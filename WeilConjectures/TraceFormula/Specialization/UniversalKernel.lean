@@ -20,7 +20,7 @@ Let `S_X`, `S_{X×X}` be nearby cycles on `X` and `X ×_S X`, `Δ` the diagonal,
 generic fibre and `K' = S_X K`. With the external product comparison
 `Π : K' ⊠ S_X D K ⟶ S_{X×X}(K ⊠ D K)` and the duality map `δ_K : S_X D K ⟶ D K'` invertible, put
 `ρ = (1 ⊠ δ_K) ∘ Π⁻¹ : S_{X×X}(K ⊠ D K) ⟶ K' ⊠ D K'`. The second identity of blueprint
-`det-tf-sp-universal-kernel` is
+`lemma-nearby-cycles-universal-kernel` is
 
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`,
 
@@ -168,7 +168,7 @@ theorem Functor.LaxMonoidal.μ_comp_map_braiding_exchange {CP CP' : Type*}
     comp_whiskerRight_assoc, h2, Iso.hom_inv_id_assoc]
 
 /-- **The first identity of the universal kernel, reduced to a pairing** (blueprint
-`det-tf-sp-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): for a lax monoidal `S_P`, the map
+`lemma-nearby-cycles-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): for a lax monoidal `S_P`, the map
 `𝔥 : S_P RHom(A, B) ⟶ RHom(A', B')` adjoint to `(a ⊗ 1) ≫ μ ≫ S_P(ev) ≫ b` and
 `λ_K : P ⟶ RHom(A, B)`, `λ_{K'} : P' ⟶ RHom(A', B')`, the identity holds as soon as the adjoint
 pairings agree: `(a ⊗ 1) ≫ μ ≫ S_P(λ_K^♭) ≫ b = (1 ⊗ ρ) ≫ λ_{K'}^♭`. -/
@@ -190,7 +190,7 @@ theorem map_comp_eq_comp_of_pairing {CP CP' : Type*} [Category CP] [Category CP'
     ← MonoidalClosed.uncurry_eq]
 
 /-- **The pairing identity of the universal kernel**, abstractly (the computation behind the first
-identity of blueprint `det-tf-sp-universal-kernel`): for the Künneth–Verdier pairings
+identity of blueprint `lemma-nearby-cycles-universal-kernel`): for the Künneth–Verdier pairings
 `p_K : p₂^* K ⊗ (p₁^* K ⊗ p₂^* D K) ⟶ p₁^! K` (the symmetry, `μ` of `p₂^*`, `p₂^*(ev)` and the
 exceptional Künneth map `κ`) and its special analogue, `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ` and
 `ρ = Π⁻¹ ≫ (1 ⊠ δ_K)`, the pairing is specialized:
@@ -258,9 +258,9 @@ theorem pairing_specialization_eq {CX CX' CP CP' : Type*} [Category CX] [Categor
   simp
 
 /-- **Nearby cycles of the universal kernel**, first identity, abstractly (blueprint
-`det-tf-sp-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): let `λ_K` and `λ_{K'}` be the curried
-Künneth–Verdier pairings (the symmetry, `μ` of `p₂^*`, `p₂^*(ev)` and the exceptional Künneth map
-`κ`), `ρ = Π⁻¹ ≫ (1 ⊠ δ_K)` for `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ`, and `𝔥` the map adjoint to
+`lemma-nearby-cycles-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): let `λ_K` and `λ_{K'}` be the
+curried Künneth–Verdier pairings (the symmetry, `μ` of `p₂^*`, `p₂^*(ev)` and the exceptional
+Künneth map `κ`), `ρ = Π⁻¹ ≫ (1 ⊠ δ_K)` for `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ`, and `𝔥` the map adjoint to
 `(α_{p₂} ⊗ 1) ≫ μ ≫ S(ev) ≫ β_{p₁}`. Then `𝔥 ∘ S(λ_K) = λ_{K'} ∘ ρ`, given the definition of `δ_K`,
 the monoidality of `α_{p₂}`, the compatibility `hκ` of `κ` with the exchanges and the symmetry of
 the lax tensor maps of `S_P`. -/
@@ -355,7 +355,6 @@ lemma leftDerivedUpperStarCompOfEq_inv_app_eq {B₀ B₁ B₂ : Scheme.{u}} (p :
   simp only [eqToHom_refl, Category.comp_id]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the instance of the abstract computation is matched against the unfolded Künneth maps
 /-- **The Künneth map along a common section of the two projections**: for morphisms of models
 `φ₁ φ₂ : P ⟶ M` and `ρ : M ⟶ P` with `ρ ≫ φ₁ = ρ ≫ φ₂ = 𝟙`, the pullback of the Künneth map
@@ -434,13 +433,13 @@ lemma isTraitModelOfBase_deformationModel :
 variable (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
 /-- The duality map `δ_K : Sp_{X,x}(D K) ⟶ D Sp_{X,x}(K)` of the specialization (blueprint
-`sk-prop-tf-nearby-duality-foundation`), for a family of dualizing maps `D`. -/
+`proposition-nearby-cycles-commute-verdier-duality`), for a family of dualizing maps `D`. -/
 noncomputable def specializationDualityMap (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (specialization k' x).obj (verdierDual ℓ K) ⟶ verdierDual ℓ ((specialization k' x).obj K) :=
   NearbyCyclesModel.nearbyDualityMap ℓ D (isTraitModelOfBase_deformationModel k' x) K
 
 /-- The comparison `ρ = (1 ⊠ δ_K) ∘ Π⁻¹ : Ψ_{X×X}(K ⊠ D K) ⟶ Ψ_X K ⊠ D Ψ_X K` of the universal
-kernels (blueprint `det-tf-sp-universal-kernel`). -/
+kernels (blueprint `lemma-nearby-cycles-universal-kernel`). -/
 noncomputable def universalKernelSpecialization
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ⟶

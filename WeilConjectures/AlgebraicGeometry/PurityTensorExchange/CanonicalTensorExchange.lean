@@ -25,7 +25,7 @@ variable (i : Z ⟶ X) (u : U ⟶ X) (v : V ⟶ Z) (j : V ⟶ U)
 variable [HasCompactification i] [HasCompactification j] [QuasiCompact j]
 set_option maxRecDepth 2000
 /-- The canonical inverse exceptional exchange commutes with tensor mates.
-Source: sk-lem-coprojection, displayed Hom calculation, and sk-thm-regular Step 4(ii)
+Source: sk-lem-coprojection, displayed Hom calculation, and lemma-class-of-point--1 Step 4(ii)
 (blueprint: lem-pur-canonical-tensor-exchange).
 Proof: apply the abstract projectionTensorMap_mateEquiv identity to the two compact-support
 adjunctions. The projection/exchange identity supplies its commuting square, the derived

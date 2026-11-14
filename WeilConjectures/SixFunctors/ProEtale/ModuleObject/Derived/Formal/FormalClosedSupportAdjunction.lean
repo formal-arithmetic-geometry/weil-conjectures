@@ -58,7 +58,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-localization,
 sk-lem-formal-closed-support-adjunction, clauses (1)--(4)
-(blueprint: det-lem-formal-closed-support-adjunction).
+(blueprint: lemma-sections-support-closed-subscheme).
 
 The inverse coefficient comparison is used to transport the module action. In particular
 no commutativity, constructibility or boundedness hypothesis is imposed.
@@ -78,19 +78,19 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 
 /-- Modules over the actual pulled-back coefficient ring, including noncommutative rings.
-Source: blueprint opening paragraph (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint opening paragraph (blueprint: lemma-sections-support-closed-subscheme). -/
 abbrev FormalSupportModules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
 /-- The module category is Grothendieck abelian without a commutativity hypothesis.
-Source: blueprint proof Step 6 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 6 (blueprint: lemma-sections-support-closed-subscheme). -/
 instance formalSupportModules_grothendieck (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (FormalSupportModules Λ X) :=
   Mod.isGrothendieckAbelian.{u + 1} (condensedRingObj Λ X)
 
 /-- Inverse image followed by transport of the action along the canonical coefficient iso.
 Source: blueprint opening paragraph and proof Steps 1--2
-(blueprint: det-lem-formal-closed-support-adjunction). -/
+(blueprint: lemma-sections-support-closed-subscheme). -/
 def formalSupportPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     FormalSupportModules Λ Y ⥤ FormalSupportModules Λ X :=
   (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
@@ -98,34 +98,34 @@ def formalSupportPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- The canonical module adjunction, obtained by lifting the sheaf adjunction and
 transporting scalars. Source: blueprint proof Step 2
-(blueprint: det-lem-formal-closed-support-adjunction). -/
+(blueprint: lemma-sections-support-closed-subscheme). -/
 abbrev formalSupportPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     formalSupportPullback Λ f ⊣ lowerStar Λ f :=
   supportPullbackAdjunction Λ f
 
 /-- The transported inverse image is additive.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2 (blueprint: lemma-sections-support-closed-subscheme). -/
 instance formalSupportPullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (formalSupportPullback Λ f).Additive :=
   inferInstanceAs ((_ ⋙ Mod.comap (asIso (condensedPullbackHom Λ f)).inv).Additive)
 
 /-- Exactness of inverse image on the underlying abelian sheaves and scalar transport.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2 (blueprint: lemma-sections-support-closed-subscheme). -/
 instance formalSupportPullback_preservesFiniteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (formalSupportPullback Λ f) :=
   inferInstanceAs (PreservesFiniteLimits (_ ⋙
     (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).inverse))
 
 /-- Cokernels commute with inverse image and scalar transport.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2 (blueprint: lemma-sections-support-closed-subscheme). -/
 instance formalSupportPullback_preservesFiniteColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (formalSupportPullback Λ f) :=
   inferInstanceAs (PreservesFiniteColimits (_ ⋙
     (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).inverse))
 
 /-- The kernel of the open adjunction unit, on objects and morphisms.
-Source: blueprint clause (1), generalizing def-exc-proetale-sections-with-support
-(blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint clause (1), generalizing definition-local-cohomology--1
+(blueprint: lemma-sections-support-closed-subscheme). -/
 def formalSupportKernel {V X : Scheme.{u}} (j : V ⟶ X) :
     FormalSupportModules Λ X ⥤ FormalSupportModules Λ X where
   obj M := kernel ((formalSupportPullbackAdjunction Λ j).unit.app M)
@@ -136,32 +136,32 @@ def formalSupportKernel {V X : Scheme.{u}} (j : V ⟶ X) :
   map_comp f g := equalizer.hom_ext (by simp)
 
 /-- The support kernel respects addition, by the universal property of the kernel.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
 instance formalSupportKernel_additive {V X : Scheme.{u}} (j : V ⟶ X) :
     (formalSupportKernel Λ j).Additive where
   map_add := equalizer.hom_ext (by simp [formalSupportKernel])
 
 /-- The closed support functor is exactly i* ker(id → j*j*).
-Source: blueprint opening formula (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint opening formula (blueprint: lemma-sections-support-closed-subscheme). -/
 def formalClosedSupport {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     FormalSupportModules Λ X ⥤ FormalSupportModules Λ Z :=
   formalSupportKernel Λ j ⋙ formalSupportPullback Λ i
 
 /-- Additivity of the displayed support formula.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
 instance formalClosedSupport_additive {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     (formalClosedSupport Λ i j).Additive :=
   inferInstanceAs ((formalSupportKernel Λ j ⋙ formalSupportPullback Λ i).Additive)
 
 /-- The canonical support-kernel inclusion.
-Source: blueprint clause (1) (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint clause (1) (blueprint: lemma-sections-support-closed-subscheme). -/
 def formalSupportKernelInclusion {V X : Scheme.{u}} (j : V ⟶ X) :
     formalSupportKernel Λ j ⟶ 𝟭 (FormalSupportModules Λ X) where
   app M := kernel.ι ((formalSupportPullbackAdjunction Λ j).unit.app M)
   naturality _ _ f := by simp [formalSupportKernel]
 
 /-- The canonical closed unit on the support kernel; clause (1) says it is invertible.
-Source: blueprint proof Step 5 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
 def formalSupportKernelComparison {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     formalSupportKernel Λ j ⟶ formalClosedSupport Λ i j ⋙ lowerStar Λ i :=
   Functor.whiskerLeft (formalSupportKernel Λ j)
@@ -364,48 +364,49 @@ The last clause describes the fibre without selecting a cone in a triangulated c
 it holds for every distinguished fibre triangle of the specified open adjunction unit.
 
 Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-localization,
-sk-lem-formal-closed-support-adjunction (1)--(4)
-(blueprint: det-lem-formal-closed-support-adjunction).
+lemma-sections-support-closed-subscheme (1)--(4)
+(blueprint: lemma-sections-support-closed-subscheme).
 
 Proof:
-1. Identify inverse-image coefficient rings by lem-sfb-alpha-iso. Lift inverse/direct
+1. Identify inverse-image coefficient rings by lemma-inverse-image-coefficient-sheaves--1. Lift
+inverse/direct
    image to module actions; the lifted sheaf adjunction restricts to linear maps.
    Exactness is detected on underlying abelian kernels and sheafified cokernels
-   (def-weil-sheaf-of-modules-category, lem-weil-pbc-site-pullback-abelian-exact).
-2. Apply lem-weil-pbc-proetale-ringed-open-closed to underlying abelian sheaves.
+   (situation-conventions, lemma-sections-support-closed-subscheme).
+2. Apply lemma-sections-support-closed-subscheme to underlying abelian sheaves.
    Its exact closed pushforward, localization sequence and zero cross-restrictions
    lift to modules, since their maps are linear. Closed pushforward is fully faithful.
-   The open slice calculation in lem-weil-proetale-weakly-etale-localization makes
+   The open slice calculation in lemma-sections-support-closed-subscheme makes
    j*j_* the identity and the restricted open unit invertible.
 3. The kernel of the open unit has zero open restriction. Its closed unit is therefore
    invertible by the localization sequence. Every map i_*A -> M factors uniquely
    through this kernel. Full faithfulness gives the sheaf adjunction and identifies
    its counit with the kernel inclusion under that unit. A right adjoint preserves
    finite limits, proving left exactness (clause 1).
-4. Module sheaves are Grothendieck abelian (lem-weil-pbc-ring-sheaves-grothendieck).
-   Use lem-pur-kinjective-degreewise-existence for unbounded K-injective resolutions
+4. Module sheaves are Grothendieck abelian (lemma-sections-support-closed-subscheme).
+   Use lemma-sections-support-closed-subscheme for unbounded K-injective resolutions
    with injective terms. Total derivation is computed there by
-   lem-weil-pbc-kinjective-total-derived. The exact closed pushforward descends
-   termwise by lem-sf-exact-functor-derived-triangulated; its right adjoint sends
-   K-injectives to K-injectives by lem-weil-pbc-right-adjoint-preserves-kinjective.
+   lemma-sections-support-closed-subscheme. The exact closed pushforward descends
+   termwise by situation-conventions; its right adjoint sends
+   K-injectives to K-injectives by lemma-sections-support-closed-subscheme.
 5. The termwise Hom adjunction descends to homotopy categories by
-   lem-weil-pbc-termwise-adjunction-homotopy. Compute Hom into K-injectives using
-   lem-weil-pbc-kinjective-hom-derived to obtain the derived adjunction (clause 2).
+   lemma-sections-support-closed-subscheme. Compute Hom into K-injectives using
+   lemma-sections-support-closed-subscheme to obtain the derived adjunction (clause 2).
    Apply the ordinary adjunction in every component of the product Hom complex.
    Naturality intertwines d_I f - (-1)^n f d_A. These are global Hom complexes,
    and K-injectivity makes them compute global derived Hom, not internal sheaf Hom.
 6. For injective I, the composite j!j*I -> I -> j*j*I is monic: both its open and
    closed restricted kernels vanish. Extend j!j*I -> I across that monomorphism
-   by injectivity (def-sp-injective-resolutions). Its extension is a section of
+   by injectivity (lemma-sections-support-closed-subscheme). Its extension is a section of
    the open unit, as can be checked after open restriction; open direct image is
    fully faithful. Hence the open unit is epi (clause 3).
 7. Resolve K by K-injective I with injective terms. Exact j! makes j*I K-injective.
    The canonical degreewise sequence 0 -> i_*Gamma(I) -> I -> j*j*I -> 0 is short
-   exact by steps 3 and 6. Apply lem-weil-pbc-complex-ses-triangle. Its first two
+   exact by steps 3 and 6. Apply lemma-sections-support-closed-subscheme. Its first two
    arrows are the exceptional counit and open unit, giving clause 4.
 8. The sequence and its connecting arrow are natural. Maps between K-injective
    resolutions represent all derived maps, and homotopic maps induce the same
-   derived arrows (lem-weil-pbc-kinjective-hom-derived), so naturality descends.
+   derived arrows (lemma-sections-support-closed-subscheme), so naturality descends.
    The canonical map from the kernel complex to Cone(I -> j*j*I)[-1], n -> (0,n),
    is a quasi-isomorphism: locally lift the first fibre coordinate, subtract its
    boundary, and obtain a kernel cocycle; the same lifting detects boundaries.

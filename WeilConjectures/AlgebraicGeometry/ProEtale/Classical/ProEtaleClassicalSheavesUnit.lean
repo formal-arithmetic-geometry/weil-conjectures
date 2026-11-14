@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonP
 /-!
 # The comparison unit for sheaves of sets
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
 `sk-thm-pe-classical-sheaves-unit`; Stacks Project, Tag 099T
-(blueprint: det-pe-classical-sheaves-unit).
+(blueprint: theorem-classical-sheaves-essential-image--1).
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 inverse image induces a bijection on every Hom set.
 Source: Weil conjectures blueprint, main-20261015,
 `sk-thm-pe-classical-sheaves-unit`; Stacks Project, Tag 099T
-(blueprint: det-pe-classical-sheaves-unit).
+(blueprint: theorem-classical-sheaves-essential-image--1).
 
 Proof:
 1. Apply lem-cbc-comparison-pullback-sections. Its normalization clause identifies

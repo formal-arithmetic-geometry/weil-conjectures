@@ -22,7 +22,7 @@ monodromy on the kernel of `π₁(U) → π₁(V)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.natCast_sub_one_mul_monodromy_eq_zero`).
 
 For the geometric fibre of a curve over `𝔽_q` and a power `E = Φ ^ m` of the geometric Frobenius
-fixing `z`, `Q = q ^ m`; this is the input of blueprint `lem-wf-open-curve-residue-sequence`
+fixing `z`, `Q = q ^ m`; this is the input of blueprint `proposition-no-fixed-class-degree-one--1`
 used for the Frobenius-fixed systems of torsors: the residues of a Frobenius-fixed torsor lie in
 `ℤ / N (-1)`, on which `Φ ^ m` acts as `Q`.
 -/
@@ -43,7 +43,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- **`Q - 1` kills the local monodromy of a Frobenius-invariant torsor.** Let `E` be an
 automorphism of `C`, restricting to `U`, fixing `z ∈ C ∖ U` and semilinear over an automorphism
@@ -131,7 +130,7 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
   change ((Q : ZMod N) - 1) * (T.monodromy s G (ρ σ)).toAdd.down = 0
   -- a primitive `N`-th root of unity of `k`, in the function field and in `Ω`
   have : NeZero (N : k) := ⟨hN⟩
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   set F := C.functionField
   let ι : F →+* Ω := algebraMap F Ω
   let κ : k →+* F := (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp

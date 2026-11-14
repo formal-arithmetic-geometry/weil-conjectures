@@ -46,7 +46,8 @@ formal fibre of A to that of A₀.
 the completed prime localization of A₀ is regular. Its tensor product with K₀ is a
 localization, hence regular; it is Noetherian by the completion and fibre lemmas.
 6. In characteristic zero every finite purely inseparable field extension is trivial,
-so this regular fibre is geometrically regular by the definition in def-weil-pbc-g-ring.
+so this regular fibre is geometrically regular by the definition in
+theorem-finite-etale-covers-proper-henselian--2.
 7. In positive characteristic A₀ cannot be a power series ring over a Cohen ring:
 a Cohen ring has characteristic zero, as its nonzero prime-number uniformizer is
 not a unit. Thus A₀ is a power series ring over a field. Apply

@@ -65,7 +65,7 @@ surjective morphism `r : T' ⟶ T`, a finite open covering `T' = ⋃ₐ Wₐ` an
 `φₐ : Wₐ ⟶ U` with `φₐ ≫ u = r|_{Wₐ}`: the morphism `r` factors through `u` Zariski locally on
 `T'`. The proof (Stacks 09Z0) inducts on a bound for the geometric fibres of `u`, using
 Zariski's main theorem and a limit argument.
-(blueprint: `lemma-weil-pbc-finite-refinement-etale-cover`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 @[stacks 09Z0]
 theorem Scheme.exists_finite_surjective_refinement_of_etale {U T : Scheme.{u}} (u : U ⟶ T)
     [Etale u] [Surjective u] [CompactSpace T] [QuasiSeparatedSpace T] :

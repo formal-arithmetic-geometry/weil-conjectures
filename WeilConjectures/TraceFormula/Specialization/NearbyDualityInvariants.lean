@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Preadditive.Opposite
 
 # Duality and invariants under a finite group of invertible order
 
-This file proves the finite-group core of blueprint `det-tf-invariants-duality` ("Verdier
+This file proves the finite-group core of blueprint `lemma-duality-invariants-pro-p--1` ("Verdier
 duality commutes with invariants under a pro-`p` group"). Let `G` be a finite group acting on an
 object `E` of an `R`-linear category, `ρ : G →* End E`, with `|G|` invertible in `R`. Then the
 invariants of `E` are the image of the *averaging idempotent*
@@ -98,23 +98,26 @@ lemma nsmul_averaging {E : C} (ρ : G → (E ⟶ E)) :
 
 /-- The averaging endomorphism is invariant: `ρ(g) ∘ e = e`. -/
 lemma averaging_comp {E : C} (ρ : G →* End E) (g : G) :
-    averaging R ρ ≫ ρ g = averaging R ρ := by
+    averaging R (fun h ↦ (ρ h).asHom) ≫ (ρ g).asHom =
+      averaging R (fun h ↦ (ρ h).asHom) := by
   rw [averaging, Linear.smul_comp, Preadditive.sum_comp]
   congr 1
   refine Fintype.sum_equiv (Equiv.mulLeft g) _ _ fun h ↦ ?_
-  rw [Equiv.coe_mulLeft, map_mul, End.mul_def]
+  rw [Equiv.coe_mulLeft, map_mul, End.mul_asHom]
 
 /-- The averaging endomorphism is invariant: `e ∘ ρ(g) = e`. -/
 lemma comp_averaging {E : C} (ρ : G →* End E) (g : G) :
-    ρ g ≫ averaging R ρ = averaging R ρ := by
+    (ρ g).asHom ≫ averaging R (fun h ↦ (ρ h).asHom) =
+      averaging R (fun h ↦ (ρ h).asHom) := by
   rw [averaging, Linear.comp_smul, Preadditive.comp_sum]
   congr 1
   refine Fintype.sum_equiv (Equiv.mulRight g) _ _ fun h ↦ ?_
-  rw [Equiv.coe_mulRight, map_mul, End.mul_def]
+  rw [Equiv.coe_mulRight, map_mul, End.mul_asHom]
 
 /-- The averaging endomorphism of an action is an **idempotent**. -/
 lemma averaging_comp_averaging {E : C} (ρ : G →* End E) :
-    averaging R ρ ≫ averaging R ρ = averaging R ρ := by
+    averaging R (fun h ↦ (ρ h).asHom) ≫ averaging R (fun h ↦ (ρ h).asHom) =
+      averaging R (fun h ↦ (ρ h).asHom) := by
   nth_rewrite 2 [averaging]
   rw [Linear.comp_smul, Preadditive.comp_sum]
   simp only [averaging_comp, Finset.sum_const, Finset.card_univ]
@@ -127,10 +130,16 @@ variable {C' : Type u₂} [Category.{v₂} C'] [Preadditive C'] [Linear R C'] (D
 `D`. -/
 @[simps]
 def contragredient {E : C} (ρ : G →* End E) : G →* End (D.obj (op E)) where
-  toFun h := D.map (ρ h⁻¹).op
-  map_one' := by rw [inv_one, map_one, End.one_def, op_id, D.map_id, End.one_def]
+  toFun h := End.of (D.map (ρ h⁻¹).asHom.op)
+  map_one' := by
+    apply End.ext
+    change D.map (ρ 1⁻¹).asHom.op = 𝟙 _
+    rw [inv_one, map_one, End.one_asHom, op_id, D.map_id]
   map_mul' g h := by
-    rw [mul_inv_rev, map_mul, End.mul_def, op_comp, D.map_comp, End.mul_def]
+    apply End.ext
+    change D.map (ρ (g * h)⁻¹).asHom.op =
+      D.map (ρ h⁻¹).asHom.op ≫ D.map (ρ g⁻¹).asHom.op
+    rw [mul_inv_rev, map_mul, End.mul_asHom, op_comp, D.map_comp]
 
 /-- **Duality sends the averaging idempotent to the averaging idempotent of the contragredient
 action**, since inversion `h ↦ h⁻¹` permutes the summands. Only additivity of `D` is used: the
@@ -145,21 +154,23 @@ theorem map_averaging_op {E : C} (ρ : G → (E ⟶ E)) :
   rw [← Nat.cast_smul_eq_nsmul R, smul_smul, invOf_mul_self, one_smul]
 
 /-- **Duality commutes with invariants** under a finite group of invertible order (blueprint
-`det-tf-invariants-duality`, finite case): if `ι : E^G ⟶ E`, `π : E ⟶ E^G` split the averaging
-idempotent of `ρ` and `ι'`, `π'` split the averaging idempotent of the contragredient action on
-`D E`, then `(D E)^G ⟶ D E ⟶ D(E^G)` is an isomorphism `(D E)^G ≅ D(E^G)`. -/
+`lemma-duality-invariants-pro-p--1`, finite case): if `ι : E^G ⟶ E`, `π : E ⟶ E^G` split the
+averaging idempotent of `ρ` and `ι'`, `π'` split the averaging idempotent of the contragredient
+action on `D E`, then `(D E)^G ⟶ D E ⟶ D(E^G)` is an isomorphism `(D E)^G ≅ D(E^G)`. -/
 noncomputable def invariantsDualIso {E I : C} (ρ : G →* End E) {ι : I ⟶ E} {π : E ⟶ I}
-    (hιπ : ι ≫ π = 𝟙 I) (hπι : π ≫ ι = averaging R ρ) {I' : C'} {ι' : I' ⟶ D.obj (op E)}
+    (hιπ : ι ≫ π = 𝟙 I) (hπι : π ≫ ι = averaging R (fun h ↦ (ρ h).asHom))
+    {I' : C'} {ι' : I' ⟶ D.obj (op E)}
     {π' : D.obj (op E) ⟶ I'} (hιπ' : ι' ≫ π' = 𝟙 I')
-    (hπι' : π' ≫ ι' = averaging R (contragredient D ρ)) :
+    (hπι' : π' ≫ ι' = averaging R (fun h ↦ (contragredient D ρ h).asHom)) :
     I' ≅ D.obj (op I) :=
   splitDualIso D hιπ hπι hιπ' (by rw [hπι', map_averaging_op]; rfl)
 
 @[simp]
 lemma invariantsDualIso_hom {E I : C} (ρ : G →* End E) {ι : I ⟶ E} {π : E ⟶ I}
-    (hιπ : ι ≫ π = 𝟙 I) (hπι : π ≫ ι = averaging R ρ) {I' : C'} {ι' : I' ⟶ D.obj (op E)}
+    (hιπ : ι ≫ π = 𝟙 I) (hπι : π ≫ ι = averaging R (fun h ↦ (ρ h).asHom))
+    {I' : C'} {ι' : I' ⟶ D.obj (op E)}
     {π' : D.obj (op E) ⟶ I'} (hιπ' : ι' ≫ π' = 𝟙 I')
-    (hπι' : π' ≫ ι' = averaging R (contragredient D ρ)) :
+    (hπι' : π' ≫ ι' = averaging R (fun h ↦ (contragredient D ρ h).asHom)) :
     (invariantsDualIso D ρ hιπ hπι hιπ' hπι').hom = ι' ≫ D.map ι.op :=
   rfl
 
@@ -172,7 +183,7 @@ open MonoidalCategory MonoidalClosed
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [MonoidalClosed C]
 
 /-- **The invariant pairing is the restriction of evaluation** (blueprint
-`det-tf-invariants-duality`): for Verdier duality `D = RHom(-, ω)`, the pairing
+`lemma-duality-invariants-pro-p--1`): for Verdier duality `D = RHom(-, ω)`, the pairing
 `E^G ⊗ (D E)^G ⟶ ω` adjoint to `ι' ≫ D(ι) : (D E)^G ⟶ D(E^G)` is the evaluation
 `E ⊗ D E ⟶ ω` restricted along the inclusions `ι ⊗ ι'` of the two invariant direct summands. -/
 lemma uncurry_invariantsDualIso_hom (ω : C) {E I I' : C} (ι : I ⟶ E)

@@ -28,7 +28,7 @@ a finite direct sum of copies of the unit
 
 The first two statements are transported, along the equivalence `p^*` from condensed
 `ℚ̲̄_ℓ`-modules (`ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`, blueprint node
-`sk-prop-pe-condensed-point`), from the regular module `ℚ̲̄_ℓ`, whose
+`proposition-pro-etale-site-separably-closed`), from the regular module `ℚ̲̄_ℓ`, whose
 endomorphisms are the constants `ℚ̄_ℓ` (`Profinite.PadicAlgCl.isIso_of_ne_zero_end_regular`,
 `Profinite.PadicAlgCl.one_ne_zero_end_regular`). The third combines the finite presentation of
 the stalks of constructible module objects
@@ -60,7 +60,7 @@ include hΩ hsep
 theorem isIso_of_ne_zero_end_tensorUnit
     (t : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω)))))) (ht : t ≠ 0) :
-    IsIso t := by
+    IsIso t.asHom := by
   let := hΩ.toField
   have := isEquivalence_upperStarFromPointMod (Ω := Ω) (Profinite.padicAlgClRingObj ℓ)
   exact (upperStarFromPointMod _ _).isIso_of_ne_zero_end (Iso.refl _)

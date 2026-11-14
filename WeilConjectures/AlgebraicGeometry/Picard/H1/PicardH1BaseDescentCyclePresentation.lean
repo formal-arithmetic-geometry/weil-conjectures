@@ -30,8 +30,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 400000 in
--- Comparing the dependent section types and local model uses extra elaboration heartbeats.
 /-- The local perfect-complex argument supplies a scalar degree-zero term, its
 outgoing differential vector `d`, and a joint degree-one map `b` with injective residue map,
 annihilating `d`. Degree-zero cycles on every smaller open give sections compatibly

@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 Let `x` be a rational point of a `k`-scheme `X`, with ideal `I = ker x` and centre
 `Z = V(I) ≅ Spec k`. The pullback exchange of the section `ẽ : S ⟶ 𝒳` of the deformation to the
 normal cone of `x` (`ProEtale.CondensedRing.zeroSectionModelHom`) is the special case `Z = {x}` of
-the zero-section map `ε_{X,Z}` of blueprint `det-sp-defect-definition`
+the zero-section map `ε_{X,Z}` of blueprint `prose-E-04`
 (`ProEtale.CondensedRing.zeroSectionMap`): the constant family `Z × S` of the centre is isomorphic
 to the trait `S` as a model, by the deformation `D_⊥ Z ≅ 𝔸¹_Z ≅ 𝔸¹_k` of the zero ideal of `Z`
 (`ProEtale.CondensedRing.centreModelHom`), and `ẽ` factors through this isomorphism.
@@ -308,7 +308,7 @@ noncomputable def centreModelHom :
 
 /-! ### The zero-section map of a rational point -/
 
-/-- **The zero-section map of a rational point** (blueprint `det-sp-defect-definition`, the case
+/-- **The zero-section map of a rational point** (blueprint `prose-E-04`, the case
 `Z = {x}`): if the zero-section map `ε_{X,Z}(K)` of the centre `Z = V(ker x)` is an isomorphism,
 then so is the pullback exchange `Le^* Ψ_𝒳(K) ⟶ Ψ_S(Lx^* K)` of the section `ẽ : S ⟶ 𝒳` of the
 deformation to the normal cone of `x`. The morphism of models `ẽ` factors as the isomorphism of

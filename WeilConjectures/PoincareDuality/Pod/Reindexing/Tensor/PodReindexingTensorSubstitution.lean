@@ -39,7 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Substitute normalized systems using these particular reindexing primitives.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-tensor-substitution).
 
 Proof: present the completed-operation models on the two Bool locations using

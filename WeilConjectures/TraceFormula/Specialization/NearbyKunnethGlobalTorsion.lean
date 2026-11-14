@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.OrdinaryKunnethResidueField
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidalTorsion
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
+import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.Tactic.TransportExact
 
 /-!
@@ -42,6 +43,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -61,7 +63,7 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- **The proper exchange for the structure morphism, with finite coefficients** (blueprint
-`det-sp-nearby-cycles-exchanges` (2); SGA 7 XIII (2.1.7.1)): for a model `M` of finite type over
+`prose-E-03` (2); SGA 7 XIII (2.1.7.1)): for a model `M` of finite type over
 the trait `Spec k'⟦t⟧` along a proper `q`, the pushforward exchange
 `χ : Ψ_S Rg_* K ⟶ R(q_s)_* Ψ_M K` of the structure morphism `(q, g) : M ⟶ S` is an isomorphism at
 every complex `K` on the geometric generic fibre bounded below of étale origin. -/
@@ -100,7 +102,6 @@ set_option hygiene false in
 /-- The condensed ring `T̲ = C(-, T)`. -/
 local notation "𝐓" => Profinite.continuousMapRingObj T
 
-set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula, with finite coefficients**: let `P`
 be the product over the henselian trait `Spec k'⟦t⟧` of models `M`, `N` of finite type along
@@ -146,9 +147,9 @@ theorem isIso_lowerStar_kunnethMap_finiteCoefficient (hM : M.IsTraitModelOver qM
   have hχN := hN.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient T _ hB
   have hχP := hP.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient T _ hAB
   refine isIso_lowerStar_kunnethMap_of_isIso 𝐓 hM hN hpb hP hgen A B ?_ ?_ ?_ hκs hκΩ hT
-  · exact_mod_proofs hχM
-  · exact_mod_proofs hχN
-  · exact_mod_proofs hχP
+  · cast_proofs hχM
+  · cast_proofs hχN
+  · cast_proofs hχP
 
 end Global
 
@@ -217,12 +218,11 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
-set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, equation (4)): let `P` be the product over the henselian
-trait `Spec k'⟦t⟧`, `k'` separably closed with `ℓ ≠ char k'`, of models `M`, `N` of finite type
-along proper structure morphisms, with projections compatible with the structure morphisms to
+`proposition-external-kunneth-formula-nearby-cycles`, equation (4)): let `P` be the product over the
+henselian trait `Spec k'⟦t⟧`, `k'` separably closed with `ℓ ≠ char k'`, of models `M`, `N` of finite
+type along proper structure morphisms, with projections compatible with the structure morphisms to
 `Spec Ω`. For bounded constructible complexes `A`, `B` of module objects over `𝔽̲_E`, the direct
 image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the point `Spec k'` is an
 isomorphism. The inputs of `isIso_lowerStar_kunnethMap_finiteCoefficient` are the ordinary

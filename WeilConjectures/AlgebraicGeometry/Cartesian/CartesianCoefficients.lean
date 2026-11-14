@@ -18,9 +18,9 @@ public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTw
 /-!
 # Cartesian coefficient sheaves
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 `sk-prop-sfb-cartesian-coefficients/_section.md`, assertions (1), (2), and the final paragraph
-(blueprint: sk-prop-sfb-cartesian-coefficients).
+(blueprint: lemma-inverse-image-coefficient-sheaves).
 
 The assertions below use the published coefficient comparison and module pullback.
 The inverse-image lift and its comparison with extension of scalars are actual constructions.
@@ -44,7 +44,7 @@ variable {X Y : Scheme.{u}}
 
 /-- The inverse-image lift with action transported through the inverse of alpha_f.
 Its underlying objects and arrows are literally those of abelian inverse image.
-Source: blueprint final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint final paragraph (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def cartesianCoefficientLift
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) :=
@@ -53,7 +53,7 @@ def cartesianCoefficientLift
 
 /-- The canonical comparison: extension along alpha is restriction along its inverse.
 This is the uniqueness-of-left-adjoints comparison of the published scalar adjunctions.
-Source: blueprint final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint final paragraph (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def cartesianCoefficientPullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) :
@@ -67,7 +67,7 @@ The first conjunct concerns the canonical ring-object morphism, whose ring struc
 is recorded by isMonHom_condensedPullbackHom; the lift comparison is the actual
 cartesianCoefficientPullbackIso above. The last equality retains the whole underlying
 functor, on objects and morphisms.
-Source: blueprint (1) and final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint (1) and final paragraph (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def CartesianCoefficientProperty
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) : Prop :=
@@ -79,7 +79,7 @@ def CartesianCoefficientProperty
 
 /-- Finite coefficients have the discrete topology, fixed here rather than supplied
 as an extra hypothesis. This is the recorded continuous-function condensed ring.
-Source: blueprint coefficient list (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint coefficient list (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 abbrev cartesianFinitePointRing (A : Type u) [CommRing A] :
     Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} :=
   letI : TopologicalSpace A := ⊥
@@ -89,7 +89,7 @@ abbrev cartesianFinitePointRing (A : Type u) [CommRing A] :
 /-- Exactly the admissible untwisted coefficient list. Z_ell and Q_ell are included
 explicitly, in addition to all finite intermediate extensions and their integer rings.
 Qbar is the finite-subextension-valued condensed ring, not all continuous functions.
-Source: blueprint (1) (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint (1) (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def CartesianUntwistedAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) : Prop :=
   (∀ (A : Type u) [CommRing A] [Finite A],
     CartesianCoefficientProperty (cartesianFinitePointRing A) f) ∧
@@ -105,7 +105,7 @@ The first-line formula fixes the map on root tensors; the second clause retains 
 Kummer identifications. Every signed comparison includes zero, tensor and evaluation
 normalizations, and is an isomorphism of coefficient modules in every degree.
 Source: blueprint finite coefficients and powers and duals paragraphs
-(blueprint: sk-prop-sfb-cartesian-coefficients). -/
+(blueprint: lemma-inverse-image-coefficient-sheaves). -/
 @[irreducible] def CartesianFiniteTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] : Prop :=
@@ -139,7 +139,7 @@ rational maps by the displayed scalar-extension equation, and Qbar by its finite
 coprojections. SpInternalCartesian retains precisely alpha_f and the sectionwise
 signed coefficient-module comparisons, together with their tensor and dual equations.
 Source: blueprint integral, rational, colimit, powers and duals paragraphs
-(blueprint: sk-prop-sfb-cartesian-coefficients). -/
+(blueprint: lemma-inverse-image-coefficient-sheaves). -/
 structure CartesianAdicComparison (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] where
@@ -188,7 +188,7 @@ structure CartesianAdicComparison (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
           (pow_dvd_pow ℓ h))
 
 /-- Existence of the normalized adic signed comparison data.
-Source: blueprint twists (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint twists (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def CartesianAdicTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] : Prop :=
@@ -198,7 +198,7 @@ def CartesianAdicTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
 The finite comparisons cover every finite coefficient ring annihilated by an ell power:
 its unital quotient map is the input a. The adic comparisons use the recorded internal
 and sectionwise encodings and their same coefficient map alpha_f.
-Source: blueprint (1), twists (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint (1), twists (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def CartesianTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) : Prop :=
   ∀ (hX : ∀ x : X, Invertible (ℓ : X.residueField x))
     (hY : ∀ y : Y, Invertible (ℓ : Y.residueField y)),
@@ -209,7 +209,7 @@ def CartesianTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) : Prop :
 
 /-- Finite-free means isomorphic to a finite sum of copies of the regular module.
 Both scalar restrictions are the coefficient maps induced by the given inclusion.
-Source: blueprint (2) (blueprint: sk-prop-sfb-cartesian-coefficients). -/
+Source: blueprint (2) (blueprint: lemma-inverse-image-coefficient-sheaves). -/
 def CartesianFiniteFreeAssertions (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Prop :=
   ∀ (E F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F),
     (∃ n : ℕ, Nonempty
@@ -238,20 +238,21 @@ private theorem cartesianFiniteFreeAssertions_proof (ℓ : ℕ) [Fact ℓ.Prime]
 and exact module pullback with its specified inverse-image lift.
 
 Source: blueprint main-20261015, sk-prop-sfb-cartesian-coefficients/_section.md,
-assertions (1), (2), final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients).
+assertions (1), (2), final paragraph (blueprint: lemma-inverse-image-coefficient-sheaves).
 
 Proof:
 1. The component of the monoidal comparison f^-1 p_Y^* = p_X^* is alpha_f;
-   sk-def-sfb-coefficient-morphisms and lem-sfb-alpha-iso make it a ring isomorphism.
-2. On the domain of sk-def-sp-tate-twist apply the comparison of
-   det-prop-sfb-cartesian-coefficients-twists. Pullback of roots is base change of
+   lemma-inverse-image-coefficient-sheaves and lemma-inverse-image-coefficient-sheaves--1 make it a
+   ring isomorphism.
+2. On the domain of definition-tate-twists apply the comparison of
+   lemma-inverse-image-coefficient-sheaves--2. Pullback of roots is base change of
    their finite etale representing scheme, compatible with Kummer powers. Finite
    coefficient twists follow by scalar tensor. Integral twists follow by the
    compatible free root tower, rational twists by localization, and Qbar by the
    finite-subextension colimit. Strong monoidality gives positive powers; rank-one
    duality gives negative powers. The comparison is linear along the same alpha_f.
 3. The integral basis and its two finite-free isomorphisms are already supplied by
-   det-prop-sfb-cartesian-coefficients-finite-free. Specialize them to X.
+   lemma-inverse-image-coefficient-sheaves. Specialize them to X.
 4. The existing CondensedRing.upperStar exactness instances give finite limits and
    finite colimits, using extension along alpha_f as restriction along its inverse.
    This is exactly cartesianCoefficientPullbackIso. The definition of mapMod and

@@ -42,7 +42,7 @@ the single proof paragraph (blueprint: lem-weil-pbc-finite-origin-exchange-trans
 Proof:
 1. Since `f` is proper it is quasi-compact and quasi-separated (blueprint pqf-lem-proper-basic);
    `f'` is quasi-compact and quasi-separated by hypothesis.  So the transport lemma
-   `comparison_derivedBaseChangeMap` (blueprint lem-weil-pbc-transport-identifies-exchange)
+   `comparison_derivedBaseChangeMap` (blueprint lemma-naturality-pasting-comparison--3)
    applies to `L` and gives `T_L ∘ ν_{Y'}^*(Ex_L) = Ex^R_{ν_X^* L} ∘ S_L` with the comparison
    isomorphisms `S_L`, `T_L`; this is the second conjunct.  As `Ex_L` is an isomorphism, so is
    `ν_{Y'}^*(Ex_L)`, hence `Ex^R_{ν_X^* L} = T_L ∘ ν_{Y'}^*(Ex_L) ∘ S_L⁻¹` is an isomorphism.

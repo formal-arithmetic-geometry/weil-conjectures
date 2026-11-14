@@ -23,7 +23,7 @@ dimension `d` over `F`, and whose geometric generic fibre is all of `X₁ ×_F S
 proves that the dualizing map `θ_N : Ψ_N ω_{X₁} ⟶ ω_{X'}` of a family of dualizing maps over
 generic bases (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) is an isomorphism
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_of_smooth`; blueprint
-`det-nearby-exchange-maps`, smooth case).
+`prose-E-15`, smooth case).
 
 * **Global sections**
   (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_lowerStar_map_θ_of_smooth`):
@@ -228,7 +228,7 @@ theorem isIso_θ_of_iso (h : M.IsTraitModelOfGenericBase X₁ ι q g)
   exact IsIso.of_isIso_comp_left ψ.inv _
 
 /-- **The dualizing map of a smooth proper model is an isomorphism** (blueprint
-`det-nearby-exchange-maps`, smooth case): for a trait model `N` over a generic base whose
+`prose-E-15`, smooth case): for a trait model `N` over a generic base whose
 structure morphism `q` is proper and smooth of pure relative dimension `d`, with `X₁` proper and
 smooth of pure relative dimension `d` over `F` and full geometric generic fibre, the dualizing
 map `θ_N : Ψ_N ω_{X₁} ⟶ ω_{X'}` is an isomorphism. -/

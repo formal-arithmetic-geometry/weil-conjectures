@@ -14,8 +14,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProperOpenTransport
 The strict-tower proper/open comparison alpha is, componentwise, the abstract comparison
 `ProperOpenTransport.alphaApp` of its adjunction data.
 
-Source: Weil conjectures blueprint, node thm-cbc-complete-proetale, proof step 8
-(blueprint: thm-cbc-complete-proetale).
+Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
+step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public noncomputable section

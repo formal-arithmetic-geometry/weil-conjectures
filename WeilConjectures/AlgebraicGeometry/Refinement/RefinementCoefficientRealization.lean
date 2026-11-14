@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 # The finite coefficient realization interface for refinement comparisons
 
 Source: blueprint finite coefficient modules, order 1233; module sheafification along
-locally bijective constant scalars (blueprint: def-weil-pbc-proetale-modules).
+locally bijective constant scalars (blueprint: definition-small-pro-etale-site--1).
 
 The recorded finite-module definitions are reexported. This exposes coefficient realization
 without importing the second copy of the fixed-coefficient six-functor declarations.
@@ -32,7 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 sheaf is in its essential image. This identifies fixed scalar module sheaves with the
 modules over the specified continuous-function coefficient sheaf, not a new coefficient
 category. Source: blueprint finite coefficient modules, order 1233
-(blueprint: def-weil-pbc-proetale-modules).
+(blueprint: definition-small-pro-etale-site--1).
 
 Proof: restrict a module's action along the constant scalar sections to obtain a
 fixed-ring module sheaf. Conversely extend a fixed scalar action to local scalar
@@ -53,7 +53,7 @@ theorem finiteCoefficientRealization_full_faithful_essSurj (T : Scheme.{u})
 
 /-- Realization gives the coefficient equivalence used for canonical transport.
 Source: blueprint finite coefficient modules, order 1233
-(blueprint: def-weil-pbc-proetale-modules). -/
+(blueprint: definition-small-pro-etale-site--1). -/
 instance refinementRealizationIsEquivalence (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (finiteCoefficientRealization T Λ).IsEquivalence where

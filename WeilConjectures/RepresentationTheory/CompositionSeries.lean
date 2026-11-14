@@ -37,9 +37,10 @@ factors*.
 
 ## Blueprint
 
-- `def-mg-weil-composition-series`: composition series and composition factors.
-- `lem-mg-composition-series-exists`, `lem-mg-jordan-holder`: existence, and Jordan–Hölder.
-- `def-mg-weil-semisimplification`, `lem-mg-semisimplification-independent`: the
+- `prose-14-13`: composition series and composition factors.
+- `definition-determinant-weight--2`, `lemma-tensor-exterior-powers-filtered-representations--3`:
+existence, and Jordan–Hölder.
+- `prose-14-13`, `lemma-tensor-exterior-powers-filtered-representations--3`: the
   semisimplification.
 -/
 
@@ -160,7 +161,7 @@ variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V
 /-- A *composition series* of a representation `ρ`: a finite chain
 `0 = V₀ ⋖ V₁ ⋖ ⋯ ⋖ V_t = V` of subrepresentations, each covering the previous one, that is with
 irreducible successive quotients (`Representation.CompositionSeries.isIrreducible_factor`).
-(blueprint: `def-mg-weil-composition-series`) -/
+(blueprint: `prose-14-13`) -/
 structure CompositionSeries where
   /-- The chain of subrepresentations `V₀ ⋖ V₁ ⋖ ⋯ ⋖ V_t`. -/
   series : _root_.CompositionSeries (Subrepresentation ρ)
@@ -176,7 +177,7 @@ abbrev length : ℕ :=
   s.series.length
 
 /-- The `i`-th composition factor `V_{i+1} / V_i` of a composition series.
-(blueprint: `def-mg-weil-composition-series`) -/
+(blueprint: `prose-14-13`) -/
 noncomputable abbrev factor (i : Fin s.length) :=
   (s.series i.succ).subquotient (s.series i.castSucc)
 
@@ -189,7 +190,8 @@ theorem isIrreducible_factor (i : Fin s.length) : (s.factor i).IsIrreducible :=
 
 /-- **Jordan–Hölder.** Any two composition series of a representation have the same composition
 factors, up to permutation and isomorphism, with the same multiplicities.
-(blueprint: `lem-mg-jordan-holder`, part L1 of `sk-r-linear-library`) -/
+(blueprint: `lemma-tensor-exterior-powers-filtered-representations--3`, part L1 of
+`lemma-tensor-exterior-powers-filtered-representations--3`) -/
 theorem jordanHolder (s₁ s₂ : ρ.CompositionSeries) :
     ∃ e : Fin s₁.length ≃ Fin s₂.length, ∀ i, Nonempty ((s₁.factor i).Equiv (s₂.factor (e i))) := by
   obtain ⟨e, he⟩ := _root_.CompositionSeries.jordan_holder s₁.series s₂.series
@@ -215,7 +217,7 @@ theorem exists_compositionSeries_last_eq [FiniteDimensional k V] (A : Subreprese
       RelSeries.last_snoc _ _ _⟩
 
 /-- **Existence of a composition series.** Every finite-dimensional representation has a
-composition series. (blueprint: `lem-mg-composition-series-exists`) -/
+composition series. (blueprint: `definition-determinant-weight--2`) -/
 theorem exists_compositionSeries [FiniteDimensional k V] : Nonempty ρ.CompositionSeries := by
   obtain ⟨s, hs, hl⟩ := ρ.exists_compositionSeries_last_eq ⊤
   exact ⟨⟨s, hs, hl⟩⟩
@@ -251,7 +253,7 @@ variable {ρ} (s : ρ.CompositionSeries)
 /-- The *semisimplification* `⨁ᵢ V_{i+1} / V_i` of a composition series: the direct sum of its
 composition factors. Its isomorphism class does not depend on the series
 (`nonempty_semisimplification_equiv`), and its simple summands are the composition factors
-(`isIrreducible_directSumSummand`). (blueprint: `def-mg-weil-semisimplification`) -/
+(`isIrreducible_directSumSummand`). (blueprint: `prose-14-13`) -/
 noncomputable def semisimplification :
     Representation k W (⨁ (i : Fin s.length), ((s.series i.succ).toSubmodule ⧸
       (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype)) :=
@@ -288,7 +290,7 @@ theorem nontrivial_semisimplification [Nontrivial V] :
 
 /-- **The semisimplification does not depend on the composition series**: the
 semisimplifications of two composition series are equivalent (Jordan–Hölder).
-(blueprint: `lem-mg-semisimplification-independent`) -/
+(blueprint: `lemma-tensor-exterior-powers-filtered-representations--3`) -/
 theorem nonempty_semisimplification_equiv (s₁ s₂ : ρ.CompositionSeries) :
     Nonempty (s₁.semisimplification.Equiv s₂.semisimplification) := by
   obtain ⟨e, he⟩ := jordanHolder s₂ s₁

@@ -17,7 +17,7 @@ For an open immersion `j : U ⟶ S` and a geometric point `s'` of `U`, the morph
 (`AlgebraicGeometry.Scheme.isIso_strictLocalizationMap_of_isOpenImmersion`): the strict
 localization of `S` at `s' ≫ j` maps into the open `U`, since all its points specialize to the
 closed point, and the universal property of the strict localization gives the inverse. Used in
-blueprint `det-tf-restriction-zero-covers` to compare the strict localizations of `U ×_k U` and
+blueprint `lemma-tangent-cones-on-cover` to compare the strict localizations of `U ×_k U` and
 `X ×_k X` at `(y, y)`.
 
 -/

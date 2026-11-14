@@ -16,7 +16,7 @@ A finite extension of a separably closed field is purely inseparable and separab
 
 variable (K L : Type*) [Field K] [Field L] [Algebra K L] [IsSepClosed K]
 
-/-- Blueprint `lem-kun-sep-closed-finite-extension-purely-inseparable`: a finite extension
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`: a finite extension
 `L / K` of a separably closed field `K` is purely inseparable.
 
 Proof: the maximal separable subextension is a finite separable extension of `K`, hence
@@ -25,7 +25,7 @@ theorem IsSepClosed.isPurelyInseparable_of_finite [FiniteDimensional K L] :
     IsPurelyInseparable K L :=
   Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed
 
-/-- Blueprint `lem-kun-sep-closed-finite-extension-sep-closed`: a finite extension `L` of a
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`: a finite extension `L` of a
 separably closed field `K` is separably closed.
 
 Proof: an algebraic closure of `L` is purely inseparable over `K`, hence over `L`; Mathlib

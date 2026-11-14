@@ -536,7 +536,7 @@ def Encoding.fixedDerived {T : Scheme.{u}} (e : Encoding A T) :
 /-- The ordinary finite constant local models: on each member of one pro-etale cover
 there is a constant finite module. Over a finite ring, finite modules are precisely
 finitely presented modules. This is the ordinary side of the source's local-model clause.
-Source: blueprint proof step 9 and sk-def-sfb-constructible, clause 1
+Source: blueprint proof step 9 and definition-constructible-sheaves, clause 1
 (blueprint: lem-sf-finite-discrete-normalized-encoding). -/
 def ordinaryLocalModel (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
@@ -547,7 +547,7 @@ def ordinaryLocalModel (T : Scheme.{u})
           (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P)
 
 /-- The ordinary finite stratification condition in the same scalar presentation.
-Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
+Source: definition-constructible-sheaves, clause 2, and blueprint proof step 9
 (blueprint: lem-sf-finite-discrete-normalized-encoding). -/
 def ordinaryStratified (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
@@ -557,7 +557,7 @@ def ordinaryStratified (T : Scheme.{u})
 
 open Classical in
 /-- Qcqs schemes use finite constructible stratifications; otherwise use every affine open.
-Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
+Source: definition-constructible-sheaves, clause 2, and blueprint proof step 9
 (blueprint: lem-sf-finite-discrete-normalized-encoding). -/
 def ordinaryConstructible (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
@@ -566,7 +566,7 @@ def ordinaryConstructible (T : Scheme.{u})
     ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) U.ι).obj M)
 
 /-- The ordinary bounded constructible predicate in the fixed scalar presentation.
-Source: sk-def-sfb-constructible, final paragraph, and blueprint proof step 9
+Source: definition-constructible-sheaves, final paragraph, and blueprint proof step 9
 (blueprint: lem-sf-finite-discrete-normalized-encoding). -/
 def ordinaryBoundedConstructible (T : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)

@@ -26,7 +26,7 @@ scalars `Λ'_X ⊗_{Λ_X} -` along `a_X : Λ_X ⟶ Λ'_X`
 If moreover `Λ'_X` is flat over `Λ_X`, i.e. the extension of scalars is exact, its left derived
 functor is computed termwise and commutes with the cohomology sheaves, so it preserves bounded
 constructible complexes (`ProEtale.CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj`,
-blueprint `lem-sfb-extend-subfield-constructible`, `lem-sfb-extend-to-qlbar-constructible`).
+blueprint `lemma-extension-scalars-preserves-dctf--1`).
 -/
 
 @[expose] public section
@@ -81,7 +81,7 @@ theorem IsConstructibleModuleObject.extendScalars {X : Scheme.{u}}
     (IsLocallyFinitelyPresented.extendScalars a
       ((isLocallyFinitelyPresented_mapMod_iff Λ _ _).1 (hS i)))
 
-/-- Blueprint `lem-sfb-extend-subfield-constructible`, `lem-sfb-extend-to-qlbar-constructible`,
+/-- Blueprint `lemma-extension-scalars-preserves-dctf--1`,
 for a general flat coefficient change: if the extension of scalars along `a_X : Λ_X ⟶ Λ'_X` is
 exact, its left derived functor preserves bounded constructible complexes. It is computed
 termwise, so `Hⁿ(Λ'_X ⊗ᴸ K) ≅ Λ'_X ⊗ Hⁿ(K)`, which vanishes where `Hⁿ(K)` does and is

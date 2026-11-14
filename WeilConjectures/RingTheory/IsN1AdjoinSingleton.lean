@@ -147,7 +147,7 @@ of those $\mathfrak p$, each minimal over $xS$. Localization at $\mathfrak m$ ke
 $\mathfrak q\subseteq\mathfrak m$ and preserves this property, so $S_{\mathfrak m}/xS_{\mathfrak
 m}$ has no embedded primes. For one such $\mathfrak q$, put $\mathfrak p=R\cap\mathfrak q$. The
 Noetherian normal local domain $R_{\mathfrak p}$ has dimension one, hence is a discrete
-valuation ring by [lem-sc-normal-dim1-dvr]. Since $x\in\mathfrak qS_{\mathfrak q}$, $x$ cannot
+valuation ring by [lemma-proper-smooth-model--1]. Since $x\in\mathfrak qS_{\mathfrak q}$, $x$ cannot
 have negative valuation in $R_{\mathfrak p}$: otherwise $x^{-1}\in\mathfrak pR_{\mathfrak
 p}\subseteq\mathfrak qS_{\mathfrak q}$, contradicting $1=xx^{-1}\in\mathfrak qS_{\mathfrak q}$.
 Therefore $x\in R_{\mathfrak p}$, so $S\otimes_RR_{\mathfrak p}=R_{\mathfrak p}[x]=R_{\mathfrak
@@ -155,7 +155,7 @@ p}$. The prime $\mathfrak q$ extends to a prime of this local ring containing $\
 pR_{\mathfrak p}$, hence exactly its maximal ideal $\mathfrak pR_{\mathfrak p}$; localizing
 gives $S_{\mathfrak q}=R_{\mathfrak p}$, a regular local ring. These are conditions (2) and
 (3)(a) of [lem-weil-pbc-analytic-unramified-principal-criterion]. Dependencies:
-lem-weil-pbc-normal-domain-fractional-principal-quotient-ass, lem-sc-normal-dim1-dvr,
+lem-weil-pbc-normal-domain-fractional-principal-quotient-ass, lemma-proper-smooth-model--1,
 lem-weil-pbc-analytic-unramified-principal-criterion.
 
 7. For the same associated prime $\mathfrak q\subseteq\mathfrak m$, the quotient $S/\mathfrak q$

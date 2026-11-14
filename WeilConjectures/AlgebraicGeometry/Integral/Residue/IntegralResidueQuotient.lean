@@ -287,7 +287,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Free integral modules on the constant finite coefficients form the actual residue diagram.
 
 Source: `lem-pur-condensed-zl-reduction-mod-ell-power` and the integral construction in
-`sk-def-sp-tate-twist`.
+`definition-tate-twists`.
 Proof: a continuous function into a finite residue ring lifts by its integer representatives.
 A continuous integral function with zero residue divides continuously by `ℓ^n`, using its
 norm bound. Thus the residue map is the cokernel of multiplication by `ℓ^n`, sectionwise,

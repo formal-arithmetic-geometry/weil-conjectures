@@ -31,7 +31,7 @@ blow-ups preserve density.
   and scheme-theoretic density of an open immersion can be checked on a cover by two opens.
 - `AlgebraicGeometry.CommonModification.dense_range_j_of_qcqs`,
   `AlgebraicGeometry.CommonModification.isSchemeTheoreticallyDominant_j`
-  (blueprint: `det-nagata-common-modification-dense`).
+  (blueprint: `lemma-gluing-after-admissible-blow-ups--1`).
 
 -/
 
@@ -203,7 +203,7 @@ namespace CommonModification
 variable {S U X₁ X₂ : Scheme.{u}} {s₁ : X₁ ⟶ S} {s₂ : X₂ ⟶ S} {j₁ : U ⟶ X₁} {j₂ : U ⟶ X₂}
   [IsOpenImmersion j₁] [IsOpenImmersion j₂]
 
-/-- Blueprint `det-nagata-common-modification-dense`: Density of the common open in a common
+/-- Blueprint `lemma-gluing-after-admissible-blow-ups--1`: Density of the common open in a common
 modification (topological part).
 
 If `U` is dense in both qcqs models `X₁`, `X₂`, then it is dense in the common
@@ -243,7 +243,7 @@ lemma quasiCompact_j (cm : CommonModification s₁ s₂ j₁ j₂) [QuasiCompact
   have := cm.quasiCompact_u₂
   exact quasiCompact_of_cover₂ cm.j cm.k₁ cm.k₂ cm.cover cm.u₁ cm.u₂ cm.u₁_k₁ cm.u₂_k₂
 
-/-- Blueprint `det-nagata-common-modification-dense`: Density of the common open in a common
+/-- Blueprint `lemma-gluing-after-admissible-blow-ups--1`: Density of the common open in a common
 modification (scheme-theoretic part).
 
 If the quasi-compact open immersions `j₁`, `j₂` are scheme-theoretically dense, then so is

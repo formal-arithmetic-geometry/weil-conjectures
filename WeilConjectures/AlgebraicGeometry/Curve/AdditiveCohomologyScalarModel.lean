@@ -24,7 +24,7 @@ namespace AlgebraicGeometry
 
 /-- First cohomology of the additive structure sheaf carries its finite-dimensional
 scalar action, with scalar multiplication represented by actual sheaf endomorphisms.
-Source: Stacks 0A3N, proof; blueprint `lem-sc-artin-schreier-dimension`, steps 3--6.
+Source: Stacks 0A3N, proof; blueprint `proposition-p-torsion-smooth-proper-curve--3`, steps 3--6.
 (blueprint: lem-sc-additive-cohomology-finite-scalar-model)
 
 Proof: Transport multiplication by the pullback of each c in k through the

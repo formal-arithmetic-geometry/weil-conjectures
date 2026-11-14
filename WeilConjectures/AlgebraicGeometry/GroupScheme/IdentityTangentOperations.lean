@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentAddition
 /-!
 # Compatibility of identity tangent transport with the vector-space operations
 
-Source: blueprint `def-wf-lie-algebra-derivation` and `lem-wf-same-lie-closed-subgroup`,
-Multiplication paragraph.
+Source: blueprint `def-wf-lie-algebra-derivation` and
+`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph.
 -/
 
 @[expose] public section
@@ -50,8 +50,9 @@ namespace GrpObj
 set_option backward.isDefEq.respectTransparency false in
 /-- Any map with the prescribed underlying morphism carries infinitesimal multiplication
 and scaling to the specified tangent addition and scalar multiplication.
-Source: blueprint `def-wf-lie-algebra-derivation`; `lem-wf-same-lie-closed-subgroup`, Multiplication
-paragraph; Stacks Project, Tag 0B2B, the construction of the vector-space operations.
+Source: blueprint `def-wf-lie-algebra-derivation`;
+`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph; Stacks Project, Tag
+0B2B, the construction of the vector-space operations.
 
 Proof: The addition formula in `exists_tangentVectors_vectorSpace` uses the pushout
 of two dual-number spectra over their closed points. For two infinitesimal points,

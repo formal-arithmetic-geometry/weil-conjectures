@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Flat.FlatModelGeneration
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-! # Constant finite-projective models of a lisse sheaf
-Source: blueprint det-sf-flat-model-generation, proof of the generator assertion.
+Source: blueprint lemma-flat-models-generators--2, proof of the generator assertion.
 -/
 
 @[expose] public section
@@ -19,7 +19,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
 /-- Finite projective geometric stalks give finite projective constant trivializations.
-Source: blueprint det-sf-flat-model-generation, clause (3), the generators
+Source: blueprint lemma-flat-models-generators--2, clause (3), the generators
 "L locally constant with finite projective stalks".
 
 Proof: take an etale trivializing cover from local constancy. Discard empty members,

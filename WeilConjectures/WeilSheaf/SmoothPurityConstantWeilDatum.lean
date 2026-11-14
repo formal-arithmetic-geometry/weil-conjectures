@@ -73,12 +73,12 @@ pullback coordinates. -/
 lemma purity_adicConstantCondensedStr_hom :
     (adicConstantCondensedStr k₀ l X).hom =
       (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app (𝟙_ _) ≫
-        tateUnitDatum l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom := by
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app (𝟙_ _) ≫
+        tateUnitDatum l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom := by
   rw [adicConstantCondensedStr_hom, toCondensed_obj_obj_str, adicConstant_obj_str]
   simp only [condensedFrobeniusComparison, Iso.symm_hom,
     purity_adicUnitIso_eq_tensorUnitIso, Category.assoc]
   exact purity_adicLowerStarUnit_condensed l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

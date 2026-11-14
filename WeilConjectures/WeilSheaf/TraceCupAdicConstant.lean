@@ -33,8 +33,9 @@ trace–cup structure is perfect
 (`AlgebraicGeometry.ProEtale.finiteAdicHCup_nondegenerate`) transported to `ℚ̄_ℓ`
 (`AlgebraicGeometry.ProEtale.isPerfPair_adicConstantHCup`).
 
-This is the coefficient stage `ℚ̄_ℓ` of blueprint `sk-cor-trace`, `sk-thm-derived-duality` and
-`sk-thm-transport` for the trace–cup pairing of `sk-def-trace-cup`.
+This is the coefficient stage `ℚ̄_ℓ` of blueprint `corollary-cup-product-pairing--1`,
+`corollary-degreewise-duality-over-fields` and `theorem-poincare-duality--9` for the trace–cup
+pairing of `corollary-cup-product-pairing--1`.
 -/
 
 @[expose] public section
@@ -58,10 +59,10 @@ private lemma isPerfPair_of_subsingleton {K V W : Type*} [Field K] [AddCommGroup
   .of_injective (fun _ _ _ ↦ Subsingleton.elim _ _) fun _ _ _ ↦ Subsingleton.elim _ _
 
 /-- **The trace–cup structure of `H^•(X ⊗ k̄, ℚ̄_ℓ)` is perfect** (the coefficient stage `ℚ̄_ℓ`
-of blueprint `sk-cor-trace` and `sk-thm-derived-duality`). For `X₀` smooth proper geometrically
-connected of pure dimension `d` over `k₀` and a trace `tr : H^{2d} ≅ ℚ̄_ℓ` on which the geometric
-Frobenius acts by `q^d`, the cup product of `ℚ̄_ℓ`-cohomology and `tr` form a trace–cup structure
-whose pairings are perfect. -/
+of blueprint `corollary-cup-product-pairing--1` and `corollary-degreewise-duality-over-fields`). For
+`X₀` smooth proper geometrically connected of pure dimension `d` over `k₀` and a trace
+`tr : H^{2d} ≅ ℚ̄_ℓ` on which the geometric Frobenius acts by `q^d`, the cup product of
+`ℚ̄_ℓ`-cohomology and `tr` form a trace–cup structure whose pairings are perfect. -/
 theorem exists_traceCup_isPerfect_of_linearEquiv
     (tr : ((adicConstant k₀ l X).cohomology (2 * d)).carrier ≃ₗ[PadicAlgCl l] PadicAlgCl l)
     (htr : ∀ z, tr (((adicConstant k₀ l X).cohomology (2 * d)).frobenius z) =
@@ -92,7 +93,7 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
   -- the pro-étale models of the cohomology groups, in the nonnegative degrees
   have hΘ : ∀ i : ℤ, 0 ≤ i → ∃ Θ : ProEtale.AdicConstantH l f.geometricFiber i.toNat ≃ₗ[
       PadicAlgCl l] ((adicConstant k₀ l X).cohomology i).carrier,
-      ∀ x, Θ (ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius i.toNat x) =
+      ∀ x, Θ (ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius.asIso i.toNat x) =
         ((adicConstant k₀ l X).cohomology i).frobenius (Θ x) := by
     intro i hi
     obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le hi
@@ -100,7 +101,7 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
       (k₀ := k₀) (l := l) (Y := X) n
   choose Θ hΘ using hΘ
   have hΘ' (i : ℤ) (hi : 0 ≤ i) (x) : (Θ i hi).symm (((adicConstant k₀ l X).cohomology i).frobenius
-      x) = ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius i.toNat
+      x) = ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius.asIso i.toNat
         ((Θ i hi).symm x) := by
     rw [LinearEquiv.symm_apply_eq, hΘ, LinearEquiv.apply_symm_apply]
   let H := (adicConstant k₀ l X).cohomology
@@ -126,7 +127,7 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
     by_cases hij : 0 ≤ i ∧ 0 ≤ j
     · rw [hcup i j k h hij, hcup i j k h hij, hΘ', hΘ', ← hΘ]
       exact congrArg _ (ProEtale.adicConstantHPullback_adicConstantHCup l f.geometricFiber hfin
-        f.geometricGaloisFrobenius _ _ _).symm
+        f.geometricGaloisFrobenius.asIso _ _ _).symm
     · rw [hcup0 i j k h hij]
       exact (map_zero ((adicConstant k₀ l X).cohomology k).frobenius).symm
   · intro i j k h x y

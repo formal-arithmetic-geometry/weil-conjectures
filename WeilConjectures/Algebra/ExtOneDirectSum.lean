@@ -14,7 +14,7 @@ import Mathlib.Algebra.Module.Shrink
 # Ext one of a direct sum is the product of Ext one
 
 Source: literature/stacks-project/more-algebra.tex, proof of Lemma Tag 05EG,
-lines 24504--24516 (blueprint: lem-weil-pbc-ext-one-direct-sum).
+lines 24504--24516 (blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Short exactness of `0 → N → E → Q → 0` is expressed, as in the landed sibling
 `LinearMap.extension_descends_of_summands` (lem-weil-pbc-direct-sum-extension-assembly),
@@ -320,7 +320,7 @@ private theorem small_middle
 
 Source: literature/stacks-project/more-algebra.tex, proof of Lemma Tag 05EG,
 lines 24504--24516 (the direct-sum compatibility step).
-(blueprint: lem-weil-pbc-ext-one-direct-sum)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 First clause: surjectivity of `Φ_A` (every family of extensions of the `C j` by `N` is,
 up to endpoint-fixed isomorphism, the family of pullbacks along `ι_j` of one extension

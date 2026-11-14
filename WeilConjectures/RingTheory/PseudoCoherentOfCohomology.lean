@@ -75,7 +75,7 @@ Shift a bounded-above finite-free representative of H^q(K)[0] by -q. Its terms
 remain finite free, so H^q(K)[-q] is pseudo-coherent, hence m-pseudo-coherent by
 lem-pc-ring-pseudo-coherent-iff-all-m. Put B = max(b,m-1). At q = m-1, T_q has zero
 cohomology in every degree ≥ m, so lem-pc-ring-m-pseudo-coherent-vanishing-base applies.
-Induct for q = m,...,B using lem-weil-pbc-truncation-triangle: its outer vertices are
+Induct for q = m,...,B using theorem-pbc-injective-acyclicity: its outer vertices are
 T_(q-1) and H^q(K)[-q]. The second clause of
 lem-pc-ring-pseudo-coherent-distinguished-triangle gives m-pseudo-coherence of T_q.
 At B ≥ b, transport the finite-free approximation across Q(T_B) ≅ K; cohomology

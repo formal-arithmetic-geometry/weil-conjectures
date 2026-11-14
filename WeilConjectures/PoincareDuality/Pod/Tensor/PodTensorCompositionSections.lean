@@ -13,7 +13,7 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
 -/
 
@@ -174,7 +174,6 @@ private theorem unit_total_restrict (S : Scheme.{u}) (n : ℕ)
 attribute [local irreducible] integralOperationsTotalTensorSection
   unrestrictedIntegralTensorSection integralOperationsTensorSection
 
-set_option maxHeartbeats 600000 in
 -- The sectionwise tensor calculation keeps three coefficient transports explicit.
 /-- Successive tensor comparisons agree on the original unit-coefficient generators.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941

@@ -74,8 +74,8 @@ def nonemptySieve (F : Cᵒᵖ ⥤ Type w) (U : C) : Sieve U where
 `G × T → T` of `G` which is simply transitive on the sections over every object, and such
 that `T` has sections locally, i.e. every object is covered by objects over which `T` has a
 section. Equivalently, `T` is locally isomorphic to `G` with its translation action.
-(blueprint: `def-sc-gm-torsor`, for a general abelian sheaf `G` on a general site; the étale
-`𝔾ₘ`-torsors and the Zariski `𝒪ˣ`-torsors of the blueprint are the cases
+(blueprint: `lemma-cohomology-multiplicative-group--3`, for a general abelian sheaf `G` on a general
+site; the étale `𝔾ₘ`-torsors and the Zariski `𝒪ˣ`-torsors of the blueprint are the cases
 `G = AlgebraicGeometry.Scheme.gmSheaf X` and `G = AlgebraicGeometry.Scheme.unitsSheaf X`).
 For `G` the constant sheaf of a finite abelian group on a small étale site these are the finite
 torsors of blueprint `def-weil-pbc-finite-torsors`. -/
@@ -831,7 +831,7 @@ case of the contracted product `P'' = P ∧ P'`, whose class is the sum of the c
 Writing `P ≅ P_s`, `P' ≅ P_{s'}` and `P'' ≅ P_{s''}` as lifting torsors for an injective
 resolution `0 → G → I → Q → 0`, the differences `b''(μ(x, x')) - b(x) - b'(x')` of the lifts are
 invariant, hence glue to a global section `c` of `I` with `d c = s'' - s - s'`.
-(blueprint: `thm-sc-hilbert-90`, the group structure on torsors) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`, the group structure on torsors) -/
 theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
     (μ : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U → P''.sheaf.obj.obj U)
     (hμ : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U) (x' : P'.sheaf.obj.obj U),
@@ -1063,7 +1063,7 @@ projection `π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to
 Only the existence of a bijection is recorded. It is obtained from an injective resolution
 `0 → G → I → Q → 0`: both sides are identified with the cokernel of `Γ(I) → Γ(Q)`
 (`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
-(blueprint: `lem-sc-torsor-h1`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`) -/
 theorem nonempty_equiv_ext_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (Abelian.Ext ((constantSheaf J AddCommGrpCat.{w}).obj
       (AddCommGrpCat.of (ULift ℤ))) G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=
@@ -1076,7 +1076,7 @@ is `Ext¹(ℤ, G)`, to which `CategoryTheory.Sheaf.nonempty_equiv_ext_torsor` ap
 
 The vanishing direction is also proved directly, without torsors, in
 `CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`.
-(blueprint: `lem-sc-torsor-h1`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`) -/
 theorem nonempty_equiv_H_one_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (H G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=
   nonempty_equiv_ext_torsor hT G

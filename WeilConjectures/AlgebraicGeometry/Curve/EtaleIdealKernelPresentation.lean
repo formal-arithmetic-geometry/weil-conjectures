@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 For nested ideals, the tensor of their inclusion is a kernel of restriction.
 There is no cokernel or quasi-coherence-of-the-quotient assumption in this assertion.
 Source: blueprint `lem-sc-additive-ideal-image-tensor-comparison`, Steps 1 and 3,
-from `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+from `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-etale-ideal-kernel-presentation)
 
 Proof: Cover an etale object by affine etale objects V over affine opens

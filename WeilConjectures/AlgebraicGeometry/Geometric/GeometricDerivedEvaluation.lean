@@ -122,13 +122,13 @@ theorem semilinearGeometryEvaluation [PreservesFiniteLimits uInv] :
     (mateEquiv O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction
       (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        ((geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O) n).inv)).natTrans
+        ((geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O) n).inv))
   have hβ (n : ℕ) : IsIso (β n) :=
     geometricEvaluationMate_isIso.{c, v, r} J B τ J' uInv uPush adjSet O n
   let γ {m n : ℕ} (h : n ≤ m) :=
     ((mateEquiv (A.scalar h).adjunction (target.scalar h).adjunction).symm
       (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso (O.restrictionPullback h)).hom)).natTrans
+        (Functor.mapDerivedCategorySquareIso (O.restrictionPullback h)).hom))
   have hγ {m n : ℕ} (h : n ≤ m) : IsIso (γ h) :=
     geometricCoefficientPullbackMate_isIso.{c, v, r} J B τ J' uInv uPush adjSet A O target h
   refine ⟨{

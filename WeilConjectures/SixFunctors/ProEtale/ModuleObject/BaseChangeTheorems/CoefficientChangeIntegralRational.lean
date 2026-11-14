@@ -64,10 +64,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 set_option maxHeartbeats 1000000 in
 -- the instances of the transfer theorem are unified with the concrete coefficient rings
-/-- Blueprint `sk-lem-sbc-exchange-compatibility`, its last assertion for the localization
-`𝒪_E ⟶ E` of `sk-prop-scalar-six`: the extension of scalars `E ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral
-base-change morphism and the base-change morphism of `Dᵇc(-)⟦E⟧` at `E ⊗ᴸ_{𝒪_E} K₀` are isomorphic
-arrows. -/
+/-- Blueprint `lemma-naturality-pasting-comparison`, its last assertion for the localization
+`𝒪_E ⟶ E` of `proposition-six-operations-change-coefficients`: the extension of scalars
+`E ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral base-change morphism and the base-change morphism of
+`Dᵇc(-)⟦E⟧` at `E ⊗ᴸ_{𝒪_E} K₀` are isomorphic arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational
     (sq : CommSq g' f' f g) (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     Nonempty (Arrow.mk ((boundedConstructibleExtendScalars Y'.left ℓ E).map

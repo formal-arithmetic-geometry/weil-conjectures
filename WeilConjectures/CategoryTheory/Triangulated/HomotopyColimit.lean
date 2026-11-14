@@ -45,10 +45,10 @@ namespace Pretriangulated
 variable {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
 
-/-- Blueprint `def-kun-truncations`: Truncations and homotopy colimits (the homotopy colimit
-part; the stupid and canonical truncations are `HomologicalComplex.stupidTrunc`,
-`CochainComplex.truncLE`, `CochainComplex.truncGE` and the truncation functors
-`TStructure.truncLE`, `TStructure.truncGE` of the canonical t-structure
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: Truncations and homotopy colimits
+(the homotopy colimit part; the stupid and canonical truncations are
+`HomologicalComplex.stupidTrunc`, `CochainComplex.truncLE`, `CochainComplex.truncGE` and the
+truncation functors `TStructure.truncLE`, `TStructure.truncGE` of the canonical t-structure
 `DerivedCategory.TStructure.t`, with the truncation triangle
 `TStructure.triangleLEGE_distinguished`).
 

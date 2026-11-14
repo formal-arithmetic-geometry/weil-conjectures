@@ -32,7 +32,7 @@ namespace CommAlgCat
 of a set `E` of finitely presented `R`-algebras, then `Λ` is a filtered colimit of
 members of `E`. The natural transformation `ι` gives the compatible coprojections,
 and `IsColimit` gives their universal property. The index category is small, in the
-universe `max u v` of the algebras (as in lem-weil-pbc-algebra-colimit-fp-algebras-over-it);
+universe `max u v` of the algebras (as in theorem-finite-etale-covers-proper-henselian--2);
 no smallness assumption on `E` is needed, since finitely presented algebras have only a
 small set of isomorphism classes.
 
@@ -46,7 +46,7 @@ Proof:
    ideals, and put `P = P₀ ∪ E'`. Every finitely presented algebra is isomorphic to a
    member of `P`. The category `I` of pairs `(A, α : A → Λ)` with `A ∈ P` is small,
    filtered, and its forgetful diagram has colimit `Λ`, by
-   lem-weil-pbc-algebra-colimit-fp-algebras-over-it (Tag 0BUF), with colimit understood
+   theorem-finite-etale-covers-proper-henselian--2 (Tag 0BUF), with colimit understood
    as in def-weil-pbc-category-colimit.
 2. Let `J` be the full subcategory on pairs `(B, γ)` with `B ∈ E'`. The hypothesis
    factors every `α` as `β ≫ γ` through a member of `E`, and composing with an

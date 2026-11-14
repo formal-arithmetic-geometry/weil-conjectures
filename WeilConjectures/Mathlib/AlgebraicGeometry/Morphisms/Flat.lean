@@ -19,7 +19,8 @@ flat, and flatness of `𝒪_{X',x'}` over `𝒪_{S,f(x)}` descends to `𝒪_{X,x
 
 ## Main results
 
-- `AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective` (blueprint `lem-pc-flat-source-descent`).
+- `AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective` (blueprint
+`theorem-hilbert-schemes-points-smooth-curve--1`).
 
 ## Implementation notes
 
@@ -48,7 +49,7 @@ theorem Flat.of_field (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.
 /-- **Flatness descends along a flat surjection on the source.** If `u : X' ⟶ X` is flat and
 surjective and `u ≫ f` is flat, then `f` is flat.
 
-(blueprint: `lem-pc-flat-source-descent`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem Flat.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ S)
     [Flat u] [Surjective u] [Flat (u ≫ f)] : Flat f := by
   refine Flat.of_stalkMap f fun x ↦ ?_

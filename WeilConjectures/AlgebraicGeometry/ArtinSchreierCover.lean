@@ -28,8 +28,9 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.Properties
 
 /-! # Artin–Schreier covers of global functions
 
-Source: blueprint, Fourier–Deligne transform, sk-lem-as-properties,
-lem-fd-as-cover; Stacks Project, Tag 0A3J (blueprint: lem-fd-as-cover).
+Source: blueprint, Fourier–Deligne transform, lemma-artin-schreier-character-sheaf,
+lemma-artin-schreier-character-sheaf; Stacks Project, Tag 0A3J (blueprint:
+lemma-artin-schreier-character-sheaf).
 
 The cover is constructed by base change from the polynomial quotient over the global
 functions. Its affine presentations identify it with the relative spectrum in the source.
@@ -47,21 +48,24 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The equation defining the Artin–Schreier cover.
-Source: blueprint, lem-fd-as-cover, first sentence (blueprint: lem-fd-as-cover). -/
+Source: blueprint, lemma-artin-schreier-character-sheaf, first sentence (blueprint:
+lemma-artin-schreier-character-sheaf). -/
 def artinSchreierCoverPolynomial (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
     Polynomial Γ(X, ⊤) :=
   Polynomial.X ^ p - Polynomial.X - Polynomial.C f
 
 /-- The Artin–Schreier cover of `f`, as a scheme over `X`. This is the base change along
 `X.toSpecΓ` of the spectrum of the actual quotient ring `Γ(X)[T]/(T^p-T-f)`.
-Source: blueprint, lem-fd-as-cover, first sentence (blueprint: lem-fd-as-cover). -/
+Source: blueprint, lemma-artin-schreier-character-sheaf, first sentence (blueprint:
+lemma-artin-schreier-character-sheaf). -/
 def artinSchreierCover (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) : Over X :=
   Over.mk (pullback.fst X.toSpecΓ
     (Spec.map (CommRingCat.ofHom
       (algebraMap Γ(X, ⊤) (AdjoinRoot (artinSchreierCoverPolynomial p X f))))))
 
 /-- The class of `T` on the Artin–Schreier cover, pulled back from its quotient-ring model.
-Source: blueprint, lem-fd-as-cover, the coordinate `T` (blueprint: lem-fd-as-cover). -/
+Source: blueprint, lemma-artin-schreier-character-sheaf, the coordinate `T` (blueprint:
+lemma-artin-schreier-character-sheaf). -/
 def artinSchreierCoverCoordinate (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
     Γ((artinSchreierCover p X f).left, ⊤) :=
   (pullback.snd X.toSpecΓ
@@ -77,7 +81,8 @@ The normalization on every open where such a function is constant specifies the 
 isomorphism, including on disconnected bases. The sheaf torsor is identified with the
 represented presheaf, and the action of each constant section is identified with the
 specified translation.
-Source: blueprint, lem-fd-as-cover (blueprint: lem-fd-as-cover).
+Source: blueprint, lemma-artin-schreier-character-sheaf (blueprint:
+lemma-artin-schreier-character-sheaf).
 
 Proof: (1) The affine quotient has monic basis `1,T,...,T^(p-1)` by
 lem-weil-pbc-monic-quotient-free. Its derivative is `-1`, so
@@ -87,11 +92,11 @@ lem-asd-polynomial-quotient-hom-equivalence and lem-weil-pbc-scheme-morphism-glu
 (3) Translation preserves the equation since `a^p=a`, by
 lem-sc-field-artin-schreier-kernel; its inverse subtracts `a`.
 (4) Over an algebraically closed field every root is uniquely `r+a`, by
-lem-sc-artin-schreier-k. This proves simple transitivity and surjectivity.
+proposition-p-torsion-smooth-proper-curve--2. This proves simple transitivity and surjectivity.
 (5) Representability is a sheaf by lem-weil-pbc-small-etale-representable-presheaf-sheaf.
 Differences of roots are locally constant by lem-fd-frobenius-fixed-sections and
 lem-weil-pbc-constant-sheaf-sections-locally-constant. The cover trivializes this sheaf;
-lem-weil-pbc-etale-base-change-continuous supplies covers after pullback.
+situation-conventions supplies covers after pullback.
 (6) For an automorphism `g`, the difference `g*T-T` is a Frobenius-fixed function on `Y`.
 It commutes with all translations exactly when that function is invariant.
 (7) Invariant functions descend uniquely to the base: geometric transitivity gives
@@ -107,7 +112,7 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
     Etale (artinSchreierCover p X f).hom ∧
     (artinSchreierCover p X f).hom.IsFiniteLocallyFreeOfDegree p ∧
     ∃ σ : Multiplicative (ZMod p) →* Aut (artinSchreierCover p X f),
-      (∀ a : ZMod p, (σ (Multiplicative.ofAdd a)).hom.left.appTop
+      (∀ a : ZMod p, (σ (Multiplicative.ofAdd a)).asIso.hom.left.appTop
           (artinSchreierCoverCoordinate p X f) =
         artinSchreierCoverCoordinate p X f + (a.val : Γ((artinSchreierCover p X f).left, ⊤))) ∧
       (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),
@@ -115,7 +120,7 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
           s ≫ (artinSchreierCover p X f).hom = x} ∧
         ∀ s t : {s : Spec (.of Ω) ⟶ (artinSchreierCover p X f).left //
           s ≫ (artinSchreierCover p X f).hom = x},
-          ∃! a : ZMod p, t.val = s.val ≫ (σ (Multiplicative.ofAdd a)).hom.left) ∧
+          ∃! a : ZMod p, t.val = s.val ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left) ∧
       (∃ (R : Sheaf.Torsor
           ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
             (AddCommGrpCat.of (ULift.{u + 1} (ZMod p)))))
@@ -128,16 +133,16 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
                 ((Functor.const X.Etaleᵒᵖ).obj
                   (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app
                     (Opposite.op U)) (ULift.up a)) s)).down =
-            (e.hom.app (Opposite.op U) s).down ≫ (σ (Multiplicative.ofAdd a)).hom) ∧
+            (e.hom.app (Opposite.op U) s).down ≫ (σ (Multiplicative.ofAdd a)).asIso.hom) ∧
       (Nonempty X → Function.Injective σ) ∧
       (∃ E : Multiplicative (LocallyConstant X (ZMod p)) ≃*
           Subgroup.centralizer (Set.range σ),
         ∀ (b : LocallyConstant X (ZMod p)) (a : ZMod p) (U : X.Opens),
           (∀ x : U, b x = a) →
           ((artinSchreierCover p X f).hom ⁻¹ᵁ U).ι ≫
-              (E (Multiplicative.ofAdd b)).val.hom.left =
+              (E (Multiplicative.ofAdd b)).val.asIso.hom.left =
             ((artinSchreierCover p X f).hom ⁻¹ᵁ U).ι ≫
-              (σ (Multiplicative.ofAdd a)).hom.left) ∧
+              (σ (Multiplicative.ofAdd a)).asIso.hom.left) ∧
       (ConnectedSpace (artinSchreierCover p X f).left → Function.Bijective σ) ∧
       (IsEmpty X → IsEmpty (artinSchreierCover p X f).left ∧
         Subsingleton (Aut (artinSchreierCover p X f))) :=

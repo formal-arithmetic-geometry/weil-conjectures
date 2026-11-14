@@ -151,7 +151,7 @@ private theorem restrictionPullback_unit
       ((proEtaleRingModuleAdjunction f SV SU cS).unit.app N) ≫
         (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
           (proEtaleRingModuleAdjunction f RV RU cR)
-          (TwoSquare.mk _ _ _ _ σ)).natTrans.app _ = _ at h
+          (TwoSquare.mk _ _ _ _ σ)).app _ = _ at h
   rw [hm] at h
   have hz := congrArg (fun k ↦ k.val.app W z) h
   change (δ.hom.app ((proEtaleRingModulePullback f SV SU cS).obj N)).val.app W

@@ -100,7 +100,7 @@ def globalSectionsFrobenius (K : ProEtaleWeilSheaf k₀ l Y) :
     (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X ⟶
       (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X :=
   (globalSectionsLowerStarIso _
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app K.carrier.X ≫
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app K.carrier.X ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map K.str.hom)
 
 /-- The Frobenius on global sections is natural. -/
@@ -119,12 +119,12 @@ def globalSectionsFrobeniusPow (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ) :
     (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X ⟶
       (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X :=
   (globalSectionsLowerStarIso _
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv).inv.app K.carrier.X ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv).inv.app K.carrier.X ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)
 
 lemma globalSectionsFrobeniusPow_zero (K : ProEtaleWeilSheaf k₀ l Y) :
     K.globalSectionsFrobeniusPow 0 = 𝟙 _ := by
-  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv = 𝟙 _ := by
+  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.inv = 𝟙 _ := by
     rw [pow_zero]
     rfl
   have e : (AdicSheaf.forget _).map (K.frobeniusPowIso 0).hom =
@@ -141,14 +141,14 @@ Frobenius. -/
 lemma globalSectionsFrobeniusPow_succ (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ) :
     K.globalSectionsFrobeniusPow (m + 1) =
       K.globalSectionsFrobeniusPow m ≫ K.globalSectionsFrobenius := by
-  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).inv =
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv ≫
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv := by
-    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
+  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).asIso.inv =
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv ≫
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv := by
+    rw [pow_succ, Aut.mul_asIso, Iso.trans_inv]
   have e : (AdicSheaf.forget _).map (K.frobeniusPowIso (m + 1)).hom =
       (lowerStarCongr _ h).hom.app K.carrier.X ≫
         (lowerStarComp (WeilCoefficients.{u} l) _ _).inv.app K.carrier.X ≫
-        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom) ≫
         (AdicSheaf.forget _).map K.str.hom := by
     rw [frobeniusPowIso]
@@ -156,14 +156,15 @@ lemma globalSectionsFrobeniusPow_succ (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ)
       Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
       adicLowerStar_map_hom]
   have h₂ : (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app
-        ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app
+        ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].obj
           K.carrier.X) ≫
-        (Sheaf.Γ _ _).map (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
-          ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)) =
+        (Sheaf.Γ _ _).map
+          (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
+            ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)) =
       (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom) ≫
         (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app K.carrier.X :=
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app K.carrier.X :=
     ((globalSectionsLowerStarIso _ _).inv.naturality _).symm
   rw [globalSectionsFrobeniusPow, globalSectionsFrobeniusPow, globalSectionsFrobenius, e]
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
@@ -190,8 +191,8 @@ variable {k₀' : Type u} [Field k₀'] [Finite k₀']
   {Y' : Scheme.{u}} [Y'.Over (Spec (CommRingCat.of k₀'))]
   (θ : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
     (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
-  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
-    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
+  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.hom =
+    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.hom ≫ θ.hom)
 
 /-- Under the identification `Γ(Ȳ', θ_* K) ≅ Γ(Ȳ, K)`, the Frobenius of the transported Weil
 sheaf `(θ_* K, θ_* φ_r)` is the Frobenius of `K` through `φ_r`. -/
@@ -202,10 +203,10 @@ lemma globalSectionsFrobenius_transport (K : ProEtaleWeilSheaf k₀ l Y) :
       K.globalSectionsFrobeniusPow r := by
   have e : (AdicSheaf.forget _).map ((transport θ r hθ).obj K).str.hom =
       (lowerStarComp (WeilCoefficients.{u} l) θ.hom
-          (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv).hom.app K.carrier.X ≫
+          (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.inv).hom.app K.carrier.X ≫
         (lowerStarCongr _ (hom_comp_geometricGaloisFrobenius_inv θ r hθ)).hom.app K.carrier.X ≫
         (lowerStarComp (WeilCoefficients.{u} l)
-          ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).inv
+          ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.inv
           θ.hom).inv.app K.carrier.X ≫
         (θ.hom)_*[_].map ((AdicSheaf.forget _).map (K.frobeniusPowIso r).hom) := by
     rw [transport_obj_str, transportCommIso]
@@ -218,7 +219,7 @@ lemma globalSectionsFrobenius_transport (K : ProEtaleWeilSheaf k₀ l Y) :
   rw [globalSectionsLowerStarIso_inv_app_comp_congr_assoc,
     globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_inv_assoc]
   have h₂ : (globalSectionsLowerStarIso (WeilCoefficients.{u} l) θ.hom).inv.app
-        ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).inv)_*[_].obj
+        ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.inv)_*[_].obj
           K.carrier.X) ≫
         (Sheaf.Γ _ _).map ((θ.hom)_*[_].map ((AdicSheaf.forget _).map (K.frobeniusPowIso r).hom)) =
       (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso r).hom) ≫

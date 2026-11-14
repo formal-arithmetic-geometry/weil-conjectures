@@ -18,8 +18,8 @@ import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 
 /-! # Sectionwise module direct-image and open-restriction pasting
 
-Source: blueprint `sk-thm-sf-comp-composition`, Composition isomorphism and Canonicity
-and associativity; Stacks Project, proetale.tex, Tag 09A5, section-morphism;
+Source: blueprint `proposition-composition-base-change-rf-shriek--1`, Composition isomorphism and
+Canonicity and associativity; Stacks Project, proetale.tex, Tag 09A5, section-morphism;
 sites.tex, Tag 00XZ, section-localize; sites-modules.tex, Tags 03D3, 03D6, 03DH
 (blueprint: lem-sfb-module-direct-image-open-pasting).
 
@@ -381,7 +381,7 @@ private noncomputable def betaMap {X Y U P : Scheme.{u}}
       upperStar Λ i ⋙ lowerStar Λ fU :=
   ((mateEquiv (upperStarLowerStarAdjunction Λ i)
     (upperStarLowerStarAdjunction Λ j)).symm
-      (TwoSquare.mk _ _ _ _ (squarePushIso Λ f j fU i w).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (squarePushIso Λ f j fU i w).hom))
 
 private noncomputable def squareSiteIso {X Y U P : Scheme.{u}}
     (f : X ⟶ Y) (j : U ⟶ Y) (fU : P ⟶ U) (i : P ⟶ X)
@@ -504,7 +504,7 @@ private theorem betaMap_def {X Y U P : Scheme.{u}}
     betaMap Λ f j fU i w =
       ((mateEquiv (upperStarLowerStarAdjunction Λ i)
         (upperStarLowerStarAdjunction Λ j)).symm
-          (TwoSquare.mk _ _ _ _ (squarePushIso Λ f j fU i w).hom)).natTrans := rfl
+          (TwoSquare.mk _ _ _ _ (squarePushIso Λ f j fU i w).hom)) := rfl
 
 private theorem mate_unit_formula {C D E F : Type*}
     [Category C] [Category D] [Category E] [Category F]
@@ -513,7 +513,7 @@ private theorem mate_unit_formula {C D E F : Type*}
     (α : R₁ ⋙ G ⟶ H ⋙ R₂) (M : C) :
     G.map (a.unit.app M) ≫ α.app (L₁.obj M) =
       b.unit.app (G.obj M) ≫ R₂.map
-        (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ α)).natTrans.app M) :=
+        (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ α)).app M) :=
   unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ α) M
 
 private theorem betaMap_unit {X Y U P : Scheme.{u}}
@@ -688,7 +688,7 @@ private theorem formalism_sqIso {X Y U P : Scheme.{u}}
 private theorem betaMap_formalism {X Y U P : Scheme.{u}}
     (f : X ⟶ Y) (j : U ⟶ Y) (fU : P ⟶ U) (i : P ⟶ X)
     (w : i ≫ f = fU ≫ j) : betaMap Λ f j fU i w =
-      ((formalism Λ).pfBaseChange i fU f j w).natTrans := by
+      ((formalism Λ).pfBaseChange i fU f j w) := by
   have h : mateEquiv (upperStarLowerStarAdjunction Λ i)
       (upperStarLowerStarAdjunction Λ j)
       ((formalism Λ).pfBaseChange i fU f j w) =
@@ -697,7 +697,7 @@ private theorem betaMap_formalism {X Y U P : Scheme.{u}}
       (upperStarLowerStarAdjunction Λ j)
       (mateEquiv (upperStarLowerStarAdjunction Λ f)
         (upperStarLowerStarAdjunction Λ fU)
-        ((formalism Λ).sqIso i fU f j w).inv)).natTrans = _
+        ((formalism Λ).sqIso i fU f j w).inv)) = _
     rw [iterated_mateEquiv_conjugateEquiv]
     rw [formalism_sqIso]
     change (conjugateIsoEquiv
@@ -712,7 +712,7 @@ private theorem betaMap_formalism {X Y U P : Scheme.{u}}
       conjugateIsoEquiv_upperStarCongr, Iso.symm_symm_eq,
       conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_upperStarComp]
     rfl
-  exact congrArg TwoSquare.natTrans
+  exact
     (((mateEquiv (upperStarLowerStarAdjunction Λ i)
       (upperStarLowerStarAdjunction Λ j)).symm_apply_eq).mpr h.symm)
 
@@ -731,7 +731,7 @@ private theorem successive_laws (β : Comparisons Λ)
       (β f j fU i sq).hom = betaMap Λ f j fU i sq.w) : SuccessiveOpens Λ β := by
   intro S T U SU W SW f j _ fU i _ sq v _ fW k _ sqW
   simp only [hb, betaMap_formalism]
-  have h := congrArg TwoSquare.natTrans ((formalism Λ).pfBaseChange_paste_horiz
+  have h := ((formalism Λ).pfBaseChange_paste_horiz
     k i fW fU f v j (k ≫ i) (v ≫ j) sqW.w sq.w rfl rfl
     (sqW.paste_horiz sq).w)
   simpa only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
@@ -746,11 +746,11 @@ private theorem pfBaseChange_vertical_normalized (F : CompactSupportFormalism)
     (w : jX ≫ (f ≫ g) = (fU ≫ gU) ≫ j) :
     Functor.whiskerRight (F.pfComp' f g (f ≫ g) rfl).hom (F.pb j) ≫
       (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft (F.pf f) (F.pfBaseChange jY gU g j wG).natTrans ≫
+      Functor.whiskerLeft (F.pf f) (F.pfBaseChange jY gU g j wG) ≫
       (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight (F.pfBaseChange jX fU f jY wF).natTrans (F.pf gU) ≫
+      Functor.whiskerRight (F.pfBaseChange jX fU f jY wF) (F.pf gU) ≫
       (Functor.associator _ _ _).hom =
-    (F.pfBaseChange jX (fU ≫ gU) (f ≫ g) j w).natTrans ≫
+    (F.pfBaseChange jX (fU ≫ gU) (f ≫ g) j w) ≫
       Functor.whiskerLeft (F.pb jX) (F.pfComp' fU gU (fU ≫ gU) rfl).hom := by
   rw [F.pfBaseChange_paste_vert jX jY j fU f gU g (fU ≫ gU) (f ≫ g)
     wF wG rfl rfl w]
@@ -800,7 +800,7 @@ private theorem pfBaseChange_identity_vertical (F : CompactSupportFormalism)
 
 private theorem pfBaseChange_identity_horizontal_normalized (F : CompactSupportFormalism)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (w : 𝟙 X ≫ f = f ≫ 𝟙 Y) :
-    (F.pfBaseChange (𝟙 X) f f (𝟙 Y) w).natTrans ≫
+    (F.pfBaseChange (𝟙 X) f f (𝟙 Y) w) ≫
       Functor.whiskerRight (F.pbId X).hom (F.pf f) ≫ (Functor.leftUnitor _).hom =
     Functor.whiskerLeft (F.pf f) (F.pbId Y).hom ≫ (Functor.rightUnitor _).hom := by
   rw [F.pfBaseChange_id_horiz]
@@ -817,7 +817,7 @@ private theorem pfBaseChange_identity_horizontal_normalized (F : CompactSupportF
 
 private theorem pfBaseChange_identity_vertical_normalized (F : CompactSupportFormalism)
     {X Y : Scheme.{u}} (j : X ⟶ Y) (w : j ≫ 𝟙 Y = 𝟙 X ≫ j) :
-    (F.pfBaseChange j (𝟙 X) (𝟙 Y) j w).natTrans ≫
+    (F.pfBaseChange j (𝟙 X) (𝟙 Y) j w) ≫
       Functor.whiskerLeft (F.pb j) (F.pfId X).hom ≫ (Functor.rightUnitor _).hom =
     Functor.whiskerRight (F.pfId Y).hom (F.pb j) ≫ (Functor.leftUnitor _).hom := by
   rw [pfBaseChange_identity_vertical]
@@ -878,7 +878,7 @@ theorem moduleDirectImageOpenPasting_canonical :
             (upperStarLowerStarAdjunction Λ fU)
             (TwoSquare.mk _ _ _ _
               (((upperStarComp Λ i f).symm ≪≫ upperStarCongr Λ sq.w ≪≫
-                upperStarComp Λ fU j).inv))).natTrans := by
+                upperStarComp Λ fU j).inv))) := by
   let β : Comparisons Λ := fun f j _ fU i _ sq ↦
     @asIso _ _ _ _ (betaMap Λ f j fU i sq.w) (betaMap_isIso Λ f j fU i sq)
   have hb : ∀ {X Y U P : Scheme.{u}} (f : X ⟶ Y) (j : U ⟶ Y) [IsOpenImmersion j]
@@ -898,6 +898,6 @@ theorem moduleDirectImageOpenPasting_canonical :
       (congrArg (fun t : upperStar Λ j ⋙ upperStar Λ fU ⟶
           upperStar Λ f ⋙ upperStar Λ i ↦
         (mateEquiv (upperStarLowerStarAdjunction Λ f)
-          (upperStarLowerStarAdjunction Λ fU) (TwoSquare.mk _ _ _ _ t)).natTrans) he)
+          (upperStarLowerStarAdjunction Λ fU) (TwoSquare.mk _ _ _ _ t))) he)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting

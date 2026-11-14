@@ -188,7 +188,6 @@ private theorem globalSectionsUpperStarMap_eval {T Y : Scheme.{v}} (m : T ⟶ Y)
   erw [← Sheaf.ΓRes_map FV a.op]
   rfl
 
--- Nested pullback pasting comparisons need additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -401,7 +400,6 @@ noncomputable def strictLocalUnderivedMateSections {X S : Scheme.{v}} (f : X ⟶
       (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1}
         (pullback.snd f (Scheme.strictLocalizationToBase s))).hom
 
-set_option maxHeartbeats 500000 in
 -- The mate calculation elaborates several nested site-pullback comparisons.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

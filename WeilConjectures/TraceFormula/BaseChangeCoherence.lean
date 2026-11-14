@@ -25,7 +25,7 @@ of `Ex_!` with the units of `Lf^* ⊣ Rf_!` for proper `f`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz`,
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`: the
   exchange of a pasted cartesian rectangle is the composite of the exchanges of the two squares
-  (blueprint `fix-lem-exchanges`, item (2)).
+  (blueprint `proposition-composition-base-change-rf-shriek`, item (2)).
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`: for
   proper vertical maps, `Ex_!` is `Ex_*` through `Rf_! ≅ Rf_*` (blueprint
   `def-exchange-projection`, the compactification `f = f ∘ 𝟙`).
@@ -101,9 +101,9 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz'
     (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz ℓ _ _ _ _ _
       hi₂ hp₂ hi₁ hp₁)
 
-/-- **Horizontal pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian
-squares `g'₁ ≫ f₂ = f₁ ≫ g₁` and `g'₂ ≫ f = f₂ ≫ g₂`, the exchange of the outer rectangle is
-`L(g₁ ≫ g₂)^* Rf_! ≅ Lg₁^* Lg₂^* Rf_! ⟶ Lg₁^* Rf₂_! Lg'₂^* ⟶ Rf₁_! Lg'₁^* Lg'₂^*
+/-- **Horizontal pasting of `Ex_!`** (blueprint `proposition-composition-base-change-rf-shriek`,
+item (2)): for cartesian squares `g'₁ ≫ f₂ = f₁ ≫ g₁` and `g'₂ ≫ f = f₂ ≫ g₂`, the exchange of the
+outer rectangle is `L(g₁ ≫ g₂)^* Rf_! ≅ Lg₁^* Lg₂^* Rf_! ⟶ Lg₁^* Rf₂_! Lg'₂^* ⟶ Rf₁_! Lg'₁^* Lg'₂^*
 ≅ Rf₁_! L(g'₁ ≫ g'₂)^*`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
     {g'₁ : X₁ ⟶ X₂} {g'₂ : X₂ ⟶ X₃} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} {f : X₃ ⟶ Y₃}
@@ -126,9 +126,9 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
     Functor.associator_inv_app, Category.id_comp, Category.assoc] at h
   exact h
 
-/-- **Vertical pasting of `Ex_!`** (blueprint `fix-lem-exchanges`, item (2)): for cartesian
-squares `h ≫ v₂ = v₁ ≫ k` and `k ≫ w₂ = w₁ ≫ l`, the exchange of the outer rectangle is
-`Ll^* R(v₂ ≫ w₂)_! ≅ Ll^* Rw₂_! Rv₂_! ⟶ Rw₁_! Lk^* Rv₂_! ⟶ Rw₁_! Rv₁_! Lh^*
+/-- **Vertical pasting of `Ex_!`** (blueprint `proposition-composition-base-change-rf-shriek`, item
+(2)): for cartesian squares `h ≫ v₂ = v₁ ≫ k` and `k ≫ w₂ = w₁ ≫ l`, the exchange of the outer
+rectangle is `Ll^* R(v₂ ≫ w₂)_! ≅ Ll^* Rw₂_! Rv₂_! ⟶ Rw₁_! Lk^* Rv₂_! ⟶ Rw₁_! Rv₁_! Lh^*
 ≅ R(v₁ ≫ w₁)_! Lh^*`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
     {h : X₁ ⟶ X₂} {v₁ : X₁ ⟶ Y₁} {v₂ : X₂ ⟶ Y₂} {k : Y₁ ⟶ Y₂} {w₁ : Y₁ ⟶ X₃} {w₂ : Y₂ ⟶ Y₃}
@@ -145,7 +145,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj M) := by
   have hM :=
     congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' ℓ sq₁ sq₂) M
-  simp only [TwoSquare.hComp, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc] at hM
   exact hM
@@ -223,7 +223,6 @@ lemma Adjunction.map_unit_app_comp_exchangeRight_app {A B A' B' : Type*} [Catego
   erw [af.left_triangle_components]
   simp
 
-set_option maxHeartbeats 1000000 in
 -- the `erw` steps unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **`Ex_!` is compatible with the units of `Lf^* ⊣ Rf_!`** for proper vertical maps:
 `Lg^*(η_f) ≫ Ex_! = η_{f'} ≫ Rf'_!(θ_sq)` with `θ_sq : Lg^* Lf'^* ≅ Lf^* Lg'^*`. -/

@@ -37,7 +37,7 @@ import WeilConjectures.ConstructibleSheaf.FreeLifting
 
 Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
 sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-invert-ell.md and its proof
-(blueprint: det-prop-sfb-qlbar-colimit-x-invert-ell).
+(blueprint: lemma-comparison-completed-coefficients--2).
 
 The coefficient rings and inclusion are the published constructions. The helpers only
 specialize the regular module, restriction of scalars, and sequential-diagram constructors.
@@ -59,14 +59,14 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The regular integral coefficient module on X.
 Source: the displayed sequence in the blueprint localization lemma
-(blueprint: det-prop-sfb-qlbar-colimit-x-invert-ell). -/
+(blueprint: lemma-comparison-completed-coefficients--2). -/
 abbrev padicIntegersRegularModule (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
   Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)
 
 /-- The existing coefficient ring E_X as an integral module along the specified inclusion φ.
 Source: the blueprint localization lemma, first and last sentences
-(blueprint: det-prop-sfb-qlbar-colimit-x-invert-ell). -/
+(blueprint: lemma-comparison-completed-coefficients--2). -/
 abbrev padicSubfieldIntegralModule (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
   (Mod.comap (padicIntegersToPadicSubfield X ℓ E)).obj
@@ -74,7 +74,7 @@ abbrev padicSubfieldIntegralModule (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The sequence of regular integral modules with transition multiplication by ℓ.
 Source: the displayed sequence in the blueprint localization lemma
-(blueprint: det-prop-sfb-qlbar-colimit-x-invert-ell). -/
+(blueprint: lemma-comparison-completed-coefficients--2). -/
 abbrev padicIntegersEllSequence (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ℕ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -136,14 +136,14 @@ of extension of scalars expresses flatness: this functor is already a left adjoi
 finite-limit preservation supplies the remaining half of exactness.
 
 Source: the blueprint localization lemma and its five proof paragraphs
-(blueprint: det-prop-sfb-qlbar-colimit-x-invert-ell).
+(blueprint: lemma-comparison-completed-coefficients--2).
 
 Proof:
 1. On a profinite test S, compactness bounds every continuous E-valued function by one
 common denominator ℓ^m. Multiplication by ℓ is injective on C(S, O_E). Thus the maps
 h ↦ ℓ⁻ᵐh identify C(S,E) with the sequential abelian-group colimit, naturally in S.
 Use the continuous-function coefficient rings of sk-def-sfb-condensed-ring and the
-inclusion of def-sfb-integers-to-subfield-point.
+inclusion of lemma-comparison-completed-coefficients--2.
 2. Every covering of a profinite set has a finite covering family. The sheaf condition
 is therefore a finite limit; filtered colimits commute with it by
 lem-weil-pbc-filtered-colimits-commute-finite-limits. The same cocone is a sheaf colimit.
@@ -156,7 +156,7 @@ on every stage implies equality on the colimit. The zeroth leg is the recorded �
 extends uniquely to the localization. On every stage its value is ℓ⁻ᵐφ; hence its
 underlying map is the module-colimit comparison, and is invertible. The multiplication
 formula on fractions is (a/ℓ^m)(b/ℓ^n) = ab/ℓ^(m+n), giving the claimed ring comparison.
-5. In the universes of def-weil-pbc-proetale-site, use the exact filtered colimits and
+5. In the universes of definition-small-pro-etale-site--1, use the exact filtered colimits and
 tensor-colimit formula of lem-pc-module-filtered-colimits-tensor. Tensoring with E_X is
 the colimit of M --ℓ--> M --ℓ--> M, and thus preserves short exact sequences. This is
 flatness and requires no quasi-compactness or Noetherian hypothesis on X. -/
@@ -165,11 +165,11 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     ∃ j : padicIntegersRegularModule X ℓ E ⟶ padicSubfieldIntegralModule X ℓ E,
       j.hom = padicIntegersToPadicSubfield X ℓ E ∧
       ∃ t : End (padicSubfieldIntegralModule X ℓ E),
-        (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) ≫ t = 𝟙 _ ∧
-        t ≫ (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) = 𝟙 _ ∧
+        (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) ≫ t.asHom = 𝟙 _ ∧
+        t.asHom ≫ (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) = 𝟙 _ ∧
         ∃ α : padicIntegersEllSequence X ℓ E ⟶
             (Functor.const ℕ).obj (padicSubfieldIntegralModule X ℓ E),
-          (∀ m : ℕ, α.app m = j ≫ t ^ m) ∧
+          (∀ m : ℕ, α.app m = j ≫ (t ^ m).asHom) ∧
           Nonempty (IsColimit
             ({ pt := padicSubfieldIntegralModule X ℓ E, ι := α } :
               Cocone (padicIntegersEllSequence X ℓ E))) ∧
@@ -198,10 +198,10 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     have h := (Mod.comap (padicIntegersToPadicSubfield X ℓ E)).map_isIso
       (ℓ • 𝟙 (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E.1) X)))
     simpa only [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id] using h
-  let t : End (padicSubfieldIntegralModule X ℓ E) := inv (ℓ • 𝟙 _)
-  have hpow (n : ℕ) : α.app n = α.app 0 ≫ t ^ n := by
+  let t : End (padicSubfieldIntegralModule X ℓ E) := .of (inv (ℓ • 𝟙 _))
+  have hpow (n : ℕ) : α.app n = α.app 0 ≫ (t ^ n).asHom := by
     induction n with
-    | zero => simp [End.one_def]
+    | zero => simp [End.one_asHom]
     | succ n ih =>
       have hn := c.w (homOfLE (Nat.le_succ n))
       dsimp only [padicIntegersEllSequence] at hn
@@ -217,7 +217,7 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
           Functor.const_obj_obj] at hn ⊢
         rw [Preadditive.comp_nsmul, Category.comp_id]
         exact hn
-      rw [pow_succ', End.mul_def, ← Category.assoc, ← ih]
+      rw [pow_succ', End.mul_asHom, ← Category.assoc, ← ih]
       apply (cancel_mono (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E))).1
       dsimp only [t]
       rw [Category.assoc, IsIso.inv_hom_id, Category.comp_id, hn']

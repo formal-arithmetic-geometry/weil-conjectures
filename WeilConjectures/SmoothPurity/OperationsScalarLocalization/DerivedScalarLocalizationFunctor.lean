@@ -24,7 +24,7 @@ namespace WeilConjectures.OperationsScalarLocalization
 
 /-- Unique additive localization of a linear functor.
 Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `def-weil-derived-pullback-tensor-hom`.
+blueprint `prose-03-02`.
 (blueprint: lem-sf-localized-functor).
 Proof: Use the semilinear extension with the identity coefficient homomorphism. Its coefficient
 map is the identity by uniqueness. The extension has the stated object and pure-tensor formulas.

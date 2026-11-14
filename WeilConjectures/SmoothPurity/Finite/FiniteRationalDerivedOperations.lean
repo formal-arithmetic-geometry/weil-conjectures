@@ -90,7 +90,7 @@ Stacks Project, Tags 06YL, 06YV, 08J7 and 099N
 (blueprint: def-sf-finite-rational-derived-operations).
 
 This is the finite, integral, and rational part of
-`def-weil-derived-pullback-tensor-hom`, extracted with its declaration names,
+`prose-03-02`, extracted with its declaration names,
 signatures, and definitions preserved. The common-stage module re-exports it.
 
 ## Main definitions
@@ -179,17 +179,17 @@ attribute [local irreducible] integralDerivedPullback integralCompletedTensor
   completedIntegralCoefficientSheafUnrestricted integralScalarExtension integralOrdinaryScalar
 
 /-- The recorded quotient coefficient ring; every operation below uses exponent n+1.
-Source: blueprint `def-weil-derived-pullback-tensor-hom`
-(blueprint: def-weil-derived-pullback-tensor-hom).
+Source: blueprint `prose-03-02`
+(blueprint: prose-03-02).
 -/
 noncomputable abbrev finiteCoefficientRing (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (n : ℕ) := Padic.coefficientExtensionRing l E n
 
 /-- Finite-level derived pullback on the intrinsic constant-ring category.
-Source: blueprint `def-weil-derived-pullback-tensor-hom`; uses the exact
-pro-etale inverse image of `def-weil-pbc-proetale-operations`.
-(blueprint: def-weil-derived-pullback-tensor-hom).
+Source: blueprint `prose-03-02`; uses the exact
+pro-etale inverse image of `prose-03-02`.
+(blueprint: prose-03-02).
 -/
 noncomputable abbrev finiteDerivedPullback {X Y : Scheme.{u}}
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -206,7 +206,7 @@ noncomputable abbrev finiteDerivedPullback {X Y : Scheme.{u}}
 The closed universal property and its K-flat evaluation normalization determine
 this structure up to the unique compatible isomorphism used downstream.
 Source: Stacks 07A4, 08J9; coefficient evaluation calculus
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def finiteIntrinsicClosed (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (n : ℕ) :
@@ -214,7 +214,7 @@ noncomputable def finiteIntrinsicClosed (l : ℕ) [Fact l.Prime]
   (coefficientDerivedSystemEvaluationCalculus l E W).choose.finiteClosed n
 
 /-- Tensor on the actual intrinsic positive-level coefficient category.
-Source: Stacks 07A4 (blueprint: def-weil-derived-pullback-tensor-hom). -/
+Source: Stacks 07A4 (blueprint: prose-03-02). -/
 noncomputable def finiteIntrinsicDerivedTensor (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (n : ℕ) :
@@ -224,14 +224,14 @@ noncomputable def finiteIntrinsicDerivedTensor (l : ℕ) [Fact l.Prime]
   (finiteIntrinsicClosed l E W n).tensor
 
 /-- The recorded intrinsic ambient Hom, with its first input contravariant.
-Source: Stacks 08J7 (blueprint: def-weil-derived-pullback-tensor-hom). -/
+Source: Stacks 08J7 (blueprint: prose-03-02). -/
 noncomputable abbrev finiteIntrinsicDerivedInternalHom (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (n : ℕ) := coefficientFiniteInternalHom l E W n
 
 /-- The actual K-flat representative comparison, including the ordinary evaluation
 formula on pure tensors. The site object and morphism universes remain u+1 and u.
-Source: Stacks 07A4, 08J9 (blueprint: def-weil-derived-pullback-tensor-hom). -/
+Source: Stacks 07A4, 08J9 (blueprint: prose-03-02). -/
 noncomputable def finiteIntrinsicTensorModels (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (n : ℕ) :
@@ -240,14 +240,14 @@ noncomputable def finiteIntrinsicTensorModels (l : ℕ) [Fact l.Prime]
   (coefficientDerivedSystemEvaluationCalculus l E W).choose.finiteTensorModel n
 
 /-- Intrinsic finite evaluation: the counit for the recorded internal Hom.
-Source: Stacks 08J9 (blueprint: def-weil-derived-pullback-tensor-hom). -/
+Source: Stacks 08J9 (blueprint: prose-03-02). -/
 noncomputable abbrev finiteIntrinsicEvaluation (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (n : ℕ) := (finiteIntrinsicClosed l E W n).evaluation
 
 /-- Intrinsic finite currying: the canonical closed Hom equivalence, whose
 representative normalization is finiteIntrinsicTensorModels.uncurry_model.
-Source: Stacks 08J9 (blueprint: def-weil-derived-pullback-tensor-hom). -/
+Source: Stacks 08J9 (blueprint: prose-03-02). -/
 noncomputable abbrev finiteIntrinsicTranspose (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (n : ℕ) := (finiteIntrinsicClosed l E W n).transpose
@@ -257,7 +257,7 @@ Its definition is the unique closed transpose of reduced evaluation, conjugated
 by the comparison fixed on K-flat tensor generators. This supplies the requested
 consumer on the existing intrinsic Hom with no flatness assumption on the quotient.
 Source: Stacks 06YS, 0A95; coefficient calculus steps 10--11
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable abbrev finiteIntrinsicReductionHom (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :=
@@ -268,7 +268,7 @@ noncomputable abbrev finiteIntrinsicReductionHom (l : ℕ) [Fact l.Prime]
 /-- Restriction of the canonical integral pullback to the recorded constructible
 subcategory. Its underlying object and arrow maps are the ambient ones.
 Source: blueprint integral paragraph; Stacks Tag 099N(5)
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def constructibleIntegralPullback (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -281,7 +281,7 @@ noncomputable def constructibleIntegralPullback (l : ℕ) [Fact l.Prime]
 
 /-- Constructible restriction of the completed integral tensor, for either scheme.
 Source: blueprint integral paragraph; Bhatt--Scholze, Lemma 6.5.5
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def constructibleIntegralTensor (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
@@ -296,7 +296,7 @@ noncomputable def constructibleIntegralTensor (l : ℕ) [Fact l.Prime]
 /-- The full subcategory of integral pairs for which the ambient derived internal
 Hom is constructible. No closure assertion for all pairs is made.
 Source: blueprint integral internal-Hom qualification; Stacks Tag 08J7
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def constructibleIntegralHomPairs (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) :
@@ -307,7 +307,7 @@ noncomputable def constructibleIntegralHomPairs (l : ℕ) [Fact l.Prime]
 
 /-- Restrict ambient internal Hom exactly on the permitted pairs.
 Source: blueprint integral paragraph; Stacks Tag 08J7
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def constructibleIntegralHom (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) :
@@ -321,7 +321,7 @@ noncomputable def constructibleIntegralHom (l : ℕ) [Fact l.Prime]
 
 /-- Rational Hom has exactly the same integral-pair restriction on its objects.
 Source: blueprint rational paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def constructibleRationalHomPairs (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) :
@@ -333,7 +333,7 @@ noncomputable def constructibleRationalHomPairs (l : ℕ) [Fact l.Prime]
 pure tensor in the raw localized Hom groups. Additivity extends the displayed
 formula to sums. Scalar-first coordinates are those of the recorded localization.
 Source: blueprint rational paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: integral pullback is linear for the constant O_E action, since the strict
 finite inverse images and their Roos construction commute with that action.
 Base change its linear Hom maps. The tensor balancing relation gives well-defined
@@ -370,7 +370,7 @@ theorem rationalDerivedPullback_existsUnique (l : ℕ) [Fact l.Prime]
 
 /-- The unique rational pullback with the prescribed integral object and tensor
 Hom action. Source: blueprint rational paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def rationalDerivedPullback (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -415,7 +415,7 @@ attribute [local irreducible] constructibleIntegralTensor sfIntegralConstructibl
 /-- Rational tensor is the unique additive-in-each-variable extension with
 coefficient multiplication c*d on pure tensors; no Karoubi envelope occurs.
 Source: blueprint rational paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: integral tensor is O_E-linear in each variable by its strict finite tensor
 formulas, preserved by Roos descent. Extend the bilinear Hom map in both scalar
 factors. Balancing is precisely integral bilinearity. Integral functoriality and
@@ -451,7 +451,7 @@ end RationalTensorConstruction
 
 /-- Rational tensor with unchanged integral objects and bilinear scalar extension
 on morphisms. Source: blueprint rational paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def rationalDerivedTensor (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :=
@@ -471,7 +471,7 @@ attribute [local irreducible] rationalDerivedTensor
 
 /-- The underlying permitted integral pair of a permitted rational pair.
 Source: blueprint rational internal-Hom paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def integralPairOfRationalHomPair (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) (P : (constructibleRationalHomPairs l E W).FullSubcategory) :
@@ -523,7 +523,7 @@ attribute [local irreducible] constructibleIntegralHom sfIntegralConstructibleLi
 The multiplication c*d applies to the contravariant first map and covariant
 second map, in exactly the source and target order of the blueprint.
 Source: blueprint rational paragraph; Stacks Tag 08J7
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: the ambient integral Hom functor is O_E-linear separately in both
 variables, with precomposition in the first variable and postcomposition in the
 second. Restrict its maps to the permitted endpoints, then extend bilinearly
@@ -570,7 +570,7 @@ end RationalHomConstruction
 
 /-- Rational internal Hom, with its contravariant/covariant pure-tensor action.
 Source: blueprint rational paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 noncomputable def rationalDerivedInternalHom (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) :=
@@ -586,7 +586,7 @@ attribute [local irreducible] rationalDerivedInternalHom
 
 /-- The restricted integral pullback comparison, with its canonical ambient component.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def integralPullbackScalarComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -601,7 +601,7 @@ def integralPullbackScalarComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The restricted integral tensor comparison, with both input comparisons covariant.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def integralTensorScalarComparison (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (M N : sfIntegralConstructibleCategory l E W) :
@@ -621,7 +621,7 @@ attribute [local irreducible] Linear.homModule Preadditive.homGroup
 
 /-- Rational pullback comparison: precisely the rationalized normalized integral map.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: apply localization to integralPullbackScalarComparison. The scalar and
 pullback object formulas identify the endpoints. Naturality holds on integral
 maps by the normalized chain construction, then on pure tensors by linearity,
@@ -750,7 +750,7 @@ theorem rationalPullbackScalarComparison_existsUnique {X Y : Scheme.{u}} (f : X 
 
 /-- The uniquely normalized rational pullback scalar comparison.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def rationalPullbackScalarComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :=
@@ -760,7 +760,7 @@ attribute [local irreducible] rationalPullbackScalarComparison
 
 /-- Rational tensor comparison, fixed by rationalizing the specified integral comparison.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: localize integralTensorScalarComparison. Both sides have the prescribed
 integral tensor objects. On pairs of pure tensors, integral naturality and the
 product of the two coefficients give rational naturality. Bilinearity gives it
@@ -882,7 +882,7 @@ theorem rationalTensorScalarComparison_existsUnique (W : Scheme.{u})
 
 /-- The uniquely normalized rational tensor scalar comparison.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def rationalTensorScalarComparison (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] :=
   (rationalTensorScalarComparison_existsUnique l E L ι W).exists.choose
@@ -893,7 +893,7 @@ attribute [local irreducible] rationalPullbackScalarComparison rationalTensorSca
 
 /-- Scalar extension preserves the permitted integral-Hom pairs.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: the source Hom is constructible by the permitted-pair predicate. Completed
 scalar extension preserves that predicate. scalarHomCompleted identifies its
 extension with the target Hom using the evaluation-defined ordinary comparison
@@ -916,7 +916,7 @@ theorem integralHomScalarPair_permitted (W : Scheme.{u})
 
 /-- The scalar-extended permitted integral pair.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def integralHomScalarPair (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) :
     (constructibleIntegralHomPairs l L W).FullSubcategory :=
@@ -928,7 +928,7 @@ def integralHomScalarPair (W : Scheme.{u})
 
 /-- The restricted integral Hom comparison is the specified completed ambient comparison.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def integralHomScalarComparison (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) :
     (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
@@ -939,7 +939,7 @@ def integralHomScalarComparison (W : Scheme.{u})
 
 /-- Rational scalar extension preserves exactly the permitted Hom-pair domain.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: the rational scalar object formula gives the scalar extension of the
 underlying integral objects. Substitute those formulas in the domain predicate;
 it becomes integralHomScalarPair_permitted, with only proof-irrelevant subtype
@@ -971,7 +971,7 @@ theorem rationalHomScalarPair_permitted (W : Scheme.{u})
 
 /-- The permitted rational pair after scalar extension.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def rationalHomScalarPair (W : Scheme.{u})
     (P : (constructibleRationalHomPairs l E W).FullSubcategory) :
     (constructibleRationalHomPairs l L W).FullSubcategory :=
@@ -983,7 +983,7 @@ def rationalHomScalarPair (W : Scheme.{u})
 
 /-- Rational Hom scalar comparison is precisely the rationalized canonical integral map.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: use the scalar and Hom object formulas to identify the endpoints with the
 localizations of the integral endpoints. Localize integralHomScalarComparison
 and its inverse. Its hom is the displayed component, which also proves uniqueness.
@@ -1052,7 +1052,7 @@ theorem rationalHomScalarComparison_existsUnique (W : Scheme.{u})
 
 /-- The uniquely normalized rational internal-Hom scalar comparison.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def rationalHomScalarComparison (W : Scheme.{u})
     (P : (constructibleRationalHomPairs l E W).FullSubcategory) :=
   (rationalHomScalarComparison_existsUnique l E L ι W P).exists.choose

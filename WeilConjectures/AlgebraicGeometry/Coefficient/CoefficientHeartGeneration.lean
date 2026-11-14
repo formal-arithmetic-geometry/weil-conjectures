@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartTriangulate
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-coefficient-heart-ii/
 sk-cor-coefficient-heart-ii-generation.md and its proof
-(blueprint: det-cor-coefficient-heart-ii-generation).
+(blueprint: corollary-coefficient-heart-b--2).
 
 The witness below is a nonempty finite sequence ending at the specified object. Its
 entries are shifted lisse extensions or shifted cones between strictly earlier entries.
@@ -137,8 +137,8 @@ construction from shifted locally closed extensions of lisse coefficient modules
 triangle with third vertex `(F r)[n]` says that `F r` is a cone up to integer shift and
 isomorphism, since distinguished triangles are closed under isomorphism.
 
-Source: blueprint sk-cor-coefficient-heart-ii-generation and its proof
-(blueprint: det-cor-coefficient-heart-ii-generation).
+Source: blueprint corollary-coefficient-heart-b--2 and its proof
+(blueprint: corollary-coefficient-heart-b--2).
 
 Proof plan (the five steps of the DAG node):
 1. Let T be the class admitting such finite witnesses. Zero is a generator: take the
@@ -148,28 +148,28 @@ entry to shift a witness; three rotations, or three inverse rotations, of a cone
 give the required signed shifted triangle. Iterate for every integer shift. These are
 finite constructions and never require a direct summand or an infinite closure.
 2. Factor a locally closed immersion through its scheme-theoretic closure, as in
-sk-lem-coefficient-heart. Apply lem-weil-pbc-proetale-ringed-open-closed with the Cartesian
-coefficient identifications of sk-prop-sfb-cartesian-coefficients. Its extension restricts
+lemma-constructible-sheaves. Apply corollary-coefficient-heart-b--2 with the Cartesian
+coefficient identifications of lemma-inverse-image-coefficient-sheaves. Its extension restricts
 to L on S and zero on the closure minus S and outside the closure. All complementary
 open immersions are quasi-compact: every open in Noetherian X is quasi-compact by
-lem-weil-pbc-noetherian-open-subscheme-noetherian; an open in the closed closure is a
+corollary-coefficient-heart-b--2; an open in the closed closure is a
 closed subset of an open of X, hence quasi-compact. Thus the three pieces, omitting empty
-ones, give a finite lisse stratification. The criterion of sk-lem-coefficient-heart gives
+ones, give a finite lisse stratification. The criterion of lemma-constructible-sheaves gives
 constructibility. Shifts and cones preserve bounded constructibility by
-det-cor-coefficient-heart-ii-triangulated, so induction on a witness proves the converse.
-3. For a constructible sheaf take an adapted stratification from sk-lem-coefficient-heart.
-Refine and order it by det-lem-coefficient-heart-common-stratification, preserving lisse
-restrictions. Apply det-lem-coefficient-heart-filtration to get a finite filtration
+corollary-coefficient-heart-b--1, so induction on a witness proves the converse.
+3. For a constructible sheaf take an adapted stratification from lemma-constructible-sheaves.
+Refine and order it by lemma-constructible-sheaves, preserving lisse
+restrictions. Apply lemma-constructible-sheaves--7 to get a finite filtration
 0 = F_0 contained in ... contained in F_m = F with quotients A_k = a_{k!}L_k.
 4. Regard each filtration sequence as a degree-zero short exact sequence of complexes.
-lem-weil-pbc-complex-ses-triangle gives F_{k-1} -> F_k -> A_k -> F_{k-1}[1]. Inverse
+corollary-coefficient-heart-b--2 gives F_{k-1} -> F_k -> A_k -> F_{k-1}[1]. Inverse
 rotation gives A_k[-1] -> F_{k-1} -> F_k -> A_k with the negative shifted connecting
 map. Starting from zero, append this generator and cone at each stage. Shift this finite
 witness to construct every F[n]. The zero sheaf requires only the rank-zero generator.
 5. For a bounded constructible complex choose a representative C with cohomology in
-[a,b]. By def-kun-truncations, the image of tau_le(a-1) C is zero in the derived category
-and tau_le b C is isomorphic to K. For q from a to b, lem-weil-pbc-truncation-triangle
-and inverse rotation exhibit tau_le q C as the cone of
+[a,b]. By proposition-open-direct-image-preserves-finite, the image of tau_le(a-1) C is zero in the
+derived category and tau_le b C is isomorphic to K. For q from a to b,
+theorem-pbc-injective-acyclicity and inverse rotation exhibit tau_le q C as the cone of
 H^q(C)[-q-1] -> tau_le(q-1) C, with the signed connecting map. Steps 3--4 give a witness
 for the first term. Concatenate witnesses and append each cone, then use isomorphism
 closure to end at K. Vanishing intermediate cohomology and an acyclic C use the same

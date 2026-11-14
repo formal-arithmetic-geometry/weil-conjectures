@@ -46,6 +46,51 @@ private lemma bijective_pi_comp_hom (d : ℕ) {C : Type*} [Category C] {X A B : 
   (Equiv.piCongrRight fun _ : Fin d ↦ (⟨fun g ↦ g ≫ f.hom, fun g ↦ g ≫ f.inv,
     fun g ↦ by simp, fun g ↦ by simp⟩ : (X ⟶ A) ≃ (X ⟶ B))).bijective
 
+/-- Naturality transports an endomorphism across the comparison of two functors. -/
+private lemma map_comp_conjugate_transport
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    (R : D ⥤ C) (R' : D' ⥤ C') (Q : C ⥤ C') (Q' : D ⥤ D')
+    (f : Q' ⋙ R' ≅ R ⋙ Q) {P : C} {M : D} {N : D'}
+    (e : N ≅ Q'.obj M) (u : P ⟶ R.obj M) (s : M ⟶ M) :
+    (Q.map u ≫ f.inv.app M ≫ R'.map e.inv) ≫
+        R'.map (e.hom ≫ Q'.map s ≫ e.inv) =
+      Q.map (u ≫ R.map s) ≫ f.inv.app M ≫ R'.map e.inv := by
+  have h := f.inv.naturality s
+  simp only [Functor.comp_map] at h
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← R'.map_comp_assoc, e.inv_hom_id, R'.map_id, Category.id_comp]
+  rw [← Category.assoc (f.inv.app M), ← h]
+  simp only [Category.assoc]
+
+/-- An additive functor and an isomorphism preserve finite coordinate decompositions. -/
+private lemma bijective_sum_comp_map_iso
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (Q : C ⥤ D) [Q.Additive] {d : ℕ} {P M : C} {X N : D}
+    (ι : Fin d → (P ⟶ M)) (π : Fin d → (M ⟶ P)) (e : Q.obj M ≅ N)
+    (hA : ∀ i j, ι i ≫ π j = if i = j then 𝟙 P else 0)
+    (hB : ∑ j, π j ≫ ι j = 𝟙 M) :
+    Function.Bijective fun h : Fin d → (X ⟶ Q.obj P) ↦
+      ∑ i, h i ≫ Q.map (ι i) ≫ e.hom := by
+  have hA' (i j : Fin d) : Q.map (ι i) ≫ Q.map (π j) =
+      if i = j then 𝟙 (Q.obj P) else 0 := by
+    rw [← Q.map_comp, hA]
+    split_ifs <;> simp
+  have hB' : ∑ j, Q.map (π j) ≫ Q.map (ι j) = 𝟙 (Q.obj M) := by
+    simp only [← Q.map_comp, ← Q.map_sum, hB, Q.map_id]
+  have hbij : Function.Bijective fun h : Fin d → (X ⟶ Q.obj P) ↦
+      ∑ i, h i ≫ Q.map (ι i) := by
+    refine ⟨fun h h' hh ↦ funext fun j ↦ ?_, fun g ↦ ⟨fun j ↦ g ≫ Q.map (π j), ?_⟩⟩
+    · have hj (h : Fin d → (X ⟶ Q.obj P)) :
+          (∑ i, h i ≫ Q.map (ι i)) ≫ Q.map (π j) = h j := by
+        simp only [Preadditive.sum_comp, Category.assoc, hA']
+        rw [Finset.sum_eq_single j (fun i _ hi ↦ by simp [hi]) (by simp)]
+        simp
+      exact (hj h).symm.trans ((congrArg (fun g ↦ g ≫ Q.map (π j)) hh).trans (hj h'))
+    · simp only [Category.assoc, ← Preadditive.comp_sum, hB', Category.comp_id]
+  convert (bijective_comp_hom (X := X) e).comp hbij using 1
+  funext h
+  simp only [Function.comp_apply, Preadditive.sum_comp, Category.assoc]
+
 /-- The derived scalar action on the image of a complex is the termwise multiplication by the
 constant section. -/
 theorem smul_id_Q_obj (x : Padic.coefficientExtensionIntegers l L)
@@ -68,8 +113,6 @@ theorem integralScalarChainAction_app_f (x : Padic.coefficientExtensionIntegers 
   intro y
   exact (integralScalarChainAction_existsUnique l L Y x).exists.choose_spec K n U y
 
-set_option maxHeartbeats 1000000 in
--- The transports between `Q ⋙ F.mapDerivedCategory` and `F.mapHomologicalComplex ⋙ Q` are slow.
 /-- The finite free Hom formula for the exact ordinary scalar extension on derived categories:
 for an `𝒪_E`-basis `b` of `𝒪_L`, every morphism `Ord X ⟶ Ord Z` is uniquely
 `∑ i, b i • Ord (h i)`.
@@ -128,84 +171,53 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
       Category.comp_id, Category.id_comp]
   have hQ (P : CochainComplex (integralTowerModules l E Y) ℤ) :
       Function.Bijective (Θ (DerivedCategory.Q.obj P)) := by
-    let OP := (Ord.mapHomologicalComplex (.up ℤ)).obj P
+    let R := Res.mapHomologicalComplex (.up ℤ)
+    let O := Ord.mapHomologicalComplex (.up ℤ)
+    let OP := O.obj P
     let unitP := (a.mapHomologicalComplex (.up ℤ)).unit.app P
     let smulC (i : Fin d) : OP ⟶ OP := (integralScalarChainAction l L Y (b i)).app OP
-    let πC (j : Fin d) : (Res.mapHomologicalComplex (.up ℤ)).obj OP ⟶ P :=
-(NatTrans.mapHomologicalComplex (π j) (.up ℤ)).app P
+    let πC (j : Fin d) : R.obj OP ⟶ P :=
+      (NatTrans.mapHomologicalComplex (π j) (.up ℤ)).app P
     have hιQ (i : Fin d) : ιZ i (DerivedCategory.Q.obj P) =
-        DerivedCategory.Q.map (unitP ≫ (Res.mapHomologicalComplex (.up ℤ)).map (smulC i)) ≫
+        DerivedCategory.Q.map (unitP ≫ R.map (smulC i)) ≫
           fR.inv.app OP ≫ Res.mapDerivedCategory.map (fO.inv.app P) := by
       have hs : b i • 𝟙 (Ord.mapDerivedCategory.obj (DerivedCategory.Q.obj P)) =
           fO.hom.app P ≫ (b i • 𝟙 (DerivedCategory.Q.obj OP)) ≫ fO.inv.app P := by
         erw [Linear.smul_comp, Category.id_comp, Linear.comp_smul, Iso.hom_inv_id_app]
         rfl
-      have hr : Res.mapDerivedCategory.map (DerivedCategory.Q.map (smulC i)) =
-          fR.hom.app OP ≫ DerivedCategory.Q.map ((Res.mapHomologicalComplex (.up ℤ)).map
-            (smulC i)) ≫ fR.inv.app OP := by
-        have h := fR.hom.naturality (smulC i)
-        simp only [Functor.comp_map] at h
-        rw [← Category.assoc, ← h, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
       simp only [ιZ, hs]
       erw [smul_id_Q_obj, Adjunction.localization_unit_app]
-      have hcR : (CatCommSq.iso (Res.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
-          DerivedCategory.Q Res.mapDerivedCategory).hom = fR.inv := rfl
-      have hcO : (CatCommSq.iso (Ord.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
-          DerivedCategory.Q Ord.mapDerivedCategory).hom = fO.inv := rfl
-      rw [hcR, hcO]
-      simp only [Functor.map_comp, Category.assoc]
-      rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-      erw [CategoryTheory.Functor.map_id, Category.id_comp, hr]
-      simp only [Category.assoc]
-      erw [Iso.inv_hom_id_app_assoc]
-    let πP (j : Fin d) : Res.mapDerivedCategory.obj (Ord.mapDerivedCategory.obj
-        (DerivedCategory.Q.obj P)) ⟶ DerivedCategory.Q.obj P :=
-      Res.mapDerivedCategory.map (fO.hom.app P) ≫ fR.hom.app OP ≫ DerivedCategory.Q.map (πC j)
-    have hAc (i j : Fin d) : unitP ≫ (Res.mapHomologicalComplex (.up ℤ)).map (smulC i) ≫ πC j =
+      exact map_comp_conjugate_transport R Res.mapDerivedCategory
+        DerivedCategory.Q DerivedCategory.Q fR (fO.app P) unitP (smulC i)
+    have hAc (i j : Fin d) : unitP ≫ R.map (smulC i) ≫ πC j =
         if i = j then 𝟙 P else 0 := by
       ext n : 1
       simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
         Adjunction.mapHomologicalComplex_unit_app_f, NatTrans.mapHomologicalComplex_app_f,
-        smulC, πC, unitP, integralScalarChainAction_app_f]
+        smulC, πC, unitP, R, integralScalarChainAction_app_f]
       refine (hA i j (P.X n)).trans ?_
       split_ifs <;> simp
-    have hBc : ∑ j, πC j ≫ unitP ≫ (Res.mapHomologicalComplex (.up ℤ)).map (smulC j) = 𝟙 _ := by
+    have hBc : ∑ j, πC j ≫ unitP ≫ R.map (smulC j) = 𝟙 _ := by
       ext n : 1
       refine (map_sum (HomologicalComplex.Hom.fAddMonoidHom
-        (C₁ := (Res.mapHomologicalComplex (.up ℤ)).obj OP)
-        (C₂ := (Res.mapHomologicalComplex (.up ℤ)).obj OP) n) _ Finset.univ).trans ?_
-      change ∑ j, (πC j ≫ unitP ≫ (Res.mapHomologicalComplex (.up ℤ)).map (smulC j)).f n = _
+        (C₁ := R.obj OP)
+        (C₂ := R.obj OP) n) _ Finset.univ).trans ?_
+      change ∑ j, (πC j ≫ unitP ≫ R.map (smulC j)).f n = _
       simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
         Adjunction.mapHomologicalComplex_unit_app_f, NatTrans.mapHomologicalComplex_app_f,
-        smulC, πC, unitP, integralScalarChainAction_app_f]
+        smulC, πC, unitP, R, integralScalarChainAction_app_f]
       exact hB (P.X n)
-    have hAP (i j : Fin d) : ιZ i (DerivedCategory.Q.obj P) ≫ πP j = if i = j then 𝟙 _ else 0 := by
-      rw [hιQ]
-      simp only [πP, Category.assoc]
-      rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-      erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
-      rw [← Functor.map_comp, Category.assoc, hAc]
-      split_ifs <;> simp
-    have hBP : ∑ j, πP j ≫ ιZ j (DerivedCategory.Q.obj P) = 𝟙 _ := by
-      have hj (j : Fin d) : πP j ≫ ιZ j (DerivedCategory.Q.obj P) =
-          Res.mapDerivedCategory.map (fO.hom.app P) ≫ fR.hom.app OP ≫ DerivedCategory.Q.map
-            (πC j ≫ unitP ≫ (Res.mapHomologicalComplex (.up ℤ)).map (smulC j)) ≫
-              fR.inv.app OP ≫ Res.mapDerivedCategory.map (fO.inv.app P) := by
-        rw [hιQ]
-        simp only [πP, Category.assoc, Functor.map_comp]
-      rw [Finset.sum_congr rfl fun j _ ↦ hj j]
-      simp only [← Preadditive.comp_sum, ← Preadditive.sum_comp, ← Functor.map_sum, hBc]
-      rw [CategoryTheory.Functor.map_id]
-      erw [Category.id_comp, Iso.hom_inv_id_app_assoc]
-      rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
-      rfl
-    refine ⟨fun h h' hh ↦ funext fun j ↦ ?_, fun g ↦ ⟨fun j ↦ g ≫ πP j, ?_⟩⟩
-    · have hj (h : Fin d → (X ⟶ DerivedCategory.Q.obj P)) : Θ _ h ≫ πP j = h j := by
-        simp only [Θ, Preadditive.sum_comp, Category.assoc, hAP]
-        rw [Finset.sum_eq_single j (fun i _ hi ↦ by simp [hi]) (by simp)]
-        simp
-      rw [← hj h, ← hj h', hh]
-    · simp only [Θ, Category.assoc, ← Preadditive.comp_sum, hBP, Category.comp_id]
+    have hAc' (i j : Fin d) : (unitP ≫ R.map (smulC i)) ≫ πC j =
+        if i = j then 𝟙 P else 0 := by
+      rw [Category.assoc, hAc]
+    have hBc' : ∑ j, πC j ≫ (unitP ≫ R.map (smulC j)) = 𝟙 _ := hBc
+    let e := (fR.app OP).symm ≪≫ Res.mapDerivedCategory.mapIso (fO.app P).symm
+    have h := bijective_sum_comp_map_iso DerivedCategory.Q
+      (fun i ↦ unitP ≫ R.map (smulC i)) πC e hAc' hBc' (P := P) (X := X)
+    convert h using 1
+    funext h
+    simp only [Θ, hιQ, e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    rfl
   have hbij : Function.Bijective (Θ Z) := by
     let P := DerivedCategory.Q.objPreimage Z
     let e : DerivedCategory.Q.obj P ≅ Z := DerivedCategory.Q.objObjPreimageIso Z

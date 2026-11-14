@@ -15,32 +15,32 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualWeil
 
 Let `f : X ⟶ Y` be smooth of relative dimension `d`, and let `g_X`, `g_Y` be endomorphisms of `X`
 and `Y` forming a cartesian square `g_X ≫ f = f ≫ g_Y` (in the blueprint, the geometric-Galois
-Frobenii of `def-pur-scheme-geometric-frobenius`). A Weil datum `φ_K : Lg_Y^* K ⟶ K` induces
+Frobenii of `sec-Weil-complexes`). A Weil datum `φ_K : Lg_Y^* K ⟶ K` induces
 data on the source and on the target of the smooth purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`
-(`def-pur-tate-datum`: `AlgebraicGeometry.Etale.smoothPurityWeilDatum` and
+(`definition-weil-structure--1`: `AlgebraicGeometry.Etale.smoothPurityWeilDatum` and
 `AlgebraicGeometry.Etale.upperShriekWeilDatum`, constructed in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum`), and on compactly supported direct
-images (`def-pur-compact-support-transport`). This file proves that purity, the exceptional counit
+images (`prose-10-20`). This file proves that purity, the exceptional counit
 and the smooth trace are morphisms of Weil objects
-(`thm-pur-weil-equivariance-of-purity-and-trace`), that the same holds for the scheme-Frobenius
-forms of the data (`prop-pur-weil-equivariance-scheme-frobenius`), and that these equivariances
+(`proposition-purity-trace-commute-frobenius`), that the same holds for the scheme-Frobenius
+forms of the data (`proposition-purity-trace-commute-frobenius`), and that these equivariances
 are transported by every functor commuting with the Frobenius pullbacks
 (`prop-pur-weil-equivariance-compatibilities`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.compactSupportWeilTransport`,
-  `AlgebraicGeometry.Etale.schemeFrobeniusWeilDatum` (`def-pur-compact-support-transport`).
-- `AlgebraicGeometry.Etale.smoothCoefficientTrace` (`def-pur-smooth-trace`).
+  `AlgebraicGeometry.Etale.schemeFrobeniusWeilDatum` (`prose-10-20`).
+- `AlgebraicGeometry.Etale.smoothCoefficientTrace` (`definition-trace-map`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isWeilMorphism_smoothPurityIso_hom`,
   `AlgebraicGeometry.Etale.isWeilMorphism_counit`,
   `AlgebraicGeometry.Etale.isWeilMorphism_smoothCoefficientTrace`
-  (`thm-pur-weil-equivariance-of-purity-and-trace`).
+  (`proposition-purity-trace-commute-frobenius`).
 - `AlgebraicGeometry.Etale.PurityFrobeniusDatum.isWeilMorphism_schemeFrobenius_smoothPurityIso_hom`
-  and its companions (`prop-pur-weil-equivariance-scheme-frobenius`).
+  and its companions (`proposition-purity-trace-commute-frobenius`).
 - `AlgebraicGeometry.Etale.isWeilEquivariant_map_smoothPurityIso_hom` and its companions
   (`prop-pur-weil-equivariance-compatibilities`).
 
@@ -50,12 +50,13 @@ The library constructs the smooth purity map `γ_{f,K}` from an identification `
 dualizing complex and a natural tensor formula `Φ` (`AlgebraicGeometry.Etale.smoothPurityIso`),
 which are arguments here. The purity square is proved for arbitrary `θ` and `Φ`. The counit and
 trace squares use, as in the blueprint, that the smooth pullback exchange of
-`def-pur-smooth-pullback-exchange` is the exceptional base change, i.e. the mate of the
-compact-support base change (`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`); this is the
-base-change compatibility of purity of `sk-prop-cohsm` (c) for the canonical purity map, which is
-not constructed in the library, so it is a hypothesis `hcoh`. For arbitrary `θ` and `Φ` it can
-fail: a natural automorphism of `Rf^!` that does not commute with `Lg^*` (for instance `±1` on
-two components of `X` swapped by `g`) changes `Φ` without changing anything else.
+`proposition-compatibility-purity-base-change--1` is the exceptional base change, i.e. the mate of
+the compact-support base change (`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`); this is the
+base-change compatibility of purity of `proposition-exceptional-inverse-image-smooth-morphism` (c)
+for the canonical purity map, which is not constructed in the library, so it is a hypothesis `hcoh`.
+For arbitrary `θ` and `Φ` it can fail: a natural automorphism of `Rf^!` that does not commute with
+`Lg^*` (for instance `±1` on two components of `X` swapped by `g`) changes `Φ` without changing
+anything else.
 
 The comparisons `κ` between scheme-Frobenius and geometric-Galois pullbacks are those of the
 purity Frobenius datum (`AlgebraicGeometry.Etale.PurityFrobeniusDatum`).
@@ -123,12 +124,12 @@ lemma smoothPurityIso_hom_naturality {K K' : DerivedCategoryModule Λ Y} (v : K 
 
 variable {gX : X ⟶ X} {gY : Y ⟶ Y}
 
-/-- Blueprint `thm-pur-weil-equivariance-of-purity-and-trace`: Weil equivariance of purity and
+/-- Blueprint `proposition-purity-trace-commute-frobenius`: Weil equivariance of purity and
 trace, the purity square.
 
 For a cartesian square `g_X ≫ f = f ≫ g_Y` and a Weil datum `φ_K` on `K`, the smooth purity map
 `γ_{f,K} : Lf^* K(d)[2d] ⟶ Rf^! K` is a morphism of Weil objects for the data `φ^pur_{f,K}` and
-`φ^!_{f,K}` of `def-pur-tate-datum`:
+`φ^!_{f,K}` of `definition-weil-structure--1`:
 ```
 Lg_X^* Lf^* K(d)[2d] ──Lg_X^* γ──▶ Lg_X^* Rf^! K
         │ φ^pur                        │ φ^!
@@ -145,7 +146,7 @@ theorem isWeilMorphism_smoothPurityIso_hom (sq : IsPullback gX f f gY)
   rw [reassoc_of% (leftDerivedUpperStar_map_comp_smoothPullbackExchange_hom Λ f sq K θ (Φ.app K)
     θ (Φ.app _)), ← smoothPurityIso_hom_naturality, Category.assoc]
 
-/-- Blueprint `def-pur-smooth-trace`: the coefficient-valued smooth trace
+/-- Blueprint `definition-trace-map`: the coefficient-valued smooth trace
 `Tr^sm_{f,K} : Rf_!(Lf^* K(d)[2d]) ──Rf_! γ──▶ Rf_! Rf^! K ──counit──▶ K`. -/
 noncomputable def smoothCoefficientTrace (K : DerivedCategoryModule Λ Y)
     (φ : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
@@ -160,7 +161,7 @@ noncomputable def smoothCoefficientTrace (K : DerivedCategoryModule Λ Y)
 variable [QuasiCompact f]
 
 variable {Λ f} in
-/-- Blueprint `def-pur-compact-support-transport`: Compact-support transport of a Weil datum.
+/-- Blueprint `prose-10-20`: Compact-support transport of a Weil datum.
 
 For a cartesian square `g_X ≫ f = f ≫ g_Y` and a Weil datum `φ_M : Lg_X^* M ⟶ M`, the datum
 ```
@@ -176,7 +177,7 @@ noncomputable abbrev compactSupportWeilTransport (sq : IsPullback gX f f gY)
   lowerShriekWeilDatum sq φM
 
 /-- Under the base-change compatibility `hcoh` of purity, the datum `φ^!_{f,K}` of
-`def-pur-tate-datum` is the exceptional transport of `φ_K`
+`definition-weil-structure--1` is the exceptional transport of `φ_K`
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`). -/
 lemma upperShriekWeilDatum_eq (sq : IsPullback gX f f gY) {K : DerivedCategoryModule Λ Y}
     (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
@@ -186,13 +187,13 @@ lemma upperShriekWeilDatum_eq (sq : IsPullback gX f f gY) {K : DerivedCategoryMo
       upperShriekMateWeilDatum sq φK := by
   rw [upperShriekWeilDatum, upperShriekMateWeilDatum, hcoh]
 
-/-- Blueprint `thm-pur-weil-equivariance-of-purity-and-trace`: Weil equivariance of purity and
+/-- Blueprint `proposition-purity-trace-commute-frobenius`: Weil equivariance of purity and
 trace, the counit square.
 
 If the smooth pullback exchange of the square is the exceptional base change `hcoh` (the
-base-change compatibility of purity, `sk-prop-cohsm` (c)), then the exceptional counit
-`Rf_! Rf^! K ⟶ K` is a morphism of Weil objects from the compact-support transport of
-`φ^!_{f,K}` to `φ_K`. -/
+base-change compatibility of purity, `proposition-exceptional-inverse-image-smooth-morphism` (c)),
+then the exceptional counit `Rf_! Rf^! K ⟶ K` is a morphism of Weil objects from the compact-support
+transport of `φ^!_{f,K}` to `φ_K`. -/
 theorem isWeilMorphism_counit (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (hcoh : (smoothPullbackExchange Λ f sq K θ (Φ.app K) θ (Φ.app _)).hom =
@@ -203,7 +204,7 @@ theorem isWeilMorphism_counit (sq : IsPullback gX f f gY)
   rw [upperShriekWeilDatum_eq Λ f θ Φ sq φK hcoh]
   exact isWeilMorphism_counit_upperShriekMateWeilDatum Λ sq φK
 
-/-- Blueprint `thm-pur-weil-equivariance-of-purity-and-trace`: Weil equivariance of purity and
+/-- Blueprint `proposition-purity-trace-commute-frobenius`: Weil equivariance of purity and
 trace, the trace square.
 
 Under the base-change compatibility `hcoh` of purity, the smooth trace
@@ -226,7 +227,7 @@ section SchemeFrobenius
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}} {F g : X ⟶ X}
 
-/-- Blueprint `def-pur-compact-support-transport`: Compact-support transport of a Weil datum,
+/-- Blueprint `prose-10-20`: Compact-support transport of a Weil datum,
 the scheme-Frobenius form.
 
 The scheme-Frobenius form `u_N = φ_N ∘ κ_N : LΦ^* N ⟶ N` of a Weil datum `φ_N : Lg^* N ⟶ N`,
@@ -267,9 +268,9 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k₀ :
         (dualizingComplex Λ (Hom.geometricFiberMap f₀ hf₀)) ≅
     R(Hom.geometricFiberMap f₀ hf₀)^![Λ])
   {K : DerivedCategoryModule Λ aY.geometricFiber}
-  (φK : (L((aY.geometricGaloisFrobenius.hom)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
+  (φK : (L((aY.geometricGaloisFrobenius.asIso.hom)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
 
-/-- Blueprint `prop-pur-weil-equivariance-scheme-frobenius`: Scheme-Frobenius forms of Weil
+/-- Blueprint `proposition-purity-trace-commute-frobenius`: Scheme-Frobenius forms of Weil
 equivariance, the purity square.
 
 Precomposing the data `φ^pur_{f,K}` and `φ^!_{f,K}` with the comparison `κ_X` of the purity
@@ -288,7 +289,7 @@ theorem isWeilMorphism_schemeFrobenius_smoothPurityIso_hom :
 
 variable [QuasiCompact (Hom.geometricFiberMap f₀ hf₀)]
 
-/-- Blueprint `prop-pur-weil-equivariance-scheme-frobenius`: Scheme-Frobenius forms of Weil
+/-- Blueprint `proposition-purity-trace-commute-frobenius`: Scheme-Frobenius forms of Weil
 equivariance, the counit square.
 
 Under the base-change compatibility `hcoh` of purity, precomposing with the comparison `κ_Y`,
@@ -310,7 +311,7 @@ theorem isWeilMorphism_schemeFrobenius_counit
         (Hom.geometricFiberMap f₀ hf₀)).counit.app K) :=
   (isWeilMorphism_counit Λ _ θ Φ _ φK hcoh).schemeFrobeniusWeilDatum D.κY.hom
 
-/-- Blueprint `prop-pur-weil-equivariance-scheme-frobenius`: Scheme-Frobenius forms of Weil
+/-- Blueprint `proposition-purity-trace-commute-frobenius`: Scheme-Frobenius forms of Weil
 equivariance, the trace square.
 
 Under the base-change compatibility `hcoh` of purity, precomposing with the comparison `κ_Y`,

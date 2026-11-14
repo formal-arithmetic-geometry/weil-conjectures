@@ -131,7 +131,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
 
 /-! # Finite levels and integral and rational Tate twist objects
 
-Source: blueprint `sk-def-sp-tate-twist`. The index n denotes exponent n+1.
+Source: blueprint `definition-tate-twists`. The index n denotes exponent n+1.
 The integral levels use the finite quotient tensor with the roots, restricted
 along O_X -> B_X. The integral object is their limit in O_X-modules, and the
 rational object is its specified extension of scalars. These are the original
@@ -160,7 +160,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The finite twist uses the unique unital quotient homomorphism to A.
 The positive index r represents the annihilating exponent r+1; its vanishing
 on 1 is equivalent to annihilation of every A-module scalar.
-Source: blueprint finite twist formula (blueprint: sk-def-sp-tate-twist). -/
+Source: blueprint finite twist formula (blueprint: definition-tate-twists). -/
 def spFiniteTwist (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
     (hA : (ℓ ^ (r + 1) : A) = 0) :=
   Scheme.tateFiniteLine X ℓ A r
@@ -169,7 +169,7 @@ def spFiniteTwist (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
 set_option backward.isDefEq.respectTransparency false in
 /-- The two recorded integer-ring models agree as subrings of the fixed finite field.
 Source: blueprint coefficient convention and def-weil-l-adic-coefficient-extension
-(blueprint: sk-def-sp-tate-twist).
+(blueprint: definition-tate-twists).
 Proof: the coefficient-extension absolute value and the norm restricted from the
 fixed algebraic closure both extend the p-adic absolute value. Uniqueness in
 lem-weil-l-adic-extension-absolute-value makes them equal. The DVR witness
@@ -238,7 +238,7 @@ private theorem spFreeTensor_linear
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite-level twist is the displayed constant-ring scalar extension.
-Source: blueprint finite-level formula (blueprint: sk-def-sp-tate-twist).
+Source: blueprint finite-level formula (blueprint: definition-tate-twists).
 Proof: a finite discrete B has continuous-function condensed sheaf equal to its
 constant sheaf: a section is a finite clopen partition labelled by B. Pullback
 from the point preserves this description, including the ring operations.

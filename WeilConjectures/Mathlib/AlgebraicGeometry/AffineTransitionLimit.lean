@@ -1389,7 +1389,6 @@ lemma Stage.toSpec_comp_SpecMap_algHom {T T' : E.Stage} (f : T ⟶ T') :
   rw [Stage.toSpec, Stage.toSpec, Category.assoc, ← Spec.map_comp, Stage.Hom.algHom_ρ,
     Spec.map_comp, ← Category.assoc, ← Scheme.toSpecΓ_naturality, Category.assoc]
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the pushout functor forces repeated defeq checks between the two
 -- `Algebra` structures on the coefficient algebra of a stage.
 /-- (Implementation) The system of stage schemes: the scheme attached to a stage is the
@@ -1438,7 +1437,6 @@ lemma isPullback_Wι {T T' : E.Stage} (f : T ⟶ T') :
   refine IsOpenImmersion.isPullback _ _ _ _ (WD_map_Wι f.base).symm ?_
   rw [opensRange_Wι, opensRange_Wι, ← Scheme.Hom.comp_preimage, ← E.N.D.map_comp, Over.w f.base]
 
-set_option maxHeartbeats 1600000 in
 -- The basic opens of the tautological elements have to be compared through
 -- `Spec.map` of the coefficient algebra map, which unfolds the stage structure.
 /-- (Implementation) The `Spec A`-squares of the system of stages are cartesian. -/
@@ -1799,7 +1797,6 @@ noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
         opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inl_stageDiagram_map]
       rfl)
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the limit along the chart isomorphism compares two cones on the
 -- opens diagram of the pushout.
 /-- (Implementation) The restriction of the stage cone to the `U`-chart is a limit cone. -/
@@ -1848,7 +1845,6 @@ noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
         opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inl_stageDiagram_map,
         WD_map_Wι_assoc])
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the limit along the overlap isomorphism compares two cones on the
 -- opens diagram of the pushout.
 /-- (Implementation) The restriction of the stage cone to the overlap of the two charts is a
@@ -1928,7 +1924,6 @@ noncomputable def algCocone (E : ExtensionData.{u}) : Cocone E.algOp.leftOp wher
       naturality := fun _ _ f ↦
         (Stage.Hom.algHom_φ f.unop).trans (Category.comp_id _).symm }
 
-set_option maxHeartbeats 1600000 in
 -- Reflecting the colimit through the forgetful functor unfolds the subalgebra
 -- coercions of every stage.
 /-- (Implementation) `Γ(X, V)` is the filtered colimit of the coefficient algebras of the
@@ -1983,7 +1978,6 @@ noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
         opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inr_stageDiagram_map]
       rfl)
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the limit along the chart isomorphism compares two cones on the
 -- opens diagram of the pushout.
 /-- (Implementation) The restriction of the stage cone to the `Spec A`-chart is a limit
@@ -2009,7 +2003,6 @@ noncomputable def charts (E : ExtensionData.{u}) (T₀ : E.Stage) (b : Bool) :
     (E.stageDiagram.obj T₀).Opens :=
   bif b then T₀.chartU else T₀.chartV
 
-set_option maxHeartbeats 1600000 in
 -- Each of the four cases unfolds the pushout defining the stage scheme.
 /-- (Implementation) The stage cone is a limit cone: its restrictions to the two charts of a
 stage scheme and to their overlap are limit cones. -/
@@ -2181,7 +2174,8 @@ variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D)
 variable {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
 
 set_option backward.defeqAttrib.useBackward true in
-/-- Blueprint `def-nagata-basechanged-system`: Base-changed system over a chosen stage.
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Base-changed system over a chosen
+stage.
 
 The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a morphism
 `p : Y ⟶ Dᵢ`, indexed by the cofinal subsystem `Over i`; its transition maps are the base
@@ -3164,7 +3158,8 @@ The affine case is
 `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
 general case follows by induction over a finite cover of `X` by affine opens each of which
 lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
-(Blueprint: `lemma:nagata-finite-presentation-descends`; `thm-pd-spreading-out`, part (1).) -/
+(Blueprint: `lemma:nagata-finite-presentation-descends`;
+`proposition-jacobian-over-ground-field--1`, part (1).) -/
 @[stacks 01ZM]
 theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)
@@ -3545,7 +3540,7 @@ its composite `ψ` with the projection to `W`, is the base change of a morphism
 Part (1) is `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`, part (3) is
 `AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`.
 
-(blueprint: `thm-pd-spreading-out`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 @[stacks 01ZM]
 theorem Scheme.exists_pullback_hom_of_isLimit [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
@@ -3573,7 +3568,7 @@ quasi-separated schemes with affine transition maps, let `V`, `W` be of finite p
 stage `Dᵢ` and let `ψ χ : V ⟶ W` be morphisms over `Dᵢ` whose base changes to `lim Dⱼ` agree.
 Then their base changes to some later stage `Dⱼ` agree.
 
-(blueprint: `thm-pd-spreading-out`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 @[stacks 01ZM]
 theorem Scheme.exists_pullback_fst_comp_eq_of_isLimit [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
@@ -3630,7 +3625,6 @@ section SeparatingPair
 
 variable (i₀ : I) {U V : (D.obj i₀).Opens}
 
-set_option maxHeartbeats 1000000 in
 -- descending the finitely many generators through the three systems of opens is a long
 -- computation
 omit [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] in
@@ -3843,14 +3837,13 @@ lemma exists_isSeparatingPair_of_isLimit
 end SeparatingPair
 
 
-set_option maxHeartbeats 1000000 in
 -- the reduction to the affine criterion goes through two common refinements of stages
 include hc in
 /-- **Separatedness descends to a finite stage.**
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
 transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage.
-(Blueprint: `lemma-nagata-separated-stage-exists-absolute`.) -/
+(Blueprint: `theorem-nagata-s-compactification-theorem--1`.) -/
 @[stacks 086Q]
 theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
@@ -3913,7 +3906,6 @@ theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
 
 variable {S : Scheme.{u}} (t : D ⟶ (Functor.const I).obj S) [∀ i, QuasiCompact (t.app i)]
 
-set_option maxHeartbeats 1000000 in
 -- the reduction to the absolute case goes through a finite affine cover of the image
 include hc in
 /-- **Separatedness over a fixed base descends to a finite stage.**
@@ -3921,8 +3913,8 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over a base
 `S`, with affine transition maps and quasi-compact structure morphisms. If `lim Dᵢ ⟶ S` is
 separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage.
-(Blueprint: `lemma-nagata-fixed-base-separated-stage-exists`,
-`lemma-nagata-fixed-base-separated-eventually`.) -/
+(Blueprint: `theorem-nagata-s-compactification-theorem--1`,
+`theorem-nagata-s-compactification-theorem--1`.) -/
 @[stacks 01ZH]
 theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     [IsSeparated (c.π.app i₀ ≫ t.app i₀)] :
@@ -4531,8 +4523,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The finite presentation approximation of `f : X ⟶ S` determined by a closed immersion
 `i : X ⟶ Y` over `S` into an `S`-scheme `Y` that is quasi-compact, quasi-separated and locally of
 finite presentation over `S`: the system of closed subschemes of `Y` cut out by the subideal
-sheaves of finite type of the kernel of `i`. (Blueprint: `def-nagata-closed-subscheme-fp-system`,
-`def-nagata-finite-type-fp-model-system`.) -/
+sheaves of finite type of the kernel of `i`. (Blueprint:
+`theorem-nagata-s-compactification-theorem--1`, `theorem-nagata-s-compactification-theorem--1`.) -/
 noncomputable def Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion
     {X Y S : Scheme.{u}} {f : X ⟶ S} [CompactSpace S] [QuasiSeparatedSpace S] (q : Y ⟶ S)
     (i : X ⟶ Y) [IsClosedImmersion i] [LocallyOfFinitePresentation q] [QuasiCompact q]
@@ -4576,7 +4568,8 @@ closed immersions.
 
 The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
 cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`, `lemma-nagata-finite-type-fp-model-system`.)
+(Blueprint: `lemma:nagata-finite-type-fp-model-system`,
+`theorem-nagata-s-compactification-theorem--1`.)
 -/
 @[stacks 09ZQ]
 theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
@@ -4769,7 +4762,7 @@ quasi-compact open of `T'` has `P`, as otherwise its closed complement would be 
 subscheme with `P`. Take a nonempty affine open `Spec A` of `T'` and a minimal prime `p` of `A`;
 then `Spec A_p` is the cofiltered limit of the nonempty basic opens `Spec A[1/f]`, `f ∉ p`, so
 it has `P`, and it is a thickening of the spectrum of its residue field, as `A_p` has a single
-prime ideal. (Blueprint: `sk-lem-minimal`, `sbc-lem-bc-minimal-counterexample`.) -/
+prime ideal. (Blueprint: `lemma-reduction-field`.) -/
 @[stacks 0F06]
 theorem exists_spec_field_of_isQcqsLocalProperty (T : Scheme.{u})
     [CompactSpace T] [QuasiSeparatedSpace T]

@@ -15,8 +15,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 /-!
 # Exact sequence of supported sections for injective pro-etale complexes
 
-Source: Weil conjectures blueprint, node `lem-pur-support-exact`;
-Stacks Project, Tags 03EJ, 03EI, 09AH and 0114 (blueprint: lem-pur-support-exact).
+Source: Weil conjectures blueprint, node `lemma-local-cohomology-right-adjoint--2`;
+Stacks Project, Tags 03EJ, 03EI, 09AH and 0114 (blueprint: lemma-local-cohomology-right-adjoint--2).
 -/
 
 @[expose] public section
@@ -34,8 +34,8 @@ open Scheme
 namespace ProEtale
 
 /-- Apply the actual closed supported inverse image and direct image term by term.
-Source: Weil conjectures blueprint, node `lem-pur-support-exact`, displayed first term
-(blueprint: lem-pur-support-exact). -/
+Source: Weil conjectures blueprint, node `lemma-local-cohomology-right-adjoint--2`, displayed first
+term (blueprint: lemma-local-cohomology-right-adjoint--2). -/
 noncomputable def supportedSectionsComplex
     (R : Type (u + 1)) [CommRing R] [Finite R] {Z U X : Scheme.{u}}
     (s : Z ⟶ X) (j : U ⟶ X)

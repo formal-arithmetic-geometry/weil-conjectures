@@ -42,7 +42,7 @@ A lift in `D_z` of the inverse arithmetic Frobenius of `κ(z)` restricts to a Fr
 `z` in `π₁(C₀)`
 (`BoundaryChart.exists_mem_stabilizer_isFrobeniusElement_restrictionMap`).
 Together with the density of the Weil group in `π₁(U₀)`, this builds the boundary datum of
-`d-real-boundary` (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
+`lemma-boundary-stalk--1` (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
 -/
 
 @[expose] public section
@@ -269,7 +269,6 @@ section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- The decomposition group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of
 the stabiliser of `Q`. -/
@@ -331,7 +330,7 @@ theorem localKernel_le_topologicalClosure_normalClosure (hz : z ∉ Set.range j.
   -- so inertia acts trivially on the generic fibre of `Z`
   have hIZ : ∀ σ ∈ Q.inertia Gal(Ω/C.functionField),
       ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
-        (galoisToAut (genericPointLift j) σ).hom.app Z t = t := by
+        (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t := by
     intro σ hσ t
     apply ((ConcreteCategory.isIso_iff_bijective ((genericPath j sU).hom.app Z)).1
       inferInstance).1
@@ -636,7 +635,7 @@ theorem ker_restrictionHom_eq_boundaryInertia :
   obtain rfl : w' = w := Subtype.ext (Prod.ext hw' (hw'deg.trans hdeg.symm))
   exact hw'M
 
-/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia.
 
 **The boundary datum of an open subcurve**: the restriction of Weil groups
 `AlgebraicGeometry.WeilGroup.restrictionOfPath`, with the inertia group at a boundary point `z`

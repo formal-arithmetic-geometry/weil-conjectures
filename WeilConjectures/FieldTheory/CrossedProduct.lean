@@ -322,7 +322,7 @@ Galois extension `L / K` with values in `Lˣ` is a coboundary: `H²(Gal(L/K), L�
 product is a central simple `K`-algebra of dimension `[L : K] ^ 2`, hence a matrix algebra
 `M_n(K)` with `n = [L : K]`; on its simple module `Kⁿ`, which is a line over `L`, the basis
 elements `u_σ` act by scalars `c_σ` that split `f`.
-(blueprint: `lem-sc-c1-brauer-trivial`, crossed product step) -/
+(blueprint: `lemma-cohomology-multiplicative-group--7`, crossed product step) -/
 theorem IsQuasiAlgClosed.exists_mul_eq_of_galois_cocycle (K L : Type u) [Field K] [Field L]
     [Algebra K L] [FiniteDimensional K L] [IsGalois K L] [IsQuasiAlgClosed K]
     (f : (L ≃ₐ[K] L) → (L ≃ₐ[K] L) → Lˣ)

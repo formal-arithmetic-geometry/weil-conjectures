@@ -13,8 +13,9 @@ public import WeilConjectures.WeilSheaf.TateTwistCohomology
 /-!
 # Tate twists commute with extension of scalars
 
-Following blueprint `lem-wf-tate-twist-compatibility`, the Tate twist `(-)(m)` commutes with
-finite scalar extension: for finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and `m ∈ ℤ`,
+Following blueprint `proposition-weights-under-usual-operations--13`, the Tate twist `(-)(m)`
+commutes with finite scalar extension: for finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and
+`m ∈ ℤ`,
 
 `F ⊗_E E_X(m) ≅ F_X(m)`
 
@@ -568,7 +569,8 @@ namespace FieldWeilSheaf
 lemma constant_obj_obj_str {k₀ : Type u} [Field k₀] [Finite k₀] {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ] :
     (constant k₀ Λ X).obj.obj.str =
-      (fieldLowerStarUnitIso Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+      (fieldLowerStarUnitIso Λ
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom :=
   rfl
 
 section ExtendScalars
@@ -584,11 +586,11 @@ lemma _root_.AlgebraicGeometry.fieldExtendScalarsFrobeniusIso_hom_app
     (M : FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     (fieldExtendScalarsFrobeniusIso he hc k₀ X).hom.app M =
       (fieldUpperStarIsoLowerStarInv Λ'
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ ≫
         (fieldUpperStarCompExtendScalarsIso he hc
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).inv.app M ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).inv.app M ≫
           (fieldExtendScalars he hc _).map ((fieldUpperStarIsoLowerStarInv Λ
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app M) :=
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app M) :=
   rfl
 
 /-- The identification `Λ' ⊗_Λ Λ_X̄ ≅ Λ'_X̄` is compatible with the Weil structures. -/
@@ -600,7 +602,7 @@ lemma frobeniusPullback_map_fieldExtendScalarsUnitIso_hom_comp_str :
   rw [ProEtaleFieldWeilSheaf.extendScalars_obj_obj_str, constant_obj_obj_str,
     constant_obj_obj_str, fieldExtendScalarsFrobeniusIso_hom_app]
   exact fieldLowerStar_map_fieldExtendScalarsUnitIso_hom_comp he hc
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
 
 /-- The extension of scalars `Λ' ⊗_Λ Λ_X` of the constant `Λ`-Weil sheaf is the constant
 `Λ'`-Weil sheaf `Λ'_X`, compatibly with the Weil structures. -/
@@ -624,11 +626,11 @@ lemma _root_.AlgebraicGeometry.fieldExtendScalarsToAdicFrobeniusIso_hom_app
     (M : FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     (fieldExtendScalarsToAdicFrobeniusIso he hc k₀ X).hom.app M =
       (adicUpperStarIsoLowerStarInv l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ ≫
         (fieldUpperStarCompExtendScalarsToAdicIso he hc
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).inv.app M ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).inv.app M ≫
           (fieldExtendScalarsToAdic he hc _).map ((fieldUpperStarIsoLowerStarInv Λ
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app M) :=
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app M) :=
   rfl
 
 /-- The identification `ℚ̄_ℓ ⊗_Λ Λ_X̄ ≅ ℚ̄_ℓ,X̄` is compatible with the Weil structures. -/
@@ -641,7 +643,7 @@ lemma frobeniusPullback_map_fieldExtendScalarsToAdicUnitIso_hom_comp_str :
   rw [ProEtaleFieldWeilSheaf.extendScalarsToAdic_obj_obj_str, constant_obj_obj_str,
     fieldExtendScalarsToAdicFrobeniusIso_hom_app]
   exact adicLowerStar_map_fieldExtendScalarsToAdicUnitIso_hom_comp he hc
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
 
 /-- The extension of scalars `ℚ̄_ℓ ⊗_Λ Λ_X` of the constant `Λ`-Weil sheaf is the constant
 `ℚ̄_ℓ`-Weil sheaf, compatibly with the Weil structures. -/
@@ -671,8 +673,8 @@ lemma _root_.PadicAlgCl.units_map_inclusion_units_map_zpow
   rw [map_zpow, ← MonoidHom.comp_apply, ← Units.map_comp]
   rfl
 
-/-- Blueprint `lem-wf-tate-twist-compatibility`: the Tate twist commutes with finite scalar
-extension.
+/-- Blueprint `proposition-weights-under-usual-operations--13`: the Tate twist commutes with finite
+scalar extension.
 
 For finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and `m ∈ ℤ`, the extension of scalars
 `F ⊗_E E_X(m)` of the Tate twisted constant `E`-Weil sheaf is `F_X(m)`, compatibly with the
@@ -701,8 +703,8 @@ lemma _root_.PadicAlgCl.units_map_val_units_map_zpow (E : IntermediateField ℚ_
   rw [map_zpow, ← MonoidHom.comp_apply, ← Units.map_comp]
   rfl
 
-/-- Blueprint `lem-wf-tate-twist-compatibility`: the Tate twist commutes with scalar extension
-to `ℚ̄_ℓ`.
+/-- Blueprint `proposition-weights-under-usual-operations--13`: the Tate twist commutes with scalar
+extension to `ℚ̄_ℓ`.
 
 For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `m ∈ ℤ`, the extension of scalars
 `ℚ̄_ℓ ⊗_E E_X(m)` of the Tate twisted constant `E`-Weil sheaf is the Tate sheaf `ℚ̄_ℓ(m)`,

@@ -24,7 +24,8 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTranspor
 # Comparison preserves and detects Tor intervals
 
 Source: Weil conjectures blueprint, `sec-six-functors/sk-cor-sf-direct-image-ctf/`
-`lem-exc-comparison-tor-interval.md` (blueprint: lem-exc-comparison-tor-interval).
+`lem-exc-comparison-tor-interval.md` (blueprint:
+corollary-finite-tor-amplitude-under-comparison--1).
 -/
 
 @[expose] public section
@@ -46,7 +47,7 @@ by the canonical exact coefficient realization, after the recorded termwise pull
 The coefficient `ULift` is the one used by `proEtaleDerivedCategory`.
 Source: blueprint `sec-six-functors/sk-cor-sf-direct-image-ctf/`
 `lem-exc-comparison-tor-interval.md`; Stacks, Tags 099T, 099V, 08FZ, 08G0 and 08G1
-(blueprint: lem-exc-comparison-tor-interval).
+(blueprint: corollary-finite-tor-amplitude-under-comparison--1).
 
 Proof:
 1. Put F = nu_T^*. The exactness and sheaf unit isomorphism of
@@ -54,8 +55,8 @@ Proof:
 sheaves. By `lem-sf-comparison-pullback-exact`, H^i(FC) = F(H^i(C)) for all complexes
 and degrees. Thus cohomology vanishing is preserved and reflected without boundedness.
 2. Suppose K has etale Tor amplitude in [a,b]. Testing with the coefficient ring,
-using `lem-pc-kflat-resolution` and `def-kun-derived-tensor`, gives H^i(K) = 0 outside
-[a,b]. Upper smart truncation at b gives a representative zero above b. By
+using `lem-pc-kflat-resolution` and `proposition-open-direct-image-preserves-finite`, gives H^i(K) =
+0 outside [a,b]. Upper smart truncation at b gives a representative zero above b. By
 `lem-pc-kflat-bounded-flat-replacement`, replace it by a quasi-isomorphic flat complex
 P zero above b. It is K-flat by `lem-pc-bounded-above-flat-kflat-site`, so P tensor N
 computes K tensor^L N for every etale module sheaf N.
@@ -64,10 +65,10 @@ criterion `lem-weil-pbc-site-flat-opcycles-tor-criterion` makes
 Q = coker(P^(a-1) -> P^a) flat. Lower smart truncation gives the flat complex
 B = [Q -> P^(a+1) -> ... -> P^b]. The projection P -> B is a quasi-isomorphism,
 since K has zero cohomology below a. Thus B represents K and is supported in [a,b].
-4. By `lem-exc-constant-inverse-image-flat`, FB has flat terms; exactness makes it
+4. By `corollary-finite-tor-amplitude-under-comparison`, FB has flat terms; exactness makes it
 represent FK, by `def-sf-comparison-derived-pullback`. It is K-flat by
 `lem-pc-bounded-above-flat-kflat-site`. The tensor computation of
-`def-weil-derived-tensor` shows that FB tensor M has no cohomology outside [a,b]
+`prose-03-02` shows that FB tensor M has no cohomology outside [a,b]
 for every pro-etale module sheaf M. Canonical coefficient realization identifies the
 fixed-scalar and intrinsic constant-ring module sheaves, their ordinary tensors and
 cohomology. This proves the forward implication for the recorded
@@ -77,8 +78,8 @@ constant coefficient ring with the constant ring and its ringed pullback with F.
 Exactness identifies LF with termwise F. Apply the unbounded tensor comparison
 `lem-weil-pbc-ringed-topoi-derived-tensor-pullback` to get
 F(K tensor^L N) = FK tensor^L FN for every etale module sheaf N. Use the common
-larger universe of `def-weil-pbc-proetale-site` and
-`def-weil-pbc-site-comparison-morphism`; site object and morphism universes remain
+larger universe of `definition-small-pro-etale-site--1` and
+`proposition-comparison-morphism-inverse-image`; site object and morphism universes remain
 distinct. No boundedness of K tensor^L N is required.
 6. Conversely, if FK has pro-etale Tor amplitude in [a,b], use FN as the test sheaf
 for each etale N. Steps 1 and 5 give

@@ -41,7 +41,7 @@ noncomputable def isColimitModuleCatOfIsFiltered (hc : IsColimit c) :
 /-- A filtered colimit `A = colim A_j` of commutative `R`-algebras is the colimit of the
 underlying `R`-modules: for every `R`-module `P` and every compatible family of `R`-linear maps
 `f j : A_j → P` there is exactly one `R`-linear map `f : A → P` with `f ∘ ι_j = f j`.
-(blueprint: `lem-weil-pbc-filtered-colimit-algebras-underlying-module`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem existsUnique_linearMap_of_isColimit (hc : IsColimit c) (P : Type u) [AddCommGroup P]
     [Module R P] (f : ∀ j, F.obj j →ₗ[R] P)
     (hf : ∀ ⦃i j : J⦄ (u : i ⟶ j), f j ∘ₗ (F.map u).hom.toLinearMap = f i) :

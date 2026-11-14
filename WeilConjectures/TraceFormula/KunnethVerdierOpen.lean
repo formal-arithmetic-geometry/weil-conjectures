@@ -17,7 +17,7 @@ Let `X, Y, U` be separated `k`-schemes of finite type, `j : U ⟶ Y` an open imm
 (`ProEtale.CondensedRing.isOpenImmersion_prodMap_left`). This file compares the Künneth–Verdier
 maps `κ^Y_{M,N}` on `X ⨯ Y` and `κ^U_{M,N'}` on `X ⨯ U`
 (`ProEtale.CondensedRing.kunnethVerdierMap`), the step of the dévissage of the Künneth–Verdier
-theorem (blueprint `thm-trf-kunneth-verdier`) along an open subscheme of `Y`.
+theorem (blueprint `lemma-external-duality-trace-morphism--1`) along an open subscheme of `Y`.
 
 ## The compatibility of the exceptional Künneth map with restriction
 
@@ -254,7 +254,7 @@ noncomputable def verdierDualUpperStarIso (j : U ⟶ Y) [IsOpenImmersion j.left]
   haveI := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion
     ℓ j N
   asIso ((Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) N).natTrans.app
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) N).app
         (dualizingComplex' ℓ Y)) ≪≫
     (ihom _).mapIso (dualizingComplexUpperStarIso ℓ j)
 
@@ -264,7 +264,7 @@ lemma verdierDualUpperStarIso_hom (j : U ⟶ Y) [IsOpenImmersion j.left]
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (verdierDualUpperStarIso ℓ j N).hom =
       (Functor.LaxMonoidal.ihomComparison
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) N).natTrans.app
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j) N).app
           (dualizingComplex' ℓ Y) ≫
         (ihom _).map (dualizingComplexUpperStarIso ℓ j).hom :=
   rfl
@@ -319,7 +319,7 @@ noncomputable def kunnethVerdierTargetRestrictionIso (j : U ⟶ Y) [IsOpenImmers
       (prod.snd : X ⨯ Y ⟶ Y)).obj N)
   asIso ((Functor.LaxMonoidal.ihomComparison
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
-        _).natTrans.app _) ≪≫
+        _).app _) ≪≫
     (ihom _).mapIso (exceptionalKunnethTargetRestrictionIso ℓ j M) ≪≫
     preIsoApp ((prodMapUpperStarSndIso ℓ j).app N) _
 
@@ -330,7 +330,7 @@ lemma kunnethVerdierTargetRestrictionIso_hom (j : U ⟶ Y) [IsOpenImmersion j.le
     (kunnethVerdierTargetRestrictionIso ℓ j M N).hom =
       (Functor.LaxMonoidal.ihomComparison
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
-          _).natTrans.app _ ≫
+          _).app _ ≫
         (ihom _).map (exceptionalKunnethTargetRestrictionIso ℓ j M).hom ≫
         (pre ((prodMapUpperStarSndIso ℓ j).app N).inv).app _ :=
   rfl

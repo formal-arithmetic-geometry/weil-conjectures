@@ -19,9 +19,9 @@ Let `k` be a field, `X` a scheme of finite type over `k` and `Λ` a finite ring.
 uniform amount: there is `B` with `RHom(K, L) ∈ D^{≤ b + B}` for every `L` with homology in
 `[a, b]` (`AlgebraicGeometry.Etale.exists_isLE_derivedHom_of_constructibleFiniteTor`).
 
-The proof is a dévissage in `K` (`lem-sf-hom-triangulated`): such `K` form a thick subcategory,
-and on the generators `K = Rg_* Rj_! P`, with `g` a closed and `j` an open immersion and `P`
-lisse flat, `RHom(K, L) ≅ Rg_* Rj_* RHom(P, Rj^! Rg^! L)` (as in
+The proof is a dévissage in `K` (`definition-verdier-dual-evaluation--3`): such `K` form a thick
+subcategory, and on the generators `K = Rg_* Rj_! P`, with `g` a closed and `j` an open immersion
+and `P` lisse flat, `RHom(K, L) ≅ Rg_* Rj_* RHom(P, Rj^! Rg^! L)` (as in
 `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`). Each functor in this
 composite has bounded amplitude: `Rg^!` by the closed-support triangle
 (`AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedUpperShriek`), `Rj^! ≅ Lj^*` is

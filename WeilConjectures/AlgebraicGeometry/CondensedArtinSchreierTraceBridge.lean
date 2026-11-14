@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 /-! Comparison data reducing an arbitrary finite-field character to a trace character.
 
 Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md
-(blueprint: lem-fd-as-lisse).
+(blueprint: lemma-artin-schreier-character-sheaf--2).
 -/
 
 @[expose] public noncomputable section
@@ -50,7 +50,8 @@ private theorem homOfVector_comp_artinSchreierScaling (k : Type u) [Field k]
 
 /-- The condensed Artin–Schreier sheaf of a shifted character `ψ(c ·)`, `c ∈ kˣ`, at a
 function `f` is that of `ψ` at `c f`: `L_{ψ(c ·), f} ≅ L_{ψ, c f}`.
-Source: blueprint lem-wft-as-comparison (2) (blueprint: lem-fd-as-lisse).
+Source: blueprint lemma-artin-schreier-character-sheaf (2) (blueprint:
+lemma-artin-schreier-character-sheaf--2).
 
 Proof: pullback along the scaling `[c]` carries `L_ψ` to `L_{ψ(c ·)}`, and the composite of
 the morphism defined by `f` with `[c]` is the morphism defined by `c f`. -/
@@ -70,15 +71,15 @@ theorem condensedArtinSchreierSheafOf_mulShift
 clauses are obtained from the qlbar trace statements after this bridge. -/
 /-- Every nontrivial condensed character is compared with one qlbar trace character.
 
-Proof source: lem-wft-as-comparison (1)--(2).  Choose a nontrivial character
+Proof source: lemma-artin-schreier-character-sheaf (1)--(2).  Choose a nontrivial character
 `Ψ` of `ZMod (ringChar k₀)` with values in `PadicAlgCl ℓ`, apply the character
 classification to its constant global-section character, and use the unique
-nonzero shift `a`.  The second part of lem-wft-as-comparison transports the
+nonzero shift `a`.  The second part of lemma-artin-schreier-character-sheaf transports the
 degree-cardinality projector to the prime-degree trace projector.  The same
 comparison is natural in the function and for the inverse character.  This
 statement records precisely that transport data; it does not include any
 lissity, tensor, or inverse conclusion.
-(blueprint: lem-fd-as-lisse). -/
+(blueprint: lemma-artin-schreier-character-sheaf--2). -/
 theorem condensedArtinSchreier_trace_bridge
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀).Prime] [Fact (ringChar k₀ ≠ ℓ)]

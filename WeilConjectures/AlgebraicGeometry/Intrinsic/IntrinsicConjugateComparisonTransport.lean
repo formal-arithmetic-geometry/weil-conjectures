@@ -66,7 +66,7 @@ private theorem mate_of_counit
     (l : L ⋙ y ≅ x ⋙ Li) (b : R ⋙ x ⟶ y ⋙ Ri)
     (hc : ∀ N, y.map (a.counit.app N) =
       l.hom.app (R.obj N) ≫ Li.map (b.app N) ≫ ai.counit.app (y.obj N)) :
-    (mateEquiv a ai (TwoSquare.mk _ _ _ _ l.inv)).natTrans = b := by
+    (mateEquiv a ai (TwoSquare.mk _ _ _ _ l.inv)) = b := by
   ext N
   apply (ai.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit]
@@ -87,9 +87,9 @@ private theorem conjugate_square
     (lc : Lc ⋙ z ≅ x ⋙ Lci)
     (bg : Rg ⋙ x ⟶ y ⋙ Rgi) (bf : Rf ⋙ y ⟶ z ⋙ Rfi)
     (bc : Rc ⋙ x ⟶ z ⋙ Rci)
-    (hg : (mateEquiv ag agi (TwoSquare.mk _ _ _ _ lg.inv)).natTrans = bg)
-    (hf : (mateEquiv af afi (TwoSquare.mk _ _ _ _ lf.inv)).natTrans = bf)
-    (hc : (mateEquiv ac aci (TwoSquare.mk _ _ _ _ lc.inv)).natTrans = bc)
+    (hg : (mateEquiv ag agi (TwoSquare.mk _ _ _ _ lg.inv)) = bg)
+    (hf : (mateEquiv af afi (TwoSquare.mk _ _ _ _ lf.inv)) = bf)
+    (hc : (mateEquiv ac aci (TwoSquare.mk _ _ _ _ lc.inv)) = bc)
     (k : Lc ≅ Lg ⋙ Lf) (ki : Lci ≅ Lgi ⋙ Lfi)
     (hk : ∀ M, z.map (k.hom.app M) ≫ lf.hom.app (Lg.obj M) ≫
       Lfi.map (lg.hom.app M) = lc.hom.app M ≫ ki.hom.app (x.obj M))
@@ -102,8 +102,7 @@ private theorem conjugate_square
   let wc := TwoSquare.mk _ _ _ _ lc.inv
   have hs : wc.whiskerLeft k.hom =
       (TwoSquare.vComp wg wf).whiskerRight ki.hom := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     change lc.inv.app M ≫ z.map (k.hom.app M) =
       ki.hom.app (x.obj M) ≫ _
     apply (cancel_epi (lc.hom.app M)).mp
@@ -116,7 +115,7 @@ private theorem conjugate_square
       ← Lfi.map_comp, Iso.inv_hom_id_app, Lfi.map_id] using hk M
   have h := mateEquiv_whiskerTop_conjugateEquiv (ag.comp af) ac
     (agi.comp afi) aci k.hom ki.hom (TwoSquare.vComp wg wf) wc hs
-  have h' := congrArg (fun t ↦ t.natTrans.app N) h
+  have h' := congrArg (fun t ↦ t.app N) h
   rw [mateEquiv_hcomp] at h'
   simpa only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -141,7 +140,7 @@ private theorem derived_realization_mate
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) f
         ).mapDerivedCategoryRightDerivedAdjunction
       (sfIntrinsicConstantModuleAdjunction f A).mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso l).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso l).inv)) =
         (sfIntrinsicDerivedDirectImageComparison f A).inv := by
   let EX := sfIntrinsicModuleEquivalence X A
   let EY := sfIntrinsicModuleEquivalence Y A

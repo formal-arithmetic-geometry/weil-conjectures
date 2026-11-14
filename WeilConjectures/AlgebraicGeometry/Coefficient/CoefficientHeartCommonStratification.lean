@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NoetherianStratumDetec
 
 Source: Weil blueprint, sec-six-functors-basics/sk-lem-coefficient-heart/
 sk-lem-coefficient-heart-common-stratification.md, clauses (1)--(3)
-(blueprint: det-lem-coefficient-heart-common-stratification).
+(blueprint: lemma-constructible-sheaves).
 
 Refinement means containment of stratum images, with their given scheme structures.
 No factorization through a stratum is inferred from containment of images.
@@ -235,7 +235,7 @@ theorem coefficientHeart_commonStratification_exactness
 
 /-- Common refinement, lisse restriction, and detection of exactness on strata.
 Source: blueprint sk-lem-coefficient-heart-common-stratification (1)--(3)
-(blueprint: det-lem-coefficient-heart-common-stratification).
+(blueprint: lemma-constructible-sheaves).
 
 Proof: assemble the three independently proved clauses.
 1. Intersect the finite input partitions and apply Noetherian induction on closed

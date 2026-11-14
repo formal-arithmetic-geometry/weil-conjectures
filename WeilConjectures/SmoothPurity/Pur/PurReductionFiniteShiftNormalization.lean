@@ -74,9 +74,9 @@ private theorem evaluation_shift
       π.app N) : NatTrans.CommShift e.hom ℤ := by
   let β : TwoSquare R V (𝟭 A) G :=
     .mk _ _ _ _ (R.rightUnitor.hom ≫ π)
-  let α := ((mateEquiv a b).symm β).natTrans
+  let α := ((mateEquiv a b).symm β)
   have hα : NatTrans.CommShift α ℤ := by
-    dsimp only [α, mateEquiv, Equiv.coe_fn_symm_mk, β, TwoSquare.natTrans]
+    dsimp only [α, mateEquiv, Equiv.coe_fn_symm_mk, β]
     infer_instance
   let τ : TwoSquare (𝟭 A) L F V :=
     .mk _ _ _ _ (F.leftUnitor.hom ≫ e.inv)
@@ -87,10 +87,10 @@ private theorem evaluation_shift
   have heq : (mateEquiv a b).symm β = τ := by
     rw [← hm]
     exact (mateEquiv a b).symm_apply_apply τ
-  have : NatTrans.CommShift τ.natTrans ℤ := by
+  have : NatTrans.CommShift τ ℤ := by
     rw [← heq]
     exact hα
-  have he : e.inv = F.leftUnitor.inv ≫ τ.natTrans := by simp [τ]
+  have he : e.inv = F.leftUnitor.inv ≫ τ := by simp [τ]
   have : NatTrans.CommShift e.inv ℤ := by rw [he]; infer_instance
   have : NatTrans.CommShift e.symm.hom ℤ := ‹NatTrans.CommShift e.inv ℤ›
   exact NatTrans.CommShift.of_iso_inv e.symm ℤ
@@ -243,7 +243,6 @@ private theorem finiteCochainModelAdditive (n : ℕ) :
 
 attribute [local instance] finiteRestrictionCommShift finiteCochainModelAdditive
 
-set_option maxHeartbeats 1200000 in
 -- Normalize the independently presented coefficient categories in the recorded unit equation.
 private theorem finite_adj_shift (n : ℕ)
     (s : (coefficientFiniteDerivedExtension l E W n).CommShift ℤ)
@@ -278,9 +277,10 @@ private theorem finite_adj_shift (n : ℕ)
         (R := completedIntegralCommRingSheafUnrestricted l E W) K
     exact ⟨Q, f, hQ, hf⟩
   · intro Q hQ
-    erw [finiteCochainModel_counit l E W n Q hQ]
     apply (Iso.eq_comp_inv (R.mapDerivedCategoryFactors.app _)).2
     have hu := CompletionUnit.finiteModel_unit l E W Q hQ n
+    -- Normalize the named model instead of searching inside the expanded cochain counit.
+    simp only [← finiteCochainModel_counit l E W n Q hQ] at hu
     with_unfolding_all exact (Category.assoc _ _ _).trans hu
 
 -- Assemble the actual sequence projection from exact restriction and the derived limit.
@@ -313,7 +313,6 @@ private theorem sequence_projection_shift (n : ℕ) :
   dsimp only [coefficientSequenceProjection]
   infer_instance
 
-set_option maxHeartbeats 600000 in
 -- Unfold coefficient-category aliases when identifying the two forms of the finite shift square.
 /-- The shift of reduction adjoint to the canonical total-limit shift agrees with
 all finite K-flat scalar-extension models and the supplied evaluation isomorphisms.
@@ -390,9 +389,10 @@ theorem purReductionFiniteShiftNormalization
     let := sf n
     have := hsf n
     have h := NatTrans.shift_app_comm (finiteCochainModel l E W n).ε r Q
-    rw [finiteCochainModel_counit l E W n Q hQ,
-      finiteCochainModel_counit l E W n (Q⟦r⟧) hQr] at h
     simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+    -- Use the cochain counits on both sides, with the same composition normal form as h.
+    simp only [← finiteCochainModel_counit l E W n Q hQ,
+      ← finiteCochainModel_counit l E W n (Q⟦r⟧) hQr, Category.assoc]
     with_unfolding_all exact h
   · intro n
     let := sf n

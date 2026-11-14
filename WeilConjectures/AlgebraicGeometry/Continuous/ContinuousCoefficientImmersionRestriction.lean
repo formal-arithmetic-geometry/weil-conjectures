@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbac
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientCompletionSupplement
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientLocalization
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbackIso
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Continuous coefficient sheaves and immersion restriction
@@ -40,7 +41,7 @@ Proof, following the node's six steps:
 1. Continuous abelian functions satisfy fpqc descent
 (`lem-cbc-continuous-functions-fpqc-sheaf`). Pro-etale coverings are fpqc coverings;
 pointwise operations and the underlying-set criterion
-(`lem-weil-pbc-algebraic-sheaf-iff-underlying-sets`) give ring sheaves.
+(`situation-conventions`) give ring sheaves.
 2. For each discrete quotient, glue constants on the open fibres of a continuous function.
 Open immersions and their composites are weakly etale
 (`lem-weil-proetale-weakly-etale-localization`), and affine quasi-compactness verifies

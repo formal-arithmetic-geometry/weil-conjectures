@@ -270,10 +270,10 @@ private theorem scalar_open_inverse_mate
     (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
     (q : JB ⋙ RU ≅ RX ⋙ JA) :
     ((mateEquiv a b).symm
-      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans =
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))) =
       ((a.comp x).leftAdjointUniq ((u.comp b).ofNatIsoRight q)).inv := by
   rw [uniq_eq_conjugate]
-  exact congrArg TwoSquare.natTrans
+  exact
     (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
 
 private theorem open_mate_cube
@@ -512,19 +512,17 @@ private theorem comparison_restriction_mate (A : Type (u + 1)) [CommRing A]
     [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} A) X)
       (comparisonAdjunction (ModuleCat.{u + 1} A) U)
-      (TwoSquare.mk _ _ _ _ (openComparisonRestrictionIso A j).hom)).natTrans = 𝟙 _ := by
+      (TwoSquare.mk _ _ _ _ (openComparisonRestrictionIso A j).hom)) = 𝟙 _ := by
   let B := ModuleCat.{u + 1} A
   let cX := comparisonAdjunction B X
   let cU := comparisonAdjunction B U
   let r := Etale.openImmersionRestrictionLowerStarAdjunction B j
   let s := openImmersionRestrictionLowerStarAdjunction B j
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv s r).injective
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
   change (mateEquiv s r (mateEquiv cX cU
-    (TwoSquare.mk _ _ _ _ (openComparisonRestrictionIso A j).hom))).natTrans =
+    (TwoSquare.mk _ _ _ _ (openComparisonRestrictionIso A j).hom))) =
     (mateEquiv s r (TwoSquare.mk _ _ _ _
-      (comparisonLowerStarOpenImmersionRestrictionIso B j).hom)).natTrans
+      (comparisonLowerStarOpenImmersionRestrictionIso B j).hom))
   rw [iterated_mateEquiv_conjugateEquiv]
   exact (openComparisonRestrictionIso_conjugate A j).trans
     (openComparisonRestriction_directImage_mate A j).symm
@@ -534,13 +532,11 @@ private theorem comparison_restriction_left (A : Type (u + 1)) [CommRing A]
     ((mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} A) X)
       (comparisonAdjunction (ModuleCat.{u + 1} A) U)).symm
       (TwoSquare.mk _ _ _ _
-        (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} A) j).hom)).natTrans =
+        (comparisonLowerStarOpenImmersionRestrictionIso (ModuleCat.{u + 1} A) j).hom)) =
       (openComparisonRestrictionIso A j).hom := by
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} A) X)
     (comparisonAdjunction (ModuleCat.{u + 1} A) U)).injective
   rw [Equiv.apply_symm_apply]
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
   exact (comparison_restriction_mate A j).symm
 
 private theorem restriction_coefficient_cube {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -575,7 +571,7 @@ private theorem restriction_coefficient_cube {A B : Type (u + 1)} [CommRing A] [
       ((comparisonAdjunction (ModuleCat.{u + 1} B) T).unit.app N) ≫
       (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} B) T)
         (comparisonAdjunction (ModuleCat.{u + 1} A) T)
-        (TwoSquare.mk _ _ _ _ (pbcComparisonRestrict T φ).inv)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (pbcComparisonRestrict T φ).inv)).app
           ((comparisonUpperStar (ModuleCat.{u + 1} B) T).obj N) = _ at ht
     rw [hm] at ht
     simp only [NatTrans.id_app] at ht
@@ -733,7 +729,7 @@ private theorem scalar_pullback_cube {A B : Type (u + 1)} [CommRing A] [CommRing
         (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology U)
       φ))).symm
           (TwoSquare.mk _ _ _ _
-            (Functor.mapDerivedCategorySquareIso (restrictScalarsIso φ j)).inv)).natTrans.app
+            (Functor.mapDerivedCategorySquareIso (restrictScalarsIso φ j)).inv)).app
               ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M) ≫
       (upperStar (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
         ((pbcComparisonReduction X φ).hom.app M) =
@@ -762,7 +758,7 @@ private theorem scalar_pullback_cube {A B : Type (u + 1)} [CommRing A] [CommRing
     (site_pullback B j)
   have hp : TwoSquare.vComp t k = TwoSquare.mk _ _ _ _
       (Functor.whiskerLeft (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ) b.hom ≫
-        (TwoSquare.vComp c q).natTrans ≫ Functor.whiskerRight b'.inv
+        (TwoSquare.vComp c q) ≫ Functor.whiskerRight b'.inv
           (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology U) φ)) := by
     ext N
     simp only [TwoSquare.vComp, NatTrans.comp_app, Functor.whiskerLeft_app,
@@ -783,7 +779,7 @@ private theorem scalar_pullback_cube {A B : Type (u + 1)} [CommRing A] [CommRing
     Etale.openScalarRestrictionMap, Etale.openDerivedRestrictScalarsIso,
     pbcFixedScalarExtension, Etale.scalarExtension,
     Category.assoc,
-    TwoSquare, TwoSquare.mk, TwoSquare.natTrans] using h
+    TwoSquare, TwoSquare.mk] using h
 
 private theorem scalar_site_square_aux {A B : Type (u + 1)} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) {U X : Scheme.{u}}
@@ -818,8 +814,8 @@ private theorem scalar_site_square_aux {A B : Type (u + 1)} [CommRing A] [CommRi
     (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology U) φ)
   let qe := Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ j)
   let qp := Functor.mapDerivedCategorySquareIso (restrictScalarsIso φ j)
-  let le := ((mateEquiv xe ue).symm (TwoSquare.mk _ _ _ _ qe.inv)).natTrans
-  let lp := ((mateEquiv xp up).symm (TwoSquare.mk _ _ _ _ qp.inv)).natTrans
+  let le := ((mateEquiv xe ue).symm (TwoSquare.mk _ _ _ _ qe.inv))
+  let lp := ((mateEquiv xp up).symm (TwoSquare.mk _ _ _ _ qp.inv))
   have he (N : Etale.DerivedCategoryModule A U) :
       be.unit.app ((Etale.scalarExtension φ U).obj N) ≫
         (Etale.upperStar (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
@@ -834,7 +830,7 @@ private theorem scalar_site_square_aux {A B : Type (u + 1)} [CommRing A] [CommRi
       be.unit.app ((Etale.scalarExtension φ U).obj N) ≫ (Etale.upperStar (ModuleCat.{u + 1} B)
       j).mapDerivedCategory.map
         (((mateEquiv ae be).symm ((mateEquiv xe ue).symm
-          (TwoSquare.mk _ _ _ _ qe.inv))).natTrans.app N) at h
+          (TwoSquare.mk _ _ _ _ qe.inv))).app N) at h
     rw [hm] at h
     exact h.symm
   have hp (N : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A))) :
@@ -851,7 +847,7 @@ private theorem scalar_site_square_aux {A B : Type (u + 1)} [CommRing A] [CommRi
       bp.unit.app ((pbcFixedScalarExtension (Scheme.ProEt.topology U) φ).obj N) ≫ (upperStar
       (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
         (((mateEquiv ap bp).symm ((mateEquiv xp up).symm
-          (TwoSquare.mk _ _ _ _ qp.inv))).natTrans.app N) at h
+          (TwoSquare.mk _ _ _ _ qp.inv))).app N) at h
     rw [hm] at h
     exact h.symm
   have h := open_mate_cube ae ap be bp

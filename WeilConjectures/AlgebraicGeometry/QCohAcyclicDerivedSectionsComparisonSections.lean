@@ -44,7 +44,7 @@ Proof:
    `lem-pc-unbounded-derived-functor-cohomological-bound` with N = 1 to τ≤(-1)E.
    Its derived sections vanish in degrees zero and one. The truncation triangle
    therefore identifies H^0(RΓ(U,E)) with H^0(RΓ(U,τ≥0 E)).
-3. Apply `thm-sp-truncation-e2` to a bounded-below representative of τ≥0 E.
+3. Apply `lemma-uniform-bound-proper-direct-image--1` to a bounded-below representative of τ≥0 E.
    Its E₂ page is R^pΓ(U,H^q(E)); step 1 kills all p > 0, while negative p
    and q vanish by the quadrant bounds. The finite filtration in total degree
    zero has just its p = q = 0 piece, giving Γ(U,H^0(E)). Undo the shift.

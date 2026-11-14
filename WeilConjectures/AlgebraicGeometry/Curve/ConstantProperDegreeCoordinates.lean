@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 # Degree-normalized proper cohomology coordinates
 
 Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of thm-sc-constant-invariance, proper case in degree two
+proof of proposition-cohomology-smooth-affine-curve, proper case in degree two
 (blueprint: lem-sc-constant-proper-degree-coordinates).
 -/
 
@@ -160,7 +160,7 @@ private theorem proper_kummer_degree_coordinates_aux
   rfl
 
 /-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of thm-sc-constant-invariance, proper case in degree two
+proof of proposition-cohomology-smooth-affine-curve, proper case in degree two
 (blueprint: lem-sc-constant-proper-degree-coordinates).
 
 Proof: a proper curve's open immersion into its smooth connected proper compactification is

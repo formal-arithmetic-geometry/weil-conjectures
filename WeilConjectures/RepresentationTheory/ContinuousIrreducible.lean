@@ -20,8 +20,8 @@ independent matrices; this is witnessed by a nonzero determinant, which stays no
 `ρ(γ₁), …, ρ(γ_{n²})` with `γᵢ` close to `gᵢ`. Hence there is a neighbourhood `U` of `1` such
 that every subgroup `Γ` meeting every left coset `g U` still acts irreducibly
 (`Representation.exists_mem_nhds_one_forall_isIrreducible`). This is the topological form of the
-finite matrix witness of `lem-zl-finite-matrix-irreducibility`, used for curve testing
-(`lem-zl-curve-testing-irreducibility`).
+finite matrix witness of `lemma-detecting-irreducibility-finite-quotient--1`, used for curve testing
+(`corollary-curve-preserving-geometric-irreducibility--1`).
 
 ## Main statements
 

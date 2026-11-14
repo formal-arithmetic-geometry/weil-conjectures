@@ -50,7 +50,7 @@ theorem moduleSheafForgetIsLeftAdjoint (Y : Scheme.{u}) (Λ : Type (u + 1)) [Com
 /-- Forgetting the module structure commutes naturally with cohomology of a sheaf
 placed in degree zero. This comparison has no compactness or colimit hypothesis.
 Source: Stacks Project, Tag 03FD and its proof.
-(blueprint: lem-weil-pbc-etale-module-cohomology-forget).
+(blueprint: lemma-cohomology-modules-underlying-abelian).
 
 Proof:
 1. The coefficient forgetful functor is both a left and a right adjoint, using
@@ -61,7 +61,7 @@ and a right adjoint, using the sheafification adjunction. Thus both functors are
 coefficients by definition, and the two global-sections/evaluation isomorphisms give
 `Γ_modules ⋙ forget ≅ sheafForget ⋙ Γ_abelian`.
 3. The underlying sheaf functor sends module injectives to abelian-global-sections
-acyclic objects by `lem-weil-pbc-etale-module-injective-forget-acyclic`. Apply the source
+acyclic objects by `lemma-cohomology-modules-underlying-abelian`. Apply the source
 library's invertibility theorem for bounded-below derived base change. Its homology
 comparison gives a natural isomorphism of the classical right derived functors.
 4. For both coefficient categories, the proved plus-derived compatibility and the

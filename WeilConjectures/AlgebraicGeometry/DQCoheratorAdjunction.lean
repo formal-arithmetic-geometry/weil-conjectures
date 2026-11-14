@@ -88,7 +88,7 @@ Source: Stacks Project, Tag 0B6I, final proof paragraph
 
 Proof: the shifted complex has only one nonzero cohomology sheaf, namely O_Y,
 which is quasi-coherent; every other cohomology sheaf is zero and quasi-coherent.
-Use `def-pc-derived-category` to conclude. -/
+Use `lemma-coherent-base-change-invertible-sheaves` to conclude. -/
 theorem structureSheaf_shift_is_derivedQCoh (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w}
@@ -440,7 +440,7 @@ Proof: global sections of a K-injective representative compute RΓ
 (`def-pc-global-derived-rhom`). Degree-i cocycles are chain maps from O_Y[-i],
 and coboundaries are null homotopies. The K-injective comparison
 (`lem-sc-kinjective-quasi-iso-comparison`) identifies this cohomology with derived Hom.
-The shift O_Y[-i] has quasi-coherent cohomology (`def-pc-derived-category`).
+The shift O_Y[-i] has quasi-coherent cohomology (`lemma-coherent-base-change-invertible-sheaves`).
 Adjunction identifies these groups with Hom into DQ_Y. An isomorphism after DQ_Y
 therefore gives an isomorphism on each global cohomology group, which is precisely
 quasi-isomorphism of the global-sections complexes. -/

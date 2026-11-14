@@ -81,21 +81,37 @@ namespace NearbyCyclesModel
 
 variable {X X' : Scheme.{u}} (M : NearbyCyclesModel X X')
 
-set_option maxHeartbeats 1600000 in
--- the derived categories are unfolded when matching the braidings
+private lemma tensorMap_braiding_aux {C D T S : Type*} [Category C] [Category D] [Category T]
+    [Category S] [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory T]
+    [MonoidalCategory S] [BraidedCategory C] [BraidedCategory D] [BraidedCategory T]
+    [BraidedCategory S] {E : C ⥤ D} {R : D ⥤ T} {I : T ⥤ S} [E.LaxMonoidal] [I.LaxMonoidal]
+    (μR : ∀ U V, R.obj U ⊗ R.obj V ⟶ R.obj (U ⊗ V))
+    (hE : ∀ A B, Functor.LaxMonoidal.μ E A B ≫ E.map (β_ A B).hom =
+      (β_ (E.obj A) (E.obj B)).hom ≫ Functor.LaxMonoidal.μ E B A)
+    (hR : ∀ U V, (β_ (R.obj U) (R.obj V)).hom ≫ μR V U =
+      μR U V ≫ R.map (β_ U V).hom)
+    (hI : ∀ U V, Functor.LaxMonoidal.μ I U V ≫ I.map (β_ U V).hom =
+      (β_ (I.obj U) (I.obj V)).hom ≫ Functor.LaxMonoidal.μ I V U)
+    (A B : C) :
+    (β_ ((E ⋙ R ⋙ I).obj A) ((E ⋙ R ⋙ I).obj B)).hom ≫
+        Functor.LaxMonoidal.μ I _ _ ≫ I.map (μR _ _ ≫ R.map (Functor.LaxMonoidal.μ E B A)) =
+      (Functor.LaxMonoidal.μ I _ _ ≫ I.map (μR _ _ ≫ R.map (Functor.LaxMonoidal.μ E A B))) ≫
+        (E ⋙ R ⋙ I).map (β_ A B).hom := by
+  dsimp only [Functor.comp_obj, Functor.comp_map]
+  rw [← reassoc_of% (hI _ _), ← I.map_comp, Category.assoc, ← I.map_comp]
+  congr 1
+  rw [reassoc_of% (hR _ _), ← R.map_comp, Category.assoc, ← R.map_comp, hE]
+
 /-- **The lax tensor map of nearby cycles commutes with the braidings.** -/
 @[reassoc]
 lemma tensorMap_braiding
     (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     (β_ ((M.nearbyCycles Λ).obj A) ((M.nearbyCycles Λ).obj B)).hom ≫ M.tensorMap Λ B A =
-      M.tensorMap Λ A B ≫ (M.nearbyCycles Λ).map (β_ A B).hom := by
-  dsimp only [tensorMap, nearbyCycles, Functor.comp_obj, Functor.comp_map]
-  rw [← μ_leftDerivedUpperStar_braiding_assoc, ← Functor.map_comp, Category.assoc,
-    ← Functor.map_comp]
-  congr 1
-  rw [lowerStarTensorMap'_braiding_assoc, ← Functor.map_comp, Category.assoc, ← Functor.map_comp,
-    μ_leftDerivedUpperStar_braiding]
+      M.tensorMap Λ A B ≫ (M.nearbyCycles Λ).map (β_ A B).hom :=
+  tensorMap_braiding_aux (E := L((M.ε)^*⟦Λ⟧)) (I := L((M.i)^*⟦Λ⟧))
+    (lowerStarTensorMap' Λ M.j) (μ_leftDerivedUpperStar_braiding Λ M.ε)
+    (lowerStarTensorMap'_braiding Λ M.j) (μ_leftDerivedUpperStar_braiding Λ M.i) A B
 
 variable {Y Y' Z Z' : Scheme.{u}} {M} {N : NearbyCyclesModel Y Y'} {P : NearbyCyclesModel Z Z'}
   {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}

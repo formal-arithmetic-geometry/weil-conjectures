@@ -32,7 +32,7 @@ commutes (`CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`), wh
 `G [X, 𝟙_ C] ⟶ [G X, G 𝟙_ C] ⟶ [G X, 𝟙_ D] ⟶ [X', 𝟙_ D]` is built from
 `CategoryTheory.Functor.LaxMonoidal.ihomComparison`, `e` and `c_X`. For perfect pairings this is
 the square of the inverses of the adjoints (`CategoryTheory.MonoidalClosed.map_inv_curry_comp`).
-This is the formal step of blueprint `thm-pod-finite-reduction`: the reduction of the adjoint of
+This is the formal step of blueprint `theorem-poincare-duality--9`: the reduction of the adjoint of
 the derived Poincaré pairing at level `n` is the adjoint at level `m`.
 -/
 
@@ -54,7 +54,7 @@ G [X, 𝟙_ C] ──ihomComparison──▶ [G X, G 𝟙_ C] ──[G X, e]─�
 noncomputable def unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X)
     (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
     G.obj ((ihom X).obj (𝟙_ C)) ⟶ (ihom X').obj (𝟙_ D) :=
-  (ihomComparison G X).natTrans.app (𝟙_ C) ≫ (ihom (G.obj X)).map e ≫ (pre cX).app (𝟙_ D)
+  (ihomComparison G X).app (𝟙_ C) ≫ (ihom (G.obj X)).map e ≫ (pre cX).app (𝟙_ D)
 
 lemma uncurry_unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X) (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
     uncurry (unitDualComparison G cX e) =
@@ -62,7 +62,7 @@ lemma uncurry_unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X) (e : G.o
   rw [unitDualComparison, ← Category.assoc, uncurry_pre_app, uncurry_natural_right, uncurry_eq,
     ihomComparison_ev, Category.assoc]
 
-/-- Blueprint `thm-pod-finite-reduction` (formal step): **the adjoints of compatible pairings
+/-- Blueprint `theorem-poincare-duality--9` (formal step): **the adjoints of compatible pairings
 form a commuting square.** If the pairings `b : X ⊗ Y ⟶ 𝟙_ C` and `b' : X' ⊗ Y' ⟶ 𝟙_ D` are
 compatible along the lax monoidal functor `G` through `c_X : X' ⟶ G X`, `c_Y : G Y ⟶ Y'` and
 `e : G 𝟙_ C ⟶ 𝟙_ D`, then `G (curry b)` followed by the dual comparison is `c_Y ≫ curry b'`. -/
@@ -75,7 +75,7 @@ theorem map_curry_comp_unitDualComparison {X Y : C} {X' Y' : D} (b : X ⊗ Y ⟶
     whisker_exchange_assoc, μ_natural_right_assoc, ← G.map_comp_assoc, ← uncurry_eq,
     uncurry_curry]
 
-/-- Blueprint `thm-pod-finite-reduction`: Finite reduction of the Poincaré pairing, formal form.
+/-- Blueprint `theorem-poincare-duality--9`: Finite reduction of the Poincaré pairing, formal form.
 
 In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`, if both
 pairings are perfect, the square of the inverses of their adjoints commutes:
@@ -101,7 +101,7 @@ theorem map_inv_curry_comp {X Y : C} {X' Y' : D} {b : X ⊗ Y ⟶ 𝟙_ C} {b' :
 
 /-- In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`, if both
 pairings are perfect and the dual comparison is an isomorphism, then so is `c_Y`. In blueprint
-`thm-pod-finite-reduction` this shows that the comparison map on ordinary global sections is an
+`theorem-poincare-duality--9` this shows that the comparison map on ordinary global sections is an
 isomorphism. -/
 theorem isIso_of_map_curry_comp_unitDualComparison {X Y : C} {X' Y' : D} {b : X ⊗ Y ⟶ 𝟙_ C}
     {b' : X' ⊗ Y' ⟶ 𝟙_ D} (hb : IsPerfectPairing b) (hb' : IsPerfectPairing b')

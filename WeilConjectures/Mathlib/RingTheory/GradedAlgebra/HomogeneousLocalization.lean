@@ -496,30 +496,30 @@ lemma awayMap_awayMap {d e e' : ι} {f g h x y : A} (hf : f ∈ 𝒜 d) (hg : g 
 
 /-- The canonical identification of the overlap rings of the charts `D₊(f)` and `D₊(g)`
 computed from either side: `Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f)`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 def Away.overlapEquiv (f g : A) : Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f) :=
   Away.congr 𝒜 (mul_comm f g)
 
 /-- The overlap equivalence identifies the two restrictions of the chart ring at `f`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 lemma Away.overlapEquiv_awayMap_left {e : ι} {f g : A} (hg : g ∈ 𝒜 e) (a : Away 𝒜 f) :
     Away.overlapEquiv 𝒜 f g (awayMap 𝒜 hg rfl a) = awayMap 𝒜 hg (mul_comm g f) a :=
   Away.congr_awayMap 𝒜 hg rfl _ a
 
 /-- The overlap equivalence identifies the two restrictions of the chart ring at `g`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 lemma Away.overlapEquiv_awayMap_right {d : ι} {f g : A} (hf : f ∈ 𝒜 d) (a : Away 𝒜 g) :
     Away.overlapEquiv 𝒜 f g (awayMap 𝒜 hf (mul_comm f g) a) = awayMap 𝒜 hf rfl a :=
   Away.congr_awayMap 𝒜 hf _ _ a
 
 /-- The overlap equivalence of a chart with itself is the identity.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 @[simp]
 lemma Away.overlapEquiv_self (f : A) : Away.overlapEquiv 𝒜 f f = RingEquiv.refl _ :=
   Away.congr_rfl 𝒜
 
 /-- The overlap equivalences are inverse under exchanging `f` and `g`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 @[simp]
 lemma Away.overlapEquiv_symm (f g : A) :
     (Away.overlapEquiv 𝒜 f g).symm = Away.overlapEquiv 𝒜 g f :=
@@ -536,7 +536,7 @@ lemma Away.awayMap_overlapEquiv {e : ι} {f g h z : A} (hh : h ∈ 𝒜 e) (hz :
 `D₊(fgh)`, i.e. after composing with the restriction maps into `Away 𝒜 z` for `z = fgh`,
 each of the overlap equivalences `φ_{fg}`, `φ_{gh}`, `φ_{fh}` becomes the identity. Hence
 `φ_{gh} ∘ φ_{fg} = φ_{fh}` on the triple overlap.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 theorem Away.overlapEquiv_cocycle {d e e' : ι} {f g h z : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e)
     (hh : h ∈ 𝒜 e') (hz : z = f * g * h) :
     (awayMap 𝒜 hh (hz.trans (by ring) : z = g * f * h)).comp

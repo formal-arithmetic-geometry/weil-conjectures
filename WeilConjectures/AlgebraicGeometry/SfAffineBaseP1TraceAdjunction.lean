@@ -174,13 +174,13 @@ Proof plan:
 2. Projective-line projections are proper by
    lemma-nagata-projective-space-base-change-proper. The diagonal is closed by
    lem-amb-p1-diagonal-cartier and proper by lem-weil-pbc-closed-immersion-proper.
-   Apply lem-kun-0f0g to obtain all unbounded projection isomorphisms. Tensor the
-   supported diagonal class with the first pullback of M and push forward along
-   the second projection. Inverse projection and inverse proper exchange give a
+   Apply proposition-proper-direct-image-constructible-complexes--9 to obtain all unbounded
+   projection isomorphisms. Tensor the supported diagonal class with the first pullback of M and
+   push forward along the second projection. Inverse projection and inverse proper exchange give a
    natural unit M -> q^*Rq_*M tensor B. Use the normalized monoidal comparisons
    of lem-sfb-ringed-derived-monoidal-comparisons throughout. Define the proposed
    counit by inverse ordered projection, tensoring t with the identity, and the
-   unit constraint (def-kun-projection-formula-map).
+   unit constraint (definition-projection-formula-map--1).
 3. Apply lem-sfb-etale-coordinate-trace-contractions with f = q and d = 1;
    lem-asd-finite-etale-twist-line supplies its line hypothesis. Its first
    coordinate equation, naturality and the section identity of

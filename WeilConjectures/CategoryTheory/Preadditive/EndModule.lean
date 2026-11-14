@@ -39,7 +39,7 @@ acting by precomposition. -/
 def rightCompEndOp (W : C) {Y Z : C} (g : Y ⟶ Z) : (W ⟶ Y) →ₗ[(End W)ᵐᵒᵖ] (W ⟶ Z) where
   toFun f := f ≫ g
   map_add' f f' := Preadditive.add_comp _ _ _ f f' g
-  map_smul' r f := Category.assoc r.unop f g
+  map_smul' r f := Category.assoc r.unop.asHom f g
 
 end
 

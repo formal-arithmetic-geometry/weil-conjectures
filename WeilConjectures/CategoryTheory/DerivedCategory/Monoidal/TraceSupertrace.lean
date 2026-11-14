@@ -23,7 +23,7 @@ the unit (`CategoryTheory.ShiftDecomposition`). For an endomorphism `w` of `Y`, 
 trace of `w` in `D(A)`, for the Koszul braiding `DerivedCategory.braidedCategory'`, is the
 supertrace `∑ᵢ (-1)ⁱ Tr(Hⁱ(w) | Hⁱ(Y))` of the endomorphisms induced on the homology objects,
 placed in degree `0` (`DerivedCategory.trace_eq_singleFunctor_map_superTrace`; blueprint
-`prop-trf-trace-formal-laws`, item (4)).
+`proposition-properties-trace`, item (4)).
 
 The scalar `Tr(Hⁱ(w))` in `End (𝟙_ A)` is placed in degree `0` by
 `DerivedCategory.singleFunctorUnitEndRingHom`.
@@ -59,6 +59,8 @@ theorem traceOrZero_eq_sum {ι : Type*} [Fintype ι] {M : C} {E : ι → C}
   have (j : ι) : HasRightDual (E j) := (hE j).some
   rw [traceOrZero_eq_trace]
   simp_rw [traceOrZero_eq_trace]
+  apply End.ext
+  simp only [End.sum_asHom]
   calc trace v = trace ((∑ j, proj j ≫ incl j) ≫ v) := by rw [h, Category.id_comp]
     _ = ∑ j, trace (proj j ≫ incl j ≫ v) := by
         rw [Preadditive.sum_comp, ← traceAddMonoidHom_apply, map_sum]
@@ -125,7 +127,7 @@ lemma superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map (n : ℤ
         ((shiftFunctor (DerivedCategory A) n).obj ((singleFunctor A 0).obj (𝟙_ A))))
       (fun i ↦ (homologyFunctor A i).map
         ((shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r))) =
-      (n.negOnePow : ℤ) • r := by
+      (n.negOnePow : ℤ) • End.of r := by
   unfold superTrace
   rw [finsum_eq_single _ (-n) fun i hi ↦ by
     rw [traceOrZero_eq_zero_of_isZero
@@ -144,7 +146,9 @@ lemma superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map (n : ℤ
           ((shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r)) ≫ e.hom) :=
         (traceOrZero_conj e _).symm
     _ = traceOrZero r := by rw [← he]
-    _ = r := by let : HasRightDual (𝟙_ A) := ⟨𝟙_ A⟩; rw [traceOrZero_eq_trace, trace_tensorUnit]
+    _ = .of (r) := by
+        let : HasRightDual (𝟙_ A) := ⟨𝟙_ A⟩
+        rw [traceOrZero_eq_trace, trace_tensorUnit]
 
 /-- The trace of an endomorphism of a shifted unit `𝟙⟦n⟧` of `D(A)` is the supertrace of the
 induced endomorphisms of its homology objects, placed in degree `0`. -/
@@ -153,20 +157,20 @@ lemma trace_eq_singleFunctor_map_superTrace_of_shift (n : ℤ)
     (b : (shiftFunctor (DerivedCategory A) n).obj (𝟙_ (DerivedCategory A)) ⟶
       (shiftFunctor (DerivedCategory A) n).obj (𝟙_ (DerivedCategory A))) :
     letI := braidedCategory' A
-    trace b = singleFunctorUnitEndRingHom A
+    trace b = (singleFunctorUnitEndRingHom A
       (superTrace
         (fun i ↦ (homologyFunctor A i).obj
           ((shiftFunctor (DerivedCategory A) n).obj (𝟙_ (DerivedCategory A))))
-        (fun i ↦ (homologyFunctor A i).map b)) := by
+        (fun i ↦ (homologyFunctor A i).map b))).asHom := by
   obtain ⟨r, rfl⟩ : ∃ r, (shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r) = b :=
     ⟨(singleFunctor A 0).preimage ((shiftFunctor (DerivedCategory A) n).preimage b), by
       erw [Functor.map_preimage, Functor.map_preimage]⟩
   refine (@trace_shiftFunctor_map_singleFunctor_map _ _ _ _ _ _ _ _ _ _ n r ‹_›).trans ?_
   erw [superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map, map_zsmul,
-    Category.id_comp, Category.comp_id]
+    End.zsmul_asHom, Category.id_comp, Category.comp_id]
   rfl
 
-/-- **The trace as a supertrace** (blueprint `prop-trf-trace-formal-laws`, item (4)): for an
+/-- **The trace as a supertrace** (blueprint `proposition-properties-trace`, item (4)): for an
 object `Y` of `D(A)` which is a finite direct sum of shifts of the unit, with dualizable
 homology objects, the categorical trace of an endomorphism `w` of `Y`, for the Koszul braiding, is
 the alternating sum `∑ᵢ (-1)ⁱ Tr(Hⁱ(w) | Hⁱ(Y))` of the traces on the homology objects, placed in
@@ -175,14 +179,17 @@ theorem trace_eq_singleFunctor_map_superTrace {Y : DerivedCategory A} [HasRightD
     (D : ShiftDecomposition (𝟙_ (DerivedCategory A)) Y)
     (hY : ∀ i, IsDualizable ((homologyFunctor A i).obj Y)) (w : Y ⟶ Y) :
     letI := braidedCategory' A
-    trace w = singleFunctorUnitEndRingHom A
-      (superTrace (fun i ↦ (homologyFunctor A i).obj Y) (fun i ↦ (homologyFunctor A i).map w)) := by
+    trace w = (singleFunctorUnitEndRingHom A
+      (superTrace (fun i ↦ (homologyFunctor A i).obj Y)
+        (fun i ↦ (homologyFunctor A i).map w))).asHom := by
   let := braidedCategory' A
   let (n : ℤ) : HasRightDual ((shiftFunctor (DerivedCategory A) n).obj (𝟙_ _)) :=
     (isDualizable_shift isDualizable_unit n).some
   rw [D.trace_eq_sum w]
   rw [Finset.sum_congr rfl fun j _ ↦ trace_eq_singleFunctor_map_superTrace_of_shift (A := A)
     (D.deg j) (D.incl j ≫ w ≫ D.proj j)]
+  rw [← End.sum_asHom]
+  apply congrArg End.asHom
   refine (map_sum (singleFunctorUnitEndRingHom A) _ _).symm.trans (congrArg _ ?_)
   unfold superTrace
   have hi (i : ℤ) : traceOrZero ((homologyFunctor A i).map w) =

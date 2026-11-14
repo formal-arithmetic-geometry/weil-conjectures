@@ -12,10 +12,10 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalizatio
 
 # The strictly local model of the Frobenius graph and the diagonal
 
-This file sets up the classical étale models of blueprint `det-tf-restriction-zero-localization`
-(in the situation of `det-tf-supported-restriction`). Let `k` be an algebraically closed field,
-`f : X ⟶ Spec k` a separated quasi-compact smooth curve, `h : X ⟶ X` a `k`-endomorphism (in the
-blueprint the `m`-th power `Φ_X^m` of the `k`-linear Frobenius) and `y` a `k`-point of `X` fixed
+This file sets up the classical étale models of blueprint `lemma-vanishing-local-term-zero-stalk--1`
+(in the situation of `lemma-local-term-restriction-map--1`). Let `k` be an algebraically closed
+field, `f : X ⟶ Spec k` a separated quasi-compact smooth curve, `h : X ⟶ X` a `k`-endomorphism (in
+the blueprint the `m`-th power `Φ_X^m` of the `k`-linear Frobenius) and `y` a `k`-point of `X` fixed
 by `h` at which `h` contracts: `h^♯ 𝔪_y ⊆ 𝔪_y²` (for `Φ_X^m` this holds since
 `Φ_X^m(t - a) = (t - a)^{q^m}` in a local coordinate `t` with `t(y) = a`, see
 `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`).
@@ -43,8 +43,8 @@ open Scheme
 
 variable (k : Type u) [Field k] [IsAlgClosed k]
 
-/-- **The data of the strictly local model** (blueprint `det-tf-supported-restriction`,
-`det-tf-restriction-zero-localization`): a separated smooth curve `f : X ⟶ Spec k` over the
+/-- **The data of the strictly local model** (blueprint `lemma-local-term-restriction-map--1`,
+`lemma-vanishing-local-term-zero-stalk--1`): a separated smooth curve `f : X ⟶ Spec k` over the
 algebraically closed field `k`, a `k`-endomorphism `h` of `X` (the iterate `Φ_X^m` of the
 Frobenius in the blueprint) and a `k`-point `y` fixed by `h` at which `h` contracts,
 `h^♯ 𝔪_y ⊆ 𝔪_y²`. -/

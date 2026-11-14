@@ -54,7 +54,7 @@ Proof:
    Since X₀ and Y₀ are qcqs, these maps are qcqs
    (lem-weil-pbc-qcqs-morphism-permanence).
 2. Choose a finite affine open cover Vⱼ,₀ of Y₀ (def-pc-scheme and
-   def-weil-pbc-scheme-conventions). Its preimages Vⱼ,T cover each base-changed target
+   definition-ind-etale-pro-etale-weakly--3). Its preimages Vⱼ,T cover each base-changed target
    and are affine. Put Uⱼ,T = f_T⁻¹(Vⱼ,T). They are qcqs by
    lem-weil-pbc-open-preimage-fibre-product and lem-weil-pbc-qcqs-over-affine.
 3. At the limit, Uⱼ is affine since f is affine (pqf-def-affine-morphism).

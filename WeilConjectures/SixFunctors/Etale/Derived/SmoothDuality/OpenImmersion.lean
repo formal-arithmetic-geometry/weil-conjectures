@@ -13,8 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 # Base change of the exceptional inverse image along an open immersion
 
 The open-immersion case of the elementary cases in the proof of blueprint
-`prop-asd-smooth-base-change`: for a quasi-compact open immersion `j : U ⟶ X` and a cartesian
-square
+`proposition-exceptional-inverse-image-smooth-morphism--6`: for a quasi-compact open immersion
+`j : U ⟶ X` and a cartesian square
 
 ```
   U' --g'--> U

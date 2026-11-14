@@ -38,7 +38,7 @@ private theorem scalar_cochain_comm (s : R) {K L : CochainComplex A ℤ}
     (Cochain.ofHom (s • 𝟙 K)).comp a (zero_add n) =
       a.comp (Cochain.ofHom (s • 𝟙 L)) (add_zero n) := by
   ext p q hpq
-  simp [Linear.smul_comp, Linear.comp_smul]
+  simp
 
 private theorem cocone_δ_inl {K L : CochainComplex A ℤ} (f : K ⟶ L) :
     δ 0 1 (mappingCocone.inl f) =

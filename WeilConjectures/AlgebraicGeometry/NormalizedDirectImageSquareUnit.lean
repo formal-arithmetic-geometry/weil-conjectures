@@ -44,7 +44,6 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   DerivedCategory.Qh
 
-set_option maxHeartbeats 800000 in
 -- The explicit categorical carrier conversions require the larger elaboration budget.
 /-- The normalized right-adjoint square is determined by the pasted right-derived
 units of its two ordinary direct-image paths.

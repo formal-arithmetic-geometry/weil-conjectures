@@ -20,7 +20,7 @@ develops, for the pro-étale cohomology of the extensions by zero
 `WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology` develops for the constant
 sheaves. When `T` is proper over an algebraically closed field these are the compactly
 supported cohomology groups of `U`; the results feed the `ℚ̄_ℓ` stage of the compactly
-supported case of blueprint `thm-pod-degreewise-perfectness-over-a-field`.
+supported case of blueprint `corollary-degreewise-duality-over-fields--1`.
 
 * the **Bockstein sequence**: the extension by zero `j_!` is exact, so it maps the Bockstein
   sequence `0 ⟶ ℤ_p --pᵐ--> ℤ_p ⟶ ℤ/pᵐ ⟶ 0` to a short exact sequence, whence
@@ -167,7 +167,6 @@ section ExtensionByZeroLimit
 
 variable {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search for the sections of the sheafified Kan extension is slow
 /-- **A section of an extension by zero vanishes on a cover of the complement.** For a section
 `r` of `j_! G` over an object `B` of the affine pro-étale site, there is a morphism `B' ⟶ B` of
@@ -538,11 +537,21 @@ image. -/
 @[simps]
 def _root_.CategoryTheory.Functor.mapRingHom (G : C ⥤ D) [G.Additive] {X : C}
     (φ : R →+* End X) : R →+* End (G.obj X) where
-  toFun r := G.map (φ r)
-  map_one' := by rw [map_one]; exact G.map_id X
-  map_mul' r s := by rw [map_mul]; exact G.map_comp _ _
-  map_zero' := by rw [map_zero]; exact G.map_zero _ _
-  map_add' r s := by rw [map_add]; exact G.map_add
+  toFun r := .of (G.map (φ r).asHom)
+  map_one' := by
+    apply End.ext
+    change G.map (φ 1).asHom = 𝟙 (G.obj X)
+    rw [map_one, End.one_asHom]
+    exact G.map_id X
+  map_mul' r s := by
+    apply End.ext
+    simp only [map_mul, End.mul_asHom, Functor.map_comp]
+  map_zero' := by
+    apply End.ext
+    simp only [map_zero, End.zero_asHom, Functor.map_zero]
+  map_add' r s := by
+    apply End.ext
+    simp only [map_add, End.add_asHom, Functor.map_add]
 
 end RingHom
 
@@ -593,9 +602,9 @@ noncomputable abbrev compactReductionSheafMap (m : ℕ) :
   (j)_!open[AddCommGrpCat.{u + 1}].map (reductionSheafMap U p m)
 
 lemma compactReductionSheafMap_comm (m : ℕ) (c : ℤ_[p]) :
-    compactIntegralSmulRingHom j p c ≫ compactReductionSheafMap j p m =
-      compactReductionSheafMap j p m ≫ compactFiniteSmulRingHom j p m c := by
-  simp only [Functor.mapRingHom_apply, ← Functor.map_comp, reductionSheafMap_comm]
+    (compactIntegralSmulRingHom j p c).asHom ≫ compactReductionSheafMap j p m =
+      compactReductionSheafMap j p m ≫ (compactFiniteSmulRingHom j p m c).asHom := by
+  simp only [Functor.mapRingHom_apply_asHom, ← Functor.map_comp, reductionSheafMap_comm]
 
 /-- The reduction `ρₘ : Hⁿ(T, j_! ℤ_p) ⟶ Hⁿ(T, j_! ℤ/pᵐ)`. -/
 noncomputable def compactReduction (m n : ℕ) :
@@ -612,14 +621,15 @@ lemma compactReduction_apply (m n : ℕ) (x : CompactIntegralAdicH j p n) :
 lemma pow_smul_compactFiniteAdicH (m n : ℕ) (y : CompactFiniteAdicH j p m n) :
     (p : ℤ_[p]) ^ m • y = 0 := by
   have h : finiteSmulRingHom U p m ((p : ℤ_[p]) ^ m) = 0 := by
+    apply End.ext
     refine (continuousSheafMap_congr U fun x ↦ ?_).trans (continuousSheafMap_zero U)
     induction x using QuotientAddGroup.induction_on with
     | H a =>
       refine (QuotientAddGroup.eq_zero_iff _).2 ?_
       exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _)
   change Ext.comp y (Ext.mk₀ ((j)_!open[AddCommGrpCat.{u + 1}].map
-    (finiteSmulRingHom U p m ((p : ℤ_[p]) ^ m)))) (add_zero n) = 0
-  rw [h, Functor.map_zero, Ext.mk₀_zero, Ext.comp_zero]
+    (finiteSmulRingHom U p m ((p : ℤ_[p]) ^ m)).asHom)) (add_zero n) = 0
+  rw [h, End.zero_asHom, Functor.map_zero, Ext.mk₀_zero, Ext.comp_zero]
 
 /-- The extension by zero of the Bockstein short complex,
 `j_! C(-, ℤ_p) --pᵐ--> j_! C(-, ℤ_p) ⟶ j_! C(-, ℤ_p / pᵐ)`. -/
@@ -773,7 +783,7 @@ variable (j p) in
 /-- **Separation.** For a quasi-compact open immersion `j : U ⟶ T`, if the groups
 `Hⁿ⁻¹(T, j_! ℤ/pᵐ)` are finite (no condition for `n = 0`), a class of `Hⁿ(T, j_! ℤ_p)` whose
 reductions modulo all `pᵐ` vanish is zero. This feeds the `ℚ̄_ℓ` stage of the compactly supported
-case of blueprint `thm-pod-degreewise-perfectness-over-a-field`. -/
+case of blueprint `corollary-degreewise-duality-over-fields--1`. -/
 theorem eq_zero_of_forall_compactReduction_eq_zero (n : ℕ)
     (hfin : ∀ m k, k + 1 = n → Finite (CompactFiniteAdicH j p m k))
     (x : CompactIntegralAdicH j p n) (hx : ∀ m, compactReduction j p m n x = 0) : x = 0 :=
@@ -784,7 +794,7 @@ variable (j p) in
 /-- **Finite generation of compactly supported `ℓ`-adic cohomology.** For a quasi-compact open
 immersion `j : U ⟶ T`, if the groups `Hⁿ⁻¹(T, j_! ℤ/pᵐ)` and `Hⁿ(T, j_! ℤ/p)` are finite, then
 `Hⁿ(T, j_! ℤ_p)` is a finitely generated `ℤ_p`-module. This feeds the `ℚ̄_ℓ` stage of the
-compactly supported case of blueprint `thm-pod-degreewise-perfectness-over-a-field`. -/
+compactly supported case of blueprint `corollary-degreewise-duality-over-fields--1`. -/
 theorem module_finite_compactIntegralAdicH (n : ℕ)
     (hfin : ∀ m k, k + 1 = n → Finite (CompactFiniteAdicH j p m k))
     [Finite (CompactFiniteAdicH j p 1 n)] :

@@ -22,7 +22,7 @@ constructible exceptional adjunction `Hom(Ri_! K, L) ≃ Hom(K, Ri^! L)`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`) is an isomorphism for every
 bounded constructible `Q`
 (`AlgebraicGeometry.ProEtale.isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion`):
-this is the last assertion of blueprint `prop-sf-closed-immersion-unit`.
+this is the last assertion of blueprint `lemma-local-cohomology-right-adjoint--1`.
 -/
 
 @[expose] public section
@@ -79,7 +79,7 @@ instance faithful_rightDerivedLowerShriek_of_isClosedImmersion :
     (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) i).Faithful :=
   Functor.Faithful.of_iso (rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar _ i).symm
 
-/-- Blueprint `prop-sf-closed-immersion-unit`, last assertion: for a closed immersion
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, last assertion: for a closed immersion
 `i : Z ⟶ X` admitting a compactification, `X` quasi-compact, and a bounded constructible
 `Q ∈ Dᵇc(Z_proét, Λ)`, `Λ` finite, the unit `Q ⟶ Ri^! Ri_! Q` of the constructible exceptional
 adjunction `Hom(Ri_! K, L) ≃ Hom(K, Ri^! L)` of

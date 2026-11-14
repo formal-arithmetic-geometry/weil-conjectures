@@ -11,7 +11,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Canonical residue normalization for native integral reductions
 
-Source: blueprint latest, sk-lem-integral-finite-levels, second paragraph.
+Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -97,7 +97,7 @@ theorem integralResidueQuotientEquiv_mk (n : ℕ)
 /-- Derived scalar extension of a native finite reduction to the residue quotient is
 canonically isomorphic to the first native reduction.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, second paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph
 (blueprint: lem-pe-integral-finite-residue-normalization).
 
 Proof: construct the residue map as the composite of the consecutive quotient maps.

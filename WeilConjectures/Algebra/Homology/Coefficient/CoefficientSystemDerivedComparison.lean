@@ -183,7 +183,6 @@ private theorem coefficientEvaluation_detectsIso
     intro n
     exact (NatIso.isIso_map_iff (coefficientEvaluation_derivedIso O ell P n) f).1 (hf n)
 
-set_option maxHeartbeats 800000 in
 -- Instantiate both sites and all ordinary/derived coherence structures.
 /-- Derived direct image commutes canonically with every evaluation, with the specified
 unit, counit and coefficient-change compatibility; bounded-below objects of levelwise
@@ -196,7 +195,7 @@ Proof plan:
 are levelwise. Apply prop-pur-kinjective-resolutions-exist on this small ringed site.
 Transport algebraic operations through the geometric inverse image, which is exact;
 its adjunction on modules gives the system adjunction level by level. Apply
-lem-weil-pbc-exact-functor-derived-factorization and
+situation-conventions and
 lem-weil-pbc-kinjective-total-derived to construct the derived functors.
 2. Use lem-weil-pbc-termwise-adjunction-homotopy and
 lem-pc-pre-derived-adjoint-functors-general to normalize the derived adjunctions.

@@ -91,7 +91,7 @@ over `π`, modulo the composition isomorphisms of the derived pushforwards. The 
 isomorphism (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`), and
 `Rπ_* F' = π_* F'` as `π_*` is exact
 (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). This is the
-identification in the proof of blueprint `sbc-lem-bc-integral-surjective`. -/
+identification in the proof of blueprint `lemma-integral-changes-source-base--1`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar (sq : IsPullback e h g p)
     (π : T' ⟶ T) [IsIntegralHom π] (sq' : IsPullback e' h' (π ≫ g) p) (q : ℤ)
     (F' : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -122,7 +122,8 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar (sq : IsPullback
   simp only [Functor.map_comp]
   exact (Arrow.isoOfIsIsoComp _ _ _).symm
 
-/-- Blueprint `sbc-lem-bc-integral-surjective`: Integral surjective base change on the target.
+/-- Blueprint `lemma-integral-changes-source-base--1`: Integral surjective base change on the
+target.
 
 Assume `BC(p, Λ, q - 1)` for some `q ≥ 1`. Let `g : T ⟶ S` be quasi-compact and
 quasi-separated, `π : T' ⟶ T` integral and surjective, and consider Cartesian squares over `g`
@@ -179,7 +180,7 @@ derived pushforwards. The former is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`), and `Rπ'_*`
 commutes with the homology functors as `π'_*` is exact
 (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). This is the
-identification in the proof of blueprint `sbc-lem-bc-integral-base`. -/
+identification in the proof of blueprint `lemma-integral-changes-source-base--2`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_comp (π : S'' ⟶ S') [IsIntegralHom π]
     (hπ : IsPullback π' p'' p' π) (sq'' : IsPullback e h'' g' p'')
     (sq : IsPullback e (h'' ≫ π') (g' ≫ π) p') (q : ℤ)
@@ -212,7 +213,7 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_comp (π : S'' ⟶ S') [Is
   rw [← Category.assoc]
   exact Arrow.isoOfIsIsoComp _ _ _
 
-/-- Blueprint `sbc-lem-bc-integral-base`: Integral base change on the source.
+/-- Blueprint `lemma-integral-changes-source-base--2`: Integral base change on the source.
 
 Let `π : S'' ⟶ S'` be integral, `p'' : X'' ⟶ S''` the base change of `p' : X' ⟶ S'` along
 `π`, and consider a Cartesian square for `p''` over `g' : T ⟶ S''` and the pasted Cartesian
@@ -220,7 +221,7 @@ square for `p'` over `g' ≫ π`. Then the base-change map of the pasted square 
 isomorphism if and only if the base-change map of the square over `g'` is.
 
 The blueprint states the forward implication; the converse is what the proof of blueprint
-`sbc-lem-bc-universal-test` uses. By
+`lemma-reduction-curve-over-normal-base--1` uses. By
 `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp` the first map is the
 image under `π'_*` of the second, and `π'_*` is conservative
 (`AlgebraicGeometry.Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom`), `π'` being

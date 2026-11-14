@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionForward
 
 /-! # Projection compatibility of the fixed graph compositor
 
-Source: blueprint sk-prop-sf-pf-coherence, composition pentagon.
+Source: blueprint proposition-composition-base-change-rf-shriek--1, composition pentagon.
 (auxiliary; not a blueprint node).
 -/
 
@@ -127,8 +127,8 @@ private meta partial def graphProjectionCongrHEq (a b : Expr) : MetaM Expr := do
 
 /-- The explicitly constructed graph compositor preserves the projection maps.
 
-Source: blueprint sk-prop-sf-pf-coherence, composition pentagon; steps 1--3 of
-lem-route-exists-right-derived-lower-shriek-comp-iso.
+Source: blueprint proposition-composition-base-change-rf-shriek--1, composition pentagon; steps 1--3
+of lem-route-exists-right-derived-lower-shriek-comp-iso.
 (auxiliary; not a blueprint node).
 
 Proof: apply sfEtaleCompactProjectionInverse_composition to the three chosen

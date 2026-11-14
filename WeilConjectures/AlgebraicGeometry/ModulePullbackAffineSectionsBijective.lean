@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option maxHeartbeats 700000 in
 -- Elaboration compares native tensor products with ModuleCat extension of scalars.
 /-- Bijectivity of an A-linear map with the canonical affine pure-tensor formula.
 Source: Stacks Project, Schemes, Tags 01I9, 01IA and 01HV; Sheaves, Tags 0097 and 00A0.

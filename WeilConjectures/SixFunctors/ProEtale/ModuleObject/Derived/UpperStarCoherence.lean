@@ -454,7 +454,6 @@ lemma leftDerivedUpperStarComp_assoc_app (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ 
     (upperStarComp_hom_app_comp_upperStarComp_hom_app Λ f g h) K,
     upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Left unit law** for the composition isomorphisms of the derived pullbacks of module
 objects. -/
@@ -470,7 +469,6 @@ lemma leftDerivedUpperStarComp_id_left_app (g : X ⟶ Y)
   rw [upperStarComp_id_left]
   simp
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Right unit law** for the composition isomorphisms of the derived pullbacks of module
 objects. -/

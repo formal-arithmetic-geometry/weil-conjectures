@@ -21,9 +21,9 @@ is natural in `Y`: the pullback of `ξ` along a morphism `f : Y' ⟶ Y` is the c
 pulled-back torsor `t ×_Y Y'`. Since a torsor has class zero exactly when it has a section,
 the pullback of `ξ` along `f` vanishes exactly when `f` lifts to the total space of `t`.
 
-This is the form in which the vanishing theorem `sk-thm-vanishing` uses the classification:
-it kills a class of `H¹` by pulling it back to a cover over which the torsor acquires a
-section.
+This is the form in which the vanishing theorem
+`proposition-base-change-larger-algebraically-closed--1` uses the classification: it kills a class
+of `H¹` by pulling it back to a cover over which the torsor acquires a section.
 
 ## Main statements
 

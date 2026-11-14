@@ -90,7 +90,6 @@ theorem isIso_homology_zero_map_unit_multiplicativeGroup_of_field :
   exact (NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight (Functor.whiskerRight adjj.unit
     (R((p)_*[ModuleCat.{u + 1} Λ]))) H) (leftDerivedUpperStarTateObjectIso p 1)).1 this
 
-set_option maxHeartbeats 1000000 in
 -- the composites of derived functors on the three schemes `B`, `𝔸¹_B` and `𝔾_{m,B}` are large
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`, clause (b) in degree one, for the twist `Λ(1) = μₙ ⊗ Λ`, over

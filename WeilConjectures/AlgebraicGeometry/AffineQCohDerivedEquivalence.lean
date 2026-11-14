@@ -49,7 +49,7 @@ Proof:
    the structure sheaf. Termwise tilde therefore inverts quasi-isomorphisms, factors
    through localization, and lands in the full quasi-coherent derived subcategory.
 2. Derive global sections using K-injective resolutions as for
-   def-pc-derived-direct-image. The ordinary adjunction induces the derived unit
+   lemma-coherent-base-change-invertible-sheaves. The ordinary adjunction induces the derived unit
    and counit; applying exact tilde termwise computes its derived functor.
 3. Affine vanishing (pqf-lem-affine-vanishing) supplies the bound `N = 1` in
    lem-pc-unbounded-derived-functor-cohomological-bound. Apply that bound to the

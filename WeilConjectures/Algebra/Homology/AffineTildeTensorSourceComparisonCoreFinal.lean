@@ -69,7 +69,6 @@ attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
   Scheme.Modules.tensorPullback schemeDerivedBaseChangeMap moduleHomotopyBaseChange
   affineTildeTensorOrdinarySourceIso affineTildeTensorDerivedCounit
 
-set_option maxHeartbeats 800000 in
 -- Comparing affine tensor units and counits requires substantial reduction.
 /-- The affine source comparison is normalized by its derived counit.
 Source: Stacks Project, Tags 06Y6, 08DW, 06Z0, 08D4, 08HY and 0AVW.

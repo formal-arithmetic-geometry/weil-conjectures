@@ -98,7 +98,7 @@ lemma Etale.toPresheafFiber_lowerStarCompPresheafFiberIso_hom_app (P : Z.Etale�
     ((Functor.Elements.π (pointSmallEtale s).fiber).op ⋙ P)
     (op (Functor.elementsMk _ V y))
 
-/-- Blueprint `lemma-openclosed-stalk-lowerstar`: **The stalk of a pushforward along a closed
+/-- Blueprint `lemma-finite-direct-images--1`: **The stalk of a pushforward along a closed
 immersion.** For a closed immersion
 `i : Z ⟶ X` and a geometric point `s : Spec Ω ⟶ Z`, the stalk of `i_* H` at the geometric
 point `s ≫ i` of `X` is the stalk of `H` at `s`, naturally in the sheaf `H`.

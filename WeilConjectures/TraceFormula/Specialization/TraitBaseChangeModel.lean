@@ -20,8 +20,8 @@ model over the trait `Spec K⟦t⟧` with total space `𝒳'' = 𝒳 ×_Y Spec K
 `𝒳'' ×_{K⟦t⟧} Spec Ω_K` (`Ω_K = (Frac K⟦t⟧)^alg`) and special fibre `𝒳'' ×_{K⟦t⟧} Spec K`, with
 the identification `ε` through `𝒳_η̄`, using an embedding `Ω ⟶ Ω_K` of the fields of the
 geometric generic points (`AlgebraicGeometry.traitGenericFieldMap`). Two cases occur in the
-generic-slicing step of Gabber's Künneth formula (blueprint `sk-prop-tf-nearby-external-kunneth`,
-"Finite support"):
+generic-slicing step of Gabber's Künneth formula (blueprint
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"):
 
 * `Y = 𝔸¹_S` and `v` the generic slice `σ : Spec K⟦t⟧ ⟶ 𝔸¹_S` along a coordinate `b`, the
   *geometric slice*, of smaller dimension;

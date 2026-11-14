@@ -101,7 +101,7 @@ private theorem identityTriangle_comp
       (F.pf p).map ((F.shId Z).hom.app ((F.pf (𝟙 Z)).obj ((F.sh i).obj K))) ≫
         (F.pf p).map ((F.pfId Z).hom.app ((F.sh i).obj K)) := by
   have hw : 𝟙 Z ≫ 𝟙 Z = 𝟙 Z ≫ 𝟙 Z := rfl
-  have : IsIso (F.baseChange (𝟙 Z) (𝟙 Z) (𝟙 Z) (𝟙 Z) hw).natTrans :=
+  have : IsIso (F.baseChange (𝟙 Z) (𝟙 Z) (𝟙 Z) (𝟙 Z) hw) :=
     CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := F) (IsPullback.of_horiz_isIso ⟨hw⟩)
   have h₁ := congr_app (F.exchange_id_vert (𝟙 Z) hw) ((F.sh i).obj K)
@@ -297,7 +297,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 /-- The geometric compositor on an etale-origin input is the pair of identity unit maps.
 This statement involves no intrinsic coefficient presentation or retained finite witness.
 
-Source: lem-amb-etale-compact-comparisons, the arbitrary-triangle formula; and
+Source: proposition-construction-independence-rf-shriek--7, the arbitrary-triangle formula; and
 lem-pur-compact-support-site-coherence, its composition square.
 (blueprint: lem-sf-identity-factor-fixed-support).
 

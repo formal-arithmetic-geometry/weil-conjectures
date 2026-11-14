@@ -269,7 +269,7 @@ lemma modelFrobenius_id (N : ℕ) :
   | succ N ih => rw [frobeniusIterate_succ, frobeniusIterate_succ, Functor.map_comp, ih]
 
 /-- For `g = 𝟙`, the model Frobenius `F_X ×_k Ω` is the model Frobenius of the model `X` of
-`X̄` over `k` (blueprint `sk-d-weil`). -/
+`X̄` over `k` (blueprint `definition-frobenius-correspondences-their-operators`). -/
 theorem isModelFrobenius_modelFrobenius_one :
     IsModelFrobenius (baseChangeModelFrobenius Ω X 1 (𝟙 X)) X.hom (geometricBaseChangeProj X) where
   isPullback := isPullback_geometricBaseChangeProj X
@@ -277,7 +277,8 @@ theorem isModelFrobenius_modelFrobenius_one :
     rw [modelFrobenius_left_comp_proj, Category.id_comp, frobeniusIterate_one]⟩
 
 /-- For `g = 𝟙`, `Ω` algebraically closed and `N ≠ 0`, the model Frobenius `F_X^N ×_k Ω` is the
-model Frobenius of a model of `X̄` over the subfield `𝔽_{q^N}` of `Ω` (blueprint `sk-d-weil`). -/
+model Frobenius of a model of `X̄` over the subfield `𝔽_{q^N}` of `Ω` (blueprint
+`definition-frobenius-correspondences-their-operators`). -/
 theorem exists_isModelFrobenius_modelFrobenius_id [IsAlgClosed Ω] [LocallyOfFiniteType X.hom]
     {N : ℕ} (hN : N ≠ 0) :
     ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₁ Ω)

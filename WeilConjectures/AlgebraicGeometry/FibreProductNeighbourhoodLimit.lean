@@ -48,7 +48,7 @@ Proof:
    Its leg at `(S,s)` is the structure map `p`; all its legs are over `S`.
 2. A compatible cone to the fibre products gives a compatible cone to the neighbourhoods
    and hence a unique map to the strict henselization. Its components to `X` agree:
-   cofilteredness (`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`) supplies common
+   cofilteredness (`definition-torsion-sheaves--3`) supplies common
    refinements. The component at `(S,s)` ensures that the two maps agree over `S`.
 3. The fibre-product universal property (`def-pc-fibre-product`) gives the unique map to
    the vertex of the displayed cone. Equality of its two components proves uniqueness,

@@ -14,12 +14,12 @@ Let `Λ` be a Noetherian domain, complete for a principal ideal `I = (ϖ)` with 
 exponent invertible on a field `k` (the integral stage `Λ = 𝒪_E`, `I = 𝔪_E`), and `M` a submonoid
 of `Λ` (the nonzero elements, or the powers of `ϖ`), so that the rational stage is
 `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]` (`CategoryTheory.Rationalization`, blueprint
-`def-sfb-rationalization-quotient`). For a separated finite-type morphism `f : X ⟶ Y` of
+`proposition-inverting-ell--2`). For a separated finite-type morphism `f : X ⟶ Y` of
 separated finite-type `k`-schemes this file constructs the compact-support direct image and the
 exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`:
 
 * at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)` (blueprint
-  `lem-coef-integral-compact-support`,
+  `lemma-change-coefficients-compact-support`,
   `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`) and so does
   `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), so that
   the adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the constructible categories
@@ -83,7 +83,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `lem-coef-integral-compact-support`: Integral compact support.
+/-- Blueprint `lemma-change-coefficients-compact-support`: Integral compact support.
 
 Let `f : X ⟶ Y` be a separated finite-type morphism of separated finite-type `k`-schemes and
 `K ∈ Dᵇc(X, Λ)`, at the integral stage `Λ = 𝒪_E`, `I = (ϖ)`. Then `Rf_! K ∈ Dᵇc(Y, Λ)`, the
@@ -121,7 +121,7 @@ variable (I) in
 /-- The compact-support direct image `Rf_! : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` at the integral stage, the
 restriction of `Rf_!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`,
-blueprint `lem-coef-integral-compact-support`). -/
+blueprint `lemma-change-coefficients-compact-support`). -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
     [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)

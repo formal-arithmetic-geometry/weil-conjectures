@@ -22,7 +22,7 @@ import WeilConjectures.SmoothPurity.Point.PointSectionsFinitenessIntegral
 /-!
 # Finiteness of sections over the algebraically closed coefficient point
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509,
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509,
 its finite, integral and rational evaluation assertions
 (blueprint: lem-weil-point-sections-finiteness).
 
@@ -48,7 +48,7 @@ namespace WeilConjectures
 sections of an integral constructible complex are bounded, finitely generated and derived
 complete; their termwise rationalization has bounded finite-dimensional cohomology.
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: lem-weil-point-sections-finiteness).
 
 Proof (the six steps of the node):

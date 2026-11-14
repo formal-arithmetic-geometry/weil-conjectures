@@ -127,7 +127,7 @@ Proof (Stacks Tag 07RY, following the ten steps of the blueprint node):
    fibre of `W` at the chosen point is empty (
    `lem-weil-pbc-finite-locally-free-degree-locally-constant`,
    `lem-weil-pbc-open-preimage-fibre-product`,
-   `lem-weil-pbc-etale-composition-cancellation`, `lem-weil-pbc-fibre-degree-base-change`).
+   `definition-torsion-sheaves--3`, `lem-weil-pbc-fibre-degree-base-change`).
 5. Additivity of degrees on the disjoint open parts and the bound `m` force every fibre of
    `W` to be empty. Thus `W` is empty and the image of the neighbourhood is in the degree-`m`
    locus. Étale maps are open, so this locus is open (`lem-weil-pbc-etale-morphism-open-map`).

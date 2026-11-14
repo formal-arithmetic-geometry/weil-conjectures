@@ -28,10 +28,10 @@ the *base change morphism* `π^* Rg_* ⟶ Rg'_* π'^*` of Weil complexes
 `g'^* π^* ≅ (g' ≫ π)^* = (π' ≫ g)^* ≅ π'^* g^*` under the adjunctions `g^* ⊣ Rg_*` and
 `g'^* ⊣ Rg'_*`.
 
-The smooth base change theorem (blueprint `sbc-thm-smooth-base-change`, in its Weil form) says
-that it is an isomorphism when the square is cartesian, `π` is smooth and `g` is separated
-(`AlgebraicGeometry.WeilComplex.isIso_baseChange_of_smooth`). The base change morphism lies over
-the native derived base-change mate of pro-étale Weil sheaves
+The smooth base change theorem (blueprint `theorem-smooth-base-change-classical-torsion--1`, in its
+Weil form) says that it is an isomorphism when the square is cartesian, `π` is smooth and `g` is
+separated (`AlgebraicGeometry.WeilComplex.isIso_baseChange_of_smooth`). The base change morphism
+lies over the native derived base-change mate of pro-étale Weil sheaves
 (`AlgebraicGeometry.WeilComplex.ι_map_baseChange_app`); forgetting the Weil structure, this is
 the geometric native smooth base change theorem
 (`AlgebraicGeometry.NativeBaseChange.geometric_smooth_baseChange_isIso`).
@@ -200,13 +200,13 @@ theorem ι_map_baseChange_app (h : g' ≫ π = π' ≫ g) (M : WeilComplex k₀ 
     Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id, Functor.comp_map,
     Functor.map_comp, ι_map_derivedLowerStar_map, ι_map_upperStar_map,
     ι_map_upperStarDerivedLowerStarAdjunction_unit_app,
-    ι_map_upperStarDerivedLowerStarAdjunction_counit_app, TwoSquare.natTrans,
+    ι_map_upperStarDerivedLowerStarAdjunction_counit_app,
     ι_map_upperStarCompUpperStarIso_hom_app]
   rfl
 
-/-- Blueprint `sbc-thm-smooth-base-change` (Weil form): **smooth base change for Weil
-complexes**. For a cartesian square of `k₀`-schemes `g' ≫ π = π' ≫ g` with `π` smooth and `g`
-separated, quasi-compact and of finite type, the base change morphism `π^* Rg_* ⟶ Rg'_* π'^*` of
+/-- Blueprint `theorem-smooth-base-change-classical-torsion--1` (Weil form): **smooth base change
+for Weil complexes**. For a cartesian square of `k₀`-schemes `g' ≫ π = π' ≫ g` with `π` smooth and
+`g` separated, quasi-compact and of finite type, the base change morphism `π^* Rg_* ⟶ Rg'_* π'^*` of
 Weil complexes is an isomorphism.
 
 Its component at a Weil complex `M` lies over the native derived base-change mate of the

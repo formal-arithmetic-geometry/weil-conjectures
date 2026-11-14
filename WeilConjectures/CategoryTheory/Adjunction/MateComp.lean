@@ -46,8 +46,9 @@ lemma Adjunction.homEquiv_comp_mateEquiv {CC CD CP CQ : Type*} [Category CC] [Ca
   simp only [Functor.map_comp, Category.assoc, Adjunction.homEquiv_counit]
   rw [hε, reassoc_of% hc, reassoc_of% hn]
 
-/-- Assembly of the transport along `g` (blueprint `thm-trf-trace-proper-compatibility`,
-Step 3) from the adjunction description of `T ≫ ζ` and the exchange of the supports. -/
+/-- Assembly of the transport along `g` (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3) from the adjunction description of
+`T ≫ ζ` and the exchange of the supports. -/
 lemma Adjunction.homEquiv_comp_mateEquiv_of_eq {CC CD CP CQ : Type*} [Category CC]
     [Category CD] [Category CP] [Category CQ] {L₁ : CC ⥤ CP} {R₁ : CP ⥤ CC} {L₂ : CD ⥤ CQ}
     {R₂ : CQ ⥤ CD} {G : CC ⥤ CD} {H : CP ⥤ CQ} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)

@@ -51,7 +51,7 @@ Proof:
 4. The W_ia cover S etale locally. Their sections agree on overlaps: their
    agreement open pulls back to the whole overlap under each T_k, hence is the
    whole overlap by joint surjectivity. The sheaf axiom of
-   def-weil-pbc-etale-sheaf-of-sets glues them to s. Local agreement gives the
+   situation-conventions glues them to s. Local agreement gives the
    prescribed pullbacks. The agreement open of two such s contains the images
    of every T_i, hence is S, proving uniqueness. Specialize to a singleton. -/
 theorem existsUnique_etaleSection_of_fpqc_cover

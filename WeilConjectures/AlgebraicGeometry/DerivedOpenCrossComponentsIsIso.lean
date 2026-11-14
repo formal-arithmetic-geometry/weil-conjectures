@@ -30,7 +30,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
 -- Threefold transported overlap restrictions require additional instance search.
 -- Transported threefold restrictions require the same instance budget as the parent theorem.
 /-- The adjoint overlap counits are invertible on the opposite open. This concerns

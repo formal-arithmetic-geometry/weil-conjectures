@@ -19,7 +19,7 @@ sheaves, and the pullbacks along the members of a jointly surjective family of �
 isomorphisms of sheaves.
 
 The localization of the exceptional inverse image along étale maps, `Lu^* Rf^! ≅ R(u ≫ f)^!`
-(blueprint `lem-amb-etale-adjoint-locality`), is in
+(blueprint `lemma-affine-space-etale-localization--4`), is in
 `WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalizationUpperShriek`.
 
 ## Main statements

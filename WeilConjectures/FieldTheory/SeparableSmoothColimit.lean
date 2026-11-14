@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 # Separable extensions as colimits of smooth subalgebras
 
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
-(blueprint: lem-kun-separable-smooth-colimit).
+(blueprint: corollary-open-direct-image-over-field--2).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace FieldTheory
 
 /-- The inclusion diagram of finitely generated smooth subalgebras of a field extension.
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
-(blueprint: lem-kun-separable-smooth-colimit). -/
+(blueprint: corollary-open-direct-image-over-field--2). -/
 def smoothSubalgebraDiagram (K : Type u) (L : Type v) [Field K] [Field L]
     [Algebra K L] :
     {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} ⥤ CommRingCat :=
@@ -42,7 +42,7 @@ def smoothSubalgebraDiagram (K : Type u) (L : Type v) [Field K] [Field L]
 
 /-- The cocone from smooth subalgebras to their ambient field, with inclusion maps.
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
-(blueprint: lem-kun-separable-smooth-colimit). -/
+(blueprint: corollary-open-direct-image-over-field--2). -/
 def smoothSubalgebraCocone (K : Type u) (L : Type v) [Field K] [Field L]
     [Algebra K L] : Cocone (smoothSubalgebraDiagram K L) :=
   { pt := CommRingCat.of L
@@ -74,7 +74,7 @@ Its canonical cocone of inclusions is a colimit, and its image under `Spec` is a
 affine smooth `K`-schemes with affine transition maps.
 
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
-(blueprint: lem-kun-separable-smooth-colimit). For each finitely generated subextension of
+(blueprint: corollary-open-direct-image-over-field--2). For each finitely generated subextension of
 `L/K`, apply `fg_separable_extension_is_filtered_colimit_smooth`. Every finite subset of `L`
 lies in one of the resulting smooth subalgebras; applying this to generators of two such
 subalgebras proves directedness. The union is the ring colimit. The `Spec` functor sends its

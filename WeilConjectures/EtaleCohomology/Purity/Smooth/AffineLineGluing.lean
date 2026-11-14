@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
 # Gluing comparisons along the affine line
 
-The inputs of the gluing half of blueprint `prop-pur-a1-invariance`
+The inputs of the gluing half of blueprint `lemma-section-normal-bundle--1`
 (`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`):
 
 * the unit section of `𝔸¹_S` is a closed immersion meeting every fibre, and the affine line
@@ -278,7 +278,6 @@ theorem conj_leftDerivedUpperStar_section_eq {B B' P P' : Scheme.{u}}
   rw [reassoc_of% H'']
   simp [Functor.map_comp]
 
-set_option maxHeartbeats 1000000 in
 -- the comparison manipulates long composites of derived pullback isomorphisms
 /-- **Agreement on overlaps.** Let `a : P ⟶ B` with section `i`, `a' : P' ⟶ B'` with section
 `i'`, and `w : P' ⟶ P` over `v : B' ⟶ B` carrying `i'` to `i`; let `r₁, r₂ : P'' ⟶ P'` lie over

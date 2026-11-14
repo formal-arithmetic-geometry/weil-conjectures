@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedTowe
 
 /-! # Projection-normalized completed reduction adjunction
 
-Source: latest blueprint, sec-smooth-purity, sk-lem-sp-tower-equivalence.proof.md.
+Source: latest blueprint, chap-Smooth-purity, sk-lem-sp-tower-equivalence.proof.md.
 (blueprint: lem-sp-completed-projection-adjunction).
 -/
 

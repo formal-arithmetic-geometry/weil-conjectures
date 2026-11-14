@@ -13,7 +13,7 @@ public import WeilConjectures.WeilSheaf.StrictWeilComplex
 /-!
 # The functor from Weil complexes to strict Weil complexes is not faithful
 
-Blueprint `sk-def-sf-weil-complexes` (complement): the functor
+Blueprint `definition-weil-structure` (complement): the functor
 `AlgebraicGeometry.WeilComplex.toStrictWeilComplex`, `K ↦ (For(K), θ_K)`, from Weil complexes to
 strict Weil complexes is not faithful. On the point `Spec k₀`, whose geometric fiber is
 `Spec k̄`, the Jordan block `J = ℚ̄_ℓ ⊕ ℚ̄_ℓ` with Frobenius `[[1, 1], [0, 1]]` is a nonsplit
@@ -197,9 +197,9 @@ noncomputable def adicGlobalSectionsFrobeniusIso :
       WeilSheaf.frobeniusPullback k₀ l X ⋙ adicGlobalSections k₀ l X :=
   NatIso.ofComponents
     (fun M ↦ ((globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app M.X).symm)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app M.X).symm)
     (fun f ↦ (globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality f.hom)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality f.hom)
 
 section Connected
 
@@ -322,7 +322,7 @@ theorem exists_ne_zero_forget_map_eq_zero
       ProEtaleWeilSheaf.not_isSplitEpi_jordanBlockSnd_adicConstant (congrArg (·.hom) h),
     ProEtaleWeilSheaf.map_jordanδ _⟩
 
-/-- Blueprint `sk-def-sf-weil-complexes` (complement): on a `k₀`-scheme with connected geometric
+/-- Blueprint `definition-weil-structure` (complement): on a `k₀`-scheme with connected geometric
 fiber, the functor `K ↦ (For(K), θ_K)` from Weil complexes to strict Weil complexes is not
 faithful: the class of the nonsplit Jordan block extension of `ℚ̄_ℓ` by `ℚ̄_ℓ` is a nonzero
 morphism `ℚ̄_ℓ ⟶ ℚ̄_ℓ[1]` of Weil complexes, which becomes zero after forgetting the Weil
@@ -343,7 +343,7 @@ instance : ConnectedSpace
     inferInstanceAs (ConnectedSpace (Spec (CommRingCat.of (AlgebraicClosure k₀))))
   (WeilSheaf.geometricFiberSpecIso k₀).hom.homeomorph.connectedSpace_iff.1 this
 
-/-- Blueprint `sk-def-sf-weil-complexes` (complement): on the point `Spec k₀`, whose geometric
+/-- Blueprint `definition-weil-structure` (complement): on the point `Spec k₀`, whose geometric
 fiber is `Spec k̄`, the functor from Weil complexes to strict Weil complexes is not faithful. -/
 theorem not_faithful_toStrictWeilComplex_spec :
     ¬ (toStrictWeilComplex (k₀ := k₀) (l := l) (X := Spec (CommRingCat.of k₀))).Faithful :=

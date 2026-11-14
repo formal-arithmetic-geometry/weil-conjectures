@@ -150,13 +150,13 @@ namespace WeilComplexTwoColimit
 
 variable [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` is
+/-- Blueprint `definition-weil-structure`: `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` is
 a pretriangulated category, the distinguished triangles being the triangles isomorphic to the
 images of distinguished triangles of a finite stage `D^b_{c,W}(X, E)`. -/
 noncomputable instance pretriangulated : Pretriangulated (WeilComplexTwoColimit k₀ l X) :=
   StageSystem.PairCategory.pretriangulated (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: `D^b_{c,W}(X, ℚ̄_ℓ)` is a triangulated category. -/
+/-- Blueprint `definition-weil-structure`: `D^b_{c,W}(X, ℚ̄_ℓ)` is a triangulated category. -/
 instance isTriangulated : IsTriangulated (WeilComplexTwoColimit k₀ l X) :=
   StageSystem.PairCategory.isTriangulated (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 

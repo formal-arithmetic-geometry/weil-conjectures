@@ -131,14 +131,14 @@ sheaf has two distinct global sections whose restrictions agree. Use
 X-schemes U_j and maps V_j to U_j over X, with V_j covering Z. Use
 `lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`,
 `lem-weil-pbc-site-sheafification-sections-local`,
-`lem-weil-pbc-presheaf-pullback-sets-left-exact`,
-`lem-weil-pbc-etale-base-change-finite-limits`, and
+`situation-conventions`,
+`situation-conventions`, and
 `lem-weil-pbc-filtered-colimit-sets-elementwise`.
 4. Shrink U_j to make V_j surjective over U_j times Z. This uses openness of etale
 morphisms and the subspace topology of a closed immersion. The sheaf condition then
 gives equality of t with the pullback of s_j on all of U_j times Z. Use
-`lem-weil-pbc-etale-composition-cancellation`, `lem-weil-pbc-etale-morphism-open-map`,
-and `def-weil-pbc-etale-sheaf-of-sets`.
+`definition-torsion-sheaves--3`, `lem-weil-pbc-etale-morphism-open-map`,
+and `situation-conventions`.
 5. The union of the images of U_j is open and contains Z, so its closed complement
 is empty by step 2. Thus their disjoint union covers X; use
 `lem-weil-pbc-etale-local-on-source`.

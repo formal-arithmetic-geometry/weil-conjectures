@@ -24,7 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The signed completed tensor shift square for every representative-normalized datum.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Step 5; Stacks 011G, 07A4, 0941
+Source: blueprint theorem-poincare-duality-frobenius--2, Step 5; Stacks 011G, 07A4, 0941
 (blueprint: lem-pod-normalized-tensor-signed-shifts).
 
 Proof: take the signed total-tensor shift on flat-term K-flat complexes. Its first

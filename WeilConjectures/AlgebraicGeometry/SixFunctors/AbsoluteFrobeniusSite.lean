@@ -34,7 +34,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 Source: the main-20261015 blueprint, six-functors-basics,
 `sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site`, and Stacks Tag 0F6W
-(blueprint: lem-trf-absolute-frobenius-site).
+(blueprint: lemma-scheme-frobenius-geometric-frobenius--1).
 
 All constant commutative coefficient rings are allowed. The module adjunction unit,
 evaluated on every section, fixes the trivialization; its derived version is exact

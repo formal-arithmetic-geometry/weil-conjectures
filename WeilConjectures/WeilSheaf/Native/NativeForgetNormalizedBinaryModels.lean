@@ -84,13 +84,198 @@ private theorem map_normalization
   simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.comp_obj,
     Category.comp_id, ← F.map_comp, h]
 
+-- Forgetting a signed exchange uses only additivity and the summand equation.
+private theorem forgotten_flip_summand
+    {A B : Type a} [Category.{b} A] [Category.{b} B]
+    [Abelian A] [HasCountableCoproducts A] [Preadditive B]
+    (U : A ⥤ B) [U.Additive] (F : A ⥤ A ⥤ A)
+    [F.Additive] [∀ A, (F.obj A).Additive]
+    (P T : CochainComplex A ℤ) {Z : CochainComplex B ℤ}
+    (c : (U.mapHomologicalComplex (.up ℤ)).obj
+      (CochainComplex.mapBifunctor T P F) ⟶ Z)
+    (p q n : ℤ) (hpq : p + q = n)
+    (x : U.obj ((F.obj (T.X q)).obj (P.X p)) ⟶ Z.X n)
+    (hc : U.map (HomologicalComplex.ιMapBifunctor T P F (.up ℤ) q p n
+      (by change q + p = n; omega)) ≫ c.f n = x) :
+    U.map (HomologicalComplex.ιMapBifunctor P T F.flip (.up ℤ) p q n hpq) ≫
+      ((U.mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).hom ≫ c).f n =
+      (q * p).negOnePow • x := by
+  dsimp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+  rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
+  simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp, hc]
+  rfl
+
+private theorem signed_summand_comp
+    {C : Type a} [Category.{b} C] [Preadditive C] {A B D E G : C}
+    (π : A ⟶ B) (i : B ⟶ D) (v : D ⟶ E) (κ : E ⟶ G)
+    (j : B ⟶ E) (out : A ⟶ G) (s : ℤˣ) (hs : s * s = 1)
+    (hi : i ≫ v = s • j) (hκ : π ≫ j ≫ κ = s • out) :
+    π ≫ i ≫ v ≫ κ = out := by
+  rw [← Category.assoc i, hi]
+  have hk := congrArg (s • ·) hκ
+  simp only [smul_smul, hs, one_smul] at hk
+  simpa only [Units.smul_def, Preadditive.comp_zsmul, Preadditive.zsmul_comp] using hk
+
+private theorem signed_uncurry_summand
+    {C D : Type a} [Category.{b} C] [Category.{b} D] [Preadditive C] [Preadditive D]
+    (U : C ⥤ D) [U.Additive] {A B T : C} {B' : D}
+    (i : A ⟶ B) (v : U.obj B ⟶ B') (g : B ⟶ T)
+    (i' : U.obj A ⟶ B') (g' : B' ⟶ U.obj T)
+    (a : A ⟶ T) (a' : U.obj A ⟶ U.obj T) (s : ℤˣ)
+    (hi : U.map i ≫ v = s • i') (hg : i ≫ g = s • a)
+    (hg' : i' ≫ g' = a') (hu : U.map a = a') :
+    U.map i ≫ U.map g = U.map i ≫ v ≫ g' := by
+  rw [← Category.assoc, hi, Linear.units_smul_comp, hg',
+    ← U.map_comp, hg, Functor.map_units_smul, hu]
+
+-- Paste the representative square before specializing to derived categories.
+private theorem representative_hom_square
+    {B D E : Type a} [Category.{b} B] [Category.{b} D] [Category.{b} E]
+    (Q : B ⥤ D) (V : B ⥤ E) (F : D ⥤ E) (δ : Q ⋙ F ≅ V)
+    (H : Eᵒᵖ × E ⥤ E) (P T I J : B) {A : D} {J' : E}
+    (e : A ≅ Q.obj J) (e' : H.obj (op (V.obj T), V.obj I) ≅ J')
+    (c : V.obj J ⟶ J')
+    (x : F.obj A ⟶ H.obj (op (F.obj (Q.obj T)), F.obj (Q.obj I)))
+    (hs : x ≫ H.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)) ≫ e'.hom =
+      F.map e.hom ≫ δ.hom.app J ≫ c) (φ : P ⟶ J) :
+    F.map (Q.map φ ≫ e.inv) ≫ x = δ.hom.app P ≫
+      (V.map φ ≫ c ≫ e'.inv) ≫ H.map (Prod.mkHom (δ.hom.app T).op (δ.inv.app I)) := by
+  have hm := TensorEvaluationFormal.remove_model_natural Q V F δ e e' c
+    (x ≫ H.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)))
+    (by simpa only [Category.assoc] using hs) φ
+  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using
+    TensorEvaluationFormal.invert_hom_square H (δ.app T) (δ.app I)
+      (F.map (Q.map φ ≫ e.inv) ≫ x) (δ.hom.app P ≫ V.map φ ≫ c ≫ e'.inv)
+      (by simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using hm)
+
+-- The cancellation argument only uses the normalization squares and an adjunction.
+private theorem normalized_model_forget
+    {B D E : Type a} [Category.{b} B] [Category.{b} D] [Category.{b} E]
+    {H : Eᵒᵖ × E ⥤ E} (T S : WeilConjectures.CoefficientClosedStructure H)
+    (Q : B ⥤ D) (V : B ⥤ E) (F : D ⥤ E) (δ : Q ⋙ F ≅ V)
+    (P K I N : B) {A : D} {Z : E}
+    (t : F.obj A ≅ T.tensor.obj (F.obj (Q.obj P), F.obj (Q.obj K)))
+    (m : A ⟶ Q.obj N) (j : N ⟶ I) (f : A ⟶ Q.obj I)
+    (v : V.obj N ⟶ Z) (ψ : Z ⟶ V.obj I) [Mono ψ]
+    (model : S.tensor.obj (V.obj P, V.obj K) ⟶ Z)
+    (f' : V.obj P ⟶ H.obj (op (V.obj K), V.obj I))
+    (hloc : m ≫ Q.map j = f)
+    (hloc' : model ≫ ψ = (S.transpose (V.obj P) (V.obj K) (V.obj I)).symm f')
+    (hchain : V.map j = v ≫ ψ)
+    (hunc : (T.transpose (F.obj (Q.obj P)) (F.obj (Q.obj K))
+        (F.obj (Q.obj I))).symm
+          (δ.hom.app P ≫ f' ≫ H.map (Prod.mkHom (δ.hom.app K).op (δ.inv.app I))) =
+        t.inv ≫ F.map f) :
+    F.map m ≫ δ.hom.app N ≫ v = t.hom ≫
+      (nativeOrdinaryClosedTensorIso T S).hom.app (F.obj (Q.obj P), F.obj (Q.obj K)) ≫
+        S.tensor.map (Prod.mkHom (δ.hom.app P) (δ.hom.app K)) ≫ model := by
+  apply (cancel_mono ψ).mp
+  apply (cancel_mono (δ.inv.app I)).mp
+  simp only [Category.assoc]
+  have hleft : F.map m ≫ δ.hom.app N ≫ v ≫ ψ ≫ δ.inv.app I = F.map f := by
+    rw [← Category.assoc v, ← hchain]
+    exact map_normalization Q F V δ m j f hloc
+  rw [hleft]
+  have hun := congrArg (t.hom ≫ ·) hunc
+  simp only [Iso.hom_inv_id_assoc] at hun
+  rw [← hun, ← closedTensorIso_uncurry T S]
+  rw [TensorEvaluationFormal.uncurry_transport S, ← hloc']
+  simp only [Category.assoc]
+
+-- Prove the signed inverse-transposition identity with abstract categories, so
+-- the summand rewrites do not reduce the native sheaf and localization instances.
+private theorem signed_normalization_uncurry
+    {A : Type a} [Category.{b} A] [Abelian A]
+    [HasCountableProducts A] [HasCountableCoproducts A]
+    {F : A ⥤ A ⥤ A} {H : Aᵒᵖ ⥤ A ⥤ A}
+    [F.Additive] [∀ A, (F.obj A).Additive]
+    [F.flip.Additive] [∀ A, (F.flip.obj A).Additive]
+    [H.Additive] [∀ A, (H.obj A).Additive]
+    (adj : F ⊣₂ H) (P T I : CochainComplex A ℤ)
+    (j ψ : CochainComplex.mapBifunctor P T F.flip ⟶ I)
+    (hψ : ∀ (p q n : ℤ) (hpq : p + q = n),
+      HomologicalComplex.ιMapBifunctor P T F.flip (.up ℤ) p q n hpq ≫ ψ.f n =
+        (p * q).negOnePow • ((F.obj (T.X q)).map
+          ((DerivedNativeTensorProof.internalHomEquiv adj T I P
+            ((HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).inv ≫ j)).f p ≫
+              CochainComplex.bifunctorHomπ H T I p q n (by omega)) ≫
+                (adj.adj (T.X q)).counit.app (I.X n))) : ψ = j := by
+  let θ := (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).inv ≫ j
+  have hθ : (HomologicalComplex.mapBifunctorFlipIso T P F (.up ℤ)).hom ≫ θ = j := by
+    simp [θ]
+  rw [← hθ]
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  change p + q = n at hpq
+  have hqp : q + p = n := by omega
+  have hu := DerivedNativeTensorProof.internalHomEquiv_f_π adj θ p q n hqp
+  have hv := congrArg ((adj.adj (T.X q)).homEquiv (P.X p) (I.X n)).symm hu
+  simp only [DerivedNativeTensorProof.curry, Adjunction.homAddEquiv_apply,
+    Equiv.symm_apply_apply] at hv
+  rw [hψ p q n hpq]
+  simp only [HomologicalComplex.comp_f, ← Category.assoc]
+  rw [HomologicalComplex.ι_mapBifunctorFlipIso_hom,
+    Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
+  change (p * q).negOnePow • _ = (q * p).negOnePow • _
+  rw [mul_comm q p]
+
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 5000000 in
+-- Apply the signed normalization once to an arbitrary map into a K-injective complex.
+private theorem native_normalized_uncurry_map
+    (P T I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+    (hP : NativeIsKFlat k₀ l X P) (hT : NativeIsKFlat k₀ l X T) (hI : I.IsKInjective)
+    (j : ((nativeTensorTotal k₀ l X).obj P).obj T ⟶ I) :
+    ∃ φ : P ⟶ CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) T I,
+      (∀ (p q n : ℤ) (hpq : p + q = n),
+        HomologicalComplex.ιMapBifunctor P T (nativeTensorBifunctor k₀ l X).flip
+          (.up ℤ) p q n hpq ≫ j.f n =
+          (p * q).negOnePow • (((nativeTensorBifunctor k₀ l X).obj (T.X q)).map
+            (φ.f p ≫ CochainComplex.bifunctorHomπ (ihomBifunctor k₀ l X)
+              T I p q n (by omega)) ≫
+                (tensorIhomAdjunction k₀ l X (T.X q)).counit.app (I.X n))) ∧
+      (nativeOpenTensorModel k₀ l X P T hP hT).hom ≫ DerivedCategory.Q.map j =
+        ((nativeDerivedClosedComparison k₀ l X).weilClosed.transpose
+          (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) (DerivedCategory.Q.obj I)).symm
+          (DerivedCategory.Q.map φ ≫
+            ((nativeDerivedClosedComparison k₀ l X).homModels.weilRepresentatives.model
+              T I hI).inv) := by
+  classical
+  let : (nativeTensorBifunctor k₀ l X).Additive := by
+    constructor
+    intro A B f g
+    apply NatTrans.ext
+    funext Q
+    exact ((nativeTensorBifunctor k₀ l X).flip.obj Q).map_add
+  let : ∀ P : ProEtaleWeilSheaf k₀ l X,
+      ((nativeTensorBifunctor k₀ l X).obj P).Additive := by
+    intro P
+    exact (tensorIhomAdjunction k₀ l X P).left_adjoint_additive
+  let a : nativeTensorBifunctor k₀ l X ⊣₂ ihomBifunctor k₀ l X :=
+    { adj := tensorIhomAdjunction k₀ l X
+      unit_whiskerRight_map := by
+        intro A B f
+        apply NatTrans.ext
+        funext Q
+        exact (unit_conjugateEquiv_symm (tensorIhomAdjunction k₀ l X B)
+          (tensorIhomAdjunction k₀ l X A)
+          ((ihomBifunctor k₀ l X).map f.op) Q).symm }
+  let θ := (HomologicalComplex.mapBifunctorFlipIso T P
+    (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
+  let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
+  obtain ⟨ψ, hψ, hloc⟩ := (native_normalized_tensor_models k₀ l X).choose_spec.2
+    P T I hP hT hI φ
+  have hψj : ψ = j := signed_normalization_uncurry a P T I j ψ hψ
+  subst ψ
+  exact ⟨φ, hψ, hloc⟩
+
 -- The fixed representative squares involve several nested localization functors.
 /-- The fixed native tensor model forgets to the canonical ordinary localization tensorator.
 The first conjunct specifies the canonical total comparison on all balanced summands;
@@ -104,7 +289,7 @@ Proof:
 1. The native category is Grothendieck abelian by
 lem-sf-native-weil-constructible-abelian. Its countable products exist by
 lem-coef-grothendieck-small-limits. Choose a K-injective resolution j of the actual
-native total using lem-sfb-grothendieck-k-injective. Both forgotten inputs are K-flat
+native total using prose-03-02. Both forgotten inputs are K-flat
 by lem-sf-native-two-sided-kflat-forget, without any termwise-flatness hypothesis.
 2. The parametrized adjunction in def-sf-native-derived-tensor-layer and the chain-map
 bijection of lem-sf-kflat-bifunctor-kinjective-currying curry j into the fixed product
@@ -121,7 +306,7 @@ The underived adjunction agrees under forgetting by lem-sf-native-weil-underived
 fixed nativeDerivedClosedComparison, which is Compatible by native_closed_forgetful.
 Its product projections identify forgotten currying with ordinary currying, and its
 representative square identifies the corresponding localized Hom arrows. The exact
-factors of lem-weil-pbc-exact-functor-derived-factorization supply their naturality.
+factors of situation-conventions supply their naturality.
 5. Unsigned NativeAdjunctionNormalization in d.models supplies the ordinary uncurry
 psi on O. On each left-first (p,q) summand, both u(j) and v followed by psi have the
 same sign (-1)^(pq). The Hom projections and the underlying counits agree, so the
@@ -189,15 +374,21 @@ theorem native_forget_normalized_binary_models
       ((nativeTensorBifunctor k₀ l X).obj P).Additive := by
     intro P
     exact (tensorIhomAdjunction k₀ l X P).left_adjoint_additive
-  obtain ⟨chain, hchain⟩ := native_weil_tensor_chain k₀ l X
+  have hchains := native_weil_tensor_chain k₀ l X
     (nativeTensorBifunctor k₀ l X) (tensorBifunctorForget k₀ l X)
+  let chain := hchains.choose
+  have hchain := hchains.choose_spec
   rcases d with ⟨⟨m, adjO, evO⟩, βO, hm, hmodels⟩
   dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hm
   subst m
   let S : WeilConjectures.CoefficientClosedStructure
       (nativeDerivedClosedComparison k₀ l X).homModels.ordinaryHom :=
     ⟨inferInstance, adjO, evO⟩
-  obtain ⟨model, swap, hnorm, hswap, hbraid, κ, hκ, hmodel⟩ := hmodels
+  let model := hmodels.choose
+  have hnorm := hmodels.choose_spec.choose_spec.1
+  let κ := hmodels.choose_spec.choose_spec.2.2.2.choose
+  have hκ := hmodels.choose_spec.choose_spec.2.2.2.choose_spec.1
+  have hmodel := hmodels.choose_spec.choose_spec.2.2.2.choose_spec.2
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)
   let flip : V.obj (((nativeTensorTotal k₀ l X).obj P).obj T) ≅
@@ -214,30 +405,22 @@ theorem native_forget_normalized_binary_models
         (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
           (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
           (.up ℤ) q p n hqp := by
-      simp only [V, flip, nativeOpenTensorInsertion, Iso.trans_hom,
-        HomologicalComplex.comp_f, Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
-      rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
-      simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
-      rw [hchain T P q p n hqp]
-      rfl
-    have hk := hκ (V.obj T) (V.obj P) q p n hqp hpq
-    have hc : Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
-        (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-          (flip ≪≫ chain T P).hom.f n).hom ≫
-        ((κ (V.obj T) (V.obj P)).hom.f n).hom =
-          Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
-            (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom := by
-      change Mod.tensorπ ((V.obj P).X p) ((V.obj T).X q) ≫
-          (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-            (flip ≪≫ chain T P).hom.f n).hom ≫
-          ((κ (V.obj T) (V.obj P)).hom.f n).hom =
-        Mod.tensorObjπ ((V.obj P).X p) ((V.obj T).X q) ≫
-          (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom
-      rw [hv]
-      have hk' := congrArg (fun z ↦ (q * p).negOnePow • z) hk
-      simp only [smul_smul, Int.units_mul_self, one_smul] at hk'
-      simpa only [Units.smul_def, Mod.zsmul_hom, Preadditive.zsmul_comp,
-        Preadditive.comp_zsmul, Category.assoc] using hk'
+      apply forgotten_flip_summand U (nativeTensorBifunctor k₀ l X)
+        P T (chain T P).hom p q n hpq
+      exact (hchain T P q p n hqp).trans (Category.id_comp _)
+    have hc := signed_summand_comp
+      (Mod.tensorπ (P.X p).carrier (T.X q).carrier)
+      (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq)).hom
+      ((flip ≪≫ chain T P).hom.f n).hom ((κ (V.obj T) (V.obj P)).hom.f n).hom
+      (HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
+        (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+        (.up ℤ) q p n hqp).hom
+      (Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
+        (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom)
+      (q * p).negOnePow (Int.units_mul_self _)
+      (by simpa only [Mod.comp_hom', Units.smul_def, Mod.zsmul_hom] using
+        congrArg (fun z ↦ z.hom) hv)
+      (hκ (V.obj T) (V.obj P) q p n hqp hpq)
     simpa only [c, Iso.trans_hom, HomologicalComplex.comp_f, Mod.comp_hom',
       Category.assoc] using hc
   · let C := nativeDerivedClosedComparison k₀ l X
@@ -247,50 +430,29 @@ theorem native_forget_normalized_binary_models
     have hC : C.Compatible := by
       unfold C nativeDerivedClosedComparison
       exact (native_closed_forgetful k₀ l X).2.2.2.2.choose_spec
-    let a : nativeTensorBifunctor k₀ l X ⊣₂ ihomBifunctor k₀ l X :=
-      { adj := tensorIhomAdjunction k₀ l X
-        unit_whiskerRight_map := by
-          intro A B f
-          apply NatTrans.ext
-          funext Q
-          exact (unit_conjugateEquiv_symm (tensorIhomAdjunction k₀ l X B)
-            (tensorIhomAdjunction k₀ l X A)
-            ((ihomBifunctor k₀ l X).map f.op) Q).symm }
     let N := ((nativeTensorTotal k₀ l X).obj P).obj T
-    obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective N
-    let θ := (HomologicalComplex.mapBifunctorFlipIso T P
-      (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
-    let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
-    obtain ⟨ψ, hψ, hloc⟩ := (native_normalized_tensor_models k₀ l X).choose_spec.2
-      P T I hP hT hI φ
-    have hψj : ψ = j := by
-      have hθ : (HomologicalComplex.mapBifunctorFlipIso T P
-          (nativeTensorBifunctor k₀ l X) (.up ℤ)).hom ≫ θ = j := by
-        simp [θ]
-      rw [← hθ]
-      apply HomologicalComplex.hom_ext
-      intro n
-      apply HomologicalComplex.mapBifunctor.hom_ext
-      intro p q hpq
-      change p + q = n at hpq
-      have hqp : q + p = n := by omega
-      have hu := DerivedNativeTensorProof.internalHomEquiv_f_π a θ p q n hqp
-      have hv := congrArg ((a.adj (T.X q)).homEquiv (P.X p) (I.X n)).symm hu
-      simp only [DerivedNativeTensorProof.curry, Adjunction.homAddEquiv_apply,
-        Equiv.symm_apply_apply] at hv
-      rw [hψ p q n hpq]
-      simp only [HomologicalComplex.comp_f, ← Category.assoc]
-      rw [HomologicalComplex.ι_mapBifunctorFlipIso_hom,
-        Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
-      change (p * q).negOnePow • _ = (q * p).negOnePow • _
-      rw [mul_comm q p]
-    subst ψ
-    obtain ⟨hUI, χ, hχ, hs⟩ := native_hom_evaluation_square_all_sources k₀ l X
+    have hres := Abelian.HasKInjectiveResolutions.exists_isKInjective N
+    let I := hres.choose
+    have hI := hres.choose_spec.1
+    let j := hres.choose_spec.2.choose
+    have hj := hres.choose_spec.2.choose_spec.2
+    have hnormalized := native_normalized_uncurry_map k₀ l X P T I hP hT hI j
+    let φ := hnormalized.choose
+    have hψ := hnormalized.choose_spec.1
+    have hloc := hnormalized.choose_spec.2
+    have hsources := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
+    have hUI := hsources.choose
+    let χ := hsources.choose_spec.choose
+    have hχ := hsources.choose_spec.choose_spec.1
+    have hs := hsources.choose_spec.choose_spec.2
     let φ' := V.map φ ≫ χ.hom
     have hUP := native_two_sided_kflat_forget k₀ l X P hP
     have hUT := native_two_sided_kflat_forget k₀ l X T hT
-    obtain ⟨ψ', hψ', hloc'⟩ := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
+    have hnormalized' := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
+    let ψ' := hnormalized'.choose
+    have hψ' := hnormalized'.choose_spec.1
+    have hloc' := hnormalized'.choose_spec.2
     let v := flip ≪≫ chain T P
     have hchain' : V.map j = v.hom ≫ ψ' := by
       apply HomologicalComplex.hom_ext
@@ -307,21 +469,21 @@ theorem native_forget_normalized_binary_models
           (q * p).negOnePow • HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
             (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
             (.up ℤ) q p n hqp := by
-        simp only [V, v, flip, Iso.trans_hom, HomologicalComplex.comp_f,
-          Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f]
-        rw [← U.map_comp_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
-        simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp]
-        rw [hchain T P q p n hqp]
-        rfl
+        apply forgotten_flip_summand U (nativeTensorBifunctor k₀ l X)
+          P T (chain T P).hom p q n hpq
+        exact (hchain T P q p n hqp).trans (Category.id_comp _)
       simp only [HomologicalComplex.comp_f]
-      rw [← Category.assoc, hi, Linear.units_smul_comp, hψ' q p n hqp]
-      rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
-      change (p * q).negOnePow • _ = (q * p).negOnePow • _
-      rw [mul_comm q p]
-      congr 1
-      dsimp only [φ', HomologicalComplex.comp_f]
-      rw [Category.assoc, hχ p q n hqp]
-      rfl
+      refine signed_uncurry_summand U _ _ _ _ _ _ _ (q * p).negOnePow hi
+        (by simpa only [mul_comm p q] using hψ p q n hpq) (hψ' q p n hqp) ?_
+      have hproj := (Category.assoc (U.map (φ.f p)) (χ.hom.f p)
+        (CochainComplex.bifunctorHomπ
+          (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+          (V.obj T) (V.obj I) p q n hqp)).trans
+        ((congrArg (U.map (φ.f p) ≫ ·) (hχ p q n hqp)).trans (U.map_comp _ _).symm)
+      exact (congrArg (fun z ↦
+        ((ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj
+          ((V.obj T).X q)).map z ≫
+            (Mod.ihomAdjunction ((V.obj T).X q)).counit.app ((V.obj I).X n)) hproj).symm
     let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model T I hI).inv
     let f' := DerivedCategory.Q.map φ' ≫
       (M.ordinaryRepresentatives.model (V.obj T) (V.obj I) hUI).inv
@@ -329,29 +491,21 @@ theorem native_forget_normalized_binary_models
           (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I) =
         δ.hom.app P ≫ f' ≫ M.ordinaryHom.map
           (Prod.mkHom (δ.hom.app T).op (δ.inv.app I)) := by
-      have hm := TensorEvaluationFormal.remove_model_natural DerivedCategory.Q
-        (V ⋙ DerivedCategory.Q) F δ (M.weilRepresentatives.model T I hI)
-        (M.ordinaryRepresentatives.model (V.obj T) (V.obj I) hUI)
-        (DerivedCategory.Q.map χ.hom)
-        (C.homComparison.hom.app (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I) ≫
-          M.ordinaryHom.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)))
-        (by simpa only [Category.assoc] using hs) φ
-      have hm' : F.map f ≫ C.homComparison.hom.app
-            (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I) ≫
-            M.ordinaryHom.map (Prod.mkHom (δ.inv.app T).op (δ.hom.app I)) =
-          δ.hom.app P ≫ f' := by
-        simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, f, f', φ'] using hm
-      simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using
-        TensorEvaluationFormal.invert_hom_square M.ordinaryHom (δ.app T) (δ.app I)
-        (F.map f ≫ C.homComparison.hom.app
-          (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I))
-        (δ.hom.app P ≫ f')
-        (by simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using hm')
+      simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, f, f', φ'] using
+        representative_hom_square DerivedCategory.Q (V ⋙ DerivedCategory.Q) F δ
+          M.ordinaryHom P T I _ (M.weilRepresentatives.model T I hI)
+          (M.ordinaryRepresentatives.model (V.obj T) (V.obj I) hUI)
+          (DerivedCategory.Q.map χ.hom)
+          (C.homComparison.hom.app (op (DerivedCategory.Q.obj T), DerivedCategory.Q.obj I))
+          hs φ
     have hunc := uncurry_comparison C.weilClosed C.ordinaryClosed F C.tensorComparison
       C.homComparison hC.1 (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T)
       (DerivedCategory.Q.obj I) f
     simp only [Iso.app_hom, Iso.app_inv] at hunc
-    rw [hf] at hunc
+    have hunc' := (congrArg
+      (C.ordinaryClosed.transpose (F.obj (DerivedCategory.Q.obj P))
+        (F.obj (DerivedCategory.Q.obj T)) (F.obj (DerivedCategory.Q.obj I))).symm hf).symm.trans
+      hunc
     let ρ := nativeOrdinaryClosedTensorIso C.ordinaryClosed S
     have hmodel' : (model (V.obj T) (V.obj P) hUT).hom ≫
         DerivedCategory.Q.map (κ (V.obj T) (V.obj P)).hom =
@@ -371,43 +525,14 @@ theorem native_forget_normalized_binary_models
         ρ.hom.app (F.obj (DerivedCategory.Q.obj P), F.obj (DerivedCategory.Q.obj T)) ≫
         S.tensor.map (Prod.mkHom (δ.hom.app P) (δ.hom.app T)) ≫
         (model (V.obj T) (V.obj P) hUT).hom := by
-      apply (cancel_mono (DerivedCategory.Q.map ψ')).mp
-      apply (cancel_mono (δ.inv.app I)).mp
-      simp only [Category.assoc]
-      have hleft : F.map (nativeOpenTensorModel k₀ l X P T hP hT).hom ≫
-          δ.hom.app N ≫ DerivedCategory.Q.map v.hom ≫
-          DerivedCategory.Q.map ψ' ≫ δ.inv.app I =
-          F.map ((C.weilClosed.transpose (DerivedCategory.Q.obj P)
-            (DerivedCategory.Q.obj T) (DerivedCategory.Q.obj I)).symm f) := by
-        rw [← DerivedCategory.Q.map_comp_assoc, ← hchain']
-        exact map_normalization DerivedCategory.Q F (V ⋙ DerivedCategory.Q) δ
-          (nativeOpenTensorModel k₀ l X P T hP hT).hom j
-          ((C.weilClosed.transpose (DerivedCategory.Q.obj P)
-            (DerivedCategory.Q.obj T) (DerivedCategory.Q.obj I)).symm f) hloc
-      rw [hleft]
-      have hun := congrArg
-        (C.tensorComparison.hom.app (DerivedCategory.Q.obj P,
-          DerivedCategory.Q.obj T) ≫ ·) hunc
-      simp only [Iso.hom_inv_id_app_assoc] at hun
-      rw [← hun]
-      have ht := TensorEvaluationFormal.uncurry_transport S
-        (δ.hom.app P) (δ.hom.app T) (δ.inv.app I) f'
-      have hcρ := closedTensorIso_uncurry C.ordinaryClosed S
-        (F.obj (DerivedCategory.Q.obj P)) (F.obj (DerivedCategory.Q.obj T))
-        (F.obj (DerivedCategory.Q.obj I))
-        (δ.hom.app P ≫ f' ≫ M.ordinaryHom.map
-          (Prod.mkHom (δ.hom.app T).op (δ.inv.app I)))
-      rw [← hcρ]
-      refine (congrArg (fun z ↦
-        C.tensorComparison.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
-          ρ.hom.app (F.obj (DerivedCategory.Q.obj P), F.obj (DerivedCategory.Q.obj T)) ≫ z)
-        ht).trans ?_
-      simpa only [Category.assoc, CategoryTheory.Functor.comp_obj, S, f', M, C, V]
-        using congrArg (fun z ↦
-        C.tensorComparison.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
-          ρ.hom.app (F.obj (DerivedCategory.Q.obj P), F.obj (DerivedCategory.Q.obj T)) ≫
-          S.tensor.map (Prod.mkHom (δ.hom.app P) (δ.hom.app T)) ≫ z ≫ δ.inv.app I)
-        hloc'.symm
+      exact normalized_model_forget C.ordinaryClosed S
+        DerivedCategory.Q (V ⋙ DerivedCategory.Q) F δ P T I N
+        (C.tensorComparison.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T))
+        (nativeOpenTensorModel k₀ l X P T hP hT).hom j _
+        (DerivedCategory.Q.map v.hom) (DerivedCategory.Q.map ψ')
+        (model (V.obj T) (V.obj P) hUT).hom f' hloc hloc'
+        (by simpa only [Functor.comp_map, Functor.map_comp] using
+          congrArg DerivedCategory.Q.map hchain') hunc'
     have hh := congrArg
       (fun z ↦ z ≫ DerivedCategory.Q.map (κ (V.obj T) (V.obj P)).hom) hmain
     simp only [Category.assoc, hmodel'] at hh

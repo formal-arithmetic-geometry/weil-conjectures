@@ -130,6 +130,7 @@ theorem traceOrZero_zero {V : C} : traceOrZero (0 : V ⟶ V) = 0 := by
   by_cases h : Nonempty (HasRightDual V)
   · let := h.some
     rw [traceOrZero_eq_trace]
+    apply End.ext
     simp [trace]
   · rw [traceOrZero, dite_eq_right h]
 
@@ -144,7 +145,8 @@ theorem traceOrZero_eq_sum_of_isBilimit [HasFiniteBiproducts C] {ι : Type*} [Fi
     traceOrZero T = ∑ i, traceOrZero (b.ι i ≫ T ≫ b.π i) := by
   obtain ⟨_⟩ := b.nonempty_hasRightDual_pt hb hV
   let := fun i ↦ (hV i).some
-  simp only [traceOrZero_eq_trace]
+  apply End.ext
+  simp only [End.sum_asHom, traceOrZero_eq_trace]
   conv_lhs => rw [← Category.comp_id T, ← Limits.IsBilimit.total hb, Preadditive.comp_sum,
     ← traceAddMonoidHom_apply, map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_

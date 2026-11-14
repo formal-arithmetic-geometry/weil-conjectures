@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunnethUnit
 # The Künneth map through the unit, and the evaluation against the exceptional Künneth adjoint
 
 Two identities for the exceptional Künneth part of identity (a) of the trace-class source
-exchange (blueprint `lem-trf-trace-source-exchange`, Step 3):
+exchange (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3):
 
 - `ProEtale.CondensedRing.prodLowerStarExternalProduct_comp_inv_app`: the Künneth map `Π_f` of
   `q = f × f`, read through `Rq_* ≅ Rq_!`, is the unit of `Lq^* ⊣ Rq_!` followed by `Rq_!` of the

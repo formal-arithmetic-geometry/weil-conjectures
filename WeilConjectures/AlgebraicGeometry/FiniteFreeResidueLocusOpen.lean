@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 
 /-! # Openness of the finite free residue locus
 
-Source: blueprint lem-pc-perfect-locus, proof steps 1--3.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof steps 1--3.
 (blueprint: lem-pc-finite-free-residue-locus-open)
 -/
 
@@ -47,7 +47,7 @@ private theorem exists_residue_rank_le {Y : Scheme.{u}}
 /-- The points where a bounded nonnegative finite free complex has residue cohomology
 concentrated in degree i with rank r form an open set.
 
-Source: blueprint lem-pc-perfect-locus, proof steps 1--3.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof steps 1--3.
 (blueprint: lem-pc-finite-free-residue-locus-open).
 
 Proof: choose bases of the finite free terms. At a field-valued point write β(q) for

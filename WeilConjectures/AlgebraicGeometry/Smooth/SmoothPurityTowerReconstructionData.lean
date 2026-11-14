@@ -75,7 +75,7 @@ import all WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTower
 /-!
 # Completed evaluations and the canonical tower reconstruction map
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 `sk-lem-sp-tower/_section.md`; Stacks Project, Tags 0940 and 099P
 (blueprint: def-sp-tower-reconstruction-data).
 

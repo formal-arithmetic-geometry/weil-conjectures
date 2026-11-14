@@ -14,7 +14,7 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 # Termwise derived pullback of a bounded-above flat complex
 
 Source: Stacks Project, Cohomology, Tags 06YD and 06YJ
-(blueprint: lem-pc-flat-complex-derived-pullback).
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2).
 -/
 
 @[expose] public section
@@ -36,14 +36,14 @@ has inverse exactly `ε` at `K`, rather than being an unrelated isomorphism.
 The localization `Qh` after the homotopy quotient represents complexes in the derived
 category; invertibility there expresses the quasi-isomorphism comparison of the node.
 Source: Stacks Project, Cohomology, Tags 06YD and 06YJ
-(blueprint: lem-pc-flat-complex-derived-pullback).
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2).
 
 Proof:
 1. By lem-pc-bounded-above-flat-kflat (Stacks 06YD), the bounded-above flat complex
    `K` is K-flat over the structure sheaf of `S`.
 2. Its identity is a K-flat resolution. The K-flat computation of
-   def-pc-derived-pullback (Stacks 06YJ) identifies the derived pullback of `K` with
-   the termwise tensor pullback of `K`. Its counit at `K` is therefore invertible.
+   lemma-coherent-base-change-invertible-sheaves--2 (Stacks 06YJ) identifies the derived pullback of
+   `K` with the termwise tensor pullback of `K`. Its counit at `K` is therefore invertible.
    Take its inverse to obtain the ordinary-to-derived comparison `e`; this is the
    canonical identification in the derived category, hence the quasi-isomorphism
    comparison in the node. -/

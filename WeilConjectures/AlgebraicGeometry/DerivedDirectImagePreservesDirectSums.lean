@@ -56,11 +56,11 @@ Proof (the three steps of the node):
    H⁰(Rf_*T) = H¹(Rf_*T) = 0, since T[-N-1] has no positive cohomology.
    Thus H⁰(Rf_*E) = H⁰(Rf_*τ≥(-N)E). Truncation commutes with direct sums,
    reducing all objects and their sum to the common lower bound -N.
-2. Apply `thm-sp-truncation-e2`: its natural E₂ page is Rᵖf_*Hᑫ(E). On each
+2. Apply `lemma-uniform-bound-proper-direct-image--1`: its natural E₂ page is Rᵖf_*Hᑫ(E). On each
    affine V in the target, f⁻¹V is qcqs. Use
    `lem-weil-pbc-qcqs-cohomology-direct-sum` there, then
    `lem-weil-pbc-higher-direct-image-presheaf` and
-   `lem-weil-pbc-module-sheaves-colimits-forgetful` to sheafify the comparison
+   `situation-conventions` to sheafify the comparison
    and obtain commutation of Rᵖf_* with the sum of the quasi-coherent Hᑫ(Eᵢ).
    Cohomology commutes with sums, so the E₂ pages agree. In total degree zero
    only 0 ≤ p ≤ N occurs; induction on the finite filtrations gives the H⁰

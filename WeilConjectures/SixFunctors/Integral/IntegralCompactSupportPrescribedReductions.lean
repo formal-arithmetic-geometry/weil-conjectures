@@ -104,7 +104,7 @@ import WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
 # Integral compact supports have the prescribed reductions
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-order 2135 (blueprint: lem-coef-integral-compact-support).
+order 2135 (blueprint: lemma-change-coefficients-compact-support).
 
 The integral value is specified by a Roos triangle of the very tower used in
 `sfIntegralCompactSupportValue`. Specifying its projection retains the data needed
@@ -133,7 +133,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Countable products for the defining compact-support tower, obtained from the
 recorded completed-coefficient derived products, with no extra existence assumption.
 Source: blueprint order 2135, Proof paragraph 2; Stacks Tag 07KC
-(blueprint: lem-coef-integral-compact-support). -/
+(blueprint: lemma-change-coefficients-compact-support). -/
 noncomputable instance coefCompactSupportHasProduct
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
     HasProduct (sfCompactSupportTerm l E c K) := by
@@ -193,7 +193,6 @@ private theorem derived_comp_heq
   subst e'
   rfl
 
-set_option maxHeartbeats 600000 in
 -- Comparing the sectionwise associators elaborates dependent restriction functors.
 private theorem ordinary_restriction_comp
     (W : Scheme.{u}) {A B C : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}

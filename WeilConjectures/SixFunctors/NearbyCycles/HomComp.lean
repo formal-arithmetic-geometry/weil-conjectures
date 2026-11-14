@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 This file defines the composite of morphisms of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.comp`) and proves that both
 exchanges of nearby cycles are compatible with composition (blueprint
-`det-sp-nearby-cycles-exchanges`).
+`prose-E-03`).
 
 ## Main results
 
@@ -96,15 +96,15 @@ lemma pullbackExchange_comp_aux {DP DN DM SP SN SM TP TN TM GP GN GM : Type*} [C
       cEc.app C ≫ εM.map (cB.app C))
     (αψ : (εP ⋙ RP ⋙ iP) ⋙ g' ⟶ g ⋙ εN ⋙ RN ⋙ iN)
     (hαψ : αψ = Functor.whiskerLeft (εP ⋙ RP) cIψ ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εP (mateEquiv aP aN cJψ.hom).natTrans ≫
+      (Functor.whiskerLeft εP (mateEquiv aP aN cJψ.hom) ≫
         Functor.whiskerRight cEψ RN) iN)
     (αφ : (εN ⋙ RN ⋙ iN) ⋙ f' ⟶ f ⋙ εM ⋙ RM ⋙ iM)
     (hαφ : αφ = Functor.whiskerLeft (εN ⋙ RN) cIφ ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εN (mateEquiv aN aM cJφ.hom).natTrans ≫
+      (Functor.whiskerLeft εN (mateEquiv aN aM cJφ.hom) ≫
         Functor.whiskerRight cEφ RM) iM)
     (αc : (εP ⋙ RP ⋙ iP) ⋙ h' ⟶ h ⋙ εM ⋙ RM ⋙ iM)
     (hαc : αc = Functor.whiskerLeft (εP ⋙ RP) cIc ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εP (mateEquiv aP aM cJc.hom).natTrans ≫
+      (Functor.whiskerLeft εP (mateEquiv aP aM cJc.hom) ≫
         Functor.whiskerRight cEc RM) iM)
     (C : DP) :
     cS.app ((εP ⋙ RP ⋙ iP).obj C) ≫ f'.map (αψ.app C) ≫ αφ.app (g.obj C) =
@@ -140,9 +140,9 @@ lemma mateEquiv_comp_aux {A B C A' B' C' : Type*} [Category A] [Category B] [Cat
     (ν₁ : G ⋙ L₁' ⟶ L₁ ⋙ H) (ν₂ : H ⋙ L₂' ⟶ L₂ ⋙ K) (ν₃ : G ⋙ L₃' ⟶ L₃ ⋙ K)
     (h : ∀ a : A, ν₃.app a ≫ K.map (e.hom.app a) =
       e'.hom.app (G.obj a) ≫ L₂'.map (ν₁.app a) ≫ ν₂.app (L₁.obj a))
-    (χ₁ : R₁ ⋙ G ⟶ H ⋙ R₁') (hχ₁ : χ₁ = (mateEquiv adj₁ adj₁' ν₁).natTrans)
-    (χ₂ : R₂ ⋙ H ⟶ K ⋙ R₂') (hχ₂ : χ₂ = (mateEquiv adj₂ adj₂' ν₂).natTrans)
-    (χ₃ : R₃ ⋙ G ⟶ K ⋙ R₃') (hχ₃ : χ₃ = (mateEquiv adj₃ adj₃' ν₃).natTrans) (c : C) :
+    (χ₁ : R₁ ⋙ G ⟶ H ⋙ R₁') (hχ₁ : χ₁ = (mateEquiv adj₁ adj₁' ν₁))
+    (χ₂ : R₂ ⋙ H ⟶ K ⋙ R₂') (hχ₂ : χ₂ = (mateEquiv adj₂ adj₂' ν₂))
+    (χ₃ : R₃ ⋙ G ⟶ K ⋙ R₃') (hχ₃ : χ₃ = (mateEquiv adj₃ adj₃' ν₃)) (c : C) :
     χ₃.app c ≫ (conjugateIsoEquiv adj₃' (adj₁'.comp adj₂') e'.symm).hom.app (K.obj c) =
       G.map ((conjugateIsoEquiv adj₃ (adj₁.comp adj₂) e.symm).hom.app c) ≫
         χ₁.app (R₂.obj c) ≫ R₁'.map (χ₂.app c) := by
@@ -284,7 +284,7 @@ lemma pullbackExchange_comp_app_of_eq {fg : X ⟶ Z} {fg' : X' ⟶ Z'} (χ : M.H
       χ.commSq_ε C)
     (ψ.pullbackExchange Λ) rfl (φ.pullbackExchange Λ) rfl (χ.pullbackExchange Λ) rfl C).symm
 
-/-- **Composition law of the pullback exchanges** (blueprint `det-sp-nearby-cycles-exchanges`):
+/-- **Composition law of the pullback exchanges** (blueprint `prose-E-03`):
 `α_{φψ} ∘ c_{f,g} = α_φ(Lg^*) ∘ Lf'^* α_ψ ∘ c_{f',g'}`, where `c` are the composition
 isomorphisms `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of derived pullbacks. -/
 lemma pullbackExchange_comp_app
@@ -326,7 +326,7 @@ lemma pushforwardExchange_comp_app_of_eq {fg : X ⟶ Z} {fg' : X' ⟶ Z'} (χ : 
     (χ.pullbackExchange Λ) (φ.pullbackExchange_comp_app_of_eq Λ ψ χ h h' htot hgen)
     (ψ.pushforwardExchange Λ) rfl (φ.pushforwardExchange Λ) rfl (χ.pushforwardExchange Λ) rfl E
 
-/-- **Composition law of the pushforward exchanges** (blueprint `det-sp-nearby-cycles-exchanges`):
+/-- **Composition law of the pushforward exchanges** (blueprint `prose-E-03`):
 `χ_{φψ} = Rg'_*(χ_φ) ∘ χ_ψ(Rf_*)`, through the composition isomorphisms
 `R(f ≫ g)_* ≅ Rf_* ⋙ Rg_*` and `R(f' ≫ g')_* ≅ Rf'_* ⋙ Rg'_*`, the conjugates of the composition
 isomorphisms of derived pullbacks. -/

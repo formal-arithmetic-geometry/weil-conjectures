@@ -24,7 +24,8 @@ sheaves: it is built from irreducible lisse sheaves by finitely many extensions.
   lisse sheaves are closed under kernels and cokernels.
 - `AlgebraicGeometry.WeilSheaf.IsLisse.nontrivial_stalk`: nonzero lisse sheaves have nonzero
   stalks.
-- `AlgebraicGeometry.WeilSheaf.IsLisse.induction_on_shortExact` (`lem-a1-finite-length`): the
+- `AlgebraicGeometry.WeilSheaf.IsLisse.induction_on_shortExact`
+(`theorem-weight-bound-affine-line`): the
   finite length of lisse Weil sheaves, as an induction principle.
 -/
 
@@ -137,7 +138,7 @@ This is stated as the corresponding induction principle: a property of lisse she
 for zero and irreducible lisse sheaves and is stable under extensions of lisse sheaves holds
 for all lisse sheaves. The proof is the induction on the rank of the blueprint: a nonzero lisse
 sheaf which is not irreducible has a proper nonzero lisse subsheaf, whose cokernel is lisse,
-and both have smaller rank at any closed point. (blueprint: `lem-a1-finite-length`) -/
+and both have smaller rank at any closed point. (blueprint: `theorem-weight-bound-affine-line`) -/
 theorem IsLisse.induction_on_shortExact {P : WeilSheaf k₀ l X → Prop}
     (zero : ∀ F : WeilSheaf k₀ l X, IsZero F → P F)
     (irreducible : ∀ F : WeilSheaf k₀ l X, F.IsIrreducibleLisse → P F)

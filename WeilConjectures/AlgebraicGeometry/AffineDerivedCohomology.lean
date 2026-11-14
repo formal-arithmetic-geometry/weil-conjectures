@@ -41,7 +41,7 @@ Proof:
    R^p f_* F = 0 for p > 0 for every quasi-coherent module F. Apply
    `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` to obtain the cohomology
    comparison for every integer i, using the derived direct image of
-   `def-pc-derived-direct-image`. For unbounded objects this uses Stacks Tag 08D4
+   `lemma-coherent-base-change-invertible-sheaves`. For unbounded objects this uses Stacks Tag 08D4
    on sections over inverse images of affine opens (the small detail of Tag 0AVW);
    one cannot simply push forward an arbitrary representative termwise.
 2. By `lem-pc-affine-morphism-hi`, ordinary direct image along an affine morphism

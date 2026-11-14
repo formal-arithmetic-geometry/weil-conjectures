@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.ProEtale.RetractionsStrictlyHenselian
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange, order 1227;
 Stacks Project, proetale.tex, lemma-first-construction and Tag 097V
-(blueprint: lem-weil-pbc-etale-contraction).
+(blueprint: theorem-existence-contractible-covers--1).
 -/
 
 @[expose] public section
@@ -156,17 +156,17 @@ private theorem ring_retraction (R : CommRingCat.{u})
 faithfully flat étale algebras of finite presentation over it admit a section,
 and its maximal localizations are strictly henselian.
 Source: blueprint order 1227; Stacks, lemma-first-construction and Tag 097V
-(blueprint: lem-weil-pbc-etale-contraction).
+(blueprint: theorem-existence-contractible-covers--1).
 
 Proof plan:
 1. Each chosen factor is faithfully flat. Tensor base change and composition preserve
 faithful flatness, by the tensor identities on complexes, so all finite tensors and their
 transition maps are faithfully flat, including the empty tensor.
 2. Apply lem-weil-pbc-directed-colimit-faithfully-flat-algebras to finite-subset colimits
-and then the sequential colimit. Apply lem-weil-pbc-ind-etale-stability to finite tensors,
+and then the sequential colimit. Apply lemma-stability to finite tensors,
 base changes, compositions and these filtered colimits to get ind-étaleness.
 3. An étale finitely presented algebra over the contraction descends to a stage by
-lem-weil-pbc-etale-finite-data-descent. Use lem-weil-pbc-limit-affine-transition and
+lemma-acyclicity-pulled-back-injectives. Use lem-weil-pbc-limit-affine-transition and
 lem-weil-pbc-limit-affine-stage to make the model affine; its quasi-compactness and
 quasi-separatedness and affine transitions follow from
 lem-weil-pbc-affine-morphism-permanence. Faithful flatness descends by applying the

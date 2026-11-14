@@ -27,8 +27,8 @@ formalism. The category `Dᵇc(X, Λ)` is
 constructible of Tor amplitude in one common interval.
 
 This file proves the ingredients of clauses (1)–(4) and (1')–(4') of blueprint
-`prop-sf-localization-all-stages` at the integral stage, for a closed immersion `i : Z ⟶ X` and
-the complementary quasi-compact open immersion `j : U ⟶ X` of schemes of finite type over `k`:
+`lemma-local-cohomology-right-adjoint--2` at the integral stage, for a closed immersion `i : Z ⟶ X`
+and the complementary quasi-compact open immersion `j : U ⟶ X` of schemes of finite type over `k`:
 the stability of `Dᵇc(-, Λ)` under the operations, its triangulated structure, the supported
 localization triangle on `D(X_ét, Λ)`, and the closed-support triangle on `Dᵇc(-, Λ)` under the
 hypotheses providing an exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. The right adjoint
@@ -151,7 +151,7 @@ lemma _root_.DerivedCategory.derivedComplete_shift (hϖ : ϖ ∈ nonZeroDivisors
   (_root_.DerivedCategory.derivedComplete _ I).le_shift m K hK
 
 /-- `Dᵇc(X, Λ)` is stable under the shifts.
-Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
+Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsStableUnderShift ℤ where
@@ -163,7 +163,7 @@ lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
 
 open ZeroObject in
 /-- `Dᵇc(X, Λ)` contains the zero object.
-Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
+Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.containsZero_boundedConstructibleIntegral (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).ContainsZero := by
@@ -183,7 +183,7 @@ of a distinguished triangle modulo `Iⁿ⁺¹` is distinguished, its middle vert
 and `Λ ⧸ Iⁿ⁺¹` is finite, so it is bounded constructible
 (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`); and the
 Tor amplitude interval is widened.
-Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
+Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulatedClosed₂ := by
@@ -206,7 +206,7 @@ subcategory (`DerivedCategory.isTriangulated_derivedComplete`), the reductions a
 functors whose values are killed by `Iⁿ⁺¹`, bounded constructible complexes are closed under such
 extensions, and Tor amplitude is stable under shifts and, with the interval widened, under
 extensions.
-Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
+Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulated :=
@@ -215,7 +215,7 @@ lemma DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span
   have := DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral (X := X) hϖ hI
   {}
 
-/-- Blueprint `prop-sf-localization-all-stages`, integral stage `𝒪_E`: `Dᵇc(X, Λ)` is a
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, integral stage `𝒪_E`: `Dᵇc(X, Λ)` is a
 triangulated subcategory of `D(X_ét, Λ)` when `I = (ϖ)` for a nonzerodivisor `ϖ`
 (`DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span`). The hypothesis on `I`
 is recorded as a `Fact`, so that this is an instance. -/
@@ -305,8 +305,8 @@ section Reductions
 variable {X Y : Scheme.{u}} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
 include hϖ hI
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the integral stage `𝒪_E`, for
-`j^*`: for an open immersion `j`, the pullback `Lj^*` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, and
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the integral stage `𝒪_E`,
+for `j^*`: for an open immersion `j`, the pullback `Lj^*` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, and
 the reductions keep their Tor amplitude interval. -/
 theorem boundedConstructibleIntegral_leftDerivedUpperStar (j : X ⟶ Y) [IsOpenImmersion j]
     {K : 𝐃(Y, Λ)} (hK : DerivedCategory.boundedConstructibleIntegral I Y K) :
@@ -319,7 +319,7 @@ theorem boundedConstructibleIntegral_leftDerivedUpperStar (j : X ⟶ Y) [IsOpenI
 /-- For a closed immersion `i : Z ⟶ X`, an object `Q` of `D(Z_ét, Λ)` lies in `Dᵇc(Z, Λ)` as soon
 as `Ri_* Q` lies in `Dᵇc(X, Λ)`: `Ri_*` is faithful and `Λ`-linear, so it reflects derived
 completeness, and `Q ≅ i^* Ri_* Q`, whose reductions are the pullbacks of those of `Ri_* Q`.
-Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
+Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
 theorem boundedConstructibleIntegral_of_rightDerivedLowerStar_obj (i : X ⟶ Y)
     [IsClosedImmersion i] {Q : 𝐃(X, Λ)}
     (hQ : DerivedCategory.boundedConstructibleIntegral I Y
@@ -358,7 +358,7 @@ lemma exists_nsmul_id_reductionModIdeal_eq_zero (n : ℕ) :
     by rw [Nat.cast_pow]; exact hmY.pow _,
     fun K ↦ nsmul_id_reductionModIdeal (by rw [Nat.cast_pow]; exact Ideal.pow_mem_pow hmI _) K⟩
 
-/-- Blueprint `prop-sf-localization-all-stages`, clauses (1) and (1') at the integral stage
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clauses (1) and (1') at the integral stage
 `𝒪_E`: for a separated morphism `f : X ⟶ Y` of schemes of finite type over `k` with
 `dim X ≤ d`, `Rf_*` carries `Dᵇc(X, Λ)` into `Dᵇc(Y, Λ)`, and if the reductions of `K` have Tor
 amplitude in `[a, b]`, those of `Rf_* K` have Tor amplitude in `[a, b + 2d]`. The direct image
@@ -519,7 +519,7 @@ noncomputable def fullyFaithfulRightDerivedLowerStarOfIsClosedImmersion :
     (R((i)_*[ModuleCat.{u + 1} Λ])).FullyFaithful :=
   .ofFullyFaithful _
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`, the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the integral stage `𝒪_E`, the
 vanishing: `Hom((Ri_* Q)[m], Rj_* G) = 0` for all `Q ∈ D(Z_ét, Λ)` and `G ∈ D(U_ét, Λ)`, in
 particular for `Q ∈ Dᵇc(Z, Λ)` and `G ∈ Dᵇc(U, Λ)`. -/
 lemma subsingleton_hom_shift_rightDerivedLowerStar_rightDerivedLowerStar [HasCompactification i]
@@ -552,7 +552,7 @@ theorem existsUnique_distTriang_closedSupportTriangle
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
     (fun _ hK ↦ rightDerivedLowerStar_essImage_of_isZero i j hij hK) K
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`,
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the integral stage `𝒪_E`,
 functoriality: for `φ : K ⟶ K'` and distinguished closed-support triangles of `K` and `K'`, the
 triple `(Ri_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
 theorem exists_triangleHom_closedSupportTriangle (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -567,7 +567,7 @@ theorem exists_triangleHom_closedSupportTriangle (hij : Set.range i.base = (Set.
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
     φ hw hw'
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`,
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the integral stage `𝒪_E`,
 functoriality: a morphism of distinguished closed-support triangles is determined by its middle
 component. -/
 theorem closedSupportTriangle_hom_ext (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -579,7 +579,7 @@ theorem closedSupportTriangle_hom_ext (hij : Set.range i.base = (Set.range j.bas
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
     hw hw' h
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the integral stage `𝒪_E`:
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the integral stage `𝒪_E`:
 `Ri^! Rj_* G = 0`, as `Hom(Q, Ri^! Rj_* G) = Hom(Ri_* Q, Rj_* G) = 0`. -/
 theorem isZero_rightDerivedUpperShriek_obj_rightDerivedLowerStar_obj
     (hij : Set.range i.base = (Set.range j.base)ᶜ) (G : 𝐃(U, Λ)) :
@@ -590,7 +590,7 @@ theorem isZero_rightDerivedUpperShriek_obj_rightDerivedLowerStar_obj
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
     G
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the integral stage `𝒪_E`: the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the integral stage `𝒪_E`: the
 unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism, `Ri_*` being fully faithful. -/
 instance isIso_rightDerivedLowerStarUpperShriekAdjunction_unit :
     IsIso (rightDerivedLowerStarUpperShriekAdjunction Λ i).unit :=
@@ -605,7 +605,7 @@ section BoundedConstructible
 variable {U Z X Y : Scheme.{u}} [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] {k : Type u} [Field k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
-/-- Blueprint `prop-sf-localization-all-stages`, clauses (1) and (1') at the integral stage
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clauses (1) and (1') at the integral stage
 `𝒪_E`: for a quasi-compact open immersion `j : U ⟶ X` into a scheme of finite type over `k`
 with `dim U ≤ d`, `Rj_*` carries `Dᵇc(U, Λ)` into `Dᵇc(X, Λ)`, and Tor amplitude `[a, b]` of
 the reductions goes to `[a, b + 2d]`. -/
@@ -624,7 +624,8 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion
     fun d' hd' ↦ (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (j ≫ aX) aX j rfl d'
       hd' hG).2⟩
 
-/-- Blueprint `det-thm-sf-pf-adic-open`: Integral open direct image preserves constructibility.
+/-- Blueprint `proposition-direct-image-along-open-immersion--1`: Integral open direct image
+preserves constructibility.
 
 For a quasi-compact open immersion `j : U ⟶ X` into a scheme of finite type over `k` and
 `K ∈ Dᵇc(U, 𝒪_E)`, the direct image `Rj_* K` is derived complete and lies in `Dᵇc(X, 𝒪_E)`
@@ -645,8 +646,8 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar_and_reductionModIdeal
   rw [pow_one] at e
   exact ⟨e.symm⟩
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the integral stage `𝒪_E`, for
-`i_*`: the direct image along a closed immersion `i : Z ⟶ X` of schemes of finite type over `k`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the integral stage `𝒪_E`,
+for `i_*`: the direct image along a closed immersion `i : Z ⟶ X` of schemes of finite type over `k`
 carries `Dᵇc(Z, Λ)` into `Dᵇc(X, Λ)`. -/
 theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
@@ -656,8 +657,8 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion
   have ⟨d, hd⟩ := exists_topologicalKrullDim_le (i ≫ aX)
   (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (i ≫ aX) aX i rfl d hd hQ).1
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (1) at the integral stage `𝒪_E`, for any
-separated quasi-compact morphism `f : Y ⟶ X` locally of finite type (an open immersion `j` or a
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (1) at the integral stage `𝒪_E`, for
+any separated quasi-compact morphism `f : Y ⟶ X` locally of finite type (an open immersion `j` or a
 closed immersion `i`) into a scheme of finite type over `k`: `Rf_*` carries `Dᵇc(Y, Λ)` into
 `Dᵇc(X, Λ)` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar`). -/
 theorem boundedConstructibleIntegral_rightDerivedLowerStar_obj
@@ -669,8 +670,8 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar_obj
   have ⟨d, hd⟩ := exists_topologicalKrullDim_le (f ≫ aX)
   (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (f ≫ aX) aX f rfl d hd hG).1
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`, the
-Tor amplitude bound in a closed-support triangle: let `T` be a distinguished triangle of
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2') at the integral stage `𝒪_E`,
+the Tor amplitude bound in a closed-support triangle: let `T` be a distinguished triangle of
 `D(X_ét, Λ)` with vertices `Ri_* M`, `K` and `Rj_* j^* K`, where `K` and `Ri_* M` lie in
 `Dᵇc(X, Λ)`. If the reductions of `K` have Tor amplitude in `[a, b]` and `dim U ≤ d`, the
 reductions of `M` have Tor amplitude in `[a, b + 2d + 1]`: the reductions of `T` are
@@ -749,7 +750,7 @@ variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplet
   [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
 include hϖ hI hi in
-/-- Blueprint `prop-sf-localization-all-stages`, clauses (3) and (3') at the integral stage
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clauses (3) and (3') at the integral stage
 `𝒪_E`, under the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: for
 `K ∈ Dᵇc(X, Λ)` the counit `Ri_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a
 distinguished triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_* Ri^! K)[1]` with a unique third
@@ -774,8 +775,8 @@ theorem boundedConstructibleIntegral_closedSupportTriangle (j : U ⟶ X) [IsOpen
     existsUnique_distTriang_closedSupportTriangle i j hij K⟩
 
 include hϖ hI hi in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`, under
-the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: if the reductions of
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2') at the integral stage `𝒪_E`,
+under the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: if the reductions of
 `K ∈ Dᵇc(X, Λ)` have Tor amplitude in `[a, b]` and the open complement `U` has dimension `≤ d`,
 the reductions of `Ri^! K` have Tor amplitude in `[a, b + 2d + 1]`
 (`AlgebraicGeometry.Etale.torAmplitudeIn_reductionModIdeal_of_distTriang`). -/

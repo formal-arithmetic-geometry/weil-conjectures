@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 
 /-! # Resolution homology square for the identity scheme morphism
 

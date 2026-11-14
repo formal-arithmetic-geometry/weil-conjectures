@@ -38,7 +38,7 @@ vanish in nonzero degrees by projectivity, and in degree zero they are `ℚ̄_�
 fully faithful (`DerivedCategory.homBijective_of_isShiftSum`), and its essential image is the
 bounded complexes with finite-dimensional cohomology
 (`ProEtale.CondensedRing.exists_fiberFunctor_point`, blueprint
-`def-weil-finite-coefficient-point`).
+`lemma-perfect-complexes-geometric-point`).
 -/
 
 @[expose] public section
@@ -97,7 +97,7 @@ noncomputable def pointSectionsUnit : (pointSections ℓ k).obj (𝟙_ (PointMod
 omit [IsSepClosed k] in
 /-- The scalar `a` acts on the global sections of the unit by the endomorphism `a` of the unit. -/
 lemma smul_pointSectionsUnit (a : ULift.{u + 1} (PadicAlgCl ℓ)) :
-    a • pointSectionsUnit ℓ k = pointUnitEndRingHom ℓ k a.down :=
+    a • pointSectionsUnit ℓ k = (pointUnitEndRingHom ℓ k a.down).asHom :=
   Category.comp_id _
 
 /-- The global sections of the unit of `Mod_{ℚ̲̄_ℓ,s}` are `ℚ̄_ℓ`. -/
@@ -105,11 +105,12 @@ noncomputable def pointSectionsUnitIso :
     ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl ℓ)) ≅ (pointSections ℓ k).obj (𝟙_ (PointMod ℓ k)) :=
   (LinearEquiv.ofBijective (LinearMap.toSpanSingleton _ _ (pointSectionsUnit ℓ k)) (by
     have h : ⇑(LinearMap.toSpanSingleton (ULift.{u + 1} (PadicAlgCl ℓ)) _
-        (pointSectionsUnit ℓ k)) = (fun a ↦ pointUnitEndRingHom ℓ k a) ∘ ULift.down := by
+        (pointSectionsUnit ℓ k)) = (fun a ↦ (pointUnitEndRingHom ℓ k a).asHom) ∘ ULift.down := by
       ext1 a
       exact smul_pointSectionsUnit ℓ k a
     rw [h]
-    exact (bijective_pointUnitEndRingHom ℓ k).comp Equiv.ulift.bijective)).toModuleIso
+    exact (End.homEquiv.bijective.comp
+      (bijective_pointUnitEndRingHom ℓ k)).comp Equiv.ulift.bijective)).toModuleIso
 
 /-- The global sections functor is bijective on the endomorphisms of the unit: every
 endomorphism of the `ℚ̄_ℓ`-vector space `Γ(ℚ̲̄_ℓ,s) = ℚ̄_ℓ` is the composition with an endomorphism
@@ -122,7 +123,10 @@ lemma bijective_pointSections_map_unit :
     change 𝟙 _ ≫ φ = 𝟙 _ ≫ ψ at this
     simpa using this
   · ext x
-    obtain ⟨a, rfl⟩ := (bijective_pointUnitEndRingHom ℓ k).2 x
+    obtain ⟨a, rfl⟩ := (End.homEquiv.bijective.comp
+      (bijective_pointUnitEndRingHom ℓ k)).2 x
+    change ((pointSections ℓ k).map (T.hom (pointSectionsUnit ℓ k))).hom
+        (pointUnitEndRingHom ℓ k a).asHom = T.hom (pointUnitEndRingHom ℓ k a).asHom
     rw [← smul_pointSectionsUnit ℓ k (ULift.up a), map_smul, map_smul]
     congr 1
 
@@ -332,7 +336,7 @@ lemma exists_pointFiberFunctor_obj_iso
       ⟨(G.commShiftIso n).app K ≪≫ (shiftFunctor _ n).mapIso e⟩⟩)
     ⟨𝟙_ _, ⟨pointFiberFunctorUnitIso ℓ k⟩⟩ hM
 
-/-- **The point category, evaluated** (blueprint `def-weil-finite-coefficient-point`): for `k`
+/-- **The point category, evaluated** (blueprint `lemma-perfect-complexes-geometric-point`): for `k`
 separably closed, evaluation at the geometric point `s = Spec k` is an exact equivalence
 `Fib_s : Dᵇc(s)⟦ℚ̲̄_ℓ⟧ ≃ Dᵇ_fd(ℚ̄_ℓ)` onto the bounded complexes of `ℚ̄_ℓ`-vector spaces with
 finite-dimensional cohomology; it sends the unit `ℚ̲̄_ℓ,s` to `ℚ̄_ℓ[0]`. -/

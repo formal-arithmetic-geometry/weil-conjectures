@@ -30,7 +30,7 @@ with `p` smooth and `g` quasi-compact and quasi-separated, and a coefficient rin
 a nonzero integer invertible on `S`. For a bounded constructible complex `K` of pro-étale
 sheaves of `Λ`-modules on `T` (one of étale origin), the pro-étale exchange map
 `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism (blueprint
-`sbc-thm-finite-proetale-smooth-base-change`). It is obtained by conjugating the étale exchange
+`theorem-smooth-base-change-all-admissible--1`). It is obtained by conjugating the étale exchange
 isomorphism (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_boundedConstructible_of_smooth`)
 by the site comparison, as recorded by the transport lemma
 `AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap` of the proper base change
@@ -82,14 +82,14 @@ with `e : l ⊣ r`, `e' : l' ⊣ r'`, `d : p ⊣ s`, `d' : p' ⊣ s'`, and compa
 and the cube of left adjoints commutes (`hsq`), then the mate of `θ`, conjugated by the
 comparison functors, is the mate of `ϑ`. -/
 private theorem comparison_mate_transport (K : E₁) :
-    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K) ≫ b'.app (h.obj K) ≫
+    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K) ≫ b'.app (h.obj K) ≫
       s'.map (c'.hom.app K) =
     c.hom.app (r.obj K) ≫ q.map (b.app K) ≫
-      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).natTrans.app (A₁.obj K) := by
+      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).app (A₁.obj K) := by
   apply (d'.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   apply (cancel_epi (a'.hom.app (g.obj (r.obj K)))).1
-  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K)
+  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K)
   simp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
   rw [d'.counit_naturality, reassoc_of% hb']
@@ -137,7 +137,7 @@ end Comparison
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 variable (g) in
-/-- Blueprint `lem-weil-pbc-comparison-pullback`: the canonical isomorphism
+/-- Blueprint `proposition-comparison-etale-derived-category--5`: the canonical isomorphism
 `ν_{Y'}^* g^* ≅ Lg^* ν_Y^*`, as functors `D⁺(Y_ét) ⥤ D(Y'_proét)`. It is induced by the
 underived isomorphism `AlgebraicGeometry.ProEtale.comparisonUpperStarCompUpperStarIso`, the
 derived pullback of the exact functor `g^*` being computed degreewise. -/
@@ -185,8 +185,8 @@ noncomputable def baseChangeTargetComparisonIso [QuasiCompact f'] [QuasiSeparate
     Functor.isoWhiskerRight (leftDerivedUpperStarComparisonIso g' Λ)
       R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f')
 
-/-- Blueprint `lem-weil-pbc-transport-identifies-exchange` (subsection
-`sk-thm-properbasechange`): for a Cartesian square
+/-- Blueprint `lemma-naturality-pasting-comparison--3` (subsection
+`theorem-proper-base-change-classical-pro`): for a Cartesian square
 
 ```
   X' ──g'──▶ X
@@ -237,7 +237,7 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
   simpa [baseChangeSourceComparisonIso, baseChangeTargetComparisonIso,
     derivedBaseChangeMap, Etale.baseChange_app, Etale.baseChangeUnitStep_app,
     Etale.baseChangeSquareStep_hom_app, Etale.baseChangeCounitStep_app,
-    mateEquiv_apply, TwoSquare.natTrans, TwoSquare.mk, Category.assoc] using h
+    mateEquiv_apply, TwoSquare.mk, Category.assoc] using h
 
 
 end ProEtale
@@ -247,7 +247,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {S T Y X : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
 variable (p) in
-/-- Blueprint `sbc-thm-finite-proetale-smooth-base-change`: for a Cartesian square with `p`
+/-- Blueprint `theorem-smooth-base-change-all-admissible--1`: for a Cartesian square with `p`
 smooth and `g` quasi-compact and quasi-separated, and a coefficient ring `Λ` killed by a
 nonzero integer `N` invertible on `S`, the pro-étale exchange map
 `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism for every bounded constructible pro-étale complex

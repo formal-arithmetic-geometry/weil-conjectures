@@ -32,7 +32,7 @@ above `V(I)`. Source: Stacks Project, Tags 096V and 092B
 Proof:
 1. The quotient-unit condition defines a multiplicative set. Apply
    `lem-weil-pbc-localization-ring-weakly-etale` and the affine equivalence in
-   `def-weil-pbc-ind-etale-algebra` to obtain weak etaleness of the spectrum morphism.
+   `definition-ind-etale-pro-etale-weakly` to obtain weak etaleness of the spectrum morphism.
 2. `lem-weil-pbc-localization-spectrum-embedding` embeds the localization spectrum with
    image the primes disjoint from `S`.
 3. If `p ≤ q` and `I ≤ q`, a member `s` of `S` cannot lie in `p`: lift an inverse of `s`

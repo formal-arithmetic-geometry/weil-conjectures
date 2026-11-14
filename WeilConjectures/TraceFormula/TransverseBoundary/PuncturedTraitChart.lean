@@ -31,7 +31,7 @@ divisors and `X_S - z = X_S ∩ (S - Y_S)` the punctured trait. Through an affin
 - `X_S - z = Spec B_t = Spec K`, with `K` the fraction field of `B`.
 
 This is the part "the punctured trait" of the proof of blueprint
-`det-tf-transverse-corner-constant`.
+`lemma-punctured-surface-punctured-curve--1`.
 
 ## Main statements
 
@@ -99,14 +99,13 @@ lemma _root_.WithBot.ENat.eq_one_of_add_one_eq_two {d : WithBot ℕ∞} (h : d +
 
 variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ C.Z)
 
-set_option maxHeartbeats 1600000 in
 -- The computation of the iterated pullbacks through the chart is a long chain of rewrites.
 /-- **The punctured trait is the spectrum of the fraction field of a strictly henselian
-trait** (blueprint `det-tf-transverse-corner-constant`, the punctured trait). For a geometric
-point `z̄` over the corner point (with `Ω` algebraically closed) there are a strictly henselian
-discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of `B`, an isomorphism
-`X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on `S - Y_S` (a local
-equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is connected. -/
+trait** (blueprint `lemma-punctured-surface-punctured-curve--1`, the punctured trait). For a
+geometric point `z̄` over the corner point (with `Ω` algebraically closed) there are a strictly
+henselian discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of `B`, an
+isomorphism `X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on `S - Y_S` (a
+local equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is connected. -/
 theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     (hz : Set.range zbar = {C.z}) :
     ∃ (B : Type u) (_ : CommRing B) (_ : IsDomain B) (_ : IsDiscreteValuationRing B)
@@ -242,14 +241,18 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     have hι : C.puncturedTraitι (xR ≫ W.2.fromSpec) =
         eP.inv ≫ Spec.map (CommRingCat.ofHom fm) ≫ hU.isoPullback.hom := by
       rw [← hP.isoPullback_hom_snd, Iso.inv_hom_id_assoc]
-    have hcancel (a : Γ(Spec (.of (Localization.Away (ρ.hom t))), ⊤)) :
-        hU.isoPullback.hom.appTop (hU.isoPullback.inv.appTop a) = a := by
-      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Iso.hom_inv_id,
+    have hcancel {X Y : Scheme.{u}} (e : X ≅ Y) (a : Γ(X, ⊤)) :
+        e.hom.appTop (e.inv.appTop a) = a := by
+      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, e.hom_inv_id,
         Scheme.Hom.id_appTop, CommRingCat.id_apply]
     simp only [u, IsUnit.unit_spec, hι, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Iso.op_hom, Scheme.Spec_map, Quiver.Hom.unop_op, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
-    rw [hcancel, hnat, hnat]
+    simp only [hcancel]
+    have hnat_fm := hnat (CommRingCat.ofHom fm)
+    simp only [hnat_fm]
+    have hnat_eK := hnat eK.symm.toRingEquiv.toCommRingCatIso.hom
+    simp only [hnat_eK]
     congr 2
     exact (IsLocalization.map_eq (S := Localization.Away (ρ.hom t)) (Q := Sm)
       (Submonoid.le_comap_map _) (ρ.hom t)).trans (eK.symm.commutes π).symm
@@ -267,11 +270,11 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
 
 omit [IsAlgClosed Ω] in
 /-- **The punctured trait is the spectrum of the fraction field of a strictly henselian
-trait** (blueprint `det-tf-transverse-corner-constant`, the punctured trait). For a geometric
-point `z̄` over the corner point (with `Ω` separably closed) there are a strictly henselian
-discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of `B`, an isomorphism
-`X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on `S - Y_S` (a local
-equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is connected.
+trait** (blueprint `lemma-punctured-surface-punctured-curve--1`, the punctured trait). For a
+geometric point `z̄` over the corner point (with `Ω` separably closed) there are a strictly
+henselian discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of `B`, an
+isomorphism `X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on `S - Y_S` (a
+local equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is connected.
 
 This reduces to the case of an algebraically closed `Ω`
 (`exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed`):

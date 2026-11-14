@@ -47,7 +47,7 @@ Proof:
    Exactness of `T` identifies its degree-`n` cohomology with `T(H^n(I))`:
    this is `Hom(P,L)` for `n = 0` and zero otherwise. In particular all
    positive sheaf Exts vanish. The truncation quasi-isomorphisms identify this
-   complex in `D(O_Y)` (`def-pc-derived-category`) with `Hom(P,L)[0]`. -/
+   complex in `D(O_Y)` (`lemma-coherent-base-change-invertible-sheaves`) with `Hom(P,L)[0]`. -/
 theorem finiteLocallyFree_derivedInternalHom_single
     (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

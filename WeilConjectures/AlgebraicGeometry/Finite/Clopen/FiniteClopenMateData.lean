@@ -135,6 +135,6 @@ def cbcClopenMatePlus (Λ : Type (u + 1)) [CommRing Λ]
         (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus :=
   (mateEquiv (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) r)
     (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) p)
-    (TwoSquare.mk _ _ _ _ (cbcClopenAlphaPlus Λ k i r p h))).natTrans
+    (TwoSquare.mk _ _ _ _ (cbcClopenAlphaPlus Λ k i r p h)))
 
 end AlgebraicGeometry.ProEtale

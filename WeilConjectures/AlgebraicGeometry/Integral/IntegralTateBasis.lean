@@ -47,7 +47,7 @@ private theorem weaklyEtale_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X) [We
 
 /-- The integral Tate module has a pro-étale local basis.
 
-Source: the current blueprint, `sk-def-sp-tate-twist`, integral limit and coefficient
+Source: the current blueprint, `definition-tate-twists`, integral limit and coefficient
 extension; Bhatt–Scholze, Section 6.8.
 
 Proof: a single cover identifies the two finite-level diagrams. Weakly étale inverse

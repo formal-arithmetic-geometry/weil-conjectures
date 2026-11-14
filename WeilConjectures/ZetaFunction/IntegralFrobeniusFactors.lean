@@ -55,7 +55,7 @@ variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- An integral realization of the determinant factors `P_{i,ℓ}` is unique: its image in
 `ℚ̄_ℓ[T]` is prescribed for one prime `ℓ ≠ p`, and `ℤ → ℚ̄_ℓ` is injective (part of
-`sk-thm-intfactors` and of `prop-integral-recovery`). -/
+`theorem-weil-conjectures-smooth-proper-schemes--2` and of `lemma-reciprocal-roots-zeta`). -/
 theorem IsIntegralFrobeniusFactor.unique [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ} {P P' : Polynomial ℤ}
@@ -91,8 +91,8 @@ theorem isWeilFactorization_of_isIntegralFrobeniusFactor {P : Fin (2 * d + 1) �
   obtain rfl : P = P' := funext fun i ↦ (hP i).unique k₀ X (hP' i)
   exact ⟨hfact, hfe, hrh⟩
 
-/-- Blueprint `sk-thm-intfactors` (integral Frobenius factors): for `X₀` smooth, proper and
-geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`,
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--3` (integral Frobenius factors): for
+`X₀` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`,
 
 * for every `0 ≤ i ≤ 2d` there is a unique `Pᵢ ∈ ℤ[T]` with `Pᵢ(0) = 1` and
   `Pᵢ^{(ℓ)} = det(1 - T F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` for every prime `ℓ ≠ p`;

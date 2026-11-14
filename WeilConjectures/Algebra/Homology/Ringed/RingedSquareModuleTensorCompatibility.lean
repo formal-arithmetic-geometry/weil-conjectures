@@ -185,7 +185,6 @@ private theorem pairing_square {C : Type*} [Category C] [CartesianMonoidalCatego
     ← CartesianMonoidalCategory.comp_lift]
   simp only [Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- The generator calculation compares four scalar-extension presentations.
 /-- Tensor compatibility of the linear square on two ordinary module sheaves.
 

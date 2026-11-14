@@ -121,8 +121,8 @@ ambient derived category, hence also in its full localizing subcategory. Its ref
 maps are exactly those used to normalize the comparisons in
 `compactification_coherence_cocycle`, rather than arbitrary isomorphisms of their endpoints.
 
-Source: blueprint sk-thm-sf-comp-composition, clause (1), rational cases, and its proof
-(blueprint: lem-sfb-localizing-lower-shriek-composition).
+Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (1), rational cases, and
+its proof (blueprint: proposition-composition-base-change-rf-shriek--1).
 
 Proof: obtain preservation from compactification_localizing. Construct an isomorphism
 on one compactification triple using the model lemma, then lift it to the full localizing

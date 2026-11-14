@@ -59,7 +59,7 @@ the cochain complexes of sheaves of `Λ`-modules on the small étale site at the
 abbrev DerivedCategoryModule : Type (u + 2) :=
   DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
-/-- Blueprint `def-sf-setting`: Coefficients and sites
+/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
 
 The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
 zero, which is the unit of the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`.
@@ -68,7 +68,7 @@ noncomputable def constantComplex :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   𝟙_ _
 
-/-- Blueprint `def-sf-setting`: Coefficients and sites
+/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
 
 An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
 `Λ`-modules on `X_ét` the derived tensor product `K ⊗^L F` has vanishing cohomology outside
@@ -80,7 +80,7 @@ def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
       ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K)).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
-/-- Blueprint `def-sf-setting`: Coefficients and sites
+/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
 
 The category `D^b_{ctf}(X, Λ)` of the purity chapter, as an object property: bounded with
 constructible cohomology sheaves and of finite Tor amplitude. -/

@@ -79,7 +79,7 @@ Source:
 literature/blueprint/master/blueprint/sec-curve-estimates/sbc-thm-algebraically-closed-invariance/
 _section.md, affine case (blueprint: lem-sc-affine-picard-torsion-base-change).
 
-Proof: Choose a smooth proper connected compactification by lem-sc-compactification.
+Proof: Choose a smooth proper connected compactification by lemma-proper-smooth-model--1.
 Its boundary cannot be empty: otherwise the open immersion is an isomorphism, making the
 original curve proper and affine; lem-sc-proper-affine-finite contradicts its dimension one.
 Choose a closed boundary point using the closedness of every boundary point. Apply

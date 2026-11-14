@@ -204,7 +204,7 @@ end FixedPoints
 @[reducible]
 def Action.distribMulAction {G : Type*} [Group G] (M : Action AddCommGrpCat.{w} G) :
     DistribMulAction G M.V where
-  smul g x := (M.ρ g).hom x
+  smul g x := (M.ρ g).asHom.hom x
   one_smul := Action.ρ_one_apply M
   mul_smul a b x := Action.ρ_mul_apply M a b x
   smul_zero _ := map_zero _
@@ -221,7 +221,7 @@ def actionKernel (M : DiscreteModule.{w} G) : Subgroup G :=
 variable (M : DiscreteModule.{w} G)
 
 omit [IsTopologicalGroup G] in
-lemma mem_actionKernel {g : G} : g ∈ actionKernel M ↔ ∀ x, (M.obj.ρ g).hom x = x := by
+lemma mem_actionKernel {g : G} : g ∈ actionKernel M ↔ ∀ x, (M.obj.ρ g).asHom.hom x = x := by
   simp [actionKernel, Subgroup.mem_iInf]
 
 instance : (actionKernel M).Normal where
@@ -269,14 +269,14 @@ compact) group, `ℓ` a prime and `M` a finite `ℓ`-primary discrete `G`-module
 subgroup `K` of index prime to `ℓ` and a finite filtration `0 = F₀ ≤ F₁ ≤ ⋯ ≤ Fₙ = M` by
 `K`-stable subgroups whose successive quotients `Fᵢ₊₁ / Fᵢ` are trivial `𝔽_ℓ`-modules: they are
 killed by `ℓ` and `K` acts trivially on them.
-(blueprint: `lem-sc-sylow-module-filtration`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 theorem exists_isOpen_not_dvd_index_filtration [CompactSpace G] (ℓ : ℕ) [Fact ℓ.Prime]
     [Finite M.obj.V] (hM : ∀ x : M.obj.V, ∃ j : ℕ, ℓ ^ j • x = 0) :
     ∃ K : Subgroup G, IsOpen (K : Set G) ∧ ¬ ℓ ∣ K.index ∧
       ∃ (n : ℕ) (F : ℕ → AddSubgroup M.obj.V), F 0 = ⊥ ∧ F n = ⊤ ∧ Monotone F ∧
-        (∀ i, ∀ k ∈ K, ∀ x ∈ F i, (M.obj.ρ k).hom x ∈ F i) ∧
+        (∀ i, ∀ k ∈ K, ∀ x ∈ F i, (M.obj.ρ k).asHom.hom x ∈ F i) ∧
         (∀ i, ∀ x ∈ F (i + 1), ℓ • x ∈ F i) ∧
-        (∀ i, ∀ k ∈ K, ∀ x ∈ F (i + 1), (M.obj.ρ k).hom x - x ∈ F i) := by
+        (∀ i, ∀ k ∈ K, ∀ x ∈ F (i + 1), (M.obj.ρ k).asHom.hom x - x ∈ F i) := by
   obtain ⟨K, hKo, hKℓ, -, hpow⟩ := exists_isOpen_not_dvd_index_pow_mem M ℓ
   let := M.obj.distribMulAction
   let : DistribMulAction K M.obj.V := DistribMulAction.compHom _ K.subtype

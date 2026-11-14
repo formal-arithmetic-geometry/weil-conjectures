@@ -57,7 +57,7 @@ private theorem derivedScalarCompat
   let := scalarLocalizationDerivedLinearOfUniverses B S b
   intro X Y f r
   let D := DerivedCategory (proEtaleRingModules T S)
-  have h : Linear.toCatCenter A D r = Linear.toCatCenter B D (c r) := by
+  have h : (Linear.toCatCenter A D r).asHom = (Linear.toCatCenter B D (c r)).asHom := by
     apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
     intro K
     have hK : (r • 𝟙 K : K ⟶ K) = c r • 𝟙 K := by

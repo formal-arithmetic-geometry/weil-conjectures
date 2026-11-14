@@ -45,8 +45,8 @@ transferred to an arbitrary Fourier partner `D'` pointwise, on the common dense 
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isReal_higherLowerShriek_realifiedKernel`: the
   sheaf `H = R¹pr₂! 𝒦` is `ι`-real, and it surjects onto the middle extension `j'_*M'`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_isPunctuallyPureOfWeight_of_correction`:
-  the purity argument for an irreducible Fourier partner (`thm-fd-generic-fourier-sheaf-pure`,
-  steps 1–4).
+  the purity argument for an irreducible Fourier partner
+  (`proposition-purity-lisse-part-fourier-transform`, steps 1–4).
 - `AlgebraicGeometry.exists_isPunctuallyPureOfWeight_of_isFourierPartner`: the Fourier
   partner of an irreducible nonexceptional pure sheaf is pure of some real weight.
 -/
@@ -84,7 +84,7 @@ variable {D D' E' : LisseOnDenseOpen k₀ l} {b : (PadicAlgCl l)ˣ}
 include c c' in
 /-- The higher direct images with compact support `R^ν pr₂! 𝒦` of the realified kernel vanish
 for `ν ≠ 1`, both transforms `FT_ψ(j_!M)` and `FT_{ψ⁻¹}(j_!M†)` being sheaves.
-(blueprint: `lem-fd-constituent-nonexceptional-concentration`, part (3)) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`, part (3)) -/
 theorem isZero_higherLowerShriek_realifiedKernel {ν : ℕ} (hν : ν ≠ 1) :
     IsZero ((higherLowerShriek k₀ l (affinePlane.snd k₀) ν).obj (realifiedKernel ψ D b)) :=
   ((biprod_isZero_iff _ _).2
@@ -94,7 +94,7 @@ theorem isZero_higherLowerShriek_realifiedKernel {ν : ℕ} (hν : ν ≠ 1) :
 
 /-- The sheaf `H = R¹pr₂! 𝒦` of the realified kernel is the sum
 `FT_ψ(j_!M) ⊕ FT_{ψ⁻¹}(j_!M†)` of the two transforms.
-(blueprint: `lem-fd-constituent-nonexceptional-concentration`, part (3)) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`, part (3)) -/
 noncomputable def higherLowerShriekRealifiedKernelIso :
     (higherLowerShriek k₀ l (affinePlane.snd k₀) 1).obj (realifiedKernel ψ D b) ≅
       c.seq.X₂ ⊞ c'.seq.X₂ :=
@@ -104,7 +104,8 @@ noncomputable def higherLowerShriekRealifiedKernelIso :
 
 include c c' in
 /-- **The sheaf `H = R¹pr₂! 𝒦` is `ι`-real**, when the realified kernel `𝒦` is: `R pr₂! 𝒦` is
-concentrated in degree one. (blueprint: `thm-fd-generic-fourier-sheaf-pure`, step 1) -/
+concentrated in degree one. (blueprint: `proposition-purity-lisse-part-fourier-transform`,
+step 1) -/
 theorem isReal_higherLowerShriek_realifiedKernel {ι : PadicAlgCl l →+* ℂ}
     (hreal : (realifiedKernel ψ D b).IsReal ι) :
     ((higherLowerShriek k₀ l (affinePlane.snd k₀) 1).obj (realifiedKernel ψ D b)).IsReal ι :=
@@ -113,7 +114,7 @@ theorem isReal_higherLowerShriek_realifiedKernel {ι : PadicAlgCl l →+* ℂ}
 /-- The epimorphism `H ↠ G ↠ j'_*M'` from the sheaf `H = R¹pr₂! 𝒦` of the realified kernel onto
 the middle extension of the Fourier partner: the projection onto the summand `G = FT_ψ(j_!M)`
 followed by the epimorphism of the correction sequence.
-(blueprint: `thm-fd-generic-fourier-sheaf-pure`, steps 1–2) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`, steps 1–2) -/
 noncomputable def higherLowerShriekRealifiedKernelToDirectImage :
     (higherLowerShriek k₀ l (affinePlane.snd k₀) 1).obj (realifiedKernel ψ D b) ⟶ D'.directImage :=
   (higherLowerShriekRealifiedKernelIso c c').hom ≫ biprod.fst ≫ c.seq.g ≫ c.isoDirectImage.hom
@@ -167,7 +168,8 @@ with correction sequences `c` for `D` and `c'` for the twisted dual `D†` (so t
 transforms `FT_ψ(j_!M)` and `FT_{ψ⁻¹}(j_!M†)` are sheaves). Then `M'` is punctually `ι`-pure of
 some real weight: on a dense open `W ⊆ U'` where `H = R¹pr₂! 𝒦` is lisse, `M'|_W` is an
 irreducible quotient of the `ι`-real lisse sheaf `H|_W`, hence pure by real-sheaf purity, and
-purity extends from `W` to `U'`. (blueprint: `thm-fd-generic-fourier-sheaf-pure`, steps 1–4) -/
+purity extends from `W` to `U'`. (blueprint: `proposition-purity-lisse-part-fourier-transform`,
+steps 1–4) -/
 theorem exists_isPunctuallyPureOfWeight_of_correction {ι : PadicAlgCl l →+* ℂ}
     (hreal : (realifiedKernel ψ D b).IsReal ι) (hD' : D'.sheaf.IsIrreducibleLisse) :
     ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v := by
@@ -303,7 +305,7 @@ open WeilSheaf WeilSheaf.LisseOnDenseOpen in
 /-- **The generic Fourier sheaf is pure, in weight `0`.** For an irreducible nonexceptional `M`
 punctually `ι`-pure of weight `0` and a nontrivial `ψ`, the lisse sheaf `M'` of a Fourier
 partner is punctually `ι`-pure of some real weight. The realified kernel is formed with `b = 1`.
-(blueprint: `thm-fd-generic-fourier-sheaf-pure`) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`) -/
 theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner_weight_zero (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) (hw : D.sheaf.IsPunctuallyPureOfWeight ι 0)
@@ -326,7 +328,7 @@ theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner_weight_zero (ι : Pa
 irreducible lisse sheaf `M'` of its Fourier partner is punctually `ι`-pure of some real weight
 `v`. By a constant twist we may assume `w = 0`
 (`AlgebraicGeometry.exists_isPunctuallyPureOfWeight_of_isFourierPartner_of_weight_zero`).
-(blueprint: `sk-p-dl-a1-some-weight`) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`) -/
 theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse)

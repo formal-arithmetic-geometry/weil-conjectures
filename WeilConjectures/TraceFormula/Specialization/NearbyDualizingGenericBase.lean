@@ -99,7 +99,7 @@ variable (k' : Type u) [Field k'] (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k']
 /-- A *family of dualizing maps* of nearby cycles over the trait `S = Spec k'⟦t⟧` over generic
 bases: a map `θ_M : Ψ_M ω_{X₁} ⟶ ω_{X'}` for every trait model `M` of an `F`-scheme `X₁` over the
 generic base `(F, X₁)`, with the two characteristic properties of the dualizing maps
-`θ_M = β_a(ℚ̄_ℓ)` of blueprint `det-nearby-exchange-maps` (see
+`θ_M = β_a(ℚ̄_ℓ)` of blueprint `prose-E-15` (see
 `NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`). This is the analogue over generic
 bases of `NearbyCyclesModel.NearbyDualizingData`. -/
 structure NearbyDualizingDataOfGenericBase where

@@ -73,7 +73,7 @@ private theorem integralEvaluation_from_construction
       congrArg (fun w ↦ κ ((α.hom.app (op n)) w))
         (Rep.hom_comm_apply (e.inv ≫ C.π.app (op n)) g z)
     _ = _ := haction g _
-    _ = _ := congrArg (fun w ↦ (c.γ g).hom.app
+    _ = _ := congrArg (fun w ↦ (c.γ g).asIso.hom.app
       (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E.val)
         (F.obj.obj (op n)) h) (κ w)) (hproj z)
 

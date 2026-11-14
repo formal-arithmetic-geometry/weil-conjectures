@@ -52,7 +52,7 @@ theorem etaleBrownProperScalarMate_isIso
     (rg : ∀ n, StrictEtaleBrownImageRealization O t g n A (B.level n) RV RW)
     {m n : ℕ} (h : m ≤ n) [Finite (strictEtaleBrownRing O t n)] :
     IsIso ((mateEquiv (B.level n).adjunction (B.level m).adjunction
-      (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans) := by
+      (.mk _ _ _ _ (B.derivedTensor h).hom))) := by
   let φ := strictEtaleBrownRingMap O t h
   let an := Etale.derivedUpperStarLowerStarAdjunction
     (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g
@@ -88,9 +88,9 @@ theorem etaleBrownProperScalarMate_isIso
   let : (RV.derived m).IsEquivalence := RV.val.equivalence m
   let : (RW.derived n).IsEquivalence := RW.val.equivalence n
   let : (RV.derived n).IsEquivalence := RV.val.equivalence n
-  let : IsIso (mateEquiv (B.level n).adjunction an pn.inv).natTrans :=
+  let : IsIso (mateEquiv (B.level n).adjunction an pn.inv) :=
     isIso_mateEquiv_of_isEquivalence (B.level n).adjunction an pn.inv
-  let : IsIso (mateEquiv (B.level m).adjunction am pm.inv).natTrans :=
+  let : IsIso (mateEquiv (B.level m).adjunction am pm.inv) :=
     isIso_mateEquiv_of_isEquivalence (B.level m).adjunction am pm.inv
   let : IsIso (Etale.scalarMate φ g) :=
     (NatTrans.isIso_iff_isIso_app _).mpr (fun J ↦ Etale.proper_scalarMate_isIso φ g J)

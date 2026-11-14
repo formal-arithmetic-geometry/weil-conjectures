@@ -29,8 +29,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Derived open pullback cohomology is ordinary restriction of cohomology.
 
-Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph; step 3
-of lem-pc-derived-single-open-locus, exactness of open restriction.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, cohomology-sheaf gluing
+paragraph; step 3 of lem-pc-derived-single-open-locus, exactness of open restriction.
 (blueprint: lem-pc-derived-open-pullback-homology).
 
 Proof: tensor pullback along W.ι is naturally isomorphic to ordinary module

@@ -34,7 +34,7 @@ namespace Algebra
 Proof (the six steps of the blueprint node):
 1. Reduce to the prime field using lem-weil-pbc-char-zero-field-extension-formally-smooth
    or lem-weil-pbc-field-char-p-nilpotent-lifting. Lift the field map first and then the
-   algebra map by def-weil-pbc-formally-smooth-adic. If the original map kills m^q,
+   algebra map by theorem-finite-etale-covers-proper-henselian--2. If the original map kills m^q,
    the lift kills m^(2q), because the obstruction ideal is square-zero.
 2. Pass to the maximal-ideal-adic completion using def-weil-pbc-adic-completion,
    lem-weil-pbc-adic-completion-noetherian and lem-weil-pbc-fs-adic-completion.
@@ -45,7 +45,7 @@ Proof (the six steps of the blueprint node):
    dimension n by lem-weil-pbc-power-series-field-cohen-regular-complete.
    Sending x_i to X_i identifies A/m^2 with T/n^2 as K-algebras.
 4. Starting with A → T/n^2, lift successively through the square-zero kernels of
-   T/n^(r+2) → T/n^(r+1) using def-weil-pbc-formally-smooth-adic.
+   T/n^(r+2) → T/n^(r+1) using theorem-finite-etale-covers-proper-henselian--2.
    Each map kills a power of m. Completeness of T gives a local prime-field-algebra
    map f : A → T; these lifts need not be K-linear.
 5. By lem-weil-pbc-nakayama-local-generators, the f(x_i) generate n.

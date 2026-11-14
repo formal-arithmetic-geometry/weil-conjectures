@@ -17,6 +17,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubcategory
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleExactClosure
+import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Limits
 import Mathlib.Data.Int.Interval
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -26,7 +27,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 # Bounded constructible pro-etale complexes form a triangulated subcategory
 
 Source: Stacks Project, Tags 09AL, 09B5 and 06UQ; Weil blueprint,
-`def-weil-finite-torsion-constructibility`
+`definition-constructible-sheaves`
 (blueprint: lem-weil-proetale-dbc-triangulated).
 -/
 
@@ -106,12 +107,7 @@ theorem finite_stalk_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     [Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)] :
     Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) G) := by
-  let E : proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
-      ModuleCat.{u + 1} (proEtaleGeometricStalkRing y (proEtaleConstantRing Y A)) :=
-    (SheafOfModules.forget _ ⋙
-    PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y) _ ⋙
-    PresheafOfModules.colimitFunctor (C := ProEtaleGeometricNeighbourhood y)
-      (colimit.isColimit (proEtaleGeometricStalkRingDiagram y (proEtaleConstantRing Y A))))
+  let E := geometricRingModuleStalkFunctor y (proEtaleConstantRing Y A)
   have : Finite (E.obj F) :=
     ‹Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)›
   change Finite (E.obj G)
@@ -122,13 +118,7 @@ theorem finite_stalk_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) (hF : IsZero F)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
     Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) := by
-  let D := PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y)
-    ((proEtaleConstantRing Y A).obj ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
-  let L := PresheafOfModules.colimitFunctor (C := ProEtaleGeometricNeighbourhood y)
-    (colimit.isColimit (proEtaleGeometricStalkRingDiagram y (proEtaleConstantRing Y A)))
-  have : D.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-  have : L.IsLeftAdjoint := (PresheafOfModules.colimitAdjunction _).isLeftAdjoint
-  have hz := (SheafOfModules.forget _ ⋙ D ⋙ L).map_isZero hF
+  have hz := (geometricRingModuleStalkFunctor y (proEtaleConstantRing Y A)).map_isZero hF
   have : Subsingleton (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) :=
     ModuleCat.subsingleton_of_isZero hz
   infer_instance
@@ -189,7 +179,7 @@ private theorem finite_homology_support_iff_bounded
 
 /-- Bounded globally constructible cohomology is invariant under isomorphisms and
 cuts out a full triangulated subcategory. Source: Stacks Project, Tags 09AL,
-09B5 and 06UQ; Weil blueprint, `def-weil-finite-torsion-constructibility`
+09B5 and 06UQ; Weil blueprint, `definition-constructible-sheaves`
 (blueprint: lem-weil-proetale-dbc-triangulated).
 
 Proof:

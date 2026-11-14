@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionFlat
 import WeilConjectures.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Flatness from the number of equations and fibre dimension
@@ -39,7 +40,7 @@ quotient base change (`lem-weil-pbc-polynomial-scalar-extension` and
 `lem-weil-pbc-tensor-quotient-base-change`) identify every fibre of this presentation.
 The lower bound `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` makes every
 nonempty fibre have dimension exactly `N - c`, so the presentation is a relative global
-complete intersection (`def-weil-pbc-relative-global-complete-intersection`). It is flat
+complete intersection (`theorem-finite-etale-covers-proper-henselian--2`). It is flat
 by `lem-weil-pbc-relative-global-complete-intersection-flat`. Localizing further at the
 prime uses `lem-weil-pbc-localization-of-localization` and
 `lem-weil-pbc-localization-flat`; transitivity of tensoring preserves injections and

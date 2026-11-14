@@ -23,7 +23,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 /-!
 # Finite affine factorizations and gluing of intervals
 
-Source: the Weil conjectures blueprint, main-20261015, `sec-six-functors-basics`,
+Source: the Weil conjectures blueprint, main-20261015, `chap-Construction-of-f`,
 `sk-prop-sf-rf-shriek-preservation.proof.md`, opening and final paragraphs
 (blueprint: lem-sf-affine-chart-factorization-gluing).
 -/
@@ -327,7 +327,7 @@ private theorem glue_finite_intervals
 cohomological and Tor bounds glue with the minimum lower and maximum upper endpoints.
 `IsLeast` and `IsGreatest` specify precisely these extrema of the finite endpoint ranges.
 Restriction is the functor on derived categories induced by exact etale inverse image.
-Source: main-20261015 blueprint, proof of `sk-prop-sf-rf-shriek-preservation`, first and last
+Source: main-20261015 blueprint, proof of `theorem-f-shriek-finite-coefficients`, first and last
 paragraphs (blueprint: lem-sf-affine-chart-factorization-gluing).
 
 Proof plan:
@@ -343,7 +343,7 @@ Proof plan:
 4. Finite type over the field makes `X` Noetherian
    (lem-weil-pbc-finite-type-over-noetherian).
 5. Exact inverse image commutes with cohomology
-   (prop-weil-pbc-inverse-image-modules-exact). Jointly surjective inverse images
+   (situation-conventions). Jointly surjective inverse images
    detect zero sheaves (lem-etale-sheaf-jointly-surjective-conservative).
 6. Compare the two constructibility notions
    (lem-weil-pbc-constructible-etale-module-sheaf-comparison), then use Noetherian

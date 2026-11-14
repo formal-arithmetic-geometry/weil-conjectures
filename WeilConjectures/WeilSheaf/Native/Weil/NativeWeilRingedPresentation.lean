@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 /-! # Underived ringed-site presentation of native Weil sheaves
 
 Source: the Frobenius action-site construction in the internal-Hom paragraph of
-cor-coef-verdier-weil-equivariance; Stacks 00W0 and 00YV.
+prose-10-20; Stacks 00W0 and 00YV.
 -/
 
 @[expose] public section
@@ -61,7 +61,7 @@ private noncomputable def inverse_hom_comparison
 /-- Native Weil sheaves admit an additive ringed-site presentation preserving the
 underived internal Hom, naturally in both module variables.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom paragraph; the action-site
+Source: prose-10-20, internal-Hom paragraph; the action-site
 part of native tensor lift steps 1--2; Stacks 00W0 and 00YV.
 (blueprint: lem-sf-native-weil-ringed-presentation)
 

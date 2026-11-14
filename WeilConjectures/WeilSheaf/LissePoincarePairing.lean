@@ -73,7 +73,7 @@ pairings `H_c^i(X₀ ⊗ k̄, F) × H^j(X₀ ⊗ k̄, F^∨) ⟶ ℚ̄_ℓ`, `i 
 `⟨F x, F y⟩ = q^d ⟨x, y⟩` for the geometric Frobenius `F`: the value line is `ℚ̄_ℓ(-d)`.
 
 This is `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`
-(blueprint `thm-pod-degreewise-perfectness-over-a-field`), which pairs with `F^∨(d)`, transported
+(blueprint `corollary-degreewise-duality-over-fields--1`), which pairs with `F^∨(d)`, transported
 along `H^j(F^∨(d)) ≅ H^j(F^∨)` with Frobenius rescaled by `χ_ℓ(σ)ᵈ = q^{-d}`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_constantTwist`). -/
 theorem exists_isPerfPair_compactlySupportedCohomology_dual_mul (d : ℕ)

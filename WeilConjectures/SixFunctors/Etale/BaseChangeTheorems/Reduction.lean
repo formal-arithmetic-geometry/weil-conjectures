@@ -53,7 +53,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- A finite morphism satisfies the base change property for every coefficient ring: the derived
 base change map is an isomorphism on all of `D⁺`
 (`AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite`).
-(blueprint: `prop-weil-pbc-finite-morphism`) -/
+(blueprint: `lemma-finite-morphisms--2`) -/
 theorem Etale.hasTorsionBaseChange_of_isFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] :
     Etale.HasTorsionBaseChange Λ f :=
   Etale.hasTorsionBaseChange_of_isBaseChangeIso Λ f
@@ -72,7 +72,7 @@ if `ℙ¹_S ⟶ S` satisfies the base change property for every scheme `S`, then
 for every finite index type `n`: the composite `(ℙ¹_S)ᵏ ⟶ ℙⁿ_S ⟶ S` of the finite surjective
 symmetric product morphism with the projection is a composite of projective lines, and the base
 change property cancels along the finite surjective symmetric product morphism.
-(blueprint: `lem-weil-pbc-reduction-projective-space`) -/
+(blueprint: `lemma-pbc-projective-space--1`) -/
 theorem Etale.hasTorsionBaseChange_projectiveSpace (hΛ : IsAddTorsion Λ)
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S)) (n : Type u)
     [Finite n] (S : Scheme.{u}) : Etale.HasTorsionBaseChange Λ (ℙ(n; S) ↘ S) := by
@@ -95,7 +95,7 @@ has the base change property, as `i` is finite and `pₙ : ℙⁿ_Y ⟶ Y` has i
 `AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveSpace`; so does `π`, the composite of
 the closed immersion `(π, i) : X̃ ⟶ ℙⁿ_X` with the projection `ℙⁿ_X ⟶ X`. Cancellation along the
 proper surjection `π` gives the base change property for `f`.
-(blueprint: `prop-weil-pbc-reduction-to-projective-line`) -/
+(blueprint: `proposition-proper-base-change-etale-site--1`) -/
 theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion
     (hΛ : IsAddTorsion Λ)
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
@@ -132,7 +132,7 @@ change property for `pₙ` comes from that of `ℙ¹` by the symmetric-product m
 transfers to `f` because it composes and cancels along proper surjections. These manipulations
 need a torsion coefficient ring, which is reached by the change of coefficients
 `Λ ↝ Λ ⧸ pΛ`.
-(blueprint: `sk-thm-reduction`, `prop-weil-pbc-reduction-to-projective-line`) -/
+(blueprint: `proposition-proper-base-change-etale-site--1`) -/
 @[stacks 0A4F]
 theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))

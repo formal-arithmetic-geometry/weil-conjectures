@@ -52,8 +52,8 @@ Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC
 
 Proof:
 1. Work over an affine open `S₀ = Spec A` and set `X₀ = f⁻¹(S₀)`. Quasi-compactness
-   (`def-weil-pbc-scheme-conventions`) supplies a finite affine cover `Uᵢ = Spec Bᵢ` of `X₀`.
-   Quasi-coherence (`pqf-def-coherent`) identifies the restrictions with associated modules
+   (`definition-ind-etale-pro-etale-weakly--3`) supplies a finite affine cover `Uᵢ = Spec Bᵢ` of
+   `X₀`. Quasi-coherence (`pqf-def-coherent`) identifies the restrictions with associated modules
    `Mᵢ`. Quasi-separatedness makes each overlap quasi-compact, by the relative diagonal,
    so choose finite covers of the overlaps by principal opens `Wᵢⱼₖ = D(gᵢⱼₖ)` in `Uᵢ`.
    Their section modules are the localizations `Nᵢⱼₖ = (Mᵢ)_{gᵢⱼₖ}`, using

@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.AdicCompletion
 
 /-- The actual Roos completion of a K-flat representative is itself complete.
-Source: Stacks 099B and 0A0E; blueprint det-pbc-complete-derived-completion
+Source: Stacks 099B and 0A0E; blueprint proposition-proper-base-change-complete-integral
 (auxiliary; not a blueprint node).
 
 Proof: choose the coefficient uniformizer endomorphism d. The normalized comparison
@@ -51,7 +51,7 @@ theorem isDerivedComplete_roos
   let e := eR ≪≫ cP.symm
   obtain ⟨cR, hcR⟩ := internal_quotient_principal_cone_comparison l E X d hd R hR
   let v := DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-    (DerivedNakayama.scalarOnComplex l E X d R))
+    (End.of (DerivedNakayama.scalarOnComplex l E X d R)))
   obtain ⟨r, hr⟩ :=
     (internal_principal_cone_hom_reflection l E X d hd R P).surjective e.hom
   change v ≫ r = e.hom at hr

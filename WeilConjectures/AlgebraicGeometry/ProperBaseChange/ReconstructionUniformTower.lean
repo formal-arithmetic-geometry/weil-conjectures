@@ -188,7 +188,7 @@ private theorem tensorCast_smul
         ((toSheafify (ProEt.topology Y)
           (SheafOfModules.changeOfRingsPresheaf c M).presheaf).app V
             (b ⊗ₜ[B.obj.obj V,(c.hom.app V).hom] x)) =
-      ((E.val.obj V).smul b).hom ((eqToHom hE.symm).val.app V
+      ((E.val.obj V).smul b).asHom.hom ((eqToHom hE.symm).val.app V
         ((toSheafify (ProEt.topology Y)
           (SheafOfModules.changeOfRingsPresheaf c M).presheaf).app V
             ((1 : T.obj.obj V) ⊗ₜ[B.obj.obj V,(c.hom.app V).hom] x))) := by
@@ -207,7 +207,7 @@ private theorem localTensorSection_smul
     {T : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (c : B ⟶ T)
     (M : pbcModules Y B) (V : Y.ProEtᵒᵖ) (b : T.obj.obj V) (x : M.val.obj V) :
     pbcTensorSection c M V b x =
-      ((((pbcExtend c).obj M).val.obj V).smul b).hom (pbcTensorSection c M V 1 x) := by
+      ((((pbcExtend c).obj M).val.obj V).smul b).asHom.hom (pbcTensorSection c M V 1 x) := by
   dsimp only [pbcTensorSection, completedAdicChangeTensor, pbcExtend, completedAdicChange]
   exact tensorCast_smul Y B c M _ ((pbcExtensionExistence c).choose_spec.choose M) V b x
 
@@ -1081,8 +1081,8 @@ each finite free Koszul complex; its transition multiplies by $a_j$ in degree $-
 identity in degree zero. Thus $c$ also respects Koszul completion and its unit.
 Uses: lem-weil-pbc-proetale-immersion-limit-preservation,
 lem-weil-proetale-countable-products-exact, lem-weil-derived-countable-products-core,
-lem-sf-exact-functor-derived-triangulated, lem-weil-pbc-ringed-strict-tower-homotopy-limit,
-lem-weil-pbc-profinite-coefficient-inverse-image, def-weil-pbc-proetale-operations,
+situation-conventions, lem-weil-pbc-ringed-strict-tower-homotopy-limit,
+lem-weil-pbc-profinite-coefficient-inverse-image, prose-03-02,
 lem-pur-derived-change-of-rings, def-weil-pbc-intrinsic-completion, lem-pc-kflat-resolution,
 lem-weil-pbc-ringed-pullback-preserves-kflat, lem-weil-pbc-ringed-topoi-module-pullback-tensor,
 lem-weil-proetale-weakly-etale-localization.

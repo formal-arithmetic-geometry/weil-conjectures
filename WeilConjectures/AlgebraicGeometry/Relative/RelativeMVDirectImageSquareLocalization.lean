@@ -54,7 +54,6 @@ private theorem normalized_unit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
 attribute [local irreducible] schemeNormalizedDirectImageCompIso
 
 set_option linter.all false in
-set_option maxHeartbeats 400000 in
 private theorem general_square_unit
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

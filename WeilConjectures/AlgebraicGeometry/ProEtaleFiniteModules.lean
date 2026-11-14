@@ -9,12 +9,15 @@ public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-!
 # Finite coefficients on the small pro-etale site
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node def-weil-pbc-proetale-modules (blueprint: def-weil-pbc-proetale-modules).
+node definition-small-pro-etale-site--1 (blueprint: definition-small-pro-etale-site--1).
 
 ## Main definitions
 
@@ -38,8 +41,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- A diagram of left modules is a module presheaf over the constant ring presheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientModulePresheaf (C : Type uC) [Category.{vC} C]
     (Λ : Type (u + 1)) [Ring Λ] :
     (Cᵒᵖ ⥤ ModuleCat.{u + 1} Λ) ⥤
@@ -117,7 +120,7 @@ variable (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
 
 /-- Continuous functions on the quotient space of connected components, with pointwise
 ring operations and restriction by precomposition. Source: blueprint,
-`def-weil-pbc-proetale-modules` (blueprint: def-weil-pbc-proetale-modules). -/
+`definition-small-pro-etale-site--1` (blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientPresheaf (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     T.ProEtᵒᵖ ⥤ RingCat.{u + 1} where
@@ -140,15 +143,15 @@ noncomputable def finiteCoefficientPresheaf (T : Scheme.{u}) (Λ : Type (u + 1))
     rfl
 
 /-- The coefficient ring sheaf is the sheafification of continuous functions on connected
-components. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+components. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientRingSheaf : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1} :=
   (presheafToSheaf (Scheme.ProEt.topology T) RingCat.{u + 1}).obj
     (finiteCoefficientPresheaf T Λ)
 
 /-- Constant scalar sections of the continuous-function coefficient presheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientConstants :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of Λ) ⟶ finiteCoefficientPresheaf T Λ where
   app U := RingCat.ofHom
@@ -160,16 +163,16 @@ noncomputable def finiteCoefficientConstants :
   naturality _ _ f := by ext r; rfl
 
 /-- The canonical scalar map from the constant presheaf to the coefficient ring sheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientScalarMap :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of Λ) ⟶ (finiteCoefficientRingSheaf T Λ).obj :=
   finiteCoefficientConstants T Λ ≫
     toSheafify (Scheme.ProEt.topology T) (finiteCoefficientPresheaf T Λ)
 
 /-- Constant scalar sections identify the coefficient sheaf with the sheafification of
-constant scalars. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules).
+constant scalars. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1).
 
 Proof: continuous functions to a discrete ring are locally constant. Their level sets,
 pulled back along the quotient map to connected components, are open and give an open
@@ -216,15 +219,15 @@ theorem finiteCoefficientScalarMap_locallyBijective :
   constructor <;> dsimp only [finiteCoefficientScalarMap] <;> infer_instance
 
 /-- Local injectivity needed for the associated module sheaf construction.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientScalarMap_isLocallyInjective :
     Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) :=
   (finiteCoefficientScalarMap_locallyBijective T Λ).1
 
 /-- Local surjectivity needed for the associated module sheaf construction.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientScalarMap_isLocallySurjective :
     Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) :=
   (finiteCoefficientScalarMap_locallyBijective T Λ).2

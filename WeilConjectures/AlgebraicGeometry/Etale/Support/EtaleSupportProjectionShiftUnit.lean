@@ -583,19 +583,20 @@ Stacks Tags 0F0G, 0B56, 0GL1
 (blueprint: lem-pur-etale-support-projection-shift-unit).
 
 Proof plan:
-1. Apply lem-kun-0f0g to the proper part c.g, E = j_! K and unbounded L. A ring killed
+1. Apply proposition-proper-direct-image-constructible-complexes--9 to the proper part c.g, E = j_!
+K and unbounded L. A ring killed
    by a power of ell is torsion, including the zero ring. Conjugate the proper counit
-   projection of def-kun-projection-formula-map by lem-kun-tensor-sym.
+   projection of definition-projection-formula-map--1 by lem-kun-tensor-sym.
 2. Apply lem-pur-etale-open-derived-tensor to M = r^* L. Its inverse projection is the
    derived sheaf extension-by-zero tensor map. Compose with the proper map and with
    lem-kun-derived-pullback-composition-monoidal. All comparisons are derived natural
    transformations, hence independent of resolutions and natural in both variables.
 3. lem-weil-pbc-ringed-projection-mate-exact supplies the proper shift/unit square;
-   prop-weil-pbc-inverse-image-modules-exact identifies exact and ringed pullback, and
+   situation-conventions identifies exact and ringed pullback, and
    lem-weil-pbc-derived-adjunction-shift identifies the right-derived shift comparison.
    Iterate the shift square forwards and backwards. For degrees p,q and shift n,
    the signs from the second-factor shift and the swap multiply as
-   (-1)^(n*p) * (-1)^(p*(q-n)) = (-1)^(p*q), by def-kun-derived-tensor.
+   (-1)^(n*p) * (-1)^(p*(q-n)) = (-1)^(p*q), by proposition-open-direct-image-preserves-finite.
 4. On K-flat coefficient models the coefficient-first open tensor map is degreewise
    and has no extra sign. Reindexing commutes with this map in every summand of the
    direct-sum total, including unbounded totals. At the unit it is scalar action,

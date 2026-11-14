@@ -22,9 +22,9 @@ hom commutes with the Tate twist: the canonical map
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.exists_isLocallyConstantSheaf_tateObject` (`lem-sf-twist-interchange`)
-- `AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_tateObject` (`lem-sf-twist-interchange`)
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_tateObject_shift` (`lem-sf-twist-interchange`)
+- `AlgebraicGeometry.Etale.exists_isLocallyConstantSheaf_tateObject` (`theorem-poincare-duality--2`)
+- `AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_tateObject` (`theorem-poincare-duality--2`)
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_tateObject_shift` (`theorem-poincare-duality--2`)
 -/
 
 @[expose] public section
@@ -42,7 +42,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] (X : Scheme.{u})
   [HasInvertibleExponent Λ X]
 
-/-- Blueprint `lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 Every Tate twisting object `Λ_X(m)` is invertible locally constant of rank one: it is a locally
 constant sheaf `L` of `Λ`-modules placed in degree zero whose stalks at geometric points are free
@@ -55,7 +55,7 @@ theorem exists_isLocallyConstantSheaf_tateObject (m : ℤ) :
         Nonempty (tateObject Λ X m ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) :=
   ⟨isInvertible_tateObject Λ X m, HasTateTwist.exists_isLocallyConstantSheaf_twistObject X m⟩
 
-/-- Blueprint `lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 For all `K, M ∈ D(X_ét, Λ)` and `m ∈ ℤ` the canonical map
 `RHom(K, M) ⊗ᴸ Λ_X(m) ⟶ RHom(K, M ⊗ᴸ Λ_X(m))`, the transpose of `ev ⊗ 1`, is an
@@ -67,7 +67,7 @@ theorem isIso_derivedHomTensorMap_tateObject (K M : DerivedCategoryModule Λ X) 
   DerivedCategory.isIso_derivedHomTensorMap K
     ((isInvertible_iff_exists_derivedTensor _).2 (isInvertible_tateObject Λ X m)) M
 
-/-- Blueprint `lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 For every `K ∈ D(X_ét, Λ)` and `m, n ∈ ℤ`, `RHom(K, Λ_X(m)[n]) ≅ K^∨(m)[n]`, where
 `K^∨ = RHom(K, Λ_X)` is the coefficient dual and `(m)` the Tate twist. -/

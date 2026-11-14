@@ -325,7 +325,6 @@ private theorem ordinaryProjection_limit (N : coefficientSequenceModules l E W) 
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, NatTrans.comp_app,
     Functor.whiskerLeft_app, Iso.symm_hom, lim.π_app]
   erw [limMap_π_assoc]
-  try simp only [Category.assoc]
   apply congrArg (fun f ↦ limit.π
     ((seqRestriction (baseTopology W) (finiteRings l E W) (finiteMaps l E W)
       (completionCone l E W)).obj N) (op n) ≫ f)

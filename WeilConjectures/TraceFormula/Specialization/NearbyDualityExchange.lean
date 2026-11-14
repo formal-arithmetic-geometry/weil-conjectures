@@ -63,7 +63,7 @@ private lemma map_mateEquiv_app_comp_counit_aux
     (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f').map
         ((mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-          (boundedConstructibleUpperStarLowerStarAdjunction ℓ f') β).natTrans.app A) ≫
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ f') β).app A) ≫
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ f').counit.app
           ((boundedConstructibleNearbyCycles hM).obj A) =
       β.app ((boundedConstructibleLowerStar ℓ f).obj A) ≫
@@ -86,8 +86,6 @@ lemma Hom.map_boundedConstructiblePushforwardExchange_app_comp_counit_app
   rw [Hom.boundedConstructiblePushforwardExchange_eq_mateEquiv]
   exact map_mateEquiv_app_comp_counit_aux hM hN _ A
 
-set_option maxHeartbeats 1000000 in
--- the concrete ℚ̲̄_ℓ-coefficient functors are unfolded when matching the generic statements
 /-- The oplax monoidality of `NearbyCyclesModel.liftExchange` of an arbitrary transformation
 `α : Ψ_N ⋙ Lf'^* ⟶ Lf^* ⋙ Ψ_M`, deduced from that of `α`; the transformation is kept abstract so
 that the kernel never unfolds the pullback exchange. -/
@@ -120,8 +118,12 @@ private lemma liftExchange_tensor_oplax_aux
           _ _ ≫ (β.app A ⊗ₘ β.app B) ≫ boundedConstructibleTensorMap hM _ _ := by
   subst hβ
   apply ObjectProperty.hom_ext
+  -- Normalize the restricted maps explicitly so matching `hα` does not unfold the
+  -- concrete nearby-cycles functors to compare their morphisms.
   simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
-    boundedConstructibleUpperStar_δ_hom, ObjectProperty.tensorHom_hom', liftExchange_app_hom]
+    boundedConstructibleUpperStar_δ_hom, ObjectProperty.tensorHom_hom', liftExchange_app_hom,
+    boundedConstructibleNearbyCycles, ObjectProperty.lift_map, ObjectProperty.homMk_hom,
+    Functor.comp_map, ObjectProperty.ι_map, boundedConstructibleTensorMap]
   exact hα A.obj B.obj
 
 /-- **The restricted pullback exchange is monoidal**, in the oplax form: the restriction of
@@ -185,8 +187,8 @@ private lemma pushforwardExchange_tensor_restricted_aux
     (fun x y ↦ boundedConstructibleTensorMap_natural hM x y) β χ hχ hβ A B
 
 /-- **The pushforward exchange is compatible with the lax tensor maps** (blueprint
-`det-tf-nearby-duality-proper` (1), "the lax products commute through proper exchange"): with the
-lax monoidal structures of `Rf_*` and `Rf'_*` (`boundedConstructibleLowerStarLaxMonoidal`),
+`lemma-nearby-duality-proper-direct-image` (1), "the lax products commute through proper exchange"):
+with the lax monoidal structures of `Rf_*` and `Rf'_*` (`boundedConstructibleLowerStarLaxMonoidal`),
 `Rf'_*(μ_M) ∘ μ_{Rf'_*} ∘ (χ ⊗ χ) = χ ∘ Ψ_N(μ_{Rf_*}) ∘ μ_N`. Both sides have the same adjoint,
 the tensor product of the generic-open counits, by the monoidality of the pullback exchange
 (`CategoryTheory.Verdier.pushforwardExchange_tensor_aux`). -/
@@ -216,8 +218,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [IsProper (toPoint Z).left]
 
-/-- **Global Verdier duality** (blueprint `det-tf-nearby-duality-proper` (3), "global Verdier
-duality"): for a proper `k`-scheme `Z` with structure morphism `a`, the duality map
+/-- **Global Verdier duality** (blueprint `lemma-nearby-duality-proper-direct-image` (3), "global
+Verdier duality"): for a proper `k`-scheme `Z` with structure morphism `a`, the duality map
 `Ra_* D_Z K ⟶ RHom(Ra_* K, ℚ̄_ℓ)` of `(Ra_*, μ, tr_Z)` (`μ` the lax structure
 `boundedConstructibleLowerStarLaxMonoidal`, `tr_Z` the trace `NearbyCyclesModel.trace`) is an
 isomorphism: read through `Ra_! ≅ Ra_*` it is the Verdier exchange morphism

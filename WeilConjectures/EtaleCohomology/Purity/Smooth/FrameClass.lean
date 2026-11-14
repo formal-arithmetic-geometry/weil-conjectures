@@ -117,7 +117,7 @@ section Frame
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasKummerClass Λ] [Finite Λ]
 
-/-- Blueprint `def-pur-frame-class`: Class of a frame
+/-- Blueprint `proposition-purity-vector-bundles`: Class of a frame
 
 A *frame* at a closed subscheme `z : Z ⟶ V`: an étale `V`-scheme `e : U ⟶ V` together with
 functions `f₁, …, f_c ∈ Γ(U, 𝒪_U)` generating the ideal of `Z ∩ U = Z ×_V U` in `U`. In the
@@ -149,7 +149,7 @@ lemma range_zeroLocusSubschemeι (F : PurityFrame z c) :
     (pullback.snd z F.e).isClosedEmbedding.isClosed_range.closure_eq]
 
 variable (Λ) in
-/-- Blueprint `def-pur-frame-class`: Class of a frame
+/-- Blueprint `proposition-purity-vector-bundles`: Class of a frame
 
 The *class of a frame* `(U, f₁, …, f_c)` at `Z`: the cup product with supports of the Kummer
 boundaries `α_k = ∂κ(f_k) ∈ H²_{V(f_k)}(U, Λ(1))`,

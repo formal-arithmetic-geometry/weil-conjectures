@@ -33,8 +33,8 @@ private theorem inverse_mate_app
     {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} {L₂ : C₃ ⥤ C₄} {R₂ : C₄ ⥤ C₃}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) {G : C₁ ⥤ C₃} {H : C₂ ⥤ C₄}
     (β : TwoSquare R₁ H G R₂) (K : C₁) :
-    ((mateEquiv adj₁ adj₂).symm β).natTrans.app K =
-      L₂.map (G.map (adj₁.unit.app K) ≫ β.natTrans.app (L₁.obj K)) ≫
+    ((mateEquiv adj₁ adj₂).symm β).app K =
+      L₂.map (G.map (adj₁.unit.app K) ≫ β.app (L₁.obj K)) ≫
         adj₂.counit.app (H.obj (L₁.obj K)) := by
   simp [mateEquiv]
 

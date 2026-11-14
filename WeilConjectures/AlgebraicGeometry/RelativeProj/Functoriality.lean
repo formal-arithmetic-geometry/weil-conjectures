@@ -23,10 +23,10 @@ condition on every affine open induces a morphism `relProjMap f : B.relProj ⟶ 
   `relProjMap_id` and `relProjMap_comp`.
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso` — a degree-preserving isomorphism
   of graded algebras induces an isomorphism of relative `Proj`s over `X`
-  (blueprint: `prop-nagata-relative-proj-functoriality`, item 2).
+  (blueprint: `definition-admissible-blow-up--1`, item 2).
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap` — a surjective
   degree-preserving morphism induces a closed immersion in the opposite direction
-  (blueprint: `prop-nagata-relative-proj-functoriality`, item 3).
+  (blueprint: `definition-admissible-blow-up--1`, item 3).
 -/
 
 @[expose] public section
@@ -75,7 +75,7 @@ lemma map_res_map_app_relProjι {U V : X.affineOpens} (h : U ≤ V) :
   exact congrArg _ (A.relProjFunctor_map_relProjι (homOfLE h))
 
 /-- The morphism of relative `Proj`s induced by a morphism of graded algebras satisfying the
-irrelevant ideal condition. (blueprint: `prop-nagata-relative-proj-functoriality`, items 2, 3) -/
+irrelevant ideal condition. (blueprint: `definition-admissible-blow-up--1`, items 2, 3) -/
 noncomputable def relProjMap : B.relProj ⟶ A.relProj :=
   colimit.desc B.relProjFunctor
     { pt := A.relProj
@@ -120,7 +120,7 @@ lemma relProjMap_comp (g : B ⟶ C) (hg : IrrelevantLE g) :
 degree-preserving isomorphism `e : A ≅ B` of quasi-coherent graded algebras (which is compatible
 with the `Γ(X, U)`-algebra structures, i.e. induces the identity on the degree-zero base) induces
 an isomorphism `B.relProj ≅ A.relProj` over `X`.
-(blueprint: `prop-nagata-relative-proj-functoriality`, item 2) -/
+(blueprint: `definition-admissible-blow-up--1`, item 2) -/
 noncomputable def relProjIsoOfIso (e : A ≅ B) : B.relProj ≅ A.relProj where
   hom := relProjMap e.hom (irrelevantLE_of_surjective e.hom fun U x ↦
     ⟨e.inv.app U x, by rw [← GradedRingHom.comp_apply, ← comp_app, e.inv_hom_id]; rfl⟩)
@@ -146,7 +146,7 @@ lemma iSup_opensRange_relProjι : ⨆ U : X.affineOpens, (A.relProjι U).opensRa
 
 /-- **Surjections of graded algebras induce closed immersions**: if `f : A ⟶ B` is surjective on
 every affine open, then `relProjMap f : B.relProj ⟶ A.relProj` is a closed immersion.
-(blueprint: `prop-nagata-relative-proj-functoriality`, item 3) -/
+(blueprint: `definition-admissible-blow-up--1`, item 3) -/
 theorem isClosedImmersion_relProjMap (hsurj : ∀ U, Function.Surjective (f.app U)) :
     IsClosedImmersion (relProjMap f (irrelevantLE_of_surjective f hsurj)) := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsClosedImmersion) _

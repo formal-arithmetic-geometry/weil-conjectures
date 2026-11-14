@@ -17,11 +17,11 @@ Let `ρ : Λ ⟶ Λ ⧸ I` be the reduction modulo an ideal (in the blueprint, `
 `I` is the maximal ideal `(ϖ)`). Extension of scalars `M ↦ (Λ ⧸ I) ⊗_Λ M` is right exact but not
 exact; its total left derived functors, computed on K-flat resolutions, are
 
-- `AlgebraicGeometry.Etale.residueScalarExtension` (`pur7710-def-residue-extension`):
+- `AlgebraicGeometry.Etale.residueScalarExtension` (`definition-sp-scalar-extension--1`):
   `D(W_ét, Λ) ⥤ D(W_ét, Λ ⧸ I)`, deriving `M ↦ (Λ ⧸ I)_W ⊗_{Λ_W} M`
   (`CategoryTheory.Sheaf.quotSMulTop`);
 - `AlgebraicGeometry.Etale.residueScalarExtensionModule`
-  (`pur7710-def-residue-extension-module`): `D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})`, deriving
+  (`lemma-kunneth-one-identity-factor`): `D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})`, deriving
   `M ↦ M / I M` (`ModuleCat.quotSMulTop`).
 
 The only input is that these functors send quasi-isomorphisms between K-flat complexes to
@@ -60,7 +60,7 @@ instance preservesKFlatQuasiIso_sheafQuotSMulTop (W : Scheme.{u}) :
       ((NatIso.mapHomologicalComplex (Sheaf.quotSMulTopCompRestrictScalarsIso I) _).app K).symm
   exact (ShortComplex.exact_map_iff_of_faithful _ ι).1 (h n)
 
-/-- Blueprint `pur7710-def-residue-extension`: residue scalar extension of sheaf complexes.
+/-- Blueprint `definition-sp-scalar-extension--1`: residue scalar extension of sheaf complexes.
 
 For a scheme `W` and the reduction `ρ : Λ ⟶ Λ ⧸ I` (in the blueprint `𝒪_E/ϖⁿ ⟶ 𝒪_E/ϖ`), the
 functor `- ⊗ᴸ_Λ Λ ⧸ I : D(W_ét, Λ) ⥤ D(W_ét, Λ ⧸ I)` is the total left derived functor, computed
@@ -84,7 +84,7 @@ instance preservesKFlatQuasiIso_moduleCatQuotSMulTop :
         K).symm
   exact (ShortComplex.exact_map_iff_of_faithful _ ι).1 (h n)
 
-/-- Blueprint `pur7710-def-residue-extension-module`: residue scalar extension of module
+/-- Blueprint `lemma-kunneth-one-identity-factor`: residue scalar extension of module
 complexes.
 
 The functor `- ⊗ᴸ_Λ Λ ⧸ I : D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})` (in the blueprint for

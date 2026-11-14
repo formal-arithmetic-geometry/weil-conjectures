@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNor
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.AlgebraicGeometry.StandardAbelianExtSectionDiagram
+import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 

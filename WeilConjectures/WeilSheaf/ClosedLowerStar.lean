@@ -74,9 +74,9 @@ noncomputable def WeilComplex.derivedLowerStarIsoDerivedLowerStarOfIsClosedImmer
       WeilComplex.derivedLowerStarOfIsClosedImmersion i :=
   Iso.refl _
 
-/-- Blueprint `def-weil-open-closed-recollement` and
-`prop-weil-open-closed-recollement-adjunctions` (open–closed recollement), for Weil complexes.
-Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--8` and
+`proposition-extension-zero-restriction-closed-subscheme` (open–closed recollement), for Weil
+complexes. Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
 complementary open immersion. There is a natural transformation `K ⟶ Ri_* i^* K` (the closed
 unit) which is an isomorphism at every `K` with `j^* K = 0`: in the recollement triangle
 `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`, the first term vanishes. Here `Ri_*` is

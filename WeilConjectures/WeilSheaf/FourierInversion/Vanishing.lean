@@ -19,7 +19,7 @@ public import WeilConjectures.WeilSheaf.TraceFunctionVanishing
 
 The compactly supported direct image of `ℒ_ψ(a s) ⊗ π^* P` along a trivial line bundle
 `π` with fibre coordinate `s` vanishes, for `a` a unit and `ψ` nontrivial (blueprint
-`lem-fd-cohomology-affine-line-character`).
+`lemma-integral-linear-character--2`).
 
 ## Proof
 
@@ -300,11 +300,11 @@ theorem WeilComplex.nonempty_iso_upperStar_derivedLowerShriek_tensorLisse_artinS
 
 end LineBundle
 
-/-- **Relative vanishing** (blueprint `lem-fd-cohomology-affine-line-character`, in the relative
-form used in the proofs of `lem-fd-first-formula` and `lem-fd-convolution-kernel`). Let
-`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle with fibre coordinate `s`, let `a` be a
-unit on `X` and `ψ` nontrivial. Then `Rπ₀!(ℒ_ψ(a s) ⊗ π^* P) = 0` for every Weil complex `P`
-on `X`: on the fibre over a geometric point `x̄` this is
+/-- **Relative vanishing** (blueprint `lemma-integral-linear-character--2`, in the relative
+form used in the proofs of `lemma-fourier-transform-constant-sheaf` and
+`proposition-fourier-inversion`). Let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle with
+fibre coordinate `s`, let `a` be a unit on `X` and `ψ` nontrivial. Then `Rπ₀!(ℒ_ψ(a s) ⊗ π^* P) = 0`
+for every Weil complex `P` on `X`: on the fibre over a geometric point `x̄` this is
 `P_x̄ ⊗ RΓ_c(𝔸¹_x̄, ℒ_ψ(a(x̄) s)) = 0`, `a(x̄) ≠ 0`. -/
 theorem WeilComplex.isZero_derivedLowerShriek_tensorLisse_artinSchreierOf_upperStar
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) {Y : Scheme.{u}}

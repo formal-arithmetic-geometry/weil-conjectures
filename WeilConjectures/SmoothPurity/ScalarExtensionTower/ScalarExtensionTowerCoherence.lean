@@ -83,7 +83,7 @@ import all WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowe
 
 /-! # Scalar extension on strict quotient models
 
-Source: main-20261015 blueprint, def-weil-derived-pullback-tensor-hom, integral operations;
+Source: main-20261015 blueprint, prose-03-02, integral operations;
 Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 
 ## Main definitions
@@ -131,7 +131,6 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 attribute [local irreducible] scalar_adj comparisons
   integralComparisonSequenceTensorSection integralComparisonSequenceScalarUnit
 
-set_option maxHeartbeats 800000 in
 -- Check all three normalized maps on homogeneous tensor generators.
 /-- Equality before localization, hence for both directions and all quotient transitions.
 Source: blueprint integral operations; Stacks 03EL, 07A4
@@ -277,7 +276,7 @@ Together with square, unit, composition and the normalized cochain definitions, 
 identifies the actual strict quotient maps and their derived limits, including ramification.
 The displayed equations are in the derived category of whole quotient systems;
 applying total derived limit gives exactly the two stated integral comparisons.
-Source: main-20261015 blueprint, def-weil-derived-pullback-tensor-hom, integral clause;
+Source: main-20261015 blueprint, prose-03-02, integral clause;
 Stacks 03EL, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 Proof:
 1. Use flat-term K-flat representatives P,Q and K-flat change of rings to form

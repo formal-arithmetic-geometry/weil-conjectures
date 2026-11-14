@@ -19,7 +19,7 @@ Let `φ : M ⟶ N` be a morphism of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom`) over `f : X ⟶ Y` and
 `f' : X' ⟶ Y'`, with morphisms `t` of total spaces and `g` of geometric generic fibres. This file
 constructs the exchange maps of the nearby cycles `Ψ = Li^* Rj_* Lε^*` on the
-unbounded derived categories of module objects (blueprint `det-sp-nearby-cycles-exchanges`):
+unbounded derived categories of module objects (blueprint `prose-E-03`):
 
 * the *pullback exchange* `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*`
   (`NearbyCyclesModel.Hom.pullbackExchange`), assembled from the pullback comparisons of the
@@ -34,10 +34,10 @@ unbounded derived categories of module objects (blueprint `det-sp-nearby-cycles-
 
 - `NearbyCyclesModel.Hom.map_unit_comp_pullbackExchange_app`: the unit law
   `α_f(Λ) ∘ Lf'^* σ_N = Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹` (blueprint
-  `sk-lem-tf-nearby-mate-coherences` (2)).
+  `sec-Base-change-for-nearby-cycles` (2)).
 - `NearbyCyclesModel.Hom.unit_comp_map_comp_pushforwardExchange_app`: the unit identity
-  `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}` (blueprint `det-tf-sp-trace-morphism`), and
-  `NearbyCyclesModel.Hom.homEquiv_symm_unit_comp_pushforwardExchange_app`: specialization
+  `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}` (blueprint `proposition-specialization-trace-class`),
+  and `NearbyCyclesModel.Hom.homEquiv_symm_unit_comp_pushforwardExchange_app`: specialization
   commutes with the adjunction `Lf^* ⊣ Rf_*`.
 - `NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso`: a morphism of models whose morphisms
   of total spaces and of geometric generic fibres are isomorphisms has an invertible pullback
@@ -171,7 +171,7 @@ private lemma unit_pullbackExchange_aux'
     (hε : θε.app oY = G.map uεN.hom ≫ ug.hom ≫ uεM.inv ≫ EM.map uf.inv) :
     Fp'.map (uiN.inv ≫ IN.map (adjN.unit.app oTN ≫ JNs.map (ujN.hom ≫ uεN.inv))) ≫
         (Functor.whiskerLeft (EN ⋙ JNs) θi ≫
-          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj).natTrans ≫
+          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj) ≫
             Functor.whiskerRight θε JMs) IM).app oY =
       uf'.hom ≫ (uiM.inv ≫ IM.map (adjM.unit.app oTM ≫ JMs.map (ujM.hom ≫ uεM.inv))) ≫
         (EM ⋙ JMs ⋙ IM).map uf.inv := by
@@ -198,7 +198,7 @@ private lemma unit_pullbackExchange_aux''
     (hε : θε.app oY = G.map uεN.hom ≫ ug.hom ≫ uεM.inv ≫ EM.map uf.inv)
     (α : (EN ⋙ JNs ⋙ IN) ⋙ Fp' ⟶ F ⋙ EM ⋙ JMs ⋙ IM)
     (hα : α = Functor.whiskerLeft (EN ⋙ JNs) θi ≫
-          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj).natTrans ≫
+          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj) ≫
             Functor.whiskerRight θε JMs) IM)
     (σN : oY' ⟶ (EN ⋙ JNs ⋙ IN).obj oY)
     (hσN : σN = uiN.inv ≫ IN.map (adjN.unit.app oTN ≫ JNs.map (ujN.hom ≫ uεN.inv)))
@@ -212,7 +212,7 @@ private lemma homEquiv_symm_comp_mateEquiv_aux' {DY DX DY' DX' : Type*} [Categor
     [Category DX] [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (hχ : χ = (mateEquiv adjf adjf' α)) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
     (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
     (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv)
     {E : DX} (h : oY ⟶ Rf.obj E) :
@@ -225,7 +225,7 @@ private lemma unit_comp_mateEquiv_aux' {DY DX DY' DX' : Type*} [Category DY] [Ca
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (hχ : χ = (mateEquiv adjf adjf' α)) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
     (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
     (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv) :
     σN ≫ ΨN.map (adjf.unit.app oY ≫ Rf.map uf.hom) ≫ χ.app oX =
@@ -237,7 +237,7 @@ private lemma unit_mateEquiv_aux {DY DX DY' DX' : Type*} [Category DY] [Category
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) (K : DY) :
+    (hχ : χ = (mateEquiv adjf adjf' α)) (K : DY) :
     ΨN.map (adjf.unit.app K) ≫ χ.app (Ff.obj K) =
       adjf'.unit.app (ΨN.obj K) ≫ Rf'.map (α.app K) := by
   subst hχ
@@ -247,7 +247,7 @@ private lemma mateEquiv_counit_aux {DY DX DY' DX' : Type*} [Category DY] [Catego
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) (E : DX) :
+    (hχ : χ = (mateEquiv adjf adjf' α)) (E : DX) :
     Ff'.map (χ.app E) ≫ adjf'.counit.app (ΨM.obj E) =
       α.app (Rf.obj E) ≫ ΨM.map (adjf.counit.app E) := by
   subst hχ
@@ -257,14 +257,14 @@ private lemma unit_comp_mateEquiv_aux₂ {DY DX DY' DX' : Type*} [Category DY] [
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (hχ : χ = (mateEquiv adjf adjf' α)) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
     (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
     (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv) :
     σN ≫ ΨN.map (adjf.unit.app oY) ≫ χ.app (Ff.obj oY) =
       adjf'.unit.app oY' ≫ Rf'.map (uf'.hom ≫ σM ≫ ΨM.map uf.inv) := by
   have hb := unit_comp_mateEquiv_aux adjf adjf' α σN σM uf' uf ha
   subst hχ
-  have hn := (mateEquiv adjf adjf' α).natTrans.naturality uf.hom
+  have hn := (mateEquiv adjf adjf' α).naturality uf.hom
   simp only [Functor.comp_map] at hn
   rw [Functor.map_comp, Category.assoc, hn] at hb
   rw [← cancel_mono (Rf'.map (ΨM.map uf.hom))]
@@ -351,7 +351,7 @@ lemma commSq_j : CommSq φ.generic M.j N.j φ.total := ⟨φ.comm_j⟩
 lemma commSq_ε : CommSq M.ε φ.generic f N.ε := ⟨φ.comm_ε.symm⟩
 
 /-- The *pullback exchange* `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of a morphism of models (blueprint
-`det-sp-nearby-cycles-exchanges` (1)): the pullback comparison `Lf'^* Li_N^* ≅ Li_M^* Lt^*` of the
+`prose-E-03` (1)): the pullback comparison `Lf'^* Li_N^* ≅ Li_M^* Lt^*` of the
 special fibres (`t` the morphism of total spaces), then `Li_M^*` of the base change morphism
 `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres (`g` the morphism of
 geometric generic fibres; the mate of the pullback comparison `Lj_M^* Lt^* ≅ Lg^* Lj_N^*`, that is
@@ -365,7 +365,7 @@ noncomputable def pullbackExchange :
       (Functor.whiskerLeft L((N.ε)^*⟦Λ⟧)
           (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
             (derivedUpperStarLowerStarAdjunction Λ M.j)
-            (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans ≫
+            (pullbackSquareComparison Λ φ.commSq_j).hom) ≫
         Functor.whiskerRight (pullbackSquareComparison Λ φ.commSq_ε).hom R((M.j)_*⟦Λ⟧))
       L((M.i)^*⟦Λ⟧)
 
@@ -383,19 +383,19 @@ lemma isIso_pullbackExchange_of_isIso [IsIso φ.total] [IsIso φ.generic] :
     IsIso (φ.pullbackExchange Λ) := by
   have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
+      (pullbackSquareComparison Λ φ.commSq_j).hom) := by
     have := isIso_baseChangeMap_of_weaklyEtale Λ (IsPullback.of_horiz_isIso φ.commSq_j)
     rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
   unfold pullbackExchange
   infer_instance
 
 /-- The *pushforward exchange* `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` of a morphism of models (blueprint
-`det-sp-nearby-cycles-exchanges` (2)): the mate of the pullback exchange `α_f` along the
+`prose-E-03` (2)): the mate of the pullback exchange `α_f` along the
 adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def pushforwardExchange :
     R((f)_*⟦Λ⟧) ⋙ N.nearbyCycles Λ ⟶ M.nearbyCycles Λ ⋙ R((f')_*⟦Λ⟧) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-    (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ)).natTrans
+    (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ))
 
 /-- The pushforward exchange is the mate of the pullback exchange: compatibility with the units
 of `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
@@ -423,7 +423,7 @@ lemma map_pushforwardExchange_app_comp_counit_app
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
     rfl E
 
-/-- **Unit law of the pullback exchange** (blueprint `sk-lem-tf-nearby-mate-coherences` (2)):
+/-- **Unit law of the pullback exchange** (blueprint `sec-Base-change-for-nearby-cycles` (2)):
 `α_f(Λ) ∘ Lf'^* σ_N = Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹`, where `ε_f : Λ_X ≅ Lf^* Λ_Y` and
 `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}` are the unit comparisons. -/
 lemma map_unit_comp_pullbackExchange_app :
@@ -460,9 +460,9 @@ lemma homEquiv_symm_unit_comp_pushforwardExchange_app
     (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
     (φ.map_unit_comp_pullbackExchange_app Λ) h
 
-/-- **Unit identity of the pushforward exchange** (blueprint `det-tf-sp-trace-morphism`):
-`χ_f(Λ_X) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`, up to the unit comparisons
-`ε_f : Λ_X ≅ Lf^* Λ_Y` and `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}`. -/
+/-- **Unit identity of the pushforward exchange** (blueprint
+`proposition-specialization-trace-class`): `χ_f(Λ_X) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`, up to
+the unit comparisons `ε_f : Λ_X ≅ Lf^* Λ_Y` and `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}`. -/
 lemma unit_comp_map_comp_pushforwardExchange_app :
     N.unit Λ ≫ (N.nearbyCycles Λ).map ((derivedUpperStarLowerStarAdjunction Λ f).unit.app (𝟙_ _) ≫
         R((f)_*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ f).hom) ≫

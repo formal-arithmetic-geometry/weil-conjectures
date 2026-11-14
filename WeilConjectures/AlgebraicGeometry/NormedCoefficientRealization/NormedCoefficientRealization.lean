@@ -358,7 +358,7 @@ private theorem transport_property {Λ Λ' : Profinite.CondensedRing.{u}}
       dsimp [transport]
       infer_instance
     let θ := (pullComparison a f).symm
-    let β := (mateEquiv adj adj' θ.hom).natTrans
+    let β := (mateEquiv adj adj' θ.hom)
     have hβ : IsIso β := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
       adj adj' (transport a Y) (transport a X) θ
     refine ⟨asIso β, fun K ↦ ?_⟩
@@ -395,7 +395,7 @@ commutes sectionwise because its map is the restriction of the field map.
 equivalence and Ext_c is isomorphic to Res_(c^-1) (sk-def-sfb-change-of-scalars, Stacks
 03CZ). The exact-functor comparison L(Ext_c) = D(Ext_c)
 (lem-weil-pbc-exact-functor-derived-functor) identifies the derived extension with the
-transport; it is a triangulated equivalence (lem-sf-exact-functor-derived-triangulated).
+transport; it is a triangulated equivalence (situation-conventions).
 5. Exact scalar restriction commutes with cohomology and is faithful
 (lem-weil-pbc-exact-functor-complex-cohomology, Stacks 010N), so it preserves and
 reflects every bound.

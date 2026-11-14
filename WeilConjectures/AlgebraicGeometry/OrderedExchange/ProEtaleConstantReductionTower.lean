@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Perfect projection for strict constant-coefficient reduction towers
 
-Source: Stacks Tags 0944 and 099M; smooth-purity blueprint, fix-lem-exchanges,
-Step 4 (blueprint: lem-sp-completion-mate-comparison).
+Source: Stacks Tags 0944 and 099M; smooth-purity blueprint,
+proposition-composition-base-change-rf-shriek, Step 4 (blueprint:
+lem-sp-completion-mate-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -53,7 +54,7 @@ private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
   let α := TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom
   let β := TwoSquare.mk _ _ _ _
     (quotientEvaluationPull (A := A) f n).inv
-  have h := congrArg (fun z ↦ z.natTrans.app K) (mateEquiv_vcomp a b a α β)
+  have h := congrArg (fun z ↦ z.app K) (mateEquiv_vcomp a b a α β)
   have hp : (mateEquiv a b α).app K = projection d f K := by
     unfold projection
     exact (b.homEquiv _ _).symm_apply_eq.mp (mateEquiv_counit a b α K)
@@ -63,7 +64,7 @@ private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
       TwoSquare.mk _ _ _ _ (quotientTensorPull d f n).hom := by
     rfl
   rw [hab] at h
-  simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk,
+  simp only [TwoSquare.vComp, TwoSquare.mk,
     NatTrans.comp_app, Functor.associator_inv_app, Functor.associator_hom_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp,
     Category.comp_id] at h
@@ -172,8 +173,8 @@ namespace CategoryTheory.AdicSites.OrderedExchangeInterface
 /-- Reexport the existing whole-diagram mate comparison, including invertibility and
 the two finite coefficient normalization clauses. No second postponed proof is introduced.
 
-Source: smooth-purity blueprint, fix-lem-exchanges Proof Step 4; ingredient sources
-Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Proof Step 4;
+ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
 (blueprint: lem-sp-completion-mate-comparison).
 
 Proof, following the ten steps of the DAG node:

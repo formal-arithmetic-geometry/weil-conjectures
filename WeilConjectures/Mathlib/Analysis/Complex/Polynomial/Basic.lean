@@ -19,8 +19,8 @@ off the local factors of an `L`-function from the `L`-function itself:
 
 ## Main statements
 
-- `Polynomial.isCoprime_of_norm_inv_roots`: blueprint `lem-zl-root-radius-separation`.
-- `Polynomial.map_conj_eq_self_of_isCoprime`: blueprint `lem-zl-real-reduced-factors`.
+- `Polynomial.isCoprime_of_norm_inv_roots`: blueprint `theorem-pure-lisse-sheaves-over-relative--1`.
+- `Polynomial.map_conj_eq_self_of_isCoprime`: blueprint `theorem-pure-lisse-sheaves-over-relative`.
 -/
 
 @[expose] public section
@@ -34,7 +34,7 @@ namespace Polynomial
 `B` are coprime. For `A` and `B` with constant term `1` the numbers `z⁻¹` are their reciprocal
 roots, so this says that no reciprocal root of `B` cancels in the fraction `A / B`: its
 reciprocal poles of modulus `S` are exactly the reciprocal roots of `B`, with multiplicity
-(blueprint: `lem-zl-root-radius-separation`). -/
+(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
 theorem isCoprime_of_norm_inv_roots {A B : ℂ[X]} (hA : A ≠ 0) (hB : B ≠ 0) {R S : ℝ}
     (hAR : ∀ z ∈ A.roots, ‖z‖⁻¹ ≤ R) (hBS : ∀ z ∈ B.roots, ‖z‖⁻¹ = S) (hRS : R < S) :
     IsCoprime A B := by
@@ -65,7 +65,7 @@ private theorem map_conj_eq_self_of_dvd {A : ℂ[X]} (hA : A.coeff 0 = 1)
 /-- **Reality of coprime factors.** Let `A` and `B` be coprime complex polynomials with constant
 term `1` such that the fraction `A / B` is fixed by complex conjugation, `A B̄ = Ā B`, that is,
 `A / B ∈ ℝ(T)`. Then `A` and `B` have real coefficients
-(blueprint: `lem-zl-real-reduced-factors`). -/
+(blueprint: `theorem-pure-lisse-sheaves-over-relative`). -/
 theorem map_conj_eq_self_of_isCoprime {A B : ℂ[X]} (hA : A.coeff 0 = 1) (hB : B.coeff 0 = 1)
     (hAB : IsCoprime A B) (h : A * B.map (starRingEnd ℂ) = A.map (starRingEnd ℂ) * B) :
     A.map (starRingEnd ℂ) = A ∧ B.map (starRingEnd ℂ) = B :=

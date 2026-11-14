@@ -57,6 +57,14 @@ attribute [local irreducible] DerivedCategory.monoidalClosed
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+/-- Restrict a comparison along an inclusion of full subcategories. -/
+private def restrict_comparison {C D : Type*} [Category C] [Category D]
+    {P Q : ObjectProperty C} (h : P ≤ Q) {F G : C ⥤ D}
+    (e : Q.ι ⋙ F ≅ Q.ι ⋙ G) : P.ι ⋙ F ≅ P.ι ⋙ G :=
+  NatIso.ofComponents (fun K ↦ e.app ((ObjectProperty.ιOfLE h).obj K)) (by
+    intro K L a
+    exact e.hom.naturality ((ObjectProperty.ιOfLE h).map a))
+
 private theorem iso_eq_of_hom_inv {C : Type*} [Category C] {X Y : C}
     (a b : X ≅ Y) (h : a.hom ≫ b.inv = 𝟙 X) : a = b := by
   apply Iso.ext
@@ -74,6 +82,13 @@ private theorem iso_eq_of_inv {C : Type*} [Category C] {A B : C}
     (a b : A ≅ B) (g : B ⟶ A) (h : a.hom ≫ g = 𝟙 A) (hb : HEq b.inv g) : a = b :=
   iso_eq_of_hom_inv a b ((congrArg (fun z ↦ a.hom ≫ z) (eq_of_heq hb)).trans h)
 
+private theorem exists_iso_eq_of_inv {C : Type*} [Category C] {A B : C}
+    {E : Sort*} {P : E → Prop} {F : E → (A ≅ B)}
+    (a : A ≅ B) (g : B ⟶ A) (h : a.hom ≫ g = 𝟙 A)
+    (he : ∃ e, P e ∧ HEq (F e).inv g) : ∃ e, P e ∧ a = F e := by
+  obtain ⟨e, he, hinv⟩ := he
+  exact ⟨e, he, iso_eq_of_inv a (F e) g h hinv⟩
+
 /-- A common dense refinement of a compactification with itself supplies a dense source. -/
 private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
     [CompactSpace Y] [QuasiSeparatedSpace Y] [IsSeparated f]
@@ -89,7 +104,6 @@ private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
     h.2.2.2.2.2.2.2.2.2.2.2.1⟩
 
 variable (k : Type u) [Field k]
-set_option maxHeartbeats 400000 in
 -- The explicit comparison family has several large derived-category instance arguments.
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem comparisonsForCoefficient
@@ -157,47 +171,43 @@ private theorem comparisonsForCoefficient
       QuasiCompact.of_comp (f := f.hom.left) (g := Y.obj.hom)
     have he := hclosure X
     let J := ObjectProperty.ιOfLE (le_of_eq he.symm)
-    have comparisonData := compactification_coherence_cocycle Λ ℓ hadm k f.hom.left
-    let ψ := Classical.choose comparisonData
-    have hiso := (Classical.choose_spec comparisonData).1
-    have hn := (Classical.choose_spec comparisonData).2.1
-    have hi := (Classical.choose_spec comparisonData).2.2.1
-    have hc := (Classical.choose_spec comparisonData).2.2.2
+    obtain ⟨ψ, hiso, hn, hi, hc⟩ :=
+      compactification_coherence_cocycle Λ ℓ hadm k f.hom.left
     let φ (c d : Compactifications k f) :
         candidate Λ k (X := X) (Y := Y) (f := f) c ≅
           candidate Λ k (X := X) (Y := Y) (f := f) d :=
-      Functor.isoWhiskerLeft J (ψ ⟨c⟩ ⟨d⟩)
+      restrict_comparison (le_of_eq he.symm) (ψ ⟨c⟩ ⟨d⟩)
     refine ⟨φ, ?_, ?_, ?_⟩
     · intro c
-      exact (congrArg (Functor.isoWhiskerLeft J) (hi ⟨c⟩)).trans
-        (Functor.isoWhiskerLeft_refl J _)
+      apply Iso.ext
+      apply NatTrans.ext
+      funext K
+      exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hi ⟨c⟩)
     · intro c d e
-      exact (Functor.isoWhiskerLeft_trans J (ψ ⟨c⟩ ⟨d⟩) (ψ ⟨d⟩ ⟨e⟩)).symm.trans
-        (congrArg (Functor.isoWhiskerLeft J) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩))
+      apply Iso.ext
+      apply NatTrans.ext
+      funext K
+      exact congrArg (fun e ↦ e.hom.app (J.obj K)) (hc ⟨c⟩ ⟨d⟩ ⟨e⟩)
     · intro c d r hb K
       let r' : (⟨c⟩ : Compactification.BoundaryCompactification f.hom.left) ⟶ ⟨d⟩ :=
         ⟨ObjectProperty.homMk r, hb⟩
       let L := J.obj K
-      obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
-        f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
-      obtain ⟨e, he, hinv⟩ := integral_boundaryRefinement_normalization Λ k ℓ hadm
-        f c d r hb K L.property
-      refine ⟨e, he, ?_⟩
-      have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
-      have hn' : (ψ ⟨c⟩ ⟨d⟩).hom.app L ≫
-          compactificationRefinementComponent Λ r' K.obj = 𝟙 _ :=
-        cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
+      refine exists_iso_eq_of_inv ((φ c d).app K)
+        (compactificationRefinementComponent Λ r' K.obj) ?_ ?_
+      · obtain ⟨w, hd, ⟨a⟩⟩ := dense_refinement (X := X.obj.left) (Y := Y.obj.left)
+          f.hom.left (show Compactification.BoundaryCompactification f.hom.left from ⟨c⟩)
+        have hnorm := hn ⟨c⟩ ⟨d⟩ ⟨w, hd⟩ a (a ≫ r') L
+        exact cancel_refinement _ _ _ _ (hiso ⟨c⟩ ⟨w, hd⟩ a L) hnorm
           (refinementComponent_comp Λ ℓ hadm r' a L.obj)
-      exact iso_eq_of_inv _ _ _ hn'
-        hinv
+      · exact integral_boundaryRefinement_normalization Λ k ℓ hadm f c d r hb K L.property
   -- Assemble the independently normalized families for all morphisms.
   choose φ hi hc hn using @per_morphism
   exact ⟨φ, hi, hc, hn⟩
 
 /-- Normalized comparison maps and their groupoid equations.
 
-Source: blueprint det-sf-comp-coherence-cocycle, common dense refinement construction,
-and det-prop-int-brown-construction, comparison paragraph.
+Source: blueprint proposition-construction-independence-rf-shriek, common dense refinement
+construction, and proposition-construction-independence-rf-shriek, comparison paragraph.
 (blueprint: lem-sfb-total-derived-normalized-comparisons).
 
 Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity

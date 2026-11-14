@@ -18,7 +18,7 @@ Let `Λ` be a finite ring whose characteristic `n` is invertible on `X`. The Tat
 constant sheaves of rank one placed in degree `0`, and they are flat. So twisting
 `K ↦ K(m) = K ⊗ᴸ Λ_X(m)` preserves bounded constructibility and the Tor amplitude interval, on
 the étale site and, through the site comparison `ν^*`, on the pro-étale site (blueprint
-`prop-weil-twist-preserves`).
+`definition-tate-twists--10`).
 
 ## Main statements
 
@@ -50,7 +50,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [NeZero (ringChar Λ)] (X : Scheme.{u})
   [HasInvertibleExponent Λ X]
 
-/-- Blueprint `prop-weil-twist-preserves`: Twists preserve finiteness conditions (the twisting
+/-- Blueprint `definition-tate-twists--10`: Twists preserve finiteness conditions (the twisting
 objects).
 
 Each Tate twist `Λ_X(m)` is an invertible locally constant sheaf of rank one: it is a locally
@@ -78,7 +78,7 @@ lemma torAmplitudeIn_tateTwistObject (m : ℤ) :
 
 variable {X}
 
-/-- Blueprint `prop-weil-twist-preserves`: Twists preserve finiteness conditions (Tor
+/-- Blueprint `definition-tate-twists--10`: Twists preserve finiteness conditions (Tor
 amplitude).
 
 Twisting `K ↦ K(m) = K ⊗ᴸ Λ_X(m)` preserves the Tor amplitude interval `[a, b]`, since `Λ_X(m)`
@@ -93,7 +93,7 @@ theorem torAmplitudeIn_tateTwist (m : ℤ) {a b : ℤ}
 
 variable [Finite Λ]
 
-/-- Blueprint `prop-weil-twist-preserves`: Twists preserve finiteness conditions (bounded
+/-- Blueprint `definition-tate-twists--10`: Twists preserve finiteness conditions (bounded
 constructibility).
 
 For a finite ring `Λ`, twisting `K ↦ K(m) = K ⊗ᴸ Λ_X(m)` preserves bounded constructibility:
@@ -106,7 +106,7 @@ theorem boundedConstructible_tateTwist (m : ℤ)
   boundedConstructible_tensor Λ X hK (boundedConstructibleFiniteTor_tateTwistObject Λ X m).1
     (boundedConstructibleFiniteTor_tateTwistObject Λ X m).2
 
-/-- Blueprint `prop-weil-twist-preserves`: Twists preserve finiteness conditions (the category
+/-- Blueprint `definition-tate-twists--10`: Twists preserve finiteness conditions (the category
 `Dctf`).
 
 For a finite ring `Λ`, twisting `K ↦ K(m)` carries `Dctf(X, Λ)` into itself. -/
@@ -139,7 +139,7 @@ noncomputable def tateTwistComparisonIso (m : ℤ)
   (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso (ModuleCat.{u + 1} Λ) G).app _ ≪≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e).app _
 
-/-- Blueprint `prop-weil-twist-preserves`: Twists preserve finiteness conditions (on the
+/-- Blueprint `definition-tate-twists--10`: Twists preserve finiteness conditions (on the
 pro-étale site).
 
 For a finite ring `Λ` whose characteristic is invertible on `X`, twisting
@@ -161,7 +161,7 @@ theorem constructibleFiniteTor_tateTwist (m : ℤ)
     (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_tateTwist Λ m ⟨hG, a, b, hGt⟩))
 
-/-- Blueprint `prop-weil-twist-preserves`: Twists preserve finiteness conditions (Tor
+/-- Blueprint `definition-tate-twists--10`: Twists preserve finiteness conditions (Tor
 amplitude on the pro-étale site).
 
 For `K ∈ Dctf(X_proét, Λ)` of Tor amplitude in `[a, b]`, the twist `K(m) = K ⊗ᴸ ν^* Λ_X(m)` has

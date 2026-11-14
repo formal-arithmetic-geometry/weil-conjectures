@@ -35,7 +35,7 @@ Proof:
    makes it integrally closed in its fraction field. Together with the domain property this
    is normality as in `def-weil-pbc-normal-ring`.
 2. Conversely, a normal local domain of dimension one is a discrete valuation ring by
-   `lem-sc-normal-dim1-dvr`. Its maximal ideal has a single nonzero generator, so
+   `lemma-proper-smooth-model--1`. Its maximal ideal has a single nonzero generator, so
    `lem-weil-pbc-principal-maximal-dim-one-regular` makes it regular. This proves the
    equivalence. -/
 theorem iff_isDomain_and_isIntegrallyClosed_of_dim_one (A : Type u) [CommRing A]

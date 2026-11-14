@@ -187,7 +187,6 @@ private theorem augmentationComparisonOfZero
 attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit
 
-set_option maxHeartbeats 400000 in
 -- Finite tensor coordinates involve several nested sheaf and complex functors.
 /-- Exact realization identifies the finite algebraic augmentation cones, including
 all strict transition maps. No arbitrary complex, pro-zero or derived limit occurs.
@@ -215,7 +214,7 @@ theorem constantKoszulCoefficientConeComparison
       (res (finiteMap J A I b n)).obj
         (SheafOfModules.unit (siteModuleRings (finite J A I n))))
     (hs : ∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
-      ringedKoszulScalar (coefficients J A I b) (algebraSection (baseMap J A I b) x) ≫
+      (ringedKoszulScalar (coefficients J A I b) (algebraSection (baseMap J A I b) x)).asHom ≫
         c.hom)
     (hq : ∀ n : ℕ, c.hom ≫ E.map (ModuleCat.ofHom (I ^ (n + 1)).mkQ) ≫ (q n).hom =
       (SheafOfModules.unitHomEquiv

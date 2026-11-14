@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 # Proper direct image of bounded constructible complexes
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md`,
-statement and proof (blueprint: lem-fin-proper-bounded-constructible).
+statement and proof (blueprint: theorem-results-from-etale-theory--3).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Etale
 /-- Proper direct image preserves ordinary bounded constructible complexes with the finite
 coefficients of the smooth-base-change convention, for finite-type schemes over a field.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md`
-(blueprint: lem-fin-proper-bounded-constructible).
+(blueprint: theorem-results-from-etale-theory--3).
 
 Proof: On the empty target every cohomology sheaf is zero. Otherwise the coefficient
 exponent descends from the nonempty target to its ground field. The finite-constant-value

@@ -51,7 +51,7 @@ Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two triangle compu
 
 Proof plan:
 1. A finite ring is additive torsion. Properness is stable under base change, so
-   lem-weil-pbc-proper-base-change, lem-kun-0f0g and
+   lem-weil-pbc-proper-base-change, proposition-proper-direct-image-constructible-complexes--9 and
    lem-kun-proper-base-change-torsion-ring make all the indicated projection and
    exchange maps invertible on arbitrary unbounded objects. The normalized signed
    tensor, unit and adjunction compositors are those of
@@ -65,7 +65,7 @@ Proof plan:
    factorization cancels inverse p1 projection; ht1 replaces t1 beta1 by f*t.
    Projection naturality and its unit normalization give the same 1 tensor t.
    Use lem-sfb-ringed-projection-tensor-composition and
-   lem-weil-pbc-adjunct-counit-identity, then cancel J_M.
+   situation-conventions, then cancel J_M.
 4. A sheaf line has exact tensor by lem-pur-sheaf-line-evaluation-inverse-pair.
    Its even shifted one-term model is K-flat with flat terms. The symmetry on its
    self-tensor is the ordinary line swap times (-1)^(4*d*d), hence identity.

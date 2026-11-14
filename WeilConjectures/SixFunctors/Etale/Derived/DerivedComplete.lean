@@ -42,8 +42,8 @@ The hypotheses on `(Λ, I)` are only used to make each `Λ/Iⁿ` perfect, throug
 ideal `𝔪_E` is principal when `E` is finite over `ℚ_ℓ`
 (`PadicAlgCl.isPrincipal_maximalIdealShrink`), which is why the specialisations assume it.
 
-The blueprint states `sk-thm-transport` at the three stages `𝒪_E`, `E` and `ℚ̄_ℓ`. Only the
-integral stage `𝒪_E` is stated here, and only its non-formal part: that the operations preserve
+The blueprint states `theorem-poincare-duality--9` at the three stages `𝒪_E`, `E` and `ℚ̄_ℓ`. Only
+the integral stage `𝒪_E` is stated here, and only its non-formal part: that the operations preserve
 derived completeness. The `E` stage would be the image of these statements under the
 rationalization `DerivedCategoryDerivedCompleteRational.fromIntegral`, and the `ℚ̄_ℓ` stage
 their colimit over finite extensions `E/ℚ_ℓ`, a colimit category the repository does not have;
@@ -225,7 +225,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
   [Small.{u + 1} E] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
   [FiniteDimensional ℚ_[l] E]
 
-/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
+/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
 
 **`Rf_*` preserves derived completeness at the integral stage.** For `E` finite over `ℚ_ℓ` and
 every morphism `f : X ⟶ Y`, `Rf_*` carries derived-complete objects of `D(X_ét, 𝒪_E)` to
@@ -237,7 +237,7 @@ theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X 
       ((R((f)_*[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))])).obj K) :=
   derivedComplete_rightDerivedLowerStar _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) f K hK
 
-/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
+/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
 
 **`Rf_!` preserves derived completeness at the integral stage, for proper `f`.** For `E` finite
 over `ℚ_ℓ` and a proper `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
@@ -254,7 +254,7 @@ theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
     hK
 
 attribute [-instance] Shrink.instRing in
-/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
+/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
 
 **The dual at the integral stage.** For `E` finite over `ℚ_ℓ` and a scheme `X` on which the
 constant complex `𝒪_E` is derived complete, the coefficient dual `K^∨ = RHom(K, 𝒪_E)` of a

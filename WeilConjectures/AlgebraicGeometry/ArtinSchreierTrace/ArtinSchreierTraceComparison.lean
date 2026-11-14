@@ -17,8 +17,8 @@ import Mathlib.FieldTheory.Finite.Trace
 /-! # The trace comparison between the two Artin–Schreier models
 
 Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lem-wft-as-comparison, clauses (1)–(3) and its proof
-(blueprint: lem-wft-as-comparison).
+lemma-artin-schreier-character-sheaf, clauses (1)–(3) and its proof
+(blueprint: lemma-artin-schreier-character-sheaf).
 
 The cover is the existing polynomial-quotient cover, also for exponent q.
 The maps on direct images are the actual pullbacks of coefficient sections.
@@ -42,23 +42,23 @@ attribute [local irreducible] ProEtale.CondensedRing.upperStar
   ProEtale.CondensedRing.upperStarLowerStarAdjunction
 
 /-- The image of a scalar in the structure sheaf of a k-scheme.
-Source: blueprint lem-wft-as-comparison (2), the function af
-(blueprint: lem-wft-as-comparison). -/
+Source: blueprint lemma-artin-schreier-character-sheaf (2), the function af
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 def scalar (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (a : k) : Γ(X, ⊤) :=
   (X ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv.hom a)
 
 /-- The constant coefficient module, retaining its actual internal-module structure.
-Source: blueprint lem-wft-as-comparison, condensed coefficient paragraph
-(blueprint: lem-wft-as-comparison). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, condensed coefficient paragraph
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 def condensedUnit (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :=
   Mod.regular (ProEtale.condensedRingObj Λ X)
 
 /-- Pullback of condensed coefficient sections as a morphism of coefficient modules.
 The linear lift sends 1 to the canonical coefficient unit eta_h(1); hence it is eta_h.
-Source: blueprint lem-wft-as-comparison (2), coefficient-module h_a^*
-(blueprint: lem-wft-as-comparison). -/
+Source: blueprint lemma-artin-schreier-character-sheaf (2), coefficient-module h_a^*
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 @[irreducible]
 def condensedPull (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {Y Z : Over X} (h : Y ⟶ Z) :
@@ -73,21 +73,21 @@ def condensedPull (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The condensed averaging projector. Each coefficient is first transported by p_Y^*
 and then acts on the regular coefficient module, before direct image.
-Source: blueprint lem-wft-as-comparison, explicit projector e_chi
-(blueprint: lem-wft-as-comparison). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, explicit projector e_chi
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 @[irreducible]
 def condensedProjector (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (G : Type v) [AddGroup G] [Fintype G]
     {X : Scheme.{u}} (Y : Over X) (σ : G → (Y ⟶ Y)) (χ : AddChar G (MonObj.Γ Λ)) :
     End ((ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left)) :=
-  ∑ c : G, condensedPull Λ (σ c) ≫
+  ∑ c : G, End.of (condensedPull Λ (σ c) ≫
     (ProEtale.CondensedRing.lowerStar Λ Y.hom).map
       (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left)
-        (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))))
+        (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c)))).asHom)
 
 /-- Evaluation of a condensed eigensection at a chosen root, in internal modules.
-Source: blueprint lem-wft-as-comparison (3), evaluation trivializations
-(blueprint: lem-wft-as-comparison). -/
+Source: blueprint lemma-artin-schreier-character-sheaf (3), evaluation trivializations
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 @[irreducible]
 def condensedEvaluation (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}} (x : T ⟶ X)
@@ -102,8 +102,8 @@ def condensedEvaluation (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- The degree-q Artin–Schreier sheaf with condensed coefficients. The same universal
 Artin–Schreier map and translations as in the recorded etale definition are used;
 only the coefficient category is changed to the recorded internal modules.
-Source: blueprint lem-wft-as-comparison, condensed coefficient convention and (2)
-(blueprint: lem-wft-as-comparison). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, condensed coefficient convention and (2)
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 @[irreducible]
 def condensedSheafOf (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]
@@ -114,6 +114,6 @@ def condensedSheafOf (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       (image (condensedProjector Λ k
         (Over.mk (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k)))
         (fun c ↦ Over.homMk (Etale.artinSchreierTranslation k c)
-          (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)) χ))
+          (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)) χ).asHom)
 
 end AlgebraicGeometry.ArtinSchreierTrace

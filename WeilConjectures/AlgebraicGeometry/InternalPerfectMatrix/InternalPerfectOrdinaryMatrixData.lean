@@ -25,8 +25,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Explicit finite-matrix evaluation for ordinary perfect reductions
 
-Source: blueprint `sk-prop-integral-local-structure`, Compatible isomorphisms.
-All choices here are taken from proved finite-basis and finite-coefficient equivalences.
+Source: blueprint `proposition-local-structure-integral-constructible-complexes`, Compatible
+isomorphisms. All choices here are taken from proved finite-basis and finite-coefficient
+equivalences.
 -/
 
 @[expose] public noncomputable section
@@ -507,7 +508,7 @@ def evaluate (W : Scheme.{u})
     z.map (quotientEntry l E P hfree n q i j hij s t)
   exact CochainComplex.HomComplex.Cochain.mk fun i j hij ↦
     (quotientIso l E W P hfree n i).hom ≫
-      biproduct.matrix (fun s t ↦ coefficientEndEquiv l E W n (entry i j hij s t)) ≫
+      biproduct.matrix (fun s t ↦ (coefficientEndEquiv l E W n (entry i j hij s t)).asHom) ≫
       (quotientIso l E W P hfree n j).inv
 
 private theorem matrix_zero {C : Type*} [Category* C] [Preadditive C]
@@ -546,7 +547,7 @@ theorem evaluate_zero (W : Scheme.{u})
             (quotientEntry l E P hfree n q i j hij s t) = 0 := by
     ext x
     exact (quotientEntry l E P hfree n q i j hij s t).hom.map_zero
-  simp_rw [hz, map_zero]
+  simp_rw [hz, map_zero, End.zero_asHom]
   rw [matrix_zero]
   simp only [Limits.comp_zero, Limits.zero_comp]
 
@@ -576,7 +577,7 @@ theorem evaluate_add (W : Scheme.{u})
           w.map (quotientEntry l E P hfree n q i j hij s t) := by
     ext x
     exact (quotientEntry l E P hfree n q i j hij s t).hom.map_add (z x) (w x)
-  simp_rw [ha, map_add]
+  simp_rw [ha, map_add, End.add_asHom]
   rw [matrix_add, Preadditive.add_comp, Preadditive.comp_add]
 
 /-- The explicit degreewise matrix evaluation as a homomorphism of abelian groups.

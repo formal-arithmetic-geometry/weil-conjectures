@@ -176,7 +176,7 @@ noncomputable def PadicIntegersRingObj.upperShriekBaseChange (E : Type) [Field E
         PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E f' :=
   (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
-    (TwoSquare.mk _ _ _ _ (PadicIntegersRingObj.lowerShriekBaseChangeIso ℓ E sq).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (PadicIntegersRingObj.lowerShriekBaseChangeIso ℓ E sq).inv))
 
 /-- Compact-support base change `Ex_! : Rf_! ⋙ Lg^* ≅ Lg'^* ⋙ Rf'_!` with `E`-coefficients, as an
 isomorphism (`isIso_boundedConstructibleLowerShriekBaseChange_padicSubfield`). -/
@@ -199,7 +199,7 @@ noncomputable def ContinuousMapRingObj.upperShriekBaseChange (E : FiniteIntermed
         ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E f' :=
   (mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
-    (TwoSquare.mk _ _ _ _ (ContinuousMapRingObj.lowerShriekBaseChangeIso ℓ E sq).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (ContinuousMapRingObj.lowerShriekBaseChangeIso ℓ E sq).inv))
 
 /-- Compact-support base change `Ex_! : Rf_! ⋙ Lg^* ≅ Lg'^* ⋙ Rf'_!` with `ℚ̄_ℓ`-coefficients, as
 an isomorphism (`isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl`). -/
@@ -217,7 +217,7 @@ lemma upperShriekBaseChangeNatTrans_eq_mateEquiv (sq : IsPullback g' f' f g) :
     upperShriekBaseChangeNatTrans ℓ sq =
       (mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
         (boundedConstructibleUpperShriekAdjunction ℓ f')
-        (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso ℓ sq).inv)).natTrans :=
+        (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso ℓ sq).inv)) :=
   rfl
 
 /-! ### Coefficient change from `𝒪_E` to `ℚ̄_ℓ` -/
@@ -260,13 +260,13 @@ theorem isIso_map_upperShriekBaseChange_padicSubfield_of_isIso_map
   have : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
       (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
       (TwoSquare.mk _ _ _ _
-        (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)).natTrans :=
+        (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)) :=
     isIso_boundedConstructibleUpperShriekExtendScalars ℓ E f
   have : IsIso (mateEquiv
       (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f')
       (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
       (TwoSquare.mk _ _ _ _
-        (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f').inv)).natTrans :=
+        (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f').inv)) :=
     isIso_boundedConstructibleUpperShriekExtendScalars ℓ E f'
   have h₁ := congrArg G.map h
   simp only [Functor.map_comp] at h₁
@@ -313,12 +313,12 @@ theorem isIso_map_upperShriekBaseChange_of_isIso_map_padicSubfield
   have : IsIso (mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
       (boundedConstructibleUpperShriekAdjunction ℓ f)
       (TwoSquare.mk _ _ _ _
-        (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv)).natTrans :=
+        (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv)) :=
     isIso_boundedConstructibleUpperShriekToPadicAlgCl ℓ E f
   have : IsIso (mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
       (boundedConstructibleUpperShriekAdjunction ℓ f')
       (TwoSquare.mk _ _ _ _
-        (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f').inv)).natTrans :=
+        (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f').inv)) :=
     isIso_boundedConstructibleUpperShriekToPadicAlgCl ℓ E f'
   have h₁ := congrArg G.map h
   simp only [Functor.map_comp] at h₁
@@ -438,10 +438,10 @@ theorem isIso_map_etaleReduction_map_upperShriekBaseChange_integral (sq : IsPull
       etaleReduction ℓ E 1 X' ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E 1)) f'.left)
     (hγf : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)).natTrans)
+      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)))
     (hγf' : IsIso (mateEquiv
       (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
-      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)).natTrans)
+      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)))
     (hσ : EtaleReductionLowerShriekBaseChangeCompatible ℓ E 1 sq γf γf')
     (P : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) {C : Type*} [Category* C]
     (G : DerivedCategory (Sheaf X'.left.smallEtaleTopology
@@ -476,7 +476,7 @@ theorem isIso_map_etaleReduction_map_upperShriekBaseChange_integral (sq : IsPull
   have hG' : IsIso (G.map ((mateEquiv (Etale.rightDerivedUpperShriekAdjunction _ f.left)
       (Etale.rightDerivedUpperShriekAdjunction _ f'.left)
       (TwoSquare.mk _ _ _ _ (asIso (Etale.rightDerivedLowerShriekBaseChangeMap
-        (integersModPowCoeff.{u} ℓ E 1) sq.overLeft)).inv)).natTrans.app
+        (integersModPowCoeff.{u} ℓ E 1) sq.overLeft)).inv)).app
           ((etaleReduction ℓ E 1 Y).obj P))) := hG
   have h₁ := congrArg G.map h
   simp only [Functor.map_comp] at h₁
@@ -505,10 +505,10 @@ theorem isIso_upperShriekBaseChange_integral_of_compatible (sq : IsPullback g' f
       etaleReduction ℓ E 1 X' ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E 1)) f'.left)
     (hγf : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)).natTrans)
+      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)))
     (hγf' : IsIso (mateEquiv
       (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
-      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)).natTrans)
+      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)))
     (hσ : EtaleReductionLowerShriekBaseChangeCompatible ℓ E 1 sq γf γf')
     (P : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     IsIso ((PadicIntegersRingObj.upperShriekBaseChange ℓ E sq).app P) := by
@@ -536,18 +536,18 @@ def HasEtaleReductionLowerShriekBaseChangeCompatible (sq : IsPullback g' f' f g)
       etaleReduction ℓ E 1 X' ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E 1)) f'.left),
     IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)).natTrans ∧
+      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)) ∧
     IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
-      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)).natTrans ∧
+      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)) ∧
     EtaleReductionLowerShriekBaseChangeCompatible ℓ E 1 sq γf γf'
 
 end Reduction
 
 /-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the reduction
 modulo `ℓ` with compact-support base change** (SGA 4, Exposé XVIII, Théorème 3.2.5 and
-Théorème 2.9 (Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square
-`g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` smooth of relative dimension
-`d` and `g` arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
+Théorème 2.9 (Var 4); blueprint `proposition-compatibility-purity-base-change`): for a cartesian
+square `g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` smooth of relative
+dimension `d` and `g` arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
 `ℚ̄_ℓ`-coefficients is an isomorphism for every `L`, provided that, for every finite subextension
 `E ⊆ ℚ̄_ℓ`, the reduction modulo `ℓ` admits comparisons with `Rf_!` and `Rf'_!` (with invertible
 transposes) compatible with compact-support base change
@@ -583,12 +583,12 @@ def EtaleReductionProperBaseChangeCompatible (E : Type) [Field E] [Algebra E (Pa
 
 /-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the canonical
 reduction comparison for proper morphisms with compact-support base change** (SGA 4, Exposé
-XVIII, Théorème 3.2.5; blueprint `sk-prop-sp-purity-bc`): let `g' ≫ f = f' ≫ g` be a cartesian
-square of separated `k`-schemes of finite type with `f` smooth of relative dimension `d` and `g`
-arbitrary, and write `f = j ≫ p` for the chosen compactification (`compactificationOverField`),
-with `j` an open immersion and `p` proper. If, for every finite subextension `E ⊆ ℚ̄_ℓ`, the
-canonical comparisons of the reduction modulo `ℓ` with `Rp_!` and with the lower shriek of the
-base change of `p` along `g` are compatible with compact-support base change
+XVIII, Théorème 3.2.5; blueprint `proposition-compatibility-purity-base-change`): let
+`g' ≫ f = f' ≫ g` be a cartesian square of separated `k`-schemes of finite type with `f` smooth of
+relative dimension `d` and `g` arbitrary, and write `f = j ≫ p` for the chosen compactification
+(`compactificationOverField`), with `j` an open immersion and `p` proper. If, for every finite
+subextension `E ⊆ ℚ̄_ℓ`, the canonical comparisons of the reduction modulo `ℓ` with `Rp_!` and with
+the lower shriek of the base change of `p` along `g` are compatible with compact-support base change
 (`EtaleReductionProperBaseChangeCompatible`), then the exceptional base change map
 `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with `ℚ̄_ℓ`-coefficients is an isomorphism for every `L`.
 

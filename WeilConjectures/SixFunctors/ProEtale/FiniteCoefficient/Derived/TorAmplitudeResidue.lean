@@ -17,7 +17,7 @@ field (the finite coefficient stage `A_{E,n} = 𝒪_E / ϖⁿ`, with residue fie
 `T`, an object `K` of `D(T_proét, Λ)` has Tor amplitude in `[a, b]` if and only if
 `K ⊗ᴸ κ_T` has homology concentrated in `[a, b]`, where `κ_T` is the constant sheaf with value
 `κ` (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor`,
-blueprint `lem-sf-proetale-residue-tor-test`).
+blueprint `lemma-bounds-finite-reductions--2`).
 
 This is the categorical residue test
 `DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor`, whose two
@@ -115,7 +115,7 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lem-sf-proetale-residue-tor-test`: The residue test on the pro-étale site.
+/-- Blueprint `lemma-bounds-finite-reductions--2`: The residue test on the pro-étale site.
 
 Let `ϖ ∈ Λ` be nilpotent with `Λ ⧸ (ϖ)` a field (for instance `Λ = A_{E,n} = 𝒪_E / ϖⁿ`), and let
 `κ_T` be the constant pro-étale sheaf on `T` with value the `Λ`-module `κ = Λ ⧸ (ϖ)`. Then

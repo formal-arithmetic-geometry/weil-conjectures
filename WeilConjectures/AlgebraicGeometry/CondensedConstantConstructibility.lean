@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Constructibility with finite constant scalar models
 
-(blueprint: sk-def-sfb-constructible).
+(blueprint: definition-constructible-sheaves).
 
 A finite presentation over the condensed ring on the point is a finite matrix over
 its scalar ring: maps between copies of the regular module are global sections of
@@ -39,8 +39,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- A pro-etale cover on which the module is pulled back from a finite presentation
 of the condensed ring on the point. Such presentations are finite matrices over
 `Λ(*)`, so these are exactly the models `Λ_U ⊗_{Λ(*)} P` for finitely presented P.
-Source: blueprint sk-def-sfb-constructible, clause 1
-(blueprint: sk-def-sfb-constructible). -/
+Source: blueprint definition-constructible-sheaves, clause 1
+(blueprint: definition-constructible-sheaves). -/
 def HasFiniteConstantLocalModel (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop :=
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
@@ -51,8 +51,8 @@ def HasFiniteConstantLocalModel (X : Scheme.{u})
 
 /-- Constructibility by a finite stratification into constructible locally closed
 subschemes, with finite constant scalar models on the strata.
-Source: blueprint sk-def-sfb-constructible, clause 2 for qcqs schemes
-(blueprint: sk-def-sfb-constructible). -/
+Source: blueprint definition-constructible-sheaves, clause 2 for qcqs schemes
+(blueprint: definition-constructible-sheaves). -/
 def IsFiniteConstantStratified (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop :=
   ∃ S : Scheme.Stratification X, ∀ a : Fin S.n,
@@ -61,8 +61,8 @@ def IsFiniteConstantStratified (X : Scheme.{u})
 
 open Classical in
 /-- On qcqs schemes use a finite constructible stratification; on other schemes impose
-this condition on every affine open. Source: blueprint sk-def-sfb-constructible, clause 2
-(blueprint: sk-def-sfb-constructible). -/
+this condition on every affine open. Source: blueprint definition-constructible-sheaves, clause 2
+(blueprint: definition-constructible-sheaves). -/
 def IsConstantModelConstructible (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop :=
   if CompactSpace X ∧ QuasiSeparatedSpace X then IsFiniteConstantStratified Λ X M
@@ -70,8 +70,8 @@ def IsConstantModelConstructible (X : Scheme.{u})
     IsFiniteConstantStratified Λ U.toScheme ((CondensedRing.upperStar Λ U.ι).obj M)
 
 /-- Bounded complexes whose cohomology module sheaves have finite constant models.
-Source: blueprint sk-def-sfb-constructible, final paragraph
-(blueprint: sk-def-sfb-constructible). -/
+Source: blueprint definition-constructible-sheaves, final paragraph
+(blueprint: definition-constructible-sheaves). -/
 def constantModelBoundedConstructible (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
@@ -79,8 +79,8 @@ def constantModelBoundedConstructible (X : Scheme.{u}) :
     IsConstantModelConstructible Λ X ((DerivedCategory.homologyFunctor _ n).obj K)
 
 /-- The full bounded constructible derived category with its ambient derived morphisms.
-Source: blueprint sk-def-sfb-constructible, final paragraph
-(blueprint: sk-def-sfb-constructible). -/
+Source: blueprint definition-constructible-sheaves, final paragraph
+(blueprint: definition-constructible-sheaves). -/
 abbrev ConstantModelBoundedConstructible (X : Scheme.{u}) :=
   (constantModelBoundedConstructible Λ X).FullSubcategory
 
@@ -97,8 +97,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The bounded constructible objects of finite Tor amplitude, as a full subcategory.
-Source: blueprint sk-def-sfb-constructible, final paragraph
-(blueprint: sk-def-sfb-constructible). -/
+Source: blueprint definition-constructible-sheaves, final paragraph
+(blueprint: definition-constructible-sheaves). -/
 abbrev ConstantModelConstructibleFiniteTor (X : Scheme.{u}) :=
   (constantModelBoundedConstructible Λ X ⊓ fun K ↦
     DerivedCategory.finiteTorAmplitude _ K).FullSubcategory

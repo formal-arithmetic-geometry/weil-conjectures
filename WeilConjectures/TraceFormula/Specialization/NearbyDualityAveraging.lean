@@ -14,8 +14,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 # Nearby duality restricted to averaging summands
 
 This file contains the formal part of the slice compatibility of nearby duality (blueprint
-`det-tf-nearby-duality-slice` (2), with `det-tf-invariants-duality`), over abstract monoidal
-closed categories.
+`lemma-nearby-duality-slice--1` (2), with `lemma-duality-invariants-pro-p--1`), over abstract
+monoidal closed categories.
 
 * **Equivariance** (`CategoryTheory.Verdier.app_comp_nearbyDualityMap_eq`): an endomorphism `σ`
   of `Ψ` which is monoidal and fixes the dualizing map `θ` intertwines the duality map with the
@@ -74,8 +74,8 @@ instance additive_internalHom_flip_obj (ω : U') :
     (MonoidalClosed.internalHom.flip.obj ω : U'ᵒᵖ ⥤ U').Additive where
   map_add {_ _ f g} := pre_add_app f.unop g.unop ω
 
-/-- **Nearby duality restricted to averaging summands** (blueprint `det-tf-nearby-duality-slice`
-(2), with `det-tf-invariants-duality`). In the situation of
+/-- **Nearby duality restricted to averaging summands** (blueprint `lemma-nearby-duality-slice--1`
+(2), with `lemma-duality-invariants-pro-p--1`). In the situation of
 `CategoryTheory.Verdier.nearbyDualityMap_restrict` (a monoidal exchange `α : F' Ψ_X ⟶ Ψ_U F`
 compatible with the dualizing maps), let a finite group `Γ` act on `Ψ_U` by monoidal
 endomorphisms `σ a` fixing `θ_U`, with `σ a⁻¹` left inverse to `σ a` on `Ψ_U F M`, and suppose

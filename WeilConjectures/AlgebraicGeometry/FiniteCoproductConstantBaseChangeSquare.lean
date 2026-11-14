@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Product coordinates for constant-coefficient base change
 
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step, and Stacks Tag 0A5B,
+Source: blueprint theorem-cohomology-curves--6, first step, and Stacks Tag 0A5B,
 first paragraph of the proof (finite disjoint unions).
 -/
 
@@ -45,7 +45,7 @@ private theorem cohomologyMap_congr {X Y : Scheme.{u}} (s t : X ⟶ Y) (h : s = 
 set_option backward.isDefEq.respectTransparency false in
 /-- The target product coordinates for finite-coproduct base change commute with
 the normalized constant-coefficient restriction maps on the source.
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step; Stacks Tag 0A5B,
+Source: blueprint theorem-cohomology-curves--6, first step; Stacks Tag 0A5B,
 first paragraph of the proof, and cohomology functoriality (Tag 01F7).
 (blueprint: lem-sc-finite-coproduct-constant-base-change-square)
 

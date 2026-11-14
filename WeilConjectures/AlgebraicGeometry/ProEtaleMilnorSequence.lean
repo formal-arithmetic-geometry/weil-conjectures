@@ -11,8 +11,8 @@ import WeilConjectures.AlgebraicGeometry.RoosCohomologySequence
 /-!
 # The Milnor sequence on the small pro-etale site
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
-sk-prop-pe-milnor/det-pe-milnor-sequence.md (blueprint: det-pe-milnor-sequence).
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
+sk-prop-pe-milnor/det-pe-milnor-sequence.md (blueprint: proposition-milnor-sequence--2).
 
 The existing strict Roos construction `WeilConjectures.integralOperationsRoos` is
 exactly Cone(1-T)[-1], including its diagonal map on strict tower morphisms.
@@ -211,18 +211,18 @@ The chosen isomorphisms e₀ and e₁ compute the cohomology of the degree-zero 
 complex. The final short exact complex is the first one with its left endpoint
 rewritten by e₁; in particular it uses the same maps, not unrelated exact sequences.
 
-md (blueprint: det-pe-milnor-sequence).
+md (blueprint: proposition-milnor-sequence--2).
 
 Proof:
 1. In the abelian category of ringedSiteModules, apply the cone long exact
-cohomology sequence (lem-sf-derived-homology-long-exact and
- def-weil-abstract-derived-category) to 1-T on the termwise product. Exactness
+cohomology sequence (proposition-milnor-sequence and
+ proposition-milnor-sequence) to 1-T on the termwise product. Exactness
 identifies the cokernel in degree q-1 with the kernel of the outgoing map, and
-its image with the kernel in degree q. By det-pe-products-derived, using exact
-products from det-pe-products-exact, the projection-induced product/cohomology
+its image with the kernel in degree q. By proposition-exact-products--2, using exact
+products from proposition-exact-products--1, the projection-induced product/cohomology
 comparison is an isomorphism. Its coordinate formulas identify the induced map
 with 1-T on cohomology. The kernel is the sheaf inverse limit by
- def-pur-sheaf-inverse-limit. The diagonal product map on cone summands commutes
+ proposition-milnor-sequence. The diagonal product map on cone summands commutes
 with inclusion and negative projection; factoring through cokernels and kernels
 gives both naturality squares below.
 2. For modules concentrated in degree zero the shifted cone has only degrees

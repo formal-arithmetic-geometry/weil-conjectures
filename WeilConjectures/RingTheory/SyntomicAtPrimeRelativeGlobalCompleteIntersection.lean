@@ -14,6 +14,7 @@ import WeilConjectures.RingTheory.EquationCountLocalizeRelativeGlobalCompleteInt
 import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization
 import WeilConjectures.RingTheory.SyntomicPrincipalLocalizationHypotheses
 import WeilConjectures.RingTheory.SyntomicEquationCountComparison
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Syntomic at a prime: a relative global complete intersection neighbourhood
@@ -346,7 +347,7 @@ F'=d=n-c$ [def-kun-topological-dimension-at-point] (isomorphic rings have homeom
 $S'=R[x_1,\dots,x_n]/(f_1,\dots,f_c)$ and its prime $\mathfrak q'_{S'}$ (inverse image $\mathfrak
 p$ in $R$): there is $h_1\in P$ with $\bar g:=\pi'(h_1)\notin\mathfrak q'_{S'}$ such that
 $T_1=R[x_1,\dots,x_{n+1}]/(f_1,\dots,f_c,h_1x_{n+1}-1)$ is a relative global complete intersection
-[def-weil-pbc-relative-global-complete-intersection] and $T_1\cong S'_{\bar g}$ as $R$-algebras,
+[theorem-finite-etale-covers-proper-henselian--2] and $T_1\cong S'_{\bar g}$ as $R$-algebras,
 $x_i\mapsto x_i/1$, $x_{n+1}\mapsto1/\bar g$. Under this isomorphism $\pi'(u)/1\in S'_{\bar g}$
 (with $u$ from step 8) is the image of $u\in R[x_1,\dots,x_n]\subseteq R[x_1,\dots,x_{n+1}]$ in
 $T_1$. By [lem-weil-pbc-relative-global-complete-intersection-principal-localization] (applied to
@@ -364,7 +365,7 @@ Since $\bar g\notin\mathfrak q'_{S'}$, the inverse image of $\mathfrak q$, we ha
 $\pi(h_1)\notin\mathfrak q$; with $\pi(u)\notin\mathfrak q$ and $\mathfrak q$ prime,
 $g'\notin\mathfrak q$. Thus $S_{g'}\cong
 T_2=R[x_1,\dots,x_{n+2}]/(f_1,\dots,f_c,h_1x_{n+1}-1,ux_{n+2}-1)$ as $R$-algebras, a relative
-global complete intersection [def-weil-pbc-relative-global-complete-intersection] in $n+2$
+global complete intersection [theorem-finite-etale-covers-proper-henselian--2] in $n+2$
 variables with $c+2$ equations; this is the conclusion (with $n+2$, $c+2$ in place of $n$, $c$),
 for the finitely presented $S$ of step 1, hence for the original $S$ by step 1. -/
 theorem exists_relativeGlobalCompleteIntersection_of_syntomicAtPrime

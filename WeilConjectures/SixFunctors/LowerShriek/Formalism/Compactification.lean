@@ -26,7 +26,7 @@ c.Z -r-> d.Z
 It satisfies the identity and composition laws, and it is an isomorphism when `F` satisfies
 proper base change. Comparing two compactifications through their common refinement gives
 `F.shriekIso c d : F.shriek c ≅ F.shriek d`, which does not depend on the common refinement and
-satisfies the cocycle condition (blueprint `sk-prop-sf-comp-coherence`).
+satisfies the cocycle condition (blueprint `proposition-construction-independence-rf-shriek`).
 -/
 
 @[expose] public section
@@ -64,7 +64,7 @@ lemma refinementComparison_app (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X
     haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
     (F.refinementComparison r hr).app K =
       (F.pf d.g).map ((F.sh d.i).map ((F.pfId X).inv.app K) ≫
-          (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+          (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).app K) ≫
         (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) :=
   haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
   ExchangeFormalism.refinementComparison_app F c.i c.g d.i d.g r.hom hr.flip.w r.hom_g K
@@ -96,7 +96,7 @@ map of the square of `r` is `β : c.i_! ≅ d.i_! ⋙ r^*` up to `(𝟙 X)^* ≅
 along `r` is the unit of `r^* ⊣ r_*`, followed by `β⁻¹` and by `r_* ⋙ (d.g)_* ≅ (c.g)_*`. -/
 lemma refinementComparison_eq_of_baseChange (r : c.Refinement d)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) (β : F.sh c.i ≅ F.sh d.i ⋙ F.pb r.hom)
-    (hβ : (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
+    (hβ : (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w) =
       Functor.whiskerRight (F.pbId X).hom (F.sh c.i) ≫ (Functor.leftUnitor _).hom ≫ β.hom) :
     F.refinementComparison r hr =
       Functor.whiskerRight (Functor.whiskerLeft (F.sh d.i) (F.adj r.hom).unit) (F.pf d.g) ≫
@@ -113,7 +113,7 @@ lemma refinementComparison_app_eq (r : c.Refinement d)
     haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
     (F.refinementComparison r hr).app K =
       (F.pf d.g).map ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫
-        (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+        (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).app K) ≫
           (F.sh c.i).map ((F.pbId X).hom.app K))) ≫
         (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) :=
   haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
@@ -170,7 +170,7 @@ obtained through the common refinement `Compactification.inf c d`. It does not d
 common refinement (`shriekIso_eq`) and satisfies the cocycle condition (`shriekIso_trans`); the
 comparisons along refinements are the identity for identity refinements
 (`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`). This is the abstract
-form of blueprint `prop-compactification-coherence-detailed`. -/
+form of blueprint `proposition-construction-independence-rf-shriek`. -/
 noncomputable def shriekIso (c d : Compactification f) : F.shriek c ≅ F.shriek d :=
   asIso (F.refinementComparison (Compactification.infFst c d)
       (Compactification.isPullback_infFst c d)) ≪≫

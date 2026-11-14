@@ -18,7 +18,7 @@ proper base change, this file constructs the composition isomorphism
 
 `F.compIso T : F.shriek T.cf ⋙ F.shriek T.cg ≅ F.shriek T.cfg`
 
-of blueprint `sk-thm-sf-comp-composition`: it is the exchange isomorphism
+of blueprint `proposition-composition-base-change-rf-shriek--1`: it is the exchange isomorphism
 `(cg.i)_! (cf.g)_* ≅ p_* q_!` of the cartesian square of `T`, followed by the composition
 isomorphisms `(cf.i)_! ⋙ q_! ≅ (cfg.i)_!` and `p_* ⋙ (cg.g)_* ≅ (cfg.g)_*`.
 
@@ -84,7 +84,7 @@ variable (F : CompactSupportFormalism.{w, v, u}) [F.HasProperExchange]
 ```
 built from the exchange isomorphism of the cartesian square `cf.g ≫ cg.i = q ≫ p`
 (`CategoryTheory.ExchangeFormalism.compIso`).
-(blueprint: `sk-thm-sf-comp-composition`) -/
+(blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
 noncomputable def compIso (T : Compactification.Triangle f g) :
     F.shriek T.cf ⋙ F.shriek T.cg ≅ F.shriek T.cfg :=
   haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
@@ -94,7 +94,7 @@ noncomputable def compIso (T : Compactification.Triangle f g) :
 lemma compIso_hom_app (T : Compactification.Triangle f g) (K : F.obj X) :
     haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
     (F.compIso T).hom.app K =
-      (F.pf T.cg.g).map ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans.app
+      (F.pf T.cg.g).map ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).app
           ((F.sh T.cf.i).obj K) ≫
         (F.pf T.p).map ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).inv.app K)) ≫
       (F.pfComp' T.p T.cg.g T.cfg.g T.p_g).inv.app ((F.sh T.cfg.i).obj K) :=
@@ -104,7 +104,8 @@ lemma compIso_hom_app (T : Compactification.Triangle f g) (K : F.obj X) :
 
 /-- **Naturality of the composition isomorphism**: for a morphism of triangles `φ : T' ⟶ T`,
 the comparisons along the refinements of `φ` intertwine the composition isomorphisms of `T` and
-`T'`. (blueprint: `sk-thm-sf-comp-composition`, independence of the compactifications) -/
+`T'`. (blueprint: `proposition-composition-base-change-rf-shriek--1`, independence of the
+compactifications) -/
 theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T) :
     (F.compIso T).hom ≫ F.refinementComparison φ.rfg φ.isPullback_rfg =
       NatTrans.hcomp (F.refinementComparison φ.rf φ.isPullback_rf)
@@ -123,7 +124,8 @@ theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T
 /-- **Independence of the triangle of compactifications**: the composition isomorphisms of two
 triangles `T₁` and `T₂` agree up to the comparison isomorphisms `F.shriekIso` of their
 compactifications. The proof compares both with the common refinement `T₁.inf T₂`.
-(blueprint: `sk-thm-sf-comp-composition`, independence of all compactification choices) -/
+(blueprint: `proposition-composition-base-change-rf-shriek--1`, independence of all compactification
+choices) -/
 theorem compIso_hom_eq [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
     (T₁ T₂ : Compactification.Triangle f g) :
     (F.compIso T₁).hom =
@@ -159,7 +161,7 @@ lemma compIso_unitLeft (c : Compactification f) :
       Functor.whiskerRight (F.shriekOfIsProperIdIso X).hom (F.shriek c) ≫
         (Functor.leftUnitor _).hom := by
   have hw : 𝟙 X ≫ c.i = c.i ≫ 𝟙 c.Z := by rw [Category.id_comp, Category.comp_id]
-  have : IsIso (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hw).natTrans :=
+  have : IsIso (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hw) :=
     HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_horiz_isIso ⟨hw⟩)
   ext K
   have h₁ := congr_app (F.exchange_id_horiz c.i hw) ((F.sh (𝟙 X)).obj K)
@@ -186,7 +188,7 @@ lemma compIso_unitRight (c : Compactification f) :
       Functor.whiskerLeft (F.shriek c) (F.shriekOfIsProperIdIso Y).hom ≫
         (Functor.rightUnitor _).hom := by
   have hw : c.g ≫ 𝟙 Y = 𝟙 c.Z ≫ c.g := by rw [Category.id_comp, Category.comp_id]
-  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 Y) c.g hw).natTrans :=
+  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 Y) c.g hw) :=
     HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_vert_isIso ⟨hw⟩)
   ext K
   have h₁ := congr_app (F.exchange_id_vert c.g hw) ((F.sh c.i).obj K)

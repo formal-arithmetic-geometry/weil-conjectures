@@ -58,7 +58,7 @@ Proof:
    scalar extension is an isomorphism with inverse `(Spec ι, id)`. The projection
    identities identify the coefficient action with `Spec γ`. The same calculation
    in step 4 gives the structure square of any model over `Spec k`.
-The dependencies used are `def-weil-finite-field-fiber`, `def-weil-frobenius-detailed`,
+The dependencies used are `def-weil-finite-field-fiber`, `prose-10-19`,
 `def-weil-affine-spectrum`, `def-pc-fibre-product` and `def-weil-scheme-over-base`. -/
 theorem frobenius_square_cartesian (D : WeilConjectures.FiniteFieldDatum.{u})
     (X₀ Y₀ : Over (Spec (CommRingCat.of D.k₀))) (f₀ : X₀ ⟶ Y₀) :

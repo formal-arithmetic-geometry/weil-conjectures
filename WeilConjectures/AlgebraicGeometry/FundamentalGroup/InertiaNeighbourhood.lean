@@ -30,7 +30,7 @@ Let `Z` be a finite étale `U`-scheme and `t` a point of `Z` over `η` fixed by 
 lies in a connected component of `Z`.
 
 This is the geometric input for the surjectivity part of blueprint
-`lem-wf-boundary-stalk-invariants`: an inertia invariant of the generic stalk of a finite locally
+`lemma-boundary-stalk--1`: an inertia invariant of the generic stalk of a finite locally
 constant sheaf comes from a section over the punctured part of an étale neighbourhood of the
 boundary point.
 -/
@@ -57,6 +57,34 @@ lemma pullbackFromNormalizationIso_inv_fst :
 lemma pullbackFromNormalizationIso_inv_snd :
     (pullbackFromNormalizationIso g j).inv ≫ pullback.snd _ _ = g := by
   rw [Iso.inv_comp_eq, pullbackFromNormalizationIso_hom_comp]
+
+private lemma exists_lift_pullbackFromNormalization {V T : Scheme.{u}}
+    (ι : V ⟶ (g ≫ j).normalization) (t : T ⟶ X) (η : T ⟶ U) (ℓ : T ⟶ V)
+    (ht : t ≫ g = η) (hℓ : ℓ ≫ ι = t ≫ (g ≫ j).toNormalization) :
+    ∃ k : pullback (ι ≫ (g ≫ j).fromNormalization) j ⟶ X,
+      k ≫ g = pullback.snd _ _ ∧
+        ∀ h : ℓ ≫ (ι ≫ (g ≫ j).fromNormalization) = η ≫ j,
+          pullback.lift ℓ η h ≫ k = t := by
+  let p := (g ≫ j).fromNormalization
+  let k : pullback (ι ≫ p) j ⟶ X :=
+    pullback.map (ι ≫ p) j p j ι (𝟙 U) (𝟙 C) (by simp) (by simp) ≫
+      (pullbackFromNormalizationIso g j).hom
+  refine ⟨k, ?_, ?_⟩
+  · simp only [k, Category.assoc, pullbackFromNormalizationIso_hom_comp]
+    rw [pullback.lift_snd, Category.comp_id]
+  · intro h
+    have he : pullback.lift ℓ η h ≫
+        pullback.map (ι ≫ p) j p j ι (𝟙 U) (𝟙 C) (by simp) (by simp) =
+          t ≫ (pullbackFromNormalizationIso g j).inv := by
+      apply pullback.hom_ext
+      · rw [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc,
+          Category.assoc, pullbackFromNormalizationIso_inv_fst]
+        exact hℓ
+      · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc,
+          Category.comp_id, Category.assoc, pullbackFromNormalizationIso_inv_snd]
+        exact ht.symm
+    change _ ≫ (_ ≫ (pullbackFromNormalizationIso g j).hom) = _
+    rw [← Category.assoc, he, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 end Scheme.Hom
 
@@ -118,8 +146,6 @@ instance isStrictlyHenselianLocalRing_atPrime_of_fact [Fact (IsAffineOpen W)] [Q
     IsStrictlyHenselianLocalRing (Localization.AtPrime Q) :=
   isStrictlyHenselianLocalRing_atPrime_of_isAffineOpen Fact.out Q
 
-set_option maxHeartbeats 400000 in
--- the elaboration of the integral closure and localization instances is slow
 include hϖ hWU m in
 /-- **A point of an integral cover fixed by inertia extends to an étale neighbourhood.** Let `Z`
 be an integral finite étale `U`-scheme and `t` a point of `Z` over the generic geometric point `η`
@@ -129,7 +155,7 @@ fixed by the inertia group of `Q`. Then there are an étale `C`-scheme `V`, a li
 theorem exists_etale_lift_of_forall_inertia_of_isIntegral (Z : U.FiniteEtale)
     [IsIntegral Z.obj.left] (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z)
     (ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t) :
     ∃ (V : C.Etale) (ℓ : Spec (.of (Localization.AtPrime Q)) ⟶ V.left)
       (hℓ : ℓ ≫ V.hom = specAtPrime hW Q) (g : Limits.pullback V.hom j ⟶ Z.obj.left),
       g ≫ Z.obj.hom = pullback.snd _ _ ∧
@@ -292,30 +318,11 @@ theorem exists_etale_lift_of_forall_inertia_of_isIntegral (Z : U.FiniteEtale)
     rw [h1, ← hring]
     simp only [ιV, Spec.map_comp, Category.assoc]
   -- the morphism `V ×_C U ⟶ N ×_C U ≅ Z`
-  let gmap : Limits.pullback (ιV ≫ pN) j ⟶ Z.obj.left :=
-    Limits.pullback.map (ιV ≫ pN) j pN j ιV (𝟙 U) (𝟙 C) (by simp) (by simp) ≫
-      (Scheme.Hom.pullbackFromNormalizationIso Z.obj.hom j).hom
-  refine ⟨V, Spec.map (CommRingCat.ofHom lam), hℓ', gmap, ?_, ?_⟩
-  · simp only [gmap, Category.assoc, Scheme.Hom.pullbackFromNormalizationIso_hom_comp]
-    rw [Limits.pullback.lift_snd, Category.comp_id]
-    rfl
-  · have h : pullback.lift (Spec.map (CommRingCat.ofHom (Ideal.atPrimeToField Q)) ≫
-        Spec.map (CommRingCat.ofHom lam)) (pointOfAlgebra Ω (genericPointLift j)) (by
-          rw [Category.assoc]
-          exact (congrArg (Spec.map (CommRingCat.ofHom (Ideal.atPrimeToField Q)) ≫ ·)
-            hℓ').trans (pointOfAlgebra_comp_eq_specAtPrime j hW Q).symm) ≫
-        Limits.pullback.map (ιV ≫ pN) j pN j ιV (𝟙 U) (𝟙 C) (by simp) (by simp) =
-          t.left ≫ (Scheme.Hom.pullbackFromNormalizationIso Z.obj.hom j).inv := by
-      refine Limits.pullback.hom_ext ?_ ?_
-      · rw [Category.assoc, Limits.pullback.lift_fst, Limits.pullback.lift_fst_assoc,
-          Category.assoc]
-        exact hkey.trans (congrArg (t.left ≫ ·)
-          (Scheme.Hom.pullbackFromNormalizationIso_inv_fst Z.obj.hom j).symm)
-      · rw [Category.assoc, Limits.pullback.lift_snd, Limits.pullback.lift_snd_assoc,
-          Category.comp_id, Category.assoc, Scheme.Hom.pullbackFromNormalizationIso_inv_snd]
-        exact (fiber_left_comp _ t).symm
-    refine (congrArg (· ≫ (Scheme.Hom.pullbackFromNormalizationIso Z.obj.hom j).hom) h).trans ?_
-    simp
+  obtain ⟨gmap, hgmap, hpoint⟩ := Scheme.Hom.exists_lift_pullbackFromNormalization
+    Z.obj.hom j ιV t.left (pointOfAlgebra Ω (genericPointLift j))
+    (Spec.map (CommRingCat.ofHom (Ideal.atPrimeToField Q)) ≫ Spec.map (CommRingCat.ofHom lam))
+    (fiber_left_comp _ t) ((Category.assoc _ _ _).trans hkey)
+  exact ⟨V, Spec.map (CommRingCat.ofHom lam), hℓ', gmap, hgmap, hpoint _⟩
 
 include hϖ hWU m in
 /-- **A point of a cover fixed by inertia extends to an étale neighbourhood.** Let `U` be
@@ -327,7 +334,7 @@ theorem exists_etale_lift_of_forall_inertia [ConnectedSpace U]
     (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
     (Z : U.FiniteEtale) (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z)
     (ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t) :
     ∃ (V : C.Etale) (ℓ : Spec (.of (Localization.AtPrime Q)) ⟶ V.left)
       (hℓ : ℓ ≫ V.hom = specAtPrime hW Q) (g : Limits.pullback V.hom j ⟶ Z.obj.left),
       g ≫ Z.obj.hom = pullback.snd _ _ ∧
@@ -342,12 +349,12 @@ theorem exists_etale_lift_of_forall_inertia [ConnectedSpace U]
     (ConcreteCategory.mono_iff_injective_of_preservesPullback _).1
       inferInstance
   have hy : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app Y y = y := by
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app Y y = y := by
     intro σ hσ
     apply hinj
     rw [← ht σ hσ]
     exact (ConcreteCategory.congr_hom
-      ((galoisToAut (genericPointLift j) σ).hom.naturality i) y).symm
+      ((galoisToAut (genericPointLift j) σ).asIso.hom.naturality i) y).symm
   obtain ⟨V, ℓ, hℓ, g, hg, hgy⟩ :=
     exists_etale_lift_of_forall_inertia_of_isIntegral j hW ϖ hϖ hWU m Q Y y hy
   refine ⟨V, ℓ, hℓ, g ≫ i.hom.left, ?_, ?_⟩

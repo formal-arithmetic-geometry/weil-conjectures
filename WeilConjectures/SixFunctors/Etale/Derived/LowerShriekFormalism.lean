@@ -160,7 +160,7 @@ instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasBaseChange where
     have : IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj l).unit :=
       isIso_derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus_unit Λ l
     have (M : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-        IsIso (((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w).natTrans.app
+        IsIso (((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w).app
           M) :=
       isIso_of_isIso_plus_of_isZero Λ l _
         ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).isIso_map_baseChange_app t l r b h.w M)
@@ -205,7 +205,7 @@ derived categories with finite coefficients, the exchange map `r_! t_* ⟶ b_* l
 square with `b` proper is an isomorphism. On the open `r` this is formal; on its closed complement
 both sides vanish, by proper base change
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`,
-blueprint `sk-thm-properbasechange`). -/
+blueprint `theorem-proper-base-change-classical-pro`). -/
 instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
   isIso_exchange {U' U Z' Z t l r b} _ _ _ h := by
     have := CompactSupportFormalism.HasBaseChange.isIso_baseChange
@@ -215,7 +215,7 @@ instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
     have : IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj l).unit :=
       isIso_derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus_unit Λ l
     have (M : DerivedCategory.Plus (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-        IsIso (((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).exchange t l r b h.w).natTrans.app
+        IsIso (((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).exchange t l r b h.w).app
           M) :=
       isIso_of_isIso_plus_of_isZero Λ r _
         (isIso_map_mateEquiv_app_of_isIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).adj t)
@@ -223,7 +223,7 @@ instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
           ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj r)
           ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj l)
           (TwoSquare.mk _ _ _ _
-            (inv ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w).natTrans))
+            (inv ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w)))
           M)
         (isZero_plus_upperStar_openImmersionLowerShriek Λ r _
           (by rw [r.range_closedComplement]; exact disjoint_compl_left) _)

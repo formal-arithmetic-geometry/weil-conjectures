@@ -31,8 +31,15 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
--- Elaborating the scalar-restriction comparison unfolds several sheaf category instances.
+private lemma finite_affine_moduleDirectImage_restrictScalars_eq
+    {X Y : Scheme.{v}} (f : X ⟶ Y) :
+    RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙
+      SheafOfModules.restrictScalars
+        (R := moduleRings Y.toRingedSpace)
+        (R' := moduleRings (directImageAlgebraSpace f))
+        ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ =
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
+
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
 its direct-image algebra. Its functor is induced by `Rg_*` for the canonical morphism
 `g : (X, O_X) → (Y, f_* O_X)`. Restricting scalars recovers `Rf_*`.
@@ -56,8 +63,8 @@ Proof:
 4. Scalar restriction is exact: the underlying sheaves, kernels and cokernels are
    unchanged. Choose a K-injective representative I of K. Rg-star and Rf-star are the
    same complex f-star I with different scalar structures
-   (`def-pc-ringed-spaces-derived-direct-image`, `def-pc-derived-direct-image`). Hence
-   scalar restriction of the equivalence is naturally isomorphic to Rf-star. -/
+   (`def-pc-ringed-spaces-derived-direct-image`, `lemma-coherent-base-change-invertible-sheaves`).
+   Hence scalar restriction of the equivalence is naturally isomorphic to Rf-star. -/
 theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]
@@ -106,7 +113,8 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     have hq := ((Scheme.Modules.affine_module_correspondence f).1 _).mp (hM n)
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso e hq
   have underived : RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙ T ≅
-      RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
+    eqToIso (finite_affine_moduleDirectImage_restrictScalars_eq f)
   let comparison : R ⋙ T.rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
     Functor.isoWhiskerLeft R T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
       (Functor.rightDerivedFunctorCompMapDerivedCategoryIso
@@ -117,7 +125,12 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     obtain ⟨⟨e⟩, hq⟩ := schemeHigherDirectImage_of_affine f K hK n
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) n
-    let c := (T.rightDerivedFunctorHomologyFunctorIso n).app (R.obj K) ≪≫
+    let c : T.obj ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) n).obj (R.obj K)) ≅
+        (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).obj
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).obj K) :=
+      (T.rightDerivedFunctorHomologyFunctorIso n).app (R.obj K) ≪≫
       H.mapIso (comparison.app K) ≪≫ e
     apply ((Scheme.Modules.affine_module_correspondence f).1 _).mpr
     exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso c.symm hq
@@ -149,7 +162,8 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
   let E := adjQ.toEquivalence.symm
   let S := (schemeDerivedQCohProperty Y).lift (pA.ι ⋙ T.rightDerivedFunctor)
     (fun M ↦ hT M.obj M.property)
-  refine ⟨E, ⟨Iso.refl _⟩, S, ⟨Iso.refl _⟩, ?_⟩
+  refine ⟨E, ⟨pA.liftCompιIso _ _⟩, S,
+    ⟨(schemeDerivedQCohProperty Y).liftCompιIso _ _⟩, ?_⟩
   exact ⟨Functor.isoWhiskerLeft pX.ι comparison⟩
 
 end AlgebraicGeometry

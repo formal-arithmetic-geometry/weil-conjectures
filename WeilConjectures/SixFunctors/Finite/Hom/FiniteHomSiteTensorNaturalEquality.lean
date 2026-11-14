@@ -50,10 +50,9 @@ def finiteHomTensorBetaRightOfComparisons
   Functor.whiskerLeft A β ≫ Functor.whiskerRight δ V ≫
     Functor.whiskerLeft (F.prod F) γ
 
-set_option maxHeartbeats 0 in
 -- Comparing the chosen intrinsic closed structures requires a larger kernel budget.
 /-- The route through the intrinsic scalar tensorator, in the direction of beta.
-Source: blueprint thm-coef-finite-hom, final site-comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
 noncomputable def finiteHomSiteTensorBetaLeft
     (l : ℕ) [Fact l.Prime]
@@ -72,10 +71,9 @@ noncomputable def finiteHomSiteTensorBetaLeft
     (finiteHomNuTensor l E X n).hom (coefFiniteHomProTensor l E X h).hom
     (finiteHomSiteBeta l E X h)
 
-set_option maxHeartbeats 0 in
 -- Comparing the chosen etale closed structures requires a larger kernel budget.
 /-- The route through the etale scalar tensorator, in the direction of beta.
-Source: blueprint thm-coef-finite-hom, final site-comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
 noncomputable def finiteHomSiteTensorBetaRight
     (l : ℕ) [Fact l.Prime]
@@ -94,7 +92,6 @@ noncomputable def finiteHomSiteTensorBetaRight
     (finiteHomEtaleTensor l E X h).hom (finiteHomNuTensor l E X m).hom
     (finiteHomSiteBeta l E X h)
 
-set_option maxHeartbeats 0 in
 -- The chain-model formulas involve separately encoded localization functors.
 private theorem beta_routes_on_representatives
     (l : ℕ) [Fact l.Prime]
@@ -114,10 +111,9 @@ private theorem beta_routes_on_representatives
     (congrArg (finiteHomIntrinsicQ l E X m).map
       (finiteHomSiteTensorChainEquation l E X h P Q e he))
 
-set_option maxHeartbeats 0 in
 -- Fully faithful descent compares the recorded derived-category presentations.
 /-- The beta oriented tensor transformations agree after K-flat localization.
-Source: blueprint thm-coef-finite-hom, final scalar/site comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final scalar/site comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality).
 Proof: restrict the two natural transformations to pairs of K-flat representatives.
 The route normalization theorem supplies comparison isomorphisms for each route;

@@ -18,8 +18,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 Let `C` be an integral curve over an algebraically closed field `k`, with generic point
 `η : Spec k(C) ⟶ C`. Assume that `Hᵠ(Spec L, 𝔾ₘ) = 0` for `q ≥ 1` and every algebraic
-extension `L` of `k(C)` (blueprint `det-thm-br-field-units`). Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for
-`q ≥ 2` (blueprint `det-thm-br-higher-vanishing`).
+extension `L` of `k(C)` (blueprint `lemma-cohomology-multiplicative-group`). Then `Hᵠ(C_ét, 𝔾ₘ) = 0`
+for `q ≥ 2` (blueprint `lemma-cohomology-multiplicative-group--2`).
 
 The argument follows the blueprint at the generic point, without spectral sequences:
 
@@ -190,7 +190,7 @@ theorem subsingleton_sheafH_lowerStar_of_forall_isAffine (p : ℕ) :
 include f in
 /-- **Higher cohomology of `𝔾ₘ` on an integral curve.** Let `C` be an integral curve over an
 algebraically closed field `k`. Assume that `Hᵠ(Spec L, 𝔾ₘ) = 0` for `q ≥ 1` and every
-algebraic extension `L` of `k(C)` (blueprint `det-thm-br-field-units`). Then
+algebraic extension `L` of `k(C)` (blueprint `lemma-cohomology-multiplicative-group`). Then
 `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`.
 
 By `AlgebraicGeometry.IsCurve.bijective_H_map_unit_fromSpecFunctionField`,
@@ -229,7 +229,7 @@ algebraically closed field `k`. Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`. T
 vanishing for algebraic extensions of `k(C)`
 (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField`). Neither
 smoothness nor properness is needed.
-(blueprint: `det-thm-br-higher-vanishing`, for integral curves) -/
+(blueprint: `lemma-cohomology-multiplicative-group--2`, for integral curves) -/
 theorem subsingleton_sheafH_gmSheaf_of_isIntegral (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H C.gmSheaf q) :=
   subsingleton_sheafH_gmSheaf_of_forall_field f
@@ -248,7 +248,7 @@ finite type over an algebraically closed field `k`. Then `Hᵠ(C_ét, 𝔾ₘ) =
 The finitely many connected components of `C` are clopen, so it suffices to treat each of them
 (`AlgebraicGeometry.Etale.subsingleton_H_of_isClopen`); a connected smooth curve is integral,
 and `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isIntegral` applies.
-(blueprint: `det-thm-br-higher-vanishing`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--2`) -/
 theorem subsingleton_sheafH_gmSheaf_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f]
     (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H C.gmSheaf q) := by
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f

@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 /-!
 # The closed–open step of the detection of a failure of base change
 
-Step (3) of the blueprint lemma `sbc-lem-bc-failure-field`: if a cokernel element survives over
+Step (3) of the blueprint lemma `lemma-reduction-field--1`: if a cokernel element survives over
 `T'` and `Z ⊆ T'` is closed with quasi-compact open complement `V`, then it survives over `V` or
 over `Z` (`AlgebraicGeometry.Etale.survivesBaseChange_or_of_isClosedImmersion`). This file
 provides the ingredients.
@@ -122,7 +122,7 @@ lemma mateApp_eq (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N :
 
 /-- `CategoryTheory.Adjunction.mateApp` is the component of Mathlib's `CategoryTheory.mateEquiv`. -/
 lemma mateApp_eq_mateEquiv_app (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
-    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).natTrans.app N := by
+    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).app N := by
   simp [mateApp]
 
 /-- The mate component `CategoryTheory.Adjunction.mateApp` is natural:

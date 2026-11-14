@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Sites.PresheafCechComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.CategoryTheory.Sites.PresheafFreeExtLocalKilling
 import WeilConjectures.CategoryTheory.Sites.PresheafCechExtEdgeInjective
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # A vanishing criterion using Čech nerves of presheaf maps

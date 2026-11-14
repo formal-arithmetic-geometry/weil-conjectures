@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 
 Let `p : X ⟶ Y` be proper, `i : Y ⟶ W` an open immersion and `X ⟶[j] Z ⟶[r] W` a
 compactification of `p ≫ i` with `X` dense in `Z`. This file proves the three statements of
-blueprint `det-sf-comp-composition-interchange`, the interchange step in the proof of the
-composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
+blueprint `proposition-composition-base-change-rf-shriek--1`, the interchange step in the proof of
+the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`), on the unbounded derived
 categories of étale sheaves:
 
@@ -54,9 +54,9 @@ section Geometry
 
 variable {X Y W : Scheme.{u}} {p : X ⟶ Y} [IsProper p] {i : Y ⟶ W} [IsOpenImmersion i]
 
-/-- Part (1) of blueprint `det-sf-comp-composition-interchange`: let `p : X ⟶ Y` be proper,
-`i : Y ⟶ W` an open immersion and `e = (X ⟶[e.i] e.Z ⟶[e.g] W)` a compactification of `p ≫ i`
-in which `X` is dense. Then `e.g⁻¹(Y) = X` and `e.g` restricts to `p` over `Y`: the square
+/-- Part (1) of blueprint `proposition-composition-base-change-rf-shriek--1`: let `p : X ⟶ Y` be
+proper, `i : Y ⟶ W` an open immersion and `e = (X ⟶[e.i] e.Z ⟶[e.g] W)` a compactification of
+`p ≫ i` in which `X` is dense. Then `e.g⁻¹(Y) = X` and `e.g` restricts to `p` over `Y`: the square
 ```
   X --e.i--> e.Z
   |           |
@@ -118,7 +118,7 @@ lemma lowerStarUpperStarOpenImmersionIso_hom (hsq : IsPullback p j i r) :
     (lowerStarUpperStarOpenImmersionIso A hsq).hom =
       (mateEquiv (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
         (derivedOpenImmersionLowerShriekUpperStarAdjunction A i)
-        (openImmersionLowerShriekLowerStarExchange A hsq)).natTrans := by
+        (openImmersionLowerShriekLowerStarExchange A hsq)) := by
   rw [openImmersionLowerShriekLowerStarExchange, iterated_mateEquiv_conjugateEquiv]
   rfl
 
@@ -164,8 +164,8 @@ lemma homEquiv_eq_lowerStarOpenImmersionLowerShriekRestrictionIso_inv_iff
   rw [← homEquiv_openImmersionLowerShriekLowerStarExchange_app A hsq K]
   exact (Adjunction.homEquiv _ _ _).apply_eq_iff_eq
 
-/-- Blueprint `det-sf-comp-composition-interchange`: Interchanging proper direct image and
-extension by zero.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Interchanging proper direct image
+and extension by zero.
 
 Let `Λ` be a finite coefficient ring, `p : X ⟶ Y` proper, `i : Y ⟶ W` an open immersion and
 `e = (X ⟶[e.i] e.Z ⟶[e.g] W)` a compactification of `p ≫ i` with `X` dense in `e.Z`. Then

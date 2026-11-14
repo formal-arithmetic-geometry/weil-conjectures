@@ -16,7 +16,7 @@ namespace CategoryTheory
 
 /-- Four inverse mate comparisons transport a commutative cube.
 Source: Mathlib's adjunction mate formulas and the final tensor-compatibility
-paragraph of the latest blueprint's lem-fix-compact-support-coefficient-change.
+paragraph of the latest blueprint's lemma-sp-reduction--1.
 (blueprint: lem-sp-scalar-mate-cube)
 Proof: transpose both composites by the last adjunction. Use its unit naturality
 and the four unit_mateEquiv_symm equations. Naturality of qI moves the first
@@ -44,10 +44,10 @@ theorem scalarMateCube
       ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).app (J.obj N) ≫
         H'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).app N) ≫
         d.app (S₀.obj N) := by
-  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).natTrans
-  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).natTrans
-  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG)).natTrans
-  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI)).natTrans
+  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ))
+  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH))
+  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG))
+  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI))
   have hj (K : C₀) : J.map (a₀.unit.app K) ≫ qJ.app (S₀.obj K) =
       a₁.unit.app (J.obj K) ≫ R₁.map (lJ.app K) :=
     unit_mateEquiv_symm a₀ a₁ (TwoSquare.mk _ _ _ _ qJ) K

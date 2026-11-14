@@ -36,7 +36,8 @@ Tor amplitude in `[r, s]` over `B` (Tor comparison), which gives `preserves` and
 `torInterval`.  The functor is the full-subcategory lift of `ι ⋙ S_a`, so `scalar_eq` holds
 by `rfl`; take as `commShift` the shift induced through the fully faithful `ι` from the
 ambient derived tensor shift, for which `realizationShift` holds by construction.
-Uses: lem-sf-flat-model, lem-pur-derived-change-of-rings, lem-sf-comparison-tor-amplitude.
+Uses: lemma-flat-models-generators--1, lem-pur-derived-change-of-rings,
+lem-sf-comparison-tor-amplitude.
 -/
 theorem finiteScalar_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

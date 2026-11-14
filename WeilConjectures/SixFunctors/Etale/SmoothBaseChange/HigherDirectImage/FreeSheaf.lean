@@ -482,7 +482,7 @@ lemma Etale.isZero_shiftedHomFunctor_obj_of_neg {Z : Scheme.{u}}
 
 end FilteredColimit
 
-/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (subsection
+/-- Blueprint `lemma-finiteness-small-etale-topoi--2` (subsection
 `lem-sc-second-kummer-divisors`): Filtered colimits of étale cohomology. Let `Z` be a quasi-compact
 and quasi-separated scheme. Then étale cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with
 coefficients in sheaves of `Λ`-modules commutes with filtered colimits:

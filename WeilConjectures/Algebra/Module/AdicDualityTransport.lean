@@ -12,8 +12,8 @@ public import WeilConjectures.Algebra.Module.RationalPerfectPairing
 # Transport of finite-level duality to an extension of `ℚ_p`
 
 This file proves the linear algebra of the transport of Poincaré duality from the finite
-coefficient rings `ℤ/ℓᵐ` to `ℚ̄_ℓ` (blueprint `sk-thm-transport`,
-`thm-pod-derived-poincare-duality`), in the following abstract form
+coefficient rings `ℤ/ℓᵐ` to `ℚ̄_ℓ` (blueprint `theorem-poincare-duality--9`,
+`theorem-poincare-duality--6`), in the following abstract form
 (`LinearMap.exists_isPerfPair_of_finiteLevel`).
 
 Let `A`, `B` be finitely generated `ℤ_p`-modules (the integral cohomology groups `Hⁱ(X, ℤ_ℓ)`,
@@ -274,7 +274,7 @@ lemma baseChangePairing_apply {K V W : Type*} [Field K] [Algebra ℤ_[p] K] [Add
   simp [baseChangePairing, IsBaseChange.lift_eq]
 
 /-- **Transport of finite-level duality to `K`** (the linear algebra of blueprint
-`thm-pod-derived-poincare-duality`). Let `A`, `B` be finitely generated `ℤ_p`-modules with
+`theorem-poincare-duality--6`). Let `A`, `B` be finitely generated `ℤ_p`-modules with
 endomorphisms `F_A`, `F_B`, and `V`, `W` their extensions of scalars to a field `K ⊇ ℤ_p` with
 endomorphisms `F_V`, `F_W` extending them. Suppose that for every `m` there are maps
 `ρ : A ⟶ Eₘ`, `σ : B ⟶ Fₘ` with kernels in `pᵐ A`, `pᵐ B` and images containing `pᵉ Eₘ`,

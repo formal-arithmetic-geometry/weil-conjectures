@@ -29,7 +29,7 @@ open Etale
 representatives of a bounded below derived object.
 Source: Stacks Project, sites-cohomology.tex, Lemma 0736 and Remark 07A7;
 derived.tex, Lemmas 070I and 070K; step 7 of the explicit comparison
-in lem-weil-pbc-derived-exchange-termwise.
+in prose-04-06.
 
 Proof: choose P from injectiveObjectEquivalence, a bounded below complex of
 injectives representing K. The comparison h from I to P is invertible in the

@@ -39,8 +39,8 @@ Proof:
 1. Module sheafification `a` and restriction `ι` preserve finite limits, as can be checked
 on underlying abelian (pre)sheaves using the module sheafification interface
 [lem-pc-sites-module-sheafification-interface], sectionwise limits
-[lem-weil-pbc-module-sheaves-colimits-forgetful], and exact abelian sheafification
-[lem-weil-pbc-sheafification-exact]. Thus `ι ⋙ tensorRight F ⋙ a` preserves finite limits.
+[situation-conventions], and exact abelian sheafification
+[situation-conventions]. Thus `ι ⋙ tensorRight F ⋙ a` preserves finite limits.
 2. The tensor/sheafification comparison [lem-pc-sites-module-sheafification-tensor]
 identifies this composite with tensoring sheaves with `a(F)`, using the sheaf tensor
 product [def-pur-sheaf-tensor-product].

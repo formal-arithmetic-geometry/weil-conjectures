@@ -14,7 +14,7 @@ public import WeilConjectures.ConstructibleSheaf.InternalHom
 
 Let `Λ` be a commutative ring and let `L` be a locally constant sheaf of `Λ`-modules on the small
 étale site of a scheme `X`, of rank one: its stalk at every geometric point is isomorphic to `Λ`
-(`AlgebraicGeometry.Scheme.HasRankOneStalks`). Then (blueprint `lem-pur-lisse-rank-one-aut`):
+(`AlgebraicGeometry.Scheme.HasRankOneStalks`). Then (blueprint `lemma-section-normal-bundle--1`):
 
 1. the canonical map `Λ_X ⟶ [L, L]` (`CategoryTheory.MonoidalClosed.id`, the adjoint of the right
    unitor, "`1 ↦ id_L`") is an isomorphism
@@ -79,7 +79,7 @@ lemma HasRankOneStalks.of_iso {L L' : Sheaf X.smallEtaleTopology (ModuleCat.{u +
 
 variable (L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
-/-- Blueprint `lem-pur-lisse-rank-one-aut`: Automorphisms of a rank-one finite locally constant
+/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
 sheaf
 
 Clause (1): for a locally constant sheaf `L` of rank one, the canonical map
@@ -106,7 +106,7 @@ theorem isIso_id_of_hasRankOneStalks [IsLocallyConstantSheaf L] (hL : HasRankOne
 
 variable {L M}
 
-/-- Blueprint `lem-pur-lisse-rank-one-aut`: Automorphisms of a rank-one finite locally constant
+/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
 sheaf
 
 Clause (1), endomorphisms: every endomorphism of a locally constant sheaf `L` of rank one is the
@@ -121,7 +121,7 @@ noncomputable def unitEndRingEquivOfHasRankOneStalks [IsLocallyConstantSheaf L]
     (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   unitEndRingEquiv L
 
-/-- Blueprint `lem-pur-lisse-rank-one-aut`: Automorphisms of a rank-one finite locally constant
+/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
 sheaf
 
 Clause (1), automorphisms: the automorphisms of a locally constant sheaf `L` of rank one are the
@@ -132,7 +132,7 @@ noncomputable def unitsUnitEndMulEquivAutOfHasRankOneStalks [IsLocallyConstantSh
   have := isIso_id_of_hasRankOneStalks L hL
   unitsUnitEndMulEquivAut L
 
-/-- Blueprint `lem-pur-lisse-rank-one-aut`: Automorphisms of a rank-one finite locally constant
+/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
 sheaf
 
 Clause (2): two isomorphisms `φ ψ : L ≅ M` between locally constant sheaves of rank one differ
@@ -140,11 +140,11 @@ by a unique unit `u` of `End Λ_X`, a locally constant function `X → Λˣ`: `�
 theorem existsUnique_hom_eq_comp_unitEndAction_of_hasRankOneStalks [IsLocallyConstantSheaf M]
     (hM : HasRankOneStalks M) (φ ψ : L ≅ M) :
     ∃! u : (End (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))ˣ,
-      ψ.hom = φ.hom ≫ unitEndAction M u :=
+      ψ.hom = φ.hom ≫ (unitEndAction M u).asHom :=
   have := isIso_id_of_hasRankOneStalks M hM
   existsUnique_hom_eq_comp_unitEndAction φ ψ
 
-/-- Blueprint `lem-pur-lisse-rank-one-aut`: Automorphisms of a rank-one finite locally constant
+/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
 sheaf
 
 The final assertion of clause (2): for an isomorphism `φ : L ≅ M` and a unit `v` of `Λ`, the

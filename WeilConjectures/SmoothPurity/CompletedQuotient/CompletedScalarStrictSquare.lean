@@ -163,7 +163,6 @@ private theorem conjugate_app
   apply Iso.ext
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Normalize the two cochain interfaces on all total-tensor generators.
 private theorem comparison_test {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y) :

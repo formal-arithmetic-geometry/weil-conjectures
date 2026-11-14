@@ -210,7 +210,6 @@ variable {P : Over (Spec (.of k))} [LocallyOfFiniteType P.hom] [QuasiCompact P.h
   (zX : W ⟶ X) (h : W ⟶ V) [IsProper h.left] (r : U ⟶ W) [IsProper r.left]
   (hA : IsPullback h zX π₁ f) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
-set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The right side of the base-change core, transposed along `Lf^* ⊣ Rf_*`. -/
 theorem sourceExchange_rightTranspose [IsProper (r ≫ h).left]

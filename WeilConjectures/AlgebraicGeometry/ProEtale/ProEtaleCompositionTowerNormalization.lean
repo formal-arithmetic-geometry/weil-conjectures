@@ -34,8 +34,8 @@ set_option linter.privateModule false
 /-!
 # Normalization on a compatible pro-etale compactification tower
 
-Source: main-20261015, thm-sf-comp-composition, Construction; Stacks Tags 0F7B and 0F7J
-(blueprint: lem-trf-proetale-composition-tower-normalization).
+Source: main-20261015, proposition-composition-base-change-rf-shriek--1, Construction; Stacks Tags
+0F7B and 0F7J (blueprint: lem-trf-proetale-composition-tower-normalization).
 
 The two sides below are independently constructed: the canonical origin compositor,
 conjugated to the supplied candidates by canonical comparisons, and the open adjunct of
@@ -85,7 +85,7 @@ private abbrev towerPlusExchange {H T V S : Scheme.{u}}
     ((Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
       Functor.mapDerivedCategoryPlusNatIso
         (upperStarCompIso (ModuleCat.{u + 1} Λ) w.symm) ≪≫
-      Functor.mapDerivedCategoryPlusCompIso _ _).hom).natTrans
+      Functor.mapDerivedCategoryPlusCompIso _ _).hom)
 
 private def towerPlusLambda {H T V S : Scheme.{u}}
     (b : H ⟶ T) (i : V ⟶ S) (r : H ⟶ V) (p : T ⟶ S)
@@ -120,14 +120,14 @@ variable {E₀ E₁ E₂ E₃ P₀ P₁ P₂ P₃ : Type*}
 
 include a a' hb hb' hsq in
 private theorem towerSiteMate_transport (K : E₁) :
-    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K) ≫ b'.app (h.obj K) ≫
+    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K) ≫ b'.app (h.obj K) ≫
       s'.map (c'.hom.app K) =
     c.hom.app (r.obj K) ≫ q.map (b.app K) ≫
-      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).natTrans.app (A₁.obj K) := by
+      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).app (A₁.obj K) := by
   apply (d'.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   apply (cancel_epi (a'.hom.app (g.obj (r.obj K)))).1
-  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K)
+  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K)
   simp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
   rw [d'.counit_naturality, reassoc_of% hb']
@@ -210,7 +210,7 @@ private theorem tower_exchange_plus {H T V S : Scheme.{u}}
       dsimp only [Functor.comp_obj, Functor.id_obj, ObjectProperty.ι_obj]
       simp only [Category.comp_id, Category.id_comp]
       exact hs M) K
-  simp only [towerPlusExchange, θ, towerExchange, mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans,
+  simp only [towerPlusExchange, θ, towerExchange, mateEquiv_apply, TwoSquare.mk,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, Functor.comp_map,
@@ -306,8 +306,6 @@ private theorem tower_etale_restrictionPlus_hom [Finite Λ]
   dsimp only [Functor.comp_obj] at he ⊢
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   erw [he]
-  try simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
   have hu : DerivedCategory.Plus.ι.map
       ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
         (ModuleCat.{u + 1} Λ) b).unit.app E) =

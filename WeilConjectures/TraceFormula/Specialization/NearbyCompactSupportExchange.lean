@@ -21,7 +21,7 @@ Let `N` be a trait model over the base of a separated `k`-scheme `Y` of finite t
 fibre `Y'`, over the strictly henselian trait `S = Spec k'⟦t⟧`. For a compactification `C` of `N`
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification`: `N ⊆ P` open in a trait model over the
 base with proper total space, over `ι : Y ⟶ X`, `ι' : Y' ⟶ X'`), the compact-support exchange of
-the structure morphism `a : Y ⟶ Spec k` (blueprint `det-nearby-exchange-maps` (3)) is
+the structure morphism `a : Y ⟶ Spec k` (blueprint `prose-E-15` (3)) is
 ```
 ν_C = χ_{a_P}⁻¹ ∘ Ra'_{P*}(ν_ι) : Ra'_! Ψ_N ⟶ Ψ_S Ra_!
 ```
@@ -37,11 +37,11 @@ and any two compactifications have a common refinement
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_eq`) and the
 compact-support exchange `ν_a` of the trait model is well defined
 (`NearbyCyclesModel.IsTraitModelOfBase.compactSupportExchange`). This is the independence
-statement of blueprint `det-nearby-exchange-maps`.
+statement of blueprint `prose-E-15`.
 
 ## The refinement identity
 
-The independence of `ν_C` from the compactification (blueprint `det-nearby-exchange-maps`) is
+The independence of `ν_C` from the compactification (blueprint `prose-E-15`) is
 proved along a refinement `π : P₃ ⟶ P₁` over a proper `p : X₃ ⟶ X₁` with `ι₁ = ι₃ ≫ p` and `N`
 cartesian over `P₁` (any two compactifications have a common refinement,
 `NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). Its key identity
@@ -120,9 +120,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {N : NearbyCyclesModel Y.left Y'.left} {P₃ : NearbyCyclesModel X₃.left X₃'.left}
   {P₁ : NearbyCyclesModel X₁.left X₁'.left}
 
-set_option maxHeartbeats 400000 in
 -- the abstract identity is instantiated on the ambient derived categories of `ℚ̄_ℓ`-modules
-/-- **The key identity of the refinement step for models** (blueprint `det-nearby-exchange-maps`,
+/-- **The key identity of the refinement step for models** (blueprint `prose-E-15`,
 proof): for open immersions `φ₃ : N ⟶ P₃`, `φ₁ : N ⟶ P₁` of models and a morphism
 `π : P₃ ⟶ P₁` over proper `p`, `p'` with `ι₁ = ι₃ ≫ p`, `φ₁ = φ₃ ≫ π` and `Y`, `Y'` cartesian,
 the identifications `E : ι₁! ≅ ι₃! ⋙ Rp_*` (`ProEtale.CondensedRing.openProperLowerShriekIso`)
@@ -334,7 +333,7 @@ lemma compactSupportExchangeOfCompactification_eq_lift (φ₃ : N.Hom P₃ ι₃
 
 
 /-- **The compact-support exchange of a compactification is unchanged along a refinement**
-(blueprint `det-nearby-exchange-maps`, proof): for compactifications `N ⊆ P₃` and `N ⊆ P₁` of a
+(blueprint `prose-E-15`, proof): for compactifications `N ⊆ P₃` and `N ⊆ P₁` of a
 model `N`, with structure morphisms `a₃`, `a₁` to the trait, and a morphism of models
 `π : P₃ ⟶ P₁` over proper `p`, `p'` with `ι₁ = ι₃ ≫ p`, `a₃ = π ≫ a₁` and `N` cartesian over
 `P₁`, the compact-support exchanges `ν = χ_a⁻¹ ∘ Ra'_*(ν_ι)` of the two compactifications agree. -/
@@ -446,7 +445,7 @@ lemma isIsoOn_pushforwardExchange :
 instance : IsIso (C.hom.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) :=
   C.hom.isIso_pullbackExchange_of_isOpenImmersion _ C.isPullback_hom_j
 
-/-- **The compact-support exchange of a compactification** (blueprint `det-nearby-exchange-maps`
+/-- **The compact-support exchange of a compactification** (blueprint `prose-E-15`
 (3)): for the structure morphisms `a : Y ⟶ Spec k`, `a' : Y' ⟶ Spec k'` and a compactification
 `N ⊆ P` over `ι : Y ⟶ X`, `ι' : Y' ⟶ X'`, the exchange `ν = χ_{a_P}⁻¹ ∘ Ra'_{P*}(ν_ι) :
 Ra'_! Ψ_N ⟶ Ψ_S Ra_!` (`ProEtale.CondensedRing.compactSupportExchangeOfCompactification`). -/
@@ -460,7 +459,7 @@ noncomputable def compactSupportExchange :
 
 
 /-- **The compact-support exchange is unchanged along a refinement** (blueprint
-`det-nearby-exchange-maps`, proof: "compatibility of `ν_h` and `χ_q⁻¹ Rq_{s*}(ν_{h''})`"): an
+`prose-E-15`, proof: "compatibility of `ν_h` and `χ_q⁻¹ Rq_{s*}(ν_{h''})`"): an
 instance of `ProEtale.CondensedRing.compactSupportExchangeOfCompactification_eq_of_refinement`. -/
 theorem compactSupportExchange_eq_of_refinement {C₃ C₁ : h.Compactification}
     (r : C₃.Refinement C₁) : C₃.compactSupportExchange ℓ = C₁.compactSupportExchange ℓ :=
@@ -471,7 +470,7 @@ theorem compactSupportExchange_eq_of_refinement {C₃ C₁ : h.Compactification}
     r.hom_generic_comp r.qc_eq.symm r.gc_eq.symm r.isPullback_ι r.isPullback_ι'
 
 /-- **The compact-support exchange does not depend on the compactification** (blueprint
-`det-nearby-exchange-maps`): two compactifications have a common refinement
+`prose-E-15`): two compactifications have a common refinement
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`), along which the
 compact-support exchange is unchanged
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_eq_of_refinement`).
@@ -485,7 +484,7 @@ end Compactification
 
 variable (h) in
 /-- The compact-support exchange `ν_a : Ra'_! Ψ_N ⟶ Ψ_S Ra_!` of the structure morphism of a
-trait model over the base (blueprint `det-nearby-exchange-maps` (3)): the exchange of any
+trait model over the base (blueprint `prose-E-15` (3)): the exchange of any
 compactification (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange`),
 which does not depend on it
 (`NearbyCyclesModel.IsTraitModelOfBase.compactSupportExchange_eq_compactSupportExchange`). -/

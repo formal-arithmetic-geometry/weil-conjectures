@@ -20,7 +20,7 @@ We complete the induction proving the affine Artin bound `ArtinBound d` in every
   (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_mvPolynomial`);
 * over an arbitrary field one passes to an algebraic closure
   (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure`, blueprint
-  `lem-sc-cd-ground-field`).
+  `lemma-uniform-bounds-pro-etale-affines`).
 -/
 
 @[expose] public section

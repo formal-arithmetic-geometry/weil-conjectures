@@ -106,7 +106,7 @@ variable {S P P' Q Q' : Type*} [CommRing S] [Algebra R S] [AddCommGroup P] [Modu
 /-- `f.lTensor S` is `S`-linear. -/
 lemma lTensor_smul_apply (f : Q →ₗ[R] Q') (a : S) (x : S ⊗[R] Q) :
     f.lTensor S (a • x) = a • f.lTensor S x := by
-  rw [← baseChange_eq_ltensor, map_smul]
+  rw [← baseChange_eq_lTensor, map_smul]
 
 /-- Compatibility of `S`-linear extensions of maps `P → S ⊗[R] Q` with base changes of maps. -/
 lemma liftBaseChange_lTensor_apply {σ₁ : P →ₗ[R] S ⊗[R] Q} {σ₂ : P' →ₗ[R] S ⊗[R] Q'}
@@ -416,10 +416,10 @@ open Algebra.TensorProduct CosimplicialObject
 variable (A B M : Type u) [CommRing A] [CommRing B] [Algebra A B] [AddCommGroup M] [Module A M]
 
 /-- The augmented Amitsur complex `0 → M → M ⊗_A B → M ⊗_A B ⊗_A B → ⋯` of a faithfully flat
-`A`-algebra `B` is exact (blueprint: lem-pc-cech-exact): the augmentation `M → M ⊗_A B` is
-injective, the complex is exact at `M ⊗_A B` (the kernel of the first differential is the image
-of the augmentation), and the Amitsur complex `amitsurComplex A B M` is exact in all positive
-degrees.
+`A`-algebra `B` is exact (blueprint: proposition-p-torsion-smooth-proper-curve): the augmentation
+`M → M ⊗_A B` is injective, the complex is exact at `M ⊗_A B` (the kernel of the first differential
+is the image of the augmentation), and the Amitsur complex `amitsurComplex A B M` is exact in all
+positive degrees.
 
 The proof follows the classical argument: after tensoring with `B`, the augmented complex admits
 the contracting homotopy `b ⊗ m ⊗ b₀ ⊗ ⋯ ⊗ bₙ ↦ b b₀ ⊗ m ⊗ b₁ ⊗ ⋯ ⊗ bₙ`, so it is exact, and

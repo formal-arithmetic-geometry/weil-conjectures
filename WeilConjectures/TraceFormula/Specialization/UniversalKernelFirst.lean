@@ -15,7 +15,7 @@ public import WeilConjectures.Tactic.TransportExact
 
 For the specialization `Sp` to the normal cone of a rational point `x` of `X`, the Künneth–Verdier
 maps `λ_K : K ⊠ D K ⟶ RHom(p₂^* K, p₁^! K)` (`ProEtale.CondensedRing.kunnethVerdierMap`) satisfy
-the first identity of blueprint `det-tf-sp-universal-kernel`,
+the first identity of blueprint `lemma-nearby-cycles-universal-kernel`,
 
 `𝔥 ∘ Sp(λ_K) = λ_{K'} ∘ ρ`,
 
@@ -24,8 +24,8 @@ with `K' = Sp K` and `ρ = (1 ⊠ δ_K) ∘ Π⁻¹` (`ProEtale.CondensedRing.un
 `CategoryTheory.map_curry_kunnethPairing_comp_eq`. Its inputs are proved here: the monoidality of
 `α_{p₂}`, the definition of `δ_K`, the symmetry of the lax tensor maps of nearby cycles, and
 `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ`. The exceptional exchange `β_{p₁}` and its compatibility with the
-exceptional Künneth maps (blueprint `det-nearby-structural-product`) are hypotheses: `β_{p₁}`
-needs the compact-support exchange `ν_{p₁}` of blueprint `det-nearby-exchange-maps` (3) for the
+exceptional Künneth maps (blueprint `lemma-base-change-maps-external-duality--1`) are hypotheses:
+`β_{p₁}` needs the compact-support exchange `ν_{p₁}` of blueprint `prose-E-15` (3) for the
 non-proper projection, which is only constructed for compactified morphisms of models.
 
 -/
@@ -53,14 +53,14 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (x : RationalPoint X) (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
-set_option maxHeartbeats 1000000 in
 -- the abstract statement is matched against the concrete functors
 /-- **Nearby cycles of the universal kernel**, first identity (blueprint
-`det-tf-sp-universal-kernel`): for an exceptional exchange `β_{p₁} : Sp_{X×X} p₁^! ⟶ p_{1s}^! Sp_X`
-compatible with the exceptional Künneth maps (`hκ`, blueprint `det-nearby-structural-product`)
-and the map `𝔥 : Sp_{X×X} RHom(p₂^* K, p₁^! K) ⟶ RHom(p_{2s}^* K', p_{1s}^! K')` adjoint to
-`(α_{p₂} ⊗ 1) ≫ μ ≫ Sp(ev) ≫ β_{p₁}`, the Künneth–Verdier maps satisfy
-`𝔥 ∘ Sp(λ_K) = λ_{K'} ∘ ρ`, with `K' = Sp_{X,x} K` and `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`. -/
+`lemma-nearby-cycles-universal-kernel`): for an exceptional exchange
+`β_{p₁} : Sp_{X×X} p₁^! ⟶ p_{1s}^! Sp_X` compatible with the exceptional Künneth maps (`hκ`,
+blueprint `lemma-base-change-maps-external-duality--1`) and the map
+`𝔥 : Sp_{X×X} RHom(p₂^* K, p₁^! K) ⟶ RHom(p_{2s}^* K', p_{1s}^! K')` adjoint to
+`(α_{p₂} ⊗ 1) ≫ μ ≫ Sp(ev) ≫ β_{p₁}`, the Künneth–Verdier maps satisfy `𝔥 ∘ Sp(λ_K) = λ_{K'} ∘ ρ`,
+with `K' = Sp_{X,x} K` and `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`. -/
 theorem map_kunnethVerdierMap_comp_eq (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (β₁ : boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X) ⋙ specializationProd k' x ⟶
       specialization k' x ⋙ boundedConstructibleUpperShriek ℓ

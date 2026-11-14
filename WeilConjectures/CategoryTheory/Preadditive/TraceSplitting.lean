@@ -20,8 +20,8 @@ coefficients are `ℤ[1/p]`-linear, as for `ℚ̄_ℓ`, `E`, `𝒪_E` or a finit
 normalized trace `d⁻¹ t` is a retraction of `u` (`CategoryTheory.normalizedTrace`).
 
 This file proves the formal parts of the averaging argument of SGA 4½, [Th. finitude], §3 and of
-Illusie, *Autour du théorème de monodromie locale*, §4 (blueprint `det-nearby-kunneth-invariants`,
-`det-tf-invariants-duality`):
+Illusie, *Autour du théorème de monodromie locale*, §4 (blueprint `prose-E-10`,
+`lemma-duality-invariants-pro-p--1`):
 
 * `CategoryTheory.comp_normalizedTrace`: `u ≫ d⁻¹ t = 𝟙`.
 * `CategoryTheory.nsmul_normalizedTrace_comp_eq_sum` (*Galois averaging*): if a finite group of

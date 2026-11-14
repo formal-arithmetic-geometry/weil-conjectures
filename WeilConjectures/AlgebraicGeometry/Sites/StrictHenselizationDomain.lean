@@ -17,7 +17,8 @@ neighbourhoods `(V, v)` of `s`. A product `ab` vanishing in the colimit vanishes
 `Γ(V, 𝒪_V)`; the local ring of `V` at `v` is regular (`V` is étale over the regular `S`), hence a
 domain, so `a` or `b` is killed by a section not vanishing at `v`, which becomes a unit in the
 colimit (the strict henselization is local), hence vanishes in the colimit. So `𝒪^{sh}_{S,s}` is a
-domain and the strict localization is integral (blueprint `det-tf-transverse-corner-vanishing`).
+domain and the strict localization is integral (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`).
 
 ## Main statements
 
@@ -72,7 +73,7 @@ lemma colimit_ι_strictHenselizationDiagram_eq_zero_of_germ_eq_zero
 variable [IsRegular S] (s)
 
 /-- The strict henselization of a regular scheme at a geometric point is a domain
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem isDomain_strictHenselization_of_isRegular : IsDomain (strictHenselization s) := by
   refine @NoZeroDivisors.to_isDomain _ _ _ ⟨fun {a b} hab ↦ ?_⟩
   obtain ⟨x, hx⟩ := exists_forall_mem_range_colimit_ι 2 ![a, b]
@@ -103,7 +104,7 @@ theorem isDomain_strictHenselization_of_isRegular : IsDomain (strictHenselizatio
   · exact Or.inr (colimit_ι_strictHenselizationDiagram_eq_zero_of_germ_eq_zero k.unop _ _ h)
 
 /-- The strict localization of a regular scheme at a geometric point is irreducible
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem irreducibleSpace_strictLocalization_of_isRegular :
     IrreducibleSpace (strictLocalization s) := by
   have := isDomain_strictHenselization_of_isRegular s

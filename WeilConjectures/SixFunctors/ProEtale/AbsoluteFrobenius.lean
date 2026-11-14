@@ -29,7 +29,7 @@ the iterates `F_X^{(m + n)} = F_X^{(n)} ∘ F_X^{(m)}`.
 - `AlgebraicGeometry.ProEtale.lowerStarIterateFrobeniusIso`,
   `AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso`: `F_{X*} ≅ 𝟭` and `F_X^* ≅ 𝟭`.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarIterateFrobeniusIso`
-  (`lem-trf-absolute-frobenius-site`): the canonical trivialization `LF_X^* ≅ 𝟭`.
+  (`lemma-scheme-frobenius-geometric-frobenius--1`): the canonical trivialization `LF_X^* ≅ 𝟭`.
 
 ## Main statements
 
@@ -195,8 +195,8 @@ lemma upperStarIterateFrobeniusIso_add (m : ℕ) :
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- Blueprint `lem-trf-absolute-frobenius-site`: Canonical trivialization of absolute Frobenius
-pullback.
+/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1`: Canonical trivialization of absolute
+Frobenius pullback.
 
 Let `X` be a scheme in which the prime `p` vanishes. On the small pro-étale site of `X`, the
 derived pullback along the `p ^ n`-power absolute Frobenius `F_X` has a canonical

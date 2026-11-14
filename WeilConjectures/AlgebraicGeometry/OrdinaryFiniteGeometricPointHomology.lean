@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 
 /-! # Scalar faithfulness and homology on a geometric point
 
-Source: blueprint thm-amb-p1-decomposition, the geometric Chern component.
+Source: blueprint lemma-cohomology-projective-line-trace, the geometric Chern component.
 (auxiliary; not a blueprint node).
 -/
 
@@ -85,7 +85,7 @@ private theorem kummer_mono_homology_zero_core
 
 /-- A scalar-faithful arrow from the constant unit on a separably closed point
 is monic on zeroth homology.
-Source: blueprint thm-amb-p1-decomposition, geometric Chern component.
+Source: blueprint lemma-cohomology-projective-line-trace, geometric Chern component.
 (auxiliary; not a blueprint node).
 
 Proof: the constant module on a separably closed point is projective. The

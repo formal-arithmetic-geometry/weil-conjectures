@@ -35,7 +35,7 @@ Source: Stacks Project, Limits, Lemma 09ZR
 
 Proof:
 1. Properness gives finite type and separatedness. By
-   prop-nagata-finite-type-closed-in-fp (01ZJ), embed X into a separated finitely
+   theorem-nagata-s-compactification-theorem--1 (01ZJ), embed X into a separated finitely
    presented S-scheme Y. Both X and Y are qcqs by
    lem-weil-pbc-qcqs-morphism-permanence.
 2. Apply lem-weil-pbc-chow-finite-type (0202) to Y: obtain a proper surjective

@@ -11,7 +11,7 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Inverse evaluation for the recorded field coefficient twists
 
-Source: prop-weil-twist-preserves, proof steps 9--13.
+Source: definition-tate-twists--10, proof steps 9--13.
 (blueprint: lem-weil-field-twist-inverse).
 -/
 
@@ -22,7 +22,7 @@ open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
 /-- Opposite signed root lines give inverse twists after rationalization and common stages.
-Source: blueprint prop-weil-twist-preserves, proof steps 9--13
+Source: blueprint definition-tate-twists--10, proof steps 9--13
 (blueprint: lem-weil-field-twist-inverse).
 
 Proof: restrict the exact integral line tensor functors to the intrinsic constructible

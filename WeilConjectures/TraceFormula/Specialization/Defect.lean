@@ -16,10 +16,10 @@ Let `X` be a `k`-scheme, `I` an ideal sheaf on `X` with closed subscheme `i : Z 
 `S = Spec k'⟦t⟧` (`ProEtale.CondensedRing.deformationModel X I k'`) receives the deformation of the
 zero ideal of `Z`, the *constant family* `Z × S` (`ProEtale.CondensedRing.deformationModel` of
 `⊥`), through the morphism of models `ẽ : Z × S ⟶ 𝒟_Z X` induced by `i`
-(`ProEtale.CondensedRing.zeroSectionDeformationModelHom`, blueprint `det-sp-dnc-definition`). Its
+(`ProEtale.CondensedRing.zeroSectionDeformationModelHom`, blueprint `prose-E-04`). Its
 special fibre is the zero section `e : Z ⊗ k' ⟶ N_Z X ⊗ k'`.
 
-This file defines (blueprint `det-sp-defect-definition`)
+This file defines (blueprint `prose-E-04`)
 * the *zero-section map* `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)`, the pullback exchange
   along `ẽ` (`ProEtale.CondensedRing.zeroSectionMap`);
 * the *defect* `C_{X,Z}(L)`, a cone of `ε_{X,Z}(L)`
@@ -27,8 +27,8 @@ This file defines (blueprint `det-sp-defect-definition`)
 
 The blueprint composes `ε_{X,Z}(L)` with the inverse of the specialization unit
 `σ_Z(Li^* L) : Li^* L ⟶ Ψ_{Z × S}(Li^* L)` of the constant family, which is an isomorphism
-(blueprint `det-sp-constant-family-vanishing`); this does not change the cone up to isomorphism,
-and the vanishing statements below do not depend on it.
+(blueprint `lemma-nearby-cycles-constant-family--1`); this does not change the cone up to
+isomorphism, and the vanishing statements below do not depend on it.
 
 ## Main results
 
@@ -99,7 +99,7 @@ noncomputable def zeroSectionSpecialFibreMap :
 
 /-- The morphism of models `ẽ : Z × S ⟶ 𝒟_Z X` from the constant family of `Z = V(I)` (the
 deformation of the zero ideal of `Z`) to the deformation to the normal cone of `Z` in `X`, over
-`i : Z ⟶ X` and the zero section `e` (blueprint `det-sp-dnc-definition`). -/
+`i : Z ⟶ X` and the zero section `e` (blueprint `prose-E-04`). -/
 noncomputable def zeroSectionDeformationModelHom :
     (deformationModel (centre X I) ⊥ k').Hom (deformationModel X I k') (centreι X I).left
       (zeroSectionSpecialFibreMap X I k').left :=
@@ -108,7 +108,7 @@ noncomputable def zeroSectionDeformationModelHom :
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The *zero-section map* `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)` (blueprint
-`det-sp-defect-definition` (2)): the pullback exchange along `ẽ : Z × S ⟶ 𝒟_Z X`. -/
+`prose-E-04` (2)): the pullback exchange along `ẽ : Z × S ⟶ 𝒟_Z X`. -/
 noncomputable def zeroSectionMap
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) :
@@ -139,7 +139,7 @@ lemma exists_distTriang_zeroSectionMap
       (g : _ ⟶ C) (h : C ⟶ _), Triangle.mk (zeroSectionMap X I k' Λ L) g h ∈ distTriang _ :=
   distinguished_cocone_triangle _
 
-/-- The *defect* `C_{X,Z}(L)` of the specialization (blueprint `det-sp-defect-definition` (3)):
+/-- The *defect* `C_{X,Z}(L)` of the specialization (blueprint `prose-E-04` (3)):
 a cone of the zero-section map `ε_{X,Z}(L)`. -/
 noncomputable def specializationDefect
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

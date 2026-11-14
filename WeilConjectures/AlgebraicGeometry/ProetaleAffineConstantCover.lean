@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # An affine cover with a fixed constant sheaf description
 
-Source: blueprint `det-lem-stratified-lattice-scheme`, proof (2)
+Source: blueprint `lemma-lattices-lisse-e-sheaves`, proof (2)
 (blueprint: lem-sfb-proetale-affine-constant-cover).
 -/
 
@@ -33,7 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- A fixed constant description on a covering family can be realized on a single
 surjective quasi-compact weakly etale affine cover.
 
-Source: blueprint `det-lem-stratified-lattice-scheme`, proof (2), its finite affine
+Source: blueprint `lemma-lattices-lisse-e-sheaves`, proof (2), its finite affine
 refinement of the trivializing covering
 (blueprint: lem-sfb-proetale-affine-constant-cover).
 

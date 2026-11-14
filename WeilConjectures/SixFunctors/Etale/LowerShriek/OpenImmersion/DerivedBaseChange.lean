@@ -56,7 +56,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
   [IsOpenImmersion j] [IsOpenImmersion j']
 
-/-- Blueprint `sbc-prop-extension-by-zero-and-arbitrary-base-change`, for complexes: for a
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`, for complexes: for a
 cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, the base change map
 `j'_! g'^* ⟶ g''^* j_!` is an isomorphism of functors on cochain complexes of étale sheaves,
 the four functors acting termwise. -/
@@ -68,7 +68,7 @@ lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap_mapHomologicalComplex
   (NatIso.mapHomologicalComplex
     (asIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)) c).isIso_hom
 
-/-- Blueprint `sbc-prop-extension-by-zero-and-arbitrary-base-change`: for an open immersion
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`: for an open immersion
 `j : U ⟶ Z` and a cartesian square
 
 ```

@@ -32,7 +32,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
 /-! # Exactness and thick locus of the specified site Hom comparison
 
-Source: blueprint, lem-weil-finite-duality-site-comparison, proof paragraphs 1--2;
+Source: blueprint, proposition-six-operations-dctf--15, proof paragraphs 1--2;
 Stacks Project, Tags 08J9, 08JB and 08JC
 (blueprint: lem-sf-site-hom-comparison-thick).
 

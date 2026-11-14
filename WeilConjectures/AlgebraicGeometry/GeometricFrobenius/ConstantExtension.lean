@@ -19,7 +19,8 @@ geometric fibers `Ȳ₁ = Y ×_{k₁} k̄₁` and `Ȳ₀ = Y ×_{k₀} k̄₀` a
 If `k₁` is finite of degree `m` over the finite field `k₀`, then `ι` intertwines the geometric
 Galois Frobenius `Fr₁` of `Ȳ₁` with the `m`-th power of the geometric Galois Frobenius `Fr₀` of
 `Ȳ₀`: `ι ≫ Fr₀ᵐ = Fr₁ ≫ ι`. This is the scheme-theoretic input for restricting Weil sheaves
-along a finite constant field extension (blueprint: `lem-wf-weil-group-constant-extension`).
+along a finite constant field extension (blueprint:
+`lemma-geometric-constituents-after-constant-extension`).
 
 ## Main definitions
 
@@ -80,7 +81,7 @@ variable {Y : Scheme.{u}} (f₁ : Y ⟶ Spec (.of k₁)) (f₀ : Y ⟶ Spec (.of
 
 /-- The morphism `ι = 𝟙 Y × Spec θ : Y ×_{k₁} k̄₁ ⟶ Y ×_{k₀} k̄₀` between the geometric fibers of a
 `k₁`-scheme `Y` over `k₁` and over `k₀`, for a `k₀`-embedding `θ : k̄₀ ↪ k̄₁`.
-(blueprint: `lem-wf-weil-group-constant-extension`) -/
+(blueprint: `lemma-geometric-constituents-after-constant-extension`) -/
 def geometricFiberExtensionMap : f₁.geometricFiber ⟶ f₀.geometricFiber :=
   pullback.map f₁ (Scheme.specAlgebraicClosure k₁).hom f₀ (Scheme.specAlgebraicClosure k₀).hom
     (𝟙 Y) (Spec.map (CommRingCat.ofHom θ.toRingHom))
@@ -148,9 +149,9 @@ with `m = [k₁ : k₀]`. -/
 @[reassoc]
 theorem specGeometricFrobenius_pow_hom_comp_spec_map_algHom
     (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure k₁) (n : ℕ) :
-    (specGeometricFrobenius k₁ ^ n).hom ≫ Spec.map (CommRingCat.ofHom θ.toRingHom) =
+    (specGeometricFrobenius k₁ ^ n).asIso.hom ≫ Spec.map (CommRingCat.ofHom θ.toRingHom) =
       Spec.map (CommRingCat.ofHom θ.toRingHom) ≫
-        (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * n)).hom := by
+        (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * n)).asIso.hom := by
   let := Fintype.ofFinite k₀
   let := Fintype.ofFinite k₁
   have hm : Fintype.card k₁ = Fintype.card k₀ ^ Module.finrank k₀ k₁ := by
@@ -170,12 +171,12 @@ variable {Y : Scheme.{u}} (f₁ : Y ⟶ Spec (.of k₁)) (f₀ : Y ⟶ Spec (.of
 
 /-- The morphism `ι : Ȳ₁ ⟶ Ȳ₀` intertwines the powers of the geometric Galois Frobenii:
 `ι ≫ Fr₀^{m n} = Fr₁ⁿ ≫ ι`, with `m = [k₁ : k₀]`.
-(blueprint: `lem-wf-weil-group-constant-extension`) -/
+(blueprint: `lemma-geometric-constituents-after-constant-extension`) -/
 @[reassoc]
 theorem geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow (n : ℕ) :
     geometricFiberExtensionMap f₁ f₀ hf θ ≫
-        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * n)).hom =
-      (f₁.geometricGaloisFrobenius ^ n).hom ≫ geometricFiberExtensionMap f₁ f₀ hf θ := by
+        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * n)).asIso.hom =
+      (f₁.geometricGaloisFrobenius ^ n).asIso.hom ≫ geometricFiberExtensionMap f₁ f₀ hf θ := by
   ext
   · simp
   · simp only [Category.assoc,
@@ -190,8 +191,8 @@ theorem geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow (n : ℕ) :
 @[reassoc]
 theorem geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow_finrank :
     geometricFiberExtensionMap f₁ f₀ hf θ ≫
-        (f₀.geometricGaloisFrobenius ^ Module.finrank k₀ k₁).hom =
-      f₁.geometricGaloisFrobenius.hom ≫ geometricFiberExtensionMap f₁ f₀ hf θ := by
+        (f₀.geometricGaloisFrobenius ^ Module.finrank k₀ k₁).asIso.hom =
+      f₁.geometricGaloisFrobenius.asIso.hom ≫ geometricFiberExtensionMap f₁ f₀ hf θ := by
   simpa using geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow f₁ f₀ hf θ 1
 
 end Scheme.Hom
@@ -293,10 +294,11 @@ variable [Finite k₀]
 geometric point `t` of `Ȳ₀` satisfies `t ≫ Fr₀^{m n} = σ₀^{m n} ≫ t`, `m = [k₁ : k₀]`. -/
 theorem geometricFiberExtensionPoint_comp_geometricGaloisFrobenius_pow
     {s : Spec (.of (AlgebraicClosure k₁)) ⟶ f₁.geometricFiber} {n : ℕ}
-    (hs : s ≫ (f₁.geometricGaloisFrobenius ^ n).hom = (specGeometricFrobenius k₁ ^ n).hom ≫ s) :
+    (hs : s ≫ (f₁.geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k₁ ^ n).asIso.hom ≫ s) :
     geometricFiberExtensionPoint f₁ f₀ hf θ s ≫
-        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * n)).hom =
-      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * n)).hom ≫
+        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * n)).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * n)).asIso.hom ≫
         geometricFiberExtensionPoint f₁ f₀ hf θ s := by
   have h := specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
   rw [← specAlgHomAlgebraicClosureIso_hom θ, ← Iso.inv_comp_eq, ← Category.assoc,
@@ -310,8 +312,8 @@ with finite residue field is fixed by `Fr₀^{deg₀ y}` up to `σ₀^{deg₀ y}
 `deg₀ y = [k₁ : k₀] deg₁ y` is the degree over `k₀`. -/
 theorem geometricFiberExtensionPoint_geometricFiberPointOfFinitePoint_comp (y : Y.finitePoints) :
     geometricFiberExtensionPoint f₁ f₀ hf θ (f₁.geometricFiberPointOfFinitePoint y) ≫
-        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * f₁.degreeOver y.1)).hom =
-      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * f₁.degreeOver y.1)).hom ≫
+        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * f₁.degreeOver y.1)).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * f₁.degreeOver y.1)).asIso.hom ≫
         geometricFiberExtensionPoint f₁ f₀ hf θ (f₁.geometricFiberPointOfFinitePoint y) :=
   geometricFiberExtensionPoint_comp_geometricGaloisFrobenius_pow f₁ f₀ hf θ
     (f₁.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow y)

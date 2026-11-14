@@ -49,7 +49,7 @@ open scoped TensorProduct
 namespace WeilConjectures
 
 /-- The tensor lift uses the existing product of fixed pairs and the existing
-transport. Source: blueprint prop-weil-operations, proof sentence 1
+transport. Source: blueprint sec-Weil-complexes, proof sentence 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def PodTensorWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (T : C × C ⥤ C)
@@ -64,14 +64,14 @@ def PodTensorWeilLiftSpec
       T.map (Prod.mkHom u.hom.f v.hom.f)
 
 /-- Retain exactly the original partial internal-Hom domain on underlying objects.
-Source: blueprint prop-weil-operations, proof sentence 1, internal-Hom qualification
+Source: blueprint sec-Weil-complexes, proof sentence 1, internal-Hom qualification
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def podWeilHomPairs {C : Type a} [Category.{b} C] (P : C ⥤ C)
     (J : ObjectProperty (Cᵒᵖ × C)) : ObjectProperty ((IsoAlgebra P)ᵒᵖ × IsoAlgebra P) :=
   fun KL ↦ J (op KL.1.unop.carrier, KL.2.carrier)
 
 /-- Forget structures on a permitted pair, retaining its actual domain witness.
-Source: blueprint prop-weil-operations, proof sentence 1
+Source: blueprint sec-Weil-complexes, proof sentence 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def podWeilHomPairForget {C : Type a} [Category.{b} C] (P : C ⥤ C)
     (J : ObjectProperty (Cᵒᵖ × C)) :
@@ -81,7 +81,7 @@ def podWeilHomPairForget {C : Type a} [Category.{b} C] (P : C ⥤ C)
 
 /-- The Hom structure is H(theta_M inverse,theta_N) after the canonical comparison.
 The functor is defined only on the original permitted pairs, and forgetting fixes
-its entire object and arrow action. Source: blueprint prop-weil-operations, sentence 1
+its entire object and arrow action. Source: blueprint sec-Weil-complexes, sentence 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def PodHomWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (J : ObjectProperty (Cᵒᵖ × C))
@@ -104,7 +104,7 @@ def PodHomWeilLiftSpec
 /-- The tensor and partial-Hom formulas define functors with the stipulated variances.
 The input J can retain any already-proved finite-Tor or site-perfect restriction;
 only its preservation by P is used, and no larger Hom domain is asserted.
-Source: blueprint prop-weil-operations, sentence 1, node proof steps 7--9
+Source: blueprint sec-Weil-complexes, sentence 1, node proof steps 7--9
 (blueprint: lem-pod-semilinear-field-operation-lifts).
 Proof: tensor uses IsoAlgebra.prod followed by mapOfNatIso. Bifunctoriality,
 the two arrow equations and naturality of mu give the tensor arrow equation.
@@ -169,7 +169,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
 /-- The rational Frobenius square component through the canonical compositors.
-Source: blueprint prop-weil-operations, sentence 1, proof step 4
+Source: blueprint sec-Weil-complexes, sentence 1, proof step 4
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def podRationalSquarePullbackComponent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [_root_.Algebra (Padic l) E]
@@ -185,7 +185,7 @@ def podRationalSquarePullbackComponent
     pullbackTensorRationalComposition l E gY f K
 
 /-- The same square component in the actual common-stage category, through the
-canonical common-stage compositors. Source: blueprint prop-weil-operations, sentence 1
+canonical common-stage compositors. Source: blueprint sec-Weil-complexes, sentence 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def podCommonSquarePullbackComponent
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω]
@@ -220,46 +220,46 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 
 /-- Integral and rational Frobenius transport, using the existing prime-invertibility
 data, canonical inverse-image realization, and the actual inverse scheme map.
-Source: blueprint prop-weil-operations, sentence 1
+Source: blueprint sec-Weil-complexes, sentence 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def PodRationalFrobeniusTransportSpec
     (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Prop :=
   letI := fun x ↦ sfWeilPrimeInvertible D l hl T₀ x
-  (∃ ε : constructibleIntegralPullback l E (D.geometricFrobenius T₀).hom ⋙
-      constructibleIntegralPullback l E (D.geometricFrobenius T₀).inv ≅ 𝟭 _,
+  (∃ ε : constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.hom ⋙
+      constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.inv ≅ 𝟭 _,
     ∀ K : sfIntegralConstructibleCategory l E (D.geometricFiber T₀).left,
       HEq ((sfIntegralConstructible l E (D.geometricFiber T₀).left).ι.map (ε.hom.app K))
-        (pullbackIdentityEpsilon l E (D.geometricFrobenius T₀).hom K).hom) ∧
-  Nonempty (constructibleIntegralPullback l E (D.geometricFrobenius T₀).inv ⋙
-    constructibleIntegralPullback l E (D.geometricFrobenius T₀).hom ≅ 𝟭 _) ∧
+        (pullbackIdentityEpsilon l E (D.geometricFrobenius T₀).asIso.hom K).hom) ∧
+  Nonempty (constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.inv ⋙
+    constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.hom ≅ 𝟭 _) ∧
   (∃ h : ∀ K : DerivedCategory (scalarReductionSource l E (D.geometricFiber T₀).left),
       sfIntegralConstructible l E (D.geometricFiber T₀).left K →
         sfIntegralConstructible l E (D.geometricFiber T₀).left
           ((isomorphismIntegralTermwiseInverseImage l E
-            (D.geometricFrobenius T₀).hom).obj K),
-    Nonempty (constructibleIntegralPullback l E (D.geometricFrobenius T₀).hom ≅
+            (D.geometricFrobenius T₀).asIso.hom).obj K),
+    Nonempty (constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.hom ≅
       (sfIntegralConstructible l E (D.geometricFiber T₀).left).lift
         ((sfIntegralConstructible l E (D.geometricFiber T₀).left).ι ⋙
-          isomorphismIntegralTermwiseInverseImage l E (D.geometricFrobenius T₀).hom)
+          isomorphismIntegralTermwiseInverseImage l E (D.geometricFrobenius T₀).asIso.hom)
         (fun K ↦ h K.obj K.property))) ∧
-  (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).hom).Additive ∧
+  (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).asIso.hom).Additive ∧
   PreservesFiniteLimits
-    (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).hom) ∧
+    (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).asIso.hom) ∧
   PreservesFiniteColimits
-    (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).hom) ∧
-  (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).hom).IsEquivalence ∧
+    (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).asIso.hom) ∧
+  (podCompletedModuleInverseImage l E (D.geometricFrobenius T₀).asIso.hom).IsEquivalence ∧
   (sfWeilFrobeniusPullback D l hl T₀ E).IsEquivalence ∧
-  (∃ (δ : constructibleIntegralPullback l E (D.geometricFrobenius T₀).hom ⋙
-        constructibleIntegralPullback l E (D.geometricFrobenius T₀).inv ≅ 𝟭 _)
+  (∃ (δ : constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.hom ⋙
+        constructibleIntegralPullback l E (D.geometricFrobenius T₀).asIso.inv ≅ 𝟭 _)
       (ε : sfWeilFrobeniusPullback D l hl T₀ E ⋙
-        rationalDerivedPullback l E (D.geometricFrobenius T₀).inv ≅ 𝟭 _),
+        rationalDerivedPullback l E (D.geometricFrobenius T₀).asIso.inv ≅ 𝟭 _),
     (∀ K, HEq ((sfIntegralConstructible l E (D.geometricFiber T₀).left).ι.map
-        (δ.hom.app K)) (pullbackIdentityEpsilon l E (D.geometricFrobenius T₀).hom K).hom) ∧
+        (δ.hom.app K)) (pullbackIdentityEpsilon l E (D.geometricFrobenius T₀).asIso.hom K).hom) ∧
     ∀ K : sfRationalConstructibleCategory l E (D.geometricFiber T₀).left,
       HEq (ε.hom.app K)
         ((sfRationalConstructibleLocalization l E (D.geometricFiber T₀).left).map
           (δ.hom.app K.obj))) ∧
-  Nonempty (rationalDerivedPullback l E (D.geometricFrobenius T₀).inv ⋙
+  Nonempty (rationalDerivedPullback l E (D.geometricFrobenius T₀).asIso.inv ⋙
     sfWeilFrobeniusPullback D l hl T₀ E ≅ 𝟭 _) ∧
   ∃ s : (sfWeilFrobeniusPullback D l hl T₀ E).CommShift ℤ,
     (fun [_s : (sfWeilFrobeniusPullback D l hl T₀ E).CommShift ℤ] ↦
@@ -268,7 +268,7 @@ def PodRationalFrobeniusTransportSpec
 /-- Both coefficient stages use the actual inverse scheme map, and their underlying
 pullbacks are exact equivalences. Tensor and Hom comparisons below are fixed to
 the recorded canonical transport maps, rather than arbitrary isomorphisms.
-Source: blueprint prop-weil-operations, sentence 1, node proof steps 2--3 and 7--8
+Source: blueprint sec-Weil-complexes, sentence 1, node proof steps 2--3 and 7--8
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
 def PodFieldOperationTransportSpec
     (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -277,16 +277,16 @@ def PodFieldOperationTransportSpec
   PodRationalFrobeniusTransportSpec D l hl T₀ E ∧
   (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).IsEquivalence ∧
   (∃ ε : sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ⋙
-      commonStageDerivedPullback l Ω (D.geometricFrobenius T₀).inv ≅ 𝟭 _,
+      commonStageDerivedPullback l Ω (D.geometricFrobenius T₀).asIso.inv ≅ 𝟭 _,
     ∀ A : AlgebraicallyClosedCoefficients.Index l Ω,
       ∃ δ : sfWeilFrobeniusPullback D l hl T₀
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω A) ⋙
         rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω A)
-          (D.geometricFrobenius T₀).inv ≅ 𝟭 _,
+          (D.geometricFrobenius T₀).asIso.inv ≅ 𝟭 _,
         ∀ K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber T₀).left A,
           HEq (ε.hom.app ((GeneralAlgebraicallyClosedCoefficients.inclusion A).obj K))
             ((GeneralAlgebraicallyClosedCoefficients.inclusion A).map (δ.hom.app K))) ∧
-  Nonempty (commonStageDerivedPullback l Ω (D.geometricFrobenius T₀).inv ⋙
+  Nonempty (commonStageDerivedPullback l Ω (D.geometricFrobenius T₀).asIso.inv ⋙
     sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ≅ 𝟭 _) ∧
   (∃ s : (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).CommShift ℤ,
     (fun [_s : (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).CommShift ℤ] ↦
@@ -297,7 +297,7 @@ def PodFieldOperationTransportSpec
         (sfWeilFrobeniusPullback D l hl T₀ E) ⋙
           rationalDerivedTensor l E (D.geometricFiber T₀).left,
     (∀ K L, μ.app (K, L) =
-      canonicalRationalPullbackTensor l E (D.geometricFrobenius T₀).hom K L) ∧
+      canonicalRationalPullbackTensor l E (D.geometricFrobenius T₀).asIso.hom K L) ∧
     PodTensorWeilLiftSpec (sfWeilFrobeniusPullback D l hl T₀ E)
       (rationalDerivedTensor l E (D.geometricFiber T₀).left) μ) ∧
   (∃ μ : commonStageDerivedTensor l Ω (D.geometricFiber T₀).left ⋙
@@ -306,7 +306,7 @@ def PodFieldOperationTransportSpec
         (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω) ⋙
           commonStageDerivedTensor l Ω (D.geometricFiber T₀).left,
     (∀ K L, μ.app (K, L) =
-      canonicalCommonStagePullbackTensor l Ω (D.geometricFrobenius T₀).hom K L) ∧
+      canonicalCommonStagePullbackTensor l Ω (D.geometricFrobenius T₀).asIso.hom K L) ∧
     PodTensorWeilLiftSpec (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω)
       (commonStageDerivedTensor l Ω (D.geometricFiber T₀).left) μ) ∧
   (∃ κ : rationalDerivedInternalHom l E (D.geometricFiber T₀).left ⋙
@@ -314,25 +314,25 @@ def PodFieldOperationTransportSpec
       podPairPullback (sfWeilFrobeniusPullback D l hl T₀ E)
         (constructibleRationalHomPairs l E (D.geometricFiber T₀).left)
         (constructibleRationalHomPairs l E (D.geometricFiber T₀).left)
-        (podRationalPairs_pullback l E (D.geometricFrobenius T₀).hom) ⋙
+        (podRationalPairs_pullback l E (D.geometricFrobenius T₀).asIso.hom) ⋙
           rationalDerivedInternalHom l E (D.geometricFiber T₀).left,
-    (∀ K, κ.hom.app K = podRationalHomComparison l E (D.geometricFrobenius T₀).hom K) ∧
+    (∀ K, κ.hom.app K = podRationalHomComparison l E (D.geometricFrobenius T₀).asIso.hom K) ∧
     PodHomWeilLiftSpec (sfWeilFrobeniusPullback D l hl T₀ E)
       (constructibleRationalHomPairs l E (D.geometricFiber T₀).left)
       (rationalDerivedInternalHom l E (D.geometricFiber T₀).left)
-      (podRationalPairs_pullback l E (D.geometricFrobenius T₀).hom) κ) ∧
+      (podRationalPairs_pullback l E (D.geometricFrobenius T₀).asIso.hom) κ) ∧
   ∃ κ : commonStageDerivedInternalHom l Ω (D.geometricFiber T₀).left ⋙
         sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ≅
       podPairPullback (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω)
         (commonStageHomPairs l Ω (D.geometricFiber T₀).left)
         (commonStageHomPairs l Ω (D.geometricFiber T₀).left)
-        (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).hom) ⋙
+        (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).asIso.hom) ⋙
           commonStageDerivedInternalHom l Ω (D.geometricFiber T₀).left,
-    (∀ K, κ.hom.app K = podCommonHomComparison l Ω (D.geometricFrobenius T₀).hom K) ∧
+    (∀ K, κ.hom.app K = podCommonHomComparison l Ω (D.geometricFrobenius T₀).asIso.hom K) ∧
     PodHomWeilLiftSpec (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω)
       (commonStageHomPairs l Ω (D.geometricFiber T₀).left)
       (commonStageDerivedInternalHom l Ω (D.geometricFiber T₀).left)
-      (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).hom) κ
+      (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).asIso.hom) κ
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   scalarReductionExistence scalarReductionDerivedExistence commonStageTensorComparison
@@ -355,9 +355,9 @@ private theorem pod_field_transport
   let : QuasiCompact ((D.geometricFiber T₀).left ↘ Spec (.of D.k)) := by
     exact inferInstanceAs (QuasiCompact
       (pullback.snd T₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-  let : IsIso (D.geometricFrobenius T₀).hom := (D.geometricFrobenius T₀).isIso_hom
+  let : IsIso (D.geometricFrobenius T₀).asIso.hom := (D.geometricFrobenius T₀).asIso.isIso_hom
   obtain ⟨iX, iY, H⟩ := isomorphismFieldTransport D l hl Ω
-    (D.geometricFrobenius T₀).hom
+    (D.geometricFrobenius T₀).asIso.hom
   have hiX : iX = i := Subsingleton.elim _ _
   have hiY : iY = i := Subsingleton.elim _ _
   cases hiX
@@ -366,33 +366,34 @@ private theorem pod_field_transport
   obtain ⟨A⟩ := (hE E).1
   obtain ⟨B⟩ := (hE E).2
   have ht := isomorphismIntegralDerivedPullback_termwise l E
-    (D.geometricFrobenius T₀).hom
+    (D.geometricFrobenius T₀).asIso.hom
   obtain ⟨h, ht, _⟩ := ht
   have hrat : PodRationalFrobeniusTransportSpec D l hl T₀ E := by
     unfold PodRationalFrobeniusTransportSpec
     dsimp only [sfWeilFrobeniusPullback]
-    rw [← IsIso.Iso.inv_hom (D.geometricFrobenius T₀)]
+    rw [← IsIso.Iso.inv_hom (D.geometricFrobenius T₀).asIso]
     refine ⟨⟨A.epsilon, ?_⟩, ?_, ⟨h, ht⟩, inferInstance, inferInstance,
       inferInstance, (podCompletedInverseImage_equivalence l E
-        (D.geometricFrobenius T₀).hom).1, A.rationalEquivalence,
+        (D.geometricFrobenius T₀).asIso.hom).1, A.rationalEquivalence,
       ⟨A.epsilon, A.rationalEpsilon, ?_, A.rational_epsilon_formula⟩, ?_,
       ⟨A.rationalShift, A.rationalExact⟩⟩
     · intro K
       exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom] using Nonempty.intro B.epsilon
+    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv] using
+        Nonempty.intro B.epsilon
     · intro K
       exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, sfWeilFrobeniusPullback] using
-        Nonempty.intro B.rationalEpsilon
-  have tensor := derivedPullbackTensorIso l E (D.geometricFrobenius T₀).hom 0 Ω
+    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv,
+        sfWeilFrobeniusPullback] using Nonempty.intro B.rationalEpsilon
+  have tensor := derivedPullbackTensorIso l E (D.geometricFrobenius T₀).asIso.hom 0 Ω
   obtain ⟨μ, hμ⟩ := tensor.2.2.2.2.2.2.1
   obtain ⟨ν, hν⟩ := tensor.2.2.2.2.2.2.2.1
-  have homs := derivedAutomorphismHomEvaluation l E (D.geometricFrobenius T₀).hom 0 Ω
+  have homs := derivedAutomorphismHomEvaluation l E (D.geometricFrobenius T₀).asIso.hom 0 Ω
   obtain ⟨κ, hκ⟩ := homs.2.2.1
   obtain ⟨ρ, hρ⟩ := homs.2.2.2.1
   unfold PodFieldOperationTransportSpec
   dsimp only [sfWeilFrobeniusPullback, sfCommonStageWeilFrobeniusPullback]
-  rw [← IsIso.Iso.inv_hom (D.geometricFrobenius T₀)]
+  rw [← IsIso.Iso.inv_hom (D.geometricFrobenius T₀).asIso]
   refine ⟨hrat, U.equivalence, ⟨U.epsilon, ?_⟩, ?_, ⟨U.shift, U.exact⟩,
     ⟨μ, hμ, ?_⟩, ⟨ν, hν, ?_⟩, ⟨κ, hκ, ?_⟩, ⟨ρ, hρ, ?_⟩⟩
   · intro L
@@ -400,7 +401,7 @@ private theorem pod_field_transport
     refine ⟨(S L).rationalEpsilon, ?_⟩
     intro K
     exact U.epsilon_formula ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj K)
-  · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom,
+  · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv,
       sfCommonStageWeilFrobeniusPullback] using Nonempty.intro V.epsilon
   · exact (pod_tensor_hom_field_operation_lifts _ _ μ _ _ _ κ).1
   · exact (pod_tensor_hom_field_operation_lifts _ _ ν _ _ _ ρ).1
@@ -458,22 +459,22 @@ theorem semilinearFieldOperationLifts
     [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
     (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] :
-    IsPullback (D.geometricFrobenius X₀).hom
+    IsPullback (D.geometricFrobenius X₀).asIso.hom
       ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left
       ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left
-      (D.geometricFrobenius Y₀).hom ∧
+      (D.geometricFrobenius Y₀).asIso.hom ∧
     ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ≫
-        (D.geometricFrobenius Y₀).hom ≫ (D.geometricFiber Y₀).hom =
-      (D.geometricFrobenius X₀).hom ≫ (D.geometricFiber X₀).hom ∧
+        (D.geometricFrobenius Y₀).asIso.hom ≫ (D.geometricFiber Y₀).hom =
+      (D.geometricFrobenius X₀).asIso.hom ≫ (D.geometricFiber X₀).hom ∧
     PodFieldOperationTransportSpec D l hl X₀ E Ω ∧
     PodFieldOperationTransportSpec D l hl Y₀ E Ω := by
   have hgeom := D.frobenius_square_cartesian X₀ Y₀ f₀
   refine ⟨hgeom.2.2.2.2.2.1, ?_, pod_field_transport D l hl X₀ E Ω,
     pod_field_transport D l hl Y₀ E Ω⟩
-  have hc : (D.geometricFrobenius X₀).hom ≫
+  have hc : (D.geometricFrobenius X₀).asIso.hom ≫
       ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left =
       ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ≫
-        (D.geometricFrobenius Y₀).hom := hgeom.2.2.2.2.1
+        (D.geometricFrobenius Y₀).asIso.hom := hgeom.2.2.2.2.1
   rw [← Category.assoc, ← hc, Category.assoc]
   congr 1
   exact ((Over.pullback (Spec.map (CommRingCat.ofHom

@@ -619,7 +619,7 @@ def quotientTransport (T : Scheme.{u})
 
 /-- Apply the recorded finite-Tor constructibility predicate after the canonical
 ell-power/uniformizer-power quotient identification, retaining every positive level.
-Source: blueprint clause (2a); def-weil-finite-tor-amplitude
+Source: blueprint clause (2a); definition-constructible-sheaves
 (blueprint: def-sp-tower-shriek-data). -/
 def GoodLevel (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) : Prop :=
   finiteTorConstructible l E (b.ramification * (n + 1))

@@ -74,7 +74,6 @@ lemma leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom {W : Scheme.{u}
   refine (Category.id_comp _).trans ((Category.id_comp _).trans ?_)
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the derived pullbacks of module objects are unfolded to the derived functors of exact functors
 /-- On the image of a complex, the composition isomorphism of the derived pullbacks of module
 objects is that of the underived pullbacks, read through the counits of the derived pullbacks. -/
@@ -89,7 +88,6 @@ lemma leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit
         Qh.map ((NatTrans.mapHomotopyCategory (upperStarComp Λ f g).hom (.up ℤ)).app K) :=
   Functor.leftDerivedFunctorFactorIso_hom_app_comp_counit (upperStarComp Λ f g) K
 
-set_option maxHeartbeats 1000000 in
 -- the derived pullbacks of module objects are unfolded to the derived functors of exact functors
 /-- The inverse form of `leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit`. -/
 @[reassoc]
@@ -103,7 +101,6 @@ lemma leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit
         (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj K) := by
   rw [← leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit, Iso.inv_hom_id_app_assoc]
 
-set_option maxHeartbeats 1000000 in
 -- the lax monoidal structure of the localization functor is unfolded
 variable {f} in
 lemma leftDerivedUpperStarTensorLeftCounit_app_app {W : Scheme.{u}} (h : W ⟶ Y)
@@ -113,7 +110,6 @@ lemma leftDerivedUpperStarTensorLeftCounit_app_app {W : Scheme.{u}} (h : W ⟶ Y
       L((h)^*⟦Λ⟧).map (μ Qh P Q) ≫ (h)^*⟦Λ⟧.leftDerivedFunctorCounit.app (P ⊗ Q) :=
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- the statement of `Functor.leftDerived₂_fac_app_app` is unfolded to the tensor comparison
 variable {f} in
 /-- The comparison `m : Lh^* (K ⊗ᴸ L) ⟶ Lh^* K ⊗ᴸ Lh^* L` on images of complexes, composed with the
@@ -137,7 +133,6 @@ lemma leftDerivedUpperStarTensor_app_app_comp {W : Scheme.{u}} (h : W ⟶ Y)
     at h1
   exact h1
 
-set_option maxHeartbeats 1000000 in
 -- the derived tensor products of module objects are unfolded
 variable {f} in
 /-- The comparison `Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M` is natural in both variables. -/
@@ -154,7 +149,6 @@ lemma leftDerivedUpperStarTensor_naturality {W : Scheme.{u}} (h : W ⟶ Y)
   rw [MonoidalCategory.tensorHom_def, MonoidalCategory.tensorHom_def, Functor.map_comp,
     Category.assoc, ← reassoc_of% h₁, ← h₂]
 
-set_option maxHeartbeats 1000000 in
 -- the monoidal structure of the homotopy category of module objects is unfolded
 /-- `upperStarTensorComplexHom_comp` in the homotopy category. -/
 @[reassoc]
@@ -179,7 +173,6 @@ lemma quotient_map_upperStarTensorComplexHom_comp
   congr 1
   rw [← upperStarTensorComplexHom_comp, MonoidalCategory.tensorHom_def, Category.assoc]
 
-set_option maxHeartbeats 1000000 in
 -- `erw` unfolds the tensor product of complexes of module objects to its components.
 /-- On complexes, the comparison `(𝟙 X)^* A ⊗ (𝟙 X)^* B ⟶ (𝟙 X)^* (A ⊗ B)` is compatible with the
 identity isomorphism of the pullback of module objects. -/
@@ -202,7 +195,6 @@ lemma upperStarTensorComplexHom_id (W : Scheme.{u})
   rw [MonoidalCategory.tensorHom_def_assoc] at hμ
   exact hμ
 
-set_option maxHeartbeats 1000000 in
 -- `erw` unfolds the tensor product of complexes of module objects to its components.
 lemma tensorHom_mapHomologicalComplexIdIso_hom_app (W : Scheme.{u})
     (A B : CochainComplex

@@ -36,7 +36,7 @@ import Mathlib.CategoryTheory.Localization.Predicate
 /-!
 # Exact tower functors and augmented counit evaluations
 
-Source: blueprint main-20261015, sec-smooth-purity, prop-sf-localization-all-stages,
+Source: blueprint main-20261015, chap-Smooth-purity, lemma-local-cohomology-right-adjoint--2,
 returned Step 6 / immersion comparison Step 5; Stacks Derived Categories, Tags 015F,
 04VG and 09T5, and Cohomology on Sites, Tag 0941
 (blueprint: lem-sf-exact-tower-augmented-counit-evaluation).

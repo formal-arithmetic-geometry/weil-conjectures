@@ -19,7 +19,8 @@ The pro-étale derived lower shriek `Rf_!` is in general *not* a left adjoint, n
 for the structure morphism of an elliptic curve over `𝔽̄_p` and `𝔽_r`-module coefficients with
 `r ≠ p`, `Rf_! = Rf_*` does not preserve coproducts (blueprint `sk-rem-sf-fullcd-scope`; see
 `WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint`). So the exceptional inverse image is
-not defined as a right adjoint. Following blueprint `det-def-sf-operations` (vi), it is the
+not defined as a right adjoint. Following blueprint `theorem-f-shriek-ell-adic-coefficients--4`
+(vi), it is the
 *constructible* exceptional inverse image, the étale right adjoint transported along the
 comparison:
 
@@ -27,8 +28,8 @@ comparison:
 
 where `f^× = AlgebraicGeometry.Etale.rightDerivedUpperShriek` is the right adjoint of the étale
 `Rf_!`. Its defining property is a theorem, not a hypothesis (an earlier form of blueprint
-`sk-prop-sf-existence`): for `K` bounded below of étale origin and `L` bounded below,
-`Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)`, naturally in both
+`theorem-existence-exceptional-inverse-image`): for `K` bounded below of étale origin and `L`
+bounded below, `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)`, naturally in both
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). Every bounded constructible
 object is bounded below of étale origin, so the adjunction holds on the constructible
 categories.
@@ -55,13 +56,13 @@ categories.
   meaningful on `D⁺(Y_proét)`, where the blueprint defines it: the adjunction is only asserted for
   bounded below objects.
 * The bijectivity in `rightDerivedUpperShriekHomEquiv` is the chain of bijections of the proof of
-  an earlier form of blueprint `sk-prop-sf-existence`: the compact-support comparison
-  `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`, the adjunction
+  an earlier form of blueprint `theorem-existence-exceptional-inverse-image`: the compact-support
+  comparison `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`, the adjunction
   `ν^* ⊣ Rν_*`, the étale adjunction `Rf_! ⊣ f^×` and the full faithfulness of `ν^*` on `D⁺`
   (`AlgebraicGeometry.ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map`).
 * The ambient right adjoint of `Rf_!` on all of `D(X_proét)` is not defined
   here: it does not exist for proper curves. The right adjoint of blueprint
-  `sk-prop-sf-existence` lives on the localizing closures `Loc(Dctf)`, see
+  `theorem-existence-exceptional-inverse-image` lives on the localizing closures `Loc(Dctf)`, see
   `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizing` in
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizing`.
 * The definition uses the étale exceptional inverse image `f^× = Rf^!` at a finite coefficient
@@ -93,9 +94,9 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 section Definition
 
-/-- Blueprint `det-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
-(at a finite stage `A = A_{E,n}`) the exceptional inverse image
-`Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
+/-- Blueprint `theorem-f-shriek-ell-adic-coefficients--4` (vi) and blueprint
+`theorem-f-shriek-finite-coefficients`: (at a finite stage `A = A_{E,n}`) the exceptional inverse
+image `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, where `f^×` is the étale exceptional inverse image
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, the right adjoint of the étale `Rf_!`. It is
 the constructible exceptional inverse image of the blueprint, meaningful on bounded below
@@ -207,8 +208,8 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 variable {A} {Λ}
 
-/-- Blueprint `sk-prop-sf-existence` (c): the counit `ε_L : Rf_! Rf^! L ⟶ L` of the
-exceptional adjunction at a bounded below `L`: the composite
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (c): the counit `ε_L : Rf_! Rf^! L ⟶ L`
+of the exceptional adjunction at a bounded below `L`: the composite
 
 ```
   Rf_! ν_X^* f^× Rν_* L ≅ ν_Y^* Rf^{ét}_! f^× Rν_* L ──ν^* ε^{ét}──▶ ν_Y^* Rν_* L ──ε^ν──▶ L
@@ -330,7 +331,7 @@ lemma bijective_rightDerivedLowerShriek_map_comp_counit
     ((bijective_rightDerivedLowerShriek_map_comp_counit_of_plus f hK' hL).comp
       e.symm.homFromEquiv.bijective)
 
-/-- Blueprint `sk-prop-sf-existence` (c): the exceptional adjunction
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (c): the exceptional adjunction
 `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` for `K` bounded below of étale origin and `L` bounded below.
 Its inverse is `g ↦ Rf_! g ≫ ε_L` (`rightDerivedUpperShriekHomEquiv_symm_apply`), so it is
 natural in `K` and `L` (`rightDerivedUpperShriekHomEquiv_naturality_left_symm`,
@@ -412,10 +413,10 @@ lemma rightDerivedUpperShriekHomEquiv_naturality_right
   rw [← Equiv.eq_symm_apply, rightDerivedUpperShriekHomEquiv_naturality_right_symm f hK hL hL',
     Equiv.symm_apply_apply]
 
-/-- Blueprint `sk-prop-sf-existence` (c), on full subcategories: if `P` is a property of
-objects of `D(X_proét)` contained in the bounded below objects of étale origin and `Q` a property
-of objects of `D(Y_proét)` contained in the bounded below objects, such that `Rf_!` sends `P` to
-`Q` and `Rf^!` sends `Q` to `P`, then the restrictions of `Rf_!` and `Rf^!` to the full
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (c), on full subcategories: if `P` is a
+property of objects of `D(X_proét)` contained in the bounded below objects of étale origin and `Q` a
+property of objects of `D(Y_proét)` contained in the bounded below objects, such that `Rf_!` sends
+`P` to `Q` and `Rf^!` sends `Q` to `P`, then the restrictions of `Rf_!` and `Rf^!` to the full
 subcategories of `P` and `Q` are adjoint. This applies to the bounded constructible objects of
 finite Tor amplitude. -/
 noncomputable def rightDerivedUpperShriekAdjunction

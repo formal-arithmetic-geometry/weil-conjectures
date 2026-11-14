@@ -12,7 +12,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Quotient comparison for a single invariant subgroup inclusion
 
-Source: Stacks Project, Tags 04JQ and 03QT; blueprint `lem-sc-affine-generic-second`,
+Source: Stacks Project, Tags 04JQ and 03QT; blueprint `theorem-cohomology-curves--2`,
 proof paragraphs 1--2.
 -/
 
@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Source: Stacks Project, Tags 04JQ and 03QT; blueprint
-`lem-sc-affine-generic-second`, proof paragraphs 1--2.
+`theorem-cohomology-curves--2`, proof paragraphs 1--2.
 (blueprint: lem-sc-primary-subgroup-sheaf-exactness)
 
 Proof: The inclusion of A into B is injective. Its quotient is B/A, explicitly the
@@ -70,7 +70,6 @@ theorem primarySheafSequence_shortExact
   have : Mono (F.map i) := inferInstance
   constructor
   · change (ShortComplex.mk (F.map i) (cokernel.π (F.map i)) (cokernel.condition _)).ShortExact
-    have hmono : Mono (F.map i) := inferInstance
     exact { exact := ShortComplex.exact_cokernel (F.map i) }
   · let N := primaryRelativeSubmodule K Ks R A B
     let Q := primaryTrivialQuotient K Ks H R A B

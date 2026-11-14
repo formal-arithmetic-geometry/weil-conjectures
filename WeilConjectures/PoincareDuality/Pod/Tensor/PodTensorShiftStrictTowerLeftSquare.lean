@@ -54,7 +54,6 @@ attribute [local implicit_reducible] isoSectionwiseModuleInverseImage
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 600000 in
 -- Keep the original tower interface while reducing to the generator calculation.
 /-- The left tensor-shift square commutes on the entire strict quotient tower.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4

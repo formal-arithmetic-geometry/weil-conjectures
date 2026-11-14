@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.BifunctorFlip
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Relative tensor-pullback homology comparison
 
@@ -95,8 +96,6 @@ private theorem kFlat_tensor_left_of_quasiIso
 
 
 
-set_option maxHeartbeats 400000 in
--- Elaborating the mixed-ring tensor comparisons needs additional heartbeats.
 /-- Restricting scalars identifies the homology of tensor with derived pullback
 with the homology computed by any K-flat resolution of the restricted complex.
 This comparison does not require finite Tor amplitude or any boundedness of K or P.

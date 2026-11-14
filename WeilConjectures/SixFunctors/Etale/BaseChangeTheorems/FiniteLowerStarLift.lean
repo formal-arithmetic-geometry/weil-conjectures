@@ -19,7 +19,7 @@ Let `(A, I)` be a henselian pair, `X` a scheme over `A` with closed fibre `ι : 
 `h : V ⟶ X` a finite morphism with `V` proper over `A`. For a finite abelian group `M`, every
 class of `H¹(X₀, ι^* h_* M)` comes from `H¹(X, h_* M)`. This is the lifting step in the proof
 of the acyclicity of restricted injectives on `ℙ¹` over a strictly henselian ring (blueprint
-`prop-weil-pbc-p1-acyclicity`).
+`lemma-acyclicity-closed-fibre--1`).
 
 ## Main statements
 

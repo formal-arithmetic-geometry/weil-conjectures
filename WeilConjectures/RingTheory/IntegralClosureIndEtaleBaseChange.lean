@@ -248,7 +248,7 @@ its bijectivity is the asserted `S`-algebra isomorphism.
 
 Proof (Stacks 0CBF, with etale stages by Stacks 03GE):
 1. Lift to one universe: put `A = ULift R`, `T = ULift S`. By
-   def-weil-pbc-ind-etale-algebra, `T` has a small filtered presentation
+   definition-ind-etale-pro-etale-weakly, `T` has a small filtered presentation
    `P : T = colim T_i` by etale (hence smooth) `A`-algebras.
 2. Same-universe case (`of_presentation`), for any `A`-algebra `D'`. Transport
    lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise from the chosen

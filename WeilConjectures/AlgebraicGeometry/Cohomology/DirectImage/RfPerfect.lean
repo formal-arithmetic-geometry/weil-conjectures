@@ -18,24 +18,24 @@ Let `f : X ⟶ S` be quasi-compact and separated with `S = Spec A` affine, `U` a
 `X` by affine opens and `ℱ` a quasi-coherent `𝒪_X`-module. Over the affine base, the derived
 direct image `Rf_* ℱ` is represented in `D(A)` by the Čech complex `Č(U, ℱ)`
 (`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`, the
-blueprint's `lem-pc-cech-resolution`).
+blueprint's `lemma-coherent-base-change-invertible-sheaves`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`
-  (`lem-pc-rf-base-change-flat-module`): if `ℱ` is flat over `S`, then `Rf_* ℱ` is represented
-  by a bounded complex `K` of flat `A`-modules, and for every base change `T = Spec B ⟶ S` the
-  canonical base-change map `cechModuleComplexBaseChangeComparison` from the derived pullback
-  `Lg^* Rf_* ℱ = B ⊗[A] K` to `Rf_{T*} ℱ_T` is an isomorphism.
+  (`lemma-coherent-base-change-invertible-sheaves--2`): if `ℱ` is flat over `S`, then `Rf_* ℱ` is
+  represented by a bounded complex `K` of flat `A`-modules, and for every base change
+  `T = Spec B ⟶ S` the canonical base-change map `cechModuleComplexBaseChangeComparison` from the
+  derived pullback `Lg^* Rf_* ℱ = B ⊗[A] K` to `Rf_{T*} ℱ_T` is an isomorphism.
 - `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`
-  (`lem-pc-projective-noetherian-rf-perfect`): for `S` noetherian, `f` projective and `ℱ`
+  (`lemma-coherent-base-change-invertible-sheaves--1`): for `S` noetherian, `f` projective and `ℱ`
   coherent and flat over `S`, `Rf_* ℱ` is perfect.
 - `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion`
-  (`cor-pc-projective-noetherian-rf-perfect-base-change`): the derived pullback of `Rf_* ℱ` along
+  (`lemma-coherent-base-change-invertible-sheaves--2`): the derived pullback of `Rf_* ℱ` along
   any `T = Spec B ⟶ S` is perfect and is `Rf_{T*} ℱ_T`.
 - `AlgebraicGeometry.Scheme.Modules.perfect_and_baseChange_cechModuleComplex_of_isProper`
-  (`lem-pc-rf-perfect-base-change`): the same for `f` proper of finite presentation and `ℱ` of
-  finite presentation and flat over `S`; it is stated in
+  (`lemma-coherent-base-change-invertible-sheaves`): the same for `f` proper of finite presentation
+  and `ℱ` of finite presentation and flat over `S`; it is stated in
   `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange`, downstream of the
   construction of Mumford's complex.
 -/
@@ -116,7 +116,7 @@ The proof: the Čech complex of `ℱ_T` is the base change of that of `ℱ`
 quasi-isomorphism after base change, the cycles of `Č(U, ℱ)` being flat in degrees `≥ #ι - 1`
 (`AlgebraicGeometry.Scheme.Modules.quasiIso_map_baseChange_ιTruncLE_cechModuleComplex`).
 
-(blueprint: `lem-pc-rf-base-change-flat-module`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
 theorem isIso_cechModuleComplexBaseChangeComparison (hℱ : ℱ.IsFlatOver f) {T Y : Scheme.{u}}
     {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (H : IsPullback g' f' f g) [IsAffine T]
     [Algebra Γ(S, ⊤) Γ(T, ⊤)] (hg : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom) :
@@ -197,7 +197,7 @@ blueprint's `lem-pc-coherent-hi`
 which covers all proper morphisms; the blueprint quotes `lem-pc-projective-coherent-finiteness`,
 its projective case.
 
-(blueprint: `lem-pc-projective-noetherian-rf-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 theorem isPerfect_Q_cechModuleComplex_of_isClosedImmersion [IsLocallyNoetherian S]
     {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
@@ -242,7 +242,7 @@ complex `Č(g'⁻¹ U, g'^* ℱ)`; the isomorphism is
 follows from `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`
 since base change preserves perfect complexes (`DerivedCategory.isPerfect_Q_obj_baseChange`).
 
-(blueprint: `cor-pc-projective-noetherian-rf-perfect-base-change`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
 theorem isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion [IsLocallyNoetherian S]
     {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
     [Fintype ι] [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) {T Y : Scheme.{u}}

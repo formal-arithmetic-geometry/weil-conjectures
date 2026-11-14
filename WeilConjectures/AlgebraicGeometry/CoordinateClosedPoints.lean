@@ -30,7 +30,7 @@ coordinate projection to the line lies in `Sᵢ` form a finite set of closed poi
 
 This is the scheme-level form of `MvPolynomial.finite_zeroLocus_range_aeval_X`: the "finite
 product of finite sets" in the finite-support step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`).
+`proposition-external-kunneth-formula-nearby-cycles`).
 
 -/
 

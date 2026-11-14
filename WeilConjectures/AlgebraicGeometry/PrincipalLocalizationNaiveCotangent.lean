@@ -43,7 +43,7 @@ Proof, following the node's eight steps:
 lem-weil-pbc-localization-away-polynomial-quotient to `B[x] → Bg`. Their composite is beta
 by def-weil-pbc-mv-polynomial-ring. Both are surjective. Lift a multiplier of `gx-1`
 through the first map to show its inverse image is `I P[x] + (fx-1)`.
-2. Use lem-weil-pbc-kahler-differentials-polynomial-extension and tensor associativity:
+2. Use theorem-finite-etale-covers-proper-henselian--2 and tensor associativity:
 the differential module splits into the old differentials and the free generator `dx`.
 3. Inclusion of kernels induces the conormal map; extend its scalars to Bg. Step 1 shows
 this image and the class of `fx-1` generate the new conormal module.

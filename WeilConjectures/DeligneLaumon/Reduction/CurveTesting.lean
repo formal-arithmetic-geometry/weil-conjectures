@@ -20,7 +20,7 @@ geometric restrictions are irreducible local systems. Through any nonempty finit
 `k̄`-points of `X` there is a smooth connected affine curve `C ⊆ X`, defined over a finite
 extension of `k₀`, on which every `𝒮ⱼ` stays irreducible
 (`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`,
-blueprint `lem-zl-curve-testing-irreducibility`).
+blueprint `corollary-curve-preserving-geometric-irreducibility--1`).
 
 ## Implementation notes
 
@@ -51,12 +51,12 @@ namespace AlgebraicGeometry
 open Scheme.FiniteEtale ProEtale
 
 /-- **Curve testing for irreducible local systems** (blueprint:
-`lem-zl-curve-testing-irreducibility`). Let `f : X₀ ⟶ Spec k₀` be a smooth geometrically connected
-affine scheme of relative dimension `d ≥ 1` over a finite field, with geometric fiber `X`, let
-`F₁, …, Fᵣ` be irreducible `ℓ`-adic local systems on `X`, and let `S` be a nonempty finite set of
-`k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a smooth connected affine curve over
-`k̄` through `S`, stable under a power of the geometric Galois Frobenius of `X`, such that every
-`i^* Fⱼ` is still an irreducible local system. -/
+`corollary-curve-preserving-geometric-irreducibility--1`). Let `f : X₀ ⟶ Spec k₀` be a smooth
+geometrically connected affine scheme of relative dimension `d ≥ 1` over a finite field, with
+geometric fiber `X`, let `F₁, …, Fᵣ` be irreducible `ℓ`-adic local systems on `X`, and let `S` be a
+nonempty finite set of `k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a smooth
+connected affine curve over `k̄` through `S`, stable under a power of the geometric Galois Frobenius
+of `X`, such that every `i^* Fⱼ` is still an irreducible local system. -/
 theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperStar
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] {X₀ : Scheme.{u}}
     (f : X₀ ⟶ Spec (.of k₀)) [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d) [SmoothOfRelativeDimension d f]
@@ -68,7 +68,7 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
       SmoothOfRelativeDimension 1 (i ≫ f.geometricFiberToAlgebraicClosure) ∧
       ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧
       (∀ j, IsIrreducibleAdicLocalSystem ((i)^*ᵃ[l].obj (F j))) ∧
-      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C, φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).hom := by
+      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C, φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom := by
   have : ConnectedSpace f.geometricFiber :=
     GeometricallyConnected.geometrically_connectedSpace (f := f)
       (Scheme.specAlgebraicClosure k₀).hom f.geometricFiberProj
@@ -82,7 +82,7 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   · refine ⟨_, 𝟙 _, inferInstance, inferInstance, by rwa [Category.id_comp], inferInstance,
       fun s _ ↦ ⟨s, Category.comp_id s⟩,
       fun j ↦ (hF j).of_iso ((adicUpperStarId l _).app _).symm, 1, one_pos,
-      f.geometricGaloisFrobenius ^ 1, by simp⟩
+      (f.geometricGaloisFrobenius ^ 1).asIso, by simp⟩
   -- the geometric fiber is regular and locally Noetherian
   have : Smooth f.geometricFiberToAlgebraicClosure := SmoothOfRelativeDimension.smooth d _
   have := IsRegular.of_smooth f.geometricFiberToAlgebraicClosure
@@ -135,19 +135,19 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
     (WeilCoefficients.linearEquivOfIso (upperStarStalkIso l i c (G j).obj.X)) (fun h v ↦ ?_)
     (hUirr j _ fun g ↦ ?_)
   · have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v)
-      (hcompat h (G j))
+      (hcompat h.asIso (G j))
     simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at this
     exact this
   · obtain ⟨γ, hγ, hγU⟩ := hΓ g
     exact ⟨γ, hγ, Set.mem_iInter.1 hγU j⟩
 
 /-- **Curve testing for geometric irreducibility**
-(blueprint: `lem-zl-curve-testing-irreducibility`). Let `X₀` be a smooth geometrically connected
-affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric fiber `X`, let
-`𝒮₁, …, 𝒮ᵣ` be Weil sheaves on `X₀` whose geometric restrictions are irreducible local systems,
-and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion
-`i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a finite
-extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
+(blueprint: `corollary-curve-preserving-geometric-irreducibility--1`). Let `X₀` be a smooth
+geometrically connected affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric
+fiber `X`, let `𝒮₁, …, 𝒮ᵣ` be Weil sheaves on `X₀` whose geometric restrictions are irreducible
+local systems, and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed
+immersion `i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a
+finite extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
 every `𝒮ⱼ` remains geometrically irreducible. -/
 theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
     [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ : Scheme.{u}}
@@ -168,7 +168,7 @@ theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k
       (∀ j, ProEtale.IsIrreducibleAdicLocalSystem
         ((i)^*ᵃ[l].obj (𝒮 j).obj.carrier)) ∧
       ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
-        φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom :=
+        φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom :=
   Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperStar _ hd
     (fun j ↦ (𝒮 j).obj.carrier) h𝒮 S hS hS'
 

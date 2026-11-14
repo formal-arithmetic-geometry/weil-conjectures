@@ -202,7 +202,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.mapDerivedCategory
-set_option maxHeartbeats 400000 in
 -- The four concrete derived module functors occur in a single mate calculation.
 /-- Compatibility of the scalar mate with the derived reduction and pullback counits.
 Source: Bhatt--Scholze, Remark 6.8.15.

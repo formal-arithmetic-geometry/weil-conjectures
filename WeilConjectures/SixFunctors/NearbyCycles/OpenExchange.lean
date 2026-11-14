@@ -25,7 +25,7 @@ generic fibres
 is cartesian. Then the pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*`
 (`NearbyCyclesModel.Hom.pullbackExchange`) is an isomorphism
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_weaklyEtale`; blueprint
-`det-sp-nearby-cycles-exchanges` (1), "nearby-cycle open pullback"). Indeed `α_f` is assembled
+`prose-E-03` (1), "nearby-cycle open pullback"). Indeed `α_f` is assembled
 from two pullback comparisons, which are isomorphisms, and from the mate of the pullback comparison
 of the square of geometric generic fibres, which is the base change morphism
 `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` (`NearbyCyclesModel.Hom.baseChangeMap_commSq_j_eq_mateEquiv`),
@@ -106,7 +106,7 @@ lemma baseChangeMap_commSq_j_eq_mateEquiv :
     baseChangeMap Λ φ.commSq_j =
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
         (derivedUpperStarLowerStarAdjunction Λ M.j)
-        (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans :=
+        (pullbackSquareComparison Λ φ.commSq_j).hom) :=
   Adjunction.exchangeRight_eq_mateEquiv _ _ _
 
 /-- If the base change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic
@@ -117,12 +117,12 @@ theorem isIso_pullbackExchange_of_isIso_baseChangeMap
   isIso_pullbackExchange_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (baseChangeMap Λ φ.commSq_j) (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ)
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl
 
 /-- **Nearby cycles commute with weakly étale pullback** (blueprint
-`det-sp-nearby-cycles-exchanges` (1), the "nearby-cycle open pullback"): for a morphism of models
+`prose-E-03` (1), the "nearby-cycle open pullback"): for a morphism of models
 `φ : M ⟶ N` whose morphism of total spaces `t` is weakly étale (for instance an open immersion,
 or étale) and whose square of geometric generic fibres `g ≫ j_N = j_M ≫ t` is cartesian, the
 pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is an isomorphism, on all complexes. -/

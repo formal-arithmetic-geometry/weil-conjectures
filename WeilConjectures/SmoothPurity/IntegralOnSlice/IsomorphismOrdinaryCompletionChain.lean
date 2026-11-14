@@ -15,7 +15,7 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Strict completion chains under a scheme isomorphism
 
-Source: the expanded DAG definition def-weil-frobenius-coefficient-twists, clause 4;
+Source: the expanded DAG definition prose-10-21, clause 4;
 Stacks Project, Tags 03EL and 08TC.
 (blueprint: lem-pur-isomorphism-ordinary-completion-chain).
 -/
@@ -119,7 +119,7 @@ attribute [local irreducible] IntegralOnSlice.ordinaryPull
 /-- Reindexing the strict quotient Roos complex along an isomorphism carries its
 specified quotient-map/zero augmentation to the ordinary pullback completion chain.
 
-Source: expanded DAG definition def-weil-frobenius-coefficient-twists, clause 4, and
+Source: expanded DAG definition prose-10-21, clause 4, and
 lem-weil-isomorphism-derived-pullback; Stacks Tags 03EL and 08TC.
 (blueprint: lem-pur-isomorphism-ordinary-completion-chain).
 Proof: the pro-etale base-change equivalence identifies ordinary module pullback

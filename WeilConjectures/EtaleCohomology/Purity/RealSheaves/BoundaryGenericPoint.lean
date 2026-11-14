@@ -24,7 +24,7 @@ at `η₀` are the `k₀`-embeddings `A ⟶ Ω`. Hence `Spec σ ≫ η = η ≫ 
 (`AlgebraicGeometry.WeilGroup.specMap_comp_genericGeomPoint`): inertia elements (`n = 0`) act on
 `Spec Ω` over `Ū`, and residue Frobenius lifts (`n = deg z`) act over the geometric Frobenius.
 This is used to compare the boundary stalks of direct images with the inertia invariants of the
-Weil fundamental representation (blueprint `lem-wf-boundary-stalk-invariants`).
+Weil fundamental representation (blueprint `lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section
@@ -145,7 +145,7 @@ lemma constantCoverPoint_injective (A : FiniteEtaleAlgebra K) {ψ ψ' : A.1 →+
 omit [Finite K] in
 lemma galoisToAut_constantCoverPoint (σ : Gal(Ω/C.functionField)) (A : FiniteEtaleAlgebra K)
     (ψ : A.1 →+* Ω) (hψ : ψ.comp (algebraMap K A.1) = genericStructHom pU j) :
-    (galoisToAut (genericPointLift j) σ).hom.app _ (constantCoverPoint j A ψ hψ) =
+    (galoisToAut (genericPointLift j) σ).asIso.hom.app _ (constantCoverPoint j A ψ hψ) =
       constantCoverPoint j A ((σ : Ω →+* Ω).comp ψ)
         (by rw [RingHom.comp_assoc, hψ, galois_comp_genericStructHom]) := by
   apply fiber_ext
@@ -288,17 +288,17 @@ the Weil group, then `Spec σ ≫ η = η ≫ Frⁿ`. -/
 theorem specMap_comp_genericGeomPoint (σ : Gal(Ω/C.functionField)) (n : ℕ)
     (h : (genericGaloisMap j sU GU σ, Multiplicative.ofAdd (n : ℤ)) ∈ weilGroup pU sU GU) :
     Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ genericGeomPoint pU j =
-      genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).hom := by
+      genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).asIso.hom := by
   let _ := Fintype.ofFinite K
   apply pullback.hom_ext
   · change _ ≫ genericGeomPoint pU j ≫ pU.geometricFiberProj =
-      _ ≫ (pU.geometricGaloisFrobenius ^ n).hom ≫ pU.geometricFiberProj
+      _ ≫ (pU.geometricGaloisFrobenius ^ n).asIso.hom ≫ pU.geometricFiberProj
     rw [genericGeomPoint_geometricFiberProj,
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj,
       genericGeomPoint_geometricFiberProj]
     exact specMapIso_hom_comp_pointOfAlgebra (genericPointLift j) σ
   · change _ ≫ genericGeomPoint pU j ≫ pU.geometricFiberToAlgebraicClosure =
-      _ ≫ (pU.geometricGaloisFrobenius ^ n).hom ≫ pU.geometricFiberToAlgebraicClosure
+      _ ≫ (pU.geometricGaloisFrobenius ^ n).asIso.hom ≫ pU.geometricFiberToAlgebraicClosure
     rw [genericGeomPoint_geometricFiberToAlgebraicClosure,
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       genericGeomPoint_geometricFiberToAlgebraicClosure_assoc, specGeometricFrobenius_pow_hom,

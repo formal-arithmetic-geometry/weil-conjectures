@@ -78,7 +78,7 @@ open LieAlgebra
 variable {R L : Type*} [CommRing R] [LieRing L] [LieAlgebra R L]
 
 /-- The sum of two solvable ideals of a Lie algebra is solvable.
-(blueprint: `lem-wf-sum-of-solvable-ideals`) -/
+(blueprint: `proposition-lie-algebras-faithful-semisimple-representation--1`) -/
 theorem isSolvable_sup {I J : LieIdeal R L} (hI : IsSolvable I) (hJ : IsSolvable J) :
     IsSolvable ↥(I ⊔ J) :=
   isSolvableAdd (R := R) (I := I) (J := J)

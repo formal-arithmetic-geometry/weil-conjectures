@@ -63,7 +63,7 @@ Proof:
    lem-weil-pbc-site-continuous-pushforward-sheaf. Cocone naturality gives composition.
 7. The constructed sheaf inverse image is left adjoint to precomposition
    (def-weil-pbc-sites-and-cohomology), hence preserves finite colimits by
-   lem-weil-pbc-left-adjoint-preserves-colimits.
+   situation-conventions.
 8. For a refinement, transpose the unit of inverse image at the refined stage
    through the original stage adjunction. The result is the transition morphism.
    Uniqueness of adjuncts gives identities, the cocycle equation and naturality.
@@ -78,10 +78,10 @@ Proof:
 11. Maps from this sheaf to H are compatible families of maps from stage inverse
     images to stage restrictions of H. Adjunction identifies these with one map
     from the original sheaf to the canonical restriction of H. Thus the constructed
-    sheaf is inverse image, by lem-weil-pbc-conjugate-iso-unit-equation. Evaluating
+    sheaf is inverse image, by situation-conventions. Evaluating
     at the image of U gives exactly the colimit cocone asserted below.
 12. The same formula at every object proves preservation of finite limits, using
-    lem-weil-pbc-presheaf-finite-limits-objectwise and commutation of filtered
+    situation-conventions and commutation of filtered
     colimits with finite limits. Together with step 7 this is a morphism of sites.
     Steps 8--11 apply to abelian groups too: their filtered colimits and finite
     limits are computed on underlying sets, and every map is additive. -/
@@ -119,7 +119,7 @@ Proof:
    lem-weil-pbc-site-continuous-pushforward-sheaf. Cocone naturality gives composition.
 7. The constructed sheaf inverse image is left adjoint to precomposition
    (def-weil-pbc-sites-and-cohomology), hence preserves finite colimits by
-   lem-weil-pbc-left-adjoint-preserves-colimits.
+   situation-conventions.
 8. For a refinement, transpose the unit of inverse image at the refined stage
    through the original stage adjunction. The result is the transition morphism.
    Uniqueness of adjuncts gives identities, the cocycle equation and naturality.
@@ -134,10 +134,10 @@ Proof:
 11. Maps from this sheaf to H are compatible families of maps from stage inverse
     images to stage restrictions of H. Adjunction identifies these with one map
     from the original sheaf to the canonical restriction of H. Thus the constructed
-    sheaf is inverse image, by lem-weil-pbc-conjugate-iso-unit-equation. Evaluating
+    sheaf is inverse image, by situation-conventions. Evaluating
     at the image of U gives exactly the colimit cocone asserted below.
 12. The same formula at every object proves preservation of finite limits, using
-    lem-weil-pbc-presheaf-finite-limits-objectwise and commutation of filtered
+    situation-conventions and commutation of filtered
     colimits with finite limits. Together with step 7 this is a morphism of sites.
     Steps 8--11 apply to abelian groups too: their filtered colimits and finite
     limits are computed on underlying sets, and every map is additive. -/

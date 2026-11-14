@@ -26,7 +26,7 @@ For `a ∈ k̄` let `ℒ_{ψ(a x)} = (a ·)^* ℒ_ψ` be the geometric linear Ar
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
 
 The second statement uses the multiplicativity `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` of the
-Artin–Schreier sheaves (blueprint `lem-fd-as-characters`), proved here for the two
+Artin–Schreier sheaves (blueprint `lemma-artin-schreier-character-sheaf`), proved here for the two
 coordinates of the plane `𝔸²` after base change to `k̄`
 (`AlgebraicGeometry.nonempty_iso_tensorLeft_upperStar_artinSchreier_add`) and pulled back along
 `x ↦ (a x, b x)`.
@@ -167,8 +167,8 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 functions `f = x` and `g = y` of `𝔸² = 𝔸¹ ×_{k₀} 𝔸¹`, `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}`, where
 `ℒ_{ψ,h} = h^* ℒ_ψ`; stated for the underlying sheaves on the geometric plane `𝔸²_{k̄}`, the tensor
 product being that of sheaves of `ℚ̄_ℓ`-modules.
-(blueprint: `lem-fd-as-characters`, the clause `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` for the coordinates
-`f = x`, `g = y` of `𝔸²`, after base change to `k̄`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`, the clause `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` for
+the coordinates `f = x`, `g = y` of `𝔸²`, after base change to `k̄`) -/
 theorem nonempty_iso_tensorLeft_upperStar_artinSchreier_add (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((Mod.tensorLeft ((Scheme.Hom.geometricFiberMap (affinePlane.snd k₀)
           (comp_over _ _))^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier)).obj

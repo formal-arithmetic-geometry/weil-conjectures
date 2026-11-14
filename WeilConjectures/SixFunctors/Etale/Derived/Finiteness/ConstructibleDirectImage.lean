@@ -14,8 +14,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 For a coefficient ring `Λ` and a morphism of schemes `f : X ⟶ S`, the predicate
 `AlgebraicGeometry.Etale.HasConstructibleDirectImages Λ f` (the blueprint's `𝒞(f)`,
-`def-finrepair-property-c`) says that every higher direct image `Rᵠf_* F` of every
-constructible sheaf `F` of `Λ`-modules on `X_ét` is constructible on `S_ét`. Here
+`proposition-proper-direct-image-finite-coefficients`) says that every higher direct image `Rᵠf_* F`
+of every constructible sheaf `F` of `Λ`-modules on `X_ét` is constructible on `S_ét`. Here
 `Rᵠf_* F` is the `q`-th homology sheaf of the total derived direct image `Rf_*(F[0])`.
 
 This file proves the formal properties of `𝒞` that need no geometry:
@@ -24,7 +24,7 @@ This file proves the formal properties of `𝒞` that need no geometry:
   holds, then `Rf_*` sends every bounded complex with constructible homology sheaves to a
   complex with constructible homology sheaves (dévissage along the truncation triangles);
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.comp`: `𝒞(f)` and `𝒞(g)` imply
-  `𝒞(f ≫ g)` (`lem-finrepair-composition-c`).
+  `𝒞(f ≫ g)` (`proposition-proper-direct-image-finite-coefficients`).
 
 The blueprint proves the composition lemma with the Grothendieck spectral sequence; we use
 instead that `Hⁿ(Rg_* K)` only depends on the truncation `τ^{≤ n} K` of a complex `K` with
@@ -51,7 +51,8 @@ open _root_.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `def-finrepair-property-c`: Constructibility under direct image.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructibility under direct
+image.
 
 For a morphism `f : X ⟶ S`, the assertion `𝒞(f)`: for every constructible sheaf `F` of
 `Λ`-modules on `X_ét` and every `q`, the higher direct image `Rᵠf_* F` is constructible on
@@ -204,7 +205,8 @@ lemma HasConstructibleDirectImages.constructibleHomology_obj_of_isGE {Y S : Sche
   exact IsConstructibleSheaf.of_iso (asIso ((homologyFunctor _ n).map
     ((R((g)_*[ModuleCat.{u + 1} Λ])).map ((TStructure.t.triangleLEGT n).obj K).mor₁)))
 
-/-- Blueprint `lem-finrepair-composition-c`: Composition for constructibility alone.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Composition for
+constructibility alone.
 
 If `𝒞(f)` and `𝒞(g)` hold for composable morphisms `f : X ⟶ Y` and `g : Y ⟶ S`, then `𝒞(f ≫ g)`
 holds. Here `Λ` is a finite ring, so that constructible sheaves form a weak Serre class. The
@@ -265,10 +267,11 @@ lemma exists_trW_of_exists_mono {X S : Scheme.{u}} (f : X ⟶ S)
 /-- **Constructibility from embeddings into good sheaves.** Suppose every constructible sheaf
 `Q` on `X` embeds into a constructible sheaf `G` such that all `Rᵠf_* G` are constructible.
 Then `𝒞(f)` holds. This is the resolution argument of the blueprint proofs of
-`lem-finrepair-finite-surjection-cancellation` and `thm-fin-projective-line-constructible`:
-for a given degree `n`, `Rⁿf_* F` agrees with `Hⁿ(Rf_* B)` for the cone `B` of a morphism
-`Q[-n-2] ⟶ F[0]` given by `AlgebraicGeometry.Etale.exists_trW_of_exists_mono`, because
-`Rf_*(Q[-n-2])` is concentrated in degrees `≥ n + 2`. -/
+`proposition-proper-direct-image-finite-coefficients` and
+`proposition-proper-direct-image-finite-coefficients`: for a given degree `n`, `Rⁿf_* F` agrees with
+`Hⁿ(Rf_* B)` for the cone `B` of a morphism `Q[-n-2] ⟶ F[0]` given by
+`AlgebraicGeometry.Etale.exists_trW_of_exists_mono`, because `Rf_*(Q[-n-2])` is concentrated in
+degrees `≥ n + 2`. -/
 theorem hasConstructibleDirectImages_of_exists_mono {X S : Scheme.{u}} (f : X ⟶ S)
     (h : ∀ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf Q →
       ∃ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : Q ⟶ G), Mono ι ∧

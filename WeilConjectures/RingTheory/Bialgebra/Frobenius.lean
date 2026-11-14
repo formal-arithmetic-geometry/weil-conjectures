@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Finite local bialgebras in characteristic `p` have `p`-power dimension
@@ -39,7 +40,7 @@ concludes.
 
 ## Blueprint
 
-`Bialgebra.exists_finrank_eq_pow` is the algebraic content of `lem-sc-connected-finite-order`.
+`Bialgebra.exists_finrank_eq_pow` is the algebraic content of `proposition-multiplication-n--2`.
 -/
 
 @[expose] public section
@@ -529,7 +530,7 @@ theorem finrank_eq_pow_mul_finrank_frobenius :
   exact Subalgebra.topEquiv.toLinearEquiv.finrank_eq.symm
 
 variable (K A p) in
-/-- **Blueprint `lem-sc-connected-finite-order`, algebraic form**: a finite-dimensional
+/-- **Blueprint `proposition-multiplication-n--2`, algebraic form**: a finite-dimensional
 commutative local bialgebra over a field of characteristic `p > 0` has dimension a power of `p`.
 Applied to the coordinate ring of a connected finite group scheme, this is
 `AlgebraicGeometry.exists_finrankΓ_eq_pow`. -/

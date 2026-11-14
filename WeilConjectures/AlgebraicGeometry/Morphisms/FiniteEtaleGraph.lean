@@ -41,7 +41,7 @@ namespace AlgebraicGeometry
 `u v : Spec B ⟶ X` agree after composing with `f` and after precomposing with `Spec β`, then
 `u = v`.
 
-(blueprint: `lem-weil-pbc-etale-pointed-map-rigidity`) -/
+(blueprint: `proposition-proper-direct-image-constructible-complexes`) -/
 theorem Scheme.eq_of_comp_eq_of_isLocalHom {B Ω : Type u} [CommRing B] [IsLocalRing B]
     [Field Ω] (β : B →+* Ω) [IsLocalHom β] {X S : Scheme.{u}} (f : X ⟶ S) [Etale f]
     (u v : Spec (.of B) ⟶ X) (hf : u ≫ f = v ≫ f)
@@ -89,7 +89,7 @@ morphism and `q : V ⟶ Y` finite étale, and let `r : V ×_Y U ⟶ U` be the pr
 closed and such that `r` restricted to `W` is an isomorphism; the subset attached to `a` is the
 image of its graph `(a, 𝟙 U) : U ⟶ V ×_Y U`.
 
-(blueprint: `lem-weil-pbc-finite-etale-graph-clopen`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y)
     [IsFinite q] [Etale q] :
     ∃ e : {a : U ⟶ V // a ≫ q = p} ≃
@@ -156,7 +156,7 @@ canonical map. Then the square formed by `j`, the projections to `U₀` and `U` 
 `U₀ ⟶ U` is cartesian, and for every `a : U ⟶ V` over `Y` the image of the graph of the base
 change `a₀ : U₀ ⟶ V₀` is the preimage under `j` of the image of the graph of `a`.
 
-(blueprint: `lem-weil-pbc-finite-etale-graph-base-change`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem Scheme.isPullback_graph_baseChange {Y Y₀ U V : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y)
     [IsFinite q] [Etale q] (i : Y₀ ⟶ Y) :
     IsPullback (pullback.map (pullback.snd q i) (pullback.snd p i) q p (pullback.fst q i)

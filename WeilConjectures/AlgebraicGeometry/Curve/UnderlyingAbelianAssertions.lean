@@ -72,7 +72,7 @@ private theorem invertibleOrder_of_underlying_iso
 /-- The conditional curve assertions depend only on the underlying abelian sheaf
 when both coefficient sheaves are constructible.
 Source: Stacks Project, Theorem 03SC, second proof paragraph; Lemma 0A5C.
-(blueprint: lem-v2-underlying-abelian-assertions)
+(blueprint: theorem-cohomology-curves)
 
 Proof: An isomorphism of underlying abelian sheaves induces isomorphisms on every
 cohomology group and on every geometric stalk. Forgetting module scalars commutes

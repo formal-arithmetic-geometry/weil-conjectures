@@ -49,7 +49,6 @@ lemma isZero_leftDerivedExtendScalars_obj
   (Functor.map_isZero (Mod.extendScalars (coefficientMap a X)).mapDerivedCategory hK).of_iso
     ((Functor.leftDerivedFunctorIsoMapDerivedCategory _).app K)
 
-set_option maxHeartbeats 800000 in
 -- Unifying the instance arguments of the derived extensions of scalars appearing in (Pull) with
 -- those of the statement is slow.
 /-- For a flat coefficient change `a : Λ ⟶ Λ'` and a closed immersion `i : Z ⟶ X` with

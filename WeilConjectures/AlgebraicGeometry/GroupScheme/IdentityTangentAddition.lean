@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 /-!
 # Compatibility of identity tangent transport with the vector-space operations
 
-Source: blueprint `def-wf-lie-algebra-derivation` and `lem-wf-same-lie-closed-subgroup`,
-Multiplication paragraph (blueprint: lem-ag-identity-tangent-addition).
+Source: blueprint `def-wf-lie-algebra-derivation` and
+`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph (blueprint:
+lem-ag-identity-tangent-addition).
 -/
 
 @[expose] public section
@@ -26,9 +27,9 @@ namespace AlgebraicGeometry.GrpObj
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The prescribed identity tangent transport sends infinitesimal multiplication to addition.
-Source: blueprint `def-wf-lie-algebra-derivation`; `lem-wf-same-lie-closed-subgroup`, Multiplication
-paragraph; Stacks Project, Tag 0B2B, construction of tangent addition.
-(blueprint: lem-ag-identity-tangent-addition)
+Source: blueprint `def-wf-lie-algebra-derivation`;
+`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph; Stacks Project, Tag
+0B2B, construction of tangent addition. (blueprint: lem-ag-identity-tangent-addition)
 
 Proof: The addition formula in `exists_tangentVectors_vectorSpace` uses the pushout
 of two dual-number spectra over their common closed point. Extend each infinitesimal

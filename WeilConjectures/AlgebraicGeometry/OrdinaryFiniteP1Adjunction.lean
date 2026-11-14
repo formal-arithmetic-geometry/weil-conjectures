@@ -160,8 +160,8 @@ attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 normalized trace and actual counit, on the entire derived categories. The chosen
 transport is fixed by its roots-of-unity and pure-tensor normalizations; the
 record's counit equation uses precisely the ordered projection map.
-Source: blueprint thm-amb-p1-adjunction, thm-amb-p1-decomposition,
-and def-amb-p1-trace; Stacks Project, Tag 03PL
+Source: blueprint proposition-adjunction-projective-line--1, lemma-cohomology-projective-line-trace,
+and lemma-cohomology-projective-line-trace; Stacks Project, Tag 03PL
 (auxiliary; not a blueprint node).
 
 Proof: obtain the roots and pure-tensor normalized transport from

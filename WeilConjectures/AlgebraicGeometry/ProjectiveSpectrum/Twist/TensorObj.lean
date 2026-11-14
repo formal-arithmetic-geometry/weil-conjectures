@@ -180,7 +180,7 @@ The two modules are then isomorphic by `Scheme.Modules.nonempty_iso_of_isFreeGen
 
 TODO: construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`.
 
-(blueprint: `lem-pc-twist-tensor`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem nonempty_tensorObj_twist_iso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
     (a b : ℤ) : Nonempty (twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b)) := by
   let U (i : {f : A // f ∈ 𝒜 1}) : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 i.1

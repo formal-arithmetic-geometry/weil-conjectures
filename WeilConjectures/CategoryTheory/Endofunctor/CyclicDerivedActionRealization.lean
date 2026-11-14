@@ -262,10 +262,10 @@ sentence; the agent construction in the DAG supplies the missing realization.
 
 Proof plan, following the seven steps of the node:
 1. The source IsoAlgebra library supplies exact, faithful forgetting. Represent N by
-   a K-injective I with a : QI ≅ N (lem-sfb-grothendieck-k-injective). By
+   a K-injective I with a : QI ≅ N (prose-03-02). By
    lem-weil-pbc-kinjective-hom-derived, the morphism a⁻¹ v D(P)(a) is represented
    by a chain map f : PI → I. Exact termwise derivation identifies its image
-   (lem-weil-pbc-exact-functor-derived-factorization); f is a quasi-isomorphism.
+   (situation-conventions); f is a quasi-isomorphism.
    Only the target is required to be K-injective; no strict inverse is chosen.
 2. Choose a quasi-inverse R of P, with unit η and counit ε satisfying the triangle
    identities. Put g = R(f)η_I, X_n = RⁿI, and g_n = Rⁿ(g). Equivalences preserve
@@ -286,7 +286,7 @@ Proof plan, following the seven steps of the node:
 6. Let M be this complex's derived image and e = a Q(j_0)⁻¹. Exact derivation
    identifies D(U)M with QC and its canonical structure with Q(τ). The equation
    τ P(j_0) = j_0 f implies e θ_M = v D(P)(e), by cancellation of the
-   invertible D(P)(Q(j_0)); use lem-weil-pbc-exact-functor-derived-factorization.
+   invertible D(P)(Q(j_0)); use situation-conventions.
 7. Exact forgetting gives UH^q(M) ≅ H^q(D(U)M) ≅ H^q(N). Conservativity
    reflects zero objects, so every cohomology interval of N is one for M.
    Isomorphism invariance transports membership in any S along these same

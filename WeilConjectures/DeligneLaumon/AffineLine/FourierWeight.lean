@@ -63,7 +63,8 @@ energies `S_m = ‖f_K‖²_m` (`AlgebraicGeometry.WeilComplex.traceEnergy`):
 
 the supremum of the empty set being `-∞`, the exponent `1` being the dimension of the curve on
 which `K` is intended to live. The `limsup` is taken in `ℝ≥0∞`. This is the same formula as for
-Weil sheaves, `AlgebraicGeometry.WeilSheaf.l2Weight`. (blueprint: `def-wf-l2-norm`) -/
+Weil sheaves, `AlgebraicGeometry.WeilSheaf.l2Weight`. (blueprint:
+`definition-growth-squared-traces`) -/
 noncomputable def l2Weight (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X) : EReal :=
   ⨆ (β : ℝ) (_ : 0 < limsup (fun m : ℕ ↦ ENNReal.ofReal
     (K.traceEnergy ι m / (Nat.card k₀ : ℝ) ^ ((m : ℝ) * (β + 1)))) atTop), (β : EReal)
@@ -116,7 +117,7 @@ namespace WeilComplex
 complex `K` on the affine line, `‖FT_ψ(K)‖ = ‖K‖ + 1`. By the Plancherel identity
 `AlgebraicGeometry.WeilComplex.traceEnergy_fourierTransform`, the defining ratio of `FT_ψ(K)` at
 `β` agrees with that of `K` at `β - 1` for every `m ≥ 1`, hence has the same `limsup`.
-(blueprint: `lem-fd-l2-plancherel-shift`) -/
+(blueprint: `corollary-plancherel--2`) -/
 theorem l2Weight_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l (affineLine k₀)) :
     ((fourierTransform ψ).obj K).l2Weight ι = K.l2Weight ι + 1 := by
@@ -172,7 +173,7 @@ partner `FT_ψ((j_*M)[1]) ≅ (j'_*M')[1]` with `M'` punctually `ι`-pure of wei
 Both sides of the isomorphism have the same `L²`-weight; that of the transform is
 `‖j_*M‖ + 1 = w + 1`, and that of `(j'_*M')[1]` is `‖j'_*M'‖ = v`. The sheaf `M'` is nonzero,
 since otherwise `‖j'_*M'‖ = -∞`. The nonvanishing of `M`, implicit in the blueprint, is needed:
-the zero sheaf is pure of every weight. (blueprint: `cor-fd-l2-plancherel-middle-extension`) -/
+the zero sheaf is pure of every weight. (blueprint: `theorem-weight-fourier-transform`) -/
 theorem eq_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1)
     (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) (hM : ¬ Limits.IsZero D.sheaf) {w v : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D')
@@ -194,7 +195,7 @@ theorem eq_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ �
 punctually `ι`-pure of weight `w`, is punctually `ι`-pure of weight exactly `w + 1`: it is pure of
 some weight `v` by `AlgebraicGeometry.exists_isPunctuallyPureOfWeight_of_isFourierPartner`, and
 `v = w + 1` by `AlgebraicGeometry.eq_add_one_of_isFourierPartner`.
-(blueprint: `cor-fd-l2-plancherel-middle-extension`) -/
+(blueprint: `theorem-weight-fourier-transform`) -/
 theorem isPunctuallyPureOfWeight_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse)
@@ -207,7 +208,7 @@ theorem isPunctuallyPureOfWeight_add_one_of_isFourierPartner (ι : PadicAlgCl l 
 /-- If `M` is irreducible, nonexceptional and punctually `ι`-pure of weight `w`, and `ψ` is
 nontrivial, then the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]` with `M'`
 irreducible and punctually `ι`-pure of weight `w + 1`.
-(blueprint: `cor-fd-l2-plancherel-middle-extension`) -/
+(blueprint: `theorem-weight-fourier-transform`) -/
 theorem exists_isFourierPartner_isPunctuallyPureOfWeight_add_one (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
@@ -222,7 +223,7 @@ set_option linter.unusedVariables false in
 /-- If `M` is irreducible, nonexceptional and pure of weight `w`, `ψ` is nontrivial, and the
 sheaf `M'` of the Fourier partner of `M` is pure of weight `v`, then `v ≤ w + 1`; in fact
 `v = w + 1` by `AlgebraicGeometry.eq_add_one_of_isFourierPartner`.
-(blueprint: `sk-p-dl-a1-fourier-weight`) -/
+(blueprint: `theorem-weight-fourier-transform`) -/
 theorem le_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1)
     (D D' : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse)

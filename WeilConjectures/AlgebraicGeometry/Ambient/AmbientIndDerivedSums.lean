@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 # Sums and truncations for ind-constructible cohomology
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-ambient-ind-derived,
-`sk-cor-ambient-ind-derived-sums.md` and its proof (blueprint: det-ambient-ind-derived-sums).
+`sk-cor-ambient-ind-derived-sums.md` and its proof (blueprint: corollary-ambient-ind-derived).
 
 The canonical comparison is written using arbitrary colimit cocones. Its source is a
 coproduct of the cohomology objects and its target is the cohomology of the coproduct;
@@ -155,20 +155,20 @@ private theorem localizing_of_small_sums
 Source: blueprint main-20261015, `sk-cor-ambient-ind-derived-sums.md`, clauses 1--3;
 Stacks Project, Tags 03DB, 07D9 and 0118; the standing separated finite-type
 positive-characteristic field setting of `sk-def-sfb-dc-setting`
-(blueprint: det-ambient-ind-derived-sums).
+(blueprint: corollary-ambient-ind-derived).
 
 Proof:
 1. The existing module-object Grothendieck instance supplies exact small coproducts
    and K-injective resolutions. The source-library coproduct-preservation instance
    for derived homology sends the given colimit cofan to a colimit cocone. Uniqueness
    of colimits makes the displayed canonical comparison `desc` an isomorphism.
-2. Apply the sum clause of `det-ind-heart-filtered-colimits` to that image cofan
+2. Apply the sum clause of `proposition-ind-constructible-sheaves--3` to that image cofan
    degree by degree. The empty sum gives membership of zero in IndCons.
 3. Apply the source-library `homologyProperty_truncLE` and `homologyProperty_truncGE`
    lemmas: truncation retains the old cohomology or replaces it by zero.
 4. Unpack bounded constructibility and use `ObjectProperty.le_ind` on every
    cohomology object, viewed as its own one-object filtered colimit.
-5. Use `det-ambient-ind-derived-triangulated` for triangulatedness. Repleteness follows
+5. Use `corollary-ambient-ind-derived--1` for triangulatedness. Repleteness follows
    from the isomorphism-closure instance for the homology predicate. To apply the
    intersection defining `localizingClosure`, an existing coproduct with larger index
    set is reduced to small nonzero support: distinct nonzero summands give distinct
@@ -251,20 +251,20 @@ theorem indConstructibleDerived_sums_and_truncations
 Source: blueprint main-20261015, `sk-cor-ambient-ind-derived-sums.md`, clauses 1--3;
 Stacks Project, Tags 03DB, 07D9 and 0118; the standing separated finite-type
 positive-characteristic field setting of `sk-def-sfb-dc-setting`
-(blueprint: det-ambient-ind-derived-sums).
+(blueprint: corollary-ambient-ind-derived).
 
 Proof:
 1. The existing module-object Grothendieck instance supplies exact small coproducts
    and K-injective resolutions. The source-library coproduct-preservation instance
    for derived homology sends the given colimit cofan to a colimit cocone. Uniqueness
    of colimits makes the displayed canonical comparison `desc` an isomorphism.
-2. Apply the sum clause of `det-ind-heart-filtered-colimits` to that image cofan
+2. Apply the sum clause of `proposition-ind-constructible-sheaves--3` to that image cofan
    degree by degree. The empty sum gives membership of zero in IndCons.
 3. Apply the source-library `homologyProperty_truncLE` and `homologyProperty_truncGE`
    lemmas: truncation retains the old cohomology or replaces it by zero.
 4. Unpack bounded constructibility and use `ObjectProperty.le_ind` on every
    cohomology object, viewed as its own one-object filtered colimit.
-5. Use `det-ambient-ind-derived-triangulated` for triangulatedness. Repleteness follows
+5. Use `corollary-ambient-ind-derived--1` for triangulatedness. Repleteness follows
    from the isomorphism-closure instance for the homology predicate. To apply the
    intersection defining `localizingClosure`, an existing coproduct with larger index
    set is reduced to small nonzero support: distinct nonzero summands give distinct

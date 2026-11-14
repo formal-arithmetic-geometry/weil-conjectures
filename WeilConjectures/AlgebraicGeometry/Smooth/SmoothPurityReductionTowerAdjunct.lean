@@ -127,6 +127,25 @@ private theorem scalar_adjunct_isIso (hd : d = a ≫ b)
   have : IsIso (f ≫ em.hom) := IsIso.of_isIso_comp_left (B.model.E.map en.inv) _
   exact IsIso.of_isIso_comp_right f em.hom
 
+private theorem scalar_adjunct_isIso_of_generators (hd : d = a ≫ b)
+    (A : SystemScalarModel a) (B : SystemScalarModel b) (D : SystemScalarModel d)
+    (X : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R))
+    (N : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))
+    (M : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J V))
+    (en : N ≅ A.model.E.obj X) (em : M ≅ D.model.E.obj X)
+    (t : N ⟶ (restrictScalars ((sheafCompose J
+      (forget₂ CommRingCat.{r} RingCat.{r})).map b)).obj M)
+    (ht : ∀ U x, @Eq (M.val.obj U)
+      (t.val.app U (en.inv.val.app U (systemModelTmul A.model X U 1 x)))
+      (em.inv.val.app U (systemModelTmul D.model X U 1 x))) :
+    IsIso ((B.ordinaryAdj.homEquiv N M).symm t) := by
+  apply scalar_adjunct_isIso hd A B D X N M en em t
+  intro U x
+  rw [ht]
+  simp only [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
+    ← SheafOfModules.comp_val, em.inv_hom_id, SheafOfModules.id_val,
+    PresheafOfModules.id_app, ModuleCat.id_apply]
+
 end ScalarAdjunct
 
 namespace AlgebraicGeometry.ProEtale
@@ -157,8 +176,6 @@ private theorem reduction_scalar_comp
   rw [coefficient_map_eq]
   rw [limit.w]
 
-set_option maxHeartbeats 800000 in
--- Kernel checking the extracted ordinary reduction helper exceeds the default budget.
 private theorem ordinary_reduction_isIso
     (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
@@ -178,21 +195,14 @@ private theorem ordinary_reduction_isIso
   let := D.evaluationColimits m
   intro X
   rw [D.ordinaryReduction_eq]
-  apply scalar_adjunct_isIso (reduction_scalar_comp l E T coefficient h)
-    (D.scalar _) (D.scalar _) (D.scalar _) X _ _
+  apply scalar_adjunct_isIso_of_generators (reduction_scalar_comp l E T coefficient h)
+    (D.scalar _) (D.scalar _) (D.scalar _) X
+    ((D.equivalence.functor.obj (ordinary.obj X)).level n)
+    ((D.equivalence.functor.obj (ordinary.obj X)).level m)
     ((level n).app X) ((level m).app X)
   intro U x
   have ht := transition X h U 1 x
-  simp only [map_one] at ht
-  have he := congrArg (fun y ↦ ((level m).hom.app X).val.app U y) ht
-  simp only [spStrictTransitionSection, spReductionGenerator] at he
-  change ((level m).hom.app X).val.app U
-    (((D.equivalence.functor.obj (ordinary.obj X)).transition h).val.app U
-      (((level n).inv.app X).val.app U
-        (systemModelTmul (D.scalar
-          (spIntegralReductionScalar l E T coefficient n)).model X U 1 x))) = _
-  simpa only [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
-    ← SheafOfModules.comp_val, (level m).inv_hom_id_app,
-    SheafOfModules.id_val, PresheafOfModules.id_app, ModuleCat.id_apply] using he
+  simp only [map_one, spStrictTransitionSection, spReductionGenerator] at ht
+  exact ht
 
 end AlgebraicGeometry.ProEtale

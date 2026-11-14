@@ -1223,7 +1223,7 @@ This is precisely the quotient-arrow equation (def-weil-integral-reduction-tower
 on pure tensors. Tensor generation and sheafification extend this to all sections.
 6. Tensor naturality in P gives the displayed chain-map naturality equation.
 7. Exact inverse image preserves quasi-isomorphisms and homotopies by
-lem-weil-pbc-exact-functor-derived-factorization, so it descends to derived categories.
+situation-conventions, so it descends to derived categories.
 8. Apply lem-pur-quasi-isos-saturated-triangulated to find a common roof for q,q'.
 Resolve its source by lem-pc-kflat-resolution. Pullback preserves K-flatness and
 flat terms by lem-weil-pbc-ringed-pullback-preserves-kflat; scalar-isomorphism

@@ -30,7 +30,7 @@ open Scheme
 two locally finitely presented `Λ`-module sheaves placed in degree `0` has no cohomology below
 degree `-1` and locally finitely presented cohomology sheaves. Then the derived tensor product of
 two constructible sheaves placed in degree `0` is bounded constructible (the reduction step of the
-case of single sheaves in blueprint `lem-sfb-dc-tensor-preserves`).
+case of single sheaves in blueprint `proposition-six-operations-dctf--14`).
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 
@@ -146,7 +146,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
 /-! ### The coefficient ring `ℚ̲̄_ℓ` -/
 
 /-- The derived tensor product of two constructible `ℚ̄_ℓ`-sheaves placed in degree `0` is bounded
-constructible. This is the case of single sheaves in blueprint `lem-sfb-dc-tensor-preserves`.
+constructible. This is the case of single sheaves in blueprint
+`proposition-six-operations-dctf--14`.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 
@@ -174,7 +175,7 @@ namespace ContinuousMapRingObj
 
 /-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived tensor product of two constructible
 `E`-sheaves placed in degree `0` is bounded constructible. This is the case of single
-sheaves in blueprint `lem-sfb-dc-tensor-preserves`.
+sheaves in blueprint `proposition-six-operations-dctf--14`.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 
@@ -204,7 +205,7 @@ namespace PadicIntegersRingObj
 
 /-- For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived tensor product of two constructible
 `𝒪_E`-sheaves placed in degree `0` is bounded constructible. This is the case of single
-sheaves in blueprint `lem-sfb-dc-tensor-preserves`.
+sheaves in blueprint `proposition-six-operations-dctf--14`.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 

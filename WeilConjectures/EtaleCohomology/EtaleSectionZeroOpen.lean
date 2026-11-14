@@ -25,8 +25,8 @@ Source: Stacks Project, Tag 04FR, clauses (1)--(3) (auxiliary; not a blueprint n
 
 Proof:
 1. Form the union of the open subschemes where `s` restricts to zero. Open immersions
-are étale by `lem-weil-pbc-etale-composition-cancellation`, so these are site objects.
-The sheaf condition (`def-weil-pbc-abelian-etale-sheaves`) gives zero on this union,
+are étale by `definition-torsion-sheaves--3`, so these are site objects.
+The sheaf condition (`situation-conventions`) gives zero on this union,
 including an empty union; maximality follows from the construction.
 2. Every site arrow is étale by cancellation. Its image is open by
 `lem-weil-pbc-etale-morphism-open-map`, and the map onto that image is a singleton
@@ -36,7 +36,7 @@ containment in the union gives factorization and hence zero restriction.
 cofinal family of affine pointed neighbourhoods. Representatives exist by
 `lem-weil-pbc-affine-etale-essentially-small-cover`; an affine open around the lifted
 point refines any neighbourhood. Cofilteredness follows from
-`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`, and
+`definition-torsion-sheaves--3`, and
 `lem-weil-pbc-colimit-initial-full-subcategory` identifies the small colimit and its
 coprojections with the stalk. Restrict `s` to a pointed affine refinement of `V`.
 4. If the germ is zero, regard the abelian groups as integer modules and apply

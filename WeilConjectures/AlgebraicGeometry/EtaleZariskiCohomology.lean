@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ZariskiDimensionBound
 # Étale and Zariski cohomology of quasi-coherent modules on curves
 
 Source: Stacks Project, Descent, Proposition 03DW, part (2), and Cohomology,
-Proposition 02UZ (blueprint: lem-sc-ga-cohomology).
+Proposition 02UZ (blueprint: proposition-p-torsion-smooth-proper-curve--3).
 
 The associated étale sheaf of the structure module `Scheme.Modules.unit C` is `Gₐ`.
 Étale cohomology uses `Sheaf.H`; Zariski module cohomology uses the recorded right
@@ -40,12 +40,12 @@ set_option autoImplicit false
 
 /-- Étale and Zariski cohomology agree for each quasi-coherent module on a curve.
 Source: Stacks Project, Descent, Proposition 03DW (2)
-(blueprint: lem-sc-ga-cohomology).
+(blueprint: proposition-p-torsion-smooth-proper-curve--3).
 
 Proof: Apply `lem-sc-etale-zariski-qcoh-comparison` to `C` and `F`. Invert its
 canonical comparison from Zariski to étale cohomology in degree `q` to obtain the
 stated additive equivalence. The associated sheaf is the one defined by
-`def-sc-etale-qcoherent-module`, with sections `Γ(U,u^*F)` and pullback restrictions. -/
+`proposition-p-torsion-smooth-proper-curve`, with sections `Γ(U,u^*F)` and pullback restrictions. -/
 theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : C.Modules) [F.IsQuasicoherent] (q : ℕ) :
@@ -62,10 +62,10 @@ theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
 
 /-- The comparison specialized to `Gₐ = (𝒪_C)_et`.
 Source: Stacks Project, Descent, Proposition 03DW (2), specialized to the structure
-sheaf (blueprint: lem-sc-ga-cohomology).
+sheaf (blueprint: proposition-p-torsion-smooth-proper-curve--3).
 
 Proof: In step 1, take `F = 𝒪_C`, which is quasi-coherent. By
-`def-sc-etale-qcoherent-module`, its associated étale sheaf has sections
+`proposition-p-torsion-smooth-proper-curve`, its associated étale sheaf has sections
 `Γ(U,u^*𝒪_C) = Γ(U,𝒪_U)` with addition and the usual pullback restrictions, so this
 is precisely the additive étale sheaf `Gₐ`. This is step 3 of the node's proof. -/
 theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
@@ -79,7 +79,7 @@ theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
 
 /-- Both cohomology groups of `Gₐ` and `𝒪_C` vanish in degree at least two on a smooth
 connected curve. Source: Stacks Project, Descent, Proposition 03DW (2), and Cohomology,
-Proposition 02UZ (blueprint: lem-sc-ga-cohomology).
+Proposition 02UZ (blueprint: proposition-p-torsion-smooth-proper-curve--3).
 
 Proof:
 1. As in step 1, use `lem-sc-etale-zariski-qcoh-comparison` for the structure module
@@ -90,7 +90,7 @@ Proof:
    `q > dim C`. Apply `lem-sc-noetherian-cohomology-above-dimension` to obtain zero
    Zariski cohomology. This is step 2 of the node's proof.
 3. The associated structure module sheaf is `Gₐ` by
-   `def-sc-etale-qcoherent-module`. Transport the vanishing across the comparison
+   `proposition-p-torsion-smooth-proper-curve`. Transport the vanishing across the comparison
    of step 1. This is step 3 of the node's proof. -/
 theorem subsingleton_etale_ga_and_structure_cohomology {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

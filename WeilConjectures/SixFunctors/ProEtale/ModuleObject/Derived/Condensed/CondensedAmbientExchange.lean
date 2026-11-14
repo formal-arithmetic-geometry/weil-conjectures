@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 /-!
 # Ambient exchange for condensed coefficient module objects
 
-Source: blueprint main-20261015, def-weil-pbc-ambient-ringed-exchange;
-Stacks Project, Remark 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange).
+Source: blueprint main-20261015, definition-pro-etale-base-change-map--1;
+Stacks Project, Remark 07A7 (blueprint: definition-pro-etale-base-change-map--1).
 
 The general ring-sheaf exchange is publicly retained. These definitions give its
 internal-module-object form for coefficients pulled back from one condensed ring.
@@ -41,8 +41,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- The canonical pullback comparison around a square for one condensed coefficient ring.
 The two coefficient identifications are those obtained by pullback from the same point;
 the published composition comparison is induced from the ordinary tensor pullbacks.
-Source: blueprint main-20261015, def-weil-pbc-ambient-ringed-exchange, displayed theta;
-Stacks Project, Remark 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+Source: blueprint main-20261015, definition-pro-etale-base-change-map--1, displayed theta;
+Stacks Project, Remark 07A7 (blueprint: definition-pro-etale-base-change-map--1). -/
 def condensedAmbientPullbackComparison (sq : ChosenCartesianSquare g' f' f g) :
     (upperStar Λ g).leftDerivedFunctor ⋙ (upperStar Λ f').leftDerivedFunctor ≅
       (upperStar Λ f).leftDerivedFunctor ⋙ (upperStar Λ g').leftDerivedFunctor :=
@@ -56,13 +56,13 @@ adjunctions of the full module pushforward and tensor pullback composites.
 Its component inserts the unit for f', applies the square comparison under Rf'_*,
 then contracts the counit for f. It is defined for every condensed ring and before
 any constructibility, properness or completeness condition.
-Source: blueprint main-20261015, def-weil-pbc-ambient-ringed-exchange, final formula;
-Stacks Project, Remark 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+Source: blueprint main-20261015, definition-pro-etale-base-change-map--1, final formula;
+Stacks Project, Remark 07A7 (blueprint: definition-pro-etale-base-change-map--1). -/
 def condensedAmbientExchange (sq : ChosenCartesianSquare g' f' f g) :
     (lowerStar Λ f).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor ⟶
       (upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ f').rightDerivedFunctor :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f')
-    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ sq).hom))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -13,7 +13,7 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 Source: Weil conjectures blueprint, `sec-trace-formula/sk-d-weil-push`,
 `lem-trf-frobenius-open-square.md`, order 2368; Stacks, Tags 03SM, 01JR and 01JP
-(blueprint: lem-trf-frobenius-open-square).
+(blueprint: lemma-additivity-open-subscheme-complement--1).
 
 The models are arbitrary schemes over the finite base. The scheme Frobenius is written
 using `Over.pullback.map` applied to the existing absolute Frobenius; this is the defining
@@ -109,19 +109,19 @@ private theorem iterateFrobenius_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 private theorem isPullback_pow {X Y : Scheme.{u}} {f : X ⟶ X} {g : Y ⟶ Y}
     {j : X ⟶ Y} (h : IsPullback f j j g) (m : ℕ) :
-    IsPullback (End.of f ^ m) j j (End.of g ^ m) := by
+    IsPullback (End.of f ^ m).asHom j j (End.of g ^ m).asHom := by
   induction m with
   | zero => exact IsPullback.of_id_fst
   | succ m ih =>
-    simpa only [pow_succ, End.mul_def] using h.paste_horiz ih
+    simpa only [pow_succ, End.mul_asHom] using h.paste_horiz ih
 
 private theorem semilinear_pow {X S : Scheme.{u}} {f : X ⟶ X} {g : S ⟶ S}
     {a : X ⟶ S} (h : f ≫ a = a ≫ g) (m : ℕ) :
-    (End.of f ^ m) ≫ a = a ≫ (End.of g ^ m) := by
+    (End.of f ^ m).asHom ≫ a = a ≫ (End.of g ^ m).asHom := by
   induction m with
-  | zero => simp only [pow_zero, End.one_def, Category.id_comp, Category.comp_id]
+  | zero => simp only [pow_zero, End.one_asHom, Category.id_comp, Category.comp_id]
   | succ m ih =>
-    rw [pow_succ, pow_succ, End.mul_def, End.mul_def, Category.assoc, ih,
+    rw [pow_succ, pow_succ, End.mul_asHom, End.mul_asHom, Category.assoc, ih,
       ← Category.assoc, h, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -130,7 +130,7 @@ are Cartesian for every nonnegative iterate. The last two identities give semili
 of the Galois maps with respect to the projections to `Spec k`.
 Source: blueprint `sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md`,
 order 2368; Stacks, Tags 03SM, 01JR and 01JP
-(blueprint: lem-trf-frobenius-open-square).
+(blueprint: lemma-additivity-open-subscheme-complement--1).
 
 Proof:
 1. The structure morphisms make `p` vanish on the models, including empty opens.
@@ -159,7 +159,7 @@ theorem frobenius_open_square (D : WeilConjectures.FiniteFieldDatum.{u})
       (End.of (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map
         (Over.homMk
           (X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) D.a)
-          (D.model_frobenius_over X₀.hom))).left) ^ m)
+          (D.model_frobenius_over X₀.hom))).left) ^ m).asHom
       (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map
         j₀).left)
       (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map
@@ -167,30 +167,30 @@ theorem frobenius_open_square (D : WeilConjectures.FiniteFieldDatum.{u})
       (End.of (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map
         (Over.homMk
           (Y₀.left.iterateFrobenius D.prime (D.model_characteristic Y₀.hom) D.a)
-          (D.model_frobenius_over Y₀.hom))).left) ^ m) ∧
+          (D.model_frobenius_over Y₀.hom))).left) ^ m).asHom ∧
     IsPullback
       (End.of (D.galoisMap X₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-        (Fintype.ofFinite D.k₀) _ _ _)) ^ m)
+        (Fintype.ofFinite D.k₀) _ _ _)) ^ m).asHom
       (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map
         j₀).left)
       (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map
         j₀).left)
       (End.of (D.galoisMap Y₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-        (Fintype.ofFinite D.k₀) _ _ _)) ^ m) ∧
+        (Fintype.ofFinite D.k₀) _ _ _)) ^ m).asHom ∧
     (End.of (D.galoisMap X₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-        (Fintype.ofFinite D.k₀) _ _ _)) ^ m) ≫
+        (Fintype.ofFinite D.k₀) _ _ _)) ^ m).asHom ≫
         pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
       pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫
         (End.of (Spec.map (CommRingCat.ofHom
           (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-            (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m) ∧
+            (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m).asHom ∧
     (End.of (D.galoisMap Y₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-        (Fintype.ofFinite D.k₀) _ _ _)) ^ m) ≫
+        (Fintype.ofFinite D.k₀) _ _ _)) ^ m).asHom ≫
         pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
       pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫
         (End.of (Spec.map (CommRingCat.ofHom
           (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
-            (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m) :=
+            (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m).asHom :=
   by
   let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
   let B := Over.pullback b

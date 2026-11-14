@@ -182,7 +182,7 @@ private theorem stalk_tensor_single_iso
 
 /-- Finite constant-module Tor tests extend to arbitrary module sheaves.
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md`,
 the closed-support paragraph; steps 4--6 of `lem-sf-open-tor-bound-arbitrary-field`
 (blueprint: lem-sf-open-tor-bound-stalk-filtered-extension).

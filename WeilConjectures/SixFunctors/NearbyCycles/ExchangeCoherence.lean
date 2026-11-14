@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareCo
 The pullback exchanges `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of morphisms of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.pullbackExchange`) are
 compatible with commutative squares of morphisms of models (blueprint
-`sk-lem-tf-nearby-mate-coherences` (2), `α_{gf} = α_f(g^*) f_s^* α_g`).
+`sec-Base-change-for-nearby-cycles` (2), `α_{gf} = α_f(g^*) f_s^* α_g`).
 
 -/
 
@@ -176,19 +176,19 @@ lemma pullbackExchange_square_aux {SM1 SM SP1 SP : Type*} [Category SM1] [Catego
       gψ'.map (cEφ'.app C) ≫ cEψ'.app (e.obj C) ≫ εP.map (cB.app C))
     (αψ : (εM1 ⋙ RM1 ⋙ iM1) ⋙ g' ⟶ g ⋙ εM ⋙ RM ⋙ iM)
     (hαψ : αψ = Functor.whiskerLeft (εM1 ⋙ RM1) cIψ ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εM1 (mateEquiv aM1 aM cJψ).natTrans ≫
+      (Functor.whiskerLeft εM1 (mateEquiv aM1 aM cJψ) ≫
         Functor.whiskerRight cEψ RM) iM)
     (αφ : (εM ⋙ RM ⋙ iM) ⋙ f' ⟶ f ⋙ εP ⋙ RP ⋙ iP)
     (hαφ : αφ = Functor.whiskerLeft (εM ⋙ RM) cIφ ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εM (mateEquiv aM aP cJφ).natTrans ≫
+      (Functor.whiskerLeft εM (mateEquiv aM aP cJφ) ≫
         Functor.whiskerRight cEφ RP) iP)
     (αφ' : (εM1 ⋙ RM1 ⋙ iM1) ⋙ e' ⟶ e ⋙ εP1 ⋙ RP1 ⋙ iP1)
     (hαφ' : αφ' = Functor.whiskerLeft (εM1 ⋙ RM1) cIφ' ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εM1 (mateEquiv aM1 aP1 cJφ').natTrans ≫
+      (Functor.whiskerLeft εM1 (mateEquiv aM1 aP1 cJφ') ≫
         Functor.whiskerRight cEφ' RP1) iP1)
     (αψ' : (εP1 ⋙ RP1 ⋙ iP1) ⋙ k' ⟶ k ⋙ εP ⋙ RP ⋙ iP)
     (hαψ' : αψ' = Functor.whiskerLeft (εP1 ⋙ RP1) cIψ' ≫ Functor.whiskerRight
-      (Functor.whiskerLeft εP1 (mateEquiv aP1 aP cJψ').natTrans ≫
+      (Functor.whiskerLeft εP1 (mateEquiv aP1 aP cJψ') ≫
         Functor.whiskerRight cEψ' RP) iP)
     (C : DX1) :
     cS.app ((εM1 ⋙ RM1 ⋙ iM1).obj C) ≫ f'.map (αψ.app C) ≫ αφ.app (g.obj C) =
@@ -384,7 +384,7 @@ namespace NearbyCyclesModel.Hom
 variable {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
 
-/-- **The pullback exchange is monoidal** (blueprint `sk-lem-tf-nearby-mate-coherences`, "`α_f`
+/-- **The pullback exchange is monoidal** (blueprint `sec-Base-change-for-nearby-cycles`, "`α_f`
 is monoidal"): `α_φ(A ⊗ B) ∘ Lf'^* μ_N = Ψ_M(m⁻¹) ∘ μ_M ∘ (α_φ A ⊗ α_φ B) ∘ m`, where `μ` are
 the lax tensor maps of nearby cycles and `m` the tensor comparisons of the derived pullbacks. -/
 lemma map_tensorMap_comp_pullbackExchange_app
@@ -399,7 +399,7 @@ lemma map_tensorMap_comp_pullbackExchange_app
     (pullbackSquareComparison Λ φ.commSq_ε).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (lowerStarTensorMap' Λ N.j) (lowerStarTensorMap' Λ M.j)
     (fun x y ↦ lowerStarTensorMap'_natural Λ M.j x y)
     (fun X Y ↦ pullbackSquareComparison_tensor Λ φ.commSq_i X Y)
@@ -414,7 +414,7 @@ variable {Z Z' X₁ X₁' Z₁ Z₁' : Scheme.{u}} {P : NearbyCyclesModel Z Z'}
   {M₁ : NearbyCyclesModel X₁ X₁'} {P₁ : NearbyCyclesModel Z₁ Z₁'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'}
   {k : Z ⟶ Z₁} {k' : Z' ⟶ Z₁'} {e : Z₁ ⟶ X₁} {e' : Z₁' ⟶ X₁'} {f₀ : Z ⟶ X} {f₀' : Z' ⟶ X'}
 
-/-- **The square law of the pullback exchanges** (blueprint `sk-lem-tf-nearby-mate-coherences`
+/-- **The square law of the pullback exchanges** (blueprint `sec-Base-change-for-nearby-cycles`
 (2), `α_{gf} = α_f(g^*) f_s^* α_g`, for the two factorizations of a commutative square of
 morphisms of models): for morphisms of models `φ₀ : P ⟶ M`, `ψ : M ⟶ M₁`, `ψ' : P ⟶ P₁` and
 `φ₁ : P₁ ⟶ M₁` with `φ₀ ≫ ψ = ψ' ≫ φ₁`, the two composite pullback exchanges

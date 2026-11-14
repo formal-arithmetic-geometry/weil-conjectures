@@ -154,8 +154,6 @@ private theorem ringed_comp_model_map
         ((NatIso.mapHomologicalComplex (ordinaryComp l E f g) (.up ℤ)).hom.app P)) := by
   exact map_triple R _ _ _ _ _ (ringed_comp_model l E f g P)
 
-set_option maxHeartbeats 400000 in
--- The representative diagram exceeds the default heartbeat budget during model conversions.
 private theorem on_good
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

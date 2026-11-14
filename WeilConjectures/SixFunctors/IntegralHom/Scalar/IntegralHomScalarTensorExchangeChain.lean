@@ -58,7 +58,6 @@ private theorem unit_eq (b : IntegralHomReductionTensorData D l hl E X n)
   erw [b.scalarUnit_normalize]
   exact (Classical.choose_spec (scalarReductionExtension_adjunction l E X n)) M U x
 
-set_option maxHeartbeats 800000 in
 -- Compare sheafified total generators without unfolding the derived constructions.
 /-- The normalized ordinary comparison commutes with Koszul interchange.
 Source: Stacks 06YY and 0FPQ. Proof: cancel the invertible ordinary comparison

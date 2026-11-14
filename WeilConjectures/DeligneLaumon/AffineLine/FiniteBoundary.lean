@@ -47,7 +47,7 @@ zero. For `r > 0` this is the vanishing of the higher direct images with compact
 the quasi-finite structure morphism, for `r < 0` the concentration of the direct image of a sheaf
 in nonnegative degrees. The blueprint states this for `G` with stalk weights at most some `w`;
 the weights play no role.
-(blueprint: `lem-a1-finite-boundary-cohomology`) -/
+(blueprint: `lemma-extreme-degrees-affine-curve`) -/
 theorem WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite
     [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
     Subsingleton (G.compactlySupportedCohomology r).carrier := by

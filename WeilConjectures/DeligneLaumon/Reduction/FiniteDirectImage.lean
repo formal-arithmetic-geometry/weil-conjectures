@@ -79,7 +79,7 @@ image `R⁰π₀!F`, at a closed point `y` every eigenvalue `β` of `F_y` has a 
 `q_x = q_y ^ e`
 (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite`).
 The blueprint states this for `π` finite étale; étaleness is not needed
-(blueprint: `lem-a1-finite-map-purity`). -/
+(blueprint: `lemma-finite-quasi-finite-direct-images--3`). -/
 theorem IsPunctuallyPureOfWeight.lowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (π : X ⟶ Y) [π.IsOver (Spec (CommRingCat.of k₀))] [IsFinite π]

@@ -26,7 +26,7 @@ which is bi-additive: additivity in the torsor
 (`AlgebraicGeometry.Scheme.EtaleTorsor.cupMu_eq_add`) comes from the `ℤ/m × ℤ/m`-torsor
 attached to a pair of characters. We show that it is perfect
 (`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_curvePairing`, blueprint
-`lem-wf-curve-finite-level-pd`):
+`proposition-kummer-duality-integral-tate-module--2`):
 
 * its left kernel is trivial: a torsor whose pairing vanishes has a section
   (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_picPairing_eq_zero`);
@@ -226,7 +226,8 @@ lemma card_continuousMonoidHom_zmod [Nonempty X] (m : ℕ) [NeZero m] (hm : (m :
   rw [Nat.card_congr ((sheafHEquivContinuousMonoidHom (ULift.{u + 1} (ZMod m)) s G).symm.trans
     e.toEquiv), Nat.card_fun, Nat.card_zmod, Nat.card_fin]
 
-/-- Blueprint `lem-wf-curve-finite-level-pd`: Finite-level degree-one Poincaré pairing on a curve.
+/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Finite-level degree-one Poincaré
+pairing on a curve.
 
 Let `X` be a smooth proper connected curve over an algebraically closed field `k` (e.g. the
 geometric fibre of a curve over a finite field), `s` a geometric point with fundamental group

@@ -16,10 +16,11 @@ correspondence `c'` of `(X', K')` with fixed locus `F'`
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization`). Let `P = K ⊠ D_X K` and
 `P' = K' ⊠ D_{X'} K'` be the universal kernels and let `ρ : Ψ_{X×X} P ⟶ P'` be a comparison
 satisfying the second universal-kernel identity `e_{K'} ρ = RΔ'_* θ_X ∘ χ_Δ ∘ Ψ_{X×X}(e_K)`
-(blueprint `det-tf-sp-universal-kernel`). If the coefficient map of `c'` is the specialization of
-that of `c`, in the sense that its kernel section is `k_{u_s} = c'^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C`
-(blueprint `lemma-section-specialized-correspondence`), then the trace class of `c'` is the
-specialization of the trace class of `c` (blueprint `proposition-specialization-trace-class`):
+(blueprint `lemma-nearby-cycles-universal-kernel`). If the coefficient map of `c'` is the
+specialization of that of `c`, in the sense that its kernel section is
+`k_{u_s} = c'^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C` (blueprint `lemma-section-specialized-correspondence`),
+then the trace class of `c'` is the specialization of the trace class of `c` (blueprint
+`proposition-specialization-trace-class`):
 ```
 Tr_{c'}(u_s) = sp_F(Tr_c(u)).
 ```
@@ -77,7 +78,7 @@ private lemma comp_eq_of_kernel {𝒞 : Type*} [Category 𝒞]
 /-- **Specialization of the trace class** (blueprint `proposition-specialization-trace-class`):
 let `ρ : Ψ_{X×X}(K ⊠ D_X K) ⟶ K' ⊠ D_{X'} K'` be a comparison of the universal kernels satisfying
 the second universal-kernel identity `e_{K'} ρ = RΔ'_* θ_X ∘ χ_Δ ∘ Ψ_{X×X}(e_K)` (blueprint
-`det-tf-sp-universal-kernel`), and suppose that the kernel section
+`lemma-nearby-cycles-universal-kernel`), and suppose that the kernel section
 `k_{u'} = λ_{c'} ũ' : ℚ̄_ℓ ⟶ Rc'^!(K' ⊠ D K')` of the coefficient map of `c'` is the specialization
 `c'^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C` of the kernel section of `u` (blueprint
 `lemma-section-specialized-correspondence`). Then `Tr_{c'}(u') = sp_F(Tr_c(u))`.

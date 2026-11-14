@@ -29,18 +29,20 @@ shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_iff_bijective_comp_of_isSepClosed` (`lem-sf-detection`): a
+- `AlgebraicGeometry.Etale.isIso_iff_bijective_comp_of_isSepClosed` (`theorem-poincare-duality`): a
   morphism `u : P ⟶ Q` of the point category is an isomorphism if and only if
   `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`
-  (`lem-sf-point`): evaluation at the point carries the dual `RHom_s(C, Λ_s)` of an object of
-  `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
+  (`theorem-global-verdier-duality`): evaluation at the point carries the dual `RHom_s(C, Λ_s)` of
+  an object of `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`
   : the same for any coefficient category `A` and scheme `X` for which the constant sheaf functor
   `A ⥤ Sheaf X_ét A` is an equivalence of categories.
 - `AlgebraicGeometry.Etale.isEquivalence_rightDerivedGlobalSections_of_isSepClosed`
-  (`lem-sf-point`): evaluation at the point `RΓ(s, -)` is an equivalence of categories.
-- `AlgebraicGeometry.Etale.homSingleShiftEquivOfIsSepClosed` (`lem-sf-point`): morphisms
+  (`theorem-global-verdier-duality`): evaluation at the point `RΓ(s, -)` is an equivalence of
+  categories.
+- `AlgebraicGeometry.Etale.homSingleShiftEquivOfIsSepClosed` (`theorem-global-verdier-duality`):
+morphisms
   `Λ_s[-r] ⟶ C` are the global sections of the `r`-th cohomology sheaf of `C`.
 -/
 
@@ -101,7 +103,7 @@ theorem exists_ne_zero_of_not_isZero_homology_of_isSepClosed
   exact (cancel_epi (((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).hom.app
     _)).1 (h0.trans comp_zero.symm)
 
-/-- Blueprint `lem-sf-detection`: Detection of isomorphisms at the point.
+/-- Blueprint `theorem-poincare-duality`: Detection of isomorphisms at the point.
 
 Let `k` be a separably closed field and `s = Spec k`. A morphism `u : P ⟶ Q` of the point
 category `D(s_ét, Λ)` is an isomorphism if and only if `Hom(Λ_s[r], u)` is bijective for every
@@ -328,7 +330,8 @@ lemma torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
 
 end Flat
 
-/-- Blueprint `lem-sf-point` (cohomology at the point): `H^r(-) = Hom_s(Λ[-r], -)`.
+/-- Blueprint `theorem-global-verdier-duality` (cohomology at the point):
+`H^r(-) = Hom_s(Λ[-r], -)`.
 
 Let `k` be a separably closed field and `s = Spec k`. For an object `C` of the point category
 and `r : ℤ`, morphisms `Λ_s[-r] ⟶ C` correspond to elements of the fibre at the geometric point
@@ -409,7 +412,8 @@ end
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lem-sf-point`: The point, evaluated (evaluation at the point is an equivalence).
+/-- Blueprint `theorem-global-verdier-duality`: The point, evaluated (evaluation at the point is an
+equivalence).
 
 Let `k` be a separably closed field and `s = Spec k`. Evaluation at the geometric point, the
 derived global sections `RΓ(s, -) : D(s_ét, Λ) ⥤ D(Λ)`, is an equivalence of categories; in
@@ -419,7 +423,7 @@ instance isEquivalence_rightDerivedGlobalSections_of_isSepClosed :
     (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).IsEquivalence :=
   isEquivalence_rightDerivedGlobalSections_of_isEquivalence _ _
 
-/-- Blueprint `lem-sf-point`: The point, evaluated (the duality part).
+/-- Blueprint `theorem-global-verdier-duality`: The point, evaluated (the duality part).
 
 Let `k` be a separably closed field, `s = Spec k` and `Λ` a coefficient ring. For every
 object `C` of the point category `D^b_c(s, Λ)`, the dual `RHom_s(C, ω_s)`, where

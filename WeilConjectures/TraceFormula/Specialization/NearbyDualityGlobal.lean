@@ -14,8 +14,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
 For a trait model `M` over the base with proper `X`, `X'` and proper total space, the global
 sections `RΓ(X', δ_{M,K})` of the duality map are compared with the duality map of the trait by
 the abstract identity `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper` (blueprint
-`det-tf-nearby-duality-proper` (1), (3)), applied to `G = Ra_*`, `G' = Ra'_*` and the proper
-exchange `χ_a`. Its concrete inputs, proved in
+`lemma-nearby-duality-proper-direct-image` (1), (3)), applied to `G = Ra_*`, `G' = Ra'_*` and the
+proper exchange `χ_a`. Its concrete inputs, proved in
 `TraceFormula.Specialization.NearbyDualityLaxMonoidal` and
 `TraceFormula.Specialization.NearbyDualityExchange`, are:
 
@@ -223,10 +223,10 @@ theorem exists_monoidal_traitSpecialization :
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
-/-- **The duality map of the trait itself** (blueprint `det-tf-nearby-duality-proper` (3), "with
-`θ_S` the identity of `A` the normalized pairing on `S` is ordinary evaluation"): for the trait `S`
-as a model of the base point `Spec k`, with the lax tensor map of its nearby cycles and the inverse
-of the specialization unit as dualizing map, the duality map
+/-- **The duality map of the trait itself** (blueprint `lemma-nearby-duality-proper-direct-image`
+(3), "with `θ_S` the identity of `A` the normalized pairing on `S` is ordinary evaluation"): for the
+trait `S` as a model of the base point `Spec k`, with the lax tensor map of its nearby cycles and
+the inverse of the specialization unit as dualizing map, the duality map
 `δ_{S,N} : Ψ_S RHom(N, ℚ̄_ℓ) ⟶ RHom(Ψ_S N, ℚ̄_ℓ)` is an isomorphism for every bounded
 constructible `N` on `Spec k`: `Ψ_S` is monoidal (`exists_monoidal_traitSpecialization`), `N` is
 dualizable (`ProEtale.CondensedRing.nonempty_hasLeftDual_point`), monoidal functors commute with
@@ -259,10 +259,10 @@ theorem isIso_nearbyDualityMap_traitModel
   infer_instance
 
 /-- **Global sections of the duality map of a proper model, reduced to the trait** (blueprint
-`det-tf-nearby-duality-proper` (1) and (3)): if `X`, `X'` and the total space of the trait model
-`M` over the base are proper, then `RΓ(X', δ_{M,K})` is an isomorphism as soon as the proper
-exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the structure morphism is invertible (it is used at `K`
-and `D_X K`), and the duality map of the trait `S` itself (lax tensor map of its nearby cycles,
+`lemma-nearby-duality-proper-direct-image` (1) and (3)): if `X`, `X'` and the total space of the
+trait model `M` over the base are proper, then `RΓ(X', δ_{M,K})` is an isomorphism as soon as the
+proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the structure morphism is invertible (it is used at
+`K` and `D_X K`), and the duality map of the trait `S` itself (lax tensor map of its nearby cycles,
 dualizing map the inverse of the specialization unit `σ_s`) is invertible at `Ra_* K`. This is
 `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper'`, with the compatibility of `χ_a`
 with the lax tensor maps (`NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_tensor`),

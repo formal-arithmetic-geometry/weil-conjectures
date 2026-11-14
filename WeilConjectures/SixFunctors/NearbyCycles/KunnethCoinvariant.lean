@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 # Invariants commute with the Künneth map: the coinvariant form
 
 The generic-slicing step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`, identification (2) and projection formula (3)) compares the
-pullback of the Künneth map `Π` to a slice with the Künneth map `Π'` of the pullback models, in
-the square of `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`
+`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3))
+compares the pullback of the Künneth map `Π` to a slice with the Künneth map `Π'` of the pullback
+models, in the square of `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`
 ```
 Lρ'^* Π ≫ a = δ ≫ (u_M ⊗ u_N) ≫ Π'.
 ```
@@ -106,9 +106,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form (blueprint
-`det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
-`sk-prop-tf-nearby-external-kunneth`). In the square of the Künneth maps and pullbacks
-(`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`) for morphisms of models
+`prose-E-10`, in the form used in the generic-slicing step of
+`proposition-external-kunneth-formula-nearby-cycles`). In the square of the Künneth maps and
+pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`) for morphisms of models
 `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P`, let families of automorphisms `σM i`, `σN i`,
 `σP i` of the pullback models act on nearby cycles, with the Künneth map `Π'` of the pullback
 models equivariant and the action on the second factor trivial. Suppose:

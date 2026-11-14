@@ -121,11 +121,9 @@ private theorem modelMap_isIso
   infer_instance
 
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the tensor representatives and their canonical counits needs this budget.
 -- The `HasMapBifunctor` instances of the K-flat tensor statement exceed the default
 -- instance-search budget against the current slopmaster2.
-set_option synthInstance.maxHeartbeats 100000 in
 /-- With one K-flat tensor factor, the total-complex counit and the derived
  tensor comparison agree up to the canonical representative isomorphisms.
 

@@ -164,8 +164,8 @@ lemma lowerStarIterateFrobeniusIso_hom_app_hom_app (G : Sheaf X.smallEtaleTopolo
       G.obj.map ((overPullbackIterateFrobeniusIso hp hX n).hom.app V.unop).op :=
   rfl
 
-/-- Étale analogue of blueprint `lem-trf-absolute-frobenius-site` (stated there for the small
-pro-étale site): the absolute Frobenius acts as the identity on
+/-- Étale analogue of blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (stated there for
+the small pro-étale site): the absolute Frobenius acts as the identity on
 the étale topos. For a scheme `X` of characteristic `p`, the pullback `(F_X)^*` along the
 absolute `p ^ n`-power Frobenius is isomorphic to the pullback `(𝟙 X)^*` along the identity. It
 is the conjugate of `AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso` under the

@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Topology.Stratification
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Constructible sheaves on the small étale site
@@ -55,9 +56,9 @@ involving finiteness require `A` to be moreover concrete, finite generation refe
 elements of the underlying type `CategoryTheory.ToType`. This covers sheaves of abelian groups
 (`A = Ab.{u + 1}`) and of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`), for all the coefficient
 stages of the `ℓ`-adic formalism: the finite rings `Λₙ = 𝒪_E/ϖⁿ`, the valuation rings `𝒪_E` and
-the fields `E` and `ℚ̄_ℓ` (`def-sf-setting`). Over a finite ring a finitely generated module is
-finite; over a field it is finite-dimensional, so constructible sheaves over a field are not
-forced to vanish.
+the fields `E` and `ℚ̄_ℓ` (`definition-constructible-sheaves--6`). Over a finite ring a finitely
+generated module is finite; over a field it is finite-dimensional, so constructible sheaves over a
+field are not forced to vanish.
 
 To restrict `F` to an étale `U ⟶ X` we use the localized site: `F.over U` is the sheaf
 induced by `F` on the localization of the small étale site at `U`, which is equivalent to
@@ -221,7 +222,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- Blueprint `pur9-def-finite-locally-constant`: Finite locally constant sheaves.
+/-- Blueprint `definition-lisse-sheaves--1`: Finite locally constant sheaves.
 
 A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *finite locally constant* if it is locally constant and finite, that is, with finitely
@@ -335,7 +336,7 @@ affine open of `X` meets finitely many `𝔸ⁿ` and `F` is constructible on it 
 loc. cit. For sheaves of modules over a noetherian ring, the pullbacks to the strata being
 locally constant of finite type, it is the constructibility of sheaves of modules of the Stacks
 project. In the `ℓ`-adic formalism it is applied with `A = ModuleCat Λ` for the coefficient
-stages `Λ` of `def-sf-setting`.
+stages `Λ` of `definition-constructible-sheaves--6`.
 
 Over a scheme with Noetherian underlying space the constructibility of the strata is automatic,
 see `IsConstructibleSheaf.of_noetherianSpace`. -/

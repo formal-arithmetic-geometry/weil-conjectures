@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Comp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Global
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Smooth
@@ -91,7 +92,7 @@ is an isomorphism. Both internal homs are identified with tensoring with the dua
 (`CategoryTheory.ExactPairing.map`), and under these identifications the comparison is
 `F (Y ⊗ B) ≅ F Y ⊗ F B`. -/
 lemma isIso_ihomComparison_app_of_exactPairing (F : C ⥤ C') [F.Monoidal] (Y X : C)
-    [ExactPairing Y X] (B : C) : IsIso ((ihomComparison F X).natTrans.app B) := by
+    [ExactPairing Y X] (B : C) : IsIso ((ihomComparison F X).app B) := by
   let := ExactPairing.map F Y X
   let s := (tensorLeftAdjunction Y X).rightAdjointUniq (ihom.adjunction X)
   let s' := (tensorLeftAdjunction (F.obj Y) (F.obj X)).rightAdjointUniq
@@ -102,14 +103,14 @@ lemma isIso_ihomComparison_app_of_exactPairing (F : C ⥤ C') [F.Monoidal] (Y X 
       (tensorLeftAdjunction (F.obj Y) (F.obj X)).counit.app (F.obj B) :=
     (tensorLeftAdjunction (F.obj Y) (F.obj X)).rightAdjointUniq_hom_app_counit
       (ihom.adjunction (F.obj X)) (F.obj B)
-  have h : F.map (s.hom.app B) ≫ (ihomComparison F X).natTrans.app B =
+  have h : F.map (s.hom.app B) ≫ (ihomComparison F X).app B =
       Functor.OplaxMonoidal.δ F Y B ≫ s'.hom.app (F.obj B) := by
     apply uncurry_injective
     rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, μ_natural_right_assoc,
       ← F.map_comp, e1]
     erw [μ_comp_map_tensorLeftAdjunction_counit_app F Y X B]
     rw [uncurry_natural_left, uncurry_eq, e2]
-  have : IsIso (F.map (s.hom.app B) ≫ (ihomComparison F X).natTrans.app B) := by
+  have : IsIso (F.map (s.hom.app B) ≫ (ihomComparison F X).app B) := by
     rw [h]
     infer_instance
   exact IsIso.of_isIso_comp_left (F.map (s.hom.app B)) _
@@ -118,7 +119,7 @@ lemma isIso_ihomComparison_app_of_exactPairing (F : C ⥤ C') [F.Monoidal] (Y X 
 comparison of internal homs of `F`. -/
 lemma nearbyDualityMap_id_eq_ihomComparison (F : C ⥤ C') [F.LaxMonoidal] (W X : C) :
     nearbyDualityMap (fun A B ↦ Functor.LaxMonoidal.μ F A B) (𝟙 (F.obj W)) X =
-      (ihomComparison F X).natTrans.app W := by
+      (ihomComparison F X).app W := by
   rw [nearbyDualityMap_eq_ihomComparison]
   simp
 
@@ -289,8 +290,7 @@ section PullbackIhom
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ ℓ)] [Fact (ringChar k₂).Prime]
   [Fact (ringChar k₂ ≠ ℓ)]
-set_option maxHeartbeats 1000000 in
--- unifying the lax monoidal structures of `Dᵇc` and of the ambient derived category is slow
+
 /-- The comparison of internal homs of the pullback on bounded constructible complexes is that of
 the ambient derived pullback. -/
 lemma ι_map_ihomComparison_upperStarOfMap_app {P : Over (Spec (.of k₁))}
@@ -298,31 +298,10 @@ lemma ι_map_ihomComparison_upperStarOfMap_app {P : Over (Spec (.of k₁))}
     {P' : Over (Spec (.of k₂))} [LocallyOfFiniteType P'.hom] [QuasiCompact P'.hom]
     [IsSeparated P'.hom] (g : P'.left ⟶ P.left) (A B : Dᵇc(P.left)⟦𝐐⟧) :
     (boundedConstructible _).ι.map ((Functor.LaxMonoidal.ihomComparison
-        (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).natTrans.app B) =
-      (Functor.LaxMonoidal.ihomComparison L((g)^*⟦𝐐⟧) A.obj).natTrans.app B.obj := by
-  have h₁ := Functor.LaxMonoidal.ihomComparison_comp_app
-    (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) (boundedConstructible _).ι A B
-  rw [ObjectProperty.ihomComparison_ι_app] at h₁
-  have h₂ := ObjectProperty.ihomComparison_ι_comp_app (boundedConstructible _) L((g)^*⟦𝐐⟧) A B
-  have hμ : ∀ X, Functor.LaxMonoidal.μ
-      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g ⋙ (boundedConstructible _).ι) A X =
-      Functor.LaxMonoidal.μ ((boundedConstructible _).ι ⋙ L((g)^*⟦𝐐⟧)) A X := fun X ↦ by
-    rw [Functor.LaxMonoidal.comp_μ, Functor.LaxMonoidal.comp_μ]
-    rw [ObjectProperty.ι_μ, ObjectProperty.ι_μ, CategoryTheory.Functor.map_id, Category.comp_id]
-    exact Category.id_comp _
-  have hev : ∀ {X Y : Dᵇc(P.left)⟦𝐐⟧} (e : X ⟶ Y),
-      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g ⋙
-        (boundedConstructible _).ι).map e =
-      ((boundedConstructible _).ι ⋙ L((g)^*⟦𝐐⟧)).map e := fun _ ↦ rfl
-  have key : (Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g ⋙ (boundedConstructible _).ι)
-        A).natTrans.app B =
-      (Functor.LaxMonoidal.ihomComparison
-        ((boundedConstructible _).ι ⋙ L((g)^*⟦𝐐⟧)) A).natTrans.app B := by
-    rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry,
-      Functor.LaxMonoidal.ihomComparison_app_eq_curry, hμ, hev]
-  rw [← h₂, ← key, h₁]
-  exact (Category.comp_id _).symm
+        (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).app B) =
+      (Functor.LaxMonoidal.ihomComparison L((g)^*⟦𝐐⟧) A.obj).app B.obj := by
+  exact ObjectProperty.ihomComparison_monoidalLift_app_hom L((g)^*⟦𝐐⟧)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ g K.obj K.property) A B
 
 /-- **Weakly étale pullback commutes with internal homs on bounded constructible complexes**: for
 a weakly étale `g : P' ⟶ P`, the duality map `g^* RHom(A, N) ⟶ RHom(g^* A, g^* N)` of `g^*` with
@@ -338,7 +317,7 @@ theorem isIso_nearbyDualityMap_upperStarOfMap_id_of_weaklyEtale {P : Over (Spec 
   rw [Verdier.nearbyDualityMap_id_eq_ihomComparison]
   have := isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale 𝐐 g A.obj
   have : IsIso ((boundedConstructible _).ι.map ((Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).natTrans.app N)) := by
+      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).app N)) := by
     rw [ι_map_ihomComparison_upperStarOfMap_app]
     infer_instance
   exact isIso_of_reflects_iso _ (boundedConstructible _).ι

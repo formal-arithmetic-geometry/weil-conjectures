@@ -13,7 +13,7 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Homology of a short complex with locally split boundaries
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), kernel/image splitting argument.
+Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
 (blueprint: lem-pc-locally-split-short-complex-homology)
 -/
 
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The cokernel of a split inclusion between finite locally free modules of fixed ranks
 is finite locally free of the difference of the ranks.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), kernel/image splitting argument.
+Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
 (blueprint: lem-pc-locally-split-short-complex-homology)
 
 Proof: The retraction gives a split short exact sequence, hence a decomposition of the
@@ -126,7 +126,7 @@ private theorem homology_iso_cokernel_imageToKernel
 /-- If the image inclusion is locally split, the homology has the expected finite
 locally free rank.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), kernel/image splitting argument.
+Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
 (blueprint: lem-pc-locally-split-short-complex-homology)
 -/
 private theorem isFiniteLocallyFreeOfRank_cokernel_imageToKernel_of_locally_split
@@ -162,7 +162,7 @@ private theorem isFiniteLocallyFreeOfRank_cokernel_imageToKernel_of_locally_spli
 incoming image is locally a direct summand of the middle term, homology is finite
 locally free of the difference of their ranks.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), kernel/image splitting argument.
+Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
 (blueprint: lem-pc-locally-split-short-complex-homology)
 
 Proof: Around each point choose a neighbourhood where the image inclusion has a

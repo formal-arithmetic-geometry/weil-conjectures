@@ -22,8 +22,8 @@ is the pushforward of the trace class of the restricted coefficient map `u_Z : K
 change of `R(𝟙)_!` along `x` is the identity up to the identity isomorphisms
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_id`), and so
 `u_Z` is the stalk map `v_x` (`Correspondence.contractingStalkMap_ofGraph`). Hence the local term
-at `x` is `tr(v_x)` (blueprint `lem-trf-local-term-locality`, item 1; Varshavsky, Thm. 2.1.3,
-Fujiwara's theorem).
+at `x` is `tr(v_x)` (blueprint `corollary-contracting-local-terms-point`, item 1; Varshavsky, Thm.
+2.1.3, Fujiwara's theorem).
 
 ## Main statements
 
@@ -64,8 +64,8 @@ variable {A B : Type*} [Category A] [Category B] {L : A ⥤ B} {R : B ⥤ A} {G 
 `G ⋙ L ⟶ L ⋙ H`. -/
 lemma mateEquiv_symm_app_of_isoId (adj : L ⊣ R) (eG : G ≅ 𝟭 A) (eH : H ≅ 𝟭 B)
     (β : TwoSquare R H G R)
-    (hβ : ∀ N, β.natTrans.app N ≫ R.map (eH.hom.app N) = eG.hom.app (R.obj N)) (M : A) :
-    ((mateEquiv adj adj).symm β).natTrans.app M =
+    (hβ : ∀ N, β.app N ≫ R.map (eH.hom.app N) = eG.hom.app (R.obj N)) (M : A) :
+    ((mateEquiv adj adj).symm β).app M =
       L.map (eG.hom.app M) ≫ eH.inv.app (L.obj M) := by
   apply (adj.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
@@ -137,11 +137,11 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 /-! ### The local term at a contracting point -/
 
-/-- **The local term at a contracting point** (blueprint `sk-thm-tf-contracting-local-term` for
-`Z = {c₁(y)}`, Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y` and `B` is an
-open and closed subscheme of the fixed locus, proper over `s`, with underlying set `{y}`, the
-local term along `B` is the integral of the trace class of the restricted coefficient map
-`u_Z` on the stalk `L(y ≫ c₁)^* K` over the point. -/
+/-- **The local term at a contracting point** (blueprint
+`theorem-contracting-correspondences-local-terms` for `Z = {c₁(y)}`, Varshavsky, Thm. 2.1.3): if `c`
+is contracting at the fixed point `y` and `B` is an open and closed subscheme of the fixed locus,
+proper over `s`, with underlying set `{y}`, the local term along `B` is the integral of the trace
+class of the restricted coefficient map `u_Z` on the stalk `L(y ≫ c₁)^* K` over the point. -/
 theorem localTerm_traceClass_eq_integral_of_isContractingAt {c : Correspondence ℓ K}
     (F : c.FixedLocus) (y : RationalPoint c.C) (hc : c.IsContractingAt y)
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
@@ -168,7 +168,7 @@ lemma integral_traceClass_ofEnd_of_eq_eqToHom
     {M N : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (e : M = N) {f : M ⟶ M} {g : N ⟶ N} (hfg : f = eqToHom e ≫ g ≫ eqToHom e.symm)
     [HasRightDual N] :
-    ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = trace g := by
+    ((ofEnd M f).traceClass (fixedLocusOfEnd f)).integral = End.of (trace g) := by
   rw [traceClass_ofEnd_of_eq_eqToHom e hfg]
   exact integral_traceClass_ofEnd g
 
@@ -277,8 +277,8 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   simp only [Category.comp_id]
 
 /-- **Contracting graph correspondences and local terms** (blueprint
-`sk-thm-tf-contracting-local-term` for the graph correspondence `(𝟙, h)` and `Z = {x}`;
-Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
+`theorem-contracting-correspondences-local-terms` for the graph correspondence `(𝟙, h)` and
+`Z = {x}`; Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
 `v : Lh^* K ⟶ K` is contracting at the fixed rational point `x`, and `B` is an open and closed
 subscheme of the fixed locus, proper over `s`, with underlying set `{x}` and point `e : s ⟶ B`,
 the restriction of the trace class to `B` is the pushforward along `e` of the trace class of
@@ -340,12 +340,12 @@ theorem restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt (h : X ⟶
   rw [← hZ, BorelMooreSection.restrict_pushforward_self]
   exact congrArg _ (traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)).symm
 
-/-- **Local terms of contracting graph correspondences** (blueprint `lem-trf-local-term-locality`,
-item 1, for correspondences with exceptional leg `c₁ = 𝟙`; Varshavsky, Thm. 2.1.3): if the graph
-correspondence `(𝟙, h)` with coefficient map `v : Lh^* K ⟶ K` is contracting at the fixed
-rational point `x`, and `B` is an open and closed subscheme of the fixed locus, proper over `s`,
-with underlying set `{x}`, then the local term along `B` is the trace of the stalk map
-`v_x : K_x ⟶ K_x`. No invertibility of `v` is required.
+/-- **Local terms of contracting graph correspondences** (blueprint
+`corollary-contracting-local-terms-point`, item 1, for correspondences with exceptional leg
+`c₁ = 𝟙`; Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
+`v : Lh^* K ⟶ K` is contracting at the fixed rational point `x`, and `B` is an open and closed
+subscheme of the fixed locus, proper over `s`, with underlying set `{x}`, then the local term along
+`B` is the trace of the stalk map `v_x : K_x ⟶ K_x`. No invertibility of `v` is required.
 
 By Varshavsky's theorem for graphs
 (`restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt`) the local term is the integral
@@ -361,7 +361,7 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
       {(F.liftPoint x hc.comp_c₁_eq_comp_c₂).left.base (default : Spec (.of k))})
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
     ((ofGraph K h v).traceClass F).localTerm j =
-      trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) := by
+      End.of (trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc))) := by
   rw [localTerm_traceClass_eq_integral_of_restrict_eq F hc.comp_c₁_eq_comp_c₂ j hB _
     fun e _ he ↦ restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt h v F hc j e he hB]
   exact integral_traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)

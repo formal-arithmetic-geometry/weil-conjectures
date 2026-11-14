@@ -101,9 +101,9 @@ public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDerivedPull
 
 /-! # Shifted line inverses on the etale and pro-etale sites
 
-Source: main-20261015, sk-prop-cohsm, thm-pur-cohomological-smoothness, first paragraph;
-Stacks Project, Tags 0B8Q, 0B8N, 06YQ, 07A4 and 0FNH.
-(blueprint: lem-pur-shifted-line-site-inverse)
+Source: main-20261015, proposition-exceptional-inverse-image-smooth-morphism,
+proposition-exceptional-inverse-image-smooth-morphism, first paragraph; Stacks Project, Tags 0B8Q,
+0B8N, 06YQ, 07A4 and 0FNH. (blueprint: lem-pur-shifted-line-site-inverse)
 -/
 
 @[expose] public noncomputable section
@@ -201,7 +201,7 @@ Source: Stacks 0GMX (blueprint: lem-pur-shifted-line-site-inverse). -/
 def dualComparison (L : Sheaf T.smallEtaleTopology B) :
     (inverseImage B T).obj ((ihom L).obj (𝟙_ _)) ⟶
       (ihom ((inverseImage B T).obj L)).obj (𝟙_ _) :=
-  (Functor.LaxMonoidal.ihomComparison (inverseImage B T) L).natTrans.app (𝟙_ _) ≫
+  (Functor.LaxMonoidal.ihomComparison (inverseImage B T) L).app (𝟙_ _) ≫
     (ihom ((inverseImage B T).obj L)).map (Functor.OplaxMonoidal.η (inverseImage B T))
 
 /-- Pullback of a sheaf pairing, with the canonical tensor and coefficient-unit maps.

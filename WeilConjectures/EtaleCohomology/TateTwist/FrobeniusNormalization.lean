@@ -22,7 +22,7 @@ the inverse `γ` of `z ↦ z ^ q`. For a commutative ring `Λ` of characteristic
 `τ_r : Lh^* Λ_Y(r) ≅ Λ_Y(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the genuine Tate twist
 (`AlgebraicGeometry.Etale.hasTateTwist`) is the multiplication by `q^{-r}`
 (`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`): this is the twist normalization of
-`def-weil-frobenius-coefficient-twists`.
+`prose-10-21`.
 
 By `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar` the Frobenius operator on
 `H⁰(Y, Λ(r))` is the multiplication by `c_1 ^ r` for a unit `c_1`, and it remains to show
@@ -268,13 +268,13 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [NeZero (ringChar Λ)] (k : Type u) [
 /-- The geometric Frobenius of `k̄` over `k` acts on `H⁰(Spec k̄, Λ(1))` by `q⁻¹`: its Frobenius
 scalar `c_1` (`AlgebraicGeometry.Etale.tateFrobeniusScalar`) satisfies `c_1 q = 1`. -/
 theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
-    tateFrobeniusScalar Λ (specGeometricFrobenius k).hom 1 * (Nat.card k : Λ) = 1 := by
+    tateFrobeniusScalar Λ (specGeometricFrobenius k).asIso.hom 1 * (Nat.card k : Λ) = 1 := by
   let := Fintype.ofFinite k
   have hn : IsUnit ((ringChar Λ : ℕ) : AlgebraicClosure k) := by
     simpa using (isUnit_ringChar_of_hasInvertibleExponent (Λ := Λ)
       (Spec (.of (AlgebraicClosure k)))).map (Scheme.ΓSpecIso (.of (AlgebraicClosure k))).hom.hom
   have : NeZero ((ringChar Λ : ℕ) : AlgebraicClosure k) := ⟨hn.ne_zero⟩
-  obtain ⟨ζ₀, hζ₀⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (AlgebraicClosure k) (ringChar Λ)
+  obtain ⟨ζ₀, hζ₀⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot (AlgebraicClosure k) (ringChar Λ)
   obtain ⟨c, hγ, hcq⟩ := exists_geometricFrobeniusAlgEquivOfAlgebraic_eq_pow k hζ₀
   let u₀ := (hζ₀.isUnit (NeZero.ne _)).unit
   have hu₀ : u₀ ^ ringChar Λ = 1 := Units.ext (by
@@ -282,7 +282,7 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
   let ζ : Γ(Spec (.of (AlgebraicClosure k)), ⊤)ˣ :=
     Units.map (Scheme.ΓSpecIso (.of (AlgebraicClosure k))).inv.hom.toMonoidHom u₀
   have hζ : ζ ^ ringChar Λ = 1 := by rw [← map_pow, hu₀, map_one]
-  have hc : Units.map (specGeometricFrobenius k).hom.appTop.hom.toMonoidHom ζ = ζ ^ c := by
+  have hc : Units.map (specGeometricFrobenius k).asIso.hom.appTop.hom.toMonoidHom ζ = ζ ^ c := by
     have key := congrArg (fun φ ↦ φ.hom ζ₀) (Scheme.ΓSpecIso_inv_naturality
       (CommRingCat.ofHom (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k
         (AlgebraicClosure k)).toRingEquiv.toRingHom))
@@ -306,20 +306,20 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
 theorem isUnit_natCard_of_hasInvertibleExponent : IsUnit (Nat.card k : Λ) :=
   isUnit_iff_exists_inv'.2 ⟨_, tateFrobeniusScalar_specGeometricFrobenius_mul_natCard Λ k⟩
 
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
+/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
 
 The Tate datum `τ_r : Lg^* Λ(r) ≅ Λ(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the Tate
 twist, for `g` the geometric Frobenius of `Spec k̄` over the finite field `k` with `q` elements, is
-normalized as in `def-weil-frobenius-coefficient-twists`: geometric Frobenius acts on
+normalized as in `prose-10-21`: geometric Frobenius acts on
 `H⁰(Spec k̄, Λ(r))` by `q^{-r}` (hence by `q^r` on `Λ(-r)`). Here `Λ` is a commutative ring of
 characteristic `n ≠ 0` invertible on `Spec k̄`, so that `q` is a unit of `Λ`
 (`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). -/
 theorem frobeniusOperator_tateWeilDatum (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k))) r) :
-    frobeniusOperator (specGeometricFrobenius k).hom (tateWeilDatum Λ _ r).hom x =
+    frobeniusOperator (specGeometricFrobenius k).asIso.hom (tateWeilDatum Λ _ r).hom x =
       (((isUnit_natCard_of_hasInvertibleExponent Λ k).unit⁻¹ ^ r : Λˣ) : Λ) • x := by
-  have hu : tateFrobeniusUnit Λ (specGeometricFrobenius k).hom =
+  have hu : tateFrobeniusUnit Λ (specGeometricFrobenius k).asIso.hom =
       (isUnit_natCard_of_hasInvertibleExponent Λ k).unit⁻¹ := by
     refine Units.ext ?_
     rw [val_tateFrobeniusUnit, Units.inv_eq_of_mul_eq_one_left]

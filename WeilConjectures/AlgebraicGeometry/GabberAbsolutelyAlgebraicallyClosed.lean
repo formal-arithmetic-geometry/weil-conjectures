@@ -45,7 +45,8 @@ Proof (the five steps of the node):
 2. The stalks and function field of `Spec R` are the prime localizations and fraction
    field (`lem-weil-pbc-spec-domain-stalks-function-field`). Those localizations are
    normal domains (`lem-weil-pbc-localization-normal-domain`). Thus Stacks 09Z9,
-   `sbc-lem-etale-over-normal` (2), makes every local ring strictly henselian.
+   `proposition-base-change-larger-algebraically-closed` (2), makes every local ring strictly
+   henselian.
 3. At a prime of `R/I` with preimage `p`, the local ring is `R_p / I R_p`.
    By `lem-weil-pbc-strictly-henselian-quotient` (05WS), it is strictly henselian too.
 4. For `h` in `R/I`, lift it to `f` in `R`. If `f = 0`, `D(h)` is empty and all

@@ -12,7 +12,7 @@ set_option autoImplicit false
 namespace CategoryTheory
 /-- Seven invertibility claims and the specified six-factor equality, with all objects
 and arrows explicit so that geometric specializations share their category instances.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: def-coef-normalized-comparison-word). -/
 def NormalizedComparisonWord
     {C D : Type*} [Category C] [Category D] {U V : C}
@@ -22,7 +22,7 @@ def NormalizedComparisonWord
   IsIso i ∧ IsIso a ∧ IsIso b ∧ IsIso c ∧ IsIso d ∧ IsIso e ∧ IsIso f ∧
     a ≫ b ≫ c ≫ d ≫ e ≫ f = v
 /-- Assemble a normalized word from its exact factors and equality.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: def-coef-normalized-comparison-word). -/
 theorem NormalizedComparisonWord.mk
     {C D : Type*} [Category C] [Category D] {U V : C}
@@ -35,7 +35,7 @@ theorem NormalizedComparisonWord.mk
   ⟨inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, h⟩
 /-- Assemble the word with mapped isomorphisms and a contravariant Hom factor.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: def-coef-normalized-comparison-word). -/
 theorem NormalizedComparisonWord.of_maps
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -51,7 +51,7 @@ theorem NormalizedComparisonWord.of_maps
       ((H.map q.op).app M) v :=
   NormalizedComparisonWord.mk _ _ _ _ _ _ _ _ h
 /-- Cancel a mapped inverse from the exact functorial pairing equation.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: lem-coef-locally-closed-pairing-cancellation). -/
 theorem cancelMappedPairing
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -64,7 +64,7 @@ theorem cancelMappedPairing
   rw [Functor.map_inv, IsIso.inv_comp_eq]
   simpa only [Functor.map_comp, Category.assoc] using h
 /-- The mapped comparison word, retaining its functors as parameters.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: def-coef-normalized-comparison-word). -/
 def MappedComparisonWord
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -77,7 +77,7 @@ def MappedComparisonWord
   NormalizedComparisonWord i (F.map (inv i)) b (G.map c) (G.map d) e
     ((H.map q.op).app M) v
 /-- The equality part of the mapped comparison word.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: def-coef-normalized-comparison-word). -/
 def MappedComparisonEquation
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -89,7 +89,7 @@ def MappedComparisonEquation
     (v : F.obj V ⟶ (H.obj (Opposite.op Y)).obj M) : Prop :=
   F.map (inv i) ≫ b ≫ G.map c ≫ G.map d ≫ e ≫ (H.map q.op).app M = v
 /-- Construct the mapped word using only isomorphisms of the unmapped factors.
-Source: thm-coef-finite-hom, paragraph 4
+Source: lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: def-coef-normalized-comparison-word). -/
 theorem MappedComparisonWord.mk
     {C D E : Type*} [Category C] [Category D] [Category E]

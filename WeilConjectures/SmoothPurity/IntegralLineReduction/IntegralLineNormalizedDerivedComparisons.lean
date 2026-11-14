@@ -54,7 +54,6 @@ attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExi
   HasDerivedCategory.standard coefficientTotalTensor CoefficientClosedStructure.tensor
   CoefficientTensorModels.iso completedIntegralCoefficientSheafUnrestricted constantSheaf
 
-set_option maxHeartbeats 800000 in
 -- Instantiate the prescribed two-variable tensor model with the actual scalar pair.
 private theorem scalarTensorData (n : ℕ) :
     Nonempty (CategoryTheory.ScalarHomTensor.PairTensorComparison.{u + 1, u, u, u + 2}
@@ -126,7 +125,6 @@ private theorem pairUnit_eq (n : ℕ) (M : scalarReductionSource.{u, u} l E X)
     (completedIntegralCommRingProjectionUnrestricted.{u, u} l E X n)
     (coefficientActualScalarDerivedPair.{u, u} l E X n) M U x
 
-set_option maxHeartbeats 800000 in
 -- Elaborate sheafification transports on the coefficient tensor sections.
 private theorem scalar_generator_smul (n : ℕ)
     (M : scalarReductionSource.{u, u} l E X) (U : X.ProEtᵒᵖ)
@@ -161,7 +159,6 @@ private theorem lineComplexIso_f (L : scalarReductionSource.{u, u} l E X)
   erw [Category.comp_id]
   exact Category.id_comp _
 
-set_option maxHeartbeats 800000 in
 -- Normalize both tensor generators through the specified chain isomorphisms.
 private theorem chain_formula (L : scalarReductionSource.{u, u} l E X)
     (b : PowerComparisons l E X L) (m : ℤ) (n : ℕ) (P : Cx.{u, u} l E X none) :
@@ -282,7 +279,6 @@ private theorem representative_pasting
   · change eq ≫ e ≫ 𝟙 _ = eq ≫ e
     simp only [Category.comp_id]
 
-set_option maxHeartbeats 1600000 in
 -- Normalize the specified scalar and tensor model transports in the representative square.
 attribute [local irreducible] SheafOfModules.monoidalCategory in
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
@@ -445,7 +441,6 @@ private theorem lineComplexIso_inv_f (L : scalarReductionSource.{u, u} l E X)
   rw [lineComplexIso_f]
   exact (b m n).inv_hom_id.symm
 
-set_option maxHeartbeats 1600000 in
 -- Elaborate the finite-ring transports in the tensor generator formulas.
 private theorem transition_formula (L : scalarReductionSource.{u, u} l E X)
     (b : PowerComparisons l E X L) (m : ℤ) (n : ℕ) (P : Cx.{u, u} l E X none) :
@@ -577,7 +572,6 @@ private theorem scalar_tensor_compatibility (n : ℕ) (P Q : Cx.{u, u} l E X non
     ((restrictComplex l E X n).map
       ((scalarTensorData l E X n).some.complexIso P Q).hom)).symm.trans h
 
-set_option maxHeartbeats 1600000 in
 -- Identify the strict tower and signed-line presentations before cancelling isomorphisms.
 attribute [local irreducible] SheafOfModules.monoidalCategory in
 private theorem transition_square (L : scalarReductionSource.{u, u} l E X)

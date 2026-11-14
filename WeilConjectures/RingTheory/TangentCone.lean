@@ -20,7 +20,7 @@ initial forms of `I` in the associated graded ring `gr_𝔪 R = ⊕ 𝔪^N / �
 only at the origin if and only if `in I + in J` contains every homogeneous element of large
 degree, that is, if `𝔪^N ⊆ (I ∩ 𝔪^N) + (J ∩ 𝔪^N) + 𝔪^(N+1)` for all large `N`
 (`IsLocalRing.TangentConesMeetAtOrigin`); this is the condition `C_t D ∩ C_t B = {0}` of
-blueprint `sk-lem-tf-blowup-restriction`.
+blueprint `lemma-vanishing-restrictions-after-blowing-up--1`.
 
 -/
 
@@ -54,7 +54,8 @@ variable (R : Type*) [CommRing R] [IsLocalRing R]
 `in I` and `in J` in the associated graded ring `gr_𝔪 R = ⊕ 𝔪^N / 𝔪^(N+1)` together contain every
 homogeneous element of large degree, i.e. `𝔪^N ⊆ (I ∩ 𝔪^N) + (J ∩ 𝔪^N) + 𝔪^(N+1)` for all large
 `N`. For curves `D`, `B` through the closed point of a surface `Spec R` with ideals `I`, `J`,
-this is the condition `C_t D ∩ C_t B = {0}` of blueprint `sk-lem-tf-blowup-restriction`. -/
+this is the condition `C_t D ∩ C_t B = {0}` of blueprint
+`lemma-vanishing-restrictions-after-blowing-up--1`. -/
 def TangentConesMeetAtOrigin (I J : Ideal R) : Prop :=
   ∃ n : ℕ, ∀ N ≥ n, maximalIdeal R ^ N ≤
     I ⊓ maximalIdeal R ^ N ⊔ J ⊓ maximalIdeal R ^ N ⊔ maximalIdeal R ^ (N + 1)
@@ -117,7 +118,7 @@ theorem monomial_mem_maximalIdeal_pow {ξ η : R} (hξ : ξ ∈ maximalIdeal R)
   rw [pow_add]
   exact Ideal.mul_mem_mul (Ideal.pow_mem_pow hξ i) (Ideal.pow_mem_pow hη j)
 
-/-- The case of an axis in blueprint `det-tf-restriction-zero-covers` (iii): if `𝔪 = (ξ, η)`,
+/-- The case of an axis in blueprint `lemma-tangent-cones-on-cover` (iii): if `𝔪 = (ξ, η)`,
 `I` contains an element with leading form `c ξ^a` (`c` a unit) and `J` contains an element with
 leading form `u η` (`u` a unit), then the tangent cones of `R ⧸ I` and `R ⧸ J` meet only at the
 origin ("the zero loci of `ξ^d` and `η^d` meet only at the origin"). -/
@@ -144,7 +145,7 @@ theorem tangentConesMeetAtOrigin_of_axis {I J : Ideal R} {ξ η f g c u : R} {a 
     rw [pow_add η, pow_one, mul_left_comm, mul_comm]
     exact mul_mem_inf_sup_inf_sup_pow (monomial_mem_maximalIdeal_pow hξ hη i k) hη1 (by omega)
 
-/-- The case of a cuspidal pair in blueprint `det-tf-restriction-zero-covers` (iii): if
+/-- The case of a cuspidal pair in blueprint `lemma-tangent-cones-on-cover` (iii): if
 `𝔪 = (ξ, η)`, `I` contains an element with leading form `c ξ^a` (`c` a unit) and `J` contains an
 element with leading form `α ξ^e - β η^e` (`β` a unit), then the tangent cones of `R ⧸ I` and
 `R ⧸ J` meet only at the origin ("the zero loci of `ξ^d` and `αξ^d − βη^d` meet only at the

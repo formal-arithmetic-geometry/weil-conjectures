@@ -130,7 +130,7 @@ open Limits
 categories, the left Kan extension `b.op.lan` along `bᵒᵖ` (the presheaf pullback
 `b_p F (Y) = colim_{(X, Y ⟶ b X)} F X`) is left adjoint to precomposition with `bᵒᵖ`; if moreover
 `C` has finite limits and `b` preserves them, then `b.op.lan` preserves finite limits.
-(blueprint: `lem-weil-pbc-presheaf-pullback-sets-left-exact`) -/
+(blueprint: `situation-conventions`) -/
 theorem nonempty_lan_adjunction_and_preservesFiniteLimits {C D : Type u₁} [SmallCategory C]
     [SmallCategory D] (b : C ⥤ D) :
     Nonempty (b.op.lan ⊣ (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ (Type u₁)).obj b.op) ∧

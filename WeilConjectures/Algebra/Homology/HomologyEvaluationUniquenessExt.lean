@@ -34,8 +34,20 @@ private lemma homObj_epi_ext (X : Scheme.{u}) (U : X.Opens)
   have he' := congrArg SheafOfModules.Hom.val ((cancel_epi (F.map q)).mp he)
   exact he'
 
+private lemma homObj_comp_naturality_apply (X : Scheme.{u})
+    {A B M N : X.Modules} (q : A ⟶ B)
+    (a : B ⟶ SheafOfModules.homObj (R := X.sheaf) M N)
+    (U : X.Opensᵒᵖ) (φ : A.val.obj U) (W : (Over U.unop)ᵒᵖ)
+    (z : M.val.obj (op W.unop.left)) :
+    (a.val.app (op W.unop.left)
+      (q.val.app (op W.unop.left) (A.val.map W.unop.hom.op φ))).app
+        (op (Over.mk (𝟙 W.unop.left))) z =
+      (a.val.app U (q.val.app U φ)).app W z := by
+  rw [PresheafOfModules.naturality_apply q.val W.unop.hom.op]
+  rw [PresheafOfModules.naturality_apply a.val W.unop.hom.op]
+  exact PresheafOfModules.restrictOver_hom_app_congr _ (Category.id_comp W.unop.hom) _
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Restricting sections unfolds the localized internal-Hom module structures.
 /-- Cycle formulas determine a morphism once every local cycle has a target-cycle lift.
 Source: Stacks Project, Tag 08DH, separatedness of internal Hom.
@@ -81,16 +93,9 @@ theorem homologyEvaluation_unique_of_cycle_of_local_lifts
   let φV := (P.cycles n).val.map W.unop.hom.op φ
   obtain ⟨b, hb⟩ := hlift V φV z
   have hv := (he V φV z b hb).trans (he' V φV z b hb).symm
-  have hn (a : P.homology n ⟶
-      SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0)) :
-      (a.val.app (op V) ((P.homologyπ n).val.app (op V) φV)).app
-          (op (Over.mk (𝟙 V))) ((T.homologyπ (-n)).val.app (op V) z) =
-        (a.val.app U ((P.homologyπ n).val.app U φ)).app W
-          ((T.homologyπ (-n)).val.app (op V) z) := by
-    rw [PresheafOfModules.naturality_apply (P.homologyπ n).val W.unop.hom.op]
-    rw [PresheafOfModules.naturality_apply a.val W.unop.hom.op]
-    exact PresheafOfModules.restrictOver_hom_app_congr _
-      (Category.id_comp W.unop.hom) _
-  exact (hn e).symm.trans (hv.trans (hn e'))
+  exact (homObj_comp_naturality_apply X (P.homologyπ n) e U φ W
+    ((T.homologyπ (-n)).val.app (op V) z)).symm.trans
+      (hv.trans (homObj_comp_naturality_apply X (P.homologyπ n) e' U φ W
+        ((T.homologyπ (-n)).val.app (op V) z)))
 
 end CategoryTheory

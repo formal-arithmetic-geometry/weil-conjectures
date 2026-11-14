@@ -117,7 +117,6 @@ private theorem reduction_unit_roos (W : Scheme.{u})
     CompletionUnit.OrdinaryModel.augmentation, CompletionUnit.OrdinaryModel.transpose,
     Adjunction.homEquiv_id, Functor.map_comp, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- The section calculation compares the two finite scalar-transport presentations.
 private theorem augmentation_section (W : Scheme.{u})
     (M : CompletionUnit.OrdinaryModel l E W)
@@ -168,7 +167,6 @@ private theorem augmentation_section (W : Scheme.{u})
     (unrestrictedIntegralTensorSection l E W n (P.X i) U 1 x))
       ((M.evaluation n).app (P.X i)).inv_hom_id).symm
 
-set_option maxHeartbeats 800000 in
 -- Elaborating sectionwise pullback and tensor generators requires the full tower data.
 private theorem augmentation_reindex
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -235,7 +233,6 @@ private theorem augmentation_snd (W : Scheme.{u})
     simp [roosι, roosLift]
   erw [h, comp_zero]
 
-set_option maxHeartbeats 3000000 in
 -- Compare the complete product cone, including its shifted coordinate.
 private theorem augmentation_roos_reindex
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

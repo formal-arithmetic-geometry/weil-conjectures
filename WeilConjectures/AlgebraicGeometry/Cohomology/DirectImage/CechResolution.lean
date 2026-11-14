@@ -479,7 +479,7 @@ sheafified Čech complex `0 ⟶ ℱ ⟶ Č⁰(U, ℱ) ⟶ Č¹(U, ℱ) ⟶ ⋯` 
 Exactness is checked on the sections over the opens `W` contained in some member `U j` of the
 cover; there, inserting the index `j` contracts the Čech complex of sections.
 
-(blueprint: `lem-pc-cech-resolution`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem quasiIso_cechResolutionι (hU : ⨆ i, U i = ⊤) : QuasiIso (cechResolutionι U ℱ) := by
   have hmono : Mono (cechResolutionAugmentation U ℱ) := by
     refine (exact_of_exact_sectionsAb
@@ -560,7 +560,7 @@ lemma piObj_eq_iInf {k : ℕ} (y : Fin (k + 1) → ι) : ∏ᶜ (fun l ↦ U (y 
 /-- **The terms of the Čech complex are `f_*`-acyclic**, for a finite cover by affine opens of a
 scheme separated over an affine scheme and a quasi-coherent module.
 
-(blueprint: `lem-pc-cech-resolution`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem rightAcyclic_cechResolution_X [IsAffine S] [IsSeparated f] [Finite ι]
     [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i)) (ℱ : X.Modules)
     [ℱ.IsQuasicoherent] (k : ℕ) : (pushforward f).rightAcyclic ((cechResolution U ℱ).X k) := by
@@ -578,7 +578,7 @@ Then `R^q f_* ℱ` is the `q`-th cohomology sheaf of the complex `f_* Č(U, ℱ)
 (`AlgebraicGeometry.Scheme.Modules.quasiIso_cechResolutionι`) by `f_*`-acyclic modules
 (`AlgebraicGeometry.Scheme.Modules.rightAcyclic_cechResolution_X`).
 
-(blueprint: `lem-pc-cech-resolution`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 noncomputable def higherDirectImageIsoCechResolution [IsAffine S] [IsSeparated f] [Finite ι]
     [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i)) (hU' : ⨆ i, U i = ⊤)
     (ℱ : X.Modules) [ℱ.IsQuasicoherent] (q : ℕ) :

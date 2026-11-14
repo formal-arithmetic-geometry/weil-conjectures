@@ -43,9 +43,9 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 
 ## Blueprint
 
-`Representation.detCharacter` implements part of `sk-d-weights`. `Representation.exteriorPower`
-is the exterior power `⋀^s V` of `det-d-linear`, and `⋀^r V` for `r = dim V` its determinant
-representation.
+`Representation.detCharacter` implements part of `definition-determinant-weight--1`.
+`Representation.exteriorPower` is the exterior power `⋀^s V` of `det-d-linear`, and `⋀^r V` for
+`r = dim V` its determinant representation.
 -/
 
 @[expose] public section
@@ -59,7 +59,7 @@ variable {V : Type*} [AddCommGroup V] [Module k V]
 
 /-- The *determinant character* of a representation `ρ` is the homomorphism `δ(w) = det ρ(w)`,
 valued in the units of `k` because `ρ(w)` is invertible.
-(blueprint: `sk-d-weights`) -/
+(blueprint: `definition-determinant-weight--1`) -/
 noncomputable def detCharacter (ρ : Representation k W V) : W →* kˣ :=
   (Units.map (LinearMap.det : Module.End k V →* k)).comp (MonoidHom.toHomUnits ρ)
 
@@ -244,7 +244,7 @@ theorem hasEigenvalue_inv {g : G} {α : k} (h : Module.End.HasEigenvalue (ρ g) 
       rw [← hgv, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
 
 /-- The eigenvalues of `g` on the dual representation are those of `g⁻¹` on `V`
-(`p-linear-spectra`). -/
+(`lemma-filtrations-spectra`). -/
 theorem hasEigenvalue_dual_iff [FiniteDimensional k V] {g : G} {α : k} :
     Module.End.HasEigenvalue (ρ.dual g) α ↔ Module.End.HasEigenvalue (ρ g⁻¹) α := by
   have h : ρ.dual g = (ρ g⁻¹).dualMap := by

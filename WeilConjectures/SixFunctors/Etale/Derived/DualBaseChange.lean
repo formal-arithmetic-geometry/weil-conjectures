@@ -29,9 +29,9 @@ records it as an isomorphism and, for proper `g`, reads it through `Rg_! ≅ Rg_
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso`
-  (`thm-sf-dual-base-change`): `Rf^! Rg_* ≅ Rg'_* Rf'^!`.
+  (`definition-trace-morphism--1`): `Rf^! Rg_* ≅ Rg'_* Rf'^!`.
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerShriekBaseChangeIso`
-  (`thm-sf-dual-base-change`): `Rf^! Rg_! ≅ Rg'_! Rf'^!` for proper `g`.
+  (`definition-trace-morphism--1`): `Rf^! Rg_! ≅ Rg'_! Rf'^!` for proper `g`.
 -/
 
 @[expose] public section
@@ -52,7 +52,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- Blueprint `thm-sf-dual-base-change`: Dual base change.
+/-- Blueprint `definition-trace-morphism--1`: Dual base change.
 
 For a Cartesian square
 ```
@@ -73,7 +73,7 @@ noncomputable def rightDerivedUpperShriekLowerStarBaseChangeIso (sq : IsPullback
   have := isIso_rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq
   (asIso (rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq)).symm
 
-/-- Blueprint `thm-sf-dual-base-change`: Dual base change, the proper case.
+/-- Blueprint `definition-trace-morphism--1`: Dual base change, the proper case.
 
 For a Cartesian square as in
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` with `g` proper (so that

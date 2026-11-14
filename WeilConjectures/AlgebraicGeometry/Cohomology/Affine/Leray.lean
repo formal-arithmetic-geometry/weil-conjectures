@@ -145,7 +145,7 @@ the `U i` being affine because `X` is separated.
 Restricting scalars along `f.appTop`, the isomorphism is `Γ(S, 𝒪_S)`-linear, and `k`-linear
 when `S = Spec k`.
 
-(blueprint: `det-lem-picard-cech-computes`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated {S : Scheme.{u}} (f : X ⟶ S)
     [IsSeparated f] [IsAffine S] {ι : Type u} (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
     (hU' : iSup U = ⊤) (ℱ : X.Modules)

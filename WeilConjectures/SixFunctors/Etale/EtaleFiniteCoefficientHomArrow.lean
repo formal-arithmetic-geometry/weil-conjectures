@@ -15,9 +15,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 /-! # Finite coefficient change for internal Hom
 
 Source: blueprint sec-six-functors/sk-prop-sf-biduality-general,
-node thm-coef-finite-hom (blueprint: def-sf-etale-finite-coefficient-hom-arrow).
-Indices n and m below denote exponents n + 1 and m + 1; thus every positive
-exponent, including the identity quotient, occurs. All comparison maps are
+node lemma-change-coefficients-internal-hom--1 (blueprint:
+def-sf-etale-finite-coefficient-hom-arrow). Indices n and m below denote exponents n + 1 and m + 1;
+thus every positive exponent, including the identity quotient, occurs. All comparison maps are
 closed transposes of reduced evaluation, never choices of arbitrary arrows.
 -/
 

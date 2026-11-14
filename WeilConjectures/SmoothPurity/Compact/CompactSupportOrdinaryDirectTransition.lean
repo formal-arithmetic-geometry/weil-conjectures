@@ -54,7 +54,6 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
 
-set_option maxHeartbeats 800000 in
 -- The identities compare concrete scalar actions on the same section carriers.
 /-- Ordinary native direct evaluation respects the actual horizontal coefficient maps.
 Source: Stacks 03DI and 0D6E.

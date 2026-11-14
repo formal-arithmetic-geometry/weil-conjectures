@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -103,7 +104,7 @@ Proof:
 2. The base change of the closed immersion is closed
    (`lem-weil-pbc-closed-immersion-base-change`), so the class dies there. Identify the
    coefficients using `lemma-constructible-pullback-constant`; cohomology respects this
-   identification by `lem-weil-pbc-cohomology-pullback-functorial`.
+   identification by `proposition-cohomology-p-1-over-henselian--1`.
 3. Write the integral cover as a nonempty directed limit of finite finitely presented covers
    by `lem-weil-pbc-integral-morphism-limit-of-finite` (09YZ). They are affine by
    `lem-weil-pbc-finite-morphism-permanence`; use `lem-weil-pbc-qcqs-over-affine` and
@@ -116,7 +117,7 @@ Proof:
    Pullback functoriality makes the finite-stage classes compatible with the limit class.
 6. The limit class is zero, hence a finite-stage class is zero by
    `def-weil-directed-colimit-abelian-groups`. Transport it back to the fibre product using
-   `lem-weil-pbc-cohomology-pullback-functorial`.
+   `proposition-cohomology-p-1-over-henselian--1`.
 7. That stage is finite and finitely presented; it is surjective because the integral
    surjective cover factors through it. It is the required cover. -/
 theorem exists_isFinite_surjective_constant_cohomology_eq_zero

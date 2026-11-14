@@ -266,8 +266,8 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 `AlgebraicGeometry.ProEtale.adicUpperStarExchangeIso`. -/
 lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq :
     adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h =
-      adicUpperStarExchangeIso l (Scheme.Hom.geometricFiberMap φ h) f.geometricGaloisFrobenius
-        g.geometricGaloisFrobenius
+      adicUpperStarExchangeIso l (Scheme.Hom.geometricFiberMap φ h) f.geometricGaloisFrobenius.asIso
+        g.geometricGaloisFrobenius.asIso
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm :=
   rfl
 
@@ -285,13 +285,13 @@ variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
 /-- The Weil structure of the internal hom, as the structure isomorphism `ihomStr`. -/
 lemma ihom_str_hom (A B : ProEtaleWeilSheaf k₀ l X) :
     (ihom k₀ l X A B).str.hom =
-      (ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius A.str B.str).hom :=
+      (ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso A.str B.str).hom :=
   rfl
 
 /-- The Weil structure of the internal hom is `ihomStr`. -/
 lemma ihom_str (A B : ProEtaleWeilSheaf k₀ l X) :
     (ihom k₀ l X A B).str =
-      ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius A.str B.str :=
+      ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso A.str B.str :=
   IsoAlgebra.mk_str _ _
 
 /-- The Weil structure of a pullback, as the structure isomorphism `upperStarStr`. -/

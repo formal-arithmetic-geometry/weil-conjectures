@@ -59,16 +59,16 @@ property of the fibre product and factorization through open subschemes.
 the finitely supported summands to obtain the presheaf morphism. (9) Commutation of
 sheaf morphisms with both component restrictions gives naturality in the sheaf.
 
-Dependency route: step 1 uses `lem-weil-pbc-etale-base-change-finite-limits`,
-`lem-weil-pbc-etale-composition-cancellation`, and `def-pc-fibre-product`.
+Dependency route: step 1 uses `situation-conventions`,
+`definition-torsion-sheaves--3`, and `def-pc-fibre-product`.
 Step 2 uses `lem-weil-pbc-finite-morphism-permanence`, `def-weil-finite-integral-morphism`,
 `lem-weil-pbc-affine-morphism-permanence`, and `lem-weil-pbc-etale-section-clopen-immersion`.
-Step 3 uses `def-weil-pbc-etale-site`, `def-weil-pbc-abelian-etale-sheaves`, and
+Step 3 uses `def-weil-pbc-etale-site`, `situation-conventions`, and
 `lem-weil-pbc-open-immersion-monomorphism`. Step 4 uses `def-weil-pbc-constant-sheaf`,
-`def-weil-pbc-sheafification`, and `def-weil-sheaf-of-modules-category`.
+`def-weil-pbc-sheafification`, and `situation-conventions`.
 Step 5 is elementary linear algebra. Step 6 additionally uses
 `lem-weil-pbc-morphism-factors-through-open-subscheme`. Steps 7 and 9 use uniqueness;
-step 8 uses `def-weil-pbc-etale-sum-extension` and `def-weil-pbc-direct-image`.
+step 8 uses `lemma-acyclicity-pulled-back-injectives` and `def-weil-pbc-direct-image`.
 -/
 theorem etale_graph_section_extension_map
     {X U : Scheme.{u}} (π : U ⟶ X) [IsFinite π] [Etale π]

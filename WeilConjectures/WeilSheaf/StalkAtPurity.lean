@@ -24,8 +24,8 @@ point `x` of `X₀`.
   exactly when the stalk at `x` is pure of weight `w` relative to `q_x = q ^ deg x`
   (`AlgebraicGeometry.WeilSheaf.isPureOfWeight_stalk_iff_stalkAt`): `F_x^{(m)}` has the
   characteristic polynomial of `F_x ^ (m / deg x)`. This is "the same power calculation at `x`"
-  of blueprint `thm-zl-real-mixed-by-curves`, which allows to test punctual purity at any
-  geometric point fixed by a power of the Frobenius
+  of blueprint `theorem-real-constructible-sheaves-are-mixed--1`, which allows to test punctual
+  purity at any geometric point fixed by a power of the Frobenius
   (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.stalkAt`,
   `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_of_forall_stalkAt`).
 -/
@@ -76,13 +76,14 @@ image of `ι₀` is fixed by the `m`-th power of the geometric Frobenius of `k̄
 element `a` of `κ(x)` satisfies `a ^ (qᵐ) = a`. -/
 theorem mem_finitePoints_and_degreeOver_dvd_of_geometricGaloisFrobenius_pow
     (s : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber) {m : ℕ} (hm : 0 < m)
-    (hs : s ≫ (f.geometricGaloisFrobenius ^ m).hom = (specGeometricFrobenius k ^ m).hom ≫ s) :
+    (hs : s ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k ^ m).asIso.hom ≫ s) :
     (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) ∈ X.finitePoints ∧
       f.degreeOver ((s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _)) ∣ m := by
   let := Fintype.ofFinite k
   set x := (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _)
   obtain ⟨ι₀, hι₀⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField _ x rfl
-  have hinv : (specGeometricFrobenius k ^ m).hom ≫ s ≫ f.geometricFiberProj =
+  have hinv : (specGeometricFrobenius k ^ m).asIso.hom ≫ s ≫ f.geometricFiberProj =
       s ≫ f.geometricFiberProj := by
     rw [← Category.assoc, ← hs, Category.assoc,
       geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
@@ -118,13 +119,14 @@ only if the stalk `F_x̄` with `F_x` is pure of weight `w` relative to `q_x = q 
 Indeed `deg x ∣ m`, and `F_x^{(m)}` has the characteristic polynomial of `F_x ^ (m / deg x)`
 (`AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`), while
 `qᵐ = q_x ^ (m / deg x)`: purity of `F_x` is purity of its `r`-th power relative to `q_xʳ`.
-This is "the same power calculation at `x`" of blueprint `thm-zl-real-mixed-by-curves`. -/
+This is "the same power calculation at `x`" of blueprint
+`theorem-real-constructible-sheaves-are-mixed--1`. -/
 theorem isPureOfWeight_stalk_iff_stalkAt (F : WeilSheaf k₀ l X) (ι : PadicAlgCl l →+* ℂ)
     (w : ℝ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m : ℕ} (hm : 0 < m)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
     (x : X.finitePoints)
     (hx : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
       (IsLocalRing.closedPoint _) = x.1) :
@@ -153,8 +155,8 @@ theorem IsPunctuallyPureOfWeight.stalkAt {F : WeilSheaf k₀ l X} {ι : PadicAlg
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m : ℕ} (hm : 0 < m)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     (F.stalkAt s m hs).IsPureOfWeight ι (Nat.card k₀ ^ m) w :=
   (isPureOfWeight_stalk_iff_stalkAt F ι w s hm hs ⟨_,
     (Scheme.Hom.mem_finitePoints_and_degreeOver_dvd_of_geometricGaloisFrobenius_pow _ s hm
@@ -168,8 +170,8 @@ theorem isPunctuallyPureOfWeight_of_forall_stalkAt {F : WeilSheaf k₀ l X}
     {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     (h : ∀ x : X.finitePoints, ∃ (s : Spec (.of (AlgebraicClosure k₀)) ⟶
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ) (_ : 0 < m)
-      (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-        (specGeometricFrobenius k₀ ^ m).hom ≫ s),
+      (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+        (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s),
       (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
         (IsLocalRing.closedPoint _) = x.1 ∧
       (F.stalkAt s m hs).IsPureOfWeight ι (Nat.card k₀ ^ m) w) :

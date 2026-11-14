@@ -21,7 +21,7 @@ open scoped CategoryTheory.Obj
 namespace WeilConjectures.CondensedWeil
 
 /-- The semilinear module return from the specified compositors and return equation.
-Source: latest blueprint, second proof paragraph of lem-zl-affine-curve-hc2-purity;
+Source: latest blueprint, second proof paragraph of theorem-pure-lisse-sheaves-over-relative;
 the local Frobenius operator uses precisely these maps before scalar evaluation
 (blueprint: def-zl-condensed-module-return). -/
 @[irreducible] def moduleReturnMap
@@ -45,6 +45,6 @@ geometric evaluation of the module return
 @[irreducible] def evaluateModuleReturn
     {C E : Type*} [Category C] [Category E] (F : C ⥤ E) (T : C ⥤ C)
     (ι : F ⟶ T ⋙ F) (M : C) (r : T.obj M ⟶ M) : End (F.obj M) :=
-  ι.app M ≫ F.map r
+  .of (ι.app M ≫ F.map r)
 
 end WeilConjectures.CondensedWeil

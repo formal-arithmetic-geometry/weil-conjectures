@@ -34,7 +34,6 @@ private theorem remove_endpoint_isos
   simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id,
     Category.comp_id] using he
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the finite and closure derived endpoint comparisons needs this budget.
 /-- The geometric closure-coefficient exchange produces a normalized pair of
 completed Chern lifts.  The lifts are existential here; their uniqueness is a

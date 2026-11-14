@@ -44,12 +44,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- Blueprint `det-prop-scalar-six-exceptional` (with the compact-support comparison `γ^!` of
-`det-prop-scalar-six-compact-support`), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`), for a proper morphism `f`. **Reduction modulo `ℓⁿ`
-commutes with `Rf_!` and with `Rf^!`**: there is an isomorphism `γ^! : (Rf_! K)_{𝒪_E ⧸ ℓⁿ} ≅
-Rf_! (K_{𝒪_E ⧸ ℓⁿ})` whose transpose `β : (Rf^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓⁿ})` under
-`Rf_! ⊣ Rf^!` is an isomorphism.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image` (with the compact-support
+comparison `γ^!` of `lemma-change-coefficients-compact-support`), for the coefficient map
+`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site (`definition-constructible-sheaves`), for a proper morphism
+`f`. **Reduction modulo `ℓⁿ` commutes with `Rf_!` and with `Rf^!`**: there is an isomorphism
+`γ^! : (Rf_! K)_{𝒪_E ⧸ ℓⁿ} ≅ Rf_! (K_{𝒪_E ⧸ ℓⁿ})` whose transpose
+`β : (Rf^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓⁿ})` under `Rf_! ⊣ Rf^!` is an isomorphism.
 
 This is weaker than the blueprint node, and enough for its use in the trace formula: it covers
 only proper `f`, and it only asserts that some isomorphism `γ` with invertible transpose exists,

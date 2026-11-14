@@ -91,7 +91,7 @@ lemma Fiber.exists_residueField_ringEquiv (q : Ideal S) [q.IsPrime] (hq : q.unde
 4. `Q ↦ j⁻¹(Q)` preserves and reflects inclusions;
 5. `ψ_q` induces an isomorphism `κ(ker ψ_q) ≃ κ(q)` through which it factors.
 
-(blueprint: `lem-weil-pbc-fibre-ring-primes-residue-fields`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem Fiber.primes_residueField :
     (∀ Q : Ideal (p.Fiber S), Q.IsPrime →
       (Q.comap includeRight.toRingHom).IsPrime ∧ (Q.comap includeRight.toRingHom).under R = p) ∧

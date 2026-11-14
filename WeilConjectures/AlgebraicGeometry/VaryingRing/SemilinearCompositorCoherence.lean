@@ -894,14 +894,14 @@ identity composition with the graph-normalized modulePId.
 2. Apply lem-trf-adjoint-composition-coherence to the ordinary inverse-image adjoints,
 using the inverses of these section comparisons on the right adjoints. The composite
 adjunction is def-weil-pbc-composite-adjunction. Unit-compatible uniqueness from
-lem-weil-pbc-conjugate-iso-unit-equation identifies the resulting comparisons with
+situation-conventions identifies the resulting comparisons with
 moduleGComp, hence proves their associativity.
 3. For identities, insert the explicit composite-adjunction unit. Naturality of the
 ordinary unit and modulePId makes each whiskered identity comparison satisfy the
 same unit equation as moduleGComp. Unit-compatible uniqueness gives both unit laws.
 No two distinct adjunction structures are identified.
 4. Localize the exact ordinary inverse images termwise, using
-lem-weil-pbc-exact-functor-derived-factorization. After postcomposition by the
+situation-conventions. After postcomposition by the
 factorization isomorphism, both pastings reduce to the corresponding ordinary pastings;
 naturality cancels the intermediate factorization maps. They agree by steps 2 and 3.
 Part (3) of lem-weil-pbc-localization-universal-property promotes equality on every

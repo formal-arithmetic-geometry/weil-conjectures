@@ -97,7 +97,7 @@ private theorem fieldFiber_smul (ℓ : ℕ) [Fact ℓ.Prime]
     (M : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))))
     (r : PadicAlgCl ℓ) (m : (ev K).obj M.X) :
-    (((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).hom m =
+    (((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).asHom.hom m =
       (Mod.act ((ev K).mapMod _ |>.obj M).X)
         ((inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K ℓ).hom.hom)
           (ULift.up r) ⊗ₜ[ℤ] m) := by
@@ -137,7 +137,7 @@ private theorem pullbackFiber_smul_aux (ℓ : ℕ) [Fact ℓ.Prime]
     (r : PadicAlgCl ℓ) (m : (ev K').obj (H.obj M.X)) :
     let N := (CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
       ((Mod.comap (inv α)).obj ((H.mapMod A).obj M))
-    (N.smul r).hom m =
+    (N.smul r).asHom.hom m =
       (Functor.LaxMonoidal.μ (H ⋙ ev K') A M.X ≫
         (H ⋙ ev K').map (Mod.act M.X)).hom
           (((ev K').map (inv α))
@@ -164,7 +164,7 @@ private theorem pullbackFiber_smul (ℓ : ℕ) [Fact ℓ.Prime]
     let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f
     let N := (CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
       ((Mod.comap (inv α)).obj ((H.mapMod A).obj M))
-    (N.smul r).hom m =
+    (N.smul r).asHom.hom m =
       (Functor.LaxMonoidal.μ (H ⋙ ev K') A M.X ≫
         (H ⋙ ev K').map (Mod.act M.X)).hom
           (((ev K').map (inv α))
@@ -195,8 +195,8 @@ private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
     let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f
     let N := (CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
       ((Mod.comap (inv α)).obj ((H.mapMod A).obj M))
-    (geometricFieldEvaluationComparison f Ab).app M.X ≫ N.smul r =
-      ((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r ≫
+    (geometricFieldEvaluationComparison f Ab).app M.X ≫ (N.smul r).asHom =
+      (((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).asHom ≫
         (geometricFieldEvaluationComparison f Ab).app M.X := by
   dsimp only
   apply AddCommGrpCat.ext
@@ -205,10 +205,10 @@ private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
   change (((CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
     ((Mod.comap (inv (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ)
       (Spec.map (CommRingCat.ofHom i))))).obj
-        (((upperStar Ab (Spec.map (CommRingCat.ofHom i))).mapMod _).obj M))).smul r).hom
+        (((upperStar Ab (Spec.map (CommRingCat.ofHom i))).mapMod _).obj M))).smul r).asHom.hom
       (((geometricFieldEvaluationComparison _ Ab).app M.X).hom m) =
     ((geometricFieldEvaluationComparison _ Ab).app M.X).hom
-      ((((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).hom m)
+      ((((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).asHom.hom m)
   rw [pullbackFiber_smul ℓ K K' i M r _, fieldFiber_smul ℓ K M r m]
   let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))
   let H := upperStar Ab (Spec.map (CommRingCat.ofHom i))
@@ -265,8 +265,8 @@ theorem condensedQbar_field_evaluation_linear (ℓ : ℕ) [Fact ℓ.Prime]
     let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f
     let N := ((H.mapMod A ⋙ Mod.comap (inv α)) ⋙
       CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj M
-    (geometricFieldEvaluationComparison f Ab).app M.X ≫ N.smul r =
-      ((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r ≫
+    (geometricFieldEvaluationComparison f Ab).app M.X ≫ (N.smul r).asHom =
+      (((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).asHom ≫
         (geometricFieldEvaluationComparison f Ab).app M.X := by
   exact main_of_coeff ℓ K K' i (condensedQbar_field_coefficient_square ℓ K K' i) M r
 
