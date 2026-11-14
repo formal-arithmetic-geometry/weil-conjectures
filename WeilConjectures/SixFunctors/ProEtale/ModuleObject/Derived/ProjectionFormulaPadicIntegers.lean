@@ -149,8 +149,10 @@ theorem isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible (p : X 
   have hKM := (PadicIntegersRingObj.isMonoidal_boundedConstructible ℓ E X).toTensorLE.prop_tensor
     _ _ hK (boundedConstructible_leftDerivedUpperStar_obj _ ℓ p ⟨M, hM⟩)
   have hL := (PadicIntegersRingObj.isMonoidal_boundedConstructible ℓ E Y).toTensorLE.prop_tensor
-    _ _ (PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨K, hK⟩) hM
-  have hR := PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨_, hKM⟩
+    _ _ (PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj_of_isProper ℓ E p
+      ⟨K, hK⟩) hM
+  have hR := PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj_of_isProper ℓ E p
+    ⟨_, hKM⟩
   -- the projection map over `𝔽_E` at the reductions
   have hC := isIso_rightDerivedLowerStarProjectionMap_app_app_of_boundedConstructible_of_field
     (ResidueFieldCoeff.{u} ℓ E) (isField_residueFieldCoeff ℓ E) p.left

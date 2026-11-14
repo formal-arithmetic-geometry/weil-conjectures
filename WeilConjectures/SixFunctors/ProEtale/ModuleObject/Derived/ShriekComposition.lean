@@ -418,7 +418,8 @@ noncomputable def boundedConstructibleLowerShriekComp :
     Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
     Functor.isoWhiskerLeft _
-      (ContinuousMapRingObj.boundedConstructibleLowerStarComp ℓ E d.overG c'.overG).symm ≪≫
+      (ContinuousMapRingObj.boundedConstructibleLowerStarOfIsProperComp ℓ E d.overG
+        c'.overG).symm ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (asIso

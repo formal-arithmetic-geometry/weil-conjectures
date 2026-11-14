@@ -82,6 +82,26 @@ noncomputable instance shiftLift_boundedConstructibleOpenImmersionLowerShriek (j
   lift := D((j.left)_!open⟦Λ⟧)
   iso := boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j
 
+/-- The derived pushforward along a proper morphism on `Dᵇc` lifts `R((p)_*⟦ℚ̲̄_ℓ⟧)`. -/
+noncomputable instance shiftLift_boundedConstructibleLowerStarOfIsProper
+    (f : X ⟶ Y) [IsProper f.left] :
+    Functor.ShiftLift (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        X.left)).ι
+      (boundedConstructibleLowerStarOfIsProper ℓ f) (boundedConstructible (condensedRingObj
+          (Profinite.padicAlgClRingObj ℓ) Y.left)).ι
+    where
+  lift := R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)
+  iso := boundedConstructibleLowerStarOfIsProperCompatibility ℓ f
+
+/-- The extension by zero on `Dᵇc` lifts the levelwise extension by zero `D((j)_!open⟦Λ⟧)`. -/
+noncomputable instance shiftLift_boundedConstructibleOpenImmersionLowerShriek (j : X ⟶ Y)
+    [IsOpenImmersion j.left] :
+    Functor.ShiftLift (boundedConstructible (condensedRingObj Λ X.left)).ι
+      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j)
+      (boundedConstructible (condensedRingObj Λ Y.left)).ι where
+  lift := D((j.left)_!open⟦Λ⟧)
+  iso := boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j
+
 /-- The lower shriek `Rf_!^c = i_! ⋙ Rp_*` on `Dᵇc` lifts `Rf_!(c)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable instance shiftLift_boundedConstructibleLowerShriekOfCompactification
     {f : X ⟶ Y} (c : Compactification f.left) :
@@ -91,7 +111,7 @@ noncomputable instance shiftLift_boundedConstructibleLowerShriekOfCompactificati
       (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).ι :=
   inferInstanceAs (Functor.ShiftLift _ (boundedConstructibleOpenImmersionLowerShriek
       (Profinite.padicAlgClRingObj ℓ) ℓ c.overI ⋙
-    boundedConstructibleLowerStar ℓ c.overG) _)
+    boundedConstructibleLowerStarOfIsProper ℓ c.overG) _)
 
 /-- The lower shriek `Rf_!` on `Dᵇc` lifts `R(f)_!⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable instance shiftLift_boundedConstructibleLowerShriek

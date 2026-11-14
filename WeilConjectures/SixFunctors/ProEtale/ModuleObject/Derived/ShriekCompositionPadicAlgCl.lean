@@ -211,7 +211,8 @@ noncomputable irreducible_def boundedConstructibleLowerShriekComp_padicAlgCl :
       (Compactification.overCompObjIso_hom_overG c c' d)).symm ≪≫
     Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp ℓ d.overG c'.overG).symm ≪≫
+    Functor.isoWhiskerLeft _
+      (boundedConstructibleLowerStarOfIsProperComp ℓ d.overG c'.overG).symm ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
@@ -245,7 +246,8 @@ noncomputable def boundedConstructibleLowerShriekCompOfCompactifications_padicAl
       (Compactification.overCompObjIso_hom_overG c c' d)).symm ≪≫
     Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp ℓ d.overG c'.overG).symm ≪≫
+    Functor.isoWhiskerLeft _
+      (boundedConstructibleLowerStarOfIsProperComp ℓ d.overG c'.overG).symm ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
