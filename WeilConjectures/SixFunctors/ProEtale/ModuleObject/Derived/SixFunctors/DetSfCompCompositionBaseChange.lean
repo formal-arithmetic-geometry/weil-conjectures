@@ -121,7 +121,7 @@ private theorem ambientExchange_of_preservation
     (localizingClosure_exists Λ B
       (constantModelBoundedConstructible Λ B ⊓ fun M ↦
         _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
-    _ _ (condensedAmbientExchange Λ sq) (composite_sums Λ hp hp' hg hg') hgen K hK
+    _ _ (condensedAmbientExchange Λ sq) (composite_sums_small Λ hp hp' hg hg') hgen K hK
 
 private theorem properExchange_admissible
     (ℓ : ℕ) [Fact ℓ.Prime]
