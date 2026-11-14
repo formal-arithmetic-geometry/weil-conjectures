@@ -16,7 +16,9 @@ import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 /-!
 # Extension by zero from disjoint opens as a finite biproduct
 
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
+## References
+
+* Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 namespace AlgebraicGeometry.Etale
 
 /-- Extension from a finite disjoint union of opens is the biproduct of the extensions
-from its members. No curve, torsion or constructibility assumption is needed.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. -/
+from its members. No curve, torsion or constructibility assumption is needed. -/
 theorem disjointOpenExtension_biproduct_iso (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (n : ℕ) (U : Fin n → X.Opens)

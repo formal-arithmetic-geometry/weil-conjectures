@@ -56,7 +56,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Simultaneous derived reduction of integral sheaves
 
-Source: blueprint diagonal tower proof step 3; Stacks Tags 06XN and 06YY.
+## References
+
+* Stacks Project, Tags 06XN, 06YY
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -374,8 +376,7 @@ private theorem derivedReductionForExactExtension
 
 /-- The ordinary quotient tower has an everywhere-defined pointwise, triangulated
 left derived functor, computed by every complex whose positive prime-power maps
-are degreewise monomorphisms. Source: blueprint diagonal tower proof step 3, Stacks 06XN,
-06YY. -/
+are degreewise monomorphisms. -/
 theorem exists_diagonalDerivedReduction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 /-!
 # Derived direct image restricted to an open
 
-Source: blueprint, chap-Smooth-purity, sk-def-sf-operations,
-proposition-construction-independence-rf-shriek--7; Stacks Project, Tags 03S2, 03F3, 05TI and 05TH.
+## References
+
+* Stacks Project, Tags 03S2, 03F3, 05TI, 05TH
 -/
 
 @[expose] public section

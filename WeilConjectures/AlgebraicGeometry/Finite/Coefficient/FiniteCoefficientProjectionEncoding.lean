@@ -16,6 +16,10 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 /-! # Finite coefficient encoding of the canonical projection arrow
 
 The assertion compares invertibility of the actual arrows without assuming either side.
+
+## References
+
+* Stacks Project, Tags 03D3, 08BJ, 08FZ, 0F0G
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +34,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Invertibility of the canonical projection morphism, with the endpoint calculations
-kept inside a named proposition. Source: proper-base-change-finite, clause (3). -/
+kept inside a named proposition. -/
 def finiteCoefficientProjectionIsIso
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -110,11 +114,7 @@ attribute [local irreducible] CategoryTheory.Adjunction.rightAdjointProjectionMa
   CondensedRing.derivedUpperStarLowerStarAdjunction CondensedRing.leftDerivedUpperStarTensor
   ProEtale.derivedUpperStarLowerStarAdjunction ProEtale.leftDerivedUpperStarTensorComparison
 
-/-- Normalized coefficient encoding preserves and reflects the canonical projection property.
-
-Source: blueprint sk-thm-sfb-proper-base-change-finite.proof.md, step 8;
-lem-sf-finite-discrete-encoding-tensor-tor, tensor comparison; Stacks Tags 03D3,
-08BJ, 08FZ and 0F0G, together with the adjunction mate defining projection. -/
+/-- Normalized coefficient encoding preserves and reflects the canonical projection property. -/
 theorem finiteCoefficientProjectionEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)

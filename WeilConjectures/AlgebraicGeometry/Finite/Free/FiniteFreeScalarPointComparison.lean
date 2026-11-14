@@ -71,11 +71,7 @@ private lemma unitComparison
   exact Functor.extendUnitHom_mapModCompExtendScalarsIso_hom_app_hom F G τ R M
 
 -- Compute the point comparison on its explicit module-composition model.
-/-- The canonical point module comparison has the specified underlying sheaf map.
-
-Proof. Identify the inverse underlying scalar-extension map with its extension unit.
-The generic module-composition unit formula then computes the point comparison.
-The proof covers all coefficient modules, including zero modules. -/
+/-- The canonical point module comparison has the specified underlying sheaf map. -/
 theorem finiteFreeScalar_pointComparison_underlying
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

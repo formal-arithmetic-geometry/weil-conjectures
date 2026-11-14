@@ -14,7 +14,11 @@ import all WeilConjectures.RingTheory.KoszulProjectiveResolution
 
 /-! # The degree-zero quotient cycle of the completed exterior Koszul complex
 
-Source: Stacks Project, Tags 091N and 099M.
+## References
+
+* Stacks Project, Tags 091N and 099M
+* Stacks Project, Tag 0623 (Koszul augmentation); Tags 03DA and 03EK (module
+  sheafification and scalar extension)
 -/
 
 @[expose] public noncomputable section
@@ -36,9 +40,7 @@ private theorem moduleIso_inv_apply {R : Type*} [Ring R] {M N : ModuleCat R}
     (e : M ≅ N) (x : N) : e.hom (e.inv x) = x :=
   ConcreteCategory.congr_hom e.inv_hom_id x
 
-/-- The degree-zero residue projection of the completed Koszul complex kills boundaries.
-Source: Stacks Project, Tag 0623, Koszul augmentation; Tags 03DA and 03EK,
-module sheafification and scalar extension. -/
+/-- The degree-zero residue projection of the completed Koszul complex kills boundaries. -/
 theorem completedKoszulQuotientProjection_exists
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (n : ℕ) :
     ∃ p : (completedAdicKoszul T d r a n).X 0 ⟶ completedAdicFiniteModule T d n,

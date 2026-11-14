@@ -10,7 +10,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.Analysis.SpecificLimits.Normed
 
-/-! # Localization of continuous integral coefficients -/
+/-! # Localization of continuous integral coefficients
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(2) and the paragraph before Definition 6.8.6.
+-/
 
 @[expose] public section
 
@@ -23,9 +28,7 @@ open CategoryTheory AlgebraicGeometry
 open AlgebraicGeometry Scheme
 namespace AlgebraicGeometry.Scheme
 
-/-- Sheafified localization of integral functions is the rational function sheaf.
-
-Source: Bhatt--Scholze, Lemma 6.8.2(2), and paragraph before Definition 6.8.6. -/
+/-- Sheafified localization of integral functions is the rational function sheaf. -/
 theorem continuousCoefficientLocalization (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) :

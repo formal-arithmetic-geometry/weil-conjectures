@@ -16,7 +16,10 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # Scalar extension of small algebraic constant complexes
 
-Source: Stacks Project, Tags 093J, 06YY and 0D6D.
+## References
+
+* Stacks Project, Modules on Sites, Tag 093J
+* Stacks Project, Cohomology on Sites, Tags 06YY and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -91,10 +94,7 @@ private def constantFactorization (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (Functor.mapDerivedCategoryCompIso (coefficientLift A) (koszulConstantFunctor X A)).symm
 
 /-- Constant realization, including its coefficient-universe lift, commutes with
-algebraic derived scalar extension on a perfect complex.
-
-Source: Stacks Project, Modules on Sites, Tag 093J; Cohomology on Sites,
-Tags 06YY and 0D6D. -/
+algebraic derived scalar extension on a perfect complex. -/
 theorem finitePerfectAdicConstant_scalarExtension
     (X : Scheme.{t}) {A B : Type t} [CommRing A] [CommRing B] (q : A →+* B)
     (P : DerivedCategory (ModuleCat.{t} A)) (hP : DerivedCategory.IsPerfect P) :

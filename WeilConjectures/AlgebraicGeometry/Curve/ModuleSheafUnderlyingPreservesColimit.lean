@@ -24,9 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /--
 The sheaf-level forgetful functor from constant-ring module sheaves to abelian
-sheaves preserves colimits of any fixed diagram.  This is the bridge needed to
-transport a module-sheaf colimit cocone to the underlying abelian sheaves.
-Source: Stacks Project, Tags 03CO and 03CY.
+sheaves preserves colimits of any fixed diagram. See Stacks Project, Tags 03CO and 03CY.
 -/
 theorem moduleSheaf_underlying_preserves_colimit
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]

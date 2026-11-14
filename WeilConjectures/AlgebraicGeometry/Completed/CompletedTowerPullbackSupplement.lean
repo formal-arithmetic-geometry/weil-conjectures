@@ -65,12 +65,19 @@ public import WeilConjectures.AlgebraicGeometry.CompletedTowerPullback
 /-!
 # Pullback of strict completed-coefficient towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1261;
-Stacks Project, Tag 099N.
-
 The structure map into the completed coefficient ring is built from its finite
 projections. It is a morphism, with no invertibility assumption. The functor here
 precedes derived inverse limit and acts on every strict derived tower.
+
+## Implementation details
+
+* `PullbackCounitNormalization` names the entire counit condition, which keeps the concrete
+  module-category presentations out of repeated elaborations of the choice predicate.
+
+## References
+
+* Stacks Project, Tag 099N, clauses (2) and (5)
+* Stacks Project, Tags 03EK, 05S7, 06YS, 09AK, 09AL
 -/
 
 @[expose] public noncomputable section
@@ -104,8 +111,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
-/-- Finite constant coefficient inverse image has its canonical isomorphism.
-Source: Stacks Tags 09AK and 09AL. -/
+/-- Finite constant coefficient inverse image has its canonical isomorphism. -/
 @[instance]
 theorem completedFiniteCoefficientMap_isIso (n : ℕ) :
     IsIso (completedFiniteCoefficientMap g d n) := by
@@ -118,8 +124,7 @@ def completedModulePullback :
   proEtaleModuleInverseImage g (pbcAdicCompletion Y d) ⋙
     reductionChange X (completedCoefficientMap g d)
 
-/-- Completed module pullback is additive.
-Source: Stacks Tag 03EK. -/
+/-- Completed module pullback is additive. -/
 @[instance]
 theorem completedModulePullback_additive : (completedModulePullback g d).Additive := by
   dsimp only [completedModulePullback]
@@ -471,10 +476,7 @@ private theorem exactDerivedCounitComparison
   apply (cancel_epi (L.map (DerivedCategory.Q.objObjPreimageIso K).hom)).1
   rw [e'.hom.naturality, e.hom.naturality, hp]
 
-/-- Counit normalization for an exact presentation of a left-derived functor.
-Naming the entire condition keeps the concrete module-category presentations out of
-repeated elaborations of the choice predicate.
-Source: Stacks 05S7, 099N. -/
+/-- Counit normalization for an exact presentation of a left-derived functor. -/
 private def PullbackCounitNormalization
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -817,16 +819,14 @@ def completedPullbackConstantIso :
   (completedPullbackConstantIso_exists g d).exists.choose
 
 /-- Completed pullback is the derived inverse limit of the pulled-back reduction tower.
-Its restriction to intrinsically complete objects is the completed pullback of the node.
-Source: Stacks Tag 099N. -/
+Its restriction to intrinsically complete objects is the completed pullback. -/
 def completedPullbackObject
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) :
     DerivedCategory (pbcModules X (pbcAdicCompletion X d)) :=
   (completedTowerRlim d X).obj
     ((completedTowerPullback g d).obj ((completedReductionTower Y d).obj K))
 
-/-- The strict-tower-induced comparison, using the canonical K → Rlim ΔK unit.
-No map between independently selected cones is used. -/
+/-- The strict-tower-induced comparison, using the canonical K → Rlim ΔK unit. -/
 def completedPullbackComparison
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) :
     (completedOrdinaryPullback g d).obj K ⟶ completedPullbackObject g d K :=
@@ -850,8 +850,7 @@ private theorem pullbackDatumTowerModulePull_eq :
     completedTowerModulePullback g d = d.towerModulePull g := by
   exact congrArg ((Functor.whiskeringRight ℕᵒᵖ _ _).obj) (completedModulePullback_eq_exact g d)
 
-/-- The module comparison on actual complexes, with the additive structures installed.
-Source: Stacks 099N. -/
+/-- The module comparison on actual complexes, with the additive structures installed. -/
 private theorem pullbackDatumModulePullComplex_eq
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     ((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P =
@@ -866,8 +865,7 @@ private theorem pullbackDatumModulePullComplex_eq
     rfl
   exact aux _ _ (completedModulePullback_eq_exact g d)
 
-/-- The strict comparison on complexes keeps all levels and transitions.
-Source: Stacks 099N. -/
+/-- The strict comparison on complexes keeps all levels and transitions. -/
 private theorem pullbackDatumTowerPullComplex_eq
     (P : CochainComplex (pbcTowers Y (pbcAdicCompletion Y d)) ℤ) :
     ((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P =
@@ -881,8 +879,7 @@ private theorem pullbackDatumTowerPullComplex_eq
     rfl
   exact aux _ _ (pullbackDatumTowerModulePull_eq g d)
 
-/-- The ordinary derived comparison is uniquely fixed by its resolving counit.
-Source: Stacks 099N, 06YS. -/
+/-- The ordinary derived comparison is uniquely fixed by its resolving counit. -/
 private theorem pullbackDatumOrdinaryTransport_exists :
     ∃! e : completedOrdinaryPullback g d ≅ d.pull g,
       PullbackCounitNormalization (completedModulePullback g d)
@@ -896,13 +893,11 @@ private theorem pullbackDatumOrdinaryTransport_exists :
     (completedOrdinaryPullback g d) (completedOrdinaryPullbackCounit g d)
     (pullbackDatumModulePullComplex_eq g d)
 
-/-- Ordinary pullback transport with its universal-counit normalization.
-Source: Stacks 099N. -/
+/-- Ordinary pullback transport with its universal-counit normalization. -/
 private def pullbackDatumOrdinaryTransport : completedOrdinaryPullback g d ≅ d.pull g :=
   (pullbackDatumOrdinaryTransport_exists g d).exists.choose
 
-/-- The strict derived tower comparison retains the universal resolving counit.
-Source: Stacks 099N, 06YS. -/
+/-- The strict derived tower comparison retains the universal resolving counit. -/
 private theorem pullbackDatumTowerTransport_exists :
     ∃! e : completedTowerPullback g d ≅ d.towerPull g,
       PullbackCounitNormalization
@@ -921,8 +916,7 @@ private theorem pullbackDatumTowerTransport_exists :
     (completedTowerPullback g d) (completedTowerPullbackCounit g d)
     (pullbackDatumTowerPullComplex_eq g d)
 
-/-- Canonical comparison of derived strict tower pullback presentations.
-Source: Stacks 099N. -/
+/-- Canonical comparison of derived strict tower pullback presentations. -/
 private def pullbackDatumTowerTransport : completedTowerPullback g d ≅ d.towerPull g :=
   (pullbackDatumTowerTransport_exists g d).exists.choose
 
@@ -1016,8 +1010,8 @@ private theorem reductionAugmentationTransport
 
 /-- On intrinsically complete inputs this construction is ordinary pullback followed
 by intrinsic derived completion, with exactly its completion unit. Under the canonical
-derived-complete constant/completed coefficient equivalences this is Stacks' completed pullback.
-Source: Stacks Tag 099N, clauses (2),(5). -/
+derived-complete constant/completed coefficient equivalences this is the completed
+pullback of the Stacks Project. -/
 theorem completedPullback_isCompletion (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))

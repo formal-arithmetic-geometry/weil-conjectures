@@ -19,7 +19,7 @@ Let `P ⟶ Y` be finite étale. Every point `y` of `Y` lies in the image of an �
 `A = Γ(P_R)` has constant rank `n` near `y`, so it splits after a faithfully flat finite étale
 base change `R_f → T` (`Algebra.IsFiniteSplit.exists_tensorProduct_of_etale`), and `U = Spec T`.
 
-The blueprint states the result with a single finite set `S`; since the degree of `P` is only
+The result is often stated with a single finite set `S`; since the degree of `P` is only
 locally constant, the trivialising cover is given locally around each point.
 -/
 

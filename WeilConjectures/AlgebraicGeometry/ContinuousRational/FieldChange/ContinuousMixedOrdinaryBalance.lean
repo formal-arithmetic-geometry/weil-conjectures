@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousAmb
 
 /-! # The mixed balancing cube before completion
 
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 0D6D.
+## References
+
+* Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E F : Type u) [Field E] [Field F]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F]
 
 /-- Flatten integral scalar extension and then insert the rational coefficient factor.
-This is a specified pair of derived tensor associators, independent of the realization.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
+This is a specified pair of derived tensor associators, independent of the realization. -/
 def FieldChange.integralBalance (i : E →ₐ[ℚ_[l]] F) (X : Base.{u} l)
     (aE : At l E X) (aF : At l F X) (b : FieldChange l E F i X aE aF)
     (K : PbcCompletedDerived X.scheme (pbcIntegralDatum l E)) :

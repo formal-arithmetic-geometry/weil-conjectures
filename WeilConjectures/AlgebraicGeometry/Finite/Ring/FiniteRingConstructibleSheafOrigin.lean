@@ -14,13 +14,16 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Constructible finite-ring sheaves have etale origin
 
-Source: Stacks Project, Tags 09AK and 099Y, with the blueprint's global finite partitions.
-
 The two recorded constructibility predicates use different equivalent encodings of
 constant-coefficient module sheaves. The equivalence below is identified with the
 recorded comparison pullback on underlying additive sheaves, and the last clause
 requires that identification to respect the constant scalar action. Thus it specifies
-the given pullback, including its module structure.
+the given pullback, including its module structure. Constructibility uses global finite
+partitions.
+
+## References
+
+* Stacks Project, Tags 09AK, 099Y
 -/
 
 @[expose] public section
@@ -35,8 +38,6 @@ namespace AlgebraicGeometry.Scheme
 The finite ring is allowed to be zero and the scheme is arbitrary, including empty.
 The natural isomorphism identifies the equivalence with `comparisonUpperStar`;
 its constant-scalar compatibility makes this an identification of module sheaves.
-Source: Stacks Project, Tag 09AK, lemma-compare-constructible, and Tag 099Y,
-lemma-compare-locally-constant, with global finite partitions as in the blueprint.
 -/
 theorem finiteRing_constructibleSheaf_origin (T : Scheme.{u})
     (B : Type u) [CommRing B] [Finite B] :

@@ -12,8 +12,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Quotient comparison for a single invariant subgroup inclusion
 
-Source: Stacks Project, Tags 04JQ and 03QT; blueprint `theorem-cohomology-curves--2`,
-proof paragraphs 1--2.
+## References
+
+* Stacks Project, Tags 04JQ, 03QT
 -/
 
 @[expose] public section
@@ -22,8 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Tags 04JQ and 03QT; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2. -/
+/-- The sheaf sequence attached to a single invariant subgroup inclusion is short exact. -/
 theorem primarySheafSequence_shortExact
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω]

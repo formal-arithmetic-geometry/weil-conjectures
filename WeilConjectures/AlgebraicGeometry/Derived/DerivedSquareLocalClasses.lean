@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareLocalClassNaturality
 
 /-! # Local classes of the ordinary-unit map in a square
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
+## References
+
+* Stacks Project, Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -63,10 +65,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The local cocycle equation for an arbitrary coefficient h-map in a commutative
-square. The edge is specified solely by its local sheafification equation. This
-requires no derived-pullback input, top-degree bound, or tensor-pullback unit.
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB, with the canonical local
-Leray and sheafification comparisons of Tags 0D5X and 0BKJ. -/
+square. The edge is specified solely by its local sheafification equation. -/
 theorem derivedSquareUnit_localClasses {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)

@@ -12,7 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantPullbackSin
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 import WeilConjectures.Tactic.TransportExact
 
-/-! # Pullback of the constant scalar coefficient -/
+/-! # Pullback of the constant scalar coefficient
+
+## References
+
+* Stacks Project, Tags 03EK, 07A6
+* Zheng, Construction 2.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -129,8 +135,7 @@ private theorem scalar_single_pasting
   simpa only [Category.assoc, hx, Category.comp_id] using
     congrArg (fun k ↦ k ≫ xi) h
 
-/-- The degree-zero scalar coefficient identification commutes with inverse image.
-Source: Stacks Tags 03EK and 07A6; Zheng Construction 2.26. -/
+/-- The degree-zero scalar coefficient identification commutes with inverse image. -/
 theorem etaleScalarConstantPullback
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

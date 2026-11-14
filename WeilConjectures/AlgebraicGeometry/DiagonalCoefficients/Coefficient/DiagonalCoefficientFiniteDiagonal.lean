@@ -44,7 +44,7 @@ def finiteCartierArrow (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- A finite diagonal comparison uses the canonical Cartier arrow, and its trace
 is the inverse of the positive unit/Chern splitting followed by the constant
 summand projection. Both comparisons retain the actual coefficient units and the
-full universal derived units. Source: blueprint clause 1 and proof step 1. -/
+full universal derived units. -/
 def FiniteDiagonalComparison
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A : Type (u + 1)) [CommRing A] [hfinite : Finite A]

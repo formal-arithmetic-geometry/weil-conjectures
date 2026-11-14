@@ -13,7 +13,9 @@ import all WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareC
 
 /-! # Cochain normalization of the inverse Brown comparison
 
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15 and Lemma 5.16
+* Stacks Project, Tags 07A4, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +36,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
 /-- The ordinary inverse comparison is the mate of the supplied sectionwise direct
-comparison. Source: Zheng, Construction 5.15; Stacks 07A4. -/
+comparison. -/
 abbrev strictEtaleBrownOrdinaryInverse
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
@@ -53,8 +55,7 @@ abbrev strictEtaleBrownOrdinaryInverse
       (.mk _ _ _ _ R.val.ordinaryRight.hom))
 
 -- The transpose compares all four realization factors.
-/-- The inverse Brown comparison is the exact localization of its ordinary mate.
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND. -/
+/-- The inverse Brown comparison is the exact localization of its ordinary mate. -/
 theorem strictEtaleBrownInverse_representative
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)

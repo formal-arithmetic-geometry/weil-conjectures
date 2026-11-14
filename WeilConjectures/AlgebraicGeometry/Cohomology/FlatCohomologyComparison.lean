@@ -16,20 +16,24 @@ import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 /-! # The canonical cohomology comparison for scalar extension
 
-We use the source library's Ext-based `Modules.H`, written as its underlying
-abelian-sheaf cohomology. Exact inverse image acts on Ext classes. The constant
-integer sheaf comparison and the adjoint coefficient map give the cohomology map.
-Naturality makes it linear for the scalar representations induced by the maps to
-an affine base. Tensor extension gives `H.baseChange`. It is defined for arbitrary
-commutative algebras; only bijectivity needs flatness.
+The cohomology `Modules.H` is the Ext-based cohomology of the underlying abelian sheaf. Exact
+inverse image acts on Ext classes. The constant integer sheaf comparison and the adjoint
+coefficient map give the cohomology map. Naturality makes it linear for the scalar
+representations induced by the maps to an affine base. Tensor extension gives `H.baseChange`.
+It is defined for arbitrary commutative algebras; only bijectivity needs flatness.
 
-The definitions share sheafification and Ext instances and name the cartesian
-scheme, projections, module and adjunction unit. `cohomologyModule` states the
-scalar action directly through `Sheaf.H.map`, avoiding expanded module wrappers.
-`HOver` retains the displayed structure map in its type. No data is postponed.
+## Implementation details
 
-Source: Stacks Project, Cohomology, Section 01F7 (pullback of cohomology), and
-Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), the canonical comparison map.
+* The definitions share the sheafification and Ext instances `cohomologyHasSheafify` and
+  `cohomologyHasExt`, and name the cartesian scheme, projections, module and adjunction unit.
+* `cohomologyModule` states the scalar action directly through `Sheaf.H.map`, avoiding expanded
+  module wrappers.
+* `HOver` retains the displayed structure map in its type.
+
+## References
+
+* Stacks Project, Section 01F7 (pullback of cohomology) and Lemma 30.5.2 (Tag 02KH)
+* Stacks Project, Section 02KE
 -/
 
 @[expose] public section
@@ -39,35 +43,28 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 attribute [-instance] instAddCommGroupH moduleH
-/-- The canonical sheafification instance, shared by all comparisons.
-Source: Mathlib's sheafification for abelian sheaves. -/
+/-- The canonical sheafification instance, shared by all comparisons. -/
 theorem cohomologyHasSheafify (Z : Scheme.{u}) :
     HasSheafify (Opens.grothendieckTopology Z) AddCommGrpCat.{u} := by infer_instance
 attribute [local instance] cohomologyHasSheafify
 
-/-- The canonical small Ext instance, shared by all comparisons.
-Source: Mathlib `IsGrothendieckAbelian.hasExt`. -/
+/-- The canonical small Ext instance, shared by all comparisons. -/
 theorem cohomologyHasExt (Z : Scheme.{u}) :
     HasExt.{u} (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) := by infer_instance
 attribute [local instance] cohomologyHasExt
 
 variable {X Y : Scheme.{u}}
-/-- Exact inverse image on abelian sheaves.
-Source: Stacks Project, Sections 01F7 and 02KE. -/
+/-- Exact inverse image on abelian sheaves. -/
 def invImage (f : X ⟶ Y) :
     Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u} ⥤
       Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
   (Opens.map f.base).sheafPullback AddCommGrpCat.{u}
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
-/-- Inverse image of abelian sheaves preserves finite limits.
-Source: Mathlib `lan_preservesFiniteLimits_of_flat` and
-`Functor.sheafPullbackConstruction.preservesFiniteLimits`. -/
+/-- Inverse image of abelian sheaves preserves finite limits. -/
 instance invImage_preservesFiniteLimits (f : X ⟶ Y) : PreservesFiniteLimits (invImage f) := by
   have := lan_preservesFiniteLimits_of_flat (E := AddCommGrpCat.{u}) (Opens.map f.base)
   exact Functor.sheafPullbackConstruction.preservesFiniteLimits _ _ _ _
-/-- Inverse image of abelian sheaves preserves finite colimits.
-Source: Mathlib `Functor.sheafAdjunctionContinuous` and
-`Adjunction.leftAdjoint_preservesColimits`. -/
+/-- Inverse image of abelian sheaves preserves finite colimits. -/
 instance invImage_preservesFiniteColimits (f : X ⟶ Y) : PreservesFiniteColimits (invImage f) := by
   have := ((Opens.map f.base).sheafAdjunctionContinuous AddCommGrpCat.{u}
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).leftAdjoint_preservesColimits
@@ -81,8 +78,7 @@ instance invImage_additive (f : X ⟶ Y) : (invImage f).Additive := by
   exact ((Opens.map f.base).sheafAdjunctionContinuous AddCommGrpCat.{u}
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).left_adjoint_additive
 
-/-- The abelian-sheaf coefficient map adjoint to the underlying module morphism.
-Source: Stacks Project, Sections 01F7 and 02KE. -/
+/-- The abelian-sheaf coefficient map adjoint to the underlying module morphism. -/
 def coeff (f : X ⟶ Y) {M : Y.Modules} {N : X.Modules}
     (φ : M ⟶ (pushforward f).obj N) :
     (invImage f).obj ((SheafOfModules.toSheaf Y.ringCatSheaf).obj M) ⟶
@@ -90,8 +86,7 @@ def coeff (f : X ⟶ Y) {M : Y.Modules} {N : X.Modules}
   (TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} f.base).homEquiv _ _ |>.symm
     ((SheafOfModules.toSheaf Y.ringCatSheaf).map φ)
 
-/-- Inverse image of the constant integer sheaf is the constant integer sheaf.
-Source: Stacks Project, Sections 01F7 and 02KE. -/
+/-- Inverse image of the constant integer sheaf is the constant integer sheaf. -/
 def constIso (f : X ⟶ Y) :
     (invImage f).obj ((constantSheaf (Opens.grothendieckTopology Y)
       AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ≅
@@ -101,8 +96,7 @@ def constIso (f : X ⟶ Y) :
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
     isTerminalTop isTerminalTop).app (AddCommGrpCat.of (ULift.{u} ℤ))
 
-/-- Naturality of the adjoint coefficient maps.
-Source: Stacks Project, Sections 01F7 and 02KE. -/
+/-- Naturality of the adjoint coefficient maps. -/
 lemma coeff_naturality (f : X ⟶ Y) {M M' : Y.Modules} {N N' : X.Modules}
     (φ : M ⟶ (pushforward f).obj N) (ψ : M' ⟶ (pushforward f).obj N')
     (a : M ⟶ M') (b : N ⟶ N') (h : a ≫ ψ = φ ≫ (pushforward f).map b) :
@@ -116,8 +110,7 @@ lemma coeff_naturality (f : X ⟶ Y) {M M' : Y.Modules} {N N' : X.Modules}
       (SheafOfModules.toSheaf Y.ringCatSheaf).map ((pushforward f).map b)
   rw [← Functor.map_comp, ← Functor.map_comp, h]
 
-/-- Naturality of the comparison on Ext-based abelian-sheaf cohomology.
-Source: Stacks Project, Section 01F7, and `Sheaf.H.mapFunctor_map`. -/
+/-- Naturality of the comparison on Ext-based abelian-sheaf cohomology. -/
 lemma sheafComparison_naturality
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -137,8 +130,7 @@ lemma sheafComparison_naturality
 
 variable {R S : Type u} [CommRing R] [CommRing S]
 
-/-- Cohomology with its scalar action from the displayed morphism to Spec R.
-Source: Stacks Project, Section 01F7. -/
+/-- Cohomology with its scalar action from the displayed morphism to Spec R. -/
 def HOver (_f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : Type u :=
   M.H q
 
@@ -146,8 +138,7 @@ instance HOver_addCommGroup (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
     AddCommGroup (HOver f M q) := by
   exact instAddCommGroupH M q
 
-/-- A scalar representation on a sheaf acts on its Ext cohomology.
-Source: Mathlib's functoriality and additivity of `Sheaf.H.map`. -/
+/-- A scalar representation on a sheaf acts on its Ext cohomology. -/
 @[instance_reducible]
 def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -203,36 +194,30 @@ instance HOver_module (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : Modul
 
 variable [Algebra R S]
 
-/-- The morphism of affine schemes induced by the scalar-extension homomorphism.
-Source: Stacks Project, Sections 01F7 and 02KE. -/
+/-- The morphism of affine schemes induced by the scalar-extension homomorphism. -/
 def baseChangeMap (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] :
     Spec (.of S) ⟶ Spec (.of R) :=
   Spec.map (CommRingCat.ofHom (algebraMap R S))
 
-/-- The scheme in the cartesian base-change square.
-Source: Stacks Project, Tag 02KH. -/
+/-- The scheme in the cartesian base-change square. -/
 def baseChangedScheme (f : X ⟶ Spec (.of R)) : Scheme.{u} :=
   Limits.pullback f (baseChangeMap R S)
 
-/-- Projection to the original scheme.
-Source: Stacks Project, Tag 02KH. -/
+/-- Projection to the original scheme. -/
 def baseChangeFst (f : X ⟶ Spec (.of R)) : baseChangedScheme (S := S) f ⟶ X :=
   Limits.pullback.fst f (baseChangeMap R S)
 
-/-- Projection to the base-changed affine base.
-Source: Stacks Project, Tag 02KH. -/
+/-- Projection to the base-changed affine base. -/
 def baseChangeSnd (f : X ⟶ Spec (.of R)) :
     baseChangedScheme (S := S) f ⟶ Spec (.of S) :=
   Limits.pullback.snd f (baseChangeMap R S)
 
-/-- The module on the cartesian base change, using the module pullback functor.
-Source: Stacks Project, Tag 02KH. -/
+/-- The module on the cartesian base change, using the module pullback functor. -/
 def baseChangedModule (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     (baseChangedScheme (S := S) f).Modules :=
   (pullback (baseChangeFst (S := S) f)).obj M
 
-/-- The scalar maps commute in the cartesian base-change square.
-Source: Stacks Project, Sections 01F7 and 02KE. -/
+/-- The scalar maps commute in the cartesian base-change square. -/
 lemma scalarMap_baseChange (f : X ⟶ Spec (.of R)) (a : R) :
     (baseChangeFst (S := S) f).appTop
         (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom a) =
@@ -262,15 +247,13 @@ instance HOver_scalarTower (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
       (baseChangedModule (S := S) f M) q) :=
   IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
 
-/-- The adjunction unit into the direct image of the base-changed module.
-Source: Stacks Project, Tag 02KH, the canonical comparison. -/
+/-- The adjunction unit into the direct image of the base-changed module. -/
 def baseChangeUnit (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     M ⟶ (pushforward (baseChangeFst (S := S) f)).obj
       (baseChangedModule (S := S) f M) :=
   (pullbackPushforwardAdjunction (baseChangeFst (S := S) f)).unit.app M
 
-/-- An exact inverse-image comparison is linear for compatible scalar representations.
-Source: Stacks Project, Section 01F7; naturality of the Ext comparison. -/
+/-- An exact inverse-image comparison is linear for compatible scalar representations. -/
 def cohomologyComparisonLinear
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -295,8 +278,7 @@ def cohomologyComparisonLinear
       map_smul' := fun a x ↦
         sheafComparison_naturality G e φ φ (ρ a).asHom (τ a).asHom (h a) q x }
 
-/-- The pullback on cohomology before extending scalars.
-Source: Stacks Project, Tag 02KH, canonical comparison. -/
+/-- The pullback on cohomology before extending scalars. -/
 def H.baseChangeLinear (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
     HOver f M q →ₗ[R] HOver (baseChangeSnd (S := S) f)
       (baseChangedModule (S := S) f M) q :=
@@ -321,8 +303,7 @@ def H.baseChangeLinear (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
       rw [pushforward_map_smulHom]
       exact smulHom_naturality (baseChangeUnit (S := S) f M) _) q
 
-/-- Extend an R-linear comparison uniquely to its S-linear tensor comparison.
-Source: Mathlib `TensorProduct.AlgebraTensorModule.lift`. -/
+/-- Extend an R-linear comparison uniquely to its S-linear tensor comparison. -/
 def extendComparison {A B : Type u} [AddCommGroup A] [AddCommGroup B]
     [Module R A] [Module R B] [Module S B] [IsScalarTower R S B]
     (l : A →ₗ[R] B) : TensorProduct R S A →ₗ[S] B :=
@@ -331,8 +312,7 @@ def extendComparison {A B : Type u} [AddCommGroup A] [AddCommGroup B]
       map_add' := fun _ _ ↦ add_smul _ _ _
       map_smul' := fun _ _ ↦ mul_smul _ _ _ }
 
-/-- The canonical base-change comparison; it is defined without assuming flatness.
-Source: Stacks Project, Tag 02KH, canonical comparison. -/
+/-- The canonical base-change comparison; it is defined without assuming flatness. -/
 def H.baseChange (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
     TensorProduct R S (HOver f M q) →ₗ[S]
       HOver (baseChangeSnd (S := S) f)

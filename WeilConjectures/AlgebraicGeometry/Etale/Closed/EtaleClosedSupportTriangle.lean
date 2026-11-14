@@ -16,8 +16,16 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 /-!
 # The ordinary derived closed-support triangle
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-existence,
-lemma-local-cohomology-right-adjoint--2, order 1804; Stacks Project, Tags 0A45 and 0152.
+## Implementation details
+In `exists_etale_closedSupportTriangle`, module-valued etale sheaves encode left modules over
+the sheafification of the constant ring presheaf: a locally represented constant scalar acts
+locally, and the resulting sections glue uniquely. This is the same encoding as the recorded
+closed-ambient adjoint, without constructibility conditions.
+
+## References
+* Stacks Project, Tags 0A45 (support triangle), 0152 (boundary), 079P (injective-term
+  replacement), 070K (total derivation), 08FI (restriction of K-injectives), 04CA (closed
+  direct image), 09XQ (sections with support) and 093X (restriction of injective sections)
 -/
 
 set_option autoImplicit false
@@ -33,15 +41,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- For a complementary closed-open pair and a finite, possibly noncommutative ring,
 the closed adjunction counit and open adjunction unit extend to a natural distinguished
-triangle on the ordinary unbounded derived category. Module-valued etale sheaves encode
-left modules over the sheafification of the constant ring presheaf: a locally represented
-constant scalar acts locally, and the resulting sections glue uniquely. This is the same
-encoding as the recorded closed-ambient adjoint, without constructibility conditions.
-
-Source: blueprint lemma-local-cohomology-right-adjoint--2, order 1804; Stacks Project,
-Tags 0A45 (support triangle), 0152 (boundary), 079P (injective-term replacement),
-070K (total derivation), 08FI (restriction of K-injectives), 04CA (closed direct image),
-09XQ (sections with support) and 093X (restriction of injective sections). -/
+triangle on the ordinary unbounded derived category. -/
 theorem exists_etale_closedSupportTriangle
     (A : Type (u + 1)) [Ring A] [Finite A]
     {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]

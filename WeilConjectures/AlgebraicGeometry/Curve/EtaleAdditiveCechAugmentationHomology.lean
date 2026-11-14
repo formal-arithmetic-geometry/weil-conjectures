@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaQuasiIso
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaHomology
 
 /-! # Homology equivalences of the two additive Čech augmentations
-Source: Stacks Project, Tags 03P2 and 01FD.
+
+## References
+
+* Stacks Project, Tag 03P2 (Theorem 59.22.4)
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
 -/
 
 @[expose] public section
@@ -22,9 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The two explicit augmentations induce isomorphisms on homology.
-Source: Stacks Project, Tag 03P2, Theorem 59.22.4 (separated affine-cover proof),
-and Tag 01FD, Lemma 20.15.1 (augmented double-complex diagram). -/
+/-- The two explicit augmentations induce isomorphisms on homology. -/
 theorem exists_additiveCech_augmentation_homology
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

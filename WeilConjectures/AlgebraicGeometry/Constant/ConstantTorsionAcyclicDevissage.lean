@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension
 /-!
 # Extending acyclic constant coefficients from cyclic groups to torsion groups
 
-Source: Stacks Project, Tag 0GJR, proof of lemma-locally-acyclic-locally-constant.
+## References
+
+* Stacks Project, Tag 0GJR.
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- On a qcqs scheme, acyclicity and the constant-section isomorphism for positive
 cyclic coefficients prime to p extend to all elementwise prime-to-p torsion groups.
-The case p = 0 allows every finite order.
-Source: Stacks Project, Tag 0GJR, proof of lemma-locally-acyclic-locally-constant. -/
+The case p = 0 allows every finite order. -/
 theorem constantTorsion_acyclic_of_cyclic
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] (p : ℕ)
     (hcyclic : ∀ n : ℕ, 0 < n → (p = 0 ∨ n.Coprime p) →

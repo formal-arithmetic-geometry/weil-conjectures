@@ -13,7 +13,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
-/-! # Derived mapping sheaves on constant complexes -/
+/-! # Derived mapping sheaves on constant complexes
+
+## References
+
+* Stacks Project, Tags 09BE, 08FR
+-/
 
 @[expose] public section
 
@@ -299,10 +304,7 @@ private noncomputable def derivedIsoPresheafIso
         restrictDerivedMap_map])
 
 /-- Sheafified derived Hom and Isom between bounded finite constant complexes are the
-constant algebraic Hom and Isom sets.
-
-Source: Stacks Project, Tags 09BE and 08FR, and the finite-source argument of
-`lem-weil-pbc-finite-ring-derived-local-constancy`, steps 2--7. -/
+constant algebraic Hom and Isom sets. -/
 theorem finiteRing_constant_derived_mapping_sheaves
     (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (E G : CochainComplex (ModuleCat.{u + 1} B) ℤ)

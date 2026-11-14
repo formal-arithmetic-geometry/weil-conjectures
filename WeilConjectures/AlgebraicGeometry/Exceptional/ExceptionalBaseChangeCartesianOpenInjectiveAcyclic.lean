@@ -47,8 +47,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 /-!
 # Proper acyclicity after extension by zero on a Cartesian open
 
-Source: blueprint `proposition-composition-open-restriction-compactifications-f--5`, Steps 2--4;
-Stacks Project, Tag 0F7B (the etale analogue), and proetale Tags 09AE and 09BN.
+## References
+
+* Stacks Project, Tag 0F7B (the étale analogue)
+* Stacks Project, Tags 09AE, 09BN (pro-étale)
 -/
 
 open CategoryTheory CategoryTheory.Limits

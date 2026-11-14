@@ -12,9 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 /-!
 # The affine scheme of roots of unity
 
-Source: Stacks Project, groupoids.tex, Tag 040M, Example `example-roots-of-unity`,
-and etale-cohomology.tex, Tag 03PK, Section `section-kummer`.
-
 ## Main definitions
 
 - `affineRootsOver`: the explicit quotient spectrum over `Spec R`.
@@ -24,6 +21,10 @@ and etale-cohomology.tex, Tag 03PK, Section `section-kummer`.
 
 - `affineRoots_representability`: the natural bijections, their sheaf identification, and
   their compatibility with arbitrary base change.
+
+## References
+
+* Stacks Project, Tag 040M (roots of unity) and Tag 03PK (Kummer theory)
 -/
 
 @[expose] public section
@@ -34,16 +35,13 @@ open CategoryTheory CategoryTheory.Limits Opposite Polynomial
 
 namespace AlgebraicGeometry
 
-/-- The scheme `Spec R[t]/(t^n - 1)` over `Spec R`. `AdjoinRoot` is exactly the quotient
-by the principal ideal, and the structure morphism is induced by the quotient algebra map.
-Source: Stacks, Tag 040M. -/
+/-- The scheme `Spec R[t]/(t^n - 1)` over `Spec R`. -/
 noncomputable def affineRootsOver (R : Type u) [CommRing R] (n : ℕ) :
     Over (Spec (CommRingCat.of R)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R
     (AdjoinRoot ((X : R[X]) ^ n - 1)))))
 
-/-- The global section corresponding to the residue class of `t` in `R[t]/(t^n - 1)`.
-Source: Stacks, Tag 040M. -/
+/-- The global section corresponding to the residue class of `t` in `R[t]/(t^n - 1)`. -/
 noncomputable def affineRootsCoordinate (R : Type u) [CommRing R] (n : ℕ) :
     Γ((affineRootsOver R n).left, ⊤) :=
   (Scheme.ΓSpecIso (CommRingCat.of (AdjoinRoot ((X : R[X]) ^ n - 1)))).inv
@@ -136,16 +134,11 @@ private theorem roots_sections_equiv (S : Scheme.{u}) (n : ℕ) (U : S.Etaleᵒ�
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine root scheme represents roots of unity on all test schemes, naturally and
-compatibly with arbitrary base change. The presheaf isomorphism is the identification of
-sheaves: the left side is a sheaf by `smallEtaleRepresentablePresheaf_isSheaf`, and the right
-side is the underlying presheaf of the recorded roots sheaf. The representable presheaf is
-transported by the standard `ULift` functor to the coefficient universe `u+1`. The formula
-is specified using
-the kernel inclusion into `gmSheaf`, whose sections are lifted, additively written units.
-Mathlib's `Over.pullback` chooses `P ×_V V'`, with projection `pullback.fst` to `P`, for the
-base change denoted `V' ×_V P` in the source.
-
-Source: Stacks, Tag 040M and Tag 03PK. -/
+compatibly with arbitrary base change. The presheaf isomorphism identifies the representable
+sheaf, transported by `ULift` to the coefficient universe `u+1`, with the underlying presheaf
+of the roots sheaf, given by the kernel inclusion into `gmSheaf` (whose sections are lifted,
+additively written units). Base change uses Mathlib's `Over.pullback`, i.e. `P ×_V V'` with
+projection `pullback.fst` to `P`. -/
 theorem affineRoots_representability (R : Type u) [CommRing R] (n : ℕ) (hn : 1 ≤ n) :
     ∃ x : Γ((affineRootsOver R n).left, ⊤)ˣ,
       (x : Γ((affineRootsOver R n).left, ⊤)) = affineRootsCoordinate R n ∧

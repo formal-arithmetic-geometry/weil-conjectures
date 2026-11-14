@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Finite projective-line adjunction transport
+
+## References
+* Stacks Project, Tags 00YV, 03D3
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
 
-/-- Realize the ordinary intrinsic pullback by uniqueness of its left adjoint.
-Source: Stacks Tags 00YV and 03D3, and the private nativePullRealization proof in
-DiagonalTraceUnitArrowComparison. -/
+/-- Realize the ordinary intrinsic pullback by uniqueness of its left adjoint. -/
 def finiteNativePullCoordinate (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     (Scheme.sfIntrinsicModuleEquivalence S A).functor.mapDerivedCategory ⋙
@@ -74,8 +75,7 @@ def finiteProjectionPullCoordinate (A : Type u) [CommRing A] [Finite A]
       (Functor.isoWhiskerRight
         (leftDerivedUpperStarIsoMapDerivedCategory C e.hom).symm K)
 
-/-- Transport an inverse-image comparison across equivalences and take its mate.
-Source: Mathlib unit_mateEquiv and the equivalence-mate theorem. -/
+/-- Transport an inverse-image comparison across equivalences and take its mate. -/
 theorem finiteAdjunctionCoordinates
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}

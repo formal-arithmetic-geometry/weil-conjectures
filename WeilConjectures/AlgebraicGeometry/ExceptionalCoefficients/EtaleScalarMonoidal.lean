@@ -20,6 +20,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoida
 
 The native derived monoidal structure is transported along uniqueness of left adjoints.
 Tensor normalization identifies its tensorator, and the left unit law identifies its unit.
+
+## References
+
+* Stacks Project, Tags 07A4, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -187,8 +191,7 @@ private theorem site_normalized_core
       tensor_normalization_flat E S r δ ht⟩ i hi hE
 
 /-- The fixed scalar left adjoint is strong monoidal for the published tensor and unit
-comparisons, and respects the actual Koszul braiding.
-Source: Stacks 07A4 and 0FPT; the tensor-model and left-unit normalization theorems. -/
+comparisons, and respects the actual Koszul braiding. -/
 theorem scalarExtension_coreMonoidal (A B : Type (u + 1)) [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     ∃ c : (scalarExtension φ T).CoreMonoidal,

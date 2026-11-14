@@ -18,6 +18,10 @@ This is the K-injective component calculation in the proof of
 `graph_proper_precomposition_unit`.
 It isolates the objectwise geometric calculation; natural-transformation extensionality is
 handled in the parent module.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -42,9 +46,7 @@ private lemma comp_homotopy_inv
   change (HomotopyCategory.quotient E (.up ℤ)).map (𝟙 _) = 𝟙 _
   exact CategoryTheory.Functor.map_id _ _
 
-/-- The representative graph equation after postcomposition by the codomain identity.
-Source: Stacks Project, Tags 0F7B, 0F7I and 0F7J; representative-complex normalization.
--/
+/-- The representative graph equation after postcomposition by the codomain identity. -/
 theorem graph_proper_precomposition_unit_component_on_complex_after_identity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

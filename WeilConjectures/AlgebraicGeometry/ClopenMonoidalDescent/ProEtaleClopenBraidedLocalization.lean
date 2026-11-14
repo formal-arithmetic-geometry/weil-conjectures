@@ -36,7 +36,9 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 
 /-! # Braided localization of degreewise clopen restriction
 
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
+## References
+
+* Stacks Project, Tags 06YS, 0G7D, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -101,9 +103,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 
 /-- Any braided structure on degreewise restriction descends to the specified exact
-restriction, with monoidal canonical localization comparison.
-
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT. -/
+restriction, with monoidal canonical localization comparison. -/
 theorem clopen_braided_localization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

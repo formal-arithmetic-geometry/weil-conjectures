@@ -285,7 +285,12 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedInternalHomExactRestri
 public import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
 import all WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantCoefficientEquivalence
 
-/-! # Perfect constant complexes in the intrinsic coefficient presentation -/
+/-! # Perfect constant complexes in the intrinsic coefficient presentation
+
+## References
+
+* Bhatt–Scholze, The pro-étale topology for schemes, Lemmas 6.5.8 and 6.6.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -709,8 +714,7 @@ private theorem cech_slice_exact_products (X : Scheme.{u})
   intro I _
   exact HasExactLimitsOfShape.of_codomain_equivalence (Discrete I) q.symm
 
-/-- The finite-projective constant model on the intrinsic small site is complete.
-Source: Bhatt--Scholze, Lemmas 6.5.8 and 6.6.8. -/
+/-- The finite-projective constant model on the intrinsic small site is complete. -/
 theorem cech_model_complete (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ)

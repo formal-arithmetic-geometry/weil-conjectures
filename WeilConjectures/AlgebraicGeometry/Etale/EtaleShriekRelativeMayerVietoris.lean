@@ -12,8 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenCoverShriekTriangle
 /-!
 # Relative Mayer--Vietoris for etale compact support
 
-Source: Stacks Project, more-etale.tex, Tag 0GKN, lemma-relative-mayer-vietoris,
-finite-ring bounded-below specialization.
+This is the finite-ring bounded-below specialization of relative Mayer--Vietoris.
+
+## References
+
+* Stacks Project, Tag 0GKN
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 
-/-- Relative Mayer--Vietoris for any chosen compactifications.
-Source: Stacks Project, Tag 0GKN, lemma-relative-mayer-vietoris.
--/
+/-- Relative Mayer--Vietoris for any chosen compactifications. -/
 theorem exists_distinguished_relativeMayerVietoris
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

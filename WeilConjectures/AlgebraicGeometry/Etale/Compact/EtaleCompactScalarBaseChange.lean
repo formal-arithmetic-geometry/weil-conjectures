@@ -8,7 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactScalar
 import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenScalarExchangeSquare
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleDirectImageScalarExchange
 
-/-! # Scalar extension and compactly supported base change -/
+/-! # Scalar extension and compactly supported base change
+
+## References
+* Stacks Project, Tags 03S6, 07A7, 0F7L, 0GL6
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
@@ -110,8 +114,7 @@ private theorem chosen_exchange_app
   rfl
 
 /-- Scalar extension respects compactly supported exchange when the source input
-and its scalar extension are bounded below.
-Source: Stacks 0F7L, 0GL6, 03S6 and 07A7. -/
+and its scalar extension are bounded below. -/
 theorem compactScalarChosenMap_baseChange
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X X' Y Y' : Scheme.{u}}

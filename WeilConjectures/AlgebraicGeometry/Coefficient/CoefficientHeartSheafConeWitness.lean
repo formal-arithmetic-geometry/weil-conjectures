@@ -16,6 +16,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
 /-! # The sheaf part of coefficient generation
+
+## References
+
+* Stacks Project, Tag 0152
 -/
 
 @[expose] public noncomputable section
@@ -296,9 +300,7 @@ private theorem locallyClosedExtension_zero
     ((CondensedRing.openImmersionLowerShriek Λ a.toImage).map_isZero (isZero_zero _))
 
 /-- A shifted constructible sheaf has a finite cone witness from shifted lisse
-extensions. The conclusion also permits an isomorphic choice of its derived object.
-
-Source: blueprint generation, Single sheaves paragraph, and Stacks Tag 0152. -/
+extensions. The conclusion also permits an isomorphic choice of its derived object. -/
 theorem coefficientHeart_sheaf_cone_witness (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

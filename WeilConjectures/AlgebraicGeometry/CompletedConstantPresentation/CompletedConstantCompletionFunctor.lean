@@ -48,7 +48,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Functoriality of completed constant modules
 
-Source: Stacks Project, Modules on Sites, Tags 093J--093M.
+## References
+
+* Stacks Project, Modules on Sites, Tags 093J--093M, 03D7 and 03DA.
 -/
 
 @[expose] public noncomputable section
@@ -61,8 +63,7 @@ namespace CompletedConstantPresentation
 
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
 
-/-- The quotient tower, with the maps induced by completion-linear maps.
-Source: Stacks Tags 093J--093M. -/
+/-- The quotient tower, with the maps induced by completion-linear maps. -/
 def tower : ModuleCat.{u + 1} (AdicCompletion I A) ⥤
     (ℕᵒᵖ ⥤ SheafOfModules.{u + 1} (adicLisseRing X A)) where
   obj N := adicLisseModuleSystem X I (completedConstantUnderlyingModule I N)
@@ -102,8 +103,7 @@ def tower : ModuleCat.{u + 1} (AdicCompletion I A) ⥤
     induction x using Submodule.Quotient.induction_on with
     | _ x => rfl
 
-/-- The actual inverse-limit functor on constant quotient modules.
-Source: Stacks Tags 093J--093M. -/
+/-- The actual inverse-limit functor on constant quotient modules. -/
 def completion : ModuleCat.{u + 1} (AdicCompletion I A) ⥤
     SheafOfModules.{u + 1} (adicLisseRing X A) := tower X I ⋙ lim
 
@@ -133,8 +133,7 @@ instance completion_additive : (completion X I).Additive := by
   rw [Functor.map_add, Preadditive.add_comp, limMap_π, limMap_π, limMap_π]
   simp only [NatTrans.app_add, Preadditive.comp_add]
 
-/-- Tensor realization, retaining the constant A-action.
-Source: Stacks Tag 093M. -/
+/-- Tensor realization, retaining the constant A-action. -/
 def realization
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I) :=
   completedConstantRealization X I φ ⋙
@@ -147,8 +146,7 @@ instance realization_additive
   unfold realization completedConstantRealization
   infer_instance
 
-/-- Tensor realization is right exact on all modules.
-Source: Stacks Tags 03D7, 03DA and 093J. -/
+/-- Tensor realization is right exact on all modules. -/
 theorem realization_preservesFiniteColimits
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I) :
     PreservesFiniteColimits (realization X I φ) := by
@@ -168,8 +166,7 @@ theorem realization_preservesFiniteColimits
 
 variable [IsNoetherianRing A]
 
-/-- The fixed comparison maps form a natural transformation.
-Source: Stacks Tags 093J--093M and the proved finite projection naturality. -/
+/-- The fixed comparison maps form a natural transformation. -/
 def comparison
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
     (hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem X I) (op n) =

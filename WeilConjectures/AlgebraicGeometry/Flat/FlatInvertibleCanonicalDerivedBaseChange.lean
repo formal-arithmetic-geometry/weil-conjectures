@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # Canonical derived base change for a flat family and a line bundle
 
-Source: the degree-zero argument in `nonempty_arrowIso_pullback_directImageCounit`,
-Step 1; Stacks Project, Tag 0A1D (base change for relatively flat complexes).
+This follows the degree-zero argument in `nonempty_arrowIso_pullback_directImageCounit`.
+
+## References
+
+* Stacks Project, Tag 0A1D (base change for relatively flat complexes)
 -/
 
 @[expose] public section
@@ -23,10 +26,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical derived base-change map at a line bundle on a flat qc separated family
-is invertible, without a hypothesis on its higher direct images.
-
-Source: `ZeroScheme.lean`, `nonempty_arrowIso_pullback_directImageCounit` docstring,
-first sentence of its proof; Stacks Project, Tag 0A1D. -/
+is invertible, without a hypothesis on its higher direct images. -/
 theorem isIso_derivedBaseChange_of_flat_invertible
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

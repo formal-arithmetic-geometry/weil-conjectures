@@ -11,7 +11,12 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 import WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantPullbackSingle
 import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 
-/-! # Derived inverse-image composition on single objects -/
+/-! # Derived inverse-image composition on single objects
+
+## References
+
+* Stacks Project, Tag 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -76,8 +81,7 @@ private theorem pullbackSingle_key
     Functor.leftDerivedFunctorNatIso_hom_app_singleFunctor_obj]
 
 /-- The composition comparison for derived inverse image acts on single objects by
-ordinary inverse-image composition, including arbitrary compatible coefficient maps.
-Source: Stacks Tag 07A6 and derived pullback composition. -/
+ordinary inverse-image composition, including arbitrary compatible coefficient maps. -/
 theorem etaleConstantPullback_single_native
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f)

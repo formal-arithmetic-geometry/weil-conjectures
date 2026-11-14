@@ -112,12 +112,14 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Brown adjunction on strict ordinary étale coefficient systems
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15, Lemma 5.16 and the
-following Brown argument, printed pp. 21, 34--35.
-
 The positive level is `n+1`. The support presentation and scalar action are reused
 from the existing ordinary étale interface. The record below contains conclusions,
 including actual natural transformations in the derived category of strict systems.
+
+## References
+
+* Zheng, Construction 4.1, Lemma 4.10, Lemma 5.13, Constructions 5.14--5.15, Lemma 5.16 and
+  the following Brown argument (printed pp. 21, 23--24, 34--35)
 -/
 
 @[expose] public noncomputable section
@@ -139,8 +141,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- Componentwise coproducts, cohomology and bounds in the existing strict category.
-This is a conclusion interface, imposing no normalization on its objects.
-Source: Zheng, Construction 4.1 and Lemma 4.10, printed pp. 21, 23--24. -/
+This is a conclusion interface, imposing no normalization on its objects. -/
 structure StrictEtaleBrownComponents (W : Scheme.{u}) (P : StrictEtaleEvaluation W O t) where
   grothendieck : IsGrothendieckAbelian.{u + 1} (strictEtaleCoefficientSystem W O t)
   [coproducts : HasCoproducts.{u + 1} (strictEtaleCoefficientSystem W O t)]
@@ -162,8 +163,7 @@ structure StrictEtaleBrownComponents (W : Scheme.{u}) (P : StrictEtaleEvaluation
 /-- The Brown adjunction and the canonical left-extension comparison, with the
 proper projection fixed by its geometric mate, and the open comparison by its mate.
 Thus `projection` is the inverse of the coefficient projection `q`, rather than
-an unspecified isomorphism having the same source and target.
-Source: Zheng, Lemmas 5.13 and 5.16 and the following Brown argument, pp. 34--35. -/
+an unspecified isomorphism having the same source and target. -/
 structure StrictEtaleBrownConstruction (S : StrictEtaleCompactSupport O t c) where
   componentsX : StrictEtaleBrownComponents O t X S.PX
   componentsZ : StrictEtaleBrownComponents O t c.Z S.PZ

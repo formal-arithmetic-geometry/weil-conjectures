@@ -29,10 +29,8 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 /--
 The generic categorical transport calculation behind a normalized root projection.
 It uses only an exact functor, an exact system-valued functor, a cone isomorphism,
-and the component equations of that cone.  The coefficient objects and their
-line maps are absent; those are supplied by the specialization in
-`diagonalTrace_rootProjection`.
-
+and the component equations of that cone. The coefficient objects and their
+line maps are supplied by the specialization in `diagonalTrace_rootProjection`.
 -/
 theorem diagonalTrace_shiftedRootProjection_transport
     {A : Type*} {B : Type*} {C : Type*}

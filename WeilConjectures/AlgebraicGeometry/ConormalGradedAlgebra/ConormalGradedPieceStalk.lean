@@ -17,7 +17,9 @@ import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-! # Homogeneous conormal module stalks
 
-Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
+## References
+
+* Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
 -/
 
 @[expose] public section
@@ -39,8 +41,7 @@ private theorem stalk_map_germ {Y : Scheme.{u}} (y : Y) {M N : Y.Modules}
     ((PresheafOfModules.toPresheaf _).map f.val) a
 
 /-- Each homogeneous conormal stalk is the successive-power quotient of the actual
-structure-stalk kernel, with its representative-germ formula.
-Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS. -/
+structure-stalk kernel, with its representative-germ formula. -/
 theorem graded_piece_stalk (n : ℕ) (z : Z) :
     ∃ e : ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i n)) ≃+
         Ideal.associatedGradedPiece (RingHom.ker (i.stalkMap z).hom) n,

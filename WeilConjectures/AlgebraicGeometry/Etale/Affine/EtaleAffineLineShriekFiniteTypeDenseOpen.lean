@@ -25,7 +25,11 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
-/-! Dense-open constructibility over a finite-type integer affine base. -/
+/-! Dense-open constructibility over a finite-type integer affine base.
+
+## References
+* Stacks Project, Tags 0GKZ, 0GKY, 0GK3, 0GKP
+-/
 
 @[expose] public section
 
@@ -113,7 +117,6 @@ private theorem affineLine_shriek_constructible_of_finite_complement
 
 /-- The dense-open step in affine-line compact-support constructibility, over a base on
 which the additive orders of the coefficients are invertible.
-Source: Stacks Project, Tag 0GKZ, induction paragraph, and Tags 0GKY, 0GK3, 0GKP.
 -/
 theorem exists_dense_open_affineLine_shriek_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y]

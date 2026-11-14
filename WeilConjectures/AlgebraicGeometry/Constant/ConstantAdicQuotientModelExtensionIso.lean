@@ -13,8 +13,16 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientRealizatio
 /-! # Algebraic extension isomorphism for consecutive constant quotient models
 
 This is the algebraic derived reduction extracted from the universal-reduction
-statement.  The geometric comparison hypotheses remain explicit so that the
-statement is strictly smaller than the Hom-bijection conclusion.
+statement.
+
+## Implementation details
+
+* The geometric comparison hypotheses of `constantAdicQuotient_model_extension_iso` remain
+  explicit so that the statement is strictly smaller than the Hom-bijection conclusion.
+
+## References
+
+* Stacks Project, Tag 09C6 (consecutive quotient balancing); Tags 0D6D and 03Q3.
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +33,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- The supplied consecutive constant quotient models are related by derived
-scalar extension along the canonical quotient map.
-
-Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient balancing;
-Tags 0D6D and 03Q3 for constant scalar comparison and stalk detection. -/
+scalar extension along the canonical quotient map. -/
 theorem constantAdicQuotient_model_extension_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

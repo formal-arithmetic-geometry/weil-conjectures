@@ -14,7 +14,10 @@ import Mathlib.RingTheory.Noetherian.Basic
 
 /-! # Weak Serre closure for finite etale-local module models
 
-Source: Stacks Project, Modules on Sites, Tag 093U; proetale.tex, Tag 099Y.
+## References
+
+* Stacks Project, Modules on Sites, Tag 093U (3)
+* Stacks Project, Tags 099Y, 09AL
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Over a finite coefficient sheaf, etale-locally constant finite modules are
-closed under kernels, cokernels and extensions, in the ambient pro-etale module category.
-
-Source: Stacks Project, Modules on Sites, Tag 093U (3), and proetale.tex, Tag 09AL. -/
+closed under kernels, cokernels and extensions, in the ambient pro-etale module category. -/
 theorem finiteCoefficient_etaleLocal_weakSerre
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

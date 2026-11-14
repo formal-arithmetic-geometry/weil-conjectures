@@ -33,7 +33,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-! # Termwise epimorphic completed-module complex towers
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0940 and 0941
+* Stacks Project, Tag 07KC
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +47,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Exact products for the completed coefficient modules.
-Source: Stacks Tags 07KC and 0941. -/
+/-- Exact products for the completed coefficient modules. -/
 theorem finitePerfectAdicModules_exactProducts
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     CountableAB4Star (CompletedAdicModules X d) := by
@@ -67,9 +69,7 @@ theorem finitePerfectAdicModules_exactProducts
   have := hasExactLimitsOfShape_of_preservesEpi (CompletedAdicModules X d) (Discrete ℕ)
   exact CountableAB4Star.of_hasExactLimitsOfShape_nat _
 
-/-- Termwise epimorphic complex towers have their ordinary limit as their Roos limit.
-
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941. -/
+/-- Termwise epimorphic complex towers have their ordinary limit as their Roos limit. -/
 theorem finitePerfectAdicComplex_roos
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ)

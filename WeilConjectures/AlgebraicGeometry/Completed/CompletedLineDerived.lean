@@ -33,6 +33,11 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedLineComplete
 
 /-! # Derived reductions and completeness of a completed line
+
+## References
+
+* Bhatt--Scholze, Section 6.5
+* Stacks Project, Tags 06YS, 06YY, 03CO
 -/
 
 @[expose] public section
@@ -71,10 +76,7 @@ private noncomputable def extensionPresheafIso
         (SheafOfModules.changeOfRingsMap_tmulOfUniverses a M i s x).symm)
 
 /-- A line over the completed coefficient sheaf has underived finite reductions
-and is complete for the actual augmented derived-reduction tower.
-
-Source: coefficient-twist blueprint, proof steps 9 and 11; Bhatt--Scholze,
-Section 6.5; Stacks Project, Tags 06YS, 06YY and 03CO. -/
+and is complete for the actual augmented derived-reduction tower. -/
 theorem completedLine_derived (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : SheafOfModules.{u + 1}

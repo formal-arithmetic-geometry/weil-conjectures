@@ -12,7 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModel
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceScalarComparisons
 
-/-! # Single-object comparisons and full normalization of the varying square -/
+/-! # Single-object comparisons and full normalization of the varying square
+
+## References
+
+* [Stacks Project, Tag 070G](https://stacks.math.columbia.edu/tag/070G)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -227,10 +232,7 @@ private theorem natTrans_ext_kInjective
   apply (cancel_mono (G.map e.hom)).mp
   rw [← α.naturality e.hom, ← β.naturality e.hom, h I hI]
 
-/-- Normalization on K-injective representatives determines the full derived square.
-
-Source: diagonal tower trace proof (1), normalized scalar restriction before the
-Milnor step; Stacks Tag 070G, uniqueness of total right derived functors. -/
+/-- Normalization on K-injective representatives determines the full derived square. -/
 theorem diagonalTrace_full_normalization_of_kInjective
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
     [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]

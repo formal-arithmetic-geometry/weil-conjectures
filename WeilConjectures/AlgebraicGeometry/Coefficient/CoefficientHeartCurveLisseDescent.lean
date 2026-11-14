@@ -32,11 +32,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 /-!
 # Lisse condensed-coefficient descent through a surjective closed immersion
 
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Project, Tag 09AB and Tag 09BK.
-
 The two comparison isomorphisms below specify the finite-free normalization and the
 composition comparison used in compatibility with the prescribed trivializations.
+
+## References
+
+* Stacks Project, Tags 09AB, 09BK
 -/
 
 @[expose] public noncomputable section
@@ -53,9 +54,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The canonical finite-free coefficient comparison: preserve the finite biproduct,
 then identify the transported regular module using extension along the Cartesian
 coefficient isomorphism, restriction along its inverse, and the coefficient map itself.
-This also constructs the rank-zero comparison without a choice of basis.
-Source: blueprint lemma-constructible-sheaves, curve descent, proof step 1;
-Stacks Project Tag 09AB. -/
+This also constructs the rank-zero comparison without a choice of basis. -/
 def coefficientHeartFiniteFreePullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :
@@ -68,11 +67,9 @@ def coefficientHeartFiniteFreePullbackIso
         Mod.regularIsoOfIsIso (condensedPullbackHom Λ f))
 
 /-- Canonical comparison from the pullback along the closed fibre of a covering member
-to the iterated pullback through its specified refinement map. Only the commutativity
-witness is supplied; every isomorphism is the existing coefficient-module composition
-isomorphism or transport along that equality.
-Source: blueprint lemma-constructible-sheaves, curve descent, proof step 4;
-Stacks Project Tag 09AB. -/
+to the iterated pullback through its specified refinement map. Every isomorphism is the
+existing coefficient-module composition isomorphism or transport along the commutativity
+witness. -/
 def coefficientHeartRefinementPullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {W T B C P : Scheme.{u}}
@@ -169,11 +166,7 @@ private theorem compatible_trivializations
   exact lift_compatible_iso F β κ
 
 /-- Lissity descends and ascends through a surjective closed immersion, with a covering
-refinement that lifts every specified finite-free trivialization, in its specified rank.
-
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Project Tag 09AB, Tag 09BK.
--/
+refinement that lifts every specified finite-free trivialization, in its specified rank. -/
 theorem coefficientHeart_curve_lisse_descent
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {W T : Scheme.{u}} (t : T ⟶ W)

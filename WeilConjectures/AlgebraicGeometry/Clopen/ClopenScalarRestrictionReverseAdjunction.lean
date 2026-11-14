@@ -27,6 +27,10 @@ import WeilConjectures.Algebra.Homology.ClopenComparisonTensorSquare.ClopenRever
 
 The interface retains literal module restriction and hides the instance-heavy
 ordinary/system normalization package used by the proof.
+
+## References
+
+* Stacks Project, Tag 04TS (disjoint two-open module gluing)
 -/
 
 @[expose] public noncomputable section
@@ -40,7 +44,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- On a clopen immersion, scalar-identified restriction is also left adjoint to
-any of its left adjoints. Source: Stacks 04TS, disjoint two-open module gluing. -/
+any of its left adjoints. -/
 theorem clopenScalarRestrictionReverseAdjunction {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] [IsClosedImmersion j]
     [(proEtaleOpenComposition j).IsContinuous (ProEt.topology U) (ProEt.topology T)]

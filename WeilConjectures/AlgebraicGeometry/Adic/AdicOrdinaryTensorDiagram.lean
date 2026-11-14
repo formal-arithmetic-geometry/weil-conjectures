@@ -26,8 +26,11 @@ import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-! # Ordinary algebraic quotient tensor diagrams
 
-Source: Stacks Project, More on Algebra, Tag 09AW; More on Algebra, Tag 06Y6.
 The coefficient maps are the actual quotient homomorphisms, viewed as linear maps.
+
+## References
+
+* Stacks Project, More on Algebra, Tags 09AW and 06Y6
 -/
 
 @[expose] public noncomputable section
@@ -37,16 +40,14 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 
-/-- The quotient rings as a diagram of modules over the original ring.
-Source: Stacks Project, Tag 09AW. -/
+/-- The quotient rings as a diagram of modules over the original ring. -/
 def adicOrdinaryCoefficientDiagram {A : Type t} [CommRing A] (I : Ideal A) :
     ℕᵒᵖ ⥤ ModuleCat.{t} A :=
   Functor.ofOpSequence (X := fun n ↦ ModuleCat.of A (A ⧸ I ^ (n + 1)))
     (fun n : ℕ ↦ ModuleCat.ofHom
     (Ideal.Quotient.factorₐ A (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))).toLinearMap)
 
-/-- Tensor an algebraic module with the full quotient coefficient diagram.
-Source: Stacks Project, Tag 09AW. -/
+/-- Tensor an algebraic module with the full quotient coefficient diagram. -/
 def adicOrdinaryTensorFunctor {A : Type t} [CommRing A] (I : Ideal A) :
     ModuleCat.{t} A ⥤ (ℕᵒᵖ ⥤ ModuleCat.{t} A) :=
   curriedTensor (ModuleCat.{t} A) ⋙
@@ -58,8 +59,7 @@ instance adicOrdinaryTensorFunctor_additive {A : Type t} [CommRing A] (I : Ideal
   unfold adicOrdinaryTensorFunctor
   infer_instance
 
-/-- Apply the ordinary coefficient tensors in every cochain degree.
-Source: Stacks Project, Tag 09AW. -/
+/-- Apply the ordinary coefficient tensors in every cochain degree. -/
 def adicOrdinaryTensorComplexDiagram {A : Type t} [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{t} A) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (ModuleCat.{t} A) ℤ :=
@@ -83,8 +83,7 @@ private theorem algebraicFlatResolution (A : Type t) [CommRing A] :
   simp only [ModuleCat.freeDesc_apply]
   rfl
 
-/-- K-flatness makes the transpose of the localized ordinary unit invertible.
-Source: Stacks Project, Tag 06Y6. -/
+/-- K-flatness makes the transpose of the localized ordinary unit invertible. -/
 theorem adicOrdinaryTranspose_isIso
     {A B : Type t} [CommRing A] [CommRing B] (φ : A →+* B)
     (L : DerivedCategory (ModuleCat.{t} A) ⥤ DerivedCategory (ModuleCat.{t} B))
@@ -106,8 +105,7 @@ theorem adicOrdinaryTranspose_isIso
     (ModuleCat.extendRestrictScalarsAdj.{t, t, t} φ) ad P
     ⟨fun _ _ s hs ↦ hP.1 s hs, fun _ _ s hs ↦ hP.2 s hs⟩
 
-/-- Restriction of ordinary scalar extension is tensor with the coefficient module.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Restriction of ordinary scalar extension is tensor with the coefficient module. -/
 def adicOrdinaryRestrictedTensorIso
     {A B : Type t} [CommRing A] [CommRing B] (φ : A →+* B) :
     ModuleCat.extendScalars.{t, t, t} φ ⋙ ModuleCat.restrictScalars φ ≅
@@ -127,8 +125,7 @@ def adicOrdinaryRestrictedTensorIso
     NatIso.ofComponents eobj (by intro M N f; ext z; rfl)
   exact e ≪≫ BraidedCategory.tensorLeftIsoTensorRight V
 
-/-- The restricted extension complex is the ordinary quotient tensor complex.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The restricted extension complex is the ordinary quotient tensor complex. -/
 def adicOrdinaryQuotientComplexIso
     {A : Type t} [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{t} A) ℤ) (n : ℕ) :
@@ -139,9 +136,8 @@ def adicOrdinaryQuotientComplexIso
   exact (Functor.mapHomologicalComplexCompIso
     (adicOrdinaryRestrictedTensorIso (Ideal.Quotient.mk (I ^ (n + 1)))) (.up ℤ)).app P
 
-/-- The restricted transpose of scalar insertion, defined on every complex.
-Source: Stacks Project, Tag 06Y6, K-flat computation of derived scalar extension.
-Compose the restricted transpose with exact scalar restriction and tensor symmetry. -/
+/-- The restricted transpose of scalar insertion, defined on every complex: the restricted
+transpose composed with exact scalar restriction and tensor symmetry. -/
 def adicOrdinaryTensorLevelMap
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -161,8 +157,7 @@ def adicOrdinaryTensorLevelMap
     (ModuleCat.restrictScalars q).mapDerivedCategoryFactors.hom.app V ≫
     DerivedCategory.Q.map (adicOrdinaryQuotientComplexIso I P n).hom
 
-/-- K-flatness makes the explicitly defined level map invertible.
-Source: Stacks Project, Tag 06Y6. -/
+/-- K-flatness makes the explicitly defined level map invertible. -/
 theorem adicOrdinaryTensorLevelMap_isIso
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

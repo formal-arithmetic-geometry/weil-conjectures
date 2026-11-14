@@ -125,7 +125,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Units and associators of scalar/pullback balancing
 
-Source: Stacks Project, Tag 0D6D, lemma-derived-pullback-composition.
+## References
+
+* [Stacks Project, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
 -/
 
 @[expose] public noncomputable section
@@ -908,9 +910,7 @@ alias tower := tower_private
 
 end Conjugation
 
-/-- Balancing respects scalar multiplication units and balanced tensor associators.
-Source: Stacks Project, Tag 0D6D, lemma-derived-pullback-composition;
-finite-free direct-image proof, Step 3. -/
+/-- Balancing respects scalar multiplication units and balanced tensor associators. -/
 theorem finiteFreeDirectImageBalancingCoherence {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z) :
     (∀ (R : Coefficients q) (K : DerivedCategory (proEtaleRingModules W R.target)),

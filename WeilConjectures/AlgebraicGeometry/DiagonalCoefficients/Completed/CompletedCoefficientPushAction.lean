@@ -30,7 +30,7 @@ private theorem completed_push_smul {l : ℕ} [Fact l.Prime]
   rfl
 
 /-- Regard the given underlying comparison on a pushed module as a comparison to
-ordinary abelian direct image. Source: the completed ringed direct-image construction. -/
+ordinary abelian direct image. -/
 def completedPushInputIso {l : ℕ} [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (eS : CompletedRealization l S)

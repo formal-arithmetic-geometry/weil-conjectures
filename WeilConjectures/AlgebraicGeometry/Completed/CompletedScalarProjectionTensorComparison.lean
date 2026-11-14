@@ -16,8 +16,15 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 /-!
 # Comparing scalar reduction with the tensor projection morphism
 
-Source: blueprint, proper base change, order 1276, finite-level projection formula;
-Stacks Project, Tags 0B56 and 06YY.
+## Implementation details
+
+* `completedScalarProjectionTensorComparison`: the ordinary direct-image presentations `F`
+  and `G` are identified with the canonical ringed functors by `hF` and `hG`; deriving these
+  exact presentations avoids unfolding the chosen localization constructions.
+
+## References
+
+* Stacks Project, Tags 0B56 and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -40,16 +47,9 @@ private def comparisonTensorModel (T : Scheme.{u})
 
 /-- After forgetting the target coefficient action and transporting the completed ring
 along its canonical constant-system comparison, the scalar-adjunction mate is the
-ordinary tensor projection morphism. This statement concerns the specified arrows;
-it asserts no invertibility of either projection morphism. The coefficient maps
-φY and φX are arbitrary compatible maps, and P is their restricted target ring;
-no finiteness, flatness or perfectness is assumed for these target rings.
-The ordinary direct-image presentations F and G are identified with the canonical
-ringed functors by hF and hG; deriving these exact presentations avoids unfolding
-the chosen localization constructions when applying the comparison.
-
-Source: blueprint order 1276, finite-level projection formula, and order 1275,
-identification of quotient tensors; Stacks Project, Tags 0B56 and 06YY. -/
+ordinary tensor projection morphism. No invertibility of either projection morphism is
+asserted. The coefficient maps φY and φX are arbitrary compatible maps, and P is their
+restricted target ring; no finiteness, flatness or perfectness is assumed. -/
 theorem completedScalarProjectionTensorComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]

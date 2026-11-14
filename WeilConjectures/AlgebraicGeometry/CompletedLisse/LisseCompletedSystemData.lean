@@ -53,12 +53,22 @@ public import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbac
 /-!
 # Completed lisse sheaves and normalized finite etale systems
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Corollary 5.1.5 and Proposition 6.8.4(1),(4),
-pp. 35, 58--59.
-
 Positive exponent n+1 is indexed by n. The finite-free restriction of the recorded
 Weil II system category is explicit. Coefficients are actual completed ring sheaves;
 the continuous-function presentation is identified by its residue projections.
+
+## Implementation details
+
+* `ModuleOperation` retains independent site object and morphism universes.
+* In `IntegralOperation` all adjunctions are on ambient module sheaves, so their left
+  adjoints are genuine tensor pullbacks, without extra assumptions.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, Corollary 5.1.5 and Proposition 6.8.4(1),(4),
+  pp. 35, 58--59.
+* Deligne, Weil II, (1.1.1) b), c), d).
+* Stacks Project, Tags 03D1 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -74,7 +84,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.CompletedLisse
 
-/-- The coefficients and scheme in BS 6.8.4, with exactly the hypotheses of this node. -/
+/-- The coefficients and scheme in BS 6.8.4, with exactly the hypotheses of that statement. -/
 structure Base (l : ℕ) [Fact l.Prime] where
   E : Type (u + 1)
   field : Field E
@@ -113,8 +123,7 @@ noncomputable abbrev Rational (P : Base.{u} l) :=
 
 /-- The finite-free restriction of the recorded normalized system category. Freeness is
 expressed on every geometric stalk as an integral-linear isomorphism with A_n^r.
-The recorded finite-local-constancy condition makes this exactly etale local freeness.
-Source: Weil II (1.1.1) b), BS 6.8.4(1). -/
+The recorded finite-local-constancy condition makes this exactly etale local freeness. -/
 noncomputable def IsFreeSystem (P : Base.{u} l) (F : LisseIntegralSheaf l P.E P.X) : Prop :=
   ∀ (n : ℕ) (κ : Type u) [Field κ] [IsAlgClosed κ] (x : Spec (.of κ) ⟶ P.X),
     ∃ r : ℕ, Nonempty
@@ -126,8 +135,7 @@ noncomputable def IsFreeSystem (P : Base.{u} l) (F : LisseIntegralSheaf l P.E P.
 noncomputable abbrev Systems (P : Base.{u} l) := ObjectProperty.FullSubcategory (IsFreeSystem l P)
 
 /-- The raw rational category restricted to precisely the finite-free integral systems.
-No idempotent completion or existence of a global lattice is imposed.
-Source: BS 6.8.4(4), Weil II (1.1.1) c). -/
+No idempotent completion or existence of a global lattice is imposed. -/
 noncomputable abbrev RawRational (P : Base.{u} l) :=
   ObjectProperty.FullSubcategory
     (fun F : LisseRationalSheaf l P.E P.X ↦ IsFreeSystem l P F.integral)
@@ -243,8 +251,7 @@ structure Comparison (P : Base.{u} l) extends IntegralComparison l P where
   rationalFullyFaithful : rationalRealization.FullyFaithful
 
 /-- A simultaneous scheme pullback and finite coefficient inclusion. Pure pullbacks
-and pure coefficient extensions are obtained by taking the other map to be an identity.
-Source: BS 6.8.4 and Weil II (1.1.1) d). -/
+and pure coefficient extensions are obtained by taking the other map to be an identity. -/
 structure Arrow (P Q : Base.{u} l) where
   scheme : Q.X ⟶ P.X
   coefficient : P.E →ₐ[ℚ_[l]] Q.E
@@ -257,14 +264,12 @@ noncomputable def composite {P Q S : Base.{u} l} (a : Arrow l P Q)
     (b : Arrow l Q S) : Arrow l P S :=
   ⟨b.scheme ≫ a.scheme, b.coefficient.comp a.coefficient⟩
 
-/-- The ramified source index ceil((m+1)/e)-1 from the recorded scalar extension.
-Source: Weil II (1.1.1) d). -/
+/-- The ramified source index ceil((m+1)/e)-1 from the recorded scalar extension. -/
 noncomputable abbrev sourceIndex {P Q : Base.{u} l} (a : Arrow l P Q) (m : ℕ) :=
   lisseScalarSourceIndex l P.E Q.E a.coefficient m
 
 /-- The actual finite-level operation: etale module pullback and then sheafified
-balanced scalar extension to A'_m, retaining the A'-action by restriction of scalars.
-Source: BS 6.8.4(1), Weil II (1.1.1) d). -/
+balanced scalar extension to A'_m, retaining the A'-action by restriction of scalars. -/
 noncomputable def finiteLevel {P Q : Base.{u} l} (a : Arrow l P Q) (m : ℕ) :
     Systems l P ⥤ Sheaf Q.X.smallEtaleTopology (ModuleCat.{u + 1} (Integers l Q)) :=
   ObjectProperty.ι _ ⋙ ObjectProperty.ι _ ⋙
@@ -276,8 +281,7 @@ noncomputable def finiteLevel {P Q : Base.{u} l} (a : Arrow l P Q) (m : ℕ) :
             (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l Q.E (m + 1))))
 
 /-- The canonical map to scalar extension, on underlying abelian sheaves. This is the
-universal module unit followed by the actual sheafification unit, so sends x to 1 tensor x.
-Source: Stacks, Modules on Sites, scalar extension; Weil II (1.1.1) d). -/
+universal module unit followed by the actual sheafification unit, so sends x to 1 tensor x. -/
 noncomputable def finiteScalarUnit {X : Scheme.{u}} {A B : Type (u + 1)} [Ring A] [Ring B]
     (φ : A →+* B) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (sheafCompose _ (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat)).obj F ⟶
@@ -291,8 +295,7 @@ noncomputable def finiteScalarUnit {X : Scheme.{u}} {A B : Type (u + 1)} [Ring A
       (forget₂ (ModuleCat.{u + 1} B) AddCommGrpCat)⟩
 
 /-- The finite-level pullback/scalar-extension unit, with source quotient reindexed
-by the ramification ceiling. Its two factors are the specified universal units.
-Source: BS 6.8.4(1), Weil II (1.1.1) d). -/
+by the ramification ceiling. Its two factors are the specified universal units. -/
 noncomputable def finiteEtaleUnit {P Q : Base.{u} l} (a : Arrow l P Q) (F : Systems l P) (m : ℕ) :
     (etaleDiagram l P F).obj (op (sourceIndex l a m)) ⟶
       (Etale.lowerStar AddCommGrpCat.{u + 1} a.scheme).obj
@@ -324,8 +327,7 @@ noncomputable def finiteProEtaleUnit {P Q : Base.{u} l} (a : Arrow l P Q)
         ((supportSiteEtaleComparisonAdjunction AddCommGrpCat.{u + 1} a.scheme).homEquiv _ _
           |>.symm (finiteEtaleUnit l a F m)))
 
-/-- A finite tower with its prescribed finite-level scalar/pullback identifications.
-Source: Weil II (1.1.1) d), BS 6.8.4(1). -/
+/-- A finite tower with its prescribed finite-level scalar/pullback identifications. -/
 structure EtaleOperation {P Q : Base.{u} l} (a : Arrow l P Q) where
   functor : Systems l P ⥤ Systems l Q
   level (m : ℕ) :
@@ -383,9 +385,7 @@ structure RingOperation {P Q : Base.{u} l} (a : Arrow l P Q)
         (proEtaleSheafDirectImage a.scheme CommRingCat.{u + 1}).map
           (cQ.coefficientIso.inv ≫ lisseIntegerToFieldSized l Q.E Q.X)
 
-/-- Completed module direct image with the specified coefficient map; no preservation
-of infinite inverse limits by inverse image is used.
-Source: Stacks 03D1; BS 6.8.4. -/
+/-- Completed module direct image with the specified coefficient map. -/
 noncomputable def RingOperation.integralPush {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} (R : RingOperation l a cP cQ) :
     ringedSiteModules.{u + 1} ((adicLisseForget Q.X).obj (completedRing l Q)) ⥤
@@ -396,8 +396,7 @@ noncomputable def RingOperation.integralPush {P Q : Base.{u} l} {a : Arrow l P Q
     (R := (adicLisseForget Q.X).obj (completedRing l Q))
     ((adicLisseForget P.X).map R.completed)
 
-/-- Rational module direct image, with the same continuous coefficient formula.
-Source: Stacks 03D1; BS 6.8.4. -/
+/-- Rational module direct image, with the same continuous coefficient formula. -/
 noncomputable def RingOperation.rationalPush {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} (R : RingOperation l a cP cQ) :
     ringedSiteModules.{u + 1} ((adicLisseForget Q.X).obj (rationalRing l Q)) ⥤
@@ -409,9 +408,7 @@ noncomputable def RingOperation.rationalPush {P Q : Base.{u} l} {a : Arrow l P Q
     ((adicLisseForget P.X).map R.rational)
 
 /-- The canonical ringed-module pullback is specified by its full adjunction, together
-with its restriction to lisse objects and the resulting universal unit. This interface
-retains independent site object and morphism universes.
-Source: Stacks 03D2; BS 6.8.4. -/
+with its restriction to lisse objects and the resulting universal unit. -/
 structure ModuleOperation {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} (R : RingOperation l a cP cQ) where
   integralAmbient :
@@ -427,8 +424,7 @@ structure ModuleOperation {P Q : Base.{u} l} {a : Arrow l P Q}
   rational : Rational l P ⥤ Rational l Q
   rationalUnderlying : rational ⋙ ObjectProperty.ι _ ≅ ObjectProperty.ι _ ⋙ rationalAmbient
 
-/-- The canonical unit x to 1 tensor x for the lisse integral module pullback.
-Source: Stacks 03D2. -/
+/-- The canonical unit x to 1 tensor x for the lisse integral module pullback. -/
 noncomputable def ModuleOperation.integralUnit {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} {R : RingOperation l a cP cQ}
     (M : ModuleOperation l R) (N : Integral l P) :
@@ -439,8 +435,7 @@ noncomputable def ModuleOperation.integralUnit {P Q : Base.{u} l} {a : Arrow l P
     (proEtaleSheafDirectImage a.scheme AddCommGrpCat.{u + 1}).map
       ((integralForget l Q).map (M.integralUnderlying.inv.app N))
 
-/-- The same universal unit for rational module pullback.
-Source: Stacks 03D2. -/
+/-- The same universal unit for rational module pullback. -/
 noncomputable def ModuleOperation.rationalUnit {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} {R : RingOperation l a cP cQ}
     (M : ModuleOperation l R) (N : Rational l P) :
@@ -468,9 +463,7 @@ attribute [irreducible] finiteScalarUnit finiteEtaleUnit finiteProEtaleUnit
 
 /-- Pullback and finite coefficient extension, with the finite transition equation,
 quotient-normalized reduction comparison, projection-normalized reconstruction, and the
-fraction-normalized rational realization square. All adjunctions are on ambient module
-sheaves, so their left adjoints are genuine tensor pullbacks, without extra assumptions.
-Source: BS 6.8.4(1),(4), Weil II (1.1.1) d). -/
+fraction-normalized rational realization square. -/
 structure IntegralOperation {P Q : Base.{u} l} (a : Arrow l P Q)
     (cP : Comparison l P) (cQ : Comparison l Q) where
   rings : RingOperation l a cP cQ

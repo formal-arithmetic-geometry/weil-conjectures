@@ -528,7 +528,7 @@ private theorem globalPrimeUnit (S : Scheme.{u}) (l : ℕ)
   simpa only [map_natCast] using (isUnit_of_invertible (l : S.residueField x)).ne_zero
 
 /-- Roots of unity commute with inverse image along every scheme morphism where ell
-is invertible, including exponent zero. Source: blueprint Roots of unity paragraph. -/
+is invertible, including exponent zero. -/
 theorem spRoots_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] (n : ℕ) :
@@ -1046,7 +1046,7 @@ private theorem extendedComparison_iso_exists
 attribute [local irreducible] spIntegralComparison
 
 /-- The derived twist functor is tensor with the recorded signed line in degree zero.
-Its object function is spComplexTwistOfUniverses. Source: blueprint derived consequence. -/
+Its object function is spComplexTwistOfUniverses. -/
 def spTwistFunctor (Z : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Z) CommRingCat.{u + 1})
     (L : Scheme.proEtaleRingModules Z R) (d : ℤ) :=
@@ -1069,7 +1069,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 Here the unit section is the canonical unit of the module pullback adjunction;
 thus the formulas determine maps on all inverse-image generators, not just global
 sections. Negative powers are normalized by evaluation of the pulled-back functional
-on the pulled-back section. Source: blueprint Powers and duals paragraph. -/
+on the pulled-back section. -/
 structure SpSignedComparison
     (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
@@ -1918,8 +1918,7 @@ attribute [local irreducible] finiteFirstComparison rootModuleComparison
   rootModuleDirect tensorMap' directScalarIso' tensorPullbackHomEquiv'
 
 /-- The finite signed comparison is normalized on root tensors, and commutes with
-all annihilating-exponent Kummer identifications. Source: blueprint Finite coefficients
-and Powers and duals paragraphs. -/
+all annihilating-exponent Kummer identifications. -/
 theorem spFiniteTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)]
@@ -1967,7 +1966,7 @@ theorem spFiniteTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
 /-- A comparison over alpha in the internal and sectionwise module encodings.
 The signed first comparison has exactly the given abelian adjunct, which fixes
 its linear lift; the module isomorphisms encode semilinearity over alpha at every
-signed degree. Source: blueprint compatibility with alpha and module structures. -/
+signed degree. -/
 def SpInternalCartesian
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -2793,10 +2792,8 @@ set_option backward.isDefEq.respectTransparency.types true
 
 /-- Inverse image of all non-finite coefficient twists, including integral and rational
 Q_ell as the bottom finite subextension, and the algebraic-closure sheafified colimit.
-Together with spRoots_cartesian and spFiniteTwists_cartesian this states every
-coefficient case in the source. Source: blueprint Inverse image of Tate twists,
-Integral twist, Rational and algebraically closed coefficients, Powers and duals,
-and Derived consequence paragraphs. -/
+Together with `spRoots_cartesian` and `spFiniteTwists_cartesian` this covers every
+coefficient case. -/
 theorem spTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] :

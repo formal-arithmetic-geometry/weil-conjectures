@@ -32,7 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The comparison image of an arbitrary ordinary degree-two line arrow, in the
-specified intrinsic coordinates. Source: the exact single and shift comparisons. -/
+specified intrinsic coordinates. -/
 def finiteOrdinaryCoordinateArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

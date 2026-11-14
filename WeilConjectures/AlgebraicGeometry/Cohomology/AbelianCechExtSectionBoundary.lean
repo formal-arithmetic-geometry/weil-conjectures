@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Ext boundary equals the horseshoe section boundary
 
-Source: Stacks Project, Tags 01EQ and 0117.
+## References
+
+* Stacks Project, Tags 0117, 01EQ, 05TE, 06XR
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The sheaf cohomology boundary sends a lifted cocycle to its differential factor.
-Source: Stacks Project, Tags 05TE and 06XR. -/
+/-- The sheaf cohomology boundary sends a lifted cocycle to its differential factor. -/
 private theorem abelianExt_boundary_cocycle
     {X : Scheme.{u}}
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))
@@ -70,8 +71,7 @@ private theorem abelianExt_boundary_cocycle
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The cocycle-compatible Ext/section identifications preserve the boundary.
-Source: Stacks 0117 and 01EQ (resolution sections). -/
+/-- The cocycle-compatible Ext/section identifications preserve the boundary. -/
 theorem abelianCechExtSection_boundary
     {X : Scheme.{u}}
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

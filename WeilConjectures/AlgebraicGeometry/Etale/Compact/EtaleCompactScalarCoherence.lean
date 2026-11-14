@@ -72,8 +72,8 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 /-!
 # Scalar coherence for ordinary etale compact support
 
-Source: Stacks Project, more-etale.tex, Tag 0GL6, with Tags 0F7I, 0F7J and 0F7L;
-sites-cohomology.tex, Tags 07A4, 0GL1 and 0E48.
+## References
+* Stacks Project, Tags 0GL6, 0F7I, 0F7J, 0F7L, 07A4, 0GL1, 0E48
 -/
 
 @[expose] public noncomputable section
@@ -100,8 +100,7 @@ attribute [local instance] cachedEtaleGroth cachedEtaleSheafify
   cachedEtaleTensor4 cachedEtaleTensor12 cachedEtaleTensor23
   cachedEtaleTensorColimits cachedEtaleTensorFlipColimits
 
-/-- The inverse of the published open balancing map has the specified open-unit transpose.
-Source: Stacks 07A4, 0GL1 and 0GL6. -/
+/-- The inverse of the published open balancing map has the specified open-unit transpose. -/
 theorem compactScalarOpen_normalization (φ : A →+* B) {U T : Scheme.{u}}
     (j : U ⟶ T) [IsOpenImmersion j] (M : DerivedCategoryModule A U) :
     (ExceptionalCoefficients.openIso φ j).inv.app M =
@@ -226,8 +225,7 @@ private theorem compactScalarOpen_exchange
     simpa only [l, r, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Iso.symm_inv,
       Category.assoc] using hinv
 
-/-- Naturality of the published proper/open scalar components.
-Source: Stacks 0GL6. -/
+/-- Naturality of the published proper/open scalar components. -/
 theorem compactScalarMap_naturality (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) {M N : DerivedCategoryModule A X} (a : M ⟶ N) :
     (scalarExtension φ Y).map
@@ -255,8 +253,7 @@ theorem compactScalarMap_naturality (φ : A →+* B) {X Y : Scheme.{u}} {f : X �
   dsimp only [Functor.comp_map] at h'
   exact congrArg R.map h'
 
-/-- Package the published proper/open scalar components as a natural transformation.
-Source: Stacks 0GL6. -/
+/-- Package the published proper/open scalar components as a natural transformation. -/
 def compactScalarMap (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
@@ -265,8 +262,7 @@ def compactScalarMap (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}
   app := ExceptionalCoefficients.compactSupportMap φ c
   naturality _ _ a := compactScalarMap_naturality φ c a
 
-/-- The proper-counit/open-tensor projection, in coefficient-first order.
-Source: Stacks 0GL6, preceding projection lemma. -/
+/-- The proper-counit/open-tensor projection, in coefficient-first order. -/
 def compactScalarProjection (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
@@ -297,8 +293,7 @@ private theorem compactScalarMap_isIso
       ((ExceptionalCoefficients.openIso φ c.i).hom.app M))
   infer_instance
 
-/-- Scalar identification of the target of the ordered projection map.
-Source: Stacks 07A4. -/
+/-- Scalar identification of the target of the ordered projection map. -/
 def compactScalarProjectionTarget (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :
     (scalarExtension φ X).obj
@@ -312,8 +307,7 @@ def compactScalarProjectionTarget (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶
     ((derivedTensor (ModuleCat.{u + 1} B) X).map
       ((scalarPullbackIso φ f).inv.app K)).app ((scalarExtension φ X).obj M)
 
-/-- The specified scalar map for the chosen compactification.
-Source: Stacks 0GL6. -/
+/-- The specified scalar map for the chosen compactification. -/
 def compactScalarChosenMap (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] :=
   compactScalarMap φ (HasCompactification.compactification f)
@@ -965,8 +959,7 @@ private theorem orderedDirectProjection_naturality
 
 /-- Scalar coherence for the fixed compactification: natural invertibility, the ordered
 projection square on every derived input, and proper-refinement compatibility on precisely
-the bounded-below pair of inputs specified in the node.
-Source: Stacks 0GL6, 0E48 and 0F7I. -/
+the specified bounded-below pair of inputs. -/
 theorem compactScalarMap_coherence
     [Finite A] [Finite B] (φ : A →+* B)
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1025,8 +1018,7 @@ theorem compactScalarMap_coherence
     rw [← hN]
     exact N.property
 
-/-- The normalized proper/open composition square for scalar extension.
-Source: Stacks 0F7J and 0GL6. -/
+/-- The normalized proper/open composition square for scalar extension. -/
 theorem compactScalarChosenMap_comp
     [Finite A] [Finite B] (φ : A →+* B)
     {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]

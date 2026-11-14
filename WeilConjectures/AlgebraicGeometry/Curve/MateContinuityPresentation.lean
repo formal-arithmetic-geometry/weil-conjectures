@@ -17,11 +17,16 @@ public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInje
 
 /-! # Projection-restriction presentation on the small strict-local model
 
-This theorem uses `strictHenselizationScheme` and `strictHenselizationStructuralMap`.
-The adopted theorem with the unprefixed name uses `strictLocalization` instead.
+## Implementation details
 
-Source: Stacks Project, Tag 03Q9, the neighbourhood-colimit construction and the
-injective-complex restriction maps in its final proof paragraph.
+* `smallModel_nonempty_strictLocalBaseChange_continuityPresentation` uses
+  `strictHenselizationScheme` and `strictHenselizationStructuralMap`; the theorem with the
+  unprefixed name uses `strictLocalization` instead.
+
+## References
+
+* Stacks Project, Tag 03Q9 (the neighbourhood-colimit construction and the proof)
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section
@@ -36,10 +41,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Present the source of the strict-local mate as neighbourhood hypercohomology,
-and identify its germ components with projection pullbacks to the limit.
-This supplies the input to derived continuity, without applying continuity and without
-asserting that either the target cocone is a colimit or the mate is invertible.
-Source: Stacks Project, Tag 03Q9, proof paragraphs 1 and 3; Tag 03Q8. -/
+and identify its germ components with projection pullbacks to the limit. -/
 theorem smallModel_nonempty_strictLocalBaseChange_continuityPresentation
     {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

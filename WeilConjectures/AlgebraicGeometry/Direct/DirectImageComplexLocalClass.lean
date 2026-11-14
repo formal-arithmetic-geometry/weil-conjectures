@@ -11,8 +11,8 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NonnegativeComplexLoca
 
 /-! # Local classes computed on an arbitrary nonnegative K-injective complex
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
+## References
+* Stacks Project, Tags 01E4, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -33,10 +33,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The class map of a nonnegative complex agrees with the derived local-class map,
 when its integer extension is K-injective. The input is an arbitrary derived object
-identified with that extension. There is no classical right-derived functor, coefficient
-object, injective-resolution augmentation, or restricted-resolution choice in this statement.
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images
-(the bounded-below-complex assertion), and Tags 0BKJ and 0D5X. -/
+identified with that extension. -/
 theorem directImageComplex_localClass {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℕ)
     [CochainComplex.IsKInjective (L.extend ComplexShape.embeddingUpNat)]

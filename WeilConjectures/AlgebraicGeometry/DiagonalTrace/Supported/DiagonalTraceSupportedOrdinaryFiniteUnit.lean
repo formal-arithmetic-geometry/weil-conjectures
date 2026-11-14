@@ -69,8 +69,7 @@ private theorem completedMap_ext (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   apply (cancel_epi (F.map e.hom)).mp
   exact hfg
 
-/-- The ordinary completed-to-finite supported unit is fixed by its integral generator.
-There are no Ext classes, derived presentations, roots, or derived limits in this statement. -/
+/-- The ordinary completed-to-finite supported unit is fixed by its integral generator. -/
 theorem diagonalTrace_supportedOrdinaryFiniteUnit
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # The module edge constructed on the fixed K-injective resolution
 
-Source: Stacks Project, cohomology.tex, Tags 0BKJ and 079W.
+## References
+
+* Stacks Project, Tags 0BKJ, 079W, 0096
 -/
 
 @[expose] public section
@@ -63,8 +65,7 @@ private theorem resolution_comparison_naturality
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- Direct image preserves kernels because it is the right adjoint of module pullback.
-Source: Stacks, Tag 0096. -/
+/-- Direct image preserves kernels because it is the right adjoint of module pullback. -/
 instance localClassEdge_preservesFiniteLimits {T S : Scheme.{u}} (g : T ⟶ S) :
     PreservesFiniteLimits (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) := by
   change PreservesFiniteLimits (Scheme.Modules.pushforward g)
@@ -72,8 +73,7 @@ instance localClassEdge_preservesFiniteLimits {T S : Scheme.{u}} (g : T ⟶ S) :
   let := a.isRightAdjoint
   infer_instance
 
-/-- Identify derived homology with the homology of the fixed representative.
-Source: Stacks, Tag 079W. -/
+/-- Identify derived homology with the homology of the fixed representative. -/
 def localClassResolutionHomologyIso (X : Scheme.{u}) (q : ℤ)
     (K : schemeDerivedCategory X) :
     (DerivedCategory.homologyFunctor _ q).obj K ≅
@@ -82,8 +82,7 @@ def localClassResolutionHomologyIso (X : Scheme.{u}) (q : ℤ)
       (RingedSpace.topEdgeResolutionIso X.toRingedSpace K).symm ≪≫
     (DerivedCategory.homologyFunctorFactors _ q).app _
 
-/-- Identify derived direct-image homology with the homology of the direct-image complex.
-Source: Stacks, Tag 079W. -/
+/-- Identify derived direct-image homology with the homology of the direct-image complex. -/
 def localClassDirectImageHomologyIso {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (K : schemeDerivedCategory T) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -98,8 +97,7 @@ def localClassDirectImageHomologyIso {T S : Scheme.{u}} (g : T ⟶ S)
     (DerivedCategory.homologyFunctorFactors _ q).app _
 
 /-- The actual module edge: preserve the kernel of the outgoing differential and
-then descend its map to cohomology classes through the incoming boundaries.
-Source: Stacks, Tags 0BKJ and 079W. -/
+then descend its map to cohomology classes through the incoming boundaries. -/
 def resolutionLocalClassEdge {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -171,8 +169,7 @@ private theorem directImage_homology_square {T S : Scheme.{u}} (g : T ⟶ S) (q 
     Functor.comp_obj, HomologicalComplex.homologyFunctor_obj,
     HomologicalComplex.homologyFunctor_map] using hh
 
-/-- The constructed edge is natural in every derived morphism.
-Source: Stacks, Tags 0BKJ and 079W. -/
+/-- The constructed edge is natural in every derived morphism. -/
 theorem resolutionLocalClassEdge_naturality {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     {K L : schemeDerivedCategory T} (k : K ⟶ L) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

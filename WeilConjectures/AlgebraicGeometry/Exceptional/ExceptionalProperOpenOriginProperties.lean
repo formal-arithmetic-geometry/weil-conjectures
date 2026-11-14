@@ -11,7 +11,13 @@ import WeilConjectures.CategoryTheory.Exact.ExactDerivedAdjunctionBounds
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalEvaluationSingleton
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalFiniteProperMate
 
-/-! # Bounded-origin properties of a proper/open strict-system comparison -/
+/-! # Bounded-origin properties of a proper/open strict-system comparison
+
+## References
+
+* Zheng, Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
+* Stacks Project, Tag 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -327,8 +333,7 @@ private theorem comparison_evaluation
 
 -- Keep the original interface assumptions; the construction only needs hX.
 set_option linter.unusedVariables false in
-/-- The canonical proper/open comparison has the bounded-origin properties.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65. -/
+/-- The canonical proper/open comparison has the bounded-origin properties. -/
 theorem exceptionalProperOpenOriginProperties
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

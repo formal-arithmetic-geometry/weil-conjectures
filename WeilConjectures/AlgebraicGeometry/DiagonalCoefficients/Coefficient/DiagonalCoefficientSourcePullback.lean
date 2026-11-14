@@ -49,7 +49,7 @@ structure BaseSquares {Y Y' : Scheme.{u}} (g : Y' ⟶ Y) where
     baseW g ≫ pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
 
 /-- The two coefficient-unit and two positive-line endpoints, before any
-source or derived equation is imposed. Source: blueprint base-change endpoints. -/
+source or derived equation is imposed. -/
 structure PullbackEndpoints
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
@@ -64,7 +64,7 @@ structure PullbackEndpoints
   lineW : PullEndpoint R (baseW g) (L (diagonalSurface Y)) (L (diagonalSurface Y')) mW
 
 /-- The canonical ordinary supported-source map, using the specified diagonal
-square and the coefficient-unit endpoint. Source: blueprint closed-support mate. -/
+square and the coefficient-unit endpoint. -/
 def sourcePullbackMap
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
@@ -77,7 +77,7 @@ def sourcePullbackMap
 
 /-- The ordinary source, unit and line normalizations in the fixed geometric
 base-change square. This constituent does not depend on the two diagonal arrows
-or their derived direct-image presentations. Source: blueprint base-change clause. -/
+or their derived direct-image presentations. -/
 structure SourcePullback
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)

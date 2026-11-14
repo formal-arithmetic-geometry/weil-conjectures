@@ -20,7 +20,9 @@ For ring sheaves `R`, `S`, `U` on the small pro-étale site of `Y`, derived scal
   isomorphism `L φ ≅ 𝟭` whose value on every complex is the multiplication map
   `a ⊗ x ↦ a • x` read through the universal counit.
 
-Source: Stacks Tag 06YY.
+## References
+
+* Stacks Project, Tags 06YY and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +40,7 @@ attribute [local instance] reductionModulesHasDerivedCategory
 
 variable (Y : Scheme.{u})
 
-/-- The universal scalar-extension counit on complex representatives is natural.
-Source: Stacks Tag 06YY. -/
+/-- The universal scalar-extension counit on complex representatives is natural. -/
 theorem reductionScalarComplexCounit_naturality
     {R S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (φ : R ⟶ S)
     {P P' : CochainComplex (reductionModules Y R) ℤ} (p : P' ⟶ P) :
@@ -53,8 +54,7 @@ theorem reductionScalarComplexCounit_naturality
   exact h
 
 /-- Derived scalar extension along a composite is the composite of derived scalar
-extensions, by a unique isomorphism given on every complex by ordinary balancing.
-Source: Stacks Tag 06YY. -/
+extensions, by a unique isomorphism given on every complex by ordinary balancing. -/
 theorem reductionDerivedChange_comp_existsUnique
     {R S U : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ) :
@@ -99,15 +99,14 @@ section Identity
 variable {Y} {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
 
 /-- A module sheaf includes into its restriction along the identity, by the identity on
-sections. Source: Stacks Tag 03DA. -/
+sections. -/
 private def restrictIdInclusion (M : reductionModules Y R) :
     M ⟶ (reductionRestrict Y (𝟙 R)).obj M :=
   ⟨PresheafOfModules.homMk ((PresheafOfModules.toPresheaf _).map (𝟙 M.val)) (by
     intro V r x
     rfl)⟩
 
-/-- Restriction along the identity maps back by the identity on sections.
-Source: Stacks Tag 03DA. -/
+/-- Restriction along the identity maps back by the identity on sections. -/
 private def restrictIdProjection (M : reductionModules Y R) :
     (reductionRestrict Y (𝟙 R)).obj M ⟶ M :=
   ⟨PresheafOfModules.homMk ((PresheafOfModules.toPresheaf _).map (𝟙 M.val)) (by
@@ -291,8 +290,7 @@ private theorem reductionDerivedChange_id_existsUnique_aux :
 end Identity
 
 /-- Derived scalar extension along a ring endomorphism equal to the identity is the
-identity, by a unique isomorphism given on every complex by multiplication `a ⊗ x ↦ a • x`.
-Source: Stacks Tag 06YY. -/
+identity, by a unique isomorphism given on every complex by multiplication `a ⊗ x ↦ a • x`. -/
 theorem reductionDerivedChange_id_existsUnique
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (φ : R ⟶ R) (hφ : φ = 𝟙 R) :
     ∃! e : reductionDerivedChange Y φ ≅ 𝟭 (reductionDerivedCategory Y R),

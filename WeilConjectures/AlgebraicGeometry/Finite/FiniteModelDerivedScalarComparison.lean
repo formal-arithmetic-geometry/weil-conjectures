@@ -18,8 +18,10 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Derived scalar extension of the constant realization of an algebraic complex
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E, and 0D6D;
-sites-modules.tex, Tag 093J.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E and 0D6D
+* Stacks Project, Modules on Sites, Tag 093J
 -/
 
 @[expose] public noncomputable section
@@ -142,12 +144,7 @@ private theorem liftedDerivedScalarRepresentative
         T.mapDerivedCategoryFactors.app _) ≪≫ LD.mapDerivedCategoryFactors.app _⟩
 
 /-- Constant realization intertwines algebraic and sheaf derived scalar extension,
-including transport of the output ring by a ring equivalence. This is independent
-of adic data, local charts, and completed-coefficient objects.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-derived-base-change (06YY),
-lemma-pullback-K-flat (0G7E), lemma-derived-pullback-composition (0D6D);
-sites-modules.tex, lemma-constant-exact (093J). -/
+including transport of the output ring by a ring equivalence. -/
 theorem finiteModel_derivedScalarComparison
     (X : Scheme.{t}) {B C D : Type t} [CommRing B] [CommRing C] [CommRing D]
     (q : B →+* C) (ρ : C ≃+* D)

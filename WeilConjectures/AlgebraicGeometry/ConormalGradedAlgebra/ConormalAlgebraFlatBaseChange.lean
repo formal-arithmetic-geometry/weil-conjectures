@@ -20,8 +20,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Flat base change of the conormal graded algebra
 
-Source: Stacks Project, Divisors, Tags 0634 and 0635, closed immersion case.
-
 ## Main definitions
 
 * `adjointPiece`: the adjoint of a homogeneous comparison, on the ambient schemes.
@@ -31,9 +29,15 @@ Source: Stacks Project, Divisors, Tags 0634 and 0635, closed immersion case.
 
 * `existsUnique_baseChangeMap`: existence, uniqueness, surjectivity, and flat isomorphism.
 
+## Implementation details
+
 An algebra map out of a tensor pullback is encoded by its underlying module map and
 its adjoint ring-sheaf map over the structure-sheaf map. This is the usual universal
 property of algebra scalar extension; the homogeneous maps specify its grading.
+
+## References
+
+* Stacks Project, Divisors, Tags 0634 and 0635, closed immersion case.
 -/
 
 @[expose] public section
@@ -64,7 +68,7 @@ variable {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
 
 /-- The adjoint homogeneous comparison, with the commutative square implementing the
 identification of the two pushforwards. The adjunction units send a representative to
-its pure tensor with one. Source: Stacks Project, Divisors, Tag 0634. -/
+its pure tensor with one. -/
 def adjointPiece (n : ℕ) (d : (tensorPullback f).obj (piece i' n) ⟶ piece i n) :
     power i' n ⟶ (pushforward (i ≫ g)).obj (piece i n) :=
   (Classical.choose (exists_tensorPullbackAdjunction i')).unit.app (power i' n) ≫
@@ -78,8 +82,7 @@ def adjointPiece (n : ℕ) (d : (tensorPullback f).obj (piece i' n) ⟶ piece i 
 makes the module map an algebra map; homogeneous maps make it graded. The affine formula
 uses ideal-power representatives and arbitrary scalar factors, hence says precisely
 `[a] tensor r` maps to `[g-sharp(a) * r]` under the recorded conormal identifications.
-The last two equations normalize degrees zero and one using the existing canonical maps.
-Source: Stacks Project, Divisors, Tags 0634 and 0635. -/
+The last two equations normalize degrees zero and one using the existing canonical maps. -/
 def IsBaseChangeMap (A : Presentation i) (A' : Presentation i')
     (c : (tensorPullback f).obj A'.algebra.toModule ⟶ A.algebra.toModule) : Prop :=
   ∃ (ρ : A'.algebra.right ⟶
@@ -587,8 +590,7 @@ private theorem adjoint_homogeneous_square
     (eqToHom E) (homOfLE Hf) t
 
 /-- The homogeneous comparisons assemble to a base-change algebra map with the
-required affine formula, normalizations, epimorphism and flat isomorphism.
-Source: Stacks Project, Divisors, Tags 0634 and 0635. -/
+required affine formula, normalizations, epimorphism and flat isomorphism. -/
 private theorem exists_baseChangeMap_assembly (hc : IsLimit (PullbackCone.mk i f h))
     (A : Presentation i) (A' : Presentation i') :
     ∃ c : (tensorPullback f).obj A'.algebra.toModule ⟶ A.algebra.toModule,
@@ -635,8 +637,7 @@ private theorem exists_baseChangeMap_assembly (hc : IsLimit (PullbackCone.mk i f
   exact hρq V a
 
 /-- The canonical comparison of conormal graded algebras exists uniquely. Its underlying
-module map is an epimorphism, and it is an isomorphism when the ambient base change is flat.
-Source: Stacks Project, Divisors, Tags 0634 and 0635. -/
+module map is an epimorphism, and it is an isomorphism when the ambient base change is flat. -/
 theorem existsUnique_baseChangeMap (hc : IsLimit (PullbackCone.mk i f h))
     (A : Presentation i) (A' : Presentation i') :
     (∀ (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1),

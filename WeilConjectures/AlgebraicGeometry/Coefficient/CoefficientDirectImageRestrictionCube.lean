@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarCoefficientEquivale
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateThickLocus
 
 /-! # The ordinary coefficient restriction cube
-Source: Stacks Project, Cohomology on Sites, Tags 0D6E and 07A6.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A6, 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +61,7 @@ attribute [local irreducible] proEtaleRingRestrictionDirectImage
 
 set_option maxHeartbeats 400000 in
 -- The dependent coefficient functors require extra elaboration heartbeats for section maps.
-/-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
-Source: Stacks 0D6E and 07A6, ordinary direct image and restriction of coefficients. -/
+/-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves. -/
 theorem coefficientDirectImageRestrictionCube
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

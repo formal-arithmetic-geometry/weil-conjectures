@@ -37,7 +37,11 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Tr
 import all Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import all Mathlib.Algebra.BigOperators.Ring.Finset
 
-/-! # Projection coherence of the normalized finite direct-image square -/
+/-! # Projection coherence of the normalized finite direct-image square
+
+## References
+* [Stacks Project, Tag 0A07](https://stacks.math.columbia.edu/tag/0A07)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -172,10 +176,7 @@ private theorem normalized_projection
   exact NatTrans.congr_app hγ M
 
 /-- The normalized limit/direct-image comparison commutes with the actual
-unit-normalized evaluation/direct-image comparison.
-
-Source: diagonal tower limit proof (1), projection compatibility of derived
-right adjoints; Stacks Tag 0A07. -/
+unit-normalized evaluation/direct-image comparison. -/
 theorem diagonalTrace_finiteEvaluation_projection
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

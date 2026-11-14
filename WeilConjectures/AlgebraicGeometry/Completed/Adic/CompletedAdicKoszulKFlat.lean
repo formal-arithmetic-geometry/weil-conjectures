@@ -70,7 +70,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 /-! # K-flatness of the completed exterior Koszul complexes
 
-Source: Stacks Project, Tags 06YQ and 0G7E.
+## References
+
+* Stacks Project, Tags 06YQ, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -262,8 +264,7 @@ private theorem koszulPowerSheaf_flat_kflat (X : Scheme.{t}) (A : Type t) [CommR
     (SheafOfModules.siteSheafTensorRightIso R (K.X i)).symm (hf i)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The recorded completed Koszul complex is K-flat, without a regularity assumption.
-Source: Stacks Project, Tags 06YQ and 0G7E. -/
+/-- The recorded completed Koszul complex is K-flat, without a regularity assumption. -/
 theorem completedAdicKoszul_isKFlat (T : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (m : ℕ) :
     CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d)

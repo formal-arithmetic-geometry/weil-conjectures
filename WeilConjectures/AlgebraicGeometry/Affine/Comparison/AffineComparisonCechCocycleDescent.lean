@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.Sites.ProperBaseChange.OrderedCechUliftCom
 /-!
 # Descent of finite affine comparison Čech cocycles
 
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions in condition (3).
+## References
+
+* Stacks Project, Tag 099U (the two finite Čech limit reductions in condition (3))
 -/
 
 @[expose] public section

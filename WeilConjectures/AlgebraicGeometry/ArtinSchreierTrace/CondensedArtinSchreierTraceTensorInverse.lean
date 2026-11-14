@@ -460,16 +460,7 @@ end AlgebraicGeometry.ArtinSchreierTrace
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- `L_{ψ,f} ⊗ L_{ψ,-f}` and `L_{ψ,-f} ⊗ L_{ψ,f}` are the regular module, and
-`L_{ψ⁻¹,f} ≅ L_{ψ,-f}`.
-
-
-Negation is an involution commuting with Artin–Schreier and conjugating translation by
-`a` to translation by `-a`. Functoriality of direct image and the regular-module unit maps
-transport this identity to the pushforward; uniqueness of right adjoints identifies
-pullback and pushforward along negation. Reindexing the projector sum by negation then
-conjugates the `ψ` and `ψ⁻¹` projectors. Pullback preserves their images, and pulling back
-along the morphism defined by `f` gives the last isomorphism. The argument also applies in
-characteristic two and on the empty base. -/
+`L_{ψ⁻¹,f} ≅ L_{ψ,-f}`. -/
 theorem condensedArtinSchreier_tensor_inverse_generic
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

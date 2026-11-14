@@ -14,7 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
-/-! # Fullness of ordinary etale affine-line pullback -/
+/-! # Fullness of ordinary etale affine-line pullback
+
+## References
+* [Stacks Project, Tag 0A3H](https://stacks.math.columbia.edu/tag/0A3H)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,9 +36,7 @@ private theorem a1_geometricallyConnected (S : Scheme.{u}) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Affine-line inverse image on ordinary etale module sheaves is full.
-Source: Stacks Project, Tag 0A3H: section invariance for flat quasi-compact morphisms
-with connected geometric fibres. -/
+/-- Affine-line inverse image on ordinary etale module sheaves is full. -/
 theorem etale_a1_pullback_full (S : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     (Etale.upperStar (ModuleCat.{u + 1} Λ)
       (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).Full := by

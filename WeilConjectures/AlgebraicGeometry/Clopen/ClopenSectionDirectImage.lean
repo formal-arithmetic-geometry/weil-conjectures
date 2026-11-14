@@ -63,10 +63,7 @@ private theorem exact_derived_counit_isIso
   exact NatIso.isIso_of_isIso_app _
 
 /-- Restriction to an open and closed section gives `Rp_* s_! ≅ id` on bounded below
-étale derived categories with coefficients in any commutative ring. Source: blueprint,
-part-six-operations/sec-six-functors-basics/sec-brown-construction/
-sec-construction-of-rf/sk-prop-sf-comp-coherence, lemma
-proposition-construction-independence-rf-shriek--7.
+étale derived categories with coefficients in any commutative ring.
 
 The equation characterizes the canonical isomorphism: after the unit identifying `K`
 with `s^* s_! K`, its component is restriction along `s`, namely the derived unit for
@@ -166,8 +163,7 @@ theorem clopenSectionDirectImage_of_commRing (Λ : Type (u + 1)) [CommRing Λ]
   dsimp [t, c, P, U, R, J, adj, A]
   simp only [Category.id_comp, Category.comp_id]
 
-/-- The finite-coefficient case of `clopenSectionDirectImage_of_commRing`, kept for its existing
-users. Source: blueprint, lemma proposition-construction-independence-rf-shriek--7. -/
+/-- The finite-coefficient case of `clopenSectionDirectImage_of_commRing`. -/
 theorem clopenSectionDirectImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
     (hs : IsClosed (Set.range s.base)) (hsp : s ≫ p = 𝟙 X) :

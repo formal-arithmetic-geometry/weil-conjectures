@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAd
 The explicit scalar realization of the fixed-scalar coordinates of a module sheaf is the
 restriction of the module sheaf to the slice.
 
-Source: Stacks Project, Tags 03CY, 03DA and 06YY.
+## References
+
+* Stacks Project, Tags 03CY, 03DA, 06YY and 00WX
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Inverse image along a pro-etale chart commutes with restriction of fixed scalars.
-Source: Stacks Tag 03DA. -/
+/-- Inverse image along a pro-etale chart commutes with restriction of fixed scalars. -/
 def finitePerfectAdicPullbackRestrictComparison {Y Z : Scheme.{t}} (g : Z ⟶ Y)
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S) :
     sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q) ⋙
@@ -38,8 +39,7 @@ def finitePerfectAdicPullbackRestrictComparison {Y Z : Scheme.{t}} (g : Z ⟶ Y)
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) (ProEt.topology Z) q
 
 /-- The inverse-image comparison with coefficient restriction is compatible with the
-identification of inverse image along a weakly etale map with restriction.
-Source: Stacks Tags 00WX and 03DA. -/
+identification of inverse image along a weakly etale map with restriction. -/
 theorem finitePerfectAdic_pullbackRestrict_upperStarIso {Y Z : Scheme.{t}} (g : Z ⟶ Y)
     (hg : WeaklyEtale g) {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (G : Sheaf (ProEt.topology Y) (ModuleCat.{t + 1} S)) :

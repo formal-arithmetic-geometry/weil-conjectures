@@ -10,7 +10,13 @@ import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemOrdinaryPu
 import WeilConjectures.CategoryTheory.SixFunctors.IndependentLocalizedCube
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 
-/-! # Normalized system pullback squares -/
+/-! # Normalized system pullback squares
+
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tags 099R, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,8 +33,7 @@ attribute [local instance 20000] strictEtaleSystemDerived strictEtaleLevelDerive
 
 variable {O : Type (u + 1)} [CommRing O] {ell : O}
 
-/-- The canonical geometric pullback square on systems and its finite levels.
-Source: Zheng Construction 4.1; Stacks 099R and 0B65. -/
+/-- The canonical geometric pullback square on systems and its finite levels. -/
 theorem exceptionalSystemPullbackSquare_exists
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     {T U : Scheme.{u}} (g : T ⟶ U)

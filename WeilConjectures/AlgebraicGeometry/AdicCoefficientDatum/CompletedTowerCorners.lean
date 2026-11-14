@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDi
 
 /-! # The specified strict four towers and arrows
 
-These are the original tower constructions, separated from their compatibility theorem
-so the existing strict-mate normalization theorem can use them independently.
+The tower constructions are kept separate from their compatibility theorem so that the
+strict-mate normalization theorem can use them independently.
 -/
 
 @[expose] public noncomputable section
@@ -27,7 +27,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
 /-- The strict four corner towers, formed before taking Rlim. The third corner uses
-ordinary pullback. Source: blueprint tower compatibility. -/
+ordinary pullback. -/
 def AdicCoefficientDatum.fourTowerCorners (K : d.derived X) :
     Fin 4 → DerivedCategory (d.towers Y') :=
   ![(d.towerPull g).obj ((completedReductionTower Y d).obj ((d.push f).obj K)),

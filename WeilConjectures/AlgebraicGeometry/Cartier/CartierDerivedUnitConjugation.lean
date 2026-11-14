@@ -32,8 +32,7 @@ open Scheme
 /--
 The unbounded derived scalar-unit Hom bijections are preserved when the source
 and target are replaced by isomorphic sheaves and the map is conjugated by
-those isomorphisms.  Source: the finite coefficient extension paragraph of
-the GeoCartier proof.
+those isomorphisms.
 -/
 theorem isCartierDerivedScalarUnit_of_iso_conj
     {R S : Type (u + 1)} [CommRing R] [CommRing S]

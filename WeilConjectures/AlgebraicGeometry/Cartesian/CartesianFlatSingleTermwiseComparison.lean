@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Localized.LocalizedMixedPullbackFiniteF
 
 /-! # Termwise comparison for a cartesian relatively flat single sheaf
 
-Source: Stacks Project, Tags 0A1D, 06YD, 06YJ and 08FE.
+## References
+
+* Stacks Project, Tag 0A1D (relatively flat base change)
+* Stacks Project, Tags 06YD, 06YJ (K-flat computation)
+* Stacks Project, Tag 08FE (open base change)
 -/
 
 @[expose] public section
@@ -24,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Cartesian single-sheaf base change followed by termwise computation on finite frees.
-This has no Noetherian, coherence or approximation hypothesis or conclusion.
-Source: Stacks Project, Tag 0A1D (relatively flat base change), Tags 06YD and 06YJ
-(K-flat computation) and Tag 08FE (open base change). -/
+This has no Noetherian, coherence or approximation hypothesis or conclusion. -/
 theorem cartesian_flat_single_termwise_comparison
     {X S T Y : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX}

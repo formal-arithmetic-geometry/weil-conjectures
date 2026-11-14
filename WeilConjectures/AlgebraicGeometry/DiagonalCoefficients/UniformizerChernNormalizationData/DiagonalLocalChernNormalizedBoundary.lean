@@ -34,28 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   [DiagonalTraceLocalizations l (ProjectiveLine Y)]
 
 /-- The integral finite projection of a normalized completed Chern arrow is the
-positive Kummer composite. No scalar-extension functor or supplied finite factor occurs.
-
-
-
-Forget to abelian sheaves. Restriction.underlying identifies strict-system restriction
-followed by evaluation and forgetting with intrinsic finite evaluation and forgetting.
-The coefficientsX.coefficient_projection equation identifies the source component with
-the actual completed ring projection. Its composite with localCompletedGenerator is the
-integer-cast map into the finite coefficient sheaf, since ring projections preserve
-integer casts. The coefficient_one equation then identifies it with finiteQuotient.
-The coefficientsX.line_projection equation identifies the target component with the
-n-th root-limit projection. The line_tensor equation and lineEvaluation normalization
-identify its comparison with finiteRootMap, followed by cartierProRootMap.
-
-Apply tq.finiteX to the hyperplane Picard class and level n, unpacking its heterogeneous
-endpoint equalities. The resulting equation identifies the preceding composite with
-evaluation of the Yoneda composite of lineBundleClass and tq.chernX.kummer, followed
-by the finite scalar root map. Exact evaluation preserves Yoneda composition. By the
-definition of evaluatedIntegralKummerClass and Ext.homEquiv this is the asserted Ext
-equality. No etale-site cancellation and no scalar-reduction normalization is used.
-The exponent is n+1, hence positive even for n=0; zero rings, trivial Picard classes and
-empty schemes require no exception. -/
+positive Kummer composite. No scalar-extension functor or supplied finite factor occurs. -/
 theorem localChern_normalized_integral_boundary
     {s : UniformizerChernNormalizationData l Y}
     {z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

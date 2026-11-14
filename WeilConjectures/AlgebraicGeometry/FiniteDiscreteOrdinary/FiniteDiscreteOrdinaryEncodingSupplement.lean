@@ -88,6 +88,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 
 /-! # Finite discrete internal and ordinary coefficients
+
+## References
+
+* [Stacks Project, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
 -/
 
 @[expose] public noncomputable section
@@ -107,8 +111,7 @@ variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 attribute [instance] Encoding.ordinaryAdditive Encoding.ordinaryInverseAdditive
   Encoding.fixedAdditive Encoding.fixedInverseAdditive
 
-/-- The canonical shift comparison on the actual termwise derived functor.
-Source: blueprint proof step 4 and Stacks 015F. -/
+/-- The canonical shift comparison on the actual termwise derived functor. -/
 instance Encoding.fixedDerivedShift {T : Scheme.{u}} (e : Encoding A T) :
     e.fixedDerived.functor.CommShift ℤ := by
   letI : (e.ordinary.trans e.fixed).functor.Additive :=

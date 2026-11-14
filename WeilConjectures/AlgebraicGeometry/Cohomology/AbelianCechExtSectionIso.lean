@@ -11,8 +11,11 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Canonical Ext/section identification on an injective resolution
 
-Source: Stacks Project, Tag 01EQ, resolution computation of global cohomology,
-and Mathlib's InjectiveResolution.extEquivCohomologyClass.
+The identification builds on Mathlib's `InjectiveResolution.extEquivCohomologyClass`.
+
+## References
+
+* Stacks Project, Tag 01EQ (resolution computation of global cohomology)
 -/
 
 @[expose] public section
@@ -74,8 +77,7 @@ private noncomputable def extendedSectionIso {X : Scheme.{u}}
       (sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj (op (⊤ : X.Opens)))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Ext cohomology is the homology of the section complex, with compatible representatives.
-Source: Stacks 01EQ, resolution computation; Mathlib InjectiveResolution.Ext. -/
+/-- Ext cohomology is the homology of the section complex, with compatible representatives. -/
 theorem abelianCechExtSectionIso_exists
     {X : Scheme.{u}}
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

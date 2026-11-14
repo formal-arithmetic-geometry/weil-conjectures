@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMat
 
 /-! # Strict-tower realization of the ordered completed proper/open composite
 
-Source: blueprint sec-six-functors-basics/sk-prop-sf-cbc, Definition 1939;
-Stacks 03DI, 09BP, 0A07.
+## References
+
+* Stacks Project, Tags 03DI, 09BP, 0A07
 -/
 
 @[expose] public noncomputable section

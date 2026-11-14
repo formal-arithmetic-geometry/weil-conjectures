@@ -11,7 +11,10 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # The rank-one completed constant comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 093M, and completion Tag 05GG.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 093M
+* Stacks Project, More on Algebra, Tag 05GG (completion modulo an ideal power)
 -/
 
 @[expose] public noncomputable section
@@ -299,9 +302,7 @@ end CompletedConstantRankOne
 
 open CompletedConstantRankOne
 
-/-- The comparison is invertible for the rank-one free completion module.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 093M; More on Algebra,
-Tag 05GG (completion modulo an ideal power). -/
+/-- The comparison is invertible for the rank-one free completion module. -/
 theorem completedConstantComparisonMap_rankOne_isIso (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

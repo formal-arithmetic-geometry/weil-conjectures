@@ -20,15 +20,16 @@ import all WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRe
 /-!
 # Scalar extension respects ordinary etale direct-image exchange
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E47,
-`remark-compose-base-change-horizontal`, with Tag 07A7, `remark-base-change`.
-
 The scalar functor is `scalarExtension`; the K-flat-normalized pullback comparison
 is `properOpenCoefficientPullbackIso`, the canonical exactness transport of
 `scalarPullbackIso`. The map chi is the existing `scalarMate`: transporting its
 canonical geometric adjunction along the same exactness isomorphism identifies its
 adjunct with scalar extension of the counit after this pullback comparison.
 The exchange is the specified `exactDerivedBaseChangeMap`.
+
+## References
+
+* Stacks Project, Tags 0E47 and 07A7
 -/
 
 @[expose] public section
@@ -122,10 +123,7 @@ private theorem coefficientPullback_square
     Category.id_comp]
 
 /-- Scalar extension commutes with the specified ordinary unbounded etale exchange,
-naturally in the input complex.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0E47,
-`remark-compose-base-change-horizontal`, with Tag 07A7, `remark-base-change`. -/
+naturally in the input complex. -/
 theorem exactDerivedBaseChangeMap_scalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X' X Y' Y : Scheme.{u}}

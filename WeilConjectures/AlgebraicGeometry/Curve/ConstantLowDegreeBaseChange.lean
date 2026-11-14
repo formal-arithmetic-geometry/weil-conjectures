@@ -32,10 +32,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper and affine cases in degrees zero and
-one.
--/
+/-- The canonical pullback of constant-coefficient cohomology of a connected curve along an
+algebraically closed field extension is bijective in degrees zero and one, in the proper and
+affine cases. -/
 theorem IsConnectedCurve.constant_low_degree_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

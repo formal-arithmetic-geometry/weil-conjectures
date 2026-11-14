@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompac
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteOpenScalarSiteTransport
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteOpenScalarRealizationTransport
 
-/-! # Scalar transport for the open factor of compact support -/
+/-! # Scalar transport for the open factor of compact support
+
+## References
+
+* Stacks Project, Tags 03DI, 09AF, 00YV
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -128,10 +133,7 @@ private theorem openScalar_transport_base
     Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
 
 /-- The open scalar mate is compatible with the canonical site and realization
-comparisons. This assertion involves only extension by zero, with no proper map.
-
-Source: Stacks Tags 03DI, 09AF and 00YV; blueprint compact-support
-constructibility proof, Step 5, and the open factor of scalar transport. -/
+comparisons. This assertion involves only extension by zero, with no proper map. -/
 theorem openScalar_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

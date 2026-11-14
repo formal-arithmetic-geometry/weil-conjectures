@@ -18,7 +18,12 @@ import Mathlib.Topology.MetricSpace.Pseudo.Defs
 import Mathlib.Analysis.SpecificLimits.Basic
 import Mathlib.Topology.Algebra.Group.Quotient
 
-/-! # The rank-one normalized ordinary quotient comparison -/
+/-! # The rank-one normalized ordinary quotient comparison
+
+## References
+
+* Stacks Project, Tags 03EK, 093M
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -298,10 +303,7 @@ private lemma encoded_regular_scalar (T : Scheme.{u}) (n : ℕ)
   rw [e.ordinary_functor, e.fixed_functor]
 
 /-- The quotient of the integral regular model, with its scalar endomorphisms, in the
-specified normalized coordinates.
-
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks 03EK, 093M.
--/
+specified normalized coordinates. -/
 theorem ordinary_scalar (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let F := FiniteConstantModel.modelFunctor (A l E) T ⋙

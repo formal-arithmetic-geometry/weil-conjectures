@@ -10,9 +10,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAd
 
 /-! # The normalized ordinary identity and composition comparisons
 
-Source: Stacks Tags 03D8 and 0D6D; completed-exchange coherence, proof steps 3--5.
-The declarations are relocated unchanged from CompletedExchangeCoherence so that
-ordinary coherence can be used independently of its completed counterpart.
+These are kept separate from `CompletedExchangeCoherence` so that ordinary coherence can be used
+independently of its completed counterpart.
+
+## References
+
+* Stacks Project, Tags 03D8, 0D6D and 098T
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The completed coefficient identification for a composite is the specified composite.
-Source: blueprint coherence, proof step 3; Stacks Tag 098T. -/
+/-- The completed coefficient identification for a composite is the specified composite. -/
 theorem AdicCoefficientDatum.integralRingIso_comp {U V W : Scheme.{t}}
     (h : U ⟶ V) (g : V ⟶ W) :
     d.integralRingIso (h ≫ g) = proEtaleRingCompositeCoefficients h g
@@ -62,8 +64,7 @@ theorem AdicCoefficientDatum.integralRingIso_comp {U V W : Scheme.{t}}
     rfl]
   rfl
 
-/-- Ordinary derived pullback composition with the specified coefficient transport.
-Source: blueprint coherence, proof step 3; Stacks Tag 0D6D. -/
+/-- Ordinary derived pullback composition with the specified coefficient transport. -/
 def AdicCoefficientDatum.pullComp {U V W : Scheme.{t}} (h : U ⟶ V) (g : V ⟶ W) :
     d.pull (h ≫ g) ≅ d.pull g ⋙ d.pull h :=
   eqToIso (congrArg
@@ -165,8 +166,7 @@ private theorem modulePushId_generic (T : Scheme.{t})
     ext N U m
     exact (hβ N U.unop m).trans (by rfl)
 
-/-- Identity direct image is uniquely fixed by inverse-image restriction on each section.
-Source: blueprint coherence, unit normalization in proof step 5; Stacks Tag 03D8. -/
+/-- Identity direct image is uniquely fixed by inverse-image restriction on each section. -/
 theorem AdicCoefficientDatum.modulePushId_existsUnique (T : Scheme.{t}) :
     ∃! α : proEtaleRingModuleDirectImage (𝟙 T) (d.completedRing T) (d.completedRing T)
         (d.integralRingIso (𝟙 T)) ≅ 𝟭 _,
@@ -181,8 +181,7 @@ theorem AdicCoefficientDatum.modulePushId_existsUnique (T : Scheme.{t}) :
 def AdicCoefficientDatum.modulePushId (T : Scheme.{t}) :=
   (d.modulePushId_existsUnique T).choose
 
-/-- Ordinary pullback identity, derived from its section-normalized ordinary adjunction.
-Source: blueprint coherence, proof step 5; Stacks Tag 03D8. -/
+/-- Ordinary pullback identity, derived from its section-normalized ordinary adjunction. -/
 def AdicCoefficientDatum.pullId (T : Scheme.{t}) : d.pull (𝟙 T) ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso
     ((proEtaleRingModuleAdjunction (𝟙 T) (d.completedRing T) (d.completedRing T)

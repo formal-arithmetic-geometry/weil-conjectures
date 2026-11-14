@@ -19,7 +19,9 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # The actual coefficient kernel as a constant residue module
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I.
+## References
+
+* Stacks Project, Tag 094I
 -/
 
 @[expose] public noncomputable section
@@ -543,10 +545,7 @@ private theorem coefficientHom_step (X : Scheme.{t})
 end FiniteLayerKernelProof
 
 /-- The actual successor coefficient kernel is the constant ideal-power layer,
-with its scalar action restricted from the residue coefficient sheaf.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094I, the
-identification of the successive-power ideal layer in the coefficient filtration. -/
+with its scalar action restricted from the residue coefficient sheaf. -/
 theorem finiteQuotient_layer_kernel_constant_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ k : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (k + 1)) ⟶

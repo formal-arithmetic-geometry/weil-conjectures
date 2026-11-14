@@ -164,9 +164,13 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteCohomologicalDimensionDire
 
 /-! # Derived coproducts with a fixed annihilator
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0F11(1), extended to objects
-annihilated by a fixed positive integer over arbitrary constant coefficients;
-sites-cohomology.tex, Tag 0D6J(3), comparison after forgetting coefficients.
+The result of Stacks Tag 0F11(1) is extended to objects annihilated by a fixed positive
+integer over arbitrary constant coefficients, and compared after forgetting coefficients
+(Tag 0D6J(3)). The fixed-annihilator extension uses a dual kernel construction.
+
+## References
+
+* Stacks Project, Tags 0F11, 0D6J, 0DD7
 -/
 
 @[expose] public section
@@ -364,10 +368,7 @@ private lemma annihilated_retract (X : Scheme.{u}) (n : ℕ) (hn : n ≠ 0)
 K-injective direct image preserves coproducts of arbitrary unbounded complexes killed
 by one fixed positive integer. The coefficient ring is arbitrary. The comparison is
 `Limits.sigmaComparison`, whose composite with each coprojection is the image of the
-corresponding coprojection (`Limits.ι_comp_sigmaComparison`). Empty families are allowed.
-
-Source: Stacks Project, Tags 0F11(1), 0D6J(3), and the divisibility argument in
-Tag 0DD7. The fixed-annihilator extension uses the dual kernel construction below. -/
+corresponding coprojection (`Limits.ι_comp_sigmaComparison`). Empty families are allowed. -/
 theorem isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

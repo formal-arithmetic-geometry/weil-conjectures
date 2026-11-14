@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.Algebra.Homology.Picard.AdditiveAdjunctionConeSquare
 import WeilConjectures.AlgebraicGeometry.Picard.KFlatPullbackAdjunctionComparison
 
-/-! # Derived transposition of a specified cone square -/
+/-! # Derived transposition of a specified cone square
+
+## References
+
+* Stacks Project, Tags 06YI, 06YJ, 079W, 014P
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -95,9 +100,7 @@ set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 800000 in
 -- The functorial flat resolution and the concrete sheaf adjunction need more heartbeats.
 /-- Transpose a specified cone-square through derived pullback/direct image.
-This is independent of open covers and of base-change comparison maps.
-Source: Stacks Project, Cohomology, Tags 06YI and 06YJ (K-flat computations),
-079W (derived adjunction), and Derived Categories, Tag 014P (cone formulas). -/
+This is independent of open covers and of base-change comparison maps. -/
 theorem derivedPullback_cone_square_transposition
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

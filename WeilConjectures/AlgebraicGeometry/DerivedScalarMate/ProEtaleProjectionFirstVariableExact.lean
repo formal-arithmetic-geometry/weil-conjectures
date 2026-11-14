@@ -20,8 +20,9 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 /-!
 # Exactness and first-variable shifts of the pro-etale projection mate
 
-Source: Stacks Project, Cohomology on Sites, Tags 0B56 and 07A4;
-Derived Categories, Tag 0A8D.
+## References
+
+* Stacks Project, Tags 0B56, 07A4, 0A8D
 -/
 
 @[expose] public noncomputable section
@@ -261,23 +262,7 @@ private theorem nativeComparisonShift
   exact firstComparisonTransport t.tensor z.tensor (pull f A) o.left l _ _ hd P
 
 /-- The native projection arrow is a transformation of exact functors of its
-first input. Source: Stacks 0B56, 07A4, 0A8D; the first-variable calculation of
-`ringedProjectionFirstShift`, for the original pro-etale site universes.
-
-
-Curry the canonical pullback/tensor comparison and fix the second argument P.
-Its first-variable shift square is checked on flat K-flat representatives: the
-ordinary pullback/tensor comparison preserves each total summand, and the first
-shift has no additional Koszul sign. The representative equations for the tensor
-models and the exact-pullback factorization give this square after localization;
-fully faithful resolving restriction extends it to arbitrary derived inputs.
-Form the natural projection transformation by the adjunction unit, this tensor
-comparison, and the counit tensored with the identity of pullback(P). Naturality
-of these maps and their shift squares prove CommShift by composition and whiskering
-(the abstract lemma `Adjunction.commShift_rightAdjointProjectionMapFlipApp`).
-Its component is precisely the adjoint-of-counit definition of the displayed
-projection arrow. This argument never asserts that the projection arrow is an
-isomorphism. -/
+first input, for the original pro-etale site universes. -/
 theorem proEtale_projection_first_variable_exact
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

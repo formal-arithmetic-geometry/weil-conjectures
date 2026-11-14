@@ -32,7 +32,7 @@ class and unit/Chern trace. The positive ell power is merely a presentation of
 the quotient's annihilator; the quotient itself is the specified pi power.
 The class uses the recorded canonical Cartier arrow. The trace uses the inverse
 of the recorded canonical positive unit/Chern splitting, followed by its constant
-summand projection. Source: blueprint clause 1 and proof step 1. -/
+summand projection. -/
 def QuotientCompatibility (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) [IsNoetherian Y]
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (d : Diagram (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))

@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 
 /-! # Restriction coherence of the constant finite perfect transition
 
-Source: Stacks Project, Tags 06YY, 09BV and 09C6.
+## References
+
+* Stacks Project, Tags 06YY, 09BV and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -100,10 +102,7 @@ private theorem normalizationArrow_coherence (Y : Scheme.{t})
   erw [← reassoc_of% (localIsomorphismRestrictionComp Y R f).inv.naturality δ]
   erw [Iso.inv_hom_id_app_assoc (localIsomorphismRestrictionComp Y R f)]
 
-/-- The explicit constant transition satisfies etale restriction coherence.
-
-Source: Stacks Project, Tags 06YY, 09BV and 09C6.
--/
+/-- The explicit constant transition satisfies etale restriction coherence. -/
 theorem finitePerfectAdicEtaleConstant_coherence (Y : Scheme.{t})
     {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :

@@ -17,13 +17,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-! # Constructible flat models under arbitrary finite scalar extension
 
-Source: Stacks Project, etale-cohomology.tex, Tags 03TT and
-0GKB, with sites-cohomology.tex, Tags 06YQ, 0G7E,
-06YT, 06YY and 08G1.
-
 Scalar extension is the ordinary, uncompleted functor into the B-module derived
 category. The ordinary representative retains the target-ring action; its tensor
 presentation is B tensor_A P, canonically the symmetric presentation of P tensor_A B.
+
+## References
+
+* Stacks Project, Étale Cohomology, Tags 03TT, 0GKB
+* Stacks Project, Cohomology on Sites, Tags 06YQ, 06YT, 06YY, 08G1, 0G7E
 -/
 
 @[expose] public section
@@ -37,8 +38,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- A bounded constructible complex of Tor amplitude `[a,b]` has a flat constructible
-model in that interval, and every such model computes arbitrary finite scalar extension.
-Source: Stacks Project, Tags 03TT and 0GKB. -/
+model in that interval, and every such model computes arbitrary finite scalar extension. -/
 theorem exists_etaleScalarFlatModel
     (T : Scheme.{u}) [IsNoetherian T]
     (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]

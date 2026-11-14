@@ -30,11 +30,13 @@ import all WeilConjectures.AlgebraicGeometry.Open.OpenClosedAdjunctionTransport
 /-!
 # Fixed finite coordinates for completed-ring open exchange
 
-Source: Stacks 03DI, 03D7, 04J0 and 099N; blueprint finite exchange before Rlim.
-
 The scalar comparisons are mates of the sectionwise specified right comparisons.
 The level coordinate change is identity on sections. Thus no unrelated finite
 coordinate isomorphism is selected.
+
+## References
+
+* Stacks Project, Tags 03CY, 03DI, 03DJ, 03D7, 03EK, 04J0, 06XN, 099N
 -/
 
 @[expose] public noncomputable section
@@ -68,14 +70,12 @@ def cbcFiniteRing (n : ℕ) : CommRingCat.{u + 1} :=
   exact d.quotientFinite n
 
 /-- The completed-ring action on constant finite coefficients is the projection
-followed by the inverse of the fixed constant-section comparison.
-Source: Stacks 099N. -/
+followed by the inverse of the fixed constant-section comparison. -/
 def cbcFiniteProjection (T : Scheme.{u}) (n : ℕ) :
     pbcAdicCompletion T d ⟶ coefficients (cbcFiniteRing d n) T :=
   pbcAdicProjection T d n ≫ (pbcLevelConstantComparison T d n).inv
 
-/-- Finite modules with their actual completed-ring scalar action.
-Source: Stacks 03CY. -/
+/-- Finite modules with their actual completed-ring scalar action. -/
 def cbcFiniteRes (T : Scheme.{u}) (n : ℕ) := pbcRestrict (cbcFiniteProjection d T n)
 
 private theorem inverseMate_isIso_change_left
@@ -133,9 +133,8 @@ private theorem finiteProjection_direct {S T : Scheme.{u}} (f : S ⟶ T) (n : �
     Functor.map_comp, Category.assoc]
   rfl
 
-/-- Direct-image coefficient restriction is the identity on underlying sections.
-This normalization fixes its mate, rather than choosing a pullback isomorphism.
-Source: Stacks 03D7. -/
+/-- Direct-image coefficient restriction is the identity on underlying sections;
+this normalization fixes its mate. -/
 theorem cbcFiniteDirectRes_existsUnique {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     ∃! e : moduleDirectImage (cbcFiniteRing d n) f ⋙ cbcFiniteRes d T n ≅
         cbcFiniteRes d S n ⋙ cbcCompletedModuleDirectImage d f,
@@ -201,13 +200,11 @@ theorem cbcFiniteDirectRes_existsUnique {S T : Scheme.{u}} (f : S ⟶ T) (n : �
   ext M V x
   exact he' M V x
 
-/-- The sectionwise direct-image comparison, with its fixed identity normalization.
-Source: Stacks 03D7. -/
+/-- The sectionwise direct-image comparison, with its fixed identity normalization. -/
 @[irreducible] def cbcFiniteDirectRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :=
   (cbcFiniteDirectRes_existsUnique d f n).exists.choose
 
-/-- The finite pullback comparison is the mate of identity on direct-image sections.
-Source: Stacks 03D7. -/
+/-- The finite pullback comparison is the mate of identity on direct-image sections. -/
 def cbcFinitePullRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     cbcFiniteRes d T n ⋙ completedModulePullback f d ⟶
       modulePullback (cbcFiniteRing d n) f ⋙ cbcFiniteRes d S n :=
@@ -216,8 +213,7 @@ def cbcFinitePullRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     (cbcModulePullbackAdjunction d f)).symm
       (TwoSquare.mk _ _ _ _ (cbcFiniteDirectRes d f n).hom))
 
-/-- The ordinary pullback mate is invertible at finite coefficients.
-Source: Stacks 03EK, 099N. -/
+/-- The ordinary pullback mate is invertible at finite coefficients. -/
 @[instance] theorem cbcFinitePullRes_isIso {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     IsIso (cbcFinitePullRes d f n) := by
   have hc : IsIso (completedCoefficientMap f d) := completedCoefficient_isIso f d
@@ -478,9 +474,7 @@ private theorem finiteOpenModel_generator {W T : Scheme.{u}}
   exact hx.trans (hc.symm.trans (by rfl))
 
 /-- Open restriction commutes with finite scalar restriction, normalized on the
-inverse-image unit generators. The site adjunction supplies the actual restricted
-section, so no unidentified comparison of underlying abelian sheaves is used.
-Source: Stacks 03DI, 04J0. -/
+inverse-image unit generators. -/
 theorem cbcFiniteOpenRestriction_existsUnique {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     ∃! q : modulePullback (cbcFiniteRing d n) e ⋙ cbcFiniteRes d W n ≅
@@ -609,15 +603,13 @@ theorem cbcFiniteOpenRestriction_existsUnique {W T : Scheme.{u}}
   exact (hq' M V.unop _ (a.unit.app V.unop) m).trans
     (hq M V.unop _ (a.unit.app V.unop) m).symm
 
-/-- The uniquely normalized finite open-restriction comparison.
-Source: Stacks 03DI. -/
+/-- The uniquely normalized finite open-restriction comparison. -/
 @[irreducible] def cbcFiniteOpenRestriction {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :=
   (cbcFiniteOpenRestriction_existsUnique d e he n).exists.choose
 
 /-- Open extension commutes with the completed action through the finite projection.
-This is the mate of the specified open-restriction comparison.
-Source: Stacks 03DI. -/
+This is the mate of the specified open-restriction comparison. -/
 def cbcFiniteOpenRes {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     cbcFiniteRes d W n ⋙ cbcOpenShriek d e he ⟶
@@ -962,8 +954,7 @@ private def completedExtension_fullyFaithful {W T : Scheme.{u}}
     (Functor.FullyFaithful.ofFullyFaithful (cbcModuleToSlice d T (cbcOpenObject e he)))
     (sliceExtension_fullyFaithful e he (pbcAdicCompletion T d))
 
-/-- The normalized open-extension comparison is invertible.
-Source: Stacks 03DI. -/
+/-- The normalized open-extension comparison is invertible. -/
 @[instance] theorem cbcFiniteOpenRes_isIso {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     IsIso (cbcFiniteOpenRes d e he n) := by
@@ -1005,8 +996,7 @@ Source: Stacks 03DI. -/
   exact NatIso.isIso_of_isIso_app _
 
 /-- Finite coordinates for the source of the ordinary exchange, built by the
-specified open and pullback mates.
-Source: Stacks 03DI, 099N. -/
+specified open and pullback mates. -/
 def cbcFiniteSourceRes (n : ℕ) :
     cbcFiniteRes d U n ⋙ cbcOpenShriek d j sq.isOpenImmersion ⋙ completedModulePullback g d ≅
       (@moduleJ.{u} (cbcFiniteRing d n) _ U X j sq.isOpenImmersion) ⋙
@@ -1016,8 +1006,7 @@ def cbcFiniteSourceRes (n : ℕ) :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (asIso (cbcFinitePullRes d g n))
 
-/-- Finite coordinates for the target, in the prescribed pullback-then-open order.
-Source: Stacks 03DI, 099N. -/
+/-- Finite coordinates for the target, in the prescribed pullback-then-open order. -/
 def cbcFiniteTargetRes (n : ℕ) :
     cbcFiniteRes d U n ⋙ completedModulePullback gU d ⋙
         cbcOpenShriek d j' sq.isOpenImmersion' ≅
@@ -1030,28 +1019,24 @@ def cbcFiniteTargetRes (n : ℕ) :
     Functor.isoWhiskerLeft _ (asIso (cbcFiniteOpenRes d j' sq.isOpenImmersion' n))
 
 /-- Reduction to finite constant coefficients, using the existing scalar extension
-and the fixed constant-section coefficient isomorphism.
-Source: Stacks 099N. -/
+and the fixed constant-section coefficient isomorphism. -/
 def cbcFiniteReductionModule (T : Scheme.{u}) (n : ℕ) :=
   reductionChange T (pbcAdicProjection T d n) ⋙
     pbcRestrict (pbcLevelConstantComparison T d n).hom
 
-/-- Finite reduction followed by coefficient restriction is additive.
-Source: Stacks 03EK, 099N. -/
+/-- Finite reduction followed by coefficient restriction is additive. -/
 @[instance] theorem cbcFiniteReductionModule_additive (T : Scheme.{u}) (n : ℕ) :
     (cbcFiniteReductionModule d T n).Additive := by
   unfold cbcFiniteReductionModule
   infer_instance
 
-/-- The finite quotient object in its own constant coefficient derived category.
-Source: Stacks 099N. -/
+/-- The finite quotient object in its own constant coefficient derived category. -/
 def cbcFiniteReduction (T : Scheme.{u}) (n : ℕ) :=
   reductionDerivedChange T (pbcAdicProjection T d n) ⋙
     pbcDerivedRestrict (pbcLevelConstantComparison T d n).hom
 
 /-- Reexpressing an ordinary reduction tower level in constant finite coordinates
-leaves every section unchanged and only transports its coefficient action.
-Source: Stacks 099N. -/
+leaves every section unchanged and only transports its coefficient action. -/
 theorem cbcFiniteLevel_existsUnique (T : Scheme.{u}) (n : ℕ) :
     ∃! e : completedReductionModuleTowerFunctor T d ⋙
           (CategoryTheory.evaluation ℕᵒᵖ (pbcModules T (pbcAdicCompletion T d))).obj (op n) ≅
@@ -1086,84 +1071,72 @@ theorem cbcFiniteLevel_existsUnique (T : Scheme.{u}) (n : ℕ) :
   ext M V x
   exact he' M V x
 
-/-- The finite coordinate change fixed by identity on sections.
-Source: Stacks 099N. -/
+/-- The finite coordinate change fixed by identity on sections. -/
 @[irreducible] def cbcFiniteLevel (T : Scheme.{u}) (n : ℕ) :=
   (cbcFiniteLevel_existsUnique d T n).exists.choose
 
-/-- The finite source functor, including the completed action through the projection.
-Source: Stacks 03DI, 099N. -/
+/-- The finite source functor, including the completed action through the projection. -/
 def cbcFiniteSource (n : ℕ) :=
   (@moduleJ.{u} (cbcFiniteRing d n) _ U X j sq.isOpenImmersion) ⋙
     modulePullback (cbcFiniteRing d n) g ⋙ cbcFiniteRes d X' n
 
-/-- The finite target functor in the pullback-then-extension order.
-Source: Stacks 03DI, 099N. -/
+/-- The finite target functor in the pullback-then-extension order. -/
 def cbcFiniteTarget (n : ℕ) :=
   modulePullback (cbcFiniteRing d n) gU ⋙
     (@moduleJ.{u} (cbcFiniteRing d n) _ U' X' j' sq.isOpenImmersion') ⋙
       cbcFiniteRes d X' n
 
-/-- Both finite source and target are exact and additive.
-Source: Stacks 03DI, 03DJ, 03EK. -/
+/-- Both finite source and target are exact and additive. -/
 @[instance] theorem cbcFiniteSource_additive (n : ℕ) :
     (cbcFiniteSource d sq n).Additive := by
   unfold cbcFiniteSource cbcFiniteRes
   infer_instance
 
-/-- Exactness of the finite source, checked before derived localization.
-Source: Stacks 03DJ, 03EK. -/
+/-- Exactness of the finite source, checked before derived localization. -/
 @[instance] theorem cbcFiniteSource_limits (n : ℕ) :
     PreservesFiniteLimits (cbcFiniteSource d sq n) := by
   unfold cbcFiniteSource cbcFiniteRes
   infer_instance
 
-/-- The finite source preserves cokernels and finite sums.
-Source: Stacks 03DI, 03EK. -/
+/-- The finite source preserves cokernels and finite sums. -/
 @[instance] theorem cbcFiniteSource_colimits (n : ℕ) :
     PreservesFiniteColimits (cbcFiniteSource d sq n) := by
   unfold cbcFiniteSource cbcFiniteRes
   infer_instance
 
-/-- Additivity of the finite target.
-Source: Stacks 03DI, 03EK. -/
+/-- Additivity of the finite target. -/
 @[instance] theorem cbcFiniteTarget_additive (n : ℕ) :
     (cbcFiniteTarget d sq n).Additive := by
   unfold cbcFiniteTarget cbcFiniteRes
   infer_instance
 
-/-- Exactness of the finite target on kernels.
-Source: Stacks 03DJ, 03EK. -/
+/-- Exactness of the finite target on kernels. -/
 @[instance] theorem cbcFiniteTarget_limits (n : ℕ) :
     PreservesFiniteLimits (cbcFiniteTarget d sq n) := by
   unfold cbcFiniteTarget cbcFiniteRes
   infer_instance
 
-/-- Exactness of the finite target on cokernels.
-Source: Stacks 03DI, 03EK. -/
+/-- Exactness of the finite target on cokernels. -/
 @[instance] theorem cbcFiniteTarget_colimits (n : ℕ) :
     PreservesFiniteColimits (cbcFiniteTarget d sq n) := by
   unfold cbcFiniteTarget cbcFiniteRes
   infer_instance
 
-/-- Finite reduction followed by the finite source preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N. -/
+/-- Finite reduction followed by the finite source preserves zero morphisms. -/
 theorem cbcFiniteSourceModel_preservesZeroMorphisms (n : ℕ) :
     (cbcFiniteReductionModule d U n ⋙ cbcFiniteSource d sq n).PreservesZeroMorphisms := by
   have := cbcFiniteReductionModule_additive d U n
   have := cbcFiniteSource_additive d sq n
   exact Functor.preservesZeroMorphisms_of_additive _
 
-/-- Finite reduction followed by the finite target preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N. -/
+/-- Finite reduction followed by the finite target preserves zero morphisms. -/
 theorem cbcFiniteTargetModel_preservesZeroMorphisms (n : ℕ) :
     (cbcFiniteReductionModule d U n ⋙ cbcFiniteTarget d sq n).PreservesZeroMorphisms := by
   have := cbcFiniteReductionModule_additive d U n
   have := cbcFiniteTarget_additive d sq n
   exact Functor.preservesZeroMorphisms_of_additive _
 
-/-- The evaluated source model preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N. -/
+/-- The evaluated source model preserves zero morphisms. -/
 theorem cbcSourceLevel_preservesZeroMorphisms (n : ℕ) :
     (completedReductionModuleTowerFunctor U d ⋙ cbcStrictOpenModule d j sq.isOpenImmersion ⋙
       completedTowerModulePullback g d ⋙
@@ -1174,8 +1147,7 @@ theorem cbcSourceLevel_preservesZeroMorphisms (n : ℕ) :
   have := cbcStrictOpenModule_additive d j sq.isOpenImmersion
   exact Functor.preservesZeroMorphisms_of_additive _
 
-/-- The evaluated target model preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N. -/
+/-- The evaluated target model preserves zero morphisms. -/
 theorem cbcTargetLevel_preservesZeroMorphisms (n : ℕ) :
     (completedReductionModuleTowerFunctor U d ⋙ completedTowerModulePullback gU d ⋙
       cbcStrictOpenModule d j' sq.isOpenImmersion' ⋙
@@ -1187,8 +1159,7 @@ theorem cbcTargetLevel_preservesZeroMorphisms (n : ℕ) :
   exact Functor.preservesZeroMorphisms_of_additive _
 
 /-- The ordinary finite-coordinate source comparison: first change the reduction
-level's coordinates, then use the fixed scalar/open/pullback mates.
-Source: Stacks 03DI, 099N. -/
+level's coordinates, then use the fixed scalar/open/pullback mates. -/
 def cbcSourceLevel (n : ℕ) :
     completedReductionModuleTowerFunctor U d ⋙ cbcStrictOpenModule d j sq.isOpenImmersion ⋙
         completedTowerModulePullback g d ⋙
@@ -1199,8 +1170,7 @@ def cbcSourceLevel (n : ℕ) :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (cbcFiniteSourceRes d sq n)
 
-/-- The analogous ordinary target comparison, with the identical finite coordinate change.
-Source: Stacks 03DI, 099N. -/
+/-- The analogous ordinary target comparison, with the identical finite coordinate change. -/
 def cbcTargetLevel (n : ℕ) :
     completedReductionModuleTowerFunctor U d ⋙ completedTowerModulePullback gU d ⋙
         cbcStrictOpenModule d j' sq.isOpenImmersion' ⋙
@@ -1211,8 +1181,7 @@ def cbcTargetLevel (n : ℕ) :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (cbcFiniteTargetRes d sq n)
 
-/-- The actual universal reduction counit on cochain representatives.
-Source: Stacks 06XN. -/
+/-- The actual universal reduction counit on cochain representatives. -/
 def cbcReductionModelMap (T : Scheme.{u})
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     (completedReductionTower T d).obj (DerivedCategory.Q.obj P) ⟶
@@ -1221,8 +1190,7 @@ def cbcReductionModelMap (T : Scheme.{u})
   Functor.leftDerivedCounitOnComplex (completedReductionModuleTowerFunctor T d)
     (completedReductionTower T d) (completedReductionTowerCounit d T) P
 
-/-- Source comparison to its ordinary strict model, using only the universal counits.
-Source: Stacks 06XN. -/
+/-- Source comparison to its ordinary strict model, using only the universal counits. -/
 def cbcSourceModelMap (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
     (completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
       completedTowerPullback g d).obj (DerivedCategory.Q.obj P) ⟶
@@ -1238,8 +1206,7 @@ def cbcSourceModelMap (P : CochainComplex (pbcModules U (pbcAdicCompletion U d))
       (((cbcStrictOpenModule d j sq.isOpenImmersion).mapHomologicalComplex (.up ℤ)).obj
         (((completedReductionModuleTowerFunctor U d).mapHomologicalComplex (.up ℤ)).obj P))
 
-/-- Target comparison to the same ordinary strict model convention.
-Source: Stacks 06XN. -/
+/-- Target comparison to the same ordinary strict model convention. -/
 def cbcTargetModelMap (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
     (completedReductionTower U d ⋙ completedTowerPullback gU d ⋙
       cbcStrictOpen d j' sq.isOpenImmersion').obj (DerivedCategory.Q.obj P) ⟶

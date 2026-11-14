@@ -34,12 +34,12 @@ import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMat
 
 /-! # Finite reduction and the strict open transpose
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-lem-cbc-completed-extension-zero-comparison.proof.md, finite-exchange paragraph;
-Stacks 03DI, 03CY, 03DJ, 06YY and 07A4.
-
 All objects below belong to derived categories of strict towers. The published
 section-normalized comparisons are reused, including their quotient transitions.
+
+## References
+
+* Stacks Project, Tags 03CY, 03D7, 03D8, 03DI, 03DJ, 06YY, 07A4, 07A7, 099N and 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -253,8 +253,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
 /-- Restriction of compatible coefficient systems respects the normalized ordinary
-pullback-square compositor. This involves neither derived functors nor exchange mates.
-Source: Stacks Project, Tags 03D7, 03D8 and 0D6D. -/
+pullback-square compositor. -/
 private theorem proEtaleRingRestriction_square
     (r s : StrictTowerRingedSquare sq)
     (aY : r.RY ⟶ s.RY) (aX : r.RX ⟶ s.RX)
@@ -696,9 +695,8 @@ abbrev openTarget := restricted d (U := U) ⋙ ProEtale.StrictTower.G A v
 abbrev ambientTarget :=
   restricted d (U := U) ⋙ ProEtale.StrictTower.J A j ⋙ ProEtale.StrictTower.G A g
 
-/-- The fixed comparison a uses the normalized pullback transport, scalar comparison,
-and quotient/open identification, in that order. No isomorphism is freely chosen.
-Source: blueprint finite-exchange paragraph; Stacks 099N and 03DI. -/
+/-- The fixed comparison a, composed of the normalized pullback transport, scalar comparison,
+and quotient/open identification, in that order. -/
 def sourceComparison (K : d.derived U) :
     (exchangeTowerRes d T').obj ((source d (j := j) (g := g)).obj K) ≅
       (ambientTarget d (j := j) (g := g)).obj K :=
@@ -709,8 +707,7 @@ def sourceComparison (K : d.derived U) :
     (exchangeResPull d g).app _ ≪≫
     (ProEtale.StrictTower.G A g).mapIso (cbcRealizationQuotientOpen d j K)
 
-/-- The fixed finite-reduction/scalar comparison d at the open corner.
-Source: blueprint finite-exchange paragraph; Stacks 099N. -/
+/-- The fixed finite-reduction/scalar comparison d at the open corner. -/
 def cornerComparison (K : d.derived U) :
     (exchangeTowerRes d U').obj ((corner d (v := v)).obj K) ≅
       (openTarget d (v := v)).obj K :=
@@ -718,8 +715,7 @@ def cornerComparison (K : d.derived U) :
       ((cbcDatumTowerTransport d v).app ((completedReductionTower U d).obj K)) ≪≫
     (exchangeResPull d v).app _
 
-/-- b = J(d)e, with e the published presheaf-identity scalar/open comparison.
-Source: Stacks 03DI and 03CY, blueprint finite-exchange paragraph. -/
+/-- b = J(d)e, with e the published presheaf-identity scalar/open comparison. -/
 def extensionComparison (K : d.derived U) :
     (exchangeTowerRes d T').obj
         ((cbcRealizationJ d j').obj ((corner d (v := v)).obj K)) ≅
@@ -737,8 +733,7 @@ def psi (K : d.derived U)
     (exchangeResPull d j').hom.app ((source d (j := j) (g := g)).obj K) ≫
     (ProEtale.StrictTower.G A j').map (sourceComparison d (j := j) (g := g) K).hom
 
-/-- The specified inverse-image square compositor for constant strict towers.
-Source: Stacks 07A7; the unit-preserving compositors of strict tower operations. -/
+/-- The specified inverse-image square compositor for constant strict towers. -/
 def constantSquare (sq : OpenImmersionSquare v j' j g) :
     ProEtale.StrictTower.G A j ⋙ ProEtale.StrictTower.G A v ≅
       ProEtale.StrictTower.G A g ⋙ ProEtale.StrictTower.G A j' :=
@@ -747,9 +742,7 @@ def constantSquare (sq : OpenImmersionSquare v j' j g) :
     ProEtale.StrictTower.gComp A j' g
 
 /-- The special x is pullback of the completed open unit, followed by the canonical
-square compositor and the inverse quotient/open source identification. The actual
-K-flat pullback presentations are transported by their universal counits.
-Source: Stacks 03DI and 07A7, blueprint finite-exchange paragraph. -/
+square compositor and the inverse quotient/open source identification. -/
 def unitArrow (sq : OpenImmersionSquare v j' j g) (K : d.derived U) :
     (corner d (v := v)).obj K ⟶
       (d.towerPull j').obj ((source d (j := j) (g := g)).obj K) :=

@@ -11,9 +11,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 
 /-! # Finite exceptional inverse image in fixed coefficient coordinates
 
-
 The coefficient universe is that of the module values on the actual small sites.
 The right adjoint is determined by its ordinary etale compact-support adjunction.
+
+## Implementation details
+
+* `sfFiniteExceptionalAt` uses the unique-adjoint construction, not an arbitrarily chosen
+  pro-etale adjoint, and imposes no boundedness hypothesis.
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +29,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The finite-level transported exceptional inverse image at a specified compactification:
 R nu_* followed by the ordinary etale right adjoint, followed by exact nu^*.
-It uses the unique-adjoint construction, not an arbitrarily chosen pro-etale adjoint.
 The fixed-ring module presentation is canonically equivalent to modules over the constant
-coefficient sheaf. No boundedness hypothesis is part of this definition of an ambient
-functor; the node's assertion concerns D+ and the bounded constructible scope. -/
+coefficient sheaf. -/
 def sfFiniteExceptionalAt (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     [(Etale.rightDerivedLowerShriekOfCompactification

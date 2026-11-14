@@ -21,8 +21,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case,
-compatible primitive-root trivializations. -/
+/-- The map `constantZModToGmSheaf` from the constant sheaf to the units sheaf is compatible
+with pullback along a morphism of schemes `g`, so that primitive-root trivializations are
+compatible with pullback. -/
 theorem constantZModToGmSheaf_pullback {X Y : Scheme.{u}} (g : X ⟶ Y)
     (n : ℕ) [NeZero n] (ζ : Γ(Y, ⊤)ˣ) (hζ : ζ ^ n = 1)
     (η : Γ(X, ⊤)ˣ) (hη : η ^ n = 1)

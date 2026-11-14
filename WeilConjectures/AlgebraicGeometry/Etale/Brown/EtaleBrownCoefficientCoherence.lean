@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleInverseTensorCo
 import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Canonical Brown coefficient projection coherence
-Source: Zheng, Construction 5.15 and (5.16.2), printed pp. 34--35.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15 and (5.16.2), pp. 34--35
 -/
 
 @[expose] public noncomputable section
@@ -174,8 +176,7 @@ private theorem projection_hom {m n : ℕ} (h : m ≤ n)
     Functor.whiskerLeft_app, Category.id_comp, Category.comp_id]
   exact Category.id_comp _
 
-/-- The inverse coefficient projection respects the canonical tensor unit and associator.
-Source: Zheng, Construction 5.15 and (5.16.2), printed pp. 34--35. -/
+/-- The inverse coefficient projection respects the canonical tensor unit and associator. -/
 theorem etaleBrownCoefficientCoherence :
     (∀ (n : ℕ) P,
       (B.projection (Nat.le_refl n)).hom.app P ≫

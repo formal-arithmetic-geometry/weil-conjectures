@@ -27,8 +27,7 @@ attribute [local irreducible] finiteScalarLineCoordinate finiteScalarComparison
   cartierRootsComparison Functor.mapDerivedCategory
 
 /-- The line coordinate carries the comparison image of root scalar extension
-to the actual finite root map. Source: diagonal-tower trace (1), root-section
-normalization of the coefficient coordinates. -/
+to the actual finite root map. -/
 theorem finiteScalarLineCoordinate_root (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :

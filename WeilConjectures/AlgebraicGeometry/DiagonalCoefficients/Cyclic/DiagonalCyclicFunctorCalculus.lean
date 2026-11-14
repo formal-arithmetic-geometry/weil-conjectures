@@ -80,8 +80,8 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
     (H.mapDerivedCategory.commShiftIso (n : ℤ)).hom.app _ ≫
     ((H.mapDerivedCategorySingleFunctor 0).hom.app Y₃)⟦(n : ℤ)⟧'
 
-/-- Exact functors carry the actual Ext representative to the single-arrow map.
-Source: Mathlib Ext.mapExactFunctor_hom. -/
+/-- Exact functors carry the actual Ext representative to the single-arrow map
+(cf. `Ext.mapExactFunctor_hom`). -/
 theorem mapExactFunctorRepresentative
     {A : Type a₃} [Category.{b₃} A] [Abelian A]
     {B : Type a₄} [Category.{b₄} B] [Abelian B]

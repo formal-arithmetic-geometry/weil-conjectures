@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardModuleLocallyCon
 
 /-! # Constructibility reflected by finite direct image on curves
 
-Source: Stacks Project, Tags 095K, 0959, 04DZ, and 095G;
-finite direct-factor refinement of the argument for Tag 0A5D.
+## References
+
+* Stacks Project, Tags 095K, 0959, 04DZ, 095G, 0A5D
 -/
 
 @[expose] public section
@@ -53,9 +54,7 @@ private theorem finite_module_stalks {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite 
     (Module.Finite.of_surjective (hM := hfg)
       ((Scheme.pointSmallEtale s).sheafFiber.map beta).hom hsurj)
 
-/-- Finite direct image reflects module constructibility on Noetherian curves.
-Source: Stacks Project, Tags 095K (finite morphism stratification), 0959 (finite
-base change), 095G (pullback), and 0A5D (the assertion-transfer argument). -/
+/-- Finite direct image reflects module constructibility on Noetherian curves. -/
 theorem Scheme.isConstructibleSheaf_of_finite_lowerStar_module
     {k : Type u} [Field k] [IsAlgClosed k] {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Spec (.of k)) [IsCurve g] [IsFinite f]

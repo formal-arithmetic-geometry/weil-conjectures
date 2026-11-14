@@ -41,7 +41,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # One-sided tensor coordinates and geometric pullback
 
-Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -89,10 +91,7 @@ private theorem coordinates_normalization {W : Scheme.{u}}
     Functor.map_comp, Iso.inv_hom_id_map, Category.comp_id,
     Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] using hh
 
-/-- Pullback of the one-sided tensor coordinates is the localized ordinary tensor map.
-This assertion contains no scalar/pullback mate.
-
-Source: Stacks 06YY, 07A4, 07A6, the resolving calculation for the tensor route. -/
+/-- Pullback of the one-sided tensor coordinates is the localized ordinary tensor map. -/
 theorem tensorScalar_oneSided_pullback
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

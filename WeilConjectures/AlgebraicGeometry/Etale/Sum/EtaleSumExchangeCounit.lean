@@ -21,12 +21,16 @@ import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumExchangeConstants
 
 /-! # The specified sum exchange preserves evaluation
 
-Source: Stacks Project, Etale Cohomology, Tag 03S6,
-Categories, Tags 0B65 and 0DV0, and Derived Categories, Tag 015F.
-
 All functors act on constant-A module sheaves on ordinary small etale sites. The chosen
 fiber product is `pullback w e`; its projections are e' = fst and w' = snd. This is the
 canonical presentation of U times_X X' used by the recorded base-change map.
+
+## References
+
+* Stacks Project, Étale Cohomology, Tag 03S6
+* Stacks Project, Categories, Tags 0B65, 0DV0
+* Stacks Project, Derived Categories, Tag 015F
+* Stacks Project, Sites and Sheaves, Tag 0H7J
 -/
 
 @[expose] public section
@@ -53,8 +57,6 @@ private lemma sumInverseMateComponent
 component formula preserves the sum counit, and its inverse descends to the specified
 sum exchange preserving evaluation on every unbounded derived object. The last equation
 says that the derived pullback square at A_X is the identity under the canonical constants.
-Source: Stacks Project, Etale Cohomology, Tag 03S6,
-Categories, Tags 0B65 and 0DV0, Derived Categories, Tag 015F, and Sites, Tag 0H7J.
 -/
 theorem etaleSumExchangeCounit
     (A : Type (u + 1)) [CommRing A] [Finite A]

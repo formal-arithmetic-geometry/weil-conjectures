@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Finite stalks and specialization imply finite local constancy
 
-Source: Stacks Project, Tag 0GKC, lemma-characterize-locally-constant-module, (2) implies (1).
+## References
+
+* Stacks Project, Tag 0GKC
 -/
 
 @[expose] public section
@@ -45,8 +47,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A module sheaf over a finite commutative ring on a Noetherian scheme is finite locally
 constant if its geometric stalks are finite sets and all strict-localization specialization
 maps are bijective. The conclusion gives the finite module and trivialization on every
-member of a jointly surjective étale cover, using restriction to the localized site.
-Source: Stacks Project, Tag 0GKC, lemma-characterize-locally-constant-module, (2) implies (1). -/
+member of a jointly surjective étale cover, using restriction to the localized site. -/
 theorem finiteLocallyConstant_of_finite_stalks_of_bijective_specialization
     {S : Scheme.{u}} [IsNoetherian S]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

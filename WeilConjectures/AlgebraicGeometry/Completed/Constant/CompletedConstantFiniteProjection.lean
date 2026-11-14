@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.CompletedConstantProjection.Comp
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 /-! # Canonical finite projections of completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 093J--093M.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -245,8 +247,7 @@ private theorem projection_linear (X : Scheme.{u})
     ha.symm).trans (residueMul_constScalar X I N n U a y))
 
 end CompletedConstantProjection
-/-- The fixed generator formula and completed-scalar linearity of a finite projection.
-Source: Stacks Tags 03EK and 093J--093M. -/
+/-- The fixed generator formula and completed-scalar linearity of a finite projection. -/
 def CompletedConstantProjectionSpec (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -276,7 +277,7 @@ def CompletedConstantProjectionSpec (X : Scheme.{u})
     q.val.app U (r • x) = a • q.val.app U x)
 
 /-- A finite residue map exists with its actual tensor formula. No finiteness of N is
-needed for this construction. Source: Stacks Tag 03EK, followed by Tags 093J--093M. -/
+needed for this construction. -/
 theorem completedConstantProjection_exists (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -294,7 +295,7 @@ theorem completedConstantProjection_exists (X : Scheme.{u})
     CompletedConstantProjection.projection_linear X I φ hφ N n⟩
 
 /-- The finite projection specified by its tensor formula, constructed by the preceding
-proved existence theorem. Source: Stacks Tags 03EK and 093J--093M. -/
+existence theorem. -/
 def completedConstantProjection (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -304,7 +305,7 @@ def completedConstantProjection (X : Scheme.{u})
     (N : ModuleCat.{u + 1} (AdicCompletion I A)) (n : ℕ) :=
   (completedConstantProjection_exists X I φ hφ N n).choose
 
-/-- Both finite-projection identities. Source: Stacks Tags 03EK and 093J--093M. -/
+/-- Both finite-projection identities. -/
 theorem completedConstantProjection_spec (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

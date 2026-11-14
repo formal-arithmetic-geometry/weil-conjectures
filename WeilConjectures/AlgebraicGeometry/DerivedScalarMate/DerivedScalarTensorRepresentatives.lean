@@ -25,7 +25,9 @@ import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # Scalar tensor comparison on resolving representatives
 
-Source: Stacks Tags 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -96,8 +98,7 @@ private theorem ordinaryComplexIso_naturality {W : Scheme.{u}}
 
 attribute [local irreducible] ordinaryComplexIso
 
-/-- The scalar/tensor comparison on flat-term K-flat representatives.
-Source: Stacks 06YY, 07A4, 07A6. -/
+/-- The scalar/tensor comparison on flat-term K-flat representatives. -/
 theorem representativeScalarTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}

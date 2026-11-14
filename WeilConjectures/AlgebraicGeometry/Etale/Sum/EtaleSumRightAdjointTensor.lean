@@ -23,12 +23,13 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # The tensor normalization of the etale sum right adjoint
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
-lem-pur-co-smooth-etale-locality.proof.md, Step 1; Stacks Project Tag 0GKF.
-
 The comparison is the existing derived graph comparison. The tensor arrow uses the
 inverse of the specified compactification projection, transported to exact pullback.
 All adjunctions are quantified, and all inputs belong to the ordinary unbounded categories.
+
+## References
+
+* Stacks Project, Tag 0GKF
 -/
 
 @[expose] public section
@@ -547,8 +548,7 @@ private theorem tensorProjectionCompatibility
   rw [ht]
   exact (Category.comp_id q).symm
 
-/-- The conjugate of the inverse canonical graph comparison for a fixed compactification.
-Source: blueprint Step 1; Stacks Tag 0GKF. -/
+/-- The conjugate of the inverse canonical graph comparison for a fixed compactification. -/
 noncomputable def etaleTensorRho
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -561,8 +561,7 @@ noncomputable def etaleTensorRho
 
 attribute [local irreducible] etaleTensorRho
 
-/-- The coefficient normalization eta is rho at the unit followed by coefficient pullback.
-Source: blueprint Step 1; Stacks Tag 0GKF. -/
+/-- The coefficient normalization eta is rho at the unit followed by coefficient pullback. -/
 noncomputable def etaleTensorEta
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -573,8 +572,7 @@ noncomputable def etaleTensorEta
 
 attribute [local irreducible] etaleTensorEta
 
-/-- The specified compactification projection, with exact rather than left-derived pullback.
-Source: Stacks Tag 0GKF, support-map compatibility (2). -/
+/-- The specified compactification projection, with exact rather than left-derived pullback. -/
 noncomputable def etaleTensorProjection
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (e : U ⟶ X)
     (c : Compactification e) (M : DerivedCategoryModule A U) (K : DerivedCategoryModule A X) :
@@ -590,8 +588,8 @@ noncomputable def etaleTensorProjection
 
 attribute [local irreducible] etaleTensorProjection
 
-/-- The specified projection is invertible, including compactifications with nonfinite proper part.
-Source: Stacks Tag 0GKF; blueprint Step 1. -/
+/-- The specified projection is invertible, including compactifications with nonfinite
+proper part. -/
 theorem isIso_etaleTensorProjection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]
@@ -621,8 +619,7 @@ theorem isIso_etaleTensorProjection
     (((derivedTensor (ModuleCat.{u + 1} A) U).obj M).obj
       ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)))
 
-/-- The displayed inverse transpose defining tau, as an actual compact-support morphism.
-Source: blueprint Step 1, displayed inverse-transpose formula; Stacks Tag 0GKF. -/
+/-- The displayed inverse transpose defining tau, as an actual compact-support morphism. -/
 noncomputable def etaleTensorInverseTranspose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]
@@ -646,8 +643,7 @@ noncomputable def etaleTensorInverseTranspose
 
 attribute [local irreducible] etaleTensorInverseTranspose
 
-/-- The tensor transpose tau under the chosen compact-support adjunction.
-Source: blueprint Step 1, displayed inverse-transpose formula; Stacks Tag 0GKF. -/
+/-- The tensor transpose tau under the chosen compact-support adjunction. -/
 noncomputable def etaleTensorTau
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]
@@ -663,7 +659,6 @@ noncomputable def etaleTensorTau
 attribute [local irreducible] etaleTensorTau
 
 /-- Counit characterization and the tensor equality, as maps natural in every unbounded K.
-Source: blueprint Step 1; Stacks Tag 0GKF.
 -/
 theorem etaleSumRightAdjointTensor
     (A : Type (u + 1)) [CommRing A] [Finite A]

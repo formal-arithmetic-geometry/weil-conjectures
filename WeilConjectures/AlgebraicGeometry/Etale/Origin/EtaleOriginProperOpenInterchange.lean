@@ -13,12 +13,12 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Etale-origin proper/open interchange
 
-Source: retained repaired proof of blueprint main-20261015,
-`proposition-composition-open-restriction-compactifications-f--5`, Step 7; Stacks Tags 099R and
-0F7B.
-
 The five arrows use the published fixed-scalar comparisons, transported through the
 canonical intrinsic realization. No ambient exceptional adjunction is assumed.
+
+## References
+
+* Stacks Project, Tags 099R, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +34,7 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- The specified etale interchange, selected together with its full representative and
-open-adjunction normalization. Those conditions determine the map on all objects.
-Source: Stacks Tag 0F7B, retained blueprint Step 7. -/
+open-adjunction normalization. Those conditions determine the map on all objects. -/
 def etaleOriginOpenEtaleInterchange {V T W : Scheme.{u}}
     (p : V ⟶ T) (i : W ⟶ T) [IsProper p] [IsOpenImmersion i]
     [IsNoetherian V] [IsNoetherian T] [IsNoetherian W] [IsNoetherian (pullback p i)] :
@@ -50,8 +49,7 @@ def etaleOriginOpenEtaleInterchange {V T W : Scheme.{u}}
     (IsPullback.of_hasPullback p i)
 
 /-- The five-arrow site-transport composite. The two intervening Plus compatibility
-isomorphisms merely identify termwise open extension before and after inclusion into D.
-Source: retained blueprint Step 7, five-arrow display; Stacks Tags 099R and 0F7B. -/
+isomorphisms merely identify termwise open extension before and after inclusion into D. -/
 def etaleOriginProperOpenIso {V T W : Scheme.{u}}
     (p : V ⟶ T) (i : W ⟶ T) [IsProper p] [IsOpenImmersion i]
     [IsNoetherian V] [IsNoetherian T] [IsNoetherian W] [IsNoetherian (pullback p i)]

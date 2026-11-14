@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicSc
 
 /-! # Realization of the actual finite quotient levels
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 06YY and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +26,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Scalar realization and normalized transition comparisons for actual levels.
-Source: Stacks Tags 06YY and 09C6. -/
+/-- Scalar realization and normalized transition comparisons for actual levels. -/
 structure FinitePerfectAdicActualRealizationData
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -77,8 +78,7 @@ structure FinitePerfectAdicActualRealizationData
       (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op
 
 /-- The descended actual levels admit scalar realization and both normalized comparison
-systems. The etale levels are chosen together with their actual descent comparison.
-Source: the coefficient restriction and tensor-balancing part of Tags 06YY and 09C6. -/
+systems. The etale levels are chosen together with their actual descent comparison. -/
 theorem finitePerfectAdic_actual_realization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

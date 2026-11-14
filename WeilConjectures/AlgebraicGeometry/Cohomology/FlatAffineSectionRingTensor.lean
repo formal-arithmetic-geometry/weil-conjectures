@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # The section ring of a cartesian affine open
 
-Source: Stacks Project, Tags 01I4 and 02KG.
+## References
+
+* Stacks Project, Tag 01I4 (Lemma 26.6.7) and Tag 02KG (Lemma 30.5.1)
 -/
 
 @[expose] public section
@@ -24,9 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}}
 
-/-- The affine cartesian ring formula, with both coefficient maps fixed.
-Source: Stacks Project, Tag 01I4, Lemma 26.6.7, applied to the affine open;
-Tag 02KG, proof of Lemma 30.5.1. -/
+/-- The affine cartesian ring formula, with both coefficient maps fixed. -/
 theorem exists_baseChange_affine_sectionRing_tensor (f : X ⟶ Spec (.of R))
     (W : X.Opens) (hW : IsAffineOpen W)
     (W' : (baseChangedScheme (S := S) f).Opens)

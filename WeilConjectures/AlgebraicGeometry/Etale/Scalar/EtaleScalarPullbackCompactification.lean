@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 
-/-! # Scalar change and the compactification pullback compositor -/
+/-! # Scalar change and the compactification pullback compositor
+
+## References
+
+* Stacks Project, Tags 03D8, 0D6D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -72,9 +77,7 @@ private theorem transport_composition
   rw [reassoc_of% hmF, reassoc_of% hnQa] at hh
   simpa only [Functor.map_comp, Category.assoc] using hh
 
-/-- Scalar change commutes with the canonical compactification pullback compositor.
-Source: Stacks 0D6D and 03D8, scalar/pullback composition and transport through exact
-inverse image; step 2 of lem-pur-etale-open-scalar-projection. -/
+/-- Scalar change commutes with the canonical compactification pullback compositor. -/
 theorem scalarPullback_compactification
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

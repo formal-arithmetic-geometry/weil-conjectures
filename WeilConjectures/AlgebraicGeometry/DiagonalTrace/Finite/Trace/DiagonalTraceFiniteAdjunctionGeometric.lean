@@ -12,6 +12,12 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTrac
 
 This module calculates the geometric component of the explicitly constructed
 finite direct-image operation, using its coefficient-unit component and naturality.
+
+## Implementation details
+
+`diagonalTrace_finiteAdjunction_geometric` is stated for the explicit operation induced by
+direct image rather than an arbitrary function: the values of such a function on supported
+classes do not determine it on all geometric classes.
 -/
 
 @[expose] public noncomputable section
@@ -46,11 +52,7 @@ private theorem adjunct_naturality
     _ = _ := by
       rw [Category.assoc, ← FS.map_comp, adj.homEquiv_naturality_right]
 
-/-- The actual finite direct-image operation has the geometric adjunction equation.
-
-The previous arbitrary-function interface was false: its values on supported
-classes do not determine it on all geometric classes. The source uses the
-operation induced by direct image, which is the explicit operation below. -/
+/-- The actual finite direct-image operation has the geometric adjunction equation. -/
 theorem diagonalTrace_finiteAdjunction_geometric
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

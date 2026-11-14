@@ -16,6 +16,10 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.
 Compatible bounded-below etale origins of a completed object give finite constant-coefficient
 etale origins at every level of its strict reduction tower, after restriction to constant
 coefficients.
+
+## References
+
+* Stacks Project, Tags 00W1, 03DA, 099M
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 /-- The constant-coefficient scalar map followed by the n-th projection is the constant
-quotient map followed by the canonical level comparison.
-Source: strict normalization, proof step 5; Stacks 099M. -/
+quotient map followed by the canonical level comparison. -/
 theorem cbcExchangeScalar_projection (V : Scheme.{t}) (n : ℕ) :
     exchangeScalar d V ≫ completedReductionProjection V d n =
       (constantSheaf (ProEt.topology V) CommRingCat.{t + 1}).map
@@ -78,8 +81,7 @@ theorem cbcPbcFunctionScalars_eq (V : Scheme.{t}) (n : ℕ) :
   erw [hη]
   rfl
 
-/-- Ring maps out of the constant coefficient ring are determined on constant sections.
-Source: Stacks 00W1. -/
+/-- Ring maps out of the constant coefficient ring are determined on constant sections. -/
 theorem cbcConstRing_hom_ext (V : Scheme.{t}) {S : Sheaf (ProEt.topology V) RingCat.{t + 1}}
     (f g : (adicLisseForget V).obj (exchangeConstantRing V A) ⟶ S)
     (h : Functor.whiskerRight (toSheafify (ProEt.topology V)
@@ -96,7 +98,7 @@ theorem cbcConstRing_hom_ext (V : Scheme.{t}) {S : Sheaf (ProEt.topology V) Ring
   apply sheafify_hom_ext _ _ _ S.property
   simpa only [← Category.assoc, hf] using h
 
-/-- The finite scalar map on constant sections. Source: Stacks 03DA. -/
+/-- The finite scalar map on constant sections. -/
 theorem cbcFiniteScalarMap_unit (X : Scheme.{t}) (Λ : Type (t + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : A →+* Λ) :
     Functor.whiskerRight
@@ -123,8 +125,7 @@ theorem cbcFiniteScalarMap_unit (X : Scheme.{t}) (Λ : Type (t + 1))
     (ProEtale.finiteCoefficientScalarMap X Λ)
 
 /-- The finite constant-coefficient scalar map, composed with the finite ring comparison,
-is the constant-coefficient scalar map followed by the n-th projection.
-Source: Stacks 03DA, 099M. -/
+is the constant-coefficient scalar map followed by the n-th projection. -/
 theorem cbcFiniteScalarMap_comparison (V : Scheme.{t}) (n : ℕ) :
     ProEtale.StrictTower.finiteScalarMap A V (ProEtale.PbcQuotient d n)
         (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ≫
@@ -153,8 +154,7 @@ theorem cbcFiniteScalarMap_comparison (V : Scheme.{t}) (n : ℕ) :
   simp only [Functor.whiskerRight_comp, Category.assoc] at h3 ⊢
   exact h3.symm
 
-/-- Restriction of module scalars along a composite of ring sheaf maps.
-Source: Stacks 03DA. -/
+/-- Restriction of module scalars along a composite of ring sheaf maps. -/
 def cbcSheafRestrictScalarsComp {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R R' R'' : Sheaf J RingCat.{t + 1}} (α : R ⟶ R') (β : R' ⟶ R'') :
     SheafOfModules.restrictScalars.{t + 1} (α ≫ β) ≅
@@ -163,8 +163,7 @@ def cbcSheafRestrictScalarsComp {C : Type*} [Category C] {J : GrothendieckTopolo
     (PresheafOfModules.isoMk (fun X ↦ ModuleCat.restrictScalarsComp'App _ _ _ rfl _)
       (by intros; ext; rfl))) (by intros; ext; rfl)
 
-/-- Restriction of module presheaf scalars along the identity of a constant ring.
-Source: Stacks 03DA. -/
+/-- Restriction of module presheaf scalars along the identity of a constant ring. -/
 def cbcConstRestrictScalarsId {C : Type*} [Category C] (Λ : Type (t + 1)) [CommRing Λ] :
     PresheafOfModules.restrictScalars.{t + 1}
         ((Functor.const Cᵒᵖ).map (RingCat.ofHom (RingHom.id Λ))) ≅ 𝟭 _ :=

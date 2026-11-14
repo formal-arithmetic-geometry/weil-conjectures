@@ -22,7 +22,9 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-! # Finite global sections of a prime-annihilated boundary sheaf
 
-Source: Stacks Project, Tag 0GJA, proof, the finite product of boundary stalks.
+## References
+
+* Stacks Project, Tag 0GJA
 -/
 
 @[expose] public section
@@ -47,9 +49,7 @@ private theorem finite_of_annihilated (Λ : Type (u + 1)) [CommRing Λ]
   exact Finite.of_equiv _ ((I • (⊤ : Submodule Λ M)).quotEquivOfEqBot hzero).toEquiv
 
 /-- A constructible sheaf killed by a prime and supported outside a dense open of a
-curve has finite degree-zero cohomology when the coefficient quotient is finite.
-Source: Stacks Project, Tag 0GJA, proof, finite product of boundary stalks;
-module coefficient adaptation of the finite-stalk argument. -/
+curve has finite degree-zero cohomology when the coefficient quotient is finite. -/
 theorem finite_support_prime_global_sections (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

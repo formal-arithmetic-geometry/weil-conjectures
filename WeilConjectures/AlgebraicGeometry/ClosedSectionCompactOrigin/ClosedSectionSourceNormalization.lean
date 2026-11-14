@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSectionCompactOrigin.Close
 
 /-! # Source normalization for a closed section
 
-Source: current blueprint rank-one Thom proof, Step 1, induced global morphism;
-Stacks Tags 0F7B and 0F7J.
+This is the source equation for the induced global morphism in the rank-one Thom isomorphism.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -20,11 +23,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.ClosedSectionCompactOrigin
 
 /-- The canonical compact-support comparison commutes with the prescribed source
-identification for a closed section. This is only the source equation: it has no
-class maps, target complexes, retained target comparison or bounded-below conclusion.
-
-Source: blueprint thm-pur-rank-one-thom.proof.md, Step 1, induced global morphism;
-Stacks Tags 0F7B and 0F7J. -/
+identification for a closed section. -/
 theorem closedSectionSourceNormalization
     (P : WeilConjectures.PurityFiniteSetting.{u}) {B X : Scheme.{u}}
     (b : B ⟶ Spec (.of P.field.k))

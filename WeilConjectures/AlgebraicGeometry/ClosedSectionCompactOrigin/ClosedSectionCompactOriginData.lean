@@ -41,8 +41,12 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-! # Canonical data for the closed-section compact-origin equation
 
 The constant objects, proper and exact closed-image identifications, source maps and
-retained witnesses are the existing data of lem-pur-closed-section-compact-origin.
+retained witnesses are the existing data of the closed-section compact-origin equation.
 This module separates their construction from the source-normalization theorem.
+
+## References
+
+* Stacks Project, Tag 09BM
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +112,7 @@ def supportedComparison {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s] :
   (DerivedCategory.singleFunctor _ 0).mapIso
     (asIso (SupportedConstantNormalization.gamma P.Coefficient s))
 
-/-- Closed pro-etale direct image is exact by the recorded complementary-open theorem.
-Source: Stacks Tag 09BM. -/
+/-- Closed pro-etale direct image is exact by the recorded complementary-open theorem. -/
 instance closedPushExact {B X : Scheme.{u}} (s : B ⟶ X) [IsClosedImmersion s]
     [QuasiCompact s.openComplement.ι] :
     PreservesFiniteColimits (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) s) :=

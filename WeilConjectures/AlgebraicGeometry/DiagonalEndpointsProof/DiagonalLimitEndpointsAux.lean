@@ -230,9 +230,7 @@ private theorem ordinaryRlim_isIso_of_unit
   unfold diagonalOrdinaryRlim
   infer_instance
 
-/-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison.
-
--/
+/-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison. -/
 private theorem ordinaryRlim_isIso_of_epi (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l T)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems l T)] (L : DiagonalRlim (DiagonalMod l T))

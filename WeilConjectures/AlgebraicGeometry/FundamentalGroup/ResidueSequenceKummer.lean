@@ -17,8 +17,7 @@ in `k` and `ζ ∈ k` a primitive `N`-th root of unity. For a unit `g` on `U`, t
 `ord_z g mod N` against `ζ` at every point `z` of `C`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_residue_eq_ord_of_isUnit`): an `N`-th root of `g`
 in a separable closure of `k(C)` is a Kummer element of the torsor. This produces the torsors
-with prescribed residues in the residue sequence of blueprint
-`proposition-no-fixed-class-degree-one--1`.
+with prescribed residues in the residue sequence.
 -/
 
 @[expose] public section

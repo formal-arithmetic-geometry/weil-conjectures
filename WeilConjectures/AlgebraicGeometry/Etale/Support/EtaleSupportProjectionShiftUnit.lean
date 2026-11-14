@@ -29,13 +29,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.DerivedTensor
 
 /-! # Shift and unit coherence of the unbounded etale support projection
 
-Source: Zheng, Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks,
-Theorem 2.18(2), printed p. 12, Construction 2.26, printed p. 15; Stacks Tags 0F0G,
-0B56 and 0GL1.
-
 The helpers only put the existing compactification projection in coefficient-first order.
 They use the canonical signed tensor symmetry, never an arbitrary comparison isomorphism.
 The theorem concerns the ordinary unbounded categories and the supplied compactification.
+
+## References
+
+* Zheng, Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks,
+  Theorem 2.18(2), printed p. 12, Construction 2.26, printed p. 15
+* Stacks Project, Tags 0B56, 0F0G, 0GL1
 -/
 
 @[expose] public section
@@ -61,16 +63,14 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [UpperStarPreservesFlat A]
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- The source `(K,L) ↦ L ⊗^L F K` in coefficient-first tensor order.
-Source: Zheng Theorem 2.18(2). -/
+/-- The source `(K,L) ↦ L ⊗^L F K` in coefficient-first tensor order. -/
 noncomputable def supportProjectionSource :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
         DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
   rightDerivedLowerShriekOfCompactification A c ⋙ (derivedTensor A Y).flip
 
-/-- The target `(K,L) ↦ F(f^* L ⊗^L K)` with the existing exact derived inverse image.
-Source: Zheng Theorem 2.18(2). -/
+/-- The target `(K,L) ↦ F(f^* L ⊗^L K)` with the existing exact derived inverse image. -/
 noncomputable def supportProjectionTarget :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
@@ -79,8 +79,8 @@ noncomputable def supportProjectionTarget :
     ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((f)^*[A])).obj
       (derivedTensor A X).flip)
 
-/-- The source has the canonical first-factor cochain shift comparison.
-Source: Stacks Tag 0B56, signed cochain tensor convention. -/
+/-- The source has the canonical first-factor cochain shift comparison, with the signed
+cochain tensor convention. -/
 noncomputable instance supportProjectionSourceCommShift
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((supportProjectionSource A c).obj K).CommShift ℤ :=
@@ -88,8 +88,7 @@ noncomputable instance supportProjectionSourceCommShift
     ((rightDerivedLowerShriekOfCompactification A c).obj K)).CommShift ℤ)
 
 /-- The target shift comparison is the composite of exact pullback, first-factor tensor,
-and the canonical derived direct-image shift comparisons.
-Source: Stacks Tags 0B56, 0GL1. -/
+and the canonical derived direct-image shift comparisons. -/
 noncomputable instance supportProjectionTargetCommShift
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((supportProjectionTarget A c).obj K).CommShift ℤ :=
@@ -104,8 +103,7 @@ variable {FC : A → A → Type vFC} {CC : A → Type (u + 1)}
 
 /-- The specified proper counit projection followed by open projection, conjugated by
 signed swaps to put the coefficient first. The open inverse is the derived sheaf tensor
-comparison; the final swap passes through extension by zero and proper direct image.
-Source: Zheng Theorem 2.18(2), Stacks Tags 0B56, 0GL1. -/
+comparison; the final swap passes through extension by zero and proper direct image. -/
 noncomputable def supportProjectionMap :
     supportProjectionSource A c ⟶ supportProjectionTarget A c :=
   Functor.whiskerLeft (rightDerivedLowerShriekOfCompactification A c)
@@ -115,8 +113,7 @@ noncomputable def supportProjectionMap :
       ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((f)^*[A])).map
         (derivedTensorSymmetry A X).hom)
 
-/-- The canonical identification of `F(f^* C_Y ⊗^L K)` with `F K`.
-Source: Zheng Theorem 2.18(2), tensor-unit normalization; Stacks Tag 0B56. -/
+/-- The canonical identification of `F(f^* C_Y ⊗^L K)` with `F K`. -/
 noncomputable def supportProjectionTargetUnit
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((supportProjectionTarget A c).obj K).obj (𝟙_ _) ≅
@@ -125,8 +122,7 @@ noncomputable def supportProjectionTargetUnit
     (((derivedTensor A X).flip.obj K).mapIso (leftDerivedUpperStarUnitIso A f) ≪≫
       derivedTensorLeftUnitor A X K)
 
-/-- The target unit arrow of the support projection.
-Source: Zheng Theorem 2.18(2). -/
+/-- The target unit arrow of the support projection. -/
 noncomputable def supportProjectionUnitA
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((supportProjectionTarget A c).obj K).obj
@@ -134,8 +130,7 @@ noncomputable def supportProjectionUnitA
       (rightDerivedLowerShriekOfCompactification A c).obj K :=
   (supportProjectionTargetUnit A c K).hom
 
-/-- The source unit arrow of the support projection.
-Source: Zheng Theorem 2.18(2). -/
+/-- The source unit arrow of the support projection. -/
 noncomputable def supportProjectionUnitB
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((supportProjectionSource A c).obj K).obj
@@ -145,8 +140,7 @@ noncomputable def supportProjectionUnitB
     ((rightDerivedLowerShriekOfCompactification A c).obj K)).hom
 
 /-- The actual map, its canonical integer-shift square (in both directions), and
-its identity component at the coefficient unit, using the explicitly fixed unitors.
-Source: Zheng Theorem 2.18(2), Stacks Tags 0B56 and 0GL1. -/
+its identity component at the coefficient unit, using the explicitly fixed unitors. -/
 abbrev SupportProjectionCoherent
     (e : supportProjectionSource A c ≅ supportProjectionTarget A c) : Prop :=
   BifunctorProjectionCoherent (sT := supportProjectionSourceCommShift A c)
@@ -176,8 +170,7 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [UpperStarPreservesFlat A]
 
 /-- The canonical unit identification for termwise constants: the exact-functor/single
-comparison followed by the constant-sheaf and derived unit identifications.
-Source: Zheng Construction 2.26. -/
+comparison followed by the constant-sheaf and derived unit identifications. -/
 noncomputable def supportConstantUnitIso (T : Scheme.{u}) :
     (constantSheaf T.smallEtaleTopology A).mapDerivedCategory.obj
       ((_root_.DerivedCategory.singleFunctor A 0).obj (𝟙_ A)) ≅
@@ -188,8 +181,7 @@ noncomputable def supportConstantUnitIso (T : Scheme.{u}) :
     singleFunctorObjUnitIso A T
 
 /-- Shift and unit normalization of a fixed constant-pullback comparison, using only
-canonical exact-functor shifts and the explicit unit identifications above.
-Source: Zheng Construction 2.26. -/
+canonical exact-functor shifts and the explicit unit identifications above. -/
 def SupportConstantPullbackCoherent {X Y : Scheme.{u}} (f : X ⟶ Y)
     (e : (constantSheaf Y.smallEtaleTopology A).mapDerivedCategory ⋙ L((f)^*[A]) ≅
       (constantSheaf X.smallEtaleTopology A).mapDerivedCategory) : Prop :=
@@ -571,8 +563,6 @@ attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
 shift and equal to the identity at the unit. The same is true after restriction to all
 constant derived coefficients, for both the map and its inverse. Pullback of constant
 complexes is the existing canonical comparison, with its shift and unit normalization.
-Source: Zheng Theorem 2.18(2), printed p. 12, Construction 2.26, printed p. 15;
-Stacks Tags 0F0G, 0B56, 0GL1.
 -/
 theorem etaleSupportProjectionShiftUnit
     (k : Type u) [Field k] [IsAlgClosed k] (p ell : ℕ) [CharP k p]

@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantRealizationScalarRestr
 
 /-! # Constant realization and scalar restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -107,9 +109,7 @@ private theorem constantRealization_underlying_eq (X : Scheme.{t})
   rw [hB, hD]
   simp only [← Functor.assoc, moduleRestrictionForget]
 
-/-- Constant realization commutes naturally with restriction of coefficient scalars.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL. -/
+/-- Constant realization commutes naturally with restriction of coefficient scalars. -/
 theorem constantRealization_restrictScalars (X : Scheme.{t})
     {B D : Type t} [CommRing B] [CommRing D] (f : B →+* D) :
     Nonempty

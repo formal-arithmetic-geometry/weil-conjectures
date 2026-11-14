@@ -14,7 +14,9 @@ import all WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExa
 
 /-! # Canonical exact structures of the scalar mate
 
-Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 07A4, 07A6, 0A8D, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -81,8 +83,7 @@ private theorem native_shifts {W : Scheme.{u}}
   rw [hc]
   simp
 
-/-- The restricted scalar functors have compatible canonical exact structures.
-Source: Stacks 06YY, 07A4, 0A8D, 0FPT; steps 4--5 of the scalar-mate argument. -/
+/-- The restricted scalar functors have compatible canonical exact structures. -/
 theorem scalarMate_canonical_exact_structures
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

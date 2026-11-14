@@ -53,8 +53,8 @@ private theorem quotient_eq_one_of_boundary_zero {A B : Type*}
   have hv' : n • v = Additive.ofMul a := by simpa using hv
   simpa only [toMul_nsmul, toMul_ofMul] using congrArg Additive.toMul hv'
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in
-degree one. -/
+/-- Invariance of cohomology under algebraically closed field extension for a smooth affine
+connected curve, in degree one: the Kummer base-change comparison is bijective. -/
 theorem IsConnectedCurve.affine_kummer_degree_one_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

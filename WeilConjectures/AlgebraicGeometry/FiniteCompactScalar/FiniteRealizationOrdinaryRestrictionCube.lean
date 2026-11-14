@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 
 /-! # The ordinary realization, restriction, and direct-image cube
 
-Source: Stacks Tags 00YV and 03D1; Step 1 of the realization/restriction cube.
+## References
+
+* Stacks Project, Tags 00YV, 03D1
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +28,7 @@ namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 attribute [local implicit_reducible]
   AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage
 
-/-- The realization/restriction cube commutes before passing to derived categories.
-Source: Stacks Tags 00YV and 03D1; section-normalized intrinsic realization. -/
+/-- The realization/restriction cube commutes before passing to derived categories. -/
 theorem realizationRestriction_ordinary_directImage_cube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)

@@ -26,7 +26,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 /-!
 # Constructibility for compact support on a relative affine line
 
-Source: Stacks Project, Tag 0GKZ, lemma-constructible-shriek-rel-dim-1.
+## References
+* [Stacks Project, Tag 0GKZ](https://stacks.math.columbia.edu/tag/0GKZ)
 -/
 
 @[expose] public section
@@ -260,20 +261,6 @@ private theorem affineLine_shriek_constructible_of_finiteType
 /-- Compactly supported cohomology of a constructible module sheaf on the relative affine
 line is constructible, for every degree and every compactification, over an affine base on
 which the additive orders of the coefficients are invertible.
-Source: Stacks Project, Tag 0GKZ (finite commutative coefficient ring specialization).
-
-
-For a finite-type integer affine base, use well-founded induction on closed subsets.
-Closed subschemes are affine and still have finite-type integer coordinate rings. For
-every closed restriction, the dense-open theorem supplies constructibility on a dense
-open. Its complement is a strictly smaller closed subset, to which the induction
-hypothesis applies. The exact inverse-image and compact-support comparisons identify
-these restrictions with the corresponding compact-support outputs. Constructibility
-glues along the open and closed parts. Empty schemes have zero sheaves. This proves
-constructibility for the finite-type model, and constructible pullback finishes the
-arbitrary-base case. The dense-open theorem is proved in the imported module from the
-lisse-open-relative-line theorem, quasi-finite shriek constructibility, and the relative
-open-closed triangle; its geometric shrinking step is also proved in this delivery.
 -/
 theorem isConstructibleEtaleModuleSheaf_affineLine_shriek
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y]

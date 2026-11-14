@@ -12,7 +12,16 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSuppor
 /-!
 # Normalization of compact supports for an etale morphism
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6.
+## Implementation details
+
+* `canonicalEtaleCompactSupportNormalization` is constructed from
+  `canonicalEtaleCompactSupportCore` and graph coherence: vertical pasting supplies
+  composition, and conjugacy supplies the unique counit-preserving adjoint comparison.
+
+## References
+
+* SGA 4 XVII 5.2.2 and 6.2.11
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public section
@@ -29,8 +38,7 @@ namespace AlgebraicGeometry.Etale
 /-- A simultaneous normalization, on all unbounded complexes. The graph-extension equation
 specifies the sheaf comparison, and the homotopy equation specifies its derived descent;
 neither comparison is an arbitrary isomorphism. Proper refinements are compared using the
-same normalized comparison for the coarser open immersion.
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tag 03S6. -/
+same normalized comparison for the coarser open immersion. -/
 structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A] where
   /-- The compact-support-to-sum comparison. -/
   comparison : ∀ {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
@@ -132,8 +140,7 @@ structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A] where
           (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) f inferInstance)).counit =
         adj.counit
 
-/-- The right-adjoint comparison is uniquely determined by preservation of the counit.
-Source: adjunction conjugacy; SGA 4 XVII 5.2.2. -/
+/-- The right-adjoint comparison is uniquely determined by preservation of the counit. -/
 theorem counitPreservingComparison
     {C D : Type*} [Category C] [Category D]
     {L S : C ⥤ D} {R T : D ⥤ C}
@@ -160,8 +167,7 @@ theorem counitPreservingComparison
   apply (cancel_epi (e.hom.app (R.obj Y))).1
   exact (NatTrans.congr_app hq' Y).trans (NatTrans.congr_app hq Y).symm
 
-/-- Comparisons of two squares are preserved by vertical composition.
-Source: functoriality and associativity; SGA 4 XVII 6.2.11. -/
+/-- Comparisons of two squares are preserved by vertical composition. -/
 theorem comparison_vComp
     {C₀ C₁ C₂ C₃ C₄ C₅ : Type*}
     [Category C₀] [Category C₁] [Category C₂]
@@ -187,10 +193,7 @@ theorem comparison_vComp
   rw [h₁K, ← G₁.map_comp_assoc, h₀K, G₁.map_comp, Category.assoc]
 
 /-- The canonical graph normalization, with its actual comparison maps exposed.
-This is the specified witness of `nonempty_etaleCompactSupportNormalization`, constructed
-from `canonicalEtaleCompactSupportCore` and graph coherence. Vertical pasting supplies
-composition, and conjugacy supplies the unique counit-preserving adjoint comparison.
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6. -/
+This is the specified witness of `nonempty_etaleCompactSupportNormalization`. -/
 noncomputable def canonicalEtaleCompactSupportNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     EtaleCompactSupportNormalization A := by
@@ -229,8 +232,7 @@ noncomputable def canonicalEtaleCompactSupportNormalization
   }
 
 /-- The canonical compact-support-to-sum normalization, including its degree-zero,
-refinement, sum/evaluation adjunction, base-change and identity/composition normalizations.
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6. -/
+refinement, sum/evaluation adjunction, base-change and identity/composition normalizations. -/
 theorem nonempty_etaleCompactSupportNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     Nonempty (EtaleCompactSupportNormalization A) := by

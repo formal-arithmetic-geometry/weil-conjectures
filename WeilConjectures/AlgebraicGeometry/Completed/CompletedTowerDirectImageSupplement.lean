@@ -25,8 +25,9 @@ public import WeilConjectures.AlgebraicGeometry.CompletedTowerDirectImage
 /-!
 # Total direct image of strict completed-coefficient towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1276;
-Stacks Project, Tag 099N.
+## References
+
+* Stacks Project, Tags 099N, 0944
 -/
 
 @[expose] public noncomputable section
@@ -419,8 +420,7 @@ private theorem finiteComplexUnit_eq (n : ℕ)
 
 set_option Elab.async false in
 /-- Perfectness of each quotient makes this specified projection-formula arrow an
-isomorphism, functorial in the input.
-Source: blueprint order 1276; Stacks Project, Tag 0944. -/
+isomorphism, functorial in the input. -/
 theorem completedDirectImageProjectionFormula_properties (d : AdicCoefficientDatum A) :
     (∀ (n : ℕ) (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))),
       IsIso (completedDirectImageProjectionFormula f d n K)) ∧

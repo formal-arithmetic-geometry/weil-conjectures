@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateTransportedPullba
 
 /-! # Coherence of normalized finite Tate comparison maps
 
-Source: Stacks Project, Tags 03PK, 03Q1 and 099R.
+## References
+
+* Stacks Project, Tags 03PK, 03Q1, 099R
 -/
 
 @[expose] public noncomputable section
@@ -341,8 +343,7 @@ private theorem limit_root_power (T : Scheme.{u}) (r s : ℕ) (h : r ≤ s)
     congr 1
     rw [show s + 1 - r = (s - r) + 1 by omega, pow_succ, Nat.mul_comm]
 
-/-- Normalized comparisons respect scheme pullback and changes of annihilator.
-Source: `lem-amb-finite-tate-site-descent`, proof step 2; Stacks 03PK and 03Q1. -/
+/-- Normalized comparisons respect scheme pullback and changes of annihilator. -/
 theorem finite_tate_normalized_coherence
     (b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →
       ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),

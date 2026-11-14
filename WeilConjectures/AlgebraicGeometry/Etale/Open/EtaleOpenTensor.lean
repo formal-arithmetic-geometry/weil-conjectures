@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantModuleFlat
 
 /-! # Canonical étale open tensor and coefficient comparisons
 
-Source: Stacks Tags 0GL1, 0E8I, 06YY, 03EL, 03DI and 0E8J.
+## References
+
+* Stacks Project, Tags 03DI, 03EL, 06YY, 0E8I, 0E8J, 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -241,8 +243,7 @@ private theorem scalar_restricts
     Iso.symm_inv, a, b] using hi
 
 /-- The full open tensor/coefficient assertion. Every comparison in these laws is
-fixed above, or is a published canonical scalar tensor/composition comparison.
-Source: Stacks 0GL1, 0E8I, 06YY, 03EL, 03DI, 0E8J. -/
+fixed above, or is a published canonical scalar tensor/composition comparison. -/
 structure EtaleOpenTensorComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Prop where
@@ -322,8 +323,7 @@ structure EtaleOpenTensorComparisons
         (scalarExtension φ X).map (canonicalGammaExact (ModuleCat.{u + 1} A) j P T)
 
 /-- The canonical open comparisons obey the projection, K-flat normalization,
-open counit, associativity, scalar-tower and mixed tensor/scalar laws.
-Source: Stacks 0GL1, 0E8I, 06YY, 03EL, 03DI, 0E8J. -/
+open counit, associativity, scalar-tower and mixed tensor/scalar laws. -/
 theorem etaleOpenTensorComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

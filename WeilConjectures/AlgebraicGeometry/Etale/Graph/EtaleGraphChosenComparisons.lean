@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSuppor
 
 /-! # Chosen compact-support comparisons used in graph composition
 
-Source: Stacks Project, Tags 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7I and 0F7J
+* SGA 4 XVII 6.2.11
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   canonicalEtaleCompactSupportComparison rightDerivedLowerShriekIso
   mapDerivedCategoryOpenImmersionLowerShriekId rightDerivedLowerStarIdIso
 
-/-- Compare the chosen compactification with the specified derived sum extension.
-Source: SGA 4 XVII 6.2.11. -/
+/-- Compare the chosen compactification with the specified derived sum extension. -/
 @[irreducible]
 noncomputable def graphChosenEtaleComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -38,8 +40,7 @@ noncomputable def graphChosenEtaleComparison
   (rightDerivedLowerShriekIso A (HasCompactification.compactification f)).symm ≪≫
     canonicalEtaleCompactSupportComparison A f (HasCompactification.compactification f)
 
-/-- Compute a proper map using its identity open immersion, then remove that identity.
-Source: Stacks Project, Tags 0F7I and 0F7J. -/
+/-- Compute a proper map using its identity open immersion, then remove that identity. -/
 @[irreducible]
 noncomputable def graphChosenProperComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -55,8 +56,7 @@ noncomputable def graphChosenProperComparison
         Functor.mapDerivedCategoryIdIso _) _ ≪≫
     Functor.leftUnitor _
 
-/-- Compute an open immersion using the identity proper map, then remove that identity.
-Source: Stacks Project, Tags 0F7I and 0F7J. -/
+/-- Compute an open immersion using the identity proper map, then remove that identity. -/
 @[irreducible]
 noncomputable def graphChosenOpenComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]

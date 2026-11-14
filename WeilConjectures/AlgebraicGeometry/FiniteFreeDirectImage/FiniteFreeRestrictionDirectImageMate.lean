@@ -19,7 +19,9 @@ For a morphism `g : U ⟶ V` of schemes and a map of ring sheaves on `V` (with i
 to `U`) along which the target ring is finite free, the inverse scalar mate of the canonical
 restriction/direct-image comparison is invertible.
 
-Source: Stacks Project, Tags 0B56 and 07A6.
+## References
+
+* Stacks Project, Tags 0B56 (projection formula), 07A6 (derived adjunction)
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 /-- The inverse scalar mate of the canonical restriction/direct-image square is invertible
-for a globally finite-free coefficient extension.
-
-Source: Stacks Project, Tags 0B56 (projection formula) and 07A6 (derived adjunction). -/
+for a globally finite-free coefficient extension. -/
 theorem restrictionDirectImageMate_isIso {U V : Scheme.{u}} (g : U ⟶ V)
     (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
     (RU SU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})

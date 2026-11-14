@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentabili
 
 /-! # Compatible sections of finite locally constant sheaf towers
 
-Source: Stacks Project, Tags 03RV, 01YW, 09BV and 0990; the finite-stalk
-adaptation in the compatible derived trivializations proof, steps 1--5.
+## References
+
+* Stacks Project, Tags 03RV, 01YW, 09BV and 0990
 -/
 
 @[expose] public section
@@ -26,10 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A countable tower of finite locally constant etale sheaves with nonempty geometric
 stalks admits simultaneous compatible sections on an affine weakly contractible cover.
-The transition maps need not be epimorphisms.
-
-Source: Stacks Project, Tags 03RV, 01YW, 09BV and 0990; steps 1--5 of the
-compatible finite derived trivializations proof. -/
+The transition maps need not be epimorphisms. -/
 theorem finite_lisse_tower_section_cover
     (X : Scheme.{u}) (I : ℕ → Sheaf X.smallEtaleTopology (Type (u + 1)))
     (r : ∀ n : ℕ, I (n + 1) ⟶ I n)

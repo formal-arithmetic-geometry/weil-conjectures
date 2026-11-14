@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # A dense thickening locus for componentwise normalization
 
-Source: Stacks Project, Tag 0GK7, last paragraph, using Tags 0BXR and 035Q.
+## References
+
+* Stacks Project, Tag 0GK7 (last paragraph), using Tags 0BXR and 035Q
 -/
 
 @[expose] public section
@@ -46,10 +48,7 @@ private theorem generic_mem_dense_open {A : Type*} [TopologicalSpace A]
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalization of the reduced irreducible components of an algebraic scheme is
 finite and surjective, and is a thickening over a dense open of the target. The inverse
-image of that open is dense in each normalized component.
-
-Source: Stacks Project, Tag 0GK7, last paragraph; Varieties, Tag 0BXR.
--/
+image of that open is dense in each normalized component. -/
 theorem field_curve_normalization_good_open
     {k : Type u} [Field k] (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] (n : ℕ) (C Y : Fin n → Scheme.{u})

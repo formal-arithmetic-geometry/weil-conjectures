@@ -14,8 +14,9 @@ set_option linter.privateModule false
 /-!
 # Geometric stalks of étale sum extension
 
-Source: Stacks Project, Tag 03S5, `proposition-describe-jshriek`, and Tag 0710,
-`lemma-stalk-j-shriek`.
+## References
+
+* Stacks Project, Tags 03S5, 0710
 -/
 
 @[expose] public section

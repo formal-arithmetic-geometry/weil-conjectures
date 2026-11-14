@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarPullback
 
 /-! # Projection normalization of the scalar mate
 
-Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -20,8 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Scheme.DerivedScalarMate
 
-/-- The normalized scalar mate restricts to the specified projection arrow.
-Source: Stacks 03EL, 06YY, 07A4, 07A6; steps 2--3 of the scalar-mate argument. -/
+/-- The normalized scalar mate restricts to the specified projection arrow. -/
 theorem scalarMate_projection_normalization
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

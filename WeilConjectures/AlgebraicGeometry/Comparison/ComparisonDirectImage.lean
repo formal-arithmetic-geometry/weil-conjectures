@@ -11,12 +11,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # The canonical comparison for bounded below direct images
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-theorem-comparison-direct-images--1; Stacks Project, Tag 099R.
-
 The comparison is the existing derived base-change transformation of the canonical
 underived mate. The three statements give invertibility, identity compatibility and
 composition compatibility. Naturality in the complex is built into the transformation.
+
+## References
+
+* [Stacks Project, Tag 099R](https://stacks.math.columbia.edu/tag/099R)
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical derived composition identification on Etale sheaves, with the
-injective-preservation instance supplied by the exact inverse-image adjunction.
-Source: blueprint theorem-comparison-direct-images--1, final proof paragraph;
-Stacks, Tag 099R. -/
+injective-preservation instance supplied by the exact inverse-image adjunction. -/
 noncomputable def etaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}} (f : U ⟶ V) (g : V ⟶ W) :
     (Etale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus ⋙
@@ -45,9 +44,7 @@ noncomputable def etaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ
     (Etale.lowerStarComp (ModuleCat.{u + 1} Λ) f g)
 
 /-- The canonical derived composition identification on ProEtale sheaves, with the
-injective-preservation instance supplied by the exact inverse-image adjunction.
-Source: blueprint theorem-comparison-direct-images--1, final proof paragraph;
-Stacks, Tag 099R. -/
+injective-preservation instance supplied by the exact inverse-image adjunction. -/
 noncomputable def proEtaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}} (f : U ⟶ V) (g : V ⟶ W) :
     (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus ⋙
@@ -60,8 +57,7 @@ noncomputable def proEtaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring
     (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) g)
     (ProEtale.lowerStarComp (ModuleCat.{u + 1} Λ) f g)
 
-/-- The canonical comparison for a quasi-compact quasi-separated morphism is invertible.
-Source: blueprint theorem-comparison-direct-images--1; Stacks, Tag 099R. -/
+/-- The canonical comparison for a quasi-compact quasi-separated morphism is invertible. -/
 theorem isIso_comparisonDirectImagePlus (Λ : Type (u + 1)) [Ring Λ]
     {U V : Scheme.{u}}
     (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] :

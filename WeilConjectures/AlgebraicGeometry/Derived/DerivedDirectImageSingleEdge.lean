@@ -10,7 +10,10 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
 /-! # Single-complex normalization of the truncated counit
-Source: Stacks Project, cohomology.tex, Tag 079W; derived.tex, Tags 08J5 and 06XS.
+
+## References
+
+* Stacks Project, Tags 079W, 08J5, 06XS
 -/
 
 @[expose] public section
@@ -194,9 +197,7 @@ private theorem single_kappa {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
   exact congrArg (fun z ↦ HT.map (pinnedModulePullbackComparisonAt g q N) ≫ z)
     (Category.comp_id (ET.hom.app (l.obj N)))
 
-/-- On a single complex the truncated counit is normalized by the derived unit.
-Source: Stacks Project, cohomology.tex, Tag 079W (normalized adjunction);
-derived.tex, Tags 08J5 and 06XS (truncation and the shifted heart). -/
+/-- On a single complex the truncated counit is normalized by the derived unit. -/
 theorem topEdgeSingleDirectImageMap_counit {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     let HS := DerivedCategory.homologyFunctor.{w, u, u + 1}

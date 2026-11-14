@@ -20,7 +20,12 @@ import WeilConjectures.AlgebraicGeometry.FiniteModelQuotient.FiniteModelQuotient
 import WeilConjectures.AlgebraicGeometry.FiniteModelQuotient.FiniteModelQuotientCohomologyDescent
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! # Finite reductions of integral scalar-model constructible sheaves -/
+/-! # Finite reductions of integral scalar-model constructible sheaves
+
+## References
+
+* Stacks Project, Tags 093M, 093J, 06YQ, 06YY, 0G7E, 09AJ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -179,10 +184,7 @@ private theorem bounded_from_vanishing
     exact h q (by omega) (by omega)
 
 /-- Finite reductions of integral constructible scalar models, including the prescribed
-matrix calculation. No completeness or geometric condition on the prime is assumed.
-
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof, Local models,
-Locality and Strata; Stacks Tags 093M, 093J, 06YQ, 06YY, 0G7E and 09AJ. -/
+matrix calculation. -/
 theorem finite_model_sheaf_quotient_constructible
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]
     (M : AdicCompletion.Modules l E V)

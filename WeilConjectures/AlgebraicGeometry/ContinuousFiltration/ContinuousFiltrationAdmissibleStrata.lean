@@ -110,13 +110,18 @@ import Mathlib.LinearAlgebra.Dimension.Free
 
 /-! # Continuous coefficient filtrations with admissible strata
 
-Source: Bhatt--Scholze, Definitions 6.8.3, 6.8.6 and 6.8.10, Lemma 6.8.13,
-Proposition 6.8.14(2), and Lemma 6.8.2.
+## Implementation details
 
-The compatible norm on a finite extension is its unique extended p-adic norm.
-The continuous coefficient ring is the published lattice presentation
-`ULift C(|U|, E)`, canonically the localization of the completed integral coefficients.
-Open pieces use the actual slice restriction and extension-by-zero counit.
+* The compatible norm on a finite extension is its unique extended p-adic norm.
+* The continuous coefficient ring is the lattice presentation `ULift C(|U|, E)`, canonically
+  the localization of the completed integral coefficients.
+* Open pieces (`piece`, `counit`) use the actual slice restriction and extension-by-zero counit.
+
+## References
+
+* Bhatt--Scholze, Definitions 6.8.1, 6.8.3, 6.8.6 and 6.8.10, Lemmas 6.8.2 and 6.8.13,
+  Proposition 6.8.14(2), Remark 6.8.15.
+* Stacks Project, Tags 09BN, 03D6 and 03DI.
 -/
 
 @[expose] public noncomputable section
@@ -135,8 +140,7 @@ namespace ContinuousFiltration
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E]
 
-/-- The tensor-formula continuous module inverse image, with the canonical coefficient map.
-Source: Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15. -/
+/-- The tensor-formula continuous module inverse image, with the canonical coefficient map. -/
 def pull {Y X : Scheme.{u}} (f : Y ⟶ X) :
     SheafOfModules.{u + 1} (latticeModuleRing X E) ⥤
       SheafOfModules.{u + 1} (latticeModuleRing Y E) :=
@@ -145,14 +149,12 @@ def pull {Y X : Scheme.{u}} (f : Y ⟶ X) :
   Scheme.proEtaleRingModulePullback f (latticeCoefficientSheaf X E)
     (latticeCoefficientSheaf Y E) (asIso (continuousCoefficientInverseImageMap f E))
 
-/-- The open-support piece `v_!v^*`, in the canonical slice presentation of the open site.
-Source: Stacks Tags 09BN and 03DI; Bhatt--Scholze, Lemma 6.8.13. -/
+/-- The open-support piece `v_!v^*`, in the canonical slice presentation of the open site. -/
 def piece {X : Scheme.{u}} (V : X.Opens) :=
   SheafOfModules.overFunctor.{u + 1} (latticeModuleRing X E) (Scheme.ProEt.mk V.ι) ⋙
     Scheme.proEtaleRingedExtensionByZero (Scheme.ProEt.mk V.ι) (latticeCoefficientSheaf X E)
 
-/-- The actual extension-by-zero/restriction counit, without any chosen map into F.
-Source: Stacks Tag 03DI; Bhatt--Scholze, Lemma 6.8.13. -/
+/-- The actual extension-by-zero/restriction counit, without any chosen map into F. -/
 def counit {X : Scheme.{u}} (V : X.Opens)
     (F : SheafOfModules.{u + 1} (latticeModuleRing X E)) :
     (piece E V).obj F ⟶ F := by
@@ -180,8 +182,7 @@ def counit {X : Scheme.{u}} (V : X.Opens)
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
 /-- Ordinary continuous closed direct image followed by continuous open extension by zero,
-with the stratum object exactly the successive restriction of F.
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tags 03D6 and 03DI. -/
+with the stratum object exactly the successive restriction of F. -/
 def stratumPiece {X : Scheme.{u}} (V : X.Opens) {S : Scheme.{u}}
     (t : S ⟶ V.toScheme) (F : SheafOfModules.{u + 1} (latticeModuleRing X E)) :=
   (continuousModuleExtensionByZero (Scheme.ProEt.mk V.ι) E).obj
@@ -192,35 +193,7 @@ end ContinuousFiltration
 
 /-- A rational constructible continuous module has an admissible finite open filtration.
 The canonical section-action equivalence retains the underlying abelian sheaves, identifies
-finite free scalar models, and intertwines locally closed restriction.
-Source: Bhatt--Scholze, Definitions 6.8.3, 6.8.6 and 6.8.10, Lemma 6.8.13,
-Proposition 6.8.14(2), and Lemma 6.8.2.
-
-Proof plan, following the seven DAG steps:
-1. `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal` gives the Noetherian space.
-The continuous realization and internal/sectionwise equivalence identify E-valued local
-models with the finite constant models: e tensor (c_i) maps to (e*c_i), with inverse
-(e_i) maps to the sum of e_i tensor the coordinate vectors. These formulas commute with
-restriction and preserve the underlying abelian sheaves. The comparisons of
-`lem-sfb-internal-module-operations-transport` carry each given stratum restriction and
-its trivializing cover to the internal category, proving constructibility there.
-2. Apply `lem-sfb-finite-model-stratum-filtration` to get ordered opens, their reduced
-closed differences, qcqs open immersions, monic counits and successive quotients.
-3. The field clause of `lem-sfb-scalar-finite-free-resolutions` gives a finite basis of
-each scalar model. Tensor its coordinate isomorphism and inverse with the coefficient
-ring. The restriction comparisons identify the resulting locally finite free L_k.
-4. `lem-sfb-internal-module-operations-transport` preserves exactness and the actual
-adjunction counits. With `lem-weil-pbc-proetale-ringed-open-closed` and the normalized
-continuous coefficient restriction, it transports the internal filtration and cokernels
-to the displayed sectionwise operations, retaining their underlying abelian sheaves.
-5. `lem-weil-pbc-noetherian-open-subscheme-noetherian` gives Noetherian V_k. Affine
-closed pieces have quotient rings of Noetherian rings, and are quasi-compact closed
-subsets, so S_k is Noetherian as well.
-6. `lem-weil-pbc-open-subspace-dimension-monotone` bounds the dimension of each V_k.
-Closed embeddings carry strict irreducible closed chains to such chains in V_k, so
-also bound dim S_k. Open stalk identifications and local ring maps preserve the unit l.
-7. For empty X take m=0; the empty-cover sheaf condition makes F zero. All inclusions
-are non-strict and ranks may be zero, so zero objects and zero quotients are included. -/
+finite free scalar models, and intertwines locally closed restriction. -/
 theorem exists_continuousFiltration_admissibleStrata
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

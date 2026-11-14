@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExch
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerRealizationComparisons
 
 /-! Naturality of the completed realization limit map along the datum tower transport.
-Source: Stacks Tag 03DI and Tag 091N; the final-limit paragraph.
+
+## References
+
+* Stacks Project, Tags 03DI and 091N
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

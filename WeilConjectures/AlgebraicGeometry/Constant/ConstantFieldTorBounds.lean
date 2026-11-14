@@ -127,11 +127,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Tor bounds over a constant field sheaf
 
-Source: blueprint main-20261015, sk-lem-integral-models.proof, first paragraph;
-Stacks Project, Tags 03ER, 08FC, 010N, 06YS and 08FZ.
-
 The existing coefficient-sized small representative accommodates every enclosing
 coefficient universe. All objects are intrinsic module sheaves over the constant ring.
+
+## References
+
+* Stacks Project, Tags 03ER, 08FC, 010N, 06YS and 08FZ.
 -/
 
 @[expose] public noncomputable section
@@ -145,10 +146,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Over a constant field sheaf, cohomological support and Tor amplitude have exactly
- the same ordered interval. No finiteness or enough-points hypothesis is used.
-
-Source: blueprint main-20261015, sk-lem-integral-models.proof, first paragraph;
-Stacks Tags 03ER, 08FC, 010N, 06YS and 08FZ. -/
+the same ordered interval. -/
 theorem constant_field_tor_bounds (X : Scheme.{u})
     (κ : Type (max v (u + 1))) [Field κ]
     (B : ConstantCompletion.D
@@ -210,10 +208,7 @@ theorem constant_field_tor_bounds (X : Scheme.{u})
     exact hpz.of_iso (hcoh P e i)
 
 /-- Finite Tor amplitude over the constant field is equivalent to bounded cohomology.
-The ordered interval is a single common bound for every test module sheaf.
-
-Source: blueprint main-20261015, sk-lem-integral-models.proof, first paragraph;
-Stacks Tag 08FZ. -/
+The ordered interval is a single common bound for every test module sheaf. -/
 theorem constant_field_finite_tor_amplitude_iff (X : Scheme.{u})
     (κ : Type (max v (u + 1))) [Field κ]
     (B : ConstantCompletion.D

@@ -11,7 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRes
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRestrictionData
 import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 
-/-! # The fixed-coefficient open scalar comparison -/
+/-! # The fixed-coefficient open scalar comparison
+
+## References
+
+* Stacks Project, Tags 03DI, 09AF
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -97,10 +102,7 @@ private theorem etale_open_iso_eq
   rw [← hd]
   rfl
 
-/-- Change of site preserves the fixed-coefficient open scalar mate.
-
-Source: Stacks Tags 03DI and 09AF; the site part of Step 2 of
-lem-finite-open-scalar-transport. -/
+/-- Change of site preserves the fixed-coefficient open scalar mate. -/
 theorem fixedOpenScalar_site_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

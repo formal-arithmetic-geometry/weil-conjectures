@@ -17,8 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 
 Let `C` be a smooth integral curve over an algebraically closed field `k`, with generic point
 `η : Spec k(C) ⟶ C`. We show that `Hᵠ(C, F) = 0` for every torsion étale sheaf `F` on `C` and
-`q ≥ 3`, following the blueprint argument at the
-generic point, without spectral sequences:
+`q ≥ 3`, by an argument at the generic point, without spectral sequences:
 
 * by the generic replacement `Hᵠ(C, F) ≅ Hᵠ(C, η_* η^* F)` for `q ≥ 2`
   (`AlgebraicGeometry.IsCurve.bijective_H_map_unit_fromSpecFunctionField`) it suffices to treat `η_*
@@ -175,12 +174,7 @@ lemma subsingleton_sheafH_one_cokernel {n : ℕ} (hn : 0 < n)
 
 include f in
 /-- **Cohomology of `η_* N`.** Let `N` be a sheaf on `Spec k(C)` killed by some `n > 0` with
-`H¹(W, N) = 0` for every affine étale `k(C)`-scheme `W`. Then `Hᵖ(C, η_* N) = 0` for `p ≥ 1`:
-for `p = 1` the edge map `H¹(C, η_* N) ⟶ H¹(k(C), N) = 0` is injective, and for `p ≥ 2`
-an acyclic envelope `0 → N → J → N' → 0` gives a short exact sequence
-`0 → η_* N → η_* J → η_* N' → 0`
-(`AlgebraicGeometry.IsCurve.epi_lowerStar_map_fromSpecFunctionField`) with `η_* J` acyclic and
-`N'` again of this kind. This replaces the Grothendieck spectral sequence of the blueprint. -/
+`H¹(W, N) = 0` for every affine étale `k(C)`-scheme `W`. Then `Hᵖ(C, η_* N) = 0` for `p ≥ 1`. -/
 theorem subsingleton_sheafH_lowerStar_fromSpecFunctionField (p : ℕ) :
     ∀ (N : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ),
       0 < n → n • 𝟙 N = 0 →
@@ -266,10 +260,7 @@ theorem subsingleton_sheafH_of_three_le_of_nsmul_eq_zero
 include f in
 /-- **Cohomological dimension of an integral curve.** Let `C` be an integral curve over an
 algebraically closed field `k`. Then `Hᵠ(C, F) = 0` for every torsion étale sheaf `F` on `C` and
-`q ≥ 3`. Smoothness is not needed: the argument at the generic point
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_nsmul_eq_zero`) only uses the
-generic replacement, the vanishing of `Rᵇη_*` for `b ≥ 2` and the cohomological dimension of
-`k(C)`; torsion sheaves are filtered unions of sheaves killed by an integer. -/
+`q ≥ 3`. -/
 theorem subsingleton_sheafH_of_three_le_of_isIntegral
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) := by

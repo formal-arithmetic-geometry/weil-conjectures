@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjection
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! Inverse mate part of the normalized image realization.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15 and Lemma 5.16
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -28,10 +32,6 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
 /-- Construction of the inverse comparison by the normalized adjunction mate.
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4.
-
-The mate of the derived comparison is invertible because the supplied Brown
-realizations are equivalences; its mate equation is the required normalization.
 -/
 theorem etaleBrownImageRealization_inverse_exists
     (O : Type (u + 1)) [CommRing O] (t : O)

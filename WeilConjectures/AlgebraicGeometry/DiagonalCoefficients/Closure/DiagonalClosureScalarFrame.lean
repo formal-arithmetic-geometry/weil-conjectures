@@ -80,25 +80,9 @@ private theorem scalarFrame_of_lineComparisons
 
 attribute [local irreducible] spRationalTwist spQbarTwist closureLineMap
 
-/-- Construct only the scalar endpoints and normalized direct-image comparisons
-for one finite-field inclusion into the closure. No class, trace, integration
-identity, family or compatibility between finite fields is asserted.
-
-
-
-Restriction of coefficients commutes with direct image; derive this square with
-its full universal unit, transporting the input model by its canonical functor
-and unit equalities. For each of the three projections, bounded continuity on
-the filtered finite-extension diagram identifies its scalar mate with the
-colimit of the finite-free direct-image comparisons. The shifted root lines have
-common lower bound -2 and the projections are qcqs, so this mate is invertible
-on precisely the shifted lines required by ScalarFrame. No continuity assertion
-on arbitrary unbounded objects is used. The target models are scalarRightDerived.
-Apply diagonal_supported_scalar_source separately to the two projections to get
-the supported endpoint and normalized sources. Endpoint uniqueness by adjunction
-injectivity identifies the two supported endpoint homs, so both source equations
-use the same endpoint. Assemble the frame. This works for the bottom field and
-empty schemes; the construction never uses a diagonal class or a trace. -/
+/-- The scalar endpoints and normalized direct-image comparisons for one finite-field
+inclusion into the closure. No class, trace, integration identity, family or
+compatibility between finite fields is asserted. -/
 theorem diagonalClosure_scalarFrame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

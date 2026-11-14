@@ -12,8 +12,10 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-!
 # Presheaves of derived etale maps
 
-Source: Stacks Project, sites-cohomology.tex, Tag 09BE, lemma-locally-constant-map,
-and the derived Hom presheaf used in the finite-ring extension of that lemma.
+## References
+
+* Stacks Project, Tag 09BE, and the derived Hom presheaf used in the finite-ring extension
+  of that lemma
 -/
 
 @[expose] public section
@@ -214,8 +216,7 @@ namespace AlgebraicGeometry.Etale
 
 variable {X : Scheme.{u}} (B : Type (u + 1)) [CommRing B]
 
-/-- The comparison between restriction to `U` and restriction first to `V` then to `U`.
-Source: Stacks, Tag 09BE, restriction of derived maps. -/
+/-- The comparison between restriction to `U` and restriction first to `V` then to `U`. -/
 noncomputable def derivedMapRestrictionIso {U V : X.Etale} (f : U ⟶ V)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     (upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.obj K ≅
@@ -225,8 +226,7 @@ noncomputable def derivedMapRestrictionIso {U V : X.Etale} (f : U ⟶ V)
     (upperStarComp (ModuleCat.{u + 1} B) f.left V.hom U.hom f.w.symm) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm).app K
 
-/-- Restrict a derived morphism along an arrow of the small etale site.
-Source: Stacks, Tag 09BE. -/
+/-- Restrict a derived morphism along an arrow of the small etale site. -/
 noncomputable def restrictDerivedMap
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}
     {U V : X.Etale} (f : U ⟶ V)
@@ -238,8 +238,7 @@ noncomputable def restrictDerivedMap
     (upperStar (ModuleCat.{u + 1} B) f.left).mapDerivedCategory.map a ≫
       (derivedMapRestrictionIso B f L).inv
 
-/-- Restrict an isomorphism in the same manner.
-Source: Stacks, Tag 09BE. -/
+/-- Restrict an isomorphism in the same manner. -/
 noncomputable def restrictDerivedIso
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}
     {U V : X.Etale} (f : U ⟶ V)
@@ -350,8 +349,7 @@ private lemma restrictDerivedMap_comp
     (derivedMapRestrictionIso B (f ≫ g) L)
     (restriction_assoc B f g K) (restriction_assoc B f g L) a
 
-/-- The restriction functions satisfy the presheaf laws.
-Source: Stacks, Tag 09BE. -/
+/-- The restriction functions satisfy the presheaf laws. -/
 theorem derivedMapRestriction_laws
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     (∀ (U : X.Etale) (a), restrictDerivedMap B (K := K) (L := L) (𝟙 U) a = a) ∧
@@ -371,8 +369,7 @@ theorem derivedMapRestriction_laws
     apply Iso.ext
     exact restrictDerivedMap_comp B K L U V W f g a.hom
 
-/-- The presheaf `U ↦ Hom(K|U,L|U)` in the derived categories of etale module sheaves.
-Source: Stacks, Tag 09BE. -/
+/-- The presheaf `U ↦ Hom(K|U,L|U)` in the derived categories of etale module sheaves. -/
 noncomputable def derivedHomPresheaf
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     X.Etaleᵒᵖ ⥤ Type (u + 1) where
@@ -383,8 +380,7 @@ noncomputable def derivedHomPresheaf
   map_comp f g :=
     ConcreteCategory.hom_ext _ _ ((derivedMapRestriction_laws B K L).2.1 _ _ _ g.unop f.unop)
 
-/-- The presheaf `U ↦ Isom(K|U,L|U)`, which can take the empty value.
-Source: Stacks, Tag 09BE. -/
+/-- The presheaf `U ↦ Isom(K|U,L|U)`, which can take the empty value. -/
 noncomputable def derivedIsoPresheaf
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     X.Etaleᵒᵖ ⥤ Type (u + 1) where

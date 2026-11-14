@@ -45,7 +45,11 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Completion of simultaneous reduction on the pro-etale site
-Source: diagonal tower proof step 4; Stacks Tags 099M, 091S and 091Z. -/
+
+## References
+
+* Stacks Project, Tags 099M, 091S, 091Z
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -480,9 +484,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Simultaneous reduction followed by total derived limit is the integral
-ell-completion reflector, with its constant Z_l action retained.
-
-Source: blueprint diagonal tower proof step 4; Stacks Tags 099M, 091S, 091Z. -/
+ell-completion reflector, with its constant Z_l action retained. -/
 theorem diagonal_reduction_completion (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]

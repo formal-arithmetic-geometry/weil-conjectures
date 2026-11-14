@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.ConstructibleShortExactAssertions
 
 /-! # Prime devissage for constructible module sheaves
 
-Source: Stacks Project, Theorem 59.83.10 (03SC), second paragraph of the proof.
+## References
+
+* Stacks Project, Theorem 59.83.10 (03SC), second paragraph of the proof.
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- On a fixed reduced curve, the eight assertions for constructible prime-field sheaves
-imply the assertions for constructible sheaves over any finite coefficient ring.
-Source: Stacks Project, Theorem 59.83.10 (03SC), second proof paragraph. -/
+imply the assertions for constructible sheaves over any finite coefficient ring. -/
 theorem IsCurve.assertions_of_constructible_prime_devissage
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]

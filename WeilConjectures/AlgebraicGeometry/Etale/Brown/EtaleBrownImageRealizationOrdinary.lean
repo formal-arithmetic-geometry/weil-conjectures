@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjection
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! Ordinary part of the normalized image realization.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15
+* Stacks Project, Tags 03CY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -54,11 +58,8 @@ private theorem constantSection_apply
         (CategoryTheory.forget CommRingCat.{u + 1}))
   exact congrArg (fun f ↦ f.app U t) h
 
-/-- Construction of the section-normalized ordinary comparison.
-Source: Zheng, Construction 5.15; Stacks 03CY and 07A4.
-
-The comparison is induced by the ordinary right-underlying comparison and its
-section formula. The construction is independent of properness and finiteness.
+/-- Construction of the section-normalized ordinary comparison, induced by the
+ordinary right-underlying comparison and its section formula.
 -/
 theorem etaleBrownImageRealization_ordinaryRight_exists
     (O : Type (u + 1)) [CommRing O] (t : O)

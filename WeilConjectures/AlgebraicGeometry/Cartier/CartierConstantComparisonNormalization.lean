@@ -40,15 +40,15 @@ import all WeilConjectures.AlgebraicGeometry.Cartier.CartierClosedExchangeCompar
 /-!
 # Normalization and naturality of the Cartier constant comparison
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-sk-lem-geo-cartier.proof.md, opening comparison paragraph; Stacks Project, Sites and
-Sheaves, Tags 0H7J and 00WX.
-
 The inverse images below are the functors on fixed-coefficient module-valued sheaves.
 The etale constant structure map is written as the adjunct of the sheafification extension
 of the constant-presheaf unit. The pro-etale structure map is the published map with
 that same definition. The commutation isomorphism is the conjugate of the canonical
 commutation of direct images along base change and the inclusion of sites.
+
+## References
+
+* Stacks Project, Sites and Sheaves, Tags 0H7J, 00WX
 -/
 
 @[expose] public section
@@ -62,11 +62,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The Cartier constant comparison equals the uniqueness-of-left-adjoints isomorphism,
-is invertible, and commutes with inverse image along every closed immersion.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening comparison paragraph;
-Stacks Project, Sites and Sheaves, Tags 0H7J and
-00WX.
--/
+is invertible, and commutes with inverse image along every closed immersion. -/
 theorem cartierConstantComparison_normalization (A : Type (u + 1)) [CommRing A] :
     (∀ T : Scheme.{u},
       cartierConstantComparison A T =

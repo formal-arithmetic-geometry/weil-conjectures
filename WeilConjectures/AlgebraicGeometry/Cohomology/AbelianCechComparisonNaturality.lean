@@ -16,8 +16,12 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # Naturality of the augmentation quotient
 
-Source: Stacks Project, Tag 01EQ, functoriality omitted in the proof,
-and Tag 01FD, augmented comparison diagram.
+This supplies the functoriality omitted in the proof of Stacks Project, Tag 01EQ.
+
+## References
+
+* Stacks Project, Tag 01EQ
+* Stacks Project, Tag 01FD (augmented comparison diagram)
 -/
 
 @[expose] public section
@@ -26,9 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
-/-- Canonical comparison maps commute with coefficient morphisms.
-
-Source: Stacks Project, Tags 01EQ and 01FD, augmentation squares. -/
+/-- Canonical comparison maps commute with coefficient morphisms. -/
 theorem abelianCechComparison_naturality
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     {F G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}} (f : F ⟶ G)

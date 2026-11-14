@@ -176,12 +176,13 @@ import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
 /-!
 # Exact scalar realization for admissible continuous coefficients
 
-Source: Stacks Project, Modules on Sites, Tags 093J and 093M; blueprint main-20261015,
-internal-Hom stability proof, paragraphs 2--3.
-
 The scalar realization is the existing `FiniteConstantModel.modelFunctor`. The algebraic
 closure below uses all continuous functions. Universe lifts of the three standard scalar
 rings carry their induced topologies and do not change their rings or sections.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 093J and 093M; Algebra, Tag 00Y0
 -/
 
 @[expose] public noncomputable section
@@ -203,8 +204,7 @@ open FiniteConstantModel
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
 /-- The pulled-back canonical scalar map, with domain `p_T^*` of the constant scalar ring.
-The canonical `constantSchemeIso` identifies its domain with the constant ring on `T`.
-Source: Stacks 093J, constant functions. -/
+The canonical `constantSchemeIso` identifies its domain with the constant ring on `T`. -/
 abbrev scalarMap (T : Scheme.{u}) :
     (upperStarFromPoint T).obj
       ((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
@@ -212,8 +212,7 @@ abbrev scalarMap (T : Scheme.{u}) :
       condensedRingObj (Profinite.continuousCoefficientRingObj A) T :=
   (upperStarFromPoint T).map (scalarToContinuous A)
 
-/-- Flatness of the actual restricted coefficient module on every localized site.
-Source: Stacks 093M and 00Y0. -/
+/-- Flatness of the actual restricted coefficient module on every localized site. -/
 def LocalizedFlatness (T : Scheme.{u}) : Prop :=
   ∀ U : T.ProEt, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
     (R := (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
@@ -228,16 +227,14 @@ def LocalizedFlatness (T : Scheme.{u}) : Prop :=
       ((Mod.comap (scalarMap A T)).obj
         (Mod.regular (condensedRingObj (Profinite.continuousCoefficientRingObj A) T)))).over U)
 
-/-- The completed identification and exact tensor extension on all sheaf modules.
-Source: Stacks 093M. -/
+/-- The completed identification and exact tensor extension on all sheaf modules. -/
 def CompletedAssertions (T : Scheme.{u}) (p : A) : Prop :=
   CompletedIdentification A T p ∧
     PreservesFiniteLimits (Mod.extendScalars (scalarMap A T)) ∧
     PreservesFiniteColimits (Mod.extendScalars (scalarMap A T)) ∧
     LocalizedFlatness A T
 
-/-- Integral extension scalars have their spectral absolute value topology.
-Source: blueprint internal-Hom proof paragraphs 2--3 and Stacks 093M. -/
+/-- Integral extension scalars have their spectral absolute value topology. -/
 def IntegralAssertions (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (T : Scheme.{u}) : Prop :=
   letI := (Padic.coefficientExtensionAbsoluteValue ℓ E).toNormedField
@@ -754,10 +751,7 @@ private theorem completed_of_identification [IsNoetherianRing A] (T : Scheme.{u}
 
 /-- All six admissible scalar realizations are additive and exact, including the continuous
 algebraic closure without a finite-subextension condition. Integral coefficients are the
-actual completed constant sheaf and are flat on all constant-ring module sheaves.
-
-Source: Stacks 093J, 093M; blueprint main-20261015, internal-Hom stability proof paragraphs
-2--3. -/
+actual completed constant sheaf and are flat on all constant-ring module sheaves. -/
 theorem admissible_scalar_realization_exact (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
     (∀ (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
       [Finite A] [DiscreteTopology A],

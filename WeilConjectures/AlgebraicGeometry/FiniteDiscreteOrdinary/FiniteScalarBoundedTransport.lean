@@ -23,8 +23,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 /-- Restriction along a normalized map of finite coefficient rings preserves bounded
-constructibility. Source: integral-finite-levels, first paragraph; the finite scalar
-restriction step of integral-criterion reductions. -/
+constructibility. -/
 theorem finite_scalar_bounded_transport
     (A B : Type u) [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]

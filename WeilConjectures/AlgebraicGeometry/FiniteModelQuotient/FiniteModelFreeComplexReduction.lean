@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteModelQuotient.FiniteModelOrdinary
 
 /-! # Quotient reduction of a literal finite free model complex
 
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks 093M and 0G7E. -/
+## References
+
+* Stacks Project, Tags 093M, 06YQ, 06YY, 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,11 +37,7 @@ private lemma flat_finite_biproduct (T : Scheme.{u}) (r : ℕ) :
       (biproduct.isoCoproduct _).symm) h
 
 -- The derived reduction unfolds the two-term free model complex and its matrix.
-/-- Derived reduction of the literal two-term free model complex keeps its matrix.
-
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks Tags 093M,
-06YQ, 06YY and 0G7E.
--/
+/-- Derived reduction of the literal two-term free model complex keeps its matrix. -/
 theorem free_complex_reduction (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T)
     (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

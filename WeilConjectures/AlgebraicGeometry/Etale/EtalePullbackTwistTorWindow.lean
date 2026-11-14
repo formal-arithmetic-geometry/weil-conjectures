@@ -48,7 +48,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 /-! # Etale pullback, finite Tate twists and Tor windows
 
-Source: Stacks Project, Tags 03TT, 0963, 095I and Section 03PK.
+## References
+
+* Stacks Project, Tags 03TT, 0963, 095I, 06YH, 0FNH and Section 03PK
 -/
 
 @[expose] public section
@@ -62,8 +64,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The existing signed-total-tensor monoidal structure on etale module complexes,
-with the canonical sheaf monoidal structure made explicit.
-Source: Stacks Project, Tag 06YH and Tag 03TT. -/
+with the canonical sheaf monoidal structure made explicit. -/
 @[instance_reducible]
 noncomputable def pullbackTwistComplexMonoidal
     (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
@@ -71,8 +72,7 @@ noncomputable def pullbackTwistComplexMonoidal
   letI := Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} R)
   inferInstance
 
-/-- The actual termwise inverse image, tensor with the finite Tate line, and signed shift.
-Source: Stacks Project, Tags 0963, 095I and Section 03PK. -/
+/-- The actual termwise inverse image, tensor with the finite Tate line, and signed shift. -/
 noncomputable def pullbackTwistComplex
     (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (f : T' ⟶ T)
     (N : ℕ) (hR : (N : R) = 0)
@@ -84,8 +84,7 @@ noncomputable def pullbackTwistComplex
       (Scheme.finiteEtaleTateTwist T' N R hR c)).mapHomologicalComplex (.up ℤ)).obj P⟦s⟧
 
 /-- The exact derived inverse image tensored with the actual finite Tate twist in degree
-zero, followed by the shift of the whole derived tensor.
-Source: Stacks Project, Tags 0963, 095I and Section 03PK. -/
+zero, followed by the shift of the whole derived tensor. -/
 noncomputable def pullbackTwistDerived
     (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (f : T' ⟶ T)
     (N : ℕ) (hR : (N : R) = 0) (K : DerivedCategoryModule R T) (c : ℕ) (s : ℤ) :
@@ -97,9 +96,7 @@ noncomputable def pullbackTwistDerived
 
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- Transport a model's constructible cohomology and Tor window to its represented object.
-Boundedness follows by testing Tor amplitude against the tensor unit.
-Source: Stacks Project Tag 03TT, lemma-when-ctf. -/
+/-- Transport a model's constructible cohomology and Tor window to its represented object. -/
 private theorem boundedConstructible_of_model
     (R : Type (u + 1)) [CommRing R] [Finite R] (X : Scheme.{u})
     (Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
@@ -126,8 +123,7 @@ private theorem boundedConstructible_of_model
     · exact (_root_.DerivedCategory.isGE_iff L a).1 hh.1 j hj
     · exact (_root_.DerivedCategory.isLE_iff L b).1 hh.2 j hj
 
-/-- Invert the canonical model comparison and move the shift out of its second factor.
-Source: Stacks Project Tags 0963 and 0FNH. -/
+/-- Invert the canonical model comparison and move the shift out of its second factor. -/
 private noncomputable def lineModelIso
     (R : Type (u + 1)) [CommRing R] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
@@ -150,10 +146,7 @@ private noncomputable def lineModelIso
 /-- Pullback, finite nonnegative Tate twist, and shift carry every specified flat
 constructible representative in [a,b] to a K-flat representative in [a-s,b-s].
 The represented object is bounded constructible with that same Tor interval.
-The last clause applies to every bounded constructible K, independently of a chosen P.
-
-Source: Stacks Project, Tags 03TT, 0963,
-095I and Section 03PK. -/
+The last clause applies to every bounded constructible K, independently of a chosen P. -/
 theorem etale_pullback_twist_tor_window
     (k : Type u) [Field k] (ell : ℕ) (_hell : ell.Prime) (_hne : ringChar k ≠ ell)
     (T T' : Over (Spec (CommRingCat.of k)))

@@ -11,7 +11,9 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-! # Bounded finite representatives of pseudo-coherent complexes
 
-Source: Stacks Project, More on Algebra, Tag 066E.
+## References
+
+* Stacks Project, More on Algebra, Tag 066E
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A cohomologically bounded pseudo-coherent object over a Noetherian ring has
-finite terms in precisely the prescribed interval.
-Source: Stacks, More on Algebra, Tag 066E, and truncation of complexes. -/
+finite terms in precisely the prescribed interval. -/
 theorem exists_boundedFinite_model {R : Type u} [CommRing R] [IsNoetherianRing R]
     [HasDerivedCategory.{v} (ModuleCat.{u} R)]
     (C : DerivedCategory (ModuleCat.{u} R)) (a b : ℤ) (hC : DerivedCategory.IsPseudoCoherent C)

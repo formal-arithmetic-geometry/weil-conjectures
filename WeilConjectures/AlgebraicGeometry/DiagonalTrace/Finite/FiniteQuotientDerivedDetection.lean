@@ -42,8 +42,8 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 
 /-! # Detection of finite coefficient classes on the integral generator
 
-Source: diagonal-tower trace (1), scalar Kummer normalization; the constant-module
-class comparison in Stacks 03FD.
+## References
+* Stacks Project, Tag 03FD
 -/
 
 @[expose] public noncomputable section
@@ -84,9 +84,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Forgetting coefficients and evaluating on the integral generator detects derived
-arrows out of the regular finite coefficient sheaf, with any finite-module target.
-
-Source: diagonal-tower trace (1), constants/scalar-extension adjunction; Stacks 03FD. -/
+arrows out of the regular finite coefficient sheaf, with any finite-module target. -/
 theorem finiteQuotient_detects_derived_arrows (T : Scheme.{u}) (n : ℕ)
     [Finite (SpTowerShriek.R l E n)]
     (M : SheafOfModules.{u + 1}

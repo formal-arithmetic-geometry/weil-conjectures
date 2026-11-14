@@ -35,6 +35,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-!
 # The diagonal class in the derived category of strict torsion towers
+
+## References
+
+* Stacks Project, Tags 099M, 091S, 091Z
 -/
 
 @[expose] public noncomputable section
@@ -43,20 +47,19 @@ universe u uA uB vA vB wA wS w
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- Integral sheaves. Source: blueprint clause 1. -/
+/-- Integral sheaves. -/
 abbrev DiagonalAb (W : Scheme.{u}) := Sheaf (Scheme.ProEt.topology W) AddCommGrpCat.{u + 1}
 
 /-- Discrete constant Z_l-module sheaves, not continuous-function coefficient sheaves. -/
 abbrev DiagonalMod (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :=
   Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ]))
 
-/-- Strict inverse systems. Source: blueprint tower category. -/
+/-- Strict inverse systems. -/
 abbrev DiagonalSystems (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :=
   ℕᵒᵖ ⥤ DiagonalMod ℓ W
 
-/-- The canonical abelian structure, named once to share all its sheafification
-witnesses throughout the strict-system specification. This is the existing Mathlib
-structure, with no choice of a replacement category. -/
+/-- The canonical abelian structure on module sheaves, named once to share all its
+sheafification witnesses throughout the strict-system specification. -/
 instance (priority := 2000) diagonalModuleSheafAbelian
     (A : Type (u + 1)) [CommRing A] (W : Scheme.{u}) :
     Abelian (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} A)) :=
@@ -70,7 +73,7 @@ instance (priority := 2000) diagonalAbSheafAbelian (W : Scheme.{u}) :
     toPreadditive := Preadditive.fullSubcategory _ }
 
 /-- Ordinary extension from abelian groups to Z_l, before reduction, sheafified
-sectionwise. Source: blueprint clause 2. -/
+sectionwise. -/
 def diagonalScalarExtension (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     DiagonalAb W ⥤ DiagonalMod ℓ W :=
   sheafToPresheaf (Scheme.ProEt.topology W) AddCommGrpCat.{u + 1} ⋙
@@ -119,15 +122,15 @@ theorem diagonalForget_exact (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     have : (sheafCompose J G).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e
     exact inferInstanceAs (PreservesFiniteColimits (sheafCompose J G))
 
-/-- Exact scalar forgetting, limits. Source: blueprint clause 2. -/
+/-- Exact scalar forgetting, limits. -/
 instance diagonalForgetLimits (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteLimits (diagonalForget ℓ W) := (diagonalForget_exact ℓ W).1
 
-/-- Exact scalar forgetting, colimits. Source: blueprint clause 2. -/
+/-- Exact scalar forgetting, colimits. -/
 instance diagonalForgetColimits (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteColimits (diagonalForget ℓ W) := (diagonalForget_exact ℓ W).2
 
-/-- Additivity of scalar forgetting. Source: blueprint clause 2. -/
+/-- Additivity of scalar forgetting. -/
 theorem diagonalForget_additive (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     (diagonalForget ℓ W).Additive := by
   dsimp only [diagonalForget, sheafCompose]
@@ -161,7 +164,7 @@ attribute [instance] DiagonalReductionPresentation.additive
 
 /-- The everywhere-defined left derived functor of a strict reduction presentation.
 The universal counit and pointwise condition retain functoriality on all unbounded
-complexes. Source: blueprint clause 2. -/
+complexes. -/
 structure DiagonalDerivedReduction
     (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] (L : A ⥤ B)
@@ -245,26 +248,26 @@ theorem diagonalFiniteToPadic_exact (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{
   · dsimp only [diagonalFiniteToPadic, sheafCompose]
     infer_instance
 
-/-- Exact restriction, limits. Source: blueprint clause 4. -/
+/-- Exact restriction, limits. -/
 instance diagonalFiniteToPadicLimits (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteLimits (diagonalFiniteToPadic ℓ n W) :=
   (diagonalFiniteToPadic_exact ℓ n W).1
 
-/-- Exact restriction, colimits. Source: blueprint clause 4. -/
+/-- Exact restriction, colimits. -/
 instance diagonalFiniteToPadicColimits (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteColimits (diagonalFiniteToPadic ℓ n W) :=
   (diagonalFiniteToPadic_exact ℓ n W).2.1
 
-/-- Additive restriction. Source: blueprint clause 4. -/
+/-- Additive restriction. -/
 instance diagonalFiniteToPadicAdditive (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     (diagonalFiniteToPadic ℓ n W).Additive :=
   (diagonalFiniteToPadic_exact ℓ n W).2.2
 
-/-- The product of two projective lines. Source: blueprint opening. -/
+/-- The product of two projective lines. -/
 abbrev diagonalSurface (Y : Scheme.{u}) :=
   pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
 
-/-- The diagonal. Source: blueprint opening. -/
+/-- The diagonal. -/
 abbrev diagonalImmersion (Y : Scheme.{u}) : ProjectiveLine Y ⟶ diagonalSurface Y :=
   pullback.diagonal (ProjectiveLine Y ↘ Y)
 
@@ -335,14 +338,12 @@ def diagonalIntegralBoundary (Y : Scheme.{u}) :
     (Etale.cartierPoleBoundary (diagonalImmersion Y) (diagonalImmersion_cartier Y)))
 
 /-- The integral derived-completion formula, with both inverse limits total right
-derived functors on strict systems. The integral reduction is independently fixed by
-the cokernels of l^(n+1) on the identity functor. Thus its composite with integral
-Rlim is exactly Rlim_n(K tensor^L Z/l^(n+1)). The displayed natural isomorphism
-retains the comparison after forgetting the constant Z_l action. In addition the
-output is right orthogonal to every complex on which l is invertible, the intrinsic
-derived l-completeness criterion. The natural unit is universal for maps to all
-such complete complexes, so this asserts derived completion, not just a limit formula.
-Source: blueprint clause 2 and Stacks 099M, 091S and 091Z. -/
+derived functors on strict systems. The integral reduction is fixed by the cokernels of
+l^(n+1) on the identity functor, so its composite with integral Rlim is exactly
+Rlim_n(K tensor^L Z/l^(n+1)). The natural isomorphism retains the comparison after
+forgetting the constant Z_l action. The output is right orthogonal to every complex on
+which l is invertible, and the natural unit is universal for maps to all such complete
+complexes, so this asserts derived completion, not just a limit formula. -/
 def DiagonalCompletionSpec (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]

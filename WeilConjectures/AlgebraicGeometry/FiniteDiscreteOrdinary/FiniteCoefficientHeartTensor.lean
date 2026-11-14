@@ -167,7 +167,7 @@ variable {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R]
 
 /-- Restriction along the inverse coefficient isomorphism preserves the internal pure
-pairing. Source: the coequalizer tensor comparison for restriction along an isomorphism. -/
+pairing. -/
 private theorem comap_μ_pure (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u})
     (M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))

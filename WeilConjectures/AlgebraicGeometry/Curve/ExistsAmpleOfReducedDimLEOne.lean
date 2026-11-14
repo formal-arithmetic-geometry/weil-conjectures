@@ -19,7 +19,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Ample invertible modules on reduced Noetherian schemes of dimension at most one
 
-Source: Stacks Project, Varieties, Lemma 09NX; Properties, Lemmas 0AAX and 0CKV.
+## References
+
+* Stacks Project, Varieties, Lemma 09NX
+* Stacks Project, Properties, Lemmas 0AAX and 0CKV
 -/
 
 @[expose] public section
@@ -29,10 +32,7 @@ universe u
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A reduced Noetherian separated scheme of dimension at most one admits an ample
-invertible module. The empty scheme is included.
-Source: Stacks Project, Varieties, Lemma 09NX, with the dimension-zero branch from
-Properties, Lemmas 0AAX and 0CKV.
--/
+invertible module. The empty scheme is included. -/
 theorem exists_isAmple_of_reduced_dim_le_one (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] [IsReduced X] [X.IsSeparated]
     (hdim : topologicalKrullDim X ≤ 1) :

@@ -282,8 +282,7 @@ private theorem ordinary_constant_map_unit (A : Type (u + 1)) [CommRing A]
 
 /-- A unital map from the constant rank-one module to its ordinary direct image
 represents the canonical finite unit adjunct after the single-complex and finite
-constant comparisons. Source: diagonal tower coefficient changes (1), ordinary
-constant units and the canonical derived adjunction. -/
+constant comparisons. -/
 theorem finite_constant_adjunct_of_one
     (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     (m : geoCartierConstant A Y ⟶

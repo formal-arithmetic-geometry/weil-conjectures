@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A prime-annihilated sheaf has invertible-order torsion when the prime is a unit
 on the base field; otherwise invertible-order torsion forces the sheaf to be zero.
-Source: Stacks Project, Tag 0GJA, proof, remark (a); elementary Bezout argument
-and geometric stalk conservativity. -/
+See Stacks Project, Tag 0GJA. -/
 theorem prime_annihilated_invertible_cases (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (r : ℕ) [Fact r.Prime]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : r • 𝟙 F = 0) :

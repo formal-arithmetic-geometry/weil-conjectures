@@ -17,7 +17,7 @@ automorphism of `C` restricting to an automorphism of `U` and semilinear over an
 `σ₀` of `k`. Transport along `E` acts on torsors over `U` (in the torsor model of `H¹`), and the
 residues of the transported torsor are those of the torsor, moved along `E` and twisted by `σ₀`
 on the roots of unity (`AlgebraicGeometry.Scheme.EtaleTorsor.residue_mapIso`). This is the
-Frobenius equivariance of the residue map of blueprint `proposition-no-fixed-class-degree-one--1`.
+Frobenius equivariance of the residue map.
 
 For a power `Φ ^ m` of the geometric Frobenius fixing a boundary point `z`, `σ₀ = φ ^ m` with
 `σ₀(x) ^ Q = x`, `Q = q ^ m`, so the pullback along `Φ ^ m` (transport along its inverse) acts on
@@ -260,9 +260,7 @@ variable {C U : Scheme.{u}} [IsIntegral C] [IsLocallyNoetherian C] (j : U ⟶ C)
   [IsOpenImmersion j] [Nonempty U] {k : Type u} [Field k] [IsAlgClosed k]
   (p : C ⟶ Spec (.of k))
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1` (as used in
-`proposition-no-fixed-class-degree-one--1`): the residues of a compatible Frobenius-fixed system
-vanish.
+/-- The residues of a compatible Frobenius-fixed system vanish.
 
 Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` for some
 `Q ≥ 2` (a power `Φ_Q` of the geometric Frobenius), restricting to `E_U` on `U`. Let `(t_n)` be

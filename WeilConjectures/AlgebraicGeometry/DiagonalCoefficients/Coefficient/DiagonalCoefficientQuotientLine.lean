@@ -70,7 +70,7 @@ def QuotientLineRealization (l : ℕ) [Fact l.Prime]
       (limit.π (Scheme.proEtaleRootsOfUnityTower X l (Fact.out : l.Prime)) (op r) ≫
         finiteRoots.toLine (ULift.{u + 1} (completedResidue l E π n)) hA)
 
-/-- The specified finite quotient line isomorphism. Source: blueprint clause 1. -/
+/-- The specified finite quotient line isomorphism. -/
 def QuotientLineRealization.iso (l : ℕ) [Fact l.Prime]
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E}
     {n r : ℕ} {hA : ((l ^ (r + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0}

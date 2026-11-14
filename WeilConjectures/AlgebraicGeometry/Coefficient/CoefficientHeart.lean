@@ -190,11 +190,15 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # The constructible coefficient heart
 
-
 All module categories use the actual condensed coefficient ring pulled back from the point.
 Constructibility is the finite constant scalar model predicate, and locally closed extension
 is the previously constructed open extension into the scheme-theoretic closure followed by
-closed direct image. The assertion predicates below spell out the clauses of the node.
+closed direct image. The assertion predicates below spell out the clauses of the statement.
+
+## Implementation details
+
+* `coefficientHeart`: the Noetherian structure used to state the assertion is constructed
+  from the standing finite-type-over-a-field hypotheses, rather than imposed as an assumption.
 -/
 
 @[expose] public noncomputable section
@@ -233,7 +237,7 @@ def CoefficientHeartCurveAssertions (X : Scheme.{u}) : Prop :=
 
 /-- A finite, non-strict filtration of each constructible sheaf by subsheaves, with the
 specified locally closed extensions as successive quotients. Zero and empty filtrations
-are allowed. Source: blueprint lemma-constructible-sheaves, clause (3). -/
+are allowed. -/
 def CoefficientHeartFiltrationAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   ∀ F : ConstantModelConstructible Λ X,
     ∃ (m : ℕ) (T : Fin (m + 1) → Subobject F.obj), T 0 = ⊥ ∧ T (Fin.last m) = ⊤ ∧
@@ -265,9 +269,9 @@ def CoefficientHeartExtensionAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop
         (coefficientHeartLocallyClosedExtension Λ a ha).mapHomologicalComplex (.up ℤ) ⋙
           DerivedCategory.Q)
 
-/-- Every assertion of the constructible-heart node, including its introductory derived
+/-- All assertions about the constructible heart, including its introductory derived
 and locally closed extension clauses. Exact descent is characterized by the localization
-square with the termwise functor, so no arbitrary derived map is substituted. -/
+square with the termwise functor. -/
 def CoefficientHeartAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   ((constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) =
     constantModelBoundedConstructible Λ X) ∧
@@ -436,9 +440,7 @@ attribute [local irreducible] heartFiltrationImage
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency true in
 /-- Constructible sheaves over E or Qbar_l form an essentially small abelian heart, with
-finite locally closed lisse filtrations and the stated curve localization sequence.
-The Noetherian structure used to state the assertion is constructed from the standing
-finite-type-over-a-field hypotheses, rather than imposed as an additional assumption. -/
+finite locally closed lisse filtrations and the stated curve localization sequence. -/
 theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime]
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj L)]

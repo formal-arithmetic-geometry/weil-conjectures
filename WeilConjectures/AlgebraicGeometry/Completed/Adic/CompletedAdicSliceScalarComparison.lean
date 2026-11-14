@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicSlic
 
 /-! # Scalar extension on a pro-etale slice
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D.
+## References
+
+* Stacks Project, Tags 06YY, 0G7E, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -22,12 +24,9 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Exact slice restriction commutes with unbounded derived scalar extension.
-This is a comparison of the two functors, for an arbitrary coefficient map; it
-contains no adic quotient, constant model, or local-isomorphism hypothesis.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-derived-base-change (06YY),
-lemma-pullback-K-flat (0G7E), and lemma-derived-pullback-composition (0D6D). -/
+/-- Exact slice restriction commutes with unbounded derived scalar extension, for an
+arbitrary coefficient map, without adic quotient, constant model, or local-isomorphism
+hypotheses. -/
 theorem completedAdic_slice_scalarComparison (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     Nonempty

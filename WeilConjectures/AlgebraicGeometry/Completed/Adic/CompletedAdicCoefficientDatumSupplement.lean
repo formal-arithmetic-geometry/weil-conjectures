@@ -97,12 +97,13 @@ public import WeilConjectures.AlgebraicGeometry.CompletedAdicCoefficientDatum
 
 /-! # Completed adic coefficient datum
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange, order 1239,
-node def-weil-pbc-adic-coefficient-datum; Stacks Tags 099L and 099M.
-
 The finite coefficient sheaves are exactly the recorded sheafifications of continuous
 functions on connected components. The ambient ring is their inverse limit. In particular,
 no identification with the discrete constant coefficient category is used.
+
+## References
+
+* Stacks Project, Tags 099L, 099M, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -355,16 +356,14 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
 
 variable {F P}
 
-/-- Computation of the complex comparison on the resolving class.
-Source: Stacks Tag 06YY. -/
+/-- Computation of the complex comparison on the resolving class. -/
 theorem DerivedReductionModelData.complexCounit_isIso (D : DerivedReductionModelData F P)
     (K : CochainComplex B ℤ) (hK : P K) : IsIso (D.complexCounit K) := by
   have := D.isIso_counit K hK
   unfold DerivedReductionModelData.complexCounit
   infer_instance
 
-/-- The right-derived comparison on a complex, with the localization factors retained.
-Source: Stacks Tag 0941. -/
+/-- The right-derived comparison on a complex, with the localization factors retained. -/
 def derivedLimitComplexComparison (L : C ⥤ B) [L.Additive]
     (RF : DerivedCategory C ⥤ DerivedCategory B)
     (δ : L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
@@ -379,8 +378,7 @@ def derivedLimitComplexComparison (L : C ⥤ B) [L.Additive]
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ≫
     (RF).map ((DerivedCategory.quotientCompQhIso _).hom.app P)
 
-/-- The normalized completion unit on a resolving complex.
-Source: Stacks Tags 06YY and 0941. -/
+/-- The normalized completion unit on a resolving complex. -/
 def derivedCompletionModelUnit (D : DerivedReductionModelData F P)
     (L : C ⥤ B) [L.Additive] (RF : DerivedCategory C ⥤ DerivedCategory B)
     (δ : L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
@@ -392,15 +390,13 @@ def derivedCompletionModelUnit (D : DerivedReductionModelData F P)
 
 end DerivedReductionModels
 
-/-- The universal strict reduction pair over the completed coefficients.
-Source: Stacks Tag 06YY. -/
+/-- The universal strict reduction pair over the completed coefficients. -/
 abbrev CompletedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   DerivedReductionModelData (completedAdicOrdinaryTower T d)
     (CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d))
 
 /-- Bundle the already chosen universal pair. Its universal property determines it
-up to its unique compatible isomorphism.
-Source: Stacks Tag 06YY. -/
+up to its unique compatible isomorphism. -/
 def completedAdicReductionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     CompletedAdicReductionData T d :=
   derivedReductionModelDataOfExists (completedAdicOrdinaryTower T d)

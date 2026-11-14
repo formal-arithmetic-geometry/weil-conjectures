@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplem
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedStrictOpenExchange
 
 /-! Normalization of completed open exchange by the simultaneous strict exchange.
-Source: Stacks Tags 03DI and 091N; the finite-exchange and final-limit paragraphs.
+
+## References
+
+* Stacks Project, Tags 03DI and 091N
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

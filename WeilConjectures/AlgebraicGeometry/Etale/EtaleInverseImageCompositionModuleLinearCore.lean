@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D7 and 03D8
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 
-/-- Compatibility of composite adjunction hom-equivalences with forgetful comparisons.
-This is the categorical calculation in step 4 of the module proof. -/
+/-- Compatibility of composite adjunction hom-equivalences with forgetful comparisons. -/
 private theorem comp_homEquiv_forget
     {M₁ M₂ M₃ A₁ A₂ A₃ : Type*}
     [Category M₁] [Category M₂] [Category M₃]
@@ -367,11 +368,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms for inverse
-image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7.
-
-The lambda-bound ring sheaves, forgetful functors and module direct images below are
-immediately applied to their actual definitions. The gamma maps are characterized by
-constant sections. The inverse images, comparison maps and adjunctions are the data of
+image with the specified unit equation. The gamma maps are characterized by constant
+sections. The inverse images, comparison maps and adjunctions are the data of
 `etaleInverseImageModulesExact`; the hom-equivalence equations specify that these are
 precisely the module adjunctions with the underlying abelian adjunctions. -/
 theorem etaleInverseImageCompositionModuleLinearCore

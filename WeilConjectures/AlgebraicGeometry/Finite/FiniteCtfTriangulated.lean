@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 /-!
 # Finite-stage constructible complexes of finite Tor amplitude
 
-Source: Stacks Project, Cohomology on Sites, Tag 08G2, lemma-cone-tor-amplitude (2),
-and the Weil blueprint, finite-stage paragraph of `definition-constructible-sheaves`.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 08G2 and 08FZ
 -/
 
 @[expose] public section
@@ -143,12 +144,7 @@ private theorem amplitude_mono
 
 /-- Bounded constructibility and finite Tor amplitude cut out a strictly full triangulated
 subcategory on the small pro-etale site. The last two clauses retain the precise interval
-bounds under shifts and extensions.
-
-Source: Stacks Project, Cohomology on Sites, Tag 08G2, lemma-cone-tor-amplitude (2),
-Tag 08FZ, definition-tor-amplitude; Weil blueprint, finite-stage paragraph of
-`definition-constructible-sheaves`.
--/
+bounds under shifts and extensions. -/
 theorem finite_ctf_isTriangulated
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :

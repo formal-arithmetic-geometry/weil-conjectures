@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Support.EtaleSupportSumCompositor
 
 /-! # Support and sum compositors under the constructed graph comparison
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7J, 0F7K and 0F50.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tags 0F50, 0F7J, 0F7K
 -/
 
 @[expose] public section
@@ -22,9 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- The actual proper/open compositor becomes nested sum composition under the graph maps.
-Source: Stacks Project, Tags 0F7J, 0F7K and 0F50; Step 1 of
-lem-pur-etale-normalized-mates-composition-pasting. -/
+/-- The actual proper/open compositor becomes nested sum composition under the graph maps. -/
 theorem etaleSupportSumCompositor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]

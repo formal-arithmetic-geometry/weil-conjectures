@@ -15,6 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientRealizatio
 This is the geometric transport part of the consecutive quotient argument.  It
 records the comparison before the supplied lower model is used; the latter is
 then only a categorical cancellation in the parent theorem.
+
+## References
+
+* Stacks Project, Tag 09C6 (consecutive quotient balancing); Tags 0D6D and 03Q3.
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +29,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- The realization of the scalar extension of the upper model reduces to the
-lower level of the adic tower.
-
-Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient balancing;
-Tags 0D6D and 03Q3 for the constant scalar comparison. -/
+lower level of the adic tower. -/
 theorem constantAdicQuotient_model_realization_reduction
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

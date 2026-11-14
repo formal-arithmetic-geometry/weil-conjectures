@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # The spectrum of a local stalk as a limit of affine neighbourhoods
 
-Source: Stacks Project, Limits, Tag 01YW, and Sheaves, section 0078.
+## References
+
+* Stacks Project, Limits, Tag 01YW, and Sheaves, section 0078
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The spectrum of a stalk is an affine-transition inverse limit of affine open
 neighbourhoods, indexed by a directed preorder. The projection equations use the
 canonical morphism from the spectrum of the stalk to the original scheme.
-
-Source: Stacks Project, Sheaves section 0078 and Limits Tag 01YW;
-compare `Scheme.isLimitFunctionFieldCone` for integral schemes.
+Compare `Scheme.isLimitFunctionFieldCone` for integral schemes.
 -/
 theorem exists_affine_neighbourhood_stalk_limit (X : Scheme.{u}) (x : X) :
     ∃ (I : Type u) (_ : Preorder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I)

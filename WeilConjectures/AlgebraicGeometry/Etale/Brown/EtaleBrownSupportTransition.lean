@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 
 /-! # Canonical Brown comparison transition
-Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15 and Lemma 5.16, pp. 34--35
 -/
 
 @[expose] public noncomputable section
@@ -310,8 +312,7 @@ private theorem open_tensor_transition {m n : ℕ} (h : n ≤ m)
     (etaleBrownEvaluationMate B m).1 (etaleBrownEvaluationMate B n).1 (B.openMate h)
     tX tZ (fun H ↦ inverse_tensor_transition (S := S) h H) K
 
-/-- The canonical compact-support evaluation respects actual derived transitions.
-Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35. -/
+/-- The canonical compact-support evaluation respects actual derived transitions. -/
 theorem etaleBrownSupportTransition {m n : ℕ} (h : n ≤ m)
     (K : DerivedCategory (strictEtaleCoefficientSystem X O t)) :
     (S.levelFunctor n).map

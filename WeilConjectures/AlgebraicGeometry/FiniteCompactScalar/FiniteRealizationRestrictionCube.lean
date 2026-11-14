@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicDirectImageUnitNormalizat
 
 /-! # The restriction and direct-image cube for intrinsic realization
 
-Source: Step 1 of lem-finite-realization-scalar-mate; Stacks Tags 0D6E, 0D6J and 07A6.
+## References
+
+* Stacks Project, Tags 0D6E, 0D6J, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -93,8 +95,7 @@ private theorem derived_unit_ext_general
   apply (cancel_mono (T.map e.hom)).mp
   rw [← a.naturality e.hom, ← b.naturality e.hom, hi]
 
-/-- A square normalized by the canonical right-derived units and localization factors.
-Source: Stacks Tag 0D6E. -/
+/-- A square normalized by the canonical right-derived units and localization factors. -/
 private def unitNormalized
     (X : DerivedCategory A ⥤ DerivedCategory Ap)
     (Y : DerivedCategory B ⥤ DerivedCategory Bp)
@@ -110,8 +111,7 @@ private def unitNormalized
         G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj I)
 omit [PreservesFiniteLimits x] [PreservesFiniteColimits x]
   [PreservesFiniteLimits y] [PreservesFiniteColimits y] in
-/-- A square normalized by right-derived units respects a morphism of ordinary squares.
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation. -/
+/-- A square normalized by right-derived units respects a morphism of ordinary squares. -/
 private theorem normalized_naturality
     (x' : A ⥤ Ap) (y' : B ⥤ Bp) [x'.Additive] [y'.Additive]
     (X X' : DerivedCategory A ⥤ DerivedCategory Ap)
@@ -461,10 +461,7 @@ private theorem restriction_eq
   exact conjugate_eq_of_unit EA EB (proEtaleCoefficientRestrictScalars T φ).mapDerivedCategory
     V q r hq
 
-/-- The realization/restriction square commutes with the specified direct-image squares.
-
-Source: Stacks Tags 0D6E, 0D6J and 07A6; Step 1 of
-`lem-finite-realization-scalar-mate`. -/
+/-- The realization/restriction square commutes with the specified direct-image squares. -/
 theorem realizationRestriction_directImage_cube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)

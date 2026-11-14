@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Fixed scalar coordinates for restriction to an etale chart
 
-Source: Stacks Project, Tags 03CY, 099R and 09AL.
+## References
+
+* Stacks Project, Tags 03CY, 099R, 09AL
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +48,7 @@ private theorem scalar_exact (X : Scheme.{t})
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
     preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
-/-- Restrict the action to constant scalars, then restrict sections to the chart.
-Source: Stacks Project, Tags 03CY and 099R. -/
+/-- Restrict the action to constant scalars, then restrict sections to the chart. -/
 def finiteCoefficientSliceRestriction (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
     (φ : adicConstantRing X B ⟶ R) (V : X.Etale) :=
@@ -58,8 +59,7 @@ def finiteCoefficientSliceRestriction (X : Scheme.{t}) (B : Type t) [CommRing B]
       ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B))
         V.hom inferInstance
 
-/-- The coordinate functor is additive and exact.
-Source: Stacks Project, Tags 03CY and 099R. -/
+/-- The coordinate functor is additive and exact. -/
 theorem finiteCoefficientSliceRestriction_exact (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
     (φ : adicConstantRing X B ⟶ R) (V : X.Etale) :
@@ -103,8 +103,7 @@ instance finiteCoefficientSliceRestriction_preservesFiniteColimits (X : Scheme.{
     PreservesFiniteColimits (finiteCoefficientSliceRestriction X B R φ V) :=
   (finiteCoefficientSliceRestriction_exact X B R φ V).2.2
 
-/-- Vanishing on the ringed slice implies vanishing in fixed scalar coordinates.
-Source: Stacks Project, Tag 099R. -/
+/-- Vanishing on the ringed slice implies vanishing in fixed scalar coordinates. -/
 theorem finiteCoefficientSliceRestriction_isZero (X : Scheme.{t}) (B : Type t)
     [CommRing B] (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
     (φ : adicConstantRing X B ⟶ R) (V : X.Etale)

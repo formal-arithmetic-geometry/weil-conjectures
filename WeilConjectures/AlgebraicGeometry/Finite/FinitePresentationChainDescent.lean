@@ -33,7 +33,10 @@ public import Mathlib.Data.Fintype.Shrink
 /-!
 # Common-stage descent of finite chains with a finite comparison
 
-Source: Stacks Project, Limits, Tags 01ZM, 01ZO, 07RR, 07RP, 0EUU, 0C0C and 081F.
+## References
+
+* Stacks Project, Limits, Tags 01ZM, 01ZO, 07RR, 07RP, 0EUU, 0C0C and 081F
+* Stacks Project, More on Morphisms, Tag 0GK7 (the diagram-descent paragraph)
 -/
 
 @[expose] public section
@@ -234,12 +237,7 @@ private theorem chain_fp_arrow {S : Scheme.{u}} (X Y : Over S) (f : X ⟶ Y)
 
 /-- Spread finitely many chains `A → B → C → lim D`, and a finite surjection from
 `∐ A` to a specified finite-presentation model, to one common stage. The assertions
-on arrows are precisely the limit properties stable under the cited descent results.
-No generic point, radicial cover, field extension or fibre geometry is involved.
-
-Source: Stacks Project, Limits, Tags 01ZM, 01ZO, 07RR, 07RP, 0EUU, 0C0C and 081F;
-the diagram-descent paragraph of More on Morphisms, Tag 0GK7.
--/
+on arrows are precisely the limit properties stable under the cited descent results. -/
 theorem exists_finitePresentation_chain_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

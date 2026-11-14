@@ -15,6 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 
 /-! Closed equality-pattern restrictions of a finite family.
+
+## References
+
+* Stacks Project, Tag 097C
 -/
 
 @[expose] public noncomputable section
@@ -125,9 +129,7 @@ private theorem finite_closed_component_cover
 open Classical in
 /-- Pointwise fiber-class cancellation extends to cancellation on a covering family.
 The conclusion records equal arrows and zero coefficient sums, independently of free
-modules, sheafification, or dual maps.
-Source: `CompletedAffineFreeLocalDual.lean`, the closed-pattern part of the proof of
-`completedAffineFree_localDual_detect`; Stacks 097C for the canonical restrictions. -/
+modules, sheafification, or dual maps. -/
 theorem completedAffine_pattern_cover (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (M : CompletedAffineCoefficientModel l X)
     (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) (W : X.ProEt)

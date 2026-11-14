@@ -22,6 +22,16 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquarePa
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Normalization of the etale comparison-square path under exact derivation
+
+## Implementation details
+
+* `comparisonSquareEtalePath_normalization` is a heterogeneous equality retaining the two
+  (definitionally equal) endpoint presentations; this avoids unfolding the derived functor
+  constructions when joining the two normalization identities.
+
+## References
+
+* [Stacks Project, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
 -/
 
 @[expose] public section
@@ -412,27 +422,7 @@ private theorem normalization_aux
   simpa only [cs, Functor.comp_map] using heq_of_eq hh
 
 /-- Exact derivation of the ordinary Etale path, with the common source and target
-composition factors. This identity concerns one path and assumes no square coherence.
-The heterogeneous equality retains the two endpoint presentations; these endpoints
-are definitionally equal. It avoids unfolding the derived functor constructions
-when joining the two normalization identities.
-Source: blueprint `stage3-proetale-comparison-square`, proof step 4; Stacks, Tag 0B65.
-
-
-For the first map, expand se using etaleComparisonSquare and the derived square using
-Etale.pullbackSquareComparison and Etale.upperStarPlusComp. The ordinary composition
-comparison is Etale.upperStarComp. The equations
-Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app and
-Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app identify the composition factors;
-equality induction on the square's commutativity identifies the middle transports.
-For the other maps, comparisonCoefficientPullbackIso is definitionally the inverse of
-comparisonUpperStarCompUpperStarIso. Expanding leftDerivedUpperStarComparisonIso gives
-exactly its derived image conjugated by C and followed by J(f).inv. Naturality of
-J(g').inv moves it past the derived f-comparison, producing L(g') of that comparison.
-The two remaining inverse J factors are precisely the final target factor. Evaluate
-at M and use associativity and inverse-hom cancellation. No pro-etale square identity
-or underived coherence equation is used; identity edges and the zero input satisfy
-the same equations. -/
+composition factors. This identity concerns one path and assumes no square coherence. -/
 theorem comparisonSquareEtalePath_normalization
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

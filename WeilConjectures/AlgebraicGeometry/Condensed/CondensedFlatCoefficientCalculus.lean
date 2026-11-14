@@ -1045,8 +1045,8 @@ private theorem scheme_finiteFree (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 end FiniteFree
 
-/-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
-TwoColimit.lean, ExtendScalars. -/
+/-- The derived tensor calculus of exact condensed coefficient change, for finite
+coefficient extensions. -/
 theorem condensedFiniteCoefficientCalculus
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F) :
@@ -1085,8 +1085,8 @@ theorem condensedFiniteCoefficientCalculus
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact ⟨scheme_finiteFree T ℓ h, scalarCalculus (padicSubfieldRingObjMap T ℓ h)⟩
 
-/-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
-TwoColimit.lean, ExtendScalars. -/
+/-- The derived tensor calculus of exact condensed coefficient change, for the
+algebraically closed coefficients. -/
 theorem condensedAlgClCoefficientCalculus
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :

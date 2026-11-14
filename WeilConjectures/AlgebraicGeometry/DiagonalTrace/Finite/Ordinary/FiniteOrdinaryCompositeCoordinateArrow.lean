@@ -53,8 +53,7 @@ def FiniteOrdinaryCoordinateArrowHom (n : ℕ)
     ((DerivedCategory.singleFunctor _ 0).obj N')⟦(2 : ℤ)⟧
 
 /-- Normalize the actual comparison-realization image using its given single
-comparison and arbitrary endpoint coordinates. Source: exact single and shift
-comparison. -/
+comparison and arbitrary endpoint coordinates. -/
 def finiteOrdinaryCompositeCoordinateArrow (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

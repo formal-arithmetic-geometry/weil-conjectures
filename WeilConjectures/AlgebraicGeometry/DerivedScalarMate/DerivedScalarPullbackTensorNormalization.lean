@@ -43,8 +43,12 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Tensor normalization before taking the geometric scalar mate
 
-Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6; the representative
-calculation in step 1 of lem-sfb-derived-scalar-projection-normalization.
+This is the representative calculation underlying the projection normalization of the derived
+scalar mate.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -99,9 +103,7 @@ private theorem flat_representative {T : Scheme.{u}}
 
 /-- Scalar extension and pullback agree with the normalized tensor comparison,
 before taking any right-adjoint mate. The coefficient comparison is the specified
-pullback of the degree-zero restricted B-module, including its unit normalization.
-
-Source: Stacks 03EK, 06YY, 07A4, 07A6; step 1 of the projection-normalization node. -/
+pullback of the degree-zero restricted B-module, including its unit normalization. -/
 theorem scalarPullback_tensor_normalization
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

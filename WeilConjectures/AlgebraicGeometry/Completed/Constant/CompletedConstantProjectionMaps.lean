@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedCons
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-! # Compatibility and limit lift of completed constant projections
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 093J--093M.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -84,8 +86,7 @@ private theorem transition_residueMul (X : Scheme.{u})
 
 end CompletedConstantProjection
 
-/-- The constructed projections commute with C-linear module maps.
-Source: Stacks Tags 03EK and 093J--093M. -/
+/-- The constructed projections commute with C-linear module maps. -/
 theorem completedConstantProjection_naturality (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -129,8 +130,7 @@ theorem completedConstantProjection_naturality (X : Scheme.{u})
     CompletedConstantProjection.constant_map_generator]
   rfl
 
-/-- The finite projections commute with successor quotient transitions.
-Source: Stacks Tags 03EK and 093J--093M. -/
+/-- The finite projections commute with successor quotient transitions. -/
 theorem completedConstantProjection_step (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -166,8 +166,7 @@ theorem completedConstantProjection_step (X : Scheme.{u})
       (n + 1))) U ((I ^ (n + 1 + 1) • ⊤ : Submodule A
         (completedConstantUnderlyingModule I N)).mkQ x)
 
-/-- The actual compatible residue cone for tensor realization.
-Source: Stacks Tags 03EK and 093J--093M. -/
+/-- The actual compatible residue cone for tensor realization. -/
 def completedConstantComparisonCone (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -184,8 +183,7 @@ def completedConstantComparisonCone (X : Scheme.{u})
     rw [Category.id_comp]
     exact (completedConstantProjection_step X I φ hφ N n).symm)
 
-/-- The canonical tensor-to-limit map, before asserting invertibility.
-Source: Stacks Tags 03EK and 093J--093M. -/
+/-- The canonical tensor-to-limit map, before asserting invertibility. -/
 def completedConstantComparisonMap (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

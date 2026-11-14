@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 
 /-! # The sheaf sum mate in the common direct image
 
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F.
+## References
+
+* Stacks Project, Tags 0F4L, 0F7B, 0F7F
 -/
 
 @[expose] public section
@@ -219,8 +221,7 @@ private theorem graph_unit_exchange
   rw [heq, Category.assoc, ← F.obj.map_comp, ← op_comp,
     C.hom_inv_id, op_id, F.obj.map_id, Category.comp_id]
 
-/-- The sheaf mate of Cartesian sum base change preserves its underlying section.
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F. -/
+/-- The sheaf mate of Cartesian sum base change preserves its underlying section. -/
 theorem cartesian_sum_mate_sheaf_normalization
     (A : Type (u + 1)) [CommRing A]
     {W Y' Z Y : Scheme.{u}}

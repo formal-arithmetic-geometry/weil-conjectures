@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownLevelRealizationC
 
 /-! # Normalized realization of a single coefficient tower
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +33,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- The fixed constant-scalar realization exists for any supplied evaluation package.
-Source: Zheng, Construction 4.1; Stacks 03CY and 06YY. -/
+/-- The fixed constant-scalar realization exists for any supplied evaluation package. -/
 theorem etaleBrownLevelRealization_exists
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) :

@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteTowerLimi
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
-/-! # Invertibility of continuous coefficient pullback along immersions -/
+/-! # Invertibility of continuous coefficient pullback along immersions
+
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1) and the paragraph before Definition 6.8.6.
+-/
 
 @[expose] public section
 
@@ -295,10 +300,7 @@ private theorem rationalLift (l : ℕ) [Fact l.Prime] (E : Type u)
   exact (congrArg (v.hom.app U) hbapp).symm.trans
     (hc.trans (hvval.trans (hφ U a)))
 
-/-- The canonical integral and rational pullback maps are isomorphisms for immersions.
-
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and paragraph before Definition 6.8.6
-(Iso). -/
+/-- The canonical integral and rational pullback maps are isomorphisms for immersions. -/
 theorem continuousCoefficientPullback_isIso (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u})

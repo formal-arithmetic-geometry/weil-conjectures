@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
 
 /-! # Ordinary tensor pullback with a single coefficient
 
-Source: Stacks Project, Tags 03EL and 07A4.
+## References
+
+* Stacks Project, Tags 03EL, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -120,8 +122,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint proEtaleRingMod
   CochainComplex.mapBifunctorSingle₂Iso
 set_option backward.defeqAttrib.useBackward true
 
-/-- The single-coefficient total pullback is tensor pullback in every degree.
-Source: Stacks Tags 03EL and 07A4. -/
+/-- The single-coefficient total pullback is tensor pullback in every degree. -/
 theorem tensorScalarOrdinaryPullback_single_f {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (P : CochainComplex (proEtaleRingModules T A) ℤ) (n : ℤ) :

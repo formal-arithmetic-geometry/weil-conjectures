@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 
 /-! # Factoring derived fibre cohomology through an open neighbourhood
 
-Source: Stacks Project, Tag 08DW.
+## References
+
+* [Stacks Project, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
 -/
 
 @[expose] public section
@@ -76,8 +78,7 @@ theorem localDerivedFiberCohomologyFunctor_eq (W : Scheme.{v}) (w : W)
 
 attribute [irreducible] localDerivedFiberCohomologyFunctor
 
-/-- Restriction to a neighbourhood computes fibre cohomology naturally on derived arrows.
-Source: Stacks Project, Tag 08DW, compatibility with restriction to opens. -/
+/-- Restriction to a neighbourhood computes fibre cohomology naturally on derived arrows. -/
 theorem derived_fiber_open_factorization (W : Scheme.{v}) (w : W)
     (U : W.Opens) (hwU : w ∈ U) (i : ℤ) :
     Nonempty ((SheafOfModules.overFunctor.{v}

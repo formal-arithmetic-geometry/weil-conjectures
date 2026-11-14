@@ -17,7 +17,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarCoc
 
 /-! # Normalization and tensor coherence of scalar change across an open immersion
 
-Source: Stacks Tags 0E8I, 03EL, 06YY, and 0E8J.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL, 0E8I
+* Stacks Project, Cohomology on Sites, Tags 06YY, 0E8J
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +31,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The coefficient part of the open projection formula, with all maps fixed by
-adjunction and by their K-flat model normalizations.
-Source: Stacks 0E8I, 03EL, 06YY, 0E8J. -/
+adjunction and by their K-flat model normalizations. -/
 structure EtaleOpenScalarComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Prop where
@@ -492,9 +494,7 @@ private theorem restriction_unique
     (hr P hk).trans (restriction_normalized φ j P hk).symm
 
 /-- Scalar change commutes canonically with open extension and restriction,
-with the prescribed K-flat normalizations and coefficient and tensor composition laws.
-Source: Stacks, Modules on Sites, Tags 0E8I and 03EL; Cohomology on Sites,
-Tags 06YY and 0E8J. -/
+with the prescribed K-flat normalizations and coefficient and tensor composition laws. -/
 theorem etaleOpenScalarComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

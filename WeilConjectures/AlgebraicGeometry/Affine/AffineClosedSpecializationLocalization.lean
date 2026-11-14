@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-! # Affine localization near an arbitrary closed subset
 
-Source: Stacks Project, Tag 096V, Lemma `lemma-localization`, with `f = 1`, and Tag 092B.
+## References
+
+* Stacks Project, Tag 096V (with `f = 1`) and Tag 092B
 -/
 
 @[expose] public section
@@ -25,7 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Localization at the elements invertible modulo `I` is weakly etale and identifies its
 spectrum with the points specializing to `V(I)`. Every source point specializes to a point
-above `V(I)`. Source: Stacks Project, Tags 096V and 092B. -/
+above `V(I)`. -/
 theorem affineClosedSpecializationLocalization (A : Type u) [CommRing A] (I : Ideal A)
     (S : Submonoid A) (hS : ∀ a : A, a ∈ S ↔ IsUnit (Ideal.Quotient.mk I a)) :
     WeaklyEtale (Spec.map (CommRingCat.ofHom (algebraMap A (Localization S)))) ∧

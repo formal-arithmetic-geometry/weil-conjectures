@@ -26,6 +26,10 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 import WeilConjectures.Algebra.Homology.ProperBaseChange.KFlatResolutionGeneral
 
 /-! # The canonical derived reduction Hom equivalence
+
+## References
+
+* Stacks Project, Tag 03D3
 -/
 
 @[expose] public section
@@ -41,7 +45,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars is exact, also when the small site's object and morphism
-universes differ. Source: order 1260, proof step 6; Stacks Tag 03D3. -/
+universes differ. -/
 theorem adicRestrictScalars_exact (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)) ∧

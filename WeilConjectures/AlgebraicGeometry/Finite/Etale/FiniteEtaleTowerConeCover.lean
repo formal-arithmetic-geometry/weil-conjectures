@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 import Mathlib.CategoryTheory.CofilteredSystem
 
 /-! # Covers mapping to finite etale towers
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV.
+
+## References
+
+* Stacks Project, Tags 01YW, 0990; finite-stalk adaptation of Tag 09BV
 -/
 
 @[expose] public section
@@ -79,8 +82,7 @@ private theorem seqLimit_surjective {S : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite etale tower with finite nonempty geometric fibers has a compatible
-cone whose legs to the base form a pro-etale cover.
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV. -/
+cone whose legs to the base form a pro-etale cover. -/
 theorem finite_etale_tower_cone_cover
     (X : Scheme.{u}) (P : ℕ → X.Etale) (p : ∀ n : ℕ, P (n + 1) ⟶ P n)
     (hfin : ∀ n : ℕ, IsFinite (P n).hom)

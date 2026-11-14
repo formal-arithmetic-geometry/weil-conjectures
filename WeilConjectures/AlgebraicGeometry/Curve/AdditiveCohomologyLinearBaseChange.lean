@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyTensorKernel
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyTensorSurjective
 
-/-! # Canonical linear base change of additive first cohomology -/
+/-! # Canonical linear base change of additive first cohomology
+
+## References
+
+* Stacks Project, Tags 02KH, 03P2 and 0A3P.
+-/
 
 @[expose] public section
 
@@ -23,8 +28,7 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- Pullback of additive cohomology intertwines structural scalar actions.
-Source: Stacks Project, Tags 03P2 and 02KH, naturality of the comparison. -/
+/-- Pullback of additive cohomology intertwines structural scalar actions. -/
 private theorem additive_cohomology_pullback_smul
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']
@@ -102,8 +106,7 @@ private theorem additive_cohomology_pullback_smul
 
 /-- The canonical pullback of additive structure-sheaf cohomology is extension
 of scalars. The given actions are required to be induced by structural scalar
-multiplication on sections; no finite-dimensionality is assumed or asserted.
-Source: Stacks Project, Tags 02KH and 03P2; Tag 0A3P, first sentence of proof. -/
+multiplication on sections; no finite-dimensionality is assumed or asserted. -/
 theorem exists_additive_cohomology_linear_base_change
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']

@@ -30,7 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The actual derived inverse image, named once to share its derived-category
-instances in the canonical exchange maps. Source: blueprint base-change clause. -/
+instances in the canonical exchange maps. -/
 def derivedUpper (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) :
     DerivedCategory (Modules R S) ⥤ DerivedCategory (Modules R X) :=
@@ -51,7 +51,7 @@ instance derivedUpperCommShift (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u
 
 /-- The canonical Beck--Chevalley map is the mate of the compositional
 pullback isomorphism of the specified commutative square. No proper or flat
-base-change theorem is built into its definition. Source: blueprint clause 3. -/
+base-change theorem is built into its definition. -/
 def ordinaryExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)

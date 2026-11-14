@@ -68,7 +68,9 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherenc
 
 /-! # Tensor compatibility of ordinary constant coefficient realization
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03EL and 0GMW.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03EL, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -184,9 +186,7 @@ private def layerLiftTensor {B : Type t} [CommRing B] (M N : ModuleCat.{t} B) :
     Functor.isoWhiskerLeft E' ((curriedTensor _).flip.mapIso (e.app N).symm) ≪≫
       Functor.isoWhiskerRight e.symm (tensorRight (E.obj N))
 
-/-- Ordinary constant realization carries tensor products to sheaf tensor products.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03EL and 0GMW. -/
+/-- Ordinary constant realization carries tensor products to sheaf tensor products. -/
 theorem finiteCoefficient_constant_tensor_comparison (X : Scheme.{t})
     (B : Type t) [CommRing B]
     {R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}

@@ -21,14 +21,21 @@ import WeilConjectures.AlgebraicGeometry.Boundary.BoundaryDerivationAlgebraicDat
 /-!
 # Boundary maps for square-zero extensions
 
-Source: Stacks Project, Cohomology, Lemma 0B8S.
-
 The algebra sheaves are `Scheme.CommAlgebraSheaf`s and their underlying `𝒪_X`-modules are
 `commAlgebraSheafModule`, with the module map of `p` given by `commAlgebraSheafModuleFunctor`.
 The kernel `I` is tied by the short exactness of `0 → I → O' → O → 0`.
 The connecting map is the snake boundary of any compatible injective resolutions,
-transported to the recorded module cohomology (independent of the choice by
-lem-weil-pbc-horseshoe-delta-functor). No boundary is an arbitrary function.
+transported to the recorded module cohomology (independent of the choice, by the horseshoe
+construction of the cohomological delta functor). No boundary is an arbitrary function.
+
+## Implementation details
+
+* In `boundary_derivation_square_zero`, the compatible resolutions are a presentation of the
+  boundary, not extra geometric conditions on the extension.
+
+## References
+
+* Stacks Project, Tag 0B8S
 -/
 
 @[expose] public section
@@ -47,11 +54,7 @@ set_option maxHeartbeats 800000 in
 `σ` is the local quotient action on the kernel, commuting with restriction.
 `μ` is its action by global sections on the kernel sheaf. `ρ` is the induced
 ring action on H¹, identified with H¹ applied to `μ`. `δ` is the connecting map,
-computed by the snake boundary of a horseshoe and the canonical resolution isomorphisms.
-The compatible resolutions are a presentation of the boundary, not extra geometric
-conditions on the extension.
-
-Source: Stacks Project, Cohomology, Lemma 0B8S. -/
+computed by the snake boundary of a horseshoe and the canonical resolution isomorphisms. -/
 theorem boundary_derivation_square_zero (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))

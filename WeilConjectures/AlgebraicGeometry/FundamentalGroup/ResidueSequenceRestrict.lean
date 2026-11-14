@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequence
 # Residues under shrinking the open
 
 Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
-`k` and `U' ⊆ U` a smaller nonempty open. For the residue sequence of blueprint
-`proposition-no-fixed-class-degree-one--1` we compare the residues of torsors on `U` and `U'`:
+`k` and `U' ⊆ U` a smaller nonempty open. For the residue sequence we compare the residues of
+torsors on `U` and `U'`:
 
 * the residues of a torsor on `U` are those of its restriction to `U'`
   (`AlgebraicGeometry.Scheme.EtaleTorsor.residue_pullback`);

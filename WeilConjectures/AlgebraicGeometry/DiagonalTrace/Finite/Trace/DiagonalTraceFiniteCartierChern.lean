@@ -30,29 +30,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- On the surface, forgetting support of the finite completed diagonal gives the
 Chern arrow of the actual divisor line. The assertion precedes direct image
-along a projection and the geometric adjunction.
-
-
-
-The finite-cycle normalization identifies the projected class with the positive
-Cartier reduction at exponent n+1. Cartier reduction existence and uniqueness
-transport it to the etale supported Kummer class with its canonical integral
-adjunct. The supported Kummer Chern realization identifies its composite with
-the constant-to-support map as the positive Kummer Chern class of the dual ideal.
-That line is diagonalPic Y. Apply hc to that Picard class at n. Its integral
-boundary equation gives the same Kummer boundary. The coefficient-one and
-root-tensor equations in k identify its quotient and root endpoints with the
-ones just computed; hn fixes the scalar-unit and single/shift comparisons.
-First pass from the completed coefficient unit to its derived finite quotient:
-l is regular on the completed ring, and its quotient at exponent n+1 is the
-actual finite constant ring. Thus derived reduction of that regular unit is the
-finite coefficient unit, and its adjunction unit is the actual coefficient
-projection. The scalar-extension adjunction from the integral unit to that finite
-unit then makes the coefficient-linear arrows equal from their integral adjuncts.
-This does not require faithfulness of forgetting on arbitrary Ext.
-Finally the exact-cone projection identity identifies the coefficient input
-with k.unitMap followed by L.projection. Exponent n+1 is positive even at n=0;
-the same maps and equations cover the empty base. -/
+along a projection and the geometric adjunction. -/
 theorem diagonalTrace_finiteCartierChern
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

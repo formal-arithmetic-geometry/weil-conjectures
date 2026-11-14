@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulUnitZer
 
 /-! # The component normalization square for completed Koszul tensor augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-sites-cohomology.tex, Tag 06YN, the total tensor construction.
+## References
+
+* Stacks Project, proetale.tex, Tag 099M (finite Koszul augmentation)
+* Stacks Project, sites-cohomology.tex, Tag 06YN (the total tensor construction)
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +28,7 @@ attribute [local instance] completedKoszulCochainMonoidal
   completedKoszulCochainMonoidalStruct
 attribute [local instance] Functor.preservesZeroMorphisms_of_additive
 
-/-- Additivity of the recorded module tensor, with its coefficient sheaf explicit.
-Source: Stacks 03EK. -/
+/-- Additivity of the recorded module tensor, with its coefficient sheaf explicit. -/
 local instance augmentationComponentPreadditive
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     MonoidalPreadditive (CompletedAdicModules T d) := by
@@ -188,10 +190,7 @@ private lemma normalization_coefficient
 maps are just maps of complexes; no naturality in P or in the quotient level is assumed.
 The source comparison is tensor of the left unitor of the Koszul complex. The target
 comparison first identifies the quotient tensor at the cochain unit with the quotient
-in degree zero, and then uses the single-degree-zero total tensor comparison.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M), finite
-Koszul augmentation, and sites-cohomology.tex, Definition 06YN, total tensor. -/
+in degree zero, and then uses the single-degree-zero total tensor comparison. -/
 theorem completedKoszulTensorAugmentationComponent
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (n : ℕ)

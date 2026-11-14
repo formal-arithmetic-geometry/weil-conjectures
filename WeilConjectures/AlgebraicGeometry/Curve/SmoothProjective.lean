@@ -22,11 +22,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # Varieties, projective morphisms and smooth projective curves
 
-This file sets up the conventions of the curve-calculation chapter of the blueprint: varieties
-and curves over a field, (H-)projective morphisms, the relative dimension of a morphism, and
-smooth projective curves. It compares them with the curves of
-`WeilConjectures/AlgebraicGeometry/Curve.lean` (`AlgebraicGeometry.IsCurve`,
-`AlgebraicGeometry.IsConnectedCurve`), which are the curves of the smooth-curve chapter.
+This file sets up conventions for the curve calculations: varieties and curves over a field,
+(H-)projective morphisms, the relative dimension of a morphism, and smooth projective curves.
+It compares them with the curves of `WeilConjectures/AlgebraicGeometry/Curve.lean`
+(`AlgebraicGeometry.IsCurve`, `AlgebraicGeometry.IsConnectedCurve`).
 
 ## Main definitions
 
@@ -142,8 +141,7 @@ instance (priority := 100) IsIntegralCurve.isConnectedCurve (f : X ⟶ Spec (.of
 
 /-- **Smooth projective curves are smooth connected curves.** A smooth projective curve `X`
 over a field `K` is a smooth connected curve: `X` is nonempty, connected, separated, of finite
-type and of dimension one over `K`, and smooth over `K`. The blueprint states this over an
-algebraically closed field, but the argument does not use it. -/
+type and of dimension one over `K`, and smooth over `K`. -/
 theorem IsSmoothProjectiveCurve.isConnectedCurve_and_smooth (f : X ⟶ Spec (.of K))
     [IsSmoothProjectiveCurve f] : IsConnectedCurve f ∧ Smooth f ∧ IsProper f :=
   ⟨inferInstance, inferInstance, inferInstance⟩
@@ -203,8 +201,7 @@ instance IsSmoothProjectiveCurve.isProper_baseChangeField :
 variable (k C) in
 /-- **The genus of the base change.** For a smooth projective curve `C` over `k` and a field
 extension `K/k`, the genus `dim_K Γ(C_K, Ω¹_{C_K/K})` of the smooth proper curve `C_K`
-(`AlgebraicGeometry.Scheme.Hom.genus`, blueprint `prose-C-05`) is the genus
-`g(C) = dim_k H¹(C, 𝒪_C)` of `C`. -/
+(`AlgebraicGeometry.Scheme.Hom.genus`) is the genus `g(C) = dim_k H¹(C, 𝒪_C)` of `C`. -/
 theorem IsSmoothProjectiveCurve.genus_baseChangeField :
     (C.baseChangeField k K ↘ Spec (.of K)).genus = Scheme.arithmeticGenus k C :=
   Scheme.genus_eq_arithmeticGenus.trans (arithmeticGenus_baseChangeField k C K)
@@ -220,10 +217,10 @@ instance IsSmoothProjectiveCurve.isIntegral_baseChangeField :
 
 variable (k C) in
 /-- **Base change of a geometrically integral smooth projective curve.** For a geometrically
-integral smooth projective curve `C` over `k` and a field extension `K/k` (in the blueprint,
-algebraically closed), the base change `C_K` is a proper smooth connected curve over `K` in the
-sense of `AlgebraicGeometry.IsConnectedCurve`, so that the degree and `Pic⁰` conventions of the
-smooth-curve chapter apply to it. -/
+integral smooth projective curve `C` over `k` and a field extension `K/k`, the base change
+`C_K` is a proper smooth connected curve over `K` in the sense of
+`AlgebraicGeometry.IsConnectedCurve`, so that the degree and `Pic⁰` conventions for such curves
+apply to it. -/
 theorem IsSmoothProjectiveCurve.isConnectedCurve_baseChangeField :
     IsConnectedCurve (C.baseChangeField k K ↘ Spec (.of K)) ∧
       Smooth (C.baseChangeField k K ↘ Spec (.of K)) ∧

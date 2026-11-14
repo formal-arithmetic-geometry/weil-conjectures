@@ -12,7 +12,12 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
-/-! # Full faithfulness of bounded below etale realization -/
+/-! # Full faithfulness of bounded below etale realization
+
+## References
+
+* Bhatt--Scholze, Corollary 5.1.6
+-/
 
 @[expose] public section
 
@@ -23,12 +28,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Exact etale inverse image is full on bounded below complexes.
-Source: Bhatt--Scholze, Corollary 5.1.6.
-
-Proof. The comparison derived adjunction has invertible unit on bounded below
-complexes, so its hom map is bijective. Restrict the source along the fully faithful
-inclusion of the bounded below derived category. -/
+/-- Exact etale inverse image is full on bounded below complexes. -/
 theorem finiteDiscreteEtaleRealization_full (B : Type) [CommRing B] (T : Scheme.{u}) :
     (DerivedCategory.Plus.ι ⋙
       D(ν^*(T)[ModuleCat.{u + 1} (ULift.{u + 1} B)])).Full where

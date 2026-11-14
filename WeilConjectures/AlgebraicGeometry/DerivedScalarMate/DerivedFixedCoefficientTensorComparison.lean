@@ -29,7 +29,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Fixed-coefficient tensor normalization on representatives
 
-Source: Stacks Tags 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -136,8 +138,7 @@ private theorem representativeFixedIso_hom_app
 
 attribute [local irreducible] representativeFixedIso
 
-/-- A fixed coefficient computes derived tensor on every flat K-flat first factor.
-Source: Stacks 07A4. -/
+/-- A fixed coefficient computes derived tensor on every flat K-flat first factor. -/
 theorem fixedCoefficientTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}

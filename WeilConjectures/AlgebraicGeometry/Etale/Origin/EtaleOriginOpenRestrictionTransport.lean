@@ -175,11 +175,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Comparison transport of the normalized open restriction map
 
-Source: retained blueprint Step 7, restriction and mate-pasting calculation;
-Stacks Tags 099R, 09AF and 09BN.
-
 This calculation concerns open restriction of a direct image, without any proper/open
 interchange map or properness hypothesis.
+
+## References
+
+* Stacks Project, Tags 00YV, 099R, 09AE, 09AF, 09BN
 -/
 
 @[expose] public noncomputable section
@@ -197,15 +198,13 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- Exact comparison followed by canonical constant-ring realization.
-Source: Stacks Tag 099R, retained blueprint Step 7. -/
+/-- Exact comparison followed by canonical constant-ring realization. -/
 def etaleOriginOpenComparison (T : Scheme.{u}) :
     Etale.DerivedCategoryModule (ULift.{u + 1, u} A) T ⥤ proEtaleDerivedCategory T A :=
   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).mapDerivedCategory ⋙
     (sfIntrinsicDerivedEquivalence T A).functor
 
-/-- Canonical realization coordinates for exact open extension, descended termwise.
-Source: Stacks Tags 00YV and 09AE, retained blueprint Step 7. -/
+/-- Canonical realization coordinates for exact open extension, descended termwise. -/
 def etaleOriginOpenCoordinates {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicDerivedOpen A j ≅
       (ProEtale.openImmersionLowerShriek
@@ -219,8 +218,7 @@ def etaleOriginOpenCoordinates {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion
             (sfIntrinsicModuleEquivalence Y A).functor)) ≪≫
     (mapDerivedCategoryCompIso _ _).symm
 
-/-- The termwise canonical open comparison in intrinsic constant coefficients.
-Source: Stacks Tag 09AF, retained blueprint Step 7. -/
+/-- The termwise canonical open comparison in intrinsic constant coefficients. -/
 def etaleOriginOpenExtensionComparison {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek
@@ -240,8 +238,7 @@ def etaleOriginOpenExtensionComparison {X Y : Scheme.{u}} (j : X ⟶ Y)
 
 /-- The counit-normalized direct-image comparison, included from D+ into D and then
 transported by the canonical realization. Every compatibility isomorphism is the
-published universal derived-functor comparison.
-Source: Stacks Tag 099R, retained blueprint Step 7. -/
+published universal derived-functor comparison. -/
 def etaleOriginOpenDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]
     (K : DerivedCategory.Plus

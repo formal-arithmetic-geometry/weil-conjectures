@@ -59,6 +59,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Scalar realization for an arbitrary commutative condensed ring
+
+## References
+
+* HRS, Definition 3.5 and formula (3.1).
+* Stacks Project, Tags 05RU and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -76,33 +81,28 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The reconstructed ring sheaf has the original sections, restrictions and multiplication.
-Source: HRS, Definition 3.5. -/
+/-- The reconstructed ring sheaf has the original sections, restrictions and multiplication. -/
 abbrev condensedSectionRing :=
   InternalAbelianSheafModule.sectionRingSheaf (coherentTopology Profinite.{u}) Λ
 
-/-- The underlying scalar ring Γ(*,Λ), with the multiplication inherited from Λ.
-Source: HRS, Definition 3.5. -/
+/-- The underlying scalar ring Γ(*,Λ), with the multiplication inherited from Λ. -/
 abbrev condensedScalarRing : CommRingCat.{u + 1} :=
   (condensedSectionRing Λ).obj.obj (op (⊤_ Profinite.{u}))
 
-/-- The canonical constant-section map, the counit of constant sheaf versus sections at *.
-Source: HRS, Definition 3.5. -/
+/-- The canonical constant-section map, the counit of constant sheaf versus sections at *. -/
 def condensedScalarMap :
     realizationRing (coherentTopology Profinite.{u}) (condensedScalarRing Λ) ⟶
       condensedSectionRing Λ :=
   (constantSheafAdj (coherentTopology Profinite.{u}) CommRingCat.{u + 1}
     terminalIsTerminal).counit.app (condensedSectionRing Λ)
 
-/-- The standard localization size for constant scalar module sheaves.
-Source: Stacks 05RU. -/
+/-- The standard localization size for constant scalar module sheaves. -/
 instance condensedScalarConstantHasDerived :
     HasDerivedCategory.{u + 2}
       (realizationModules (coherentTopology Profinite.{u}) (condensedScalarRing Λ)) :=
   HasDerivedCategory.standard _
 
-/-- The standard localization size for sectionwise condensed module sheaves.
-Source: Stacks 05RU. -/
+/-- The standard localization size for sectionwise condensed module sheaves. -/
 instance condensedScalarSectionHasDerived :
     HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1}
       ((sheafCompose (coherentTopology Profinite.{u})
@@ -111,8 +111,7 @@ instance condensedScalarSectionHasDerived :
   HasDerivedCategory.standard _
 
 /-- The derived coefficient extension, fixed by its universal counit and K-flat computation.
-Its universal property determines the selected object up to counit-compatible isomorphism.
-Source: HRS, formula (3.1), and Stacks 06YY. -/
+Its universal property determines the selected object up to counit-compatible isomorphism. -/
 def condensedScalarExtensionModel :
     SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
       (condensedScalarMap Λ) :=

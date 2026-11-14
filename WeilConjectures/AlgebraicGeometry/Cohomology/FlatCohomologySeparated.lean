@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechNaturality
 
 /-! # The separated case of flat cohomology base change
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH),
-the separated-case paragraph.
+## References
+
+* Stacks Project, Lemma 30.5.2 (Tag 02KH)
 -/
 
 @[expose] public section
@@ -27,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical comparison is bijective for a quasi-compact separated scheme over
-an arbitrary commutative ring and an arbitrary flat commutative algebra.
-
-Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), separated-case paragraph. -/
+an arbitrary commutative ring and an arbitrary flat commutative algebra. -/
 theorem H.baseChange_bijective_of_isSeparated
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
     {X : Scheme.{u}} [CompactSpace X] (f : X ⟶ Spec (.of R)) [IsSeparated f]

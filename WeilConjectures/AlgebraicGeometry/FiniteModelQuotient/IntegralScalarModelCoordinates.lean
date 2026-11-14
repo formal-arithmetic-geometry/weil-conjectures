@@ -15,7 +15,12 @@ import Mathlib.Algebra.Category.ModuleCat.Kernels
 import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
-/-! # Ordinary scalar coordinates for an integral constant model -/
+/-! # Ordinary scalar coordinates for an integral constant model
+
+## References
+
+* [Stacks Project, Tag 093J](https://stacks.math.columbia.edu/tag/093J)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,9 +31,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteModelQuotient
 
 /-- A finitely presented internal scalar module gives an ordinary finitely presented
-integral scalar model on a scheme.
-
-Source: blueprint latest, ctf-equals-bc, Local models, first two sentences; Stacks Tag 093J. -/
+integral scalar model on a scheme. -/
 theorem integral_scalar_model_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

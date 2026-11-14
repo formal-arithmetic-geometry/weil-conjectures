@@ -97,7 +97,17 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
-/-! # Bounded constant models on the mixed-universe small etale site -/
+/-! # Bounded constant models on the mixed-universe small etale site
+
+## Implementation details
+
+* `etale_site_bounded_constant_models` is obtained by transporting
+  `CategoryTheory.exists_site_bounded_constant_model` along `AsSmall.equiv`.
+
+## References
+
+* Stacks Project, Tag 094G
+-/
 
 @[expose] public section
 
@@ -135,10 +145,7 @@ private noncomputable def overRestrictionIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Local finite cohomology models give bounded finite complex models on an etale cover.
-
-Source: Stacks Project, Tag 094G, proof of lemma-locally-constant; transport of
-`CategoryTheory.exists_site_bounded_constant_model` along `AsSmall.equiv`. -/
+/-- Local finite cohomology models give bounded finite complex models on an etale cover. -/
 theorem etale_site_bounded_constant_models
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))

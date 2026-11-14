@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 import all WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line.ProjectiveLineAutomorphismHyperplane
 
-/-! # Hyperplane pullback for independently chosen projective-line models -/
+/-! # Hyperplane pullback for independently chosen projective-line models
+
+## References
+
+* EGA II, Remark 4.2.7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -17,10 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- A Cartesian inverse image of one relative hyperplane class is the other
-relative hyperplane class times a line from the base.
-
-Source: diagonal coefficients (3), the change of projective-line model; EGA II,
-Remark 4.2.7. -/
+relative hyperplane class times a line from the base. -/
 theorem diagonalProjectiveModel_hyperplanePullback
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)

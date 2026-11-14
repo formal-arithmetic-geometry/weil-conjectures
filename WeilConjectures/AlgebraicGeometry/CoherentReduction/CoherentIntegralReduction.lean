@@ -23,12 +23,20 @@ public import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 
 /-! # The actual coherent integral reduction system
 
-Source: Zheng, Construction 4.1, and the first step of
-`lem-sfb-finite-proper-exceptional-coherent-tower`.
-
 Coefficients are continuous condensed rings pulled back from the point. The
 reduction is one derived scalar extension on the sequence site. The field of
 coefficients may have universe u+1 while the schemes have universe u.
+
+## Implementation details
+
+* `continuousPoint` includes sheafification, so the construction does not require a sheaf
+  proof as data.
+
+## References
+
+* Zheng, Construction 4.1
+* Bhatt–Scholze, Definition 6.5.1 and the finite coefficient comparison
+* Stacks Project, Tags 00WH, 00YV, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +54,7 @@ namespace AlgebraicGeometry.ProEtale.CoherentReduction
 
 attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
-/-- Continuous functions on profinite tests, with pointwise commutative ring operations.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+/-- Continuous functions on profinite tests, with pointwise commutative ring operations. -/
 def continuousPresheaf (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] : Profinite.{u}ᵒᵖ ⥤ CommRingCat.{u + 1} where
   obj S := CommRingCat.of C(S.unop, T)
@@ -56,15 +63,12 @@ def continuousPresheaf (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The continuous condensed coefficient ring, with its actual section construction.
-Sheafification is included so the construction does not require a sheaf proof as data.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+/-- The continuous condensed coefficient ring, with its actual section construction. -/
 def continuousPoint (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] : Sheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1} :=
   (presheafToSheaf _ CommRingCat.{u + 1}).obj (continuousPresheaf T)
 
-/-- Continuous postcomposition defines the coefficient homomorphisms.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+/-- Continuous postcomposition defines the coefficient homomorphisms. -/
 def continuousPointMap {T S : Type (u + 1)} [CommRing T] [CommRing S]
     [TopologicalSpace T] [TopologicalSpace S] [IsTopologicalRing T] [IsTopologicalRing S]
     (f : T →+* S) (hf : Continuous f) : continuousPoint T ⟶ continuousPoint S :=
@@ -72,8 +76,7 @@ def continuousPointMap {T S : Type (u + 1)} [CommRing T] [CommRing S]
     { app := fun U ↦ CommRingCat.ofHom (f.compLeftContinuous U.unop hf)
       naturality := fun _ _ _ ↦ rfl }
 
-/-- The sheafified map sending a scalar to its constant continuous function.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+/-- The sheafified map sending a scalar to its constant continuous function. -/
 def pointConstants (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] :
     (constantSheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).obj
@@ -82,16 +85,14 @@ def pointConstants (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     { app := fun U ↦ CommRingCat.ofHom (ContinuousMap.C (α := U.unop))
       naturality := fun _ _ _ ↦ rfl }
 
-/-- Forget commutativity and then multiplication, retaining the canonical internal ring.
-Source: the ring-object construction, Stacks 00YV. -/
+/-- Forget commutativity and then multiplication, retaining the canonical internal ring. -/
 abbrev abelianPoint (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
       (continuousPoint T))
 
-/-- The continuous coefficients are commutative internal ring objects.
-Source: pointwise multiplication, Stacks 00YV. -/
+/-- The continuous coefficients are commutative internal ring objects. -/
 instance abelianPoint_comm (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] : IsCommMonObj (abelianPoint T) :=
   Sheaf.isCommMonObj_sheafCompose_obj
@@ -105,27 +106,23 @@ abbrev internalRing (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :=
   condensedRingObj (abelianPoint T) X
 
-/-- The actual multiplication on the pulled-back continuous ring.
-Source: pointwise multiplication, Stacks 00YV. -/
+/-- The actual multiplication on the pulled-back continuous ring. -/
 instance internalRingMonObj (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] : MonObj (internalRing X T) :=
   inferInstanceAs (MonObj (condensedRingObj (abelianPoint T) X))
 
-/-- Commutativity is transported by the original pullback, rather than chosen afresh.
-Source: Stacks 00YV. -/
+/-- Commutativity of the pulled-back continuous ring, transported by the original pullback. -/
 instance internalRingComm (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] : IsCommMonObj (internalRing X T) :=
   inferInstanceAs (IsCommMonObj (condensedRingObj (abelianPoint T) X))
 
-/-- The section-ring presentation of the same internal coefficients.
-Source: Stacks 00YV, the recorded section-action equivalence. -/
+/-- The section-ring presentation of the same internal coefficients. -/
 abbrev sectionRing (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology X) (internalRing X T)
 
-/-- A morphism of internal rings, reconstructed on their original sections.
-Source: Stacks 00YV. -/
+/-- A morphism of internal rings, reconstructed on their original sections. -/
 def internalSectionMap (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -167,8 +164,7 @@ def schemeConstants (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
           ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
             (pointConstants T)))
 
-/-- Forgetting a ring sheaf preserves local isomorphisms on the pro-etale site.
-Source: Stacks 00WH. -/
+/-- Forgetting a ring sheaf preserves local isomorphisms on the pro-etale site. -/
 instance coefficientForgetPreserves (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).PreservesSheafification
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
@@ -182,9 +178,7 @@ open MonoidalCategory MonObj
 /-! ### The constant-section homomorphism -/
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The constant-section map from the point to the scheme is a morphism of ring objects.
-Source: Stacks 00YV; monoidality of inverse image from the point
-(auxiliary; not a blueprint node). -/
+/-- The constant-section map from the point to the scheme is a morphism of ring objects. -/
 theorem schemeConstants_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     @IsMonHom _ _ _ _ _ ((constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).monObjObj
@@ -204,16 +198,14 @@ theorem schemeConstants_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T
       (IsMonHom.comp_of_monObj _ _ _ _ _ h₁ h₂))
 
 /-- Constant sections on the scheme, as a morphism of abelian presheaves from the constant
-presheaf.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+presheaf. -/
 def schemeConstantsPresheaf (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     (Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T) ⟶ (internalRing X T).obj :=
   toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T)) ≫
     (schemeConstants X T).hom
 
-/-- The presheaf of constant sections is a morphism of ring objects of abelian presheaves.
-Source: Stacks 00YV and 03CY (auxiliary; not a blueprint node). -/
+/-- The presheaf of constant sections is a morphism of ring objects of abelian presheaves. -/
 theorem schemeConstantsPresheaf_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     @IsMonHom _ _ _ _ _ ((Functor.const X.ProEtᵒᵖ).monObjObj (AddCommGrpCat.of T))
@@ -230,8 +222,7 @@ theorem schemeConstantsPresheaf_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [Co
       _ _ _ hc)
 
 /-- The constant-section homomorphism of commutative ring sheaves: the sheafification adjunct
-of the constant sections on the scheme.
-Source: Stacks 00YV and 03CY (auxiliary; not a blueprint node). -/
+of the constant sections on the scheme. -/
 def constantSectionsRingMap (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     realizationRing.{u + 1, u} (Scheme.ProEt.topology X) T ⟶ sectionRing X T :=
@@ -241,8 +232,7 @@ def constantSectionsRingMap (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
       (internalRing X T) (schemeConstantsPresheaf X T) (schemeConstantsPresheaf_isMonHom X T))
 
 /-- The constant-section homomorphism sends the constant section of a scalar to its constant
-section in the internal ring.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+section in the internal ring. -/
 theorem constantSectionsRingMap_toSheafify (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] (U : X.ProEtᵒᵖ) (a : T) :
     (constantSectionsRingMap X T).hom.app U
@@ -257,8 +247,7 @@ theorem constantSectionsRingMap_toSheafify (X : Scheme.{u}) (T : Type (u + 1)) [
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The additive map underlying the constant-section homomorphism is the constant-section map,
-after the constant-sheaf comparison.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+after the constant-sheaf comparison. -/
 theorem constantSectionsRingMap_forget (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     ((constantCommuteCompose (Scheme.ProEt.topology X)
@@ -277,8 +266,7 @@ theorem constantSectionsRingMap_forget (X : Scheme.{u}) (T : Type (u + 1)) [Comm
 /-! ### Finite discrete coefficients -/
 
 /-- Constant functions from the constant presheaf to continuous functions, before
-sheafification; `pointConstants` is its sheafification.
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+sheafification; `pointConstants` is its sheafification. -/
 def pointConstantsPresheaf (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] :
     (Functor.const Profinite.{u}ᵒᵖ).obj (CommRingCat.of T) ⟶ continuousPresheaf T where
@@ -286,8 +274,7 @@ def pointConstantsPresheaf (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
   naturality _ _ _ := rfl
 
 /-- Continuous functions from a profinite set to a finite discrete ring are locally constant:
-the constant-function map is locally surjective.
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+the constant-function map is locally surjective. -/
 instance pointConstantsPresheaf_isLocallySurjective (T : Type (u + 1)) [CommRing T] [Finite T]
     [TopologicalSpace T] [DiscreteTopology T] :
     Presheaf.IsLocallySurjective (coherentTopology Profinite.{u})
@@ -313,8 +300,7 @@ instance pointConstantsPresheaf_isLocallySurjective (T : Type (u + 1)) [CommRing
     exact x.property.symm
 
 /-- Equality of constant functions is locally detected: the constant-function map is locally
-injective, using the empty cover of the empty profinite set.
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+injective. -/
 instance pointConstantsPresheaf_isLocallyInjective (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     Presheaf.IsLocallyInjective (coherentTopology Profinite.{u})
@@ -333,15 +319,13 @@ instance pointConstantsPresheaf_isLocallyInjective (T : Type (u + 1)) [CommRing 
         ⟨PEmpty, inferInstance, U, incl, hι, fun i ↦ i.elim⟩
 
 /-- For a finite discrete ring, constant functions give an isomorphism from the constant
-condensed ring to the continuous condensed ring.
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+condensed ring to the continuous condensed ring. -/
 instance pointConstants_isIso (T : Type (u + 1)) [CommRing T] [Finite T]
     [TopologicalSpace T] [DiscreteTopology T] : IsIso (pointConstants T) :=
   ((coherentTopology Profinite.{u}).W_iff (pointConstantsPresheaf T)).mp
     ((coherentTopology Profinite.{u}).W_of_isLocallyBijective (pointConstantsPresheaf T))
 
-/-- For a finite discrete ring, the constant-section map on the scheme is an isomorphism.
-Source: Bhatt--Scholze, finite coefficient comparison (auxiliary; not a blueprint node). -/
+/-- For a finite discrete ring, the constant-section map on the scheme is an isomorphism. -/
 instance schemeConstants_isIso (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T] [Finite T]
     [TopologicalSpace T] [DiscreteTopology T] : IsIso (schemeConstants X T) := by
   let : (coherentTopology Profinite.{u}).PreservesSheafification
@@ -358,9 +342,7 @@ instance schemeConstants_isIso (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T] 
 
 end ConstantSectionsHelpers
 
-/-- Constant sections determine the map to the reconstructed continuous coefficient ring.
-Source: the constant-ring/section-action comparison, Stacks 00YV.
--/
+/-- Constant sections determine the map to the reconstructed continuous coefficient ring. -/
 theorem constantSections_existsUnique (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
     ∃! f : realizationRing.{u + 1, u} (Scheme.ProEt.topology X) T ⟶ sectionRing X T,
@@ -382,15 +364,12 @@ theorem constantSections_existsUnique (X : Scheme.{u}) (T : Type (u + 1)) [CommR
     exact (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
       forget₂ RingCat.{u + 1} Ab.{u + 1})).map_injective h
 
-/-- The uniquely specified constant-section homomorphism.
-Source: Stacks 00YV. -/
+/-- The uniquely specified constant-section homomorphism. -/
 def constantSections (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :=
   (constantSections_existsUnique X T).exists.choose
 
-/-- For finite discrete coefficients the constant-section homomorphism is an isomorphism.
-Source: Bhatt--Scholze, finite coefficient comparison.
--/
+/-- For finite discrete coefficients the constant-section homomorphism is an isomorphism. -/
 theorem constantSections_isIso (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [Finite T] [TopologicalSpace T] [DiscreteTopology T] :
     IsIso (constantSections X T) := by
@@ -468,9 +447,7 @@ theorem exists_span_pow_eq_coefficientExtensionIdeal (r : ℕ) :
     ((Ideal.quotEquivOfEq hk.symm).surjective.comp (Ideal.Quotient.factor_surjective _))
 
 /-- Positive ell-power quotients of the spectral ring of integers are continuous
-with their discrete topology.
-Source: the finite torsion levels in the blueprint; Zheng, Construction 4.1.
--/
+with their discrete topology. -/
 theorem quotient_continuous (n : ℕ) : Continuous (quotient l E n) := by
   obtain ⟨k, hk⟩ := exists_span_pow_eq_coefficientExtensionIdeal l E (n + 1)
   have hle : Padic.coefficientExtensionIdeal l E (k + 1) ≤
@@ -532,9 +509,7 @@ theorem sectionMap_comp (X : Scheme.{u}) {T S W : Type (u + 1)} [CommRing T] [Co
   congr 1
   rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, continuousPointMap_comp]
 
-/-- The integral quotient maps form a morphism of the actual ring systems.
-Source: Zheng, Construction 4.1, and the original quotient maps in blueprint step 1.
--/
+/-- The integral quotient maps form a morphism of the actual ring systems. -/
 theorem coefficientMap_compatible (X : Scheme.{u}) (n : ℕ) :
     coefficientMap l E X (n + 1) ≫ transitions l E X n =
       (𝟙 (sectionRing X (Padic.coefficientExtensionIntegers l E))) ≫
@@ -544,8 +519,7 @@ theorem coefficientMap_compatible (X : Scheme.{u}) (n : ℕ) :
   rw [sectionMap_comp]
   congr 1
 
-/-- The normalized simultaneous derived extension of the constant integral system.
-Source: Zheng, Construction 4.1; the existing normalized semilinear calculus. -/
+/-- The normalized simultaneous derived extension of the constant integral system. -/
 def reductionScalar (X : Scheme.{u}) :
     ScalarSystems.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (constantCoefficients.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
@@ -564,27 +538,23 @@ def reductionScalar (X : Scheme.{u}) :
     (coefficients l E X) (transitions l E X) (coefficientMap l E X)
     (coefficientMap_compatible l E X)
 
-/-- The exact section-action equivalence, on the actual continuous integral coefficients.
-Source: the recorded internal/sectionwise module equivalence, Stacks 00YV. -/
+/-- The exact section-action equivalence, on the actual continuous integral coefficients. -/
 def integralSections (X : Scheme.{u}) :=
   (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
     (internalRing X (Padic.coefficientExtensionIntegers l E))).functor
 
-/-- Section-action transport leaves addition of morphisms unchanged.
-Source: Stacks 00YV. -/
+/-- Section-action transport leaves addition of morphisms unchanged. -/
 instance integralSections_additive (X : Scheme.{u}) : (integralSections l E X).Additive where
   map_add := by intros; rfl
 
-/-- An equivalence preserves kernels.
-Source: Stacks 00YV. -/
+/-- An equivalence preserves kernels. -/
 instance integralSections_limits (X : Scheme.{u}) :
     PreservesFiniteLimits (integralSections l E X) :=
   inferInstanceAs (PreservesFiniteLimits
     (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
       (internalRing X (Padic.coefficientExtensionIntegers l E))).functor)
 
-/-- An equivalence preserves cokernels.
-Source: Stacks 00YV. -/
+/-- An equivalence preserves cokernels. -/
 instance integralSections_colimits (X : Scheme.{u}) :
     PreservesFiniteColimits (integralSections l E X) :=
   inferInstanceAs (PreservesFiniteColimits
@@ -597,8 +567,7 @@ abbrev Bc (X : Scheme.{u}) :=
 
 /-- Actual integral reductions as one object of the ordinary derived category of systems.
 This is section-action transport, the exact diagonal, and one simultaneous derived
-scalar extension. Its K-flat normalization is part of reductionScalar's model.
-Source: Zheng, Construction 4.1; blueprint coherent-tower proof, step 1. -/
+scalar extension. Its K-flat normalization is part of `reductionScalar`'s model. -/
 def reduction (X : Scheme.{u}) :
     DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (internalRing X (Padic.coefficientExtensionIntegers l E))) ⥤

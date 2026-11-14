@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 
 /-! # Coefficient augmentation preserves closed elements
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2. -/
+
+## References
+
+* Stacks Project, Tag 01EQ (Lemma 20.11.2)
+-/
 
 @[expose] public section
 
@@ -21,8 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The horizontal part of the total differential kills the coefficient augmentation.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta. -/
+/-- The horizontal part of the total differential kills the coefficient augmentation. -/
 private theorem etaleAdditiveCech_beta_horizontal
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)
@@ -151,8 +154,7 @@ private theorem etaleAdditiveCech_beta_horizontal
   exact hd
 
 
-/-- The vertical part of the total differential kills the coefficient augmentation.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta. -/
+/-- The vertical part of the total differential kills the coefficient augmentation. -/
 private theorem etaleAdditiveCech_beta_vertical
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)
@@ -212,8 +214,7 @@ private theorem etaleAdditiveCech_beta_vertical
 
 
 
-/-- The coefficient augmentation sends cycles to elements killed by the total differential.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta. -/
+/-- The coefficient augmentation sends cycles to elements killed by the total differential. -/
 theorem etaleAdditiveCech_beta_closed
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)

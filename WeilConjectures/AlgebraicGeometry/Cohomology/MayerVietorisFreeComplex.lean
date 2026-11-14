@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Category.Grp.Biproducts
 import Mathlib.CategoryTheory.Sites.MayerVietorisSquare
 /-! # Free abelian sheaves for a two-open cover
 
-Source: Stacks Project, Tag 01EB.
+## References
+
+* Stacks Project, Tag 01EB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -73,8 +75,7 @@ private lemma openSquare_cover {X : Scheme.{u}} (U V : X.Opens) (hc : U ⊔ V = 
   · refine ⟨V, homOfLE le_top, ?_, h⟩
     exact Sieve.le_generate _ _ _ (Presieve.ofArrows.mk WalkingPair.right)
 
-/-- The free-sheaf two-open complex is short exact for a cover.
-Source: Stacks Project, Tag 01EB; Mathlib's MayerVietorisSquare.shortComplex_shortExact. -/
+/-- The free-sheaf two-open complex is short exact for a cover. -/
 theorem H.openFreeShortComplex_shortExact {X : Scheme.{u}} (U V : X.Opens)
     (hc : U ⊔ V = ⊤) : (H.openFreeShortComplex U V).ShortExact := by
   have hs : (openSquare U V).IsPullback := by

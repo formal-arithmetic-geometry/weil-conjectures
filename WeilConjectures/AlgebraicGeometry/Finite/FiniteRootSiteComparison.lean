@@ -152,8 +152,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonP
 
 /-! # Finite root comparison between the etale and pro-etale sites
 
-Source: Stacks Project, proetale.tex, Tag 0GLZ, lemma-describe-pullback-from-etale;
-sites-modules.tex, Tag 03EL, lemma-tensor-product-pullback.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 0GLZ
+* Stacks Project, Tags 03CY, 03PK, 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -169,8 +171,7 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
 /-- The recorded root module in the fixed `ZMod m` coefficient presentation.
-Restriction along constant sections retains exactly the original root sections.
-Source: Stacks Tags 03CY and 03PK. -/
+Restriction along constant sections retains exactly the original root sections. -/
 def finiteRootProModule (T : Scheme.{u}) (m : ℕ) (hm : 0 < m) :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ZMod m)) :=
   (sheafCompose (ProEt.topology T)
@@ -180,8 +181,7 @@ def finiteRootProModule (T : Scheme.{u}) (m : ℕ) (hm : 0 < m) :
         (proEtaleRootsOfUnityModule T m hm))
 
 /-- The actual balanced scalar extension of the root sheaf, sheafified sectionwise.
-This is `D_m,T`, with the `A` factor first, as in the recorded etale construction.
-Source: Stacks Tags 03EK and 03EL. -/
+This is `D_m,T`, with the `A` factor first, as in the recorded etale construction. -/
 def finiteRootProTensor (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)
     (hA : (m : A) = 0) (T : Scheme.{u}) :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A) :=
@@ -189,8 +189,7 @@ def finiteRootProTensor (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)
     ((finiteRootProModule T m hm).obj ⋙
       ModuleCat.extendScalars (finiteEtaleTwistScalar m A hA))
 
-/-- A local tensor `z ⊗ a`, written `a ⊗ z`, followed by the sheafification unit.
-Source: Stacks Tags 03EK and 03EL. -/
+/-- A local tensor `z ⊗ a`, written `a ⊗ z`, followed by the sheafification unit. -/
 def finiteRootProGenerator (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)
     (hA : (m : A) = 0) (T : Scheme.{u}) (W : T.ProEtᵒᵖ) (a : A)
     (z : (proEtaleRootsOfUnitySheaf T m).obj.obj W) :
@@ -205,8 +204,7 @@ attribute [irreducible] finiteRootProModule finiteRootProTensor finiteRootProGen
 /-- The normalized comparison, with scalar, scheme, identity, composition and power laws.
 The root comparison is the already constructed `ProEtale.cartierRootsIso`. Additive root
 maps are linear for the unique constant `ZMod m` actions; the tensor arrows live in
-`ModuleCat A` and hence are linear for the corresponding constant ring sheaves.
-Source: Stacks Tags 0GLZ, 03CY and 03EL. -/
+`ModuleCat A` and hence are linear for the corresponding constant ring sheaves. -/
 def FiniteRootSiteComparisonSpec (A : Type (u + 1)) [CommRing A] : Prop :=
   ∃ (sigma : ∀ (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)
     (T : Scheme.{u}), IsUnit (m : Γ(T, ⊤)) →
@@ -1445,9 +1443,7 @@ private theorem rootPullback_comp {T T' T'' : Scheme.{u}}
   exact (congrArg (fun f ↦ f.hom
     (Additive.toMul (((proEtaleRootsOfUnityInclusion T m).hom.app U z).down)).val) hp).symm
 
-/-- The finite root comparison with its specified scalar and scheme coherence exists.
-Source: Stacks Project, proetale.tex, Tag 0GLZ; sites-modules.tex, Tag 03EL.
--/
+/-- The finite root comparison with its specified scalar and scheme coherence exists. -/
 theorem finiteRootSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A] :
     FiniteRootSiteComparisonSpec A := by
   have (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)

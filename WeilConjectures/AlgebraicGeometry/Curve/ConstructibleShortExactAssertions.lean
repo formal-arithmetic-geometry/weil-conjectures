@@ -15,8 +15,14 @@ import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 /-! # Short-exact devissage with constructible outer terms
 
-Source: Stacks Project, Lemma 0A5C. The proof specializes the existing proof in
-Curve.Reductions; this standalone module avoids its import of ConstructiblePrimeDevissage.
+## Implementation details
+
+* The proof specializes the one in `Curve.Reductions`; this standalone module avoids its import
+  of `ConstructiblePrimeDevissage`.
+
+## References
+
+* Stacks Project, Lemma 0A5C.
 -/
 
 @[expose] public section
@@ -28,12 +34,9 @@ open Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Short exact dévissage for the eight curve assertions.** Let `X` be a curve over `k` and
-`0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` a short exact sequence of étale sheaves of `Λ`-modules on `X`. If the
-eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`: the long exact
-cohomology sequences (and their pullbacks along a field extension) pass vanishing, finiteness
-and bijectivity to the middle term, the hypotheses of the assertions being inherited by
-subsheaves and quotients; constructibility of the outer terms is assumed; for `C₈` one uses
-`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`. -/
+`0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` a short exact sequence of étale sheaves of `Λ`-modules on `X` with
+constructible outer terms. If the eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does
+`C(X, F)`. -/
 theorem IsCurve.Assertions.of_constructible_shortExact {k : Type u} [Field k]
     {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

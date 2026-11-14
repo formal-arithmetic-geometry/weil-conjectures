@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 
 /-! # Global augmentation sends cycles to total cycles
 
-Source: Stacks Project, Tag 01FD, the left augmentation of the double complex. -/
+## References
+
+* Stacks Project, Tag 01FD
+-/
 
 @[expose] public section
 
@@ -22,9 +25,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Restriction from global resolution sections gives a total cycle. No covering
-or acyclicity assumption is required for this chain-map property.
-Source: Stacks Project, Tag 01FD, the left augmentation of the double complex. -/
+/-- Restriction from global resolution sections gives a total cycle. -/
 theorem additiveCech_alpha_representative
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)

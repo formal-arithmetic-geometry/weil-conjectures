@@ -21,6 +21,11 @@ This assembly step pastes the proper mate projection square with the open
 restriction and constant-tensor comparison. It is stated conditionally on the
 proper mate square so that the unbounded mate calculation is an independent
 intermediate result.
+
+## References
+
+* Zheng, Proposition 2.29(2) and Construction 2.26
+* Stacks Project, Tag 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -99,8 +104,7 @@ private theorem projection_construction_components
             ((derivedTensorSymmetry A X).hom.app K).app (H'.obj V)) := by
   rfl
 
-/-- The specified constant projection has its three defining components.
-Source: Zheng, Construction 2.26; expand the generic projection constructor. -/
+/-- The specified constant projection has its three defining components. -/
 private theorem constant_projection_components
     (C : Type (u + 1)) [CommRing C]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -163,10 +167,7 @@ private theorem projection_pasting
     z₁ ≫ z₂ ≫ s ≫ b = σ ≫ byMap ≫ pH ≫ q₁ ≫ q₂ ≫ q₃ := by
   rw [reassoc_of% h₁, h₂, ← reassoc_of% hn]
 
-/-- The untwisted constant-coefficient projection word.
-Source: Zheng, Proposition 2.29(2), Construction 2.26. Paste the proper mate
-hypothesis with the open projection identity, transport the coefficient by
-naturality, and combine constant pullback along the two compactification factors. -/
+/-- The untwisted constant-coefficient projection word. -/
 private theorem compact_projection_word
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -242,9 +243,7 @@ private theorem map_pair_twice
     J.map (T.map l) ≫ J.map (T.map m) = J.map (T.map r) ≫ J.map (T.map s) := by
   exact map_pair J (map_pair T h)
 
-/-- Functorial transport of constant pullback composition.
-Source: Zheng, Construction 2.26. Apply preservation of composition first to
-T and then to J in the proved degree-zero constant pullback equation. -/
+/-- Functorial transport of constant pullback composition. -/
 private theorem mapped_constant_composition
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (M : ModuleCat.{u + 1} C)
@@ -494,7 +493,6 @@ private theorem constant_projection_word
 
 /-- Paste the open restriction comparison and the constant tensor maps after a
 proper mate projection identity.
-Source: Zheng, Proposition 2.29(2), Construction 2.26; Stacks Tag 0GL6.
 -/
 theorem etaleQuotientTensorProjection_of_proper_mate
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)

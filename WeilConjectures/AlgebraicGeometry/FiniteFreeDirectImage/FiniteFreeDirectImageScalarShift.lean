@@ -43,7 +43,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Counit-compatible shifts of normalized scalar models
 
-Source: Stacks Project, Tags 06YY and 07A6.
+## References
+
+* Stacks Project, Tags 06YY, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -54,8 +56,7 @@ universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-/-- The normalized scalar adjunction gives the universal counit's shift structure.
-Source: Stacks Project, Tags 06YY and 07A6. -/
+/-- The normalized scalar adjunction gives the universal counit's shift structure. -/
 theorem finiteFreeDirectImageScalarShift {X : Scheme.{u}} (s : ScalarModel X)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) :
     (s.presentation a).derived.IsTriangulated ∧

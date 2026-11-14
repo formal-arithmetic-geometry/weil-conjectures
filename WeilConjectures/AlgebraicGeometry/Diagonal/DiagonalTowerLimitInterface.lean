@@ -86,9 +86,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 
 /-! # Shared definitions for the completed diagonal limit
 
-These are the existing completed endpoints, normalized comparison maps, and limit
-specifications, extracted unchanged so their proof dependencies can be imported below
-the final assembly theorem.
+These are the completed endpoints, normalized comparison maps, and limit specifications,
+kept in a separate file so that their proof dependencies can be imported below the final
+assembly theorem.
+
+## References
+
+* Stacks Project, Tags 0940, 099I, 099M
 -/
 
 @[expose] public noncomputable section
@@ -130,8 +134,7 @@ structure DiagonalRightDerived
 attribute [instance] DiagonalRightDerived.shift
 
 /-- The total derived limit, including its canonical projections to the derived levels.
-The normalization is an equation on complexes and fixes the maps, not just their types.
-Source: blueprint clauses 1 and 3, Stacks 0940. -/
+The normalization is an equation on complexes and fixes the maps, not just their types. -/
 structure DiagonalRlim
     (A : Type a) [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] extends
@@ -240,8 +243,7 @@ def diagonalCompletedSource (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
                   (Scheme.purTwistZlCompletion (ProjectiveLine Y) ℓ))))
 
 /-- Restrict the completed action to constant scalars, then to constant sections.
-The two constant-ring presentations are identified by constantCommuteCompose.
-Source: blueprint clause 3 and Stacks 099I. -/
+The two constant-ring presentations are identified by `constantCommuteCompose`. -/
 def diagonalCompletedRestriction (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     DiagonalCompleted ℓ X ⥤ DiagonalMod ℓ X :=
   letI := Scheme.purTwistForgetPreservesSheafification X
@@ -305,24 +307,23 @@ theorem diagonalCompletedRestriction_exact (ℓ : ℕ) [Fact ℓ.Prime] (X : Sch
   dsimp only [diagonalCompletedRestriction]
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- The additive part of coefficient restriction. Source: blueprint clause 3. -/
+/-- The additive part of coefficient restriction. -/
 instance diagonalCompletedRestrictionAdditive (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     (diagonalCompletedRestriction ℓ X).Additive :=
   (diagonalCompletedRestriction_exact ℓ X).1
 
-/-- The left exact part of coefficient restriction. Source: blueprint clause 3. -/
+/-- The left exact part of coefficient restriction. -/
 instance diagonalCompletedRestrictionLimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     PreservesFiniteLimits (diagonalCompletedRestriction ℓ X) :=
   (diagonalCompletedRestriction_exact ℓ X).2.1
 
-/-- The right exact part of coefficient restriction. Source: blueprint clause 3. -/
+/-- The right exact part of coefficient restriction. -/
 instance diagonalCompletedRestrictionColimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     PreservesFiniteColimits (diagonalCompletedRestriction ℓ X) :=
   (diagonalCompletedRestriction_exact ℓ X).2.2
 
 /-- Simultaneous derived quotient with its canonical quotient units on arbitrary inputs.
-The normalization with the left-derived counit specifies the actual quotient map.
-Source: blueprint clause 3, derived finite reductions; Stacks 099M. -/
+The normalization with the left-derived counit specifies the actual quotient map. -/
 structure DiagonalCompletedReductionData
     (ℓ : ℕ) (A : Type a) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] where

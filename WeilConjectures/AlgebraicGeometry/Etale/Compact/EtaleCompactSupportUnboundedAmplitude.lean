@@ -27,12 +27,16 @@ import Mathlib.RingTheory.KrullDimension.Field
 
 /-! # Unbounded amplitude and coproducts of finite etale compact supports
 
-Source: Zheng, Six operations and Lefschetz-Verdier formula for Deligne-Mumford stacks,
-Corollary 2.19, printed p. 12, and the coproduct argument of Proposition 2.23.
-
 The functor below is the existing ordinary unbounded `Rr_*` after the exact derived
 extension by zero for the supplied compactification, not a new compact-support construction.
 The geometric bound is asserted before quantifying over coefficient rings.
+
+## References
+
+* Zheng, Six operations and Lefschetz-Verdier formula for Deligne-Mumford stacks,
+  Corollary 2.19 (printed p. 12) and the coproduct argument of Proposition 2.23
+* Stacks Project, More on Étale Cohomology, the uniform bound for derived lower shriek
+  with torsion coefficients
 -/
 
 @[expose] public section
@@ -49,15 +53,7 @@ attribute [-instance] commShiftRightDerivedLowerStar isTriangulated_rightDerived
 /-- Finite prime-to-characteristic etale compact support is triangulated, preserves
 set-indexed coproducts, and has unbounded amplitude in `[0, 2d]` for every bound `d` on
 geometric fibres of the original morphism. All three schemes are Noetherian, quasi-compact
-and quasi-separated, without any separatedness hypothesis on either structure morphism.
-
-Source: Zheng, Corollary 2.19, printed p. 12; Proposition 2.23, coproduct argument.
-
-
-The uniform auxiliary bound is Stacks Project, more-etale.tex,
-lemma-derived-lower-shriek-bounded, (3), for torsion coefficients; only its already
-proved source-library implementation is used. No sharp bound on compactified fibres
-is asserted. -/
+and quasi-separated, without any separatedness hypothesis on either structure morphism. -/
 theorem compactSupport_unbounded_amplitude
     (k : Type u) [Field k] [IsAlgClosed k]
     (p : ℕ) [CharP k p] (hp : 0 < p)

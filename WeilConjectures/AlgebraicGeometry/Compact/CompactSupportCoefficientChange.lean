@@ -76,13 +76,16 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 /-!
 # Change of finite coefficients for compact support
 
-Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-trace-perfectness,
-order 1824; Stacks Tags 0GL5 and 0GL6.
+## Implementation details
 
-Derived scalar extension is expressed by the published universal property
-`Sheaf.IsDerivedBaseChange`. A model includes its universal arrow, so the comparison
-below is a unique B-linear arrow, not a lift of an unspecified A-linear arrow.
-The actual compact-support functors and proper/open mates are used throughout.
+* Derived scalar extension is expressed by the universal property `Sheaf.IsDerivedBaseChange`.
+  A model (`CoefficientTensorModel`) includes its universal arrow, so the comparison
+  `compactSupportCoefficientComparison` is a unique B-linear arrow, not a lift of an unspecified
+  A-linear arrow. The actual compact-support functors and proper/open mates are used throughout.
+
+## References
+
+* Stacks Project, Tags 03DI, 06YY, 07A4, 07A6, 0D6D, 0F0G, 0GL5, 0GL6
 -/
 
 @[expose] public section
@@ -92,11 +95,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- A presentation of the actual derived scalar extension, including its universal arrow.
-The universal property is the published definition of derived base change; it determines
-this object up to the unique isomorphism respecting that arrow. K-flat scalar extension
-supplies such presentations.
-Source: Stacks Tags 06YY and 07A6. -/
+/-- A presentation of the derived scalar extension, including its universal arrow. The universal
+property determines this object up to the unique isomorphism respecting that arrow. -/
 structure CoefficientTensorModel
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) where
@@ -106,8 +106,7 @@ structure CoefficientTensorModel
 
 namespace CoefficientTensorModel
 
-/-- The canonical scalar extension of a map, fixed by the universal arrows.
-Source: Stacks Tag 07A6. -/
+/-- The canonical scalar extension of a map, fixed by the universal arrows. -/
 noncomputable def map
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B} {T : Scheme.{u}}
     {K L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))}
@@ -116,7 +115,7 @@ noncomputable def map
   (Equiv.ofBijective _ (M.universal N.obj)).symm (f ≫ N.unit)
 
 /-- The composite universal arrow for successive reductions, with the canonical
-restriction-of-scalars associativity map. Source: Stacks Tag 0D6D. -/
+restriction-of-scalars associativity map. -/
 noncomputable def comp
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     {φ : A →+* B} {ψ : B →+* C} {T : Scheme.{u}}
@@ -128,8 +127,7 @@ noncomputable def comp
     (Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology T) rfl).hom.app N.obj
   universal := M.universal.comp rfl N.universal
 
-/-- Pullback of the universal tensor arrow remains universal.
-Source: Stacks Tags 07A4 and 06YY. -/
+/-- Pullback of the universal tensor arrow remains universal. -/
 theorem pullback_universal
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B}
     {T V : Scheme.{u}} (g : V ⟶ T)
@@ -152,8 +150,7 @@ theorem pullback_universal
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
       (fixedScalarRestrictionPullback φ g).hom K).symm) M.unit M.universal N
 
-/-- The canonical pullback of a tensor presentation, with its normalized universal arrow.
-Source: Stacks Tag 07A4. -/
+/-- The canonical pullback of a tensor presentation, with its normalized universal arrow. -/
 noncomputable def pullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B}
     {T V : Scheme.{u}} (g : V ⟶ T)
@@ -167,8 +164,7 @@ noncomputable def pullback
 
 end CoefficientTensorModel
 
-/-- The unit of derived extension of scalars exhibits a derived base change.
-Source: Stacks Tag 07A6. -/
+/-- The unit of derived extension of scalars exhibits a derived base change. -/
 theorem isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
     (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
@@ -179,8 +175,7 @@ theorem isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
   exact ((leftDerivedSheafExtendScalarsAdjunction R S X).homEquiv_unit K N g).symm
 
 /-- The open restriction comparison is the mate, along derived extension of scalars, of the
-commutation of scalar extension with extension by zero.
-Source: Stacks Tags 03DI and 07A6. -/
+commutation of scalar extension with extension by zero. -/
 theorem mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom
     (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -200,8 +195,7 @@ theorem mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom
   exact h
 
 /-- Compact support carries derived base changes of bounded constructible complexes of finite
-Tor amplitude to derived base changes, through the canonical restriction comparison.
-Source: Stacks Tags 0GL5, 0GL6 and 07A6. -/
+Tor amplitude to derived base changes, through the canonical restriction comparison. -/
 theorem isDerivedBaseChange_compactSupport_map_comp
     {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] [Finite R] [Finite S]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -261,8 +255,7 @@ theorem isDerivedBaseChange_compactSupport_map_comp
 restriction, composed with the source tensor unit, is compact support of the input
 unit followed by the canonical proper/open restriction comparison.
 This is equivalently the tensor comparison: on the proper factor its transpose is
-coefficient extension of the counit, and on the open factor it is the unit mate.
-Source: Stacks Tags 0GL5, 0GL6 and 07A6. -/
+coefficient extension of the counit, and on the open factor it is the unit mate. -/
 noncomputable def compactSupportCoefficientComparison
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     {φ : A →+* B} {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -301,8 +294,7 @@ noncomputable def finiteReductionCompactSupportComparison
 /-- Compact support commutes with reduction A_{E,n} to A_{E,m} for bounded
 constructible K of finite Tor amplitude, in the finite-field datum.
 The conclusion is an isomorphism in the B-coefficient category, for every universal
-presentation of each derived tensor. In particular it includes m=n.
-Source: Weil blueprint order 1824; Stacks Tags 0GL5, 0GL6 and 0F0G. -/
+presentation of each derived tensor. In particular it includes m=n. -/
 theorem finiteReductionCompactSupportComparison_isIso
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

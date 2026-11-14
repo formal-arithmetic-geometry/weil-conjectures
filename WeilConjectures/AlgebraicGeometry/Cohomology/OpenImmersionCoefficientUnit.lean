@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageCoefficie
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 /-! # Underlying abelian sheaves under open module pullback
 
-Source: Stacks Project, Tag 04J0 and Section 01F7.
+## References
+
+* Stacks Project, Tag 04J0 and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -18,9 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {X Y : Scheme.{u}}
-/-- The coefficient unit is invertible for an open immersion.
-Source: Stacks Project, Tag 04J0, localization of ringed sites, and Section 01F7.
--/
+/-- The coefficient unit is invertible for an open immersion. -/
 theorem coefficientUnit_isIso_of_isOpenImmersion (j : Y ⟶ X) [IsOpenImmersion j]
     (M : X.Modules) : IsIso (coefficientUnit j M) := by
   have := Topology.IsOpenEmbedding.functor_isContinuous j.isOpenEmbedding

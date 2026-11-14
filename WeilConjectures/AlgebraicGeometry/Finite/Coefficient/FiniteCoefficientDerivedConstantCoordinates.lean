@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 
 /-! # Constant complexes in fixed coordinates on an etale chart
 
-Source: Stacks Project, Tags 03CY, 093J and 099R.
+## References
+
+* Stacks Project, Tags 03CY, 093J, 099R
 -/
 
 @[expose] public noncomputable section
@@ -123,10 +125,7 @@ private def fixedConstantComparison (X : Scheme.{t}) (B : Type t) [CommRing B] :
   exact ConcreteCategory.congr_hom (congrArg (fun k ↦ k.app U) hn) x
 
 /-- Fixed-coordinate restriction of a derived constant realization is the corresponding
-constant complex on the chart. This applies to arbitrary unbounded complexes.
-
-Source: Stacks Project, change of rings (03CY), module sheafification (093J),
-and localization (099R). -/
+constant complex on the chart. This applies to arbitrary unbounded complexes. -/
 theorem finiteCoefficient_derived_constant_coordinates
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

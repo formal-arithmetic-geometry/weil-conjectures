@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Homology.BifunctorSingleNaturality
 
 /-! # Existence of the finite strict completed Koszul tensor augmentation
 
-Source: Stacks Project, Tags 091N and 099M.
+## References
+
+* Stacks Project, Tags 091N and 099M
 -/
 
 @[expose] public noncomputable section
@@ -196,10 +198,7 @@ private theorem assembleTowerMap {C D : Type*} [Category C] [HasZeroMorphisms C]
   rfl
 
 set_option linter.unusedVariables false in
-/-- The normalized strict augmentation exists before taking any products.
-
-Source: Stacks Project, Tags 091N and 099M, the degree-zero augmentation in the
-proof of lemma-naive-completion. -/
+/-- The normalized strict augmentation exists before taking any products. -/
 theorem completedKoszulTensorQuotientAugmentation_exists
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     ∃ β : completedKoszulTensorTower T d r a ⟶

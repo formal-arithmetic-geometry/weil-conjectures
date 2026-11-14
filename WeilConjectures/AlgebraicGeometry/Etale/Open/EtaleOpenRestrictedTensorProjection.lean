@@ -13,7 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSingleCoeffic
 import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenScalarExchange
 import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 
-/-! # Restricted scalar change and the open tensor projection -/
+/-! # Restricted scalar change and the open tensor projection
+
+## References
+
+* Stacks Project, Tag 0GL6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -88,8 +93,7 @@ private theorem openCoefficientTensorPullback_normalization
     Functor.map_comp, Category.assoc, ε, T] using h
 
 /-- Scalar restriction of the open balancing isomorphism is the inverse open
-projection, with the canonical coefficient pullback.
-Source: Stacks Tag 0GL6 and the unit normalization of extension by zero. -/
+projection, with the canonical coefficient pullback. -/
 theorem etaleOpenRestrictedTensorProjection
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]

@@ -32,8 +32,9 @@ eight assertions, which only see the underlying abelian sheaf, hold for it by th
 `F` and for `j_! j^* F` are equivalent for every open `j`, without any condition on the torsion
 of `F`: this is the unconditional form of `AlgebraicGeometry.IsCurve.dense_open_assertions`.
 
-Source: Stacks Project, Theorem 03SC and Lemma 0GJA (blueprint: `app:curve-package`,
-`lemma-removing-finitely-many-points`).
+## References
+
+* Stacks Project, Theorem 03SC and Lemma 0GJA.
 -/
 
 @[expose] public section
@@ -61,9 +62,7 @@ private noncomputable def integralUnderlyingIso {X : Scheme.{u}}
 
 /-- **The curve package for constructible torsion abelian sheaves.** Let `k` be algebraically
 closed and `(C, F)` a curve coefficient pair over `k` with `F` constructible. Then the eight
-assertions `C(C, F)` hold, for `F` viewed as a sheaf of `ULift ℤ`-modules.
-
-Source: Stacks Project, Theorem 03SC (blueprint: `app:curve-package`). -/
+assertions `C(C, F)` hold, for `F` viewed as a sheaf of `ULift ℤ`-modules. -/
 theorem CurveCoefficientPair.assertions_of_constructible {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
@@ -134,9 +133,7 @@ coefficient pair over `k` with `F` constructible and `j : U ⟶ C` an open immer
 `C(C, F)` holds if and only if `C(C, j_! j^* F)` holds, both sheaves viewed as sheaves of
 `ULift ℤ`-modules. Unlike `AlgebraicGeometry.IsCurve.dense_open_assertions`, no condition on the
 torsion of `F` is needed; and the statement holds for every open `U`, in particular for every
-dense open.
-
-Source: Stacks Project, Lemma 0GJA. -/
+dense open. -/
 theorem IsCurve.assertions_iff_dense_open {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj

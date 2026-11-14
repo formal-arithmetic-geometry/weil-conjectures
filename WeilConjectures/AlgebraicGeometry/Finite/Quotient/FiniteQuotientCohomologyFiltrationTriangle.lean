@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientPreviousL
 
 /-! # The controlled outer terms of the coefficient-filtration triangle
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094I and 094H.
+## References
+
+* Stacks Project, Tags 0942, 094I, 094H, 09C2
 -/
 
 @[expose] public noncomputable section
@@ -28,12 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Tensoring the coefficient-layer sequence gives a distinguished triangle
 whose middle term is the actual successor reduction and whose outer terms have
-bounded finite etale-local cohomology. No assertion is made about the homology of
-the middle term.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (0942), first proof
-paragraph, and lemma-locally-constant-bounded (094I), with lemma-locally-constant-tensor-product
-(094H); proetale.tex, Tag 09C2. -/
+bounded finite etale-local cohomology. -/
 theorem finiteQuotient_cohomology_filtration_triangle
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

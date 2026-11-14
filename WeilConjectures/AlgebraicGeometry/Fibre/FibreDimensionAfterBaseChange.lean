@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 /-!
 # Fibre dimension after base change
 
-Source: Stacks Project, Tag 02FY, part (1).
+## References
+
+* [Stacks Project, Tag 02FY](https://stacks.math.columbia.edu/tag/02FY), part (1)
 -/
 
 @[expose] public section
@@ -118,7 +120,6 @@ private theorem localDim_fiber_point {X S : Scheme.{u}} (f : X ⟶ S)
   simpa using hy
 
 /--
-Source: Stacks Project, Tag 02FY, part (1).
 The fibre `(X')_{s'}` is identified with `X_s ×_{κ(s)} κ(s')` by an isomorphism
 compatible with the maps to `X_s` and to `Spec κ(s')` (the base change of `X_s` along
 `κ(s) → κ(s')`); `f x = s` is the cartesian-square relation `s = g(s') = f(x)`.

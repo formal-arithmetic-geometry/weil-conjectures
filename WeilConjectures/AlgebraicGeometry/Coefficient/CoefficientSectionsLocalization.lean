@@ -33,11 +33,11 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 /-!
 # Coefficient sections and localization
 
-Source: Stacks Project, sites.tex, Tags 00Y0 and 03EH; proetale.tex, Tag 098T;
-canonical coefficient specialization using the blueprint pullback-from-point comparison.
+Canonical coefficient specialization, using the pullback-from-point comparison.
 
-Stage-2 validation: N6 checked the recorded statement, dependency interfaces, and
-universe parameters against the shared live library on 2026-10-18.
+## References
+
+* Stacks Project, Tags 00Y0, 03CE, 03EH, 098T
 -/
 
 @[expose] public section
@@ -51,16 +51,14 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The unit morphism of the canonical coefficient ring.
-Source: Stacks, Tag 00Y0. -/
+/-- The unit morphism of the canonical coefficient ring. -/
 noncomputable def sfbCoefficientUnit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u}) :
     𝟙_ (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ⟶ condensedRingObj Λ X :=
   MonObj.one (X := condensedRingObj Λ X)
 
-/-- The graph of a map to a test object, as a map from the final object to its base change.
-Source: Stacks, Tag 03CE. -/
+/-- The graph of a map to a test object, as a map from the final object to its base change. -/
 noncomputable def sfbSectionGraph {X Y : Scheme.{u}} (f : X ⟶ Y) (T : Y.ProEt)
     (a : X ⟶ T.left) (ha : a ≫ T.hom = f) :
     Scheme.ProEt.mk (𝟙 X) ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T :=
@@ -69,8 +67,7 @@ noncomputable def sfbSectionGraph {X Y : Scheme.{u}} (f : X ⟶ Y) (T : Y.ProEt)
     (pullback.lift_snd _ _ _) trivial
 
 /-- Evaluate a sheaf morphism into a direct image and restrict along a graph.
-The coefficient section maps below are specializations of this construction.
-Source: Stacks, Tag 03CE. -/
+The coefficient section maps below are specializations of this construction. -/
 noncomputable def sfbSectionMapOfHom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -80,8 +77,7 @@ noncomputable def sfbSectionMapOfHom {X Y : Scheme.{u}} (f : X ⟶ Y)
   η.hom.app (op T) ≫ S.obj.map (sfbSectionGraph f T a ha).op
 
 /-- The section map `θ_T`: apply the actual coefficient mate `η` and restrict along the
- diagonal. This is the evaluation of `α` after inverse-image restriction, without choosing
- an arbitrary isomorphism. Source: Stacks, Tags 00Y0 and 03CE. -/
+diagonal. This is the evaluation of `α` after inverse-image restriction. -/
 noncomputable def sfbCoefficientSectionMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     {B : Scheme.{u}} (T : B.ProEt) :
@@ -93,7 +89,7 @@ noncomputable def sfbCoefficientSectionMap
     (𝟙 T.left) (Category.id_comp T.hom)
 
 /-- The global-section map `f^sharp`, expressed by the coefficient mate and the canonical
-map from the final object to its base change. Source: Stacks, Tag 03EH. -/
+map from the final object to its base change. -/
 noncomputable def sfbCoefficientGlobalMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

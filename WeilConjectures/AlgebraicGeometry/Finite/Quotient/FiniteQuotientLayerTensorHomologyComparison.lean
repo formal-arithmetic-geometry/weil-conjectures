@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerTens
 
 /-! # The homology comparison for the explicit ideal-layer tensor complex
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I, the displayed balancing identity,
-and Tags 094H and 06YU.
+## References
+
+* Stacks Project, Tags 094I, 094H, 06YU
 -/
 
 @[expose] public noncomputable section
@@ -25,13 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Compute the layer homology from the specified residue projective complex.
-This statement concerns the already constructed tensor complex; it does not assert
-existence of a finite model or any bound on its homology. Only an upper bound and
-projectivity are needed, with no finite-generation or lower-bound hypothesis.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094I, the displayed balancing identity,
-Tag 094H, and the bounded-above flat-complex calculation of derived tensor (06YU). -/
+/-- Compute the homology of the layer tensor complex from the specified residue projective
+complex, assuming only an upper bound and projectivity of its terms. -/
 theorem finiteQuotient_layer_tensor_homology_comparison
     (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

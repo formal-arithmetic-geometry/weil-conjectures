@@ -13,6 +13,10 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 This module isolates the section, localization, and mate equations for supplied
 realization data.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +73,7 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
 set_option maxHeartbeats 2000000 in
 -- The normalization transports adjunctions between two concrete derived-category universes.
 /-- Normalize the comparison maps while retaining the supplied derived functors and
-factorizations. Arbitrary comparison isomorphisms are not automatically normalized.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4. -/
+factorizations. -/
 theorem etaleBrownLevelRealizationCoherence_exists
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)

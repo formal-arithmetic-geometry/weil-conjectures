@@ -12,7 +12,12 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyFiniteDimensional
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
-/-! # Finite-dimensional scalar model for first additive étale cohomology -/
+/-! # Finite-dimensional scalar model for first additive étale cohomology
+
+## References
+
+* Stacks Project, Tag 0A3N.
+-/
 
 @[expose] public section
 
@@ -23,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- First cohomology of the additive structure sheaf carries its finite-dimensional
-scalar action, with scalar multiplication represented by actual sheaf endomorphisms.
-Source: Stacks 0A3N, proof; blueprint `proposition-p-torsion-smooth-proper-curve--3`, steps 3--6. -/
+scalar action, with scalar multiplication represented by actual sheaf endomorphisms. -/
 theorem exists_finiteDimensional_etaleCohomology_one_scalar_model
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

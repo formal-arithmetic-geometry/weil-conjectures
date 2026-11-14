@@ -18,8 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
 /-!
 # Pullback of the integral Cartier pole extension
 
-Source: blueprint lemma-cycle-class-cartier-divisor, relative trivialization paragraph;
-Stacks 03AJ and 0A45.
+## References
+
+* Stacks Project, Tags 03AJ, 0A45
 -/
 
 @[expose] public noncomputable section
@@ -88,10 +89,7 @@ private theorem pole_pullback_of_framed_map {D D' T T' : Scheme.{u}}
 
 /-- The integral pole-extension class of a Cartier divisor commutes with pullback
 of its Cartier pair. This is a degree-one identity with integral coefficients and
-units, before either the Kummer connecting map or coefficient extension.
-
-Source: blueprint lemma-cycle-class-cartier-divisor, paragraph beginning "All the cone
-maps"; Stacks 03AJ and 0A45. -/
+units, before either the Kummer connecting map or coefficient extension. -/
 theorem cartierPoleBoundary_pullback {D D' T T' : Scheme.{u}}
     (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
     (i' : D' ⟶ T') [IsClosedImmersion i'] (hI' : i'.ker.IsInvertible)

@@ -32,8 +32,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proposition-cohomology-smooth-affine-curve.
+/-- Compatibility of constant-coefficient cohomology of a connected curve with algebraically
+closed field extension.
 
 The witness `r` is constrained to be the canonical cohomology pullback followed by the
 constant-sheaf comparison. The witness `t` is the primitive-root trivialization on cohomology.
@@ -42,8 +42,7 @@ compatibility with Picard torsion and Picard modulo n. In the proper case the de
 identification is constrained by the degree of every line bundle. Compatible bases of Picard
 torsion give the degree-one coordinates with the genus of the chosen compactification.
 In the affine case the equations are the canonical short exact Kummer ladder, whose Picard
-term is the quotient of the compactification's Jacobian described by
-proposition-cohomology-smooth-affine-curve--3. -/
+term is the quotient of the compactification's Jacobian. -/
 theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

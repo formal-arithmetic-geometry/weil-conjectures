@@ -18,7 +18,11 @@ import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The normalized tower in pro-etale quotient coordinates
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tag 09C6 (the quotient arrows `K_(n+1) → K_n`)
+* Stacks Project, Tag 06YY (computation and balancing of derived scalar extension)
+* Stacks Project, Tags 03CY, 03DA and 05RU
 -/
 
 @[expose] public noncomputable section
@@ -35,10 +39,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 semilinear arrows `δ n` between the ordinary fixed-scalar coordinates, whose localizations on
 K-flat complexes are universal for derived restriction of scalars, and which are carried by the
 explicit scalar realizations to the strict ordinary tensor tower restricted to every `W`,
-compatibly with the ordinary scalar compositor and the inverse-image comparison.
-
-Source: Stacks Project, Tag 09C6, the quotient arrows; Tag 06YY, tensor balancing;
-Tags 03CY and 03DA. -/
+compatibly with the ordinary scalar compositor and the inverse-image comparison. -/
 theorem finitePerfectAdic_quotient_strict_tower
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -80,24 +81,7 @@ theorem finitePerfectAdic_quotient_strict_tower
     (δ n) (hδ n) P hP, finitePerfectAdic_quotient_strict_realization X d φ hφ hcompat V δ hδ⟩
 
 /-- The actual quotient coordinates admit normalized consecutive arrows and a joint
-scalar realization of the strict completed quotient tower. No etale origins are chosen.
-
-Source: Stacks Project, Tag 09C6, the actual quotient arrows K_(n+1) to K_n;
-Tag 06YY, computation and balancing of derived scalar extension; Tags 03CY and 05RU.
-
-
-For each U,W,f, restrict this same representative, transport along the slice
-equivalence, and use the counit of associated module sheafification. These maps
-identify the scalar realizations with the restrictions of the same strict ordinary
-tensor tower. On underlying abelian sheaves, the canonical scalar compositor is
-fixed by the sheafification unit; both composites send b tensor x to q(b) tensor x.
-Thus the consecutive square commutes before localization, not merely on objects.
-The derived counits are invertible on P. Their naturality and the counit identifying
-the specified strict representative of completedAdicReduction carry the entire
-square to the displayed RestrictedTower, simultaneously at all levels. Independence
-of P follows from the universal localization comparisons, which commute with these
-actual chain maps. The argument includes the empty chart and the zero ring, and
-uses no boundedness or finiteness condition on the cohomology of M. -/
+scalar realization of the strict completed quotient tower. No etale origins are chosen. -/
 theorem finitePerfectAdic_quotient_coordinate_tower
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

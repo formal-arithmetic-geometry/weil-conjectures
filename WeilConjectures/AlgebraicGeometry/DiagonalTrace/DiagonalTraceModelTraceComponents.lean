@@ -200,17 +200,7 @@ private theorem projected_trace_of_components
     (V.map (t.model.trace l E)) _ hβ'
 
 /-- A source map with a base component and a coefficient-one Chern component
-integrates to the canonical coefficient projection.
-
-
-Exact restriction and evaluation preserve these equations. Apply the evaluated
-trace to the assumed pretrace sum. Additivity kills its arbitrary base term and
-leaves the projected coefficient unit. Result.reductions identifies this with the
-projection of the completed trace composite. Finally, the normalized exact-cone
-projection theorem identifies the coefficient unit and its derived projection,
-followed by the restriction/evaluation single comparisons, with the actual
-ordinary coefficientProjection. Postcomposing the equality by these comparisons
-gives the displayed identity. -/
+integrates to the canonical coefficient projection. -/
 theorem diagonalTrace_integral_of_components
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientPrevi
 
 /-! # Constant realization and scalar restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The constant scalar-restriction comparison has identity underlying abelian sheaf map.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL. -/
+/-- The constant scalar-restriction comparison has identity underlying abelian sheaf map. -/
 theorem constantRealization_restrictionIso_exists (X : Scheme.{t})
     {B D : Type t} [CommRing B] [CommRing D] (f : B →+* D) (M : ModuleCat.{t} D) :
     ∃ e : (ModuleCat.uliftFunctor.{t + 1, t} B ⋙ ModuleCat.restrictScalars.{t + 1}

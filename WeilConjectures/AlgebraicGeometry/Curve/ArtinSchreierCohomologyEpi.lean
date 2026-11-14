@@ -22,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Frobenius minus identity is onto in first additive cohomology of a curve.
-Source: blueprint `proposition-p-torsion-smooth-proper-curve--3`, steps 3--7; Stacks 0A3L and 0A3N.
--/
+See Stacks Project, Tags 0A3L and 0A3N. -/
 theorem epi_etaleCohomology_artinSchreier_one
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

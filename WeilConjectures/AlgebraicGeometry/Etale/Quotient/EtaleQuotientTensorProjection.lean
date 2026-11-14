@@ -13,12 +13,20 @@ import WeilConjectures.AlgebraicGeometry.Etale.Quotient.EtaleQuotientTensorProje
 
 /-! # The restricted compact-support coefficient projection
 
-Source: Zheng, Proposition 2.29(2), Construction 2.26, Lemma 5.22 and Proposition 5.24,
-printed pp. 16, 36--37.
-
 This identity compares the canonical coefficient map with the constant-tensor
-projection. Its coefficient complex and scalar/tensor identifications are written
-locally to keep the normalization module independent of this proof dependency.
+projection.
+
+## Implementation details
+
+* `etaleQuotientTensorProjection`: the coefficient complex and scalar/tensor
+  identifications are written locally to keep the normalization module independent of
+  this proof dependency.
+
+## References
+
+* Zheng, Proposition 2.29(2), Construction 2.26, Lemma 5.22 and Proposition 5.24,
+  printed pp. 16, 36--37
+* Stacks Project, Tag 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +43,7 @@ open CategoryTheory CategoryTheory.Limits SheafOfModules
 
 namespace AlgebraicGeometry.Etale
 
-/-- Restriction of the actual scalar projection is the constant-coefficient projection.
-Source: Zheng, Proposition 2.29(2) and Construction 2.26; Stacks Tag 0GL6. -/
+/-- Restriction of the actual scalar projection is the constant-coefficient projection. -/
 theorem etaleQuotientTensorProjection
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

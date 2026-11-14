@@ -30,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The coordinate model of affine space: start with the base and adjoin one coordinate
-at a time. Over Spec B this is Spec B[t₁,…,t_d]. Source: blueprint
-proposition-purity-vector-bundles, Step 6. -/
+at a time. Over Spec B this is Spec B[t₁,…,t_d]. -/
 def affineTraceTower (S : Scheme.{u}) : ℕ → Scheme.{u}
   | 0 => S
   | d + 1 => AffineSpace PUnit.{u + 1} (affineTraceTower S d)
@@ -42,8 +41,7 @@ def affineTraceProjection (S : Scheme.{u}) : (d : ℕ) → affineTraceTower S d 
   | d + 1 => (AffineSpace PUnit.{u + 1} (affineTraceTower S d) ↘ affineTraceTower S d) ≫
       affineTraceProjection S d
 
-/-- Coordinatewise base change in the tower. Source: blueprint proposition-purity-vector-bundles,
-Step 6. -/
+/-- Coordinatewise base change in the tower. -/
 def affineTraceMap {S' S : Scheme.{u}} (f : S' ⟶ S) :
     (d : ℕ) → affineTraceTower S' d ⟶ affineTraceTower S d
   | 0 => f
@@ -143,7 +141,7 @@ theorem affineTraceToAffineSpace_isIso (S : Scheme.{u}) (d : ℕ) :
       simp [affineTraceToAffineSpace, g, affineTraceFromVector_coord]
 
 /-- The canonical affine-space identification, whose inverse is uniquely determined by
-the concrete coordinate map. Source: blueprint proposition-purity-vector-bundles, Step 6. -/
+the concrete coordinate map. -/
 def affineTraceAffineSpaceIso (S : Scheme.{u}) (d : ℕ) :
     affineTraceTower S d ≅ AffineSpace (ULift.{u} (Fin d)) S :=
   letI := affineTraceToAffineSpace_isIso S d
@@ -199,7 +197,7 @@ theorem affineTraceChart_isPullback {S' S : Scheme.{u}} (f : S' ⟶ S) :
     (AffineSpace.isPullback_map (n := PUnit.{u + 1}) f)
 
 /-- The projection of the coordinate tower is separated, locally of finite type and
-quasi-compact. Source: blueprint proposition-purity-vector-bundles, Step 6. -/
+quasi-compact. -/
 theorem affineTraceProjection_properties (S : Scheme.{u}) (d : ℕ) :
     IsSeparated (affineTraceProjection S d) ∧
       LocallyOfFiniteType (affineTraceProjection S d) ∧

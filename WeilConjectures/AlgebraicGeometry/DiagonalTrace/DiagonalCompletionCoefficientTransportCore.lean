@@ -39,7 +39,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Comparing the actual diagonal scalar functor with small-site coefficients
 
-Source: Stacks Tags 00YY, 03CY and 093M; the diagonal tower limit, clause (3).
+## References
+
+* Stacks Project, Tags 00YY, 03CY, 093M
 -/
 
 @[expose] public noncomputable section
@@ -369,9 +371,7 @@ private def restrictionTransport
 attribute [local irreducible] moduleSiteEquivalence completedRingIso finiteTowerIso
 
 /-- The small-site and constant-ring encodings identify the actual scalar functor,
-including its action on all derived morphisms. No completeness assertion occurs here.
-
-Source: Stacks Tags 00YY, 03CY and 093M; blueprint diagonal tower limit, clause (3). -/
+including its action on all derived morphisms. No completeness assertion occurs here. -/
 theorem diagonalCompletionCoefficientTransportCore (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l S)]
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l S)] :

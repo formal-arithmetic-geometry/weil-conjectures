@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 
 /-! # The open/proper model of the compact-support compositor
 
-Source: Stacks Project, Tags 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -93,8 +95,7 @@ private lemma chosen_to_model
   unfold rightDerivedLowerShriekIso
   rfl
 
-/-- Factorization normalization of the chosen compositor.
-Source: Stacks Project, Tags 0F7I and 0F7J. -/
+/-- Factorization normalization of the chosen compositor. -/
 theorem graph_compactification_factorization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

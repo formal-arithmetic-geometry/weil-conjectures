@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientEta
 
 /-! # Finite-module models after one coefficient extension
 
-Source: Stacks Tags 09C2, 094I and 094G.
+## References
+
+* Stacks Project, Tags 09C2, 094I, 094G
 -/
 
 @[expose] public noncomputable section
@@ -55,11 +57,7 @@ private theorem finiteModels_emptySlice_derived_isZero (X : Scheme.{t})
   exact (DerivedCategory.Q.map_isZero hC).of_iso
     (DerivedCategory.Q.objObjPreimageIso K).symm
 
-/-- The coefficient-filtration step gives bounded constant finite-module models.
-It does not assert projectivity of their terms or finite Tor amplitude.
-
-Source: Stacks Project, proetale.tex, lemma-describe-constructible-complexes (09C2),
-sites-cohomology.tex, lemma-bounded (094I) and lemma-locally-constant (094G). -/
+/-- The coefficient-filtration step gives bounded constant finite-module models. -/
 theorem finiteQuotient_finiteModule_models_succ
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

@@ -11,6 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalReductionCompletion
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalKummerReduction
 
 /-! # Existence of the normalized strict diagonal cycle system
+
+## References
+
+* Stacks Project, Tags 099M, 09AD
 -/
 
 @[expose] public noncomputable section
@@ -76,10 +80,7 @@ private theorem source_counit_iso (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
 /-- The diagonal torsion classes form one morphism in the derived category of
 strict inverse systems, obtained by simultaneous derived reduction of the positive
 integral Cartier roof. No noetherian, finiteness or nonemptiness assumption is imposed
-on Y. The displayed typeclasses only choose the localization and Ext size conventions.
-
-Source: blueprint main-20261015, sk-prop-diagonal-tower-system.md, clauses 1--4;
-Stacks Project, Tags 099M and 09AD. -/
+on `Y`. The displayed typeclasses only choose the localization and Ext size conventions. -/
 theorem exists_diagonalTowerSystem (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

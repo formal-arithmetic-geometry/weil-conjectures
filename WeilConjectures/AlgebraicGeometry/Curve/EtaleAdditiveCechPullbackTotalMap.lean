@@ -14,9 +14,8 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The map of tuple open subschemes to the pullback of the source tuple open.
-It uses the actual inclusions of opens, not a choice of a comparison map.
-Source: Stacks Project, Tag 01FD, tuple restriction maps. -/
+/-- The map of tuple open subschemes to the pullback of the source tuple open, given by the
+inclusions of opens. See Stacks Project, Tag 01FD. -/
 noncomputable def additiveCechTuplePullback
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)
@@ -31,8 +30,8 @@ noncomputable def additiveCechTuplePullback
       ((hinter p y).trans (g.preimage_mono (TopCat.Presheaf.iInf_le_piObj U y))))) ≫
     Etale.openSectionPullback g (∏ᶜ fun l ↦ U (y l))
 
-/-- Explicit product of tuple section transfers in bidegree (p,q).
-Source: Stacks Project, Tag 01FD, map of double complexes. -/
+/-- Explicit product of tuple section transfers in bidegree `(p, q)`.
+See Stacks Project, Tag 01FD. -/
 noncomputable def additiveCechPullbackBidegree
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)
@@ -49,8 +48,7 @@ noncomputable def additiveCechPullbackBidegree
     (Etale.resolutionSectionTransfer g I.cocomplex J.cocomplex α _ _
       (additiveCechTuplePullback g U V hinter p y)).f q)
 
-/-- Specification on all total summands; it determines the total map uniquely.
-Source: Stacks Project, Tag 01FD; the coproduct universal property. -/
+/-- Specification of a total map on all total summands; it determines the total map uniquely. -/
 def IsAdditiveCechPullbackTotalMap
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)
@@ -215,7 +213,7 @@ private noncomputable def pullbackDoubleMap
           (additiveCechTuplePullback g U V hinter p y)).comm q q'))
 
 /-- Tuplewise restriction maps assemble to a total cochain map satisfying the alpha square.
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1, double-complex construction. -/
+See Stacks Project, Tag 01FD (Lemma 20.15.1). -/
 theorem exists_additiveCech_pullback_total_map
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

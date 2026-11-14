@@ -18,7 +18,9 @@ import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 /-!
 # Sections over a field as geometric stalk invariants
 
-Source: Stacks Project, Tags 03QW and 04JQ, Lemma global-sections-point.
+## References
+
+* Stacks Project, Tags 03QW, 04JQ
 -/
 
 @[expose] public section

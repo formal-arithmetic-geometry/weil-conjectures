@@ -16,7 +16,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # The homogeneous coproduct of a line bundle's symmetric algebra
 
-Source: Stacks Project, Modules, Section 01CF; Schemes, Section 01LA (9); Tag 09MS.
+## References
+
+* Stacks Project, Modules, Section 01CF; Schemes, Section 01LA (9); Tag 09MS
 -/
 
 @[expose] public section
@@ -29,9 +31,7 @@ universe u
 noncomputable section
 
 /-- Multiplicative tensor-power maps to a locally symmetric algebra of a line bundle
-are a coproduct cofan of module sheaves.
-
-Source: Stacks Project, Modules, Section 01CF; Schemes, Section 01LA (9); Tag 09MS. -/
+are a coproduct cofan of module sheaves. -/
 theorem isColimit_invertible_symmetricAlgebra_cofan {X : Scheme.{u}}
     (L : X.Modules) [L.IsInvertible] (B : X.CommAlgebraSheaf)
     (j : L ⟶ commAlgebraSheafModule X.sheaf B)

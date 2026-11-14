@@ -205,6 +205,10 @@ import WeilConjectures.CategoryTheory.Ringed.RingedTowerPushforwardLimitComparis
 
 /-!
 # Complete compactification images and strict coefficient limits
+
+## References
+
+* Stacks Project, Tags 03D7, 03DI, 03DJ, 0941, 09BP, 09T5, 0A07, 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -252,8 +256,7 @@ abbrev fixedPushOrd {Z Y : Scheme.{u}} (p : Z ⟶ Y) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (pushOrd l E p)
 
 /-- Canonical direct-image/Rlim comparison, obtained by conjugating the identity
-constant-tower/pullback square through the actual geometric and limit adjunctions.
-Source: blueprint paragraph (2); Stacks 0A07. -/
+constant-tower/pullback square through the actual geometric and limit adjunctions. -/
 def pushLimit {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
     coefficientConstantTowerLimit l E Z ⋙ (pushOrd l E p).rightDerivedFunctor ≅
       (fixedPushOrd l E p).rightDerivedFunctor ⋙ coefficientConstantTowerLimit l E Y :=
@@ -286,8 +289,7 @@ def finiteCoefficients (n : ℕ) : PurCompactSupport.Coefficients.{u} where
   ring T := (spCoefficientCommRings.{u, u} l E T).obj (op n)
   pull f := StrictTower.constantRingIso (rings l E n) f
 
-/-- Canonical comparison between the finite open presentations, preserving the open unit.
-Source: Stacks 03DI; blueprint paragraph (2). -/
+/-- Canonical comparison between the finite open presentations, preserving the open unit. -/
 def finiteOpen (b : SpTowerShriek.Base l E) {X Z : Scheme.{u}}
     (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ) :
     PurCompactSupport.openExtension (finiteCoefficients.{u} l E n) j ≅
@@ -411,8 +413,7 @@ def reductionCounit (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
     r.counit.app ((F.mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The exact scalar-forgetting and normalized reduction-limit presentation.
-All structure fields specify already recorded functors and actual quotient units.
-Source: blueprint paragraph (2); Stacks 0941, 09T5. -/
+All structure fields specify already recorded functors and actual quotient units. -/
 structure LimitPresentation (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
     (r : SpReductionTower l E T D) where
   [additive : (forgetting l E T D).Additive]
@@ -455,8 +456,7 @@ abbrev totalLimit (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
   letI := a.colimits
   spCompletedTotalLimit l E T D
 
-/-- The normalized finite open comparison, restricted back to completed scalars.
-Source: blueprint paragraph (2); Stacks 03DI, 03DJ. -/
+/-- The normalized finite open comparison, restricted back to completed scalars. -/
 def openScalar (b : SpTowerShriek.Base l E) (h : ScalarSquares l E)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ) :=
   letI := b.finite n
@@ -468,8 +468,7 @@ def openScalar (b : SpTowerShriek.Base l E) (h : ScalarSquares l E)
       (spCompletedEllRestriction l E Z n).mapDerivedCategory
 
 /-- The normalized finite direct-image comparison, in the inverse direction of the
-recorded restriction/direct-image comparison.
-Source: blueprint paragraph (2); Stacks 0D6E. -/
+recorded restriction/direct-image comparison. -/
 def pushScalar (h : ScalarSquares l E) {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ) :=
   (proEtaleRingRestrictionDerivedDirectImage p
     ((PurCompactSupport.completed l E).ring Y) ((finiteCoefficients l E n).ring Y)
@@ -503,8 +502,7 @@ def projection (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
   letI := a.colimits
   spCompletedTotalProjection l E T D n
 
-/-- The constant-ring strict-tower open comparison, fixed as the constant-diagram mate.
-Source: blueprint paragraph (2); Stacks 09BP. -/
+/-- The constant-ring strict-tower open comparison, fixed as the constant-diagram mate. -/
 def openLimit {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
   cbcRealizationLimitMap (openOrd l E j)
 
@@ -564,15 +562,13 @@ def ordinaryPushEvaluation (b : SpTowerShriek.Base l E)
     Functor.isoWhiskerLeft _ ((o.geometry p).ordinaryPushEvaluation n) ≪≫
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (eZ.ordinary n) _
 
-/-- Ordinary open/scalar comparison, fixed by its adjunction unit.
-Source: blueprint paragraph (2); Stacks 03DI. -/
+/-- Ordinary open/scalar comparison, fixed by its adjunction unit. -/
 def ordinaryOpenScalar (b : SpTowerShriek.Base l E) (h : ScalarSquares l E)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ) :=
   asIso (PurCompactSupport.openRestrictionMap (coefficientChange l E h n) j) ≪≫
     Functor.isoWhiskerRight (finiteOpen l E b j n) (spCompletedEllRestriction l E Z n)
 
-/-- Ordinary direct-image/scalar comparison, fixed by identity on sections.
-Source: blueprint paragraph (2); Stacks 03D7. -/
+/-- Ordinary direct-image/scalar comparison, fixed by identity on sections. -/
 def ordinaryPushScalar (h : ScalarSquares l E) {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ) :=
   (proEtaleRingRestrictionDirectImage p
     ((PurCompactSupport.completed l E).ring Y) ((finiteCoefficients l E n).ring Y)
@@ -582,8 +578,7 @@ def ordinaryPushScalar (h : ScalarSquares l E) {Z Y : Scheme.{u}} (p : Z ⟶ Y) 
     ((coefficientChange l E h n).square p)).symm
 
 /-- Localize the specified ordinary open/scalar square with the standard composition
-factors. This definition retains the strict transitions before passing to complexes.
-Source: blueprint paragraph (2); Stacks 03DJ. -/
+factors. This definition retains the strict transitions before passing to complexes. -/
 def deriveOpenScalar (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (DX : SpCoefficientTowersAbelian l E X) (DZ : SpCoefficientTowersAbelian l E Z)
@@ -612,8 +607,7 @@ def forgettingFactors (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
   letI := a.colimits
   (forgetting l E T D).mapDerivedCategoryFactors
 
-/-- The right-derived unit of the simultaneous tower direct image, on cochain complexes.
-Source: blueprint paragraph (2); Stacks 0D6E. -/
+/-- The right-derived unit of the simultaneous tower direct image, on cochain complexes. -/
 def towerPushUnit (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     (DZ : SpCoefficientTowersAbelian l E Z) (DY : SpCoefficientTowersAbelian l E Y)
@@ -625,7 +619,7 @@ def towerPushUnit (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E
 
 /-- The complex-level inverse-limit normalization for the scalar/direct-image square.
 It equates the two composition units, without assuming that scalar restriction preserves
-K-injectives. Source: blueprint paragraph (2); Stacks 0D6E. -/
+K-injectives. -/
 def IsPushScalarNormalized (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     (DZ : SpCoefficientTowersAbelian l E Z) (DY : SpCoefficientTowersAbelian l E Y)

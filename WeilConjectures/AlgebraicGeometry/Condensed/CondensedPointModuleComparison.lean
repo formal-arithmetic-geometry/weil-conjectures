@@ -16,13 +16,16 @@ meta import Mathlib.Lean.Meta.CongrTheorems
 /-!
 # Module and derived comparison for pullback from the condensed point
 
-
 The ordinary comparison is the existing `CondensedRing.upperStarFromPointModComp`.
 Its scalar cancellation uses the specified coefficient isomorphism, and its underlying
 map is `upperStarFromPointComp`. The internal module categories are identified with
 sectionwise module sheaves by `InternalAbelianSheafModule.sectionModuleEquivalence`;
 `InternalModuleOperations.upperComparison` identifies the two module inverse images.
 All derived categories here are ordinary and unbounded.
+
+## References
+
+* HRS, Section 3, pp. 5--6.
 -/
 
 @[expose] public section
@@ -38,8 +41,7 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] DerivedCategory.Q Functor.mapDerivedCategory
 
-/-- Point-module inverse image preserves finite limits.
-Source: HRS Section 3, pp. 5--6. -/
+/-- Point-module inverse image preserves finite limits. -/
 @[instance]
 theorem condensedPointModule_preservesFiniteLimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -56,8 +58,7 @@ theorem condensedPointModule_preservesFiniteLimits
   unfold CondensedRing.upperStarFromPointMod
   infer_instance
 
-/-- Point-module inverse image preserves finite colimits.
-Source: HRS Section 3, pp. 5--6. -/
+/-- Point-module inverse image preserves finite colimits. -/
 @[instance]
 theorem condensedPointModule_preservesFiniteColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -69,8 +70,7 @@ theorem condensedPointModule_preservesFiniteColimits
   unfold CondensedRing.upperStarFromPointMod
   infer_instance
 
-/-- Point-module inverse image is additive.
-Source: HRS Section 3, pp. 5--6. -/
+/-- Point-module inverse image is additive. -/
 @[instance]
 theorem condensedPointModule_additive
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

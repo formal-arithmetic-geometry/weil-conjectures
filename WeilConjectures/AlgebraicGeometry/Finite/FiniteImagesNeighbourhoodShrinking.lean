@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # Simultaneous shrinking below finitely many finite morphisms
 
-Source: Stacks Project, Tag 0GK7, the final shrinking paragraphs.
+## References
+
+* Stacks Project, Tag 0GK7 (the final shrinking paragraphs)
 -/
 
 @[expose] public section
@@ -20,10 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- If open sets in finitely many finite covers contain every point above a given point,
-an affine neighbourhood of that point has inverse images contained in all those opens.
-
-Source: Stacks Project, Tag 0GK7, final shrinking paragraphs.
--/
+an affine neighbourhood of that point has inverse images contained in all those opens. -/
 theorem exists_affine_neighbourhood_below_finite_maps
     (V : Scheme.{u}) (η : V) (n : ℕ) (T : Fin n → Scheme.{u})
     (t : ∀ i, T i ⟶ V) [∀ i, IsFinite (t i)] (O : ∀ i, (T i).Opens)

@@ -23,6 +23,10 @@ The canonical comparison is written using arbitrary colimit cocones. Its source 
 coproduct of the cohomology objects and its target is the cohomology of the coproduct;
 `IsColimit.desc` specifies the comparison by the original coprojections. This avoids
 making any additional choice of coproducts or imposing a coproduct-existence hypothesis.
+
+## References
+
+* Stacks Project, Tags 03DB, 07D9 and 0118
 -/
 
 @[expose] public section
@@ -149,11 +153,8 @@ private theorem localizing_of_small_sums
   have hr' := cofanIsColimit (hr.whiskerEquivalence e)
   exact hsum _ _ _ hr' (fun j ↦ hK ((equivShrink J).symm j).val)
 
-/-- All three assertions for a finite subextension E.
-Source: blueprint main-20261015, `sk-cor-ambient-ind-derived-sums.md`, clauses 1--3;
-Stacks Project, Tags 03DB, 07D9 and 0118; the standing separated finite-type
-positive-characteristic field setting of `sk-def-sfb-dc-setting`.
--/
+/-- The sums and truncations assertions for ind-constructible cohomology, for a finite
+subextension `E`. -/
 theorem indConstructibleDerived_sums_and_truncations
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -224,11 +225,8 @@ theorem indConstructibleDerived_sums_and_truncations
   · intro K hK
     exact hK _ hlocal hdbc
 
-/-- All three assertions for the finite-subextension-valued condensed algebraic closure.
-Source: blueprint main-20261015, `sk-cor-ambient-ind-derived-sums.md`, clauses 1--3;
-Stacks Project, Tags 03DB, 07D9 and 0118; the standing separated finite-type
-positive-characteristic field setting of `sk-def-sfb-dc-setting`.
--/
+/-- The sums and truncations assertions for ind-constructible cohomology, for the
+finite-subextension-valued condensed algebraic closure. -/
 theorem indConstructibleDerived_sums_and_truncations_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)

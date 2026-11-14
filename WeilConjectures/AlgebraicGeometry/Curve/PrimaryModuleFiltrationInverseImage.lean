@@ -14,8 +14,9 @@ import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 /-!
 # Inverse image and restriction of the stalk representation
 
-Source: Stacks Project, Tags 03QT, 03SF and 04JQ; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2.
+## References
+
+* Stacks Project, Tags 03QT, 03SF, 04JQ
 -/
 
 @[expose] public section
@@ -24,8 +25,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Tags 03QT, 03SF and 04JQ; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2. -/
+/-- Inverse image of the sheaf of a primary stalk representation is compatible with
+restriction of the representation. -/
 theorem primary_inverseImage_restriction
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

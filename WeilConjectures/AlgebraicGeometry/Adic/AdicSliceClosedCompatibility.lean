@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceRestrictionComparison
 import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 
-/-! # Closed comparisons on further pro-etale slices -/
+/-! # Closed comparisons on further pro-etale slices
+
+## References
+
+* Stacks Project, Tags 03CE, 03EL, 03EO and 0E8H
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,8 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The two closed compatibility equations, without a bidual invertibility assertion.
-Source: Stacks 03CE, 03EL, 03EO and 0E8H. -/
+/-- The two closed compatibility equations, without a bidual invertibility assertion. -/
 structure AdicSliceClosedData (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),
@@ -195,8 +199,7 @@ private lemma bidual_restriction (U : X.ProEt)
 
 end
 
-/-- Internal Hom on further slices and bidual evaluation respect native pullback.
-Source: Stacks 03EO and 0E8H; step 2 of the parent comparison. -/
+/-- Internal Hom on further slices and bidual evaluation respect native pullback. -/
 theorem adicSliceClosedCompatibility (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),

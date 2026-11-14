@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalScalarCone
 
 /-! # The explicit scalar-cone map from a strict quotient limit
 
-Source: Stacks 099M and 0941; diagonal tower limit proof paragraph (3).
+## References
+
+* Stacks Project, Tags 099M, 0941
 -/
 
 @[expose] public noncomputable section
@@ -42,29 +44,25 @@ theorem diagonalQuotient_annihilated (M : A) :
       simpa only [Preadditive.nsmul_comp, Category.id_comp] using O.zero n M
     _ = _ := comp_zero.symm
 
-/-- Exact evaluation of the ordinary quotient complex.
-Source: Stacks 099M. -/
+/-- Exact evaluation of the ordinary quotient complex. -/
 abbrev diagonalQuotientLevelComplex : CochainComplex A ℤ ⥤ CochainComplex B ℤ :=
   O.E.mapHomologicalComplex (.up ℤ) ⋙
     ((evaluation ℕᵒᵖ B).obj (op n)).mapHomologicalComplex (.up ℤ)
 
 omit [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory B]
   [HasDerivedCategory (ℕᵒᵖ ⥤ B)] in
-/-- The strict quotient complex is annihilated degreewise.
-Source: Stacks 099M. -/
+/-- The strict quotient complex is annihilated degreewise. -/
 theorem diagonalQuotientLevel_annihilated (P : CochainComplex A ℤ) :
     ℓ ^ (n + 1) • 𝟙 ((diagonalQuotientLevelComplex O n).obj P) = 0 := by
   ext i
   exact diagonalQuotient_annihilated O n (P.X i)
 
-/-- The identity as a map out of a strictly annihilated complex.
-Source: Stacks 099M. -/
+/-- The identity as a map out of a strictly annihilated complex. -/
 def diagonalQuotientLevelSequence (P : CochainComplex A ℤ) : ShortComplex (CochainComplex B ℤ) :=
   ShortComplex.mk (ℓ ^ (n + 1) • 𝟙 ((diagonalQuotientLevelComplex O n).obj P)) (𝟙 _)
     (by rw [diagonalQuotientLevel_annihilated, zero_comp])
 
-/-- Projection from the scalar cone of the strict finite quotient to that quotient.
-Source: Stacks 099M. -/
+/-- Projection from the scalar cone of the strict finite quotient to that quotient. -/
 def diagonalQuotientLevelConeProjection :
     diagonalQuotientLevelComplex O n ⋙ diagonalScalarConeComplex B (ℓ ^ (n + 1)) ⟶
       diagonalQuotientLevelComplex O n where
@@ -88,8 +86,7 @@ def diagonalQuotientLevelFactors :
     ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategoryFactors
 
 /-- Apply the scalar cone to the actual limit projection, then project its finite
-strictly annihilated target cone to its degree-zero summand. All data are explicit.
-Source: Stacks 099M, the two-term scalar resolution, and 0941. -/
+strictly annihilated target cone to its degree-zero summand. All data are explicit. -/
 def diagonalTowerScalarConeComparison :
     (O.E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) ⋙
         L.R ⋙ diagonalScalarCone B (ℓ ^ (n + 1)) ⟶
@@ -107,8 +104,7 @@ def diagonalTowerScalarConeComparison :
     Functor.whiskerRight (diagonalQuotientLevelConeProjection O n) DerivedCategory.Q ≫
     (diagonalQuotientLevelFactors O n).inv
 
-/-- The explicit comparison extends precisely the supplied derived-limit projection.
-Source: Stacks 099M, adjunction unit formula. -/
+/-- The explicit comparison extends precisely the supplied derived-limit projection. -/
 theorem diagonalTowerScalarConeComparison_unit (P : CochainComplex A ℤ) :
     (diagonalScalarConeUnit B (ℓ ^ (n + 1))).app
         (L.R.obj (DerivedCategory.Q.obj ((O.E.mapHomologicalComplex (.up ℤ)).obj P))) ≫

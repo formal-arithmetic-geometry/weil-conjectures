@@ -13,7 +13,12 @@ import Mathlib.Algebra.Homology.TotalComplexSymmetry
 
 /-! # The affine coefficient augmentation is a quasi-isomorphism
 
-Source: Stacks Project, Tags 03P2 and 01EQ. -/
+## References
+
+* Stacks Project, Tag 03P2 (Theorem 59.22.4)
+* Stacks Project, Tag 01EQ (Lemma 20.11.2)
+* Stacks Project, Homology, Lemma 12.25.4
+-/
 
 @[expose] public section
 
@@ -47,9 +52,7 @@ private def natTotalSymmetry :
     rw [one_mul, Nat.mul_add, Nat.mul_one, pow_add]
 
 /-- The fixed coefficient augmentation extends to a quasi-isomorphism from the
-lifted ordinary unit Cech complex. No covering or compactness assumption is needed.
-Source: Stacks Project, Theorem 59.22.4 (Tag 03P2), separated affine intersections;
-Lemma 20.11.2 (Tag 01EQ), the beta augmentation, and Homology Lemma 12.25.4. -/
+lifted ordinary unit Čech complex. -/
 theorem exists_additiveCech_beta_quasiIso
     (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]
     (U : ι → X.Opens)

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Affine.Comparison.AffineComparisonEtale
 /-!
 # Geometric étale presentations of finite affine pro-étale coverings
 
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions.
+## References
+
+* Stacks Project, Tag 099U (the two finite Čech limit reductions); Tags 01ZM, 01ZN and 07RP
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 /-- A finite affine pro-étale covering and all of its repeated intersections admit
 compatible affine étale covering approximations. This is purely geometric; it does
-not involve sections, coefficients, cochain complexes, or cocycles.
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions, using
-Tags 01ZM, 01ZN and 07RP for affine étale finite-presentation descent. -/
+not involve sections, coefficients, cochain complexes, or cocycles. -/
 theorem exists_affine_etale_cech_system
     (Y : Scheme.{u}) [IsAffine Y]
     (V : Y.ProEt) (hV : proAffineEtale V.hom)

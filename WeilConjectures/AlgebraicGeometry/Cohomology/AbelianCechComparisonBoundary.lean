@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBound
 
 /-! # Boundary compatibility of the augmentation quotient
 
-Source: Stacks Project, Tag 01EQ, augmented injective Čech double complex;
-Homology, the horseshoe lemma and naturality of the homology connecting map.
+## References
+
+* Stacks Project, Tag 01EQ (augmented injective Čech double complex), Tag 013T (horseshoe
+  resolutions) and Tag 0117 (naturality of the homology connecting map)
 -/
 
 @[expose] public section
@@ -53,10 +55,7 @@ private theorem comparison_quotient
   exact (hc I x a ha z hz ht.symm).symm
 
 /-- The augmentation quotient commutes with connecting maps for sequences
-surjective on every tuple intersection. Canonicity is an essential hypothesis.
-
-Source: Stacks Project, Tag 01EQ, injective double-complex construction;
-Tags 013T (horseshoe resolutions) and 0117 (connecting-map naturality). -/
+surjective on every tuple intersection. Canonicity is an essential hypothesis. -/
 theorem abelianCechComparison_boundary
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

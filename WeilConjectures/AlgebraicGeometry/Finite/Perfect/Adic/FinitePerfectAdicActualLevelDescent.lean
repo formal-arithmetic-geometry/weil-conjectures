@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationCoherence
 
 /-! # Descent of the actual quotient tower with its comparison retained
 
-Source: Stacks Project, Tags 09AL, 09B1, 09C6 and 06YY.
+## References
+
+* Stacks Project, Tags 09AL, 09B1, 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +29,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- A specified etale diagram descends the actual quotient tower only when its
 realization and its consecutive arrows compare with that tower. Stalkwise agreement
-with the algebraic model alone does not express this requirement.
-Source: Stacks Tags 09AL, 09C6 and 06YY. -/
+with the algebraic model alone does not express this requirement. -/
 structure FinitePerfectAdicActualLevelDescent
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -52,9 +53,7 @@ structure FinitePerfectAdicActualLevelDescent
         (homOfLE (Nat.le_succ n)).op
 
 /-- The actual finite quotient tower admits an etale descent with the explicit
-realization comparison, compatibly with its consecutive quotient arrows.
-
-Source: Stacks Project, Tags 09AL, 09B1, 09C6 and 06YY. -/
+realization comparison, compatibly with its consecutive quotient arrows. -/
 theorem finitePerfectAdic_actual_level_descent
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

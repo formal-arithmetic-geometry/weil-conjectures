@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Detection by the affine étale free complexes
 
-Source: Bhatt--Scholze, Proposition 6.4.8, first paragraph.
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.4.8, first paragraph
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The free rank-one sheaf at an affine étale object, placed in degree zero.
-Source: Bhatt--Scholze, Proposition 6.4.8, coherent generators. -/
+/-- The free rank-one sheaf at an affine étale object, placed in degree zero. -/
 noncomputable def affineEtaleFreeComplex
     (C : Type (u + 1)) [CommRing C] (T : Scheme.{u}) (U : T.AffineEtale) :
     DerivedCategoryModule C T :=
@@ -206,10 +207,7 @@ private theorem iso_of_tests
       Pretriangulated.comp_distTriang_mor_zero₁₂ Tn hTn, comp_zero]
   exact (T.isZero₃_iff_isIso₁ hT).1 hz
 
-/-- The shifts of the affine free complexes detect isomorphisms.
-
-Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.4.8,
-first paragraph, expanded by the K-injective argument in the parent node. -/
+/-- The shifts of the affine free complexes detect isomorphisms. -/
 theorem isIso_of_affineEtaleFreeComplex
     (C : Type (u + 1)) [CommRing C] (T : Scheme.{u})
     {A B : DerivedCategoryModule C T} (h : A ⟶ B)

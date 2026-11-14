@@ -12,18 +12,19 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonMaps
 import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonNaturality
 import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonBoundary
 
-/-! # Existence of normalized additive Cech comparisons
+/-! # Existence of normalized additive Čech comparisons
 
-Source: Stacks Project, Tags 01EQ and 01FD. -/
+## References
+
+* Stacks Project, Tag 01EQ (Lemma 20.11.2) and Tag 01FD (Lemma 20.15.1)
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
-/-- Every open cover admits a normalized additive Cech comparison system.
-
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2; Tag 01FD, Lemma 20.15.1. -/
+/-- Every open cover admits a normalized additive Čech comparison system. -/
 theorem exists_cechComparisonSystem
     {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) :

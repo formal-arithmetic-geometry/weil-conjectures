@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyPullbackComparison
 
-/-! # Untensored comparison of additive etale and Zariski pullback -/
+/-! # Untensored comparison of additive etale and Zariski pullback
+
+## References
+
+* Stacks Project, Tags 03P2 and 02KH.
+-/
 
 @[expose] public section
 
@@ -23,9 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Natural section coordinates identify additive etale cohomology with ordinary
-structure-module cohomology, compatibly with the untensored pullback.
-Source: Stacks Project, Tag 03P2, Theorem etale-cohomology-theorem-zariski-fpqc-quasi-coherent,
-and Tag 02KH, the canonical cohomology comparison before tensor extension. -/
+structure-module cohomology, compatibly with the untensored pullback. -/
 theorem exists_additive_cohomology_baseChange_square
     {k k' : Type u}
     [CommRing k] [CommRing k'] [Algebra k k']

@@ -62,7 +62,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # Intrinsic finite constructibility and fixed coefficient modules
 
-Source: Stacks Project, Tags 09AJ, 099Y and 00YV.
+## References
+
+* Stacks Project, Tags 09AJ, 099Y, 00YV
 -/
 
 @[expose] public noncomputable section
@@ -408,10 +410,7 @@ private theorem relative_lisse_fixed
 
 /-- Intrinsic finite constructibility gives constructibility in the fixed-ring
 presentation, for any isomorphism presenting the finite constant coefficient ring.
-This is an assertion about a single sheaf, with no derived objects or bounds.
-
-Source: Stacks Project, proetale.tex, Tags 09AJ and 099Y; Tag 00YV for associated
-module sheaves. -/
+This is an assertion about a single sheaf, with no derived objects or bounds. -/
 theorem finiteCoefficient_intrinsic_constructible
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (u + 1)) [CommRing B] [Finite B]

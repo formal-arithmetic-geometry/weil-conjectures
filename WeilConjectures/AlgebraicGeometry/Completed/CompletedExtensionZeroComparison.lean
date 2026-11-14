@@ -55,9 +55,17 @@ public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-! # Completed open-immersion base change
 
-Source: blueprint order 1587; Stacks Tags 03DI, 09BP, 099N.
 All extension functors below are the specified direct-sum presheaf followed by
 module sheafification, transported along the ringed slice-site identification.
+
+## Implementation details
+
+* `cbcModelPullbackAdjunction` carries an explicit continuity witness, which prevents
+  instance inference from choosing an unrelated larger model.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 03D2, 03D7, 03EK, 094T, 0951, 098K, 09BP, 099N
 -/
 
 @[expose] public noncomputable section
@@ -230,8 +238,7 @@ instance cbcQuotient_finite (n : ℕ) : Finite (A ⧸ d.ideal ^ (n + 1)) :=
   d.quotientFinite n
 
 /-- Direct-image form of the recorded completed coefficient map, without assuming
-that the structure map is invertible.
-Source: Tag 099N. -/
+that the structure map is invertible. -/
 def cbcCompletedCoefficientDirectMap {X Y : Scheme.{t}} (g : X ⟶ Y) :
     completedReductionCoefficient Y d ⟶
       (proEtaleSheafDirectImage g CommRingCat.{t + 1}).obj
@@ -239,8 +246,7 @@ def cbcCompletedCoefficientDirectMap {X Y : Scheme.{t}} (g : X ⟶ Y) :
   ((proEtaleSheafAdjunction g CommRingCat.{t + 1}).homEquiv _ _)
     (completedCoefficientMap g d)
 
-/-- Sectionwise direct image with the recorded completed scalar action.
-Source: Tag 03D7. -/
+/-- Sectionwise direct image with the recorded completed scalar action. -/
 def cbcCompletedModuleDirectImage {X Y : Scheme.{t}} (g : X ⟶ Y) :
     pbcModules X (pbcAdicCompletion X d) ⥤ pbcModules Y (pbcAdicCompletion Y d) :=
   SheafOfModules.pushforward.{t + 1} (F := proEtaleBaseChange g)
@@ -248,9 +254,7 @@ def cbcCompletedModuleDirectImage {X Y : Scheme.{t}} (g : X ⟶ Y) :
     ⟨Functor.whiskerRight (cbcCompletedCoefficientDirectMap d g).hom
       (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})⟩
 
-/-- The existing module pullback adjunction on the fixed small models. The explicit
-continuity witness prevents inference from choosing an unrelated larger model.
-Source: Tags 03D2, 03D7. -/
+/-- The existing module pullback adjunction on the fixed small models. -/
 def cbcModelPullbackAdjunction {X Y : Scheme.{t}} (g : X ⟶ Y) :=
   letI := proEtaleModelBaseChange_isContinuous g
   SheafOfModules.pullbackPushforwardAdjunction.{t + 1}
@@ -259,8 +263,7 @@ def cbcModelPullbackAdjunction {X Y : Scheme.{t}} (g : X ⟶ Y) :=
     (proEtaleModelRingUnit g (pbcAdicCompletion Y d))
 
 /-- The pullback adjunction is uniquely normalized by the model-site inverse-image
-unit followed by the actual sheafified tensor section 1 tensor m.
-Source: Tags 03D7, 03EK. -/
+unit followed by the actual sheafified tensor section 1 tensor m. -/
 theorem cbcModulePullbackAdjunction_exists {X Y : Scheme.{t}} (g : X ⟶ Y) :
     ∃! adj : completedModulePullback g d ⊣ cbcCompletedModuleDirectImage d g,
       ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (V : Y.ProEt)
@@ -317,19 +320,16 @@ theorem cbcModulePullbackAdjunction_exists {X Y : Scheme.{t}} (g : X ⟶ Y) :
   ext M V x
   exact (hadj' M V.unop x).trans (hu M V.unop x).symm
 
-/-- The tensor-unit normalized adjunction for the recorded pullback construction.
-Source: Tag 03D7. -/
+/-- The tensor-unit normalized adjunction for the recorded pullback construction. -/
 def cbcModulePullbackAdjunction {X Y : Scheme.{t}} (g : X ⟶ Y) :=
   (cbcModulePullbackAdjunction_exists d g).exists.choose
 
 /-- The recorded strict reduction, tower pullback and Rlim, as a composite functor.
-Its object function is exactly completedPullbackObject.
-Source: Tag 099N. -/
+Its object function is exactly completedPullbackObject. -/
 abbrev cbcCompletedPullback {X Y : Scheme.{t}} (g : X ⟶ Y) :=
   completedReductionTower Y d ⋙ completedTowerPullback g d ⋙ completedTowerRlim d X
 
-/-- Naturality of the recorded ordinary-to-completed pullback comparison.
-Source: Tag 099N. -/
+/-- Naturality of the recorded ordinary-to-completed pullback comparison. -/
 theorem cbcCompletedPullbackComparison_naturality {X Y : Scheme.{t}} (g : X ⟶ Y)
     {K L : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))} (f : K ⟶ L) :
     (completedOrdinaryPullback g d).map f ≫ completedPullbackComparison g d L =
@@ -341,22 +341,19 @@ theorem cbcCompletedPullbackComparison_naturality {X Y : Scheme.{t}} (g : X ⟶ 
         (completedTowerRlim d X)
   exact η.naturality f
 
-/-- The recorded completion-unit comparison with its naturality statement.
-Source: Tag 099N. -/
+/-- The recorded completion-unit comparison with its naturality statement. -/
 def cbcCompletedPullbackComparison {X Y : Scheme.{t}} (g : X ⟶ Y) :
     completedOrdinaryPullback g d ⟶ cbcCompletedPullback d g where
   app := completedPullbackComparison g d
   naturality _ _ f := cbcCompletedPullbackComparison_naturality d g f
 
-/-- An open immersion is weakly etale.
-Source: Tag 098K. -/
+/-- An open immersion is weakly etale. -/
 theorem cbcOpenWeaklyEtale {U T : Scheme.{t}} (j : U ⟶ T)
     (_hj : IsOpenImmersion j) : WeaklyEtale j := by
   let := _hj
   infer_instance
 
-/-- Forget the ambient structure map in a pro-etale slice object.
-Source: Tag 0951. -/
+/-- Forget the ambient structure map in a pro-etale slice object. -/
 def cbcSliceFunctor (T : Scheme.{t}) (W : T.ProEt) : Over W ⥤ W.left.ProEt where
   obj V := MorphismProperty.Over.mk ⊤ V.hom.left
     ((ProEt.weaklyEtale_localization.{t, t + 1, t + 1} T W
@@ -364,8 +361,7 @@ def cbcSliceFunctor (T : Scheme.{t}) (W : T.ProEt) : Over W ⥤ W.left.ProEt whe
   map f := MorphismProperty.Over.homMk f.left.left
     (congrArg (fun h ↦ h.left) f.w)
 
-/-- The concrete localization functor is continuous.
-Source: Tags 098K, 094T, 0951. -/
+/-- The concrete localization functor is continuous. -/
 @[instance] theorem cbcSliceFunctor_continuous (T : Scheme.{t}) (W : T.ProEt) :
     (cbcSliceFunctor T W).IsContinuous ((ProEt.topology T).over W)
       (ProEt.topology W.left) := by
@@ -440,8 +436,7 @@ private theorem finiteSliceIso_unit {T : Scheme.{t}} (W : T.ProEt)
 
 attribute [local irreducible] finiteSliceIso
 
-/-- The finite ring identification in the slice is fixed by local function sections.
-Source: Tag 098K. -/
+/-- The finite ring identification in the slice is fixed by local function sections. -/
 theorem cbcFiniteSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :
     ∃! φ : ((reductionCoefficient T d n)).over W ⟶
         ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
@@ -477,8 +472,7 @@ theorem cbcFiniteSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :
     (((hφ V.unop).trans (finiteSliceIso_unit W d n V.unop).symm).trans
       (congrArg (fun f ↦ f ≫ (finiteSliceIso W d n).hom.hom.app V) hV.symm))
 
-/-- The finite slice coefficient map with the specified function normalization.
-Source: Tag 098K. -/
+/-- The finite slice coefficient map with the specified function normalization. -/
 def cbcFiniteSliceMap (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :=
   (cbcFiniteSliceMap_exists d T W n).exists.choose
 
@@ -584,8 +578,7 @@ private theorem completedSliceIso_projection {T : Scheme.{t}} (W : T.ProEt)
   rw [← Category.assoc, preservesLimitIso_hom_π]
   rfl
 
-/-- The completed coefficient identification is fixed by every finite projection.
-Source: Tags 098K, 099N. -/
+/-- The completed coefficient identification is fixed by every finite projection. -/
 theorem cbcCompletedSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) :
     ∃! φ : ((completedReductionCoefficient T d)).over W ⟶
         ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
@@ -606,13 +599,11 @@ theorem cbcCompletedSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) :
   intro n
   exact (hφ n.unop).trans (completedSliceIso_projection W d n.unop).symm
 
-/-- The completed ring map identifying the ringed slice site.
-Source: Tag 098K. -/
+/-- The completed ring map identifying the ringed slice site. -/
 def cbcCompletedSliceMap (T : Scheme.{t}) (W : T.ProEt) :=
   (cbcCompletedSliceMap_exists d T W).exists.choose
 
-/-- A module over the open's completed ring, viewed on the ambient ringed slice.
-Source: Tag 03DI. -/
+/-- A module over the open's completed ring, viewed on the ambient ringed slice. -/
 def cbcModuleToSlice (T : Scheme.{t}) (W : T.ProEt) :
     (pbcModules W.left (pbcAdicCompletion W.left d)) ⥤ SheafOfModules.{t + 1}
       ((reductionModuleRing T (completedReductionCoefficient T d)).over W) :=
@@ -621,14 +612,12 @@ def cbcModuleToSlice (T : Scheme.{t}) (W : T.ProEt) :
     ((sheafCompose ((ProEt.topology T).over W) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map
       (cbcCompletedSliceMap d T W))
 
-/-- The pro-etale object supplied by an open immersion.
-Source: Tag 098K. -/
+/-- The pro-etale object supplied by an open immersion. -/
 def cbcOpenObject {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) : T.ProEt :=
   letI := hj
   MorphismProperty.Over.mk ⊤ j (inferInstance : WeaklyEtale j)
 
-/-- Extension by zero is the recorded module direct-sum presheaf, then sheafification.
-Source: Tag 03DI. -/
+/-- Extension by zero is the recorded module direct-sum presheaf, then sheafification. -/
 def cbcOpenShriek {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (pbcModules U (pbcAdicCompletion U d)) ⥤ (pbcModules T (pbcAdicCompletion T d)) :=
   cbcModuleToSlice d T (cbcOpenObject j hj) ⋙
@@ -637,8 +626,7 @@ def cbcOpenShriek {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     PresheafOfModules.sheafification.{t + 1}
       (𝟙 (reductionModuleRing T (completedReductionCoefficient T d)).obj)
 
-/-- Extension by zero is additive.
-Source: Tag 03DI. -/
+/-- Extension by zero is additive. -/
 @[instance] theorem cbcOpenShriek_additive {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : (cbcOpenShriek d j hj).Additive := by
   have : (cbcModuleToSlice d T (cbcOpenObject j hj)).Additive := by
@@ -651,8 +639,7 @@ Source: Tag 03DI. -/
       (completedReductionCoefficient T d) (cbcOpenObject j hj)).Additive
   infer_instance
 
-/-- Extension by zero is exact, without any quasi-compactness assumption.
-Source: Tag 03DJ. -/
+/-- Extension by zero is exact, without any quasi-compactness assumption. -/
 @[instance] theorem cbcOpenShriek_finiteLimits {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : PreservesFiniteLimits (cbcOpenShriek d j hj) := by
   have : (cbcSliceFunctor T (cbcOpenObject j hj)).IsContinuous
@@ -674,8 +661,7 @@ Source: Tag 03DJ. -/
       (completedReductionCoefficient T d) (cbcOpenObject j hj))
   infer_instance
 
-/-- Extension by zero preserves finite colimits.
-Source: Tag 03DI. -/
+/-- Extension by zero preserves finite colimits. -/
 @[instance] theorem cbcOpenShriek_finiteColimits {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : PreservesFiniteColimits (cbcOpenShriek d j hj) := by
   have h : cbcCompletedSliceMap d T (cbcOpenObject j hj) =
@@ -698,30 +684,26 @@ Source: Tag 03DI. -/
       (completedReductionCoefficient T d) (cbcOpenObject j hj))
   infer_instance
 
-/-- The exact extension functor applied termwise and descended to the derived category.
-Source: Tag 03DJ. -/
+/-- The exact extension functor applied termwise and descended to the derived category. -/
 def cbcDerivedOpenShriek {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     DerivedCategory (pbcModules U (pbcAdicCompletion U d)) ⥤
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) :=
   (cbcOpenShriek d j hj).mapDerivedCategory
 
-/-- Composition of a pro-etale arrow with the open immersion.
-Source: Tag 098K. -/
+/-- Composition of a pro-etale arrow with the open immersion. -/
 def cbcOpenSiteFunctor {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     U.ProEt ⥤ T.ProEt :=
   letI := hj
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
 
-/-- Open-site composition is continuous.
-Source: Tag 098K. -/
+/-- Open-site composition is continuous. -/
 @[instance] theorem cbcOpenSiteFunctor_continuous {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (cbcOpenSiteFunctor j hj).IsContinuous (ProEt.topology U) (ProEt.topology T) := by
   let := hj
   exact ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
 
-/-- The finite restriction coefficient map identifies the very same local functions.
-Source: Tag 098K. -/
+/-- The finite restriction coefficient map identifies the very same local functions. -/
 theorem cbcFiniteRestrictionMap_exists {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :
     ∃! φ : (reductionCoefficient U d n) ⟶
@@ -755,8 +737,7 @@ theorem cbcFiniteRestrictionMap_exists {U T : Scheme.{t}}
     funext V
     exact (hφ V).trans (NatTrans.congr_app he V).symm
 
-/-- The finite restriction map fixed by local functions.
-Source: Tag 098K. -/
+/-- The finite restriction map fixed by local functions. -/
 def cbcFiniteRestrictionMap {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :=
   (cbcFiniteRestrictionMap_exists d j hj n).exists.choose
@@ -840,8 +821,7 @@ private theorem completedRestrictionIso_projection {U T : Scheme.{t}}
     Functor.mapIso_hom, asIso_hom, finiteRestrictionMap_eq]
   rfl
 
-/-- The completed restriction map is fixed by its finite projections.
-Source: Tags 098K, 099N. -/
+/-- The completed restriction map is fixed by its finite projections. -/
 theorem cbcCompletedRestrictionMap_exists {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     ∃! φ : (completedReductionCoefficient U d) ⟶
@@ -861,14 +841,12 @@ theorem cbcCompletedRestrictionMap_exists {U T : Scheme.{t}}
   intro n
   exact (hφ n.unop).trans (completedRestrictionIso_projection d j hj n.unop).symm
 
-/-- The canonical inverse of the open's completed coefficient identification.
-Source: Tag 098K. -/
+/-- The canonical inverse of the open's completed coefficient identification. -/
 def cbcCompletedRestrictionMap {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :=
   (cbcCompletedRestrictionMap_exists d j hj).exists.choose
 
-/-- Actual restriction of completed-ring modules to the open pro-etale site.
-Source: Tag 03DI. -/
+/-- Actual restriction of completed-ring modules to the open pro-etale site. -/
 def cbcOpenRestriction {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (pbcModules T (pbcAdicCompletion T d)) ⥤ (pbcModules U (pbcAdicCompletion U d)) :=
   SheafOfModules.pushforward.{t + 1} (F := cbcOpenSiteFunctor j hj)
@@ -876,8 +854,7 @@ def cbcOpenRestriction {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j)
     ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map
       (cbcCompletedRestrictionMap d j hj))
 
-/-- The slice object corresponding to a pro-etale object of the open.
-Source: Tag 098K. -/
+/-- The slice object corresponding to a pro-etale object of the open. -/
 def cbcOpenSliceObject {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j)
     (V : U.ProEt) : Over (cbcOpenObject j hj) :=
   Over.mk (@id ((cbcOpenSiteFunctor j hj).obj V ⟶ cbcOpenObject j hj)
@@ -1000,8 +977,7 @@ private def openSliceAdjunction {U T : Scheme.{t}}
 set_option maxHeartbeats 1000000 in
 -- Unfolding the concrete composite adjunction and its generator formula needs more heartbeats.
 open Classical in
-/-- The extension/restriction adjunction is fixed by the direct-sum generator formula.
-Source: Tag 03DI. -/
+/-- The extension/restriction adjunction is fixed by the direct-sum generator formula. -/
 theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     ∃! adj : cbcOpenShriek d j hj ⊣ cbcOpenRestriction d j hj,
@@ -1045,8 +1021,7 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
   rw [Adjunction.homEquiv_id] at h h'
   exact h.trans h'.symm
 
-/-- The generator-normalized extension/restriction adjunction.
-Source: Tag 03DI. -/
+/-- The generator-normalized extension/restriction adjunction. -/
 def cbcOpenAdjunction {U T : Scheme.{t}} (j : U ⟶ T) (hj : IsOpenImmersion j) :=
   (cbcOpenAdjunction_exists d j hj).exists.choose
 
@@ -1604,10 +1579,7 @@ def cbcCompleteProperty (T : Scheme.{t}) (r : ℕ) (a : Fin r → A)
 /-- Extension by zero along a quasi-compact open immersion preserves intrinsic
 derived completeness. The completed base-change map is the unique natural map
 compatible with ordinary base change and the specified completion units. It is
-an isomorphism, and both sides are derived complete.
-
-Source: blueprint order 1587, node lem-cbc-completed-extension-zero-comparison;
-Stacks Tags 03DI, 09BP, 099N. -/
+an isomorphism, and both sides are derived complete. -/
 theorem cbcCompletedExchange_exists [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     ∃! β : (cbcCompleteProperty d U r a ha).ι ⋙
@@ -1629,8 +1601,7 @@ def cbcCompletedExchange [QuasiCompact j]
   (cbcCompletedExchange_exists d sq r a ha).exists.choose
 
 /-- Completed extension by zero commutes with pullback, naturally in complete K.
-It preserves completeness and both sides of the canonical exchange are complete.
-Source: blueprint order 1587; Tags 09BP, 099N. -/
+It preserves completeness and both sides of the canonical exchange are complete. -/
 theorem completedExtensionZeroComparison [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     IsIso (cbcCompletedExchange d sq r a ha) ∧

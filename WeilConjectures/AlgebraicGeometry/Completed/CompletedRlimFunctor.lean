@@ -51,13 +51,14 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!
 # The derived inverse-limit functor on strict completed-coefficient towers
 
-Source: blueprint, proper base change, proposition Rlim functoriality;
-Stacks Tags 079P and 08TC.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.completedRlim_computation`:
-  the recorded construction or statement of this node.
+  Rlim is computed by inverse limits of K-injective tower resolutions and is triangulated.
+
+## References
+
+* Stacks Project, Tags 079P, 07KC, 08TC
 -/
 
 @[expose] public noncomputable section
@@ -80,8 +81,7 @@ attribute [local instance] completedRlimAbSheafify completedRlimAbLocallyBijecti
 attribute [instance] reductionTower_isGrothendieckAbelian
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The ordinary inverse limit of strict towers, with its canonical limit maps.
-Source: blueprint Rlim functoriality; Stacks Tag 079P. -/
+/-- The ordinary inverse limit of strict towers, with its canonical limit maps. -/
 abbrev completedTowerLimit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     reductionTowerCategory T (reductionModuleRing T R) ⥤ reductionModules T R :=
@@ -96,8 +96,7 @@ instance coherenceTowerLimit_additive (T : Scheme.{t})
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Rlim is the total right derived functor of the actual strict inverse-limit functor.
-Its universal unit, not a choice of triangulated cones, determines its action on maps.
-Source: blueprint Rlim functoriality; Stacks Tag 079P. -/
+Its universal unit determines its action on maps. -/
 abbrev completedRlim (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     DerivedCategory (reductionTowerCategory T (reductionModuleRing T R)) ⥤
@@ -105,16 +104,14 @@ abbrev completedRlim (T : Scheme.{t})
   (completedTowerLimit T R).rightDerivedFunctor
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The universal comparison to the K-injective computation of Rlim.
-Source: blueprint Rlim functoriality; Stacks Tag 079P. -/
+/-- The universal comparison to the K-injective computation of Rlim. -/
 def completedRlimUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   (completedTowerLimit T R).rightDerivedFunctorUnit
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Rlim is computed by inverse limits of K-injective tower resolutions. It is
-triangulated, and its universal derived pair identifies all resolution choices.
-Source: blueprint proposition Rlim functoriality; Stacks Tags 079P and 08TC. -/
+triangulated, and its universal derived pair identifies all resolution choices. -/
 theorem completedRlim_computation (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
     (J : CochainComplex (reductionTowerCategory T (reductionModuleRing T R)) ℤ)
@@ -125,8 +122,7 @@ theorem completedRlim_computation (T : Scheme.{t})
   infer_instance
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The canonical derived projection is obtained by deriving the actual limit projection.
-Source: blueprint Rlim functoriality and its K-injective construction; Stacks 079P. -/
+/-- The canonical derived projection is obtained by deriving the actual limit projection. -/
 def completedRlimProjection (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) (n : ℕ) :
     completedRlim T R ⟶
@@ -136,8 +132,7 @@ def completedRlimProjection (T : Scheme.{t})
       (reductionTowerEvaluation T (reductionModuleRing T R) n)).hom
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The first Roos arrow is the product of the actual derived limit projections.
-Source: blueprint Rlim functoriality and derived inverse limit; Stacks 07KC and 08TC. -/
+/-- The first Roos arrow is the product of the actual derived limit projections. -/
 def completedRlimRoosProjection (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (reductionTowerCategory T
@@ -177,8 +172,7 @@ private theorem completedRlimProjection_unit (T : Scheme.{t})
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The K-injective computation of Rlim gives the distinguished Roos triangle with
-its specified projections, rather than a cone map chosen in a triangulated category.
-Source: blueprint Rlim functoriality and derived inverse limit; Stacks 07KC and 08TC. -/
+its specified projections. -/
 theorem completedRlim_roos (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (reductionTowerCategory T

@@ -124,8 +124,10 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafification
 
 /-! # Balancing two constant models of consecutive actual quotients
 
-Source: Stacks Project, Tag 09C6, the consecutive quotient balancing isomorphism;
-Tags 0D6D and 03Q3 for derived scalar transitivity and geometric stalks.
+## References
+
+* Stacks Project, Tag 09C6 (the consecutive quotient balancing isomorphism)
+* Stacks Project, Tags 0D6D and 03Q3
 -/
 
 @[expose] public noncomputable section
@@ -274,11 +276,7 @@ private theorem reflectConstantIso (X : Scheme.{t}) (B : Type t) [CommRing B]
 
 /-- On a nonempty etale chart, perfect constant models of consecutive actual
 quotients are related by the algebraic derived quotient extension. This assertion
-uses no descended etale complexes or local constancy theorem.
-
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6),
-consecutive quotient balancing; derived scalar transitivity (Tag 0D6D), and the
-constant-stalk comparison (Tag 03Q3). -/
+uses no descended etale complexes or local constancy theorem. -/
 theorem finitePerfectAdic_constant_models_reduction
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

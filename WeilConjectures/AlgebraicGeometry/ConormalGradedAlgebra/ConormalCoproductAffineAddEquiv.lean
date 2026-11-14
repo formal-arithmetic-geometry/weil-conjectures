@@ -19,7 +19,9 @@ import Mathlib.LinearAlgebra.Isomorphisms
 
 /-! # Additive affine sections of the coproduct of conormal pieces
 
-Source: Stacks Project, Divisors, Lemma 0633, part (2).
+## References
+
+* Stacks Project, Divisors, Lemma 0633, part (2).
 -/
 
 @[expose] public section
@@ -224,8 +226,7 @@ private theorem piece_equiv {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion 
   exact ha
 
 /-- Affine sections of a module coproduct of conormal pieces are the additive
-sum of the ideal-power quotients. No ring structure on the coproduct is assumed.
-Source: Stacks Project, Divisors, Lemma 0633, part (2). -/
+sum of the ideal-power quotients. No ring structure on the coproduct is assumed. -/
 theorem exists_conormalCoproduct_affine_addEquiv {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (M : Z.Modules) (j : ∀ n, piece i n ⟶ M)
     (hc : IsColimit (Cofan.mk M j)) (U : X.affineOpens) :

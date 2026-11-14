@@ -78,8 +78,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import all WeilConjectures.CategoryTheory.StrictReduction.ReductionPullbackDerivedTower
 /-! # Finite reduction of completed pullback
 
-Source: Stacks Project, Tag 099N (5), and blueprint order 1262.
-
 ## Main definitions
 
 - `completedPullbackReductionArrow`: adjunct of the actual limit projection.
@@ -91,6 +89,10 @@ Source: Stacks Project, Tag 099N (5), and blueprint order 1262.
 
 All coefficients remain sheaves on the original small pro-etale sites. Positive
 level n is encoded by n-1, so a natural number n denotes the quotient by I^(n+1).
+
+## References
+
+* Stacks Project, Tags 099N (5), 00VC, 03D2, 03D3, 03EK, 06XN, 06YY and 08TC.
 -/
 
 @[expose] public noncomputable section
@@ -120,8 +122,7 @@ def completedPullbackFunctor :
 attribute [local irreducible] proEtaleModelRingUnit
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
   coefficientProEtaleModuleDirectImage_isRightAdjoint
-/-- The small-model module pushforward has its canonical pullback adjunction.
-Source: Stacks 03D2. -/
+/-- The small-model module pushforward has its canonical pullback adjunction. -/
 theorem completedReductionModelPushforward_isRightAdjoint
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     (@SheafOfModules.pushforward.{u + 1} _ _ _ _ _ _ _ _ _
@@ -138,8 +139,7 @@ attribute [local instance] completedTowerModulePullback_additive
 attribute [local instance] completedReductionModuleTowerFunctor_additive
 
 /-- An inverse-image generator from an object V and a base-change arrow U→g*V.
-It is the small-model module-adjunction unit followed by restriction along that arrow.
-Source: Stacks 03D2, 00VC. -/
+It is the small-model module-adjunction unit followed by restriction along that arrow. -/
 def completedReductionInverseImageGenerator
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (M : pbcModules Y R)
     (V : Y.ProEt) (U : X.ProEt) (f : U ⟶ (proEtaleBaseChange g).obj V)
@@ -155,22 +155,19 @@ def completedReductionInverseImageGenerator
 attribute [irreducible] completedReductionInverseImageGenerator
 
 /-- The standard localization comparison for exact restriction, with its exactness
-instances supplied by the existing coefficient interface.
-Source: Stacks 03D3. -/
+instances supplied by the existing coefficient interface. -/
 def completedReductionRestrictionFactors (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     DerivedCategory.Q ⋙ pbcDerivedRestrict φ ≅
       (pbcRestrict φ).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   (pbcRestrict φ).mapDerivedCategoryFactors
 
-/-- The existing tensor-formula module pullback over the finite coefficient sheaves.
-Source: Stacks 099N (5). -/
+/-- The existing tensor-formula module pullback over the finite coefficient sheaves. -/
 abbrev completedReductionFiniteModules (n : ℕ) :=
   proEtaleRingModulePullback g (reductionCoefficient Y d n)
     (reductionCoefficient X d n) (asIso (completedFiniteCoefficientMap g d n))
 
-/-- Exact finite-coefficient pullback, with the standard localization on both sites.
-Source: Stacks 099N (5). -/
+/-- Exact finite-coefficient pullback, with the standard localization on both sites. -/
 abbrev completedReductionFiniteDerived (n : ℕ) :=
   proEtaleRingDerivedPullback g (reductionCoefficient Y d n)
     (reductionCoefficient X d n) (asIso (completedFiniteCoefficientMap g d n))
@@ -182,8 +179,7 @@ def completedReductionFiniteTarget (n : ℕ) :
   reductionDerivedChange Y (completedReductionProjection Y d n) ⋙
     completedReductionFiniteDerived g d n
 
-/-- The actual sheafified pure tensor in the tensor-formula finite pullback.
-Source: Stacks 03EK. -/
+/-- The actual sheafified pure tensor in the tensor-formula finite pullback. -/
 def completedReductionFiniteTensor (n : ℕ)
     (M : pbcModules Y (reductionCoefficient Y d n))
     (U : X.ProEtᵒᵖ) (s : (reductionCoefficient X d n).obj.obj U)
@@ -217,8 +213,7 @@ def completedReductionFiniteGenerator (n : ℕ)
 
 attribute [irreducible] completedReductionFiniteGenerator
 
-/-- Explicitly inherit zero preservation before forming the complex comparison.
-Source: Stacks 03EK. -/
+/-- Explicitly inherit zero preservation before forming the complex comparison. -/
 instance completedReductionOrdinarySource_preservesZero (n : ℕ) :
     (completedReductionModuleTowerFunctor Y d ⋙ completedTowerModulePullback g d ⋙
       (CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
@@ -227,8 +222,7 @@ instance completedReductionOrdinarySource_preservesZero (n : ℕ) :
   letI := completedTowerModulePullback_additive g d
   Functor.preservesZeroMorphisms_of_additive _
 
-/-- The canonical limit projection, derived from the ordinary projection.
-Source: Stacks 08TC. -/
+/-- The canonical limit projection, derived from the ordinary projection. -/
 def completedReductionLimitProjection (n : ℕ) :
     completedTowerRlim d X ⟶ pbcTowerEvaluation X (pbcAdicCompletion X d) n :=
   Functor.rightDerivedFunctorNatTrans
@@ -722,8 +716,7 @@ def completedReductionOrdinaryComparison (n : ℕ) :
             ((adicLisseForget X).map (completedReductionProjection X d n)) :=
   (completedReductionOrdinaryComparison_exists g d n).exists.choose
 
-/-- The native reduction-tower comparison is natural on complexes.
-Source: Stacks Tags 06XN and 06YY. -/
+/-- The native reduction-tower comparison is natural on complexes. -/
 def completedReductionTowerComplexNat (T : Scheme.{u}) :
     DerivedCategory.Q ⋙ completedReductionTower T d ⟶
       completedReductionComplexTowerFunctor T d ⋙ DerivedCategory.Q where
@@ -734,8 +727,7 @@ def completedReductionTowerComplexNat (T : Scheme.{u}) :
       (complexCounitNat (completedReductionModuleTowerFunctor T d)
         (completedReductionTower T d) (coherenceReductionTowerCounit T d)).naturality f
 
-/-- The universal homotopy comparison, read naturally on cochain complexes.
-Source: Stacks Tag 06YY. -/
+/-- The universal homotopy comparison, read naturally on cochain complexes. -/
 def completedReductionComplexCounitNat
     {B D : Type*} [Category* B] [Abelian B] [Category* D] [Abelian D]
     [HasDerivedCategory B] [HasDerivedCategory D]
@@ -748,8 +740,7 @@ def completedReductionComplexCounitNat
     simpa only [complexCounitNat_app, reductionComplexCounit,
       Functor.leftDerivedCounitOnComplex] using (complexCounitNat F L ε).naturality f
 
-/-- The exact tower comparison, using its native component maps.
-Source: Stacks Tag 06YY. -/
+/-- The exact tower comparison, using its native component maps. -/
 def completedReductionPullbackComplexNat :
     DerivedCategory.Q ⋙ completedTowerPullback g d ⟶
       (completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ) ⋙

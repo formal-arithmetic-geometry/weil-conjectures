@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInt
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProScalarActions
 import WeilConjectures.CategoryTheory.Exact.ExactDerivedAdjunctionBounds
 
-/-! # Exact and scalar-linear pro-etale operations -/
+/-! # Exact and scalar-linear pro-etale operations
+
+## References
+
+* Zheng, Proposition 2.29(2), Construction 5.15 and Lemma 5.22
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,8 +41,7 @@ variable (P : ExceptionalProCompactSupport O ell c
     CX.proEvaluation CY.proEvaluation CZ.proEvaluation)
 
 /-- The actual pro-etale compact support and site-transported right functor carry
-triangulated and coefficient-linear structures.
-Source: Zheng Proposition 2.29(2), Construction 5.15 and Lemma 5.22. -/
+triangulated and coefficient-linear structures. -/
 private def derivedExactIso {A B : Type*} [Category A] [Category B]
     [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]

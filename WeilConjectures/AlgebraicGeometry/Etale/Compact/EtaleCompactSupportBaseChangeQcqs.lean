@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedExtensionZeroBaseChangeS
 /-!
 # Arbitrary base change for compact support on qcqs etale sites
 
-Source: Stacks Project, `more-etale.tex`, Tag 0F7L,
-`lemma-base-change-shriek`, first proof paragraph.
+## References
+
+* Stacks Project, Tag 0F7L
 -/
 
 @[expose] public section
@@ -27,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- For finite constant coefficients, compact support computed with a fixed compactification
-commutes with arbitrary change of qcqs base, naturally in the bounded below complex.
-Source: Stacks Project, Tag 0F7L, `lemma-base-change-shriek`, first proof paragraph.
--/
+commutes with arbitrary change of qcqs base, naturally in the bounded below complex. -/
 theorem etale_compactSupport_baseChange_qcqs
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Y' : Scheme.{u}}

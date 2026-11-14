@@ -30,8 +30,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Pullback compatibility of the diagonal and all three traces, including the
 canonical supported-source mate. The only asserted base-change isomorphisms are
-on these specified coefficient objects. Source: blueprint clause 3 and proof
-steps 3a--3c. -/
+on these specified coefficient objects. -/
 structure PullbackCompatibility
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)

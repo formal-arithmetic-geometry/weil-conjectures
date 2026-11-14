@@ -16,8 +16,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Separating closed sections over affine strata
 
-Source: Stacks Project, Tag 095K, proof of `lemma-decompose-quasi-finite-morphism`,
-final paragraph.
+## References
+
+* Stacks Project, Tag 095K (final paragraph of the proof)
 -/
 
 @[expose] public section
@@ -275,10 +276,7 @@ private theorem select_disjoint_closed_sections
     exact ⟨e ⟨t k, k, rfl⟩, z, by simpa only [t', e.symm_apply_apply] using hz⟩
 
 /-- A closed subscheme of an affine scheme covered by finitely many closed sections is
-covered by disjoint closed sections after a finite reduced affine partition of the base.
-
-Source: Stacks Project, Tag 095K, final paragraph of
-`lemma-decompose-quasi-finite-morphism`. -/
+covered by disjoint closed sections after a finite reduced affine partition of the base. -/
 theorem exists_closed_section_affine_partition
     {X Y W : Scheme.{u}} [IsAffine X] [IsNoetherian X] [IsAffine W]
     (h : Y ⟶ X) (p : W ⟶ X) (j : Y ⟶ W) [IsClosedImmersion j]

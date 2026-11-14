@@ -15,10 +15,14 @@ public import WeilConjectures.AlgebraicGeometry.Derived.ComparisonScalarExtensio
 
 /-! # Finite-coefficient presentations of the genuine system evaluations
 
-Source: Zheng, Construction 4.1; Bhatt--Scholze, finite coefficient comparison.
-
 The functors change only the presentation of the same module sheaves. In
 particular the horizontal arrows below are those of the actual sequence topos.
+
+## References
+
+* Zheng, Construction 4.1
+* Bhatt–Scholze, finite coefficient comparison
+* Stacks Project, Tags 03CY, 03D7, 03DA, 06YT, 0941, 09B1, 0F63
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +38,7 @@ namespace AlgebraicGeometry.ProEtale.CoherentReduction
 attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
   AlgebraicGeometry.ProEtale.VaryingRing.sequenceSiteSmall
 
-/-- Proof alias of the existing exactness-reflection criteria for scalar restriction.
-The underlying abelian sheaf is unchanged; no new exactness theorem is postulated.
-Source: Stacks 03D7. -/
+/-- Proof alias of the existing exactness-reflection criteria for scalar restriction. -/
 private abbrev ringRestriction_exact (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{u + 1} a) ∧
@@ -49,20 +51,17 @@ private abbrev ringRestriction_exact (X : Scheme.{u})
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
     preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
-/-- The existing equivalence from constant-ring module sheaves to fixed-ring sheaves.
-Source: Stacks 03DA. -/
+/-- The existing equivalence from constant-ring module sheaves to fixed-ring sheaves. -/
 def fixedEquivalence (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   (constant_ring_module_sheaves.{u + 1, u} (Scheme.ProEt.topology X) A).1.choose
 
-/-- Its forward maps are the original scalar restrictions.
-Source: Stacks 03DA. -/
+/-- Its forward maps are the original scalar restrictions. -/
 instance fixedEquivalence_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (fixedEquivalence X A).functor.Additive :=
   (constant_ring_module_sheaves.{u + 1, u}
     (Scheme.ProEt.topology X) A).1.choose_spec.2.1
 
-/-- Its inverse retains the original additive sections and maps.
-Source: Stacks 03DA. -/
+/-- Its inverse retains the original additive sections and maps. -/
 instance fixedEquivalence_inverse_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (fixedEquivalence X A).inverse.Additive :=
   (constant_ring_module_sheaves.{u + 1, u}
@@ -88,16 +87,14 @@ def finiteUnrealization (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite
   res.{u + 1, u, u + 1} (finiteConstantIso X A).hom ⋙
     CategoryTheory.ConstantScalarRestriction.restriction (Scheme.ProEt.topology X) A
 
-/-- Finite realization is additive.
-Source: Stacks 03DA. -/
+/-- Finite realization is additive. -/
 instance finiteRealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     (finiteRealization X A).Additive := by
   unfold finiteRealization
   infer_instance
 
-/-- Finite realization preserves finite limits.
-Source: Stacks 03DA. -/
+/-- Finite realization preserves finite limits. -/
 instance finiteRealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteLimits (finiteRealization X A) := by
@@ -108,8 +105,7 @@ instance finiteRealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing 
   let := h.2
   infer_instance
 
-/-- Finite realization preserves finite colimits.
-Source: Stacks 03DA. -/
+/-- Finite realization preserves finite colimits. -/
 instance finiteRealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteColimits (finiteRealization X A) := by
@@ -120,8 +116,7 @@ instance finiteRealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
   let := h.2
   infer_instance
 
-/-- The inverse presentation is additive.
-Source: Stacks 03DA. -/
+/-- The inverse presentation is additive. -/
 instance finiteUnrealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     (finiteUnrealization X A).Additive := by
@@ -131,8 +126,7 @@ instance finiteUnrealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommR
     (finiteConstantIso X A).hom ⋙ _).Additive
   infer_instance
 
-/-- The inverse presentation preserves finite limits.
-Source: Stacks 03DA. -/
+/-- The inverse presentation preserves finite limits. -/
 instance finiteUnrealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteLimits (finiteUnrealization X A) := by
@@ -148,8 +142,7 @@ instance finiteUnrealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
   change PreservesFiniteLimits (SheafOfModules.restrictScalars.{u + 1} r ⋙ _)
   infer_instance
 
-/-- The inverse presentation preserves finite colimits.
-Source: Stacks 03DA. -/
+/-- The inverse presentation preserves finite colimits. -/
 instance finiteUnrealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteColimits (finiteUnrealization X A) := by
@@ -165,8 +158,7 @@ instance finiteUnrealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommR
   change PreservesFiniteColimits (SheafOfModules.restrictScalars.{u + 1} r ⋙ _)
   infer_instance
 
-/-- The finite presentation is an exact equivalence, with its original section maps.
-Source: Stacks 03CY. -/
+/-- The finite presentation is an exact equivalence, with its original section maps. -/
 instance finiteUnrealization_isEquivalence (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     (finiteUnrealization X A).IsEquivalence := by
@@ -180,9 +172,7 @@ instance finiteUnrealization_isEquivalence (X : Scheme.{u}) (A : Type (u + 1)) [
   unfold finiteUnrealization
   infer_instance
 
-/-- The ordinary tensor comparison sends local pure tensors to the same pure tensors.
-Both factors use published, proved tensor-transport constructions.
-Source: Stacks 03CY, 06YT. -/
+/-- The ordinary tensor comparison sends local pure tensors to the same pure tensors. -/
 @[instance_reducible]
 def finiteUnrealizationMonoidal (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
@@ -197,8 +187,7 @@ def finiteUnrealizationMonoidal (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Ordinary fixed-module evaluation of the actual system.
-Source: Zheng 4.1. -/
+/-- Ordinary fixed-module evaluation of the actual system. -/
 def fixedEvaluation (X : Scheme.{u}) (n : ℕ) :
     Systems.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X) ⥤
@@ -208,27 +197,23 @@ def fixedEvaluation (X : Scheme.{u}) (n : ℕ) :
     (coefficients l E X) (transitions l E X) n ⋙
       finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n)
 
-/-- Fixed evaluation preserves addition through the exact finite presentation.
-Source: Zheng 4.1. -/
+/-- Fixed evaluation preserves addition through the exact finite presentation. -/
 instance fixedEvaluation_additive (X : Scheme.{u}) (n : ℕ) :
     (fixedEvaluation l E X n).Additive := by unfold fixedEvaluation; infer_instance
 
-/-- Fixed evaluation preserves finite limits through the exact finite presentation.
-Source: Stacks 0941. -/
+/-- Fixed evaluation preserves finite limits through the exact finite presentation. -/
 instance fixedEvaluation_limits (X : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (fixedEvaluation l E X n) := by
   unfold fixedEvaluation
   infer_instance
 
-/-- Fixed evaluation preserves finite colimits through the exact finite presentation.
-Source: Stacks 0941. -/
+/-- Fixed evaluation preserves finite colimits through the exact finite presentation. -/
 instance fixedEvaluation_colimits (X : Scheme.{u}) (n : ℕ) :
     PreservesFiniteColimits (fixedEvaluation l E X n) := by
   unfold fixedEvaluation
   infer_instance
 
-/-- Its exact derived evaluation, without choosing level objects.
-Source: Zheng 4.1. -/
+/-- Its exact derived evaluation, without choosing level objects. -/
 def fixedDerivedEvaluation (X : Scheme.{u}) (n : ℕ) :
     DS.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X) ⥤
@@ -238,16 +223,14 @@ def fixedDerivedEvaluation (X : Scheme.{u}) (n : ℕ) :
     (coefficients l E X) (transitions l E X) n ⋙
       (finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n)).mapDerivedCategory
 
-/-- Exact derived etale-to-pro-etale comparison with the original fixed coefficients.
-Source: Bhatt--Scholze, finite coefficient comparison. -/
+/-- Exact derived etale-to-pro-etale comparison with the original fixed coefficients. -/
 def nu (X : Scheme.{u}) (n : ℕ) :=
   (comparisonUpperStar (ModuleCat.{u + 1} (Etale.FiniteProperQuotient.Ring l E n))
     X).mapDerivedCategory
 
-/-- The canonical derived comparison between scalar extension and `nu^*`.
-Source: Stacks 09B1 and 0F63, via the scalar-restriction comparison square.
-The map is the mate of the existing comparison isomorphism, hence it is tied
-to the derived scalar-extension adjunction and is not an arbitrary natural map. -/
+/-- The canonical derived comparison between scalar extension and `nu^*`: the mate, under the
+derived scalar-extension adjunction, of the existing scalar-restriction comparison
+isomorphism. -/
 noncomputable def nuFixedScalarExtensionComparisonMap (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙
@@ -269,15 +252,13 @@ noncomputable def nuFixedScalarExtensionComparisonMap (X : Scheme.{u})
       (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ))
     ).symm (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom))
 
-/-- The canonical `nu^*`/scalar-extension comparison is invertible.
-Source: Stacks 09B1 and 0F63. -/
+/-- The canonical `nu^*`/scalar-extension comparison is invertible. -/
 theorem nuFixedScalarExtensionComparisonMap_isIso (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     IsIso (nuFixedScalarExtensionComparisonMap X φ) := by
   exact ProEtale.isIso_mate_comparisonRestrictScalarsIso φ X
 
-/-- The canonical comparison isomorphism used by the finite reduction maps.
-Source: Stacks 09B1 and 0F63. -/
+/-- The canonical comparison isomorphism used by the finite reduction maps. -/
 noncomputable def nuFixedScalarExtensionComparison (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙
@@ -497,9 +478,7 @@ theorem finiteUnrealizationSemilinearMap_forget (X : Scheme.{u}) {A B : Type (u 
       ((SheafOfModules.toSheaf (WeilConjectures.SemilinearSections.ring.{u + 1, u, u + 1}
         (Scheme.ProEt.topology X) (sectionRing X A))).map f) :=
   HEq.rfl
-/-- The fixed coefficient transition is the original horizontal additive map.
-Source: Zheng 4.1.
--/
+/-- The fixed coefficient transition is the original horizontal additive map. -/
 theorem fixedTransition_existsUnique (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     ∃! δ : fixedEvaluation l E X m ⟶ fixedEvaluation l E X n ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology X)
@@ -527,13 +506,11 @@ theorem fixedTransition_existsUnique (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) 
       AddCommGrpCat.{u + 1})).map_injective
   exact eq_of_heq ((hδ' M).trans (finiteUnrealizationSemilinearMap_forget X _ _ hκ (T.app M)).symm)
 
-/-- The uniquely normalized fixed-coefficient horizontal map.
-Source: Zheng 4.1. -/
+/-- The uniquely normalized fixed-coefficient horizontal map. -/
 def fixedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :=
   (fixedTransition_existsUnique l E X h).exists.choose
 
-/-- Derived descent of the original horizontal map, including the localization compositors.
-Source: Zheng 4.1. -/
+/-- Derived descent of the original horizontal map, including the localization compositors. -/
 def fixedDerivedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     fixedDerivedEvaluation l E X m ⟶ fixedDerivedEvaluation l E X n ⋙
       Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X)
@@ -554,8 +531,7 @@ def fixedDerivedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X)
       (Etale.FiniteProperQuotient.quotient l E h))
 
-/-- Scalar-adjunction transpose of that map: the actual derived reduction of a system.
-Source: Zheng 4.1. -/
+/-- Scalar-adjunction transpose of that map: the actual derived reduction of a system. -/
 def fixedReduction (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m)
     (M : DS.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X)) :

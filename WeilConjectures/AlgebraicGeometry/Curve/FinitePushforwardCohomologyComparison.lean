@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Whiskering
 
 /-! # Finite pushforward comparison for curve assertions
 
-Source: Stacks Project, Lemma 0A5D.
+## References
+
+* Stacks Project, Lemma 0A5D
 -/
 
 @[expose] public section
@@ -40,7 +42,8 @@ private noncomputable def coefficientRoundTrip (X : Scheme.{u})
   exact Functor.isoWhiskerLeft F.obj (forget₂ (ModuleCat.{u + 1} ℤ)
     AddCommGrpCat.{u + 1}).asEquivalence.counitIso
 
-/-- Source: Stacks Project, Lemma 0A5D, cohomology step. -/
+/-- The cohomology comparison step of the transfer of the curve assertions along a finite
+pushforward. -/
 theorem IsCurve.finite_pushforward_cohomology_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]

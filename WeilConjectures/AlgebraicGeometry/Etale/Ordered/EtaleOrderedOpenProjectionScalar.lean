@@ -14,6 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Ordered.EtaleOrderedOpenProjectio
 /-! # Scalar change for the local ordered open projection
 
 This is the open-immersion square before inserting a compactification pullback compositor.
+
+## References
+
+* Stacks Project, Tags 07A4, 0E8I, 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +37,7 @@ attribute [local irreducible] derivedTensorSymmetry
   leftDerivedUpperStarComp leftDerivedUpperStarIsoMapDerivedCategory
   Functor.leftDerivedFunctorIsoMapDerivedCategory
 
-/-- The ordered open projection, without any composite-pullback identification.
-Source: Stacks 0E8I and 0GL6. -/
+/-- The ordered open projection, without any composite-pullback identification. -/
 @[irreducible] def orderedOpenProjection (R : Type (u + 1)) [CommRing R]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (T : DerivedCategoryModule R Z) (M : DerivedCategoryModule R X) :
@@ -50,9 +53,7 @@ Source: Stacks 0E8I and 0GL6. -/
       (((derivedTensorSymmetry (ModuleCat.{u + 1} R) X).hom.app M).app
         ((upperStar (ModuleCat.{u + 1} R) j).leftDerivedFunctor.obj T))
 
-/-- Scalar change commutes with the local ordered open projection.
-Source: Stacks 0E8I, 0GL6 and 07A4; step 1 and the signed-symmetry part of step 2
-of lem-pur-etale-open-scalar-projection. -/
+/-- Scalar change commutes with the local ordered open projection. -/
 theorem etaleOrderedOpenProjectionScalar
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

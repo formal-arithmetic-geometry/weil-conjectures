@@ -19,7 +19,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 /-! # Covers mapping to finite etale towers
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV.
+
+## References
+
+* Stacks Project, Tags 01YW, 0990; finite-stalk adaptation of Tag 09BV
 -/
 
 @[expose] public section
@@ -29,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite etale tower with finite nonempty geometric fibers has a compatible
-cone whose legs to the base form an affine weakly contractible pro-etale cover.
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV. -/
+cone whose legs to the base form an affine weakly contractible pro-etale cover. -/
 theorem finite_etale_tower_cover
     (X : Scheme.{u}) (P : ℕ → X.Etale) (p : ∀ n : ℕ, P (n + 1) ⟶ P n)
     (hfin : ∀ n : ℕ, IsFinite (P n).hom)

@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechGlobalMapNatural
 
 /-! # Scalar transport of augmentation representatives
 
-Source: Stacks Project, Tags 03P2 and 01FD. -/
+## References
+
+* Stacks Project, Tags 03P2, 01FD, 01EQ
+-/
 
 @[expose] public section
 
@@ -23,9 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Multiplication transports a common augmentation representative to another one.
-Source: Stacks Project, Tag 01EQ, functoriality in coefficients, and Tag 01FD,
-the commuting augmented double-complex diagram used in Tag 03P2. -/
+/-- Multiplication transports a common augmentation representative to another one. -/
 theorem additiveCech_scalar_transport
     (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (μ : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))

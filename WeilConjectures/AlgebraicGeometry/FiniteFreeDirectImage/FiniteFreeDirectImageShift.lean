@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Shift compatibility of the canonical coefficient comparison
 
-Source: Stacks Project, Tags 07A6 and 0DVC.
+## References
+
+* Stacks Project, Tags 07A6, 0DVC
 -/
 
 @[expose] public noncomputable section
@@ -74,8 +76,7 @@ private theorem restriction_shift {Z W : Scheme.{u}} {q : Z ⟶ W}
       Category.comp_id, Category.assoc] using h
   exact heq ▸ hm
 
-/-- The canonical scalar/direct-image mate commutes with the prescribed shifts.
-Source: Stacks Project, Tags 07A6 and 0DVC. -/
+/-- The canonical scalar/direct-image mate commutes with the prescribed shifts. -/
 theorem finiteFreeDirectImageShift {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :

@@ -17,12 +17,13 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 
 /-! # Regular scalars and finite quotients of completed coefficients
 
-Source: blueprint, chap-Smooth-purity, proposition-sp-integral-towers proof, first paragraph,
-and coefficient setup in prose-09-21; Stacks Tags 00WK and 00YR.
-
 Natural level n denotes exponent n+1. The commutative-ring objects below retain the
 underlying ring sheaves of the recorded coefficient towers. Quotients are the existing
 sheafifications of sectionwise principal-power quotients.
+
+## References
+
+* Stacks Project, Tags 00WK, 00YR, 03CO, 03DB
 -/
 
 @[expose] public noncomputable section
@@ -355,10 +356,7 @@ private theorem quotient_iso {C : Type t} [Category C]
   rw [toSheafify_sheafifyLift, Category.comp_id, hq]
 
 /-- Completed coefficients have regular positive scalar powers and the specified finite
-quotients, with the actual projections and all quotient transitions normalized.
-
-Source: blueprint, proposition-sp-integral-towers proof, first paragraph; coefficient setup in
-prose-09-21; Stacks Tags 00WK, 00YR, 03CO and 03DB. -/
+quotients, with the actual projections and all quotient transitions normalized. -/
 theorem sp_completed_coefficient_regular_quotients :
     (∃ (v : (Padic.coefficientExtensionIntegers l E)ˣ) (e : ℕ),
       1 ≤ e ∧ (l : Padic.coefficientExtensionIntegers l E) =

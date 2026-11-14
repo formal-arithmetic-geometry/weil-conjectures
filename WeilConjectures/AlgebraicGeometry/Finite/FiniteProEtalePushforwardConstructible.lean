@@ -24,12 +24,14 @@ import WeilConjectures.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
 /-!
 # Constructibility of ordinary finite-coefficient pro-etale direct images
 
-Source: Stacks Project, Tags 09AK, 09AL and 09A6; Bhatt--Scholze,
-Theorem 6.7.1 and the finite-coefficient part of Lemma 6.7.2.
-
 The fixed-module presentation uses the published canonical realization of modules over
 constant coefficient sheaves. Constructibility is intrinsic and no Tor bound is imposed.
 The comparison arrow is the mate of the exact derived pullback comparison.
+
+## References
+
+* Stacks Project, Tags 09AK, 09AL and 09A6
+* Bhatt--Scholze, Theorem 6.7.1 and the finite-coefficient part of Lemma 6.7.2
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +45,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Termwise descent of the canonical commuting inverse images, in the direction
-`nu_Y^* f_proet^* ≅ f_et^* nu_X^*` used to form the direct-image mate.
-Source: Stacks Project, Tag 09A6, preceding paragraph. -/
+`nu_Y^* f_proet^* ≅ f_et^* nu_X^*` used to form the direct-image mate. -/
 def finitePushforwardDerivedPullbackComparison (B : Type (u + 1)) [CommRing B]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (comparisonUpperStar (ModuleCat.{u + 1} B) Y).mapDerivedCategory ⋙
@@ -58,9 +59,7 @@ def finitePushforwardDerivedPullbackComparison (B : Type (u + 1)) [CommRing B]
 
 /-- The canonical ordinary total derived direct-image comparison, defined as the
 counit mate of the specified exact pullback comparison. Thus its component is the
-adjoint transpose of the pulled-back etale counit after that comparison; there is no
-choice of a morphism or of an isomorphism between the endpoints.
-Source: Stacks Project, Tag 09A6, lemma-morphism-comparison. -/
+adjoint transpose of the pulled-back etale counit after that comparison. -/
 def finitePushforwardDerivedComparison (B : Type (u + 1)) [CommRing B]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Etale.rightDerivedLowerStar (ModuleCat.{u + 1} B) f ⋙
@@ -99,9 +98,7 @@ private theorem isIso_mate_change_adjunction
 has bounded constructible etale origin, and ordinary direct image along a morphism
 of finite-type schemes over a field is bounded and intrinsically constructible.
 The comparison after any chosen realization is the specified counit mate followed
-by the direct image of that realization.
-Source: Stacks Project, Tags 09AL, 09AK and 09A6; Bhatt--Scholze, Theorem 6.7.1 and
-finite-coefficient Lemma 6.7.2. -/
+by the direct image of that realization. -/
 theorem finite_proetale_pushforward_constructible
     (k : Type u) [Field k] (B : Type (u + 1)) [CommRing B] [Finite B]
     (m : ℕ) (hm : 0 < m) (hB : (m : B) = 0) (hk : IsUnit (m : k))

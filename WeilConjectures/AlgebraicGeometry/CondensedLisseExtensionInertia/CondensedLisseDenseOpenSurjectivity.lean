@@ -19,12 +19,7 @@ open AlgebraicGeometry.ProEtale AlgebraicGeometry.Scheme.FiniteEtale
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedLisseExtensionInertia
 
-/-- The open immersion and fundamental-group surjectivity needed by the reverse extension.
-
-The source proof obtains regularity and connectedness from the projective-line pullback,
-then applies the published surjectivity theorem to the induced open immersion.  The
-point is presented over an algebraic closure by transport along the supplied field
-embedding, and the resulting path identity is unchanged by that transport. -/
+/-- The open immersion and fundamental-group surjectivity needed by the reverse extension. -/
 theorem dense_open_pullbackPathHom_surjective
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
     (U₀ C₀ : (ProjectiveLine (Spec (.of D.k₀))).Opens)

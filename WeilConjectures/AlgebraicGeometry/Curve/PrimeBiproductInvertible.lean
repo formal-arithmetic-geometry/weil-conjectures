@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
 
 /-! # Componentwise curve assertions for finite biproducts
 
-Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C. -/
+## References
+
+* Stacks Project, Tags 03SC, 0A5C
+-/
 
 @[expose] public section
 
@@ -152,8 +155,7 @@ private theorem cohomology_bijective_sum_iff (Λ : Type (u + 1)) [CommRing Λ]
         exact Etale.cohomologyMap_map a q (A.map φ) x }
   exact bijective_sum_iff T S η G e
 
-/-- Componentwise equivalence for the invertible assertions of a prime-killed finite sum.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. -/
+/-- Componentwise equivalence for the invertible assertions of a prime-killed finite sum. -/
 theorem prime_biproduct_invertible_iff (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     (r : ℕ) [Fact r.Prime] {ι : Type} [Finite ι]

@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 
 /-! # Identity normalization of geometric and scalar pullback comparisons
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E46,
-identity specialization; Tags 03D8 and 0D6D for the ordinary and derived compositors.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0E46 (identity specialization)
+* Stacks Project, Tags 03D8 and 0D6D (the ordinary and derived compositors)
 -/
 
 @[expose] public section
@@ -90,9 +92,7 @@ private theorem exact_identity_unit
     Category.assoc, Iso.inv_hom_id_app_assoc] using h
 
 /-- The canonical identity-identity geometric compositor and scalar/pullback comparison
-become identity transformations under the canonical geometric identity comparisons.
-Source: Stacks Project, Tag 0E46, identity specialization,
-with ordinary formulas from Tag 03D8 and derived normalization from Tag 0D6D. -/
+become identity transformations under the canonical geometric identity comparisons. -/
 theorem leftDerivedUpperStarId_scalarExtension_normalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :

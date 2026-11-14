@@ -53,12 +53,13 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFinite.QuasiFiniteCompactSu
 
 /-! # The full right mate of etale compact-support exchange
 
-Source: Stacks Project, Tag 03S6; blueprint etale locality,
-Step 1, and the proper/open normalization in lem-pur-etale-support-map-compatibility (1).
-
 The helpers assemble existing canonical maps. All equations concern natural transformations
 on the ordinary unbounded categories, with arbitrary chosen right adjoints and adjunctions.
 The comparison d is the inverse of the constructed graph map, not an arbitrary isomorphism.
+
+## References
+
+* Stacks Project, Tags 03S6, 0F7I, 0F7K, 0F7L, 0GKM
 -/
 
 @[expose] public section
@@ -79,9 +80,7 @@ attribute [local irreducible] upperStar lowerStar etaleLowerShriek
   exactCompactSupportExchange exactEtaleSumExchange
 
 /-- The specified proper exchange followed by inverse open-extension exchange, as an iso.
-The exact/left-derived inverse-image transports are those in exactCompactSupportExchange.
-Invertibility uses the existing unbounded proper base-change theorem for finite coefficients.
-Source: Stacks Tags 0F7L and 03S6. -/
+The exact/left-derived inverse-image transports are those in exactCompactSupportExchange. -/
 noncomputable def exchangeIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} {e : U ⟶ X} (c : Compactification e) (w : X' ⟶ X) :
@@ -103,8 +102,7 @@ noncomputable def exchangeIso
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
         (pullback.snd w e)) _
 
-/-- Rho is the conjugate of the inverse canonical support/sum comparison.
-Source: Stacks Tag 03S6; Mathlib Adjunction/Mates, conjugateIsoEquiv. -/
+/-- Rho is the conjugate of the inverse canonical support/sum comparison. -/
 noncomputable def rightAdjointIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -117,8 +115,7 @@ noncomputable def rightAdjointIso
     (canonicalEtaleCompactSupportComparison A e c).symm
 
 /-- The full right mate B for the pulled-back compactification and every unbounded input.
-Its transpose is exactly the inverse exchange followed by the pulled-back counit.
-Source: Stacks Tag 03S6; Mathlib Adjunction/Mates, mateEquiv. -/
+Its transpose is exactly the inverse exchange followed by the pulled-back counit. -/
 noncomputable def rightMate
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} {e : U ⟶ X} (c : Compactification e) (w : X' ⟶ X)
@@ -131,8 +128,7 @@ noncomputable def rightMate
       (upperStar (ModuleCat.{u + 1} A) w).mapDerivedCategory ⋙ G' :=
   (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ (exchangeIso A c w).inv))
 
-/-- The inverse-comparison clause, as an equality of natural isomorphisms.
-Source: Stacks Tag 03S6; support-map compatibility (1). -/
+/-- The inverse-comparison clause, as an equality of natural isomorphisms. -/
 theorem inverse_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]
@@ -161,8 +157,7 @@ theorem inverse_comparison
       using (etaleCompactSupportGraph_coherence A).base_change e c w
   exact congrArg Iso.symm h
 
-/-- The displayed common sum-adjunction transpose, at every unbounded K.
-Source: Stacks Tag 03S6 and blueprint etale locality Step 1. -/
+/-- The displayed common sum-adjunction transpose, at every unbounded K. -/
 theorem common_transpose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]
@@ -243,8 +238,7 @@ theorem common_transpose
         W.map (S.map (rho.app K)) at hn
   rw [← Category.assoc, ← hn, Category.assoc, he, S'.map_comp, Category.assoc]
 
-/-- The full right-adjoint exchange equation, as a natural-transformation identity.
-Source: Stacks Tag 03S6 and blueprint etale locality Step 1. -/
+/-- The full right-adjoint exchange equation, as a natural-transformation identity. -/
 theorem rightMate_eq
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]
@@ -375,8 +369,8 @@ private lemma comparison_refinement
     (unboundedEtaleCompactSupport_comparison_coherence A e).2, hd]
   exact hc.symm
 
-/-- Rho agrees under every canonical compactification comparison, including proper refinements.
-Source: Stacks Tags 0F7I, 0F7K, 0GKM. -/
+/-- Rho agrees under every canonical compactification comparison, including proper
+refinements. -/
 theorem rightAdjointIso_refinement
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]

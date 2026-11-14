@@ -99,11 +99,12 @@ import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.Ringe
 /-!
 # Comparison of étale and pro-étale Tor amplitude
 
-
 ## Main statements
 
-- `finiteCoefficient_comparison_preserves_torAmplitude`: clause (i).
-- `finiteCoefficient_comparison_reflects_torAmplitude`: clause (ii).
+- `finiteCoefficient_comparison_preserves_torAmplitude`: comparison preserves Tor intervals
+  and bounded constructibility.
+- `finiteCoefficient_comparison_reflects_torAmplitude`: comparison reflects Tor intervals of
+  bounded-below étale origins.
 
 The étale coefficients are the canonical universe lift of the same quotient ring.
 The pullback is the existing intrinsic comparison, obtained by constant-scalar
@@ -121,7 +122,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Clause (i): comparison preserves the specified Tor interval and bounded constructibility.
+/-- Comparison preserves the specified Tor interval and bounded constructibility.
 -/
 theorem finiteCoefficient_comparison_preserves_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})
@@ -150,7 +151,7 @@ theorem finiteCoefficient_comparison_preserves_torAmplitude
   exact ⟨intrinsicComparison_boundedConstructible D l _hlp E n hn T K' _hK',
     intrinsicComparison_torAmplitude D l _hlp E n hn T a b _hab K' _hK' _hTor'⟩
 
-/-- Clause (ii): comparison reflects the Tor interval of a bounded-below étale origin.
+/-- Comparison reflects the Tor interval of a bounded-below étale origin.
 -/
 theorem finiteCoefficient_comparison_reflects_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})

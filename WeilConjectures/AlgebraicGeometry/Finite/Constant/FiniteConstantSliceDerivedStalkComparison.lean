@@ -44,7 +44,9 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Constant complexes under the geometric stalk of a ringed slice
 
-Source: Stacks Project, Tags 03CY, 0F6B, 00Y8(3), and 05RU.
+## References
+
+* Stacks Project, Tags 03CY, 0F6B, 00Y8(3), 05RU
 -/
 
 @[expose] public noncomputable section
@@ -442,10 +444,7 @@ end FiniteConstantSliceStalkProof
 
 /-- A geometric stalk on the slice recovers the lifted algebraic constant complex.
 The same functor works for every complex; no isomorphism between two complexes is
-assumed or reflected by this statement.
-
-Source: Stacks Project, Modules on Sites, Tag 03CY; proetale.tex, Tag 0F6B;
-Sites, Tag 00Y8(3); Derived Categories, Tag 05RU. -/
+assumed or reflected by this statement. -/
 theorem finiteConstantSlice_derivedStalk_comparison
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{t + 1} B)]

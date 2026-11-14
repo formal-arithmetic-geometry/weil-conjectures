@@ -99,7 +99,9 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantModelStratificationTra
 
 /-! # Finite free local models of continuous rational sheaves
 
-Source: Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10.
+## References
+
+* Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10.
 -/
 
 @[expose] public noncomputable section
@@ -347,8 +349,7 @@ namespace AlgebraicGeometry.Scheme.ContinuousRational
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 /-- Over a coefficient field the finitely presented continuous local models are exactly
-finite locally free models. The normalized coefficient encoding preserves this condition.
-Source: Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10. -/
+finite locally free models. The normalized coefficient encoding preserves this condition. -/
 theorem rationalContinuousFiniteFreeCriterion (X : Base.{u} l)
     (e : AlgebraicGeometry.ProEtale.latticeCoefficientSheaf X.scheme
       (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ≅

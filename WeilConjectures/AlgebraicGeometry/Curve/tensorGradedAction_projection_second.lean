@@ -10,8 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedActionKernelSecond
 
 /-! # Projection of homogeneous quotient actions
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, the quotient action on a square-zero ideal.
+## References
+
+* Stacks Project, Tags 09MS (the graded direct-sum ideal sequence), 0B8S (the quotient action
+  on a square-zero ideal), 01XC
 -/
 
 @[expose] public section
@@ -27,11 +29,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
 set_option linter.unusedVariables false in
-/-- Compatibility of the degree-n(e+1) section x on the degree-n coefficient.
-
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, quotient multiplication on the square-zero ideal;
-Tag 01XC, naturality of the affine cohomology comparison. -/
+/-- Compatibility of the degree-n(e+1) section x on the degree-n coefficient. -/
 theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

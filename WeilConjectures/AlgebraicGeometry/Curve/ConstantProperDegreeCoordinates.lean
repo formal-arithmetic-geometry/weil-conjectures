@@ -155,8 +155,8 @@ private theorem proper_kummer_degree_coordinates_aux
   rw [AddEquiv.symm_apply_apply]
   rfl
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper case in degree two. -/
+/-- Degree-normalized coordinates on degree-two constant-coefficient cohomology of a proper
+connected curve, compatible with algebraically closed field extension. -/
 theorem IsConnectedCurve.constant_proper_degree_coordinates
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

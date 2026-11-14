@@ -8,7 +8,13 @@ public import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
 public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComparison
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMateData
 
-/-! # The restriction transpose of the geometric scalar mate -/
+/-! # The restriction transpose of the geometric scalar mate
+
+## References
+
+* Stacks Project, Tags 07A4, 0D6J, 0G7E
+* Zheng, Lemma 5.16
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -16,8 +22,7 @@ open CategoryTheory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The geometric scalar mate is conjugate to exact restriction/direct image.
-Source: Stacks 07A4, 0G7E and 0D6J; Zheng, Lemma 5.16. -/
+/-- The geometric scalar mate is conjugate to exact restriction/direct image. -/
 theorem scalarMate_restrictionTranspose
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (g : V ⟶ W) :

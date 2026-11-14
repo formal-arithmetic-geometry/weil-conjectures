@@ -48,11 +48,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 /-!
 # Compatibility of the etale proper-support comparison
 
-Source: Stacks Project, Tags 0F4L, 0F4Y, 0GKM, 03S6, 0F7L, 0GKF and 0GL5.
-
 The auxiliary arrows transport the existing derived tensor comparison to the exact
 inverse-image functor and take its projection mate under the existing sum adjunction.
 The statement characterizes its comparisons by graph extension and the derived unit.
+
+## References
+
+* Stacks Project, Tags 03S6, 0F4L, 0F4Y, 0F7L, 0GKF, 0GKM, 0GL5
 -/
 
 @[expose] public section
@@ -76,8 +78,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Adjunction.mapDerivedCa
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor
 
 /-- Tensor comparison for termwise exact inverse image. This is the existing derived
-pullback tensor comparison transported through `L(e^*) ≅ D(e^*)` in both variables.
-Source: Stacks Project, Tags 0GKF and 0GL5. -/
+pullback tensor comparison transported through `L(e^*) ≅ D(e^*)` in both variables. -/
 noncomputable def etaleSupportExactUpperTensorIso
     (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (e : V ⟶ T) :
     (((Functor.whiskeringLeft₂ _).obj
@@ -101,10 +102,7 @@ noncomputable def etaleSupportExactUpperTensorIso
 
 /-- The reverse sum-extension projection arrow. It is the projection mate of the
 sum/evaluation adjunction, using the canonical exact pullback tensor comparison above.
-Its inverse is the map `(s,m) ⊗ k ↦ (s,m ⊗ s^*k)` of Tag 0GKF: transposing this rule
-sends the summand generator to the unit inclusion tensored with the restricted section.
-Thus the normalization below specifies a particular map, not an arbitrary isomorphism.
-Source: Stacks Project, Tags 0GKF and 0GL5. -/
+Its inverse is the map `(s,m) ⊗ k ↦ (s,m ⊗ s^*k)` of Stacks Tag 0GKF. -/
 noncomputable def etaleSupportSumProjectionReverse
     (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (e : V ⟶ T) [Etale e] :
     (Functor.postcompose₂.obj
@@ -473,8 +471,6 @@ intertwines the specified exchange and projection transformations, on the entire
 categories and for every compactification. The existential families are characterized by
 sheaf and homotopy normalization equations; they are not unconstrained comparisons.
 The final equation is the compatibility with proper-refinement identifications.
-
-Source: Stacks Project, Tags 0F4L, 0F4Y, 0GKM, 03S6, 0F7L, 0GKF and 0GL5.
 -/
 theorem etaleSupportMapCompatibility
     (A : Type (u + 1)) [CommRing A] [Finite A] :

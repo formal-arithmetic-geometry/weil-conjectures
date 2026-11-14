@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 
 /-! # The scalar realization of the ordinary quotient arrows
 
-Source: Stacks Project, Tags 03CY, 03DA, 03EK and 09C6.
+## References
+
+* Stacks Project, Tags 03CY, 03DA, 03EK and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +26,7 @@ set_option maxHeartbeats 600000 in
 -- Instantiating the generic realization square unfolds the completed coefficient rings.
 /-- The explicit scalar realizations carry the ordinary quotient arrows to the transition maps of
 the strict ordinary tensor tower restricted to `W`, compatibly with the inverse-image comparison
-and the ordinary scalar compositor.
-Source: Stacks Project, Tags 03CY, 03DA and 09C6. -/
+and the ordinary scalar compositor. -/
 theorem finitePerfectAdicQuotientStrictRealizationIso_square
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

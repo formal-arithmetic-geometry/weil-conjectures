@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenDeriv
 
 /-! # The homotopy form of the scalar representative square
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
+## References
+
+* Stacks Project, Tag 06YY
 -/
 
 -- After pruning, this module only keeps private declarations.

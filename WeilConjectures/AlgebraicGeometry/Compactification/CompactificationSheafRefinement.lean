@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 /-!
 # The sheaf map along a cartesian compactification refinement
 
-Source: Stacks Project, Tags 0F7B and 0F7I.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ variable (A : Type (u + 1)) [CommRing A]
   {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
   (r : c.Refinement d) (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
 
-/-- The adjunct of inverse open base change, followed by direct-image composition.
-Source: Stacks Project, Tags 0F7B and 0F7I. -/
+/-- The adjunct of inverse open base change, followed by direct-image composition. -/
 noncomputable def compactificationSheafRefinement :
     openImmersionLowerShriek (ModuleCat.{u + 1} A) d.i ⋙
         lowerStar (ModuleCat.{u + 1} A) d.g ⟶
@@ -163,8 +164,7 @@ private lemma compactification_inclusion_mono
   infer_instance
 
 /-- The sheaf refinement preserves the inclusion into ordinary pushforward, whose
-components are monomorphisms.
-Source: Stacks Project, Tag 0F7I, and the sheaf comparison in Tag 0F7B. -/
+components are monomorphisms. -/
 theorem compactificationSheafRefinement_properties :
     compactificationSheafRefinement A r hcart ≫ compactificationSheafToDirectImage A c =
       compactificationSheafToDirectImage A d ∧

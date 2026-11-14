@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperSupportUnit
 
 /-! # The proper square without an open source leg
 
-Source: Stacks Project, Tags 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7F, 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
 /-- The compact-support interchange for a proper Cartesian square with etale horizontal
-maps is the mate of inverse sum exchange. This statement has no open source leg.
-Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F. -/
+maps is the mate of inverse sum exchange. -/
 theorem graph_proper_interchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W Y' Z Y : Scheme.{u}}

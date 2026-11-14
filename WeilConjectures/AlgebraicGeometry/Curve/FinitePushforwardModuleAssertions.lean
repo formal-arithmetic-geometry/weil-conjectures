@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardModuleConstructi
 
 /-! # Finite direct image of module-valued curve assertions
 
-Source: Stacks Project, Lemma 0A5D, finite pushforward statements.
+## References
+
+* Stacks Project, Lemma 0A5D
 -/
 
 @[expose] public section
@@ -106,8 +108,7 @@ private theorem finite_module_torsion_reflection {k : Type u} [Field k]
     simpa only [map_nsmul, map_zero] using
       congrArg ((Scheme.pointSmallEtale s).sheafFiber.map beta).hom hz
 
-/-- Finite direct image transfers the eight module-valued curve assertions.
-Source: Stacks Project, Lemma 0A5D, proof of finite pushforward statements. -/
+/-- Finite direct image transfers the eight module-valued curve assertions. -/
 theorem IsCurve.Assertions.of_finite_pushforward_module {k : Type u} [Field k]
     [IsAlgClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Spec (.of k))
     [IsCurve g] [IsFinite f]

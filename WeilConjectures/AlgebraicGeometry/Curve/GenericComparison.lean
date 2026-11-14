@@ -235,9 +235,7 @@ theorem subsingleton_H_of_genericVanishing
 include f in
 /-- **Generic replacement.** Let `C` be an integral curve over an algebraically closed field,
 with generic point `η : Spec k(C) ⟶ C`. For every abelian étale sheaf `F` on `C` the unit
-`F ⟶ η_* η^* F` induces bijections `Hᵠ(C, F) → Hᵠ(C, η_* η^* F)` for `q ≥ 2`: its kernel and
-cokernel have generically vanishing sections by continuity of sections at the limit
-`Spec k(C) = lim_U Spec Γ(C, U)`, hence are acyclic. -/
+`F ⟶ η_* η^* F` induces bijections `Hᵠ(C, F) → Hᵠ(C, η_* η^* F)` for `q ≥ 2`. -/
 theorem bijective_H_map_unit_fromSpecFunctionField
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
     Function.Bijective (Sheaf.H.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}

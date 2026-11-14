@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafClosedLo
 
 /-! # Acyclicity of a closed diagonal source under a retraction
 
-Source: Stacks, proetale.tex, lemma-closed-immersion-complement-retrocompact-exact,
-and the supported-source computation in the diagonal tower trace.
+## References
+
+* Stacks Project, Pro-étale Cohomology chapter: exactness of pushforward along a closed
+  immersion with retrocompact complement
 -/
 
 @[expose] public noncomputable section
@@ -82,10 +84,7 @@ private theorem single_on_image (M : D) :
 
 end Retract
 
-/-- The supported regular module is acyclic for every retraction of the diagonal.
-
-Source: Stacks, proetale.tex, lemma-closed-immersion-complement-retrocompact-exact;
-diagonal tower trace, supported-source identification. -/
+/-- The supported regular module is acyclic for every retraction of the diagonal. -/
 theorem diagonal_supported_acyclic
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

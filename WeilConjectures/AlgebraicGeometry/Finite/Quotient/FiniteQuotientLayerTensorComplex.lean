@@ -14,7 +14,9 @@ import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # The explicit algebraic complex for a successive coefficient layer
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
+## References
+
+* Stacks Project, Tags 0942, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -24,15 +26,13 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- The actual ideal-power quotient, viewed over the residue coefficient ring.
-Source: Stacks Project, Tags 0942 and 094I. -/
+/-- The actual ideal-power quotient, viewed over the residue coefficient ring. -/
 def finiteQuotientLayerModule {A : Type t} [CommRing A] (I : Ideal A) (n : ℕ) :
     ModuleCat.{t} (A ⧸ I ^ (0 + 1)) :=
   ModuleCat.of _ ((I ^ (n + 1) : Ideal A) ⧸
     (I ^ (0 + 1) • ⊤ : Submodule A (I ^ (n + 1) : Ideal A)))
 
-/-- The constructed residue module is the actual kernel of the quotient ring map.
-Source: Stacks Project, Tag 094I, its ideal-layer identification. -/
+/-- The constructed residue module is the actual kernel of the quotient ring map. -/
 def finiteQuotientLayerKernelEquiv {A : Type t} [CommRing A] (I : Ideal A) (n : ℕ) :
     finiteQuotientLayerModule I n ≃
       RingHom.ker (Ideal.Quotient.factor
@@ -47,8 +47,7 @@ def finiteQuotientLayerKernelEquiv {A : Type t} [CommRing A] (I : Ideal A) (n : 
       (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)) :
         I ^ (n + 1 + 1) ≤ I ^ (n + 1))).symm))
 
-/-- Tensor with the ideal layer and retain the successor-ring action by restriction.
-Source: Stacks Project, Tags 0942 and 094I. -/
+/-- Tensor with the ideal layer and retain the successor-ring action by restriction. -/
 def finiteQuotientLayerTensor {A : Type t} [CommRing A] (I : Ideal A) (n : ℕ) :
     ModuleCat.{t} (A ⧸ I ^ (0 + 1)) ⥤ ModuleCat.{t} (A ⧸ I ^ (n + 1 + 1)) :=
   MonoidalCategory.tensorLeft (finiteQuotientLayerModule I n) ⋙
@@ -60,22 +59,19 @@ instance finiteQuotientLayerTensor_additive {A : Type t} [CommRing A]
   unfold finiteQuotientLayerTensor
   infer_instance
 
-/-- Apply the layer tensor functor term by term, including to the differential.
-Source: Stacks Project, Tags 0942, 094H and 094I. -/
+/-- Apply the layer tensor functor term by term, including to the differential. -/
 def finiteQuotientLayerTensorComplex {A : Type t} [CommRing A] (I : Ideal A) (n : ℕ)
     (P : CochainComplex (ModuleCat.{t} (A ⧸ I ^ (0 + 1))) ℤ) :
     CochainComplex (ModuleCat.{t} (A ⧸ I ^ (n + 1 + 1))) ℤ :=
   ((finiteQuotientLayerTensor I n).mapHomologicalComplex (.up ℤ)).obj P
 
-/-- The ideal layer embeds in the finite successor quotient, hence is a finite type.
-Source: Stacks Project, Tag 0942; Mathlib's ideal-power quotient equivalence. -/
+/-- The ideal layer embeds in the finite successor quotient, hence is a finite type. -/
 theorem finiteQuotientLayerModule_finite {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) : Finite (finiteQuotientLayerModule d.ideal n) := by
   have := d.quotientFinite (n + 1)
   exact Finite.of_equiv _ (finiteQuotientLayerKernelEquiv d.ideal n).symm
 
-/-- Tensoring with the finite ideal layer has finite successor-coefficient terms.
-Source: Stacks Project, Tags 0942 and 094I. -/
+/-- Tensoring with the finite ideal layer has finite successor-coefficient terms. -/
 theorem finiteQuotientLayerTensorComplex_finite {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ)
     (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))) ℤ)
@@ -94,8 +90,7 @@ theorem finiteQuotientLayerTensorComplex_finite {A : Type t} [CommRing A]
     infer_instance
   exact Module.Finite.of_finite
 
-/-- A layer tensor complex retains the lower support bound, including for a zero layer.
-Source: Stacks Project, Tag 094I. -/
+/-- A layer tensor complex retains the lower support bound, including for a zero layer. -/
 theorem finiteQuotientLayerTensorComplex_ge {A : Type t} [CommRing A]
     (I : Ideal A) (n : ℕ)
     (P : CochainComplex (ModuleCat.{t} (A ⧸ I ^ (0 + 1))) ℤ)
@@ -105,8 +100,7 @@ theorem finiteQuotientLayerTensorComplex_ge {A : Type t} [CommRing A]
   intro i hi
   exact (finiteQuotientLayerTensor I n).map_isZero (P.isZero_of_isStrictlyGE a i hi)
 
-/-- A layer tensor complex retains the upper support bound, even for an empty interval.
-Source: Stacks Project, Tag 094I. -/
+/-- A layer tensor complex retains the upper support bound, even for an empty interval. -/
 theorem finiteQuotientLayerTensorComplex_le {A : Type t} [CommRing A]
     (I : Ideal A) (n : ℕ)
     (P : CochainComplex (ModuleCat.{t} (A ⧸ I ^ (0 + 1))) ℤ)

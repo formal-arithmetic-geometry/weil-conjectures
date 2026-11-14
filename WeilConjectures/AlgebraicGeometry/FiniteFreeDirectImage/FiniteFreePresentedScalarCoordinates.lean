@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Finite-free coordinates for a specified scalar presentation
 
-Source: Stacks Project, Tags 03EK and 06YY.
+## References
+
+* Stacks Project, Tags 03EK, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +50,7 @@ private def basisPowerIso (X : Scheme.{u})
 
 set_option maxHeartbeats 500000 in
 -- Elaborating the presentation transport and tensor coordinates requires extra heartbeats.
-/-- The tensor coordinates transported through the specified ordinary presentation.
-Source: Stacks Project, Tag 03EK. -/
+/-- The tensor coordinates transported through the specified ordinary presentation. -/
 @[irreducible] private def presentedFiniteFreeCoordinates (X : Scheme.{u})
     (s : ScalarModel X) {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) (d : ℕ)
@@ -83,8 +84,7 @@ Source: Stacks Project, Tag 03EK. -/
     erw [Pi.map_π])
 
 /-- Finite-basis coordinates make presented scalar extension exact and its universal
-counit invertible on every homotopy complex.
-Source: Stacks Project, Tags 03EK and 06YY. -/
+counit invertible on every homotopy complex. -/
 theorem finiteFreeDirectImage_presentedScalarCoordinates (X : Scheme.{u})
     (s : ScalarModel X) {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) (d : ℕ)

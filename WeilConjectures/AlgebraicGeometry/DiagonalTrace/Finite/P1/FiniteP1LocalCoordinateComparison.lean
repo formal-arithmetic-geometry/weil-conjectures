@@ -49,7 +49,7 @@ attribute [local irreducible] Functor.mapDerivedCategory SpTowerP1.nuSingle
   Etale.ordinaryFiniteUnitPullback Etale.ordinaryFiniteShiftedLinePullback
 
 /-- The local fixed-Hom coordinate image is successive ordinary coordinate
-transport. Source: exact single comparison and the actual local-image equation. -/
+transport. -/
 theorem finiteP1LocalCoordinateImage_ordinary (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (X : Scheme.{u}) {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)

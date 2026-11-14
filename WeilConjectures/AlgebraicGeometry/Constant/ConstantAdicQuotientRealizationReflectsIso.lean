@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientScalarComparison
 import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientRealizationHomologyLift
 
-/-! # Conservativity of a nonempty constant quotient realization -/
+/-! # Conservativity of a nonempty constant quotient realization
+
+## References
+
+* Stacks Project, Tags 093J, 03DH and 03Q3.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,10 +23,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- On a nonempty etale chart, the constant quotient realization reflects
-isomorphism of algebraic derived coefficient objects.
-
-Source: Stacks Project, sites-modules.tex, Tags 093J and 03DH; proetale.tex,
-Tag 03Q3. -/
+isomorphism of algebraic derived coefficient objects. -/
 theorem constantAdicQuotientRealization_reflects_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

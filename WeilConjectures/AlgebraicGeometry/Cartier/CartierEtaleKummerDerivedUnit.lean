@@ -17,6 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Residue.ResidueFiniteRootMapIso
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedCartierKummerSupplement
 
 /-! # Cartier reduction and site comparison
+
+## References
+
+* Stacks Project, Tags 0152, 06YY, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -57,11 +61,9 @@ private theorem etale_root_scalar (n : ℕ) {R A : Type (u + 1)}
   have h := hθ W 1 z
   simpa only [map_one] using h
 
-/-- Let n>0, A a finite commutative ring killed by n, Z a scheme on which n is invertible, and i:D→Z
-an effective Cartier closed immersion. The normalized etale Kummer class G_m→forget(A_Z(1))[1] is a
-degree-one unbounded scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+/-- Let n>0, A a finite commutative ring killed by n, Z a scheme on which n is invertible,
+and i:D→Z an effective Cartier closed immersion. The normalized etale Kummer class
+G_m→forget(A_Z(1))[1] is a degree-one unbounded scalar unit. -/
 theorem etale_kummer_derived_unit
     (A : Type (u + 1)) [CommRing A] [Finite A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]

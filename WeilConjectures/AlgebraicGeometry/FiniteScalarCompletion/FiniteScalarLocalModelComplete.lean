@@ -129,13 +129,15 @@ public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-! # Completeness of finite constant scalar local models
 
-Source: blueprint main-20261015, localizing-closure-ctf-equals-bc, Local models and
-Locality; Bhatt--Scholze, Sections 3.1 and 3.4.
-
 The ambient category is the ordinary unbounded derived category of internal modules
 on the small pro-etale site. Natural-number level n denotes the exponent n+1.
 Finite powers, quotient maps and the quotient tower below use the actual coefficient
 maps of `AdicCompletion`. No choice of unrelated levelwise isomorphisms is used.
+
+## References
+
+* Bhatt--Scholze, The pro-étale topology for schemes, Propositions 3.1.9--3.1.10,
+  Sections 3.1 and 3.4
 -/
 
 @[expose] public noncomputable section
@@ -1026,10 +1028,7 @@ coordinates, is a quasi-isomorphism at every level, and respects the augmentatio
 The derived isomorphism to the quotient Roos limit has exactly the scalar quotient
 projections. Every strict completion augmentation with the coordinate formula of
 `completion_triangle_comparison` maps to this cone under the Roos image of that same
-strict tower map q; thus the comparison carries the specified completion unit to it.
-
-Source: blueprint main-20261015, localizing-closure-ctf-equals-bc, Local models and
-Locality; Bhatt--Scholze, Propositions 3.1.9--3.1.10 and Section 3.4. -/
+strict tower map q; thus the comparison carries the specified completion unit to it. -/
 theorem finite_scalar_local_model_complete :
     (∀ M : Modules l E T,
       HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) T M →

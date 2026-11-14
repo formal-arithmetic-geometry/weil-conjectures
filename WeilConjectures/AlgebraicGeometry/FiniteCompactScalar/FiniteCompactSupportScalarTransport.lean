@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompac
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteOpenScalarTransport
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteProperScalarTransport
 
-/-! # Canonical transport of the finite compact-support scalar mate -/
+/-! # Canonical transport of the finite compact-support scalar mate
+
+## References
+
+* Stacks Project, Tags 0GL6, 09AL, 0D6J
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -244,10 +249,7 @@ private theorem compactSiteIso_factors_iso
   Iso.ext (compactSiteIso_factors A c G)
 
 /-- Canonical transport identifies the scalar transpose, including its units and counits.
-This is an equality of maps, rather than merely an isomorphism between their endpoints.
-
-Source: Stacks Tags 0GL6, 09AL and 0D6J; the scalar-mate compatibility of
-`etaleProEtale_scalar_mate`, followed by intrinsic realization. -/
+This is an equality of maps, rather than merely an isomorphism between their endpoints. -/
 theorem intrinsicCompactScalarIsoOfOrigin_hom
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

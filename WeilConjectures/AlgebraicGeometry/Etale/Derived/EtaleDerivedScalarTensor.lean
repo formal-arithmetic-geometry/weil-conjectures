@@ -65,9 +65,17 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 /-!
 # Ordinary derived scalar extension in the constant-coefficient presentation
 
-Source: Stacks Project, Tags 03EK and 06YY.
 The general ring-sheaf interface is reexported. The additional interface uses
 ModuleCat-valued sheaves and fixes the scalar/tensor comparison on K-flat representatives.
+
+## Implementation details
+
+* `scalarTensorModelNormalization` is a general helper that shares the monoidal data with
+  the tensor-model API before specialization.
+
+## References
+
+* Stacks Project, Tags 03EK and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -78,25 +86,22 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- Additivity of the existing sheafified sectionwise scalar extension.
-Source: Stacks 03EK. -/
+/-- Additivity of the existing sheafified sectionwise scalar extension. -/
 @[instance] theorem scalarSheafExtension_additive
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).Additive := by
   exact (ProEtale.etaleSheafExtendScalarsAdjunction φ T).left_adjoint_additive
 
-/-- The published scalar-extension functor in the small-etale specialization.
-This is an abbreviation for the existing chosen left adjoint, not a new construction.
-Source: Stacks 06YY. -/
+/-- The published scalar-extension functor in the small-etale specialization: the existing
+chosen left adjoint. -/
 abbrev scalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     DerivedCategoryModule A T ⥤ DerivedCategoryModule B T :=
   ProEtale.pbcFixedScalarExtension T.smallEtaleTopology φ
 
-/-- B as an A-module sheaf, using actual exact restriction of scalars.
-Source: Stacks 03EK. -/
+/-- B as an A-module sheaf, using actual exact restriction of scalars. -/
 def scalarCoefficientSheaf
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -104,16 +109,14 @@ def scalarCoefficientSheaf
   (Sheaf.restrictScalars T.smallEtaleTopology φ).obj
     (𝟙_ (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)))
 
-/-- B_T[0], with its restricted A-action.
-Source: Stacks 06YY. -/
+/-- B_T[0], with its restricted A-action. -/
 def scalarCoefficient
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) : DerivedCategoryModule A T :=
   (_root_.DerivedCategory.singleFunctor _ 0).obj (scalarCoefficientSheaf φ T)
 
 /-- The ordinary balancing map M tensor_A B to the restricted scalar extension.
-It is scalar unit, followed by the lax tensorator of restriction and the right unitor.
-Source: Stacks 03EK. -/
+It is scalar unit, followed by the lax tensorator of restriction and the right unitor. -/
 def scalarSheafTensorMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -145,8 +148,7 @@ private theorem balancing_naturality
   rw [← R.map_comp, rightUnitor_naturality, R.map_comp]
   simp only [Category.assoc]
 
-/-- Naturality of the balancing map.
-Source: Stacks 03EK. -/
+/-- Naturality of the balancing map. -/
 theorem scalarSheafTensorMap_naturality
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -157,8 +159,7 @@ theorem scalarSheafTensorMap_naturality
           ((ProEtale.etaleSheafExtendScalars φ T).map a) := by
   exact balancing_naturality (ProEtale.etaleSheafExtendScalarsAdjunction φ T) a
 
-/-- The ordinary balancing map, as a natural transformation.
-Source: Stacks 03EK. -/
+/-- The ordinary balancing map, as a natural transformation. -/
 def scalarSheafTensorTransformation
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -177,8 +178,7 @@ variable {C : Type v} {D : Type w} [Category.{v₁} C] [Category.{v₂} D]
   (adj : F ⊣ R) (E : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D)
   (ad : E ⊣ R.mapDerivedCategory)
 
-/-- The cochain adjunction transpose, sharing ordinary and derived functor endpoints.
-Source: Stacks 06YY. -/
+/-- The cochain adjunction transpose, sharing ordinary and derived functor endpoints. -/
 abbrev scalarAdjunctionRepresentativeMap (P : CochainComplex C ℤ) :
     E.obj (_root_.DerivedCategory.Q.obj P) ⟶
       _root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -191,8 +191,7 @@ abbrev scalarAdjunctionRepresentativeMap (P : CochainComplex C ℤ) :
 
 end Representative
 
-/-- The ordinary scalar unit on a cochain representative.
-Source: Stacks 06YY. -/
+/-- The ordinary scalar unit on a cochain representative. -/
 def scalarRepresentativeUnit
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -206,8 +205,7 @@ def scalarRepresentativeUnit
       (Iso.refl (ProEtale.etaleSheafExtendScalars φ T ⋙
         Sheaf.restrictScalars T.smallEtaleTopology φ)) (.up ℤ)).inv.app P
 
-/-- The derived-extension counit on a cochain representative, including the quotient factor.
-Source: Stacks 06YY. -/
+/-- The derived-extension counit on a cochain representative, including the quotient factor. -/
 def scalarExtensionRepresentative
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -227,8 +225,7 @@ def scalarExtensionRepresentative
       (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryFactors.inv.app
         (((ProEtale.etaleSheafExtendScalars φ T).mapHomologicalComplex (.up ℤ)).obj P))
 
-/-- The scalar representative has the specified scalar-unit transpose.
-Source: Stacks 06YY. -/
+/-- The scalar representative has the specified scalar-unit transpose. -/
 theorem scalarExtensionRepresentative_unit_public
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -244,8 +241,7 @@ theorem scalarExtensionRepresentative_unit_public
   exact ((Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)).homEquiv _ _).apply_symm_apply _
 
-/-- Exact restriction of the scalar-extension representative map.
-Source: Stacks 06YY. -/
+/-- Exact restriction of the scalar-extension representative map. -/
 def scalarRestrictedExtensionRepresentative
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -264,8 +260,7 @@ def scalarRestrictedExtensionRepresentative
         (Iso.refl (ProEtale.etaleSheafExtendScalars φ T ⋙
           Sheaf.restrictScalars T.smallEtaleTopology φ)) (.up ℤ)).hom.app P)
 
-/-- Tensoring with F[0], in the general monoidal-category interface.
-Source: Stacks 06YY. -/
+/-- Tensoring with F[0], in the general monoidal-category interface. -/
 def scalarTensorModelFunctor
     {C : Type w} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -273,9 +268,7 @@ def scalarTensorModelFunctor
     (F : C) : _root_.DerivedCategory C ⥤ _root_.DerivedCategory C :=
   tensorRight ((_root_.DerivedCategory.singleFunctor C 0).obj F)
 
-/-- Normalization by the ordinary balancing map on cochain representatives.
-This general helper shares the monoidal data with the tensor-model API before specialization.
-Source: Stacks 06YY. -/
+/-- Normalization by the ordinary balancing map on cochain representatives. -/
 def scalarTensorModelNormalization
     {C : Type w} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -303,8 +296,7 @@ private theorem tensor_model_eq
       scalarTensorModelFunctor F := by
   rfl
 
-/-- The site-specific tensor and the general tensor-model functor have the same data.
-Source: Stacks 06YY. -/
+/-- The site-specific tensor and the general tensor-model functor have the same data. -/
 theorem scalarTensorFunctor_eq
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -522,8 +514,7 @@ private theorem scalarExtension_preservesKFlatQuasiIso
   exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (he n)
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints in
-/-- The scalar/tensor comparison is uniquely fixed on K-flat representatives.
-Source: Stacks 06YY, using 03EK. -/
+/-- The scalar/tensor comparison is uniquely fixed on K-flat representatives. -/
 theorem scalarTensorIso_existsUnique
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -560,8 +551,7 @@ theorem scalarTensorIso_existsUnique
 
 end ScalarSpecialization
 
-/-- Canonical scalar/tensor identification; its defining theorem determines it uniquely.
-Source: Stacks 06YY. -/
+/-- Canonical scalar/tensor identification; its defining theorem determines it uniquely. -/
 def scalarTensorIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :

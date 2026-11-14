@@ -26,7 +26,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Derived coordinates on a constant-coefficient ringed slice
 
-Source: Stacks Project, Tags 03CY, 093J and 099R.
+## References
+
+* Stacks Project, Tags 03CY, 093J, 099R
 -/
 
 @[expose] public noncomputable section
@@ -176,10 +178,7 @@ private theorem sliceCoordinate_iso_iff
 
 /-- Changing from ringed slice modules to fixed coefficients preserves and reflects
 isomorphism classes of derived objects, and identifies constant realizations.
-There is no finiteness, boundedness, covering or etale-origin assertion here.
-
-Source: Stacks Project, modules on sites, change of rings (03CY), module
-sheafification (093J), and localization of the pro-etale site (099R). -/
+There is no finiteness, boundedness, covering or etale-origin assertion here. -/
 theorem finiteCoefficient_slice_derived_coordinates
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

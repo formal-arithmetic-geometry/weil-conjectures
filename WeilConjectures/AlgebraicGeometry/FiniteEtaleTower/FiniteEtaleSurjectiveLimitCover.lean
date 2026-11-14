@@ -19,9 +19,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 /-!
 # The actual inverse limit of a finite étale surjective tower is a cover
 
-Source: blueprint, smooth purity, proof of `definition-tate-twists`, (1);
-Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S.
-
 ## Main definitions
 
 * `FiniteEtaleTower.affineDiagram`: the tower restricted to an open of the base.
@@ -34,6 +31,10 @@ Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S.
   its covering property, and the compatible affine-chart description.
 
 Index `n : ℕ` denotes the paper's positive index `n + 1`.
+
+## References
+
+* Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ, 094S
 -/
 
 @[expose] public section
@@ -48,24 +49,18 @@ namespace AlgebraicGeometry
 
 namespace FiniteEtaleTower
 
-/-- Restriction of a tower over `X` to the open subscheme `U`, by actual fibre products.
-Source: Stacks Project, Tags 01YX and 01YW, applied to the tower in blueprint proof (1)
-of `definition-tate-twists`. -/
+/-- Restriction of a tower over `X` to the open subscheme `U`, by actual fibre products. -/
 noncomputable def affineDiagram {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X.Opens) :
     ℕᵒᵖ ⥤ Scheme.{u} :=
   D ⋙ Over.pullback U.ι ⋙ Over.forget U.toScheme
 
-/-- The coordinate rings of the base-changed tower, with their actual transition maps.
-Source: Stacks Project, Tag 01YW, and blueprint proof (1) of
-`definition-tate-twists`. -/
+/-- The coordinate rings of the base-changed tower, with their actual transition maps. -/
 noncomputable def ringDiagram {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X.Opens) :
     ℕᵒᵖᵒᵖ ⥤ CommRingCat.{u} :=
   (affineDiagram D U).op ⋙ Scheme.Γ
 
 /-- The canonical map `A → colim Bₙ`, computed using the first stage. All stages give
-this same map because all transitions are over the base chart.
-Source: Stacks Project, Tag 01YW, and blueprint proof (1) of
-`definition-tate-twists`. -/
+this same map because all transitions are over the base chart. -/
 noncomputable def baseMap {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X.Opens) :
     Γ(U.toScheme, ⊤) ⟶ colimit (ringDiagram D U) :=
   (pullback.snd (D.obj (op 0)).hom U.ι).appTop ≫
@@ -228,9 +223,6 @@ is an affine surjective weakly étale cover, with its actual affine coordinate c
 The cone is limiting after forgetting to schemes; its legs are the specified projections.
 The singleton belongs to the precoverage of the small pro-étale site. The chart
 isomorphism respects every projection and the structure morphism to the base chart.
-
-Source: blueprint proof (1) of `definition-tate-twists`;
-Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S.
 -/
 theorem exists_finiteEtale_surjective_limit_cover {X : Scheme.{u}}
     (D : ℕᵒᵖ ⥤ Over X)

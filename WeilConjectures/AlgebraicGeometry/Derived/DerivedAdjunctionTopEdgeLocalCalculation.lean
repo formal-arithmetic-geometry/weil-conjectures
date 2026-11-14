@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalClassEdge
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-! # Local normalization of the truncated derived counit
-Source: Stacks, cohomology.tex, Tags 079W, 0BKJ and 0D5X;
-derived.tex, Tags 08J5 and 06XS.
+
+## References
+
+* Stacks Project, Tags 079W, 0BKJ, 0D5X, 08J5, 06XS
 -/
 
 @[expose] public section
@@ -179,10 +181,7 @@ private theorem directImage_isGE {T S : Scheme.{u}} (g : T ⟶ S)
     ((DerivedCategory.homologyFunctor _ q).mapIso
       (F.rightDerivedFunctorPlusCompatibility.app K')).symm
 
-/-- The counit on the upper truncation of Rg_*K has the canonical local-class formula.
-This assertion has no variable source C and no assertion about arbitrary adjuncts.
-Source: Stacks, cohomology.tex, Tags 079W (normalized derived adjunction),
-0BKJ (local classes), 0D5X (local Leray); derived.tex, Tags 08J5 and 06XS. -/
+/-- The counit on the upper truncation of Rg_*K has the canonical local-class formula. -/
 theorem topEdgeTruncatedCounit_localClass {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (K : schemeDerivedCategory T) :
     ∀ V : (Opens S)ᵒᵖ,

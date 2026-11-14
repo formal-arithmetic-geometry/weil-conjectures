@@ -15,7 +15,11 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
 
 /-! Pullback composition and completed reduction on the strict diagram category.
-Source: Stacks Project, Tags 0D6D and 0E48. -/
+
+## References
+
+* Stacks Project, Tags 0D6D and 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,8 +31,7 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The integral ringed square retains the specified completed coefficient maps.
-Source: Stacks Tag 0D6D. -/
+/-- The integral ringed square retains the specified completed coefficient maps. -/
 def AdicCoefficientDatum.integralTowerRingedSquare
     (sq : ChosenCartesianSquare g' f' f g) : StrictTowerRingedSquare sq where
   RY := d.completedRing Y
@@ -74,9 +77,7 @@ private theorem reductionIso_level {U V : Scheme.{t}} (q : U ⟶ V)
   exact h
 
 /-- The normalized completed reduction comparisons respect the inverse-image square.
-This is an equation before taking mates and in the full derived diagram category.
-Source: blueprint completed-exchange-coherence, tensor/pullback coherence in its
-first two proof sentences; Stacks Tags 0D6D and 0E48. -/
+This is an equation before taking mates and in the full derived diagram category. -/
 theorem completedReductionPullback_square
     (sq : ChosenCartesianSquare g' f' f g) :
     Functor.whiskerRight (d.reductionTowerPullbackIso g).hom (d.towerPull f') ≫

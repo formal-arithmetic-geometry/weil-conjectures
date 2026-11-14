@@ -29,7 +29,10 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite cohomology of the dense-open boundary
 
-Source: Stacks Project, Tags 0GJA and 095L. -/
+## References
+
+* Stacks Project, Tags 0GJA, 095L, 03RW and 03Q1.
+-/
 
 @[expose] public section
 
@@ -37,9 +40,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
-/-- Lift a geometric point into its constructible stratum and use the finite set stalk
-there. Forgetting abelian groups and inverse image both commute with geometric stalks.
-Source: Stacks Project, Tags 03RW and 03Q1. -/
+/-- The geometric stalks of a constructible sheaf are finite. -/
 private theorem finite_constructible_stalk {X : Scheme.{u}}
     (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hA : Scheme.IsConstructibleEtaleSheafOfSets
@@ -80,8 +81,7 @@ private theorem finite_constructible_stalk {X : Scheme.{u}}
   rwa [ht] at hfin''
 
 /-- The closed-boundary term of a constructible torsion sheaf on a curve has finite
-cohomology in every degree.
-Source: Stacks Project, Tag 0GJA, proof, and Tag 095L. -/
+cohomology in every degree. -/
 theorem dense_open_integral_boundary_finiteness {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

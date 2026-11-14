@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProperGraphTransfer.EtaleProperGraphTransfer
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 
-/-! # Unit normalization for inverse derived direct-image composition -/
+/-! # Unit normalization for inverse derived direct-image composition
+
+## References
+
+* Stacks Project, Tag 0F7B
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -61,8 +66,7 @@ private lemma right_comp_inv_unit
   all_goals erw [Category.id_comp]
 
 /-- The inverse proper direct-image compositor carries the unit to the two
-successive right-derived units and the inverse ordinary compositor.
-Source: Stacks Project Tag 0F7B; the ordinary derived-composition unit identity. -/
+successive right-derived units and the inverse ordinary compositor. -/
 theorem properDerivedComposition_inv_unit
     (A : Type (u + 1)) [CommRing A]
     {W Z V : Scheme.{u}} (a : W ⟶ Z) (b : Z ⟶ V) (d : W ⟶ V) (w : a ≫ b = d)

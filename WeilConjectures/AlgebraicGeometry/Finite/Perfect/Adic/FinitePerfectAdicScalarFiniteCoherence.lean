@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CompletedConstantProjection.CompletedCo
 
 /-! # Coefficient transitions for direct finite module sheaves
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J, 093M and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +28,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 attribute [local irreducible] completedAdicChangeData completedAdicRing
   directCoefficientMap overDirectMap directCoefficientIso
 
-/-- Scalar restriction is compatible with composition of sheaf-ring maps.
-
-Source: Stacks Project, Tag 06YY. -/
+/-- Scalar restriction is compatible with composition of sheaf-ring maps. -/
 def finitePerfectAdicRestrictCompIso
     {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
     {R S T : Sheaf J RingCat.{t + 1}}

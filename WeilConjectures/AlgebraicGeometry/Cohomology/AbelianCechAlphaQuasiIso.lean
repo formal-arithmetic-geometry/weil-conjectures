@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # The section augmentation is a quasi-isomorphism
 
-Source: Stacks Project, Tag 01EQ, using Tags 01EP and 0133.
+## References
+
+* Stacks Project, Tag 01EQ, using Tags 01EP and 0133
 -/
 
 @[expose] public section
@@ -21,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- The explicit restriction augmentation induces isomorphisms on homology.
-Source: Stacks 01EQ, row augmentation argument. -/
+/-- The explicit restriction augmentation induces isomorphisms on homology. -/
 theorem abelianCechAlpha_quasiIso
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

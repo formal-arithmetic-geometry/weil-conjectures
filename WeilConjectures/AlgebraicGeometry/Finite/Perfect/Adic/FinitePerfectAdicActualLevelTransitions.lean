@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 
 /-! # Consecutive normalized arrows for actual finite levels
 
-Source: Stacks Project, Tags 09C6 and 06YY.
+## References
+
+* Stacks Project, Tags 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section

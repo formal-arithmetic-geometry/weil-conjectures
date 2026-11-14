@@ -144,13 +144,14 @@ import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackIdentit
 /-!
 # Counit scalar maps and ordinary étale direct-image composition
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E46,
-with Tags 07A6 and 0D6E for the canonical adjunctions and K-injective comparisons.
-
 The coefficient comparison is the existing `scalarMate`, whose transpose is the
 scalar/pullback isomorphism followed by scalar extension of the geometric counit.
 The compositors below are the universal right-derived comparisons, normalized by
 K-injective resolutions, in the direction from composite to iterated direct image.
+
+## References
+
+* Stacks Project, Tags 0E46, 07A6 and 0D6E
 -/
 
 @[expose] public section
@@ -252,8 +253,7 @@ private theorem identity_counit
   rw [Iso.hom_inv_id_app_assoc]
   rfl
 
-/-- The counit coefficient mate commutes with composition of arbitrary scheme morphisms.
-Source: Stacks Project, Tag 0E46. -/
+/-- The counit coefficient mate commutes with composition of arbitrary scheme morphisms. -/
 theorem scalarMate_directImage_composition
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)
@@ -320,17 +320,7 @@ theorem scalarMate_directImage_composition
   simp only [Functor.id_obj, Iso.hom_inv_id_app_assoc]
   rfl
 
-/-- Under the canonical identity direct-image comparisons the coefficient mate is identity.
-Source: Stacks Project, Tags 0E46, 07A6 and 0D6E, identity normalization.
-
-Proof (step 7 of the node): the canonical identity pullback compositor is identity
-on K-flat representatives, and every object has such a representative by
-lem-pc-kflat-resolution. Apply lem-sf-scalar-pullback-composition to two identity
-maps. The identity scalar/pullback comparison is idempotent; it is invertible by
-def-pur-etale-scalar-pullback-iso, so it is identity. The identity adjunction has
-identity counit by lem-sfb-ringed-derived-monoidal-comparisons. The defining transpose
-of scalarMate is therefore identity, and the Hom bijection gives the displayed
-identity after the two canonical direct-image identifications. -/
+/-- Under the canonical identity direct-image comparisons the coefficient mate is identity. -/
 theorem scalarMate_directImage_identity
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) (M : DerivedCategoryModule A T) :

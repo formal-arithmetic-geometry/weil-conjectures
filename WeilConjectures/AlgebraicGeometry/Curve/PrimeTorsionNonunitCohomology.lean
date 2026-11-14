@@ -11,7 +11,12 @@ import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.Data.Int.GCD
 
-/-! # Dense-open field-extension comparison ingredients -/
+/-! # Dense-open field-extension comparison ingredients
+
+## References
+
+* Stacks Project, Tag 0GJA
+-/
 
 @[expose] public section
 
@@ -22,8 +27,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- A sheaf killed by a noninvertible prime and having invertible-order torsion has
-zero cohomology, as does its inverse image along any scheme morphism.
-Source: Stacks Project, Tag 0GJA, proof (remark (c), positive-characteristic case). -/
+zero cohomology, as does its inverse image along any scheme morphism. -/
 theorem prime_torsion_nonunit_cohomology (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X Y : Scheme.{u}} (a : Y ⟶ X)
     (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

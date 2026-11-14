@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalGr
 
 /-! # Degree-one uniqueness for maps from the conormal algebra
 
-Source: Stacks 0630, 0632, generation of the associated graded algebra by degree one.
+## References
+
+* Stacks Project, Tags 0630 and 0632 (generation of the associated graded algebra by
+  degree one).
 -/
 
 @[expose] public section
@@ -71,8 +74,7 @@ private theorem graded_hom_ext {R : Type u} [CommRing R] (I : Ideal R)
   | add x y ihx ihy => simp only [map_add, ihx, ihy]
 
 /-- An algebra morphism out of the conormal algebra is determined by its values on the
-classes of ideal sections in degree one, on all ambient affine charts.
-Source: Stacks 0630, 0632, the degree-one generation of the associated graded algebra. -/
+classes of ideal sections in degree one, on all ambient affine charts. -/
 theorem hom_ext_degree_one {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {B : Z.CommAlgebraSheaf} (f g : (presentation i).algebra ⟶ B)
     (h : ∀ (U : X.affineOpens) (a : (power i 1).val.obj (op U.1)),

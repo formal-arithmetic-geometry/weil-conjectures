@@ -23,9 +23,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line.ProjectiveLineAuto
 
 /-! # The diagonal divisor line relative to an arbitrary projective-line model
 
-Source: the diagonal equation in the proof of lem-amb-p1-diagonal-chern-components;
-EGA II, Remark 4.2.7, and its arbitrary-base extension in the projective-bundle
-Picard classification (Stacks, Tag 0B8W), for changing the projective-line model.
+## References
+
+* EGA II, Remark 4.2.7
+* [Stacks Project, Tag 0B8W](https://stacks.math.columbia.edu/tag/0B8W)
 -/
 
 @[expose] public noncomputable section
@@ -60,11 +61,7 @@ private theorem pic_map_injective {X Y : Scheme.{u}} (e : X ≅ Y) :
   simpa only [← Scheme.Pic.map_comp, Iso.inv_hom_id, Scheme.Pic.map_id] using h'
 
 /-- The diagonal divisor has relative degree one in either projection, including after
-changing its projective-line model. Its remaining factor is pulled back from the base.
-
-Source: lem-amb-p1-diagonal-chern-components, proof, the equation x0 y1 - x1 y0;
-EGA II, Remark 4.2.7, with the arbitrary-base projective bundle Picard
-classification (Stacks, Tag 0B8W, finite-presentation descent). -/
+changing its projective-line model. Its remaining factor is pulled back from the base. -/
 theorem diagonalTrace_diagonalPic_factorization (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨

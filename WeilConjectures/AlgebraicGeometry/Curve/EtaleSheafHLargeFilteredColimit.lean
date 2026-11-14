@@ -15,7 +15,17 @@ import Mathlib.CategoryTheory.Presentable.Directed
 import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
-/-! # Continuity of Ext cohomology for large filtered diagrams -/
+/-! # Continuity of Ext cohomology for large filtered diagrams
+
+## Implementation details
+
+* `etaleCohomology_isColimit_large_filtered` is the derived-functor statement, isolated so that
+  the Ext comparison can be transported separately.
+
+## References
+
+* Stacks Project, Tags 03Q5, 0739
+-/
 
 @[expose] public section
 
@@ -25,14 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Large-universe filtered-colimit continuity for the derived etale cohomology functor.
-Source: Stacks Project, Tags 03Q5 and 0739; the same finite-cover and injective-resolution
-argument as the small-index theorem, with the index category in `Type (u + 1)`.
-(H-large-filtered-colimit-derived)
-
-The proof repeats the filtered-colimit continuity argument while tracking the larger
-indexing universe. This intermediate result is isolated so the Ext comparison can be
-transported separately. -/
+/-- Large-universe filtered-colimit continuity for the derived etale cohomology functor: the
+index category lives in `Type (u + 1)`. -/
 theorem etaleCohomology_isColimit_large_filtered
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]
@@ -50,7 +54,7 @@ theorem etaleCohomology_isColimit_large_filtered
   obtain ⟨hH⟩ := etaleCohomology_isColimit_of_isDirected X hF q
   exact ⟨Functor.Final.isColimitWhiskerEquiv F _ hH⟩
 
-/-- (H-large-filtered-colimit) -/
+/-- Large-universe filtered-colimit continuity for `sheafH`. -/
 theorem sheafH_isColimit_large_filtered
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]

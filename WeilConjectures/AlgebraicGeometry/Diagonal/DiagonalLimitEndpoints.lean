@@ -10,6 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedOrdinaryLimit
 import all WeilConjectures.AlgebraicGeometry.DiagonalEndpointsProof.DiagonalLimitEndpointsAux
 
 /-! # Normalized completed diagonal endpoints
+
+## References
+
+* Stacks Project, Tags 099L, 099M
 -/
 
 @[expose] public noncomputable section
@@ -30,10 +34,7 @@ attribute [local irreducible] diagonalCompletedSource diagonalOrdinaryRlim
 
 set_option linter.unusedVariables false in
 /-- The ordinary supported constant and root limits, their canonical derived-limit
-comparisons, and intrinsic completeness of the two completed endpoints.
-
-Source: blueprint `sk-prop-diagonal-tower-limit.proof.md`, paragraphs (1) and (3);
-Stacks 099L and 099M. -/
+comparisons, and intrinsic completeness of the two completed endpoints. -/
 theorem diagonal_limit_endpoints (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

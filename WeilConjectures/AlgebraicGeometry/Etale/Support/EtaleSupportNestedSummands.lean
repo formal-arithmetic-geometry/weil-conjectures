@@ -11,7 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 /-!
 # Nested summands in section-preserving support composition
 
-Source: Stacks Project, Tags 0F4Y and 0F50.
+## References
+
+* Stacks Project, Tags 0F4Y, 0F50
 -/
 
 @[expose] public section
@@ -214,8 +216,7 @@ private lemma graphExtend_comp
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The composition determined inside direct image sends a pair of etale lifts to their
-composite lift.
-Source: Stacks Project, Tags 0F4Y and 0F50. -/
+composite lift. -/
 theorem etaleSupportNestedSummands
     (A : Type (u + 1)) [CommRing A]
     {V T B : Scheme.{u}} (h : V ⟶ T) (e : T ⟶ B) [Etale h] [Etale e]

@@ -23,7 +23,13 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
-/-! # The finite proper direct-image mate in the strict coefficient presentation -/
+/-! # The finite proper direct-image mate in the strict coefficient presentation
+
+## References
+
+* Stacks Project, Tags 099R, 0B65
+* Zheng, Lemma 4.10 and Construction 5.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -570,9 +576,7 @@ private theorem finiteFixedMate
     (ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y)
     (ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) X) M
 
-/-- The proper mate is invertible on bounded-below finite etale coefficient objects.
-Source: Stacks 099R and 0B65; the canonical finite-coefficient direct-image comparison;
-Zheng Lemma 4.10 and Construction 5.15. -/
+/-- The proper mate is invertible on bounded-below finite etale coefficient objects. -/
 theorem exceptionalFiniteProperMate
     {O : Type (u + 1)} [CommRing O] {ell : O}
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]

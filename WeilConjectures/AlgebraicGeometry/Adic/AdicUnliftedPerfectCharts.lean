@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 
 /-! # Perfect charts for the actual unlifted Padic datum
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.6.11 and Lemma 6.5.8
 -/
 
 @[expose] public noncomputable section
@@ -32,10 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A bounded constructible complete complex has constant perfect models on covers
-of finitely many strata, using its actual unlifted coefficient datum. This assertion
-has no elementary-divisor decomposition and no assertion about consecutive-quotient Tor.
-
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8. -/
+of finitely many strata, using its actual unlifted coefficient datum. -/
 theorem pbc_adic_unlifted_perfect_charts
     (T : Scheme.{u}) [IsNoetherian T]
     (hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)

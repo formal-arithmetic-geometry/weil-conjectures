@@ -20,11 +20,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 /-!
 # Tensor products and scalar extension at geometric étale stalks
 
-Source: Stacks Project, Tags 007K, 008B, 03EL and 04FM.
-
 Scalar extension is expressed by its universal property: a left adjoint to restriction
 of scalars. Its adjunction unit sends `m` to `1 ⊗ m`; consequently `a • unit m`
 is `a ⊗ m`. This formulation includes noncommutative coefficient rings.
+
+## References
+
+* Stacks Project, Tags 007K, 008B, 03EL and 04FM
 -/
 
 @[expose] public section
@@ -99,13 +101,9 @@ private theorem stalk_tensorator
   exact ((congrArg (fun k ↦ k ≫ Functor.LaxMonoidal.μ T F G)
     (id_tensorHom_id (T.obj F) (T.obj G))).trans (Category.id_comp _)).symm
 
-/-- Source: Stacks 007K, 008B, 03EL, 04FM, clause 1.
-Step 1 uses `definition-torsion-sheaves--3` to identify the tensor
-presheaf stalk with the tensor sheaf stalk. Step 2 uses
-`definition-torsion-sheaves--3`: represent two germs on a common
-refinement and tensor their sections; further refinements prove independence of choices.
-The inverse sends a pure tensor section to the tensor of its germs, and the two composites
-are identities on generators. Step 3 checks uniqueness on those generators. -/
+/-- The geometric stalk of a tensor product of étale module sheaves is identified with the
+tensor product of the stalks, by the unique isomorphism sending the germ of a pure tensor
+section to the tensor of its germs. -/
 theorem etale_stalk_tensor_unique
     (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :
     (let p := (pointSmallEtale y).ulift.{u + 1}
@@ -150,14 +148,8 @@ section Scalar
 
 variable {R S : Type (u + 1)} [Ring R] [Ring S] (f : R →+* S)
 
-/-- Source: Stacks 007K, 008B and 04FM, clause 2, individual-map uniqueness.
-Step 4: form balanced maps on sections and pass to the filtered neighborhood colimit
-using `definition-torsion-sheaves--3`. A tensor of a germ maps
-to the class of its tensor section, independently of the representative. The inverse
-maps that section class to its tensor of germs. The composites fix generators.
-`definition-torsion-sheaves--3` then identifies the target with the
-sheafified stalk. Uniqueness follows on generators, including every `a ⊗ s` by
-left `S`-linearity. The two existing comparison isomorphisms define that same map. -/
+/-- Scalar extension commutes with geometric étale stalks: the comparison map is unique, and
+sends a tensor of a scalar with a germ to the class of the corresponding tensor section. -/
 theorem etale_stalk_scalar_component_unique
     (E : ModuleCat.{u + 1} R ⥤ ModuleCat.{u + 1} S)
     (adj : E ⊣ ModuleCat.restrictScalars f)

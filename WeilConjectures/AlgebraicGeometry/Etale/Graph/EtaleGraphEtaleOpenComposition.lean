@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
 
 /-! # Graph composition with an open second leg
 
-Source: Stacks Project, Tags 0F4L and 0F7J.
+## References
+
+* Stacks Project, Tags 0F4L, 0F7J
 -/
 
 @[expose] public section
@@ -229,8 +231,7 @@ private lemma support_compositor_global
           (rightDerivedLowerShriekOfCompactificationCompIso A d (k.ofComp d)).hom.app M ≫ t)
       hk'
 
-/-- The graph comparison identifies etale/open composition with composition of left adjoints.
-Source: Stacks Project, Tags 0F4L and 0F7J. -/
+/-- The graph comparison identifies etale/open composition with composition of left adjoints. -/
 theorem graph_etale_open_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X Z : Scheme.{u}}

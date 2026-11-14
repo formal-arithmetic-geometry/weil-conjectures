@@ -84,12 +84,13 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # The evaluation-normalized internal-Hom formula for an immersion
 
-Source: Stacks Project, Tags 08J9, 07A6 and 08FJ; blueprint
-sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.
-
 All categories below are ordinary unbounded derived categories of constant-coefficient
 etale module sheaves. The internal Hom is the existing closed internal Hom `derivedHom`;
 its tensor product is the existing K-flat derived tensor `derivedTensor`.
+
+## References
+
+* Stacks Project, Tags 08J9, 07A6 and 08FJ
 -/
 
 @[expose] public section
@@ -317,8 +318,7 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- The exceptional inverse image `Ri^! j^*` for the specified closed-then-open factorization.
-Source: blueprint lemma-internal-adjunction-two-exchange-formulas--1 and Stacks Tag 08FJ. -/
+/-- The exceptional inverse image `Ri^! j^*` for the specified closed-then-open factorization. -/
 noncomputable def immersionUpperShriek
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S U X : Scheme.{u}} (i : S ⟶ U) (j : U ⟶ X)
@@ -328,7 +328,7 @@ noncomputable def immersionUpperShriek
   D((j)^*[ModuleCat.{u + 1} A]) ⋙ (R((i)_*[ModuleCat.{u + 1} A])).rightAdjoint
 
 /-- Right-ordered evaluation `RHom(P,M) ⊗ᴸ P ⟶ M`, obtained from the existing
-left-tensor evaluation by the canonical signed symmetry. Source: Stacks Tag 08J9. -/
+left-tensor evaluation by the canonical signed symmetry. -/
 noncomputable def immersionHomEvaluation
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P M : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :

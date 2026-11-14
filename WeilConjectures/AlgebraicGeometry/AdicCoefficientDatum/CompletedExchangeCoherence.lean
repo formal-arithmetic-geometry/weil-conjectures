@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAd
 /-!
 # Naturality, units, and pasting of completed exchange
 
-
 ## Main statements
 
 - `AdicCoefficientDatum.completedExchange_naturality`: naturality for arbitrary maps.
@@ -29,6 +28,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAd
 
 - `AdicCoefficientDatum.completedPullComp`: the unit-normalized composition comparison.
 - `AdicCoefficientDatum.completedPullId`: the unit-normalized identity comparison.
+
+## References
+
+* Stacks Project, Tag 099N
 -/
 
 @[expose] public noncomputable section
@@ -142,8 +145,7 @@ private theorem compositeUnit_bijective {U V W : Scheme.{t}}
   have h₃ := iso_precomp_bijective ((d.pullComp h g).app K) N
   exact h₃.comp (h₂.comp h₁)
 
-/-- Completed composition is uniquely fixed by its ordinary completion-unit equation.
-Source: blueprint coherence, canonical associativity and proof step 5; Stacks Tag 099N (5). -/
+/-- Completed composition is uniquely fixed by its ordinary completion-unit equation. -/
 theorem AdicCoefficientDatum.completedPullComp_existsUnique {U V W : Scheme.{t}}
     (h : U ⟶ V) (g : V ⟶ W) :
     ∃! α : d.completedPull (h ≫ g) ≅ d.completedPull g ⋙ d.completedPull h,
@@ -185,7 +187,7 @@ def AdicCoefficientDatum.completedPullComp {U V W : Scheme.{t}}
   (d.completedPullComp_existsUnique h g).choose
 
 /-- On complete inputs the identity completed pullback has its unique unit-normalized
-identity comparison. Source: blueprint coherence, proof steps 5 and 6. -/
+identity comparison. -/
 theorem AdicCoefficientDatum.completedPullId_existsUnique (T : Scheme.{t})
     (K : d.derived T) (hK : d.TowerComplete T K) :
     ∃! α : (d.completedPull (𝟙 T)).obj K ≅ K,

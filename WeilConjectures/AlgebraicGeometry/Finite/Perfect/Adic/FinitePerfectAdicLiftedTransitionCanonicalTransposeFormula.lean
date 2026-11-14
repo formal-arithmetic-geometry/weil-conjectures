@@ -23,7 +23,9 @@ import WeilConjectures.Algebra.Homology.Coefficient.CoefficientLiftKFlatResoluti
 
 /-! # Formula for the canonical transpose of the lifted transition
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 06YY and 09C6
 -/
 
 @[expose] public noncomputable section

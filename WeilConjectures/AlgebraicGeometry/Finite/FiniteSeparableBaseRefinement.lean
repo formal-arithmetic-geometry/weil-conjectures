@@ -16,7 +16,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 /-!
 # Refining a smooth projective base through a finite separable extension
 
-Source: Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC.
+## References
+
+* Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A morphism to a finite separable extension is smooth, H-projective and proper if its
-composite to the original field is smooth and H-projective.
-Source: Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC. -/
+composite to the original field is smooth and H-projective. -/
 theorem smooth_hProjective_proper_of_finite_separable_base
     (k L : Type u) [Field k] [Field L] [Algebra k L]
     [FiniteDimensional k L] [Algebra.IsSeparable k L]

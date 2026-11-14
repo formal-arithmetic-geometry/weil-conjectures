@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Comma
 
 /-! # Universal scalar arrows on an etale source
 
-Source: Stacks Project, Tags 06YS, 0G7E, 0D6D and 03ED.
+## References
+
+* Stacks Project, Tags 06YS, 0G7E, 0D6D and 03ED
 -/
 
 @[expose] public noncomputable section

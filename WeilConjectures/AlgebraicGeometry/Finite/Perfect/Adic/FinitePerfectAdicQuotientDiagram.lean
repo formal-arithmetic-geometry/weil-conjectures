@@ -10,7 +10,10 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The canonical algebraic quotient diagram and compatible markings
 
-Source: Stacks Project, Tag 09C6 and More on Algebra, Tag 09AW.
+## References
+
+* Stacks Project, Tag 09C6
+* Stacks Project, More on Algebra, Tag 09AW
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 
-/-- The canonical consecutive quotient map, obtained by transposing the level unit.
-Source: Stacks Tag 09AW. -/
+/-- The canonical consecutive quotient map, obtained by transposing the level unit. -/
 def finitePerfectAdicQuotientTransition
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -34,8 +36,7 @@ def finitePerfectAdicQuotientTransition
   ((adj (n + 1)).homEquiv C _).symm
     ((adj n).unit.app C ≫ (DerivedCategory.adicRestrictionComp I n).hom.app ((L n).obj C))
 
-/-- The actual algebraic quotient diagram of a specified complex.
-Source: Stacks Tag 09C6. -/
+/-- The actual algebraic quotient diagram of a specified complex. -/
 def finitePerfectAdicQuotientDiagram
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -61,10 +62,7 @@ private theorem quotientTransition_unit
         (DerivedCategory.adicRestrictionComp I n).hom.app ((L n).obj C) := by
   exact ((adj (n + 1)).homEquiv C _).apply_symm_apply _
 
-/-- Compatible level markings identify the entire diagram with the canonical quotient diagram.
-
-Source: Stacks Project, Tag 09C6, compatibility with the actual quotient transitions;
-More on Algebra, Tag 09AW. -/
+/-- Compatible level markings identify the entire diagram with the canonical quotient diagram. -/
 theorem finitePerfectAdicQuotientDiagram_marking
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

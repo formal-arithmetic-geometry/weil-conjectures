@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicAc
 
 /-! # The actual-quotient half of a finite perfect normalization diagram
 
-Source: Stacks Project, Tags 09AL, 09C6 and 06YY.
+## References
+
+* Stacks Project, Tags 09AL, 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Descent and scalar comparisons for the actual quotient tower, against the explicit
 constant diagram. This data has no Isom-presheaf reduction maps or constant-model
-boundedness, lisse, or universality assertions.
-Source: Stacks Tags 09AL and 09C6, finite quotient descent and balancing. -/
+boundedness, lisse, or universality assertions. -/
 structure FinitePerfectAdicActualNormalization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -94,26 +95,7 @@ structure FinitePerfectAdicActualNormalization
       (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op
 
 /-- Descend actual finite quotients and compare their specified transitions with the
-explicit constant diagram after forgetting finite scalars. This is the actual-quotient
-and scalar-comparison part of the argument, before constructing any Isom-presheaf map.
-
-Source: Stacks Project, Tag 09C6, the finite quotient levels and their consecutive
-normalization maps; Tag 09AL, constructible derived comparison; Tag 06YY, balancing.
-
-
-For a pro-etale U over the chart, realize a fixed finite-coefficient sheaf as a module
-over the finite quotient ring sheaf, using the locally bijective constant-scalar
-unit. Restrict its scalars along the completed-ring projection, and then restrict
-along W to U. These exact functors localized termwise give realization. Restriction
-of scalars in two steps gives scalar. The descent isomorphism of K gives actual;
-the constant-sheaf comparison and universe lift give model for the explicitly
-constructed constant algebraic level. The compatibility equations for phi identify
-the two composites of coefficient homomorphisms. Their termwise restriction
-comparisons, localized on complexes, identify the two realized consecutive arrows
-with the strict actual and model transitions. These are actual_normalized and
-model_normalized. All comparisons are the canonical ones, fixed by the scalar units;
-no simultaneous marking or inverse limit is chosen. The argument remains valid for
-zero rings and empty charts, where the stalk assertion has no geometric point. -/
+explicit constant diagram after forgetting finite scalars. -/
 theorem finitePerfectAdic_actual_normalization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

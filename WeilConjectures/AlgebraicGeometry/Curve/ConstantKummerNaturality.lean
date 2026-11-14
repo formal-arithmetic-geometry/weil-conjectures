@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, Kummer naturality in the proper and affine
-cases. -/
+/-- Naturality of the Kummer sequence, in primitive-root coordinates, under algebraically
+closed field extension of a connected curve, in the proper and affine cases. -/
 theorem IsConnectedCurve.constant_kummer_baseChange_naturality
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

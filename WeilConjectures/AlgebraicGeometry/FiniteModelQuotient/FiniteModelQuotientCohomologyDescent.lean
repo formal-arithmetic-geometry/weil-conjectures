@@ -45,7 +45,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 import WeilConjectures.Topology.ConstructibleIsRetrocompact
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! # Descent of finite-model quotient cohomology -/
+/-! # Descent of finite-model quotient cohomology
+
+## References
+
+* [Stacks Project, Tag 09AJ](https://stacks.math.columbia.edu/tag/09AJ)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -418,10 +423,7 @@ private theorem chart_model (T : Scheme.{u}) (n a b : ℕ)
     (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n)))).map_isZero hZ)⟩,
     fun _ _ ↦ hZ⟩
 
-/-- Descent of the local finite quotient calculation to cohomology sheaves.
-
-Source: blueprint latest, ctf-equals-bc, Locality and Strata; Stacks Tag 09AJ.
--/
+/-- Descent of the local finite quotient calculation to cohomology sheaves. -/
 theorem cohomology_descent
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]
     (M : AdicCompletion.Modules l E V)

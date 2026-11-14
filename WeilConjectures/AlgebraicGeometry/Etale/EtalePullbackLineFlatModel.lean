@@ -37,12 +37,21 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 /-!
 # Flat constructible pullback and line models
 
-Source: Stacks Project, Tag 0963, lemma-pullback-ctf, with the explicit termwise
-line, signed shift, representative comparison and pulled-back trivializing witnesses.
+Pullback of flat constructible models, with the explicit termwise line, signed shift,
+representative comparison and pulled-back trivializing witnesses.
 
 The comparison is defined first in the derived-to-model direction using the lax
 monoidal localization map. Its invertibility specifies its inverse uniquely, giving
 the model-to-derived arrow of the statement without choosing an arbitrary isomorphism.
+
+## Implementation details
+
+* The only local instance in `etalePullbackLineAssertions` is lexically inside that
+  definition and is the canonical sheaf tensor structure.
+
+## References
+
+* Stacks Project, Tags 0963, 06YU, 0FPQ, 095G, 095I, 03RZ and 06YQ
 -/
 
 @[expose] public section
@@ -53,8 +62,7 @@ universe u uA vA wA
 
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
-/-- Localization's actual tensor comparison with a shifted single sheaf.
-Source: Stacks Project Tags 06YU and 0FPQ. -/
+/-- Localization's actual tensor comparison with a shifted single sheaf. -/
 noncomputable def etaleLineRepresentativeComparison
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
@@ -104,8 +112,7 @@ private theorem line_comparison_isIso
   dsimp only [etaleLineRepresentativeComparison]
   infer_instance
 
-/-- Specialize the canonical comparison to the existing small-etale tensor structures.
-Source: Stacks Project Tag 0963 and Tag 06YU. -/
+/-- Specialize the canonical comparison to the existing small-etale tensor structures. -/
 noncomputable def etaleLineRepresentativeComparisonOnSite
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -117,8 +124,7 @@ noncomputable def etaleLineRepresentativeComparisonOnSite
     (E : Sheaf X.smallEtaleTopology A) (r : ℤ) :=
   etaleLineRepresentativeComparison P K h E r
 
-/-- Invertibility of the canonical representative comparison on the small etale site.
-Source: Stacks Project Tags 0963 and 06YU. -/
+/-- Invertibility of the canonical representative comparison on the small etale site. -/
 def etaleLineRepresentativeComparisonIsIsoOnSite
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -135,8 +141,7 @@ namespace AlgebraicGeometry.Etale
 variable (R : Type (u + 1)) [CommRing R]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The termwise inverse image, tensor with the specified line and cochain shift.
-Source: Stacks Project Tag 0963, finite-complex argument. -/
+/-- The termwise inverse image, tensor with the specified line and cochain shift. -/
 noncomputable def etalePullbackLineModel
     (C : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
     (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (r : ℤ) :
@@ -145,8 +150,7 @@ noncomputable def etalePullbackLineModel
     (ModuleCat.{u + 1} R)) E).mapHomologicalComplex (.up ℤ)).obj
       (((upperStar (ModuleCat.{u + 1} R) f).mapHomologicalComplex (.up ℤ)).obj C))⟦r⟧
 
-/-- The target is the exact derived inverse image of K tensored with the shifted line.
-Source: Stacks Project Tag 0963, constant-coefficient derived pullback. -/
+/-- The target is the exact derived inverse image of K tensored with the shifted line. -/
 noncomputable def etalePullbackLineTarget (K : DerivedCategoryModule R Y)
     (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (r : ℤ) :
     DerivedCategoryModule R X :=
@@ -154,8 +158,7 @@ noncomputable def etalePullbackLineTarget (K : DerivedCategoryModule R Y)
     ((upperStar (ModuleCat.{u + 1} R) f).mapDerivedCategory.obj K)).obj
       (((_root_.DerivedCategory.singleFunctor _ 0).obj E)⟦r⟧)
 
-/-- Exact inverse image's localization comparison, using the prescribed representative.
-Source: Stacks Project Tag 0963, exact constant-coefficient inverse image. -/
+/-- Exact inverse image's localization comparison, using the prescribed representative. -/
 noncomputable def etalePullbackRepresentative
     (C : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
     (K : DerivedCategoryModule R Y) (e : _root_.DerivedCategory.Q.obj C ≅ K) :
@@ -168,8 +171,7 @@ noncomputable def etalePullbackRepresentative
 /-- The canonical representative comparison, in the derived-to-model direction.
 It uses the specified isomorphism Q(C) = K, exact pullback's localization comparison,
 the lax monoidal map of Q, the total-tensor/single-complex identification and the
-cochain shift. Its inverse, when invertible, is the required representative-defined map.
-Source: Stacks Project Tags 0963, 06YU and 0FPQ. -/
+cochain shift. Its inverse, when invertible, is the required representative-defined map. -/
 noncomputable def etalePullbackLineComparison
     (C : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
     (K : DerivedCategoryModule R Y) (e : _root_.DerivedCategory.Q.obj C ≅ K)
@@ -179,8 +181,7 @@ noncomputable def etalePullbackLineComparison
     ((upperStar (ModuleCat.{u + 1} R) f).mapDerivedCategory.obj K)
     (etalePullbackRepresentative R f C K e) E r
 
-/-- The common refinement of the prescribed pulled-back cover and the line's cover.
-Source: Stacks Project Tags 095G and 095I, fibre products of trivializing covers. -/
+/-- The common refinement of the prescribed pulled-back cover and the line's cover. -/
 noncomputable def etalePullbackLineCover (S : Scheme.Stratification Y) (k : Fin S.n)
     (U : Scheme.Cover.{u} Scheme.etalePrecoverage (S.domain k))
     (V : Scheme.Cover.{u} Scheme.etalePrecoverage X) :
@@ -189,9 +190,7 @@ noncomputable def etalePullbackLineCover (S : Scheme.Stratification Y) (k : Fin 
     (V.pullback₂ ((S.pullback f).immersion k))
 
 /-- All conclusions, including arbitrary prescribed cohomology stratifications and
-finite module values on the actual common refinement. The only local instance here is
-lexically inside this definition and is the canonical sheaf tensor structure.
-Source: Stacks Project Tags 0963, 095G, 095I, 03RZ, 06YQ and 06YU. -/
+finite module values on the actual common refinement. -/
 noncomputable def etalePullbackLineAssertions [Finite R]
     (C : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
     (K : DerivedCategoryModule R Y) (e : _root_.DerivedCategory.Q.obj C ≅ K)
@@ -241,10 +240,7 @@ noncomputable def etalePullbackLineAssertions [Finite R]
 
 /-- Pullback, termwise line tensor and arbitrary integer shift preserve flat constructible
 models, with support and Tor interval [a-r,b-r], the canonical derived comparison and
-all prescribed pulled-back cohomology-stratum trivializations.
-
-Source: Stacks Project Tag 0963, lemma-pullback-ctf, explicit finite-complex strengthening.
--/
+all prescribed pulled-back cohomology-stratum trivializations. -/
 theorem etale_pullback_line_flat_model [Finite R]
     [IsNoetherian X] [IsNoetherian Y]
     (C : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)

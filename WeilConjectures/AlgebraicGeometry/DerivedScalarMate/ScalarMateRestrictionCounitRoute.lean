@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The restricted derived scalar mate on representatives
 
-Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -260,8 +262,7 @@ private theorem scalarMate_counit {Z T : Scheme.{u}} (f : Z ⟶ T)
   simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
   simpa only [Category.assoc, proEtaleRingDerivedPullbackFactors] using h.symm
 
-/-- A unit-normalized ordinary scalar comparison computes the restricted derived mate.
-Source: Stacks Tags 06YY and 07A6. -/
+/-- A unit-normalized ordinary scalar comparison computes the restricted derived mate. -/
 theorem scalarMate_restriction_counit_route {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (χ : proEtaleRingExtension a ⋙

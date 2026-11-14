@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Finite prime-field filtrations of constructible module sheaves
 
-Source: Stacks Project, Theorem 03SC, second proof paragraph; Lemma 03RZ.
+## References
+
+* Stacks Project, Tags 03SC, 03RZ
 -/
 
 @[expose] public section
@@ -21,11 +23,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The finite extension closure of constructible module sheaves whose underlying
-abelian sheaf is a constructible prime-field sheaf.
-
-This inductive predicate records a finite extension tree, without any cohomological
-assertion. A zero object is included as a prime-field factor with zero value.
-Source: Stacks Project, Theorem 03SC, second proof paragraph. -/
+abelian sheaf is a constructible prime-field sheaf. A zero object counts as a prime-field
+factor. -/
 inductive HasPrimeFieldFiltration (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) → Prop
   | prime (r : ℕ) [Fact r.Prime]

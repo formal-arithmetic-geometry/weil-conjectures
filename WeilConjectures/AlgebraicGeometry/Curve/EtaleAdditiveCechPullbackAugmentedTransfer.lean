@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalTransfer
 
 /-! # Augmentation-preserving pullback maps of the additive Čech complexes
-Source: Stacks Project, Tags 01FD, 01FB and 03P2. -/
+
+## References
+
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
+* Stacks Project, Tags 01FB, 03P2
+-/
 
 @[expose] public section
 
@@ -58,9 +63,7 @@ private theorem exists_structural_resolution_comparison
         ((I.exact_succ n).comp_descToInjective _ hz').symm⟩)
   exact ⟨b, hb₀⟩
 
-/-- Pullback and refinement give augmentation-preserving global and total cochain maps.
-Source: Stacks Project, Tag 01FD, proof of Lemma 20.15.1 (double-complex maps),
-Tag 01FB, resolution comparison, and Tag 03P2, structural-function coordinates. -/
+/-- Pullback and refinement give augmentation-preserving global and total cochain maps. -/
 theorem exists_additiveCech_pullback_augmented_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

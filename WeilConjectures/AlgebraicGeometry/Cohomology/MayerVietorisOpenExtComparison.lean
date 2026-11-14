@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTranspor
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 /-! # Free abelian sheaves for a two-open cover
 
-Source: Stacks Project, Tag 01EB.
+## References
+
+* Stacks Project, Tag 01EB and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -20,9 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
-/-- Compatible Ext presentations for a single cohomology term.
-Source: Stacks Project, Tag 01EB and Section 01F7.
--/
+/-- Compatible Ext presentations for a single cohomology term. -/
 theorem H.openFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :
     let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
     let G := invImage (baseChangeFst (S := S) f)

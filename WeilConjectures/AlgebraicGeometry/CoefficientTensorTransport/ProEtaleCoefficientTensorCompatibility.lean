@@ -13,6 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullb
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 
 /-! # Compatibility of coefficient restriction with tensor pullback
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,14 +33,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   proEtaleRingDerivedPullbackFactors CoefficientTensorChain.complexPullback
   pullback SheafOfModules.monoidalCategory
 
-/-- The normalized coefficient tensor comparison, including its geometric compatibility.
-
-Source: Stacks Tags 03EL and 07A4. Construct the coefficient tensor comparison by
-representative descent of the chain tensor square. On a flat K-flat pair, the three
-representative normalization equations reduce the desired square to that chain
-square. Full faithfulness of restriction to resolving representatives extends the
-square to all derived pairs.
--/
+/-- The normalized coefficient tensor comparison, including its geometric compatibility. -/
 theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

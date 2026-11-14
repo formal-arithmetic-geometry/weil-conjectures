@@ -10,7 +10,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTran
 
 /-! # The ordinary quotient arrows in fixed-scalar chart coordinates
 
-Source: Stacks Project, Tags 03CY and 09C6.
+## References
+
+* Stacks Project, Tags 03CY, 099R, 06YY and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- Ordinary fixed-scalar coordinates of the finite quotient on the chart: ordinary scalar
 extension to the finite quotient ring, followed by the fixed coefficient encoding and
 restriction to the chart. Its termwise application to a K-flat complex computes
-`finitePerfectAdicQuotientCoordinates`.
-Source: Stacks Tags 03CY, 099R and 06YY. -/
+`finitePerfectAdicQuotientCoordinates`. -/
 def finitePerfectAdicQuotientStrictCoordinates
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -61,8 +62,7 @@ abbrev finitePerfectAdicStepRestrict (X : Scheme.{t}) {A : Type t} [CommRing A]
 
 /-- A consecutive arrow of fixed-scalar coordinates is the ordinary quotient arrow: on every
 chart object it sends the sheafified pure tensor `b ⊗ x` to `q(b) ⊗ x`. Since sheafified pure
-tensors generate, this determines the arrow uniquely.
-Source: Stacks Project, Tag 09C6. -/
+tensors generate, this determines the arrow uniquely. -/
 def FinitePerfectAdicQuotientTransition
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -205,9 +205,8 @@ def finitePerfectAdicQuotientStrictTransition
     intro x
     exact (congrArg (fun f ↦ f.val.app (op (finitePerfectAdicChartObject V U.unop)) x) hn)
 
-/-- The ordinary quotient arrows exist between the fixed-scalar coordinates. This uses the
-compatibility of the finite comparisons `φ` with the quotient maps.
-Source: Stacks Project, Tags 03CY and 09C6. -/
+/-- The ordinary quotient arrows exist between the fixed-scalar coordinates, given the
+compatibility of the finite comparisons `φ` with the quotient maps. -/
 theorem finitePerfectAdic_quotient_transition_exists
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

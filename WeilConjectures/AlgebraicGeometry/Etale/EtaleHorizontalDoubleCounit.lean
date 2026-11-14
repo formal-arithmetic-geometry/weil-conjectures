@@ -16,9 +16,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Double counits in an etale-horizontal square
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md, Step 1;
-Stacks Project, Tags 0037, 0DV0, 0F7J, 0F7K, 0F7L and 03S6.
+## References
+
+* Stacks Project, Tags 0037, 0DV0, 0F7J, 0F7K, 0F7L and 03S6
 -/
 
 @[expose] public section
@@ -34,8 +34,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] upperStar etaleLowerShriek
   Functor.mapDerivedCategory derivedEtaleLowerShriekUpperStarAdjunction
 
-/-- The right-adjoint restriction comparison determined by inverse compact-support exchange.
-Source: Stacks Project, Tags 0037 and 0F7L. -/
+/-- The right-adjoint restriction comparison determined by inverse compact-support exchange. -/
 noncomputable def etaleHorizontalCounitRightExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -146,8 +145,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
   (adj' : rightDerivedLowerShriek (ModuleCat.{u + 1} A) h' ⊣ G')
 
 /-- Conjugate the specified inverse delta under the two normalized composite adjunctions.
-This is the map b of the node; the compositor formula is recorded below.
-Source: Stacks Project, Tags 0037 and 0DV0. -/
+Its compositor formula is `etaleHorizontalDoubleCounit_compositors`. -/
 noncomputable def etaleHorizontalDoubleCounitIso :
     G ⋙ (upperStar (ModuleCat.{u + 1} A) e').mapDerivedCategory ≅
       (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory ⋙ G' :=
@@ -161,8 +159,7 @@ noncomputable def etaleHorizontalDoubleCounitIso :
 
 set_option maxRecDepth 10000 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Double-counit equality, single-counit equality, and the unique adjunct description.
-Source: blueprint co-smooth etale locality, Step 1; Stacks 0037, 0DV0 and 0F7K. -/
+/-- Double-counit equality, single-counit equality, and the unique adjunct description. -/
 theorem etaleHorizontalDoubleCounit :
     ∀ K : DerivedCategoryModule A Y,
       ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map
@@ -241,8 +238,7 @@ theorem etaleHorizontalDoubleCounit :
 set_option linter.unusedSectionVars false in
 /-- The explicit formula rho inverse, inverse first conjugate compositor, second
 conjugate compositor, and rho. A common right adjoint for the equal composites is
-arbitrary, and both occurrences use the same adjunction.
-Source: Stacks 0037 and 0DV0, blueprint co-smooth etale locality Step 1. -/
+arbitrary, and both occurrences use the same adjunction. -/
 theorem etaleHorizontalDoubleCounit_compositors
     {Ge : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A Y'}
     {Ge' : DerivedCategoryModule A X ⥤ DerivedCategoryModule A X'}
@@ -277,8 +273,7 @@ theorem etaleHorizontalDoubleCounit_compositors
   simp only [etaleHorizontalSupportMateDelta, Iso.trans_inv, Iso.symm_inv,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Category.assoc]
 
-/-- Equality of natural transformations, making naturality in K explicit.
-Source: blueprint co-smooth etale locality Step 1 and Stacks 0037. -/
+/-- Equality of natural transformations, making naturality in K explicit. -/
 theorem etaleHorizontalDoubleCounit_exchange :
     (etaleHorizontalDoubleCounitIso A sq N adj adj').hom =
       etaleHorizontalCounitRightExchange A (IsPullback.of_iso_pullback sq.toCommSq

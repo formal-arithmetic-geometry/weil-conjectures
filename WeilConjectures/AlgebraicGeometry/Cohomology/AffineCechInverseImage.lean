@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImage
 
 /-! # Inverse image on affine Čech cocycles
 
-Source: Stacks Project, Tags 01FD, 01ET and 01XD.
+## References
+
+* Stacks Project, Tags 01FD, 01ET and 01XD
 -/
 
 @[expose] public section
@@ -24,11 +26,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Leray comparisons respect any inverse-image coefficient map on matching cocycles.
-This is a statement about sections and inverse image only, without tensor products.
-
-Source: Stacks Project, Tag 01FD (functoriality of the Čech comparison),
-Tags 01ET and 01XD (affine acyclicity). -/
+/-- Leray comparisons respect any inverse-image coefficient map on matching cocycles. -/
 theorem exists_affineCech_inverseImage
     {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u}
     (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S))

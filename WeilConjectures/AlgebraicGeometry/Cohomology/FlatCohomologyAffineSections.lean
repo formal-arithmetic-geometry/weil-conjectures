@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Canonical base change of sections on an affine open
 
-Source: Stacks Project, Tags 02KG and 02KH.
+## References
+
+* Stacks Project, Tags 02KG and 02KH
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}}
 
-/-- Base change of sections on one affine open, with its canonical pure-tensor formula.
-Source: Stacks Project, Tag 02KG, used in the separated-case proof of Tag 02KH. -/
+/-- Base change of sections on one affine open, with its canonical pure-tensor formula. -/
 theorem exists_baseChange_affine_section_equiv (f : X ⟶ Spec (.of R))
     (W : X.Opens) (hW : IsAffineOpen W) (M : X.Modules) [M.IsQuasicoherent]
     (W' : (baseChangedScheme (S := S) f).Opens)

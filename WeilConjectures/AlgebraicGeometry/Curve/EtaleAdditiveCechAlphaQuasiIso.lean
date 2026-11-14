@@ -12,7 +12,11 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 
 /-! # Global restriction augmentation quasi-isomorphism
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2. -/
+
+## References
+
+* Stacks Project, Tag 01EQ (Lemma 20.11.2)
+-/
 
 
 @[expose] public section
@@ -85,8 +89,7 @@ private theorem restriction₀_d
   rw [hh]
   exact add_neg_cancel _
 
-/-- The global restriction augmentation is a quasi-isomorphism of complexes.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation alpha. -/
+/-- The global restriction augmentation is a quasi-isomorphism of complexes. -/
 theorem etaleAdditiveCech_alpha_quasiIso
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (hcover : iSup U = ⊤) (I : InjectiveResolution X.etaleAdditiveSheaf) :

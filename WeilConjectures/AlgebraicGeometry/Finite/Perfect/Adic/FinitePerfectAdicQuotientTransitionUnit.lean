@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTransitionU
 The unit of ordinary scalar extension along `R → R_(n+1)`, followed by the quotient transition,
 is the unit along `R → R_n`: both send a section `x` to `1 ⊗ x`.
 
-Source: Stacks Project, Tags 03EK and 09C6.
+## References
+
+* Stacks Project, Tags 03EK and 09C6
 -/
 
 @[expose] public noncomputable section

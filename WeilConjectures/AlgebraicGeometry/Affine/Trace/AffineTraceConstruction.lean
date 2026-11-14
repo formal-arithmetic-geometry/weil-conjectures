@@ -211,6 +211,12 @@ isomorphisms. Neither the counit nor its base-change map is chosen independently
 - `affineTraceCounit`: its actual counit at the constant coefficient complex.
 - `affineTraceExchange`: the coordinatewise pasted compact-support exchange.
 - `exists_affineSpaceTopTrace`: invertibility and arbitrary Noetherian base change.
+
+## Implementation details
+
+* `affineTraceComposeAdjunction` is Mathlib's composite adjunction, with the same unit and
+  counit; its explicit counit components avoid expanding the associator implementation in
+  coordinate inductions.
 -/
 
 @[expose] public noncomputable section
@@ -237,8 +243,7 @@ abbrev affineTraceLineLeft (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
   affineTraceOpenLeft A S ⋙ ordinaryFinitePushforward A (ProjectiveLine S ↘ S)
 
 /-- The right functor obtained by restricting the normalized projective-line right
-functor to the standard affine chart. Source: blueprint proposition-purity-vector-bundles, Step
-5(b). -/
+functor to the standard affine chart. -/
 abbrev affineTraceLineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) :
     DerivedCategoryModule A S ⥤ DerivedCategoryModule A (AffineSpace PUnit.{u + 1} S) :=
@@ -254,14 +259,12 @@ def affineTraceOpenAdjunction (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
 
 attribute [irreducible] affineTraceOpenAdjunction
 
-/-- Ordered left composites for a family of categories.
-Source: Mathlib adjunction composition. -/
+/-- Ordered left composites for a family of categories. -/
 abbrev affineTraceLeftTower {C : ℕ → Type*} [∀ d, Category (C d)]
     (L : ∀ d, C (d + 1) ⥤ C d) : (d : ℕ) → C d ⥤ C 0 :=
   Nat.rec (motive := fun d ↦ C d ⥤ C 0) (𝟭 _) (fun d F ↦ L d ⋙ F)
 
-/-- Ordered right composites for a family of categories.
-Source: Mathlib adjunction composition. -/
+/-- Ordered right composites for a family of categories. -/
 abbrev affineTraceRightTower {C : ℕ → Type*} [∀ d, Category (C d)]
     (R : ∀ d, C d ⥤ C (d + 1)) : (d : ℕ) → C 0 ⥤ C d :=
   Nat.rec (motive := fun d ↦ C 0 ⥤ C d) (𝟭 _) (fun d G ↦ G ⋙ R d)
@@ -279,9 +282,7 @@ abbrev affineTraceRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
   affineTraceRightTower (C := fun d ↦ DerivedCategoryModule A (affineTraceTower S d))
     (fun d ↦ affineTraceLineRight A N hA (affineTraceTower S d))
 
-/-- Composite adjunction with its counit written componentwise.
-This is Mathlib's composite, with the same unit and counit; the explicit components
-avoid expanding the associator implementation in coordinate inductions. -/
+/-- Composite adjunction with its counit written componentwise. -/
 def affineTraceComposeAdjunction
     {C : Type*} {E : Type*} {F : Type*}
     [Category C] [Category E] [Category F]
@@ -308,8 +309,7 @@ def affineTraceComposeAdjunction
         rw [h]
         exact (a.comp b).right_triangle_components X }
 
-/-- Component formula for the explicit composite.
-Source: Mathlib `Adjunction.comp_counit_app`. -/
+/-- Component formula for the explicit composite. -/
 theorem affineTraceComposeAdjunction_counit
     {C : Type*} {E : Type*} {F : Type*}
     [Category C] [Category E] [Category F]
@@ -319,8 +319,7 @@ theorem affineTraceComposeAdjunction_counit
       L'.map (a.counit.app (R'.obj X)) ≫ b.counit.app X := by
   rfl
 
-/-- The explicit-component presentation is the original composite adjunction.
-Source: Mathlib `Adjunction.ext` and `Adjunction.comp_counit_app`. -/
+/-- The explicit-component presentation is the original composite adjunction. -/
 theorem affineTraceComposeAdjunction_eq
     {C : Type*} {E : Type*} {F : Type*}
     [Category C] [Category E] [Category F]
@@ -350,8 +349,7 @@ theorem affineTraceLineAdjunction_counit (A : Type (u + 1)) [CommRing A] (N : �
   unfold affineTraceLineAdjunction
   exact affineTraceComposeAdjunction_counit _ _ _
 
-/-- Ordered composite adjunctions in a family of abstract categories.
-Source: Mathlib adjunction composition. -/
+/-- Ordered composite adjunctions in a family of abstract categories. -/
 def affineTraceAdjunctionTower {C : ℕ → Type*} [∀ d, Category (C d)]
     {L : ∀ d, C (d + 1) ⥤ C d} {R : ∀ d, C d ⥤ C (d + 1)}
     (a : ∀ d, L d ⊣ R d) : (d : ℕ) →
@@ -359,8 +357,7 @@ def affineTraceAdjunctionTower {C : ℕ → Type*} [∀ d, Category (C d)]
   Nat.rec (motive := fun d ↦ affineTraceLeftTower L d ⊣ affineTraceRightTower R d)
     Adjunction.id (fun d b ↦ affineTraceComposeAdjunction (a d) b)
 
-/-- Successor counit formula, checked before specializing the category instances.
-Source: Mathlib `Adjunction.comp_counit_app`. -/
+/-- Successor counit formula for the ordered composite adjunctions. -/
 theorem affineTraceAdjunctionTower_counit_succ {C : ℕ → Type*} [∀ d, Category (C d)]
     {L : ∀ d, C (d + 1) ⥤ C d} {R : ∀ d, C d ⥤ C (d + 1)}
     (a : ∀ d, L d ⊣ R d) (d : ℕ) (K : C 0) :
@@ -536,8 +533,7 @@ theorem affineTraceExchangeTower_succ {C C' : ℕ → Type*}
   simp [affineTraceExchangeTower]
 
 /-- The canonical exchange of the ordered coordinate tower, obtained by pasting the
-proper/open exchanges of its coordinate steps. Source: blueprint proposition-purity-vector-bundles,
-Step 6. -/
+proper/open exchanges of its coordinate steps. -/
 def affineTraceExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) (d : ℕ)
     (M : DerivedCategoryModule A (affineTraceTower S d)) :
@@ -599,7 +595,7 @@ def affineTraceCompositeRightSquareIso
   affineTraceRightSquareIso s (R.obj K) c
 
 /-- Canonical pullback of the one-coordinate right functor, with the normalized
-roots-of-unity Tate comparison. Source: blueprint proposition-purity-vector-bundles, Step 5(b). -/
+roots-of-unity Tate comparison. -/
 abbrev affineTraceLineRightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))

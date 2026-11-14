@@ -60,7 +60,7 @@ def finiteP1CoordinateImage (n : ℕ)
     (finiteKummerLineCoordinate l E n e hS c).inv
 
 /-- The actual composite-comparison image of a local ordinary arrow in the
-fixed original finite Hom. Source: single and shift comparison. -/
+fixed original finite Hom. -/
 def finiteP1LocalCoordinateImage (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (X : Scheme.{u}) {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)

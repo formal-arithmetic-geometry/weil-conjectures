@@ -20,6 +20,10 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 
 The coefficient functor, its tensor structure, and its pullback comparison are
 constructed here. The remaining equality is a tensor equation on the abelian hearts.
+
+## References
+
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
 -/
 
 @[expose] public noncomputable section
@@ -309,10 +313,7 @@ attribute [local irreducible] heartSectionsIso coefficientHeartEncoding
 
 -- Retain the finite discrete hypotheses of the existing public statement.
 set_option linter.unusedSectionVars false in
-/-- The normalized mate respects the balanced tensor comparisons on the hearts.
-
-Source: blueprint proper-base-change-finite, transport paragraph and clause (3),
-and step 2 of lem-sfb-finite-coefficient-tensor-pullback-encoding; Stacks 03D3. -/
+/-- The normalized mate respects the balanced tensor comparisons on the hearts. -/
 theorem coefficientHeartPullIso_monoidal
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y : Scheme.{u}} (p : X ⟶ Y) (EX : Encoding A X) (EY : Encoding A Y) :

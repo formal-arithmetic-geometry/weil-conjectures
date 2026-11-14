@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulFiniteQ
 
 /-! # Exact finite quotient realization over completed coefficients
 
-Source: Stacks Project, Tags 099M, 0921 and 093M.
+## References
+
+* Stacks Project, Tags 099M, 0921, 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -34,10 +36,7 @@ local instance finiteQuotientRealizationCochainMonoidalStruct
 
 /-- Exactness and the normalized finite quotient comparison for the concrete
 constant-module/scalar-extension functor. This statement has no exterior complexes,
-augmentation maps, cones, or inverse limits of complexes.
-
-Source: Stacks Project, sites-modules.tex, Tags 093J--093M, and proetale.tex,
-proof of lemma-naive-completion (099M). -/
+augmentation maps, cones, or inverse limits of complexes. -/
 theorem completedKoszulFiniteQuotientRealization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :

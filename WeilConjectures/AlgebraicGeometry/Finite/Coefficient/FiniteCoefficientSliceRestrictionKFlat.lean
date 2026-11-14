@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSli
 
 /-! # K-flatness of fixed scalar chart coordinates
 
-Source: Stacks Project, Tags 03CY, 06YN and 03DH.
+## References
+
+* Stacks Project, Tags 03CY, 06YN, 0E8K, 03DH
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The fixed-scalar encoding followed by restriction to a weakly etale chart carries K-flat
 complexes over the constant ring sheaf to K-flat complexes of sheaves of `B`-modules on the
-chart.
-Source: Stacks Project, Tags 03CY, 06YN, 0E8K and 03DH. -/
+chart. -/
 theorem finiteCoefficientSliceRestriction_kFlat_of_constant
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

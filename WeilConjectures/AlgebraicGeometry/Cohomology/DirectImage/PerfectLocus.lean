@@ -12,6 +12,13 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semiconti
 
 On an open over which `R f_* ℱ` is computed by a finite free complex, the higher direct images
 at the points of the perfect locus are locally free and commute with base change.
+
+## Implementation details
+
+* `isZero_higherDirectImage_of_isPullback`, together with
+  `isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`, is the concrete form of
+  "`R f'_* ℱ'` is perfect of amplitude `[i, i]`", stated without a derived category of
+  `X.Modules`.
 -/
 
 @[expose] public section
@@ -175,12 +182,7 @@ v          v
 T' --g---> T
 ```
 with `ℱ'` the pullback of `ℱ` to `X'`. Then the higher direct images `R^q f'_* ℱ'` vanish for
-`q ≠ i`.
-
-Together with
-`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`
-this is the concrete form of "`R f'_* ℱ'` is perfect of amplitude `[i, i]`", there being no
-derived category of `X.Modules` available. -/
+`q ≠ i`. -/
 theorem isZero_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f) {i : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)

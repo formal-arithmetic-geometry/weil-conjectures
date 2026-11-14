@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCocha
 
 /-! # Degree-zero normalization under inverse image
 
-Source: Stacks Project, Tag 01FD, section faces of Lemma 20.15.1;
-Tag 01EQ, degree-zero restriction augmentation.
+## References
+
+* Stacks Project, Tag 01FD (Lemma 20.15.1) and Tag 01EQ
 -/
 
 @[expose] public section
@@ -22,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian TopologicalSpac
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- Restricting a global section commutes with the coefficient Čech map.
-Source: Stacks Project, Tags 01EQ and 01FD, augmentation naturality. -/
+/-- Restricting a global section commutes with the coefficient Čech map. -/
 private theorem cech_augmentation_naturality
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens)
@@ -58,8 +58,7 @@ private theorem cech_augmentation_naturality
     HomologicalComplex.comp_liftCycles_assoc]
   simp only [h]
 
-/-- The canonical constant-sheaf comparison transposes to the inverse-image unit.
-Source: Stacks Project, Tag 01FD; uniqueness of the constant-sheaf adjunction. -/
+/-- The canonical constant-sheaf comparison transposes to the inverse-image unit. -/
 private theorem constant_adjunct_pullback
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
@@ -106,8 +105,7 @@ private theorem constant_adjunct_pullback
     ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app
       F).hom.app (op ⊤) ≫ m) (((invImage g).obj F).obj.map_id (op ⊤)).symm
 
-/-- In degree zero, exact inverse image acts on sections by the adjunction unit.
-Source: Stacks Project, Tag 01FD; the degree-zero Ext description of sections. -/
+/-- In degree zero, exact inverse image acts on sections by the adjunction unit. -/
 private theorem ext_zero_sections
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
@@ -130,9 +128,7 @@ private theorem ext_zero_sections
   refine h.trans ?_
   rfl
 
-/-- Degree-zero Čech pullback agrees with the constant-sheaf Ext pullback.
-
-Source: Stacks Project, Tags 01FD and 01EQ, degree-zero section augmentations. -/
+/-- Degree-zero Čech pullback agrees with the constant-sheaf Ext pullback. -/
 theorem cechInverseImage_degree_zero
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)

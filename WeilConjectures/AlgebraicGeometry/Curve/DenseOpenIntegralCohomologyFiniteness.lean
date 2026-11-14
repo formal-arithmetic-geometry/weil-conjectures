@@ -20,7 +20,10 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Dense-open finiteness with integral torsion coefficients
 
-Source: Stacks Project, Tag 0GJA, proof, using Tag 095L. -/
+## References
+
+* Stacks Project, Tag 0GJA, proof (five-term sequence), using Tag 095L.
+-/
 
 @[expose] public section
 
@@ -37,8 +40,7 @@ private noncomputable def cohomologyEquiv {X : Scheme.{u}}
   right_inv x := by rw [← Sheaf.H.map_comp_apply, e.inv_hom_id]; simp
 
 /-- Finiteness of all cohomology groups transfers across the dense-open counit
-for a constructible torsion abelian sheaf, encoded with integral coefficients.
-Source: Stacks Project, Tag 0GJA, proof (five-term sequence), with Tag 095L. -/
+for a constructible torsion abelian sheaf, encoded with integral coefficients. -/
 theorem dense_open_integral_cohomology_finiteness {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

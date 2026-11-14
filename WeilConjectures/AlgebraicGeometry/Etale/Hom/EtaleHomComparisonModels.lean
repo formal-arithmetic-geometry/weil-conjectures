@@ -24,13 +24,25 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # Models for the étale scalar internal-Hom comparison
 
-Source: blueprint `lemma-change-coefficients-internal-hom--1`, proof paragraph 2; Stacks 06YY, 07A4,
-08J9 and 08JC.
-
 The scalar extension functor and the derived internal Hom are the published étale
 constructions.  The comparison is specified by its tensor--Hom transpose, so that
 the statement retains the actual evaluation map and does not choose an unrelated
 map between the two Hom objects.
+
+## Implementation details
+
+* `IsEtaleHomTensorCanonical`: the ordinary oplax structure is the mate of the fixed lax
+  restriction-of-scalars structure, so it cannot be twisted by per-object automorphisms.
+* `EtaleHomShiftNormalization`: the quadratic sign `ε(n) = ((n * (n + 1)) / 2).negOnePow`
+  satisfies ε(a+b) = (-1)^(a*b) ε(a) ε(b), which compensates c(a+b) = (-1)^(a*b) c(a) c(b)
+  for the tensor shift cancellations, so the normalized family obeys the `CommShift`
+  addition axiom (a multiplicative factor such as `n.negOnePow` would not). The factor is
+  -1 for n = 1, as the cone triangle's connecting morphism in the opposite triangulated
+  convention requires.
+
+## References
+
+* Stacks Project, Tags 05SU, 06YY, 07A4, 08J9, 08JC
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +76,7 @@ abbrev EtaleHomRight (X : Scheme.{u}) (φ : A →+* B)
   (scalarExtension φ X).op ⋙
     (derivedHom (ModuleCat.{u + 1} B) X).flip.obj ((scalarExtension φ X).obj M)
 
-/-- Type of binary tensor comparisons; canonicity is imposed below.
-Source: Stacks 07A4, tensor compatibility. -/
+/-- Type of binary tensor comparisons; canonicity is imposed below. -/
 abbrev EtaleHomTensorComparison (X : Scheme.{u}) (φ : A →+* B) : Type _ :=
   ∀ K L : DerivedCategoryModule A X,
     ((derivedTensor (ModuleCat.{u + 1} B) X).obj ((scalarExtension φ X).obj K)).obj
@@ -86,8 +97,7 @@ variable (C : Type w₁) [Category.{u + 1} C] [Abelian C]
 /-- The binary derived comparison is normalized by the ordinary oplax tensorator.
 The equation is imposed on K-flat complexes with flat terms. Its bottom arrow is
 ordinary scalar balancing, inverse to (x tensor b) tensor (y tensor c) ↦
-(x tensor y) tensor bc. The comparison maps r are the derived-extension counit.
-Source: Stacks 06YY and 07A4, proof step 1 of the node. -/
+(x tensor y) tensor bc. The comparison maps r are the derived-extension counit. -/
 def EtaleHomTensorModelNormalization
     (E : Sheaf X.smallEtaleTopology C ⥤ Sheaf X.smallEtaleTopology D) [E.Additive] [E.IsLeftAdjoint]
     [E.OplaxMonoidal]
@@ -103,10 +113,7 @@ def EtaleHomTensorModelNormalization
 
 end TensorNormalization
 
-/-- Naturality in both tensor variables and the flat-term K-flat normalization.
-The ordinary oplax structure is the mate of the fixed lax restriction-of-scalars
-structure, so it cannot be twisted by per-object automorphisms.
-Source: Stacks 07A4, proof step 1 of the node. -/
+/-- Naturality in both tensor variables and the flat-term K-flat normalization. -/
 def IsEtaleHomTensorCanonical (X : Scheme.{u}) (φ : A →+* B)
     (μ : EtaleHomTensorComparison X φ) : Prop :=
   (∀ {K K' : DerivedCategoryModule A X} (f : K ⟶ K') (L : DerivedCategoryModule A X),
@@ -282,8 +289,7 @@ private theorem extension_preservesKFlatQuasiIso {R S : Type (u + 1)}
     exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
   exact hE
 
-/-- The canonical binary tensor comparison exists uniquely.
-Source: Stacks 06YY and 07A4, proof step 1 of the node. -/
+/-- The canonical binary tensor comparison exists uniquely. -/
 theorem etaleHomTensorComparison_existsUnique (X : Scheme.{u}) (φ : A →+* B) :
     ∃! μ : EtaleHomTensorComparison X φ, IsEtaleHomTensorCanonical X φ μ := by
   let E := ProEtale.etaleSheafExtendScalars φ X
@@ -315,8 +321,7 @@ theorem etaleHomTensorComparison_existsUnique (X : Scheme.{u}) (φ : A →+* B) 
 
 end ScalarTensorProof
 
-/-- The uniquely normalized binary comparison, used in the evaluation transpose.
-Source: Stacks 07A4, proof step 1 of the node. -/
+/-- The uniquely normalized binary comparison, used in the evaluation transpose. -/
 def etaleHomTensorComparison (X : Scheme.{u}) (φ : A →+* B) :
     EtaleHomTensorComparison X φ :=
   (etaleHomTensorComparison_existsUnique X φ).choose
@@ -353,8 +358,7 @@ variable (C : Type w) [Category.{u + 1} C] [Abelian C]
   [MonoidalClosed C] [SymmetricCategory C] [Abelian.HasFunctorialFlatResolution C]
   (X : Scheme.{u})
 
-/-- Canonical cancellation of the two opposite tensor shifts, with the tensor signs.
-Source: Stacks 08JC and the tensor-shift calculation in proof step 4. -/
+/-- Canonical cancellation of the two opposite tensor shifts, with the tensor signs. -/
 def etaleHomTensorShiftCancellation
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) (n : ℤ) :
     ((derivedTensor C X).obj (K⟦-n⟧)).obj (L⟦n⟧) ⟶ ((derivedTensor C X).obj K).obj L :=
@@ -368,13 +372,7 @@ an equivalence. In complex notation it is the signed reindexing of Hom. With the
 tensor shifts composed as in `etaleHomTensorShiftCancellation`, the Hom shift carries
 the explicit factor `((n * (n + 1)) / 2).negOnePow`; on Hom complexes it is then
 f ↦ (-1)^(n*j + n*(n+1)/2) f in degree j, the sign of Mathlib's `Cochain.leftShift`
-by -n. The factor is -1 for n = 1, as the cone triangle's connecting morphism in
-the opposite triangulated convention requires. It satisfies
-ε(a+b) = (-1)^(a*b) ε(a) ε(b), which compensates c(a+b) = (-1)^(a*b) c(a) c(b) for the
-cancellations, so the normalized family obeys the `CommShift` addition axiom
-(a multiplicative factor such as `n.negOnePow` would not). It applies to both
-coefficient Hom functors.
-Source: Stacks 08JC, proof steps 4 and 5. -/
+by -n. It applies to both coefficient Hom functors. -/
 def EtaleHomShiftNormalization
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
     (s : ((derivedHom C X).flip.obj M).CommShift ℤ) : Prop :=
@@ -383,8 +381,7 @@ def EtaleHomShiftNormalization
 end HomShiftNormalization
 
 /-- The scalar shift is the canonical adjoint mate of exact restriction's shift.
-This is the counit-compatible shift, hence on K-flat models the termwise shift.
-Source: Stacks 05SU and 06YY, proof step 1. -/
+This is the counit-compatible shift, hence on K-flat models the termwise shift. -/
 @[instance_reducible]
 def etaleHomScalarCommShift (X : Scheme.{u}) (φ : A →+* B) :
     (scalarExtension φ X).CommShift ℤ :=
@@ -395,8 +392,7 @@ def etaleHomScalarCommShift (X : Scheme.{u}) (φ : A →+* B) :
 The two component equations are chi_Phi = F(s_A) followed by sigma and
 chi_Psi = H_B(sigma inverse,1) followed by s_B. The very same structures make
 both functors triangulated and v a shift-compatible natural transformation;
-therefore its third triangle square includes the connecting map and its sign.
-Source: Stacks 08JC, proof steps 4--6. -/
+therefore its third triangle square includes the connecting map and its sign. -/
 def IsEtaleHomReversedExact (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X)
     (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M) : Prop :=

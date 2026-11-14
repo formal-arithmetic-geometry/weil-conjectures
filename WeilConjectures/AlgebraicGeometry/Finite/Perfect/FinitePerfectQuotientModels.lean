@@ -19,10 +19,12 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # Uniform perfect models of finite quotients
 
-Source: Stacks Tags 09C2 and 094I.
-
 This interface records finite-level models without asserting a completed realization.
 All coefficient identifications are normalized on constant sections.
+
+## References
+
+* Stacks Project, Tags 09C2, 094I, 093M, 09C6, 03DJ, 05RU
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +39,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The normalized comparisons preserve the actual consecutive quotient maps.
-Source: Stacks Tags 093M and 09C6. -/
+/-- The normalized comparisons preserve the actual consecutive quotient maps. -/
 private theorem finitePerfectModelsComparison_step (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -91,8 +92,7 @@ private theorem finitePerfectModelsComparison_step (X : Scheme.{t}) {A : Type t}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The completed scalar map is normalized by the finite quotient comparisons.
-Source: Stacks Tags 093M and 09C6. -/
+/-- The completed scalar map is normalized by the finite quotient comparisons. -/
 private theorem finitePerfectModelsScalar_projection (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -124,8 +124,7 @@ private theorem finitePerfectModelsScalar_projection (X : Scheme.{t}) {A : Type 
   rw [← hq, hnorm]
   exact hs
 
-/-- Normalization on constant sections determines a compatible coefficient system.
-Source: Stacks Tags 093M and 09C6. -/
+/-- Normalization on constant sections determines a compatible coefficient system. -/
 theorem finitePerfectModels_normalized_compatible (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -136,7 +135,7 @@ theorem finitePerfectModels_normalized_compatible (X : Scheme.{t})
     finitePerfectModelsScalar_projection X d φ hnorm⟩
 
 /-- Further restriction is exact and preserves the representative-based derived
-restriction isomorphisms. Source: Stacks Tag 03DJ. -/
+restriction isomorphisms. -/
 private theorem finitePerfectModelsOverMap_exact (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V) :
     (SheafOfModules.overMap.{t + 1} R f).Additive ∧
@@ -161,8 +160,7 @@ private theorem finitePerfectModelsOverMap_exact (X : Scheme.{t})
       ((hS.map_of_exact (SheafOfModules.toSheaf.{t + 1} (R.over V))).map_of_exact H)
   exact ⟨hAdd, (Functor.exact_tfae F).out 1 4 |>.mp h⟩
 
-/-- The exact derived restriction agrees with the chosen representative formula.
-Source: Stacks Tags 03DJ and 05RU. -/
+/-- The exact derived restriction agrees with the chosen representative formula. -/
 private def finitePerfectModelsRestrictionComparison (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
@@ -175,8 +173,7 @@ private def finitePerfectModelsRestrictionComparison (X : Scheme.{t})
   exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
-/-- A local isomorphism persists on every smaller chart.
-Source: Stacks Tag 03DJ. -/
+/-- A local isomorphism persists on every smaller chart. -/
 private theorem finitePerfectModelsRestrictIso_further (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V)
     (M N : DerivedCategory (SheafOfModules.{t + 1} R))
@@ -205,10 +202,7 @@ private theorem finitePerfectModelsRestrictIso_further (X : Scheme.{t})
       finitePerfectModelsRestrictionComparison X R U K
   exact ⟨(c M).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫ c N⟩
 /-- One step of the perfect-residue coefficient filtration preserves local models
-and their fixed Tor interval. No completeness or simultaneous trivialization is assumed.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094I; proetale.tex, Tag 09C2;
-connected etale perfect constancy. -/
+and their fixed Tor interval. -/
 theorem residuePerfect_quotient_models_succ
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
@@ -285,9 +279,7 @@ private theorem finitePerfectModelsOn_mono (X : Scheme.{t}) {A : Type t} [CommRi
     P.isStrictlyLE_of_le b b' hb, hP, e⟩
 
 /-- A perfect constant residue model gives uniformly bounded perfect constant models
-at all finite levels, on etale refinements. Completeness of M is not assumed.
-
-Source: Stacks Tags 094I and 09C2. -/
+at all finite levels, on etale refinements. -/
 theorem residuePerfect_finite_quotient_models
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

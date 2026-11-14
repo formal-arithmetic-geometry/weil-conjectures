@@ -34,7 +34,7 @@ private theorem diagonalUniqueLift
   exact (cancel_mono t).1 (hε.trans he.symm)
 
 /-- Assemble normalized completed data from endpoint comparisons and finite
-comparison equations. Source: diagonal tower limit, paragraph (3). -/
+comparison equations. -/
 theorem diagonalCompleteData_of_bijective
     {A : Type a} [Category.{v} A] [Abelian A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -103,7 +103,7 @@ def diagonalFiniteCycleNormalizationHEq
         (Ext.mk₀.{w} t.hom) (add_zero 2)) (zero_add 2)) (finiteClass n)
 
 /-- Replace homogeneous heterogeneous equalities by equalities in the finite
-normalization. Source: the finite normalization definitions. -/
+normalization. -/
 theorem diagonalFiniteCycleNormalization_of_heq
     {A : Type a} [Category.{v} A] [Abelian A]
     [HasExt.{w} A] [HasExt.{w} (ℕᵒᵖ ⥤ A)]
@@ -119,7 +119,7 @@ theorem diagonalFiniteCycleNormalization_of_heq
   exact ⟨s, t, hs, ht, eq_of_heq he⟩
 
 /-- The strict-system part of the diagonal limit assertion, retaining its Ext
-class and finite normalization. Source: the system and limit interfaces. -/
+class and finite normalization. -/
 def DiagonalStrictDataSpec
     (ℓ : ℕ) {A : Type a} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {B : Type b} [Category.{u} B] [Abelian B]

@@ -17,8 +17,10 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-!
 # Coefficient conversion and the extension-by-zero counit
 
-Source: Stacks Project, Lemma 095L, the counit arrow,
-and Lemma 0GJA, the coefficient convention in its application.
+## References
+
+* Stacks Project, Lemma 095L (the counit arrow)
+* Stacks Project, Lemma 0GJA (the coefficient convention in its application)
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Coefficient conversion identifies the two extension-by-zero objects and their counits.
-Source: Stacks Project, Lemma 095L, the first arrow of
-its sequence; Lemma 0GJA, its use of that arrow. -/
+/-- Coefficient conversion identifies the two extension-by-zero objects and their counits. -/
 theorem exists_lowerShriek_coefficient_counit {X : Scheme.{u}}
     (U : X.Opens) (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

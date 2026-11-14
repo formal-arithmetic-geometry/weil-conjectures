@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Affine neighbourhoods of finite sets on schemes with an ample invertible module
 
-Source: Stacks Project, Properties, Lemma 01ZY, case (3).
+## References
+
+* Stacks Project, Properties, Lemma 01ZY, case (3)
 -/
 
 @[expose] public section
@@ -67,7 +69,6 @@ private theorem exists_basicOpen_between_finite_and_open
     exact hx (hIx hfI)
 
 /-- Every finite subset of a scheme carrying an ample invertible module lies in an affine open.
-Source: Stacks Project, Properties, Lemma 01ZY, case (3).
 -/
 theorem exists_affineOpen_of_isAmple (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (hL : Modules.IsAmple X L) (E : Set X) (hE : E.Finite) :

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphOpenTowerFactor
 
 /-! # Graph compatibility with the open leg
 
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7J.
+## References
+
+* Stacks Project, Tag 0F4L (graph comparison)
+* Stacks Project, Tags 0F7B, 0F7J (the proper/open composition tower)
 -/
 
 @[expose] public section
@@ -28,10 +31,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   derivedOpenImmersionLowerShriekUpperStarAdjunction mapDerivedUpperStarLowerStarAdjunction
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
-/-- Normalization of the etale-first composition through its open leg.
-This involves only one compact-support composition, and no proper/etale interchange.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L (graph comparison), and
-more-etale.tex Tags 0F7B and 0F7J (the proper/open composition tower). -/
+/-- Normalization of the etale-first composition through its open leg. -/
 theorem etaleGraph_open_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Z' : Scheme.{u}}

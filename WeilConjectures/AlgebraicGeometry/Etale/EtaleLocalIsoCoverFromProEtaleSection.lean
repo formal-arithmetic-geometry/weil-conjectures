@@ -27,8 +27,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Étale covers carrying representatives of pro-étale Isom sections
 
-Source: Stacks Project, proetale.tex, Tag 09B1 (bounded-below derived comparison);
-localization of sites and exact inverse image.
+## References
+
+* Stacks Project, Tag 09B1 (bounded-below derived comparison)
 -/
 
 @[expose] public noncomputable section
@@ -83,11 +84,7 @@ private noncomputable def restrictionComparisonIso
     NatIso.ofComponents (fun _ ↦ Iso.refl _)
 
 /-- With a bounded-below target, a pro-etale local derived Isom section is represented by
-actual isomorphisms on an etale cover of its etale object.
-
-Source: Stacks Project, proetale.tex, Tag 09B1 (bounded-below derived comparison);
-localization of sites and exact inverse image.
--/
+actual isomorphisms on an etale cover of its etale object. -/
 theorem exists_etale_iso_cover_of_proetale_local_iso_section
     (X : Scheme.{u}) (V : X.Etale)
     {B : Type (u + 1)} [CommRing B]

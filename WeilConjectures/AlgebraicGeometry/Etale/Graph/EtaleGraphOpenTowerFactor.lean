@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphEtaleOpenComposit
 
 /-! # Graph tower factorization before endpoint normalization
 
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7J.
+## References
+
+* Stacks Project, Tag 0F4L (graph comparison)
+* Stacks Project, Tags 0F7B, 0F7J (the proper/open composition tower)
 -/
 
 @[expose] public section
@@ -181,10 +184,7 @@ private lemma support_associativity
 /-- The graph tower identity before the terminal compactification comparison.
 
 This is the normalized identity after postcomposition with the inverse of the endpoint
-comparison `k`; the original tower formula follows by cancellation.
-This involves only one compact-support composition, and no proper/etale interchange.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L (graph comparison), and
-more-etale.tex Tags 0F7B and 0F7J (the proper/open composition tower). -/
+comparison `k`. -/
 theorem etaleGraph_open_tower_factor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Z' : Scheme.{u}}

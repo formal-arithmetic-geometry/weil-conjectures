@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # A common model for a finite family over an inverse limit
 
-Source: Stacks Project, Limits, Tag 01ZM, object descent and common refinement.
+## References
+
+* Stacks Project, Limits, Tag 01ZM
 -/
 
 @[expose] public section
@@ -25,10 +27,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Finitely many finitely presented objects over an affine-transition qcqs inverse limit
 have models over a single common stage. The original objects, and not just their isomorphism
-classes, occur in the displayed cartesian squares.
-
-Source: Stacks Project, Limits, Tag 01ZM, clause (1), with a common refinement.
--/
+classes, occur in the displayed cartesian squares. -/
 theorem exists_finitePresentation_family_stage
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u})

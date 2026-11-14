@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 /-!
 # DenseOpenRestrictionComparison
 
-Source: Stacks Project, Lemma 0GJA.
+## References
+
+* Stacks Project, Lemmas 0GJA and 095L.
 -/
 
 @[expose] public section
@@ -30,8 +32,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
--/
+/-- Comparison of the open-restriction (surjectivity) assertion for a sheaf on a curve over an
+algebraically closed field and for the extension by zero of its restriction to a dense open. -/
 theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

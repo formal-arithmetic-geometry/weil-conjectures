@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginRestrictionPull
 import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteOpenScalarRealizationTransport
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMateData
 
-/-! # Intrinsic realization and scalar pullback coherence -/
+/-! # Intrinsic realization and scalar pullback coherence
+
+## References
+
+* Stacks Project, Tags 06YY, 07A6, 0D6D, 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -108,9 +113,7 @@ private theorem site_scalar_mate
     Functor.associator_inv_app, Category.id_comp, Category.assoc]
   rfl
 
-/-- The extension/realization comparison commutes with geometric pullback.
-Source: Stacks 0D6D, 06YY and 07A6; extension part of the coefficient comparison
-in Tag 0E48. -/
+/-- The extension/realization comparison commutes with geometric pullback. -/
 theorem etaleOriginExtensionPullbackCube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)

@@ -17,8 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorResidue
 Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
 `k`, with boundary `D = C ∖ U`, and let `N` be invertible in `k`. The residues
 `res_z : H¹(U, ℤ / N) → Hom(μ_N(k), ℤ / N) = ℤ / N (-1)` at the boundary points
-(`AlgebraicGeometry.Scheme.EtaleTorsor.residue`) fit in the exact sequence (5.1) of blueprint
-`proposition-no-fixed-class-degree-one--1`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.residue`) fit in the exact sequence (5.1)
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ D} ℤ / N (-1)`.
 

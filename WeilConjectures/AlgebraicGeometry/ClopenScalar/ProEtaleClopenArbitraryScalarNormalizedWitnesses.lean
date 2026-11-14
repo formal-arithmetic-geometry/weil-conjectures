@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarCompar
 
 /-! # Normalized scalar witnesses for arbitrary coefficient presentations
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D.
+## References
+
+* Stacks Project, Tags 06YY, 0D6D
 -/
 
 @[expose] public noncomputable section

@@ -16,7 +16,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
-/-! # Decomposition of extension by zero on disjoint opens -/
+/-! # Decomposition of extension by zero on disjoint opens
+
+## References
+
+* Stacks Project, Theorem 03SC, proof, fourth paragraph, and Lemma 0A5C.
+-/
 
 @[expose] public section
 
@@ -26,8 +31,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- Assertions for extension from a finite union of disjoint opens are componentwise.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph, and Lemma 0A5C. -/
+/-- Assertions for extension from a finite union of disjoint opens are componentwise. -/
 theorem assertions_iff_disjoint_open_prime (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

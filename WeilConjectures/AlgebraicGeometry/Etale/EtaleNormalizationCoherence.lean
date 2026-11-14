@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 
 /-! # Coherence of etale coefficient normalization
 
-Source: Stacks Project, Tags 03DA, 03ED and 06YY.
+## References
+
+* Stacks Project, Tags 03DA, 03ED and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -54,9 +56,7 @@ private theorem coefficients_comp {T Z Y : Scheme.{u}} (f : T ⟶ Z) (g : Z ⟶ 
     (fun N ↦ by simpa using congr_app (Etale.upperStarRestrictScalarsIso_comp_hom q f g) N) C
 
 /-- The canonical coefficient arrow commutes with successive etale inverse images.
-This equation holds for arbitrary arrows; universality and towers are not required.
-
-Source: Stacks Project, Tags 03DA, 03ED and 06YY. -/
+This equation holds for arbitrary arrows; universality and towers are not required. -/
 theorem etaleNormalization_coherence (Y : Scheme.{u})
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))}

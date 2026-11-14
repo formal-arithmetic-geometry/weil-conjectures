@@ -24,7 +24,9 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 /-!
 # Cohomology of the closed boundary of a dense open curve
 
-Source: Stacks Project, Tag 0GJA, proof of lemma-restrict-to-open.
+## References
+
+* Stacks Project, Tag 0GJA, proof.
 -/
 
 @[expose] public section
@@ -36,7 +38,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- The closed-boundary sheaf has finite degree-zero cohomology and zero positive-degree cohomology.
-Source: Stacks Project, Tag 0GJA, proof of lemma-restrict-to-open, finite stalk product. -/
+-/
 theorem dense_open_boundary_cohomology (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

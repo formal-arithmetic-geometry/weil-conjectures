@@ -19,7 +19,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 /-!
 # Simultaneous affine étale presentations of a finite covering family
 
-Source: Stacks Project, Tag 099U, the geometric finite-cover reductions.
+## References
+
+* Stacks Project, Tag 099U (the geometric finite-cover reductions); Tags 01ZM, 01ZN and 07RP
 -/
 
 @[expose] public section
@@ -72,9 +74,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A finite covering of affine ind-étale objects admits compatible small cofiltered
 presentations by affine étale covering families. Only the base and the members are
 presented here; the repeated intersections are constructed separately by universal
-properties in `presentedNerveIsLimit`.
-Source: Stacks Project, Tag 099U, the two geometric finite-cover reductions;
-Tags 01ZM, 01ZN and 07RP, finite presentation and covering descent. -/
+properties in `presentedNerveIsLimit`. -/
 theorem exists_affine_etale_cover_presentation
     (Y : Scheme.{u}) [IsAffine Y]
     (V : Y.ProEt) (hV : proAffineEtale V.hom)

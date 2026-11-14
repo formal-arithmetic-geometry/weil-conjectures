@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.Coefficie
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 
-/-! # Composition of the specified comparison on coefficient hearts -/
+/-! # Composition of the specified comparison on coefficient hearts
+
+## References
+
+* Stacks Project, Tags 03D3, 0D6D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,10 +50,7 @@ private theorem heartPush_comp (e : Mon.mk R ≅ Mon.mk (coefficient A))
   simp only [CondensedRing.comapLowerStarIso, lowerStarComp_hom_app_hom_app]
   rfl
 
-/-- The constructed heart comparison respects the published underived compositors.
-
-Source: blueprint proper-base-change-finite, Transport and clause (2); the inverse-image
-coefficient-encoding proof, steps 1--2; Stacks 03D3 and 0D6D. -/
+/-- The constructed heart comparison respects the published underived compositors. -/
 theorem heartPull_comp (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (EX : Encoding A X) (EY : Encoding A Y) (EZ : Encoding A Z)

@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Picard.NestedOpenSingleDirectImageCompa
 import WeilConjectures.AlgebraicGeometry.Localized.LocalizedCartesianFlatSingleComparison
 
 /-! # Localized cartesian base change for a relatively flat single sheaf
-Source: Stacks Project, Tags 0A1D and 08FE.
+
+## References
+
+* Stacks Project, Tags 0A1D, 08FE
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ universe u wX wS wT wW wY
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Cartesian base change for the single sheaf, before choosing any representative.
-Source: Stacks Project, Tags 0A1D and 08FE. -/
+/-- Cartesian base change for the single sheaf, before choosing any representative. -/
 theorem cartesian_flat_single_localized_baseChange
     {X S T Y : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX}

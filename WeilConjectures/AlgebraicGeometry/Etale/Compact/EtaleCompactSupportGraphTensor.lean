@@ -13,7 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 /-!
 # Tensor evaluation of the compactification graph
 
-Source: Stacks Project, Tags 0F4L, 0GKF and 0GL5.
+## References
+
+* Stacks Project, Tags 0F4L, 0GKF and 0GL5
 -/
 
 @[expose] public section
@@ -35,9 +37,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Adjunction.mapDerivedCa
   etaleLowerShriek upperStar lowerStar openImmersionLowerShriek derivedTensor
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor
 
-/-- Graph evaluation commutes with the sum-extension tensor mate.
-Source: Stacks Project, Tags 0F4L, 0GKF and 0GL5.
--/
+/-- Graph evaluation commutes with the sum-extension tensor mate. -/
 private theorem projection_transpose
     {C D : Type*} [Category C] [Category D]
     {P : C ⥤ D} {R : D ⥤ C} (adj : P ⊣ R)

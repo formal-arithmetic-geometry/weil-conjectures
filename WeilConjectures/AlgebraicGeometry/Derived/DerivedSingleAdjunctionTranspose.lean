@@ -10,7 +10,10 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
 /-! # The pinned derived adjunction on single complexes
-Source: Stacks Project, cohomology.tex, Tag 079W; derived.tex, Tags 08J5 and 06XS.
+
+## References
+
+* Stacks Project, Tags 079W, 08J5, 06XS, 0096
 -/
 
 @[expose] public section
@@ -72,8 +75,7 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 /-- The right-derived unit on a single complex in an arbitrary integer degree.
-This extends the existing degree-zero comparison by the same termwise construction.
-Source: Stacks Project, cohomology.tex, Tag 079W. -/
+This extends the existing degree-zero comparison by the same termwise construction. -/
 @[irreducible] def topEdgeSingleDirectImageMap {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     (DerivedCategory.singleFunctor
@@ -88,8 +90,7 @@ Source: Stacks Project, cohomology.tex, Tag 079W. -/
       ((HomotopyCategory.singleFunctor _ q).obj M))
 
 -- Comparing the pinned sheaf adjunction to its normalized construction needs extra heartbeats.
-/-- The pinned derived adjunction on a single complex in any integer degree.
-Source: Stacks Project, cohomology.tex, Tag 079W; sheaves.tex, Tag 0096. -/
+/-- The pinned derived adjunction on a single complex in any integer degree. -/
 theorem topEdgeSingleAdjunctionTranspose {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (N : S.Modules) (M : T.Modules) (b : (Scheme.Modules.tensorPullback g).obj N ⟶ M) :
     let adj := @pinnedDerivedAdjunction.{u, w} _

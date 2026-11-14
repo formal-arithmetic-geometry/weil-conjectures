@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicAc
 
 /-! # Levelwise actual finite quotient data
 
-Source: Stacks Project, Tags 09AL and 09C6.
+## References
+
+* Stacks Project, Tags 09AL and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The levelwise part of the actual quotient normalization package.
-Source: Stacks Tags 09AL and 09C6, finite quotient descent and balancing. -/
+/-- The levelwise part of the actual quotient normalization package. -/
 structure FinitePerfectAdicActualLevelData
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)

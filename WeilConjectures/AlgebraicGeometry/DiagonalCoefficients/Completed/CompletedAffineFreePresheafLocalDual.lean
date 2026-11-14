@@ -88,13 +88,7 @@ private theorem sum_smul_eq_zero_of_class_sums
     _ = 0 := by rw [hs, zero_smul]
 
 /-- Finite-support local dual separation for the free presheaf on a pro-affine etale
-representable, provided its section has nonzero image in sheafification.
-
-
-
-The former hypothesis `y ≠ 0` was false: four globally distinct maps on two disjoint
-components may pair up differently on the components. The formal swap-kernel lemma
-above certifies this obstruction; the change record gives the scheme example. -/
+representable, provided its section has nonzero image in sheafification. -/
 theorem completedAffineFree_presheaf_localDual (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom)
     (W : X.ProEt) :

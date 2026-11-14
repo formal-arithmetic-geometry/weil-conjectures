@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Finite-free coordinates for the computed scalar pullback comparison
 
-Source: Stacks Project, Tags 03EL, 06YY and 0944.
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0944
 -/
 
 @[expose] public noncomputable section
@@ -197,8 +199,7 @@ end CoordinateColumns
 
 /-- The finite-basis tensor coordinates commute with termwise scalar pullback.
 This concerns inverse image and the computed comparison, before the comparison
-is identified with the conjugate of the derived direct-image square.
-Source: Stacks Project, Tags 03EL, 06YY and 0944. -/
+is identified with the conjugate of the derived direct-image square. -/
 theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)

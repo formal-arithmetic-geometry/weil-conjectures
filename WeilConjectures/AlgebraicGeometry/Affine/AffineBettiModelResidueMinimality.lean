@@ -11,7 +11,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import all WeilConjectures.AlgebraicGeometry.Residue.ResidueRankModelDifferential
 
 /-! # Minimality of affine models at a residue point
-Source: Stacks Project, Tags 0BCD and 0BF2.
+
+## References
+
+* Stacks Project, Tags 0BCD and 0BF2
 -/
 
 @[expose] public section
@@ -21,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- A free affine model whose term ranks are its residue Betti numbers is minimal at w.
-Source: Stacks Project, Tags 0BCD and 0BF2, the minimal source complex. -/
+/-- A free affine model whose term ranks are its residue Betti numbers is minimal at w. -/
 theorem affine_betti_model_residue_minimality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

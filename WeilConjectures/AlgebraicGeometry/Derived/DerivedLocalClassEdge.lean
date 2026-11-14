@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedResolutionEdgeSingle
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedSingleDirectImageUnitIso
 
 /-! # The natural local-class edge and its single-complex normalization
-Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W.
+
+## References
+
+* Stacks Project, Tags 0BKJ, 0D5X, 079W
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 /-- Sheafifying the local Leray/class maps gives a natural module edge, normalized on
-single complexes by the right-derived unit.
-Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X (local classes and Leray),
-and Tag 079W (the right-derived unit on the same resolution). -/
+single complexes by the right-derived unit. -/
 theorem exists_topEdgeLocalClassEdge {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ) :
     let HS := DerivedCategory.homologyFunctor.{w, u, u + 1}
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q

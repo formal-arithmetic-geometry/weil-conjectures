@@ -19,12 +19,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The sheaf of derived local isomorphisms
 
-Source: Stacks Project, Tag 09BV, isomorphism sheaves, with the bounded-derived adaptation
-of lem-weil-pbc-compatible-finite-derived-trivializations.
+The bounded-derived analogue of the isomorphism sheaf. The presheaf uses actual isomorphisms in
+the derived categories of the localized etale sites, identified with the sites of the source
+schemes. Its restriction maps are the canonical exact pullbacks, transported by their
+composition comparisons.
 
-The presheaf uses actual isomorphisms in the derived categories of the localized etale
-sites, identified with the sites of the source schemes. Its restriction maps are the
-canonical exact pullbacks, transported by their composition comparisons.
+## References
+
+* Stacks Project, Tags 09BV, 03ED, 05RU, 099R, 098K, 03DA, 06YY
 -/
 
 @[expose] public section
@@ -40,12 +42,11 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
 
 /-- Derived restriction of fixed-coefficient sheaves to an etale object, using the
-existing exact inverse image. Source: Stacks Tag 03ED. -/
+existing exact inverse image. -/
 noncomputable abbrev localIsomorphismRestriction (V : X.Etale) :=
   (Etale.upperStar (ModuleCat.{u + 1} B) V.hom).mapDerivedCategory
 
-/-- Canonical comparison for successive etale restrictions.
-Source: Stacks Tags 03ED and 05RU. -/
+/-- Canonical comparison for successive etale restrictions. -/
 noncomputable def localIsomorphismRestrictionComp {V W : X.Etale} (f : V ⟶ W) :
     localIsomorphismRestriction X B V ≅ localIsomorphismRestriction X B W ⋙
       (Etale.upperStar (ModuleCat.{u + 1} B) f.left).mapDerivedCategory :=
@@ -55,8 +56,7 @@ noncomputable def localIsomorphismRestrictionComp {V W : X.Etale} (f : V ⟶ W) 
 
 variable {X B}
 
-/-- Restrict an actual local derived isomorphism along an arrow of the etale site.
-Source: Stacks Tag 09BV, derived adaptation. -/
+/-- Restrict an actual local derived isomorphism along an arrow of the etale site. -/
 noncomputable def localIsomorphismMap
     (A K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
     {V W : X.Etale} (f : V ⟶ W)
@@ -175,8 +175,7 @@ private theorem restrictionTriangle_id (V : X.Etale)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 2048 in
-/-- The canonical local restriction maps obey the presheaf laws.
-Source: Stacks Tags 03ED and 09BV, derived adaptation. -/
+/-- The canonical local restriction maps obey the presheaf laws. -/
 theorem localIsomorphismMap_laws
     (A K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     (∀ (V : X.Etale) (e : (localIsomorphismRestriction X B V).obj A ≅
@@ -246,8 +245,7 @@ theorem localIsomorphismMap_laws
 
 end RestrictionLaws
 
-/-- The presheaf of isomorphisms in the derived categories of localized etale sites.
-Source: Stacks Tag 09BV, derived adaptation. -/
+/-- The presheaf of isomorphisms in the derived categories of localized etale sites. -/
 noncomputable def derivedLocalIsomorphismPresheaf
     (A K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     X.Etaleᵒᵖ ⥤ Type (u + 1) where
@@ -257,8 +255,7 @@ noncomputable def derivedLocalIsomorphismPresheaf
   map_id V := ConcreteCategory.hom_ext _ _ ((localIsomorphismMap_laws A K).1 V.unop)
   map_comp f g := ConcreteCategory.hom_ext _ _ ((localIsomorphismMap_laws A K).2 g.unop f.unop)
 
-/-- The sheafification of actual local derived isomorphisms; no arbitrary sheaf or
-comparison map is chosen. Source: Stacks Tag 09BV, derived adaptation. -/
+/-- The sheafification of actual local derived isomorphisms. -/
 noncomputable def derivedLocalIsomorphismSheaf
     (A K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     Sheaf X.smallEtaleTopology (Type (u + 1)) :=
@@ -270,14 +267,13 @@ section ProEtale
 variable {Y : Scheme.{u}} (f : Y ⟶ X) {R S : Type (u + 1)} [CommRing R] [CommRing S]
 
 /-- Derived comparison followed by derived restriction to a pro-etale object. The same
-formula is defined for any scheme map, with no change to the chosen derived categories.
-Source: Stacks Tags 099R and 098K. -/
+formula is defined for any scheme map, with no change to the chosen derived categories. -/
 noncomputable abbrev localProEtaleComparison (R : Type (u + 1)) [CommRing R] :=
   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ⋙
     (ProEtale.upperStar (ModuleCat.{u + 1} R) f).mapDerivedCategory
 
 /-- The canonical comparison/coefficients interchange, obtained by localizing the mate
-of sectionwise restriction. Source: Stacks Tags 099R and 03DA. -/
+of sectionwise restriction. -/
 noncomputable def localIsomorphismComparisonCoefficients (q : R →+* S) :
     normalizationRestrict X.smallEtaleTopology q ⋙
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ≅
@@ -307,7 +303,7 @@ noncomputable def localIsomorphismComparisonCoefficients (q : R →+* S) :
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))).symm
 
 /-- The canonical pro-etale restriction/coefficients interchange, again the localization
-of the specified mate. Source: Stacks Tags 098K and 03DA. -/
+of the specified mate. -/
 noncomputable def localIsomorphismProEtaleCoefficients (q : R →+* S) :
     normalizationRestrict (ProEt.topology X) q ⋙
         (ProEtale.upperStar (ModuleCat.{u + 1} R) f).mapDerivedCategory ≅
@@ -338,8 +334,7 @@ noncomputable def localIsomorphismProEtaleCoefficients (q : R →+* S) :
     (sheafCompose (ProEt.topology Y)
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))).symm
 
-/-- Combined canonical coefficient interchange for comparison and local restriction.
-Source: Stacks Tags 099R and 098K. -/
+/-- Combined canonical coefficient interchange for comparison and local restriction. -/
 noncomputable def localProEtaleComparisonCoefficients (q : R →+* S) :
     normalizationRestrict X.smallEtaleTopology q ⋙ localProEtaleComparison f R ≅
       localProEtaleComparison f S ⋙ normalizationRestrict (ProEt.topology Y) q :=
@@ -349,9 +344,8 @@ noncomputable def localProEtaleComparisonCoefficients (q : R →+* S) :
     isoWhiskerLeft _ (localIsomorphismProEtaleCoefficients f q) ≪≫
     (Functor.associator _ _ _).symm
 
-/-- Pull a specified normalization arrow to the localized pro-etale site. This is its
-actual inverse image followed by the canonical coefficient interchange, not an arbitrary
-arrow with the same endpoints. Source: Stacks Tags 099R, 098K and 06YY. -/
+/-- Pull a specified normalization arrow to the localized pro-etale site: its
+actual inverse image followed by the canonical coefficient interchange. -/
 noncomputable def localProEtaleNormalization (q : R →+* S)
     {A : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))}
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S))}

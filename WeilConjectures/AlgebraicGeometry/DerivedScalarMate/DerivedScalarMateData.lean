@@ -48,9 +48,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Normalized scalar tensor and geometric mate data
 
-Source: blueprint main-20261015, sk-thm-sf-ctf-stability-direct-images.proof.md,
-paragraph (3), agent-extracted ring-sheaf subargument; Stacks Tags 03EL, 06YY,
-07A4, 07A6, 0G7E, 0FPT and 014A.
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 06YU, 07A4, 07A6, 0D6E, 0G7E, 0FPT, 014A
 -/
 
 @[expose] public noncomputable section
@@ -63,8 +63,7 @@ namespace AlgebraicGeometry.Scheme.DerivedScalarMate
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
 /-- The full normalization of h on two flat K-flat representatives, resolving B too.
-The equation uses Q → B[0] only after tensoring with the K-flat first factor.
-Source: Stacks 06YY, 07A4. -/
+The equation uses Q → B[0] only after tensoring with the K-flat first factor. -/
 def IsDerivedTensor {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B)
@@ -207,8 +206,7 @@ private theorem coefficientResolution {W : Scheme.{u}}
     fun n ↦ (exactFunctor _ _).prop_of_iso
       (SheafOfModules.siteSheafTensorRightIso A (Q.X n)).symm (hf n)⟩, q, hq⟩
 
-/-- The restricted extension is the derived tensor with B, with its full normalization.
-Source: Stacks 06YY, 07A4. -/
+/-- The restricted extension is the derived tensor with B, with its full normalization. -/
 theorem derivedTensorIso_existsUnique
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
@@ -265,8 +263,7 @@ theorem derivedTensorIso_existsUnique
   have his : h'.symm = h.symm := Iso.ext hinv
   exact congrArg Iso.symm his
 
-/-- The comparison h selected by its unique representative normalization.
-Source: Stacks 06YY. -/
+/-- The comparison h selected by its unique representative normalization. -/
 noncomputable def derivedTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
@@ -274,62 +271,53 @@ noncomputable def derivedTensorIso
     (a : Scheme.ProEtaleTensorModel W A) :=
   Classical.choose (derivedTensorIso_existsUnique φ a).exists
 
-/-- Literal inverse-image coefficient ring, on the original small site.
-Source: Stacks 03EL. -/
+/-- Literal inverse-image coefficient ring, on the original small site. -/
 abbrev inverseRing {Z T : Scheme.{u}} (f : Z ⟶ T)
     (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj A
 
-/-- Literal inverse-image coefficient map.
-Source: Stacks 03EL. -/
+/-- Literal inverse-image coefficient map. -/
 abbrev inverseMap {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a
 
-/-- The canonical exact derived inverse image with identified coefficients.
-Source: Stacks 07A6. -/
+/-- The canonical exact derived inverse image with identified coefficients. -/
 abbrev pull {Z T : Scheme.{u}} (f : Z ⟶ T)
     (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   proEtaleRingDerivedPullback f A (inverseRing f A) (Iso.refl _)
 
-/-- The ordinary unbounded derived direct image with identified coefficients.
-Source: Stacks 07A6. -/
+/-- The ordinary unbounded derived direct image with identified coefficients. -/
 abbrev push {Z T : Scheme.{u}} (f : Z ⟶ T)
     (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   proEtaleRingDerivedDirectImage f A (inverseRing f A) (Iso.refl _)
 
-/-- The existing canonical, tensor-unit normalized derived module adjunction.
-Source: Stacks 07A6. -/
+/-- The existing canonical, tensor-unit normalized derived module adjunction. -/
 abbrev adjunction {Z T : Scheme.{u}} (f : Z ⟶ T)
     (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   proEtaleRingDerivedAdjunction f A (inverseRing f A) (Iso.refl _)
 
 /-- The existing balanced scalar/pullback comparison, in the direction lambda.
-It is the inverse mate of the exact restriction square with normalized scalar adjunctions.
-Source: Stacks 03EL, 06YY. -/
+It is the inverse mate of the exact restriction square with normalized scalar adjunctions. -/
 def scalarPullback {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :=
   proEtaleReductionPullbackIso f A B (inverseRing f A) (inverseRing f B)
     a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)
 
-/-- The prescribed beta, the geometric adjunction mate of lambda followed by T(epsilon).
-Source: Stacks 07A6. -/
+/-- The prescribed beta, the geometric adjunction mate of lambda followed by T(epsilon). -/
 def beta {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :
     push f A ⋙ proEtaleRingDerivedExtension a ⟶
       proEtaleRingDerivedExtension (inverseMap f a) ⋙ push f B :=
   (mateEquiv (adjunction f A) (adjunction f B) (scalarPullback f a).hom)
 
-/-- The canonical restriction/direct-image comparison d, with its adjunction normalization.
-Source: Stacks 0D6E. -/
+/-- The canonical restriction/direct-image comparison d, with its adjunction normalization. -/
 def restrictionPush {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :=
   proEtaleRingRestrictionDerivedDirectImage f A B (inverseRing f A) (inverseRing f B)
     a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)
 
 /-- The ordinary identification f_A^*(r_T B_T) = r_Z B_Z, from the restriction square
-and the uniquely unit-normalized pullback of the B-ring module.
-Source: Stacks 03EL. -/
+and the uniquely unit-normalized pullback of the B-ring module. -/
 def coefficientPullback {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :=
   (@asIso _ _ _ _
@@ -343,8 +331,7 @@ def coefficientPullback {Z T : Scheme.{u}} (f : Z ⟶ T)
       (Classical.choose (proEtaleProjectionUnit_existsUnique f B (inverseRing f B)
         (Iso.refl _)).exists)
 
-/-- The same coefficient identification in the derived category, in degree zero.
-Source: Stacks 07A4. -/
+/-- The same coefficient identification in the derived category, in degree zero. -/
 def derivedCoefficientPullback {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :=
   (proEtaleRingDerivedPullbackFactors f A (inverseRing f A) (Iso.refl _)).app
@@ -364,8 +351,7 @@ def locus {Z T : Scheme.{u}} (f : Z ⟶ T)
   fun K ↦ IsIso ((beta f a).app K)
 
 /-- Canonical signed-total shifts on the tensor model, using the existing general
-representative-normalization predicate, including the unsigned first-factor shift.
-Source: Stacks 06YU. -/
+representative-normalization predicate, including the unsigned first-factor shift. -/
 def CanonicalTensorShifts {W : Scheme.{u}}
     {A : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
     (a : ProEtaleTensorModel W A) [(Functor.curryObj a.tensor).CommShift₂Int] : Prop :=
@@ -373,8 +359,7 @@ def CanonicalTensorShifts {W : Scheme.{u}}
     a.tensor (proEtaleFlatRepresentatives W A)
     (fun P Q hp hq ↦ a.representative.app (⟨P, hp⟩, ⟨Q, hq⟩))
 
-/-- The source identification e_T after direct image, with the functor associator explicit.
-Source: Stacks 06YY. -/
+/-- The source identification e_T after direct image, with the functor associator explicit. -/
 def sourceIso {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (t : ProEtaleTensorModel T A) :=
@@ -383,8 +368,7 @@ def sourceIso {Z T : Scheme.{u}} (f : Z ⟶ T)
     Functor.isoWhiskerLeft (push f A) (derivedTensorIso a t)
 
 /-- The target identification d followed by e_Z and the canonical pulled-back coefficient
-identification, oriented to the exact projection functor.
-Source: Stacks 0D6E, 06YY. -/
+identification, oriented to the exact projection functor. -/
 def targetIso {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (z : ProEtaleTensorModel Z (inverseRing f A)) :=

@@ -55,8 +55,11 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 
 /-! # Flatness of continuous coefficients over discrete constant scalars
 
-Source: Stacks Project, Tags 093J, 03EI, 03EP and 08FC; the torsion-free flatness criterion
-for a principal ideal domain.
+The proof uses the torsion-free flatness criterion over a principal ideal domain.
+
+## References
+
+* Stacks Project, Tags 093J, 03EI, 03EP, 08FC
 -/
 
 @[expose] public noncomputable section
@@ -73,10 +76,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteConstantModel
 
 /-- The canonical map from discrete constant scalars to continuous functions is flat over
-any principal ideal domain.
-
-Source: Stacks Project, Tags 093J, 03EI, 03EP and 08FC, together with torsion-free flatness
-criterion for a principal ideal domain. -/
+any principal ideal domain. -/
 theorem constantToContinuous_preservesFiniteLimits
     (A : Type u) [CommRing A] [IsDomain A] [IsPrincipalIdealRing A]
     [TopologicalSpace A] [IsTopologicalRing A]

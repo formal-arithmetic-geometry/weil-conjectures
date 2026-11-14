@@ -12,6 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientTensorChain.ProEtaleC
 import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleTensorRepresentativeNormalization
 
 /-! # Compatibility on flat K-flat representative pairs
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 07A6
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,9 +35,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
 
 set_option maxHeartbeats 800000 in
 -- Conversion between the specified tensor totalizations uses a large elaboration budget.
-/-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
-
-Source: Stacks Tags 03EL, 07A4 and 07A6. -/
+/-- Compatibility for a flat K-flat pair, given the normalized restriction comparison. -/
 theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.TensorScalarOrdinaryS
 
 /-! # The ordinary scalar mate square on complexes
 
-Source: Stacks Project, Tags 03EL and 07A4.
+## References
+
+* Stacks Project, Tags 03EL, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +55,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint proEtaleRingMod
   CochainComplex.mapBifunctorSingle₂Iso
 set_option backward.defeqAttrib.useBackward true
 
-/-- The ordinary module scalar/tensor square remains compatible on cochain complexes.
-Source: Stacks Project, Tags 03EL and 07A4. -/
+/-- The ordinary module scalar/tensor square remains compatible on cochain complexes. -/
 theorem scalarMate_ordinary_complex_route {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (χ : proEtaleRingExtension a ⋙

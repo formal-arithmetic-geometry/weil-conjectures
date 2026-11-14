@@ -77,6 +77,10 @@ import all WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSup
 This is the Milnor cone and product-comparison part of the direct-image limits
 proposition.  It is split from the final assembly because it requires the full
 normalized Roos calculation.
+
+## References
+
+* Stacks Project, Tags 0941, 08TC, 0A07
 -/
 
 @[expose] public noncomputable section
@@ -237,9 +241,7 @@ private theorem transition_fac (T : Scheme.{u}) (n : ℕ) (J : CochainComplex (T
         (ev l E T n).mapDerivedCategoryFactors := rfl
   simp [transition, towerDerivedEvaluationTransition, Localization.liftNatTrans_app, hm, hn]
 
-/-- The Milnor (Roos) triangle of a derived tower, with the level projections as first map.
-Source: Stacks Tags 0941 and 08TC; proof (1) of proposition-proper-base-change-complete-integral--1.
--/
+/-- The Milnor (Roos) triangle of a derived tower, with the level projections as first map. -/
 theorem roos_triangle (T : Scheme.{u})
     [HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E T))] (M : DTow l E T) :
     ∃ δ, IsDerivedLimitTriangle (fun n : ℕ ↦ (transition l E T n).app M) _
@@ -500,28 +502,8 @@ private theorem constant_coherence_Q (n : ℕ)
 end ProjectionSquare
 
 /-- Roos triangles, product comparison and the projection compatibility for direct image,
-with the levelwise evaluation isomorphisms: assertion (1) of
-proposition-proper-base-change-complete-integral--1, with its Milnor-cone description.
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/
-prop-weil-pbc-direct-image-limits.proof.md, proof (1); Stacks Tag 0A07.
-
-Proof. The tower direct image is the derived functor of `f_*` applied levelwise, so by
-assertions (3) and (4) of proposition-proper-base-change-complete-integral its evaluation at level
-`n` is canonically `Rf_*` of the evaluation at `n`: this is `pushEvaluationMap`, invertible
-for every `n`. Products of sheaves of modules on the pro-étale site are exact, so both derived
-categories have countable products, computed
-termwise. For a tower `M` the derived limit `rlim M` is the right adjoint of the constant
-tower, and its counit at level `n` is `levelProjection`; by def-weil-derived-limit the
-derived limit sits in the Milnor (Roos) triangle
-`rlim M → ∏ M_n --(1-T)--> ∏ M_n → rlim M[1]` whose first map has components the level
-projections. This holds on `X` for `M` and on `Y` for `Rf_*^Tow M`. The product
-comparison `Rf_* ∏ M_n → ∏ Rf_* M_n` is invertible because `Rf_*` is a right adjoint, and
-it commutes with `1-T` because `T` is a product of transition maps and the comparison is
-natural in each factor. Finally `pushLimitIso` is the conjugate of the constant/pullback
-comparison, so it is compatible with the counits of the two constant-limit adjunctions;
-composing with `pushEvaluationMap` gives the level-projection square. The normalized
-direct-image Roos comparison lem-weil-pbc-direct-image-roos-normalization packages the
-product, `1-T` and connecting-morphism squares. -/
+with the levelwise evaluation isomorphisms `pushEvaluationMap`: the limit-comparison
+assertion of the direct-image limits proposition, with its Milnor-cone description. -/
 theorem directImage_roos_limit_data :
     (∀ n : ℕ, IsIso (pushEvaluationMap l E f n)) ∧
     (∃ (_ : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E X)))

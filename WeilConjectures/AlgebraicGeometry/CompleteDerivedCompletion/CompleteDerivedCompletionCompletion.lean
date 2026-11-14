@@ -41,6 +41,10 @@ bounded finite-free tensor commutes with the derived limit; the completion is de
 complete, the completion unit `kappa` becomes invertible after every finite reduction, and
 its invertibility characterizes derived completeness; the completion is computed by the
 Roos model of any K-flat representative.
+
+## References
+
+* Stacks Project, Tags 0941, 099B, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -71,8 +75,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The specified right derived inverse limit has the normalized strict Roos model.
-Source: blueprint Notation 1, Stacks Tag 0941. -/
+/-- The specified right derived inverse limit has the normalized strict Roos model. -/
 theorem roosComparison (T : Scheme.{u}) :
     Nonempty (DerivedCategory.Q ⋙ rlim l E T ≅ ExactProductsRoos.fibre ⋙ DerivedCategory.Q) := by
   let : CountableAB4Star (AdicCompletion.Modules l E T) :=
@@ -791,8 +794,7 @@ private theorem principalCompletionComparison (T : Scheme.{u})
     DerivedCategory.Q.map_comp, Category.assoc, he]
   exact (kappa_on_complex l E T P).symm
 
-/-- The quotient Roos complex represents the specified completion, preserving its unit.
-Source: blueprint Notation 4, Stacks Tags 099B, 0A0E and 0941. -/
+/-- The quotient Roos complex represents the specified completion, preserving its unit. -/
 theorem completionComparison_on_complex (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ)
     (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E T) (.up ℤ)).kFlat P) :
@@ -843,8 +845,7 @@ theorem isDerivedComplete_iff (T : Scheme.{u})
   rw [AdicCompletion.isDerivedComplete_iff l E T M P hP e, ← hε]
   exact (isIso_comp_right_iff (AdicCompletion.completionMap l E T M P e) ε.hom).symm
 
-/-- The output of completion is derived complete for every input.
-Source: blueprint Assertion 6 and Stacks Tag 099B. -/
+/-- The output of completion is derived complete for every input. -/
 theorem completion_isDerivedComplete (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) :
     IsDerivedComplete l E T ((completion l E T).obj M) := by
@@ -953,8 +954,7 @@ private theorem finiteReduction_kappa_complex (T : Scheme.{u})
   rw [F.map_comp]
   infer_instance
 
-/-- Finite reduction inverts the specified completion unit.
-Source: blueprint Assertion 6, Stacks Tags 0941 and 099B. -/
+/-- Finite reduction inverts the specified completion unit. -/
 theorem finiteReduction_kappa (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) (n : ℕ) :
     IsIso ((AdicCompletion.derivedReduction l E T n).map ((kappa l E T).app M)) := by

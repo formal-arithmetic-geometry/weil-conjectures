@@ -24,8 +24,12 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 /-!
 # Constructibility of the etale compact-support candidate
 
-Source: Stacks Project, Tag 0GL0, theorem-constructible-shriek,
-finite-ring bounded-below specialization.
+This is the finite-ring bounded-below specialization of the constructibility theorem for
+compact support.
+
+## References
+
+* Stacks Project, Tag 0GL0
 -/
 
 @[expose] public section
@@ -37,8 +41,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- A fixed compact-support candidate preserves constructible cohomology on bounded-below
-complexes as soon as it does on constructible sheaves placed in degree zero.
-Source: Stacks Project, Tag 0GL0, final paragraph (the truncation alternative). -/
+complexes as soon as it does on constructible sheaves placed in degree zero. -/
 private lemma constructible_compactSupport_of_sheaf
     {X Y : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (f : X ⟶ Y) (c : Compactification f)
@@ -223,8 +226,7 @@ private lemma compactSupportPlus_affineSpace
     exact compactSupportPlus_comp Λ (E.hom ≫ a) b cEa cb
       (c.copy (by simpa [Category.assoc] using hfac)) K hEa (fun M hM ↦ ih Y hΛ cb M hM)
 
-/-- The affine-source, affine-base case of compact-support constructibility.
-Source: Stacks Project, Tag 0GL0, second paragraph. -/
+/-- The affine-source, affine-base case of compact-support constructibility. -/
 private lemma constructible_compactSupport_affine
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -404,8 +406,7 @@ private lemma constructible_compactSupport_of_cover
     intro q
     exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (hP₃ q)
 
-/-- Compact-support constructibility over an affine base, by a finite affine cover.
-Source: Stacks Project, Tag 0GL0, first paragraph. -/
+/-- Compact-support constructibility over an affine base. -/
 private lemma compactSupportPlus_affineBase
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [IsAffine Y]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -506,9 +507,7 @@ private lemma compactSupport_constructible_of_affine_base
   exact Scheme.IsConstructibleSheaf.of_iso eout
 
 /-- The compact-support candidate has constructible cohomology for bounded-below inputs,
-when the additive orders of the coefficients are invertible on the base.
-Source: Stacks Project, Tag 0GL0, theorem-constructible-shriek (torsion prime to the
-characteristics of the base). -/
+when the additive orders of the coefficients are invertible on the base. -/
 theorem isConstructibleEtaleModuleSheaf_homology_compactSupportCandidate
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

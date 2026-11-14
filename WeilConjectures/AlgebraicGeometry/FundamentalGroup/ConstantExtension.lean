@@ -449,9 +449,7 @@ omit [Finite L] in
 constant-field extension.
 
 An element of the Weil group of `X₀` whose degree is divisible by `m = [L : K]` lies in the image
-of `ρ : π₁(X₀', s') → π₁(X₀, s)`. The image of `ρ` is closed, and a point `u` of a geometric fibre
-fixed by it comes, through a section of the base change to `X₀'`, from a point of the geometric
-fibre of `X₀ ×_K Spec L ≅ X₀'`, on which the `m`-th power of the geometric Frobenius is trivial. -/
+of `ρ : π₁(X₀', s') → π₁(X₀, s)`. -/
 theorem mem_range_of_mem_weilGroup_constantExtension (h : G) (n : Multiplicative ℤ)
     (hmem : (h, n) ∈ weilGroup p s G) (hdvd : (Module.finrank K L : ℤ) ∣ n.toAdd) :
     h ∈ (fundamentalGroupMap τ G' G).range := by

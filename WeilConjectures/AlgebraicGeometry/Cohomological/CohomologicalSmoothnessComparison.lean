@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Cohomological smoothness in canonical comparison coordinates
 
-
 This is the constructible pro-etale definition in etale-origin coordinates. The dualizing
 object is comparison pullback of the etale dualizing object. Tensor and base-change maps
 are comparison pullbacks of the specified counit mates, not arbitrary endpoint maps.
@@ -25,9 +24,13 @@ Every pro-etale Dctf object has an etale origin, so testing all etale representa
 whose images are Dctf tests precisely the original domain, independently of witnesses.
 Comparison is fully faithful and monoidal on these objects. Its canonical unit, tensor,
 pullback and compact-support comparisons identify these maps with the two transposes
-in the node. Thus this uses the transported constructible adjunction, rather than an
-ambient pro-etale adjunction. The legacy module imports two incompatible versions of
-the inverse-image API; this module uses the published canonical etale maps directly.
+in the definition. Thus this uses the transported constructible adjunction, rather than an
+ambient pro-etale adjunction.
+
+## Implementation details
+
+* The legacy module imports two incompatible versions of the inverse-image API; this module
+  uses the published canonical etale maps directly.
 -/
 
 @[expose] public section
@@ -116,11 +119,7 @@ Clause 1 uses the actual pro-etale tensor and Dctf predicate. Clause 2 tests the
 comparison pullback of the specified tensor mate on every etale representative of
 a pro-etale Dctf object. Clause 3 uses the comparison pullback of the specified
 compact-support base-change mate, with every finite-type change of base allowed.
-The canonical comparison is fully faithful on these representatives and commutes
-with pullback, tensor and compact supports, with the specified units and counits;
-therefore the two maps are exactly the node's maps in these coordinates. Symmetry
-changes the tensor mate's source ordering from pullback tensor omega to omega tensor
-pullback. No isomorphism between endpoints is substituted for a canonical map. -/
+The tensor mate's source is ordered as omega tensor pullback. -/
 noncomputable def IsCohomologicallySmoothCompared
     (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

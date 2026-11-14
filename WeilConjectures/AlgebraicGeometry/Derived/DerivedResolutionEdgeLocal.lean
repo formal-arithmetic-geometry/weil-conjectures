@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryLocalClassCycles
 import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Local description of the constructed resolution edge
-Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W.
+
+## References
+
+* Stacks Project, Tags 0BKJ, 0D5X, 079W
 -/
 
 @[expose] public section
@@ -256,29 +259,7 @@ private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- The kernel/cokernel resolution edge has the fixed local-class description.
-Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
-construction and local Leray comparison; Tag 079W, normalization by the derived unit.
-
-
-On an arbitrary complex B the sheafification unit followed by
-localSectionComplexSheafificationIso sends a section cocycle to its class in the
-underlying cohomology sheaf. This is the kernel/cokernel universal property: precompose
-with the quotient from cycles, use the exact-sheafification homology comparison, and
-then its counit identity. Apply this observation to B and to I. Preservation of kernels
-by g_* identifies cycles of B with g_* of cycles of I, and the definition of
-leftExactHomologyEdge makes the two maps from these cycles equal after taking their
-cohomology classes. Precomposition by inverse-image opens preserves homology, so its
-published homology comparison makes this equality the inverse-open local-class map.
-
-Finally localHypercohomologySheafificationAt is normalized on fixed representatives
-by localHypercohomologySheafificationModel. Naturality of that comparison transports
-the preceding equation along the resolution isomorphisms on S and T and along the
-direct-image comparison, cancelling the homology-factorization isomorphisms. This is
-the displayed equation of presheaf maps. Evaluation at V proves the assertion.
-The argument uses only kernels, cokernels and isomorphisms; it requires neither
-acyclicity of B for module homology nor any boundedness, and also covers empty opens,
-zero complexes and negative q. -/
+/-- The kernel/cokernel resolution edge has the fixed local-class description. -/
 theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) (V : (TopologicalSpace.Opens S)ᵒᵖ) :
     (RingedSpace.topEdgeLocalClass S.toRingedSpace q

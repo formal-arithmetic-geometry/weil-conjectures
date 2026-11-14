@@ -19,7 +19,10 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-! # Coefficient hypotheses for finite direct images
 
-Source: Stacks Project, Lemma 0A5D and Tags 03QP, 095G, 09BH.
+## References
+
+* Stacks Project, Lemma 0A5D
+* Stacks Project, Tags 03QP, 095G, 09BH
 -/
 
 @[expose] public section
@@ -69,9 +72,7 @@ private theorem finite_counit_epi {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
   erw [e.hom.naturality beta]
   infer_instance
 
-/-- Coefficient hypotheses descend from finite direct image.
-Source: Stacks Project, Lemma 0A5D, the primary-part
-argument and the constructibility converse supplied by Tags 03QP, 095G and 09BH. -/
+/-- Coefficient hypotheses descend from finite direct image. -/
 theorem IsCurve.finite_pushforward_coefficient_control {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]

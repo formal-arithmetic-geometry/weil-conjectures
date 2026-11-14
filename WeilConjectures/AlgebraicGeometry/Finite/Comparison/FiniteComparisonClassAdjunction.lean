@@ -36,7 +36,6 @@ import Mathlib.CategoryTheory.EssentialImage
 /-!
 # Exceptional adjunction on the comparison class
 
-
 The interface retains the natural Hom equivalences and the compactification comparisons.
 The right functor is written as the specified comparison composite, without an ambient
 pro-etale adjunction hypothesis. A single etale right adjoint normalizes the right functors

@@ -12,7 +12,10 @@ import Mathlib.Algebra.Homology.ConcreteCategory
 
 /-! # Coefficient representatives of arbitrary total homology classes
 
-Source: Stacks Project, Tags 03P2 and 01EQ. -/
+## References
+
+* Stacks Project, Tags 03P2, 01EQ
+-/
 
 @[expose] public section
 
@@ -24,8 +27,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The coefficient augmentation represents every total homology class.
-Source: Stacks Project, Tags 03P2 and 01EQ, the affine column comparison. -/
+/-- The coefficient augmentation represents every total homology class. -/
 theorem additiveCech_beta_representative
     (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]
     (U : ι → X.Opens)

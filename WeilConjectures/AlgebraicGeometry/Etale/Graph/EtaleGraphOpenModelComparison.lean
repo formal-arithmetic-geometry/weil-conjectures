@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactS
 public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphDerivedIsoSupplement
 import all WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphCoherence
 
-/-! # The graph comparison in the standard compactification of an open immersion -/
+/-! # The graph comparison in the standard compactification of an open immersion
+
+## References
+
+* Stacks Project, Tag 0F4L
+* SGA 4, Exposé XVII, 6.2.11
+-/
 
 @[expose] public section
 
@@ -121,8 +127,7 @@ private lemma open_derived_identity_algebra
   rfl
 
 /-- The graph comparison for an open immersion in its identity-proper compactification
-is precisely removal of the identity direct image.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11. -/
+is precisely removal of the identity direct image. -/
 theorem etaleGraphOpenModelComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] [QuasiCompact j] :

@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- The supported-source identification is the coefficient unit followed by
-direct image of the constant-to-support map. This is an ordinary module-sheaf
-identity; it involves neither a derived class nor a finite projection. -/
+direct image of the constant-to-support map, as an identity of ordinary module sheaves. -/
 theorem diagonalTrace_supportedUnit_normalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality
 
 /-! # Termwise sections and derived pullback cohomology
 
-Source: Stacks Project, Tag 03Q9, final injective-complex restriction paragraph.
+## References
+
+* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section
@@ -24,9 +26,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The comparison from termwise sections to stage hypercohomology is invertible,
-and intertwines both neighbourhood and cone restrictions. This theorem concerns
-only the derived-sections unit and its naturality, not derived Hom or the mate.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph. -/
+and intertwines both neighbourhood and cone restrictions. -/
 theorem smallModel_injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

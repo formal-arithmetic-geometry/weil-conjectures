@@ -11,9 +11,13 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Extension by zero preserves unbounded K-flat complexes
 
-Source: Stacks Tags 0E8I, 06YN, and 0GKF. The proof transports arbitrary acyclic
-ringed-site tensor tests through the canonical constant-module equivalences and
-the signed total-tensor projection isomorphism. No quasi-compactness is required.
+The proof transports arbitrary acyclic ringed-site tensor tests through the canonical
+constant-module equivalences and the signed total-tensor projection isomorphism.
+No quasi-compactness is required.
+
+## References
+
+* Stacks Project, Tags 06YN, 0E8I, 0GKF
 -/
 
 @[expose] public noncomputable section
@@ -273,8 +277,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Etale
 
-/-- Exact open extension preserves the acyclic total-tensor tests for K-flatness.
-Source: Stacks 0E8I, 06YN, 0GKF. -/
+/-- Exact open extension preserves the acyclic total-tensor tests for K-flatness. -/
 theorem etaleOpenKFlat
     {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]

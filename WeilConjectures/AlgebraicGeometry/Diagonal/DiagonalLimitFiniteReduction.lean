@@ -10,6 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalCompletedReductionRest
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalAdicEvaluationComparison
 
 /-! # Finite reduction of the completed diagonal limit
+
+## References
+
+* Stacks Project, Tags 099I, 099M
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +29,7 @@ attribute [local irreducible] diagonalCompletedSource diagonalOrdinaryRlim
   diagonalCompletedRestriction
 
 /-- Finite quotient comparisons for reduction of any map between the two integral
-endpoints. Their units are normalized by the actual derived-limit projections.
-
-Source: blueprint `sk-prop-diagonal-tower-limit.proof.md`, paragraph (3);
-Stacks 099I and 099M. -/
+endpoints. Their units are normalized by the actual derived-limit projections. -/
 theorem diagonal_limit_finite_reduction (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

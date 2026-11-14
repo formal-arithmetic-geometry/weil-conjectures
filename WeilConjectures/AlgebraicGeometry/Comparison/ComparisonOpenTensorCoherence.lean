@@ -33,8 +33,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarP
 /-!
 # Comparison preserves the canonical open tensor map
 
-Source: Stacks Project, Tags 0GL1, 0E8I and 07A4; the finite-coefficient transport
-paragraph of the blueprint proof of `thm-sf-pf-proetale`.
+## References
+
+* Stacks Project, Tags 00WX, 07A4, 0B65, 0E8I, 0GL1
 -/
 
 @[expose] public section
@@ -259,9 +260,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical comparison `A_U Lj_e^* ≅ Lj_p^* A_X`, with the exact derived
 pullbacks identified with their total left derived functors. It is the degreewise
-localization of the recorded section-normalized comparison, not a chosen isomorphism.
-Source: Stacks Project, Tags 00WX and 0B65, and the blueprint finite-coefficient
-transport paragraph. -/
+localization of the recorded section-normalized comparison, not a chosen isomorphism. -/
 noncomputable def comparisonOpenDerivedPullbackIso
     (Λ : Type (u + 1)) [CommRing Λ] {U X : Scheme.{u}} (j : U ⟶ X) :
     L(Etale.upperStar (ModuleCat.{u + 1} Λ) j) ⋙
@@ -286,12 +285,10 @@ noncomputable def comparisonOpenDerivedPullbackIso
     Functor.isoWhiskerLeft D(comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm
 
-/-- The map `h_{K,N} = (1 ⊗ a_{j,N}) ∘ t_U` of the node. The tensor comparison is
+/-- The map `h_{K,N} = (1 ⊗ a_{j,N}) ∘ t_U`. The tensor comparison is
 that of the strong monoidal comparison pullback, computed on K-flat representatives;
 `a` is the canonical comparison of pullbacks localized degreewise. These constructions
-are natural in both inputs.
-Source: Stacks Project, Tag 07A4, and the blueprint finite-coefficient transport
-paragraph. -/
+are natural in both inputs. -/
 noncomputable def comparisonOpenTensorIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U ⟶ X)
     (K : Etale.DerivedCategoryModule Λ U) (N : Etale.DerivedCategoryModule Λ X) :
@@ -612,9 +609,7 @@ private lemma comparison_mixed_tensor_compatible
 
 /-- The comparison carries the canonical etale open tensor map to the pro-etale
 one, for arbitrary unbounded `K` and `N`, naturally in both variables. In diagrammatic
-composition order the equality is `A_X(γe) ≫ e ≫ j_!(h) = t_X ≫ (e ⊗ 1) ≫ γp`.
-Source: Stacks Project, Tags 0GL1, 0E8I and 07A4, and the finite-coefficient
-transport paragraph of `thm-sf-pf-proetale`. -/
+composition order the equality is `A_X(γe) ≫ e ≫ j_!(h) = t_X ≫ (e ⊗ 1) ≫ γp`. -/
 theorem comparison_open_tensor_coherence
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

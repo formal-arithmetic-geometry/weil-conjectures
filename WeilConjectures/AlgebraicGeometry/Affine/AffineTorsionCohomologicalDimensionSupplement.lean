@@ -15,6 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensi
 
 /-!
 # Affine torsion cohomological dimension bound
+
+## References
+
+* [Stacks Project, Tag 0F0V](https://stacks.math.columbia.edu/tag/0F0V)
 -/
 
 @[expose] public section
@@ -25,12 +29,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The affine finite-type step in the torsion cohomological-dimension bound.
-
-Source: the affine bound `lemma-uniform-bounds-pro-etale-affines` in the blueprint subsection
-`sec-smooth-purity/sk-prop-sf-cbc`, with its proof by induction on dimension; also
-Stacks Project, Tag 0F0V (https://stacks.math.columbia.edu/tag/0F0V).
--/
+/-- The affine finite-type step in the torsion cohomological-dimension bound. -/
 theorem subsingleton_H_of_two_mul_add_lt_of_isAffine {K : Type u} [Field K] (c d : ℕ)
     (hK : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}, F.IsTorsion →
       ∀ q : ℕ, c < q → Subsingleton (Sheaf.H F q))

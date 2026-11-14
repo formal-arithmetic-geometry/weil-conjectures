@@ -22,6 +22,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIs
 Strict reduction followed by constant-coefficient restriction compares completed-ring
 objects with derived strict towers of constant-coefficient modules. This file records its
 comparisons with inverse images.
+
+## References
+
+* Stacks Project, Tags 03DI, 0D6D, 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -158,7 +162,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 set_option backward.defeqAttrib.useBackward true
 
 /-- Restricting the action of a ring extension to constant coefficients preserves
-open support. Source: Stacks 03DI. -/
+open support. -/
 theorem restrictScalars_openExtension_counit_isIso
     {B : Type (u + 1)} [CommRing B] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (RX : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
@@ -251,8 +255,7 @@ theorem cbcStrictPull_hom_app {U V : Scheme.{t}} (f : U ⟶ V) (M : d.derived V)
   erw [Category.id_comp]
 /-- Strict reduction commutes with inverse image compatibly with composition: the
 comparison for a composite is the composite of the comparisons, up to the completed and
-strict inverse-image compositors.
-Source: blueprint step 8; Stacks 0D6D. -/
+strict inverse-image compositors. -/
 theorem cbcStrictPull_comp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (M : d.derived Z) :
     (cbcStrictReduction d X).map ((d.pullComp f g).hom.app M) ≫
         (cbcStrictPull d f).hom.app ((d.pull g).obj M) ≫
@@ -363,7 +366,7 @@ theorem cbcStrictPull_square {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (cbcStrictPull_comp_hom d r i h.symm x) (cbcStrictPull_comp d k p x)
 
 /-- The mate of the reduction/pullback comparison is the strict projection-formula map, so it
-is invertible. Source: blueprint step 8. -/
+is invertible. -/
 theorem reductionTowerPullbackIso_mate_isIso {U V : Scheme.{t}} (f : U ⟶ V) :
     IsIso (mateEquiv (cbcPullPushAdjunction d f) (d.towerAdjunction f)
       (d.reductionTowerPullbackIso f).hom) := by
@@ -378,7 +381,7 @@ theorem reductionTowerPullbackIso_mate_isIso {U V : Scheme.{t}} (f : U ⟶ V) :
   exact NatIso.isIso_of_isIso_app _
 
 /-- The mate of the restriction/pullback comparison is the restriction/direct-image
-comparison, so it is invertible. Source: blueprint step 8; Stacks 0D6E. -/
+comparison, so it is invertible. -/
 theorem exchangeResPull_mate_isIso {U V : Scheme.{t}} (f : U ⟶ V) :
     IsIso (mateEquiv (d.towerAdjunction f) (ProEtale.StrictTower.adj A f)
       (exchangeResPull d f).inv) := by
@@ -398,8 +401,7 @@ theorem exchangeResPull_mate_isIso {U V : Scheme.{t}} (f : U ⟶ V) :
 
 /-- Strict reduction commutes with direct image: the mate of the inverse-image comparison
 is invertible. Its components are the strict projection-formula map and the
-restriction/direct-image comparison.
-Source: blueprint step 8; Stacks 0D6E. -/
+restriction/direct-image comparison. -/
 theorem cbcStrictPush_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
     IsIso (mateEquiv (cbcPullPushAdjunction d f) (ProEtale.StrictTower.adj A f)
       (cbcStrictPull d f).inv) := by
@@ -408,8 +410,7 @@ theorem cbcStrictPush_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
   exact mateEquiv_isIso_of_paste (cbcPullPushAdjunction d f) (d.towerAdjunction f)
     (ProEtale.StrictTower.adj A f) (d.reductionTowerPullbackIso f) (exchangeResPull d f)
 
-/-- Restriction to constant coefficients commutes with ordinary open extension.
-Source: Stacks 03DI. -/
+/-- Restriction to constant coefficients commutes with ordinary open extension. -/
 private theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (ProperOpenTransport.openComparison (cbcEndpointOpenAdj d j)
       (ProEtale.StrictTower.moduleJAdj A j) (exchangeOrdinaryResPull d j)) := by
@@ -425,7 +426,7 @@ private theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmer
       (d.integralRingIso j) (exchangeScalar d X) M)
 
 /-- Restriction to constant coefficients commutes with open extension of derived strict
-towers. Source: Stacks 03DI. -/
+towers. -/
 private def exchangeTowerOpenIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
     exchangeTowerRes d U ⋙ ProEtale.StrictTower.J A j ≅
       cbcTowerDerived (cbcEndpointOpen d j) ⋙ exchangeTowerRes d X :=
@@ -440,8 +441,7 @@ private def exchangeTowerOpenIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersi
         (proEtaleRingRestrictScalars (exchangeScalar d X))).symm)
 
 /-- Strict reduction commutes with extension by zero: the open-extension mate of the
-inverse-image comparison is invertible.
-Source: blueprint step 8; Stacks 03DI. -/
+inverse-image comparison is invertible. -/
 theorem cbcStrictOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (CategoryTheory.ProperOpenTransport.openComparison (cbcDerivedOpenAdjunction d j)
       (ProEtale.StrictTower.jAdj A j) (cbcStrictPull d j)) := by

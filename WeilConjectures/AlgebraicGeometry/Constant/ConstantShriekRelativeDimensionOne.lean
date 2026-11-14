@@ -42,8 +42,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 /-!
 # Constructible compact support for constant finite coefficients on affine smooth curves
 
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, specialized to
-finite commutative coefficients and affine bases of finite type over the integers.
+The result of Stacks Project, Tag 0GKX, specialized to finite commutative coefficients and
+affine bases of finite type over the integers.
+
+## References
+
+* Stacks Project, Tag 0GKX.
 -/
 
 @[expose] public section
@@ -56,8 +60,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Compactly supported cohomology of a finite constant module commutes with arbitrary base
 change of a qcqs base: the inverse image along `g` of the `q`-th cohomology sheaf of the lower
-shriek is isomorphic to the `q`-th cohomology sheaf of the lower shriek of the base change.
-Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+shriek is isomorphic to the `q`-th cohomology sheaf of the lower shriek of the base change. -/
 theorem nonempty_constantShriekBaseChangeIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S T : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
@@ -98,8 +101,7 @@ private theorem constructible_of_empty
   exact Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty F)
 
 /-- Noetherian induction for constructibility: a sheaf on a Noetherian scheme is constructible
-if its restriction to every nonempty closed subscheme is constructible on some nonempty open.
-Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+if its restriction to every nonempty closed subscheme is constructible on some nonempty open. -/
 theorem constructible_of_closed_nonempty_generic
     {S : Scheme.{u}} [IsNoetherian S] {Λ : Type (u + 1)} [CommRing Λ]
     (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -181,8 +183,7 @@ private theorem dense_open_complement_dimension_zero
   exact ENat.WithBot.lt_add_one_iff.mp (by simpa using hlt)
 
 /-- The closed complement of a fibrewise dense open of a smooth separated affine relative curve
-over a Noetherian base is quasi-finite over the base.
-Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+over a Noetherian base is quasi-finite over the base. -/
 theorem denseOpenCurve_complement_quasiFinite
     {X S : Scheme.{u}} [IsNoetherian S]
     (f : X ⟶ S) [IsSeparated f] [IsAffineHom f] [SmoothOfRelativeDimension 1 f]
@@ -239,8 +240,7 @@ private noncomputable def constantSinglePullbackIso
 
 /-- Open-closed gluing for compactly supported cohomology of a constant sheaf: if the
 cohomology sheaves for an open `U` and its closed complement are constructible, so are those
-for the whole scheme.
-Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+for the whole scheme. -/
 theorem constantShriek_openClosed
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
@@ -379,8 +379,7 @@ private theorem properSmooth_finiteEtale_constantShriek_constructible
 
 /-- Given a good-curves diagram over a Noetherian base whose proper smooth models have
 constructible compactly supported cohomology, the compactly supported cohomology of the
-constant sheaf on the dense open `W` is constructible.
-Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+constant sheaf on the dense open `W` is constructible. -/
 theorem goodCurvesOpen_constantShriek_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]
@@ -547,24 +546,7 @@ private theorem generic_constantShriek_constructible
 
 /-- Compact support of a finite constant module on an affine smooth relative curve over
 an affine base of finite type over the integers, on which the additive orders of the
-coefficients are invertible, has constructible cohomology in every degree.
-
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`.
-
-
-The original curve's boundary is quasi-finite: its fibre is a closed complement of a dense
-open in a Noetherian space of dimension at most one, hence zero-dimensional and discrete.
-Quasi-finite shriek constructibility and the open-closed triangle reduce to the dense open.
-Its finite closed cover is a thickening. The open-closed triangle for that closed cover has
-zero first term, and therefore reduces to the inverse image of the dense open.
-
-For each proper model, use the identity compactification and the proper smooth finite-module
-lemma (the coefficient orders stay invertible on every scheme over the base); then compose
-with the finite etale map using quasi-finite shriek constructibility.
-The remaining good-curves-preimage lemma assembles those models and removes their boundaries.
-This proves the generic step. Open-closed gluing completes the induction, including nilpotent
-closed subschemes directly. The last comparison converts finite-stalk constructibility to
-the finite-constant-value predicate of the statement. -/
+coefficients are invertible, has constructible cohomology in every degree. -/
 theorem constructibleCohomology_lowerShriek_constant_of_smooth_relativeDimension_one
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (A : Type u) [CommRing A] [Algebra.FiniteType ℤ A]

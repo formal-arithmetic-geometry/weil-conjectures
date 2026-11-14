@@ -87,11 +87,7 @@ lemma hom_left_comp {P Q : Y.FiniteEtale}
 /-- The geometric fibre of a finite étale `Y`-scheme
 at a geometric point is finite.
 
-The geometric fibre `|P_s|` is the set of `Y`-morphisms `Spec Ω ⟶ P`, which are the sections of
-the base change `P ×_Y Spec Ω ⟶ Spec Ω`; by blueprint `lem-galois-geometric-fibre`
-(`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`) this base change is finite
-étale, so its sections are the `Ω`-algebra maps out of a finite `Ω`-algebra, of which there are
-finitely many. -/
+Here the geometric fibre `|P_s|` is the set of `Y`-morphisms `Spec Ω ⟶ P`. -/
 lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P.obj) := by
   have : IsFinite P.obj.hom := P.property
   set h := pullback.snd P.obj.hom s

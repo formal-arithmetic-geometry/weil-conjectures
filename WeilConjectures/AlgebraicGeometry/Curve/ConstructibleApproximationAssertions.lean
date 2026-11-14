@@ -21,8 +21,9 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Constructible approximation for the eight assertions
 
-Source: Stacks Project, Theorem 59.83.10 (03SC), first proof paragraph,
-and Lemma 59.73.2 (03SA).
+## References
+
+* Stacks Project, Theorem 59.83.10 (03SC), first proof paragraph, and Lemma 59.73.2 (03SA).
 -/
 
 @[expose] public section
@@ -177,8 +178,7 @@ private theorem invertible_order_of_mono
   simpa only [map_nsmul, map_zero] using hx
 
 /-- On a fixed curve, assertions for all constructible Λ-module sheaves imply assertions
-for every torsion Λ-module sheaf, provided Λ is finite.
-Source: Stacks Project, Theorem 59.83.10 (03SC), first proof paragraph; Lemma 03SA. -/
+for every torsion Λ-module sheaf, provided Λ is finite. -/
 theorem IsCurve.assertions_of_constructible_approximation
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]

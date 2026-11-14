@@ -25,9 +25,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.IsCurve
 
 /-- The characteristic-p degree-one comparison has an Artin--Schreier fixed-point model.
-Source: Stacks Project, Tag 0A3P, proof, and Tag 02KH; arbitrary coefficients use
-`Etale.exists_constantModSheaf_finite_sum_colimit` and
-`Scheme.sheafH_isColimit_large_filtered` (Tags 03Q5 and 0739). -/
+See Stacks Project, Tags 0A3P, 02KH, 03Q5 and 0739. -/
 theorem exists_constantModSheaf_one_frobenius_baseChange_model
     {Λ : Type (u + 1)} [CommRing Λ] {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']

@@ -21,8 +21,7 @@ geometric points `A(K̄)`, written additively, and its rational form is
 `AddCommGroup.rationalTateModule`. Over an algebraically closed field it is free of rank
 `2 * g`.
 
-The two definitions live in the `IsAbelianVariety` namespace, both because the blueprint node
-they realise is about abelian varieties and so that they do not shadow
+The two definitions live in the `IsAbelianVariety` namespace so that they do not shadow
 `AddCommGroup.tateModule` and `AddCommGroup.rationalTateModule`.
 
 ## Main definitions
@@ -248,28 +247,16 @@ theorem exists_zsmul_eq_and_natCard_torsionBy [IsAlgClosed K] (p : ℕ) [CharP K
     simp only [AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup, Submodule.mem_torsionBy_iff]
     rw [AddEquiv.toEquiv_eq_coe, EquivLike.coe_coe, ← map_zsmul, AddEquiv.map_eq_zero_iff]
 
-/-- The `ℓ`-adic Tate module is free of rank `2g`.
-
-This is also the blueprint proposition `proposition-integral-tate-module--2`.
-
-Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
-`ℓ ≠ char K`. Then `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`.
-
-The group `A(K̄)` is `ℓ`-divisible and
-its `ℓ`-torsion has `ℓ ^ (2g)` elements, so this is
-`AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
+/-- The `ℓ`-adic Tate module is free of rank `2g`: for an abelian variety `A` of dimension `g`
+over an algebraically closed field `K` and `ℓ ≠ char K`, `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`. -/
 theorem nonempty_linearEquiv_tateModule [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
     Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ])) :=
   have h := exists_zsmul_eq_and_natCard_torsionBy ℓ A p hℓ
   AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq ℓ _ h.1 _ h.2
 
-/-- The `ℓ`-adic Tate module is free of rank `2g`.
-
-This is also the blueprint proposition `proposition-integral-tate-module--2`.
-
-Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
-`ℓ ≠ char K`. Then `V_ℓ A ≅ ℚ_[ℓ] ^ (2 * g)`: this is the base change of
-`AlgebraicGeometry.IsAbelianVariety.nonempty_linearEquiv_tateModule` to `ℚ_[ℓ]`. -/
+/-- The rational `ℓ`-adic Tate module has dimension `2g`: for an abelian variety `A` of
+dimension `g` over an algebraically closed field `K` and `ℓ ≠ char K`,
+`V_ℓ A ≅ ℚ_[ℓ] ^ (2 * g)`. -/
 theorem nonempty_linearEquiv_rationalTateModule [IsAlgClosed K] (p : ℕ) [CharP K p]
     (hℓ : ℓ ≠ p) :
     Nonempty (rationalTateModule ℓ A ≃ₗ[ℚ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℚ_[ℓ])) :=
@@ -434,9 +421,8 @@ theorem coe_galoisRepresentation_apply (σ : Gal(AlgebraicClosure K/K)) (t : tat
 
 variable (A) [Fintype K]
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector` (finiteness step): over a finite field `k₀`,
-the group `A^σ` of geometric points of `A` fixed by the arithmetic Frobenius `σ` is finite (it is
-the group `A(k₀)` of rational points). -/
+/-- Over a finite field `k₀`, the group `A^σ` of geometric points of `A` fixed by the arithmetic
+Frobenius `σ` is finite (it is the group `A(k₀)` of rational points). -/
 theorem finite_setOf_frobenius_fixed :
     {P | geometricPointsAddEquiv (A := A)
       (FiniteField.frobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)) P = P}.Finite :=
@@ -444,14 +430,11 @@ theorem finite_setOf_frobenius_fixed :
   (Scheme.finite_setOf_specAlgebraicClosureMap_frobenius_comp_eq_self A).preimage
     (Additive.toMul.injective.injOn)
 
-/-- No Frobenius-fixed vectors on the Tate
-module.
+/-- No Frobenius-fixed vectors on the Tate module.
 
 Let `A` be an abelian variety over a finite field `k₀` and `F = σ⁻¹` the geometric Frobenius,
 acting on the geometric points `A(k̄)` by coordinates. Then `F` fixes no nonzero vector of the
-`ℓ`-adic Tate module `T_ℓ A`: the fixed group `A^σ` is finite
-(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_frobenius_fixed`), so this is
-`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_symm_fixed`. -/
+`ℓ`-adic Tate module `T_ℓ A`. -/
 theorem eq_zero_of_mem_tateModule_of_forall_geometricFrobenius_fixed {t : ℕ → _}
     (ht : t ∈ tateModule ℓ A) (hst : ∀ n, geometricPointsAddEquiv
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)) (t n) = t n) :
@@ -461,14 +444,11 @@ theorem eq_zero_of_mem_tateModule_of_forall_geometricFrobenius_fixed {t : ℕ �
       rw [← geometricPointsAddEquiv_inv, ← FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv]
       exact hst n
 
-/-- No Frobenius-fixed vectors on the Tate
-module.
+/-- No Frobenius-fixed vectors on the rational Tate module.
 
 Let `A` be an abelian variety over a finite field `k₀` and `F = σ⁻¹` the geometric Frobenius,
 acting on the geometric points `A(k̄)` by coordinates. Then `F` fixes no nonzero vector of the
-rational Tate module: `(V_ℓ A)^F = 0`. The fixed group `A^σ` is finite
-(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_frobenius_fixed`), so this is
-`AddCommGroup.rationalTateModule.eq_zero_of_map_symm_eq_self`. -/
+rational Tate module: `(V_ℓ A)^F = 0`. -/
 theorem eq_zero_of_map_geometricFrobenius_eq_self {v : rationalTateModule ℓ A}
     (hv : AddCommGroup.rationalTateModule.map (geometricPointsAddEquiv
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K))).toAddMonoidHom v =

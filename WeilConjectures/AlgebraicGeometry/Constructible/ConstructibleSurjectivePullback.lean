@@ -22,7 +22,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Constructibility descends through surjective pullback
 
-Source: Stacks Project, Tag 095Q, lemma-check-constructible (3), for finite commutative rings.
+## References
+
+* Stacks Project, Tag 095Q (3), for finite commutative rings.
 -/
 
 @[expose] public section
@@ -34,9 +36,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Constructibility of a module sheaf over a finite commutative ring can be checked after
-surjective pullback between quasi-compact quasi-separated schemes.
-
-Source: Stacks Project, Tag 095Q, lemma-check-constructible (3). -/
+surjective pullback between quasi-compact quasi-separated schemes. -/
 theorem isConstructibleEtaleModuleSheaf_iff_surjective_pullback
     {U V : Scheme.{u}} [CompactSpace U] [QuasiSeparatedSpace U]
     [CompactSpace V] [QuasiSeparatedSpace V] (f : V ⟶ U) [Surjective f]

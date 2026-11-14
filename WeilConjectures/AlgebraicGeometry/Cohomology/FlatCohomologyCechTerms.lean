@@ -14,9 +14,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyAffineSections
 
-/-! # Canonical degree maps for affine Cech base change
+/-! # Canonical degree maps for affine Čech base change
 
-Source: Stacks Project, Tags 02KH and 02KG, the separated-case Cech argument.
+## References
+
+* Stacks Project, Tags 02KH and 02KG
 -/
 
 @[expose] public section
@@ -63,10 +65,7 @@ private noncomputable def scalarTensorEquiv (T : ModuleCat.{u} R) :
         | tmul s a => rfl
         | add x y hx hy => simp only [smul_add, map_add, hx, hy] }
 
-/-- Canonical scalar extension gives isomorphisms of the individual Cech terms.
-This assertion concerns only the objects in each degree, not the differentials.
-
-Source: Stacks Project, Tags 02KH (separated-case proof) and 02KG. -/
+/-- Canonical scalar extension gives isomorphisms of the individual Čech terms. -/
 theorem exists_cechBaseChange_term_isos (f : X ⟶ Spec (.of R)) [IsSeparated f]
     [Finite ι] (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
     (M : X.Modules) [M.IsQuasicoherent]

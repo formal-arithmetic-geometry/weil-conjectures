@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteLisseTowerSectionCover
 
 /-! # Compatible algebraic stalk trivialization of finite perfect quotient diagrams
 
-Source: Stacks Project, Tag 09C6, with the finite-stalk tower argument of Tag 09BV.
+## References
+
+* Stacks Project, Tags 09C6, 09BV, 09B1
 -/
 
 @[expose] public noncomputable section
@@ -24,10 +26,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Uniform finite perfect local models admit compatible algebraic stalk trivializations.
-
-Source: Stacks Project, Tag 09C6, the choice of the algebraic stalk system and of
-compatible local markings, using Tags 09B1 and 09BV. -/
+/-- Uniform finite perfect local models admit compatible algebraic stalk trivializations. -/
 theorem finitePerfectAdicTower_extraction
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

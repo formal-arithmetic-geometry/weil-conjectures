@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricSpecializationStrict
 
 /-! # Specialization invariance of the bijectivity locus of a section map
 
-Source: Stacks Project, Tags 0GJ2, 0GJ5, 0GJ6 and 0GKC.
+## References
+
+* Stacks Project, Tags 0GJ2, 0GJ5, 0GJ6 and 0GKC
 -/
 
 @[expose] public section
@@ -272,10 +274,7 @@ private theorem germ_bijective_normalize
   rfl
 
 /-- A section map which is bijective on a geometric stalk remains bijective on every
-geometric stalk above a comparable point of the same etale neighbourhood.
-
-Source: Stacks Project, Tag 0GKC, bijectivity-locus paragraph, with Tags 0GJ2, 0GJ5 and
-0GJ6. -/
+geometric stalk above a comparable point of the same etale neighbourhood. -/
 theorem etale_section_germ_bijective_specializes_iff
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

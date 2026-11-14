@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Affine.Limit.AffineLimitFibreDimensionB
 /-!
 # Fibre dimension bounds descend in affine inverse systems
 
-Source: Stacks Project, Limits, Tag 05M5, `lemma-limit-dimension`, affine specialization.
+## References
+
+* Stacks Project, Limits, Tag 05M5 (affine specialization)
 -/
 
 @[expose] public section
@@ -30,12 +32,8 @@ namespace AlgebraicGeometry
 
 /-- An upper bound on all fibre dimensions of a directed colimit of finite type ring maps
 already holds at one stage, provided the base-change comparison maps are surjective.
-Source: Stacks Project, Limits, Tag 05M5, `lemma-limit-dimension`, affine specialization.
-
-The comparison is expressed by the commutative-ring pushout, canonically the tensor product
-by `CommRingCat.pushoutCoconeIsColimit`. The fibres are affine pullbacks, identified by
-`pullbackSpecIso` with spectra of the tensor products with the residue fields. Thus empty
-fibres have dimension bottom and are included. -/
+The comparison is expressed by the commutative-ring pushout; empty fibres, of dimension
+bottom, are included. -/
 theorem exists_stage_fibre_dimension_le
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (A C : I ⥤ CommRingCat.{u}) (φ : A ⟶ C)

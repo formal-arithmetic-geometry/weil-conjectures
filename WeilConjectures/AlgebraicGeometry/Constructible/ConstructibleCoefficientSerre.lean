@@ -63,7 +63,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Exact closure of constructible sheaves in the site coefficient universe
-Source: Stacks Tags 09B5 and 093U, with finite global partitions. -/
+
+## References
+
+* Stacks Project, Tags 09B5 and 093U(3), with the global finite partitions of Tag 03RZ.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -574,8 +578,7 @@ private theorem closure :
 end CoefficientSerre
 
 /-- Intrinsically constructible coefficient-module sheaves are closed under kernels,
-cokernels and extensions for the canonical constant-ring presentation.
-Source: Stacks Tags 09B5 and 093U(3), with the global finite partitions of Tag 03RZ. -/
+cokernels and extensions for the canonical constant-ring presentation. -/
 theorem constructibleCoefficient_exactClosure
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
     (∀ (F G : pbcModules T (adicLisseConstantRing T A)) (f : F ⟶ G),

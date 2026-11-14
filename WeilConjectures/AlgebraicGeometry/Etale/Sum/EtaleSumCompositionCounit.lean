@@ -25,13 +25,15 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Evaluation and composition of exact etale sum adjunctions
 
-Source: Stacks Project, Etale Cohomology, Tags 03S3 and 03S5; More on Etale
-Cohomology, Tag 0F50.
-
 The sum compositor is constructed on sheaves from the universal property of sum extension
 against literal restriction along the small-site localization functors. It is then descended
 termwise. Thus its construction specifies the nested-summand comparison independently of
 the derived pullback compositor whose conjugacy is asserted below.
+
+## References
+
+* Stacks Project, Étale Cohomology, Tags 03S3, 03S5
+* Stacks Project, More on Étale Cohomology, Tag 0F50
 -/
 
 @[expose] public section
@@ -119,8 +121,7 @@ private lemma cell_counit
   erw [Category.comp_id]
   rfl
 
-/-- Literal restriction composes by composition of the small-site localization functors.
-Source: Stacks Tag 03S3, restriction description preceding equation-j-p-shriek. -/
+/-- Literal restriction composes by composition of the small-site localization functors. -/
 noncomputable def etaleSumRestrictionCompIso
     (A : Type (u + 1)) [CommRing A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] :
@@ -136,8 +137,7 @@ noncomputable def etaleSumRestrictionCompIso
 /-- The sheaf sum compositor: the universal map identifying two successive sums with the
 sum over composite lifts. The restriction comparison is induced by `Over.mapComp`; the
 left-adjoint uniqueness construction therefore sends each nested generator to its composite
-lift generator, including the intervening sheafification.
-Source: Stacks Tags 03S3 and 0F50. -/
+lift generator, including the intervening sheafification. -/
 noncomputable def etaleSumSheafCompIso
     (A : Type (u + 1)) [CommRing A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] :
@@ -151,9 +151,7 @@ noncomputable def etaleSumSheafCompIso
 
 /-- The sum compositor sends a nested structural summand to the summand for its
 composite lift. The units here are the structural inclusions into sheafified sums; the
-last restriction transports along the literal small-site composition isomorphism.
-Source: Stacks Tags 03S3 and 0F50; the final etale clause of
-lem-sfb-quasifinite-compact-support-exact. -/
+last restriction transports along the literal small-site composition isomorphism. -/
 theorem etaleSumSheafCompIso_summand
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]
@@ -249,8 +247,7 @@ private lemma sheaf_composition_counit
     Category.assoc]
   rw [← L.map_comp_assoc, Iso.hom_inv_id_app, L.map_id, Category.id_comp]
 
-/-- The specified degreewise sum-composition comparison on ordinary unbounded categories.
-Source: Stacks Tags 03S3 and 0F50; exact-functor localization. -/
+/-- The specified degreewise sum-composition comparison on ordinary unbounded categories. -/
 noncomputable def derivedEtaleSumCompIso
     (A : Type (u + 1)) [CommRing A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] :
@@ -265,7 +262,6 @@ attribute [local irreducible] upperStar etaleLowerShriek Functor.mapDerivedCateg
 set_option backward.isDefEq.respectTransparency false in
 /-- The specified derived nested-sum compositor preserves the evaluation counit, and its
 adjunction conjugate is the canonical exact pullback-composition comparison.
-Source: Stacks Tags 03S3, 03S5 and 0F50.
 -/
 theorem etaleSumCompositionCounit
     (A : Type (u + 1)) [CommRing A] [Finite A]

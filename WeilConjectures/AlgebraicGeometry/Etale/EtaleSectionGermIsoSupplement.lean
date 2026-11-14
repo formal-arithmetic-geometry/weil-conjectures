@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Section maps that are isomorphisms on all geometric stalks
 
-Source: Stacks Project, Tags 03PT and 0GKC, stalkwise-isomorphism step.
+## References
+
+* Stacks Project, Tags 03PT and 0GKC
 -/
 
 @[expose] public section
@@ -85,9 +87,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- If a linear map into neighbourhood sections induces a bijection at every geometric
-point of that neighbourhood, its adjunct is a constant-sheaf trivialization.
-
-Source: Stacks Project, Tag 0GKC, conclusion by Tag 03PT. -/
+point of that neighbourhood, its adjunct is a constant-sheaf trivialization. -/
 theorem exists_constant_iso_of_bijective_section_germs
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

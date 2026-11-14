@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientPreviousLocalComplexesAux
 
 /-! # Local algebraic complexes for a coefficient-filtration outer term
-Source: Stacks Project, Tags 0942, 094H and 094I.
+
+## References
+
+* Stacks Project, Tags 0942, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The previous perfect complex gives finite local complexes over the successor ring.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I. -/
+/-- The previous perfect complex gives finite local complexes over the successor ring. -/
 theorem finiteQuotient_previous_local_complexes
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

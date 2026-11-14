@@ -10,7 +10,13 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficien
 import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoefficientSerre
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
-/-! # Finite native models and relative lissity -/
+/-! # Finite native models and relative lissity
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 093U
+* Stacks Project, Cohomology on Sites, Tag 094I
+-/
 
 @[expose] public noncomputable section
 
@@ -22,10 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Finite native models detect relative finite lissity, for any coefficient isomorphism.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093U; finite constant coefficient
-transport in Cohomology on Sites, Tag 094I. -/
+/-- Finite native models detect relative finite lissity, for any coefficient isomorphism. -/
 theorem finite_native_models_relative_lisse {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] [Finite B]
     (F : pbcModules X (adicLisseConstantRing X B))

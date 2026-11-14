@@ -15,7 +15,10 @@ open scoped CategoryTheory
 /-!
 # Étale sum extension and unbounded tensor totalization
 
-Source: literature/stacks-project/more-etale.tex, Tag 0GKF.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0GKF
+* Stacks Project, Homology, Tag 012Z
 -/
 
 @[expose] public section
@@ -46,16 +49,14 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [∀ P H : CochainComplex D ℤ, HomologicalComplex.HasMapBifunctor P H G (.up ℤ)]
   (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
 
-/-- Comparison families for additive functors and total tensor bifunctors.
-Source: literature/stacks-project/homology.tex, Tag 012Z, with more-etale.tex Tag 0GKF;. -/
+/-- Comparison families for additive functors and total tensor bifunctors. -/
 def TotalTensorComparison :=
   ∀ (P : CochainComplex C ℤ) (H : CochainComplex D ℤ),
     HomologicalComplex.mapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P) H G (.up ℤ) ≅
       (L.mapHomologicalComplex (.up ℤ)).obj (HomologicalComplex.mapBifunctor P
         ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ))
 
-/-- Naturality of a comparison in both chain-map variables.
-Source: literature/stacks-project/more-etale.tex, Tag 0GKF, natural projection;. -/
+/-- Naturality of a comparison in both chain-map variables. -/
 def TotalTensorNaturality (Ψ : TotalTensorComparison F G L R) : Prop :=
   ∀ (P P' : CochainComplex C ℤ) (H H' : CochainComplex D ℤ)
     (f : P ⟶ P') (g : H ⟶ H'),
@@ -65,8 +66,7 @@ def TotalTensorNaturality (Ψ : TotalTensorComparison F G L R) : Prop :=
         (HomologicalComplex.mapBifunctorMap f
           ((R.mapHomologicalComplex (.up ℤ)).map g) F (.up ℤ))
 
-/-- The comparison has the prescribed canonical component on every total summand.
-Source: literature/stacks-project/homology.tex, Tag 012Z, coproduct terms;. -/
+/-- The comparison has the prescribed canonical component on every total summand. -/
 def TotalTensorSummandNormalization (Ψ : TotalTensorComparison F G L R)
     (a : ∀ (M : C) (N : D),
       (G.obj (L.obj M)).obj N ⟶ L.obj ((F.obj M).obj (R.obj N))) : Prop :=
@@ -257,7 +257,7 @@ abbrev EtaleModuleSheaf (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)
 
 /-- Unbounded étale sum extension has a total-tensor projection comparison
-without quasi-compactness. Source: Stacks Tag 0GKF. -/
+without quasi-compactness. -/
 theorem etale_sum_tensor_comparison
     (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (u : U ⟶ X) (hu : Etale u)

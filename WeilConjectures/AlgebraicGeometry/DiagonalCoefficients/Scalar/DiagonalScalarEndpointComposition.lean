@@ -33,8 +33,7 @@ variable {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [IsMonHom a] [IsMonHom b] [IsMonHom c]
 
 /-- Composition of exact scalar restrictions, fixed by the ordinary identity-on-sheaves
-comparison. Source: scalar associativity.
--/
+comparison. -/
 def scalarRestrictionCompIso (h : a ≫ b = c) (X : Scheme.{u}) :
     (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (coefficientMap c X)).mapDerivedCategory ≅

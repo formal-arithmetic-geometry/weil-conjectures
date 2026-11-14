@@ -50,8 +50,12 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Ordinary completed realization and the quotient coefficient tensors
 
-Source: Stacks Project, Tag 09C6; Modules on Sites, Tags 093J--093M.
 This comparison takes place entirely in the abelian module categories.
+
+## References
+
+* Stacks Project, Tag 09C6 (the ordinary quotient tensor calculation)
+* Stacks Project, Modules on Sites, Tags 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -457,10 +461,7 @@ private def scalarTensorComparison
     exact s.natural M N M' N' f g
 
 /-- Completed scalar extension is exact and its ordinary quotient tensor comparison
-is natural in the input module and in every coefficient transition.
-
-Source: Stacks Project, Tag 09C6, the ordinary quotient tensor calculation;
-Modules on Sites, Tags 093J--093M, completed constant algebra flatness and finite reduction. -/
+is natural in the input module and in every coefficient transition. -/
 theorem finitePerfectAdicOrdinaryCoefficient_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     (PreservesFiniteLimits (completedAdicScalarExtension X d) ∧
@@ -480,8 +481,7 @@ theorem finitePerfectAdicOrdinaryCoefficient_comparison
   exact ⟨ordinaryScalar_exact X d, ⟨tH.diagramIso
     (adicOrdinaryCoefficientDiagram d.ideal) (finitePerfectAdicCoefficientDiagram X d) e⟩⟩
 
-/-- Ordinary coefficient balancing extends degreewise to a diagram of complexes.
-Source: Stacks Project, Tag 09C6. -/
+/-- Ordinary coefficient balancing extends degreewise to a diagram of complexes. -/
 theorem finitePerfectAdicTensorComplexDiagram_ordinaryComparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (ModuleCat.{t} A) ℤ) :

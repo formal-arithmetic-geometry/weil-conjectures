@@ -141,7 +141,9 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbac
 
 /-! # The finite scalar mate of the pulled quotient augmentation
 
-Source: Stacks Tag 099N (5).
+## References
+
+* Stacks Project, Tag 099N (5)
 -/
 
 @[expose] public noncomputable section
@@ -854,8 +856,7 @@ private theorem finiteMate_isIso_on_model (n : ℕ)
     have := completedReductionFiniteModelMap_isIso g d n P hP
     exact IsIso.of_isIso_comp_right _ (completedReductionFiniteModelMap g d n P)
 
-/-- The finite mate of the pulled quotient augmentation is invertible.
-Source: Stacks Tag 099N (5), normalized finite pullback comparison. -/
+/-- The finite mate of the pulled quotient augmentation is invertible. -/
 theorem completedPullbackComparison_finiteMate_isIso
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (n : ℕ) :
     IsIso ((reductionDerivedChange X (completedReductionProjection X d n)).map

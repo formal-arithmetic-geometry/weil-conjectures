@@ -19,7 +19,7 @@ is finite locally free of rank `rk ℱ`, we define the degree
 and prove Riemann–Roch `χ(ℱ) = deg ℱ + rk ℱ (1 - g)`
 (`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_coherentDegree_add`).
 
-The proof follows the blueprint.
+Outline of the proof:
 
 * The torsion subsheaf `𝒯` is killed by its annihilator ideal sheaf, which is nonzero on every
   nonempty affine open, so `𝒯` is the pushforward of a module on a closed subscheme which is
@@ -305,11 +305,7 @@ include k in
 /-- **Saturation of a line subsheaf.** Let `E` be finite locally free of rank `r + 1` on a smooth
 curve and `φ : ℳ ⟶ E` a morphism from an invertible module which is nonzero at the generic
 point. Let `C` be the cokernel of `φ`, `Q = C / C_tors` and `L` the kernel of `E ⟶ Q`. Then
-`0 ⟶ L ⟶ E ⟶ Q ⟶ 0` is short exact with `L` invertible and `Q` finite locally free of rank `r`.
-
-`Q` is locally free of rank `rk C` (`isFiniteLocallyFreeOfRank_torsionQuotient`) and `L` is
-locally free as a coherent submodule of the torsion-free `E`. The image of `φ` has rank one,
-being nonzero at the generic point and a quotient of `ℳ`, so `rk C = r` and `rk L = 1`. -/
+`0 ⟶ L ⟶ E ⟶ Q ⟶ 0` is short exact with `L` invertible and `Q` finite locally free of rank `r`. -/
 theorem exists_shortExact_of_stalkLinearMap_ne_zero {r : ℕ} (E ℳ : X.Modules)
     [E.IsFiniteLocallyFreeOfRank (r + 1)] [ℳ.IsInvertible] (φ : ℳ ⟶ E)
     (hφ : φ.stalkLinearMap (genericPoint X) ≠ 0) :
@@ -482,13 +478,7 @@ lemma exists_hom_ne_zero (E : X.Modules) [SheafOfModules.IsQuasicoherent (R := X
 variable (k) in
 /-- **Riemann–Roch for finite locally free modules.** On a smooth proper curve `X` over `k` with
 `H⁰(X, 𝒪_X) = k`, of genus `g`, a finite locally free module `E` of rank `r` satisfies
-`χ(E) = deg (⋀ʳ E) + r (1 - g)`.
-
-By induction on `r`. For `r = 0`, `E = 0` and `⋀⁰ E = 𝒪_X`. Otherwise
-`AlgebraicGeometry.Scheme.Modules.exists_hom_ne_zero` and
-`AlgebraicGeometry.Scheme.Modules.exists_shortExact_of_stalkLinearMap_ne_zero` give a short exact
-sequence `0 ⟶ L ⟶ E ⟶ Q ⟶ 0` with `L` invertible and `Q` locally free of rank `r - 1`; then
-`⋀ʳ E ≅ L ⊗ ⋀^{r-1} Q`, and `χ` and the degree are additive. -/
+`χ(E) = deg (⋀ʳ E) + r (1 - g)`. -/
 theorem eulerChar_eq_degree_exteriorPower_add (r : ℕ) (E : X.Modules)
     [E.IsFiniteLocallyFreeOfRank r] :
     E.eulerChar k = (E.exteriorPower r).degree k + r * (1 - (arithmeticGenus k X : ℤ)) := by
@@ -558,15 +548,7 @@ variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spe
 variable (k) in
 /-- **Riemann–Roch for coherent modules on a curve.** Let `X` be a smooth proper curve over `k`
 with `H⁰(X, 𝒪_X) = k`, of genus `g`. For every coherent `𝒪_X`-module `ℱ`,
-`χ(ℱ) = deg ℱ + rk ℱ (1 - g)`.
-
-By additivity of `χ` on `0 ⟶ 𝒯 ⟶ ℱ ⟶ ℰ ⟶ 0`, with `χ(𝒯) = h⁰(𝒯)`
-(`AlgebraicGeometry.Scheme.Modules.eulerChar_torsion`) and Riemann–Roch for the locally free
-`ℰ` of rank `rk ℱ`
-(`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_degree_exteriorPower_add`).
-
-(part (2),
-`theorem-riemann-roch-coherent-serre-duality`) -/
+`χ(ℱ) = deg ℱ + rk ℱ (1 - g)`. -/
 theorem eulerChar_eq_coherentDegree_add (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :

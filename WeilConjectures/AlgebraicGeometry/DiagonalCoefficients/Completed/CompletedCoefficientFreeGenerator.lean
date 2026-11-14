@@ -23,8 +23,8 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 
 /-! # Free representables for the completed coefficient action
 
-Source: the local generator argument in lem-sfb-diagonal-completed-section-action;
-Mathlib's free-module and module-sheafification adjunctions.
+The local generators are built from Mathlib's free-module and module-sheafification
+adjunctions.
 -/
 
 @[expose] public noncomputable section
@@ -35,15 +35,13 @@ open scoped TensorProduct CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The free completed-coefficient presheaf on a representable, with the representable
-lifted to the coefficient universe. Source: the free local generators in the proof of
-lem-sfb-diagonal-completed-section-action. -/
+lifted to the coefficient universe. -/
 def completedFreePresheaf (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) (U : X.ProEtᵒᵖ) :=
   (PresheafOfModules.free
     (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj).obj
       (uliftYoneda.{u + 1}.obj U.unop)
 
-/-- Sheafify the actual free presheaf on the local representable. Source: module
-sheafification, Mathlib's sheafificationAdjunction. -/
+/-- Sheafify the actual free presheaf on the local representable. -/
 def completedFreeCell (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (U : X.ProEtᵒᵖ) : DiagonalCompleted l X :=
   (PresheafOfModules.sheafification
@@ -51,15 +49,15 @@ def completedFreeCell (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
       (completedFreePresheaf l X U)
 
 /-- The distinguished local generator is the sheafification of the identity basis
-vector. Source: the local generator argument, not a choice of an existence witness. -/
+vector. -/
 def completedFreeGenerator (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) (U : X.ProEtᵒᵖ) :
     (completedFreeCell l X U).val.obj U :=
   ((PresheafOfModules.sheafificationAdjunction
     (𝟙 (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj)).unit.app
       (completedFreePresheaf l X U)).app U (ModuleCat.freeMk (ULift.up (𝟙 U.unop)))
 
-/-- The morphism that sends the local generator to the specified section. Source:
-compose the inverses of the sheafification, free-module, and Yoneda adjunctions. -/
+/-- The morphism that sends the local generator to the specified section, obtained from
+the inverses of the sheafification, free-module, and Yoneda adjunctions. -/
 def completedFreeDesc {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : DiagonalCompleted l X) (U : X.ProEtᵒᵖ) (m : M.val.obj U) :
     completedFreeCell l X U ⟶ M :=
@@ -67,8 +65,7 @@ def completedFreeDesc {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (𝟙 (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj)).homEquiv _ _ |>.symm
       (PresheafOfModules.freeHomEquiv.symm (uliftYonedaEquiv.{u + 1}.symm m))
 
-/-- Evaluation of the explicitly constructed local generator map. Source: triangle
-identities of the three adjunctions defining completedFreeDesc. -/
+/-- Evaluation of the explicitly constructed local generator map. -/
 theorem completedFreeDesc_generator {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : DiagonalCompleted l X) (U : X.ProEtᵒᵖ) (m : M.val.obj U) :
     (completedFreeDesc M U m).val.app U (completedFreeGenerator l X U) = m := by

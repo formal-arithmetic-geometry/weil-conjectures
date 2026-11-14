@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequence
 
 Let `C` be a smooth proper connected curve over an algebraically closed field `k`, `U ⊆ C` a
 nonempty open with boundary `D = C ∖ U`, and `N` invertible in `k`. The residue sequence (5.1)
-of blueprint `proposition-no-fixed-class-degree-one--1`
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)`
 

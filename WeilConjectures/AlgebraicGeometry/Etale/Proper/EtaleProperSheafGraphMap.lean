@@ -13,7 +13,13 @@ import all WeilConjectures.AlgebraicGeometry.Cartesian.CartesianSumMateSheafNorm
 import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenPastingSupplement
 import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 
-/-! # The ordinary sheaf graph map for a proper and etale factorization -/
+/-! # The ordinary sheaf graph map for a proper and etale factorization
+
+## References
+
+* Stacks Project, Tags 0F4L, 0F7B
+* SGA 4, Exposé XVII, 6.2.11
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -354,8 +360,7 @@ private theorem properSheaf_graph_map_aux
   simp only [a, Functor.map_comp, Category.assoc]
   rfl
 
-/-- The normalized proper-support map transposes to the ordinary clopen-graph map.
-Source: Stacks Project, Tags 0F7B and 0F4L; SGA 4 XVII 6.2.11. -/
+/-- The normalized proper-support map transposes to the ordinary clopen-graph map. -/
 theorem properSheaf_graph_map
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

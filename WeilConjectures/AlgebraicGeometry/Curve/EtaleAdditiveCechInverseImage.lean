@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 
 /-! # Étale additive cohomology in ordinary Čech coordinates
 
-Source: Stacks Project, Tags 03P2 and 01FD.
+## References
+
+* Stacks Project, Tags 03P2, 01FD
 -/
 
 @[expose] public section
@@ -123,11 +125,7 @@ private lemma exists_additiveOrdinary_cycle_transfer
 
 /-- Affine-intersection Čech coordinates compute lifted additive étale cohomology.
 The coordinates respect multiplication and represent inverse-image classes by
-matching structural-function cocycles. No ordinary Ext comparison occurs here.
-
-Source: Stacks Project, Tag 03P2, separated-case proof of
-etale-cohomology-theorem-zariski-fpqc-quasi-coherent; Tag 01FD,
-cohomology-lemma-cech-functorial, augmented double-complex diagram. -/
+matching structural-function cocycles. -/
 theorem exists_etaleAdditive_cech_inverseImage
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated]

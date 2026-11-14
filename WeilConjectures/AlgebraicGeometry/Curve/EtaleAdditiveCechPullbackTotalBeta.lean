@@ -24,7 +24,7 @@ private theorem restrict_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (P : X.Opens)
     congr 1
 
 /-- Tuplewise structural pullback coordinates force the beta square for a total map.
-Source: Stacks Project, Tags 01FD and 03P2, augmented double-complex diagram. -/
+See Stacks Project, Tags 01FD and 03P2. -/
 theorem additiveCech_pullback_total_beta
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

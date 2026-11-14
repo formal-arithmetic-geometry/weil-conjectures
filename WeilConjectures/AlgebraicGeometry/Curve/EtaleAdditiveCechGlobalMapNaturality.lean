@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarCha
 
 /-! # Coefficient endomorphisms on additive Čech complexes
 
-Source: Stacks Project, Tags 01EQ and 01FD. -/
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
+-/
 
 @[expose] public section
 
@@ -21,8 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The canonical cocycle comparison is natural for a coefficient endomorphism.
-Source: Stacks Project, Tag 01EQ, and the injective-resolution Ext construction. -/
+/-- The canonical cocycle comparison is natural for a coefficient endomorphism. -/
 theorem additiveCech_global_map_naturality
     (X : Scheme.{u}) (I : InjectiveResolution X.etaleAdditiveSheaf)
     (c : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf I)

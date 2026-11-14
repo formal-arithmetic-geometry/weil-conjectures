@@ -13,8 +13,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Compatibility of the pullback stalk comparison with change of lift
 
-Source: Stacks Project, Tag 03QW, equation 59.56.0.1 and Remark 59.56.6,
-and Tag 03Q1, Lemma 59.36.2(3).
+## References
+
+* Stacks Project, Tag 03QW (equation 59.56.0.1 and Remark 59.56.6)
+* Stacks Project, Tag 03Q1 (Lemma 59.36.2(3))
 -/
 
 @[expose] public section
@@ -25,10 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
 /-- The canonical pullback stalk comparison commutes with endomorphisms that change
-represented lifts by the same endomorphism of the geometric point.
-
-Source: Stacks Project, Tag 03QW, equation 59.56.0.1 and Remark 59.56.6;
-Tag 03Q1, Lemma 59.36.2(3). -/
+represented lifts by the same endomorphism of the geometric point. -/
 theorem exists_etale_pullback_stalk_germ_action
     {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) (t : Spec (.of Ω) ⟶ Y) (hst : s ≫ f = t)

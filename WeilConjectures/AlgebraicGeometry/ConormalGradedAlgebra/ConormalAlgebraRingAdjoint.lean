@@ -9,7 +9,10 @@ import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalAlgebraHo
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHomAffine
 /-! # A ring-sheaf adjoint from local homogeneous formulas
-Source: Stacks Project, Divisors, Tag 0634.
+
+## References
+
+* Stacks Project, Divisors, Tag 0634.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -48,8 +51,7 @@ private theorem sectionMap_smul {Y W : Scheme.{u}} (k : W ⟶ Y)
 attribute [local irreducible] sectionMap
 
 /-- A module map with the ambient homogeneous representative formula induces a
-ring-sheaf morphism compatible with structure-sheaf scalars.
-Source: Stacks Project, Divisors, Tag 0634. -/
+ring-sheaf morphism compatible with structure-sheaf scalars. -/
 theorem exists_ringAdjoint_of_homogeneousFormula {X Z X' Z' : Scheme.{u}}
     (i : Z ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i] [IsClosedImmersion i']
     (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')

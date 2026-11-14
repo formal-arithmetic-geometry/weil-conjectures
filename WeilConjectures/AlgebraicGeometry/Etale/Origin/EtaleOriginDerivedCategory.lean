@@ -49,9 +49,7 @@ noncomputable def etaleOriginForgetfulPlus (T : Scheme.{u}) (Λ : Type (u + 1))
   inducedFunctor
     (fun P : Σ K : FiniteCoefficientDerivedCategoryPlus T Λ, EtaleOriginWitness T Λ K ↦ P.1)
 
-/-- The forgetful functor is fully faithful by the induced-category construction.
-Source: Weil blueprint, `proposition-construction-independence-rf-shriek`, order 1472;
-Mathlib, `CategoryTheory.fullyFaithfulInducedFunctor`. -/
+/-- The forgetful functor is fully faithful by the induced-category construction. -/
 noncomputable def etaleOriginForgetfulPlusFullyFaithful (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] :

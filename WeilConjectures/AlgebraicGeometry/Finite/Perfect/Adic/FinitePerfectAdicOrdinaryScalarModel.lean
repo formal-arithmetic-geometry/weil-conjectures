@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicOr
 
 /-! # Ordinary scalar comparison for constant quotient modules
 
-Source: Stacks Project, Tags 093J, 093M, 03CY and 06YY.
+## References
+
+* Stacks Project, Modules on Sites, Tags 093J and 093M
+* Stacks Project, Tag 03CY
+* Stacks Project, Cohomology on Sites, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -22,11 +26,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Ordinary constant quotient modules agree with completed extension, compatibly with
-consecutive coefficient restriction. This is an assertion in abelian categories only.
-
-Source: Stacks Project, Modules on Sites, Tags 093J and 093M; Tag 03CY for associated
-module sheafification and Cohomology on Sites, Tag 06YY for scalar composition.
--/
+consecutive coefficient restriction. This is an assertion in abelian categories only. -/
 theorem finitePerfectAdicOrdinaryScalar_model
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

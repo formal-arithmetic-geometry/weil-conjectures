@@ -15,8 +15,10 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 /-!
 # Composition of qcqs etale compact-support candidates
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7J,
-`lemma-shriek-composition`, with Tag 0F7I for arbitrary chosen compactifications.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0F7J, with Tag 0F7I for arbitrary chosen
+  compactifications
 -/
 
 @[expose] public section
@@ -29,10 +31,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- For a finite commutative coefficient ring and separated finite-type morphisms of qcqs
 schemes, the bounded-below compact-support functors attached to any three chosen
-compactifications compose up to natural isomorphism.
-
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7I.
--/
+compactifications compose up to natural isomorphism. -/
 theorem nonempty_iso_etaleShriek_qcqs_compactification_comp
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}}

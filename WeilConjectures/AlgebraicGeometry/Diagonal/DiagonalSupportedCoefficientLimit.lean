@@ -7,6 +7,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimitInterface
 import Mathlib.Algebra.Category.Ring.Limits
 /-! # The supported coefficient ring limit as an abelian sheaf
+
+## References
+
+* [Stacks Project, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -149,10 +153,7 @@ private theorem completedGenerator_eq (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) 
   erw [h, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- Forgetting the completed supported unit identifies it with the limit of the
-supported finite coefficient rings, with the canonical integer unit.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-limit.proof.md`, paragraph (1),
-ordinary coefficient limit; Stacks Tag 099L. -/
+supported finite coefficient rings, with the canonical integer unit. -/
 theorem diagonal_supported_coefficient_limit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     ∃ e : (diagonalForget l (diagonalSurface Y)).obj
         ((diagonalCompletedRestriction l (diagonalSurface Y)).obj

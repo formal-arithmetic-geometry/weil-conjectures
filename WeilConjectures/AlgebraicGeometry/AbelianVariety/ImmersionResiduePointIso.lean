@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! Residue-point isomorphisms induced by immersions.
+
+## References
+
+* Stacks Project, Tag 01IO
 -/
 
 @[expose] public section
@@ -17,8 +21,7 @@ universe v
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- An immersion identifies the residue points, with the actual projection equation.
-Source: Stacks Project, Tag 01IO; Mathlib's surjectivity of immersion stalk maps. -/
+/-- An immersion identifies the residue points, with the actual projection equation. -/
 theorem immersion_residuePointIso
     {S W : Scheme.{v}} (k : W ⟶ S) [IsImmersion k]
     (w : W) (s : S) (hw : k w = s) :

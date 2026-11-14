@@ -16,6 +16,10 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-! # Section modules of native adic sheaves
 
 The internal action induces the ordinary module structure on each section group.
+
+## References
+
+* Stacks Project, Tags 03CV and 0GMW
 -/
 
 @[expose] public section
@@ -27,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory MonObj Opposite
 namespace AlgebraicGeometry.ProEtale
 open scoped CategoryTheory.Obj
 
-/-- The commutative coefficient sheaf, with the native locally finite function sections.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The commutative coefficient sheaf, with the native locally finite function sections. -/
 noncomputable def comparisonRing (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} := by
   let F : X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} :=
@@ -53,7 +56,7 @@ noncomputable def comparisonRing (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
       (adicConstantSheaf l X)).property
 
 /-- Forget sheaf descent and identify the transported coefficient monoid with its pointwise monoid.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+-/
 noncomputable def comparisonPresheafFunctor (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) : AdicSheaf l X ⥤
     Mod (X.ProEtᵒᵖ ⥤ WeilCoefficients.{u} l) (adicConstantSheaf l X).obj := by
@@ -67,8 +70,7 @@ noncomputable def comparisonPresheafFunctor (l : ℕ) [Fact l.Prime]
   letI : IsMonHom φ.hom := φ.isMonHom_hom
   exact F.mapMod (adicConstantSheaf l X) ⋙ Mod.comap φ.hom
 
-/-- The module structure on sections induced by the internal action on pure tensors.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The module structure on sections induced by the internal action on pure tensors. -/
 @[instance_reducible]
 noncomputable def comparisonSectionModule {l : ℕ} [Fact l.Prime]
     {X : Scheme.{u}} (P : Mod (X.ProEtᵒᵖ ⥤ WeilCoefficients.{u} l)
@@ -116,8 +118,7 @@ noncomputable def comparisonSectionModule {l : ℕ} [Fact l.Prime]
       (PadicAlgCl.locallyFiniteFunctions l V.unop.left)) ⊗ₜ x) = 0
     rw [TensorProduct.zero_tmul, map_zero]
 
-/-- The presheaf of modules obtained from a presheaf with an internal coefficient action.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The presheaf of modules obtained from a presheaf with an internal coefficient action. -/
 noncomputable def comparisonModulePresheaf {l : ℕ} [Fact l.Prime]
     {X : Scheme.{u}} (P : Mod (X.ProEtᵒᵖ ⥤ WeilCoefficients.{u} l)
       (adicConstantSheaf l X).obj) :
@@ -136,8 +137,7 @@ noncomputable def comparisonModulePresheaf {l : ℕ} [Fact l.Prime]
   exact (ConcreteCategory.congr_hom ((Mod.act (A := (adicConstantSheaf l X).obj) P.X).naturality f)
     (r ⊗ₜ[ULift.{u + 1} (PadicAlgCl l)] x)).symm
 
-/-- Encode internal presheaf modules by their section modules, leaving maps unchanged.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- Encode internal presheaf modules by their section modules, leaving maps unchanged. -/
 noncomputable def comparisonPresheafEncoding (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Mod (X.ProEtᵒᵖ ⥤ WeilCoefficients.{u} l) (adicConstantSheaf l X).obj ⥤
       PresheafOfModules.{u + 1} ((comparisonRing l X).obj ⋙
@@ -154,8 +154,7 @@ noncomputable def comparisonPresheafEncoding (l : ℕ) [Fact l.Prime] (X : Schem
   map_id M := by ext V x; rfl
   map_comp f g := by ext V x; rfl
 
-/-- The native-to-sectionwise module functor, unchanged on underlying additive sections.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The native-to-sectionwise module functor, unchanged on underlying additive sections. -/
 noncomputable def comparisonModuleFunctor (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     AdicSheaf l X ⥤ SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -170,7 +169,7 @@ noncomputable def comparisonModuleFunctor (l : ℕ) [Fact l.Prime] (X : Scheme.{
   map_comp f g := by ext V x; rfl
 
 /-- Recover the vector-space scalar action by restricting along constant coefficient functions.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+-/
 @[instance_reducible]
 noncomputable def comparisonScalarModule {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
@@ -180,8 +179,7 @@ noncomputable def comparisonScalarModule {l : ℕ} [Fact l.Prime] {X : Scheme.{u
   Module.compHom (P.val.obj V) (algebraMap _
     (ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l V.unop.left)))
 
-/-- The vector-space presheaf recovered from sectionwise modules via constant functions.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The vector-space presheaf recovered from sectionwise modules via constant functions. -/
 noncomputable def comparisonVectorPresheaf {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -198,8 +196,7 @@ noncomputable def comparisonVectorPresheaf {l : ℕ} [Fact l.Prime] {X : Scheme.
       map_id := fun V ↦ by ext m; simp
       map_comp := fun f g ↦ by ext m; exact P.val.map_comp_apply f g m }
 
-/-- The vector-space sheaf recovered from a sectionwise module sheaf.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The vector-space sheaf recovered from a sectionwise module sheaf. -/
 noncomputable def comparisonVectorSheaf {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -208,8 +205,7 @@ noncomputable def comparisonVectorSheaf {l : ℕ} [Fact l.Prime] {X : Scheme.{u}
   exact Presheaf.isSheaf_of_isSheaf_comp _ _
     (forget₂ (WeilCoefficients.{u} l) AddCommGrpCat.{u + 1}) P.isSheaf
 
-/-- The ordinary scalar action as a linear map out of a tensor product.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The ordinary scalar action as a linear map out of a tensor product. -/
 noncomputable def sectionOrdinaryAction
     (k S N : Type (u + 1)) [CommRing k] [CommRing S] [Algebra k S]
     [AddCommGroup N] [Module S N] :
@@ -227,8 +223,7 @@ noncomputable def sectionOrdinaryAction
       change r • (algebraMap k S c • m) = algebraMap k S c • (r • m)
       rw [← mul_smul, mul_comm r, mul_smul])))
 
-/-- The sectionwise module action as a natural vector-space bilinear pairing.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The sectionwise module action as a natural vector-space bilinear pairing. -/
 noncomputable def comparisonReverseAction {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -243,8 +238,7 @@ noncomputable def comparisonReverseAction {l : ℕ} [Fact l.Prime] {X : Scheme.{
     intro r m
     exact (P.val.map_smul f r m).symm
 
-/-- The internal presheaf module constructed from a sectionwise module sheaf.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The internal presheaf module constructed from a sectionwise module sheaf. -/
 noncomputable def comparisonReversePresheaf {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -275,8 +269,7 @@ noncomputable def comparisonReversePresheaf {l : ℕ} [Fact l.Prime] {X : Scheme
       exact mul_smul r s m)
   exact ⟨comparisonVectorPresheaf P⟩
 
-/-- Sheafify internal presheaf modules and identify the coefficient monoid through the counit.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- Sheafify internal presheaf modules and identify the coefficient monoid through the counit. -/
 noncomputable def comparisonModuleReflector (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Mod (X.ProEtᵒᵖ ⥤ WeilCoefficients.{u} l) (adicConstantSheaf l X).obj ⥤ AdicSheaf l X := by
   let adj := sheafificationAdjunction (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)
@@ -300,16 +293,14 @@ noncomputable def comparisonModuleReflector (l : ℕ) [Fact l.Prime] (X : Scheme
       (asIso (adj.counit.app (adicConstantSheaf l X)))
   exact adj.modLeft φ.hom
 
-/-- The native module obtained by sheafifying the recovered internal presheaf action.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The native module obtained by sheafifying the recovered internal presheaf action. -/
 noncomputable def comparisonLiftModule {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
         (comparisonRing l X))) : AdicSheaf l X :=
   (comparisonModuleReflector l X).obj (comparisonReversePresheaf P)
 
-/-- The sheafification unit as an internal presheaf-module morphism.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The sheafification unit as an internal presheaf-module morphism. -/
 noncomputable def comparisonLiftUnit {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -336,8 +327,7 @@ noncomputable def comparisonLiftUnit {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       (asIso (adj.counit.app (adicConstantSheaf l X)))
   exact (adj.modAdjunction φ.hom).unit.app (comparisonReversePresheaf P)
 
-/-- The presheaf forgetful functor on native modules is fully faithful.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The presheaf forgetful functor on native modules is fully faithful. -/
 noncomputable def comparisonPresheafFullyFaithful (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (comparisonPresheafFunctor l X).FullyFaithful where
   preimage {M N} f := by
@@ -358,8 +348,8 @@ noncomputable local instance {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       (((comparisonModuleFunctor l X).obj M).val.obj V) :=
   (comparisonSectionModule ((comparisonPresheafFunctor l X).obj M) V).toSMul
 
-/-- The action of a constant coefficient on native sections is their original vector-space action.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The action of a constant coefficient on native sections is their original vector-space
+action. -/
 theorem comparison_constant_smul {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) (V : X.ProEtᵒᵖ) (k : ULift.{u + 1} (PadicAlgCl l))
     (m : M.X.obj.obj V) :
@@ -372,8 +362,7 @@ theorem comparison_constant_smul {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (((η[(adicConstantSheaf l X).obj]).app V k) ⊗ₜ m) = k • m at h
   exact h
 
-/-- A sectionwise linear map recovered as a native module map.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- A sectionwise linear map recovered as a native module map. -/
 noncomputable def comparisonPreimageMap {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     {M N : AdicSheaf l X}
     (f : (comparisonModuleFunctor l X).obj M ⟶ (comparisonModuleFunctor l X).obj N) :
@@ -416,16 +405,14 @@ noncomputable def comparisonPreimageMap {l : ℕ} [Fact l.Prime] {X : Scheme.{u}
   intro r m
   exact (f.val.app V).hom.map_smul r m
 
-/-- The native-to-sectionwise module functor is fully faithful.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The native-to-sectionwise module functor is fully faithful. -/
 noncomputable def comparisonModuleFullyFaithful (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (comparisonModuleFunctor l X).FullyFaithful where
   preimage f := comparisonPreimageMap f
   map_preimage f := by ext V m; rfl
   preimage_map f := by apply Mod.hom_ext; ext V m; rfl
 
-/-- The underlying map of the internal module lift unit is the vector sheafification unit.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The underlying map of the internal module lift unit is the vector sheafification unit. -/
 theorem comparisonLiftUnit_hom {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X)
@@ -436,8 +423,7 @@ theorem comparisonLiftUnit_hom {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   rw [Adjunction.modAdjunction_unit_app_hom]
   rfl
 
-/-- The recovered presheaf action has precisely the original section module structure.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The recovered presheaf action has precisely the original section module structure. -/
 noncomputable def comparisonReverseSections {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X)
@@ -452,8 +438,7 @@ noncomputable def comparisonReverseSections {l : ℕ} [Fact l.Prime] {X : Scheme
     ext m
     rfl
 
-/-- Sheafifying a sectionwise module and re-encoding its action recovers that module.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- Sheafifying a sectionwise module and re-encoding its action recovers that module. -/
 noncomputable def comparisonLiftCounit {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (P : SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X)
@@ -474,8 +459,8 @@ noncomputable def comparisonLiftCounit {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       hom_inv_id := SheafOfModules.hom_ext c.hom_inv_id
       inv_hom_id := SheafOfModules.hom_ext c.inv_hom_id }
 
-/-- Full faithfulness and the explicit sheafified preimage make the section functor an equivalence.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- Full faithfulness and the explicit sheafified preimage make the section functor an
+equivalence. -/
 noncomputable instance comparisonModuleFunctor_isEquivalence
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (comparisonModuleFunctor l X).IsEquivalence := by
@@ -486,21 +471,14 @@ noncomputable instance comparisonModuleFunctor_isEquivalence
   exact {}
 
 /-- Native adic modules identify with the sectionwise modules over the sheaf of locally
-finite coefficient functions. Source: Stacks 03CV and 0GMW.
-The internal action restricts to sectionwise bilinear actions, whose laws follow on pure
-threefold tensors and the unit. Conversely restrict scalars along constant functions and
-extend the action across monoidal sheafification. The module adjunction unit is invertible
-because the original section presheaf already is a sheaf. The forward functor is fully
-faithful since scalar-linear maps recover the original vector-space linearity and the
-internal action equation is detected before sheafification. -/
+finite coefficient functions. -/
 noncomputable def adicSectionModuleEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     AdicSheaf l X ≌ SheafOfModules.{u + 1}
       ((sheafCompose (Scheme.ProEt.topology X)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (comparisonRing l X)) :=
   (comparisonModuleFunctor l X).asEquivalence
 
-/-- The section module of the native regular module is the ordinary regular sheaf module.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The section module of the native regular module is the ordinary regular sheaf module. -/
 noncomputable def comparisonUnitIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (comparisonModuleFunctor l X).obj (AdicSheaf.unit l X) ≅
       SheafOfModules.unit ((sheafCompose (Scheme.ProEt.topology X)
@@ -523,8 +501,7 @@ noncomputable def comparisonUnitIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
       inv_hom_id := SheafOfModules.hom_ext e.inv_hom_id }
 
 -- Pin the native colimit instance before the functor appears in its dependent type.
-/-- Native adic modules have coproducts in the required index universe.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- Native adic modules have coproducts in the required index universe. -/
 noncomputable instance comparisonNativeCoproducts (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) : HasCoproducts.{u + 1} (AdicSheaf l X) := by
   intro I
@@ -534,8 +511,8 @@ noncomputable instance comparisonNativeCoproducts (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] comparisonModuleFunctor
 
-/-- The section equivalence identifies a coordinate sum of native units with the free module sheaf.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The section equivalence identifies a coordinate sum of native units with the free module
+sheaf. -/
 noncomputable def comparisonFreeIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (I : Type (u + 1)) :
     (comparisonModuleFunctor l X).obj (∐ (fun (_ : I) ↦ AdicSheaf.unit l X)) ≅
@@ -545,8 +522,7 @@ noncomputable def comparisonFreeIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (fun (_ : I) ↦ AdicSheaf.unit l X) ≪≫
       Sigma.mapIso (fun (_ : I) ↦ comparisonUnitIso l X)
 
-/-- The free-module comparison preserves each coordinate inclusion.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification. -/
+/-- The free-module comparison preserves each coordinate inclusion. -/
 theorem comparisonFreeIso_coordinates (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (I : Type (u + 1)) (i : I) :
     (comparisonModuleFunctor l X).map

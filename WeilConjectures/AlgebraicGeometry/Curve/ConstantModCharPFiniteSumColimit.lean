@@ -16,9 +16,10 @@ import Mathlib.Algebra.Module.ZMod
 
 /-! # Finite-sum presentation of constant coefficients killed by a prime
 
-Source: the coefficient-extension step of `lem-sc-c3-degree-two`, realizing blueprint
-`sec-proper-base-change/sk-thm-p1/lem-sc-c3`; the finite-subcoproduct construction is
-Mathlib `CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone`.
+## Implementation details
+
+* The finite-subcoproduct construction is Mathlib's
+  `CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone`.
 -/
 
 @[expose] public section
@@ -30,13 +31,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The underlying abelian sheaf of `Λ/pΛ` is a filtered colimit of finite sums of
- the constant prime-field sheaf. This statement concerns coefficients only: it imposes
- no dimension, smoothness, compactness, or characteristic condition on the scheme.
- Source: the coefficient-extension step of `lem-sc-c3-degree-two`, realizing blueprint
- `sec-proper-base-change/sk-thm-p1/lem-sc-c3`. The construction uses Mathlib
- `Module.Basis.ofVectorSpace`, `ModuleCat.finsuppCoconeIsColimit`,
- `CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone`, and
- `CategoryTheory.constantCommuteCompose`. -/
+the constant prime-field sheaf. This statement concerns coefficients only: it imposes
+no dimension, smoothness, compactness, or characteristic condition on the scheme. -/
 theorem exists_constantModSheaf_finite_sum_colimit
     (Λ : Type (u + 1)) [CommRing Λ] (C : Scheme.{u}) (p : ℕ) [Fact p.Prime] :
     ∃ (I : Type (u + 1)) (_ : SmallCategory I) (_ : IsFiltered I)

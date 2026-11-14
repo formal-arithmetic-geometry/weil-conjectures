@@ -38,7 +38,9 @@ import all WeilConjectures.CategoryTheory.Flat.FlatConstantTensorProZeroConesSup
 
 /-! # Pro-zero cones of the completed strict Koszul tensor augmentation
 
-Source: Stacks Project, Tags 0921 and 099M.
+## References
+
+* Stacks Project, Tags 0921 and 099M
 -/
 
 @[expose] public noncomputable section
@@ -78,10 +80,7 @@ private theorem proZero_of_exact_realization
 -- Preserve the inherited name hq in the statement.
 set_option linter.unusedVariables false in
 /-- The strict tensor augmentation cone is eventually zero at each fixed level
-in the derived category. No product, Roos fibre or derived limit occurs here.
-
-Source: Stacks Project, More on Algebra, sequence-Koszul-complexes (Tag 0921),
-and proetale.tex, lemma-naive-completion (Tag 099M). -/
+in the derived category. No product, Roos fibre or derived limit occurs here. -/
 theorem completedKoszulTensorQuotientConeProZero
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)

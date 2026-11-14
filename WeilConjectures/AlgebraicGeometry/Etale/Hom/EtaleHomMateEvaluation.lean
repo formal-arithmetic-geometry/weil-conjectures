@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Native.NativeHomSourceShiftData
 public import WeilConjectures.CategoryTheory.SixFunctors.HomShiftEvaluationNormalization
 
-/-! # Evaluation identity for the opposite internal Hom shift mate -/
+/-! # Evaluation identity for the opposite internal Hom shift mate
+
+## References
+
+* Stacks Project, Tag 08JC
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -56,8 +61,7 @@ private theorem transported_mate_evaluation (K M : D) (r s : ℤ) (h : -r = s) :
     Category.comp_id] using
     raw_mate_evaluation K M r
 
-/-- The raw opposite source-shift mate preserves evaluation after tensor cancellation.
-Source: Stacks Project, Tag 08JC; right-adjoint uniqueness and its counit identity. -/
+/-- The raw opposite source-shift mate preserves evaluation after tensor cancellation. -/
 private theorem opposite_mate_evaluation (K M : D) (n : ℤ) :
     (tensorLeft (K⟦-n⟧)).map
         ((ProEtale.siteHomOppositeSourceShift K n).hom.app M) ≫
@@ -71,8 +75,7 @@ private theorem opposite_mate_evaluation (K M : D) (n : ℤ) :
     Functor.id_obj, Category.assoc] using
     transported_mate_evaluation K M (-n) n (neg_neg n)
 
-/-- The quadratic-signed mate obeys evaluation normalization.
-Source: Stacks Project, Tag 08JC; right-adjoint uniqueness and its counit identity. -/
+/-- The quadratic-signed mate obeys evaluation normalization. -/
 theorem etaleHom_signedMateEvaluation (M : D)
     (s : (MonoidalClosed.internalHom.flip.obj M).CommShift ℤ)
     (hs : ∀ (K : D) (n : ℤ),

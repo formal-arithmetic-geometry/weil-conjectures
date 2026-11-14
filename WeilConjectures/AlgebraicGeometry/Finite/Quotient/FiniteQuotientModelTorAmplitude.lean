@@ -41,7 +41,9 @@ import Mathlib.RingTheory.Idempotents
 
 /-! # Detecting Tor amplitude of a finite-quotient constant model
 
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I).
+## References
+
+* Stacks Project, Tag 094I
 -/
 
 @[expose] public noncomputable section
@@ -84,10 +86,7 @@ private theorem zero_of_nilpotent_reduction
   exact ModuleCat.isZero_of_subsingleton N
 
 /-- A constant model on a nonempty chart has the Tor interval of the residue.
-The zero-complex alternative permits the zero model on empty charts. No finiteness
-or projectivity of the model is assumed.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I), part (2). -/
+The zero-complex alternative permits the zero model on empty charts. -/
 theorem finiteQuotient_model_torAmplitude
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.OpenFreeSheafRestrictionHom
 import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf
 /-! # Bijectivity of Ext restriction from a represented open
 
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0 and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -141,9 +143,7 @@ private theorem openBaseChangeInclusion_opensRange
   simp only [openBaseChangeInclusion_eq, Scheme.Hom.opensRange_comp_of_isIso,
     Scheme.Hom.opensRange_pullbackSnd, Scheme.Opens.opensRange_ι]
 
-/-- Restriction from the free sheaf on an open, before and after base change, is bijective.
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
--/
+/-- Restriction from the free sheaf on an open, before and after base change, is bijective. -/
 theorem H.openRestrictionExt_bijective
     (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens)
     (e : (invImage W.ι).obj (H.openFreeSheaf W) ≅

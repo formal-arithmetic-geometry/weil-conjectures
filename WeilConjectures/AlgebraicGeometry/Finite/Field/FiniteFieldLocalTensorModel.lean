@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-!
 # Scalar extension of a localized inverse-image constant model
 
-Source: Stacks Project, Tags 03EL, 0GMW and 093V.
+## References
+
+* Stacks Project, Tags 03EL, 0GMW, 093V
 -/
 
 @[expose] public noncomputable section
@@ -503,8 +505,7 @@ private noncomputable def inverseImageExtensionIso
       (inverseImageRestrictionIso g a).symm
 
 /-- Scalar extension carries any given localized inverse-image constant model to the
-constant tensor model, over the actual inverse-image target ring.
-Source: Stacks Project, Tags 03EL, 0GMW and 093V. -/
+constant tensor model, over the actual inverse-image target ring. -/
 theorem finiteFieldScalarExtension_localModel
     (Y : Scheme.{u}) {k k' : Type u} [Field k] [Field k'] (f : k →+* k') :
     ∀ (X : Scheme.{u}) (g : X ⟶ Y)

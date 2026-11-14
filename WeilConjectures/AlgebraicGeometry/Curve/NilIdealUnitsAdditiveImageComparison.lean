@@ -22,18 +22,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- For a nil ideal I with I squared contained in J contained in I, subtracting one
-identifies the multiplicative image of the congruence subgroup with the additive
-image of the ideal. This assertion involves only structure rings and their units,
-not the module cokernel or tensor sections.
-
-
-Formal reduction: First identify each image with the pushforward from Z_J of
-the corresponding kernel for Z_I to Z_J. The unit identification uses nilpotence
-to lift units; the additive identification is quotient exactness without any
-nil hypothesis. On Z_J the relative ideal I/J has square zero, so subtracting
-one identifies these two kernel sheaves. Push forward that isomorphism and
-compose with the two image identifications. -/
+/-- For a nil ideal `I` with `I² ⊆ J ⊆ I`, subtracting one identifies the multiplicative
+image of the congruence subgroup with the additive image of the ideal. -/
 theorem nonempty_nilIdealUnitsAdditiveImageIso (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J)
     (hIN : I ≤ X.nilradical) :

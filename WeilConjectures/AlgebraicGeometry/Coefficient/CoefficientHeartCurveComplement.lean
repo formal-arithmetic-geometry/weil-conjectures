@@ -153,12 +153,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 /-!
 # The finite curve complement and its coefficient-module localization sequence
 
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Tags 01J3, 0AAX and 09AH.
-
 The reduced induced closed complement is specified by its unique characterization:
 a reduced closed subscheme with underlying image the complement of the given open.
 All arrows are the actual adjunction counit and unit on internal coefficient modules.
+
+## References
+
+* Stacks Project, Tags 01J3, 09AH, 0AAX
 -/
 
 @[expose] public section
@@ -179,10 +180,7 @@ For every commutative condensed ring and every internal coefficient module, the 
 open counit and closed unit form a short exact sequence, and the closed term restricts
 to zero on the open. In particular, when the open restriction is lisse in the sense of
 `IsLisseCoefficientModule`, this is the extension of the finite closed-support term
-`i_* i^* F` by `u_! L`, with `L = u^* F`.
-
-Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
-Stacks Tags 01J3, 0AAX and 09AH. -/
+`i_* i^* F` by `u_! L`, with `L = u^* F`. -/
 theorem coefficientHeart_curve_complement
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

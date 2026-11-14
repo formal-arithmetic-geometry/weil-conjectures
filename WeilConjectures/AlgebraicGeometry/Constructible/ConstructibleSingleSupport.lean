@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Constructible sheaves placed in degree zero
 
-Source: coefficient-twist blueprint, order 1505, proof step 10; Stacks Tag 03RZ.
+## References
+
+* Stacks Project, Tag 03RZ.
 -/
 
 @[expose] public section
@@ -113,8 +115,7 @@ private theorem constructible_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A] 
       (E.mapIso e'.symm).toLinearEquiv.injective
 
 /-- A constructible sheaf in degree zero has finite constructible cohomology, supported
-only in zero. Its support is exactly `{0}` when the sheaf is not a zero object.
-Source: coefficient-twist blueprint, order 1505, step 10; Stacks Tag 03RZ. -/
+only in zero. Its support is exactly `{0}` when the sheaf is not a zero object. -/
 theorem constructible_single_support (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A))
     (hF : IsConstructibleProEtaleModuleSheaf Y A F)

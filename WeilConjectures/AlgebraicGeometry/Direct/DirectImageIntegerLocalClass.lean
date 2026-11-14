@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareLocalClassNaturality
 
 /-! # The local direct-image class on an integer complex
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
+## References
+* Stacks Project, Tags 01E4, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -89,7 +89,6 @@ private theorem directImage_leray_model
 
 /-- The derived direct-image local class is ordinary sheafification on a K-injective
 integer complex, with the specified resolution and Leray normalizations.
-Source: Stacks Project, Tags 01E4, 0BKJ and 0D5X.
 -/
 theorem directImage_integer_localClass
     {X Y : RingedSpace.{u}}

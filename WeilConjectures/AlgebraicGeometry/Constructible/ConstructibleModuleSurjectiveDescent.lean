@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSurjectivePu
 /-!
 # Descent of constructibility along a surjective morphism
 
-Source: Stacks Project, Etale Cohomology, Tag 095Q (3), converse for finite coefficient
-rings.
+## References
+
+* Stacks Project, Etale Cohomology, Tag 095Q (3), converse for finite coefficient rings.
 -/
 
 @[expose] public section
@@ -28,10 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Constructibility of a sheaf of modules over a finite commutative ring descends along
 any surjective morphism between quasi-compact quasi-separated schemes. Constructibility
 on both sides means the same finite constructible, locally closed stratification with
-finite locally constant module values.
-
-Source: Stacks Project, Etale Cohomology, Tag 095Q (3), converse for finite coefficient
-rings. -/
+finite locally constant module values. -/
 theorem isConstructibleEtaleModuleSheaf_of_surjective_pullback
     {T U : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
     [CompactSpace U] [QuasiSeparatedSpace U] (a : T ⟶ U) [Surjective a]

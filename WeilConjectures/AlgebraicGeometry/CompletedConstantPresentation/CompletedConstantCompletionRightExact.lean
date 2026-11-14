@@ -18,7 +18,9 @@ import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Right exactness of completed constant finite modules
 
-Source: Stacks Project, More on Algebra, Tag 0912; Modules on Sites, Tags 093J--093M.
+## References
+
+* Stacks Project, More on Algebra, Tag 0912; Modules on Sites, Tags 093J--093M.
 -/
 
 @[expose] public section
@@ -631,9 +633,7 @@ private noncomputable def sectionwise_cokernel (X : Scheme.{u})
     (SheafOfModules.evaluation (adicLisseRing X A) U) h).symm ?_
   exact ModuleCat.isColimitCokernelCofork (f.val.app U) (g.val.app U) (he U) (hs U)
 
-/-- Completion of constant modules preserves cokernels of maps between finite modules.
-Source: Stacks Project, More on Algebra, Tag 0912; Modules on Sites,
-Tags 093J--093M (constant exactness, finite-presentation tensor comparison and flat sections). -/
+/-- Completion of constant modules preserves cokernels of maps between finite modules. -/
 theorem completion_preservesCokernel (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {P Q : ModuleCat.{u + 1} (AdicCompletion I A)}

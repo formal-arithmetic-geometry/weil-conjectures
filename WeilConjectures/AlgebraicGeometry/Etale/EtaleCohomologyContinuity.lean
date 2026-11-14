@@ -17,11 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleCohomologyClassDescent
 /-!
 # Continuity of etale cohomology at inverse limits
 
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, lemma Etale cohomology continuity; Stacks
-Project, Tag 03Q6.
-
 The canonical filtered-colimit isomorphism is stated by its elementwise criterion:
 every limit class descends, and every stage class in the kernel eventually vanishes.
+
+## References
+
+* Stacks Project, Tag 03Q6
 -/
 
 @[expose] public section
@@ -63,10 +64,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 system with affine transition morphisms is the filtered colimit of stage cohomology.
 The two conjuncts express surjectivity and injectivity of the canonical comparison,
 with the indexing category of later stages given by arrows `f : j ⟶ i`.
-The composition isomorphism identifies iterated inverse images with direct inverse images.
-
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, Etale cohomology continuity;
-Stacks Project, Tag 03Q6 (the base-change case of the continuity theorem). -/
+The composition isomorphism identifies iterated inverse images with direct inverse images. -/
 theorem cohomology_continuity_of_isLimit
     {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})
     [∀ j : J, CompactSpace (D.obj j)] [∀ j : J, QuasiSeparatedSpace (D.obj j)]

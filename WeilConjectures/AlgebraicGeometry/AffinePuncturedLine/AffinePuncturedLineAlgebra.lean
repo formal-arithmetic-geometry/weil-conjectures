@@ -23,12 +23,13 @@ import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
 
 /-! # Units and Picard groups of the affine and punctured lines
 
-Source: blueprint sec-smooth-purity/sk-prop-a1-kummer,
-lem-pur-affine-punctured-line-algebra; Stacks Project, Tags 03P4, 01HV, 0BCH and 01IB.
-
 The unit groups below are the actual values of the small etale unit sheaf at the terminal
 object. Multiplicative notation reverses the additive convention of gmSheaf; ULift is retained.
 The two summands of the cokernel are written as a product, their finite direct sum.
+
+## References
+
+* Stacks Project, Tags 03P4, 01HV, 0BCH and 01IB
 -/
 
 @[expose] public noncomputable section
@@ -41,15 +42,13 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.AffinePuncturedLine
 
-/-- Global sections of the existing etale unit sheaf on Spec R, in multiplicative notation.
-Source: Stacks, Tag 03P4 (2). -/
+/-- Global sections of the existing etale unit sheaf on Spec R, in multiplicative notation. -/
 abbrev specUnits (R : Type u) [CommRing R] :=
   Multiplicative ((Spec (CommRingCat.of R)).gmSheaf.obj.obj
     (op (Scheme.Etale.mk (𝟙 (Spec (CommRingCat.of R))))))
 
 /-- A coordinate-ring unit as the corresponding actual global etale unit section.
-This is the canonical Gamma(Spec R) identification, followed by the unit-sheaf type tags.
-Source: Stacks, Tags 01HV (1) and 03P4 (2). -/
+This is the canonical Gamma(Spec R) identification, followed by the unit-sheaf type tags. -/
 def specUnitSection (R : Type u) [CommRing R] (a : Rˣ) : specUnits R :=
   Multiplicative.ofAdd (ULift.up (Additive.ofMul
     (Units.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom.toMonoidHom a)))
@@ -278,9 +277,7 @@ private theorem scalarRoots (k : Type u) [Field k] [IsAlgClosed k] (N : ℕ) (hN
     exact a.ne_zero hb.symm
   exact ⟨Units.mk0 b hb0, Units.ext (by simpa using hb)⟩
 
-/-- The canonical unit descriptions, the two Picard vanishings and the power-map cokernel.
-Source: blueprint sec-smooth-purity/sk-prop-a1-kummer,
-lem-pur-affine-punctured-line-algebra; Stacks, Tags 03P4, 01HV, 0BCH and 01IB. -/
+/-- The canonical unit descriptions, the two Picard vanishings and the power-map cokernel. -/
 theorem affine_punctured_line_algebra (k : Type u) [Field k] :
     Function.Bijective (fun a : kˣ ↦
       specUnitSection (Polynomial k) (Units.map Polynomial.C.toMonoidHom a)) ∧

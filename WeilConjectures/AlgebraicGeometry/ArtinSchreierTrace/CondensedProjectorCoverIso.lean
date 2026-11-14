@@ -205,24 +205,7 @@ private lemma pull_scalar
 end Coherence
 
 /-- An equivariant cover isomorphism transports the actual character-projector image,
-including every induced pullback-of-functions map and its root evaluation.
-
-Proof in words. On a cover Y, take the coefficient module pushed forward along Y→X.
-The regular-lift formula for condensedPull is the pullback of coefficient functions.
-Its identity and composition laws follow from the unit and associativity coherence of
-lowerStarComp and from condensedPushforwardHom_id and condensedPushforwardHom_comp;
-regular module maps are determined by their value on the coefficient unit. This gives
-a contravariant functor of covers. These maps commute with coefficient multiplication,
-by the monoidal-adjunction mate equation and naturality of scalar multiplication.
-Conjugacy of the translations therefore intertwines the finite sums defining the two
-averaging projectors. The isomorphism of the two pushed-forward coefficient modules
-induces an isomorphism J of their images, whose composite with the image inclusion
-is the old inclusion followed by pullback along u inverse. Compose this identity with
-the given inclusion identity for e. The composition law for condensedPull gives the
-first asserted equation. Apply upperStar to it and use its functoriality. By the
-composition law once more, the defining adjunction-counit formula for
-condensedEvaluation gives the second equation, at every root and after every base map.
-No root existence, torsor, invertibility of card(G), or field hypothesis is used. -/
+including every induced pullback-of-functions map and its root evaluation. -/
 theorem condensedProjector_coverIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

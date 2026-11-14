@@ -152,11 +152,7 @@ lemma ringKrullDim_stalk_eq_one_of_smoothOfRelativeDimension_one
   exact_mod_cast le_antisymm hle' (Order.one_le_iff_ne_zero.mpr hne)
 
 /-- **Closed points of a smooth curve are effective Cartier divisors.** On a smooth curve over a
-field the local ring at a closed point `Q` is regular of dimension `1`, a discrete valuation
-ring; a uniformizer generates the reduced ideal of `Q` near `Q` and is a non-zerodivisor there,
-and away from `Q` the ideal is the unit ideal.
-
-(Step 0, the divisor `[Q]`) -/
+field the reduced ideal sheaf of a closed point `Q` is invertible. -/
 lemma isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
     [SmoothOfRelativeDimension 1 f] {Q : X}
     (hQ : IsClosed ({Q} : Set X)) :

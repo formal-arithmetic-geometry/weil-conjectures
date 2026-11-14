@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCompari
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 /-! # Composition of inverse images and coefficient units
 
-Source: Stacks Project, Section 01F7, functoriality of pullback.
+## References
+
+* Stacks Project, Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -20,13 +22,11 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {X Y Z : Scheme.{u}}
 
-/-- The coefficient morphism induced by the module pullback unit.
-Source: Stacks Project, Section 01F7. -/
+/-- The coefficient morphism induced by the module pullback unit. -/
 noncomputable def coefficientUnit (f : Y ⟶ X) (M : X.Modules) :=
   coeff f ((pullbackPushforwardAdjunction f).unit.app M)
 
-/-- The inverse-image composition comparison, determined by the adjunctions.
-Source: Mathlib `Adjunction.leftAdjointCompIso`; Stacks Project, Section 01F7. -/
+/-- The inverse-image composition comparison, determined by the adjunctions. -/
 noncomputable def invImageComp (g : Z ⟶ Y) (f : Y ⟶ X) :
     invImage f ⋙ invImage g ≅ invImage (g ≫ f) :=
   Adjunction.leftAdjointCompIso
@@ -35,14 +35,11 @@ noncomputable def invImageComp (g : Z ⟶ Y) (f : Y ⟶ X) :
     (TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (g ≫ f).base)
     (Iso.refl _)
 
-/-- Inverse images along equal morphisms identify.
-Source: equality transport; Stacks Project, Section 01F7. -/
+/-- Inverse images along equal morphisms identify. -/
 noncomputable def invImageCongr {f g : Y ⟶ X} (h : f = g) :
     invImage f ≅ invImage g := eqToIso (congrArg invImage h)
 
-/-- Coefficient units compose under the canonical comparisons.
-Source: Stacks Project, Section 01F7, functoriality of pullback.
--/
+/-- Coefficient units compose under the canonical comparisons. -/
 @[reassoc]
 theorem coefficientUnit_comp (g : Z ⟶ Y) (f : Y ⟶ X) (M : X.Modules) :
     (invImage g).map (coefficientUnit f M) ≫

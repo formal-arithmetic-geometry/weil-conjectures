@@ -17,8 +17,11 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 The exact-square factor identity and normalized unit equations imply compatibility
 of the derived comparison with augmentation, first on resolving complexes and then
-on the derived category. These proved helpers support the stratum restriction proof.
-Source: Stacks Tags 03EL, 06YY.
+on the derived category.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +41,7 @@ attribute [local irreducible] completedAdicChangeData completedReductionCoeffici
 attribute [local irreducible] completedReductionModuleTowerFunctor
   completedReductionTowerComplexCounit reductionComplexCounit coherenceReductionTowerCounit
 
-/-- Ordinary augmentation compatibility descends through computing reduction counits.
-Source: Stacks Tags 03EL, 06YY. -/
+/-- Ordinary augmentation compatibility descends through computing reduction counits. -/
 theorem derivedReduction_augmentationOfCounits
     {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
     [Abelian B] [Abelian C] [Abelian D] [Abelian E]

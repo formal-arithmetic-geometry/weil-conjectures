@@ -11,7 +11,10 @@ set_option linter.privateModule false
 
 /-! # Ordinary normalized rational pullback before completion
 
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03EL and 06YY.
+## References
+
+* Bhatt--Scholze, Remark 6.8.15.
+* Stacks Project, Tags 03EL and 06YY.
 -/
 
 @[expose] public noncomputable section

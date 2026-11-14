@@ -51,7 +51,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The comparison of the two successive exact scalar transports before endpoint
-normalization. Source: exact comparison and the realization unit. -/
+normalization. -/
 theorem finiteOrdinaryScalarTransportComparison (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

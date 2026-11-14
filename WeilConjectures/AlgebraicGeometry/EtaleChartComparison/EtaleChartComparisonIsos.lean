@@ -68,12 +68,15 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
 /-! # Canonical scalar and chart comparisons between etale and pro-etale sites
 
-Source: Stacks Project, proetale.tex, Tag 0GLZ; sites-cohomology.tex,
-Tags 06YY, 0D6D and 07A4; the Charts paragraph of lemma-sp-reduction--2.
-
 The inverse images below are the ordinary derived inverse images. Tensor and
 shift comparisons are the existing normalized derived comparisons. Finite roots
 and their scalar extensions use the recorded same-unit root comparison.
+
+## References
+
+* Stacks Project, Pro-étale Cohomology, Tags 099R, 0GLZ
+* Stacks Project, Cohomology on Sites, Tags 06YS, 06YT, 06YY, 07A4, 0D6D
+* Stacks Project, Tags 00WX, 03EK, 03EL, 05RU, Section 03PK
 -/
 
 @[expose] public noncomputable section
@@ -108,14 +111,13 @@ private instance sheafSmallColimits (J : GrothendieckTopology C)
   ⟨fun _ ↦ Sheaf.instHasColimitsOfShape⟩
 
 /-- Sheafified balanced extension of constant scalars, with the new ring acting on
-its tensor factor. Source: Stacks, Tags 03EK and 06YY. -/
+its tensor factor. -/
 def fixedCoefficientScalarExtension (J : GrothendieckTopology C)
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (f : A →+* B) :
     Sheaf J (ModuleCat.{u + 1} A) ⥤ Sheaf J (ModuleCat.{u + 1} B) :=
   Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} f)
 
-/-- Additivity follows from the actual scalar-extension/restriction adjunction.
-Source: Stacks, Tag 06YY. -/
+/-- Additivity follows from the actual scalar-extension/restriction adjunction. -/
 instance fixedCoefficientScalarExtension_additive (J : GrothendieckTopology C)
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (f : A →+* B) :
     (fixedCoefficientScalarExtension J f).Additive :=
@@ -161,8 +163,7 @@ private theorem fixedExtension_preservesKFlat (J : GrothendieckTopology C)
     exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
   infer_instance
 
-/-- Everywhere-defined ordinary derived scalar extension. Source: Stacks, Tags
-06YS, 06YT and 06YY. -/
+/-- Everywhere-defined ordinary derived scalar extension. -/
 @[instance]
 theorem fixedCoefficientScalarExtension_hasPointwiseLeftDerivedFunctor
     (J : GrothendieckTopology C)
@@ -196,8 +197,7 @@ attribute [local irreducible] fixedCoefficientScalarExtension
 
 /-- The canonical total left derived extension, the universal right Kan extension
 of ordinary extension followed by localization. Its universal property determines
-it up to the unique comparison preserving its counit.
-Source: Stacks, Tag 06YY. -/
+it up to the unique comparison preserving its counit. -/
 def fixedCoefficientDerivedExtension (J : GrothendieckTopology C)
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (f : A →+* B) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
@@ -206,8 +206,7 @@ def fixedCoefficientDerivedExtension (J : GrothendieckTopology C)
     DerivedCategory.Q).totalLeftDerived DerivedCategory.Q
       (HomologicalComplex.quasiIso (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ))
 
-/-- The universal counit of the displayed ordinary left derived extension.
-Source: Stacks, Tag 06YY. -/
+/-- The universal counit of the displayed ordinary left derived extension. -/
 def fixedCoefficientDerivedExtensionCounit (J : GrothendieckTopology C)
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (f : A →+* B) :
     DerivedCategory.Q ⋙ fixedCoefficientDerivedExtension J f ⟶
@@ -224,86 +223,74 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.EtaleChartComparison
 
-/-- Ordinary etale coefficient modules. Source: Stacks, Tag 05RU. -/
+/-- Ordinary etale coefficient modules. -/
 abbrev Et (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) : Type (u + 2) :=
   Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)
 
-/-- Ordinary pro-etale coefficient modules. Source: Stacks, Tags 099R and 05RU. -/
+/-- Ordinary pro-etale coefficient modules. -/
 abbrev Pro (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) : Type (u + 2) :=
   Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R)
 
-/-- Cache the right adjoint underlying etale sheafification.
-Source: Stacks, 00WX. -/
+/-- Cache the right adjoint underlying etale sheafification. -/
 instance etWeakSheafify (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} R) := HasSheafify.isRightAdjoint
 
-/-- Cache the right adjoint underlying pro-etale sheafification.
-Source: Stacks, 00WX. -/
+/-- Cache the right adjoint underlying pro-etale sheafification. -/
 instance proWeakSheafify (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     HasWeakSheafify (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R) :=
   HasSheafify.isRightAdjoint
 
-/-- Existing small colimits, made explicit for the unbounded derived construction.
-Source: Stacks, Tag 06YS. -/
+/-- Existing small colimits, made explicit for the unbounded derived construction. -/
 instance etSmallColimits (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     HasColimitsOfSize.{0, 0} (Et R T) := ⟨fun _ ↦ Sheaf.instHasColimitsOfShape⟩
 
-/-- Cache the existing Abelian structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing Abelian structure, without choosing a new category. -/
 instance etAbelian (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     Abelian (Et R T) := inferInstance
 
-/-- Cache the existing Abelian structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing Abelian structure, without choosing a new category. -/
 instance proAbelian (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     Abelian (Pro R T) := inferInstance
 
-/-- Cache the existing MonoidalPreadditive structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing MonoidalPreadditive structure, without choosing a new category. -/
 instance etMonoidalPreadditive (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     MonoidalPreadditive (Et R T) := inferInstance
 
-/-- Cache the existing MonoidalPreadditive structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing MonoidalPreadditive structure, without choosing a new category. -/
 instance proMonoidalPreadditive (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     MonoidalPreadditive (Pro R T) := inferInstance
 
-/-- Cache the existing SymmetricCategory structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing SymmetricCategory structure, without choosing a new category. -/
 instance etSymmetricCategory (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     SymmetricCategory (Et R T) := inferInstance
 
-/-- Cache the existing MonoidalClosed structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing MonoidalClosed structure, without choosing a new category. -/
 instance etMonoidalClosed (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     MonoidalClosed (Et R T) := inferInstance
 
-/-- Cache the existing MonoidalClosed structure, without choosing a new category.
-Source: Stacks, 06YS. -/
+/-- Cache the existing MonoidalClosed structure, without choosing a new category. -/
 instance proMonoidalClosed (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     MonoidalClosed (Pro R T) := inferInstance
 
-/-- Cache the existing functorial flat resolution structure.
-Source: Stacks, 06YS. -/
+/-- Cache the existing functorial flat resolution structure. -/
 instance etHasFunctorialFlatResolution (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     CategoryTheory.Abelian.HasFunctorialFlatResolution (Et R T) := inferInstance
 
-/-- Cache the existing functorial flat resolution structure.
-Source: Stacks, 06YS. -/
+/-- Cache the existing functorial flat resolution structure. -/
 instance proHasFunctorialFlatResolution (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     CategoryTheory.Abelian.HasFunctorialFlatResolution (Pro R T) := inferInstance
 
-/-- The exact comparison, localized at quasi-isomorphisms. Source: Stacks, 0GLZ. -/
+/-- The exact comparison, localized at quasi-isomorphisms. -/
 abbrev nu (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     DerivedCategory (Et R T) ⥤ DerivedCategory (Pro R T) :=
   (comparisonUpperStar (ModuleCat.{u + 1} R) T).leftDerivedFunctor
 
-/-- Scheme inverse image on ordinary pro-etale complexes. Source: Stacks, Tag 0D6D. -/
+/-- Scheme inverse image on ordinary pro-etale complexes. -/
 abbrev proPull (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (v : T' ⟶ T) :
     DerivedCategory (Pro R T) ⥤ DerivedCategory (Pro R T') :=
   (AlgebraicGeometry.ProEtale.upperStar (ModuleCat.{u + 1} R) v).leftDerivedFunctor
 
-/-- The exact comparison on degree-zero sheaves. Source: Stacks 05RU. -/
+/-- The exact comparison on degree-zero sheaves. -/
 def nuSingle (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     DerivedCategory.singleFunctor (Et R T) 0 ⋙ nu R T ≅
       comparisonUpperStar (ModuleCat.{u + 1} R) T ⋙
@@ -315,8 +302,7 @@ attribute [local irreducible] nuSingle
 
 /-- Ordinary balanced scalar comparison, fixed by the commuting restriction square.
 Both right adjoints restrict the same sections with the same A-action. Consequently
-left-adjoint uniqueness gives the ordinary balanced-tensor map, in B-modules.
-Source: Stacks, Tags 03EL and 06YY. -/
+left-adjoint uniqueness gives the ordinary balanced-tensor map, in B-modules. -/
 def scalarSheafIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u}) :
     fixedCoefficientScalarExtension T.smallEtaleTopology f ⋙
@@ -336,7 +322,7 @@ attribute [local irreducible] scalarSheafIso
 
 /-- The normalized finite-root scalar comparison already specified by its generators.
 The theorem determines its map uniquely: each local root goes to the same unit and
-its scalar factor is unchanged. Source: Stacks, Tags 0GLZ and 03EL. -/
+its scalar factor is unchanged. -/
 def rootIso (R : Type (u + 1)) [CommRing R] [Finite R]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (T : Scheme.{u})
     (hT : IsUnit (N : Γ(T, ⊤))) :
@@ -345,16 +331,14 @@ def rootIso (R : Type (u + 1)) [CommRing R] [Finite R]
       Scheme.finiteRootProTensor R N hN hR T :=
   Classical.choose (Scheme.finiteRootSiteComparison R) N hN hR T hT
 
-/-- Nonnegative powers of the actual pro-etale root tensor, with constant unit in degree zero.
-Source: Stacks, Section 03PK and Tag 07A4. -/
+/-- Nonnegative powers of the actual pro-etale root tensor, with constant unit in degree zero. -/
 def proTwist (R : Type (u + 1)) [CommRing R]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (T : Scheme.{u}) : ℕ → Pro R T
   | 0 => 𝟙_ _
   | 1 => Scheme.finiteRootProTensor R N hN hR T
   | c + 2 => proTwist R N hN hR T (c + 1) ⊗ Scheme.finiteRootProTensor R N hN hR T
 
-/-- Iterated canonical tensor comparison, initialized by the unit and the same-unit root map.
-Source: Stacks, Tags 03EL, 0GLZ and 07A4. -/
+/-- Iterated canonical tensor comparison, initialized by the unit and the same-unit root map. -/
 def twistSheafIso (R : Type (u + 1)) [CommRing R] [Finite R]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (T : Scheme.{u})
     (hT : IsUnit (N : Γ(T, ⊤))) : ∀ c : ℕ,
@@ -370,8 +354,7 @@ def twistSheafIso (R : Type (u + 1)) [CommRing R] [Finite R]
 
 attribute [local irreducible] twistSheafIso rootIso
 
-/-- The degree-zero finite-root comparison in the ordinary derived categories.
-Source: Stacks, Tags 0GLZ and 07A4. -/
+/-- The degree-zero finite-root comparison in the ordinary derived categories. -/
 def twistLineIso (R : Type (u + 1)) [CommRing R] [Finite R]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (T : Scheme.{u})
     (hT : IsUnit (N : Γ(T, ⊤))) (c : ℕ) :
@@ -383,8 +366,7 @@ def twistLineIso (R : Type (u + 1)) [CommRing R] [Finite R]
 
 attribute [local irreducible] twistLineIso
 
-/-- The canonical derived tensor comparison for the site inverse image.
-Source: Stacks, 07A4. -/
+/-- The canonical derived tensor comparison for the site inverse image. -/
 def nuTensorRaw (R : Type (u + 1)) [CommRing R] [Finite R] (T : Scheme.{u})
     (K M : DerivedCategory (Et R T)) :
     (nu R T).obj (K ⊗ M) ⟶ (nu R T).obj K ⊗ (nu R T).obj M :=
@@ -392,15 +374,13 @@ def nuTensorRaw (R : Type (u + 1)) [CommRing R] [Finite R] (T : Scheme.{u})
     (comparisonUpperStar (ModuleCat.{u + 1} R) T)).app K).app M
 
 /-- The same canonical tensor arrow with its source and target written explicitly.
-The transports are identities on the displayed bifunctor objects.
-Source: Stacks, 07A4. -/
+The transports are identities on the displayed bifunctor objects. -/
 def nuTensor (R : Type (u + 1)) [CommRing R] [Finite R] (T : Scheme.{u})
     (K M : DerivedCategory (Et R T)) :
     (nu R T).obj (K ⊗ M) ⟶ (nu R T).obj K ⊗ (nu R T).obj M :=
   nuTensorRaw R T K M
 
-/-- The specified tensor comparison is invertible.
-Source: Stacks, 07A4. -/
+/-- The specified tensor comparison is invertible. -/
 @[instance]
 theorem nuTensor_isIso (R : Type (u + 1)) [CommRing R] [Finite R] (T : Scheme.{u})
     (K M : DerivedCategory (Et R T)) : IsIso (nuTensor R T K M) := by
@@ -411,8 +391,7 @@ theorem nuTensor_isIso (R : Type (u + 1)) [CommRing R] [Finite R] (T : Scheme.{u
 attribute [local irreducible] nuTensor nuTensorRaw
 
 /-- The specified derived twist comparison: the derived tensor comparison followed by
-one tensor the finite-root comparison, including the constant-unit case c=0.
-Source: Stacks, Tag 07A4. -/
+one tensor the finite-root comparison, including the constant-unit case c=0. -/
 def twistIso (R : Type (u + 1)) [CommRing R] [Finite R]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (T : Scheme.{u})
     (hT : IsUnit (N : Γ(T, ⊤))) (c : ℕ) (L : DerivedCategory (Et R T)) :
@@ -427,7 +406,7 @@ def twistIso (R : Type (u + 1)) [CommRing R] [Finite R]
 attribute [local irreducible] twistIso
 
 /-- The canonical shift map, obtained from termwise inverse image with the signed
-cochain differential. Source: Stacks, Tag 05RU. -/
+cochain differential. -/
 def shiftIso (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) (s : ℤ) :
     shiftFunctor (DerivedCategory (Et R T)) s ⋙ nu R T ≅
       nu R T ⋙ shiftFunctor (DerivedCategory (Pro R T)) s :=
@@ -441,8 +420,7 @@ def shiftIso (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) (s : ℤ) :
 
 
 
-/-- The localization comparison for the exact site inverse image, on cochain complexes.
-Source: Stacks, Tags 0GLZ and 05RU. -/
+/-- The localization comparison for the exact site inverse image, on cochain complexes. -/
 def nuQFactor (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     DerivedCategory.Q ⋙ nu R T ≅
       (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapHomologicalComplex (.up ℤ) ⋙
@@ -454,8 +432,7 @@ def nuQFactor (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
 attribute [local irreducible] nuQFactor
 
 /-- The equation specifying the scalar comparison on every flat-term K-flat model.
-The ordinary arrow is scalarSheafIso, so this retains its B-action and tensor normalization.
-Source: Stacks, Tags 06YY and 07A4. -/
+The ordinary arrow is scalarSheafIso, so this retains its B-action and tensor normalization. -/
 def ScalarModel {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u})
     (alpha : fixedCoefficientDerivedExtension T.smallEtaleTopology f ⋙ nu B T ⟶

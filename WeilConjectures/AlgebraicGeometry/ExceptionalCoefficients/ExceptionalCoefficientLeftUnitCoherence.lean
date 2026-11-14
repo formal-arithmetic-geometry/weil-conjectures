@@ -8,7 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.Exceptio
 import WeilConjectures.CategoryTheory.Scalar.ScalarLeftUnitTransport
 import all WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientMaps
 
-/-! # The normalized scalar comparison respects the left tensor unit -/
+/-! # The normalized scalar comparison respects the left tensor unit
+
+## References
+
+* Stacks Project, Tag 07A4
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
@@ -70,8 +75,7 @@ private theorem normalized_left_unit
     exact congrArg (fun z ↦ z ≫ S.map (_root_.DerivedCategory.Q.map π)) hp
   exact NatTrans.congr_app hab K
 
-/-- Left-unit coherence with the site monoidal parameters shared.
-Source: Stacks 07A4. -/
+/-- Left-unit coherence with the site monoidal parameters shared. -/
 def SiteScalarLeftUnitLaw
     (C : Type*) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
@@ -90,8 +94,7 @@ def SiteScalarLeftUnitLaw
         S.map (derivedTensorLeftUnitor C T K).hom
 
 /-- Component form of the scalar left-unit normalization, with the site monoidal
-structures shared throughout the statement.
-Source: Stacks 07A4. -/
+structures shared throughout the statement. -/
 private theorem SiteScalarLeftUnitLaw.component
     (C : Type*) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
@@ -193,8 +196,7 @@ private theorem scalarRepresentativeNatTrans_isIso
   exact cochain_representative_isIso _ _ _ _
     (ProEtale.etaleSheafExtendScalarsAdjunction φ T) P hP
 
-/-- Left unitality of the specified scalar tensor and unit comparisons.
-Source: Stacks 07A4. -/
+/-- Left unitality of the specified scalar tensor and unit comparisons. -/
 theorem tensorIso_left_unit
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     (T : Scheme.{u}) :

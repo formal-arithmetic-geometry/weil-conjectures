@@ -93,11 +93,7 @@ theorem IsConnectedCurve.baseChangeField [IsAlgClosed k] [IsConnectedCurve f] [S
             topologicalKrullDim_eq_of_smoothOfRelativeDimension (f.baseChangeField k') 1 }
 
 /-- **The genus is invariant under base change.** For a smooth proper curve `C` over `k` and a
-field extension `k'`, `g(C_{k'}) = g(C)`: both genera are arithmetic genera
-(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), and `H¹(C_{k'}, 𝒪) = H¹(C, 𝒪) ⊗_k k'`.
-This is the genus part of blueprint `proposition-cohomology-smooth-affine-curve--4`; its
-compatibility of the Jacobian with base change, `J_{C_{k'}} ≅ (J_C)_{k'}`, is not formalised
-here. -/
+field extension `k'`, `g(C_{k'}) = g(C)`. -/
 theorem Scheme.Hom.genus_baseChangeField [SmoothOfRelativeDimension 1 f] [IsProper f] :
     (f.baseChangeField k').genus = f.genus := by
   let : C.Over (Spec (.of k)) := ⟨f⟩
@@ -157,12 +153,7 @@ noncomputable def Scheme.Hom.sheafHBaseChangeConstantZModAddEquiv (n q : ℕ) :
 
 /-- **Invariance of the cohomology of a smooth proper curve.** Let `k ⊆ k'` be algebraically
 closed fields, `C` a smooth proper connected curve over `k` and `n` prime to `char k`. Then the
-pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`: it is injective
-(`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`), and both groups are
-finite of the same order by the curve estimate
-(`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`), since `C_{k'}` is again a
-smooth proper connected curve of the same genus.
-(proper case) -/
+pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsProper f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

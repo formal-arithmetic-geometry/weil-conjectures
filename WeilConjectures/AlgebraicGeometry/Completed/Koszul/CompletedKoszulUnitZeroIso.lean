@@ -10,8 +10,10 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherenc
 
 /-! # The degree-zero completed Koszul unit is invertible
 
-Source: Stacks Project, Tag 099M, the finite Koszul construction; Tag 03EK,
-scalar extension of module sheaves.
+## References
+
+* Stacks Project, Tag 099M (the finite Koszul construction)
+* Stacks Project, Tag 03EK (scalar extension of module sheaves)
 -/
 
 @[expose] public noncomputable section
@@ -129,8 +131,7 @@ private theorem normalizedScalarTensor_map
   exact hn.symm
 
 attribute [local irreducible] completedAdicRing in
-/-- The specified degree-zero completed Koszul unit is an isomorphism.
-Source: Stacks Project, Tag 099M, finite Koszul complexes; Tag 03EK, scalar extension. -/
+/-- The specified degree-zero completed Koszul unit is an isomorphism. -/
 theorem completedKoszulUnitZero_isIso
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (n : ℕ) :

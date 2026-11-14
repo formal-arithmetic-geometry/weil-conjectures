@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedCoefficientDirectI
 
 /-! # Transport of scalar mates through coefficient isomorphisms
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 07A6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YY, 07A6, 0D6D and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 namespace CompletedProjection
 
 /-- View an object over the completed ring on X over the literal inverse image of
-that on Y, using the specified completed coefficient isomorphism.
-Source: blueprint order 1275; Stacks 07A6. -/
+that on Y, using the specified completed coefficient isomorphism. -/
 abbrev inverseObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (K : PerfectProjection.derived d X) :=
@@ -158,11 +159,7 @@ private theorem literalBeta_transpose
 
 /-- The scalar-adjunction mate is invariant under the two coefficient isomorphisms
 and the normalized presentations of ordinary direct image. The arrow on the right
-is the existing scalar mate over literal inverse-image ring sheaves. No tensor
-model, projection-formula arrow, or perfectness hypothesis occurs here.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 07A6; the canonical
-coefficient-change comparisons of Tags 0D6D and 0D6E; blueprint orders 1275-1276. -/
+is the existing scalar mate over literal inverse-image ring sheaves. -/
 theorem completedScalarMateCoefficientTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]

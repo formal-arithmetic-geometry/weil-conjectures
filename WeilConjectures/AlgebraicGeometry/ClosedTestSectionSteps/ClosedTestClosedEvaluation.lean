@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ClosedTestDerivedExchangeModel.C
 
 /-! # Derived closed-unit evaluation and its naturality
 
-Source: Stacks Project, proetale.tex, Tags 09BK and 09BL; sites-cohomology.tex, Tag 0D6F. -/
+## References
+
+* Stacks Project, Tags 09BK, 09BL, 0D6F
+-/
 
 @[expose] public noncomputable section
 

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectI
 
 /-! # Finite-free basis columns of the direct-image coefficient comparison
 
-Source: Stacks Project, Tags 0B56 and 0944.
+## References
+
+* Stacks Project, Tags 0B56, 0944
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +74,7 @@ private theorem mate_columns_private
     adj.right_triangle_components, Category.id_comp]
 
 /-- In finite-free coordinates the restricted canonical mate has the direct images
-of the basis inclusions as its columns. This does not assert invertibility.
-Source: Stacks Project, sites-cohomology.tex, Tags 0B56 and 0944. -/
+of the basis inclusions as its columns. -/
 theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)

@@ -10,7 +10,12 @@ public import Mathlib.Algebra.Homology.Localization
 
 import all Mathlib.Algebra.Homology.Localization
 
-/-! # The adjunction mate of exact open localization. -/
+/-! # The adjunction mate of exact open localization.
+
+## References
+
+* Stacks Project, Tags 06YY, 0E8I
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -92,8 +97,7 @@ private theorem open_unit
   rw [exactFactorh, exactFactorh] at h
   exact h
 
-/-- The right mate of the exact open localization factor is the inverse restriction factor.
-Source: Stacks 06YY, 0E8I; normalization proof step 1. -/
+/-- The right mate of the exact open localization factor is the inverse restriction factor. -/
 theorem etaleOpenLocalizationMate
     (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

@@ -21,7 +21,12 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Etale.Gabber
 import Mathlib.Order.CompletePartialOrder
 
-/-! # Acyclic closed term for a dense-open counit -/
+/-! # Acyclic closed term for a dense-open counit
+
+## References
+
+* Stacks Project, Tag 0GJA, proof (five-term exact sequence and remark (c)).
+-/
 
 @[expose] public section
 
@@ -48,9 +53,7 @@ private theorem bijective_finite_pushforward_comparison
   exact (Function.Bijective.of_comp_iff' hright _).mp hb
 
 /-- The dense-open counit has a short exact cokernel with acyclic degree-one
-cohomology on both sides of the field extension and bijective degree-zero comparison.
-Source: Stacks Project, Tag 0GJA, proof (five-term exact sequence and remark (c)).
--/
+cohomology on both sides of the field extension and bijective degree-zero comparison. -/
 theorem dense_open_closed_term (Λ : Type (u + 1)) [CommRing Λ]
     {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]

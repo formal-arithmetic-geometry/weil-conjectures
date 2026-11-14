@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenLowBaseChange
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
 
-/-! # Field extension across a dense open -/
+/-! # Field extension across a dense open
+
+## References
+
+* Stacks Project, Tag 0GJA, proof (the five-term sequence) and remark (c).
+-/
 
 @[expose] public section
 
@@ -104,8 +109,7 @@ private theorem invertible_order_of_annihilator (Λ : Type (u + 1)) [CommRing Λ
   simpa using hx
 
 /-- The two conditional field-extension assertions transfer across a dense-open counit
-for a constructible sheaf killed by a prime.
-Source: Stacks Project, Tag 0GJA, proof, the five-term sequence and remark (c). -/
+for a constructible sheaf killed by a prime. -/
 theorem dense_open_base_change (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

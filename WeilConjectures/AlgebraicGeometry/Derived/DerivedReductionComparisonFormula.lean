@@ -10,12 +10,18 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # The representative equation for derived reduction comparisons
 
-Source: Stacks Project, Tags 06YS and 06YY.
-
 The predicate records the ordinary comparison transported through the two specified
-reduction counits and the localization factors of exact pullback. Naming the common
-formula lets applications share its categorical data without unfolding concrete module
-categories and functors during every conversion.
+reduction counits and the localization factors of exact pullback.
+
+## Implementation details
+
+* `DerivedReductionComparisonFormula` names the common formula so that applications share its
+  categorical data without unfolding concrete module categories and functors during every
+  conversion.
+
+## References
+
+* Stacks Project, Tags 06YS, 06YY
 -/
 
 @[expose] public section
@@ -24,8 +30,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The counit-normalized comparison on a cochain representative.
-Source: Stacks Project, Tags 06YS and 06YY. -/
+/-- The counit-normalized comparison on a cochain representative. -/
 def DerivedReductionComparisonFormula
     {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
     [Abelian B] [Abelian C] [Abelian D] [Abelian E]

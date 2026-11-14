@@ -16,6 +16,10 @@ import Mathlib.CategoryTheory.Adjunction.Evaluation
 import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 
 /-! # Finite reduction of the normalized total limit.
+
+## References
+
+* [Stacks Project, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
 -/
 
 @[expose] public noncomputable section
@@ -58,10 +62,7 @@ private theorem module_regular_resolutions (ℓ : ℕ) [Fact ℓ.Prime] (W : Sch
     (moduleUnit_mono ℓ W _ (pow_ne_zero _ (Fact.out : ℓ.Prime).ne_zero)) _ (hflat i)
 
 /-- Reduction of a total limit of derived quotient towers is naturally evaluation;
-the comparison is the adjoint of the actual limit projection.
-
-Source: Stacks 099M; blueprint diagonal tower limit proof, paragraph (3), and
-`lemma-weil-pbc-adic-completion-reduction`. -/
+the comparison is the adjoint of the actual limit projection. -/
 theorem diagonal_adic_evaluation_comparison (ℓ : ℕ) [Fact ℓ.Prime]
     (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.AffineSpace.AffineLineDenseOpenFiniteCo
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 
-/-! A lisse open with finite complement after shrinking an affine-line base. -/
+/-! A lisse open with finite complement after shrinking an affine-line base.
+
+## References
+* [Stacks Project, Tag 0GKZ](https://stacks.math.columbia.edu/tag/0GKZ)
+-/
 
 @[expose] public section
 
@@ -23,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A constructible sheaf on a relative affine line is lisse with finite complement after
-restricting the base to a dense affine open.
-Source: Stacks Project, Tag 0GKZ, the generic-constancy and generic-finiteness paragraph. -/
+restricting the base to a dense affine open. -/
 theorem exists_dense_affine_open_lisse_finite_complement
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y]
     [Algebra.FiniteType ℤ Γ(Y, ⊤)]

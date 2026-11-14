@@ -17,12 +17,14 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownSupportTransition
 
 /-! # Evaluation mates and a uniform lower bound for the system right adjoint
 
-Source: Zheng, Lemma 5.22, (5.16.2), and Construction 5.15, printed pp. 35--36.
-
 All categories are ordinary unbounded derived categories of strict systems. Level `n`
 denotes the positive exponent `n+1`. The Brown package supplies only the already recorded
 canonical comparisons: the right adjoints below are arbitrary fixed choices. The bound
 is conditional and does not restrict the inputs of the evaluation or transition clauses.
+
+## References
+
+* Zheng, Construction 4.1, Construction 5.15, (5.16.2) and Lemma 5.22 (printed pp. 35--36)
 -/
 
 @[expose] public noncomputable section
@@ -51,9 +53,8 @@ variable {O : Type (u + 1)} [CommRing O] {t : O}
     DerivedCategory (strictEtaleLevel X O t n)}
   (adjN : ∀ n : ℕ, S.levelFunctor n ⊣ g n)
 
-/-- The six Hom bijections in the node, in their specified order. The middle bijection
-precomposes with the inverse of the canonical left-extension comparison.
-Source: Zheng, (5.16.2) and Lemma 5.22. -/
+/-- The chain of six Hom bijections, in their specified order. The middle bijection
+precomposes with the inverse of the canonical left-extension comparison. -/
 def strictEtaleEvaluationHomChain (n : ℕ)
     (P : DerivedCategory (strictEtaleLevel X O t n))
     (M : DerivedCategory (strictEtaleCoefficientSystem Y O t)) :
@@ -66,15 +67,13 @@ def strictEtaleEvaluationHomChain (n : ℕ)
     ((adjN n).homEquiv P ((S.PY.evaluation n).obj M))
 
 /-- The coefficient projection's right mate. `B.projection.hom` is `q⁻¹`, as fixed by
-`projection_recorded_q`; the mate uses the chosen finite-level units and counits.
-Source: Zheng, Lemma 5.22 and Construction 5.15. -/
+`projection_recorded_q`; the mate uses the chosen finite-level units and counits. -/
 def strictEtaleBrownQuotientMate {m n : ℕ} (h : n ≤ m) :
     g m ⋙ (S.PX.scalar h).derived ⟶ (S.PY.scalar h).derived ⋙ g n :=
   (mateEquiv (adjN m) (adjN n) (.mk _ _ _ _ (B.projection h).hom))
 
 /-- The prescribed finite-level transition word `g_n(t_M) b`, using the scalar-adjoint
-of the actual derived strict transition of `M`, including nonflat quotient maps.
-Source: Zheng, Lemma 5.22 and Construction 4.1. -/
+of the actual derived strict transition of `M`, including nonflat quotient maps. -/
 def strictEtaleBrownRightSystemTransition {m n : ℕ} (h : n ≤ m)
     (M : DerivedCategory (strictEtaleCoefficientSystem Y O t)) :
     (S.PX.scalar h).derived.obj ((g m).obj ((S.PY.evaluation m).obj M)) ⟶
@@ -330,8 +329,7 @@ private theorem right_transition_composition {r m n : ℕ} (h₁ : m ≤ r) (h�
     ((S.PY.evaluation r).obj M)).symm]
 
 /-- Conclusion data, rather than assumptions, for evaluation, its unique Hom-chain
-normalization, the evaluated unit/counit, actual transitions, and the unchanged bound.
-Source: Zheng, Lemma 5.22 and Construction 5.15. -/
+normalization, the evaluated unit/counit, actual transitions, and the unchanged bound. -/
 structure StrictEtaleEvaluationBound where
   theta : ∀ n : ℕ, G ⋙ S.PX.evaluation n ≅ S.PY.evaluation n ⋙ g n
   hom_chain : ∀ (n : ℕ) P M (h : P ⟶ (S.PX.evaluation n).obj (G.obj M)),

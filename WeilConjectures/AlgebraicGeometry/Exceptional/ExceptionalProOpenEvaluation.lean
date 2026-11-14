@@ -96,7 +96,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
 import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 import WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExactIndependent
 
-/-! # Ordinary pro-etale open extension -/
+/-! # Ordinary pro-etale open extension
+
+## References
+
+* Stacks Project, Tags 03DJ, 0941
+* Zheng, Construction 4.1 and Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -280,9 +286,7 @@ private theorem coextension_mate_isIso (n : ℕ) :
   exact NatIso.isIso_of_isIso_app beta
 
 /-- Level extension by zero is exact, and the mate of ordinary restriction
-with evaluation is invertible for the canonical open left adjoints.
-
-Source: Stacks 03DJ, 0941; Zheng Construction 4.1 and Lemma 4.10. -/
+with evaluation is invertible for the canonical open left adjoints. -/
 theorem exceptionalProOpen_evaluation
     [I.inverse.IsRightAdjoint]
     [∀ n : ℕ, (I.lift n).modules.IsRightAdjoint] :

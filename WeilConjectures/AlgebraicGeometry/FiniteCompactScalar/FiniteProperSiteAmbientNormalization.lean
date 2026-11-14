@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompac
 public import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMateData
 import all WeilConjectures.AlgebraicGeometry.Sp.SpDirectImageEtaleMate
 
-/-! # Bounded-below and ambient proper site comparisons -/
+/-! # Bounded-below and ambient proper site comparisons
+
+## References
+
+* [Stacks Project, Tag 099R](https://stacks.math.columbia.edu/tag/099R)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,9 +24,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 
 /-- The included D+ site mate is the ambient counit mate, with the prescribed
-intrinsic-realization identifications. This equality contains no change of coefficients.
-
-Source: Stacks Tag 099R; `lem-finite-proper-scalar-transport`, Step 3. -/
+intrinsic-realization identifications. This equality contains no change of coefficients. -/
 theorem properSiteIso_hom_ambient
     (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]

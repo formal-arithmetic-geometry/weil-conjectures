@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Identity normalization of an exact compact-support unit
 
-Source: Stacks Project, Tags 0F7I, 0F7K and 015F.
+## References
+
+* Stacks Project, Tags 0F7I, 0F7K, 015F
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized exact derived unit at the proper identity compactification has the
-canonical identity normalization.
-Source: Stacks Project, Tags 0F7I, 0F7K and 015F. -/
+canonical identity normalization. -/
 theorem exactCompactificationUnit_identity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X]

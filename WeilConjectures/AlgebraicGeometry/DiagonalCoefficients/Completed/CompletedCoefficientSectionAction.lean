@@ -105,8 +105,7 @@ end CategoryTheory.SheafModuleSection
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Evaluate an internal module action on two local sections, using the tensor comparison
-from the presheaf tensor to the sheaf tensor. Source: the sectionwise description of internal
-abelian module sheaves. -/
+from the presheaf tensor to the sheaf tensor. -/
 def coefficientSectionAction {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (N : Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X) (U : X.ProEtᵒᵖ)
     (a : (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X).obj.obj U)

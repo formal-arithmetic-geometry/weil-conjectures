@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.Flat.FlatConstantTensorProZeroConesSupplem
 
 /-! # Finite exact realization of completed Koszul coefficient cones
 
-Source: Stacks Project, Tags 099M, 0921 and 093M.
+## References
+
+* Stacks Project, Tags 099M, 0921, 093M, 06YN
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +29,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing total tensor structure, with the completed coefficient sheaf explicit.
-Source: Stacks 06YN. -/
+/-- The existing total tensor structure, with the completed coefficient sheaf explicit. -/
 instance completedKoszulCochainMonoidal
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     MonoidalCategory (CochainComplex (CompletedAdicModules T d) ℤ) :=
@@ -38,8 +39,7 @@ instance completedKoszulCochainMonoidal
 attribute [-instance] completedKoszulCochainMonoidal
 attribute [local instance] completedKoszulCochainMonoidal
 
-/-- Use precisely the tensor data of completedKoszulCochainMonoidal.
-Source: Stacks 06YN. -/
+/-- Use precisely the tensor data of `completedKoszulCochainMonoidal`. -/
 instance completedKoszulCochainMonoidalStruct
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     MonoidalCategoryStruct (CochainComplex (CompletedAdicModules T d) ℤ) :=
@@ -66,10 +66,7 @@ private theorem mapToExtendedSingle_ext
 set_option linter.unusedVariables false in
 /-- Finite exact realization identifies the algebraic augmentation cones with the
 completed coefficient cones, including their actual strict transition maps. There
-is no arbitrary complex P, K-flatness, eventual vanishing, or inverse limit here.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M),
-more-algebra.tex, lemma-sequence-Koszul-complexes (0921), and Modules on Sites (093M). -/
+is no arbitrary complex P, K-flatness, eventual vanishing, or inverse limit here. -/
 theorem completedKoszulCoefficientConeRealization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)

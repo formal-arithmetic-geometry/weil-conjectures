@@ -387,24 +387,7 @@ private theorem integralScalarComparison_isIso (l : ℕ) [Fact l.Prime]
   exact ⟨hf, CondensedRing.finitePush_of_pointCopower f _ _ (integralMap l E) I θ'⟩
 
 /-- The finite-free and localization direct-image comparisons are invertible on
-the shifted root lines. No class, trace or integration identity is included.
-
-
-
-For rationalization scalar extension is exact localization at ell, as given by
-the regular coefficient telescope. Restriction again preserves K-injectives,
-so the same universal-unit construction supplies the normalized square.
-After restriction the scalar mate on the shifted root line is the canonical
-comparison for the ell-multiplication telescope on the line in degree -2.
-Every complex of this telescope vanishes below -2. Since f is qcqs, bounded
-continuity makes its direct-image comparison an isomorphism on every homology
-sheaf. Exact filtered colimits identify the target with localization, hence
-with the rational scalar image. Homology detects isomorphisms in the derived
-category and restriction reflects them, proving the rational assertion.
-Both identifications agree with the stated mate: transposing by the scalar
-adjunction reduces them to the full-unit normalization already imposed.
-The zero line and the identity finite extension satisfy the same equations;
-no invertibility assumption on ell is needed to obtain the degree bound. -/
+the shifted root lines. No class, trace or integration identity is included. -/
 theorem diagonalFinite_scalarSquares
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] :

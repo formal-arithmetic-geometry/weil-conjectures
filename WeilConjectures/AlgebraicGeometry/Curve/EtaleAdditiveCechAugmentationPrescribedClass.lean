@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaMap
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackChainTransfer
 
 /-! # Čech augmentation compatibility for a prescribed target class
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1. -/
+
+## References
+
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
+* Stacks Project, Tags 01FB, 03P2
+-/
 
 @[expose] public section
 
@@ -22,9 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- A target global cycle of the prescribed pullback class has matching total augmentations.
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1, the augmented double-complex
-construction; Tag 01FB, resolution comparison; Tag 03P2, coefficient sections. -/
+/-- A target global cycle of the prescribed pullback class has matching total augmentations. -/
 theorem etaleAdditiveCech_augmentation_prescribed_class
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

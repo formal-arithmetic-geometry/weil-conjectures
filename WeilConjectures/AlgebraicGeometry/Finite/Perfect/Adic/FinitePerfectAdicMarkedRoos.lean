@@ -20,7 +20,11 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedLowerStarDerivedLimit
 
 /-! # The Roos calculation for algebraically marked finite-projective quotients
 
-Source: Stacks Project, Tag 09C6, the displayed finite-projective inverse-limit calculation.
+## References
+
+* Stacks Project, Tag 09C6 (the displayed finite-projective inverse-limit calculation)
+* Stacks Project, Cohomology on Sites, Tags 0940 and 0941
+* Stacks Project, Tag 03DA
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +36,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- An isomorphism of cone points transports a Roos triangle.
-Source: Stacks Tag 0941. -/
+/-- An isomorphism of cone points transports a Roos triangle. -/
 theorem finitePerfectAdicRoos_changeObject
     {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
@@ -48,8 +51,7 @@ theorem finitePerfectAdicRoos_changeObject
         (δ ≫ (shiftFunctor D (1 : ℤ)).map e.hom))
       e (Iso.refl _) (Iso.refl _) (by simp) (by simp) (by simp))).mp h
 
-/-- An isomorphism of entire inverse diagrams transports a Roos triangle.
-Source: Stacks Tag 0941. -/
+/-- An isomorphism of entire inverse diagrams transports a Roos triangle. -/
 theorem finitePerfectAdicRoos_changeDiagram
     {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
@@ -74,8 +76,7 @@ theorem finitePerfectAdicRoos_changeDiagram
       (Pretriangulated.Triangle.mk (p ≫ E.hom) _ (E.inv ≫ δ))
       (Iso.refl _) E E (by simp) hE.symm (by simp))).mp h
 
-/-- Exact slice restriction is a right adjoint also on unbounded derived categories.
-Source: Stacks Tag 03DA and Derived Categories, derived adjunction. -/
+/-- Exact slice restriction is a right adjoint also on unbounded derived categories. -/
 theorem finitePerfectAdicRestriction_rightAdjoint
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (U : X.ProEt) :
@@ -104,8 +105,7 @@ theorem finitePerfectAdicRestriction_rightAdjoint
     DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
     E.mapDerivedCategory R.mapDerivedCategory).isRightAdjoint
 
-/-- Exact derived slice restriction preserves Roos limit triangles.
-Source: Stacks Tags 0940 and 0941. -/
+/-- Exact derived slice restriction preserves Roos limit triangles. -/
 theorem finitePerfectAdicRestriction_roos
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (U : X.ProEt)
@@ -140,10 +140,7 @@ theorem finitePerfectAdicRestriction_roos
   exact ⟨_, _, h⟩
 
 /-- The canonical algebraic quotient diagram of a bounded finite-projective complex
-has its completed constant realization as its Roos limit.
-
-Source: Stacks Project, Tag 09C6, the displayed finite-projective inverse-limit calculation;
-Cohomology on Sites, Tags 0940 and 0941. -/
+has its completed constant realization as its Roos limit. -/
 theorem finitePerfectAdicMarked_roos
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (U : X.ProEt)

@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechResolutionTransf
 import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 
 /-! # Existence of normalized additive étale Čech edges
-Source: Stacks Project, Tags 03P2, 01EQ and 01FD. -/
+
+## References
+
+* Stacks Project, Tags 03P2, 01EQ, 01FD
+-/
 
 @[expose] public section
 
@@ -22,11 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The additive étale Čech edge equivalence has its augmentation normalization.
-This concerns one scheme, with no endomorphism or inverse-image assertion.
-
-Source: Stacks Project, Tag 03P2, separated-case affine-cover proof; Tag 01EQ,
-construction of the two augmentations; Tag 01FD, augmented double-complex diagram. -/
+/-- The additive étale Čech edge equivalence has its augmentation normalization. -/
 theorem exists_etaleAdditiveCech_normalized
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

@@ -16,7 +16,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Exact derived pullback-square pasting
 
-Source: Stacks Project, Tag 03S6; coherence of exact inverse images.
+## References
+
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public section
@@ -40,8 +42,7 @@ private lemma exact_word_cell_iso
     Word.cell C alpha.hom = P.comparison.inv ≫
       (Functor.mapDerivedCategoryNatIso alpha).hom ≫ R.comparison.hom := rfl
 
-/-- Inverse exact pullback-square comparisons paste under successive Cartesian changes.
-Source: Stacks Project, Tag 03S6, and the sheaf inverse-image square-pasting law. -/
+/-- Inverse exact pullback-square comparisons paste under successive Cartesian changes. -/
 theorem etaleExactPullbackSquarePasting
     (A : Type (u + 1)) [CommRing A]
     {U U' U'' X X' X'' : Scheme.{u}}

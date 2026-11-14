@@ -133,7 +133,9 @@ import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCohe
 
 /-! # Pullback of a finite free coefficient module
 
-Source: Stacks Project, Tags 03D2, 03D3 and 03EL.
+## References
+
+* Stacks Project, Tags 03D2, 03D3, 03EL
 -/
 
 @[expose] public noncomputable section
@@ -352,8 +354,7 @@ private theorem basisCoordinate_unit {Z W : Scheme.{u}} {q : Z ⟶ W}
   exact (hR.trans hS).symm.trans (h.symm.trans
     ((congrArg (fun t ↦ (pullbackRegularIso R).hom.val.app VZ t) hn.symm).trans hL))
 
-/-- The pulled-back coefficient basis has the expected coordinate formula.
-Source: Stacks Project, Tags 03D2, 03D3 and 03EL. -/
+/-- The pulled-back coefficient basis has the expected coordinate formula. -/
 theorem finiteFreeDirectImage_coefficientPullback {Z W : Scheme.{u}} {q : Z ⟶ W}
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
     (θ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology W)

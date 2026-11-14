@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Degree-zero dimension of the derived residue of the structure sheaf
 
-Source: Stacks Project, Tags 06YD and 06YJ; Tag 0E62, local argument.
+## References
+
+* Stacks Project, Tags 06YD, 06YJ, 0E62
 -/
 
 @[expose] public section
@@ -24,8 +26,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The flat single complex on the structure sheaf computes its derived residue pullback.
-Source: Stacks Project, Tags 06YD and 06YJ. This is the flat-single component of. -/
+/-- The flat single complex on the structure sheaf computes its derived residue pullback. -/
 private theorem residue_unit_single_iso (S : Scheme.{u}) (s : S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u}
@@ -79,8 +80,7 @@ private theorem residue_unit_single_iso (S : Scheme.{u}) (s : S)
     ((DerivedCategory.singleFunctorIsoCompQ B 0).app (F.obj M)).symm ≪≫
     (DerivedCategory.singleFunctor B 0).mapIso eFM⟩
 
-/-- An invertible degree-zero residue map from the structure sheaf forces Betti number one.
-Source: Stacks Project, Tag 0E62, local argument, using Tags 06YD and 06YJ. -/
+/-- An invertible degree-zero residue map from the structure sheaf forces Betti number one. -/
 theorem derivedFiberBetti_zero_eq_one_of_unit_iso (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}

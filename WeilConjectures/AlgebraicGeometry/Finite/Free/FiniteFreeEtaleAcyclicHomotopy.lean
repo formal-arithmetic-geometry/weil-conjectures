@@ -16,7 +16,9 @@ import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 
 /-! # Local null-homotopies into acyclic etale complexes
 
-Source: Stacks Project, Cohomology on Sites, Tag 08FP, assertion (1).
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 08FP, assertion (1)
 -/
 
 @[expose] public section
@@ -240,9 +242,7 @@ private theorem homotopy_of_above
   · exact (hbelow n (by omega)).eq_of_src _ _
 
 /-- Maps from a bounded finite free constant complex into an acyclic complex
-are null-homotopic on an etale cover.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 08FP, lemma-local-homotopy (1). -/
+are null-homotopic on an etale cover. -/
 theorem finiteFree_etale_acyclic_homotopy
     (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (P : CochainComplex (ModuleCat.{u + 1} B) ℤ)

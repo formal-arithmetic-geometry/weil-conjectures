@@ -17,7 +17,9 @@ import all WeilConjectures.CategoryTheory.FlatScalarUnit
 
 /-! # The normalized derived scalar endpoint of a flat internal module
 
-Source: Stacks Project, Tag 06YY, K-flat computation of derived scalar extension.
+## References
+
+* [Stacks Project, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +37,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor
   Mod.derivedExtendMapDerivedCategoryAdjunction
 
 /-- A flat internal module has a unique scalar-endpoint isomorphism with the
-prescribed ordinary unit as its derived adjoint.
-
-Source: Stacks Project, Tag 06YY; coefficient changes paragraph (1). -/
+prescribed ordinary unit as its derived adjoint. -/
 theorem diagonal_flat_scalar_endpoint_iso
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

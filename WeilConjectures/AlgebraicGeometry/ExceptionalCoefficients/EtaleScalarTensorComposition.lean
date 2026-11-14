@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformationOpla
 
 /-! # Tensor compatibility of the fixed scalar comparisons
 
-Source: Stacks 07A4 and 0D6D, the tensor clause of the finite-Hom domain calculation.
+## References
+
+* Stacks Project, Tags 07A4, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -624,9 +626,7 @@ private theorem scalar_comp_tensor_kFlat
     (scalarRepresentativeTransformation_isIso χ T) P Q hP hQ
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints in
-/-- The published scalar tensor comparison respects the fixed scalar compositor.
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive coefficient paragraph;
-Stacks 07A4, 0D6D. -/
+/-- The published scalar tensor comparison respects the fixed scalar compositor. -/
 theorem scalarTensor_comp
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (hχ : χ = ψ.comp φ)

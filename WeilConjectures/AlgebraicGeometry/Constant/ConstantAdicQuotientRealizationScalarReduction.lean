@@ -15,6 +15,11 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 This is the coefficient comparison substep of the consecutive quotient
 realization argument.  It contains no tower model or supplied model
 isomorphism.
+
+## References
+
+* Stacks Project, Tags 0D6D and 03Q3 (scalar comparison for consecutive quotient
+  coefficients).
 -/
 
 @[expose] public noncomputable section
@@ -24,15 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
-/-- Consecutive constant quotient realization commutes with derived restriction.
-
-Source: Stacks Project, proetale.tex, Tags 0D6D and 03Q3, scalar comparison
-for consecutive quotient coefficients.  The proof pastes the canonical
-constant quotient scalar comparison at the two levels with the derived
-constant realization scalar extension comparison; the quotient maps are
-identified by completion evaluation.  This statement is the coefficient-only
-part of the realization reduction and does not use an adic tower.
--/
+/-- Consecutive constant quotient realization commutes with derived restriction. -/
 theorem constantAdicQuotient_realization_scalar_reduction
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

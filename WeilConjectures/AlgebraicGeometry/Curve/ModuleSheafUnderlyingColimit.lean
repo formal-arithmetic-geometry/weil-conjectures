@@ -14,7 +14,12 @@ public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.Curve.ModuleSheafUnderlyingPreservesColimit
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
-/-! # Colimits under the constant-coefficient module forgetful functor -/
+/-! # Colimits under the constant-coefficient module forgetful functor
+
+## References
+
+* Stacks Project, Tags 03CO, 03CY
+-/
 
 @[expose] public section
 
@@ -25,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 
-/-- Forgetting constant-ring module structures preserves a module-sheaf colimit cocone.
-Source: Stacks Project, Tags 03CO and 03CY. -/
+/-- Forgetting constant-ring module structures preserves a module-sheaf colimit cocone. -/
 theorem moduleSheaf_underlying_isColimit
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {A : Type (u + 1)} [SmallCategory A]

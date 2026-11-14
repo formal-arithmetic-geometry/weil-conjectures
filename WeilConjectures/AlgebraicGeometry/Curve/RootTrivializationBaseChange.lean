@@ -22,9 +22,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, compatible primitive roots in the proper case.
--/
+/-- Primitive-root trivializations of the constant sheaf commute with extension of the base
+field, in the proper case. -/
 theorem constant_root_trivialization_baseChange
     {k K : Type u} [Field k] [Field K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (n : ℕ) [NeZero n]

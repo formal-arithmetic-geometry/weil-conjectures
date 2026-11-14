@@ -14,7 +14,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # Derived Nakayama from the first reduction
 
-
 The canonical reduction functor at index n is reduction modulo pi^(n+1).
 The four conjuncts express vanishing, closure under cones, closure under all integer
 shifts, and detection of isomorphisms by the first reduction.
@@ -59,11 +58,7 @@ private theorem uniformizer_end_unique
 
 /-- Derived complete complexes vanish if their first reduction vanishes, are closed under
 cones and shifts, and have isomorphisms detected by their first reduction.
-
-
-
-There is no boundedness assumption, no restriction on X, and no invertibility hypothesis
-on l on X. The dependency indexes positive coefficient powers by n+1, so index zero is K_1. -/
+Positive coefficient powers are indexed by n+1, so index zero is K_1. -/
 theorem derived_nakayama_first_reduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :

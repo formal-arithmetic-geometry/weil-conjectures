@@ -23,30 +23,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   Functor.mapDerivedCategorySingleFunctor
 
-/-- The completed diagonal integral induces the identity after one coefficient projection.
-
-
-The source a is normalized by the ordinary composition comparison along the diagonal
-and f, using diagonal ≫ f = identity. Its acyclicity identifies its single comparison
-with the right derived direct image. Evaluation of coefficient-system direct image
-preserves this unit, so after finite reduction its map is the canonical finite source
-comparison α_n. In particular no scalar automorphism of the source is introduced.
-The construction and reduction equations of t identify its projected trace with
-Tr_n: exact restriction and evaluation preserve the unit/Chern splitting, its inverse,
-the twisting comparison and the second projection that define this trace. The
-normalized pushforward/limit square commutes with all projections. Consequently these
-source, class and trace squares identify
-
-  underlying(a.hom ≫ Rc(δ) ≫ trace) ≫ j ≫ single(π_n)
-
-with α_n ≫ Rf(c_n) ≫ Tr_n, preceded by the coefficient projection from the completed
-source and the same canonical single comparisons. Finite projective-line diagonal
-integration gives α_n ≫ Rf(c_n) ≫ Tr_n = identity, for the projection selected by hf.
-Here l is invertible at exponent n+1 by hY, and the positive Cartier sign is the one
-fixed in hδ, so the identity has sign +1. Restrict this equality to constant l-adic
-scalars and cancel the finite comparison isomorphisms. The resulting equality is
-exactly the displayed projection equation. Only this one finite projection is
-asserted; no detection of general derived morphisms from their projections is used. -/
+/-- The completed diagonal integral induces the identity after one coefficient projection. -/
 theorem diagonalTrace_finiteIntegralProjection
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

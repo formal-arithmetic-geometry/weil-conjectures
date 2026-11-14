@@ -22,7 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- A geometric comparison square over algebraically closed fields.
-Source: Stacks Project, Tag 0A5E, proof (compatible algebraic closures). -/
+See Stacks Project, Tag 0A5E. -/
 theorem sepClosed_geometric_comparison
     {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
     {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]

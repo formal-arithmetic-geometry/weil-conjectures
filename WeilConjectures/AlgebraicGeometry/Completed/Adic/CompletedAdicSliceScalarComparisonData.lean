@@ -59,7 +59,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 
 /-! # Universal data for the completed adic slice comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E and 0D6D.
+## References
+
+* Stacks Project, Tags 06YY, 0G7E, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -75,8 +77,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option linter.defProp false in
 /-- The universal ordinary and derived scalar-extension witness on the slice.
 Its object and map equations determine ordinary tensor extension, while its
-counit determines the derived functor.  Source: Stacks Tag 06YY.
--/
+counit determines the derived functor. -/
 def completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
@@ -89,24 +90,18 @@ def completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients
     (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).map f)
 
-/-- Ordinary scalar extension along the coefficient map restricted to the slice.
-Source: Stacks Tag 06YY.
--/
+/-- Ordinary scalar extension along the coefficient map restricted to the slice. -/
 def completedAdicSliceChange (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   (completedAdicSliceChangeData X U f).choose
 
-/-- The chosen slice scalar-extension witness is additive.
-Source: Stacks Tag 06YY.
--/
+/-- The chosen slice scalar-extension witness is additive. -/
 instance completedAdicSliceChange_additive (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     (completedAdicSliceChange X U f).Additive :=
   (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose
 
-/-- The total left derived scalar-extension functor on the slice.
-Source: Stacks Tag 06YY.
--/
+/-- The total left derived scalar-extension functor on the slice. -/
 def completedAdicSliceDerivedChange (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
@@ -368,12 +363,7 @@ private theorem sliceChangeMap (X : Scheme.{t}) (U : X.ProEt)
       eqToHom (sliceChangeObj X U f N).symm :=
   (sliceChangeExistence X U f).choose_spec.choose_spec.choose a
 
-/-- Ordinary scalar extension commutes with restriction to the pro-etale slice.
-The proof is the presheaf tensor comparison followed by the sheafification
-universal property.  This is the ordinary (underived) step in the derived
-comparison theorem.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D.
--/
+/-- Ordinary scalar extension commutes with restriction to the pro-etale slice. -/
 theorem completedAdic_slice_scalarComparison_underived (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     Nonempty
@@ -551,9 +541,7 @@ attribute [local irreducible] completedAdicChange completedAdicDerivedChange
 The composite of exact slice restriction with derived slice extension, and the
 composite of derived extension with exact slice restriction, each carry a counit to
 the localized ordinary composite exhibiting it as a left derived functor along the
-quasi-isomorphisms.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E and 0D6D.
--/
+quasi-isomorphisms. -/
 theorem completedAdic_slice_scalarComparison_derived_data (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     let O_R := (sheafCompose (ProEt.topology X)

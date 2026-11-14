@@ -13,9 +13,9 @@ import Mathlib.CategoryTheory.Limits.Types.Products
 
 /-! # Cover effacement before inverse image
 
-Source: `lem-pc-cech-cover-relative-effacement`, product and contraction paragraphs.
-The construction is an expansion of that node's argument, given here;
-Stacks Project, Tags 01EQ and 01FD, supply its comparison context.
+## References
+
+* Stacks Project, Tags 01EQ and 01FD
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- The restriction adjunction for an open inclusion, transported to naive restriction.
-Source: Mathlib `sheafPullbackIso` and `pullbackPushforwardAdjunction`. -/
+/-- The restriction adjunction for an open inclusion, transported to naive restriction. -/
 private noncomputable def coverRestrictionAdjunction {X : Scheme.{u}} (W : X.Opens) :
     W.sheafRestrict ⊣ TopCat.Sheaf.pushforward AddCommGrpCat.{u} (Opens.inclusion' W) :=
   (TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u}
@@ -218,9 +217,7 @@ private theorem surjective_sections_of_splitRestriction {X : Scheme.{u}}
   exact he
 
 /-- Core cover effacement: the quotient is sectionwise surjective and locally split,
-with surjective Čech connecting maps. The inverse-image clause is derived separately.
-Source: `lem-pc-cech-cover-relative-effacement`, product and contraction paragraphs
-(explicit expansion in the context of Stacks Project, Tags 01EQ and 01FD). -/
+with surjective Čech connecting maps. -/
 theorem exists_cechCoverRelativeEffacement_core
     {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤)

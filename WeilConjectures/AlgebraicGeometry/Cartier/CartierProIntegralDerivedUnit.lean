@@ -96,6 +96,10 @@ import WeilConjectures.AlgebraicGeometry.Cartier.CartierProIntegralScalar
 import WeilConjectures.CategoryTheory.DerivedUnit.DerivedScalarExtUnitZero
 
 /-! # Cartier reduction and site comparison
+
+## References
+
+* Stacks Project, Tags 0152, 06YY, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -113,12 +117,9 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
   cartierProIntegralGenerator cartierProRootMap cartierReducedEtale cartierReducedPro
   CartierEtaleReductionSpec CartierProReductionSpec cartierResidueReducedPro
 
-/-- Let n>0, R=ULift(Z/n), A a commutative ring killed by n, i:D→Z a closed immersion and φ:R→A. If
-Cartier classes cR,cA satisfy GeoCartierScalarCompatibility [lemma-cycle-class-cartier-divisor],
-then the pro-etale supported integral generator i_*Z_D→forget(i_*A_D) is a degree-zero unbounded
-scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+/-- Let n>0, R=ULift(Z/n), A a commutative ring killed by n, i:D→Z a closed immersion and
+φ:R→A. If Cartier classes cR,cA satisfy GeoCartierScalarCompatibility, then the pro-etale
+supported integral generator i_*Z_D→forget(i_*A_D) is a degree-zero unbounded scalar unit. -/
 theorem pro_integral_derived_unit
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) (hR : (n : ULift.{u + 1} (ZMod n)) = 0)

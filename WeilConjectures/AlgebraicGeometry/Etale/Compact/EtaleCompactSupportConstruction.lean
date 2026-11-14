@@ -17,7 +17,10 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 
 /-! # Coherent extension by zero on strict étale coefficient systems
 
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Constructions 4.1 and 5.15.
+## References
+
+* Stacks Project, Tags 03S2, 03DI and 03DJ
+* Zheng, Constructions 4.1 and 5.15
 -/
 
 @[expose] public noncomputable section
@@ -85,8 +88,7 @@ private theorem etalePullbackFiniteLimits {T U : Scheme.{u}} (g : T ⟶ U) :
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Construct the ordinary and derived compact-support system, including the coefficient
-restriction comparison for its open part.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Constructions 4.1 and 5.15. -/
+restriction comparison for its open part. -/
 theorem etaleCompactSupport_construction
     (O : Type (u + 1)) [CommRing O] (t : O)
     (hregular : ∀ x : O, t * x = 0 → x = 0)

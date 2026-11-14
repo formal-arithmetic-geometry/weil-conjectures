@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSingleAdjunctionTran
 
 /-! # The ordinary unit representative of a derived square
 
-Source: Stacks Project, Cohomology, Tags 01FB and 08HY.
+## References
+
+* Stacks Project, Tags 01FB, 08HY
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Adjunction.leftAdjoi
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The right-adjoint mate of the pinned pullback square, with its scalar normalization.
-Source: Stacks Project, Tag 08HY. -/
+/-- The right-adjoint mate of the pinned pullback square, with its scalar normalization. -/
 def derivedSquareRightComparison {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g) :
     schemeDerivedDirectImage v ⋙ schemeDerivedDirectImage f ≅
@@ -48,8 +49,7 @@ def derivedSquareRightComparison {X S Z T : Scheme.{u}}
 
 /-- Apply Rf to the ordinary coefficient map in degree zero and its direct-image unit,
 then use the right-adjoint comparison of the square. This construction makes sense for
-an arbitrary h-map and an arbitrary commutative square.
-Source: Stacks Project, Tags 01FB and 08HY. -/
+an arbitrary h-map and an arbitrary commutative square. -/
 def derivedSquareUnitMap {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (Scheme.Modules.pushforward v).obj G) :

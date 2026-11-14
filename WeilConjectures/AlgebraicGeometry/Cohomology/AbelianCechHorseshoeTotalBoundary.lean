@@ -13,7 +13,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplex
 
 /-! # Horseshoe total boundary and augmentation naturality
 
-Source: Stacks Project, Tags 01EQ and 0117.
+## References
+
+* Stacks Project, Tags 0117, 01EQ
 -/
 
 @[expose] public section
@@ -109,8 +111,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 600000 in
 -- Comparing the two nested complex functors with finite-diagonal totalization is expensive.
-/-- A prescribed horseshoe gives a common total boundary for alpha and beta.
-Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality). -/
+/-- A prescribed horseshoe gives a common total boundary for alpha and beta. -/
 theorem abelianCechHorseshoe_total_boundary
     {X : Scheme.{u}}
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

@@ -34,8 +34,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # The Čech local-lift representative computes the connecting boundary
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 0B8S, local-lift description of the
-boundary, with Lemma 01EQ for the Čech-to-cohomology map.
+## References
+
+* Stacks Project, Tag 0B8S (local-lift description of the boundary)
+* Stacks Project, Tag 01EQ (the Čech-to-cohomology map)
 -/
 
 @[expose] public section
@@ -140,8 +142,7 @@ sequence `S` of `O_X`-modules on a scheme `X`, `U` an open covering, `s` a globa
 canonical comparison map `c_A : Ȟ¹(U, A) → H¹(X, A)` (any `c` with `IsModuleCechComparison`)
 sends the class of `z` to the connecting class `∂(s)` of the long exact cohomology sequence
 of `S`, where `∂` is `RingedSpace.moduleCohomologyBoundary` and `s` is read in `H⁰(X, C)`
-through `toRightDerivedZero`. Source: Stacks, Cohomology, Lemma 0B8S, local-lift paragraph;
-Lemma 01EQ. -/
+through `toRightDerivedZero`. -/
 theorem boundary_cech_compatibility (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

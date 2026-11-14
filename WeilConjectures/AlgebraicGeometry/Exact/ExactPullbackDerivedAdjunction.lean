@@ -28,7 +28,12 @@ import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 
-/-! # Normalized derived adjunction for an exact module inverse image -/
+/-! # Normalized derived adjunction for an exact module inverse image
+
+## References
+
+* Stacks Project, Tags 07A6, 08BJ, 070I, 070K
+-/
 
 @[expose] public noncomputable section
 
@@ -43,10 +48,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.ConstantCompletion
 
-/-- Exact module inverse image has a normalized unbounded derived adjunction.
-
-Source: Stacks Project, Tag 07A6, lemma-adjoint, and Derived Categories,
-Tags 08BJ, 070I and 070K. -/
+/-- Exact module inverse image has a normalized unbounded derived adjunction. -/
 theorem exactPullbackDerivedAdjunction
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

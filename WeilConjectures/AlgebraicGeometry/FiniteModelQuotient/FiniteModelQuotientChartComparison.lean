@@ -11,7 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.FiniteConstantModel.FiniteConstantM
 import WeilConjectures.AlgebraicGeometry.FiniteConstantModel.ConstantToContinuousScalarFlat
 import WeilConjectures.AlgebraicGeometry.FiniteModelQuotient.FiniteModelFreeComplexReduction
 
-/-! # Specified finite-model chart comparison -/
+/-! # Specified finite-model chart comparison
+
+## References
+
+* Stacks Project, Tags 093M, 06YQ, 06YY, 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -139,11 +144,7 @@ private theorem pullback_reduction
     (AdicCompletion.derivedReduction l E T n).mapIso
       ((F.mapDerivedCategorySingleFunctor 0).app M)⟩
 
-/-- A specified scalar resolution computes the restriction of derived reduction.
-
-Source: blueprint latest, ctf-equals-bc, Local models; Stacks Tags 093M, 06YQ,
-06YY and 0G7E.
--/
+/-- A specified scalar resolution computes the restriction of derived reduction. -/
 theorem chart_comparison
     (V T : Scheme.{u}) (f : T ⟶ V) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (e : Encoding l E n T) (P : ModuleCat.{u + 1} (A l E))

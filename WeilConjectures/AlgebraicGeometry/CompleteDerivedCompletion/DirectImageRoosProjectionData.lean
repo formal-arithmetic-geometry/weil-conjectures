@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
-/-! Canonical derived-limit projection normalization. -/
+/-! Canonical derived-limit projection normalization.
+
+## References
+
+* Stacks Project, Tags 0940, 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,8 +25,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The canonical counit projections form the first map of the Milnor triangle.
-Source: blueprint direct-image limits, proof (1); Stacks Tags 0940 and 0941. -/
+/-- The canonical counit projections form the first map of the Milnor triangle. -/
 theorem directImage_roos_projection_data (T : Scheme.{u}) :
     ∃ (_ : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E T))),
       ∀ M : DTow l E T,

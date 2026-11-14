@@ -144,7 +144,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Transport of the two strict completion presentations to the small constant site
 
-Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
+## References
+
+* Stacks Project, Tags 03CR, 05RR, 06YY, 0941, 099L, 099M, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -670,9 +672,7 @@ private theorem koszul_to_constant_completion
 
 set_option linter.style.haveILetI false in
 /-- A scalar-preserving completed coefficient isomorphism carries the localized
-Koszul fiber and its specified unit to constant-sheaf quotient completion.
-
-Source: Stacks Tags 099L, 099M and 0A0E. -/
+Koszul fiber and its specified unit to constant-sheaf quotient completion. -/
 theorem completed_koszul_constant_transport
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (β : completedCechRing T d ≅

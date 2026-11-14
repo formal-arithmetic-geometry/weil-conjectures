@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 
 /-! # The intrinsic compact scalar mate on bounded constructible inputs
 
-Source: Stacks 0GL6 and 09AL; the compact-support paragraph of
-`proposition-six-operations-change-coefficients`.
+## References
+
+* Stacks Project, Tags 0GL6, 09AL
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 
-/-- The scalar transpose of the specified compact-support restriction comparison.
-Source: Stacks 0GL6. -/
+/-- The scalar transpose of the specified compact-support restriction comparison. -/
 def intrinsicCompactScalar
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -96,10 +96,7 @@ private theorem bounded_interval
   · exact (not_lt_of_ge (le_trans (hb hn) (le_max_right _ _))) hi
 
 /-- The actual intrinsic scalar transpose is invertible if its input is bounded
-constructible and its scalar extension has bounded cohomology.
-
-Source: Stacks 0GL6 and 09AL; `proposition-six-operations-change-coefficients`, compact-support
-paragraph. -/
+constructible and its scalar extension has bounded cohomology. -/
 theorem intrinsicCompactScalar_isIso_of_constructible
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

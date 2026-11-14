@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalConst
 
 /-! # Finite isomorphism sheaves and evaluation for a supplied algebraic tower
 
-Source: Stacks Project, Tags 09BV, 09C6 and 0F63.
+## References
+
+* Stacks Project, Tags 09BV, 09C6 and 0F63
 -/
 
 @[expose] public noncomputable section
@@ -28,10 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- A supplied normalized algebraic model has finite Isom sheaves with nonempty stalks.
 Their reduction and evaluation respect the actual strict tower arrows. This constructs
-no covering and chooses no compatible sections.
-
-Source: Stacks Project, Tags 09BV and 0F63, with the scalar comparisons of Tag 09C6;
-finite-level etale presentation and finite-ring derived local constancy. -/
+no covering and chooses no compatible sections. -/
 theorem finitePerfectAdic_isomorphism_sections
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

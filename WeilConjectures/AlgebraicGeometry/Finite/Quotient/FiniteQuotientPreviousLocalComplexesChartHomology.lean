@@ -53,12 +53,14 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoeffic
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # Homology transport for the previous quotient chart model
-Source: Stacks Project, Tags 0942, 094H and 094I.
 
-The hard comparison step is isolated here: after restriction of scalars along
-the quotient from the successor coefficient ring, the supplied chart
-comparison identifies every slice homology object with the corresponding
+After restriction of scalars along the quotient from the successor coefficient ring, the
+supplied chart comparison identifies every slice homology object with the corresponding
 constant realization.
+
+## References
+
+* Stacks Project, Tags 0942, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -388,14 +390,8 @@ private theorem chartHomology (X : Scheme.{t})
     O'.mapIso ((finiteCoefficientConstantFunctor X B φB).mapIso
       ((P.sc q).mapHomologyIso (ModuleCat.restrictScalars f)).symm)⟩
 
-/-- Transport the supplied chart comparison to homology after restriction of scalars.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
-The quotient map from `A ⧸ I^(n+2)` to `A ⧸ I^(n+1)` is exact on modules,
-slice restriction, and constant realization. Applying the derived homology
-functor to the supplied comparison and composing the coefficient compatibility
-isomorphisms gives the displayed isomorphism in every degree.
--/
+/-- Transport the supplied chart comparison to homology, in every degree, after restriction
+of scalars along the quotient map from `A ⧸ I^(n+2)` to `A ⧸ I^(n+1)`. -/
 theorem finiteQuotient_previous_local_complexes_chart_homology
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

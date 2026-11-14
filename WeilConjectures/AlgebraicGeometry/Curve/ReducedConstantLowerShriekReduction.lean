@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocaliza
 
 /-! # Reduction data for constant coefficients on reduced curves
 
-The normalization argument is [Stacks 0A3Q](https://stacks.math.columbia.edu/tag/0A3Q).
+## References
+
+* [Stacks Project, Tag 0A3Q](https://stacks.math.columbia.edu/tag/0A3Q)
+* [Stacks Project, Tag 03SG](https://stacks.math.columbia.edu/tag/03SG)
 -/
 
 @[expose] public section
@@ -30,9 +33,9 @@ namespace AlgebraicGeometry.IsCurve
 
 
 
-/-- Reduction data for the normalization argument of Stacks 0A3Q, proof, first paragraph.
-The witnesses consist of a finite surjective smooth modification, a dense open where
-it is an isomorphism, a pullback open immersion, and its eight lower-shriek assertions. -/
+/-- Reduction data for the normalization argument for constant coefficients on a reduced
+curve: a finite surjective smooth modification, a dense open where it is an isomorphism, a
+pullback open immersion, and its eight lower-shriek assertions. -/
 def ReducedConstantLowerShriekReductionData {k : Type u} [Field k] [IsAlgClosed k]
     {X U : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime] : Prop :=
@@ -45,12 +48,8 @@ def ReducedConstantLowerShriekReductionData {k : Type u} [Field k] [IsAlgClosed 
         ((@Etale.openImmersionLowerShriek _ _ _ _ U' Y j' hopen).obj
            (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) U' r))
 
-/-- Transfer from smooth modification data.
-Source: Stacks 0A3Q, proof, finite pushforward and dense-open comparison paragraphs;
-`lemma-weil-pbc-curve-normalization-constant` records the existing transfer theorem.
-Unpack the finite, surjective, smooth, dense-open-isomorphism and pullback hypotheses,
-install their typeclass instances, and apply
-`Assertions.lowerShriek_constantModSheaf_of_finite_coefficients` to the smooth assertion package. -/
+/-- The lower-shriek assertions for constant coefficients on a reduced curve follow from
+smooth modification data `ReducedConstantLowerShriekReductionData`. -/
 theorem reducedConstantLowerShriekAssertions_of_reduction_data
     {k : Type u} [Field k] [IsAlgClosed k] {X U : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X] (j : U ⟶ X)
@@ -70,9 +69,7 @@ theorem reducedConstantLowerShriekAssertions_of_reduction_data
   exact Assertions.lowerShriek_constantModSheaf_of_finite_coefficients
     (ULift.{u + 1} (ZMod r)) f ν V hV j hpullback r H
 
-/-- Existence of normalization data with smooth lower-shriek assertions.
-Source: [Stacks 03SG](https://stacks.math.columbia.edu/tag/03SG), proof, and the
-normalization paragraph of [Stacks 0A3Q](https://stacks.math.columbia.edu/tag/0A3Q). -/
+/-- Existence of normalization data with smooth lower-shriek assertions. -/
 theorem exists_reducedConstantLowerShriekReductionData
     {k : Type u} [Field k] [IsAlgClosed k] {X U : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X] (j : U ⟶ X)
@@ -128,10 +125,7 @@ theorem exists_reducedConstantLowerShriekReductionData
   exact smoothConstantLowerShriekAssertions_of_constant r Hconstant (ν ≫ f) j'
 
 
-/-- Prime coefficient sheaves are canonically isomorphic.
-Source: `Etale.constantModSheaf` in `SmoothBaseChange.Defs`,
-and Mathlib's `Submodule.quotEquivOfEqBot` and
-`constantSheaf.mapIso` (the functorial image of a coefficient isomorphism). -/
+/-- Prime coefficient sheaves are canonically isomorphic. -/
 theorem constantModSheaf_iso_constantSheaf {U : Scheme.{u}} (r : ℕ) [Fact r.Prime] :
     Nonempty (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) U r ≅
       (constantSheaf U.smallEtaleTopology

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownOpenSingletonEval
 
 /-! # Canonical projection and left-extension comparisons
 
-Source: Zheng, Lemma 5.13 and the proof of Lemma 5.16, printed pp. 34--35.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Lemma 4.10, Lemma 5.13, Constructions 5.14--5.15
+  and Lemma 5.16, pp. 23--24 and 34--35
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +40,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- Proper inverse image commutes with singleton extension by conjugating the fixed
-right-adjoint evaluation comparison.
-Source: Zheng, Lemma 5.13, printed p. 34. -/
+right-adjoint evaluation comparison. -/
 def strictEtaleBrownProperInsertion (S : StrictEtaleCompactSupport O t c) (n : ℕ) :
     S.PY.derivedExtension n ⋙ S.properDerived.system.inverse ≅
       (S.properDerived.level n).inverse ⋙ S.PZ.derivedExtension n :=
@@ -48,8 +49,7 @@ def strictEtaleBrownProperInsertion (S : StrictEtaleCompactSupport O t c) (n : �
     (((S.properDerived.level n).adjunction).comp (S.PZ.derivedAdj n))).symm
       (S.properDerived.directEvaluation n)).symm
 
-/-- The conjugate is exactly the specified proper evaluation comparison.
-Source: Zheng, Lemma 5.13, printed p. 34. -/
+/-- The conjugate is exactly the specified proper evaluation comparison. -/
 theorem strictEtaleBrownProperInsertion_conjugate
     (S : StrictEtaleCompactSupport O t c) (n : ℕ) :
     conjugateEquiv
@@ -60,8 +60,7 @@ theorem strictEtaleBrownProperInsertion_conjugate
   exact Equiv.apply_symm_apply _ _
 
 /-- Open extension commutes with singleton extension by conjugating the fixed
-inverse-image evaluation comparison.
-Source: Zheng, Construction 5.14 and Lemma 5.16, printed pp. 34--35. -/
+inverse-image evaluation comparison. -/
 def strictEtaleBrownOpenInsertion (S : StrictEtaleCompactSupport O t c) (n : ℕ) :
     S.PX.derivedExtension n ⋙ S.derivedOpen ≅
       S.levelDerivedOpen n ⋙ S.PZ.derivedExtension n :=
@@ -70,8 +69,7 @@ def strictEtaleBrownOpenInsertion (S : StrictEtaleCompactSupport O t c) (n : ℕ
     ((S.levelDerivedOpenAdjunction n).comp (S.PZ.derivedAdj n))).symm
       (S.openDerived.inverseEvaluation n)).symm
 
-/-- The conjugate is exactly the specified open inverse-evaluation comparison.
-Source: Zheng, Construction 5.14 and Lemma 5.16, printed pp. 34--35. -/
+/-- The conjugate is exactly the specified open inverse-evaluation comparison. -/
 theorem strictEtaleBrownOpenInsertion_conjugate
     (S : StrictEtaleCompactSupport O t c) (n : ℕ) :
     conjugateEquiv
@@ -81,16 +79,14 @@ theorem strictEtaleBrownOpenInsertion_conjugate
         (S.openDerived.inverseEvaluation n).hom := by
   exact Equiv.apply_symm_apply _ _
 
-/-- The actual proper singleton mate, defined before evaluating it.
-Source: Zheng, Lemma 5.13, printed p. 34. -/
+/-- The actual proper singleton mate, defined before evaluating it. -/
 def strictEtaleBrownProperInsertionMap (S : StrictEtaleCompactSupport O t c) (n : ℕ) :
     (S.properDerived.level n).direct ⋙ S.PY.derivedExtension n ⟶
       S.PZ.derivedExtension n ⋙ S.properDerived.system.direct :=
   (mateEquiv (S.properDerived.level n).adjunction S.properDerived.system.adjunction
     (.mk _ _ _ _ (strictEtaleBrownProperInsertion O t c S n).hom))
 
-/-- Above the selected level the proper singleton mate is a map between zero objects.
-Source: Zheng, Lemma 5.13, printed p. 34. -/
+/-- Above the selected level the proper singleton mate is a map between zero objects. -/
 theorem strictEtaleBrownProperInsertionMap_above
     (S : StrictEtaleCompactSupport O t c) (n m : ℕ) (h : n < m)
     (P : DerivedCategory (strictEtaleLevel c.Z O t n)) :
@@ -106,17 +102,14 @@ theorem strictEtaleBrownProperInsertionMap_above
       ((S.properDerived.level m).direct.map_isZero hz)
   exact hsrc.isIso htgt _
 
-/-- Evaluation jointly detects isomorphisms for every recorded strict-system model.
-Source: Zheng, Lemma 4.10, printed pp. 23--24. -/
+/-- Evaluation jointly detects isomorphisms for every recorded strict-system model. -/
 theorem strictEtaleBrownEvaluation_detectsIso (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
     {M N : DerivedCategory (strictEtaleCoefficientSystem W O t)} (a : M ⟶ N) :
     IsIso a ↔ ∀ n : ℕ, IsIso ((P.evaluation n).map a) := by
   exact coefficientEvaluation_detectsIso O t P a
 
-/-- Joint detection upgrades invertibility below n to the canonical singleton mate
-isomorphism; the above-n cases were proved separately.
-Source: Zheng, Lemma 5.13, printed p. 34. -/
+/-- The canonical proper singleton mate, as an isomorphism. -/
 def strictEtaleBrownProperInsertionMate (S : StrictEtaleCompactSupport O t c)
     (hbelow : ∀ (n m : ℕ), m ≤ n →
       ∀ P : DerivedCategory (strictEtaleLevel c.Z O t n),
@@ -135,8 +128,7 @@ def strictEtaleBrownProperInsertionMate (S : StrictEtaleCompactSupport O t c)
   exact asIso (strictEtaleBrownProperInsertionMap O t c S n)
 
 /-- The compact-support singleton comparison is the composite of the open insertion
-and the inverse proper mate.
-Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35. -/
+and the inverse proper mate. -/
 def strictEtaleBrownLeftExtension (S : StrictEtaleCompactSupport O t c)
     (hbelow : ∀ (n m : ℕ), m ≤ n →
       ∀ P : DerivedCategory (strictEtaleLevel c.Z O t n),
@@ -149,8 +141,7 @@ def strictEtaleBrownLeftExtension (S : StrictEtaleCompactSupport O t c)
     isoWhiskerLeft _ (strictEtaleBrownProperInsertionMate O t c S hbelow n).symm ≪≫
     (Functor.associator _ _ _).symm
 
-/-- The canonical geometric comparisons, independently of the Brown right adjoint.
-Source: Zheng, Lemma 5.13 and Lemma 5.16, printed pp. 34--35. -/
+/-- The canonical geometric comparisons, independently of the Brown right adjoint. -/
 structure StrictEtaleBrownGeometry (S : StrictEtaleCompactSupport O t c) where
   realizationX : StrictEtaleBrownRealization O t X S.PX
   realizationZ : StrictEtaleBrownRealization O t c.Z S.PZ
@@ -255,8 +246,7 @@ private theorem paste_evaluation_square
   simp only [Functor.map_comp, Category.assoc]
 
 /-- The geometric projection and singleton comparisons for a fixed compact-support
-presentation, before Brown representability is applied.
-Source: Zheng, Lemma 5.13 and the proof of Lemma 5.16, printed pp. 34--35. -/
+presentation, before Brown representability is applied. -/
 theorem etaleBrownGeometricComparisons
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

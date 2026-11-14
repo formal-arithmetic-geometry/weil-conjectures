@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSourceQuotientNormaliz
 import WeilConjectures.AlgebraicGeometry.SixFunctors.SheafKummerTransportAssembly
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalFiniteCartierNormalization
 
-/-! # Kummer calculation of the simultaneously reduced Cartier boundary -/
+/-! # Kummer calculation of the simultaneously reduced Cartier boundary
+
+## References
+
+* Stacks Project, Tags 03PL, 0152, 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,10 +39,7 @@ attribute [local irreducible] normalizedBoundaryTarget DiagonalSourceNormalizati
   diagonalScalarAdjunction diagonalIntegralBoundary
 
 /-- Once the source counit is invertible, Kummer reduction identifies the target
-and the evaluated reduced boundary with the normalized finite Cartier classes.
-
-Source: blueprint diagonal tower proof steps 5--7 and the Cartier unit proof
-paragraphs 4--5; Stacks Tags 03PL, 0152 and 06YY. -/
+and the evaluated reduced boundary with the normalized finite Cartier classes. -/
 theorem diagonal_kummer_reduction (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

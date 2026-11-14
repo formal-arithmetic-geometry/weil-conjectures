@@ -17,8 +17,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 /-!
 # The spectrum of a finite free algebra
 
-Source: Stacks Project, morphisms.tex, Tag 02KB, lemma-finite-flat, proof of (1) implies (2),
-affine finite free case.
+## References
+
+* Stacks Project, Morphisms, Tag 02KB (proof of (1) implies (2), affine finite free case)
 -/
 
 @[expose] public section
@@ -28,10 +29,7 @@ universe u v
 namespace AlgebraicGeometry
 
 /-- The spectrum of an algebra admitting a finite module basis is finite locally free.
-No nonzero-ring or Noetherian hypothesis is needed, and the index type may be empty.
-
-Source: Stacks Project, Tag 02KB, lemma-finite-flat, proof of (1) implies (2), affine finite
-free case. -/
+No nonzero-ring or Noetherian hypothesis is needed, and the index type may be empty. -/
 theorem specMap_isFiniteLocallyFree_of_basis
     (A S : Type u) [CommRing A] [CommRing S] [Algebra A S]
     {I : Type v} [Finite I] (_b : Module.Basis I A S) :

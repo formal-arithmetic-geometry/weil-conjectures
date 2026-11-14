@@ -16,9 +16,13 @@ import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-! # Existence of normalized shifted-line comparisons
 
-This is the existence part of the gluing argument in the blueprint, separated from
-rigidity and independence of comparisons. Affine-line fullness makes this existence
-result valid for arbitrary sheaves placed in a common degree and arbitrary rings.
+This is the existence part of the gluing argument, separated from rigidity and
+independence of comparisons. Affine-line fullness makes this existence result valid for
+arbitrary sheaves placed in a common degree and arbitrary rings.
+
+## References
+
+* Stacks Project, Tags 0A3H, 015F, 06XS, 03EM and 04TQ
 -/
 
 @[expose] public noncomputable section
@@ -176,9 +180,7 @@ private theorem pullback_shifted_sheaf (A : Type (u + 1)) [CommRing A]
 
 -- Transport through single complexes, shifts, and the section compositor.
 /-- For arbitrary sheaves placed in a common degree, normalized local comparisons give
-a normalized global comparison with the prescribed restrictions.
-Source: blueprint sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md, Gluing;
-Stacks Tags 0A3H, 015F, 06XS, 03EM, and 04TQ. -/
+a normalized global comparison with the prescribed restrictions. -/
 theorem exists_normalized_shifted_line_comparison (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u})
     (m : ℤ) (C : DerivedCategoryModule A S)

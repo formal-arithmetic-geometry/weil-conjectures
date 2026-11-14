@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateEtalePowerGenerat
 
 /-! # Detection of maps on local lifted finite root tensors
 
-Source: Stacks Project, `proetale.tex`, Lemma `describe-pullback-from-etale`, and
-`sites-modules.tex`, tensor products; the uniqueness argument of the root comparison.
+## References
+
+* Stacks Project, Tag 0GLZ, and the section on tensor products of module sheaves
 -/
 
 @[expose] public section
@@ -122,10 +123,7 @@ private theorem finite_tate_generators_hom_ext
   exact hf.symm.trans (he.trans hg)
 
 /-- Maps from a compared finite Tate power are detected by root tensors after local
-lifting to the root tower; the target is any sheaf of modules.
-Source: Stacks Project, `proetale.tex`, Lemma `describe-pullback-from-etale` (0GLZ),
-and `sites-modules.tex`, tensor product of module sheaves; the uniqueness step of
-`def-pur-adic-root-comparisons`. -/
+lifting to the root tower; the target is any sheaf of modules. -/
 theorem finiteTate_local_root_tensors_hom_ext
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (T : Scheme.{u})

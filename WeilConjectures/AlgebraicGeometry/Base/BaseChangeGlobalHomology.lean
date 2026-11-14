@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 This theorem retains `strictHenselizationScheme` and its structural map.
 The adopted theorem with the unprefixed name uses `strictLocalization` instead.
 
-Source: Stacks Project, Tags 03Q8, 03Q9 and 0GIT.
+## References
+
+* Stacks Project, Tags 03Q8, 03Q9 and 0GIT
 -/
 
 @[expose] public section
@@ -31,8 +33,6 @@ namespace AlgebraicGeometry.Etale
 /-- The homology of the derived base-change mate is invertible on strict-local sections.
 This only asserts invertibility after global sections; it does not assert that the mate
 is an isomorphism of sheaves on the strict-local base.
-Source: Stacks Project, Tag 03Q9, the affine-neighbourhood continuity argument and the
-injective-representative construction of the canonical map.
 -/
 theorem smallModel_isIso_strictHenselization_baseChange_globalHomology
     {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]

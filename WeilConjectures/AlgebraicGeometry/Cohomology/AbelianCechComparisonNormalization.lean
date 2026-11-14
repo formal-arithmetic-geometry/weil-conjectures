@@ -12,7 +12,14 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # Normalization from the degree-zero quotient equation
 
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2.
+## Implementation details
+
+* In `abelianCechComparison_zero_normalization`, the degree-zero gluing identification is
+  `cechCohomologyZeroIso`.
+
+## References
+
+* Stacks Project, Tag 01EQ (proof of Lemma 20.11.2)
 -/
 
 @[expose] public section
@@ -109,17 +116,7 @@ private theorem augmentation_zero_square
     (homOfLE (le_top (a := ⨅ l, U (y l)))).op s
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The degree-zero quotient equation forces the canonical normalization.
-
-Source: Stacks Project, Tag 01EQ, the two restriction augmentations in the proof
-of Lemma 20.11.2; the degree-zero gluing identification is implemented by the
-source library's cechCohomologyZeroIso.
-
-
-Only the degree-zero predicate is needed; no assumption on alpha in positive
-degrees is used. An empty covering forces X to be empty by hcover, so gluing and
-all degree-zero groups are zero. Infinite coverings use the ordinary sheaf
-condition and introduce no finiteness assumption. -/
+/-- The degree-zero quotient equation forces the canonical normalization. -/
 theorem abelianCechComparison_zero_normalization
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

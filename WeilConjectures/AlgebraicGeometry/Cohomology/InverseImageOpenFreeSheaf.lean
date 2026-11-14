@@ -8,7 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 /-! # Inverse image of a represented open free sheaf
 
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0 and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -63,9 +65,7 @@ private theorem inverseFreeHomEquiv_naturality {X Y : Scheme.{u}} (p : Y ⟶ X)
   erw [adj.homEquiv_naturality_right]
   exact openFreeSectionsEquiv_naturality W (J.map f) (adj.homEquiv _ F a)
 
-/-- Inverse image carries the free sheaf of an open to that of its preimage.
-Source: Stacks Project, Tag 04J0 and Section 01F7; inverse-image adjunction.
--/
+/-- Inverse image carries the free sheaf of an open to that of its preimage. -/
 theorem H.invImage_openFreeSheaf_iso {X Y : Scheme.{u}} (p : Y ⟶ X) (W : X.Opens) :
     Nonempty ((invImage p).obj (H.openFreeSheaf W) ≅ H.openFreeSheaf (p ⁻¹ᵁ W))  := by
   exact ⟨(Coyoneda.ext _ _ (fun a => (inverseFreeHomEquiv p W _).symm a)

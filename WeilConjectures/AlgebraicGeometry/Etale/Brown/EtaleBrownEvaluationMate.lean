@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 
 /-! # Canonical Brown comparison normalization
 
-Source: Zheng, Construction 4.1, (5.16.2), and Lemma 5.22.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.15, (5.16.2), Lemma 5.22,
+  pp. 34--35
 -/
 
 @[expose] public noncomputable section
@@ -98,8 +100,7 @@ private theorem proper_evaluation_mate (n : ℕ) :
     exact B.properInsertion_conjugate n
   exact congrArg Iso.inv hi
 
-/-- The insertion comparison and evaluation comparison are adjunction mates.
-Source: Zheng, (5.16.2), Construction 5.15, printed pp. 34--35. -/
+/-- The insertion comparison and evaluation comparison are adjunction mates. -/
 theorem etaleBrownEvaluationMate (n : ℕ) :
     (mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)
       (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)) =

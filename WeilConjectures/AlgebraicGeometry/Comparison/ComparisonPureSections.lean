@@ -9,7 +9,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 
 /-! # Pure sections of the etale to pro-etale comparison
 
-Source: the monoidal comparison adjunction; Stacks Project, Tag 0GLZ.
+## References
+
+* [Stacks Project, Tag 0GLZ](https://stacks.math.columbia.edu/tag/0GLZ)
 -/
 
 @[expose] public noncomputable section
@@ -114,8 +116,7 @@ private theorem comparison_unit_sections (A : Type (u + 1)) [CommRing A]
       ((Functor.const T.ProEtᵒᵖ).obj (ModuleCat.of.{u + 1, u + 1} A A))).naturality f.op) a |>.symm
 
 /-- The comparison adjunction preserves constant scalars and pure tensors on
-arbitrary pro-etale tests over etale objects.
-Source: Stacks Tag 0GLZ and the monoidal comparison adjunction. -/
+arbitrary pro-etale tests over etale objects. -/
 theorem comparison_pure_sections (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     (∀ (M N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ) (f : W.unop ⟶ (toProEt T).obj U.unop)

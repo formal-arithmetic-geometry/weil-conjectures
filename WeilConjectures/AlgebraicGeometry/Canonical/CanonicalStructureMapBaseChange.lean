@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
 /-! # Canonical structure maps and derived exchange
 
-Source: Stacks Project, Tag 08HY, the mate description, and Tag 0096.
+## References
+
+* Stacks Project, Tag 08HY (the mate description)
+* Stacks Project, Tag 0096 (pullback of modules)
 -/
 
 @[expose] public section
@@ -160,8 +163,7 @@ private theorem structure_map_pasting
     _ = _ := by rw [h]; simp only [Functor.map_comp, Category.assoc]
 
 /-- The canonical structure maps commute with the pinned derived exchange map.
-No cartesianness, flatness, vanishing or invertibility assumption is needed.
-Source: Stacks Project, Tag 08HY, mate description, and Tag 0096, pullback of modules. -/
+No cartesianness, flatness, vanishing or invertibility assumption is needed. -/
 theorem canonical_structure_map_base_change
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -17,12 +17,13 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotien
 /-!
 # Completed pullback through strict completed-coefficient towers
 
-Source: blueprint proper base change, completed pullback; Stacks Tag 099N.
-
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPull`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPull`: completed pullback.
+
+## References
+
+* Stacks Project, Tag 099N
 -/
 
 @[expose] public noncomputable section
@@ -62,8 +63,7 @@ theorem AdicCoefficientDatum.towerComplete_iff_intrinsic (T : Scheme.{t})
         (h r a ha _ _)
 
 /-- Completed pullback is precisely Rlim of tower pullback of the strict reduction tower.
-The formula extends to ambient inputs; its restriction is the completed pullback of the node.
-Source: blueprint completed pullback; Stacks 099N. -/
+The formula is defined on all ambient inputs. -/
 def AdicCoefficientDatum.completedPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.derived V ⥤ d.derived U :=
   completedReductionTower V d ⋙ d.towerPull f ⋙ completedRlim U (d.completedRing U)

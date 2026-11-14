@@ -33,8 +33,7 @@ private theorem finite_middle_of_exact {A B C : Type*}
   infer_instance
 
 /-- Unconditional finiteness of all cohomology groups is invariant under restriction
-and extension by zero across a dense open of a curve.
-Source: Stacks Project, Tag 0GJA, proof, the five-term sequence and finite boundary term. -/
+and extension by zero across a dense open of a curve. See Stacks Project, Tag 0GJA. -/
 theorem dense_open_cohomology_finiteness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

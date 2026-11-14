@@ -54,6 +54,10 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedFiniteExchangeCo
 
 /-!
 # Complete pro-etale compact-support base change
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 09C9
 -/
 
 @[expose] public noncomputable section
@@ -125,8 +129,7 @@ attribute [local irreducible] cbcDerivedOpenShriek cbcProperOpenGamma
 Its components are the proper pushforward of gamma, preceded by the inverse proper
 identity comparison and followed by the proper composition comparison. Explicit
 unitors and associators have identity components, so this construction gives the
-same component formula as the canonical refinement map.
-Source: blueprint proof step 8, C_u; Stacks 0F7B and 0F7C. -/
+same component formula as the canonical refinement map. -/
 @[irreducible]
 def cbcRefinementTransformation
     {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
@@ -226,8 +229,7 @@ private theorem cbcCompletedExchange_naturality
   exact e.naturality k
 
 /-- Every normalized proper/open refinement map is invertible on the stated inputs.
-No Cartesian hypothesis is imposed on the refinement square.
-Source: blueprint statement and proof step 8; Stacks 0F7B, 09C9. -/
+No Cartesian hypothesis is imposed on the refinement square. -/
 theorem cbcRefinementMap_isIso
     {X Y : Scheme.{t}} {f : X ⟶ Y}
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

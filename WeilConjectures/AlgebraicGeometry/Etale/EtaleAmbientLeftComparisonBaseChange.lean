@@ -44,6 +44,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSupportExchange.EtaleSupportExchan
 
 The comparison below concerns the left adjoints, before taking a mate or evaluating at
 coefficients. It uses the actual graph-normalized sum-extension comparison.
+
+## References
+
+* Stacks Project, Tags 0F7J, 0F7L and 03S6
 -/
 
 @[expose] public section
@@ -614,35 +618,7 @@ private theorem normalized_leftDerived_inverse
   simpa only [← Category.assoc, dd, d, c, Iso.inv_hom_id_app,
     Category.id_comp] using he
 
-/-- Inverse compact-support exchange preserves the etale composition comparison.
-Source: Stacks Project, Tags 0F7J and 0F7L, together with Tag 03S6.
-
-
-More explicitly, refinement normalization and `N.refinement` imply
-`I(d,c).hom ≫ (N.comparison u c).hom = (N.comparison u d).hom` for a proper
-refinement from `c` to `d`. A common refinement and the comparison cocycle give this
-identity for any two compactifications. Hence the etale left comparison can be computed
-using the chosen compactification of `u`, with its graph comparison inserted before the
-canonical compact-support compositor. The compositor/exchange equation then gives
-`xi_uf ≫ v*(alpha.inv) = alpha'.inv ≫ F'(xi_u) ≫ xi_f(E(-))`, initially with
-`xi_u` the inverse sum-exchange map. An arbitrary Cartesian square is transported to the
-chosen fibre product by its unique pullback isomorphism; the inverse-image compositors
-supply exactly the `J` in the statement.
-
-To check the remaining identification of `xi_u`, let `ev` denote the sum-extension
-counit. The mate counit equation to prove is
-`E'(J_M) ≫ ev' = xi_u(u*M) ≫ r*(ev_M)`.
-On sheaves, transpose both sides under the composite adjunction of sum extension with
-inverse image. By the defining conjugate formula, the transpose of the right side is
-ordinary exchange followed by the composite unit and pulled-back evaluation. Naturality
-of ordinary exchange and `u*(ev) ≫ unit = id` reduce it to ordinary exchange followed
-by the inverse-image unit. Expand ordinary exchange as the transpose of the commuting
-inverse-image square. Naturality of that square and the inverse-image triangle identity
-reduce the result to `r1_*(J_M) ≫ unit_r1`. Transposing the left side gives the same
-map by the sum-extension triangle identity. Thus the adjunction bijection proves the
-counit equation. Exactness and termwise derivation preserve this equation; injectivity
-of the mates correspondence identifies this `xi_u` with the inverse mate displayed below.
-No smoothness, section, fibre parameter, or dualizing complex enters this calculation. -/
+/-- Inverse compact-support exchange preserves the etale composition comparison. -/
 theorem etaleAmbientLeftComparison_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : EtaleCompactSupportNormalization A)

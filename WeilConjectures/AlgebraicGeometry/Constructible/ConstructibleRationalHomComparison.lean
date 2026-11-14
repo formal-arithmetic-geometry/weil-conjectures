@@ -15,11 +15,13 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Constructible rational Hom comparison
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62.
-
 The completed integral category and the realization, including its normalized coefficient
 maps, are the published ones. The general scalar-localization comparison predicate includes
 all fraction, naturality, identity, composition and simultaneous-shift equations.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62.
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +46,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 /-- Specialize the existing fraction-normalized comparison to completed integral objects
 and the actual derived scalar extension of a rational module realization. The existential
 shift structure expresses commutation with shifts for this derived functor; the predicate
-records the shift comparison explicitly in its fraction and compatibility formulas.
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2). -/
+records the shift comparison explicitly in its fraction and compatibility formulas. -/
 def ConstructibleRationalHomComparison (R : RationalModuleRealization l E X) : Prop :=
   (fun [_localizedLinear : Linear (Localization.Away (pbcUniformizer l E))
       (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E)))] ↦
@@ -241,9 +242,7 @@ open Classical in
 coproduct-Hom comparison. Actual scalar extension therefore identifies every localized
 shifted Hom with its rational ambient Hom, naturally and compatibly with identities,
 composition and shifts. The specified realization of the raw rationalization is full
-and faithful into the actual ambient derived category.
-
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62. -/
+and faithful into the actual ambient derived category. -/
 theorem constructibleRationalHomComparison :
     (∀ (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E))
       (I : Type (u + 1)) [Countable I]

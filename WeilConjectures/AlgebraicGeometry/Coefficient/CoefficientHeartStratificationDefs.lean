@@ -31,7 +31,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Lisse means pro-etale locally free of finite rank, with ranks allowed to vary on the
-cover. Source: blueprint lemma-constructible-sheaves, introductory paragraph. -/
+cover. -/
 def IsLisseCoefficientModule
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}

@@ -14,7 +14,9 @@ import all WeilConjectures.Algebra.Homology.OpenCoverMateComplexShortExact
 
 /-! # Natural open-cover short exact sequences of etale sheaves
 
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
+## References
+
+* Stacks Project, Tag 0GKK
 -/
 
 @[expose] public section
@@ -85,9 +87,7 @@ private lemma counitSequence_shortExact_right
   have : IsIso (biprod.desc eU eV) := e.isIso_hom
   exact (ShortComplex.Splitting.ofIsZeroOfIsIso _ hW inferInstance).shortExact
 
-/-- The natural sheaf-level sequence needed before applying a complex functor.
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
--/
+/-- The natural sheaf-level sequence needed before applying a complex functor. -/
 theorem exists_natural_shortExact_openCover_lowerShriek
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤) :

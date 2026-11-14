@@ -89,7 +89,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
 /-! # Etale origin and reflection of local constant models
 
-Source: Stacks Project, Tags 09AL, 09B1, 094T and 0951.
+## References
+
+* Stacks Project, Tags 09AL, 09B1, 094T, 0951
 -/
 
 @[expose] public noncomputable section
@@ -181,12 +183,7 @@ private theorem chartAlgebraLift_exact (B : Type t) [CommRing B] :
 set_option linter.unusedVariables false in
 /-- A complex over a constant finite ring, on a localized pro-etale site, with uniformly
 bounded perfect constant models on an etale covering has etale origin. Constant models
-of this origin are exactly the constant models of the original complex. This assertion
-only constructs the origin and compares its local models: it does not assert boundedness,
-local constancy of its cohomology, or perfectness of a geometric fibre.
-
-Source: Stacks Project, proetale.tex, lemma-compare-constructible-derived (09AL),
-lemma-compare-locally-constant (09B1), and weakly etale localization (094T, 0951). -/
+of this origin are exactly the constant models of the original complex. -/
 theorem finitePerfectChart_etale_origin
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

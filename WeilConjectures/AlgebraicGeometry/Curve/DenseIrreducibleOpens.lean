@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
-/-! # Dense disjoint irreducible opens in a curve -/
+/-! # Dense disjoint irreducible opens in a curve
+
+## References
+
+* Stacks Project, Theorem 03SC, proof, third paragraph.
+-/
 
 @[expose] public section
 
@@ -20,8 +25,7 @@ open CategoryTheory TopologicalSpace Set
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- A dense open of a curve can be shrunk to a finite disjoint union of irreducible opens.
-Source: Stacks Project, Theorem 03SC, proof, third paragraph. -/
+/-- A dense open of a curve can be shrunk to a finite disjoint union of irreducible opens. -/
 theorem exists_dense_irreducible_opens {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] (V : X.Opens) (hV : Dense (V : Set X)) :
     ∃ (n : ℕ) (U : Fin n → X.Opens),

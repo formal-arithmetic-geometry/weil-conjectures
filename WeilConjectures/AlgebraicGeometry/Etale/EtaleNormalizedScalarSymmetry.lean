@@ -14,7 +14,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.RestrictScala
 import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 
-/-! # The normalized scalar tensor comparison respects the signed symmetry -/
+/-! # The normalized scalar tensor comparison respects the signed symmetry
+
+## References
+
+* Stacks Project, Tags 07A4 and 06YU
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -118,8 +123,7 @@ private theorem scalarDerivedComparison
 end AlgebraicGeometry.Etale.ExceptionalCoefficients
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical scalar tensor comparison preserves the Koszul symmetry.
-Source: Stacks 07A4 and 06YU; the signed scalar-balancing step. -/
+/-- The canonical scalar tensor comparison preserves the Koszul symmetry. -/
 theorem etaleNormalizedScalarSymmetry
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (Z : Scheme.{u})
     (K L : DerivedCategoryModule A Z) :

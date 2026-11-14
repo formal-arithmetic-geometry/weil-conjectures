@@ -30,7 +30,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 
 /-! # Transport of supplied constant complexes on a slice
 
-Source: Stacks Project, proetale.tex, Tags 099R, 099Y and 09AL.
+## References
+
+* Stacks Project, Tags 099R, 099Y, 09AL, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -444,10 +446,7 @@ end Coordinates
 end SliceModelTransportProof
 
 /-- Transport a supplied etale constant complex through a marked fixed-coefficient
-origin. No finiteness, cohomological bounds or local constancy of K is required.
-
-Source: Stacks Project, proetale.tex, localization (099R), comparison (099Y, 09AL),
-and modules.tex, scalar restriction and extension (03CY). -/
+origin. -/
 theorem finiteCoefficient_slice_model_transport
     (X : Scheme.{t})
     (B : Type t) [CommRing B] [Finite B]

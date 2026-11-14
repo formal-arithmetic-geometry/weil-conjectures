@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficientTrans
 
 /-! # Scalar factorization of the relative completed constant realization
 
-Source: Stacks Tags 06YY, 06YU and 0D6D; flat completion (Tag 093M).
+## References
+
+* Stacks Project, Tags 06YY, 06YU, 0D6D, 093M
 -/
 
 @[expose] public noncomputable section
@@ -182,10 +184,7 @@ private theorem coefficientSquare (X Y : Scheme.{u}) (g : Y ⟶ X)
 
 /-- Relative completed constant realization factors through the single coefficient map
 from the inverse image of the constant algebraic completion to completed coefficients.
-This statement contains no quotient reductions or transition compatibility.
-
-Source: Stacks Tags 06YY, 06YU and 0D6D; the scalar-extension computation in the first step
-of lem-weil-pbc-completed-constant-unbounded-finite-diagram-comparison. -/
+This statement contains no quotient reductions or transition compatibility. -/
 theorem completed_constant_derived_scalar_factorization
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

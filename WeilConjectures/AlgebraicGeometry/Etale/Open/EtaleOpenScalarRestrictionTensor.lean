@@ -13,8 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarM
 
 /-! # Tensor compatibility of the scalar/open restriction comparison
 
-Source: Stacks Project, sites-modules.tex, Tags 03EL and 0E8J;
-sites-cohomology.tex, Tags 06YY and 07A4.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL, 0E8J
+* Stacks Project, Cohomology on Sites, Tags 06YY, 07A4
 -/
 
 @[expose] public section
@@ -217,27 +219,7 @@ private theorem restriction_comparison_eq
   rw [restriction_map_transport, h]
   rfl
 
-/-- The fixed scalar/restriction mate respects the normalized binary tensor comparisons.
-Source: the restriction/tensor portion of the proof of
-`lem-coef-etale-open-mixed-tensor-scalar`; Stacks Tags 03EL, 0E8J, 06YY and 07A4.
-
-
-Apply this ordinary equation to each bidegree of two flat K-flat resolutions.
-Restriction is exact and preserves flat objects and integer-indexed colimits,
-so these resolutions can also compute the derived restriction tensorators.
-Ordinary scalar extension takes these resolving complexes to flat K-flat
-complexes over the new ring. The scalar representative maps and localization
-tensorators on these models are invertible. The scalar-adjunction definition
-of r transposes to the localized ordinary scalar unit, so its representative
-normalization is exactly the degreewise ordinary scalar/restriction comparison.
-The defining normalization of t identifies its inverse with the localized
-ordinary oplax tensorator. Substitute these normalizations into the totalized
-ordinary monoidality equation and cancel the representative isomorphisms.
-This yields the displayed equation on resolving representatives. Naturality
-in each argument and the existence of such representatives yield it for all
-unbounded K and M. Each map preserves bidegrees, so the signed totalization
-introduces no extra sign. Nothing requires a flat coefficient map, a nonempty
-open, or a nonzero coefficient ring. -/
+/-- The fixed scalar/restriction mate respects the normalized binary tensor comparisons. -/
 theorem etaleOpenScalarRestrictionTensor
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

@@ -78,9 +78,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # The etale/pro-etale scalar and inverse-image cube
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6D,
-`lemma-derived-pullback-composition`, with Tags 06YS, 0G7E, 06YY and 07A4;
-Modules on Sites, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 06YY, 07A4, 0D6D, 0G7E
+* Stacks Project, Modules on Sites, Tags 03EK, 03EL
 -/
 
 @[expose] public section
@@ -352,8 +353,7 @@ private theorem reverse_scalar_cube
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical inverse-image square commutes with derived scalar extension.
-Source: Stacks Project, Tag 0D6D, `lemma-derived-pullback-composition`. -/
+/-- The canonical inverse-image square commutes with derived scalar extension. -/
 theorem etaleProEtale_scalar_pullback_cube
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)

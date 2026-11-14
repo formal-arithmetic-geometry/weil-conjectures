@@ -15,7 +15,11 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 
 /-! # Quotient-normalized reductions are scalar cones
 
-Source: Stacks 099M and uniqueness of pointwise left derived functors.
+The proof uses uniqueness of pointwise left derived functors and the free two-term resolution.
+
+## References
+
+* Stacks Project, Tags 099M, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +59,7 @@ private theorem reduction_computes_regular (ℓ : ℕ)
   infer_instance
 
 /-- In any abelian category admitting regular resolutions, normalized simultaneous
-quotients are the localized two-term scalar cones, including their quotient units.
-
-Source: Stacks 099M, the free two-term resolution, and Stacks 06YY. -/
+quotients are the localized two-term scalar cones, including their quotient units. -/
 theorem diagonal_quotient_scalar_cone (ℓ : ℕ) (N : DiagonalCompletedReductionData ℓ A)
     (res : ∀ K : CochainComplex A ℤ,
       ∃ (P : CochainComplex A ℤ) (p : P ⟶ K),

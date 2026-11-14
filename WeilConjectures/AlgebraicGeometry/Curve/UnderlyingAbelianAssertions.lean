@@ -11,8 +11,12 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-! # Changing scalars in the curve assertions
 
-Source: Stacks Project, Theorem 03SC, second proof paragraph. Cohomology is taken
-on the underlying abelian sheaf, so only the stalkwise torsion hypotheses need comparison.
+Cohomology is taken on the underlying abelian sheaf, so only the stalkwise torsion hypotheses
+need comparison.
+
+## References
+
+* Stacks Project, Tags 03SC, 0A5C
 -/
 
 @[expose] public section
@@ -70,8 +74,7 @@ private theorem invertibleOrder_of_underlying_iso
   simpa only [map_nsmul, map_zero] using hx
 
 /-- The conditional curve assertions depend only on the underlying abelian sheaf
-when both coefficient sheaves are constructible.
-Source: Stacks Project, Theorem 03SC, second proof paragraph; Lemma 0A5C. -/
+when both coefficient sheaves are constructible. -/
 theorem assertions_of_underlying_abelian_iso
     {Λ R : Type (u + 1)} [CommRing Λ] [CommRing R] {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k))

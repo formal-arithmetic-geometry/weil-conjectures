@@ -17,7 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
-/-! # Finite-dimensional scalar model for first additive étale cohomology -/
+/-! # Finite-dimensional scalar model for first additive étale cohomology
+
+## References
+
+* Stacks Project, Tags 0A3N, 03P2 and 02O6.
+-/
 
 @[expose] public section
 
@@ -28,9 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A scalar action on first additive étale cohomology induced by multiplication
-on sections is finite-dimensional.
-Source: Stacks 0A3N, proof, with 03P2 and 02O6; blueprint
-`proposition-p-torsion-smooth-proper-curve--3`, steps 3--6. -/
+on sections is finite-dimensional. -/
 theorem finiteDimensional_etaleCohomology_one_of_scalar_model
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

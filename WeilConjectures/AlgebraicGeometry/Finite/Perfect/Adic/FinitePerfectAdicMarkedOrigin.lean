@@ -93,7 +93,9 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Retained etale origin of a marked finite quotient
 
-Source: Stacks Project, Tags 09AL, 09B1 and 09C6.
+## References
+
+* Stacks Project, Tags 09AL, 09B1, 09C6, 03CY and 099R
 -/
 
 @[expose] public noncomputable section
@@ -105,8 +107,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Fixed finite-scalar coordinates of the actual quotient on the chart.
-Source: Stacks Tags 03CY, 099R and 09AL. -/
+/-- Fixed finite-scalar coordinates of the actual quotient on the chart. -/
 def finitePerfectAdicQuotientCoordinates
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -194,9 +195,7 @@ private theorem chartAlgebraLift_exact (B : Type t) [CommRing B] :
   exact ⟨inferInstance, inferInstance⟩
 
 /-- A marked finite quotient descends with its actual comparison retained.
-No consecutive arrow or completed-scalar realization is asserted.
-
-Source: Stacks Project, Tags 09AL and 09B1, applied as in Tag 09C6. -/
+No consecutive arrow or completed-scalar realization is asserted. -/
 theorem finitePerfectAdic_marked_origin
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

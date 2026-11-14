@@ -48,7 +48,11 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
 /-! # Constructible cohomology with coefficients in the site universe
-Source: Stacks Tags 09B5, 093U and 06UQ. -/
+
+## References
+
+* Stacks Project, Tags 09B5, 093U and 06UQ.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -121,9 +125,7 @@ private theorem coefficientConstructible_of_isZero
   exact (G.map_isZero h₁).iso (G.map_isZero h₂)
 
 /-- Intrinsically constructible cohomology is an isomorphism-closed triangulated
-property, with no boundedness hypothesis and coefficients in Type (u+1).
-Source: Stacks Tags 09B5, 093U and 06UQ; the coefficient-universe version of the
-finite-level argument. -/
+property, with no boundedness hypothesis and coefficients in Type (u+1). -/
 theorem constructibleCoefficientHomology_isTriangulated
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
     ObjectProperty.IsClosedUnderIsomorphisms

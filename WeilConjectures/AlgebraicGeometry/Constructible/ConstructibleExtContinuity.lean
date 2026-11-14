@@ -46,11 +46,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 /-!
 # Continuity of Ext from constructible complexes
 
-
 All derived categories below are ordinary derived categories of internal module objects.
 The comparison is induced by a colimit cocone of complexes, hence by the termwise
-colimit cocone. Field coefficients use the finite constant-model constructibility
-recorded by definition-constructible-sheaves.
+colimit cocone. Field coefficients use the recorded finite constant-model
+constructibility.
 -/
 
 @[expose] public noncomputable section

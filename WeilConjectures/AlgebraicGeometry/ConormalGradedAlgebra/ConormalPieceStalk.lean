@@ -15,7 +15,9 @@ import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-! # The conormal module at a closed-subscheme point
 
-Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
+## References
+
+* Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
 -/
 
 @[expose] public section
@@ -37,8 +39,7 @@ private theorem stalk_map_germ {Y : Scheme.{u}} (y : Y) {M N : Y.Modules}
     ((PresheafOfModules.toPresheaf _).map f.val) a
 
 /-- The stalk of `i^*I` is the cotangent module of the actual closed-immersion stalk
-kernel, compatibly with the quotient local ring and with germs of representatives.
-Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS. -/
+kernel, compatibly with the quotient local ring and with germs of representatives. -/
 theorem conormal_stalk (z : Z) :
     ∃ e : ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i 1)) ≃+
         (RingHom.ker (i.stalkMap z).hom).Cotangent,

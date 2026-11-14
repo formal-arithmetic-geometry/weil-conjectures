@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Specialization of geometric module stalks
 
-Source: Stacks Project, Tag 0GJ2, section-specialization.
+## References
+
+* Stacks Project, Tag 0GJ2
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The specialization map is characterized on affine pointed neighbourhood germs by
 restricting the limit projection along `t`. The quantified lift `v` is the composite
-of `t` with the specified projection, not an arbitrary lift of its image in the base.
-Source: Stacks Project, Tag 0GJ2, section-specialization. -/
+of `t` with the specified projection, not an arbitrary lift of its image in the base. -/
 def IsEtaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ]
@@ -52,8 +53,7 @@ def IsEtaleModuleStalkSpecialization
           ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)
         v G.obj
 
-/-- There is a unique map with the specified germ formula.
-Source: Stacks Project, Tag 0GJ2, section-specialization. -/
+/-- There is a unique map with the specified germ formula. -/
 theorem existsUnique_etaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ]
@@ -137,9 +137,7 @@ theorem existsUnique_etaleModuleStalkSpecialization
     exact (hc.fac d j).symm
 
 /-- Specialization of geometric module stalks, the unique map carrying each affine
-pointed-neighbourhood germ to its germ along the strict-localization projection.
-Only the proof of its unique characterization is postponed; the object is determined.
-Source: Stacks Project, Tag 0GJ2, section-specialization. -/
+pointed-neighbourhood germ to its germ along the strict-localization projection. -/
 noncomputable def etaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ]

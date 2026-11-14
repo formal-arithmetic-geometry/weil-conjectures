@@ -14,7 +14,10 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 
 /-! # Integral coefficients and open extension by zero
 
-Source: Stacks Project, Tags 03S5 and 0GJA. -/
+## References
+
+* Stacks Project, Tags 03S5, 0GJA
+-/
 
 @[expose] public section
 
@@ -23,8 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical integral coefficient encoding commutes with restriction followed by
-extension by zero along an open immersion.
-Source: Stacks Project, Tag 03S5 (extension by zero), and Tag 0GJA, proof. -/
+extension by zero along an open immersion. -/
 theorem integral_open_extension_comparison {X : Scheme.{u}}
     (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

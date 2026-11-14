@@ -980,10 +980,7 @@ theorem pbcCompleteRawInclusionComparison_exists (h : E ≤ F) :
   (pbcCompleteRawInclusionComparison_exists l Ω W h).exists.choose
 
 /-- The specified finite-stage inclusion comparison is the actual Karoubi extension
-of the identity-on-integral-tensor raw comparison. Mathlib's map on natural
-transformations sandwiches each component between the two images of the projector;
-the inverse uses the reverse sandwich. The composition comparisons are identities
-on the underlying object, projector and arrows. -/
+of the identity-on-integral-tensor raw comparison. -/
 @[irreducible] def pbcCompleteKaroubiInclusionComparison (h : E ≤ F) :
     pbcConstructibleCompleteInclusion l Ω W E ⋙
         pbcAmbientCompleteKaroubiTransition l Ω W h ≅
@@ -1258,9 +1255,7 @@ def pbcRawQbarToComplete : pbcQbarCategory l Ω W ⥤
   pbcRawPairToComplete l Ω W ⋙ Idempotents.toKaroubi _
 
 /-- The constructible-to-ambient functor on the full nested Karoubi categories.
-Objects `((E,(K,p)),e)` are sent to `((E,(j K,j p)),J e)`; both projectors survive.
-The finite-stage aliases, normalized tensor systems, quotient representatives and
-this outer functor together render the coefficient categories in the node. -/
+Objects `((E,(K,p)),e)` are sent to `((E,(j K,j p)),J e)`; both projectors survive. -/
 def pbcConstructibleCompleteQbarInclusion
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})

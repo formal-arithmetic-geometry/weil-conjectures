@@ -87,7 +87,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalC
 
 /-! # Finite constant module sheaves on a slice
 
-Source: Stacks Project, proetale.tex, Tags 099R, 099Y and 09AL.
+## References
+
+* Stacks Project, Tags 099R, 099Y, 09AL
 -/
 
 @[expose] public noncomputable section
@@ -200,10 +202,7 @@ private def localizedModelIso (X : Scheme.{t}) (B : Type t) [CommRing B]
 
 set_option linter.unusedVariables false in
 /-- Finite etale-local constant models of a single module sheaf descend on a chart.
-This is a statement in the abelian hearts; it has no complex or truncation bound.
-
-Source: Stacks Project, proetale.tex, lemma-compare-locally-constant (099Y),
-with small-site localization (099R). -/
+This is a statement in the abelian hearts; it has no complex or truncation bound. -/
 theorem finiteCoefficient_slice_heart_origin
     (X : Scheme.{t})
     (B : Type t) [CommRing B] [Finite B]

@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicModuleSectionComparison
 import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientLocalization
 
-/-! # Section maps for normalized native restriction -/
+/-! # Section maps for normalized native restriction
+
+## References
+
+* Stacks Project, Tags 03CE, 03EK and 0E8H
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -16,8 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The additive section isomorphism induced by the actual inverse-image comparison.
-Source: Stacks 03CE and the specified native inverse-image/localization isomorphism. -/
+/-- The additive section isomorphism induced by the actual inverse-image comparison, the
+specified native inverse-image/localization isomorphism. -/
 noncomputable def adicSliceSectionEquiv {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (P : AdicModuleSectionComparison l X)
     (Q : AdicModuleSectionComparison l U.left)
@@ -140,8 +145,7 @@ private theorem restriction_sections_apply {l : ℕ} [Fact l.Prime] {X : Scheme.
   simp only [adicSliceSectionEquiv, AddEquiv.trans_apply, AddEquiv.symm_apply_apply]
   rfl
 
-/-- Native restriction on sections respects the restricted coefficient action.
-Source: Stacks 03CE, 03EK and 0E8H; the action step of normalized module restriction. -/
+/-- Native restriction on sections respects the restricted coefficient action. -/
 theorem adicSliceSectionEquiv_smul {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (P : AdicModuleSectionComparison l X)
     (Q : AdicModuleSectionComparison l U.left)

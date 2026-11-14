@@ -73,7 +73,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Etale to pro-etale comparison preserves signed symmetry
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* [Stacks Project, Cohomology on Sites, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public section
@@ -87,8 +89,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.ProEtale
 
 /-- The etale-to-pro-etale comparison tensorator commutes with the signed derived
-symmetries.  This is the localization of the signed total-complex exchange square.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4. -/
+symmetries.  This is the localization of the signed total-complex exchange square. -/
 theorem comparisonTensorator_signedSymmetry
     (A : Type (u + 1)) [CommRing A] [Finite A] [TopologicalSpace A]
     [DiscreteTopology A] (T : Scheme.{u})

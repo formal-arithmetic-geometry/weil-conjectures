@@ -79,9 +79,7 @@ variable {X Y : Scheme.{u}} {p : X ⟶ Y}
 /-- **Effective descent along finite locally free morphisms** (Stacks 0CCI). Let `p : X ⟶ Y` be a
 surjective finite locally free morphism and let `V` be a scheme over `X` in which every finite set
 of points lying over one point of `Y` lies in an affine open. Then every descent datum on `V`
-relative to `p` is effective.
-
-(a step of the proof) -/
+relative to `p` is effective. -/
 theorem isEffective_of_isFinite_of_fibre [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X}
     (hV : ∀ (y : Y) (s : Set V.left), s.Finite → (∀ x ∈ s, (V.hom ≫ p) x = y) →
@@ -91,15 +89,11 @@ theorem isEffective_of_isFinite_of_fibre [IsFinite p] [Flat p] [LocallyOfFiniteP
   obtain ⟨U, hv, hU, hUa, W, hW, hUW⟩ := D.exists_isInvariant_isAffineOpen_of_fibre hV v
   exact ⟨U, hU, hv, D.isEffective_restrict_of_isAffineOpen hU hUa hW hUW⟩
 
-/-- **Effective descent for projective schemes.** Let `p : X ⟶ Y` be a surjective finite locally
-free morphism and let `V` be a scheme over `X` whose structure morphism `V ⟶ X` is H-projective:
-it factors as a closed immersion `V ⟶ ℙ(n; X)`, with `n` finite, followed by the projection
-`ℙ(n; X) ⟶ X` (in particular this applies when `V ⟶ X` is projective,
-`AlgebraicGeometry.IsProjective`). Then every descent datum on `V` relative to `p` is effective.
-
-This is Stacks 0CCJ: finitely many points of `V` over one point of `Y` lie in an affine open
-(`AlgebraicGeometry.IsHProjective.exists_isAffineOpen_superset`), which is the criterion
-`isEffective_of_isFinite_of_fibre` (Stacks 0CCI). -/
+/-- **Effective descent for projective schemes** (Stacks 0CCJ). Let `p : X ⟶ Y` be a surjective
+finite locally free morphism and let `V` be a scheme over `X` whose structure morphism `V ⟶ X` is
+H-projective: it factors as a closed immersion `V ⟶ ℙ(n; X)`, with `n` finite, followed by the
+projection `ℙ(n; X) ⟶ X` (in particular this applies when `V ⟶ X` is projective,
+`AlgebraicGeometry.IsProjective`). Then every descent datum on `V` relative to `p` is effective. -/
 theorem isEffective_of_isHProjective [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X} [IsHProjective V.hom] (D : Over.DescentDatum p V) :
     D.IsEffective := by

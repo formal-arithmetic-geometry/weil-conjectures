@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # Local generation of finite etale Tate powers
 
-Source: Stacks Project, sites-modules.tex, section-tensor-product (03EK),
-and sites.tex, lemma-sections-sheafification (00WK).
+## References
+
+* Stacks Project, Tags 03EK, 00WK
 -/
 
 @[expose] public section
@@ -148,9 +149,7 @@ private theorem rawGenerator_span (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
           simp only [rawGenerator, Fin.snoc_castSucc, Fin.snoc_last]
           rfl
 
-/-- Sections of finite etale Tate powers locally belong to the span of pure root tensors.
-Source: Stacks Project, sites-modules.tex, section-tensor-product (03EK),
-and sites.tex, lemma-sections-sheafification (00WK). -/
+/-- Sections of finite etale Tate powers locally belong to the span of pure root tensors. -/
 theorem finiteTateEtalePowerGenerator_locally_span
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hA : (m : A) = 0) (d : ℕ) (U : T.Etaleᵒᵖ)

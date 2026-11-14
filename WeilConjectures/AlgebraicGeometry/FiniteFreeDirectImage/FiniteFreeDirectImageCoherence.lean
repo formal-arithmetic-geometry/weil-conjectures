@@ -16,12 +16,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Finite-free direct-image coefficient coherence
 
-Source: Stacks Project, Tags 0B56 and 0944.
-
 All module and derived categories are the existing ones. The auxiliary records bundle
 coefficient squares and normalized presentations of the existing scalar functors.
 Balancing is the conjugate of the canonical restriction/direct-image comparison, and
 its right mate is the specified counit-tensor map. No arbitrary comparison is bound.
+
+## References
+
+* Stacks Project, Tags 0B56, 0944, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +74,7 @@ private theorem comparison_isIso_app_private {Z W : Scheme.{u}} (q : Z ⟶ W)
       a.target a.source R.identification S.identification a.comm).2.1
   exact isIso_of_reflects_iso f U
 
-/-- The identity equation for the actual direct-image mate.
-Source: Stacks Project, Tags 0B56 and 0D6D. -/
+/-- The identity equation for the actual direct-image mate. -/
 private theorem finiteFreeDirectImageUnit {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z) (R : Coefficients q)
     (M : DerivedCategory (proEtaleRingModules Z R.source)) :
@@ -97,8 +98,7 @@ private theorem finiteFreeDirectImageUnit {Z W : Scheme.{u}} (q : Z ⟶ W)
   have hc := congrArg (fun t ↦ t.app M) h
   simpa [comparison, α, TwoSquare.whiskerRight, TwoSquare.whiskerLeft] using hc.symm
 
-/-- The coefficient tower equation for the actual direct-image mate.
-Source: Stacks Project, Tags 0B56 and 0D6D. -/
+/-- The coefficient tower equation for the actual direct-image mate. -/
 private theorem finiteFreeDirectImageTower {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S B : Coefficients q) (a : CoefficientMap R S) (b : CoefficientMap S B)
@@ -136,10 +136,6 @@ pushforward, as an isomorphism of exact functors, with input-shift, identity and
 coherence. All equalities take place in the enlarged coefficient module category.
 The existential scalar models only present the recorded universal derived functors;
 their ordinary tensors, derived counits, units, adjunctions and associators are normalized.
-In particular neither a balancing isomorphism nor a shift structure is an extra hypothesis.
-
-Source: Stacks Tags 0B56 and 0944; shift and coefficient-tower coherences are extracted
-from the counit-tensor construction.
 -/
 theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :
     ∃ (sW : ScalarModel W) (sZ : ScalarModel Z),

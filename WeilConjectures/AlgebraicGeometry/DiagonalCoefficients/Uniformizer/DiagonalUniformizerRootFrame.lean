@@ -42,7 +42,7 @@ structure UniformizerRootFrame
       finiteRoots.toLine A hA)
 
 /-- All supplied data of the uniformizer coefficient square. The record contains
-no Cartier class equation. Source: coefficient changes (1). -/
+no Cartier class equation. -/
 structure UniformizerSquareData
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
@@ -62,7 +62,7 @@ structure UniformizerSquareData
     (l ^ (n + 1)) (cartierResidue_cast l (n + 1)) hA Y
 
 /-- The coefficient equation for this supplied data. This definition asserts
-nothing and chooses nothing. Source: coefficient changes (1). -/
+nothing and chooses nothing. -/
 @[irreducible]
 def UniformizerSquareData.equation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSuppor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import all WeilConjectures.AlgebraicGeometry.Compactification.CompactificationRefinementHomotopyUnit
 
-/-! # Common refinements preserve the raw homotopy unit -/
+/-! # Common refinements preserve the raw homotopy unit
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0D6E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -153,10 +158,7 @@ private lemma raw_refinement
     (compactificationSheafRefinement A r hcart) rfl K
 
 /-- Common-refinement comparison preserves a sheaf map followed by the mixed derived unit.
-The input sheaf functor is only additive; its exactness is unnecessary because its derived
-functor does not occur.
-
-Source: Stacks Project, Tags 0F7B, 0F7I and 0D6E. -/
+The input sheaf functor is only assumed to be additive. -/
 theorem compactification_raw_unit_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

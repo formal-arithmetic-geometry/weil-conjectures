@@ -12,8 +12,10 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Proper singleton evaluation
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 5.13,
+  Constructions 5.14--5.15 and Lemma 5.16, pp. 21 and 34--35
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -225,9 +227,7 @@ private theorem iterated_insertion_mate
 variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- The evaluated proper singleton mate is the coefficient projection inverse.
-Source: Zheng, Lemma 5.13, printed pp. 34--35, using the normalized transpose
-of Construction 4.1. -/
+/-- The evaluated proper singleton mate is the coefficient projection inverse. -/
 theorem etaleBrownProperSingletonEvaluation
     (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)
     (q : (S.PZ.scalar h).derived ⋙ (S.properDerived.level m).direct ≅

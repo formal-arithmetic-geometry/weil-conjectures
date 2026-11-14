@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetry
 /-!
 # Cancellation of opposite canonical derived tensor symmetries
 
-Source: Stacks Project, Tag 06YU, the signed symmetry on total tensor complexes.
+## References
+
+* Stacks Project, Tag 06YU (the signed symmetry on total tensor complexes)
 -/
 
 @[expose] public section
@@ -143,9 +145,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize in
-/-- Opposite canonical signed swaps cancel.
-Source: Stacks Project, Tag 06YU, definition-derived-tor and its signed tensor symmetry.
--/
+/-- Opposite canonical signed swaps cancel. -/
 theorem derivedTensorSymmetry_involutive
     (Λ : Type (u + 1)) [CommRing Λ] (X : AlgebraicGeometry.Scheme.{u})
     (K M : DerivedCategoryModule Λ X) :

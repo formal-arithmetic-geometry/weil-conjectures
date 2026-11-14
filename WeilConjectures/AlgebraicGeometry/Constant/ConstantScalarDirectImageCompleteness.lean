@@ -119,7 +119,12 @@ import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 import WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExactIndependent
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
-/-! # Direct image preserves local derived completeness -/
+/-! # Direct image preserves local derived completeness
+
+## References
+
+* Stacks Project, Tags 099J, 0997 and 0A07.
+-/
 
 @[expose] public noncomputable section
 
@@ -332,10 +337,7 @@ private theorem complete_iff_globalTower
   · intro h U
     exact (hlocal U).mpr (by have := h; infer_instance)
 
-/-- Direct image preserves vanishing for a scalar transported by the coefficient map.
-
-Source: Stacks Project, algebraization.tex, Tags 099J and 0997;
-sites-cohomology.tex, Tag 0A07. -/
+/-- Direct image preserves vanishing for a scalar transported by the coefficient map. -/
 theorem constantScalarDirectImage_complete
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology E)

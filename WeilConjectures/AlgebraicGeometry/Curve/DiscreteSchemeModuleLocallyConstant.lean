@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # Module sheaves on discrete schemes over an algebraically closed field
 
-Source: Stacks Project, Tags 06LH, 04DZ and 03P5; step 4 of the parent node.
+## References
+
+* Stacks Project, Tags 06LH, 04DZ and 03P5.
 -/
 
 @[expose] public section
@@ -44,8 +46,7 @@ private theorem isConstant_module_spec
   exact F.isConstant_of_isIso_counit_app J
 
 /-- Every module sheaf on a discrete scheme locally of finite type over an algebraically
-closed field is locally constant. No finiteness condition is imposed on the module.
-Source: Stacks Project, Tags 06LH, 04DZ and 03P5. -/
+closed field is locally constant. No finiteness condition is imposed on the module. -/
 theorem isLocallyConstantSheaf_of_discrete_finiteType_module
     (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]
     {Z : Scheme.{u}} [DiscreteTopology Z]

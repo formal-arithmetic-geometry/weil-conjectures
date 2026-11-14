@@ -8,7 +8,12 @@ module
 
 public import Mathlib.Topology.Sheaves.Abelian
 
-/-! Monomorphism preservation for extension by zero along an open embedding. -/
+/-! Monomorphism preservation for extension by zero along an open embedding.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ
+-/
 
 @[expose] public section
 
@@ -77,8 +82,7 @@ private theorem openEmbedding_lan_preservesMonomorphisms
   exact inferInstanceAs (Mono ((hf.functor.op.lan ⋙
     (evaluation (Opens Y)ᵒᵖ AddCommGrpCat.{u}).obj V).map α))
 
-/-- The sheaf pullback along the open-subspace functor preserves monomorphisms.
-Source: Stacks Project, Tags 03DI and 03DJ. -/
+/-- The sheaf pullback along the open-subspace functor preserves monomorphisms. -/
 theorem Topology.isOpenEmbedding_sheafPullback_preservesMonomorphisms
     {X Y : TopCat.{u}} (f : X ⟶ Y) (hf : Topology.IsOpenEmbedding f) :
     (let G := hf.functor

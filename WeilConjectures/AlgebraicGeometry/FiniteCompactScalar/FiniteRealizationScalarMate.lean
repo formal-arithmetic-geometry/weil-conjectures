@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScal
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteRealizationRestrictionCube
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionDirectImage
 
-/-! # Scalar direct-image mates under intrinsic realization -/
+/-! # Scalar direct-image mates under intrinsic realization
+
+## References
+
+* Stacks Project, Tags 0D6E, 0D6J, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,10 +29,7 @@ attribute [local implicit_reducible] CategoryTheory.Equivalence.mapDerivedCatego
 namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 
 /-- Intrinsic realization respects the direct-image scalar mate on the entire
-unbounded fixed-scalar pro-etale category. This assertion involves no change of site.
-
-Source: Stacks Tags 0D6E, 0D6J and 07A6; the realization/restriction cube in
-`lem-finite-proper-scalar-transport`, proof Steps 1 and 2. -/
+unbounded fixed-scalar pro-etale category. This assertion involves no change of site. -/
 theorem realizationScalar_directImage_mate
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)

@@ -12,7 +12,8 @@ import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoCo
 
 /-! # Transport of embedded integral coefficients
 
-Source: the integral-models Stacks comparison, Stacks Tag 09C1.
+## References
+* [Stacks Project, Tag 09C1](https://stacks.math.columbia.edu/tag/09C1)
 -/
 
 @[expose] public noncomputable section
@@ -146,8 +147,6 @@ private theorem map_square {C D : Type*} [Category C] [Category D]
   simpa only [Functor.map_comp] using congrArg F.map h
 
 /-- A continuous coefficient ring isomorphism preserves the first-residue condition.
-
-Source: integral-models-stacks, first-quotient transport; Stacks Tag 09C1.
 -/
 theorem embeddedIntegralResidueTransport
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

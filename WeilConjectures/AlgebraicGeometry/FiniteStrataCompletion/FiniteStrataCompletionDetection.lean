@@ -65,13 +65,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Finite-stratum detection for strict integral completion
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-def-localizing-closure-ctf-equals-bc.proof.md, Strata and Locality;
-Stacks Tags 09Y4, 09AA, 09AH, 09BM.
-
 The helpers only specialize published constructions: exact inverse image, the actual
 base-changed cover, its leaf tests, and the cone of the specified strict augmentation.
 The scalar-presentation clause retains each supplied scalar matrix, including zero ranks.
+
+## References
+
+* Stacks Project, Tags 09Y4, 09AA, 09AH, 09BM, 022D, 03DJ, 04TQ
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +108,7 @@ variable {W : Scheme.{u}} (S : Scheme.FiniteLocallyClosedStratification W)
   (𝒰 : ∀ a : Fin S.n, Scheme.Cover.{u} Scheme.proetalePrecoverage (S.domain a))
 
 /-- The given cover pulled back to an actual stratum factor of a leaf. Its cover structure
-retains the fpqc finite-refinement condition, not just joint surjectivity.
-Source: Stacks Tag 022D. -/
+retains the fpqc finite-refinement condition, not just joint surjectivity. -/
 abbrev leafCover {L : Scheme.{u}} (a : Fin S.n) (t : L ⟶ S.domain a) :
     Scheme.Cover.{u} Scheme.proetalePrecoverage L :=
   (𝒰 a).pullback₂ t
@@ -702,9 +701,7 @@ private theorem refinement_tree [CompactSpace W] [QuasiSeparatedSpace W]
       inferInstance inferInstance hcover' hd' trivial tl' tr', htl', htr'⟩
 
 /-- Finite-stratum and leaf-cover detection of strict completion, each cohomology degree,
-and the cone of the specified completion unit, retaining the scalar models and matrices.
-Source: blueprint main-20261015, finite-model proof, Strata and Locality;
-Stacks Tags 09Y4, 09AA, 09AH, 09BM, 03DJ, 04TQ. -/
+and the cone of the specified completion unit, retaining the scalar models and matrices. -/
 theorem finite_strata_completion_detection
     [CompactSpace W] [QuasiSeparatedSpace W]
     (_hc : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) :

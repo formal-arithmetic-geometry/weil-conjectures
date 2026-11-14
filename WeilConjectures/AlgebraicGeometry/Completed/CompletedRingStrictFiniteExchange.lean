@@ -37,11 +37,13 @@ public import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteOpenScalars.Fi
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedExtensionZeroBaseChange
 /-!
 # Strict finite open exchange over completed rings
-Source: blueprint sec-six-functors-basics/sk-prop-sf-cbc,
-lem-cbc-completed-extension-zero-comparison.proof.md, finite exchange before Rlim;
-Stacks 03DI, 03DJ, 04J0, 06XN and 099N.
+
 This identifies the simultaneous strict exchange with the canonical finite
 open-unit exchange, on reductions of arbitrary unbounded completed-ring objects.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0, 06XN, 099N
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -110,8 +112,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 end
-/-- Both finite comparison maps exist uniquely with their representative normalizations.
-Source: Stacks 099N, 03DI, 06XN. -/
+/-- Both finite comparison maps exist uniquely with their representative normalizations. -/
 theorem cbcFiniteComparisons_existsUnique (n : ℕ) :
     (∃! e : completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
           completedTowerPullback g d ⋙ pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅
@@ -158,23 +159,19 @@ theorem cbcFiniteComparisons_existsUnique (n : ℕ) :
       cbcStrictOpen d j' sq.isOpenImmersion' ⋙
       pbcTowerEvaluation X' (pbcAdicCompletion X' d) n).map (DerivedCategory.Q.map s))).1
     rw [z.hom.naturality, f.hom.naturality, hp]
-/-- The canonical finite source identification, with its fixed counit equation.
-Source: Stacks 099N. -/
+/-- The canonical finite source identification, with its fixed counit equation. -/
 @[irreducible] def cbcSourceFiniteComparison (n : ℕ) :=
   (cbcFiniteComparisons_existsUnique d sq n).1.exists.choose
-/-- The canonical finite target identification, with the same representative convention.
-Source: Stacks 099N. -/
+/-- The canonical finite target identification, with the same representative convention. -/
 @[irreducible] def cbcTargetFiniteComparison (n : ℕ) :=
   (cbcFiniteComparisons_existsUnique d sq n).2.exists.choose
 /-- The finite inverse exchange with its completed-ring action, before localization.
-Its component is exactly the open-unit adjunct, not an unrelated derived morphism.
-Source: Stacks 03DI. -/
+Its component is exactly the open-unit adjunct. -/
 def cbcFiniteInverse (n : ℕ) : cbcFiniteTarget d sq n ⟶ cbcFiniteSource d sq n :=
   Functor.whiskerRight
     (@singleBetaInv.{u} (cbcFiniteRing d n) _ U' U X' X gU j' j g
       sq.isOpenImmersion sq.isOpenImmersion' sq.w) (cbcFiniteRes d X' n)
-/-- The finite inverse is invertible for the chosen cartesian square.
-Source: Stacks 03DI. -/
+/-- The finite inverse is invertible for the chosen cartesian square. -/
 @[instance] theorem cbcFiniteInverse_isIso (n : ℕ) : IsIso (cbcFiniteInverse d sq n) := by
   let := sq.isOpenImmersion
   let := sq.isOpenImmersion'
@@ -182,8 +179,7 @@ Source: Stacks 03DI. -/
     (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
   unfold cbcFiniteInverse
   infer_instance
-/-- The canonical finite exchange after restriction of its finite scalar action.
-Source: Stacks 03DI. -/
+/-- The canonical finite exchange after restriction of its finite scalar action. -/
 def cbcFiniteExchange (n : ℕ) :=
   Functor.mapDerivedCategoryNatIso (asIso (cbcFiniteInverse d sq n)).symm
 section

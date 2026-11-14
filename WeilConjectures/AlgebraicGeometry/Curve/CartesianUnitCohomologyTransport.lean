@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CartesianUnitCohomologyPullb
 
 /-! # Transport of ordinary unit cohomology across a displayed cartesian square
 
-Source: Stacks Project, Tags 01F7 and 02KH; Mathlib unit-module pullback.
+## References
+
+* Stacks Project, Tags 01F7 and 02KH.
 -/
 
 @[expose] public section
@@ -22,10 +24,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The displayed unit module and the canonical pulled-back unit have the same
-ordinary cohomology, compatibly with structural scalars and pullback.
-Source: Mathlib `pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit`;
-Stacks Project, Tag 01F7, cohomology-equation-functorial; Tag 02KH, the canonical
-base-change map before tensor extension. -/
+ordinary cohomology, compatibly with structural scalars and pullback. -/
 theorem exists_cartesian_unit_cohomology_transport
     {k k' : Type u} [CommRing k] [CommRing k'] [Algebra k k']
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

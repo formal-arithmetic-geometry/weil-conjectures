@@ -12,7 +12,12 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomologyHigh
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomologyPullback
 
-/-! # Higher cohomology across a dense open -/
+/-! # Higher cohomology across a dense open
+
+## References
+
+* Stacks Project, Tag 0GJA, proof and remark (d).
+-/
 
 @[expose] public section
 
@@ -23,8 +28,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- The counit from extension by zero induces bijections in degrees above one,
-including degree two after restriction to any open immersion.
-Source: Stacks Project, Tag 0GJA, proof, the higher-degree isomorphisms and remark (d). -/
+including degree two after restriction to any open immersion. -/
 theorem dense_open_high_cohomology (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

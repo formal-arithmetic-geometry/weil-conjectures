@@ -14,11 +14,14 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! Tensor/pullback compatibility for an arbitrary Cartesian square.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7, and sites-cohomology,
-Tags 0D6D and 0E47.
-The ordinary composition and localization calculations adapt the proved helpers of
-OrdinaryRestrictionPullbackSquare and TensorPullbackSquare; only the square equality
+
+## Implementation details
+The ordinary composition and localization calculations adapt the helpers of
+`OrdinaryRestrictionPullbackSquare` and `TensorPullbackSquare`; only the square equality
 is needed, so no open-immersion hypothesis enters.
+
+## References
+* Stacks Project, Tags 03D7, 03D8, 07A4, 0D6D, 0E47, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -35,14 +38,12 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory.Functor
 
-/-- Ordinary scalar restriction in constant-ring coordinates.
-Source: Stacks Tag 03D7. -/
+/-- Ordinary scalar restriction in constant-ring coordinates. -/
 private abbrev ordinaryScalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   Scheme.proEtaleRingRestrictScalars (Scheme.proEtaleConstantRingMap (T := T) φ)
 
-/-- The recorded ordinary constant-ring inverse image.
-Source: Stacks Tag 03D8. -/
+/-- The recorded ordinary constant-ring inverse image. -/
 private abbrev ordinaryConstantPullback (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :=
   StrictTower.modulePullback (ULift.{u + 1, u} A) f
 
@@ -53,8 +54,7 @@ private abbrev padj (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :
   Scheme.proEtaleRingModuleAdjunction f (Scheme.proEtaleConstantRing W A)
     (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRingComparison f A)
 
-/-- Constant coefficient maps commute with inverse-image identification.
-Source: Stacks Tag 03D7. -/
+/-- Constant coefficient maps commute with inverse-image identification. -/
 private theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     (Scheme.proEtaleConstantRingComparison f A).hom ≫
@@ -66,8 +66,7 @@ private theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (Scheme.proEtaleConstantInverseImageMap_naturality f
       (a := CommRingCat.ofHom (RingHom.ulift φ))).symm
 
-/-- The specified ordinary restriction/pullback mate.
-Source: Stacks Tag 03D7. -/
+/-- The specified ordinary restriction/pullback mate. -/
 private def ordinaryRestrictionComparison {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     ordinaryScalarRestriction φ W ⋙ ordinaryConstantPullback A f ⟶
@@ -242,10 +241,7 @@ private lemma pasteTransport
     rw [← S.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
   rw [reassoc_of% hb]
 
-/-- Restriction of scalars respects the specified ordinary pullback-square compositor.
-No derived tensor functor, localization, or extension by zero occurs here.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7; the ordinary composition
-calculation underlying parent `lem-fix-tensor-pullback-square`. -/
+/-- Restriction of scalars respects the specified ordinary pullback-square compositor. -/
 private theorem ordinaryRestrictionPullbackSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B)
     {U' U X' X : Scheme.{u}}
@@ -489,9 +485,7 @@ private lemma derivedCube
 end DerivedCube
 
 /-- The tensor/pullback comparisons commute around a square, with its specified
-inverse-image compositor. This involves no open extension and no base-change mate.
-Source: Stacks Tags 07A4 and 0G7E; the tensor composition calculation in
-`lem-fix-open-scalar-exchange`, proof step 2. -/
+inverse-image compositor. -/
 theorem scalarTensorPullbackSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B)
     {U' U X' X : Scheme.{u}}

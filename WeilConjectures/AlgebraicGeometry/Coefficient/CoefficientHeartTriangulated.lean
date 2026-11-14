@@ -18,11 +18,10 @@ import Mathlib.CategoryTheory.ObjectProperty.Retract
 /-!
 # Bounded constructible field-coefficient complexes form a thick triangulated subcategory
 
-
 The property is the recorded finite-constant-model notion, not the different upstream
 stratified-local-finite-presentation property. The two coefficient choices carry their
 canonical ring-object structures. The algebraic-closure coefficient has sections valued
-in a finite subextension, as required by the source.
+in a finite subextension.
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszul
 
 /-! # Tensor comparison for normalized completed Koszul augmentation cones
 
-Source: Stacks Project, Tags 099M and 06YP; the signed total-tensor cone formula.
+## References
+
+* Stacks Project, Tags 099M and 06YP (the signed total-tensor cone formula)
 -/
 
 @[expose] public noncomputable section
@@ -31,10 +33,7 @@ attribute [local irreducible] completedAdicRing
 
 /-- The actual cone tower at P is tensor of its coefficient cone tower. This is
 an isomorphism of strict towers of complexes, before any localization. It imposes
-no K-flatness and asserts neither eventual vanishing nor a derived-limit result.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M), and
-sites-cohomology.tex, lemma-K-flat-quasi-isomorphism (06YP), tensor-cone calculation. -/
+no K-flatness and asserts neither eventual vanishing nor a derived-limit result. -/
 theorem completedKoszulTensorConeComparison
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

@@ -21,13 +21,14 @@ set_option linter.privateModule false
 /-!
 # Finite-level bounded constructibility for proper support
 
-Source: Stacks Project, Tags 0GL0, 095U and 0GL6; current blueprint,
-sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.
-
 We use intrinsic finite-torsion constructibility and the recorded compactification
 candidate. The scalar comparison is the adjunct of compact support of the tensor unit,
 followed by the recorded, normalized restriction-of-scalars comparison. In particular
 it is the canonical B-linear map, not an unspecified isomorphism of underlying objects.
+
+## References
+
+* Stacks Project, Tags 0GL0, 095U, 0GL6
 -/
 
 @[expose] public noncomputable section

@@ -68,7 +68,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Normalization of the scalar and geometric balancing comparison
 
-Source: Stacks Project, Tags 03EL, 0D6D and 07A6.
+## References
+
+* Stacks Project, Tags 03EL, 0D6D, 06YY, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -77,8 +79,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-/-- The ordinary balancing conjugates the identity-on-sections restriction square.
-Source: Stacks Project, Tag 03EL. -/
+/-- The ordinary balancing conjugates the identity-on-sections restriction square. -/
 def ordinaryBalancing {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :
@@ -95,8 +96,7 @@ def ordinaryBalancing {Z W : Scheme.{u}} {q : Z ⟶ W}
       a.target a.source R.identification S.identification a.comm)).symm
 
 /-- A comparison is computed by ordinary balancing when it intertwines both
-universal derived counits with the termwise ordinary comparison.
-Source: Stacks Project, Tags 06YY and 07A6. -/
+universal derived counits with the termwise ordinary comparison. -/
 def BalancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S)
@@ -474,8 +474,7 @@ private theorem derived_restriction_pullback_eq {Z W : Scheme.{u}} {q : Z ⟶ W}
   rfl
 
 /-- The normalized termwise balancing agrees with the conjugate of the actual
-restriction/direct-image comparison.
-Source: Stacks Project, Tags 03EL, 0D6D, 06YY and 07A6. -/
+restriction/direct-image comparison. -/
 theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S)

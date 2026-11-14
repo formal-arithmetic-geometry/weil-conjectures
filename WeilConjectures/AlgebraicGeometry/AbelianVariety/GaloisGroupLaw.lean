@@ -36,9 +36,7 @@ variable {K : Type u} [Field K] (A : Over (Spec (.of K))) [GrpObj A]
 /-- **The Galois action on a base-changed group scheme preserves the group law.** For a group
 scheme `A` over `K` and `σ ∈ Gal(K̄ / K)` (or any `K`-endomorphism of `K̄`), the automorphism
 `σ_A = 𝟙 × Spec σ` of `A_{K̄} = A ×_K K̄` lies over `Spec σ` and satisfies
-`μ ∘ (σ_A ×_σ σ_A) = σ_A ∘ μ` for the base-changed group law `μ`. Applied to the Jacobian `J₀`
-of `AlgebraicGeometry.exists_jacobian_galoisAction`, this is the clause of
-`proposition-jacobian-over-ground-field--5` that `σ_J` preserves the group laws. -/
+`μ ∘ (σ_A ×_σ σ_A) = σ_A ∘ μ` for the base-changed group law `μ`. -/
 noncomputable def geometricFiberGaloisGrpHom (σ : AlgebraicClosure K →ₐ[K] AlgebraicClosure K) :
     SemilinearGrpHom (S := Spec (.of (AlgebraicClosure K)))
       (Scheme.specAlgebraicClosureMap σ).left (baseChangeAlgebraicClosure A)

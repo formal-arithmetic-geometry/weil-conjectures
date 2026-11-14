@@ -15,8 +15,11 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Normalized finite-level geometric comparisons
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16,
+  pp. 21 and 34--35
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +58,7 @@ private theorem inverseMateIso_mate
     (mateEquiv a b (.mk _ _ _ _ (inverseMateIso a b e).inv)) = e.hom := by
   exact ((mateEquiv a b).apply_symm_apply _)
 
-/-- Normalized realizations and coefficient projection, without singleton extension.
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4. -/
+/-- Normalized realizations and coefficient projection, without singleton extension. -/
 theorem etaleBrownLevelComparisons
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

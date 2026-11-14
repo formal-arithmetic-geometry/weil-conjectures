@@ -29,10 +29,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- An explicit bounded-below étale origin for a pro-étale derived object.  The source
+/-- An explicit bounded-below étale origin for a pro-étale derived object.  It
 retains the étale complex and its comparison isomorphism as data, rather than merely
-asserting that such data exists. Source: Weil conjectures blueprint,
-`proposition-proper-direct-image-constructible-complexes--5`. -/
+asserting that such data exists. -/
 structure EtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (K : FiniteCoefficientDerivedCategoryPlus T Λ) where

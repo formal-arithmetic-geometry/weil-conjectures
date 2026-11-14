@@ -13,7 +13,10 @@ import Mathlib.CategoryTheory.Presentable.Directed
 
 /-! # Descent of fixed-base étale cohomology classes
 
-Source: Stacks Project, Tag 09YQ.
+## References
+
+* [Stacks Project, Tag 09YQ](https://stacks.math.columbia.edu/tag/09YQ) (Theorem 59.51.3)
+* [Stacks Project, Tag 0032](https://stacks.math.columbia.edu/tag/0032)
 -/
 
 @[expose] public section
@@ -260,15 +263,7 @@ attribute [local irreducible] upperStar cohomologyMap Sheaf.H.map
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Every cohomology class of a sheaf pulled back from a fixed base descends to a stage.
-
-Source: Stacks Project, Theorem 59.51.3, Tag 09YQ, and directed reindexing, Tag 0032.
-
-
-Edge cases: cofilteredness supplies a nonempty index; q = 0 needs no negative
-cochains. Empty schemes and the zero sheaf give only the zero class. A constant
-one-object diagram gives the usual inverse-image composition identification.
--/
+/-- Every cohomology class of a sheaf pulled back from a fixed base descends to a stage. -/
 theorem exists_cohomologyMap_preimage_of_isLimit {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.OpenUnitSections.OpenSystemUnitSections
 
 /-! # Horizontal compatibility of open extension under block reindexing
 
-Source: Zheng Construction 4.1, ordinary levelwise operations; Stacks 03DI--03DJ.
+## References
+
+* Zheng, Construction 4.1 (ordinary levelwise operations)
+* Stacks Project, Tags 03DI, 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +46,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (O : OpenSystems.{c, v, r} J B τ U)
   (OD : OpenSystems.{c, v, r} J (blockCoefficients B t) (blockTransitions J B τ t) U)
 
-/-- The component comparison is the composite of the given ordinary evaluations.
-Source: Zheng Construction 4.1; Stacks 03DJ. -/
+/-- The component comparison is the composite of the given ordinary evaluations. -/
 @[irreducible] def blockOpenExtensionComponent
     (P : Systems (J.over U) (openRings.{c, v, r} J B U)
       (openTransitions.{c, v, r} J B τ U)) (m : ℕ) :
@@ -261,8 +263,7 @@ theorem blockOpenExtensionEvaluationIso_hom (m : ℕ) (P) :
   exact comparison_evaluation Q OD.extension O.extension R.repetition _ _ _ _ _
     (OD.extensionEvaluation m) (qev m) (O.extensionEvaluation (t.index m)) (R.evaluation m) P
 
-/-- The normalized component comparisons commute with horizontal system transitions.
-Source: Zheng Construction 4.1, ordinary levelwise operations, and Stacks 03DI--03DJ. -/
+/-- The normalized component comparisons commute with horizontal system transitions. -/
 theorem blockOpenExtensionComponent_transition
     (hQ : ∀ (M : Systems (J.over U) (openRings.{c, v, r} J B U)
         (openTransitions.{c, v, r} J B τ U))

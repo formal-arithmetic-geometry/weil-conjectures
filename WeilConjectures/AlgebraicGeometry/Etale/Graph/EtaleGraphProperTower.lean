@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperInterchange
 
 /-! # The proper/etale graph interchange
 
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7F (proper/quasi-finite interchange and change of base)
+* Stacks Project, Tags 0F7J (composition) and 0F7L
+* Stacks Project, Tag 0F4L (graph normalization)
 -/
 
 @[expose] public section
@@ -193,10 +197,7 @@ private lemma graph_formal_pasting
 
 /-- Normalization of the proper-first composition with etale sum extension.
 There is no upper open-square comparison in this equation: the only geometric
-interchange is the Cartesian square of the proper maps c'.g and p.
-Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F (proper/quasi-finite
-interchange and change of base), Tag 0F7J (composition), and Tag 0F7L, final
-proof paragraph item (3); etale-cohomology.tex Tag 0F4L (graph normalization). -/
+interchange is the Cartesian square of the proper maps c'.g and p. -/
 theorem etaleGraph_proper_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X' Y' Y Z : Scheme.{u}}

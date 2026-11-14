@@ -10,13 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 
 /-!
-# The smooth diagonal with the chapter's pure-codimension convention
+# The smooth diagonal with a pure-codimension convention
 
-
-The chapter's definition concerns positive codimension and separated finite-type schemes
+The definition used here concerns positive codimension and separated finite-type schemes
 over a field. Unlike the upstream affine-local predicate, it records stalk dimensions as
-well as regular generators. The current blueprint_update removes the old tangent-bundle
-conclusion. The rank-zero clopen case used by the consumer is expressed there directly.
+well as regular generators. The rank-zero clopen case is expressed directly.
 -/
 
 @[expose] public section

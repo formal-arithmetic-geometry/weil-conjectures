@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 
 /-! # Coefficient endomorphisms on additive Čech complexes
 
-Source: Stacks Project, Tags 01EQ and 01FD. -/
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
+-/
 
 @[expose] public section
 
@@ -21,8 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Apply global sections to the actual resolution comparison map.
-Source: Stacks Project, Tag 01EQ, functoriality in coefficients. -/
+/-- Global sections of the resolution comparison map. -/
 noncomputable def additiveCechGlobalMap {X : Scheme.{u}}
     (I : InjectiveResolution X.etaleAdditiveSheaf)
     (f : X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf) :
@@ -30,8 +32,7 @@ noncomputable def additiveCechGlobalMap {X : Scheme.{u}}
   ((Etale.etaleSectionFunctor (Scheme.Etale.mk (𝟙 X))).mapHomologicalComplex
     (.up ℕ)).map (InjectiveResolution.desc f I I)
 
-/-- Apply the open Čech functor, flip, and totalize the resolution comparison map.
-Source: Stacks Project, Tag 01FD, functoriality of the double complex. -/
+/-- The open Čech functor applied to the resolution comparison map, flipped and totalized. -/
 noncomputable def additiveCechTotalMap {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf)
     (f : X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf) :
@@ -43,8 +44,7 @@ noncomputable def additiveCechTotalMap {X : Scheme.{u}} {ι : Type u}
           (additiveCechOpenInclusion X).op ⋙ cechComplexFunctor U).mapHomologicalComplex
             (.up ℕ)).map (InjectiveResolution.desc f I I))) (.up ℕ)
 
-/-- The global restriction augmentation is natural in a coefficient endomorphism.
-Source: Stacks Project, Tag 01FD, right upper square of the augmented diagram. -/
+/-- The global restriction augmentation is natural in a coefficient endomorphism. -/
 theorem additiveCech_alpha_natural
     (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf)
@@ -64,8 +64,7 @@ theorem additiveCech_alpha_natural
     Category.assoc, Pi.lift_comp_π]
   exact ((InjectiveResolution.desc f I I).f n).hom.naturality _
 
-/-- The coefficient augmentation commutes with multiplication.
-Source: Stacks Project, Tags 01EQ and 01FD, the augmented double-complex diagram. -/
+/-- The coefficient augmentation commutes with multiplication. -/
 theorem additiveCech_scalar_chain_action
     (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (μ : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))

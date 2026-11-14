@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 
 /-! # Constant-quotient filtration induction steps
 
-Source: Stacks Project, etale-cohomology.tex, 03SD and 0A5C.
+## References
+
+* Stacks Project, Tags 03SD, 0A5C
 -/
 
 @[expose] public section
@@ -27,10 +29,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.IsCurve
 
 /-- The zero case and successor step for extension by zero of a constant-quotient
-filtration. This states only local induction steps, not the terminal assertion.
-
-Source: Stacks Project 03SD, final paragraph;
-0A5C. -/
+filtration. -/
 theorem open_lowerShriek_constant_filtration_steps
     {k : Type u} [Field k] [IsAlgClosed k] {Y V : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (a : V ⟶ Y) [IsOpenImmersion a]

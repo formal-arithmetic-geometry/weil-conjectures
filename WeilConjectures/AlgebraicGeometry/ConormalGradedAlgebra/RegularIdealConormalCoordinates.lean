@@ -19,7 +19,9 @@ import WeilConjectures.RingTheory.Regular.RegularSequenceHigherRelations
 /-!
 # Conormal coordinates for an affine regular ideal
 
-Source: Stacks Tags 00LN, 0631--0633 and 01R3.
+## References
+
+* Stacks Project, Tags 00LN, 0631--0633 and 01R3.
 -/
 
 @[expose] public noncomputable section
@@ -148,8 +150,7 @@ attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEqu
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Regular affine generators give a conormal frame and the polynomial multiplication
-comparison. Its monomials are represented by the actual coordinate products.
-Source: Stacks Tags 00LN, 0631--0633 and 01R3. -/
+comparison. Its monomials are represented by the actual coordinate products. -/
 theorem regular_ideal_conormal_coordinates {V S : Scheme.{u}}
     (s : S ⟶ V) [IsClosedImmersion s] (U : V.affineOpens) (d : ℕ)
     (x : Fin d → Γ(V, U.1))

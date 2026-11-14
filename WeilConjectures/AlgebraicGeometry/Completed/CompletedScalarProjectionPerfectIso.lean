@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Completed.CompletedScalarProject
 /-!
 # Perfectness makes the normalized scalar projection invertible
 
-Source: Stacks Project, Tag 0944, and blueprint order 1276.
+## References
+
+* Stacks Project, Tag 0944
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +36,7 @@ private theorem derivedRestriction_reflectsIsomorphisms (T : Scheme.{u})
       (by rw [Functor.comp_map]; infer_instance)
   exact isIso_of_reflects_iso _ (pbcRestrict φ)
 
-/-- A scalar projection whose coefficient unit is the positive quotient is invertible.
-Source: Stacks Project, Tag 0944; blueprint order 1276, finite-level projection formula. -/
+/-- A scalar projection whose coefficient unit is the positive quotient is invertible. -/
 theorem completedScalarProjectionPerfectIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]

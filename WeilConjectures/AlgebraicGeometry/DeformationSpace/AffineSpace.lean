@@ -429,8 +429,8 @@ lemma isPullback_deformationSpaceToAffineSpace :
       deformationSpaceProj_over, Scheme.Hom.comp_preimage]
     exact toBase_preimage _ (affineOpenOver hW)
 
-/-- Blueprint `prose-09-12` (4), **the standard pair**: the deformation space of the zero
-section of `𝔸^n_B ⟶ B` is `𝔸^n_{𝔸¹_B} = 𝔸^n_B ×_B 𝔸¹_B`, with coordinates `u_k = x_k t⁻¹`. -/
+/-- **The standard pair**: the deformation space of the zero section of `𝔸^n_B ⟶ B` is
+`𝔸^n_{𝔸¹_B} = 𝔸^n_B ×_B 𝔸¹_B`, with coordinates `u_k = x_k t⁻¹`. -/
 instance isIso_deformationSpaceToAffineSpace : IsIso (deformationSpaceToAffineSpace n B) := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := MorphismProperty.isomorphisms Scheme)
     (fun W : B.affineOpens ↦ (AffineSpace.map n (affineLineChart W.2)).opensRange) ?_ fun W ↦ ?_
@@ -462,9 +462,8 @@ noncomputable def deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
   deformationSpaceToAffineSpace n B' ≫ AffineSpace.map n (AffineSpace.map _ b) ≫
     inv (deformationSpaceToAffineSpace n B)
 
-/-- Blueprint `prose-09-12` (5) for the standard pair: the deformation space of the zero
-section commutes with base change in `B`,
-`D_0 𝔸^n_{B'} = D_0 𝔸^n_B ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
+/-- For the standard pair, the deformation space of the zero section commutes with base change
+in `B`: `D_0 𝔸^n_{B'} = D_0 𝔸^n_B ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
 lemma isPullback_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
     IsPullback (deformationSpaceMap b)
       (deformationSpaceProj (𝔸(n; B') ↘ B') (AffineSpace.zeroSection n B'))
@@ -480,8 +479,7 @@ lemma isPullback_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
     P₃
   simpa [deformationSpaceMap] using this
 
-/-- Blueprint `prose-09-12` (5) for the standard pair: the base change of the section `s̃` is
-the section `s̃` over `B'`. -/
+/-- For the standard pair, the base change of the section `s̃` is the section `s̃` over `B'`. -/
 lemma deformationSpaceSection_comp_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
     (AffineSpace.zeroSection n B').deformationSpaceSection ≫ deformationSpaceMap b =
       AffineSpace.map _ b ≫ (AffineSpace.zeroSection n B).deformationSpaceSection := by

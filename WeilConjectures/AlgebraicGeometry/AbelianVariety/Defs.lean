@@ -50,9 +50,8 @@ An *abelian variety* over a field `K` is a group scheme over `K` which is proper
 connected; its *dimension* is `AlgebraicGeometry.IsAbelianVariety.dim`, the Krull dimension of
 its underlying space.
 
-As blueprint
-`lemma-abelian-variety-commutative--1` records, that these are exactly the complete group varieties
-is `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. -/
+That these are exactly the complete group varieties is
+`AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. -/
 class IsAbelianVariety (A : Over (Spec (.of K))) : Prop
     extends IsProper A.hom, Smooth A.hom, ConnectedSpace A.left
 

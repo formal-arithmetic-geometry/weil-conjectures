@@ -41,7 +41,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 /-!
 # Etale horizontal compact-support exchange is the composition mate
 
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7K.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tags 0F4L, 0F7J, 0F7K, 0F7L and 0GKM
 -/
 
 set_option autoImplicit false
@@ -55,8 +57,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The compactification-independent proper-support comparison for an etale map.
-Source: literature/stacks-project/more-etale.tex, Tags 0F4L and 0GKM. -/
+/-- The compactification-independent proper-support comparison for an etale map. -/
 noncomputable def etaleCanonicalCompactSupportComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] [IsSeparated e]
@@ -69,8 +70,7 @@ noncomputable def etaleCanonicalCompactSupportComparison
   (rightDerivedLowerShriekIso A (HasCompactification.compactification e)).symm ≪≫
     N.comparison e (HasCompactification.compactification e)
 
-/-- The specified composition mate built from the normalized compact-support comparisons.
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7K. -/
+/-- The specified composition mate built from the normalized compact-support comparisons. -/
 noncomputable def etaleHorizontalSupportMateDelta
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
@@ -103,8 +103,7 @@ noncomputable def etaleHorizontalSupportMateDelta
       (etaleCanonicalCompactSupportComparison A v N)
 
 /-- The specified unbounded compact-support exchange `C_{f,v} : v^* Rf_! ≅ Rf'_! v'^*` as an
-isomorphism; its `hom` is the recorded exchange and its `inv` is `C_{f,v}⁻¹`.
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7L. -/
+isomorphism; its `hom` is the recorded exchange and its `inv` is `C_{f,v}⁻¹`. -/
 noncomputable def etaleHorizontalSupportBaseChangeIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -432,9 +431,7 @@ attribute [local irreducible] rightDerivedLowerShriekIso
 -- Keep the pullback compactification and its projection definitionally aligned.
 set_option maxRecDepth 10000 in
 set_option backward.isDefEq.respectTransparency false in
-/-- The counit identity for the composition mate of compact-support exchange.
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7K.
--/
+/-- The counit identity for the composition mate of compact-support exchange. -/
 theorem etaleHorizontalSupportMate
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

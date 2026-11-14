@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1OrdinaryKummerBoundaryCore
 
 /-! # The integral boundary of the ordinary finite Kummer class
+
+## References
+* Stacks Project, Tags 03PL, 03FD
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The ordinary positive Chern arrow, expressed in the finite coefficient coordinates,
-has the integral positive Kummer boundary. No tower Chern construction occurs here.
-
-Source: diagonal-tower trace (1), comparison with the scalar Kummer class;
-Stacks 03PL and 03FD. -/
+has the integral positive Kummer boundary. -/
 theorem finiteP1_ordinary_kummer_boundary
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     (e : X ≅ ProjectiveLine S) (k : Kummer l X)

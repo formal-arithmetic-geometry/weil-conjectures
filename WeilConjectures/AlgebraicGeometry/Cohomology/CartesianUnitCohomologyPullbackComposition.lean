@@ -18,9 +18,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- The explicitly constructed forward transport intertwines the two structural
-pullback maps in a displayed cartesian square.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial; Tag 02KH,
-the untensored comparison map; Mathlib's adjunction identity for pullback of the unit. -/
+pullback maps in a displayed cartesian square. See Stacks Project, Tags 01F7 and 02KH. -/
 theorem cartesian_unit_cohomology_pullback_comp
     {k k' : Type u} [CommRing k] [CommRing k'] [Algebra k k']
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

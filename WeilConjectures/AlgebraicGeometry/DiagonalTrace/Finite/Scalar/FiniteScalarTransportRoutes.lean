@@ -62,7 +62,7 @@ def finiteScalarModuleRoute (n : ℕ)
         (finiteOrdinaryIntrinsicImage l E n T a)
 
 /-- Ordinary module forgetting and abelian comparison, with the actual scalar
-comparison isomorphisms at the endpoints. Source: exact site comparison. -/
+comparison isomorphisms at the endpoints. -/
 def finiteScalarAbelianRoute (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

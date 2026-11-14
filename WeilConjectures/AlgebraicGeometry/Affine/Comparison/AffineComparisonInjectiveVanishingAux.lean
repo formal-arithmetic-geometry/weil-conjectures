@@ -34,7 +34,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Finite affine Čech exactness for comparison pullbacks of injectives
 
-Source: Stacks Project, Tag 099U, verification of condition (3).
+## References
+
+* Stacks Project, Tag 099U (verification of condition (3))
 -/
 
 @[expose] public section

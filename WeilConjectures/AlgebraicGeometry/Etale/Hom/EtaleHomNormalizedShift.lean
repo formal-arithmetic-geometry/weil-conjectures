@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonModels
 import WeilConjectures.AlgebraicGeometry.Native.NativeDerivedHomNormalizedShift
 
-/-! # Evaluation-normalized exact shift for one étale Hom functor -/
+/-! # Evaluation-normalized exact shift for one étale Hom functor
+
+## References
+
+* Stacks Project, Tags 08J9, 08JC
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -20,9 +25,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] Etale.sheafBraidedCategory
 
-/-- A single coefficient Hom functor admits the evaluation-normalized exact shift.
-Source: Stacks Project, Tags 08JC and 08J9, signed Hom reindexing and the
-termwise split sequence argument. -/
+/-- A single coefficient Hom functor admits the evaluation-normalized exact shift. -/
 theorem etaleHom_normalizedShift_exists
     (C : Type (u + 2)) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

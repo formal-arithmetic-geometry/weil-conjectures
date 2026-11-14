@@ -316,25 +316,7 @@ private theorem lisse_on_refined_stratum
       (constantModel_lfp (coefficientHeartRingObj Λ) S _ hM))
 
 /-- Lisse modules restrict to every locally closed refinement, including its given scheme
-structure. Source: blueprint lemma-constructible-sheaves, steps (5)--(6),
-and the finite-presentation pullback and immersion-range arguments of
-`CondensedConstructibleSerre.lean` and `ProEtaleModuleLfpImmersionTransport.lean`.
-
-
-For a refined stratum T with image contained in an adapted stratum S, undo the
-normalized coefficient comparison to get local finite presentation over the raw
-inverse-image ring on S. Apply the existing immersion-range transfer theorem. It
-forms T times_X S and reflects local finite presentation through the surjective
-closed immersion to T. Normalize the coefficient comparison on T again. This gives
-local finite presentation of the actual restriction, without a factorization T to S.
-
-The underlying space of T is Noetherian because its immersion into X is an embedding.
-For each of the finite-subfield and algebraic-closure coefficient cases, the existing
-local-triviality lemma makes every locally finitely presented module on T pro-etale
-locally finite free. Transport its raw pullbacks to normalized coefficient pullbacks.
-This is the required lisse cover. Empty schemes and rank zero are included by the
-existing finite-presentation and covering lemmas.
--/
+structure. -/
 theorem coefficientHeart_commonStratification_lisse
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})

@@ -89,7 +89,9 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 
 /-! # The ordinary coefficient restriction tensor square
 
-Source: Stacks, Modules on Sites, Tag 03EL.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -230,9 +232,7 @@ private theorem invert_square {A : Type*} [Category* A]
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
     Iso.hom_inv_id, Iso.inv_hom_id, Category.comp_id] using hh.symm
 
-/-- Coefficient restriction commutes with the canonical ordinary tensor pullback.
-
-Source: Stacks, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback. -/
+/-- Coefficient restriction commutes with the canonical ordinary tensor pullback. -/
 theorem ordinary_square
     (o : SheafOfModules.RingIsoTensorTransport
       (J := ProEt.topology X)

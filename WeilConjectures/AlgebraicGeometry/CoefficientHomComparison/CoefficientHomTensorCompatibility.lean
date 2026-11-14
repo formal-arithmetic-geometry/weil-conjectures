@@ -8,7 +8,12 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
-/-! # Tensor compatibility of the closed comparison -/
+/-! # Tensor compatibility of the closed comparison
+
+## References
+
+* Stacks Project, Tags 07A4, 0D6D
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -16,8 +21,7 @@ open CategoryTheory MonoidalCategory MonoidalClosed
 open Functor.LaxMonoidal
 namespace AlgebraicGeometry.ProEtale.CoefficientHomComparison
 
-/-- A braided lax monoidal functor respects the tensor product of internal morphisms.
-Source: Stacks 07A4, 0D6D; Step 10 of the constructible coefficient Hom comparison. -/
+/-- A braided lax monoidal functor respects the tensor product of internal morphisms. -/
 theorem closed_comparison_tensor
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
     [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D]

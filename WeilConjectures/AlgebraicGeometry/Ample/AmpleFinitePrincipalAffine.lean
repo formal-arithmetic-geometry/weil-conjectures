@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Affine section neighbourhoods of finite sets
 
-Source: Stacks Project, Properties, Lemma 09NV.
+## References
+
+* Stacks Project, Properties, Lemma 09NV
 -/
 
 @[expose] public section
@@ -27,7 +29,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An ample invertible module has a positive-power section with affine nonvanishing locus
 containing a prescribed finite set and contained in a prescribed open neighbourhood.
-Source: Stacks Project, Properties, Lemma 09NV.
 -/
 theorem exists_affine_section_neighbourhood_of_finite
     (Y : Scheme.{u}) (M : Y.Modules) [M.IsInvertible] (hM : IsAmple Y M)

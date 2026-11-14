@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.BraidedCochainNormaliza
 
 /-! # Braided cochain restriction with normalized tensor and unit
 
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
+## References
+
+* Stacks Project, Tags 06YS, 0G7D, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +57,7 @@ private theorem restrictionCoproducts
   exact preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) _
 
 /-- Ordinary braided restriction lifts to a braided cochain restriction with the given
-summand-normalized inverse tensorator and the ordinary unit in degree zero.
-
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT. -/
+summand-normalized inverse tensorator and the ordinary unit in degree zero. -/
 theorem clopen_braided_cochain_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

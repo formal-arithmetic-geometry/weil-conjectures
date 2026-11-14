@@ -26,13 +26,13 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
 /-!
 # The unbounded module exchange on K-injective representatives
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K and 0DVC. Blueprint main-20261015, definition-derived-base-change-map, final
-paragraph.
+The comparison below is an unbounded representative statement, using the exact inverse-image
+mate defining the derived base-change map. The three auxiliary definitions spell out its
+canonical maps, without additional choices.
 
-The comparison below is the agent-formulated unbounded representative statement,
-using the exact inverse-image mate of `definition-derived-base-change-map`.
-The three auxiliary definitions spell out its canonical maps, without additional choices.
+## References
+
+* Stacks Project, Tags 0736, 07A7, 070I, 070K, 070Y, 08BJ, 0DVC
 -/
 
 @[expose] public section
@@ -138,8 +138,7 @@ private theorem square_factors
   simp only [Category.assoc]
   erw [Iso.hom_inv_id_app_assoc]
 
-/-- The exact derived adjunction mate satisfies the right-derived unit identity on complexes.
-Source: Stacks Project, derived.tex, Tag 0DVC; exact-derived mate factorization. -/
+/-- The exact derived adjunction mate satisfies the right-derived unit identity on complexes. -/
 theorem derivedExchangeUnitQ
     {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
     [Abelian C₁] [Abelian C₂] [Abelian C₃] [Abelian C₄]
@@ -232,8 +231,7 @@ private theorem representative_comparison
   rw [F'.rightDerivedFunctor.map_comp]
 
 /-- The canonical direct-image comparison on a specified K-injective representative:
-`Q(u_*I) ≅ Ru_*(QI) ≅ Ru_*K`, with the second arrow induced by `s.symm`.
-Source: Stacks Project, derived.tex, Tags 070K and 070Y. -/
+`Q(u_*I) ≅ Ru_*(QI) ≅ Ru_*K`, with the second arrow induced by `s.symm`. -/
 noncomputable def moduleExchangeDirectImageIso
     (Λ : Type (u + 1)) [CommRing Λ] {U V : Scheme.{u}} (f : U ⟶ V)
     {K : DerivedCategoryModule Λ U}
@@ -244,8 +242,7 @@ noncomputable def moduleExchangeDirectImageIso
   (((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorObjQIso I).symm ≪≫
     (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso s.symm
 
-/-- The isomorphism `t = g'⁻¹(s) ≫ φ ≫ Q(j)` associated to the replacement `j`.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A7, and derived.tex, Tag 070I. -/
+/-- The isomorphism `t = g'⁻¹(s) ≫ φ ≫ Q(j)` associated to the replacement `j`. -/
 noncomputable def moduleExchangeReplacementIso
     (Λ : Type (u + 1)) [CommRing Λ] {X' X : Scheme.{u}} (g' : X' ⟶ X)
     {K : DerivedCategoryModule Λ X}
@@ -259,9 +256,7 @@ noncomputable def moduleExchangeReplacementIso
     ((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app I ≪≫
     asIso (DerivedCategory.Q.map j)
 
-/-- The complex map `e = Ex⁰_I ≫ f'_*(j)`, using the termwise module mate.
-Naturality of the sheaf mate supplies the chain-map condition in every degree.
-Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7. -/
+/-- The complex map `e = Ex⁰_I ≫ f'_*(j)`, using the termwise module mate. -/
 noncomputable def moduleExchangeRepresentativeMap
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -277,15 +272,9 @@ noncomputable def moduleExchangeRepresentativeMap
     (((f')_*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (.up ℤ)).map j
 
 /-- The specified unbounded module exchange is computed on any K-injective representative
-and any K-injective replacement of its inverse image. The two sides are respectively
-`σsrc ≫ Ex_K` and `Q(e) ≫ χ_(J,t)`, with `χ_(I,s)`, `t`, and `e` explicitly defined above.
-Consequently conjugating `Q(e)` by the displayed comparison isomorphisms always yields
-this fixed exchange mate. This includes bounded below injective representatives, and
-requires no K-injectivity of the inverse image of `I`.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K, 08BJ and 0DVC; blueprint main-20261015, definition-derived-base-change-map, final
-paragraph. -/
+and any K-injective replacement of its inverse image: `σsrc ≫ Ex_K = Q(e) ≫ χ_(J,t)`, with
+`χ_(I,s)`, `t`, and `e` explicitly defined above. This includes bounded below injective
+representatives. -/
 theorem derivedExchangeModuleTermwise
     (Λ : Type (u + 1)) [CommRing Λ] {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}

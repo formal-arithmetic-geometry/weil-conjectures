@@ -39,7 +39,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The finite-level compact-support candidate for a specified compactification: the
 termwise descent of extension by zero followed by the ordinary K-injective right derived
-direct image. Source: blueprint order 1488. -/
+direct image. -/
 noncomputable def sfAmbientCompactSupportCandidate
     (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (d : Compactification f) : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=

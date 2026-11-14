@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechExtSectionBoundar
 
 /-! # Boundary squares before taking the augmentation quotient
 
-Source: Stacks Project, Tags 01EQ, 013T and 0117.
+## References
+
+* Stacks Project, Tags 01EQ (augmented double complex), 013T (horseshoe), 0117 (naturality)
 -/
 
 @[expose] public section
@@ -24,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- The coefficient and section augmentations have the same total boundary.
-Source: Stacks 01EQ, augmented double complex; 013T, horseshoe; 0117, naturality. -/
+/-- The coefficient and section augmentations have the same total boundary. -/
 theorem abelianCechAugmentation_boundary_squares
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

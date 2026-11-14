@@ -13,7 +13,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 
 /-! # Transport of embedded integral coefficients
 
-Source: the integral-models Stacks comparison, Stacks Tag 09C1.
+## References
+* Stacks Project, Tags 0999, 099F, 09C1
 -/
 
 @[expose] public noncomputable section
@@ -121,8 +122,6 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- A continuous coefficient ring isomorphism preserves the local completeness condition.
-
-Source: integral-models-stacks, scalar-square transport; Stacks Tags 0999, 099F and 09C1.
 -/
 theorem embeddedIntegralCompletenessTransport
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

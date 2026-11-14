@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupp
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonConstantGenerator
 
 /-! # Cartier reduction and site comparison
+
+## References
+
+* Stacks Project, Tags 0152, 06YY, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -101,12 +105,9 @@ private theorem constant_generator_scalar {R A : Type (u + 1)} [CommRing R] [Com
   rw [comparison_constant_generator, hη, map_intCast]
   exact (comparison_constant_generator A D (x.down : A)).symm
 
-/-- For commutative rings R,A, φ:R→A, a closed immersion i:D→Z and a coefficient map η:R_D→Res(A_D)
-normalized on constant-presheaf generators, the normalized pro-etale supported integral generator
-for R followed by forget(i_*η) equals the generator for A [def-sfb-cartier-reduction-data,
-lemma-cycle-class-cartier-divisor].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+/-- For commutative rings R,A, φ:R→A, a closed immersion i:D→Z and a coefficient map
+η:R_D→Res(A_D) normalized on constant-presheaf generators, the normalized pro-etale supported
+integral generator for R followed by forget(i_*η) equals the generator for A. -/
 theorem pro_supported_generator_scalar {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
     (η : geoCartierConstant R D ⟶

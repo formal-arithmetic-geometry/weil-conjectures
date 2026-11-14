@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationPrescribedClass
 
 /-! # Transport of equal additive Čech augmentation classes
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1. -/
+
+## References
+
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 
@@ -21,10 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- A matched pair of coefficient cycles transports a supplied augmentation
-class equality. This concerns resolution cycles, with no normalized edge equivalence.
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1, the augmented resolution pentagon;
-Tag 03P2 identifies coefficient sections on the small étale sites. -/
+/-- A matched pair of coefficient cycles transports a supplied augmentation class equality. -/
 theorem etaleAdditiveCech_augmentation_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

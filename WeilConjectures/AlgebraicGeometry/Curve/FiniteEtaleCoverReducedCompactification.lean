@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-! # Reduced cartesian compactification
 
-Source: Stacks Project, etale-cohomology.tex, 03SD and 05K0.
+## References
+
+* Stacks Project, Tags 03SD, 05K0
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.IsCurve
 
 /-- A finite etale cover of an open of a reduced curve has a reduced finite
-compactification whose square over the original open is cartesian.
-
-Source: Stacks Project 03SD, compactification paragraph;
-05K0. -/
+compactification whose square over the original open is cartesian. -/
 theorem exists_reduced_cartesian_finite_cover_compactification
     {k : Type u} [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

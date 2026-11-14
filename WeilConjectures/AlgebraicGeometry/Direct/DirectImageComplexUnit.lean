@@ -12,8 +12,8 @@ import all WeilConjectures.AlgebraicGeometry.Local.LocalHypercohomologyClassUnit
 
 /-! # The unit equation for the local Leray comparison
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
+## References
+* Stacks Project, Tags 01E4, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -130,7 +130,6 @@ private theorem leray_complex_unit
 
 /-- The local Leray comparison factors the direct-image derived unit through the
 section derived unit on the direct-image complex.
-Source: Stacks Project, Tags 0BKJ and 0D5X.
 -/
 theorem directImage_complex_unit
     {X Y : RingedSpace.{u}}

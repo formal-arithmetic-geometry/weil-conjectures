@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Descent of homogeneous algebra operations through a closed immersion
 
-Source: Stacks Project, Divisors, Tag 0630, and Modules, Lemma 08KS.
+## References
+
+* Stacks Project, Tags 0630, 08KS
 -/
 
 @[expose] public section
@@ -209,9 +211,7 @@ private theorem reflect_heq {I : Type*} {M N : I → Type*}
   exact heq_of_eq (hf j (eq_of_heq h))
 
 /-- A graded algebra on modules supported on a closed subscheme descends through
-specified pushforward isomorphisms, including the structure-sheaf unit.
-Source: Stacks Project, Divisors, Tag 0630, paragraph preceding
-`definition-conormal-sheaf`, and Modules, Lemma 08KS. -/
+specified pushforward isomorphisms, including the structure-sheaf unit. -/
 theorem exists_gradedAlgebra_closed_descent {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (B : ℕ → X.Modules) (C : ℕ → Z.Modules)
     (e : ∀ n, (Scheme.Modules.pushforward i).obj (C n) ≅ B n)

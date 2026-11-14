@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.UnderlyingAbelianAssertions
 
 /-! # Localization of smooth constant-coefficient curve assertions
 
-Source: Stacks Project, Tags 03SG, 0GJA and 0A5C, proofs.
+## References
+
+* Stacks Project, Tags 03SG, 0GJA, 0A5C
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- The constant-coefficient calculations on all smooth curves imply the corresponding
-extension-by-zero calculations for every open immersion into a smooth curve.
-Source: Stacks Project, Tags 03SG, 0GJA (dense-open localization) and 0A5C (finite sums). -/
+extension-by-zero calculations for every open immersion into a smooth curve. -/
 theorem smoothConstantLowerShriekAssertions_of_constant
     {k : Type u} [Field k] [IsAlgClosed k] (r : ℕ) [Fact r.Prime]
     (H : ∀ {C : Scheme.{u}} (g : C ⟶ Spec (.of k)) [IsCurve g] [Smooth g],

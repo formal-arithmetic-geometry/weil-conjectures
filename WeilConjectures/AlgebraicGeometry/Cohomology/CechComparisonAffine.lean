@@ -12,7 +12,9 @@ import Mathlib.Algebra.FiveLemma
 
 /-! # Affine degeneration of normalized Čech comparisons
 
-Source: Stacks Project, Tags 01ET and 01XD.
+## References
+
+* Stacks Project, Tags 01ET and 01XD
 -/
 
 @[expose] public section
@@ -108,11 +110,7 @@ private theorem comparison_smul
   rw [he]
   exact hn
 
-/-- A normalized comparison is bijective and linear on an affine-intersection cover.
-It is essential that the system is normalized and commutes with connecting maps;
-this assertion would be false for an arbitrary additive comparison.
-
-Source: Stacks Project, Tags 01ET and 01XD. -/
+/-- A normalized comparison is bijective and linear on an affine-intersection cover. -/
 theorem cechComparison_affine_bijective_linear
     {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u}
     (f : X ⟶ Spec (.of R)) (U : ι → X.Opens)

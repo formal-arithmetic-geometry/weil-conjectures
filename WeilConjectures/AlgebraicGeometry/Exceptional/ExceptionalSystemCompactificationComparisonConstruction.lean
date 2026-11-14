@@ -12,7 +12,12 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemOrdinar
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 
-/-! # Construction of proper/open comparison data -/
+/-! # Construction of proper/open comparison data
+
+## References
+
+* Zheng, Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -206,8 +211,7 @@ private theorem inverseSquare_eq
     IsIso.inv_hom_id_assoc, IsIso.hom_inv_id, Category.comp_id] using hh.symm
 
 -- The system and level mate identities require simultaneous localization comparisons.
-/-- Construct the normalized proper and open compactification comparisons.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22. -/
+/-- The normalized proper and open compactification comparisons exist. -/
 theorem exceptionalSystemCompactificationComparison_exists
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

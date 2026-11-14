@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizedScalarSymmetry
 import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 
-/-! # Normalization of one side of the ordered scalar projection square -/
+/-! # Normalization of one side of the ordered scalar projection square
+
+## References
+
+* Stacks Project, Tags 07A4, 0E8I, 0GL6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -149,8 +154,7 @@ private theorem local_transport
   · exact derivedTensorSymmetry_involutive B X _ _
   · exact (etaleHomTensorComparison_existsUnique X φ).choose_spec.1.2.1 M _
 
-/-- Normalize the target-side scalar transport before applying the mixed equation.
-Source: Stacks 0E8I, 0GL6 and 07A4; the target normalization in the local open square. -/
+/-- Normalize the target-side scalar transport before applying the mixed equation. -/
 theorem etaleOrderedScalar_targetNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
 /-! # Constructible sheaves over finite rings have finite prime-field filtrations
 
-Source: Stacks Project, Theorem 03SC, second proof paragraph; Lemma 03RZ.
+## References
+
+* Stacks Project, Theorem 03SC, second proof paragraph; Lemma 03RZ.
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Every constructible sheaf over a finite ring lies in the finite extension
-closure of constructible sheaves with prime-field underlying abelian sheaves.
-Source: Stacks Project, Theorem 03SC, second proof paragraph; Lemma 03RZ. -/
+closure of constructible sheaves with prime-field underlying abelian sheaves. -/
 theorem constructible_hasPrimeFieldFiltration
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :

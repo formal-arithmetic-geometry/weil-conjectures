@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Comma
 
 /-! # Reflection of universal scalar arrows through etale comparison
 
-Source: Stacks Project, Tags 06YS, 0G7E, 0D6D and 09B1.
+## References
+
+* Stacks Project, Tags 06YS, 0G7E, 0D6D, 09B1
 -/
 
 @[expose] public noncomputable section

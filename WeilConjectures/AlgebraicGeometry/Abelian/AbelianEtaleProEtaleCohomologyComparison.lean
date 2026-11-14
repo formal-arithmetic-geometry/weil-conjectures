@@ -23,7 +23,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 /-!
 # Abelian etale–pro-etale cohomology comparison
 
-Source: Stacks Project, proetale.tex, Tag 099W, part (1).
+## References
+
+* Stacks Project, Tags 099W (part (1)), 099R, 00YV and 08J6
 -/
 
 @[expose] public section
@@ -74,9 +76,8 @@ private theorem mapExt_bijective_of_derivedPlus_fullyFaithful
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Specialize the existing constant-sheaf pullback isomorphism and transport it to
-the constructed comparison inverse image using the canonical adjunction isomorphism.
-Source: Stacks Project, Tags 099R and 00YV. -/
+/-- The constant-sheaf isomorphism for the constructed comparison inverse image, obtained from
+the constant-sheaf pullback isomorphism and the canonical adjunction isomorphism. -/
 noncomputable def comparisonConstantSheafIso (T : Scheme.{u}) :
     constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
       comparisonUpperStar AddCommGrpCat.{u + 1} T ≅
@@ -90,8 +91,7 @@ noncomputable def comparisonConstantSheafIso (T : Scheme.{u}) :
       (terminalIsTerminal.isTerminalObj (Scheme.toProEt T))
 
 /-- The canonical cohomology pullback: apply exact comparison inverse image to an
-Ext class and precompose with the canonical constant-sheaf comparison.
-Source: Stacks Project, Tag 099W and Cohomology on Sites, Remark 08J6. -/
+Ext class and precompose with the canonical constant-sheaf comparison. -/
 noncomputable def comparisonCohomologyMap (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (i : ℕ) :
     Sheaf.H F i →+
@@ -100,8 +100,7 @@ noncomputable def comparisonCohomologyMap (T : Scheme.{u})
     ((comparisonConstantSheafIso T).symm.app (AddCommGrpCat.of (ULift ℤ))) F i
 
 /-- For every abelian etale sheaf, canonical pullback is an isomorphism in every
-nonnegative degree, without coefficient restrictions.
-Source: Stacks Project, Tag 099W, part (1). -/
+nonnegative degree, without coefficient restrictions. -/
 theorem comparisonCohomologyMap_bijective (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (i : ℕ) :
     Function.Bijective (comparisonCohomologyMap T F i) := by

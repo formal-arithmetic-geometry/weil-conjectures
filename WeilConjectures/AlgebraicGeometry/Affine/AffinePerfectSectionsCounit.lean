@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.AffineFreeTerminalSectionsReconstru
 
 /-! # A natural reconstruction counit for strictly perfect affine complexes
 
-Source: Stacks Project, Tag 01IB.
+## References
+
+* Stacks Project, Tag 01IB
 -/
 
 @[expose] public section
@@ -54,7 +56,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option maxRecDepth 2048 in
 /-- Terminal-section reconstruction is a natural transformation, invertible on
-strictly perfect complexes. Source: Stacks Project, Tag 01IB. -/
+strictly perfect complexes. -/
 theorem affine_perfect_sections_counit (W : Scheme.{v}) (U : W.Opens)
     (hU : IsAffineOpen U) :
     let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤

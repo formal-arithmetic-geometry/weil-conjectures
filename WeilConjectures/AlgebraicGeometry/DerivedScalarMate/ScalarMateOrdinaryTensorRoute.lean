@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.ScalarMateRestriction
 
 /-! # The scalar mate in ordinary tensor coordinates
 
-Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -112,10 +114,7 @@ private theorem ordinaryScalarIso_unit {Z T : Scheme.{u}} (f : Z ⟶ T)
   rw [hi]
   exact h
 
-/-- The scalar mate computes the ordinary scalar/tensor route on a K-flat complex.
-This assertion involves no derived tensor presentation or geometric tensor comparison.
-
-Source: Stacks 03EK, 06YY, 07A6, the balanced scalar route before tensor descent. -/
+/-- The scalar mate computes the ordinary scalar/tensor route on a K-flat complex. -/
 theorem scalarMate_ordinary_tensor_route
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

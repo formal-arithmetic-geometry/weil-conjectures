@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerLocalComplexCore
 
 /-! # Local algebraic complexes for a coefficient-filtration outer term
-Source: Stacks Project, Tags 0942, 094H and 094I.
+
+## References
+
+* Stacks Project, Tags 0942, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +25,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 set_option linter.unusedVariables false in
-/-- The residue complex computes the coefficient layer after ordinary tensor.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I. -/
+/-- The residue complex computes the coefficient layer after ordinary tensor. -/
 theorem finiteQuotient_layer_local_complexes
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

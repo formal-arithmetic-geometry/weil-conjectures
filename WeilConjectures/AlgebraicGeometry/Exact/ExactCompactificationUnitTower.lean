@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 /-!
 # The exact derived unit on one compatible compactification tower
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7J, 0D6E
 -/
 
 @[expose] public section
@@ -462,9 +464,7 @@ private lemma canonical_derived_tower
     Category.assoc, asIso_hom]
   rfl
 
-/-- The forward unit equation on a single compatible proper/open tower. No invertibility
-of the units, family of compactifications, or chosen-compactification comparison is required.
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
+/-- The forward unit equation on a single compatible proper/open tower. -/
 theorem exactCompactificationUnit_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T B : Scheme.{u}} [IsNoetherian V] [IsNoetherian T] [IsNoetherian B]

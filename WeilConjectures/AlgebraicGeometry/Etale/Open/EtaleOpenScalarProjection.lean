@@ -11,7 +11,12 @@ public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetry
 import WeilConjectures.AlgebraicGeometry.Etale.Ordered.EtaleOrderedOpenProjectionScalar
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackCompactification
 
-/-! # Scalar compatibility of the open part of compact-support projection -/
+/-! # Scalar compatibility of the open part of compact-support projection
+
+## References
+
+* Stacks Project, Tags 07A4, 0GL6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,8 +36,7 @@ attribute [local irreducible] derivedTensorSymmetry
   leftDerivedUpperStarComp leftDerivedUpperStarIsoMapDerivedCategory
   Functor.leftDerivedFunctorIsoMapDerivedCategory
 
-/-- The ordered open projection followed by the compactification pullback comparison.
-Source: Stacks 0GL6, projection formula preceding change of rings. -/
+/-- The ordered open projection followed by the compactification pullback comparison. -/
 @[irreducible] def compactOpenProjection (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
@@ -154,8 +158,7 @@ private theorem compactPullback_tensor_scalar
   rw [hp]
   simp only [Functor.map_comp, NatTrans.comp_app, Functor.comp_obj]
 
-/-- Scalar compatibility of the open tensor map and composite pullback identification.
-Source: Stacks 0GL6 and 07A4; compact-scalar coherence proof step 2, open part. -/
+/-- Scalar compatibility of the open tensor map and composite pullback identification. -/
 theorem compactOpenProjection_scalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

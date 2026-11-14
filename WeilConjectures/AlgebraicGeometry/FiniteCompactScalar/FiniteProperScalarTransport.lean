@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteRealizationScalarMate
 import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteProperSiteAmbientNormalization
 
-/-! # Scalar transport for the proper factor of compact support -/
+/-! # Scalar transport for the proper factor of compact support
+
+## References
+
+* Stacks Project, Tags 0D6E, 0D6J, 099R, 0GL6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -156,10 +161,7 @@ private theorem fixedSiteScalar_mate_with_iso
   exact hf'
 
 /-- Proper direct-image scalar transport in intrinsic coordinates. This compares
-only proper images, before composing with any extension by zero.
-
-Source: Stacks Tags 0D6E, 0D6J, 099R and 0GL6; blueprint scalar-six direct-image
-proof, finite rings paragraph; compact-support constructibility, Step 5. -/
+only proper images, before composing with any extension by zero. -/
 theorem properScalar_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]

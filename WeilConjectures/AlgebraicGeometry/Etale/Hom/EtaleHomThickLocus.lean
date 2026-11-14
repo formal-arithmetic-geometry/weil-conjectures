@@ -15,7 +15,12 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 
 import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomTransposeExact
 
-/-! # The thick locus of the étale scalar Hom comparison -/
+/-! # The thick locus of the étale scalar Hom comparison
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 08J9, 08JC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -179,9 +184,6 @@ contravariant functors are exact with their canonical shifts (hence carry every
 distinguished triangle to the reversed triangle, including the connecting sign), and
 its isomorphism locus is thick: zero, isomorphisms, all integer shifts, cones, and
 retracts.  No flatness assumption on `φ` is made.
-
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2 (localization
-reduction), and Stacks 06YY, 07A4, 08J9, 08JC; expanded proof steps 1--9 of this node.
 -/
 theorem etaleHomComparison_thickLocus (X : Scheme.{u}) (φ : A →+* B) :
     ∃ (v : ∀ M : DerivedCategoryModule A X,

@@ -56,7 +56,13 @@ import WeilConjectures.Mathlib.CategoryTheory.NatIso
 import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
 
-/-! # Ordinary pro-etale open extension -/
+/-! # Ordinary pro-etale open extension
+
+## References
+
+* Stacks Project, Tag 03DI
+* Zheng, Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -72,9 +78,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O)
   (I : ExceptionalProOrdinaryImage O ell j)
 
 /-- Open restriction on strict pro-etale coefficient systems and on each level has
-an extension-by-zero left adjoint.
-
-Source: Stacks 03DI; Zheng Construction 4.1. -/
+an extension-by-zero left adjoint. -/
 theorem exceptionalProOpen_rightAdjoints :
     I.inverse.IsRightAdjoint ∧ ∀ n : ℕ, (I.lift n).modules.IsRightAdjoint := by
   classical

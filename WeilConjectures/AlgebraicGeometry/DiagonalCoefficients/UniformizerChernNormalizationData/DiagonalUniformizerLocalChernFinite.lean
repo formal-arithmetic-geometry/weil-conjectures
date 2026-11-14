@@ -36,13 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 
 namespace UniformizerChernNormalizationData
 
-/-- The completed normalized arrow has a finite comparison factor.
-
-The target of the finite arrow is a degree-zero sheaf shifted by two, hence
-bounded below. The etale/pro-etale comparison is bijective on morphisms into
-this target. Apply its surjectivity to LocalComposite and reverse the resulting
-equality. The normalization hypothesis is needed only for identification of the
-factor, not for existence. -/
+/-- The completed normalized arrow has a finite comparison factor. -/
 theorem localChern_transport_exists
     (s : UniformizerChernNormalizationData l Y)
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

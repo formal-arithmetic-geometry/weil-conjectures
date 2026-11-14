@@ -29,15 +29,24 @@ import WeilConjectures.CategoryTheory.Derived.DerivedTensorRightExact
 
 /-! # Exceptional coefficient comparisons
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-compatibilities.proof.md, (2)--(3); Stacks 0GL6 and 0F7L.
-
 All scalar functors are the published left adjoints to exact scalar restriction.
 The scalar/pullback identification and the proper coefficient map are the recorded
-`scalarPullbackIso` and `scalarMate` of lem-pur-etale-scalar-mate-projection.
+`scalarPullbackIso` and `scalarMate`.
 The comparison for compact support is constructed from its open and proper parts.
 The auxiliary tensor and pullback identifications are fixed by their ordinary
 adjunctions and their computation on cochain representatives.
+
+## Implementation details
+
+* `comparisonInverse` is extended by zero only to make the term total; every use is on the
+  domain where the comparison is an isomorphism.
+* `SiteTensorNormalizationAux` keeps its monoidal arguments inside a generic body, which avoids
+  repeated comparison of the nested sheafification and derived-monoidal proofs in specialized
+  theorem types.
+
+## References
+
+* Stacks Project, Tags 0GL6, 0F7L, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -51,9 +60,8 @@ namespace ExceptionalCoefficients
 
 variable {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
 
-/-- Scalar extension and open extension by zero are left adjoint to canonically
-identified right adjoints; uniqueness gives the identity/zero comparison.
-Source: Stacks 0GL6. -/
+/-- The identity/zero comparison between scalar extension and open extension by zero,
+given by uniqueness of left adjoints of canonically identified right adjoints. -/
 def openIso {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
         scalarExtension φ Z ≅
@@ -70,8 +78,7 @@ def openIso {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
 
 /-- The canonical compact-support coefficient arrow, on a fixed compactification: the
 recorded proper coefficient mate `scalarMate` at the open extension, followed by
-proper direct image of the open comparison.
-Source: Stacks 0GL6. -/
+proper direct image of the open comparison. -/
 def compactSupportMap {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategoryModule A X) :
     (scalarExtension φ Y).obj
@@ -83,9 +90,7 @@ def compactSupportMap {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor.map
       ((openIso φ c.i).hom.app M)
 
-/-- Inverse of the canonical comparison on its isomorphism domain, extended by zero.
-This extension only makes the term total; every theorem use is on the domain where
-b is an isomorphism. Source: Stacks 0GL6. -/
+/-- Inverse of the canonical comparison on its isomorphism domain, extended by zero. -/
 def comparisonInverse {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategoryModule A X) :
     (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).obj
@@ -109,21 +114,19 @@ def mateMap [Finite A] [Finite B] {X Y : Scheme.{u}} (f : X ⟶ Y)
       (scalarExtension φ Y).map
         ((rightDerivedUpperShriekAdjunction A f).counit.app K))
 
-/-- The ordinary extension has its actual scalar-restriction adjunction.
-Source: Stacks 06YY. -/
+/-- The ordinary extension has its actual scalar-restriction adjunction. -/
 instance ordinaryIsLeftAdjoint (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).IsLeftAdjoint :=
   (ProEtale.etaleSheafExtendScalarsAdjunction φ T).isLeftAdjoint
 
-/-- The ordinary tensorator is the sheafified scalar balancing map.
-Source: Stacks 07A4. -/
+/-- The ordinary tensorator is the sheafified scalar balancing map. -/
 instance ordinaryOplax (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).OplaxMonoidal :=
   composeAndSheafifyOplaxMonoidal T.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
 
 /-- Representative normalization for a scalar tensor comparison, with monoidal data
-kept shared in both categories. Source: Stacks 07A4. -/
+kept shared in both categories. -/
 def TensorNormalizationAux
     {C : Type v} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -147,10 +150,7 @@ def TensorNormalizationAux
           (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app P).app Q)
 
 /-- The all-complex normalization with site tensor functors kept as shared constants.
-This is exactly `TensorNormalizationAux` on the small etale sheaf categories.
-Keeping its monoidal arguments inside this generic body avoids repeated comparison
-of the nested sheafification and derived-monoidal proofs in specialized theorem types.
-Source: Stacks 07A4. -/
+This is exactly `TensorNormalizationAux` on the small etale sheaf categories. -/
 def SiteTensorNormalizationAux
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
@@ -169,8 +169,7 @@ def SiteTensorNormalizationAux
       S.prod S ⋙ Functor.uncurry.obj (derivedTensor D T)) : Prop :=
   TensorNormalizationAux F S r δ
 
-/-- Small-etale specialization of the shared all-complex tensor normalization.
-Source: Stacks 07A4. -/
+/-- Small-etale specialization of the shared all-complex tensor normalization. -/
 abbrev TensorNormalization (T : Scheme.{u}) :=
   SiteTensorNormalizationAux (ModuleCat.{u + 1} A) (ModuleCat.{u + 1} B) T
     (ProEtale.etaleSheafExtendScalars φ T)
@@ -424,8 +423,7 @@ private def adjointRepresentative
           congrArg (adj.homEquiv _ _).symm (t.naturality f)
         _ = _ := adj.homEquiv_naturality_right_symm _ _ }
 
-/-- The canonical scalar tensor isomorphism is determined by ordinary balancing.
-Source: Stacks 07A4. -/
+/-- The canonical scalar tensor isomorphism is determined by ordinary balancing. -/
 theorem tensorIso_existsUnique (T : Scheme.{u}) :
     ∃! δ, TensorNormalization φ T δ := by
   let E := ProEtale.etaleSheafExtendScalars φ T
@@ -473,8 +471,7 @@ theorem tensorIso_existsUnique (T : Scheme.{u}) :
 
 /-- The same normalized tensor comparison, expressed using the site's tensor functor.
 The heterogeneous equality asserts equality of the very same natural isomorphism,
-including its endpoints, rather than choosing an unrelated comparison.
-Source: Stacks 07A4. -/
+including its endpoints, rather than choosing an unrelated comparison. -/
 theorem siteTensorIso_existsUnique (T : Scheme.{u}) :
     ∃! e : Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} A) T) ⋙
         scalarExtension φ T ≅
@@ -483,16 +480,14 @@ theorem siteTensorIso_existsUnique (T : Scheme.{u}) :
       HEq e (tensorIso_existsUnique φ T).choose := by
   exact ⟨(tensorIso_existsUnique φ T).choose, HEq.rfl, fun _ h ↦ eq_of_heq h⟩
 
-/-- The site's tensor comparison, uniquely equal to the representative-normalized one.
-Source: Stacks 07A4. -/
+/-- The site's tensor comparison, uniquely equal to the representative-normalized one. -/
 def tensorIso (T : Scheme.{u}) :
     Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} A) T) ⋙ scalarExtension φ T ≅
       (scalarExtension φ T).prod (scalarExtension φ T) ⋙
         Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} B) T) :=
   (siteTensorIso_existsUnique φ T).choose
 
-/-- Unit normalization using shared monoidal data for the ordinary scalar functor.
-Source: Stacks 07A4. -/
+/-- Unit normalization using shared monoidal data for the ordinary scalar functor. -/
 def UnitNormalizationAux
     {C : Type v} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -509,8 +504,7 @@ def UnitNormalizationAux
       _root_.DerivedCategory.Q.map (Functor.OplaxMonoidal.mapHomologicalComplexη (.up ℤ) F) =
     e.hom ≫ Functor.LaxMonoidal.ε _root_.DerivedCategory.Q
 
-/-- Specialization of scalar-unit normalization to the ordinary small-etale site.
-Source: Stacks 07A4. -/
+/-- Specialization of scalar-unit normalization to the ordinary small-etale site. -/
 abbrev UnitNormalization (T : Scheme.{u}) :=
   UnitNormalizationAux (ProEtale.etaleSheafExtendScalars φ T)
     (scalarExtension φ T) (scalarExtensionRepresentative φ T)
@@ -618,8 +612,7 @@ private theorem unitRepresentative_isIso (T : Scheme.{u}) :
     (Adjunction.ofIsRightAdjoint _) _
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat.prop_unit
 
-/-- The scalar unit comparison is uniquely normalized by multiplication B tensor_A A -> B.
-Source: Stacks 07A4. -/
+/-- The scalar unit comparison is uniquely normalized by multiplication B tensor_A A -> B. -/
 theorem unitIso_existsUnique (T : Scheme.{u}) :
     ∃! e, UnitNormalization φ T e := by
   have hrep := unitRepresentative_isIso φ T
@@ -630,8 +623,7 @@ theorem unitIso_existsUnique (T : Scheme.{u}) :
     (ModuleCat.{u + 1} B) T (ProEtale.etaleSheafExtendScalars φ T)
     (scalarExtension φ T) (scalarExtensionRepresentative φ T)
 
-/-- Canonical scalar unit identification, selected by its unique normalization.
-Source: Stacks 07A4. -/
+/-- Canonical scalar unit identification, selected by its unique normalization. -/
 def unitIso (T : Scheme.{u}) :
     (scalarExtension φ T).obj (𝟙_ (DerivedCategoryModule A T)) ≅
       𝟙_ (DerivedCategoryModule B T) :=

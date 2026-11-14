@@ -12,7 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.Complete
 /-! # Finite reductions over the constant completion ring
 
 These constructions involve the constant ring of the algebraic completion, without
-passing to the completed sheaf of rings. Source: Stacks Tags 06YY and 093J--093M.
+passing to the completed sheaf of rings.
+
+## References
+
+* Stacks Project, Tags 06YY and 093J--093M.
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Completion evaluation commutes with consecutive quotient maps.
-Source: Stacks Tag 093M. -/
+/-- Completion evaluation commutes with consecutive quotient maps. -/
 theorem constantAdicCompletion_eval_step
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) (n : ℕ) :
     CommRingCat.ofHom (AdicCompletion.evalₐ I (n + 2)).toRingHom ≫
@@ -40,8 +43,7 @@ theorem constantAdicCompletion_eval_step
     (AdicCompletion.AdicCauchySequence.mk_eq_mk (Nat.le_succ (n + 1)) s)
   simpa [smul_eq_mul, Ideal.mul_top] using hs
 
-/-- Evaluation from the constant algebraic completion to the finite coefficient diagram.
-Source: Stacks Tags 06YY and 093M. -/
+/-- Evaluation from the constant algebraic completion to the finite coefficient diagram. -/
 def constantAdicFiniteCone (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     Cone (pbcAdicRings X d) :=
@@ -57,14 +59,12 @@ def constantAdicFiniteCone (X : Scheme.{u})
               (constantAdicCompletion_eval_step d.ideal n).symm)) ≫
       (pbcConstantSystemComparison X d).hom }
 
-/-- The finite quotient projections after inverse image, with their actual coefficients.
-Source: Stacks Tags 06YY and 093M. -/
+/-- The finite quotient projections after inverse image, with their actual coefficients. -/
 def constantAdicFiniteProjection {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   (adicTowerInverseImage g).map ((constantAdicFiniteCone X d).π.app (op n))
 
-/-- The finite projections commute with every quotient map, including equal indices.
-Source: Stacks Tag 06YY. -/
+/-- The finite projections commute with every quotient map, including equal indices. -/
 theorem constantAdicFiniteProjection_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (m n : ℕ) (h : n ≤ m) :
@@ -75,8 +75,7 @@ theorem constantAdicFiniteProjection_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
   exact congrArg (adicTowerInverseImage g).map
     ((constantAdicFiniteCone X d).w (homOfLE h).op)
 
-/-- Constant module sheafification is exact.
-Source: Stacks Tag 093J. -/
+/-- Constant module sheafification is exact. -/
 theorem constantAdicFinite_constant_exact (X : Scheme.{u})
     (B : Type (u + 1)) [CommRing B] :
     PreservesFiniteLimits (adicLisseConstantModules X B) ∧
@@ -84,8 +83,7 @@ theorem constantAdicFinite_constant_exact (X : Scheme.{u})
   CompletedConstantReduction.constant_exact X B
 
 /-- Constant algebraic complexes, restricted by exact inverse image. The base ring is
-inverse image of the constant algebraic completion, rather than the completed sheaf.
-Source: Stacks Tags 093J and 06YY. -/
+inverse image of the constant algebraic completion, rather than the completed sheaf. -/
 def constantAdicFiniteRealization {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A)) ⥤

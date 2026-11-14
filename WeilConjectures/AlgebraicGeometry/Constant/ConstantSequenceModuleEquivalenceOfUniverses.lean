@@ -9,9 +9,13 @@ public import WeilConjectures.Algebra.Homology.System.SystemRingedSequenceSite
 
 /-! # Constant sequence modules with independent site universes
 
-Source: Stacks Project, Tags 03DA and 0940; Zheng, Construction 4.1.
 The forward and inverse functors are constructed from strict systems, not chosen
-from an existence theorem. The proved same-universe dependency is unchanged.
+from an existence theorem.
+
+## References
+
+* Stacks Project, Tags 03DA and 0940.
+* Zheng, Construction 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -30,13 +34,11 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   (O : Sheaf J CommRingCat.{max c v r})
 
-/-- The independentSystem construction with independent site and module universes.
-Source: Stacks 03DA, 0940; Zheng 4.1. -/
+/-- The independentSystem construction with independent site and module universes. -/
 abbrev independentSystem :=
   SheafOfModules.StrictRingSystem.{c, v, max c v r} (J := J) ((Functor.const ℕᵒᵖ).obj O)
 
-/-- The independentToTower construction with independent site and module universes.
-Source: Stacks 03DA, 0940; Zheng 4.1. -/
+/-- The independentToTower construction with independent site and module universes. -/
 def independentToTower : independentSystem.{c, v, r} O ⥤ (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r}
         ((sheafCompose J
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) where
@@ -57,8 +59,7 @@ def independentToTower : independentSystem.{c, v, r} O ⥤ (ℕᵒᵖ ⥤ ringed
   map_id M := rfl
   map_comp f g := rfl
 
-/-- The independentFromTower construction with independent site and module universes.
-Source: Stacks 03DA, 0940; Zheng 4.1. -/
+/-- The independentFromTower construction with independent site and module universes. -/
 def independentFromTower : (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} ((sheafCompose J
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) ⥤ independentSystem.{c, v,
         r} O where
@@ -81,8 +82,8 @@ def independentFromTower : (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} ((sheafC
   map_comp f g := rfl
 
 -- Identity coefficient restrictions require reducing the varying-ring system interface.
-/-- The independentSystemTowerEquivalence construction with independent site and module universes.
-Source: Stacks 03DA, 0940; Zheng 4.1. -/
+/-- The independentSystemTowerEquivalence construction with independent site and module
+universes. -/
 def independentSystemTowerEquivalence : independentSystem.{c, v, r} O ≌
     (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} ((sheafCompose J
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)) where
@@ -116,8 +117,7 @@ def independentSystemTowerEquivalence : independentSystem.{c, v, r} O ≌
       simp only [Category.comp_id, Category.id_comp])) (by intro M N f; ext n; exact rfl)
   functor_unitIso_comp M := by ext n; simp [independentToTower]
 
-/-- The real constant-ring sequence equivalence, including its specified inverse.
-Source: Stacks 03DA, 0940; Zheng 4.1. -/
+/-- The real constant-ring sequence equivalence, including its specified inverse. -/
 def independentConstantSequenceEquivalence :
     systemSequenceModules.{c, v, max c v r} ((Functor.const ℕᵒᵖ).obj O) ≌
       (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} ((sheafCompose J
@@ -125,8 +125,7 @@ def independentConstantSequenceEquivalence :
   (strictSystemSequenceEquivalence.{c, v, max c v r}
     ((Functor.const ℕᵒᵖ).obj O)).symm.trans (independentSystemTowerEquivalence.{c, v, r} O)
 
-/-- Both explicit functors preserve sums.
-Source: Stacks 03DA, 0940. -/
+/-- Both explicit functors preserve sums. -/
 theorem independentConstantSequenceEquivalence_additive :
     (independentConstantSequenceEquivalence.{c, v, r} O).functor.Additive ∧
       (independentConstantSequenceEquivalence.{c, v, r} O).inverse.Additive := by

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationRefine
 /-!
 # Compatibility of exact compactification units with refinements
 
-Source: Stacks Project, Tags 0F7B, 0F7I and 0D6E.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0D6E
 -/
 
 @[expose] public section
@@ -74,8 +76,7 @@ private lemma exactCompactificationUnit_transport
   exact compactificationRefinement_homotopyUnit A r hcart F a.hom
 
 /-- Two compactification units with the same underlying sheaf inclusion agree under the
-canonical common-refinement comparison.
-Source: Stacks Project, Tags 0F7B, 0F7I and 0D6E. -/
+canonical common-refinement comparison. -/
 theorem exactCompactificationUnit_refinement
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

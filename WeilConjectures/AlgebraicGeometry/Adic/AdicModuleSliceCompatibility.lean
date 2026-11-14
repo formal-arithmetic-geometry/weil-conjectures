@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceCoefficientComparison
 import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceTensorCompatibility
 import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceClosedCompatibility
 
-/-! # Restriction compatibility of the normalized adic module comparison -/
+/-! # Restriction compatibility of the normalized adic module comparison
+
+## References
+
+* Stacks Project, Tags 03CE, 03EL, 03EO and 0E8H
+-/
 
 @[expose] public section
 
@@ -28,8 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The complete native/slice comparison, including its normalization under the actual native
 pullback and compatibility on every further slice. All fields are conclusions, not hypotheses
-on a scheme or on its modules.
-Source: Stacks 03EO, 0E8H, 03EL, and native adic pullback and evaluation. -/
+on a scheme or on its modules. -/
 structure AdicModuleSliceCompatibility (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) where
   /-- Coefficients on the localized site are the restriction of the base coefficients. -/
@@ -173,8 +177,7 @@ private theorem tensorSlice_square (l : ℕ) [Fact l.Prime]
       rw [Iso.hom_inv_id_assoc]
       rfl
 
-/-- A normalized comparison commutes with the actual site-object inverse image.
-Source: Stacks Project, Tags 03CE, 03EL and 0E8H. -/
+/-- A normalized comparison commutes with the actual site-object inverse image. -/
 theorem adicModuleSliceCompatibility (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) :
     Nonempty (AdicModuleSliceCompatibility l base) := by

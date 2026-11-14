@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
 
 /-! # Composition of exact inverse-image cohomology maps
 
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial.
+## References
+
+* Stacks Project, Tag 01F7
 -/
 
 @[expose] public section
@@ -61,10 +63,7 @@ private lemma constant_adjunct_invImage {X Y : Scheme.{u}} (f : Y ⟶ X)
       F).hom.app (Opposite.op ⊤) ≫ 𝟙 _ = _
   rw [Category.comp_id]
 
-/-- Inverse-image maps on cohomology compose under the canonical comparison.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
-Mathlib's exact-functor action on Ext and uniqueness of left-adjoint comparisons.
--/
+/-- Inverse-image maps on cohomology compose under the canonical comparison. -/
 theorem inverseImageCohomology_comp {X Y Z : Scheme.{u}}
     (g : Z ⟶ Y) (f : Y ⟶ X)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

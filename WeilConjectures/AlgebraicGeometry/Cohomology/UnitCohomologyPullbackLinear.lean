@@ -18,11 +18,7 @@ noncomputable section
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- The cohomology map of a module morphism over the displayed common affine base.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial.
-
-The map is the adjoint coefficient map after exact inverse image on Ext. The
-projection identity identifies the structural scalars; coefficient naturality
-therefore proves linearity. No equivalence or witness is chosen. -/
+See Stacks Project, Tag 01F7. -/
 def unitCohomologyPullbackLinear
     {R : Type u} [CommRing R] {X Y : Scheme.{u}}
     (f : Y ⟶ Spec (.of R)) (f' : X ⟶ Spec (.of R)) (d : X ⟶ Y)
@@ -51,8 +47,7 @@ def unitCohomologyPullbackLinear
         exact smulHom_naturality φ _) n
 
 /-- Transport through a scheme isomorphism and a specified unit-module isomorphism
-is bijective on ordinary cohomology.
-Source: Stacks Project, Tag 01F7; `Sheaf.H.mapFunctor_bijective`. -/
+is bijective on ordinary cohomology. See Stacks Project, Tag 01F7. -/
 theorem unitCohomologyPullbackLinear_bijective
     {R : Type u} [CommRing R] {X Y : Scheme.{u}}
     (f : Y ⟶ Spec (.of R)) (f' : X ⟶ Spec (.of R)) (d : X ⟶ Y) [IsIso d]

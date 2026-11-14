@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSu
 
 /-! # Finite coefficient derived origin in the site universe
 
-Source: Stacks Project and the local-effectivity argument in amplification (c).
+## References
+
+* Stacks Project, Tag 09AL
 -/
 
 @[expose] public noncomputable section
@@ -177,10 +179,7 @@ private theorem finite_etale_origin_realization
 
 /-- A single finite-ring complex with bounded intrinsically constructible cohomology
 has a bounded constructible etale presentation in the recorded coefficient universe.
-The comparison `e` may be any constant-ring presentation isomorphism.
-
-Source: Stacks Project, proetale.tex, Tag 09AL, lemma-compare-constructible-derived;
-coefficient transport in step 1 of the local-effectivity argument. -/
+The comparison `e` may be any constant-ring presentation isomorphism. -/
 theorem finiteCoefficient_constructibleDerived_origin_presentation
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (u + 1)) [CommRing B] [Finite B]

@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldShriekSystem.FieldShriekSys
 
 /-! # Normalized evaluation of coefficient-system comparisons
 
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -68,7 +67,7 @@ attribute [local irreducible] restrictionEvaluation
 
 /-- Evaluation compatibility of two actual adjunctions is equality of the right mate
 with the given restriction square. This is the adjunction-transpose equation, before
-any claim of conservativity. Source: blueprint (2), scalar evaluation normalization. -/
+any claim of conservativity. -/
 @[irreducible] def AdjunctionEvaluationNormalized
     {A : Type a} {B : Type b} {A' : Type a'} {B' : Type b'}
     [Category.{vA} A] [Category.{vB} B] [Category.{vA'} A'] [Category.{vB'} B']

@@ -60,11 +60,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # The presheaf description of bounded-below higher direct images
 
-Source: Stacks Project, Tag 0D6I, lemma-unbounded-describe-higher-direct-images,
-and the first paragraph of the blueprint corollary-continuity-cohomology--2.
-
 All coefficient sheaves, complexes, presheaves and conclusions use the original
 small pro-etale sites. The AsSmall model is used only to construct resolutions.
+
+## References
+
+* Stacks Project, Tags 0D6I, 03D1, 079P
 -/
 
 @[expose] public section
@@ -77,14 +78,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-- Sectionwise additivity of transport back to the original site.
-Source: Stacks Tag 03D1. -/
+/-- Sectionwise additivity of transport back to the original site. -/
 instance ringModuleFromModel_additive {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1}) :
     (proEtaleModuleFromModel R).Additive := ⟨by intros; rfl⟩
 
-/-- The sectionwise identity identifies round-trip transport with the original modules.
-Source: Stacks Tag 03D1. -/
+/-- The sectionwise identity identifies round-trip transport with the original modules. -/
 noncomputable def ringModuleModelRoundTrip {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1}) :
     𝟭 (ringedSiteModules.{u + 1} R) ≅
@@ -92,8 +91,7 @@ noncomputable def ringModuleModelRoundTrip {X : Scheme.{u}}
   NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget R).preimageIso
     (PresheafOfModules.isoMk (fun U ↦ Iso.refl _)))
 
-/-- The model replacement used by the landed ringHypercohomology, before transport back.
-Source: Stacks Tag 079P. -/
+/-- The model replacement used by ring hypercohomology, before transport back. -/
 noncomputable def ringModuleModelResolutionFunctor {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1}) :=
   let S := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
@@ -102,8 +100,7 @@ noncomputable def ringModuleModelResolutionFunctor {X : Scheme.{u}}
   (proEtaleModuleToModel R).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
     CochainComplex.kInjectiveResolutionFunctor.{u + 1} (ringedSiteModules.{u + 1} S)
 
-/-- One functorial resolution on the original site, transported from the small model.
-Source: Stacks Tags 079P and 03D1. -/
+/-- One functorial resolution on the original site, transported from the small model. -/
 noncomputable def ringModuleResolutionFunctor {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1}) :
     CochainComplex (ringedSiteModules.{u + 1} R) ℤ ⥤
@@ -111,8 +108,7 @@ noncomputable def ringModuleResolutionFunctor {X : Scheme.{u}}
   ringModuleModelResolutionFunctor R ⋙
     (proEtaleModuleFromModel R).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The actual augmentation of the transported functorial resolution.
-Source: Stacks Tags 079P and 03D1. -/
+/-- The actual augmentation of the transported functorial resolution. -/
 noncomputable def ringModuleResolutionMap {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1})
     (K : CochainComplex (ringedSiteModules.{u + 1} R) ℤ) :
@@ -131,8 +127,7 @@ noncomputable def ringModuleResolutionMap {X : Scheme.{u}}
     NatIso.mapHomologicalComplex (ringModuleModelRoundTrip R) (ComplexShape.up ℤ)).hom.app K ≫
     B.map s
 
-/-- The specified transported complex and augmentation form a K-injective resolution.
-Source: Stacks Tags 079P, 03D1 and 0D6I. -/
+/-- The specified transported complex and augmentation form a K-injective resolution. -/
 theorem ringModuleResolution_isKInjective_quasiIso {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1})
     (K : CochainComplex (ringedSiteModules.{u + 1} R) ℤ) :
@@ -171,8 +166,7 @@ theorem ringModuleResolution_isKInjective_quasiIso {X : Scheme.{u}}
     change QuasiIso (_ ≫ B.map s)
     exact quasiIso_comp _ (B.map s)
 
-/-- Evaluation on the model, forgetting only the sectionwise module action.
-Source: Stacks Tag 03D1. -/
+/-- Evaluation on the model, forgetting only the sectionwise module action. -/
 noncomputable def ringModuleModelEvaluation {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) :=
   let S := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
@@ -180,8 +174,7 @@ noncomputable def ringModuleModelEvaluation {X : Scheme.{u}}
   SheafOfModules.evaluation S (op (AsSmall.up.obj U)) ⋙
     forget₂ (ModuleCat.{u + 1} (S.obj.obj (op (AsSmall.up.obj U)))) AddCommGrpCat.{u + 1}
 
-/-- Sectionwise evaluation is additive.
-Source: Stacks Tag 03D1. -/
+/-- Sectionwise evaluation is additive. -/
 instance ringModuleModelEvaluation_additive {X : Scheme.{u}}
     (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) :
     (ringModuleModelEvaluation R U).Additive := ⟨by intros; rfl⟩

@@ -16,9 +16,13 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportOriginRestriction
 
 /-! # Finite coefficient comparison and compact-support composition
 
-Source: Stacks Project, more-etale.tex, Tags 0F7J and 0GL6.
 The two statements use the actual small-etale and pro-etale compact-support functors,
 the specified canonical compositors, and universal B-linear coefficient comparisons.
+
+## References
+
+* Stacks Project, Tags 0F7J, 0GL6
+* Serre, *Local Fields*, Chapter II, Section 2
 -/
 
 @[expose] public noncomputable section
@@ -33,16 +37,13 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] originCompositionAmbient
 
-/-- Positive-level coefficient rings in the standard coefficient universe are finite.
-This only registers the recorded coefficient finiteness theorem at positive levels.
-Source: Serre, Local Fields, Chapter II, section 2; Stacks Tag 0GL6. -/
+/-- Positive-level coefficient rings in the standard coefficient universe are finite. -/
 instance finiteCompositionCoefficient (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ+) : Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) :=
   Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n n.property)
 
-/-- The specified quotient coefficient homomorphism, with only the standard universe lift.
-Source: Stacks Tag 0GL6. -/
+/-- The specified quotient coefficient homomorphism, with only the standard universe lift. -/
 def finiteCompositionReduction (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (m n : ℕ+) (hmn : n ≤ m) :

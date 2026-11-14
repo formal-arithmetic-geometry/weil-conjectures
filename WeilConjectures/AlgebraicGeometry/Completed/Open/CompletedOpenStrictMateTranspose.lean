@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRingStrictFin
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedReductionPullbackSquare
 
 /-! The strict normalized exchange is the transpose of the pulled open unit.
-Source: Stacks Project, Tag 03DI; blueprint finite-exchange paragraph.
+
+## References
+
+* Stacks Project, Tag 03DI
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

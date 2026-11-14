@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCo
 
 /-! # Inverse-image naturality before affine degeneration
 
-Source: Stacks Project, Tag 01FD, with the normalized comparison of Tag 01EQ.
+## References
+
+* Stacks Project, Tags 01EQ and 01FD
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- Normalized additive Čech comparisons can be chosen compatibly with inverse image.
-There is no acyclicity hypothesis and no assertion that either comparison is invertible.
-
-Source: Stacks Project, Tags 01EQ and 01FD. -/
+/-- Normalized additive Čech comparisons can be chosen compatibly with inverse image. -/
 theorem exists_cechComparison_inverseImage
     {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u}
     (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S))

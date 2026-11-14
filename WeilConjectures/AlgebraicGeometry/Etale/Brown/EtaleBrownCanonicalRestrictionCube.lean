@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.Adjunction.MateCube
 
 /-! # The canonical restriction model in geometric scalar coordinates
 
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.15, Lemma 5.16
+* Stacks Project, Tags 03CY, 05RU, 07A4, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -1122,8 +1124,7 @@ private theorem brown_exact_restriction_cube
     (comm := ordinary)
 
 -- The localization cube simultaneously compares twelve factorization isomorphisms.
-/-- The exact ordinary restriction cube commutes after Brown realization.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 05RU and 07A4. -/
+/-- The exact ordinary restriction cube commutes after Brown realization. -/
 theorem strictEtaleBrownCanonicalRestrictionCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

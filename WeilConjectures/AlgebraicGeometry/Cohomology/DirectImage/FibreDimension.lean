@@ -51,13 +51,7 @@ variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
 /-- **Vanishing of the higher direct images above the fibre cohomology.** With `f : X ⟶ T`
 proper of finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over
 `T`, if the cohomology `H^q(X_t, ℱ_t)` of every fibre vanishes in degrees `q > d`, then
-`R^q f_* ℱ = 0` for all `q > d`.
-
-Near a point of `T`, `R f_* ℱ` is computed by a bounded complex `P` of finite free modules whose
-fibres compute the fibre cohomology
-(`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`); the fibres of
-`P` are exact in degrees `q > d`, hence so is `P`
-(`IsFiniteFreeComplex.isZero_homology_of_isZero_homology_pullback`). -/
+`R^q f_* ℱ = 0` for all `q > d`. -/
 theorem isZero_higherDirectImage_of_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) {d : ℕ}
     (h : ∀ t q, d < q → ℱ.hFiber f q t = 0) {q : ℕ} (hq : d < q) :
     IsZero ((higherDirectImage f q).obj ℱ) := by
@@ -105,12 +99,7 @@ theorem isZero_higherDirectImage_of_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) {d 
 /-- **Vanishing of the higher direct images above the fibre dimension.** With `f : X ⟶ T`
 proper of finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over
 `T`, if the fibres `X_t` of `f` over the points `t` of an open `U` of `T` have dimension at most
-`d`, then `R^q f_* ℱ|_U = 0` for all `q > d`.
-
-By Grothendieck vanishing on the Noetherian schemes `X_t`, the fibre cohomology `H^q(X_t, ℱ_t)`
-vanishes for `q > d`, and the statement is
-`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_hFiber_eq_zero` for the restriction
-of `f` over `U`. -/
+`d`, then `R^q f_* ℱ|_U = 0` for all `q > d`. -/
 theorem isZero_higherDirectImage_restrict_of_topologicalKrullDim_le (hℱ : ℱ.IsFlatOver f)
     (U : T.Opens) {d : ℕ} (hd : ∀ t ∈ U, topologicalKrullDim (f.fiber t) ≤ d) {q : ℕ}
     (hq : d < q) : IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
@@ -140,12 +129,7 @@ theorem isZero_higherDirectImage_restrict_of_topologicalKrullDim_le (hℱ : ℱ.
 /-- **Local vanishing of the higher direct images above the fibre dimension.** With `f : X ⟶ T`
 proper of finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over
 `T`, every point of `T` has an open neighbourhood `U` over which the dimensions of the fibres of
-`f` are bounded by some `d_U`, and then `R^q f_* ℱ|_U = 0` for all `q > d_U`.
-
-For `U` one can take any affine neighbourhood: finitely many affine opens of finite type over `U`
-cover `f⁻¹ U`, which bounds the fibre dimension
-(`AlgebraicGeometry.exists_topologicalKrullDim_le_of_isPullback_of_compactSpace`), and the
-vanishing is `isZero_higherDirectImage_restrict_of_topologicalKrullDim_le`. -/
+`f` are bounded by some `d_U`, and then `R^q f_* ℱ|_U = 0` for all `q > d_U`. -/
 theorem exists_isZero_higherDirectImage_restrict_of_topologicalKrullDim_le
     (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧ (∀ s ∈ U, topologicalKrullDim (f.fiber s) ≤ d) ∧

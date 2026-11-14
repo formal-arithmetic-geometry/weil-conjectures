@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! Pullback pasting over identified bases.
+
+## References
+
+* Stacks Project, Tag 01JP
 -/
 
 @[expose] public section
@@ -16,8 +20,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Identify an iterated pullback with a fibre product over an isomorphic base.
-Source: Stacks Project, Tag 01JP, fibre products and base change. -/
+/-- Identify an iterated pullback with a fibre product over an isomorphic base. -/
 theorem identifiedBaseFibreIso
     {X S W T T' : Scheme.{v}} (f : X ⟶ S) (k : W ⟶ S)
     (g : T ⟶ W) (t : T' ⟶ S) (r : T ≅ T') (h : g ≫ k = r.hom ≫ t) :

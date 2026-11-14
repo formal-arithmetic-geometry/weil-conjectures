@@ -34,11 +34,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 /-!
 # Finite coefficient change for ordinary direct image
 
-
 Scalar extension is the published left adjoint to exact derived restriction.
 The coefficient map is uniquely fixed by its scalar-unit/counit equation in D(B).
 The equation is the scalar-adjunction form of extending the A-coefficient counit.
 It does not use faithfulness of derived scalar restriction.
+
+## References
+
+* Stacks Project, Tags 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -273,8 +276,7 @@ private theorem coefficient_naturality
     exact (adjT.unit.naturality (adjA.counit.app M)).symm
   simpa only [Functor.comp_map, heq] using γ.naturality h
 
-/-- Explicit size witness for the small etale site; no universe equality is imposed.
-Source: Mathlib essentiallySmall_of_small_of_locallySmall; blueprint order 2130. -/
+/-- Explicit size witness for the small etale site; no universe equality is imposed. -/
 instance AlgebraicGeometry.Etale.finiteCoefficientSiteSize (X : AlgebraicGeometry.Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -283,8 +285,7 @@ instance AlgebraicGeometry.Etale.finiteCoefficientSiteSize (X : AlgebraicGeometr
 
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical exact restriction/pullback comparison, in the unbounded categories.
-Source: blueprint order 2130; Stacks Tags 07A4 and 07A6. -/
+/-- Canonical exact restriction/pullback comparison, in the unbounded categories. -/
 def finiteCoefficientRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X) :
@@ -301,8 +302,7 @@ def finiteCoefficientRestrictionPullback
 /-- The equation fixing the coefficient projection map. Precomposing its B-counit
 transpose with the pulled-back scalar unit gives the A-counit followed by the input
 scalar unit. This is precisely extension of the counit after pullback/scalar
-extension, expressed without choosing flat resolutions or an arbitrary comparison.
-Source: blueprint order 2130, statement and proof Step 3; Stacks Tag 07A6. -/
+extension, expressed without choosing flat resolutions or an arbitrary comparison. -/
 def IsFiniteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -348,7 +348,7 @@ theorem finiteCoefficientDirectImageMap_existsUnique
     (finiteCoefficientRestrictionPullback φ f) (ProEtale.scalarPullbackReverse_isIso φ f).2 K
 
 /-- The actual B-linear coefficient projection map, chosen from a theorem that
-uniquely determines it by the extended counit. Only that proof is postponed. -/
+uniquely determines it by the extended counit. -/
 def finiteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -366,8 +366,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The equation fixing the coefficient projection map. Precomposing its B-counit
 transpose with the pulled-back scalar unit gives the A-counit followed by the input
 scalar unit. This is precisely extension of the counit after pullback/scalar
-extension, expressed without choosing flat resolutions or an arbitrary comparison.
-Source: blueprint order 2130, statement and proof Step 3; Stacks Tag 07A6. -/
+extension, expressed without choosing flat resolutions or an arbitrary comparison. -/
 def IsFiniteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -431,7 +430,7 @@ theorem finiteCoefficientDirectImageMap_existsUnique
     (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ) adt e hk K
 
 /-- The actual B-linear coefficient projection map, chosen from a theorem that
-uniquely determines it by the extended counit. Only that proof is postponed. -/
+uniquely determines it by the extended counit. -/
 def finiteCoefficientChangeDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -1861,19 +1860,7 @@ attribute [instance] AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint
 namespace AlgebraicGeometry.Etale
 
 /-- Ordinary uncompleted finite coefficient change commutes with a separated
-finite-type direct image on a bounded constructible complex of finite Tor amplitude.
-No flatness of the finite algebra B over A is assumed.
-
-
-The normalized scalar/pullback comparison equals the inverse mate of the exact
-restriction/pullback square, by their cochain scalar-unit equations. Tor amplitude
-gives a lower bound for the scalar extension of K. The projection isomorphism and
-faithful exact restriction give a lower bound for the scalar extension of Rf_*K.
-Consequently all comparisons in the published projection/mate identity apply on
-bounded-below representatives. The ambient restriction/direct-image mate is the
-canonical bounded-below comparison, by the derived adjunction identities. Cancelling
-it in the projection/mate identity makes restriction of the specified coefficient
-map invertible. Faithful exact restriction reflects isomorphisms. -/
+finite-type direct image on a bounded constructible complex of finite Tor amplitude. -/
 theorem finiteCoefficientDirectImageMap_isIso
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

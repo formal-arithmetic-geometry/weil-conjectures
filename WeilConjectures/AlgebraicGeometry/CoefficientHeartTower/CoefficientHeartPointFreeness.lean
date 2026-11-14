@@ -11,6 +11,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 
 /-! # Finite freeness at the chosen geometric point
+
+## References
+
+* Bhatt–Scholze, Example 4.1.10
 -/
 
 @[expose] public section
@@ -20,9 +24,7 @@ open CategoryTheory
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CoefficientHeartTower
 
-/-- A lisse native coefficient module becomes finite free at a geometric point.
-Source: coefficient-heart proof (1), compatible free charts above the chosen point;
-Bhatt--Scholze, Example 4.1.10. -/
+/-- A lisse native coefficient module becomes finite free at a geometric point. -/
 theorem point_freeness
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}

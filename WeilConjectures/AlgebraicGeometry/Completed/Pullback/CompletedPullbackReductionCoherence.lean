@@ -128,7 +128,9 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoeffic
 
 /-! # Coherence of the projection-induced finite reduction arrows
 
-Source: Stacks Tag 099N (5), and the completed-pullback blueprint proof.
+## References
+
+* Stacks Project, Tag 099N (5)
 -/
 
 @[expose] public noncomputable section
@@ -404,9 +406,7 @@ private theorem projection_transition (T : Scheme.{u})
   apply congrArg DerivedCategory.Q.map
   ext i : 1
   exact limit.w (J.X i) (homOfLE h).op
-/-- Invertible finite reduction arrows satisfy all quotient coherence equations.
-
-Source: Stacks Tag 099N (5); completed-pullback reduction, normalization clause. -/
+/-- Invertible finite reduction arrows satisfy all quotient coherence equations. -/
 theorem completedPullbackReduction_coherence
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))
     (hiso : ∀ n : ℕ, IsIso (completedPullbackReductionArrow g d K n)) :

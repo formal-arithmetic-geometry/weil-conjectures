@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 
 /-! # Ordinary scalar mate and tensor pullback on module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK, 03EL
 -/
 
 @[expose] public noncomputable section
@@ -269,8 +271,7 @@ private theorem ordinaryScalar_pure {Z T : Scheme.{u}} (f : Z ⟶ T)
     ((proEtaleRingDirectImageMap f B (inverseRing f B) (Iso.refl _)).hom.app W s) 1
     ((adjA.unit.app M).val.app W x)
 
-/-- The ordinary inverse scalar mate agrees with tensor pullback and the fixed coefficient map.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL. -/
+/-- The ordinary inverse scalar mate agrees with tensor pullback and the fixed coefficient map. -/
 theorem scalarMate_ordinary_module_route {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (χ : proEtaleRingExtension a ⋙

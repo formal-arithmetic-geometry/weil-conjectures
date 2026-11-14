@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Adic.AdicOrdinaryTensorDiagram
 
 /-! # The consecutive square for ordinary algebraic quotient tensors
 
-Source: Stacks Project, More on Algebra, Tag 09AW; More on Algebra, Tag 06Y6.
+## References
+
+* Stacks Project, More on Algebra, Tags 09AW, 0BYK and 06Y6
 -/
 
 @[expose] public noncomputable section
@@ -136,10 +138,7 @@ attribute [local irreducible] adicOrdinaryQuotientComplexIso adicOrdinaryTensorC
 attribute [local irreducible] adicOrdinaryTensorLevelMap
 
 /-- The explicitly constructed level maps commute with the consecutive
-canonical quotient transition and the ordinary quotient homomorphism.
-
-Source: Stacks Project, Tags 09AW and 0BYK, quotient scalar transitions; Tag 06Y6, the unit
-normalization of the scalar-extension representative comparison. -/
+canonical quotient transition and the ordinary quotient homomorphism. -/
 theorem adicOrdinaryTensorLevelMap_transition
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -267,8 +266,7 @@ theorem adicOrdinaryTensorLevelMap_transition
   simp only [Category.assoc]
   rw [← reassoc_of% hn, ← Functor.map_comp_assoc, ← hr, Functor.map_comp_assoc, hw]
 
-/-- Consecutive compatibility and K-flat invertibility assemble the entire quotient diagram.
-Source: Stacks Project, Tags 09AW and 06Y6. -/
+/-- Consecutive compatibility and K-flat invertibility assemble the entire quotient diagram. -/
 theorem adicOrdinaryTensorComplexDiagram_comparison
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

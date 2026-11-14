@@ -29,6 +29,11 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.Diagon
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedScalarSource
 
 /-! # Scalar endpoints and supported sources for a uniformizer quotient
+
+## Implementation details
+
+- `scalarRightDerived` is parameterized by its coefficient ring to keep endpoint
+  structures small.
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +47,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The fixed canonical model, parameterized by its coefficient ring to keep
-endpoint structures small. Source: coefficient changes paragraph (1). -/
+/-- The fixed canonical right-derived model, parameterized by its coefficient ring. -/
 abbrev scalarRightDerived
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S) :=
@@ -264,23 +268,7 @@ private theorem scalarFrame_of_squares
     source₂ := hs₂ }⟩
 
 /-- Construct the scalar frame before transporting any class or trace. In particular,
-this assertion does not identify a finite Cartier class or choose a quotient diagram.
-
-
-
-For the three projections use the full-unit-normalized uniformizer scalar square.
-Its scalar mate is invertible on every complex by the two-term finite free quotient
-resolution and the perfect projection argument; in particular it is invertible on
-the required shifted lines. This uses no projective-line cohomology computation.
-
-Apply closed-support scalar compatibility separately to both projections, using
-their integral normalized sources and the common regular endpoint. This supplies
-the quotient normalized sources and the two source equations. Two endpoints for
-the same underlying supported coefficient map have equal semilinear maps, and
-their adjoint normalization therefore makes their derived homs equal. Replace the
-second endpoint hom by the first in the second source equation and assemble the
-frame. The argument applies at n = 0 and for ramified uniformizers without requiring
-flatness of the quotient coefficient map. -/
+this assertion does not identify a finite Cartier class or choose a quotient diagram. -/
 theorem diagonalUniformizer_scalarFrame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

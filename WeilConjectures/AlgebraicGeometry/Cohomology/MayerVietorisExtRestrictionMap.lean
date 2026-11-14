@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
 /-! # Ext restriction along an exact functor
 
-Source: Stacks Project, Section 01F7; functoriality of Ext.
+## References
+
+* Stacks Project, Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -19,8 +21,7 @@ namespace CategoryTheory.Abelian.Ext
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
   {D : Type u'} [Category.{v'} D] [Abelian D] [HasExt.{w'} D]
 
-/-- Apply an exact functor and identify its source and coefficient objects.
-Source: Stacks Project, Section 01F7; functoriality of Ext. -/
+/-- Apply an exact functor and identify its source and coefficient objects. -/
 noncomputable def restrictAddHom (J : C ⥤ D) [J.Additive]
     [PreservesFiniteLimits J] [PreservesFiniteColimits J]
     {A F : C} {B E : D} (e : J.obj A ≅ B) (d : J.obj F ≅ E) (n : ℕ) :
@@ -28,8 +29,7 @@ noncomputable def restrictAddHom (J : C ⥤ D) [J.Additive]
   ((Ext.mk₀ d.hom).postcomp B (add_zero n)).comp
     (((Ext.mk₀ e.inv).precomp (J.obj F) (zero_add n)).comp (J.mapExtAddHom A F n))
 
-/-- Restriction respects postcomposition when the coefficient square commutes.
-Source: Stacks Project, Section 01F7; associativity and functoriality of Ext. -/
+/-- Restriction respects postcomposition when the coefficient square commutes. -/
 theorem restrictAddHom_comp (J : C ⥤ D) [J.Additive]
     [PreservesFiniteLimits J] [PreservesFiniteColimits J]
     {A F : C} {B E : D} (e : J.obj A ≅ B) (d : J.obj F ≅ E)
@@ -50,8 +50,7 @@ universe w₃ w₄ v₃ v₄ u₃ u₄
 variable {C₃ : Type u₃} [Category.{v₃} C₃] [Abelian C₃] [HasExt.{w₃} C₃]
   {C₄ : Type u₄} [Category.{v₄} C₄] [Abelian C₄] [HasExt.{w₄} C₄]
 
-/-- The constructed restriction maps commute across a coherent exact-functor square.
-Source: Stacks Project, Section 01F7; naturality of derived functor maps. -/
+/-- The constructed restriction maps commute across a coherent exact-functor square. -/
 theorem restrictAddHom_square
     (G : C ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (J : C ⥤ C₃) [J.Additive] [PreservesFiniteLimits J] [PreservesFiniteColimits J]

@@ -49,7 +49,7 @@ def cyclicCompletedUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The underlying cyclic evaluation is the derived scalar quotient followed by
-forgetting its finite action. Source: exact-functor composition and finite realization. -/
+forgetting its finite action. -/
 def cyclicEvaluationUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) (p : CyclicCartierFrame l Y n) :

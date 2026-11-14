@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCocha
 
 /-! # Successor step for inverse-image Čech comparison
 
-Source: Stacks Project, Tags 01FD and 01EQ, applied to abelian sheaves.
+## References
+
+* Stacks Project, Tags 01FD and 01EQ
 -/
 
 @[expose] public section
@@ -76,10 +78,7 @@ private theorem exactFunctor_Hδ
     (hT.map_of_exact G).extClass (zero_add q) rfl (by omega)).symm
 
 
-/-- The inverse-image comparison equality passes through a Čech connecting map.
-
-Source: Stacks Project, Tags 01FD and 01EQ, connecting-map compatibility of the
-comparison; the elementary diagram chase is written here for normalized systems. -/
+/-- The inverse-image comparison equality passes through a Čech connecting map. -/
 theorem cechComparison_inverseImage_succ_step
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)

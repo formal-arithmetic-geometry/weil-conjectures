@@ -20,7 +20,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageColimits
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
-/-! # Constructible approximation for one prime and one pullback -/
+/-! # Constructible approximation for one prime and one pullback
+
+## References
+
+* Stacks Project, Tags 03SA, 03Q5, 03SC
+-/
 
 @[expose] public section
 
@@ -31,8 +36,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Bijectivity on constructible prime-field module sheaves extends to every abelian sheaf
-killed by the same prime, for a fixed morphism of qcqs schemes.
-Source: Stacks Project, 03SA(3), 03Q5, and the first paragraph of the proof of 03SC. -/
+killed by the same prime, for a fixed morphism of qcqs schemes. -/
 theorem bijective_cohomologyMap_of_constructible_prime
     {X Y : Scheme.{u}} (a : Y ⟶ X)
     [CompactSpace X] [QuasiSeparatedSpace X]

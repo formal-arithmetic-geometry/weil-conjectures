@@ -46,15 +46,12 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
     fun K ↦ (directImage_completion_compatibility l E f).1 K
   exact NatIso.isIso_of_isIso_app _
 
-/-- The three direct-image assertions, using the actual integral module derived categories.
-The canonical arrow in (1) is pushLimitIso, constructed by the constant/pullback
-conjugacy, and the evaluation arrow is pushEvaluationMap. Its Milnor-cone description:
-the canonical level projections are the first maps of Roos triangles on both sides, the
-product comparison of Rf* is invertible and commutes with 1-T, and pushLimitIso is
-compatible with the level projections through pushEvaluationMap. The projection in (2) is
-pushReductionMap, the mate of the summand-normalized cone comparison; it is a single
-natural transformation on derived towers. The displayed equality is exactly (3), before
-inverting the projection comparison on its right-hand side. -/
+/-- The three direct-image assertions for the integral module derived categories:
+(1) the canonical limit comparison `pushLimitIso` with its Milnor-cone description, compatible
+with the level projections through the evaluation arrow `pushEvaluationMap`; (2) the reduction
+projection `pushReductionMap`, the mate of the summand-normalized cone comparison, as a natural
+transformation on derived towers; (3) the displayed equality, before inverting the projection
+comparison on its right-hand side. -/
 theorem directImage_limits :
     (∀ n : ℕ, IsIso (pushEvaluationMap l E f n)) ∧
     (∃ (_ : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E X)))

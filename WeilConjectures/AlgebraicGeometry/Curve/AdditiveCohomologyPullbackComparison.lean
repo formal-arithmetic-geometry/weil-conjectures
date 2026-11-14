@@ -12,7 +12,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.AlgebraicGeometry.Curve.CanonicalAdditiveCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport
 
-/-! # Untensored comparison of additive etale and Zariski pullback -/
+/-! # Untensored comparison of additive etale and Zariski pullback
+
+## References
+
+* Stacks Project, Tags 03P2 and 02KH.
+-/
 
 @[expose] public section
 
@@ -76,9 +81,7 @@ private theorem coordinateIso_pullback
   exact hq U x
 
 /-- Coordinate-normalized additive comparisons commute with structural scalar
-endomorphisms and untensored pullback. No module actions on G.H or G'.H are inputs.
-Source: Stacks Project, Tag 03P2, Theorem etale-cohomology-theorem-zariski-fpqc-quasi-coherent,
-and Tag 02KH, the canonical cohomology comparison before tensor extension. -/
+endomorphisms and untensored pullback. No module actions on G.H or G'.H are inputs. -/
 theorem exists_additive_cohomology_pullback_comparison
     {k k' : Type u}
     [CommRing k] [CommRing k'] [Algebra k k']

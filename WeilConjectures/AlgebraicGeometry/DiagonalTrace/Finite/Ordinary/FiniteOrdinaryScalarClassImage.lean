@@ -47,8 +47,7 @@ theorem ordinaryFiniteClass_exact_image (A : Type (u + 1)) [CommRing A]
   rw [ordinaryFiniteClass_hom, mapSingleArrow_precomp]
 
 /-- The exact scalar-class formula remains valid after arbitrary derived
-source and target normalizations. Source: the preceding exact image formula
-and associativity. -/
+source and target normalizations. -/
 theorem ordinaryFiniteClass_exact_image_prepost (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{t₂} D]

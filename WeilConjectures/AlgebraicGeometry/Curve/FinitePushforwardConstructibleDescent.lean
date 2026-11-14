@@ -18,8 +18,11 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 /-!
 # Constructibility descends from finite direct image on curves
 
-Source: Stacks Project, Etale Cohomology, Tags 03QP (1), 095G and 09BH (2),
-combined in the converse of Tag 095R in the blueprint.
+The results combine to a converse of Stacks Project, Tag 095R.
+
+## References
+
+* Stacks Project, Etale Cohomology, Tags 03QP (1), 095G, 09BH (2), 03PU, 095R
 -/
 
 @[expose] public section
@@ -30,8 +33,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A torsion quotient of a constructible torsion middle term is constructible.
-Source: Stacks Project, Proposition 09BH (2). -/
+/-- A torsion quotient of a constructible torsion middle term is constructible. -/
 theorem CurveCoefficientPair.constructible_of_short_exact
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -61,8 +63,7 @@ theorem CurveCoefficientPair.constructible_of_short_exact
 -- Keep the inherited compatibility binder; the counit construction does not need it.
 set_option linter.unusedVariables false in
 /-- The finite direct image supplies a torsion constructible middle term and a short exact
-sequence ending in the original sheaf. Source: Stacks Project, Tags 03QP (1), 095G and 03PU;
-the counit argument is a composition of these results. -/
+sequence ending in the original sheaf. -/
 theorem CurveCoefficientPair.finite_pushforward_data
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
@@ -149,9 +150,7 @@ theorem CurveCoefficientPair.finite_pushforward_data
     CategoryTheory.Limits.kernel.condition beta,
     ShortComplex.ShortExact.mk' (ShortComplex.exact_kernel beta) inferInstance inferInstance⟩
 
-/-- Constructibility descends from a finite direct image of a torsion sheaf on a curve.
-Source: a composition of Stacks Project, Tags 03QP (1), 095G and 09BH (2),
-forming the converse of Tag 095R. -/
+/-- Constructibility descends from a finite direct image of a torsion sheaf on a curve. -/
 theorem CurveCoefficientPair.isConstructible_of_finite_pushforward
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]

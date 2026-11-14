@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-! # Finite Tate descent
 
-Source: Stacks Project, Tags 03PK and 099R.
+## References
+
+* Stacks Project, Tags 03PK, 099R, 0GLZ, 099T, 03EL
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +57,6 @@ private theorem comparison_iso_lift_unique
 normalization, all nonnegative tensor powers, pullback squares, exponent transitions,
 and uniqueness of the descent with its comparison. Both positive exponents are indexed
 by their predecessor: the finite quotient is at `n+1`, and the annihilator is `l^(r+1)`.
-There is no condition relating `n+1` to the ramification index.
-Source: Stacks Project, Tags 03PK, 099R, 0GLZ, 099T and 03EL;
-finite reduction in `lem-pur-twist-sheaf-locally-free`, clauses (2)--(3).
 -/
 theorem finite_tate_site_descent :
     ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →

@@ -13,13 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalRelativeProjProperLo
 
 /-! # Properness of finite type relative Proj
 
-Source: Stacks Project, Morphisms, Lemma 01WC,
-with Lemma 01WB.
+The argument uses affine presentations of a finite type quasi-coherent module, identifies
+the corresponding open restrictions of relative Proj with the local projective bundles,
+which are H-projective, and applies target-locality of properness.
 
-The remaining local argument is: use affine presentations of a finite type
-quasi-coherent module, identify the corresponding open restrictions of relative
-Proj with the local projective bundles, prove those restrictions H-projective,
-and apply target-locality of properness.
+## References
+
+* Stacks Project, Morphisms, Lemmas 01WB, 01WC
 -/
 
 @[expose] public section
@@ -30,9 +30,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- The canonical relative projective bundle of a finite type quasi-coherent module is proper.
-
-Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC. -/
+/-- The canonical relative projective bundle of a finite type quasi-coherent module is proper. -/
 theorem canonicalRelativeProj_proper {S : Scheme.{u}} (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) :
     IsProper (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom := by

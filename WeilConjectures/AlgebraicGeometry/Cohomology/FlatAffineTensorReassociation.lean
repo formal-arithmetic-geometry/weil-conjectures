@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.FlatAffineSectionRingTensor
 
 /-! # Scalar reassociation on a cartesian affine open
 
-Source: Stacks Project, Tag 02KG, the displayed tensor reassociation in its proof.
+## References
+
+* Stacks Project, Tag 02KG (Lemma 30.5.1)
 -/
 
 @[expose] public section
@@ -52,9 +54,7 @@ private theorem tensor_reassociation_of_ringEquiv
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}}
 
-/-- Reassociate scalar extension with the coefficient ring of a cartesian affine open.
-This concerns the original section module only, and assumes no quasi-coherence.
-Source: Stacks Project, Tag 02KG, proof of Lemma 30.5.1. -/
+/-- Reassociate scalar extension with the coefficient ring of a cartesian affine open. -/
 theorem exists_baseChange_affine_tensor_reassociation (f : X ⟶ Spec (.of R))
     (W : X.Opens) (hW : IsAffineOpen W) (M : X.Modules)
     (W' : (baseChangedScheme (S := S) f).Opens)

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.ExistsAmpleOfDimLEOne
 /-!
 # Quasi-projectivity in dimension at most one
 
-Source: Stacks Project, Varieties, Lemma 0A25.
+## References
+
+* Stacks Project, Varieties, Lemma 0A25.
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ namespace AlgebraicGeometry
 /-- A separated finite-type scheme over a field of dimension at most one admits a closed
 immersion into an open subscheme of a finite-dimensional projective space over that field.
 Here `ℙᴺ_k = Proj(k[x₀, …, x_N])` is `ℙ(ULift (Fin (N + 1)); Spec k)`, the projective space
-of `def-pc-projective-morphism` (`IsHProjective`).
-Source: Stacks Project, Varieties, Lemma 0A25. -/
+used by `IsHProjective`. -/
 theorem exists_closed_open_immersion_projectiveSpace_of_dim_le_one
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : X.dim ≤ 1) :

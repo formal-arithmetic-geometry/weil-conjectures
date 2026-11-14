@@ -16,6 +16,10 @@ This is the K-injective component calculation in the proof of
 `graph_proper_precomposition_unit`.
 It isolates the objectwise geometric calculation; natural-transformation extensionality is
 handled in the parent module.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -30,9 +34,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   Functor.mapDerivedCategory Functor.rightDerivedFunctor canonicalEtaleCompactSupportComparison
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
-/-- The proper-first graph unit equation at one homotopy object.
-Source: Stacks Project, Tags 0F7B, 0F7I and 0F7J; resolution-level calculation.
--/
+/-- The proper-first graph unit equation at one homotopy object. -/
 theorem graph_proper_precomposition_unit_component
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

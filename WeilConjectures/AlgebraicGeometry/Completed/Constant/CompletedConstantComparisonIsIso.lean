@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Invertibility of the canonical finite-module comparison
 
-Source: Stacks Project, More on Algebra, Tag 0912, and Modules on Sites, Tags 093J--093M.
+## References
+
+* Stacks Project, More on Algebra, Tag 0912, and Modules on Sites, Tags 093J--093M
 -/
 
 @[expose] public section
@@ -70,9 +72,7 @@ private theorem isIso_on_finite_free
       _ = 𝟙 _ := by rw [htotal, G.map_id]
   exact ⟨⟨β, hleft, hright⟩⟩
 
-/-- The already constructed tensor-to-limit map is invertible for finite modules.
-Source: Stacks Project, More on Algebra, Tag 0912, and Modules on
-Sites, Tags 093J--093M. -/
+/-- The already constructed tensor-to-limit map is invertible for finite modules. -/
 theorem completedConstantComparisonMap_isIso (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

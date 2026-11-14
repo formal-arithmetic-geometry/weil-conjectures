@@ -13,13 +13,15 @@ import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseIm
 /-!
 # Actual finite coefficient maps and their normalized restriction comparison
 
-Source: blueprint main-20261015, prop-weil-pbc-scalar-extension, coefficient maps;
-Bhatt--Scholze, Proposition 6.8.14; Stacks Tags 03EL and 0D6D.
-
 The integer inclusion is the existing restriction of the field embedding. Quotient
 maps use the actual valuation rings and the recorded adic ideals. Finite projections
 fix the completed map uniquely. Its restriction comparison specializes the existing
 ordinary-adjunction and flat-term K-flat normalization, without new choices.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.14
+* Stacks Project, Tags 03EL and 0D6D
 -/
 
 -- After pruning, this module only keeps private declarations.

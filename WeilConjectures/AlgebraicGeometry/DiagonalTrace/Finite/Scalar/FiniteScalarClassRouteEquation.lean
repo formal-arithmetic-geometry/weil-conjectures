@@ -47,7 +47,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Realizing the ordinary scalar class identifies the two normalized
-additive routes. Source: exact scalar-class realization and associativity. -/
+additive routes. -/
 theorem finiteScalarNormalizedClassRoute_eq (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

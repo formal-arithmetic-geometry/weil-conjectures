@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicMa
 
 /-! # Finite-level descended objects and their cohomology
 
-Source: Stacks Project, Tags 09AL and 09C6.
+## References
+
+* Stacks Project, Tags 09AL and 09C6
 -/
 
 @[expose] public noncomputable section

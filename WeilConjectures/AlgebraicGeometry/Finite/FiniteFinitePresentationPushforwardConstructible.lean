@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 /-!
 # Finite finitely presented pushforward preserves constructibility
 
-Source: Stacks Project, Etale Cohomology, Tag 095R, lemma-finite-pushforward-constructible.
+## References
+
+* Stacks Project, Etale Cohomology, Tag 095R
 -/
 
 @[expose] public section
@@ -93,10 +95,7 @@ private theorem constructible_finite_affine
   exact isConstructibleEtaleModuleSheaf_of_surjective_pullback a _ hbc
 
 /-- Finite finitely presented pushforward preserves constructible module sheaves on qcqs
-schemes over a finite commutative coefficient ring.
-
-Source: Stacks Project, Etale Cohomology, Tag 095R,
-lemma-finite-pushforward-constructible, finite-ring and qcqs specialization. -/
+schemes over a finite commutative coefficient ring. -/
 theorem isConstructibleEtaleModuleSheaf_lowerStar_of_finite_finitePresentation
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) [IsFinite f]

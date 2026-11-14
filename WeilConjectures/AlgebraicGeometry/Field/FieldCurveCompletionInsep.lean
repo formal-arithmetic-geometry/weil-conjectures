@@ -34,8 +34,9 @@ import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 /-!
 # Smooth projective completions after an inseparable field extension
 
-Source: Stacks Project, Varieties, Tag 0GK5,
-`lemma-dim-1-projective-completion-after-insep`, assertions (1)-(5).
+## References
+
+* Stacks Project, Varieties, Tag 0GK5, assertions (1)-(5)
 -/
 
 @[expose] public section
@@ -203,13 +204,10 @@ private theorem constant_field_model
 /-- A separated finite type scheme of dimension at most one has, after finite purely
 inseparable extension, componentwise normalization with smooth projective geometrically
 irreducible completions over finite separable constant fields.
-Source: Stacks Project, Varieties, Tag 0GK5.
 
 The integral closed immersions `c i` enumerate the reduced irreducible components of
-`X_K`: an integral closed subscheme with a given irreducible-component support is exactly
-its reduced induced subscheme, equivalently that of `(X_K)_red`. The isomorphisms `e i`
-identify `Y i` with their normalizations. Thus the equation for `ν` specifies the full
-componentwise normalization map, including its scheme structure.
+`X_K`, and the isomorphisms `e i` identify `Y i` with their normalizations, so the equation
+for `ν` specifies the full componentwise normalization map, including its scheme structure.
 -/
 theorem exists_field_curve_completion_insep
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]

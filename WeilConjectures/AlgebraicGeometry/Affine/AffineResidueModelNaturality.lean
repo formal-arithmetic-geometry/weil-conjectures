@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Affine.AffinePerfectResidueModelNatural
 
 /-! # Naturality of strictly perfect affine residue models
 
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
+## References
+
+* Stacks Project, Tags 01IB, 064K, 06YJ and 010V
 -/
 
 public section
@@ -45,12 +47,7 @@ variable
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The comparison from the residue cycle homology of a strictly perfect affine model `K` of
-`E` (via the model isomorphism `m`) to the degree-one derived fibre cohomology of `E`.
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
-
-Construction: identify residue cycle homology with homology of the residue extension of
-sections, apply `affinePerfectResidueModelIso`, transport along `m`, and use the open
-factorization of derived fibre cohomology. -/
+`E` (via the model isomorphism `m`) to the degree-one derived fibre cohomology of `E`. -/
 noncomputable def affineResidueModelEquiv
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]
@@ -76,8 +73,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical affine model comparisons are natural: if a chain map `φ : K ⟶ C` represents
 `b : E ⟶ E'` through the model isomorphisms `m` and `m'`, then the residue cycle homology map
-of `φ` corresponds to the derived fibre cohomology map of `b`.
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V. -/
+of `φ` corresponds to the derived fibre cohomology map of `b`. -/
 theorem affineResidueModelEquiv_naturality
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]

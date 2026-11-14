@@ -19,8 +19,9 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-! # Generic local constancy reflected by a finite direct image
 
-Source: Stacks Project, Tags 095K, 0959, 04DZ and 0A5D, with the module direct-factor
-argument in the parent node's proof, steps 1--3.
+## References
+
+* Stacks Project, Tags 095K, 0959, 04DZ, 0A5D
 -/
 
 @[expose] public section
@@ -82,9 +83,7 @@ private theorem locallyConstant_of_split_lowerStar
   exact IsLocallyConstantSheaf.of_cover 𝒲' F
 
 /-- Generic local constancy of the source, after shrinking a dense open where the finite
-module direct image is finite locally constant. Only the generic part is asserted;
-nothing is claimed on the complement.
-Source: Stacks Project, Tags 095K, 0959 and 04DZ; module direct-factor refinement of 0A5D. -/
+module direct image is finite locally constant. Nothing is claimed on the complement. -/
 theorem exists_dense_open_locallyConstant_of_finite_lowerStar_module
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [IsFinite f]

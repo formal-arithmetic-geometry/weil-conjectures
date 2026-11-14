@@ -249,8 +249,7 @@ private theorem finite_constant_pullback_raw (A : Type (u + 1)) [CommRing A]
     (Functor.OplaxMonoidal.η (upperStar (ModuleCat.{u + 1} A) f)) ho
 
 /-- The finite unit comparison intertwines the canonical constant pullback with
-its degree-zero pro-etale pullback. Source: diagonal tower coefficient changes (1),
-the constant coefficient unit and the etale/pro-etale inverse-image square. -/
+its degree-zero pro-etale pullback. -/
 theorem finite_constant_pullback_comparison (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (geoP1UnitPullback A f).hom ≫ (finiteUnitComparison A X).hom =

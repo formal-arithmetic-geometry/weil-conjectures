@@ -16,8 +16,9 @@ import Mathlib.LinearAlgebra.TensorProduct.Prod
 
 /-! # The flat base-change Mayer--Vietoris comparison diagram
 
-Source: Stacks Project, Tags 02KH and 01EB, the Mayer--Vietoris proof of flat
-base change.
+## References
+
+* Stacks Project, Tags 02KH and 01EB
 -/
 
 @[expose] public section
@@ -29,14 +30,10 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical flat base-change comparisons form a morphism of exact
-Mayer--Vietoris sequences. This assertion assumes no local comparison is bijective.
-The upper terms are tensor products of the original cohomology, with the binary
-sum identified with the product of the two tensor products. The lower terms use
+Mayer--Vietoris sequences. The upper terms are tensor products of the original cohomology, with
+the binary sum identified with the product of the two tensor products. The lower terms use
 base changes of the individual opens, transported by the cartesian open-subscheme
-isomorphisms and the iterated module-pullback isomorphisms.
-
-Source: Stacks Project, Tag 02KH,
-Mayer--Vietoris alternative, and Tag 01EB. -/
+isomorphisms and the iterated module-pullback isomorphisms. -/
 theorem H.baseChange_mayerVietoris
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules) [M.IsQuasicoherent]

@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 public import WeilConjectures.AlgebraicGeometry.ProperGraphTransfer.EtaleProperGraphTransfer
 import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphDerivedMate
 
-/-! # Exact-derived normalization of the graph adjunction mate -/
+/-! # Exact-derived normalization of the graph adjunction mate
+
+## References
+
+* Stacks Project, Tag 0F7B
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,10 +29,8 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   openImmersionLowerShriekUpperStarAdjunction etaleLowerShriekUpperStarAdjunction
   upperStarLowerStarAdjunction Adjunction.mapDerivedCategoryAdjunction
 
-/-- The ordinary open-extension graph map induces the derived graph adjunct.
-The exact factors are retained explicitly, so this equality uses no support
-normalization hypothesis. Source: Stacks Project Tag 0F7B and the ordinary graph
-unit identity. -/
+/-- The ordinary open-extension graph map induces the derived graph adjunct, with the
+exact factors retained explicitly. -/
 theorem properGraph_mate_normal
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

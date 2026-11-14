@@ -22,19 +22,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- At one coefficient level, the supported diagonal has an arbitrary base component
-and exactly one positive relative Chern component, before applying any trace.
-
-
-
-Factor that divisor line into a base pullback and the hyperplane line of p.model.
-Chern additivity, normalized Chern pullback and naturality of the geometric
-adjunction give the two tower components (divisorChernAdjoint_components).
-Pulling hY back gives the invertibility hypotheses of that tower identity.
-
-Apply the additive exact restriction and evaluation functors to the identity,
-and precompose with the projected coefficient unit. Its base component is the
-witness beta; its relative component has coefficient one. This calculation uses
-no trace, inverse splitting or integration identity. -/
+and exactly one positive relative Chern component, before applying any trace. -/
 theorem diagonalTrace_finitePretrace_components
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

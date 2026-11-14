@@ -1131,12 +1131,11 @@ end AlgebraicGeometry.ProEtale
 
 namespace WeilConjectures
 
-/-- The finite-stage comparison conclusion. Each abbreviation inside this definition
-is the existing canonical object or functor. In particular the two dualizing objects
-are fixed before the comparison isomorphism is quantified. Its hom is prescribed by
-the base adjunction unit, and the Hom comparison is prescribed by evaluation.
-The last clauses record the induced equivalence of finite-Tor constructible categories,
-the anti-equivalence with the specified Verdier functor, and its canonical biduality map. -/
+/-- The finite-stage comparison conclusion. The two dualizing objects are fixed before the
+comparison isomorphism is quantified; its hom is prescribed by the base adjunction unit, and
+the Hom comparison is prescribed by evaluation. The last clauses record the induced
+equivalence of finite-Tor constructible categories, the anti-equivalence with the specified
+Verdier functor, and its canonical biduality map. -/
 noncomputable def FiniteDualitySiteComparison
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]

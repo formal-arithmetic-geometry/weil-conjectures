@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
 
 /-! # Cartier reduction and site comparison
+
+## References
+
+* Stacks Project, Tags 0152, 06YY, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -28,10 +32,7 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 
 /-- For a commutative ring A, scheme D and a∈A, the etale constant-presheaf generator a, followed by
 the comparison adjunction unit and the canonical constant-sheaf comparison, equals the pro-etale
-constant-presheaf generator a at the terminal object [def-weil-pbc-constant-sheaf,
-proposition-comparison-morphism-inverse-image].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+constant-presheaf generator a at the terminal object. -/
 theorem comparison_constant_generator (A : Type (u + 1)) [CommRing A]
     (D : Scheme.{u}) (a : A) :
     (((comparisonUpperStarConstantSheafIso A D).app (ModuleCat.of A A)).hom).hom.app

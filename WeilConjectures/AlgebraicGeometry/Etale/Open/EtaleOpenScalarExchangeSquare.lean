@@ -12,7 +12,12 @@ import all WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRe
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! # Scalar exchange for an arbitrary cartesian open square -/
+/-! # Scalar exchange for an arbitrary cartesian open square
+
+## References
+
+* Stacks Project, Tags 03S6, 07A4
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -116,8 +121,7 @@ private theorem open_exchange_unit
     (fun K ↦ unit_map_openImmersionLowerShriekBaseChangeMap_app
       (ModuleCat.{u + 1} A) sq.toCommSq K) M
 
-/-- Open coefficient balancing commutes with every cartesian open square.
-Source: Stacks 03S6, 07A4. -/
+/-- Open coefficient balancing commutes with every cartesian open square. -/
 theorem properOpenCoefficientOpenInverse_baseChange
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientComplet
 /-!
 # Normalized continuous integral coefficient comparison
 
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1), and Section 6.5.
+## References
+
+* Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1), and Section 6.5.
 -/
 
 @[expose] public noncomputable section
@@ -185,8 +187,7 @@ private theorem normalizedCoefficientIso_exists (X : Scheme.{u}) (l : ℕ) [Fact
     ((continuousCoefficientConstants X (latticeCoefficientIntegers l E)).app V a)) x).symm
 
 /-- The continuous integral coefficient ring agrees with the completed quotient
-presentation, compatibly with its actual constant scalar map.
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1), completed coefficients of Section 6.5. -/
+presentation, compatibly with its actual constant scalar map. -/
 theorem continuousIntegralCoefficientComparison
     (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

@@ -15,7 +15,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Prime-field coefficients on a prime-annihilated constructible sheaf
 
-Source: Stacks Project, Theorem 03SC, second proof paragraph.
+## References
+
+* Stacks Project, Tags 03SC, 03RW
 -/
 
 @[expose] public section
@@ -81,8 +83,7 @@ private noncomputable def moduleAbelianPullbackIso {X Y : Scheme.{u}}
   exact asIso c
 
 /-- A prime-field module sheaf with the same underlying abelian sheaf as a
-constructible sheaf over finite coefficients is constructible.
-Source: Stacks Project, Theorem 03SC, second proof paragraph; Definition 03RW. -/
+constructible sheaf over finite coefficients is constructible. -/
 theorem isConstructibleSheaf_prime_of_underlyingAbelianIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
     (r : ℕ) [Fact r.Prime]

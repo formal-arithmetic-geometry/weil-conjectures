@@ -125,8 +125,7 @@ theorem universalProjector_image_retraction (χ : AddChar k (MonObj.Γ Λ))
 
 /-- Negation transports the two projector images and the actual root evaluations.
 The remaining comparison with pullback along base negation is separate from this
-isomorphism of covers. Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md,
-Duality, negating roots. -/
+isomorphism of covers. -/
 theorem rootNegation_coverComparison (χ : AddChar k (MonObj.Γ Λ)) :
     ∃ J : image (universalProjector k Λ χ).asHom ≅
         image (condensedProjector Λ k (negativeCover k) (negativeTranslation k) χ⁻¹).asHom,

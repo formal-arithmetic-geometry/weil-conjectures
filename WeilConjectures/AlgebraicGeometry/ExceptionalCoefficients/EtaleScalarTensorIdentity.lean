@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarTens
 
 /-! # Tensor compatibility of the fixed scalar comparisons
 
-Source: Stacks 07A4 and 0D6D, the tensor clause of the finite-Hom domain calculation.
+## References
+
+* Stacks Project, Tags 07A4, 0D6D
 -/
 
 -- After pruning, this module only keeps private declarations.

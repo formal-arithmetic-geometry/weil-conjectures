@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 
 /-! # Natural residue homology after transport to the scheme residue field
 
-Source: Stacks Project, Tags 0098 and 010V.
+## References
+
+* Stacks Project, Tags 0098 and 010V
 -/
 
 @[expose] public section
@@ -39,8 +41,7 @@ private def restrictionHomologyIso
 -- Scalar extension, residue restriction and quotient carriers use different module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The affine cycle quotient agrees naturally with homology after residue evaluation.
-Source: Stacks Project, Tags 0098 and 010V. -/
+/-- The affine cycle quotient agrees naturally with homology after residue evaluation. -/
 theorem affine_residue_evaluation_homology_naturality
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]

@@ -52,7 +52,9 @@ import Mathlib.Algebra.Module.Torsion.Basic
 
 /-! # Tensor realization of finite completion modules
 
-Source: Stacks Tags 0912, 093J--093M and 09BT.
+## References
+
+* Stacks Project, Tags 0912, 093J--093M and 09BT (clause (3))
 -/
 
 @[expose] public noncomputable section
@@ -237,8 +239,7 @@ private theorem completion_module_properties
   exact Module.Finite.equiv ((Submodule.Quotient.restrictScalarsEquiv A P).symm.trans
     (Submodule.quotEquivOfEq _ _ hp))
 
-/-- Scalar extension realizes the compatible finite quotient module model.
-Source: Stacks Tag 0912, Tags 093J--093M and Tag 09BT, clause (3). -/
+/-- Scalar extension realizes the compatible finite quotient module model. -/
 theorem completed_constant_module_model (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

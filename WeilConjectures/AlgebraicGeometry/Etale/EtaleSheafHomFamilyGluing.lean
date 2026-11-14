@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-! # Gluing sheaf morphisms on an étale covering family
 
-Source: Stacks Project, Modules on Sites, Lemma 03EM and Sites Lemma 04TQ.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EM, and Sites, Tag 04TQ
 -/
 
 @[expose] public noncomputable section
@@ -20,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Compatible morphisms of restrictions to an étale covering family glue uniquely.
-Compatibility is equality on any étale object admitting two lifts to cover members.
-Source: Stacks Project, Tags 03EM and 04TQ. -/
+Compatibility is equality on any étale object admitting two lifts to cover members. -/
 theorem existsUnique_etaleSheafHom_of_family
     (B : Type (u + 1)) [CommRing B]
     {X : Scheme.{u}} {I : Type u} {U : I → Scheme.{u}}
@@ -99,8 +100,7 @@ theorem existsUnique_etaleSheafHom_of_family
     ← NatIso.naturality_2 (upperStarIsoLocalizationRestriction
       (ModuleCat.{u + 1} B) (a i) inferInstance) φ, hφ' i, hφ i]
 
-/-- A glued map has any further local restriction compatible with its covering family.
-Source: Stacks Project, Tags 03EM and 04TQ. -/
+/-- A glued map has any further local restriction compatible with its covering family. -/
 theorem etaleSheafHom_restriction_eq_of_compatible
     (B : Type (u + 1)) [CommRing B]
     {X : Scheme.{u}} {I : Type u} {U : I → Scheme.{u}}

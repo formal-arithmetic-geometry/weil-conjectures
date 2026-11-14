@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! # Integral quotient models for a rational sheaf filtration
 
-Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2).
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13 and (the proof of) Proposition 6.8.14(2).
 -/
 
 @[expose] public noncomputable section
@@ -226,8 +228,7 @@ private theorem modelScalarComparison (X : Base.{u} l)
     (eqToIso (reductionChange_obj_eq X.scheme a N))⟩
 
 /-- Retain the finite stratum filtration as degree-zero completed integral quotient models
-for the specified raw rational realization.
-Source: Bhatt--Scholze, Lemma 6.8.13 and the proof of Proposition 6.8.14(2). -/
+for the specified raw rational realization. -/
 theorem rationalContinuousFiltrationModels (X : Base.{u} l)
     (s : RationalModuleRealization l E X.scheme)
     (F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E))

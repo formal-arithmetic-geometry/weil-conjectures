@@ -31,8 +31,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # The Roos computation for a compatibly marked finite-projective quotient system
 
-Source: Stacks Project, Tag 09C6, the finite-projective inverse-limit calculation;
-Cohomology on Sites, Tags 0940 and 0941.
+## References
+
+* Stacks Project, Tags 09C6, 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -113,10 +114,7 @@ private theorem restrictedRlim_isDerivedLimit
       ((DerivedCategory.Q.objPreimage Z).asFunctor ⋙ DerivedCategory.Q) _
       (completedRlim_isDerivedLimit X d Z)
 
-/-- A compatible finite-projective marking computes the local derived inverse limit.
-
-Source: Stacks Project, Tag 09C6, the inverse-limit calculation for finite-projective
-complexes; Cohomology on Sites, Tags 0940 and 0941. -/
+/-- A compatible finite-projective marking computes the local derived inverse limit. -/
 theorem finitePerfectAdicTower_limit
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [IsAdicComplete d.ideal A] (U : X.ProEt)

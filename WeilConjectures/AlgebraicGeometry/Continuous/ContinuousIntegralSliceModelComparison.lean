@@ -83,7 +83,10 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-!
 # Integral scalar models on a slice site
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and Definition 6.8.10.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.10 and the completed coefficient presentation
+  of Definition 6.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -464,9 +467,7 @@ private theorem finitePresentation_restrict
 end ContinuousIntegralSlice
 
 /-- Coefficient transport identifies the finite scalar models on each slice after a
-locally closed immersion. Both sides use ordinary scalar extension, with torsion allowed.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.10 and the completed coefficient
-presentation of Definition 6.5.1. -/
+locally closed immersion. Both sides use ordinary scalar extension, with torsion allowed. -/
 theorem continuousIntegralSliceModelComparison
     (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian X]

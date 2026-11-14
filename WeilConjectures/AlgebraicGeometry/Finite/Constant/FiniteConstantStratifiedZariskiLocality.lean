@@ -14,14 +14,15 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 /-!
 # Zariski locality of finite constant stratified constructibility
 
-Source: Stacks Project, Topology, Tags 005J, 09YD and 053W; Etale Cohomology,
-Tag 095E, finite-affine-cover argument; blueprint chap-The-pro-etale-site,
-definition-constructible-sheaves, clause 2.
-
 The three clauses state restriction to quasi-compact opens, assembly over a finite
 quasi-compact open cover, and the equivalent affine-local criterion on qcqs schemes.
 The coefficients are arbitrary commutative condensed rings and the local models are
 finite constant scalar models, as in the recorded constructibility definition.
+
+## References
+
+* Stacks Project, Topology, Tags 005J, 09YD, 053W
+* Stacks Project, Etale Cohomology, Tag 095E
 -/
 
 @[expose] public section
@@ -155,10 +156,7 @@ private theorem stratified_of_affine_neighborhoods {X : Scheme.{u}}
 
 /-- Finite constant stratified constructibility restricts to quasi-compact opens of
 qcqs schemes, glues over finite quasi-compact open covers of qcqs opens, and is
-therefore equivalent to the affine-local condition on a qcqs scheme.
-
-Source: Stacks Project, Topology, Tags 005J, 09YD and 053W; Etale Cohomology,
-Tag 095E, proof of (2) implies (3); blueprint definition-constructible-sheaves, clause 2. -/
+therefore equivalent to the affine-local condition on a qcqs scheme. -/
 theorem finiteConstantStratified_zariski_locality
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

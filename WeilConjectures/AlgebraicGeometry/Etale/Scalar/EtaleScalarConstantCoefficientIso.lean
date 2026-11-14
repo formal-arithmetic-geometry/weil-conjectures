@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentat
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleExceptionalConstantTensor
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarConstantPullback
 
-/-! # A shared canonical scalar coefficient isomorphism -/
+/-! # A shared canonical scalar coefficient isomorphism
+
+## References
+
+* Stacks Project, Tags 03EK, 07A6
+* Zheng, Construction 2.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance 2000] CategoryTheory.instAdditiveSheafConstantSheaf
 
 /-- The canonical scalar coefficient is identified with the derived constant
-single complex by scalar restriction and the exact constant/single comparison.
-Source: Mathlib `constantCommuteCompose` and `mapDerivedCategorySingleFunctor`. -/
+single complex by scalar restriction and the exact constant/single comparison. -/
 def etaleScalarConstantCoefficientIso
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     (W : Scheme.{u}) : scalarCoefficient a W ≅
@@ -55,8 +60,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.mapDerivedCategorySingleFunctor singleFunctorCompLeftDerivedUpperStarIso
   exceptionalConstantPullbackIso scalarCoefficientPullbackIso
 
-/-- The specified scalar coefficient identification commutes with inverse image.
-Source: Stacks Tags 03EK and 07A6; Zheng Construction 2.26. -/
+/-- The specified scalar coefficient identification commutes with inverse image. -/
 theorem etaleScalarConstantCoefficientIso_pullback
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

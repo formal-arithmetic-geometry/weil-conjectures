@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Scalar action on normalized additive étale Čech edges
-Source: Stacks Project, Tags 03P2 and 01EQ. -/
+
+## References
+
+* Stacks Project, Tags 03P2, 01EQ
+-/
 
 @[expose] public section
 
@@ -23,9 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Augmentation-normalized edges intertwine multiplication with scalar action.
-Source: Stacks Project, Tag 03P2, the coefficient edge, and Tag 01EQ,
-functoriality of the augmented injective Čech double complex in coefficients. -/
+/-- Augmentation-normalized edges intertwine multiplication with scalar action. -/
 theorem etaleAdditiveCech_normalized_scalar
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

@@ -20,8 +20,9 @@ import Mathlib.Data.Fin.VecNotation
 
 /-! # Locally constant source strata for a finite direct image
 
-Source: Stacks Project, Tags 095K, 0959, 04DZ and 0A5D, with the generic
-finite-algebra splitting refinement for module coefficients.
+## References
+
+* Stacks Project, Tags 095K, 0959, 04DZ, 0A5D
 -/
 
 @[expose] public section
@@ -31,13 +32,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The local constancy part of finite direct-image constructibility reflection.
-Source: Stacks Project, Tag 095K, Tag 0959, Tag 04DZ, and the
-finite-stratification refinement of Tag 0A5D.
-
-
-Only local constancy is asserted here. Finiteness of all source stalks is proved
-separately using the finite direct-image counit, and is not part of this hole. -/
+/-- The local constancy part of finite direct-image constructibility reflection. Finiteness
+of the source stalks is not asserted here. -/
 theorem Scheme.exists_locallyConstant_stratification_of_finite_lowerStar_module
     {k : Type u} [Field k] [IsAlgClosed k] {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Spec (.of k)) [IsCurve g] [IsFinite f]

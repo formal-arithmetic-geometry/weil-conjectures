@@ -58,12 +58,7 @@ variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spe
 /-- **The degree of the line bundle of an effective divisor.** Let `E = ∑_P n_P [P]` be an
 effective divisor on a smooth proper curve `X` over `k`. The degree
 `deg 𝒪_X(E) = χ(𝒪_X(E)) - χ(𝒪_X)` of its line bundle `𝒪_X(E) = 𝒪_X(-E)^∨`, where
-`𝒪_X(-E) = ∏_P 𝓘_P^{n_P}`, is `∑_P n_P [κ(P) : k]`.
-
-The χ-degree of `𝒪_X(E)` is `dim_k Γ(E, 𝒪_E)`
-(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`), and
-`dim_k Γ(E, 𝒪_E) = ∑_P n_P [κ(P) : k]`
-(`AlgebraicGeometry.Scheme.Divisor.finrankΓ_subschemeι_idealSheaf`). -/
+`𝒪_X(-E) = ∏_P 𝓘_P^{n_P}`, is `∑_P n_P [κ(P) : k]`. -/
 theorem Divisor.degree_dual_toModules_idealSheaf (E : closedPoints X →₀ ℕ) :
     (Divisor.idealSheaf E).toModulesᵛ.degree k =
       E.sum fun P n ↦ (n : ℤ) * (X ↘ Spec (.of k)).degreeOver P.1 := by

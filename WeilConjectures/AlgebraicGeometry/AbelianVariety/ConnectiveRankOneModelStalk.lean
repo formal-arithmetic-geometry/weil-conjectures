@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # The local stalk calculation for a connective rank-one model
 
-Source: Stacks Project, Tag 0E62, local argument; Tag 0BCD.
+## References
+
+* Stacks Project, Tags 0E62 (local argument) and 0BCD
 -/
 
 @[expose] public section
@@ -79,8 +81,7 @@ private theorem epi_map_of_natIso {C : Type*} [Category C]
   infer_instance
 
 -- The composed homology/stalk functors require substantial definitional-equality checking.
-/-- The local unit calculation for an already supplied strictly perfect representative.
-Source: Stacks Project, Tag 0E62, local argument, and Tag 0BCD. -/
+/-- The local unit calculation for an already supplied strictly perfect representative. -/
 theorem surjective_stalk_homology_of_connective_rank_one_model (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

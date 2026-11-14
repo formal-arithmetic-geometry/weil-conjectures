@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaClosed
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Realizing additive Čech cycles in the augmented resolution total
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2. -/
+
+## References
+
+* Stacks Project, Tag 01EQ (Lemma 20.11.2)
+-/
 
 @[expose] public section
 
@@ -23,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Every coefficient Čech cycle has a global-resolution representative with
-matching augmentation classes. No edge equivalence or inverse image is involved.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, the two augmentation arrows. -/
+matching augmentation classes. -/
 theorem etaleAdditiveCech_cycle_realization
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (hcover : iSup U = ⊤)

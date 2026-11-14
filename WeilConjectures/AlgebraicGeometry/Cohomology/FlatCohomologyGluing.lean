@@ -14,8 +14,9 @@ import Mathlib.Algebra.FiveLemma
 
 /-! # Mayer--Vietoris gluing of the canonical flat base-change comparison
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH),
-the Mayer--Vietoris alternative in the quasi-separated paragraph.
+## References
+
+* Stacks Project, Lemma 30.5.2 (Tag 02KH), the Mayer--Vietoris alternative
 -/
 
 @[expose] public section
@@ -27,14 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Flat base-change comparisons glue along a two-open cover when the comparisons
-on the two opens and their intersection are bijective in every degree.
-
-Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), Mayer--Vietoris alternative.
-
-
-No affineness of U intersect V is asserted. In the eventual qcqs induction that
-intersection is only compact and separated, and is handled by the separated-case
-lemma. The gluing lemma itself needs neither compactness nor separatedness. -/
+on the two opens and their intersection are bijective in every degree. -/
 theorem H.baseChange_bijective_of_openCover
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules) [M.IsQuasicoherent]

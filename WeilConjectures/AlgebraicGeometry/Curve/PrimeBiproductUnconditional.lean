@@ -12,7 +12,10 @@ import Mathlib.Algebra.Category.Grp.Biproducts
 
 /-! # Componentwise curve assertions for finite biproducts
 
-Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C. -/
+## References
+
+* Stacks Project, Tags 03SC, 0A5C
+-/
 
 @[expose] public section
 
@@ -131,21 +134,8 @@ private theorem biproduct_bijective_iff {C : Type*} [Category C] [Preadditive C]
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- Componentwise equivalence for the unconditional assertions of a finite sum.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
-
-
-Naturality `Etale.cohomologyMap_map` makes pullback a natural transformation
-between the additive cohomology functors. Surjectivity is tested in product
-coordinates, using vectors supported in one coordinate for the forward direction
-and choosing coordinate preimages for the converse. For injectivity, each summand
-is a retract via `biproduct.ι G i ≫ e.inv` and `e.hom ≫ biproduct.π G i`;
-naturality gives the forward implication, and joint injectivity of coordinates
-gives the converse. Bijectivity combines these two tests. Apply the tests degree
-by degree to C1, C2, C5, C7 and C8. Properness and affineness are common hypotheses;
-the supplied constructibility proofs discharge C5 in the respective directions.
-Empty products are singletons, so the argument includes the empty index type.
-No derived-global-sections comparison or constructibility closure theorem is used. -/
+/-- Componentwise equivalence for the unconditional assertions of a finite sum, including
+the empty sum. -/
 theorem prime_biproduct_unconditional_iff (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     {ι : Type} [Finite ι]

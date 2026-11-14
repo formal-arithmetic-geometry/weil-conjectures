@@ -35,9 +35,10 @@ import WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 /-!
 # Compact support, compact images, and coproducts of the exceptional adjoint
 
-Source: Bhatt--Scholze, The pro-étale topology for schemes, Section 6.4,
-Example 6.4.1 and Proposition 6.4.8, with Definition 6.3.1; the retained compact-image,
-adjoint-coproduct and coefficient-functor argument of the blueprint node.
+## References
+
+* Bhatt--Scholze, The pro-étale topology for schemes, Section 6.4, Example 6.4.1,
+  Proposition 6.4.8 and Definition 6.3.1
 -/
 
 @[expose] public section
@@ -73,8 +74,6 @@ set_option linter.unusedVariables false in
 /-- Compact support sends bounded constructible finite-Tor complexes to compact objects;
 its fixed right adjoint preserves coproducts and is exact with adjunction-compatible shifts.
 The termwise constant and the two coefficient tensor functors are exact and preserve sums.
-
-Source: Bhatt--Scholze, Section 6.4, Example 6.4.1 and Proposition 6.4.8, Definition 6.3.1.
 -/
 theorem support_compactImages_adjoint_sums
     {k : Type u} [Field k] [IsAlgClosed k]

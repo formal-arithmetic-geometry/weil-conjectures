@@ -30,12 +30,13 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSumRightAdjointCoherence
 
 /-! # Coherence of normalized etale sum right adjoints
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
-lem-pur-co-smooth-etale-locality.proof.md, Step 1; Stacks Tags 03S6, 0F7J, 0F7K.
-
 The comparisons below use the actual proper/open compositor and exchange. The map to sum
 extension is the constructed graph comparison, rather than a choice of a bare isomorphism.
 Right adjoints and their adjunctions are quantified, so no choice of Brown adjoint is imposed.
+
+## References
+
+* Stacks Project, Tags 03S6, 0F7J, 0F7K
 -/
 
 @[expose] public section
@@ -65,8 +66,7 @@ noncomputable def etaleSumRightAdjointUnitIso
   (etaleSumRightAdjointIso A e G adj).app (constantComplex A X) ≪≫
     etaleSumPullbackUnitIso A e
 
-/-- The right-adjoint compositor is the conjugate of the specified compact-support compositor.
-Source: Stacks Tags 0F7J, 0F7K; blueprint Step 1. -/
+/-- The right-adjoint compositor is the conjugate of the specified compact-support compositor. -/
 noncomputable def etaleSumRightAdjointCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T)
@@ -82,8 +82,7 @@ noncomputable def etaleSumRightAdjointCompIso
   conjugateIsoEquiv adj_ve (adj_e.comp adj_v) (unboundedEtaleLowerShriekCompIso A e v)
 
 /-- The exceptional exchange at the coefficient unit is the adjunct of the inverse
-specified compact-support exchange followed by the pulled-back counit and unit identification.
-Source: blueprint Step 1, definition of b; Stacks Tag 03S6. -/
+specified compact-support exchange followed by the pulled-back counit and unit identification. -/
 noncomputable def etaleSumRightAdjointBaseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}}
@@ -330,8 +329,7 @@ private theorem normalized_square
   rw [hq, Category.id_comp] at hp'
   exact hp' sq
 
-/-- Composition coherence for the normalized right adjoints, at every unbounded input.
-Source: blueprint Step 1; Stacks Tags 0F7J, 0F7K. -/
+/-- Composition coherence for the normalized right adjoints, at every unbounded input. -/
 theorem etaleSumRightAdjoint_comp
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]
@@ -368,8 +366,7 @@ theorem etaleSumRightAdjoint_comp
     etaleSumRightAdjointCompIso]
   convert h using 1
 
-/-- The identity normalization uses the canonical identity comparison.
-Source: blueprint Step 1; Stacks Tag 0F7K. -/
+/-- The identity normalization uses the canonical identity comparison. -/
 theorem etaleSumRightAdjoint_id
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X] [HasCompactification (𝟙 X)]
@@ -384,8 +381,7 @@ theorem etaleSumRightAdjoint_id
     hid, Iso.refl_symm, Iso.refl_trans, Iso.trans_refl, unboundedEtaleLowerShriekId] using
     etaleNormalizedMates_identity A X (HasCompactification.compactification (𝟙 X)) G adj
 
-/-- Base change preserves the normalized dualizing coefficient object.
-Source: blueprint Step 1; Stacks Tag 03S6. -/
+/-- Base change preserves the normalized dualizing coefficient object. -/
 theorem etaleSumRightAdjoint_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}}

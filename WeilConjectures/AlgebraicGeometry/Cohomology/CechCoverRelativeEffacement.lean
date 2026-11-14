@@ -12,9 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageLocallySplitSect
 
 /-! # Cover-relative effacement of positive Čech cohomology
 
-Source: the relative-effacement argument of
-`lem-pc-cech-comparison-inverse-image-unit`, Step 1, expanding the uniqueness
-argument for Stacks Project, Tags 01EQ and 01FD.
+The relative-effacement argument used for the uniqueness of normalized Čech comparisons.
+
+## References
+
+* Stacks Project, Tags 01EQ and 01FD
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- An effacement sequence split on cover members is suitable for both covers.
-
-Source: `lem-pc-cech-comparison-inverse-image-unit`, proof Step 1; relative
-Čech effacement used to identify normalized comparisons in Tags 01EQ and 01FD. -/
+/-- An effacement sequence split on cover members is suitable for both covers. -/
 theorem exists_cechCoverRelativeEffacement
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)

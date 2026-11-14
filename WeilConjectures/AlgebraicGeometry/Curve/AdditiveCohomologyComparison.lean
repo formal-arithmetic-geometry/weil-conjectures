@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 import WeilConjectures.AlgebraicGeometry.EtaleQcoherentSourceComparisonNatural
 
-/-! # Scalar-compatible comparison for additive first cohomology -/
+/-! # Scalar-compatible comparison for additive first cohomology
+
+## References
+
+* Stacks Project, Tags 03P2 and 03FD.
+-/
 
 @[expose] public section
 
@@ -108,10 +113,7 @@ private theorem map_smulHom_field
   rfl
 
 /-- Compare the larger-coefficient derived additive cohomology with ordinary
-structure-sheaf cohomology, including its canonical scalar maps.
-Source: Stacks Project, Tags 03P2 and 03FD; the coefficient-universe argument
-is the separated-case finite affine open cover argument of Tag 03P2,
-applied in each coefficient universe. -/
+structure-sheaf cohomology, including its canonical scalar maps. -/
 theorem exists_addEquiv_etaleCohomology_one_structureSheaf
     {k : Type u} [Field k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f]

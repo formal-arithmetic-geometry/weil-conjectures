@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleSystemIn
 
 /-! # Scalar action on strict étale compact support
 
-Source: Zheng, Construction 4.1; Stacks 09MK, 070I and 015F.
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tags 09MK, 070I and 015F
 -/
 
 @[expose] public noncomputable section
@@ -342,8 +345,7 @@ private theorem exact_preserves_scalar
   exact congr_app he M
 
 /-- The canonical coefficient action on source and target derived systems is preserved
-by ordinary étale compact support.
-Source: Zheng, Construction 4.1; Stacks 09MK, 070I and 015F. -/
+by ordinary étale compact support. -/
 theorem etaleCompactSupport_scalarAction
     {O : Type (u + 1)} [CommRing O] {t : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}

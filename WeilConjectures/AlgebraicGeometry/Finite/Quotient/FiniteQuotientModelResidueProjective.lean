@@ -18,7 +18,9 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # The algebraic residue of a finite-quotient constant model
 
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I).
+## References
+
+* Stacks Project, Tags 094I, 094G, 09C2, 03DJ, 05RU
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +57,7 @@ private theorem residueOverMap_exact (X : Scheme.{t})
       ((hS.map_of_exact (SheafOfModules.toSheaf.{t + 1} (R.over V))).map_of_exact H)
   exact ⟨hAdd, (Functor.exact_tfae F).out 1 4 |>.mp h⟩
 
-/-- The exact derived restriction agrees with the chosen representative formula.
-Source: Stacks Tags 03DJ and 05RU. -/
+/-- The exact derived restriction agrees with the chosen representative formula. -/
 private def residueRestrictionComparison (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
@@ -69,8 +70,7 @@ private def residueRestrictionComparison (X : Scheme.{t})
   exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
-/-- A local isomorphism persists on every smaller chart.
-Source: Stacks Tag 03DJ. -/
+/-- A local isomorphism persists on every smaller chart. -/
 private theorem residueRestrictIso_further (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V)
     (M N : DerivedCategory (SheafOfModules.{t + 1} R))
@@ -100,11 +100,8 @@ private theorem residueRestrictIso_further (X : Scheme.{t})
   exact ⟨(c M).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫ c N⟩
 
 /-- On a nonempty chart, the algebraic derived residue of a constant quotient model
-has a projective representative in the residue interval. This asserts a model only
-AFTER reduction modulo the image of the coefficient ideal, not a Tor bound before reduction.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 094I (lemma-bounded, part (2))
-and 094G; proetale.tex, Tag 09C2. -/
+has a projective representative in the residue interval, after reduction modulo the
+image of the coefficient ideal. -/
 theorem finiteQuotient_model_residueProjective
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]

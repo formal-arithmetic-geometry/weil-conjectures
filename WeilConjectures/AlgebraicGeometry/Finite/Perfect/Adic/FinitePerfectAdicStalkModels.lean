@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalConst
 
 /-! # Algebraic stalk models before simultaneous trivialization
 
-Source: Stacks Project, Tag 09C6, the normalized algebraic stalk diagram.
+## References
+
+* Stacks Project, Tag 09C6 (the normalized algebraic stalk diagram)
+* Stacks Project, Tags 09AL, 09B1 and 094G
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +27,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Separate finite-level markings by one fixed algebraic tower on an etale chart.
-The covering at a level can depend on that level. No compatibility of markings is asserted.
-Source: Stacks Tags 09C6 and 09B1. -/
+The covering at a level can depend on that level. No compatibility of markings is asserted. -/
 def FinitePerfectAdicLevelMarkings (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -41,18 +43,7 @@ def FinitePerfectAdicLevelMarkings (X : Scheme.{t}) {A : Type t} [CommRing A]
             ((finitePerfectAdicDerivedConstant X (A ⧸ d.ideal ^ (n + 1))).obj (T.level n))))
 
 /-- A normalized algebraic stalk system gives separate local models at all finite levels.
-There is no common pro-etale covering and no compatible family of markings in this result.
-
-Source: Stacks Project, Tag 09C6, the paragraph constructing the objects M_n and their
-normalized consecutive maps, using Tags 09AL, 09B1 and 094G.
-
-Each stalk is perfect: locally it is the stalk of the specified bounded finite-projective
-constant model. Finite-ring derived local constancy on the connected chart identifies
-each etale level locally with that same stalk, independently for each level. Transport
-these separate isomorphisms through the finite coefficient comparisons and exact slice
-restriction to obtain FinitePerfectAdicLevelMarkings. Composing the refinements gives the
-etale cover of X. The empty scheme uses its empty cover. No compatible choice of the
-finite-level markings, inverse limit, or perfect complex over A is used here. -/
+There is no common pro-etale covering and no compatible family of markings in this result. -/
 theorem finitePerfectAdic_stalk_models
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

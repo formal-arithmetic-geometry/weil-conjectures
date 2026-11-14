@@ -14,8 +14,8 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCo
 
 The reduction/direct-image comparison `h` is written as the adjunction mate of the
 canonical pullback/reduction comparison `pullReduction`. This is verbatim the body of
-`pushReductionMap` of `proposition-proper-base-change-complete-integral--1`. That node's proof uses
-the present lemma, so this module does not import its module.
+`pushReductionMap`. The proof of the direct-image completion compatibility uses the present
+lemma, so this module does not import the module defining `pushReductionMap`.
 -/
 
 @[expose] public noncomputable section

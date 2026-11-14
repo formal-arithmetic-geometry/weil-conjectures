@@ -15,7 +15,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 
-/-! # Functorial direct-sum coordinates for constant coefficients modulo a prime -/
+/-! # Functorial direct-sum coordinates for constant coefficients modulo a prime
+
+## References
+
+* Stacks Project, Tags 03Q5 and 0739.
+-/
 
 @[expose] public section
 
@@ -146,9 +151,7 @@ private theorem natural_finsupp_coordinates
 namespace AlgebraicGeometry.Etale
 
 /-- A single prime-field basis of Λ/pΛ gives direct-sum coordinates on both sides
-of a cohomology pullback, and pullback acts separately on every coordinate.
-Source: Stacks Project, Tags 03Q5 and 0739, together with the coefficient-basis
-construction of `proposition-p-torsion-smooth-proper-curve--4`. -/
+of a cohomology pullback, and pullback acts separately on every coordinate. -/
 theorem exists_constantModSheaf_cohomology_finsupp_pullback
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]

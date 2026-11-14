@@ -17,7 +17,12 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonSquareTransportSupplement
 
-/-! # Compatibility of canonical derived site comparisons -/
+/-! # Compatibility of canonical derived site comparisons
+
+## References
+
+* [Stacks Project, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
+-/
 
 @[expose] public section
 
@@ -27,8 +32,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The fixed pullback comparisons commute with the fixed square isomorphisms.
-Source: blueprint transport proof, step 4; Stacks Project, Tag 0B65. -/
+/-- The fixed pullback comparisons commute with the fixed square isomorphisms. -/
 theorem comparison_square {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)
     (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

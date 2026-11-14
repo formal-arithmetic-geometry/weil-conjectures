@@ -33,11 +33,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The finite exceptional inverse image on intrinsic constant-ring modules:
-`nu_X^* f^times Rnu_Y,*`. The first functor undoes the canonical constant-ring
-realization, and the last performs comparison and that realization. The ordinary
-etale right adjoint is supplied by Brown representability, and compactifiability
-by Nagata over the field; neither is an additional hypothesis. Restricting this
-formula to bounded constructible complexes is the operation of the blueprint. -/
+`nu_X^* f^times Rnu_Y,*`, conjugated by the canonical constant-ring realization. The ordinary
+etale right adjoint is supplied by Brown representability, and compactifiability by Nagata
+over the field; neither is an additional hypothesis. -/
 noncomputable def finiteExceptionalInverseImage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

@@ -26,12 +26,12 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.Conde
 /-!
 # Exact locally closed extension of condensed coefficient modules
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart,
-introductory closure-factorization paragraph and proof paragraphs (1), (3);
-Stacks Project, Tags 09BM, 03DJ, 010N, 015F.
-
 The functor is the existing canonical open extension into the scheme-theoretic image
 followed by its closed direct image. Cohomology comparisons are natural in complexes.
+
+## References
+
+* Stacks Project, Tags 010N, 015F, 01OW, 01OY, 01OZ, 01R8, 03DJ, 09BM
 -/
 
 @[expose] public noncomputable section
@@ -48,10 +48,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- All locally closed subschemes of a Noetherian scheme are Noetherian. The canonical
 closure factorization has exact coefficient-module factors and exact composite; its
 termwise functor commutes naturally with cohomology, preserves quasi-isomorphisms and
-descends to the unbounded derived categories with its localization comparison.
-
-Source: blueprint lemma-constructible-sheaves, introductory paragraph and proof (1), (3);
-Stacks Tags 01OW, 01OZ, 01OY, 01R8, 09BM, 03DJ, 010N, 015F. -/
+descends to the unbounded derived categories with its localization comparison. -/
 theorem coefficientHeart_locallyClosedExtension
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsNoetherian X] :

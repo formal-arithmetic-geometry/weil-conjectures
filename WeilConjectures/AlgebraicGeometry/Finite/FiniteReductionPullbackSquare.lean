@@ -12,7 +12,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackSquare
 import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedSquareLocalization
 /-! Finite coefficient reduction and the canonical inverse-image square.
-Source: Stacks Project, Tags 0D6D and 0E48. -/
+
+## References
+
+* Stacks Project, Tags 0D6D and 0E48
+-/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false

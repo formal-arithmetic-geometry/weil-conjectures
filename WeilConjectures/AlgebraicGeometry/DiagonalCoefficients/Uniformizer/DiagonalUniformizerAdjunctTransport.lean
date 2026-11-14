@@ -97,17 +97,7 @@ private theorem uniformizerAssembly
   dsimp only [UniformizerChernNormalizationData.diagram]
   exact completed_adjunct_square l Y s p
 
-/-- The prescribed comparisons transport the model adjunct to the local coefficient image.
-
-
-
-Compose the four arrow squares by functoriality. Naturality of q_canonical
-identifies the last vertical composite with presentation.comparison. Expanding
-the nested unit inverses and positive-line maps gives localUnitInv and localLine.
-Finally adjunction naturality identifies the coefficient-unit arrow followed by
-the pushed local class with the finite adjunct in Transported. No finite Kummer,
-trace or degree identity is used. The scalar calculation does not assume flatness
-or nonzero coefficients; the formulas also include n=0 and the empty scheme. -/
+/-- The prescribed comparisons transport the model adjunct to the local coefficient image. -/
 theorem diagonalUniformizer_adjunctTransport
     (s : UniformizerChernNormalizationData l Y)
     (p : NormalizedAdjunctPair l Y s) : p.Transported l Y s := by

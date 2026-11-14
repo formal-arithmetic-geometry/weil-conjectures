@@ -28,8 +28,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
 # Finite-ring derived local constancy
 
-Source: Stacks Project, Tag 094G, lemma-locally-constant; the bounded finite-source
-extension of Tag 09BE and connected constancy described in the DAG.
+## References
+
+* Stacks Project, Tags 094G, 09BE
 -/
 
 @[expose] public section
@@ -468,8 +469,7 @@ private theorem derived_mapping_sheaves_restriction
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Bounded finite lisse complexes have finite constant local models, finite lisse
-Hom and isomorphism sheaves, and on a connected scheme the model is any geometric fibre.
-Source: Stacks, Tag 094G and the finite-source extension of Tag 09BE. -/
+Hom and isomorphism sheaves, and on a connected scheme the model is any geometric fibre. -/
 theorem finiteRing_derived_local_constancy
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))

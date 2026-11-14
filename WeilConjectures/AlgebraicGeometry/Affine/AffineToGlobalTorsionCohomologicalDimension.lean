@@ -186,30 +186,7 @@ private theorem isZero_comparison_rightDerived_of_affine_sections
 -- Preserve the names of the original hypothesis binders.
 set_option linter.unusedVariables false in
 /-- The comparison and Leray step turns the affine bound into the bound for a
-finite-type scheme.
-
-
-
-For each point x the stalk of R^r ε_*F is the filtered colimit over open
-neighbourhoods V of H^r(V_et,F|V). Indeed apply ε_* to an injective resolution;
-open restriction preserves injectives and filtered colimits of abelian groups
-are exact, so cohomology commutes with that colimit. Affine neighbourhoods are
-cofinal: refine an intersection of two neighbourhoods to a smaller affine
-neighbourhood, without asserting that the intersection is affine. Such a V
-is affine and finite type over K, and its dimension is at most d since closure
-in X preserves strict chains of irreducible closed subsets of V. Restricting
-F preserves the locally torsion condition: each local annihilating cover over
-V is the same cover in the localized etale site. Thus hAffine makes the
-colimit zero for r > d + c. Stalks detect zero Zariski sheaves, so R^r ε_*F = 0
-in those degrees. Grothendieck vanishing on the Noetherian space X kills the
-E₂ terms for p > d, for every abelian Zariski sheaf, without a torsion condition.
-If p + r = q > 2 * d + c, either p > d or r > d + c. Thus all E₂ terms of
-total degree q are zero, as are their later pages. First-quadrant convergence
-gives a finite filtration of H^q with zero graded pieces, and therefore H^q = 0.
-The same argument covers the empty scheme and d = 0; no separatedness of X is
-used. The field cohomological-dimension hypothesis is unnecessary here: it is
-used only to supply hAffine in the parent theorem.
--/
+finite-type scheme. -/
 theorem subsingleton_H_of_two_mul_add_lt_of_affine_bound
     {K : Type u} [Field K] (c d : ℕ)
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]

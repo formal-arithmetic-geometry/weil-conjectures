@@ -86,6 +86,12 @@ constructed as a cone in complexes of towers. Its source has transition multipli
 by the uniformizer and its target is constant. Thus its transition is precisely
 `(π, 1)`, including on complexes with torsion. Localization defines the derived
 reduction functor; no choice of unrelated levelwise derived arrows is made.
+
+## Implementation details
+
+* `uniformizer` is determined uniquely: the first property of the derived Nakayama
+  resolution theorem specifies its value on every section and every point, so it is not a
+  choice from a bare existence assertion.
 -/
 
 @[expose] public noncomputable section
@@ -225,10 +231,7 @@ def pullEvaluation {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
   towerDerivedEvaluationInterchange
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f) (op n)
 
-/-- Multiplication by the specified coefficient uniformizer on the regular module.
-This choice is determined uniquely: the first property of the cited resolution theorem
-specifies its value on every section and every point, so it is not a choice from a bare
-existence assertion. Source: blueprint Notation 3 and derived Nakayama resolution. -/
+/-- Multiplication by the specified coefficient uniformizer on the regular module. -/
 def uniformizer : End (Mod.regular (DerivedNakayama.integerRing l E)) :=
   (DerivedNakayama.derived_nakayama_resolution l E).choose
 
@@ -237,7 +240,7 @@ abbrev scalar (T : Scheme.{u}) :=
   DerivedNakayama.scalarOnModules l E T (uniformizer l E)
 
 /-- The source of the reduction power map: the same module at every level with
-uniformizer transitions. Source: blueprint Notation 3. -/
+uniformizer transitions. -/
 def scalarTower (T : Scheme.{u}) : AdicCompletion.Modules l E T ⥤ Tow l E T :=
   (Functor.ofOpSequence (X := fun _ : ℕ ↦ 𝟭 (AdicCompletion.Modules l E T))
     (fun _ ↦ scalar l E T)).flip
@@ -407,7 +410,7 @@ def augmentation (T : Scheme.{u}) : dconstant l E T ⟶ red l E T :=
 def completion (T : Scheme.{u}) := red l E T ⋙ rlim l E T
 
 /-- The canonical completion unit: the constant-limit adjunction unit followed by
-Rlim of the degree-zero inclusions. Source: blueprint Notation 4. -/
+Rlim of the degree-zero inclusions. -/
 def kappa (T : Scheme.{u}) : 𝟭 (DerivedCategory (AdicCompletion.Modules l E T)) ⟶
     completion l E T :=
   (constantLimitAdjunction l E T).unit ≫

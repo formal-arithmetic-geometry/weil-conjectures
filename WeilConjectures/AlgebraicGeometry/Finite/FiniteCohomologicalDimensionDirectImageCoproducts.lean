@@ -18,8 +18,9 @@ import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 /-!
 # Finite cohomological dimension and coproducts of derived direct images
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-exc-direct-image-coproducts.md;
-Stacks Project, Tags 0F11 and 07K7.
+## References
+
+* Stacks Project, Tags 0F11 and 07K7
 -/
 
 @[expose] public section
@@ -35,10 +36,7 @@ namespace AlgebraicGeometry.Etale
 /-- Finite cohomological dimension makes qcqs direct image with finite commutative
 coefficients preserve all set-indexed coproducts on the ordinary unbounded derived categories.
 There is no boundedness or constructibility restriction, and the index type may be empty.
-Preservation means that the canonical comparison induced by the coprojections is invertible.
-
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-exc-direct-image-coproducts.md;
-Stacks Project, Tag 0F11, proof of (1), and Tag 07K7. -/
+Preservation means that the canonical comparison induced by the coprojections is invertible. -/
 theorem rightDerivedLowerStar_preservesCoproducts_of_finite_dimension
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U T : Scheme.{u}} (f : U ⟶ T) [QuasiCompact f] [QuasiSeparated f]

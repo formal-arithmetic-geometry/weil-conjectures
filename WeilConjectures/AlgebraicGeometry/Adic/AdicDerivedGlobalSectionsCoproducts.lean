@@ -32,7 +32,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Bounded-below sums and integral derived global sections
 
-Source: Bhatt--Scholze, Lemma 6.3.14(1); Stacks Project, Tags 09A2 and 09A3.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.3.14(1)
+* Stacks Project, Tags 09A2 and 09A3
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +45,7 @@ open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 namespace AlgebraicGeometry.Scheme
 
 /-- Derived sections with any specified scalar action preserve every
-uniformly bounded-below coproduct. No rational algebra structure is required.
-Source: Bhatt--Scholze, Lemma 6.3.14(1); Stacks Project, Tags 09A2 and 09A3. -/
+uniformly bounded-below coproduct. No rational algebra structure is required. -/
 theorem proEtale_derivedGlobalSections_boundedBelow_preservesColimit
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

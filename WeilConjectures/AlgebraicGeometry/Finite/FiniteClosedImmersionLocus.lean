@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 /-!
 # The closed-immersion locus of a finite morphism
 
-Source: Stacks Project, Tags 04DG and 056J, applied to the marked-open step of 0GK7.
+## References
+
+* Stacks Project, Morphisms, Tags 04DG and 056J
+* Stacks Project, Tag 0GK7 (the marked-open step)
 -/
 
 @[expose] public section
@@ -38,11 +41,7 @@ private theorem closedImmersion_fiber_descend
     ⟨⟨hflat.2, hflat.1⟩, inferInstance⟩ h
 
 /-- A finite morphism is a closed immersion over an open containing every open
-closed-immersion locus of an arbitrary base change.
-
-Source: Stacks Project, Morphisms, Tags 04DG and 056J; the marked-open paragraph of
-Tag 0GK7.
--/
+closed-immersion locus of an arbitrary base change. -/
 theorem exists_finite_closedImmersion_locus
     {Y X Y₀ X₀ : Scheme.{u}} (f : Y ⟶ X) [IsFinite f]
     (f₀ : Y₀ ⟶ X₀) (b : Y₀ ⟶ Y) (a : X₀ ⟶ X)

@@ -18,18 +18,24 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 /-!
 # Geometric étale stalks and unbounded derived tensor products
 
-The stage-2 comparison is packaged in `ExactFunctorTensorComparison` to keep
-concrete localization structures behind an API. Its isomorphism, naturality and
-normalization clauses are exposed by `exactFunctorTensorComparison_iff`.
-
-Source: Stacks Project, `sites-cohomology.tex`, Tag 0DEN, clause (1), and Tags 06YS,
-06YT, 06YU and 07A4.
-
 ## Main statements
 
 * `AlgebraicGeometry.Etale.exists_derivedTensor_stalk_iso`: the natural isomorphism,
   normalized by the ordinary total-complex stalk comparison.
 * The three auxiliary instances expose existing additive and coproduct structures.
+
+## Implementation details
+
+* The tensor comparison of an exact monoidal functor is packaged in the irreducible
+  proposition `ExactFunctorTensorComparison`, to keep concrete localization structures behind
+  an API and avoid repeatedly reducing localized monoidal structures. Its isomorphism,
+  naturality and normalization clauses are exposed by `exactFunctorTensorComparison_iff`.
+* In `exactFunctor_tensor_iso` the objects are explicit parameters, so that their chosen
+  derived-category instances determine the source of the component.
+
+## References
+
+* Stacks Project, Tag 0DEN (1), and Tags 04EQ, 06YS, 06YT, 06YU and 07A4
 -/
 
 @[expose] public section
@@ -48,8 +54,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The existing additive structure on the geometric module-stalk functor, exposed for
 termwise passage to complexes and derived categories. This is precisely the structure
-`Point.sheafFiber_additive`, obtained from the skyscraper adjunction.
-Source: Stacks Project, Tag 04EQ. -/
+`Point.sheafFiber_additive`, obtained from the skyscraper adjunction. -/
 noncomputable instance moduleSheafFiber_additive
     (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
@@ -62,9 +67,7 @@ attribute [local irreducible] Functor.leftDerivedFunctorIsoMapDerivedCategory
 -- Transport the derived comparison to the termwise derived functor, including its counit
 -- square. Abstract category structures keep the transport rewrites small.
 /-- Naturality and the localization-counit normalization of a tensor comparison for
-an exact monoidal functor. Keeping this proposition named avoids repeatedly reducing
-localized monoidal structures at concrete coefficient categories.
-Source: Stacks Project, Tag 0DEN. -/
+an exact monoidal functor. -/
 @[irreducible]
 def ExactFunctorTensorComparison
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
@@ -96,7 +99,7 @@ def ExactFunctorTensorComparison
             (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P).app Q)
 
 /-- The defining tensor-comparison clauses, exposed without unfolding the concrete
-localization constructions. Source: Stacks Project, Tag 0DEN. -/
+localization constructions. -/
 theorem exactFunctorTensorComparison_iff
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -129,8 +132,7 @@ theorem exactFunctorTensorComparison_iff
   unfold ExactFunctorTensorComparison
   rfl
 
-/-- The objectwise isomorphisms supplied by a normalized tensor comparison.
-Source: Stacks Project, Tag 0DEN. -/
+/-- The objectwise isomorphisms supplied by a normalized tensor comparison. -/
 theorem ExactFunctorTensorComparison.exists_iso
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -148,9 +150,7 @@ theorem ExactFunctorTensorComparison.exists_iso
   exact ⟨e⟩
 
 /-- An exact monoidal functor preserving flat objects has the normalized derived tensor
-comparison. The proof transports the source left-derived comparison through the exact
-functor comparison and checks its naturality and counit square.
-Source: Stacks Project, Tag 0DEN. -/
+comparison. -/
 theorem exactFunctor_tensor_comparison
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -193,9 +193,7 @@ theorem exactFunctor_tensor_comparison
     rw [← η.hom.naturality_assoc,
       F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac_assoc]
 
-/-- The component of the exact-functor comparison at two given derived objects.
-The objects are explicit parameters so their chosen derived-category instances determine
-the source of the component. Source: Stacks Project, Tag 0DEN. -/
+/-- The component of the exact-functor comparison at two given derived objects. -/
 theorem exactFunctor_tensor_iso
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -213,9 +211,7 @@ theorem exactFunctor_tensor_iso
     (F := F) (exactFunctor_tensor_comparison F)
   exact ⟨e K L⟩
 
-/-- A geometric module-stalk preserves flat objects, by the geometric-fiber criterion
-and the canonical comparison with the lifted point.
-Source: Stacks Project, Tag 0DEN. -/
+/-- A geometric module-stalk preserves flat objects. -/
 instance geometricStalk_preservesFlat
     (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :

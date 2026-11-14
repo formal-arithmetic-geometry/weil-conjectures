@@ -22,8 +22,7 @@ quasi-compact and quasi-separated morphism to a quasi-compact base, the higher d
 quasi-coherent sheaves vanish in degrees bounded uniformly in the sheaf and the base change.
 
 A projective morphism `f : X ⟶ S` is presented through a closed immersion `i : X ⟶ ℙ(n; S)` over
-`S`, as in the blueprint's definition of (H-)projective morphisms. The finiteness of the
-cohomology over a noetherian ring is in
+`S`. The finiteness of the cohomology over a noetherian ring is in
 `WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite`
 (`AlgebraicGeometry.ProjectiveSpace.finite_H`,
 `AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion`).
@@ -37,6 +36,10 @@ cohomology over a noetherian ring is in
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage_of_isClosedImmersion`
   and `isZero_higherDirectImage_of_isClosedImmersion`: coherence and vanishing of the higher
   direct images along a projective morphism.
+
+## References
+
+* [Stacks Project, Tag 01XJ](https://stacks.math.columbia.edu/tag/01XJ)
 -/
 
 @[expose] public section
@@ -56,17 +59,7 @@ variable {X T : Scheme.{u}}
 /-- **Uniform vanishing of the higher direct images.** Let `f : X ⟶ T` be quasi-compact and
 quasi-separated, with `T` quasi-compact. There is an integer `n` such that `R^p f'_* ℱ' = 0` for
 all `p ≥ n`, all base changes `f' : X' ⟶ T'` of `f` along morphisms `g : T' ⟶ T`, and all
-quasi-coherent `𝒪_{X'}`-modules `ℱ'`.
-
-Over an affine open `A` of `T`, cover `f⁻¹ A` by `t` affine opens `Uᵢ`, each intersection
-`Uᵢ ∩ Uⱼ` being covered by at most `m` affine opens (`X` is quasi-separated over `T`). Induction
-on `t` with the Mayer–Vietoris sequence of the higher direct images for `U₁` and `U₂ ∪ ⋯ ∪ U_t`,
-where `U₁ ∩ (U₂ ∪ ⋯ ∪ U_t)` is a union of affine opens of the affine `U₁`, gives the bound
-`n = t m + 2` (`AlgebraicGeometry.Scheme.Modules.higherDirectImageBound_of_affineCover`).
-Over an affine open `W' ⊆ g⁻¹ A` of `T'`, the preimages of these opens in `f'⁻¹ W'` are
-again affine, being fibre products of affine schemes, and form a covering of the same shape
-[Stacks, Tag 01XJ]. Quasi-coherence of the `R^p f_* ℱ`, the first part of the blueprint
-lemma, is `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`. -/
+quasi-coherent `𝒪_{X'}`-modules `ℱ'`. -/
 theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X ⟶ T)
     [QuasiCompact f] [QuasiSeparated f] :
     ∃ n : ℕ, ∀ {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
@@ -147,12 +140,7 @@ variable {n : Type u} [Finite n] {X : Scheme.{u}}
 
 /-- **Vanishing of the cohomology of a projective scheme above the dimension.** Let
 `i : X ⟶ ℙᵈ_A` be a closed immersion, `ℙᵈ_A = ℙ(n; Spec A)` with `Nat.card n = d + 1`, and
-`ℱ` a quasi-coherent `𝒪_X`-module. Then `H^q(X, ℱ) = 0` for `q > d`: the separated scheme `X` is
-covered by the `d + 1` affine preimages of the standard affine opens, and quasi-coherent
-cohomology vanishes above the number of affine opens in such a covering
-(`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`).
-
-This is the vanishing clause of the blueprint lemma. -/
+`ℱ` a quasi-coherent `𝒪_X`-module. Then `H^q(X, ℱ) = 0` for `q > d`. -/
 theorem Scheme.Modules.subsingleton_H_of_isClosedImmersion (A : Type u) [CommRing A]
     (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {d : ℕ} (hn : Nat.card n = d + 1)
@@ -182,13 +170,7 @@ variable {S : Scheme.{u}} (f : X ⟶ S) (i : X ⟶ ℙ(n; S)) [IsClosedImmersion
 include hi in
 /-- **Coherence of the higher direct images of a projective morphism.** Let `S` be locally
 noetherian, `f : X ⟶ S` projective, i.e. `f = π ∘ i` for a closed immersion `i : X ⟶ ℙⁿ_S`,
-and `ℱ` a coherent `𝒪_X`-module. Then every `R^q f_* ℱ` is coherent.
-
-A projective morphism is proper, so this is a case of
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`. (The blueprint proves
-it directly, as the input of the proper case: over an affine open `Spec A` of `S`, the Čech
-complex of a finite affine cover of `f⁻¹(Spec A)` localises, so `R^q f_* ℱ` is the sheaf
-associated with the finite `A`-module `H^q(f⁻¹(Spec A), ℱ)`.) -/
+and `ℱ` a coherent `𝒪_X`-module. Then every `R^q f_* ℱ` is coherent. -/
 theorem isFinitePresentation_higherDirectImage_of_isClosedImmersion [IsLocallyNoetherian S]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by

@@ -11,7 +11,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # The embedded integral constant scalar square
 
-Source: integral-models-stacks, the coefficient comparison preceding Stacks Tag 09C1.
+## References
+* [Stacks Project, Tag 09C1](https://stacks.math.columbia.edu/tag/09C1)
 -/
 
 @[expose] public noncomputable section
@@ -548,7 +549,6 @@ private theorem coefficientMonSquares (X : Scheme.{u})
   exact coefficientSquares X ec e.hom.hom he I J hIJ
 
 /-- The constant scalar square and equality of the transported first residue kernels.
-Source: integral-models-stacks, scalar comparison; Stacks Tag 09C1.
 -/
 theorem embeddedIntegralScalarKernelSquare
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

@@ -89,18 +89,7 @@ private theorem finite_open_constantModSheaf_stalk {X U : Scheme.{u}}
     infer_instance
 
 /-- The cokernel of any monomorphism between the two normalization comparison sheaves
-is constructible and vanishes on the dense isomorphism locus.
-
-
-
-Over V, finite base change and ν|V being an isomorphism identify the two sheaves with
-the same extension-by-zero constant R-sheaf on U ∩ V. At a geometric point in U ∩ V,
-the restricted map α is an injection between two copies of the finite set R, hence
-is a bijection. At a point outside U both stalks vanish. Pullback preserves monos,
-and geometric stalks detect isomorphisms, so V^*α is an isomorphism. Pullback also
-preserves cokernels; consequently V^*(cokernel α) is zero. This argument applies to
-any mono α, not just the canonical diagonal. Finiteness of R is essential for this
-last argument; no such general claim is made for infinite coefficient sets. -/
+is constructible and vanishes on the dense isomorphism locus. -/
 theorem normalization_mono_properties {k : Type u} [Field k] [IsAlgClosed k]
     {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] (V : X.Opens) (hV : Dense (V : Set X))

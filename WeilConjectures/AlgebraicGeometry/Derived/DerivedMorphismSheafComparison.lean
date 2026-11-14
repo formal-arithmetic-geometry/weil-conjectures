@@ -30,8 +30,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedHomFini
 /-!
 # Canonical comparison and evaluation of derived morphism sheaves
 
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions.
+The constructions use the localization and inverse-image adjunctions.
+
+## References
+
+* Stacks Project, Tags 09B1, 0F63
 -/
 
 @[expose] public section
@@ -113,25 +116,16 @@ namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
 
-/-- The actual inverse-image functor on set sheaves for the etale/pro-etale comparison.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The actual inverse-image functor on set sheaves for the etale/pro-etale comparison. -/
 noncomputable abbrev comparisonSetUpperStar :=
   Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
     (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)
 
-/-- The exact module-sheaf comparison inverse image, applied to the actual derived category.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The exact module-sheaf comparison inverse image, applied to the actual derived category. -/
 noncomputable abbrev derivedComparison :=
   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory
 
-/-- The etale-to-pro-etale inclusion induces a continuous functor on localized sites.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The etale-to-pro-etale inclusion induces a continuous functor on localized sites. -/
 theorem comparisonSlice_continuous (V : X.Etale) :
     (Over.post (toProEt X)).IsContinuous (X.smallEtaleTopology.over V)
       ((ProEt.topology X).over ((toProEt X).obj V)) := by
@@ -142,55 +136,37 @@ theorem comparisonSlice_continuous (V : X.Etale) :
 
 attribute [instance] comparisonSlice_continuous
 
-/-- The constructed comparison inverse image on the localized etale and pro-etale sites.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The constructed comparison inverse image on the localized etale and pro-etale sites. -/
 noncomputable abbrev comparisonSliceUpperStar (V : X.Etale) :=
   Functor.sheafPullbackConstruction.sheafPullback (Over.post (toProEt X))
     (ModuleCat.{u + 1} B) (X.smallEtaleTopology.over V)
       ((ProEt.topology X).over ((toProEt X).obj V))
 
-/-- The constructed pullback/pushforward adjunction on the localized sites.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The constructed pullback/pushforward adjunction on the localized sites. -/
 noncomputable abbrev comparisonSliceAdjunction (V : X.Etale) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Over.post (toProEt X))
     (ModuleCat.{u + 1} B) (X.smallEtaleTopology.over V)
       ((ProEt.topology X).over ((toProEt X).obj V))
 
-/-- The localized comparison direct image is additive, section by section.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The localized comparison direct image is additive, section by section. -/
 instance comparisonSliceLowerStar_additive (V : X.Etale) :
     ((Over.post (toProEt X)).sheafPushforwardContinuous (ModuleCat.{u + 1} B)
       (X.smallEtaleTopology.over V)
       ((ProEt.topology X).over ((toProEt X).obj V))).Additive where
   map_add := by intros; rfl
 
-/-- The localized comparison inverse image is additive by its adjunction.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The localized comparison inverse image is additive by its adjunction. -/
 noncomputable instance comparisonSliceUpperStar_additive (V : X.Etale) :
     (comparisonSliceUpperStar X B V).Additive :=
   (comparisonSliceAdjunction X B V).left_adjoint_additive
 
-/-- The localized comparison inverse image preserves finite colimits as a left adjoint.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The localized comparison inverse image preserves finite colimits as a left adjoint. -/
 instance comparisonSliceUpperStar_preservesFiniteColimits (V : X.Etale) :
     PreservesFiniteColimits (comparisonSliceUpperStar X B V) :=
   letI := (comparisonSliceAdjunction X B V).leftAdjoint_preservesColimits
   PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
 
-/-- The localized comparison inverse image is left exact.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The localized comparison inverse image is left exact. -/
 theorem comparisonSliceUpperStar_preservesFiniteLimits (V : X.Etale) :
     PreservesFiniteLimits (comparisonSliceUpperStar X B V) := by
   have : RepresentablyFlat (Over.post (X := V) (toProEt X)) :=
@@ -202,10 +178,7 @@ theorem comparisonSliceUpperStar_preservesFiniteLimits (V : X.Etale) :
 attribute [instance] comparisonSliceUpperStar_preservesFiniteLimits
 
 /-- The canonical slice base-change map, defined by restricting the unit of the global comparison
-adjunction and transposing under the slice adjunction.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+adjunction and transposing under the slice adjunction. -/
 noncomputable def comparisonSliceBaseMap (V : X.Etale)
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
     (comparisonSliceUpperStar X B V).obj (M.over V) ⟶
@@ -224,10 +197,7 @@ private noncomputable def comparisonStarIso (V : X.Etale) :
       ext
       simpa using prodComparison_natural (toProEt X) (𝟙 V) f)
 
-/-- The specified canonical slice base-change map is invertible and natural in the module sheaf.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The specified canonical slice base-change map is invertible and natural in the module sheaf. -/
 theorem comparisonSliceBaseMap_properties (V : X.Etale) :
     (∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B),
       IsIso (comparisonSliceBaseMap X B V M)) ∧
@@ -296,10 +266,7 @@ theorem comparisonSliceBaseMap_properties (V : X.Etale) :
   · intro M N f
     simpa only [he, Functor.comp_map] using e.hom.naturality f
 
-/-- The natural isomorphism formed from the specified invertible slice base-change map.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The natural isomorphism formed from the specified invertible slice base-change map. -/
 noncomputable def comparisonSliceBaseIso (V : X.Etale) :
     X.smallEtaleTopology.overPullback (ModuleCat.{u + 1} B) V ⋙
       comparisonSliceUpperStar X B V ≅
@@ -311,10 +278,7 @@ noncomputable def comparisonSliceBaseIso (V : X.Etale) :
     ((comparisonSliceBaseMap_properties X B V).2 _ _)
 
 /-- The induced canonical commutation of comparison inverse image and restriction on derived
-categories.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+categories. -/
 noncomputable def derivedComparisonSliceIso (V : X.Etale) :
     derivedSliceRestriction X.smallEtaleTopology B V ⋙
       (comparisonSliceUpperStar X B V).mapDerivedCategory ≅
@@ -488,10 +452,7 @@ private theorem derivedComparisonRestrictionCoherence {V W : X.Etale} (g : W ⟶
 
 variable (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
 
-/-- Pullback of an actual etale-local derived morphism under the localized comparison functor.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- Pullback of an actual etale-local derived morphism under the localized comparison functor. -/
 noncomputable def derivedComparisonLocalHom (V : X.Etale)
     (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ⟶
       (derivedSliceRestriction X.smallEtaleTopology B V).obj D) :
@@ -503,10 +464,7 @@ noncomputable def derivedComparisonLocalHom (V : X.Etale)
     (comparisonSliceUpperStar X B V).mapDerivedCategory.map f ≫
       (derivedComparisonSliceIso X B V).hom.app D
 
-/-- Pullback of an actual etale-local derived isomorphism under that same functor.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- Pullback of an actual etale-local derived isomorphism under that same functor. -/
 noncomputable def derivedComparisonLocalIso (V : X.Etale)
     (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ≅
       (derivedSliceRestriction X.smallEtaleTopology B V).obj D) :
@@ -552,26 +510,17 @@ private theorem derivedComparisonLocalHom_natural {V W : X.Etale} (g : W ⟶ V)
   simp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn, ← hD]
 
-/-- The pro-etale sheafification of local derived Hom between the pulled-back objects.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The pro-etale sheafification of local derived Hom between the pulled-back objects. -/
 noncomputable abbrev derivedComparisonHomTarget :=
   derivedLocalHomSheaf (ProEt.topology X) B
     ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
 
-/-- The pro-etale sheafification of local derived Isom between the pulled-back objects.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The pro-etale sheafification of local derived Isom between the pulled-back objects. -/
 noncomputable abbrev derivedComparisonIsoTarget :=
   derivedLocalIsoSheaf (ProEt.topology X) B
     ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
 
-/-- Pull back a local derived morphism and apply the pro-etale sheafification unit.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- Pull back a local derived morphism and apply the pro-etale sheafification unit. -/
 noncomputable def derivedComparisonHomUnit (V : X.Etale)
     (f : (derivedLocalHomPresheaf X.smallEtaleTopology B A D).obj (op V)) :
     (derivedComparisonHomTarget X B A D).obj.obj (op ((toProEt X).obj V)) :=
@@ -580,10 +529,7 @@ noncomputable def derivedComparisonHomUnit (V : X.Etale)
       ((derivedComparison X B).obj A) ((derivedComparison X B).obj D))).app
         (op ((toProEt X).obj V)) (derivedComparisonLocalHom X B A D V f)
 
-/-- Pull back a local derived isomorphism and apply the pro-etale sheafification unit.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- Pull back a local derived isomorphism and apply the pro-etale sheafification unit. -/
 noncomputable def derivedComparisonIsoUnit (V : X.Etale)
     (f : (derivedLocalIsoPresheaf X.smallEtaleTopology B A D).obj (op V)) :
     (derivedComparisonIsoTarget X B A D).obj.obj (op ((toProEt X).obj V)) :=
@@ -592,10 +538,8 @@ noncomputable def derivedComparisonIsoUnit (V : X.Etale)
       ((derivedComparison X B).obj A) ((derivedComparison X B).obj D))).app
         (op ((toProEt X).obj V)) (derivedComparisonLocalIso X B A D V f)
 
-/-- Local derived pullback followed by sheafification commutes with restriction on the etale site.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- Local derived pullback followed by sheafification commutes with restriction on the etale
+site. -/
 theorem derivedComparisonUnits_natural :
     (∀ (V W : X.Etale) (g : W ⟶ V)
       (f : (derivedLocalHomPresheaf X.smallEtaleTopology B A D).obj (op V)),
@@ -624,10 +568,7 @@ theorem derivedComparisonUnits_natural :
     apply Iso.ext
     exact derivedComparisonLocalHom_natural X B A D g f.hom
 
-/-- The presheaf map formed from the specified local derived Hom pullbacks.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The presheaf map formed from the specified local derived Hom pullbacks. -/
 noncomputable def derivedComparisonHomPresheafMap :
     derivedLocalHomPresheaf X.smallEtaleTopology B A D ⟶
       ((toProEt X).sheafPushforwardContinuous (Type (u + 1))
@@ -640,10 +581,7 @@ noncomputable def derivedComparisonHomPresheafMap :
     intro a
     exact (derivedComparisonUnits_natural X B A D).1 _ _ f.unop a
 
-/-- The presheaf map formed from the specified local derived Isom pullbacks.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The presheaf map formed from the specified local derived Isom pullbacks. -/
 noncomputable def derivedComparisonIsoPresheafMap :
     derivedLocalIsoPresheaf X.smallEtaleTopology B A D ⟶
       ((toProEt X).sheafPushforwardContinuous (Type (u + 1))
@@ -657,10 +595,7 @@ noncomputable def derivedComparisonIsoPresheafMap :
     exact (derivedComparisonUnits_natural X B A D).2 _ _ f.unop a
 
 /-- The canonical comparison map on derived Hom sheaves: first transpose along sheafification, then
-along the comparison adjunction. Its data comes from actual local derived pullback.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+along the comparison adjunction. Its data comes from actual local derived pullback. -/
 noncomputable def derivedHomSheafComparison :
     (comparisonSetUpperStar X).obj
       (derivedLocalHomSheaf X.smallEtaleTopology B A D) ⟶
@@ -669,10 +604,7 @@ noncomputable def derivedHomSheafComparison :
     (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
       (derivedComparisonHomPresheafMap X B A D))
 
-/-- The analogous canonical comparison map on derived Isom sheaves, using actual isomorphisms.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The analogous canonical comparison map on derived Isom sheaves, using actual isomorphisms. -/
 noncomputable def derivedIsoSheafComparison :
     (comparisonSetUpperStar X).obj
       (derivedLocalIsoSheaf X.smallEtaleTopology B A D) ⟶
@@ -681,18 +613,12 @@ noncomputable def derivedIsoSheafComparison :
     (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
       (derivedComparisonIsoPresheafMap X B A D))
 
-/-- The pro-etale sheafification unit on the local derived Hom presheaf at the specified object.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The pro-etale sheafification unit on the local derived Hom presheaf at the specified object. -/
 noncomputable abbrev proEtaleDerivedHomUnit (U : X.ProEt) :=
   (toSheafify (ProEt.topology X) (derivedLocalHomPresheaf (ProEt.topology X) B
     ((derivedComparison X B).obj A) ((derivedComparison X B).obj D))).app (op U)
 
-/-- The pro-etale sheafification unit on the local derived Isom presheaf at the specified object.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The pro-etale sheafification unit on the local derived Isom presheaf at the specified object. -/
 noncomputable abbrev proEtaleDerivedIsoUnit (U : X.ProEt) :=
   (toSheafify (ProEt.topology X) (derivedLocalIsoPresheaf (ProEt.topology X) B
     ((derivedComparison X B).obj A) ((derivedComparison X B).obj D))).app (op U)
@@ -876,10 +802,7 @@ private theorem bijectiveUnitOfFiniteProducts
       CategoryTheory.Functor.map_id, types_id_apply]
 
 /-- The pro-etale sheafification units for these two presheaves are bijective on affine weakly
-contractible objects.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+contractible objects. -/
 theorem proEtaleDerivedUnits_bijective (U : X.ProEt) [IsAffine U.left]
     (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U) :
     Function.Bijective (proEtaleDerivedHomUnit X B A D U) ∧
@@ -894,10 +817,7 @@ theorem proEtaleDerivedUnits_bijective (U : X.ProEt) [IsAffine U.left]
       (proEtaleDerivedHom_finiteProducts X B I W c hc hsec) _ _
 
 /-- The canonical evaluation map: the comparison map followed by the unique inverse of the bijective
-pro-etale sheafification unit. Only the proof of bijectivity is postponed.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+pro-etale sheafification unit. -/
 noncomputable def derivedHomEvaluation (U : X.ProEt) [IsAffine U.left]
     (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)
     (s : ((comparisonSetUpperStar X).obj
@@ -908,10 +828,7 @@ noncomputable def derivedHomEvaluation (U : X.ProEt) [IsAffine U.left]
     (proEtaleDerivedUnits_bijective X B A D U hU).1).symm
       ((derivedHomSheafComparison X B A D).hom.app (op U) s)
 
-/-- The same canonical evaluation construction on actual derived isomorphisms.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The same canonical evaluation construction on actual derived isomorphisms. -/
 noncomputable def derivedIsoEvaluation (U : X.ProEt) [IsAffine U.left]
     (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)
     (s : ((comparisonSetUpperStar X).obj
@@ -925,10 +842,7 @@ noncomputable def derivedIsoEvaluation (U : X.ProEt) [IsAffine U.left]
 variable {B' : Type (u + 1)} [CommRing B']
 
 /-- The canonical map commuting scalar restriction with comparison inverse image, obtained by
-transposing the restriction of the comparison adjunction unit.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+transposing the restriction of the comparison adjunction unit. -/
 noncomputable def comparisonRestrictScalarsMap (φ : B →+* B')
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B')) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).obj
@@ -939,10 +853,7 @@ noncomputable def comparisonRestrictScalarsMap (φ : B →+* B')
     ((Sheaf.restrictScalars X.smallEtaleTopology φ).map
       ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B') X).unit.app M))
 
-/-- The specified scalar-restriction comparison is invertible and natural.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The specified scalar-restriction comparison is invertible and natural. -/
 theorem comparisonRestrictScalarsMap_properties (φ : B →+* B') :
     (∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B'),
       IsIso (comparisonRestrictScalarsMap X B φ M)) ∧
@@ -979,10 +890,7 @@ theorem comparisonRestrictScalarsMap_properties (φ : B →+* B') :
   · intro M N f
     simpa only [he, Functor.comp_map] using e.hom.naturality f
 
-/-- The canonical scalar-restriction comparison isomorphism on module sheaves.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The canonical scalar-restriction comparison isomorphism on module sheaves. -/
 noncomputable def comparisonRestrictScalarsSheafIso (φ : B →+* B') :
     Sheaf.restrictScalars X.smallEtaleTopology φ ⋙
       ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X ≅
@@ -993,10 +901,7 @@ noncomputable def comparisonRestrictScalarsSheafIso (φ : B →+* B') :
       ((comparisonRestrictScalarsMap_properties X B φ).1 M))
     ((comparisonRestrictScalarsMap_properties X B φ).2 _ _)
 
-/-- The canonical scalar-restriction comparison induced on derived categories.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; localization and inverse-image
-adjunctions. -/
+/-- The canonical scalar-restriction comparison induced on derived categories. -/
 noncomputable def comparisonRestrictScalarsIso (φ : B →+* B') :
     Sheaf.derivedRestrictScalars X.smallEtaleTopology φ ⋙ derivedComparison X B ≅
       derivedComparison X B' ⋙ Sheaf.derivedRestrictScalars (ProEt.topology X) φ :=

@@ -100,7 +100,9 @@ import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
 
 /-! # K-flatness under completed-coefficient open extension
 
-Source: Stacks Tags 00XZ, 0E8I and 06YN.
+## References
+
+* Stacks Project, Tags 00XZ, 0E8I and 06YN
 -/
 
 @[expose] public noncomputable section
@@ -297,8 +299,7 @@ private theorem cbcModuleToSlice_kFlat
     ⟨by intros; with_unfolding_all rfl⟩
   exact reindex_kFlat f c P hP hf
 
-/-- Completed-coefficient open extension preserves K-flat flat-term representatives.
-Source: Stacks Tags 00XZ, 0E8I and 06YN. -/
+/-- Completed-coefficient open extension preserves K-flat flat-term representatives. -/
 theorem cbcOpenShriek_kFlat_of_flatTerms
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {U X : Scheme.{u}} (j : U ⟶ X) (hj : IsOpenImmersion j)

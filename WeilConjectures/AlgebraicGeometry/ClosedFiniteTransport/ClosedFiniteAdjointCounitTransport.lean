@@ -21,12 +21,14 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Closed finite exceptional inverse image and its counit
 
-Source: blueprint main-20261015, sk-prop-a1, first localization triangle;
-Stacks Project, Tags 04CA, 015F, 09A6 and 09BM.
+This concerns the first localization triangle. The auxiliary definitions are the specified
+canonical identifications, not additional choices of functors or adjunctions. The support
+adjoint is exactly the one used by `exists_etale_closedSupportTriangle`.
 
-The auxiliary definitions are the specified canonical identifications, not additional
-choices of functors or adjunctions. The support adjoint is exactly the one used by
-`exists_etale_closedSupportTriangle`.
+## References
+
+* Stacks Project, Tags 015F, 03S3, 04CA, 09A6, 09BM
+* Bhatt–Scholze, Proposition 5.2.6
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +57,7 @@ instance compactSupportIsLeftAdjoint :
   Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A
     (Compactification.ofIsProper i)
 
-/-- The canonical identity/proper compactification comparison, on all unbounded objects.
-Source: sk-prop-a1, first localization triangle; identity extension by zero, Tag 03S3. -/
+/-- The canonical identity/proper compactification comparison, on all unbounded objects. -/
 def compactSupportIso :
     Etale.rightDerivedLowerShriekOfCompactification
         (ModuleCat.{u + 1} A) (Compactification.ofIsProper i) ≅
@@ -65,8 +66,7 @@ def compactSupportIso :
     (Etale.mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) Z) _ ≪≫
     Functor.leftUnitor _
 
-/-- The second canonical identification with termwise closed direct image.
-Source: Stacks Tags 04CA and 015F, exact closed pushforward. -/
+/-- The second canonical identification with termwise (exact) closed direct image. -/
 def termwiseIso :
     (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor ≅
       (Etale.lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategory :=
@@ -75,8 +75,7 @@ def termwiseIso :
 variable (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 variable (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
-/-- Termwise pro-etale closed direct image, with exactness supplied by the complement.
-Source: Stacks Tag 09BM. -/
+/-- Termwise pro-etale closed direct image, with exactness supplied by the complement. -/
 def proTermwise :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :=
@@ -84,8 +83,7 @@ def proTermwise :
   (lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategory
 
 /-- The specified closed comparison: descend the underived direct-image comparison
-termwise and identify the exact etale derived direct image with its termwise descent.
-Source: Stacks Tags 09A6 and 09BM. -/
+termwise and identify the exact etale derived direct image with its termwise descent. -/
 def closedComparison :
     (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ≅
@@ -114,8 +112,7 @@ def transportedCounit
           (compactSupportIso A i)).counit.app _) ≫
     (derivedComparisonAdjunction (ModuleCat.{u + 1} A) X).counit.app K
 
-/-- The inverse used in the classical-input comparison is the inverse of the actual unit.
-Source: Bhatt--Scholze, Proposition 5.2.6; sk-prop-a1. -/
+/-- The inverse used in the classical-input comparison is the inverse of the actual unit. -/
 def comparisonUnitIso (T : Scheme.{u})
     (B : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     B.obj ≅ ((comparisonLowerStar (ModuleCat.{u + 1} A) T).rightDerivedFunctor).obj

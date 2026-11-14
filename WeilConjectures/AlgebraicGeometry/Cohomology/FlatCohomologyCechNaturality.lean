@@ -10,9 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBas
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles
 
-/-! # Compatibility of the Cech model with the canonical flat cohomology comparison
+/-! # Compatibility of the Čech model with the canonical flat cohomology comparison
 
-Source: Stacks Project, Tags 02KH, 01XD and 02KE.
+## References
+
+* Stacks Project, Lemma 30.5.2 (Tag 02KH), Lemma 30.2.6 (Tag 01XD) and Tag 02KE
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}} {ι : Type u}
 
-/-- Identify categorical scalar extension with tensor using the given algebra action.
-Source: Mathlib's definition of extendScalars and the algebra smul identity. -/
+/-- Identify categorical scalar extension with tensor using the given algebra action. -/
 noncomputable def extendScalarsTensorIso (A : Type u) [AddCommGroup A] [Module R A] :
     (ModuleCat.extendScalars (algebraMap R S)).obj (ModuleCat.of R A) ≅
       ModuleCat.of S (TensorProduct R S A) := by
@@ -51,8 +52,7 @@ noncomputable def extendScalarsTensorIso (A : Type u) [AddCommGroup A] [Module R
         | add x y hx hy => simp only [smul_add, map_add, hx, hy] }
   exact eS.toModuleIso
 
-/-- The tensor identification is the identity on pure tensors.
-Source: the defining tensor maps in Mathlib. -/
+/-- The tensor identification is the identity on pure tensors. -/
 lemma extendScalarsTensorIso_hom_tmul (A : Type u) [AddCommGroup A] [Module R A]
     (b : S) (a : A) :
     (extendScalarsTensorIso (R := R) (S := S) A).hom
@@ -60,9 +60,7 @@ lemma extendScalarsTensorIso_hom_tmul (A : Type u) [AddCommGroup A] [Module R A]
   rfl
 
 
-/-- Exact scalar extension commutes with the homology of the ordered Cech complex.
-This uses only the three terms at the selected degree; boundedness is unnecessary.
-Source: Mathlib `ShortComplex.mapHomologyIso`, as in Stacks Tag 02KH. -/
+/-- Exact scalar extension commutes with the homology of the ordered Čech complex. -/
 noncomputable def flatCechHomologyIso [Module.Flat R S] (f : X ⟶ Spec (.of R))
     (U : ι → X.Opens) (M : X.Modules) (q : ℕ) :
     (ModuleCat.extendScalars (algebraMap R S)).obj ((cechOver f U M).homology q) ≅
@@ -134,11 +132,7 @@ private theorem extendedCechCycles_homology [Module.Flat R S]
     rw [HomologicalComplex.liftCycles_i]
 
 /-- Leray identifications can be chosen so that any chain map with the canonical
-pure-tensor formula induces the specified sheaf cohomology comparison. This is a
-compatibility statement; it does not assert that the chain map is invertible.
-
-Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), separated-case paragraph;
-Lemma 30.2.6 (Tag 01XD), and the canonical comparison of Tag 02KE. -/
+pure-tensor formula induces the specified sheaf cohomology comparison. -/
 theorem exists_cechBaseChange_cohomology_square [Module.Flat R S]
     (f : X ⟶ Spec (.of R)) [IsSeparated f] [Finite ι]
     (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)

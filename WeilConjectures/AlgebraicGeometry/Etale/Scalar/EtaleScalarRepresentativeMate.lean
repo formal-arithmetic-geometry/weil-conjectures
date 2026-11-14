@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 
-/-! # The scalar representative as an adjunction mate. -/
+/-! # The scalar representative as an adjunction mate.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,8 +27,7 @@ attribute [local irreducible] HasDerivedCategory.ofHasKInjectiveResolutions
   HasDerivedCategory.standard
 
 /-- The fixed scalar cochain representative is the inverse mate of the exact restriction
-localization factor.
-Source: Stacks 03EK, 06YY; normalization proof step 1. -/
+localization factor. -/
 theorem etaleScalarRepresentativeMate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})

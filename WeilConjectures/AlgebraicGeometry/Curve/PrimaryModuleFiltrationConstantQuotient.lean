@@ -17,8 +17,9 @@ import Mathlib.Algebra.Field.ULift
 /-!
 # Constant prime-field quotient identification
 
-Source: Stacks Project, Tag 04JQ; blueprint `theorem-cohomology-curves--2`,
-proof paragraphs 1--2.
+## References
+
+* Stacks Project, Tags 04JQ, 03QT, 03QW
 -/
 
 @[expose] public section
@@ -64,8 +65,7 @@ private theorem constant_fin_power (T : Scheme.{u}) (ℓ d : ℕ) :
       F.mapBiprod (AddCommGrpCat.of (Fin d → ULift.{u + 1} (ZMod ℓ)))
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))) ≪≫ biprod.mapIso hd (Iso.refl _)⟩
 
-/-- Source: Stacks Project, Tags 04JQ, 03QT and 03QW; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2. -/
+/-- A trivial primary representation gives a constant prime-field sheaf. -/
 private theorem primary_trivialRepresentation_constant
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -152,8 +152,8 @@ private theorem primary_trivialRepresentation_constant
     (C.inverse.mapIso r' ≪≫ (C.unitIso.app F).symm) ≪≫
       (upperStarConstantSheafIso AddCommGrpCat.{u + 1} e.inv).app (AddCommGrpCat.of V)⟩
 
-/-- Source: Stacks Project, Tag 04JQ; blueprint `theorem-cohomology-curves--2`,
-proof paragraphs 1--2. -/
+/-- The trivial quotient of a primary filtration is identified with a constant prime-field
+sheaf. -/
 theorem primaryTrivialQuotient_constant
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

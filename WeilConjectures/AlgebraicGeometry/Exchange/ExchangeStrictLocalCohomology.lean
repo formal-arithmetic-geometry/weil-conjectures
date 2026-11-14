@@ -34,7 +34,9 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 
 /-! # Testing exchange on strict-local cohomology
 
-Source: Stacks Project, Tag 0EZU, lemma-base-change-f-star-general-stalks.
+## References
+
+* [Stacks Project, Tag 0EZU](https://stacks.math.columbia.edu/tag/0EZU)
 -/
 
 @[expose] public section
@@ -47,12 +49,9 @@ namespace AlgebraicGeometry.Etale
 
 /-- The degree-q exchange is invertible exactly when its strict-local cohomology
 pullbacks are bijective. The ring map `a` is specified by its structural and geometric-point
-compatibilities: these characterize the canonical map of strict henselizations. Thus
-quantifying over such `a` does not choose an arbitrary map over the base. The target of
+compatibilities, which characterize the canonical map of strict henselizations. The target of
 `cohomologyMap` uses the iterated inverse image of `F`, canonically identified with its
-inverse image under the projection to `T`.
-
-Source: Stacks Project, Tag 0EZU, lemma-base-change-f-star-general-stalks. -/
+inverse image under the projection to `T`. -/
 theorem isIso_exchange_iff_strictLocalCohomology
     {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
     [QuasiCompact g] [QuasiSeparated g]

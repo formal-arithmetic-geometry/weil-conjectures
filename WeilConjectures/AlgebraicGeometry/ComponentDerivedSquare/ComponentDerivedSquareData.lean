@@ -58,11 +58,19 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 
 /-! # Data for the component square on ordinary unbounded derived categories
 
-
 The data structures below spell out the simultaneous witnesses and normalizations of
 this one statement. All inverse images are the actual site inverse images. Module
 transport uses the existing internal-module encoding and its equivalence with
 `ringedSiteModules`; the derived categories and tensors are the ordinary ones.
+
+## Implementation details
+
+* `tensorSquareMonoidal` takes the four tensor structures as parameters, which avoids
+  recomputing their derived constructions.
+
+## References
+
+* HRS, Section 3, construction (4.1) and Corollary 4.4(2).
 -/
 
 @[expose] public noncomputable section
@@ -78,8 +86,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.ComponentDerivedSquare
 
-/-- The direct image of the relative component site is restriction along the recorded tests.
-Source: HRS (4.1). -/
+/-- The direct image of the relative component site is restriction along the recorded tests. -/
 def componentDirect (X : Scheme.{u}) [IsAffine X]
     (hc : (CondensedRing.componentTests X).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -89,8 +96,7 @@ def componentDirect (X : Scheme.{u}) [IsAffine X]
     ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
     (Scheme.ProEt.topology X)
 
-/-- Restriction carries the canonical pointwise lax tensor maps.
-Source: HRS (4.1). -/
+/-- Restriction carries the canonical pointwise lax tensor maps. -/
 instance componentDirectMonoidal (X : Scheme.{u}) [IsAffine X]
     (hc : (CondensedRing.componentTests X).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -98,8 +104,7 @@ instance componentDirectMonoidal (X : Scheme.{u}) [IsAffine X]
   dsimp only [componentDirect]
   infer_instance
 
-/-- The actual component-site adjunction, including its specified unit.
-Source: HRS (4.1). -/
+/-- The actual component-site adjunction, including its specified unit. -/
 def componentAdjunction (X : Scheme.{u}) [IsAffine X]
     (hc : (CondensedRing.componentTests X).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -110,15 +115,13 @@ def componentAdjunction (X : Scheme.{u}) [IsAffine X]
     ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
     (Scheme.ProEt.topology X)
 
-/-- The slice projection adjunction; its inverse image is restriction to the slice.
-Source: HRS (4.1). -/
+/-- The slice projection adjunction; its inverse image is restriction to the slice. -/
 def slicePointAdjunction (P : Profinite.{u}) :=
   (Over.forgetAdjStar P).sheafPushforwardContinuous
     ((coherentTopology Profinite.{u}).over P) (coherentTopology Profinite.{u})
     (E := Ab.{u + 1})
 
-/-- The structural adjunction with absolute profinite tests as its direct image.
-Source: HRS (4.1). -/
+/-- The structural adjunction with absolute profinite tests as its direct image. -/
 def absoluteAdjunction (X : Scheme.{u}) :=
   (pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).ofNatIsoRight
@@ -128,8 +131,7 @@ def absoluteAdjunction (X : Scheme.{u}) :=
         (Scheme.ProEt.topology X))
 
 /-- Simultaneous site and coefficient witnesses, with canonical adjunctions and
-absolute-test normalization. These fields add no hypothesis to the theorem.
-Source: HRS construction (4.1). -/
+absolute-test normalization. -/
 structure Corner (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X] where
   [continuous : (CondensedRing.componentTests X).IsContinuous
     ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -176,8 +178,7 @@ structure Corner (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X
 attribute [instance] Corner.braided Corner.finiteLimits Corner.finiteColimits
   Corner.beta_monoidal
 
-/-- The actual module inverse image, transporting along the prescribed coefficient iso.
-Source: HRS (4.1). -/
+/-- The actual module inverse image, transporting along the prescribed coefficient iso. -/
 def Corner.modules (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Corner Λ X) :
     Mod (Sheaf ((coherentTopology Profinite.{u}).over (affineComponentSpace X)) Ab.{u + 1})
@@ -186,8 +187,7 @@ def Corner.modules (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine
   s.inverse.mapMod (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X)) ⋙
     Mod.comap s.coefficient.inv.hom
 
-/-- Additivity comes from finite-product preservation of the actual inverse image.
-Source: HRS (4.1). -/
+/-- Additivity comes from finite-product preservation of the actual inverse image. -/
 instance Corner.modulesAdditive (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Corner Λ X) : (s.modules Λ X).Additive :=
   letI : PreservesFiniteLimits (s.modules Λ X) := by
@@ -195,33 +195,28 @@ instance Corner.modulesAdditive (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{
     infer_instance
   Functor.additive_of_preserves_binary_products _
 
-/-- The actual direct image for a map of component spaces is restriction along base change.
-Source: HRS (4.1). -/
+/-- The actual direct image for a map of component spaces is restriction along base change. -/
 def sliceDirect {P Q : Profinite.{u}} (h : Q ⟶ P) :=
   (Over.pullback h).sheafPushforwardContinuous Ab.{u + 1}
     ((coherentTopology Profinite.{u}).over P) ((coherentTopology Profinite.{u}).over Q)
 
-/-- Slice restriction carries its canonical pointwise lax tensor maps.
-Source: HRS (4.1). -/
+/-- Slice restriction carries its canonical pointwise lax tensor maps. -/
 instance sliceDirectMonoidal {P Q : Profinite.{u}} (h : Q ⟶ P) :
     (sliceDirect h).LaxMonoidal := by
   dsimp only [sliceDirect]
   infer_instance
 
-/-- The inverse image left adjoint to restriction along the profinite base-change functor.
-Source: HRS (4.1). -/
+/-- The inverse image left adjoint to restriction along the profinite base-change functor. -/
 def sliceInverse {P Q : Profinite.{u}} (h : Q ⟶ P) :=
   Functor.sheafPullbackConstruction.sheafPullback (Over.pullback h) Ab.{u + 1}
     ((coherentTopology Profinite.{u}).over P) ((coherentTopology Profinite.{u}).over Q)
 
-/-- Its canonical adjunction, used to specify all mate normalizations.
-Source: HRS (4.1). -/
+/-- Its canonical adjunction, used to specify all mate normalizations. -/
 def sliceAdjunction {P Q : Profinite.{u}} (h : Q ⟶ P) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Over.pullback h) Ab.{u + 1}
     ((coherentTopology Profinite.{u}).over P) ((coherentTopology Profinite.{u}).over Q)
 
-/-- The coefficient comparison on a profinite slice is fixed by the canonical product map.
-Source: HRS construction (4.1). -/
+/-- The coefficient comparison on a profinite slice is fixed by the canonical product map. -/
 structure Slice (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} (h : Q ⟶ P) where
   inverse : Sheaf ((coherentTopology Profinite.{u}).over P) Ab.{u + 1} ⥤
     Sheaf ((coherentTopology Profinite.{u}).over Q) Ab.{u + 1}
@@ -253,8 +248,7 @@ structure Slice (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} (h : Q 
 
 attribute [instance] Slice.braided Slice.finiteLimits Slice.finiteColimits Slice.beta_monoidal
 
-/-- The actual slice module inverse image with the canonical coefficient transport.
-Source: HRS (4.1). -/
+/-- The actual slice module inverse image with the canonical coefficient transport. -/
 def Slice.modules (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} {h : Q ⟶ P}
     (s : Slice Λ h) :
     Mod (Sheaf ((coherentTopology Profinite.{u}).over P) Ab.{u + 1})
@@ -264,44 +258,38 @@ def Slice.modules (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} {h : 
   s.inverse.mapMod (CondensedRing.profiniteCoefficient Λ.X P) ⋙
     Mod.comap s.coefficient.inv.hom
 
-/-- Finite limits of the component module pullback are computed on underlying sheaves.
-Source: HRS (4.1). -/
+/-- Finite limits of the component module pullback are computed on underlying sheaves. -/
 instance Corner.modulesFiniteLimits (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u})
     [IsAffine X] (s : Corner Λ X) : PreservesFiniteLimits (s.modules Λ X) := by
   unfold Corner.modules
   infer_instance
 
-/-- Finite colimits of the component module pullback are computed on underlying sheaves.
-Source: HRS (4.1). -/
+/-- Finite colimits of the component module pullback are computed on underlying sheaves. -/
 instance Corner.modulesFiniteColimits (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u})
     [IsAffine X] (s : Corner Λ X) : PreservesFiniteColimits (s.modules Λ X) := by
   unfold Corner.modules
   infer_instance
 
-/-- Finite limits of the slice module pullback are computed on underlying sheaves.
-Source: HRS (4.1). -/
+/-- Finite limits of the slice module pullback are computed on underlying sheaves. -/
 instance Slice.modulesFiniteLimits (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) :
     PreservesFiniteLimits (s.modules Λ) := by
   unfold Slice.modules
   infer_instance
 
-/-- Finite colimits of the slice module pullback are computed on underlying sheaves.
-Source: HRS (4.1). -/
+/-- Finite colimits of the slice module pullback are computed on underlying sheaves. -/
 instance Slice.modulesFiniteColimits (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) :
     PreservesFiniteColimits (s.modules Λ) := by
   unfold Slice.modules
   infer_instance
 
-/-- Additivity of the slice module inverse image.
-Source: HRS (4.1). -/
+/-- Additivity of the slice module inverse image. -/
 instance Slice.modulesAdditive (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) : (s.modules Λ).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- Exact module inverse image on the ordinary unbounded derived category.
-Source: HRS (4.1). -/
+/-- Exact module inverse image on the ordinary unbounded derived category. -/
 @[irreducible]
 def Corner.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Corner Λ X) :
@@ -311,8 +299,7 @@ def Corner.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine
     CondensedRing.Evaluation.D (Scheme.ProEt.topology X) (condensedRingObj Λ.X X) :=
   (s.modules Λ X).mapDerivedCategory
 
-/-- The slice pullback on the ordinary unbounded derived category is termwise localization.
-Source: HRS (4.1). -/
+/-- The slice pullback on the ordinary unbounded derived category is termwise localization. -/
 @[irreducible]
 def Slice.derived (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) :
@@ -322,8 +309,7 @@ def Slice.derived (Λ : Profinite.CondensedRing.{u})
       (CondensedRing.profiniteCoefficient Λ.X Q) :=
   (s.modules Λ).mapDerivedCategory
 
-/-- Identify extension along the scheme coefficient isomorphism with transported scalars.
-Source: HRS (4.1). -/
+/-- Identify extension along the scheme coefficient isomorphism with transported scalars. -/
 def schemeUnderlying (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} (f : Y ⟶ X) :
     CondensedRing.upperStar Λ.X f ⋙ Mod.forget (condensedRingObj Λ.X Y) ≅
@@ -333,8 +319,7 @@ def schemeUnderlying (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
       (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ.X f)))
     (Mod.forget (condensedRingObj Λ.X Y))
 
-/-- The two actual module inverse-image paths for one affine scheme morphism.
-Source: HRS (4.1). -/
+/-- The two actual module inverse-image paths for one affine scheme morphism. -/
 structure Square (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X)
     (sX : Corner Λ X) (sY : Corner Λ Y) (sh : Slice Λ (affineComponentMap f)) where
@@ -361,22 +346,19 @@ structure Square (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     (ordinary.hom.app M).hom =
       (schemeUnderlying Λ f).hom.app ((sX.modules Λ X).obj M) ≫ abelian.hom.app M.X
 
-/-- The left derived path is the localization of the actual scheme/module inverse images.
-Source: HRS (4.1). -/
+/-- The left derived path is the localization of the actual scheme/module inverse images. -/
 abbrev leftPath (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] (sX : Corner Λ X) (f : Y ⟶ X) :=
   sX.derived Λ X ⋙ (CondensedRing.upperStar Λ.X f).mapDerivedCategory
 
-/-- The right derived path is the localization of the actual slice/module inverse images.
-Source: HRS (4.1). -/
+/-- The right derived path is the localization of the actual slice/module inverse images. -/
 abbrev rightPath (Λ : Profinite.CondensedRing.{u})
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (sY : Corner Λ Y) (f : Y ⟶ X) (sh : Slice Λ (affineComponentMap f)) :=
   sh.derived Λ ⋙ sY.derived Λ Y
 
 /-- The derived square is the specified termwise module comparison, localized, with
-both canonical derived composition comparisons inserted.
-Source: HRS (4.1). -/
+both canonical derived composition comparisons inserted. -/
 @[irreducible]
 def Square.theta (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] {f : Y ⟶ X}
@@ -402,15 +384,13 @@ def Square.theta (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
       Functor.mapDerivedCategoryNatIso sq.ordinary ≪≫
         (Functor.mapDerivedCategoryCompIso (sh.modules Λ) (sY.modules Λ Y)).symm
 
-/-- The ordinary component module tensor is the existing transported relative tensor.
-Source: HRS (4.1). -/
+/-- The ordinary component module tensor is the existing transported relative tensor. -/
 instance Corner.modulesMonoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     (X : Scheme.{u}) [IsAffine X] (s : Corner Λ X) : (s.modules Λ X).Monoidal := by
   unfold Corner.modules
   infer_instance
 
-/-- The ordinary slice module tensor is the existing transported relative tensor.
-Source: HRS (4.1). -/
+/-- The ordinary slice module tensor is the existing transported relative tensor. -/
 instance Slice.modulesMonoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) : (s.modules Λ).Monoidal := by
   unfold Slice.modules
@@ -428,8 +408,7 @@ variable {C D : Type w} [Category.{v} C] [Category.{v} D] [Abelian C] [Abelian D
   [F.Monoidal]
 
 /-- The ordinary derived monoidal structure is normalized by termwise tensor and Q.
-The braidings are the existing Koszul braidings, rather than unspecified structures.
-Source: HRS Section 3 and (4.1). -/
+The braidings are the existing Koszul braidings. -/
 structure TensorLift where
   [colimits : PreservesColimitsOfSize.{0, 0} F]
   [monoidal : F.mapDerivedCategory.Monoidal]
@@ -444,8 +423,7 @@ structure TensorLift where
 
 end Tensor
 
-/-- Identity on the actual slice pullback, normalized by the projection of the test object.
-Source: HRS (4.1). -/
+/-- Identity on the actual slice pullback, normalized by the projection of the test object. -/
 structure SliceIdentity (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Slice Λ (affineComponentMap (𝟙 X))) where
   tests : Over.pullback (affineComponentMap (𝟙 X)) ≅ 𝟭 (Over (affineComponentSpace X))
@@ -459,8 +437,7 @@ structure SliceIdentity (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsA
   ordinary : s.modules Λ ≅ 𝟭 _
   ordinary_underlying : ∀ M, (ordinary.hom.app M).hom = abelian.hom.app M.X
 
-/-- Composition of slice inverse images, with both test-object projections prescribed.
-Source: HRS (4.1). -/
+/-- Composition of slice inverse images, with both test-object projections prescribed. -/
 structure SliceComposition (Λ : Profinite.CondensedRing.{u})
     {X Y Z : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine Z]
     (f : Y ⟶ X) (g : Z ⟶ Y)
@@ -485,8 +462,7 @@ structure SliceComposition (Λ : Profinite.CondensedRing.{u})
   ordinary : sfg.modules Λ ≅ sf.modules Λ ⋙ sg.modules Λ
   ordinary_underlying : ∀ M, (ordinary.hom.app M).hom = abelian.hom.app M.X
 
-/-- Derived identity of a slice pullback, obtained by the existing localization operation.
-Source: HRS (4.1). -/
+/-- Derived identity of a slice pullback, obtained by the existing localization operation. -/
 @[irreducible]
 def SliceIdentity.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     {s : Slice Λ (affineComponentMap (𝟙 X))} (i : SliceIdentity Λ X s) :
@@ -494,8 +470,7 @@ def SliceIdentity.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [I
   unfold Slice.derived
   exact Functor.mapDerivedCategoryNatIso i.ordinary ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- Derived slice composition, with the existing canonical localization comparisons.
-Source: HRS (4.1). -/
+/-- Derived slice composition, with the existing canonical localization comparisons. -/
 @[irreducible]
 def SliceComposition.derived (Λ : Profinite.CondensedRing.{u})
     {X Y Z : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine Z]
@@ -511,16 +486,14 @@ def SliceComposition.derived (Λ : Profinite.CondensedRing.{u})
     Functor.mapDerivedCategoryNatIso c.ordinary ≪≫
       (Functor.mapDerivedCategoryCompIso (sf.modules Λ) (sg.modules Λ)).symm
 
-/-- Derived scheme identity, with the published ordinary identity and localization maps.
-Source: HRS (4.1). -/
+/-- Derived scheme identity, with the published ordinary identity and localization maps. -/
 @[irreducible]
 def schemeIdentity (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) :
     (CondensedRing.upperStar Λ.X (𝟙 X)).mapDerivedCategory ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarId Λ.X X) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
-/-- Derived scheme composition, with the published ordinary adjunction comparison.
-Source: HRS (4.1). -/
+/-- Derived scheme composition, with the published ordinary adjunction comparison. -/
 @[irreducible]
 def schemeComposition (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) :
@@ -538,9 +511,7 @@ def schemeComposition (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
 section TensorSquare
 universe v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄
 
-/-- Monoidality of a square with four explicitly supplied tensor structures.
-Keeping the structures as parameters avoids recomputing their derived constructions.
-Source: the tensor and unit equations of HRS (4.1). -/
+/-- Monoidality of a square with four explicitly supplied tensor structures. -/
 def tensorSquareMonoidal
     {A : Type w₁} [Category.{v₁} A] [MonoidalCategory A]
     {B : Type w₂} [Category.{v₂} B] [MonoidalCategory B]
@@ -558,8 +529,7 @@ def tensorSquareMonoidal
 end TensorSquare
 
 /-- Monoidality of the specified comparison, with canonical termwise-localized structures.
-This includes the coefficient-unit equation and both tensor comparisons.
-Source: HRS (4.1). -/
+This includes the coefficient-unit equation and both tensor comparisons. -/
 def Square.monoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] {f : Y ⟶ X}
     {sX : Corner Λ X} {sY : Corner Λ Y} {sh : Slice Λ (affineComponentMap f)}
@@ -576,16 +546,14 @@ def Square.monoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
 section SquareCoherence
 universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆
 
-/-- The identity equation of an isomorphism square, kept independent of its construction.
-Source: HRS (4.1). -/
+/-- The identity equation of an isomorphism square, kept independent of its construction. -/
 def squareIdentity
     {A : Type w₁} [Category.{v₁} A] {B : Type w₂} [Category.{v₂} B]
     (F : A ⥤ B) (G : B ⥤ B) (H : A ⥤ A)
     (e : F ⋙ G ≅ H ⋙ F) (i : H ≅ 𝟭 A) (j : G ≅ 𝟭 B) : Prop :=
   ∀ M, e.hom.app M ≫ F.map (i.hom.app M) = j.hom.app (F.obj M)
 
-/-- The pasting equation of two isomorphism squares, independent of the edge constructions.
-Source: HRS (4.1). -/
+/-- The pasting equation of two isomorphism squares, independent of the edge constructions. -/
 def squareComposition
     {A : Type w₁} [Category.{v₁} A] {B : Type w₂} [Category.{v₂} B]
     {C : Type w₃} [Category.{v₃} C] {D : Type w₄} [Category.{v₄} D]
@@ -601,8 +569,7 @@ def squareComposition
 end SquareCoherence
 
 /-- A single coherent family of the square, its exact symmetric tensor structures and
-its termwise descent. Identity/composition maps are normalized by test-object projections.
-Source: HRS (4.1), Corollary 4.4(2). -/
+its termwise descent. Identity/composition maps are normalized by test-object projections. -/
 structure System (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] where
   corner : ∀ (X : Scheme.{u}) [IsAffine X], Corner Λ X
   slice : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),

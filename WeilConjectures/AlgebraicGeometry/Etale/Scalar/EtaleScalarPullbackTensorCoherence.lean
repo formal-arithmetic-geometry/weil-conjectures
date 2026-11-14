@@ -7,7 +7,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientMaps
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackTensorKFlat
 
-/-! # Tensor compatibility of the normalized scalar/pullback comparison -/
+/-! # Tensor compatibility of the normalized scalar/pullback comparison
+
+## References
+
+* Stacks Project, Tags 07A4, 0G7E, 0GL6
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -15,8 +20,7 @@ open CategoryTheory MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- Binary scalar/pullback tensor coherence with categorical parameters shared.
-Source: Stacks 07A4. -/
+/-- Binary scalar/pullback tensor coherence with categorical parameters shared. -/
 def ScalarPullbackTensorLaw
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory F]
@@ -33,8 +37,7 @@ def ScalarPullbackTensorLaw
     L'.map (dQ.hom.app (P, R)) ≫ (dL' (Q.obj P) (Q.obj R)).hom ≫
       (a.hom.app P ⊗ₘ a.hom.app R)
 
-/-- The normalized scalar/pullback isomorphism respects the binary tensor comparison.
-Source: Stacks 07A4, 0G7E and 0GL6. -/
+/-- The normalized scalar/pullback isomorphism respects the binary tensor comparison. -/
 private def uncurryTensorComparison
     {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (T : C ⥤ C ⥤ C) (S : D ⥤ D ⥤ D)

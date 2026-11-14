@@ -14,8 +14,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-! # Descent of one finite perfect quotient and its geometric fibre
 
-Source: Stacks Project, Tag 09C6, the construction of L_n and its algebraic fibre;
-Tags 09AL, 09B1 and 03Q3.
+## References
+
+* Stacks Project, Tag 09C6 (the construction of `L_n` and its algebraic fibre)
+* Stacks Project, Tags 09AL, 09B1 and 03Q3
 -/
 
 @[expose] public noncomputable section
@@ -156,10 +158,7 @@ private def stalk_constant_model
 
 /-- One finite quotient with etale local perfect constant models descends to an etale
 complex, and its geometric fibre at the specified point has a perfect small model.
-There is no consecutive scalar-extension assertion and no choice of a cover here.
-
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6), the
-construction of L_n; lemma-compare-constructible-derived (Tag 09AL), and Tag 09B1. -/
+There is no consecutive scalar-extension assertion and no choice of a cover here. -/
 theorem finitePerfectAdic_etale_level_descent
     (X : Scheme.{t}) [IsLocallyNoetherian X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

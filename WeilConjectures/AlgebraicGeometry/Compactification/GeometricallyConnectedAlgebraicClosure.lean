@@ -15,15 +15,17 @@ import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtensi
 /-!
 # Testing geometric connectedness on an algebraically closed extension
 
-Source: Stacks Project, `varieties.tex`, Lemma 33.7.7 (Tag 0387), Lemma 33.7.3
-(Tag 054N), and the remark after Definition 33.7.1.
-
 ## Main statements
 
 - `AlgebraicGeometry.geometricallyConnected_iff_connectedSpace_of_isAlgClosed`:
   geometric connectedness is tested on one algebraically closed extension.
 - `AlgebraicGeometry.GeometricallyConnected.nonempty_over_field`:
   a geometrically connected scheme over a field is nonempty.
+
+## References
+
+* Stacks Project, Lemma 33.7.7 (Tag 0387), Lemma 33.7.3 (Tag 054N), and the remark after
+  Definition 33.7.1
 -/
 
 @[expose] public section
@@ -35,8 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A scheme over a field is geometrically connected if and only if its base change to
-any fixed algebraically closed extension is connected.
-Source: Stacks Project, `varieties.tex`, Tags 0387 and 054N. -/
+any fixed algebraically closed extension is connected. -/
 theorem geometricallyConnected_iff_connectedSpace_of_isAlgClosed
     {k Ω : Type u} [Field k] [Field Ω] [Algebra k Ω] [IsAlgClosed Ω]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] :

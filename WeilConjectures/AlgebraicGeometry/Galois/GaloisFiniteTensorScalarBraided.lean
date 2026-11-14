@@ -11,8 +11,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-! # Braided tensor component of the finite Galois comparison
 
-Source: Stacks Project, Tag 0DV5 (3), and the blueprint
-`proposition-lattices-representations-normal-scheme`, proof steps 4 and 5. -/
+## References
+
+* Stacks Project, Tag 0DV5 (3)
+-/
 
 @[expose] public section
 

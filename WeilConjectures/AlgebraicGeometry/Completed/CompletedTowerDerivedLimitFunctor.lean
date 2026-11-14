@@ -38,8 +38,9 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!
 # The functorial completed-coefficient derived inverse limit
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1242;
-Stacks Tags 08TC, 079P and 0BK7.
+## References
+
+* Stacks Project, Tags 08TC, 079B, 079P, 079Q, 0BK7, 099N
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +51,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- Strict module towers have K-injective resolutions in the unrestricted module category.
-Source: Stacks Tags 079B and 079Q. -/
+/-- Strict module towers have K-injective resolutions in the unrestricted module category. -/
 @[instance]
 theorem completedTowers_hasKInjectiveResolutions (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
@@ -64,8 +64,7 @@ theorem completedTowers_hasKInjectiveResolutions (T : Scheme.{u})
     reductionTower_isGrothendieckAbelian T ((adicLisseForget T).obj R)
   infer_instance
 
-/-- The limit functor on strict module towers is additive.
-Source: Stacks Tag 099N. -/
+/-- The limit functor on strict module towers is additive. -/
 @[instance]
 theorem completedTowerLimit_additive (T : Scheme.{u}) :
     (lim : pbcTowers T (pbcAdicCompletion T d) ⥤
@@ -76,8 +75,7 @@ theorem completedTowerLimit_additive (T : Scheme.{u}) :
     WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
   exact Functor.additive_of_preserves_binary_products _
 
-/-- Derived strict inverse limit, computed from the actual inverse-limit functor.
-Source: Stacks Tag 099N. -/
+/-- Derived strict inverse limit, computed from the actual inverse-limit functor. -/
 abbrev completedTowerRlim (T : Scheme.{u}) :
     DerivedCategory (pbcTowers T (pbcAdicCompletion T d)) ⥤
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) :=

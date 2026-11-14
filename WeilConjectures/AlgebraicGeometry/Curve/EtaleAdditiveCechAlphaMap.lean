@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 
 /-! # The global-section augmentation as a cochain map
-Source: Stacks Project, Tag 01EQ, the augmented double-complex construction. -/
+
+## References
+
+* Stacks Project, Tag 01EQ
+-/
 
 @[expose] public section
 
@@ -82,9 +86,7 @@ private lemma rowRestriction_vertical {X : Scheme.{u}} {ι : Type u}
   erw [Pi.lift_comp_π]
   exact (I.cocomplex.d n m).hom.naturality _
 
-/-- Restriction into the degree-zero Čech column is a cochain map for any open family.
-Source: Stacks Project, Tag 01EQ, proof of the augmented double-complex lemma.
--/
+/-- Restriction into the degree-zero Čech column is a cochain map for any open family. -/
 theorem exists_additiveCech_alpha_map {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf) :
     ∃ a : additiveCechGlobal I ⟶ additiveCechTotal U I,

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Flat.FlatDerivedStructureUnitProperties
 
 /-! # The derived structure unit and its degree-zero and fibre comparisons
 
-Source: Stacks Project, Tags 0E62, 0A1D, and 0096.
+## References
+
+* Stacks Project, Tags 0E62 (first paragraph), 0A1D (base change), 0096
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ namespace AlgebraicGeometry
 /-- The structure unit admits a derived lift with the canonical degree-zero comparison.
 For quasi-compact separated flat morphisms its derived fibres have no negative
 cohomology, and the residue-field H0 condition makes the fibre of this lift invertible
-in degree zero. No surjectivity or injectivity of the ordinary stalk map is asserted.
-Source: Stacks Project, Tag 0E62, first paragraph, Tag 0A1D (base change), and Tag 0096. -/
+in degree zero. No surjectivity or injectivity of the ordinary stalk map is asserted. -/
 theorem exists_flat_derived_structure_unit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

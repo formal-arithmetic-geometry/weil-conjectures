@@ -14,7 +14,10 @@ import WeilConjectures.CategoryTheory.Ringed.Site.RingedSitePerfectDuality
 
 /-! # Completeness of a locally free completed-coefficient line
 
-Source: coefficient-twist blueprint, proof step 11; Bhatt--Scholze, Section 6.5.
+## References
+
+* Bhatt--Scholze, Sections 3.4 and 6.5
+* Stacks Project, Tag 08JJ
 -/
 
 @[expose] public section
@@ -100,10 +103,7 @@ private theorem sf_complete_iso (l : ℕ) [Fact l.Prime]
     (fun n ↦ ((WeilConjectures.sfDerivedReductionTransition l E S n).naturality e.hom).symm)
     (fun n ↦ ((WeilConjectures.sfDerivedReductionUnit l E S n).naturality e.hom).symm) h
 
-/-- A locally free completed-coefficient line in degree zero is derived complete.
-
-Source: coefficient-twist blueprint, proof step 11; Bhatt--Scholze, Sections 3.4
-and 6.5; Stacks Project, Tag 08JJ. -/
+/-- A locally free completed-coefficient line in degree zero is derived complete. -/
 theorem completedLine_complete (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : SheafOfModules.{u + 1}

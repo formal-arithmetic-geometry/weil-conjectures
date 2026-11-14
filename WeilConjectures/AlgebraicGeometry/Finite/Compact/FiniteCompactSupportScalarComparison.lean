@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 /-!
 # The canonical finite coefficient comparison for compact support
 
-Source: Stacks Tags 0F0G, 0GL1, 0GL6; blueprint finite compact support, Steps 7--10.
+## References
+
+* Stacks Project, Tags 0F0G, 0GL1, 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -87,12 +89,7 @@ private theorem noetherianCompactification {X Y : Scheme.{u}} {f : X ⟶ Y}
   exact ⟨⟩
 
 /-- The canonical scalar-adjunction transpose for a fixed compactification is invertible
-when the input and its ordinary derived reduction are bounded constructible.
-Only invertibility is asserted here: constructibility and interval bounds are supplied
-independently by finite compact-support finiteness.
-
-Source: Stacks Tags 0F0G, 0GL1 and 0GL6; blueprint
-theorem-results-from-etale-theory--3, Steps 7--10. -/
+when the input and its ordinary derived reduction are bounded constructible. -/
 theorem finiteCompactSupportScalarComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

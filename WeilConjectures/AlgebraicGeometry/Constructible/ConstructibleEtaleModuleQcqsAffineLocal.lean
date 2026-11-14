@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 /-!
 # Affine locality of constructible etale module sheaves on qcqs schemes
 
-Source: Stacks Project, Tags 095E and 03RW(3).
+## References
+
+* Stacks Project, Tags 095E and 03RW(3).
 -/
 
 @[expose] public section
@@ -77,8 +79,7 @@ private theorem finiteLocallyConstant_comp
 
 /-- For finite module coefficients, affine-local constructibility, its validity on an
 open cover, and a global constructible immersed partition are equivalent.
-Reduced immersed representatives encode the reduced induced structure on local strata.
-Source: Stacks Project, Tags 095E and 03RW(3). -/
+Reduced immersed representatives encode the reduced induced structure on local strata. -/
 theorem constructible_etale_module_qcqs_affine_local
     {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

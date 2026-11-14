@@ -109,7 +109,9 @@ set_option linter.privateModule false
 
 /-! # Direct finite-coefficient derived tensor comparison
 
-Source: Stacks Project, Tags 06YS and 06YU, and the finite coefficient site comparison.
+## References
+
+* Stacks Project, Tags 06YS and 06YU
 -/
 
 @[expose] public noncomputable section

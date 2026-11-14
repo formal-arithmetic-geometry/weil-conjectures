@@ -20,9 +20,16 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Normalized ordinary scalar tensor comparison
 
-The ordinary part of the scalar mate construction, extracted as a separate module
-so that the ordinary and derived comparisons compile independently.
-Source: Stacks Tags 03EK and 06YY.
+The ordinary part of the scalar mate construction.
+
+## Implementation details
+
+* The ordinary part is a separate module so that the ordinary and derived comparisons compile
+  independently.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 0B56
 -/
 
 @[expose] public noncomputable section
@@ -34,15 +41,13 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme.DerivedScalarMate
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-/-- The actual scalar restriction, with unchanged underlying abelian sheaf.
-Source: Stacks 03EK. -/
+/-- The actual scalar restriction, with unchanged underlying abelian sheaf. -/
 noncomputable abbrev restriction {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
   Scheme.proEtaleRingRestrictScalars φ
 
-/-- The coefficient B_W with its A_W action, without deriving or resolving B.
-Source: Stacks 0B56. -/
+/-- The coefficient B_W with its A_W action, without deriving or resolving B. -/
 noncomputable abbrev coefficient {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
@@ -50,24 +55,21 @@ noncomputable abbrev coefficient {W : Scheme.{u}}
     ((sheafCompose (Scheme.ProEt.topology W)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B))
 
-/-- The degree-zero coefficient complex B_W, as an A_W-module complex.
-Source: Stacks 0B56. -/
+/-- The degree-zero coefficient complex B_W, as an A_W-module complex. -/
 noncomputable abbrev coefficientComplex {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
   (CochainComplex.singleFunctor (Scheme.proEtaleRingModules W
     A) (0 : ℤ)).obj (coefficient φ)
 
-/-- The existing ordinary tensor with B as its last factor.
-Source: Stacks 03EK. -/
+/-- The existing ordinary tensor with B as its last factor. -/
 noncomputable abbrev ordinaryTensor {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
   (Scheme.proEtaleOrdinaryTensor W A).flip.obj
     (coefficient φ)
 
-/-- The original sheafification image of b tensor m in scalar extension.
-Source: Stacks 03EK. -/
+/-- The original sheafification image of b tensor m in scalar extension. -/
 noncomputable def pureSection {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B)
@@ -83,8 +85,7 @@ noncomputable def pureSection {W : Scheme.{u}}
             φ M)).app U)
     (b ⊗ₜ[_, (φ.hom.app U).hom] m)
 
-/-- The normalization on all sectionwise pure tensors, including nonconstant local scalars.
-Source: Stacks 03EK. -/
+/-- The normalization on all sectionwise pure tensors, including nonconstant local scalars. -/
 def IsOrdinaryTensor {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B)
@@ -252,8 +253,7 @@ private theorem ordinaryComponent_naturality {W : Scheme.{u}}
   rw [pureSection_map]
   rfl
 
-/-- The canonical ordinary identification, uniquely fixed by balanced pure tensors.
-Source: Stacks 03EK, 06YY. -/
+/-- The canonical ordinary identification, uniquely fixed by balanced pure tensors. -/
 theorem ordinaryTensorIso_existsUnique
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
@@ -293,8 +293,7 @@ theorem ordinaryTensorIso_existsUnique
   rw [hc]
   exact (he M U b m).trans (hn M U b m).symm
 
-/-- The uniquely normalized ordinary identification; its data are determined by the formula.
-Source: Stacks 03EK. -/
+/-- The uniquely normalized ordinary identification; its data are determined by the formula. -/
 noncomputable def ordinaryTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
@@ -302,8 +301,7 @@ noncomputable def ordinaryTensorIso
   Classical.choose (ordinaryTensorIso_existsUnique φ).exists
 
 /-- On complexes, reverse the balanced tensors degreewise and use the degree-zero
-single-factor identification. This is an actual chain isomorphism.
-Source: Stacks 06YY. -/
+single-factor identification. This is an actual chain isomorphism. -/
 noncomputable def ordinaryComplexIso
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}

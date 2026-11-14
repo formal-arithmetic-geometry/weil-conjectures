@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Common-stage descent of finitely many arrows between specified models
 
-Source: Stacks Project, Limits, Tag 01ZM, clause (2).
+## References
+
+* Stacks Project, Limits, Tag 01ZM, clause (2)
 -/
 
 @[expose] public section
@@ -25,10 +27,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Finitely many arrows between specified finite-presentation models descend to one stage.
 Different arrows may have different sources and targets. The equations retain their original
-limit arrows, rather than only their isomorphism classes.
-
-Source: Stacks Project, Limits, Tag 01ZM, clause (2), with common refinement.
--/
+limit arrows, rather than only their isomorphism classes. -/
 theorem exists_finitePresentation_arrows_stage
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u})

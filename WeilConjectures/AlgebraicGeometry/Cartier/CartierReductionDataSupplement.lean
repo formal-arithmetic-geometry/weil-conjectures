@@ -205,6 +205,10 @@ The derived scalar units below are expressed by their Hom adjunction against eve
 unbounded complex. This is an equivalent, model-independent specification of derived
 extension of scalars at the supported constant and at G_m. In particular the equality
 of reduced maps is an equality in module Ext, not a test on the global section one.
+
+## References
+
+* Stacks Project, Tags 03D7, 09T5, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -252,8 +256,7 @@ attribute [local irreducible] comparisonUpperStar Etale.cartierPoleBoundary
 attribute [local instance 0] IsGroupoid.all_isIso isIso_of_isDiscrete
   HasZeroObject.zero_to_zero_isIso to_initial_isIso terminal_isIso_from initial_isIso_to
 
-/-- Scalar forgetting is exact on the original pro-etale site.
-Source: Stacks 03D7. -/
+/-- Scalar forgetting is exact on the original pro-etale site. -/
 theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteLimits (cartierForget A Z) ∧
       PreservesFiniteColimits (cartierForget A Z) := by
@@ -266,15 +269,15 @@ theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
   · have := (Sheaf.forget₂CoinduceAdj (Scheme.ProEt.topology Z) A).isLeftAdjoint
     infer_instance
 
-/-- Exactness on finite limits. Source: Stacks 03D7. -/
+/-- Exactness on finite limits. -/
 instance cartierForgetLimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteLimits (cartierForget A Z) := (cartierForget_exact A Z).1
 
-/-- Exactness on finite colimits. Source: Stacks 03D7. -/
+/-- Exactness on finite colimits. -/
 instance cartierForgetColimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteColimits (cartierForget A Z) := (cartierForget_exact A Z).2
 
-/-- Additivity on sections. Source: Stacks 03D7. -/
+/-- Additivity on sections. -/
 instance cartierForgetAdditive (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     (cartierForget A Z).Additive where
 
@@ -341,8 +344,7 @@ attribute [local irreducible] cartierReducedEtale cartierReducedPro
 
 /-- The Hom universal property of a derived scalar unit with a shifted sheaf target.
 It is tested against every unbounded complex, and therefore determines the target up
-to its unique unit-compatible isomorphism.
-Source: Stacks 09T5, 0FND and blueprint Cartier reduction paragraphs. -/
+to its unique unit-compatible isomorphism. -/
 def CartierScalarUnit
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasExt.{wE} B]

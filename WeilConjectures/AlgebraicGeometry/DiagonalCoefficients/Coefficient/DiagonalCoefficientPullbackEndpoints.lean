@@ -15,6 +15,11 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 - `PullEndpoint`: the ordinary module endpoint fixed by its underlying adjoint.
 - `PullEndpoint.derived`, `PullEndpoint.shift`: its canonical derived arrows.
 - `modelExchange`, `TracePullback`: the normalized derived trace comparison.
+
+## Implementation details
+
+- `singlePullback` is named so that both categories are fixed before elaborating any
+  geometric supported-source expression.
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +36,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- A module pullback endpoint is fixed by the actual inverse-image map on
-underlying sheaves, through the ordinary module adjunction. Source: blueprint
-clause 3. -/
+underlying sheaves, through the ordinary module adjunction. -/
 structure PullEndpoint (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S)
     (M : Modules R S) (N : Modules R X)
@@ -49,9 +53,7 @@ def UnitPullEndpoint (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   PullEndpoint R f (Mod.regular (condensedRingObj R S))
     (Mod.regular (condensedRingObj R X)) (condensedPullbackHom R f)
 
-/-- The canonical exact inverse-image comparison on a degree-zero module.
-Naming its component fixes both categories before elaborating any geometric
-supported-source expression. Source: blueprint base-change identifications. -/
+/-- The canonical exact inverse-image comparison on a degree-zero module. -/
 def singlePullback (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) (M : Modules R S) :
     (derivedUpper R f).obj ((DerivedCategory.singleFunctor (Modules R S) 0).obj M) ≅

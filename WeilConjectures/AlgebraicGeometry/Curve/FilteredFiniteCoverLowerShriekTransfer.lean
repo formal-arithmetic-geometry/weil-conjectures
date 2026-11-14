@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTra
 
 /-! # Transfer from a filtered finite etale cover through extension by zero
 
-Source: Stacks Project, proof of 03SD, paragraphs 2--4.
+## References
+
+* Stacks Project, Tag 03SD (proof, paragraphs 2--4)
+* Stacks Project, Tags 05K0, 0GJ1, 0A5C, 0A5D
 -/
 
 @[expose] public section
@@ -24,10 +27,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- Transfer the constant case using a given finite etale cover, filtration and retraction.
-
-Source: Stacks Project, 03SD, paragraphs 2--4; 05K0, 0GJ1,
-0A5C, 0A5D. -/
+/-- Transfer the constant case using a given finite etale cover, filtration and retraction. -/
 theorem filteredFiniteCoverLowerShriekTransfer {k : Type u} [Field k] [IsAlgClosed k]
     {X U V : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]

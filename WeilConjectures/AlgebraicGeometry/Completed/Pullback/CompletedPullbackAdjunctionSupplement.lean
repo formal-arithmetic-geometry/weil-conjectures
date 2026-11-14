@@ -195,14 +195,16 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantDirectImagePreservesCo
 /-!
 # Completed pullback is left adjoint to direct image
 
-Source: Stacks Project, `proetale.tex`, Tags 099M and 099N (1), (2), and
-`algebraization.tex`, Tag 099K.
-
 All coefficient sheaves, local-completeness predicates and quotient-tower completions
 are the constructions of `ConstantCompletionEquivalence`. Positive exponents are n+1.
 The existential witnesses below specify geometric module direct image and its total
 right derived functor by their underlying maps and universal comparisons. In particular
 no preservation or adjunction on complete objects is an assumption.
+
+## References
+
+* Stacks Project, `proetale.tex`, Tags 099M and 099N (1), (2)
+* Stacks Project, `algebraization.tex`, Tag 099K
 -/
 
 -- After pruning, this module only keeps private declarations.

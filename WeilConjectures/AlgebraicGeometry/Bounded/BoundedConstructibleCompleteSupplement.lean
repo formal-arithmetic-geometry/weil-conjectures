@@ -20,6 +20,13 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplete
 
 /-!
 # Bounded constructible derived-complete objects
+
+## Implementation details
+
+* `pbcAssociatedModule` keeps the coefficient presentation abstract, which avoids expanding
+  the quotient limit during normalization.
+* In `PbcIsIntrinsicallyComplete`, the generator tuple and complex representative are
+  existential proof witnesses only.
 -/
 
 @[expose] public noncomputable section
@@ -34,10 +41,10 @@ open ProEtale
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
-/-- The actual completed-coefficient ambient category. Source: blueprint order 1300. -/
+/-- The actual completed-coefficient ambient category. -/
 abbrev PbcCompletedDerived := DerivedCategory (pbcModules T (pbcAdicCompletion T d))
 
-/-- Derived extension along the actual limit projection. Source: blueprint order 1300. -/
+/-- Derived extension along the actual limit projection. -/
 abbrev pbcCompletedReduction (n : ℕ) := pbcDerivedExtend (pbcAdicProjection T d n)
 
 /-- Constants mapped to the continuous-function coefficient presentation. -/
@@ -54,21 +61,17 @@ theorem pbcFunctionScalars_locallyBijective (n : ℕ) :
   dsimp only [pbcFunctionScalars]
   constructor <;> infer_instance
 
-/-- Local injectivity of the specified coefficient presentation. Source: blueprint
-order 1300. -/
+/-- Local injectivity of the specified coefficient presentation. -/
 instance pbcFunctionScalars_injective (n : ℕ) :
     Presheaf.IsLocallyInjective (ProEt.topology T) (pbcFunctionScalars T d n) :=
   (pbcFunctionScalars_locallyBijective T d n).1
 
-/-- Local surjectivity of the specified coefficient presentation. Source: blueprint
-order 1300. -/
+/-- Local surjectivity of the specified coefficient presentation. -/
 instance pbcFunctionScalars_surjective (n : ℕ) :
     Presheaf.IsLocallySurjective (ProEt.topology T) (pbcFunctionScalars T d n) :=
   (pbcFunctionScalars_locallyBijective T d n).2
 
-/-- Associated modules for any locally bijective coefficient presentation.
-Keeping the presentation abstract avoids expanding the quotient limit during
-normalization. Source: blueprint order 1300. -/
+/-- Associated modules for any locally bijective coefficient presentation. -/
 def pbcAssociatedModule (P : Type (u + 1)) [CommRing P]
     (R : Sheaf (ProEt.topology T) RingCat.{u + 1})
     (α : (Functor.const T.ProEtᵒᵖ).obj (RingCat.of P) ⟶ R.obj)
@@ -86,7 +89,7 @@ def pbcAssociatedAdditive (P : Type (u + 1)) [CommRing P] :=
     presheafToSheaf (ProEt.topology T) AddCommGrpCat.{u + 1}
 
 /-- The source restriction comparison forgets to exactly the ordinary additive
-sheafification. Source: blueprint order 1300. -/
+sheafification. -/
 def pbcAssociatedRestrictionSource (P Q : Type (u + 1)) [CommRing P] [CommRing Q]
     (R : Sheaf (ProEt.topology T) RingCat.{u + 1})
     (α : (Functor.const T.ProEtᵒᵖ).obj (RingCat.of P) ⟶ R.obj)
@@ -185,7 +188,7 @@ theorem pbcAssociatedRestriction_exists
     exact hn.trans (hf N).symm
 
 /-- Canonical associated-module-sheaf realization, with the coefficient presentation
-changed along the recorded isomorphism. Source: blueprint order 1300. -/
+changed along the recorded isomorphism. -/
 abbrev pbcFunctionRealization (n : ℕ) :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (PbcQuotient d n)) ⥤
       pbcModules T ((pbcAdicRings T d).obj (op n)) :=
@@ -205,27 +208,27 @@ theorem pbcFunctionRealization_exact (n : ℕ) :
       (pbcFunctionScalars T d n)
   exact ⟨this, Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
-/-- The canonical realization equivalence. Source: blueprint order 1300. -/
+/-- The canonical realization equivalence. -/
 instance pbcFunctionRealization_equivalence (n : ℕ) :
     (pbcFunctionRealization T d n).IsEquivalence :=
   (pbcFunctionRealization_exact T d n).1
 
-/-- Exact realization, additive part. Source: blueprint order 1300. -/
+/-- Exact realization, additive part. -/
 instance pbcFunctionRealization_additive (n : ℕ) :
     (pbcFunctionRealization T d n).Additive :=
   (pbcFunctionRealization_exact T d n).2.1
 
-/-- Exact realization, left exact part. Source: blueprint order 1300. -/
+/-- Exact realization, left exact part. -/
 instance pbcFunctionRealization_limits (n : ℕ) :
     PreservesFiniteLimits (pbcFunctionRealization T d n) :=
   (pbcFunctionRealization_exact T d n).2.2.1
 
-/-- Exact realization, right exact part. Source: blueprint order 1300. -/
+/-- Exact realization, right exact part. -/
 instance pbcFunctionRealization_colimits (n : ℕ) :
     PreservesFiniteColimits (pbcFunctionRealization T d n) :=
   (pbcFunctionRealization_exact T d n).2.2.2
 
-/-- Realization on derived categories. Source: blueprint order 1300. -/
+/-- Realization on derived categories. -/
 abbrev pbcDerivedFunctionRealization (n : ℕ) :=
   (pbcFunctionRealization T d n).mapDerivedCategory
 
@@ -296,7 +299,7 @@ theorem pbcFunctionScalars_comp (n : ℕ) :
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
   rw [Category.assoc, ← hn, ← Category.assoc, hc, Category.assoc]
 
-/-- The normalized ordinary scalar-restriction comparison. Source: blueprint order 1300. -/
+/-- The normalized ordinary scalar-restriction comparison. -/
 def pbcFunctionRestriction (n : ℕ) :
     Sheaf.restrictScalars (ProEt.topology T)
         (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)) ⋙
@@ -311,7 +314,7 @@ def pbcFunctionRestriction (n : ℕ) :
     ((adicLisseForget T).map (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)))
     (pbcFunctionScalars_comp T d n)).exists.choose
 
-/-- Its exact derived descent. Source: blueprint order 1300. -/
+/-- The exact derived descent of `pbcFunctionRestriction`. -/
 def pbcDerivedFunctionRestriction (n : ℕ) :
     Sheaf.derivedRestrictScalars (ProEt.topology T)
         (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)) ⋙
@@ -355,12 +358,12 @@ private theorem inverseMate_equivalences
   have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α) := he ▸ hi
   exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α
 
-/-- The canonical tensor mate is invertible. Source: blueprint order 1300. -/
+/-- The canonical tensor mate is invertible. -/
 theorem pbcFunctionReductionMap_isIso (n : ℕ) : IsIso (pbcFunctionReductionMap T d n) := by
   exact inverseMate_equivalences _ _
     (TwoSquare.mk _ _ _ _ (pbcDerivedFunctionRestriction T d n).hom)
 
-/-- Canonical coefficient-reduction comparison. Source: blueprint order 1300. -/
+/-- Canonical coefficient-reduction comparison. -/
 def pbcFunctionReduction (n : ℕ) :
     pbcDerivedFunctionRealization T d (n + 1) ⋙
         pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)) ≅
@@ -368,8 +371,7 @@ def pbcFunctionReduction (n : ℕ) :
   letI := pbcFunctionReductionMap_isIso T d n
   asIso (pbcFunctionReductionMap T d n)
 
-/-- Intrinsic completeness transported along the normalized completed-ring comparison.
-The generator tuple and complex representative are existential proof witnesses only. -/
+/-- Intrinsic completeness transported along the normalized completed-ring comparison. -/
 def PbcIsIntrinsicallyComplete (K : PbcCompletedDerived T d) : Prop :=
   ∃ (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal)
     (C : CochainComplex (adicDatumModules T
@@ -423,7 +425,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The integral full subcategory for the finite-extension coefficients and the base
-hypotheses in the source. Source: blueprint order 1300. -/
+hypotheses. -/
 abbrev PbcIntegralCategory (T : Scheme.{u}) [IsNoetherian T]
     (_hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
     (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) :=

@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf
 import WeilConjectures.AlgebraicGeometry.Cohomology.OpenImmersionCoefficientUnit
 /-! # Restriction data for the cartesian open-subscheme square
 
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0 and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -22,8 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
 
-/-- The base change of the inclusion of an open subscheme.
-Source: Stacks Project, Tag 04J0; the cartesian open-subscheme square. -/
+/-- The base change of the inclusion of an open subscheme. -/
 noncomputable def H.openBaseChangeInclusion (f : X ⟶ Spec (.of R)) (W : X.Opens) :
     baseChangedScheme (S := S) (W.ι ≫ f) ⟶ baseChangedScheme (S := S) f :=
   Limits.pullback.lift (baseChangeFst (S := S) (W.ι ≫ f) ≫ W.ι)
@@ -60,9 +61,7 @@ private lemma scalarRep_naturality {Y : Scheme.{u}} {M N : Y.Modules}
   simp [invImageCongr, pullbackCongr]
 
 
-/-- Degree-zero data for restriction, including the cartesian coefficient square.
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
--/
+/-- Degree-zero data for restriction, including the cartesian coefficient square. -/
 theorem H.openRestrictionData (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :
     let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
     let G := invImage (baseChangeFst (S := S) f)

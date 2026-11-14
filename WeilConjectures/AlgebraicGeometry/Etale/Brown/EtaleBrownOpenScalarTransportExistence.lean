@@ -10,8 +10,10 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Open scalar transport decomposition
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -122,12 +124,7 @@ private theorem scalar_inverse_mate
 
 end MateCalculus
 
-/-- The open scalar projection mate exists and has the prescribed normalized mate.
-Source: Zheng, Constructions 5.14--5.15 and Lemma 5.16; Stacks 07A4.
-
-The proof constructs the left mate of the normalized inverse-image scalar
-comparison from the scalar/open adjunctions and verifies its invertibility by the
-cochain localization comparison. -/
+/-- The open scalar projection mate exists and has the prescribed normalized mate. -/
 theorem etaleBrownOpenScalarTransport_exists
     (O : Type (u + 1)) [CommRing O] (t : O)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

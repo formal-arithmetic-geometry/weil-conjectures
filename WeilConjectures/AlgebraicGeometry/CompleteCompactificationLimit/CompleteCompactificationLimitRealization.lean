@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.Compactif
 
 /-!
 # Complete compactification images: canonical limit realization
+
+## References
+
+* [Stacks Project, Tag 0A07](https://stacks.math.columbia.edu/tag/0A07)
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +68,7 @@ structure ScalarComparison (b : SpTowerShriek.Base l E)
   derived_normalized : IsPushScalarNormalized l E b o c.g DZ DY rZ rY aZ aY
     pushOrdinary pushDerived
 
-/-- The normalization of direct-image evaluation on actual K-injective strict towers.
-Source: blueprint paragraph (2); Stacks 0A07. -/
+/-- The normalization of direct-image evaluation on actual K-injective strict towers. -/
 def IsFixedPushEvaluation {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
     (v : (fixedPushOrd l E p).rightDerivedFunctor ⋙
         coefficientConstantTowerEvaluation l E Y n ≅

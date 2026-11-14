@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Transfer between additive Čech resolution double complexes
-Source: Stacks Project, Tag 01FD, the identity-morphism case of the augmentation diagram.
+
+## References
+
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
 -/
 
 @[expose] public section
@@ -132,8 +135,7 @@ private lemma transfer_beta {X : Scheme.{u}} {ι : Type u}
   exact ConcreteCategory.congr_hom h _
 
 /-- Augmentation-preserving transfer between two resolutions commutes with both
-Čech augmentations and with every supplied canonical global Ext comparison.
-Source: Stacks Project, Tag 01FD, identity-morphism case of Lemma 20.15.1. -/
+Čech augmentations and with every supplied canonical global Ext comparison. -/
 theorem exists_additiveCech_resolution_transfer
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (I J : InjectiveResolution X.etaleAdditiveSheaf)

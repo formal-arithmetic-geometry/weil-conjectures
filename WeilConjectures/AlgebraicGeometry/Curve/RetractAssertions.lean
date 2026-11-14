@@ -17,8 +17,15 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 /-!
 # The eight curve assertions pass to retracts
 
-Source: Stacks Project, Etale Cohomology, Section 03SB, proof of Lemma 03SD,
-first paragraph.
+## Implementation details
+
+- In `AlgebraicGeometry.IsCurve.assertions_of_isIso_comp`, the local coefficient equivalence
+  `E` (the same as in `finite_pushforward_assertions`) views abelian groups as modules over
+  `ULift ℤ`, adding no coefficient structure.
+
+## References
+
+* Stacks Project, Section 03SB, proof of Lemma 03SD
 -/
 
 @[expose] public section
@@ -62,10 +69,7 @@ private theorem pullback_bijective_of_retract {X Y : Scheme.{u}} (f : Y ⟶ X)
     congrArg (Sheaf.H.map ((Etale.upperStar _ f).map a) q) hxy
 
 /-- The eight curve assertions pass from a torsion abelian sheaf `H` to `P.F` when
-`a ≫ b` is invertible and the conditional coefficient hypotheses pass from `P.F` to `H`.
-The local `E` is the same coefficient equivalence used in finite_pushforward_assertions;
-it views abelian groups as modules over `ULift ℤ`, adding no coefficient structure.
-Source: Stacks Project, Section 03SB, proof of Lemma 03SD, first paragraph. -/
+`a ≫ b` is invertible and the conditional coefficient hypotheses pass from `P.F` to `H`. -/
 theorem IsCurve.assertions_of_isIso_comp {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (H : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})

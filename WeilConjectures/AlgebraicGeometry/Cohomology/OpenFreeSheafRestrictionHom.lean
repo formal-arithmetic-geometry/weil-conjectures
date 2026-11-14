@@ -8,7 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 /-! # Restriction of morphisms from a represented open
 
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -32,9 +34,7 @@ private theorem freeSectionsEquiv_naturality {X : Scheme.{u}} (W : X.Opens)
   erw [Adjunction.homEquiv_naturality_right]
   rfl
 
-/-- Restriction is bijective on morphisms out of the free sheaf of the image open.
-Source: Stacks Project, Tags 03DI and 03DJ; the represented free-sheaf adjunction.
--/
+/-- Restriction is bijective on morphisms out of the free sheaf of the image open. -/
 theorem H.openFreeSheaf_restrictionHom_bijective {X Y : Scheme.{u}}
     (j : Y ⟶ X) [IsOpenImmersion j]
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :

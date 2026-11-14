@@ -113,7 +113,9 @@ public import Mathlib.Order.CompletePartialOrder
 
 /-! # The coefficient quotient cone in the internal module category
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), and Propositions 3.1.9--3.1.10.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1), and Propositions 3.1.9--3.1.10
 -/
 
 @[expose] public noncomputable section
@@ -128,14 +130,12 @@ namespace AlgebraicGeometry.ProEtale.AdicCompletion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The positive coefficient quotients, retaining their integral scalar actions.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The positive coefficient quotients, retaining their integral scalar actions. -/
 def coefficientSequence : ℕᵒᵖ ⥤ Modules l E X :=
   Functor.ofOpSequence (X := fun n ↦ finiteModule l E X n) (fun n ↦
     (DerivedNakayama.pullback l E X).map (quotientStep l E n))
 
-/-- The actual quotient projections from the regular integral module.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The actual quotient projections from the regular integral module. -/
 def coefficientCone : Cone (coefficientSequence l E X) :=
   ⟨𝟙_ (Modules l E X), NatTrans.ofOpSequence (finiteUnit l E X)
     (fun n ↦ by
@@ -325,8 +325,7 @@ private theorem coefficientCone_isLimit : Nonempty (IsLimit (coefficientCone l E
     ((IsLimit.postcomposeHomEquiv (realizationTower l E X) c) hc)⟩
 
 /-- Continuous integral coefficients are the ordinary inverse limit of their positive
-finite quotients, with the specified projections; the quotient transitions are epi.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Propositions 3.1.9--3.1.10. -/
+finite quotients, with the specified projections; the quotient transitions are epi. -/
 theorem integral_coefficient_quotient_limit :
     Nonempty (IsLimit (coefficientCone l E X)) ∧
       ∀ n : ℕ, Epi ((coefficientSequence l E X).map (homOfLE n.le_succ).op) := by

@@ -56,7 +56,9 @@ import all Mathlib.CategoryTheory.Limits.Preserves.Limits
 
 /-! # Transport of the two strict completion presentations to the small constant site
 
-Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
+## References
+
+* Stacks Project, Tags 03CR, 05RR, 06YY, 0941, 093M
 -/
 
 @[expose] public noncomputable section
@@ -827,9 +829,7 @@ private theorem comparisonCompletedRingIso_scalar
   exact h'
 
 /-- The constants-to-functions equivalence identifies the completed ring, its scalars,
-its module category and every positive quotient, including their strict quotient units.
-
-Source: Stacks Tags 03CR, 093M and 06YY. -/
+its module category and every positive quotient, including their strict quotient units. -/
 theorem completed_constant_coefficient_equivalence
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     ∃ β : completedCechRing T d ≅

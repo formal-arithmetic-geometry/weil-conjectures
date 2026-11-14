@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 
 /-! # Specialization to the distinguished closed lift
 
-Source: Stacks Project, Tag 0GJ2, the pointed-neighbourhood construction.
+## References
+
+* Stacks Project, Tag 0GJ2 (the pointed-neighbourhood construction), Tag 04HX
 -/
 
 @[expose] public section
@@ -134,8 +136,7 @@ private theorem germ_transport
   simp
 
 /-- At the distinguished closed lift the specialization is the original germ,
-with only the transport of its geometric point.
-Source: Stacks Project, Tag 0GJ2 and Tag 04HX. -/
+with only the transport of its geometric point. -/
 theorem Etale.etaleStalkSpecialization_closed
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S)
@@ -192,8 +193,7 @@ private theorem exactDerived_transport
   subst τ
   simp [Functor.rightDerivedFunctorPlusNatTrans, NatTrans.mapHomotopyCategoryPlus_id]
 
-/-- Derived specialization to the distinguished closed lift is the canonical transport.
-Source: Stacks Project, Tag 0GJ2 and Tag 04HX. -/
+/-- Derived specialization to the distinguished closed lift is the canonical transport. -/
 theorem Etale.derivedEtaleStalkSpecialization_closed
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S)

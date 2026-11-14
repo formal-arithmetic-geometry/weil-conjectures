@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInte
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimForgetUnit
 
-/-! # Forgetting constant scalars commutes with inverse image -/
+/-! # Forgetting constant scalars commutes with inverse image
+
+## References
+
+* [Stacks Project, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,9 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- The constant-scalar forgetful functor commutes with inverse image.
-
-Source: Stacks Project, Modules on Sites, Tag 03D3. -/
+/-- The constant-scalar forgetful functor commutes with inverse image. -/
 theorem diagonalRlimForgetPullback (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     Nonempty (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f ⋙ diagonalForget l X ≅

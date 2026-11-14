@@ -144,24 +144,7 @@ private theorem closureSquare_mate
 
 set_option linter.unusedVariables false in
 /-- A single rational root line extends to the prescribed closure line, and
-its shifted scalar/direct-image mate is invertible for a qcqs morphism.
-This statement contains no diagonal class, trace, supported source or integration identity.
-
-
-
-Derive the ordinary restriction/direct-image comparison using exact coefficient
-restriction and direct-image-acyclic resolutions. Equivalently, derive its
-adjoint scalar/inverse-image comparison and take the conjugate. Transport from
-the canonical source model to R using hR and its full-unit equation hunit. This
-gives the normalized RestrictionSquare, including its equation on every complex.
-On the root line shifted by two the scalar mate is the filtered colimit of the
-finite-free projection comparisons. All single root-line complexes shifted by
-two vanish below -2. Bounded continuity for the qcqs morphism identifies direct
-image of the colimit with the colimit of direct images, and exactness of filtered
-colimits identifies the derived coefficient endpoints. The finite comparisons
-and their colimit are isomorphisms, so this mate component is invertible. No
-continuity claim is made on arbitrary unbounded complexes. The proof includes
-identity morphisms and the bottom field, and is valid on empty schemes. -/
+its shifted scalar/direct-image mate is invertible for a qcqs morphism. -/
 theorem diagonalClosure_lineComparison
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]

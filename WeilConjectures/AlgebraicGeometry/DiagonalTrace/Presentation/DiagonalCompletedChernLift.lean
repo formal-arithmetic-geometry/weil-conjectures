@@ -14,6 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 
 /-! # Lifting the Chern adjunct to completed coefficients
+
+## References
+* Stacks Project, Tags 099I, 099L
 -/
 
 @[expose] public noncomputable section
@@ -104,8 +107,7 @@ def Presentation.systemChern (l : ℕ) [Fact l.Prime]
   p.restrictionS.F.mapDerivedCategory.map
       (p.model.chernAdjoint l (ULift.{u} (Padic l))) ≫ p.varying.hom.app _
 
-/-- Lift the system Chern adjunct using the full subcategory of complete objects.
-Source: diagonal tower trace proof (1), and Stacks 099I and 099L. -/
+/-- Lift the system Chern adjunct using the full subcategory of complete objects. -/
 theorem diagonalTrace_completedChern_lift
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

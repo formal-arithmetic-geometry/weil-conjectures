@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-! # Residue cohomology of an affine bounded free representative
 
-Source: Stacks Project, Tags 0BCD, 064K, 06YB and 0098.
+## References
+
+* Stacks Project, Tags 0BCD, 064K, 06YB, 06YI, 06YJ and 0098
 -/
 
 @[expose] public section
@@ -29,10 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Residue extension of the section complex computes the derived residue fibre
-cohomology by a linear equivalence.
-Source: Stacks Project, Tags 0BCD (minimal free models), 064K (bounded free
-K-flatness), 06YB (stalkwise K-flatness), 06YI and 06YJ (derived pullback),
-and 0098 (stalks of pullback). -/
+cohomology by a linear equivalence. -/
 theorem affineFree_residueSections_cohomologyLinearEquiv
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

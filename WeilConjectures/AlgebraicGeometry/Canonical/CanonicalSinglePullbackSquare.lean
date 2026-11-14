@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposit
 
 /-! # Pullback composition compatibility on single modules
 
-Source: Stacks Project, Tag 0D5S.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section
@@ -91,8 +93,7 @@ private theorem singlePullback_congr
     simp [pullbackCongr]
 
 /-- Single pullback comparisons respect a commutative square and a module morphism.
-This concerns only pullback; it involves neither base change nor direct image.
-Source: Stacks Project, Tag 0D5S, and the naturality of left-derived counits. -/
+This concerns only pullback; it involves neither base change nor direct image. -/
 theorem canonicalSinglePullbackSquare
     {X S X' S' : Scheme.{u}} (f : X ⟶ S)
     (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')

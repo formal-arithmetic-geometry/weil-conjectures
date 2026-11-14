@@ -30,7 +30,7 @@ element acting on a geometric fibre) corresponds to precomposition with `f^*`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHPicTorsionDualAddEquiv_mapIsoH1`).
 
 The groups `Pic(X)[ℓⁿ] ≅ (ℤ/ℓⁿ)^{2g}` have `ℓ ^ (2 g n)` elements, so the `ℓ`-power torsion
-of `Pic(X)` is `ℓ`-divisible, and passing to the limit gives blueprint (4.1),
+of `Pic(X)` is `ℓ`-divisible, and passing to the limit gives (4.1),
 
 `lim_n H¹(X, ℤ/ℓⁿ) ≃+ Hom_{ℤ_ℓ}(T_ℓ Pic(X), ℤ_ℓ)`
 

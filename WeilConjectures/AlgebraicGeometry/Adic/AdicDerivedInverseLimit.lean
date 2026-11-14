@@ -12,10 +12,6 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 /-!
 # Adic derived inverse limits with a chosen Roos triangle
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/def-weil-pbc-adic-derived-inverse-limit.md, order 1256;
-Stacks Project, Derived Categories, Tags 08TC and 0H9J.
-
 ## Main definitions
 
 - `adicReductionSequence`: the scalar-restricted reductions, indexed from zero.
@@ -26,6 +22,10 @@ Stacks Project, Derived Categories, Tags 08TC and 0H9J.
 The model parameter uses the recorded coefficient construction. Every derived object
 admits such a model by `adicKFlatModel_exists`; no boundedness condition is imposed.
 No derived-limit object, morphism between triples, or functor is selected.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 08TC and 0H9J
 -/
 
 @[expose] public section

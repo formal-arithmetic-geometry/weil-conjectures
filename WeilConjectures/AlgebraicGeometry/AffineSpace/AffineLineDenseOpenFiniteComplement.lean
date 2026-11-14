@@ -17,7 +17,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.GenericFiniteOpenNeighborhood
 
-/-! The geometric shrinking step for a dense open in a relative affine line. -/
+/-! The geometric shrinking step for a dense open in a relative affine line.
+
+## References
+
+* Stacks Project, Tag 0GKZ (dense-open step) and Tag 02NW
+-/
 
 @[expose] public section
 
@@ -163,8 +168,7 @@ private theorem finite_generic_fibers
   exact hzi
 
 /-- The closed complement of a dense open of a relative affine line becomes finite over a
-suitable dense affine open of a finite-type integer base.
-Source: Stacks Project, Tag 0GKZ, dense-open step, and Tag 02NW. -/
+suitable dense affine open of a finite-type integer base. -/
 theorem exists_dense_affine_open_isFinite_closedComplement
     (Y : Scheme.{u}) [IsAffine Y] [Algebra.FiniteType ℤ Γ(Y, ⊤)]
     (U : (AffineSpace (ULift.{u} (Fin 1)) Y).Opens)

@@ -9,7 +9,9 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Existence of normalized scalar models
 
-Source: Stacks Project, Tags 03EK, 06YY and 07A6.
+## References
+
+* Stacks Project, Tags 03EK, 06YY, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -154,8 +156,7 @@ private theorem derivedUnit_normalization
   simp [derivedUnit, Localization.liftNatIso_hom, Localization.liftNatTrans_app,
     ordinaryUnitHomotopy]
 
-/-- Normalized scalar models exist on the actual pro-etale module categories.
-Source: Stacks Project, Tags 03EK, 06YY and 07A6. -/
+/-- Normalized scalar models exist on the actual pro-etale module categories. -/
 theorem finiteFreeDirectImageScalarModels (X : Scheme.{u}) : Nonempty (ScalarModel X) := by
   obtain ⟨p, ⟨n⟩⟩ :=
     SheafOfModules.SuccessiveDerivedQuotient.successive_derived_quotient_normalization

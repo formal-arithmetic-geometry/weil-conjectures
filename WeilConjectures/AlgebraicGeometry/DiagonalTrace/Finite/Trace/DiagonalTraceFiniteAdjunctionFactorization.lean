@@ -23,30 +23,8 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource completedSupportedUnit
 
 /-- The two normalized direct-image constructions factor through the same operation
-on finite, unadjointed arrows on the surface. This concerns every supported arrow
-and every geometric arrow, without identifying either arrow as a Cartier or Chern class.
-
-
-
-For a supported arrow gamma, naturality of the completed exact square moves gamma
-past p.completed. Its common-unit normalization identifies the single-object map
-of a.iso with the direct image of the constant-to-support map. Indeed a.normalization
-is precisely the ordinary composition comparison for diagonal followed by f, and
-a.over_eq makes that composition the identity. The unit equation therefore fixes
-this map with no scalar factor. The common-derived-unit equation for p.limits
-identifies its projection with the evaluation/direct-image comparison used in Phi.
-Naturality of the root cone then gives the first equation for every gamma.
-
-For a geometric arrow theta, expand its adjunct as the adjunction unit followed by
-the direct image of coefficientPullback.derivedIso.hom followed by theta. The
-ordinary coefficient pullback normalization sends one to one. Together with
-p.varying_normalization this identifies its restricted unit with the coefficient
-unit used in Phi. The ordinary coefficient cone has actual quotient projections;
-the exact-cone projection identity identifies the input with coefficientsS.unitMap
-followed by LS.projection. Naturality gives the second equation for every theta.
-No equality of arbitrary derived arrows is inferred from their finite values.
-The construction uses no inverses of coefficient projections, so also covers n=0
-and the empty surface. -/
+on finite, unadjointed arrows on the surface, for every supported arrow and every
+geometric arrow. -/
 theorem diagonalTrace_finiteAdjunction_factorization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

@@ -15,7 +15,9 @@ import WeilConjectures.Topology.InverseImageOperationExt
 
 /-! # Algebra base change compared with module tensor pullback
 
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096; Tag 09MS, coefficient quotient.
+## References
+
+* Stacks Project, Sheaves on Spaces, Tags 0095 and 0096; Tag 09MS.
 -/
 
 @[expose] public section
@@ -149,12 +151,7 @@ end
 
 set_option maxHeartbeats 800000 in
 -- Comparing dependent inverse-image scalar actions requires extra elaboration steps.
-/-- Canonical algebra pushout comparison for the chosen tensor pullback adjunction.
-
-Source: Stacks Project, Tags 0095 and 0096; Tag 09MS, coefficient quotient.
-The proof constructs the sheaf pushout of the inverse-image structure sheaf and the
-inverse-image algebra, then identifies its underlying module by the sheaf tensor
-pushout comparison and inverse-image regular extension. -/
+/-- Canonical algebra pushout comparison for the chosen tensor pullback adjunction. -/
 private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{u}} (j : Z ⟶ X)
     (B : X.CommAlgebraSheaf) :
     ∃ (C : X.CommAlgebraSheaf) (p : B ⟶ C)
@@ -249,9 +246,7 @@ private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{
   exact (congrArg (v.hom.val.app W) (hk IM W m)).trans (hv (op V) x)
 
 /-- Pulling back an algebra sheaf and pushing it forward realizes the unit on its
-underlying module, for any supplied tensor-pullback adjunction.
-
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096; Tag 09MS, coefficient quotient. -/
+underlying module, for any supplied tensor-pullback adjunction. -/
 theorem exists_algebraTensorPullbackComparison {X Z : Scheme.{u}} (j : Z ⟶ X)
     (a : tensorPullback j ⊣ pushforward j) (B : X.CommAlgebraSheaf) :
     ∃ (C : X.CommAlgebraSheaf) (p : B ⟶ C)

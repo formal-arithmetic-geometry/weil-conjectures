@@ -40,7 +40,7 @@ private theorem whisker_eqToIso_trans_heq {C D E : Type*}
   simp
 
 /-- The cached comparison is the canonical exact-derived comparison after identifying
-its source single functor. Source: the exact-derived comparison in coefficient changes (1). -/
+its source single functor. -/
 theorem finiteSingleComparison_heq (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     HEq (finiteSingleComparison A X)
       ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategorySingleFunctor 0) := by

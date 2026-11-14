@@ -13,7 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Proper.Etale.ProperEtaleCompositorRawUn
 import WeilConjectures.AlgebraicGeometry.Proper.Etale.ProperEtaleSheafSupportMap
 import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperSheafUnitGraphTranspose
 
-/-! # The graph transpose of the compact-support compositor -/
+/-! # The graph transpose of the compact-support compositor
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0F7J
+* SGA 4, Exposé XVII, 6.2.11
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -68,8 +74,7 @@ private theorem graphTransferNat_app
   rw [Category.comp_id]
   rfl
 
-/-- The transpose of compact-support composition is the clopen graph transfer.
-Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J; SGA 4 XVII 6.2.11. -/
+/-- The transpose of compact-support composition is the clopen graph transfer. -/
 theorem properCompositor_graph_transpose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

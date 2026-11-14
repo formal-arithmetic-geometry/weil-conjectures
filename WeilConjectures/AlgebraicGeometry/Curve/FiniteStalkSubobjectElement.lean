@@ -17,7 +17,9 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 /-!
 # A stalk element lies in a finite-stalk subobject
 
-Source: blueprint `theorem-cohomology-curves--2`, paragraph 4; Stacks 04JQ.
+## References
+
+* Stacks Project, Tag 04JQ
 -/
 
 @[expose] public section
@@ -107,9 +109,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.style.haveILetI false in
 /-- Every element of the geometric stalk of a torsion sheaf over a field comes from
-one finite-stalk subobject.
-
-Source: blueprint `theorem-cohomology-curves--2`, paragraph 4, and Stacks 04JQ. -/
+one finite-stalk subobject. -/
 theorem torsion_exists_finite_stalk_subobject_element
     (K : Type u) [Field K]
     (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})

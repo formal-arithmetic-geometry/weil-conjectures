@@ -32,7 +32,9 @@ import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-! # The strict completed Koszul-to-quotient Roos augmentation
 
-Source: Stacks Project, Tags 091N and 099M.
+## References
+
+* Stacks Project, Tags 091N and 099M
 -/
 
 @[expose] public noncomputable section
@@ -213,10 +215,7 @@ end Assembly
 
 /-- The coefficient augmentation induces a natural chain map of the explicit Roos
 models. It is a quasi-isomorphism on unbounded K-flat complexes and preserves the actual
-zero-second-coordinate quotient unit.
-
-Source: Stacks Project, Tags 091N, 099M; the strict augmentation part of blueprint
-sec-proper-base-change/sk-thm-properbasechange, order 1248. -/
+zero-second-coordinate quotient unit. -/
 theorem completedKoszulQuotientRoosAugmentation
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :

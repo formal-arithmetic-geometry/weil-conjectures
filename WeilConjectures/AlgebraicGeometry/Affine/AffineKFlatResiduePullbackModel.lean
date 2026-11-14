@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 
 /-! # An affine K-flat model of the ambient derived residue pullback
 
-Source: Stacks Project, Tags 0BDI and 08DW(2).
+## References
+
+* Stacks Project, Tag 0BDI (affine reduction) and Tag 08DW(2) (affine derived pullback)
 -/
 
 @[expose] public section
@@ -55,14 +57,7 @@ private noncomputable def mapComplexComparison
 -- The natural comparisons involve several composed functors on sheaves and complexes.
 /-- A supplied K-flat affine module model computes the ambient derived residue pullback
 as an object, before taking any cohomology or dimensions. The scalar field is transported
-by the explicitly constructed residue-field isomorphism `e`.
-
-Source: Stacks Project, Tag 0BDI, affine reduction; Tag 08DW(2), affine derived pullback.
-
-
-No cohomology, finrank, freeness, boundedness or finite-dimensionality is used here.
-For an empty open there is no z. The zero complex and arbitrary unbounded K-flat
-complexes are included; all scalar maps are isomorphisms where asserted. -/
+by the explicitly constructed residue-field isomorphism `e`. -/
 theorem affine_kFlat_residuePullback_model (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

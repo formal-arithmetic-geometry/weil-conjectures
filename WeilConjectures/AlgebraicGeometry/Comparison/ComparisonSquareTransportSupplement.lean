@@ -17,7 +17,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonSquareEtalePathNormalizationSupplement
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonSquareProEtalePathNormalizationSupplement
 
-/-! # Derived transport of a coherent comparison square -/
+/-! # Derived transport of a coherent comparison square
+
+## References
+
+* [Stacks Project, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
+-/
 
 @[expose] public section
 
@@ -31,9 +36,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Derived pullback comparisons transport an underived coherent square to the bounded-below
 comparison square. This is the categorical transport portion of
 `comparison_square`; the underived square is supplied separately so that arbitrary commutative
-coefficient rings are allowed.
-Source: blueprint `stage3-proetale-comparison-square`, proof step 4; Stacks Project, Tag 0B65.
--/
+coefficient rings are allowed. -/
 theorem comparison_square_of_component
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

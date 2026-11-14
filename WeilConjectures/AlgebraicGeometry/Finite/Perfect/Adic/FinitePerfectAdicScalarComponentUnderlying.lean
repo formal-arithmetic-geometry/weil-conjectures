@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
 import all WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicSourcePresentation
 
-/-! # Underlying abelian map of the ordinary scalar compositor -/
+/-! # Underlying abelian map of the ordinary scalar compositor
+
+## References
+
+* Stacks Project, Tags 03CY and 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,9 +38,7 @@ private lemma restrictedIso_forget
     finitePerfectAdicRestriction_forget_compositor]
   exact Category.comp_id _
 
-/-- After forgetting scalars, the scalar compositor is its finite associated-sheaf map.
-
-Source: Stacks Project, Tags 03CY and 06YY. -/
+/-- After forgetting scalars, the scalar compositor is its finite associated-sheaf map. -/
 theorem finitePerfectAdicScalarComponent_forget
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

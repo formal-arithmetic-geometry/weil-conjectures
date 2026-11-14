@@ -127,7 +127,9 @@ import all WeilConjectures.Algebra.Homology.Finite.FiniteFreeScalarExtension
 
 /-! # Ordinary finite-basis coordinates and scalar pullback
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -330,8 +332,7 @@ private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
   rfl
 
 /-- A basis and its pullback give ordinary coordinate isomorphisms whose square
-commutes with the actual geometric and scalar comparisons.
-Source: Stacks Project, Tags 03EK, 03EL and 06YY. -/
+commutes with the actual geometric and scalar comparisons. -/
 theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)

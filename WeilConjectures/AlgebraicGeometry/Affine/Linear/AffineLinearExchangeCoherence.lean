@@ -19,8 +19,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pasting of ordinary derived compact-support exchange maps, in the left-derived
-inverse-image model. Source: linear trace proof, paragraph 1; transport of the existing
-unbounded exchange pasting equation through the exact/derived comparison. -/
+inverse-image model. -/
 theorem affineLinearExchange_paste (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' X'' Y Y' Y'' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian X'] [IsNoetherian X'']
@@ -153,8 +152,7 @@ private theorem square_inv_eq
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pasting the automorphism square before and after a base-change square gives
-compatible action maps. Source: linear trace proof, paragraph 1; apply exchange pasting
-in the two orders and cancel the identity pullback comparisons. -/
+compatible action maps. -/
 theorem affineLinearExchange_action
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

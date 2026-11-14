@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeHorizontalMate
 
 /-! # Source and apex transport of a derived base-change mate
 
-Source: Stacks Project, Tags 08HY and 0D5T.
+## References
+
+* Stacks Project, Tags 08HY, 0D5T
 -/
 
 @[expose] public section
@@ -80,8 +82,7 @@ private theorem transport_baseChange_naturality
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, eqToIso.hom,
     eqToHom_app, Functor.comp_obj, Functor.id_obj, Category.assoc] using hn
 
-/-- Horizontal transport of the base-change mate, with arbitrary coefficient maps.
-Source: Stacks Project, Tags 08HY and 0D5T. -/
+/-- Horizontal transport of the base-change mate, with arbitrary coefficient maps. -/
 theorem derivedBaseChange_source_transport
     [∀ X : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

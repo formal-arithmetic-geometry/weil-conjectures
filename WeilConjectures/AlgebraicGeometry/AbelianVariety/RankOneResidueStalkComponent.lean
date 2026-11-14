@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # The residue calculation for the degree-zero component of a rank-one model
 
-Source: Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD.
+## References
+
+* Stacks Project, Tags 0E62 (residue-field argument) and 0BCD
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The degree-zero component of a fixed chain representative is invertible at the
-chosen stalk when its derived residue arrow is invertible on degree-zero homology.
-Source: Stacks Project, Tag 0E62, residue-field argument, and Tag 0BCD. -/
+chosen stalk when its derived residue arrow is invertible on degree-zero homology. -/
 theorem isIso_localized_stalk_component_of_residue_homology (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

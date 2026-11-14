@@ -22,11 +22,15 @@ public import Mathlib.CategoryTheory.Sites.LocalSite
 /-!
 # Canonical closed-test derived exchange maps
 
-Source: Stacks Project, Tags 09BL and 0D6F.
+## Implementation details
 
-These are the unchanged canonical map constructions previously housed with the
-closed-test exchange theorems. Keeping the constructions separate allows those
-theorems to import their section-localization proof dependencies without a cycle.
+* The canonical map constructions are kept separate from the closed-test exchange theorems so
+  that those theorems can import their section-localization dependencies without an import
+  cycle.
+
+## References
+
+* Stacks Project, Tags 08BJ, 09BK, 09BL, 09T5, 0D6E, 0D6F
 -/
 
 @[expose] public noncomputable section
@@ -66,8 +70,7 @@ instance (priority := 2500) moduleSectionsAdditive (X : Scheme.{u}) :
     (condensedModuleSections Λ X).Additive :=
   inferInstance
 
-/-- Exact pullback, from the recorded module inverse image.
-Source: Tags 09BL and 0D6F. -/
+/-- Exact pullback, from the recorded module inverse image. -/
 def pull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y)) ⥤
@@ -75,37 +78,32 @@ def pull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (condensedRingObj Λ X)) :=
   (CondensedRing.upperStar Λ f).mapDerivedCategory
 
-/-- The canonical derived adjunction with exact inverse image.
-Source: Tag 09T5. -/
+/-- The canonical derived adjunction with exact inverse image. -/
 def adj {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pull Λ f ⊣ CondensedRing.moduleObjectDerivedPushforward Λ f :=
   (CondensedRing.upperStarLowerStarAdjunction Λ f).mapDerivedCategoryRightDerivedAdjunction
 
-/-- Composition of exact pullbacks, using the recorded ordinary composition.
-Source: Tag 09T5. -/
+/-- Composition of exact pullbacks, using the recorded ordinary composition. -/
 def pullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     pull Λ (f ≫ g) ≅ pull Λ g ⋙ pull Λ f :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The canonical pullback comparison of a commutative square.
-Source: Tag 09BL, specified mate. -/
+/-- The canonical pullback comparison of a commutative square. -/
 def square {X U T Z : Scheme.{u}} {f : X ⟶ U} {s : Z ⟶ U}
     {h : T ⟶ X} {fZ : T ⟶ Z} (w : CommSq h fZ f s) :
     pull Λ s ⋙ pull Λ fZ ≅ pull Λ f ⋙ pull Λ h :=
   (pullComp Λ fZ s).symm ≪≫
     eqToIso (congrArg (fun b : T ⟶ U ↦ pull Λ b) w.w.symm) ≪≫ pullComp Λ h f
 
-/-- The specified exchange, constructed as the adjunction mate.
-Source: Tag 09BL, unit--counit calculation. -/
+/-- The specified exchange, constructed as the adjunction mate. -/
 def exchange {X U T Z : Scheme.{u}} {f : X ⟶ U} {s : Z ⟶ U}
     {h : T ⟶ X} {fZ : T ⟶ Z} (w : CommSq h fZ f s) :
     CondensedRing.moduleObjectDerivedPushforward Λ f ⋙ pull Λ s ⟶
       pull Λ h ⋙ CondensedRing.moduleObjectDerivedPushforward Λ fZ :=
   Adjunction.squareExchange (adj Λ f) (adj Λ fZ) (pull Λ s) (pull Λ h) (square Λ w)
 
-/-- Canonical global-section composition before deriving.
-Source: Tag 0D6E, sectionwise identity. -/
+/-- Canonical global-section composition before deriving. -/
 def pushSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CondensedRing.lowerStar Λ f ⋙ condensedModuleSections Λ Y ≅
       condensedModuleSections Λ X :=
@@ -119,22 +117,19 @@ def pushSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology X) Ab.{u + 1}
         (Scheme.ProEt.isTerminalMkId X))
 
-/-- K-injective preservation is supplied by the existing exact inverse-image adjunction.
-Source: Tag 08BJ. -/
+/-- K-injective preservation is supplied by the existing exact inverse-image adjunction. -/
 instance lowerStarPreservesKInjective {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.lowerStar Λ f).PreservesKInjectiveComplexes :=
   (CondensedRing.upperStarLowerStarAdjunction Λ f).preservesKInjectiveComplexes
 
-/-- Derived composition for global sections, normalized by the ordinary section identity.
-Source: Tag 0D6E. -/
+/-- Derived composition for global sections, normalized by the ordinary section identity. -/
 def pushDerivedSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CondensedRing.moduleObjectDerivedPushforward Λ f ⋙
         (condensedModuleSections Λ Y).rightDerivedFunctor ≅
       (condensedModuleSections Λ X).rightDerivedFunctor :=
   Functor.rightDerivedFunctorCompIso' _ _ (pushSectionsIso Λ f)
 
-/-- Canonical derived restriction: the derived unit, followed by section composition.
-Source: Tags 09T5 and 0D6E. -/
+/-- Canonical derived restriction: the derived unit, followed by section composition. -/
 def restriction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (condensedModuleSections Λ Y).rightDerivedFunctor ⟶
       pull Λ f ⋙ (condensedModuleSections Λ X).rightDerivedFunctor :=
@@ -143,15 +138,13 @@ def restriction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.whiskerLeft (pull Λ f) (pushDerivedSectionsIso Λ f).hom
 
 /-- Derived sections on the source of b, after the existing exact pullback.
-For a pro-etale b this is the canonical localized-site derived sections.
-Source: Tag 0D6F. -/
+For a pro-etale b this is the canonical localized-site derived sections. -/
 def sectionsOver {X W : Scheme.{u}} (b : W ⟶ X) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) ⥤ DerivedCategory Ab.{u + 1} :=
   pull Λ b ⋙ (condensedModuleSections Λ W).rightDerivedFunctor
 
-/-- Restriction between two schemes over X, with the canonical pullback composition.
-Source: Tags 0D6E--0D6F. -/
+/-- Restriction between two schemes over X, with the canonical pullback composition. -/
 def restrictionOver {X W W' : Scheme.{u}} (b : W ⟶ X) (a : W' ⟶ W) :
     sectionsOver Λ b ⟶ sectionsOver Λ (a ≫ b) :=
   Functor.whiskerLeft (pull Λ b) (restriction Λ a) ≫
@@ -159,8 +152,7 @@ def restrictionOver {X W W' : Scheme.{u}} (b : W ⟶ X) (a : W' ⟶ W) :
       (condensedModuleSections Λ W').rightDerivedFunctor
 
 /-- The canonical Leray/base-change section comparison of a commutative square.
-It is defined without an invertibility assumption.
-Source: Tags 09BL and 0D6E. -/
+It is defined without an invertibility assumption. -/
 def sectionComparison {X U T W : Scheme.{u}} {f : X ⟶ U} {b : W ⟶ U}
     {h : T ⟶ X} {fW : T ⟶ W} (w : CommSq h fW f b) :
     CondensedRing.moduleObjectDerivedPushforward Λ f ⋙ sectionsOver Λ b ⟶
@@ -169,9 +161,7 @@ def sectionComparison {X U T W : Scheme.{u}} {f : X ⟶ U} {b : W ⟶ U}
       (condensedModuleSections Λ W).rightDerivedFunctor ≫
     Functor.whiskerLeft (pull Λ h) (pushDerivedSectionsIso Λ fW).hom
 
-/-- Restriction to V from its closed-site lift, along the actual closed inclusion.
-The equality uses the geometric pullback statement, not an arbitrary comparison map.
-Source: Tag 09BL (2). -/
+/-- Restriction to V from its closed-site lift, along the actual closed inclusion. -/
 def closedComparison (A : Type u) [CommRing A] (I : Ideal A)
     (V : (Spec (.of (A ⧸ I))).AffineProEt) :
     sectionsOver Λ ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom ⟶
@@ -185,13 +175,11 @@ def closedComparison (A : Type u) [CommRing A] (I : Ideal A)
       (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).hom
       (condensedModuleSections Λ V.left).rightDerivedFunctor
 
-/-- The closed subscheme morphism Spec(A/I) → Spec A.
-Source: Tag 09BL. -/
+/-- The closed subscheme morphism Spec(A/I) → Spec A. -/
 abbrev closedMap (A : Type u) [CommRing A] (I : Ideal A) :=
   Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
 
-/-- The map from the closed test fibre to its lifted test fibre, by the pullback property.
-Source: Tag 09BK. -/
+/-- The map from the closed test fibre to its lifted test fibre, by the pullback property. -/
 def testMap (A : Type u) [CommRing A] (I : Ideal A)
     {X XZ : Scheme.{u}} {f : X ⟶ Spec (.of A)}
     {h : XZ ⟶ X} {fZ : XZ ⟶ Spec (.of (A ⧸ I))}
@@ -206,8 +194,7 @@ def testMap (A : Type u) [CommRing A] (I : Ideal A)
         ((Scheme.AffineProEt.affine_closed_site_functor_properties A I).2.2.2.2.2.2.2
           V).2.1.w])
 
-/-- Restriction on the two actual test fibres, including its canonical target identification.
-Source: Tags 09BL and 0D6F. -/
+/-- Restriction on the two actual test fibres, including its canonical target identification. -/
 def testRestriction (A : Type u) [CommRing A] (I : Ideal A)
     {X XZ : Scheme.{u}} {f : X ⟶ Spec (.of A)}
     {h : XZ ⟶ X} {fZ : XZ ⟶ Spec (.of (A ⧸ I))}

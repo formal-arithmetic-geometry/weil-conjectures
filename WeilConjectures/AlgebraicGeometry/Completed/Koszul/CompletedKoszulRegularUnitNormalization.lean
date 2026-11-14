@@ -11,7 +11,9 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Normalization of the completed regular Koszul unit
 
-Source: Stacks Project, Tags 03EK and 099M.
+## References
+
+* Stacks Project, Tags 03EK and 099M
 -/
 
 @[expose] public noncomputable section
@@ -317,10 +319,7 @@ private lemma completedRegularUnitIso_normalization (r : ℕ) (a : Fin r → A) 
       congrArg (fun f ↦ (scalarUnitIso (completedAdicScalar T d)).inv ≫
         eqToHom (hG (SheafOfModules.unit R)).symm ≫ f) hc)
 
-/-- One fixed regular-module isomorphism realizes every normalized degree-zero Koszul unit.
-
-Source: Stacks Project, Modules on Sites, section on tensor products (03EK), and
-proetale.tex, proof of lemma-naive-completion (099M). -/
+/-- One fixed regular-module isomorphism realizes every normalized degree-zero Koszul unit. -/
 theorem completedKoszulRegularUnitNormalization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

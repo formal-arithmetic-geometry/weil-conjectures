@@ -11,7 +11,12 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
-/-! # Pullback compatibility of the Artin--Schreier rows -/
+/-! # Pullback compatibility of the Artin--Schreier rows
+
+## References
+
+* Stacks Project, Tag 0A3J.
+-/
 
 @[expose] public section
 
@@ -22,8 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- Artin--Schreier rows commute with structural pullback of regular functions.
-Source: Stacks Project, Tag 0A3J, opening sequence and its functoriality. -/
+/-- Artin--Schreier rows commute with structural pullback of regular functions. -/
 theorem exists_artinSchreier_pullback_rows
     {C C' : Scheme.{u}} (ι' : C' ⟶ C) (p : ℕ) [Fact p.Prime]
     (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})

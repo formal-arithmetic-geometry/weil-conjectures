@@ -13,12 +13,12 @@ set_option linter.privateModule false
 /-!
 # Coefficient cocycle of the normalized pro-etale derived direct image
 
-Source: Stacks Project, derived.tex, Tag 070Y (`lemma-K-injective-defined`), and the
-agent-written coefficient-composition argument in the DAG.
-
 The comparisons are the specified `fixedScalarRestrictionDirectImage` isomorphisms.
 The restriction associators are the existing sectionwise identity isomorphisms localized
 termwise as `Sheaf.derivedRestrictScalarsCompIso`. All derived categories are unbounded.
+
+## References
+* [Stacks Project, Tag 070Y](https://stacks.math.columbia.edu/tag/070Y)
 -/
 
 @[expose] public section

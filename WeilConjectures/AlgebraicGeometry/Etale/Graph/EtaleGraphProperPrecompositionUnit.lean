@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperPrecomposit
 
 /-! # A proper-first tower compared with one compactification
 
-Source: Stacks Project, Tags 0F7B, 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0F7J
+* Stacks Project, Tag 0F4L (graph normalization)
 -/
 
 @[expose] public section
@@ -28,10 +31,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   Functor.mapDerivedCategory Functor.rightDerivedFunctor canonicalEtaleCompactSupportComparison
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
-/-- Normalize just the proper-first tower against a single compactification of its composite.
-There is no second proper/etale factorization in this assertion.
-Source: Stacks Project, more-etale.tex Tags 0F7B, 0F7I and 0F7J; graph normalization:
-etale-cohomology.tex Tag 0F4L. -/
+/-- Normalize just the proper-first tower against a single compactification of its composite. -/
 theorem graph_proper_precomposition_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 
 /-! # Proper-support tower normalization through the right-derived unit
 
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7F, 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -365,8 +367,7 @@ private theorem graph_proper_support_unit_aux
     NatTrans.mapHomotopyCategory_comp, Functor.whiskerRight_comp, Category.assoc] using hpre
 
 /-- A sheaf map normalized in the common ordinary direct image computes the
-compact-support tower interchange after the source right-derived unit.
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7I and 0F7J. -/
+compact-support tower interchange after the source right-derived unit. -/
 theorem graph_proper_support_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W Y' Z Y : Scheme.{u}}

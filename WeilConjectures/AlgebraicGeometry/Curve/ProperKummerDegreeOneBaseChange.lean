@@ -38,8 +38,8 @@ private theorem proper_units_divisible {k : Type u} [Field k] [IsAlgClosed k]
   have : Module.Finite k Γ(C, ⊤) := Scheme.finite_globalSectionsRingHom_of_isProper
   exact IsAlgClosed.exists_pow_eq_of_finite hn
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in
-degree one. -/
+/-- For a proper connected curve, the Kummer comparison in degree one is bijective under
+base change to an extension of algebraically closed fields. -/
 theorem IsConnectedCurve.proper_kummer_degree_one_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

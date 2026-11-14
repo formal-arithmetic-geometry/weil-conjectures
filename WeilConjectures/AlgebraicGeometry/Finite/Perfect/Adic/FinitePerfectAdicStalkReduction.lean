@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalConst
 
 /-! # Consecutive algebraic stalk reductions
 
-Source: Stacks Project, Tag 09C6, the balancing isomorphism between consecutive levels.
+## References
+
+* Stacks Project, Tag 09C6 (the balancing isomorphism between consecutive levels)
 -/
 
 @[expose] public noncomputable section
@@ -42,13 +44,10 @@ private def finitePerfectAdic_pullback_constant_model
     (Functor.mapDerivedCategoryNatIso
       (upperStarConstantSheafIso (ModuleCat.{t + 1} B) g)).app E
 
-/-- Two already descended quotient levels have the expected algebraic scalar extension.
-This only relates the two supplied perfect fibres; it constructs neither etale levels
-nor their comparison maps, and has no cover-existence conclusion.
-
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6), the
-sentence asserting L_(n+1) tensor^L (A/I^(n+1)) = L_n; Cohomology on Sites,
-lemma-locally-constant-map, and tensor compatibility of geometric inverse image. -/
+/-- Two already descended quotient levels have the expected algebraic scalar extension
+`L_(n+1) ⊗^L (A/I^(n+1)) ≅ L_n`. This only relates the two supplied perfect fibres; it
+constructs neither etale levels nor their comparison maps, and has no cover-existence
+conclusion. -/
 theorem finitePerfectAdic_stalk_reduction
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

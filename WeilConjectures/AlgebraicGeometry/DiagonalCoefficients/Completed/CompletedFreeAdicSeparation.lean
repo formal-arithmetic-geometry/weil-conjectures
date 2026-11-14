@@ -86,14 +86,7 @@ private theorem localDual_zero (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     Over.mk g ⟶ Over.mk (𝟙 W)).op _
 
 /-- A locally infinitely ell-divisible section of the free completed-coefficient
-sheaf on a pro-affine etale representable vanishes.
-
-
-
-The earlier version for arbitrary pro-etale representables was false: gluing two
-copies of a Boolean convergent-sequence spectrum along its isolated points gives
-a non-quasi-separated counterexample. The change record explains the correction
-and the descent preserving the parent statement. -/
+sheaf on a pro-affine etale representable vanishes. -/
 theorem completedFree_adicSeparated (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) :
     let R := Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)

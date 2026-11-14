@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 
 /-! # The algebra obtained by descending the ideal-power quotients
 
-Source: Stacks Project, Divisors, Tags 0630 and 0633.
+## References
+
+* Stacks Project, Divisors, Tags 0630 and 0633.
 -/
 
 @[expose] public section
@@ -31,7 +33,7 @@ variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- The algebra construction with its coproduct and normalized affine charts.
 This record contains no stalk or finiteness assertion and no symmetric comparison
-or augmentation. Source: Stacks Project, Divisors, Tags 0630 and 0633. -/
+or augmentation. -/
 structure AffineData where
   algebra : Z.CommAlgebraSheaf
   inclusion : ∀ n, piece i n ⟶ algebra.toModule
@@ -160,8 +162,7 @@ private theorem additive_chart_mul
     simp only [add_mul, map_add, ha c, hb c]
 
 /-- The ideal-power quotient multiplication descends to the closed subscheme and
-its total algebra has the expected normalized affine associated-graded charts.
-Source: Stacks Project, Divisors, Tags 0630 and 0633. -/
+its total algebra has the expected normalized affine associated-graded charts. -/
 theorem exists_affineData : Nonempty (AffineData i) := by
   classical
   obtain ⟨B, hBunit, hBmul⟩ := formalAssociatedGraded_algebra_exists i.ker

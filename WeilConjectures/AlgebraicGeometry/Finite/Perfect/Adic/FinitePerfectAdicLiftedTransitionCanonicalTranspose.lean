@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicLi
 
 /-! # Canonical transpose of the lifted finite perfect transition
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 06YY and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +35,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 
 /-- The transpose of the lifted transition is invertible for the canonical derived
 restriction adjunction. This is the universe-lifted form of the normalized transpose
-in the supplied algebraic tower. The proof transports the original transpose through
-exact universe lifting and the scalar-restriction comparison. -/
+in the supplied algebraic tower. -/
 theorem finitePerfectAdicLiftedTransition_canonical_transpose_isIso
     {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :

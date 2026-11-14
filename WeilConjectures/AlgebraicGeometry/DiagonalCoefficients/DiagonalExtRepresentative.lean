@@ -8,6 +8,11 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Named actual Ext representative with an inverse API
+
+## Implementation details
+
+- `cyclicExtRepresentative` is irreducible, keeping the actual Hom representative behind a
+  named function.
 -/
 
 @[expose] public noncomputable section
@@ -18,8 +23,8 @@ universe u v w t
 open CategoryTheory CategoryTheory.Abelian
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- Ext-smallness supplies the shifted-single localization proof directly.
-Source: Mathlib `HasExt` and `HasSmallLocalizedShiftedHom`. -/
+/-- Ext-smallness (`HasExt`) supplies the shifted-single localization proof
+(`HasSmallLocalizedShiftedHom`) directly. -/
 theorem cyclicSmallShiftedSingleHom
     {C : Type u} [Category.{v} C] [Abelian C] [h : HasExt.{w} C]
     (X Y : C) (a b : ℤ) :
@@ -29,8 +34,7 @@ theorem cyclicSmallShiftedSingleHom
       (((CochainComplex.singleFunctor C 0).obj Y)⟦b⟧) := by
   exact h X Y a b
 
-/-- The actual Hom representative, kept behind a named function.
-Source: Mathlib Ext.Basic. -/
+/-- The actual Hom representative of an Ext class. -/
 @[irreducible] def cyclicExtRepresentative
     {C : Type u} [Category.{v} C] [Abelian C]
     [dC : HasDerivedCategory.{t} C] [eC : HasExt.{w} C]

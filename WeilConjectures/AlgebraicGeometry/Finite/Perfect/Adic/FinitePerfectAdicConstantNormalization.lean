@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicCo
 
 /-! # Universal normalization of the explicit constant quotient diagram
 
-Source: Stacks Project, Tags 06YY, 093J and 09C6.
+## References
+
+* Stacks Project, Tags 06YY, 093J and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +27,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The specified constant algebraic transition is universal on every etale source,
 with its canonical coefficient and restriction coherence. It constructs no descended
-actual quotient, realization functor, or map of Isom presheaves.
-
-Source: Stacks Project, Tags 06YY, 093J and 09C6. -/
+actual quotient, realization functor, or map of Isom presheaves. -/
 theorem finitePerfectAdicEtaleConstant_normalization (Y : Scheme.{t})
     {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :

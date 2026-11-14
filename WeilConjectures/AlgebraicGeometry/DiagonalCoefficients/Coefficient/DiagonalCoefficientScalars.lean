@@ -34,8 +34,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- Restriction/direct-image comparison with its universal-unit normalization.
-Its scalar mate is therefore the canonical scalar/direct-image map. Source:
-blueprint coefficient changes, proof steps 1--2. -/
+Its scalar mate is therefore the canonical scalar/direct-image map. -/
 abbrev RestrictionSquare {X S : Scheme.{u}} (f : X ⟶ S)
     (R : DiagonalRightDerived (CondensedRing.lowerStar Λ f))
     (R' : DiagonalRightDerived (CondensedRing.lowerStar Λ' f)) :=
@@ -78,8 +77,7 @@ structure TraceCompatibility {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- All scalar-extension squares for a diagonal class and its three traces.
 The endpoint maps are normalized adjoints of the actual unit and root maps, and
-all direct-image maps are their specified adjunction mates. Source: blueprint
-clauses 1--2. -/
+all direct-image maps are their specified adjunction mates. -/
 structure ScalarCompatibility (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (L' : ∀ X : Scheme.{u}, Modules Λ' X)
     (m : ∀ X : Scheme.{u}, (L X).X ⟶ (L' X).X)

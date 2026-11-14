@@ -22,8 +22,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Tensor sections of an ideal identify with its additive vanishing functions.
-For nested ideals, the tensor of their inclusion is a kernel of restriction.
-There is no cokernel or quasi-coherence-of-the-quotient assumption in this assertion. -/
+For nested ideals, the tensor of their inclusion is a kernel of restriction. -/
 theorem exists_etaleIdealKernelPresentation (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) :
     ∃ e : (Modules.etaleTensorSectionsFunctor X).obj I.toModules ≅

@@ -13,8 +13,6 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # An explicit injective-resolution comparison for hypercover sections
 
-Source: Stacks Project, Hypercoverings, Tag 01H0, first proof.
-
 The bicomplex is constructed by evaluating an actual resolution sheaf in every
 hypercover degree. Both augmentations are explicit chain maps. Inverting the
 quasi-isomorphism on homology and the canonical resolution comparison gives a
@@ -23,6 +21,10 @@ object is chosen. The first-quadrant augmentation lemma proves the required
 quasi-isomorphism from injective-row acyclicity. Naturality is proved on these
 chain maps, including refinement maps, and the canonical derived-functor
 compatibility identifies terminal-section cohomology with etale cohomology.
+
+## References
+
+* Stacks Project, Hypercoverings, Tag 01H0 (first proof)
 -/
 
 @[expose] public section

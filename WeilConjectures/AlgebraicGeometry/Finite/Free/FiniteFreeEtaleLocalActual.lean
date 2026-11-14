@@ -20,10 +20,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-!
 # Local chain representatives for finite free constant complexes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08FR, assertions (1) and (2).
-
 Constant coefficients are expressed as sheaves valued in `ModuleCat B`, the usual
 constant-ring-module encoding. Étale inverse image is restriction to the localized site.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 08FP, 08FQ and 08FR
 -/
 
 @[expose] public section
@@ -67,12 +69,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived maps from a bounded finite free constant complex have local chain
 representatives, and a chain map vanishing in the derived category is locally homotopic
-to zero. Source: Stacks Project, Tag 08FR, assertions (1) and (2).
-
-
-Source for steps 1 and 2: Stacks Tags 08FP, 08FQ and 08FR. Step 3 supplies
-Tag 08FR's omitted proof of assertion (2) by the same cone argument.
--/
+to zero. -/
 theorem finiteFree_etale_local_actual
     (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (P : CochainComplex (ModuleCat.{u + 1} B) ℤ)

@@ -11,8 +11,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Section homology of an injective resolution
 
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2, the identification of
-resolution-section cohomology with sheaf cohomology.
+## References
+
+* Stacks Project, Tag 01EQ (proof of Lemma 20.11.2: resolution-section cohomology computes
+  sheaf cohomology)
 -/
 
 @[expose] public section
@@ -82,9 +84,7 @@ private noncomputable def homSectionsComplexIso {X : Scheme.{u}}
       exact (sectionHomEquiv_naturality a (I.cochainComplex.d n m)).symm)
 
 /-- Section homology computes Ext from the constant integer sheaf, with its
-specified cocycle formula.
-
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2. -/
+specified cocycle formula. -/
 theorem exists_abelianResolutionSectionsIso
     {X : Scheme.{u}}
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

@@ -13,7 +13,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Single-module transposes for the pinned derived adjunction
 
-Source: Stacks Project, Tags 079W and 0FP1.
+## References
+
+* Stacks Project, Tags 079W, 0FP1
 -/
 
 @[expose] public section
@@ -74,9 +76,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The pinned derived adjunction transposes the ordinary single-module comparison.
-Source: Stacks Project, Tags 079W and 0FP1; the factorization defining
-`exists_schemeDerivedAdjunction`. -/
+/-- The pinned derived adjunction transposes the ordinary single-module comparison. -/
 theorem canonicalSingleAdjunctionTranspose {X S : Scheme.{u}} (f : X ⟶ S)
     (N : S.Modules) (M : X.Modules) (a : (pullback f).obj N ⟶ M) :
     (Classical.choose (exists_schemeDerivedAdjunction f

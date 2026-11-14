@@ -22,8 +22,9 @@ import Mathlib.Logic.Equiv.Fin.Basic
 /-!
 # Finite-stage immersion constructibility and unchanged cohomological intervals
 
-Source: main-20261015, proof of proposition-extension-zero-restriction-closed-subscheme--8,
-finite-stage paragraph; Stacks Tags 09AA, 09BM, 09AH, 093R and 015F.
+## References
+
+* Stacks Project, Tags 09AA, 09BM, 09AH, 093R and 015F
 -/
 
 @[expose] public noncomputable section
@@ -36,11 +37,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The restriction clause of a constructibility witness, using the existing local
-constancy and geometric stalk definitions. This merely names the clause for a supplied
-immersion, without choosing or changing its domain.
-Source: finite-stage paragraph of proposition-extension-zero-restriction-closed-subscheme--8; Stacks
-093R. -/
+/-- The restriction clause of a constructibility witness for a supplied immersion, using the
+existing local constancy and geometric stalk definitions. -/
 def sfFiniteImmersionStratum (A : Type u) [CommRing A] {X S : Scheme.{u}}
     (s : S ⟶ X) (M : proEtaleRingModules X (proEtaleConstantRing X A)) : Prop :=
   IsLocallyConstantProEtaleModuleSheaf S A (proEtaleConstantModulePullback s A M) ∧
@@ -50,9 +48,7 @@ def sfFiniteImmersionStratum (A : Type u) [CommRing A] {X S : Scheme.{u}}
 
 /-- The actual fibre-product partition of a supplied constructibility witness still
 witnesses constructibility after inverse image. `Stratification.pullback` retains the
-index set and uses the schemes `S.domain ν ×[X] Y` with their second projections.
-Source: finite-stage paragraph of proposition-extension-zero-restriction-closed-subscheme--8; Stacks
-093R. -/
+index set and uses the schemes `S.domain ν ×[X] Y` with their second projections. -/
 def sfFiniteImmersionPullbackPartitions (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (g : Y ⟶ X) : Prop :=
   ∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (S : Stratification X),

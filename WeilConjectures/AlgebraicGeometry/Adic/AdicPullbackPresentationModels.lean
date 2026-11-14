@@ -99,12 +99,13 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 /-!
 # Normalized models for adic pullback presentations
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-lem-cbc-completed-extension-zero-comparison.proof.md; Stacks Tags 05S7 and 03DI.
-
 The coefficient uniqueness statement first identifies both presentations with the published
 coefficient map. The subsequent statements use these identifications to write both universal
 pairs over the same ordinary functor. No invertibility of the completed coefficient map is used.
+
+## References
+
+* Stacks Project, Tags 05S7 and 03DI
 -/
 
 @[expose] public noncomputable section
@@ -238,8 +239,7 @@ private theorem constantDirect_naturality
     (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map φ))
       ((proEtaleBaseChange g).op.obj V)
 
-/-- Proof that the published strict-tower pair is a universal left-derived pair.
-Source: blueprint CBC argument, Step 3; Stacks 05S7. -/
+/-- The published strict-tower pair is a universal left-derived pair. -/
 theorem adicPresentationTowerUniversal_proof :
     (completedTowerPullback g d).IsLeftDerivedFunctor
       (completedTowerPullbackCounit g d)

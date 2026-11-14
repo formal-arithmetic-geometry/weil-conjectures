@@ -10,7 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Composition of structural unit coefficient maps
 
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial.
+## References
+
+* [Stacks Project, Tag 01F7](https://stacks.math.columbia.edu/tag/01F7)
 -/
 
 @[expose] public section
@@ -21,10 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- Coefficient-level compatibility of the pullback unit with structural maps.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
-Mathlib's pullback-unit adjunction identity.
--/
+/-- Coefficient-level compatibility of the pullback unit with structural maps. -/
 theorem structuralUnitCoefficient_comp {X Y Z : Scheme.{u}}
     (g : Z ⟶ Y) (f : Y ⟶ X) :
     (invImage g).map (coefficientUnit f (SheafOfModules.unit X.ringCatSheaf)) ≫

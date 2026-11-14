@@ -30,27 +30,7 @@ attribute [local irreducible] quotientLine quotientLineMap derivedScalars
 
 /-- Identify a supplied scalar-compatible quotient diagram with the positive finite
 Cartier class and trace, at the fixed annihilating exponent. No quotient diagram or
-scalar compatibility is constructed by this statement.
-
-
-
-Use reference.delta to express family.zl.delta as the completed diagonal class.
-The whole-system limit normalization hδ and hcompletion identify its reduction
-modulo l^(n+1) with the canonical finite positive Cartier boundary. Extend from
-Z/l^(n+1) to the quotient ring using Cartier scalar compatibility. Scalar
-associativity, family.toIntegral and scalar.delta identify that boundary with
-d.delta under the preceding source and line comparisons. For the trace, the
-reference's full completed trace comparisons identify family.zl.traceq with the
-inverse positive unit/Chern splitting followed by its constant projection. Apply
-the same reduction and finite scalar extension. The canonical unit and the
-Kummer Chern arrow reduce to their finite counterparts, so the splitting reduces
-to geoP1TwistedMap and its inverse reduces to its inverse. The full right-derived
-units fix the ordinary and derived realization/direct-image squares; scalar.q.trace
-therefore gives the asserted equation for d.traceq. Assemble these comparisons
-into FiniteDiagonalComparison. The argument uses the full normalized completed
-arrow, not an assertion that separate reductions detect arbitrary derived arrows.
-At n = 0 the exponent remains l; ramification changes the quotient but neither
-the fixed annihilation nor the coefficient-naturality argument. -/
+scalar compatibility is constructed by this statement. -/
 theorem diagonalUniformizer_finiteNormalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Ample invertible modules in dimension at most one
 
-Source: Stacks Project, Varieties, Lemma 0A25 and Proposition 09NZ.
+## References
+
+* Stacks Project, Varieties, Lemma 0A25 and Proposition 09NZ
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A separated finite-type scheme over a field of topological dimension at most one
-has an ample invertible module, including when the scheme is empty.
-Source: Stacks Project, Varieties, Lemma 0A25, using Proposition 09NZ.
--/
+has an ample invertible module, including when the scheme is empty. -/
 theorem exists_isAmple_of_dim_le_one {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (hdim : topologicalKrullDim X ≤ 1) :

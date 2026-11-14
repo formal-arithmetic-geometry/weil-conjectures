@@ -15,7 +15,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
-/-! # Finite point resolutions and normalized scalar squares -/
+/-! # Finite point resolutions and normalized scalar squares
+
+## References
+
+* [Stacks Project, Tag 0944](https://stacks.math.columbia.edu/tag/0944)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -374,10 +379,7 @@ private theorem restrictionReflectsIsomorphisms {Λ Λ' : ScalarSixRing.{u}}
   exact isIso_of_reflects_iso _ F
 
 /-- A finite free point resolution supplies a normalized restriction square and makes
-the scalar mate of every full-unit-normalized restriction square invertible.
-Source: current scalar-six direct-image proof, finite free
-coefficient argument and formal properties; Stacks Tag 0944.
--/
+the scalar mate of every full-unit-normalized restriction square invertible. -/
 private theorem finiteFreePointResolution_scalarSquares
     {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (P : ShortComplex (PointModules Λ))

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenCoverShriekNaturalS
 
 /-! # The termwise extension-by-zero short exact sequence
 
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
+## References
+
+* Stacks Project, Tag 0GKK
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The short exact complex before passage to the derived category.
-Source: Stacks Project, Tag 0GKK, proof of `lemma-mayer-vietoris-shriek`.
--/
+/-- The short exact complex before passage to the derived category. -/
 theorem exists_shortExact_openCover_lowerShriek_complex
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

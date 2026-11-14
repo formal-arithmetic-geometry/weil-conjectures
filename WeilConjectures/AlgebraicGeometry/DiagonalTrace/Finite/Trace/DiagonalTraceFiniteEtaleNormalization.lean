@@ -176,7 +176,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteEtaleIntegralBoundary
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceIntegralKummerComparison
 
-/-! # Integral normalization of a finite étale lift -/
+/-! # Integral normalization of a finite étale lift
+
+## References
+* Stacks Project, Tag 03PL
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
@@ -197,11 +201,8 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   comparisonUpperStar diagonalFiniteToPadic diagonalForget SpTowerClasses.lineModule
 
 /-- The ordinary integral class of a supplied étale finite lift is its Kummer class.
-This is only the integral comparison. It asserts neither existence of the lift nor equality
-of finite coefficient arrows, and contains no supported class, limit or source projection.
-
-Source: blueprint latest, diagonal-tower trace proof (2), finite coefficient comparison;
-geometric tower classes proof (2), steps 6--8; Stacks 03PL. -/
+This is only the integral comparison; it asserts neither existence of the lift nor equality
+of finite coefficient arrows. -/
 theorem diagonalTrace_finiteEtale_normalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

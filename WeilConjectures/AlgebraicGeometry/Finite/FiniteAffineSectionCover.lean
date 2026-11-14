@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Free.FiniteFreeAlgebraSpectrum
 /-!
 # Finite affine morphisms and finite covers by closed sections
 
-Source: Stacks Project, Morphisms, Tag 03HW, Lemma `lemma-massage-finite`, clauses (1)–(5).
+## References
+
+* Stacks Project, Morphisms, Tag 03HW, clauses (1)–(5)
 -/
 
 @[expose] public section
@@ -34,7 +36,7 @@ namespace AlgebraicGeometry
 
 /-- A finite morphism to an affine scheme admits, after surjective finite locally free base
 change, a closed immersion into an affine finite locally free scheme covered by finitely many
-closed sections. Source: Stacks Project, Morphisms, Tag 03HW, clauses (1)–(5). -/
+closed sections. -/
 theorem exists_finite_affine_section_cover {X Y : Scheme.{u}} (f : Y ⟶ X)
     [IsFinite f] [IsAffine X] :
     ∃ (X' : Scheme.{u}) (a : X' ⟶ X),

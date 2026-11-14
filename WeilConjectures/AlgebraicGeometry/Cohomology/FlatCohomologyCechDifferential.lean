@@ -10,9 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCompari
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.Sheaves.CechComparison
 
-/-! # Naturality of canonical Cech base-change components
+/-! # Naturality of canonical Čech base-change components
 
-Source: Stacks Project, Tags 02KH and 02KG, the separated-case Cech argument.
+## References
+
+* Stacks Project, Tags 02KH and 02KG
 -/
 
 @[expose] public section
@@ -79,11 +81,7 @@ private theorem scalarRestriction_comm {Y : Scheme.{u}} (N : Y.Modules)
   rw [← CommRingCat.comp_apply, ← Functor.map_comp]
   congr 2
 
-/-- Canonical component maps commute with the alternating Cech differential.
-This is a naturality assertion and does not assert invertibility of any component.
-
-Source: Stacks Project, Tag 02KH, separated-case Cech argument, and the
-coordinate differential formula in WeilConjectures.Topology.Sheaves.CechComparison. -/
+/-- Canonical component maps commute with the alternating Čech differential. -/
 theorem cechBaseChange_components_comm (f : X ⟶ Spec (.of R))
     (U : ι → X.Opens) (M : X.Modules)
     (hI : ∀ (k : ℕ) (y : Fin (k + 1) → ι),

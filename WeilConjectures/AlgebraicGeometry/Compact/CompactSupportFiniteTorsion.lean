@@ -18,14 +18,15 @@ import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenComparisonComposi
 /-!
 # Compact-support base change with finite coefficients and arbitrary refinements
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-torsion;
-Stacks Project, Tags 0DDE, 0F7I, 0F7J and 0F7F.
-
 The exchange map, its invertibility, identity and horizontal pasting, and its canonical
 compactification-independent version and vertical pasting already exist upstream. The theorem
-below also identifies the comparisons specified by the node with the canonical comparisons
-for every proper refinement, including refinements whose square over the open is not Cartesian.
-Together with the recorded upstream declarations, this states all clauses of the node.
+below also identifies the specified proper/open refinement comparisons with the canonical
+comparisons for every proper refinement, including refinements whose square over the open is
+not Cartesian.
+
+## References
+
+* Stacks Project, Tags 0DDE, 0F7I, 0F7J, 0F7F
 -/
 
 @[expose] public section
@@ -38,9 +39,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The comparison `C_r = Rp₂*(α_r)`, followed by direct-image composition, for any
 proper refinement fixing the open. The map `α_r` is exactly `properOpenComparison`, not an
-exchange requiring a Cartesian refinement square.
-Source: blueprint proposition-composition-base-change-rf-shriek, proof steps 4 and 5; Stacks
-Project, Tag 0F7I. -/
+exchange requiring a Cartesian refinement square. -/
 noncomputable def compactSupportProperOpenRefinementMap
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
@@ -245,9 +244,7 @@ private theorem compactSupportProperOpenRefinementMap_cartesian
 
 /-- Compact-support exchange is invertible at every bounded-below complex, and the
 specified proper/open refinement maps are the canonical comparison isomorphisms, for all
-refinements without a Cartesian or density hypothesis.
-Source: blueprint proposition-composition-base-change-rf-shriek; Stacks Project, Tags 0DDE and 0F7I.
--/
+refinements without a Cartesian or density hypothesis. -/
 theorem compactSupportFiniteTorsion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

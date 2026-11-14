@@ -16,23 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTr
 universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.IsCurve
-/-- The compactification and filtration part of the filtered-cover transfer.
-
-The proof is the first part of Stacks Project 03SD, using 05K0 to factor the finite
-etale cover through an open immersion into a finite scheme over `X`.  Replace the
-finite scheme by the reduced closure of the open image.  The open image is then a
-dense open of a reduced curve, and over `U` it is also closed: its map to the
-preimage of `U` is finite, while a finite dense open immersion is surjective.
-Thus the resulting square is the cartesian square needed for base change.
-
-Apply `hconstant` to this new reduced curve.  Exactness of extension by zero and
-the short exact sequences supplied by `hquot` allow induction along `W`, starting
-from `hzero`; the induction uses the cokernel identifications and the standard
-short-exact devissage assertion.  Transport the result across `hend`.  Finite
-pushforward and the exchange isomorphism for lower shriek transfer the resulting
-assertions to the lower-star of the upper-star of `G`.  This is precisely the
-conclusion below. No unit retraction is needed for this step; descent along the
-retraction is performed only in the separate retract theorem. -/
+/-- The compactification and filtration part of the filtered-cover transfer: the assertions
+for the constant case transfer to the lower-star of the upper-star of `G`, without a unit
+retraction. See Stacks Project, Tag 03SD. -/
 theorem filteredFiniteCoverLowerShriekTransfer_core {k : Type u} [Field k] [IsAlgClosed k]
     {X U V : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]

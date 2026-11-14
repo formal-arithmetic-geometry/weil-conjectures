@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The completed part of the normalized diagonal limit, from the endpoint
-and finite reduction calculations. Source: diagonal tower limit, paragraph (3). -/
+and finite reduction calculations. -/
 theorem diagonal_limit_completed_data (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

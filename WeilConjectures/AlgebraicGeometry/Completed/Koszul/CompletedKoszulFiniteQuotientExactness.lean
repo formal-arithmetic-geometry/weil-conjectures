@@ -54,6 +54,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 The finite quotient diagrams identify the concrete completed coefficient ring with
 completion of the constant ring in the coefficient universe. Stacks Tag 093M then
 supplies exact scalar extension, and Tag 093J supplies exact constant realization.
+
+## References
+
+* Stacks Project, Tags 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -330,8 +334,7 @@ private theorem completionComparisonIso_scalar (T : Scheme.{t})
   dsimp only [F] at h ⊢
   simpa only [quotientCommIso, Functor.preimageIso_hom, Functor.map_preimage] using h
 
-/-- Exactness of the concrete completed coefficient realization.
-Source: Stacks Project, Tags 093J--093M. -/
+/-- Exactness of the concrete completed coefficient realization. -/
 theorem completedKoszulFiniteQuotientExactness
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d

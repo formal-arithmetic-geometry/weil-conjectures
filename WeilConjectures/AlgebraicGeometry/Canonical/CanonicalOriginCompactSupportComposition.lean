@@ -20,10 +20,12 @@ import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationCohere
 /-!
 # Canonical compact-support composition on the etale-origin class
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, construction and coherence
-paragraphs; Stacks Project, Tags 0F7J and 0F7K. The comparison is transported from the specified
-etale compositor. Full faithfulness makes it natural for all ambient morphisms, independently of
-retained witnesses.
+The comparison is transported from the specified etale compositor. Full faithfulness makes it
+natural for all ambient morphisms, independently of retained witnesses.
+
+## References
+
+* Stacks Project, Tags 0F7J, 0F7K
 -/
 
 @[expose] public noncomputable section

@@ -12,7 +12,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ConcreteCategory
 
 /-! # Section homology detects equality of Ext cocycles
 
-Source: Stacks Project, Tags 01EQ and 01FD.
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- Equality of section homology classes implies equality of the corresponding
-Ext classes. Source: Stacks Project, Tag 01EQ, computation of cohomology on an
-injective resolution; Mathlib `extMk_eq_zero_iff` and the constant-sheaf
-adjunction. -/
+Ext classes. -/
 theorem abelianCech_ext_section_injective
     {X : Scheme.{u}} {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) (q : ℕ)

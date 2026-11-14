@@ -20,15 +20,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedSupportTr
 /-!
 # Finite duality: comparison for a closed immersion
 
-Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/
-sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md`, first paragraph;
-Stacks Project, Tags 04CA, 04JC and 014A.
-
 The comparison below is formulated with the actual derived direct-image adjunctions.
-The isomorphism `δ` is the canonical direct-image comparison of
-`lem-weil-pbc-comparison-direct-image-canonical-mate`, transported from its bounded-below
-mate along an explicit bounded-below lift by the named Plus/full compatibility isomorphisms.
-The transpose formula is the definition of the comparison map `α`.
+The isomorphism `δ` is the canonical direct-image comparison mate, transported from its
+bounded-below mate along an explicit bounded-below lift by the named Plus/full compatibility
+isomorphisms. The transpose formula is the definition of the comparison map `α`.
+
+## References
+
+* Stacks Project, Tags 04CA, 04JC and 014A
 -/
 
 @[expose] public section

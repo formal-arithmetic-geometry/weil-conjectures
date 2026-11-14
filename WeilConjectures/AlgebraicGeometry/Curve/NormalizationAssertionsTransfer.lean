@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.FiniteSupportPrimeGlobalSections
 
 /-! # Descent across a finite-support cokernel
 
-Source: Stacks Project, Tags 0A3Q and 0GJA, normalization and dense-open comparison.
+## References
+
+* Stacks Project, Tags 0A3Q, 0GJA
 -/
 
 @[expose] public section
@@ -217,8 +219,7 @@ private theorem bijective_first {X Y : Scheme.{u}} (a : Y ⟶ X)
       (hG n).2 (hQ n) (hG (n + 1)) (hQ (n + 1)).1
 
 /-- A constructible prime-annihilated sheaf with the eight curve assertions transfers
-those assertions to a subsheaf whose cokernel vanishes on a dense open.
-Source: Stacks Project, Tags 0A3Q, proof, and 0GJA, proof, remarks (a)--(d). -/
+those assertions to a subsheaf whose cokernel vanishes on a dense open. -/
 theorem IsCurve.Assertions.of_finite_support_mono {k : Type u} [Field k]
     [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

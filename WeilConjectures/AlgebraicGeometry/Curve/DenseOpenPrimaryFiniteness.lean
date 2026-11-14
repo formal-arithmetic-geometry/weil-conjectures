@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenCohomologyFiniteness
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
 
-/-! # Primary vanishing and finiteness across a dense open -/
+/-! # Primary vanishing and finiteness across a dense open
+
+## References
+
+* Stacks Project, Tag 0GJA, proof (the five-term sequence) and remarks (a), (b).
+-/
 
 @[expose] public section
 
@@ -26,8 +31,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- Primary vanishing and the two conditional finiteness assertions transfer across a
- dense-open counit for a constructible sheaf killed by a prime.
-Source: Stacks Project, Tag 0GJA, proof, the five-term sequence and remarks (a), (b). -/
+dense-open counit for a constructible sheaf killed by a prime. -/
 theorem dense_open_primary_finiteness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

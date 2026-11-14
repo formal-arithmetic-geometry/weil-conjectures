@@ -10,7 +10,10 @@ public import Mathlib.LinearAlgebra.Prod
 public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation
 /-! # Mayer--Vietoris naturality before scalar extension
-Source: Stacks Project, Tags 01EB and 02KH.
+
+## References
+
+* Stacks Project, Tags 01EB and 02KH
 -/
 @[expose] public section
 universe u
@@ -100,10 +103,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- Ext transport elaboration unfolds large categorical terms.
 /-- The original and pulled-back Mayer--Vietoris sequences are compatible with
-`H.baseChangeLinear`, before tensoring. Neither flatness nor quasi-coherence is needed.
-
-Source: Stacks Project, Tag 01EB, cohomology-lemma-mayer-vietoris, and Tag 02KH,
-coherent-lemma-flat-base-change-cohomology, Mayer--Vietoris alternative. -/
+`H.baseChangeLinear`, before tensoring. -/
 theorem H.baseChangeLinear_mayerVietoris
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules)

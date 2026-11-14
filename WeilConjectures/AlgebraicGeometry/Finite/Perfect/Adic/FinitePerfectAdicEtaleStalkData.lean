@@ -18,8 +18,10 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # Descended etale stalk data before finite-level local trivialization
 
-Source: Stacks Project, Tag 09C6, the normalized algebraic stalk diagram;
-Tags 09AL and 09B1 for finite coefficient descent.
+## References
+
+* Stacks Project, Tag 09C6 (the normalized algebraic stalk diagram)
+* Stacks Project, Tags 09AL, 09B1 and 094G
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +37,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 The transport is conditional on a supplied etale isomorphism with the stalk complex.
 It supplies neither such an isomorphism nor a covering on which one exists. It includes
-further restriction along every arrow to a supplied etale chart.
-Source: Stacks Tags 09C6, 09AL and 09B1. -/
+further restriction along every arrow to a supplied etale chart. -/
 structure FinitePerfectAdicEtaleStalkData (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -144,13 +145,8 @@ private theorem finitePerfectAdic_connected_model_cover
   exact ⟨𝒱, fun x ↦ ⟨hconn x, w x, a x, b x, hab x, hmodel x⟩⟩
 
 /-- Descend the quotient diagram and extract its algebraic stalk levels and reduction maps.
-
-This conclusion contains no local isomorphisms with constant stalk complexes and no
-finite-level marking sieves. Those are obtained separately from finite-ring derived
-local constancy on each connected chart.
-
-Source: Stacks Project, Tag 09C6, the paragraph constructing normalized algebraic M_n
-before taking their limit, with Tags 09AL, 09B1 and 094G. -/
+The conclusion contains no local isomorphisms with constant stalk complexes and no
+finite-level marking sieves. -/
 theorem finitePerfectAdic_etale_stalk_data
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

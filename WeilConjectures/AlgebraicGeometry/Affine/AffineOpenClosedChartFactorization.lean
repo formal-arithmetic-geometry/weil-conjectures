@@ -16,7 +16,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # Geometric factorization of stratified pro-etale charts
 
-Source: Stacks Tags 09C3 and 09Y4, finite affine cover and base-change argument.
+## References
+
+* Stacks Project, Tags 09C3 and 09Y4
 -/
 
 @[expose] public noncomputable section
@@ -374,9 +376,7 @@ private theorem finiteAffineOver {W Y : Scheme.{u}} [CompactSpace W] (f : W ⟶ 
     exact ⟨e.symm ⟨y, hy⟩, by simpa using hxy⟩
 
 /-- Given source charts with any property, target charts factor through source charts.
-No preservation of that property under pullback is assumed or asserted.
-
-Source: Stacks proetale.tex, Tag 09C3, local-structure argument; Topology Tag 09Y4. -/
+No preservation of that property under pullback is assumed or asserted. -/
 theorem affineOpenClosedChartFactorization
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hs : IsSeparated f) (_ht : LocallyOfFiniteType f) (_hq : QuasiCompact f)

@@ -56,15 +56,18 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 
 /-! # Continuous rational derived realization data
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Lemma 6.8.2(1), Proposition 6.8.11(3),
-Definition 6.8.8 and Remark 6.8.15.
-
 ## Main definitions and statement
 
 * `ContinuousRational.At`: normalized equivalence at one scheme.
 * `ContinuousRational.Along`: canonical derived module pullback comparison.
 * `ContinuousRational.Family`: coherent scheme and coefficient comparisons.
 The existence theorem is in `ContinuousRationalDerivedRealization`.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1), Definition 6.8.8, Proposition 6.8.11(3),
+  Proposition 6.8.14(2) and Remark 6.8.15.
+* Stacks Project, Tags 03EK, 03EL and 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -77,8 +80,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.ContinuousRational
 
-/-- The geometric hypotheses of BS 6.8.14, including the empty scheme.
-Source: Bhatt--Scholze 6.8.14. -/
+/-- The geometric hypotheses of Bhatt--Scholze, Proposition 6.8.14, including the empty
+scheme. -/
 structure Base (l : ℕ) where
   scheme : Scheme.{u}
   [noetherian : IsNoetherian scheme]
@@ -240,8 +243,7 @@ def modulePull {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
   coefficientProEtaleModelUp_isContinuous in
-/-- The actual tensor unit over a base-changed site object, for arbitrary coefficients.
-Source: BS 6.8.15; Stacks 03EL. -/
+/-- The actual tensor unit over a base-changed site object, for arbitrary coefficients. -/
 def moduleUnit {X Y : Scheme.{u}} (g : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -264,8 +266,7 @@ def derivedPull {X Y : Scheme.{u}} (g : X ⟶ Y)
 /-- The canonical counit for derived module inverse image. The exact inverse-image
 API inserts scalar extension along the identity ring map. The first two comparisons
 remove precisely that identity tensor factor. Their section equation is multiplication,
-and the final equation fixes the derived counit on every complex.
-Source: BS 6.8.15; Stacks 03EL, 03EK. -/
+and the final equation fixes the derived counit on every complex. -/
 def IsNormalizedPullCounit {X Y : Scheme.{u}} (g : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -403,8 +404,7 @@ def Along.raw {X Y : Base.{u} l} {g : X.scheme ⟶ Y.scheme}
 
 /-- Canonical ambient composition, fixed by the insertion of tensor units and the
 universal derived counits. The last equation states compatibility of J with precisely
-this ambient comparison, rather than a new choice of triangulated composition.
-Source: BS 6.8.15; Stacks 0D6D. -/
+this ambient comparison, rather than a new choice of triangulated composition. -/
 structure Composition {X Y Z : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (h : Z.scheme ⟶ X.scheme) (aX : At l E X) (aY : At l E Y) (aZ : At l E Z)
     (ag : Along l E g aX aY) (ah : Along l E h aZ aX)
@@ -516,7 +516,7 @@ structure FieldComposition (i : E →ₐ[ℚ_[l]] F) (j : F →ₐ[ℚ_[l]] G) (
           coefficient (aE.J.obj K)).hom
 
 /-- The mixed coefficient/pullback square, using the actual raw scalar/completed-pull
-comparison and the ordinary balanced tensor map. Source: BS 6.8.14--6.8.15. -/
+comparison and the ordinary balanced tensor map. -/
 structure Mixed (i : E →ₐ[ℚ_[l]] F) {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (aXE : At l E X) (aYE : At l E Y) (aXF : At l F X) (aYF : At l F Y)
     (agE : Along l E g aXE aYE) (agF : Along l F g aXF aYF)
@@ -578,12 +578,11 @@ structure Mixed (i : E →ₐ[ℚ_[l]] F) {X Y : Base.{u} l} (g : X.scheme ⟶ Y
         ambient.hom.app (aYE.J.obj K)
 
 /-- The site inclusion attached to a weakly étale object, with no finiteness hypothesis
-on its source. Source: BS 6.8.14; Stacks 03EL. -/
+on its source. -/
 def siteInclude {X : Scheme.{u}} (U : X.ProEt) : U.left.ProEt ⥤ X.ProEt :=
   MorphismProperty.Over.map ⊤ U.prop
 
-/-- Projection from the base-changed object, viewed in the original small site.
-Source: BS 6.8.15; Stacks 03EL. -/
+/-- Projection from the base-changed object, viewed in the original small site. -/
 def siteCounit {X : Scheme.{u}} (U : X.ProEt) (V : X.ProEt) :
     (siteInclude U).obj ((proEtaleBaseChange U.hom).obj V) ⟶ V :=
   MorphismProperty.Over.homMk (pullback.fst V.hom U.hom) pullback.condition

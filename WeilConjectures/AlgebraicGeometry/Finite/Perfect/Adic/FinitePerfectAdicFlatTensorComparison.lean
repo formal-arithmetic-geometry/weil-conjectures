@@ -14,8 +14,11 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Derived comparison for the explicit bounded flat tensor model
 
-Source: Stacks Project, Tag 09C6, the quotient-complex calculation;
-Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW.
+## References
+
+* Stacks Project, Tag 09C6 (the quotient-complex calculation)
+* Stacks Project, Modules on Sites, Tags 093J--093M
+* Stacks Project, More on Algebra, Tag 09AW
 -/
 
 @[expose] public noncomputable section
@@ -52,10 +55,7 @@ private theorem completedExactComparison
     (HomotopyCategory.quasiIso _ (.up ℤ))⟩
 
 /-- Ordinary tensor models of a bounded flat algebraic complex compute the completed
-realization and its entire canonical derived quotient diagram.
-
-Source: Stacks Project, Tag 09C6, the finite-projective quotient calculation;
-Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW. -/
+realization and its entire canonical derived quotient diagram. -/
 theorem finitePerfectAdicFlatTensor_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

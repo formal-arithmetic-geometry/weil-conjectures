@@ -15,6 +15,10 @@ This module isolates the construction of the realization functors and their
 factorization, restriction, and scalar comparison data. The coherence equations
 are stated separately so that the categorical construction and its normalization
 can be proved independently.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.14--5.15
+* Stacks Project, Tag 03CY
 -/
 
 @[expose] public noncomputable section
@@ -159,15 +163,6 @@ private def brownInverseMateIso
   exact (asIso α).symm
 
 /-- The realization data can be constructed from a supplied strict evaluation package.
-
-Source: Zheng, Construction 4.1 and Constructions 5.14--5.15, together with the
-constant-ring module equivalence of Stacks 03CY. The construction first transports
-modules along the constant-ring sheafification equivalence, then localizes the exact
-transport at every level. The ordinary restriction maps are the sectionwise scalar
-restriction maps; their derived maps are obtained by localization. Scalar extension
-is the mate of these restriction maps under the supplied scalar adjunctions. This
-statement deliberately omits all coherence equations, which are the subject of the
-next theorem.
 -/
 theorem etaleBrownLevelRealizationData_exists
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})

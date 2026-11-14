@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphChosenComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 
-/-! # The graph comparison and the right-derived unit -/
+/-! # The graph comparison and the right-derived unit
+
+## References
+
+* SGA 4, Exposé XVII, 6.2.11
+* Stacks Project, Tag 0F4L
+-/
 
 @[expose] public section
 
@@ -23,8 +29,7 @@ attribute [local irreducible] lowerStar etaleLowerShriek openImmersionLowerShrie
   Functor.mapDerivedCategory Functor.rightDerivedFunctor canonicalEtaleCompactSupportComparison
 
 /-- The inverse graph comparison is normalized by the right-derived unit for the proper
-leg of the compactification.
-Source: SGA 4 XVII 6.2.11 and Stacks Project, Tag 0F4L. -/
+leg of the compactification. -/
 theorem graph_compactification_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W Z : Scheme.{u}} [IsNoetherian W] [IsNoetherian Z]

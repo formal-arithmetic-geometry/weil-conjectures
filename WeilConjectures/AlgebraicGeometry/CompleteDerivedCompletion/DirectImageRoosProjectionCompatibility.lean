@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletion
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 
-/-! Canonical derived-limit projection normalization. -/
+/-! Canonical derived-limit projection normalization.
+
+## References
+
+* Stacks Project, Tag 0A07
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,8 +24,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The conjugate limit comparison preserves the canonical counit projections.
-Source: blueprint direct-image limits, proof (1); Stacks Tag 0A07. -/
+/-- The conjugate limit comparison preserves the canonical counit projections. -/
 theorem directImage_roos_projection_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : DTow l E X) (n : ℕ) :
     (pushLimitIso l E f).hom.app M ≫

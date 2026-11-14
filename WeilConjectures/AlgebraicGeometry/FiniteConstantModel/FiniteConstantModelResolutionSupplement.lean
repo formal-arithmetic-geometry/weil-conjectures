@@ -44,13 +44,16 @@ public import WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
 /-!
 # Two-term resolutions of finite constant scalar models
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3), Lemma 6.8.2(1); Stacks Tags 093J,
-093M.
-
 The model functor first forms discrete constant modules, extends scalars by the map
 sending a scalar to the constant continuous function, and applies the monoidal inverse
 image from the point. Thus it is precisely B_T tensor over the discrete constant A,
 not a tensor over the continuous coefficient ring on the point.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.8.1, Lemma 6.8.2(1),
+  Proposition 6.8.11(3)
+* Stacks Project, Tags 093J, 093M
 -/
 
 @[expose] public noncomputable section
@@ -81,8 +84,7 @@ universe uC vC
 
 /-- A scalar short exact sequence, its specified scalar-extended short exact sequence,
 and the augmented complex in degrees minus one and zero. The component equations
-fix the differential and augmentation to the images of the original scalar maps.
-Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
+fix the differential and augmentation to the images of the original scalar maps. -/
 def HasResolution {A : Type u} [CommRing A] {C : Type uC} [Category.{vC} C] [Abelian C]
     (F : ModuleCat.{u + 1} A ⥤ C) (free : ℕ → C) (P : ModuleCat.{u + 1} A)
     (rational : Bool) : Prop :=
@@ -404,20 +406,17 @@ private lemma resolution_of_scalar_sequence {A : Type u} [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 
-/-- The continuous integral condensed ring with the specified extension absolute value.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.2(1). -/
+/-- The continuous integral condensed ring with the specified extension absolute value. -/
 abbrev integralCoefficients :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers l E)
 
-/-- The continuous rational condensed ring with the specified extension absolute value.
-Source: Bhatt--Scholze, Definition 6.8.1. -/
+/-- The continuous rational condensed ring with the specified extension absolute value. -/
 abbrev rationalCoefficients :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingObj E
 
-/-- Constant integral scalar modules extended to the actual pulled-back condensed ring.
-Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
+/-- Constant integral scalar modules extended to the actual pulled-back condensed ring. -/
 def integralModel (T : Scheme.{u}) :
     ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) ⥤
       Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
@@ -425,8 +424,8 @@ def integralModel (T : Scheme.{u}) :
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   modelFunctor (Padic.coefficientExtensionIntegers l E) T
 
-/-- Constant rational scalar modules extended to the actual pulled-back condensed ring.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), field case. -/
+/-- Constant rational scalar modules extended to the actual pulled-back condensed ring
+(the field case). -/
 def rationalModel (T : Scheme.{u}) :
     ModuleCat.{u + 1} E ⥤ Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (rationalCoefficients l E) T) :=
@@ -434,10 +433,8 @@ def rationalModel (T : Scheme.{u}) :
   modelFunctor E T
 
 /-- Finite constant local models have length-one finite-free resolutions; over E the
-negative-degree free term can be zero. No condition is placed on the scheme or on
-scalar torsion, and all complexes are ordinary cochain complexes of module sheaves.
-
-Source: Bhatt--Scholze, Proposition 6.8.11(3), with Lemma 6.8.2(1); Stacks 093J, 093M. -/
+negative-degree free term can be zero. All complexes are ordinary cochain complexes of
+module sheaves. -/
 theorem finite_constant_model_two_term_free_resolution
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :

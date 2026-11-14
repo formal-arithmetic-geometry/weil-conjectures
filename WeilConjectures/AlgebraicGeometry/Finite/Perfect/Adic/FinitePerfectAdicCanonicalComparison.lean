@@ -12,8 +12,11 @@ import Mathlib.RingTheory.Finiteness.Projective
 
 /-! # The canonical quotient diagram as an explicit coefficient complex
 
-Source: Stacks Project, Tag 09C6, the finite-projective quotient comparison;
-Modules on Sites, Tags 093J--093M.
+## References
+
+* Stacks Project, Tag 09C6 (the finite-projective quotient comparison)
+* Stacks Project, Modules on Sites, Tags 093J--093M
+* Stacks Project, More on Algebra, Tag 09AW
 -/
 
 @[expose] public noncomputable section
@@ -89,10 +92,7 @@ private theorem tensorModule_retract
            projection_naturality := hp }⟩
 
 /-- The canonical algebraic quotient diagram is computed by the corresponding explicit
-coefficient complex and its compatible finite-free summands.
-
-Source: Stacks Project, Tag 09C6, the displayed finite-projective quotient calculation;
-Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW. -/
+coefficient complex and its compatible finite-free summands. -/
 theorem finitePerfectAdicCanonical_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

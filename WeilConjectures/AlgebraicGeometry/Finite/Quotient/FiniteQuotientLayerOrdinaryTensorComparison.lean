@@ -34,7 +34,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientCon
 
 /-! # Ordinary constant tensor compatibility for the finite coefficient layer
 
-Source: Stacks Project, Tags 03EK, 03EL and 094I.
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 094I
 -/
 
 @[expose] public noncomputable section
@@ -106,10 +108,7 @@ private theorem tensorRestrictionComparison
     Functor.isoWhiskerLeft (tensorRight L) eR ≪≫ Functor.isoWhiskerRight s (U ⋙ V)⟩
 
 /-- Ordinary tensor with the constant residue layer agrees with constant
-realization of the explicit algebraic layer tensor, retaining the successor action.
-
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
-Tag 094I, the ordinary constant ideal-layer tensor calculation. -/
+realization of the explicit algebraic layer tensor, retaining the successor action. -/
 theorem finiteQuotient_layer_ordinary_tensor_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ k : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (k + 1)) ⟶

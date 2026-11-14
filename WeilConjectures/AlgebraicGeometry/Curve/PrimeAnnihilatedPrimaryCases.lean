@@ -19,9 +19,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Prime annihilation gives primary torsion for that prime, and a sheaf primary for
-another prime must be zero.
-Source: Stacks Project, Tag 0GJA, proof, primary assertion; elementary Bezout argument
-and geometric stalk conservativity. -/
+another prime must be zero. See Stacks Project, Tag 0GJA. -/
 theorem prime_annihilated_primary_cases (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} (r : ℕ) [Fact r.Prime]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : r • 𝟙 F = 0) :

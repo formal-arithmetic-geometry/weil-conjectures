@@ -33,29 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   [DiagonalTraceLocalizations l (ProjectiveLine Y)]
 
 /-- The integral image of a scalar-reduced arrow is its actual finite root projection.
-This concerns every completed arrow, without any Chern or Kummer hypothesis.
-
-
-
-Forget these ordinary insertions to abelian sheaves. CompletedRealization.line_normalization
-identifies the first map with the bottom integral root map. The integral-root transition
-formula identifies its integral extension with lineP's integralRoots. The quotient-line
-normalization therefore makes the whole target map the n-th root projection followed by
-lineP's finiteRoots.toLine. Its kernel-inclusion equation identifies the finiteRoots
-isomorphism with cartierRootsIso, so this last map is cartierProRootMap.
-
-Precompose the transposed equation with the integral generator of the completed unit.
-The scalar-unit semilinear maps preserve one; completedP.unit_normalization identifies
-the coefficient projection at every positive level. The map to the quotient factors
-through level n because s.hA says l^(n+1) is zero there. The finite realization's
-unit_normalization identifies the resulting generator with the ordinary finite integer
-generator after site comparison. Naturality of the composite adjunction unit now
-identifies the forgotten integral arrow with completedIntegralProjection. Substitute hk.
-Exact comparison commutes with forgetting coefficients via forgetComparisonIso; Ext
-functoriality moves the two endpoint comparisons outside. This is exactly the displayed
-integral image of ordinaryFiniteClass. Only integral Ext is compared: no faithfulness
-of derived coefficient forgetting is asserted. All maps preserve zero and one, so the
-same calculation applies to z=0, n=0, the zero coefficient ring and the empty scheme. -/
+This concerns every completed arrow, without any Chern or Kummer hypothesis. -/
 theorem localChern_transport_integral_projection
     {s : UniformizerChernNormalizationData l Y}
     {z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

@@ -22,7 +22,9 @@ import WeilConjectures.CategoryTheory.Sites.Point.Linear
 /-!
 # DenseOpenBaseChangeComparison
 
-Source: Stacks Project, Lemma 0GJA.
+## References
+
+* Stacks Project, Lemmas 0GJA and 095L.
 -/
 
 @[expose] public section
@@ -34,9 +36,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Changing abelian coefficients to modules over the lifted integers commutes with
-extension by zero followed by restriction.
-Source: Stacks Project, Tag 0GJA, open-closed reduction. The coefficient transport is
-formal uniqueness of left adjoints (`Adjunction.leftAdjointUniq`). -/
+extension by zero followed by restriction. -/
 private theorem dense_open_coefficient_iso {X : Scheme.{u}}
     (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
@@ -94,8 +94,8 @@ private theorem comparison_iso_iff {X Y : Scheme.{u}} (a : Y ⟶ X)
     (cohomology_iso_bijective ((Etale.upperStar _ a).mapIso e) q)
     (fun x ↦ Etale.cohomologyMap_map a q e.hom x)
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
--/
+/-- Comparison of the field-extension (base change) assertions for a sheaf on a curve over an
+algebraically closed field and for the extension by zero of its restriction to a dense open. -/
 theorem IsCurve.dense_open_baseChange_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

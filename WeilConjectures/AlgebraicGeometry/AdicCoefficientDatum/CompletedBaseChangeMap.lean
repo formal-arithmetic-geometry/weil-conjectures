@@ -10,12 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedTo
 /-!
 # The completed base-change map as the specified ordered composite
 
-Source: blueprint proper base change, completed base-change map; Stacks Tags 09C9 and 099N.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap`:
-  the recorded construction or statement of this node.
+  the completed base-change map.
+
+## References
+
+* Stacks Project, Tags 09C9 and 099N
 -/
 
 @[expose] public noncomputable section
@@ -41,10 +43,9 @@ def AdicCoefficientDatum.completedExchange (K : d.derived X) :
       (d.directImageRlimIso f').inv.app
         ((d.towerPull g').obj ((completedReductionTower X d).obj K))
 
-/-- The completed base-change map on the precise domain of the blueprint: proper f,
-derived-complete K, and a retained bounded-below etale-origin witness at every finite
-quotient. The formula itself is the ambient ordered composite above; the witnesses
-certify its finite exchange maps and impose no compatibility or uniform bound. -/
+/-- The completed base-change map, for proper `f`, derived-complete `K`, and a retained
+bounded-below etale-origin witness at every finite quotient. The witnesses certify its finite
+exchange maps and impose no compatibility or uniform bound. -/
 def AdicCoefficientDatum.completedBaseChangeMap [IsProper f]
     (K : d.derived X) (_hK : d.TowerComplete X K)
     (_W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))

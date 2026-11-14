@@ -62,12 +62,13 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 /-!
 # Bounded-below pro-etale comparison
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-prop-sf-comparison,
-statement and proof; Stacks Tags 099V, 099W and 03Q6.
-
 The affine formula is stated on bounded-below injective representatives. The source
 complex of its comparison map is the termwise filtered colimit, which represents the
 filtered derived colimit because filtered colimits of modules are exact.
+
+## References
+
+* Stacks Project, Tags 099V, 099W, 03Q6
 -/
 
 @[expose] public section
@@ -81,7 +82,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical global-sections comparison, obtained by applying derived etale sections
 to the derived adjunction unit and then the Leray isomorphism. No finiteness or commutativity
-is required of the coefficient ring. Source: Stacks 099V and 099W. -/
+is required of the coefficient ring. -/
 noncomputable def boundedBelowComparisonGlobalSections (X : Scheme.{u})
     (Λ : Type (u + 1)) [Ring Λ] :
     DerivedCategory.Plus.ι ⋙ Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X ⟶
@@ -102,9 +103,7 @@ noncomputable def boundedBelowComparisonGlobalSections (X : Scheme.{u})
           (comparisonLowerStarCompRightDerivedGlobalSectionsIso
             (ModuleCat.{u + 1} Λ) X).hom)
 
-/-- The derived unit, full faithfulness on D+ and the canonical global-sections comparison.
-Source: blueprint main-20261015, theorem-bounded-below-cohomology-comparison; Stacks 099V and 099W.
--/
+/-- The derived unit, full faithfulness on D+ and the canonical global-sections comparison. -/
 theorem boundedBelowComparison (X : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] :
     IsIso (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.unit ∧
       Nonempty (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.FullyFaithful ∧

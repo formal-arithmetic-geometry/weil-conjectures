@@ -10,7 +10,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Lifting a finite geometric stalk to neighbourhood sections
 
-Source: Stacks Project, Tag 0GKC, the finite-presentation paragraph.
+## References
+
+* Stacks Project, Tag 0GKC
 -/
 
 @[expose] public section
@@ -88,10 +90,7 @@ private theorem finite_germ_relations
       · exact congrArg (G.obj.map g.op) (hT j hj)
 
 /-- The identity of a finite geometric stalk lifts to a linear map into the sections
-on one pointed etale neighbourhood.
-
-Source: Stacks Project, Tag 0GKC, finite-presentation paragraph, expanded using the finite
-operation table. -/
+on one pointed etale neighbourhood. -/
 theorem exists_etale_finite_stalk_section
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

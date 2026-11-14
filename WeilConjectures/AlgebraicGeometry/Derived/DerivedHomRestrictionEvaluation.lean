@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 /-! # Evaluation commutes with restriction of derived Hom coefficients
 
-Source: Stacks Project, Tags 03DA, 098K and 0F63.
+## References
+
+* Stacks Project, Tags 03DA, 098K, 0F63
 -/
 
 @[expose] public section
@@ -329,9 +331,7 @@ private theorem comparisonHom_restrict
     ((presheafToSheaf X.smallEtaleTopology (Type (u + 1))).map
       (derivedRestrictionHomPresheaf X.smallEtaleTopology q A D)) _ _ θ hs
 
-/-- Evaluation of local derived morphisms commutes with coefficient restriction.
-Source: Stacks Project, Tags 03DA and 098K (restriction of coefficients and localization),
-and 0F63 (the inverse sheafification unit on weakly contractible affines). -/
+/-- Evaluation of local derived morphisms commutes with coefficient restriction. -/
 theorem derivedHomEvaluation_restrictScalars
     (X : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S)))

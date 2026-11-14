@@ -32,8 +32,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectChara
 /-!
 # Completed-to-continuous coefficient transport and shifted Hom sums
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12.
-
 The transport is derived restriction along the inverse of the recorded normalized
 coefficient isomorphism. The continuous scalar action uses actual constant functions.
 The comparison field specifies its Hom identifications on arrows and checks the square
@@ -50,6 +48,11 @@ compatible etale-origin witnesses, in the coordinates given by the coefficient i
 ## Main statements
 
 * `completedContinuousHomHypotheses`: the specified transport has these properties.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12
+* Stacks Project, Tag 015F
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +68,7 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Constant functions give the scalar action on continuous integral coefficients.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- Constant functions give the scalar action on continuous integral coefficients. -/
 def continuousIntegralSections (X : Scheme.{u}) :
     PbcIntegralRing l E →+* RingCat.sectionsSubring
       ((integralCoefficientSheaf l X E).obj ⋙ forget₂ CommRingCat RingCat) := by
@@ -78,8 +80,7 @@ def continuousIntegralSections (X : Scheme.{u}) :
       map_zero' := rfl
       map_add' := fun _ _ ↦ rfl }
 
-/-- The ordinary module category is linear over constant integral coefficients.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The ordinary module category is linear over constant integral coefficients. -/
 instance continuousIntegralLinear (X : Scheme.{u}) :
     Linear (PbcIntegralRing l E)
       (pbcModules X (integralCoefficientSheaf l X E)) :=
@@ -94,8 +95,7 @@ instance continuousIntegralLinear (X : Scheme.{u}) :
     comp_smul := fun M N P f a g ↦
       Linear.comp_smul M N P f (continuousIntegralSections l E X a) g }
 
-/-- The induced constant action on the continuous-coefficient derived category.
-Source: Bhatt--Scholze, Lemma 6.8.2(1); Stacks Project, Tag 015F. -/
+/-- The induced constant action on the continuous-coefficient derived category. -/
 instance continuousIntegralDerivedLinear (X : Scheme.{u}) :
     Linear (PbcIntegralRing l E)
       (DerivedCategory (pbcModules X (integralCoefficientSheaf l X E))) := inferInstance
@@ -104,14 +104,12 @@ variable (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
-/-- The fixed transport is restriction along the inverse normalized coefficient map,
-derived by the exact-functor construction; it is not an arbitrarily chosen equivalence.
-Source: Bhatt--Scholze, Lemma 6.8.2(1); Stacks Project, Tag 015F. -/
+/-- The fixed transport: restriction along the inverse normalized coefficient map,
+derived by the exact-functor construction. -/
 abbrev completedContinuousTransport (R : RationalModuleRealization l E X) :=
   pbcDerivedRestrict R.integralIso.inv
 
-/-- The canonical commutation with integer shifts for exact derived restriction.
-Source: Stacks Project, Tag 015F. -/
+/-- The canonical commutation with integer shifts for exact derived restriction. -/
 instance completedContinuousTransportShift (R : RationalModuleRealization l E X) :
     (completedContinuousTransport l E X R).CommShift ℤ :=
   inferInstanceAs ((pbcRestrict R.integralIso.inv).mapDerivedCategory.CommShift ℤ)
@@ -121,8 +119,7 @@ open Classical in
 The two bijective maps below are the direct-sum extensions of composition with the
 shifted coprojections. The formulas for `φ` and `ψ` and the generator square identify
 these actual maps, including their constant-coefficient module structures. The complete
-predicate in `integral` retains every compatible etale-origin witness.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12. -/
+predicate in `integral` retains every compatible etale-origin witness. -/
 structure CompletedContinuousHomHypotheses (R : RationalModuleRealization l E X) where
   /-- Derived restriction is an equivalence. -/
   equivalence : (completedContinuousTransport l E X R).IsEquivalence
@@ -290,8 +287,7 @@ private theorem completedTransport_bounds (R : RationalModuleRealization l E X)
       have := h
       exact F.isLE_mapDerivedCategory_obj N n
 
-/-- The normalized completed-to-continuous transport verifies all shifted Hom hypotheses.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12. -/
+/-- The normalized completed-to-continuous transport verifies all shifted Hom hypotheses. -/
 theorem completedContinuousHomHypotheses (R : RationalModuleRealization l E X) :
     Nonempty (CompletedContinuousHomHypotheses l E X R) := by
   classical

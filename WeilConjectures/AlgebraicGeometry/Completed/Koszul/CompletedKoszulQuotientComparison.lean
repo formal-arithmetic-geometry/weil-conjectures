@@ -13,12 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantPre
 /-!
 # The normalized Koszul-to-quotient comparison over completed coefficients
 
-Source: blueprint, proper base change, Koszul and quotient reconstruction, order 1248;
-Stacks Tags 099L, 099M and 0A0E.
-
 This is the reconstruction comparison in the actual completed coefficient presentation,
 with coefficient universe one above the scheme universe. The quotient unit is the
 constant-tower adjunction unit followed by the specified strict quotient augmentation.
+
+## References
+
+* Stacks Project, Tags 099L, 099M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -29,10 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The localized explicit Koszul fiber is isomorphic to the derived strict quotient
 limit, carrying its transported (u,0) unit to the actual quotient completion unit.
-No completeness hypothesis on the input is required.
-
-Source: blueprint `prop-weil-pbc-koszul-reconstruction`, comparison assertion;
-Stacks Tags 099L, 099M and 0A0E. -/
+No completeness hypothesis on the input is required. -/
 theorem completedKoszulQuotientComparison
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)

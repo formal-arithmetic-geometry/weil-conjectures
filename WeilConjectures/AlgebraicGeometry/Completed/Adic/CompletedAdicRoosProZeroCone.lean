@@ -50,7 +50,9 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # The concrete completed adic Roos functor kills pro-zero cones
 
-Source: Stacks Project, Tags 0940 and 0941.
+## References
+
+* Stacks Project, Tags 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -88,9 +90,7 @@ private theorem countableProducts_exact :
     infer_instance
   exact hasExactLimitsOfShape_of_preservesEpi B (Discrete ℕ)
 
-/-- The concrete Roos fibre kills an eventually derived-zero strict cone tower.
-
-Source: Stacks Project, Tags 0940 and 0941; the pro-zero derived-limit argument. -/
+/-- The concrete Roos fibre kills an eventually derived-zero strict cone tower. -/
 theorem completedAdicRoosMapQuasiIsoOfProZero
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     {X Y : CochainComplex (CompletedAdicTowers T d) ℤ} (v : X ⟶ Y)

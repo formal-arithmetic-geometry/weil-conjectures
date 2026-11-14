@@ -15,7 +15,12 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizedScalarSymmetry
 
-/-! # Normalization of one side of the ordered scalar projection square -/
+/-! # Normalization of one side of the ordered scalar projection square
+
+## References
+
+* Stacks Project, Tags 07A4, 0E8I, 0GL6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -163,8 +168,7 @@ private theorem symmetry_inv
     (((derivedTensorSymmetry (ModuleCat.{u + 1} R) Z).hom.app K).app L)).1
   rw [Iso.hom_inv_id_app_app, derivedTensorSymmetry_involutive]
 
-/-- Normalize the source-side scalar transport and the exact open projection.
-Source: Stacks 0E8I, 0GL6 and 07A4; the source normalization in the local open square. -/
+/-- Normalize the source-side scalar transport and the exact open projection. -/
 theorem etaleOrderedScalar_sourceNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

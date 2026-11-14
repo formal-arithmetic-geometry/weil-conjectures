@@ -50,12 +50,13 @@ import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSuppl
 
 /-! # Intrinsic Koszul completion over the completed coefficient sheaf
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node def-weil-pbc-intrinsic-completion; Stacks Tag 099M.
-
 Koszul complexes are obtained by scalar extension of the recorded exterior-algebra
 construction along the residue-normalized map from the constant ring to A_T. All tensor
 products, products and mapping fibres below are in modules over A_T.
+
+## References
+
+* Stacks Project, Tags 099M, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -170,8 +171,7 @@ def completedAdicScalar (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
   (completedAdicScalar_exists T d).exists.choose
 
 set_option linter.defProp false in
-/-- The scalar-extension witness with its object and morphism tensor formulas.
-Source: blueprint def-weil-pbc-intrinsic-completion; Stacks Tag 06YY. -/
+/-- The scalar-extension witness with its object and morphism tensor formulas. -/
 def completedAdicScalarExtensionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   completedAdicChangeData T (completedAdicScalar T d)
 
@@ -448,7 +448,7 @@ def completedAdicKoszulOneSubShift (T : Scheme.{t}) (d : AdicCoefficientDatum A)
 
 /-- The mapping fibre with degree i terms B^i and B^. Taking the cone of -(1-s)
 and shifting by -1 gives exactly the differential (dx,(1-s)x-dy), under the canonical
-index isomorphisms of the shift. Source: blueprint def-weil-pbc-intrinsic-completion. -/
+index isomorphisms of the shift. -/
 def completedAdicKoszulFibre (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
     CochainComplex (CompletedAdicModules T d) ℤ :=

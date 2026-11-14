@@ -176,10 +176,7 @@ private lemma coefficientExactDetection
     rw [F.map_comp, ← hl, ← hk, Category.assoc, reassoc_of% he, zero_comp, comp_zero]
 
 /-- Exactness, monomorphisms and epimorphisms of coefficient modules are detected on every
-finite locally closed stratification. Source: blueprint det-lem-coefficient-heart-common-
-stratification, step (7). It uses exact inverse image for cartesian coefficients and the
-finite-stratum zero-detection theorem on underlying abelian sheaves.
--/
+finite locally closed stratification. -/
 theorem coefficientHeart_commonStratification_exactness
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] :

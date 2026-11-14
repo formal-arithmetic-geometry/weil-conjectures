@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechTotalMap
 
 /-! # Naturality of the coefficient augmentation
 
-Source: Stacks Project, Tags 01EQ and 01FD.
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
 -/
 
 @[expose] public section
@@ -20,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- The coefficient augmentation commutes with a lift of a coefficient morphism.
-Source: Stacks Project, Tags 01EQ and 01FD, beta square. -/
+/-- The coefficient augmentation commutes with a lift of a coefficient morphism. -/
 theorem abelianCechBeta_square
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

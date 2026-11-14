@@ -12,14 +12,16 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
 /-! # Derived scalar extension commutes with the etale/pro-etale comparison
 
-Source: Stacks Tags 09B1, 0F63, 06YY and 07A4.
-
 For a ring map `φ : A →+* B`, the mate of the canonical square
 `Scheme.comparisonRestrictScalarsIso` (derived restriction of scalars commutes with the
 exact comparison pullback `ν^*`) with respect to the derived scalar-extension adjunctions
 on the small etale and pro-etale sites is invertible. This is the pro-etale comparison
 analogue of `AlgebraicGeometry.ProEtale.proEtaleScalarPullbackMate_isIso` and uses the
 same flat-resolution machinery of `WitnessCompatibility`.
+
+## References
+
+* Stacks Project, Tags 09B1, 0F63, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -137,8 +139,7 @@ private theorem comparison_computed_mate_isIso {A B : Type (u + 1)} [CommRing A]
 
 /-- The derived scalar-extension mate of the etale/pro-etale comparison square
 `Scheme.comparisonRestrictScalarsIso` is invertible: derived scalar extension commutes with
-the exact comparison pullback `ν^*`, for an arbitrary ring map `φ`.
-Source: Stacks 09B1, 0F63, 06YY and 07A4. -/
+the exact comparison pullback `ν^*`, for an arbitrary ring map `φ`. -/
 theorem isIso_mate_comparisonRestrictScalarsIso {A B : Type (u + 1)} [CommRing A]
     [CommRing B] (φ : A →+* B) (X : Scheme.{u}) :
     IsIso (((mateEquiv

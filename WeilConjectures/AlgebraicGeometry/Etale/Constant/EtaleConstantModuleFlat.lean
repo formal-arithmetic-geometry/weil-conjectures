@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantModuleTenso
 
 /-! # Flatness and the constant-coefficient realization
 
-Source: Stacks Project, Modules on Sites, Sections 03EK and 03ER.
+## References
+
+* Stacks Project, Modules on Sites, Sections 03EK, 03ER, 093I and 03CV
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Flatness is unchanged by extending constant scalars and the canonical ring transport.
-Source: Stacks Project, Modules on Sites, Sections 03EK and 03ER, together with the
-constant-scalar equivalence in Sections 093I and 03CV. -/
+/-- Flatness is unchanged by extending constant scalars and the canonical ring transport. -/
 theorem etaleConstantModule_flat_iff (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     ObjectProperty.flat F ↔

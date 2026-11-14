@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 
 /-! # Canonical additive comparison and its inverse-image square
 
-Source: Stacks Project, Tags 03P2 and 01FD.
+## References
+
+* Stacks Project, Tags 03P2, 01F7 and 01FD.
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Multiplication by a global function on the lifted additive structure sheaf.
-This is a sectionwise construction, with naturality from structural pullback.
-Source: Stacks Project, Tag 03P2, the associated abelian sheaf of the unit module. -/
+/-- Multiplication by a global function on the lifted additive structure sheaf. -/
 noncomputable def etaleAdditiveSmul (X : Scheme.{u}) (r : Γ(X, ⊤)) :
     X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf := by
   refine ⟨{ app := ?_, naturality := ?_ }⟩
@@ -60,8 +60,7 @@ noncomputable def etaleAdditiveSmul (X : Scheme.{u}) (r : Γ(X, ⊤)) :
     rw [Scheme.Hom.comp_appTop] at hw
     exact ConcreteCategory.congr_hom hw r
 
-/-- The coefficient map adjoint to structural pullback on additive sections.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial. -/
+/-- The coefficient map adjoint to structural pullback on additive sections. -/
 noncomputable def etaleAdditivePullback {X Y : Scheme.{u}} (g : Y ⟶ X) :
     (Etale.upperStar AddCommGrpCat.{u + 1} g).obj X.etaleAdditiveSheaf ⟶
       Y.etaleAdditiveSheaf :=
@@ -139,10 +138,7 @@ private theorem exists_refined_affine_covers {X Y : Scheme.{u}} (g : Y ⟶ X)
     exact hi (y l).val ((iInf_le (fun l ↦ V' (y l)) l) hx)
 
 /-- The fixed additive structure sheaves admit comparisons compatible with global
-multiplication and the canonical inverse-image coefficient map.
-Source: Stacks Project, Tag 03P2, theorem
-etale-cohomology-theorem-zariski-fpqc-quasi-coherent; Tag 01FD, inverse-image
-naturality of the Cech comparison. -/
+multiplication and the canonical inverse-image coefficient map. -/
 theorem exists_canonical_additive_cohomology_square
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated] (n : ℕ) :

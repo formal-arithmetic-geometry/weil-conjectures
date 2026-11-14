@@ -130,9 +130,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalEndpointsProof.DiagonalLimi
 /-!
 # The completed diagonal class
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-limit.md, clauses 1--3; Stacks Tags 099L and 099I.
-
 Strict towers have constant discrete Z_l coefficients. Only the final arrow has
 coefficients in the completed ring sheaf. Positive exponent n+1 is indexed by n.
 
@@ -141,6 +138,10 @@ coefficients in the completed ring sheaf. Positive exponent n+1 is indexed by n.
 - `diagonalTower_limit`: completed endpoints and the unique completed diagonal arrow.
 - `diagonalTower_directImage`: levelwise direct image and its canonical limit comparison.
 - `diagonalCompletedTwist_limits`: exactness, products and inverse limits for both twists.
+
+## References
+
+* Stacks Project, Tags 099L, 099I, 099M
 -/
 
 @[expose] public noncomputable section
@@ -447,12 +448,8 @@ end DirectImageProof
 /-- The completed diagonal class is the limit of the simultaneous reduction of the
 positive Cartier boundary. Its endpoints are the supported completed constant and the
 completed Tate line shifted by two. The unique lift is specified by its whole underlying
-constant-coefficient morphism, not by a claim that individual reductions detect maps.
-The reduction isomorphisms are normalized against the canonical limit projections and
-the canonical derived quotient units.
-
-Source: blueprint main-20261015, sk-prop-diagonal-tower-limit.md, clauses 1 and 3;
-Stacks 099L, 099I and 099M. -/
+constant-coefficient morphism. The reduction isomorphisms are normalized against the canonical
+limit projections and the canonical derived quotient units. -/
 theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

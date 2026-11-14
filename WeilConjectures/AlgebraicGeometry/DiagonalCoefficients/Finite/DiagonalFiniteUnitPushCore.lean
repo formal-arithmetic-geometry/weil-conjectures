@@ -210,10 +210,7 @@ private theorem finite_unit_identity
 /-- The normalized finite push square on the coefficient unit, before cancellation
 of the finite realization unit isomorphism. This is the single-object instance of
 `FinitePushSquare.derived.normalization`, combined with the ordinary unit
-normalization and the canonical derived-unit equation. The ordinary square is
-first evaluated on the regular module, then the single-complex comparisons are
-cancelled; the result is the displayed equation. No line, trace, or positivity
-hypothesis enters this coefficient-unit step. -/
+normalization and the canonical derived-unit equation. -/
 theorem finite_unit_push_square
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] (Y : Scheme.{u})

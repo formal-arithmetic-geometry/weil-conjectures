@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 /-!
 # Scalar extension of affine Proj with its chart maps
 
-Source: literature/stacks-project/constructions.tex, Tags 01N2 and 01MY
+## References
+
+* Stacks Project, Tags 01N2, 01MY
 -/
 
 @[expose] public section
@@ -25,9 +27,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Scalar extension of affine Proj, with the standard-open descriptions.
-Source: Stacks Project, Tags 01N2 and 01MY.
--/
+/-- Scalar extension of affine Proj, with the standard-open descriptions. -/
 theorem lem_nagata_affine_proj_scalar_extension
     {R : Type u} [CommRing R] {S : Type u} [CommRing S]
     {A : Type u} [CommRing A] {B : Type u} [CommRing B]

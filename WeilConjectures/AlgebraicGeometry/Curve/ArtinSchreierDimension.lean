@@ -20,8 +20,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Artin–Schreier vanishing on a smooth connected curve
 
-Source: blueprint, `sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension`;
-Stacks Project, Tag 0A3N, dimension one.
+## References
+
+* Stacks Project, Tag 0A3N, dimension one.
 -/
 
 @[expose] public section
@@ -32,11 +33,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint
-`sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension`; Stacks Project, Tag
-0A3N. For a smooth separated connected
-curve over an algebraically closed field of positive characteristic `p`, the constant étale sheaf
-`ℤ/p` has zero cohomology in degrees above one. -/
+/-- For a smooth separated connected curve over an algebraically closed field of positive
+characteristic `p`, the constant étale sheaf `ℤ/p` has zero cohomology in degrees above one. -/
 theorem isZero_etaleCohomology_constantZMod_of_one_lt_of_charP
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

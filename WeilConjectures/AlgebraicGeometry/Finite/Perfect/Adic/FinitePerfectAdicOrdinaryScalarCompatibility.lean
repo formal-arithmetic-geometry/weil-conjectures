@@ -49,7 +49,9 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Extension of the ordinary scalar comparison from the rank-one quotient
 
-Source: Stacks Project, Tags 093J, 093M and 03CY.
+## References
+
+* Stacks Project, Tags 093J, 093M and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -142,10 +144,7 @@ private theorem ordinaryTarget_colimits
   unfold finitePerfectAdicOrdinaryScalarTarget finitePerfectAdicScalarModelOrdinary
   infer_instance
 
-/-- A rank-one ordinary scalar comparison extends to every quotient module.
-
-Source: Stacks Project, Tags 093J and 093M; Tag 03CY for finite presentations.
--/
+/-- A rank-one ordinary scalar comparison extends to every quotient module. -/
 theorem finitePerfectAdicOrdinaryScalar_compatibility
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

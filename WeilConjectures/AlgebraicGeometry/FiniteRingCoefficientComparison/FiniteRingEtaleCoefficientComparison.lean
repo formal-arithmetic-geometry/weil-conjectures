@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 /-!
 # Extending constant coefficients to the constant ring sheaf
 
-Source: Stacks Project, Modules on Sites, Sections 093I and 03CV;
-Sites Example 0H7J.
+## References
+
+* Stacks Project, Modules on Sites, Sections 093I and 03CV; Sites, Example 0H7J
+* Stacks Project, Tag 0F0D
 -/
 
 @[expose] public noncomputable section
@@ -258,20 +260,14 @@ private def etaleConstantModuleCounitIso :
     ext X x
     rfl
 
-/-- Extending to the constant ring sheaf is an equivalence of categories.
-
-Source: Stacks Project, Modules on Sites, Sections 093I and 03CV, and Sites Example 0H7J.
-The equivalence argument is the constant-scalar construction in steps 1--3 of
-lem-weil-pbc-injective-etale-constant-ring-module. -/
+/-- Extending to the constant ring sheaf is an equivalence of categories. -/
 private theorem etaleConstantModuleFunctor_isEquivalence :
     (etaleConstantModuleFunctor Y Λ).IsEquivalence :=
   Functor.IsEquivalence.mk' (etaleConstantModuleRestrictionFunctor Y Λ)
     (etaleConstantModuleUnitIso Y Λ) (etaleConstantModuleCounitIso Y Λ)
 
 /-- Module-valued étale sheaves over an arbitrary ring are modules over its constant ring
-sheaf, by an equivalence preserving the underlying abelian sheaf.
-Source: Stacks, Tags 093I and 03CV; the constant-scalar construction is a substep of
-Stacks 0F0D with coefficient restriction. -/
+sheaf, by an equivalence preserving the underlying abelian sheaf. -/
 @[no_expose]
 def constantModuleEquivalence :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌ SheafOfModules.{u + 1}

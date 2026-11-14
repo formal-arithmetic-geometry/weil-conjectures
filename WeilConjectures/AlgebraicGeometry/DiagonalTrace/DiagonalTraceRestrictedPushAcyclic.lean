@@ -40,7 +40,12 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Tr
 import all Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import all Mathlib.Algebra.BigOperators.Ring.Finset
 
-/-! # Acyclicity after scalar restriction for direct image -/
+/-! # Acyclicity after scalar restriction for direct image
+
+## References
+
+* [Stacks Project, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -251,12 +256,7 @@ private theorem tower_resolution_quasiIso (l : ℕ) [Fact l.Prime]
     (ProEtale.VaryingRing.baseChange f) _ RX RS a b I J j
 
 /-- Restricted K-injective complexes are acyclic for geometric direct image,
-for the strict finite-coefficient systems and for completed coefficients.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-scalar/direct-image comparison; Stacks Tag 0D6E, composition of ringed-topos
-right derived direct images.
--/
+for the strict finite-coefficient systems and for completed coefficients. -/
 theorem diagonalTrace_restrictedPush_acyclic (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # The boundary of a dense open after field extension
 
-Source: Stacks Project, Tag 0GJA, proof and remark (c).
+## References
+
+* Stacks Project, Tag 0GJA, proof and remark (c).
 -/
 
 @[expose] public section
@@ -78,21 +80,7 @@ private theorem dense_open_boundary
   exact hTcl Z x hxZ
 
 /-- The inverse image of a dense open in a curve over an algebraically closed field has
-finite complement consisting of closed points with separably closed residue fields.
-Source: Stacks Project, Tag 0GJA, proof, first sentence and remark (c).
-
-
-For a boundary point x, its residue field is k by the Nullstellensatz, so the composite
-Spec κ(x) to X to Spec k is an isomorphism. Paste the square defining the fiber of ι' at x
-with the given field-extension square. The resulting square is cartesian, and pulling
-back the isomorphism just obtained shows that this fiber maps isomorphically to Spec k'.
-Consequently its underlying space, and the topological fiber of ι', are subsingletons.
-Therefore ι' is injective on the inverse image of the finite boundary; this inverse image
-is finite. The inverse image of each closed singleton in the boundary is a singleton
-whenever nonempty and is closed by continuity. Finally f' is locally of finite type by
-base change, so the residue field of each closed boundary point in X' is k', hence
-separably closed. Empty curves, empty boundaries, zero-dimensional curves and nonreduced
-curves require no extra assumptions or separate choices. -/
+finite complement consisting of closed points with separably closed residue fields. -/
 theorem dense_open_baseChange_boundary
     {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]

@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteReduction.FiniteReductionSystem
 /-!
 # Finite reduction and constructibility
 
-Source: main-20261015 blueprint, sec-smooth-purity/sk-lem-sp-reduction,
-first paragraph; Stacks Tags 08G1, 06YQ, 094H and 09AL.
-
 ## Main definitions
 
 * `AlgebraicGeometry.FiniteReduction.System`: universal derived extensions with
@@ -28,6 +25,10 @@ first paragraph; Stacks Tags 08G1, 06YQ, 094H and 09AL.
 
 * `AlgebraicGeometry.FiniteReduction.finiteReduction_constructibility`: finite reduction,
   its bounded flat models, intrinsic finiteness and coherent etale origin.
+
+## References
+
+* Stacks Project, Tags 08G1, 06YQ, 094H, 09AL
 -/
 
 @[expose] public noncomputable section

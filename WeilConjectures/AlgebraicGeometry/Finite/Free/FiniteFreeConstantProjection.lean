@@ -21,8 +21,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 /-!
 # Projection for bounded finite free constant complexes
 
-Source: Stacks Project, Tag 0944, finite free case.
-The library proves this case through dualizability of bounded finite free complexes.
+## Implementation details
+
+The finite free case is proved through dualizability of bounded finite free complexes.
+
+## References
+
+* Stacks Project, Tag 0944
 -/
 
 @[expose] public section
@@ -35,8 +40,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- The projection map is invertible on a bounded finite free constant complex.
-Source: Stacks Project, Tag 0944, finite free case. -/
+/-- The projection map is invertible on a bounded finite free constant complex. -/
 theorem isIso_projectionMap_bounded_finiteFree_constant
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))

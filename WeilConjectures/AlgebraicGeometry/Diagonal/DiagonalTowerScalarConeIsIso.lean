@@ -42,7 +42,9 @@ import WeilConjectures.CategoryTheory.RegularScalarQuotient.RegularScalarQuotien
 
 /-! # Scalar cones of strict ordinary quotient limits
 
-Source: Stacks 099M and 0941; diagonal tower limit proof paragraph (3).
+## References
+
+* Stacks Project, Tags 099M, 0941
 -/
 
 @[expose] public noncomputable section
@@ -237,10 +239,7 @@ private theorem scalarConeAugmentation_at_zero_isIso
   exact transport (0 + k) (Nat.zero_add k)
     (homOfLE (Nat.le_add_left k 0)).op _ h
 
-/-- The explicit scalar-cone comparison for a regular strict quotient tower is invertible.
-
-Source: Stacks 099M, the proof of naive completion; Stacks 0941; blueprint
-`sk-prop-diagonal-tower-limit.proof.md`, paragraph (3). -/
+/-- The explicit scalar-cone comparison for a regular strict quotient tower is invertible. -/
 theorem diagonal_tower_scalar_cone_isIso (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

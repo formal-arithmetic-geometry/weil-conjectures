@@ -28,8 +28,9 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSurjectivePu
 /-!
 # Finite etale pushforward preserves constructibility of module sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 095H, lemma-pushforward-constructible,
-module clause for finite coefficient rings.
+## References
+
+* Stacks Project, Etale Cohomology, Tag 095H (module clause for finite coefficient rings)
 -/
 
 @[expose] public section
@@ -153,9 +154,7 @@ private theorem constructible_of_finite_affine_open_cover
       eqToIso (by rw [hq]))
 
 /-- Direct image along a finite etale morphism of qcqs schemes preserves the finite
-constructible-stratification predicate for sheaves over a finite commutative ring.
-
-Source: Stacks Project, Tag 095H, lemma-pushforward-constructible, module clause. -/
+constructible-stratification predicate for sheaves over a finite commutative ring. -/
 theorem isConstructibleEtaleModuleSheaf_lowerStar_of_finite_etale
     {V U : Scheme.{u}} [CompactSpace V] [QuasiSeparatedSpace V]
     [CompactSpace U] [QuasiSeparatedSpace U] (h : V ⟶ U) [IsFinite h] [Etale h]

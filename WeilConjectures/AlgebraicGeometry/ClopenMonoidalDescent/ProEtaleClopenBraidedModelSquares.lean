@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenMonoidalDescent.ProEtaleClopenBra
 
 /-! # Cancellation of native braided model squares
 
-Source: Stacks Project, Tags 06YU and 0FPT.
+## References
+
+* Stacks Project, Tags 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -69,10 +71,7 @@ private theorem inverse_tensor_square_aux
 end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
-/-- The native tensor and unit equations follow by cancellation from a monoidal
-factorization. This is the algebraic square used by the normalization theorem.
-Source: Stacks Project, Tags 06YU and 0FPT.
--/
+/-- The native tensor and unit equations follow from a monoidal factorization. -/
 theorem clopen_braided_model_squares
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

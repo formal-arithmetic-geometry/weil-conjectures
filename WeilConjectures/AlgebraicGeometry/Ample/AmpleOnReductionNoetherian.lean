@@ -18,10 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Ample.AmpleSquareZeroThickening
 
 /-! # Ampleness on a Noetherian reduction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
+The invertibility of the pullback `i^*L` is the first clause of
+`Scheme.Modules.invertible_pullback_tensor`; it is not restated here.
 
-The invertibility of the pullback `i^*L` (the node's parenthetical) is the first clause of
-the landed `Scheme.Modules.invertible_pullback_tensor`; it is not restated here.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 09MS; Lemma 01Y9
 -/
 
 @[expose] public section
@@ -33,11 +35,7 @@ namespace AlgebraicGeometry
 
 universe u
 
-/-- The kernel is locally contained in the nilradical because its support is all of `X`.
-On a finite affine cover, Noetherianity makes each section ideal finitely generated,
-so each has a zero power. The maximum of these exponents kills the ideal on the cover,
-and ideal-sheaf extensionality gives global vanishing. This includes the empty cover.
-Source: Stacks Project, Lemma 09MS, first paragraph; Lemma 01Y9, its affine proof. -/
+/-- Some power of the kernel ideal of `i` vanishes. -/
 private theorem exists_ker_pow_eq_bot {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [IsLocallyNoetherian X] [CompactSpace X]
     (hi : IsHomeomorph i.base) : ∃ n : ℕ, i.ker ^ n = ⊥ := by
@@ -78,11 +76,8 @@ private theorem exists_ker_pow_eq_bot {Z X : Scheme.{u}} (i : Z ⟶ X)
   apply le_bot_iff.mp
   exact (Ideal.pow_le_pow_right (Finset.le_sup (Finset.mem_univ a))).trans (hn a).le
 
-/-- On an affine open of `X`, the kernel of the composite is the inverse image of the
-kernel of `j`. Surjectivity of the section map of `k` identifies the latter with the
-image of the former. Its square is therefore zero if the composite kernel's square
-lies in the kernel of `k`. The inverse images of affine opens cover `Y`.
-Source: Stacks Project, Lemma 09MS, first paragraph, the square-zero transition ideals. -/
+/-- The kernel of `j` has square zero if the square of the kernel of the composite lies in
+the kernel of `k`. -/
 private theorem ker_square_eq_bot_of_comp {Z Y X : Scheme.{u}}
     (j : Z ⟶ Y) (k : Y ⟶ X) [IsClosedImmersion j] [IsClosedImmersion k]
     (h : (j ≫ k).ker ^ 2 ≤ k.ker) : j.ker ^ 2 = ⊥ := by
@@ -105,13 +100,8 @@ private theorem ker_square_eq_bot_of_comp {Z Y X : Scheme.{u}}
   simpa only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply, Scheme.Hom.ker_apply]
     using h V
 
-/-- Induct on an exponent `n + 2` killing the ideal. At `n = 0`, use square-zero
-lifting. In the successor case factor through the subscheme defined by the square
-of the ideal. The first immersion has square-zero kernel, while the second has
-nilpotency exponent at most `n + 2`, since `n + 3 ≤ 2 * (n + 2)`. Lift first along the
-square-zero immersion, transport via composition of tensor pullbacks, and apply the
-induction hypothesis to the second immersion.
-Source: Stacks Project, Lemma 09MS, first paragraph, reduction to the square-zero case. -/
+/-- Ampleness lifts along a closed immersion whose kernel ideal is killed by the exponent
+`n + 2`. -/
 private theorem isAmple_of_ker_pow_eq_bot (n : ℕ) {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]
     [IsLocallyNoetherian Z] [IsLocallyNoetherian X]
@@ -166,7 +156,6 @@ private theorem isAmple_of_ker_pow_eq_bot (n : ℕ) {Z X : Scheme.{u}}
 
 /-- Ampleness of an invertible module is unchanged on a Noetherian closed subscheme
 with the same underlying topological space.
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
 -/
 theorem isAmple_iff_of_isClosedImmersion_of_isHomeomorph {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]

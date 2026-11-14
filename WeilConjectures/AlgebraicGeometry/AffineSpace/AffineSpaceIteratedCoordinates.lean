@@ -41,8 +41,7 @@ theorem iteratedAffineLine.hom_ext {S X : Scheme.{u}} :
       exact hc 0
 
 /-- Affine space and the ordered affine tower are canonically isomorphic with
-identical coordinates and base map. Source: corollary-cup-product-pairing--1, local smooth
-coordinates. -/
+identical coordinates and base map. -/
 def AffineSpace.iteratedIso (S : Scheme.{u}) (r : ℕ) :
     AffineSpace (ULift.{u} (Fin r)) S ≅ iteratedAffineLine S r where
   hom := Scheme.Hom.toIteratedAffineLine (AffineSpace (ULift.{u} (Fin r)) S ↘ S)

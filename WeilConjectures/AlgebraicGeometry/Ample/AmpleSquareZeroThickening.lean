@@ -18,11 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Ampleness lifts along a square-zero thickening
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, square-zero case.
+The invertibility of the pullback `j^*L` is the first clause of
+`Scheme.Modules.invertible_pullback_tensor`; it is not restated here.
 
-The invertibility of the pullback `j^*L` is the first clause of the landed
-`Scheme.Modules.invertible_pullback_tensor`;
-it is not restated here.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 09MS, square-zero case
 -/
 
 @[expose] public section
@@ -63,7 +64,6 @@ private theorem affine_of_affine_preimage {X Z : Scheme.{u}} (j : Z ⟶ X)
   exact isAffine_of_isFinite_surjective_of_isNoetherian (j ∣_ V)
 
 /-- Ampleness lifts along a square-zero closed immersion of Noetherian schemes.
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, square-zero case.
 -/
 theorem isAmple_of_isAmple_tensorPullback_of_square_zero
     {X Z : Scheme.{u}} (j : Z ⟶ X)

@@ -13,6 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The underlying additive comparison for finite coefficients
+
+## References
+* Stacks Project, Tags 00YV, 03FD
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
 
-/-- The actual associated-module-sheaf unit after forgetting coefficients.
-Source: Stacks 00YV. -/
+/-- The actual associated-module-sheaf unit after forgetting coefficients. -/
 def finiteRealizationForgetUnit :
     finiteOrdinaryForget (FiniteRing l E n) T ⟶
       finiteOrdinaryRealization l E n T ⋙ finiteForget l E T n where
@@ -46,8 +48,7 @@ def finiteRealizationForgetUnit :
         (finiteCoefficientIntrinsicScalarMap T (SpTowerShriek.R l E n))).unit.naturality
         ((finiteCoefficientModulePresheaf T.ProEt (FiniteRing l E n)).map f.hom))
 
-/-- The comparison is invertible because the underlying additive sheaf is already a sheaf.
-Source: Stacks 00YV. -/
+/-- The comparison is invertible because the underlying additive sheaf is already a sheaf. -/
 instance finiteRealizationForgetUnit_isIso :
     IsIso (finiteRealizationForgetUnit l E n T) := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -64,8 +65,7 @@ instance finiteRealizationForgetUnit_isIso :
       (forget₂ (ModuleCat.{u + 1} (FiniteRing l E n)) AddCommGrpCat.{u + 1})).obj M).property
 
 /-- Exact site comparison commutes with forgetting the finite coefficient action,
-using the actual associated-sheaf unit.
-Source: Stacks 00YV, 03FD. -/
+using the actual associated-sheaf unit. -/
 def finiteScalarComparison :
     Etale.moduleAbelianForget (FiniteRing l E n) T ⋙
         comparisonUpperStar AddCommGrpCat.{u + 1} T ≅
@@ -105,7 +105,7 @@ theorem finiteScalarLineCoordinate_eq
         (finiteForget l E T n).map (finiteOrdinaryLineCoordinate l E n T c).hom := rfl
 
 /-- The additive comparison carries the comparison-adjunction generator to the
-actual scalar-unit section. Source: the adjunction mate defining forgetComparisonIso. -/
+actual scalar-unit section. -/
 theorem finiteScalarComparison_unit_section
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (FiniteRing l E n)))
     (U : T.Etaleᵒᵖ)

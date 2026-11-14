@@ -19,8 +19,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Conditional coefficient hypotheses after a finite cover
 
-Source: Stacks Project, Tag 03SD, `lemma-vanishing-easier`, first paragraph;
-Tag 095R, `lemma-finite-pushforward-constructible`.
+## References
+
+* Stacks Project, Tag 03SD (first paragraph of the proof)
+* Stacks Project, Tags 095B, 095R
 -/
 
 @[expose] public section
@@ -73,9 +75,7 @@ private theorem finiteCoverLowerShriek_isZero {R : Type (u + 1)} [CommRing R]
     ((Etale.lowerStar (ModuleCat.{u + 1} R) v).map_isZero
       ((Etale.upperStar (ModuleCat.{u + 1} R) v).map_isZero hG))
 
-/-- Finite etale pushforward preserves finite local constancy. Use the trivial
-stratification on the open and extend by zero over its closed complement.
-Source: Stacks Project, Tags 095B and 095R. -/
+/-- Finite etale pushforward preserves finite local constancy. -/
 theorem finiteCoverLowerShriek_constructible {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
@@ -102,9 +102,7 @@ theorem finiteCoverLowerShriek_constructible {k : Type u}
   exact Scheme.IsConstructibleSheaf.openImmersionLowerShriek
     j j.closedComplement j.range_closedComplement H
 
-/-- Torsion substatement retained as a separately reviewable obligation.
-Source: Stacks Project, Tag 03SD.
-(auxiliary lemma; not a blueprint node) -/
+/-- The torsion part of the coefficient hypotheses passes to the finite-cover sheaf. -/
 theorem finiteCoverLowerShriek_torsion {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
@@ -172,12 +170,7 @@ theorem finiteCoverLowerShriek_torsion {k : Type u}
       exact ⟨0, Subsingleton.elim _ _⟩
 
 
-/-- The coefficient hypotheses needed for retract descent pass to the finite-cover sheaf.
-This statement contains no cohomology assertions and does not assume a unit retraction.
-
-Source: Stacks Project, Tag 03SD, `lemma-vanishing-easier`, first paragraph;
-Tag 095R, `lemma-finite-pushforward-constructible`.
-(auxiliary lemma; not a blueprint node) -/
+/-- The coefficient hypotheses needed for retract descent pass to the finite-cover sheaf. -/
 theorem finiteCoverLowerShriek_coefficient_compatibility {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

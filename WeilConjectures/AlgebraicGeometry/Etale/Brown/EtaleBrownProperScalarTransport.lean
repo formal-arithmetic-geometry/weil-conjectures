@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProperScalarSquar
 
 /-! # Proper scalar mate in normalized realizations
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4, 0F0G, 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- The proper scalar projection and its local transport square.
-Source: Zheng, Lemma 5.16; Stacks 0F0G, 0GL6 and 07A4. -/
+/-- The proper scalar projection and its local transport square. -/
 theorem etaleBrownProperScalarTransport
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]

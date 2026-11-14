@@ -17,14 +17,23 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Compact-support site coherence
 
-Source: Stacks Project, Tags 0F7C, 0F7D and 0F7F; the agent-formulated normalized
-site-coherence calculation in the DAG.
-
 The diagram generators are the recorded refinement, composition and open-restriction
 maps on both sites. A diagram may contain identity edges, composites, and whiskering
 by compact support or inverse image, and insertion of compatible boundary isomorphisms.
 Its two boundary maps are constructed independently;
 commutativity is the theorem, never a field of a generator.
+
+## Implementation details
+
+* `coherenceEtaleFunctor` and `coherenceProEtaleFunctor` hide the functor structure of the
+  derived compact-support constructions behind definitions.
+* `coherenceChosenEtaleCompositorIso` displays the chosen compactification functors of the
+  canonical etale compositor, avoiding conversion of whole derived functors inside later
+  compositions.
+
+## References
+
+* Stacks Project, Tags 0F7C, 0F7D, 0F7F, 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -184,15 +193,13 @@ def coherenceBoundedSiteFunctor (X : Scheme.{u}) :
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :=
   DerivedCategory.Plus.ι ⋙ coherenceSiteFunctor A X
 
-/-- The bounded-below etale compact-support functor with its functor structure hidden
-behind a definition. Source: etale derived lower shriek. -/
+/-- The bounded-below etale compact-support functor. -/
 def coherenceEtaleFunctor {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c
 
-/-- The ambient pro-etale compact-support functor with its derived construction behind
-a definition. Source: ambient compact support from a compactification. -/
+/-- The ambient pro-etale compact-support functor. -/
 def coherenceProEtaleFunctor {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) :=
@@ -219,8 +226,6 @@ def coherenceEtaleChangeIso {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
   Etale.rightDerivedLowerShriekOfCompactificationPlusIso A c d
 
 /-- The canonical etale compositor with its chosen compactification functors displayed.
-This records the same isomorphism, while avoiding conversion of whole derived functors
-inside later compositions. Source: Stacks 0F7J and proposition-composition-base-change-rf-shriek--1.
 -/
 def coherenceChosenEtaleCompositorIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -235,7 +240,7 @@ def coherenceChosenEtaleCompositorIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
 
 /-- The canonical origin compositor, viewed in the ambient derived categories.
 The etale-origin inclusion has the same underlying object and morphism maps as this
-bounded-below comparison. Source: originCompositionModel. -/
+bounded-below comparison. -/
 def coherenceChosenProEtaleCompositorIso {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -282,8 +287,7 @@ def coherenceChosenProEtaleCompositorComponent {X Y Z : Scheme.{u}}
     (coherenceProEtaleFunctor A (HasCompactification.compactification (f ≫ g)))
     (coherenceChosenProEtaleCompositorIso A f g) L
 
-/-- The etale compositor evaluated using precisely the three supplied compactifications.
-Source: Stacks 0F7J; proposition-construction-independence-rf-shriek--7. -/
+/-- The etale compositor evaluated using precisely the three supplied compactifications. -/
 def coherenceEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) :
@@ -332,8 +336,7 @@ def coherenceCompositionSource {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
       (coherenceBoundaryComponent A c L)
 
 /-- The independently constructed etale and pro-etale composition factors.
-No commutativity proof is stored in this data. Source: the canonical compactification
-comparisons and canonical origin compositor. -/
+No commutativity proof is stored in this data. -/
 def coherenceCompositionDataOfChoice {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -600,8 +603,7 @@ inductive CompactSupportSiteDiagram (P : WeilConjectures.PurityFiniteSetting.{u}
       (D : CompactSupportSiteDiagram P b₀ b₁) : CompactSupportSiteDiagram P c₀ c₁
 
 /-- The etale boundary composite, constructed solely with the recorded etale maps.
-The refinement uses the inverse of the upstream comparison because its upstream direction
-is d to c, whereas the node's rho is c to d. -/
+The refinement step uses the inverse of the upstream comparison, whose direction is d to c. -/
 def CompactSupportSiteDiagram.etaleMap {P : WeilConjectures.PurityFiniteSetting.{u}}
     {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T}
     (D : CompactSupportSiteDiagram P b₀ b₁) : b₀.etale ⟶ b₁.etale :=

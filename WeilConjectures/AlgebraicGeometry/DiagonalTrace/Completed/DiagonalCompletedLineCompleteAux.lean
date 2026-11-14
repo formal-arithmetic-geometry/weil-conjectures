@@ -12,8 +12,9 @@ import all WeilConjectures.CategoryTheory.Finite.FiniteTowerLimitOrthogonality
 
 /-! # Local descent for completed coefficient lines
 
-Source: Stacks Tags 099L, 099M and 091Q, and the diagonal trace proof,
-paragraph (1).
+## References
+
+* Stacks Project, Tags 099L, 099M, 091Q
 -/
 
 @[expose] public noncomputable section
@@ -101,9 +102,6 @@ private theorem completedCoefficient_difference (l : ℕ) [Fact l.Prime] (S : Sc
 
 /--
 The local-to-global part of completeness for a completed coefficient line.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-and Stacks Tags 099L, 099M and 091Q.
 -/
 theorem diagonalCompletedLine_complete_of_cover (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [IsNoetherian S] [DiagonalTraceLocalizations l S]

@@ -21,10 +21,14 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Effectivity of uniformly perfect finite quotient systems
 
-Source: Stacks Project, proetale.tex, Tag 09C6; More on Algebra, Tag 09AW.
-
 The input consists of finite-level models. The output identifies the derived limit of
 the specified quotient tower, without assuming that its original object is complete.
+
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 09C6
+* Stacks Project, More on Algebra, Tag 09AW
+* Stacks Project, Cohomology on Sites, Tags 0940 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -111,11 +115,7 @@ private theorem finitePerfectAlgebraicModel
   simpa only [Category.assoc] using congrArg (fun z ↦ i.inv ≫ z) (hcompat n)
 
 /-- A normalized quotient system with uniformly bounded etale local perfect constant
-models has a pro-etale local perfect completed realization.
-
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6), specifically
-its algebraic tower and compatible-isomorphism argument; More on Algebra, Tag 09AW;
-Cohomology on Sites, Tags 0940 and 0941. -/
+models has a pro-etale local perfect completed realization. -/
 theorem finitePerfectModels_adic_realization
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

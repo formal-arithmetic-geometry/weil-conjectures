@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerTensorHomologyComparison
 
 /-! # Chartwise comparison for finite quotient coefficient layers
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
+
+## References
+
+* Stacks Project, Tags 0942, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -21,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The residue perfect complex admits a finite local model for the coefficient layer.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
--/
+/-- The residue perfect complex admits a finite local model for the coefficient layer. -/
 theorem finiteQuotient_layer_local_complex_core
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

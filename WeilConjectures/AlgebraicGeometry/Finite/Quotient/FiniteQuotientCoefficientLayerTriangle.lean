@@ -299,7 +299,10 @@ import WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentC
 import WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 
 /-! # The actual coefficient-layer triangle
-Source: Stacks Project, Tag 0942.
+
+## References
+
+* Stacks Project, Tag 0942
 -/
 
 @[expose] public noncomputable section
@@ -310,10 +313,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Tensoring the actual coefficient short exact sequence gives the required triangle.
-No local model, support bound, or finiteness of cohomology is assumed or asserted.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0942, lemma-bounded, proof (1). -/
+/-- Tensoring the actual coefficient short exact sequence gives the coefficient-layer
+distinguished triangle. -/
 theorem finiteQuotient_coefficient_layer_triangle
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) :

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso
 
 /-! # Descent of the coefficient augmentation to homology
-Source: Stacks Project, Tags 03P2 and 01FD. -/
+
+## References
+
+* Stacks Project, Tag 03P2 (Theorem 59.22.4)
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
+-/
 
 @[expose] public section
 
@@ -39,9 +44,7 @@ private theorem mapHomologyIso_inv_π
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-/-- Beta lifts cycles additively and descends to a bijective additive homology map.
-Source: Stacks Project, Tag 03P2, Theorem 59.22.4, separated-case proof,
-and Tag 01FD, Lemma 20.15.1, the coefficient augmentation. -/
+/-- Beta lifts cycles additively and descends to a bijective additive homology map. -/
 theorem exists_additiveCechBeta_homology
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

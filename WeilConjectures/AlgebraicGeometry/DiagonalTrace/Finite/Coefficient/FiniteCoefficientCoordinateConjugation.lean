@@ -48,7 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Exact scalar conjugation in coefficient coordinates, before realizing an
-ordinary cohomology class. Source: diagonal-tower trace (1), exact forgetting. -/
+ordinary cohomology class. -/
 theorem finiteOrdinaryCoordinateArrow_scalar_expanded (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

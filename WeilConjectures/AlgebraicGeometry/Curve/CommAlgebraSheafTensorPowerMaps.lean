@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Tensor-power maps into an algebra sheaf
 
-Source: Stacks Project, Modules, Section 01CF; Tag 09MS.
+## References
+
+* Stacks Project, Modules, Section 01CF (tensor and symmetric algebras); Tag 09MS.
 -/
 
 @[expose] public section
@@ -145,9 +147,7 @@ private lemma algebraPowers_transport {X : Scheme.{u}} (L : X.Modules)
   cases h
   simp
 
-/-- A map from an invertible module into an algebra sheaf extends to all tensor powers.
-
-Source: Stacks Project, Modules, Section 01CF (tensor and symmetric algebras); Tag 09MS. -/
+/-- A map from an invertible module into an algebra sheaf extends to all tensor powers. -/
 theorem exists_commAlgebraSheaf_tensorPower_maps {X : Scheme.{u}} (L : X.Modules) [L.IsInvertible]
     (B : X.CommAlgebraSheaf) (j : L ⟶ commAlgebraSheafModule X.sheaf B) :
     ∃ b : ∀ d : ℕ, L.tensorPow d ⟶ commAlgebraSheafModule X.sheaf B,

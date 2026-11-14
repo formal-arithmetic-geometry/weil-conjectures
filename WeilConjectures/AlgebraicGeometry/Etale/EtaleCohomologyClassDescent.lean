@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
 /-!
 # Descent of an etale cohomology class to a finite stage
 
-Source: the first proof step of blueprint corollary-cohomology-pro-etale-affine;
-Stacks Project, Tags 03Q6 and 09YQ.
+## References
+
+* Stacks Project, Tags 03Q6 and 09YQ
 -/
 
 @[expose] public section
@@ -26,10 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Every class on the limit is the pullback of a class at a stage mapping to `i`.
-This is only the class-descent part of continuity; it asserts no eventual vanishing.
-
-Source: blueprint corollary-cohomology-pro-etale-affine, proof step 1 and
-blueprint_sketch proof paragraph beginning "Let alpha"; Stacks Tags 03Q6 and 09YQ. -/
+This is only the class-descent part of continuity; it asserts no eventual vanishing. -/
 theorem exists_cohomology_class_of_isLimit
     {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})
     [∀ j : J, CompactSpace (D.obj j)] [∀ j : J, QuasiSeparatedSpace (D.obj j)]

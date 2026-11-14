@@ -20,7 +20,7 @@ geometric fibres `U ⊆ C`, and let `V ⊆ C` be an open with `V ∖ U = {z}`. A
 roots of unity of `𝔽̄_q` through `Q = q ^ m`. Hence `Q - 1` kills the local monodromy at `z` of a
 `ℤ / N`-torsor on `U` which is fixed by `Φ ^ m`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_natCast_sub_one_mul_monodromy_eq_zero`). This is
-the Frobenius action on the boundary module of blueprint `proposition-no-fixed-class-degree-one--1`.
+the Frobenius action on the boundary module of the residue sequence.
 -/
 
 @[expose] public section

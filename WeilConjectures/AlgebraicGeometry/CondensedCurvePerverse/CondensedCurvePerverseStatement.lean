@@ -82,8 +82,7 @@ abbrev WeilHeart {C : Scheme.{u}} (g : C ≅ C) :=
 
 /-- The canonical forgetful functor retains the carrier and its geometric derived arrow.
 The defining carrier property supplies exactly bounded constructibility and the
-geometric perverse conditions. Source: current blueprint lemma-perverse-sheaves-curve, final
-paragraph. -/
+geometric perverse conditions. -/
 def forget {C : Scheme.{u}} (g : C ≅ C) :
     WeilHeart Λ g ⥤ (heart Λ C).FullSubcategory where
   obj K := ⟨K.obj.carrier, K.property⟩

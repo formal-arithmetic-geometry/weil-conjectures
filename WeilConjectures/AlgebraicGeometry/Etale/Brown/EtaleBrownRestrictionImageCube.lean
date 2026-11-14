@@ -27,7 +27,12 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.CategoryTheory.ShrinkYoneda
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
-/-! # Assembly of the normalized restriction and image cube -/
+/-! # Assembly of the normalized restriction and image cube
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 and Lemma 5.16
+* Stacks Project, Tags 07A4, 0D6E
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genSizeOf false
@@ -271,8 +276,7 @@ private theorem brown_restriction_factors
             ((NatIso.mapHomologicalComplex (R.val.ordinaryRestriction h) (.up ℤ)).hom.app I) :=
   R.property.2.1 h
 
-/-- Exact scalar restriction commutes with the normalized Brown image square.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E. -/
+/-- Exact scalar restriction commutes with the normalized Brown image square. -/
 theorem etaleBrownRestrictionImageCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

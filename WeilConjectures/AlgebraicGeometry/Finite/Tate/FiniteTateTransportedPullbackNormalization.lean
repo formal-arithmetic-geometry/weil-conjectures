@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Root normalization of a transported finite Tate pullback
 
-Source: Stacks Project, Tags 03PK, 03Q1, 099R and 0GLZ.
+## References
+
+* Stacks Project, Tags 03PK, 03Q1, 099R, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -227,9 +229,7 @@ private theorem etale_root_pullback_value (A : Type (u + 1)) [CommRing A]
   rw [Equiv.apply_symm_apply] at h
   exact congrArg (fun f ↦ Additive.toMul ((f.hom.app U z).down)) h.symm
 
-/-- Transport of one normalized etale pullback respects the prescribed pro-etale roots.
-Source: `lem-amb-finite-tate-normalized-coherence`, pullback generator calculation;
-Stacks Tags 03PK, 03Q1, 099R and 0GLZ. -/
+/-- Transport of one normalized etale pullback respects the prescribed pro-etale roots. -/
 theorem finite_tate_transported_pullback_normalized
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ)

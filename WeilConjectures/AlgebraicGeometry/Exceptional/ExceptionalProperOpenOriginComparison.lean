@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInt
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProperOpenOriginConstruction
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProperOpenOriginProperties
 
-/-! # Proper/open comparison on strict pro-etale systems -/
+/-! # Proper/open comparison on strict pro-etale systems
+
+## References
+
+* Zheng, Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
+* Stacks Project, Tag 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,9 +38,8 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CY : ExceptionalSystemSiteComparison O ell Y S.PY)
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
-/-- Construct the proper/open pro-etale operation and its canonical comparison,
-including origin stability before making an exceptional adjunction.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65. -/
+/-- The proper/open pro-etale operation and its canonical comparison exist,
+including origin stability, before an exceptional adjunction is formed. -/
 theorem exceptionalProperOpenOriginComparison
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

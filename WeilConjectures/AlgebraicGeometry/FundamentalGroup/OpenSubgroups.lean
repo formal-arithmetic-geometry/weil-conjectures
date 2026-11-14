@@ -229,8 +229,8 @@ the index of the subgroup:
    `AlgebraicGeometry.Scheme.FiniteEtale.exists_iso_fiber_map_eq_iff`);
 3. the degree is the index of the stabilizer.
 
-The blueprint states the bijection with open subgroups; the stabilizer of a point is only
-well-defined up to conjugacy (changing the point conjugates it), which is the form stated in (2).
+The stabilizer of a point is only well-defined up to conjugacy (changing the point conjugates
+it), which is the form stated in (2).
 -/
 theorem galois_openSubgroups :
     (∀ (P : Y.FiniteEtale) (x : (fiber s).obj P), IsOpen (MulAction.stabilizer G x : Set G)) ∧

@@ -29,8 +29,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # The proper site-comparison factor
 
-Source: Stacks Project, Tags 09A6, 09AF and 099R; the factor calculation in
-lem-amb-compact-support-site-comparison-open.
+## References
+
+* Stacks Project, Tags 09A6, 09AF, 099R, 0B65
 -/
 
 @[expose] public noncomputable section
@@ -216,9 +217,7 @@ private theorem etale_mate_eq (A : Type (u + 1)) [CommRing A]
     Functor.comp_map, Category.id_comp, Functor.comp_obj]
   erw [Category.comp_id]
 
-/-- The proper factor of the compact-support site-comparison square.
-Source: Stacks Project, Tags 099R and 0B65; step 4 of
-lem-amb-compact-support-site-comparison-open. -/
+/-- The proper factor of the compact-support site-comparison square. -/
 theorem compactSupportProperFactor (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z' Z S' S : Scheme.{u}} {h : Z' ⟶ Z} {p' : Z' ⟶ S'}
     {p : Z ⟶ S} {a : S' ⟶ S} [QuasiCompact p] [QuasiSeparated p]

@@ -47,7 +47,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
 /-- The scalar quotient, realized as discrete integral modules. This functor is
-independent of a diagonal class. Source: coefficient changes (1). -/
+independent of a diagonal class. -/
 def cyclicEvaluationFunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) (p : CyclicCartierFrame l Y n) :

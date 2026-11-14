@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientModelExten
 
 /-! # Scalar reduction of two supplied constant quotient models
 
-Source: Stacks Project, Tag 09C6, consecutive quotient balancing.
+## References
+
+* Stacks Project, Tag 09C6 (consecutive balancing isomorphism); Tags 0D6D and 03Q3.
 -/
 
 @[expose] public noncomputable section
@@ -21,11 +23,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- Two constant models of consecutive actual tower levels on one nonempty etale
-chart admit an algebraic universal reduction arrow. No lissity, etale descent, or
-covering construction is part of this assertion.
-
-Source: Stacks Project, proetale.tex, Tag 09C6, the consecutive balancing isomorphism;
-Tags 0D6D and 03Q3 for scalar transitivity and constant geometric stalks. -/
+chart admit an algebraic universal reduction arrow. -/
 theorem constantAdicQuotient_model_reduction
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

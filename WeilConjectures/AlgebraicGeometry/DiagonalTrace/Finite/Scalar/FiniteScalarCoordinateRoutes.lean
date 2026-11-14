@@ -120,7 +120,7 @@ def finiteScalarNormalizedAbelianRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)
           (finiteScalarLineCoordinate l E n T c))⟦(2 : ℤ)⟧'
 
 /-- Normalize the actual comparison image of any additive cohomology class
-at the finite line endpoint. Source: the given integer and scalar line coordinates. -/
+at the finite line endpoint, using the given integer and scalar line coordinates. -/
 def finiteScalarNormalizedCohomologyRoute (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

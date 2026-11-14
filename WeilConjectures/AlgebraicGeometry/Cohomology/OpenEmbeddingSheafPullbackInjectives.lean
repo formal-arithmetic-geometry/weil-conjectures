@@ -10,14 +10,15 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackAdjunction
 /-! # Open embeddings and injective sheaf pullback
 
-Source: Stacks Project, Tags 03DI and 03DJ.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ
 -/
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
-/-- Pullback of abelian sheaves along an open embedding preserves injectives.
-Source: Stacks Project, Tags 03DI and 03DJ. -/
+/-- Pullback of abelian sheaves along an open embedding preserves injectives. -/
 theorem Topology.isOpenEmbedding_sheafPullback_preservesInjectiveObjects
     {X Y : TopCat.{u}} (f : X ⟶ Y) (hf : Topology.IsOpenEmbedding f) :
     (TopCat.Sheaf.pullback AddCommGrpCat.{u} f).PreservesInjectiveObjects := by

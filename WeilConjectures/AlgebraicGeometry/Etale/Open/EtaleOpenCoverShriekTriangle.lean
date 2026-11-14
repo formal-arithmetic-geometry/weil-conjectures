@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenCoverShriekComplexS
 /-!
 # The extension-by-zero triangle of an open cover
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0GKK.
+## References
+
+* Stacks Project, More on Etale Cohomology, Tag 0GKK
 -/
 
 @[expose] public section
@@ -22,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 
-/-- The absolute extension-by-zero triangle of a two-open cover.
-
-Source: Stacks Project, Tag 0GKK, `lemma-mayer-vietoris-shriek`.
--/
+/-- The absolute extension-by-zero triangle of a two-open cover. -/
 theorem exists_distinguished_openCover_lowerShriek
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

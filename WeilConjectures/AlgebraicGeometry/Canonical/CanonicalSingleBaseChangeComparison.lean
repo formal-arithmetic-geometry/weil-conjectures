@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 
 /-! # Derived exchange on a single module
 
-Source: Stacks Project, Tag 08HY, the mate construction and its derived unit compatibility.
+## References
+
+* Stacks Project, Tag 08HY (the mate construction and its derived unit compatibility)
 -/
 
 @[expose] public section
@@ -90,8 +92,7 @@ private theorem single_comparison_finish
 
 -- Keep the pinned functors behind their interfaces while comparing the single maps.
 /-- Derived exchange commutes with the two canonical single-module comparisons.
-This identity concerns an arbitrary module and has no structure-sheaf unit maps.
-Source: Stacks Project, Tag 08HY, the mate construction. -/
+This identity concerns an arbitrary module and has no structure-sheaf unit maps. -/
 theorem canonicalSingleBaseChangeComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

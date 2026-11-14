@@ -27,6 +27,10 @@ finite-dimensional. A closed subscheme reduces to `ℙᵈ_k` by pushing forward.
   finite-dimensional.
 - `AlgebraicGeometry.ProjectiveSpace.finiteDimensional_H`: the cohomology of a coherent sheaf on
   `ℙᵈ_k` is finite-dimensional.
+
+## References
+
+* [Hartshorne, *Algebraic Geometry*, Theorem III.5.2]
 -/
 
 @[expose] public section
@@ -157,13 +161,7 @@ theorem finiteDimensional_H_twist [Finite n] (m : ℤ) (q : ℕ) :
   · have := ProjectiveSpace.subsingleton_H_twist_of_ne n k D hD q m hq.ne' hqD
     infer_instance
 
-/-- **The cohomology of a coherent sheaf on `ℙᵈ_k` is finite-dimensional** (Hartshorne III.5.2).
-
-By descending induction on the degree, for all coherent sheaves at once: the cohomology vanishes
-above `d` (`AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt`). A coherent `𝒢` sits in
-`0 ⟶ 𝒦 ⟶ ⨁ⱼ 𝒪(-mⱼ) ⟶ 𝒢 ⟶ 0` with `𝒦` coherent
-(`AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist`), so `H^q(𝒢)` sits between the
-finite-dimensional `⨁ⱼ H^q(𝒪(-mⱼ))` and `H^{q+1}(𝒦)`, finite-dimensional by induction. -/
+/-- **The cohomology of a coherent sheaf on `ℙᵈ_k` is finite-dimensional.** -/
 theorem finiteDimensional_H [Finite n] (ℱ : (ℙ(n; Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of k))).ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of k))).ringCatSheaf) ℱ] (q : ℕ) :

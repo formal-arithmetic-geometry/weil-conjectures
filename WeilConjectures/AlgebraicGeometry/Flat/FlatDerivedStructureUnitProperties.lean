@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 
 /-! # Derived fibres of the canonical structure map
 
-Source: Stacks Project, Tags 0E62 (first paragraph), 0A1D, and 0096.
+## References
+
+* Stacks Project, Tags 0E62 (first paragraph), 0A1D, 0096
 -/
 
 @[expose] public section
@@ -60,8 +62,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The explicit structure map, obtained by applying the single functor to the
 ordinary structure map and composing with the canonical right-derived unit,
 has nonnegative derived fibres and induces an isomorphism in degree zero when
-the canonical map on fibre global functions is invertible.
-Source: Stacks Project, Tag 0E62 (first paragraph), Tag 0A1D, and Tag 0096. -/
+the canonical map on fibre global functions is invertible. -/
 theorem flat_derived_structure_unit_properties
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

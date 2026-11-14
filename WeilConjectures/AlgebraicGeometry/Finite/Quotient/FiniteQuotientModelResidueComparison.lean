@@ -76,7 +76,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteModelDerivedScalarComparis
 
 /-! # The coefficient-change square for a finite-quotient constant model
 
-Source: Stacks Project, Tags 06YY, 07A6 and 094I.
+## References
+
+* Stacks Project, Tags 06YY, 07A6, 094I
 -/
 
 @[expose] public noncomputable section
@@ -197,12 +199,8 @@ private def residueRestrictionComparison (X : Scheme.{t})
 -- The existing signature retains hφ, although the comparison does not need it.
 set_option linter.unusedVariables false in
 /-- Reduction of a given constant quotient model is the constant realization of its
-algebraic derived residue, after the specified residue-ring identification. This is
-only a coefficient-change comparison: there is no local projective-model hypothesis
-and no boundedness or Tor-amplitude conclusion. It also holds on an empty chart.
-
-Source: Stacks Project, Tags 06YY and 07A6, and sites-cohomology.tex,
-Tag 094I, part (2), the derived residue computation. -/
+algebraic derived residue, after the specified residue-ring identification. This also
+holds on an empty chart. -/
 theorem finiteQuotient_model_residueComparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]

@@ -16,9 +16,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonDerived
 /-!
 # Finite proper base change with canonical ring-sheaf coefficients
 
-Source: blueprint theorem 1325; Stacks Project, Pro-etale Cohomology, Section 09C8,
-and the finite etale-origin step of Theorem 09C9.
-This is the recorded finite theorem in the normalized ring-sheaf presentation.
+This is the finite proper base change theorem in the normalized ring-sheaf presentation.
+
+## References
+
+* Stacks Project, Pro-etale Cohomology, Section 09C8, and the finite etale-origin step of
+  Theorem 09C9
 -/
 
 @[expose] public noncomputable section

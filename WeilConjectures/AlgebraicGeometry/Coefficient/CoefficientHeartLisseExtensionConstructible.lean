@@ -161,6 +161,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
 /-! # Constructibility of locally closed lisse extensions
+
+## References
+
+* Stacks Project, Tags 09AA, 09AG, 09AH, 09BM, 09BN
 -/
 
 @[expose] public noncomputable section
@@ -368,10 +372,7 @@ private theorem single_constructible (X : Scheme.{u})
       · exact DerivedCategory.isZero_of_isLE K 0 q hq
 
 /-- The degree-zero derived object of a lisse locally closed extension is bounded
-constructible for the finite-constant-model convention.
-
-Source: blueprint generation, Converse paragraph; Stacks Tags 09AA, 09BM, 09BN, 09AH,
-and 09AG. -/
+constructible for the finite-constant-model convention. -/
 theorem coefficientHeart_lisse_extension_constructible (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

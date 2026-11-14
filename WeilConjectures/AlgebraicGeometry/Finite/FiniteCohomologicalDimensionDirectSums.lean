@@ -15,9 +15,15 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 /-!
 # Direct sums and finite cohomological dimension
 
-Source: the blueprint of the Weil conjectures, chapter `chap-Smooth-purity`, unit
-`proposition-ordinary-external-kunneth--1`, node `proposition-open-direct-image-preserves-finite`,
-order 1732; Stacks Project, Etale Cohomology, Tag 0F11.
+## Implementation details
+
+* In `derivedDirectImage_and_globalSections_preserveCoproducts`, the coefficient ring
+  `ZMod n` is lifted by the canonical ring equivalence `ULift.ringEquiv` to the universe used
+  by the existing six-functor and derived-category interfaces.
+
+## References
+
+* Stacks Project, Etale Cohomology, Tag 0F11
 -/
 
 @[expose] public section
@@ -33,12 +39,7 @@ namespace AlgebraicGeometry.Etale
 /-- If `n ≥ 1` and `f` is quasi-compact, quasi-separated and of finite torsion étale
 cohomological dimension, derived direct image on `ZMod n`-module étale sheaves commutes
 with every set-indexed coproduct; for every qcqs scheme of finite torsion étale
-cohomological dimension, derived global sections has the same property. The coefficient
-ring is lifted by the canonical ring equivalence `ULift.ringEquiv` to the universe used
-by the existing six-functor and derived-category interfaces.
-
-Source: Stacks Project, Etale Cohomology, Tag 0F11, `lemma-finite-cd-mod-n-direct-sums`,
-assertions (1) and (2). -/
+cohomological dimension, derived global sections has the same property. -/
 theorem derivedDirectImage_and_globalSections_preserveCoproducts
     (n : ℕ) (hn : 1 ≤ n) :
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f],

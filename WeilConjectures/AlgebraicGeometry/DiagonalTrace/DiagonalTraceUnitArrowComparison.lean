@@ -261,29 +261,7 @@ private def evaluatedUnitArrowIso
     (unit S (Arings l E S)) (c.derivedIso l E) (coefficientEvaluationIso l E S n)
 
 /-- Evaluation and coefficient realization identify the actual coefficient unit
-with the image of the ordinary etale coefficient unit, as an arrow.
-
-
-
-For the realization step, the intrinsic tensor direct image and the realized
-fixed-scalar direct image have the same coefficient map. Uniqueness of their
-left adjoints identifies the two ordinary pullbacks. Descend this isomorphism
-by exact functors, and compose with the pullback compositor for e over S.
-Pullback along e and coefficient realization are equivalences. Conjugating
-the two adjunctions through these equivalences identifies their unit arrows:
-the conjugate of the invertible pullback comparison is invertible, and its
-unit equation gives the commuting square.
-
-Comparison of constant sheaves and the canonical constant-module realization
-identify the source with the regular intrinsic module in degree zero. The
-ring equality defining level evaluation identifies this regular module with
-the evaluated tower coefficient object. Finally, the unit identity in
-geometry_adjunction_evaluation and naturality of pushEvaluation give the
-remaining square. The target isomorphism includes the inverse pullEvaluation
-and the image of c.derivedIso. Its invertibility suffices: no separately fixed
-endpoint comparison is asserted, so c.normalization need not be invoked.
-All constructions apply to the empty scheme and the zero coefficient ring;
-no Chern class or projective-line decomposition is used. -/
+with the image of the ordinary etale coefficient unit, as an arrow. -/
 theorem diagonalTrace_unit_arrow_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

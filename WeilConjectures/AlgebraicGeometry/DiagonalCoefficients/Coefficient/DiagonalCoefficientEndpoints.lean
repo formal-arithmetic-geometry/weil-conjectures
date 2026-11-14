@@ -36,7 +36,7 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The actual derived extension functor, named once to share its coefficient
-and derived-category instances. Source: blueprint coefficient-change maps. -/
+and derived-category instances. -/
 def derivedScalars (X : Scheme.{u}) :
     DerivedCategory (Modules Λ X) ⥤ DerivedCategory (Modules Λ' X) :=
   (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor
@@ -47,8 +47,7 @@ instance (priority := 100) scalarCommShift (X : Scheme.{u}) :
     (derivedScalars a X).CommShift ℤ :=
   (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).leftAdjointCommShift ℤ
 
-/-- A coefficient-semilinear map with its specified underlying sheaf map. Source:
-blueprint coefficient-change maps, including quotient maps at every positive level. -/
+/-- A coefficient-semilinear map with its specified underlying sheaf map. -/
 structure Semilinear {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
     (m : M.X ⟶ N.X) where
   hom : M ⟶ (Mod.comap (coefficientMap a X)).obj N
@@ -56,7 +55,7 @@ structure Semilinear {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
 
 /-- An endpoint identification is fixed by its derived scalar/restriction adjoint.
 Thus the displayed isomorphism cannot rescale a class or a trace. This definition
-uses derived extension even for a nonflat quotient. Source: blueprint clauses 1--2. -/
+uses derived extension even for a nonflat quotient. -/
 structure Endpoint {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X)
     (m : M.X ⟶ N.X) where
   semilinear : Semilinear a M N m

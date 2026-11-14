@@ -20,8 +20,9 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-!
 # Uniform dimension bound for fibres of a finite-type morphism
 
-Source: Stacks Project, Morphisms, Tag 0A3V,
-lemma-morphism-finite-type-bounded-dimension.
+## References
+
+* Stacks Project, Tags 0A3V, 02FZ, 00QH
 -/
 
 @[expose] public section
@@ -106,9 +107,7 @@ private theorem fibre_dimension_resLE
     simpa only [Scheme.Hom.comp_apply, Scheme.Hom.fiberι_asFiber] using hh
   exact (dimensionAt_openEmbedding q.isOpenEmbedding _).trans (congrArg _ hpoint)
 
-/-- A finite local fibre dimension bounds the local fibre dimension on a neighbourhood.
-
-Source: Stacks Project, Morphisms, Tag 02FZ, affine reduction to Algebra Tag 00QH. -/
+/-- A finite local fibre dimension bounds the local fibre dimension on a neighbourhood. -/
 theorem exists_bounded_fibre_dimension_neighbourhood
     {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]
     (x : X) (d : ℕ) (hd : topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞)) :
@@ -147,9 +146,7 @@ theorem exists_bounded_fibre_dimension_neighbourhood
 
 /-- A finite-type morphism with quasi-compact target has a uniform finite bound on the
 Krull dimensions of its scheme-theoretic fibres, including empty fibres of dimension bottom.
-
-Source: Stacks Project, Morphisms, Tag 0A3V,
-lemma-morphism-finite-type-bounded-dimension. -/
+-/
 theorem exists_fibre_dimension_bound {X Y : Scheme.{u}} (f : X ⟶ Y)
     [LocallyOfFiniteType f] [QuasiCompact f] [CompactSpace Y] :
     ∃ d : ℕ, ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : WithBot ℕ∞) := by

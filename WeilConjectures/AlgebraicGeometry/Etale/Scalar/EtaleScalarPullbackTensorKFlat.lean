@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoExistence
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarSheafTensorPullback
 import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 /-! K-flat representative form of scalar/pullback tensor compatibility.
-Source: Stacks 07A4, 0G7E and 0GL6.
+
+## References
+
+* Stacks Project, Tags 07A4, 0G7E, 0GL6
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -514,9 +517,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   scalarPullbackIso
 
-/-- The normalized scalar/pullback tensor equation on flat-term K-flat representatives.
-This is the representative calculation underlying the unrestricted derived statement.
-Source: Stacks 07A4, 0G7E and 0GL6. -/
+/-- The normalized scalar/pullback tensor equation on flat-term K-flat representatives. -/
 theorem etaleScalarPullback_tensor_kFlat
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y)

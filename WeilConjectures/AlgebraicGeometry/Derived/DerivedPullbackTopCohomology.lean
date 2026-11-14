@@ -18,14 +18,21 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical top cohomology of derived module pullback
 
-Source: Stacks Project, derived.tex, Tag 05TC (dual upper-bound and truncation argument),
-cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the agent assembly
-specified in the DAG.
-
 The comparison in degree n is the selected derived counit evaluated at the single
 complex in degree n. The pinned counit shift theorem identifies it with c[-n].
 The top projection is fixed by its identity action on cohomology, using the existing
 bijection on maps from D^{≤n} to D^{≥n}; thus it is the standard truncation projection.
+
+## Implementation details
+
+* `derivedTopTruncationProjection` works in any abelian category, using its standard
+  truncation interface.
+* `derivedSingleComparisonOfCounit` is generic, to avoid expanding the concrete
+  sheafification data when checking each use of the same pinned comparison.
+
+## References
+
+* Stacks Project, Tags 05TC, 08J5, 06YJ, 08HY, 0D5S
 -/
 
 @[expose] public section
@@ -39,10 +46,7 @@ namespace AlgebraicGeometry
 
 attribute [local irreducible] Scheme.Modules.tensorPullback
 
-/-- The canonical projection C → H^n(C)[-n], characterized by identity on H^n.
-The inverse below is the existing bijection of Hom sets. This construction works in
-any abelian category and uses its existing standard truncation interface.
-Source: Stacks, derived.tex, Tags 08J5 and 05TC. -/
+/-- The canonical projection C → H^n(C)[-n], characterized by identity on H^n. -/
 def derivedTopTruncationProjection
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
     (n : ℤ) (C : DerivedCategory A) (hC : C.IsLE n) :
@@ -81,9 +85,7 @@ private theorem topProjection_naturality
     ((DerivedCategory.homologyFunctor A n).map a))
 
 /-- Evaluate a specified derived counit on a single module and apply the canonical
-termwise/single identification. This generic construction avoids expanding the concrete
-sheafification data when checking each use of the same pinned comparison.
-Source: Stacks, cohomology.tex, Tags 06YJ and 08HY. -/
+termwise/single identification. -/
 def derivedSingleComparisonOfCounit
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B]
@@ -393,8 +395,7 @@ variable [∀ X : Scheme.{u},
 /-- The pinned derived-to-tensor-pullback comparison on a single module in degree n.
 For n=0 this is the specified counit representative of
 `IsDerivedModulePullbackComparison`, normalized by the ordinary pullback unit.
-For general n it is the shifted comparison, by pinned counit shift compatibility.
-Source: Stacks, cohomology.tex, Tags 06YJ, 08HY and 0D5S. -/
+For general n it is the shifted comparison. -/
 def pinnedModulePullbackComparisonAt {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (M : S.Modules) :
     (derivedPullback g).obj ((DerivedCategory.singleFunctor.{w, u, u + 1}
@@ -410,8 +411,7 @@ def pinnedModulePullbackComparisonAt {T S : Scheme.{u}} (g : T ⟶ S)
     (Scheme.Modules.tensorPullback g) (derivedPullback g) (pinnedPullbackCounit.{u, w} g) n M
 
 /-- The specified κ: apply derived pullback to the top projection, apply the pinned
-comparison on H^n(C)[-n], take H^n, and use the canonical single-complex cohomology iso.
-Source: Stacks, derived.tex, Tag 05TC, dual truncation argument; cohomology.tex, Tag 06YJ. -/
+comparison on H^n(C)[-n], take H^n, and use the canonical single-complex cohomology iso. -/
 def derivedPullbackTopCohomology {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE n) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -777,9 +777,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived pullback preserves the upper bound; H^0 of its normalized module comparison
 and the specified top comparison are isomorphisms. The top comparison is natural for
 all derived morphisms between upper-bounded objects and respects composition.
-The existential `hbound` records the first conclusion and supplies its proof to κ_h.
-Source: Stacks, derived.tex, Tags 05TC and 08J5, dual upper-bound/truncation argument;
-cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the DAG assembly. -/
+The existential `hbound` records the first conclusion and supplies its proof to κ_h. -/
 theorem derivedPullback_topCohomology {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE n) :
     ∃ hbound : ((derivedPullback g).obj C).IsLE n,

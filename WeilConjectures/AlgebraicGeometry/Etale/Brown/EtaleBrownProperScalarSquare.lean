@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarMateRestriction
 
 /-! # The normalized proper Brown scalar transport square
 
-Source: Zheng, Constructions 4.1 and 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -126,13 +127,7 @@ private theorem rotate_right_mapped_square
 
 set_option maxHeartbeats 8000000 in
 -- Specialize mate-pasting to the concrete coefficient and sheaf derived categories.
-/-- The normalized realization square for a chosen proper scalar projection.
-Source: Zheng, Lemma 5.16; Stacks 03CY, 06YY and 07A4.
-
-The proof is the mate-pasting calculation on cochain representatives. The
-ordinary restriction comparison is sectionwise the identity, its derived square
-is fixed by localization, and the scalar unit equation identifies the two
-transposes. -/
+/-- The normalized realization square for a chosen proper scalar projection. -/
 theorem etaleBrownProperScalarSquare
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]

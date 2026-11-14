@@ -11,6 +11,10 @@ import Mathlib.Topology.Irreducible
 
 /-!
 # Connected ordered common refinements
+
+## References
+
+* Stacks Project, Topology, Tags 0052, 09Y5
 -/
 
 @[expose] public noncomputable section
@@ -177,9 +181,7 @@ private theorem exists_locallyClosed_immersion (X : Scheme.{u}) (s : Set X)
   exact Set.inter_eq_left.mpr subset_coborder
 
 /-- A finite family of locally closed scheme stratifications has a connected ordered
-common refinement. Source: blueprint common-stratification clause (1); Stacks Project,
-Topology, Tags 09Y5 and 0052.
--/
+common refinement. -/
 theorem coefficientHeart_commonStratification_refinement
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] :

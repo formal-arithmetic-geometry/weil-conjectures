@@ -10,7 +10,12 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralProjecti
 import Mathlib.CategoryTheory.Sites.LeftExact
 import Mathlib.CategoryTheory.Types.Basic
 
-/-! # Uniformizer regularity on completed integral coefficients -/
+/-! # Uniformizer regularity on completed integral coefficients
+
+## References
+
+* Stacks Project, Tags 093J--093M
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -80,9 +85,7 @@ private theorem family_regular {A : Type u} [CommRing A] [IsDomain A]
   rw [← F.map_comp, he]
   exact hxy (m + k)
 
-/-- Powers of the constant uniformizer act injectively on the completed coefficient sheaf.
-
-Source: Stacks Tags 093J--093M; original blueprint step 1. -/
+/-- Powers of the constant uniformizer act injectively on the completed coefficient sheaf. -/
 theorem completedIntegralScalar_regular
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})

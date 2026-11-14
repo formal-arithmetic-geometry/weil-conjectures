@@ -35,7 +35,7 @@ abbrev OrdinaryProEtaleModules (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) 
   Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)
 
 /-- The existing ordinary localization, with its module category stated in the
-common ring presentation. Source: ordinary derived coefficients. -/
+common ring presentation. -/
 @[instance_reducible]
 def finiteOrdinaryDerived (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasDerivedCategory.{u + 1} (OrdinaryEtaleModules A T) :=
@@ -83,7 +83,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] Padic Padic.coefficientExtensionIntegers
 
 /-- The existing realization, cached with its ordinary ring presentation before
-forming derived functors. Source: intrinsic realization of constant coefficients. -/
+forming derived functors. -/
 def finiteOrdinaryRealization :
     OrdinaryProEtaleModules (FiniteRing l E n) T ⥤
       Scheme.reductionModules T (SpTowerShriek.B l E T n) :=

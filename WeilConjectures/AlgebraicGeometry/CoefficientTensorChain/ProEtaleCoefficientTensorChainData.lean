@@ -88,7 +88,13 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientTensorChain.ProEtaleC
 import all WeilConjectures.AlgebraicGeometry.CoefficientTensorChain.ProEtaleCoefficientOrdinaryTensorSquare
 import WeilConjectures.Algebra.Homology.ProperBaseChange.TensorTotalComparisonSquare
 
-/-! # The chain square for change of coefficient isomorphism -/
+/-! # The chain square for change of coefficient isomorphism
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
+* Stacks Project, Cohomology on Sites, Tag 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -125,10 +131,7 @@ attribute [local irreducible] tensorIso complexPullback proEtaleTensorPullbackTo
 
 -- Elaborate the three termwise tensor comparisons with their coefficient universes.
 /-- The normalized restriction tensor map commutes with ordinary geometric tensor
-pullback, as an equality of chain maps before localization.
-
-Source: Stacks, Modules on Sites, Tag 03EL, its universal bilinear-map proof;
-Cohomology on Sites, Tag 07A4, signed direct-sum totalization. -/
+pullback, as an equality of chain maps before localization. -/
 theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTransport
     (J := ProEt.topology X)
     (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c) :
@@ -172,8 +175,7 @@ theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTranspo
     (tensorIso_summand f R S c o)
     (ordinary_bifunctor_square f R S c o) P Q
 
-/-- Localization of the normalized chain square.
-Source: functoriality of localization, Stacks Tag 07A4. -/
+/-- Localization of the normalized chain square. -/
 theorem restriction_tensor_localized_square
     (o : SheafOfModules.RingIsoTensorTransport (J := ProEt.topology X)
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)

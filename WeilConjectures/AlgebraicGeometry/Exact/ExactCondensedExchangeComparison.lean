@@ -474,7 +474,7 @@ theorem totalDerivedExchange_exact_comparisonFor
     (exactCondensedExchangeFor Λ sq) (totalExchangeFor_eq Λ sq).symm (exactExchangeFor_eq Λ sq).symm
 
 /-- At the canonical bundled coefficient the general exact exchange is the native
-comparison's exact exchange. Source: the two specified compositor formulas. -/
+comparison's exact exchange. -/
 theorem exactCondensedExchangeFor_canonical (l : ℕ) [Fact l.Prime]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g) :

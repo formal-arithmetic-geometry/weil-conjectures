@@ -10,7 +10,12 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenScalarRestrictionTensor
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 
-/-! # Scalar extension intertwines the exact open projection map and the scalar tensor maps. -/
+/-! # Scalar extension intertwines the exact open projection map and the scalar tensor maps.
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0E8I, 0E8J
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -141,9 +146,7 @@ private theorem exact_projection
     (derivedTensor (ModuleCat.{u + 1} A) U) (derivedTensor (ModuleCat.{u + 1} A) X)
     (mapDerivedCategoryUpperStarDerivedTensorIso (ModuleCat.{u + 1} A) j).hom K M
 
-/-- Scalar extension intertwines the exact open projection map and the scalar tensor maps.
-Source: Stacks Tags 0E8I, 03EL, 06YY and 0E8J; parent proof step 3,
-the mixed scalar/tensor compatibility assertion. -/
+/-- Scalar extension intertwines the exact open projection map and the scalar tensor maps. -/
 theorem etaleOpenMixedTensorScalar
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

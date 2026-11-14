@@ -21,6 +21,11 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 * `pbcAmbientCompleteStage`: the raw rational ambient complete category.
 * `pbcAmbientCompleteRawTransition`: the normalized localized tensor.
 * `pbcAmbientCompleteRawSystem`: these tensors and their balanced associators.
+
+## Implementation details
+
+* `pbcCompleteCoefficientTorsionFree` specializes Mathlib's division-ring torsion-free
+  instance to coefficient fields, avoiding its slower flatness search path.
 -/
 
 @[expose] public noncomputable section
@@ -35,10 +40,8 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Use the existing division-ring torsion-free instance directly for coefficient fields.
-This specializes Mathlib's instance, avoiding its slower flatness search path.
-Source: sketch32, coefficient fields throughout lines 1191--1438;
-Mathlib `DivisionSemiring.to_moduleIsTorsionFree`. -/
+/-- The torsion-free module instance for coefficient fields, specializing Mathlib's
+`DivisionSemiring.to_moduleIsTorsionFree`. -/
 instance (priority := 3000) pbcCompleteCoefficientTorsionFree
     (l : ℕ) [Fact l.Prime] (L : Type v) [Field L] [Algebra (Padic l) L] :
     Module.IsTorsionFree (Padic l) L := DivisionSemiring.to_moduleIsTorsionFree

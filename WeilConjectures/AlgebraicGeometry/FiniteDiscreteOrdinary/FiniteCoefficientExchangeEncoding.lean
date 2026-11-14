@@ -20,6 +20,10 @@ import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientExc
 
 This is the change of presentation of the exchange arrow. It requires neither
 properness nor boundedness, and asserts no invertibility of the exchange.
+
+## References
+
+* Stacks Project, Tags 03D3, 07A7, 09C8
 -/
 
 @[expose] public noncomputable section
@@ -115,11 +119,7 @@ private theorem encoding_congr
   subst g
   simp
 
-/-- Normalized coefficient encoding identifies the actual exchange arrows.
-
-Source: blueprint sk-thm-sfb-proper-base-change-finite.proof.md, steps 1 and 5;
-lem-sfb-finite-coefficient-derived-exchange-identification, proof steps 1--5;
-Stacks Tags 03D3, 07A7 and 09C8. -/
+/-- Normalized coefficient encoding identifies the actual exchange arrows. -/
 theorem finiteCoefficientExchangeEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)

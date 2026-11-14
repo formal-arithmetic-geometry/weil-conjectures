@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonNormali
 
 /-! # Objectwise canonical abelian Čech comparisons
 
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2.
+## References
+
+* Stacks Project, Tag 01EQ (proof of Lemma 20.11.2)
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 /-- The quotient of beta by alpha exists for one coefficient sheaf, with its
 canonical degree-zero value. Naturality in different coefficient sheaves and
-compatibility with connecting maps are separate statements.
-
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2. -/
+compatibility with connecting maps are separate statements. -/
 theorem exists_abelianCechComparison_maps
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

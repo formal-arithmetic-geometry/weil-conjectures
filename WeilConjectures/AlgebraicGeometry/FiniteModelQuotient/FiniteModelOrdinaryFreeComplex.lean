@@ -12,7 +12,10 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Ordinary quotient extension of a free model complex
 
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks 093M and 0G7E. -/
+## References
+
+* Stacks Project, Tags 03EK, 093M, 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -230,11 +233,7 @@ private lemma model_additive (T : Scheme.{u}) :
   dsimp only [FiniteConstantModel.modelFunctor]
   infer_instance
 
-/-- Ordinary quotient extension retains the matrix in normalized fixed coordinates.
-
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks Tags 03EK,
-093M and 0G7E.
--/
+/-- Ordinary quotient extension retains the matrix in normalized fixed coordinates. -/
 theorem ordinary_free_complex (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T)
     (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

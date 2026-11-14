@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInt
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
 import Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! # Evaluation of the origin adjunction -/
+/-! # Evaluation of the origin adjunction
+
+## References
+
+* Zheng, Lemmas 4.10 and 5.22, Proposition 5.24
+* Stacks Project, Tag 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -548,8 +554,7 @@ private theorem origin_hom_evaluation
     htS htN hq (CX.image.counit n M.obj)
 
 -- The three concrete evaluation identities elaborate over large derived categories.
-/-- Evaluation of origin-adjunction Hom words and quotient transitions.
-Source: Zheng Lemmas 4.10 and 5.22 and Proposition 5.24; Stacks 0B65. -/
+/-- Evaluation of origin-adjunction Hom words and quotient transitions. -/
 theorem exceptionalOriginAdjunctionEvaluation
     (record : ExceptionalSystemTransportData G CX CY CZ P R)
     (hfinite : ∀ n M, CX.levelOrigin n M →

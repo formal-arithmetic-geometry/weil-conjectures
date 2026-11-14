@@ -17,7 +17,9 @@ import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Strict realization of the quotient coordinates
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 06YY, 09C6, 03CY and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +32,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Inverse image along a weakly etale chart commutes with restriction of fixed scalars; this
-is the ordinary comparison localized in `localIsomorphismProEtaleCoefficients`.
-Source: Stacks Tag 03DA. -/
+is the ordinary comparison localized in `localIsomorphismProEtaleCoefficients`. -/
 def finitePerfectAdicPullbackRestrictIso {Y Z : Scheme.{t}} (g : Z ⟶ Y)
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S) :
     sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q) ⋙
@@ -44,8 +45,7 @@ def finitePerfectAdicPullbackRestrictIso {Y Z : Scheme.{t}} (g : Z ⟶ Y)
 
 /-- The explicit scalar realizations carry the fixed-scalar coordinates to the strict ordinary
 tensor tower restricted to `W`, and the ordinary quotient arrows to its transition maps,
-compatibly with the inverse-image comparison and the ordinary scalar compositor.
-Source: Stacks Project, Tags 03CY, 03DA and 09C6. -/
+compatibly with the inverse-image comparison and the ordinary scalar compositor. -/
 theorem finitePerfectAdic_quotient_strict_realization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

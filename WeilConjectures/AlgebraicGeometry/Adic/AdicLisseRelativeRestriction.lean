@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseIm
 
 /-! # Restriction of adic-lisse modules to inverse-image coefficients
 
-Source: Stacks Project, proetale.tex, Tag 09BT, clause (3), and
-sites.tex, Tag 00YV (functoriality of algebraic structures in topoi).
+## References
+
+* Stacks Project, Tag 09BT, clause (3)
+* Stacks Project, Tag 00YV, parts (2), (5), (6) (functoriality of algebraic structures in topoi)
 -/
 
 @[expose] public section
@@ -214,9 +216,7 @@ private theorem localModel_restrict
   exact asIso η
 
 /-- A projection-compatible coefficient map turns an adic-lisse module on the target
-site into a relatively adic-lisse module over the inverse-image completed coefficients.
-
-Source: Stacks Project, Tag 09BT, clause (3); Tag 00YV, parts (2), (5), (6). -/
+site into a relatively adic-lisse module over the inverse-image completed coefficients. -/
 theorem adicLisse_relative_restrict {X Y : Scheme.{u}} (h : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (β : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj

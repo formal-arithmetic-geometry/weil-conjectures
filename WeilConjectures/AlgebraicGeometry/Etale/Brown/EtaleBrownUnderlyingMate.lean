@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjection
 
 /-! # The ordinary restriction and Brown image cube
 
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 and Lemma 5.16
+* Stacks Project, Tags 03CV, 03CZ
 -/
 
 @[expose] public noncomputable section
@@ -138,8 +140,7 @@ private theorem brown_underlying_cube
 
 set_option maxHeartbeats 8000000 in
 -- Check the section calculation independently of the derived assembly.
-/-- The ordinary Brown restriction/image cube, before deriving.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ. -/
+/-- The ordinary Brown restriction/image cube, before deriving. -/
 theorem etaleBrownOrdinaryRestrictionCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

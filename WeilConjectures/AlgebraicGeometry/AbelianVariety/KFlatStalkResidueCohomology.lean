@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Residue cohomology of a K-flat sheaf representative
 
-Source: Stacks Project, Cohomology, Tags 06YI and 06YJ; Sheaves, Tag 0098.
+## References
+
+* Stacks Project, Tags 06YI, 06YJ and 0098
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A K-flat sheaf complex computes residue-fibre cohomology by its stalk tensor.
-Source: Stacks Project, Cohomology, Tags 06YI and 06YJ; Sheaves, Tag 0098. -/
+/-- A K-flat sheaf complex computes residue-fibre cohomology by its stalk tensor. -/
 theorem nonempty_kFlat_stalk_residueCohomology_linearEquiv
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

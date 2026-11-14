@@ -16,11 +16,14 @@ import Mathlib.NumberTheory.Padics.ProperSpace
 /-!
 # Reduction of pulled-back condensed ell-adic integers
 
-
 The reduction is the normalized integral-limit projection of the recorded completed
 coefficient comparison. The quotient is the actual cokernel of scalar multiplication
 in sheaves of modules. Its ring structure is characterized by the quotient projection
 being a ring map. The comparison is simultaneously a ring and module isomorphism.
+
+## References
+
+* Stacks Project, Tag 00WH.
 -/
 
 @[expose] public section
@@ -84,13 +87,11 @@ noncomputable def purZlPowerMultiplication (ℓ : ℕ) [Fact ℓ.Prime]
   ℓ ^ r • 𝟙 (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) X))
 
 /-- The sheaf quotient by the image ideal of multiplication by `ℓ^r`, computed as the
-cokernel in modules, whose underlying abelian sheaf is also the sheaf cokernel.
-Source: Tate twists, integral coefficient comparison; Stacks, Tag 00WH. -/
+cokernel in modules, whose underlying abelian sheaf is also the sheaf cokernel. -/
 noncomputable def purZlQuotient (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) (r : ℕ) :=
   Mod.cokernelObj (purZlPowerMultiplication ℓ X r)
 
-/-- The quotient projection, with its actual induced `R_X`-module structure.
-Source: Tate twists, integral coefficient comparison; Stacks, Tag 00WH. -/
+/-- The quotient projection, with its actual induced `R_X`-module structure. -/
 noncomputable def purZlQuotientProjection (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) (r : ℕ) :=
   Mod.cokernelπ (purZlPowerMultiplication ℓ X r)
@@ -473,9 +474,7 @@ private theorem purAbstractQuotientTransition
 sheaf, as rings and as modules over the pulled-back condensed integers, compatibly at
 all positive exponents. `n + 1` ranges over exactly the positive integers.
 The ring structures below are quotient-ring structures, since their projections are
-ring maps; the projection is epimorphic, so this characterizes their operations.
-
--/
+ring maps; the projection is epimorphic, so this characterizes their operations. -/
 theorem pur_condensed_zl_reduction_mod_ell_power (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) :
     ∃ (m : ∀ n : ℕ, MonObj (purZlQuotient ℓ X (n + 1)).X)

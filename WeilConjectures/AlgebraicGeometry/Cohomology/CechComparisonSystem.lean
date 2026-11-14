@@ -11,8 +11,12 @@ public import WeilConjectures.Topology.Sheaves.CechCohomology
 
 /-! # Normalized Čech comparison systems
 
-Source: Stacks Project, Tags 01EQ and 01FD. A system records the comparison as a
-morphism of cohomological functors, including its normalization and connecting maps.
+A system records the comparison as a morphism of cohomological functors, including its
+normalization and connecting maps.
+
+## References
+
+* Stacks Project, Tags 01EQ and 01FD
 -/
 
 @[expose] public section
@@ -26,9 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- A normalized morphism from Čech cohomology to sheaf cohomology.
-Source: Stacks Project, Tag 01EQ, the augmented double-complex comparison;
-Tag 01FD, functoriality. This is data with laws, with no postponed data. -/
+/-- A normalized morphism from Čech cohomology to sheaf cohomology. -/
 structure CechComparisonSystem {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) where
   comparison : ∀ q, TopCat.Sheaf.cechCohomologyFunctor U q ⟶
@@ -63,8 +65,7 @@ noncomputable def cechOverHomologyAddEquiv
     HomologicalComplex.homologyMapIso ((TopCat.Presheaf.cechComplex U).mapIso
       (presheafOverForgetIso f M)) q).addCommGroupIsoToAddEquiv
 
-/-- The additive comparison induced by a fixed normalized system.
-Source: Stacks Project, Tag 01EQ. No existence theorem is used to choose this map. -/
+/-- The additive comparison induced by a fixed normalized system. -/
 noncomputable def CechComparisonSystem.overMap
     {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u}
     {U : ι → X.Opens} {hcover : iSup U = ⊤} (c : CechComparisonSystem U hcover)

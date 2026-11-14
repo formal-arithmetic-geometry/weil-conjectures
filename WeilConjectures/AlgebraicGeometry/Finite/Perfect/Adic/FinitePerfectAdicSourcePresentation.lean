@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAd
 
 /-! # Presentation and scalar-forgetting identities for chart constants
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J, 093M and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -130,9 +132,7 @@ private abbrev SourceRestrictionFormula
     (g : M ⟶ (SheafOfModules.restrictScalars b).obj N) : Prop :=
   (SheafOfModules.toSheaf T).map f = (SheafOfModules.toSheaf R).map g
 
-/-- The scalar-restriction compositor acts identically on the underlying abelian sheaf.
-
-Source: Stacks Project, Tag 06YY. -/
+/-- The scalar-restriction compositor acts identically on the underlying abelian sheaf. -/
 theorem finitePerfectAdicRestriction_forget_compositor
     {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
     {R S T : Sheaf J RingCat.{t + 1}}

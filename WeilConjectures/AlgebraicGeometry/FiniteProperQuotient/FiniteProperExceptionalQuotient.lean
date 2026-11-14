@@ -27,13 +27,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-! # Finite proper exceptional inverse image and quotient coefficients
 
-Source: literature/blueprint/latest/blueprint/part-six-operations/
-sec-coefficients-constructible/sec-n-brown/sk-thm-existence/
-lem-sfb-dc-proper-pushforward-left-adjoint-e.proof.md, sentences 2--3;
-Zheng, Propositions 2.29(2) and 3.16(2).
-
 Indices `n : ℕ` denote the positive exponents `n + 1`. All categories are ordinary
 unbounded small-etale derived categories. Only their ctf object predicates are restricted.
+
+## References
+
+* Zheng, Propositions 2.29(2) and 3.16(2)
+* Stacks Project, Tags 06YY, 03RW, 09AL, 03EK
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +56,7 @@ def quotient {m n : ℕ} (h : n ≤ m) : Ring l E m →+* Ring l E n :=
   Ideal.Quotient.factor
     (Ideal.span_singleton_le_span_singleton.mpr (pow_dvd_pow _ (Nat.add_le_add_right h 1)))
 
-/-- Derived quotient tensor on the ambient ordinary etale category.
-Source: blueprint reduction sentence; Stacks 06YY. -/
+/-- Derived quotient tensor on the ambient ordinary etale category. -/
 abbrev Q (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :=
   scalarExtension (quotient l E h) T
 
@@ -67,12 +66,11 @@ abbrev F {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ) :=
 
 /-- The existing bounded constructible finite-Tor predicate. For the Noetherian schemes
 of this theorem, its finite stratification condition is equivalent to affine-local
-constructibility. Source: Stacks 03RW(3), 09AL and blueprint ctf clause. -/
+constructibility. -/
 abbrev Ctf (T : Scheme.{u}) (n : ℕ) :=
   DerivedCategory.boundedConstructibleFiniteTor (Ring l E n) T
 
-/-- Canonical tensor reassociation: conjugate the sectionwise restriction comparison.
-Source: Stacks 06YY, successive quotient normalization. -/
+/-- Canonical tensor reassociation: conjugate the sectionwise restriction comparison. -/
 def reassoc (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :
     Q l E T h ⋙ Q l E T ht ≅ Q l E T (ht.trans h) :=
   Adjunction.leftAdjointCompIso
@@ -85,8 +83,7 @@ def reassoc (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :
     (Sheaf.derivedRestrictScalarsCompIso T.smallEtaleTopology
       (RingHom.ext fun x ↦ Quotient.inductionOn x fun _ ↦ rfl))
 
-/-- The sectionwise identity restriction at an equal-index quotient.
-Source: Stacks 03EK, identity coefficient change. -/
+/-- The sectionwise identity restriction at an equal-index quotient. -/
 def restrictionSelf (T : Scheme.{u}) (n : ℕ) :
     Sheaf.restrictScalars T.smallEtaleTopology (quotient l E (le_refl n)) ≅ 𝟭 _ :=
   NatIso.ofComponents
@@ -96,8 +93,7 @@ def restrictionSelf (T : Scheme.{u}) (n : ℕ) :
           (RingHom.ext fun x ↦ Quotient.inductionOn x fun _ ↦ rfl))))
     (fun {_ _} f ↦ by ext U x; rfl)
 
-/-- The tensor identity comparison, fixed by the scalar adjunction.
-Source: Stacks 06YY, identity coefficient change. -/
+/-- The tensor identity comparison, fixed by the scalar adjunction. -/
 def selfReduction (T : Scheme.{u}) (n : ℕ) : Q l E T (le_refl n) ≅ 𝟭 _ :=
   ((conjugateIsoEquiv
     (Adjunction.ofIsRightAdjoint
@@ -111,8 +107,7 @@ variable {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     DerivedCategoryModule (Ring l E n) Z)
   (adj : ∀ n : ℕ, F l E p n ⊣ G n)
 
-/-- The right-adjoint mate of the inverse of the canonical proper comparison.
-Source: blueprint quotient mate, counit transpose; Mathlib mateEquiv. -/
+/-- The right-adjoint mate of the inverse of the canonical proper comparison. -/
 def b {m n : ℕ} (h : n ≤ m)
     (q : F l E p m ⋙ Q l E Y h ≅ Q l E Z h ⋙ F l E p n) :
     G m ⋙ Q l E Z h ⟶ Q l E Y h ⋙ G n :=
@@ -120,16 +115,7 @@ def b {m n : ℕ} (h : n ≤ m)
 
 include G adj in
 /-- Ordinary proper exceptional inverse images preserve ctf and have coherent quotient mates.
-Source: blueprint proof sentences 2--3; Zheng 2.29(2), 3.16(2).
-
-
-The proof dependencies are lem-sfb-ordinary-exceptional-ctf-preservation and
-theorem-existence-exceptional-inverse-image--1 in step 1;
-lem-asd-proper-finite-coefficient-extension in step 2; def-sf-etale-exceptional-quotient-mate,
-lem-sfb-ordinary-exceptional-change-of-rings and lem-pur-mate-unit-compatibility in step 3;
-lem-sfb-successive-derived-quotient-normalization,
-lem-pur-ringed-coefficient-projection-cocycle, lem-weil-pbc-mate-pasting and
-def-weil-pbc-adjunction-mate in step 4. -/
+-/
 theorem finite_proper_exceptional_quotient
     (p₀ : ℕ) [Fact p₀.Prime] (k : Type u) [Field k] [CharP k p₀] (_hl : l ≠ p₀)
     [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))]

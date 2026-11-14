@@ -11,7 +11,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # The canonical model of a diagonal right derived functor
 
-Source: Stacks Project, Tag 070G, derived functors computed by K-injectives.
+Derived functors are computed by K-injectives.
+
+## References
+
+* Stacks Project, Tag 070G
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +43,7 @@ private theorem canonicalDerives (F : C ⥤ D) [F.Additive] :
   change IsIso (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map f.hom))
   infer_instance
 
-/-- The full canonical unit on cochain complexes.
-Source: Stacks Tag 070G. -/
+/-- The full canonical unit on cochain complexes. -/
 def canonicalDiagonalUnit (F : C ⥤ D) [F.Additive]
     [Abelian.HasKInjectiveResolutions C] :
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
@@ -48,8 +51,7 @@ def canonicalDiagonalUnit (F : C ⥤ D) [F.Additive]
   app K := F.rightDerivedFunctorUnitQ K
   naturality _ _ f := F.rightDerivedFunctorUnitQ_naturality f
 
-/-- The canonical cochain unit is universal, since it computes on K-injectives.
-Source: Stacks Tag 070G. -/
+/-- The canonical cochain unit is universal. -/
 theorem canonicalDiagonalUnit_universal (F : C ⥤ D) [F.Additive]
     [Abelian.HasKInjectiveResolutions C] :
     F.rightDerivedFunctor.IsRightDerivedFunctor (canonicalDiagonalUnit F)
@@ -61,17 +63,8 @@ theorem canonicalDiagonalUnit_universal (F : C ⥤ D) [F.Additive]
   rw [F.rightDerivedFunctorUnitQ_eq]
   infer_instance
 
-/-- The published right derived functor with its complete unit on complexes,
-K-injective computation, shift structure and triangulation.
-
-Source: Stacks Project, Tag 070G, and the library's canonical right derived
-functor.
-
-Proof of the fields: a quasi-isomorphism between K-injective complexes is a
-homotopy equivalence. The additive functor preserves that homotopy equivalence,
-so the K-injective localizer derives the functor. Its canonical unit is an
-isomorphism on K-injectives, which proves its universal property. The canonical
-right derived functor supplies the shift and triangulated structures. -/
+/-- The right derived functor with its complete unit on complexes,
+K-injective computation, shift structure and triangulation. -/
 def canonicalDiagonalRightDerived (F : C ⥤ D) [F.Additive]
     [Abelian.HasKInjectiveResolutions C] : DiagonalRightDerived F where
   R := F.rightDerivedFunctor

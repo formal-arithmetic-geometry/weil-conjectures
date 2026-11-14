@@ -9,7 +9,9 @@ public import Mathlib.Topology.Sober
 
 /-! # A neighbourhood inside a specialization invariant locus
 
-Source: Stacks Project, Tag 0GKC, component-shrinking paragraph.
+## References
+
+* Stacks Project, Tag 0GKC
 -/
 
 @[expose] public section
@@ -19,9 +21,7 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- In a sober space with finitely many irreducible components, a subset stable in
-both directions under specialization contains a neighbourhood of each of its points.
-
-Source: Stacks Project, Tag 0GKC, component-shrinking paragraph. -/
+both directions under specialization contains a neighbourhood of each of its points. -/
 theorem exists_open_subset_of_specialization_invariant
     {X : Type u} [TopologicalSpace X] [QuasiSober X]
     (hfin : (irreducibleComponents X).Finite) (E : Set X)

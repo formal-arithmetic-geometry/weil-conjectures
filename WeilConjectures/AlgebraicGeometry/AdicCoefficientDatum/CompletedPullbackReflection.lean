@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedBa
 import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantPresentationTransport
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 
-/-! # Reflection through the specified completed pullback unit -/
+/-! # Reflection through the specified completed pullback unit
+
+## References
+
+* Stacks Project, Tags 099N and 099M
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -98,9 +103,7 @@ private theorem quotient_reflection (T : Scheme.{t}) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Completed pullback is the reflection of ordinary pullback on every ambient input.
-Source: Stacks Tag 099N, proof of (2) and (5), together with Tag 099M;
-blueprint completed-exchange coherence, proof steps 1 and 4. -/
+/-- Completed pullback is the reflection of ordinary pullback on every ambient input. -/
 theorem AdicCoefficientDatum.completedPull_reflection {U V : Scheme.{t}} (u : U ⟶ V) :
     (∀ K : d.derived V, d.TowerComplete U ((d.completedPull u).obj K)) ∧
       ∀ (K : d.derived V) (L : d.derived U), d.TowerComplete U L →

@@ -25,10 +25,12 @@ import Mathlib.AlgebraicGeometry.Properties
 /-!
 # Finite-type ambient geometry and a uniform geometric-fibre dimension bound
 
-Source: Stacks Project, Morphisms, Tag 0A3V, with the affine polynomial-presentation
-refinement described in the DAG node.
-The refinement also uses Algebra Tags 00FN, 00KE and 00P3, Schemes Tag 01IJ,
-and `MvPolynomial.ringKrullDim_of_isNoetherianRing`.
+The bound refines Stacks Tag 0A3V using affine polynomial presentations and
+`MvPolynomial.ringKrullDim_of_isNoetherianRing`.
+
+## References
+
+* Stacks Project, Tags 0A3V, 00FN, 00KE, 00P3, 01IJ
 -/
 
 @[expose] public section
@@ -98,10 +100,7 @@ private theorem finiteType_source_dimension_bound
 
 /-- A finite-type morphism over a scheme with a finite Noetherian affine cover and finite
 Krull dimension has the same source finiteness properties, a uniform dimension bound on all
-geometric fibres, and preserves invertibility of integers in local rings.
-
-Source: Stacks Project, Morphisms, Tag 0A3V and its affine-generator refinement; Algebra
-Tags 00FN, 00KE and 00P3; Schemes Tag 01IJ. -/
+geometric fibres, and preserves invertibility of integers in local rings. -/
 theorem finiteType_noetherianCover_dimension_geometricFibres
     {T Y : Scheme.{u}} (p : T ⟶ Y) [LocallyOfFiniteType p] [QuasiCompact p]
     (hYCover : ∃ (n : ℕ) (U : Fin n → Y.affineOpens),

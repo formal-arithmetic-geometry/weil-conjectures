@@ -17,6 +17,10 @@ import all WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 
 This is the inverse-image part of normalized coefficient transport. It involves
 neither direct images nor exchange morphisms.
+
+## References
+
+* Stacks Project, Tags 03D3, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -339,10 +343,7 @@ private lemma fixed_compositor {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
 -- Retain the original finite-discrete interface, although the normalized encoding suffices.
 set_option linter.unusedSectionVars false in
-/-- Normalized encoding commutes with inverse images and their published compositors.
-
-Source: blueprint proper-base-change-finite, Transport and clause (2);
-lem-sfb-finite-coefficient-exchange-encoding, proof steps 1--2; Stacks 03D3 and 0D6D. -/
+/-- Normalized encoding commutes with inverse images and their published compositors. -/
 theorem finiteCoefficientPullbackEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T) :

@@ -16,7 +16,12 @@ import Mathlib.Algebra.FiveLemma
 import Mathlib.Algebra.Ring.BooleanRing
 import Std.Tactic.BVDecide.Normalize.Prop
 
-/-! # Dense-open field-extension comparison ingredients -/
+/-! # Dense-open field-extension comparison ingredients
+
+## References
+
+* Stacks Project, Tag 0GJA, proof (five-term exact sequence and remark (c)).
+-/
 
 @[expose] public section
 
@@ -27,8 +32,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- Simultaneous degree-zero and degree-one comparison bijections transfer across
-extension by zero from a dense open, for one algebraically closed field extension.
-Source: Stacks Project, Tag 0GJA, proof (five-term exact sequence and remark (c)). -/
+extension by zero from a dense open, for one algebraically closed field extension. -/
 theorem dense_open_low_base_change (Λ : Type (u + 1)) [CommRing Λ]
     {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]

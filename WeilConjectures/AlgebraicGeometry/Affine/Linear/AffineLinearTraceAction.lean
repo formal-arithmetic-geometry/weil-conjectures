@@ -178,7 +178,7 @@ namespace AlgebraicGeometry
 
 /-- The linear coordinate map in the existing tower model: pull the matrix entries
 back from S, take the usual finite sums, and use the canonical affine-space coordinate
-isomorphism. Source: blueprint linear-trace lemma, statement and proof paragraph 1. -/
+isomorphism. -/
 def affineTraceLinearMap (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     affineTraceTower S d ⟶ affineTraceTower S d :=
@@ -256,7 +256,7 @@ private lemma linear_comp (S : Scheme.{u}) (d : ℕ)
     exact Finset.sum_comm
 
 /-- The concrete linear coordinate map is an automorphism, and its square over the
-identity is Cartesian. Source: linear-trace invariance, proof paragraph 1. -/
+identity is Cartesian. -/
 theorem affineTraceLinearMap_isPullback (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     IsPullback (affineTraceLinearMap S d g) (affineTraceProjection S d)
@@ -378,7 +378,7 @@ def affineLinearLineDescent (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)).symm
 
 /-- One induction step in the canonical coefficient descent, with the preceding
-comparison explicit. Source: blueprint linear-trace lemma, proof paragraph 1. -/
+comparison explicit. -/
 def affineLinearCoefficientDescentStep (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

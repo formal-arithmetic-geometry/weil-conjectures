@@ -78,12 +78,12 @@ import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Constructibility of the ordinary finite coefficient/site square
 
-Source: Stacks Project, Tags 0GKB and 03RZ, and blueprint main-20261015,
-sec-proetale-coefficients/sk-thm-pe-constructible-comparison,
-sk-thm-pe-constructible-comparison-equivalence.proof.md, parts (1)-(2).
-
 All scalar tensors below are ordinary sheafified tensors, with the target ring acting
 on its own factor. No flatness or derived-scalar-extension assertion is present.
+
+## References
+
+* Stacks Project, Tags 0GKB, 03RZ, 03EK, 098B and 099R.
 -/
 
 @[expose] public noncomputable section
@@ -177,8 +177,7 @@ private theorem fixedConstructible_of_models (T : Scheme.{u})
       exact isEmptyElim ((show Spec (.of Ω) ⟶ T from x) (IsLocalRing.closedPoint Ω))
 
 /-- Ordinary termwise scalar extension using the published sheaf tensor functor.
-Its additive structure is supplied by its actual scalar adjunction.
-Source: Stacks 0GKB and 03EK. -/
+Its additive structure is supplied by its actual scalar adjunction. -/
 def constructibleCoefficientComplex {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B)
     (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -189,8 +188,7 @@ def constructibleCoefficientComplex {A B : Type (u + 1)} [CommRing A] [CommRing 
 
 /-- Each original stratum and each original finite constant model survives ordinary
 scalar extension, including on every member of any chosen trivializing cover.
-`ModuleCat.extendScalars` uses B tensor M, canonically the same B-module as M tensor B.
-Source: Stacks 0GKB. -/
+`ModuleCat.extendScalars` uses B tensor M, canonically the same B-module as M tensor B. -/
 theorem constructibleCoefficientSheaf
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -240,8 +238,7 @@ theorem constructibleCoefficientSheaf
 
 /-- Comparison retains every nonempty stratification and its finite constant models.
 The last clause explicitly repairs a zero-stratum partition on the empty scheme by
-one empty stratum with constant zero value.
-Source: blueprint comparison-equivalence proof (1), Stacks 098B and 099R. -/
+one empty stratum with constant zero value. -/
 theorem constructibleSiteComparison
     (X : Scheme.{u}) [IsNoetherian X]
     (R : Type (u + 1)) [CommRing R] [Finite R]
@@ -379,8 +376,7 @@ private theorem localizedHomology_isZero
     ((_root_.DerivedCategory.homologyFunctorFactors D q).app C)
 
 /-- The four ordinary localized complexes have constructible cohomology in the original
-interval; comparison commutes with each cohomology sheaf.
-Source: Stacks 03RZ and blueprint comparison-equivalence proof (2). -/
+interval; comparison commutes with each cohomology sheaf. -/
 theorem constructibleCoefficientSiteSquare
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]

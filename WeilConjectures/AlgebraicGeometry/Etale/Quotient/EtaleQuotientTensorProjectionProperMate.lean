@@ -13,6 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarTensorPullbackNormalizatio
 This is the proper-factor identity used in the restricted coefficient projection.
 It removes the bounded-below witnesses from the existing mate calculation; the
 remaining open-factor calculation is handled by the parent theorem.
+
+## References
+
+* Zheng, Proposition 2.29(2) and Construction 2.26
+* Stacks Project, Tag 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -163,7 +168,6 @@ private theorem unbounded_scalar_tensor_pullback_square
 
 /-- The unbounded scalar mate followed by direct-image restriction is the proper
 projection map after the canonical scalar/tensor identification.
-Source: Zheng, Proposition 2.29(2), Construction 2.26; Stacks Tag 0GL6.
 -/
 theorem scalarMate_restrict_eq_projection_unbounded
     {A B : Type (u + 1)} [CommRing A] [CommRing B]

@@ -13,7 +13,9 @@ public import Mathlib.AlgebraicGeometry.Properties
 /-!
 # A Noetherian scheme of dimension at most zero is finite and discrete
 
-Source: Stacks Project, Properties, Lemma 28.10.5 (Tag 0AAX), proof and conclusion.
+## References
+
+* [Stacks Project, Tag 0AAX](https://stacks.math.columbia.edu/tag/0AAX)
 -/
 
 @[expose] public section
@@ -27,10 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A Noetherian scheme of topological Krull dimension at most zero has a finite discrete
 underlying space: every point is closed and every singleton is open (`isClosed_discrete`,
-`isOpen_discrete`). This includes the empty scheme.
-
-Source: Stacks Project, Properties, Lemma 28.10.5 (Tag 0AAX), proof and conclusion.
--/
+`isOpen_discrete`). This includes the empty scheme. -/
 theorem finite_and_discreteTopology_of_topologicalKrullDim_le_zero
     (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y]
     (hdim : topologicalKrullDim Y ≤ 0) :

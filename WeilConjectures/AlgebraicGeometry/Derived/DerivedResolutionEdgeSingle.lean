@@ -13,7 +13,10 @@ import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSectionPresheaf
 
 /-! # Normalization of the resolution edge by the derived unit
-Source: Stacks Project, cohomology.tex, Tags 0BKJ and 079W.
+
+## References
+
+* Stacks Project, Tags 0BKJ, 079W
 -/
 
 @[expose] public section
@@ -254,8 +257,7 @@ private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
   exact resolutionEdge_unit_of_map
     (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) q J I r b hb
 
-/-- The constructed edge on a single complex is normalized by the derived unit.
-Source: Stacks, Tags 0BKJ and 079W. -/
+/-- The constructed edge on a single complex is normalized by the derived unit. -/
 theorem resolutionLocalClassEdge_single {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

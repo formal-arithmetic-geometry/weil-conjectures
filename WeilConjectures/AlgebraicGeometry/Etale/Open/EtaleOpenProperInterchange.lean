@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenInterchangeCohere
 /-!
 # Open extension by zero and proper derived pushforward
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B,
-`lemma-shriek-proper-and-open`, Cartesian open-immersion specialization, case (b).
+## References
+
+* Stacks Project, More on Etale Cohomology, Tag 0F7B, case (b)
 -/
 
 @[expose] public section
@@ -34,9 +35,6 @@ extension by zero along `i` commutes with proper derived pushforward in their Ca
 square, on bounded-below derived categories of etale sheaves of modules over a finite
 commutative ring. The two projections from `pullback p i` are `b = pullback.fst p i`
 and `p_V = pullback.snd p i`.
-
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B,
-`lemma-shriek-proper-and-open`, case (b).
 -/
 theorem nonempty_iso_etale_open_proper_interchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

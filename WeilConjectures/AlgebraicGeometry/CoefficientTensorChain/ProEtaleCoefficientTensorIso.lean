@@ -86,7 +86,12 @@ public import WeilConjectures.CategoryTheory.Monoidal.BraidedLocalizationSquare
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.AlgebraicGeometry.CoefficientTensorChain.ProEtaleCoefficientTensorIsoNaturality
 
-/-! # The normalized chain tensor isomorphism for coefficient restriction -/
+/-! # The normalized chain tensor isomorphism for coefficient restriction
+
+## References
+
+* Stacks Project, Tag 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -113,8 +118,7 @@ def tensorIso (o : SheafOfModules.RingIsoTensorTransport
   NatIso.ofComponents (fun Z ↦ o.totalIso Z.1 Z.2)
     (fun v ↦ tensorIso_naturality f R S c o _ _ v)
 
-/-- The normalized tensor isomorphism has the prescribed map on every total summand.
-Source: RingIsoTensorTransport.total_summand; Stacks Tag 07A4. -/
+/-- The normalized tensor isomorphism has the prescribed map on every total summand. -/
 theorem tensorIso_summand
     (o : SheafOfModules.RingIsoTensorTransport (J := ProEt.topology X)
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)

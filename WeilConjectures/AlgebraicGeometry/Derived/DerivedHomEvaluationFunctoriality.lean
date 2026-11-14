@@ -9,8 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedMorphismSheafComp
 
 /-! # Functoriality of local derived morphism evaluation
 
-Source: Stacks Tags 09B1, 0946, 09BE and 0F63. Transpose the local comparison
-identities under the two adjunctions, then cancel the bijective sheafification unit.
+The local comparison identities are transposed under the two adjunctions, and the bijective
+sheafification unit is then cancelled.
+
+## References
+
+* Stacks Project, Tags 09B1, 0946, 09BE, 09BV, 0F63
 -/
 
 @[expose] public noncomputable section
@@ -105,11 +109,7 @@ private theorem comparisonHom_natural
     (derivedLocalHomSheafMap f g) _ _ θ hs
 
 /-- Evaluation is natural in both derived arguments, contravariantly in the first and covariantly in
-the second.
-
-Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; Cohomology on Sites, Tags 0946
-and 09BE; the blueprint amplification proof, finite-source extension.
--/
+the second. -/
 theorem derivedHomEvaluation_natural
     (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
     (f : A' ⟶ A) (g : D ⟶ D') (U : X.ProEt) [IsAffine U.left]
@@ -180,8 +180,7 @@ private theorem iso_hom (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
   exact (ConcreteCategory.congr_hom (congr_app hn (op ((toProEt X).obj V.unop)))
     (derivedComparisonLocalIso X B A D V.unop f)).symm
 
-/-- Evaluation sends the Isom-to-Hom projection to the underlying evaluated arrow.
-Source: Stacks Tags 09BV and 0F63. -/
+/-- Evaluation sends the Isom-to-Hom projection to the underlying evaluated arrow. -/
 theorem derivedIsoEvaluation_hom
     (U : X.ProEt) [IsAffine U.left]
     (hw : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)

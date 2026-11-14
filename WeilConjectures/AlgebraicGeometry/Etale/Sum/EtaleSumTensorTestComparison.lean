@@ -25,8 +25,11 @@ public import Mathlib.Algebra.Homology.Additive
 
 /-! # Acyclic tensor tests for étale sum extension
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0GKF, and the unbounded
-totalization expansion of lem-pur-etale-sum-tensor-totalization.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0GKF
+* Stacks Project, Modules on Sites, Tags 03CV, 093I
+* Stacks Project, Homology, Tag 012Z
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +41,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Sum extension on modules over the constant commutative ring sheaf, constructed
-by restriction to constant scalars and the published realization functor.
-Source: Stacks Tags 093I, 03CV, and 0GKF. -/
+by restriction to constant scalars and the published realization functor. -/
 def etaleSumTensorTestExtension {U X : Scheme.{u}} (f : U ⟶ X) (hf : Etale f)
     (A : Type (u + 1)) [CommRing A] :
     SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology
@@ -102,10 +104,7 @@ private theorem constantRingTransport_equivalence (T : Scheme.{u})
   exact ⟨eT.isEquivalence_functor, eT.isEquivalence_inverse⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The transported sum extension is exact. Source: Stacks Tag 0GKF and the
-constant-scalar equivalence.
-The two ring transports are equivalences. Restriction is inverse to the published
-constant-scalar equivalence, and the middle sum extension is exact. -/
+/-- The transported sum extension is exact. -/
 theorem etaleSumTensorTestExtension_exact {U X : Scheme.{u}} (f : U ⟶ X) (hf : Etale f)
     (A : Type (u + 1)) [CommRing A] :
     exactFunctor _ _ (etaleSumTensorTestExtension f hf A)   := by
@@ -119,8 +118,7 @@ theorem etaleSumTensorTestExtension_exact {U X : Scheme.{u}} (f : U ⟶ X) (hf :
   apply (exactFunctor_iff _).mpr
   constructor <;> dsimp only [etaleSumTensorTestExtension] <;> infer_instance
 
-/-- Apply the exact transported extension degreewise.
-Source: Stacks Tag 0GKF. -/
+/-- Apply the exact transported extension degreewise. -/
 def etaleSumTensorTestComplexExtension {U X : Scheme.{u}} (f : U ⟶ X) (hf : Etale f)
     (A : Type (u + 1)) [CommRing A] :=
   let h := etaleSumTensorTestExtension_exact f hf A
@@ -128,15 +126,13 @@ def etaleSumTensorTestComplexExtension {U X : Scheme.{u}} (f : U ⟶ X) (hf : Et
   let := Functor.additive_of_preserves_binary_products (etaleSumTensorTestExtension f hf A)
   (etaleSumTensorTestExtension f hf A).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- Modules over the canonical constant commutative ring sheaf.
-Source: Stacks Tags 093I and 03CV. -/
+/-- Modules over the canonical constant commutative ring sheaf. -/
 abbrev EtaleSumTensorTestModule (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   SheafOfModules.{u + 1} ((sheafCompose T.smallEtaleTopology
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
     ((constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))
 
-/-- The canonical realization of constant-coefficient module sheaves.
-Source: Stacks Tags 093I and 03CV. -/
+/-- The canonical realization of constant-coefficient module sheaves. -/
 def etaleSumTensorTestRealization (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤ EtaleSumTensorTestModule T A :=
   etaleConstantModuleFunctor T A ⋙
@@ -144,8 +140,7 @@ def etaleSumTensorTestRealization (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
       (constantModuleHomRingIso T.smallEtaleTopology A).inv
 
 /-- The canonical realization is an equivalence: both its constant-scalar functor and
-its transport along a ring isomorphism are equivalences.
-Source: Stacks Tags 093I and 03CV. -/
+its transport along a ring isomorphism are equivalences. -/
 theorem etaleSumTensorTestRealization_isEquivalence (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] :
     (etaleSumTensorTestRealization T A).IsEquivalence := by
@@ -154,8 +149,7 @@ theorem etaleSumTensorTestRealization_isEquivalence (T : Scheme.{u})
   dsimp only [etaleSumTensorTestRealization]
   infer_instance
 
-/-- Realization applied degreewise to an unbounded complex.
-Source: Stacks Tag 0GKF. -/
+/-- Realization applied degreewise to an unbounded complex. -/
 def etaleSumTensorTestRealizationComplex (T : Scheme.{u}) (A : Type (u + 1))
     [CommRing A] :=
   letI := etaleConstantModuleFunctor_isEquivalence T A
@@ -164,8 +158,7 @@ def etaleSumTensorTestRealizationComplex (T : Scheme.{u}) (A : Type (u + 1))
       (constantModuleHomRingIso T.smallEtaleTopology A).inv).mapHomologicalComplex
         (ComplexShape.up ℤ)
 
-/-- The actual direct-sum total tensor, with Koszul differential.
-Source: Stacks Tag 012Z. -/
+/-- The actual direct-sum total tensor, with Koszul differential. -/
 def etaleSumTensorTestTotal (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (B P : CochainComplex (EtaleSumTensorTestModule T A) ℤ) :=
   let R := (constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)

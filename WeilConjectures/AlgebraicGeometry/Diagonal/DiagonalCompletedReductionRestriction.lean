@@ -219,6 +219,10 @@ import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import Mathlib.Algebra.Ring.TransferInstance
 
 /-! # Finite reduction and completed scalar restriction.
+
+## References
+
+* Stacks Project, Tags 099I, 099M
 -/
 
 @[expose] public noncomputable section
@@ -627,9 +631,7 @@ private theorem constantRegularResolution
   exact flat_multiplication_mono _ (hm n) (P.X i) (hf i)
 
 /-- Simultaneous finite reduction commutes with exact completed scalar restriction,
-including its quotient units, on all completed derived objects.
-
-Source: Stacks 099I and 099M; blueprint diagonal tower limit proof, paragraph (3). -/
+including its quotient units, on all completed derived objects. -/
 theorem diagonal_completed_reduction_restriction (ℓ : ℕ) [Fact ℓ.Prime]
     (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]

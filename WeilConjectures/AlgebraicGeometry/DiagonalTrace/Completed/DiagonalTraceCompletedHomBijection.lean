@@ -132,6 +132,10 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Completed scalar restriction for the projective-line trace
+
+## References
+
+* Stacks Project, Tags 099I, 099L
 -/
 
 @[expose] public noncomputable section
@@ -192,10 +196,7 @@ private def rightDerivedComparison
     (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
 
 /-- Completed scalar restriction is fully faithful on the two complete objects
-used as the source and target of the trace.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), derived completeness
-and passage from constant to completed coefficients; Stacks Tags 099I and 099L. -/
+used as the source and target of the trace. -/
 theorem diagonalTrace_completedHom_bijective
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

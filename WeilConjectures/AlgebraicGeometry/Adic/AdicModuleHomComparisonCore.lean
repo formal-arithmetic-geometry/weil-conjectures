@@ -12,7 +12,12 @@ import WeilConjectures.Algebra.Homology.SiteTensorHom.SiteTensorHomEquiv
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import Mathlib.CategoryTheory.Yoneda
 
-/-! # Hom part of the normalized adic module comparison -/
+/-! # Hom part of the normalized adic module comparison
+
+## References
+
+* Stacks Project, Tags 03EO and 0E8H
+-/
 
 @[expose] public section
 
@@ -27,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The Hom, evaluation, and bidual part of the normalized comparison for the explicit
-adic section equivalence. Source: Stacks 03EO and 0E8H. -/
+adic section equivalence. -/
 structure AdicModuleHomComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) where
   /-- The Hom comparison is natural in the target. -/
   homIso : ∀ M : AdicSheaf l X,
@@ -235,9 +240,7 @@ private theorem homComparison_isIso {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   rw [he, Category.comp_id, FF.map_preimage, ← Category.assoc, Iso.inv_hom_id_assoc]
 
 /-- The normalized Hom comparison and its evaluation and bidual formulas exist for every
-prime and scheme.
-
-Source: Stacks 03EO and 0E8H. -/
+prime and scheme. -/
 theorem adicModuleHomComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Nonempty (AdicModuleHomComparisonCore l X) := by
   obtain ⟨T⟩ := adicModuleTensorComparisonCore l X

@@ -32,7 +32,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.RingTheory.Finiteness.Cardinality
 
-/-! # Algebraic local representatives of derived maps of finite constant complexes -/
+/-! # Algebraic local representatives of derived maps of finite constant complexes
+
+## References
+
+* Stacks Project, Tags 09BE, 08FR
+-/
 
 @[expose] public section
 
@@ -394,10 +399,7 @@ private theorem local_finite_point
   simpa only [Functor.map_comp, Category.assoc] using heq
 
 /-- A derived morphism between restrictions of bounded finite constant complexes is
-locally the restriction of an algebraic derived morphism.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 09BE and 08FR, with the finite-source
-truncation argument of the constant derived mapping sheaf lemma. -/
+locally the restriction of an algebraic derived morphism. -/
 theorem finiteRing_constant_derived_map_local
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (E G : CochainComplex (ModuleCat.{u + 1} B) ℤ)

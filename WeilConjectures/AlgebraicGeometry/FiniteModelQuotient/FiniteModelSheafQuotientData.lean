@@ -19,11 +19,17 @@ public import Mathlib.Algebra.Category.ModuleCat.Kernels
 
 The coordinate definitions are shared by the chart comparison and descent.
 
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof,
-Local models, Locality and Strata paragraphs; Stacks Tags 093J, 093M, 06YQ, 06YY and 09AJ.
-
 The index n denotes the positive exponent n+1. All reductions use the existing actual
 quotient map and take values in the derived category over the quotient coefficient ring.
+
+## Implementation details
+
+* The explicit finiteness witness in `OrdinaryConclusion` installs only the finiteness
+  asserted by the main theorem.
+
+## References
+
+* Stacks Project, Tags 093J, 093M, 06YQ, 06YY, 09AJ
 -/
 
 @[expose] public noncomputable section
@@ -42,10 +48,10 @@ namespace AlgebraicGeometry.ProEtale.FiniteModelQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The recorded integral scalar ring. Source: blueprint Local models. -/
+/-- The recorded integral scalar ring. -/
 abbrev A := Padic.coefficientExtensionIntegers l E
 
-/-- The recorded positive-level scalar quotient. Source: blueprint Local models. -/
+/-- The recorded positive-level scalar quotient. -/
 abbrev R (n : ℕ) := Padic.coefficientExtensionRing l E (n + 1)
 
 /-- Named quotient-module coordinates for the specified category. -/
@@ -105,7 +111,7 @@ abbrev Encoding (n : ℕ) (T : Scheme.{u}) :=
   FiniteDiscreteOrdinary.Encoding (R l E n) T
 
 /-- The specified ordinary encoding with its source written as the actual quotient
-module category. Source: blueprint finite coefficient coordinates. -/
+module category. -/
 def fixedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
     quotientModules l E n T ≌
       Sheaf (Scheme.ProEt.topology T)
@@ -114,7 +120,7 @@ def fixedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
   e.ordinary.trans e.fixed
 
 /-- The specified derived encoding with its source written as the actual quotient
-module category. Source: blueprint finite coefficient coordinates. -/
+module category. -/
 def derivedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
     DerivedCategory (quotientModules l E n T) ≌
       DerivedCategory (Sheaf (Scheme.ProEt.topology T)
@@ -215,7 +221,7 @@ structure ChartCalculation (T : Scheme.{u}) (n a b : ℕ)
 
 /-- The chart calculation for every specified scalar resolution on every member of
 any chosen stratification and pro-etale covers. The two cohomology identifications
-retain the quotient coefficient action. Source: blueprint Local models and Locality. -/
+retain the quotient coefficient action. -/
 structure LocalCalculationAt (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (enc : ∀ T : Scheme.{u}, Encoding l E n T)
     (K : DerivedCategory (quotientModules l E n V)) : Prop where
@@ -242,8 +248,7 @@ abbrev LocalCalculation (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n :
   LocalCalculationAt l E V M n enc (reduction l E V M n)
 
 /-- Ordinary boundedness and intrinsic constructibility in the recorded finite-ring
-encoding. The explicit finiteness witness installs only the finiteness just asserted
-by the main theorem. Source: blueprint finite constructible cohomology clause. -/
+encoding. -/
 def OrdinaryConclusion (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (hf : Finite (R l E n)) (e : Encoding l E n V) : Prop :=
   let := hf

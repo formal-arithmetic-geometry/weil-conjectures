@@ -302,12 +302,7 @@ section Duality
 variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
 
 /-- **Serre duality on a curve with the residue trace**, in the form `Hom(ℱ, ω) ≅ H¹(X, ℱ)^∨`,
-`φ ↦ t_X ∘ H¹(φ)`, for every finite locally free `ℱ`.
-
-The abstract trace `t` of `exists_trace_bijective_dualPairing` satisfies `t_X = t ∘ H¹(φ₀)` for
-an endomorphism `φ₀` of `ω`; `φ₀` is multiplication by a global function `c`
-(`Modules.exists_eq_smulHom`), `c ≠ 0` since `t_X ≠ 0`, so `c` is a unit of the field
-`Γ(X, 𝒪_X)` and `φ₀` is an isomorphism. -/
+`φ ↦ t_X ∘ H¹(φ)`, for every finite locally free `ℱ`. -/
 theorem bijective_dualPairing_residueTrace (ℱ : X.Modules)
     (hℱ : SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ) :
     Function.Bijective (Modules.dualPairing (residueTrace k X) ℱ) := by
@@ -368,8 +363,7 @@ free `ℱ` the trace pairing
   H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) --∪--> H¹(X, ℱ ⊗ ℱᵛ ⊗ ω) --H¹(ev)--> H¹(X, ω) --t_X--> k
 ```
 (`Modules.cupPairing`) is perfect: both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and
-`H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. This is the case `n = 1` of Serre duality with the
-explicit trace of the blueprint. -/
+`H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. -/
 theorem serreDuality_residueTrace (ℱ : X.Modules)
     (hℱ : SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ) :
     Function.Bijective (Modules.cupPairing (residueTrace k X) ℱ) ∧

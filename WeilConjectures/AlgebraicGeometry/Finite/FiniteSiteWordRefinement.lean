@@ -30,8 +30,11 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenComparison
 /-!
 # Finite-site words and pushed proper/open refinements
 
-Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF, and more-etale.tex,
-Tag 0F7I; blueprint exceptional reduction, Locality paragraph.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tags 09A6 and 09AF
+* Stacks Project, More Etale Cohomology, Tag 0F7I
+* Stacks Project, Tag 03EH
 -/
 
 @[expose] public noncomputable section
@@ -201,7 +204,7 @@ end DerivedTools
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The specified finite-site comparison for a proper/open word, with canonical
-associators. Source: Stacks Tags 09A6, 09AF and 0F7I. -/
+associators. -/
 def finiteSiteWordComparison (R : Type (u + 1)) [CommRing R]
     {X W V : Scheme.{u}} (j : X ⟶ W) [IsOpenImmersion j] (r : W ⟶ V) :
     ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus ⋙
@@ -219,8 +222,7 @@ def finiteSiteWordComparison (R : Type (u + 1)) [CommRing R]
       (lowerStar (ModuleCat.{u + 1} R) r).rightDerivedFunctorPlus ≫
     (Functor.associator _ _ _).hom
 
-/-- The canonical etale pushed-refinement component, with r1 defined as r2 after u.
-Source: Stacks Tag 0F7I. -/
+/-- The canonical etale pushed-refinement component, with r1 defined as r2 after u. -/
 def finiteSiteEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
     {X W₁ W₂ V : Scheme.{u}} (j₁ : X ⟶ W₁) (j₂ : X ⟶ W₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -238,8 +240,7 @@ def finiteSiteEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
       ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j₁).mapDerivedCategoryPlus.obj E)
 
 /-- The canonical pro-etale pushed-refinement component on etale-origin input.
-The open-adjunct comparison is the published three-constituent theta comparison.
-Source: Stacks Tag 0F7I. -/
+The open-adjunct comparison is the published three-constituent theta comparison. -/
 def finiteSiteProEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
     {X W₁ W₂ V : Scheme.{u}} (j₁ : X ⟶ W₁) (j₂ : X ⟶ W₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -258,7 +259,7 @@ def finiteSiteProEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
         ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E))
 
 /-- Termwise descent of the canonical Etale open compositor, in the orientation
-from iterated to composite extension. Source: Stacks Tags 09AF and 03EH. -/
+from iterated to composite extension. -/
 def finiteSiteEtaleOpenComp (R : Type (u + 1)) [CommRing R]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion a] [IsOpenImmersion b] :
@@ -269,8 +270,7 @@ def finiteSiteEtaleOpenComp (R : Type (u + 1)) [CommRing R]
     Functor.mapDerivedCategoryPlusNatIso (Etale.openImmersionLowerShriekComp (ModuleCat.{u + 1} R)
       a b).symm
 
-/-- Termwise descent of the canonical Etale open unit identification.
-Source: Stacks Tags 09AF and 03EH. -/
+/-- Termwise descent of the canonical Etale open unit identification. -/
 def finiteSiteEtaleOpenId (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) (𝟙 X)).mapDerivedCategoryPlus ≅
       𝟭 _ :=
@@ -281,7 +281,7 @@ def finiteSiteEtaleOpenId (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
     Functor.mapDerivedCategoryPlusIdIso _
 
 /-- Termwise descent of the canonical ProEtale open compositor, in the orientation
-from iterated to composite extension. Source: Stacks Tags 09AF and 03EH. -/
+from iterated to composite extension. -/
 def finiteSiteProEtaleOpenComp (R : Type (u + 1)) [CommRing R]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion a] [IsOpenImmersion b] :
@@ -291,8 +291,7 @@ def finiteSiteProEtaleOpenComp (R : Type (u + 1)) [CommRing R]
   (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryPlusNatIso (proEtaleOpenExtensionComp R a b).symm
 
-/-- Termwise descent of the canonical ProEtale open unit identification.
-Source: Stacks Tags 09AF and 03EH. -/
+/-- Termwise descent of the canonical ProEtale open unit identification. -/
 def finiteSiteProEtaleOpenId (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
     (openImmersionLowerShriek (ModuleCat.{u + 1} R) (𝟙 X)).mapDerivedCategoryPlus ≅
       𝟭 _ :=
@@ -335,39 +334,7 @@ private theorem proEtaleOpenComp_symm (R : Type (u + 1)) [CommRing R]
   exact derivedComp_symm _ _ _ _
 
 /-- Finite-site word comparisons, lower bounds, normalized compositor and unit laws,
-and compatibility with pushed proper/open refinements.
-
-Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF; more-etale.tex, Tag 0F7I;
-blueprint exceptional reduction, Locality paragraph.
-
-Proof (the node's eight steps):
-1. Etale and pro-etale extension by zero and comparison inverse image are exact. The exact-functor
-  cohomology comparison preserves every specified lower bound.
-2. Use enough injectives and an injective representative vanishing below the chosen
-   bound. Direct image computes its right
-   derived functor on that representative,
-   so every intermediate etale direct image remains bounded below.
-3. Apply the canonical sheaf open comparison and its composition law in every degree.
-   Naturality makes chain maps; exactness preserves quasi-isomorphisms. Localization descends the
-   maps and equations.
-4. Finite affine covers give quasi-compactness; local Noetherianness gives
-   quasi-separatedness. Morphism permanence gives qcqs proper maps. The specified mate
-   is invertible, hence so is B.
-   Its domain is exactly the comparison of the bounded-below etale word, the witness.
-5. The coherent pullback comparisons descend
-   termwise by exactness. Mate pasting
-   (lem-weil-pbc-mate-pasting, parts 2 and 3) gives the compositor equation for the
-   specified counit mates; adjunction conjugation fixes the canonical compositors.
-6. The identity pullback comparison and identity mate law give the proper unit law.
-   The open composition law at two identities gives e=e squared; cancellation by
-   its inverse gives the open unit law.
-7. Expand B and rho. Apply the proper compositor equation, then naturality of d_r2
-   at alpha_u and of the pro-etale compositor at e_j1. The three middle factors are
-   P_u(e_j1), d_u, and N(alpha_u), all on bounded-below etale inputs from step 2.
-8. Substitute the site equation of lem-sp-refinement-coefficient-mate to replace
-   those factors by alpha_u_pro after e_j2. Functoriality of P_r2 gives precisely
-   rho_pro after B_r2,j2. All constituents are natural, hence so is this equation.
-   No Cartesian refinement square, base field, or coefficient presentation is used. -/
+and compatibility with pushed proper/open refinements. -/
 theorem finiteSiteWordRefinement (R : Type (u + 1)) [CommRing R] [Finite R] :
     (∀ {X W : Scheme.{u}} [IsNoetherian X] [IsNoetherian W]
       (j : X ⟶ W) [IsOpenImmersion j]

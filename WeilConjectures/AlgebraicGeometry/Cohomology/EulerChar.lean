@@ -31,7 +31,7 @@ invariants `AlgebraicGeometry.Scheme.Modules.finrankH` and the Euler characteris
 `AlgebraicGeometry.Scheme.Modules.eulerChar`.
 
 There is no group of Cartier or Weil divisors on a scheme in Mathlib. The degree is therefore
-*defined* cohomologically, which is the standard alternative definition (Stacks 0AYQ). On a
+*defined* cohomologically, which is the standard alternative definition. On a
 smooth proper curve it agrees with the degree `dim_k Γ(D, 𝒪_D)` of divisors; this is part of
 Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean`.
 
@@ -57,6 +57,10 @@ Riemann–Roch, stated in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.l
   finite disjoint union of open subschemes is the direct sum of the cohomologies of the pieces.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint`: the Euler
   characteristic is additive over a finite disjoint union of open subschemes.
+
+## References
+
+* Stacks Project, Tags 0AYQ, 02UZ and 02KH
 -/
 
 @[expose] public section
@@ -68,12 +72,7 @@ open CategoryTheory Function TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 /-- **Grothendieck vanishing.** On a noetherian scheme `X` of dimension `n`, the cohomology of
-every sheaf of modules vanishes in degrees `q > n`.
-
-This is what makes the `finsum` defining `AlgebraicGeometry.Scheme.Modules.eulerChar` a finite
-sum, hence makes `χ`, the genus and the degree meaningful, for instance on a curve, where
-`n = 1`.
--/
+every sheaf of modules vanishes in degrees `q > n`. -/
 @[stacks 02UZ]
 theorem Modules.subsingleton_H_of_topologicalKrullDim_lt {X : Scheme.{u}} [IsNoetherian X]
     (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) := by
@@ -143,20 +142,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 /-- **Flat base change of cohomology along a field extension.** Let `X` be a quasi-compact
 quasi-separated scheme over a field `k`, let `K/k` be a field extension and let `M` be a
 quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
-`X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`.
-
-Proof (Stacks 02KH): first suppose `X` is separated. A finite affine open cover has affine
-intersections, so its Čech complex computes quasi-coherent cohomology. The affine pullback
-section formula identifies the base-changed complex with its tensor product by `K`.
-Tensoring over the field `k` is exact, hence commutes with cohomology. For general
-quasi-separated `X`, use compact-open induction. Its step adds an affine open `V` to a
-compact open `U`. The overlap `U ∩ V` is compact by quasi-separatedness and separated
-because it is open in the affine scheme `V`; it need not be affine. The separated case
-applies to `V` and the overlap, while the induction hypothesis applies to `U`.
-Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪ V` in
-all degrees. Apply the induction at the whole scheme and invert the resulting
-`K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology.
--/
+`X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`. -/
 @[stacks 02KH]
 theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
@@ -255,8 +241,7 @@ section Degree
 
 variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
-/-- The **degree** `deg ℒ = χ(ℒ) - χ(𝒪_X)` of a sheaf of modules `ℒ` on a `k`-scheme `X`
-(Stacks 0AYQ).
+/-- The **degree** `deg ℒ = χ(ℒ) - χ(𝒪_X)` of a sheaf of modules `ℒ` on a `k`-scheme `X`.
 
 The value is the degree in the usual sense only for an invertible `ℒ` on a proper curve, where
 it agrees with the degree of the associated divisor class; for other sheaves it is just a
@@ -341,14 +326,7 @@ private theorem finrankH_eq_sum_of_pairwise_disjoint_aux {ι : Type} [Fintype ι
 /-- **Cohomology of a finite disjoint union.** If `X` is the disjoint union of finitely many
 open subschemes `U i`, then `H^q(X, M) ≅ ⊕ᵢ H^q(U i, M|_{U i})`; in particular, when
 `H^q(X, M)` is finite-dimensional, `h^q(X, M) = ∑ᵢ h^q(U i, M|_{U i})`. Each `U i` is a scheme
-over `k` through `X`.
-
-Each `U i` is open and closed, `M` is the direct sum of the pushforwards of its restrictions to
-the `U i` (`AlgebraicGeometry.Scheme.Modules.isIso_biproduct_lift_restrictAdjunction_unit`), and
-the pushforward along the inclusion of an open and closed subscheme does not change cohomology
-(`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`).
-
-This is used in the proof of blueprint `proposition-multiplication-n--1`. -/
+over `k` through `X`. -/
 theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ)
     [FiniteDimensional k (M.H q)] :
@@ -417,12 +395,7 @@ theorem eulerChar_eq_sum_range_of_subsingleton (M : X.Modules) {D : ℕ}
 /-- **The Euler characteristic of a quasi-coherent module is additive over a finite disjoint
 union.** If a quasi-compact separated scheme `X` is the disjoint union of finitely many open
 subschemes `U i`, and the cohomology of the quasi-coherent module `M` is finite-dimensional, then
-`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`.
-
-This is `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint` without the
-appeal to Grothendieck vanishing: the cohomology of quasi-coherent modules on `X` and on the `U i`
-vanishes above the number of affine opens needed to cover them
-(`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isQuasicoherent`). -/
+`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`. -/
 theorem eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent [CompactSpace X]
     [IsSeparated (Limits.terminal.from X)] {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules)

@@ -22,8 +22,12 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 
 /-! # Sheaf and derived-unit normalizations of the Cartesian sum mate
 
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F; the factorization equations
-for derived adjunctions. No compactification or properness is used here.
+The derived statements use the factorization equations for derived adjunctions.
+No compactification or properness is used here.
+
+## References
+
+* Stacks Project, Tags 0F4L, 0F7B, 0F7F
 -/
 
 @[expose] public section
@@ -128,8 +132,7 @@ private lemma derived_square_mate_units
   exact Iso.inv_hom_id_app_assoc G.mapDerivedCategoryFactorsh
     ((R.mapHomotopyCategory (.up ℤ)).obj N) _
 
-/-- Right derivation computes the mate of inverse sum exchange from its sheaf mate.
-Source: Stacks Project, Tag 0F7F; the derived-adjunction factorization equations. -/
+/-- Right derivation computes the mate of inverse sum exchange from its sheaf mate. -/
 theorem cartesian_sum_mate_units
     (A : Type (u + 1)) [CommRing A]
     {W Y' Z Y : Scheme.{u}}

@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Ample.AmpleProjLocalChart
 /-!
 # An ample invertible module gives an open immersion into Proj
 
-Source: Stacks Project, Properties, Proposition 01Q3, implication (1) => (2),
-and Lemma 01Q1.
+## References
+
+* Stacks Project, Properties, Proposition 01Q3, implication (1) => (2), and Lemma 01Q1
 -/
 
 @[expose] public section
@@ -28,9 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A scheme with an ample invertible module is an open subscheme of the Proj of a
-nonnegatively graded commutative ring.
-Source: Stacks Project, Properties, Proposition 01Q3, implication (1) => (2),
-and Lemma 01Q1. -/
+nonnegatively graded commutative ring. -/
 theorem exists_isOpenImmersion_proj_of_isAmple (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible] (hL : Scheme.Modules.IsAmple X L) :
     ∃ (S : Type u) (_ : CommRing S) (𝒮 : ℕ → AddSubgroup S) (_ : GradedRing 𝒮)

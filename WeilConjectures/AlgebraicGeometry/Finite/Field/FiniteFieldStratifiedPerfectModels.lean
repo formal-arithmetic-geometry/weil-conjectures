@@ -37,9 +37,10 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-! # Stratified perfect constant models over a finite field
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.6.11,
-forward implication (residue stratification), and Proposition 6.8.11(3);
-Stacks Project, Tags 095E, 03RZ and 094G.
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Propositions 6.6.11 and 6.8.11(3)
+* Stacks Project, Tags 095E, 03RZ, 094G
 -/
 
 @[expose] public section
@@ -168,10 +169,7 @@ private noncomputable def comparisonConstantComplexIso
 /-- A bounded constructible etale complex over a finite field has, on an etale cover
 of each constructible locally closed stratum, an actual bounded finite-dimensional
 constant complex model. The same complex models its pro-etale comparison pullback,
-in the continuous-function coefficient-ring presentation.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication, and 6.8.11(3);
-Stacks Project, Tags 095E, 03RZ and 094G. -/
+in the continuous-function coefficient-ring presentation. -/
 theorem finite_field_stratified_perfect_models
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (k : Type (u + 1)) [Field k] [Finite k] [TopologicalSpace k] [DiscreteTopology k]

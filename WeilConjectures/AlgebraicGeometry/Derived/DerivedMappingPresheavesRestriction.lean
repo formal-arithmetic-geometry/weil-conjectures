@@ -12,7 +12,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 
-/-! # Restriction of derived mapping presheaves -/
+/-! # Restriction of derived mapping presheaves
+
+## References
+
+* [Stacks Project, Tag 09BE](https://stacks.math.columbia.edu/tag/09BE)
+-/
 
 @[expose] public section
 
@@ -141,9 +146,7 @@ private theorem conjugation_natural
   simp only [Category.assoc]
   rw [hl]
 
-/-- The derived mapping presheaves commute with localization of the etale site.
-
-Source: Stacks Project, Tag 09BE, lemma-locally-constant-map, restriction of derived maps. -/
+/-- The derived mapping presheaves commute with localization of the etale site. -/
 theorem derived_mapping_presheaves_restriction
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))

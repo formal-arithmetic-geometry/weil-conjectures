@@ -13,7 +13,10 @@ import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 import all WeilConjectures.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
 
 /-! # Invertibility in the first degree of the derived single comparison
-Source: Stacks Project, derived.tex, Tag 0156; cohomology.tex, Tag 079W.
+
+## References
+
+* Stacks Project, Tags 0156, 079W
 -/
 
 @[expose] public section
@@ -70,8 +73,7 @@ private theorem single_unit_iso
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- The single direct-image comparison is invertible on cohomology in its single degree.
-Source: Stacks, Tag 0156, transported by the canonical integer shifts. -/
+/-- The single direct-image comparison is invertible on cohomology in its single degree. -/
 theorem topEdgeSingleDirectImageMap_isIso_homology {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     IsIso ((DerivedCategory.homologyFunctor.{w, u, u + 1}

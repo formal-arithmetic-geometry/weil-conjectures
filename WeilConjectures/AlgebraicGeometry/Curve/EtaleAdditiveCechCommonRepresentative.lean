@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaRepresentati
 
 /-! # Common augmentation representatives
 
-Source: Stacks Project, Tags 03P2 and 01FD. -/
+## References
+
+* Stacks Project, Tags 03P2, 01FD
+-/
 
 @[expose] public section
 
@@ -23,9 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Every global resolution cycle has a common total-complex class with a coefficient cycle.
-Source: Stacks Project, Tag 03P2, the separated affine-cover comparison, and Tag 01FD,
-the two augmentations of the injective Čech double complex. -/
+/-- Every global resolution cycle has a common total-complex class with a coefficient cycle. -/
 theorem additiveCech_common_representative
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

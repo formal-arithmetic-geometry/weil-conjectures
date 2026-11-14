@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChange
 
-/-! # Dense-open comparison for prime-torsion module sheaves -/
+/-! # Dense-open comparison for prime-torsion module sheaves
+
+## References
+
+* Stacks Project, Lemma 0GJA and its proof.
+-/
 
 @[expose] public section
 
@@ -38,8 +43,8 @@ private theorem surjective_iff_of_bijective_square
     obtain ⟨x, rfl⟩ := hi.2 y
     exact ⟨x, hj.1 ((hcomm x).trans hy)⟩
 
-/-- The eight assertions are unchanged by extending the restriction from a dense open by zero.
-Source: Stacks Project, Lemma 0GJA and its proof, specialized to prime-torsion coefficients. -/
+/-- The eight assertions are unchanged by extending the restriction from a dense open by zero,
+for prime-torsion coefficients. -/
 theorem assertions_iff_dense_open_prime (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

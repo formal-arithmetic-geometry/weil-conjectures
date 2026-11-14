@@ -65,11 +65,12 @@ set_option linter.privateModule false
 
 /-! # Finite-ring compact-support site coherence
 
-Source: Stacks Project, more-etale.tex, Tags 0F7I, 0F7J and 0F7K;
-canonical site-square deduction in the DAG.
-
 The tower arrow below uses the specified open adjunct Gamma, not conjugation of
 an etale composition arrow. All inputs retain their bounded-below etale witness.
+
+## References
+
+* Stacks Project, Tags 0F7I, 0F7J, 0F7K
 -/
 
 @[expose] public noncomputable section

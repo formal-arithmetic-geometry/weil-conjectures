@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coherent compact-support comparison on coefficient systems
 
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the

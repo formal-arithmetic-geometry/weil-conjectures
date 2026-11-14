@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationArrowUniversal
 
 /-! # Sourcewise universality of the constant finite perfect transition
 
-Source: Stacks Project, Tags 06YY, 093J and 09C6.
+## References
+
+* Stacks Project, Tags 06YY, 093J and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -23,10 +25,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The explicit constant transition is universal after pullback to one etale source.
-
-Source: Stacks Project, Tags 06YY, 093J and 09C6.
--/
+/-- The explicit constant transition is universal after pullback to one etale source. -/
 theorem finitePerfectAdicEtaleConstant_universal (Y : Scheme.{t})
     {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) (U : Y.Etale) :

@@ -31,13 +31,15 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleExactPullbackSquarePasting
 
 /-! # Composition and pasting of actual normalized etale mates
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7K;
-Etale Cohomology, Tag 03S6; blueprint etale locality Step 1.
-
 All compactifications and all right adjunctions are arbitrary. The support/sum comparison
 is the existing constructed graph comparison. The helpers only transport the specified
 proper/open compositor and exchange to these fixed compactifications, then take their mates.
 No choice of an unrelated natural isomorphism occurs.
+
+## References
+
+* Stacks Project, More on Étale Cohomology, Tags 0F7J and 0F7K
+* Stacks Project, Étale Cohomology, Tag 03S6
 -/
 
 @[expose] public section
@@ -55,8 +57,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   canonicalEtaleCompactSupportComparison derivedEtaleLowerShriekUpperStarAdjunction
   rightDerivedLowerShriekOfCompactificationIso unboundedEtaleCompactSupportExchange
 
-/-- The specified proper/open compositor transported to three fixed compactifications.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The specified proper/open compositor transported to three fixed compactifications. -/
 noncomputable def etaleNormalizedSupportCompositor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} {e : U ⟶ X} {v : X ⟶ T}
@@ -70,8 +71,7 @@ noncomputable def etaleNormalizedSupportCompositor
     rightDerivedLowerShriekOfCompactificationCompIso A d (k.ofComp d) ≪≫
     rightDerivedLowerShriekOfCompactificationIso A (d.comp (k.ofComp d)) k
 
-/-- The actual proper/open exchange, followed by the canonical compactification comparison.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The actual proper/open exchange, followed by the canonical compactification comparison. -/
 noncomputable def etaleNormalizedSupportExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} {e : U ⟶ X} {e' : U' ⟶ X'}
@@ -96,8 +96,7 @@ noncomputable def etaleNormalizedSupportExchange
       (rightDerivedLowerShriekOfCompactificationIso A (c.ofIsPullback sq) d)
 
 /-- The right mate B on the entire unbounded category, for arbitrary fixed adjunctions.
-Its defining transpose is the inverse support exchange followed by the pulled-back counit.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+Its defining transpose is the inverse support exchange followed by the pulled-back counit. -/
 noncomputable def etaleNormalizedRightExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} {e : U ⟶ X} {e' : U' ⟶ X'}
@@ -347,8 +346,7 @@ attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 
 end
 
-/-- The normalized conjugates respect the actual compact-support compositor, at every K.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The normalized conjugates respect the actual compact-support compositor, at every K. -/
 theorem etaleNormalizedMates_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]
@@ -407,8 +405,7 @@ theorem etaleNormalizedMates_composition
   rw [hs] at hc
   simpa only [conjugateIsoEquiv_apply_hom, Iso.symm_hom] using hc
 
-/-- The identity normalization for every compactification and right adjunction.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The identity normalization for every compactification and right adjunction. -/
 theorem etaleNormalizedMates_identity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X] (c : Compactification (𝟙 X))
@@ -456,8 +453,7 @@ theorem etaleNormalizedMates_identity
   simp only [Category.assoc]
   rfl
 
-/-- The actual right exchange mates paste for an arbitrary further change of base.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The actual right exchange mates paste for an arbitrary further change of base. -/
 theorem etaleNormalizedMates_baseChange_pasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' U'' X X' X'' : Scheme.{u}}
@@ -517,8 +513,7 @@ theorem etaleNormalizedMates_baseChange_pasting
       rw [Z.map_id]
       exact Category.comp_id _
 
-/-- The canonical inverse-image square maps paste with their exact composition maps.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The canonical inverse-image square maps paste with their exact composition maps. -/
 theorem etaleNormalizedMates_pullback_pasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' U'' X X' X'' : Scheme.{u}}
@@ -544,7 +539,7 @@ theorem etaleNormalizedMates_pullback_pasting
   exact etaleExactPullbackSquarePasting A sq sq' sq'' K
 
 /-- The two normalized exchange squares imply the normalized square for the pasted base change.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+-/
 theorem etaleNormalizedMates_normalization_pasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' U'' X X' X'' : Scheme.{u}}
@@ -616,8 +611,8 @@ theorem etaleNormalizedMates_normalization_pasting
     (etaleNormalizedMates_baseChange_pasting A sq sq' sq'' c d k G G' G'' adj adj' adj'' K)
     (etaleNormalizedMates_pullback_pasting A sq sq' sq'' K) hw hz
 
-/-- The component of B is the adjunct specified in the node.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The component of the right mate `etaleNormalizedRightExchange` is its defining adjunct:
+the inverse support exchange followed by the pulled-back counit. -/
 theorem etaleNormalizedMates_exchange_adjunct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} [IsNoetherian U] [IsNoetherian U']
@@ -646,8 +641,7 @@ attribute [local irreducible] etaleNormalizedSupportExchange
 
 end
 
-/-- The normalization square is preserved by every Cartesian open restriction, at every K.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1. -/
+/-- The normalization square is preserved by every Cartesian open restriction, at every K. -/
 theorem etaleNormalizedMates_openRestriction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} [IsNoetherian U] [IsNoetherian U']

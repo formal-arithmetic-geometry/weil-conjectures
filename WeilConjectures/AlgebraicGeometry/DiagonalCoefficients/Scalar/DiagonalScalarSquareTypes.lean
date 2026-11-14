@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalDiagonalRight
 /-! # Shared types for normalized scalar squares
 
 These transparent aliases share the derived-category instances before specializing
-coefficient rings. Source: diagonal coefficient changes and their full-unit normalization.
+coefficient rings.
 -/
 
 @[expose] public noncomputable section

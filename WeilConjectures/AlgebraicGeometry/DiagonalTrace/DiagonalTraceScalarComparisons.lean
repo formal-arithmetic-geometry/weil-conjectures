@@ -24,7 +24,12 @@ import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
-/-! # Scalar restriction and direct-image comparisons for the diagonal trace -/
+/-! # Scalar restriction and direct-image comparisons for the diagonal trace
+
+## References
+
+* [Stacks Project, Tag 070G](https://stacks.math.columbia.edu/tag/070G)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -117,11 +122,7 @@ private def squareOfAcyclic
 
 -- Preserve the published names of the existential section-normalization witnesses.
 set_option linter.unusedVariables false in
-/-- Scalar restrictions retain the coefficient cones and the normalized push squares.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-scalar restriction before the Milnor step; Stacks Tag 070G for K-injective derivation.
--/
+/-- Scalar restrictions retain the coefficient cones and the normalized push squares. -/
 theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Homotopy normalization of a cartesian refinement
 
-Source: Stacks Project, Tags 0F7I and 0D6E.
+## References
+
+* Stacks Project, Tags 0F7I, 0D6E
 -/
 
 @[expose] public section
@@ -268,8 +270,7 @@ private lemma refinement_unit
       S.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K)) ht.symm
 
 /-- Pasting the exact-source unit with a single cartesian derived refinement is the
-homotopy unit of the explicitly transported sheaf map. The input map need not be invertible.
-Source: Stacks Project, Tags 0F7I and 0D6E. -/
+homotopy unit of the explicitly transported sheaf map. The input map need not be invertible. -/
 theorem compactificationRefinement_homotopyUnit
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}

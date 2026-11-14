@@ -15,7 +15,10 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 
 /-! # The derived pullback square on constant coefficients
 
-Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F.
+## References
+
+* Stacks Project, Sites and Sheaves, Tag 0H7J
+* Stacks Project, Derived Categories, Tag 015F
 -/
 
 @[expose] public section
@@ -117,8 +120,7 @@ private lemma sumSquareSingleIsos
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
   exact sumSquareSingleMaps L R L' R' τ M N N' P c.hom d.hom c'.hom d'.hom h
 
-/-- The canonical derived pullback square commutes with the specified constant comparisons.
-Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F. -/
+/-- The canonical derived pullback square commutes with the specified constant comparisons. -/
 theorem etaleSumExchangeConstantSquare
     (A : Type (u + 1)) [CommRing A]
     {U X X' : Scheme.{u}} (e : U ⟶ X) (w : X' ⟶ X) :

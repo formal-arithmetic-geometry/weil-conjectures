@@ -22,10 +22,12 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Unbounded localization of finite clopen module gluing
 
-Source: Stacks Project, derived.tex, Tags 015F and 05RU, finite-clopen application.
-
 The selected module data below are the fully specified sectionwise gluing data of the
-recorded dependency. No arbitrary derived equivalence replaces their normalization.
+recorded module gluing. No arbitrary derived equivalence replaces their normalization.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 015F, 05RU
 -/
 
 @[expose] public noncomputable section
@@ -45,40 +47,34 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenLocalization
 
-/-- The recorded module category in a universe containing the small site and index set.
-Source: Stacks 05RU. -/
+/-- The recorded module category in a universe containing the small site and index set. -/
 abbrev Modules {X : Scheme.{t}} (R : Sheaf (topology X) RingCat.{u}) :=
   ringedSiteModules.{max v w (t + 1)} R
 
-/-- The existing Mathlib abelian structure, with both site-size witnesses explicit.
-Source: Stacks 05RU. -/
+/-- The existing Mathlib abelian structure, with both site-size witnesses explicit. -/
 instance modulesAbelian {X : Scheme.{t}} (R : Sheaf (topology X) RingCat.{u}) :
     Abelian (Modules.{t, u, v, w} R) := by
   letI := AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify.{t, max v w} X
   letI := AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective.{t, max v w} X
   exact SheafOfModules.instAbelian R
 
-/-- The standard unbounded localization, with its full morphism universe.
-Source: Stacks 05RU. -/
+/-- The standard unbounded localization, with its full morphism universe. -/
 instance hasDerived {X : Scheme.{t}} (R : Sheaf (topology X) RingCat.{u}) :
     HasDerivedCategory.{max u (v + 1) (w + 1) (t + 2)} (Modules.{t, u, v, w} R) :=
   HasDerivedCategory.standard (Modules.{t, u, v, w} R)
 
-/-- The existing restriction, with no change to sections or scalar actions.
-Source: Stacks 015F. -/
+/-- The existing restriction, with no change to sections or scalar actions. -/
 def restriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     Modules.{t, u, v, w} R ⥤ Modules.{t, u, v, w} ((clopenRingRestriction j).obj R) :=
   clopenModuleRestriction j R
 
-/-- Additivity inherited from sectionwise restriction.
-Source: Stacks 015F. -/
+/-- Additivity inherited from sectionwise restriction. -/
 instance restrictionAdditive {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     (restriction.{t, u, v, w} j R).Additive := clopenModuleRestriction_additive j R
 
-/-- Exactness of restriction used in the degreewise and localized functors.
-Source: Stacks 015F. -/
+/-- Exactness of restriction used in the degreewise and localized functors. -/
 theorem restriction_exact {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     PreservesFiniteLimits (restriction.{t, u, v, w} j R) ∧
@@ -120,26 +116,22 @@ theorem restriction_exact {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
 
 attribute [local irreducible] SheafOfModules.pushforward
 
-/-- The finite-limit part of the preceding exactness assertion.
-Source: Stacks 015F. -/
+/-- The finite-limit part of the preceding exactness assertion. -/
 instance restrictionLimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     PreservesFiniteLimits (restriction.{t, u, v, w} j R) := (restriction_exact.{t, u, v, w} j R).1
 
-/-- The finite-colimit part of the preceding exactness assertion.
-Source: Stacks 015F. -/
+/-- The finite-colimit part of the preceding exactness assertion. -/
 instance restrictionColimits {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     PreservesFiniteColimits (restriction.{t, u, v, w} j R) := (restriction_exact.{t, u, v, w} j R).2
 
-/-- Degreewise restriction of unbounded complexes.
-Source: Stacks 015F. -/
+/-- Degreewise restriction of unbounded complexes. -/
 abbrev complexRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :=
   (restriction.{t, u, v, w} j R).mapHomologicalComplex (.up ℤ)
 
-/-- The existing exact-functor localization of restriction.
-Source: Stacks 015F. -/
+/-- The existing exact-functor localization of restriction. -/
 abbrev derivedRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     DerivedCategory (Modules.{t, u, v, w} R) ⥤
@@ -477,13 +469,13 @@ namespace CoordinateSums
 attribute [local instance] ComplexAssembly.piPreadditive
 noncomputable section
 
-/-- Equality transport of categories. Source: Stacks 015F, finite-product argument. -/
+/-- Equality transport of categories. -/
 def coordinateTransport {J : Type*} (D : J → Type*)
     [∀ i, Category (D i)] {i k : J} (h : i = k) : D i ⥤ D k := by
   subst k
   exact 𝟭 _
 
-/-- Insert a coordinate and zero objects elsewhere. Source: Stacks 015F. -/
+/-- Insert a coordinate and zero objects elsewhere. -/
 def coordinateInsertion {J : Type*} (D : J → Type*)
     [∀ i, Category (D i)] [∀ i, HasZeroObject (D i)] (i : J) : D i ⥤ ∀ k, D k := by
   classical
@@ -714,8 +706,7 @@ private theorem zeroRingModules
   have := Module.subsingleton (R.obj.obj U) (M.val.obj U)
   exact Subsingleton.elim _ _
 
-/-- An equivalence with a fixed forward functor, retaining its specified unit and counit.
-Source: Stacks 015F. -/
+/-- An equivalence with a fixed forward functor, retaining its specified unit and counit. -/
 abbrev FixedEquivalence {C D : Type*} [Category C] [Category D] (F : C ⥤ D) :=
   {e : Σ G : D ⥤ C, (𝟭 C ≅ F ⋙ G) × (G ⋙ F ≅ 𝟭 D) //
     ∀ X, F.map (e.2.1.hom.app X) ≫ e.2.2.hom.app (F.obj X) = 𝟙 _}
@@ -723,19 +714,18 @@ abbrev FixedEquivalence {C D : Type*} [Category C] [Category D] (F : C ⥤ D) :=
 namespace FixedEquivalence
 variable {C D : Type*} [Category C] [Category D] {F : C ⥤ D}
 
-/-- The inverse in the specified equivalence data. Source: Stacks 015F. -/
+/-- The inverse in the specified equivalence data. -/
 abbrev inverse (e : FixedEquivalence F) := e.val.1
-/-- The unit in the specified equivalence data. Source: Stacks 015F. -/
+/-- The unit in the specified equivalence data. -/
 abbrev unitIso (e : FixedEquivalence F) := e.val.2.1
-/-- The counit in the specified equivalence data. Source: Stacks 015F. -/
+/-- The counit in the specified equivalence data. -/
 abbrev counitIso (e : FixedEquivalence F) := e.val.2.2
-/-- The left triangle for the specified equivalence data. Source: Stacks 015F. -/
+/-- The left triangle for the specified equivalence data. -/
 theorem functor_unitIso_comp (e : FixedEquivalence F) : ∀ X,
     F.map (e.unitIso.hom.app X) ≫ e.counitIso.hom.app (F.obj X) = 𝟙 _ := e.property
 end FixedEquivalence
 
-/-- Package an existent, fully specified equivalence without expanding its witnesses.
-Source: Stacks 015F. -/
+/-- Package an existent, fully specified equivalence without expanding its witnesses. -/
 def FixedEquivalence.ofExists {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D)
     (P : ∀ (G : D ⥤ C), (𝟭 C ≅ F ⋙ G) → (G ⋙ F ≅ 𝟭 D) → Prop)
@@ -756,12 +746,10 @@ variable (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
   (R : Sheaf (topology X) RingCat.{u})
   (hcomm : ∀ (U : X.ProEtᵒᵖ) (a b : R.obj.obj U), a * b = b * a)
 
-/-- The tuple of component module categories of the recorded gluing theorem.
-Source: Stacks 015F. -/
+/-- The tuple of component module categories of the recorded gluing theorem. -/
 abbrev Components := ∀ i, Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)
 
-/-- The module equivalence with exactly the specified sectionwise gluing data.
-Source: Stacks 015F. -/
+/-- The module equivalence with exactly the specified sectionwise gluing data. -/
 def recordedEquivalence :
     FixedEquivalence (Functor.pi' (fun i ↦ restriction.{t, u, v, w} (j i) R)) :=
   (FixedEquivalence.ofExists _ _
@@ -773,25 +761,21 @@ attribute [irreducible] recordedEquivalence
 attribute [local irreducible] restriction
 
 /-- The sectionwise gluing inverse, determined by the full section and morphism formulas
-of the recorded dependency; only the proofs of its properties may be postponed.
-Source: Stacks 015F. -/
+of the recorded module gluing. -/
 def gluing : Components.{t, u, v, w} X I Y j R ⥤ Modules.{t, u, v, w} R :=
   (recordedEquivalence.{t, u, v, w} X I Y j hd hc R hcomm).inverse
 
-/-- The specified restriction-of-sections module unit, not an arbitrary automorphism.
-Source: Stacks 015F. -/
+/-- The specified restriction-of-sections module unit, not an arbitrary automorphism. -/
 def moduleUnit : 𝟭 _ ≅ (Functor.pi' (fun i ↦ restriction.{t, u, v, w} (j i) R)) ⋙
     gluing.{t, u, v, w} X I Y j hd hc R hcomm :=
   (recordedEquivalence.{t, u, v, w} X I Y j hd hc R hcomm).unitIso
 
-/-- The specified projection module counit.
-Source: Stacks 015F. -/
+/-- The specified projection module counit. -/
 def moduleCounit : gluing.{t, u, v, w} X I Y j hd hc R hcomm ⋙
     Functor.pi' (fun i ↦ restriction.{t, u, v, w} (j i) R) ≅ 𝟭 _ :=
   (recordedEquivalence.{t, u, v, w} X I Y j hd hc R hcomm).counitIso
 
-/-- The selected zero insertion from the same module-gluing data.
-Source: Stacks 015F. -/
+/-- The selected zero insertion from the same module-gluing data. -/
 def insertion (i : I) : Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R) ⥤
     Modules.{t, u, v, w} R :=
   CoordinateSums.coordinateInsertion
@@ -849,10 +833,7 @@ private theorem insertionOffDiagonal (i k : I) (hki : k ≠ i) (M) :
           ((clopenRingRestriction (j k)).obj R))).choose_spec
   exact hz.of_iso ((insertionCoordinate.{t, u, v, w} X I Y j hd hc R hcomm i k).app M)
 
-/-- Zero insertion is additive, since it inserts coordinatewise zeros and then applies
-an additive gluing functor. Source: Stacks 015F.
-Proof (step 1): addition is coordinatewise in the product. Zero insertion preserves
-it, and the sectionwise product gluing of the dependency preserves it as well. -/
+/-- Zero insertion is additive. -/
 theorem insertion_additive (i : I) :
     (insertion.{t, u, v, w} X I Y j hd hc R hcomm i).Additive := by
   let E := moduleEquivalence.{t, u, v, w} X I Y j hd hc R hcomm
@@ -864,10 +845,7 @@ theorem insertion_additive (i : I) :
 
 attribute [instance] insertion_additive
 
-/-- Exactness of insertion, needed for its unbounded localization.
-Source: Stacks 015F.
-Proof (step 1): the tuple kernel and cokernel have the given kernel and cokernel
-in coordinate i and zero elsewhere. The exact gluing equivalence preserves both. -/
+/-- Exactness of insertion, needed for its unbounded localization. -/
 theorem insertion_exact (i : I) :
     PreservesFiniteLimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) ∧
       PreservesFiniteColimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) := by
@@ -890,74 +868,60 @@ theorem insertion_exact (i : I) :
   · exact ShortComplex.exact_of_isZero_X₂ _
       (insertionOffDiagonal.{t, u, v, w} X I Y j hd hc R hcomm i k hki S.X₂)
 
-/-- Finite limits are preserved by the specified insertion.
-Source: Stacks 015F. -/
+/-- Finite limits are preserved by the specified insertion. -/
 instance insertionLimits (i : I) :
     PreservesFiniteLimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) :=
   (insertion_exact.{t, u, v, w} X I Y j hd hc R hcomm i).1
 
-/-- Finite colimits are preserved by the specified insertion.
-Source: Stacks 015F. -/
+/-- Finite colimits are preserved by the specified insertion. -/
 instance insertionColimits (i : I) :
     PreservesFiniteColimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) :=
   (insertion_exact.{t, u, v, w} X I Y j hd hc R hcomm i).2
 
-/-- The unbounded complexes over the ambient coefficient sheaf.
-Source: Stacks 05RU. -/
+/-- The unbounded complexes over the ambient coefficient sheaf. -/
 abbrev Complexes := CochainComplex (Modules.{t, u, v, w} R) ℤ
 
-/-- The component complex categories, with no boundedness hypothesis.
-Source: Stacks 05RU. -/
+/-- The component complex categories, with no boundedness hypothesis. -/
 abbrev ComplexComponents :=
   ∀ i, CochainComplex (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)) ℤ
 
-/-- The actual degreewise tuple restriction.
-Source: Stacks 015F. -/
+/-- The actual degreewise tuple restriction. -/
 abbrev complexFamily := Functor.pi' (fun i ↦ complexRestriction.{t, u, v, w} (j i) R)
 
-/-- Taking the nth module of each complex in a tuple.
-Source: Stacks 05RU. -/
+/-- Taking the nth module of each complex in a tuple. -/
 abbrev componentDegree (n : ℤ) := Functor.pi (fun i ↦ HomologicalComplex.eval
   (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)) (.up ℤ) n)
 
-/-- The actual restriction on homotopy categories.
-Source: Stacks 015F. -/
+/-- The actual restriction on homotopy categories. -/
 abbrev homotopyFamily := Functor.pi' (fun i ↦
   (restriction.{t, u, v, w} (j i) R).mapHomotopyCategory (.up ℤ))
 
-/-- The tuple of homotopy quotient functors.
-Source: Stacks 05RU. -/
+/-- The tuple of homotopy quotient functors. -/
 abbrev componentQuotient := Functor.pi (fun i ↦ HomotopyCategory.quotient
   (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)) (.up ℤ))
 
-/-- The ordinary unbounded derived category, in the standard localization universe.
-Source: Stacks 05RU. -/
+/-- The ordinary unbounded derived category, in the standard localization universe. -/
 abbrev Derived := DerivedCategory (Modules.{t, u, v, w} R)
 
-/-- The product of the ordinary component derived categories.
-Source: Stacks 05RU. -/
+/-- The product of the ordinary component derived categories. -/
 abbrev DerivedComponents :=
   ∀ i, DerivedCategory (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R))
 
-/-- The tuple of the canonical localization functors.
-Source: Stacks 05RU. -/
+/-- The tuple of the canonical localization functors. -/
 abbrev componentLocalization := Functor.pi (fun i ↦
   (DerivedCategory.Q : CochainComplex
     (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)) ℤ ⥤ _))
 
-/-- The tuple of the canonical exact-functor derived restrictions.
-Source: Stacks 015F. -/
+/-- The tuple of the canonical exact-functor derived restrictions. -/
 abbrev derivedFamily := Functor.pi' (fun i ↦ derivedRestriction.{t, u, v, w} (j i) R)
 
-/-- The zero insertion localized by the existing exact-functor construction.
-Source: Stacks 015F. -/
+/-- The zero insertion localized by the existing exact-functor construction. -/
 abbrev derivedInsertion (i : I) :
     DerivedCategory (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R)) ⥤
       DerivedCategory (Modules.{t, u, v, w} R) :=
   (insertion.{t, u, v, w} X I Y j hd hc R hcomm i).mapDerivedCategory
 
-/-- Shift every component by the same integer, using its existing signed derived shift.
-Source: Stacks 05RU. -/
+/-- Shift every component by the same integer, using its existing signed derived shift. -/
 abbrev componentShift (n : ℤ) := Functor.pi (fun i ↦ shiftFunctor
   (DerivedCategory (Modules.{t, u, v, w} ((clopenRingRestriction (j i)).obj R))) n)
 
@@ -968,8 +932,7 @@ attribute [local irreducible] DerivedCategory.Q Functor.mapDerivedCategory
 its prescribed module normalization. The existential data and the labeled conjuncts
 express the inverse triangulated functor directly on coordinate shifts and tuples
 of distinguished triangles,
-without selecting a second triangulated structure on any component derived category.
-Source: Stacks 015F and 05RU, finite-clopen application. -/
+without selecting a second triangulated structure on any component derived category. -/
 def LocalizationStatement : Prop :=
   ∃ complexGluing : (ComplexComponents.{t, u, v, w} X I Y j R) ⥤ (Complexes.{t, u, v, w} X R),
   ∃ degreeIso : ∀ n : ℤ, complexGluing ⋙ HomologicalComplex.eval (Modules.{t, u, v, w} R) (.up
@@ -1162,37 +1125,8 @@ def LocalizationStatement : Prop :=
     Nonempty ((Derived.{t, u, v, w} X R) ≌ Discrete PUnit.{1}) ∧ Nonempty ((DerivedComponents.{t,
         u, v, w} X I Y j R) ≌ Discrete PUnit.{1}))
 
-/-- Finite-clopen degreewise gluing and its normalized unbounded derived localization.
-Source: Stacks 015F and 05RU, the finite-product argument.
-
-Proof, following the node's nine steps:
-1. The recorded module equivalence gives additive exact restriction and gluing;
-   insertion is exact because kernels and cokernels in a product are coordinatewise.
-2. Apply these functors degreewise. Naturality of the module unit and counit for
-   differentials gives chain maps. Their module triangle equations hold in every
-   degree. Additivity preserves the equation f-g = dh+hd, giving homotopy descent.
-3. Exact-functor cohomology comparison gives both displayed cohomology isomorphisms.
-   The module equivalence detects zero cohomology and invertible cohomology maps,
-   proving acyclicity and quasi-isomorphism detection.
-4. The finite product of the component localization functors is a localization, including the empty
-  product. Descend degreewise
-   restriction and gluing by the localization universal property.
-5. Descend the specified degreewise unit and counit and their inverses. Faithfulness
-   of precomposition with a localization descends both triangle equations; the
-   normalization fields give the exact composites after precomposition.
-6. Exact-functor derived restriction is triangulated. For gluing, finite-coordinate
-   cone triangles glue to the cone triangle of the glued map: the differential
-   matrix is (d, f; 0, -d). The signed shift constraints and their coherences hold
-   degreewise and descend by uniqueness of natural-transformation localization.
-7. Combine the complex cohomology comparison with the factors through Q and
-   descend the natural isomorphism; this includes inverses of quasi-isomorphisms.
-8. Localize the module insertion identities. The tuple is the finite biproduct of
-   its zero insertions; gluing, an equivalence, preserves this biproduct. This gives
-   both bilimit bicones with the identity and gluing as their vertices.
-9. Coordinate zeros and coordinate inverses give joint detection. Empty sites and
-   zero ring sheaves have only zero modules, hence zero complexes; localizing their
-   already invertible maps gives the one-object, one-arrow category. An empty
-   covering forces X empty. No boundedness or nonempty-index hypothesis is used. -/
+/-- Finite-clopen degreewise gluing and its normalized unbounded derived localization,
+with no boundedness or nonempty-index hypothesis. -/
 theorem clopen_unbounded_derived_localization :
     LocalizationStatement.{t, u, v, w} X I Y j hd hc R hcomm := by
   classical

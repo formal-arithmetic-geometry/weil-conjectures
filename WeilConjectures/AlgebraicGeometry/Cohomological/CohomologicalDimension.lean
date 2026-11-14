@@ -82,11 +82,13 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 /-!
 # Prime-power cohomological dimension
 
-Source: blueprint `definition-cohomological-dimension`, order 1506; Stacks Project, Tag 0F10.
-
 The common annihilator diagram gives the canonical filtered-colimit torsion condition
 on both sites. Its local sectionwise form is also stated for the pro-étale site.
-The comparison and finiteness statements are the corresponding blueprint clauses.
+The comparison and finiteness statements are also proved here.
+
+## References
+
+* Stacks Project, Tag 0F10
 -/
 
 @[expose] public section
@@ -779,15 +781,7 @@ theorem relativeCohomologicalDimension_eq_etale
     exact adj.isIso_counit_app_iff_mem_essImage.mpr ⟨F, ⟨Iso.refl _⟩⟩
 
 /-- Over a field of finite `ℓ`-cohomological dimension, a finite-type morphism between
-finite-type schemes over that field has finite relative dimension.
-Source: blueprint `definition-cohomological-dimension`, final sentence; Stacks Tag 0F10. Proof:
-finite-type schemes over a field are Noetherian, hence
-qcqs; every morphism from such a source is qcqs, since inverse images of affine opens, also for its
-diagonal, are quasi-compact opens of a Noetherian scheme. A locally prime-power torsion sheaf
-is torsion by the local-section criterion of `definition-torsion-sheaves--3`.
-Apply `theorem-results-from-etale-theory--6` to the underlying étale torsion sheaves and
-use the relative comparison to transport its
-uniform vanishing bound to classical prime-power torsion sheaves. -/
+finite-type schemes over that field has finite relative dimension. -/
 theorem relativeCohomologicalDimension_lt_top_of_finiteType
     (ℓ : ℕ) (hℓ : Nat.Prime ℓ) {K : Type u} [Field K]
     (hK : cohomologicalDimension ℓ hℓ (Spec (.of K)) < ⊤)
@@ -820,17 +814,7 @@ theorem relativeCohomologicalDimension_lt_top_of_finiteType
         ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))).symm
 
 /-- Over a field of finite `ℓ`-cohomological dimension, every finite-type scheme has
-finite absolute dimension.
-Source: blueprint `definition-cohomological-dimension`, final sentence; Stacks Tag 0F10. Proof: use
-`theorem-results-from-etale-theory--6` for a
-relative bound e on the structure morphism. The field hypothesis and the comparison give an absolute
-bound c for prime-power torsion sheaves on the field. By `lem-sbc-qcqs-higher-images-prime-torsion`,
-all higher direct images are again locally prime-power torsion, using exact conservative geometric
-stalks and filtered colimits to identify this with the kernel-colimit convention. Apply
-`lem-sc-leray-vanishing-bound` to obtain the bound c + e, then use the absolute
-comparison. Finite type over a field gives a Noetherian source, so the scheme and
-its structure morphism are qcqs, as in the relative finiteness proof.
-Empty schemes satisfy the same bound. -/
+finite absolute dimension. -/
 theorem cohomologicalDimension_lt_top_of_finiteType
     (ℓ : ℕ) (hℓ : Nat.Prime ℓ) {K : Type u} [Field K]
     (hK : cohomologicalDimension ℓ hℓ (Spec (.of K)) < ⊤)

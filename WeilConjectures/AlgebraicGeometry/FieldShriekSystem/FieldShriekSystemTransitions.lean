@@ -14,12 +14,15 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient-system comparison laws
 
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
 specified constructions and their laws as conclusions, rather than assuming the
 comparison or choosing a lift of its finite evaluations.
+
+## References
+
+* Zheng, 4.1
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +72,7 @@ structure QuotientRestriction (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m 
     HEq (((ordinary.hom.app N).val.app U) x) x
 
 /-- Reduction is the actual derived strict transition transposed under finite scalar
-adjunction, after exact localization of the section-identity restriction comparison.
-Source: blueprint (2), proof step 8; Zheng 4.1. -/
+adjunction, after exact localization of the section-identity restriction comparison. -/
 @[irreducible] def systemReduction (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m ≤ n)
     (q : QuotientRestriction P E T v) (N : SpTowerShriek.D P.coefficients.l E.val T) :
     (scalarExtensionFunctor (SpTowerCalculus.quotient P.coefficients.l E.val v) T).obj

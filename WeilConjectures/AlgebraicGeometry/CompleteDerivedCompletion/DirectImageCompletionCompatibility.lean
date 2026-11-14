@@ -11,6 +11,10 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRe
 
 /-!
 # Reduction and completion compatibility for direct image
+
+## References
+
+* Stacks Project, Tags 099N, 0944
 -/
 
 @[expose] public noncomputable section
@@ -86,33 +90,9 @@ private theorem directImage_completion_compatibility_eq
   rw [← hs]
 
 /-- Reduction, completion-unit compatibility, and reconstruction for direct image:
-assertions (2) and (3) of proposition-proper-base-change-complete-integral--1.
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/
-prop-weil-pbc-direct-image-limits.proof.md, proofs (2) and (3); Stacks Tags 099N, 0944.
-
-Proof. (2) Let `K` be represented by a K-injective complex `I`. For
-`B_n = [O_{E,Y} --π^n--> O_{E,Y}]` in degrees `-1, 0`,
-proposition-proper-base-change-complete-integral and lemma-reduction-derived-nakayama--1 identify
-`I ⊗ f^*B_n` with the `n`-th reduction of `I`; after `f_*` the resulting tower is strictly the
-reduction tower of `f_*I`. Each `I ⊗ f^*B_n` is
-K-injective, so every evaluation of the mate
-`pushReductionMap` at `K` is an isomorphism, and levelwise detection in
-proposition-proper-base-change-complete-integral shows `(pushReductionMap).app K` is invertible
-(this is lem-weil-pbc-direct-image-completion-compatibility-isIso). The
-finite-free chain map `θ_{I,B_n}` of lem-pbc-bounded-free-projection-chain-model
-identifies the level-`n` map with the projection-formula morphism, and its strict naturality in
-`B_n` gives the
-transition and quotient-unit squares.
-(3) Let `i_K : cK → red K` be the reduction augmentation. The square
-lem-weil-pbc-direct-image-completion-unit-square expresses `f_*` of this augmentation
-through the constant-tower comparison `χ_K`. Apply `Rlim` and the naturality of
-`pushLimitIso`; by lem-weil-pbc-constant-tower-pushforward-normalization,
-`Rlim(χ_K)⁻¹ ∘ a_{cK}` is the identity of `Rf_*K` under `Rlim ∘ c ≅ 1`. With the definition
-of `kappa` this is the displayed equation. If `K` is derived complete, `kappa_K` is invertible; in
-the equation `pushLimitIso`
-and `Rlim(pushReductionMap K)` are invertible, so `kappa` of `Rf_*K` is invertible, i.e.
-`Rf_*K` is derived complete, and `Rf_* kappa_K` followed by `pushLimitIso` gives
-`Rf_*K ≅ Rlim(Rf_*^Tow red K)`. -/
+`pushReductionMap` is invertible and compatible with the transition and quotient-unit squares;
+`Rf_*` of the completion unit `kappa` is related to `kappa` of `Rf_*K` through `pushLimitIso`;
+and if `K` is derived complete, then so is `Rf_*K`, with `Rf_*K ≅ Rlim(Rf_*^Tow red K)`. -/
 theorem directImage_completion_compatibility :
     (∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       IsIso ((pushReductionMap l E f).app K)) ∧

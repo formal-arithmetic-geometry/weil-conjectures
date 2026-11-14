@@ -39,7 +39,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCompletion
 
-/-! # Completion of continuous integral coefficients -/
+/-! # Completion of continuous integral coefficients
+
+## References
+
+* Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1).
+-/
 
 @[expose] public section
 
@@ -230,8 +235,7 @@ noncomputable def continuousCoefficientResidueCone (l : ℕ) [Fact l.Prime]
         intro x
         rfl }
 
-/-- Pointwise lifting of compatible residues makes the continuous residue cone limiting.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- Pointwise lifting of compatible residues makes the continuous residue cone limiting. -/
 theorem continuousCoefficientResidueCone_isLimit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) : Nonempty (CategoryTheory.Limits.IsLimit
@@ -315,9 +319,7 @@ theorem continuousCoefficientResidueCone_isLimit (l : ℕ) [Fact l.Prime]
       (e.apply_symm_apply (b x))
 
 /-- Continuous integral coefficients are the limit of the positive constant residue tower,
-with constants fixed and projections given by pointwise reduction.
-
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1). -/
+with constants fixed and projections given by pointwise reduction. -/
 theorem continuousCoefficientCompletion (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) :

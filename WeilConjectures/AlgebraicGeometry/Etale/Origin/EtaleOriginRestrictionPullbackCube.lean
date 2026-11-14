@@ -14,7 +14,12 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarR
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarDirectNormalization
 
-/-! # Intrinsic realization and scalar pullback coherence -/
+/-! # Intrinsic realization and scalar pullback coherence
+
+## References
+
+* Stacks Project, Tags 03EL, 07A6, 0D6D, 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -427,9 +432,7 @@ private theorem origin_restriction_inv_app
     Category.id_comp, Category.assoc]
   rfl
 
-/-- The restriction/realization comparison commutes with geometric pullback.
-Source: Stacks 03EL, 0D6D and 07A6; restriction part of the coefficient comparison
-in Tag 0E48. -/
+/-- The restriction/realization comparison commutes with geometric pullback. -/
 theorem etaleOriginRestrictionPullbackCube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)

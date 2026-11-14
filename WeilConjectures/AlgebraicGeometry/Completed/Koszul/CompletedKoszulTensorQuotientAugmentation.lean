@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorQ
 
 /-! # The finite strict completed Koszul tensor augmentation
 
-Source: Stacks Project, Tags 091N and 099M.
+## References
+
+* Stacks Project, Tags 091N and 099M
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +27,7 @@ variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- There is a uniquely normalized strict augmentation before taking any products.
 The second clause prescribes zero on every summand of nonzero exterior degree.
-There is no K-flatness, pro-zero, inverse-limit, or Roos assertion here.
-
-Source: Stacks Project, Tags 091N and 099M, the degree-zero augmentation in the
-proof of lemma-naive-completion. -/
+There is no K-flatness, pro-zero, inverse-limit, or Roos assertion here. -/
 theorem completedKoszulTensorQuotientAugmentation
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     ∃! β : completedKoszulTensorTower T d r a ⟶

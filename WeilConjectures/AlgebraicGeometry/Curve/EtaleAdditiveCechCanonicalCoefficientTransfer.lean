@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 /-!
 # Canonical global transfer with a coefficient morphism
 
-Source: Stacks Project, Tags 0A50, 03F3, 01F8 and 01FB.
+## References
+
+* Stacks Project, Tags 0A50, 03F3, 01F8, 01FB
 -/
 
 @[expose] public section
@@ -106,10 +108,7 @@ private theorem section_adjunction_transfer {X Y : Scheme.{u}} (g : Y ⟶ X)
   exact congrArg (AddCommGrpCat.uliftZMultiplesAddEquiv _) hs
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical global transfer identity including an adjoint coefficient morphism.
-Source: Stacks Project, Tags 0A50 and 03F3; this is the pointwise cocycle calculation
-used in the global transfer theorem.
--/
+/-- The canonical global transfer identity including an adjoint coefficient morphism. -/
 theorem resolutionSection_canonical_coefficient_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

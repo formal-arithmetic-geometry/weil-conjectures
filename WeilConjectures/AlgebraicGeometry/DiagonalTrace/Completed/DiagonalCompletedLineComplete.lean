@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalComplet
 
 /-! # Completeness of a completed-coefficient line
 
-Source: Stacks Tags 099L, 099M and 091Q, and the diagonal trace proof, paragraph (1).
+## References
+
+* Stacks Project, Tags 099L, 099M, 091Q
 -/
 
 @[expose] public noncomputable section
@@ -24,11 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- A locally free rank-one module over the actual completed Z_l coefficient sheaf
-has a derived l-complete underlying constant-coefficient complex in degree zero.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-and `sk-prop-diagonal-tower-limit.proof.md`, completed coefficients;
-Stacks Tags 099L, 099M and 091Q. -/
+has a derived l-complete underlying constant-coefficient complex in degree zero. -/
 theorem diagonalCompletedLine_complete (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [IsNoetherian S] [DiagonalTraceLocalizations l S]
     (L : DiagonalCompleted l S) (hL : L.IsFiniteLocallyFreeOfRank 1) :

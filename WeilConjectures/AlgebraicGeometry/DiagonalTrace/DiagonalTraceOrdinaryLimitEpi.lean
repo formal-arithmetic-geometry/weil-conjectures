@@ -108,9 +108,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 open SpTowerClasses
 
-/-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison.
-
--/
+/-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison. -/
 theorem diagonalOrdinaryRlim_isIso_of_epi (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] (L : DiagonalRlim (DiagonalMod l T))
     (H : DiagonalSystems l T)

@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 
 /-! # Proper postcomposition on compactification models
 
-Source: Stacks Project, Tags 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -88,8 +90,7 @@ private lemma chosen_to_model
   unfold rightDerivedLowerShriekIso
   rfl
 
-/-- A proper postcomposition only composes the two proper direct images.
-Source: Stacks Project, Tags 0F7I and 0F7J. -/
+/-- A proper postcomposition only composes the two proper direct images. -/
 theorem graph_proper_postcomposition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}}

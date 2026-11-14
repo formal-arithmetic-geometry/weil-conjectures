@@ -12,6 +12,10 @@ import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 import Mathlib.NumberTheory.Padics.ProperSpace
 
 /-! Continuous-function coordinates for completed coefficients.
+
+## References
+
+* Stacks Project, Tags 03CO, 0906
 -/
 
 @[expose] public noncomputable section
@@ -72,10 +76,7 @@ private theorem positiveLift_exists (l : ℕ) [Fact l.Prime]
     simpa only [Function.comp_def, e, hf] using (a n).continuous)
   exact ⟨⟨f, hc⟩, hf⟩
 
-/-- Completed scalar sections are continuous p-adic functions, naturally in the test object.
-Source: `CompletedAffineFreeLocalDual.lean`, coefficient-identification step of the
-proof of `completedAffineFree_localDual_detect`; finite constant sheaves and sectionwise
-limits, Stacks Tags 03CO and 0906. -/
+/-- Completed scalar sections are continuous p-adic functions, naturally in the test object. -/
 theorem completedAffineCoefficientModel_exists (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Nonempty (CompletedAffineCoefficientModel l X) := by
   classical

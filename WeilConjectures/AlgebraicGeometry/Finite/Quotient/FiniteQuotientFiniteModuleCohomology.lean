@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupp
 
 /-! # Finite etale-local cohomology of the successor coefficient quotient
 
-Source: Stacks Project, Tags 094I, 094H and 09C2.
+## References
+
+* Stacks Project, Tags 094I, 094H, 09C2
 -/
 
 @[expose] public noncomputable section
@@ -28,13 +30,8 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 -- Retain the published named chart-map binder in the conclusion.
 set_option linter.unusedVariables false in
-/-- The successor quotient has bounded finite etale-local cohomology. This
-statement constructs only local models of individual cohomology sheaves, not a
-complex model or any differentials.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I) and
-lemma-locally-constant-tensor (094H); proetale.tex,
-lemma-describe-constructible-complexes (09C2). -/
+/-- The successor quotient has bounded finite etale-local cohomology: each cohomology
+sheaf individually has local models. -/
 theorem finiteQuotient_finiteModule_cohomology_succ
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

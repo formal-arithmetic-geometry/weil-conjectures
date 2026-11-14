@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import WeilConjectures.AlgebraicGeometry.Affine.AffineKFlatResiduePullbackModel
 /-! # Derived residue model from affine free sections
 
-Source: Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098.
+## References
+
+* Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ set_option autoImplicit false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- A K-flat finite free section complex represents the derived residue pullback.
-Source: Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098. -/
+/-- A K-flat finite free section complex represents the derived residue pullback. -/
 theorem affineFree_residueSections_derivedModel
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

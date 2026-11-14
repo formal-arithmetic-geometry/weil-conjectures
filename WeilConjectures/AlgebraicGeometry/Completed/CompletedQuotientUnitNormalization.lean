@@ -15,7 +15,9 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Normalization of the actual completed quotient unit
 
-Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
+## References
+
+* Stacks Project, Tags 03CR, 05RR, 06YY, 0941, 099M
 -/
 
 @[expose] public noncomputable section
@@ -149,8 +151,7 @@ attribute [local irreducible] completedReductionTower completedReductionTowerCou
   completedReductionModuleUnit completedReductionTowerUnit
 
 /-- The ordinary strict quotient-limit unit, constructed from the constant/limit
-adjunction and the specified quotient augmentation.
-Source: Stacks Tags 099M and 0941. -/
+adjunction and the specified quotient augmentation. -/
 @[irreducible]
 def completedQuotientOrdinaryUnit (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -175,10 +176,9 @@ private theorem completedQuotientOrdinaryUnit_projection (T : Scheme.{t})
   unfold completedQuotientOrdinaryUnit
   exact ordinaryAdjUnit_projection _ _ P q (op n)
 
-/-- The specified actual quotient-completion unit as a single natural transformation.
-Its construction is exactly the derived adjunction unit followed by derived inverse
-limit of the fixed quotient augmentation.
-Source: Stacks Tags 099M and 0941. -/
+/-- The specified actual quotient-completion unit as a single natural transformation:
+the derived adjunction unit followed by derived inverse limit of the fixed quotient
+augmentation. -/
 @[irreducible]
 def completedQuotientCompletionUnit (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
@@ -235,9 +235,7 @@ private theorem actualCompletionUnit_normalization (T : Scheme.{t})
 
 set_option linter.style.haveILetI false in
 /-- On a K-flat representative the actual quotient-completion unit is the localized
-strict quotient-unit cone followed by the universal inverse-limit comparison.
-
-Source: Stacks Tags 06YY, 099M and 0941. -/
+strict quotient-unit cone followed by the universal inverse-limit comparison. -/
 theorem completedQuotientUnitNormalization
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ)

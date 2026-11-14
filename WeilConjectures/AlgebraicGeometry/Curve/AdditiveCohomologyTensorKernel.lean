@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyBaseChangeSquare
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 
-/-! # Kernel of additive cohomology tensor pullback -/
+/-! # Kernel of additive cohomology tensor pullback
+
+## References
+
+* Stacks Project, Tags 02KH and 03P2.
+-/
 
 @[expose] public section
 
@@ -23,8 +28,7 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.IsCurve
 
-/-- The tensor-linear extension of canonical additive pullback has trivial kernel.
-Source: Stacks Project, Tags 02KH (finite affine cover proof) and 03P2. -/
+/-- The tensor-linear extension of canonical additive pullback has trivial kernel. -/
 theorem additive_cohomology_tensor_kernel
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']

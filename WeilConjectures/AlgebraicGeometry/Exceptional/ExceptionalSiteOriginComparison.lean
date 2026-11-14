@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInterfaces
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSiteOriginComparisonCore
 
-/-! # Bounded-below site comparison on strict coefficient systems -/
+/-! # Bounded-below site comparison on strict coefficient systems
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tag 09B1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,14 +29,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
 
-/-- Construct comparison at a fixed etale evaluation package, and restrict its actual
-unit and counit to bounded-below objects and finite etale origins.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.
-
-The core comparison theorem supplies the actual system comparison, its equivalence,
-and all levelwise unit, counit, and inverse-origin assertions. Exact evaluation
-preserves the common lower bound, while the origin witness in `C.origin` is already
-the required finite-level origin witness. -/
+/-- The site comparison at a fixed etale evaluation package, with its actual unit and counit
+restricted to bounded-below objects and finite etale origins. -/
 theorem exceptionalSiteOriginComparison
     (O : Type (u + 1)) [CommRing O] (ell : O)
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]

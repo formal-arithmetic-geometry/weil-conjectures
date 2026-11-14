@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
 /-! # Single-module comparison and composition of two pullbacks
 
-Source: Stacks Project, Tag 0D5S, and the defining left-derived lift factorization.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section
@@ -87,9 +89,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 200000 in
 -- The selected derived counits have large dependent types.
-/-- Compatibility with composition of two morphisms, before comparing square paths.
-Source: Stacks Project, Tag 0D5S, and `Functor.leftDerived_fac_app` applied to the
-factorization in `exists_derivedPullbackComposition`. -/
+/-- Compatibility with composition of two morphisms, before comparing square paths. -/
 theorem canonicalSinglePullbackComposition
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules) :
     ((Classical.choose (Classical.choose_spec (Classical.choose_spec

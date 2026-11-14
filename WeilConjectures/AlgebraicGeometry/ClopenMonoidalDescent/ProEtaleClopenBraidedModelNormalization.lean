@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 
 /-! # Braided lift of clopen restriction with its model square
 
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 0G7D, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -92,9 +94,7 @@ attribute [local instance 20000] instMonoidalCategoryHomologicalComplexIntUp_wei
 
 /-- The summand-normalized total comparison descends to a braided structure on the
 specified exact derived restriction, satisfying the K-flat computation square and
-canonical degree-zero unit equation.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT. -/
+canonical degree-zero unit equation. -/
 theorem clopen_braided_model_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

@@ -45,7 +45,9 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Transport of completed quotient and Koszul presentations
 
-Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
+## References
+
+* Stacks Project, Tags 03CR, 05RR, 06YY, 099M and 0941
 -/
 
 @[expose] public noncomputable section
@@ -356,8 +358,7 @@ private theorem comparisonOrdinaryCompletionUnit (T : Scheme.{t})
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- A common coefficient presentation of both completed objects and their fixed units.
-Source: Stacks Tags 03CR, 05RR, 06YY, 099M and 0941. -/
+/-- A common coefficient presentation of both completed objects and their fixed units. -/
 structure CompletedConstantPresentationData
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) where
   equivalence : d.derived T ≌ ConstantCompletion.D
@@ -390,9 +391,7 @@ structure CompletedConstantPresentationData
 -- Keep the fixed derived-category structures inlined at the published interfaces.
 set_option linter.style.haveILetI false in
 /-- The coefficient equivalence preserves the two completion objects and their specified units.
-The Koszul clause uses an actual list generating the adic ideal.
-
-Source: Stacks Tags 03CR, 05RR, 06YY, 099M and 0941. -/
+The Koszul clause uses an actual list generating the adic ideal. -/
 theorem completed_constant_presentation_transport
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     Nonempty (CompletedConstantPresentationData T d) := by

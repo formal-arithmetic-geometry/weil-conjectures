@@ -43,7 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The actual composite single comparison is unchanged by the cached ordinary
-coefficient presentation. Source: exact single-complex comparison. -/
+coefficient presentation. -/
 theorem finiteOrdinarySingleComparison_eq (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     (M : OrdinaryEtaleModules (FiniteRing l E n) T) :

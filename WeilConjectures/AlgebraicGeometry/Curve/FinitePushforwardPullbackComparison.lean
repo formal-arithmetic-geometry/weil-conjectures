@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Whiskering
 
 /-! # Finite pushforward comparison for curve assertions
 
-Source: Stacks Project, Lemma 0A5D.
+## References
+
+* Stacks Project, Lemma 0A5D
 -/
 
 @[expose] public section
@@ -97,7 +99,8 @@ private theorem finite_pullback_properties
   apply comparison_properties _ _ _ _ hl hr
   exact congrArg DFunLike.coe (Etale.cohomology_edgeMap_baseChange sq F q)
 
-/-- Source: Stacks Project, Lemma 0A5D, base-change and restriction steps. -/
+/-- The base-change and restriction comparison steps of the transfer of the curve assertions
+along a finite pushforward. -/
 theorem IsCurve.finite_pushforward_pullback_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]

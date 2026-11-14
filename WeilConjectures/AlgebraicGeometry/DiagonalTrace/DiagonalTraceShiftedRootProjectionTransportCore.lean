@@ -113,10 +113,8 @@ private theorem transport_shifted_cone
     ← (shiftFunctor T j).map_comp_assoc, h]
 
 /--
-The post-shift-isomorphism core of generic root-projection transport.  Removing
- the common source shift isomorphism makes this the finite projection transport
- equation itself; the enclosing theorem reinstates that common isomorphism.
-
+The core of generic root-projection transport after removing the common source shift
+isomorphism: the finite projection transport equation itself.
 -/
 theorem diagonalTrace_shiftedRootProjection_transport_core
     {A : Type*} {B : Type*} {C : Type*}

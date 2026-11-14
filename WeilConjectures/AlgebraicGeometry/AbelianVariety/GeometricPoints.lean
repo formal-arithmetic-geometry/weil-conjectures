@@ -147,18 +147,10 @@ section BaseChange
 
 variable {K' : Type u} [Field K'] [Algebra K K']
 
-/-- Multiplication by `d` prime to the characteristic
-is étale (the geometric fibre of `A[n]`).
-
-Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
-prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base change
-`A[n]_{K'}` is, as a scheme over `K'`, the disjoint union of `n ^ (2 * g)` copies of `Spec K'`:
-it is the constant scheme on a set with `n ^ (2 * g)` elements.
-
-`A[n]` is finite étale of order `n ^ (2 * g)` (`AlgebraicGeometry.etale_torsionSubgroupScheme`,
-`AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`), the order is invariant under base change,
-and a finite étale scheme over a separably closed field is a disjoint union of copies of the
-base (`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`). -/
+/-- Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let
+`n` be prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base
+change `A[n]_{K'}` is, as a scheme over `K'`, the disjoint union of `n ^ (2 * g)` copies of
+`Spec K'`: it is the constant scheme on a set with `n ^ (2 * g)` elements. -/
 theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
     (hn : 0 < n) (hnp : ¬ p ∣ n) :
     ∃ (S : Type u) (_ : Finite S), Nat.card S = n ^ (2 * IsAbelianVariety.dim A) ∧
@@ -172,20 +164,10 @@ theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [C
   refine ⟨S, hS, ?_, e⟩
   rw [hcard, Scheme.Hom.finrankΓ_pullback_snd, finrankΓ_torsionSubgroupScheme n hn]
 
-/-- Multiplication by `d` prime to the characteristic
-is étale (the geometric points of `A[n]`).
-
-Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
-prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
+/-- Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let
+`n` be prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
 `n`-torsion of the group `A(K')` of `K'`-valued points of `A` (the morphisms `Spec K' ⟶ A` over
-`K`) is `(ℤ/nℤ) ^ (2 * g)`.
-
-`A(K')` is the group of `K'`-points of the abelian variety `A_{K'}`
-(`AlgebraicGeometry.Scheme.pointsAddEquivBaseChangePoints`), hence divisible. For a prime
-`ℓ ∣ n`, the `ℓ`-torsion of `A(K')` is the set of `K'`-points of `A[ℓ]`
-(`AlgebraicGeometry.torsionByPointsEquiv`), that is of the finite étale `A[ℓ]_{K'}`, which has
-`ℓ ^ (2 * g)` of them (`AlgebraicGeometry.card_points_eq_finrankΓ`); then
-`AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime` concludes. -/
+`K`) is `(ℤ/nℤ) ^ (2 * g)`. -/
 theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
     (hn : 0 < n) (hnp : ¬ p ∣ n) :
     Nonempty (AddSubgroup.torsionBy

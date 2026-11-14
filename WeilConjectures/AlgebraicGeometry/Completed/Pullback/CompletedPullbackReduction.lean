@@ -50,7 +50,15 @@ import WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedCon
 /-! # Finite reduction of completed pullback
 
 The canonical finite interface is in `CompletedPullbackReductionData`.
-Source: Stacks Tag 099N (5).
+
+## Implementation details
+
+* `projection_surjective` is kept in this module for the modules that read it through
+  `import all` of this module.
+
+## References
+
+* Stacks Project, Tag 099N (5)
 -/
 
 @[expose] public noncomputable section
@@ -65,9 +73,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
 open AlgebraicGeometry.ProEtale in
-/-- Every finite coefficient projection is sectionwise surjective. Kept here, as in the
-published module, for the modules that read it through `import all` of this module.
-Source: Stacks Tag 099N. -/
+/-- Every finite coefficient projection is sectionwise surjective. -/
 private theorem projection_surjective {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{u}) (n : ℕ) (U : T.ProEtᵒᵖ) :
     Function.Surjective ((completedReductionProjection T d n).hom.app U) := by
@@ -148,9 +154,7 @@ private theorem adjunct_composite_natural
 /-- Reduction of completed pullback, including the actual projection-induced arrows,
 functoriality, transition maps, normalization, quotient cocycle and equal-index unit.
 The parameter n denotes the positive level n+1; representatives are arbitrary.
-No boundedness, nonempty scheme, nonzero ring, or nonempty generator tuple is required.
-
-Source: blueprint order 1262; Stacks Tag 099N (5). -/
+No boundedness, nonempty scheme, nonzero ring, or nonempty generator tuple is required. -/
 theorem completedPullback_reduction
     (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal)
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))

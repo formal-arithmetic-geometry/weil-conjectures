@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 
-/-! # The native adic bidual evaluation map -/
+/-! # The native adic bidual evaluation map
+
+## References
+
+* Stacks Project, Tag 03EO
+-/
 
 @[expose] public section
 
@@ -20,16 +25,15 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.ProEtale
 
-/-- Native bidual evaluation is the transpose of the identity of the dual.
-Source: Stacks 03EO, the tensor-Hom adjunction. -/
+/-- Native bidual evaluation is the transpose of the identity of the dual under the tensor-Hom
+adjunction. -/
 noncomputable def adicNativeBidual {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) :
     M ⟶ (AdicSheaf.ihom ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X))).obj
       (AdicSheaf.unit l X) :=
   Mod.transpose (𝟙 ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X)))
 
-/-- The native bidual map is the transpose of braided evaluation.
-Source: Stacks 03EO. -/
+/-- The native bidual map is the transpose of braided evaluation. -/
 theorem adicNativeBidual_transpose {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) :
     (adicNativeBidual M).hom ▷ ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X)).X ≫

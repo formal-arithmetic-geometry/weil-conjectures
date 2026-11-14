@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Site comparison for cartesian open base change
 
-Source: Stacks Project, Tags 09AF and 0F7B.
+## References
+
+* Stacks Project, Tags 099R, 09AF, 0B65, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +42,7 @@ set_option backward.defeqAttrib.useBackward true
 /-- The canonical pullback comparison, expressed using localization restriction on both
 sites. The first factor converts etale restriction to inverse image; the middle factor
 is the recorded canonical comparison, and the last converts pro-etale inverse image to
-restriction. No independent comparison is chosen.
-Source: Stacks Project, Tags 099R and 09AF. -/
+restriction. No independent comparison is chosen. -/
 private noncomputable def openComparisonRestrictionIso (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
@@ -331,8 +332,7 @@ private theorem component_unpack
     c₂.inv.app (L₁.obj F) ≫ R₂.map (c₁.inv.app F) ≫ sp.hom.app (K₀.obj F) =
       K₂.map (se.hom.app F) ≫ c₂'.inv.app (L₁'.obj F) ≫ R₂'.map (c₁'.inv.app F) := h
 
-/-- Specialized inverse-image comparison square used by the open exchange calculation.
-Source: canonical comparison-square coherence, Stacks Tags 099R and 0B65. -/
+/-- Specialized inverse-image comparison square used by the open exchange calculation. -/
 private theorem fixSiteOpenExchangeSquare (Λ : Type (u + 1)) [CommRing Λ]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} (sq : ChosenCartesianSquare gU j' j g)
@@ -477,10 +477,7 @@ private theorem beta_forward_comparison (Λ : Type (u + 1)) [CommRing Λ]
 
 end BetaSiteTransportProof
 
-/-- Site comparison preserves the inverse cartesian open base-change map.
-Source: Stacks Project, proetale.tex, lemma-jshriek-comparison (Tag 09AF);
-open-unit transpose calculation in step 1 of
-lem-cbc-finite-clopen-alpha-site-transport. -/
+/-- Site comparison preserves the inverse cartesian open base-change map. -/
 theorem finiteClopenBetaSiteTransport
     (Λ : Type (u + 1)) [CommRing Λ]
     {W S T : Scheme.{u}} (i : S ⟶ T) (p : W ⟶ T) [IsOpenImmersion i]

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicSc
 
 /-! # Rank-one ordinary scalar comparisons
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J, 093M and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -103,11 +105,7 @@ private lemma comparison_square
   rw [← ht, t₁.inv_hom_id_assoc]
   exact hs
 
-/-- The ordinary comparison has a coherent rank-one quotient component.
-
-Source: Stacks Project, Tags 093J and 093M; Tag 03CY for the associated module
-sheaf.
--/
+/-- The ordinary comparison has a coherent rank-one quotient component. -/
 theorem finitePerfectAdicOrdinaryScalar_components
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

@@ -32,6 +32,10 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 import Mathlib.CategoryTheory.Abelian.ShortExact
 
 /-! # Cartier reduction and site comparison
+
+## References
+
+* Stacks Project, Tags 0152, 06YY, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -51,10 +55,8 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
   CartierEtaleReductionSpec CartierProReductionSpec cartierResidueReducedPro
 
 /-- For a closed immersion i:D→Z and n>0, the normalized supported integral generator
-i_*Z_D→forget(i_*(ULift(Z/n))_D) on the pro-etale site has the unbounded DerivedUnit property
-[def-sfb-cartier-reduction-data, def-sp-exact-functor-derived-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ. -/
+i_*Z_D→forget(i_*(ULift(Z/n))_D) on the pro-etale site has the unbounded DerivedUnit
+property. -/
 theorem pro_integral_residue_derived_unit (n : ℕ) (hn : 0 < n)
     {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :
     (cartierForget (ULift.{u + 1} (ZMod n)) Z).DerivedUnit

@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Degree-zero Artin–Schreier surjectivity on proper curves
 
-Source: blueprint sec-proper-base-change/sk-thm-p1/lem-sc-c5,
-Artin–Schreier branch; Stacks Project Tag 0A3P.
+## References
+
+* Stacks Project, Tag 0A3P.
 -/
 
 @[expose] public section
@@ -28,10 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- On a smooth proper connected curve, Frobenius minus identity is onto in
- degree-zero additive cohomology.
- Source: blueprint `proposition-p-torsion-smooth-proper-curve--4`, characteristic-p branch, and
- `proposition-p-torsion-smooth-proper-curve--4`, paragraph 2; Stacks Project Tag 0A3P.
--/
+degree-zero additive cohomology. -/
 theorem epi_etaleCohomology_artinSchreier_zero_of_isProper
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

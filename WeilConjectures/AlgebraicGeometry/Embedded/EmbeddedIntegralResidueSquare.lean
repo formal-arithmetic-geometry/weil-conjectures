@@ -12,7 +12,8 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-! # The constant and residue squares of an integral coefficient isomorphism
 
-Source: Stacks Tag 09C1 and the integral-model coefficient comparison.
+## References
+* [Stacks Project, Tag 09C1](https://stacks.math.columbia.edu/tag/09C1)
 -/
 
 @[expose] public noncomputable section
@@ -259,8 +260,6 @@ private theorem coefficientSquares
 
 /-- An isomorphism of continuous integral coefficients induces commuting isomorphisms
 on constant coefficients and their first quotients.
-
-Source: integral-models-stacks, first-quotient transport; Stacks Tag 09C1.
 -/
 theorem embeddedIntegralResidueSquare
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

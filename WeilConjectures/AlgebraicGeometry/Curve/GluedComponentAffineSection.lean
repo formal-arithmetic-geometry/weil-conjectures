@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.AffineLocusOfCompatibleComponentSection
 
 /-! # An affine section around component intersections
 
-Source: Stacks Project, Varieties, Lemma 09NX, first two paragraphs.
+## References
+
+* Stacks Project, Varieties, Lemma 09NX (first two paragraphs of the proof)
+* Stacks Project, Properties, Lemma 09NV; Varieties, Lemma 09NE; Limits, Lemma 09NL
 -/
 
 @[expose] public section
@@ -30,11 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option linter.unusedVariables false in
 /-- Ample modules on the components can be powered and glued, with an affine section
-neighbourhood of their intersections. This constructs the bundle but does not assert
-its ampleness on the ambient scheme.
-
-Source: Stacks Project, Varieties, Lemma 09NX, first two paragraphs; Properties,
-Lemma 09NV; Varieties, Lemma 09NE; Limits, Lemma 09NL. -/
+neighbourhood of their intersections. Ampleness on the ambient scheme is not asserted. -/
 theorem exists_glued_component_affine_section
     (X : Scheme.{u}) [IsReduced X] (r : ℕ)
     (C : Fin r → Scheme.{u}) (i : ∀ a, C a ⟶ X)

@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Vanishing of derived additive cohomology above degree one.
-Source: blueprint `proposition-p-torsion-smooth-proper-curve--3`, step 2; Stacks 03P2 and 02UZ. -/
+See Stacks Project, Tags 03P2 and 02UZ. -/
 theorem isZero_etaleCohomology_additive_of_two_le
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

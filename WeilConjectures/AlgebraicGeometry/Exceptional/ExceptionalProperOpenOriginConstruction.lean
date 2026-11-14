@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInt
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProCompactSupportConstruction
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemCompactificationComparisonConstruction
 
-/-! # Construction of the proper/open strict-system operation -/
+/-! # Construction of the proper/open strict-system operation
+
+## References
+
+* Zheng, Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
+* Stacks Project, Tag 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,8 +38,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CY : ExceptionalSystemSiteComparison O ell Y S.PY)
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
-/-- The pro-etale compact-support operation and its comparison data exist.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65. -/
+/-- The pro-etale compact-support operation and its comparison data exist. -/
 theorem exceptionalProperOpenOriginConstruction
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

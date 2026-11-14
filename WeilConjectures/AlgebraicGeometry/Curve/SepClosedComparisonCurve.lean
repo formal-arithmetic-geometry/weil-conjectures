@@ -17,8 +17,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- A base change of a proper curve whose projection is a universal homeomorphism
-is a proper curve.
-Source: Stacks Project, Tag 0A5E, the algebraic-closure base change in its proof. -/
+is a proper curve. See Stacks Project, Tag 0A5E. -/
 theorem isCurve_isProper_of_sepClosed_comparison_core
     {k K : Type u} [Field k] [Field K] {C D : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]

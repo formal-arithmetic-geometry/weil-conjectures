@@ -27,6 +27,10 @@ import all WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Quotient.DiagonalQuotientRootProjectionIso
 
 /-! # A single quotient root endpoint
+
+## References
+
+* Stacks Project, Tags 0990, 090K, 03EK, 03EL
 -/
 
 @[expose] public noncomputable section
@@ -336,27 +340,7 @@ private theorem quotientRootProjection_exists
     (limit.π (Scheme.proEtaleRootsOfUnityTower X l (Fact.out : l.Prime)) (op n))
     (by exact roots.projections n)
 
-/-- The quotient of the integral root line has the prescribed finite root endpoint.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), expected reductions;
-Stacks Tags 0990, 090K, 03EK and 03EL, as expanded in
-lem-amb-tate-root-projection-reduction.
-
-Proof in words. Construct the integral root map with its projection equations.
-Annihilation of the quotient by l^(n+1) factors its coefficient map through the
-n-th ell-power quotient. Tensor this factor with the identity on the n-th roots,
-compose with the integral limit projection, and transpose under scalar extension.
-The free-module unit equation gives its exact root normalization. The resulting
-map is invertible by the epic local rank-one argument of
-lem-diagonal-quotient-root-projection-iso. The free-module adjunction transports
-through the supplied equivalence and underlying-sheaf comparison. The pulled-back
-finite Cartier line represents the same root maps, by its etale free-module
-universal property and the comparison adjunction. Their representing isomorphism
-preserves the root units. Compose it with the realized quotient projection and
-use naturality of the underlying comparison to obtain the required equation.
-Package this endpoint with the integral map and the supplied finite roots.
-No flatness, ramification-index divisibility, or choice of realization is used. -/
+/-- The quotient of the integral root line has the prescribed finite root endpoint. -/
 theorem diagonalQuotientRootEndpoint
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     (hX : IsUnit (l : Γ(X, ⊤)))

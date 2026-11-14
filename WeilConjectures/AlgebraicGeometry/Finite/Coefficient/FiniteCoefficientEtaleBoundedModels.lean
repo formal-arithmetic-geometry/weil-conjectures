@@ -14,7 +14,9 @@ import Mathlib.Algebra.Module.Shrink
 
 /-! # Bounded constant models from finite etale-local cohomology
 
-Source: Stacks Project, Tags 09AL and 094G.
+## References
+
+* Stacks Project, Tags 09AL, 094G
 -/
 
 @[expose] public noncomputable section
@@ -129,10 +131,7 @@ private theorem small_finite_complex (R : Type t) [CommRing R]
 /-- Finite etale-local cohomology and fixed cohomological bounds give bounded
 constant finite-module complexes on a further etale cover. This assertion is for an
 arbitrary derived object over a coefficient sheaf identified with a finite constant
-ring; it contains no adic filtration or perfect-residue hypothesis.
-
-Source: Stacks Project, proetale.tex, lemma-compare-constructible-derived (09AL),
-and sites-cohomology.tex, lemma-locally-constant (094G). -/
+ring; it contains no adic filtration or perfect-residue hypothesis. -/
 theorem finiteCoefficient_etale_bounded_models
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     (B : Type t) [CommRing B] [Finite B]

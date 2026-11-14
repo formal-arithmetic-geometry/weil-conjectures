@@ -94,7 +94,12 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsLocal
 
-/-! # Direct image preserves local derived completeness -/
+/-! # Direct image preserves local derived completeness
+
+## References
+
+* Stacks Project, Tags 099J, 0997 and 0A07.
+-/
 
 @[expose] public noncomputable section
 
@@ -154,10 +159,7 @@ private theorem complete_iff_constantElements
     change y.val = f at hy
     exact hy ▸ y.property
 
-/-- The derived geometric direct image preserves each local complete element.
-
-Source: Stacks Project, algebraization.tex Tag 099J, lemma-pushforward-derived-complete;
-Tag 0997, lemma-hom-from-Af; sites-cohomology.tex Tag 0A07. -/
+/-- The derived geometric direct image preserves each local complete element. -/
 theorem constantDirectImage_preservesComplete
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology E)

@@ -39,9 +39,8 @@ def FiniteP1BoundaryData
 /--
 A finite boundary equality transports through the normalized coefficient and
 site comparisons to the displayed derived equality. The comparison t is the
-explicit normalized coordinate; mere existence of an endpoint isomorphism does
-not specify its effect on the positive class. The statement isolates
-the scalar Kummer step from construction of the line comparison isomorphism.
+explicit normalized coordinate, since mere existence of an endpoint isomorphism
+does not specify its effect on the positive class.
 -/
 -- STATEMENT-DISPUTED: the old signature allowed arbitrary t, independently of hb.
 -- Composing a normalized t with a nontrivial scalar automorphism changes the class.

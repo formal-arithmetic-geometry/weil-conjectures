@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ClopenMonoidalDescent.ProEtaleCl
 
 /-! # Unit normalization of native braided restriction
 
-Source: Stacks Project, Tags 06YU and 0FPT.
+## References
+
+* Stacks Project, Tags 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -83,8 +85,7 @@ private theorem unitComparison_hom_aux
         (topology Y) ((clopenTensorRings.{t, u} j).obj R)).inv := by
   rfl
 
-/-- The inverse unit of derived restriction is the canonical degree-zero comparison.
-Source: Stacks Project, Tags 06YU and 0FPT. -/
+/-- The inverse unit of derived restriction is the canonical degree-zero comparison. -/
 theorem clopen_braided_unit_square
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

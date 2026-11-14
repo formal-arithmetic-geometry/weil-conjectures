@@ -452,7 +452,13 @@ import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemOrdinaryImages
 
-/-! # Ordinary normalized system pullback squares -/
+/-! # Ordinary normalized system pullback squares
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 03D2, 099R, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -803,8 +809,7 @@ private theorem finiteComparison
     asIso_hom, Iso.symm_hom] using hh
 
 -- Assembly compares both inverse-image paths at every coefficient level and system transition.
-/-- The normalized pullback comparison on ordinary coefficient systems and levels.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03D2, 099R and 0B65. -/
+/-- The normalized pullback comparison on ordinary coefficient systems and levels. -/
 theorem exceptionalSystemOrdinaryPullbackSquare_exists
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     {T U : Scheme.{u}} (g : T ⟶ U)

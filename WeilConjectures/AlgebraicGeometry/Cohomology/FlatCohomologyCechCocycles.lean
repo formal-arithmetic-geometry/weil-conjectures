@@ -11,9 +11,12 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.AffineCechInverseImage
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
-/-! # The inverse-image Cech comparison on cocycles
+/-! # The inverse-image Čech comparison on cocycles
 
-Source: Stacks Project, Tags 01FD, 02KH, 01XD and 02KE.
+## References
+
+* Stacks Project, Lemma 20.15.1 (Tag 01FD), Lemma 30.5.2 (Tag 02KH),
+  Lemma 30.2.6 (Tag 01XD) and Tag 02KE
 -/
 
 @[expose] public section
@@ -30,9 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}} {ι : Type u}
 
-/-- Extend a Cech cocycle and apply a chain map. This construction needs no flatness:
-only the fact that scalar extension takes a zero differential to zero is used.
-Source: Stacks Tag 02KH, the map on Cech cocycles in the separated-case argument. -/
+/-- Extend a Čech cocycle and apply a chain map. -/
 noncomputable def extendedCechCycles (f : X ⟶ Spec (.of R)) (U : ι → X.Opens)
     (M : X.Modules)
     (c : tensorCech (S := S) f U M ⟶
@@ -53,13 +54,8 @@ noncomputable def extendedCechCycles (f : X ⟶ Spec (.of R)) (U : ι → X.Open
   rw [← Category.assoc, ← Functor.map_comp, HomologicalComplex.iCycles_d,
     Functor.map_zero, zero_comp]
 
-/-- Leray's comparisons identify the class of the pullback of an original Cech
-cocycle with its inverse-image cohomology class. There is no assertion about
-arbitrary elements of tensor homology, and flatness is not assumed.
-
-Source: Stacks Project, Lemma 20.15.1 (01FD), inverse-image naturality;
-Lemma 30.5.2 (02KH), separated-case paragraph;
-Lemma 30.2.6 (01XD), and the canonical comparison of Tag 02KE. -/
+/-- Leray's comparisons identify the class of the pullback of an original Čech
+cocycle with its inverse-image cohomology class. -/
 theorem exists_cechBaseChange_cocycle_comparison
     (f : X ⟶ Spec (.of R)) [IsSeparated f] [Finite ι]
     (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)

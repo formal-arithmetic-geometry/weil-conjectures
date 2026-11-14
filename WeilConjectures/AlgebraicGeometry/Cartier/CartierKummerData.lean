@@ -17,6 +17,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 The declarations are the original fixed-coefficient interfaces, without changes
 of signature or body. They are separate from the existence theorem so that
 normalization and transport results can refer to them.
+
+## References
+
+* Stacks Project, Tags 00WX, 03D0, 07A6, 099R
 -/
 
 @[expose] public noncomputable section
@@ -29,44 +33,37 @@ open scoped CategoryTheory.Functor ChangeOfRings
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- Reuse the existing left-exact sheafification at each etale module site.
-Source: Stacks 00WX. -/
+/-- Reuse the existing left-exact sheafification at each etale module site. -/
 instance cartierHasSheafifyEtale (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) : HasSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   inferInstance
 
-/-- Cache the existing weak etale sheafification separately from left exactness.
-Source: Stacks 00WX. -/
+/-- Cache the existing weak etale sheafification separately from left exactness. -/
 instance cartierHasWeakSheafifyEtale (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) : HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   inferInstance
 
-/-- Reuse abelian sheafification for the cohomological Chern-class realization.
-Source: Stacks 00WX. -/
+/-- Reuse abelian sheafification for the cohomological Chern-class realization. -/
 instance cartierHasSheafifyAbelian (T : Scheme.{u}) :
     HasSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   inferInstance
 
-/-- Reuse small Ext for the existing abelian cohomology realization.
-Source: Stacks 07A6. -/
+/-- Reuse small Ext for the existing abelian cohomology realization. -/
 instance cartierHasExtAbelian (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   inferInstance
 
-/-- Name the existing abelian structure on etale module sheaves.
-Source: Stacks 03D0. -/
+/-- Name the existing abelian structure on etale module sheaves. -/
 instance cartierAbelianEtale (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Abelian (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
 
-/-- Name the existing abelian structure used by the Chern-class realization.
-Source: Stacks 03D0. -/
+/-- Name the existing abelian structure used by the Chern-class realization. -/
 instance cartierAbelianGroups (T : Scheme.{u}) :
     Abelian (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   inferInstance
 
-/-- Cache the existing small Ext instance without changing its universe or category.
-Source: Stacks 07A6. -/
+/-- Cache the existing small Ext instance without changing its universe or category. -/
 instance cartierHasExtEtale (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
@@ -74,8 +71,7 @@ instance cartierHasExtEtale (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The constant-section comparison for the inclusion of sites, specified by adjunction.
-Source: Stacks 099R and 00WX. -/
+/-- The constant-section comparison for the inclusion of sites, specified by adjunction. -/
 def cartierConstantComparison (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj
         (ordinaryFiniteConstant A T) ⟶

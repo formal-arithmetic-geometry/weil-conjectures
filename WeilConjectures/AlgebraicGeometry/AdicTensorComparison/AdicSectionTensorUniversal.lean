@@ -13,7 +13,10 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 The sectionwise tensor represents natural bilinear pairings by the module-sheafification
 adjunction. Vector-space sheafification similarly detects tensor diagrams and extends
 presheaf pairings. These are the sheafification steps in the native tensor comparison.
-Source: Stacks, Sites of Modules, Tags 03EK and 03EO.
+
+## References
+
+* Stacks Project, Sites of Modules, Tags 03EK and 03EO
 -/
 
 @[expose] public section
@@ -117,9 +120,7 @@ lemma sectionTensor_map {M M' N N' : SectionModule (l := l) (X := X)}
   rw [Functor.map_comp] at he
   exact he.symm
 
-/-- Natural bilinear pairings extend uniquely across the sectionwise sheaf tensor.
-
-Source: Stacks, Sites of Modules, Tag 03EK. -/
+/-- Natural bilinear pairings extend uniquely across the sectionwise sheaf tensor. -/
 lemma sectionTensor_exists (M N P : SectionModule (l := l) (X := X))
     (b : ∀ V : X.ProEtᵒᵖ, M.val.obj V →ₗ[(comparisonRing l X).obj.obj V]
       N.val.obj V →ₗ[(comparisonRing l X).obj.obj V] P.val.obj V)

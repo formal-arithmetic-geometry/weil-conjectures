@@ -14,11 +14,14 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalRelativeProjRestrict
 
 /-! # Local properness of the canonical relative Proj
 
-Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC.
 The relative Proj of the restricted module on each affine open of a finite-generator cover is
 identified (`exists_canonicalRelativeProj_restrict_iso`) with the restriction of the global
 relative Proj; H-projective properness transports across that comparison and glues by
 target-locality.
+
+## References
+
+* Stacks Project, Morphisms, Lemmas 01WB, 01WC
 -/
 
 @[expose] public section
@@ -58,9 +61,7 @@ private theorem canonicalRelativeProj_global_proper {S : Scheme.{u}} (E : S.Modu
   obtain ⟨hi, ⟨s, hs, hq, hfin, j, hj, hjc, hproj⟩⟩ := hlocal i
   exact canonicalRelativeProj_member_proper E hE (U i) hi hq hproj
 
-/-- The canonical relative Proj is proper after restriction to any affine open of the base.
-
-Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC. -/
+/-- The canonical relative Proj is proper after restriction to any affine open of the base. -/
 theorem canonicalRelativeProj_restrict_proper {S : Scheme.{u}} (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (_hU : IsAffineOpen U) :
     IsProper ((@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom ∣_ U) := by

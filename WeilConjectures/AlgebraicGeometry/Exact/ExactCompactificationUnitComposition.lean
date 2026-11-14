@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Exact.ExactCompactificationUnitTower
 /-!
 # Compatibility of normalized exact compact-support units with composition
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
+## References
+
+* Stacks Project, Tags 0D6E, 0F7B, 0F7J
 -/
 
 @[expose] public section
@@ -71,8 +73,7 @@ private lemma invert_unit_square
     Iso.inv_hom_id_assoc]
 
 set_option maxRecDepth 4096 in
-/-- The inverse normalized units respect the proper/open composition map.
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
+/-- The inverse normalized units respect the proper/open composition map. -/
 theorem exactCompactificationUnit_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T B : Scheme.{u}} [IsNoetherian V] [IsNoetherian T] [IsNoetherian B]

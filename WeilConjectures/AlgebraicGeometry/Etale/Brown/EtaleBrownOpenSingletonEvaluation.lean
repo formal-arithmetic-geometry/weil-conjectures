@@ -10,8 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownOpenSingletonEval
 
 /-! # Open singleton evaluation
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16,
+  pp. 21 and 34--35
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +38,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- The open singleton insertion evaluates to the open coefficient projection.
-Source: Zheng, Construction 5.14, Lemma 5.16 and Construction 4.1,
-printed pp. 21 and 34--35. -/
+/-- The open singleton insertion evaluates to the open coefficient projection. -/
 theorem etaleBrownOpenSingletonEvaluation
     (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)
     (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅

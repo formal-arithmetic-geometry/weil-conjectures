@@ -19,7 +19,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 /-!
 # The curve assertions for finite sums with a common prime annihilator
 
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
+## References
+
+* Stacks Project, Tags 03SC, 0A5C
 -/
 
 @[expose] public section
@@ -34,8 +36,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- The eight conditional assertions are componentwise for a finite biproduct of
 constructible sheaves killed by one fixed prime. The ambient sheaf may be any object
-isomorphic to the biproduct; there is no open immersion in this statement.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. -/
+isomorphic to the biproduct. -/
 theorem assertions_iff_of_prime_biproduct_iso (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     (r : ℕ) [Fact r.Prime] {ι : Type} [Finite ι]

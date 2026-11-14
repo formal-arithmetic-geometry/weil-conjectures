@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The constant-model comparison for explicit scalar realization
 
-Source: Stacks Project, Tags 093J, 093M, 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 093J, 093M, 06YY and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -118,9 +120,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Constant algebraic quotient complexes have the canonical realized model diagram,
-including its specified consecutive arrows.
-
-Source: Stacks Project, Tags 093J, 093M, 06YY and 09C6. -/
+including its specified consecutive arrows. -/
 theorem finitePerfectAdicScalar_model
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (T : FinitePerfectAdicAlgebraTower d)

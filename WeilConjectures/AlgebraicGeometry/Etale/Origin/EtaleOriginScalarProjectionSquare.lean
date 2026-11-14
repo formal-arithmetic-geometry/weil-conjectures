@@ -10,8 +10,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginScalarPullbackS
 
 /-! # Scalar restriction of the etale-origin projection square
 
-Source: Stacks Project, Tags 0E48 and 0B56. This is a compatibility of specified
-maps for a qcqs morphism; it does not assert a projection formula.
+This is a compatibility of specified maps for a qcqs morphism; it does not assert a
+projection formula.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0B56, 0E48
+* Stacks Project, Pro-étale Cohomology, Tag 09A6
 -/
 
 @[expose] public noncomputable section
@@ -127,12 +132,8 @@ private theorem etale_projection_counit
 
 /-- The etale projection and the restricted scalar mate give the same square
 through the canonical tensor comparisons and the bounded-below direct-image mates.
-The morphism is only required to be qcqs. In particular, this statement neither
-uses properness nor claims that either projection morphism is invertible.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0E48,
-remark-compatible-with-diagram, and Tag 0B56, equation-projection-formula-map;
-proetale.tex, Tag 09A6.
+The morphism is only required to be qcqs; the statement does not claim that either
+projection morphism is invertible.
 -/
 theorem etaleOriginScalarProjectionSquare
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]

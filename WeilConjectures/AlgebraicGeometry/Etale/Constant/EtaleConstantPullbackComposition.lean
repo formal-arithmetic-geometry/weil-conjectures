@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleExceptionalConstantTensor
 import all WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantPullbackNative
 
-/-! # Pullback of the constant scalar coefficient -/
+/-! # Pullback of the constant scalar coefficient
+
+## References
+
+* Stacks Project, Tag 07A6
+* Zheng, Construction 2.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -99,8 +105,7 @@ private theorem native_right_eq
   rfl
 
 /-- Pullback of a constant complex concentrated in degree zero respects the
-proper/open composition of a compactification.
-Source: Stacks Tag 07A6; Zheng Construction 2.26. -/
+proper/open composition of a compactification. -/
 private theorem native_composition_complete
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (M : ModuleCat.{u + 1} C) :
@@ -119,8 +124,7 @@ private theorem native_composition_complete
     ((step_six C c M).trans (native_right_eq C c M).symm)
 
 /-- Pullback of a constant complex concentrated in degree zero respects the
-proper/open composition of a compactification.
-Source: Stacks Tag 07A6; Zheng Construction 2.26. -/
+proper/open composition of a compactification. -/
 theorem etaleConstantPullback_comp_single
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (M : ModuleCat.{u + 1} C) :

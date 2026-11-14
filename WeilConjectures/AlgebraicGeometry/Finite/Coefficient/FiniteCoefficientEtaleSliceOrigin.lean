@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOrigi
 
 /-! # Etale derived origin on a finite-coefficient slice
 
-Source: Stacks Project, proetale.tex, Tag 09AL.
+## References
+
+* Stacks Project, Tags 09AL, 099R, 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -32,10 +34,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option linter.unusedVariables false in
 /-- A bounded object with finite etale-local cohomology descends to the etale site
 of the chart. The final clause transports a supplied constant complex model; it
-asserts no existence of such a complex.
-
-Source: Stacks Project, proetale.tex, lemma-compare-constructible-derived (09AL),
-with the finite-level comparison and weakly etale localization (099R, 03DJ). -/
+asserts no existence of such a complex. -/
 theorem finiteCoefficient_etale_slice_origin
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     (B : Type t) [CommRing B] [Finite B]

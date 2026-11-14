@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 /-! # Ext naturality for a square of exact functors
 
-Source: Stacks Project, Section 01F7, functoriality of derived inverse image.
+## References
+
+* Stacks Project, Tag 015F and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -17,11 +19,7 @@ universe w₁ w₂ w₃ w₄ v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace CategoryTheory.Abelian.Ext
 
-/-- The composition comparison with independent Ext universes.
-Source: Stacks Project, Tag 015F. Adapted from the complete proof of
-`exactFunctorCompositionComparison` in Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison.
-Identify Ext classes with derived morphisms, verify the single-complex comparison
-degreewise, and apply shifted naturality. Each Ext universe can be chosen independently. -/
+/-- The composition comparison with independent Ext universes. -/
 private theorem compositionComparison
     {C : Type u₁} {D : Type u₂} {E : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₄} E]
@@ -136,9 +134,7 @@ private theorem compositionComparison
     simp only [← Functor.commShiftIso_hom_naturality_assoc] at hh
     exact hh
 
-/-- A natural isomorphism between composite exact functors intertwines their Ext maps.
-Source: Stacks Project, Section 01F7; naturality of maps in derived categories.
--/
+/-- A natural isomorphism between composite exact functors intertwines their Ext maps. -/
 theorem mapExactFunctor_square
     {C₁ : Type u₁} [Category.{v₁} C₁] [Abelian C₁] [HasExt.{w₁} C₁]
     {C₂ : Type u₂} [Category.{v₂} C₂] [Abelian C₂] [HasExt.{w₂} C₂]

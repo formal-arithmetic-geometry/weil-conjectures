@@ -13,13 +13,17 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Canonical local models and the truncated-counit edge
 
-The existing resolution, local-class, Leray and pullback-inverse constructions retain
-exactly their original names and terms. The truncated-counit edge uses the adjoint of
-the upper-truncation inclusion and its invertible map on top cohomology. Keeping the
-constructions here lets a local calculation import them without importing its consumer.
+The truncated-counit edge uses the adjoint of the upper-truncation inclusion and its invertible
+map on top cohomology.
 
-Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W; derived.tex,
-Tags 08J5 and 06XS.
+## Implementation details
+
+* The resolution, local-class, Leray and pullback-inverse constructions are kept in this file so
+  that a local calculation can import them without importing its consumer.
+
+## References
+
+* Stacks Project, Tags 0BKJ, 0D5W, 0D5X, 079V, 079W, 08J5, 06XS, 05TC
 -/
 
 @[expose] public section
@@ -37,14 +41,13 @@ namespace RingedSpace
 variable (X : RingedSpace.{u})
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
 
-/-- A fixed K-injective representative, using the published functorial resolution.
-Source: Stacks, Tag 079V. -/
+/-- A fixed K-injective representative, using the published functorial resolution. -/
 abbrev topEdgeResolution (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :=
   (CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X))).obj
     (DerivedCategory.Q.objPreimage K)
 
 /-- The canonical identification of that representative with K, induced by the resolution
-quasi-isomorphism. Source: Stacks, Tag 079V. -/
+quasi-isomorphism. -/
 def topEdgeResolutionIso (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     DerivedCategory.Q.obj (topEdgeResolution X K) ≅ K :=
   let r := (CochainComplex.toKInjectiveResolution.{u}
@@ -54,7 +57,7 @@ def topEdgeResolutionIso (K : DerivedCategory (SheafOfModules.{u} (moduleRings X
   (asIso (DerivedCategory.Q.map r)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso K
 
 /-- H^q of local sections computed on the fixed representative. Both isomorphisms are
-canonical derived-unit comparisons. Source: Stacks, Tags 0BKJ and 0D5W. -/
+canonical derived-unit comparisons. -/
 def topEdgeLocalModel (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (localHypercohomologyPresheaf X q).obj K ≅
@@ -67,7 +70,7 @@ def topEdgeLocalModel (q : ℤ)
     (DerivedCategory.homologyFunctorFactors _ q).app _
 
 /-- The canonical local-class map Θ, namely the abelian sheafification unit followed by
-its fixed cohomology-sheaf identification. Source: Stacks, Tag 0BKJ. -/
+its fixed cohomology-sheaf identification. -/
 def topEdgeLocalClass (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (localHypercohomologyPresheaf X q).obj K ⟶
@@ -80,7 +83,7 @@ variable {X} {Y : RingedSpace.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]
 
 /-- Transport between the two published right-derived direct images, by comparing both
-units on the same K-injective representative. Source: Stacks, Tags 079V and 0D5W. -/
+units on the same K-injective representative. -/
 def topEdgeDirectImageComparison (g : X ⟶ Y)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (sectionDerivedDirectImage g).obj K ≅ (derivedModuleDirectImage g).obj K :=
@@ -90,8 +93,7 @@ def topEdgeDirectImageComparison (g : X ⟶ Y)
     ((derivedModuleDirectImage g).mapIso (topEdgeResolutionIso X K).symm ≪≫
       (moduleDirectImage g).rightDerivedFunctorObjQIso (topEdgeResolution X K)).symm
 
-/-- The inverse-open local cohomology presheaf computed on the same representative.
-Source: Stacks, Tag 0D5X. -/
+/-- The inverse-open local cohomology presheaf computed on the same representative. -/
 def topEdgeInverseModel (g : X ⟶ Y) (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (inverseOpenHypercohomologyPresheaf g q).obj K ≅
@@ -104,8 +106,7 @@ def topEdgeInverseModel (g : X ⟶ Y) (q : ℤ)
     (DerivedCategory.homologyFunctorFactors _ q).app _
 
 /-- The local derived-sections isomorphism λ, in the direction used by the edge.
-The selected presheaf isomorphism is uniquely fixed by its stated hom transformation.
-Source: Stacks, Tags 0D5W and 0D5X. -/
+The selected presheaf isomorphism is uniquely fixed by its stated hom transformation. -/
 def topEdgeLocalLeray (g : X ⟶ Y) (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (localHypercohomologyPresheaf Y q).obj ((derivedModuleDirectImage g).obj K) ≅
@@ -113,9 +114,8 @@ def topEdgeLocalLeray (g : X ⟶ Y) (q : ℤ)
   (localHypercohomologyPresheaf Y q).mapIso (topEdgeDirectImageComparison g K).symm ≪≫
     (Classical.choose (unboundedDirectImage_sectionPresheaf g q)).symm.app K
 
-/-- Θ on inverse-image opens. Exact precomposition commutes with homology; the two
-model comparisons then identify H^q(g^-1 V,K) with the corresponding local sections of K.
-Source: Stacks, Tags 0BKJ and 0D5X. -/
+/-- Θ on inverse-image opens: identifies H^q(g^-1 V,K) with the corresponding local sections
+of K. -/
 def topEdgeInverseLocalClass (g : X ⟶ Y) (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (inverseOpenHypercohomologyPresheaf g q).obj K ⟶
@@ -136,16 +136,14 @@ end RingedSpace
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- The inverse of the already recorded canonical top comparison κ.
-Source: Stacks, Tag 05TC. -/
+/-- The inverse of the already recorded canonical top comparison κ. -/
 def topEdgePullbackInverse {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE q) :=
   letI := (derivedPullback_topCohomology g q C hC).choose_spec.2.1
   inv (derivedPullbackTopCohomology g q C hC)
 
 /-- The edge obtained by transposing the inclusion of the upper truncation of Rg_*K.
-The inverse on cohomology exists because upper truncation preserves degree q.
-Source: Stacks, derived.tex, Tags 08J5 and 05TC; cohomology.tex, Tag 079W. -/
+The inverse on cohomology exists because upper truncation preserves degree q. -/
 def topEdgeTruncatedCounit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

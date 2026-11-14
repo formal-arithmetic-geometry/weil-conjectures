@@ -12,7 +12,9 @@ import Mathlib.RingTheory.Finiteness.Cardinality
 
 /-! # Finite homology and bounds from algebraic local models
 
-Source: Stacks Project, Tags 094H and 094I.
+## References
+
+* Stacks Project, Tags 03CY, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Ordinary constant realization, with the prescribed coefficient identification.
-Source: Stacks Project, Tags 03CY and 094H. -/
+/-- Ordinary constant realization, with the prescribed coefficient identification. -/
 def finiteCoefficientConstantFunctor (X : Scheme.{t}) (B : Type t) [CommRing B]
     {R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
     (φ : adicConstantRing X B ⟶ R) :=
@@ -35,8 +36,7 @@ def finiteCoefficientConstantFunctor (X : Scheme.{t}) (B : Type t) [CommRing B]
 
 /-- Local algebraic complexes compute the homology, with finite terms and a fixed support.
 This asks for algebraic complexes, not for finite homology modules. In particular,
-finiteness of homology and descent of the bounds remain separate consequences.
-Source: Stacks Project, Tags 094H and 094I. -/
+finiteness of homology and descent of the bounds remain separate consequences. -/
 def FiniteCoefficientLocalHomologyModels (X : Scheme.{t}) (B : Type t) [CommRing B]
     {R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
     (φ : adicConstantRing X B ⟶ R)
@@ -94,8 +94,7 @@ private theorem finite_homology (B : Type t) [CommRing B] [Finite B]
     ((ModuleCat.epi_iff_surjective _).mp inferInstance)
   exact Module.Finite.of_finite
 
-/-- Finite bounded algebraic local models give bounded finite local cohomology.
-Source: Stacks Project, Tags 094H and 094I. -/
+/-- Finite bounded algebraic local models give bounded finite local cohomology. -/
 theorem finiteCoefficient_local_homology_models
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulRegular
 
 /-! # Unit tensor realization of the completed exterior Koszul tower
 
-Source: Stacks Project, Tags 099M, 0921 and 093M.
+## References
+
+* Stacks Project, Tags 099M, 0921 and 093M
 -/
 
 @[expose] public noncomputable section
@@ -237,10 +239,7 @@ private theorem coefficient_transition
 
 /-- The concrete scalar realization of the exterior complexes is the actual
 Koszul tower tensored with the cochain unit. Any regular-module identification
-can be used, with the same scalar twist in every exterior degree.
-
-Source: Stacks Project, more-algebra.tex, lemma-sequence-Koszul-complexes (0921),
-and proetale.tex, proof of lemma-naive-completion (099M). -/
+can be used, with the same scalar twist in every exterior degree. -/
 theorem completedKoszulUnitTensorRealization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

@@ -11,7 +11,13 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 
-/-! # Invertibility of open comparison mates -/
+/-! # Invertibility of open comparison mates
+
+## References
+
+* Zheng, Construction 5.15 and Lemmas 4.10 and 5.22
+* Stacks Project, Tag 09AF
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -85,8 +91,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CY : ExceptionalSystemSiteComparison O ell Y S.PY)
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
-/-- Inverse mates of the normalized ordinary open pullback squares are invertible.
-Source: Zheng Construction 5.15 and Lemmas 4.10 and 5.22; Stacks 09AF. -/
+/-- Inverse mates of the normalized ordinary open pullback squares are invertible. -/
 theorem exceptionalSystemLevelOpenMate_isIso
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (_hX : ExceptionalSystemSiteEquivalence CX)

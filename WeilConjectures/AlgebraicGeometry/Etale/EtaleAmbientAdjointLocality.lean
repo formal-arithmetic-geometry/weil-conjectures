@@ -12,11 +12,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-! # Etale locality of the ordinary ambient adjoint
 
-
 Sheaf-level exactness is the existing `preservesFiniteLimits_etaleLowerShriek`, together
 with preservation of colimits by its existing left-adjoint structure. The first declaration
 below descends the existing sheaf adjunction, without any boundedness restriction. The second
 states locality for arbitrary right adjoints of the ordinary compact-support candidates.
+
+## Implementation details
+
+* `existsUnique_etaleAmbientAdjointLocalityIso` quantifies over the right adjoints `F` and `G`
+  with their adjunctions, which avoids imposing a choice of Brown right adjoint. Its
+  graph-normalized comparison family `N` is not an unconstrained choice, since such a family
+  is known to exist.
 -/
 
 @[expose] public section
@@ -215,17 +221,11 @@ noncomputable def etaleAmbientLeftComparison
     rightDerivedLowerShriekOfCompactificationIso A (c.comp (d.ofComp c)) d
 
 /-- For finite commutative coefficients the ordinary ambient right adjoint localizes along
-separated etale maps of finite type. The isomorphism is natural in every unbounded input K.
+separated etale maps of finite type, naturally in every unbounded input K.
 Here `F` and `G`, with the supplied adjunctions, denote the right adjoints f^× and (fu)^×;
-quantifying over them avoids imposing a choice of Brown right adjoint. Compactifications
-are arbitrary. Their sources are Noetherian as finite-type schemes over the Noetherian base.
-The canonical isomorphism is obtained from the Hom bijections in the proof below, by sending
-the identity to its image; its inverse is obtained from the inverse bijections. In particular
-its adjoint transpose is the inverse compact-support composition comparison followed by
-the sum-extension counit and then the compact-support counit. The displayed equation records
-this normalization in Lean. It holds for every graph-normalized comparison family `N` from
-lemma-affine-space-etale-localization--5, which has a recorded existence theorem. Thus `N`
-is not an additional hypothesis or an unconstrained choice of comparison.
+compactifications are arbitrary. The adjoint transpose of the canonical isomorphism is the
+inverse compact-support composition comparison followed by the sum-extension counit and then
+the compact-support counit, for every graph-normalized comparison family `N`.
 -/
 theorem existsUnique_etaleAmbientAdjointLocalityIso
     (A : Type (u + 1)) [CommRing A] [Finite A]

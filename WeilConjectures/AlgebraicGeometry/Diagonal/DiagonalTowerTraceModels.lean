@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Geo.GeoP1Cohomology
 /-!
 # The completed projective-line trace and the diagonal integrals
 
-
 The strict systems have discrete constant Z_l coefficients. The final traces have
 completed coefficients. The localization choices below only package the size data.
 
@@ -22,6 +21,10 @@ completed coefficients. The localization choices below only package the size dat
 - `DiagonalTrace.ExactSquare` and `DiagonalTrace.LimitSquare` normalize derived comparisons.
 - `diagonalTracePush`, `exactConeComparison`, and `DiagonalTrace.shiftedComparison`
   give the actual direct image, coefficient-cone map, and shifted comparison.
+
+## References
+
+* Stacks Project, Tag 0A07
 -/
 
 @[expose] public noncomputable section
@@ -305,8 +308,7 @@ attribute [-instance] CategoryTheory.ConstantScalarRestriction.ringPreadditive
   CategoryTheory.ConstantScalarRestriction.fixedZeroMorphisms
 
 /-- The canonical direct-image/limit comparison, fixed by its common derived unit.
-The projection equation retains the level maps, rather than only its object values.
-Source: blueprint trace proof step 5; Stacks 0A07. -/
+The projection equation retains the level maps, rather than only its object values. -/
 structure LimitSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (LX : DiagonalRlim (DiagonalMod l X)) (LS : DiagonalRlim (DiagonalMod l S))

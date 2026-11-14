@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizedMatesCompositi
 
 /-! # Graph composition with an open first leg
 
-Source: Stacks Project, Tags 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F4L, 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -64,8 +66,7 @@ private theorem graph_chosen_open_eq_etale
   exact hd
 
 /-- Graph extension for an open immersion followed by an etale map agrees with
-composition of their left adjoints. There is no proper square in this assertion.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L, and more-etale.tex Tag 0F7J. -/
+composition of their left adjoints. -/
 theorem graph_open_etale_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X W Z : Scheme.{u}}

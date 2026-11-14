@@ -15,7 +15,9 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 /-!
 # Constructible cohomology of finite-coefficient derived tensors
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09BQ, lemma-tensor-c.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 09BQ
 -/
 
 @[expose] public section
@@ -97,10 +99,7 @@ private theorem common_stratification {I : Type*} (s : Finset I)
 
 /-- Every cohomology sheaf of the derived tensor of bounded constructible
 finite-torsion inputs is constructible. The tensor is computed on arbitrary
-representatives by the recorded K-flat resolution; no lower bound is asserted.
-
-Source: Stacks Project, Pro-etale Cohomology, Tag 09BQ, lemma-tensor-c.
--/
+representatives by the recorded K-flat resolution; no lower bound is asserted. -/
 theorem finiteTensor_constructible_cohomology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})

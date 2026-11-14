@@ -132,11 +132,13 @@ import Mathlib.Algebra.Module.Shrink
 
 /-! # Reverse transport from fixed-scalar pro-etale models to etale finite models
 
-Source: Stacks Project, proetale.tex, Tag 099Y; sites-modules.tex, Tag 04IX.
-
 This is the reverse direction of the local-model comparison. It is split from
 `finiteCoefficient_etaleLocal_encoding` so that the descent from pro-etale
 constant charts to etale charts can be proved independently.
+
+## References
+
+* Stacks Project, Tags 099Y, 04IX, 03CY, 00DV
 -/
 
 @[expose] public noncomputable section
@@ -153,8 +155,7 @@ attribute [local instance] ProFiniteModels.asSmallDownEquivalence
   ProFiniteModels.asSmallUpEquivalence ProFiniteModels.asSmallDense
   ProFiniteModels.asSmallUpDense
 
-/-- Apply the coefficient-sized chart theorem, then undo the site equivalences.
-Source: Stacks Project, Tag 099Y. -/
+/-- Apply the coefficient-sized chart theorem, then undo the site equivalences. -/
 private theorem fixed_etale_charts (X : Scheme.{t}) (B : Type (t + 1))
     [CommRing B] [IsNoetherianRing B]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{t + 1} B))
@@ -214,8 +215,7 @@ private theorem fixed_etale_charts (X : Scheme.{t}) (B : Type (t + 1))
     exact ⟨M, hfinite,
       ⟨(fixedModelSchemeIso F ((toProEt X).obj (D.obj (U i))) M).toFun e'⟩⟩
 
-/-- A finite module over the lifted ring has a representative in the original universe.
-Source: finite generation and the small-carrier equivalence, Stacks Tag 00DV. -/
+/-- A finite module over the lifted ring has a representative in the original universe. -/
 private theorem small_finite_module (B : Type t) [CommRing B]
     (M : ModuleCat.{t + 1} (ULift.{t + 1} B)) [Module.Finite (ULift.{t + 1} B) M] :
     ∃ N : ModuleCat.{t} B, Module.Finite B N ∧ Nonempty
@@ -257,8 +257,7 @@ private theorem small_finite_module (B : Type t) [CommRing B]
 
 attribute [local irreducible] completedAdicChangeData pbcScalarAdjunction
 
-/-- Reflect a supplied constant model through the fixed-scalar slice coordinates.
-Source: Stacks Project, Tags 03CY and 04IX. -/
+/-- Reflect a supplied constant model through the fixed-scalar slice coordinates. -/
 private theorem ringed_model_of_fixed (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
     (φ : adicConstantRing X B ⟶ R) [IsIso φ] (W : X.Etale)
@@ -300,9 +299,7 @@ private theorem ringed_model_of_fixed (X : Scheme.{t}) (B : Type t) [CommRing B]
       (ModuleCat.{t + 1} (ULift.{t + 1} B))).mapIso eN.symm ≪≫ c.symm ≪≫
         (sq.app ((completedAdicChange X φ).obj K)).symm)⟩⟩
 
-/-- Fixed-scalar pro-etale finite local models give etale finite local models.
-
-Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX. -/
+/-- Fixed-scalar pro-etale finite local models give etale finite local models. -/
 theorem finiteCoefficient_etaleLocal_encoding_reverse
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

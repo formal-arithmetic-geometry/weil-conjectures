@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtComparis
 
 /-! # Geometric Ext presentations for the Mayer--Vietoris comparison
 
-Source: Stacks Project, Tags 01EB, 01F7 and 02KH.
+## References
+
+* Stacks Project, Tags 01EB, 01F7 and 02KH
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A scalar-compatible presentation of three graded groups by Ext from the
-three objects of a short complex. It specifies no horizontal cohomology maps.
-Source: the coefficient-functor naturality in Stacks Project, Tag 01EB,
-and Ext cohomology in Section 01F7. -/
+three objects of a short complex. It specifies no horizontal cohomology maps. -/
 structure H.ExtRowPresentation
     (R : Type u) [CommRing R]
     {C : Type v} [Category.{w} C] [Abelian C] [HasExt.{u} C]
@@ -107,31 +107,7 @@ variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 /-- The geometric realization of the two cohomology rows as contravariant Ext
 from one short exact sequence and its exact inverse image. The vertical identities
 identify the actual comparison maps with exact-functor action on Ext followed by
-the coefficient morphism. No row maps, row exactness, or connecting squares are
-asserted here.
-
-Source: Stacks Project, Tag 01EB (the free-sheaf Mayer--Vietoris sequence),
-Section 01F7 (pullback of cohomology), and Tag 02KH (the two-open argument).
-
-
-Apply exact inverse image G along the cartesian projection X_S to X to K.
-Inverse image of the free sheaf represented by W is the free sheaf represented
-by its preimage: their Hom functors both give sections of pushforward on W,
-by the inverse-image adjunction and the free-sheaf universal property. The
-isomorphisms commute with inclusions, and G preserves finite direct sums.
-Identify each base-changed open scheme with its preimage in X_S by its
-cartesian open-subscheme isomorphism. Composition of module pullback identifies
-the coefficient sheaves. This gives the lower Ext presentations, with the same
-signs. Their naturality in the coefficient sheaf gives the lower scalar equations.
-
-Under these identifications, the constant-sheaf comparison on X and the
-free-sheaf comparison on W agree with the inverse-image adjunction. Consequently
-pullback on each Ext group is exact-functor action followed by postcomposition
-with the coefficient map adjoint to the module pullback unit. This is precisely
-H.baseChangeLinear, as defined in FlatCohomologyComparison, giving the three
-vertical identities. For the product term, use additivity and the natural
-Ext direct-sum decomposition. This argument works for empty opens, repeated
-opens and the zero ring, and requires no flatness or quasi-coherence. -/
+the coefficient morphism. -/
 theorem H.exists_mayerVietoris_extPresentation
     (f : X ⟶ Spec (.of R)) (M : X.Modules)
     (U V : X.Opens) (hcover : U ⊔ V = ⊤) :

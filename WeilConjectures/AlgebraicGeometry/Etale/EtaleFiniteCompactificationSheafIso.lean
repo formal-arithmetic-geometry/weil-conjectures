@@ -18,7 +18,9 @@ import Mathlib.Algebra.Homology.SingleHomology
 /-!
 # The sheaf graph comparison in a finite compactification
 
-Source: Stacks Project, Tags 0GKM, 0F4Y and 015F.
+## References
+
+* Stacks Project, Tags 0GKM, 0F4Y and 015F
 -/
 
 @[expose] public section
@@ -132,9 +134,7 @@ private theorem isIso_of_derived_comparison
   exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso _) _).mp hmiddle
 
 /-- In a compactification with finite proper part, the sheaf graph map for a separated
-quasi-compact etale map is invertible. This follows by applying degree-zero detection to
-the normalized unbounded graph comparison, since the finite pushforward is exact.
-Source: Stacks Project, Tags 0GKM, 0F4Y and 015F. -/
+quasi-compact etale map is invertible. -/
 theorem isIso_etaleCompactificationGraphMap_of_isFinite
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsSeparated f] [QuasiCompact f]

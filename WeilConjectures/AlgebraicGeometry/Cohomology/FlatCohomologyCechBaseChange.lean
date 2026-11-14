@@ -14,9 +14,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechTerms
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential
 
-/-! # The termwise scalar extension of a finite affine Cech complex
+/-! # The termwise scalar extension of a finite affine Čech complex
 
-Source: Stacks Project, Tags 02KH and 02KG, the separated-case Cech argument.
+## References
+
+* Stacks Project, Lemma 30.5.1 (Tag 02KG) and Lemma 30.5.2 (Tag 02KH)
 -/
 
 @[expose] public section
@@ -31,33 +33,28 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}} {ι : Type u}
 
-/-- The presheaf of R-modules obtained from the displayed map to Spec R.
-Source: Stacks Project, Tag 02KH, the Cech complex over the affine base. -/
+/-- The presheaf of R-modules obtained from the displayed map to Spec R. -/
 noncomputable def presheafOver (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     X.Opensᵒᵖ ⥤ ModuleCat.{u} R :=
   M.presheafModuleCat ⋙
     ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom)
 
-/-- The ordered Cech complex, with scalars restricted to the affine base.
-Source: Stacks Project, Tag 02KH, the separated-case paragraph. -/
+/-- The ordered Čech complex, with scalars restricted to the affine base. -/
 noncomputable def cechOver (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules) :
     CochainComplex (ModuleCat.{u} R) ℕ :=
   (cechComplexFunctor U).obj (presheafOver f M)
 
-/-- The cover obtained by inverse image under the base-change projection.
-Source: Stacks Project, Tag 02KH. -/
+/-- The cover obtained by inverse image under the base-change projection. -/
 noncomputable def baseChangeCover (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) :
     ι → (baseChangedScheme (S := S) f).Opens :=
   fun i ↦ baseChangeFst (S := S) f ⁻¹ᵁ U i
 
-/-- Scalar extension on the ordered Cech complex.
-Source: Stacks Project, Tag 02KH. -/
+/-- Scalar extension on the ordered Čech complex. -/
 noncomputable abbrev tensorCech (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules) :=
   ((ModuleCat.extendScalars (algebraMap R S)).mapHomologicalComplex (.up ℕ)).obj
     (cechOver f U M)
 
-/-- Inverse images of tuple intersections are contained in the inverse image intersection.
-Source: elementary inverse-image calculus in the Cech argument of Stacks Tag 02KH. -/
+/-- Inverse images of tuple intersections are contained in the inverse image intersection. -/
 lemma baseChangeCover_intersection_le (f : X ⟶ Spec (.of R)) (U : ι → X.Opens)
     (k : ℕ) (y : Fin (k + 1) → ι) :
     (⨅ l, baseChangeCover (S := S) f U (y l)) ≤
@@ -69,18 +66,15 @@ lemma baseChangeCover_intersection_le (f : X ⟶ Spec (.of R)) (U : ι → X.Ope
   rw [TopologicalSpace.Opens.coe_iInf]
   simpa [baseChangeCover, Set.mem_iInter] using hx
 
-/-- The coordinate of an ordered Cech cochain on a tuple intersection.
-Source: the coordinate description of ordered Cech complexes, Stacks Tag 02KH. -/
+/-- The coordinate of an ordered Čech cochain on a tuple intersection. -/
 noncomputable def cechCoordinate (f : X ⟶ Spec (.of R)) (U : ι → X.Opens)
     (M : X.Modules) (k : ℕ) (y : Fin (k + 1) → ι) :
     (cechOver f U M).X k → Γ(M, ⨅ l, U (y l)) :=
   fun x ↦ M.presheaf.map (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op
     (TopCat.Presheaf.cechComplexFunctorπ U (presheafOver f M) k y x)
 
-/-- A Cech comparison is canonical when its coordinates send b tensor x to b times
-pullback of the corresponding section via the module adjunction unit. This predicate
-specifies a chain map without assuming it is invertible.
-Source: Stacks Project, Tags 02KG and 02KH, canonical affine-section comparison. -/
+/-- A Čech comparison is canonical when its coordinates send b tensor x to b times
+pullback of the corresponding section via the module adjunction unit. -/
 def IsCechBaseChange (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules)
     (c : tensorCech (S := S) f U M ⟶
       cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
@@ -96,11 +90,8 @@ def IsCechBaseChange (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Module
           ((baseChangeUnit (S := S) f M).val.app (op (⨅ l, U (y l)))
             (cechCoordinate f U M k y x))
 
-/-- On a finite affine cover of a scheme separated over Spec R the canonical Cech
-comparison is a chain isomorphism. Flatness is not needed at the chain level.
-
-Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), separated-case paragraph, and
-Lemma 30.5.1 (Tag 02KG). -/
+/-- On a finite affine cover of a scheme separated over Spec R the canonical Čech
+comparison is a chain isomorphism. -/
 theorem exists_cechBaseChange_iso (f : X ⟶ Spec (.of R)) [IsSeparated f]
     [Finite ι] (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
     (M : X.Modules) [M.IsQuasicoherent] :

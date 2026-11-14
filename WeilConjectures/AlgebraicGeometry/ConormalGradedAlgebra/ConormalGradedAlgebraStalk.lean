@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FormalAssociatedGradedAffineMultiplicat
 
 /-! # Stalk charts of the conormal algebra
 
-Source: Stacks Project, Divisors, Tag 0633; Algebra, Tag 00CS.
+## References
+
+* Stacks Project, Divisors, Tag 0633; Algebra, Tag 00CS.
 -/
 
 @[expose] public section
@@ -188,8 +190,7 @@ private theorem addHom_add_mul {R S : Type*}
   rw [add_mul, map_add, ha, hb, map_add, add_mul]
 
 /-- The affine associated-graded charts induce the associated-graded chart for the
-actual ideal kernel at every point of the closed subscheme.
-Source: Stacks Project, Divisors, Tag 0633; Algebra, Tag 00CS. -/
+actual ideal kernel at every point of the closed subscheme. -/
 theorem affineData_stalk_chart (A : AffineData i) : ∀ z : Z,
     ∃ e : TopCat.Presheaf.stalk A.algebra.right.obj z ≅
         CommRingCat.of (Ideal.associatedGraded (RingHom.ker (i.stalkMap z).hom)),

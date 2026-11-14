@@ -64,6 +64,10 @@ local tensor generators; their images under localization are the canonical deriv
 - `adicTransition_id`, `adicTransition_comp`: the transition identities.
 - `adicNormalization_cocycle`, `adicNormalization_unit`: normalization coherence.
 - `adicReductionUnderlying_tensor`: comparison with the recorded derived tensor product.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YS, 06YY, 0D6D
 -/
 
 @[expose] public section
@@ -120,8 +124,7 @@ noncomputable def adicLocalization (X : Scheme.{t}) (A : Type t) [CommRing A] :
   @DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)
 
 /-- One K-flat flat-term representative of the arbitrary derived object K. The realization
-is part of the choice of model, rather than a restriction on K.
-Source: blueprint order 1255, construction step 1; Stacks Tag 06YS. -/
+is part of the choice of model, rather than a restriction on K. -/
 structure AdicKFlatModel (X : Scheme.{t}) (Λ : Type t) [CommRing Λ]
     (K : proEtaleDerivedCategory X Λ) where
   complex : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ
@@ -145,8 +148,7 @@ noncomputable abbrev adicRestrict (X : Scheme.{t}) {A B : Type t}
   ((SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)).mapHomologicalComplex
     (ComplexShape.up ℤ)).obj P
 
-/-- The local pure tensor s tensor m, mapped into the sheafified scalar extension.
-Source: blueprint order 1255, steps 2 and 3; Stacks Tag 03EK. -/
+/-- The local pure tensor s tensor m, mapped into the sheafified scalar extension. -/
 noncomputable def adicTensorSection (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B)
     (M : SheafOfModules.{t + 1} (adicModuleRing X A)) (U : X.ProEtᵒᵖ)
@@ -479,7 +481,7 @@ private noncomputable def adicSheafBalanceIso (X : Scheme.{t}) {A B C : Type t}
       map_one, one_mul]
 
 /-- The ordinary balancing map is uniquely specified on local tensor generators and is
-invertible. Source: blueprint order 1255, step 3; Stacks Tags 03EK and 0D6D. -/
+invertible. -/
 theorem adicBalance_exists (X : Scheme.{t}) {A B C : Type t}
     [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (h : ψ.comp φ = χ)
@@ -536,8 +538,7 @@ theorem adicQuotientMap_comp_mk {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
       Ideal.Quotient.mk (I ^ a) := by
   exact Ideal.Quotient.factor_comp_mk _
 
-/-- The quotient-coefficient reduction, computed by the fixed K-flat model.
-Source: blueprint order 1255, step 1; Stacks Tag 06YY. -/
+/-- The quotient-coefficient reduction, computed by the fixed K-flat model. -/
 noncomputable def adicReduction (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
     (M : AdicKFlatModel X Λ K) (n : ℕ+) :
@@ -579,7 +580,7 @@ private theorem adicSheafTransition_tensorSection (X : Scheme.{t}) {A B C : Type
   rw [adicSheafBalance_tensorSection, one_mul]
 
 /-- The transition chain map is uniquely specified by applying the quotient homomorphism
-on the coefficient tensor factor. Source: blueprint order 1255, step 2; Stacks Tag 03EK. -/
+on the coefficient tensor factor. -/
 theorem adicTransitionComplex_exists (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (I : Ideal Λ)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)

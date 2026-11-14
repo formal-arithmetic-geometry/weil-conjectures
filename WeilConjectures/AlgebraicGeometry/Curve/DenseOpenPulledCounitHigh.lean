@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.OpenClosed.Complex
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChangeBoundary
 
-/-! # Dense-open field-extension comparison ingredients -/
+/-! # Dense-open field-extension comparison ingredients
+
+## References
+
+* Stacks Project, Tag 0GJA, proof (higher-degree isomorphisms and remark (c)).
+-/
 
 @[expose] public section
 
@@ -24,8 +29,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- After algebraically closed field extension the inverse image of the dense-open
-counit induces bijections in degrees above one.
-Source: Stacks Project, Tag 0GJA, proof (higher-degree isomorphisms and remark (c)). -/
+counit induces bijections in degrees above one. -/
 theorem dense_open_pulled_counit_high (Λ : Type (u + 1)) [CommRing Λ]
     {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]

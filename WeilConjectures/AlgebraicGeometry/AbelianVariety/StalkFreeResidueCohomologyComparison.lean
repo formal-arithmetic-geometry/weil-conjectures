@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Residue cohomology computed by a free stalk representative
 
-Source: Stacks Project, Tags 06YB, 064K and 0098.
+## References
+
+* Stacks Project, Tags 06YB, 064K and 0098
 -/
 
 @[expose] public section
@@ -28,10 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Every bounded-above free complex representing the stalk derived object
-computes the derived residue fibre, degree by degree, by a linear equivalence.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 06YB; More on Algebra, Tag 064K;
-Sheaves, Tag 0098. -/
+computes the derived residue fibre, degree by degree, by a linear equivalence. -/
 theorem nonempty_stalkFree_residueCohomology_linearEquiv
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

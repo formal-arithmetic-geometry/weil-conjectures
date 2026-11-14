@@ -26,13 +26,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 
 /-! # The actual normal comparison of an etale coordinate chart
 
-Source: current blueprint, sec-smooth-purity/sk-prop-sp-orientation,
-sk-prop-sp-orientation-charts.proof.md, Steps 1--2; Stacks Tags 0633--0635, 0473,
-08S2 and 01LX.
-
 The specification below retains the canonical graded maps, their relative spectra,
 and the difference convention. No map or isomorphism is chosen from its existence.
 The relative-spectrum normal cone is the existing PurityNormalBundle construction.
+
+## References
+
+* Stacks Project, Tags 0633, 0634, 0635, 0636, 0637, 0473, 08S2, 01LX
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +49,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.ChartNormalDifferential
 
-/-- The existing relative-spectrum identification for the actual conormal algebra.
-Source: Stacks Tags 0636, 01LX. -/
+/-- The existing relative-spectrum identification for the actual conormal algebra. -/
 def normalAlgebraIso {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     (ConormalGradedAlgebra.presentation i).algebra ≅
       Under.mk (⟨(PurityNormalBundle.projection i).c⟩ : Z.sheaf ⟶
@@ -61,7 +60,7 @@ def normalAlgebraIso {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
       (PurityNormalBundle.algebraObject i))).symm
 
 /-- Sectionwise normalization of a relative-spectrum map by an algebra pullback.
-The equation includes all sections, not just degree one. Source: Stacks Tag 01LX. -/
+The equation includes all sections, not just degree one. -/
 def IsSpecMap {Z Z' N N' : Scheme.{u}} (f : Z ⟶ Z')
     (B : Z.CommAlgebraSheaf) (B' : Z'.CommAlgebraSheaf)
     (π : N ⟶ Z) (π' : N' ⟶ Z')
@@ -77,8 +76,7 @@ def IsSpecMap {Z Z' N N' : Scheme.{u}} (f : Z ⟶ Z')
         (by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h])
         (α'.hom.right.hom.app (op V) a)
 
-/-- The adjunction sends a section to its pure tensor with one, then applies `c`.
-Source: Stacks Tags 0634--0635. -/
+/-- The adjunction sends a section to its pure tensor with one, then applies `c`. -/
 def pullbackSection {Z Z' : Scheme.{u}} (f : Z ⟶ Z')
     (M : Z.Modules) (M' : Z'.Modules) (c : (tensorPullback f).obj M' ⟶ M)
     (V : Z'.Opens) (a : M'.val.obj (op V)) : M.val.obj (op (f ⁻¹ᵁ V)) :=
@@ -86,8 +84,7 @@ def pullbackSection {Z Z' : Scheme.{u}} (f : Z ⟶ Z')
     (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app M').val.app (op V) a)
 
 /-- The differential/conormal identification uses the difference second minus first.
-This works with either the full ambient product or its open neighbourhood.
-Source: Stacks Tag 08S2. -/
+This works with either the full ambient product or its open neighbourhood. -/
 def IsDifferenceIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y)
     (δ : U ⟶ M) [IsClosedImmersion δ] (p₁ p₂ : M ⟶ U)
     (ω : h.relativeDifferentials ≅ ConormalGradedAlgebra.piece δ 1) : Prop :=
@@ -101,8 +98,7 @@ def IsDifferenceIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y)
           (ConormalGradedAlgebra.representative δ 1 T s)
 
 /-- A normal/tangent identification is induced by the symmetric-algebra map with the
-specified degree-one identification. It fixes the projection and the zero section.
-Source: Stacks Tags 0637, 08S2, 01LX. -/
+specified degree-one identification. It fixes the projection and the zero section. -/
 def IsNormalTangentIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y) [Smooth h]
     (δ : U ⟶ M) [IsClosedImmersion δ]
     (ω : h.relativeDifferentials ≅ ConormalGradedAlgebra.piece δ 1)
@@ -124,8 +120,7 @@ def IsNormalTangentIdentification {U Y M : Scheme.{u}} (h : U ⟶ Y) [Smooth h]
 
 /-- The actual differential is normalized on every local differential `da` by
 `da ↦ d(e-sharp a)`. Projection fixes scalars, so the symmetric-algebra universal
-property determines the whole scheme map. Source: Stacks Tag 08S2 and the blueprint's
-Step 2. -/
+property determines the whole scheme map. -/
 def IsDifferential {U A Y : Scheme.{u}} (p : A ⟶ Y) (e : U ⟶ A)
     [Smooth p] [Smooth (e ≫ p)]
     (de : RelativeTangentBundle.scheme (e ≫ p) ⟶ RelativeTangentBundle.scheme p) : Prop :=
@@ -154,8 +149,7 @@ attribute [local irreducible] normalAlgebraIso PurityNormalBundle.projection
   Scheme.Hom.relativeDifferentials SymmetricAlgebraSheaf.algebra ConormalGradedAlgebra.piece
 
 /-- All clauses of the chart comparison, with every map normalized. This is a package
-of the conclusions of the lemma, not additional hypotheses on a chart.
-Source: current blueprint Step 2; Stacks Tags 0633--0635, 0473, 08S2 and 01LX. -/
+of the conclusions of the lemma, not additional hypotheses on a chart. -/
 structure Comparison {U A Y : Scheme.{u}} (d : ℕ) (p : A ⟶ Y) (e : U ⟶ A)
     [IsSeparated p] [IsSeparated (e ≫ p)] [Smooth p] [Smooth (e ≫ p)] where
   /-- The specified open neighbourhood of the diagonal. -/
@@ -1746,9 +1740,7 @@ private theorem comparisonOfChart {k : Type u} [Field k]
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual graded and normal comparisons for an etale affine coordinate chart,
-including dimension zero and the empty source.
-Source: current blueprint sec-smooth-purity/sk-prop-sp-orientation,
-sk-prop-sp-orientation-charts.proof.md Step 2; Stacks 0633--0635, 0473, 08S2, 01LX. -/
+including dimension zero and the empty source. -/
 theorem comparison (D : WeilConjectures.FiniteFieldDatum.{u})
     (_C : D.CoefficientDatum) (n : ℕ) (_hn : 1 ≤ n)
     {Y U : Scheme.{u}} [IsAffine Y]

@@ -18,14 +18,12 @@ import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
 /-! # Transposes of the ordinary quotient arrows
 
 The transpose of the ordinary quotient arrow under extension of scalars along the consecutive
-quotient map `q : A_(n+1) → A_n` is invertible. The arrow factors as the image under the chart
-coordinates of the ring-level quotient transition `R_(n+1) ⊗ N ⟶ R_n ⊗ N`, followed by the
-strict square identifying the two scalar restrictions. The transpose is accordingly the mate of
-this square followed by the chart image of the ring-level transpose; the latter is the
-comparison of the left adjoints of the restriction along `R → R_n`, and the mate is invertible
-since its iterated mate along the chart adjunctions is.
+quotient map `q : A_(n+1) → A_n` is invertible. It is computed as the mate of the strict square
+identifying the two scalar restrictions, followed by the chart image of the ring-level transpose.
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 06YY and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +36,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The transpose of a consecutive quotient arrow under extension of scalars along the
-consecutive quotient map is invertible.
-Source: Stacks Project, Tags 06YY and 09C6. -/
+consecutive quotient map is invertible. -/
 theorem finitePerfectAdicQuotientTransition_transpose_isIso
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

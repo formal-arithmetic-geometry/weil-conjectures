@@ -18,7 +18,11 @@ import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # Flatness of the internal supported diagonal coefficient
 
-Source: closed/open localization and tensor detection; Stacks Tags 09AA and 09AH.
+The proof uses closed/open localization and tensor detection.
+
+## References
+
+* Stacks Project, Tags 09AA, 09AH
 -/
 
 @[expose] public noncomputable section
@@ -120,10 +124,7 @@ private theorem flat_of_closed_open_restrictions
         exact (Functor.Monoidal.commTensorLeft (ringSheafInverseImage i B) F).symm)).1
 
 /-- The regular module supported on the closed diagonal is flat, for arbitrary
-commutative condensed coefficients.
-
-Source: Stacks, proetale.tex, lemma-closed-immersion; the closed/open tensor
-argument in the diagonal tower coefficient changes, paragraph (1). -/
+commutative condensed coefficients. -/
 theorem diagonal_supported_flat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

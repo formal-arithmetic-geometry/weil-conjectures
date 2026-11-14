@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Noetherian.Basic
 
 /-! # Scalar restriction on the full category of complete objects
 
-Source: Stacks Tags 099I and 099L, and the diagonal trace proof, paragraph (1).
+## References
+
+* Stacks Project, Tags 099I, 099L, 091Q
 -/
 
 @[expose] public noncomputable section
@@ -142,10 +144,7 @@ private theorem constantComplete_restriction_iff
 
 /-- Restriction from the completed coefficient sheaf to constant coefficients is
 fully faithful on objects with derived-complete underlying constant coefficients.
-The completeness condition is right orthogonality to all l-invertible complexes.
-
-Source: Stacks Tags 099I, 099L and 091Q; blueprint latest,
-`sk-prop-diagonal-tower-trace.proof.md`, paragraph (1). -/
+The completeness condition is right orthogonality to all l-invertible complexes. -/
 theorem diagonalCompleteScalarRestrictionCore (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l S)]
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l S)] :

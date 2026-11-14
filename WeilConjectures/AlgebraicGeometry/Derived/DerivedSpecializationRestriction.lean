@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBa
 
 /-! # Derived specialization factors through strict-local sections
 
-Source: Stacks Project, Tag 0GJ2, Remark alternative-sp.
+## References
+
+* Stacks Project, Tags 0GJ2, 03Q1
 -/
 
 @[expose] public section
@@ -121,8 +123,7 @@ private lemma exactDerived_factorization
     Functor.map_comp, hw]
 
 /-- Specialization is restriction to strict-local sections followed by the global germ
-and the inverse-image stalk identification.
-Source: Stacks Project, Tag 0GJ2, Remark alternative-sp, and Tag 03Q1 (3). -/
+and the inverse-image stalk identification. -/
 theorem derivedEtaleStalkSpecialization_restriction
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']

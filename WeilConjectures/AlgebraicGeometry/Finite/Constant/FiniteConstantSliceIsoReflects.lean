@@ -17,7 +17,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Recovering algebraic constant values on a nonempty slice
 
-Source: Stacks Project, Tags 03CY, 0F6B and 05RU.
+## References
+
+* Stacks Project, Tags 03CY, 0F6B, 00Y8(3), 05RU
 -/
 
 @[expose] public noncomputable section
@@ -124,10 +126,7 @@ private theorem ulift_reflects_derived_iso (B : Type t) [CommRing B]
   exact ⟨(asIso (DerivedCategory.Q.map q)).symm ≪≫ asIso (DerivedCategory.Q.map g)⟩
 
 /-- Isomorphic constant realizations on a nonempty slice have isomorphic algebraic
-values. The coefficient change is an isomorphism; no finite generation, bounds,
-projectivity, adic datum, or residue hypothesis is used.
-
-Source: Stacks Project, Tags 03CY, 0F6B, 00Y8(3) and 05RU. -/
+values. The coefficient change is an isomorphism. -/
 theorem finiteConstantSlice_iso_reflects
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

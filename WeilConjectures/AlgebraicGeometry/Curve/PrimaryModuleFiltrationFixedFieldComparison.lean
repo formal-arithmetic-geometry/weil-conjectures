@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 /-!
 # Restricted subgroup representations and the fixed-field comparison
 
-Source: Stacks Project, Tags 04JQ, 03QT and 03SF; blueprint
-`theorem-cohomology-curves--2`, proof paragraphs 1--2.
+## References
+
+* Stacks Project, Tags 04JQ, 03QT, 03QW, 03SF, 0BML
 -/
 
 @[expose] public section
@@ -219,7 +220,7 @@ private noncomputable def reindexDiscreteEquiv
                  isIntertwining' := fun g ↦ by ext x; simp [reindexDiscrete] }))
     (by intros; ext x; rfl)
 
-/-- Source: Stacks Project, Tags 0BML, 03QT, 03QW and 04JQ. -/
+/-- The primary fixed-field comparison exists. -/
 theorem nonempty_primaryFixedFieldComparison
     (K Ks : Type u) [Field K] [Field Ks] [Algebra K Ks]
     (H : OpenSubgroup (Gal(Ks/K))) [IsSepClosure K Ks]

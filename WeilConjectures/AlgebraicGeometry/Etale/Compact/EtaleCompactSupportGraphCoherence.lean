@@ -19,7 +19,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Coherence of the specified compact-support graph map
 
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6, 0F7B and 0F7C.
+## References
+
+* SGA 4 XVII 5.2.2, 6.2.11
+* Stacks Project, Tags 03S6, 0F7B and 0F7C
 -/
 
 @[expose] public section
@@ -395,8 +398,7 @@ private theorem graph_derived_refinement
     (etaleCompactificationGraphMap A f c)
     (lowerStarComp (ModuleCat.{u + 1} A) r.hom d.g c.g r.hom_g.symm) hs K
 
-/-- Base change, proper refinement and identity for the specified graph comparison.
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6, 0F7B and 0F7C. -/
+/-- Base change, proper refinement and identity for the specified graph comparison. -/
 theorem etaleCompactSupportGraph_coherence
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     EtaleCompactSupportCoherence A (canonicalEtaleCompactSupportCore A) := by

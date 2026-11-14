@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedQuotientCoeff
 
 /-! # The normalized ordinary limit of the supported quotient tower
 
-Source: diagonal tower limit proof, paragraph (1), and Stacks Tag 099L.
+## References
+
+* [Stacks Project, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
 -/
 
 @[expose] public noncomputable section
@@ -67,11 +69,7 @@ private theorem quotientKilled (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     D.zero n (diagonalIntegralSource Y)
 
 /-- The completed supported constant is the ordinary limit of its quotient tower,
-with the coefficient-unit normalization at every projection.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-limit.proof.md`, paragraph (1);
-the cokernel source calculation in `sk-prop-diagonal-tower-system`, step (3);
-Stacks Tag 099L. -/
+with the coefficient-unit normalization at every projection. -/
 theorem diagonal_supported_ordinary_limit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (D : DiagonalReductionPresentation l (diagonalScalarExtension l (diagonalSurface Y))) :
     ∃ s : (diagonalCompletedRestriction l (diagonalSurface Y)).obj

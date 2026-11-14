@@ -79,7 +79,9 @@ import Mathlib.Algebra.Group.Action.Basic
 
 /-! # The orthogonality test for local principal completeness
 
-Source: Stacks Tags 091Q and 0999.
+## References
+
+* Stacks Project, Tags 091Q and 0999.
 -/
 
 @[expose] public section
@@ -232,9 +234,7 @@ private theorem kernel_section_divisible
   exact Ideal.mem_span_singleton.mp (hle hm)
 
 /-- Orthogonality against complexes on which the generator acts invertibly implies
-local completeness for the principal constant ideal.
-
-Source: Stacks Tags 091Q and 0999. -/
+local completeness for the principal constant ideal. -/
 theorem constantPrincipalComplete_of_orthogonal
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (n : ℕ)

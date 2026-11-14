@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.CoherentFiniteTyp
 
 /-! # Restriction comparison for the canonical relative Proj
 
-Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC, affine-local comparison.
+## References
+
+* Stacks Project, Morphisms, Lemmas 01WB, 01WC (affine-local comparison)
+* Stacks Project, Constructions, Tag 01NQ
 -/
 
 @[expose] public section
@@ -95,10 +98,7 @@ private theorem chart_iso {S : Scheme.{u}} (E : S.Modules) [E.IsQuasicoherent]
     rfl
 
 /-- The canonical relative Proj commutes with restriction to an affine open: the relative Proj
-of Sym(E|_U) over U is isomorphic, over U, to the preimage of U in the relative Proj of Sym(E).
-
-Source: Stacks Project, Morphisms, Lemmas 01WB and 01WC, affine-local comparison;
-Constructions, Tag 01NQ. -/
+of Sym(E|_U) over U is isomorphic, over U, to the preimage of U in the relative Proj of Sym(E). -/
 theorem exists_canonicalRelativeProj_restrict_iso {S : Scheme.{u}} (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (hU : IsAffineOpen U)
     (hq : (E.restrict U.ι).IsQuasicoherent) :

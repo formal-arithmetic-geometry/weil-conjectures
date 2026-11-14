@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechCycleRealization
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationTransfer
 
 /-! # Inverse image on normalized additive étale Čech edges
-Source: Stacks Project, Tags 01FD and 03P2. -/
+
+## References
+
+* Stacks Project, Tag 01FD (Lemma 20.15.1)
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 
@@ -23,10 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Matched cycles have inverse-image classes for any normalized edge equivalences.
-The cycles and both equivalences are supplied: no existence or scalar law is asserted.
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1, coefficient/refinement diagram,
-applied to the small étale sites; Tag 03P2 identifies the coefficient sections. -/
+/-- Matched cycles have inverse-image classes for any supplied normalized edge equivalences. -/
 theorem etaleAdditiveCech_normalized_inverseImage
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated]

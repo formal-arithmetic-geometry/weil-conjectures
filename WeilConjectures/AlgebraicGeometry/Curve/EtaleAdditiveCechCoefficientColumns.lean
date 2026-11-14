@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
 
 /-! # The fixed additive coefficient augmentation on vertical columns
 
-Source: Stacks Project, Tags 03P2 and 01EQ.
+## References
+
+* Stacks Project, Tag 03P2 (Theorem 59.22.4)
+* Stacks Project, Tag 01EQ (Lemma 20.11.2)
 -/
 
 @[expose] public section
@@ -165,9 +168,7 @@ private theorem coefficient_sections_coordinate (X : Scheme.{u})
 
 
 /-- Each fixed coefficient map augments its vertical resolution column by a
-quasi-isomorphism when the tuple intersections are affine.
-Source: Stacks Project, Theorem 59.22.4 (Tag 03P2), affine acyclicity, and
-Lemma 20.11.2 (Tag 01EQ), the augmented vertical columns. -/
+quasi-isomorphism when the tuple intersections are affine. -/
 theorem additiveCechCoefficientMap_column_quasiIso
     (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]
     (U : ι → X.Opens)

@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Category
 /-!
 # Comparing the two geometric finiteness predicates
 
-Source: Stacks Project, Tag 04FN.
+## References
+
+* [Stacks Project, Tag 04FN](https://stacks.math.columbia.edu/tag/04FN)
 -/
 
 @[expose] public section
@@ -71,8 +73,7 @@ private theorem bijective_geometric_lifts {Y : Scheme.{v}}
       _ = t.left := pullback.lift_fst _ _ _
 
 /-- Finiteness at algebraically closed geometric points implies the source library's
-finiteness predicate, which tests all separably closed geometric points.
-Source: Stacks Project, Tag 04FN (invariance under extension of geometric points). -/
+finiteness predicate, which tests all separably closed geometric points. -/
 theorem isFiniteSheaf_of_finite_algClosed_stalks {Y : Scheme.{v}}
     (E : Sheaf Y.smallEtaleTopology (Type (v + 1)))
     (h : ∀ (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),

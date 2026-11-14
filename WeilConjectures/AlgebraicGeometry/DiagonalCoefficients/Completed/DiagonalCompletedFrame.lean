@@ -14,6 +14,10 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Integral.DiagonalIntegralRootMap
 
 /-! # Normalized coefficient equivalences before transporting a diagonal class
+
+## References
+
+* Stacks Project, Tag 070G
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The fixed canonical right-derived condensed Z_l direct image.
-Source: Stacks Tag 070G and the coefficient comparison. -/
+/-- The fixed canonical right-derived condensed Z_l direct image. -/
 abbrev condensedDiagonalRightDerived (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :=
   canonicalDiagonalRightDerived

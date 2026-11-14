@@ -84,13 +84,14 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 /-!
 # The canonical direct-image/derived-limit comparison
 
-Source: blueprint proper base change, direct image and limits; Stacks Tag 099N
-and Cohomology on Sites, lemma-Rf-commutes-with-Rlim.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso`:
-  the recorded construction or statement of this node.
+  the canonical comparison between direct image and derived limits.
+
+## References
+
+* Stacks Project, Tags 099N, 079P, 06YY, 0D6D, 03EL, 0944 and 015F
 -/
 
 @[expose] public noncomputable section
@@ -144,8 +145,7 @@ private theorem evaluationPreservesKInjective (B : Type*) [Category B] [Abelian 
   ⟨fun J _ ↦ evaluationMapKInjective B J n⟩
 
 /-- Evaluation of strict towers preserves K-injective complexes: its left adjoint
-is the exact sum of copies indexed by arrows into the chosen level.
-Source: blueprint direct image and limits, evaluation clause; Stacks 079P. -/
+is the exact sum of copies indexed by arrows into the chosen level. -/
 @[instance]
 theorem completedTowerEvaluation_kinjective (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) (n : ℕ)
@@ -157,8 +157,7 @@ theorem completedTowerEvaluation_kinjective (T : Scheme.{t})
   exact evaluationMapKInjective _ J (Opposite.op n)
 
 set_option linter.defProp false in
-/-- The exact K-injective normalization of tower direct-image evaluation.
-Source: blueprint direct image and limits, evaluation clause; Stacks 099N. -/
+/-- The exact K-injective normalization of tower direct-image evaluation. -/
 def AdicCoefficientDatum.IsTowerPushEvaluation (n : ℕ)
     (α : d.towerPush f ⋙
         reductionTowerDerivedEvaluation V (reductionModuleRing V (d.completedRing V)) n ≅
@@ -325,8 +324,7 @@ end NormalizedTowerEvaluation
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The levelwise direct image comparison is fixed on K-injective towers by the
-identity of the two termwise evaluations. It is a natural isomorphism.
-Source: blueprint direct image and limits, first clause; Stacks 099N. -/
+identity of the two termwise evaluations. It is a natural isomorphism. -/
 theorem AdicCoefficientDatum.towerPushEvaluation_existsUnique (n : ℕ) :
     ∃! α : d.towerPush f ⋙
         reductionTowerDerivedEvaluation V (reductionModuleRing V (d.completedRing V)) n ≅
@@ -646,8 +644,7 @@ private theorem limitCounitProjection_eq (T : Scheme.{t}) (n : ℕ) :
 universe ub vb uc vc
 attribute [local instance] evaluationPreservesKInjective
 
-/-- The ordinary scalar/pullback mate, in the inverse direction of chi.
-Source: blueprint four corners and tower compatibility; Stacks 06YY and 0D6D. -/
+/-- The ordinary scalar/pullback mate, in the inverse direction of chi. -/
 def completedOrdinaryReductionPullbackInv (n : ℕ) :
     proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
         (d.integralRingIso f) ⋙ proEtaleRingExtension (d.projection U n) ⟶
@@ -662,8 +659,7 @@ def completedOrdinaryReductionPullbackInv (n : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The normalized ordinary mate is the invertible tensor balancing map.
-Source: blueprint tower compatibility; Stacks 03EL and 06YY. -/
+/-- The normalized ordinary mate is the invertible tensor balancing map. -/
 theorem completedOrdinaryReductionPullbackInv_isIso (n : ℕ) :
     IsIso (completedOrdinaryReductionPullbackInv d f n) := by
   let av := proEtaleRingExtensionAdjunction (d.projection V n)
@@ -783,9 +779,8 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
 end GenericComparisonPredicate
 
 set_option linter.defProp false in
-/-- Reuse the strict quotient-unit normalized representative formula.
-The ordinary comparison agrees with this module's by `ordinaryReduction_eq_stratum`.
-Source: blueprint tower compatibility, steps 1--3; Stacks 06YY and 0D6D. -/
+/-- The strict quotient-unit normalized representative formula for the completed reduction
+pullback comparison. The ordinary comparison agrees with it by `ordinaryReduction_eq_stratum`. -/
 def IsCompletedReductionPullbackComparison
     (τ : completedReductionTower V d ⋙ d.towerPull f ≅
         d.pull f ⋙ completedReductionTower U d) : Prop :=
@@ -799,7 +794,7 @@ private theorem reductionFormula_iff
     IsCompletedReductionPullbackComparison d f τ ↔ StratumReductionFormula d f τ := Iff.rfl
 
 /-- The universal normalization of the ordinary reduction comparison determines its derived lift.
-Source: Stacks Tags 06YY and 03EL. -/
+-/
 theorem completedReductionPullbackIso_existsUnique :
     ∃! τ : completedReductionTower V d ⋙ d.towerPull f ≅
         d.pull f ⋙ completedReductionTower U d,
@@ -809,7 +804,7 @@ theorem completedReductionPullbackIso_existsUnique :
     fun η hη ↦ hu η ((reductionFormula_iff d f η).mp hη)⟩
 
 /-- The normalized reduction-tower/pullback isomorphism, rather than an arbitrary lift
-of levelwise maps. Source: blueprint tower compatibility. -/
+of levelwise maps. -/
 def AdicCoefficientDatum.reductionTowerPullbackIso :
     completedReductionTower V d ⋙ d.towerPull f ≅
       d.pull f ⋙ completedReductionTower U d :=
@@ -925,7 +920,7 @@ private theorem towerProjection_completion (K : d.derived U) :
 
 /-- Evaluate the pushed reduction tower using its canonical K-injective evaluation
 comparison, the normalized reduction counit, and the specified scalar-restriction
-comparison. Source: blueprint direct image and limits, projection-formula clause. -/
+comparison. -/
 def AdicCoefficientDatum.towerPushReductionEvaluation
     (K : d.derived U) (n : ℕ) :
     (reductionTowerDerivedEvaluation V
@@ -1040,9 +1035,7 @@ private theorem towerProjection_evaluation (K : d.derived U) (n : ℕ) :
 
 /-- The specified tower projection evaluates to the finite projection formula, is
 natural in arbitrary morphisms, and identifies the two completion units. The map
-is one morphism of derived strict towers, retaining every quotient transition.
-Source: blueprint direct image and limits, projection and completeness clauses;
-Stacks Tags 0944 and 099N. -/
+is one morphism of derived strict towers, retaining every quotient transition. -/
 theorem AdicCoefficientDatum.towerProjection_properties (K : d.derived U) :
     (∀ n : ℕ,
       (reductionTowerDerivedEvaluation V
@@ -1080,8 +1073,7 @@ private theorem derivedTowerIsIso
     exact (NatIso.isIso_map_iff (E.mapDerivedCategoryHomologyFunctorIso i) a).2 inferInstance
   exact NatIso.isIso_of_isIso_app _
 
-/-- Perfect quotient coefficients make the specified strict projection invertible.
-Source: blueprint tower compatibility; Stacks Tags 0944 and 015F. -/
+/-- Perfect quotient coefficients make the specified strict projection invertible. -/
 theorem AdicCoefficientDatum.towerProjection_isIso {U V : Scheme.{t}} (f : U ⟶ V)
     (K : d.derived U) : IsIso (d.towerProjection f K) := by
   have he (n : ℕ) : IsIso
@@ -1103,8 +1095,7 @@ theorem AdicCoefficientDatum.towerProjection_isIso {U V : Scheme.{t}} (f : U ⟶
 
 attribute [instance] AdicCoefficientDatum.towerProjection_isIso
 
-/-- Direct image preserves quotient-tower completeness, with the specified completion unit.
-Source: blueprint direct image and limits; Stacks Tag 099N (3), (4). -/
+/-- Direct image preserves quotient-tower completeness, with the specified completion unit. -/
 theorem AdicCoefficientDatum.push_complete (K : d.derived U)
     (hK : d.TowerComplete U K) : d.TowerComplete V ((d.push f).obj K) := by
   let : IsIso (d.completionUnit U K) := hK

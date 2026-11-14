@@ -10,8 +10,9 @@ import all WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 
 /-! # Deriving an ordinary completed coefficient square
 
-Source: coefficient changes, paragraph (1), coefficient/direct-image comparison;
-Stacks Tags 05RR and 0941.
+## References
+
+* Stacks Project, Tags 05RR, 0941
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +25,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- An exact equivalence square has a right-derived comparison fixed by the
-full units on complexes, retaining the two independent localization universes.
-
-Source: coefficient changes, paragraph (1); Stacks Tags 05RR and 0941. -/
+full units on complexes, retaining the two independent localization universes. -/
 theorem diagonalExactSquare_exists
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
     [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -74,7 +73,7 @@ structure CompletedOrdinarySquare (l : ℕ) [Fact l.Prime]
 
 /-- Derive an ordinary square by its universal-unit-normalized comparison.
 The normalization uniquely fixes the derived isomorphism by the two universal
-right-derived units. Source: coefficient changes, paragraph (1). -/
+right-derived units. -/
 def CompletedOrdinarySquare.derive
     {l : ℕ} [Fact l.Prime] {X S : Scheme.{u}} {f : X ⟶ S}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

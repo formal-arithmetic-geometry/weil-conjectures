@@ -176,7 +176,12 @@ import all WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionSiteCompari
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryExactTransport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
-/-! # The two-site comparison of the positive integral Kummer composite -/
+/-! # The two-site comparison of the positive integral Kummer composite
+
+## References
+
+* [Stacks Project, Tag 03PL](https://stacks.math.columbia.edu/tag/03PL)
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
@@ -296,10 +301,7 @@ private theorem ordinaryKummer_comp (A : Type (u + 1)) [CommRing A]
 
 /-- The evaluated integral Kummer composite is the comparison image of the
 ordinary etale Kummer class. This assertion has no Chern data, scalar restriction,
-frame, supplied finite lift, support, or limiting arrow.
-
-Source: geometric tower classes proof (2), positive Kummer connecting map;
-Cartier reduction site comparison, Kummer comparison paragraph; Stacks 03PL. -/
+frame, supplied finite lift, support, or limiting arrow. -/
 theorem diagonalTrace_integralKummer_comparison
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (n : ℕ)

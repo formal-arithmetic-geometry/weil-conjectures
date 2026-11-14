@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicModuleSectionComparison
 
-/-! # Coefficient identification on a pro-etale site object -/
+/-! # Coefficient identification on a pro-etale site object
+
+## References
+
+* Stacks Project, Tag 03CV
+-/
 
 @[expose] public section
 
@@ -16,8 +21,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- Normalized coefficient sheaves restrict by the identity on function sections.
-Source: Stacks 03CV, and the coefficient normalization of the base comparison. -/
+/-- Normalized coefficient sheaves restrict by the identity on function sections. -/
 theorem adicSliceCoefficientComparison (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) :
     ∃ c : ∀ (X : Scheme.{u}) (U : X.ProEt),

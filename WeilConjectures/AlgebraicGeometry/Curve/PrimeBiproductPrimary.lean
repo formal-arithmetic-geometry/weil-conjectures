@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
 
 /-! # Componentwise curve assertions for finite biproducts
 
-Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C. -/
+## References
+
+* Stacks Project, Tags 03SC, 0A5C
+-/
 
 @[expose] public section
 
@@ -24,8 +27,7 @@ namespace AlgebraicGeometry.IsCurve
 
 -- The base morphism is unused, but belongs to the existing public signature.
 set_option linter.unusedVariables false in
-/-- Componentwise equivalence for the primary assertions of a prime-killed finite sum.
-Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. -/
+/-- Componentwise equivalence for the primary assertions of a prime-killed finite sum. -/
 theorem prime_biproduct_primary_iff (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     (r : ℕ) [Fact r.Prime] {ι : Type} [Finite ι]

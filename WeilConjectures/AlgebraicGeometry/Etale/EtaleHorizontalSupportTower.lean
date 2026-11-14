@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperTower
 
 /-! # The normalized compactification tower for etale horizontal composition
 
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7J and 0F7L.
+## References
+
+* Stacks Project, Tags 0F7B and 0F7F (proper/quasi-finite interchange), Tag 0F7J
+  (composition), Tag 0F7L (3) (base-change compatibility) and Tag 0F4L (graph comparison)
 -/
 
 @[expose] public section
@@ -71,10 +74,7 @@ private lemma compactSupportTower_cancel
 compactification normal form. This identity is before either horizontal counit is applied.
 The proper factor is the right-adjoint mate of inverse etale sum exchange under the
 inverse-image/direct-image adjunctions. In particular it does not involve inverse proper
-base change, or the full compact-support exchange for f.
-Source: Stacks Project, Tags 0F7B and 0F7F for proper/quasi-finite interchange,
-Tag 0F7J for composition, and Tag 0F7L, item (3), for its base-change compatibility;
-Tag 0F4L for the canonical graph comparison. -/
+base change, or the full compact-support exchange for f. -/
 theorem etaleHorizontalSupport_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

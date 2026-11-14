@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonPureSections
 
 /-! # Normalized finite Tate comparison maps
 
-Source: Stacks Project, Tags 03PK, 03EK and 099R.
+## References
+
+* Stacks Project, Tags 03PK, 03EK, 099R
 -/
 
 @[expose] public noncomputable section
@@ -96,8 +98,7 @@ private theorem first_comparison (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤)))
   erw [htensor, hz, he]
 
 /-- The finite root projection and the finite-root site comparison give normalized
-comparison isomorphisms in every nonnegative degree.
-Source: `lem-amb-finite-tate-site-descent`, proof steps 1 and 3; Stacks 03PK and 03EK. -/
+comparison isomorphisms in every nonnegative degree. -/
 theorem finite_tate_normalized_comparisons :
     ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →
       ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),

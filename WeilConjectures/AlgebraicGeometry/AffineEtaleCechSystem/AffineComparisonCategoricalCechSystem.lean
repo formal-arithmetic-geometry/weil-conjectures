@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 
 /-! # Categorical finite Čech section systems
 
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions.
+## References
+
+* Stacks Project, Tag 099U (the two finite Čech limit reductions)
 -/
 
 @[expose] public section
@@ -40,8 +42,7 @@ variable {Y : Scheme.{u}} {V : Y.ProEt} {n : ℕ} {U : Fin n → Over V}
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- A finite product cocone is colimiting when its components are colimiting and
-filtered colimits are exact. Source: Mathlib, HasExactColimitsOfShape and
-CategoryTheory.Limits.colim, applied to a finite product diagram. -/
+filtered colimits are exact. -/
 private theorem finiteProductCocone_isColimit
     {K : Type} [Finite K] {D₀ : Type u} [SmallCategory D₀] [IsFiltered D₀]
     [HasColimitsOfShape D₀ A] [HasExactColimitsOfShape D₀ A]
@@ -267,8 +268,7 @@ private theorem categoricalDegreeIsColimit [IsCofiltered I]
   erw [Pi.lift_comp_π]
   rfl
 
-/-- Exactness at a positive degree passes to a degreewise filtered colimit.
-Source: Mathlib, CategoryTheory.Limits.colim.exact_mapShortComplex. -/
+/-- Exactness at a positive degree passes to a degreewise filtered colimit. -/
 private theorem exactAt_of_degreewise_colimit
     {D₀ : Type u} [SmallCategory D₀]
     [HasColimitsOfShape D₀ A] [HasExactColimitsOfShape D₀ A]
@@ -286,8 +286,7 @@ private theorem exactAt_of_degreewise_colimit
     (fun i ↦ (c.ι.app i).comm q (q + 1))
     (fun i ↦ (c.ι.app i).comm (q + 1) (q + 2))
 
-/-- Positive Čech exactness descends along the simultaneous étale presentation.
-Source: Stacks Project, Tag 099U, both finite-limit reductions. -/
+/-- Positive Čech exactness descends along the simultaneous étale presentation. -/
 theorem categoricalOriginalExactAt [IsCofiltered I]
     (hS : ∀ k y, Nonempty (IsLimit
       ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone (S.nerveCone k y))))

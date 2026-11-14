@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenClosedRecollement
 /-!
 # Open-closed localization for relative etale compact support
 
-Source: Stacks Project, Tag 0GKP, `lemma-relative-triangle-associated-to-open`.
+## References
+
+* Stacks Project, Tag 0GKP
 -/
 
 @[expose] public section
@@ -31,10 +33,7 @@ namespace AlgebraicGeometry.Etale
 /-- Relative compact support has an open-closed distinguished triangle and the associated
 long exact sequence of cohomology sheaves. The three isomorphisms identify the vertices
 with the specified compactification-dependent bounded-below pushforwards, viewed in the
-ambient derived category. Since `D⁺` is strictly full and triangulated, this also specifies
-its triangle in `D⁺`.
-
-Source: Stacks Project, Tag 0GKP. -/
+ambient derived category. -/
 theorem exists_compactSupport_openClosed_triangle
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U Z X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

@@ -15,7 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperSheafTransposeN
 import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphTransferNormalization
 import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphDerivedMate
 
-/-! # The graph transpose of the normalized sheaf map -/
+/-! # The graph transpose of the normalized sheaf map
+
+## References
+
+* Stacks Project, Tag 0F7B, case (b)
+* Stacks Project, Tag 0F4L (graph support description)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,8 +35,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   derivedEtaleLowerShriekUpperStarAdjunction etaleLowerShriekUpperStarAdjunction
 
 /-- A sheaf map normalized into the common direct image has the graph transfer as
-its transpose after passage through the right-derived units.
-Source: Stacks Project, Tag 0F7B, case (b), and Tag 0F4L, graph support description. -/
+its transpose after passage through the right-derived units. -/
 theorem properSheafUnit_graph_transpose
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}}

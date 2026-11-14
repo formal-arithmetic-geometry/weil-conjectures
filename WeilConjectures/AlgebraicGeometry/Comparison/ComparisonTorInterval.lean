@@ -22,6 +22,10 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTranspor
 
 /-!
 # Comparison preserves and detects Tor intervals
+
+## References
+
+* Stacks Project, Tags 099T, 099V, 08FZ, 08G0, 08G1
 -/
 
 @[expose] public section
@@ -41,8 +45,6 @@ has the same Tor amplitude, tested against every module sheaf on the respective 
 The pro-etale object is expressed in the recorded intrinsic constant-ring presentation
 by the canonical exact coefficient realization, after the recorded termwise pullback.
 The coefficient `ULift` is the one used by `proEtaleDerivedCategory`.
-Source: blueprint `sec-six-functors/sk-cor-sf-direct-image-ctf/`
-`lem-exc-comparison-tor-interval.md`; Stacks, Tags 099T, 099V, 08FZ, 08G0 and 08G1.
 -/
 theorem comparison_torAmplitudeIn_iff
     (A : Type u) [CommRing A] [Finite A]

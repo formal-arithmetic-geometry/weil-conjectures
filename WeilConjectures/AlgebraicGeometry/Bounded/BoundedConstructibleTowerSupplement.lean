@@ -23,14 +23,11 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 /-!
 # Uniformly bounded constructible adic towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-bounded-constructible-tower, order 1250; Stacks Tags 09AI and 09BT.
-
 Positive level n+1 is indexed by n : ℕ. Normalizations are stored for every comparable
 pair; their cocycle determines the nonconsecutive ones from the consecutive ones.
 Compatibility is expressed on their adjoints M_b→Res(M_a). The tensor-unit normalized
-scalar-extension adjunction makes this equivalent to the displayed normalization
-identities in the blueprint. This permits restrictions to retain their actual
+scalar-extension adjunction makes this equivalent to the direct normalization
+identities. This permits restrictions to retain their actual
 inverse-image coefficients, without choosing a tensor/pullback comparison.
 
 ## Main definitions
@@ -40,6 +37,10 @@ inverse-image coefficients, without choosing a tensor/pullback comparison.
 * `IsUniformlyBoundedConstructibleAdicTower`: common bounds, finite strata and local models.
 * `pbcLevelConstantComparison` and `pbcCompletedComparison`: canonical coefficient
   presentation comparisons fixed on constant sections.
+
+## References
+
+* Stacks Project, Tags 09AI, 09BT, 03DA, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -162,8 +163,7 @@ variable {B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
   (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ)
 
 include h in
-/-- Composition of exact derived scalar restrictions, with its canonical section maps.
-Source: Stacks Tag 03DA. -/
+/-- Composition of exact derived scalar restrictions, with its canonical section maps. -/
 def pbcDerivedRestrictComp : pbcDerivedRestrict ψ ⋙ pbcDerivedRestrict φ ≅
     pbcDerivedRestrict χ :=
   Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ) ≪≫
@@ -185,8 +185,7 @@ def pbcReductionNormalizationHom (K : DerivedCategory (pbcModules X R)) :
   ((pbcDerivedScalarAdjunction ψ).homEquiv _ _).symm
     (pbcReductionTransition φ ψ χ h K)
 
-/-- Derived balancing is invertible, without flatness of either coefficient map.
-Source: blueprint order 1239; Stacks Tag 06YY. -/
+/-- Derived balancing is invertible, without flatness of either coefficient map. -/
 theorem pbcReductionNormalization_isIso (K : DerivedCategory (pbcModules X R)) :
     IsIso (pbcReductionNormalizationHom φ ψ χ h K) := by
   let e := Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction φ)
@@ -338,9 +337,8 @@ def adicTowerRestrictedTransition (M : AdicTower X d) (b a : ℕ) (hab : a ≤ b
 
 /-- A common local bounded model with adic-lisse finite-type terms, finite-lisse
 cohomology in every finite reduction, and compatible quotient-linear identifications.
-The compatibility equation is the adjoint form of e_aρ=σ(Le_b); scalar-extension Hom
-bijections make it equivalent to the blueprint's equation.
-Source: blueprint order 1250; Stacks Tags 09AI and 09BT. -/
+The compatibility equation is the adjoint form of e_aρ=σ(Le_b), equivalent to it by
+scalar-extension Hom bijections. -/
 structure AdicTowerLocalModel (M : AdicTower X d) (d₀ d₁ : ℤ) where
   /-- One complex over the restricted completed coefficients, independent of the level. -/
   complex : CochainComplex (pbcModules Y
@@ -372,8 +370,7 @@ structure AdicTowerLocalModel (M : AdicTower X d) (d₀ d₁ : ℤ) where
 /-- Uniformly bounded constructibility means one window and one finite locally closed
 stratification, with a pro-etale cover on each stratum carrying common local models.
 The coefficient restrictions are along the composite of the stratum immersion and the
-covering morphism. The finite-lisse cohomology covers can depend on both level and degree.
-Source: blueprint order 1250; Stacks Tags 09AI and 09BT. -/
+covering morphism. The finite-lisse cohomology covers can depend on both level and degree. -/
 def IsUniformlyBoundedConstructibleAdicTower (M : AdicTower X d) : Prop :=
   ∃ (d₀ d₁ : ℤ), d₀ ≤ d₁ ∧ ∃ S : Stratification X,
     ∀ α : Fin S.n, ∃ V : Sieve (⊤_ (S.domain α).ProEt),

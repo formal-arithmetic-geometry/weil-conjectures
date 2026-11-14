@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 
 /-! # Vanishing for a dense-open closed complement after open restriction
 
-Source: Stacks Project, Tag 0GJA, proof and remark (d).
+## References
+
+* Stacks Project, Tag 0GJA, proof and remark (d).
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ open CategoryTheory AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.IsCurve
 
 /-- A sheaf pushed forward from the closed complement of a dense open in a curve
-has no positive cohomology after restriction along an open immersion.
-Source: Stacks Project, Tag 0GJA, proof and remark (d). -/
+has no positive cohomology after restriction along an open immersion. -/
 theorem dense_open_complement_pullback_vanishing (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X Z : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

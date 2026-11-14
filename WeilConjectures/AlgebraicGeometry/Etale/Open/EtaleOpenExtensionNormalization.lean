@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenDerivedConjugate
 import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenLocalizationMate
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarRepresentativeMate
 
-/-! # The canonical open/scalar adjoint comparison has the prescribed cochain normalization. -/
+/-! # The canonical open/scalar adjoint comparison has the prescribed cochain normalization.
+
+## References
+
+* Stacks Project, Tags 03DI, 06YY, 0E8I
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -167,8 +172,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   ProEtale.etaleSheafExtendScalarsAdjunction openImmersionLowerShriekUpperStarAdjunction
   Adjunction.mapHomologicalComplex
 
-/-- The canonical open/scalar adjoint comparison has the prescribed cochain normalization.
-Source: Stacks Tags 0E8I, 03DI and 06YY; parent proof step 1. -/
+/-- The canonical open/scalar adjoint comparison has the prescribed cochain normalization. -/
 theorem etaleOpenExtensionNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

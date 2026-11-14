@@ -56,7 +56,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 The finite-family equivalence and uniqueness on flat-term K-flat models are proved here.
 The remaining normalized braided lift is isolated in its own theorem.
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
+
+## References
+
+* Stacks Project, Tags 06YS, 0G7D, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -254,11 +257,7 @@ attribute [local irreducible] TotalNormalization ModelNormalization
 
 /-- Clopen restriction has a unique K-flat-normalized derived tensor comparison. Its
 inverse is natural for every derived morphism; its tensorator and degree-zero unit make
-restriction a symmetric monoidal equivalence for the prescribed native tensor structures.
-
-Source: Stacks sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT; normalized
-finite-clopen application.
--/
+restriction a symmetric monoidal equivalence for the prescribed native tensor structures. -/
 theorem clopen_kflat_monoidal_descent
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

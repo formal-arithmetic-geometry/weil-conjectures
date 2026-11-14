@@ -45,9 +45,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 /-!
 # Tensor compatibility of constant-coefficient realization
 
-Source: Stacks Project, Modules on Sites, Tags 0GMW, 093I and 03CV.
 The realization is identified with module sheafification of the constant-scalar
 presheaf encoding, which carries the sectionwise tensor product unchanged.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 0GMW, 03EK, 093I and 03CV
 -/
 
 @[expose] public noncomputable section
@@ -252,8 +255,7 @@ end AlgebraicGeometry.Scheme.ConstantTensorAux
 namespace AlgebraicGeometry.Scheme
 
 -- The tensor comparisons require elaborating several large sheafification functor composites.
-/-- The constant-scalar tensor comparison is natural in both factors.
-Source: Stacks Project, Modules on Sites, Tag 0GMW. -/
+/-- The constant-scalar tensor comparison is natural in both factors. -/
 theorem etaleConstantModule_tensor_comparison (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] :
     let R := (constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj
@@ -292,8 +294,7 @@ theorem etaleConstantModule_tensor_comparison (T : Scheme.{u})
     Functor.isoWhiskerRight k E⟩
 
 -- The tensor comparisons require elaborating several large sheafification functor composites.
-/-- Realizing constant coefficients commutes naturally with right tensor.
-Source: Stacks Project, Modules on Sites, Sections 03EK, 093I and 03CV. -/
+/-- Realizing constant coefficients commutes naturally with right tensor. -/
 theorem etaleConstantModule_tensorRight_comparison (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :

@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Site comparison for the clopen projection and compositors
 
-Source: Stacks Project, Tags 09AF and 0F7B.
+## References
+
+* Stacks Project, Tags 09AF, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -452,8 +454,7 @@ private theorem tail_paste
   rw [← reassoc_of% nj', ← T'.map_comp_assoc, ← np]
   simp only [Functor.map_comp, Category.assoc]
 
-/-- The part of the proetale alpha after cartesian base change.
-Source: Stacks Tags 09AF and 0F7B. -/
+/-- The part of the proetale alpha after cartesian base change. -/
 def finiteClopenProEtaleTail
     (Λ : Type (u + 1)) [CommRing Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
@@ -482,9 +483,7 @@ def finiteClopenProEtaleTail
 attribute [local irreducible] upperStar Etale.upperStar comparisonUpperStar
   openImmersionLowerShriek Etale.openImmersionLowerShriek
 
-/-- Comparison preserves the clopen projection with its outgoing compositors.
-Source: Stacks Project, proetale.tex Tag 09AF and more-etale.tex Tag 0F7B;
-steps 2--3 of lem-cbc-finite-clopen-alpha-site-transport. -/
+/-- Comparison preserves the clopen projection with its outgoing compositors. -/
 theorem finiteClopenTailSiteTransport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)

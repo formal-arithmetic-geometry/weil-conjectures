@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # The quotient-completion unit on arbitrary complexes
 
-Source: Stacks Tags 099M and 0941; naturality of localization and derived comparisons.
+## References
+
+* Stacks Project, Tags 06YY, 099M and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -57,9 +59,7 @@ private theorem constantOrdinaryUnit_naturality
   exact congrArg (fun t ↦ t.app n)
     ((ConstantCompletion.reductionUnit J A I b).naturality (f.f q))
 
-/-- The representative normalization of quotient completion holds on every complex.
-
-Source: Stacks Tags 06YY, 099M and 0941. -/
+/-- The representative normalization of quotient completion holds on every complex. -/
 theorem constantCompletionUnit_normalization_all
     {C : Type t} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type t) [CommRing A] (I : Ideal A) (b : Bool)

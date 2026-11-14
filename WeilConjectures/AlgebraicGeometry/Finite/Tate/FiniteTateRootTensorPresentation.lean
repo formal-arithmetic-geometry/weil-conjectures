@@ -17,7 +17,9 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualTowerCore
 
 /-! # Fixed-scalar presentation of the finite root projection
 
-Source: Stacks Project, Tags 03CY, 03EK and 03PK.
+## References
+
+* Stacks Project, Tags 03CY, 03EK, 03PK
 -/
 
 @[expose] public noncomputable section
@@ -344,9 +346,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (n : ℕ)
 
 /-- The root projection identifies the first finite coefficient twist with the
-fixed-scalar extension of the finite roots module, retaining its tensor formula.
-Source: Stacks 03CY, 03EK and 03PK; the first step of
-`lem-amb-finite-tate-normalized-comparisons`. -/
+fixed-scalar extension of the finite roots module, retaining its tensor formula. -/
 theorem finite_tate_root_tensor_presentation (T : Scheme.{u})
     (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)
     (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) :

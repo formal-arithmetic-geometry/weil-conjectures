@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicAc
 
 /-! # Etale presentations and scalar transport for a supplied algebraic tower
 
-Source: Stacks Project, Tags 09C6, 09BV and 06YY.
+## References
+
+* Stacks Project, Tags 09C6, 09BV, 06YY, 09AL and 05RU
 -/
 
 @[expose] public noncomputable section
@@ -23,13 +25,11 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The lifted finite quotient ring at a level.
-Source: Stacks Tag 09C6, with coefficient universes made explicit. -/
+/-- The lifted finite quotient ring at a level. -/
 abbrev finitePerfectAdicIsomorphismRing {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) := ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))
 
-/-- Consecutive quotient homomorphism in the lifted coefficient universe.
-Source: Stacks Tag 09C6. -/
+/-- Consecutive quotient homomorphism in the lifted coefficient universe. -/
 def finitePerfectAdicIsomorphismQuotient {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     finitePerfectAdicIsomorphismRing d (n + 1) →+* finitePerfectAdicIsomorphismRing d n :=
@@ -39,8 +39,7 @@ def finitePerfectAdicIsomorphismQuotient {A : Type t} [CommRing A]
       (ULift.ringEquiv : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) ≃+*
         (A ⧸ d.ideal ^ (n + 1 + 1))).toRingHom)
 
-/-- A finite-coefficient etale complex on a chart.
-Source: Stacks Tags 09AL and 05RU. -/
+/-- A finite-coefficient etale complex on a chart. -/
 abbrev finitePerfectAdicIsomorphismComplex {A : Type t} [CommRing A]
     (Y : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :=
   DerivedCategory (Sheaf Y.smallEtaleTopology
@@ -50,10 +49,8 @@ abbrev finitePerfectAdicIsomorphismComplex {A : Type t} [CommRing A]
 
 The presheaf maps have their normalization equation only on etale generators.
 The scalar-forgetting realization functors, coefficient interchange and two level
-comparisons have their actual normalization identities. Transport of raw isomorphisms
-and preservation of a supplied raw square are then constructed and proved below. Neither
-evaluation on pro-etale sheaf sections nor its reduction square is contained in the datum.
-Source: Stacks Tags 09C6, 09BV and 06YY. -/
+comparisons have their actual normalization identities. Neither evaluation on pro-etale
+sheaf sections nor its reduction square is contained in the datum. -/
 structure FinitePerfectAdicIsomorphismPresentation
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -157,8 +154,7 @@ private theorem conjugate_normalization_square
   change F.map dC ≫ F.map (H.map e'.hom) ≫ α.hom.app K' ≫ actual'.hom = _
   rw [← F.map_comp_assoc, ← he, F.map_comp, Category.assoc, ha]
 
-/-- Apply the scalar-forgetting realization and the two specified level comparisons.
-Source: Stacks Tag 09C6. -/
+/-- Apply the scalar-forgetting realization and the two specified level comparisons. -/
 def FinitePerfectAdicIsomorphismPresentation.transport
     {X : Scheme.{t}} {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     {M : DerivedCategory (CompletedAdicModules X d)} {V : X.Etale}
@@ -172,8 +168,7 @@ def FinitePerfectAdicIsomorphismPresentation.transport
         (op n) :=
   (D.model U W f n).symm ≪≫ (D.realization U W f n).mapIso e ≪≫ D.actual U W f n
 
-/-- The two normalization identities transport a raw square to the actual diagrams.
-Source: Stacks Tag 09C6; naturality of the coefficient comparison. -/
+/-- The two normalization identities transport a raw square to the actual diagrams. -/
 theorem FinitePerfectAdicIsomorphismPresentation.transport_square
     {X : Scheme.{t}} {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     {M : DerivedCategory (CompletedAdicModules X d)} {V : X.Etale}
@@ -202,10 +197,7 @@ theorem FinitePerfectAdicIsomorphismPresentation.transport_square
     (D.actual_normalized U W f n) (D.model_normalized U W f n) e e' he
 
 /-- Descend finite-level models and construct their etale normalization presheaf maps.
-This supplies no pro-etale sheaf-section evaluation or evaluated reduction square.
-
-Source: Stacks Project, Tag 09C6, finite quotient descent and normalized algebraic levels;
-Tag 09BV, Isom presheaves; Tag 06YY, universal normalization arrows. -/
+This supplies no pro-etale sheaf-section evaluation or evaluated reduction square. -/
 theorem finitePerfectAdic_isomorphism_presentation
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

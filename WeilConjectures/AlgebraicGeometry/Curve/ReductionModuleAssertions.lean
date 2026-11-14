@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # The eight assertions descend from the reduction
 
-Source: Stacks Project, Theorem 59.83.10 (03SC), first proof sentence,
-and Proposition 59.45.4 (03SI).
+## References
+
+* Stacks Project, Theorem 59.83.10 (Tag 03SC) and Proposition 59.45.4 (Tag 03SI)
 -/
 
 @[expose] public section
@@ -23,8 +24,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 open Etale
 
-/-- For a fixed sheaf, all eight assertions descend from the nilradical reduction.
-Source: Stacks Project, Theorem 59.83.10 (03SC), first proof sentence; Proposition 03SI. -/
+/-- For a fixed sheaf, all eight assertions descend from the nilradical reduction. -/
 theorem IsCurve.assertions_of_reduction
     (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]

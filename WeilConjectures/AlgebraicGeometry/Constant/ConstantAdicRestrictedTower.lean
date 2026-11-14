@@ -125,7 +125,9 @@ import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 
 /-! # The actual adic tower after restriction to constant completion coefficients
 
-Source: Stacks Project, Tags 03DA and 06YY, scalar restriction and its compositors.
+## References
+
+* Stacks Project, Tags 03DA and 06YY (scalar restriction and its compositors).
 -/
 
 @[expose] public noncomputable section
@@ -525,8 +527,7 @@ private theorem actualCommonTransition_id {X Y : Scheme.{u}} (g : Y ⟶ X)
   simpa only [Category.comp_id] using
     (actualCommonTransition_comp g d M n n n le_rfl le_rfl).symm
 
-/-- The consecutive actual transitions, restricted to the common constant coefficient ring.
-Source: Stacks Tags 03DA and 06YY. -/
+/-- The consecutive actual transitions, restricted to the common constant coefficient ring. -/
 def constantAdicRestrictedStep {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : AdicTower X d) (n : ℕ) :=
@@ -538,8 +539,7 @@ def constantAdicRestrictedStep {X Y : Scheme.{u}} (g : Y ⟶ X)
       (constantAdicFiniteProjection_comp g d (n + 1) n (Nat.le_succ n))).hom.app
         ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj (M.level n))
 
-/-- The sequential diagram built from the actual consecutive transitions.
-Source: Stacks Tags 03DA and 06YY. -/
+/-- The sequential diagram built from the actual consecutive transitions. -/
 def constantAdicRestrictedTower {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : AdicTower X d) :
@@ -550,11 +550,7 @@ def constantAdicRestrictedTower {X Y : Scheme.{u}} (g : Y ⟶ X)
       ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj (M.level n)))
     (constantAdicRestrictedStep g d M)
 
-/-- Composing consecutive transitions recovers every actual normalized transition.
-No local systems, bounds, stalk models, markings or covering are used.
-
-Source: Stacks Tags 03DA and 06YY; the semilinear cocycle in
-`def-weil-pbc-bounded-constructible-tower`. -/
+/-- Composing consecutive transitions recovers every actual normalized transition. -/
 theorem constantAdicRestrictedTower_map {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : AdicTower X d) (m n : ℕ) (h : n ≤ m) :

@@ -13,12 +13,11 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 # Continuous `ℤ_ℓ`-characters of the fundamental group and `lim_n H¹(Y, ℤ/ℓⁿ)`
 
 Let `Y` be a connected scheme with a geometric point `s`, `G = π₁(Y, s)` and `ℓ` a prime. The
-identifications `H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(G, ℤ/ℓⁿ)` of blueprint
-`lemma-invariant-additive-characters` are compatible with the reductions `ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ`
-(`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_map`), so they identify
-`Hom_cont(G, ℤ_ℓ)` with the inverse limit of the groups `H¹(Y_ét, ℤ/ℓⁿ)` under the maps induced
-by reduction (`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv`). The
-identification is equivariant for an automorphism `e` of `Y`: precomposition with the induced
+identifications `H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(G, ℤ/ℓⁿ)` are compatible with the reductions
+`ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ` (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_map`), so
+they identify `Hom_cont(G, ℤ_ℓ)` with the inverse limit of the groups `H¹(Y_ét, ℤ/ℓⁿ)` under the
+maps induced by reduction (`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv`).
+The identification is equivariant for an automorphism `e` of `Y`: precomposition with the induced
 map `σ` of `G` corresponds to the transport of torsors along `e`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv_comp`).
 -/
@@ -214,7 +213,7 @@ Let `e` be an automorphism of `Y`, `τ : F_s ∘ e_* ≅ F_s` a transport of the
 bijection `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃ lim_n H¹(Y_ét, ℤ/ℓⁿ)` sends `b ∘ σ` to the transport along
 `e` of the family attached to `b`. For the Frobenius of a curve over a finite field and a lift
 `s` of Frobenius to the Weil group, `σ` is conjugation `g ↦ s⁻¹ g s` (up to the convention for
-`s`), which is the Frobenius action `f ↦ [g ↦ f (s⁻¹ g s)]` of the blueprint. -/
+`s`), which is the Frobenius action `f ↦ [g ↦ f (s⁻¹ g s)]`. -/
 theorem continuousMonoidHomPadicEquiv_comp (e : Y ≅ Y)
     (τ : FiniteEtale.mapIso e ⋙ fiber s ≅ fiber s) (σ : G →ₜ* G)
     (hσ : ∀ P (g : G) (x : (fiber s).obj ((FiniteEtale.mapIso e).obj P)),

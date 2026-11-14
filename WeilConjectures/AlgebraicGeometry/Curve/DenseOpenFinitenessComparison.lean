@@ -23,7 +23,9 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 /-!
 # DenseOpenFinitenessComparison
 
-Source: Stacks Project, Lemma 0GJA.
+## References
+
+* Stacks Project, Lemmas 0GJA and 095L.
 -/
 
 @[expose] public section
@@ -107,8 +109,8 @@ private theorem isZero_of_primary_invertible
   have hc : (p ^ m).Coprime n := (hp.coprime_iff_not_dvd.mpr hndiv).pow_left m
   exact (nsmul_eq_zero_iff_of_coprime hc).mp ⟨hm, hn⟩
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
--/
+/-- Comparison of the finiteness assertions for a sheaf on a curve over an algebraically closed
+field and for the extension by zero of its restriction to a dense open. -/
 theorem IsCurve.dense_open_finiteness_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology
