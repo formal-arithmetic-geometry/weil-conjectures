@@ -211,7 +211,7 @@ lemma frobenius_inv_hom_comp_map {K L : WeilComplex (ModuleCat.{u + 1} Λ) g} (f
   rw [Iso.inv_hom_id_assoc]
 
 variable {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-  [QuasiCompact aX] [HasInvertibleExponent Λ X] [IsAlgClosed k]
+  [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 /-- Blueprint `prose-10-20`: the *internal-Hom Frobenius* of two Weil complexes
 `(K, φ_K)` and `(L, φ_L)`, the Weil structure
@@ -224,7 +224,6 @@ noncomputable def internalHomFrobenius (K L : WeilComplex (ModuleCat.{u + 1} Λ)
       ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.obj)).obj L.obj :=
   ObjectProperty.isoMk _ (derivedHomFrobenius K L)
 
-omit [IsAlgClosed k] in
 lemma internalHomFrobenius_hom_hom (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (internalHomFrobenius aX K L).hom.hom =
       leftDerivedUpperStarDerivedHomComparison (ModuleCat.{u + 1} Λ) g.hom K.obj.obj L.obj.obj ≫

@@ -155,7 +155,7 @@ instance isTriangulated_derivedHom_obj
   (derivedTensorHomAdjunction _ K.unop).isTriangulated_rightAdjoint
 
 variable {k : Type u} [Field k] {X} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-  [QuasiCompact aX] [HasInvertibleExponent Λ X] [IsAlgClosed k]
+  [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 /-- Blueprint `prose-10-20`: the derived internal hom `RHom(-, -)` of `Dctf(X, Λ)`, for
 `X` of finite type over an algebraically closed field on which the exponent of `Λ` is
@@ -178,7 +178,6 @@ noncomputable def derivedHom :
     exact NatTrans.congr_app ((RHom(X)[ModuleCat.{u + 1} Λ]).map_comp f.unop.hom.op g.unop.hom.op)
       M.obj
 
-omit [IsAlgClosed k] in
 @[simp]
 lemma ι_obj_derivedHom_obj_obj (K : (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ)
     (M : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
@@ -186,7 +185,6 @@ lemma ι_obj_derivedHom_obj_obj (K : (DerivedCategoryFiniteTor (ModuleCat.{u + 1
       ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((ι _ X).obj K.unop))).obj ((ι _ X).obj M) :=
   rfl
 
-omit [IsAlgClosed k] in
 lemma derivedHom_map {K K' : (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ}
     (f : K ⟶ K') :
     (derivedHom Λ aX).map f = ObjectProperty.liftFullSubcategoryMap _ _
