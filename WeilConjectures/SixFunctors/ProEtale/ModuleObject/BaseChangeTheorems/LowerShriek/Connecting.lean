@@ -93,15 +93,6 @@ noncomputable instance shiftLift_boundedConstructibleLowerStarOfIsProper
   lift := R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)
   iso := boundedConstructibleLowerStarOfIsProperCompatibility ℓ f
 
-/-- The extension by zero on `Dᵇc` lifts the levelwise extension by zero `D((j)_!open⟦Λ⟧)`. -/
-noncomputable instance shiftLift_boundedConstructibleOpenImmersionLowerShriek (j : X ⟶ Y)
-    [IsOpenImmersion j.left] :
-    Functor.ShiftLift (boundedConstructible (condensedRingObj Λ X.left)).ι
-      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j)
-      (boundedConstructible (condensedRingObj Λ Y.left)).ι where
-  lift := D((j.left)_!open⟦Λ⟧)
-  iso := boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j
-
 /-- The lower shriek `Rf_!^c = i_! ⋙ Rp_*` on `Dᵇc` lifts `Rf_!(c)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable instance shiftLift_boundedConstructibleLowerShriekOfCompactification
     {f : X ⟶ Y} (c : Compactification f.left) :
