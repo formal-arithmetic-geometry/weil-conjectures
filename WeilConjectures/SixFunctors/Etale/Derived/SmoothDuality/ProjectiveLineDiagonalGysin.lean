@@ -111,12 +111,14 @@ noncomputable def projectiveLineDiagonalTateIso :
   ((L(((𝐖 ↘ 𝐏))^*[ModuleCat.{u + 1} Λ])).mapIso (leftDerivedUpperStarTateTwoIso Λ (𝐏 ↘ S)) ≪≫
     leftDerivedUpperStarTateTwoIso Λ (𝐖 ↘ 𝐏)).symm
 
-/-- **The Gysin map of the diagonal** `c : RΔ_* Λ_P ⟶ La^* Lq^* τ`: the adjoint
+/-- The auxiliary Gysin map of the diagonal `RΔ_* Λ_P ⟶ La^* Lq^* τ`: the adjoint
 `LΔ^* Λ_W ⟶ RΔ^! Λ_W(1)[2]` of the class with supports of the diagonal
 (`AlgebraicGeometry.Etale.cartierKummerClass`, read on `RΔ_! ≅ RΔ_*`), followed by
-`RΔ_* RΔ^! ≅ RΔ_! RΔ^! ⟶ 𝟭` and `Λ_W(1)[2] ≅ La^* Lq^* τ`. -/
+`RΔ_* RΔ^! ≅ RΔ_! RΔ^! ⟶ 𝟭` and `Λ_W(1)[2] ≅ La^* Lq^* τ`. Its cycle class is the
+forgotten-supports Kummer class `AlgebraicGeometry.Etale.cartierKummerCycleClassAux` of the
+diagonal; the Gysin map of the notes is its negative `projectiveLineDiagonalGysin`. -/
 @[irreducible]
-noncomputable def projectiveLineDiagonalGysin :
+noncomputable def projectiveLineDiagonalGysinAux :
     (R((𝐝)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ⟶
       (L(((𝐖 ↘ 𝐏))^*[ModuleCat.{u + 1} Λ])).obj ((L(((𝐏 ↘ S))^*[ModuleCat.{u + 1} Λ])).obj 𝛕) :=
   (R((𝐝)_*[ModuleCat.{u + 1} Λ])).map (inv (η (L((𝐝)^*[ModuleCat.{u + 1} Λ]))) ≫
@@ -127,20 +129,42 @@ noncomputable def projectiveLineDiagonalGysin :
       (rightDerivedUpperShriekAdjunction Λ 𝐝).counit.app _ ≫
         (projectiveLineDiagonalTateIso Λ S).hom
 
+/-- **The Gysin map of the diagonal** `c : RΔ_* Λ_P ⟶ La^* Lq^* τ` with the sign of the notes:
+the negative of `projectiveLineDiagonalGysinAux`, so that its cycle class is the cycle class
+`δ = c₁(𝒪(Δ))` of the diagonal (`AlgebraicGeometry.Etale.cartierKummerCycleClass`,
+`unit_app_comp_map_η_comp_projectiveLineDiagonalGysin`). -/
+noncomputable def projectiveLineDiagonalGysin :
+    (R((𝐝)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ⟶
+      (L(((𝐖 ↘ 𝐏))^*[ModuleCat.{u + 1} Λ])).obj ((L(((𝐏 ↘ S))^*[ModuleCat.{u + 1} Λ])).obj 𝛕) :=
+  -projectiveLineDiagonalGysinAux Λ S
+
+/-- The cycle class `Λ_W ⟶ RΔ_* LΔ^* Λ_W ≅ RΔ_* Λ_P ⟶ La^* Lq^* τ` of the auxiliary Gysin map of
+the diagonal is the forgotten-supports Kummer class
+`AlgebraicGeometry.Etale.cartierKummerCycleClassAux` of the diagonal. -/
+theorem unit_app_comp_map_η_comp_projectiveLineDiagonalGysinAux :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) 𝐝).unit.app (𝟙_ _) ≫
+      (R((𝐝)_*[ModuleCat.{u + 1} Λ])).map (η (L((𝐝)^*[ModuleCat.{u + 1} Λ]))) ≫
+        projectiveLineDiagonalGysinAux Λ S =
+      cartierKummerCycleClassAux Λ 𝐝 (supportedTatePure_projectiveSpaceDiagonal_line Λ S) ≫
+        (projectiveLineDiagonalTateIso Λ S).hom := by
+  rw [projectiveLineDiagonalGysinAux, ← Functor.map_comp_assoc, IsIso.hom_inv_id_assoc,
+    ← Category.assoc]
+  erw [← Adjunction.homEquiv_unit]
+  erw [Equiv.apply_symm_apply]
+  rw [Category.assoc, Iso.hom_inv_id_app_assoc, cartierKummerCycleClassAux, Category.assoc]
+  rfl
+
 /-- The cycle class `Λ_W ⟶ RΔ_* LΔ^* Λ_W ≅ RΔ_* Λ_P ⟶ La^* Lq^* τ` of the Gysin map of the
-diagonal is the cycle class `AlgebraicGeometry.Etale.cartierKummerCycleClass` of the diagonal. -/
+diagonal is the cycle class `AlgebraicGeometry.Etale.cartierKummerCycleClass` of the diagonal:
+the auxiliary statement, both sides negated. -/
 theorem unit_app_comp_map_η_comp_projectiveLineDiagonalGysin :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) 𝐝).unit.app (𝟙_ _) ≫
       (R((𝐝)_*[ModuleCat.{u + 1} Λ])).map (η (L((𝐝)^*[ModuleCat.{u + 1} Λ]))) ≫
         projectiveLineDiagonalGysin Λ S =
       cartierKummerCycleClass Λ 𝐝 (supportedTatePure_projectiveSpaceDiagonal_line Λ S) ≫
         (projectiveLineDiagonalTateIso Λ S).hom := by
-  rw [projectiveLineDiagonalGysin, ← Functor.map_comp_assoc, IsIso.hom_inv_id_assoc,
-    ← Category.assoc]
-  erw [← Adjunction.homEquiv_unit]
-  erw [Equiv.apply_symm_apply]
-  rw [Category.assoc, Iso.hom_inv_id_app_assoc, cartierKummerCycleClass, Category.assoc]
-  rfl
+  simp only [projectiveLineDiagonalGysin, cartierKummerCycleClass, Preadditive.comp_neg,
+    Preadditive.neg_comp, unit_app_comp_map_η_comp_projectiveLineDiagonalGysinAux]
 
 omit [Finite Λ] [HasKummerClass.IsNormalized Λ] in
 /-- The isomorphism `e : Lq^* ⋙ La^* ≅ Lq^* ⋙ Lb^*` is compatible with the identifications
