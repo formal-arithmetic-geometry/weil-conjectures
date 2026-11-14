@@ -224,6 +224,7 @@ noncomputable def internalHomFrobenius (K L : WeilComplex (ModuleCat.{u + 1} Λ)
       ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.obj)).obj L.obj :=
   ObjectProperty.isoMk _ (derivedHomFrobenius K L)
 
+omit [IsAlgClosed k] in
 lemma internalHomFrobenius_hom_hom (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (internalHomFrobenius aX K L).hom.hom =
       leftDerivedUpperStarDerivedHomComparison (ModuleCat.{u + 1} Λ) g.hom K.obj.obj L.obj.obj ≫

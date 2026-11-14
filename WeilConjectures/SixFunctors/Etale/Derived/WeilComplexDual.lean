@@ -67,6 +67,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k)) [Local
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 include aX in
+omit [IsAlgClosed k] in
 /-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
 
 The coefficient dual `K^∨ = RHom(K, Λ_X)` of `K ∈ Dctf(X, Λ)` lies in `Dctf(X, Λ)`; for a
