@@ -108,7 +108,6 @@ lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type (u + 1)} [SmallCat
   erw [hx]
   exact ht
 
-set_option maxHeartbeats 1600000 in
 -- The element chases below go through many coercions between sections of sheaves of modules
 -- and of abelian groups, which are expensive for the kernel.
 /-- A functor `G` to sheaves of `Λ`-modules on `X_ét` preserves filtered colimits as soon as it
@@ -294,7 +293,7 @@ private theorem Etale.preservesColimitsOfShape_higherDirectImage_of_app {X Y : S
 
 end ModuleSheafInstances
 
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+/-- Blueprint `prose-04-17`: Filtered colimits and higher
 direct image.
 
 For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
@@ -317,7 +316,7 @@ theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u
     ((Scheme.AffineEtale.Spec X).obj U) J
   exact preservesColimitsOfShape_of_natIso (Functor.associator _ _ _).symm
 
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+/-- Blueprint `prose-04-17`: Filtered colimits and higher
 direct image, for filtered categories of any size
 (`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`).
 

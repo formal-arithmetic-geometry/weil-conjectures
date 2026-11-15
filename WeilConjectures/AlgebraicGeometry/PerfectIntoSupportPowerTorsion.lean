@@ -94,8 +94,35 @@ private theorem top_restriction_faithful (X : Scheme.{u})
   change F.mapDerivedCategory.Faithful
   exact inferInstance
 
-set_option maxHeartbeats 800000 in
--- The induction compares restriction functors at four opens and arbitrary integer shifts.
+-- Do the torsion calculation in arbitrary categories, before specializing to derived restrictions.
+private theorem power_torsion_of_exact
+    {C D D₁ D₂ D₃ : Type*}
+    [Category C] [Category D] [Category D₁] [Category D₂] [Category D₃]
+    [Preadditive D] [Preadditive D₁] [Preadditive D₂] [Preadditive D₃]
+    (F : C ⥤ D) (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂) (F₃ : C ⥤ D₃)
+    {E M N : C} (s : ℕ → (E ⟶ E)) (hmul : ∀ a b, s (a + b) = s a ≫ s b)
+    (ρ₁ : (F.obj E ⟶ F.obj M) → (F₁.obj E ⟶ F₁.obj M))
+    (ρ₂ : (F.obj E ⟶ F.obj M) → (F₂.obj E ⟶ F₂.obj M))
+    (δ : (F₃.obj E ⟶ F₃.obj N) →+ (F.obj E ⟶ F.obj M))
+    (hlift : ∀ β, ρ₁ β = 0 → ρ₂ β = 0 → ∃ γ, δ γ = β)
+    (hρ₁ : ∀ n β, ρ₁ (F.map (s n) ≫ β) = F₁.map (s n) ≫ ρ₁ β)
+    (hρ₂ : ∀ n β, ρ₂ (F.map (s n) ≫ β) = F₂.map (s n) ≫ ρ₂ β)
+    (hδ : ∀ n γ, δ (F₃.map (s n) ≫ γ) = F.map (s n) ≫ δ γ)
+    (h₁ : ∀ β : F₁.obj E ⟶ F₁.obj M, ∃ n, F₁.map (s n) ≫ β = 0)
+    (h₂ : ∀ β : F₂.obj E ⟶ F₂.obj M, ∃ n, F₂.map (s n) ≫ β = 0)
+    (h₃ : ∀ γ : F₃.obj E ⟶ F₃.obj N, ∃ n, F₃.map (s n) ≫ γ = 0)
+    (β : F.obj E ⟶ F.obj M) : ∃ n, F.map (s n) ≫ β = 0 := by
+  obtain ⟨a, ha⟩ := h₁ (ρ₁ β)
+  obtain ⟨b, hb⟩ := h₂ (ρ₂ β)
+  have hzero₁ : ρ₁ (F.map (s (a + b)) ≫ β) = 0 := by
+    rw [hρ₁, Nat.add_comm a b, hmul, Functor.map_comp, Category.assoc, ha, comp_zero]
+  have hzero₂ : ρ₂ (F.map (s (a + b)) ≫ β) = 0 := by
+    rw [hρ₂, hmul, Functor.map_comp, Category.assoc, hb, comp_zero]
+  obtain ⟨γ, hγ⟩ := hlift (F.map (s (a + b)) ≫ β) hzero₁ hzero₂
+  obtain ⟨c, hc⟩ := h₃ γ
+  refine ⟨c + (a + b), ?_⟩
+  rw [hmul, Functor.map_comp, Category.assoc, ← hγ, ← hδ, hc, map_zero]
+
 /-- Maps from a perfect complex into a quasi-coherent complex supported on `V(f)` are
 annihilated by a power of `f`. Source: Stacks Project, Tag 08EJ
 (blueprint: lem-sc-perfect-into-support-on-T).
@@ -133,9 +160,10 @@ theorem exists_pow_smul_eq_zero_of_perfect_supported
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
   let S := fun (U : X.Opens) (n : ℕ) ↦
     (R U).map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj))
-  have hmul (U : X.Opens) (a b : ℕ) : S U (a + b) = S U a ≫ S U b := by
-    dsimp [S]
-    rw [pow_add, scalar_id_mul, Functor.map_comp]
+  have hmul (a b : ℕ) : schemeDerivedScalar X (f ^ (a + b)) (𝟙 E.obj) =
+      schemeDerivedScalar X (f ^ a) (𝟙 E.obj) ≫
+        schemeDerivedScalar X (f ^ b) (𝟙 E.obj) := by
+    rw [pow_add, scalar_id_mul]
   let P := fun U : X.Opens ↦
     ∀ (k : ℤ) (β : (R U).obj E.obj ⟶ (R U).obj (E'.obj⟦k⟧)),
       ∃ n : ℕ, S U n ≫ β = 0
@@ -144,28 +172,15 @@ theorem exists_pow_smul_eq_zero_of_perfect_supported
   have h_union (U V : X.Opens) (_ : IsCompact (U : Set X)) (_ : IsAffineOpen V)
       (hU : P U) (hV : P V) (hUV : P (U ⊓ V)) : P (U ⊔ V) := by
     intro k β
-    obtain ⟨a, ha⟩ := hU k
-      (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left) β)
-    obtain ⟨b, hb⟩ := hV k
-      (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β)
     obtain ⟨δ, hlift, hlinear⟩ :=
       derived_open_hom_scalar_mayer_vietoris X U V E.obj E'.obj k
-    have hzeroU : derivedOpenHomRestriction X.toRingedSpace
-        (homOfLE le_sup_left) (S (U ⊔ V) (a + b) ≫ β) = 0 := by
-      rw [restriction_precomp]
-      change S U (a + b) ≫ _ = 0
-      rw [Nat.add_comm a b, hmul, Category.assoc, ha, comp_zero]
-    have hzeroV : derivedOpenHomRestriction X.toRingedSpace
-        (homOfLE le_sup_right) (S (U ⊔ V) (a + b) ≫ β) = 0 := by
-      rw [restriction_precomp]
-      change S V (a + b) ≫ _ = 0
-      rw [hmul, Category.assoc, hb, comp_zero]
-    obtain ⟨γ, hγ⟩ := hlift (S (U ⊔ V) (a + b) ≫ β) hzeroU hzeroV
-    obtain ⟨c, hc⟩ := hUV (k - 1) γ
-    refine ⟨c + (a + b), ?_⟩
-    rw [hmul, Category.assoc, ← hγ]
-    change (R (U ⊔ V)).map (schemeDerivedScalar X (f ^ c) (𝟙 E.obj)) ≫ δ γ = 0
-    rw [← hlinear, hc, map_zero]
+    exact power_torsion_of_exact (R (U ⊔ V)) (R U) (R V) (R (U ⊓ V))
+      (fun n ↦ schemeDerivedScalar X (f ^ n) (𝟙 E.obj)) hmul
+      (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left))
+      (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right))
+      δ hlift (fun n β ↦ restriction_precomp X _ _ β)
+      (fun n β ↦ restriction_precomp X _ _ β) (fun n γ ↦ hlinear (f ^ n) γ)
+      (hU k) (hV k) (hUV (k - 1)) β
   have htop : P ⊤ := quasiCompactOpen_induction X P h_affine h_union ⊤ isCompact_univ
   let e : E'.obj⟦(0 : ℤ)⟧ ≅ E'.obj :=
     (shiftFunctorZero (schemeDerivedCategory X) ℤ).app E'.obj
@@ -178,6 +193,6 @@ theorem exists_pow_smul_eq_zero_of_perfect_supported
   have hz' : schemeDerivedScalar X (f ^ n) (𝟙 E.obj) ≫ α.hom = 0 := by
     apply (cancel_mono e.inv).mp
     simpa only [Category.assoc, zero_comp] using hz
-  simpa [schemeDerivedScalar, Linear.smul_comp] using hz'
+  simpa only [schemeDerivedScalar, Linear.smul_comp, Category.id_comp] using hz'
 
 end AlgebraicGeometry.Scheme

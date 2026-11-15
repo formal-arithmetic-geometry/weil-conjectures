@@ -86,7 +86,6 @@ private theorem tensorFold_perm {X : Scheme.{v}} {l l' : List X.Modules}
     obtain ⟨e₂⟩ := ih₂
     exact ⟨e₁ ≪≫ e₂⟩
 
-set_option maxHeartbeats 400000 in
 -- The eight comparisons involve several concrete-category and scalar-action transports.
 /-- Invertible modules remain invertible under pullback and tensor product. Pullback
 commutes naturally with tensor products and composition, with the stated action on

@@ -186,7 +186,7 @@ then gives smoothness over the perfect field k. This works in dimension zero as 
 3. Choose these modifications simultaneously. The proved helper
 `exists_modification_of_component_modifications` takes their coproduct, whose map is
 finite and whose structure map is smooth. The open summands bound its dimension by one.
-The remaining dense-open gluing is `lem-weil-pbc-dense-open-component-modifications`.
+The remaining dense-open gluing is `theorem-cohomology-curves`.
 4. Finiteness over X gives separatedness and finite type over k by composition, and
 these properties together with the coproduct's dense open give the stated witness. -/
 theorem exists_finite_smooth_modification_of_reduced_curve

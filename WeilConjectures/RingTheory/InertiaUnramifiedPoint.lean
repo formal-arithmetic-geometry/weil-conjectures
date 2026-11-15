@@ -42,7 +42,6 @@ variable (m : Ideal R) [m.IsMaximal] [PerfectField m.ResidueField]
   [IsLocalization.Away π R'] {A : Type*} [CommRing A] [IsDomain A] [Algebra R A]
   [Algebra R' A] [IsScalarTower R R' A] [Module.Finite R' A] [Algebra.Etale R' A]
 
-set_option maxHeartbeats 1000000 in
 -- the elaboration of the localisation and integral closure instances is slow
 include R' m in
 /-- **Points fixed by inertia are étale.** Let `π ∈ R` be nonzero and `A` a finite étale

@@ -38,7 +38,7 @@ Geometrically, let `{Dᵢ}` be a cofiltered system of schemes with affine transi
 - `AlgebraicGeometry.isLimitBaseChangeOverCone`: for `W ⟶ R` and a system over `R`, the
   `W ×_R Dᵢ` have limit `W ×_R X`.
 
-These are part of blueprint `lem-weil-pbc-etale-finite-data-descent`.
+These are part of blueprint `lemma-acyclicity-pulled-back-injectives`.
 
 Over a general base, let `X = lim Dⱼ` be a cofiltered limit of schemes with affine transition
 maps. This file also collects the finite-presentation data which descends from `X` to some stage
@@ -56,7 +56,7 @@ maps. This file also collects the finite-presentation data which descends from `
   of a quasi-compact quasi-separated scheme étale over some stage.
 - `AlgebraicGeometry.etale_finite_data_descent_of_isLimit`: the descent of étale objects,
   morphisms, equalities and coverings, bundled (blueprint
-  `lem-weil-pbc-etale-finite-data-descent`).
+  `lemma-acyclicity-pulled-back-injectives`).
 -/
 
 @[expose] public section
@@ -106,7 +106,7 @@ include hc in
 /-- **Étale algebras descend along filtered colimits of rings.** If `S` is an étale algebra
 over the colimit `c.pt` of a filtered diagram `F` of commutative rings, then `S` is the base
 change of an étale algebra `T` over one of the `F.obj j`.
-(blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+(blueprint: part of `lemma-acyclicity-pulled-back-injectives`) -/
 theorem exists_isPushout_of_etale {S : CommRingCat.{u}} (f : c.pt ⟶ S) (hf : f.hom.Etale) :
     ∃ (j : J) (T : CommRingCat.{u}) (g : F.obj j ⟶ T) (_ : g.hom.Etale) (h : T ⟶ S),
       IsPushout (c.ι.app j) g f h := by
@@ -208,7 +208,7 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of affine schemes with affine transition maps and
 let `X` be an affine scheme which is étale over `lim Dᵢ`. Then `X` is the base change of an
 affine scheme `Y` which is étale over some `Dᵢ`.
-(blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+(blueprint: part of `lemma-acyclicity-pulled-back-injectives`) -/
 lemma Scheme.exists_isPullback_of_etale_of_isAffine [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, IsAffine (D.obj i)]
     {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt) [Etale g] :
@@ -291,7 +291,7 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-separated schemes with affine transition
 maps, and let `X` be an affine scheme which is étale over `lim Dᵢ`, with image in an affine open
 `N` of `lim Dᵢ`. Then `X` is the base change of an affine scheme `Y` which is étale over some
-`Dᵢ`. (blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+`Dᵢ`. (blueprint: part of `lemma-acyclicity-pulled-back-injectives`) -/
 lemma Scheme.exists_isPullback_of_etale_of_isAffineOpen [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)]
     {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt) [Etale g] {N : c.pt.Opens}
@@ -328,7 +328,7 @@ Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated sch
 affine transition maps, let `X = Y ×_{Dᵢ} lim Dⱼ` for a quasi-compact quasi-separated
 `Y ⟶ Dᵢ`, and let `φ : X ⟶ U` be a morphism over `R` to a scheme `U` locally of finite
 presentation over `R`. Then `φ` factors through `Y ×_{Dᵢ} Dₖ` for some `k ⟶ i`.
-(blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+(blueprint: part of `lemma-acyclicity-pulled-back-injectives`) -/
 lemma Scheme.exists_isPullbackLift_comp_eq [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {R : Scheme.{u}} (π : D ⟶ (Functor.const I).obj R)
     {i : I} {X Y : Scheme.{u}} {g : X ⟶ c.pt} {p : Y ⟶ D.obj i} {h : X ⟶ Y}
@@ -866,7 +866,7 @@ quasi-compact quasi-separated schemes over `R` with affine transition maps. Then
 4. *(coverings)* étale morphisms `Eᵢ ⟶ V` to a quasi-compact scheme over a stage `Dₖ` which
    are jointly surjective after base change to `X` are jointly surjective after base change to
    every late enough stage (`AlgebraicGeometry.exists_forall_mem_range_of_isLimit`).
-(blueprint: `lem-weil-pbc-etale-finite-data-descent`) -/
+(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
 theorem etale_finite_data_descent_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] {R : Scheme.{u}} (π : D ⟶ (Functor.const J).obj R) :
     (∀ {V : Scheme.{u}} (g : V ⟶ c.pt) [Etale g] [QuasiCompact g] [QuasiSeparated g],

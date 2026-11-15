@@ -19,7 +19,7 @@ trait models over a generic base, over proper morphisms `i₁ : Y₁ ⟶ X₁` (
 `ν_i : Ri₂_! Ψ_{Z'} ⟶ Ψ_Z Ri₁_!` invert the proper exchange `χ_i` under `Ri_! ≅ Ri_*`, and
 `β_i : Ψ_{Z'} Ri₁^! ⟶ Ri₂^! Ψ_Z` be its exceptional adjoint
 (`ProEtale.CondensedRing.exceptionalExchange`). The closed-immersion law of blueprint
-`sk-lem-tf-nearby-mate-coherences` (4) (`det-tf-nearby-duality-slice`, "the map `θ`") is
+`sec-Base-change-for-nearby-cycles` (4) (`lemma-nearby-duality-slice--1`, "the map `θ`") is
 ```
 θ_{Z'} ∘ Ψ_{Z'}(ρ) = ρ' ∘ Ri₂^!(θ_Z) ∘ β_i(ω_{X₁})
 ```
@@ -117,7 +117,7 @@ lemma app_comp_map_mateEquiv_app_comp_inv_app_comp_counit_app {C' D' : Type*} [C
   rw [reassoc_of% hn, hm, reassoc_of% hν', Functor.map_comp]
 
 /-- The diagram chase of the closed-immersion law `θ_{Z'} ∘ Ψ_{Z'}(ρ) = ρ' ∘ Ri₂^!(θ_Z) ∘ β_i`
-of the dualizing maps (blueprint `sk-lem-tf-nearby-mate-coherences` (4)), for
+of the dualizing maps (blueprint `sec-Base-change-for-nearby-cycles` (4)), for
 functors `S` (specialization of the point), `B`, `A` (global sections on the two special
 fibres): the traces of `θ' ∘ Ψ'(ρ)` and of `ρ' ∘ i₂^!(θ) ∘ β` agree after the proper exchange
 `χA`, by the naturality squares `h₁, h₅, h₆, h₇, h₁₀`, the trace identities `h₂, h₁₁` of `θ'`

@@ -21,7 +21,8 @@ section invariant construction `Ls^* ω ≅ Ls^* T`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`), which is the
 hypothesis `hL` of
 `AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`
-(blueprint `thm-pur-diagonal-dualizing-object`, `det-sp-purity-coefficient-change`).
+(blueprint `proposition-relative-dualizing-complex--1`,
+`proposition-compatibility-purity-change-coefficients`).
 
 ## Main definitions
 
@@ -118,7 +119,8 @@ end TensorMap
 variable (Λ Λ' : Type (u + 1)) [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasTateTwist Λ] [HasTateTwist Λ']
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 A *monoidal* change of coefficients: a change of coefficients with comparisons with `Le^*`,
 `Ri_!` and `Ri^!` (`AlgebraicGeometry.Etale.SupportedCoefficientChange`) together with natural
@@ -259,7 +261,8 @@ lemma map_rightDerivedUpperShriekTensorMap_comp {M N : 𝐃(V, Λ)} {M' N' : �
     ← rightDerivedUpperShriekTensorMap_naturality_left_assoc,
     ← rightDerivedUpperShriekTensorMap_naturality_right, NatTrans.naturality_assoc]
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **A monoidal change of coefficients preserves the section invariant construction.** For a
 closed immersion `s : B ⟶ V`, identifications `vω : Ψ ω ≅ ω'`, `vT : Ψ T ≅ T'` of invertible
@@ -370,7 +373,8 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
   [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : MonoidalSupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `thm-pur-diagonal-dualizing-object`, `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-relative-dualizing-complex--1`,
+`proposition-compatibility-purity-change-coefficients`
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
 coefficients** (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`), as soon as the change

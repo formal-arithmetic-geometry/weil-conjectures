@@ -54,7 +54,7 @@ The ring `𝒪(C)` is a finite `k`-algebra
 powers (`IsAlgClosed.exists_pow_eq_of_finite`) and the first term `𝒪(C)ˣ/n` of the short exact
 sequence of
 `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes.
-(blueprint: `det-prop-h1`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime--2`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper [IsAlgClosed k]
     (f : C ⟶ Spec (.of k)) [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 1 ≃+
@@ -85,7 +85,7 @@ All four come from the long exact cohomology sequence of the Kummer sequence. In
 primitive `n`-th root of unity of `k` (`IsSepClosed.exists_isPrimitiveRoot`) identifies `μₙ` with
 `ℤ/n` (`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`), whose global sections on a
 connected scheme are `ℤ/n`.
-(blueprint: `lem-sc-kummer-les`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 theorem sheafH_rootsOfUnitySheaf_of_subsingleton [IsAlgClosed k] (f : C ⟶ Spec (.of k))
     [IsCurve f] (n : ℕ) (hn : (n : k) ≠ 0) (hBr : Subsingleton C.CohomologicalBrauerGroup) :
     (∃ (α : Additive Γ(C, ⊤)ˣ →+ Sheaf.H (C.rootsOfUnitySheaf n) 1)
@@ -123,7 +123,7 @@ In the long exact sequence of the Kummer sequence
 (`AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_two`) the last term is the
 Brauer group `H²(C, 𝔾ₘ)`, which vanishes for smooth curves
 (`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_smooth`, blueprint
-`sk-thm-br`),
+`lemma-cohomology-multiplicative-group`),
 so `H²(C, μₙ)` is the cokernel of multiplication by `n` on `Pic(C) = H¹(C, 𝔾ₘ)`. The blueprint
 states this for smooth proper curves; properness is not needed.
 (blueprint: `lem-sc-second-kummer-divisors`) -/
@@ -148,7 +148,7 @@ theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
 This is the remark of blueprint `lem-sc-second-kummer-divisors` that the identity holds for every
 curve, since the Brauer group of every curve vanishes
 (`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup`, blueprint
-`lem-sc-brauer-zero-all-curves`); for smooth curves see
+`lemma-cohomology-multiplicative-group--6`); for smooth curves see
 `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`.
 (blueprint: `lem-sc-second-kummer-divisors`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two [IsAlgClosed k] (f : C ⟶ Spec (.of k))

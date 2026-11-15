@@ -23,7 +23,7 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. Then
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection
+`corollary-cohomology-pro-etale-affine`, which belongs to the subsection
 `lem-sc-second-kummer-divisors`. For abelian sheaves it is proved here in elementwise form
 (`cohomologyMap_isColimit_of_isLimit`), by specialising
 `nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vanishing form follows
@@ -55,7 +55,7 @@ noncomputable abbrev sectionsFunctor (X : Scheme.{u}) : Sheaf X.smallEtaleTopolo
   sheafToPresheaf _ A ⋙
     (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X)))
 
-/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity.
+/-- Blueprint `corollary-cohomology-pro-etale-affine`: Etale cohomology continuity.
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
 transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S`. Then
@@ -108,7 +108,7 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     exact (hstage j).eq_of_src _ _
   exact hlimit.of_iso e.symm
 
-/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
+/-- Blueprint `corollary-cohomology-pro-etale-affine`: Etale cohomology continuity, in the
 form of an elementwise colimit statement for the pullback maps.
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
@@ -220,7 +220,7 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     change Sheaf.H.map _ q (H.map f y) = 0
     rw [hfg, map_zero]
 
-/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, vanishing
+/-- Blueprint `corollary-cohomology-pro-etale-affine`: Etale cohomology continuity, vanishing
 form for abelian sheaves.
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine

@@ -25,11 +25,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Blueprint `prop-asd-smooth-base-change` without the quasi-separatedness of the base: the
-canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism for `f` smooth of relative
-dimension `d` and quasi-compact `f'` (the statement of
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6` without the
+quasi-separatedness of the base: the canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism
+for `f` smooth of relative dimension `d` and quasi-compact `f'` (the statement of
 `isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension` before the sync).
-(blueprint: prop-asd-smooth-base-change) -/
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6) -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general
     {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] [QuasiCompact f'] :

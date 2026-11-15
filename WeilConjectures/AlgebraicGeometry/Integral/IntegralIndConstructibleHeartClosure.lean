@@ -179,7 +179,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The cofinality argument for a filtered presentation by finitely presentable objects.
 Source: canonical-presentation proof, Cofinality paragraph.
-(blueprint: det-ind-heart-canonical-presentation). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 private theorem final_constructiblePresentation
     {C : Type*} [Category.{u + 1} C] (P : ObjectProperty C)
     (hP : ∀ A : P.FullSubcategory, IsFinitelyPresentable.{u + 1} A.obj)
@@ -215,7 +215,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Assemble a canonical colimit from essential smallness and finite presentation.
 Source: canonical-presentation proof, Essential smallness and Colimit paragraphs.
-(blueprint: det-ind-heart-canonical-presentation). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 private theorem canonicalPresentation_of_finitePresentation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u})
@@ -370,8 +370,8 @@ set_option linter.unusedVariables false in
 and is closed under ambient small coproducts. This is a statement in the abelian
 module category; it involves neither derived truncations nor localizing subcategories.
 
-Source: blueprint main-20261015, det-prop-int-compactness-compact, proof steps 1--7
-and 9; det-prop-int-compactness-direct-sums, proof steps 7 and 11.
+Source: blueprint main-20261015, proposition-compactness-proper-direct-image--1, proof steps 1--7
+and 9; proposition-compactness-proper-direct-image--2, proof steps 7 and 11.
 (blueprint: lem-sfb-integral-ind-heart-closure).
 
 Proof: integral constant-model heart closure gives ambient kernels, cokernels and

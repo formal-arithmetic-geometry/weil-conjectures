@@ -15,8 +15,8 @@ public import WeilConjectures.TraceFormula.KunnethVerdierTheorem
 Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)`, with support map
 `c = (c₁, c₂) : C ⟶ X ⨯ X`, fixed locus `ι : Fix(c) ⟶ C` and `d = ι ≫ c₁ : Fix(c) ⟶ X`, so that
 the fixed square `ι ≫ c = d ≫ Δ_X` is cartesian (`Correspondence.FixedLocus.isPullback`). The
-*trace class* of `u` is the Borel–Moore section (blueprint `def-trf-trace-class`,
-`sk-d-trace-class`)
+*trace class* of `u` is the Borel–Moore section (blueprint `definition-trace-class-local-terms--1`,
+`definition-trace-class-local-terms`)
 ```
 Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)
 ```
@@ -27,26 +27,26 @@ Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)
 where
 * `𝓗_c(K) = RHom(Lc₂^* K, Rc₁^! K)` is the *trace-class source* and `ũ` the mate of `u`
   (`Correspondence.traceClassSource`, `Correspondence.mate`, blueprint
-  `def-trf-trace-class-source`);
+  `lemma-external-duality-trace-morphism--2`);
 * `𝔱` is the *trace morphism from external duality* (`Correspondence.traceMap`, blueprint
-  `lem-trf-trace-map-from-external-duality`):
+  `definition-trace-morphism--1`):
   ```
   𝓗_c(K) ≅ Rc^! (K ⊠ D_X K) --Rc^! e_K--> Rc^! RΔ_* ω_X ≅ Rι_* Rd^! ω_X ≅ Rι_* ω_Fix(c),
   ```
   the external duality isomorphism (`Correspondence.verdierDualityIso`, blueprint
-  `thm-trf-verdier-duality`: the exceptional internal hom exchange
+  `lemma-external-duality-trace-morphism`: the exceptional internal hom exchange
   `RHom(Lc^* M, Rc^! N) ≅ Rc^! RHom(M, N)` of blueprint
-  `lem-trf-exceptional-internal-hom-exchange` followed by the inverse Künneth–Verdier map), the
+  `lemma-external-duality-trace-morphism--2` followed by the inverse Künneth–Verdier map), the
   evaluation kernel `e_K : K ⊠ D_X K ⟶ RΔ_* ω_X` adjoint to the evaluation
   `K ⊗ D_X K ⟶ ω_X` (`evaluationKernel`), the right-adjoint form of compact-support base change
   in the fixed square (`Correspondence.FixedLocus.upperShriekLowerStarIso`, blueprint
-  `thm-trf-fixed-point-base-change`) and the composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)` of
+  `definition-trace-morphism--1`) and the composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)` of
   the dualizing complexes.
 
 The construction uses the derived projection formula (blueprint `thm-sf-pf-proetale`), compact
-support base change and the Künneth–Verdier theorem (blueprint `thm-trf-kunneth-verdier`) only
-through the invertibility of the canonical maps; it needs no further hypothesis on `c` or `K`
-(blueprint `prop-trf-trace-class-unconditional`).
+support base change and the Künneth–Verdier theorem (blueprint
+`lemma-external-duality-trace-morphism--1`) only through the invertibility of the canonical maps; it
+needs no further hypothesis on `c` or `K` (blueprint `definition-trace-class-local-terms--1`).
 
 ## Main statements
 
@@ -101,7 +101,7 @@ noncomputable def diagUpperStarExternalProductIso
         (boundedConstructibleUpperStarId _ ℓ X).app N)
 
 /-- The *evaluation kernel* `e_K : K ⊠ D_X K ⟶ RΔ_* ω_X` (blueprint
-`lem-trf-trace-map-from-external-duality`, `def-trf-kernel-pushforward-maps`): the
+`definition-trace-morphism--1`, `theorem-proper-pushforward-lefschetz-verdier--1`): the
 `LΔ^* ⊣ RΔ_*` adjoint of the evaluation `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K ⟶ ω_X`. -/
 noncomputable def evaluationKernel (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ K (verdierDual ℓ K) ⟶
@@ -119,8 +119,8 @@ variable (ℓ) {C Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCom
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom] (c : C ⟶ Y ⨯ X)
 
-/-- **The class of a correspondence** (blueprint `lem-trf-correspondence-class`): for the support
-`c = (c₁, c₂) : C ⟶ Z = Y ⨯ X` of a correspondence from `(X, K)` to `(Y, L)`, with
+/-- **The class of a correspondence** (blueprint `lemma-external-duality-trace-morphism--2`): for
+the support `c = (c₁, c₂) : C ⟶ Z = Y ⨯ X` of a correspondence from `(X, K)` to `(Y, L)`, with
 `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`, the tensor–hom adjunction, the derived projection formula for
 `c` and the exceptional adjunction give a bijection
 ```
@@ -163,7 +163,8 @@ lemma correspondenceClassEquiv_apply (K : Dᵇc(X.left)⟦Profinite.padicAlgClRi
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L :=
   rfl
 
-/-- Naturality of the class bijection in `L` (blueprint `lem-trf-correspondence-class`). -/
+/-- Naturality of the class bijection in `L` (blueprint
+`lemma-external-duality-trace-morphism--2`). -/
 lemma correspondenceClassEquiv_naturality_right
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     {L L' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L')
@@ -180,7 +181,8 @@ lemma correspondenceClassEquiv_naturality_right
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst)
     ((boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K) b g
 
-/-- Naturality of the class bijection in `K` (blueprint `lem-trf-correspondence-class`). -/
+/-- Naturality of the class bijection in `K` (blueprint
+`lemma-external-duality-trace-morphism--2`). -/
 lemma correspondenceClassEquiv_naturality_left
     {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a : K' ⟶ K)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -209,18 +211,18 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
 /-- The *trace-class source* `𝓗_c(K) = RHom(Lc₂^* K, Rc₁^! K)` of an endocorrespondence
-(blueprint `def-trf-trace-class-source`). -/
+(blueprint `lemma-external-duality-trace-morphism--2`). -/
 noncomputable def traceClassSource : Dᵇc(c.C.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (ihom ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K)).obj
     ((boundedConstructibleUpperShriek ℓ c.c₁).obj K)
 
 /-- The *mate* `ũ : ℚ̄_ℓ,C ⟶ 𝓗_c(K)` of the coefficient map `u`, its transpose under the
-tensor–hom adjunction (blueprint `def-trf-trace-class-source`). -/
+tensor–hom adjunction (blueprint `lemma-external-duality-trace-morphism--2`). -/
 noncomputable def mate : 𝟙_ _ ⟶ c.traceClassSource :=
   curry' c.u
 
 /-- The mate construction identifies coefficient maps `Lc₂^* K ⟶ Rc₁^! K` with sections of the
-trace-class source (blueprint `def-trf-trace-class-source`). -/
+trace-class source (blueprint `lemma-external-duality-trace-morphism--2`). -/
 noncomputable def mateEquiv :
     ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K ⟶
         (boundedConstructibleUpperShriek ℓ c.c₁).obj K) ≃
@@ -231,7 +233,7 @@ lemma mateEquiv_apply_u : c.mateEquiv c.u = c.mate :=
   rfl
 
 /-- The **exceptional internal hom exchange** for the support map (blueprint
-`lem-trf-exceptional-internal-hom-exchange`): for `M, N` on `X ⨯ X`,
+`lemma-external-duality-trace-morphism--2`): for `M, N` on `X ⨯ X`,
 `RHom(Lc^* M, Rc^! N) ≅ Rc^! RHom(M, N)`, built from the derived projection formula for `c`
 and the two adjunctions. -/
 noncomputable def exceptionalHomIso (M N : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -260,8 +262,8 @@ noncomputable def traceClassSourceIso :
       (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c.support prod.fst).app K)
 
 /-- The **external duality isomorphism** of the trace-class source (blueprint
-`thm-trf-verdier-duality`): `𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`, the exceptional internal hom exchange
-`RHom(Lc^* Lp₂^* K, Rc^! Rp₁^! K) ≅ Rc^! RHom(Lp₂^* K, Rp₁^! K)` followed by `Rc^!` of the
+`lemma-external-duality-trace-morphism`): `𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`, the exceptional internal hom
+exchange `RHom(Lc^* Lp₂^* K, Rc^! Rp₁^! K) ≅ Rc^! RHom(Lp₂^* K, Rp₁^! K)` followed by `Rc^!` of the
 inverse Künneth–Verdier isomorphism `κ_{K,K}`. -/
 noncomputable def verdierDualityIso :
     c.traceClassSource ≅
@@ -275,7 +277,7 @@ namespace FixedLocus
 
 variable {c} (F : c.FixedLocus)
 
-/-- **Base change in the fixed square** (blueprint `thm-trf-fixed-point-base-change`, (2)):
+/-- **Base change in the fixed square** (blueprint `definition-trace-morphism--1`, (2)):
 compact-support base change `LΔ_X^* Rc_! ≅ Rd_! Lι^*` in the cartesian fixed square. -/
 noncomputable def lowerShriekBaseChangeIso :
     boundedConstructibleLowerShriek ℓ c.support ⋙
@@ -286,7 +288,7 @@ noncomputable def lowerShriekBaseChangeIso :
   asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ F.isPullback)
 
 /-- **Base change in the fixed square, right-adjoint form** (blueprint
-`thm-trf-fixed-point-base-change`, (2)): `Rc^! RΔ_{X*} ≅ Rι_* Rd^!`, the conjugate of
+`definition-trace-morphism--1`, (2)): `Rc^! RΔ_{X*} ≅ Rι_* Rd^!`, the conjugate of
 `lowerShriekBaseChangeIso` for the composite adjunctions `Rc_! ⋙ LΔ^* ⊣ RΔ_* ⋙ Rc^!` and
 `Lι^* ⋙ Rd_! ⊣ Rd^! ⋙ Rι_*`. -/
 noncomputable def upperShriekLowerStarIso :
@@ -302,7 +304,7 @@ noncomputable def upperShriekLowerStarIso :
     F.lowerShriekBaseChangeIso.symm
 
 /-- **Pullback along the ordinary leg in the fixed square** (blueprint
-`thm-trf-fixed-point-base-change`, (1)): `Lι^* Lc₂^* K ≅ Ld^* K`, from `ι ≫ c₂ = d`. -/
+`definition-trace-morphism--1`, (1)): `Lι^* Lc₂^* K ≅ Ld^* K`, from `ι ≫ c₂ = d`. -/
 noncomputable def upperStarC₂Iso (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ F.ι).obj ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K) ≅
       (boundedConstructibleUpperStar _ ℓ F.d).obj K :=
@@ -312,7 +314,7 @@ noncomputable def upperStarC₂Iso (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
 end FixedLocus
 
 /-- The *trace morphism from external duality* `𝔱 : 𝓗_c(K) ⟶ Rι_* ω_Fix(c)` (blueprint
-`lem-trf-trace-map-from-external-duality`, objectwise form):
+`definition-trace-morphism--1`, objectwise form):
 ```
 𝓗_c(K) ≅ Rc^! (K ⊠ D_X K) --Rc^! e_K--> Rc^! RΔ_* ω_X ≅ Rι_* Rd^! ω_X ≅ Rι_* ω_Fix(c).
 ```
@@ -326,18 +328,18 @@ noncomputable def traceMap (F : c.FixedLocus) :
     (boundedConstructibleLowerStar ℓ F.ι).map (dualizingComplexComp ℓ F.d).hom
 
 /-- The *trace class* `Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)` of an endocorrespondence (blueprint
-`def-trf-trace-class`, `sk-d-trace-class`): the `Lι^* ⊣ Rι_*` adjoint of the composite
-`ℚ̄_ℓ,C --ũ--> 𝓗_c(K) --𝔱--> Rι_* ω_Fix(c)` of the mate of `u` and the trace morphism
-`traceMap`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C`. It is defined for every correspondence,
-with no hypothesis beyond the finiteness conditions on the schemes (blueprint
-`prop-trf-trace-class-unconditional`). -/
+`definition-trace-class-local-terms--1`, `definition-trace-class-local-terms`): the `Lι^* ⊣ Rι_*`
+adjoint of the composite `ℚ̄_ℓ,C --ũ--> 𝓗_c(K) --𝔱--> Rι_* ω_Fix(c)` of the mate of `u` and the
+trace morphism `traceMap`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C`. It is defined for every
+correspondence, with no hypothesis beyond the finiteness conditions on the schemes (blueprint
+`definition-trace-class-local-terms--1`). -/
 noncomputable def traceClass (F : c.FixedLocus) : BorelMooreSection ℓ F.F :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
       (c.mate ≫ c.traceMap F)
 
 /-- **The trace class is unconditionally defined** (blueprint
-`prop-trf-trace-class-unconditional`): it is the image of the mate of `u` under the
+`definition-trace-class-local-terms--1`): it is the image of the mate of `u` under the
 `ℚ̄_ℓ`-linear map `Hom(ℚ̄_ℓ,C, 𝓗_c(K)) ⟶ Hom(ℚ̄_ℓ,Fix(c), ω_Fix(c))` induced by the trace
 morphism, defined for every coefficient map `u`. -/
 lemma traceClass_eq (F : c.FixedLocus) :

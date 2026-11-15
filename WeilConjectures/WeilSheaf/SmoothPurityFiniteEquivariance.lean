@@ -9,7 +9,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusOrientation
 /-! # Relative finite-coefficient equivariance of the smooth orientation
 
 This uses the existing finite-coefficient purity base-change theorem. Its upstream
-`sk-prop-sp-purity-bc` admission remains a dependency and is not discharged here.
+`proposition-compatibility-purity-base-change` admission remains a dependency and is not discharged
+here.
 -/
 
 @[expose] public section

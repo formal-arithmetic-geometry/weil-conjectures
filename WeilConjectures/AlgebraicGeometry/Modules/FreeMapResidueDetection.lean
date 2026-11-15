@@ -35,7 +35,7 @@ private theorem unit_map_eq_zero_of_top_one {X : Scheme.{u}} {N : X.Modules}
 
 /-- Residue-field evaluations detect a morphism between finite free sheaves on a reduced scheme.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), larger minors vanish on a reduced base.
+Source: `lemma-triviality-fibres--2`, proof (3), larger minors vanish on a reduced base.
 (blueprint: lem-pc-free-map-residue-detection)
 
 Proof: Each matrix entry has zero evaluation at every point, so its basic open is empty.

@@ -19,7 +19,7 @@ import WeilConjectures.SmoothPurity.Point.PointFibreRepresentativeTransport
 /-! # Descent of the point fibre on common-stage morphisms
 
 Source: the common-stage construction of the point fibre.
-(blueprint: def-weil-finite-coefficient-point).
+(blueprint: lemma-perfect-complexes-geometric-point).
 -/
 
 @[expose] public section
@@ -119,7 +119,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The common-stage formula uniquely defines the fourth fibre functor.
-Source: blueprint order 1509, clause 4 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509, clause 4 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: use the displayed object map. Every source morphism has a common-stage
 representative by the recorded common-stage calculus. Send it to
 pointQbarFibreRepresentative. The scalar-extension coherence of the recorded
@@ -164,7 +164,7 @@ theorem pointQbarFibre_existsUnique :
 /-- Clause 4: stagewise sections, with the prescribed action on every common-stage morphism.
 Together with pointFiniteFibre, pointIntegralFibre and pointRationalFibre, this is the
 four-stage geometric-point fibre. Equivalence is a separate node, not assumed here.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointQbarFibre :
     generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)) ⥤
       DerivedCategory.PointFdQbar l Ω :=

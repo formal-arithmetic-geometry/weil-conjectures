@@ -75,9 +75,9 @@ Proof:
    at the terminal object, with all other components obtained by restriction. This gives
    the constant-sheaf/sections adjunction with unit the sheafification unit at the terminal
    object. Compose it with the comparison adjunction using def-weil-pbc-composite-adjunction
-   and def-weil-pbc-site-comparison-morphism. The inclusion preserves the terminal object,
+   and proposition-comparison-morphism-inverse-image. The inclusion preserves the terminal object,
    so both right adjoints are pro-etale sections.
-2. By lem-weil-pbc-conjugate-iso-unit-equation, the left-adjoint uniqueness isomorphism
+2. By situation-conventions, the left-adjoint uniqueness isomorphism
    corresponds to the pro-etale constant unit. The explicit definition of
    cartierConstantComparison first extends that presheaf unit by sheafification and then
    transposes under the comparison adjunction. Evaluating on the etale constant unit at
@@ -91,7 +91,7 @@ Proof:
 4. Transpose the left side successively through pro-etale inverse image, the comparison
    inverse image, and the etale constant functor, using def-weil-pbc-composite-adjunction.
    The defining conjugate unit equation for the commutation isomorphism, supplied by
-   lem-weil-pbc-conjugate-iso-unit-equation, rewrites this as transposition through the
+   situation-conventions, rewrites this as transposition through the
    etale inverse image and then the comparison at D. The remaining adjuncts from steps
    2 and 3 send a to its pro-etale constant section on D. The right-adjoint commutation
    identifies the two base-change objects; its terminal component changes no section.

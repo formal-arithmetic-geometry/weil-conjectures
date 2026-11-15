@@ -73,7 +73,6 @@ variable [∀ S : Scheme.{u},
 
 set_option linter.all false in
 -- Avoid repeating the expensive chosen-object type comparisons during linting.
-set_option maxHeartbeats 400000 in
 -- The selected adjunctions and composite sheaf instances need a larger budget.
 /-- The pasted right-derived units transpose to the explicit pasted underived counits.
 Source: Stacks Project, Tags 079W, 0D5S and 0D5T.

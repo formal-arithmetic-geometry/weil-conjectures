@@ -18,7 +18,8 @@ import WeilConjectures.CategoryTheory.LanContinuityFromRepresentables
 # Sections of the etale to pro-etale comparison inverse image
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-Sections of the comparison inverse image (blueprint: lem-weil-pbc-comparison-sections).
+Sections of the comparison inverse image (blueprint:
+proposition-comparison-morphism-inverse-image--3).
 -/
 
 @[expose] public section
@@ -33,7 +34,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The section cocone induced by a map to the restriction of a pro-etale sheaf.
 Its legs are the given map at a stage followed by restriction to the limit object.
 Source: blueprint, comparison-sections, adjunction paragraph
-(blueprint: lem-weil-pbc-comparison-sections). -/
+(blueprint: proposition-comparison-morphism-inverse-image--3). -/
 def proEtaleComparisonSectionsCocone {X : Scheme.{u}}
     {A : Type v} [Category.{w} A] {I : Type u} [SmallCategory I]
     (D : I ⥤ X.Etale) (V : X.ProEt)
@@ -62,7 +63,7 @@ set_option backward.isDefEq.respectTransparency false in
 scheme, along a specified map to that object. This is the inverse-image unit followed
 by restriction along the graph into the scheme fibre product.
 Source: blueprint, comparison-sections, scheme inverse-image clause
-(blueprint: lem-weil-pbc-comparison-sections). -/
+(blueprint: proposition-comparison-morphism-inverse-image--3). -/
 noncomputable def proEtaleBasisPulledBackSection {X : Scheme.{u}}
     {A : Type v} [Category.{w} A] (U : X.AffineProEt) (W : X.Etale)
     (h : (Scheme.AffineProEt.toProEt X).obj U ⟶ (Scheme.toProEt X).obj W)
@@ -434,15 +435,15 @@ that the canonical unit-and-restriction cocone for every affine etale
 finite-presentation presentation is a colimit, so the identification uses the
 restriction transition maps, rather than an unspecified bijection.
 Source: blueprint, comparison-sections, statement and both proof paragraphs
-(blueprint: lem-weil-pbc-comparison-sections).
+(blueprint: proposition-comparison-morphism-inverse-image--3).
 
 Proof:
 1. On an affine basis object put P(F)(U) = Gamma(U_et, F|U), where restriction is
    scheme inverse image. Pass to a cofinal upper tail of the presentation. Apply
-   lem-weil-pbc-etale-section-continuity (respectively its sets version) to the
+   proposition-comparison-morphism-inverse-image--3 (respectively its sets version) to the
    terminal etale object; the inverse-image-restriction lemmas identify its stage
    sections with F(U_i), with their actual restriction maps.
-2. By lem-weil-pbc-ind-etale-basis it suffices to check finite basis covers.
+2. By proposition-pro-etale-affines-form-basis it suffices to check finite basis covers.
    Ind-etale stability presents each covering member by affine etale stages.
    Every tuple of stages still covers, and fibre products commute with these limits.
    Apply continuity to the members and their pairwise fibre products. Move finitely
@@ -712,15 +713,15 @@ that the canonical unit-and-restriction cocone for every affine etale
 finite-presentation presentation is a colimit, so the identification uses the
 restriction transition maps, rather than an unspecified bijection.
 Source: blueprint, comparison-sections, statement and both proof paragraphs
-(blueprint: lem-weil-pbc-comparison-sections).
+(blueprint: proposition-comparison-morphism-inverse-image--3).
 
 Proof:
 1. On an affine basis object put P(F)(U) = Gamma(U_et, F|U), where restriction is
    scheme inverse image. Pass to a cofinal upper tail of the presentation. Apply
-   lem-weil-pbc-etale-section-continuity (respectively its sets version) to the
+   proposition-comparison-morphism-inverse-image--3 (respectively its sets version) to the
    terminal etale object; the inverse-image-restriction lemmas identify its stage
    sections with F(U_i), with their actual restriction maps.
-2. By lem-weil-pbc-ind-etale-basis it suffices to check finite basis covers.
+2. By proposition-pro-etale-affines-form-basis it suffices to check finite basis covers.
    Ind-etale stability presents each covering member by affine etale stages.
    Every tuple of stages still covers, and fibre products commute with these limits.
    Apply continuity to the members and their pairwise fibre products. Move finitely

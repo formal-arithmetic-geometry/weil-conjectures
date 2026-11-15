@@ -88,8 +88,8 @@ variable {f : X ⟶ Y} (c : Compactification f)
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of étale sheaves: the
 functor `Di_!` induced on derived categories by the *exact* extension by zero `i_!`, followed
 by the total right derived pushforward `Rg_*`. This is blueprint
-`def-amb-etale-compact-support` (the candidate `Rf_!^c = Rr_* j_!`; the functor `Rf_!` of the
-chosen compactification is `AlgebraicGeometry.Etale.rightDerivedLowerShriek`).
+`proposition-construction-independence-rf-shriek` (the candidate `Rf_!^c = Rr_* j_!`; the functor
+`Rf_!` of the chosen compactification is `AlgebraicGeometry.Etale.rightDerivedLowerShriek`).
 
 Warning: It is deliberately *not* the total right derived functor of the composite
 `i_! ⋙ g_* = Etale.lowerShriek`. In general, `i_!` does not sends injective sheaves to

@@ -111,7 +111,6 @@ variable [HasDerivedCategory.{w} (scalarInternalModules J R)]
 
 open SheafOfModules
 
-set_option maxHeartbeats 800000 in
 -- Comparing the homotopy and complex factorization APIs needs additional elaboration.
 omit [HasDerivedCategory (scalarInternalModules J R)]
   [HasDerivedCategory (scalarInternalModules J S)] in

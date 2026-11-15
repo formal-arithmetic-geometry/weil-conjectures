@@ -1338,7 +1338,6 @@ private def freeImageIso : free R ⋙ F₀ ≅ L₀ ⋙ free R' :=
     (((freeAdjunction R).comp a₀).ofNatIsoRight e₀)
     (adj₀.comp (freeAdjunction R'))
 
-set_option maxHeartbeats 1200000 in
 -- The resolving subcategory carries two dependent monoidal structures.
 include L₀ V₀ adj₀ G₀ a₀ e₀ in
 set_option backward.isDefEq.respectTransparency false in
@@ -1573,7 +1572,6 @@ private theorem ordinaryInverseTransition
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1200000 in
 -- Elaborate the dependent normalized comparison equations.
 /-- Derived direct image commutes with evaluation, including its canonical mates.
 Source: Zheng, Construction 4.1 and Lemma 4.10, printed pp. 21 and 23--24.

@@ -16,7 +16,7 @@ public import WeilConjectures.Compactification.StrictRefinement
 # The category of dense compactifications
 
 For a morphism `f : X ⟶ Y`, the dense compactifications of `f` together with the strict
-refinements (blueprint `det-nagata-definition-refinement`) form a full subcategory
+refinements (blueprint `definition-compactification-refinement--3`) form a full subcategory
 `AlgebraicGeometry.Compactification.DenseCategory f` of the category of compactifications with
 strict refinements. When `f` is quasi-compact, every refinement out of a dense compactification
 is strict, so this is also the full subcategory of `AlgebraicGeometry.Compactification.category`
@@ -34,13 +34,14 @@ on the dense compactifications.
 ## Main results
 
 - `AlgebraicGeometry.Compactification.refinement_common_dense` (blueprint
-  `det-nagata-refinement-common-dense`): the closure `inf c d` of the diagonal is a dense
-  compactification and both projections are strict refinements;
+  `proposition-dense-compactifications-form-cofiltered-category--1`): the closure `inf c d` of the
+  diagonal is a dense compactification and both projections are strict refinements;
 - `AlgebraicGeometry.Compactification.exists_isDense_isStrict_refinement`: every finite
   nonempty family of compactifications has a common dense strict refinement;
 - `AlgebraicGeometry.Compactification.DenseCategory.isThin` and
   `AlgebraicGeometry.Compactification.DenseCategory.isCofiltered`: the category of dense
-  compactifications is a cofiltered preorder (blueprint `det-nagata-refinement-cofiltered`).
+  compactifications is a cofiltered preorder (blueprint
+  `proposition-dense-compactifications-form-cofiltered-category--3`).
 
 -/
 
@@ -70,8 +71,8 @@ theorem isStrict_infFst (c d : Compactification f) : (infFst c d).IsStrict :=
 theorem isStrict_infSnd (c d : Compactification f) : (infSnd c d).IsStrict :=
   Refinement.isStrict_of_isSchemeTheoreticallyDominant (isSchemeTheoreticallyDominant_inf_i c d) _
 
-/-- Blueprint `det-nagata-refinement-common-dense`: The closure of the diagonal is a common
-dense refinement.
+/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category--1`: The closure of the
+diagonal is a common dense refinement.
 
 For compactifications `c₁`, `c₂` of a quasi-compact `f`, the scheme-theoretic image `inf c₁ c₂`
 of `X` in `c₁.Z ×_Y c₂.Z` is a dense compactification of `f`, and both projections are strict
@@ -84,8 +85,8 @@ theorem refinement_common_dense (c₁ c₂ : Compactification f) :
 end Inf
 
 variable (f) in
-/-- Blueprint `det-nagata-definition-refinement`: the dense compactifications of `f` form a full
-subcategory of the category of compactifications with strict refinements. -/
+/-- Blueprint `definition-compactification-refinement--3`: the dense compactifications of `f` form a
+full subcategory of the category of compactifications with strict refinements. -/
 abbrev DenseCategory : Type (u + 1) :=
   ObjectProperty.FullSubcategory (C := StrictCategory f) fun c ↦ c.obj.IsDense
 
@@ -106,8 +107,9 @@ lemma homMk_hom_hom [QuasiCompact f] {c d : DenseCategory f}
     (r : c.obj.obj.Refinement d.obj.obj) : (homMk r).hom.hom = r :=
   rfl
 
-/-- Blueprint `det-nagata-refinement-cofiltered`: there is at most one morphism between two
-dense compactifications, by uniqueness of refinements out of a dense compactification. -/
+/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category--3`: there is at most
+one morphism between two dense compactifications, by uniqueness of refinements out of a dense
+compactification. -/
 instance isThin : Quiver.IsThin (DenseCategory f) := fun c _ ↦
   ⟨fun r s ↦ ObjectProperty.hom_ext _ (WideSubcategory.hom_ext _
     (Refinement.ext_of_isSchemeTheoreticallyDominant c.property r.hom.hom s.hom.hom))⟩
@@ -135,15 +137,16 @@ instance isCofilteredOrEmpty [QuasiCompact f] : IsCofilteredOrEmpty (DenseCatego
 instance nonempty [QuasiCompact f] [HasCompactification f] : Nonempty (DenseCategory f) :=
   HasCompactification.nonempty_compactification.map fun c ↦ mk (inf c c) (isDense_inf c c)
 
-/-- Blueprint `det-nagata-refinement-cofiltered`: the category of dense compactifications of a
-quasi-compact compactifiable morphism is cofiltered. -/
+/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category--3`: the category of
+dense compactifications of a quasi-compact compactifiable morphism is cofiltered. -/
 instance isCofiltered [QuasiCompact f] [HasCompactification f] :
     IsCofiltered (DenseCategory f) where
 
 end DenseCategory
 
 /-- Every finite nonempty family of compactifications of a quasi-compact morphism has a common
-dense strict refinement (blueprint `det-nagata-refinement-common-dense`). -/
+dense strict refinement (blueprint
+`proposition-dense-compactifications-form-cofiltered-category--1`). -/
 theorem exists_isDense_isStrict_refinement [QuasiCompact f] {ι : Type*} [Finite ι] [Nonempty ι]
     (c : ι → Compactification f) :
     ∃ e : Compactification f, e.IsDense ∧ ∀ i, ∃ r : e.Refinement (c i), r.IsStrict := by
@@ -158,8 +161,8 @@ theorem exists_isDense_isStrict_refinement [QuasiCompact f] {ι : Type*} [Finite
   exact ⟨r.hom.hom.comp (infFst (c i) (c i)),
     Refinement.IsStrict.comp r.hom.property (isStrict_infFst _ _)⟩
 
-/-- Blueprint `det-nagata-refinement-cofiltered`: The category of dense compactifications is
-cofiltered.
+/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category--3`: The category of
+dense compactifications is cofiltered.
 
 Let `Y` be quasi-compact and quasi-separated and `f : X ⟶ Y` separated, quasi-compact and
 locally of finite type. The category of dense compactifications of `f` with the (strict)

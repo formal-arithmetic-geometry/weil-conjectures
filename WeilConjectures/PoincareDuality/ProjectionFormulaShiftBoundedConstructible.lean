@@ -60,9 +60,7 @@ noncomputable def boundedConstructibleExceptionalProjectionOfCompactificationNat
 
 set_option linter.flexible false in
 set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 1000000 in
 -- the instance problems for the composite functors are large
-set_option maxHeartbeats 1000000 in
 -- the instances of the composite functors are large
 /-- The exceptional projection morphism of a compactification on bounded constructible complexes
 commutes with the shifts in its second variable. -/

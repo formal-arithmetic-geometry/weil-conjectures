@@ -36,7 +36,7 @@ Source: Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`; the l
 finite free model used in that proof is Tag 0BCD, `lift-perfect-from-residue-field`.
 (blueprint: lem-sc-proper-flat-structure-sheaf-stalk).
 
-Proof: By `lem-pc-rf-perfect-base-change`, applied to the relatively flat, finitely
+Proof: By `lemma-coherent-base-change-invertible-sheaves`, applied to the relatively flat, finitely
 presented structure sheaf, E = Rf_* O_X is perfect and its derived fibre at s is
 RΓ(X_s, O). The negative fibre cohomology is zero, independently of the hypothesis on
 H^0. On an affine neighbourhood of s take the bounded finite free residue model of

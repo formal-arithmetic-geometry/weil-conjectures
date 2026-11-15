@@ -50,7 +50,7 @@ private theorem etale_comp {B C D : Type*} [CommRing B] [CommRing C] [CommRing D
 /--
 The canonical chart map from the polynomial presentation of the origin chart to the
 extended Rees algebra after the étale base change.
-Source: blueprint `sec-smooth-purity`, clause (2), coordinates `u_i = x_i/t`
+Source: blueprint `chap-Smooth-purity`, clause (2), coordinates `u_i = x_i/t`
 (blueprint: lem-pur-dnc-etale-rees-chart).
 -/
 noncomputable def etaleReesChartMap
@@ -64,7 +64,7 @@ noncomputable def etaleReesChartMap
 
 /--
 The affine-line structure map in the polynomial presentation of the origin chart.
-Source: blueprint `sec-smooth-purity`, clause (2), affine-space projection
+Source: blueprint `chap-Smooth-purity`, clause (2), affine-space projection
 (blueprint: lem-pur-dnc-etale-rees-chart).
 -/
 noncomputable def etaleReesBaseMap
@@ -76,7 +76,7 @@ noncomputable def etaleReesBaseMap
 The canonical tensor map induced by coefficientwise Laurent-polynomial functoriality
 of the extended-Rees algebra.  Its data is the tensor-product lift of the existing
 `Ideal.extendedReesAlgebraAlgHom`.
-Source: blueprint `sec-smooth-purity`, clause (2), flat tensor identification
+Source: blueprint `chap-Smooth-purity`, clause (2), flat tensor identification
 (blueprint: lem-pur-dnc-etale-rees-chart).
 -/
 noncomputable def etaleReesTensorMap
@@ -93,7 +93,7 @@ noncomputable def etaleReesTensorMap
 /-- The canonical universe-lifted ring map used to form the affine scheme morphism.
 The `ULift` transport puts the source and target rings in the common universe
 `max u v`, preserving the underlying map for arbitrary ring universes.
-Source: blueprint `sec-smooth-purity`, clause (2), affine spectra
+Source: blueprint `chap-Smooth-purity`, clause (2), affine spectra
 (blueprint: lem-pur-dnc-etale-rees-chart). -/
 noncomputable def etaleReesChartSchemeMap
     (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ)

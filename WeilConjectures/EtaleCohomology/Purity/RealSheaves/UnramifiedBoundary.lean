@@ -60,7 +60,7 @@ The elements of the geometric part acting trivially form a closed normal subgrou
 `W(U₀)`, since `ρ` is continuous on the geometric part. Its image in `π₁(U₀)` is compact, hence
 closed, and normal since the Weil group is dense; it contains the inertia group, hence the local
 kernel (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`).
-(blueprint: `cor-wf-unramified-boundary-purity`) -/
+(blueprint: `corollary-unramified-boundary-point--2`) -/
 theorem apply_eq_self_of_mem_weilLocalKernel
     {ρ : Representation (PadicAlgCl l) (weilGroup pU sU GU) V}
     (hρ : (ofFundamentalGroup pU sU GU).IsLisse l ρ) (z : ↥((Set.range j.base)ᶜ))
@@ -263,8 +263,8 @@ extends to a lisse Weil sheaf `G` on `V₀`
 (`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure of
 weight `w` since its restriction to `U₀` is
 (`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
-`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lem-a1-lisse-middle-extension`).
-(blueprint: `cor-wf-unramified-boundary-purity`) -/
+`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lemma-boundary-stalk--2`).
+(blueprint: `corollary-unramified-boundary-point--2`) -/
 theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.base)ᶜ))
     {F : WeilSheaf K l U} (hF : F.IsLisse)
     (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber)
@@ -362,8 +362,8 @@ variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-/-- Blueprint `cor-wf-unramified-boundary-purity` (first clause, inertia form), together with
-`prop-wf-weil-sheaf-representation-equivalence`.
+/-- Blueprint `corollary-unramified-boundary-point--2` (first clause, inertia form), together with
+`definition-weil-representation--1`.
 
 Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
 geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius

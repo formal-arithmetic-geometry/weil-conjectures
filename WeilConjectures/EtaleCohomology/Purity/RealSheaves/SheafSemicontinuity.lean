@@ -20,12 +20,13 @@ public import WeilConjectures.WeilSheaf.DirectImageStalk
 Let `C₀` be a smooth geometrically connected affine curve over `k₀ = 𝔽_q`, `j : U₀ ⟶ C₀` a
 dense open immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most `β`. Then
 the direct image `j_* ℱ` has punctual weights at most `β` on all of `C₀`
-(`lem-wf-boundary-semicontinuity`, and the first assertion of `sk-p-real-semi`).
+(`proposition-weights-j-boundary-points--1`, and the first assertion of
+`proposition-weights-j-boundary-points`).
 
 This is the sheaf-level form of the argument of
 `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_of_isAffine`. Put `J = j_* ℱ` and let `T` be the
 set of closed points of `C₀` lying in `U₀`, whose complement is finite. The Euler product of `J`
-(`lem-wf-euler-product-middle-extension`,
+(`proposition-weights-j-boundary-points`,
 `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`), split into the
 product over `T` and the finitely many local factors outside `T`, gives
 
@@ -158,7 +159,7 @@ local instance locallyOfFiniteType_semicontinuity :
   haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
-/-- Steps 1–3 of `lem-wf-boundary-semicontinuity`: the preliminary bound at the boundary.
+/-- Steps 1–3 of `proposition-weights-j-boundary-points--1`: the preliminary bound at the boundary.
 
 Let `C₀` be a smooth geometrically connected affine curve, `j : U₀ ⟶ C₀` a dense open
 immersion and `ℱ` a lisse Weil sheaf on `U₀` with weights at most `β`. At a closed point `s` of
@@ -346,7 +347,8 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
   rw [← hqc]
   simpa using (le_mul_inv_iff₀ (norm_pos_iff.2 hα0)).1 h1
 
-/-- Blueprint `lem-wf-boundary-semicontinuity` (first assertion of `sk-p-real-semi`):
+/-- Blueprint `proposition-weights-j-boundary-points--1` (first assertion of
+`proposition-weights-j-boundary-points`):
 *boundary semicontinuity of weights* on a smooth geometrically connected affine curve.
 
 Let `C₀` be a smooth geometrically connected affine curve over `k₀`, `j : U₀ ⟶ C₀` a dense

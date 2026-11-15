@@ -32,7 +32,7 @@ model with a proper morphism of models to `ℙ¹_S` is determined by that of `�
 
 The invertibility of the proper exchange rests on the sorried
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper` (proper base change for nearby
-cycles, blueprint `det-sp-nearby-cycles-exchanges` (2)).
+cycles, blueprint `prose-E-03` (2)).
 
 -/
 
@@ -111,7 +111,7 @@ variable (ℓ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ 
 
 include hq hMgen hNgen hg in
 /-- **The proper exchange of a morphism of proper trait models over a generic base** is
-invertible on bounded constructible complexes (blueprint `det-sp-nearby-cycles-exchanges` (2)):
+invertible on bounded constructible complexes (blueprint `prose-E-03` (2)):
 the morphism of total spaces is proper since `qN = φ.total ≫ q` is proper and `q` separated, and
 the squares of special fibres and of identifications are cartesian. -/
 lemma isIso_boundedConstructiblePushforwardExchange :
@@ -168,7 +168,7 @@ variable [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
 
 /-- **The composition law of the dualizing maps along a proper morphism of models** (blueprint
-`sk-lem-tf-nearby-mate-coherences` (4)): for a morphism `φ : N ⟶ M` of proper trait models with
+`sec-Base-change-for-nearby-cycles` (4)): for a morphism `φ : N ⟶ M` of proper trait models with
 full geometric generic fibres over a common generic base, over proper `i₁ : Y₁ ⟶ X₁` and
 `i₂ : Y' ⟶ X'`, `θ_N ∘ Ψ_N(ρ) = ρ' ∘ Ri₂^!(θ_M) ∘ β_φ(ω_{X₁})`, where `β_φ` is the exceptional
 exchange of the compact-support exchange `ν_φ` inverse to the proper exchange `χ_φ`. This is
@@ -273,7 +273,7 @@ variable {k'} {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').
   [Fact (ringChar (FractionRing (PowerSeries k')) ≠ ℓ)]
 
 /-- **The dualizing map of a model with a proper coordinate to `ℙ¹_S`** (blueprint
-`sk-lem-tf-nearby-mate-coherences` (4) for a coordinate): for a proper trait model `M` of `X₁`
+`sec-Base-change-for-nearby-cycles` (4) for a coordinate): for a proper trait model `M` of `X₁`
 over the generic base `(η, X₁, 𝟙)` with full geometric generic fibre, and a morphism of models
 `b : M ⟶ ℙ¹_S` over proper `b_η : X₁ ⟶ ℙ¹_η` and `b_s : X' ⟶ ℙ¹_{k'}`,
 `θ_M = Ψ_M(ρ)⁻¹ ∘ β_b(ω_{ℙ¹_η}) ∘ Rb_s^!(θ_{ℙ¹_S}) ∘ ρ'`, for the exceptional exchange `β_b` of the

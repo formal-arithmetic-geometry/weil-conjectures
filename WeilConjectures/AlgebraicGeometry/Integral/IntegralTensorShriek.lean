@@ -363,7 +363,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor,
 `det-lem-int-tensor-shriek.md` and its proof; Stacks Project, Tags 09AA, 09BM, 09BP
-(blueprint: det-lem-int-tensor-shriek).
+(blueprint: lemma-inverse-image-tensor-product).
 
 The coefficient ring is the existing continuous condensed valuation ring. Local complex
 models are pulled back from finite free complexes on the point, so their differentials
@@ -386,8 +386,8 @@ namespace AlgebraicGeometry.ProEtale
 /-- Pull a bounded finite free complex on the coefficient point to a scheme, term by
 term. This is the model P tensor O_{E,X}: maps between finite copies of the regular
 module on the point are scalar matrices over O_E.
-Source: blueprint det-lem-int-tensor-shriek, clause (2)
-(blueprint: det-lem-int-tensor-shriek). -/
+Source: blueprint lemma-inverse-image-tensor-product, clause (2)
+(blueprint: lemma-inverse-image-tensor-product). -/
 noncomputable def integralTensorShriek_pointComplex
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})

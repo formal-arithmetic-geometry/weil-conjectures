@@ -156,8 +156,6 @@ lemma isIso_upperStar_map_upperStarRootsOfUnitySheafToRootsOfUnitySheaf {X' : Sc
     (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n q)
   exact IsIso.of_isIso_comp_left ((Etale.upperStarComp _ q g (q ≫ g) rfl).hom.app _) _
 
-set_option maxHeartbeats 1000000 in
--- elaborating the iterated pullbacks and their étale instances is slow
 /-- **The pullback of `μₙ` is `μₙ`.** For `g : X ⟶ Y` with `n` invertible on `Y`, the comparison
 `g^* μₙ ⟶ μₙ` is an isomorphism. After the étale cover of `Y` adjoining a primitive `n`-th root of
 unity this is
@@ -168,6 +166,8 @@ theorem isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit [NeZero n]
     IsIso (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n g) := by
   have : Etale (primitiveRootsCover Γ(Y, ⊤) n) :=
     etale_primitiveRootsCover _ _ (NeZero.ne n) hn
+  have : Surjective (primitiveRootsCover Γ(Y, ⊤) n) :=
+    ⟨surjective_primitiveRootsCover Γ(Y, ⊤) n hn⟩
   let qY := pullback.fst Y.toSpecΓ (primitiveRootsCover Γ(Y, ⊤) n)
   let ζ : Γ(pullback Y.toSpecΓ (primitiveRootsCover Γ(Y, ⊤) n), ⊤)ˣ :=
     ((PrimitiveRootsAlgebra.isUnit_zeta Γ(Y, ⊤) n (Nat.pos_of_ne_zero (NeZero.ne n))).map
@@ -181,7 +181,7 @@ theorem isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit [NeZero n]
       (primitiveRootsCover Γ(Y, ⊤) n), ⊤)) ^ i - (ζ : Γ(pullback Y.toSpecΓ
       (primitiveRootsCover Γ(Y, ⊤) n), ⊤)) ^ j) := by
     intro i hi j hj hij
-    simpa [ζ, ← map_pow, ← map_sub] using
+    simpa only [ζ, IsUnit.unit_spec, ← map_pow, ← map_sub] using
       (PrimitiveRootsAlgebra.isUnit_zeta_pow_sub_zeta_pow Γ(Y, ⊤) n hi hj hij).map
         ((Scheme.ΓSpecIso (.of (PrimitiveRootsAlgebra Γ(Y, ⊤) n))).inv ≫
           (pullback.snd Y.toSpecΓ (primitiveRootsCover Γ(Y, ⊤) n)).appTop).hom
@@ -189,12 +189,7 @@ theorem isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit [NeZero n]
     (pullback.fst g qY) g (pullback.snd g qY) qY pullback.condition
     (isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf n qY)
     (isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit_sub n _ ζ hζ hζ')
-  refine isIso_of_isIso_upperStar_map _ (pullback.fst g qY) ?_ _
+  exact isIso_of_isIso_upperStar_map _ (pullback.fst g qY) (pullback.fst g qY).surjective _
     (isIso_upperStar_map_upperStarRootsOfUnitySheafToRootsOfUnitySheaf n _ g hcomp)
-  intro x
-  obtain ⟨v, hv⟩ := surjective_primitiveRootsCover Γ(Y, ⊤) n hn (Y.toSpecΓ (g x))
-  obtain ⟨y', hy', -⟩ := Scheme.Pullback.exists_preimage_pullback (g x) v hv.symm
-  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback x y' hy'.symm
-  exact ⟨z, hz⟩
 
 end AlgebraicGeometry.Scheme

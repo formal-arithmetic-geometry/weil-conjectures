@@ -14,7 +14,7 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -194,7 +194,7 @@ private theorem tensor_identity_on_good (A : PodReindexFamily l E)
 end TensorIdentityProof
 
 /-- The identity relabelling commutes with reduction, total limit and completed tensor.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941
 (blueprint: lem-pod-reindexing-identity-compatibility).
 

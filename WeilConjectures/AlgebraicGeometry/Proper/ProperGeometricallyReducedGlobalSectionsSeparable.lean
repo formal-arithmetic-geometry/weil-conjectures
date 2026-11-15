@@ -36,7 +36,7 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Varieties, Lemma 0BUG, clause (4)
 (blueprint: lem-pc-proper-geometrically-reduced-global-sections-separable).
 
-By `lem-pc-euler-characteristic-well-defined` (with `F = 𝒪_X`, `i = 0`) `A` is
+By `theorem-riemann-roch-coherent-serre-duality--1` (with `F = 𝒪_X`, `i = 0`) `A` is
 finite-dimensional over `k`, so `A/k` is a finite field extension. For an algebraic closure
 `k̄` of `k`, `Spec k̄ → Spec k` is flat and `X` is quasi-compact and quasi-separated, so flat
 base change identifies `A ⊗_k k̄` with `Γ(X_k̄, 𝒪)`. Geometric reducedness makes `X_k̄`

@@ -55,7 +55,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical etale locality comparison `u^* f^× ≅ (fu)^×`.
-Source: the blueprint thm-asd-smooth-tensor proof, paragraph 3
+Source: the blueprint proposition-exceptional-inverse-image-smooth-morphism proof, paragraph 3
 (blueprint: lem-asd-tensor-mate-etale-precomp).
 
 Conjugate the specified proper/open tower comparison against the composite of the

@@ -13,7 +13,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 /-! # Finite regular coefficient comparison data
 
 Source: Stacks 03D6 and 0D6D; main-20261015, constant-sheaf clause of
-prop-every-iterate-trace (blueprint: def-zl-finite-regular-coefficient-comparisons).
+theorem-grothendieck-lefschetz-trace-formula--8 (blueprint:
+def-zl-finite-regular-coefficient-comparisons).
 
 The regular complex and c, kappa and lambda below are transparent aliases of the
 published constructions, not new choices or copies. Composition is the prescribed

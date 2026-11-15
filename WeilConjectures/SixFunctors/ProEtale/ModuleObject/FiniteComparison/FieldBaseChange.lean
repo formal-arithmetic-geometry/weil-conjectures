@@ -18,7 +18,8 @@ Let `k` be a field, `aX : X ⟶ Spec k` quasi-compact and quasi-separated, `aY :
 of finite type and quasi-compact, and `W = X ×_k Y` with projections `p₁ : W ⟶ X`, `p₂ : W ⟶ Y`.
 For a coefficient ring killed by an integer `n` invertible in `k`, the base change morphism
 `aY^* Ra_{X*} ⟶ Rp₂_* p₁^*` is an isomorphism on bounded below complexes (of étale origin on the
-pro-étale site). This is the base change towards spectra of fields (blueprint `lem-kun-0f1i`,
+pro-étale site). This is the base change towards spectra of fields (blueprint
+`lemma-kunneth-field-coefficients--1`,
 `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_field`), assembled in three steps:
 
 * on the étale site, for every bounded below complex
@@ -55,7 +56,7 @@ and quasi-separated, `aY : Y ⟶ Spec k` locally of finite type and quasi-compac
 coefficient ring `Λ` killed by an integer `n` invertible in `k`, the derived base change map
 `aY^* Ra_{X*} K ⟶ Rp₂_* p₁^* K` of `W = X ×_k Y` is an isomorphism for every `K ∈ D⁺(X_ét, Λ)`.
 By dévissage it suffices to treat sheaves placed in degree `0`, where this is the base-change
-property of `aY` (blueprint `lem-kun-0f1i`). -/
+property of `aY` (blueprint `lemma-kunneth-field-coefficients--1`). -/
 theorem Etale.isIso_baseChange_app_of_field (Λ : Type (u + 1)) [CommRing Λ]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [QuasiCompact aX] [QuasiSeparated aX]
     (sq : IsPullback p₁ p₂ aX aY) (n : ℕ) (hn : IsUnit (n : k)) (hΛ : (n : Λ) = 0)

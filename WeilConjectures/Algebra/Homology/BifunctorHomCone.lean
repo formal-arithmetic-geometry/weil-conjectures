@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, omitted termwise-split
 calculation, generalized to separately additive bifunctors using the signed differential
 of `WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
-(used for `lem-sf-hom-finite-projective`)
+(used for `proposition-six-operations-dctf--15`)
 
 The two coordinate maps below use the actual shifted mapping cone, rather than a
 replacement complex. Mathlib orders the source-shifted summand first in a mapping cone;
@@ -40,7 +40,7 @@ variable {A : Type u₁} {B : Type u₂} {C : Type u₃}
 
 /-- The `y : U(K)^(n-1)` projection from the actual `Cone(U(f))[-1]`.
 Source: Stacks Project, Tag 08JC, omitted split Hom calculation, with the cone and shift
-of Tag 014P (used for `lem-sf-hom-finite-projective`). -/
+of Tag 014P (used for `proposition-six-operations-dctf--15`). -/
 noncomputable def bifunctorHomConeY {K L : CochainComplex A ℤ} (f : K ⟶ L) (n : ℤ) :
     ((mappingCone (bifunctorHomMapLeft (H := H) (Y := I) f))⟦(-1 : ℤ)⟧).X n ⟶
       (bifunctorHomObj H K I).X (n - 1) :=
@@ -51,7 +51,7 @@ noncomputable def bifunctorHomConeY {K L : CochainComplex A ℤ} (f : K ⟶ L) (
 
 /-- The `x : U(L)^n` projection from the actual `Cone(U(f))[-1]`.
 Source: Stacks Project, Tag 08JC, omitted split Hom calculation, with the cone and shift
-of Tag 014P (used for `lem-sf-hom-finite-projective`). -/
+of Tag 014P (used for `proposition-six-operations-dctf--15`). -/
 noncomputable def bifunctorHomConeX {K L : CochainComplex A ℤ} (f : K ⟶ L) (n : ℤ) :
     ((mappingCone (bifunctorHomMapLeft (H := H) (Y := I) f))⟦(-1 : ℤ)⟧).X n ⟶
       (bifunctorHomObj H L I).X n :=
@@ -323,7 +323,7 @@ There are no boundedness, injectivity or product-exactness hypotheses.
 
 Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, omitted termwise-split
 calculation, generalized to the upstream signed bifunctor Hom complex.
-(used for `lem-sf-hom-finite-projective`)
+(used for `proposition-six-operations-dctf--15`)
 
 Proof plan, the eight steps of the node:
 1. On each product projection the differential is s_p(D b_p - A b_(p+1)),

@@ -178,8 +178,6 @@ lemma adicLowerStarEquivalence_symm_unit_app_hom_hom_app {X : Scheme.{u}} (e : X
     adicLowerStarCongr_inv_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
     ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp]
 
-set_option maxHeartbeats 2000000 in
--- Rewriting both sides down to sections takes many elaboration steps.
 /-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two
 sides of `J ≫ b⁻¹ = a⁻¹ ≫ J` is the mate, under the equivalences `(a⁻¹)_* ⊣ a_*` and
 `(b⁻¹)_* ⊣ b_*`, of the composition isomorphism along the two sides of `a ≫ J = J ≫ b`. -/
@@ -205,34 +203,35 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
       ((adicLowerStarEquivalence l e).symm.functor.obj N).X.obj.map φ =
         N.X.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.inv).map φ.unop).op :=
     rfl
-  repeat' first
-    | rw [Iso.trans_hom]
-    | rw [Iso.symm_hom]
-    | rw [Functor.map_comp]
-    | rw [Mod.comp_hom']
-    | rw [ObjectProperty.FullSubcategory.comp_hom]
-    | rw [NatTrans.comp_app]
-    | rw [adicLowerStar_map_hom_hom_app]
-    | rw [hi]
-    | rw [adicLowerStarEquivalence_symm_unit_app_hom_hom_app]
-    | rw [adicLowerStarComp_hom_app_hom_hom_app]
-    | rw [adicLowerStarComp_inv_app_hom_hom_app]
-    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
-    | rw [adicLowerStar_obj_X_obj_map]
-    | rw [hf]
-  repeat' first
-    | rw [Functor.map_comp] at key
-    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
-    | rw [NatTrans.comp_app] at key
-    | rw [lowerStar_map_hom_app'] at key
-    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_hom_app_hom_app] at key
-    | rw [lowerStarComp_inv_app_hom_app] at key
-    | rw [lowerStarCongr_hom_app_hom_app] at key
-    | rw [lowerStarId_inv_app_hom_app] at key
-    | rw [lowerStar_obj_obj_map'] at key
+  -- Expose components before normalizing module, sheaf, and section compositions in order.
+  -- `rewrite` retains explicit proofs without attempting reflexivity after every step.
+  repeat' rewrite [Iso.trans_hom]
+  repeat' rewrite [Iso.symm_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [Functor.map_comp]
+  repeat' rewrite [Mod.comp_hom']
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [adicLowerStar_map_hom_hom_app]
+  repeat' rewrite [hi]
+  repeat' rewrite [adicLowerStarEquivalence_symm_unit_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_inv_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarCongr_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStar_obj_X_obj_map]
+  repeat' rewrite [hf]
+  repeat' rewrite [Functor.map_comp] at key
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom] at key
+  repeat' rewrite [NatTrans.comp_app] at key
+  repeat' rewrite [lowerStar_map_hom_app'] at key
+  repeat' rewrite [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_hom_app_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_hom_app] at key
+  repeat' rewrite [lowerStarId_inv_app_hom_app] at key
+  repeat' rewrite [lowerStar_obj_obj_map'] at key
   simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
   exact key
 

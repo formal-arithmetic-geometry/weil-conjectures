@@ -25,7 +25,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/
 lem-dg-compact-support-amplitude.md, order 1625
-(blueprint: lem-dg-compact-support-amplitude).
+(blueprint: theorem-results-from-etale-theory--5).
 
 ## Main definitions
 
@@ -50,7 +50,7 @@ namespace AlgebraicGeometry.Etale
 This supplies its quasi-compact quasi-separated base instances from the finite-type hypotheses;
 it introduces no additional choice beyond `NagataCompactification`.
 Source: blueprint lem-dg-compact-support-amplitude.md, proof step 1
-(blueprint: lem-dg-compact-support-amplitude). -/
+(blueprint: theorem-results-from-etale-theory--5). -/
 noncomputable def compactSupportAmplitudeCompactification
     (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
@@ -67,20 +67,21 @@ compact-support direct image of any etale module sheaf over a finite coefficient
 invertible exponent vanishes above twice the dimension bound on the original geometric fibres.
 All derived functors are on the ordinary unbounded derived categories.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md,
-order 1625 (blueprint: lem-dg-compact-support-amplitude).
+order 1625 (blueprint: theorem-results-from-etale-theory--5).
 
 Proof, following the node's nine steps:
 1. A field is Noetherian. By lem-weil-pbc-finite-type-over-noetherian, X and Y are
 Noetherian, and Y is quasi-separated by lem-weil-pbc-locally-noetherian-quasi-separated.
-Use thm-nagata-compactification to write f = j followed by r with j open and r proper.
-By def-amb-etale-compact-support and lem-amb-etale-compact-comparisons, Rf_! F is Rr_* j_! F.
-The bounded-below injective resolution from lem-weil-pbc-dplus-injective-representative is
-K-injective, so this computes the same object in the ordinary unbounded derived category.
+Use theorem-nagata-s-compactification-theorem--1 to write f = j followed by r with j open and r
+proper. By proposition-construction-independence-rf-shriek and
+proposition-construction-independence-rf-shriek--7, Rf_! F is Rr_* j_! F. The bounded-below
+injective resolution from lem-weil-pbc-dplus-injective-representative is K-injective, so this
+computes the same object in the ordinary unbounded derived category.
 2. Fix y and its algebraic-closure geometric point. Set T equal to the compactified fibre,
 and U equal to the original fibre. By lem-weil-pbc-open-immersion-base-change the map U to T
-is open. Apply the derived clause of cor-weil-pbc-geometric-fiber-finite and
-lem-cbc-extension-zero-base-change to identify the pulled-back direct image with the derived
-sections of G = j_! F on T. Exactness from prop-weil-pbc-inverse-image-modules-exact and
+is open. Apply the derived clause of corollary-cohomology-geometric-fibres--2 and
+proposition-extension-zero-restriction-closed-subscheme--11 to identify the pulled-back direct image
+with the derived sections of G = j_! F on T. Exactness from situation-conventions and
 lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk identifies the q-th geometric
 stalk with H^q_A(T,G). By lem-weil-pbc-etale-module-cohomology-forget its underlying group is
 H^q(T,G_ab). No finiteness assumption is made on F.
@@ -97,17 +98,18 @@ in U, so def-kun-topological-krull-dimension gives dim C_a = dim V_a <= dim U <=
 irreducible member lies in a component of the finite closed cover. Thus dim C <= d.
 If C is empty, U is empty, and lem-weil-pbc-extension-by-zero-stalks together with
 lemma-weil-pbc-geometric-stalk-conservative makes G_ab zero; all its cohomology vanishes.
-6. Extension-by-zero stalks vanish outside U, hence outside C. By lem-kun-04ca, G_ab is
-the closed direct image of H = i^-1 G_ab on C. A positive additive exponent of the finite
-ring kills every module. The additive exact inverse image of prop-weil-pbc-inverse-image-exact
-therefore makes H torsion, without a constructibility or finite-stalk assumption.
+6. Extension-by-zero stalks vanish outside U, hence outside C. By
+proposition-extension-zero-restriction-closed-subscheme--5, G_ab is the closed direct image of H =
+i^-1 G_ab on C. A positive additive exponent of the finite ring kills every module. The additive
+exact inverse image of prop-weil-pbc-inverse-image-exact therefore makes H torsion, without a
+constructibility or finite-stalk assumption.
 7. The closed immersion is finite by lem-weil-pbc-closed-immersion-finite, and
-lem-weil-pbc-finite-pushforward-cohomology identifies H^q(T,G_ab) with H^q(C,H).
-8. The algebraic closure is separably closed, so lem-sf-separably-closed-torsion-cd gives
-torsion cohomological dimension zero. Apply thm-sc-finite-type-torsion-cd to C of dimension
+lemma-finite-morphisms-cohomology--2 identifies H^q(T,G_ab) with H^q(C,H).
+8. The algebraic closure is separably closed, so lemma-cohomological-dimension-base-field--1 gives
+torsion cohomological dimension zero. Apply lemma-uniform-bounds-pro-etale-affines to C of dimension
 e <= d to obtain torsion cohomological dimension at most 2e, in the sense of
-def-sc-etale-torsion-cd. Thus H^q(C,H) vanishes for q > 2d. Retain the stated invertibility
-hypothesis; no stronger coefficient assumption is used.
+definition-cohomological-dimension. Thus H^q(C,H) vanishes for q > 2d. Retain the stated
+invertibility hypothesis; no stronger coefficient assumption is used.
 9. By lem-kun-support-geometric-point-independent the vanishing holds at every geometric
 point over y. Apply lemma-weil-pbc-geometric-stalk-conservative to the map from zero to the
 underlying abelian sheaf. A module sheaf with zero underlying sheaf is zero. Only the

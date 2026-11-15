@@ -23,7 +23,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Higher compact-support images in the actual common-stage Weil heart
 
-Source: blueprint main-20261015, sec-deligne-laumon-general,
+Source: blueprint main-20261015, chap-The-Deligne-Laumon-theorem-in-general,
 sk-l-dl-general-composition, lem-zl-composition-weight-bound.proof.md,
 first paragraph; SGA 4, XVII, §5--6; Bhatt--Scholze 6.7.6--6.7.7
 (blueprint: def-zl-weil-compact-support-cohomology).

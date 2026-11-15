@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 # The localizing closure
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node sk-def-localizing-closure (blueprint: sk-def-localizing-closure).
+node definition-localizing-subcategory (blueprint: definition-localizing-subcategory).
 
 The ambient category is the unbounded derived category of module objects on the
 small pro-etale site.  The localizing closure is defined as the intersection of
@@ -35,8 +35,8 @@ namespace CategoryTheory
 /-- A property describes a full replete triangulated subcategory closed under
 all coproducts that exist in the ambient category.
 
-Source: blueprint sk-def-localizing-closure, first paragraph
-(blueprint: sk-def-localizing-closure). -/
+Source: blueprint definition-localizing-subcategory, first paragraph
+(blueprint: definition-localizing-subcategory). -/
 def IsLocalizingSubcategory {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -49,8 +49,8 @@ def IsLocalizingSubcategory {C : Type u} [Category.{v, u} C]
 
 /-- The intersection of all localizing subcategories containing `S`.
 
-Source: blueprint sk-def-localizing-closure, first paragraph
-(blueprint: sk-def-localizing-closure). -/
+Source: blueprint definition-localizing-subcategory, first paragraph
+(blueprint: definition-localizing-subcategory). -/
 def localizingClosure {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -68,7 +68,7 @@ open AlgebraicGeometry Scheme
 pro-etale scheme.
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node sk-def-localizing-closure (blueprint: sk-def-localizing-closure).
+node definition-localizing-subcategory (blueprint: definition-localizing-subcategory).
 The coefficient ring is the condensed ring `Λ`; `condensedRingObj Λ X` is its
 pullback `Λ_X`, and `ConstantModelConstructibleFiniteTor Λ X` is `Dctf(X, Λ)`.
 The localizing closure is the intersection defining the smallest full replete

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonemp
 
 /-! # Local block normal form of a constant rank sheaf map
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), reduced-ring normal form.
+Source: `lemma-triviality-fibres--2`, proof (3), reduced-ring normal form.
 (blueprint: lem-pc-constant-rank-map-local-normal-form)
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A constant rank map on an open part of a reduced scheme is locally a projection
 followed by an inclusion, in finite free bases.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), normal-form claim;
+Source: `lemma-triviality-fibres--2`, proof (3), normal-form claim;
 `lem-pc-constant-rank-map-kernel-image`, proof steps 1 and 2.
 (blueprint: lem-pc-constant-rank-map-local-normal-form)
 

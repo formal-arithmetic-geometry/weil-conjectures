@@ -14,7 +14,8 @@ public import WeilConjectures.WeilSheaf.IsotypicPullback
 The Artin–Schreier map `AS : 𝔸¹ ⟶ 𝔸¹` is a `k₀`-torsor under the translations
 (`AlgebraicGeometry.affineLine.isTorsorSplit_artinSchreierMap`), and the inclusion `ℒ_ψ ⟶ AS_* ℚ̄_ℓ`
 of pro-étale Weil sheaves (`AlgebraicGeometry.ProEtaleWeilSheaf.artinSchreierImageι`)
-is `ψ`-equivariant with invertible adjoint `AS^* ℒ_ψ ⟶ ℚ̄_ℓ` (blueprint `lem-fd-as-characters`).
+is `ψ`-equivariant with invertible adjoint `AS^* ℒ_ψ ⟶ ℚ̄_ℓ` (blueprint
+`lemma-artin-schreier-character-sheaf`).
 -/
 
 @[expose] public section
@@ -41,7 +42,7 @@ instance (c : k₀) : (affineLine.translationIso k₀ c).hom.IsOver (Spec (CommR
   inferInstanceAs ((affineLine.translation k₀ c).IsOver (Spec (CommRingCat.of k₀)))
 
 /-- The translations of the affine line lie over the Artin–Schreier map
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma affineLine.translationIso_comp_artinSchreierMap (c : k₀) :
     (affineLine.translationIso k₀ c).hom ≫ affineLine.artinSchreierMap k₀ =
       affineLine.artinSchreierMap k₀ :=
@@ -49,14 +50,14 @@ lemma affineLine.translationIso_comp_artinSchreierMap (c : k₀) :
 
 omit [Finite k₀] in
 /-- Translation by `c + d` is translation by `c` followed by translation by `d`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma affineLine.translationIso_add (c d : k₀) :
     (affineLine.translationIso k₀ (c + d)).hom =
       (affineLine.translationIso k₀ c).hom ≫ (affineLine.translationIso k₀ d).hom :=
   affineLine.translation_add k₀ c d
 
 /-- The Artin–Schreier map is a split `k₀`-torsor under the translations
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma affineLine.isTorsorSplit_artinSchreierMap :
     IsTorsorSplit (affineLine.artinSchreierMap k₀) (affineLine.translationIso k₀)
       (affineLine.translationIso_comp_artinSchreierMap) :=
@@ -64,14 +65,14 @@ lemma affineLine.isTorsorSplit_artinSchreierMap :
 
 omit [Finite k₀] in
 /-- The base change of the translations of the affine line are the geometric translations
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma affineLine.geometricTorsorAut_translationIso :
     (geometricTorsorAut k₀ (affineLine.translationIso k₀)) =
       affineLine.geometricTranslationIso k₀ :=
   funext fun _ ↦ Iso.ext rfl
 
 /-- The translation of a torsor pushforward only depends on the automorphisms
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtale.torsorTranslation_congr {Z W : Scheme.{u}} (π : W ⟶ Z) {G : Type u}
     {τ τ' : G → (W ≅ W)} (e : τ = τ') (hτ : ∀ g, (τ g).hom ≫ π = π)
     (hτ' : ∀ g, (τ' g).hom ≫ π = π) (g : G) :
@@ -102,7 +103,7 @@ noncomputable def ProEtaleWeilSheaf.artinSchreierImageι :
     exact h⟩
 
 /-- The underlying morphism of `AlgebraicGeometry.ProEtaleWeilSheaf.artinSchreierImageι`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.artinSchreierImageι_hom_f :
     (ProEtaleWeilSheaf.artinSchreierImageι ψ).hom.f =
       (image.ι (WeilSheaf.artinSchreierIdempotent ψ)).hom.hom.f :=
@@ -111,7 +112,7 @@ lemma ProEtaleWeilSheaf.artinSchreierImageι_hom_f :
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The translations of `ĀS_* ℚ̄_ℓ` are the torsor translations
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma artinSchreierTranslationSheafHom_eq_torsorTranslation (c : k₀) :
     artinSchreierTranslationSheafHom l c = torsorTranslation l ĀS
       (geometricTorsorAut k₀ (affineLine.translationIso k₀))
@@ -167,7 +168,7 @@ lemma ProEtaleWeilSheaf.artinSchreierImageι_comp_torsorTranslation (c : k₀) :
   exact affineLine.homEquiv_symm_artinSchreierImageι_comp ψ c
 
 /-- The adjoint `AS^* ℒ_ψ ⟶ ℚ̄_ℓ` of the inclusion `ℒ_ψ ⟶ AS_* ℚ̄_ℓ` is invertible
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 instance ProEtaleWeilSheaf.isIso_homEquiv_symm_artinSchreierImageι :
     IsIso (((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l
       (affineLine.artinSchreierMap k₀)).homEquiv _ _).symm

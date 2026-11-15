@@ -177,7 +177,7 @@ The definitions that other statements use
 (moved out of `IntegralCompactSupportCoefficientComparison`,
 blueprint: def-pur-integral-compact-support-coefficient-data); the lemma's theorems stay there.
 
-Source: Weil blueprint, sk-thm-purity-transport, Step 3; Bhatt--Scholze,
+Source: Weil blueprint, theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
 Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 (blueprint: def-pur-integral-compact-support-coefficient-data).
 

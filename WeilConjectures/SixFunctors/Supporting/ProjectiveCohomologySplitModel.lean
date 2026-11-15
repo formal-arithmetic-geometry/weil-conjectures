@@ -446,7 +446,7 @@ Source: Stacks 09C3, generator lifting, expanded degreewise; Stacks 064B
 
 Proof:
 1. The exact forgetful functor to abelian sheaves preserves epimorphisms
-   (lem-weil-pbc-module-sheaves-colimits-forgetful). The local-surjectivity criteria for
+   (situation-conventions). The local-surjectivity criteria for
    abelian sheaves and set sheaves identify their underlying maps as epimorphisms of
    set sheaves. The evaluation hypothesis therefore makes module quotients surjective
    on sections at U; kernels are sectionwise.

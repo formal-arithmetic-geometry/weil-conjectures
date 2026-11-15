@@ -15,7 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompactSc
 /-! # Evaluation of the proper/open scalar word
 
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941, 06YY and 07A6;
-the compact-support paragraph of `lem-fix-operation-reduction`.
+the compact-support paragraph of `proposition-six-operations-change-coefficients`.
 -/
 
 @[expose] public noncomputable section
@@ -239,7 +239,7 @@ identity of arrows for arbitrary systems, without constructibility, boundedness,
 Noetherian, completeness or cartesian-system hypotheses.
 
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941, 06YY, 07A6;
-`lem-fix-operation-reduction`, compact-support paragraph, and step 3 of
+`proposition-six-operations-change-coefficients`, compact-support paragraph, and step 3 of
 `lem-sf-compact-support-system-scalar-finite-invertible`.
 (blueprint: lem-sf-compact-scalar-evaluation-square).
 

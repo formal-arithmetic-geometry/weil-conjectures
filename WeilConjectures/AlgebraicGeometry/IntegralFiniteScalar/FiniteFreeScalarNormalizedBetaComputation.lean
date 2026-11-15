@@ -21,7 +21,6 @@ private instance ring_comm (Λ : ScalarSixRing.{u}) : IsCommMonObj Λ.X := Λ.co
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunctor
   DerivedCategory.monoidalClosed Mod.monoidalClosed Sheaf.monoidalCategory
   AlgebraicGeometry.ProEtale.upperStarFromPoint
-set_option maxHeartbeats 600000 in
 -- Compare the two total tensors using their invertible coefficient summands.
 /-- Augmentation normalization computes beta using any ordinary and total comparisons
 with the prescribed underlying maps and degree-zero summands.

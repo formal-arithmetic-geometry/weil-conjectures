@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Module constructibility from finite sets and finite coefficients
 
-Source: the normalization exact-sequence blueprint, unit `sk-thm-p1`, module refinement
-in lem-weil-pbc-finite-pushforward-finite-stalk-module.
+Source: the normalization exact-sequence blueprint, unit
+`proposition-proper-base-change-projective-line`, module refinement in
+lem-weil-pbc-finite-pushforward-finite-stalk-module.
 -/
 
 @[expose] public section

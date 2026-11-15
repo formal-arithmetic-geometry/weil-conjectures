@@ -31,7 +31,7 @@ sections of the zeroth cohomology of the quotient algebraic Hom complex, natural
 all quotient arrows.
 
 Source: Stacks Project, Tags 09C5, 08JH and 06YQ; current blueprint,
-`sk-prop-integral-local-structure`, Compatible isomorphisms.
+`proposition-local-structure-integral-constructible-complexes`, Compatible isomorphisms.
 (blueprint: lem-pe-internal-perfect-endomorphism-hom-comparison).
 
 Proof: localize the small pro-etale site at W. The DVR quotients are finite, so the

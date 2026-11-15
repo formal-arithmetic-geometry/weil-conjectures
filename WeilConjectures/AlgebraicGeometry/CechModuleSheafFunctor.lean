@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The module sheaf of sections on intersections
 
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
 (blueprint: def-pc-cech-module-sheaf-functor).
 -/
 

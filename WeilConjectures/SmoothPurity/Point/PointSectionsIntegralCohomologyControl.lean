@@ -441,7 +441,7 @@ private theorem finite_quotient_of_finite_cone
   exact Finite.of_injective g hg
 
 /-- Integral sections have bounded derived-complete cohomology and finite residue.
-Source: the point evaluation assertion in blueprint `def-weil-finite-coefficient-point`,
+Source: the point evaluation assertion in blueprint `lemma-perfect-complexes-geometric-point`,
 steps 3--5 of `lem-weil-point-sections-finiteness`; Stacks Tags 091W, 093M and 091P.
 (blueprint: lem-weil-point-sections-integral-cohomology-control).
 

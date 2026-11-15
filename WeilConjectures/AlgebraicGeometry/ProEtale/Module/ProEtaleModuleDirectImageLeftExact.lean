@@ -35,7 +35,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 # Left exactness of pro-etale module direct image
 
 Source: Stacks Project, Tags 03DA and 03DC, and the Weil conjectures blueprint,
-`def-weil-derived-direct-image`, first paragraph
+`prose-03-02`, first paragraph
 (blueprint: lem-weil-proetale-module-direct-image-left-exact).
 -/
 
@@ -51,7 +51,7 @@ namespace AlgebraicGeometry.Scheme
 additive and left exact. In these abelian categories, preservation of finite limits
 is equivalent to preserving exact sequences `0 → F' → F → F''`.
 
-Source: Stacks Project, Tags 03DA and 03DC; blueprint `def-weil-derived-direct-image`,
+Source: Stacks Project, Tags 03DA and 03DC; blueprint `prose-03-02`,
 first paragraph (blueprint: lem-weil-proetale-module-direct-image-left-exact).
 
 Proof plan: addition of morphisms is sectionwise. Precomposition with base change

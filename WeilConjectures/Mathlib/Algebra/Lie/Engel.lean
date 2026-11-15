@@ -24,7 +24,7 @@ direct consequence of Mathlib's `LieModule.isNilpotent_iff_forall'`.
 
 ## Blueprint
 
-`LieSubalgebra.exists_forall_apply_eq_zero_and_isNilpotent` implements `lem-wf-engel-matrix`.
+`LieSubalgebra.exists_forall_apply_eq_zero_and_isNilpotent` implements `lemma-engel-s-theorem`.
 -/
 
 @[expose] public section
@@ -40,7 +40,7 @@ variable {k M : Type*} [Field k] [AddCommGroup M] [Module k M] [FiniteDimensiona
 /-- **Engel's matrix lemma.** Let `A` be a Lie algebra of endomorphisms of a nonzero
 finite-dimensional vector space `M`, all of whose elements are nilpotent. Then some nonzero vector
 of `M` is killed by every element of `A`, and `A` is a nilpotent Lie algebra.
-(blueprint: `lem-wf-engel-matrix`) -/
+(blueprint: `lemma-engel-s-theorem`) -/
 theorem exists_forall_apply_eq_zero_and_isNilpotent [Nontrivial M]
     (A : LieSubalgebra k (Module.End k M)) (hA : ∀ X ∈ A, IsNilpotent X) :
     (∃ v : M, v ≠ 0 ∧ ∀ X ∈ A, X v = 0) ∧ LieRing.IsNilpotent A := by

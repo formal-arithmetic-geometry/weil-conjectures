@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly
 /-- The canonical origin compositor at three specified candidates, with the canonical
 candidate comparisons inserted on both ends. This extends the existing tower component
 notation to an arbitrary retained origin object; it chooses no comparison maps.
-Source: Stacks 0F7J; thm-sf-comp-composition
+Source: Stacks 0F7J; proposition-composition-base-change-rf-shriek--1
 (blueprint: lem-sf-projection-compatible-triangle-assembly). -/
 def candidateCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

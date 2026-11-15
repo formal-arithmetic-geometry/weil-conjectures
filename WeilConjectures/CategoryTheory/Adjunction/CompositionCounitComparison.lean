@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Composition comparisons determined by smooth counits
 
 Source: the composite-adjunction argument in the current blueprint proof of
-sk-prop-sp-composition (blueprint: lem-pur-composition-counit-comparison).
+proposition-compatibility-purity-composition (blueprint: lem-pur-composition-counit-comparison).
 -/
 
 @[expose] public section

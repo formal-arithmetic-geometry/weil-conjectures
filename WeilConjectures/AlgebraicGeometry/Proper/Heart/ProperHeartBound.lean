@@ -27,7 +27,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 # A uniform bound for proper direct image on the ind-constructible heart
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-heart-bound,
-statement and proof (blueprint: sk-lem-proper-heart-bound).
+statement and proof (blueprint: lemma-uniform-bound-proper-direct-image).
 
 ## Main statements
 
@@ -52,8 +52,9 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The functor M ↦ H^q(Rp_*(M[0])) on internal modules over the pulled-back coefficient ring.
-Source: blueprint sk-lem-proper-heart-bound, definition of R^q p_* in the standing conventions
-(blueprint: sk-lem-proper-heart-bound). This is the full module-object derived direct image. -/
+Source: blueprint lemma-uniform-bound-proper-direct-image, definition of R^q p_* in the standing
+conventions (blueprint: lemma-uniform-bound-proper-direct-image). This is the full module-object
+derived direct image. -/
 def properHeartHigherDirectImage
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (q : ℤ) :
@@ -69,8 +70,8 @@ of ind-constructibles by each nonnegative higher direct image. Preservation mean
 image of every colimit cofan is a colimit; its legs are the images of the original injections.
 By fullness, repleteness and ambient-sum closure of IndCons, this is exactly preservation
 of sums in IndCons itself, including the empty sum.
-Source: blueprint sk-lem-proper-heart-bound, displayed formulas and final assertion
-(blueprint: sk-lem-proper-heart-bound). -/
+Source: blueprint lemma-uniform-bound-proper-direct-image, displayed formulas and final assertion
+(blueprint: lemma-uniform-bound-proper-direct-image). -/
 def ProperHeartBoundAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ) : Prop :=
@@ -104,7 +105,6 @@ private theorem dimension_bound_of_finite_lower_bounds (D : WithBot ℕ∞) (d :
       rw [ite_eq_right hd]
       exact_mod_cast (show n ≤ d.toNat by omega)
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 private theorem properHeartHigherDirectImage_preservesFilteredColimits
@@ -114,7 +114,6 @@ private theorem properHeartHigherDirectImage_preservesFilteredColimits
       (properHeartHigherDirectImage Λ p q) := by
   exact CondensedRing.higherDirectImage_filtered Λ p q
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Coproduct inference for internal modules needs the same search budget as filtered colimits.
 set_option synthInstance.maxSize 4096 in
 private theorem properHeartHigherDirectImage_preservesSums
@@ -169,8 +168,8 @@ private theorem properHeartBound_of_continuity
 /-- For a proper morphism in the standing separated finite-type positive-characteristic
 setting, higher direct image of ind-constructible E-modules vanishes above 2d+1, stays
 ind-constructible in nonnegative degrees, and preserves arbitrary direct sums.
-Source: blueprint main-20261015, sk-lem-proper-heart-bound, statement and proof
-(blueprint: sk-lem-proper-heart-bound).
+Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, statement and proof
+(blueprint: lemma-uniform-bound-proper-direct-image).
 
 Proof: convert the finite-lower-bound convention for geometric fibre dimension,
 including empty fibres and negative d, and apply the constructible rational vanishing
@@ -216,8 +215,9 @@ theorem properHeartBound
 
 /-- The uniform proper heart bound for the condensed algebraic closure, whose sections
 are continuous maps valued in some finite subextension, rather than all continuous maps
-into the algebraic closure. Source: blueprint main-20261015, sk-lem-proper-heart-bound,
-statement and proof (blueprint: sk-lem-proper-heart-bound).
+into the algebraic closure. Source: blueprint main-20261015,
+lemma-uniform-bound-proper-direct-image, statement and proof (blueprint:
+lemma-uniform-bound-proper-direct-image).
 
 Proof: use the algebraic-closure coefficient cases of the same constructible
 vanishing and constructibility inputs as properHeartBound. Internal-module qcqs

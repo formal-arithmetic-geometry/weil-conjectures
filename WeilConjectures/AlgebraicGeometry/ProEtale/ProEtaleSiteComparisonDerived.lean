@@ -20,7 +20,8 @@ set_option autoImplicit false
 # Bounded below finite-coefficient site comparison
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node thm-weil-pbc-site-comparison (blueprint: thm-weil-pbc-site-comparison).
+node theorem-bounded-below-cohomology-comparison (blueprint:
+theorem-bounded-below-cohomology-comparison).
 -/
 
 @[expose] public section
@@ -36,38 +37,38 @@ variable (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
 
 /-- Direct image in the specified coefficient encoding: undo canonical coefficient
 realization and restrict along the inclusion of the etale site.
-Source: blueprint, thm-weil-pbc-site-comparison, module adjunction
-(blueprint: thm-weil-pbc-site-comparison). -/
+Source: blueprint, theorem-bounded-below-cohomology-comparison, module adjunction
+(blueprint: theorem-bounded-below-cohomology-comparison). -/
 noncomputable def finiteCoefficientDirectImage :
     FiniteCoefficientModules T Λ ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   (finiteCoefficientRealization T Λ).inv ⋙ comparisonLowerStar (ModuleCat.{u + 1} Λ) T
 
 /-- The module adjunction transported through canonical coefficient realization.
-Source: blueprint, thm-weil-pbc-site-comparison, module adjunction
-(blueprint: thm-weil-pbc-site-comparison). -/
+Source: blueprint, theorem-bounded-below-cohomology-comparison, module adjunction
+(blueprint: theorem-bounded-below-cohomology-comparison). -/
 noncomputable def finiteCoefficientComparisonAdjunction :
     finiteCoefficientComparison T Λ ⊣ finiteCoefficientDirectImage T Λ :=
   (T.proEtaleSiteComparisonModules Λ).comp
     (finiteCoefficientRealization T Λ).asEquivalence.toAdjunction
 
 /-- Transport enough injectives along the canonical coefficient equivalence.
-Source: blueprint, thm-weil-pbc-site-comparison, injective-resolution paragraph
-(blueprint: thm-weil-pbc-site-comparison). -/
+Source: blueprint, theorem-bounded-below-cohomology-comparison, injective-resolution paragraph
+(blueprint: theorem-bounded-below-cohomology-comparison). -/
 noncomputable instance finiteCoefficientModulesEnoughInjectives :
     EnoughInjectives (FiniteCoefficientModules T Λ) :=
   EnoughInjectives.of_equivalence (finiteCoefficientRealization T Λ).inv
 
 /-- Additivity of direct image, inherited from the specified module adjunction.
-Source: blueprint, thm-weil-pbc-site-comparison, module adjunction
-(blueprint: thm-weil-pbc-site-comparison). -/
+Source: blueprint, theorem-bounded-below-cohomology-comparison, module adjunction
+(blueprint: theorem-bounded-below-cohomology-comparison). -/
 noncomputable instance finiteCoefficientDirectImageAdditive :
     (finiteCoefficientDirectImage T Λ).Additive :=
   (finiteCoefficientComparisonAdjunction T Λ).right_adjoint_additive
 
 /-- The canonical adjunction on bounded below derived categories. Its left adjoint is
 termwise exact inverse image; its right adjoint is the right derived direct image.
-Source: blueprint, thm-weil-pbc-site-comparison, derived-adjunction paragraph
-(blueprint: thm-weil-pbc-site-comparison). -/
+Source: blueprint, theorem-bounded-below-cohomology-comparison, derived-adjunction paragraph
+(blueprint: theorem-bounded-below-cohomology-comparison). -/
 noncomputable def finiteCoefficientDerivedComparisonAdjunction :
     (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus ⊣
       (finiteCoefficientDirectImage T Λ).rightDerivedFunctorPlus :=
@@ -75,8 +76,8 @@ noncomputable def finiteCoefficientDerivedComparisonAdjunction :
 
 /-- Finite-coefficient comparison is fully faithful on all bounded below complexes,
 and its canonical derived unit is a natural isomorphism.
-Source: blueprint, thm-weil-pbc-site-comparison, statement and all proof paragraphs;
-Stacks Project, Tag 099V, final paragraph (blueprint: thm-weil-pbc-site-comparison).
+Source: blueprint, theorem-bounded-below-cohomology-comparison, statement and all proof paragraphs;
+Stacks Project, Tag 099V, final paragraph (blueprint: theorem-bounded-below-cohomology-comparison).
 
 Proof:
 1. The module categories are abelian. The comparison inverse image is additive and

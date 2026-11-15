@@ -30,8 +30,27 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 0 in
--- The coefficient and compactification comparisons elaborate large instance terms.
+private theorem nonempty_compactSupport_comapIso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (a : Λ' ⟶ Λ) [IsMonHom a]
+    [∀ T : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a T))]
+    {T Z : Scheme.{u}} {p : T ⟶ Z} (d : Compactification p) :
+    Nonempty (rightDerivedLowerShriekOfCompactification Λ d ⋙
+        (Mod.comap (coefficientMap a Z)).mapDerivedCategory ≅
+      (Mod.comap (coefficientMap a T)).mapDerivedCategory ⋙
+        rightDerivedLowerShriekOfCompactification Λ' d) := by
+  let J := openImmersionLowerShriek Λ d.i
+  let J' := openImmersionLowerShriek Λ' d.i
+  let P' := lowerStar Λ' d.g
+  let j : J.mapDerivedCategory ⋙ (Mod.comap (coefficientMap a d.Z)).mapDerivedCategory ≅
+      (Mod.comap (coefficientMap a T)).mapDerivedCategory ⋙ J'.mapDerivedCategory :=
+    Functor.mapDerivedCategorySquareIso (comapOpenImmersionLowerShriekIso a d.i)
+  exact ⟨Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft J.mapDerivedCategory (derivedComapLowerStarIso a d.g) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight j P'.rightDerivedFunctor ≪≫ Functor.associator _ _ _⟩
+
 private theorem transport_compactSupport_baseChange
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -50,7 +69,8 @@ private theorem transport_compactSupport_baseChange
         ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ≅
       (rightDerivedLowerShriekOfCompactification Λ c').obj
         ((upperStar Λ g').leftDerivedFunctor.obj K)) := by
-  let a := e.inv.hom
+  -- Fix the coefficient objects before elaborating the derived comparisons.
+  let a : Λ' ⟶ Λ := e.inv.hom
   have : IsMonHom a := inferInstanceAs (IsMonHom e.inv.hom)
   have : IsIso a := inferInstanceAs (IsIso ((Mon.forget _).map e.inv))
   let (T : Scheme.{u}) : IsIso (coefficientMap a T) :=
@@ -76,32 +96,18 @@ private theorem transport_compactSupport_baseChange
     exact Functor.isEquivalence_mapDerivedCategory _
   have hK' : boundedConstructible (condensedRingObj Λ' X) ((U X).obj K) :=
     (boundedConstructible_comap_iso_iff (coefficientMap a X) K).2 hK
-  have ec {T Z : Scheme.{u}} {p : T ⟶ Z} (d : Compactification p) :
-      rightDerivedLowerShriekOfCompactification Λ d ⋙ U Z ≅
-        U T ⋙ rightDerivedLowerShriekOfCompactification Λ' d := by
-    let J := openImmersionLowerShriek Λ d.i
-    let J' := openImmersionLowerShriek Λ' d.i
-    let P' := lowerStar Λ' d.g
-    let j : J.mapDerivedCategory ⋙ U d.Z ≅ U T ⋙ J'.mapDerivedCategory :=
-      Functor.mapDerivedCategoryCompIso _ _ ≪≫
-        Functor.mapDerivedCategoryNatIso (comapOpenImmersionLowerShriekIso a d.i) ≪≫
-        (Functor.mapDerivedCategoryCompIso _ _).symm
-    exact Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft J.mapDerivedCategory (derivedComapLowerStarIso a d.g) ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight j P'.rightDerivedFunctor ≪≫ Functor.associator _ _ _
+  obtain ⟨ec⟩ := nonempty_compactSupport_comapIso a c
+  obtain ⟨ec'⟩ := nonempty_compactSupport_comapIso a c'
   obtain ⟨bc⟩ := h ((U X).obj K) hK'
   have : (U Y').IsEquivalence := he Y'
   refine ⟨(U Y').preimageIso (?_)⟩
   exact (derivedComapLeftDerivedUpperStarIso a g).symm.app _ ≪≫
-    (upperStar Λ' g).leftDerivedFunctor.mapIso ((ec c).app K) ≪≫
+    (upperStar Λ' g).leftDerivedFunctor.mapIso (ec.app K) ≪≫
     bc ≪≫
     (rightDerivedLowerShriekOfCompactification Λ' c').mapIso
       ((derivedComapLeftDerivedUpperStarIso a g').app K) ≪≫
-    ((ec c').app ((upperStar Λ g').leftDerivedFunctor.obj K)).symm
+    (ec'.app ((upperStar Λ g').leftDerivedFunctor.obj K)).symm
 
-set_option maxHeartbeats 0 in
--- The coefficient and compactification comparisons elaborate large instance terms.
 /-- Compact-support base change on bounded constructible complexes is independent
 of the chosen compactifications and of an isomorphic presentation of E or Qlbar.
 
@@ -140,10 +146,9 @@ theorem nonempty_iso_compactSupport_baseChange_of_coefficientIso
         ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ≅
       (rightDerivedLowerShriekOfCompactification Λ c').obj
         ((upperStar Λ g'.left).leftDerivedFunctor.obj K)) := by
-  rcases hΛ with hE | hQ
-  · obtain ⟨e⟩ := hE
-    apply transport_compactSupport_baseChange e f.left g.left f'.left g'.left c c' ?_ K hK
-    intro L hL
+  rcases hΛ with ⟨⟨e⟩⟩ | ⟨⟨e⟩⟩
+  · refine transport_compactSupport_baseChange e f.left g.left f'.left g'.left c c'
+      (fun L hL ↦ ?_) K hK
     let L' : BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E)
         X.left) := ⟨L, hL⟩
     have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E c sq
@@ -155,9 +160,8 @@ theorem nonempty_iso_compactSupport_baseChange_of_coefficientIso
     exact ⟨(boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E)
       Y'.left)).ι.mapIso (bc.app L' ≪≫ ci.app
         ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g').obj L'))⟩
-  · obtain ⟨e⟩ := hQ
-    apply transport_compactSupport_baseChange e f.left g.left f'.left g'.left c c' ?_ K hK
-    intro L hL
+  · refine transport_compactSupport_baseChange e f.left g.left f'.left g'.left c c'
+      (fun L hL ↦ ?_) K hK
     let L' : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         X.left) := ⟨L, hL⟩
     have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl

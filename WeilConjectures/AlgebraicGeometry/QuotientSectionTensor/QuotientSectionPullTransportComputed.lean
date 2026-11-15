@@ -615,7 +615,6 @@ private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] complex_iso complex_comp_iso section_localization_iso
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Infer the fixed cochain instances for all eight coefficient categories together.
 /-- The normalized scalar and geometric squares commute at a cochain representative
 where the internal scalar computation counit is invertible.

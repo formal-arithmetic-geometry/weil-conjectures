@@ -17,7 +17,7 @@ correspondence of an endomorphism `v` is `P ∘ (v ⊗ D_s K) ∘ σ`
 (`ProEtale.CondensedRing.Correspondence.integral_traceClass_ofEnd_eq`), for the coevaluation
 `σ = pointCoev v : ℚ̄_ℓ ⟶ K ⊗ D_s K` built from the class of the identity and the pairing
 `P = pointPairing v`, the evaluation followed by `ω_s ≅ ℚ̄_ℓ` (blueprint
-`prop-trf-pairing-point-normalization`). The coevaluation is written as
+`lemma-local-terms-point--1`). The coevaluation is written as
 `σ = (eB ⊗ eC) ∘ δ ∘ LΔ^* (κ⁻¹ ∘ [1]) ∘ τ` (`ProEtale.CondensedRing.Correspondence.pointCoev_eq`),
 with the identifications `LΔ^* Lp^* ≅ 𝟭` of `diagUpperStarProjIso`.
 

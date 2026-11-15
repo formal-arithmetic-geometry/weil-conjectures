@@ -34,8 +34,6 @@ private lemma roof_mate_transport {C D : Type*} [Category C] [Category D]
   simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Category.assoc] using
     (adj.homEquiv_naturality_left p (e.hom ≫ a ≫ e'.inv)).symm
 
-set_option maxHeartbeats 400000 in
--- Elaborating the three large derived-category comparison types needs more heartbeats.
 set_option linter.unusedVariables false in
 /-- Resolved source and target short exact rows and their vertex comparisons,
 before recording the three mate equations. Source: Stacks Project, Cohomology

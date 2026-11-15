@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInvers
 # Identity normalization of ordinary pro-etale derived pullback
 
 Source: Stacks Project, Tag 09A5, identity specialization of `section-morphism`;
-the final sentence of the blueprint proof of `lem-pur-diagonal-base-change`
-(blueprint: lem-pur-proetale-derived-pullback-identity).
+the final sentence of the blueprint proof of
+`proposition-exceptional-inverse-image-smooth-morphism--7` (blueprint:
+lem-pur-proetale-derived-pullback-identity).
 
 The coprojection formula fixes the module comparison before scalar extension.
 The tensor formulas fix its scalar-transport identification. The final equality
@@ -219,7 +220,6 @@ private def cancelScalarTransport {X : Scheme.{u}}
     ext x
     rfl
 
-set_option maxHeartbeats 1000000 in
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A] :
@@ -268,7 +268,8 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
         _ = M.val.map (p.inv.app U).op (M.val.map (p.hom.app U).op m) :=
           congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (hd M U m)
         _ = M.val.map ((p.hom.app U).op ≫ (p.inv.app U).op) m :=
-          (M.val.map_comp_apply _ _ m).symm
+          ConcreteCategory.congr_hom (M.val.map_comp (p.hom.app U).op
+            (p.inv.app U).op).symm m
         _ = m := by
           rw [← op_comp, p.inv_hom_id_app]
           exact ConcreteCategory.congr_hom (M.val.map_id (op U)) m
@@ -320,10 +321,10 @@ m tensor a to c inverse(a)m and sends m back to m tensor 1. Composing with eM gi
 with the two displayed tensor formulas, naturally in the module.
 (5) Alpha identifies pullback with the identity, so pullback is additive and exact.
 Its termwise maps commute with differentials by naturality, giving the complex
-isomorphism b (lem-weil-pbc-exact-functor-derived-factorization).
+isomorphism b (situation-conventions).
 (6) The localization universal property descends b and its inverse to gamma. Its
 representative formula is precisely the factorization followed by Q(b), as displayed
-(lem-weil-pbc-localization-universal-property and def-weil-pbc-proetale-operations).
+(lem-weil-pbc-localization-universal-property and prose-03-02).
 (7) No argument uses a point of X or a nonzero ring. For the zero ring all unitary
 modules are zero; for the empty scheme the empty-cover sheaf axiom gives the same
 degenerate comparisons. Both cases satisfy the formulas without extra hypotheses. -/

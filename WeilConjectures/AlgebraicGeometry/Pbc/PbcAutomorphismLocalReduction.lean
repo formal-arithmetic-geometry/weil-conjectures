@@ -75,7 +75,7 @@ def pbcLocalScalarData : ScalarSixPullbackData.{u} :=
 
 /-- The specified local coefficient comparison: inverse geometric compositor, inverse
 scalar comparison, and scalar extension of the given local identification.
-Source: def-wf-tensor-product, local monoidal inverse-image comparison
+Source: prose-03-02, local monoidal inverse-image comparison
 (blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
 def pbcLocalReductionComparison (a : Λ ⟶ Λ') (f : X ⟶ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
@@ -193,7 +193,7 @@ theorem pbcLocalReductionComparison_tower (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
 formula and scalar-tower coherence. The local map is parametrized as `h : U ⟶ X`;
 for a map `g : U ⟶ Y`, take `h = g ≫ f.inv`, since `h ≫ f.hom = g`.
 
-Source: def-wf-tensor-product, monoidal inverse-image comparison; scalar-six (1),(3).
+Source: prose-03-02, monoidal inverse-image comparison; scalar-six (1),(3).
 Proof: the composite defining `pbcLocalReductionComparison` is an isomorphism.
 Invert geometric composition to obtain the iterated formula, use naturality for
 morphisms of local models, and use scalar-tower coherence for successive changes.

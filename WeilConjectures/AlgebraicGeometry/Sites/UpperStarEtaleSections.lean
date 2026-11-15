@@ -14,7 +14,7 @@ For an étale morphism `f : P ⟶ V`, the pullback `f^*` of étale sheaves is th
 the localization functor `P_ét ⥤ V_ét`
 (`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`).
 Hence the global sections of `f^* F` are the sections of `F` over the étale `V`-scheme `P`,
-naturally in `F` (blueprint `det-tf-transverse-corner-vanishing`, dévissage step).
+naturally in `F` (blueprint `lemma-cohomology-near-two-transverse-divisors--1`, dévissage step).
 
 ## Main definitions
 
@@ -32,7 +32,8 @@ namespace AlgebraicGeometry.Etale
 variable {P V : Scheme.{u}} (f : P ⟶ V) [AlgebraicGeometry.Etale f]
 
 /-- The image of the terminal object of `P_ét` under the localization functor along an étale
-`f : P ⟶ V` is `P`, as an étale `V`-scheme (blueprint `det-tf-transverse-corner-vanishing`). -/
+`f : P ⟶ V` is `P`, as an étale `V`-scheme (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`). -/
 noncomputable def overMapTerminalIso :
     (MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale f)).obj
       (⊤_ P.Etale) ≅ Scheme.Etale.mk f :=
@@ -43,8 +44,8 @@ noncomputable def overMapTerminalIso :
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- **Global sections of the pullback along an étale morphism** (blueprint
-`det-tf-transverse-corner-vanishing`): for `f : P ⟶ V` étale, the global sections of `f^* F`
-are the sections of `F` over the étale `V`-scheme `P`, naturally in `F`. -/
+`lemma-cohomology-near-two-transverse-divisors--1`): for `f : P ⟶ V` étale, the global sections of
+`f^* F` are the sections of `F` over the étale `V`-scheme `P`, naturally in `F`. -/
 noncomputable def upperStarCompSectionsIso :
     (f)^*[A] ⋙ (sheafSections P.smallEtaleTopology A).obj (op (⊤_ P.Etale)) ≅
       (sheafSections V.smallEtaleTopology A).obj (op (Scheme.Etale.mk f)) :=

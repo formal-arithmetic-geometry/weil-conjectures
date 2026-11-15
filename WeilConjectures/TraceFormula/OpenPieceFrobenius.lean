@@ -114,7 +114,6 @@ noncomputable def openPieceFrobeniusCoeff (hj : ΦU ≫ j = j ≫ Φ)
       ((weilUpperStarComparison ℓ ΦU Φ j hj).hom.app K.carrier ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map K.str.hom)
 
-set_option maxHeartbeats 1000000 in
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
 /-- The operator `E_U` of the open piece is `RΓ_c(X, ψ_U) ∘ Φ^♯` on `RΓ_c(X, Rj_! Lj^* K)`. -/

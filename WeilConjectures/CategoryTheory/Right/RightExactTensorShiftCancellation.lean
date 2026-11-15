@@ -109,7 +109,6 @@ private theorem derived_unit_homotopy (adj : E ⊣ U)
   simp only [Iso.inv_hom_id_app]
   erw [Category.comp_id]
 
-set_option maxHeartbeats 1500000 in
 -- Expanding the adjunction transpose involves several whiskered natural transformations.
 omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D]
   [BraidedCategory D] [HasFunctorialFlatResolution D] in
@@ -172,7 +171,6 @@ variable (F : C ⥤ D) [F.Additive] [F.OplaxMonoidal] [F.IsLeftAdjoint]
     ∃ Y, P Y ∧ Nonempty (Qh.obj Y ≅ K))
   (hc : ∀ Y, P Y → IsIso (cL.app Y))
 include P hres hc
-set_option maxHeartbeats 1000000 in
 -- The factorisation through `Qh` elaborates large composites of whiskered transformations.
 open CategoryTheory.Functor in
 /-- A natural transformation `τ : LF(Qh X ⊗ᴸ -) ⟶ LF(Qh X) ⊗ᴸ LF(-)` which is compatible, on
@@ -225,7 +223,6 @@ private theorem commShift_of_tensorLeft_fac_models (X : HomotopyCategory C (.up 
     Functor.associator_inv_app, Functor.associator_hom_app]
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- The factorisation through `Qh` elaborates large composites of whiskered transformations.
 open CategoryTheory.Functor in
 /-- A natural transformation `τ : LF(- ⊗ᴸ Qh X) ⟶ LF(-) ⊗ᴸ LF(Qh X)` which is compatible, on
@@ -330,7 +327,6 @@ private theorem nativeRight_of_iso {K K' : DerivedCategory C} (e : K ≅ K')
   rw [he]
   infer_instance
 
-set_option maxHeartbeats 1500000 in
 -- Constructing a common K-flat representative elaborates the flat resolution comparisons.
 omit [HasFunctorialFlatResolution D] [F.PreservesKFlatQuasiIso] [F.Monoidal]
   [F.leftDerivedFunctor.CommShift ℤ] [NatTrans.CommShift F.leftDerivedFunctorCounit ℤ] in
@@ -576,7 +572,6 @@ private theorem normalized_iso_eq
       Functor.normalizedTensorIso_natural₂ F G e, hn⟩).symm
 end Normalized
 
-set_option maxHeartbeats 2000000 in
 -- The normalization and adjoint-mate shift elaborate large derived-category comparisons.
 /-- A flat-model-normalized tensor comparison for a right exact monoidal functor
 commutes with cancellation of opposite shifts. The shift on the chosen derived
@@ -654,7 +649,6 @@ private theorem rightExactTensorComparison_shiftCancellation_aux
   rw [hcomp, hcomp]
   exact hc
 
-set_option maxHeartbeats 2000000 in
 -- Converting tensor notation is done before any concrete coefficient specialization.
 /-- The normalized right exact tensor comparison respects opposite-shift cancellation,
 written using the tensor bifunctors. The proof is the counit/model argument above,

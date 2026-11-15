@@ -13,8 +13,8 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # The recorded Tate twists in the PBC finite-stage coordinates
 
-Source: blueprint def-coefficient-twists-detailed, signed powers and tensor with a complex;
-Bhatt--Scholze, Section 6.8 (blueprint: def-coefficient-twists-detailed).
+Source: blueprint definition-tate-twists, signed powers and tensor with a complex;
+Bhatt--Scholze, Section 6.8 (blueprint: definition-tate-twists).
 All roots, signed powers and coefficient identifications are the published ones.
 The only new construction is their transport to the PBC completed coefficient ring.
 The original finite, integral, rational and intrinsic Qbar interfaces remain imported.
@@ -41,7 +41,7 @@ variable (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- The recorded signed root line, transported along the fixed coefficient isomorphism.
 Source: blueprint signed-power definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 def pbcTateLineSheaf (m : ℤ) : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) :=
   (pbcRestrict (purCoefficientIso l E X).hom).obj
     (coefficientTwistLine X
@@ -49,7 +49,7 @@ def pbcTateLineSheaf (m : ℤ) : pbcModules X (pbcAdicCompletion X (pbcIntegralD
 
 /-- Ordinary sheaf tensor by the same line, in the actual PBC module category.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 def pbcTateSheafTensor (m : ℤ) :
     pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) ⥤
       pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) :=
@@ -59,7 +59,7 @@ def pbcTateSheafTensor (m : ℤ) :
 omit [IsNoetherian X] hDim in
 /-- The ordinary tensor twist is additive and exact.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed).
+(blueprint: definition-tate-twists).
 Proof: both coefficient restrictions are exact, and tensor with the rank-one root
 line is exact because l is invertible on every residue field. -/
 theorem pbcTateSheafTensor_exact (m : ℤ) :
@@ -82,27 +82,27 @@ theorem pbcTateSheafTensor_exact (m : ℤ) :
 
 /-- Additivity of the ordinary tensor twist.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance pbcTateSheafTensor_additive (m : ℤ) : (pbcTateSheafTensor l X E m).Additive :=
   (pbcTateSheafTensor_exact l X E m).1
 
 /-- The ordinary tensor twist preserves finite limits.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance pbcTateSheafTensor_finiteLimits (m : ℤ) :
     PreservesFiniteLimits (pbcTateSheafTensor l X E m) :=
   (pbcTateSheafTensor_exact l X E m).2.1
 
 /-- The ordinary tensor twist preserves finite colimits.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance pbcTateSheafTensor_finiteColimits (m : ℤ) :
     PreservesFiniteColimits (pbcTateSheafTensor l X E m) :=
   (pbcTateSheafTensor_exact l X E m).2.2
 
 /-- The actual derived tensor: flatness permits termwise tensor on every complex.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 def pbcTateAmbient (m : ℤ) :
     PbcCompletedDerived X (pbcIntegralDatum l E) ⥤
       PbcCompletedDerived X (pbcIntegralDatum l E) :=
@@ -112,7 +112,7 @@ omit hInv [IsNoetherian X] hDim in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary tensor twist commutes with the constant coefficient action.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed).
+(blueprint: definition-tate-twists).
 Proof: transport the constant section through the coefficient isomorphism. Tensor
 with the line commutes with multiplication by every global section, and both
 coefficient restrictions leave sections and the transported action unchanged. -/
@@ -166,7 +166,7 @@ omit [IsNoetherian X] hDim in
 attribute [local instance] pbcTateSheafTensor_linear in
 /-- Additivity and constant-coefficient linearity of the derived tensor twist.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed).
+(blueprint: definition-tate-twists).
 Proof: the twist is exact and linear on sheaves, and derived localization preserves
 both properties. -/
 theorem pbcTateAmbient_linear (m : ℤ) :
@@ -187,13 +187,13 @@ theorem pbcTateAmbient_linear (m : ℤ) :
 
 /-- Additivity of the derived tensor twist.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance pbcTateAmbient_additive (m : ℤ) : (pbcTateAmbient l X E m).Additive :=
   (pbcTateAmbient_linear l X E m).1
 
 /-- Constant-coefficient linearity of the derived tensor twist.
 Source: blueprint tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance pbcTateAmbient_isLinear (m : ℤ) :
     (pbcTateAmbient l X E m).Linear (PbcIntegralRing l E) :=
   (pbcTateAmbient_linear l X E m).2
@@ -201,7 +201,7 @@ instance pbcTateAmbient_isLinear (m : ℤ) :
 omit [IsNoetherian X] in
 /-- Tensor by the root line preserves the three defining integral conditions.
 Source: blueprint integral tensor-twist definition
-(blueprint: def-coefficient-twists-detailed).
+(blueprint: definition-tate-twists).
 Proof: locally trivialize the root line on its compatible primitive-root covers.
 Its positive powers, the unit, and its dual powers are invertible lines. Tensor
 is locally the identity, commutes with each finite reduction, and preserves the
@@ -218,7 +218,7 @@ theorem pbcTateAmbient_mem [IsNoetherian X]
 
 /-- Rational tensor by the actual signed line at the specified finite field.
 Source: blueprint rational tensor-twist definition
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 def pbcTateRational (F : Padic.FiniteCoefficientFields l Ω) (m : ℤ) :
     pbcStageCategory l Ω X F ⥤ pbcStageCategory l Ω X F :=
   pbcConditionalRational (pbcStageDatum.{u} l Ω F)

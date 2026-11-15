@@ -19,19 +19,19 @@ with the lifted operations.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilComplex.upperStarCompForgetIso` (`prop-weil-operations`): the
+- `AlgebraicGeometry.WeilComplex.upperStarCompForgetIso` (`sec-Weil-complexes`): the
   forgetful functor commutes with the pullback `φ^*` of Weil complexes,
   `For ∘ φ^* ≅ φ̄^* ∘ For`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_forget_iso`
-  (`prop-weil-operations`): the forgetful functor commutes with the derived pushforward
+  (`sec-Weil-complexes`): the forgetful functor commutes with the derived pushforward
   `Rφ_*` of Weil complexes, `For ∘ Rφ_* ≅ Rφ̄_* ∘ For`.
 
 ## Implementation notes
 
-Blueprint `prop-weil-operations` lifts `Lf^*`, `Rf_*`, `Rf_!`, `⊗ᴸ`, `RHom` and `Rf^!` to Weil
+Blueprint `sec-Weil-complexes` lifts `Lf^*`, `Rf_*`, `Rf_!`, `⊗ᴸ`, `RHom` and `Rf^!` to Weil
 complexes, compatibly with the forgetful functor, and asserts that the composition, base
 change, projection, purity and duality isomorphisms are morphisms of Weil complexes. The Weil
 complexes of the repository (`AlgebraicGeometry.WeilComplex`) carry the lifts of `φ^*`
@@ -63,7 +63,7 @@ namespace WeilComplex
 
 variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes.
+/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes.
 
 The forgetful functor commutes with the pullback of Weil complexes: `For(φ^* K) ≅ φ̄^* For(K)`,
 where `φ̄ : X̄ ⟶ Ȳ` is the base change of `φ` to the geometric fibers. The pullback of a
@@ -85,7 +85,7 @@ noncomputable def upperStarCompForgetIso :
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
         ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l])).symm)
 
-/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes.
+/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes.
 
 The forgetful functor commutes with the derived pushforward of Weil complexes:
 `For(Rφ_* K) ≅ Rφ̄_* For(K)`, where `φ̄ : X̄ ⟶ Ȳ` is the base change of `φ` to the geometric

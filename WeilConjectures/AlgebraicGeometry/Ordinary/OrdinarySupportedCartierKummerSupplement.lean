@@ -209,7 +209,7 @@ The derived arrow is displayed explicitly; Ext is only its canonical degree-two
 representative. The boundary determines that representative uniquely. Pullback and
 scalar-extension representatives are themselves normalized by the same boundary.
 
-Source: Stacks 03PL and 0A45; blueprint lem-amb-cartier-kummer-map
+Source: Stacks 03PL and 0A45; blueprint lemma-cycle-class-cartier-divisor
 (blueprint: lem-asd-ordinary-supported-kummer).
 
 Proof:

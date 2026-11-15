@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conservative
 /-! # Generic restriction of locally constant module sheaves on a normal base
 
 Source: `lem-sp-normalized-tate-line-comparison`, proof step 3, and the local
-constant-sheaf calculation of `lem-fin-normal-generic-constant`.
+constant-sheaf calculation of `proposition-proper-direct-image-finite-coefficients`.
 -/
 
 @[expose] public section
@@ -34,7 +34,7 @@ open Scheme
 
 /-- The actual generic-point adjunction unit is invertible on locally constant sheaves.
 Source: `lem-sp-normalized-tate-line-comparison`, proof step 3; the local calculation
-is `lem-fin-normal-generic-constant` (Stacks Project, Tag 09Z5).
+is `proposition-proper-direct-image-finite-coefficients` (Stacks Project, Tag 09Z5).
 (blueprint: lem-sp-normal-generic-locally-constant-unit).
 
 Proof in words: the normal generic constant theorem says that the generic-point

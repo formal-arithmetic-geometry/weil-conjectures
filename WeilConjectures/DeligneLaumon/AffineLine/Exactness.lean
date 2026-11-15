@@ -66,7 +66,7 @@ ordinary direct images form a short exact sequence on the curve:
 ```
 The curve is assumed separated, quasi-compact and geometrically connected over `k₀` (see the
 implementation notes of this file).
-(blueprint: `sk-p-dl-a1-exact`, `p-dl-a1-exact`)
+(blueprint: `proposition-exactness-fixed-pure-weight--1`)
 -/
 theorem shortExact_map_directImage (ι : PadicAlgCl l →+* ℂ)
     {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]

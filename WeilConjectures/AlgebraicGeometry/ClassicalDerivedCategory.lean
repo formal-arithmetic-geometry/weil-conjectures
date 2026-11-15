@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Classical finite-coefficient derived category
 
-Source: the current blueprint, `sk-def-pe-classical-definition`, final complex clause
+Source: the current blueprint, `definition-classical-pro-etale-sheaves`, final complex clause
 (blueprint: def-sfb-classical-derived-category).
 
 For a finite discrete coefficient ring, this is the full subcategory of the unbounded
