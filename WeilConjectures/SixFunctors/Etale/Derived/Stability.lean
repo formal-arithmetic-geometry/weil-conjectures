@@ -66,8 +66,10 @@ imports; downstream files may import this module or just the pieces they need.
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek`
   (`proposition-six-operations-dctf`, clauses (i)–(v)).
-- `AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`
-  (`lemma-flat-models-generators`, complement).
+- `AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_openImmersionLowerShriek`
+  (`lemma-flat-models-generators`, complement; generators `Rg_* j_! L` with the extension by
+  zero `j_!`, as in the notes) and its `Rj_!` form
+  `AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_eq_triangEnvelope_ctfGenerators`
   (`lemma-flat-models-generators--3`): `Dctf(X, Λ)` is the thick envelope of the generators
   `AlgebraicGeometry.Etale.ctfGenerators`; it is a thick subcategory by
