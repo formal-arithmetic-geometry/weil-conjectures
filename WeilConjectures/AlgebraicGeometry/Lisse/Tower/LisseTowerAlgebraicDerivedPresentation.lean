@@ -40,7 +40,7 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 
 * Stacks Project, Pro-etale Cohomology, Tag 09BV
 * More on Algebra, Tag 09AV
-* Stacks, Tag 09BV (lemma-weird)
+* Stacks, Tag 09BV
 -/
 
 @[expose] public noncomputable section

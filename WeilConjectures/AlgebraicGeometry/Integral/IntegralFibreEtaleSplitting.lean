@@ -236,9 +236,9 @@ private theorem exists_etale_clopen_singleton_fibre
       apply (pullback.fst f A.ι).isOpenEmbedding.injective
       rw [← Scheme.Hom.comp_apply, hap, heq, hx']
 
-/-- Separate the finitely many fibre points successively. At each step take a common
-pointed affine étale refinement and remove the new clopen from all previous clopens.
-The restriction to the marked fibre is unchanged because the listed points are distinct. -/
+/-- After a pointed affine étale neighbourhood of `s` with trivial residue extension, the
+finitely many points `x i` of the fibre over `s` lie in pairwise disjoint clopens `V i` of the
+base change, with `V i` meeting the fibre exactly in the point over `x i`. -/
 private theorem exists_etale_clopen_fibre_separation
     {X S : Scheme.{u}} (f : X ⟶ S) [IsIntegralHom f]
     (s : S) (n : ℕ) (x : Fin n → X) (hx : Function.Injective x)

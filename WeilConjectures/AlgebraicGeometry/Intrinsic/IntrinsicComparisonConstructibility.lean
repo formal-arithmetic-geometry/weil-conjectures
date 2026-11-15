@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! The bounded constructibility component of finite-coefficient comparison.
 
-Proof plan: use exactness of intrinsic comparison to identify homology with the
+## Implementation details
+
+Use exactness of intrinsic comparison to identify homology with the
 comparison pullback of each étale homology sheaf; transport constructibility across
 the constant-scalar restriction equivalence and the finite constructible comparison
 lemma. Finiteness of the set of nonzero homology degrees follows from the bounded

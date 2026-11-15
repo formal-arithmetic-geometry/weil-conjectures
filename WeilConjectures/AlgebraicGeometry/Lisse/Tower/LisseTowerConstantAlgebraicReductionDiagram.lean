@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerConstantStalkMode
 
 * Stacks Tag 09BV, finite-ring derived local constancy and compatible trivializations in
   amplification (c)
-* Tag 09BV (lemma-weird), the derived local-constancy and simultaneous-trivialization argument in
+* Tag 09BV, the derived local-constancy and simultaneous-trivialization argument in
   amplification (c)
 * Tags 06YY and 093J
 -/

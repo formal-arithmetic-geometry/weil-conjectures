@@ -106,8 +106,7 @@ attribute [local irreducible]
 
 attribute [local irreducible] ordinaryFiniteRootMap Sheaf.H.map
 
-/-- The degree-zero object is concentrated in degrees at least zero, as its
-single-functor value is; this keeps the Mathlib instance visible through the wrapper. -/
+/-- The degree-zero object is concentrated in degrees at least zero. -/
 instance ordinaryFiniteDegreeZero_isGE (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     DerivedCategory.TStructure.t.IsGE (ordinaryFiniteDegreeZero A T F) 0 :=

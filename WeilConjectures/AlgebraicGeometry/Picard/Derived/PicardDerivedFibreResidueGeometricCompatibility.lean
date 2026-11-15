@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Structure.StructureDerivedImageCohomolo
 
 /-! Geometric compatibility for fixed residue models.
 
-Proof: Normalize the derived coefficient arrows by proper-flat base change and the
+## Implementation details
+
+Normalize the derived coefficient arrows by proper-flat base change and the
 common fibre trivialization. Apply the affine-base Leray comparison to the resulting
 structure-module arrows. Compose these equivalences with the supplied affine residue
 comparisons.

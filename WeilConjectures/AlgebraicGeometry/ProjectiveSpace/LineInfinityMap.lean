@@ -20,8 +20,9 @@ is finite and étale over an open `W ∋ ∞` of `ℙ¹` with finite complement
 
 ## Implementation details
 
-This replaces a homography `τ` with `τ(s) = ∞` for a rational point `s`, and needs no constant
-field extension: a closed point of `U` is sent to `∞` by a finite map which is étale near `∞`.
+Instead of a homography `τ` with `τ(s) = ∞` for a rational point `s`, which may need a
+constant field extension, a closed point of `U` is sent to `∞` by a finite map which is étale
+near `∞`.
 -/
 
 @[expose] public section

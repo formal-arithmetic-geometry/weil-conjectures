@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteLisseTowerSectionCover
 ## References
 
 * Stacks Project, Tags 09BV and 09C6
-* Stacks Project, Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and its stable
+* Stacks Project, Tag 09BV, the inverse system of isomorphism sheaves and its stable
   images
 -/
 

@@ -16,7 +16,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! The Tor-amplitude component of finite-coefficient comparison.
 
-Proof plan: choose the bounded étale flat model, apply exact comparison termwise,
+## Implementation details
+
+Choose the bounded étale flat model, apply exact comparison termwise,
 use preservation of flatness, and compare the resulting K-flat tensor complexes.
 The support interval is unchanged, giving the displayed pro-étale predicate. -/
 @[expose] public section

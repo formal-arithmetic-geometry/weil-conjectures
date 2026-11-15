@@ -34,12 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The completed chain comparison and preservation of flat-term K-flat models.
-
-The two strictly simpler components are supplied by the completed pure-tensor
-comparison and preservation statements. Their conjunction is exactly the item
-statement, so this wrapper performs no additional mathematical identification.
--/
+/-- The completed chain comparison and preservation of flat-term K-flat models. -/
 theorem scalar_completed_model
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :

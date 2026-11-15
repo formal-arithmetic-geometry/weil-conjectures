@@ -8,7 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautologicalData
 
 /-! # Coherence of the specified tensor-pullback comparisons
-Proof: conjugate the ordinary pullback unit equations by the specified tensor-to-ordinary
+
+## Implementation details
+
+Conjugate the ordinary pullback unit equations by the specified tensor-to-ordinary
 isomorphisms, cancel inverse pairs and use naturality. Equality transport commutes with the
 comparison family. Combine the two unit equations by cancellation against the composition
 isomorphism. Naturality of the identity comparison applied to the quotient gives its square.

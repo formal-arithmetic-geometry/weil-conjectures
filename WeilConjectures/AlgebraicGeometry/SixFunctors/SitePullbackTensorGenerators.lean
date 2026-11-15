@@ -112,7 +112,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 ## References
 
 * Stacks Project, Modules on Sites, Tag 03EL, and Cohomology on Sites, Tag 0G7E
-* Stacks 03EL and 0G7E
+* Stacks Project, Modules on Sites, Tag 03D7
 -/
 
 @[expose] public noncomputable section
@@ -458,9 +458,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The linear adjunction to the supplied sectionwise pushforward, retaining the
-underlying set-sheaf hom equivalence. The scalar insertion is the image of `1 ⊗ m`.
-This is the module adjunction construction of Stacks 03D7 with its normalization
-recorded, rather than discarded by the existential wrapper. -/
+underlying set-sheaf hom equivalence.
+The scalar insertion is the image of `1 ⊗ m`. -/
 private theorem normalizedAdjunction
     {C D : Type c} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootNormalization
 ## References
 
 * Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH
-* Stacks Project, Tag 0EYG, root-extension paragraph, Tag 09EB and Tag 0BRM (lemma-abhyankar)
+* Stacks Project, Tag 0EYG, root-extension paragraph, Tag 09EB and Tag 0BRM
 -/
 
 @[expose] public section

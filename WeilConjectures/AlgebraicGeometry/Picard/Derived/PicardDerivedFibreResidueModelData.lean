@@ -19,15 +19,15 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! Simultaneous affine strictly-perfect residue model data for a finite family.
 
-Proof: Restrict the finitely many proper flat direct images to affine
+## Implementation details
+
+Restrict the finitely many proper flat direct images to affine
 neighbourhoods of the marked point and intersect those neighbourhoods.  Apply
 perfectness and the finite-free residue-model construction to the source and
 each target, transporting the derived localization isomorphisms along the
 restriction.  The residue ideal is the kernel of evaluation at the marked
 point.  The construction is simultaneous in `Fin n`, including the empty
-family.  The comparison equations are deliberately omitted; this theorem
-only supplies the affine and strictly-perfect model data used to construct
-those equations.
+family. The comparison equations are not part of this data.
 
 ## References
 

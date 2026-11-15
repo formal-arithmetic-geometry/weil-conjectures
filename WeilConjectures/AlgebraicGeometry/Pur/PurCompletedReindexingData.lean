@@ -73,7 +73,7 @@ attribute [local instance 2000] reductionModulesHasDerivedCategory reductionTowe
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- Whisker a transformation between composites, with the composite tower functors
-written explicitly. This generic wrapper keeps checking away from tensor data. -/
+written explicitly. -/
 def purWhiskerCompositeMap
     {J C D D' E : Type*} [Category J] [Category C] [Category D] [Category D'] [Category E]
     (F : C ⥤ D) (G : D ⥤ E) (F' : C ⥤ D') (G' : D' ⥤ E)

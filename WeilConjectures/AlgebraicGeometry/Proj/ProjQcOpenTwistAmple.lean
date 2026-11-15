@@ -27,8 +27,6 @@ set_option linter.privateModule false
 The statement records the common positive degree whose restricted Proj twists are
 invertible and ample, together with the canonical tensor-power identification.
 
-This stage-2 statement record was revalidated by group Q16 on 2026-10-18.
-
 ## References
 
 * Stacks Project, Constructions, Tag 01MW and Properties, Tag 01Q2

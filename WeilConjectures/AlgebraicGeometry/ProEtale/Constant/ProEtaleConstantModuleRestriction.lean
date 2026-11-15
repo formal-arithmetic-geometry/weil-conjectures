@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 ## References
 
 * Stacks Project, Sites Tag 00XR and Modules on Sites Tag 04IY
-* Stacks Project, Sites Tag 00XR, and Modules on Sites Tag 04IY, lemma-relocalize
 -/
 
 @[expose] public section

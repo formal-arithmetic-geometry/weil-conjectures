@@ -18,12 +18,13 @@ import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibreResidu
 
 /-! Fixed-model naturality core for the derived fibre residue bridge.
 
-Proof: Apply the affine residue model naturality theorem to the coefficient
+## Implementation details
+
+Apply the affine residue model naturality theorem to the coefficient
 arrow and choose a chain representative by the affine perfect map theorem.
 Compose the residue-to-derived-fibre comparisons with the geometric residue
 comparisons.  Naturality of the geometric residue comparison gives the two
-required equations simultaneously for every index.  This fixed-model core is
-strictly below the common-neighbourhood selection theorem.
+required equations simultaneously for every index.
 
 ## References
 

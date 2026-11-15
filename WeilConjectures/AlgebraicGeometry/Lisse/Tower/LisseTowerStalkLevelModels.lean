@@ -20,7 +20,7 @@ import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 * Stacks Project, Tags 09BV and 09C6
 * Stacks Project, the construction of the normalized algebraic stalk diagram, with the bounded
   finite cohomology version of finite-ring local constancy
-* Tag 09BV (lemma-weird), first paragraph before the inverse system of isomorphism sheaves
+* Tag 09BV, first paragraph before the inverse system of isomorphism sheaves
 -/
 
 @[expose] public noncomputable section

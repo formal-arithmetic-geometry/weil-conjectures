@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericResid
 ## References
 
 * Stacks Project, Tags 09EB, 0BRM and 0EYG
-* Stacks Project, 0BRM (lemma-abhyankar), 0307, and 09E7
+* Stacks Project, 0BRM, 0307, and 09E7
 -/
 
 @[expose] public section

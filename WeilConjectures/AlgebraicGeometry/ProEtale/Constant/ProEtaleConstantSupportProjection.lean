@@ -29,7 +29,9 @@ set_option linter.privateModule false
 /-!
 # Projection on constant coefficients for coproduct-preserving compact support
 
-Proof: compare the two exact coproduct-preserving coefficient functors, check the
+## Implementation details
+
+Compare the two exact coproduct-preserving coefficient functors, check the
 projection on the tensor unit, and extend across the localizing generators of the derived
 module category.
 
