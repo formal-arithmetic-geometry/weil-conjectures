@@ -85,13 +85,7 @@ attribute [local irreducible] coefficientEvaluationMap
 /-- The normalized coefficient coordinates at a finite level: the unit coordinate is the
 constant-object comparison followed by the realization unit and coefficient evaluation, and
 the line coordinate is the root-site comparison followed by the intrinsic root-tensor
-comparison.
-
-Proof: compose the constant-object comparison with the normalized regular-module
-realization and coefficient evaluation. Naturality of the realization unit and
-the monoidal comparison unit equation give its scalar-section formula. For the
-line, compose finiteRootSiteComparison with the intrinsic root-tensor comparison.
-Their pure-tensor equations give exactly the required root-section formula. -/
+comparison. -/
 @[no_expose] def finiteP1CoefficientCoordinates (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) :

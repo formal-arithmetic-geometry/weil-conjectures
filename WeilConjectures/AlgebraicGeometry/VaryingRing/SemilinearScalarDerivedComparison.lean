@@ -540,15 +540,7 @@ private theorem scalarD_evaluation_of_cube
   convert ht using 1
   rfl
 /-- Evaluation of the actual mate is the normalized single-level comparison, through
-exactly the recorded localization and direct-image evaluation identifications.
-Proof: localize D.level and D.b termwise, using localization uniqueness. The evaluation
-comparisons evalP and StrictTower.evalR are the mates of inverse-image evaluation.
-The evaluation-of-transposes formula of semilinearDerivedSections therefore identifies
-the evaluated scalarD word with the single-level unit--inverse-b--counit word. Apply
-proEtaleRingSheafChangeAdjunction to t equal to the C_n counit. Its transpose is the
-identity by the triangle identity, so that word is precisely scalarLevelD. Naturality
-moves the evaluation identifications to the displayed positions. This is an equality
-of constructed words, not an argument from faithfulness of evaluation. -/
+exactly the recorded localization and direct-image evaluation identifications. -/
 theorem scalarD_evaluation (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (N : Derived R φ X) :
@@ -886,22 +878,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Derived scalar comparisons are invertible specified mates and preserve intrinsic
-alpha before proper mating, for every commutative proper/quasi-compact-open square.
-Proof: (1) localize D.b and its inverse; localization respects both inverse identities.
-The definition scalarD is the specified adjunction mate of scalarB.inv. (2) By
-scalarD_evaluation its evaluations are the normalized invertible single-level ring-change
-comparisons. Joint detection of isomorphisms in semilinearDerivedSections, specialized
-to the constant B system (the strict-tower category), proves every component invertible.
-Their inverses are natural by the naturality squares, giving IsIso of scalarD.
-(3) Localize D.a and its inverse. The ordinary open-unit normalization says that D.a.inv
-is the left mate of D.b. Cancel unit and counit using the triangle identity and descend
-this equality with the canonical derived open adjunctions; this gives the displayed
-left-mate word. (4) D.alpha_comparison is an equality of ordinary system maps built
-from cartesian beta, the clopen projector and normalized compositors. Localize the
-whole equality. The varying-ring alpha is its specified localization, and the tower
-alpha is the same localized beta/projector/compositor word. Functoriality of localization
-gives the final equality on systems, including noncartesian squares. No equality is
-inferred from levelwise evaluation, and no proper mate has yet been taken. -/
+alpha before proper mating, for every commutative proper/quasi-compact-open square. -/
 theorem derivedScalarComparison (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n) :
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (scalarD D f)) ∧
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

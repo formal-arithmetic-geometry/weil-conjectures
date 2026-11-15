@@ -163,10 +163,14 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompos
 /-!
 # Unbounded ordinary etale compact-support comparisons
 
+This file assembles the specified proper/open tower composition for unbounded ordinary etale
+compact support, transports the existing exchange to exact, termwise inverse image, and
+proves coherence and equality with the bounded-below maps.
+
+## Implementation details
+
 The candidates, common-refinement comparisons, and proper/open tower isomorphism are the
-existing ordinary etale constructions. The definitions below assemble the specified tower
-composition and transport the existing exchange to exact, termwise inverse image. The
-statements supply coherence and equality with the bounded-below maps, on actual natural
+existing ordinary etale constructions. The statements concern the actual natural
 transformations rather than just existence of unrelated isomorphisms.
 
 ## References
@@ -1058,10 +1062,7 @@ private lemma unbounded_chosen_comp
   rfl
 
 /-- The common-refinement comparisons satisfy the identity and cocycle laws. In particular,
-passing through any third compactification produces the same map.
-Proof: identify the actual pairwise comparison with the compact-support formalism's
-common-refinement comparison. Its identity and cocycle equations give both assertions;
-the refinement-composition and naturality equations are already proved in that formalism. -/
+passing through any third compactification produces the same map. -/
 theorem unboundedEtaleCompactSupport_comparison_coherence
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1100,10 +1101,7 @@ noncomputable def unboundedEtaleRefinementOpenComparison
   (N.comparison d.i (refinementOpenCompactification r)).symm
 
 /-- The composition isomorphism is computed by every proper/open tower. Thus it is
-independent of compactification choices and commutes with their refinement comparisons.
-Proof: identify the formalism's triangle compositor with the actual proper/open tower
-map, using the exact-derived open compositor and the canonical right-derived proper
-compositor. Its every-triangle equation then gives the result for the supplied tower. -/
+independent of compactification choices and commutes with their refinement comparisons. -/
 theorem unboundedEtaleLowerShriekCompIso_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
@@ -1208,10 +1206,7 @@ private lemma unbounded_chosen_congr
   cases h
   rfl
 
-/-- Associativity is equality of the two specified natural transformations.
-Proof: identify the chosen compositor, congruence maps and units with the existing
-compact-support formalism. Its associativity equation, proved by refining the tower and
-pasting the proper/open squares, transports to the specified natural transformations. -/
+/-- Associativity is equality of the two specified natural transformations. -/
 theorem unboundedEtaleLowerShriekCompIso_assoc
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z T : Scheme.{u}}
@@ -1241,10 +1236,7 @@ theorem unboundedEtaleLowerShriekCompIso_assoc
   rw [hc] at h'
   exact h'
 
-/-- Both unit laws have the canonical identity-compactification normalization.
-Proof: identify the chosen composition and identity comparisons with the compact-support
-formalism. The open and proper identity compositors have the specified derived-unit
-normalizations. Transport its left and right unit equations across these identifications. -/
+/-- Both unit laws have the canonical identity-compactification normalization. -/
 theorem unboundedEtaleLowerShriekCompIso_units
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1396,11 +1388,7 @@ noncomputable def unboundedEtaleProperOpenRestriction
         (ModuleCat.{u + 1} A) k).unit).inv.app K)
 
 /-- The tower interchange has adjunct inverse to the specified proper open-restriction
-exchange. The equation specifies the inverse without choosing any unrelated isomorphism.
-Proof: descend the open adjunction and its triangles termwise. Proper base
-change makes lambda invertible, and the open unit is invertible. The two mate formulas
-for the tower exchange transpose to lambda inverse by triangle identities and mate pasting.
-This is equality of the actual maps, and does not use stalks to detect derived morphisms. -/
+exchange. -/
 theorem unboundedEtaleCompactSupport_tower_adjunct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U V W Z : Scheme.{u}}
@@ -1496,12 +1484,7 @@ private theorem exchange_normalization_general
 
 set_option backward.isDefEq.respectTransparency false in
 /-- On a compactification, exchange is exactly proper exchange followed by the inverse
-of the degreewise open-extension comparison, with the displayed canonical associators.
-Proof: expand the exact-functor transport in the existing exchange definition.
-The proper factor becomes the exact inverse-image adjunction mate of
-definition-derived-base-change-map. The open factor is the degreewise inverse conjugate of the sheaf
-exchange, hence the map of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the
-exact-functor transport isomorphisms. Localization descends this equation on every complex. -/
+of the degreewise open-extension comparison, with the displayed canonical associators. -/
 theorem unboundedEtaleCompactSupport_exchange_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -1580,11 +1563,7 @@ private lemma unbounded_chosen_base_change
     ((leftDerivedUpperStarIsoMapDerivedCategory B v').hom.app K)
 
 /-- Compact-support exchange is an isomorphism on every unbounded complex, independently
-of compactification, with the specified exact proper exchange and inverse open factor.
-Proof: identify the canonical exact-derived proper mate and the degreewise open base-change
-isomorphism with the two factors of the compact-support formalism. Proper base change makes
-the first factor invertible for finite coefficients. The formalism's refinement naturality
-and common-refinement cocycle identify the result for every supplied compactification. -/
+of compactification, with the specified exact proper exchange and inverse open factor. -/
 theorem unboundedEtaleCompactSupport_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -1807,10 +1786,7 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_horiz
   exact h
 
 /-- Successive changes of base give the composite exchange, with the termwise
-inverse-image composition identifications.
-Proof: use the twice base-changed compactification and the formalism's horizontal pasting
-equation. Its refinement square identifies the transported maps with the specified chosen
-exchanges; the common-refinement factors cancel by the comparison cocycle. -/
+inverse-image composition identifications. -/
 theorem unboundedEtaleCompactSupport_baseChange_comp
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' X'' Y Y' Y'' : Scheme.{u}}
@@ -1840,10 +1816,7 @@ theorem unboundedEtaleCompactSupport_baseChange_comp
 attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Identity base changes give identity exchange after the canonical pullback unit maps.
-Proof: apply the horizontal pasting equation with an identity change of base. Cancel the
-invertible compact-support exchange. Naturality of the inverse-image compositor and its
-unit equation give precisely the displayed identity after the canonical unit maps. -/
+/-- Identity base changes give identity exchange after the canonical pullback unit maps. -/
 theorem unboundedEtaleCompactSupport_baseChange_id
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1924,11 +1897,7 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_vert
   simp only [Category.assoc] at h
   exact h
 
-/-- Base change is compatible with the specified compact-support composition maps.
-Proof: apply the proved compact-support-formalism exchange/compositor pasting equation.
-Identify its chosen compact-support compositor and exchange with the concrete maps, and
-its inverse-image compositor with the exact termwise-derived inverse-image comparison.
-The resulting component equation is the asserted equality. -/
+/-- Base change is compatible with the specified compact-support composition maps. -/
 theorem unboundedEtaleCompactSupport_baseChange_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' Z Z' : Scheme.{u}}
@@ -2401,11 +2370,7 @@ private lemma refinement_comparison_plus
   erw [reassoc_of% ht']
   rfl
 
-/-- The pairwise comparisons restrict to the already specified bounded-below comparisons.
-Proof: compare the right-derived proper exchange and exact open adjunction under the
-bounded-below inclusion, using their derived units, counits and square equations. This
-identifies the cartesian refinement comparisons. Apply the two common-refinement factors
-and their inverses to obtain equality of the specified pairwise comparison maps. -/
+/-- The pairwise comparisons restrict to the already specified bounded-below comparisons. -/
 theorem unboundedEtaleCompactSupport_comparison_plus
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}}
@@ -3611,13 +3576,7 @@ private theorem triangle_restriction_plus
   erw [comparison_inverse_plus A f cf T.cf K]
   simp only [Functor.map_comp, Functor.comp_map, Functor.comp_obj, Category.assoc]
 
-/-- The normalized composition comparison restricts to the existing bounded-below one.
-Proof: compare two compactifications through their common infimum, using the
-bounded/unbounded refinement squares; invert the second square and paste it with the first.
-For the chosen `ofRestrict` triangle, use this comparison on its first and composite faces,
-and the identity on its second face. The bounded and native compositor definitions give the
-same triangle word, and naturality pastes the four faces. No Noetherian, separatedness or
-finite-type hypothesis is used. -/
+/-- The normalized composition comparison restricts to the existing bounded-below one. -/
 theorem unboundedEtaleCompactSupport_composition_plus
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiCompact f] [QuasiCompact g]
@@ -4345,15 +4304,7 @@ private lemma normalization_transport_eq
 end NormalizationRefinements
 
 /-- Every proper refinement, including a noncartesian one, gives the comparison normalized
-as the identity on the source open. The graph-normalized open comparison is the identity
-there; applying the ambient direct image and composing direct images gives this formula.
-Proof: sheaf normalization determines the comparison because its map to direct image is
-monic. The prescribed injective model then identifies its derived map with proper/open
-interchange. For a cartesian refinement, the specified adjunct identifies this with the
-formalism comparison. Apply the normalization family's refinement law to the coarser open
-to obtain composition for arbitrary refinements. The concrete dense refinement of the
-source maps cartesianly to both compactifications. Composition and cancellation of its
-isomorphism give the result for the original refinement. -/
+as the identity on the source open. -/
 theorem unboundedEtaleCompactSupport_refinement_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

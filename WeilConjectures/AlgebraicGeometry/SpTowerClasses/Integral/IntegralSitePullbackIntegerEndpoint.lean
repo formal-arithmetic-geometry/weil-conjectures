@@ -53,14 +53,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- Integer endpoint square for the etale-to-pro-etale pullback.
-
-Proof: transpose through the two inverse-image adjunctions and the
-constant-sheaf adjunction. The two resulting maps are the same constant-section
-map on every base-changed chart, so adjunction injectivity proves the equality.
-This endpoint identity is a strict substatement of the conjunction in
-`integral_site_pullback_endpoints`.
--/
+/-- Integer endpoint square for the etale-to-pro-etale pullback. -/
 theorem integral_site_pullback_integer_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f
     let z := ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm

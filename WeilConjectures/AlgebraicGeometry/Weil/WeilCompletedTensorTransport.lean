@@ -82,23 +82,7 @@ attribute [local irreducible] completedCechModulesEquiv intrinsicPresentationRou
 -- Elaborate the unbounded tensor comparison across the two coefficient models.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Coefficient restriction and site transport commute with total tensor and its unit.
-
-Proof: take the ordinary module bifunctor comparison and its right-unit
-normalization from completedCechModuleTensorTransport. The coefficient-back functor
-and site functor are equivalences, so their composite preserves the coproducts in
-totalization. Apply HomologicalComplex.mapBifunctorComparisonNatTrans; the existing
-comparison is natural in both complexes and respects both differentials and their
-Koszul signs. Map the inverse of intrinsicPresentationRoundTrip degreewise to
-identify the first transported factor with G(C), then tensor with this chain
-isomorphism. For the displayed equation, expand completedKoszulTensorUnit into the
-inverse right unitor, tensoring with the named degree-zero unit, and the (q,0)
-summand inclusion. The comparison's summand formula and naturality in the unit
-reduce this to the ordinary right-unit normalization. Whisker exchange and
-right-unitor naturality move the inverse round trip to its round trip, which
-cancels. The remaining composite is exactly the prescribed (q,0) inclusion.
-No exterior-to-dual comparison, boundedness assumption, or choice of a replacement
-complex is involved. The formula also holds for zero modules and the zero ring. -/
+/-- Coefficient restriction and site transport commute with total tensor and its unit. -/
 theorem completedCechTensorTransport
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :

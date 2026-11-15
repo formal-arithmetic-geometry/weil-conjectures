@@ -141,9 +141,7 @@ def strictSectionArrow (B : Type (u + 1)) [CommRing B]
       ((StrictTower.gComp B (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
         (eqToIso (congrArg (StrictTower.G B) (pullback.lift_snd k r h))).hom) (StrictTower.J B k)
 
-/-- The varying-system arrow is the composite of its two separately localized factors.
-Proof: localization preserves composition; the original moduleAlpha is the open
-base-change comparison followed by moduleSectionArrow, with the same associators. -/
+/-- The varying-system arrow is the composite of its two separately localized factors. -/
 theorem alpha_factorization {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -155,8 +153,7 @@ theorem alpha_factorization {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   rw [openBaseChange, sectionArrow, localizedArrow_comp]
   rfl
 
-/-- The strict-tower arrow has the identical two-factor expression.
-Proof: expand the two definitions and associate their composites. -/
+/-- The strict-tower arrow has the identical two-factor expression. -/
 theorem strictAlpha_factorization (B : Type (u + 1)) [CommRing B]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]

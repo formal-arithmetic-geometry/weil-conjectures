@@ -203,10 +203,7 @@ private theorem exchangeConstantComparisonComp {X Y Z : Scheme.{t}}
     (proEtaleConstantDirectImageMap g CommRingCat.{t + 1} A)
     (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A)
 
-/-- Constant coefficient identifications agree around the chosen scheme square.
-Proof: the two coefficient maps send every constant a to the constant a on X'.
-The sheafification universal property identifies them. Transporting along the
-commutativity of the scheme square gives the displayed heterogeneous equality. -/
+/-- Constant coefficient identifications agree around the chosen scheme square. -/
 theorem exchangeConstant_coherent (sq : ChosenCartesianSquare g' f' f g) :
     HEq (proEtaleRingCompositeCoefficients g' f
       (exchangeConstantRing Y A) (exchangeConstantRing X A) (exchangeConstantRing X' A)
@@ -244,11 +241,7 @@ abbrev exchangeScalar (T : Scheme.{t}) : exchangeConstantRing T A ⟶ d.complete
     { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
       quotientFinite := d.quotientFinite } ≫ (pbcCompletedComparison T d).hom
 
-/-- The scalar maps commute with the canonical coefficient inverse images.
-Proof: compose the two maps with each finite projection. The profinite comparison
-projection formula and naturality of the constant-section map identify both maps
-with the constant quotient section a mod I^(n+1). Projections of the completed ring
-are jointly monic, so the two scalar maps agree. -/
+/-- The scalar maps commute with the canonical coefficient inverse images. -/
 theorem exchangeScalar_comm {U V : Scheme.{t}} (f : U ⟶ V) :
     (exchangeConstantIso f A).hom ≫ exchangeScalar d U =
       (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map (exchangeScalar d V) ≫
@@ -330,10 +323,7 @@ private theorem exchangeTowerModuleRes_kinjective (T : Scheme.{t}) :
     (E := completedAdicChange T c) (F := proEtaleRingRestrictScalars c) adj
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exactness of restriction on strict diagrams, with all transition maps retained.
-Proof: ordinary restriction changes only the ring action and preserves kernels
-and cokernels. These are computed pointwise in the strict functor category, giving
-both finite-limit and finite-colimit preservation for the termwise functor. -/
+/-- Exactness of restriction on strict diagrams, with all transition maps retained. -/
 theorem exchangeTowerModuleRes_exact (T : Scheme.{t}) :
     PreservesFiniteLimits (exchangeTowerModuleRes d T) ∧
       PreservesFiniteColimits (exchangeTowerModuleRes d T) := by
@@ -618,15 +608,7 @@ private theorem exchangeModuleResPull_mate {U V : Scheme.{t}} (f : U ⟶ V) :
   exact congrArg (fun z ↦ z.app (M.obj n)) h
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction/direct-image comparison is uniquely determined by the universal units.
-Proof: scalar extension from constant to completed coefficients is flat by
-constant-completion-equivalence. Exact scalar extension and its adjunction lift
-termwise to strict towers. Restriction, its right adjoint, preserves K-injectives.
-On one K-injective tower representative the ordinary comparison
-is identity on every section and transition, and both derived units are invertible.
-This defines the comparison uniquely there. K-injective resolutions and the
-universal property of the right-derived functor give its natural extension and
-the displayed unit equation on every complex. -/
+/-- Restriction/direct-image comparison is uniquely determined by the universal units. -/
 theorem exchangeResPush_existsUnique {U V : Scheme.{t}} (f : U ⟶ V) :
     ∃! e : d.towerPush f ⋙ exchangeTowerRes d V ≅
         exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f,
@@ -667,30 +649,23 @@ def exchangeCornerD {X' X Y' : Scheme.{t}} (g' : X' ⟶ X) (f' : X' ⟶ Y') :
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (exchangeResPull d g') _ ≪≫ Functor.associator _ _ _
 
-/-- The explicit strict H: inverse pullback/reduction identification followed by h.
-Its source is R(M), its target is B, and its projection factor is the adjunct
-of the ambient counit tensored with the whole quotient diagram. The preceding
-inverse chi identifies R(M) with L_g R_Y(Rf_*K), so h is H after chi. -/
+/-- The explicit strict `H`: the inverse pullback/reduction identification followed by
+pullback of the tower projection-formula map. -/
 def exchangeRealizationH (K : d.derived X) :
     (completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K)) ≅
       (d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K)) :=
   ((d.reductionTowerPullbackIso g).symm.app ((d.push f).obj K)) ≪≫
     (d.towerPull g).mapIso (asIso (d.towerProjection f K))
 
-/-- The explicit strict H prime, from R(N) to D: the diagram projection formula
-for E followed by direct image of the inverse reduction/pullback identification.
-Both H and H prime are isomorphisms before any evaluation is taken. -/
+/-- The explicit strict `H'`: the tower projection-formula map for `g'^* K` followed by
+direct image of the inverse reduction/pullback identification. -/
 def exchangeRealizationHPrime (K : d.derived X) :
     (completedReductionTower Y' d).obj ((d.push f').obj ((d.pull g').obj K)) ≅
       (d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K)) :=
   asIso (d.towerProjection f' ((d.pull g').obj K)) ≪≫
     (d.towerPush f').mapIso ((d.reductionTowerPullbackIso g').symm.app K)
 
-/-- The specified strict lift commutes with every morphism of the input object.
-Proof: reduction and the ambient exchange are natural. The projection arrow is
-its adjunction mate and hence natural in K. Pullback and direct image preserve
-these naturality equations. Compose them for h inverse, v and h prime to obtain
-the displayed equation for the specified strict composite towerV'. -/
+/-- The specified strict lift commutes with every morphism of the input object. -/
 theorem exchangeStrict_naturality (sq : ChosenCartesianSquare g' f' f g)
     {K L : d.derived X} (a : K ⟶ L) :
     (d.towerPull g).map ((d.towerPush f).map ((completedReductionTower X d).map a)) ≫

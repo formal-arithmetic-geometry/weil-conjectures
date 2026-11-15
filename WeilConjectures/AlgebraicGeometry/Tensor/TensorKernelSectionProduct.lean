@@ -32,18 +32,7 @@ private theorem ideal_tensor_shuffle {C : Type*} [Category C] [MonoidalCategory 
   simp only [comp_whiskerRight, Category.assoc]
   monoidal
 
-/-- Multiplying a tensor-power section by a kernel section stays in the next kernel.
-Proof: The kernel of the unit on L^d is the subsheaf J L^d. The tensor-power
-multiplication L^a tensor L^d to L^(a+d) carries L^a tensor J L^d into J L^(a+d):
-locally a generator r t with r in J maps to r times the product of the two sections.
-Equivalently, use the ideal-kernel comparison and the associator and symmetry to
-construct a morphism L^a tensor K_d to J tensor L^(a+d), then follow the
-ideal-kernel comparison in degree a+d. Its composite with the kernel inclusion is
-the tensor-power multiplication followed after the degree-d kernel inclusion.
-Evaluate this morphism on the elementary tensor of s and y to obtain z.
-This argument uses only the kernel description, not square-zero annihilation or a
-graded algebra presentation. Degree zero uses the tensor unit and the same unitors;
-on the empty open all sections are zero. -/
+/-- Multiplying a tensor-power section by a kernel section stays in the next kernel. -/
 theorem tensorKernel_section_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (a d : ℕ)
     (U : X.Opens) (s : Γ(L.tensorPow a, U))

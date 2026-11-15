@@ -61,10 +61,7 @@ private abbrev sitePair {C : Type c} [Category.{v} C]
   let := SemilinearSections.locallyBijective.{c, v, max c v r} J
   SheafOfModules.siteSheafTensorTmul M N U x y
 
-/-- The constructed comparison is conjugation by the two explicit site tensor bridges.
-
-Proof: eliminate the coefficient, transition and pull-functor equalities. The construction
-of comparisonOfCoordinates is then this composite, by definition. -/
+/-- The constructed comparison is conjugation by the two explicit site tensor bridges. -/
 theorem tensorComparison_coordinates {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (B' : ℕ → Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})

@@ -129,7 +129,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-!
 # Canonical composition maps for strict constant-coefficient towers
 
-`Compactification.Triangle` names the node's maps as follows: `cf.i = c`, `cf.g = p_Y`,
+The maps of `Compactification.Triangle` are named as follows: `cf.i = c`, `cf.g = p_Y`,
 `cg.i = i`, `cg.g = q`, `cfg.i = a`, `q = b`, and `p = p`.
 All maps below are constructed in the derived category of strict towers, before evaluation.
 

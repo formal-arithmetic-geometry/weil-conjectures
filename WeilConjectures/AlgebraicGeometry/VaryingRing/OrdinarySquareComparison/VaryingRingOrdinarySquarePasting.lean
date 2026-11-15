@@ -20,10 +20,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 
-/-- Comparison equations for consecutive natural transformations compose.
-Proof: apply map_comp to their composite. Substitute the second comparison
-at its component, then the first comparison with the remaining factor on the
-right. Associativity identifies the result with the required equation. -/
+/-- Comparison equations for consecutive natural transformations compose. -/
 theorem OrdinarySquareComparison.trans
     {A B C D M A' B' C' D' M' : Type*}
     [Category A] [Category B] [Category C] [Category D]

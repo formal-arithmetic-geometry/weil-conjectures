@@ -771,17 +771,7 @@ private theorem unitCompositionEtale
   case hθg => intro N; rfl
   case hθh => intro N; rfl
 
-/-- Unit specialization of the canonical tensor-composition identity.
-Proof: the compactification-tower projection identity is transported through the
-three common-refinement comparisons. Naturality of projection maps under each
-comparison gives ProjectionCompCompatible for smoothCompactSupportCompIso.
-Apply lowerShriekRightAdjointTensorMap_comp with this compatibility and specialize
-its first variable to the coefficient unit. Naturality of the adjoint comparison
-cancels its inverse from q. The projectionTensorMap_assoc identity, naturality of
-the tensor map in both variables, and the left-unitor identity then give precisely
-the reassociated right-hand composite. This argument needs no smoothness or
-invertibility of the dualizing object; it also applies to empty schemes and the
-zero coefficient ring. -/
+/-- Unit specialization of the canonical tensor-composition identity. -/
 theorem smoothTensorCompositionEquation
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

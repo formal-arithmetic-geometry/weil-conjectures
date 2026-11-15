@@ -105,22 +105,7 @@ private theorem localizedOpen_unit_isIso
     ⟨SheafOfModules.localizedModuleAdjunctionIndependent R U, b⟩
   exact triple.isIso_unit_iff_isIso_counit.mpr inferInstance
 
-/-- Restricting a single constant coefficient action preserves open support.
-
-Proof: identify the small pro-etale site of U with the site localized at the
-subterminal open j. The specified module pullback is restriction in these coordinates;
-adjoint uniqueness identifies its chosen left adjoint with localized extension by zero.
-For a localized A-module M, the extension presheaf at H is the direct sum of M(H -> U)
-over lifts H -> U. Restrict the action on each summand through a. The two resulting
-presheaves have the same underlying additive groups, restrictions, and B-actions.
-Identity on each summand therefore identifies restriction of the A-extension
-presheaf with the B-extension presheaf of the restricted localized module. The same
-identity extends to sheafification: restriction changes only the action, and the
-underlying additive sheafification is unchanged. Thus the restricted extension lies
-in the essential image of the chosen B-extension. Its B-open counit is invertible,
-since open extension is fully faithful. The argument includes the empty open, where
-both extension presheaves are zero, and the identity open, where restriction is the
-identity. It assumes no flatness of a. -/
+/-- Restricting a single constant coefficient action preserves open support. -/
 theorem restrictScalars_openCounit_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     {U X : Scheme.{u}} (a : coefficients B X ⟶ coefficients A X)

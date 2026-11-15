@@ -36,8 +36,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The normalized compositor is uniquely determined by canonical adjunction conjugation.
-Proof: take the displayed conjugate; equality to it also proves uniqueness. -/
+/-- The normalized compositor is uniquely determined by canonical adjunction conjugation. -/
 theorem rCompEq_existsUnique {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) :
     ∃! e : R B f ⋙ R B g ≅ R B h,
@@ -46,15 +45,13 @@ theorem rCompEq_existsUnique {X Y Z : Scheme.{u}}
   exact ⟨_, rfl, fun _ he ↦ he⟩
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- Direct-image composition with a supplied equation for the composite.
-The determining theorem fixes its data by equality to the canonical conjugate. -/
+/-- Direct-image composition with a supplied equation for the composite. -/
 def rCompEq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z)
     (w : f ≫ g = h) : R B f ⋙ R B g ≅ R B h :=
   Classical.choose (rCompEq_existsUnique B f g h w)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- This representative is exactly the canonical conjugate compositor.
-Proof: apply the specification of its uniquely determining choice. -/
+/-- `rCompEq` is the canonical conjugate compositor. -/
 theorem rCompEq_spec {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (h : X ⟶ Z) (w : f ≫ g = h) :
     rCompEq B f g h w =
@@ -1263,8 +1260,7 @@ private theorem concrete_matePastingLaw (A : Type (u + 1)) [CommRing A] :
     (system_matePastingLaw (pullbackSystem A))
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The canonical square mates respect direct-image composition.
-Proof: the full compositor and exchange family equalities transport formal mate pasting. -/
+/-- The canonical square mates respect direct-image composition. -/
 theorem strictTowerMatePasting :
     matePastingLaw (G B) (R B) (@rCompEq.{u} B _) (@exchange.{u} B _) :=
   concrete_matePastingLaw B
@@ -1294,23 +1290,7 @@ private theorem packedDirectImageCoherence_proof : DirectImageCoherence B := by
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The canonical direct-image compositors are unital and associative, and the
-canonical proper-square mates preserve identity maps and pasting.
-
-Proof: first check the module direct-image comparisons on sections. Their components
-are restriction along the canonical pullback composition and identity isomorphisms.
-Pullback pasting gives their triangle and pentagon equations. The uniqueness in
-moduleRComp_existsUnique and moduleRId_existsUnique identifies these section maps
-with the published choices. Conjugate through the module adjunctions to get the
-same equations for module pullback. Termwise whiskering to towers and complexes
-and exact localization preserve them, giving the equations for gComp and gId.
-Conjugate again through the derived adjunctions: conjugation respects composition,
-associators and unitors, giving the first two clauses of DirectImageCoherence for rComp and rId.
-For the last two equations expand squareG. The pullback triangle equation identifies
-the identity square with the two identity comparisons. The pentagon equation
-identifies the square of a pasted rectangle with the two pasted square comparisons.
-Take proper-adjunction mates. Mate pasting and the two conjugation equations for
-composite adjunctions give exactly the displayed identity and pasting equations.
-All these equalities hold before evaluation, on every derived strict tower. -/
+canonical proper-square mates preserve identity maps and pasting. -/
 theorem strictTowerDirectImageCoherence : DirectImageCoherence B := by
   exact packedDirectImageCoherence_proof B
 

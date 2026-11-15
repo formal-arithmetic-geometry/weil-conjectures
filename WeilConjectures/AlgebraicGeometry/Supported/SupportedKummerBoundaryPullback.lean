@@ -365,17 +365,7 @@ private theorem boundary_equation (A : Type (u + 1)) [CommRing A]
   simpa only [Ext.comp_assoc] using hext
 
 /-- Cartier pullback preserves the normalized supported Kummer class, with the
-canonical closed exchange and any roots-normalized twist transport.
-
-Proof: the boundary witnesses determine the normalized integral pole class.
-The integral Cartier pullback square and the Kummer short-exact-sequence square
-identify the pullback of its Yoneda product with the primed product. The roots
-and pure-tensor normalizations identify the coefficient-line comparison with t.
-Naturality of the integral generator through closed exchange and the exact-functor
-comparison identify this product with the scalar adjunct of the transported module
-class. The supported integral derived unit makes this adjunct injective on Ext,
-so the transported class is the supplied primed class. Cancel inverse exchange.
-The argument includes N = 1 and uses no flatness of the base map. -/
+canonical closed exchange and any roots-normalized twist transport. -/
 theorem supported_kummer_boundary_pullback (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

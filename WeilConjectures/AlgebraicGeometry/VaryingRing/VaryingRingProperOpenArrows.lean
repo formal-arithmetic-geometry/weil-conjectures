@@ -41,8 +41,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- The square comparison is uniquely fixed by the explicit compositor formula.
-Proof: the displayed composite is a witness, and its defining equality gives uniqueness. -/
+/-- The square comparison is uniquely fixed by the explicit compositor formula. -/
 theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ∃! e : pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k,
@@ -56,8 +55,7 @@ noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ 
     pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k :=
   (moduleSquareG_existsUnique R φ k r p i h).choose
 
-/-- The square comparison retains exactly its original compositor formula.
-Proof: this is the defining equality of the uniquely specified comparison. -/
+/-- The square comparison retains exactly its original compositor formula. -/
 theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     moduleSquareG R φ k r p i h =
@@ -75,9 +73,7 @@ noncomputable def moduleBetaInvApp {U' U X' X : Scheme.{u}}
     ((pull R φ gU).map ((moduleJAdj R φ j).unit.app M) ≫
       (moduleSquareG R φ gU j' j g h).inv.app ((extension R φ j).obj M))
 
-/-- Naturality of the specified open-unit transpose.
-Proof: use naturality of the open unit, the pullback compositor and the adjunction
-Hom equivalence. The transposes of both sides are the same naturality square. -/
+/-- Naturality of the specified open-unit transpose. -/
 theorem moduleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -148,10 +144,7 @@ private theorem derived_open_unit_iso {U X : Scheme.{u}} (j : U ⟶ X)
     exact IsIso.of_isIso_comp_right _ ((evalG R φ j n).hom.app ((J R φ j).obj M))
   exact NatIso.isIso_of_isIso_app _
 
-/-- The open-extension unit is invertible.
-Proof: on an object lying over the open there is exactly one lift to it, so restriction
-of the extension presheaf is the original module. This survives sheafification,
-termwise extension to strict towers, and exact localization. -/
+/-- The open-extension unit is invertible. -/
 theorem moduleJAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (moduleJAdj R φ j).unit := by
   have := derived_open_unit_iso R φ j
@@ -236,11 +229,7 @@ private theorem ordinary_open_image {U X : Scheme.{u}} (j : U ⟶ X)
     (DerivedCategory.singleFunctorCompHomologyFunctorIso (Modules R φ X) 0).app _⟩
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary rings.
-Proof: restriction commutes with direct image on the same pulled-back test object.
-The two routes are left adjoint to these canonically identified right adjoints.
-Their unique unit-preserving comparison is invertible and its inverse has exactly
-the displayed transpose. The equalities descend from strict complexes. -/
+arbitrary rings. -/
 theorem moduleBetaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -384,11 +373,7 @@ private theorem ordinary_clopen_iso {U X : Scheme.{u}} (j : U ⟶ X)
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft S
       (Functor.isoWhiskerRight e H) ≪≫ h⟩
 
-/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Proof: over each pro-etale test object split sections into the product of sections on
-the inverse image of the clopen image and on its complement. Both extension and direct
-image give the first factor with zero second factor. The specified comparison is the
-identity on the first factor. The same formula acts termwise on towers and complexes. -/
+/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible. -/
 theorem moduleOpenToP_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (moduleOpenToP R φ j) := by
   obtain ⟨e⟩ := ordinary_clopen_iso R φ j
@@ -411,9 +396,7 @@ noncomputable def modulePi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
   (moduleAdj R φ s).unit ≫ Functor.whiskerLeft (pull R φ s)
     (@inv _ _ _ _ (moduleOpenToP R φ s) (moduleOpenToP_isIso R φ s))
 
-/-- Equality transport for open extension, independent of proof-irrelevant instances.
-Proof: substitute the equality of scheme maps; proof irrelevance identifies the
-open-immersion instances and hence the chosen universal-property functors. -/
+/-- Open extensions along equal open immersions are equal functors. -/
 theorem moduleJ_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     extension R φ f = extension R φ g := by

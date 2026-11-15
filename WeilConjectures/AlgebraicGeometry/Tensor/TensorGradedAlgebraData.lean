@@ -150,22 +150,7 @@ private theorem restrictionCofanIsColimit {X Z : Scheme.{u}} (j : Z ⟶ X)
     rw [hn, Category.assoc]
     exact congrArg (fun t ↦ a.unit.app (D d) ≫ t) (hm d)
 
-/-- The tensor powers and their restrictions form a graded algebra quotient.
-Proof: on a frame open for L, form the polynomial algebra O_X[T], and on its inverse
-image form O_Z[T]. A change of frame by a unit u acts on degree d by u^d. These
-algebra automorphisms satisfy the cocycle identities, so the polynomial algebra
-sheaves and their coefficient quotient maps glue to B, C, and p. Their underlying
-modules are the sheafifications of the direct sums of the tensor powers and of
-j_*j^*L^d. The canonical homogeneous inclusions give b and c; the coproduct
-universal properties hold locally on frames and therefore globally. Compare the
-chosen tensor-pullback adjunction with the usual adjunction by uniqueness of left
-adjoints. Its units differ by an invertible natural transformation on j_*j^*.
-Precompose each target inclusion c_d by the inverse of this transformation. This
-preserves the coproduct universal property and gives the quotient square for the
-chosen tensorGradedUnit, without requiring c to preserve multiplication. On a frame,
-the multiplication equation is (s T^a)(t T^d) = st T^(a+d); the transition maps preserve
-it, and separation of the sheaf gives the equation on every open. This construction
-uses neither square-zero of the ideal nor any kernel or projection data. -/
+/-- The tensor powers and their restrictions form a graded algebra quotient. -/
 theorem tensorGradedAlgebraData_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] :
     Nonempty (TensorGradedAlgebraData j L) := by

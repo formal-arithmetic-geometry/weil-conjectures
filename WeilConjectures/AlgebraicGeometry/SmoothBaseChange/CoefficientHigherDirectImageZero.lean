@@ -28,13 +28,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Restriction of scalars detects vanishing of a higher direct image.
-
-Proof: apply the existing base-change coefficient comparison to the identity Cartesian
-square with right vertical map h. The base-change target identifies with higher direct
-image because pullback along the identity is the identity. Restriction of scalars
-preserves zero morphisms and is faithful; it therefore preserves and reflects zero
-objects, by the criterion that the identity morphism is zero. -/
+/-- Restriction of scalars detects vanishing of a higher direct image. -/
 theorem isZero_higherDirectImage_restrictScalars_iff
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]

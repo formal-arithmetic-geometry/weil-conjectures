@@ -169,7 +169,7 @@ The strict composite is constructed before applying either Rlim or evaluation.
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09BP, 0A07, 079P, 03D3, 03DJ, 0E8I,
-  0D6E, 099M
+  0D6E, 099M, 0941
 -/
 
 @[expose] public noncomputable section
@@ -228,8 +228,7 @@ def cbcRealizationLimitMap {T S : Scheme.{t}}
 
 section LimitMateNormalization
 
--- Unit-normalized Roos comparison, following the existing endpoint proof
--- (Stacks 09BP, 0941; lem-cbc-completed-open-endpoint-limit-transport).
+-- Unit-normalized Roos comparison, following the completed open-endpoint limit transport.
 private def cbcRealizationCochainUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   derivedCochainRightUnit (completedTowerLimit T R) (completedRlim T R)
@@ -441,12 +440,7 @@ private theorem cbcRealizationLimit_mate_eq
   have hh := exactDerivedMate_eq aa bb (Functor.compConstIso ℕᵒᵖ F) tau hm lambda he
   simpa only [exactDerivedMate, Functor.mapDerivedCategorySquareIso] using hh
 
-/-- The specified mate is invertible for an exact product-preserving functor.
-Proof: apply lem-cbc-exact-product-functor-strict-limit. Its signed Roos formula
-is induced by the canonical product map. On a K-injective tower it is the ordinary
-limit comparison followed by a target resolution; adjunction transposition shows
-that this is exactly cbcRealizationLimitMap. The normalized comparison is invertible,
-and its augmentation equation also identifies the constant-diagram mate. -/
+/-- The specified mate is invertible for an exact product-preserving functor. -/
 theorem cbcRealizationLimitMap_isIso {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}
@@ -538,13 +532,7 @@ private theorem cbcTranspose_leftAdjointUniq
   rw [Category.assoc, ← hn, ← Category.assoc, ← U.map_comp,
     Adjunction.unit_leftAdjointUniq_hom_app]
 
-/-- The tensor/open transpose is natural and invertible.
-Proof: naturality is naturality of the open unit and of the strict reduction/pullback
-comparison. On K-flat representatives its evaluation is the sheafified balancing map
-j_!(Q) tensor P_n to j_!(Q tensor j^*P_n). Extension preserves K-flatness: tensor
-with an acyclic ambient complex is extension of tensor with its exact restriction.
-The inverse balancing maps commute with differentials and all quotient transitions.
-Thus the inverse exists in the derived category of strict towers itself. -/
+/-- The tensor/open transpose is natural and invertible. -/
 theorem cbcRealizationReductionInv_properties {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] :
     (∀ K : d.derived U, IsIso (cbcRealizationReductionInv d j K)) ∧
@@ -616,12 +604,7 @@ section ScalarOpenInvertibility
 
 attribute [local irreducible] cbcRealizationOpenAdj
 
-/-- The scalar/open mate is invertible and preserves the normalized open adjunction.
-Proof: the extension presheaf has the same direct-sum summands and restriction maps
-after scalar restriction. Its action is the completed action composed with the scalar
-map. Sheafification therefore gives the identity on the underlying additive sheaf.
-The open unit includes the structure-map summand and the counit evaluates that
-summand; both are unchanged. Its transpose is the displayed mate, so it is invertible. -/
+/-- The scalar/open mate is invertible and preserves the normalized open adjunction. -/
 theorem cbcRealizationScalarOpenInv_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] : IsIso (cbcRealizationScalarOpenInv d j) := by
   let R := exchangeConstantRing T A
@@ -735,12 +718,7 @@ private theorem cbcRealizationRestrictionForgetsProducts
 
 -- The cached universe-polymorphic sheafification instance gets stuck on the coefficient universe.
 attribute [-instance] SheafOfModules.RingedCoefficientProjection.cachedSheafifyModules in
-/-- Products are preserved by scalar restriction and by quasi-compact constant open extension.
-Proof: restriction leaves the underlying additive sheaves and all limits unchanged.
-For open extension, use j!N = ker(j*N to i*i^-1j*N). Direct images preserve
-products sectionwise and closed inverse image preserves products on the pro-etale
-site. Kernels commute with products. These are the canonical projection maps,
-including for the empty product; no qcqs hypothesis on the ambient scheme is used. -/
+/-- Products are preserved by scalar restriction and by quasi-compact constant open extension. -/
 theorem cbcRealizationProducts (T : Scheme.{t}) :
     (∀ M : ℕ → reductionModules T (d.completedRing T),
       IsIso (piComparison (cbcRealizationRes d T) M)) ∧

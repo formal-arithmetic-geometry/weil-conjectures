@@ -284,30 +284,8 @@ private theorem unitModel_transport
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.trans_refl] using hu
 
 -- The geometry records require many dependent category and instance checks.
-/-- Choose geometry before constructing any coefficient-unit comparison.
-
-Proof: take the ramification and strict sequence-site realization of
-strictBaseCoordinates. At each scheme select the semilinear system
-calculus. On the actual constant quotient rings transport the canonical algebraic
-inverse image through proEtaleConstantRingComparison. Its coefficient squares
-commute by naturality of the constant-section maps. Use ordinaryInverseSystem_exists
-on these inverse images. For the right adjoints use proEtaleConstantRingPushforward
-with proEtaleConstantRingAdjunction, and use the identity on their underlying
-section sheaves. The normalized tensor-insertion formula of that adjunction
-identifies its underlying transpose with the set adjunction, as required by
-ordinaryDirectSystem_exists. Assemble the ordinary system Hom equivalence and
-adjunction. Keep its actual level functors, adjunctions and identity underlying
-comparisons when constructing GeometryOrdinary. Apply semilinearGeometryEvaluation
-and semilinearGeometryTensor to these fixed ordinary data and the two selected
-calculi. Derive the ordinary adjunctions canonically; their unit and counit
-identities and ordinaryPullTransition give the transition and projection formulas.
-Transport the resulting generic Geometry to the constant quotient presentation,
-retaining the bundled level adjunctions and all evaluation comparisons. This
-produces SpTowerShriek.Geometry with the stated identity on sections. Its actual
-finite-unit transition law follows from the restriction-underlying identity and
-set-sheaf adjunction naturality. No coefficient-unit comparison is constructed.
-All constructions apply
-also to empty schemes and the positive coefficient level indexed by zero. -/
+/-- There is a geometry for `f` whose level direct images are the identity on underlying
+sections; no coefficient-unit comparison is constructed. -/
 theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       ∀ (n : ℕ)

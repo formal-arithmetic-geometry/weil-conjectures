@@ -48,18 +48,7 @@ private theorem hom_ext_on_affine_base {S X : Scheme.{u}} (p : X ⟶ S)
         congrArg (fun k ↦ adj.unit.app M ≫ (Scheme.Modules.pushforward (p ⁻¹ᵁ V.1).ι).map k) (h V)
       _ = g ≫ adj.unit.app N := (adj.unit.naturality g).symm
 
-/-- An affinely normalized ordered twist comparison preserves coordinates globally.
-
-Proof: inverse images of affine base opens cover the relative Proj. The supplied
-normalization says that the two maps agree after restricting to each member of
-this cover. Naturality of the restriction adjunction unit transports these local
-equalities to maps into the pushforward restrictions. Sheaf separatedness, in
-`hom_ext_of_restrictAdjunction_unit`, then gives equality globally. This uses no
-nonemptiness or positive-dimensional assumption.
-
-The normalization hypothesis is essential: multiplying an arbitrary line
-isomorphism by a nontrivial unit changes its coordinate sections.
--/
+/-- An affinely normalized ordered twist comparison preserves coordinates globally. -/
 theorem ordered_twist_coordinate_compatibility (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)

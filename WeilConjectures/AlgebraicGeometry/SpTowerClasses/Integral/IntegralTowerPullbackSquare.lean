@@ -28,10 +28,7 @@ attribute [local instance] NormalizedIntegralTowerSquare.additiveF
   NormalizedIntegralTowerSquare.additiveP NormalizedIntegralTowerSquare.limitsP
   NormalizedIntegralTowerSquare.colimitsP
 
-/-- An ordinary sheaf class square induces the corresponding normalized tower class square.
-Proof: use congruence to replace the source realization and the units boundary on the left,
-and the integer boundary and target realization on the right. Exact-derived constant-tower
-transport gives the equality between these normalized composites. Apply transitivity. -/
+/-- An ordinary sheaf class square induces the corresponding normalized tower class square. -/
 theorem normalized_integral_tower_square {X Y : Scheme.{u}}
     [hDiagY : HasDerivedCategory.{u + 1} (DiagonalAb Y)]
     [hDiagX : HasDerivedCategory.{u + 1} (DiagonalAb X)]

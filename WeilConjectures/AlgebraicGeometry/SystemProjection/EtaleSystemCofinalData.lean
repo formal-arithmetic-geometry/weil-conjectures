@@ -147,9 +147,7 @@ private theorem cofinalCoefficientRings (W : Scheme.{u})
   dsimp only [cmp] at hh
   simpa only [NatTrans.ofOpSequence_app, Category.id_comp, Category.comp_id] using hh
 
-/-- The structural ring map for restriction is the identity at selected levels.
-Proof: unfold the sequence ring. The value at (i,U) is C_(r(i))(U) on both
-sides. Functoriality identifies horizontal composites; vertical maps are unchanged. -/
+/-- The structural ring map for restriction is the identity at selected levels. -/
 theorem cofinalRing (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) :
     ((cofinalSite W r).sheafPushforwardContinuous RingCat.{u + 1}
@@ -210,9 +208,7 @@ private theorem cofinalPushforward_exact (W : Scheme.{u}) (r : ℕ ↪o ℕ)
     exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
 /-- Restriction is exact and additive because kernels, cokernels and addition are
-componentwise.
-Proof: restriction selects the same components in every finite diagram. Kernels
-are termwise and cokernels are vertical sheafifications, which commute with selection. -/
+componentwise. -/
 theorem cofinalRestriction_exact (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) :
     (cofinalRestriction W B r).Additive ∧
@@ -414,9 +410,7 @@ def cofinalRepeated {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
   finite n := B.finite (r (SheafOfModules.systemNextSelected r n))
   torsion n := B.torsion (r (SheafOfModules.systemNextSelected r n))
 
-/-- Naturality of the selected quotient transitions D_m→C_m.
-Proof: both composites are the ring map of B for the unique inequality
-m≤r(t(n)); use functoriality and monotonicity of t. -/
+/-- Naturality of the selected quotient transitions D_m→C_m. -/
 theorem cofinalCoefficient_naturality {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)
     {m n : ℕᵒᵖ} (f : m ⟶ n) :
     (cofinalRepeated B r).rings.map f ≫

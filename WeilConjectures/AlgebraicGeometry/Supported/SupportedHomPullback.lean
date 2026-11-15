@@ -1271,27 +1271,8 @@ private theorem supportHomSquare
 
 /-- The canonical supported-Hom identifications commute with arbitrary pullback of a
 closed pair in the etale topology and, for etale-origin coefficients, in the pro-etale
- topology. They also commute with comparison on both schemes, and the comparison
-squares for supported groups and closed constants commute. Each identification is
-normalized on every supported cocycle; each transport is fixed by the inverse-image
-unit and the epic constant restriction. Thus the existential data introduce the
-canonical maps, rather than allowing any choice of maps or identifications.
-
-Proof:
-1. Use the canonical constant-exchange normalization to construct the two pullback
-   transports and the two site-comparison transports. Their closed exchanges are
-   normalized by the inverse-image unit and the epic constant restriction.
-2. Use supported-Hom cocycle normalization for both sites. Transport the pro-etale
-   normalization along the canonical isomorphism from the ordinary pro-etale
-   supported constant to the etale-origin supported constant. Evaluation at 1
-   identifies the inverse-image unit with each specified supported-section map.
-3. Apply the module-valued transport lemma. It resolves the inverse image of an
-   injective complex, compares the derived unit on cocycles, and then uses
-   naturality to pass to every bounded-below derived object. It does not require
-   inverse image to preserve injectives.
-4. The canonical constant-exchange square gives coherence for closed objects and
-   supported sections. The right-derived base-change cube gives coherence for
-   the normalized derived supported maps. -/
+topology. They also commute with comparison on both schemes, and the comparison
+squares for supported groups and closed constants commute. -/
 theorem supportedHom_pullback (P : WeilConjectures.PurityFiniteSetting.{u}) :
     ∃ chiE : ∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i],
         (etaleSupportHomPair P i).Identification,

@@ -334,13 +334,7 @@ private theorem transportIdempotentUnit {C D : Type*} [Category* C] [Category* D
       rw [← Category.assoc, ← hn]
       simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
-/-- The published Koszul fiber is the reflector, also with distinct site object/Hom sizes.
-Proof: pass to a small model of the site in the coefficient universe. The site equivalence
-preserves module tensor, strict towers and their derived inverse limits. Apply the ringed
-Koszul reflector there. Exact countable products on the small pro-etale site identify its
-strict derived limit with the published product/mapping-fiber complex. The comparison
-preserves the degree-zero augmentation, hence precisely the (u,0) unit. Transport back.
-The reflector's complete-output and Hom-bijection assertions give the two clauses. -/
+/-- The published Koszul fiber is the reflector, also with distinct site object/Hom sizes. -/
 theorem wfCompletionReflector :
     (∀ M : PbcCompletedDerived X d,
       WfIsComplete X d r a ha (wfCompletionObj X d r a ha M)) ∧
@@ -392,10 +386,7 @@ def wfCompletionExtend (M : PbcCompletedDerived X d)
   Equiv.ofBijective _ ((wfCompletionReflector X d r a ha).2 M L.obj L.property) |>.symm f
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The unique extended maps preserve identities and composition.
-Proof: compose with the completion unit. Both identity candidates become the same unit;
-both composition candidates become f followed by g followed by the final unit. The Hom
-bijection's injectivity gives both equations. -/
+/-- The unique extended maps preserve identities and composition. -/
 theorem wfCompletionMap_laws :
     (∀ M : PbcCompletedDerived X d,
       wfCompletionExtend X d r a ha M (wfCompleteObj X d r a ha M)

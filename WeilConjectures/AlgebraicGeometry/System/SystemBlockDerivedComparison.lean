@@ -194,8 +194,7 @@ variable {X : Type u₁} {Y : Type u₂} {Xd : Type u₃} {Yd : Type u₄}
   [RX.PreservesKInjectiveComplexes]
 
 /-- The canonical comparison of total right derived functors, constructed from their
-universal properties. In the system application the supplied square is identity on
-sections, morphisms and transitions, so this is kappa_t of the node. -/
+universal properties. -/
 def blockDerivedComparison (square : RX ⋙ GD ≅ G ⋙ RY) :
     RX.mapDerivedCategory ⋙ GD.rightDerivedFunctor ≅
       G.rightDerivedFunctor ⋙ RY.mapDerivedCategory :=

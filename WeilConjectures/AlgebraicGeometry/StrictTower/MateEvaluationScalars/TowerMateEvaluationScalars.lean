@@ -430,12 +430,7 @@ def evaluationFactors (X : Scheme.{u}) (n : ℕ) :=
     ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)) inferInstance inferInstance inferInstance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation preserves the same alpha, including the specified clopen section projector.
-Proof: evaluation commutes termwise with inverse image and extension by zero.
-The inverse cartesian beta is characterized by the pulled-back open unit. The clopen
-projector theorem identifies pi with the first-factor section projection and with
-unit followed by the inverse of openToR. Evaluation retains this projector and the
-unit-preserving compositors. Descend these exact identities and compose the factors. -/
+/-- Evaluation preserves the same alpha, including the specified clopen section projector. -/
 theorem evaluation_alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
@@ -454,11 +449,7 @@ theorem evaluation_alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
   rw [hα, evalJ_eq, evalJ_eq, evalG_eq, evalG_eq]
   exact he
 
-/-- Evaluation carries the proper mate to the single-level mate of the same projector.
-Proof: apply evaluation to the three factors in gamma_formula. Replace the evaluated
-unit and counit by their single-level versions using evaluation_transpose and the
-normalized direct-image comparison. Replace alpha using evaluation_alpha. Functoriality
-preserves their ordered composite, giving exactly the single-level mate formula. -/
+/-- Evaluation carries the proper mate to the single-level mate of the same projector. -/
 theorem evaluation_gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
@@ -491,10 +482,7 @@ variable {B} {Λ : Type (u + 1)} [CommRing Λ]
 def coefficientMap (φ : B →+* Λ) (X : Scheme.{u}) : coefficients B X ⟶ coefficients Λ X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (CommRingCat.ofHom φ)
 
-/-- Constant-section identifications commute with any coefficient homomorphism.
-Proof: the tower realization theorem's coefficient-naturality clause computes both
-adjoints on a constant section b as the constant section φ(b). Sheafification's
-universal property gives equality, and taking inverse-image adjoints gives this square. -/
+/-- Constant-section identifications commute with any coefficient homomorphism. -/
 theorem coefficient_square (φ : B →+* Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (constantRingIso B f).hom ≫ coefficientMap φ X =
       (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (coefficientMap φ Y) ≫
@@ -545,12 +533,7 @@ def scalarJInv (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersi
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The open-unit transpose is invertible for arbitrary coefficient maps.
-Proof: identify the pro-etale open site with the slice. Apply
-lem-cbc-ringed-open-scalar-adjunction: on the extension presheaf every direct-sum
-summand is unchanged, its map is identity, and the remaining values are zero.
-The theorem preserves the open units and counits, so uniqueness of transpose
-identifies its inverse with scalarJInv. No flatness is needed. -/
+/-- The open-unit transpose is invertible for arbitrary coefficient maps. -/
 theorem scalarJInv_app_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     [IsOpenImmersion f] (M : Modules Λ U) :
     IsIso ((scalarJInv φ f).app M) := by
@@ -650,11 +633,7 @@ def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar comparisons preserve the specified ordinary open unit and counit.
-These equations normalize the identity on extension-presheaf generators.
-Proof: the slice scalar theorem identifies each generator with the same section in
-the same summand, and sends the open unit and counit to themselves. Transport
-through weakly-etale localization and uniqueness of the unit-preserving adjoint.
-These are exactly the two equations of RingedOpenScalar.Equations. -/
+These equations normalize the identity on extension-presheaf generators. -/
 theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     [IsOpenImmersion f] :
     ((∀ N : Modules Λ U,

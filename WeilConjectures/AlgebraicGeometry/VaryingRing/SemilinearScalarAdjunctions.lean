@@ -124,8 +124,7 @@ private theorem scalarInverseMate_isIso (adj : L ⊣ P) (adj' : L' ⊣ P')
 
 end MateEquations
 
-/-- The direct-image mate equation implies preservation of the specified unit.
-Proof: use the unit equation for mates and cancel b inverse against b. -/
+/-- The direct-image mate equation implies preservation of the specified unit. -/
 theorem OrdinaryScalarAdjunctions.unit (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules R φ Y) :
@@ -135,8 +134,7 @@ theorem OrdinaryScalarAdjunctions.unit (C : OrdinaryScalarRestriction R φ B ψ)
       (scalarTowerAdj B f).unit.app ((C.rho Y).obj M) :=
   scalarMateUnit (moduleAdj R φ f) (scalarTowerAdj B f) (G.b f) (G.d f) (G.mate f) M
 
-/-- The direct-image mate equation implies preservation of the specified counit.
-Proof: apply the counit equation for mates to b inverse and substitute the mate equation. -/
+/-- The direct-image mate equation implies preservation of the specified counit. -/
 theorem OrdinaryScalarAdjunctions.counit (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : Modules R φ X) :
@@ -566,17 +564,7 @@ private theorem scalarOpenInverse_isIso (C : OrdinaryScalarRestriction R φ B ψ
 
 attribute [local irreducible] scalarOpenInverse
 
-/-- Scalar restriction commutes with inverse/direct images and open extension.
-Proof: compose the prescribed level identifications, normalized evaluation and
-single-ring direct-image comparisons to construct d at each level. The restriction
-transition equations assemble these components, and their normalizations give the
-pointwise section identity. Define b inverse as the inverse adjunction mate of d.
-Pasting the evaluation mate with the existing invertible single-ring pullback mate
-identifies every component with a composite of isomorphisms, so b is invertible.
-The mate correspondence gives the unit and counit equations. The single-sheaf
-open-support lemma makes the constant-coefficient open counit invertible at every
-level of the restricted varying-ring extension. The inverse open mate of b is
-therefore invertible; its inverse defines a, with the required open unit. -/
+/-- Scalar restriction commutes with inverse/direct images and open extension. -/
 theorem ordinaryScalarAdjunctions (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
     (C : OrdinaryScalarRestriction R φ B ψ) :
     Nonempty (OrdinaryScalarAdjunctions R φ B ψ C) := by

@@ -63,16 +63,7 @@ private theorem singleAdjunct
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The normalized ordinary scalar counit on the coefficient module.
-
-Proof: the coefficient module in degree zero is K-flat by the cochain tensor right
-unitor. Apply the representative transpose formula of `ScalarData` to the induced
-chain map from the ordinary coefficient arrow `e`. The adjunction on single
-complexes has the ordinary adjunct as its degree-zero component. The exact
-restriction single comparison identifies this derived transpose with the single of
-`scalarGenerator`. The third Chern normalization gives the same transpose for
-`scalarUnit`. Cancel the single comparison and use injectivity of the derived Hom
-equivalence. This proves the displayed ordinary counit equation. -/
+/-- The normalized ordinary scalar counit on the coefficient module. -/
 theorem scalarCounitNormalization {T : Scheme.{u}} (c : Chern l E T)
     (nc : c.Normalized l E)
     (e : c.scalar.model.E.obj (coefficient T (Rrings l T)) ⟶

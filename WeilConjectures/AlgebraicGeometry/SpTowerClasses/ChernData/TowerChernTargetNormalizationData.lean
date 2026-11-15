@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 
 /-! # Extract the positive Kummer equation of normalized Chern data
+
+## Implementation details
+
+The coefficient diagrams are kept as parameters, sharing the categories of the source
+normalization without expanding the actual scalar generator or coefficient map.
 -/
 
 @[expose] public noncomputable section
@@ -45,11 +50,7 @@ def ChernData.rootNormalized
       (ShortComplex.mk c.kummer.inclusion c.kummer.power c.kummer.zero)
       c.kummer.exact c.rootIso c.rootForget
 
-/-- The positive Kummer normalization follows from normalized Chern data.
-
-Proof: project the second conjunct, then its first conjunct. Keeping the
-coefficient diagrams as parameters shares the source normalization's categories
-without expanding either the actual scalar generator or coefficient map. -/
+/-- The positive Kummer normalization follows from normalized Chern data. -/
 theorem chern_integral_target_normalization
     (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})

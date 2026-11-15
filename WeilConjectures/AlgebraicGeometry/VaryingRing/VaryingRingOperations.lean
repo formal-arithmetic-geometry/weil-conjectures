@@ -240,10 +240,7 @@ abbrev Derived (X : Scheme.{u}) :=
 def baseChange {X Y : Scheme.{u}} (f : X ⟶ Y) : ℕ × Y.ProEt ⥤ ℕ × X.ProEt :=
   (𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)
 
-/-- Continuity on the vertical sequence topology.
-Proof: the inverse image of a vertical covering sieve is the base change of its
-covering slice. Pro-etale base change preserves covering families. The horizontal
-coordinate is unchanged, so the vertical-slice criterion proves continuity. -/
+/-- Continuity on the vertical sequence topology. -/
 theorem baseChange_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (baseChange f).IsContinuous (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
@@ -299,10 +296,7 @@ private theorem constantMap_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((toSheafification (Scheme.ProEt.topology X) CommRingCat.{u + 1}).naturality
       ((Functor.const X.ProEtᵒᵖ).map a))
 
-/-- Naturality includes the horizontal, possibly nonflat, coefficient maps.
-Proof: for vertical arrows use naturality of the constant-section map on the site;
-for horizontal arrows use its naturality in the coefficient ring. Every product
-arrow factors into these two arrows, giving the displayed naturality equation. -/
+/-- Naturality includes the horizontal, possibly nonflat, coefficient maps. -/
 theorem ringMapApp_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {U V : (ℕ × Y.ProEt)ᵒᵖ} (a : U ⟶ V) :
     (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology Y))
@@ -429,10 +423,7 @@ private theorem largePush_isRightAdjoint
     intro U
     rfl
 
-/-- Existence of inverse image as the left adjoint of the actual section functor.
-Proof: form inverse image on the product site and extend scalars along ringMap.
-Constant sheaves pull back to the same constants, compatibly with φ. Thus this
-module pullback is the componentwise inverse image and has the usual adjunction. -/
+/-- Existence of inverse image as the left adjoint of the actual section functor. -/
 theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).IsRightAdjoint := by
   exact largePush_isRightAdjoint (C := ℕ × Y.ProEt) (D := ℕ × X.ProEt)
@@ -451,9 +442,7 @@ def moduleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : pull R φ f ⊣ push R φ f :=
 
 attribute [local irreducible] moduleAdj
 
-/-- Direct image is additive on all section modules.
-Proof: continuous module pushforward preserves the underlying maps and their
-pointwise sums. Extensionality on all sections gives additivity. -/
+/-- Direct image is additive on all section modules. -/
 theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).Additive := by
   constructor
@@ -702,10 +691,7 @@ private theorem moduleEvalP_specialized {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Elaborating the section-carrier normalization unfolds both continuous module functors.
-/-- Ordinary pushforward evaluation is identity on every section carrier.
-Proof: both sides have sections N_n(H ×_Y X), maps induced by the same restrictions,
-and the same constant scalar map. The identity is linear and natural. Equality on
-all sections proves uniqueness. -/
+/-- Ordinary pushforward evaluation is identity on every section carrier. -/
 theorem moduleEvalP_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! d : push R φ f ⋙ eval R φ Y n ≅
         eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f,
@@ -1085,14 +1071,7 @@ attribute [local irreducible] coFor coForAdj coFunctor coAdj
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Existence of the unit-normalized ordinary pullback evaluation comparison.
-Proof: evaluation has an explicit right coextension: at (m,V) it is zero when m < n,
-and otherwise M(V), with scalars restricted from level m to level n. Its unit is horizontal
-restriction and its counit is evaluation at n. The mate of moduleEvalP under these adjunctions
-is identity on section carriers. The iterated-mates identity then makes the inverse mate under
-the geometric adjunctions invertible. Its inverse is d; the standard mate/unit identity and
-cancellation give the required normalization.
--/
+/-- Existence of the unit-normalized ordinary pullback evaluation comparison. -/
 theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃ d : pull R φ f ⋙ eval R φ X n ≅
         eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,
@@ -1157,12 +1136,7 @@ theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   exact (congrArg (fun z ↦ adj.unit.app ((eval R φ Y n).obj N) ≫ z)
     ((StrictTower.moduleDirectImage (R n) f).map_id _)).trans (Category.comp_id _)
 
-/-- Uniqueness of the unit-normalized ordinary pullback evaluation comparison.
-Proof: apply naturality to the system adjunction unit and use the triangle identity.
-The direct-image evaluation comparison is invertible, so the displayed unit equation
-cancels its component; the level adjunction hom-equivalence then cancels the remaining
-unit and identifies the two natural isomorphisms componentwise.
--/
+/-- Uniqueness of the unit-normalized ordinary pullback evaluation comparison. -/
 theorem moduleEvalG_unique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (d e : pull R φ f ⋙ eval R φ X n ≅
       eval R φ Y n ⋙ StrictTower.modulePullback (R n) f)
@@ -1239,10 +1213,7 @@ private theorem exact_of_componentwise
   exact (ShortComplex.exact_iff_of_iso (s.mapNatIso (e n))).mpr
     ((hs.map (T n)).map (H n))
 
-/-- Inverse image is additive and exact on all systems.
-Proof: the left adjoint is canonically the componentwise abelian inverse image.
-Kernels and sheafified cokernels are componentwise; inverse image preserves both.
-Addition is inherited from abelian inverse image. No flatness of φ is used. -/
+/-- Inverse image is additive and exact on all systems. -/
 theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pull R φ f).Additive ∧ PreservesFiniteLimits (pull R φ f) ∧
       PreservesFiniteColimits (pull R φ f) := by
@@ -1257,12 +1228,7 @@ theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (fun n ↦ StrictTower.modulePullback (R n) f)
     A.systems.componentwise (moduleEvalG R φ f)
 
-/-- Open restriction has the extension-by-zero left adjoint.
-Proof: moduleEvalG identifies every level of restriction with evaluation followed by
-the single-ring open pullback. Both preserve all limits. The conservative forgetful
-functor to presheaves of abelian groups reflects limits, which are pointwise. Thus
-restriction preserves all limits. The system category is Grothendieck abelian, so
-its small coseparator and the special adjoint functor theorem give a left adjoint. -/
+/-- Open restriction has the extension-by-zero left adjoint. -/
 theorem pull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (pull R φ j).IsRightAdjoint := by
   let : IsGrothendieckAbelian.{u + 1} (Modules R φ X) :=
@@ -1301,10 +1267,7 @@ instance pullLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
 instance pullColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (pull R φ f) := (pull_exact R φ f).2.2
 
-/-- K-injective resolutions on the actual ringed sequence site.
-Proof: the category is modules over systemRing on the small vertical sequence site.
-Apply the recorded Grothendieck abelianness and K-injective resolution theorem to
-that ringed site. This does not assert that evaluation preserves K-injectives. -/
+/-- K-injective resolutions on the actual ringed sequence site. -/
 theorem modules_kInjective (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (Modules R φ X) := by
   let :=
@@ -1374,10 +1337,7 @@ private theorem constantMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   rw [Category.id_comp] at hn
   exact hn.symm
 
-/-- Ordinary direct-image composition is fixed on every section and coefficient index.
-Proof: restriction along the canonical fibre-product pasting isomorphism is linear,
-natural in test objects, and compatible with every coefficient transition. Its
-inverse is restriction along the inverse isomorphism. Sections determine uniqueness. -/
+/-- Ordinary direct-image composition is fixed on every section and coefficient index. -/
 theorem modulePComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃! d : push R φ f ⋙ push R φ g ≅ push R φ (f ≫ g),
       ∀ (N : Modules R φ X) (n : ℕ) (U : Z.ProEt)
@@ -1461,10 +1421,7 @@ def pComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (L₂ := G R φ (f ≫ g)) (R₂ := P R φ (f ≫ g))
     ((adj R φ g).comp (adj R φ f)) (adj R φ (f ≫ g)) (gComp R φ f g)
 
-/-- The identity comparison for ordinary direct image is the pullback graph map.
-Proof: restriction along the graph of the identity base change is a linear isomorphism
-at every index. The inverse graph gives its inverse. These maps commute with the
-semilinear transitions, and the section formula determines them uniquely. -/
+/-- The identity comparison for ordinary direct image is the pullback graph map. -/
 theorem modulePId_existsUnique (X : Scheme.{u}) :
     ∃! d : push R φ (𝟙 X) ≅ 𝟭 (Modules R φ X),
       ∀ (N : Modules R φ X) (n : ℕ) (U : X.ProEt)
@@ -2099,12 +2056,7 @@ end OpenEvaluationMates
 
 attribute [local instance] fixedEvalContinuous
 
-/-- Exactness of extension by zero, including the empty open.
-Proof: the open-site map/base-change adjunction presents pullback as continuous
-module pushforward along the inverse transpose of the coefficient map. Evaluation
-commutes with this presentation and its right coextension. Adjoint uniqueness and
-conjugation give coefficientwise comparison with the existing single-ring extension
-by zero. Its exactness and the componentwise short-complex criterion give the claim. -/
+/-- Exactness of extension by zero, including the empty open. -/
 theorem extension_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (extension R φ j).Additive ∧ PreservesFiniteLimits (extension R φ j) ∧
       PreservesFiniteColimits (extension R φ j) := by
@@ -2529,13 +2481,7 @@ private theorem derived_finiteMate_iso
     (levelAdj R f n) (adj R φ f) (evalG R φ f n).inv hD
 end FiniteEvaluationLeftAdjoints
 
-/-- The canonical direct-image evaluation mate is invertible on all systems.
-Proof: transport the existing strict singleton left extension to actual sequence-site
-modules. Its normalized derived adjunction is computed on flat-term K-flat complexes.
-Pullback preserves this resolving class by the ringed-topos K-flat pullback theorem.
-The ordinary unit normalization and iterated mates make the finite-extension mate
-invertible. Its derived representative is invertible on resolving complexes, hence
-everywhere. A second iterated-mates identity gives the prescribed evalPMate. -/
+/-- The canonical direct-image evaluation mate is invertible on all systems. -/
 theorem evalPMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (evalPMate R φ f n) := by
   exact derived_finiteMate_iso R φ f n
@@ -2893,13 +2839,7 @@ private theorem derivedOpenMateIso
     (levelJAdj R j n) (exactAdj (StrictTower.moduleJAdj (R n) j))
     (ev R φ U n) (ev R φ X n) (evalG R φ j n)
 
-/-- The open-extension mate is the localization of the coefficientwise lift map.
-Proof: the continuous open-site pullback has a unit given by restriction along the
-site-adjunction counit. The identity section comparisons satisfy the evaluation unit
-square. Uniqueness identifies its transported comparison with moduleEvalG. Taking
-mates under evaluation/right-coextension and then under the open adjunctions gives
-an invertible ordinary mate. Exact localization preserves its normalized unit square;
-adjunction transport identifies the derived mate with the prescribed evalJInv. -/
+/-- The open-extension mate is the localization of the coefficientwise lift map. -/
 theorem evalJInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     IsIso (evalJInv R φ j n) := by
   exact derivedOpenMateIso R φ j n

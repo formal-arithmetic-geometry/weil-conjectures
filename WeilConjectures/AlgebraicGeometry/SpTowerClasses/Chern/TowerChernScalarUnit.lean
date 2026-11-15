@@ -68,17 +68,7 @@ private theorem singleAdjunct
   rfl
 
 /-- Scalar extension carries the coefficient unit to the coefficient unit, with
-its comparison fixed by the ordinary quotient ring map.
-
-Proof: the unit in degree zero is K-flat, since tensoring an acyclic complex
-with it is isomorphic to that complex by the tensor unitor. The universal scalar
-counit therefore computes its derived extension. Ordinary scalar extension of
-the unit is the target ring by multiplication, with inverse a mapping to a
-tensor one. Compose this multiplication isomorphism with the counit and the
-single-complex comparisons. The representative transpose equation identifies
-its adjunct with the ordinary unit followed by multiplication. On every section
-this is x mapping to phi(x). The defining uniqueness of scalarGenerator gives
-the required normalization. No flatness of the ring map is used. -/
+its comparison fixed by the ordinary quotient ring map. -/
 theorem exists_normalizedScalarUnit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u})

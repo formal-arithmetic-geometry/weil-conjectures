@@ -33,22 +33,7 @@ attribute [local irreducible] scalarFiniteBoundary_eval scalarFiniteBoundary_int
 
 /--
 The evaluated scalar arrow and the underlying integral arrow have the same finite
-boundary composite. This is the composition identity used to construct the
-`Fact` in `scalarFiniteBoundary`.
-
-Proof: transpose the scalar-extended arrow through the derived scalar adjunction.
-On a K-flat representative, naturality of the universal scalar counit cancels the
-resolution comparison and identifies the transpose with the ordinary scalar unit.
-The normalization equation for the scalar unit then makes the source generator
-scalarGenerator. Apply exact evaluation and restriction of scalars. The section,
-restriction, and morphism equations of the specified forgetful functor identify
-these evaluations with the displayed maps. The integer generator composite sends
-k to k times one, so uniqueness of finiteQuotient fixes the source endpoint; the
-pure-tensor equation for lineEvaluation sends z to one tensor z, so uniqueness of
-finiteRootMap fixes the target endpoint. Naturality of the shifted single
-comparisons transports the equality to degree two, yielding the displayed
-composition identity. Empty schemes and zero arrows satisfy the same formulas.
--/
+boundary composite. -/
 theorem scalarFiniteBoundary_composition (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)

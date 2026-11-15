@@ -47,15 +47,7 @@ attribute [local implicit_reducible] spCoefficientCommRings SemilinearSections.e
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The normalized underlying finite unit gives the actual system identity adjoint.
-
-Proof: eliminate the specified coefficient, transition, pull-functor, finite adjunction
-and pull-evaluation coordinate equalities. Evaluate the underlying-unit equation on x.
-Use the identity-on-sections comparison for the direct image, then cancel the inverse
-moduleUnderlying isomorphism. The evaluated system adjunction unit is the finite unit
-followed by inverse pull-evaluation, by tensorComparison_adjoint_evaluation. This
-identifies the transported section with sectionAdjoint of the identity, including on
-empty charts and for zero modules. -/
+/-- The normalized underlying finite unit gives the actual system identity adjoint. -/
 theorem tensorComparison_unit_coordinates {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (B' : ℕ → Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})

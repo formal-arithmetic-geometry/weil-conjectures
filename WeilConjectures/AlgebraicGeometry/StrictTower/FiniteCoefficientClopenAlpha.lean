@@ -865,29 +865,7 @@ private lemma fcTransport
 
 attribute [local irreducible] hOpen hPullbackIso singleAlpha
 
-/-- Coefficient realization preserves the clopen alpha before taking proper mates.
-
-Proof: factor H as site inverse image followed by C, using the ordinary sheaf
-alpha equation already proved in FiniteClopenAlphaSiteTransport. For C over the given
-ring map, take the inverse mate of the section-normalized cDirect and then the
-inverse open mate. Naturality of cUnderlying and its section equation for cDirect
-prove composition of the direct comparisons. Mate pasting gives composition and
-commutative-square coherence of the pullback comparisons. The mate-cube identity
-then compares the cartesian open base-change maps. For a clopen immersion, the
-restriction of the specified projector is the open-adjunction unit. The open mate
-unit equation and naturality identify these restrictions after C. Maps into clopen
-extension are detected by restriction, using its isomorphism with direct image and
-the pullback/direct-image adjunction. Thus the projectors agree as well. Mate
-injectivity compares the open compositors; equality transport gives the remaining
-congruence maps. Composing these comparisons along the clopen lift gives the
-ordinary coefficient alpha equation. Finally mate pasting factors hPullbackInv
-and hOpen through the site and coefficient comparisons, and pasting the two alpha
-equations proves the assertion. An explicit natural isomorphism from H to its
-site-coefficient composite transports the equation without expanding the functors.
-This argument works directly for arbitrary B and
-phi: it needs no flatness or scalar-factorization hypothesis. Empty clopen images
-and complements and zero coefficient rings are covered by the same adjunction
-and projector identities. -/
+/-- Coefficient realization preserves the clopen alpha before taking proper mates. -/
 theorem finiteCoefficientClopenAlpha
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

@@ -43,11 +43,7 @@ abbrev finiteForget (T : Scheme.{u}) (n : ℕ) :=
     (SemilinearSections.ring.{u + 1, u, u + 1}
       (Scheme.ProEt.topology T) (SpTowerShriek.B l E T n))
 
-/-- Forgetting the action retains the underlying sheaf kernels and sheafified
-cokernels.
-Proof: kernels are sectionwise kernels with their restricted action; cokernels
-are the associated sheaves of the same abelian presheaf quotients. Thus forgetting
-preserves both kernels and cokernels and therefore finite limits and colimits. -/
+/-- Forgetting the action preserves finite limits and finite colimits. -/
 theorem finiteForget_exact (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (finiteForget l E T n) ∧
       PreservesFiniteColimits (finiteForget l E T n) := by
@@ -65,10 +61,7 @@ instance finiteForgetColimits (T : Scheme.{u}) (n : ℕ) :
 abbrev abEvaluation (T : Scheme.{u}) (n : ℕ) :=
   (CategoryTheory.evaluation ℕᵒᵖ (DiagonalAb T)).obj (op n)
 
-/-- The finite integer quotient is uniquely fixed on the constant generators.
-Proof: map an integer to its multiple of one in the actual finite coefficient
-ring. Restrictions and sheafification preserve this formula. The constant-sheaf
-adjunction gives the unique resulting additive sheaf map. -/
+/-- The finite integer quotient is uniquely fixed on the constant generators. -/
 theorem finiteQuotient_existsUnique (T : Scheme.{u}) (n : ℕ) :
     ∃! q : (abEvaluation T n).obj (integers T) ⟶
       (finiteForget l E T n).obj
@@ -114,11 +107,7 @@ theorem finiteQuotient_existsUnique (T : Scheme.{u}) (n : ℕ) :
 def finiteQuotient (T : Scheme.{u}) (n : ℕ) :=
   (finiteQuotient_existsUnique l E T n).exists.choose
 
-/-- The finite root-to-coefficient-line map sends z to 1 tensor z, on every chart.
-Proof: tensor the root module with the actual quotient coefficient ring along
-finiteScalar. The sheafification unit supplies the indicated additive map. It
-commutes with restrictions by functoriality of tensor, and its value on every
-section specifies it uniquely. -/
+/-- The finite root-to-coefficient-line map sends z to 1 tensor z, on every chart. -/
 theorem finiteRootMap_existsUnique (T : Scheme.{u}) (n : ℕ) :
     ∃! r : (roots l T).obj (op n) ⟶
       (finiteForget l E T n).obj (finiteLine l E T n),

@@ -104,13 +104,7 @@ private theorem iso_left_cancel {D : Type*} [Category D]
 end
 
 /-- An evaluation transpose preserves normalized Hom shifts when the tensor comparison
-preserves cancellation of opposite shifts.
-
-Proof. Cancel the target Hom shift and transpose using evaluation normalization. Tensor
-cancellation naturality moves the shifted comparison past cancellation. Cancel the scalar
-shift in the first tensor variable, use the evaluation-transpose equation, scalar tensor
-cancellation, and naturality of the tensor comparison. The source evaluation normalization
-finishes the chase; adjunction injectivity gives the original square. -/
+preserves cancellation of opposite shifts. -/
 private theorem tensorHomShiftComparison_aux
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasShift C ℤ]
     {D : Type u₂} [Category.{v₂} D] [Preadditive D] [HasShift D ℤ]
@@ -204,15 +198,7 @@ private theorem etaleHomShiftNormalization_apply
       (derivedTensorHomAdjunction C (X := X) (K⟦-n⟧)).counit.app M := by
   exact h K n
 
-/-- Derived tensor-Hom comparison respects normalized shifts.
-
-Proof. Apply the abstract tensor-Hom evaluation chase to the derived tensor and Hom
-bifunctors. First-variable adjunction naturality and tensor-shift cancellation naturality
-supply its two categorical compatibility hypotheses; the other hypotheses are given.
-The abstract chase cancels the target Hom shift and the tensor image of the first scalar
-shift, then uses cancellation naturality, the evaluation-transpose equation, scalar tensor
-cancellation, binary comparison naturality, and the source evaluation normalization.
-Adjunction injectivity recovers the shift square. -/
+/-- Derived tensor-Hom comparison respects normalized shifts. -/
 theorem derivedTensorHomShiftComparison_component
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

@@ -37,8 +37,7 @@ namespace AlgebraicGeometry.SymmetricAlgebraSheaf
 open scoped TensorProduct
 
 /-- The canonical symmetric grading on an affine section algebra. The decomposition is the
-unique inverse of the summation map, using the internality recorded by the symmetric-grading
-node; it chooses no algebra or grading. -/
+unique inverse of the summation map; it chooses no algebra or grading. -/
 noncomputable instance sectionGradedAlgebra {X : Scheme.{u}} (E : X.Modules)
     (U : X.affineOpens) :
     GradedAlgebra (fun n : ℕ ↦ (SymmetricAlgebra.ι Γ(X, U.1)
@@ -48,12 +47,7 @@ noncomputable instance sectionGradedAlgebra {X : Scheme.{u}} (E : X.Modules)
   simp only [Submodule.map_pow, ← LinearMap.range_comp] at h
   exact DirectSum.IsInternal.gradedAlgebra h
 
-/-- Restriction preserves every symmetric degree.
-
-Proof: the degree-n submodule is spanned by products of n degree-one generators.
-Restriction sends each generator to the restricted module section and sends scalars by
-structure-sheaf restriction. It therefore sends each such product to a product of the same
-length, and additivity and semilinearity extend this to its span. -/
+/-- Restriction preserves every symmetric degree. -/
 theorem restriction_mem_symmetricDegree {X : Scheme.{u}} (E : X.Modules)
     {U V : X.affineOpens} (h : U ≤ V) (n : ℕ)
     (a : sections E (op V.1))
@@ -98,15 +92,7 @@ private theorem graded_bijective_degree
     change f (DirectSum.decompose D a n) = (b : B)
     rw [f.map_directSumDecompose, ha, DirectSum.decompose_of_mem_same D' b.property]
 
-/-- Affine restriction is coefficientwise base change in each symmetric degree.
-
-Proof: for affine U contained in V, quasi-coherence identifies E(U) with
-O(U) tensor over O(V) E(V), through m tensor r mapping to r times the restricted m.
-Symmetric powers commute with this base change: the tensor-algebra base-change
-isomorphism preserves degree and takes the commutator ideal to the corresponding
-commutator ideal, hence descends degree by degree to symmetric algebras. On generators
-this is precisely restriction E, and its scalar equation is restriction_algebraMap.
-The resulting bijections in every degree give IsGradedBaseChangeAlong. -/
+/-- Affine restriction is coefficientwise base change in each symmetric degree. -/
 theorem gradedRestriction_isGradedBaseChangeAlong {X : Scheme.{u}} (E : X.Modules)
     [E.IsQuasicoherent] {U V : X.affineOpens} (h : U ≤ V) :
     (gradedRestriction E h).IsGradedBaseChangeAlong

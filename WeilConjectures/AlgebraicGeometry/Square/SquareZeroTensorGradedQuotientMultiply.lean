@@ -9,6 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedPre
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
+/-!
+# Multiplication on graded quotients of square-zero tensor algebras
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08KS, 0096, 01CD, 09MS
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
@@ -117,18 +125,7 @@ private theorem multiply_lifts {X Z : Scheme.{u}} (j : Z ⟶ X)
   apply congrArg
   exact hn
 
-/-- Multiplication descends from the homogeneous algebra to the quotient.
-Proof: The closed-immersion adjunction unit on each tensor power is locally surjective:
-on stalks it is the quotient by the immersion ideal, transported by the unique
-adjunction comparison. Locally lift s and t through these units, refining their
-covers to a common cover. The equation b_quotient identifies their images under c
-with p applied to their b-images. Since p is an algebra morphism, their product is
-p applied to the product of those b-images. Apply b_multiply and b_quotient in degree
-a+d. Naturality and the monoidal adjunction comparison identify the image of the
-tensor product of the lifts with the tensor product of s and t transported through
-boundaryPullbackTensorIso. This proves the displayed equality on the common cover;
-sheaf separation proves it globally. The argument also works in degree zero, where
-tensorPowAddIso and the pullback tensor comparison use the unitors. -/
+/-- Multiplication descends from the homogeneous algebra to the quotient. -/
 theorem tensorGradedQuotient_multiply {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (T : TensorGradedPresentation j L)
     (a d : ℕ) (s : Γ((tensorPullback j).obj (L.tensorPow a), ⊤))

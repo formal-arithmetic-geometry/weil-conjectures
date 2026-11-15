@@ -215,9 +215,7 @@ def proScalarSheafTensorMap
       ((ProEtale.sheafExtendScalars φ T).obj M) (𝟙_ _) ≫
     (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ).map (ρ_ _).hom
 
-/-- Naturality of the balancing map.
-Proof: apply naturality of the scalar unit, the lax tensorator, and the right unitor.
-On sections this is (m tensor b) maps to b tensor a(m). -/
+/-- Naturality of the balancing map. -/
 theorem proScalarSheafTensorMap_naturality
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})

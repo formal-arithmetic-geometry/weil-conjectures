@@ -28,12 +28,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Higher direct image along a qcqs morphism preserves filtered diagrams indexed
-in the coefficient universe, without a torsion assumption.
-
-Proof: this is the instance at `J` of
-`Etale.preservesFilteredColimitsOfSize_higherDirectImage`, which gives preservation of all
-filtered colimits indexed in `Type (u + 1)`. -/
+/-- Higher direct image along a qcqs morphism preserves colimits of filtered diagrams
+indexed in the coefficient universe. -/
 theorem preservesColimitsOfShape_higherDirectImage_large
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)
     [QuasiCompact h] [QuasiSeparated h] (q : ℤ)

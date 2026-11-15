@@ -22,11 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local implicit_reducible] spCoefficientCommRings
 
-/-- The transpose of lineComparison is the ordinary scalar unit on the root module.
-Proof: use the arbitrary-complex model-unit equation on the single root complex.
-Naturality of the exact restriction comparison moves the single comparison past
-restriction. The ordinary adjunction on single complexes then gives the single of
-its unit. This uses no flatness of the root module. -/
+/-- The transpose of lineComparison is the ordinary scalar unit on the root module. -/
 theorem scalarRootTranspose (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) :

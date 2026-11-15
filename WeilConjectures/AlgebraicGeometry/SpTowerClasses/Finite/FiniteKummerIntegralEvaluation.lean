@@ -38,20 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- Evaluation of the integral tower Kummer class is the comparison image of the
-etale Kummer class.
-
-Proof: write the line bundle class as the exact comparison image of its Picard
-extension, transported along integerComparison and cartierUnitsComparison.
-Exact evaluation of constant towers is the identity functor. The morphism from
-the comparison image of the etale Kummer sequence to the evaluated tower Kummer
-sequence has units comparison in its middle and final terms and roots comparison
-in its first term. Its squares are the defining kernel equation and compatibility
-of the additive units comparison with multiplication by the exponent. Naturality
-of the extension class, followed by associativity of Yoneda composition, identifies
-the evaluated composite with the image of Picard class composed with the etale
-Kummer extension. This is exactly kummerδ₁. Realize the resulting Ext equality in
-the derived category. The argument uses positive exponents and covers zero classes
-and empty schemes without a separate case. -/
+etale Kummer class. -/
 theorem finiteKummer_integral_evaluation (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
     (L : T.Pic) :

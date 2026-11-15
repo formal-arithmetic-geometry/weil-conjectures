@@ -241,22 +241,7 @@ private theorem single_coefficient_chain
   rw [single_proper_chain]
   simp only [Category.assoc, CommRingCat.hom_comp, derivedExtension, Functor.comp_obj]
 
-/-- The ordinary coefficient projection has its restriction adjunct and scalar cocycle.
-
-Proof: The proper restriction comparison is invertible by uniqueness of the right
-adjoint to the common composite inverse image. The open restriction comparison is
-an isomorphism on sheaves, and both functors are exact. Paste these isomorphisms to
-obtain d with the stated hom. Transpose the proper coefficient map through the
-scalar adjunction: the two geometric/scalar mate operations commute, so its
-transpose is proper image of the scalar unit followed by inverse restriction.
-For the open factor use the open-unit normalization of its scalar balancing map.
-Naturality pastes the resulting transpose formulas, proving the first assertion.
-For three rings, identify the normalized proper scalar mate with the existing
-finiteCoefficientDirectImageMap and apply its coefficient-chain theorem. Apply
-etaleOpenScalarComparisons.successive_scalar to the open factor, using the open-unit
-normalization to identify its comparison with ExceptionalCoefficients.openIso.
-Naturality of the proper scalar mate pastes these two coefficient-chain equations.
-The resulting word is exactly singlePath, with its published balanced associators. -/
+/-- The ordinary coefficient projection has its restriction adjunct and scalar cocycle. -/
 theorem etaleSingleCoefficientProjection
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) :
     (∀ (A B : CommRingCat.{u + 1}) (_hA : Finite A) (_hB : Finite B)

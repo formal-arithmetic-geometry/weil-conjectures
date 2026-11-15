@@ -12,15 +12,13 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Strict ordinary étale system interfaces
 
-These declarations are relocated, with their original names and data, from the
-adjoint theorem module. No existence theorem is needed to import these notions.
+Interfaces for strict ordinary étale coefficient systems.
 
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 00W1, 03D7, 05RU
 * W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
-  Construction 4.1, Constructions 5.14--5.15, Lemma 5.16, Lemma 4.10, Constructions 4.1 and 5.15,
-  Construction 5.15, Proposition 2.29(2), Lemma 5.22
+  Constructions 4.1, 5.14 and 5.15, Lemmas 4.10, 5.16 and 5.22, Proposition 2.29(2)
 -/
 
 @[expose] public noncomputable section
@@ -36,21 +34,20 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
 open SheafOfModules
-/-- Reuse the existing ring-sheafification witness once at the concrete etale-site size.
-This instance only caches an existing proof, so the constant sheaf construction is unchanged. -/
+/-- The ring-sheafification witness at the concrete étale-site size. -/
 instance (priority := 2000) strictEtaleCommRingSheafify (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology CommRingCat.{u + 1} := inferInstance
-/-- Reuse the existing additive-sheafification witness at the ordinary etale-site size. -/
+/-- The additive-sheafification witness at the ordinary étale-site size. -/
 instance (priority := 2000) strictEtaleAddCommGrpSheafify (T : Scheme.{u}) :
     HasSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1} := inferInstance
-/-- Reuse the existing local-bijection characterization for additive sheaves. -/
+/-- The local-bijection characterization for additive sheaves. -/
 instance (priority := 2000) strictEtaleAddCommGrpLocal (T : Scheme.{u}) :
     T.smallEtaleTopology.WEqualsLocallyBijective AddCommGrpCat.{u + 1} := inferInstance
-/-- Reuse the existing forgetful composition witness for constant coefficient rings. -/
+/-- The forgetful composition witness for constant coefficient rings. -/
 instance (priority := 2000) strictEtaleRingCompose (T : Scheme.{u}) :
     T.smallEtaleTopology.HasSheafCompose
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := inferInstance
-/-- Cache the existing set-sheafification witness at the concrete etale-site size. -/
+/-- The set-sheafification witness at the concrete étale-site size. -/
 instance (priority := 2000) strictEtaleTypeSheafify (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology (Type (u + 1)) := inferInstance
 /-- Cache the existing ring-to-set sheaf composition witness. -/

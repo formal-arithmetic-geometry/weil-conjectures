@@ -37,13 +37,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Direct image along the actual diagonal is exact on system sheaves.
-Proof: a closed immersion has finite geometric fibres and its small pro-etale
-direct image is exact, including the empty closed immersion. The coefficient
-system maps are formed with the same identity structural maps at every level;
-kernels and sheafified cokernels are levelwise, so the ordinary system direct
-image preserves both. Transport through the section-normalized realization
-retains those kernels and cokernels. -/
+/-- Direct image along the actual diagonal is exact on system sheaves. -/
 theorem diagonalPush_exact {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) :
     PreservesFiniteLimits g.push ∧ PreservesFiniteColimits g.push := by
@@ -131,12 +125,7 @@ private theorem pushEvaluationUnderlying_apply
     ((SpTowerShriek.ev l E X n).obj N) ((g.ordinaryPushEvaluation n).app N) U x
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The supported finite quotient is induced by the same integral quotient on P.
-Proof: over a chart U of W its source consists of locally constant integers on
-P times_W U. Send each such integer to its residue multiple of one. The ordinary
-pushforward evaluation identifies the target with these actual coefficient
-sections on P times_W U. Constant generators locally generate the source and
-sheaf gluing gives existence and uniqueness. -/
+/-- The supported finite quotient is induced by the same integral quotient on P. -/
 theorem finiteSupportedQuotient_existsUnique {b : SpTowerShriek.Base l E}
     {S : Scheme.{u}} (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) (n : ℕ) :
     ∃! q : diagonalIntegralSource S ⟶

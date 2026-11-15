@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCouni
 import WeilConjectures.AlgebraicGeometry.Picard.UnionBoundedAboveModel
 import WeilConjectures.AlgebraicGeometry.BoundedAboveModelFlatReplacement
 
+/-! # Bounded flat model for the union in flat counit presentations
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 077J
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option linter.style.haveILetI false
@@ -16,28 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The Mayer--Vietoris construction supplies the bounded flat complex and its
-base direct-image identification.  This is the construction part of the
-relative Mayer--Vietoris gluing argument (Stacks Project, Tag 0DJ9).
-
-Proof: Restrict N to the two opens and their intersection; quasi-coherence and
-relative flatness are preserved by open restriction. Apply the three supplied
-presentation properties to obtain bounded-above complexes representing the
-three direct images on B. In particular their cohomology vanishes above three
-integer bounds. The relative Mayer--Vietoris triangle for this two-open cover
-identifies the direct image from the union with the homotopy fibre of the
-restriction-difference arrow from the sum of the first two direct images to
-the third. Its long exact cohomology sequence shows that the union direct image
-has no cohomology above the maximum of the first two bounds and one plus the
-third bound. Take any complex representative of this derived object and its
-good truncation at that bound. The truncation inclusion is a quasi-isomorphism,
-since the cohomology above the bound vanishes. Apply the bounded-above flat
-replacement theorem for sheaves of modules (Stacks Project, Tag 077J) to this
-truncation. Its augmentation is a quasi-isomorphism, its terms are flat, and
-it is zero above the bound. After localization the augmentation, truncation
-inclusion and representative identification give e. This uses only the
-sheaf-module Mayer--Vietoris triangle, so no quasi-compactness of U or V is
-needed; the quasi-coherent refinement of that triangle is not used. -/
+/-- The Mayer--Vietoris construction supplies a bounded-above complex of flat modules on `B`
+identified with the derived direct image of `N` from `U ⊔ V`. -/
 theorem standardSingleFlatCounitUnionCore
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

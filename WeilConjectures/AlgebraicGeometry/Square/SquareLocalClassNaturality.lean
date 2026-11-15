@@ -26,12 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry.RingedSpace
 variable {Y : RingedSpace.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]
-/-- Naturality of the normalized derived local class.
-
-Proof: On K-injective representatives, compose naturality of the derived unit,
-localization homology and exact sheafification. Lift an arbitrary derived morphism
-to a complex map into the K-injective representative and conjugate by the two
-resolution isomorphisms. Finally use naturality of the sheafification unit. -/
+/-- Naturality of the normalized derived local class. -/
 theorem squareLocalClass_naturality (q : ℤ)
     {K L : DerivedCategory (SheafOfModules.{u} (moduleRings Y))} (a : K ⟶ L) :
     (localHypercohomologyPresheaf Y q).map a ≫ topEdgeLocalClass Y q L =

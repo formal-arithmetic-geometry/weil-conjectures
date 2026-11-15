@@ -16,7 +16,15 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeTorsorForgetNormalizat
 /-!
 # Relative torsor representatives and boundary signs
 
--- Q32 revalidation delivery of the reviewed statement.
+The canonical classification of étale torsors with a section over an open by relative
+cohomology, with explicit extension representatives and the signs of the boundary maps
+(`divisor_torsor_boundary_signs`).
+
+## Implementation details
+
+The classification uses the raw lifting cocycle. Its negative forgetful image is the
+Ext-normalized torsor class, and the normalized classification in `relative_torsor_cohomology`
+is the negative of this one.
 
 ## References
 
@@ -1489,41 +1497,7 @@ attribute [-instance] torsorBoundaryHasSheafify torsorBoundaryWEqualsLocallyBije
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical relative torsor classification admits the specified extension
 representatives and the two boundary signs, simultaneously in all resolution models.
-The classification uses the raw lifting cocycle. Its negative forgetful image is
-the Ext-normalized torsor class; the final conjunct specifies the representatives.
-The normalized classification in `relative_torsor_cohomology` is the negative of this one.
-
-STATEMENT-DISPUTED: the original positive forgetful clause conflicts with the raw
-representatives and the proved Ext comparison. The statement below corrects that clause.
-
-Proof:
-1. Use the raw lifting-cocycle equivalence. The frame forget-normalization theorem
-sends its class to minus the torsor H1 class; hence the displayed negative forgetful
-image. The proved raw-class naturality gives coefficient and pullback compatibility.
-2. The presentation map t ↦ h(generator(t)) is equivariant with augmentation as
-its action increment. Its image in resolution cycles is invariant and glues to a
-global cycle s. It is an equivariant isomorphism with the lifting torsor of s.
-The constant-sheaf adjunction gives a from iCycles(s). Uniqueness in the extension
-presentation proves projection followed by a equals dh. The raw classification
-presentation formula gives the required signed representative (a,h(section)).
-3. Apply the global difference theorem for two equivariant lifting maps to h and
-h'. It supplies x with derivative a'-a and restriction h'(section)-h(section).
-4. Apply the shift short-complex isomorphism to a section cycle, then the shifted
-cone inclusion. Its signed coordinates are (0,-b). The quotient commutes with both
-maps. The zero lifting presentation computes the trivial pair as (0,g), and
-uniqueness of its signed coordinates identifies its class with minus the boundary.
-5. Evaluate the specified splittings and extend by zero to get a short exact open
-section sequence. A lift r of the augmented g exists in degree zero. Its derivative
-lies in the kernel of the degree-one quotient, so choose c with a(c)=dr. Mathlib's
-concrete boundary formula computes the ordinary boundary as [c]. The relative
-lift (0,r) differentiates to (0,-dr), so the same formula computes the relative
-boundary as [(0,-c)]. This is the localization representative of [c], and the
-coordinate isomorphism proves equality of the two classes, for every lift r.
-6. Cone maps act componentwise on the signed coordinates. Apply cyclesMap and
-quotient naturality to obtain the representative transport formulas. Naturality
-of cone inclusions and the shift homology isomorphism gives localization squares.
-The proved relativeConnecting naturality supplies the last two squares. Resolution
-comparisons are the identity-coefficient instance of raw-class naturality. -/
+Its negative forgetful image is the torsor class in `H¹`. -/
 theorem divisor_torsor_boundary_signs :
     ∃ e : ∀ (T : Scheme.{u}) (W : T.Opens)
       (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G),

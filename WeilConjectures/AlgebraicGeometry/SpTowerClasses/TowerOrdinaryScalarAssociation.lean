@@ -56,24 +56,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Balanced scalar association for already constructed integral inverse image.
 The coefficient arrows are specified by their ordinary adjuncts; no derived
-counit or K-flatness condition occurs in the statement.
-
-Proof: restrictedScalarAdjunction_exists gives the normalized adjunction from
-integral inverse image followed by ordinary scalar extension to geometric direct
-image followed by coefficient restriction. The source scalar adjunction composed
-with the geometric adjunction has this same right adjoint. Uniqueness of left
-adjoints gives alpha. The Hom equivalence of the first adjunction sends
-alpha_M followed by t to the Hom equivalence of the second adjunction applied
-to t; this follows from the unit equation for leftAdjointUniq and naturality.
-The recorded Forget functor is faithful: its morphism equation identifies every
-component with the underlying additive component of the original module map.
-To prove either endpoint equation, transpose by the composite source adjunction,
-forget, and postcompose with chi. The normalized target adjunction identifies
-the left side with the abelian transpose of forgetIso followed by the target
-scalar adjunct. scalarUnit_abelianTranspose and scalarRoot_abelianTranspose
-identify exactly these two abelian transposes with the corresponding source
-arrows. Cancel chi, use faithfulness of Forget, and then injectivity of the
-source Hom equivalence. No faithfulness of derived evaluation is used. -/
+counit or K-flatness condition occurs in the statement. -/
 theorem ordinaryScalarAssociation_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

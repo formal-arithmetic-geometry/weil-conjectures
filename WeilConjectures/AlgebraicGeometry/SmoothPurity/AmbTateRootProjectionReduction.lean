@@ -59,10 +59,19 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualTowerCore
 
 /-! # Root-projection reduction of finite ramified Tate coefficients
 
+The projection from the pro-étale root tower to a finite level identifies the finite
+ramified Tate twist with finite roots of unity tensored with the coefficients, compatibly
+with pullback (`ambTateRootProjectionReduction`).
+
+## Implementation details
+
 All levels below are positive: index `r` means exponent `r + 1`, and coefficient
 index `n` means quotient by the uniformizer to exponent `n + 1`. Pullback maps
 are specified by their direct-image adjuncts. This retains the specified maps,
 and expresses their coherence using the actual fibre-product comparisons.
+The inverses constructed use only that the finite coefficients are killed by the relevant
+power of `ℓ`; neither flatness over `ℤ/ℓ^r` nor divisibility of `n` by the ramification index
+is assumed.
 
 ## References
 
@@ -172,8 +181,8 @@ def ambTateDirectSection {T T' : Scheme.{u}} (v : T' ⟶ T)
   f.val.app (op U) x
 
 /-- The conclusion, with every map fixed by its specified root or tensor formula.
-The fields c and b are the direct-image adjuncts of c_L and b_v. The square is
-therefore exactly the adjunct of the displayed inverse-image square in the node. -/
+The fields `c` and `b` are the direct-image adjuncts of `c_L` and `b_v`, so the square is the
+adjunct of the inverse-image reduction square. -/
 structure AmbTateRootProjectionData where
   /-- Reassociation for the prescribed finite twist. -/
   j : ∀ T : AmbTateBase l, purTwistFiniteOne T.val l E n ≅ ambTateReduced l E n T.val
@@ -903,103 +912,8 @@ private theorem ambSquare (d : AmbRootTowerPullbackCoherence.{u} l)
     _ _ _ _ (d.square (Padic.coefficientExtensionRing l E (n + 1))
       r.val r.property v)
 
-/-- Root-projection reduction with arbitrary ramification and annihilated finite coefficients.
-
-Proof:
-
-1. Give $L_T$ its $Z_T$-action by $(a x)_s=x_s^{a\bmod\ell^s}$; the power transitions respect
-reduction of the exponent, so this is an action on compatible tuples. In additive module notation,
-define $j_T((x\otimes b)\otimes a)=x\otimes ba$ and its inverse by $x\otimes
-a\mapsto(x\otimes1)\otimes a$. The balancing relations make both maps well defined, and their
-composites are the identity on pure tensors. Sheafify these natural sectionwise formulas. The
-definition of $P_T$ identifies the first source with the prescribed finite twist.
-
-2. The projections $p_{r,T}$ are locally surjective. Indeed, apply lem-pur-twist-root-transitions
-to every consecutive power map. The general-site abelian epi criterion makes it locally surjective
-on underlying sets, and the set epi criterion makes it an epimorphism of set sheaves. Given an
-object $U$ and $u\in\mu_{\ell^r}(U)$, cover $U$ by the affine objects $V_i$ weakly contractible
-for the full $T_{\mathrm{proet}}$ site. On each fixed $V_i$, every consecutive transition is
-surjective on sections by that precise weak contractibility assertion. Set $x_r=u|_{V_i}$, define
-$x_s=u|_{V_i}^{\ell^{r-s}}$ for $s<r$, and choose recursively $x_{s+1}$ above $x_s$ for $s\geq r$.
-This gives a compatible tuple, hence an element of $L_T(V_i)$ with $r$th projection $u|_{V_i}$.
-All uses are on the full site; no infinite refinement of etale covers is asserted.
-
-3. Compute the kernel on every object $U$. If $x=(x_s)_s\in L_T(U)$ has $x_r=1$, put
-$y_s=x_{s+r}$. Since $x_{s+r}^{\ell^s}=x_r=1$, this really belongs to $\mu_{\ell^s}(U)$, and
-$y_{s+1}^\ell=y_s$. Also $y_s^{\ell^r}=x_s$. Conversely $(\ell^r y)_r=y_r^{\ell^r}=1$ for every
-$y$. Thus in additive notation $\ker p_r(U)=\ell^rL_T(U)$, with an explicit division map on the
-kernel, compatible with restrictions.
-
-4. Put $H=L_T\otimes_{Z_T}A_T$, which is killed by $\ell^r$ since $\ell^rA=0$. For local sections
-$u$ of $\mu_{\ell^r}$ and $a$ of $A_T$, choose local lifts $x$ of $u$ by step 2 and set
-$B(u,a)=x\otimes a$. Two lifts differ by $\ell^r y$ by step 3, so their tensors differ by
-$y\otimes\ell^ra=0$. The local outputs therefore glue uniquely and commute with restrictions.
-Addition in either input follows by choosing lifts $x+x'$ and by distributivity of the tensor. For
-fixed $a$ this is an additive map to $H$ on the slice site, so lem-pur-torsion-sheaf-constant-
-module (2) makes it $R_{r,T}$-linear; both source and target are killed by $\ell^r$. Consequently
-$B(cu,a)=B(u,ca)$ for local $c\in R_{r,T}$, and $B(u,aa')=a'B(u,a)$. The universal property of the
-sheaf tensor gives an $A_T$-linear map $D_{r,T}\to H$. Conversely $x\otimes a\mapsto p_r(x)\otimes
-a$ is $Z_T$-balanced, since the action in step 1 projects to exponent reduction. Both composites
-are identity: on $x\otimes a$ choose the lift $x$, and on $u\otimes a$ use any local lift of $u$.
-The pure-tensor determination statement proves equality of the resulting sheaf maps. Compose
-$H\cong D_{r,T}$ with $j_T$ to obtain precisely $\theta_{r,T}$. No exactness of tensoring with $A$
-was used.
-
-5. For $r'\geq r$, apply both sides of the asserted transition equation to $j_T^{-1}(x\otimes a)$.
-They give respectively $x_{r'}^{\ell^{r'-r}}\otimes a$ and $x_r\otimes a$, which agree by
-compatibility of the tuple. Pure tensors determine the maps, so
-$(P_{r',r}\otimes1)\theta_{r',T}=\theta_{r,T}$. In particular the transition is
-$\theta_{r,T}\theta_{r',T}^{-1}$ and is invertible. For three levels, the exponent identity
-$\ell^{r''-r'}\ell^{r'-r}=\ell^{r''-r}$ proves composition; at equal levels the exponent is $1$.
-The tensors over the different finite rings are well defined because each power map is linear
-after restriction to the larger finite ring and $A$ factors through the smaller quotient.
-
-6. For $v:T'\to T$, lem-pur-roots-of-unity-inverse-image-iso (1)-(2) says exactly that $c^v_s$
-commutes with the power transitions and is semilinear over the constant finite ring maps. It also
-obeys identity and composition laws under the canonical inverse-image identifications: by def-pur-
-roots-of-unity-inverse-image its adjunct on an object $U\to T$ is the pullback of the same unit
-along $T'\times_TU\to U$. For $w:T''\to T'$, the iterated pullback on
-$T''\times_{T'}(T'\times_TU)$ is the pullback on $T''\times_TU$, because the canonical fibre-
-product identification commutes with the projections and pullback of global functions respects
-composition. Hence these adjuncts are equal, and the adjunction bijection gives $c^{v\circ
-w}_s=c^w_s\,w^{-1}(c^v_s)$ after the comparison isomorphism. The identity projection gives
-$c^{\mathrm{id}}_s=\mathrm{id}$. These are equalities of the specified maps, rather than choices
-of isomorphisms.
-
-7. The maps $c^v_s\,v^{-1}p_{s,T}$ form a cone by the transition equation in step 6. Apply the
-universal property of the limit on $T'_{\mathrm{proet}}$ to obtain $c^v_L:v^{-1}L_T\to L_{T'}$.
-Its projection equations are exactly those of the statement, and joint uniqueness of maps to a
-limit proves uniqueness. It is semilinear for the constant $\mathbf Z_\ell$ map: after $p_{s,T'}$
-this says that pulling back an exponent and reducing it modulo $\ell^s$ gives the same scalar as
-reducing first, followed by the finite constant-ring map. This is the semilinearity in step 6 and
-the coordinatewise action in step 1, so the projections prove the assertion. This construction
-uses a cone into $L_{T'}$, never an assertion that $v^{-1}$ preserves the infinite limit.
-
-8. The structure maps $c^v_\Lambda:v^{-1}\Lambda_T\to\Lambda_{T'}$ of the constant coefficient
-rings ($\Lambda=\mathbf Z_\ell,\mathbf Z/\ell^r,A$) are the canonical ring-sheaf isomorphisms of
-lem-pe-constant-left-module-inverse-image for the geometric morphism $v_{\mathrm{proet}}$; this is
-the identification of the statement. Apply lem-weil-pbc-ringed-topoi-module-pullback-tensor to the
-pro-etale geometric morphism and these constant coefficient ring maps. Together with $j_T,j_{T'}$
-this identifies $v^*P_T$ with $v^{-1}L_T\otimes_{v^{-1}Z_T}A_{T'}$. The semilinear map of step 7
-induces $x\otimes a\mapsto c^v_L(x)\otimes a$; this is the required $b_v$ after the stated
-identifications. On a pure tensor, the two sides of the required square are
-$p_{r,T'}c^v_L(x)\otimes a$ and $c^v_r(v^{-1}p_{r,T}(x))\otimes a$. Step 7 equates these
-expressions. The pure-tensor determination property gives equality of the sheaf morphisms, proving
-the full square with the specified root maps.
-
-9. For the identity morphism, every projection of $c_L^{\mathrm{id}}$ equals $p_s$, so
-$c_L^{\mathrm{id}}=\mathrm{id}$. For $T''\xrightarrow w T'\xrightarrow v T$, project
-$c_L^w\,w^{-1}(c_L^v)$ to level $s$. Using step 7 twice gives $c_s^w\,w^{-1}(c_s^v)\,(v\circ
-w)^{-1}p_{s,T}$ after the canonical comparison; step 6 identifies this with $c_s^{v\circ
-w}\,(v\circ w)^{-1}p_{s,T}$. Limit uniqueness gives the composition law for $c_L$. On a pure
-tensor both the composite pullback map for $b_w,w^*b_v$ and $b_{v\circ w}$ therefore send
-$x\otimes a$ to $c_L^{v\circ w}(x)\otimes a$. Identity and composition follow from pure-tensor
-determination, the canonical monoidal inverse-image comparisons, and the compatibility of the
-constant-ring identifications with composition of geometric morphisms stated in lem-pe-constant-
-left-module-inverse-image. On the empty scheme all these formulas are the unique maps of zero
-sheaves. Every inverse constructed in step 4 uses only $\ell^rA=0$, so the proof imposes neither
-flatness over $\mathbf Z/\ell^r$ nor any divisibility of $n$ by the ramification index.
--/
+/-- Root-projection reduction with arbitrary ramification and annihilated finite coefficients:
+the data `AmbTateRootProjectionData l E n` exist. -/
 theorem ambTateRootProjectionReduction :
     Nonempty (AmbTateRootProjectionData l E n) := by
   classical

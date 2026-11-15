@@ -74,13 +74,7 @@ private theorem localization_transport
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
 
-/-- The published ambient pullback square is the exact descent of the ordinary square.
-Proof: the normalization theorem identifies each canonical derived compositor with
-exact localization of the ordinary compositor. Its right-adjoint conjugate has the
-same sectionwise fibre-product formula as exchangeModuleComposition, so uniqueness
-identifies the ordinary isomorphisms. Exact localization preserves inverse,
-composition and equality transport. Substitute these identities into the two
-compositors defining the square. -/
+/-- The published ambient pullback square is the exact descent of the ordinary square. -/
 theorem StrictTowerRingedSquare.ambientSquare_localization
     {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}

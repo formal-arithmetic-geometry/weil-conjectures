@@ -189,17 +189,7 @@ def derivedShiftedSingleEndpoint
     ((P.mapDerivedCategorySingleFunctor 0).hom.app B)⟦(1 : ℤ)⟧' ≫
     ((DerivedCategory.singleFunctor D 0).map t)⟦(1 : ℤ)⟧'
 
-/-- Transport a sheaf-level derived square through exact constant towers.
-
-Proof: realize the source derived arrow as an Ext class. Exact-functor Ext
-compatibility identifies the two paths around the functor square, conjugated by
-its specified isomorphism. Naturality under source precomposition and shifted
-target postcomposition transports the given endpoint square. The two endpoint
-identities identify the conjugated endpoints with s and t. Finally cancel the
-inverse single comparison. This gives the displayed single and shift comparisons.
-The argument applies to arbitrary source and target objects and does not require
-s, t, z or a to be invertible.
--/
+/-- Transport a sheaf-level derived square through exact constant towers. -/
 theorem constant_tower_derived_square {X Y : Scheme.{u}}
     [hDiagY : HasDerivedCategory.{u + 1} (DiagonalAb Y)]
     [hDiagX : HasDerivedCategory.{u + 1} (DiagonalAb X)]

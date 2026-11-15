@@ -18,17 +18,16 @@ import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 /-!
 # Connectivity of the derived tensor product
 
-The first factor has Tor amplitude in `[a, ∞)`, and the second factor has no
-cohomology below `b`. We use bounded dévissage for each canonical upper truncation
-of the second factor. An unrestricted categorical K-flat model of the first factor
-computes every tensor product. The upper truncations have colimit the original
-complex, tensoring preserves this colimit, and exact filtered colimits preserve
-exactness at each degree below `a + b`. Thus no comparison between the independent
-coefficient K-flat predicate and categorical K-flatness is needed.
+If the first factor has Tor amplitude in `[a, ∞)` and the second factor has no
+cohomology below `b`, then their derived tensor product has no cohomology below `a + b`.
 
-The finite dévissage is the existing `DerivedCategory.isGE_obj_of_isGE` from
-`WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure`.
-The exact-colimit step is proved below from Mathlib's `colim.exact_mapShortComplex`.
+## Implementation details
+
+The bound is first proved for bounded second factors by dévissage
+(`DerivedCategory.isGE_obj_of_isGE`) and then passed to the colimit of the canonical upper
+truncations, using an unrestricted categorical K-flat model of the first factor and exactness
+of filtered colimits (`colim.exact_mapShortComplex`). Thus no comparison between the
+coefficient K-flat predicate and categorical K-flatness is needed.
 
 ## References
 
@@ -158,13 +157,7 @@ private theorem etale_tensor_isGE_of_single
   exact tensor_isGE_of_single A B a b hsingle
 
 /-- If `A` has Tor amplitude in `[a, ∞)` and `B` has no cohomology below `b`,
-then the derived tensor `A ⊗ᴸ B` has no cohomology below `a + b`.
-
-A categorical K-flat model
-computes the tensors before passing to this colimit. Exactness of filtered colimits
-transfers the lower cohomology bound to the original second factor. This gives the
-connectivity estimate used in Stacks Tag 0F1J, first reduction paragraph.
--/
+then the derived tensor `A ⊗ᴸ B` has no cohomology below `a + b`. -/
 theorem derivedTensor_isZero_homology_of_torAmplitudeGE
     (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u})
     (A B : DerivedCategoryModule Λ T) (a b : ℤ)

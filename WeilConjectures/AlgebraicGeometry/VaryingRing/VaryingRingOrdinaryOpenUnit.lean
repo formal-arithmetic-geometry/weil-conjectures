@@ -346,19 +346,7 @@ private theorem pasteComparison_hom (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : L₂ 
 
 end PasteComparison
 
-/-- The inverse open comparison is the mate of the specified pullback comparison.
-Proof: the inverse derived evaluation comparison evalJInv is defined as the inverse
-mate of evalG. Recover this unit equation through the fully faithful degree-zero
-embedding, using the exact-single naturality and composition equations. Apply the
-constant-tower functor termwise to the ordinary unit equation. The exact-single
-comparison transports this to the derived strict open adjunction, because the latter
-is the localization of the termwise ordinary adjunction. Finally conjugate by the
-ordinaryRealization_eq equality isomorphisms. Naturality cancels these transports.
-Explicitly, writing E for realization, g for the pullback comparison, and e for the
-open comparison, the resulting unit equation on N is
-E_U.map(eta_N) ; g.hom_(j_! N) = eta'_(E_U N) ; G_j.map(e.inv_N).
-The unit characterization of mateEquiv identifies its unique mate with g.hom,
-which is the displayed equality. No cartesian square is involved. -/
+/-- The inverse open comparison is the mate of the specified pullback comparison. -/
 theorem ordinaryOpen_mate (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     mateEquiv (moduleJAdj R φ j) (StrictTower.jAdj (R n) j)

@@ -14,9 +14,13 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearPullbackCubeCoher
 /-!
 # Pullback compatibility of the intrinsic semilinear alpha
 
-The ordinary system cube is stated first. Its exact localization is the derived
-cube, prior to taking any proper direct-image mate. The auxiliary isomorphisms
-only localize the dependency's specified ordinary comparisons.
+This file proves that the intrinsic semilinear alpha comparison is compatible with pullback:
+first the cube on ordinary systems, then its exact localization, which is the derived cube
+prior to taking any proper direct-image mate.
+
+## Implementation details
+
+The auxiliary isomorphisms only localize the dependency's specified ordinary comparisons.
 
 ## References
 
@@ -360,9 +364,8 @@ private theorem localize_cube_functors
     (ExactFunctor.of Df)
     al0 al₁0 bi0 bk0 gp0 gr0 hOrd M
 
-/-- Exact localization of the specified unit-normalized open comparison.
-This is the actual ordinary moduleBeta localized, with the standard composition
-isomorphisms; no derived comparison is selected independently. -/
+/-- Exact localization of the specified unit-normalized open comparison `moduleBeta`, with
+the standard composition isomorphisms. -/
 def alphaPullbackBeta {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -371,9 +374,8 @@ def alphaPullbackBeta {U' U X' X : Scheme.{u}}
     Functor.mapDerivedCategoryNatIso (moduleBeta R φ a j' j g h hsq) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Exact localization of the specified inverse-image square compositor.
-The square comparison is induced by moduleGComp, hence by the section-normalized
-ordinary direct-image comparison, with its prescribed adjunction units. -/
+/-- Exact localization of the specified inverse-image square compositor, induced by
+`moduleGComp`. -/
 def alphaPullbackSquareG {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     (h : k ≫ p = r ≫ i) : G R φ i ⋙ G R φ r ≅ G R φ p ⋙ G R φ k :=
@@ -453,30 +455,7 @@ private theorem square_inv_localized {V W S T : Scheme.{u}}
         (moduleSquareG R φ k r p i h).inv := by
   exact (localizedArrow_iso_inv _ _ _ _ _).symm
 
-/-- The pullback cube already commutes on ordinary semilinear systems.
-Proof (the node's seven steps):
-1. Factor Q through T = V ×_Z W. The canonical lift s : U → T is clopen.
-   Base change gives s₁ : U₁ → T₁, its clopen image, and its complementary open.
-2. For an ordinary system M use the two cartesian open comparisons to write the
-   common source as b₁! q₁* c* M. The open-adjunction Hom bijection reduces
-   equality to equality after restriction along b₁.
-3. Transpose the defining open unit for moduleBeta. The triangle identity says
-   its restriction is identity under the open-unit identifications.
-4. The clopen modulePi is the direct-image unit followed by the inverse of the
-   open-to-direct-image comparison. Its restriction is the open unit. Therefore
-   restriction of moduleAlpha along k is r* applied to the inverse unit for i.
-5. Restrict both cube paths along k₁. By steps 3 and 4 both give r₁* c* applied
-   to the inverse unit for i. The specified compositors agree: their right
-   adjoints are the same identity-on-sections direct-image comparison.
-6. On the complement of s₁ the common target is zero. On the image the two
-   restrictions agree by step 5. Sheaf uniqueness on this disjoint open cover,
-   coefficientwise and compatibly with the transitions, gives the ordinary
-   system equality. The Hom bijection in step 2 removes the restriction.
-7. Apply the ordinary transformations degreewise to unbounded complexes and
-   localize at quasi-isomorphisms. Exactness preserves quasi-isomorphisms and
-   the localization universal property preserves the equality and composition.
-   This gives the derived equality before any proper direct-image mate is taken.
--/
+/-- The pullback cube already commutes on ordinary semilinear systems. -/
 theorem moduleAlpha_baseChange
     {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}
     (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)
@@ -541,30 +520,7 @@ theorem moduleAlpha_baseChange
       w w₁ wk wi wp wr ((extension R φ i).obj M))
 
 /-- The two displayed alpha cube paths agree after exact localization, on every
-unbounded derived system, prior to taking any proper direct-image mate.
-Proof (the node's seven steps):
-1. Factor Q through T = V ×_Z W. The canonical lift s : U → T is clopen.
-   Base change gives s₁ : U₁ → T₁, its clopen image, and its complementary open.
-2. For an ordinary system M use the two cartesian open comparisons to write the
-   common source as b₁! q₁* c* M. The open-adjunction Hom bijection reduces
-   equality to equality after restriction along b₁.
-3. Transpose the defining open unit for moduleBeta. The triangle identity says
-   its restriction is identity under the open-unit identifications.
-4. The clopen modulePi is the direct-image unit followed by the inverse of the
-   open-to-direct-image comparison. Its restriction is the open unit. Therefore
-   restriction of moduleAlpha along k is r* applied to the inverse unit for i.
-5. Restrict both cube paths along k₁. By steps 3 and 4 both give r₁* c* applied
-   to the inverse unit for i. The specified compositors agree: their right
-   adjoints are the same identity-on-sections direct-image comparison.
-6. On the complement of s₁ the common target is zero. On the image the two
-   restrictions agree by step 5. Sheaf uniqueness on this disjoint open cover,
-   coefficientwise and compatibly with the transitions, gives the ordinary
-   system equality. The Hom bijection in step 2 removes the restriction.
-7. Apply the ordinary transformations degreewise to unbounded complexes and
-   localize at quasi-isomorphisms. Exactness preserves quasi-isomorphisms and
-   the localization universal property preserves the equality and composition.
-   This gives the derived equality before any proper direct-image mate is taken.
--/
+unbounded derived system, prior to taking any proper direct-image mate. -/
 theorem alpha_baseChange
     {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}
     (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)

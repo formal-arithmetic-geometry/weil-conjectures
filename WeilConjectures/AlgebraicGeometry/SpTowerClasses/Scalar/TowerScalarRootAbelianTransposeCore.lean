@@ -207,12 +207,6 @@ private theorem rightSection
 /--
 The finite root normalization comparison after expanding both scalar adjunction
 transposes to their units.  This is the χ-free core of the component calculation.
-
-Proof: evaluate the scalar unit as the sheafified pure tensor, evaluate the
-ordinary geometric transpose on that tensor, and use the normalized line
-comparison.  The Kummer boundary square, `hk`, and `d.kummer_roots` identify
-its root with `restrictRoot`; `LinePullback.normalization` then gives the
-same finite Tate tensor as the abelian transpose after `d.rootIso`.
 -/
 theorem scalarRoot_abelianTranspose_core
     {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -76,24 +76,7 @@ attribute [local irreducible] constantResidueHomEquiv
 
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
-/-- Evaluation of scalar extension represents additive maps from the roots sheaf.
-
-Proof: restrict the sequence-site scalar-extension presheaf to level n. Its value
-at U is A_n(U) tensor over R_n(U) with the evaluated root module. Vertical
-restriction commutes with sheafification: covering sieves in the sequence topology
-restrict to exactly the covering sieves at level n, and the sheafification unit
-is locally bijective on both sites. The tensor/restriction adjunction consequently
-identifies morphisms from the evaluated extension with R_n-linear maps from the
-evaluated root module to N with scalars restricted along the coefficient map.
-The section and restriction equations of the recorded Forget functor identify
-its underlying additive sheaf with the n-th level of the forgotten root module.
-Compose with rootForget to identify this with the actual roots sheaf. Additive
-maps between sheaves killed by ell^(n+1) are automatically linear over the
-constant ZMod sheaf, by local lifting of scalars to constant integer sections.
-These identifications give the displayed Hom equivalences. Postcomposition
-commutes with each identification. The tensor adjunction sends x to 1 tensor x;
-linearity gives the displayed formula for arbitrary a. No normalization of the
-derived Chern comparisons is required. -/
+/-- Evaluation of scalar extension represents additive maps from the roots sheaf. -/
 theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :

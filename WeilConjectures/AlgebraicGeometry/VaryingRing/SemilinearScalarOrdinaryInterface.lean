@@ -68,9 +68,7 @@ def scalarTowerOpenComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
   Adjunction.leftAdjointCompIso (scalarTowerOpenAdj B j) (scalarTowerOpenAdj B k)
     (scalarTowerOpenAdj B (j ≫ k)) (StrictTower.towerGComp B j k).symm
 
-/-- Ordinary extension respects equality of the open scheme map.
-Proof: substitute the equality of maps. Proof irrelevance identifies the open-immersion
-instances, so both chosen adjoints are definitionally the same functor. -/
+/-- Ordinary extension respects equality of the open scheme map. -/
 theorem scalarTowerOpen_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     StrictTower.towerJ B f = StrictTower.towerJ B g := by

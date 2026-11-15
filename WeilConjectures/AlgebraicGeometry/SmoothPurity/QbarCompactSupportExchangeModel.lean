@@ -182,16 +182,11 @@ def CbcScalarInverseBetaSpec
         ((pbcStageLocalization l Ω Y' F).map
           (ObjectProperty.homMk (X := ⟨_, hs⟩) (Y := ⟨_, ht⟩) (inverse h K.obj)))
 
-/-- Coherent descent data for the specified compact-support exchange. This is a
-presentation of the two composites, not an alternative coefficient category.
-`source` and `target` fix the rational functors on every integral object and map;
-localization then fixes them on every rational map. `normalized` fixes the exchange
-on every integral object, for every generating tuple of the adic ideal.
-`sourceBeta` and `targetBeta` fix both scalar comparisons by localization of the
-proper counit and open unit mates. The completed pullback factors are fixed by
-`scalarPull.unit` and `scalarPull'.unit`, retaining their quotient augmentations.
-The `CoherentExactMorphism` and `Hom` fields retain the associator, shift and
-exchange-compatibility equations required by the recorded descent proposition.
+/-- Coherent descent data for the specified compact-support exchange: a presentation of the
+two composites, not an alternative coefficient category. `source` and `target` fix the
+rational functors on integral objects and maps, `normalized` fixes the exchange on every
+integral object and every generating tuple of the adic ideal, and `sourceBeta`, `targetBeta`
+fix the scalar comparisons by localization of the proper counit and open unit mates.
 No invertibility assumption is included. -/
 structure CbcQbarExchangeModel where
   scalarPull : CbcCompletedScalarComparison l Ω g

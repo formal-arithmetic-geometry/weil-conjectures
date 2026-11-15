@@ -20,16 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The coefficient unit comparison is normalized on constant integer sections.
-
-Proof: apply the ringUnderlying comparison to the coefficient module.  The ring
-addition, multiplication, zero and one equations, together with module scalar
-compatibility, make it a linear isomorphism and the ordinary transition equation
-assembles it over the tower.  On constant integer sections the composite sends
-one to one and preserves addition, hence it fixes every integer.  The universal
-property defining `integerGenerator`, the adjunction defining `integerPull`, and
-sheafification of constant sections then give the displayed equality.
--/
+/-- The coefficient unit comparison is normalized on constant integer sections. -/
 theorem integralInverseSystem_unit_normalization (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

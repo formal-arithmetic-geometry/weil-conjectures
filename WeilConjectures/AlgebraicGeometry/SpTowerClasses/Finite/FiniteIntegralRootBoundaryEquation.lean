@@ -38,11 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.ofIsGrothendieckAbelian HomologicalComplex.quasiIso
 
 /-- Exact comparison of the positive Kummer boundary is comparison of the
-Yoneda composite, for any units extension.
-
-Proof: apply the displayed integral roots comparison to the Yoneda composite.
-The positive Kummer class is definitionally composition with the given
-short-exact extension class, so this is the same input. -/
+Yoneda composite, for any units extension. -/
 theorem finiteIntegralRootClass_boundary_eq (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (n : ℕ) (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
     (x : Sheaf.H T.gmSheaf 1) :

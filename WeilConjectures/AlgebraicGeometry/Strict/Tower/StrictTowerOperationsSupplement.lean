@@ -72,10 +72,7 @@ abbrev exchangeTowerModulePull : exchangeTowers V R ⥤ exchangeTowers U S :=
 abbrev exchangeTowerModulePush : exchangeTowers U S ⥤ exchangeTowers V R :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingModuleDirectImage f R S c)
 
-/-- Exactness of termwise inverse image on the whole strict diagram category.
-Proof: kernels and cokernels in the functor category are pointwise. The ordinary
-identified-coefficient module inverse image preserves both, since its coefficient
-map is an isomorphism. Evaluation at every index proves both preservation claims. -/
+/-- Exactness of termwise inverse image on the whole strict diagram category. -/
 theorem exchangeTowerModulePull_exact :
     PreservesFiniteLimits (exchangeTowerModulePull f R S c) ∧
       PreservesFiniteColimits (exchangeTowerModulePull f R S c) := by
@@ -116,11 +113,7 @@ def exchangeTowerAdjunction :
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-/-- The two coefficient paths agree over the equality of composite scheme maps.
-Proof: the commutative scheme square identifies f' followed by g with g' followed
-by f. The coefficient coherence field, in the reverse direction, identifies the
-isomorphism components over that equality. Dependent-pair extensionality gives
-the displayed equality, so transport does not choose any additional ring map. -/
+/-- The two coefficient paths agree over the equality of composite scheme maps. -/
 theorem StrictTowerRingedSquare.exchangeCoefficients_eq (r : StrictTowerRingedSquare sq) :
     (⟨f' ≫ g, proEtaleRingCompositeCoefficients f' g r.RY r.RY' r.RX' r.cg r.cf'⟩ :
       Σ q : X' ⟶ Y,

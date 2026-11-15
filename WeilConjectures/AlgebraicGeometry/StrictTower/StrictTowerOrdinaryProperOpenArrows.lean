@@ -965,13 +965,7 @@ private theorem module_localization_paste
 end DescentCalculus
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow.
-Proof: exact localization preserves the open-unit transpose and its inverse,
-the direct-image unit on the clopen, and the unit-preserving adjoint compositors.
-ClopenProjectorDescent expresses this equality by its equation after the localization
-functor, which determines the descended natural transformation uniquely.
-Consequently each factor of singleAlpha localizes to the corresponding factor in alpha;
-functoriality of localization identifies their composites. -/
+/-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow. -/
 theorem alpha_eq_localized_singleAlpha {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

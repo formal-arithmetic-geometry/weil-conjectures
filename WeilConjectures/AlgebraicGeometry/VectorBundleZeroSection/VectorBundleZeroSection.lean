@@ -25,10 +25,18 @@ import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricAlgebraS
 /-!
 # The vector bundle Spec Sym(F), its augmentation and zero section
 
+This file constructs the vector bundle `Spec Sym(F)` of a module sheaf `F`, its augmentation,
+its zero section, affine charts and frame trivializations.
+
+## Implementation details
+
 The relative-spectrum anti-equivalence is the one characterized by its structure-algebra
 functor in `affine_morphism_relative_spec`. Its inverse determines the bundle up to the
 unique algebra-compatible isomorphism. The augmentation is chosen from a unique extension
 of the zero linear map, and the zero section is its fully faithful inverse image.
+The equations of `affineChart_spec` are split out as `affineChart_equations`, since the
+relative-spectrum construction and the zero-section comparison are independent of chart
+invertibility.
 
 ## References
 
@@ -96,9 +104,7 @@ def structureAlgebraFunctor (S : Scheme.{u}) :
       h.unop.hom.left.appLE _ _ _ ≫ k.unop.hom.left.appLE _ _ _
     rw [Scheme.Hom.appLE_comp_appLE]
 
-/-- The structure-algebra functor is an equivalence.
-Proof: the relative-spectrum theorem provides an equivalence whose object and morphism
-characterizations give a natural isomorphism to this concrete functor. -/
+/-- The structure-algebra functor is an equivalence. -/
 theorem structureAlgebraFunctor_isEquivalence (S : Scheme.{u}) :
     (structureAlgebraFunctor S).IsEquivalence := by
   obtain ⟨E, hobj, ρ, hmap, _⟩ := (affine_morphism_relative_spec S).2
@@ -204,11 +210,7 @@ def affineChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
         (SymmetricAlgebraSheaf.sectionMap F (op U.1))))
 
 /-- The augmentation is the unique map killing every degree-one section, and on sectionwise
-symmetric algebras is the identity on scalars and zero on generators.
-Proof: the core symmetric-algebra universal property with the zero linear map gives
-existence and uniqueness. Before sheafification the map is SymmetricAlgebra.algebraMapInv;
-uniqueness on scalars and generators identifies the composite with the sheafification unit.
-The under-category compatibility supplies the identity on scalars. -/
+symmetric algebras is the identity on scalars and zero on generators. -/
 theorem augmentation_spec (S : Scheme.{u}) (F : S.Modules) :
     (∀ (U : S.Opens) (x : F.val.obj (op U)),
       (augmentation S F).right.hom.app (op U)
@@ -241,12 +243,7 @@ theorem augmentation_spec (S : Scheme.{u}) (F : S.Modules) :
     | mul a b ha hb => simp only [map_mul, ha, hb]
     | add a b ha hb => simp only [map_add, ha, hb]
 
-/-- The zero section is a section and a closed immersion.
-Proof: the augmentation is an O_S-algebra map, so its spectrum lies over S, giving the
-section identity. On each relative-spectrum affine chart it is induced by the
-augmentation Sym_R(F(U)) → R, which is surjective because it fixes scalars. It is therefore
-the quotient closed subscheme for the augmentation kernel, by the affine closed-immersion
-criterion. These charts cover the total space, so the morphism is a closed immersion. -/
+/-- The zero section is a section and a closed immersion. -/
 theorem zero_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] :
     zero S d F ≫ π S d F = 𝟙 S ∧ IsClosedImmersion (zero S d F) := by
@@ -303,13 +300,7 @@ private theorem zero_pullback (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S
 -- Geometry uses the equivalence API, not the choice of its quasi-inverse.
 attribute [local irreducible] antiEquivalence
 
-/-- The two compatibility equations for the affine relative-spectrum chart.
-This is the equation portion of `affineChart_spec`; it is split out because the
-relative-spectrum construction and the zero-section comparison are independent of
-chart invertibility.
-Proof: use the affine symmetric-algebra section bijection and the relative-spectrum chart
-characterization. Scalar compatibility gives the first equation, and augmentation_spec gives
-the second. -/
+/-- The two compatibility equations for the affine relative-spectrum chart. -/
 theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
     (affineChart S d F U ≫
@@ -353,12 +344,7 @@ theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S
 
 set_option linter.style.haveILetI false in
 /-- The affine charts are isomorphisms over the corresponding base affine opens, and the
-zero section in these charts is exactly the spectrum of the augmentation.
-Proof: quasiCoherentSymmetricAlgebra_affine_comparison identifies affine algebra sections
-with Sym_R(F(U)). Since the structural projection is affine, its inverse image of an affine
-open is affine. Its toSpecΓ map, the counit on sections, and the section comparison are
-isomorphisms, so their spectra give the chart isomorphism. The two compatibility equations
-are exactly affineChart_equations, using scalar compatibility and the augmentation. -/
+zero section in these charts is exactly the spectrum of the augmentation. -/
 theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
     IsIso (affineChart S d F U) ∧
@@ -388,10 +374,7 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
   exact ⟨hi, heq.1, heq.2⟩
 
 /-- On an inclusion of affine opens, the chart change is the spectrum of the
-symmetric-algebra restriction, so these are exactly the affine pieces glued in the node.
-Proof: naturality of the counit algebra isomorphism and of the sheafification unit
-identifies the maps on section rings with SymmetricAlgebraSheaf.restriction. Apply
-naturality of toSpecΓ and contravariant functoriality of Spec. -/
+symmetric-algebra restriction. -/
 theorem affineChart_naturality (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U V : S.affineOpens) (h : U.1 ≤ V.1) :
     Scheme.Hom.resLE (𝟙 (scheme S d F)) ((π S d F) ⁻¹ᵁ V.1) ((π S d F) ⁻¹ᵁ U.1)
@@ -820,14 +803,7 @@ private theorem isIso_of_affineSpace_charts {T X : Scheme.{u}} (I : Type u)
   rw [← hp.flip.isoPullback_inv_snd]
   infer_instance
 
-/-- The frame induces an affine-space isomorphism over V with the zero section at the origin.
-Proof: on every affine open inside V the frame gives a module basis. The basis-preserving
-isomorphism SymmetricAlgebra.equivMvPolynomial identifies its symmetric algebra with the
-polynomial algebra and its generators with the variables. The affine relative-spectrum
-charts therefore identify trivializationMap with an isomorphism over V. These maps agree
-on overlaps because their coordinates are the restrictions of j(e_i), so they glue.
-The augmentation kills each e_i, hence all coordinates of the zero section vanish;
-AffineSpace.homOfVector identifies this with the standard affine-space zero section. -/
+/-- The frame induces an affine-space isomorphism over V with the zero section at the origin. -/
 theorem trivializationMap_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V) :
     IsIso (trivializationMap S d F V e) ∧
@@ -867,15 +843,7 @@ theorem trivializationMap_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : 
       exact zero_coordinateMap S d F V (frameSection S d F V e i.down)
 
 /-- Two frames on an overlap differ by an invertible matrix of regular functions, and the
-same matrix changes their degree-one coordinates (with no transpose or dual convention).
-Proof: the composite of the two frame isomorphisms is an automorphism of the finite free
-module sheaf. Its values on the standard global basis have global coefficient sections,
-giving G. The inverse automorphism gives H. Applying their composites to each basis
-vector proves GH = HG = I. These coefficients give the displayed equation for frame
-sections on W, whether or not W is affine. The degree-one map j is O_S-linear; applying
-it and the algebra isomorphism to that equation gives the coordinate equation, with
-coefficients pulled back along the restricted projection. For d = 0 all sums are empty
-and the unique empty matrices are mutual inverses. -/
+same matrix changes their degree-one coordinates (with no transpose or dual convention). -/
 theorem transition_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (W : S.Opens) (e e' : Trivialization S d F W) :
     ∃ G H : Matrix (Fin d) (Fin d) (S.presheaf.obj (op W)),

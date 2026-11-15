@@ -65,8 +65,7 @@ private theorem presheafHom_map_eq {T : Scheme.{u}} (L M : T.Modules)
         (Over.w f) (Over.w f) := by
   simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
 
-/-- Restricting a pulled-back global map gives its pullback on the smaller object.
-Proof: use the pseudofunctor restriction formula on a mapped global morphism. -/
+/-- Restricting a pulled-back global map gives its pullback on the smaller object. -/
 theorem pullbackMap_presheaf_map {T : Scheme.{u}} (L M : T.Modules)
     {A B : Over T} (f : B ⟶ A) (s : L ⟶ M) :
     (modulesPseudofunctor.presheafHom L M).map f.op ((pullback A.hom).map s) =

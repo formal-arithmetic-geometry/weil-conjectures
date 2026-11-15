@@ -291,15 +291,7 @@ noncomputable def ComparisonCondition
     (t : ComparisonHom G F₁ F₂) : Prop :=
   ComparisonFamilyCondition G F₁ F₂ (fun P Q ↦ (τ.app P).app Q) t
 
-/-- A natural comparison of tensor complexes descends uniquely to the derived tensor.
-Proof: resolve the second variable by functorial flat complexes. Since F₂ preserves
-flat objects and colimits, their images are K-flat. The mixed target tensor is therefore
-a total left derived bifunctor, with counit the two exact-functor comparisons followed
-by the tensor-localization counit. Apply its universal property to the image under G
-of the source tensor counit followed by the given comparison. Its factorization equation
-is the displayed model normalization. Naturality comes from the resulting natural
-transformation. Conversely, a normalized natural family gives a natural transformation;
-the uniqueness part of the same universal property identifies it with the constructed one. -/
+/-- A natural comparison of tensor complexes descends uniquely to the derived tensor. -/
 theorem exists_unique_comparison
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]

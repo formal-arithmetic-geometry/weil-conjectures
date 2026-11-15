@@ -165,8 +165,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 
 /-! # Vector-bundle integration charts and local trace maps
 
-These are the existing coefficient, chart and normalization constructions. Cohomology
-concentration follows by exact inverse image and the affine-space trace on a frame cover.
+These are the coefficient, chart and normalization constructions for vector-bundle
+integration, together with the concentration of the compact-support complex in degree zero.
 -/
 
 @[expose] public noncomputable section
@@ -198,13 +198,7 @@ instance vectorIntegrationZariskiLocallyBijective (S : Scheme.{u}) :
       fun P ↦ Presheaf.isLocallySurjective_toSheafify' J P
     GrothendieckTopology.WEqualsLocallyBijective.mk' J AddCommGrpCat.{u}
 
-/-- The geometric properties needed to form the ordinary compact support of the bundle.
-Proof: the relative spectrum is affine, hence quasi-compact and separated by
-lem-weil-pbc-affine-morphism-permanence. On an affine trivializing open its coordinate
-ring is the polynomial algebra on d generators. The pointwise finite-type criterion
-lem-weil-pbc-lft-pointwise-criterion gives local finite type. Finite type over the
-Noetherian base gives a Noetherian total space by lem-weil-pbc-finite-type-over-noetherian.
--/
+/-- The geometric properties needed to form the ordinary compact support of the bundle. -/
 theorem vectorIntegration_geometry (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
     IsAffineHom (VectorBundleZeroSection.π S d F) ∧
@@ -284,11 +278,7 @@ def vectorIntegrationChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     inv (VectorBundleZeroSection.trivializationMap S d F V e) ≫
       ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V).ι
 
-/-- The inverse-frame square over V → S is Cartesian.
-Proof: the open inverse-image square is Cartesian. The frame's concrete coordinate map
-is an isomorphism over V by proposition-purity-vector-bundles; the coordinate tower is
-the same affine space. Paste this isomorphism square with the open inverse-image square.
--/
+/-- The inverse-frame square over V → S is Cartesian. -/
 theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
     (e : VectorBundleZeroSection.Trivialization S d F V) :
@@ -377,12 +367,7 @@ def VectorIntegrationNormalization (N : ℕ) (hN : 0 < N)
     (ordinaryFinitePullback A V.ι).map f ≫ (ordinaryFiniteUnitPullback A V.ι).hom =
       vectorIntegrationLocalTrace N hN A hA t D S hS d F V e
 
-/-- The bundle compact-support complex has no cohomology outside degree zero.
-
-Proof: choose a finite-rank frame cover. Exchange, coefficient descent and the affine
-trace identify each restriction with the constant complex. Exact inverse image commutes
-with cohomology. The cover detects that the map of each other cohomology sheaf to zero
-is an isomorphism. This also applies to the empty base and to rank zero. -/
+/-- The bundle compact-support complex has no cohomology outside degree zero. -/
 theorem vectorIntegration_cohomology_zero (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

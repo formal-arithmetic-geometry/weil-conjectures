@@ -148,21 +148,7 @@ private theorem constantSection_pullback
   exact Adjunction.unit_leftAdjointUniq_hom_app ((adjY.comp adj).ofNatIsoRight e) adjZ N
 
 /-- A locally constant sheaf on a strict-local fibre is the constant sheaf on its
-original geometric stalk, with the canonical alpha map equal to constant sections.
-
-Proof: pull the locally constant sheaf back to the strict henselization T. A
-trivializing etale cover has a point above its closed point; strict henselianity
-provides a section of this member. Pulling its constant trivialization back along the
-section proves constancy on T. Sheafification of a constant presheaf does not change
-its value on T, so the constant-sheaf functor on T is fully faithful. Its counit is
-therefore an isomorphism on every constant sheaf. The canonical germ restriction r
-identifies the original geometric stalk M with sections of the pullback F. Thus
-C(r) followed by the counit gives an isomorphism C(M) to F. The adjunction triangle
-identifies the induced map on sections, preceded by the constant-section unit, with r.
-Pull this isomorphism back to the fibre. Naturality of the sections pullback map and
-the unit identities for the constant-sheaf adjunctions show that constant sections
-pull back to constant sections. Finally the inverse-image composition isomorphism
-is the one in localAcyclicityAlpha, giving the asserted equality. -/
+original geometric stalk, with the canonical alpha map equal to constant sections. -/
 theorem exists_strictLocalConstantComparison
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']

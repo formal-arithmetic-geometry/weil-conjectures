@@ -58,25 +58,7 @@ def tensorCoefficientKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 attribute [irreducible] tensorCoefficientSheafIso tensorCoefficientKernelMap
 
-/-- The first homogeneous action square, as an equality of sheaf morphisms.
-There is no cohomology or cohomology action in this statement.
-
-Proof: Cancel the monomorphism i to compute the quotient action using hlocal.
-Locally lift the restriction of the homogeneous section through the tensor-pullback
-unit in degree n; the unit is epi by the closed-immersion unit quotient theorem.
-Use b_quotient to identify its image under p. Precompose the proposed square with
-k d for every d. By k_inclusion and b_multiply, multiplication by the chosen lift
-has degree n+d. If d differs from n(e+1), k_orthogonal kills its projection to
-n(e+2); otherwise k_projection leaves exactly the product on that coefficient.
-The ideal-kernel inclusion equation identifies this product with tensoring by the
-lift. The inverse annihilated-module unit and tensor-degree comparisons identify
-it with pushforward of mulTensorPowSection f F e 1. A different local lift changes
-the product by the product of two kernel sections, zero by squareZero. Naturality
-of these comparisons and hrestrict glue the local equalities; hglobal identifies
-the global endomorphism. Finally k_colimit.hom_ext proves the square from its
-restrictions to all k d. When n=0, n+d=d and the same projection calculation uses
-only the diagonal identity for d=0 and orthogonality for d≠0. No positive-degree,
-affineness, or nonzero-section assumption is needed. -/
+/-- The first homogeneous action square, as an equality of sheaf morphisms. -/
 theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

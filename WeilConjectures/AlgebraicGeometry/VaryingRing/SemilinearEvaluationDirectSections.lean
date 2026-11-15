@@ -28,10 +28,7 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- Direct-image evaluation retains sections in the native evaluation carrier.
-Proof: the existing unique comparison is normalized on the common fibre-product
-section carrier. Unfold its choice and apply that normalization to the same section;
-equality on this carrier implies heterogeneous equality in the native carrier. -/
+/-- Direct-image evaluation retains sections in the native evaluation carrier. -/
 theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Modules R φ X) (n : ℕ) (H : Y.ProEtᵒᵖ)
     (x : ((eval R φ Y n).obj ((push R φ f).obj M)).val.obj H) :

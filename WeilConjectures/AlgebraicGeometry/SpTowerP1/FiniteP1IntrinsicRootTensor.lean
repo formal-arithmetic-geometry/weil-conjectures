@@ -151,21 +151,8 @@ private theorem rootHomEquiv_tensor (n : ℕ) [Finite (SpTowerShriek.R l E n)]
   exact (f.val.app W).hom.map_smul _ _
 
 /-- Associated-module realization identifies the two sheafified presentations of
-scalar extension of the finite roots, with every pure tensor fixed.
-
-Proof: apply the module sheafification adjunction defining realization. The
-fixed-scalar tensor sheaf represents balanced maps from the finite roots module
-and the coefficient ring. The intrinsic tensor sheaf defining finiteLine has
-the same universal property by finiteTateLine_universal. Restriction of scalars
-along constant sections identifies the balancing maps: the two maps from
-ZMod(l^(n+1)) are equal because this ring is initial among rings annihilated by
-that exponent. Locally every section of the constant coefficient sheaf comes
-from a constant, so fixed-scalar linearity extends uniquely to linearity over
-the sheaf of rings. Sheafification gives maps in both directions. They carry
-each pure tensor to itself; these tensors locally generate, so both composites
-are identities and the comparison is unique. The displayed scalar-section
-formula is the sheafification unit formula for these tensor maps. The argument
-also applies to the empty scheme, the zero ring, and n=0. -/
+scalar extension of the finite roots, with every pure tensor fixed; this identification is
+unique. -/
 theorem finiteP1_intrinsic_root_tensor (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) :
     ∃! e : (realization l E n T).obj

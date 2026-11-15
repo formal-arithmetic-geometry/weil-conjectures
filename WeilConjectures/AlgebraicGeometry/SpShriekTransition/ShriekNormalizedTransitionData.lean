@@ -10,9 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionDirectImageCo
 
 /-! # Normalized scalar coordinates of actual tower transitions
 
-All systems and evaluations are the published ordinary derived sequence-site model.
-Index n denotes the positive exponent n+1. Scalar coordinates below are fixed by
-adjunction uniqueness, rather than a choice of maps between evaluated objects.
+## Implementation details
+
+All systems and evaluations use the ordinary derived sequence-site model.
+Index `n` denotes the positive exponent `n + 1`. Scalar coordinates are fixed by
+adjunction uniqueness, rather than by a choice of maps between evaluated objects.
 -/
 
 @[expose] public noncomputable section
@@ -69,10 +71,7 @@ def quotientMap {m n : ℕ} (h : m ≤ n) : SpTowerShriek.R l E n →+* SpTowerS
       (Ideal.Quotient.factorPowSucc (spEllIdeal l E) (a + 1)))).map (homOfLE h).op).hom
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The sequence-site coefficient map is the constant sheaf of the actual quotient map.
-Proof: induction on the length of the index interval reduces to the adjacent quotient
-map. Constant sheafification preserves its identity and composite, and ULift preserves
-composition of ring homomorphisms. Thus both sides are the same quotient map. -/
+/-- The sequence-site coefficient map is the constant sheaf of the actual quotient map. -/
 theorem coefficientMap_eq (T : Scheme.{u}) {m n : ℕ} (h : m ≤ n) :
     SemilinearSections.coefficientMap (ProEt.topology T)
         (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T) h =

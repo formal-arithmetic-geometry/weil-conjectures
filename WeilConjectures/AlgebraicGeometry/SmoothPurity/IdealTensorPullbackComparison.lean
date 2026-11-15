@@ -61,14 +61,7 @@ private theorem ideal_product_unit_image {X : Scheme.{u}} {I : X.Modules}
   rw [imageSubobject_iso_comp, imageSubobject_mono]
 
 /-- The canonical tensor-pullback map onto the extended ideal is epi, and is an
-isomorphism for flat pullback. Its composite with the ideal inclusion fixes it uniquely.
-
-Proof: Tensor the ideal inclusion and compose with the structure-module comparison.
-The pullback ideal-product image theorem, applied to the unit module, identifies its
-image with the extended ideal. Factor through this image. The factor is epi and its
-composite with the monic ideal inclusion determines it uniquely. Under flat pullback
-the original inclusion remains monic, so the factor is both mono and epi and hence
-an isomorphism in the abelian category of module sheaves. -/
+isomorphism for flat pullback. Its composite with the ideal inclusion fixes it uniquely. -/
 theorem existsUnique_idealTensorPullbackComparison {X Y : Scheme.{u}} (g : X ⟶ Y)
     (J : Y.IdealSheafData) :
     ∃! d : (Scheme.Modules.tensorPullback g).obj J.toModules ⟶ (J.comap g).toModules,

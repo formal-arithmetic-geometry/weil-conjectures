@@ -46,18 +46,14 @@ noncomputable def smallModelLegs {X S : Scheme.{v}} {f : X ⟶ S}
         strictLocalNeighbourhoodDiagram f s :=
   (Cone.mk _ Q.legs).extend (strictLocalSmallModelPullbackIso f s).hom |>.π
 
-/-- Transport preserves the limiting property of the cone.
-Proof: extend the upstream limiting cone along the pullback comparison isomorphism;
-`Cone.extendIso` identifies it with the original limit cone. -/
+/-- Transport preserves the limiting property of the cone. -/
 noncomputable def smallModelIsLimit {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s) : IsLimit (Cone.mk _ Q.smallModelLegs) :=
   Q.isLimit.ofIsoLimit
     (Cone.extendIso (Cone.mk _ Q.legs) (strictLocalSmallModelPullbackIso f s).symm)
 
-/-- The transported legs have the original projection to X.
-Proof: compose the upstream projection equation with the comparison and use the
-first projection formula for the pullback map. -/
+/-- The transported legs have the original projection to X. -/
 theorem smallModelOver {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s)
@@ -68,10 +64,7 @@ theorem smallModelOver {X S : Scheme.{v}} {f : X ⟶ S}
   rw [Q.over]
   simp [strictLocalSmallModelPullbackIso]
 
-/-- The transported base component is exactly the small-model colimit leg.
-Proof: the inverse final-functor colimit comparison preserves each coprojection.
-Apply Spec, compose with the affine Gamma-Spec identification, then use the second
-projection formula for the pullback comparison and the upstream first-component equation. -/
+/-- The transported base component is exactly the small-model colimit leg. -/
 theorem smallModelFirst {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s)

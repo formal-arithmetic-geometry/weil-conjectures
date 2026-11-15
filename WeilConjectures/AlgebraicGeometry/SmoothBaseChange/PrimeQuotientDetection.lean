@@ -15,6 +15,14 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Detecting a prime cyclic coefficient inside a nonzero ring quotient
 
+For a prime `r` that is not a unit in `Λ`, vanishing of the higher direct image of the
+constant sheaf `Λ / rΛ` implies vanishing for the constant sheaf `ZMod r`.
+
+## Implementation details
+
+The comparison takes place in abelian sheaves: `ZMod r` is an additive retract of the
+`ZMod r`-vector space `Λ / rΛ`, and no `Λ`-linear decomposition is asserted.
+
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 0F08
@@ -78,31 +86,8 @@ private theorem preservesSheafification_forget_modules
     Functor.isLeftAdjoint_of_iso e
   infer_instance
 
-/-- Vanishing for Lambda/rLambda implies vanishing for the prime cyclic coefficient
-whenever r is prime and is not a unit in Lambda.
-
-This argument takes place in abelian sheaves, so
-no Lambda-linear decomposition of a Lambda-module is asserted.
-
-Proof:
-1. Since r is not a unit, the ideal (r) is proper: if 1 belongs to it, writing
-1 = a*r gives an inverse for r. Thus V = Lambda/rLambda is a nonzero vector
-space over F_r. Its vector 1 is nonzero. Extend that vector to a basis, and
-project onto its coordinate. The inclusion a -> a*1 and this projection exhibit
-F_r as an additive retract of V.
-2. Apply the constant abelian sheaf functor on Y to this retraction, and then
-the abelian higher direct image in degree q along h. Functors preserve the
-retraction identities, so R^q h_* F_r is a retract of R^q h_* V. A retract of
-a zero object is zero.
-3. Forgetting coefficients commutes with constant sheaves. Tag 03FD on every
-etale object, followed by the sheafified cohomology-presheaf description of
-higher direct images, identifies the underlying abelian higher direct images
-with those of the module sheaves in the statement. Injective module resolutions
-compute these comparisons because their underlying abelian terms are acyclic.
-Finally the forgetful functor reflects zero objects. In prime coefficients the
-quotient by r is the ring itself. These identifications turn step 2 into the
-claimed implication. Negative degrees vanish, including for either coefficient
-ring, and degree zero uses the ordinary direct-image comparison. -/
+/-- If `r` is a prime that is not a unit in `Λ` and the higher direct image of the constant
+sheaf `Λ / rΛ` vanishes in degree `q`, then so does that of the constant sheaf `ZMod r`. -/
 theorem isZero_prime_cyclic_higherDirectImage_of_quotient
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) (r : ℕ) (hr : r.Prime) (hunit : ¬ IsUnit (r : Λ))

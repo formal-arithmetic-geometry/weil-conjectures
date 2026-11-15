@@ -808,11 +808,7 @@ def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact diagonal preserves K-injectives because it is right adjoint to exact
-terminal-index evaluation.
-Proof: a map from a tower to a constant tower is uniquely determined at index zero;
-all other components are its composites with the transitions to zero. This gives
-an adjunction from exact evaluation to the diagonal. Transport a map from an acyclic
-complex through that adjunction and use K-injectivity to null-homotope it. -/
+terminal-index evaluation. -/
 @[instance] theorem delta_preservesKInjective (X : Scheme.{u}) :
     (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).PreservesKInjectiveComplexes := by
   let adj₀ : (evaluation ℕᵒᵖ (Modules A X)).obj (op 0) ⊣ Functor.const ℕᵒᵖ :=
@@ -1229,10 +1225,7 @@ private theorem quotientStep_comp (X : Scheme.{u}) (n : ℕ) :
   rw [← Functor.map_comp]
   congr 1
 
-/-- Quotient transitions are the unique maps on sheafified pure tensors.
-Proof: quotient maps commute with the scalar maps from A, so s tensor x maps to
-q(s) tensor x by a balanced linear map. Sheafification extends it uniquely. The
-formula proves compatibility with site restrictions and naturality in the module. -/
+/-- Quotient transitions are the unique maps on sheafified pure tensors. -/
 theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
     ∃! τ : level I X (n + 1) ⟶ level I X n,
       ∀ (M : Modules A X) (U : X.ProEtᵒᵖ)
@@ -1266,9 +1259,7 @@ theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
 def reductionModule (X : Scheme.{u}) : Modules A X ⥤ Towers A X :=
   (Functor.ofOpSequence (fun n ↦ (step_existsUnique I X n).exists.choose)).flip
 
-/-- Reduction is additive before localization.
-Proof: every level is scalar extension followed by additive scalar restriction.
-Evaluation jointly detects equality of maps of strict diagrams. -/
+/-- Reduction is additive before localization. -/
 @[instance] theorem reductionModule_additive (X : Scheme.{u}) :
     (reductionModule I X).Additive := by
   constructor
@@ -1298,13 +1289,7 @@ structure ReductionModel (X : Scheme.{u}) where
     CochainComplex.IsKFlatIndependentCoefficients (R := coefficients A X) P →
     IsIso (counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
-/-- Universal derived reduction, with its K-flat representative normalization.
-Proof: choose flat-term K-flat resolutions. Their diagonal is K-flat: tensoring an
-acyclic tower evaluates to tensoring an acyclic complex with the K-flat model at
-every level. Evaluations are exact and jointly detect acyclicity. The strict
-quotient construction therefore inverts resolving quasi-isomorphisms. The resolving
-class left-derived theorem gives the universal counit, invertible on these models.
-This universal property determines the derived pair up to its unique comparison. -/
+/-- Universal derived reduction, with its K-flat representative normalization. -/
 theorem reduction_exists (X : Scheme.{u}) : Nonempty (ReductionModel I X) := by
   let H := HomotopyCategory.quotient (Modules A X) (.up ℤ)
   let F := reductionHomotopy I X
@@ -1362,10 +1347,7 @@ def reductionCounit (X : Scheme.{u}) :
     DerivedCategory.Qh ⋙ reduction I X ⟶ reductionHomotopy I X :=
   (reductionModel I X).counit
 
-/-- Ordinary quotient augmentation, uniquely fixed by the tensor unit at every level.
-Proof: insert 1 tensor x. Quotient transitions preserve 1 and their pure tensor
-formula therefore makes these maps a strict tower map, natural in the module.
-The formula on all sections determines every component uniquely. -/
+/-- Ordinary quotient augmentation, uniquely fixed by the tensor unit at every level. -/
 theorem ordinaryAugmentation_existsUnique (X : Scheme.{u}) :
     ∃! η : (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) ⟶ reductionModule I X,
       ∀ (M : Modules A X) (n : ℕ) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -1494,13 +1476,7 @@ private theorem levelPull_step {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   rw [quotientStep_direct_comm]
 
 /-- Ordinary tensor/pullback comparison on the entire strict quotient tower.
-Its formula is imposed on all inverse-image generators, not only constant sections.
-Proof: pullback of each constant quotient ring is its canonical constant sheaf.
-The scalar square commutes on constants and therefore on the sheafifications.
-Tensor balancing sends the inverse image of s tensor x to the inverse image of s
- tensored with the inverse image of x. The reverse reassociation is inverse.
-The quotient transition formulas make these maps a strict diagram isomorphism.
-Local generation of inverse-image sections and sheafification prove uniqueness. -/
+Its formula is imposed on all inverse-image generators, not only constant sections. -/
 theorem ordinaryReductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! σ : reductionModule I Y ⋙ towerPullback A f ≅
         modulePullback A f ⋙ reductionModule I X,
@@ -1576,12 +1552,7 @@ private theorem reductionCounit_isIso (X : Scheme.{u})
 section
 attribute [local irreducible] modulePullback reductionModule reduction reductionCounit
   reductionModel
-/-- Derived tensor/pullback comparison characterized on K-flat representatives.
-Proof: a flat-term K-flat model P remains K-flat with flat terms after exact
-constant-coefficient inverse image. The reduction counits are invertible there.
-Conjugate the ordinary strict comparison by these counits and the localization
-factors. This descends through chain maps, homotopies and resolving
-quasi-isomorphisms. Every object has such a model, proving uniqueness. -/
+/-- Derived tensor/pullback comparison characterized on K-flat representatives. -/
 theorem reductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! τ : reduction I Y ⋙ G A f ≅ pull A f ⋙ reduction I X,
       ∀ P : CochainComplex (Modules A Y) ℤ,

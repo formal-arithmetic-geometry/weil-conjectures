@@ -66,12 +66,7 @@ theorem tensorGradedCoefficientProjection_apply {X Z : Scheme.{u}} {j : Z ⟶ X}
 
 attribute [irreducible] tensorGradedCoefficientProjection
 
-/-- The raw homogeneous multiplication identity.
-Proof: Work locally where the invertible module is free of rank one, lift both quotient
-sections through the degreewise adjunction unit, apply `b_multiply`, and use `b_quotient`
-and `c_projection`. Tensor-power associativity and the unitors identify the resulting
-section with the displayed transported tensor product; local equality glues by sheaf
-separation. -/
+/-- The raw homogeneous multiplication identity. -/
 theorem tensorGradedSection_product_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
@@ -132,18 +127,7 @@ theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
       (1 : Γ(Z, ⊤)))) (T.c_projection (n * ((e + 1) + 1)))
 
 /-- Projecting a product of the two homogeneous sections gives the transported tensor
-product section. No cohomology boundary, action, or derivation identity occurs here.
-
-Proof: Work locally where L is free of rank one and lift each quotient section through
-the degreewise adjunction unit, which is an epimorphism. The compatibility b_quotient
-identifies its homogeneous image with the image of its homogeneous lift under p.
-Apply the algebra map p to b_multiply. The c_projection identity extracts degree
-n+n(e+1)=n(e+2). The canonical monoidal pullback comparison and tensor-power multiplication
-identify this product with lambda inverse followed by f tensor x. For s, tensorPowSection
-f 1 includes exactly the degree-one right unitor needed by a_0. Changing a lift changes
-it by a kernel section and hence does not change the quotient product. These identities
-hold locally and glue by sheaf separation. The same argument for n=0 uses the unit
-summand twice; it does not require the two summands to have different degrees. -/
+product section. No cohomology boundary, action, or derivation identity occurs here. -/
 theorem tensorGradedSection_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

@@ -185,15 +185,8 @@ private theorem scalarRho_colimits : PreservesFiniteColimits (scalarRho J S τ A
 
 end SequenceRestriction
 
-/-- Restrict each coefficient action and retain all section maps.
-Proof: compose each level evaluation with restriction along the constant-sheaf map.
-The equality psi_(n+1) phi_n = psi_n identifies the twice-restricted coefficient
-module with the directly restricted one. Compose that identification with the system
-transition. These natural transformations define a tower-valued functor. Its maps
-are the original section maps, so it is additive. Each evaluation and scalar
-restriction preserves finite limits and colimits. Evaluation detects these properties
-in the tower category, proving exactness. The level identifications and transition
-formula are the identity section prescriptions of the construction. -/
+/-- An ordinary scalar restriction along `ψ` exists: restrict each coefficient action and
+retain all section maps. -/
 theorem ordinaryScalarRestriction (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n) :
     Nonempty (OrdinaryScalarRestriction R φ B ψ) := by
   have ha (X : Scheme.{u}) (n : ℕ) :

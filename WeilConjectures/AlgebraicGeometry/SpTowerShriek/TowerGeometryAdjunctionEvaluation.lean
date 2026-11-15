@@ -191,13 +191,7 @@ private theorem geometry_evaluation_transport (b : Base l E)
     hs p q pg qg hp hq hdA' hu hc
 
 /-- The concrete section-model comparisons preserve the derived adjunction unit
-and counit. This involves no tensor, compactification, or constructibility test.
-Proof: transport the generic unit and counit evaluation equations through the
-coefficient, transition, target, pull and push identifications of Geometry. Its
-specified pullEvaluation and pushEvaluation are the generic comparisons, and
-its derivedAdjunction_eq and levelAdjunction_eq identify both adjunctions with
-their canonical ordinary-derived localizations. Thus the transported equations
-are precisely the two displayed equations. No detection of equality by levels is used. -/
+and counit. This involves no tensor, compactification, or constructibility test. -/
 theorem geometry_adjunction_evaluation (b : Base l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) (n : ℕ) :
     (∀ M : D l E Y,

@@ -36,16 +36,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints in
 /-- Specializing the derived pullback tensor square to a sheaf in degree zero agrees
-with the ordinary tensor square on every cochain complex.
-
-Proof: use the counit square defining leftDerivedUpperStarTensorComparison on P
-and the complex concentrated in degree zero at M. The geometric counit on the
-second complex equals exact inverse image on the single sheaf, by the defining
-exact-derived comparison and the mapDerivedCategorySingleFunctor square. Compose
-with the localization of the total-tensor/single-complex isomorphism. Its degree n
-component is the degree n tensor comparison with M: only the summand (n,0) occurs,
-so no permutation of degrees or sign occurs. Naturality with respect to k gives
-the displayed square. No K-flat assumption is needed for this counit equation. -/
+with the ordinary tensor square on every cochain complex. -/
 theorem upperStar_single_tensor_representative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}

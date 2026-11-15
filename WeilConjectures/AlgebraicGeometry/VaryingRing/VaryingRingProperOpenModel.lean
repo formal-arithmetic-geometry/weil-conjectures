@@ -307,12 +307,7 @@ def actualProperOpenInputs (A : Scheme.{u} → Prop)
   gamma _U _V _W _Z k r p i _ _ _ _ _ _ h :=
     @asIso _ _ _ _ (gamma R φ k r p i h) (hgamma k r p i h)
 
-/-- The actual proper/open data satisfy all the defining equations.
-
-Proof: use the named-composite associativity and unit lemmas. On reflexive
-composites, the named maps reduce to the original compositors. After unfolding
-only the data record, the two pasting and two identity equations are exactly
-properOpenPasting and gamma_identities; asIso retains the original hom map. -/
+/-- The actual proper/open data satisfy all the defining equations. -/
 theorem actualProperOpenEquations (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -352,16 +347,8 @@ theorem actualProperOpenEquations (A : Scheme.{u} → Prop)
       dsimp only [actualProperOpenInputs]
       simpa only [asIso_hom] using (gamma_identities R φ).2 p h M }
 
-/-- Invertibility is the only additional input to the existing proper/open equations.
-All functors and maps are the actual varying-ring constructions.
-
-Proof: use the actual direct images, open extensions and their specified identity
-and composition comparisons. Turn the specified gamma into an isomorphism using
-its invertibility, without choosing a different arrow. The named-composite
-associativity and unit equations are precisely semilinear compositor coherence.
-The proper/open vertical, horizontal and identity equations are the existing
-pasting equations. Restricting the scheme index to any predicate changes none
-of these maps or equations. -/
+/-- The proper/open calculus of the actual varying-ring operations on schemes satisfying
+`A`, given that every comparison `gamma` is invertible. -/
 def properOpenModel (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

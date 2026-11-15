@@ -33,12 +33,7 @@ namespace AlgebraicGeometry.SymmetricProjTautologicalCharts
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- An affine restriction comparison together with compatibility with the chosen chart.
-
-Proof: construct the comparison on the standard affine charts of relative Proj by
-the homogeneous fraction map.  The map sends a degree-one frame to its restriction;
-the affine tilde equivalence and the fraction formula show that it is independent of
-the chosen chart and hence glues to the displayed isomorphism. -/
+/-- An affine restriction comparison together with compatibility with the chosen chart. -/
 structure AffineComparison {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent]
     (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
@@ -160,16 +155,7 @@ private theorem invertible_of_symmetric_twist_charts {S : Scheme.{u}} (E : S.Mod
     (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one L).mpr hfree
   exact Scheme.Modules.IsInvertible.of_sheafOfModules L
 
-/-- The chart comparison exists on every inclusion of affine base opens.
-
-Proof: glue the degree-one affine twists together with their normalized section
-map, and take the adjoint quotient. Degree-one standard opens cover symmetric Proj:
-a prime containing the generators contains the irrelevant ideal, by induction on
-the symmetric algebra. Thus the affine twists, and hence the glued module, are
-invertible. The normalized sections give epimorphy. For an affine inclusion, invert
-the pulled-back chart over the larger open and compose with the pullback-composition
-comparison and the chart over the smaller open. Compatibility is cancellation of
-an isomorphism with its inverse. -/
+/-- The chart comparison exists on every inclusion of affine base opens. -/
 theorem exists_affine_comparison_with_chart_compatibility
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent] :
     ∃ D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E,

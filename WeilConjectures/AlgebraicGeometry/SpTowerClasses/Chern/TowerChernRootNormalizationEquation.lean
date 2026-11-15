@@ -63,12 +63,7 @@ private theorem mk_target_equation
         ((DerivedCategory.singleFunctor C 0).obj V) := by
   exact h
 
-/-- The target normalization identifies the root transpose with the signed Kummer boundary.
-
-Proof: unfold the target-normalization predicate. Its four factors are the
-adjunction transpose, shift comparison, single-complex comparison and root
-identification. The right-hand side is exactly the positive short-exact boundary
-shifted once, followed by the inverse shift-addition comparison. -/
+/-- The target normalization identifies the root transpose with the signed Kummer boundary. -/
 theorem chern_root_normalization_equation
     (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})

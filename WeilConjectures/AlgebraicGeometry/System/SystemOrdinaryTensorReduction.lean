@@ -263,14 +263,7 @@ attribute [local irreducible] ordinaryTensorHom tensorSection
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Ordinary reduction commutes with tensor under the canonical comparisons.
-Proof: transpose both maps through extension/restriction adjunction. Precompose with
-inverse tensor evaluation and test on pure tensors, which generate the sheafified
-module tensor. The adjunction unit sends x to its scalar-extension section. The
-ordinary scalar comparison sends the extension of x tensor y to the tensor of the
-two extended sections. Horizontal restriction commutes with pure tensor sections,
-and evaluation's comparison is the identity on these sections. Thus the two
-transposes agree on pure sections, hence on the whole tensor sheaf. -/
+/-- Ordinary reduction commutes with tensor under the canonical comparisons. -/
 theorem ordinary_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ}
     (h : n ≤ m) (M N : Systems.{c, v, max c v r} J B τ) :
     ordinaryReduction.{c, v, r} J B τ A h

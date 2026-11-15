@@ -67,31 +67,7 @@ private def coefficientUnit (X : Scheme.{u}) :
     (AdicCompletion.quotient_transition l E X n).symm
 
 /-- The entire section-action and restriction assertion, with no boundedness,
-Noetherianity or prime-invertibility assumptions.
-
-Proof plan (the seven steps of the node):
-1. Section action is exact and unchanged on sections and scalar matrices. It
-   preserves cokernels, cohomology and finite constant local models. The inverse
-   equivalence identifies products by their projections.
-2. The canonical coefficient isomorphisms are natural in the condensed ring;
-   hence they identify the uniformizer, quotient units and quotient transitions.
-3. For immersions use proEtale_immersion_inverseImage_preservesLimits. For site
-   objects identify inverse image with slice restriction, exact and sectionwise
-   product preserving. Compose these facts, including the empty composite.
-4. The tensor comparisons on K-flat representatives identify reductions. Their
-   normalization sends m tensor 1 to the same tensor, preserving quotient units
-   and transitions. Section action has the same local-pure-tensor normalization.
-5. In cone coordinates the comparison is (Fx,Fy). Its transition is (Fx,pi Fy)
-   and its augmentation is (Fm,0). Substitution in (dx+pi^n y,-dy) proves that
-   these are the specified strict reduction comparisons.
-6. Product projections give beta F(1-T)=(1-T) beta. On the two Roos coordinates
-   use beta diagonally; the augmentation becomes (((Fm,0))_n,0). Both the
-   product projections and the zero coordinate are retained in Comparison.
-7. Localize these chain isomorphisms using the completion-triangle comparison.
-   The representative equation and unit equation identify the specified maps.
-   Naturality comes from natural chain maps and localization. For composites,
-   product projections and the two cone coordinates give the same comparison.
--/
+Noetherianity or prime-invertibility assumptions. -/
 theorem strict_completion_restriction_comparison :
     ∃ S : ∀ X : Scheme.{u}, Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X),
       (∀ X : Scheme.{u}, IsIntegral l E X (S X)) ∧

@@ -218,24 +218,7 @@ private theorem constantSquareCube
   erw [CategoryTheory.Functor.map_id, Category.id_comp] at H'
   exact H'.symm
 
-/-- Intrinsic alpha obeys cube pasting on module sheaves.
-Proof: Restriction detects maps into open extension: transport to fixed-scalar sheaves,
-compose with the monomorphism from open extension to direct image, and use the
-restriction/direct-image adjunction. Faithfulness transports equality back to modules.
-The inverse-transpose definition of beta gives its restriction normalization through
-the specified open units. The clopen projector restricts to the identity, so intrinsic
-alpha restricts to the canonical inverse-image square identification followed by
-inverse image of the inverse open unit. All detection opens are quasi-compact.
-For base change, restrict along k₁. The original-alpha route reduces through
-ak₁ = kd to d* r*, then through rd = cr₁ to r₁* c*. The beta for k is exactly
-the open-unit identification. On the changed-alpha route the beta for i first gives
-that same open-unit identification, and intrinsic alpha for Q₁ reduces to r₁* c*.
-The square identification for p₁ followed by b equal to a followed by p makes the
-starting comparisons equal.
-Detection gives the cube equation without proper direct-image base change.
-Apply this calculation to every module sheaf M to obtain the displayed component
-identity. Empty schemes and the zero coefficient ring give the unique zero maps;
-identity opens give the unit-normalized inverse-image compositor identity. -/
+/-- Intrinsic alpha obeys cube pasting on module sheaves. -/
 theorem singleAlpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)

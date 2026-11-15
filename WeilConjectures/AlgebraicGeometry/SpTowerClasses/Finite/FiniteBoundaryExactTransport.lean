@@ -149,11 +149,7 @@ theorem finiteBoundary_square_glue {D : Type*} [Category D] [HasShift D ℤ]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hn, reassoc_of% hc]
   simp only [← (shiftFunctor D n).map_comp_assoc, Iso.hom_inv_id_assoc]
-/-- Assemble a transported scalar square before specializing any module categories.
-Proof: transport the given square through F followed by V. Naturality for e is
-its second square. The square gluing identity then inserts the ordinary source,
-target and target-isomorphism maps. Functoriality of the single functor writes
-the two endpoint composites as the displayed single maps. -/
+/-- Assemble a transported scalar square before specializing any module categories. -/
 theorem finiteBoundary_exact_glue
     {A C D H : Type*} [Category A] [Category C] [Category D] [Category H]
     [Abelian A] [Abelian C] [Abelian D] [Abelian H]
@@ -204,9 +200,7 @@ theorem finiteBoundary_congr {D : Type*} [Category D] {X X' Y Y' : D}
   subst a'
   subst b'
   exact h
-/-- Assemble an exact scalar square with its ordinary endpoint identifications.
-Proof: use the exact transport square, apply the single functor to the source
-and target equalities, and substitute the given evaluations of the two arrows. -/
+/-- Assemble an exact scalar square with its ordinary endpoint identifications. -/
 theorem finiteBoundary_identified_glue
     {A C D H : Type*} [Category A] [Category C] [Category D] [Category H]
     [Abelian A] [Abelian C] [Abelian D] [Abelian H]

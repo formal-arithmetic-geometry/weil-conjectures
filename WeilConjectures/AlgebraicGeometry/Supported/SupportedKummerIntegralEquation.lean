@@ -115,13 +115,7 @@ attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- Forgetting coefficients and evaluating at the integral supported generator identifies
 any normalized supported Kummer boundary with the common pole extension followed by
-its Kummer extension and coefficient root map. No finiteness or positivity is needed.
-
-Proof: specialize the relative boundary specification to the complementary open of D.
-The extension supplied there satisfies the pole-boundary specification for every
-complementary open, because all such opens are equal. The uniqueness of the integral
-pole class therefore identifies its extension class with cartierPoleBoundary. Substitute
-this equality in the final Yoneda-product equation of the boundary specification. -/
+its Kummer extension and coefficient root map. No finiteness or positivity is needed. -/
 theorem supported_kummer_integral_equation
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)

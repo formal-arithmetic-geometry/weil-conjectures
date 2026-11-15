@@ -36,8 +36,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The square compositor is uniquely determined by its explicit composition formula.
-Proof: the displayed composite witnesses existence, and the required equality gives uniqueness. -/
+/-- The square compositor is uniquely determined by its explicit composition formula. -/
 theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ∃! e : modulePullback B i ⋙ modulePullback B r ≅
@@ -52,8 +51,7 @@ noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ 
     modulePullback B i ⋙ modulePullback B r ≅ modulePullback B p ⋙ modulePullback B k :=
   (moduleSquareG_existsUnique B k r p i h).choose
 
-/-- The specified square compositor equals the original explicit composite.
-Proof: this is the equality clause of the unique specification. -/
+/-- The specified square compositor equals the original explicit composite. -/
 theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     moduleSquareG B k r p i h =
@@ -71,9 +69,7 @@ noncomputable def singleBetaInvApp {U' U X' X : Scheme.{u}}
     ((modulePullback B a).map ((moduleJAdj B j).unit.app M) ≫
       (moduleSquareG B a j' j g h).inv.app ((moduleJ B j).obj M))
 
-/-- Naturality follows from the same open-unit transpose.
-Proof: transpose each naturality square under the open adjunction. Naturality of
-the open unit and of the pullback-square comparison makes their transposes equal. -/
+/-- The components `singleBetaInvApp` are natural in the module. -/
 theorem singleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -258,11 +254,7 @@ private theorem openSquare_image {U' U X' X : Scheme.{u}}
 
 end
 
-/-- The finite-coefficient canonical comparison is invertible for a cartesian square.
-Proof: open localization identifies the right adjoints by restriction on the same
-pulled-back test objects. Their left adjoints have the unique unit-preserving
-isomorphism. Its inverse has exactly the displayed open-unit transpose, hence is
-singleBetaInv. Exactness passes this isomorphism degreewise and through localization. -/
+/-- The finite-coefficient canonical comparison is invertible for a cartesian square. -/
 theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -286,7 +278,7 @@ theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
   exact NatIso.isIso_of_isIso_app _
 
 /-- The existing finite open-base-change comparison, in constant-ring module coordinates.
-Its inverse has the prescribed open-unit transpose; no new map is chosen. -/
+Its inverse has the prescribed open-unit transpose. -/
 noncomputable def singleBeta [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)

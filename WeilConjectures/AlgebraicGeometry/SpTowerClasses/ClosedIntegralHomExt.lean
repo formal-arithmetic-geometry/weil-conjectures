@@ -49,14 +49,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Morphisms from a closed direct image of the integer sheaf agree if they agree on
-constant integer generators on all pulled-back charts.
-
-Proof: the ambient integer sheaf maps epimorphically onto the closed direct image.
-Cancel that map. By the sheafification universal property, equality of the resulting
-maps from the ambient constant sheaf is equality on the constant presheaf. The
-canonical direct-image map sends each integer generator to the same integer on the
-pulled-back chart, so the assumed equality gives the required presheaf equality.
-This also covers empty schemes and charts. -/
+constant integer generators on all pulled-back charts. -/
 theorem closedIntegral_hom_ext {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {N : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}}
     {q q' : (lowerStar AddCommGrpCat.{u + 1} i).obj

@@ -598,15 +598,7 @@ private theorem chern_boundary_models
     (chern_root_normalization_equation l Y RY AY φY cY hY)
     (chern_root_normalization_equation l X RX AX φX cX hX) aD gD haD hgD
 
-/-- The normalized positive Kummer-boundary transpose square commutes under inverse image.
-
-Proof: transport the short-exact-sequence boundary through the exact inverse
-image using its canonical single and shift comparisons. Naturality of the
-triangle under d.kummer identifies its first and last components with the
-recorded root and units pullback maps. Shift once more using commShiftIso_add.
-The two target normalizations identify these signed shifted boundaries with
-the adjunction transposes of the recorded root isomorphisms. Cancel the
-invertible single and shift comparisons to obtain the stated square. -/
+/-- The normalized positive Kummer-boundary transpose square commutes under inverse image. -/
 theorem kummer_pullback_transpose
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {cY : Chern l E Y} {cX : Chern l E X}

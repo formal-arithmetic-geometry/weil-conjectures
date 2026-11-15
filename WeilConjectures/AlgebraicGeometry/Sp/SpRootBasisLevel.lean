@@ -190,22 +190,7 @@ private theorem spCoefficient_nsmul (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime
   exact congrArg (fun t ↦ t.hom.app U b) hX
 
 /-- A prescribed root basis gives the normalized linear basis of one finite
-integral twist level on its slice.
-
-Proof: write N = ell^(n+1) and B = O_E/(N). The canonical finite-discrete
-coefficient comparison identifies the actual coefficient sheaf with constant B,
-including its ring operations. On the slice, tensor the given root basis with B.
-The integer tensor and the tensor over the constant Z/N sheaf coincide: locally
-lift a residue scalar to an integer, for which balancing is ordinary integer
-balancing; separatedness descends that equality. Restriction commutes with the
-sheafification of these tensors because slice coverings are the original
-coverings of each object. The resulting inverse sends b tensor z to b times
-the image in B of e inverse of z. The balancing equations make this well defined.
-The two composites are identities on pure tensors and hence after sheafification.
-Both maps retain the B action, and therefore the O_E action through reduction.
-The forward map sends every section b to b tensor the restricted zeta, by the
-normalization of e. The same argument includes the zero coefficient ring and
-empty slices. This assertion involves one level and no transition maps. -/
+integral twist level on its slice. -/
 theorem spRootBasisLevel
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (W : X.ProEt) (n : ℕ)
     (ζ : (Scheme.purTwistRootsModule X ℓ n).val.obj (op W))

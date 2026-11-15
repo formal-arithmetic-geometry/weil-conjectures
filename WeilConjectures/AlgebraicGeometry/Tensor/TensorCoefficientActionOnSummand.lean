@@ -27,22 +27,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
-/-- On one source summand the homogeneous action is the canonical tensor multiplication.
-Proof: On an open trivializing L, locally lift the restricted section f through the
-closed-immersion unit in degree n. By b_quotient its image in C is the restriction
-of tensorGradedSection. Apply hlocal to this lift and the image under k of an ideal
-tensor section. Use k_inclusion and b_multiply to compute their product in degree
-n+n(e+1). Under boundaryIdealKernelIso its inclusion is multiplication of the ideal
-factor and the tensor-power factor. The inverse unit on the annihilated ideal and
-boundaryCoefficientDegreeIso identify this operation with pushforward of
-mulTensorPowSection f F e 1. These comparisons are canonical: uniqueness of the
-adjunction comparison respects the monoidal tensor product, and the ideal-kernel
-comparison is fixed by its inclusion equation. Cancel the monic i to obtain the
-identity in I. Changing the lift adds a kernel element, whose product with the
-ideal section is zero by squareZero. Restriction compatibility hrestrict and
-hglobal identify these local calculations with the specified global action.
-Sheaf separation gives the asserted morphism equality. This also covers n=0:
-the monoidal unit comparisons give the same product in degree zero. -/
+/-- On one source summand the homogeneous action is the canonical tensor multiplication. -/
 theorem tensorGradedCoefficient_action_on_summand {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

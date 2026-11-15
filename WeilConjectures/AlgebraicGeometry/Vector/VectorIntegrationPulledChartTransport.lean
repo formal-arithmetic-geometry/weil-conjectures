@@ -350,17 +350,7 @@ private theorem exchange_paste_named
   subst hz hc
   exact affineLinearExchange_paste A sq₁ sq₂ K
 
-/-- Restrict the prefix of one frame along an arbitrary map to its frame open.
-There is no second frame, linear action, or trace counit in this identity.
-
-Proof: paste the affine-tower base-change square with the inverse-frame square.
-Naturality moves the chart coefficient through the tower exchange. The canonical
-compact-support comparison intertwines tower exchange and ordinary exchange.
-On coefficients, inverse square pasting identifies the two geometric comparisons;
-composition of the normalized ordered Tate transport identifies the successive base
-coefficients with transport along j. Cancel the intervening isomorphisms. These are
-unit and composition equations, so rank zero, empty schemes and zero rings are included.
--/
+/-- Restrict the prefix of one frame along an arbitrary map to its frame open. -/
 theorem vectorIntegration_pulled_chart_transport
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

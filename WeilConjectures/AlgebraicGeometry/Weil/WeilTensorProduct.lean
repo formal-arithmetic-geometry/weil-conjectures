@@ -62,18 +62,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # Relative condensed derived tensor and its geometric Frobenius
 
-The current blueprint uses `wfCondensedTensor`, the native relative derived tensor
+The main construction is `wfCondensedTensor`, the native relative derived tensor
 on modules over the pulled-back condensed ring. Its first argument is computed by
 a K-flat representative. `wfCondensedTensorFrobenius` composes the normalized tensor
 comparison of exact pullback with the tensor of the given Weil isomorphisms.
-
-The completed adic and rationalized constructions below are retained as presentation
-interfaces for existing consumers. They do not define the current condensed tensor.
-No preservation of constructibility or exactness on Weil pairs is assumed here.
-
-The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
-these are the valuation-ring data transported along `Shrink.algEquiv`, with the
-actual field inclusions conjugated by that canonical equivalence.
 
 ## Main definitions
 
@@ -84,6 +76,16 @@ actual field inclusions conjugated by that canonical equivalence.
 - `wfIntegralTensor`, `wfRationalTensor`: completed integral and rational tensor.
 - `wfRationalTensorPullback`: the normalized Frobenius/tensor comparison.
 - `WeilConjectures.wfTensorFrobenius`: tensor of the given Weil structures.
+
+## Implementation details
+
+The completed adic and rationalized constructions below are retained as presentation
+interfaces for existing consumers. They do not define the condensed tensor.
+No preservation of constructibility or exactness on Weil pairs is assumed here.
+
+The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
+these are the valuation-ring data transported along `Shrink.algEquiv`, with the
+actual field inclusions conjugated by that canonical equivalence.
 
 ## References
 
@@ -337,14 +339,7 @@ private theorem derivedBilinear :
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 set_option backward.isDefEq.respectTransparency false in
-/-- The localization model's natural comparison on flat-term K-flat representatives.
-Proof: take the natural representative comparison from site-derived-tensor descent.
-The homotopy quotient comparison identifies its source with total tensor of complexes.
-Flatness means exactness of sheaf tensor, so the two flat-term subcategories coincide.
-Their localization comparisons give the displayed natural isomorphism. Restriction
-of transformations to the resolving subcategory is bijective by descent, so the
-compatible comparison with any other model exists uniquely. Thus the chosen model
-is determined up to its unique compatible natural isomorphism. -/
+/-- The localization model's natural comparison on flat-term K-flat representatives. -/
 theorem wfTensorRepresentative_exists :
     ∃ i :
       (((proEtaleFlatRepresentatives X (pbcAdicCompletion X d)).ι.prod
@@ -478,12 +473,7 @@ private theorem completionLinear :
       (b • ((wfCompletion X d r a ha).map f).hom)
     rw [Linear.comp_smul, wfCompletion_unit_map, wfCompletion_unit_map, Linear.smul_comp]
 
-/-- Bilinear scalar extension is uniquely determined on pure tensors, including denominators.
-Proof: sheaf tensor is linear in each variable. Its K-flat localization is linear by
-extension of transformations from K-flat representatives; the reflector is linear by its
-unit and the Hom bijection. Extend this bilinear map along A→A[1/p] in both variables.
-The tensor-product universal property gives the displayed pure-tensor formula and uniqueness.
-Writing coefficients as inverse powers gives precisely denominator p^(r+s). -/
+/-- Bilinear scalar extension is uniquely determined on pure tensors, including denominators. -/
 theorem wfRationalTensorHom_exists (p : A)
     (M M' N N' : WfAmbientRationalCategory X d r a ha p) :
     ∃! b : (M ⟶ M') →ₗ[Localization.Away p] (N ⟶ N') →ₗ[Localization.Away p]
@@ -544,10 +534,7 @@ private theorem wfRationalTensorHom_tmul (p : A)
 
 attribute [local irreducible] wfRationalTensorHom
 
-/-- The extended tensor maps satisfy the bifunctor laws.
-Proof: on pure tensors the identity law follows from integral tensor's identity law and
-1*1=1. Composition follows from integral functoriality and commutative multiplication of
-localized scalars. Bilinearity extends these equations to all localized morphisms. -/
+/-- The extended tensor maps satisfy the bifunctor laws. -/
 theorem wfRationalTensor_laws (p : A) :
     (∀ M N : WfAmbientRationalCategory X d r a ha p,
       wfRationalTensorHom X d r a ha p M M N N (𝟙 M) (𝟙 N) = 𝟙 _) ∧
@@ -818,15 +805,7 @@ private theorem wfPullback_preservesComplete :
   exact (wfComplete_iso X d r a ha (asIso (adj.unit.app M))).mp hM
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The completion comparison is uniquely fixed by its unit square.
-Proof: compare the canonical Koszul completeness predicate with completeness in the
-presentation category, using the exact coefficient equivalence and independence of the
-Koszul representative and generating list. Direct image commutes with completion and
-its unit. For an automorphism, ordinary derived pullback and direct image are adjoint
-equivalences; thus each preserves complete objects. Transport the reflector's Hom
-bijection through this adjunction to obtain the universal property of the pulled-back
-completion. The unique maps between the two reflections are inverse, and the same
-Hom bijection proves uniqueness with the required unit equation. -/
+/-- The completion comparison is uniquely fixed by its unit square. -/
 theorem wfPullbackCompletion_exists (M : PbcCompletedDerived X d) :
     ∃! c : (pbcIsoAmbientPullback e.asIso.hom d).obj (wfCompletionObj X d r a ha M) ≅
         wfCompletionObj X d r a ha ((pbcIsoAmbientPullback e.asIso.hom d).obj M),
@@ -880,12 +859,7 @@ theorem wfPullbackCompletion_exists (M : PbcCompletedDerived X d) :
   exact (hbij _ htarget).injective (hc'.trans hf.symm)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact coefficient transport preserves intrinsic completeness for the actual scalar list.
-Proof: the finite coefficient comparisons preserve every constant section a_j, and commute
-with quotient maps. Their limit fixes a_j on the completed ring. Apply the exact inverse
-site equivalences to the strict Koszul tower. They preserve products and both finite
-fiber summands; the projection comparison commutes with 1-shift and with the signed
-fiber differential. It identifies the (u,0) units, hence preserves their invertibility. -/
+/-- Exact coefficient transport preserves intrinsic completeness for the actual scalar list. -/
 theorem wfIsoPullback_complete (M : WfCompleteCategory X d r a ha) :
     WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.asIso.hom d).obj M.obj) := by
   change IsIso (wfCompletionUnit X d r a ha
@@ -998,11 +972,7 @@ private theorem wfCompletedSection_directImage (U : X.ProEtᵒᵖ) (b : A) :
   rw [hu] at h
   exact h
 
-/-- Constant sections are fixed by the completed coefficient identification.
-Proof: check the scalar action after every finite quotient projection. The constant
-inverse-image comparison is adjoint to identity on constants, so fixes each residue.
-The limit map therefore fixes every scalar. The sectionwise linear equation descends
-through complexes and localization, and restricts to the complete full subcategory. -/
+/-- Constant sections are fixed by the completed coefficient identification. -/
 theorem wfCompletePullback_linear :
     (wfCompletePullback X d r a ha e).Additive ∧
       (wfCompletePullback X d r a ha e).Linear A := by
@@ -1126,12 +1096,7 @@ private theorem wfIntegralTensorPullback_naturality
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Rationalizing the constructed integral comparison fixes every component uniquely.
-Proof: tensor with one the integral comparison and its inverse on Hom modules. The
-integral comparison is natural by naturality of the canonical tensor comparison and
-of the product/fiber comparison. Its naturality extends to all fractions by A-linearity
-and inversion of p. Every object is an original integral object, so the component
-formula gives uniqueness. The two displayed directions are thus fixed, not chosen. -/
+/-- Rationalizing the constructed integral comparison fixes every component uniquely. -/
 theorem wfRationalTensorPullback_exists (p : A) :
     ∃! mu : wfRationalTensor X d r a ha p ⋙ wfAmbientRationalPullback X d r a ha e p ≅
         ((wfAmbientRationalPullback X d r a ha e p).prod
@@ -1185,12 +1150,7 @@ theorem wfRationalTensorPullback_exists (p : A) :
 def wfRationalTensorPullback (p : A) :=
   (wfRationalTensorPullback_exists X d r a ha e p).exists.choose
 
-/-- The exact PBC integral subcategory lies in this same intrinsically complete category.
-Proof: its first defining condition supplies an intrinsic-completion witness after the
-canonical completed-ring presentation comparison. The mutually inverse exact coefficient
-restrictions preserve the strict Koszul tower and unit. The Koszul reflector shows
-independence of the generating tuple and representative. Therefore the canonical
-representative and the given generating tuple have invertible intrinsic unit. -/
+/-- The exact PBC integral subcategory lies in this same intrinsically complete category. -/
 theorem wfConstructible_complete (M : PbcBoundedConstructibleComplete X d) :
     WfIsComplete X d r a ha M.obj := by
   obtain ⟨s, b, hb, C, eC, hC⟩ := M.property.1
@@ -1203,11 +1163,7 @@ def wfIntegralConstructibleInclusion :
     (ObjectProperty.ι (PbcIsBoundedConstructibleComplete X d))
     (wfConstructible_complete X d r a ha)
 
-/-- The inclusion on rational coefficients is uniquely determined by integral localization.
-Proof: the inclusion is A-linear since its underlying maps are unchanged. Extend its
-Hom maps by tensor with the identity of A[1/p]. This respects the given composition
-and identity formulas. Every localized morphism is a fraction of an integral morphism,
-and the objects are unchanged, so the equality determines the functor uniquely. -/
+/-- The inclusion on rational coefficients is uniquely determined by integral localization. -/
 theorem wfConstructibleInclusion_exists (p : A) :
     ∃! F : PbcRationalCategory X d p ⥤ WfAmbientRationalCategory X d r a ha p,
       pbcRationalization X d p ⋙ F =
@@ -1251,11 +1207,7 @@ theorem wfConstructibleInclusion_exists (p : A) :
 def wfConstructibleInclusion (p : A) :=
   (wfConstructibleInclusion_exists X d r a ha p).exists.choose
 
-/-- Inclusion commutes with the same coefficient transport, normalized by identity on objects.
-Proof: both inclusions and both pullbacks act on the same ambient derived objects and
-maps. Their integral composites agree after the faithful ambient inclusion. The unique
-rational extension retains these object identities and sends every integral arrow to
-itself tensored with one. Thus the displayed object equality is literal. -/
+/-- Inclusion commutes with the same coefficient transport, normalized by identity on objects. -/
 theorem wfConstructiblePullback_obj (p : A) (M : PbcRationalCategory X d p) :
     (wfAmbientRationalPullback X d r a ha e p).obj
         ((wfConstructibleInclusion X d r a ha p).obj M) =
@@ -1292,9 +1244,7 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
   [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
   (E : Padic.FiniteCoefficientFields c.l c.Qbar)
 
-/-- The singleton generator is exactly the stipulated uniformizer ideal.
-Proof: the range of the constant function on Fin 1 is the singleton uniformizer, and
-pbcIntegralDatum defines its ideal as the span of that singleton. -/
+/-- The singleton generator is exactly the stipulated uniformizer ideal. -/
 theorem wfUniformizer_generates :
     Ideal.span (Set.range (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)) =
       (pbcStageDatum.{u} c.l c.Qbar E).ideal := by
@@ -1317,7 +1267,7 @@ abbrev wfAmbientFrobenius := wfAmbientRationalPullback (D.geometricFiber X₀).l
   (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
   (wfUniformizer_generates D c E) (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
-/-- Inclusion of the node's Weil-complex carriers into the stipulated ambient category. -/
+/-- Inclusion of the Weil-complex carriers into the stipulated ambient category. -/
 abbrev wfWeilCarrier (K : WeilD D c X₀ E) : WfAmbient D c X₀ E :=
   (wfConstructibleInclusion (D.geometricFiber X₀).left
     (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)

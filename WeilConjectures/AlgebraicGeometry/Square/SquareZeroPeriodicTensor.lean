@@ -303,20 +303,7 @@ private def periodicDerivedTensorIso [HasDerivedCategory.{w} (ModuleCat.{r} R)]
       (-(q : ℤ)) ≪≫
     (tensorRight F).mapIso (P.cochainComplexXIso (-(q : ℤ)) q rfl) ≪≫ λ_ F
 
-/-- The multiplication-by-`t` resolution and its self-tensor calculation.
-
-Proof:
-1. Put R in every nonnegative chain degree, with differential multiplication by t,
-   and augment by R → R/(t). The square-zero equation makes a complex. The annihilator
-   hypothesis says each kernel equals the incoming image tR. The quotient augmentation
-   is surjective with kernel tR, so this is a free resolution of rank one in every degree.
-2. Reindex by i = -q. This is bounded above and termwise flat, hence K-flat by
-   lem-pc-module-bounded-flat-kflat, using def-pc-kflat-complex on the one-point site.
-   The computation and independence in lem-pc-derived-tensor-second-factor-functor
-   identify its total tensor with F[0] with the derived self-tensor.
-3. Each nonpositive term after tensoring is F and multiplication by t is zero.
-   There is only one summand in each total degree. Thus cohomology in degree -q is F,
-   including q = 0. The chain-indexed calculation is exactly Tor_q(F,F). -/
+/-- The multiplication-by-`t` resolution and its self-tensor calculation. -/
 theorem square_zero_periodic_resolution_tensor (R : Type r) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{r} R)]
     (t : R) (ht : t ^ 2 = 0)

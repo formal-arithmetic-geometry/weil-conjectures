@@ -176,17 +176,7 @@ private theorem ramification_factor :
   exact v.isUnit
 
 /-- The actual ell-power tower has a section-preserving sequence-site base whose
-calculus is the systems field of semilinear derived sections at every scheme.
-
-Proof: factor ell by the irreducible specified uniformizer in the integer DVR.
-Its absolute value is less than one, so its exponent is positive. Taking powers
-of the principal-ideal equality identifies the actual quotient ideals; finiteness
-follows from the finite uniformizer quotients. The coefficient ring presheaves
-are equal, since forming the inverse sequence commutes with forgetting
-commutativity. The vertical sheaf condition is exactly the levelwise condition.
-Rebundle the same module presheaves, with identity unit, counit and all maps.
-Finally retain the systems field and Grothendieck structure of semilinear
-derived sections. No new choice of tensor or of section carriers is made. -/
+calculus is the systems field of semilinear derived sections at every scheme. -/
 theorem strictBaseCoordinates :
     ∃ b : Base l E, ∀ T : Scheme.{u},
       ∃ s : SemilinearSections.SemilinearDerivedSectionsData.{u + 1, u, u + 1}

@@ -93,21 +93,7 @@ private theorem finiteLine_hom_ext (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
   have hg := hp N g U 1 z
   simpa only [one_smul] using hf.trans ((h U z).trans hg.symm)
 
-/-- The finite coefficient/root formula respects horizontal tower restrictions.
-
-Proof: the finite-line universal property reduces equality of linear maps to their
-values on generators 1 tensor z. Naturality of the scalar-adjunction unit computes
-the line transition on these generators. The rootForget transition equation identifies
-the root restriction with the actual roots-tower transition. The actual finite-unit
-normalization of Geometry computes the finite adjunct of the lower horizontal path.
-Use the assumed level-n normalization there and the level-m normalization on the
-other path. Every coefficient map preserves one, and the root direct-image map
-commutes with the roots transitions because restriction along a ring map preserves
-powers. Thus both adjuncts have the same value on every generator, including on
-empty charts. The finite-line universal property gives equality of morphisms, and
-cancelling the ordinary pull and line evaluation isomorphisms gives the displayed
-horizontal square. No statement about assembly or the tower adjoint is used.
--/
+/-- The finite coefficient/root formula respects horizontal tower restrictions. -/
 theorem linePullback_components_horizontal
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y) (cX : Chern l E X)

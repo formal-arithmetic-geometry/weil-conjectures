@@ -53,10 +53,7 @@ private theorem geometric_single_core
   rfl
 
 /-- The exact single-coefficient comparison is the geometric representative
-followed by localization of the ordinary single-complex comparison and coefficient iso.
-Proof: factor the geometric representative through the exact-derived comparison.
-Use mapDerivedCategorySingleFunctor_hom_app_eq and functoriality of Q on the
-single-complex comparison followed by k. The singleFunctor is single followed by Q. -/
+followed by localization of the ordinary single-complex comparison and coefficient iso. -/
 theorem upperStar_single_coefficient_representative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}

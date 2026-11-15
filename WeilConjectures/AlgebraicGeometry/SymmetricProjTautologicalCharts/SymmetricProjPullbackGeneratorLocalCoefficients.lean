@@ -66,19 +66,9 @@ private theorem pair_local_coefficients {S T : Scheme.{u}} (f : T ⟶ S)
   obtain ⟨b', hqZ'⟩ := hq' U W h x Z hZW hxZ a c hqZ
   exact ⟨Z, hZW, hxZ, a, b', c, fun t ↦ ⟨hqZ t, hqZ' t⟩⟩
 
-/-- Local factorization and coefficient formulas on one affine chart.
-
-The proof first chooses an affine `V` below the image of a point and lifts the
-point to the relative Proj chart over `V`. The old degree-one basic opens cover
-that chart by symmetric-algebra induction. Choose one generator `v` containing
-the lifted point, refine its standard open and the original open by an affine
-`Z`, and factor the inclusion through the standard open. The absolute
-`Proj.awayι_comp_map` and homogeneous-localization fraction map give the old
-coefficient. The normalized chart formula for `D'` gives the new coefficient;
-`hb` identifies the two coefficients. The pullback unit and composition
-naturality transport both formulas to the displayed maps `q` and `q'`.
-This is strictly weaker than the parent statement: it supplies only the local
-common-coefficient data, with no tensor symmetry or sheaf gluing conclusion. -/
+/-- Local coefficient formulas on one affine chart: near every point there are sections `a`, `b'`
+and coefficients `c` such that `q` and `q'` send each pulled generator `t` to `c t • a` and
+`c t • b'` respectively. -/
 theorem normalized_pullback_generator_local_coefficients
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

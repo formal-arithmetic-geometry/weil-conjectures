@@ -26,23 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The finite exterior coefficient tower is the dual positive tensor tower.
-
-Proof: use the increasing-subset bases of the exterior powers of A^(Fin r).
-Identify a degree -k basis vector with the dual tensor coordinate, with sign
-(-1)^(k*(k-1)/2). Contraction removes the j-th generator with sign (-1)^j;
-the differential on the dual adds the degree sign, and the ratio of the two
-successive comparison signs gives exactly that sign. This defines inverse
-chain maps over A. Apply constant module sheafification, completed scalar
-extension, inverse restriction along the coefficient isomorphism, and the
-site equivalence. Each operation preserves finite free coordinates. The
-transition on a subset is multiplication by the product of its generators
-on both sides, so the comparison commutes with consecutive transitions.
-The empty subset has sign +1. Both augmentations send 1 to that coordinate;
-the transported regular-module unit is precisely the section 1, giving the
-last equation. If r=0 the comparison is the unit isomorphism. Zero and unit
-generators and the zero ring require no cancellation, and sheafification
-also handles the empty site. No tensor with an arbitrary complex occurs. -/
+/-- The finite exterior coefficient tower is the dual positive tensor tower. -/
 theorem completedKoszulCoefficientComparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

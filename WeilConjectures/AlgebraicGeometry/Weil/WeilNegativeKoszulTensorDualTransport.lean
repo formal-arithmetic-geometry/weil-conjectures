@@ -112,29 +112,7 @@ private theorem negativeKoszulDualityAux
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The scalar realization of the tensor of negative rank-one factors is the
-internal dual of the tensor of positive rank-one factors.
-
-Proof: the one-generator exterior complex has A in degrees -1 and 0 and zero
-elsewhere, using the zeroth and first exterior equivalences and vanishing of
-higher exterior powers of a rank-one module. Its contraction is multiplication
-by a^(m+1), and its transition is (a,1). Constant sheafification, completed scalar
-extension, inverse coefficient restriction and reindexing along the site equivalence
-send A to the regular O-module, multiplication by a to the specified compatible
-residue scalar b, and the algebraic element 1 to section 1. The resulting negative
-factor is the internal dual of [O --b^(m+1)--> O] in degrees 0 and 1: in degree -1
-the Hom differential has sign -(-1)^(-1)=+1. Evaluation on 1 gives the two
-rank-one identifications and intertwines (b,1) with the dual of (1,b).
-For several factors use the tensor comparison of scalar extension and reindexing
-on each finite total summand. Tensor duals of finite free complexes identify with
-the dual of their tensor; on homogeneous tensors the evaluation has the Koszul
-sign from interchanging the middle factors. These signs make evaluation a chain
-map and make its inverse the dual-basis map. Induct on the ordered factors.
-Naturality of evaluation gives the consecutive transition identity. All units
-are degree-zero tensors of 1; evaluation there has sign +1, so the displayed
-unit is the dual of the positive projection, preceded by evaluation at 1.
-For the empty tensor use Hom(O[0],O[0])=O[0]. Finite free dual bases and their
-identities remain valid over the zero ring and on the empty site. This proof
-uses only rank-one exterior powers, not the exterior-to-tensor comparison. -/
+internal dual of the tensor of positive rank-one factors. -/
 theorem negativeKoszulTensorDualTransport
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

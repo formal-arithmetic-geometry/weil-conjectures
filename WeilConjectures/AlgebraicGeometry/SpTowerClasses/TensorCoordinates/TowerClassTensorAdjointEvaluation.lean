@@ -47,12 +47,7 @@ attribute [local implicit_reducible] spCoefficientCommRings SemilinearSections.e
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Evaluation commutes with transposition by the ordinary geometric adjunction.
-
-Proof: express transposition as the unit followed by the direct image of the map.
-The normalized system unit evaluates to the finite unit followed by the direct image
-of the inverse pull-evaluation isomorphism. Naturality of push-evaluation then gives
-the finite transpose. This works without a nonempty chart or nonzero module assumption. -/
+/-- Evaluation commutes with transposition by the ordinary geometric adjunction. -/
 theorem tensorComparison_adjoint_evaluation {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     {M : Systems Y (Arings l E Y)} {N : Systems X (Arings l E X)}

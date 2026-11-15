@@ -616,17 +616,7 @@ private theorem coefficientPullIso_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [← Functor.map_comp_assoc, integerGenerator_constant, integerGenerator_constant]
   exact (abConstantComparison f).naturality (integerResidue l n.unop)
 
-/-- Pointwise normalized comparison of constant integral sections.
-
-Proof: identify each forgotten coefficient system with its tower of constant
-residue groups. The canonical inverse-image comparison for constant sheaves is
-an isomorphism and is natural in additive group homomorphisms. Its naturality
-for the integer quotient gives the generator equation. Every additive morphism
-between modules over a constant residue ring is linear (Stacks 03CY); applying
-this at each level makes the recorded forgetting functor fully faithful.
-Conjugate the canonical abelian comparison by the supplied e, lift the resulting
-isomorphism through this fully faithful functor, and cancel e with its inverse.
-The generator equation then gives the asserted equality on every section. -/
+/-- Pointwise normalized comparison of constant integral sections. -/
 theorem integralInverseSystem_unit_normalization_components (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

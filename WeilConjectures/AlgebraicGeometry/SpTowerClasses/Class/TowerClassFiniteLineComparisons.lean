@@ -25,17 +25,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Finite inverse image of the scalar-extended root line, with its tensor formula.
-
-Proof: map the global unit ell from Y to X, and then into every residue field.
-The supplied finite coefficient quotients are finite by Base.finite. Apply
-spFiniteTwists_cartesian with the n-th quotient as coefficient ring and exponent
-n, and take its degree-one isomorphism. Its tensor formula uses the actual
-constant coefficient direct-image map and the direct-image roots map. The unique
-section characterization of the latter identifies it with restrictRoot through
-the roots-section equivalence. This proves the displayed formula without any
-tower assembly or compatibility assertion. No condition on the morphism is used.
--/
+/-- Finite inverse image of the scalar-extended root line, with its tensor formula. -/
 theorem finiteLineComparisons_exists
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hY : IsUnit (l : Γ(Y, ⊤))) :

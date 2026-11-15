@@ -68,9 +68,14 @@ import WeilConjectures.AlgebraicGeometry.Affine.AffineComponentSiteProjection
 /-!
 # Relative profinite tests over an affine scheme's component space
 
+This file constructs a functor from profinite sets over the component space of an affine
+scheme to its pro-étale site. Its finite stages are coproducts of actual restricted open
+subschemes, and its image of every finite-clopen presentation is a limit cone over the base.
+
+## Implementation details
+
 The functor in the theorem is specified by a universal property, not by an arbitrary
-choice of affine schemes. Its finite stages are coproducts of actual restricted open
-subschemes. Its image of every finite-clopen presentation is a limit cone over the base.
+choice of affine schemes.
 
 ## References
 
@@ -128,11 +133,7 @@ noncomputable def componentFiniteScheme (T : Scheme.{u}) [IsAffine T]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The pullback topology and stalkwise isomorphisms give the relative universal
-mapping property, including maps from arbitrary schemes over the base.
-
-Proof: pair the given coordinate with the map to the base, apply the inverse pullback
-homeomorphism, and lift the resulting continuous map by stalk-isomorphism lifting.
-Equality of both coordinates gives uniqueness. -/
+mapping property, including maps from arbitrary schemes over the base. -/
 theorem component_mapping_property (T : Scheme.{u}) [IsAffine T]
     (F : Over (affineComponentSpace T) ⥤ T.ProEt)
     (p : ∀ E : Over (affineComponentSpace T), C((F.obj E).left, E.left))
@@ -610,30 +611,7 @@ private theorem component_finiteIso {C : Type*} [Category* C] [HasCoproducts.{u}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The relative profinite test functor, its presentation characterization, and the
-factorization of the condensed-point morphism.
-
-Proof for stage 3.
-1. The affine component-site projection supplies the functor, stalkwise isomorphisms,
-   the pullback homeomorphisms, finite limits, coverings, and the geometric morphism.
-2. The inverse-image adjunction makes each continuous lift over T into a unique
-   scheme morphism, since the structure morphism is an isomorphism on stalks.
-3. At a finite stage, each restricted clopen subscheme maps to its corresponding
-   finite-coordinate fibre. These are disjoint open immersions covering the test
-   scheme, so their cofan is a coproduct, including empty and repeated blocks.
-4. Compatible finite clopen partitions give a small cofiltered relative presentation;
-   its limiting property follows from Mathlib's canonical finite-quotient limit.
-5. Apply the universal mapping property to the limiting cone in topological spaces
-   over the component space. This proves preservation of every small relative limit.
-6. For finite coproducts, images of the component injections are disjoint open
-   immersions covering the target. Their cofan is again a scheme coproduct.
-7. The absolute functor and the relative functor applied to S times a profinite test
-   agree on finite tests: continuity gives finite coproducts and finite limits give
-   the terminal test. Both preserve the canonical finite-quotient limits. The finite
-   comparison extends naturally through these limits.
-8. Mathlib's slice adjunction gives the geometric morphism with inverse image
-   overPullback. Restriction along the natural comparison identifies the composite
-   direct image with the condensed-point direct image. Its adjoint mate gives the
-   stated isomorphism of inverse images. -/
+factorization of the condensed-point morphism. -/
 theorem component_relative_profinite_site (T : Scheme.{u}) [IsAffine T] :
     ∃ F : Over (affineComponentSpace T) ⥤ T.ProEt,
       (∀ E : Over (affineComponentSpace T), IsAffine (F.obj E).left) ∧

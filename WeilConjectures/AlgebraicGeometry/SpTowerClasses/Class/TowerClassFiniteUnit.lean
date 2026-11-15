@@ -248,17 +248,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] finiteUnitIso
 
 /-- The actual finite constant-ring adjunction preserves its regular module,
-with its transpose fixed on every section.
-
-Proof: direct image preserves global module sections since base change on the
-pro-etale sites preserves terminal objects and is therefore final. The regular
-module represents global sections. Thus composition with the adjoint of the
-canonical unital ring map is a bijection on every outgoing Hom set, so that
-adjoint is invertible by Yoneda. Transport the two regular modules through the
-identity-on-carriers evaluation comparisons. Naturality of the Hom equivalence
-identifies its transpose with the original unital ring map. Its equality with
-the constant direct-image map is the inverse law of the ring-sheaf adjunction.
-This uses neither a nonempty-chart assumption nor finiteness of the ring. -/
+with its transpose fixed on every section. -/
 theorem exists_finiteUnitIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃ d : (Scheme.proEtaleConstantRingPullback (SpTowerShriek.R l E n) f).obj
         ((SpTowerShriek.ev l E Y n).obj (coefficient Y (Arings l E Y))) ≅

@@ -85,21 +85,7 @@ private theorem scalar_comparison_paste
 
 /-- Geometric inverse image commutes with the successive coefficient realization. The
 comparison is natural on all integral derived objects, has the coefficient-unit source,
-and carries the full-units target map to the specified root-tensor comparison. This
-assertion involves no line bundle or Chern class.
-
-Proof: first construct the exact inverse image of the intermediate R-module
-systems and its scalar-extension comparison kappa by tower_chernScalar_pullback.
-Then apply tower_chernReduction_pullback to that same inverse image, obtaining
-rho between integral reductions. Whisker kappa on the left by the reduction on Y,
-whisker rho on the right by scalar extension on X, and compose to obtain eta.
-For either endpoint, combine the two reduction factors under scalar extension,
-substitute rho's endpoint equation, and use naturality of kappa with respect to
-the unit or root identification. Kappa's endpoint equation then gives exactly
-the required coefficient or line comparison. Functoriality of scalar extension
-and pullback supplies the final composition equations. The private lemma
-scalar_comparison_paste proves this calculation uniformly for both endpoints.
-All comparisons are in the derived categories of whole systems. -/
+and carries the full-units target map to the specified root-tensor comparison. -/
 theorem tower_chernRealization_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))

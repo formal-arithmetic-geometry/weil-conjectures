@@ -44,15 +44,7 @@ private theorem squareG_eq {V W S T : Scheme.{u}}
   exact normalizeIsoSquare (gComp B r i) (gComp B k p) (congrArg (G B) w.symm)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The inverse-image comparisons of successive commutative squares paste.
-Proof: expand each square comparison into the two inverse-image compositors and
-the equality of the composite scheme maps. The associativity law for these
-compositors identifies both paths with the same comparison from the inverse image
-of the composite map to three successive inverse images. This law holds on module
-sheaves because the direct-image compositors are restriction along the unique
-pullback pasting isomorphisms; their conjugate pullback compositors inherit it.
-Whiskering to strict towers and exact derived localization preserve the equation.
-No openness or cartesianness is required. -/
+/-- The inverse-image comparisons of successive commutative squares paste. -/
 theorem squareG_pasting_inv {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
     (j : U ⟶ X) (j₁ : U₁ ⟶ X₁) (j₂ : U₂ ⟶ X₂)
     (g : X₁ ⟶ X) (h : X₂ ⟶ X₁) (a : U₁ ⟶ U) (b : U₂ ⟶ U₁)

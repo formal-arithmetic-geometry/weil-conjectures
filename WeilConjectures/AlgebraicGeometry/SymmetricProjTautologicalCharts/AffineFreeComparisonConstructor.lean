@@ -48,13 +48,7 @@ private theorem comparisonLogic {α δ ε θ : Type u}
   ⟨a, hp, hq, hr, h, c, hc, ht, d, k, f, hn, hd, hj⟩
 
 /-- The explicit ordered polynomial, twist and relative-chart witnesses give the affine
-comparison predicate with precisely those witnesses.
-
-Proof: Unfold AffineFreeComparison, choose beta, its irrelevant-ideal witness and eC,
-then gamma, its irrelevant-ideal witness and eR. Insert the supplied bijectivity,
-coefficient, ordered-variable, Proj-map, twist and relative-chart identities in the
-order of the conjunctions. The polynomial grading is the specified Mathlib grading.
-No nonemptiness or nonzero-ring hypothesis is used. -/
+comparison predicate with precisely those witnesses. -/
 theorem affineFreeComparison_mk {S : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅

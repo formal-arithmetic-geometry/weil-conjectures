@@ -124,18 +124,7 @@ private theorem homogeneous_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
   rw [haction, hπ]
 
 /-- A homogeneous quotient section of degree n carries the d-th ideal summand
-into the (n+d)-th ideal summand. No coefficient transport or projection is asserted.
-Proof: Set r to the degree-d inclusion followed by the given global action, and
-set v to r followed by the degree-(n+d) projection. Locally lift the homogeneous
-quotient section along the epimorphic tensor-pullback unit. The ideal-kernel
-comparison shows that multiplying this lift by a degree-d kernel section lies in
-the degree-(n+d) kernel. The identities b_quotient, k_inclusion, b_multiply, hlocal
-and hglobal identify its image in I with r; cancel the monomorphism i to obtain
-this equality. The identity k_projection then gives r = v followed by k_(n+d)
-locally. Naturality and sheaf separation give the equality globally. Specialize
-to the section defining tensorGradedSection and simplify n*(0+1) to n. The argument
-uses no independence of lifts or gluing of newly chosen maps; v was explicit from
-the start. Tensor unit coherence covers zero degrees and empty opens. -/
+into the (n+d)-th ideal summand. -/
 theorem tensorGradedCoefficient_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

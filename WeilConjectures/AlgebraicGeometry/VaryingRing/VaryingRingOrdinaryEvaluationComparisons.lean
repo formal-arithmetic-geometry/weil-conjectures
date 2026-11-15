@@ -35,8 +35,7 @@ variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 attribute [local instance 2000] WeilConjectures.SemilinearSections.sequenceSmall
   StrictTower.towers_hasDerivedCategory Scheme.proEtaleRingModules_hasDerivedCategory
 
-/-- The realization functor is fixed uniquely by its explicit construction.
-Proof: the displayed functor is a witness; the defining equality gives uniqueness. -/
+/-- The realization functor is fixed uniquely by its explicit construction. -/
 theorem ordinaryRealization_existsUnique (n : ℕ) (X : Scheme.{u}) :
     ∃! E : Modules R φ X ⥤ StrictTower.Derived (R n) X,
       E = eval R φ X n ⋙ Functor.const ℕᵒᵖ ⋙
@@ -48,8 +47,7 @@ def ordinaryRealization (n : ℕ) (X : Scheme.{u}) :
     Modules R φ X ⥤ StrictTower.Derived (R n) X :=
   (ordinaryRealization_existsUnique R φ n X).choose
 
-/-- The realization retains exactly the explicit component/single construction.
-Proof: this is the equality in its proved unique specification. -/
+/-- The realization retains exactly the explicit component/single construction. -/
 theorem ordinaryRealization_eq (n : ℕ) (X : Scheme.{u}) :
     ordinaryRealization R φ n X = eval R φ X n ⋙ Functor.const ℕᵒᵖ ⋙
       DerivedCategory.singleFunctor (StrictTower.Towers (R n) X) 0 :=

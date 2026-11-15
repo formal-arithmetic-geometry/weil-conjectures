@@ -35,6 +35,13 @@ well as abelian groups and finite fixed-ring modules. Every comparison is the ma
 of the canonical base-change isomorphism on restriction functors. No arbitrary
 isomorphism is selected.
 
+## Implementation details
+
+The support-site comparison, identity, composition and square isomorphisms are
+definitionally equal to their counterparts in `ComparisonPullbackCoherence`, so the coherence
+predicate `supportSiteComparisonPullbackCoherent` reuses `ComparisonPullbackCoherent` and
+`supportSiteComparison_pullback_coherent` specializes `comparison_pullback_coherent`.
+
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 098T, 099R, 00WX, 0B65
@@ -179,39 +186,12 @@ noncomputable def supportSiteComparisonCoefficientPullbackIso {X Y : Scheme.{u}}
       (supportSiteComparisonCoefficientDirectImageIso D f).symm).symm
 
 /-- The identity, composition and chosen Cartesian-square equations for the
-canonical comparison. This reuses `ComparisonPullbackCoherent`: the support-site
-comparison maps above are definitionally the same canonical maps. Equations are
-componentwise on every sheaf, equivalently
-equalities of natural transformations. The square is the specified one, including
-its commutativity transport; it is not replaced by an arbitrary isomorphism. -/
+canonical comparison of etale and pro-etale inverse images with coefficients in `D`. -/
 abbrev supportSiteComparisonPullbackCoherent : Prop :=
   ComparisonPullbackCoherent D
 
 /-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
-sheaves and sheaves of modules over every finite discrete ring.
-
-Proof: (1) the etale-to-pro-etale inclusion commutes with base change: both composites
-have the same fibre products and arrows. Restriction of sheaves therefore gives
-`supportSiteComparisonCoefficientDirectImageIso`. Scalar actions are the same constant sections,
-so this works in fixed-ring modules as well as sets and abelian groups.
-(2) Compose the inverse-image and comparison adjunctions (`Adjunction.comp`), and
-apply the unit-normalized conjugation bijection (`conjugateIsoEquiv` and
-`unit_conjugateEquiv_symm`). This is exactly `supportSiteComparisonCoefficientPullbackIso`.
-(3) For identities the right-image map is the identity after the fibre-product identity.
-For composites, both right-image paths restrict along the same associativity map
-`(W ×[Z] Y) ×[Y] X ≅ W ×[Z] X`, preserving the two projections. The composite Hom
-bijections thus coincide; their injectivity proves the identity and composite equations.
-(4) For the chosen Cartesian square, expand each square identification through the
-composition comparisons and the supplied commutativity equation. Both paths on sections
-identify the iterated products with `W ×[Y] X'` preserving both projections. Thus the
-right-image maps agree, and injectivity of the adjunction Hom bijections proves the
-specified square equation. These arguments are the node's four proof steps and retain
-all identity, arbitrary-composite and chosen-square cases.
-
-The existing `comparison_pullback_coherent` proves this argument for the same
-Kan-extension constructions. The support-site comparison, identity, composition
-and square isomorphisms are definitionally equal to its counterparts, so the
-coherence predicate reuses the existing one and the theorem specializes directly. -/
+sheaves and sheaves of modules over every finite discrete ring. -/
 theorem supportSiteComparison_pullback_coherent :
     supportSiteComparisonPullbackCoherent (Type (u + 1)) ∧
       supportSiteComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧

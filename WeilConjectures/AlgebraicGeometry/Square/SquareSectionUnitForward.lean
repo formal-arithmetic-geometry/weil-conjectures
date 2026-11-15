@@ -763,13 +763,6 @@ end Helpers
 /-- The normalized square comparison reaches the raw target endpoint before its
 inverse is applied. This is the forward equation needed for cancellation in the
 section-unit identity.
-
-Proof: Resolve the target coefficient by J, use the right-derived mate equation for
-the commuting square, and evaluate the universal Leray and inverse-open
-factorizations on the same K-injective representative. The resulting map is the
-hom of `squareInjectiveLocalComparison` for k. This is the forward half of the
-unit cancellation; postcomposition with its inverse gives the parent statement.
-The construction is valid for empty opens and identity squares.
 -/
 theorem squareSectionUnit_forward {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)

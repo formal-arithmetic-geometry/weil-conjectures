@@ -297,23 +297,7 @@ private theorem basisNaturality
   exact congrArg Mod.Hom.hom h
 
 /-- The prescribed roots give an isomorphism of the rational coefficient and twist
-abelian-sheaf diagrams on the slice, whose components are linear for each finite field.
-
-Proof: at level n tensor the normalized map e_n with O_E/(ell^(n+1)). Its inverse
-sends b tensor z to b times the image of e_n inverse applied to z. Balancing gives
-the inverse identities. The normalization of e_n and compatibility of the roots
-make these maps commute with quotient reductions, so they induce inverse integral
-basis maps. Identify the coefficient limit by the positive ell-power coefficient
-limit theorem. Extend both maps to E by the specified scalar extension; the
-balancing relation proves E-linearity. For E contained in F, the finite transition
-sends b tensor zeta_n to its coefficient image tensor the same zeta_n. Thus the
-integral maps commute with field inclusions by limit projection extensionality,
-and their rational extensions commute by scalar-tensor extensionality. This is
-the naturality equation for the asserted diagram isomorphism. The displayed action
-identity is precisely the E-linearity of each component, expressed before section
-reconstruction. No colimit over fields or positive tensor power is taken here.
-The argument includes the empty slice: all the natural maps and inverse equations
-remain valid on its sections. -/
+abelian-sheaf diagrams on the slice, whose components are linear for each finite field. -/
 theorem spRationalRootDiagramBasis
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)

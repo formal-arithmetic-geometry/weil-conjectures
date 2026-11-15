@@ -177,15 +177,7 @@ def TensorSingleCounitSquare
             (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ tensorRight N))
               (.up ℤ)).symm).hom.app P)
 
-/-- The cochain tensor counit square implies its single-coefficient specialization.
-Proof: write the single-coefficient comparison as its geometric representative
-followed by localization of the ordinary single-complex comparison and k. Lax
-monoidal naturality moves this latter morphism through the tensorator. Apply the
-cochain tensor counit square to P and single M. The ordinary bifunctor comparison
-on a single complex, and naturality of its single-complex iso with respect to k,
-identify the remaining map with the degreewise tensor comparison t. Naturality
-of the geometric representative moves the total-tensor/single iso to the other
-side; functoriality of Q and associativity finish the equation. -/
+/-- The cochain tensor counit square implies its single-coefficient specialization. -/
 theorem tensor_single_cochain_counit
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D]

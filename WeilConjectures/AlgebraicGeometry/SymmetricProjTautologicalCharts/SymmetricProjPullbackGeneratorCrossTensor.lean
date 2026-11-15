@@ -28,28 +28,7 @@ attribute [local instance 2000] CategoryTheory.Abelian.hasFiniteLimits
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 open Scheme.Modules CategoryTheory.MonoidalCategory
 
-/-- The degree-two cross relation on actual pulled generators over affine opens.
-
-Proof: refine W by inverse images of affine-pair charts for g and by their
-standard opens D_+(b(iota(v))). They cover: the degree-one base-change condition
-says that the images of the old degree-one elements span the new degree-one
-part, so a homogeneous prime containing all images contains the irrelevant ideal.
-On such a standard open, the chart normalization D.generator writes the image
-of a pulled generator m as iota(m)/iota(v) times the pulled old twist frame.
-The new chart normalization D'.generator writes its image as
-b(iota(m))/b(iota(v)) times the new frame, by hb. The fraction formula for the
-Proj map identifies the pulled old coefficient with this new coefficient.
-Thus the two displayed tensors have respective coefficients c_m*c_n and c_n*c_m
-in the same tensor of the two frames; they agree by commutativity. The
-section-normalized pullback composition and its unit equation identify the
-sections with m' and n', including the equality transport e; proof irrelevance
-makes the choice of equality proof immaterial. Where U and an affine pair's
-base open differ, refine their intersection by affine opens and apply the same
-calculation to restricted m and n. Separation of the tensor sheaf glues the
-identity on W. Empty standard opens and zero coefficient rings satisfy the
-same equality. This proves only the formula for the specified pulled generators;
-no extension to arbitrary sections, free-frame atlas or line isomorphism is
-asserted. -/
+/-- The degree-two cross relation on actual pulled generators over affine opens. -/
 theorem normalized_pullback_generator_cross_tensor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

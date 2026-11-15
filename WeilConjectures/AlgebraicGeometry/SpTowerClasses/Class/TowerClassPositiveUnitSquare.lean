@@ -153,17 +153,7 @@ private theorem ordinary_unit_square
     (tX.equivalence.functor.map q.iso.hom ≫ tX.unitIso.hom) n U z
   exact hleft.trans (hX.symm.trans hright.symm)
 
-/-- The positive pullback comparison respects the coefficient-to-line unit.
-
-Proof: the normalized ordinary unit isomorphism identifies every section of
-its source with a tensor 1 tensor y. Transpose the two arrows under the ordinary
-geometric adjunction and test them on sections using the invertible evaluation
-comparison. The positive-pullback normalization, tensor functoriality, and the
-coefficient normalization at 1 identify the right path with the adjoint of the
-line pullback applied to y, which is the left path. Naturality of the exact
-single-functor comparisons and compatibility with derived composition transport
-this ordinary equality to the displayed derived square. The argument includes
-empty charts and requires no nonvanishing hypothesis. -/
+/-- The positive pullback comparison respects the coefficient-to-line unit. -/
 theorem positivePullback_unit_square
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -641,15 +641,7 @@ private theorem supportCube
     ← reassoc_of% (hp ((t.support C).openImage.J.obj N)), reassoc_of% ht]
 
 attribute [local irreducible] eqToHom in
-/-- The forward compact-support restriction evaluation cube.
-
-Proof: paste the normalized proper and open restriction comparisons, using
-sectionwise identity maps and their inverse-image and right-adjoint mates; exact
-localization preserves the resulting square. Naturality of the proper and open
-comparisons gives the displayed forward cube. This is the forward form before
-cancelling the support evaluation isomorphism and replacing the canonical
-single-ring restriction by an arbitrary `d` with `hd`.
--/
+/-- The forward compact-support restriction evaluation cube. -/
 theorem etaleSystemRestriction_evaluation_forward
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l)
     (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)

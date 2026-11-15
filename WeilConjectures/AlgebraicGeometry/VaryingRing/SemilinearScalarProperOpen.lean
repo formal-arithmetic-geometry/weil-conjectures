@@ -1337,22 +1337,7 @@ private theorem scalarAlpha_comparison (C : OrdinaryScalarRestriction R φ B ψ)
     (scalarBeta_comparison R φ B ψ C G (pullback.snd p i) (pullback.fst p i) i p
       pullback.condition.symm (IsPullback.of_hasPullback p i).flip M)
 
-/-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha.
-Proof: choose the constant-tower cartesian beta as the inverse open-unit transpose.
-The inverse-image compositor comparison follows by taking the mates of the
-sectionwise direct-image compositor. The open compositor comparison follows from
-uniqueness of the unit-preserving left-adjoint comparison. Transposing the two sides
-of beta compatibility, substituting these compositor and open-unit equations,
-gives identical morphisms; the adjunction bijection proves their equality.
-For a clopen map, the open unit is invertible and its inverse transpose is the
-extension/direct-image comparison. Take its inverse and compose with the
-direct-image unit to define pi. The already established unit and mate comparisons
-prove pi compatibility. Define alpha by the specified beta, pi and compositor
-word. Substitute beta and pi compatibility and the two compositor equations into
-this word. Naturality moves each coefficient comparison through the factors, and
-the neighboring inverse comparisons cancel. The resulting equation is alpha
-compatibility. None of these arguments assumes that the proper/open square is
-cartesian or that a coefficient map is flat. -/
+/-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha. -/
 theorem ordinaryScalarProperOpen (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
     (C : OrdinaryScalarRestriction R φ B ψ) (G : OrdinaryScalarAdjunctions R φ B ψ C) :
     Nonempty (OrdinaryScalarProperOpen R φ B ψ C G) := by

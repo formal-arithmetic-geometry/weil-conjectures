@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationClosedFiberForward
 # Transport of the closed fibre to the small strict henselization
 
 The canonical colimit isomorphism intertwines the small-model structural map with
-`strictLocalizationToBase`. This transfers the upstream singleton-fibre theorem without
-exposing its different structural-map compatibility API.
+`strictLocalizationToBase`; this transfers the singleton-fibre theorem to the small model.
 
 ## References
 
@@ -32,12 +31,7 @@ namespace AlgebraicGeometry.Scheme
 open Limits Opposite in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Spec of the small-to-full colimit comparison commutes with the structure maps.
-
-Proof: choose a representative pointed affine neighbourhood. The inverse colimit
-comparison identifies its two coprojections. Apply Spec, identify the inverse of the
-canonical affine global-sections map, and compose with the neighbourhood map to the base.
-The defining equations of both structural maps identify the resulting composites. -/
+/-- Spec of the small-to-full colimit comparison commutes with the structure maps. -/
 theorem smallStrictHenselizationColimitIso_toBase
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

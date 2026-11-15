@@ -34,7 +34,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 * The same three constructions in `AlgebraicGeometry.ProEtale` use the small pro-etale site.
 
 The constructions are defined for all abelian sheaves, hence in particular on the torsion
-sheaves and bounded-below complexes with torsion cohomology of the node. On the pro-etale
+sheaves and bounded-below complexes with torsion cohomology. On the pro-etale
 site the coefficient category may be `ModuleCat Λ`, in particular for each finite-torsion
 coefficient ring of the purity conventions. No twist is needed to define supported sections.
 -/
@@ -59,9 +59,7 @@ noncomputable def supportedSectionsFunctor : Sheaf J A ⥤ A where
   map_id F := equalizer.hom_ext (by simp)
   map_comp f g := equalizer.hom_ext (by simp)
 
-/-- Additivity needed to derive the kernel-of-restriction functor.
-Proof: compose each proposed equality with the kernel inclusion. The resulting equality
-is additivity of evaluation on sections; the kernel inclusion is monic. -/
+/-- Additivity needed to derive the kernel-of-restriction functor. -/
 theorem supportedSectionsFunctor_additive : (supportedSectionsFunctor J A j).Additive := by
   refine ⟨?_⟩
   intro F G f g

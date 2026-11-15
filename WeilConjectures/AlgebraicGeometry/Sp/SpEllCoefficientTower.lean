@@ -155,20 +155,7 @@ def spEllCoefficientCone (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     rfl)
 
 /-- The specified ell-power reductions make the regular integral coefficient module
-an inverse limit of its quotient coefficient modules.
-
-Proof: the native continuous-function coefficient sheaf is the limit of all
-ell-power quotient sheaves, with its specified reduction projections. The successor
-functor on the opposite natural-number category is initial: predecessor is left
-adjoint to successor on the natural-number order. Whiskering this limit cone removes
-its zero exponent and gives exactly the positive exponents used here. The canonical
-condensed-to-continuous coefficient comparison is an isomorphism for the integral
-ring and for each discrete quotient. Its naturality for continuous ring maps makes
-these comparisons an isomorphism of the actual quotient diagrams and identifies
-every reduction projection. Transport the continuous limit through these diagram
-and cone isomorphisms. Finally the internal-module forgetful functor reflects limits,
-so the constructed coefficient cone is a limit in modules with the specified action.
-No preservation of infinite limits by an inverse-image functor is used. -/
+an inverse limit of its quotient coefficient modules. -/
 theorem spEllCoefficientCone_isLimit (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     Nonempty (IsLimit (spEllCoefficientCone X ℓ E)) := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1

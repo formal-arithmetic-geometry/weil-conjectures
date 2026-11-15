@@ -54,19 +54,9 @@ private theorem localizationPresentation_flatOver_restrict
   exact congrArg (fun x ↦ (M.smul x).asHom.hom m) (congrArg (fun x ↦ x.hom r) heq)
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- Concrete localized presentation witnesses used by completion.
-Proof: choose an affine open S containing g(a), then an affine open V containing a
-inside the open inverse image of S. Put W = p inverse-image S. Restrict M to W
-and p to W -> S. Quasi-compactness and quasi-separatedness persist under this
-open base change; quasi-coherence and relative flatness restrict, since sections
-on affine subopens and their scalar actions are identified by open restriction.
-Apply h_affine to W -> S and V -> S, and then to the restriction of M to the top
-open of W. The top-open inclusion is an isomorphism. Transport its direct image,
-ordinary pullback and canonical comparison along that isomorphism, using the
-unit and counit identities. This gives the displayed presentation on S, including
-its bounded flat K, both identifications and their equation. Nothing is extended
-from S to the whole base B. The chosen point ensures the opens are nonempty;
-there is no assertion to check when A is empty. -/
+/-- Concrete localized presentation witnesses: there are affine opens `S ∋ g a` and `V ∋ a`
+with `V ≤ g ⁻¹ᵁ S` carrying a flat counit presentation for the restriction of `p` and `M`
+over `S`. -/
 theorem standardSingleFlatCounit_localization_presentation_data
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

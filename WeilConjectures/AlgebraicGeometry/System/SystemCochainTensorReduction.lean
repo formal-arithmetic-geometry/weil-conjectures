@@ -61,9 +61,7 @@ private theorem cochainReduction_f (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : 
     (cochainReduction.{c, v, r} J B τ A h P).f k =
       ordinaryReduction.{c, v, r} J B τ A h (P.X k) := rfl
 
-/-- The degreewise construction agrees with the induced cochain adjunction.
-Proof: the inverse Hom equivalence is extension of the map followed by the
-counit in both constructions, and the cochain counit is degreewise. -/
+/-- The degreewise construction agrees with the induced cochain adjunction. -/
 theorem cochainReduction_eq_transpose (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     cochainReduction.{c, v, r} J B τ A h P =
@@ -154,13 +152,7 @@ private theorem cochainReduction_summand_paste {D E : Type*} [Category D] [Categ
 
 set_option backward.isDefEq.respectTransparency true in
 -- The summand calculation compares three dependent ringed module categories.
-/-- Cochain reduction commutes with the normalized total tensor comparisons.
-Proof: test equality in each total degree on every (p,q) summand. The comparison
-model summand equations express both maps using the inverse ordinary comparisons.
-Naturality moves the horizontal adjoint past the system tensor summand. The
-ordinary tensor reduction identity then equates the two remaining maps. This
-argument uses every summand of the unbounded total and changes no differential
-or Koszul sign. -/
+/-- Cochain reduction commutes with the normalized total tensor comparisons. -/
 theorem cochain_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     (A.scalarTensorModel h).chain

@@ -761,9 +761,7 @@ noncomputable def betaInvApp {U' U X' X : Scheme.{u}}
     ((G B gU).map ((jAdj B j).unit.app M) ≫
       (squareG B gU j' j g h).inv.app ((J B j).obj M))
 
-/-- Naturality of the specified open-unit transpose.
-Proof: use naturality of the open unit, the pullback compositor and the adjunction
-Hom equivalence. The transposes of both sides are the same naturality square. -/
+/-- Naturality of the specified open-unit transpose. -/
 theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -782,10 +780,7 @@ noncomputable def betaInv {U' U X' X : Scheme.{u}}
   app := betaInvApp B gU j' j g h
   naturality := betaInvApp_naturality B gU j' j g h
 
-/-- The open-extension unit is invertible.
-Proof: on an object lying over the open there is exactly one lift to it, so restriction
-of the extension presheaf is the original module. This survives sheafification,
-termwise extension to strict towers, and exact localization. -/
+/-- The open-extension unit is invertible. -/
 theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (jAdj B j).unit := by
   let A := ModuleCat.{u + 1} B
@@ -885,11 +880,7 @@ private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (moduleJ B j') (moduleOpenSquare B gU j' j g hsq))
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary B.
-Proof: transport ordinary open base change through the equivalence between constant-ring
-modules and sheaves of fixed B-modules, then extend termwise and localize. Thus G_g J_j M
-lies in the essential image of the fully faithful J_jprime. The specified transpose is
-its invertible counit composed with J_jprime of the pulled-back invertible open unit. -/
+arbitrary B. -/
 theorem betaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -1004,12 +995,8 @@ private theorem evalG_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     Iso.symm_hom, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Evaluation at finite constant coefficients gives exactly the dependency's
-unit-normalized open base change.
-Proof: transpose inverse comparisons under the open adjunction. Evaluation
-commutes with termwise G and J, and evaluates their units to the ordinary units.
-The two transposes are identical. Exact localization and the adjunction Hom
-bijection give equality of these particular comparisons. -/
+/-- Evaluation at finite constant coefficients gives exactly the finite-coefficient
+unit-normalized open base change. -/
 theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -1052,11 +1039,7 @@ theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
 noncomputable abbrev squareLift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) := pullback.lift k r h
 
-/-- The induced lift is open and closed; no cartesian or identity-left assumption.
-Proof: identify the fibre product with p⁻¹(S), an open in W. The map s identifies V
-with k(V) inside this open. The base change q of p is separated and q s = r is
-proper, so the proper-over-separated theorem makes s proper. A proper open immersion
-is closed. This includes the empty open and gives the complementary open component. -/
+/-- The induced lift is open and closed for every proper/open commutative square. -/
 theorem squareLift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1108,12 +1091,7 @@ noncomputable def openToR {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
   exact Functor.mapDerivedCategoryNatIso e ≪≫
     (towerDirectImage B j).rightDerivedFunctorIsoMapDerivedCategory.symm
 
-/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Proof: transport the ordinary clopen extension/direct-image isomorphism through the
-constant-ring module equivalence. Termwise direct image is therefore exact, so its
-right derived functor R is isomorphic to J and is fully faithful. The direct-image
-adjunction unit is invertible on J M, which lies in the essential image of R. The
-specified comparison is this unit followed by R of the inverse open unit. -/
+/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible. -/
 theorem openToR_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (openToR B j) := by
   let d := derivedClopenIso B j

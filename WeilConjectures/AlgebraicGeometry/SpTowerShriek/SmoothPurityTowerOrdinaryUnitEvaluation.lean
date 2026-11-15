@@ -79,21 +79,8 @@ private theorem transport_unit_evaluation (b : Base l E)
   exact h
 
 /-- Evaluation carries the normalized ordinary system unit to the constant-ring
-unit, after the specified push and pull comparisons.
-
-Proof: identify the generic coefficient family with B using Geometry.coefficients,
-and the generic transition family with tau using Geometry.transitions. This
-identifies the two system categories and their evaluations. Under these coordinate
-identifications, Geometry.pull_eq and Geometry.push_eq identify the ordinary
-functors, and Geometry.ordinaryAdjunction_eq identifies their specified adjunction.
-Apply generic.ordinary_unit_evaluation to M at n. Replace the two component
-comparisons by Geometry.ordinaryPullEvaluation_eq and
-Geometry.ordinaryPushEvaluation_eq, and the finite adjunction by
-Geometry.levelAdjunction_eq. The resulting equation is the one displayed here:
-the evaluated system unit, followed by the push comparison and the pushforward of
-the pull comparison, is the finite unit. These are equalities of ordinary module
-maps, so no derived faithfulness or exactness assertion is involved. The argument
-works also at n = 0, on the empty scheme and on the zero system. -/
+unit, after the specified push and pull comparisons: the evaluated system unit, followed
+by the push comparison and the pushforward of the pull comparison, is the finite unit. -/
 theorem geometry_unit_evaluation (b : Base l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) (n : ℕ) (M : S l E Y) :
     (ev l E Y n).map (g.ordinaryAdjunction.unit.app M) ≫

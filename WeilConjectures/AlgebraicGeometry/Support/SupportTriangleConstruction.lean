@@ -28,10 +28,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Additivity needed to apply the supported kernel termwise. Proof: compose the kernel map of a sum
- with the monic
-kernel inclusion. Naturality makes this the sum of the two composites. Cancel the inclusion; the
-same argument handles zero. -/
+/-- The supported-sections functor `finiteSupportedSections Λ j` is additive. -/
 theorem supportKernelAdditive {X U : Scheme.{u}} (j : U ⟶ X) :
     (finiteSupportedSections Λ j).Additive := by
   constructor
@@ -46,9 +43,7 @@ theorem supportKernelAdditive {X U : Scheme.{u}} (j : U ⟶ X) :
 
 attribute [instance] supportKernelAdditive
 
-/-- Additivity of closed inverse image of the supported kernel.
-Proof: `finiteClosedUpperShriek` is the composite of the additive supported-kernel
-functor and the additive module inverse image; composition preserves sums. -/
+/-- Additivity of closed inverse image of the supported kernel. -/
 theorem supportShriekAdditive {X Z U : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X) :
     (finiteClosedUpperShriek Λ s j).Additive := by
   unfold finiteClosedUpperShriek

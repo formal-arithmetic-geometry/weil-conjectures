@@ -60,28 +60,7 @@ private theorem ordinaryClopenComparison_factor (n : ℕ) :
   simpa only [hf, strictAlpha_factorization] using hh
 
 /-- Ordinary evaluation preserves the specified inverse-image and open-extension
-comparisons and the single-square clopen arrow.
-Proof: evaluate a system at n, embed the resulting module as a constant tower,
-and apply the degree-zero embedding. The inverse-image comparison is moduleEvalG,
-whiskered by the constant and single functors and their exact-functor comparisons.
-The open comparison is its inverse open-adjunction mate. Evaluation and constant
-embedding preserve that mate's unit normalization; exact localization preserves
-the same unit, so this mate is invertible. For pullback composition take proper
-adjunction mates: moduleEvalP is the identity on section carriers, and the two
-pushforward compositors are restriction along the same pullback-pasting map.
-Their equality on sections proves pull_comp by injectivity of the mate equivalence.
-For open composition transpose once more: moduleJComp and the strict-tower jComp
-are both conjugate to these pullback compositors. This proves open_comp.
-For clopen, use the chosen pullback W ×_T S. Evaluation keeps the pullback lift
-label, so the unit transpose defining moduleBeta evaluates to the strict-tower
-beta. The canonical lift is clopen. On its image the projection is the open unit;
-on its complement it is zero. Evaluation, constant embedding, and the single
-functor keep these two maps. The two-component sheaf decomposition therefore
-identifies the evaluated projector with the strict-tower pi. Substitute these
-identifications into moduleAlpha and use the two compositor comparisons just
-proved. The resulting equation is clopen. This calculation is on ordinary
-systems and their degree-zero complexes; it uses no faithfulness of derived
-evaluations and assumes no vertical or horizontal pasting law. -/
+comparisons and the single-square clopen arrow. -/
 theorem ordinaryClopenEvaluation (n : ℕ) :
     ∃ (gIso : OrdinaryPullComparison R φ n) (jIso : OrdinaryOpenComparison R φ n),
       OrdinaryPullComposition R φ n gIso ∧ OrdinaryOpenComposition R φ n jIso ∧

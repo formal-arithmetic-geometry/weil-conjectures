@@ -41,7 +41,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Res
 ## Main definitions and statements
 
 * `ProEtale.supportComparison`: the natural bounded-below comparison map.
-* `ProEtale.supportComparison_isIso`: invertibility under the node's hypotheses.
+* `ProEtale.supportComparison_isIso`: invertibility under the stated hypotheses.
 * `ProEtale.supportComparison_forget`, `ProEtale.fullSupportForget_isIso`, and
   `ProEtale.supportComparison_open`: forgetting, full-support normalization, and restriction.
 * `ProEtale.supportExteriorCoefficientIso`: the specified tensor/pullback comparison theta.
@@ -119,11 +119,8 @@ private theorem supportEvaluation_hom (A : Type (u + 1)) [CommRing A]
   rfl
 
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The canonical identification of the global-section kernel with the restriction
-kernel used by the support long exact sequence.
-Proof: the terminal-evaluation isomorphism identifies global restriction with
-restriction from the terminal object. It induces an isomorphism of kernels.
-The kernel inclusion determines its forward map and hence the isomorphism uniquely. -/
+/-- There is a unique identification of the global-section kernel with the restriction
+kernel used by the support long exact sequence, compatible with the kernel inclusions. -/
 theorem supportKernelEvaluationIso_existsUnique :
     ∃! e : Etale.supportedEtaleSections A T i.openComplement ≅ etaleSupportKernel A i,
       e.hom ≫ Sheaf.supportedSectionsInclusion T.smallEtaleTopology

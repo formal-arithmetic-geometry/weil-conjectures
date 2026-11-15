@@ -353,9 +353,7 @@ noncomputable abbrev ev (X : Scheme.{u}) (n : ℕ) :
     Derived B X ⥤ DerivedCategory (Modules B X) :=
   ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)).mapDerivedCategory
 
-/-- Compatibility of the canonical constant-section identifications with composition.
-Proof: transpose both maps under inverse image. On every constant scalar both maps
-are the same constant section; the sheafification universal property gives equality. -/
+/-- Compatibility of the canonical constant-section identifications with composition. -/
 theorem constantRingIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     constantRingIso B (f ≫ g) = Scheme.proEtaleRingCompositeCoefficients f g
       (coefficients B Z) (coefficients B Y) (coefficients B X)
@@ -421,11 +419,7 @@ theorem constantRingIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (Scheme.proEtaleConstantDirectImageMap g CommRingCat.{u + 1} A)
     (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A)
 
-/-- Fibre-product pasting uniquely normalizes ordinary direct-image composition.
-Proof: evaluate both direct images on a test object. Restriction along the canonical
-fibre-product pasting isomorphism gives the displayed map and its inverse. These are
-linear by preservation of constant sections and natural by the universal property
-of pullbacks. Equality on all sections proves uniqueness. -/
+/-- Fibre-product pasting uniquely normalizes ordinary direct-image composition. -/
 theorem moduleRComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃! d : moduleDirectImage B f ⋙ moduleDirectImage B g ≅ moduleDirectImage B (f ≫ g),
       ∀ (N : Modules B X) (U : Z.ProEt)
@@ -481,10 +475,7 @@ noncomputable def rComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     R B f ⋙ R B g ≅ R B (f ≫ g) :=
   conjugateIsoEquiv ((adj B g).comp (adj B f)) (adj B (f ≫ g)) (gComp B f g)
 
-/-- The identity direct image is the sectionwise pullback-identity comparison.
-Proof: the inverse base-change identity sends U to U ×_X X by its graph. Restrict
-sections along this map. It preserves constant scalar sections, so is linear. Its
-inverse is restriction along the inverse graph. Sections determine a unique map. -/
+/-- The identity direct image is the sectionwise pullback-identity comparison. -/
 theorem moduleRId_existsUnique (X : Scheme.{u}) :
     ∃! e : moduleDirectImage B (𝟙 X) ≅ 𝟭 (Modules B X),
       ∀ (M : Modules B X) (U : X.ProEt)
@@ -582,9 +573,7 @@ noncomputable def gId (X : Scheme.{u}) : G B (𝟙 X) ≅ 𝟭 (Derived B X) :=
 noncomputable def rId (X : Scheme.{u}) : R B (𝟙 X) ≅ 𝟭 (Derived B X) :=
   (conjugateIsoEquiv Adjunction.id (adj B (𝟙 X)) (gId B X)).symm
 
-/-- Evaluation commutes with strict termwise inverse image.
-Proof: both object maps evaluate the same strict tower at n and apply the same
-module functor. Their maps are the same evaluated natural transformations. -/
+/-- Evaluation commutes with strict termwise inverse image. -/
 theorem evaluationPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     towerPullback B f ⋙ (evaluation ℕᵒᵖ (Modules B X)).obj (op n) =
       (evaluation ℕᵒᵖ (Modules B Y)).obj (op n) ⋙ modulePullback B f := by
@@ -624,12 +613,7 @@ private theorem evaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   exact (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).right_triangle_components _
 
-/-- This normalized mate is invertible, without a uniform lower bound.
-Proof: a K-injective strict tower evaluates to a K-injective complex: evaluation
-has an exact left adjoint given by sums over the index arrows. On such a
-representative both direct images give the identical evaluated complex.
-The homotopy adjunction is termwise, so the derived Hom bijection identifies
-this equality with the displayed mate, including its unit and counit. -/
+/-- The evaluation comparison `evalR B f n` is invertible. -/
 theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (evalR B f n) := by
   let L := towerPullback B f

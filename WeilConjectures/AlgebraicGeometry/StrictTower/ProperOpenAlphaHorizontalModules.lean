@@ -93,21 +93,7 @@ private theorem moduleOpenUnitInv_comp {U V X : Scheme.{u}}
     Iso.symm_hom, NatIso.inv_inv_app, Iso.symm_inv, moduleOpenUnitInv,
     openBetaModuleJComp, NatIso.isIso_inv_app, Functor.comp_obj, Category.assoc] using hi.symm
 
-/-- Intrinsic alpha obeys horizontal pasting on module sheaves.
-Proof: First detect equality of maps to open extension on module sheaves. Transport
-to sheaves of B-modules and compose with the monomorphism from extension by zero
-to direct image. The restriction/direct-image adjunction detects equality there.
-The inverse-transpose definition of beta gives its restriction normalization through
-the specified open units. The clopen projector restricts to the identity, so intrinsic
-alpha restricts to the canonical inverse-image square identification followed by
-inverse image of the inverse open unit. All detection opens are quasi-compact.
-For horizontal pasting, restrict along lk. The second alpha reduces q* j! i! to
-p* i!; the open unit for l and then the first alpha reduce this to r*. The
-unit-preserving open compositor identifies the successive open units with the
-outer open unit. Detection along lk identifies the pasted and intrinsic outer maps.
-Apply this calculation to every module sheaf M to obtain the displayed component
-identity. Empty schemes and the zero coefficient ring give the unique zero maps;
-identity opens give the unit-normalized inverse-image compositor identity. -/
+/-- Intrinsic alpha obeys horizontal pasting on module sheaves. -/
 theorem singleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)

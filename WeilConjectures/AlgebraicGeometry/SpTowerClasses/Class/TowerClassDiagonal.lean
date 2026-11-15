@@ -36,10 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 def diagonalLine (S : Scheme.{u}) : (diagonalSurface S).Modules :=
   Scheme.Modules.dual ((diagonalImmersion S).ker.toModules)
 
-/-- The divisor line is invertible because the specified diagonal ideal is Cartier.
-Proof: the equations b-a and 1-ab are regular on the standard charts. The
-recorded Cartier theorem makes the ideal invertible, and its dual is invertible
-by def-pc-divisor-line-bundle. -/
+/-- The divisor line is invertible because the specified diagonal ideal is Cartier. -/
 theorem diagonalLine_invertible (S : Scheme.{u}) :
     Scheme.Modules.IsInvertible (diagonalLine S) := by
   exact (diagonalImmersion_cartier S).isInvertible_dual_toModules
@@ -172,12 +169,7 @@ private theorem section_cast_heq {A B : AddCommGrpCat.{u + 1}}
   subst B
   rfl
 
-/-- The finite comparison is fixed on every scalar multiple of every root generator.
-Proof: restriction to a sequence-site slice commutes with the sheafified ordinary
-scalar extension. The underlying root module is identified by rootForget. Both
-sides are sheafifications of the same local tensor product; send a tensor to the
-identical tensor. This commutes with restrictions and quotient transitions.
-These local pure tensors generate the tensor sheaf, giving uniqueness. -/
+/-- The finite comparison is fixed on every scalar multiple of every root generator. -/
 theorem lineEvaluation_existsUnique {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :
     ∃! e : (SpTowerShriek.ev l E T n).obj (lineModule l E c) ≅ finiteLine l E T n,
       ∀ (U : T.ProEtᵒᵖ) (a : (SpTowerShriek.B l E T n).obj.obj U)

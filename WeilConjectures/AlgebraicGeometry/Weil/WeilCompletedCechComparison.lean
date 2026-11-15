@@ -138,11 +138,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The published Koszul fiber is Cech internal Hom, with its specified unit.
-Proof: compare the explicit fiber with the prescribed strict derived inverse limit.
-The existing single-site Cech--Koszul theorem identifies that strict limit with
-Cech internal Hom and carries the Cech unit to the strict unit. Compose the two
-isomorphisms and cancel the second unit equation. -/
+/-- The published Koszul fiber is Cech internal Hom, with its specified unit. -/
 theorem completed_fiber_cech_comparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

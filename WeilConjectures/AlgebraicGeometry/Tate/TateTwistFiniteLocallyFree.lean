@@ -552,13 +552,7 @@ private theorem tateRootCover (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The finite part of `tateTwist_locallyFree`: one common covering with compatible root
 generators and unit-to-root basis isomorphisms, and for every finite coefficient ring the
-Kummer transitions and the signed finite lines. No integral, rational or algebraically
-closed coefficient is involved.
-
-Proof: the compatible root-tower local model gives the cover, the generators and the
-basis isomorphisms with their transition and slice formulas. For a finite ring A killed
-by ℓ^(r+1), the unique quotient map, the Kummer maps (isomorphisms on the cover, hence
-globally) and the signed finite lines are the finite clause. -/
+Kummer transitions and the signed finite lines. -/
 theorem tateTwist_finite_locallyFree
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)] :

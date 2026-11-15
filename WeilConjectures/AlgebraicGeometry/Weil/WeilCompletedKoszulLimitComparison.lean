@@ -102,33 +102,7 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDa
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The published signed Koszul fiber computes the prescribed strict derived limit,
-including the canonical degree-zero unit, after the explicit ringed-site equivalence.
-
-Proof: use the explicit small site, completed ring and module equivalence above.
-The coefficient restriction equivalence and the site equivalence preserve products
-and tensor, and their induced derived equivalences commute with localization.
-At power m+1, identify the exterior Koszul complex with the dual of the ordered tensor
-of the positive two-term factors. On the basis of sorted k-element subsets in degree
--k, multiply the identification by (-1)^(k*(k-1)/2). The ratio in consecutive degrees
-is (-1)^(k+1), the dual-differential sign, so contraction agrees with the differential.
-The degree-zero identification is the identity. Both transitions multiply a subset
-by the product of its generators. Tensoring with C therefore gives an isomorphism
-of strict towers with their degree-zero units.
-
-Exact countable products on the pro-etale site imply that the ordinary product of
-complexes preserves quasi-isomorphisms. Resolve the strict tower by a K-injective
-tower and apply its levelwise quasi-isomorphisms to products. The induced map on
-the mapping fibers of 1-shift is a quasi-isomorphism. The strict-tower Roos theorem
-computes the derived inverse limit on this resolution. Its right-derived universal
-property identifies this computation with D.inverseLimit, normalized by D.comparison;
-D.tensorFactors identifies its input with the actual strict tower. The compatible
-degree-zero units have zero composite with 1-shift. Their zero-homotopy lift is
-exactly the published (u,0) map, and all the displayed comparisons preserve that map.
-The representative normalization in D.unit supplies the final equation.
-
-For r=0 the tower is the constant identity tower and its fiber comparison carries
-the diagonal unit to the identity. Zero or invertible generators, the zero ring and
-the empty site satisfy the same formulas. No generation hypothesis is required. -/
+including the canonical degree-zero unit, after the explicit ringed-site equivalence. -/
 theorem completed_fiber_strict_limit_comparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

@@ -33,10 +33,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Restrict a geometric germ through the strict localization and then take its germ
-at `t`. The first arrow is the uniquely characterized pointed-neighbourhood restriction;
-the last arrow is the canonical inverse-image stalk comparison. Thus this is the
-specified specialization map, with target at the composite point on `S`. -/
+/-- The specialization map on stalks: restrict a geometric germ at `s` through the strict
+localization and take its germ at `t`, viewed as a point of `S`. -/
 noncomputable def strictLocalSpecialization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -59,20 +57,9 @@ noncomputable def strictLocalSpecialization
     (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1}
       (Scheme.strictHenselizationStructuralMap s) t).hom.app G
 
-/-- Prime-to-characteristic specialization invariance, with no finite-stalk or
-relative-dimension condition. Higher direct images here are formed after forgetting
-scalars to abelian sheaves, as allowed in the node.
-
-Proof: forgetting scalars makes F a locally constant abelian sheaf, killed by the
-prime ell. Since ell is a unit in each local ring of S, it remains a unit in every
-residue field of X, so the torsion orders are prime to residue characteristic.
-The smooth-local-acyclicity lemma gives universal local acyclicity, hence local
-acyclicity. The locally-constant-torsion-local-acyclicity lemma gives local acyclicity
-relative to this underlying sheaf. Apply proper-locally-acyclic-specialization in
-degree q to obtain invertibility of the pointed-neighbourhood restriction map.
-If direct images are interpreted in module sheaves, the module/abelian derived
-direct-image comparison commutes with cohomology and geometric germs and transports
-this assertion to the module specialization map; its bijective inverse is linear. -/
+/-- Prime-to-characteristic specialization for a smooth proper morphism: for a locally
+constant sheaf of `ZMod ell`-modules with `ell` invertible on `S`, the specialization maps on
+higher direct images (formed after forgetting scalars to abelian sheaves) are isomorphisms. -/
 theorem isIso_strictLocalSpecialization_smooth_proper_prime
     {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [IsProper f]
     (ell : ℕ) [Fact ell.Prime]

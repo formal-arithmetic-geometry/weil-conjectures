@@ -251,22 +251,7 @@ private instance koszulJoinMap_isIso {A : Type (u + 1)} [CommRing A]
     (ConcreteCategory.isIso_iff_bijective _).mpr (koszulJoinGraded_bijective r a m i)
   exact HomologicalComplex.Hom.isIso_of_components _
 
-/-- Splitting off the first exterior generator gives a tensor with a rank-one complex.
-
-Proof: split the ordered free basis Fin (r+1) into its first vector and its tail.
-In exterior degree k, separate increasing k-subsets according as they contain the
-first vector. Send a wedge without it to 1 tensor the tail wedge, and a wedge
-with it to the first vector tensor the remaining wedge. The inverse concatenates
-wedges; the two maps are inverse on the ordered subset bases, over any ring.
-Contraction of a wedge with the first vector is its first coefficient times the
-tail minus the first vector wedged with tail contraction. This is exactly the
-total differential on the first degree -1 summand. Without that vector it is
-tail contraction. Extension by zero to integer degrees respects these formulas.
-The exterior transition on a subset is multiplication by the product of its
-coefficients, equal to the product of the first and tail transition factors.
-The empty subset maps to 1 tensor 1, proving the unit equation. The same basis
-maps apply when k=0 or k>r+1, the tail is empty, coefficients vanish or are units,
-and over the zero ring. No sheaf transport or dual complex is involved. -/
+/-- Splitting off the first exterior generator gives a tensor with a rank-one complex. -/
 theorem koszulAdjoinGenerator
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A) :
     ∃ e : ∀ m : ℕ, completedKoszulPower (A := A) (r + 1) a m ≅

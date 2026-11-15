@@ -9,10 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSect
 
 /-! # Finite block constructions and ordinary coherence
 
-The existing block constructions, their ring identifications and ordinary
-composition, identity and coefficient coherence are extracted from
-SystemBlockRepetition to keep each file within the single-file compilation limit.
-Their public signatures, definition bodies and global attributes are retained.
+Block maps of the index set, the induced reindexings of the sequence site, their ring
+identifications and ordinary composition, identity and coefficient coherence.
 
 ## References
 
@@ -57,11 +55,7 @@ def blockTransitions {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     blockCoefficients B t (m + 1) ⟶ blockCoefficients B t m :=
   coefficientMap J B τ (t.index.monotone (Nat.le_succ m))
 
-/-- Endpoint and interval properties, and the no-skipped-level assertion at a boundary.
-Proof: Nat.find_spec gives t(a_i)=i and Nat.find_min' gives minimality. Monotonicity
-then gives a_i≤m<a_(i+1) for t(m)=i and monotonicity of a. If t(m+1)>t(m)+1,
-surjectivity at the missing integer contradicts monotonicity on either side of m.
-Thus blockTransitions is identity within blocks and the original adjacent map at a boundary. -/
+/-- Endpoint and interval properties, and the no-skipped-level assertion at a boundary. -/
 theorem systemBlockMap_endpoints (t : SystemBlockMap) :
     (∀ i : ℕ, t.index (t.first i) = i) ∧ Monotone t.first ∧
     (∀ m : ℕ, t.first (t.index m) ≤ m ∧ m < t.first (t.index m + 1)) ∧
@@ -98,9 +92,7 @@ theorem systemBlockMap_endpoints (t : SystemBlockMap) :
         rw [hk] at h
         exact Nat.le_antisymm h (Nat.succ_le_of_lt (lt_of_le_of_ne hlo (Ne.symm he)))
 
-/-- First-endpoint monotonicity, needed by the real endpoint functor.
-Proof: the endpoint and interval assertions of systemBlockMap_endpoints give this
-projection; equivalently minimality and monotonicity of t prohibit reversed endpoints. -/
+/-- First-endpoint monotonicity, needed by the real endpoint functor. -/
 theorem SystemBlockMap.firstMonotone (t : SystemBlockMap) : Monotone t.first := by
   exact (systemBlockMap_endpoints t).2.1
 
@@ -108,10 +100,7 @@ theorem SystemBlockMap.firstMonotone (t : SystemBlockMap) : Monotone t.first := 
 def blockSite {C : Type c} [Category.{v} C] (k : ℕ →o ℕ) : ℕ × C ⥤ ℕ × C :=
   k.toFunctor.prod (𝟭 C)
 
-/-- Reindexing preserves the vertical sheaf condition.
-Proof: at (m,U) restriction along a vertical cover is exactly restriction of the
-original sheaf along that same cover of U at level k(m); glue there. Thus
-precomposition carries every sheaf to a sheaf, which is the continuity criterion. -/
+/-- Reindexing preserves the vertical sheaf condition. -/
 theorem blockSite_continuous {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
     (blockSite (C := C) k).IsContinuous
@@ -163,9 +152,7 @@ instance blockSiteContinuous {C : Type c} [Category.{v} C]
 def SystemBlockMap.endpoints (t : SystemBlockMap) : ℕ →o ℕ :=
   ⟨t.first, t.firstMonotone⟩
 
-/-- Fibers of a composite block map are finite unions of finite fibers.
-Proof: the fiber at i is the union, over the finite fiber t⁻¹(i), of the finite
-fibers s⁻¹(j). Finite unions preserve finiteness. -/
+/-- Fibers of a composite block map are finite unions of finite fibers. -/
 theorem SystemBlockMap.comp_finite (t s : SystemBlockMap) (i : ℕ) :
     Set.Finite {m : ℕ | t.index (s.index m) = i} := by
   have h := (t.finite i).biUnion (fun j _ ↦ s.finite j)
@@ -221,10 +208,7 @@ private theorem blockRingPresheaf (k : ℕ →o ℕ)
   intro X Y f
   rfl
 
-/-- The identity coefficient identification for repetition on the sequence site.
-Proof: both ring sheaves have B_(t(m))(U) at (m,U). The horizontal maps are the
-same composites of tau by functoriality of rings, including identity maps within
-a block. Vertical maps are B_(t(m))'s restrictions. Extensionality proves equality. -/
+/-- The identity coefficient identification for repetition on the sequence site. -/
 theorem blockRepeatRing :
     ((blockSite (C := C) t.index).sheafPushforwardContinuous RingCat.{r}
       (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj
@@ -259,10 +243,7 @@ def blockRepeat : Systems J B τ ⥤
   SheafOfModules.pushforward (F := blockSite (C := C) t.index)
     (eqToHom (blockRepeatRing J B τ t).symm)
 
-/-- The identity coefficient identification at first endpoints.
-Proof: t(a_i)=i identifies every section ring with B_i. The composite transition
-from a_(i+1) to a_i reindexes to the original B_(i+1)→B_i by functoriality of the
-coefficient sequence. Vertical restrictions are unchanged. Use sheaf extensionality. -/
+/-- The identity coefficient identification at first endpoints. -/
 theorem blockEndpointRing :
     ((blockSite (C := C) t.endpoints).sheafPushforwardContinuous RingCat.{r}
       (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj

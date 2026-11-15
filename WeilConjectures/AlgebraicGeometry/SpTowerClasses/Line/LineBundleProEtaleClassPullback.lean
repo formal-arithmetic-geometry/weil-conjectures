@@ -42,14 +42,7 @@ private theorem pic_map_ofIsInvertible {X Y : Scheme.{u₁}} (f : X ⟶ Y)
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Pullback of the line-bundle class before making a constant tower.
-
-Proof: the arbitrary-scheme Picard cohomology naturality theorem identifies the
-pulled back class with that of Pic.map f (Pic.ofIsInvertible L). Pulling back the
-canonical representative isomorphism identifies this Picard element with
-Pic.ofIsInvertible (f*L). Apply integral_cohomology_site_pullback to that class
-and the given units map. Its two sides are precisely lineBundleEtaleClass, by
-definition. No flatness, nonemptiness or invertibility of a units comparison is used. -/
+/-- Pullback of the line-bundle class before making a constant tower. -/
 theorem lineBundle_proEtaleClass_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : Y.Modules) [Scheme.Modules.IsInvertible L]
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

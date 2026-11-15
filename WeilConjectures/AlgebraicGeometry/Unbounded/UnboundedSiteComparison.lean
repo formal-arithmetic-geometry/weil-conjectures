@@ -15,7 +15,7 @@ set_option autoImplicit false
 /-!
 # Unbounded comparison on the small etale and pro-etale sites
 
-The theorem states exactness, full faithfulness, and arbitrary small-coproduct preservation
+This file proves exactness, full faithfulness, and arbitrary small-coproduct preservation
 of the canonical finite-coefficient comparison on unbounded derived categories.
 -/
 
@@ -29,29 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- For a finite or algebraically closed field and a finite primary coefficient ring, the
 termwise comparison from the etale to the pro-etale module derived category is exact,
-fully faithful, and preserves arbitrary small direct sums.
-
-Proof:
-1. Write L for the exact comparison inverse image and E for finite coefficient
-realization. Exactness induces the triangulated termwise derived functor, and E is
-an equivalence by the existing coefficient realization theorem.
-2. Form the canonical unbounded derived adjunction of L and comparison direct image.
-Replace the nilpotence exponent n by n+1. Apply
-proposition-unbounded-comparison-finite-coefficients--1: the derived image of L has classical
-cohomology, and the actual derived counit is invertible on this image. That theorem
-contains the geometric finite-cohomological-dimension and truncation argument.
-3. The underived L is fully faithful and reflects isomorphisms. The natural
-cohomology comparison identifies H^q(L(f)) with L(H^q(f)); hence L on derived
-categories also reflects isomorphisms by DerivedCategory.isIso_iff.
-4. The left triangle identity says that L of the derived unit, followed by the
-counit on the image, is the identity. Cancel the invertible counit and reflect
-isomorphisms through derived L. Thus the derived unit is invertible, and the
-derived adjunction gives full faithfulness of L.
-5. Compose with derived E and transport along the canonical derived composition
-isomorphism. The left adjunction preserves colimits of every requested discrete
-shape; derived E preserves them as an equivalence. The same composition
-isomorphism transfers preservation to finiteCoefficientDerivedComparison.
--/
+fully faithful, and preserves arbitrary small direct sums. -/
 theorem finiteCoefficientDerivedComparison_fullyFaithful
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     {ℓ : ℕ} [Fact ℓ.Prime]

@@ -425,16 +425,7 @@ attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [local irreducible] compEq moduleAlpha modulePi moduleJCongr push eqToIso factor in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction of intrinsic alpha is the inverse of the open unit, under the specified
-inverse-image square comparison.
-Proof: factor the square through its canonical fibre product. The lift is clopen.
-The open base-change comparison is the inverse transpose of the open unit, so its
-restriction is the square compositor followed by the inverse open unit. The clopen
-projector is the direct-image unit followed by inverse open-to-direct comparison;
-the two triangle identities give that its restriction is the open unit. The open
-composition comparison preserves the units by its adjoint definition. Apply these
-three formulas to the defining beta-projector-compositor word for alpha. Naturality
-cancels the intermediate open units, and inverse-image composition identifies the
-remaining restriction with r-star of the inverse unit for i. -/
+inverse-image square comparison. -/
 theorem moduleAlpha_restriction
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

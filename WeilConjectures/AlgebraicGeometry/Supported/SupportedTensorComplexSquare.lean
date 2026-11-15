@@ -54,13 +54,7 @@ noncomputable def supportedTensorComplexSquareCondition
         (Functor.mapHomologicalComplexCompNatTrans F₂ H F₂' a₂ Q)
         (curriedTensor E) (.up ℤ)
 
-/-- An ordinary coefficient tensor square induces the same square on signed total complexes.
-Proof: in each total degree, use the coproduct extensionality for the image under G' of
-all tensor bidegree summands. Naturality of the degreewise coefficient map moves it past
-the summand inclusion. The normalization of each total comparison reduces the resulting
-square to the assumed ordinary square in that bidegree. Tensoring the two degreewise
-maps commutes with the summand inclusions. This proves equality in every degree, hence
-equality of the chain maps, with the signed differentials already built into totalization. -/
+/-- An ordinary coefficient tensor square induces the same square on signed total complexes. -/
 theorem supportedTensorComplex_square
     {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category.{w} E]
     [Preadditive C] [Preadditive D] [Preadditive E]

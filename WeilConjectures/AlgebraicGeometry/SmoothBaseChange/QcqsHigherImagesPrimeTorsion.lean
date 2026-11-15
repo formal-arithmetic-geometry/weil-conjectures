@@ -18,6 +18,10 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Filt
 /-!
 # Qcqs higher direct images preserve a fixed set of torsion primes
 
+If every stalk element of an abelian étale sheaf is killed by a positive integer with prime
+divisors in a set `P`, the same holds for its higher direct images along a quasi-compact
+quasi-separated morphism.
+
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 0DDD, 0DDC
@@ -31,8 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The small divisibility index for the restricted kernel union in Stacks Tag 0DDC.
-The integer 1 is allowed even when P has no prime members. -/
+/-- The positive integers whose prime divisors lie in `P`, used to index the kernels of
+multiplication. The integer 1 is allowed even when `P` has no prime members. -/
 private structure PrimeAnnihilator (P : Set ℕ) where
   val : ℕ
   pos : 0 < val
@@ -50,11 +54,9 @@ private instance (P : Set ℕ) : PartialOrder (PrimeAnnihilator P) where
     congr
     exact Nat.dvd_antisymm hnm hmn
 
-/-- The restricted kernel union from Stacks Tags 0DDC and 0DDD, followed by an
-additive functor preserving small filtered colimits. The colimit map is mono by AB5.
-Its epimorphism property follows by lifting each geometric-stalk element through
-its annihilator kernel and using geometric-stalk joint faithfulness. A colimit
-representative then retains the kernel's allowed annihilator under the functor. -/
+/-- If every geometric stalk of `F` is torsion with annihilators having prime divisors in `P`,
+then so is every element of `H.obj F`, for any additive functor `H` preserving filtered
+colimits. -/
 private theorem prime_torsion_of_filtered_functor
     {X : Scheme.{u}} (P : Set ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -161,9 +163,8 @@ private theorem prime_torsion_of_filtered_functor
   change n.val • (H.map (α.app n)) z = 0
   rw [← map_nsmul, hz, map_zero]
 
-/-- Integer-module coefficients carry precisely the data of an abelian sheaf.
-Use Mathlib's ring-equivalence restriction of scalars and integer-module equivalence,
-then restrict the coefficient adjunction along the full sheaf subcategories. -/
+/-- The forgetful functor from sheaves of `ULift ℤ`-modules to abelian sheaves is an
+equivalence. -/
 private theorem integerSheafForget_isEquivalence (X : Scheme.{u}) :
     (moduleAbelianForget (ULift.{u + 1} ℤ) X).IsEquivalence := by
   let E := forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}
@@ -181,49 +182,7 @@ private theorem integerSheafForget_isEquivalence (X : Scheme.{u}) :
 
 /-- Higher direct images along a quasi-compact quasi-separated scheme morphism preserve
 stalkwise torsion whose annihilators have prime divisors in a fixed set `P`.
-Only prime members of `P : Set ℕ` are tested, so this encodes an arbitrary set of primes.
-
-Proof:
-1. Take an affine pointed etale neighbourhood W of the target geometric point. The scheme Z = U
-×_V W is qcqs by lem-weil-pbc-qcqs-morphism-permanence and lem-weil-pbc-qcqs-over-affine. Its
-pulled-back sheaf G has the same allowed-prime stalk torsion by lemma-openclosed-stalk-upperstar.
-No global qcqs condition on U or V is needed.
-
-2. Order the positive integers with prime divisors in P by divisibility. This is a nonempty
-directed set (1 is an index and nm bounds n and m). Form G[n] = ker(n : G → G) using
-def-pur-abelian-sheaf-kernel. Divisibility gives inclusions and a cocone to G. The colimit C
-exists by lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact; the indices form a subset of
-the natural numbers.
-
-3. The map C → G is an isomorphism on stalks: prop-weil-pbc-geometric-stalks-exact identifies
-stalks of G[n] with kernels and definition-torsion-sheaves--3 identifies stalks of C with their
-colimit. The hypothesis supplies surjectivity. Represent a colimit element by a kernel element
-using lem-weil-pbc-filtered-colimit-modules-elementwise over the integers; if it maps to zero,
-the representative is zero by the subgroup inclusion. Thus the stalk map is bijective. Apply
-lemma-weil-pbc-geometric-stalk-conservative to conclude that G is the colimit of G[n] with the
-actual inclusion maps.
-
-4. Apply lem-weil-pbc-etale-directed-cohomology-colimit on Z to this directed diagram. Every
-cohomology class of G comes from H^q(Z, G[n]) for some allowed n, by
-lem-weil-pbc-filtered-colimit-modules-elementwise over the integers. There is no uniform
-annihilator assumption.
-
-5. Sectionwise kernels give n id of G[n] equal to zero. Cohomology is the right derived sections
-functor by def-weil-pbc-sites-and-cohomology, and its degree functors are additive by
-lem-weil-pbc-right-derived-universal-delta-functor. Hence n kills H^q(Z, G[n]); the
-inclusion-induced group homomorphism shows that n kills the represented class in H^q(Z, G).
-
-6. Use proposition-base-change-larger-algebraically-closed and definition-torsion-sheaves--3 to
-express the target stalk as the filtered colimit of cohomology over pointed etale neighbourhoods.
-The index is filtered by definition-torsion-sheaves--3. Use
-lem-weil-pbc-filtered-colimit-modules-elementwise to represent the chosen stalk element on a
-neighbourhood; lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink refines it to an affine one
-without changing the stalk class. Work in a common universe, or a small equivalent index
-category.
-
-7. Apply steps 1–5 to this affine representative. The map to the stalk is a group homomorphism,
-so its positive allowed-prime annihilator also kills the original stalk element. This works for
-every nonnegative degree and every target geometric point. -/
+Only prime members of `P : Set ℕ` are tested, so this encodes an arbitrary set of primes. -/
 theorem qcqs_higherDirectImages_prime_torsion
     {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f]
     (P : Set ℕ) (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})

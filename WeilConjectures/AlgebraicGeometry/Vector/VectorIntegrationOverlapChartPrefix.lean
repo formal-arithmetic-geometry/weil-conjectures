@@ -82,30 +82,8 @@ def vectorIntegrationOverlapPrefix (N : ℕ) (hN : 0 < N)
     affineTraceUnitBaseChange A N hA t (S.homOfLE hUV)
       (affineTracePullbackInvertible N V.ι hS) d
 
-/-- On a common smaller open the two inverse-frame comparisons differ by the actual
-linear-coordinate pullback action. No counit, projective-line datum, sheaf Hom
-correspondence, or descent assertion occurs in this statement.
-
-Proof: restrict both module frames to U using the restriction functor on module sheaves
-and its free-module comparison. Their composite is an automorphism of the free module.
-Its images of the standard global basis give a matrix G of global sections with inverse
-obtained from the inverse automorphism, as in transition_spec. In the convention
- e'_j = sum_i G_ij e_i the coordinate change is G transpose. Thus the inverse charts
-are related by g = (G transpose) inverse. Check this equality on degree-one generators
-of the symmetric algebra and then use its universal property. The corresponding
-linear map is affineTraceLinearMap, and its square over the identity is Cartesian.
-Paste each restricted inverse-coordinate square with its original chart square.
-Compact-support exchange pasting, its naturality in the coefficient, and naturality
-of the bounded/unbounded compact-support comparisons identify the two resulting
-prefixes. Associativity of inverse-image compositors and the composition equations
-of normalized Tate pullback identify the coefficient factors: they are exactly
-vectorIntegrationChartCoefficient and affineTraceRightBaseChange followed by the
-constant-unit comparison in affineTraceUnitBaseChange. The remaining automorphism
-factor, conjugated by affineLinearCompactComparison, is precisely
-affineLinearTraceAction (with no counit applied). This proves the displayed equation.
-For rank zero the basis and matrix are empty and all these equations are unit equations;
-restriction to the empty open and the zero coefficient ring obey the same formulas.
--/
+/-- On a common smaller open the two inverse-frame comparisons differ by the
+linear-coordinate pullback action `affineLinearTraceAction`. -/
 theorem vectorIntegration_overlap_chart_prefix (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

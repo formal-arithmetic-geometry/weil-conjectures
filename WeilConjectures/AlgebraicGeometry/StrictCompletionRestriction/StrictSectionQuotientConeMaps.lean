@@ -521,27 +521,7 @@ private theorem quotientConeMap (X : Scheme.{u})
     exact (quasiIso_iff_comp_left (eqToIso (data.hobj n K)).hom _).mp hc
 
 /-- The canonical principal-cone maps to the actual quotient tensors, before Roos
-completion or derived localization.
-
-Proof: use the existing internal principal-cone augmentation. The exact section
-module equivalence identifies its finite coefficient module with the actual
-section algebra module, using restriction of scalars and the regular-module
-comparison. Sheafify the ordinary section tensor comparison and this coefficient
-isomorphism. Naturality of sheafification gives its pure-tensor formula and
-naturality in the input module. The right unitor and finite coefficient unit
-identify its composite with the internal tensor unit as exactly tensorUnit.
-Apply the inverse termwise section equivalence to P. Its counit transfers the
-specified K-flatness to this internal representative by the total-tensor
-comparison. Equality on local sections identifies the internal scalar with
-T.scalar, including all positive powers. The existing internal cone augmentation
-is a quasi-isomorphism on this K-flat representative. Cone descent commutes with
-the exact section equivalence and with the counit and tensor isomorphisms, so
-the section augmentation is also a quasi-isomorphism. Transport across T.cone;
-the descShortComplex formula and T.coordinates_eq give the displayed components.
-Finally eliminate the supplied coefficient object and morphism equalities at
-each level and assemble the family.
-Only positive exponents occur, so the point scalar is regular; on an empty site
-or for a zero quotient the same exact sequences and coordinate formulas apply. -/
+completion or derived localization. -/
 theorem strictSectionQuotientConeMaps (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1}
       (Modules (DerivedNakayama.integerRing l E) X))

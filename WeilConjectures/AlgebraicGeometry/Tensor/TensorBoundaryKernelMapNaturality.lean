@@ -113,14 +113,7 @@ private theorem comparison_inv_eq {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 attribute [local irreducible] boundaryCoefficientCohomologyIso
 
-/-- The canonical coefficient comparisons intertwine every transported kernel map.
-Proof: Write the inverse coefficient comparison as H of the kernel-to-pushforward
-isomorphism followed by the edge map. This follows by expanding the canonical
-comparison, functoriality of H, and naturality of the edge map for the tensor-degree
-isomorphism. Apply edge naturality to v. Expand the transported map and cancel the
-kernel-to-pushforward isomorphism of the target. Evaluating this commuting square
-on w gives the assertion. No graded algebra, quotient action, or homogeneous section
-is involved; a and b are arbitrary, including zero. -/
+/-- The canonical coefficient comparisons intertwine every transported kernel map. -/
 theorem tensorBoundaryKernelMap_naturality {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)

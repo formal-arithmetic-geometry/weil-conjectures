@@ -23,13 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 namespace AlgebraicGeometry.StrictEtaleOpenScalarMate
 
-/-- The inverse mate of the scalar restriction square is invertible.
-
-Proof: restriction of scalars is left adjoint to scalar coextension. Coextension
-preserves sheaves and commutes literally with restriction to the open subsite.
-Taking its inverse mate gives the identity scalar-restriction square, by the
-triangle identity on each section. Taking the inverse mate a second time is
-conjugation by the composite adjunctions, so preserves this isomorphism. -/
+/-- The inverse mate of the scalar restriction square is invertible. -/
 theorem fixed_scalar_mate_iso
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (f : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :

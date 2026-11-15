@@ -17,8 +17,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.I
 /-!
 # Localization for the ambient bounded-below exceptional inverse image
 
-The categories are all constant-coefficient module sheaves, as in
-`definition-local-cohomology`; there is no constructibility condition. The right derived
+The categories are all categories of sheaves of modules over a constant ring of coefficients;
+there is no constructibility condition. The right derived
 functors below are the existing ordinary injective-derived functors on `D⁺`.
 
 ## References
@@ -120,9 +120,7 @@ noncomputable def supportClosedDerivedPlus :
   (lowerStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus
 
 set_option linter.unusedSectionVars false in
-/-- A model in the stated class is K-injective.
-Proof: choose a lower bound from hI. Its terms are injective by hI. Apply
-CochainComplex.isKInjective_of_injective with that bound. -/
+/-- A bounded below complex of injectives is K-injective. -/
 theorem supportModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) : I.IsKInjective := by
   obtain ⟨⟨n, hn⟩, hInj⟩ := hI
@@ -132,11 +130,7 @@ theorem supportModelKInjective (I : SupportComplex Λ X)
 
 include hj in
 set_option linter.unusedSectionVars false in
-/-- Open restriction of a bounded below injective model is K-injective.
-Proof: identify open inverse image with the slice restriction by
-lem-weil-proetale-weakly-etale-localization. Its exact left adjoint, extension by
-zero, implies that it preserves injectives.
-It preserves the lower bound since it is additive. Apply Stacks Tag 070J. -/
+/-- Open restriction of a bounded below injective model is K-injective. -/
 theorem supportOpenModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) :
     CochainComplex.IsKInjective

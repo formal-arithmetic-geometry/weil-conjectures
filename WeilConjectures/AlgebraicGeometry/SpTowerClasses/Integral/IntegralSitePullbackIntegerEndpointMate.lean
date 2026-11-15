@@ -134,13 +134,7 @@ private theorem etale_constant_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).naturality
       (PreservesTerminal.iso f.Etale).inv.op).symm.trans (Category.id_comp _)
 
-/-- The comparison mate for the integer endpoint maps.
-
-Proof: apply the hom-set adjunctions for the étale and pro-étale inverse images.
-The comparison isomorphism is the conjugate of the direct-image comparison, and
-`integerComparison` and `upperStarConstantSheafIso` are defined by uniqueness of
-left adjoints.  Their defining unit equations reduce both sides to the same
-constant-section map. -/
+/-- The comparison mate for the integer endpoint maps. -/
 theorem integral_site_pullback_integer_endpoint_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let A := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ))

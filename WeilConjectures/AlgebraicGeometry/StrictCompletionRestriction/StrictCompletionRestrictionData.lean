@@ -19,7 +19,7 @@ public import Mathlib.CategoryTheory.MorphismProperty.Composition
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 /-! # Strict completion comparison interface
 
-The presentation structures below only package the assertions of this node. Cone
+The presentation structures below package the comparison assertions. Cone
 objects, coordinates, tower arrows, Roos functor, augmentations and localized units
 are all fixed by equations. No comparison or completion is selected from existence.
 Positive exponent n+1 is indexed by n : ℕ, as in the recorded completion interface.

@@ -54,9 +54,7 @@ instance abExt (T : Scheme.{u}) : HasExt.{u + 2} (Ab T) := HasExt.standard (Ab T
 def constant (T : Scheme.{u}) : DiagonalAb T ⥤ Ab T :=
   Functor.const (ℕᵒᵖ) (C := DiagonalAb T)
 
-/-- Exactness of the actual constant-system functor.
-Proof: limits and colimits in the functor category are levelwise, so the
-constant-system functor preserves them, including the additive group laws. -/
+/-- Exactness of the actual constant-system functor. -/
 theorem constant_exact (T : Scheme.{u}) :
     (constant T).Additive ∧ PreservesFiniteLimits (constant T) ∧
       PreservesFiniteColimits (constant T) := by
@@ -279,10 +277,7 @@ private theorem integerLevelMap_transitions (T : Scheme.{u})
   ext U k
   exact congrArg (fun a ↦ a k) (integerSectionMap_transitions T B F n U)
 
-/-- The quotient of the constant integer tower is fixed on every constant section.
-Proof: at each level the integer acts on the coefficient unit by its integer
-multiple of one. This commutes with restrictions and quotient transitions;
-the constant-sheaf universal property gives existence and uniqueness. -/
+/-- The quotient of the constant integer tower is fixed on every constant section. -/
 theorem integerGenerator_existsUnique (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (F : Forget T B) :

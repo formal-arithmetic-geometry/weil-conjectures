@@ -87,13 +87,7 @@ private theorem openBetaModuleJUnit {U X : Scheme.{u}} (j : U ⟶ X)
     (moduleJAdj B j) (fixedRestriction B U) (fixedRestriction B X)
     (openImmersionLowerShriek A j) (fixedOpen B j)
 
-/-- The specified inverse open-unit transpose is invertible for arbitrary constant B.
-Proof: conjugate the section-normalized right-adjoint comparison under the composite
-adjunctions (def-weil-pbc-composite-adjunction,
-situation-conventions). The iterated-mate formula
-lem-trf-iterated-square-mates identifies its inverse with `singleBetaInv`.
-The transpose formula lem-pur-adjunction-mate-transpose gives precisely the pulled-back
-open unit, so injectivity of the Hom equivalence proves the identification. -/
+/-- The specified inverse open-unit transpose is invertible for arbitrary constant B. -/
 theorem openBetaModule_isIso {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -123,11 +117,7 @@ def openBetaModule {U' U X' X : Scheme.{u}}
     (openBetaModule_isIso B a j' j g w sq)).symm
 
 /-- The left-adjoint comparison of the section-normalized restriction is exactly the
-open-unit-normalized sheaf comparison, including the specified direction.
-Proof: apply conjugate-iso uniqueness to the two composite adjunctions. The iterated
-mate identity identifies the resulting inverse with the left open mate of the square
-compositor. Apply the mate-transpose identity to the identity of j_!M; its transpose
-is the open unit. This proves the formula and its uniqueness. -/
+open-unit-normalized sheaf comparison, including the specified direction. -/
 theorem openBetaModule_normalized {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -350,13 +340,7 @@ def openBetaTower {U' U X' X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The derived tower comparison is the exact descent of the specific sheaf comparison,
-and its inverse has the specified open-unit transpose before evaluation.
-Proof: extend the sheaf comparison termwise; naturality gives the transition-map and
-chain-map equations. Use situation-conventions and
-lem-weil-pbc-localization-universal-property (2),(3) to descend the comparison, its
-inverse identities and its transpose equation. The descended units are the specified
-jAdj units, so injectivity of their Hom equivalence identifies the result with beta.
-No faithfulness of derived evaluations is used. -/
+and its inverse has the specified open-unit transpose before evaluation. -/
 theorem openBetaNormalization {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -588,11 +572,7 @@ private theorem moduleInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
   simp only [Category.assoc, Iso.hom_inv_id_app]
   exact (Category.comp_id _).symm
 
-/-- Open composition before evaluation.
-Proof: Restriction to successive opens is the same sectionwise restriction. Paste
-these restriction comparisons and take successive open mates using the composite
-open adjunction. The normalized open compositor is its conjugate. Invert the
-resulting inverse-beta equation, the same equation remains valid on sheaves. -/
+/-- Open composition before evaluation. -/
 theorem openBetaModuleOpenComp {V U X V₁ U₁ X₁ : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
     (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)

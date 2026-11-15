@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedExchangeModuleTermwiseSu
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
-# Unbounded proper/open AdjunctionNormalization
+# Unbounded proper/open adjunction normalization
+
+This file shows that proper/open comparisons normalized on K-injective representatives
+satisfy the adjunction normalization, for unbounded complexes.
 
 ## References
 
@@ -312,20 +315,7 @@ private lemma iso_of_normalization
     change gamma.hom.app X = (b.homEquiv _ _).symm (b.homEquiv _ _ (gamma.hom.app X))
     exact ((b.homEquiv _ _).symm_apply_apply (gamma.hom.app X)).symm
 
-/-- Adjunction normalization of comparisons normalized on K-injective representatives.
-
-Proof:
-For a cartesian square, apply the sheaf support normalization and restrict along i.
-Under the open-unit identifications the ordinary exchange sends i*theta followed by the
-open unit to r* of the other open unit. Resolve k!J by a K-injective I. Exact restriction
-preserves the resolution, and k*I is K-injective because restriction is right adjoint to
-exact extension by zero. The exchange representative formula and naturality along the
-resolution show that the displayed lambda, followed by the adjunct of Gamma, is identity.
-The representative normalization makes Gamma an isomorphism. The open unit is also an
-isomorphism, so the adjunct is invertible. Its inverse is lambda. Descend the resulting
-natural isomorphism and apply the inverse adjunction formula to get the asserted counit
-expression. This works for unbounded J because no truncation occurs.
--/
+/-- Adjunction normalization of comparisons normalized on K-injective representatives. -/
 theorem unboundedProperOpenAdjunctionNormalization_of_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}

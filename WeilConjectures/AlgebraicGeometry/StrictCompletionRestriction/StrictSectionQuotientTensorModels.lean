@@ -739,26 +739,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized tensor identification of the section reductions, without the
-completion assertion.
-
-Proof: use strictSectionQuotientConeMaps for the normalized quasi-isomorphism
-from each scalar cone to termwise tensor with the quotient. Its component formula
-implies naturality in the complex and identifies the inclusion and successor
-squares, giving model, unit and step after localization. Collapse total tensor
-with a degree-zero singleton by its sole (p,0) summand and compare the monoidal
-tensor with the site tensor. Sheafification naturality proves the prescribed
-local pure-tensor formula, giving single and single_values.
-
-Extend the supplied HM comparison by functorial K-flat resolution in both
-variables. It is invertible whenever the first factor is K-flat and agrees with
-HM on two K-flat factors. Combine it with single to identify model with derived
-tensor on K-flat representatives. Functorial resolution extends this natural
-isomorphism to all complexes, and localization descends it to the derived
-category without altering those representative values. Naturality in every
-quotient resolution Q gives tensor_model.
-No flatness of the quotient or boundedness of P is used.
-For the empty site all these maps are the unique maps; a zero quotient gives
-zero tensor objects, and the same formulas still apply. -/
+completion assertion. -/
 theorem strictSectionQuotientTensorModels (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1}
       (Modules (DerivedNakayama.integerRing l E) X))

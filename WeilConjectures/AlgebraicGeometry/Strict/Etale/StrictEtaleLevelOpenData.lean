@@ -22,6 +22,14 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 This isolates the fixed coefficient-level transport from the subsequent system assembly.
 
+## Implementation details
+
+Each level is the fixed-coefficient open extension by zero, transported along the additive
+equivalence between modules over the constant quotient-ring sheaf and fixed-coefficient module
+sheaves obtained by restriction along the constant-presheaf sheafification unit. The
+restriction isomorphism is the inverse mate of `I.restrictInverse.inv`, which is invertible
+because extension by zero is fully faithful.
+
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
@@ -574,31 +582,7 @@ structure StrictEtaleLevelOpenData where
 
 attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
-/-- The levelwise transport exists.
-
-Restrict a module along the constant-presheaf sheafification unit to obtain an
-additive equivalence with fixed-coefficient module sheaves. The ring comparison
-`constantCommuteCompose` and `constant_ring_module_sheaves` prove this equivalence.
-Transport the fixed-coefficient open extension by zero and its exact adjunction.
-The addition and scalar graph equations of the supplied lift, together with its
-constant-section normalization, identify its right adjoint with literal open
-restriction. This gives the chosen adjunctions with `(I.lift n).modules`.
-
-Naturality of sheafification identifies scalar restriction through the equivalences
-by the identity on sections. For fixed coefficients, scalar coextension commutes
-with open restriction. Taking its mate twice shows that extension by zero commutes
-with scalar restriction. Transport this isomorphism through the equivalences to
-identify scalar restriction of an extended object with extension of its scalar
-restriction. Extension by zero and its transports are fully faithful. The inverse
-mate of `I.restrictInverse.inv` is a composite of the image of the invertible unit,
-the given inverse-image coefficient isomorphism, and a counit at an object
-isomorphic to an extended object. That counit is invertible by full faithfulness,
-so this exact inverse mate is invertible. Define `restriction` as its isomorphism;
-the inverse law of `mateEquiv` gives `restrictionMate` exactly.
-
-The constructions apply to the zero coefficient ring and to the empty open: the
-same section formulas and Hom transposes give the zero functors and identities.
-No nonzero-ring, regularity or completeness assumption enters the construction. -/
+/-- The levelwise transport data for strict étale extension by zero exists. -/
 theorem strictEtaleLevelOpenData_exists :
     Nonempty (StrictEtaleLevelOpenData O t j I) := by
   have (n : ℕ) : (StrictEtaleOpenProof.fixed X

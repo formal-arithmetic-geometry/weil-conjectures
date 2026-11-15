@@ -34,14 +34,7 @@ private theorem mapSingleArrow_add
   simp only [mapSingleArrow, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 /-- Tensor multiplication becomes addition for the integral line class in the
-ordinary derived category of constant towers.
-
-Proof: the changed-site integral line class preserves multiplication as addition
-by tower_lineBundleEtaleClass_mul. The constant-system functor is exact and
-additive. Its derived functor therefore preserves the sum, and the fixed single
-and shift comparisons preserve it under composition. This is precisely the
-mapSingleArrow transport defining lineBundleClass.
--/
+ordinary derived category of constant towers. -/
 theorem tower_lineBundleClass_mul (T : Scheme.{u}) (L M : T.Pic) :
     lineBundleClass T (L * M) = lineBundleClass T L + lineBundleClass T M := by
   simp only [lineBundleClass, tower_lineBundleEtaleClass_mul, mapSingleArrow_add]

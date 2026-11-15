@@ -33,11 +33,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleReplete
 
 /-! # Root tower projections and normalized finite tensor reduction
 
-Kernel division and the normalized
-inverse are the agent arguments in the node.
+This file studies the projections from the pro-étale root tower to finite roots of unity and
+the resulting normalized reduction of finite tensors (`rootTower_finite_tensor`).
+
+## Implementation details
 
 The natural-number level `r` denotes the positive exponent `r + 1`.
-All tensors are ordinary sheafified tensors. No flatness or finiteness of B is assumed.
+All tensors are ordinary sheafified tensors. No flatness or finiteness of `B` is assumed.
 
 ## References
 
@@ -587,34 +589,9 @@ private def rootTensorIso (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} _ _ U b x
     erw [SheafOfModules.scalarExtensionSection_smul.{u + 1, u, u + 1, u + 1}, mul_one]
 
-/-- Root projections, their sectionwise shift division, and normalized finite tensor reduction.
-
-Proof:
-1. Use the proved epimorphic root transitions and pro-etale repleteness, after forgetting
-additive structure and transporting the limit. The local-surjectivity criterion gives
-local surjectivity of every root projection.
-2. In positive-exponent notation, if x_r = 0, set d(x)_s = x_(s+r). Iterating the
-transition equation shows that this unit is killed by l^s and that these roots are
-compatible. The sectionwise limit constructs d; its coordinates give l^r d(x) = x.
-Root-group annihilation gives the converse. Coordinate extensionality and naturality
-of projections prove that d commutes with restrictions.
-3. Restrict the completed action to constant Z_l. The coordinate action makes p_r
-linear for reduction to Z/l^r. PadicInt.ker_toZModPow and the annihilation of B
-factor its scalar map through this quotient. Scalar extension then constructs the
-forward B-linear map with the asserted pure-tensor formula.
-4. The tensor embedding kills ker(p_r): step 2 expresses its sections as l^r y,
-and l^r vanishes in the constant coefficient sheaf. Since p_r is epic, Abelian.epiDesc
-produces the unique additive map from finite roots to the tensor with composite equal
-to the tensor embedding. This is the categorical form of gluing local lifts.
-5. Every additive map between modules over the constant residue-ring sheaf is linear:
-restrict to the constant presheaf, represent each residue by an integer, use preservation
-of integer multiplication, then descend along the locally surjective sheafification
-unit. Applying this to the descended map and extending scalars gives the inverse.
-6. One composite is the identity on pure tensors by the descent equation. For the other,
-cancel the epic projection to identify the descended map followed by the forward map
-with the finite tensor embedding, then use pure-tensor extensionality. Naturality and
-the separatedness axiom identify the inverse with exactly the stated gluing for every
-covering sieve and family of lifts. No flatness is used. -/
+/-- Root projections are locally surjective, their kernels are the multiples of `l ^ (r + 1)`
+with a sectionwise shift division, and for `l ^ (r + 1) B = 0` the root-tower tensor with `B`
+is isomorphic to the finite Tate line, normalized on pure tensors and local lifts. -/
 theorem rootTower_finite_tensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (hT : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) (r : ℕ) :
     Sheaf.IsLocallySurjective (rootTowerProjection T l r) ∧

@@ -171,8 +171,13 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 /-!
 # Transporting the explicit Koszul comparison between derived representatives
 
+This file transports the explicit Koszul fiber comparison, with its prescribed unit equation,
+to every specified derived representative.
+
+## Implementation details
+
 The finite construction comparison is used only at the actual termwise transported
-complex. All representative transport and its prescribed unit equation are proved here.
+complex.
 
 ## References
 
@@ -295,25 +300,7 @@ namespace AlgebraicGeometry.Scheme
 universe v
 
 -- Checking the two presentations of the exact derived equivalence needs extra elaboration.
-/-- The explicit Koszul fiber comparison for every specified derived representative.
-
-Proof: the right tensor unitor and tensor functoriality make the maps from a complex
-into each Koszul level natural. Limit projections then prove naturality of the ordinary
-limit unit. Compose with the inverse termwise-limit comparison and the natural Roos
-inclusion to obtain the actual zero-homotopy unit as a natural transformation.
-
-Exact countable products transfer along the module-sheaf equivalence. Strict Roos
-derivation gives its descended functor and localization factorization. The existing
-single-site Koszul theorem supplies the descended tensor tower. Combining these
-factorizations descends the actual composite tensor/Roos functor. Full faithfulness of
-precomposition by localization lifts its unit natural transformation. Naturality of
-that lifted unit transports the comparison along any supplied representative isomorphism.
-
-Apply the source chain isomorphism at the termwise transported input and localize it.
-Naturality of the exact module functor's localization factorization identifies its unit.
-Compose with the representative comparison. The inverse/hom identities of the same
-factorization leave precisely realization.inv, proving the displayed equation. All these
-arguments apply to empty generator lists, zero rings and zero complexes. -/
+/-- The explicit Koszul fiber comparison for every specified derived representative. -/
 theorem completed_fiber_roos_comparison
     (X : Scheme.{v}) {A : Type (v + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

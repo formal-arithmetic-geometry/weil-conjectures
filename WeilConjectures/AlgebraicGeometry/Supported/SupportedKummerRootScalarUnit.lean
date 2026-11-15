@@ -212,13 +212,7 @@ private theorem boundaryScalarLineMap_unit
     (boundaryScalarLineMap_universal φ T N hR hS)
 
 /-- The coefficient map on the ordinary Tate root line, normalized on pure roots,
-is an unbounded derived scalar unit, without flatness of the target coefficient ring.
-
-Proof: the root-line Hom equivalence constructs the coefficient map from the target
-root generator. Its value at one and linearity give the displayed generator formula.
-The same Hom equivalences give its ordinary scalar universal property. The source
-line has a tensor inverse, hence is flat; the flat scalar-unit theorem upgrades the
-ordinary universal property to the full unbounded derived one. -/
+is an unbounded derived scalar unit, without flatness of the target coefficient ring. -/
 theorem supported_kummer_root_scalar_unit
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)

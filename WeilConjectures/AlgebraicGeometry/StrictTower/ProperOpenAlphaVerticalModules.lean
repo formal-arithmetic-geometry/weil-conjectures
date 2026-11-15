@@ -62,21 +62,7 @@ private theorem open_target_detection {U X : Scheme.{u}} (k : U ⟶ X)
   rw [hp]
   simp only [R, Functor.map_comp]
 
-/-- Intrinsic alpha obeys vertical pasting on module sheaves.
-Proof: Detect equality of maps to open extension by its monomorphism into direct image.
-Transport through the fixed-coefficient equivalence and use naturality of the
-restriction/direct-image unit. Equality after open restriction therefore suffices.
-The inverse-transpose definition of beta gives its restriction normalization through
-the specified open units. The clopen projector restricts to the identity, so intrinsic
-alpha restricts to the canonical inverse-image square identification followed by
-inverse image of the inverse open unit. All detection opens are quasi-compact.
-For vertical pasting, restrict along k and use p₁k = ir₁. The second square reduces
-the input to r₁* r₂* of the original module. The first alpha is then the identity
-under its open-unit identification. The inverse-image compositor identifies this
-with the restriction of intrinsic outer alpha. Detection gives the module equation.
-Apply this calculation to every module sheaf M to obtain the displayed component
-identity. Empty schemes and the zero coefficient ring give the unique zero maps;
-identity opens give the unit-normalized inverse-image compositor identity. -/
+/-- Intrinsic alpha obeys vertical pasting on module sheaves. -/
 theorem singleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)

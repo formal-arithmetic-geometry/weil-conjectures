@@ -421,23 +421,7 @@ private theorem reduction_preserves_regular_quasiIso (l : ℕ) [Fact l.Prime] (T
     (powerShortComplex_exact l T r P hP) (powerShortComplex_exact l T r Q hQ)
     (PowerTransition.quasiIso_map l f) hf
 
-/-- Every abelian tower complex has a reduction-acyclic resolution with torsion-free terms.
-
-Proof: sheafify the free abelian presheaf on the sections of a sheaf, and apply this
-construction at every level of a tower. Its evaluation map is epic and its nonzero
-integer multiples are monic, since sheafification is exact. Cover a complex K by the
-complex with terms F(K^i) ⊕ F(K^(i-1)), differential (x,y) ↦ (0,x), and augmentation
-(x,y) ↦ ε(x) + d ε(y). The cone of the inclusion of its augmentation kernel maps
-quasi-isomorphically to K. Its terms are sums of subobjects of free sheaves, so all
-nonzero integer multiples are monic. In particular the positive prime powers are
-monic after evaluation. On complexes with this regularity, the ordinary adjunction
-unit is the cokernel of the variable-power map. The associated short exact sequence
-and its homology sequence show that ordinary reduction preserves quasi-isomorphisms
-between regular complexes, since twisting transitions preserves quasi-isomorphisms
-and the exact faithful forgetful functor detects them. Apply the resolving-class
-construction on the homotopy category and transport its universal pair to complexes.
-Uniqueness of universal derived functors identifies its invertible counit components
-with those of the supplied reduction r. -/
+/-- Every abelian tower complex has a reduction-acyclic resolution with torsion-free terms. -/
 theorem powerSystem_acyclic_resolution (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Reduction T (Rrings l T)) (K : CochainComplex (Ab T) ℤ) :
     ∃ (P : CochainComplex (Ab T) ℤ) (q : P ⟶ K),

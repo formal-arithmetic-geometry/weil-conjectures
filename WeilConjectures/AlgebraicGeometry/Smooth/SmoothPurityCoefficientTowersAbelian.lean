@@ -44,18 +44,22 @@ import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 /-!
 # The abelian category of smooth-purity coefficient towers
 
-The input category is the recorded `spCoefficientTowers`, not a tower of modules
-with one fixed coefficient ring. The equivalence below only uncurries its product-site
-module presheaves into the already defined strict semilinear systems. Its four
-normalizations fix every section module, restriction, transition and morphism.
-The existing scalar models and their normalized associators specify the derived
-scalar extensions. All positive levels are represented: index n means level n+1.
+This file shows that the category `spCoefficientTowers` of smooth-purity coefficient towers is
+a Grothendieck abelian category with levelwise kernels, cokernels and filtered colimits.
 
 ## Main statements
 
 - `sp_coefficient_towers_abelian`: Grothendieck abelianness, levelwise kernels,
   cokernels and filtered colimits, exact derived evaluation, and natural reduction
   maps induced by the strict transitions, with identity and composition compatibility.
+
+## Implementation details
+
+The input category is `spCoefficientTowers`, not a tower of modules with one fixed
+coefficient ring. The equivalence below only uncurries its product-site module presheaves
+into the strict semilinear systems. Its four normalizations fix every section module,
+restriction, transition and morphism. The existing scalar models and their normalized
+associators specify the derived scalar extensions. Index n means level n+1.
 
 ## References
 
@@ -820,16 +824,7 @@ private def coefficientEquivalence : spCoefficientTowers l E T ≌
 
 end
 
-/-- The abelian axioms for the existing componentwise preadditive structure.
-Proof: give ℕ × T.ProEt the vertical topology, whose sheaf condition is exactly the
-recorded levelwise condition. The actual varying coefficient presheaf is a ring sheaf:
-its restriction to level n is naturally isomorphic to the recorded ring sheaf R_n.
-Rebundle each tower as a sheaf of modules over this ring sheaf. The inverse forgets
-only the global sheaf proof and retains its levelwise form; the two functors fix all
-presheaf modules and all maps, so their unit and counit are identities. Transfer finite
-products along this equivalence and use Mathlib's abelianOfEquivalence, which uses the
-existing componentwise preadditive structure. Extract normality, finite products,
-kernels and cokernels from this abelian structure. -/
+/-- The abelian axioms for the existing componentwise preadditive structure. -/
 theorem sp_coefficient_towers_abelian_axioms :
     IsNormalMonoCategory (spCoefficientTowers l E T) ∧
       IsNormalEpiCategory (spCoefficientTowers l E T) ∧

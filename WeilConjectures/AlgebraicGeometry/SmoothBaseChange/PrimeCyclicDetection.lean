@@ -79,26 +79,9 @@ private theorem prime_cyclic_vanishing_in_integer_coefficients
     DerivedCategory.Plus.homologyFunctor _ q
   exact (HZ.mapIso ci).isZero_iff.mp hz'
 
-/-- Nonvanishing with a geometric-point coefficient detects a prime cyclic abelian
-coefficient, with a prime that is not a unit in the original coefficient ring.
-
-Proof:
-1. The geometric-point module-constancy theorem supplies a module M and an isomorphism
-between e-star F and the constant M-sheaf on Y. The already-proved
-baseChangeTargetFunctorIso transports the nonvanishing to its higher direct image.
-2. Restrict M along ULift Z -> Lambda. The constant sheaf comparison and
-isZero_higherDirectImage_restrictScalars_iff preserve nonvanishing. The equation n = 0
-in Lambda kills every element of this integer module.
-3. Suppose there is no prime as in the conclusion. Apply
-isZero_higherDirectImage_constant_of_prime_vanishing. For a prime dividing n with
-noninjective multiplication on M, scalar cancellation shows that prime is not a unit
-in Lambda. The assumed absence of a witness forces its prime-field image to vanish.
-4. In P = ULift(ZMod r), r = 0, so its ideal is bottom. The quotient module is P,
-by Submodule.quotEquivOfEqBot. Restricting its scalar action to the integers gives
-the ordinary integer-module P, by Int.cast_smul_eq_zsmul. The higher-direct-image
-coefficient comparison and constantCommuteCompose turn its vanishing into the
-prime-cyclic vanishing required in step 3. The resulting vanishing for M contradicts
-step 2. This also covers negative q, where images of degree-zero sheaves vanish. -/
+/-- If the base-change target functor is nonzero on a sheaf `F` over `Spec K`, then the
+higher direct image of the constant sheaf `ZMod r` on `Y` is nonzero for some prime `r ∣ n`
+that is not a unit in `Λ`. -/
 theorem exists_prime_cyclic_higherDirectImage
     (Λ : Type (u + 1)) [CommRing Λ] {K : Type u} [Field K] [IsAlgClosed K]
     {X Y : Scheme.{u}} (e : Y ⟶ Spec (.of K)) (h : Y ⟶ X)

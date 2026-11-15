@@ -105,26 +105,7 @@ private theorem cross_tensor_of_pulled_generators {S T : Scheme.{u}} (h : T ⟶ 
   exact cross_tensor_affine h E q q' U ⟨W, hW⟩ (hWV.trans inf_le_right)
     (hpure U ⟨W, hW⟩ (hWV.trans inf_le_right)) _ _
 
-/-- The two normalized quotients satisfy the degree-two cross relation.
-
-Proof: work over affine pairs W contained in g inverse U, then on the standard
-opens D_+(b(iota(v))) of Proj Sym(g*E)(W). These opens cover: scalar extension
-identifies degree one with the span of the images of E(U), and a homogeneous
-prime containing their images would contain the irrelevant ideal. In the twist
-charts of D and D', the images of pulled generators m and n are respectively
-iota(m) and iota(n) in the old twist, and b(iota(m)) and b(iota(n)) in the new
-twist. Divide by the respective degree-one frame. The old coefficients pull back
-to b(iota(m))/b(iota(v)) and b(iota(n))/b(iota(v)), which are also the new
-coefficients by hb. Thus the two cross tensors have equal coefficients, by
-commutativity of the localized ring. This calculation asserts only equality of
-tensor sections, and requires no choice or gluing of a line isomorphism.
-The affine tensor-pullback section comparison expresses all local sections as
-finite sums of scalar multiples of pulled generators. Bilinearity extends the
-cross relation to those sums. The normalized pullback composition identifies the
-maps in this calculation with q and q'; proof irrelevance removes dependence on
-the proof e. Refine affine-base overlaps by affine opens and use separatedness of
-the tensor sheaf to obtain equality on every open V. Empty standard opens and
-zero rings give the same equality; no finite generation or flatness is used. -/
+/-- The two normalized quotients satisfy the degree-two cross relation. -/
 theorem normalized_pullback_cross_tensor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

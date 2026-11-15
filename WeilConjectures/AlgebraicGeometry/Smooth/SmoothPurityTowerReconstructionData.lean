@@ -157,12 +157,8 @@ private theorem spCompletedEllCommProjection_comp {m n : ℕ} (h : m ≤ n) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The unique ordinary transition, fixed on every section by the original strict
-semilinear tower.
-Proof: the completed projections commute with quotient transitions by the limit-cone
-condition. Thus the original semilinear transition becomes completed-ring linear.
-It commutes with sheaf restrictions and tower morphisms. Equality on all sections
-determines each component uniquely. -/
+/-- There is a unique transition between consecutive completed evaluations that agrees on
+every section with the transition of the strict semilinear tower. -/
 theorem spCompletedTransition_existsUnique (n : ℕ) :
     ∃! τ : spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n,
       ∀ (M : spCoefficientTowers l E T) (U : T.ProEtᵒᵖ)

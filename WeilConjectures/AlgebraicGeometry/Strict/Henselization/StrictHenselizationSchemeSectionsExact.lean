@@ -25,15 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Global sections on the spectrum of the pointed-neighbourhood colimit are exact.
-
-Proof: strictHenselizationLocalStructure supplies the local and strictly henselian
-structures on the actual coordinate-ring colimit. Sections at the terminal etale
-object preserve epimorphisms on the spectrum of any strictly henselian local ring.
-The canonical global-sections comparison transfers preservation of epimorphisms
-to global sections. This functor preserves kernels, so it preserves homology and
-therefore finite colimits. No comparison with a different strict localization is
-needed. The result applies to every geometric point and to the zero sheaf. -/
+/-- Global sections on the spectrum of the pointed-neighbourhood colimit are exact. -/
 instance strictHenselizationScheme_globalSections_preservesFiniteColimits
     {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

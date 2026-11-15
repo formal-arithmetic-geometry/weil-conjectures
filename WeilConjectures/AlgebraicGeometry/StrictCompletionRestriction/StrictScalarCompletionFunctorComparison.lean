@@ -616,16 +616,7 @@ private theorem reductionTransition
 
 include hscalar hproducts in
 /-- The strict scalar-cone tower, its augmented Roos complex and their derived descents
-commute with an exact additive functor preserving countable products and the scalar.
-
-Proof: Map the scalar powers and use the canonical mapping-cone comparison.
-The two biproduct projections show naturality and compatibility with the successor
-transition. Apply the product comparison followed by the product of the cone maps;
-its projections identify the Roos endomorphism 1-T. The shifted-cone comparison is
-diagonal in these product coordinates. The zero coordinate and every level of the
-augmentation agree. Fully faithful precomposition by derived localization descends
-the level and Roos isomorphisms. Naturality and the representative equations then
-identify all reduction transitions and units, and the completion unit. -/
+commute with an exact additive functor preserving countable products and the scalar. -/
 theorem strictScalarCompletionFunctorComparison : Nonempty (Comparison F S T) := by
   classical
   choose δ hδ using reductionDescent F S T hscalar

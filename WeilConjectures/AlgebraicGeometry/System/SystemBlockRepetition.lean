@@ -34,10 +34,16 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Exact block repetition of ordinary derived semilinear systems
 
-Indices here start at zero: index n denotes the paper's index n+1. The actual
-module-sheaf categories are `SemilinearSections.Systems`, with ordinary unbounded
-localizations `DS`. Section formulas specify the functors, not just their objects
-in the derived category. Derived comparisons are normalized before evaluation.
+Block repetition and first-endpoint reindexing of semilinear systems on the sequence site,
+their adjunction, and compatibility with extension by zero.
+
+## Implementation details
+
+Indices start at zero: index n denotes the paper's index n+1. The module-sheaf categories are
+`SemilinearSections.Systems`, with ordinary unbounded localizations `DS`. Section formulas
+specify the functors, not just their objects in the derived category. Derived comparisons are
+normalized before evaluation. The extension-by-zero comparison is normalized to be the identity
+on component sections, so no levelwise automorphism twists it.
 
 ## References
 
@@ -211,19 +217,7 @@ private theorem pushforwardEvaluationEquality
   rw [h]
 
 attribute [local irreducible] systemRing ringPresheaf rings in
-/-- Exact endpoint/repetition adjunction on the dependency's actual module-sheaf categories.
-Proof: on the sequence site ℕ × C of lem-coef-semilinear-derived-sections, the
-first-endpoint reindexing a is left adjoint to the block reindexing t: the unit has
-index i ≤ t(a(i)) = i, the counit has index a(t(m)) ≤ m, both with identity vertical
-components, and the triangle identities hold by thinness of ℕ. After applying t the
-counit and the unit are equality transports, since t(a(i)) = i; so the two ring
-equations of Mathlib's SheafOfModules.pushforwardPushforwardAdj hold for the endpoint
-and repetition ring identifications, giving blockEndpoint ⊣ blockRepeat. Its unit at
-(m,U) is the transition P_m(U) → P_(a(t(m)))(U), which is the adjunct formula.
-Composition of pushforwards gives the evaluation isomorphisms, identity on sections.
-Reindexing pushforwards are additive and exact (blockPushforward_exact). For acyclic H,
-E H is acyclic; Hom_K(H,R I)=Hom_K(E H,I)=0 for K-injective I
-(Adjunction.preservesKInjectiveComplexes), which proves the final clause. -/
+/-- Exact endpoint/repetition adjunction on the dependency's actual module-sheaf categories. -/
 theorem systemBlockRepetition : Nonempty (SystemBlockRepetition J B τ t) := by
   let siteAdj : blockSite (C := C) t.endpoints ⊣ blockSite t.index :=
     { unit :=
@@ -433,10 +427,7 @@ variable [EssentiallySmall.{max c v r} C]
   (B₀ : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ₀ : ∀ n : ℕ, B₀ (n + 1) ⟶ B₀ n) (U : C)
 
-/-- The ring identification for repetition after restriction to an open slice.
-Proof: both section rings at (m,V→U) are B_(t(m))(V). Restriction to the slice
-commutes with composition of tau, so all horizontal and vertical maps agree.
-Functor and sheaf extensionality give the claimed equality. -/
+/-- The ring identification for repetition after restriction to an open slice. -/
 theorem blockOpenRepeatRing :
     ((blockSite (C := Over U) t.index).sheafPushforwardContinuous RingCat.{max c v r}
       (coefficientSequenceTopology (J.over U))
@@ -512,22 +503,8 @@ private theorem blockOpenRepeat_restrictions
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] evaluation systemRing ringPresheaf rings blockOpenRepeat in
-/-- Exact extension by zero commutes with repetition. Both open presentations have
-level restriction identifications that are the identity on sections; with their unit
-and counit equations this fixes their extension evaluations `e_n j_! = j_! e_n`, so
-no levelwise automorphism twists them. The normalization says that under these
-actual level realizations the comparison is the identity on every component section.
-Consequently it is the strict identity for the direct-sum and sheafification
-realizations of the dependency, and commutes with reindexing.
-Proof: extension by zero is the sheafification of the level direct-sum extension.
-At (m,V) both sides extend the identical module M_(t(m)) and every component map
-and transition is extended by the same j!. The summand identity respects gluing,
-so defines the system comparison, with the asserted section normalization after
-the dependency's level identifications. It is invertible by the reverse identity.
-Exactness descends this ordinary identity termwise by
-situation-conventions. A second repetition substitutes
-s(m) into the same component identity, so gives the identical comparison and
-commutes with the composition identifications; the identity map leaves it unchanged. -/
+/-- Exact extension by zero commutes with repetition: the comparison is the identity on every
+component section under the level realizations of the open presentations. -/
 theorem blockRepeat_extensionByZero
     (R : SystemBlockRepetition J B₀ τ₀ t) :
     ∃ (O : OpenSystems.{c, v, r} J B₀ τ₀ U)

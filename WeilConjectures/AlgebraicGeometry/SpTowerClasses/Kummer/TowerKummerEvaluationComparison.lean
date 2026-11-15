@@ -21,10 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The named boundary evaluates to the existing finite Kummer composite.
-Proof: apply congrArg for exact evaluation to the proved equality between
-composition with the named boundary and the original kummerComposite. No coefficient
-tower or scalar-extension data are involved. Convert equality to HEq. -/
+/-- The named boundary evaluates to the existing finite Kummer composite. -/
 theorem towerKummerBoundary_evaluation (l : ℕ) [Fact l.Prime] {T : Scheme.{u}}
     (k : Kummer l T)
     (f : (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶

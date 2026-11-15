@@ -155,23 +155,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Localizing Hom into a K-injective representative and then restricting its sections
-computes the canonical cohomology germ leg. This is a statement only about a complex on
-S; it has no direct-image functor, pullback square, mate, or fibre cohomology.
-
-Proof: represent a localized Hom class by a cocycle from Z[W][0] to L[n]. Such
-representatives exist and are unique modulo homotopy because L is K-injective.
-Evaluation at the free generator identifies its class with the cohomology of L(W).
-The map to H^n(K)(W) applies homology to this cocycle, so sends it to exactly its
-homology section. Naturality of the presheaf fibre moves this map across the germ
-of W. The characterizing equation for strictHenselizationStalkRestriction replaces
-the resulting germ restriction by strictHenselizationSectionRestriction on that
-homology section. Exact inverse image and exact strict-local global sections commute
-with homology; their comparison isomorphisms send this section to the class of the
-restricted cocycle. Boundaries map to boundaries, so the equality descends to
-cohomology. The quotient and localization factorization isomorphisms, and the
-homology shift isomorphism, give precisely the displayed transport. Naturality of
-these isomorphisms with r completes the equality. Nothing requires acyclicity of
-the pulled-back complex. The same argument treats zero classes and every integer n. -/
+computes the canonical cohomology germ leg. -/
 theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

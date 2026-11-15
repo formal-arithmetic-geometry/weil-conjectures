@@ -282,20 +282,7 @@ private theorem pro_supported_integral_universal (A : Type (u + 1)) [CommRing A]
   rfl
 
 /-- Scalar extension carries the supported integral constant to the supported
-constant p-adic module, preserving the integral generator.
-
-Proof: Over the etale site the constant lifted integer module has the same
-underlying abelian sheaf as the integral constant, and scalar forgetting from
-lifted integers is fully faithful. The constant scalar unit from lifted integers
-to the p-adic ring represents module maps out of the p-adic constant. The finite
-ordinary scalar-unit theorem transports this Hom bijection through the closed
-direct image. The etale/pro-etale comparison adjunctions and the supported-source
-comparison isomorphisms give the same Hom bijection on the pro-etale site.
-Naturality of both adjunctions identifies its unit with the specified supported
-integral generator. This unit therefore has the same universal property as the
-unit of diagonalScalarAdjunction. The unique comparison is an isomorphism and
-preserves these units. No residue level or reduction presentation is involved;
-on an empty scheme the Hom bijections are bijections of singleton sets. -/
+constant p-adic module, preserving the integral generator. -/
 theorem supported_padic_scalar_extension (ℓ : ℕ) [Fact ℓ.Prime]
     {X Z : Scheme.{u}} (i : X ⟶ Z) [IsClosedImmersion i] :
     ∃ e : (diagonalScalarExtension ℓ Z).obj

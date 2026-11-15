@@ -33,10 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- The two factors of the clopen arrow have a common coefficient realization.
-Proof: compose the coefficient realization of cartesian open base change with
-that of the clopen section factor. Functoriality of evaluation and associativity
-identify their composite with alpha, using exact localization of composition. -/
+/-- The two factors of the clopen arrow have a common coefficient realization. -/
 theorem clopenArrowEvaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

@@ -25,12 +25,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The coordinate-ring evaluation gives the canonical closed-point lift over `s`.
-Proof: select a representative affine pointed neighbourhood. The structural map is its
-limit leg followed by its structure morphism. The evaluation cocone, followed by this
-limit leg, is the specified geometric point of that neighbourhood by the colimit cocone
-identity (`strictHenselizationRingPointEvaluation_pointed`). Its composite with the structure
-morphism is `s` by pointedness. Associativity gives the asserted factorization. -/
+/-- The coordinate-ring evaluation gives the canonical closed-point lift over `s`. -/
 theorem strictHenselizationClosedLift_over
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

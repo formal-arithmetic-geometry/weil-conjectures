@@ -329,21 +329,7 @@ private theorem coefficientPlusCounit
   rw [mateEquiv_counit]
   exact Iso.inv_hom_id_app_assoc (hPullbackPlus B Λ φ f) _ _
 
-/-- The canonical coefficient realization transports the normalized finite etale mate.
-Proof: factor H as site inverse image, finite-coefficient realization, and restriction
-of scalars. The underlying-sheaf identification of C fixes every sheafification-unit
-section. Its direct-image comparison is cDirect, and the inverse-image comparison is
-its adjunction mate. The open comparison is the mate for extension by zero. On the
-clopen lift all three comparisons preserve the projection onto the first factor of
-the disjoint-cover product, since they preserve restriction and zero sections.
-They consequently preserve the ordinary alpha, with its inverse cartesian comparison
-and its two compositors. Apply exact localization to this equality. The unit-normalized
-derived direct-image comparison is hR, including the bounded-below inclusion into the
-unbounded category. Transposing alpha under the two proper adjunctions gives the
-singleDerivedGamma square. The finite site-transport theorem identifies its fixed-ring
-site part with the etale derived mate; etale clopen normalization identifies this with
-the specified normalizedComparison. Composition of the coefficient and site squares
-is exactly the displayed equation. No flatness of the scalar map is required. -/
+/-- The canonical coefficient realization transports the normalized finite etale mate. -/
 theorem singleLevelFiniteProperOpenTransport
     (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)

@@ -397,15 +397,7 @@ attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundT
 attribute [local irreducible] completedCechModulesEquiv
 
 -- Checking the fixed coefficient and site presentations needs extra elaboration steps.
-/-- The published exterior product fiber is the tensor-dual Roos fiber, with its unit.
-
-Proof: the finite tower comparison commutes with transitions and augmentation. Backward
-coefficient restriction preserves limits because the module-to-sheaf functor preserves
-and reflects them; the site equivalence preserves products. Compare product projections
-to conjugate 1-shift. Additive functors preserve cones and shifts. Identity on the source
-and negation on the target identify the two signed cones. The zero second coordinate
-of the unit survives these comparisons. Its projections are the finite augmentations,
-so the ordinary-limit universal property identifies it with the asserted unit. -/
+/-- The published exterior product fiber is the tensor-dual Roos fiber, with its unit. -/
 theorem completed_fiber_roos_comparison_on_complex
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

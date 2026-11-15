@@ -301,15 +301,7 @@ private theorem pointMatrixModels (X : Scheme.{u})
     exact (h j k U x).trans (pointScalarValue l E X (a j k) U x).symm
 
 /-- The section-action equivalence identifies finite constant local models with the
-specified finite scalar-matrix cokernel models on the actual pro-etale cover.
-
-Proof: An exact additive functor carries finite free biproducts and the cokernel of
-any finite presentation to their canonical comparisons. Entries of the transported
-matrix are the transported regular-module endomorphisms. On the section unit every
-endomorphism is multiplication by its value at one, which is sectionScalarValue.
-Conversely use the same matrix of point endomorphisms and cokernel preservation.
-Full faithfulness reflects these cokernel models. Apply the inverse-image comparison
-on every chart of the cover; the same cover proves both directions. -/
+specified finite scalar-matrix cokernel models on the actual pro-etale cover. -/
 theorem strictCompletionFiniteConstantModels (X : Scheme.{u}) (M : AdicCompletion.Modules l E X) :
     HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X M ↔
       HasSectionFiniteConstantLocalModel l E X

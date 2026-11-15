@@ -64,27 +64,7 @@ private theorem systemHom_ext {T : Scheme.{u}}
   ext V x
   exact congrArg (fun k ↦ k.val.app (op V.unop.2) x) (h V.unop.1)
 
-/-- The geometric tower operations can be chosen with their ordinary unit and tensor maps.
-
-Proof: use the coefficient-tower calculus and the ringed sequence site from
-strictSystemGeometricRealization. Realize inverse image by the algebraic inverse
-image of each constant quotient ring. Choose the constant-section comparison at
-each level, so its adjoint is the specified constant direct-image map. Quotient
-maps commute with those section maps; hence the unit comparisons assemble to
-CoefficientPullback. This constructs a normalized geometry, rather than asserting
-an extra normalization for every geometry with the same level functors.
-For two ordinary module systems, apply geometricOrdinaryTensor_exists to that
-ordinary realization. Its system and system_natural fields provide the assembled
-tensor isomorphisms and naturality. Its evaluation and level_pure fields express
-the finite maps as the inverse images of pure tensors. Scalar restriction
-commutes with that pairing, since both composites send a generalized pure tensor
-to the tensor of its two restricted inverse images. Transpose with the ordinary
-system adjunction, whose unit evaluates to the finite unit: a pure tensor maps
-to the tensor of the two unit sections. This is TensorPullback.normalization.
-The construction uses the unital constant-ring comparison also on empty charts;
-no nonempty-chart assumption or flatness of a quotient-ring map is needed.
-There is no roots-of-unity line, twisting equivalence, or projection assertion here.
--/
+/-- The geometric tower operations can be chosen with their ordinary unit and tensor maps. -/
 theorem exists_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       Nonempty (CoefficientPullback l E b f g) ∧ Nonempty (TensorPullback l E f g) := by

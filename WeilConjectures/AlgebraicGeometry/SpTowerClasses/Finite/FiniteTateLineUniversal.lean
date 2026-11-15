@@ -88,19 +88,7 @@ private def forgetHomEquiv (T : Scheme.{u}) (k : ℕ) (hk : 0 < k)
   left_inv f := by ext U x; rfl
   right_inv f := by ext U x; rfl
 
-/-- The finite Tate line represents additive maps out of the finite roots sheaf.
-
-Proof: the finite Tate line is the sheafification of the sectionwise tensor
-B tensor over ZMod(ell^(n+1)) with the canonical roots module. The
-sheafification adjunction followed by the tensor/restriction adjunction identifies
-maps from it with linear maps from the roots module to the scalar restriction
-of N. The underlying sheaf of the roots module is the actual roots sheaf.
-Every additive map from it is linear over the constant ZMod sheaf: locally lift
-a scalar to an integer section, use additivity, and descend the equality by
-separatedness. This constructs the stated equivalence and its inverse. The
-adjunctions are natural for postcomposition. On pure tensors the inverse sends
-b tensor z to b times the image of z, which is the displayed scalar formula.
-This applies also to the zero coefficient ring and to the empty scheme. -/
+/-- The finite Tate line represents additive maps out of the finite roots sheaf. -/
 theorem finiteTateLine_universal (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] (n : ℕ) (a : ZMod (l ^ (n + 1)) →+* B) :
     ∃ Ψ : ∀ N : SheafOfModules.{u + 1}

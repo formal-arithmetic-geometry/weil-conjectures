@@ -15,10 +15,17 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Canonical root-tower pullback and tensor coherence
 
+This file constructs the canonical pullback maps of the pro-étale root tower, their ordinary
+tensor extensions and the reduction square, packaged as `AmbRootTowerPullbackCoherence`.
+
+## Implementation details
+
 Index `s : ℕ` means the positive exponent `s + 1`. Maps are specified by their
 adjuncts, so identity and composition use the actual fibre-product comparisons.
 The root limit and its completed action are the existing `purTwistZlOne` and
 `purTwistZlModule`. Only restriction to constant scalars is used here.
+The invertibility of `l` is retained as a hypothesis on the schemes; the construction itself
+uses only the indicated roots, limits and ordinary tensors.
 
 ## References
 
@@ -1518,33 +1525,8 @@ private theorem tensor_reduction_square (B : Type u) [CommRing B] [Algebra ℤ_[
       (root_direct_project_value l f n U x)
   exact (h1.trans h2).trans (hp.trans (h3.trans h4).symm)
 
-/-- Canonical root-tower pullback, its ordinary tensor extension, and the reduction square.
-
-Proof:
-1. The constant sheaf adjunction composed with the inverse-image adjunction is the constant
-sheaf adjunction on the target, since base change preserves the terminal object; uniqueness
-of left adjoints makes the constant comparison maps invertible. Sheafification uniqueness
-gives their naturality in the coefficient ring and their identity and composition laws.
-2. The finite-root inverse-image lemma gives power-transition compatibility and
-semilinearity. The finite direct-image root maps are pullback of units along the
-fibre-product projection, so the fibre-product projection identities give their identity
-and composition laws; the normalized finite-ring action makes them linear.
-3. The pulled-back limit projections composed with the finite root comparisons form a cone
-over the target root tower; its lift, transposed, is c. The lift equations give the
-projection law, adjunction and the limit property give uniqueness, and joint injectivity of
-the projections with step 2 gives the identity, composition and constant Z_l-linearity laws.
-4. The map x |-> 1 tensor c(x) is linear into the restricted direct-image tensor module by
-coefficient naturality, so the scalar-extension universal property gives h with
-h(b tensor x) = b tensor c(x). Maps out of a scalar extension are determined on pure
-sections, which proves the identity and composition laws of h.
-5. If l^(r+1) B = 0, the algebra map Z_l -> B factors through Z/l^(r+1) by the cast
-homomorphism. The root projection is semilinear for this reduction, so scalar extension
-gives alpha; the same lift of the finite root map gives d. Both composites of the square
-agree on pure sections by the projection law, which proves the square. Neither alpha nor
-c_r is inverted.
-
-The invertibility of l is retained as a hypothesis on the schemes. The construction itself
-uses only the indicated roots, limits and ordinary tensors. -/
+/-- The canonical root-tower pullback, its ordinary tensor extension and the reduction square
+exist: `AmbRootTowerPullbackCoherence l` is inhabited. -/
 theorem ambRootTowerPullbackCoherence :
     Nonempty (AmbRootTowerPullbackCoherence.{u} l) := by
   refine ⟨{

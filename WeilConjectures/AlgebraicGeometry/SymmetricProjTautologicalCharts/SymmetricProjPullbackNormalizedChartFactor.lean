@@ -479,17 +479,7 @@ attribute [local irreducible] Proj.twist
   Proj.unitToTwist sectionOn quotientSymmetricGenerator Proj.map
   Proj Proj.twistPullbackMap unitSectionsEquiv
 
-/-- On an affine pair, the normalized pulled quotients admit an intertwining morphism.
-
-Proof: conjugate the explicit homogeneous-localization map on degree-one twists by
-both normalized chart isomorphisms and the normalized pullback-composition maps.
-The localization map takes the section iota(t)/1 to b(iota(t))/1, which `hb`
-identifies with the corresponding pulled generator. Naturality and the quotient
-normalizations give the intertwining equation on these pulled sections. Since
-sections over an affine base generate the pulled quasi-coherent module locally,
-the affine tensor-section comparison extends this equation to module morphisms.
-This works for empty charts and zero rings as well.
--/
+/-- On an affine pair, the normalized pulled quotients admit an intertwining morphism. -/
 theorem normalized_pullback_quotient_chart_factor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

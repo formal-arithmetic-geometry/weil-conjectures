@@ -48,12 +48,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- Forgetting commutativity commutes with sheafification at the original site universes.
-Proof: the plus construction uses limits of matching families and filtered colimits
-of coverings. Forgetting commutativity creates these limits and preserves these
-filtered colimits. Apply the construction twice and its universal property to
-identify ring sheafification with forgotten commutative-ring sheafification.
-The resulting comparison preserves the sheafification unit. -/
+/-- Forgetting commutativity commutes with sheafification at the original site universes. -/
 @[instance]
 theorem constantRingForget_preservesSheafification (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).PreservesSheafification
@@ -78,10 +73,7 @@ noncomputable def finiteRestriction (X : Scheme.{u}) (Λ : Type (u + 1))
     FiniteCoefficientModules X Λ ⥤ Modules B X :=
   SheafOfModules.restrictScalars (finiteScalarMap B X Λ φ)
 
-/-- Restriction of scalars is exact; no flatness of φ is required.
-Proof: restriction leaves the underlying additive sheaf, restrictions and maps
-unchanged. Kernels and sheafified cokernels have the same restricted scalar action,
-so both finite-limit and finite-colimit comparisons are isomorphisms. -/
+/-- Restriction of scalars is exact; no flatness of φ is required. -/
 theorem finiteRestriction_exact (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (finiteRestriction B X Λ φ).Additive ∧
@@ -143,11 +135,7 @@ noncomputable def C (X : Scheme.{u}) (Λ : Type (u + 1))
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤ Modules B X :=
   finiteCoefficientRealization X Λ ⋙ finiteRestriction B X Λ φ
 
-/-- The realization comparison is uniquely normalized on the sheafification unit.
-Proof: module sheafification has the sheafification of the underlying additive
-presheaf as its underlying sheaf. The counit to the original additive sheaf is
-an isomorphism and sends each unit section to itself. Local surjectivity of the
-unit gives uniqueness. Scalar restriction leaves all these sections unchanged. -/
+/-- The realization comparison is uniquely normalized on the sheafification unit. -/
 theorem cUnderlying_existsUnique (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     ∃! e : C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅
@@ -306,11 +294,7 @@ private theorem moduleDirectImage_scalarUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [hρ]
   exact congrArg (fun r ↦ r • m) hu
 
-/-- Direct image commutes with this scalar realization by identity on sections.
-Proof: after the underlying-sheaf identifications both sides have sections of F
-on U ×_Y X. Identity on these sections is B-linear because both coefficient maps
-send b to the constant value φ(b). It is natural and invertible. Faithfulness of
-underlying additive sheaves proves uniqueness. -/
+/-- Direct image commutes with this scalar realization by identity on sections. -/
 theorem cDirect_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     ∃! e : ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f ⋙ C B Y Λ φ ≅
@@ -906,12 +890,7 @@ private theorem cPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end FixedCoefficients
 
-/-- The specified coefficient/site pullback comparison is invertible.
-Proof: separate site inverse image from scalar restriction. The former has the
-canonical inverse-image comparison; the latter keeps the inverse-image additive
-sheaf and restricts its action. On constant scalars the two actions coincide.
-The unit-section normalization identifies their composite with this inverse mate.
-No flatness and no preservation of injectives by scalar restriction is used. -/
+/-- The specified coefficient/site pullback comparison is invertible. -/
 theorem hPullbackInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     IsIso (hPullbackInv B f Λ φ) := by
@@ -1157,15 +1136,7 @@ noncomputable def hOpenInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (ModuleCat.{u + 1} Λ) j) (moduleJAdj B j)).symm
     (@inv _ _ _ _ (hPullbackInv B j Λ φ) (hPullbackInv_isIso B j Λ φ)))
 
-/-- The specified inverse open comparison is invertible.
-Proof: factor the pullback comparison into its site and coefficient squares.
-The site square has an invertible open mate by the recorded open-unit normalization.
-Restricting modules over the constant ring sheaf to constant scalars is an equivalence.
-After this equivalence, the coefficient square is the standard scalar pullback square:
-its direct-image mate acts identically on sections. On an open immersion its open mate
-is the scalar extension-by-zero comparison. Both identifications follow by injectivity
-of the mate correspondence. Pasting the two invertible open mates gives the specified
-inverse open comparison. The argument also covers the empty open and zero ring. -/
+/-- The specified inverse open comparison is invertible. -/
 theorem hOpenInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1219,9 +1190,7 @@ noncomputable def hOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
       H B U Λ φ ⋙ moduleJ B j :=
   (@asIso _ _ _ _ (hOpenInv B j Λ φ) (hOpenInv_isIso B j Λ φ)).inv
 
-/-- The normalized forward open comparison is invertible.
-Proof: this is the inverse of the invertible unit-normalized inverse comparison,
-so the two inverse identities give invertibility of the forward arrow. -/
+/-- The normalized forward open comparison is invertible. -/
 theorem hOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1229,9 +1198,7 @@ theorem hOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   dsimp only [hOpen]
   infer_instance
 
-/-- The comparison functor is additive and exact.
-Proof: comparison inverse image, finite realization and scalar restriction are
-additive and exact. Their composite therefore preserves finite limits and colimits. -/
+/-- The comparison functor is additive and exact. -/
 theorem h_exact (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (H B X Λ φ).Additive ∧ PreservesFiniteLimits (H B X Λ φ) ∧
@@ -1327,16 +1294,7 @@ private theorem h_rightAcyclic {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (lowerStar (ModuleCat.{u + 1} B) f).rightAcyclic.prop_of_iso
     ((cFixed B X Λ φ).app F).symm h
 
-/-- This particular direct-image comparison is an isomorphism for qcqs maps.
-Proof: the underived site mate is invertible for qcqs maps, and the normalized
-coefficient comparison is invertible. The image of an injective etale sheaf under
-site inverse image is direct-image acyclic. The higher-direct-image scalar comparison
-transports this acyclicity through scalar restriction. The equivalence between modules
-over the constant ring sheaf and fixed-ring module sheaves reflects acyclicity and
-identifies their higher direct images. Thus H sends injective etale sheaves to
-module-direct-image acyclic objects. Apply the acyclic-object criterion to the exact
-functors H and the specified hDirect; its derived base-change map is invertible.
-The associators and compatibility isomorphisms in hR preserve invertibility. -/
+/-- This particular direct-image comparison is an isomorphism for qcqs maps. -/
 theorem hR_isIso {U X : Scheme.{u}} (f : U ⟶ X) [QuasiCompact f] [QuasiSeparated f]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :

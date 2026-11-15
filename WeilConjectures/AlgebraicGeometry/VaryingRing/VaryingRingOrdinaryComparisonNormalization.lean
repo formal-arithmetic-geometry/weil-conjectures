@@ -377,28 +377,8 @@ private theorem open_composition (n : ℕ)
     (ordinaryPullComparison R φ n U X (i ≫ j))
     (moduleGComp R φ i j) (StrictTower.gComp (R n) i j) (hp i j)
 
-/-- The two construction normalizations, before any cartesian or section arrow.
-Proof: use ordinaryRealization_eq to replace realization by its explicit
-component/constant/single composite, keeping the equality transports. Apply
-constant embedding and degree-zero embedding to ordinaryModuleEvalG_comp.
-Naturality moves each evaluation comparison past its exact-single comparison;
-the natural-isomorphism and compositor coherence of the exact-single comparison
-identifies the remaining factors. Constant-tower comparison composes termwise.
-This gives the specified pullback-composition equation.
-For open composition first identify the mate of ordinaryOpenComparison.inv
-with ordinaryPullComparison.hom. The defining inverse mate evalJInv of evalG
-has this unit equation after localization. The fully faithful degree-zero
-embedding recovers its ordinary version, constant embedding makes the unit
-termwise, and the exact-single localization factors give the derived strict
-unit. Whisker with evaluation and the realization equality isomorphisms.
-Transpose the two inverse open-composition maps under the composite open
-adjunctions. Mate pasting identifies their mates with the pullback-composition
-maps just proved. Conjugation sends moduleJComp.inv and StrictTower.jComp.inv
-to the corresponding inverse pullback compositors, by their leftAdjointCompIso
-normalization. The pullback equation therefore makes the mates equal.
-Injectivity of mateEquiv gives equality of inverse isomorphisms; inversion gives
-the displayed forward open-composition equation. Neither calculation uses a
-cartesian beta map or a clopen section projection. -/
+/-- The ordinary pullback and open realization comparisons are compatible with
+composition. -/
 theorem ordinaryComparisonNormalization (n : ℕ) :
     OrdinaryPullComposition R φ n (ordinaryPullComparison R φ n) ∧
       OrdinaryOpenComposition R φ n (ordinaryOpenComparison R φ n) := by

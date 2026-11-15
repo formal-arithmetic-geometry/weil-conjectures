@@ -59,13 +59,7 @@ noncomputable def structureDerivedImageCohomologyTargetEquiv
 -- Composing the module and abelian comparisons requires large category transports.
 /-- The affine-base Leray comparisons `structureDerivedImageCohomologyEquiv q` and
 `structureDerivedImageCohomologyTargetEquiv q j hj` for structure modules respect a map
-`j` of total spaces.
-
-Proof: By `structure_derived_image_module_naturality`, the affine Leray edges carry `H(b)`
-to the module h-map of the structure map of `j`. By `structure_module_abelian_comparison`,
-the fixed injective-resolution comparison carries the module h-map of every scheme
-morphism to `structureSheafCohomologyPullback`. Applying the two squares in turn gives
-the equation. -/
+`j` of total spaces. -/
 theorem structure_derived_image_cohomology_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

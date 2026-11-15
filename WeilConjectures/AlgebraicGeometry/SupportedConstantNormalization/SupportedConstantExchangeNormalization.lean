@@ -68,7 +68,7 @@ All sheaves are ordinary fixed-scalar modules over the given constant ring.
 
 ## References
 
-* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S6, 095L
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S6, 095L, 04J0
 * J. S. Milne, *Lectures on étale cohomology*, Section 9, Theorem 9.4
 -/
 
@@ -320,7 +320,7 @@ abbrev compare (X : Scheme.{u}) :=
 /-- The scalar-preserving constant-unit identification for site comparison. -/
 abbrev compareUnit (X : Scheme.{u}) := ProEtale.comparisonUpperStarUnitIso A X
 
-/-- The recorded coherent comparison, with exactly the orientation in the node. -/
+/-- The recorded coherent comparison with its fixed orientation. -/
 def comparePullback {X' X : Scheme.{u}} (h : X' ⟶ X) :
     pull A false h ⋙ compare A X' ≅ compare A X ⋙ pull A true h :=
   ProEtale.supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) h
@@ -811,16 +811,7 @@ private lemma compare_open_isIso [Finite A] {U X : Scheme.{u}}
   rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction is the cokernel of the open constant counit in both topologies.
-Proof: Apply the exact inverse-image adjunctions and the constant-module inverse-image
-lemma (step 1). The etale open/closed sequence and the pro-etale constant presentation
-identify restriction as the cokernel of the open constant counit (step 2); no compactness
-of the complement is used. Transpose the canonical open comparison: the triangle identity
-identifies its composite with the pulled-back counit with the target counit (step 3).
-Transpose the closed mate: naturality of the square comparison, the closed triangle
-identity and scalar-preserving constant coherence give d L rho = rho' q (step 4).
-The cokernel universal property constructs a two-sided inverse to d and proves uniqueness
-by cancellation with L rho (step 5). -/
+/-- Restriction is the cokernel of the open constant counit in both topologies. -/
 theorem presentation (P : WeilConjectures.PurityFiniteSetting.{u}) (pro : Bool)
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     ∃ w : epsilon P.Coefficient pro i.openComplement.ι ≫
@@ -887,16 +878,7 @@ theorem presentation (P : WeilConjectures.PurityFiniteSetting.{u}) (pro : Bool)
     exact IsCokernel.ofIso b hc (CokernelCofork.ofπ r hz)
       e.symm (Iso.refl _) (Iso.refl _) (by simp [he]) (by rfl)
 
-/-- Exact pullback, the actual open counit comparison, and the canonical closed mate.
-Proof: Apply the exact inverse-image adjunctions and the constant-module inverse-image
-lemma (step 1). The etale open/closed sequence and the pro-etale constant presentation
-identify restriction as the cokernel of the open constant counit (step 2); no compactness
-of the complement is used. Transpose the canonical open comparison: the triangle identity
-identifies its composite with the pulled-back counit with the target counit (step 3).
-Transpose the closed mate: naturality of the square comparison, the closed triangle
-identity and scalar-preserving constant coherence give d L rho = rho' q (step 4).
-The cokernel universal property constructs a two-sided inverse to d and proves uniqueness
-by cancellation with L rho (step 5). -/
+/-- Exact pullback, the actual open counit comparison, and the canonical closed mate. -/
 theorem scheme_normalization (P : WeilConjectures.PurityFiniteSetting.{u}) (pro : Bool)
     {Z' Z X' X : Scheme.{u}} {g : Z' ⟶ Z} {i' : Z' ⟶ X'} {i : Z ⟶ X} {h : X' ⟶ X}
     [IsClosedImmersion i] [IsClosedImmersion i']
@@ -967,16 +949,7 @@ theorem scheme_normalization (P : WeilConjectures.PurityFiniteSetting.{u}) (pro 
     (ho gU sqU).2 hn
   exact ⟨hl, hc, ho, hi, hn, unique⟩
 
-/-- The same normalization for the prescribed site-comparison mate.
-Proof: Apply the exact inverse-image adjunctions and the constant-module inverse-image
-lemma (step 1). The etale open/closed sequence and the pro-etale constant presentation
-identify restriction as the cokernel of the open constant counit (step 2); no compactness
-of the complement is used. Transpose the canonical open comparison: the triangle identity
-identifies its composite with the pulled-back counit with the target counit (step 3).
-Transpose the closed mate: naturality of the square comparison, the closed triangle
-identity and scalar-preserving constant coherence give d L rho = rho' q (step 4).
-The cokernel universal property constructs a two-sided inverse to d and proves uniqueness
-by cancellation with L rho (step 5). -/
+/-- The same normalization for the prescribed site-comparison mate. -/
 theorem site_normalization (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     PreservesFiniteLimits (compare P.Coefficient X) ∧
@@ -1030,13 +1003,7 @@ def SectionCondition (pro : Bool) {Z' Z X' X : Scheme.{u}}
     l.app M ≫ kernel.ι (((pull A pro h).obj M).obj.map (supportRestriction pro i').op) =
       kernel.ι (M.obj.map (supportRestriction pro i).op) ≫ sigma A pro h M
 
-/-- The supported inverse-image section transformation exists and is uniquely normalized.
-Proof: Evaluate the inverse-image unit at the terminal object. The localized direct-image
-identity of Stacks 04J0 makes its restrictions on X and U commute (node step 7).
-Consequently it sends the kernel of restriction into the target kernel. Apply the kernel
-universal property on each module sheaf. Naturality follows from naturality of the unit;
-uniqueness follows from the monic kernel inclusion. This works for every module sheaf,
-without a compactness or finiteness assumption. -/
+/-- The supported inverse-image section transformation exists and is uniquely normalized. -/
 theorem sectionMap_existsUnique (P : WeilConjectures.PurityFiniteSetting.{u}) (pro : Bool)
     {Z' Z X' X : Scheme.{u}} {g : Z' ⟶ Z} {i' : Z' ⟶ X'} {i : Z ⟶ X} {h : X' ⟶ X}
     [IsClosedImmersion i] [IsClosedImmersion i']
@@ -1205,13 +1172,7 @@ def CompareSectionCondition {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion 
     l.app M ≫ kernel.ι (((compare A X).obj M).obj.map (supportRestriction true i).op) =
       kernel.ι (M.obj.map (supportRestriction false i).op) ≫ compareSigma A X M
 
-/-- The uniquely normalized supported-section map for the site comparison.
-Proof: Evaluate the inverse-image unit at the terminal object. The localized direct-image
-identity of Stacks 04J0 makes its restrictions on X and U commute (node step 7).
-Consequently it sends the kernel of restriction into the target kernel. Apply the kernel
-universal property on each module sheaf. Naturality follows from naturality of the unit;
-uniqueness follows from the monic kernel inclusion. This works for every module sheaf,
-without a compactness or finiteness assumption. -/
+/-- The uniquely normalized supported-section map for the site comparison. -/
 theorem compareSectionMap_existsUnique (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     ∃! l : sections P.Coefficient false i ⟶
@@ -1293,18 +1254,7 @@ private lemma sigma_comparison_square {X' X : Scheme.{u}} (h : X' ⟶ X)
   erw [← reassoc_of% e]
   rfl
 
-/-- Both canonical underived comparison squares commute, with the prescribed k.
-Proof: Precompose the two closed-exchange composites with the twice-pulled-back
-constant restriction (node step 6). The closed normalization identifies them with the
-two scalar-preserving constant units. Coherence of the recorded comparison makes those
-equal. Exactness preserves the cokernel, hence its epimorphism can be cancelled.
-For sections, use the composite adjunctions (step 8). Their right adjoints identify
-sectionwise on each etale object with evaluation on its base change. The recorded
-comparison is their conjugate, so the conjugate-isomorphism unit equation makes the
-two composite section maps agree after applying k. Step 7 restricts this equality to
-support kernels, and their monic inclusions give the displayed equation for all M.
-This argument uses neither quasi-compactness of the open complement nor finiteness
-of h or X'. -/
+/-- Both canonical underived comparison squares commute, with the prescribed k. -/
 theorem comparison_square (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z' Z X' X : Scheme.{u}} {g : Z' ⟶ Z} {i' : Z' ⟶ X'} {i : Z ⟶ X} {h : X' ⟶ X}
     [IsClosedImmersion i] [IsClosedImmersion i']

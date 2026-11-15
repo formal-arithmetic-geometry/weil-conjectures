@@ -12,10 +12,8 @@ import Mathlib.LinearAlgebra.Prod
 
 /-! # Nonpositive-degree exterior basis splitting
 
-Projection to the tail and contraction with the head coordinate give an explicit
-inverse to exterior assembly. Only head degrees zero and one survive in the tensor
-coproduct; checking these summands proves the graded join map is bijective.
-(
+This file proves that the graded join map is bijective in nonpositive degrees, by splitting
+the exterior basis into the head coordinate and the tail.
 
 ## References
 
@@ -182,23 +180,7 @@ private theorem exterior_split (x : ExteriorAlgebra R (Fin (r + 1) →₀ R)) :
     abel_nf
     simp only [mul_smul_comm, ← mul_assoc]
 
-/--
-
-Proof: let `p` be restriction of a finitely supported vector to the tail and
-let `δ` evaluate its head coordinate. Inclusion `j` and restriction satisfy
-`p ∘ j = id`, and `p(e_head)=0`. Define the inverse on degree `n+1` by
-`x ↦ (Λ^(n+1)(p)(x), Λ^n(p)(contractLeft δ x))`. Contraction kills the exterior
-algebra of the tail: prove this by left induction using its defining Leibniz
-rule. Consequently contracting `j(a) + e_head ∧ j(b)` gives `j(b)`, so both
-components of the proposed inverse recover `(a,b)`.
-
-For the other inverse identity put `T=Λ(j) ∘ Λ(p)` on the full exterior algebra
-and `L=ι(e_head)`. Left induction proves `T(x) + L*T(contractLeft δ x) = x`.
-The scalar and addition cases are immediate. For `ι(v)*x`, decompose the vector
-as `j(p(v)) + δ(v)*e_head`; use the contraction rule, the induction hypothesis,
-anticommutation of `ι(j(p(v)))` with `L`, and `L*L=0`. Restrict this identity to
-degree `n+1`. All maps are genuine constructions and the identities hold also
-for `r=0`, the zero ring, and degrees above the rank. -/
+/-- The head assembly map `(a,b) ↦ inclusion(a) + e_head ∧ inclusion(b)` is bijective. -/
 private theorem headAssembly_bijective (n : ℕ) :
     Function.Bijective (headAssembly R r n) := by
   let δ : Fin (r + 1) → R := fun i ↦ if i = (0 : Fin (r + 1)) then 1 else 0

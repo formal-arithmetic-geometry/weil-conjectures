@@ -49,9 +49,7 @@ def Rrings (T : Scheme.{u}) := Functor.ofOpSequence (Rtransition l T)
 /-- The coefficient ring tower A is the published one. -/
 abbrev Arings (T : Scheme.{u}) := spCoefficientCommRings l E T
 
-/-- The quotient kills the required positive ell power.
-Proof: the ell power belongs to the (n+1)-st power of the principal ideal (ell).
-Its image in that quotient is zero, including the zero coefficient ring. -/
+/-- The quotient kills the required positive ell power. -/
 theorem coefficient_annihilates (n : ℕ) :
     ((l ^ (n + 1) : ℕ) : SpTowerShriek.R l E n) = 0 := by
   have h := Ideal.pow_mem_pow
@@ -67,10 +65,7 @@ def coefficientMap (T : Scheme.{u}) (n : ℕ) :
       ((ZMod.castHom (ringChar.dvd (coefficient_annihilates l E n))
         (SpTowerShriek.R l E n)).comp ULift.ringEquiv.{0, u + 1}.toRingHom)))
 
-/-- The coefficient maps commute with the specified quotient transitions.
-Proof: both maps are induced by the integer-ring quotient and take one to one.
-They agree on integers, hence on Z/ell^(n+2), and constant sheafification preserves
-this equality. -/
+/-- The coefficient maps commute with the specified quotient transitions. -/
 theorem coefficientMap_transition (T : Scheme.{u}) (n : ℕ) :
     coefficientMap l E T (n + 1) ≫ SpTowerShriek.tau l E T n =
       (Rrings l T).map (homOfLE (Nat.le_succ n)).op ≫ coefficientMap l E T n := by
@@ -91,10 +86,7 @@ def coefficientSystemMap (T : Scheme.{u}) :=
     (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T)
     (coefficientMap l E T) (coefficientMap_transition l E T)
 
-/-- The unit under actual coefficient restriction is induced by the ring map.
-Proof: at every section the formula is the unital ring homomorphism from the
-coefficient system map. It is linear for restriction of scalars, commutes with
-all presheaf maps and is uniquely determined by that formula. -/
+/-- The unit under actual coefficient restriction is induced by the ring map. -/
 theorem scalarGenerator_existsUnique (T : Scheme.{u}) :
     ∃! f : coefficient T (Rrings l T) ⟶
       (SemilinearSections.res.{u + 1, u, u + 1}

@@ -50,10 +50,7 @@ noncomputable def strictLocalNeighbourhoodSection
       simp
       rfl) (by trivial)
 
-/-- The small strict-local cone supplies compatible sections over an initial diagram.
-Proof: initiality is strictHenselization_properties. For compatibility, compare both
-pullback projections. The base projection is the identity, and the other projection
-is natural by the limit-cone equation and naturality of the affine spectrum comparison. -/
+/-- The small strict-local cone supplies compatible sections over an initial diagram. -/
 noncomputable def strictLocalSectionCone :
     PointedEtaleSectionCone (Scheme.strictHenselizationStructuralMap s)
       ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙

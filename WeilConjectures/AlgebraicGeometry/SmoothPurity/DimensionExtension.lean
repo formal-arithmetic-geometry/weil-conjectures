@@ -17,6 +17,9 @@ import WeilConjectures.AlgebraicGeometry.DenseCompactification
 /-!
 # Dimension after field extension and dense open restriction
 
+The topological Krull dimension of a finite-type scheme over a field is unchanged by base
+change to a field extension and by restriction to a dense open subscheme.
+
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 00P3, 0A21
@@ -31,18 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Dimension of a finite type scheme over a field is unchanged by any field extension
-or any dense open immersion.
-
-Proof:
-1. Apply the existing source theorem `topologicalKrullDim_pullback_eq_of_field`
-   (the closed source attachment of `lem-pc-dim-base-change`) to the structure map
-   and the spectrum map of the field extension.
-2. The range of an open immersion is open. Apply `topologicalKrullDim_le_of_dense` to this dense
-open image.
-3. The open embedding identifies its source homeomorphically with its range.
-   Transport the preceding bound along that homeomorphism, and combine it with
-   inducing-map dimension monotonicity to obtain equality. Both source results
-   include empty schemes, so no separate nonemptiness assumption is needed. -/
+or any dense open immersion. -/
 theorem topologicalKrullDim_fieldExtension_and_denseOpen
     {K : Type u} [Field K] {X : Scheme.{u}} [X.Over (Spec (.of K))]
     [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] :

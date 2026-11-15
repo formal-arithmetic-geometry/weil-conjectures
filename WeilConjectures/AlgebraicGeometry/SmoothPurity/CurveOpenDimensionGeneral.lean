@@ -15,6 +15,15 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveOpenDirectImage
 
 /-!
 # Open direct-image dimension on arbitrary curves
+
+Higher direct images along an open immersion into a finite-type scheme of dimension at most one
+vanish above degree one, for finite prime-power-torsion coefficient rings.
+
+## Implementation details
+
+This is a specialization of `isZero_higherDirectImage_of_isOpenImmersion`, which holds over any
+ground field and for any additively torsion coefficient ring; the hypotheses on the field, the
+prime `ℓ` and the torsion exponent are not used.
 -/
 
 @[expose] public section
@@ -29,14 +38,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Higher direct images across an arbitrary open immersion into a finite-type scheme of
  dimension at most one over a finite field or its algebraic closure vanish above degree one
- for every module sheaf over a finite prime-power-torsion coefficient ring.
-
-Proof: The source-library theorem
-`isZero_higherDirectImage_of_isOpenImmersion` proves the stronger assertion for
-any ground field and any additively torsion coefficient ring. A finite ring is
-additively torsion. Apply that theorem in degree `q.toNat`, which is greater than
-one. Since `q > 1`, the natural-number degree casts back to `q`; the definition of
-`higherDirectImage` is the displayed bounded-below derived homology object. -/
+ for every module sheaf over a finite prime-power-torsion coefficient ring. -/
 theorem isZero_higherDirectImage_of_open_curve
     (k : Type u) [Field k]
     (hk : Finite k ∨ ∃ k₀ : Subfield k, Finite k₀ ∧ IsAlgClosure k₀ k)

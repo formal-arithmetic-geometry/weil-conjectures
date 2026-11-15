@@ -20,15 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 
 /-! The affine Leray comparison before passing from modules to abelian sheaves.
 
-Proof: Apply the affine Leray edge isomorphisms to the degree-one cohomology of
-the two proper direct images. The cocycle square for the derived adjunction unit,
-the canonical single pullback transpose, and naturality of direct-image composition
-identify the resulting map with `moduleCohomologyFMap` for the structure h-map.
-The identity-base truncated edge is invertible by its local-class formula and
-sheafification of local cohomology. The total/classical comparison is the canonical
-single comparison. This argument is uniform in the finite family and supplies the
-two additive equivalences and their displayed square.
-
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 01XK, 01FB, 03FD, 0BKJ
@@ -282,15 +273,7 @@ noncomputable def affineLerayTargetEquiv
       (affineLerayEquiv qY).symm
 
 /-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
-`affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
-
-Proof: The cocycle Leray edge is bijective by affine higher-image vanishing; compose
-with the inverse total/classical comparison. The identity-base truncated edge is an
-isomorphism since its local-class square sheafifies to a square of isomorphisms.
-Naturality of relativeMVImageComp and the canonical single adjunction transpose
-identify the displayed map b with the derived-square unit alpha followed by an
-isomorphism psi. Apply globalLeray_unitSquare with the identity base, then compose
-the target comparison with the identity edge and inverse psi. -/
+`affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces. -/
 theorem structure_derived_image_module_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -52,15 +52,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- Units endpoint square for the etale-to-pro-etale pullback.
-
-Proof: transpose through the two inverse-image adjunctions. The hypothesis on
-`a`, the adjunction definition of `cartierUnitsComparison`, and the definition
-of `upperStarGmSheafToGmSheaf` all give pullback of a unit along the same
-fibre-product projection on every chart. Adjunction injectivity proves the
-identity. This endpoint identity is a strict substatement of the conjunction
-in `integral_site_pullback_endpoints`.
--/
+/-- Units endpoint square for the etale-to-pro-etale pullback. -/
 theorem integral_site_pullback_units_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶
       Scheme.proEtaleUnitsSheaf X)

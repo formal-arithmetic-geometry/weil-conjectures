@@ -34,10 +34,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Extract the positive Kummer-boundary normalization at the actual coefficient towers.
-
-Proof: apply the proved target-normalization projection to the actual R and A
-coefficient diagrams and their scalar generator. -/
+/-- Extract the positive Kummer-boundary normalization at the actual coefficient towers. -/
 theorem chern_target_normalization {T : Scheme.{u}} (c : Chern l E T)
     (n : c.Normalized l E) :
     c.rootNormalized l T (Rrings l T) (Arings l E T)

@@ -168,15 +168,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Change of site preserves an arbitrary integral units cohomology class with its
-specified integer and full-units endpoints.
-
-Proof: use integral_site_pullback_endpoints for the two ordinary endpoint squares.
-Exact-functor Ext compatibility identifies the two composites under the canonical
-comparisonUpperStarCompUpperStarIso. Apply Ext.hom and naturality of the single
-and shift comparisons; precomposition and shifted postcomposition commute with
-this transport. The integer square rewrites the source factor and the units square
-rewrites the target factor. Their composites are exactly gmCohomologyMap followed
-by the comparison inverse image and its integer and units endpoint maps. -/
+specified integer and full-units endpoints. -/
 theorem integral_cohomology_site_pullback {X Y : Scheme.{u₁}} (f : X ⟶ Y)
     (e : Sheaf.H Y.gmSheaf 1)
     (a : (upperStar AddCommGrpCat.{u₁ + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

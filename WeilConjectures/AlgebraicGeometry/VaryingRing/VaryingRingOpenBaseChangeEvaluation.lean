@@ -551,26 +551,7 @@ private theorem strictBetaForward (n : ℕ) {V W S T : Scheme.{u}}
   simpa only [Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom] using he
 
 /-- Coefficient evaluation preserves the cartesian open base-change comparison,
-using the specified pullback and open-extension comparisons.
-Proof: the ordinary unit-normalized pullback comparison preserves composition.
-The exact-square composition theorem localizes that natural-isomorphism equation
-before taking components. Apply it to the two paths around the square, including
-the equality transport; this identifies evaluation of the inverse square map.
-The inverse beta is the open-adjunction mate of that square map: exact localization
-preserves its defining unit equation. Open evaluation is itself the inverse mate
-of pullback evaluation. The mate interchange law therefore gives evaluation of
-inverse beta with the single-coefficient open mate of the single-coefficient
-square map. For strict towers the pullback-square equation is termwise evaluation,
-and its open mate equation follows from exact localization of the ordinary unit.
-The same mate interchange gives the identical single-coefficient inverse map.
-Cartesianness makes strict inverse beta invertible. Cancel the other invertible
-comparison factors to see that the single-coefficient mate is invertible at every
-evaluated strict tower. Every single-coefficient derived object is isomorphic to
-the evaluation of its constant derived tower. Naturality along constantEval thus
-proves invertibility at every object, without asserting faithfulness of evaluation.
-Take the inverse of this specified single-coefficient mate. Multiplying the two
-inverse comparison equations by the six comparison isomorphisms gives exactly the
-two displayed forward equations. No finiteness or properness assumption is used. -/
+using the specified pullback and open-extension comparisons. -/
 theorem openBaseChangeEvaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     (h : r ≫ i = k ≫ p) (hsq : IsPullback r k i p) (n : ℕ) :

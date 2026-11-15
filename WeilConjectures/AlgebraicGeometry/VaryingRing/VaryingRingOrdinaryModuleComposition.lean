@@ -146,13 +146,7 @@ private lemma mateSquare
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Ordinary component evaluation preserves the specified inverse-image compositor.
-Proof: take adjunction mates. The unit normalization identifies the evaluation
-mate with the sectionwise identity comparison moduleEvalP. Both pushforward
-compositors restrict sections along the same pullback-pasting map, so their
-comparison holds on every section. Injectivity of the mate equivalence gives
-its inverse-image counterpart; cancellation of the comparison isomorphisms
-then gives the displayed orientation. -/
+/-- Ordinary component evaluation preserves the specified inverse-image compositor. -/
 theorem ordinaryModuleEvalG_comp (n : ℕ) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (N : Modules R φ Z) :
     (eval R φ X n).map ((moduleGComp R φ f g).hom.app N) ≫

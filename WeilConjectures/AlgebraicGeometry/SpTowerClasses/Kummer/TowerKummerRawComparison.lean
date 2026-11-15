@@ -21,11 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Naming the actual Kummer complex does not change its Kummer composite.
-Proof: the named complex unfolds to the same three objects and two maps, with
-the same zero-composite proof. Its named exactness proof and k.exact prove the
-same proposition. Proof irrelevance identifies them. Apply congrArg to the
-Kummer-composite construction, without expanding its connecting morphism. -/
+/-- Naming the actual Kummer complex does not change its Kummer composite. -/
 theorem towerKummerComposite_eq_raw (l : ℕ) [Fact l.Prime] {T : Scheme.{u}}
     (k : Kummer l T)
     (f : (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶

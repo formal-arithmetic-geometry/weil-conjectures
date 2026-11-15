@@ -84,9 +84,7 @@ private def resFixed (a : B →+* C) (X : Scheme.{u}) :
         (scalarUnit C X).app V (a b) • (show M.val.obj V from m)
       rw [scalarUnit_naturality])
 
-/-- The constant-preserving coefficient maps commute with a coefficient homomorphism.
-Proof: transpose under the ring-sheaf adjunction. Both maps send each constant b to
-the constant section a(b). The constant-presheaf sheafification property gives equality. -/
+/-- The constant-preserving coefficient maps commute with a coefficient homomorphism. -/
 theorem coefficientSquare (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (constantRingIso B f).hom ≫ coefficientMap a Y =
       (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (coefficientMap a X) ≫
@@ -294,12 +292,7 @@ section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 
-/-- The normalized open scalar mate is invertible, including for the empty open.
-Proof: transport the pullback comparison through the equivalence between constant-ring
-module sheaves and sheaves of modules over the coefficient ring. Its direct-image mate
-is identity on sections, so it agrees with the ordinary scalar comparison. The ordinary
-open mate is invertible. Inverse-mate pasting transports this fact back through the
-coordinate equivalences and identifies the resulting mate with openResMap. -/
+/-- The normalized open scalar mate is invertible, including for the empty open. -/
 theorem openResMap_isIso [Finite B] [Finite C] (a : B →+* C)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : IsIso (openResMap a j) := by
   -- Paste through fixed coefficient coordinates, then take open inverse mates.
@@ -434,10 +427,7 @@ def targetResC [Finite B] [Finite C] (a : B →+* C)
       ((modulePullback C gU ⋙ moduleJ C j') ⋙ res a X').mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex (targetRes a gU j') (.up ℤ)
 
-/-- Scalar restriction preserves the inverse-image/direct-image unit and counit.
-Proof: direct image comparison is the identity on sections. The pullback comparison
-was defined as its mate using the normalized module adjunctions. The mate unit and
-counit equations give the two equalities; all constructions are applied degreewise. -/
+/-- Scalar restriction preserves the inverse-image/direct-image unit and counit. -/
 theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
     {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (∀ F : Modules C X,
@@ -479,9 +469,7 @@ theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
     rw [hm] at hc
     exact hc.symm
 
-/-- Restriction along the identity has its unique identity-on-sections identification.
-Proof: identity scalar restriction leaves the action unchanged. Identity section maps
-are linear and natural, and their inverses are identical. Sections determine uniqueness. -/
+/-- Restriction along the identity has its unique identity-on-sections identification. -/
 theorem resId_existsUnique (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     ∃! e : res (RingHom.id A) X ≅ 𝟭 (Modules A X),
       ∀ (M : Modules A X) (W : X.ProEtᵒᵖ) (m : M.val.obj W),
@@ -526,10 +514,7 @@ def resId (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     res (RingHom.id A) X ≅ 𝟭 (Modules A X) :=
   Classical.choose (resId_existsUnique A X)
 
-/-- Compatible ambient coefficient actions give a unique identity-on-sections comparison.
-Proof: the equation on ring maps says the two restricted actions agree. Identity on
-every section is therefore linear, natural, and its own inverse. Sectionwise faithfulness
-makes the resulting natural isomorphism unique. -/
+/-- Compatible ambient coefficient actions give a unique identity-on-sections comparison. -/
 theorem ambientRes_existsUnique (a : B →+* C) (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1})
     (rB : R ⟶ ringCoefficients B X) (rC : R ⟶ ringCoefficients C X)
@@ -574,8 +559,7 @@ def ambientRes (a : B →+* C) (X : Scheme.{u})
       SheafOfModules.restrictScalars.{u + 1} rC :=
   Classical.choose (ambientRes_existsUnique a X R rB rC hr)
 
-/-- Constant coefficient maps respect composition.
-Proof: this is functoriality of constant-sheaf sheafification on ring maps. -/
+/-- Constant coefficient maps respect composition. -/
 theorem coefficientMap_comp {D : Type (u + 1)} [CommRing D]
     (a : B →+* C) (b : C →+* D) (X : Scheme.{u}) :
     ringCoefficientMap a X ≫ ringCoefficientMap b X = ringCoefficientMap (b.comp a) X := by
@@ -641,10 +625,7 @@ private theorem pull_identity_aux (A : Type (u + 1)) [CommRing A] [Finite A]
     (pushRes (RingHom.id A) f).hom
     (pull_unit_counit (RingHom.id A) f).1 (push_identity A f) M
 
-/-- The canonical inverse-image and extension scalar identifications preserve identities.
-Proof: the identity-on-sections direct-image comparison is the identity after resId.
-Uniqueness of the unit-preserving mate gives the pullback equality. Transposing that
-equality under the two open adjunctions gives the extension equality. -/
+/-- The canonical inverse-image and extension scalar identifications preserve identities. -/
 theorem scalar_identity (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (∀ M : Modules A X,
@@ -775,11 +756,7 @@ private theorem pull_composition_aux {D : Type (u + 1)} [CommRing D]
     (pull_unit_counit b f).1 (pull_unit_counit a f).1
     (pull_unit_counit (b.comp a) f).1 (push_composition a b f) M
 
-/-- Pullback and open-extension identifications compose along arbitrary coefficient maps.
-Proof: all direct-image scalar identifications are identity on sections, so their
-composite is the identity for the composite ring map under resComp. Mate pasting gives
-the pullback equality; mate pasting once more under the open adjunctions gives the
-extension equality. Applying degreewise gives the same identities for chain maps. -/
+/-- Pullback and open-extension identifications compose along arbitrary coefficient maps. -/
 theorem scalar_composition {D : Type (u + 1)} [CommRing D]
     [Finite B] [Finite C] [Finite D] (a : B →+* C) (b : C →+* D)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -825,9 +802,7 @@ theorem scalar_composition {D : Type (u + 1)} [CommRing D]
         erw [CategoryTheory.Functor.map_id]
       simp only [Category.id_comp, Category.comp_id]
 
-/-- Pullback scalar identifications preserve the identity for arbitrary scheme maps.
-Proof: the direct-image comparison is identity on every section after the identity
-restriction comparison. Uniqueness of its adjunction mate gives this equation. -/
+/-- Pullback scalar identifications preserve the identity for arbitrary scheme maps. -/
 theorem pull_identity (A : Type (u + 1)) [CommRing A] [Finite A]
     {Y X : Scheme.{u}} (f : Y ⟶ X) (M : Modules A X) :
     (pullRes (RingHom.id A) f).hom.app M ≫

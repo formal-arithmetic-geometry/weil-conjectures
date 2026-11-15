@@ -22,13 +22,21 @@ import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 /-!
 # Constant-module projection for bounded torsion objects
 
-The map is the existing counit mate, a natural transformation of bifunctors. Its target
-is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant inverse-image isomorphism.
-The statement concerns the uncompleted tensor in the ordinary unbounded derived category.
+This file proves that the derived projection map of a separated morphism of finite type
+`k`-schemes is invertible at a constant module in degree zero, for an object of bounded
+torsion exponent.
+
+## Implementation details
+
+The map is the existing counit mate `rightDerivedLowerStarProjectionMap`, a natural
+transformation of bifunctors, restricted along the constant-sheaf functor and the degree-zero
+embedding. Its target is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant
+inverse-image isomorphism. The statement concerns the uncompleted tensor in the ordinary
+unbounded derived category.
 
 ## References
 
-* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F12
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F10, 0F12
 -/
 
 @[expose] public section
@@ -43,35 +51,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The constant-module projection map is invertible for a bounded torsion object of finite
-Tor amplitude over Noetherian coefficients. There is no finiteness or flatness condition
-on the module and no constructibility condition on the object. Naturality in both variables
-is that of `rightDerivedLowerStarProjectionMap`, restricted along the constant-sheaf functor
-and the degree-zero embedding. The canonical constant inverse-image comparison identifies
-its target with `Rf_*(E ⊗ᴸ M_X[0])`, naturally in `M`.
-
-Proof:
-1. Finite-type schemes over a field are Noetherian and the source is quasi-compact.
-   Tag 0F10(1) gives finite relative torsion cohomological dimension for `f`.
-2. Restrict the existing projection natural transformation along the exact termwise
-   derived constant-sheaf functor `C`. Its source and target are triangulated and it
-   commutes with shifts, by the existing etale shift and triangulated-functor instances.
-   The existing projection-unit theorem, the monoidal constant-sheaf unit comparison,
-   and `mapDerivedCategorySingleFunctor` give its invertibility at `Λ[0]`.
-3. For every `P`, the additive functor `(- ⊗ᴸ P)` sends `N • id_E = 0` to
-   `N • id_(E ⊗ᴸ P) = 0`. Apply the fixed-exponent coproduct theorem to the family
-   `E ⊗ᴸ Lf^* C(P_i)`. Its invertible canonical coproduct comparison proves preservation
-   of this particular coproduct by `Rf_*`. Constants, inverse image, and tensor preserve
-   all coproducts, so both functors in the restricted transformation preserve coproducts.
-4. The isomorphism locus contains shifts of the rank-one free module, including the
-   harmless `ULift` used by `derivedModuleFreeGeneration`. It is closed under coproducts
-   by naturality and preservation, under third vertices of distinguished triangles by
-   the triangle-isomorphism theorem, and under retracts by naturality. Free generation
-   therefore gives invertibility at every object of `D(Λ)`.
-5. Evaluate at `M[0]` and transport along `mapDerivedCategorySingleFunctor`, obtaining
-   exactly the displayed component of the original projection transformation. The result
-   does not require changing coefficients or identifying a different projection map.
--/
+/-- The constant-module projection map is invertible for an object `E` killed by a
+positive integer `N`, over Noetherian coefficients and for an arbitrary module `M`. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     (k : Type u) [Field k] {X Y : Scheme.{u}}

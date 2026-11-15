@@ -101,10 +101,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- The coefficient-first compact-support tensor projection map on a specified compactification.
 
-The middle map is exactly the proper projection followed by the derived termwise
-open-extension tensor comparison. The two symmetries and the exact-pullback comparison
-only put its endpoints in the coefficient-first convention of this node.
--/
+The middle map is the proper projection followed by the derived termwise
+open-extension tensor comparison. -/
 noncomputable def compactSupportProjectionMapOfCompactification
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

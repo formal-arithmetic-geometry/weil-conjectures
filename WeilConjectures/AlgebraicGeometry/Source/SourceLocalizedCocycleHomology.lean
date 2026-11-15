@@ -42,18 +42,8 @@ noncomputable def smallModel_sourceCocycleHomologySection {S : Scheme.{v}}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation of a localized single-source cocycle is its actual homology section.
-This is a comparison on the base site, before taking stalks or restricting to any scheme.
-
-Proof: the localization isomorphism sends the class of the single-source cocycle to
-its chain map into the shifted complex, then applies the quotient and shift comparison.
-Degree-zero homology of that map is the map on cycles followed by the homology quotient.
-The single-complex homology identification removes the source single complex. The homology
-shift comparison identifies the target with degree n homology of L. Naturality of the
-localization factorization and the homology shift comparison transports this equality
-along r inverse. Evaluation of the resulting sheaf morphism at the free generator is
-smallModel_sourceFreeSectionsEquiv, giving the displayed section. This works for every integer n;
-zero cocycles give zero sections and boundaries give zero homology sections. -/
+/-- Evaluation of a localized single-source cocycle is its actual homology section, as a
+comparison on the base site. -/
 theorem smallModel_sourceLocalizedCocycleHomology {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)

@@ -19,24 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Successive inverse-image coefficient identifications for a frame on V and its
-restriction to U equal direct coefficient descent in the pasted inverse-chart square.
-No compact-support functor or exchange map occurs in this equality.
-
-Proof: expand vectorIntegrationChartCoefficient, affineTraceRightBaseChange and the
-Cartesian coefficient. Compose both sides with affineLinearCoefficientDescent over U.
-Expand the coefficient descent over V, and use naturality of inverse-image composition
-to move the base coefficient comparison past the affine tower square. Induct on d to
-identify inverse image of the ordered tensor coefficient with its direct comparison.
-At zero this is the constant-unit pullback composition equation. At a successor use
-monoidality of derived inverse-image composition and naturality of tensor pullback;
-the shifted-line comparison respects composition because normalized roots and Tate-line
-comparisons respect composition and derived inverse image commutes with shift. This
-also identifies the right-functor base-change map with descent of the base tensor.
-Associativity of the inverse-image compositor pastes the inverse-frame square and the
-tower square. The equalities of the open inclusions identify the resulting base map
-with U.ι. Cancel the coefficient descent over U to obtain the formula. These are
-canonical unit, tensor and composition identities, valid for d=0, empty opens and
-the zero ring without a choice of orientation. -/
+restriction to U equal direct coefficient descent in the pasted inverse-chart square. -/
 theorem vectorIntegration_restricted_chart_coefficient
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

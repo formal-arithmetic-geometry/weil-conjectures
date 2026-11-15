@@ -85,7 +85,9 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 - `spCoefficientRings`: the positive ell-power constant coefficient ring tower.
 - `spCoefficientTowers`: module presheaves on the coefficient diagram, sheaves at each level.
 
-The natural number n always denotes the paper's positive level n+1. In the product
+## Implementation details
+
+The natural number n always denotes the positive level n+1. In the product
 category `ℕ × T.ProEt`, presheaf restrictions run from higher levels to lower levels.
 Their scalar maps are exactly the quotient maps, so Mathlib's `PresheafOfModules`
 encodes the required semilinearity. The full subcategory imposes only the levelwise
@@ -207,13 +209,7 @@ private theorem spEllIdeal_eq_uniformizer_pow :
     rw [hv, Ideal.span_singleton_mul_left_unit v.isUnit, Ideal.span_singleton_pow]
   exact hell
 
-/-- The ell-power and chosen uniformizer-power ideals are cofinal.
-
-Proof: the DVR description of the ring of integers gives ell = a unit times pi^e
-with e positive, since the extending absolute value of ell is strictly less than one.
-Thus (ell)^m = (pi)^(em). For the first direction choose m at least n and use e >= 1;
-for the second direction choose m = en. Ideal powers are decreasing. The exponent-zero
-case is the unit ideal and requires no exception. -/
+/-- The ell-power and chosen uniformizer-power ideals are cofinal. -/
 theorem sp_coefficient_ideals_cofinal :
     (∀ n : ℕ, ∃ m : ℕ, spEllIdeal l E ^ m ≤ Padic.coefficientExtensionIdeal l E n) ∧
     (∀ n : ℕ, ∃ m : ℕ, Padic.coefficientExtensionIdeal l E m ≤ spEllIdeal l E ^ n) := by
@@ -365,23 +361,7 @@ private theorem spCompletedLimit_exists :
   exact hscalar _ _ (hpow (op n))
 
 /-- The completed coefficient sheaf is also the limit of the ell-power constant sheaves.
-It is the existing uniformizer-power completion, whose identification with the pullback
-of condensed integers is clause (3) of `sfb_integral_coefficient_limit`.
-
-Proof: `sp_coefficient_ideals_cofinal` gives mutually cofinal positive filtrations.
-Their quotient maps, all induced by the identity on the integer ring, induce inverse
-maps between the two limits: at each target level choose a deeper source ideal, reduce,
-and use compatibility to see independence of the choice. The composites are identities
-by the jointly distinguishing limit projections. Apply constant sheafification to all
-finite quotient maps. Limits of ring sheaves are computed sectionwise by
-`def-pur-sheaf-inverse-limit`, so the same compatible-family argument gives the displayed
-ring-sheaf isomorphism. Clause (3) of `lemma-comparison-completed-coefficients--1`
-identifies the uniformizer completion with the pulled-back condensed integer ring;
-`lemma-comparison-completed-coefficients` supplies the same comparison for finite subextensions.
-The comparison agrees with the quotient map on constant scalars at every finite level.
-For uniqueness, a ring-sheaf map into R_(n+1) kills ell^(n+1); reduction of the completed
-integer sheaf modulo this power is the finite constant sheaf, so this normalization fixes
-every projection. No choice of uniformizer affects the comparison: all maps are reductions. -/
+The isomorphism is unique subject to compatibility with the finite quotient maps. -/
 theorem sp_completed_coefficient_limit :
     ∃! e : WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E T ≅
         limit (spCoefficientRings l E T),

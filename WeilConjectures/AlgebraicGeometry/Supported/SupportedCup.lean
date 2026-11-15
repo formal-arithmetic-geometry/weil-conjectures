@@ -29,7 +29,7 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 
 The ordinary coefficient map is uniquely specified by restriction and multiplication of
 constants. Its derived comparison uses the actual localization tensor comparison. The cup
-product acts on the supported-Hom representatives from lemma-sections-support-closed-subscheme--1.
+product acts on the supported-Hom representatives computing cohomology with closed supports.
 Its target is a Hom group in the unbounded derived category, including when tensoring two
 bounded-below inputs produces an unbounded complex.
 
@@ -47,7 +47,7 @@ bounded-below inputs produces an unbounded complex.
 ## Main statements
 
 - `cupCoefficientMap_existsUnique`, `cupCoefficientMap_isIso`, `cupCoefficient_flat`:
-  the quotient and idempotent coefficient calculation attached to the node.
+  the quotient and idempotent coefficient calculation.
 - `cupDerivedCoefficientMap_isIso`: degree-zero flatness identifies the derived coefficients.
 -/
 
@@ -308,15 +308,7 @@ private theorem cupRestriction_factor (P : WeilConjectures.PurityFiniteSetting.{
     cupRestriction_comp P p g⟩
 
 /-- The coefficient multiplication map is uniquely determined by multiplying restrictions
-of local constants.
-
-Proof: identify the coefficient constants with the tensor unit. Restriction then equals
-lax monoidal direct-image unit, and those units commute with composition. Restrict both
-factors to the intersection, apply the direct-image tensor comparison, and multiply there.
-The lax unit law verifies the required normalization. The supported-constant cokernel
-presentation makes each restriction epic, including for empty supports and the zero ring;
-tensoring preserves these epimorphisms because the sheaf tensor functors are left adjoints.
-Cancellation of their tensor product gives uniqueness. -/
+of local constants. -/
 theorem cupCoefficientMap_existsUnique (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -535,13 +527,7 @@ private theorem comparison_normalization {C : Type*} [Category C] [MonoidalCateg
   rw [Functor.LaxMonoidal.μ_natural_assoc]
   rw [← F.map_comp_assoc, hμ, F.map_comp, Category.assoc]
 
-/-- The coefficient map is invertible.
-Proof: the existing etale closed-constant tensor map is invertible and preserves the
-normalization by constant sections. The strong monoidal comparison inverse image preserves
-this isomorphism, and base change identifies its three coefficients with the specified
-pro-etale direct images. The comparison unit agrees with cupConstantIso, and the monoidal
-mate identity identifies the restriction maps. The transported isomorphism therefore has
-exactly the normalization characterizing cupCoefficientMap; uniqueness identifies them. -/
+/-- The coefficient map is invertible. -/
 theorem cupCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] : IsIso (cupCoefficientMap P i j) := by
@@ -586,13 +572,7 @@ theorem cupCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
 
 end CoefficientComparison
 
-/-- Flatness of each closed direct image of constants, without a geometric-stalk assumption.
-Proof: the coefficient ring is finite. The étale constant coefficient module is the tensor
-unit, hence flat. The proved étale open-closed flatness theorem shows that its direct image
-under the closed immersion is flat. Comparison inverse image preserves flatness, and its
-base-change comparison with this closed direct image is an isomorphism because a closed
-immersion is quasi-compact and quasi-separated. Transport flatness through that isomorphism.
-This uses no conservativity assertion for geometric stalks of pro-étale sheaves. -/
+/-- Flatness of each closed direct image of constants, without a geometric-stalk assumption. -/
 theorem cupCoefficient_flat (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     ObjectProperty.flat ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj
@@ -709,12 +689,7 @@ private theorem cupDerivedPair_isIso {C : Type c} [Category.{v} C]
   subst p
   exact cupDerivedCoefficientMap_isIso_of_flat μ hL
 
-/-- The derived coefficient comparison is invertible.
-Proof: cupCoefficient_flat makes each degree-zero supported coefficient K-flat: tensoring
-an acyclic complex by an exact tensor functor preserves its kernels, images and cohomology.
-Thus the localization tensor comparison in cupSingleTensorMap is invertible by
-isIso_mu_Qh_of_kFlat and the quotient monoidal comparison. The single-complex comparison
-is an isomorphism. Finally cupCoefficientMap_isIso inverts the remaining factor. -/
+/-- The derived coefficient comparison is invertible. -/
 theorem cupDerivedCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -746,7 +721,7 @@ noncomputable def cupTensorShiftIso {C : Type c} [Category.{v} C]
       ((((curriedTensor C).flip.obj G).commShiftIso a).app F) ≪≫
     (shiftFunctorAdd C a b).symm.app _
 
-/-- Supported groups for an arbitrary unbounded target, by the node's Hom convention.
+/-- Supported groups for an arbitrary unbounded target, defined as a Hom group.
 For bounded-below targets supported_cohomology_hom identifies this with derived supported
 sections. -/
 abbrev cupSupportedHom (P : WeilConjectures.PurityFiniteSetting.{u})

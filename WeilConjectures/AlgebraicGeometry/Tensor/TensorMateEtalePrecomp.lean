@@ -35,9 +35,16 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtalePrecompProjection
 /-!
 # Canonical tensor mates under etale precomposition
 
-The locality isomorphism uses the graph-normalized compact-support comparison and the
-termwise sum/evaluation adjunction. The theorem states both the actual tensor-mate equality
-and the sum-counit normalization on the whole ordinary unbounded derived categories.
+This file defines the canonical etale locality comparison `u^* f^× ≅ (fu)^×` on the ordinary
+unbounded derived categories.
+
+## Implementation details
+
+The comparison is the conjugate of the specified proper/open tower comparison against the
+composite of the sum-extension/evaluation adjunction and the exceptional adjunction. The
+normalization `N` includes the graph-section characterization, so no arbitrary isomorphism or
+arbitrary adjunction for the etale map is chosen. Such an `N` exists by
+`nonempty_etaleCompactSupportNormalization`.
 -/
 
 @[expose] public section
@@ -50,14 +57,8 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical etale locality comparison `u^* f^× ≅ (fu)^×`.
-
-Conjugate the specified proper/open tower comparison against the composite of the
-sum-extension/evaluation adjunction and the exceptional adjunction. The normalization `N`
-includes the graph-section characterization, so this construction uses no arbitrary
-isomorphism or arbitrary adjunction for the etale map. Its existence is supplied by
-`nonempty_etaleCompactSupportNormalization`; the theorem below holds for every such `N`.
--/
+/-- The canonical etale locality comparison `u^* f^× ≅ (fu)^×`, for a given compact-support
+normalization `N`. -/
 noncomputable def tensorMateEtalePrecompLocalityIso
     (A : Type (v + 1)) [CommRing A] [Finite A]
     (N : EtaleCompactSupportNormalization A)

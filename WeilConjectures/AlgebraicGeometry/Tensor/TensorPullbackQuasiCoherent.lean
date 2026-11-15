@@ -28,12 +28,7 @@ noncomputable def tensorOrdinaryPullbackIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
   (Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq
     (pullbackPushforwardAdjunction g)
 
-/-- Tensor pullback preserves quasi-coherent modules.
-
-Proof: compare the tensor-formula pullback with the existing module pullback by
-uniqueness of left adjoints to module pushforward. The latter preserves
-quasi-coherence by the affine-local tensor description of a quasi-coherent module.
-Transport its quasi-coherence across that natural isomorphism. -/
+/-- Tensor pullback preserves quasi-coherent modules. -/
 @[instance]
 theorem isQuasicoherent_tensorPullback {X Y : Scheme.{u}} (g : X ⟶ Y)
     (F : Y.Modules) [F.IsQuasicoherent] : ((tensorPullback g).obj F).IsQuasicoherent := by

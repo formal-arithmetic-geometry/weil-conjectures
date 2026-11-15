@@ -396,16 +396,7 @@ end Ordinary
 
 attribute [local irreducible] Rrings
 
-/-- The underlying abelian tower comparison supplied by an ordinary inverse system.
-
-Proof: at each coefficient level, the moduleUnderlying comparison of the algebraic
-inverse image is composed with the component comparison of the ordinary system and
-with the evaluation identifications supplied by the two Forget structures.  The
-module graph equations make these maps additive.  Naturality in system morphisms
-and the restriction_underlying and transition equations make the level maps
-compatible with horizontal arrows, so the component maps assemble to the required
-natural isomorphism of abelian towers.
--/
+/-- The underlying abelian tower comparison supplied by an ordinary inverse system. -/
 theorem integralInverseSystem_abelian_comparison (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

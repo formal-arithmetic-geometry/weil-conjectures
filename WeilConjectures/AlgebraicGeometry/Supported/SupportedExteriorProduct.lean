@@ -121,11 +121,7 @@ noncomputable instance supportedCoefficients_additive
   inferInstanceAs ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A) ⋙
     lowerStar (ModuleCat.{u + 1} A) i).Additive)
 
-/-- Exactness of closed supported coefficients.
-Proof: at a geometric point the closed direct image of a constant module has stalk
-that module on the closed subset and zero outside. Both functors on modules are exact.
-Exact and conservative geometric stalks detect finite limits and finite colimits.
-The same argument handles the empty closed subscheme. -/
+/-- Exactness of closed supported coefficients. -/
 theorem supportedCoefficients_exact (A : Type (u + 1)) [CommRing A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     PreservesFiniteLimits (supportedCoefficients A i) ∧
@@ -388,9 +384,7 @@ private lemma normalization_ΓMap_unit_app_eq (M : Sheaf X.smallEtaleTopology C)
   simp
 
 /-- The global sections of the inclusion `𝒢_Z M ⟶ M` of the sections supported on the closed
-complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`: `Γ` preserves the kernel
-`𝒢_Z M` of `M ⟶ j_* j^* M`, and `Γ(X, M) ⟶ Γ(X, j_* j^* M)` is the restriction `Γ(X, M) ⟶ M(U)`
-followed by an isomorphism (`AlgebraicGeometry.Etale.normalization_ΓMap_unit_app_eq`). -/
+complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`. -/
 private noncomputable def normalization_isLimitΓMapSectionsWithSupportι
     (M : Sheaf X.smallEtaleTopology C) :
     IsLimit (KernelFork.ofι _ (normalization_ΓMap_sectionsWithSupportι_app_comp_ΓRes C j M)) :=
@@ -548,11 +542,7 @@ end OrdinaryAdjunctionProof
 set_option backward.isDefEq.respectTransparency true
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ordinary adjunction, uniquely normalized by inclusion of the support kernel.
-Proof: apply Hom into F to the open-closed sequence of constant M. The kernel of
-restriction is Hom from M into the kernel defining supported sections. The quotient
-is epic, so precomposition determines the Hom equivalence uniquely. Naturality of
-restriction gives naturality in both variables and hence the adjunction. -/
+/-- The ordinary adjunction, uniquely normalized by inclusion of the support kernel. -/
 theorem exists_unique_supportedCoefficientAdjunction
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
@@ -604,9 +594,7 @@ noncomputable def supportedProductImmersion {B X Y Z W : Scheme.{u}}
     pullback (i ≫ f) (j ≫ g) ⟶ pullback f g :=
   pullback.map (i ≫ f) (j ≫ g) f g i j (𝟙 B) (by simp) (by simp)
 
-/-- Closedness of the product support.
-Proof: the product map is the composite of the two base changes of the closed
-immersions. Closed immersions are stable under base change and composition. -/
+/-- Closedness of the product support. -/
 @[instance]
 theorem supportedProductImmersion_isClosedImmersion {B X Y Z W : Scheme.{u}}
     (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)

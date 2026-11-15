@@ -107,11 +107,7 @@ private theorem representative_quotient
   rw [hi]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- The defining derived tensor counit square on arbitrary cochain complexes.
-Proof: apply the homotopy-category counit square to the quotients of P and R.
-The quotient tensorator and mapHomotopyCategoryFactors have identity components;
-quotientCompQhIso identifies Qh on quotient morphisms with Q. These identities
-transport the square to exactly the displayed geometric representatives. -/
+/-- The defining derived tensor counit square on arbitrary cochain complexes. -/
 theorem upperStar_tensor_cochain_representative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     : LaxSquareHδ (Q₁ := DerivedCategory.Q) (Q₂ := DerivedCategory.Q)

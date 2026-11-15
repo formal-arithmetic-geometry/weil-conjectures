@@ -50,11 +50,7 @@ noncomputable abbrev moduleJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j
 noncomputable def moduleJAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     moduleJ B j ⊣ modulePullback B j := Adjunction.ofIsRightAdjoint _
 
-/-- Open extension is additive and exact, also on the empty open.
-Proof: on the localized site the extension presheaf is the direct sum over lifts to
-the open. Each object has at most one lift; stalkwise this is the original module or
-zero. Sheafification is exact. The unit-preserving localization comparison transfers
-additivity and exactness to the left adjoint chosen by its universal property. -/
+/-- Open extension is additive and exact, also on the empty open. -/
 theorem moduleJ_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (moduleJ B j).Additive ∧ PreservesFiniteLimits (moduleJ B j) ∧
       PreservesFiniteColimits (moduleJ B j) := by
@@ -88,9 +84,7 @@ noncomputable instance moduleJ_finiteColimits {U X : Scheme.{u}} (j : U ⟶ X)
 noncomputable abbrev towerJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B U) (Modules B X)).obj (moduleJ B j)
 
-/-- Exactness persists on strict towers.
-Proof: finite limits and colimits in a functor category are levelwise; evaluation
-reduces each comparison to the exactness statement for module extension by zero. -/
+/-- Open extension on strict towers is exact. -/
 theorem towerJ_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteLimits (towerJ B j) ∧ PreservesFiniteColimits (towerJ B j) := by
   constructor
@@ -122,9 +116,7 @@ noncomputable def jComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
   Adjunction.leftAdjointCompIso (jAdj B j) (jAdj B k) (jAdj B (j ≫ k))
     (gComp B j k).symm
 
-/-- Equality transport for the proof-irrelevant open-immersion structure.
-Proof: substitute equality of the two scheme maps. The two open-immersion instances
-are equal by proof irrelevance, so the constructed functors are definitionally equal. -/
+/-- Equality transport for the proof-irrelevant open-immersion structure. -/
 theorem J_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J B f = J B g := by
   subst g
@@ -139,9 +131,7 @@ noncomputable def jCongr {U X : Scheme.{u}} {f g : U ⟶ X}
 noncomputable def jId (X : Scheme.{u}) : J B (𝟙 X) ≅ 𝟭 (Derived B X) :=
   Adjunction.leftAdjointIdIso (jAdj B (𝟙 X)) (gId B X)
 
-/-- Evaluation commutes with strict termwise extension by zero.
-Proof: the two functors have the identical object and morphism maps: extension
-by zero of the n-th module and the n-th component of an extended tower. -/
+/-- Evaluation commutes with strict termwise extension by zero. -/
 theorem evaluationOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     towerJ B j ⋙ (evaluation ℕᵒᵖ (Modules B X)).obj (op n) =
       (evaluation ℕᵒᵖ (Modules B U)).obj (op n) ⋙ moduleJ B j := by

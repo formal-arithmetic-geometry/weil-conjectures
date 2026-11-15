@@ -68,17 +68,8 @@ private theorem affineFraction_smul {R B : Type u} [CommRing R] [CommRing B]
   rw [Proj.coe_twist_smul_apply, affineFraction_val, affineFraction_val, hc]
   simp [Algebra.smul_def, Localization.mk_mul]
 
-/-- The section m maps to iota(m)/1 is linear over the affine base ring. This assertion
-is entirely on the absolute affine Proj chart and constructs no descended sheaf.
-
-Proof: evaluate sections in the degree-one part of the localization at each point.
-The section associated to m has value iota(m)/1. Additivity follows from additivity
-of iota and of localization. Multiplying m by r multiplies its image by the image of
-r under the structural ring map: iota(r m)=r iota(m). This is exactly the scalar
-action in the two iterated pushforwards, because relProjι followed by relProjHom
-is the structural morphism of the affine Proj chart followed by the base inclusion.
-The equalities hold pointwise and hence as sections. These identities bundle the
-specified function as a linear map; no freeness or finite generation is used. -/
+/-- The section `m ↦ iota(m)/1` is linear over the affine base ring. This assertion
+is entirely on the absolute affine Proj chart and constructs no descended sheaf. -/
 theorem exists_affine_generator_linear
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent] (U : S.affineOpens) :
     ∃ t : E.val.obj (op U.1) →ₗ[Γ(S, U.1)]

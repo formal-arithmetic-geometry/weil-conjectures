@@ -38,33 +38,7 @@ namespace AlgebraicGeometry.ProEtale
 open SpTowerClasses
 
 /-- Kummer Chern morphisms commute with arbitrary scheme pullback, with the unit
-and root-tensor comparisons normalized on sections and the canonical shift comparison.
-
-Proof plan:
-1. Exact inverse image on the system topos transports the integral, finite and
-O_E/ell^n coefficient systems. Root pullback respects the power transitions
-(lem-coef-semilinear-derived-sections; lemma-inverse-image-coefficient-sheaves--2).
-2. Glue the line-bundle extension by (u,m)_b -> (g_ab^m u,m)_a; its fibre at 1
-is the frame torsor of L. Its constant-system boundary is lineBundleClass
-(lemma-cohomology-multiplicative-group--3; lemma-cohomology-multiplicative-group--3;
-ext-one-extension-classification).
-3. Pullback of units gives (u,m) -> (a(u),m) between these extensions, so
-naturality of short-exact-sequence boundaries transports the integral class.
-No isomorphism on all units and no flatness of the scheme morphism is needed.
-4. Apply unit-normalized derived scalar extension on the entire diagram;
-algebra-diagram-pullback-extension-coherence identifies the source comparisons.
-5. Resolve Z/ell^n by [Z --ell^n--> Z] with transition (ell,1). Tensoring with
-units has its only cohomology in degree -1, namely the roots tower. The positive
-kernel inclusion fixes the target normalization. The homotopy h^0 = identity
-gives j inverse b = -p v inverse, the same connecting-morphism sign convention.
-6. On these models the pulled map is (a,a); on kernels it is exactly root
-pullback. Fully faithful shifted single functors identify these whole-system
-maps, rather than relying on faithfulness of finite-level evaluation.
-7. Extend to O_E/ell^n using successive-derived-quotient-normalization.
-Compatible root generators make the root tower flat; the target comparison is
-u tensor b -> r(u) tensor b and respects u tensor b -> u^ell tensor bar(b).
-The source is the coefficient-unit comparison, giving the displayed equality.
--/
+and root-tensor comparisons normalized on sections and the canonical shift comparison. -/
 theorem tower_firstChern_pullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
