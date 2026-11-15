@@ -118,5 +118,7 @@ lemma boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification
     boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso,
     BoundedConstructibleCoefficientChange.shriekOfCompactification, Functor.pasteSquareIso,
     toPadicAlgClCoefficientChange, continuousMapPushforwardData, padicAlgClPushforwardData]
+  -- the proper-only `Rp_*` of the shriek and the general one agree definitionally
+  rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

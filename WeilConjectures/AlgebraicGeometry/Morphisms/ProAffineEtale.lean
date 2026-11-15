@@ -455,7 +455,7 @@ instance : proAffineEtale.HasOfPostcompProperty proAffineEtale where
     exact RingHom.IndEtale.of_comp hπ hfπ
 
 
-/- TODO: this previously followed from a (sorried, mathematically unjustified) global
+/- TODO: this previously followed from a (mathematically unjustified, since removed) global
 instance `IsStableUnderComposition (pro P)`. The corrected statement
 `MorphismProperty.IsStableUnderComposition.pro_of_le_isFinitelyPresentable` additionally
 requires `P.IsStableUnderBaseChange` and `P.op ≤ isFinitelyPresentable Schemeᵒᵖ`,
