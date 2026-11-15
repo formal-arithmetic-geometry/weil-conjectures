@@ -53,93 +53,6 @@ universe u v w u' v'
 open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject CategoryTheory.Obj
 
--- Existing coproducts have only Hom-universe many nonzero summands.
-private theorem small_coproduct_support
-    {C : Type u} [Category.{v} C] [Preadditive C]
-    {I : Type w} (G : I → C) (t : Cofan G) (ht : IsColimit t) :
-    Small.{v} {i // ¬ IsZero (G i)} := by
-  classical
-  let p (i : I) : t.pt ⟶ G i := ht.desc (Cofan.mk (G i) (Pi.single i (𝟙 (G i))))
-  have hp (i j : I) :
-      t.inj j ≫ p i = Pi.single (M := fun j ↦ G j ⟶ G i) i (𝟙 (G i)) j :=
-    ht.fac (Cofan.mk (G i) (Pi.single i (𝟙 (G i)))) (Discrete.mk j)
-  let q : {i // ¬ IsZero (G i)} → (t.pt ⟶ t.pt) := fun i ↦ p i.val ≫ t.inj i.val
-  apply small_of_injective.{v, v, w} (f := q)
-  intro i j hij
-  apply Subtype.ext
-  by_contra hne
-  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
-  have hi : t.inj i.val ≫ p i.val = 𝟙 (G i.val) := by simp [hp]
-  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
-  have hid : 𝟙 (G i.val) = 0 := by
-    simpa only [q, ← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
-  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
-
--- Preservation at the Hom universe implies preservation of every existing coproduct.
-private theorem preserves_large_coproducts
-    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
-    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]
-    (hF : ∀ I : Type v, PreservesColimitsOfShape (Discrete I) F) (I : Type w) :
-    PreservesColimitsOfShape (Discrete I) F := by
-  classical
-  constructor
-  intro K
-  let G : I → C := fun i ↦ K.obj ⟨i⟩
-  suffices h : PreservesColimit (Discrete.functor G) F by
-    let := h
-    exact preservesColimit_of_iso_diagram (K₁ := Discrete.functor G) (K₂ := K)
-      F (Discrete.natIsoFunctor (F := K)).symm
-  constructor
-  intro t ht
-  let t : Cofan G := t
-  have : Small.{v} {i // ¬ IsZero (G i)} := small_coproduct_support G t ht
-  let N := {i // ¬ IsZero (G i)}
-  let B := Shrink.{v} N
-  let e : N ≃ B := equivShrink N
-  let r : B → I := fun b ↦ (e.symm b).val
-  let U : N → C := fun i ↦ G i.val
-  let tN : Cofan U := Cofan.mk t.pt (fun i ↦ t.inj i.val)
-  have htN : IsColimit tN := by
-    refine Cofan.IsColimit.mk tN (fun s ↦ ht.desc (Cofan.mk s.pt
-      (fun i ↦ if hi : ¬ IsZero (G i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-    · intro s i
-      obtain ⟨i, hi⟩ := i
-      change t.ι.app (Discrete.mk i) ≫ _ = _
-      rw [ht.fac]
-      simp only [Cofan.mk_ι_app, dite_eq_left hi]
-    · intro s m hm
-      apply ht.hom_ext
-      intro ⟨i⟩
-      rw [ht.fac]
-      by_cases hi : ¬ IsZero (G i)
-      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-          using hm ⟨i, hi⟩
-      · exact (not_not.mp hi).eq_of_src _ _
-  let V : B → C := fun b ↦ U (e.symm b)
-  let tB : Cofan V := Cofan.mk t.pt (fun b ↦ tN.inj (e.symm b))
-  have htB : IsColimit tB :=
-    (Cofan.isColimitEquivOfEquiv e.symm tN) htN
-  let := hF B
-  have hmapped : IsColimit (Cofan.mk (F.obj t.pt) (fun b ↦ F.map (tB.inj b))) :=
-    (Cofan.isColimitMapCoconeEquiv F V tB) (isColimitOfPreserves F htB)
-  refine ⟨(isColimitMapCoconeCofanMkEquiv F G t.inj).symm ?_⟩
-  refine Cofan.IsColimit.mk _
-    (fun s ↦ hmapped.desc (Cofan.mk s.pt (fun b ↦ s.inj (r b)))) ?_ ?_
-  · intro s i
-    by_cases hi : ¬ IsZero (G i)
-    · have hh := hmapped.fac (Cofan.mk s.pt (fun b ↦ s.inj (r b)))
-        (Discrete.mk (e ⟨i, hi⟩))
-      change F.map (t.inj (r (e ⟨i, hi⟩))) ≫ _ = s.inj (r (e ⟨i, hi⟩)) at hh
-      have hr : r (e ⟨i, hi⟩) = i := congrArg Subtype.val (e.symm_apply_apply _)
-      rw [hr] at hh
-      exact hh
-    · exact (F.map_isZero (not_not.mp hi)).eq_of_src _ _
-  · intro s m hm
-    apply hmapped.hom_ext
-    intro ⟨b⟩
-    rw [hmapped.fac]
-    exact hm (r b)
-
 private theorem localizingClosure_isLocalizing
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -253,10 +166,10 @@ theorem preservesColimit_of_properLocalizingHypotheses
     (G : Discrete I ⥤ (localizingClosureProEtale Λ X).FullSubcategory) :
     PreservesColimit (G ⋙ (localizingClosureProEtale Λ X).ι)
       (lowerStar Λ p).rightDerivedFunctor := by
-  let e := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)
-  have h' : PreservesColimit (e.functor ⋙ (G ⋙ (localizingClosureProEtale Λ X).ι))
-      (lowerStar Λ p).rightDerivedFunctor := h.2 (ULift.{u + 2} I) (e.functor ⋙ G)
-  exact Functor.Final.preservesColimit_of_comp (F := e.functor)
+  have : PreservesColimit ((Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)).functor ⋙
+      (G ⋙ (localizingClosureProEtale Λ X).ι)) (lowerStar Λ p).rightDerivedFunctor :=
+    h.2 (ULift.{u + 2} I) ((Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)).functor ⋙ G)
+  exact preservesColimit_of_preservesColimit_ulift _ _
 
 /-- The canonical restriction of the total derived pushforward is triangulated
 and preserves every small coproduct. The subcategory structures are the induced
@@ -345,13 +258,12 @@ theorem proper_image_localizing_proper
         exact hL.prop_colimit G inferInstance (fun i ↦ hG ⟨i⟩))
     let := hclosed
     have : L.IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-        (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))
+      L.isClosedUnderColimitsOfShape_discrete_of_ulift I
     let := createsColimitsOfShapeFullSubcategoryInclusion (Discrete I) L
     infer_instance
   intro I
   have : PreservesColimitsOfShape (Discrete I) L.ι :=
-    preserves_large_coproducts L.ι hι I
+    Functor.preservesColimitsOfShape_discrete_of_small L.ι hι I
   constructor
   intro G
   have : PreservesColimit (G ⋙ L.ι) F := h.2 I G

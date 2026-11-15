@@ -27,7 +27,7 @@ intersection and imposes no derived-completeness condition.
 
 set_option autoImplicit false
 
-universe u v w
+universe u v w u' v' w'
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -99,16 +99,17 @@ section LargeCoproducts
 variable {C : Type u} [Category.{v, u} C] [Preadditive C]
 
 /-- The nonzero summands of an existing direct sum inject into the endomorphisms of its vertex
-(the composite of the projection onto a summand and its inclusion): their index set is `v`-small,
-`v` the universe of the morphisms. -/
-theorem coproduct_small_nonzero_support {I : Type w} (K : I → C) (c : Cofan K) (hc : IsColimit c) :
-    Small.{v} {i // ¬ IsZero (K i)} := by
+(the composite of the projection onto a summand and its inclusion): their index set is as small as
+the hom types, `w'`-small when `C` is `LocallySmall.{w'}` (always `v`-small, `v` the universe of
+the morphisms). -/
+theorem coproduct_small_nonzero_support [LocallySmall.{w'} C] {I : Type w} (K : I → C)
+    (c : Cofan K) (hc : IsColimit c) : Small.{w'} {i // ¬ IsZero (K i)} := by
   classical
   let p (i : I) : c.pt ⟶ K i := hc.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
   have hp (i j : I) : c.inj j ≫ p i =
       Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
     hc.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
-  apply small_of_injective.{v} (β := c.pt ⟶ c.pt)
+  apply small_of_injective (β := c.pt ⟶ c.pt)
     (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ c.inj i.val)
   intro i j hij
   apply Subtype.ext
@@ -120,13 +121,35 @@ theorem coproduct_small_nonzero_support {I : Type w} (K : I → C) (c : Cofan K)
     simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
   exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
 
-/-- A property closed under isomorphisms and under the `v`-small direct sums that exist is closed
-under every direct sum that exists, whatever the universe of its index: an existing direct sum
-has `v`-small nonzero support (`coproduct_small_nonzero_support`) and is the direct sum of its
-nonzero summands. -/
-theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small
+/-- An existing direct sum is the direct sum of its nonzero summands: the arrows out of the
+omitted zero summands are unique. -/
+theorem Cofan.isColimit_restrict_nonzero {I : Type w} (K : I → C) (c : Cofan K)
+    (hc : IsColimit c) :
+    IsColimit (Cofan.mk c.pt (fun i : {i // ¬ IsZero (K i)} ↦ c.inj i.val)) := by
+  classical
+  refine Cofan.IsColimit.mk _ (fun s ↦ hc.desc (Cofan.mk s.pt
+    (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
+  · intro s i
+    obtain ⟨i, hi⟩ := i
+    change c.ι.app ⟨i⟩ ≫ _ = _
+    rw [hc.fac]
+    simp only [Cofan.mk_ι_app, dite_eq_left hi]
+  · intro s m hm
+    apply hc.hom_ext
+    intro ⟨i⟩
+    rw [hc.fac]
+    by_cases hi : ¬ IsZero (K i)
+    · simpa only [cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi] using hm ⟨i, hi⟩
+    · exact (not_not.mp hi).eq_of_src _ _
+
+/-- A property closed under isomorphisms and under the `w'`-small direct sums that exist, `C`
+being `LocallySmall.{w'}`, is closed under every direct sum that exists, whatever the universe of
+its index: an existing direct sum has `w'`-small nonzero support
+(`coproduct_small_nonzero_support`) and is the direct sum of its nonzero summands
+(`Cofan.isColimit_restrict_nonzero`). -/
+theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small [LocallySmall.{w'} C]
     (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
-    (hsmall : ∀ I : Type v, P.IsClosedUnderColimitsOfShape (Discrete I))
+    (hsmall : ∀ I : Type w', P.IsClosedUnderColimitsOfShape (Discrete I))
     (I : Type w) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
   classical
   apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
@@ -138,32 +161,75 @@ theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small
     apply IsColimit.ofIsoColimit
       ((IsColimit.precomposeHomEquiv e (colimit.cocone F)).symm (colimit.isColimit F))
     exact Cocone.ext (Iso.refl _) (fun i ↦ by simp [e, c])
-  have : Small.{v} {i // ¬ IsZero (K i)} := coproduct_small_nonzero_support K c hc
+  have : Small.{w'} {i // ¬ IsZero (K i)} := coproduct_small_nonzero_support K c hc
   let J := {i // ¬ IsZero (K i)}
-  let r : Cofan (fun i : J ↦ K i.val) := Cofan.mk c.pt (fun i ↦ c.inj i.val)
-  have hr : IsColimit r := by
-    refine Cofan.IsColimit.mk r (fun s ↦ hc.desc (Cofan.mk s.pt
-      (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-    · intro s i
-      obtain ⟨i, hi⟩ := i
-      change c.ι.app ⟨i⟩ ≫ _ = _
-      rw [hc.fac]
-      simp only [Cofan.mk_ι_app, dite_eq_left hi]
-    · intro s m hm
-      apply hc.hom_ext
-      intro ⟨i⟩
-      rw [hc.fac]
-      by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-          using hm ⟨i, hi⟩
-      · exact (not_not.mp hi).eq_of_src _ _
-  let : P.IsClosedUnderColimitsOfShape (Discrete (Shrink.{v} J)) := hsmall _
+  let : P.IsClosedUnderColimitsOfShape (Discrete (Shrink.{w'} J)) := hsmall _
   let : P.IsClosedUnderColimitsOfShape (Discrete J) :=
     ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
       (Discrete.equivalence (equivShrink J)).symm
-  exact P.prop_of_isColimit (J := Discrete J) hr (fun i ↦ hF ⟨i.as.val⟩)
+  exact P.prop_of_isColimit (J := Discrete J) (Cofan.isColimit_restrict_nonzero K c hc)
+    (fun i ↦ hF ⟨i.as.val⟩)
+
+/-- A functor preserving zero morphisms and the `w'`-indexed direct sums, `C` being
+`LocallySmall.{w'}`, preserves every direct sum that exists, whatever the universe of its index
+(the same reduction to the `w'`-small family of nonzero summands). -/
+theorem Functor.preservesColimitsOfShape_discrete_of_small [LocallySmall.{w'} C]
+    {D : Type u'} [Category.{v'} D] [Preadditive D] (F : C ⥤ D) [F.PreservesZeroMorphisms]
+    (hF : ∀ J : Type w', PreservesColimitsOfShape (Discrete J) F)
+    (I : Type w) : PreservesColimitsOfShape (Discrete I) F := by
+  classical
+  have hpres (K : I → C) : PreservesColimit (Discrete.functor K) F := by
+    refine ⟨fun {t} ht ↦ ⟨?_⟩⟩
+    let t₀ : Cofan K := t
+    have : Small.{w'} {i // ¬ IsZero (K i)} := coproduct_small_nonzero_support K t₀ ht
+    let J := {i // ¬ IsZero (K i)}
+    have : PreservesColimitsOfShape (Discrete (Shrink.{w'} J)) F := hF _
+    have : PreservesColimitsOfShape (Discrete J) F :=
+      preservesColimitsOfShape_of_equiv (Discrete.equivalence (equivShrink J)).symm F
+    let U : J → C := fun i ↦ K i.val
+    let q : Cofan (fun i ↦ F.obj (U i)) :=
+      Cofan.mk (F.obj t.pt) (fun i ↦ F.map (t₀.inj i.val))
+    have hq : IsColimit q :=
+      isColimitCofanMkObjOfIsColimit F U _ (Cofan.isColimit_restrict_nonzero K t₀ ht)
+    refine { desc := fun s ↦ hq.desc (Cofan.mk s.pt
+        (fun i ↦ s.ι.app (Discrete.mk i.val))), fac := ?_, uniq := ?_ }
+    · intro s ⟨i⟩
+      by_cases hi : ¬ IsZero (K i)
+      · exact hq.fac (Cofan.mk s.pt (fun i ↦ s.ι.app (Discrete.mk i.val)))
+          (Discrete.mk ⟨i, hi⟩)
+      · exact (F.map_isZero (not_not.mp hi)).eq_of_src _ _
+    · intro s m hm
+      apply Cofan.IsColimit.hom_ext hq
+      intro i
+      exact (hm (Discrete.mk i.val)).trans
+        (hq.fac (Cofan.mk s.pt (fun i ↦ s.ι.app (Discrete.mk i.val)))
+          (Discrete.mk i)).symm
+  exact preservesColimitsOfShape_of_discrete F
 
 end LargeCoproducts
+
+section ULiftIndex
+
+variable {C : Type u} [Category.{v, u} C]
+
+/-- Closure under the direct sums indexed by `ULift.{w'} I` is closure under those indexed by `I`
+(the index categories are equivalent). -/
+theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_ulift (P : ObjectProperty C)
+    (I : Type w) [P.IsClosedUnderColimitsOfShape (Discrete (ULift.{w'} I))] :
+    P.IsClosedUnderColimitsOfShape (Discrete I) :=
+  ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+    (Discrete.equivalence (Equiv.ulift : ULift.{w'} I ≃ I))
+
+/-- A functor preserving the colimit of `G` reindexed along `ULift.{w'} I ≃ I` preserves the
+colimit of `G`. -/
+theorem preservesColimit_of_preservesColimit_ulift {D : Type u'} [Category.{v'} D]
+    {I : Type w} (G : Discrete I ⥤ C) (F : C ⥤ D)
+    [PreservesColimit ((Discrete.equivalence (Equiv.ulift : ULift.{w'} I ≃ I)).functor ⋙ G) F] :
+    PreservesColimit G F :=
+  Functor.Final.preservesColimit_of_comp
+    (F := (Discrete.equivalence (Equiv.ulift : ULift.{w'} I ≃ I)).functor)
+
+end ULiftIndex
 
 section AnyIndex
 
@@ -177,7 +243,7 @@ theorem IsLocalizingSubcategory.isClosedUnderColimitsOfShape_discrete {P : Objec
     (hP : IsLocalizingSubcategory P) (I : Type w) :
     P.IsClosedUnderColimitsOfShape (Discrete I) := by
   have := hP.2.1
-  refine ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small P (fun J ↦ ?_) I
+  refine ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small P (fun J : Type v ↦ ?_) I
   apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
   rintro _ ⟨F, hF⟩
   exact hP.2.2 F inferInstance fun i ↦ hF ⟨i⟩
