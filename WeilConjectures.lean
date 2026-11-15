@@ -20783,6 +20783,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FibreSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FiniteLowerStarLift
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.GeometricFibreCohomology
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.CompactlySupported
