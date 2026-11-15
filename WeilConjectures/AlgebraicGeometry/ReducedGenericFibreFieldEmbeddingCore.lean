@@ -11,7 +11,8 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreMapCore
 
-/-!
+/-! # Reduced generic fibre field embedding, core affine case
+
 ## References
 
 * Stacks Project, Tags 0559 and 030R.

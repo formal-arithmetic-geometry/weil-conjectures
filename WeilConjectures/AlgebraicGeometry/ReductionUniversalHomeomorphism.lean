@@ -20,16 +20,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 ## References
 
-* Stacks Project, Lemma 054M.
-* Stacks Project, Morphisms, Lemma 054M; Schemes, Lemma 01J3 / Definition 01J4.. Proof: 1. By the
-  map is the nilradical closed immersion. Every prime contains the nilradical, so its support is all
-  of X and the map is surjective. A closed embedding onto all of X is a homeomorphism. 2. On an
-  affine open Spec R, the inverse image is Spec (R / nilradical R). If a class is nilpotent, a power
-  of its representative belongs to the nilradical, so a further power is zero; the representative
-  itself is therefore in the nilradical. The quotient is reduced. Apply on this affine cover, and
-  hence all local rings are reduced, as in Stacks 01J3 for the full subset. 3. For every morphism X'
-  → X, its fibre product projection is a closed immersion by and surjective by. Its underlying
-  closed embedding is surjective and therefore a homeomorphism. This is exactly.
+* Stacks Project, Morphisms, Lemma 054M.
+* Stacks Project, Schemes, Lemma 01J3 and Definition 01J4.
 -/
 
 @[expose] public section
@@ -39,7 +31,7 @@ universe u
 namespace AlgebraicGeometry
 
 /-- The reduction is reduced and its canonical map is a surjective closed immersion
-and a universal homeomorphism. The proof follows Stacks Lemma 054M and Lemma 01J3. -/
+and a universal homeomorphism. -/
 theorem reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism
     (X : Scheme.{u}) :
     IsReduced X.nilradical.subscheme ∧

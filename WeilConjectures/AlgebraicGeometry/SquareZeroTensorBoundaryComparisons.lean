@@ -22,9 +22,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 ## References
 
-* Stacks Project, Tags 09MS, 08KS, and 01XC.
-* Stacks Tag 0096.
-* Stacks Tag 01CD.
+* Stacks Project, Tags 0096, 01CD, 01XC, 08KS and 09MS.
 -/
 
 @[expose] public section
@@ -114,16 +112,15 @@ theorem boundaryIdealKernelIso_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
   exact IsLimit.conePointUniqueUpToIso_hom_comp hμ'
     (kernelIsKernel (adj'.unit.app M)) WalkingParallelPair.zero
 
-/-- The kernel comparison is determined by its inclusion equation; no unspecified object
-is selected. -/
+/-- The comparison of `I ⊗ M` with the kernel of the adjunction unit at `M`, for the ideal `I`
+of a closed immersion, characterized by its inclusion equation. -/
 def boundaryIdealKernelIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) [M.IsInvertible] :
     j.ker.toModules ⊗ M ≅
       kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app M) :=
   Classical.choose (boundaryIdealKernelIso_exists j M)
 
-/-- Square-zero annihilation makes the adjunction unit on every ideal tensor power invertible.
-This statement concerns modules only, with no cohomology, section, or derivation assertion. -/
+/-- Square-zero annihilation makes the adjunction unit on every ideal tensor power invertible. -/
 theorem square_zero_ideal_tensor_unit_isIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (d : ℕ) :

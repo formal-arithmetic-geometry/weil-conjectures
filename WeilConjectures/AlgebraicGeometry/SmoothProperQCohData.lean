@@ -15,13 +15,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.DerivedTensorUnitCompact
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-/-!
+/-! # Quasi-coherence data for proper noetherian morphisms
+
 ## References
 
-* Stacks Project, Tags 08D5, 08DW, 08DX and 09M1. Proof: properness supplies quasi-compactness and
-  quasi-separatedness, so derived direct image preserves quasi-coherent cohomology. Transport
-  quasi-coherence along the existing tensor-unit isomorphism. Derived pullback preserves
-  quasi-coherent cohomology, and canonical derived tensor preserves it.
+* Stacks Project, Tags 08D5, 08DW, 08DX and 09M1.
 -/
 
 @[expose] public section

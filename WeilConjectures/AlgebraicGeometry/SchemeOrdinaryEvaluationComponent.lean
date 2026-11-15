@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 
 ## References
 
-* Stacks Project, Tags 08DJ and 08DQ, representative evaluation calculation.. The existing local
+* Stacks Project, Tags 08DJ and 08DQ, representative evaluation calculation. The existing local
   predicate has an over-site carrier. This predicate writes the same component equation directly on
   a scheme's opens, so that transport can be separated from the derived calculation. All complexes
   and components are actual constructions.

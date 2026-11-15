@@ -24,18 +24,19 @@ import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 
 /-! # Tor-independent base change for a perfect tensor factor
 
+## Implementation details
+
+The target of the base-change map in `torIndependent_perfect_tensor_baseChange` is written as
+`Rf'_* Lg_X^*(P ⊗ K)`. Under the canonical tensor-pullback isomorphism (Stacks, Tag 079U) it is
+`Rf'_*(Lg_X^*P ⊗ Lg_X^*K)`; postcomposing with that isomorphism does not change invertibility.
+
 ## References
 
-* Stacks Project, perfect.tex, single-complex base change (Tags 0DJ9, 0DJA) and the Tor-independent
+* Stacks Project, single-complex base change (Tags 0DJ9, 0DJA) and the Tor-independent
   comparison (Tag 08IB).
-* Stacks, Tags 08IB, 01AG, and equation-bc before Tag 0DJ8.
+* Stacks, Tags 08IB, 01AG, and the base change equation before Tag 0DJ8.
 * Stacks Project, Tag 08HY, the canonical derived base-change construction.
-* Stacks, perfect.tex, Tags 08IB, 0DJA and 0DJ9. Proof (the node's four steps): 1. Apply to P: Tor
-  independence gives the stalkwise condition for the identity of Lg_X^*P. 2. Apply, with K=P,
-  K'=Lg_X^*P, the identity comparison, and E=K, to inherit the condition for the tensor product. The
-  two factors can be exchanged by tensor symmetry. 3. Perfect objects have quasi-coherent cohomology
-  (08DB). By all tensor products and pullbacks concerned have quasi-coherent cohomology. Apply to
-  this comparison.
+* Stacks Project, Tag 08DB (perfect objects have quasi-coherent cohomology).
 -/
 
 @[expose] public section
@@ -47,10 +48,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Convert the pullback comparison predicate into the identity stalk condition.
-The coordinate equation makes t a quasi-isomorphism. Exact stalks preserve it;
-the two tensor-to-stalk maps agree by uniqueness, so the localized comparisons
-agree. Cancel the coordinate isomorphism and compose the remaining isomorphisms. -/
+/-- Convert the pullback comparison predicate into the identity stalk condition. -/
 private theorem stalkCondition_of_comparison
     [∀ Y : Scheme.{uPT},
       HasDerivedCategory.{wPT} (SheafOfModules.{uPT} (moduleRings Y.toRingedSpace))]
@@ -120,8 +118,7 @@ private theorem stalkCondition_of_comparison
   dsimp only [SingleComplexBaseChange.stalkComparison]
   infer_instance
 
-/-- Naturality of the canonical mate in its derived input, from the naturality
-of the pullback composition comparisons and the adjunction Hom equivalence. -/
+/-- Naturality of the canonical mate in its derived input. -/
 private theorem baseChange_naturality
     [∀ Z : Scheme.{uPT}, HasDerivedCategory.{wPT}
       (SheafOfModules.{uPT} (moduleRings Z.toRingedSpace))]
@@ -186,11 +183,9 @@ private theorem baseChange_naturality
     ((schemeDerivedDirectImage f ⋙ derivedPullback g).map s)
     (γ.app F) (γ.app E) ((derivedPullback g').map s) (γ.naturality s)
 
-/-- Tor-independent qcqs base change over affine bases for a perfect tensor factor.
-The target is written as Rf'_* Lg_X^*(P ⊗ K). Under the canonical tensor-pullback
-isomorphism of lem-pc-derived-pullback-tensor-product (Stacks, 079U), this is exactly
-Rf'_*(Lg_X^*P ⊗ Lg_X^*K). Postcomposing the fixed base-change map with that
-isomorphism does not change IsIso. -/
+/-- Tor-independent qcqs base change over affine bases for a perfect tensor factor: if `f` and
+`g` are Tor independent, `P` is perfect and `K` has quasi-coherent cohomology, the base-change
+map for `P ⊗ K` is an isomorphism. -/
 theorem torIndependent_perfect_tensor_baseChange
     [∀ Y : Scheme.{uPT},
       HasDerivedCategory.{wPT} (SheafOfModules.{uPT} (moduleRings Y.toRingedSpace))]

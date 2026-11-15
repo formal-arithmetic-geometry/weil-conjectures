@@ -14,14 +14,15 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # The explicit action on the nonnegative twisted section direct sum
 
+## Implementation details
+
+The degree `z` piece is the type of functions from `PLift (0 ≤ z)` to the section group, so that
+negative degrees are empty products, i.e. zero groups.
+
 ## References
 
 * Stacks Project, Lemma 01YS(5), construction of the section module.
-* Stacks Project, Definition 01MN and Lemma 01M7. Proof: the twist multiplication morphism sends a
-  local homogeneous fraction r to r * (1/1), which equals r. After identifying z+0 with z, it is the
-  identity morphism of the twist. Tensoring this identity with G gives the identity of G tensor the
-  twist. Evaluation at the whole space preserves identity morphisms, so its value on every section
-  is the same section. The heterogeneous equality records only the degree identification.
+* Stacks Project, Definition 01MN and Lemma 01M7.
 -/
 
 @[expose] public section
@@ -37,8 +38,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 variable (k : Type u) [Field k]
 variable (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules)
 
-/-- The degree `z` group is the section group when `z ≥ 0`, and the zero group otherwise.
-Using functions out of the proposition makes negative degrees empty products. -/
+/-- The degree `z` group is the section group when `z ≥ 0`, and the zero group otherwise. -/
 abbrev serreSectionPiece (z : ℤ) :=
   PLift (0 ≤ z) → Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z, ⊤)
 
@@ -397,7 +397,7 @@ theorem serreSectionActionLaws :
   exact ⟨one_smul_law k G, mul_smul_law k G, smul_add_law k G,
     add_smul_law k G, homogeneous_single k G⟩
 
-/-- The module structure on the explicit direct sum, using only the named action-law proof. -/
+/-- The module structure on the explicit direct sum. -/
 noncomputable instance serreSectionSumModule :
     Module (MvPolynomial (Fin 2) k) (serreSectionSum k G) where
   one_smul := (serreSectionActionLaws k G).1

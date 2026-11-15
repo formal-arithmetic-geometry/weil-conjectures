@@ -16,11 +16,11 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
-/-!
+/-! # Injectivity of the second-page coproduct comparison for truncated direct images
+
 ## References
 
-* Stacks Project, Tag 08DZ, second-page direct-sum reduction; Tag 009E (5), identification of stalks
-  of direct sums. This is the injectivity half only.
+* Stacks Project, Tag 08DZ; Tag 009E (5).
 -/
 
 @[expose] public section

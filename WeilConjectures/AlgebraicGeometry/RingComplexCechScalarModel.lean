@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.RingComplexOrderedScalarIso
 
 ## References
 
-* Stacks Project, dualizing.tex, Tag 0ALZ, and algebraization.tex, Tag 099D(c).
+* Stacks Project, Tag 0ALZ, and Tag 099D(c).
 -/
 
 @[expose] public section

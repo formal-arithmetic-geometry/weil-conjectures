@@ -16,7 +16,7 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 
 ## References
 
-* Stacks Project, Lemma Tag 03QO.
+* Stacks Project, Tags 03QO and 092Z.
 -/
 
 @[expose] public section
@@ -29,10 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The pointed form of the section construction in Stacks Tag 03QO. Shrink the
-marked point to an affine Spec B, localize B at its marked prime q, and use Olivier's
-theorem (Tag 092Z) to identify B_q with R. The geometric point's ring map extends
-uniquely to B_q, so the resulting section passes through that geometric point. -/
+/-- An étale `X ⟶ Spec R` over a strictly henselian local ring `R` has a section through any
+geometric point of `X` lying over the closed point of `Spec R`. -/
 private theorem strictlyHenselianSections_pointedSection
     {R : Type u} [CommRing R]
     (hR : IsStrictlyHenselianLocalRing R)

@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStalkSquare
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-* Stacks Project, perfect.tex, Tag 0DJA(1), the tensor-transitivity calculation of Tag 0BYJ and
+* Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
+* Stacks Project, Tag 0DJA(1), the tensor-transitivity calculation of Tag 0BYJ and
   equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB for K-flat tensor products and stalk
   tensor identification.
 -/

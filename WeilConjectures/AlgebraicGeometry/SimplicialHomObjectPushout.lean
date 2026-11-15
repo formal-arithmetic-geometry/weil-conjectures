@@ -119,9 +119,8 @@ private lemma representedFamily_exists {X : Scheme.{u₁}}
   exact congrFun (congrFun (congrArg Subtype.val hg) n) s
 
 set_option linter.unusedVariables false in
-/-- Hom objects turn admissible simplicial pushouts into pullbacks.
-The representing pairs are arbitrary fixed choices from def-weil-pbc-simplicial-hom-object;
-the equations specify their unique induced morphisms, without another Hom-object definition. -/
+/-- Hom objects turn admissible simplicial pushouts into pullbacks, for arbitrary
+representing pairs of the Hom objects and the morphisms between them induced by the pushout. -/
 theorem simplicialHomObject_pushout_isPullback {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)}
     {A B C D : SSet.{t₁}} [A.Finite] [B.Finite] [C.Finite] [D.Finite]

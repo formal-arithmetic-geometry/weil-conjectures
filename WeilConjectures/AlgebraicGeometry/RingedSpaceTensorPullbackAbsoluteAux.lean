@@ -19,6 +19,13 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
+/-! # The derived tensor pullback of ringed spaces and its absoluteness
+
+## References
+
+* Stacks Project, Tags 06YJ, 079W, 06XN and 05SE.
+-/
+
 @[expose] public section
 
 universe u wX wY
@@ -149,11 +156,8 @@ private theorem leftDerived_absolute_of_resolving
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The K-flat resolving-class construction supplies the derived comparison for the
-concrete tensor pullback.  The proof follows Tags 06YJ, 079W and 06XN: resolve by
-K-flat complexes, use preservation of quasi-isomorphisms under inverse image and
-change of rings, and apply `leftDerived_from_resolvingClass` to the resulting
-functor. -/
+/-- The concrete tensor pullback `P` along `g` has a left derived functor whose comparison is
+invertible on K-flat complexes. -/
 theorem exists_tensorPullback_leftDerived
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]
@@ -275,10 +279,9 @@ theorem exists_tensorPullback_leftDerived
       DerivedCategory.Qh F S hres hinvS
   exact ⟨LF, ε, hLF, fun K hK ↦ hε _ ⟨K, hK, rfl⟩⟩
 
-/-- Absoluteness of a K-flat derived comparison: the right Kan extension over the
-cofinal K-flat resolution category is essentially constant, hence every postcomposition
-functor preserves its comparison.  This is the absolute-resolution argument of
-Stacks Tags 06XN and 05SE. -/
+/-- Absoluteness of a K-flat derived comparison: a left derived functor of the tensor pullback
+whose comparison is invertible on K-flat complexes remains a left derived functor after
+postcomposition with any functor `H`. -/
 theorem leftDerived_tensorPullback_absolute
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

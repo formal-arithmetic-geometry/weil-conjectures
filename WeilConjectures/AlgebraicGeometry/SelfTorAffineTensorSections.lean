@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.LocallyQuasicoherentAffinePullbackSecti
 ## References
 
 * Stacks Project, Tags 01I9, and 0096.
-* Stacks Project, Tag 01I9(1); Tag 01I7; Tag 0096.. Proof: Put V=i inverse-image U, A=Gamma(Y,U),
+* Stacks Project, Tag 01I9(1); Tag 01I7; Tag 0096. Proof: Put V=i inverse-image U, A=Gamma(Y,U),
   B=Gamma(Z,V), and j:U to Y. Because i is affine, V is affine. Restrict j_* of the associated M
   back to U. The open-immersion restriction comparison identifies this restriction with that
   associated module, since j inverse-image U is all of U. Its map on sections is inverse to the

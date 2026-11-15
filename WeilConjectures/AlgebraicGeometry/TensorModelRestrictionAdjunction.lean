@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 
 ## References
 
-* Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
+* Stacks Project, Tags 08DJ and 08DL.
 -/
 
 @[expose] public section

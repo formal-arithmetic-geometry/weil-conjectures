@@ -34,7 +34,7 @@ open Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The compatible marked maps give a ring cocone and hence a map to its spectrum.
-The colimit coprojection formula gives the pointed limit-leg equations (Stacks Tag 04HX). -/
+The colimit coprojection formula gives the pointed limit-leg equations. -/
 private theorem pointedStrictHenselizationLift
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) :
@@ -86,9 +86,7 @@ private theorem pointedStrictHenselizationLift
   exact (N.obj j).2.w
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical exchange map has the unit/pointed-lift formula on every germ.
-This is the representative calculation from GeometricFibreExchangeGerms (Tag 0EYP),
-with no assumed comparison map: the map being evaluated is exchange itself. -/
+/-- The canonical exchange map has the unit/pointed-lift formula on every germ. -/
 private theorem fibreExchangeSectionComparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -216,8 +214,7 @@ private theorem fibreExchangeSectionComparison
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The module stalk comparison with strict henselization sections, together with
-its compatibility with restriction to the given geometric fibre. This assertion
-uses no integral or proper hypothesis. -/
+its compatibility with restriction to the given geometric fibre. -/
 theorem strictHenselizationModuleFibre_factorization
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

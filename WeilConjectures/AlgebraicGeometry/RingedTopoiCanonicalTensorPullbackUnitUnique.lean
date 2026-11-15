@@ -31,8 +31,8 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 open scoped ChangeOfRings
 
 set_option linter.unusedVariables false in
-/--
-The proof cancels the tensor comparison and uses the tensor universal property to identify maps. -/
+/-- Given a canonical tensor comparison `k` for `L`, an isomorphism `L 𝒪 ≅ 𝒪` of unit sheaves
+whose composite with `k` and the right unitors recovers `L` of the right unitor is unique. -/
 theorem canonicalRingedTensorComparison_unit_unique
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

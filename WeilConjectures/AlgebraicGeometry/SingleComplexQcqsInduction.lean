@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexTargetLocality
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 0DJ9.
+* Stacks Project, Tag 0DJ9.
 -/
 
 @[expose] public section

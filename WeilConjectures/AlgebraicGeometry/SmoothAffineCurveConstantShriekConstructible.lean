@@ -48,7 +48,7 @@ open-closed triangles, and descent steps recorded in the DAG node.
 
 ## References
 
-* Stacks Project, `more-etale.tex`, Tag 0GKX, lines 4511--4613.
+* Stacks Project, Tag 0GKX.
 -/
 
 @[expose] public section

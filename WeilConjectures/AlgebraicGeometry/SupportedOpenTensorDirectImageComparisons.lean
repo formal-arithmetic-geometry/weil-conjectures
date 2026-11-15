@@ -117,7 +117,7 @@ private theorem supportedTensor_stalk_zero_of_restriction_zero
   exact i.addCommGroupIsoToAddEquiv.toEquiv.subsingleton_congr.mp
     (AddCommGrpCat.isZero_iff_subsingleton.mp hz)
 
-/-- Closed support is preserved by derived direct image; use standard auxiliary opens. -/
+/-- Closed support is preserved by derived direct image. -/
 private theorem supportedTensor_direct_image_support {Y X : Scheme.{u}} (f : Y ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -15,8 +15,8 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseComparison
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc preceding Tag 0DJ8;
-  cohomology.tex, Tags 08HY and 08FE.
+* Stacks Project, Tag 0DJ9 first paragraph and equation-bc preceding Tag 0DJ8;
+  Tags 08HY and 08FE.
 -/
 
 @[expose] public section

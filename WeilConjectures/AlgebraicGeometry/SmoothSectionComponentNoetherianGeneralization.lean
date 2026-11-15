@@ -27,8 +27,9 @@ open CategoryTheory Topology
 
 namespace AlgebraicGeometry
 
-/-- The noetherian geometric argument produces an open stable locus agreeing with the
-section component locus. -/
+/-- For a smooth quasi-compact quasi-separated `g` with section `σ` over a noetherian base, the
+locus of points lying in the connected component of `σ` in their fibre is stable under
+generalization. -/
 theorem Smooth.exists_noetherian_section_component_stable_locus {P T : Scheme.{u}}
     (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g]
     [IsNoetherian T]
@@ -96,7 +97,9 @@ theorem Smooth.exists_noetherian_section_component_stable_locus {P T : Scheme.{u
   have h := connectedComponentIn_mono (Limits.pullback.fst g b (σ' η)) hfibre himage
   simpa only [η, haη, hbase] using h
 
-/-- (blueprint: lem-sbc-smooth-section-component-noetherian-generalization) -/
+/-- For a smooth quasi-compact quasi-separated `g` with section `σ` over a noetherian base, a
+generalization of a point in the connected component of `σ` in its fibre again lies in the
+connected component of `σ` in its own fibre. -/
 theorem Smooth.section_component_generalization_of_isNoetherian {P T : Scheme.{u}}
     (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g] [IsNoetherian T]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) {x y : P} (hxy : y ⤳ x)

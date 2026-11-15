@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 09RE, affine calculation and open induction.
+* Stacks Project, Tag 09RE, affine calculation and open induction.
 -/
 
 @[expose] public section

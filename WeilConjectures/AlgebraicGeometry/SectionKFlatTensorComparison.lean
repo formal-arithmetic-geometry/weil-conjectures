@@ -17,7 +17,7 @@ square, native localization normalization, and the three constraint diagrams.
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT.
+* Stacks Project, Tags 06YU and 0FPT.
 * Stacks 06YN, 06YS.
 * Stacks 06YS, 06YU, 04VK.
 -/

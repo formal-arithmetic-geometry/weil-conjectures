@@ -50,9 +50,7 @@ def SimplicialHomFamily.precomp {X : Scheme.{u}}
 
 /-- The presheaf `W ↦ {S-families in K over W}` of compatible families, functorial by
 precomposition. An object `Hom(S,K)_0` with universal family `u` is a pair `(H, u)` with
-`(simplicialHomFamilyFunctor K S).IsRepresentedBy u`;
-for `S` with finite nonempty degrees and finitely many nondegenerate simplices such a pair
-exists by `exists_simplicial_hom_object`. -/
+`(simplicialHomFamilyFunctor K S).IsRepresentedBy u`. -/
 def simplicialHomFamilyFunctor {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (S : SSet.{t}) :
     (FormalCoproduct.{w} X.Etale)ᵒᵖ ⥤ Type (max u w t) where

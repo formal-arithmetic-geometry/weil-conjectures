@@ -20,7 +20,7 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 ## References
 
-* Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD.
+* Stacks Project, Lemma Tag 03FD.
 -/
 
 @[expose] public section

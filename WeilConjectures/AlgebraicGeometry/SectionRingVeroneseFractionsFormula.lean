@@ -11,11 +11,19 @@ public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractionKernel
 
-/-!
+/-! # The Veronese fraction equivalence for the section ring of an invertible module
+
+## Implementation details
+
+`sectionRingVeroneseFractionEquiv` is the inverse of the quotient equivalence induced by the
+explicit map `sectionRingVeroneseFractionMap`, which sends `t` in numerator degree `n` to
+`of_(nd)(T_n⁻¹(t))/s^n`; its surjectivity and kernel are
+`sectionRingVeroneseFractionMap_surjective` and `sectionRingVeroneseFractionMap_kernel`. No data
+are chosen from an existence theorem.
+
 ## References
 
-* Stacks Project, Properties, equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the proof of
-  Lemma 01Q1.
+* Stacks Project, Properties, Tag 0B5L, Lemma 01PW(2), and the proof of Lemma 01Q1.
 -/
 
 @[expose] public section
@@ -25,16 +33,8 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical Veronese fraction equivalence, constructed by the quotient map.
-
-The explicit direct-sum map sends `t` in numerator degree `n` to
-`of_(nd)(T_n⁻¹(t))/s^n`. Its surjectivity is proved in
-`sectionRingVeroneseFractionMap_surjective`; its kernel is the relation submodule by
-`sectionRingVeroneseFractionMap_kernel`. The first isomorphism theorem therefore
-constructs a quotient equivalence from section fractions to homogeneous localization.
-We take its inverse. The only inverse chosen is the unique inverse of this fixed
-bijective quotient map. No data are chosen from a bare existence theorem.
--/
+/-- The canonical additive equivalence between the degree-zero homogeneous localization of the
+section ring at `s` and section fractions of `L^{⊗d}` with denominator `s`. -/
 noncomputable def sectionRingVeroneseFractionEquiv
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :

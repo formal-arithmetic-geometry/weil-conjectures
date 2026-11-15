@@ -15,9 +15,21 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Universal factorization before Stein connectedness
 
+## Implementation details
+
+Write `q = X.toSpecΓ` and `s = f.steinFactorizationBase`. The structure-sheaf identity says
+that the canonical map `q.c` is invertible. The relative-spectrum clause is expressed by the
+canonical algebra identification `s_* O ≅ f_* O`, the pushforward of `q.c` along the integral
+(hence affine) map `s`; an affine scheme with this algebra identification is the relative
+spectrum. For a flat base change, two Cartesian squares specify the base-changed
+factorization, and the same identification asserts that its intermediate scheme is the relative
+spectrum of the new pushforward. These are identifications of algebras through the canonical
+sharp maps, not arbitrary isomorphisms of ring sheaves.
+
 ## References
 
 * Stacks Project, More on Morphisms, Lemma 37.53.4 (Tag 03GY).
+* Stacks Project, Tags 01S8, 01SA and 01LW (relative spectrum).
 -/
 
 @[expose] public section
@@ -29,17 +41,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Universal-closed Stein factorization properties from Stacks, Tag 03GY.
-
-The structure-sheaf identity means that the canonical map `q.c` is invertible.
-The relative-spectrum clause is expressed by the canonical algebra identification
-`s_* O ≅ f_* O`: push forward `q.c` along the integral (hence affine) map `s`.
-An affine scheme with this algebra identification is exactly the relative spectrum,
-by the affine/quasi-coherent-algebra anti-equivalence (Stacks 01S8, 01SA, 01LW).
-For every flat base change, two Cartesian squares specify the base-changed factorization;
-the same canonical algebra identification asserts that its intermediate scheme is the
-relative spectrum of the new pushforward. Thus these are identifications of algebras
-through the canonical sharp maps, rather than arbitrary isomorphisms of ring sheaves. -/
+/-- For `f : X ⟶ Spec A` universally closed and quasi-separated, `X ⟶ Spec Γ(X, ⊤)` is
+universally closed, quasi-compact, quasi-separated and surjective, `Spec Γ(X, ⊤) ⟶ Spec A` is
+integral, and the structure-sheaf maps of `X ⟶ Spec Γ(X, ⊤)` and of its flat base changes are
+isomorphisms after pushforward. -/
 theorem stein_universally_closed_factor
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [UniversallyClosed f] [QuasiSeparated f] :

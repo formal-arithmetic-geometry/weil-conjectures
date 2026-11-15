@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 ## References
 
-* Stacks Project, algebraization.tex, Tag 099C, proof, last two sentences. Proof: Tag 0997 and the
+* Stacks Project, Tag 099C, proof, last two sentences. Proof: Tag 0997 and the
   Roos distinguished triangle identify completeness with invertibility of one minus the product
   shift. Derived products exist by termwise products of K-injective resolutions. Restriction is
   exact and conservative and its derived functor is a right adjoint, hence preserves products and

@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.Single
 ## References
 
 * Stacks Project, Tag 09M1, proof, first paragraph.
-* Stacks Project, Tag 09M1, proof, first paragraph, and Tag 0B6A.. Proof: For a complex J, a chain
+* Stacks Project, Tag 09M1, proof, first paragraph, and Tag 0B6A. Proof: For a complex J, a chain
   map from O_X[0] is an O_X-linear morphism O_X to J^0 whose composite with d^0 is zero. Evaluate at
   one on the total open. The inverse takes a global cycle z to the morphism whose value on an open U
   at r is r times the restriction of z to U. Naturality and linearity give inverse additive maps.

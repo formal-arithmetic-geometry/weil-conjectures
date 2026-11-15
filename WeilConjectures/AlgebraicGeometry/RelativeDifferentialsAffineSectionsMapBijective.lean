@@ -11,7 +11,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapInjective
 import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapSurjective
 
-/-!
+/-! # Bijectivity of the affine comparison map for relative differentials
+
 ## References
 
 * Stacks Project, Tag 01UT.
@@ -28,8 +29,7 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 /-- A linear map compatible with the universal derivation is the affine comparison
-isomorphism.  This is the injectivity and surjectivity part of the affine calculation.
--/
+isomorphism, i.e. it is bijective on sections over affine opens. -/
 theorem relativeDifferentials_affine_sections_map_bijective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]

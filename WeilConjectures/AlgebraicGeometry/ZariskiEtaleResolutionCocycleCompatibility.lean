@@ -8,7 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ObjectCohomologyResolutionCocycleEquivalence
 
-/-!
+/-! # Cocycle compatibility for Zariski and étale resolutions
+
 ## References
 
 * Stacks Project, Section 01FT; Tag 06XR (1).

@@ -10,7 +10,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import all WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
-/-!
+/-! # Finite free stalks of finite locally free sheaves
+
 ## References
 
 * Stacks Project, Tag 01C6, Definition 17.14.1(2).

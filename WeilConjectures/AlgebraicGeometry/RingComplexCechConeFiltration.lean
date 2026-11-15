@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.BoundedComplexTriangulated
 
 ## References
 
-* Stacks Project, dualizing.tex, Tag 0A6R, the finite localization filtration of its displayed
+* Stacks Project, Tag 0A6R, the finite localization filtration of its displayed
   extended Cech complex.
 -/
 

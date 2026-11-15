@@ -14,19 +14,19 @@ public import WeilConjectures.AlgebraicGeometry.Modules.IntegralSections
 
 Let `f : P ⟶ T` be proper, flat, locally of finite presentation and with geometrically integral
 fibres, and let `M`, `N` be invertible modules on `P`. The set of points `t ∈ T` such that `M`
-and `N` become isomorphic on the fibre `P_t` is closed in `T` (Stacks, Tags 0BDP and 0BF0; this
-is the closedness half of Mumford's seesaw theorem).
-
-On the fibre `P_t`, which is integral and proper over `κ(t)`, `M_t ≅ N_t` holds if and only if
-both `M_t ⊗ N_tᵛ` and `N_t ⊗ M_tᵛ` have nonzero global sections
-(`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_of_tensorObj_iso_unit`). Both conditions
-are closed in `t` by the upper semicontinuity of `t ↦ dim H⁰(P_t, -)`
-(`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`).
+and `N` become isomorphic on the fibre `P_t` is closed in `T` (this is the closedness half of
+Mumford's seesaw theorem).
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_fiber_iff`: `M_t ≅ N_t` if and only if both
+  `M_t ⊗ N_tᵛ` and `N_t ⊗ M_tᵛ` have nonzero global sections.
 - `AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber`: the locus of points
   over which `M` and `N` are isomorphic on the fibre is closed.
+
+## References
+
+* Stacks Project, Tags 0BDP and 0BF0.
 -/
 
 @[expose] public section
@@ -85,8 +85,7 @@ lemma pos_hFiber_zero_iff (f : P ⟶ T) [IsProper f] (A : P.Modules) [A.IsInvert
 
 /-- **Triviality on a fibre through `h⁰`.** Let `f : P ⟶ T` be proper with geometrically
 integral fibres and let `A`, `B` be invertible modules on `P` with `A ⊗ B ≅ 𝒪_P`. Then `A` is
-trivial on the fibre `P_t` if and only if `h⁰(P_t, A_t) > 0` and `h⁰(P_t, B_t) > 0`
-(`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_of_tensorObj_iso_unit`). -/
+trivial on the fibre `P_t` if and only if `h⁰(P_t, A_t) > 0` and `h⁰(P_t, B_t) > 0`. -/
 theorem nonempty_iso_unit_fiber_iff (f : P ⟶ T) [IsProper f] [GeometricallyIntegral f]
     {A B : P.Modules} [A.IsInvertible] [B.IsInvertible] (e : A ⊗ B ≅ 𝟙_ P.Modules) (t : T) :
     Nonempty ((Modules.pullback (f.fiberι t)).obj A ≅ 𝟙_ (f.fiber t).Modules) ↔
@@ -131,11 +130,7 @@ theorem nonempty_iso_fiber_iff (f : P ⟶ T) [IsProper f] [GeometricallyIntegral
 /-- **Triviality over a field-valued point is triviality over its residue field.** Let
 `f : P ⟶ T` be proper with geometrically integral fibres, let `M`, `N` be invertible modules on
 `P`, and let `φ : Spec F ⟶ T` be a point with values in a field `F`, with image `t`. If `M` and
-`N` become isomorphic on `P ×_T Spec F`, they are isomorphic on the fibre `P_t` over `κ(t)`.
-
-Both conditions are expressed through `h⁰` of `M ⊗ Nᵛ` and `N ⊗ Mᵛ` on the fibres
-(`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_fiber_iff`), and the fibre dimensions are
-invariant under base change (`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`). -/
+`N` become isomorphic on `P ×_T Spec F`, they are isomorphic on the fibre `P_t` over `κ(t)`. -/
 theorem nonempty_iso_fiber_of_nonempty_iso_pullback (f : P ⟶ T) [IsProper f]
     [GeometricallyIntegral f] (M N : P.Modules) [M.IsInvertible] [N.IsInvertible]
     {F : Type u} [Field F] (φ : Spec (.of F) ⟶ T)
@@ -161,14 +156,10 @@ theorem nonempty_iso_fiber_of_nonempty_iso_pullback (f : P ⟶ T) [IsProper f]
   exact ⟨hpos u (nonempty_pullback_tensorObj_dual_iso_unit g' M N e).some,
     hpos (β_ _ _ ≪≫ u) (nonempty_pullback_tensorObj_dual_iso_unit g' N M e.symm).some⟩
 
-/-- **The seesaw principle: the locus of triviality on the fibres is closed** (Stacks, Tags 0BDP
-and 0BF0). Let `f : P ⟶ T` be proper, flat, locally of finite presentation and with geometrically
-integral fibres, and let `M`, `N` be invertible modules on `P`. The set of points `t ∈ T` such
-that `M` and `N` become isomorphic on the fibre `P_t` is closed.
-
-By `AlgebraicGeometry.Scheme.Modules.nonempty_iso_fiber_iff` it is the set of points where
-`h⁰(P_t, (M ⊗ Nᵛ)_t) ≥ 1` and `h⁰(P_t, (N ⊗ Mᵛ)_t) ≥ 1`. Both conditions are closed by upper
-semicontinuity (`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`). -/
+/-- **The seesaw principle: the locus of triviality on the fibres is closed.** Let `f : P ⟶ T` be
+proper, flat, locally of finite presentation and with geometrically integral fibres, and let `M`,
+`N` be invertible modules on `P`. The set of points `t ∈ T` such that `M` and `N` become
+isomorphic on the fibre `P_t` is closed. -/
 theorem isClosed_setOf_nonempty_iso_fiber (f : P ⟶ T) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f] [GeometricallyIntegral f] (M N : P.Modules) [M.IsInvertible]
     [N.IsInvertible] :

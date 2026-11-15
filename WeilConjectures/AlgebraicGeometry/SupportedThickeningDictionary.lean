@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Whiskering
 ## References
 
 * Stacks Project, Remark 088F and Lemma 087T.
-* Stacks Project, Remark 088F, Lemma 087T, and equation 0880.. Proof: Apply the thickening-systems
+* Stacks Project, Remark 088F, Lemma 087T, and equation 0880. Proof: Apply the thickening-systems
   dictionary with the given adjunctions to the coherent system `(F, φ)`. Its evaluation isomorphisms
   `β n` give the termwise isomorphisms and their transition compatibility. At level zero, its kernel
   formula and the closed-immersion kernel identity identify the displayed ideal with the kernel used

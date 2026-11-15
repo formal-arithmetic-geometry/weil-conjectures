@@ -12,15 +12,20 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # The actual internal total oplax arrow in section modules
 
-All tensors are relative to the pulled-back coefficient ring. The totalization is the
-existing signed direct-sum total, including its infinite degreewise sums. The helpers
-name existing functors and canonical comparisons; the final proposition records their
-specified-map equalities before and after homotopy quotient and localization.
+Termwise pullback of cochain complexes of internal modules and of section modules, the signed
+total oplax tensor comparisons for both, and the conjugation of the internal comparison by the
+section equivalence.
+
+## Implementation details
+
+All tensors are relative to the pulled-back coefficient ring. The totalization is the signed
+direct-sum total, including its infinite degreewise sums. The inverse of `actualInternalTotalIso`
+is the summed lax map: `HomologicalComplex.mapBifunctorComparison` uses the canonical left-adjoint
+coproduct comparison and is the forward map of `mapCochainComplexμIso.symm`.
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tag 07A4, displayed total comparison; Modules on Sites, Tag
-  03EL.
+* Stacks Project, Cohomology on Sites, Tag 07A4; Modules on Sites, Tag 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -72,9 +77,7 @@ instance totalSectionPullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (totalSectionPull Λ f).obj ((totalSectionEquivalence Λ Y).obj P) :=
   (NatIso.mapHomologicalComplex (pullComparison Λ f) (.up ℤ)).app P
 
-/-- The total of the actual internal adjunction-mate oplax map. Its inverse is the
-summed lax map. The existing mapBifunctorComparison uses the canonical left-adjoint
-coproduct comparison, and is the forward map of mapCochainComplexμIso.symm. -/
+/-- The total of the actual internal adjunction-mate oplax map. -/
 @[irreducible] def actualInternalTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
     (totalInternalPull Λ f).obj (P ⊗ Q) ≅
@@ -128,8 +131,7 @@ theorem actualInternalTotalIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (Functor.OplaxMonoidal.δNatTrans (CondensedRing.upperStar Λ f)) (.up ℤ) a b
 
 /-- The signed total of the specified ringed adjunction-mate tensor map. Its inverse
-is the sum of the ordinary inverse maps, the construction used by the ringed
-cochain comparison of lem-pur-cochain-pullback-tensor-coherence. -/
+is the sum of the ordinary inverse maps. -/
 @[irreducible] def sectionTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (totalSectionPull Λ f).obj (P ⊗ Q) ≅

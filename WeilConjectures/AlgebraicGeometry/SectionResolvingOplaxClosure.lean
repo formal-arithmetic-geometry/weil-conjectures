@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SectionModuleAlgebraicInverseImage
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
+* Stacks Project, Tags 07A4 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -102,13 +102,8 @@ private theorem resolving_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     L V adj I (P.X n) (hP.2 n)
   exact resolving_iso Λ X ((NatIso.mapHomologicalComplex e (.up ℤ)).app P) ⟨hk, hf⟩
 
-/--
-The four nested tensor totals of resolving section complexes, together with all
-their pullbacks, are resolving.  This is the closure step in the explicit
-representative calculation: apply the K-flat total-tensor model theorem to the
-two binary pairs and then to the two outer pairs, and apply preservation of
-K-flatness and flat terms by ringed-topos pullback.
--/
+/-- The four nested tensor totals of resolving section complexes, together with all their
+pullbacks, are resolving. -/
 theorem section_resolving_oplax_closure {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q H : CochainComplex (modules Λ Y) ℤ)
     (hP : KFlatSectionComparison.sectionResolving Λ Y P)

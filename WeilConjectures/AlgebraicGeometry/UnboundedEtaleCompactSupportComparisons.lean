@@ -136,8 +136,7 @@ private lemma exact_exchange_transport
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Assemble the canonical proper/open tower comparison, using the closure compactification
-`ofComp`, and compare the input and output with the chosen compactifications. This is the
-explicit isomorphism in the proof of the existing unbounded composition theorem. -/
+`ofComp`, and compare the input and output with the chosen compactifications. -/
 noncomputable def unboundedEtaleLowerShriekCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

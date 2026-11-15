@@ -26,12 +26,8 @@ and equations; there are no free proposition-valued parameters.
 
 * Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 4.10 and Proposition 4.17;
   Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB.
-* Zheng 4.1; Stacks 03EK. Proof: restriction to a vertical slice commutes with sectionwise tensor
-  and sheafification. Map each pure tensor to the identical tensor in that slice. The sheafification
-  universal property gives a natural isomorphism. Local pure tensors generate, so the displayed
-  section formula determines it uniquely.
-* Stacks 03D1.
-* Stacks 03EL.
+* Zheng, Six Operations and Lefschetz--Verdier, 4.1; Stacks Project, Tag 03EK.
+* Stacks Project, Tags 03D1 and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -505,9 +501,7 @@ attribute [local irreducible] ordinaryEvaluationTensor
 set_option genInjectivity false in
 set_option genSizeOf false in
 set_option genSizeOfSpec false in
-/-- The full ordinary-derived system calculus over one fixed ring tower.
-Every proposition field is a specific mathematical assertion about the displayed
-categories, functors, maps or adjunctions; none is an unconstrained Prop parameter. -/
+/-- The full ordinary-derived system calculus over one fixed ring tower. -/
 structure Data where
   /-- Grothendieck abelianness of the actual category of module systems. -/
   grothendieck : IsGrothendieckAbelian.{max c v r} (Systems.{c, v, max c v r} J B τ)
@@ -565,7 +559,7 @@ structure Data where
       closed (levelClosed n) tensorModels (levelTensorModels n)
       (tensorEvaluation n)
   /-- The ordinary component of the evaluation model is exactly the
-  identity-on-sections comparison, so it cannot be sign-twisted. -/
+  identity-on-sections comparison. -/
   tensorEvaluationModel_ordinary : ∀ (n : ℕ)
     (M N : Systems.{c, v, max c v r} J B τ),
     (tensorEvaluationModel n).ordinary M N =

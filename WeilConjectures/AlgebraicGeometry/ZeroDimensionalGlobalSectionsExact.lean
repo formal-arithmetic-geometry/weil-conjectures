@@ -19,7 +19,8 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
-/-!
+/-! # Exactness of étale global sections on zero-dimensional schemes
+
 ## References
 
 * Stacks Project, Tags 00KH, 00FV, 054M, 03SI and 03QO.

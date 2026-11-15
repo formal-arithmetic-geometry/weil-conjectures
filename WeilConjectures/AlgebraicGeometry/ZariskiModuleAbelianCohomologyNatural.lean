@@ -23,7 +23,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tag 03FD.
+* Stacks Project, Tag 03FD.
 -/
 
 @[expose] public section

@@ -10,7 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
-/-!
+/-! # Geometric points of zero-dimensional base changes
+
 ## References
 
 * Stacks Project, Tags 00KH, 00FV and 01JT.

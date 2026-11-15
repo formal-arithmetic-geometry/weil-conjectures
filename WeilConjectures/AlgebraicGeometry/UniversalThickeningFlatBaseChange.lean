@@ -28,11 +28,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Flat base change preserves universal first order thickenings and identifies their
-conormal sheaves. The two projection equations specify `iZ = id_X × iW` uniquely.
-The map in the final clause is exactly the canonical map of
-`Scheme.Modules.closedImmersion_conormal_functorial`, not an arbitrary module isomorphism.
-The proof witnesses `hu` and `HZ` allow the conormal definition to use this thickening. -/
+/-- Flat base change preserves universal first order thickenings, where `iZ = id_X × iW` is
+specified by the two projection equations, and the canonical map of
+`Scheme.Modules.closedImmersion_conormal_functorial` from the pulled-back conormal sheaf to the
+conormal sheaf of the base change is an isomorphism. -/
 theorem universalFirstOrderThickening_flat_base_change
     {W W' X Y : Scheme.{u}} (hW : W ⟶ Y) [FormallyUnramified hW]
     (g : X ⟶ Y) [Flat g] (iW : W ⟶ W') (s : W' ⟶ Y)

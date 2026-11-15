@@ -23,7 +23,7 @@ section-module modules.
 
 ## References
 
-* Stacks Project, `derived.tex`, Tags 09T5 and 08BJ, and `sites-cohomology.tex`, Tags 07A6 and 0FPI.
+* Stacks Project, Tags 09T5 and 08BJ, and Tags 07A6 and 0FPI.
 -/
 
 @[expose] public noncomputable section
@@ -485,7 +485,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
-/-- The existing internal derived adjunction with its two functor types fixed explicitly. -/
+/-- The internal derived adjunction `Lf^* ⊣ Rf_*` with its two functor types fixed
+explicitly. -/
 def normalizationInternalAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalDerivedPullback Λ f ⊣ internalDerivedPushforward Λ f :=
   CondensedRing.derivedUpperStarLowerStarAdjunction Λ f
@@ -751,34 +752,11 @@ private theorem derivedMate {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (pullComparison Λ f) (pushComparison Λ f)
         (InternalModuleOperations.upperComparison_existsUnique Λ f).exists.choose_spec)
 
-/--
-Proof, following the eight steps of the node.
-1. Use the derived equivalence instance for the fixed additive section equivalence.
-2. The equivalence and its exact inverse preserve K-injectivity. The degreewise
-   unit identifies the image under their composite with the original complex,
-   proving reflection. Combine this with reflection of quasi-isomorphisms.
-3. The factorization equations for exact derived squares give the left comparison
-   equation. The right equation follows from the unit equations for right-derived
-   composition, natural isomorphisms, and composition with an exact functor.
-   Evaluate the homotopy equations at quotient complexes.
-4. The universal derived-adjunction comparison identifies the independently
-   constructed adjunctions with the exact-left/right-derived adjunctions. The
-   exact-derived mate formula and right-derived uniqueness identify the mate of
-   the specified left square with the specified right square. Transport along
-   the internal left-derived/exact-derived isomorphism.
-5. Apply the general mate-transposition identity for the Hom comparison. The unit
-   and counit mate identities give the two remaining equations by cancellation.
-6. The ordinary pushforward comparisons are identities on sections. The ordinary
-   section compositor and internal compositor have the same geometric underlying
-   sheaf map. The normalized adjunction-comparison compositor theorem then gives
-   the ordinary pullback square.
-7. Localize that square with the exact-square composition theorem. Transport along
-   the three left-derived/exact-derived isomorphisms, using naturality to cancel
-   adjacent inverse factors. The resulting compositor is the specified internal
-   left-derived compositor.
-8. Mate pasting for the inverse pullback squares and the mixed conjugate/mate
-   pasting identities give precisely the specified right compositor equation.
--/
+/-- The derived section-module functors are equivalences normalizing the internal derived
+push-pull: the section equivalence reflects K-injective complexes and resolutions, the derived
+pullback and pushforward comparisons agree with their underived counterparts on complexes and
+are compatible with the two derived adjunctions (Hom equivalence, unit and counit) and with
+composition of pullbacks and of pushforwards. -/
 theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedFunctor Λ X).IsEquivalence ∧
     (derivedFunctor Λ Y).IsEquivalence ∧

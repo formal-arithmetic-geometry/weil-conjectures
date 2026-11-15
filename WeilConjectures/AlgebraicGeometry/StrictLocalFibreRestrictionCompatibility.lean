@@ -49,8 +49,8 @@ noncomputable def strictLocalFibreRestriction
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')
         (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).hom.app _
 
-/-- Compatibility uses only the two projections of i and the pointed limit-leg
-identities, and asserts neither continuity nor invertibility. -/
+/-- The strict-local section restriction at a neighbourhood `j` followed by
+`strictLocalFibreRestriction` equals the geometric fibre section restriction at `j`. -/
 theorem strictLocalFibreRestriction_compatibility
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

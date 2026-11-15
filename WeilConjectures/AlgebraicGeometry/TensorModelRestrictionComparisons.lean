@@ -16,8 +16,8 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence
 
 ## References
 
-* Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-* Stacks Project, cohomology.tex, Tags 08DJ and 08DL, and Tag 06YH.
+* Stacks Project, Tags 08DJ and 08DL.
+* Stacks Project, Tags 08DJ and 08DL, and Tag 06YH.
 -/
 
 @[expose] public section

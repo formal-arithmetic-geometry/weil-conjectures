@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport.
+* Stacks Project, Tag 08EB, affine isomorphism transport.
 -/
 
 @[expose] public section

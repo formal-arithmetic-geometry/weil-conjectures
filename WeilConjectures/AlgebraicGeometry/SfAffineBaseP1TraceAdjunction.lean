@@ -13,15 +13,17 @@ import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 
 /-! # Projective-line trace adjunction over an arbitrary affine base
 
-proof.md, diagonal-kernel unit,
-both triangle identities and (G7)
-.
+## Implementation details
 
 The counit equality is written after precomposition with the canonical projection
 isomorphism. Cancelling that isomorphism gives precisely the inverse-projection
 formula. For the identity/proper factorization this is the proper counit-defined
 projection map. Specializing to the coefficient unit identifies the counit with
-its trace under the canonical unit comparisons.
+its trace under the canonical unit comparisons (made explicit by `sfTensorPullbackUnitIso`).
+
+The projective line is presented with the coordinates `Option (ULift (Fin 1))` over any affine
+`S`; this is the same geometric projective line as the `ULift (Fin 2)` presentation. No
+noetherian, constructibility, boundedness or Tor-amplitude hypothesis is needed.
 -/
 
 @[expose] public section
@@ -147,17 +149,11 @@ end
 
 attribute [local irreducible] derivedTensor
 
-/-- The ordinary unbounded projective-line pushforward has the shifted finite Tate
-line tensored with inverse image as right adjoint, with the specified actual counit.
-We use any affine S and the two coordinates Option (ULift (Fin 1)); these are
-the same geometric projective line as the Spec R and ULift (Fin 2) presentation.
-The identity/proper compactification realizes Rq_* and its canonical projection.
-The unit identification is made explicit by sfTensorPullbackUnitIso.
-There is no Noetherian, constructibility, boundedness or Tor-amplitude hypothesis.
-The equality for every K includes the coefficient unit: the projection map at that
-unit is the canonical unit comparison, so the counit there is t.
-
-proof.md, (G6), (G7), both triangles. -/
+/-- For finite coefficients `A` killed by `N` and an affine base `S` on which `N` is invertible,
+the pushforward `Rq_*` along the projective line `q : ℙ¹_S ⟶ S` is left adjoint to
+`K ↦ q^*K ⊗ T⟦2⟧` (`T` the finite Tate line) for some trace `t : Rq_*(T⟦2⟧) ⟶ A`: at every `K`
+the counit precomposed with the projection map is `t ⊗ K` followed by the left unitor, and at
+the coefficient unit the counit is `t`. -/
 theorem sfAffineBaseP1TraceAdjunction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0)

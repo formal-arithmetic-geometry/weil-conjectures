@@ -8,12 +8,11 @@ module
 public import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
-/-!
+/-! # Transport of separable generation along residue-field equivalences
+
 ## References
 
-* Stacks Project, Tag 030O (definition of separable generation). Proof: keep the same subset of E as
-  transcendence basis. Transport algebraic independence in both directions along e, using the
-  compatibility of algebra maps.
+* Stacks Project, Tag 030O (definition of separable generation).
 -/
 
 @[expose] public section

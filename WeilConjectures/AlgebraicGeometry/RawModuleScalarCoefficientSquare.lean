@@ -100,7 +100,8 @@ private theorem coefficient_unshifted
             (Over.w f).symm).inv.app _) := by
   exact rawModuleScalar_coefficient_unshifted Λ G A B f
 
-/-- (blueprint: lem-sbc-raw-scalar-coefficient-square) -/
+/-- The scalar coefficient factors for `A` and `B` form a commutative square with the module and
+abelian coefficient factors along `f`, via the derived upper-star comparison for `f.left`. -/
 theorem rawModuleScalar_coefficient_square
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

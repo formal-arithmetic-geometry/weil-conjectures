@@ -13,6 +13,12 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoLiftedComparisonCounit
 
 /-! # Commutation of normalized source-isomorphism transport with the second mate
 
+## Implementation details
+
+All data of `schemeIsoMateSourceIso` are explicit; no witness of an existence statement is
+chosen. `schemeIso_secondMate_normalized_square` asserts an equality of specified morphisms; it
+neither supplies endpoint isomorphisms nor constructs an arrow isomorphism.
+
 ## References
 
 * Stacks Project, Tags 0ATR and 0D5S.
@@ -25,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 noncomputable section
 /-- The source comparison uses only pullback composition and the supplied comparison of
-right adjoints. All its data are explicit; no witness of existence is chosen.
--/
+right adjoints. -/
 def schemeIsoMateSourceIso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -95,9 +100,7 @@ private theorem source_iso_mate_comparison
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The normalized endpoint comparisons commute with the fixed second-mate formula.
-Unlike the transport theorem, this asserts an equality of specified morphisms;
-it neither supplies endpoint isomorphisms nor constructs an arrow isomorphism. -/
+/-- The normalized endpoint comparisons commute with the fixed second-mate formula. -/
 theorem schemeIso_secondMate_normalized_square
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {P U S T : Scheme.{u}}

@@ -15,7 +15,7 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 ## References
 
 * Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-* Stacks Project, sites-modules.tex, localization of modules on a site; Tags 03D2 and 00YY.
+* Stacks Project, localization of modules on a site; Tags 03D2 and 00YY.
 -/
 
 @[expose] public noncomputable section

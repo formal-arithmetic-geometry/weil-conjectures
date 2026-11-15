@@ -20,7 +20,7 @@ specialized declaration is retained by public import.
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tag 06YY.
+* Stacks Project, Tag 06YY.
 -/
 
 @[expose] public noncomputable section

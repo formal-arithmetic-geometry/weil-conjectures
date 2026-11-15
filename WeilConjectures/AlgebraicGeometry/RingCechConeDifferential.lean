@@ -10,13 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.RingCechConeLinearEquiv
 
 ## References
 
-* Stacks Project, more-algebra.tex, section-alternating-cech, its defining alternating differential.
-* Stacks Project, more-algebra.tex, section-alternating-cech, formulas (1)--(3).
-* Stacks Project, more-algebra.tex, section-alternating-cech, formula (3).
-* Stacks Project, more-algebra.tex, section-alternating-cech, formulas (2)--(3). Proof: subsets
+* Stacks Project, section-alternating-cech, its defining alternating differential.
+* Stacks Project, section-alternating-cech, formulas (1)--(3).
+* Stacks Project, section-alternating-cech, formula (3).
+* Stacks Project, section-alternating-cech, formulas (2)--(3). Proof: subsets
   avoiding zero use the tail differential. On subsets containing zero, the first face contributes
   the localized first block. All remaining faces preserve zero.
-* Stacks Project, more-algebra.tex, section-alternating-cech, formula (1).
+* Stacks Project, section-alternating-cech, formula (1).
 -/
 
 @[expose] public noncomputable section

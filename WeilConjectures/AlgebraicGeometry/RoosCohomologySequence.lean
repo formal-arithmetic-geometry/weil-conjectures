@@ -7,10 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RoosCohomologyMaps
 import WeilConjectures.AlgebraicGeometry.RoosCohomologyNaturality
 
-/-! # The natural cohomology sequence of a strict Roos complex
-
-proof.md, first paragraph.
--/
+/-! # The natural cohomology sequence of a strict Roos complex -/
 
 @[expose] public section
 
@@ -22,9 +19,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-- The natural short exact sequence from the long exact sequence of Cone(1-T)[-1].
-
-proof.md, first paragraph. -/
+/-- For each `q`, a short exact sequence, natural in the tower `K`, from the Milnor cokernel of
+the `H^(q-1)` tower through `H^q` of the Roos complex to the limit of the `H^q` tower. -/
 theorem roos_cohomology_sequence {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableLimits A] [HasExactLimitsOfShape (Discrete ℕ) A] :
     ∀ q : ℤ,

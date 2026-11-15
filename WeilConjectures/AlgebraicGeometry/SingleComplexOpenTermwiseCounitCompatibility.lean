@@ -15,8 +15,8 @@ import all Mathlib.Algebra.Homology.Localization
 
 ## References
 
-* Stacks Project, cohomology.tex, Tags 08HY, 08FE and 0D5S.
-* Stacks Project, cohomology.tex, Tags 08HY, 08FE and 0D5S; perfect.tex, Tag 0DJ9, first paragraph.
+* Stacks Project, Tags 08HY, 08FE and 0D5S.
+* Stacks Project, Tags 08HY, 08FE and 0D5S; Tag 0DJ9, first paragraph.
 -/
 
 @[expose] public section

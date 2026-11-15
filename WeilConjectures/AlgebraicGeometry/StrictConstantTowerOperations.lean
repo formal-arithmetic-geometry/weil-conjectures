@@ -203,7 +203,7 @@ noncomputable instance towers_kInjective (X : Scheme.{u}) :
     CategoryTheory.Abelian.HasKInjectiveResolutions (Towers B X) :=
   towers_hasKInjectiveResolutions B X
 
-/-- Termwise exactness uses the levelwise kernels and cokernels of strict diagrams. -/
+/-- Termwise inverse image on strict towers is exact. -/
 theorem towerPullback_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (towerPullback B f) ∧
       PreservesFiniteColimits (towerPullback B f) := by

@@ -20,9 +20,14 @@ The projection map is the existing proper/open compactification construction wit
 factors exchanged by the canonical signed derived tensor symmetry. Exact termwise inverse
 image is identified with left derived inverse image by its canonical comparison.
 
+## Implementation details
+
+`projectionMap_chosen_comp` is a public alias of a private theorem, so that it is available
+to importers using `import all`.
+
 ## References
 
-* Stacks Project, `more-etale.tex`, Tags 0F7B and 0F7J, and `sites-cohomology.tex`, Tag 0E48.
+* Stacks Project, Tags 0F7B and 0F7J, and Tag 0E48.
 -/
 
 @[expose] public section
@@ -202,8 +207,8 @@ private theorem projectionMap_chosen_comp_private
 
 -- Normalize the two tensor conventions without unfolding the derived functors.
 
-/-- Public export of the private `projectionMap_chosen_comp_private`
-(used by `import all` importers; linter.privateModule). -/
+/-- The projection maps of `Rf_!` and `Rg_!` compose to the projection map of `R(f ≫ g)_!`,
+compatibly with the composition isomorphism `R(f ≫ g)_! ≅ Rg_! ∘ Rf_!`. -/
 alias projectionMap_chosen_comp := projectionMap_chosen_comp_private
 end TensorConventionProof
 

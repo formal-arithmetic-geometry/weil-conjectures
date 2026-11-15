@@ -20,10 +20,8 @@ comparison.  No flatness assumption on the new coefficient ring occurs.
 
 ## References
 
-* Stacks Project, `etale-cohomology.tex`, Tags 03QP and 03Q1, together with sites-cohomology derived
-  change of rings.
-* Stacks, sites-cohomology, Tag 06YY. It is the scalar map of, composed with the canonical `ULift`
-  ring equivalence.
+* Stacks Project, Étale Cohomology, Tags 03QP and 03Q1.
+* Stacks Project, Cohomology on Sites, Tag 06YY (derived change of rings).
 -/
 
 @[expose] public noncomputable section
@@ -43,15 +41,11 @@ def supportedScalarMap (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) =
   (Scheme.finiteEtaleTwistScalar N A hA).comp ULift.ringEquiv.toRingHom
 
 /--
-For a finite coefficient ring killed by `N`, the supported constant scalar extension is
-characterized simultaneously on the closed support and on the ambient scheme.  The
-maps `ηD` and `ηT` are the coefficient units; their derived universal properties state
-that the displayed objects are the derived scalar extensions.  The final equality is
-naturality of the unit under the closed pushforward. The first two conjuncts fix
-both maps on constant-presheaf generators, excluding a rescaling of the units.
-This is the canonical comparison
-of `Ri_* Λ_D ⊗ᴸ_{Λ_T} A_T` with `Ri_* A_D`, expressed in the ordinary unbounded derived
-module categories, and does not assume that `A` is flat over `Λ`.
+For a finite coefficient ring `A` killed by `N` and a closed immersion `i : D ⟶ T`, there are
+coefficient units `ηD`, `ηT` from the constant `ℤ/N` sheaves to the constant `A` sheaves, given
+by the scalar map on constant-presheaf generators, that are derived scalar extensions on `D`, on
+`T` and after closed pushforward, and commute with the closed pushforward units. No flatness of
+`A` is assumed.
 -/
 theorem supported_kummer_scalar_source
     (T : Scheme.{u}) (N : ℕ) (hN : 1 ≤ N)

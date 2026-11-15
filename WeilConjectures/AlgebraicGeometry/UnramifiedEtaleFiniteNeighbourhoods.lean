@@ -17,11 +17,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
 /-!
 # Finite unramified neighbourhoods after étale localization
 
-The first construction in Stacks Project, Tag 04HI, using Tags 02LM, 02G6 and 02GA.
+Given points `x i` of `X` over `s ∈ S` at which `f` is unramified, after passing to an étale
+neighbourhood `(U, u)` of `s`, the points of `X ×_S U` over `u` lying over the `x i` have finite
+unramified open neighbourhoods.
 
 ## References
 
-* Stacks Project, Tag 04HH, used by Tag 04HI; Tag 02LM and Tags 02G6, 02GA.
+* Stacks Project, Tags 04HH and 04HI; see also Tags 02G6, 02GA and 02LM.
 -/
 
 @[expose] public section
@@ -162,22 +164,10 @@ private theorem index_finite_family {A : Type u} [Finite A] (n : ℕ) :
       right_inv a := rfl }
   exact ⟨m, ⟨e.trans (Fintype.equivFin A).symm⟩⟩
 
-/-- Source: Stacks Project, Tag 04HH, used by Tag 04HI; Tag 02LM and Tags 02G6, 02GA.
-(blueprint: lem-weil-pbc-unramified-etale-finite-neighbourhoods)
-
-Proof: take the union of the given unramified open neighbourhoods. Local finite type and
-unramifiedness are local on the source, so its restriction is unramified. Remove duplicate
-listed points, keeping one representative index for each. The isolated-fibre-point theorem
-applies to this restriction. Apply `exists_etale_local_finite_multiple_points` to the distinct
-representatives. Its finite pieces remain unramified by base change and open restriction.
-The open immersion from the restricted source induces an open immersion of pullbacks;
-regard the pieces as opens of the original pullback. Open immersions identify their residue
-fields, so uniqueness and pure inseparability persist. For a nonempty original list, put
-all pieces in its first output row and give every other row size zero, using an equivalence
-of finite index types. The injectivity of the marked points is unchanged. Every lift of a
-listed point lies in this source open and is one of the enumerated points, including for
-repeated entries of the original list. For the empty list retain the obtained neighbourhood
-and take the empty family. -/
+/-- Let `x i` be points of `X` over `s ∈ S` with unramified open neighbourhoods. There is
+an étale neighbourhood `(U, u)` of `s` such that every point of `X ×_S U` over `u` and some
+`x i` is a marked point `v a` of an open `V a`, finite and unramified over `U`, in which `v a`
+is the only point over `u` and has purely inseparable residue field extension. -/
 theorem exists_etale_finite_unramified_neighbourhoods
     {X S : Scheme.{u}} (f : X ⟶ S) (s : S)
     (n : ℕ) (x : Fin n → X) (hx : ∀ i, f.base (x i) = s)

@@ -21,9 +21,8 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The exact adjunction family already used by `schemeDerivedBaseChangeMap`.
-Its Hom equivalence is pinned to the same left-derived counit and right-derived unit.
-This name shares the existing expression and makes no new adjunction choice. -/
+/-- The adjunction `derivedPullback f ⊣ schemeDerivedDirectImage f` used by
+`schemeDerivedBaseChangeMap`. -/
 noncomputable abbrev singleComplexOpenPinnedAdjunction
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

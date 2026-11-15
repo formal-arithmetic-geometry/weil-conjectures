@@ -25,7 +25,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).
-* Stacks Project, Tags 072W and 0733(1); etale-cohomology.tex, Tag 09AX, proof, first, second and
+* Stacks Project, Tags 072W and 0733(1); Tag 09AX, proof, first, second and
   last sentences.
 -/
 

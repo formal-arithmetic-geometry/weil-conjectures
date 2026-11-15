@@ -23,9 +23,9 @@ homology, and the representing map conjugates the two comparison arrows.
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 0DJ9, localization calculation.
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8 and Tag 0DJ9, first paragraph;
-  cohomology.tex, Tags 08HY and 08FE.
+* Stacks Project, Tag 0DJ9, localization calculation.
+* Stacks Project, equation-bc preceding Tag 0DJ8 and Tag 0DJ9, first paragraph;
+  Tags 08HY and 08FE.
 -/
 
 @[expose] public section

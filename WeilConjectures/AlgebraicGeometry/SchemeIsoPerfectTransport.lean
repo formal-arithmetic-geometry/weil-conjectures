@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectLocalTransport
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 08EB, transport along an affine isomorphism.
+* Stacks Project, Tag 08EB, transport along an affine isomorphism.
 -/
 
 @[expose] public section

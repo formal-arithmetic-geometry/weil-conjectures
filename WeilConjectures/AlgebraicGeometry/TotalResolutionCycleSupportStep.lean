@@ -12,13 +12,14 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
-/-!
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+
+/-! # Removing an outer column from a finitely supported total cycle
+
 ## References
 
-* Stacks Project, Homology, Tag 09IZ, proof, the two boundary corrections.
+* Stacks Project, Homology, Tag 09IZ.
 -/
-
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 @[expose] public section
 

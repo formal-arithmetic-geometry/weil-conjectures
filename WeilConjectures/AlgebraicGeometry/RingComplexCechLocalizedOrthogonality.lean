@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RingComplexCechCohomologyPowerTorsion
 
 ## References
 
-* Stacks Project, dualizing.tex, Tag 0A6R, and the localization/restriction adjunction used in the
+* Stacks Project, Tag 0A6R, and the localization/restriction adjunction used in the
   node's finite localization proof.
 -/
 

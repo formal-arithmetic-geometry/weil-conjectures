@@ -13,7 +13,8 @@ import Mathlib.CategoryTheory.Sites.LocalSite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantStalk
 
-/-!
+/-! # The constant-sheaf counit over an algebraically closed field
+
 ## References
 
 * Stacks Project, Remark 59.23.2 (Tag 03P5).

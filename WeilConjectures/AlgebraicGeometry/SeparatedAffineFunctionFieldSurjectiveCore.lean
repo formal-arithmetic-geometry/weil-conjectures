@@ -11,12 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.AffineLocalFunctionFieldDiagonalPullback
 
-/-!
+/-! # Closed immersion from the function field of a separated integral scheme
+
 ## References
 
-* Varieties Lemma 09NB, separatedness paragraph. The proof constructs the pullback of the diagonal
-  along the affine charts, identifies it with `Spec K`, and transports the resulting closed
-  immersion through the affine-spectrum identifications.
+* Stacks Project, Varieties, Lemma 09NB.
 -/
 
 @[expose] public section

@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBas
 
 ## References
 
-* Stacks Project, Tag 0DAV, construction of the extension and the final simplicial composition
-  check; Tag 0DAU (lemma-split).
+* Stacks Project, Tags 0DAV and 0DAU.
 -/
 
 @[expose] public section

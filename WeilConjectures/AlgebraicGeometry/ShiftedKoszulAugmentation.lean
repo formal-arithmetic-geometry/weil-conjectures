@@ -17,8 +17,7 @@ public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
 ## References
 
-* Stacks Project, Tag 08CX, Section 36.9.
-* Stacks, Tag 08CX; Tag 01I6.
+* Stacks Project, Tag 08CX (Section 36.9); Tag 01I6.
 -/
 
 @[expose] public section
@@ -83,9 +82,7 @@ def shiftedKoszulAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r →
     ComplexShape.embeddingDownNat
 
 /-- The derived augmentation, obtained by associated sheaves then localization.
-Its source is `I` and its target is the structure sheaf in degree zero. Associated
-sheaves are Mathlib's `tilde.functor` applied termwise, in the form of the landed
-lem-pc-koszul-affine-detection and lemma-coherent-base-change-invertible-sheaves--1 citers. -/
+Its source is `I` and its target is the structure sheaf in degree zero. -/
 def affineKoszulAugmentation (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

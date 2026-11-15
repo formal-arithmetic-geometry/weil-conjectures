@@ -15,10 +15,11 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.LinearAlgebra.Dimension.Free
 
-/-!
+/-! # Generic stalks of rank one modules on integral closed subschemes
+
 ## References
 
-* Stacks Project, Tag 01YH, rank calculation following Tag 01YE.
+* Stacks Project, Tags 01YH and 01YE.
 -/
 
 @[expose] public section

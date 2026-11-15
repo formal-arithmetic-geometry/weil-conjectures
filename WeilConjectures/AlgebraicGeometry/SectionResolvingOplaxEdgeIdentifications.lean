@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -240,13 +240,8 @@ private theorem representative_all {X Y : Scheme.{u}} (f : X ⟶ Y)
   · intro A B hA hB
     simpa only [pairModel, Category.assoc] using h.1 ⟨A, hA⟩ ⟨B, hB⟩
 
-/--
-Under the representative equations, the six prescribed edge squares commute
-for every triple of resolving section complexes.  The proof expands the fixed
-vertices, uses naturality of the resolution comparison and of `modelTensor`,
-and applies the representative equation to the relevant binary pair; the
-source and target associator equations identify the remaining edge.
--/
+/-- Under the representative equations, the six prescribed edge squares commute for every
+triple of resolving section complexes. -/
 theorem section_resolving_oplax_edge_identifications {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

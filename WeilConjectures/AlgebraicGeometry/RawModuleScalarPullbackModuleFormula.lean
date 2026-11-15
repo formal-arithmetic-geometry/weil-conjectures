@@ -11,6 +11,14 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceFactors
 
 /-! # Module raw pullback factorization
 
+## Implementation details
+
+The module formula is first proved for the raw pullback `higherDirectImageRawOverPullback` over
+`B` rather than through `higherDirectImageRawOverFunctor`, keeping the `unop (op B)` objects of
+the functor out of the kernel check. It instantiates `rawTriangleMap_whiskerLeft_eq_comp`, a
+statement over arbitrary categories, with explicit arguments, so the kernel matches the factors
+argument by argument instead of unfolding composites in the derived category.
+
 ## References
 
 * Stacks Project, Tags 03FD and 03Q8.
@@ -24,8 +32,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- A raw triangle map whose functors are precomposed with `L` is the composite of any morphism
-equal to its source, the image of the class, and the coefficient. Being stated over arbitrary
-categories, its associativity step is cheap to check. -/
+equal to its source, the image of the class, and the coefficient. -/
 private theorem rawTriangleMap_whiskerLeft_eq_comp
     {C₀ C D E D' E' : Type*} [Category C₀] [Category C] [Category D] [Category E]
     [Category D'] [Category E'] [Preadditive D'] [Preadditive E']
@@ -41,12 +48,7 @@ private theorem rawTriangleMap_whiskerLeft_eq_comp
   exact (Category.assoc _ _ _).symm
 
 /-- The module formula for the raw pullback itself, stated over `B` rather than through the
-functor `higherDirectImageRawOverFunctor`. Keeping this a separate declaration keeps the
-`unop (op B)` objects of the functor out of the kernel check of the associativity step.
-The proof instantiates `rawTriangleMap_whiskerLeft_eq_comp` with explicit arguments, so the
-kernel matches `higherDirectImageRawOverPullback` and `moduleSourceFactor` against
-`rawTriangleMap` and `rawTriangleSource` argument by argument, instead of unfolding composites
-in the derived category. -/
+functor `higherDirectImageRawOverFunctor`. -/
 private theorem higherDirectImageRawOverPullback_eq_moduleFactors
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale)

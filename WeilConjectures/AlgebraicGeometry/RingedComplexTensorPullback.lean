@@ -31,7 +31,7 @@ import all WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullback
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex, Tag 03EL.
+* Stacks Project, Tag 07A4, and Tag 03EL.
 -/
 
 @[expose] public section

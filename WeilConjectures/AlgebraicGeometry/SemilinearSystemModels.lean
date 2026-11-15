@@ -16,36 +16,19 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientRingedSequenceSite
 - `ScalarData`: scalar adjunctions normalized on ordinary and K-flat representatives.
 - `TensorComparisonModel`: tensor comparisons fixed on actual total-complex summands.
 
+## Implementation details
+
+The data in `ScalarData`, `TensorComparisonModel` and `ScalarTensorComparisonModel` normalize
+the derived functors on representatives: the change-of-rings model fixes ordinary scalar
+extension and its K-flat counit, the unit-section equation fixes the ordinary adjunction, and
+the representative equations fix the derived adjunction and the derived tensor comparisons on
+K-flat representatives of the system category itself, rather than merely after evaluation.
+
 ## References
 
-* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1; Stacks 03D1, 03EK, 05RU, 06YY,
-  07A4 and 0G7E.
-* Stacks 03DA.
-* Stacks 03CZ.
-* Zheng 4.1. Proof: take a small model of C and its product with the natural-number poset, using a
-  universe lift of the latter. The product of the two equivalences is an equivalence with a category
-  whose objects and arrows lie in the coefficient universe.
-* Zheng 4.1.
-* Zheng 4.1. Proof: glue in B_n on the vertical covering slice. Separatedness on the pullbacks of
-  that cover verifies compatibility with horizontal restrictions. The algebra operations commute
-  with gluing since each B_n is a ring sheaf.
-* Zheng 4.1. Proof: a covering sieve restricts to a covering sieve on its vertical slice by the
-  definition of coefficientSequenceTopology. The sheaf condition restricts accordingly.
-* Zheng 4.1. Proof: uncurry and ofOpSequence evaluate to B_n(U).
-* Zheng 4.1. Proof: kernels are sectionwise and cokernels are sheafifications of sectionwise
-  cokernels. Vertical sheafification computes the same sheafification at each level. Addition of
-  maps is sectionwise as well.
-* Stacks 06YY and 07A6.
-* Zheng 4.1. Proof: the horizontal presheaf restriction is linear over B_m after scalar restriction
-  to B_n. Site naturality gives a module-sheaf map. Its formula is natural in the system, and
-  sectionwise extensionality proves uniqueness.
-* Stacks 08J7.
-* Stacks 07A4, 08J9.
-* Stacks 06YS, 07A4.
-* Stacks 06YN.
-* Stacks 06YU.
-* Stacks 03ER, 06YS, 0G7E.
-* Stacks 03EL, 07A4.
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1.
+* Stacks Project, Tags 03CZ, 03D1, 03DA, 03EK, 03EL, 03ER, 05RU, 06YN, 06YS, 06YU, 06YY, 07A4,
+  07A6, 08J7, 08J9 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -368,10 +351,8 @@ def extensionUnit (M : Mod.{c, v, r} J R) (U : Cᵒᵖ) (x : M.val.obj U) :
       (SheafOfModules.changeOfRingsPresheaf.{v, c, r} φ M)).app U
         ((1 : R'.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
 
-/-- A universal derived scalar-extension pair with its normalized adjunction.
-The existing change-of-rings model fixes ordinary extension and its K-flat counit.
-The unit-section equation fixes the ordinary adjunction. The representative equation
-fixes the derived adjunction and hence its units, counits and transposes. -/
+/-- A derived scalar-extension functor along `φ`, with ordinary and derived adjunctions to
+restriction of scalars normalized on sections and on K-flat representatives. -/
 structure ScalarData where
   /-- The dependency's actual everywhere-defined K-flat derived change of rings. -/
   model : @SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, r,
@@ -753,10 +734,9 @@ def flatTerms (R : Sheaf J CommRingCat.{max c v r})
   ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
     (J := J) (R := R) (P.X p)
 
-/-- Representative normalization of an exact tensor comparison. The chain map is
-fixed on every total summand by the inverse ordinary comparison. Its localized
-square fixes the derived comparison on K-flat representatives, on the system
-category itself, rather than merely after evaluation. -/
+/-- Representative normalization of an exact tensor comparison `μ`: a chain map fixed on every
+total summand by the inverse ordinary comparison, whose localization is `μ` on K-flat
+representatives. -/
 structure TensorComparisonModel {C' : Type c} [Category.{v} C']
     [EssentiallySmall.{max c v r} C'] (J' : GrothendieckTopology C')
     (R : Sheaf J CommRingCat.{max c v r}) (S : Sheaf J' CommRingCat.{max c v r})
@@ -801,9 +781,7 @@ structure TensorComparisonModel {C' : Type c} [Category.{v} C']
       (Functor.mapDerivedCategoryFactors F).hom.app
         ((totalTensor.{c, v, r} J R).obj (P, Q)) = DerivedCategory.Q.map (chain P Q)
 
-/-- The section carried by a scalar-extension functor's ordinary unit.  The
-object equality in the derived change-of-rings model is used explicitly, so
-this is the actual model `E`, rather than an unrelated extension functor. -/
+/-- The section of `A.model.E.obj M` given by the ordinary scalar-extension unit `x ↦ 1 ⊗ x`. -/
 def scalarExtensionSection {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -813,9 +791,8 @@ def scalarExtensionSection {C : Type c} [Category.{v} C]
   (eqToHom (A.model.obj_eq M).symm).val.app U
     (extensionUnit.{c, v, max c v r} φ M U x)
 
-/-- The ordinary scalar/tensor comparison is fixed on pure tensors.  This is
-the change-of-rings map `(x ⊗ y) ⊗ 1 ↦ (x ⊗ 1) ⊗ (y ⊗ 1)` on every generalized
-section, with the actual sheafification unit and the chosen ordinary comparison. -/
+/-- The ordinary scalar/tensor comparison is the change-of-rings map
+`(x ⊗ y) ⊗ 1 ↦ (x ⊗ 1) ⊗ (y ⊗ 1)` on every generalized section. -/
 def ScalarTensorPure {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -832,9 +809,8 @@ def ScalarTensorPure {C : Type c} [Category.{v} C]
         (scalarExtensionSection.{c, v, r} φ A M U x)
         (scalarExtensionSection.{c, v, r} φ A N U y)
 
-/-- The K-flat counit of the actual scalar-extension model, packaged as an
-isomorphism on a chosen K-flat representative; it is invertible there by the
-model's `computes` field. -/
+/-- The K-flat counit of the scalar-extension model, as an isomorphism on a K-flat
+representative. -/
 noncomputable def scalarEpsilonIso {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -847,9 +823,8 @@ noncomputable def scalarEpsilonIso {C : Type c} [Category.{v} C]
   @asIso _ _ _ _ (A.model.ε.app P) (A.model.computes P hP)
 
 /-- A scalar/tensor comparison carrying the K-flat representative square
-and its pure-tensor ordinary normalization. Unlike an exact inverse-image
-comparison, scalar extension is only required to preserve the K-flat class;
-its derived comparison is written with the model counits `ε`. -/
+and its pure-tensor ordinary normalization, with the derived comparison written using the
+model counits `ε`. -/
 structure ScalarTensorComparisonModel {C : Type c} [Category.{v} C]
     [EssentiallySmall.{max c v r} C] (J : GrothendieckTopology C)
     (R R' : Sheaf J CommRingCat.{max c v r}) (φ : R ⟶ R')

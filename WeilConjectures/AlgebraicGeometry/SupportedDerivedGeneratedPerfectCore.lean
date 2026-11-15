@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.GeneratorTowerNormalize
 
 ## References
 
-* Stacks Project, duality.tex, proof of Lemma 48.4.3(3), Section Tag 0E4G; derived.tex (Tag 09SN).
+* Stacks Project, proof of Lemma 48.4.3(3), Section Tag 0E4G; derived.tex (Tag 09SN).
 -/
 
 @[expose] public section

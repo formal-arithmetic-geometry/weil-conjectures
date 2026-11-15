@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 ## References
 
-* Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
+* Stacks Project, Tags 0996 and 099D(d).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +29,8 @@ def ringTensorCechSection (A : CommRingCat.{u}) (x : A) :
     ((CochainComplex.onePointRingSheaf A).obj ⋙ forget CommRingCat).sections :=
   ⟨fun _ ↦ x, fun _ ↦ rfl⟩
 
-/-- The actual ordered tensor of the two-term localization complexes on the ring site.
-This uses the existing tensor construction, with its existing augmentation. -/
+/-- The ordered tensor of the two-term localization complexes of the elements `f i` on the ring
+site, together with its augmentation to the ring. -/
 def ringTensorCech (A : CommRingCat.{u}) (r : ℕ) (f : Fin r → A) :
     Σ K : CochainComplex (RingSiteModules A) ℤ, K ⟶ ringComplexSingle A :=
   ringedExtendedCech (CochainComplex.onePointRingSheaf A) r

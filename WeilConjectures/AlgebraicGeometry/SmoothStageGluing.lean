@@ -9,10 +9,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
-/-!
+/-! # Smoothness at a finite stage from a smooth model
+
 ## References
 
-* Stacks Project, Tag 0C0C, limits.tex, locality of smoothness after a common cofiltered refinement.
+* Stacks Project, Tag 0C0C.
 -/
 
 @[expose] public section
@@ -23,10 +24,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The gluing part of eventual smoothness.  A smooth finite-stage model `q` of the
-pullback morphism, i.e. a smooth `q : Z ⟶ N.D.obj j.left` together with a comparison
-isomorphism `e : Z ≅ pullback p (N.D.map j.hom)` over `N.D.obj j.left`, makes the pullback
-morphism itself smooth at that stage, since smoothness is invariant under isomorphism. -/
+/-- A smooth `q : Z ⟶ N.D.obj j.left` with an isomorphism `e : Z ≅ pullback p (N.D.map j.hom)`
+over `N.D.obj j.left` makes the pullback morphism smooth at that stage. -/
 theorem Scheme.NoetherianApproximation.smooth_stage_of_affine_models
     {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}
     {Y : Scheme.{u}} (p : Y ⟶ N.D.obj i)

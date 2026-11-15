@@ -16,9 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 
 ## References
 
-* Stacks Project, etale-cohomology.tex, proof of Lemma 095B, and sites.tex, Definition 00VM.
-* Stacks Project, etale-cohomology.tex, proof of Lemma 095B, lines 9982--9991, and sites.tex,
-  Definition 00VM.
+* Stacks Project, Étale Cohomology, Lemma 095B; Sites, Definition 00VM.
 -/
 
 @[expose] public section
@@ -30,21 +28,9 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, etale-cohomology.tex, proof of Lemma 095B,
-lines 9982--9991, and sites.tex, Definition 00VM.
-(blueprint: lem-weil-pbc-split-cover-sections-limit).
-
-Proof: Base change the clopen coproduct Y by W → X. Its j-th piece is W,
-using the inverse t j to i j ≫ f; its inclusion is the displayed pullback lift.
-These inclusions cover W ×_X Y and have empty pairwise overlaps for distinct
-indices. The self-overlap projections agree because the inclusions are monic.
-The sheaf condition makes sections the equalizer of the two overlap maps.
-Sections on the empty object are zero, by its empty covering. Thus every family
-of sections on the pieces is compatible and glues uniquely. For any module M,
-a family of linear maps from M to these section modules therefore glues to a
-unique map to H(W ×_X Y); uniqueness of gluing proves additivity and scalar
-linearity. This is exactly the limiting-fan property, also for the empty family.
--/
+/-- If `Y ⟶ X` is a finite coproduct of clopen pieces `V j`, each mapping isomorphically to `X`,
+then the sections of an étale sheaf of modules `H` on `Y` over the base change of `W` form the
+product of its sections over the copies of `W` in the pieces. -/
 theorem splitCoverSectionsLimit
     {X Y : Scheme.{u}} {J : Type w} [Finite J]
     {Λ : Type (u + 1)} [CommRing Λ]

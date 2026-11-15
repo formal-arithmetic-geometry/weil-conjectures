@@ -15,16 +15,15 @@ public import Mathlib.RingTheory.Localization.BaseChange
 
 ## References
 
-* Stacks Project, more-algebra.tex, section-alternating-cech, and algebra.tex, localization base
+* Stacks Project, section-alternating-cech, and localization base
   change.
-* Stacks Project, more-algebra.tex, section-alternating-cech.
-* the ordered-subset partition in Stacks Project, more-algebra.tex, section-alternating-cech.
-* Stacks Project, more-algebra.tex, section-alternating-cech, canonical face maps.
-* Stacks Project, algebra.tex, localization universal property.
-* Stacks Project, more-algebra.tex, section-alternating-cech, formula (2).
-* Stacks Project, algebra.tex, localization base change.
-* Stacks Project, algebra.tex, localization base change, and more-algebra.tex,
-  section-alternating-cech.
+* Stacks Project, section-alternating-cech.
+* the ordered-subset partition in Stacks Project, section-alternating-cech.
+* Stacks Project, section-alternating-cech, canonical face maps.
+* Stacks Project, localization universal property.
+* Stacks Project, section-alternating-cech, formula (2).
+* Stacks Project, localization base change.
+* Stacks Project, localization base change, and section-alternating-cech.
 -/
 
 @[expose] public noncomputable section

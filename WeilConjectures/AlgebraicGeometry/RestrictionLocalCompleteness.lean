@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsIdeal
 
 ## References
 
-* Stacks Project, algebraization.tex, Tag 099C, using Tags 0997 and 0998.
+* Stacks Project, Tag 099C, using Tags 0997 and 0998.
 -/
 
 @[expose] public section

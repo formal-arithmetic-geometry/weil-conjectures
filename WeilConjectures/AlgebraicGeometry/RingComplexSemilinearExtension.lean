@@ -12,8 +12,7 @@ import all WeilConjectures.Algebra.Homology.RingHomExtensionTransport
 
 ## References
 
-* Stacks Project, Tag 099D(c); Modules on Sites, Tag 03EK. All data are constructed by the
-  extension/restriction adjunction, rather than chosen from an existence assertion.
+* Stacks Project, Tag 099D(c); Modules on Sites, Tag 03EK.
 -/
 
 @[expose] public section
@@ -102,8 +101,7 @@ def ringComplexExtensionComplex {A B : CommRingCat.{u}} (φ : A →+* B)
     (P : CochainComplex (RingSiteModules A) ℤ) : CochainComplex (RingSiteModules B) ℤ :=
   ((ringComplexExtension φ).mapHomologicalComplex (.up ℤ)).obj P
 
-/-- The sheafification unit identifies sections of scalar extension with the tensor product.
-The topology is bottom, so the unit is an isomorphism. -/
+/-- The sheafification unit identifies sections of scalar extension with the tensor product. -/
 def ringComplexExtensionSections {A B : CommRingCat.{u}} (φ : A →+* B)
     (M : RingSiteModules A) :
     (ModuleCat.extendScalars φ).obj (M.val.obj (op ⟨PUnit.unit⟩)) ≅

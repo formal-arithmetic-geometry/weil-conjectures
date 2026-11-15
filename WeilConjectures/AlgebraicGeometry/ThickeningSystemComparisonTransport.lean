@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
-/-!
+/-! # Compatible families along comparisons of thickening systems
+
 ## References
 
 * Stacks Project, Lemma 087T and Remark 088F.

@@ -12,7 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-/-!
+/-! # Integrality of the closed fibre over a valuation ring
+
 ## References
 
 * Stacks Project, More on Morphisms, Tag 0EX8.

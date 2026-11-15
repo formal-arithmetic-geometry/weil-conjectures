@@ -27,8 +27,8 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- Expand the module pullback and commute only its source and class factors.
-The coefficient comparison is deliberately retained as the module coefficient tail. -/
+/-- Formula for `rawModuleAbelianHomMap` on a transition map: the source prefix followed by
+the upper-star comparison, the module coefficient factor and the scalar coefficient factor. -/
 theorem rawModuleAbelianHomMap_source_formula
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)

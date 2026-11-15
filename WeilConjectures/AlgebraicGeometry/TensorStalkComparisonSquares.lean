@@ -19,8 +19,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 0DJA(1).
-* Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ. Proof: take existing
+* Stacks Project, Tag 0DJA(1).
+* Stacks Project, Tag 0DJA(1), local computation using Tag 0BYJ. Proof: take existing
   coordinates e for the identity map on the pullback of E. Set U to the stalk of e.P, Q to the stalk
   of c.P, N to the stalk of c.N, and t to tensorStalkIso(c.P) followed by the stalk of c.t. The
   stalk K-flat criterion proves both acyclicity assertions. Construct the local-spectrum map from

@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonInheritance
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 0DJA, part (1).
+* Stacks Project, Tag 0DJA, part (1).
 -/
 
 @[expose] public section

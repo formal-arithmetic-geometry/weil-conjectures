@@ -15,10 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
 
 ## References
 
-* Stacks Project, More on Morphisms, Lemma 06AD (label).
-* Stacks Project, More on Morphisms, Lemma 06AD (label). Proof: use the definition of `IsThickening`
-  to obtain a surjective closed immersion; closed immersions are universally closed, and Limits
-  Proposition 05YU says that a scheme receiving such a morphism from an affine scheme is affine.
+* Stacks Project, More on Morphisms, Lemma 06AD; Limits, Proposition 05YU.
 -/
 
 @[expose] public section
@@ -29,9 +26,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A thickening of an affine scheme is affine. The proof applies Limits,
-Proposition 05YU to the surjective universally closed closed immersion.
--/
+/-- A thickening of an affine scheme is affine. -/
 theorem isAffine_of_isThickening {X X' : Scheme.{u}} (i : X ⟶ X')
     (hi : IsThickening i) [IsAffine X] : IsAffine X' := by
   let : IsClosedImmersion i := hi.1

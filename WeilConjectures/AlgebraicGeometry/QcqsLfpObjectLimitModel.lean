@@ -18,7 +18,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 ## References
 
-* Stacks Project, `limits.tex`, Tag 0EY1, essential surjectivity (lines 2722--2810).
+* Stacks Project, Tag 0EY1, essential surjectivity.
 -/
 
 @[expose] public section

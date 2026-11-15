@@ -16,8 +16,8 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPrope
 
 /-! # The residue identification of the coordinate-ring strict henselization
 
-This is clause (1) of `lem-weil-pbc-strict-henselization-functoriality` for the
-coordinate-ring model `Scheme.strictHenselizationRing` of the strict henselization,
+This file identifies the residue field of the coordinate-ring model
+`Scheme.strictHenselizationRing` of the strict henselization,
 whose canonical maps are the legs of `Scheme.strictHenselizationCone` and the structural
 map `Scheme.strictHenselizationStructuralMap`. The pointed residue map is transported from
 the point evaluation on `Scheme.strictHenselization` along the canonical colimit comparison
@@ -25,8 +25,7 @@ the point evaluation on `Scheme.strictHenselization` along the canonical colimit
 
 ## References
 
-* Stacks Project, Tag 04HX and Definition 03PS.
-* Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
+* Stacks Project, Tag 04HX and Definition 03PS; Tags 04GW and 04GP.
 -/
 
 @[expose] public section
@@ -93,10 +92,7 @@ private theorem strictHenselizationRingPointedMap
   exact h
 
 /-- The strictly henselian ring, canonical base map, and unique pointed residue
-identification of clause (1), for the coordinate-ring model
-`Scheme.strictHenselizationRing`. The factorization condition forces the residue
-identification to respect the base residue field; using ring equivalences therefore
-also states uniqueness as an equivalence of base-residue-field algebras. -/
+identification, for the coordinate-ring model `Scheme.strictHenselizationRing`. -/
 theorem strictHenselizationRingResidue
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)

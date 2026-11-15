@@ -15,9 +15,14 @@ public import WeilConjectures.AlgebraicGeometry.TangentMapLinear
 
 * `schemeTangentSpace`: dual-number morphisms over the base with the prescribed closed point.
 * `schemeTangentSpaceAddCommGroup` and `schemeTangentSpaceModule`: the canonical vector space
-  structure supplied by `exists_tangentVectors_vectorSpace`, with its specified operations.
-* `schemeTangentMap`: the linear map supplied by `exists_tangentMap_linear`, given by
-  postcomposition after the residue fields are identified.
+  structure over the residue field.
+* `schemeTangentMap`: the differential, given by postcomposition after the residue fields are
+  identified.
+
+## Implementation details
+
+The vector space structure and the differential are chosen from
+`exists_tangentVectors_vectorSpace` and `exists_tangentMap_linear`.
 
 ## References
 
@@ -42,15 +47,15 @@ def schemeTangentSpace (k : Type u) [Field k] (X : Scheme.{u})
   {θ : Spec (.of (DualNumber K)) ⟶ X //
     c ≫ θ = X.fromSpecResidueField x ∧ θ ≫ p = q ≫ X.fromSpecResidueField x ≫ p}
 
-/-- The additive group of tangent vectors is selected from the vector-space existence lemma.
-Its zero is the constant point morphism; its addition is gluing along the common closed point,
-followed by the map sending both square-zero coordinates to epsilon. -/
+/-- The additive group of tangent vectors. Its zero is the constant point morphism; its addition
+is gluing along the common closed point, followed by the map sending both square-zero
+coordinates to epsilon. -/
 noncomputable instance schemeTangentSpaceAddCommGroup
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     AddCommGroup (schemeTangentSpace k X p x) :=
   Classical.choose (exists_tangentVectors_vectorSpace k X p x).2.2.2
 
-/-- The canonical residue-field module structure, selected together with its additive group.
+/-- The canonical residue-field module structure on tangent vectors.
 Multiplication by `t` is precomposition with the spectrum of the map epsilon to `t * epsilon`. -/
 noncomputable instance schemeTangentSpaceModule
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
@@ -58,10 +63,9 @@ noncomputable instance schemeTangentSpaceModule
   Classical.choose
     (Classical.choose_spec (exists_tangentVectors_vectorSpace k X p x).2.2.2)
 
-/-- The differential of a morphism over `k` with bijective induced residue-field map.
-The target scalar action is transported by the inverse residue-field isomorphism. The chosen
-linear map has value `d ≫ θ.val ≫ f`, where `d` is the induced identification of dual-number
-spectra. This is postcomposition with `f` under the identification of the two residue fields. -/
+/-- The differential at `x` of a morphism over `k` with bijective residue-field map, linear for
+the target scalar action transported along the inverse residue-field isomorphism. It is
+postcomposition with `f` under the identification of the two residue fields. -/
 noncomputable def schemeTangentMap
     (k : Type u) [Field k] (X Y : Scheme.{u})
     (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k))

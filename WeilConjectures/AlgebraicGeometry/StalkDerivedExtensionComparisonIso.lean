@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsIso
 
 ## References
 
-* Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6; perfect.tex,
-  equation-bc preceding Tag 0DJ8 (Tag 0DJ7).
+* Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6; equation-bc preceding Tag 0DJ8 (Tag 0DJ7).
 -/
 
 @[expose] public section

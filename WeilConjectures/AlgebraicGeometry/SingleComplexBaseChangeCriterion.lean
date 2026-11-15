@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 ## References
 
-* Stacks Project, perfect.tex, Tags 0DJ8, 0DJ9 and 0DJA(1).
+* Stacks Project, Tags 0DJ8, 0DJ9 and 0DJA(1).
 -/
 
 @[expose] public section

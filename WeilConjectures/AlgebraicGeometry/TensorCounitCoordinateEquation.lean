@@ -16,16 +16,7 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 
 ## References
 
-* Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1).
-* Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1). Proof: first suppose both
-  complexes are K-flat. The canonical comparison predicate supplies a chain isomorphism and its
-  coordinate equation. The prescribed equations on the coproduct summands determine the chain map
-  uniquely: apply the inverse of one comparison and check the resulting endomorphism on every tensor
-  summand. The invertible module tensor comparison cancels, giving the identity on each summand.
-  Thus that coordinate equation holds for the specified comparison. For arbitrary P and G, choose
-  K-flat resolutions P0 -> P and G0 -> G, as in Stacks 06YS. Their images under Q are isomorphisms.
-  The localization tensor map is natural in both factors. Pullback of the total tensor complex has
-  the chain comparison specified by the module tensor isomorphisms.
+* Stacks Project, Tags 079U, 0DJA(1) and 06YS.
 -/
 
 @[expose] public section
@@ -45,7 +36,7 @@ attribute [local instance] pullbackDescentModuleTensor moduleSymmetric modulePre
 
 attribute [local instance] Scheme.Modules.globalPullbackMatesColimits
 
-/-- Use the cached small-colimit structure directly for each diagram. -/
+/-- Small diagrams of sheaves of modules on `S` have colimits. -/
 local instance tensorCounit_colimit (S : Scheme.{u}) (J : Type) [Category.{0} J]
     (F : J ⥤ SheafOfModules.{u} (moduleRings S.toRingedSpace)) : HasColimit F :=
   ((Scheme.Modules.globalPullbackMatesColimits S).has_colimits_of_shape J).has_colimit F
@@ -58,7 +49,7 @@ local instance tensorCounit_hasMapBifunctor (S : Scheme.{u})
   intro n
   exact tensorCounit_colimit S _ _
 
-/-- The cochain-complex presentation uses the same total coproducts. -/
+/-- Cochain-complex tensor total complexes have their defining coproducts. -/
 local instance tensorCounit_cochainHasMapBifunctor (S : Scheme.{u})
     (P G : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) :
     CochainComplex.HasMapBifunctor P G
@@ -232,8 +223,7 @@ private theorem tensorCounit_resolution_transfer
   exact (reassoc_of% heq) v
 
 /-- The shared pullback counit is compatible with the localization tensor maps,
-without a K-flatness assumption on either argument. The chain comparison is
-specified on every tensor summand, so its underlying map is uniquely determined. -/
+without a K-flatness assumption on either argument. -/
 theorem tensorCounit_coordinateEquation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

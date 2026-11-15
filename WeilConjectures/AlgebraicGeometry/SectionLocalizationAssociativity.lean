@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SectionRepresentativeTensorArrow
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tags 06YU, 0FPT, and 07A4.
+* Stacks Project, Tags 06YU, 0FPT, and 07A4.
 -/
 
 @[expose] public noncomputable section

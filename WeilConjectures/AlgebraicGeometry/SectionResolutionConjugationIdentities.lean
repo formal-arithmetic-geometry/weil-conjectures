@@ -20,7 +20,7 @@ chosen tensor-pullback transformations. Composition in Lean is left to right.
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
+* Stacks Project, Tags 07A4 and 0G7E.
 -/
 
 @[expose] public noncomputable section

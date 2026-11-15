@@ -19,7 +19,7 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 ## References
 
-* Stacks Project, algebra.tex, Lemmas 00KH and 00FV.
+* Stacks Project, Lemmas 00KH and 00FV.
 -/
 
 set_option linter.style.haveILetI false

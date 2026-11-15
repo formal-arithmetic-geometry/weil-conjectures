@@ -20,12 +20,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Projection-formula and representative-comparison step for self-Tor.
-
-This is the intermediate statement used to separate the qcqs projection formula
-from the final choice of the literal termwise pullback representative.  Its
-proof is the derived projection formula, exactness of closed-immersion
-pushforward, and transport along the displayed complex isomorphism. -/
+/-- Projection-formula and representative-comparison step for self-Tor. -/
 theorem nonempty_selfTor_projection_homology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

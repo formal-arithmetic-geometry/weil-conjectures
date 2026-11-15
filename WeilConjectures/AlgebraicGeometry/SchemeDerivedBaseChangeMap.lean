@@ -13,16 +13,24 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
-/-!
- # The derived base-change morphism of O-modules
+/-! # The derived base-change morphism of O-modules
+
+For a commutative square of schemes, `schemeDerivedBaseChangeMap` is the canonical map
+`Lg^* Rf_* E ⟶ Rf'_* Lg'^* E`.
+
+## Implementation details
+
+The base-change map is defined by the counit description: transpose under `Lf'^* ⊣ Rf'_*` the
+composite `Lf'^* Lg^* Rf_* E ≅ Lg'^* Lf^* Rf_* E ⟶ Lg'^* E`. The functor comparisons are those
+selected from the left-derived universal property in `exists_derivedPullbackComposition`, and
+the adjunctions are the ones of `exists_schemeDerivedAdjunction`, pinned to the same
+left-derived counits and to the recorded right-derived units; no independent adjunction choice
+is made.
 
 ## References
 
 * Stacks Project, Cohomology, Remark 08HY; equivalently the unit construction of Lemma 02N7.
-* Stacks, Tag 079W. Proof: nonempty_derivedPullbackAdjunction gives existence of an unbounded
-  adjunction. To specify the canonical one, the module tensor pullback is left adjoint to module
-  direct image by. Their left and right derived functors are the recorded derivedPullback and
-  schemeDerivedDirectImage. Apply the abstract derived adjunction theorem (Tag 09T5).
+* Stacks Project, Tags 079W and 09T5.
 -/
 
 @[expose] public section
@@ -159,19 +167,8 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
 
 
 
-/-- The canonical base-change map for a commutative square of schemes. In particular
-apply this to the chosen fibre product, or to the cartesian square obtained by
-restricting its upper row to an open W and its inverse image W'.
-
-This is the counit description of Stacks, Remark 08HY: transpose under Lf'^* ⊣ Rf'_*
-the composite Lf'^* Lg^* Rf_* E ≅ Lg'^* Lf^* Rf_* E → Lg'^* E.
-It is equivalently the unit description of Lemma 02N7 in the node: transpose under
-Lg^* ⊣ Rg_* the unit map followed by direct-image composition comparisons.
-Those comparisons are the mates of the same derived-pullback composition comparisons.
-The functor comparisons below are selected from their left-derived universal property,
-not arbitrary isomorphisms. The adjunction Hom equivalences are pinned to the same
-left-derived counits as these comparisons and to the recorded right-derived units, via
-`exists_schemeDerivedAdjunction`; no independent adjunction choice is allowed. -/
+/-- The canonical base-change map `Lg^* Rf_* E ⟶ Rf'_* Lg'^* E` for a commutative square
+of schemes `g' ≫ f = f' ≫ g`. -/
 def schemeDerivedBaseChangeMap
     [∀ Y : Scheme.{uBC},
       HasDerivedCategory.{wBC} (SheafOfModules.{uBC} (moduleRings Y.toRingedSpace))]

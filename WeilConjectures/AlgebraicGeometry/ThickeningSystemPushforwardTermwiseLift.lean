@@ -15,7 +15,8 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
-/-!
+/-! # Termwise lifts along a system of thickenings
+
 ## References
 
 * Stacks, Remark 088F, Lemma 087T and equation 0880.

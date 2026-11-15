@@ -19,6 +19,13 @@ import WeilConjectures.AlgebraicGeometry.SelfExtTorResolutionModel
 
 /-! # Evaluation between self Ext and self Tor
 
+## Implementation details
+
+`selfExt_tor_dual_chart` is existential: `κ` is built from chosen resolutions (a common complex `T`
+and a K-injective resolution `J` of `O_Z`, with chosen identifications of self Ext and self Tor
+with the homology of `Hom(T, J)` and of `T`), and it is not asserted to be the canonical Ext–Tor
+evaluation map.
+
 ## References
 
 * Stacks Project, Tags 0BQY, 08DH and 068G.
@@ -30,15 +37,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
--- Transport through the fixed derived tensor involves several composed object types.
 /-- There is a global morphism `κ` from the pulled-back self-Ext sheaf to the dual of the
-pulled-back self-Tor sheaf which is an isomorphism on every regular affine chart.
-
-This statement is existential: `κ` is built from chosen resolutions (a common complex `T`
-and a K-injective resolution `J` of `O_Z`, with chosen identifications of self Ext and self
-Tor with the homology of `Hom(T, J)` and of `T`), and it is not asserted to be the canonical
-Ext–Tor evaluation map. Only the existence of a global morphism that is chartwise invertible
-is used downstream, to glue the chartwise inverses. -/
+pulled-back self-Tor sheaf which is an isomorphism on every regular affine chart. -/
 theorem selfExt_tor_dual_chart
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

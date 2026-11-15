@@ -46,13 +46,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 * Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ;
   Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
-* Stacks 06YU, fixed equivalence transport.
-* Stacks 06YN. Proof: the degree-n index consists of pairs of integers with sum n, hence is
-  countable. The internal Grothendieck module category has this coproduct.
-* Stacks 05RU.
-* Stacks 070H. Proof: a chain map from an acyclic complex is null-homotopic on one side exactly when
-  its underlying linear maps give that same null-homotopy on the other. Transfer the functorial
-  internal K-injective resolution through the equivalence.
+* Stacks Project, Tags 06YU, 06YN, 05RU and 070H.
 -/
 
 @[expose] public noncomputable section
@@ -184,8 +178,7 @@ variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- Read the source functor of the specified comparison without re-inferring its
-large derived-functor instance arguments. This returns the actual source itself. -/
+/-- The source functor `F` of a natural isomorphism `F ≅ G`. -/
 @[implicit_reducible]
 def comparisonSource {C : Type u₁} [Category.{v₁} C]
     {D : Type u₂} [Category.{v₂} D] {F G : C ⥤ D} (_e : F ≅ G) : C ⥤ D := F
@@ -394,9 +387,8 @@ def transportedDerivedMonoidal (X : Scheme.{u}) :
     MonoidalCategory (DerivedCategory (modules Λ X)) :=
   ResolvingOplaxConstraints.TensorFunctorTransport.monoidal (derivedEquivalence Λ X)
 
-/-- The canonical sectionwise derived tensor, constructed by exact equivalence transport.
-Its K-flat representative characterization is stated below, so this construction uses
-precisely the ordinary sectionwise derived tensor, with no arbitrary bifunctor choice. -/
+/-- The canonical sectionwise derived tensor, transported along the derived section
+equivalence `derivedEquivalence`. -/
 def tensor (X : Scheme.{u}) :
     DerivedCategory (modules Λ X) × DerivedCategory (modules Λ X) ⥤
       DerivedCategory (modules Λ X) :=

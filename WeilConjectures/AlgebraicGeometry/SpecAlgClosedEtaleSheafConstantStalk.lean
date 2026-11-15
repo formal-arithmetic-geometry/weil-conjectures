@@ -8,7 +8,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
-/-!
+/-! # Étale stalks over an algebraically closed field
+
 ## References
 
 * Stacks Project, Lemma 59.39.3 (Tag 0A3H).
@@ -22,8 +23,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The identity geometric stalk is computed by the global sections map in the
-algebraically closed case. -/
+/-- For an étale sheaf `G` on `Spec Ω` with `Ω` algebraically closed, the map from global
+sections to the stalk at the identity geometric point is bijective. -/
 theorem spec_algClosed_etale_sheaf_constant_stalk
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf ((Spec (CommRingCat.of Ω)).smallEtaleTopology) (Type (u + 1))) :

@@ -14,7 +14,8 @@ public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.AlgebraicGeometry.PushedResolutionPositiveHomologyZero
 
-/-!
+/-! # The pushed Zariski-étale resolution is a quasi-isomorphism
+
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).

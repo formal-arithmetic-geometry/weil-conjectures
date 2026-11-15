@@ -9,10 +9,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.SeparatedOpenInduction
 
-/-!
+/-! # Intersections of quasi-compact and affine opens
+
 ## References
 
-* Stacks Project, Cohomology of Schemes, Lemma 08DR, second paragraph.
+* Stacks Project, Cohomology of Schemes, Lemma 08DR.
 -/
 
 @[expose] public section
@@ -23,10 +24,9 @@ open TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- The intersection property needed for quasi-compact open induction.
-
-The overlap of a quasi-compact open with an affine open is separated and quasi-compact;
-applying separated quasi-compact open induction proves `P` on the overlap. -/
+/-- The intersection property for quasi-compact open induction: if `P` holds on affine opens
+and is preserved by the union step, then it holds on the intersection of a quasi-compact open
+with an affine open. -/
 theorem property_intersection_of_quasiCompact_affine
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (P : X.Opens → Prop)
     (h_affine : ∀ U : X.Opens, IsAffineOpen U → P U)

@@ -8,11 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonData
 import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
-/-!
+/-! # Unit isomorphism for canonical tensor comparisons on ringed topoi
+
 ## References
 
-* Stacks Project, Modules on Sites, Tag 03EL.. Proof in words: The proof constructs the unit map
-  from pure tensors and scalar extension.
+* Stacks Project, Modules on Sites, Tag 03EL.
 -/
 
 @[expose] public section
@@ -211,8 +211,8 @@ private theorem comparison_q_hom_ext
     Functor.map_comp, Category.assoc] using h
 
 -- Transport scalar extension and evaluate the comparison on generalized unit tensors.
-/--
-The proof constructs the unit map from pure tensors and scalar extension. -/
+/-- A canonical tensor comparison for `L` yields an isomorphism from `L` of the unit sheaf of
+modules to the unit, compatible with the right unitors. -/
 theorem canonicalRingedTensorComparison_unit_exists
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

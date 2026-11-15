@@ -9,7 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMap
 import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineChartDerivation
 
-/-!
+/-! # Injectivity of the affine sections map for relative differentials
+
 ## References
 
 * Stacks Project, Tag 01UT.
@@ -23,10 +24,8 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine comparison map is injective by the uniqueness part of the universal
-property of Kähler differentials. Apply the affine Spec comparison to identify the
-target with the module of Kähler differentials, then use uniqueness of maps preserving
-the universal derivation. -/
+/-- A linear map from affine Kähler differentials to sections of relative differentials that
+is compatible with the derivations is injective. -/
 theorem relativeDifferentials_affine_sections_map_injective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]

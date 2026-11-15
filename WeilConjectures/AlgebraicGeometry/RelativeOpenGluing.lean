@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionHomGluing
 
 ## References
 
-* Stacks Project, Tag 08DG, Lemma cohomology-lemma-glue.
+* Stacks Project, Tag 08DG.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Assemble relative gluing from an ambient object and gluing of morphisms.
-The compatibility calculation only uses functoriality and composition. -/
+/-- Assemble relative gluing from an ambient object and gluing of morphisms. -/
 private theorem exists_relative_gluing_of_ambient
     {C D CW CV CI : Type*} [Category C] [Category D]
     [Category CW] [Category CV] [Category CI]

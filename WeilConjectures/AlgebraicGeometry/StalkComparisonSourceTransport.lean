@@ -19,9 +19,8 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtensio
 
 ## References
 
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8; More on Algebra, derived change of
-  rings (Tag 06Y6).
+* Stacks Project, Tag 0DJ8 (the base change map preceding it).
+* Stacks Project, More on Algebra, derived change of rings, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -134,8 +133,7 @@ private theorem lift_tensor_iso
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Additivity of the module stalk functor, by additivity of abelian-group stalks.
--/
+/-- The module stalk functor is additive. -/
 instance comparisonStalkAdditive (Y : Scheme.{u}) (y : Y) :
     (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).Additive where
   map_add := by
@@ -148,8 +146,7 @@ instance comparisonStalkAdditive (Y : Scheme.{u}) (y : Y) :
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-/-- Exactness of the module stalk functor, from the shared stalk exactness theorem.
--/
+/-- The module stalk functor preserves homology. -/
 instance comparisonStalkHomology (Y : Scheme.{u}) (y : Y) :
     (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).PreservesHomology := by
   apply Functor.preservesHomology_of_map_exact
@@ -157,30 +154,27 @@ instance comparisonStalkHomology (Y : Scheme.{u}) (y : Y) :
   exact ((RingedSpace.module_stalk_exact Y.toRingedSpace T.f).2.2.2.2
     T.X₃ T.f T.g T.zero).mp hT y
 
-/-- (blueprint: lem-pc-stalk-comparison-source-transport) -/
+/-- The module stalk functor preserves finite limits. -/
 instance comparisonStalkLimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteLimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteLimits_of_preservesHomology _
 
-/-- (blueprint: lem-pc-stalk-comparison-source-transport) -/
+/-- The module stalk functor preserves finite colimits. -/
 instance comparisonStalkColimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteColimits_of_preservesHomology _
 
-/-- The exact stalk functor on derived categories, with the standard module localization.
--/
+/-- The exact stalk functor on derived categories, with the standard module localization. -/
 def comparisonDerivedStalk (Y : Scheme.{u}) (y : Y) :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} (Y.presheaf.stalk y))
   (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapDerivedCategory
 
-/-- Derived stalk cohomology, as a functor on the sheaf derived category.
--/
+/-- Derived stalk cohomology, as a functor on the sheaf derived category. -/
 def comparisonStalkCohomology (Y : Scheme.{u}) (y : Y) (i : ℤ) :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} (Y.presheaf.stalk y))
   comparisonDerivedStalk Y y ⋙ DerivedCategory.homologyFunctor _ i
 
-/-- Identification of the derived stalk cohomology with the homology of the stalk complex.
--/
+/-- Identification of the derived stalk cohomology with the homology of the stalk complex. -/
 def comparisonStalkHomologyIso (Y : Scheme.{u}) (y : Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (i : ℤ) :
@@ -192,8 +186,7 @@ def comparisonStalkHomologyIso (Y : Scheme.{u}) (y : Y)
       ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapDerivedCategoryFactors.app P) ≪≫
     (DerivedCategory.homologyFunctorFactors _ i).app _
 
-/-- Naturality of the identification of derived stalk cohomology.
--/
+/-- Naturality of the identification of derived stalk cohomology. -/
 @[reassoc]
 theorem comparisonStalkHomologyIso_naturality (Y : Scheme.{u}) (y : Y)
     {P Q : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
@@ -216,16 +209,14 @@ variable {X X' S S' : Scheme.{u}}
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
-/-- Exact derived restriction of stalk modules to the base stalk ring.
--/
+/-- Exact derived restriction of stalk modules to the base stalk ring. -/
 def comparisonBaseRestriction (z : X') :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} (A g' z))
   letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))
   letI := leftAlgebra f g' z
   (ModuleCat.restrictScalars.{u} (algebraMap (R f g' z) (A g' z))).mapDerivedCategory
 
-/-- The model's input identifies with the derived restriction of the derived stalk.
--/
+/-- The model's input identifies with the derived restriction of the derived stalk. -/
 def comparisonModelInputIso (z : X')
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     letI := HasDerivedCategory.standard (ModuleCat.{u} (A g' z))
@@ -248,8 +239,7 @@ def comparisonModelInputIso (z : X')
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).mapDerivedCategoryFactors
         |>.symm.app P)
 
-/-- The counit-compatible isomorphism between the two derived tensor functors.
--/
+/-- The counit-compatible isomorphism between the two derived tensor functors. -/
 def comparisonModelDerivedIso (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     letI := leftAlgebra f g' z
@@ -271,8 +261,7 @@ def comparisonModelDerivedIso (z : X')
   exact Functor.leftDerivedNatIso M.derived N.derived M.counit N.counit
     (HomotopyCategory.quasiIso _ (.up ℤ)) (Iso.refl _)
 
-/-- The canonical B-linear cohomology transport before lifting to the tensor algebra.
--/
+/-- The canonical B-linear cohomology transport before lifting to the tensor algebra. -/
 def comparisonSourceUnderlyingIso (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :
@@ -302,7 +291,7 @@ def comparisonSourceUnderlyingIso (z : X')
     (N.cohomologyIso i).symm
 
 /-- The canonical underlying cohomology transport lifts uniquely to a tensor-algebra
-linear isomorphism. No K-flatness or morphism to a target complex is needed. -/
+linear isomorphism. -/
 theorem exists_comparisonSourceIso (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :

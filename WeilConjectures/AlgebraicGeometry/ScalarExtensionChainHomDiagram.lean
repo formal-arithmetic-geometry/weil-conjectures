@@ -21,7 +21,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 ## References
 
-* Stacks Project, perfect.tex, Tag 09RE, affine calculation.
+* Stacks Project, Tag 09RE, affine calculation.
 -/
 
 @[expose] public section

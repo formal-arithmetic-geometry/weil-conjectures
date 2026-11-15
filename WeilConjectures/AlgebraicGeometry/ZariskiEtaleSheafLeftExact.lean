@@ -10,14 +10,15 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Topology.Sheaves.Sheaf
 
-/-!
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+
+/-! # Left exactness of pullback from Zariski to étale sheaves
+
 ## References
 
 * Stacks Project, Sites, Lemma Tag 00X5, using Tags 00X3 and 00WJ.
 -/
-
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
-import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
 @[expose] public section
 
@@ -27,7 +28,8 @@ universe u v
 
 namespace AlgebraicGeometry
 
-/-- Left exactness of the canonical sheaf pullback, with arbitrary coefficient universe. -/
+/-- Sheaf pullback along a continuous representably flat functor from Zariski opens to the small
+étale site preserves finite limits, for sheaves of types in an arbitrary universe. -/
 theorem zariski_to_etale_sheaf_left_exact
     (X : Scheme.{u})
     (i : X.Opens ⥤ X.Etale)

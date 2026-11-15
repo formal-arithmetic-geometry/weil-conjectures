@@ -8,27 +8,23 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
-/-!
-## References
-
-* Stacks Project, Tags 04GW and 04GP. Proof: give Ω the algebra structure induced by the
-  geometric-point residue map. The existing strictHenselizationResidue theorem supplies a local-ring
-  structure on the coordinate-ring colimit C and says that its closed point maps to s(closedPoint
-  Ω). Every point of a local spectrum specializes to its closed point. Apply this in C to
-  e(closedPoint A), and in A to e.inv(closedPoint C), then map the latter specialization by e.hom.
-  The inverse identity gives specializations in both directions. Since Spec C is T0, e(closedPoint
-  A) = closedPoint C. Substitute in the structural-image equation.
--/
-
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
+
+/-! # The closed point of a strict henselization
+
+## References
+
+* Stacks Project, Tags 04GW and 04GP.
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 set_option autoImplicit false
 /-- The closed point of an affine presentation of a strict henselization maps to the
-selected geometric point. This is the backward half of the singleton-fibre theorem. -/
+selected geometric point. -/
 theorem strictHenselizationStructuralMap_closedPoint_eq
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]
     [CommRing A] [IsLocalRing A]

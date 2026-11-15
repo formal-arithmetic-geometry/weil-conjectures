@@ -15,14 +15,14 @@ import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Spreading a stalk nonzerodivisor generator to a Cartier equation
 
-The two statements are the ring assertion and the scheme assertion of the node.
+The two statements are the ring assertion and the scheme assertion.
 The ideal stalk in the latter is expressed by extending the ideal on an affine
 neighbourhood along the canonical germ homomorphism. This is the stalk ideal inside
 the structure-sheaf stalk, independently of the chosen affine neighbourhood.
 
 ## References
 
-* Stacks Project, divisors.tex, Tag 0AG8 (lemma-effective-Cartier-in-points), and Algebra, Tag 061L.
+* Stacks Project, Tag 0AG8, and Algebra, Tag 061L.
 -/
 
 @[expose] public section

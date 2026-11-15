@@ -12,18 +12,22 @@ import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 
 /-! # Scalar extension and geometric exchange
 
-proof.md, (2),
-coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47
-.
+This file defines the two routes of the rectangle comparing scalar extension along a map of
+coefficient rings `Λ ⟶ Λ'` with the exchange map of a cartesian square, both for the ambient
+derived categories and for their section realizations.
 
-All functors are the existing ordinary unbounded internal-module derived functors.
-The balancing maps are specified by their universal computation-counit normalization.
-The direct-image maps are their actual mates, without an invertibility assumption.
+## Implementation details
+
+All functors are the ordinary unbounded internal-module derived functors. The balancing maps
+are specified by their universal computation-counit normalization, and the direct-image maps
+are their mates, without an invertibility assumption. The section balancing isomorphism
+`sectionRectangleLambda` is chosen from `SectionPullNormalized`; it is uniquely determined by
+its comparison equation, since the section realization is essentially surjective and every
+other factor is invertible.
 
 ## References
 
-* Stacks 0E47.
-* Stacks 07A7.
+* Stacks Project, Tags 07A7 and 0E47 (coefficient dévissage).
 * Stacks 07A6.
 * Stacks 03EK, 07A6, 0D6D.
 -/
@@ -93,8 +97,8 @@ namespace AlgebraicGeometry.ProEtale.QuotientChange
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
-/-- The existing ambient exchange with the named internal functor interfaces exposed.
-This changes only its type presentation, retaining the exact unit-square-counit map. -/
+/-- The ambient exchange map of a chosen cartesian square: the mate of its scalar pullback
+square. -/
 def scalarAmbientExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
@@ -178,9 +182,8 @@ def scalarSectionPushComparison
         hom_inv_id := (congrArg (fun t ↦ t ≫ e.inv) hm).trans e.hom_inv_id
         inv_hom_id := (congrArg (fun t ↦ e.inv ≫ t) hm).trans e.inv_hom_id }
 
-/-- The section realization equation fixes the balancing isomorphism supplied by
-normalized pullback data. All other factors are invertible and realization is an
-equivalence, so the displayed property determines this isomorphism uniquely. -/
+/-- Normalized pullback data supply a section balancing isomorphism `d` satisfying the
+section realization equation. -/
 theorem sectionRectangleLambda_witness (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)
@@ -198,11 +201,8 @@ theorem sectionRectangleLambda_witness (φ : Λ ⟶ Λ') [IsMonHom φ]
   exact ⟨p.choose_spec.2.choose_spec.2.choose,
     p.choose_spec.2.choose_spec.2.choose_spec.2⟩
 
-/-- The section K-flat balancing isomorphism supplied by SectionPullNormalized.
-Its representative square uses the ordinary conjugate of the identity on sections.
-The final comparison equation uniquely determines this d: the section realization
-is essentially surjective and every other factor is invertible. Thus this choice
-selects the specified comparison, rather than an undetermined scalar isomorphism. -/
+/-- The section K-flat balancing isomorphism supplied by `SectionPullNormalized`, satisfying
+the section realization equation of `sectionRectangleLambda_witness`. -/
 def sectionRectangleLambda (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)
@@ -212,8 +212,8 @@ def sectionRectangleLambda (φ : Λ ⟶ Λ') [IsMonHom φ]
       ModuleRingedComparison.derivedPullback Λ h ⋙ sU.pair.derived :=
   (sectionRectangleLambda_witness φ h sU sV b p).choose
 
-/-- Section rho is the actual mate of the normalized section lambda under the
-independently specified ringed derived geometric adjunctions. -/
+/-- Section rho: the mate of `sectionRectangleLambda` under the ringed derived geometric
+adjunctions. -/
 def sectionRectangleRho (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)
@@ -225,8 +225,7 @@ def sectionRectangleRho (φ : Λ ⟶ Λ') [IsMonHom φ]
     (ModuleRingedComparison.derivedAdjunction Λ' h)
     (TwoSquare.mk _ _ _ _ (sectionRectangleLambda φ h sU sV b p).hom)).natTrans
 
-/-- Section exchange is the mate of the section geometric square compositor.
-This is the word in the last conjunct of GeometricAgreement, with g'=a and g=c. -/
+/-- Section exchange: the mate of the section geometric square compositor. -/
 def sectionRectangleExchange
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]

@@ -11,10 +11,11 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
-/-!
+/-! # Total cycles supported in column zero
+
 ## References
 
-* Stacks Project, Homology, Tag 09IZ, proof, final column-zero representative.
+* Stacks Project, Homology, Tag 09IZ.
 -/
 
 @[expose] public section

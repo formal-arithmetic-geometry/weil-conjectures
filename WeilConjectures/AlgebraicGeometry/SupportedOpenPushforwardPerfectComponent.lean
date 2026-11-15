@@ -13,7 +13,8 @@ import WeilConjectures.AlgebraicGeometry.SupportedOpenPushforwardComplementZero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
-/-!
+/-! # Perfectness of supported open pushforwards
+
 ## References
 
 * Stacks Project, Tag 08DP, using Tag 08FE and Definition 08CM.

@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationCohomologyComparison
 
 ## References
 
-* Stacks Project, Theorem 59.53.1, Tag 03Q9, first assertion.
+* Stacks Project, Theorem 59.53.1, Tag 03Q9.
 -/
 
 @[expose] public section
@@ -27,11 +27,9 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- For every abelian étale sheaf, the canonical strict-local restriction is an isomorphism.
-The germ map `r` is specified by its neighbourhood components; its existence and uniqueness
-are supplied by `existsUnique_strictHenselizationStalkRestriction`. The canonical map is
-`r ≫ strictHenselizationCohomologyComparison`, with target the cohomology of the inverse
-image along the first projection of the strict-local base change. -/
+/-- For every abelian étale sheaf, there is a strict-henselization stalk restriction `r` of the
+higher direct image whose composite with `strictHenselizationCohomologyComparison` is an
+isomorphism. -/
 theorem unrestricted_strictHenselization_stalk
     {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type w} [Field Ω] [IsAlgClosed Ω]

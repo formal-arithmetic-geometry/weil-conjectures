@@ -20,7 +20,8 @@ import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 import WeilConjectures.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison
 import Mathlib.CategoryTheory.Yoneda
 
-/-!
+/-! # Perfect case of the smooth proper tensor comparison
+
 ## References
 
 * Stacks Tag 0A9T.

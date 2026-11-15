@@ -11,7 +11,8 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.CategoryTheory.Abelian.Images
 
-/-!
+/-! # Range of the stalk map of an image inclusion
+
 ## References
 
 * Stacks Project, Modules, Lemma 01AG.
@@ -25,10 +26,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Stalk exactness identifies the range of the stalk image inclusion with the
-range of the stalk map. This is the image part of the proof of
-`ideal_multiplication_stalk_range`.
--/
+/-- At every point, the stalk map of the image inclusion of `f` has the same range as the
+stalk map of `f`. -/
 theorem stalk_image_inclusion_range {X : Scheme.{u}}
     {M N : X.Modules} (f : M ⟶ N) (x : X) :
     let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x

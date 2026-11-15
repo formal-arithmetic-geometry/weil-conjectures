@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 
 ## References
 
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
+* Stacks Project, equation-bc preceding Tag 0DJ8.
 -/
 
 @[expose] public section

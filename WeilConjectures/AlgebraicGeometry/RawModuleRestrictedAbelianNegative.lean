@@ -10,7 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.Algebra.Category.Grp.Zero
 
-/-!
+/-! # Negative-degree raw and restricted étale cohomology
+
 ## References
 
 * Stacks Project, Tags 03FD and 03Q8.

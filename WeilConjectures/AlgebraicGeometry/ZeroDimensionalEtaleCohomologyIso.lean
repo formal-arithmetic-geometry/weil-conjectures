@@ -11,7 +11,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 
-/-!
+/-! # Degree-zero étale cohomology of a zero-dimensional scheme over an algebraically closed field
+
 ## References
 
 * Stacks Project, Tags 00KH, 00FV, 054M, 03QO, 03SI and 03Q1.

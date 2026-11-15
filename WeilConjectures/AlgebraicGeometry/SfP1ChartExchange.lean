@@ -11,8 +11,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLower
 
 /-! # Exchange before the projective-line trace
 
-The chart comparison factors through exchange for the self-product square.
-This is an equation before applying a trace, independent of any splitting family.
+The chart comparison factors through exchange for the self-product square, as an equation
+before applying the projective-line trace.
 -/
 
 @[expose] public noncomputable section
@@ -240,7 +240,7 @@ attribute [local irreducible] upperStar lowerStar Scheme.finiteEtaleTateLine
   ordinaryFiniteSinglePullbackIso
   ordinaryFiniteSingleExactPullbackIso
 
--- The cached functor now stores ordinaryFiniteDegreeZero as its object field.
+-- The cached functor stores ordinaryFiniteDegreeZero as its object field.
 -- Expose this projection locally while retaining the cached comparison isomorphisms.
 attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
 
@@ -523,7 +523,7 @@ private theorem compared_composite
   simp only [Iso.inv_hom_id_app_assoc]
   rw [hc]
 
-/-- Use the cached object field without unfolding the derived embedding. -/
+/-- The object of `ordinaryFiniteSingleFunctor A T` at `K` is `ordinaryFiniteDegreeZero A T K`. -/
 private theorem singleFunctor_obj (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (K : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (ordinaryFiniteSingleFunctor A T).obj K = ordinaryFiniteDegreeZero A T K := rfl
@@ -630,8 +630,7 @@ private lemma chart_opposite (S : Scheme.{u}) (a : Bool) :
   · exact (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2))
       (ProjectiveLine S ↘ S)).isoPullback_hom_fst
 
-/-- The ordinary exchange from a product projection, with its twist endpoint corrected.
-It is defined before, and independently of, any trace or decomposition. -/
+/-- The ordinary exchange from a product projection, with its twist endpoint corrected. -/
 @[irreducible]
 def projectionExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -707,8 +706,8 @@ private theorem chartExchange_aux
   dsimp only [ordinaryFiniteP1DiagonalTarget] at h ⊢
   simpa only [projectionExchange, Iso.app_inv, Category.assoc] using h
 
-/-- The chart pushforward is product exchange followed by projective-space exchange.
-Neither side contains a trace, a Chern class, or a splitting family. -/
+/-- The chart pushforward is product exchange followed by projective-space exchange,
+as an equation before applying any trace. -/
 theorem chartExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

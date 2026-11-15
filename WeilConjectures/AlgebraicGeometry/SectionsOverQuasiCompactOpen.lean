@@ -106,14 +106,10 @@ private theorem colimit_eval_injective (D : ℕ ⥤ AddCommGrpCat.{u})
       exact (ConcreteCategory.congr_hom (colimit.w D f) x).symm
     _ = 0 := by rw [hf]; exact map_zero _
 
-/-- Sections over the complement of a finite type quasi-coherent ideal on a quasi-compact
-scheme. The open `U` is specified by surjectivity of the stalk inclusion, equivalently
-by the stalk ideal being the whole local ring. The diagrams are identified with their
-Hom groups by `e` and `e'`; their maps are exactly precomposition by the inclusions of
-powers, and, in the quotient case, postcomposition by the induced quotient maps.
-The cocones take a homomorphism to its value on the section `one n` above `1` on `U`.
-In the quotient case this value is transported back through the quotient map on `U`.
-The annihilator subsheaves are specified on every open, including all smaller opens. -/
+/-- Let `I` be a finite type quasi-coherent ideal on a quasi-compact scheme and `U` the open
+where `I` is the unit ideal. For quasi-coherent `F`, the map `colim_n Hom(Iⁿ, F) → Γ(F, U)` is
+injective; if `X` is quasi-separated, `colim_n Hom(Iⁿ, F / Aₙ) → Γ(F, U)` is bijective, where
+`Aₙ ⊆ F` is the subsheaf annihilated by `Iⁿ`. -/
 theorem sections_over_quasiCompact_open {X : Scheme.{u}} [CompactSpace X]
     {I : X.Modules} (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
     [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] :

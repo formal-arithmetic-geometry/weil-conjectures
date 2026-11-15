@@ -9,7 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-/-!
+/-! # Chart compatibility for the relative spectrum
+
 ## References
 
 * Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX.

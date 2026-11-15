@@ -17,12 +17,11 @@ import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
-/-!
+/-! # The second-page coproduct comparison for truncated direct images is an epimorphism
+
 ## References
 
-* Stacks Project, Tag 08DZ, second-page direct-sum reduction, using Tag 07TB for filtered colimits
-  and hence direct sums of module sheaves. Tag 015J identifies these ordinary higher images as
-  second-page terms. This is the surjectivity half only.
+* Stacks Project, Tags 08DZ, 07TB and 015J.
 -/
 
 @[expose] public section

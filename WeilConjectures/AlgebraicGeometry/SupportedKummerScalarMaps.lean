@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 
-/-! Normalized constant coefficient maps for supported scalar extension.
+/-! # Normalized constant coefficient maps for supported scalar extension
 
 ## References
 
@@ -108,10 +108,9 @@ private theorem normalizedConstantMap_apply {R S : Type (u + 1)} [CommRing R]
   rw [normalizedConstantMap_top] at hn
   exact hn
 
-/-- Construct the normalized coefficient maps by the constant-sheaf adjunction and record their
-component formulas. Proof: use the adjunction hom-equivalence to define each map from the
-terminal generator, then use naturality of the sheafification unit to transport the terminal
-formula along every étale object. -/
+/-- For a ring map `φ : ZMod N → A` there are maps from the constant sheaf
+`ZMod N` to the constant sheaf `A` (viewed via `φ`) on `D` and on `T` sending the class of `r`
+to that of `φ r`. -/
 theorem exists_supported_kummer_scalar_maps
     (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (φ : ULift.{u + 1} (ZMod N) →+* A)

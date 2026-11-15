@@ -31,7 +31,7 @@ import WeilConjectures.AlgebraicGeometry.RingedComplexTensorPullback
 
 ## References
 
-* Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tag 07A4.
+* Stacks Project, Tag 0A0E; Tag 07A4.
 -/
 
 @[expose] public section

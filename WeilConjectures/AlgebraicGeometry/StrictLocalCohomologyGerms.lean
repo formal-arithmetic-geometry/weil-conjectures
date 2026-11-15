@@ -14,9 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
 
 ## References
 
-* Stacks Project, Tags 03Q8 and 03Q9. The derived Hom comparison is the explicit free-abelian-sheaf
-  construction used in AbelianHigherDirectImagePresheaf.
-* Stacks, Tags 03Q9 and 03QO.
+* Stacks Project, Tags 03Q8, 03Q9 and 03QO.
 -/
 
 @[expose] public section
@@ -124,7 +122,7 @@ noncomputable def strictLocalCohomologyPresheaf {S : Scheme.{v}}
 
 /-- The canonical map from derived sections to sections of the cohomology sheaf.
 It takes a derived morphism to its degree-zero homology, evaluates the free generator,
-and uses the homology shift isomorphism. No sheafification isomorphism is chosen. -/
+and uses the homology shift isomorphism. -/
 noncomputable def strictLocalCohomologyGermMap {S : Scheme.{v}}
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) : strictLocalCohomologyPresheaf L n ⟶

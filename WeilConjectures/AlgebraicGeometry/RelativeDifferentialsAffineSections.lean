@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapB
 ## References
 
 * Stacks Project, Tag 01UT.
-* Stacks Project, Tag 01UT; Tag 08S2, affine calculation.. Proof: restrict differentials along the
+* Stacks Project, Tag 01UT; Tag 08S2, affine calculation. Proof: restrict differentials along the
   open immersion of `U`, using `relativeDifferentialsRestrictIso`. Factor the restricted morphism
   through `V` and use `relativeDifferentialsCompIso` to remove the open immersion of the base.
   Identify `U` and `V` with the spectra of their section rings, using their canonical affine

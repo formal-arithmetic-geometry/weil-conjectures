@@ -19,7 +19,8 @@ import WeilConjectures.AlgebraicGeometry.SmoothProperQCohData
 import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 
-/-!
+/-! # Quasi-coherence and monoidal data for the projection formula of a proper morphism
+
 ## References
 
 * Stacks Project, Tag 0A9T.

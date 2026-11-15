@@ -11,11 +11,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackPresentation
 import Mathlib.CategoryTheory.Sites.Spaces
 
-/-!
+/-! # Local quasi-coherence of the tensor pullback of a sheaf of modules
+
 ## References
 
-* Stacks Project, Modules, Tag 01BG, Lemma 17.10.4. The proof chooses affine-style presentation
-  neighbourhoods and transports them through inverse image and extension of scalars.
+* Stacks Project, Modules, Tag 01BG, Lemma 17.10.4.
 -/
 
 @[expose] public section

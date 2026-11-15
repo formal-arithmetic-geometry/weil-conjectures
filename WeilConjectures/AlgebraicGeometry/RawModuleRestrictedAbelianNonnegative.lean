@@ -10,7 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomComparison
 import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
 
-/-!
+/-! # Raw module cohomology versus restricted abelian cohomology in nonnegative degrees
+
 ## References
 
 * Stacks Project, Tags 03FD, 03Q8 and 09Z1.

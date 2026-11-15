@@ -13,7 +13,8 @@ public import Mathlib.CategoryTheory.Functor.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.CategoryTheory.Adjunction.Limits
 
-/-!
+/-! # The Zariski site as a subsite of the small étale site
+
 ## References
 
 * Stacks Project, Sites, Proposition Tag 00X6 and Lemma Tag 00X5; Morphisms, Tag 02GP; Schemes, Tag
@@ -72,7 +73,9 @@ private noncomputable def etaleImageAdjunction (X : Scheme.{u}) :
       apply (cancel_mono V.ι).mp
       exact (CategoryTheory.Over.w _).trans (CategoryTheory.Over.w _).symm }
 
-/-- Core site data for the Zariski-to-etale inclusion. -/
+/-- The inclusion of Zariski opens into the small étale site lifts the restriction functor, is
+cover preserving, continuous and representably flat, preserves finite limits, and sends `⊤` to a
+terminal object. -/
 theorem zariski_to_etale_core (X : Scheme.{u}) :
     ∃ (i : X.Opens ⥤ X.Etale),
       (i ⋙ Scheme.Etale.forget X = X.restrictFunctor) ∧
@@ -81,7 +84,7 @@ theorem zariski_to_etale_core (X : Scheme.{u}) :
       Nonempty (IsTerminal (i.obj ⊤)) ∧
       i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology ∧
         RepresentablyFlat i := by
-  -- The open-image adjunction supplies the limit comparisons in the planned argument.
+  -- The open-image adjunction supplies the limit comparisons.
   let i := openEtaleInclusion X
   let : i.IsRightAdjoint := (etaleImageAdjunction X).isRightAdjoint
   let : PreservesFiniteLimits i := inferInstance

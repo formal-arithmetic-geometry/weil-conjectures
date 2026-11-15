@@ -91,8 +91,7 @@ private noncomputable def globalStalkIso (R : CommRingCat.{u}) [IsLocalRing R] :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Scalar extension along a ring isomorphism agrees with restriction along its inverse.
-Use uniqueness of left adjoints, followed by composition of extension of scalars. -/
+/-- Scalar extension along a ring isomorphism agrees with restriction along its inverse. -/
 private noncomputable def extendScalarsRingIso {A B C : Type u}
     [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (e : B ≃+* C) :

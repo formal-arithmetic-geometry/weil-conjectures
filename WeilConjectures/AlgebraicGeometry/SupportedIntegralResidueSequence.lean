@@ -15,11 +15,7 @@ The integral generator is the actual quotient projection, including its value on
 
 ## References
 
-* Stacks 0152, 06YY and 0GLZ. Proof: The constant integer-to-residue sequence is exact:
-  sheafification is exact and the elementary integer sequence has kernel nZ. A closed immersion is
-  finite, so its etale direct image is exact. Apply this direct image to the constant sequence. The
-  constant-sections adjunction identifies its quotient map with the published integral generator.
-  Positivity ensures multiplication by n is monic, including n=1.
+* Stacks Project, Tags 0152, 06YY and 0GLZ.
 -/
 
 @[expose] public noncomputable section
@@ -163,7 +159,7 @@ private theorem ordinaryIntegralResidueSequence (T : Scheme.{u}) (n : ℕ) (hn :
 
 /-- For a closed immersion i:D→T of schemes and n>0, the maps n:i_*Z_D→i_*Z_D and the normalized
 integral generator i_*Z_D→forget(i_*(ULift(Z/n))_D) form a short exact sequence of abelian etale
-sheaves [def-weil-pbc-direct-image, def-asd-ordinary-finite-p1-kummer-class]. -/
+sheaves. -/
 theorem supported_integral_residue_sequence {D T : Scheme.{u}} (i : D ⟶ T)
     [IsClosedImmersion i] (n : ℕ) (hn : 0 < n) :
     ∃ w : (n • 𝟙 ((lowerStar AddCommGrpCat.{u + 1} i).obj

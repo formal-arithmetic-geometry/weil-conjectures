@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 ## References
 
-* Stacks Project, Cohomology, Tag 0D5S and perfect.tex, Tag 09RE.
+* Stacks Project, Cohomology, Tag 0D5S and Tag 09RE.
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ noncomputable abbrev recordedPerfectHomComposition {X Y Z : Scheme.{u}} (f : X �
     derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
   recordedDerivedPullbackComposition f g
 
-/-- The counit-pinned comparison for a base-change arrow. This is the explicit
-construction used by `perfectDescentComparison`, with no independently chosen data. -/
+/-- The counit-pinned comparison of derived pullbacks for a base-change arrow. -/
 noncomputable def recordedPerfectHomComparison {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) :
     derivedPullback (pullback.fst s T'.hom) ≅
@@ -50,14 +49,14 @@ noncomputable def recordedPerfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
   (recordedPerfectHomComparison s g).hom.app P ≫
     (derivedPullback (baseChangeMap s g)).map f ≫ (recordedPerfectHomComparison s g).inv.app Q
 
-/-- (blueprint: lem-pc-recorded-perfect-hom-transport) -/
+/-- Hom transport along a base-change arrow preserves identities. -/
 @[simp] theorem recordedPerfectHomMap_id {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) (P : schemeDerivedCategory X) :
     recordedPerfectHomMap s g (𝟙 ((derivedPullback (pullback.fst s T.hom)).obj P)) =
       𝟙 _ := by
   simp [recordedPerfectHomMap]
 
-/-- (blueprint: lem-pc-recorded-perfect-hom-transport) -/
+/-- Hom transport along a base-change arrow preserves composition. -/
 @[simp] theorem recordedPerfectHomMap_comp {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q K : schemeDerivedCategory X}
     (a : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -68,7 +67,8 @@ noncomputable def recordedPerfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
       recordedPerfectHomMap s g b := by
   simp [recordedPerfectHomMap, Category.assoc]
 
-/-- (blueprint: lem-pc-recorded-perfect-hom-transport) -/
+/-- Two morphisms have equal Hom transports iff their pullbacks along the base-change map
+agree. -/
 theorem recordedPerfectHomMap_eq_iff {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q : schemeDerivedCategory X}
     (a b : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -239,7 +239,7 @@ noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (c.ι.app j))
       (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) f
 
-/-- (blueprint: lem-pc-recorded-perfect-hom-transport) -/
+/-- Transport between finite stages preserves identities. -/
 @[simp] theorem recordedPerfectStageMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k) (P : schemeDerivedCategory X) :
@@ -252,7 +252,7 @@ noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (R.map (homOfLE hjk)))
       (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) P
 
-/-- (blueprint: lem-pc-recorded-perfect-hom-transport) -/
+/-- Transport from a finite stage to the colimit scheme preserves identities. -/
 @[simp] theorem recordedPerfectLimitMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {X : Scheme.{u}}
     (s : X ⟶ Spec (R.obj i)) {j : I} (hij : i ≤ j) (P : schemeDerivedCategory X) :
@@ -265,8 +265,7 @@ noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (c.ι.app j))
       (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) P
 
-/-- Transport to the colimit is compatible with increasing the finite stage.
-No perfectness or finite-presentation hypothesis is needed for this coherence identity. -/
+/-- Transport to the colimit is compatible with increasing the finite stage. -/
 theorem recordedPerfectLimitMap_stage {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k) {P Q : schemeDerivedCategory X}

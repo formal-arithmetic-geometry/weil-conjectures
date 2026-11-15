@@ -43,11 +43,18 @@ ordinary module adjunction, and its simultaneous K-flat derived comparison.
 - `sequenceSiteCompletionProjection`: exactness of the canonical equivalence and
   existence of the compatible constant/limit projection data.
 
+## Implementation details
+
+In `RingedToposMorphismOfUniverses`, the ring identities test every generalized element of the
+target topos; by left exactness of the inverse image these are precisely the identities for a
+morphism of ring objects. The module identity pins the module direct image to the usual induced
+one, up to its displayed natural identification. No exactness of the tensor module pullback or
+preservation of K-injectives is assumed.
+
 ## References
 
-* Stacks, sites-cohomology.tex, Tags 0940 and 06YY; Zheng, Construction 4.1, printed p. 21.
-* Stacks 03CZ.
-* Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules.
+* Stacks Project, Tags 0940, 06YY and 03CZ; Sites, Definition 00XA.
+* Zheng, Construction 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -100,15 +107,7 @@ instance (priority := 1100) ringedToposCommRingForgetCompose
 attribute [-instance] ringedToposCommRingForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompose
 
-/-- A geometric morphism with a structural ring map and the induced direct image on modules.
-
-The ring identities test every generalized element of the target topos. Left exactness
-identifies the inverse image of products and the terminal object, so these are precisely
-the identities for a morphism of ring objects. The last identity specifies addition and
-scalar multiplication on the module direct image under the sheaf adjunction. It includes
-zero by taking all three module elements zero. Thus the supplied module direct image is
-the usual induced one, up to its displayed natural identification, not an arbitrary lift.
-No exactness of the tensor module pullback or preservation of K-injectives is assumed. -/
+/-- A geometric morphism with a structural ring map and the induced direct image on modules. -/
 structure RingedToposMorphismOfUniverses
     {C : Type c} {D : Type d} [Category.{v} C] [Category.{w} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

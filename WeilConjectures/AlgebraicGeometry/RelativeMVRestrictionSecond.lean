@@ -10,14 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSourceCounit
 import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionTargetCounit
 
-/-!
+/-! # Base change of the relative Mayer–Vietoris restriction maps
+
 ## References
 
-* Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.. Proof: Expand relativeMVRestriction as the
-  mate of the restricted counit and cancel the right-adjoint composition comparisons on both paths.
-  Transpose under the adjunction for W and its inverse-image open. The resulting maps are composites
-  of pullbacks of the same counit. Naturality of that counit and of φ identifies their middle
-  factors.
+* Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
 -/
 
 @[expose] public section

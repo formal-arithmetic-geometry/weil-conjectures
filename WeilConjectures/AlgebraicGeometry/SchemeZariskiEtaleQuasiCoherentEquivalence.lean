@@ -144,10 +144,8 @@ def smallEtaleModulePushforward {U T : Scheme.{u}} (a : U ⟶ T) :
     SmallEtaleModules U ⥤ SmallEtaleModules T :=
   SheafOfModules.pushforward (smallEtaleModuleRingMap a)
 
-/-- The canonical ringed-site tensor pullback, left adjoint to restriction.
-It represents O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M;
-Mathlib constructs this functor by module-presheaf pullback and sheafification.
-Only the proof that the right adjoint exists is an argument. -/
+/-- The canonical ringed-site tensor pullback from Zariski to small étale modules, left adjoint
+to restriction. -/
 def zariskiEtaleModuleExtension (X : Scheme.{u})
     (hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology)
@@ -181,8 +179,8 @@ def smallEtaleModuleAdjunction {U T : Scheme.{u}} (a : U ⟶ T)
   letI : (SheafOfModules.pushforward (smallEtaleModuleRingMap a)).IsRightAdjoint := hp
   SheafOfModules.pullbackPushforwardAdjunction (smallEtaleModuleRingMap a)
 
-/-- Proof data permitting the canonical module pullback on these presented sites.
-There is no chosen ring, module, map or functor in this structure. -/
+/-- Hypotheses permitting the canonical module pullback on these presented sites: continuity of
+the inclusion and existence of a left adjoint to restriction. -/
 structure ZariskiEtaleModuleContext (X : Scheme.{u}) where
   /-- The inclusion of open subschemes is continuous. -/
   continuous : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
@@ -215,7 +213,7 @@ def zariskiEtalePullbackComparison {U T : Scheme.{u}} (a : U ⟶ T)
     (cT.adjunction.comp (smallEtaleModuleAdjunction a hp))).symm r.symm).symm
 
 /-- The canonical direct-image comparison, defined as the counit mate of the canonical
-pullback comparison. No quasi-coherence or quasi-compactness is needed to define this map. -/
+pullback comparison. -/
 def zariskiEtalePushforwardComparison {U T : Scheme.{u}} (a : U ⟶ T)
     (cU : ZariskiEtaleModuleContext U) (cT : ZariskiEtaleModuleContext T)
     (hp : (smallEtaleModulePushforward a).IsRightAdjoint)

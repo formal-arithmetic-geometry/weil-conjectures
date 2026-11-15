@@ -109,7 +109,7 @@ namespace AlgebraicGeometry.Etale.SupportedTrace
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The existing compactly supported direct image, with its coefficient category explicit. -/
+/-- The compactly supported direct image, with its coefficient category explicit. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :=
   rightDerivedLowerShriek (ModuleCat.{u + 1} A) f
 

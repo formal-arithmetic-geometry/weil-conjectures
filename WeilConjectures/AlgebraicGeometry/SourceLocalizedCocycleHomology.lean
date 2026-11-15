@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceCompar
 
 ## References
 
-* Stacks Project, Tag 03Q8, computation with an injective complex.
+* Stacks Project, Tag 03Q8.
 -/
 
 @[expose] public section
@@ -23,8 +23,7 @@ open AlgebraicGeometry CochainComplex CochainComplex.HomComplex
 
 namespace AlgebraicGeometry.Etale
 
-/-- The homology section of a cocycle, evaluated at the free generator.
-This construction uses the actual cycle map and transports homology along `r`. -/
+/-- The homology section of a cocycle, evaluated at the free generator, transported along `r`. -/
 noncomputable def sourceCocycleHomologySection {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -39,8 +38,7 @@ noncomputable def sourceCocycleHomologySection {S : Scheme.{v}}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation of a localized single-source cocycle is its actual homology section.
-This is a comparison on the base site, before taking stalks or restricting to any scheme. -/
+/-- Evaluation of a localized single-source cocycle is its actual homology section. -/
 theorem sourceLocalizedCocycleHomology {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)

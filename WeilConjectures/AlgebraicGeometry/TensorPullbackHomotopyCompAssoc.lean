@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory
 
 ## References
 
-* Stacks Project, Cohomology, Tag 0D5S.. Proof: For each scheme morphism choose the adjunction
+* Stacks Project, Cohomology, Tag 0D5S. Proof: For each scheme morphism choose the adjunction
   pinned by `exists_tensorPullbackAdjunction`. Its composition comparison is exactly the inverse
   mate of `pushforwardComp`. Apply `Adjunction.leftAdjointCompIso_assoc` to the six adjunctions
   belonging to h, f, g, h≫f, f≫g, and the total composite. The hypothesis is the pushforward

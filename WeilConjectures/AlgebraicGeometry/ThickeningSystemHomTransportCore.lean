@@ -8,7 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
-/-!
+/-! # Morphisms of thickening systems as compatible families
+
 ## References
 
 * Stacks Project, Remark 088F and Lemma 087T.
@@ -20,8 +21,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Componentwise conjugation identifies system arrows with families compatible with `d`.
--/
+/-- Componentwise conjugation identifies system arrows with families compatible with `d`. -/
 theorem thickeningSystem_hom_transport_d
     {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}
     (j : ∀ n, T n ⟶ X) (d : ∀ n, Scheme.Modules.tensorPullback (j (n + 1)) ⋙

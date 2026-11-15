@@ -17,6 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Tor-independent perfect pullback comparison at a stalk
 
+## Implementation details
+
+The comparison is expressed in K-flat coordinates by `IsComparisonIso`, using the canonical map of
+`BaseDerivedTensorCohomologyModel`; invertibility is invariant under the identification with the
+actual derived pullback stalk.
+
 ## References
 
 * Stacks Project, Tag 08IB, local affine Tor-independent tensor comparison.
@@ -114,10 +120,8 @@ private theorem kFlat_pullback_stalk_cohomology
   exact ⟨(HomologicalComplex.homologyFunctor _ (.up ℤ) i).mapIso ht ≪≫ hSt ≪≫ h⟩
 
 /-- For a Tor-independent square, the canonical base-derived tensor comparison
-for a perfect object is an isomorphism at every pullback stalk in every degree.
-The comparison is expressed in K-flat coordinates by `IsComparisonIso`, using
-exactly the canonical map of `BaseDerivedTensorCohomologyModel`; invertibility
-is invariant under the identification with the actual derived pullback stalk. -/
+for a perfect object is an isomorphism at every pullback stalk in every degree, stated in K-flat
+coordinates via `IsComparisonIso`. -/
 theorem torIndependent_perfect_pullback_comparison
     {X S T : Scheme.{u₁}} (f : X ⟶ S) (g : T ⟶ S)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

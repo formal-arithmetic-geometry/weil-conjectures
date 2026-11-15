@@ -7,7 +7,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 import WeilConjectures.AlgebraicGeometry.CartierReductionData
 
-/-! # SupportedCartierBoundaryExistence -/
+/-! # Existence of the supported Cartier boundary
+
+## References
+
+* Stacks Project, Tags 03PL and 0A45.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -16,9 +21,8 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The normalized relative boundary exists and determines its Ext representative.
-proof.md, paragraphs 1--4;
-Stacks 03PL and 0A45. -/
+/-- The normalized relative boundary exists and is unique: there is a unique degree-two Ext class
+satisfying `SupportedKummerBoundary`. -/
 theorem supported_cartier_boundary_existsUnique (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

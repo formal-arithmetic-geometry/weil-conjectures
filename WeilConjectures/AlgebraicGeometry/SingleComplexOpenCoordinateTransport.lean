@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCoordinateStalkEquival
 ## References
 
 * Stacks Project, Tags 0DJ9, 08HY, and 08FE.
-* Stacks Project, perfect.tex, Tag 0DJ9, first paragraph, and equation-bc preceding Tag 0DJ8;
+* Stacks Project, Tag 0DJ9, first paragraph, and equation-bc preceding Tag 0DJ8;
   Cohomology, Tag 06YC.
 -/
 

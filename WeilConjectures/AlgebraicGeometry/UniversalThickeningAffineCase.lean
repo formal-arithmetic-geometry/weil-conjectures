@@ -14,8 +14,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 ## References
 
-* Stacks Project, More on Morphisms, proof of Lemma 04F3, affine-case paragraph, using Algebra,
-  Lemma 04EB.
+* Stacks Project, More on Morphisms, Lemma 04F3; Algebra, Lemma 04EB.
 -/
 
 @[expose] public section
@@ -60,8 +59,7 @@ private theorem specRingHom_lift {T : Scheme.{u}} {B : Type u} [CommRing B]
   refine ⟨ΓSpec.adjunction.homEquiv T (.op (.of B)) (CommRingCat.ofHom φ).op, ?_⟩
   exact congrArg CommRingCat.Hom.hom (ΓSpecIso_inv_ΓSpec_adjunction_homEquiv _)
 
-/-- Open base change preserves a first order thickening: its kernel ideals are
-transported by the isomorphism on sections of the open immersion. -/
+/-- Open base change preserves a first order thickening. -/
 private theorem firstOrderThickening_pullback_open
     {T T' U U' : Scheme.{u}} (j : T ⟶ T') (jU : U ⟶ U')
     (f : U ⟶ T) (g : U' ⟶ T') [IsOpenImmersion g]
@@ -85,8 +83,7 @@ private theorem firstOrderThickening_pullback_open
   exact (Ideal.comap_bot_of_injective _
     (ConcreteCategory.bijective_of_isIso (g.appIso V).inv).1).le
 
-/-- Uniqueness on affine test schemes gives uniqueness on any test scheme, by
-restricting both solutions to an affine cover of the thickened test scheme. -/
+/-- Uniqueness on affine test schemes gives uniqueness on any test scheme. -/
 private theorem unique_lifts_of_affine_tests
     {Z Z' X : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : ∀ {T T' : Scheme.{u}} [IsAffine T'] (j : T ⟶ T')
@@ -115,8 +112,8 @@ private theorem unique_lifts_of_affine_tests
     · rw [Category.assoc, hd.1]
     · rw [← Category.assoc, C.pullbackHom_map, Category.assoc, hd.2, Category.assoc]
 
-/-- Unique solutions on affine tests glue. First establish uniqueness on arbitrary
-schemes; use it on overlaps, glue the local lifts, and check both triangles locally. -/
+/-- If the lifting problem has unique solutions for affine test schemes, it has unique
+solutions for all test schemes. -/
 private theorem lifts_of_affine_tests
     {Z Z' X : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : ∀ {T T' : Scheme.{u}} [IsAffine T'] (j : T ⟶ T')
@@ -192,8 +189,8 @@ private theorem lifts_of_affine_tests
       simpa only [Category.assoc] using (hc k).2
   exact ⟨c', hc', fun d hd => unique_lifts_of_affine_tests h i h' H j b a hj hab hd hc'⟩
 
-/-- Translate an affine test to the quotient of its global sections by the kernel
-of the closed immersion, apply the ring universal property, and translate back. -/
+/-- A universal square-zero extension `S' → S` of `R`-algebras gives unique lifts to
+`Spec S'` for first order thickenings of affine test schemes. -/
 private theorem affine_lift
     (R S S' : Type u) [CommRing R] [CommRing S] [CommRing S']
     (φ : R →+* S) [Algebra R S] [Algebra R S'] (π : S' →ₐ[R] S)

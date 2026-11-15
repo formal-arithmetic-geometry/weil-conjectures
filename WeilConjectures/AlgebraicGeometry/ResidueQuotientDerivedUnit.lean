@@ -22,12 +22,7 @@ property is tested against every unbounded complex.
 
 ## References
 
-* Stacks 0152, 06YY and 0GLZ. Proof: Realize raw module sheaves as modules over the constant residue
-  ring and abelian sheaves as integer modules. Apply normalized divisible-extension reduction to the
-  split presentation 0→G→G. Its quotient identification identifies the adjunction unit with p.
-  Transport the Hom bijections along the integer-module and raw-module equivalences. Exact-functor
-  single comparisons identify the transported map with single(p). The argument is valid for n=1 and
-  zero sheaves.
+* Stacks Project, Tags 0152, 06YY and 0GLZ.
 -/
 
 @[expose] public noncomputable section
@@ -404,7 +399,7 @@ open SheafOfModules.DivisibleReduction in
 /-- On an essentially small site with a terminal object, sheafification and the usual abelian sheaf
 exactness assumptions, let n>0, G an abelian sheaf, H a sheaf of ULift(Z/n)-modules and U the
 coefficient-forgetting functor. If n:G→G followed by p:G→UH is short exact, then p satisfies
-DerivedUnit [def-sp-exact-functor-derived-unit], in any chosen unbounded derived categories. -/
+`DerivedUnit`, in any chosen unbounded derived categories. -/
 theorem quotient_derived_unit [EssentiallySmall.{u + 1} C] [HasTerminal C]
     (n : ℕ) (hn : 0 < n)
     (F : Sheaf J AddCommGrpCat.{u + 1})

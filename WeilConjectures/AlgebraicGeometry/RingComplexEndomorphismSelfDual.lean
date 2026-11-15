@@ -30,7 +30,7 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Section 0A8X.
+* Stacks Project, Section 0A8X.
 -/
 
 @[expose] public section

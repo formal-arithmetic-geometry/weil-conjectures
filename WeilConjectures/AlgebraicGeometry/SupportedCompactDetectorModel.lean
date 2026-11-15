@@ -23,7 +23,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 ## References
 
-* Stacks Project, duality.tex, proof of (3), Section Tag 0E4G; derived.tex (Tag 09SN).
+* Stacks Project, proof of (3), Section Tag 0E4G; derived.tex (Tag 09SN).
 -/
 
 @[expose] public section

@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 ## References
 
-* Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1).
+* Stacks Project, Tag 079U; Tag 0DJA(1).
 -/
 
 @[expose] public section

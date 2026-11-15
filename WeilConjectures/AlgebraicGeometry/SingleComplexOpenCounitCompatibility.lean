@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 ## References
 
 * Stacks Project, Tags 08FE, 08HY and 0D5S.
-* Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.
+* Stacks Project, Tags 08FE, 08BS and 08HY.
 -/
 
 @[expose] public section

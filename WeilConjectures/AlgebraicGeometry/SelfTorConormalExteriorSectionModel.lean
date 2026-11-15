@@ -26,8 +26,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Exterior powers of actual conormal sections identify with sections of the
-pulled-back affine conormal exterior module. This statement does not use the
-exterior sheaf or its sheafification. -/
+pulled-back affine conormal exterior module. -/
 theorem exists_selfTor_conormal_exterior_section_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

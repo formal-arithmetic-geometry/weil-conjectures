@@ -27,7 +27,7 @@ maps, of affine schemes `X_i` of finite type over `L` with `dim X_i < dim X`.
 
 ## References
 
-- Stacks Project, Lemma 0F0U, <https://stacks.math.columbia.edu/tag/0F0U>
+* Stacks Project, Lemma 0F0U, <https://stacks.math.columbia.edu/tag/0F0U>
 -/
 
 @[expose] public section
@@ -38,19 +38,11 @@ open CategoryTheory Limits Polynomial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Let `K` be a field, `aX : X ⟶ Spec K` of finite type and `s : Spec Ω ⟶ X` a geometric point
-(`Ω` separably closed) lying over a non-closed point `x` of `X` (for `X` of finite type over `K`
-this is equivalent to `trdeg_K κ(x) > 0`). Then there are
-
-* a separably closed field `L` over `K` and a morphism `ℓ : X' ⟶ Spec L` from the strict
-  localization `X' = Spec 𝒪^{sh}_{X,s}`, compatible with `X' ⟶ X ⟶ Spec K` and
-  `Spec L ⟶ Spec K`;
-* a small cofiltered category `I`, a diagram `D : I ⥤ Scheme` and a limit cone `π` from `X'`
-  to `D`;
-* structure morphisms `q i : D i ⟶ Spec L`, locally of finite type, compatible with the
-  transition maps and with `ℓ`,
-
-such that every `D i` is affine, all transition maps are affine, and `dim D i < dim X`. -/
+/-- For `X` of finite type over a field `K` and a geometric point `s : Spec Ω ⟶ X` over a
+non-closed point, the strict localization `X' = Spec 𝒪^{sh}_{X,s}` is a scheme over a
+separably closed field `L` over `K` and the limit of a small cofiltered diagram of affine
+schemes `D i`, locally of finite type over `L`, with affine transition maps and
+`dim D i < dim X`. -/
 @[stacks 0F0U]
 theorem exists_isLimit_strictLocalization_of_not_isClosed {K Ω : Type u} [Field K] [Field Ω]
     [IsSepClosed Ω] {X : Scheme.{u}} (aX : X ⟶ Spec (.of K)) [LocallyOfFiniteType aX]
@@ -198,9 +190,8 @@ lemma not_isClosed_singleton_of_residueFieldTrdeg_pos {K : Type u} [Field K] {X 
   rw [h, trdeg_eq_zero] at hx
   exact lt_irrefl _ hx
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`, in the form of the blueprint: the strict
-henselization at a geometric point over a point `x` with `trdeg_K κ(x) > 0` is a limit as in
-`exists_isLimit_strictLocalization_of_not_isClosed`. -/
+/-- The strict henselization at a geometric point over a point `x` with `trdeg_K κ(x) > 0` is a
+limit as in `exists_isLimit_strictLocalization_of_not_isClosed`. -/
 @[stacks 0F0U]
 theorem exists_isLimit_strictLocalization_of_residueFieldTrdeg_pos {K Ω : Type u} [Field K]
     [Field Ω] [IsSepClosed Ω] {X : Scheme.{u}} (aX : X ⟶ Spec (.of K)) [LocallyOfFiniteType aX]

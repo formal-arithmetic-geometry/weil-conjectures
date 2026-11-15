@@ -9,11 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
-/-!
+/-! # Restriction of tensor-power sections to opens
+
 ## References
 
 * Stacks Project, Modules, Tag 01CD.
-* Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction paragraph.
+* Stacks Project, Properties, Tag 01PW.
 -/
 
 @[expose] public section

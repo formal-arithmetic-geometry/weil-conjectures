@@ -25,8 +25,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
-/-- Evaluate the natural resolution comparison, remove its universe lifts, and use
-exactness of evaluation to commute evaluation with homology. -/
+/-- The cohomology of `F` over `V` is additively equivalent to the degree-`q` homology of an
+injective resolution of `F` evaluated at `V`. -/
 private theorem objectResolutionEquiv.{v, w, t}
     {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{w}]
@@ -48,10 +48,9 @@ private theorem objectResolutionEquiv.{v, w, t}
 
 -- The unchanged statement includes an unused comparison map and existential names.
 set_option linter.unusedVariables false in
-/-- Intermediate cocycle-comparison component for the Zariski–étale resolution comparison.
-
-The existence of the displayed additive equivalences is the termwise sheafification,
-free-abelian, and Yoneda calculation from Stacks Project, Section 01FT. -/
+/-- The Zariski cohomology of the restriction of `F` over `V` and the étale cohomology of `F`
+over `i V` are additively equivalent to the degree-`q` homology at `V` of the resolutions `R`
+and `I` (the latter restricted to the Zariski site). -/
 theorem zariski_etale_resolution_cocycle_equivalences
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

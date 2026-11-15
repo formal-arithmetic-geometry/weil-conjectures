@@ -10,6 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Named pinned data for the open base-change calculation
 
+## Implementation details
+
+`singleComplexOpenPinnedComposition` is the same chosen expression as the composition family used
+by `schemeDerivedBaseChangeMap`; it does not select new comparison data.
+
 ## References
 
 * Stacks Project, Tags 0D5S and 08HY.
@@ -21,8 +26,9 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The exact composition family already used by `schemeDerivedBaseChangeMap`.
-This name shares the pinned expression; it does not select new comparison data. -/
+/-- The chosen composition isomorphisms
+`derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g)` used by
+`schemeDerivedBaseChangeMap`. -/
 noncomputable abbrev singleComplexOpenPinnedComposition
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

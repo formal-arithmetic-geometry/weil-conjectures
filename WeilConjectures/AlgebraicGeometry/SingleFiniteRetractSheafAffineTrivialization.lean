@@ -28,9 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Sections preserve the splitting. The affine counit is a retract of the counit on
-finite free sheaves, hence invertible. The sections of the ambient sheaf are finite free
-by `tildeFinsupp` and the unit of tilde-Gamma, so its summand is finite projective. -/
+/-- A retract of a finite free sheaf of modules on `Spec R` is quasi-coherent, and its global
+sections are a finite projective `R`-module. -/
 private theorem affine_retract_sections {R : CommRingCat.{u}} (M : (Spec R).Modules)
     (m : ℕ) (ι : M ⟶ SheafOfModules.free (ULift.{u} (Fin m)))
     (π : SheafOfModules.free (ULift.{u} (Fin m)) ⟶ M) (h : ι ≫ π = 𝟙 M) :

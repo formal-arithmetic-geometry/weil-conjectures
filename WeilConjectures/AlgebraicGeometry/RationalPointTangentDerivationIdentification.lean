@@ -31,10 +31,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- At a rational point, extraction of the epsilon coefficient of the stalk homomorphism
-identifies tangent vectors with the dual of the cotangent space. The map `r` is the structural
-map from `k` to the residue field; its bijectivity expresses rationality. Scalar structures
-are restricted along `r`. The displayed dual-number formula uses residue-field coordinates,
-so that the coefficient `D a : k` appears as `r (D a)`. -/
+identifies tangent vectors with the `k`-dual of the cotangent space; rationality is the
+bijectivity of the structural map `r : k → κ(x)`, along which scalars are restricted. -/
 theorem exists_rationalPoint_tangent_cotangent_linearEquiv
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     let R := X.presheaf.stalk x

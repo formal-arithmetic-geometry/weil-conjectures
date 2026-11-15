@@ -9,12 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenPieces
 
-/-!
+/-! # Restricting a universal first order thickening to opens
+
 ## References
 
-* Stacks Project, More on Morphisms, Lemma 04FA and the general remarks in Lemma 04F3. The proof
-  restricts the closed immersion to the open determined by the image of `V`, factors the structure
-  maps through `U`, and applies the universal lifting property.
+* Stacks Project, More on Morphisms, Lemmas 04FA and 04F3.
 -/
 
 @[expose] public section

@@ -6,13 +6,11 @@ Authors: Bin Wu
 module
 public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
 
-/-!
+/-! # Transport of Ext bijectivity of scalar units along exact-functor squares
+
 ## References
 
-* Stacks 0152, 06YY and 0GLZ. Proof: Naturality of exact-functor Ext maps for the square isomorphism
-  makes the two maps a commuting square after the endpoint isomorphisms. Those isomorphisms induce
-  bijections by Yoneda composition, as do F and G by assumption. Express the lower map as a
-  composite of these bijections and the inverse of the upper comparison.
+* Stacks Project, Tags 0152, 06YY and 0GLZ.
 -/
 
 @[expose] public noncomputable section
@@ -70,10 +68,10 @@ private theorem postcomp_bijective {P Q Q' : C} (a : Q ≅ Q') (n : ℕ) :
         simp only [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, Iso.inv_hom_id, comp_mk₀_id] }
   exact e.bijective
 
-/-- In an exact-functor square U⋙G≅F⋙V between abelian categories, assume F and G induce bijections
-on Ext, and the degree-n Ext map induced by a specified scalar unit η is bijective. After
-transporting its source and target by specified isomorphisms, the corresponding V-scalar-unit map on
-Ext is also bijective [def-weil-abstract-derived-category]. -/
+/-- In an exact-functor square `U ⋙ G ≅ F ⋙ V` between abelian categories, assume `F` and `G`
+induce bijections on `Ext`, and the degree-`n` `Ext` map induced by a scalar unit `η` is bijective.
+After transporting its source and target by given isomorphisms, the corresponding `V`-scalar-unit
+map on `Ext` is also bijective. -/
 theorem scalar_unit_ext_comparison_bijective
     (τ : U ⋙ G ≅ F ⋙ V) {P Q : C} {X : B} {X' : E} {P' : D}
     (η : X ⟶ U.obj P) (s : G.obj X ≅ X') (a : F.obj P ≅ P') (n : ℕ)

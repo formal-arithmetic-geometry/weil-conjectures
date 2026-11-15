@@ -26,13 +26,9 @@ universe u
 namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
-/-- The presheaf extension by zero and its sheafification give an additive left adjoint
-from abelian sheaves on an open Zariski subspace to abelian sheaves on the ambient scheme.
-
-The presheaf `P F` is sectionwise `F W` on opens `W ≤ U` and zero otherwise.  The
-maps `θ F` satisfy the universal property of sheafification, and the displayed
-adjunction is the map induced by composition with `θ F`, natural in both sheaves.
--/
+/-- The presheaf extension by zero `P F` (sections `F W` on opens `W ≤ U`, zero otherwise) and
+its sheafification `θ F : P F ⟶ L F` give an additive left adjoint `L` to restriction, from
+abelian sheaves on the open subspace `U` to abelian sheaves on `X`. -/
 theorem zariski_extension_by_zero_adjunction (X : Scheme.{u})
     (U : Opens X.toRingedSpace.carrier) :
     ∃ (L : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U) ⥤

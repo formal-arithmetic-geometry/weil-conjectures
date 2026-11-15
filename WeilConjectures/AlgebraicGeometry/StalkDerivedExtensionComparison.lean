@@ -66,8 +66,7 @@ variable [∀ Y : Scheme.{u},
 
 set_option linter.unusedVariables false in
 /-- Derived extension of the original stalk identifies naturally with the stalk of
-sheaf derived pullback. The computation on K-flat complexes uses precisely the
-specified tensor-stalk isomorphism and the two universal counits. -/
+sheaf derived pullback. -/
 theorem exists_stalkDerivedExtensionComparison (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

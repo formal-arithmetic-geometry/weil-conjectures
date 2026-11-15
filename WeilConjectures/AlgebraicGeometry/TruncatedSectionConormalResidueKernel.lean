@@ -195,7 +195,11 @@ theorem truncated_section_conormal_residue_kernel_comap
     (LinearMap.congr_fun hv x).symm.trans (hkill hx)
 
 
-/-- (blueprint: lem-weil-pbc-truncated-section-conormal-residue-kernel) -/
+/-- Let `P` be a local presentation of a local `R`-algebra `S` with kernel `I` and maximal ideal
+`m`, with `m ^ N ∩ I ⊆ m • I` for some `N ≥ 2`. If the truncation
+`P / (I ^ 2 + m ^ N) → P / (I + m ^ N)` has an `R`-algebra section, then an element of the
+cotangent module `I / I ^ 2` whose image in the cotangent space lies in `m_S • Ω` lies in
+`m_S • (I / I ^ 2)`. -/
 theorem truncated_section_conormal_residue_kernel
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]

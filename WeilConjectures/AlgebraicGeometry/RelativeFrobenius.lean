@@ -59,18 +59,8 @@ section General
 variable {C : Type u} [Category.{v} C] {X Y : C}
 
 /-- The *relative Frobenius* `r = (f, Φ_X) : X ⟶ X'` of a morphism `f : X ⟶ Y` compatible with
-endomorphisms `Φ_X`, `Φ_Y` (`Φ_X ≫ f = f ≫ Φ_Y`), where `X' = Y ×_{Φ_Y, Y, f} X`:
-
-```
-     X' ──f'──→ Y           r ≫ p = Φ_X
-     │          │           r ≫ f' = f
-    p│          │Φ_Y
-     ↓          ↓
-     X ───f───→ Y
-```
-
-Here `X'` is `CategoryTheory.Limits.pullback Φ_Y f`, with `f' = pullback.fst` and
-`p = pullback.snd`. -/
+endomorphisms `Φ_X`, `Φ_Y` (`Φ_X ≫ f = f ≫ Φ_Y`), where `X' = Y ×_{Φ_Y, Y, f} X` is
+`pullback Φ_Y f` with projections `f' = pullback.fst` and `p = pullback.snd`. -/
 noncomputable def relativeFrobenius (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶ Y)
     (h : ΦX ≫ f = f ≫ ΦY) [HasPullback ΦY f] : X ⟶ pullback ΦY f :=
   pullback.lift f ΦX h.symm
@@ -142,8 +132,7 @@ variable {k : Type u} [Field k] [Finite k] {s₀ X₀ Y₀ X Y : Scheme.{u}}
 
 /-- For the base change `f : X ⟶ Y` of a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite
 field `k`, and the base changes `Φ_X = F_X ×_k 𝟙`, `Φ_Y = F_Y ×_k 𝟙` of the `#k`-power
-Frobenii, `Φ_X ^ m ≫ f = f ≫ Φ_Y ^ m` for every `m`: the absolute Frobenius commutes with every
-morphism of `𝔽_p`-schemes. Hence the relative Frobenius `r_m = (f, Φ_X ^ m)` is defined. -/
+Frobenii, `Φ_X ^ m ≫ f = f ≫ Φ_Y ^ m` for every `m`. -/
 theorem comp_frobenius_pow_eq_of_isFrobenius (gX : X₀ ⟶ Spec (.of k))
     (hY : IsPullback pY aY gY σ)
     (hFX : FX.IsFrobenius (Nat.card k)) (hFY : FY.IsFrobenius (Nat.card k))
@@ -168,8 +157,7 @@ theorem isPullback_frobenius_pow_of_isFrobenius (hY : IsPullback pY aY gY σ)
 `Q = #k ^ m`. Then `F_X ^ m`, `F_Y ^ m` are the `Q`-power Frobenii of `X₀`, `Y₀`, the fibre
 product `X'_m = Y ×_{Φ_Y ^ m, Y, f} X` is the base change `X₀^{(Q)} ×_k s₀` of
 `X₀^{(Q)} = Y₀ ×_{F_Y ^ m, Y₀, f₀} X₀`, and `r_m = (f, Φ_X ^ m)` is the base change of the
-relative `Q`-power Frobenius `F_{X₀/Y₀} = (f₀, F_X ^ m)`. The identities `p_m ∘ r_m = Φ_X ^ m`
-and `f'_m ∘ r_m = f` are `relativeFrobenius_snd` and `relativeFrobenius_fst`. -/
+relative `Q`-power Frobenius `F_{X₀/Y₀} = (f₀, F_X ^ m)`. -/
 theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ)
     (hY : IsPullback pY aY gY σ) (hFX : FX.IsFrobenius (Nat.card k))
     (hFY : FY.IsFrobenius (Nat.card k)) (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY)
@@ -208,9 +196,7 @@ section Finite
 
 variable {X Y : Scheme.{u}}
 
-/-- The relative Frobenius of a morphism between schemes with finite endomorphisms is finite:
-it is a section of the projection `p`, a base change of `Φ_Y`, and its composite with that
-projection is the finite morphism `Φ_X`. -/
+/-- The relative Frobenius of a morphism between schemes with finite endomorphisms is finite. -/
 instance isFinite_relativeFrobenius (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶ Y)
     (h : ΦX ≫ f = f ≫ ΦY) [IsFinite ΦX] [IsFinite ΦY] :
     IsFinite (relativeFrobenius f ΦX ΦY h) := by
@@ -220,8 +206,7 @@ instance isFinite_relativeFrobenius (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶ Y
   exact .of_comp _ (pullback.snd ΦY f)
 
 /-- The relative Frobenius of a morphism between schemes whose endomorphisms are finite
-universal homeomorphisms is a universal homeomorphism: its composite with the projection `p`, a
-base change of `Φ_Y`, is `Φ_X`. -/
+universal homeomorphisms is a universal homeomorphism. -/
 instance isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶ Y)
     (h : ΦX ≫ f = f ≫ ΦY) [IsUniversalHomeomorphism ΦX] [IsUniversalHomeomorphism ΦY] :
     IsUniversalHomeomorphism (relativeFrobenius f ΦX ΦY h) := by

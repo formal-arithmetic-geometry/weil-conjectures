@@ -20,7 +20,7 @@ import WeilConjectures.RingTheory.LimitFlatModules
 
 ## References
 
-* Stacks Project, sites-modules.tex, Tags 093M and 0912.
+* Stacks Project, Tags 093M and 0912.
 -/
 
 @[expose] public noncomputable section

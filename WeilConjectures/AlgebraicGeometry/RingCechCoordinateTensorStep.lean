@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RingLocalizationTensorBlocks
 
 ## References
 
-* Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
+* Stacks Project, Tags 0996 and 099D(d).
 -/
 
 @[expose] public noncomputable section

@@ -11,7 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-/-!
+/-! # Naturality of the right-adjoint projection mates
+
 ## References
 
 * Stacks Project, Tag 0A9U.
@@ -22,7 +23,8 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
-/-- The pinned projection family has a natural right-adjoint mate. -/
+/-- The mates `Lf^*K ⊗ c(𝒪_Y) ⟶ c(K)` of the projection isomorphisms `pf K` under the
+adjunction `Rf_* ⊣ c` are the components of a natural transformation. -/
 theorem rightAdjointTensorComparison_components
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

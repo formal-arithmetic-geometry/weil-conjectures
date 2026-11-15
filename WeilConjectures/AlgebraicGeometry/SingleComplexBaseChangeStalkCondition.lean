@@ -20,14 +20,18 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # The single-complex stalkwise base-change condition
 
-K-flat coordinates express the canonical tensor-cohomology comparison, followed by
-the given derived map. Every choice is tied to the actual stalk maps or to a
-localization equation. Invertibility is independent of representative coordinates.
+For a pullback square of schemes and a derived morphism `φ`, K-flat coordinates express the
+canonical stalkwise tensor-cohomology comparison followed by the map induced by `φ`. The stalk
+condition asks these comparisons to be isomorphisms.
+
+## Implementation details
+
+`StalkCondition` quantifies over all K-flat coordinates rather than choosing one; coordinates
+exist by `nonempty_coordinates`, so the condition is not vacuous.
 
 ## References
 
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8, and Tag 0DJ9.
-* Stacks Project, Tag 0098 and perfect.tex, equation-bc before Tag 0DJ8.
+* Stacks Project, Tags 0DJ8, 0DJ9 and 0098.
 -/
 
 @[expose] public section
@@ -44,7 +48,7 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{uSC},
   HasDerivedCategory.{wSC} (SheafOfModules.{uSC} (moduleRings Y.toRingedSpace))]
 
-/-- Additivity of termwise tensor pullback, from the existing composition construction. -/
+/-- Termwise tensor pullback is additive. -/
 instance tensorPullbackAdditive {Y Z : Scheme.{uSC}} (k : Y ⟶ Z) :
     (Scheme.Modules.tensorPullback k).Additive :=
   (Classical.choose exists_derivedPullbackComposition) k
@@ -142,9 +146,8 @@ abbrev stalkComplex (z : X')
   ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).mapHomologicalComplex
     (.up ℤ)).obj P
 
-/-- The existing base-derived tensor cohomology model at a point of this square.
-The R-, A-, B- and tensor-algebra structures are the actual scheme stalk maps;
-the model fixes the localized comparison by its derived counit equations. -/
+/-- The base-derived tensor cohomology model at a point of this square, with the R-, A-, B- and
+tensor-algebra structures given by the scheme stalk maps. -/
 def cohomologyModel (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
   letI := leftAlgebra f g' z
@@ -226,7 +229,7 @@ def tensorStalkIso (z : X')
 
 /-- K-flat coordinates for the given derived morphism. P represents K, N represents
 K', and t represents phi through the specified left-derived counit and the two
-representative isomorphisms. No arbitrary stalk comparison is included. -/
+representative isomorphisms. -/
 structure Coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') where
   P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ
@@ -283,7 +286,6 @@ private theorem derived_map_surjective
   rw [DerivedCategory.quotientCompQhIso_inv_naturality, ht]
   simp [e]
 
--- Elaborating the two sheaf resolutions and their localization maps needs this budget.
 /-- Every derived morphism has these K-flat coordinates. -/
 theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') : Nonempty (Coordinates g' K K' φ) := by
@@ -314,12 +316,8 @@ theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCa
     IsIso.hom_inv_id_assoc]
 
 /-- The canonical map H^i(K_x tensor-derived-over-R B) tensor-over-(A tensor-over-R B) C
--> H^i(K'_z), expressed in given K-flat coordinates c for phi.
-It is the existing localized tensor comparison followed by the canonical
-pullback-stalk identification and the stalk of c.t. The target H^i(N_z) identifies
-canonically with H^i(K')_z through c.e' and exactness of stalks. Postcomposing by
-that identification preserves and reflects invertibility. The represents equation
-of c ensures this is the map induced by the given phi, rather than a free comparison. -/
+-> H^i(K'_z), expressed in given K-flat coordinates c for phi. It is the localized tensor
+comparison followed by the pullback-stalk identification and the stalk of `c.t`. -/
 def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
     {φ : (derivedPullback g').obj K ⟶ K'} (c : Coordinates g' K K' φ) (z : X') (i : ℤ) :=
   letI := leftAlgebra f g' z
@@ -333,10 +331,8 @@ def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'
       (((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
         (.up ℤ)).map c.t) i
 
-/-- The single-complex stalk condition (equation-bc of Tag 0DJ8 an isomorphism for
-every z and i). Invertibility of the comparison does not depend on the K-flat
-coordinates, so it is required for all of them; they exist by `nonempty_coordinates`,
-so the condition is not vacuous. No coordinate system is chosen. -/
+/-- The single-complex stalk condition: the stalk comparison (the base-change map of Stacks
+Tag 0DJ8) is an isomorphism for all K-flat coordinates of `φ`, all `z` and all `i`. -/
 def StalkCondition (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') : Prop :=
   ∀ (c : Coordinates g' K K' φ) (z : X') (i : ℤ),

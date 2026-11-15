@@ -10,10 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import all WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
 
-/-!
+/-! # Transport of local perfectness along scheme isomorphisms
+
 ## References
 
 * Stacks Project, Tag 09IR.
+* Stacks Project, Tag 08EB.
 -/
 
 @[expose] public section
@@ -116,9 +118,7 @@ private theorem localRestrictionSquare {X Y : Scheme.{u}} (s : X ≅ Y)
         Modules.pullbackCongr hi) EV.inverse)
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Local transport of a perfect model along a scheme isomorphism. The proof follows the
-localization comparison, restriction compatibility, and transport of strictly perfect
-complexes described in Stacks Project, perfect.tex, Tag 08EB. -/
+/-- Local transport of a perfect model along a scheme isomorphism. -/
 theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}
     (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

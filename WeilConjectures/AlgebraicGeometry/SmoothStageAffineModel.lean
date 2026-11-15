@@ -10,10 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
 
-/-!
+/-! # Smooth affine models in Noetherian approximation
+
 ## References
 
-* Stacks Project, Tag 0C0C, limits.tex, affine reduction of.
+* Stacks Project, Tags 0C0C, 0CAQ and 01ZM.
 -/
 
 @[expose] public section
@@ -25,8 +26,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- The affine-chart part of eventual smoothness: after passing to a later stage `j`,
-the base change `pullback.snd p (N.D.map j.hom)` of `p` is smooth.  This is the affine
-descent argument of Tags 0CAQ and 01ZM(2)-(3) on a finite affine cover of `Y`. -/
+the base change `pullback.snd p (N.D.map j.hom)` of `p` is smooth. -/
 theorem Scheme.NoetherianApproximation.exists_smooth_affine_model
     {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}
     {Y X : Scheme.{u}} (p : Y ⟶ N.D.obj i)

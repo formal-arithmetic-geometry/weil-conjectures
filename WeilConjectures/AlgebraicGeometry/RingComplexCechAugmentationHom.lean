@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.RingComplexCechLocalizedOrthogonality
 
 ## References
 
-* Stacks Project, dualizing.tex, Tag 0A6R, the local-cohomology adjunction.
+* Stacks Project, Tag 0A6R, the local-cohomology adjunction.
 -/
 
 @[expose] public section

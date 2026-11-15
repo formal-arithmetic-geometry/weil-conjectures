@@ -32,14 +32,6 @@ algebraically closed, and for every abelian étale sheaf `F` on `C`:
 * the map `H⁰(C, F) ⟶ ∏_x F_{s x}` to the stalks at geometric points `s x` over the points
   `x` of `C` is an isomorphism.
 
-The vanishing is `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar` (a sheaf supported
-on finitely many closed points with separably closed residue fields is acyclic). For the
-degree zero statement, `F(C) = ∏_x F({x})` since the points `{x}` are open, and the pointed
-open neighbourhood `({x}, s x)` is initial among the pointed étale neighbourhoods of `s x`, so
-that `F({x}) = F_{s x}`: an étale scheme over the one-point scheme `{x}` with a point over `x`
-has a section through that point, by topological invariance of the étale site along
-`Spec κ(x) ⟶ {x}`.
-
 ## Main statements
 
 - `AlgebraicGeometry.zero_dimensional_etale_cohomology`:
@@ -57,7 +49,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A scheme of finite type over a field whose dimension is at most zero has finitely many
-points: it is Noetherian of dimension zero, hence Artinian. -/
+points. -/
 theorem Scheme.finite_of_topologicalKrullDim_le_zero {k : Type u} [Field k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]
     (hdim : topologicalKrullDim C ≤ 0) : Finite C := by
@@ -67,8 +59,7 @@ theorem Scheme.finite_of_topologicalKrullDim_le_zero {k : Type u} [Field k] {C :
   have : IsArtinianScheme C := ⟨⟩
   infer_instance
 
-/-- A scheme locally of finite type over a field whose dimension is at most zero is discrete:
-it is locally Noetherian of dimension zero, hence locally Artinian. -/
+/-- A scheme locally of finite type over a field whose dimension is at most zero is discrete. -/
 lemma Scheme.discreteTopology_of_topologicalKrullDim_le_zero {k : Type u} [Field k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f]
     (hdim : topologicalKrullDim C ≤ 0) : DiscreteTopology C := by
@@ -78,7 +69,7 @@ lemma Scheme.discreteTopology_of_topologicalKrullDim_le_zero {k : Type u} [Field
 
 /-- Two field-valued points `a b : Spec Ω ⟶ V` of a scheme `V` étale over `S`, with the same
 image point and the same composite to `S`, are equal if the residue field of `S` at their image
-is separably closed: the residue field extension at that point is then trivial. -/
+is separably closed. -/
 theorem Scheme.eq_of_comp_eq_of_isSepClosed {V S : Scheme.{u}} (p : V ⟶ S) [Etale p]
     {Ω : Type u} [Field Ω] {a b : Spec (.of Ω) ⟶ V} (hab : a ≫ p = b ≫ p)
     (hpt : a default = b default) (hsep : IsSepClosed (S.residueField (p (a default)))) :
@@ -102,9 +93,7 @@ theorem Scheme.eq_of_comp_eq_of_isSepClosed {V S : Scheme.{u}} (p : V ⟶ S) [Et
   rw [this]
 
 /-- Let `U` be a scheme with a single point, whose residue field is separably closed, and
-`p : V ⟶ U` étale. Every field-valued point `v` of `V` lies on a section of `p`. The section
-is obtained over `Spec κ`, `κ` the residue field of `U`, and lifted to `U` by topological
-invariance of the étale site along the universal homeomorphism `Spec κ ⟶ U`. -/
+`p : V ⟶ U` étale. Every field-valued point `v` of `V` lies on a section of `p`. -/
 theorem Scheme.exists_section_of_etale_of_subsingleton {U V : Scheme.{u}} [Subsingleton U]
     (hsep : ∀ x : U, IsSepClosed (U.residueField x)) (p : V ⟶ U) [Etale p]
     {Ω : Type u} [Field Ω] (v : Spec (.of Ω) ⟶ V) :
@@ -167,9 +156,7 @@ noncomputable abbrev Scheme.pointSmallEtaleElementsOpens : (pointSmallEtale s).f
   (pointSmallEtale s).fiber.elementsMk (Etale.mk U.ι) (Scheme.pointSmallEtaleFiberObjOpens s U hs)
 
 /-- If `U` has a single point, with separably closed residue field, then `(U, s)` maps to every
-pointed étale neighbourhood of `s`, by
-`AlgebraicGeometry.Scheme.exists_section_of_etale_of_subsingleton` applied to its base change
-to `U`. -/
+pointed étale neighbourhood of `s`. -/
 lemma Scheme.nonempty_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsingleton)
     (hsep : ∀ x ∈ U, IsSepClosed (X.residueField x)) (c : (pointSmallEtale s).fiber.Elements) :
     Nonempty (Scheme.pointSmallEtaleElementsOpens s U hs ⟶ c) := by
@@ -194,8 +181,7 @@ lemma Scheme.nonempty_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsing
     rw [← Category.assoc, hσv, pullback.lift_fst]
 
 /-- If `U` has a single point, there is at most one morphism from `(U, s)` to a pointed étale
-neighbourhood of `s`: two such morphisms agree on an open subset of `U` containing the image of
-`s` (`AlgebraicGeometry.FormallyUnramified.eqLocus`), that is, on all of `U`. -/
+neighbourhood of `s`. -/
 lemma Scheme.subsingleton_hom_pointSmallEtaleElementsOpens (hU : (U : Set X).Subsingleton)
     (c : (pointSmallEtale s).fiber.Elements) :
     Subsingleton (Scheme.pointSmallEtaleElementsOpens s U hs ⟶ c) := by
@@ -244,9 +230,7 @@ end OnePoint
 /-- **Sections over a finite discrete scheme.** Let `X` be a finite discrete scheme whose
 residue fields are separably closed, and for every point `x` let `s x` be a geometric point of
 `X` at `x`. For every sheaf `P` on the small étale site of `X`, the map
-`P(X) ⟶ ∏_x P_{s x}` to the stalks is an isomorphism: `P(X) = ∏_x P({x})` as the `{x}` form
-a disjoint open cover, and `P({x}) = P_{s x}`
-(`AlgebraicGeometry.Scheme.isIso_toPresheafFiber_pointSmallEtaleFiberObjOpens`). -/
+`P(X) ⟶ ∏_x P_{s x}` to the stalks is an isomorphism. -/
 theorem Etale.isIso_piLift_toPresheafFiber {X : Scheme.{u}} [Finite X] [DiscreteTopology X]
     (hsep : ∀ x : X, IsSepClosed (X.residueField x))
     (Ω : X → Type u) [∀ x, Field (Ω x)] [∀ x, IsSepClosed (Ω x)]
@@ -306,9 +290,7 @@ theorem Etale.isIso_piLift_toPresheafFiber {X : Scheme.{u}} [Finite X] [Discrete
   infer_instance
 
 /-- Let `C` be a scheme of finite type and of dimension at most zero over an algebraically
-closed field. Every abelian étale sheaf on `C` has no cohomology in positive degrees: it is
-supported on the finitely many closed points of `C`, whose residue fields are algebraically
-closed (`AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`). -/
+closed field. Every abelian étale sheaf on `C` has no cohomology in positive degrees. -/
 lemma Etale.subsingleton_cohomology_of_topologicalKrullDim_le_zero {k : Type u} [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f]
     [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0)
@@ -338,8 +320,7 @@ lemma Etale.subsingleton_cohomology_of_topologicalKrullDim_le_zero {k : Type u} 
 
 /-- Let `C` be a scheme of finite type and of dimension at most zero over an algebraically
 closed field, and `s x` a geometric point of `C` at every point `x`. For every abelian étale
-sheaf `F` on `C` the canonical map `H⁰(C, F) ⟶ ∏_x F_{s x}` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_piLift_toPresheafFiber`). -/
+sheaf `F` on `C` the canonical map `H⁰(C, F) ⟶ ∏_x F_{s x}` is an isomorphism. -/
 lemma Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero {k : Type u} [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f]
     [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0)
@@ -365,11 +346,11 @@ lemma Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero {k : Type u} [F
     inferInstance) Ω s hs F
   infer_instance
 
-/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`: **Cohomology of zero-dimensional
-schemes.** Let `C` be a separated scheme of finite type over an algebraically closed field `k`
-with `dim C ≤ 0`. Then `C` has finitely many points, and for every abelian étale sheaf `F` on
-`C`, `Hᵠ(C, F) = 0` for `q > 0` while the canonical map `H⁰(C, F) ⟶ ∏_x F_{s x}` to the
-stalks at geometric points `s x` over the points `x` of `C` is an isomorphism. -/
+/-- **Cohomology of zero-dimensional schemes.** Let `C` be a separated scheme of finite type
+over an algebraically closed field `k` with `dim C ≤ 0`. Then `C` has finitely many points, and
+for every abelian étale sheaf `F` on `C`, `Hᵠ(C, F) = 0` for `q > 0` while the canonical map
+`H⁰(C, F) ⟶ ∏_x F_{s x}` to the stalks at geometric points `s x` over the points `x` of `C` is
+an isomorphism. -/
 theorem zero_dimensional_etale_cohomology
     (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k))

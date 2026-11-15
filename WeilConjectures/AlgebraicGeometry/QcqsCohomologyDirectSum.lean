@@ -76,9 +76,7 @@ private theorem moduleCohomology_directSum_injective (X : Scheme.{u})
 open Classical in
 /-- On a quasi-compact quasi-separated scheme, the canonical linear map from the direct sum
 of the cohomology modules to the cohomology of a coproduct is bijective, hence an isomorphism.
-Its restriction to summand `i` is the map on cohomology induced by `ι i`.
-In particular, take `I = ℕ` and the family of nonnegative graded pieces of a quasi-coherent
- graded module; no quasi-coherence hypothesis is needed for the general assertion. -/
+Its restriction to summand `i` is the map on cohomology induced by `ι i`. -/
 theorem moduleCohomology_directSum_bijective (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] (I : Type v)
     (F : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))

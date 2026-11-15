@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSquares
 ## References
 
 * Stacks Project, Cohomology, Tags 08HY and 08HZ.
-* Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; perfect.tex, Tag 0DJ9, the induction
+* Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Tag 0DJ9, the induction
   diagram.
 -/
 

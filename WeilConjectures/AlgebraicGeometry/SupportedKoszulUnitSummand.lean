@@ -32,8 +32,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Adding the supported Koszul summand forces the open-restriction unit to be an
-isomorphism under shifted orthogonality. This does not assert detection or use induction. -/
+/-- A perfect complex `Q` supported on `T` is a retract of a perfect complex `E` supported on `T`
+such that the open-restriction unit at every quasi-coherent `K` supported on `T` with
+`E⟦n⟧ ⟶ K` trivial for all `n` is an isomorphism. -/
 theorem exists_supported_koszul_unit_summand
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -22,7 +22,7 @@ import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 ## References
 
 * Stacks Project, Tag 067U, and More on Morphisms, Tag 068C.
-* Stacks Tag 062F.
+* Stacks Project, Tag 062F.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Specialize the weakly regular module theorem to the ring, transporting its homology
-vanishing along the degreewise tensor-unit isomorphisms. -/
+/-- A weakly regular sequence in a commutative ring is Koszul regular. -/
 private theorem isKoszulRegular_of_isWeaklyRegular {R : Type u} [CommRing R] {r : ℕ} (g : Fin r → R)
     (h : RingTheory.Sequence.IsWeaklyRegular R (List.ofFn g)) :
     RingTheory.Sequence.IsKoszulRegular g := by
@@ -59,8 +58,7 @@ private theorem isKoszulRegular_of_isWeaklyRegular {R : Type u} [CommRing R] {r 
     ((HomologicalComplex.homologyFunctor _ _ n).mapIso e.symm)
 
 /-- A closed immersion on an affine open is the spectrum of the quotient by its section
-kernel. Surjectivity gives the ring isomorphism by the first isomorphism theorem; naturality
-of the affine spectrum isomorphism proves compatibility over the open. -/
+kernel. -/
 private theorem affine_closedImmersion_quotient {X Y : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i]
     (U : Y.Opens) (hU : IsAffineOpen U) :
     ∃ e : (i ⁻¹ᵁ U).toScheme ≅
@@ -84,14 +82,9 @@ private theorem affine_closedImmersion_quotient {X Y : Scheme.{u}} (i : X ⟶ Y)
   exact (Scheme.Opens.toSpecΓ_naturality i U).symm
 
 /-- The closed diagonal of a finite type smooth morphism of pure relative dimension `d`
-over a Noetherian scheme is a Koszul-regular immersion of codimension `d`, its
-pushed-forward structure sheaf in degree zero is perfect, and the diagonal is proper.
-The Koszul-regular clause is the affine quotient-presentation hypothesis of
-`lem-sc-koszul-regular-closed-immersion-perfect` (`koszulRegular_closedImmersion_perfect`):
-every point of `X ×_S X` has an affine open neighbourhood `U` whose ideal `I` of the
-diagonal is spanned by a Koszul-regular sequence, with `Δ⁻¹(U) ≅ Spec(Γ(U)/I)` over `U`;
-codimension `d` means the sequence has length `d` unless `U` misses the diagonal
-(`I = ⊤`). -/
+over a Noetherian scheme is a Koszul-regular immersion of codimension `d` (locally
+cut out by a Koszul-regular sequence of length `d`), its pushed-forward structure sheaf in
+degree zero is perfect, and the diagonal is proper. -/
 theorem smooth_diagonal_koszul_regular_perfect_proper {X S : Scheme.{u}}
     (d : ℕ) (f : X ⟶ S) [IsNoetherian S] [SmoothOfRelativeDimension d f]
     [LocallyOfFiniteType f] [QuasiCompact f] [IsClosedImmersion (pullback.diagonal f)]

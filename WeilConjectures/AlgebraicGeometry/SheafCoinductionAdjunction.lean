@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.SheafCoinductionCounit
 
 ## References
 
-* Stacks Project, duality.tex, Tag 0BUZ.
+* Stacks Project, Tag 0BUZ.
 -/
 
 @[expose] public section

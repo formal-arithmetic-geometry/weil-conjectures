@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 ## References
 
 * Stacks Project, Algebraization, Tag 099I.
-* Stacks Project, sites-cohomology.tex, Section 0A8X.. Proof: uncurrying first precomposes and then
+* Stacks Project, Section 0A8X. Proof: uncurrying first precomposes and then
   postcomposes.
 -/
 

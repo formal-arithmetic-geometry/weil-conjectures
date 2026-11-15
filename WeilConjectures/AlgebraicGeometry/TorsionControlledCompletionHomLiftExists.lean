@@ -10,13 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
 import WeilConjectures.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion
 
-/-!
+/-! # Existence of lifts of torsion-controlled completion homomorphisms
+
 ## References
 
-* Stacks Project, Tag 0889(1), affine gluing argument using Tag 05EK. The proof identifies coherent
-  modules on affine opens with finite modules, constructs localized comparison maps where the
-  torsion kernels and cokernels vanish, and uses exactness of the formal gluing complex to descend
-  these maps and glue them globally. This is strictly the existence half.
+* Stacks Project, Tag 0889(1); see also Tag 05EK.
 -/
 
 @[expose] public section
@@ -27,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Existence part of the torsion-controlled completion homomorphism lifting theorem.
--/
+/-- Given `a : F ⟶ H` and `a' : F' ⟶ H` whose kernels and cokernels are killed by a power of `J`,
+every map `θ` of completions over `H` lifts to a map `g : F ⟶ F'` over `H` completing to `θ`. -/
 theorem torsionControlled_completion_hom_lift_exists
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H F F' : CoherentModules X) (a : F ⟶ H) (a' : F' ⟶ H)

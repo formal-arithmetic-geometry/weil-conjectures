@@ -37,9 +37,7 @@ namespace AlgebraicGeometry
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Exact derived restriction has the original homology stalk at each point of the open.
-Combine exact restriction/homology comparison with the over-site equivalence and
-`Scheme.Modules.restrictStalkNatIso`. -/
+/-- Exact derived restriction has the original homology stalk at each point of the open. -/
 private noncomputable def restrictionHomologyStalkIso
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -61,9 +59,7 @@ private noncomputable def restrictionHomologyStalkIso
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Vanishing after open restriction implies vanishing of homology stalks on that open.
-Apply homology and the additive stalk functor to the zero object, then use the stalk
-comparison. -/
+/-- Vanishing after open restriction implies vanishing of homology stalks on that open. -/
 private theorem stalk_zero_of_restriction_zero
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -86,10 +82,7 @@ private theorem stalk_zero_of_restriction_zero
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Open base change propagates cohomological support through derived direct image.
-Restriction to the inverse image of the open complement of T is zero by supported
-restriction. Open base change identifies restriction of the direct image with the
-direct image of that zero object. Its homology stalks on the complement vanish. -/
+/-- Open base change propagates cohomological support through derived direct image. -/
 private theorem direct_image_support
     {Y X : Scheme.{u}} (f : Y ⟶ X)
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -137,7 +130,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The open right-adjoint image of a supported quasi-coherent complex remains supported
-and quasi-coherent. This concerns the second vertex, with no cone or triangle supplied. -/
+and quasi-coherent. -/
 theorem supported_open_unit_image_properties
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

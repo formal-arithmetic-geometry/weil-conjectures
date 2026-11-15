@@ -35,7 +35,7 @@ torsion sheaves reduce to sheaves killed by a positive integer.
 
 ## References
 
-- Stacks Project, Lemma 59.51.7 (cohomology and filtered colimits),
+* Stacks Project, Lemma 59.51.7 (cohomology and filtered colimits),
   <https://stacks.math.columbia.edu/tag/03Q6>
 -/
 

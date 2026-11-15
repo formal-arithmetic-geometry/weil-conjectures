@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 
 ## References
 
-* Stacks Project, More on Algebra, proof of Tag 09XH.
-* Stacks Project, :2529-2541, proof of Tag 09XH.
+* Stacks Project, More on Algebra, Tag 09XH.
 -/
 
 @[expose] public section
@@ -49,15 +48,9 @@ theorem firstFactor_range
       ext <;> simp [ha']
     exact (p.isPrime.mem_or_mem (hm ▸ p.asIdeal.zero_mem)).resolve_right he
 
-/-- A component of a closed fibre has relatively open image over an isomorphism locus.
-
-Choose a lift t of e.symm (1,0). The first factor spectrum is V(J) intersect D(t):
-a prime containing J contains exactly one of t and 1-t, since their product lies in J.
-The equality J = map i J' identifies V(J) with the inverse image of V(J').
-On the inverse image of U, the scheme isomorphism induces a homeomorphism to U.
-It sends the open intersection with D(t) to an open W in Spec(S'). The image of
-our factor is W intersect V(J'), because every point of the factor lies over U.
-Pullback along the quotient spectrum therefore gives an open subset. -/
+/-- Let `J = J'S` and `S ⧸ J ≃ D₁ × D₂`. If `Spec D₁` lies over an open `U` of `Spec S'` over
+which `Spec S ⟶ Spec S'` is an isomorphism, then the image of `Spec D₁` in `Spec S'` is open in
+`Spec (S' ⧸ J')`. -/
 theorem quotient_firstFactor_image_isOpen
     {S' S : Type u} [CommRing S'] [CommRing S] (i : S' →+* S)
     (J' : Ideal S') (J : Ideal S) (hJ : Ideal.map i J' = J)

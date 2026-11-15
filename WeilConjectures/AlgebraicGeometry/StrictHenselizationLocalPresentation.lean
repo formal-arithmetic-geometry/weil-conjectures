@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizatio
 
 ## References
 
-* Stacks Project, Tag 04HX.
-* Stacks Project, Tag 04HX, using Tag 04GW.
+* Stacks Project, Tags 04HX and 04GW.
 -/
 
 @[expose] public section
@@ -173,7 +172,7 @@ theorem strictHenselization_chart_isStrictHenselization
 
 
 /-- The geometric strict henselization is an algebraic strict henselization of a prime
-localization, compatibly with the given structural ring map. There is no divisor here. -/
+localization, compatibly with the given structural ring map. -/
 theorem strictHenselizationRing_local_presentation
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

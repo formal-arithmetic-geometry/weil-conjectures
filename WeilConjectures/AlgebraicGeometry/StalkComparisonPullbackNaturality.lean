@@ -23,9 +23,9 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 ## References
 
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-* Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8; Cohomology, Tag 06YB (K-flat stalks),
-  and Tag 06Y6 (derived tensor functoriality).
+* Stacks Project, Derived Categories of Schemes, the base change map preceding Tag 0DJ8.
+* Stacks Project, Cohomology, Tag 06YB (K-flat stalks) and Tag 06Y6 (derived tensor
+  functoriality).
 -/
 
 @[expose] public section
@@ -55,11 +55,8 @@ variable [∀ Y : Scheme.{u},
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
-/-- The comparison with the cohomology of the canonical derived pullback.
-Its construction uses the invertible pullback counit on the representative, the
-specified tensor-stalk isomorphism, and the localization comparison; no target
-complex or morphism to a target is involved.
--/
+/-- The comparison from the localized stalk cohomology model of `P` to the stalk cohomology at
+`z` of the canonical derived pullback of `P`. -/
 def comparisonIntoPullback (z : X')
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
@@ -82,8 +79,8 @@ def comparisonIntoPullback (z : X')
           (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
 /-- The comparison into derived pullback is natural for derived isomorphisms of
-K-flat sheaf representatives, using any tensor-algebra lift of the specified
-underlying cohomology transport. -/
+K-flat sheaf representatives, with respect to any tensor-algebra lift of the underlying
+cohomology transport. -/
 theorem comparisonIntoPullback_naturality (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor)

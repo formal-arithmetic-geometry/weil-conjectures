@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Homology.RingHomExtensionDefs
 
 ## References
 
-* Stacks Project, algebraization.tex, Tag 099D, clauses (a)-(d). The predicates below specify data
+* Stacks Project, Tag 099D, clauses (a)-(d). The predicates below specify data
   and equations.
 -/
 

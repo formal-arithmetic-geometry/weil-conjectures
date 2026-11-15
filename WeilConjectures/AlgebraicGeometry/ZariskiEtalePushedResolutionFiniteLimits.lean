@@ -13,10 +13,12 @@ import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 
-/-!
+/-! # Zariski-to-étale abelian sheaf pullback preserves finite limits
+
 ## References
 
-* Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX; Modules on Sites, Tag 03DJ.
+* Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX;
+  Modules on Sites, Tag 03DJ.
 -/
 
 @[expose] public section

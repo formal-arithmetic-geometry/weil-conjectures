@@ -37,9 +37,11 @@ projection arrow is selected from an unconstrained existence statement.
 * `ProjectionRestriction.TensorModel`: derived tensor normalized on resolving pairs.
 * `ProjectionRestriction.Local`: canonical slice comparisons and their normalizations.
 
+## Implementation details
+
 The assembly theorem `ringedProjectionRestriction` is in
-`Sheaf.Paper.RingedProjectionRestriction`. This module contains its unchanged data
-interfaces so the construction lemmas can be imported without a cycle.
+`Sheaf.Paper.RingedProjectionRestriction`. This module contains its data interfaces so the
+construction lemmas can be imported without a cycle.
 
 ## References
 
@@ -84,9 +86,9 @@ instance derivedOver (R : Sheaf J CommRingCat.{u + 1}) (V : C) :
 instance derivedOverModules (R : Sheaf J RingCat.{u + 1}) (V : C) :
     HasDerivedCategory (SheafOfModules.{u + 1} (R.over V)) := HasDerivedCategory.standard _
 
-/-- Proof data for the actual module operations associated to a continuous ringed site map.
-The only ring map is the displayed coefficient map. The adjunction, exact pullback and
-K-injective direct image are then fixed constructions. -/
+/-- The module operations associated to a continuous ringed site map: the coefficient ring map
+together with adjointness, additivity and exactness of module pullback and pushforward, and
+K-injective resolutions for `S`-modules. -/
 structure Operation (F : C ⥤ D) (R : Sheaf J CommRingCat.{u + 1})
     (S : Sheaf K CommRingCat.{u + 1}) where
   [continuous : F.IsContinuous J K]

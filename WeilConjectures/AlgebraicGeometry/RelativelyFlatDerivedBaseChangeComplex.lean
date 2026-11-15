@@ -25,14 +25,18 @@ import WeilConjectures.AlgebraicGeometry.TensorCounitOneKFlatCoordinates
 
 /-! # Derived base change for a bounded relatively flat complex
 
+## Implementation details
+
+The map in `relativelyFlat_derivedBaseChange_complex` is the derived base-change map followed by
+the derived-to-ordinary pullback counit `SingleComplexBaseChange.counit` at `Tot(P ⊗ G)`. Its
+target represents `Rf_{T,*}(L(g')^*E ⊗^L (g')^*G)`: the termwise pullback tensor isomorphism
+identifies `(g')^*Tot(P ⊗ G)` with `Tot((g')^*P ⊗ (g')^*G)`, and `(g')^*P` is K-flat and
+represents `L(g')^*E`. No boundedness or flatness is imposed on `E`.
+
 ## References
 
-* Stacks Project, perfect.tex, Lemma 36.26.4, Tag 0A1D.
-* Stacks Project, perfect.tex, Lemma 36.26.4, Tag 0A1D. Proof (the three steps of the node): 1.
-  Apply (Tags 0DJ9 and 0DJA) to the qcqs morphism, `E` with quasi-coherent cohomology, and the
-  bounded-above complex `G`. 2. Verify the criterion's stalk condition by: the stalk complex of `G`
-  is bounded above and flat over the base stalk, so ordinary tensor with the new base computes
-  derived tensor.
+* Stacks Project, Derived Categories of Schemes, Lemma 36.26.4, Tag 0A1D; Tags 0DJ9 and 0DJA.
+* Stacks Project, Tag 079U.
 -/
 
 @[expose] public section
@@ -137,20 +141,10 @@ private theorem relativelyFlat_isIso_transport
     (isIso_comp_right_iff _ (F.map b.hom)).mp hcomp
   exact IsIso.of_isIso_comp_left s.hom _
 
-/-- The canonical base-change map for a relatively flat bounded-above complex is
-invertible. `P` is a K-flat representative of `E` (`e`), so the total tensor complex
-`Tot(P ⊗ G)` represents `E ⊗^L G`; `α` is any identification of the two (invertibility
-does not depend on it, since it is precomposed after the derived functors). The map
-displayed is `Lg^*Rf_*(E ⊗^L G) ⟶ Rf_{T,*}L(g')^*Tot(P ⊗ G) ⟶ Rf_{T,*}(g')^*Tot(P ⊗ G)`:
-the recorded derived base-change map followed by the universal derived-to-ordinary
-pullback counit `SingleComplexBaseChange.counit` at `Tot(P ⊗ G)`. Its target is the node's
-`Rf_{T,*}(L(g')^*E ⊗^L (g')^*G)`: the termwise module pullback tensor isomorphism
-identifies `(g')^*Tot(P ⊗ G)` with
-`Tot((g')^*P ⊗ (g')^*G)`, and `(g')^*P` is K-flat and represents `L(g')^*E`, so this
-complex represents `L(g')^*E ⊗^L (g')^*G`. Under these identifications and the
-derived pullback tensor comparison (lem-pc-derived-pullback-tensor-product, Stacks 079U)
-the displayed map is the source's canonical map; postcomposing with these isomorphisms
-does not change `IsIso`. No boundedness or flatness is imposed on `E`. -/
+/-- For a qcqs `f`, `E` with quasi-coherent cohomology, a K-flat representative `P` of `E`, and
+a bounded-above complex `G` of quasi-coherent modules flat over `S`, the base-change map
+`Lg^*Rf_*(E ⊗^L G) ⟶ Rf_{T,*}(g')^*Tot(P ⊗ G)` is invertible, for any identification `α` of
+`E ⊗^L G` with `Tot(P ⊗ G)`. -/
 theorem relativelyFlat_derivedBaseChange_complex
     {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (g : T ⟶ S)

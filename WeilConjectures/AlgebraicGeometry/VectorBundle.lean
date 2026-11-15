@@ -75,11 +75,10 @@ structure VectorBundleAtlas (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) where
             (pullback.fst (v i) (v j)) (𝟙 Z) (by simp) (by simp)).appTop
             ((chart i).hom.appTop (AffineSpace.coord (V i) (ULift.up l))))
 
-/-- `p : E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a section
-of `p` and a closed immersion, and `(p, z)` admits a linear atlas of rank `c`
+/-- `p : E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a
+section of `p` and a closed immersion, and `(p, z)` admits a linear atlas of rank `c`
 (`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas`): Zariski-locally on `Z`, `(E, z)` is
-`(𝔸^c, 0)` with linear transition functions, i.e. `E ≅ Spec_Z (Sym^• ℰ)` for the locally free
-sheaf `ℰ` of rank `c` of fibrewise linear functions, `z` being given by the augmentation. -/
+`(𝔸^c, 0)` with linear transition functions. -/
 structure IsVectorBundle (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) : Prop where
   zeroSection_comp : z ≫ p = 𝟙 Z
   isClosedImmersion_zeroSection : IsClosedImmersion z

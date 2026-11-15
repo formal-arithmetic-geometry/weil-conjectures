@@ -14,13 +14,11 @@ import WeilConjectures.AlgebraicGeometry.KFlatSingleTensorRepresentative
 import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorComplexProjection
 import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
 
-/-!
+/-! # Self-Tor of a closed immersion via a K-flat resolution
+
 ## References
 
-* Stacks Project, Tags 06YH, 08KS, 01CB and 0098. Proof: compute the derived tensor square using P
-  tensor B[0], identify this complex with the termwise pushforward of tensorPullback(i)(P), apply
-  homology, and use exact closed-immersion module pushforward to commute homology with it. The
-  localization/homology comparison identifies the actual displayed objects.
+* Stacks Project, Tags 06YH, 08KS, 01CB and 0098.
 -/
 
 @[expose] public section
@@ -29,10 +27,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
-/--
-The K-flat tensor representative and ordinary closed-immersion projection
-comparison give an invertible arrow between the displayed homology objects.
--/
+/-- For a closed immersion `i : Z ⟶ Y` and a K-flat resolution `P` of `B = i_* 𝒪_Z`, there is
+an isomorphism `H^k(B ⊗^L B) ⟶ i_* H^k(i^* P)`. -/
 theorem exists_selfTor_projection_homology_termwise_arrow
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -63,13 +59,8 @@ theorem exists_selfTor_projection_homology_termwise_arrow
     (T.sc k).mapHomologyIso (Scheme.Modules.pushforward i)
   exact ⟨h.hom, inferInstance⟩
 
-/-- The termwise representative form of the self-Tor projection computation.
-
-This is the derived projection-formula computation followed by comparison with the
-specified K-flat resolution and exact closed-immersion pushforward.  It is separated
-from representative transport so that an arbitrary isomorphic complex can be handled
-functorially in the parent theorem.
--/
+/-- For a closed immersion `i : Z ⟶ Y` and a K-flat resolution `P` of `B = i_* 𝒪_Z`, there is
+an isomorphism `H^k(B ⊗^L B) ≅ i_* H^k(i^* P)`. -/
 theorem nonempty_selfTor_projection_homology_termwise
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

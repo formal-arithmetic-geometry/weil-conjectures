@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleGraphProjectionArbitraryBase
 
 /-! # Normalized etale exceptional duality over arbitrary bases
 
-proof.md`, paragraphs 2-3
-.
+## Implementation details
 
 The normalization is the mate of the constructed graph comparison, with the exact
 sum/evaluation adjunction. Tensor domains are transported explicitly from left-derived
@@ -158,9 +157,8 @@ private theorem exactTensorUnit
     Category.assoc] using h
 
 /-- Canonical etale exceptional duality, including its evaluation-counit normalization
-and the equality of the actual tensor mate with the unit action. The adjunction argument
-selects any right adjoint furnished by `sfEtaleAmbientAdjointProjection`.
-proof.md`, paragraphs 2-3. -/
+and the equality of the tensor mate with the unit action. The adjunction argument
+selects any right adjoint furnished by `sfEtaleAmbientAdjointProjection`. -/
 theorem sfEtaleUnitTensorArbitraryBase
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e] (c : Compactification e)

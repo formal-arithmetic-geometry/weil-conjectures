@@ -21,14 +21,17 @@ import WeilConjectures.AlgebraicGeometry.SectionResolvingOplaxConstraintDiagrams
 
 /-! # The actual internal derived tensor arrow on section representatives
 
-The component below is a conjugate of `internalDelta`, never a definition by its
-representative square. The other helpers expose precisely the square's two sides,
-its naturality, and the localized associator and unitor paths.
+This file compares the derived tensor arrow `actualTensor` with the cochain-level tensor
+comparison on resolving section representatives: the representative square, its naturality,
+and the localized associator and unitor paths.
+
+## Implementation details
+
+`actualTensor` is a conjugate of `internalDelta`, not a definition by its representative square.
 
 ## References
 
-* Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
-* Stacks 06YU, 07A4.
+* Stacks Project, Tags 06YU, 07A4 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -358,8 +361,7 @@ def actualTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((derivedPullback Λ f).map ((derivedEquivalence Λ Y).counitIso.hom.app M))
       ((derivedPullback Λ f).map ((derivedEquivalence Λ Y).counitIso.hom.app N)))
 
-/-- The prescribed input comparison a: LF(r_Y inverse), followed by epsilon at the total.
-Here qTensor is r inverse on resolving representatives, by the fixed K-flat normalization. -/
+/-- The prescribed input comparison a: LF(r_Y inverse), followed by epsilon at the total. -/
 def input {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (derivedPullback Λ f).obj
@@ -417,9 +419,8 @@ def Naturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
       actualPath Λ f P.obj Q.obj ≫ DerivedCategory.Q.map
         ((totalSectionPull Λ f).map a ⊗ₘ (totalSectionPull Λ f).map b)
 
-/-- Compatibility with inverses in the localized representative categories.
-The hypotheses identify the inverse maps by both inverse equations, so no arbitrary
-choice of an inverse or extra invertibility assumption is introduced. -/
+/-- Compatibility of `actualPath` with two-sided inverses of quasi-isomorphisms in the localized
+representative categories. -/
 def InverseNaturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   ∀ (P Q P' Q' : (KFlatSectionComparison.sectionResolving Λ Y).FullSubcategory)
     (a : P.obj ⟶ P'.obj) (b : Q.obj ⟶ Q'.obj),
@@ -1179,28 +1180,7 @@ private theorem output_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
   infer_instance
 
 /-- The actual internal derived arrow satisfies the prescribed resolving square and unit,
-with its naturality, inverse-denominator compatibility, and all three constraint diagrams.
-
-Proof, following the five assembly steps of the node.
-1. Exactness makes every epsilon invertible. The resolving qTensor is invertible,
-   hence so is input. The actual internal tensor arrow and its conjugate are
-   isomorphisms; the representative equation then makes output invertible.
-2. Apply the internal derived tensor component formula to cochain representatives.
-   Normalize the quotient tensor and apply the derived section equivalence.
-   The conjugation identities identify both endpoints and the middle total arrow.
-   Naturality of the actual conjugate extends the equation through the termwise
-   equivalence counits. Cancel the invertible binary input identification.
-3. Substitute the internal unit component identity into the unary conjugation
-   equation and cancel the comparison isomorphisms.
-4. Whisker the natural actual conjugate by the product localization, then compose
-   with the tensor of epsilon and qTensor. Naturality of this composite gives
-   actualPath naturality, even before restricting to resolving representatives.
-   Multiplying this square by the specified inverses gives inverse naturality.
-5. Instantiate the resolving constraint theorem with the actual conjugate and
-   unit. The pair and unit formulas supply its hypotheses. Convert the transported
-   tensor maps to tensor notation and normalize composition to obtain exactly the
-   two associator paths and the four unitor paths in the statement.
--/
+with its naturality, inverse-denominator compatibility, and all three constraint diagrams. -/
 theorem section_derived_representative_square {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ P Q : (KFlatSectionComparison.sectionResolving Λ Y).FullSubcategory,
       IsIso (input Λ f P.obj Q.obj) ∧ IsIso (output Λ f P.obj Q.obj) ∧

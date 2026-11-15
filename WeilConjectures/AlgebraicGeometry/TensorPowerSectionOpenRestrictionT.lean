@@ -12,10 +12,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
-/-!
+/-! # Open restriction of tensor-power section transition maps
+
 ## References
 
-* Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction paragraph.
+* Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW.
 -/
 
 @[expose] public section

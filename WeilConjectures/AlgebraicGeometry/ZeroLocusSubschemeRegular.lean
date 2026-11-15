@@ -16,9 +16,8 @@ public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 /-!
 # Local rings of the zero locus of a function, and regular points
 
-Auxiliary results for the local chart of blueprint `lemma-punctured-surface-punctured-curve--1`,
-where the zero locus `V(t)` of a function `t` with germ in `𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is shown to
-be a regular divisor near `x`.
+Auxiliary results for showing that the zero locus `V(t)` of a function `t` with germ in
+`𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is a regular divisor near `x`.
 
 - The local ring of `V(f) ⊆ Y` at `z` is `𝒪_{Y,z} ⧸ (f)`
   (`AlgebraicGeometry.Scheme.ker_stalkMap_zeroLocusSubschemeι_singleton`,
@@ -29,6 +28,10 @@ be a regular divisor near `x`.
   `AlgebraicGeometry.Scheme.Hom.isRegularLocalRing_stalk_of_mem_smoothLocus`).
 - A locally noetherian scheme with domain local rings has irreducible open neighbourhoods
   (`AlgebraicGeometry.Scheme.exists_mem_isPreirreducible_of_isDomain_stalk`).
+
+## References
+
+* Stacks Project, Tag 00TV (regular points are smooth over a perfect field).
 -/
 
 @[expose] public section
@@ -102,7 +105,7 @@ theorem Scheme.Opens.exists_zeroLocusSubschemeι_eq {X : Scheme.{u}} (U : X.Open
   rw [U.ι_image_basicOpen_topIso_inv, X.mem_basicOpen _ _ w.2] at h
   exact (IsLocalRing.mem_maximalIdeal _).mp hw h
 
-/-- **Regular points are smooth over a perfect field** (Stacks `00TV`). Let `X` be locally of
+/-- **Regular points are smooth over a perfect field.** Let `X` be locally of
 finite type over a perfect field `K`. Every point of `X` whose local ring is regular lies in the
 smooth locus of `X ⟶ Spec K`. -/
 theorem Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing_of_perfectField {K : Type u} [Field K]
@@ -144,8 +147,7 @@ theorem Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing_of_perfectField {K : Ty
   rwa [hcomp] at this
 
 /-- **Smooth points are regular.** The local ring of a scheme over a field `K` at a point of the
-smooth locus of `X ⟶ Spec K` is a regular local ring: the smooth locus is an open subscheme
-smooth over `K`. -/
+smooth locus of `X ⟶ Spec K` is a regular local ring. -/
 theorem Scheme.Hom.isRegularLocalRing_stalk_of_mem_smoothLocus {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f] {x : X}
     (hx : x ∈ f.smoothLocus) : IsRegularLocalRing (X.presheaf.stalk x) := by
@@ -156,8 +158,7 @@ theorem Scheme.Hom.isRegularLocalRing_stalk_of_mem_smoothLocus {K : Type u} [Fie
   exact .of_ringEquiv (f.smoothLocus.stalkIso ⟨x, hx⟩).commRingCatIsoToRingEquiv
 
 /-- In a locally noetherian scheme whose local rings are domains, every point has an open
-neighbourhood which is (pre)irreducible: its connected component, which is open since `X` is
-locally connected, and irreducible by `AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk`. -/
+neighbourhood which is (pre)irreducible. -/
 theorem Scheme.exists_mem_isPreirreducible_of_isDomain_stalk (X : Scheme.{u})
     [IsLocallyNoetherian X] (h : ∀ x : X, IsDomain (X.presheaf.stalk x)) (x : X) :
     ∃ C : X.Opens, x ∈ C ∧ IsPreirreducible (C : Set X) := by

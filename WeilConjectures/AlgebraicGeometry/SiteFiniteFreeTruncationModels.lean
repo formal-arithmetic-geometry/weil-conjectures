@@ -14,6 +14,11 @@ import WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 
 /-! # Local finite free models of a good lower truncation
 
+## Implementation details
+
+The derived categories of the slices use their standard localization; no choice of small
+localization or of points of the site is required.
+
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 094G and 094H; More on Algebra, Tag 066E.
@@ -109,9 +114,7 @@ private theorem finite_free_realization (B : Type u) [CommRing B] [IsNoetherianR
 
 set_option synthInstance.maxSize 2048 in
 /-- A single bounded-above complex with finite locally constant cohomology has, on
-covering slices, bounded-above finite free constant models for each good lower truncation.
-The derived categories of slices use their standard localization; no choice of small
-localization or points of the site is required. -/
+covering slices, bounded-above finite free constant models for each good lower truncation. -/
 theorem exists_site_finiteFree_truncation_models
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks]

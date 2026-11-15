@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteGeneratorsLocalSpan
 
 ## References
 
-* Stacks Project, algebraization.tex, Tag 099E.
+* Stacks Project, Tag 099E.
 -/
 
 @[expose] public noncomputable section

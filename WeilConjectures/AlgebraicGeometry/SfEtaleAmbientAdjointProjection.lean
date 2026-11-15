@@ -13,10 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-! # Ambient etale adjunction and projection for a supplied compactification
 
-proof.md`, paragraph 1;
-Stacks Project, Tags 0F0G, 0GL1 and 0F5Y
-.
-
 The factorization is supplied explicitly as `Compactification f`, which does not
 require its open immersion to be quasi-compact. The categories are ordinary and
 unbounded. The inverse image appearing in the projection map is canonically the
@@ -27,6 +23,10 @@ termwise exact inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`.
 * `sfEtaleAmbientAdjointProjection`: the right adjoint exists and every canonical
   projection component is invertible.
 * `sfEtaleAmbientTensorMap`: its counit transpose for any selected right adjoint.
+
+## References
+
+* Stacks Project, Tags 0F0G, 0GL1 and 0F5Y.
 -/
 
 @[expose] public section
@@ -41,9 +41,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The ordinary unbounded compact-support functor of a supplied open/proper
-factorization has a right adjoint, and its canonical projection map is invertible.
-proof.md`, paragraph 1;
-Stacks Project, Tags 0F0G, 0GL1 and 0F5Y. -/
+factorization has a right adjoint, and its canonical projection map is invertible. -/
 theorem sfEtaleAmbientAdjointProjection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -65,10 +63,7 @@ theorem sfEtaleAmbientAdjointProjection
 
 /-- The morphism theta for a selected right adjoint G, with omega = G(A_Y).
 It is the transpose of inverse projection, followed by the counit tensored with
-K and the left unit constraint. The adjunction is data selecting the right
-adjoint whose existence is sfEtaleAmbientAdjointProjection, not an additional
-geometric hypothesis. No invertibility assertion is made about theta.
-proof.md`, paragraph 1. -/
+K and the left unit constraint. -/
 noncomputable def sfEtaleAmbientTensorMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

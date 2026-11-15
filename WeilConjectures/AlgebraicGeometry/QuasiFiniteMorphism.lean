@@ -30,12 +30,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- Quasi-finite at a point in the sense of Stacks Tag 01TD:
-some affine neighbourhood `U` of `x` maps into an affine
-open `V`, and the ring map `Γ(S, V) → Γ(X, U)` is of finite type and quasi-finite at the
-prime corresponding to `x`, in the sense of `Algebra.IsQuasiFiniteAtPrime`.
-For `f` locally
-of finite type it is Mathlib's `f.QuasiFiniteAt x`
+/-- Quasi-finite at a point in the sense of Stacks Tag 01TD: some affine neighbourhood `U` of `x`
+maps into an affine open `V`, and `Γ(S, V) → Γ(X, U)` is of finite type and quasi-finite at the
+prime corresponding to `x`. For `f` locally of finite type it is Mathlib's `f.QuasiFiniteAt x`
 (`Scheme.Hom.isQuasiFiniteAtPoint_iff_quasiFiniteAt`). -/
 def IsQuasiFiniteAtPoint {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) (x : X) : Prop :=
   ∃ (U : X.Opens) (hx : x ∈ U) (hU : AlgebraicGeometry.IsAffineOpen U)
@@ -45,25 +42,20 @@ def IsQuasiFiniteAtPoint {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) (x :
       letI := hft
       Algebra.IsQuasiFiniteAtPrime Γ(S, V) Γ(X, U) (hU.primeIdealOf ⟨x, hx⟩)
 
-/-- Locally quasi-finite in the sense of Stacks Tag 01TD:
-quasi-finite at every point, including the local
-finite-type requirement in `IsQuasiFiniteAtPoint`. It is equivalent to Mathlib's
-`LocallyQuasiFinite f ∧ LocallyOfFiniteType f` (`Scheme.Hom.isLocallyQuasiFinite_iff`). -/
+/-- Locally quasi-finite in the sense of Stacks Tag 01TD: quasi-finite at every point.
+It is equivalent to Mathlib's `LocallyQuasiFinite f ∧ LocallyOfFiniteType f`
+(`Scheme.Hom.isLocallyQuasiFinite_iff`). -/
 def IsLocallyQuasiFinite {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
   ∀ x : X, IsQuasiFiniteAtPoint f x
 
-/-- Quasi-finite in the sense of Stacks Tag 01TD:
-of finite type, with every point isolated in its fibre. Finite type is expressed as
-locally of finite type and quasi-compact. The singleton is open in the scheme-theoretic
-fibre, which is canonically homeomorphic to the set-theoretic fibre. It is equivalent to
-Mathlib's `LocallyQuasiFinite f ∧ LocallyOfFiniteType f ∧ QuasiCompact f`
-(`Scheme.Hom.isQuasiFinite_iff`). -/
+/-- Quasi-finite in the sense of Stacks Tag 01TD: of finite type, with every point isolated in
+its fibre. It is equivalent to Mathlib's `LocallyQuasiFinite f ∧ LocallyOfFiniteType f ∧
+QuasiCompact f` (`Scheme.Hom.isQuasiFinite_iff`). -/
 def IsQuasiFinite {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
   AlgebraicGeometry.LocallyOfFiniteType f ∧ AlgebraicGeometry.QuasiCompact f ∧
     ∀ x : X, IsOpen ({f.asFiber x} : Set (f.fiber (f x)))
 
-/-- Finite fibres as in the blueprint's convention appended to Stacks Tag 01TD:
-the inverse image of every singleton is finite. -/
+/-- Finite fibres: the inverse image of every singleton is finite. -/
 def HasFiniteFibres {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
   ∀ s : S, (f ⁻¹' {s}).Finite
 

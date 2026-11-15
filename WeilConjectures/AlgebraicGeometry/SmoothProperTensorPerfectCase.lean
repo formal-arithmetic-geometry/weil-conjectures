@@ -23,6 +23,15 @@ import WeilConjectures.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore
 
 /-! # Projection comparison for perfect complexes
 
+## Implementation details
+
+In `smoothProper_tensor_perfect_case`, the inverse of the projection isomorphism `pf` is
+specified as the canonical projection map (inverse tensor comparison followed by the pullback
+counit). The existential witnesses record the quasi-coherence of `Rf_*E`, of the unit and of the
+tensor source; the statement holds for every monoidal structure on `Lf^*` and every adjunction
+`Lf^* ⊣ Rf_*`. Finite Tor dimension is stated via Tor of the restriction of scalars along the
+stalk maps, with a bound that may depend on the point but not on the test module.
+
 ## References
 
 * Stacks Project, Duality for Schemes, Tag 0A9T.
@@ -37,19 +46,9 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry
 
-/-- The projection-formula mate `Lf^*K ⊗ c(𝒪_Y) → c(K)` is invertible for perfect `K`.
-The displayed equation specifies the inverse of `pf` as the canonical projection map:
-its pullback-adjoint is the inverse tensor comparison followed by the pullback counit.
-Thus `pf.hom`, followed by the right-adjoint counit and the right unitor, has exactly
-its prescribed mate under `Rf_* ⊣ c`. Full-subcategory morphisms are formed by `homMk`.
-
-The existential witnesses are bookkeeping for restriction of `Rf_*` to quasi-coherent
-objects, the quasi-coherence of the unit and the tensor source, and the derived pullback's
-monoidal adjunction. They are conclusions, not additional geometric hypotheses. The
-formula is stated for every choice of monoidal pullback and its adjunction: in particular
-for their canonical K-flat constructions. These choices do not change invertibility.
-Finite Tor dimension is stated directly using Tor of the actual stalk-map restriction
-of scalars; the bound may depend on the point, but not on the test module. -/
+/-- For a proper morphism `f` of Noetherian schemes of finite Tor dimension and a right adjoint
+`c` of `Rf_*` on quasi-coherent objects, the projection-formula mate `Lf^*K ⊗ c(𝒪_Y) → c(K)`
+is invertible for perfect `K`. -/
 theorem smoothProper_tensor_perfect_case
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorCompariso
 
 ## References
 
-* Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+* Stacks Project, Tags 08DJ, 08DM and 08DQ.
 -/
 
 @[expose] public section

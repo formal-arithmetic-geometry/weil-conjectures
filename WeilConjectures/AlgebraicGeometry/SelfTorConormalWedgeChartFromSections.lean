@@ -14,15 +14,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
-/-!
+/-! # Conormal exterior power charts from sections
+
 ## References
 
 * Stacks Project, Tags 01R3 (conormal) and 01I6 (affine quasi-coherent sheaves, full faithfulness,
-  and exterior powers).. Proof: Let V be the inverse-image chart. It is affine since i is a closed
-  immersion and U is affine. The ideal module is the kernel of the map from the structure module to
-  the direct image of the structure module of its closed subscheme. Closed direct image and kernels
-  preserve quasi-coherence, so this ideal module is quasi-coherent. Identify tensorPullback with
-  ordinary pullback by uniqueness of left adjoints.
+  and exterior powers).
 -/
 
 @[expose] public section
@@ -122,7 +119,9 @@ private theorem affine_model_chart_quasicoherent {Z Y : Scheme.{u}} (i : Z ⟶ Y
   exact (SheafOfModules.isQuasicoherent V.toScheme.ringCatSheaf).prop_of_iso
     r.symm (by infer_instance)
 
-/-- Sheafification of the affine conormal section calculation. -/
+/-- On the chart `i⁻¹ U` over an affine open `U`, a linear isomorphism `e` between the sections
+of `∧ⁿ (i^* I)` and of the affine conormal model extends to an isomorphism of sheaves whose
+component on `i⁻¹ U` is `e`. -/
 theorem exists_selfTor_conormal_wedge_chart_from_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens)

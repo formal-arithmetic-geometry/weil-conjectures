@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RingCechConeDifferential
 
 ## References
 
-* Stacks Project, more-algebra.tex, section-alternating-cech.
-* Stacks Project, more-algebra.tex, section-alternating-cech, its differential formula and
-  localization base change; algebraization.tex, Tag 0996.
+* Stacks Project, section-alternating-cech.
+* Stacks Project, section-alternating-cech, its differential formula and
+  localization base change; Tag 0996.
 -/
 
 @[expose] public noncomputable section

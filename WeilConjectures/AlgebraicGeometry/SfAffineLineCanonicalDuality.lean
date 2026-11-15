@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SfExceptionalTensorTransitivity
 
 /-! # Canonical affine-line duality over arbitrary affine bases
 
-proof.md`, paragraphs 2-3, and
-`sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md`, paragraph 1
-.
+## Implementation details
 
 The compactification is the actual standard affine chart of projective space.
 The right adjoint and adjunction are selected ambient data; their existence follows
@@ -170,10 +168,9 @@ private theorem tensorMap_etale_restriction
   simpa only [isIso_comp_left_iff] using hi
 
 /-- Affine-line duality identifies the concrete roots-of-unity Tate line shifted by
-2 with the ambient dualizing object, and the resulting actual tensor composite is
+2 with the ambient dualizing object, and the resulting tensor composite is
 invertible for every ordinary unbounded complex. The arguments G and adj select
-an ambient right adjoint, whose existence is already guaranteed; they impose no
-additional geometric or cohomological hypothesis. -/
+an ambient right adjoint. -/
 theorem sfAffineLineCanonicalDuality
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

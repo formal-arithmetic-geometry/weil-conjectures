@@ -10,14 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparis
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 
-/-!
+/-! # Square-zero tensor section comparison and multiplication
+
 ## References
 
-* Stacks Project, Tag 01CD, tensor pullback, and Tag 09MS, tensor powers.. Proof: Replace D by
-  canonicalTensorBoundaryComparisons using hD. Its section comparison is boundaryPullbackPowIso
-  followed by tensorPowMulIso. Expand these recursive isomorphisms, and use naturality of
-  boundaryPullbackComparison and the monoidal pullback tensorator. The tensor-power addition map
-  groups the first n factors and the remaining n(e+1) factors.
+* Stacks Project, Tag 01CD, tensor pullback, and Tag 09MS, tensor powers.
 -/
 
 @[expose] public section

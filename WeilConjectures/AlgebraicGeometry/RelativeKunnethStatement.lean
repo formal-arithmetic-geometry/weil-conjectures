@@ -17,12 +17,17 @@ import WeilConjectures.Compactification.NagataCompactification
 /-!
 # Relative Künneth theorem
 
-This is the statement node `lemma-kunneth-formula-compact-supports--1` from the current blueprint.
-The canonical comparison is the published six-factor composite
-`AlgebraicGeometry.Etale.relativeKunnethIso`; its naturality is exposed by the published
-bifunctor isomorphism `relativeKunnethNatIso`.  The remaining clauses record the canonical
-base-change and proper `Rf_!`/`Rf_*` comparisons and the compact-support product after
-restriction to closed subschemes.
+The canonical comparison is the six-factor composite `AlgebraicGeometry.Etale.relativeKunnethIso`;
+its naturality is exposed by the bifunctor isomorphism `relativeKunnethNatIso`. The remaining
+clauses record the canonical base-change and proper `Rf_!`/`Rf_*` comparisons and the
+compact-support product after restriction to closed subschemes.
+
+## Implementation details
+
+Every comparison in `relativeKunnethBaseChangeCompatibility` is a canonical comparison; no
+auxiliary map is chosen. `relativeKunnethExteriorPullbackIso` is the explicit
+pullback-composition/tensor comparison occurring in the proof of
+`nonempty_iso_leftDerivedUpperStar_externalProduct`, with no choice from `Nonempty`.
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +55,7 @@ noncomputable def leftDerivedUpperStarCompPathIso
     (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) q r (a ≫ p) h).app K
 
 /-- The pasted exchange square expressing base-change compatibility of the canonical
-relative Künneth composite.  Every comparison in this definition is a published canonical
-comparison; no auxiliary map is chosen. -/
+relative Künneth composite. -/
 def relativeKunnethBaseChangeCompatibility
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
@@ -116,7 +120,7 @@ def relativeKunnethBaseChangeCompatibility
       ext_t ≫ ext'.hom ≫ κ'
 
 /-- Compatibility with proper direct image, expressed using the canonical forward
-ordinary Künneth map and the published forget-supports comparisons
+ordinary Künneth map and the forget-supports comparisons
 `AlgebraicGeometry.Etale.compactificationForgetSupports` of the chosen compactifications.
 The premise permits either factor to be proper. For each proper factor its comparison is the
 canonical identification `Rf_! ≅ Rf_*` (`isIso_compactificationForgetSupports`). -/
@@ -143,9 +147,8 @@ def relativeKunnethProperCompatibility
         kunnethMap (ModuleCat.{u + 1} Λ) (pullback.fst f g) (pullback.snd f g)
           f g (pullback.toBase f g) (by simp) (by simp) K L
 
-/-- The canonical restriction comparison for exterior products. This is the explicit
-pullback-composition/tensor comparison occurring in the proof of the published
-`nonempty_iso_leftDerivedUpperStar_externalProduct`, with no choice from `Nonempty`. -/
+/-- The canonical restriction isomorphism `(i × j)^*(K ⊠ L) ≅ i^*K ⊠ j^*L` for exterior
+products, built from the pullback-tensor and pullback-composition comparisons. -/
 def relativeKunnethExteriorPullbackIso
     {Λ : Type (u + 1)} [CommRing Λ]
     {X Y B Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)

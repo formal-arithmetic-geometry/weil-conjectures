@@ -17,7 +17,7 @@ import Mathlib.RingTheory.Flat.Basic
 
 ## References
 
-* Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV.
+* Stacks Project, Varieties, Lemma 09NC; Properties, Lemma 01PV.
 -/
 
 @[expose] public section
@@ -135,12 +135,9 @@ private theorem affine_finite_intersection {X : Scheme.{u}} {ι : Type*}
     simp only [Finset.mem_insert, forall_eq_or_imp]
     tauto
 
-/-- The tensor section `τ = t₀ ⊗ ⋯ ⊗ tₙ` of a nonempty finite family of invertible modules
-(the landed left-associated `positiveTensorFamily` with its section
-`positiveTensorFamilySection`, def-sc-positive-tensor-family; `n` means `n + 1` factors)
-has nonvanishing locus equal to the intersection of the factor loci. If one factor locus is
-affine, so is this intersection.
--/
+/-- The tensor section `τ = t₀ ⊗ ⋯ ⊗ tₙ` of a family of `n + 1` invertible modules
+(`positiveTensorFamilySection`) has nonvanishing locus equal to the intersection of the factor
+loci. If one factor locus is affine, so is this intersection. -/
 theorem tensor_section_affine_open {X : Scheme.{u}} (n : ℕ)
     (L : Fin (n + 1) → X.Modules) [∀ i, (L i).IsInvertible]
     (t : (i : Fin (n + 1)) → (L i).sections) :

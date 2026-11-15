@@ -18,6 +18,9 @@ For a morphism `f : X ⟶ Y`, the sheaf of relative differentials `Ω¹_{X/Y}` i
 bundle* is the vector bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})`
 (`AlgebraicGeometry.Scheme.Modules.symSpec`), with its zero section `X ⟶ T_{X/Y}`
 corresponding to the augmentation `Sym_{𝒪_X}(Ω¹_{X/Y}) ⟶ 𝒪_X`, which kills `Ω¹_{X/Y}`.
+It is mainly of interest for smooth `f`, where `Ω¹_{X/Y}` is locally free
+(`AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials`), but the
+construction makes sense for every morphism.
 
 ## Main definitions
 
@@ -64,10 +67,8 @@ instance isQuasicoherent_relativeDifferentials : f.relativeDifferentials.IsQuasi
   exact (presentationTilde _ Set.univ (by simp) _ (Submodule.span_eq _)).ofIsIso
     (f.relativeDifferentialsRestrictFromSpecIso (hU x) (hV x) (hVU x)).inv
 
-/-- The relative tangent bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})` of a morphism `f : X ⟶ Y`.
-The blueprint considers it for smooth `f`, where `Ω¹_{X/Y}` is locally free
-(`AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials`), but the
-construction makes sense for every morphism. -/
+/-- The relative tangent bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})` of a morphism
+`f : X ⟶ Y`. -/
 noncomputable def tangentBundle : Scheme.{u} :=
   f.relativeDifferentials.symSpec
 

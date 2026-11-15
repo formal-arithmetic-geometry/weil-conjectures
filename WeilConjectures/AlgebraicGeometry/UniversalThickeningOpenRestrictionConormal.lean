@@ -9,11 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.FormallyUnramifiedConormal
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKernelModule
 
-/-!
+/-! # Conormal sheaf of a universal first-order thickening under open restriction
+
 ## References
 
-* Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2. The restriction of the kernel
-  ideal along an open immersion identifies with the kernel ideal of the restricted thickening.
+* Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2.
 -/
 
 @[expose] public section

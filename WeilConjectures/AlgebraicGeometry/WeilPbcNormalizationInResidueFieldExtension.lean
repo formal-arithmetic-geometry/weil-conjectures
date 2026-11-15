@@ -12,14 +12,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
-/-!
+/-! # Normalization in a finite residue field extension
+
 ## References
 
-* Stacks Project, Morphisms Lemmas 035H, 035I, 035L and Etale Cohomology Lemma 09Z6. The proof first
-  shows that the composite from the affine field scheme is quasi-compact and quasi-separated. It
-  applies relative normalization to obtain an integral factorization with dominant map and uses
-  integrality of the source to make the normalization integral. On affine opens through the chosen
-  point, the coordinate ring is the integral closure of the corresponding domain in K.
+* Stacks Project, Morphisms, Lemmas 035H, 035I, 035L; Etale Cohomology, Lemma 09Z6.
 -/
 
 @[expose] public section
@@ -29,11 +26,7 @@ universe u
 open CategoryTheory Limits IsLocalRing
 open AlgebraicGeometry
 
-/-- Denominator clearing in the affine stalk supplies integral numerators and denominators.
-The finite extension is integral over the residue field, which is a quotient of the stalk.
-`IsIntegral.exists_multiple_integral_of_isLocalization` clears the coefficients of a monic
-relation at the affine prime. The resulting denominator is a unit in the stalk and hence
-has nonzero image in `K`. This proves the function-field calculation used in Stacks 09Z6. -/
+/-- Denominator clearing in the affine stalk supplies integral numerators and denominators. -/
 private theorem finite_residue_extension_integral_quotients
     (X : Scheme.{u}) (x : X) (K : Type u) [Field K]
     [Algebra (X.residueField x) K] [Module.Finite (X.residueField x) K]

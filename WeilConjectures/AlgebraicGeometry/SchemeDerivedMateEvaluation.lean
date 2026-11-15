@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
-/-! # SchemeDerivedMateEvaluation
+/-! # Evaluation of the derived base-change mate
 
 ## References
 
@@ -40,7 +40,7 @@ private theorem evaluation_factors {C D : Type*} [Category C] [Category D]
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The adjunction choice already used by `schemeDerivedBaseChangeMap`, pinned to the
+/-- The adjunction `Lk^* ⊣ Rk_*` used by `schemeDerivedBaseChangeMap`, pinned to the
 selected left-derived counit and the recorded right-derived unit. -/
 noncomputable def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶ Q) :
     derivedPullback k ⊣ schemeDerivedDirectImage k :=
@@ -50,15 +50,16 @@ noncomputable def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition))) k))
 
-/-- The composition choice already used by `schemeDerivedBaseChangeMap`, determined
-by the left-derived universal property in `exists_derivedPullbackComposition`. -/
+/-- The composition isomorphism `Lk^* ∘ Ll^* ≅ L(k ≫ l)^*` used by `schemeDerivedBaseChangeMap`,
+chosen via `exists_derivedPullbackComposition`. -/
 noncomputable def canonicalDerivedPullbackComposition {P Q Z : Scheme.{u}}
     (k : P ⟶ Q) (l : Q ⟶ Z) :
     derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=
   (Classical.choose (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition)))) k l
 
-/-- The square comparison already used in the defining transpose of base change. -/
+/-- The comparison `Ll'^* Lr^* ⟶ Lr'^* Ll^*` for a commutative square, as used in the
+definition of base change. -/
 noncomputable def canonicalDerivedSquareComparison {P Q P' Q' : Scheme.{u}}
     (l : P ⟶ Q) (l' : P' ⟶ Q') (r : Q' ⟶ Q) (r' : P' ⟶ P)
     (hh : r' ≫ l = l' ≫ r) (M : schemeDerivedCategory Q) :

@@ -14,10 +14,11 @@ import WeilConjectures.AlgebraicGeometry.TotalResolutionCycleFiniteSupport
 import WeilConjectures.AlgebraicGeometry.TotalResolutionCycleSupportStep
 import WeilConjectures.AlgebraicGeometry.TotalResolutionCycleSupportZero
 
-/-!
+/-! # Cycle reduction for left half-plane total complexes
+
 ## References
 
-* Stacks Project, Homology, Tag 09IZ, proof, finite-support induction.
+* Stacks Project, Homology, Tag 09IZ.
 -/
 
 @[expose] public section

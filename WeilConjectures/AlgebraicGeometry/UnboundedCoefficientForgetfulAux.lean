@@ -9,10 +9,11 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-!
+/-! # Restriction of scalars and invertibility of the unbounded étale base-change map
+
 ## References
 
-* Stacks Project, Tag 0D6J(3), and the canonical mate coherence of.
+* Stacks Project, Tag 0D6J(3).
 -/
 
 @[expose] public section

@@ -8,16 +8,16 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
-/-!
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
+public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource
+
+/-! # Invertibility of the source stalk comparison of the strict-local exchange cube
+
 ## References
 
 * Stacks Project, Tags 03Q9 and 03QO.
 -/
-
-
-public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
-public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource
 
 @[expose] public section
 universe u
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 set_option linter.unusedVariables false in
-/-- Component theorem: the source strict-local cube stalk comparison is invertible. -/
+/-- The source strict-local exchange-cube stalk comparison is invertible. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}

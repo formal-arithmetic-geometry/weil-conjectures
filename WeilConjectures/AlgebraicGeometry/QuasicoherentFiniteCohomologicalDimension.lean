@@ -30,7 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Actual intersections and inclusions realize the site Čech products (Stacks 01XI). -/
+/-- Actual intersections and inclusions realize the site Čech products. -/
 private def openCechProducts (X : Scheme.{u}) {I : Type u} (U : I → X.Opens) :
     SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)) where
   W p t := ⨅ k, U (t k)
@@ -63,7 +63,8 @@ private noncomputable def openCechProductsIso (X : Scheme.{u}) {I : Type u}
     simp only [SiteCechComplex.complex, CochainComplex.of_d]
     rfl)
 
-/-- Stacks 01XI, second proof: increasing tuples disappear above the cover size. -/
+/-- The Čech cohomology of a presheaf for a finite linearly ordered open cover vanishes in
+degrees at least the number of opens. -/
 private theorem finiteCech_isZero (X : Scheme.{u}) {I : Type u}
     [Fintype I] [LinearOrder I] (U : I → X.Opens) (hU : iSup U = ⊤)
     (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}) (p : ℕ) (hp : Fintype.card I ≤ p) :

@@ -16,8 +16,7 @@ specified-map equalities before and after homotopy quotient and localization.
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tag 07A4, displayed total comparison; Modules on Sites, Tag
-  03EL.
+* Stacks Project, Cohomology on Sites, Tag 07A4; Modules on Sites, Tag 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +45,8 @@ set_option backward.isDefEq.respectTransparency true
 -- One proposition records the component, local-generator and localized equations.
 /-- The clauses of actual internal-to-section total normalization: tensor and inverse
 equalities, both inverse laws, every summand, local scalar formulas, signed differential,
-unit multiplication, naturality and the three constraint diagrams. All complex arguments
-are arbitrary integer-indexed complexes; flat-term K-flat subcategories introduced in
-the node are context for later derived-tensor computation and impose no restriction here. -/
+unit multiplication, naturality and the three constraint diagrams, for arbitrary
+integer-indexed complexes. -/
 def SectionTotalNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{u + 1} (modules Λ X)] : Prop :=
   (∀ P Q : CochainComplex (internalModules Λ Y) ℤ,
@@ -478,16 +476,8 @@ private theorem internal_apply_eq_of_comp (X : Scheme.{u})
     (congrArg (fun z ↦ (c.hom.hom.app W) z) hb)
 
 -- The twelve dependent comparison clauses share the same signed tensor structures.
-/-- Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node).
-Proof: preserve the full coproduct indexed by p+q=n using the specified left adjunctions.
-On each summand ordinary oplax normalization identifies the actual internal map with the
-ringed comparison, so coproduct uniqueness gives equality in every degree. Naturality
-commutes with both differential components, retaining the sign (-1)^p. Scalar splitting
-and scalar contraction give the two inverse chain maps. The degree-zero ordinary unit
-is scalar multiplication. The existing cochain oplax laws give naturality,
-associativity and both unitor identities. Finally apply
-the homotopy quotient and derived localization to these equalities, their composites
-and identities. No flatness or boundedness has been used. -/
+/-- The internal-to-section total normalization clauses `SectionTotalNormalization` hold for
+every morphism `f`. -/
 theorem section_oplax_total_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{u + 1} (modules Λ X)] : SectionTotalNormalization Λ f := by
   unfold SectionTotalNormalization

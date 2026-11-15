@@ -9,11 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 import WeilConjectures.AlgebraicGeometry.UniversalThickeningOverlapGlueData
 
-/-!
+/-! # Atlas for gluing universal first-order thickenings
+
 ## References
 
-* Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3), paragraphs beginning "Choose
-  an affine open covering" and "By the general remarks".
+* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3).
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Gluing the thickened charts gives a covering family of open immersions with
-compatible local maps and the prescribed source overlaps. This statement constructs
-only the ambient scheme and its charts, not the global source or structure morphisms. -/
+compatible local maps and the prescribed source overlaps. -/
 theorem universalFirstOrderThickening_cartesianAtlas_core
     {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})
     (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)

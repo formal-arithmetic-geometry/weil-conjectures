@@ -33,15 +33,11 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Let j = U.ι be the inclusion of an open subscheme and T ⊆ U closed in X.
-(1) A perfect F on U supported on T has perfect derived direct image Rj_*F.
-(2) For every E on X supported on T, the unit E → Rj_*(E|_U) of any adjunction between
-derived restriction and Rj_* is invertible.
-(3) For every such F, with j_! any left adjoint of derived restriction (extension by zero),
-the canonical map j_!F → Rj_*F is invertible: it is the map φ whose adjunct
-(j_!F)|_U → F is the inverse of the unit F → (j_!F)|_U, i.e. a left inverse of that unit.
-Support means: every cohomology sheaf has zero stalk at every point off T.
-Derived restriction is the over-site restriction followed by `Modules.overEquiv U`. -/
+/-- Let `j = U.ι` be an open immersion and `T ⊆ U` closed in `X`; "supported on `T`" means all
+cohomology stalks vanish off `T`. A perfect `F` on `U` supported on `T` has perfect `Rj_*F`; for
+`E` on `X` supported on `T` the unit `E → Rj_*(E|_U)` is invertible; and for such perfect `F`
+the canonical map `j_!F → Rj_*F` (a map whose adjunct is left inverse to the unit
+`F → (j_!F)|_U`) is invertible. -/
 theorem supported_open_pushforward (X : Scheme.{u}) (U : X.Opens)
     (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

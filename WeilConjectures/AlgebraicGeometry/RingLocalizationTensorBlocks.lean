@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RingPointTensorComparison
 
 ## References
 
-* Stacks Project, algebraization.tex, Tag 0996.
+* Stacks Project, Tag 0996.
 -/
 
 @[expose] public noncomputable section

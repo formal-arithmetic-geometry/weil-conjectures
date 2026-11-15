@@ -8,7 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 
 /-! # Direct-image composition in the projective-line chart
 
-This is the definition-expansion step of the chart exchange argument.
+The diagonal chart map on the projective line is expressed through the canonical composite
+direct-image map of the chart and the projection.
 -/
 
 @[expose] public noncomputable section
@@ -106,7 +107,8 @@ private theorem comp_congr (A : Type (u + 1)) [CommRing A]
     rightDerivedLowerStarCompHom, conjugateEquiv_leftDerivedUpperStarComp_hom]
   rfl
 
-/-- The chart map uses the canonical composite-adjunction direct-image map. -/
+/-- The diagonal chart map is the composite of the adjunction unit, the canonical composite
+direct-image map and the shifted line pullback. -/
 theorem chartMap_compHom
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u})

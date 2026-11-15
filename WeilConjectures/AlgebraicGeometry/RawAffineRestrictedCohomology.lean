@@ -50,8 +50,8 @@ noncomputable def rawAffineComplexPullback (p : ℤ) {X Y : Scheme.{v}} (f : X �
         (rightDerivedGlobalSections AddCommGrpCat.{v + 1} X).map
           ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryFactors.hom.app K))
 
-/-- Cohomology of a sheaf restricted to the etale scheme `U ×_S Y`, in degree zero
-as a complex. No raw derived-Hom group occurs in this definition. -/
+/-- Cohomology of a sheaf restricted to the etale scheme `U ×_S Y`, placed in degree zero
+as a complex. -/
 noncomputable def rawAffineRestrictedCohomology {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     AddCommGrpCat.{v + 1} :=
@@ -84,7 +84,7 @@ noncomputable def rawAffineRestrictedCoefficient {S Y Y' : Scheme.{v}} (a : Y' �
       (upperStar AddCommGrpCat.{v + 1} r').map φ
 
 /-- Canonical restricted-cohomology map: derived pullback followed by the restricted
-coefficient map. This definition uses neither continuity nor raw derived Hom. -/
+coefficient map. -/
 noncomputable def rawAffineRestrictedCohomologyMap {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

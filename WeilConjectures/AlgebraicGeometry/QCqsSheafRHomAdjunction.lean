@@ -63,8 +63,8 @@ private theorem rightAdjoint_map_isIso_of_bijective
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The five Hom bijections in the proof of Stacks, Tag 0A9Q.
-The mate equation identifies their composite with postcomposition by the trace. -/
+/-- Under the projection-formula and mate hypotheses, postcomposition with the trace
+`c ≫ J.map (𝟙 _ ×ₘ ε_K)` is bijective on Hom sets out of `M`. -/
 private theorem trace_bijective_of_projection
     {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D]

@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
 ## References
 
-* Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 (Tag 0DJ7); Cohomology, Tags 06YB and
+* Stacks Project, equation-bc before Tag 0DJ8 (Tag 0DJ7); Cohomology, Tags 06YB and
   0D5S; More on Algebra, Tag 06Y6.
 -/
 

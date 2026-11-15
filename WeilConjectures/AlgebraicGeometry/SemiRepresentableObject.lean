@@ -10,10 +10,10 @@ public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 
-/-!
-# Blueprint statements
+/-! # Semi-representable objects and hypercovers
 
-corollary-cohomology-pro-etale-affine.
+Finite limits, coverings, matching objects and hypercovers in the category of formal coproducts
+of objects of the small étale site of a scheme.
 -/
 
 @[expose] public section
@@ -25,23 +25,24 @@ open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- Formal coproducts of étale `X`-schemes have finite limits. -/
 noncomputable instance semiRepresentableHasFiniteLimits (X : Scheme.{u}) :
     HasFiniteLimits (FormalCoproduct.{w} X.Etale) :=
   hasFiniteLimits_of_hasTerminal_and_pullbacks
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- Points of a formal coproduct `L` over an étale `X`-scheme `T`: morphisms `T ⟶ L`. -/
 abbrev semiRepresentablePoints {X : Scheme.{u}} (T : X.Etale)
     (L : FormalCoproduct.{w} X.Etale) :=
   (FormalCoproduct.incl X.Etale).obj T ⟶ L
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- Postcomposition with `f : L ⟶ L'` on points over `T`. -/
 def semiRepresentablePointsMap {X : Scheme.{u}} (T : X.Etale)
     {L L' : FormalCoproduct.{w} X.Etale} (f : L ⟶ L') :
     semiRepresentablePoints T L → semiRepresentablePoints T L' :=
   fun t => t ≫ f
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- A morphism `f : U ⟶ V` of formal coproducts is a covering if, for each component of `V`, the
+components of `U` over it form an étale covering sieve. -/
 def IsSemiRepresentableCovering {X : Scheme.{u}}
     {U V : FormalCoproduct.{w} X.Etale} (f : U ⟶ V) : Prop :=
   ∀ j : V.I,
@@ -49,7 +50,7 @@ def IsSemiRepresentableCovering {X : Scheme.{u}}
       (fun i => f.φ i.val ≫ eqToHom (congrArg V.obj i.property)) ∈
         X.smallEtaleTopology (V.obj j)
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- The boundary matching diagram of a simplicial formal coproduct has a multiequalizer. -/
 instance semiRepresentableHasMultiequalizer {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (n : ℕ) :
     HasMultiequalizer (SimplicialObject.matchingBoundaryIndex K n) := by
@@ -63,7 +64,7 @@ instance semiRepresentableHasMultiequalizer {X : Scheme.{u}}
     inferInstanceAs (DecidableEq {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
   infer_instance
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- The `n`-th matching object of a simplicial formal coproduct `K`. -/
 noncomputable def semiRepresentableMatchingObject {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) :
     ℕ → FormalCoproduct.{w} X.Etale
@@ -71,7 +72,7 @@ noncomputable def semiRepresentableMatchingObject {X : Scheme.{u}}
   | 1 => ∏ᶜ fun _ : Fin 2 => K _⦋0⦌
   | n + 2 => multiequalizer (SimplicialObject.matchingBoundaryIndex K n)
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- The canonical map from `K _⦋n⦌` to the `n`-th matching object of `K`. -/
 noncomputable def semiRepresentableMatchingMap {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) :
     (n : ℕ) → K _⦋n⦌ ⟶ semiRepresentableMatchingObject K n
@@ -95,7 +96,8 @@ noncomputable def semiRepresentableMatchingMap {X : Scheme.{u}}
           rw [← hb] at this
           exact this)
 
-/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
+/-- A simplicial formal coproduct is a semi-representable hypercover if every matching map is a
+covering. -/
 def IsSemiRepresentableHypercover {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) : Prop :=
   ∀ n : ℕ, IsSemiRepresentableCovering (semiRepresentableMatchingMap K n)
