@@ -180,7 +180,6 @@ lemma upperStar_map_upperStar_map_unit_comp_counit_comp_eq_id :
 end Restriction
 namespace Correspondence
 
-set_option maxHeartbeats 1000000 in
 -- unfolding the projections of the diagram in the instantiated statement is slow
 /-- The double transpose of a composite with the coefficient pushforward of a proper pushforward
 diagram `(f, g)` given by its fields, for the adjunctions `Rb₁_! ⊣ Rb₁^!` and `Lf^* ⊣ Rf_*`

@@ -24,7 +24,7 @@ For a proper morphism `f`, the exceptional projection morphism
 
 - `ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`: the clause
   "identification with the direct-image projection formula through `Rf_! ≅ Rf_*` for proper `f`"
-  of blueprint `prop-sf-pf-coherence` (section `sec-six-functors`).
+  of blueprint `prop-sf-pf-coherence` (section `chap-The-six-operations-on-Dbctf`).
 - `ProEtale.CondensedRing.exceptionalProjection_comp`: the clause "the associativity pentagon
   for composable `f`, `g`, compatible with the composition law" of `prop-sf-pf-coherence`.
 - `ProEtale.CondensedRing.exceptionalProjection_id`: the clause "the identity for `f = id`" of

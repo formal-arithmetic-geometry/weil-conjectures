@@ -589,7 +589,7 @@ already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback al
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
 The statement holds for arbitrary (not only torsion) abelian sheaves and small filtered
 categories.
-(blueprint: lemma-weil-pbc-curve-filtered-cohomology)
+(blueprint: lemma-finiteness-small-etale-topoi--2)
 -/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]

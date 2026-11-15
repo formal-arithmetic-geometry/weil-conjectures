@@ -18,7 +18,7 @@ public import WeilConjectures.TraceFormula.PointNormalizationTau
 
 Over the base point `s = Spec k`, the trace class of the diagonal correspondence of an
 endomorphism `v` of a dualizable object integrates to the categorical trace of `v` (blueprint
-`prop-trf-pairing-point-normalization`, `sk-p-pairing`).
+`lemma-local-terms-point--1`, `lemma-local-terms-point`).
 
 ## Strategy
 
@@ -96,9 +96,9 @@ theorem pointCoev_zigzag (v : K ⟶ K) :
     exact pointClass_transport K
       (boundedConstructibleUpperStar_μ_map_braiding_hom ℓ (diag (point k)) _ _)
 
-/-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
-`sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
-endomorphism `v` of a perfect complex integrates to the categorical trace of `v`,
+/-- **Point normalization of the pairing** (blueprint `lemma-local-terms-point--1`,
+`lemma-local-terms-point`): over the base point, the trace class of the diagonal correspondence of
+an endomorphism `v` of a perfect complex integrates to the categorical trace of `v`,
 `∫_s Tr(v) = tr(v)`. -/
 theorem integral_traceClass_ofEnd [HasRightDual K] (v : K ⟶ K) :
     ((ofEnd K v).traceClass (fixedLocusOfEnd v)).integral = .of (trace v) :=

@@ -18,7 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullba
 /-!
 # Pullback of constructible modules with finite constant scalar models
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-prop-proper-base-change-unbounded-pullback.proof.md`, paragraph
 "Constructible complexes"; Stacks Project, Tag 054I; Bhatt--Scholze,
 The pro-etale topology for schemes, proof of Lemma 6.3.8
@@ -232,8 +232,8 @@ stratum to the old one. The whole specified family base changes to a cover; the 
 between strata need not itself be weakly etale.
 3. Choose a finite scalar presentation of each given P. The exact constant-sheaf
 functor and right-exact scalar extension turn this particular presentation into a
-cokernel of the same scalar matrix on U, as in det-def-sfb-constructible-local-model.
-By sk-prop-sfb-cartesian-coefficients, inverse image is exact along the coefficient
+cokernel of the same scalar matrix on U, as in definition-constructible-sheaves--1.
+By lemma-inverse-image-coefficient-sheaves, inverse image is exact along the coefficient
 comparison. It preserves the regular coefficient module, finite sums and this cokernel;
 finite-sum preservation also follows from the adjunction of
 sk-def-sfb-module-pushforward-pullback.
@@ -243,7 +243,7 @@ with that same scalar after pullback. The cokernel on the new cover member is th
 extension of the original P. The composition isomorphism of
 sk-def-sfb-module-pushforward-pullback identifies the two composite restrictions.
 5. The pulled-back finite constructible locally closed stratification, its covers and
-these models witness sk-def-sfb-constructible on the qcqs target scheme. -/
+these models witness definition-constructible-sheaves on the qcqs target scheme. -/
 theorem pullback_constantModelConstructible
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})

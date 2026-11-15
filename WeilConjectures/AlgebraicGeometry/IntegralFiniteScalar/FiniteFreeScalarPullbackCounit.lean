@@ -44,7 +44,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 attribute [local irreducible] betaTotalNatIso betaOrdinary betaTargetIso
   betaRestrictedCounit betaScalarCounit
 
-set_option maxHeartbeats 800000 in
 -- Compare the normalized derived mate with its ordinary unit square.
 /-- The normalized scalar-pullback mate commutes with the exact representative factors
 and the derived-to-ordinary scalar counits, on every cochain complex.

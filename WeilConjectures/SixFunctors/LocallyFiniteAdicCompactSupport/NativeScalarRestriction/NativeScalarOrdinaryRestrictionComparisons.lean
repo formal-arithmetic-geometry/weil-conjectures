@@ -73,7 +73,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 -- Comparing concrete section-module functors requires elaborating the site transports.
 @[irreducible] private def ringPushforwardOfIso (R : PurCompactSupport.Coefficients.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

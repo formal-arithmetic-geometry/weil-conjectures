@@ -27,8 +27,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Canonically normalized support localization
 
-Source: Stacks Project, Tag 09XP; blueprint lem-pur-support-restriction-triangle,
-all six proof steps (blueprint: lem-pur-support-restriction-triangle).
+Source: Stacks Project, Tag 09XP; blueprint proposition-purity-vector-bundles,
+all six proof steps (blueprint: proposition-purity-vector-bundles).
 
 This extends the published existence interface with the injective-complex normalization
 of the boundary. The ordinary arrows are uniquely fixed by the support kernel inclusions.
@@ -372,12 +372,12 @@ private theorem supportedSection_exists (A : Type (u + 1)) [CommRing A]
   exact S.moduleCat_exact_iff.1 he x hx
 
 /-- Intersection of the two closed supports, as a closed immersion.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportIntersection {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T) :
     pullback b c ⟶ T := pullback.fst b c ≫ b
 
 /-- Closedness of the intersection follows by base change and composition.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: the first projection is the base change of c; compose it with b. -/
 @[instance]
 theorem supportIntersection_closed {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
@@ -387,12 +387,12 @@ theorem supportIntersection_closed {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶
   infer_instance
 
 /-- The support restricted to an actual open ambient scheme.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportOnOpen {T B : Scheme.{u}} (b : B ⟶ T) (U : T.Opens) :
     pullback b U.ι ⟶ U := pullback.snd b U.ι
 
 /-- Closed immersions remain closed after open base change.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: this projection is the base change of b along the open immersion. -/
 @[instance]
 theorem supportOnOpen_closed {T B : Scheme.{u}} (b : B ⟶ T) (U : T.Opens)
@@ -408,7 +408,7 @@ private theorem supportIntersection_complement {T B C : Scheme.{u}}
     Scheme.Pullback.range_fst_comp, TopologicalSpace.Opens.coe_sup, Set.compl_inter]
 
 /-- The complement of a support after open base change.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: a point lies off the base-changed closed subscheme exactly when its image lies
 off the original closed subscheme, by the topological image description of base change. -/
 theorem supportOnOpen_complement {T B : Scheme.{u}} (b : B ⟶ T)
@@ -419,7 +419,7 @@ theorem supportOnOpen_complement {T B : Scheme.{u}} (b : B ⟶ T)
     Scheme.Pullback.range_snd, Scheme.Hom.coe_preimage, Set.preimage_compl]
 
 /-- Uniquely normalized inclusion of the intersection support kernel.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: a section vanishing off B intersection C vanishes off B. The kernel universal
 property gives existence, naturality and uniqueness, since the kernel inclusion is monic. -/
 theorem exists_unique_supportInclusion (A : Type (u + 1)) [CommRing A]
@@ -444,7 +444,7 @@ theorem exists_unique_supportInclusion (A : Type (u + 1)) [CommRing A]
   exact (kernel.lift_ι _ _ _).symm
 
 /-- Canonical support inclusion, selected by its unique kernel characterization.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportInclusion (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -454,7 +454,7 @@ noncomputable def supportInclusion (A : Type (u + 1)) [CommRing A]
 
 /-- Supported pullback along an open immersion, normalized on ordinary sections.
 Source: Tag 09XP, restriction construction
-(blueprint: lem-pur-support-restriction-triangle).
+(blueprint: proposition-purity-vector-bundles).
 Proof: the complement equality makes restriction land in the support kernel. Its monic
 inclusion gives existence and uniqueness of the natural transformation. -/
 theorem exists_unique_supportTransport (A : Type (u + 1)) [CommRing A]
@@ -508,7 +508,7 @@ theorem exists_unique_supportTransport (A : Type (u + 1)) [CommRing A]
   exact (hr' M).trans (NatTrans.congr_app hr M).symm
 
 /-- Canonical restriction on supported sections is uniquely fixed by restriction on
-ordinary sections. Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+ordinary sections. Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: pullback of a supported section vanishes off the pulled-back support. Factor its
 ordinary restriction through the kernel. The monic kernel inclusion gives uniqueness
 and naturality. This works for every open, including the empty and full opens. -/
@@ -526,7 +526,7 @@ theorem exists_unique_supportOpenRestriction (A : Type (u + 1)) [CommRing A]
     (supportOnOpen_complement b U)
 
 /-- Restriction with support to an open ambient scheme.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportOpenRestriction (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :
     supportedEtaleSections A T b.openComplement ⟶
@@ -535,7 +535,7 @@ noncomputable def supportOpenRestriction (A : Type (u + 1)) [CommRing A]
   (exists_unique_supportOpenRestriction A b U).choose
 
 /-- The composite of intersection inclusion and restriction to T minus C is zero.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: its sections vanish on T minus C. Compose with the monic support kernel inclusion
 and use the characterizations of both arrows to obtain the zero restriction. -/
 theorem supportInclusion_restriction_zero (A : Type (u + 1)) [CommRing A]
@@ -571,7 +571,7 @@ theorem supportInclusion_restriction_zero (A : Type (u + 1)) [CommRing A]
   simp only [zero_comp]
 
 /-- The ordinary support localization short complex of functors.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportLocalizationSequence (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :=
@@ -579,7 +579,7 @@ noncomputable def supportLocalizationSequence (A : Type (u + 1)) [CommRing A]
     (supportInclusion_restriction_zero A b c)
 
 /-- Termwise localization of a complex of sheaves.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportLocalizationComplex (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c]
@@ -790,7 +790,7 @@ private theorem supportLocalizationSequence_shortExact (A : Type (u + 1)) [CommR
 end
 
 /-- Injective sheaves give a short exact sequence of supported section complexes.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: restriction is onto by extending a section supported on B intersection U by zero
 on T minus B, gluing on their union, and lifting that section to T by injectivity and the
 extension-by-zero adjunction. The kernel is the intersection support. Apply degreewise. -/
@@ -805,14 +805,14 @@ theorem supportLocalizationComplex_shortExact (A : Type (u + 1)) [CommRing A]
 
 /-- The derived functor of the third ordinary support functor before the canonical
 open-restriction comparison. Source: Tag 09XP
-(blueprint: lem-pur-support-restriction-triangle). -/
+(blueprint: proposition-purity-vector-bundles). -/
 noncomputable abbrev supportOpenComposite (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :=
   upperStar (ModuleCat.{u + 1} A) U.ι ⋙
     supportedEtaleSections A U (supportOnOpen b U).openComplement
 
 /-- The canonical boundary, normalized on every termwise injective K-injective complex.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: the short exact complex gives its canonical connecting map. Naturality of the
 short exact complex triangle descends this to the derived category. Every derived object
 has a termwise injective K-injective resolution, and the K-injective Hom bijection shows
@@ -847,7 +847,7 @@ theorem exists_unique_supportLocalizationBoundary (A : Type (u + 1)) [CommRing A
   exact ShortComplex.exists_unique_unboundedDerivedBoundary S hS
 
 /-- The normalized connecting map, with no arbitrary triangle completion.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportLocalizationBoundary (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -857,7 +857,7 @@ noncomputable def supportLocalizationBoundary (A : Type (u + 1)) [CommRing A]
   (exists_unique_supportLocalizationBoundary A b c).choose
 
 /-- Canonical derived-composite comparison for an open immersion.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: exact extension by zero is left adjoint to open inverse image, so the latter
 preserves injectives and K-injectives. Apply the derived-composition theorem and exact
 pullback comparison. Uniqueness of right derived functors gives the unit normalization. -/
@@ -905,7 +905,7 @@ theorem exists_unique_supportTransportComparison (A : Type (u + 1)) [CommRing A]
   exact he'.trans he.symm
 
 /-- Canonical comparison for restriction to an open before taking supported sections.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: open inverse image is exact and preserves injectives, being right adjoint to
 exact extension by zero. The composition theorem for right derived functors gives the
 comparison. The uniqueness of derived functors characterizes it by the displayed units. -/
@@ -925,7 +925,7 @@ theorem exists_unique_supportOpenDerivedComparison (A : Type (u + 1)) [CommRing 
   exact exists_unique_supportTransportComparison A U.ι (supportOnOpen b U)
 
 /-- The uniquely normalized derived open comparison.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportOpenDerivedComparison (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :
     (supportOpenComposite A b U).rightDerivedFunctor ≅
@@ -934,14 +934,14 @@ noncomputable def supportOpenDerivedComparison (A : Type (u + 1)) [CommRing A]
   (exists_unique_supportOpenDerivedComparison A b U).choose
 
 /-- The derived restriction arrow, with the third term on the open ambient scheme.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def derivedSupportOpenRestriction (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :=
   Functor.rightDerivedFunctorNatTrans (supportOpenRestriction A b U) ≫
     (supportOpenDerivedComparison A b U).hom
 
 /-- Localization triangle with the actual support inclusion, restriction, and boundary.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def normalizedSupportTriangle (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c]
@@ -953,7 +953,7 @@ noncomputable def normalizedSupportTriangle (A : Type (u + 1)) [CommRing A]
       (supportLocalizationBoundary A b c).app K)
 
 /-- The uniquely normalized ordinary supported transport.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportTransport (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -963,7 +963,7 @@ noncomputable def supportTransport (A : Type (u + 1)) [CommRing A]
   (exists_unique_supportTransport A h b d hd).choose
 
 /-- The normalized derived-composite comparison for an open immersion.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def supportTransportComparison (A : Type (u + 1)) [CommRing A]
     {T S D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (d : D ⟶ S) [IsClosedImmersion d] :
@@ -973,7 +973,7 @@ noncomputable def supportTransportComparison (A : Type (u + 1)) [CommRing A]
   (exists_unique_supportTransportComparison A h d).choose
 
 /-- The actual derived restriction with closed support, to an arbitrary open immersion.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def derivedSupportTransport (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -982,7 +982,7 @@ noncomputable def derivedSupportTransport (A : Type (u + 1)) [CommRing A]
     (supportTransportComparison A h d).hom
 
 /-- Change of ambient scheme by an isomorphism is an isomorphism on derived supports.
-Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Source: Tag 09XP (blueprint: proposition-purity-vector-bundles).
 Proof: inverse image along a scheme isomorphism is an equivalence. Its global-sections
 map is invertible, hence so is the map of the support kernels. Derive this isomorphism
 and compose with the canonical derived-composite comparison. -/

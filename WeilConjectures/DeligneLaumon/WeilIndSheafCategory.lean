@@ -32,7 +32,7 @@ import WeilConjectures.DeligneLaumon.CommonStagePullbackCompNaturality
 
 /-! # Ambient equivariant ind-sheaves for the recorded common-stage Weil heart
 
-Source: blueprint main-20261015, sec-deligne-laumon-general,
+Source: blueprint main-20261015, chap-The-Deligne-Laumon-theorem-in-general,
 sk-l-dl-general-composition, lem-zl-composition-weight-bound.proof.md,
 first paragraph; SGA 4, XVII, sheaf resolutions
 (blueprint: def-zl-weil-ind-sheaf-category).

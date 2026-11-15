@@ -243,7 +243,7 @@ obtained, and $x=\xi_1$. This gives an affine open $U=\operatorname{Spec}S\subse
 containing the entire fibre over $\eta$. If $n=0$, use the empty affine open
 $U=\operatorname{Spec}(0)$. In both cases $U$ is affine and contains every point over $\eta$.
 
-Dependencies: lem-chow-affine-through-generic-points, def-weil-affine-spectrum.
+Dependencies: lemma-affine-covers-dense-intersection--1, def-weil-affine-spectrum.
 
 4. The affine-pairs finite-type criterion applied to $U\subseteq X$, $V_0\subseteq Y$ makes the
 induced map $\varphi:R\to S$ of finite type. The prime $\mathfrak p$ of $\eta$ is minimal by the

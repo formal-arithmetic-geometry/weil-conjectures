@@ -87,51 +87,56 @@ the monodromy groups and read on `k`-points.
 
 `DegreeDatum`, `RepresentedDegreeDatum` and the attached definitions, among them
 `RepresentedDegreeDatum.arithmeticMonodromy` and `RepresentedDegreeDatum.geometricMonodromy`,
-implement `d-monodromy`; `RepresentedDegreeDatum.geometricMonodromy` also implements
-`def-wf-geometric-monodromy-group`;
-`RepresentedDegreeDatum.IsPositiveCentralPair` implements `d-central`;
+implement `definition-monodromy-groups`; `RepresentedDegreeDatum.geometricMonodromy` also implements
+`definition-monodromy-groups--1`;
+`RepresentedDegreeDatum.IsPositiveCentralPair` implements
+`proposition-central-element-arithmetic-monodromy-group--1`;
 `RepresentedDegreeDatum.arithmeticMonodromy_le_geometricMonodromy`,
 `RepresentedDegreeDatum.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy`,
 `RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy`,
-`RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy`,
-the instance
+`RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy`, the instance
 `containsCommutators_subgroupSchemeHom_arithmeticMonodromy_le_geometricMonodromy`,
 `RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy`,
 `RepresentedDegreeDatum.lie_mem_lieAlgebra_identityComponent_geometricMonodromy` and
 `RepresentedDegreeDatum.isSemisimpleRepresentation_standardRepresentation_identityComponent`
-implement `sk-i-restriction`, the normality, commutator and Lie statements also
-`lem-ag-closure-commutators`;
+implement `lemma-restriction-normal-subgroup`, the normality, commutator and Lie statements also
+`lemma-normality-geometric-monodromy`;
 `RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero` implements
-`lem-mg-normal-restriction-semisimple`;
+`lemma-restriction-normal-subgroup--1`;
 `RepresentedDegreeDatum.isSemisimpleRepresentation_arithmeticMonodromy` implements
-the `G` part of `lem-ag-closure-semisimple`;
+the `G` part of `lemma-identity-component`;
 `RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy` and
-`RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement `sk-p-product`;
-`RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central` and `p-central`,
+`RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement
+`lemma-identity-component`; `RepresentedDegreeDatum.exists_isPositiveCentralPair` implements
+`proposition-central-element-arithmetic-monodromy-group--1` and
+`proposition-central-element-arithmetic-monodromy-group--1`,
 `RepresentedDegreeDatum.exists_pos_mem_center_mem_degreeComponent` implements
-`lem-mg-common-positive-central-element`;
-`RepresentedDegreeDatum.frobeniusConj`, `RepresentedDegreeDatum.frobeniusAction`,
-`RepresentedDegreeDatum.ArithmeticMonodromyExtension` and
+`proposition-central-element-arithmetic-monodromy-group--1`; `RepresentedDegreeDatum.frobeniusConj`,
+`RepresentedDegreeDatum.frobeniusAction`, `RepresentedDegreeDatum.ArithmeticMonodromyExtension` and
 `RepresentedDegreeDatum.arithmeticMonodromyExtensionHom` implement, on `k`-points,
-`def-wf-arithmetic-monodromy-extension`; that it is a group whose degree map is surjective with
-kernel `H × {0}` (`lem-wf-arith-extension-group`) is Mathlib's `SemidirectProduct` group structure
-with `SemidirectProduct.rightHom_surjective` and `SemidirectProduct.range_inl_eq_ker_rightHom`.
-The tuple `(ρ, H, G_arith(ρ), G^[m])` of a represented degree datum is its monodromy data
-(`def-wf-monodromy-data`).
-`DegreeDatum.lift`, `DegreeDatum.lift_apply_of_mem_ker`, `DegreeDatum.lift_degreeOneElement` and
-`DegreeDatum.continuous_lift` implement `lem-wf-weil-fundamental-representation`;
-`RepresentedDegreeDatum.IsGeometricallySemisimple` implements `def-wf-geometric-semisimplicity`;
+`definition-monodromy-groups--2`; that it is a group whose degree map is surjective with kernel
+`H × {0}` (`proposition-central-element-arithmetic-monodromy-group--1`) is Mathlib's
+`SemidirectProduct` group structure with `SemidirectProduct.rightHom_surjective` and
+`SemidirectProduct.range_inl_eq_ker_rightHom`. The tuple `(ρ, H, G_arith(ρ), G^[m])` of a
+represented degree datum is its monodromy data (`definition-monodromy-groups`). `DegreeDatum.lift`,
+`DegreeDatum.lift_apply_of_mem_ker`, `DegreeDatum.lift_degreeOneElement` and
+`DegreeDatum.continuous_lift` implement `situation-weil`;
+`RepresentedDegreeDatum.IsGeometricallySemisimple` implements `lemma-restriction-normal-subgroup`;
 `RepresentedDegreeDatum.frobeniusConjIso` and its companions implement
-`lem-wf-conjugation-geometric-monodromy` (`RepresentedDegreeDatum.frobeniusConj` is its action on
-`k`-points); `RepresentedDegreeDatum.degreeComponent` implements `def-wf-degree-components`;
+`lemma-normality-geometric-monodromy--1` (`RepresentedDegreeDatum.frobeniusConj` is its action on
+`k`-points); `RepresentedDegreeDatum.degreeComponent` implements
+`proposition-central-element-arithmetic-monodromy-group--1`;
 `RepresentedDegreeDatum.image_degreeComponent_eq_closure` implements
-`lem-wf-degree-component-image`; `RepresentedDegreeDatum.degreeComponent_mul_degreeComponent` and
-`RepresentedDegreeDatum.inv_degreeComponent` implement `lem-wf-degree-components-grading`. The
-closure `G` of a subgroup is a closed subgroup (`lem-wf-zariski-closure-subgroup`) by
+`proposition-central-element-arithmetic-monodromy-group--1`;
+`RepresentedDegreeDatum.degreeComponent_mul_degreeComponent` and
+`RepresentedDegreeDatum.inv_degreeComponent` implement
+`proposition-central-element-arithmetic-monodromy-group--1`. The closure `G` of a subgroup is a
+closed subgroup (`lemma-normality-geometric-monodromy--1`) by
 `Matrix.GeneralLinearGroup.instIsHopfIdealVanishingIdeal`. The pointer remarks
-`rem-ptr-wf-arithmetic-monodromy-extension-1` and `rem-ptr-wf-degree-components-2` refer to the
-statements above of `lem-wf-arith-extension-group`, `lem-wf-degree-component-image` and
-`lem-wf-degree-components-grading`.
+`proposition-central-element-arithmetic-monodromy-group--1` and
+`proposition-central-element-arithmetic-monodromy-group--1` refer to the statements above of
+`proposition-central-element-arithmetic-monodromy-group--1` and
+`proposition-central-element-arithmetic-monodromy-group--1`.
 -/
 
 @[expose] public section
@@ -143,7 +148,7 @@ namespace AlgebraicGeometry.Monodromy
 
 /-- A degree datum: a group `W`, a surjective homomorphism `deg : W → ℤ` and a chosen element
 `γ` of degree one.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 structure DegreeDatum (W : Type*) [Group W] where
   /-- The degree homomorphism. -/
   deg : W →* Multiplicative ℤ
@@ -260,8 +265,8 @@ uniquely `u γⁿ`, with `n = deg w`. For the Weil group `W(X₀)` with a lift `
 `T = T_s`, this is the Weil fundamental representation `ρ(γ sⁿ) = ρ_geom(γ) T_sⁿ`; it restricts
 to `f` (`lift_apply_of_mem_ker`), sends `γ` to `T` (`lift_degreeOneElement`) and is continuous
 when `f` is and `P` is open (`continuous_lift`).
-(blueprint: `lem-wf-weil-fundamental-representation`, the extension step of
-`def-wf-fundamental-representation`) -/
+(blueprint: `situation-weil`, the extension step of
+`situation-weil`) -/
 def lift : W →* M where
   toFun w := f ⟨_, D.mul_inv_zpow_mem_ker w⟩ * T ^ (D.deg w).toAdd
   map_one' := by
@@ -286,7 +291,7 @@ theorem lift_apply (w : W) :
   rfl
 
 /-- The extension `lift` restricts to `f` on the degree-zero subgroup.
-(blueprint: `lem-wf-weil-fundamental-representation`) -/
+(blueprint: `situation-weil`) -/
 theorem lift_apply_of_mem_ker {u : W} (hu : u ∈ D.deg.ker) : D.lift f T hT u = f ⟨u, hu⟩ := by
   rw [lift_apply]
   have h : (D.deg u).toAdd = 0 := by rw [MonoidHom.mem_ker.1 hu, toAdd_one]
@@ -298,7 +303,7 @@ theorem lift_comp_subtype : (D.lift f T hT).comp D.deg.ker.subtype = f :=
   MonoidHom.ext fun u ↦ D.lift_apply_of_mem_ker f T hT u.2
 
 /-- The extension `lift` sends the degree-one element `γ` to `T`.
-(blueprint: `lem-wf-weil-fundamental-representation`) -/
+(blueprint: `situation-weil`) -/
 @[simp]
 theorem lift_degreeOneElement : D.lift f T hT D.degreeOneElement = T := by
   have : (⟨_, D.mul_inv_zpow_mem_ker D.degreeOneElement⟩ : D.deg.ker) = 1 :=
@@ -318,7 +323,7 @@ theorem eq_lift {ρ : W →* M} (hρ : ρ.comp D.deg.ker.subtype = f)
 /-- **Continuity of the Weil fundamental representation.** If the degree-zero subgroup is open
 in the topological group `W` (the degree map is locally constant) and `f` is continuous, then the
 extension `lift` is continuous: near the identity it agrees with `f`.
-(blueprint: `lem-wf-weil-fundamental-representation`) -/
+(blueprint: `situation-weil`) -/
 theorem continuous_lift [TopologicalSpace W] [IsTopologicalGroup W] [TopologicalSpace M]
     [IsTopologicalGroup M] (hP : IsOpen (D.deg.ker : Set W)) (hf : Continuous f) :
     Continuous (D.lift f T hT) := by
@@ -339,7 +344,7 @@ end DegreeDatum
 `n → k`.
 Its tuple `(ρ, H_geom, G_arith, G^[m])` (`rep`, `geometricMonodromy`, `arithmeticMonodromy`,
 `degreeComponent`) is the monodromy data of `ρ`.
-(blueprint: `d-monodromy`, `def-wf-monodromy-data`) -/
+(blueprint: `definition-monodromy-groups`) -/
 structure RepresentedDegreeDatum (W : Type*) [Group W] (n k : Type*) [Fintype n] [DecidableEq n]
     [Field k] extends DegreeDatum W where
   /-- The representation. -/
@@ -351,7 +356,7 @@ variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type
 variable (D : RepresentedDegreeDatum W n k)
 
 /-- The subgroup `P = ker deg` of degree-zero elements.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 def degreeZero : Subgroup W := D.deg.ker
 
 instance : D.degreeZero.Normal :=
@@ -359,7 +364,7 @@ instance : D.degreeZero.Normal :=
 
 /-- The arithmetic monodromy group `G = closure ρ(W)`, as a closed subgroup scheme of `GL_n`: the
 Hopf ideal of equations vanishing on `ρ(W)`, which cuts out the reduced Zariski closure.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 noncomputable def arithmeticMonodromy : Ideal (CoordinateRing n k) :=
   vanishingIdeal (D.rep.range : Set (GL n k))
 
@@ -368,7 +373,7 @@ Hopf ideal of equations vanishing on `ρ(P)`, which cuts out the reduced Zariski
 Weil group `W(X₀, s)` (`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, with the degree datum
 `DegreeDatum.ofWeilGroup`) the subgroup `P` is the geometric fundamental group, and this is the
 geometric monodromy group `H_geom` of a representation of the Weil group.
-(blueprint: `d-monodromy`, `def-wf-geometric-monodromy-group`) -/
+(blueprint: `definition-monodromy-groups`, `definition-monodromy-groups--1`) -/
 noncomputable def geometricMonodromy : Ideal (CoordinateRing n k) :=
   vanishingIdeal (D.degreeZero.map D.rep : Set (GL n k))
 
@@ -379,13 +384,13 @@ instance : D.geometricMonodromy.IsHopfIdeal k :=
   inferInstanceAs ((vanishingIdeal (D.degreeZero.map D.rep : Set (GL n k))).IsHopfIdeal k)
 
 /-- The image `ρ(W)` of the representation lies in the arithmetic monodromy group.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 theorem range_rep_le_zeroLocus_arithmeticMonodromy :
     D.rep.range ≤ zeroLocus D.arithmeticMonodromy k :=
   subset_zeroLocus_vanishingIdeal D.rep.range
 
 /-- The image `ρ(P)` of the degree-zero subgroup lies in the geometric monodromy group.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 theorem map_rep_degreeZero_le_zeroLocus_geometricMonodromy :
     D.degreeZero.map D.rep ≤ zeroLocus D.geometricMonodromy k :=
   subset_zeroLocus_vanishingIdeal (D.degreeZero.map D.rep)
@@ -399,11 +404,11 @@ theorem rep_mem_zeroLocus_geometricMonodromy {w : W} (hw : w ∈ D.degreeZero) :
   D.map_rep_degreeZero_le_zeroLocus_geometricMonodromy ⟨w, hw, rfl⟩
 
 /-- The Frobenius element `F = ρ(γ)`.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 def frobenius : GL n k := D.rep D.degreeOneElement
 
 /-- The representation of `W` on `n → k` underlying the datum.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 noncomputable def asRepresentation : Representation k W (n → k) where
   toFun w := Matrix.toLinAlgEquiv' (D.rep w : Matrix n n k)
   map_one' := by simp
@@ -415,13 +420,13 @@ theorem asRepresentation_eq : D.asRepresentation = (toRepresentation n k).comp D
 /-- A datum is *semisimple* when `n → k` is a semisimple `W`-representation.  This is an `abbrev`
 so that the underlying class `Representation.IsSemisimpleRepresentation` stays visible to
 instance search.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 noncomputable abbrev IsSemisimple : Prop :=
   Representation.IsSemisimpleRepresentation D.asRepresentation
 
 /-- A datum is *geometrically semisimple* when `n → k` is a semisimple representation of the
 degree-zero subgroup `P`, the geometric fundamental group of a Weil group.
-(blueprint: `def-wf-geometric-semisimplicity`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 noncomputable abbrev IsGeometricallySemisimple : Prop :=
   Representation.IsSemisimpleRepresentation (D.asRepresentation.comp D.degreeZero.subtype)
 
@@ -430,21 +435,21 @@ noncomputable abbrev IsGeometricallySemisimple : Prop :=
 of the set `H(k)` with the singleton `{Fᴺ}`. Only `k`-points of `Z(G)` occur, so `Z(G)(k)` is
 written as `centerPoints`, the matrices of `G(k)` commuting with all of `G(k)`; this makes sense
 over any field `k`.
-(blueprint: `d-central`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 def IsPositiveCentralPair (N : ℕ) (z : GL n k) : Prop :=
   0 < N ∧ z ∈ (centerPoints D.arithmeticMonodromy : Set (GL n k)) ∩
     (zeroLocus D.geometricMonodromy k * {D.frobenius ^ N})
 
 /-- The ideal of `G` is contained in the ideal of `H`; that is, `H ⊆ G` as closed subschemes of
 `GL_n`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem arithmeticMonodromy_le_geometricMonodromy :
     D.arithmeticMonodromy ≤ D.geometricMonodromy :=
   vanishingIdeal_anti (Subgroup.map_le_range D.rep D.degreeZero)
 
 /-- The geometric monodromy group is contained in the arithmetic one: `H(R) ⊆ G(R)` for every
 `k`-algebra `R`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy (R : Type*) [CommRing R]
     [Algebra k R] : zeroLocus D.geometricMonodromy R ≤ zeroLocus D.arithmeticMonodromy R :=
   zeroLocus_anti D.arithmeticMonodromy_le_geometricMonodromy
@@ -452,7 +457,7 @@ theorem zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy (R : Type*
 /-- The geometric monodromy group is a normal subgroup scheme of the arithmetic one: for every
 `k`-algebra `R`, the `R`-points of `H` form a normal subgroup of the `R`-points of `G`. This is the
 closure of the normality of `ρ(P)` in `ρ(W)`.
-(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
+(blueprint: `lemma-restriction-normal-subgroup`, `lemma-normality-geometric-monodromy`) -/
 theorem normal_zeroLocus_geometricMonodromy (R : Type*) [CommRing R] [Algebra k R] :
     ((zeroLocus D.geometricMonodromy R).subgroupOf (zeroLocus D.arithmeticMonodromy R)).Normal := by
   rw [Subgroup.normal_subgroupOf_iff_le_normalizer
@@ -467,7 +472,7 @@ open scoped commutatorElement in
 /-- Every commutator of the arithmetic monodromy group lies in the geometric one: for every
 `k`-algebra `R`, `⁅G(R), G(R)⁆ ⊆ H(R)`. This is the closure of `⁅ρ(W), ρ(W)⁆ ⊆ ρ(P)`, which holds
 because `W ⧸ P ≅ ℤ` is abelian.
-(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
+(blueprint: `lemma-restriction-normal-subgroup`, `lemma-normality-geometric-monodromy`) -/
 theorem commutator_zeroLocus_le_zeroLocus_geometricMonodromy (R : Type*) [CommRing R]
     [Algebra k R] :
     ⁅zeroLocus D.arithmeticMonodromy R, zeroLocus D.arithmeticMonodromy R⁆ ≤
@@ -485,7 +490,7 @@ section Semisimple
 /-- **Normal restriction.** A semisimple Weil representation is geometrically semisimple: the
 restriction of a semisimple datum to the normal subgroup `P = ker deg` is semisimple, by
 Clifford's theorem `Representation.isSemisimpleRepresentation_comp_subtype`.
-(blueprint: `lem-mg-normal-restriction-semisimple`) -/
+(blueprint: `lemma-restriction-normal-subgroup--1`) -/
 theorem isSemisimpleRepresentation_degreeZero (hD : D.IsSemisimple) :
     Representation.IsSemisimpleRepresentation (D.asRepresentation.comp D.degreeZero.subtype) :=
   Representation.isSemisimpleRepresentation_comp_subtype _ _
@@ -509,7 +514,7 @@ noncomputable def subrepresentationOrderIsoArithmeticMonodromy :
 
 /-- A semisimple datum is semisimple for its arithmetic monodromy group `G`: the defining
 representation of `G(k)` on `n → k` is semisimple, because `ρ(W)` and `G` have the same stable
-subspaces. (blueprint: the `G` part of `lem-ag-closure-semisimple`; the `G°` part is
+subspaces. (blueprint: the `G` part of `lemma-identity-component`; the `G°` part is
 `isSemisimpleRepresentation_standardRepresentation_identityComponent`) -/
 theorem isSemisimpleRepresentation_arithmeticMonodromy (hD : D.IsSemisimple) :
     Representation.IsSemisimpleRepresentation
@@ -532,7 +537,7 @@ theorem IsPositiveCentralPair.commute {N : ℕ} {z : GL n k} (hz : D.IsPositiveC
 
 /-- The `k`-points of the arithmetic monodromy group preserve every subrepresentation of the
 defining representation: invariance under `ρ(W)` passes to its Zariski closure.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem mulVec_mem_of_mem_zeroLocus_arithmeticMonodromy {g : GL n k}
     (hg : g ∈ zeroLocus D.arithmeticMonodromy k) (S : Subrepresentation D.asRepresentation)
     {x : n → k} (hx : x ∈ S) : (g : Matrix n n k) *ᵥ x ∈ S :=
@@ -557,7 +562,7 @@ theorem frobenius_mem_zeroLocus_arithmeticMonodromy :
   D.rep_mem_zeroLocus_arithmeticMonodromy _
 
 /-- The automorphism `α : h ↦ F h F⁻¹` of the `k`-points of the geometric monodromy group.
-(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+(blueprint: `definition-monodromy-groups--2`) -/
 noncomputable def frobeniusConj : MulAut (zeroLocus D.geometricMonodromy k) where
   toFun h := ⟨D.frobenius * h * D.frobenius⁻¹,
     D.mul_mul_inv_mem_zeroLocus_geometricMonodromy D.frobenius_mem_zeroLocus_arithmeticMonodromy
@@ -577,7 +582,7 @@ theorem coe_frobeniusConj_apply (h : zeroLocus D.geometricMonodromy k) :
   rfl
 
 /-- The action `m ↦ αᵐ` of `ℤ` on the `k`-points of the geometric monodromy group.
-(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+(blueprint: `definition-monodromy-groups--2`) -/
 noncomputable def frobeniusAction : Multiplicative ℤ →* MulAut (zeroLocus D.geometricMonodromy k) :=
   zpowersHom _ D.frobeniusConj
 
@@ -601,12 +606,13 @@ multiplication `(h, m) (h', n) = (h αᵐ(h'), m + n)`; its degree map `deg_G` i
 `(h, m)⁻¹ = (α⁻ᵐ(h⁻¹), -m)`, and that `deg_G` is a surjective homomorphism with kernel
 `H × {0}`, is Mathlib's `SemidirectProduct` (`SemidirectProduct.inv_left`,
 `SemidirectProduct.rightHom_surjective`, `SemidirectProduct.range_inl_eq_ker_rightHom`).
-(blueprint: `def-wf-arithmetic-monodromy-extension`, `lem-wf-arith-extension-group`) -/
+(blueprint: `definition-monodromy-groups--2`,
+`proposition-central-element-arithmetic-monodromy-group--1`) -/
 abbrev ArithmeticMonodromyExtension : Type _ :=
   zeroLocus D.geometricMonodromy k ⋊[D.frobeniusAction] Multiplicative ℤ
 
 /-- The map `j : G_arith(ρ)(k) → GL n k`, `(h, m) ↦ h Fᵐ`, to matrices.
-(blueprint: `def-wf-arithmetic-monodromy-extension`) -/
+(blueprint: `definition-monodromy-groups--2`) -/
 noncomputable def arithmeticMonodromyExtensionHom : D.ArithmeticMonodromyExtension →* GL n k :=
   SemidirectProduct.lift (zeroLocus D.geometricMonodromy k).subtype (zpowersHom _ D.frobenius)
     fun m ↦ by
@@ -628,7 +634,7 @@ theorem arithmeticMonodromyExtensionHom_apply (x : D.ArithmeticMonodromyExtensio
 /-- The degree component `G^[m] = H × {m}` of the arithmetic monodromy extension: the fibre over
 `m` of the degree map `deg_G = SemidirectProduct.rightHom`. Its elements are the
 *algebraic-monodromy elements of degree `m`*.
-(blueprint: `def-wf-degree-components`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 def degreeComponent (m : ℤ) : Set D.ArithmeticMonodromyExtension :=
   SemidirectProduct.rightHom ⁻¹' {Multiplicative.ofAdd m}
 
@@ -636,7 +642,8 @@ theorem mem_degreeComponent {m : ℤ} {x : D.ArithmeticMonodromyExtension} :
     x ∈ D.degreeComponent m ↔ x.right = Multiplicative.ofAdd m :=
   Iff.rfl
 
-/-- The degree component `G^[m]` is `H × {m}`. (blueprint: `def-wf-degree-components`) -/
+/-- The degree component `G^[m]` is `H × {m}`. (blueprint:
+`proposition-central-element-arithmetic-monodromy-group--1`) -/
 theorem degreeComponent_eq_range (m : ℤ) :
     D.degreeComponent m = Set.range fun h ↦
       (⟨h, Multiplicative.ofAdd m⟩ : D.ArithmeticMonodromyExtension) := by
@@ -646,7 +653,7 @@ theorem degreeComponent_eq_range (m : ℤ) :
   rfl
 
 /-- **The degree components multiply by degree:** `G^[m] G^[m'] = G^[m + m']`.
-(blueprint: `lem-wf-degree-components-grading`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 theorem degreeComponent_mul_degreeComponent (m m' : ℤ) :
     D.degreeComponent m * D.degreeComponent m' = D.degreeComponent (m + m') := by
   ext x
@@ -661,7 +668,7 @@ theorem degreeComponent_mul_degreeComponent (m m' : ℤ) :
     · simp [hx, ofAdd_add]
 
 /-- **The degree components invert to the opposite degree:** `(G^[m])⁻¹ = G^[-m]`.
-(blueprint: `lem-wf-degree-components-grading`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 theorem inv_degreeComponent (m : ℤ) : (D.degreeComponent m)⁻¹ = D.degreeComponent (-m) := by
   ext x
   rw [Set.mem_inv, mem_degreeComponent, mem_degreeComponent, SemidirectProduct.inv_right,
@@ -700,7 +707,7 @@ theorem image_rep_preimage_deg (m : ℤ) :
 map `(h, m) ↦ h Fᵐ` to matrices is the Zariski closure of the image `ρ(deg⁻¹(m))` of the elements
 of degree `m`, namely the translate `H(k) Fᵐ` (`image_degreeComponent`): right translation by
 `Fᵐ` carries the closure of `ρ(P)` to the closure of `ρ(P) Fᵐ = ρ(deg⁻¹(m))`.
-(blueprint: `lem-wf-degree-component-image`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 theorem image_degreeComponent_eq_closure (m : ℤ) :
     D.arithmeticMonodromyExtensionHom '' D.degreeComponent m =
       {g : GL n k | ∀ a ∈ vanishingIdeal (D.rep '' (D.deg ⁻¹' {Multiplicative.ofAdd m})),
@@ -710,7 +717,7 @@ theorem image_degreeComponent_eq_closure (m : ℤ) :
   rfl
 
 /-- The arithmetic monodromy group `G_Zar = closure ρ(W)` contains all the translates `H(k) Fᵐ`.
-(blueprint: `d-monodromy`) -/
+(blueprint: `definition-monodromy-groups`) -/
 theorem zeroLocus_geometricMonodromy_mul_frobenius_zpow_subset (m : ℤ) :
     (zeroLocus D.geometricMonodromy k : Set (GL n k)) * {D.frobenius ^ m} ⊆
       zeroLocus D.arithmeticMonodromy k := by
@@ -741,7 +748,7 @@ def map (r : GL n k →* GL m k) : RepresentedDegreeDatum W m k :=
 variable {D} in
 /-- A positive central pair `(N, z)` is transported to the positive central pair `(N, r z)` along a
 homomorphism `r : GL n k →* GL m k` given by polynomials, such as an exterior power.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem IsPositiveCentralPair.map {N : ℕ} {z : GL n k} (hz : D.IsPositiveCentralPair N z)
     (r : GL n k →* GL m k) (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
     (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) :
@@ -778,7 +785,7 @@ subgroup schemes of `GL_n`: this is `commutator_zeroLocus_le_zeroLocus_geometric
 `R`-points for all `k`-algebras `R`, transported to the schemes. In particular `H` is a normal
 subgroup scheme of `G` (`AlgebraicGeometry.IsMonHom.Normal.of_containsCommutators`), and the
 general results on such pairs of closed subgroups apply to `H ⊆ G`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 instance containsCommutators_subgroupSchemeHom_arithmeticMonodromy_le_geometricMonodromy :
     IsMonHom.ContainsCommutators (subgroupSchemeHom D.arithmeticMonodromy_le_geometricMonodromy) :=
   containsCommutators_subgroupSchemeHom _ (by
@@ -786,14 +793,15 @@ instance containsCommutators_subgroupSchemeHom_arithmeticMonodromy_le_geometricM
     exact D.commutator_zeroLocus_le_zeroLocus_geometricMonodromy R)
 
 /-- The geometric monodromy group contains the derived subgroup `[G, G]` of the arithmetic one, as
-closed subgroup schemes of `GL_n`: `J ≤ derivedIdeal I`. (blueprint: `sk-i-restriction`) -/
+closed subgroup schemes of `GL_n`: `J ≤ derivedIdeal I`. (blueprint:
+`lemma-restriction-normal-subgroup`) -/
 theorem geometricMonodromy_le_derivedIdeal_arithmeticMonodromy :
     D.geometricMonodromy ≤ derivedIdeal D.arithmeticMonodromy :=
   (containsCommutators_iff_le_derivedIdeal _).1 inferInstance
 
 /-- The derived algebra of `Lie G` lies in `Lie H`, over any field, where `Lie H → Lie G` is the
 differential `lieAlgebraMap` of the closed immersion `H ⟶ G`.
-(blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
+(blueprint: `lemma-restriction-normal-subgroup`, `lemma-normality-geometric-monodromy`) -/
 theorem lie_mem_lieAlgebra_geometricMonodromy
     (X Y : GrpObj.Lie (subgroupScheme D.arithmeticMonodromy)) :
     ∃ Z : GrpObj.Lie (subgroupScheme D.geometricMonodromy),
@@ -801,7 +809,8 @@ theorem lie_mem_lieAlgebra_geometricMonodromy
   (LieHom.mem_range _ _).1 (lie_mem_range_lieAlgebraMap _ X Y)
 
 /-- The derived algebra of `Lie G°` lies in `Lie H°`, over an algebraically closed field of
-characteristic zero. (blueprint: `sk-i-restriction`, `lem-ag-closure-commutators`) -/
+characteristic zero. (blueprint: `lemma-restriction-normal-subgroup`,
+`lemma-normality-geometric-monodromy`) -/
 theorem lie_mem_lieAlgebra_identityComponent_geometricMonodromy [IsAlgClosed k] [CharZero k]
     (X Y : GrpObj.Lie (subgroupScheme (identityComponent D.arithmeticMonodromy))) :
     ∃ Z : GrpObj.Lie (subgroupScheme (identityComponent D.geometricMonodromy)),
@@ -814,7 +823,7 @@ Frobenius `F = ρ(γ)` is an automorphism of the algebraic group `H`: the closed
 `V(J)` of `GL_n` is carried onto itself by the conjugation `conjHom F` of `GL_n`, because `F`
 normalizes `ρ(P)` and hence its closure. It is a morphism of group schemes (`IsMonHom`), and on
 `k`-points it is `frobeniusConj` (`zeroLocusMulEquiv_comp_frobeniusConjIso_hom`).
-(blueprint: `lem-wf-conjugation-geometric-monodromy`) -/
+(blueprint: `lemma-normality-geometric-monodromy--1`) -/
 noncomputable def frobeniusConjIso :
     subgroupScheme D.geometricMonodromy ≅ subgroupScheme D.geometricMonodromy :=
   subgroupSchemeConjIso D.frobenius
@@ -824,7 +833,7 @@ noncomputable def frobeniusConjIso :
         (inv_mem D.frobenius_mem_zeroLocus_arithmeticMonodromy) ha)
 
 /-- Conjugation by the Frobenius is an automorphism of the group scheme `H`.
-(blueprint: `lem-wf-conjugation-geometric-monodromy`) -/
+(blueprint: `lemma-normality-geometric-monodromy--1`) -/
 instance : IsMonHom D.frobeniusConjIso.hom :=
   inferInstanceAs (IsMonHom (subgroupSchemeConjIso (I := D.geometricMonodromy) D.frobenius _ _).hom)
 
@@ -836,7 +845,7 @@ theorem frobeniusConjIso_hom_comp_subgroupSchemeι :
   subgroupSchemeConjIso_hom_comp_subgroupSchemeι _ _ _
 
 /-- On `k`-points, the automorphism `frobeniusConjIso` of `H` is `α = frobeniusConj`.
-(blueprint: `lem-wf-conjugation-geometric-monodromy`) -/
+(blueprint: `lemma-normality-geometric-monodromy--1`) -/
 theorem zeroLocusMulEquiv_comp_frobeniusConjIso_hom (h : zeroLocus D.geometricMonodromy k) :
     zeroLocusMulEquiv _ k h ≫ D.frobeniusConjIso.hom =
       zeroLocusMulEquiv _ k (D.frobeniusConj h) := by
@@ -867,7 +876,7 @@ group: the standard representation of `G°(k)` on `kⁿ` is semisimple.
 Proof sketch (not formalised): `kⁿ` is a semisimple `W`-module, hence a semisimple module for the
 Zariski closure `G(k)` of `ρ(W)`, since the stabilizer of a subspace is closed; `G°(k)` has finite
 index in `G(k)`, so by Clifford's theorem (`Representation.isSemisimpleRepresentation_comp_subtype`)
-`kⁿ` is a semisimple `G°(k)`-module. (blueprint: `sk-i-restriction`) -/
+`kⁿ` is a semisimple `G°(k)`-module. (blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem isSemisimpleRepresentation_standardRepresentation_identityComponent
     (hD : D.IsSemisimple) :
     Representation.IsSemisimpleRepresentation
@@ -902,7 +911,7 @@ group is the central–geometric product `G° = Z(G°)° H°`: the multiplicatio
 `Z(G°)° ×ₖ H° ⟶ G°` of group schemes is surjective. This is the general
 `AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent` for the pair
 `H ⊆ G`, which contains the commutators of `G` and acts semisimply on `kⁿ`.
-(blueprint: `sk-p-product`) -/
+(blueprint: `lemma-identity-component`) -/
 theorem surjective_mul_center_geometricMonodromy (hD : D.IsSemisimple) :
     Function.Surjective
       (mulCenterIdentityComponent D.arithmeticMonodromy_le_geometricMonodromy).left.base :=
@@ -912,7 +921,7 @@ theorem surjective_mul_center_geometricMonodromy (hD : D.IsSemisimple) :
 omit [CharZero k] in
 /-- The `k`-points of the identity component `G°` of the arithmetic monodromy group act
 semisimply on `kⁿ`: this is `isSemisimpleRepresentation_standardRepresentation_identityComponent`
-for the matrices of the points. (blueprint: `sk-i-restriction`) -/
+for the matrices of the points. (blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem isSemisimpleRepresentation_zeroLocus_identityComponent (hD : D.IsSemisimple) :
     Representation.IsSemisimpleRepresentation
       ((toRepresentation n k).comp
@@ -925,7 +934,7 @@ every matrix of `G°(k)` is a product `c h` with `c ∈ Z(G°)°(k)` and `h ∈ 
 `AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_commutator_mem` for the pair `H ⊆ G`,
 whose commutators lie in `H` (`commutator_zeroLocus_le_zeroLocus_geometricMonodromy`); it
 supplies the factorization `Fᵐ = c h` of `exists_isPositiveCentralPair`.
-(blueprint: `sk-p-product`) -/
+(blueprint: `lemma-identity-component`) -/
 theorem exists_mem_center_mul_mem_geometricMonodromy_eq (hD : D.IsSemisimple) {g : GL n k}
     (hg : g ∈ zeroLocus (identityComponent D.arithmeticMonodromy) k) :
     ∃ c ∈ zeroLocus (identityComponent (center (identityComponent D.arithmeticMonodromy))) k,
@@ -1018,7 +1027,7 @@ The group theory is then `exists_pos_mem_center_mul_inv_mem`: with `K` the norma
 in `G(k)`, of index `e`, factor `Fᵉ = c h`; then `cᵉ` is central in `K`, and the product of its
 conjugates by representatives of `G(k) ⧸ K` is central in `G(k)` and lies in `H Fᴺ` for
 `N = e³`.
-(blueprint: `sk-p-central`, `p-central`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
     ∃ (N : ℕ) (z : GL n k), D.IsPositiveCentralPair N z := by
   have hG₀ : zeroLocus (identityComponent D.arithmeticMonodromy) k ≤
@@ -1058,7 +1067,7 @@ positive central pair (`exists_isPositiveCentralPair`).
 
 With `z = (h, m)`: the matrix `z_mat` commutes with `H(k)` and with `F`, so `h` commutes with `F`,
 and `z (x, n) = (h Fᵐ x F⁻ᵐ, m + n) = (x h, m + n) = (x Fⁿ h F⁻ⁿ, n + m) = (x, n) z`.
-(blueprint: `lem-mg-common-positive-central-element`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--1`) -/
 theorem exists_pos_mem_center_mem_degreeComponent (hD : D.IsSemisimple) :
     ∃ m : ℕ, 0 < m ∧ ∃ z ∈ Subgroup.center D.ArithmeticMonodromyExtension,
       z ∈ D.degreeComponent m ∧

@@ -15,12 +15,12 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunnethUnit
 For a proper morphism `f : X ⟶ Y` and `q = f × f : X × X ⟶ Y × Y`, the base change along the
 non-cartesian square `q ≫ p₁' = p₁ ≫ f` (the mate of its composition isomorphism) is compared
 with the compact-support base changes of the product squares of `X` and `Y` (blueprint
-`lem-trf-trace-source-exchange`, Step 3). This is the base-change input of the exceptional
-Künneth part of identity (a) of the trace-class source exchange
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3). This is the base-change input of the
+exceptional Künneth part of identity (a) of the trace-class source exchange
 (`ProEtale.CondensedRing.unit_comp_lowerShriek_map_prodBaseChangeIso`). The comparison goes
 through the factorization `q = (1 × f) ≫ (f × 1)` and the cartesian squares
 `(f × 1) ≫ p₁' = p_X ≫ f` and `(1 × f) ≫ p_Y = p₂ ≫ f`, using the pasting laws of `Ex_!`
-(blueprint `fix-lem-exchanges`).
+(blueprint `proposition-composition-base-change-rf-shriek`).
 
 -/
 
@@ -31,6 +31,50 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
+
+/-- A diagram chase for two pasted base-change squares, expressed in abstract functors. -/
+private lemma CategoryTheory.Functor.comp_baseChangeIso_of_paste
+    {CS CX CY CP CW CV : Type*}
+    [Category CS] [Category CX] [Category CY] [Category CP] [Category CW] [Category CV]
+    (fU : CY ⥤ CX) (fL : CX ⥤ CY) (aYL : CY ⥤ CS) (aYU : CS ⥤ CY)
+    (aXL : CX ⥤ CS) (aXU : CS ⥤ CX) (p₁YL : CV ⥤ CY) (p₂YU : CY ⥤ CV)
+    (p₁XL : CW ⥤ CX) (p₂XU : CX ⥤ CW) (pXL : CP ⥤ CX) (pYU : CY ⥤ CP)
+    (hU : CV ⥤ CP) (gL : CW ⥤ CP)
+    (aU : aXU ≅ aYU ⋙ fU) (aL : aXL ≅ fL ⋙ aYL)
+    (pU : pYU ≅ p₂YU ⋙ hU) (pL : p₁XL ≅ gL ⋙ pXL)
+    (s₁ : p₁YL ⋙ fU ⟶ hU ⋙ pXL) (s₃ : fL ⋙ pYU ⟶ p₂XU ⋙ gL)
+    (β : aYL ⋙ aXU ⟶ pYU ⋙ pXL)
+    (γX : p₂XU ⋙ p₁XL ≅ aXL ⋙ aXU) (γY : p₂YU ⋙ p₁YL ≅ aYL ⋙ aYU)
+    (B : CX) {R : CY} (i : R ⟶ fL.obj B)
+    (hV : γX.inv.app B = aXU.map (aL.hom.app B) ≫ β.app (fL.obj B) ≫
+      pXL.map (s₃.app B) ≫ pL.inv.app (p₂XU.obj B))
+    (hH : β.app (fL.obj B) = aU.hom.app (aYL.obj (fL.obj B)) ≫
+      fU.map (γY.inv.app (fL.obj B)) ≫ s₁.app (p₂YU.obj (fL.obj B)) ≫
+      pXL.map (pU.inv.app (fL.obj B))) :
+    (s₁.app (p₂YU.obj R) ≫
+      pXL.map (pU.inv.app R ≫ pYU.map i ≫ s₃.app B) ≫
+      pL.inv.app (p₂XU.obj B)) ≫ γX.hom.app B =
+    fU.map (γY.hom.app R) ≫ aU.inv.app (aYL.obj R) ≫
+      aXU.map (aYL.map i ≫ aL.inv.app B) := by
+  have nY := γY.inv.naturality i
+  have n₁ := s₁.naturality (p₂YU.map i)
+  have nC := aU.hom.naturality (aYL.map i)
+  have nC' := pU.inv.naturality i
+  simp only [Functor.comp_map, Functor.comp_obj] at nY n₁ nC nC'
+  rw [← cancel_mono (γX.inv.app B)]
+  simp only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj, Category.comp_id]
+  rw [hV, hH]
+  simp only [Functor.map_comp, Category.assoc]
+  have c₁ : aXU.map (aL.inv.app B) ≫ aXU.map (aL.hom.app B) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  have c₂ : fU.map (γY.hom.app R) ≫ fU.map (aYU.map (aYL.map i)) ≫
+      fU.map (γY.inv.app (fL.obj B)) = fU.map (p₁YL.map (p₂YU.map i)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp, nY, Iso.hom_inv_id_app_assoc]
+  have c₃ : pXL.map (hU.map (p₂YU.map i)) ≫ pXL.map (pU.inv.app (fL.obj B)) =
+      pXL.map (pU.inv.app R) ≫ pXL.map (pYU.map i) := by
+    rw [← Functor.map_comp, ← Functor.map_comp, nC']
+  simp only [reassoc_of% c₁]
+  rw [reassoc_of% nC, Iso.inv_hom_id_app_assoc, reassoc_of% c₂, reassoc_of% n₁, reassoc_of% c₃]
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -50,8 +94,6 @@ variable {S P W V : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompa
   [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
 
-set_option maxHeartbeats 1000000 in
--- the pasting identities are checked against the six-functor definitions
 /-- The compact-support base changes of the product squares of `X` and `Y` (here abstract
 cartesian squares over a base `S`) are compatible along a proper `f : X ⟶ Y`: pasting the
 cartesian squares `h ≫ p₁' = p_X ≫ f` and `g ≫ p_Y = p₂ ≫ f` with the product squares,
@@ -106,70 +148,28 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_prod_paste (aX : X 
           (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app B ≫
           eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj B) hA)) := by
   subst hA hp hpY
-  have eX := γX.hom_inv_id_app B
-  have eX' := γX.inv_hom_id_app B
-  have eY := γY.hom_inv_id_app ((boundedConstructibleLowerStar ℓ f).obj B)
-  rw [hγX] at eX eX'
-  rw [hγY] at eY
-  have : IsIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B) :=
-    ⟨⟨γX.hom.app B, eX', eX⟩⟩
-  have hV : (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B = _ :=
-    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ s₃ sqXY B
-  have hH : (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqXY).app
-      ((boundedConstructibleLowerShriek ℓ f).obj B) = _ :=
-    boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ s₁ sqY _
-  have nY := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).naturality
-    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)
-  have n₁ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁).naturality
-    ((boundedConstructibleUpperStar _ ℓ p₂').map
-      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))
-  have nC := (boundedConstructibleUpperStarComp _ ℓ f aY).hom.naturality
-    ((boundedConstructibleLowerShriek ℓ aY).map
-      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))
-  have nC' := (boundedConstructibleUpperStarComp _ ℓ h p₂').inv.naturality
-    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)
-  simp only [Functor.comp_map, Functor.comp_obj] at nY n₁ nC nC'
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
-  rw [← cancel_mono ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqX).app B)]
-  simp only [Category.assoc, eX, Functor.comp_obj, Category.comp_id]
-  rw [hV, hH]
-  simp only [Functor.map_comp, Category.assoc]
-  have c₁ : (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
-        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).inv.app B) ≫
-      (boundedConstructibleUpperStar _ ℓ (f ≫ aY)).map
-        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY).hom.app B) = 𝟙 _ := by
-    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-  have c₂ : (boundedConstructibleUpperStar _ ℓ f).map
-        (γY.hom.app ((boundedConstructibleLowerStar ℓ f).obj B) :
-          (boundedConstructibleLowerShriek ℓ p₁').obj ((boundedConstructibleUpperStar _ ℓ p₂').obj
-            ((boundedConstructibleLowerStar ℓ f).obj B)) ⟶
-          (boundedConstructibleUpperStar _ ℓ aY).obj ((boundedConstructibleLowerShriek ℓ aY).obj
-            ((boundedConstructibleLowerStar ℓ f).obj B))) ≫
-      (boundedConstructibleUpperStar _ ℓ f).map ((boundedConstructibleUpperStar _ ℓ aY).map
-        ((boundedConstructibleLowerShriek ℓ aY).map
-          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))) ≫
-      (boundedConstructibleUpperStar _ ℓ f).map
-        ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqY).app
-          ((boundedConstructibleLowerShriek ℓ f).obj B)) =
-      (boundedConstructibleUpperStar _ ℓ f).map ((boundedConstructibleLowerShriek ℓ p₁').map
-        ((boundedConstructibleUpperStar _ ℓ p₂').map
-          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))) := by
-    rw [← Functor.map_comp, ← Functor.map_comp, nY, reassoc_of% eY]
-  have c₃ : (boundedConstructibleLowerShriek ℓ pX).map ((boundedConstructibleUpperStar _ ℓ h).map
-        ((boundedConstructibleUpperStar _ ℓ p₂').map
-          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B))) ≫
-      (boundedConstructibleLowerShriek ℓ pX).map
-        ((boundedConstructibleUpperStarComp _ ℓ h p₂').inv.app
-          ((boundedConstructibleLowerShriek ℓ f).obj B)) =
-      (boundedConstructibleLowerShriek ℓ pX).map
-          ((boundedConstructibleUpperStarComp _ ℓ h p₂').inv.app
-            ((boundedConstructibleLowerStar ℓ f).obj B)) ≫
-        (boundedConstructibleLowerShriek ℓ pX).map
-          ((boundedConstructibleUpperStar _ ℓ (h ≫ p₂')).map
-            ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)) := by
-    rw [← Functor.map_comp, ← Functor.map_comp, nC']
-  simp only [reassoc_of% c₁]
-  rw [reassoc_of% nC, Iso.inv_hom_id_app_assoc, reassoc_of% c₂, reassoc_of% n₁, reassoc_of% c₃]
+  apply Functor.comp_baseChangeIso_of_paste
+    (boundedConstructibleUpperStar _ ℓ f) (boundedConstructibleLowerShriek ℓ f)
+    (boundedConstructibleLowerShriek ℓ aY) (boundedConstructibleUpperStar _ ℓ aY)
+    (boundedConstructibleLowerShriek ℓ (f ≫ aY))
+    (boundedConstructibleUpperStar _ ℓ (f ≫ aY))
+    (boundedConstructibleLowerShriek ℓ p₁') (boundedConstructibleUpperStar _ ℓ p₂')
+    (boundedConstructibleLowerShriek ℓ (g ≫ pX)) (boundedConstructibleUpperStar _ ℓ p₂)
+    (boundedConstructibleLowerShriek ℓ pX) (boundedConstructibleUpperStar _ ℓ (h ≫ p₂'))
+    (boundedConstructibleUpperStar _ ℓ h) (boundedConstructibleLowerShriek ℓ g)
+    (boundedConstructibleUpperStarComp _ ℓ f aY)
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f aY)
+    (boundedConstructibleUpperStarComp _ ℓ h p₂')
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g pX)
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₁)
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s₃)
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sqXY) γX γY B
+    ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app B)
+  · rw [hγX]
+    exact boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ s₃ sqXY B
+  · rw [hγY]
+    exact boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz ℓ s₁ sqY _
 
 end Pasting
 
@@ -221,11 +221,11 @@ lemma upperStar_map_upperStar_map_comp_εIso_inv {S : Over (Spec (.of k))}
   rw [← hu, eqToHom_refl, Category.comp_id, ← reassoc_of% hn, Iso.inv_hom_id_app_assoc]
 
 /-- **Base change along the Künneth square of a proper morphism** (blueprint
-`lem-trf-trace-source-exchange`, Step 3): the unit of `Lq^* ⊣ Rq_!` for `q = f × f`, followed by
-the composition isomorphism of `q ≫ p₁' = p₁ ≫ f`, the transported counit, the compact-support
-base change of the product square of `X` and the counit of `Ra_X! ⊣ Ra_X^!`, is the compact-support
-base change of the product square of `Y` followed by `Ra_Y! Rf_* ω_X ≅ Ra_X! ω_X`, the counit of
-`Ra_X! ⊣ Ra_X^!` and the unit `𝟙 ⟶ Rf_! 𝟙`. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): the unit of `Lq^* ⊣ Rq_!` for
+`q = f × f`, followed by the composition isomorphism of `q ≫ p₁' = p₁ ≫ f`, the transported counit,
+the compact-support base change of the product square of `X` and the counit of `Ra_X! ⊣ Ra_X^!`, is
+the compact-support base change of the product square of `Y` followed by
+`Ra_Y! Rf_* ω_X ≅ Ra_X! ω_X`, the counit of `Ra_X! ⊣ Ra_X^!` and the unit `𝟙 ⟶ Rf_! 𝟙`. -/
 theorem unit_comp_lowerShriek_map_prodBaseChangeIso :
     ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f)).unit.app

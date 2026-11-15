@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportEx
 # The dualizing maps of nearby cycles over the trait
 
 For a trait model `N` of `Y` over the base, the dualizing map `θ_N : Ψ_N ω_Y ⟶ ω_{Y'}` (blueprint
-`det-nearby-exchange-maps` (5)) is the exceptional adjoint of the compact-support exchange
+`prose-E-15` (5)) is the exceptional adjoint of the compact-support exchange
 `ν_a : Ra'_! Ψ_N ⟶ Ψ_S Ra_!` of the structure morphism, read through the specialization unit of
 the trait (`NearbyCyclesModel.IsTraitModelOfBase.dualizingMap`, an instance of
 `ProEtale.CondensedRing.dualizingExchange`). The compact-support exchange is defined through a
@@ -30,7 +30,7 @@ The two characteristic properties of `NearbyCyclesModel.NearbyDualizingData` hol
   `M`, so the composition law of the dualizing maps
   (`ProEtale.CondensedRing.dualizingExchange_eq_comp`) gives the open restriction property.
 
-Hence `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint `det-nearby-exchange-maps`).
+Hence `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint `prose-E-15`).
 
 -/
 
@@ -57,7 +57,7 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
   [QuasiCompact Y'.hom] [IsSeparated Y'.hom] {N : NearbyCyclesModel Y.left Y'.left}
   {q : N.total ⟶ trait k'} {g : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **The dualizing map of a trait model over the base** (blueprint `det-nearby-exchange-maps`
+/-- **The dualizing map of a trait model over the base** (blueprint `prose-E-15`
 (5)): `θ_N = β_a(ℚ̄_ℓ) : Ψ_N ω_Y ⟶ ω_{Y'}`, the exceptional adjoint of the compact-support
 exchange `ν_a` (`NearbyCyclesModel.IsTraitModelOfBase.compactSupportExchange`), read through the
 specialization unit `σ : ℚ̄_ℓ ≅ Ψ_S ℚ̄_ℓ` of the trait. -/
@@ -66,7 +66,6 @@ noncomputable def dualizingMap (h : N.IsTraitModelOfBase k q g) :
       (dualizingComplex ℓ Y) ⟶ dualizingComplex ℓ Y' :=
   dualizingExchange ℓ (traitSpecializationUnit k k' (ℓ := ℓ)) (h.compactSupportExchange ℓ)
 
-set_option maxHeartbeats 1600000 in
 -- matching the objects `ω_Y` and `Ra^! ℚ̄_ℓ` of the two sides unfolds the monoidal units
 /-- **The dualizing map of a proper model is compatible with the traces**:
 `tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)`, for `q` proper and geometric generic fibre

@@ -26,7 +26,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Finite free resolutions of scalar models
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
 ctf-equals-bc proof, Local models; Stacks Tags 03EI, 06YQ, 06YS, 06YP and 06YU
 (auxiliary; not a blueprint node).
 

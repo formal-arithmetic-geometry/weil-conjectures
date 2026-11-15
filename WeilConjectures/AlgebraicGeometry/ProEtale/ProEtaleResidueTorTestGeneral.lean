@@ -17,7 +17,7 @@ assumption on `l` and a constructibility assumption which its proof never uses. 
 records the same statement without them, so that it applies over an arbitrary scheme.
 
 Source: Weil conjectures blueprint, localization unit, node order 1867
-(blueprint: lem-sf-proetale-residue-tor-test).
+(blueprint: lemma-bounds-finite-reductions--2).
 -/
 
 @[expose] public section
@@ -36,7 +36,7 @@ K-flat resolution `f : P ⟶ K`. This is `proEtale_torAmplitude_iff_residue_tens
 its unused finite-field, invertibility and constructibility hypotheses.
 
 Source: Weil conjectures blueprint, localization unit, node order 1867
-(blueprint: lem-sf-proetale-residue-tor-test).
+(blueprint: lemma-bounds-finite-reductions--2).
 
 Proof: one direction is the definition of Tor amplitude applied to the residue module.
 Conversely, filter an arbitrary module by the images of the powers of `ϖ_E`; the graded

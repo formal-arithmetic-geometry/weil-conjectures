@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 /-!
 # Base change for every coefficient with constructible pushforward
 
-Source: the blueprint, `sec-six-functors-basics`, unit `sk-def-sfb-base-change-morphism`
+Source: the blueprint, `chap-Construction-of-f`, unit `sk-def-sfb-base-change-morphism`
 (blueprint: sk-def-sfb-base-change-morphism).
 
 The pullback comparison is the existing `boundedConstructiblePullbackSquareComparison`.

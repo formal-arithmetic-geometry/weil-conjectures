@@ -10,7 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceRightNormal
 
 /-! # The specified ordered affine right normal form
 
-Source: main-20261015 blueprint, sk-prop-an, Steps 5(b) and 6
+Source: main-20261015 blueprint, proposition-purity-vector-bundles, Steps 5(b) and 6
 (blueprint: def-sp-ordered-affine-right-normal-form).
 This definition node owns the specified ordered normal form and its degree-zero
 Tate product. It exposes the existing construction used in the trace proof;
@@ -28,7 +28,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCateg
 set_option backward.isDefEq.respectTransparency true
 
 /-- The direct pullback, ordered Tate power, and accumulated even shift.
-Source: blueprint sk-prop-an, affine right normal form
+Source: blueprint proposition-purity-vector-bundles, affine right normal form
 (blueprint: def-sp-ordered-affine-right-normal-form). -/
 @[expose]
 def orderedAffineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -43,7 +43,7 @@ def orderedAffineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- The actual ordered normal form used to construct the affine-space trace.
 It is the existing recursive construction, not a choice from Nonempty.
-Source: blueprint sk-prop-an, Steps 5(b), 6; Charts of reduction-exceptional
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b), 6; Charts of reduction-exceptional
 (blueprint: def-sp-ordered-affine-right-normal-form). -/
 @[irreducible]
 def orderedAffineRightIso (A : Type (u + 1)) [CommRing A] [Finite A]

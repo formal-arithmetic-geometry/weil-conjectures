@@ -95,7 +95,7 @@ private theorem component_cohomology
 /-- The evaluated coefficient unit is an isomorphism on cohomology outside degree two.
 
 Source: `sk-prop-diagonal-tower-trace.proof.md` (1), the unit component of (G2) in
-`sk-lem-geo-p1-cohomology`.
+`lemma-cohomology-projective-line-trace`.
 (blueprint: lem-sfb-diagonal-trace-finite-unit-cohomology).
 
 Proof: set A to the actual quotient of the ring of integers of E by l^(n+1).

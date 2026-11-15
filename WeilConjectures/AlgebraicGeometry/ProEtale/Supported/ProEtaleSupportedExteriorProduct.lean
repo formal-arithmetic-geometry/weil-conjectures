@@ -59,7 +59,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedPushforwa
 # The supported exterior product
 
 Source: blueprint, sec-smooth-purity/sk-prop-a1-kummer,
-`def-pur-supported-exterior-product`, pulling back supported sections and tensoring them
+`proposition-purity-vector-bundles`, pulling back supported sections and tensoring them
 (blueprint: def-pur-proetale-supported-exterior-product).
 
 Supported coefficients are closed direct images of constant modules. The ordinary
@@ -83,7 +83,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Use the existing preadditive tensor structure without reopening sheafification
 instance search under each tensor-complex binder.
-Source: blueprint `def-pur-supported-exterior-product`, tensor construction
+Source: blueprint `proposition-purity-vector-bundles`, tensor construction
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable instance supportedSheaf_monoidalPreadditive (A : Type (u + 1)) [CommRing A]
     (X : Scheme.{u}) : MonoidalPreadditive (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
@@ -129,7 +129,7 @@ noncomputable def supportedModuleSectionsToSections
 
 /-- Inclusion of the existing pro-etale support kernel into all sections, through
 Mathlib's canonical terminal-evaluation identification. The support functor itself
-is the declaration of def-pur-support-cohomology, not a second kernel construction.
+is the declaration of definition-local-cohomology, not a second kernel construction.
 Source: blueprint kernel-of-restriction construction
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedModuleSectionsι
@@ -231,7 +231,7 @@ noncomputable abbrev supportedSheafTensor (A : Type (u + 1)) [CommRing A]
     (X : Scheme.{u}) := supportedSheafTensorGeneric (ModuleCat.{u + 1} A) X
 
 /-- Closed supported constant coefficients. Source: blueprint
-`def-pur-supported-exterior-product`, supported-section construction
+`proposition-purity-vector-bundles`, supported-section construction
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedCoefficients (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) :
@@ -240,7 +240,7 @@ noncomputable def supportedCoefficients (A : Type (u + 1)) [CommRing A] [Finite 
     lowerStar (ModuleCat.{u + 1} A) i
 
 /-- The quotient from constant coefficients to closed supported coefficients.
-Source: blueprint `def-pur-supported-exterior-product`, open-closed coefficient sequence
+Source: blueprint `proposition-purity-vector-bundles`, open-closed coefficient sequence
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedCoefficientQuotient (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) (M : ModuleCat.{u + 1} A) :
@@ -250,7 +250,7 @@ noncomputable def supportedCoefficientQuotient (A : Type (u + 1)) [CommRing A] [
     ((constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) i).hom.app M)
 
 /-- Additivity of closed supported coefficients. Source: blueprint
-`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
+`proposition-purity-vector-bundles` (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable instance supportedCoefficients_additive
     (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}} (i : Z ⟶ X) :
     (supportedCoefficients A i).Additive :=
@@ -713,7 +713,7 @@ private theorem ordinaryAdjunctionExists
 end OrdinaryAdjunctionProof
 
 /-- The ordinary adjunction, uniquely normalized by inclusion of the support kernel.
-Source: blueprint `def-pur-supported-exterior-product`, supported-section construction
+Source: blueprint `proposition-purity-vector-bundles`, supported-section construction
 (blueprint: def-pur-proetale-supported-exterior-product).
 Proof: apply Hom into F to the open-closed sequence of constant M. The kernel of
 restriction is Hom from M into the kernel defining supported sections. The quotient
@@ -746,7 +746,7 @@ theorem exists_unique_supportedCoefficientAdjunction
 set_option backward.isDefEq.respectTransparency true
 
 /-- Canonical ordinary supported-coefficient adjunction, selected from its unique
-normalization. Source: blueprint `def-pur-supported-exterior-product`
+normalization. Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedCoefficientAdjunction
     (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
@@ -755,7 +755,7 @@ noncomputable def supportedCoefficientAdjunction
   (exists_unique_supportedCoefficientAdjunction A i).choose
 
 /-- Exactness of closed supported coefficients.
-Source: blueprint `def-pur-supported-exterior-product`, closed-support construction
+Source: blueprint `proposition-purity-vector-bundles`, closed-support construction
 (blueprint: def-pur-proetale-supported-exterior-product); Stacks Tag 09BM,
 proetale.tex, lemma-closed-immersion-complement-retrocompact-exact.
 Proof: the open complement is retrocompact in a locally Noetherian ambient scheme:
@@ -775,21 +775,21 @@ theorem supportedCoefficients_exact (A : Type (u + 1)) [CommRing A] [Finite A]
       lowerStar (ModuleCat.{u + 1} A) i)), inferInstance⟩
 
 /-- The finite-limit instance from closed-support exactness. Source: blueprint
-`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
+`proposition-purity-vector-bundles` (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable instance supportedCoefficients_preservesFiniteLimits
     (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
     PreservesFiniteLimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).1
 
 /-- The finite-colimit instance from closed-support exactness. Source: blueprint
-`def-pur-supported-exterior-product` (blueprint: def-pur-proetale-supported-exterior-product). -/
+`proposition-purity-vector-bundles` (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable instance supportedCoefficients_preservesFiniteColimits
     (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
     PreservesFiniteColimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).2
 
 /-- The unbounded support functor, extending the bounded-below injective construction.
-Source: blueprint `def-pur-supported-exterior-product`, derived support resolutions
+Source: blueprint `proposition-purity-vector-bundles`, derived support resolutions
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable abbrev supportedSectionsDerived
     (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
@@ -797,7 +797,7 @@ noncomputable abbrev supportedSectionsDerived
   (supportSections i A).rightDerivedFunctor
 
 /-- The pointwise constant-presheaf tensor comparison.
-Source: blueprint `def-pur-supported-exterior-product`, constant section tensor
+Source: blueprint `proposition-purity-vector-bundles`, constant section tensor
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 def constantPresheafTensor (A : Type (u + 1)) [CommRing A] [Finite A]
     (T : Scheme.{u}) (M N : ModuleCat.{u + 1} A) :
@@ -821,7 +821,7 @@ noncomputable def supportedConstantTensor (A : Type (u + 1)) [CommRing A] [Finit
       ((Functor.const _).obj M) ((Functor.const _).obj N)).inv
 
 /-- Tensor comparison for constant coefficients and the two projection pullbacks.
-Source: blueprint `def-pur-supported-exterior-product`, constant section pairing
+Source: blueprint `proposition-purity-vector-bundles`, constant section pairing
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def constantExteriorTensor (A : Type (u + 1)) [CommRing A] [Finite A]
     {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (M N : ModuleCat.{u + 1} A) :
@@ -837,14 +837,14 @@ noncomputable def constantExteriorTensor (A : Type (u + 1)) [CommRing A] [Finite
       ((constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) (pullback.snd f g)).inv.app N)
 
 /-- Supported coefficients pulled back along the first projection.
-Source: blueprint `def-pur-supported-exterior-product`
+Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable abbrev supportedFirstCoefficients (A : Type (u + 1)) [CommRing A] [Finite A]
     {B X Y Z : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) :=
   supportedCoefficients A i ⋙ upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)
 
 /-- Supported coefficients pulled back along the second projection.
-Source: blueprint `def-pur-supported-exterior-product`
+Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable abbrev supportedSecondCoefficients (A : Type (u + 1)) [CommRing A] [Finite A]
     {B X Y W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) :=
@@ -1005,7 +1005,7 @@ private theorem coefficient_factorization
 end CoefficientTensorProof
 
 /-- The supported coefficient tensor comparison is uniquely fixed by the quotient
-of constant sections. Source: blueprint `def-pur-supported-exterior-product`
+of constant sections. Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product).
 Proof: the target is zero off the intersection of the two inverse-image supports,
 so the constant section pairing factors through the open-closed coefficient quotient.
@@ -1039,7 +1039,7 @@ theorem exists_unique_supportedCoefficientTensor
     (tensor_zero_on_union A (pullback.fst f g) (pullback.snd f g) i j _ hc M N) _
 
 /-- The uniquely normalized supported coefficient tensor comparison.
-Source: blueprint `def-pur-supported-exterior-product`
+Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedCoefficientTensor
     (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y Z W : Scheme.{u}}
@@ -1126,7 +1126,7 @@ private theorem coefficientTensor_natural
     ← Category.assoc, ← coefficientTensor_spec, Category.assoc]
 
 /-- The natural bifunctor comparison for closed supported coefficients.
-Source: blueprint supported tensor construction (blueprint: def-pur-supported-exterior-product). -/
+Source: blueprint supported tensor construction (blueprint: proposition-purity-vector-bundles). -/
 private noncomputable def coefficientTensorNatTrans
     (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y Z W : Scheme.{u}}
     (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
@@ -1189,7 +1189,7 @@ noncomputable def supportedCoefficientTensorComplexCondition
 
 /-- Totalization of the supported coefficient tensor map, characterized on every
 bidegree summand, with the usual cochain signs.
-Source: blueprint `def-pur-supported-exterior-product`, K-flat construction
+Source: blueprint `proposition-purity-vector-bundles`, K-flat construction
 (blueprint: def-pur-proetale-supported-exterior-product).
 Proof: closed supported coefficients preserve direct sums, being a left adjoint.
 Use their canonical coproduct comparison and the coefficient tensor comparison on
@@ -1210,7 +1210,7 @@ theorem exists_unique_supportedCoefficientTensorComplex
     (supportedSecondCoefficients A f g j) (coefficientTensorNatTrans A f g i j) P Q
 
 /-- The signed total complex coefficient map, selected by its summand characterization.
-Source: blueprint `def-pur-supported-exterior-product`
+Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedCoefficientTensorComplex
     (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y Z W : Scheme.{u}}
@@ -1299,7 +1299,7 @@ private theorem coefficientTensorComplex_eq
 
 /-- The coefficient comparison after localization, with its full complex-model
 normalization and naturality, rather than an unspecified isomorphism.
-Source: blueprint `def-pur-supported-exterior-product`, K-flat tensor derivation
+Source: blueprint `proposition-purity-vector-bundles`, K-flat tensor derivation
 (blueprint: def-pur-proetale-supported-exterior-product).
 Proof: closed direct image preserves flatness, as detected by the exact monoidal
 restrictions to the closed support and its open complement. Constant sheafification
@@ -1369,7 +1369,7 @@ theorem supportedCoefficientTensorDerivedHom_tensor
     (supportedTensorHom_eq A (pullback f g))
 
 /-- The derived coefficient comparison with its uniquely specified model normalization.
-Source: blueprint `def-pur-supported-exterior-product`
+Source: blueprint `proposition-purity-vector-bundles`
 (blueprint: def-pur-proetale-supported-exterior-product). -/
 noncomputable def supportedCoefficientTensorDerived
     (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y Z W : Scheme.{u}}

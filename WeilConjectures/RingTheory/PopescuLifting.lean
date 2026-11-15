@@ -168,7 +168,7 @@ smooth-ring-map-principal-localization]), so $\bar C/\pi\bar C\to(D_k/\pi D_k)_{
 (composition), i.e. $\bar C/\pi\bar C\to D_k/\pi D_k$ is smooth at every prime not containing
 $a_k$ [def-weil-pbc-singular-ideal] [def-weil-pbc-smooth-ring-map]. Dependencies: lem-weil-pbc-
 smooth-ring-map-base-change-composition, lem-weil-pbc-kahler-differentials-base-change, lem-
-weil-pbc-polynomial-ring-smooth, lem-weil-pbc-kahler-differentials-polynomial-extension, lem-
+weil-pbc-polynomial-ring-smooth, theorem-finite-etale-covers-proper-henselian--2, lem-
 weil-pbc-smooth-ring-map-principal-localization, def-weil-pbc-singular-ideal, def-weil-pbc-
 smooth-ring-map.
 
@@ -244,7 +244,7 @@ such that the prime $\bar{\mathfrak q}=\rho^{-1}(\mathfrak q/\pi D)$ of $\bar C$
 (1) some $\bar a_k\notin\bar{\mathfrak q}$; as $\rho(\bar a_k)$ is the class of $a_k$,
 $a_k\notin\mathfrak q$. Let $\mathfrak q_k\subset D_k$ be the inverse image of $\mathfrak q$
 under $D_k\to D=D_k/J_k$; then $\pi\in\mathfrak q_k$, $a_k\notin\mathfrak q_k$. By Step 17 and
-[lem-weil-pbc-finite-module-localization-zero-annihilator] (for the finitely generated
+[theorem-finite-etale-covers-proper-henselian--2] (for the finitely generated
 $D_k$-module $J_k$ and $D_k\setminus\mathfrak q_k$) there is $s\in D_k\setminus\mathfrak q_k$
 with $sJ_k=0$, so $(D_k)_s\to D_s$ is an isomorphism. By Step 14 there is $g\notin\mathfrak q_k$
 with $(D_k)_g$ smooth over $R$; then $D_{sg}\cong(D_k)_{sg}$ is smooth over $R$ [lem-weil-pbc-

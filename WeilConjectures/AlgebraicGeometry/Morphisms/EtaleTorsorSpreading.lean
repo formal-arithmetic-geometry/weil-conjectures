@@ -56,15 +56,18 @@ abelian case is used by smooth base change; it is the statement
 deduced by viewing an `M`-torsor as a Galois cover with group `Multiplicative M`.
 
 The uniqueness of the extension is not asserted. Connectedness of the torsor is deliberately
-*not* assumed: the torsors that the vanishing theorem `sk-thm-vanishing` spreads are those
-attached to an arbitrary class in `H^1`, which need not be connected.
+*not* assumed: the torsors that the vanishing theorem
+`proposition-base-change-larger-algebraically-closed--1` spreads are those attached to an arbitrary
+class in `H^1`, which need not be connected.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre`: spreading a finite
-  étale Galois cover with group `G` (blueprint `sbc-thm-spreading-finite-etale-galois`).
+  étale Galois cover with group `G` (blueprint
+  `proposition-base-change-larger-algebraically-closed`).
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre`: the spreading
-  statement for torsors under a finite abelian group (blueprint `sk-prop-input-spreading`).
+  statement for torsors under a finite abelian group (blueprint
+  `proposition-base-change-larger-algebraically-closed`).
 
 ## References
 
@@ -79,7 +82,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `sbc-thm-spreading-finite-etale-galois`: Spreading a finite étale Galois cover
+/-- Blueprint `proposition-base-change-larger-algebraically-closed`: Spreading a finite étale Galois
+cover
 
 Let `S` be a qcqs integral normal scheme with generic point `η` and function field
 `κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
@@ -94,7 +98,7 @@ cartesian.
 This is [Stacks 0EZJ], recorded as a classical input. Galois covers are taken in the sense
 of `AlgebraicGeometry.Scheme.GaloisCover`, following the blueprint definition
 `def-sbc-normal-dominant-galois`: their total space need not be connected. 
-(blueprint: sbc-thm-spreading-finite-etale-galois)
+(blueprint: proposition-base-change-larger-algebraically-closed)
 -/
 @[stacks 0EZJ]
 theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
@@ -134,7 +138,8 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme.EtaleTorsor
 
-/-- Blueprint `sk-prop-input-spreading`: Spreading a finite étale Galois cover
+/-- Blueprint `proposition-base-change-larger-algebraically-closed`: Spreading a finite étale Galois
+cover
 
 Let `S` be a qcqs integral normal scheme with generic point `η` and function field
 `κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically

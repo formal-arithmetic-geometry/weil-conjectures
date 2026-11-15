@@ -16,7 +16,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 # Images of finite free projectors under base change
 
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, final projector argument
-(blueprint: lem-weil-pbc-idempotent-endomorphism-image-base-change).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace LinearMap
 
 /-- The image of a finite free projector is finite projective and commutes with base change.
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, final sentences
-(blueprint: lem-weil-pbc-idempotent-endomorphism-image-base-change).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: Put `q = 1 - p`. The identities `q² = q`, `pq = qp = 0`, and `p + q = 1`
 decompose every vector as `p v + q v`. Applying `p` to a vector in both images makes

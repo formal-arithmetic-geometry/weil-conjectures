@@ -59,14 +59,14 @@ Proof, following the node's split of Stacks 07FH (with its corrected choice of s
 q\Lambda_{\mathfrak q}$ and residue field $K=\kappa(\mathfrak q)$
 [def-weil-pbc-localization-at-prime], Noetherian as a localization of the Noetherian ring
 $\Lambda$ [lem-weil-pbc-localization-noetherian], and $\mathfrak q\Lambda_{\mathfrak
-q}\cap\Lambda=\mathfrak q$. It is geometrically regular over $k$ [def-weil-pbc-g-ring]: for a
-finite purely inseparable $k'/k$, $k'\otimes_k\Lambda_{\mathfrak q}$ is the localization of the
-regular ring $k'\otimes_k\Lambda$ at the image of $\Lambda\setminus\mathfrak q$ (tensor products
-commute with localization), hence regular [lem-weil-pbc-localization-of-regular-ring]. Set
-$\bar\Lambda=\Lambda_{\mathfrak q}/\mathfrak q^n\Lambda_{\mathfrak q}$ (Stacks' notation); it is
-an Artinian local $k$-algebra with maximal ideal $\bar{\mathfrak m}=\mathfrak q\bar\Lambda$,
-$\bar{\mathfrak m}^n=0$, and residue field $K$
-[lem-weil-pbc-noetherian-local-quotient-artinian-local].
+q}\cap\Lambda=\mathfrak q$. It is geometrically regular over $k$
+[theorem-finite-etale-covers-proper-henselian--2]: for a finite purely inseparable $k'/k$,
+$k'\otimes_k\Lambda_{\mathfrak q}$ is the localization of the regular ring $k'\otimes_k\Lambda$ at
+the image of $\Lambda\setminus\mathfrak q$ (tensor products commute with localization), hence
+regular [theorem-finite-etale-covers-proper-henselian--2]. Set $\bar\Lambda=\Lambda_{\mathfrak
+q}/\mathfrak q^n\Lambda_{\mathfrak q}$ (Stacks' notation); it is an Artinian local $k$-algebra with
+maximal ideal $\bar{\mathfrak m}=\mathfrak q\bar\Lambda$, $\bar{\mathfrak m}^n=0$, and residue field
+$K$ [lem-weil-pbc-noetherian-local-quotient-artinian-local].
 
 2. *$\dim_KH_1(L_{K/k})<\infty$.* By [lem-weil-pbc-geometrically-regular-h1-injective] applied to
 the Noetherian local $k$-algebra $\Lambda_{\mathfrak q}$, geometrically regular over $k$ (step 1),

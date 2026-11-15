@@ -460,9 +460,9 @@ theorem isRegularImmersion_diagonal_of_isAffine {U V : Scheme.{u}} [IsAffine U] 
   rw [h]
   exact IsRegularImmersion.diagonal_isIso_comp _ _
 
-/-- Blueprint `sk-lem-diag-reg`: The diagonal is a regular immersion
+/-- Blueprint `prose-09-15`: The diagonal is a regular immersion
 
-Blueprint `lem-pur-diagonal-regular-immersion`
+Blueprint `prose-09-15`
 
 Let `f : X ⟶ Y` be smooth and separated of pure relative dimension `d`, let `W = X ×_Y X` and
 let `Δ : X ⟶ W` be the diagonal. Then `Δ` is a regular closed immersion of pure codimension

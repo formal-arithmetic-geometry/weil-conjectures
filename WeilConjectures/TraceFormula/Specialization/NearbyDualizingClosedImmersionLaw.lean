@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 
 This file provides concrete inputs of the closed-immersion law
 `θ_{Z'} ∘ Ψ_{Z'}(ρ) = ρ' ∘ Ri₂^!(θ_Z) ∘ β_i(ω_{X₁})` of the dualizing maps of trait models over a
-generic base (blueprint `sk-lem-tf-nearby-mate-coherences` (4), see
+generic base (blueprint `sec-Base-change-for-nearby-cycles` (4), see
 `CategoryTheory.closedImmersionLaw_aux`):
 
 * the composition of traces `tr_Y ∘ Ra_{Y*}(ρ) = tr_X ∘ Ra_{X*}(Ri_* Ri^! ω_X ⟶ ω_X)` for a proper

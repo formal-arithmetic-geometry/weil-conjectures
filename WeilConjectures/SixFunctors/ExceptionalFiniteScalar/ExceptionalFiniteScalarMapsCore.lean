@@ -899,7 +899,6 @@ structure FiniteScalarMapsCore
   qShift : q.hom.CommShift ℤ
   bShift : b.hom.CommShift ℤ
 
-set_option maxHeartbeats 2000000 in
 -- The scalar comparison cube expands several derived naturality squares.
 attribute [local irreducible] originIso leftScalarMap leftOriginIso scalarOriginIso in
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian

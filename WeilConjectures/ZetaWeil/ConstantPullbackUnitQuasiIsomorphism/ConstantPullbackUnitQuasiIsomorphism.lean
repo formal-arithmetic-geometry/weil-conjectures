@@ -80,8 +80,8 @@ import all WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-! # The normalized regular unit for arbitrary completed pullback
 
-Source: the constant-sheaf clause of `prop-every-iterate-trace`, expanded in step 6
-of `lem-zl-constant-geometric-stalk-unit`. The finite regular multiplication,
+Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, expanded in
+step 6 of `lem-zl-constant-geometric-stalk-unit`. The finite regular multiplication,
 compatible quotient tower and its actual limit cone determine the entire Roos map.
 -/
 
@@ -315,8 +315,8 @@ end GeneralPullbackUnitProof
 /-- Every strict regular unit with the finite generator and zero shifted-component
 normalizations is a quasi-isomorphism after localization.
 
-Source: constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion step 6
-(blueprint: lem-zl-constant-pullback-unit-quasi-isomorphism).
+Source: constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
+expansion step 6 (blueprint: lem-zl-constant-pullback-unit-quasi-isomorphism).
 
 Proof: finite pullback multiplication identifies the regular module with the target
 regular module. The base-change functor preserves the terminal object and hence is

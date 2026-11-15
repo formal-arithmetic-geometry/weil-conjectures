@@ -105,7 +105,7 @@ theorem nonempty_H_twist_top_linearEquiv_self (A : Type u) [CommRing A] [Fintype
 `Hᵈ(ℙᵈ_A, 𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d - 1`.
 
 (blueprint: `lem-pc-projective-space-twist-cohomology` (ii),
-`lem-pc-projective-space-serre-pairing`) -/
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem nonempty_H_twist_top_linearEquiv_dual (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) {m : ℤ} (hm : m ≤ -(d : ℤ) - 1) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d

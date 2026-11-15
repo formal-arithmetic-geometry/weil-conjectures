@@ -110,7 +110,7 @@ Proof plan:
 1. The limit universal property gives `constLimAdj`, whose counit is the family
    of limit projections. Constants and evaluations are exact by levelwise
    abelianity (lem-weil-tower-category-levelwise-abelian). Apply the exact-functor
-   factorization (lem-weil-pbc-exact-functor-derived-factorization) and the termwise
+   factorization (situation-conventions) and the termwise
    homotopy adjunction (lem-weil-pbc-termwise-adjunction-homotopy).
 2. The exact constant left adjoint shows that the termwise limit of a K-injective
    tower is K-injective (lem-weil-pbc-right-adjoint-preserves-kinjective). The

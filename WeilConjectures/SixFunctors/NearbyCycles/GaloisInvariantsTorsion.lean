@@ -27,7 +27,8 @@ For a model over a strictly henselian trait whose generic fibre lies over the ge
 `η = Spec L` and `Ω` the separable closure of `L`, the group `Gal(Ω/L)` is the inertia group `I`,
 and for a closed subgroup `P ⊆ I` with fixed field `L_P = Ω^P`, `N_{L_P}` is the model with generic
 fibre over `L_P`; applied to `Ω/L_P` this gives `Ψ_{N_{L_P}} = (Ψ_{N_Ω})^P` (SGA 4½, [Th. finitude],
-Lemme 3.4; blueprint `sk-prop-tf-nearby-external-kunneth`, identification (2)), for pro-`p` `P`.
+Lemme 3.4; blueprint `proposition-external-kunneth-formula-nearby-cycles`, identification (2)), for
+pro-`p` `P`.
 -/
 
 @[expose] public section
@@ -47,7 +48,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option maxHeartbeats 1000000 in
 -- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`**
 (torsion coefficients in which the degrees of the finite Galois subextensions of `Ω/L` are

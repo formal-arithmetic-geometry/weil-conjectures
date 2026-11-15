@@ -25,7 +25,7 @@ Galois Frobenius of `X`.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback`: blueprint
-  `lem-zl-bertini-finite-cover-curve`.
+  `lemma-curve-preserving-finite-cover--1`.
 
 ## Implementation notes
 
@@ -52,7 +52,7 @@ open CategoryTheory Limits TensorProduct
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- **Curves through prescribed points preserving a finite cover**
-(blueprint: `lem-zl-bertini-finite-cover-curve`). Let `f : X₀ ⟶ Spec k₀` be a smooth
+(blueprint: `lemma-curve-preserving-finite-cover--1`). Let `f : X₀ ⟶ Spec k₀` be a smooth
 geometrically connected affine scheme of relative dimension `d ≥ 2` over a finite field, with
 geometric fiber `X`, let `π : T ⟶ X` be a finite étale morphism with `T` connected, and let `S`
 be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a

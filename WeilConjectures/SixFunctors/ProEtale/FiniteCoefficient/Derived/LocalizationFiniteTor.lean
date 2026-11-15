@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 Let `k` be a field, `X` a scheme of finite type over `k`, `i : Z ⟶ X` a closed immersion and
 `j : U ⟶ X` the complementary quasi-compact open immersion, and let `Λ` be a finite ring
 killed by an integer invertible in `k`: the finite coefficient stage `A_{E,n}` of blueprint
-`prop-sf-localization-all-stages`. This file proves clauses (1')–(4') of that proposition at the
-finite stage, on the bounded constructible pro-étale complexes of finite Tor amplitude
+`lemma-local-cohomology-right-adjoint--2`. This file proves clauses (1')–(4') of that proposition at
+the finite stage, on the bounded constructible pro-étale complexes of finite Tor amplitude
 `Dᵇc_ctf(-, Λ)` (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`), with
 explicit Tor amplitude intervals, for `dim U ≤ d`:
 
@@ -42,7 +42,7 @@ exact, jointly conservative on sheaves, and commute with the derived tensor prod
 `j^* Ri_* P = 0`. For `Ri^! K`, tensoring the closed-support triangle
 `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` with a sheaf `M` gives a distinguished triangle whose long exact
 homology sequence bounds the homology of `Ri_* Ri^! K ⊗ᴸ M`; then `Ri^! K ≅ i^* Ri_* Ri^! K`.
-This replaces the blueprint's residue test (`lem-sf-proetale-residue-tor-test`) by a test on all
+This replaces the blueprint's residue test (`lemma-bounds-finite-reductions--2`) by a test on all
 sheaves `M`.
 -/
 
@@ -202,8 +202,8 @@ theorem torAmplitudeIn_of_mapDerivedCategory_upperStar (i : Z ⟶ X) [IsClosedIm
     ((_root_.DerivedCategory.homologyConcentratedIn a b).prop_of_iso
       (mapDerivedCategoryUpperStarTensorSingleIso _ j K M).symm (hj _))
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the finite stage `A_{E,n}`: the
-direct image `Ri_*` along a closed immersion `i` (whose range is the complement of the range of
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the finite stage `A_{E,n}`:
+the direct image `Ri_*` along a closed immersion `i` (whose range is the complement of the range of
 a quasi-compact open immersion `j`) preserves Tor amplitude intervals: `D(i^*) Ri_* P ≅ P` and
 `D(j^*) Ri_* P = 0`, and Tor amplitude is detected after `i^*` and `j^*`
 (`AlgebraicGeometry.ProEtale.torAmplitudeIn_of_mapDerivedCategory_upperStar`). No
@@ -232,8 +232,8 @@ variable [Finite Λ] {k : Type u} [Field k] (N : ℕ) (hN : (N : k) ≠ 0) (hΛ 
 include hN hΛ s
 
 omit [IsClosedImmersion i] in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (1') at the finite stage `A_{E,n}`: if
-`G ∈ Dᵇc_proét(U, Λ)` has Tor amplitude in `[a, b]` and `dim U ≤ d`, then `Rj_* G` has Tor
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (1') at the finite stage `A_{E,n}`:
+if `G ∈ Dᵇc_proét(U, Λ)` has Tor amplitude in `[a, b]` and `dim U ≤ d`, then `Rj_* G` has Tor
 amplitude in `[a, b + 2d]`. This is the case of an open immersion of
 `AlgebraicGeometry.ProEtale.torAmplitudeIn_rightDerivedLowerStar`; it is sharper than the
 blueprint's interval `[a, b + 2d + c]`, `c ≥ 0` being the torsion cohomological dimension of
@@ -248,7 +248,7 @@ theorem torAmplitudeIn_rightDerivedFunctor_lowerStar_of_isOpenImmersion (d : ℕ
   torAmplitudeIn_rightDerivedLowerStar Λ N hN (nsmul_id_eq_zero N hΛ) s j d hd a b hG hGt
 
 omit [IsClosedImmersion i] in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (1') at the finite stage `A_{E,n}`:
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (1') at the finite stage `A_{E,n}`:
 `Rj_*` carries `Dᵇc_ctf(U, Λ)` into `Dᵇc_ctf(X, Λ)`, for `dim U ≤ d`. -/
 theorem constructibleFiniteTor_rightDerivedFunctor_lowerStar_of_isOpenImmersion (d : ℕ)
     (hd : topologicalKrullDim U ≤ (d : WithBot ℕ∞))
@@ -261,8 +261,8 @@ theorem constructibleFiniteTor_rightDerivedFunctor_lowerStar_of_isOpenImmersion 
     torAmplitudeIn_rightDerivedFunctor_lowerStar_of_isOpenImmersion N hN hΛ s j d hd hbc hGt⟩
 
 omit [QuasiCompact j] in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the finite stage `A_{E,n}`: the
-direct image `Ri_*` along a closed immersion preserves bounded constructibility together with
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the finite stage `A_{E,n}`:
+the direct image `Ri_*` along a closed immersion preserves bounded constructibility together with
 the Tor amplitude interval `[a, b]`
 (`AlgebraicGeometry.ProEtale.torAmplitudeIn_rightDerivedFunctor_lowerStar_of_isClosedImmersion`). -/
 theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_of_isClosedImmersion
@@ -277,7 +277,7 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_of_isClose
   ⟨boundedConstructible_rightDerivedFunctor_lowerStar_of_isClosedImmersion i N hN hΛ s hP,
     torAmplitudeIn_rightDerivedFunctor_lowerStar_of_isClosedImmersion i j hij hPt⟩
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the finite stage `A_{E,n}`:
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the finite stage `A_{E,n}`:
 `Ri_*` carries `Dᵇc_ctf(Z, Λ)` into `Dᵇc_ctf(X, Λ)`
 (`boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_of_isClosedImmersion`). -/
 theorem constructibleFiniteTor_rightDerivedFunctor_lowerStar_of_isClosedImmersion
@@ -292,8 +292,8 @@ theorem constructibleFiniteTor_rightDerivedFunctor_lowerStar_of_isClosedImmersio
   ⟨h.1, a, b, h.2⟩
 
 omit hN hΛ s [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the finite stage `A_{E,n}`: the
-pullback `Lg^*` along any morphism (in particular `i^*` and `j^*`) preserves bounded
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the finite stage `A_{E,n}`:
+the pullback `Lg^*` along any morphism (in particular `i^*` and `j^*`) preserves bounded
 constructibility together with the Tor amplitude interval `[a, b]`
 (`AlgebraicGeometry.ProEtale.torAmplitudeIn_leftDerivedUpperStar`). -/
 theorem boundedConstructible_and_torAmplitudeIn_leftDerivedFunctor_upperStar_obj
@@ -319,8 +319,8 @@ theorem constructibleFiniteTor_leftDerivedFunctor_upperStar_obj {Y : Scheme.{u}}
   have h := boundedConstructible_and_torAmplitudeIn_leftDerivedFunctor_upperStar_obj g hbc hKt
   ⟨h.1, a, b, h.2⟩
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the finite stage `A_{E,n}` (the
-first vertex of the closed-support triangle): if `K ∈ Dᵇc_proét(X, Λ)` has Tor amplitude in
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2') at the finite stage `A_{E,n}`
+(the first vertex of the closed-support triangle): if `K ∈ Dᵇc_proét(X, Λ)` has Tor amplitude in
 `[a, b]` and `dim U ≤ d`, then `Ri_* Ri^! K` has Tor amplitude in `[a, b + 2d + 1]`. In the
 closed-support triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶` the object `Rj_* Lj^* K` has Tor
 amplitude in `[a, b + 2d]` (clauses (3') and (1')), and
@@ -339,8 +339,8 @@ theorem torAmplitudeIn_rightDerivedFunctor_lowerStar_obj_closedUpperShriek
   exact torAmplitudeIn_obj₁_of_distTriang _ hw (by lia) hKt
     (torAmplitudeIn_rightDerivedFunctor_lowerStar_of_isOpenImmersion N hN hΛ s j d hd h.1 h.2)
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the finite stage `A_{E,n}`: if
-`K ∈ Dᵇc_proét(X, Λ)` has Tor amplitude in `[a, b]` and `dim U ≤ d`, then `Ri^! K` (the right
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2') at the finite stage `A_{E,n}`:
+if `K ∈ Dᵇc_proét(X, Λ)` has Tor amplitude in `[a, b]` and `dim U ≤ d`, then `Ri^! K` (the right
 adjoint of `Ri_*`, `AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) has
 Tor amplitude in `[a, b + 2d + 1]`: `Ri^! K ≅ D(i^*) Ri_* Ri^! K`, and `D(i^*)` preserves Tor
 amplitude. This is sharper than the blueprint's interval `[a, b + 2d + c + 1]`, `c ≥ 0` being the
@@ -359,7 +359,7 @@ theorem torAmplitudeIn_closedUpperShriek_rightDerivedFunctor_obj
       (torAmplitudeIn_rightDerivedFunctor_lowerStar_obj_closedUpperShriek N hN hΛ s i j hij d hd
         hK hKt))
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the finite stage `A_{E,n}`:
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2') at the finite stage `A_{E,n}`:
 `Ri^!` carries `Dᵇc_ctf(X, Λ)` into `Dᵇc_ctf(Z, Λ)`, for `dim U ≤ d`. -/
 theorem constructibleFiniteTor_closedUpperShriek_rightDerivedFunctor_obj
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (d : ℕ)
@@ -372,8 +372,8 @@ theorem constructibleFiniteTor_closedUpperShriek_rightDerivedFunctor_obj
   ⟨boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj i j N hN hΛ s hij hbc, a, _,
     torAmplitudeIn_closedUpperShriek_rightDerivedFunctor_obj N hN hΛ s i j hij d hd hbc hKt⟩
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the finite stage `A_{E,n}`: for
-`K ∈ Dᵇc_ctf(X, Λ)` and `dim U ≤ d`, all three vertices of the closed-support triangle
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3') at the finite stage `A_{E,n}`:
+for `K ∈ Dᵇc_ctf(X, Λ)` and `dim U ≤ d`, all three vertices of the closed-support triangle
 `Ri_* Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶` (`AlgebraicGeometry.ProEtale.closedSupportTriangle`) lie in
 `Dᵇc_ctf(X, Λ)`; if `K` has Tor amplitude in `[a, b]`, the outer vertices have Tor amplitude in
 `[a, b + 2d + 1]` and `[a, b + 2d]`. -/
@@ -418,8 +418,8 @@ noncomputable def finiteTorClosedUpperShriek
     (fun K ↦ constructibleFiniteTor_closedUpperShriek_rightDerivedFunctor_obj N hN hΛ s i j hij d
       hd K.2)
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4') at the finite stage `A_{E,n}`: the
-direct image `i_* : Dᵇc_ctf(Z, Λ) ⥤ Dᵇc_ctf(X, Λ)` has the right adjoint `Ri^!`, the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4') at the finite stage `A_{E,n}`:
+the direct image `i_* : Dᵇc_ctf(Z, Λ) ⥤ Dᵇc_ctf(X, Λ)` has the right adjoint `Ri^!`, the
 restriction of the ambient adjunction
 `AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`. -/
 noncomputable def finiteTorClosedUpperShriekAdjunction
@@ -431,8 +431,8 @@ noncomputable def finiteTorClosedUpperShriekAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _)
     (Iso.refl _)
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4') at the finite stage `A_{E,n}`: the
-unit `Q ⟶ Ri^! i_* Q` of the adjunction on `Dᵇc_ctf`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4') at the finite stage `A_{E,n}`:
+the unit `Q ⟶ Ri^! i_* Q` of the adjunction on `Dᵇc_ctf`
 (`AlgebraicGeometry.ProEtale.finiteTorClosedUpperShriekAdjunction`) is an isomorphism, `Ri_*`
 being fully faithful (`CategoryTheory.ObjectProperty.isIso_unit_app_of_lift`). -/
 theorem isIso_finiteTorClosedUpperShriekAdjunction_unit_app
@@ -442,7 +442,7 @@ theorem isIso_finiteTorClosedUpperShriekAdjunction_unit_app
     IsIso ((finiteTorClosedUpperShriekAdjunction N hN hΛ s i j hij d hd).unit.app Q) :=
   ObjectProperty.isIso_unit_app_of_lift _ _ Q
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4') at the finite stage `A_{E,n}`:
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4') at the finite stage `A_{E,n}`:
 `Ri^! Rj_* G = 0` in `Dᵇc_ctf(Z, Λ)` for `G ∈ Dᵇc_ctf(U, Λ)`; this holds for every
 `G ∈ D(U_proét, Λ)`
 (`ProEtale.isZero_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedFunctor_lowerStar`). -/

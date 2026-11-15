@@ -26,7 +26,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 # Cohomology with support
 
 Source: the blueprint, `sec-smooth-purity/sk-def-purity-conv`,
-`def-pur-support-cohomology` (blueprint: def-pur-support-cohomology).
+`definition-local-cohomology` (blueprint: definition-local-cohomology).
 
 ## Main definitions
 
@@ -55,7 +55,7 @@ variable (A : Type a) [Category.{w} A] [Abelian A] {V W : C} (j : W ⟶ V)
 
 /-- The kernel of restriction from `V` to `W`, on objects and morphisms of sheaves.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, kernel formula
-(blueprint: def-pur-support-cohomology). This single construction is used in both topologies. -/
+(blueprint: definition-local-cohomology). This single construction is used in both topologies. -/
 noncomputable def supportedSectionsFunctor : Sheaf J A ⥤ A where
   obj F := kernel (F.obj.map j.op)
   map f := kernel.map _ _ (f.hom.app (op V)) (f.hom.app (op W))
@@ -65,7 +65,7 @@ noncomputable def supportedSectionsFunctor : Sheaf J A ⥤ A where
 
 /-- Additivity needed to derive the kernel-of-restriction functor.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, derived-functor clause
-(blueprint: def-pur-support-cohomology).
+(blueprint: definition-local-cohomology).
 Proof: compose each proposed equality with the kernel inclusion. The resulting equality
 is additivity of evaluation on sections; the kernel inclusion is monic. -/
 theorem supportedSectionsFunctor_additive : (supportedSectionsFunctor J A j).Additive := by
@@ -86,7 +86,7 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- The open-complement restriction arrow in the small etale site.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, restriction along `j`
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 def supportRestrictionArrow :
     Scheme.Etale.mk i.openComplement.ι ⟶ Scheme.Etale.mk (𝟙 X) :=
   MorphismProperty.Over.homMk i.openComplement.ι
@@ -94,7 +94,7 @@ def supportRestrictionArrow :
 
 /-- Sections of an abelian etale sheaf with support in the closed subscheme `Z`.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, kernel formula
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 noncomputable abbrev supportSections :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1} :=
   Sheaf.supportedSectionsFunctor X.smallEtaleTopology AddCommGrpCat.{u + 1}
@@ -102,7 +102,7 @@ noncomputable abbrev supportSections :
 
 /-- `R Γ_Z` on the bounded-below derived category of abelian etale sheaves.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, derived-complex clause
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 noncomputable def derivedSupportSections :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ⥤
       DerivedCategory.Plus AddCommGrpCat.{u + 1} :=
@@ -110,7 +110,7 @@ noncomputable def derivedSupportSections :
 
 /-- `H^q_Z(X,K) = H^q(R Γ_Z(X,K))` for every integer, in particular when `K` has
  torsion cohomology. Source: blueprint `sec-smooth-purity/sk-def-purity-conv`
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 noncomputable def supportHypercohomology (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     AddCommGrpCat.{u + 1} :=
@@ -125,7 +125,7 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- The same restriction arrow in the small pro-etale site.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 def supportRestrictionArrow :
     Scheme.ProEt.mk i.openComplement.ι ⟶ Scheme.ProEt.mk (𝟙 X) :=
   MorphismProperty.Over.homMk i.openComplement.ι
@@ -136,7 +136,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- Sections with closed support of a pro-etale `Λ`-module sheaf, in particular for each
 finite-torsion coefficient ring `A_{E,n}`. The kernel carries the induced `Λ` action.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 noncomputable abbrev supportSections :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤ ModuleCat.{u + 1} Λ :=
   Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)
@@ -144,7 +144,7 @@ noncomputable abbrev supportSections :
 
 /-- Bounded-below right derived supported sections on the small pro-etale site.
 Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 noncomputable def derivedSupportSections :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory.Plus (ModuleCat.{u + 1} Λ) :=
@@ -152,7 +152,7 @@ noncomputable def derivedSupportSections :
 
 /-- Cohomology of derived supported sections, in every integer degree, with pro-etale
 finite-torsion coefficients. Source: blueprint `sec-smooth-purity/sk-def-purity-conv`
-(blueprint: def-pur-support-cohomology). -/
+(blueprint: definition-local-cohomology). -/
 noncomputable def supportHypercohomology (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
     ModuleCat.{u + 1} Λ :=

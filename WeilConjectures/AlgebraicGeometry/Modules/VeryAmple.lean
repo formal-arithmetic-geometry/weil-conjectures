@@ -86,8 +86,8 @@ lemma IsVeryAmple.pullback {S Z : Scheme.{u}} {f : X ⟶ S} {M : X.Modules} (h :
   exact ⟨n, g ≫ i, hn, inferInstance, by rw [Category.assoc, hif],
     ⟨(Scheme.Modules.pullbackComp g i).symm.app _ ≪≫ (Scheme.Modules.pullback g).mapIso e⟩⟩
 
-/-- Blueprint `lem-chow-segre`: The Segre embedding is a closed immersion (the consequence that
-`𝒪(1) ⊠ 𝒪(1)` is very ample, recorded in its detailed form).
+/-- Blueprint `theorem-chow-s-lemma-projective-form`: The Segre embedding is a closed immersion (the
+consequence that `𝒪(1) ⊠ 𝒪(1)` is very ample, recorded in its detailed form).
 
 **A tensor product of very ample modules is very ample.** If `M = i^* 𝒪(1)` and `N = j^* 𝒪(1)`
 for closed immersions `i : X ⟶ ℙ(n; S)` and `j : X ⟶ ℙ(m; S)` over `S`, then `M ⊗ N` is the
@@ -147,7 +147,7 @@ pullback of `𝒪(1)` along a closed immersion `X ⟶ ℙ(m; K)`, then `(i^* L)^
 is its pullback along the closed immersion `Z ⟶ X ⟶ ℙ(m; K)` (Stacks, Properties of Schemes,
 Section 28.26).
 
-This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
+This is used in the proof of blueprint `proposition-multiplication-n--1`. -/
 theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Modules}
     (hL : IsAmple f L) (i : Z ⟶ X) [IsClosedImmersion i] :
     IsAmple (i ≫ f) ((Scheme.Modules.pullback i).obj L) := by
@@ -159,14 +159,14 @@ theorem IsAmple.pullback {Z : Scheme.{u}} {f : X ⟶ Spec (.of K)} {L : X.Module
 so is `(L^{⊗ m})^{⊗ k}` (`AlgebraicGeometry.IsVeryAmple.tensorPow`, via the Segre embedding), and
 `(L^{⊗ m})^{⊗ k} ≅ L^{⊗ mk} ≅ (L^{⊗ k})^{⊗ m}`.
 
-This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+This is used in the proof of blueprint `proposition-multiplication-n--2`. -/
 theorem IsAmple.tensorPow {f : X ⟶ Spec (.of K)} {L : X.Modules} (hL : IsAmple f L) {k : ℕ}
     (hk : 0 < k) : IsAmple f (L.tensorPow k) := by
   obtain ⟨hinv, m, hm, hLm⟩ := hL
   exact ⟨inferInstance, m, hm, (hLm.tensorPow hk).of_iso ((L.tensorPowMulIso m k).symm ≪≫
     eqToIso (congrArg L.tensorPow (Nat.mul_comm m k)) ≪≫ L.tensorPowMulIso k m)⟩
 
-/-- Blueprint `lem-sc-ample-tensor`: Tensor products of ample modules.
+/-- Blueprint `lemma-symmetric-ample-sheaf--1`: Tensor products of ample modules.
 
 **A tensor product of ample modules is ample** (Stacks 0890). If `L^{⊗ a}` and `M^{⊗ b}` are
 very ample, then so are `(L^{⊗ a})^{⊗ b} ≅ L^{⊗ ab}` and `(M^{⊗ b})^{⊗ a} ≅ M^{⊗ ab}`, hence also
@@ -186,7 +186,7 @@ immersion `i : X ⟶ ℙ(n; k)`, then for a field extension `K/k` the base chang
 pullback of `𝒪(1)` along the base change `i_K : X_K ⟶ ℙ(n; K)` of `i`, which is again a closed
 immersion (Stacks 01JY).
 
-(blueprint: `lem-pc-very-ample-ample`, `lem-pc-closed-imm-base-change`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, `lem-pc-closed-imm-base-change`) -/
 theorem IsVeryAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
     {M : X.Modules} (h : IsVeryAmple f M) (K : Type u) [Field K] [Algebra k K] :
     IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
@@ -215,7 +215,7 @@ theorem IsVeryAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.o
 /-- **Ampleness is stable under field extension**, by
 `AlgebraicGeometry.IsVeryAmple.pullback_of_field` applied to a very ample tensor power.
 
-(blueprint: `lem-pc-very-ample-ample`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem IsAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
     {M : X.Modules} (h : IsAmple f M) (K : Type u) [Field K] [Algebra k K] :
     IsAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))

@@ -24,7 +24,7 @@ structure map of the strict localization (Stacks, Tag 04HX).
 This is the chart version of
 `AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation`; the proof is that of the
 private chart lemma of `WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation`,
-made available here for a non-affine `S` (blueprint `det-tf-transverse-corner-constant`).
+made available here for a non-affine `S` (blueprint `lemma-punctured-surface-punctured-curve--1`).
 -/
 
 @[expose] public section
@@ -33,7 +33,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- **The strict henselization through an affine chart** (Stacks, Tag 04HX). For an open
@@ -42,7 +41,7 @@ closed, there are a prime `q` of `R`, a separable closure `K` of the residue fie
 a ring map `ρ : R ⟶ 𝒪^{sh}_{S, xR ≫ i}` with `Spec ρ ≫ i` the structure map of the strict
 localization, such that `𝒪^{sh}_{S, xR ≫ i}` is the strict henselization of `R_q` with respect
 to `K`, compatibly with `ρ`; the prime `q` is the image of `xR` (blueprint
-`det-tf-transverse-corner-constant`). -/
+`lemma-punctured-surface-punctured-curve--1`). -/
 theorem strictHenselizationRing_chart_presentation
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]

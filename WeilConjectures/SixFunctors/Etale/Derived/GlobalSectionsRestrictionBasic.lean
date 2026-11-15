@@ -20,7 +20,7 @@ is derived global sections of the unit of the derived adjunction `f^* ⊣ Rf_*`
 (`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`) followed by the Leray
 isomorphism (`AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso`).
 It is the pullback map on cohomology used throughout the blueprint (for instance in
-`det-tf-punctured-restriction-factorization`: "pullback maps on cohomology are compatible with
+`lemma-restriction-punctured-curve--1`: "pullback maps on cohomology are compatible with
 composition").
 
 ## Main definitions

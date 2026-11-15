@@ -132,7 +132,6 @@ private theorem signedUncurryInverse {D : Type*} [Category D] [Preadditive D]
   rw [uncurry_units_smul, MonoidalClosed.uncurry_curry] at h'
   rw [h', smul_smul, Int.units_mul_self, one_smul]
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the tensor and Hom comparison through their explicit site instances.
 private theorem complexEvaluation_component (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (p q n : ℤ) (h : p + q = n) :

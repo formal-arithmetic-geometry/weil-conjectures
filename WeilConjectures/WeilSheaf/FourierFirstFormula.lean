@@ -12,8 +12,8 @@ public import WeilConjectures.WeilSheaf.FourierInversion.ConvolutionKernel
 # The first Fourier formula
 
 The Fourier–Deligne transform of Weil complexes on the affine line exchanges the constant sheaf
-`ℚ̄_ℓ` and the skyscraper `δ₀ = i₀,* ℚ̄_ℓ` at the origin (blueprint `lem-fd-first-formula`): for a
-nontrivial additive character `ψ`,
+`ℚ̄_ℓ` and the skyscraper `δ₀ = i₀,* ℚ̄_ℓ` at the origin (blueprint
+`lemma-fourier-transform-constant-sheaf`): for a nontrivial additive character `ψ`,
 
 * `FT_ψ(ℚ̄_ℓ) ≅ δ₀(-1)[-1]` (`AlgebraicGeometry.nonempty_iso_fourierTransform_obj_adicConstant`):
   `FT_ψ(ℚ̄_ℓ) = Rpr₂!(μ^* ℒ_ψ)[1]`, and the delta kernel computation for the function `ξ` on the
@@ -165,10 +165,11 @@ lemma affineLine.zeroFibre_appTop_mul :
       AffineSpace.zeroSection_appTop_coord, map_zero]
   rw [map_mul, h, zero_mul]
 
-/-- **The transform of the skyscraper at the origin** (blueprint `lem-fd-first-formula`, second
-formula): `FT_ψ(δ₀) ≅ ℚ̄_ℓ[1]`. By compact-support base change along `pr₁`, `pr₁^* δ₀` is the
-constant complex on the line `ξ ↦ (0, ξ)`; by the projection formula the kernel `μ^* ℒ_ψ` restricts
-to `ℒ_{ψ,0} ≅ ℚ̄_ℓ` on it, and `pr₂` maps this line isomorphically onto the dual line. -/
+/-- **The transform of the skyscraper at the origin** (blueprint
+`lemma-fourier-transform-constant-sheaf`, second formula): `FT_ψ(δ₀) ≅ ℚ̄_ℓ[1]`. By compact-support
+base change along `pr₁`, `pr₁^* δ₀` is the constant complex on the line `ξ ↦ (0, ξ)`; by the
+projection formula the kernel `μ^* ℒ_ψ` restricts to `ℒ_{ψ,0} ≅ ℚ̄_ℓ` on it, and `pr₂` maps this
+line isomorphically onto the dual line. -/
 theorem nonempty_iso_fourierTransform_obj_delta (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((fourierTransform ψ).obj (affineLine.delta k₀ l) ≅
       (shiftFunctor _ (1 : ℤ)).obj
@@ -218,10 +219,10 @@ theorem nonempty_iso_fourierTransform_obj_delta (ψ : AddChar k₀ (PadicAlgCl l
 
 
 
-/-- **The transform of the constant sheaf** (blueprint `lem-fd-first-formula`, first formula): for a
-nontrivial additive character `ψ`, `FT_ψ(ℚ̄_ℓ) ≅ δ₀(-1)[-1]`. Here `FT_ψ(ℚ̄_ℓ) = Rpr₂!(ℒ_ψ(ξ x))[1]`
-with `pr₂ : (x, ξ) ↦ ξ` the trivial line bundle with fibre coordinate `x` over the dual line, and
-the delta kernel computation
+/-- **The transform of the constant sheaf** (blueprint `lemma-fourier-transform-constant-sheaf`,
+first formula): for a nontrivial additive character `ψ`, `FT_ψ(ℚ̄_ℓ) ≅ δ₀(-1)[-1]`. Here
+`FT_ψ(ℚ̄_ℓ) = Rpr₂!(ℒ_ψ(ξ x))[1]` with `pr₂ : (x, ξ) ↦ ξ` the trivial line bundle with fibre
+coordinate `x` over the dual line, and the delta kernel computation
 (`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_mul`)
 for the coordinate `ξ`, whose zero locus is the origin, gives `i₀,!(ℚ̄_ℓ(-1)[-2])[1]`. -/
 theorem nonempty_iso_fourierTransform_obj_adicConstant (ψ : AddChar k₀ (PadicAlgCl l))

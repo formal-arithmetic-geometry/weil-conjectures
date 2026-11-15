@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.DualizableIntegralCompletio
 # The ordinary integral derived tensor product
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor,
-`det-lem-int-tensor-product.md` and its proof (blueprint: det-lem-int-tensor-product).
+`det-lem-int-tensor-product.md` and its proof (blueprint: lemma-inverse-image-tensor-product--2).
 
 All tensors use the ambient K-flat derived monoidal structure over the pulled-back
 continuous condensed valuation ring. Constructibility uses finite constant scalar models.
@@ -96,8 +96,8 @@ private theorem dualizable_preserves_products
 finite free scalar complexes are dualizable and preserve products, sequential derived limits
 and derived completeness.
 
-Source: blueprint latest, det-lem-int-tensor-product
-(blueprint: det-lem-int-tensor-product).
+Source: blueprint latest, lemma-inverse-image-tensor-product--2
+(blueprint: lemma-inverse-image-tensor-product--2).
 
 Proof: the constructibility clause is the separate stratum/residue argument
 `integralTensorConstructibility`. For the moreover clause, each term of the local complex is

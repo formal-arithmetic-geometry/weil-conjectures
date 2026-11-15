@@ -604,7 +604,7 @@ generators is a bijection from the Picard group of `X` onto the set of isomorphi
 `𝒪_Xˣ`-torsors on the Zariski site of `X`. Its inverse sends a torsor `T` to the invertible
 module `(T × 𝒪_X) / 𝒪_Xˣ` (`AlgebraicGeometry.Scheme.Modules.ofUnitsTorsor`), see
 `AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf_symm_mk`.
-(blueprint: `lem-sc-line-bundle-torsor`, Zariski part) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`, Zariski part) -/
 theorem Pic.bijective_torsorClass : Function.Bijective (Pic.torsorClass (X := X)) := by
   refine ⟨fun L L' h ↦ ?_, fun T ↦ ?_⟩
   · have := Pic.isInvertible L
@@ -639,7 +639,7 @@ lemma picEquivQuotientTorsorUnitsSheaf_symm_mk (T : Sheaf.Torsor X.unitsSheaf) :
 
 /-- Invertible modules up to isomorphism are in bijection with `𝒪_Xˣ`-torsors up to
 isomorphism; the bijection is `AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf`.
-(blueprint: `lem-sc-line-bundle-torsor`, Zariski part) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`, Zariski part) -/
 theorem nonempty_pic_equiv_quotient_torsor_unitsSheaf (X : Scheme.{u}) :
     Nonempty (X.Pic ≃ _root_.Quotient (Sheaf.Torsor.setoid (G := X.unitsSheaf))) :=
   ⟨X.picEquivQuotientTorsorUnitsSheaf⟩

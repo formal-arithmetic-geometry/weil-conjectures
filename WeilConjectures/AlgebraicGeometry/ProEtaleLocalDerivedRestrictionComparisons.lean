@@ -64,7 +64,7 @@ sequences and addition of maps. Apply the abelian exact-functor criterion. This 
 only the actual inverse-image ring, without extension to another coefficient ring.
 DAG inputs: lem-weil-pbc-proetale-module-inverse-image-comparison,
 lem-weil-pbc-left-exact-site-inverse-image-tensor,
-lem-weil-pbc-module-sheaves-colimits-forgetful, and
+situation-conventions, and
 lem-sp-exact-functor-preserves-homology. -/
 theorem inverseImage_exact {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :

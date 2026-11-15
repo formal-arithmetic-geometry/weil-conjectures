@@ -13,7 +13,7 @@ public import WeilConjectures.Compactification.TwoOpenComparison
 
 This file complements `WeilConjectures.Compactification.TwoOpenComparison` with the
 scheme-level forms of the statements of the blueprint subsections
-`lemma-nagata-key-boundary-disjointness`, which the
+`proposition-compactifying-union-two-opens--1`, which the
 main chain of the two-open compactification theorem only uses in topological form.
 
 * `AlgebraicGeometry.TwoOpenSide.boundaryLoci`: all clauses of
@@ -53,8 +53,8 @@ section BoundaryLoci
 
 variable {O : U.Opens} (σ : TwoOpenSide u O)
 
-/-- **The four boundary loci** (blueprint: `lemma-nagata-boundary-loci`). For a side `σ`
-over `O` and the other open `O'` with `O ∪ O' = U`, write `Z = U ∖ O'` and `Z' = U ∖ O`.
+/-- **The four boundary loci** (blueprint: `proposition-compactifying-union-two-opens--1`). For a
+side `σ` over `O` and the other open `O'` with `O ∪ O' = U`, write `Z = U ∖ O'` and `Z' = U ∖ O`.
 Then `Z` is closed in `U` and contained in `O`; the loci `ψ⁻¹(Z)` and `ψ⁻¹(Z')` are
 closed in `V`, i.e. their closures in `X` (the self and the forbidden boundary) meet `V`
 exactly in them; they are disjoint; and `ψ` is an isomorphism over an open neighbourhood
@@ -168,7 +168,7 @@ theorem range_toImage_comparisonMap_snd :
     exact h
 
 /-- The canonical isomorphism `V₁ ×_U V₂ ≅ p₁⁻¹(V₁)` (blueprint:
-`lemma-nagata-key-boundary-disjointness`, part (2)): the comparison morphism is a
+`proposition-compactifying-union-two-opens--1`, part (2)): the comparison morphism is a
 quasi-compact immersion, so it is an open immersion into its scheme-theoretic image, with
 range `p₁⁻¹(V₁)`. -/
 def pullbackIsoComparisonFstPreimage :
@@ -178,7 +178,7 @@ def pullbackIsoComparisonFstPreimage :
     (by rw [Scheme.Opens.range_ι, range_toImage_comparisonMap]; rfl)
 
 /-- The canonical isomorphism `V₁ ×_U V₂ ≅ p₂⁻¹(V₂)` (blueprint:
-`lemma-nagata-key-boundary-disjointness`, part (2)). -/
+`proposition-compactifying-union-two-opens--1`, part (2)). -/
 def pullbackIsoComparisonSndPreimage :
     pullback σ₁.ψ σ₂.ψ ≅ (comparisonSnd σ₁ σ₂ ⁻¹ᵁ σ₂.V).toScheme :=
   IsOpenImmersion.isoOfRangeEq (comparisonMap σ₁ σ₂).toImage
@@ -230,7 +230,7 @@ lemma pullbackIsoComparisonSndPreimage_hom_comparisonFst :
   rw [pullbackIsoComparisonSndPreimage_hom_ι_assoc, toImage_comparisonFst]
 
 /-- **`p₁⁻¹(V₁) ⟶ V₁` is the base change of `ψ₂` along `ψ₁`** (blueprint:
-`lemma-nagata-key-boundary-disjointness`, part (2), `i = 1`). The square
+`proposition-compactifying-union-two-opens--1`, part (2), `i = 1`). The square
 ```
 p₁⁻¹(V₁) --> V₂
    |          | ψ₂
@@ -251,7 +251,7 @@ theorem isPullback_comparisonFst_restrict :
   rw [← hfst, Category.assoc, Category.assoc, pullback.condition]
 
 /-- **`p₂⁻¹(V₂) ⟶ V₂` is the base change of `ψ₁` along `ψ₂`** (blueprint:
-`lemma-nagata-key-boundary-disjointness`, part (2), `i = 2`). -/
+`proposition-compactifying-union-two-opens--1`, part (2), `i = 2`). -/
 theorem isPullback_comparisonSnd_restrict :
     IsPullback (comparisonSnd σ₁ σ₂ ∣_ σ₂.V)
       ((pullbackIsoComparisonSndPreimage σ₁ σ₂).inv ≫ pullback.fst σ₁.ψ σ₂.ψ)
@@ -362,7 +362,7 @@ lemma ker_comparisonMap_admissibleBlowup :
   rw [h, ← improvedToStrictTransform_ι, Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant]
 
 /-- **The improved comparison space is the strict transform of the old one** (blueprint:
-`lemma-nagata-key-boundary-disjointness`, part (3); Stacks Project Tag 0F3Y). After a
+`proposition-compactifying-union-two-opens--1`, part (3); Stacks Project Tag 0F3Y). After a
 `V₁`-admissible blow-up `π : X₁' ⟶ X₁`, the comparison space formed with `X₁'` is
 canonically isomorphic, as a closed subscheme of `X₁' ×_S X₂`, to the strict transform of
 the comparison space `X₁₂` along `π`. -/
@@ -510,7 +510,7 @@ end Improved
 end TwoOpenSide
 
 open TwoOpenSide in
-/-- **The improved comparison** (blueprint: `lemma-nagata-key-boundary-disjointness`,
+/-- **The improved comparison** (blueprint: `proposition-compactifying-union-two-opens--1`,
 parts (3) and (4); Stacks Project Tag 0F3W). There is a `V₁`-admissible blow-up
 `π : X₁' ⟶ X₁` such that, for the improved pair, the first comparison projection `p₁` is
 an isomorphism over an open neighbourhood of the forbidden boundary `Z̄₁,₂` of `X₁'`, and
@@ -554,7 +554,7 @@ theorem exists_admissibleBlowup_isIso_comparisonFst_near_forbiddenBoundary [IsNo
 
 open TwoOpenSide in
 /-- **Improved comparison and key disjointness** (blueprint:
-`lemma-nagata-key-boundary-disjointness`). For prepared sides `σ₁, σ₂` there is a further
+`proposition-compactifying-union-two-opens--1`). For prepared sides `σ₁, σ₂` there is a further
 `V₁`-admissible blow-up of `X₁` such that the improved first side is still prepared, the
 first projection `p₁ : X₁₂ ⟶ X₁` of the improved comparison space is an isomorphism over
 an open neighbourhood of the forbidden boundary `Z̄₁,₂`, and the key disjointness

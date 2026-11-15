@@ -18,7 +18,7 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 # Local rings as directed colimits of essentially finite type rings
 
 Source: Stacks Project, Tag 00QU, proof (construction of the base-ring system).
-(blueprint: lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z)
+(blueprint: lemma-quasi-finite-coordinates--1)
 -/
 
 @[expose] public section
@@ -160,7 +160,7 @@ private noncomputable def localCoconeIsColimit (R : Type u) [CommRing R] [IsLoca
 /-- Every local ring is a directed colimit in commutative rings of local rings essentially
 of finite type over `ℤ`, with local transition maps and local cocone maps.
 Source: Stacks Project, Tag 00QU, proof, base-ring construction; also Tag 00QT.
-(blueprint: lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z)
+(blueprint: lemma-quasi-finite-coordinates--1)
 
 Proof: Index by finite subsets `A` of `R`, including the empty subset; union supplies common
 upper bounds. Let `C_A = ℤ[A]` and contract the maximal ideal of `R` to a prime `q_A` of `C_A`.

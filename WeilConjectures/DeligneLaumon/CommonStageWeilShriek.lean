@@ -24,8 +24,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Compact support with canonical Frobenius comparison
 
-Source: blueprint main-20261015, lem-zl-shriek-composition and
-lem-fix-weil-operations; SGA 4, XVII, §5--6
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1 and
+prose-10-20; SGA 4, XVII, §5--6
 (blueprint: def-zl-common-stage-weil-shriek).
 
 Open extension and proper image are adjoints of the existing common-stage pullback.

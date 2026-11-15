@@ -255,8 +255,45 @@ private theorem identity_generator_restrict (X : Scheme.{u})
   erw [PresheafOfModules.Monoidal.tensorObj_map_tmul]
   rfl
 
-set_option maxHeartbeats 800000 in
--- Pure generators cross the sectionwise coefficient transports in the rewrites.
+private theorem identity_complex_sections (X : Scheme.{u})
+    [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ) (k : Identity l E X s)
+    (P : K l E X s) (n : ℤ) (U : X.ProEt)
+    (x : (P.X n).val.obj (op ((proEtaleIsoPostcompose (𝟙 X)).obj U))) :
+    ((k.complex P).hom.f n).val.app (op U) x =
+      (P.X n).val.map ((siteId X).inv.app U).op x := by
+  rw [k.degree]
+  exact eq_of_heq (k.sections (P.X n) U x)
+
+-- Check a map out of a tensor presentation using chosen preimages of its generators.
+private theorem identity_tensor_iso_hom_ext (X : Scheme.{u})
+    [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
+    (A P Q H : K l E X s) (e : A ≅ (total l E X s).obj (P, Q))
+    (f : (total l E X s).obj (P, Q) ⟶ H) (g : A ⟶ H)
+    (hh : ∀ (n p q : ℤ) (hpq : p + q = n) (U : X.ProEtᵒᵖ)
+      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),
+      ∃ z : (A.X n).val.obj U,
+        (e.hom.f n).val.app U z =
+          coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+            (podReindexingRing l E X s) P Q p q n hpq U x y ∧
+        (f.f n).val.app U
+          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+            (podReindexingRing l E X s) P Q p q n hpq U x y) =
+          (g.f n).val.app U z) :
+    e.hom ≫ f = g := by
+  apply (cancel_epi e.inv).mp
+  rw [Iso.inv_hom_id_assoc]
+  ext n : 1
+  apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
+    (R := podReindexingRing l E X s)
+  intro p q hpq U x y
+  obtain ⟨z, hz, hf⟩ := hh n p q hpq U x y
+  have hi := congrArg (fun a ↦ (a.f n).val.app U z) e.hom_inv_id
+  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
+  rw [hf, ← hz]
+  exact congrArg (fun z ↦ (g.f n).val.app U z) hi.symm
+
+-- Evaluate the two routes directly on the preimages of pure generators.
 private theorem identity_tensor_chain (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
@@ -265,36 +302,21 @@ private theorem identity_tensor_chain (X : Scheme.{u})
     (c.tensorChain P Q).hom ≫
         (total l E X s).map ((k.complex P).hom, (k.complex Q).hom) =
       (k.complex ((total l E X s).obj (P, Q))).hom := by
-  apply (cancel_epi (c.tensorChain P Q).inv).mp
-  ext n : 1
-  apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
-    (R := podReindexingRing l E X s)
-  intro p q hpq U x y
-  let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+  apply identity_tensor_iso_hom_ext l E X s _ _ _ _ (c.tensorChain P Q)
+  intro n p q hpq U x y
+  refine ⟨coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
     (podReindexingRing l E X s) P Q p q n hpq
-      (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) x y
-  have hcancel := congrArg (fun a ↦ (a.f n).val.app U z)
-    (c.tensorChain P Q).hom_inv_id
-  have hi := congrArg
-    (fun z ↦ (((c.tensorChain P Q).inv.f n).val.app U) z)
-    (c.tensorChain_pure P Q p q n hpq U.unop x y)
-  have hi' : (((c.tensorChain P Q).inv.f n).val.app U)
-      (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
-        (podReindexingRing l E X s) ((podReindexingComplexFunctor l E (𝟙 X) s).obj P)
-        ((podReindexingComplexFunctor l E (𝟙 X) s).obj Q) p q n hpq U x y) = z :=
-    hi.symm.trans hcancel
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rw [hi']
-  dsimp only [z]
-  erw [c.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
-  rw [k.degree, k.degree, k.degree]
-  erw [eq_of_heq (k.sections _ U.unop z)]
-  erw [identity_generator_restrict]
-  have hx := eq_of_heq (k.sections (P.X p) U.unop x)
-  have hy := eq_of_heq (k.sections (Q.X q) U.unop y)
-  erw [hx, hy]
-  rfl
+      (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) x y,
+    c.tensorChain_pure P Q p q n hpq U.unop x y, ?_⟩
+  refine (ScalarHomTensor.tensor_generator_map (k.complex P).hom
+    (k.complex Q).hom p q n hpq U x y).trans ?_
+  refine (congrArg₂ (fun a b ↦ coefficientTensorGenerator.{u, u + 1, u}
+    (ProEt.topology X) (podReindexingRing l E X s) P Q p q n hpq U a b)
+      (identity_complex_sections l E X s k P p U.unop x)
+      (identity_complex_sections l E X s k Q q U.unop y)).trans ?_
+  exact (identity_generator_restrict l E X s P Q p q n hpq
+    ((siteId X).inv.app U.unop).op x y).symm.trans
+      (identity_complex_sections l E X s k ((total l E X s).obj (P, Q)) n U.unop _).symm
 
 private theorem identity_representative_square
     {C : Type*} [Category C] (F : C ⥤ C) (B : C × C ⥤ C)
@@ -318,8 +340,7 @@ private theorem identity_representative_square
       simp only [Category.assoc]
     _ = _ := by rw [hδ, Category.assoc, hd, Category.assoc]; rfl
 
-set_option maxHeartbeats 800000 in
--- Elaborating the K-flat model square unfolds the fixed derived-category transports.
+-- State the localized naturality square explicitly before composing it with the chain square.
 private theorem identity_tensor_representative (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
@@ -341,7 +362,10 @@ private theorem identity_tensor_representative (X : Scheme.{u})
   let B := total l E X s
   obtain ⟨hFP, hFQ, hm⟩ := c.tensor_model P Q hP hQ
   let r := T.comparison.app (⟨P, hP⟩, ⟨Q, hQ⟩)
-  have hn := T.comparison.hom.naturality
+  have hn : Q₀.map (B.map (Prod.mkHom (k.complex P).hom (k.complex Q).hom)) ≫ r.hom =
+      T.comparison.hom.app (⟨_, hFP⟩, ⟨_, hFQ⟩) ≫
+        S.tensor.map (Prod.mkHom (Q₀.map (k.complex P).hom) (Q₀.map (k.complex Q).hom)) :=
+    T.comparison.hom.naturality
     (Prod.mkHom (ObjectProperty.homMk (k.complex P).hom :
       (⟨_, hFP⟩ : ObjectProperty.FullSubcategory
         (CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -355,8 +379,10 @@ private theorem identity_tensor_representative (X : Scheme.{u})
       T.comparison.hom.app (⟨_, hFP⟩, ⟨_, hFQ⟩)) ≫
       S.tensor.map (Prod.mkHom (Q₀.map (k.complex P).hom) (Q₀.map (k.complex Q).hom)) =
       Q₀.map (k.complex (B.obj (P, Q))).hom ≫ r.hom := by
-    erw [Category.assoc, ← hn, ← Q₀.map_comp_assoc, hc]
-    rfl
+    exact (Category.assoc _ _ _).trans
+      ((congrArg (fun f ↦ Q₀.map (c.tensorChain P Q).hom ≫ f) hn.symm).trans
+        ((Q₀.map_comp_assoc _ _ _).symm.trans
+          (congrArg (fun f ↦ Q₀.map f ≫ r.hom) hc)))
   exact identity_representative_square (podReindexingDerivedFunctor l E (𝟙 X) s)
     S.tensor k.derived c.tensor.hom r (α.hom.app P) (α.hom.app Q)
     (α.hom.app (B.obj (P, Q))) (Q₀.map (k.complex P).hom)

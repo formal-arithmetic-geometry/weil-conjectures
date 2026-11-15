@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstructibleExtContinuityFinite
 # Extending a specified constructible Ext bound to ind-constructible sheaves
 
 Source: blueprint latest, sec-six-functors-basics/sk-cor-ind-heart-ii/_section.md,
-vanishing clause, used by the one-cohomology case of det-finite-window-bounded.
+vanishing clause, used by the one-cohomology case of lemma-reduction-finitely-many-degrees.
 -/
 
 @[expose] public section
@@ -36,7 +36,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The specified bound extends to ind-constructible targets on a Noetherian scheme,
 for either of the canonical field coefficient sheaves.
 
-Source: blueprint `sk-cor-ind-heart-ii`, vanishing clause.
+Source: blueprint `corollary-ind-heart-b`, vanishing clause.
 (blueprint: lem-finite-window-ind-ext-bound-noetherian)
 Proof: the existing Noetherian continuity theorem makes the shifted Hom functor
 preserve each filtered module colimit. Every element of the colimit of abelian
@@ -81,12 +81,12 @@ theorem constructibleInd_extBound_noetherian
 ind-constructible sheaf. The coefficient equality includes the multiplication,
 via bundled monoid objects. This is the sheaf input to bounded-complex devissage.
 
-Source: blueprint latest, sk-cor-ind-heart-ii, vanishing clause, and
+Source: blueprint latest, corollary-ind-heart-b, vanishing clause, and
 sk-lem-finite-window-bounded.proof.md, one-cohomology case
 (blueprint: lem-finite-window-ind-ext-bound).
 
 Proof: choose a small filtered constructible presentation B = colim B_i.
-The filtered-colimit Ext comparison of sk-lem-constructible-ext-continuity,
+The filtered-colimit Ext comparison of lemma-continuity-ext-out-constructible-complex--1,
 clause (1), identifies Ext^r(C,B) with colim Ext^r(C,B_i). Every stage group is
 zero by the supplied bound since d < r. A colimit of zero abelian groups is
 zero; transporting along the comparison gives the claim. This uses only

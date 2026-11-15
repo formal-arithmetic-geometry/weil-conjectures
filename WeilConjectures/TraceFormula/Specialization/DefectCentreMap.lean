@@ -21,8 +21,8 @@ Let `f : X' ⟶ X` be a morphism of `k`-schemes, `Z = V(I) ⊆ X` a closed subsc
 (`ProEtale.CondensedRing.centreSpecialFibreMap`).
 
 This file proves the geometric inputs of the proper and smooth exchanges for the defect of the
-specialization (blueprint `det-sp-defect-proper-smooth`), following blueprint
-`det-sp-dnc-base-change`:
+specialization (blueprint `lemma-base-change-cone-x-z`), following blueprint
+`lemma-functoriality-deformation`:
 
 * the squares of geometric generic fibres of the morphisms of deformation models are cartesian
   (`ProEtale.CondensedRing.isPullback_deformationModel_ε_deformationGenericMap`);
@@ -101,7 +101,7 @@ noncomputable abbrev comapSpecialFibreMap :
   deformationSpecialFibreMap f (siteIdeal_map_appLE_le_comap f I) k'
 
 /-- The morphism of deformation models `𝒟_{Z'} X' ⟶ 𝒟_Z X` induced by `f`, for `Z' = f⁻¹ Z`
-(blueprint `det-sp-dnc-base-change` (1)). -/
+(blueprint `lemma-functoriality-deformation` (1)). -/
 noncomputable abbrev comapDeformationModelHom :
     (deformationModel X' (I.comap f.left) k').Hom (deformationModel X I k') f.left
       (comapSpecialFibreMap f I k').left :=
@@ -154,7 +154,7 @@ lemma deformationGenericMap_comp {W : Over (Spec (.of k))} (h : W ⟶ X)
       deformationGenericMap_toPoint]
 
 /-- For `f` proper and `J = f⁻¹ I`, the morphism of total spaces `𝒳 ⟶ 𝒴` of the deformation
-models is proper (blueprint `det-sp-dnc-base-change` (3)). -/
+models is proper (blueprint `lemma-functoriality-deformation` (3)). -/
 lemma isProper_deformationTotalMap [IsProper g.left] (hJI : J = I.comap g.left) :
     IsProper (deformationTotalMap g hJ k') := by
   have := IdealSheafData.isProper_deformationSpaceMap g.left I J hJ hJI
@@ -162,7 +162,7 @@ lemma isProper_deformationTotalMap [IsProper g.left] (hJI : J = I.comap g.left) 
     inferInstance
 
 /-- For `f` smooth and `J = f⁻¹ I`, the morphism of total spaces `𝒳 ⟶ 𝒴` of the deformation
-models is smooth: it is the base change of `f` (blueprint `det-sp-dnc-base-change` (3)). -/
+models is smooth: it is the base change of `f` (blueprint `lemma-functoriality-deformation` (3)). -/
 lemma smooth_deformationTotalMap [Smooth g.left] (hJI : J = I.comap g.left) :
     Smooth (deformationTotalMap g hJ k') := by
   have : Smooth (IdealSheafData.deformationSpaceMap g.left I J hJ) :=
@@ -324,8 +324,8 @@ lemma isPullback_zeroSection_deformationTotalMap :
     (isPullback_zeroSection_deformationSpaceMap f I)
 
 /-- **The zero sections are compatible with the deformation of `f`** (blueprint
-`det-sp-dnc-base-change` (2)): the special fibre `N_{Z'} X' ⟶ N_Z X` of the deformation of `f`
-pulls the zero section `e : N_⊥ Z ⟶ N_Z X` back to the zero section `e' : N_⊥ Z' ⟶ N_{Z'} X'`,
+`lemma-functoriality-deformation` (2)): the special fibre `N_{Z'} X' ⟶ N_Z X` of the deformation of
+`f` pulls the zero section `e : N_⊥ Z ⟶ N_Z X` back to the zero section `e' : N_⊥ Z' ⟶ N_{Z'} X'`,
 that is, `f̃_s⁻¹(Z) = Z'` schematically. -/
 lemma isPullback_zeroSectionSpecialFibreMap :
     IsPullback (zeroSectionSpecialFibreMap X' (I.comap f.left) k').left

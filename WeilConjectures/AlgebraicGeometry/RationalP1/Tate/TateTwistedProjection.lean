@@ -37,7 +37,6 @@ open DiagonalCoefficients CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Tensor with the given degree-zero Tate module, followed by the positive shift two.
 Source: blueprint unit/counit clause 2
@@ -103,7 +102,6 @@ theorem projectionMate_existsUnique :
 Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison). -/
 def projectionMateMap : ProjectionMateFamily Λ := (projectionMate_existsUnique Λ).exists.choose
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The right projection mate with precisely the specified shifted-line comparison.
 Source: blueprint unit/counit clause 2

@@ -21,7 +21,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 /-- The action-site Hom comparison with its specified underlying ordinary map.
-Source: the local Hom/evaluation paragraph of cor-coef-verdier-weil-equivariance,
+Source: the local Hom/evaluation paragraph of prose-10-20,
 and the normalized component construction of native_action_site_hom_comparison.
 (blueprint: lem-sf-native-normalized-action-hom).
 

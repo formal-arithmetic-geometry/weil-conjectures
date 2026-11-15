@@ -66,10 +66,10 @@ Source: Stacks Project, Cohomology, Tag 0D5S
 (blueprint: lem-pc-ringed-spaces-derived-pullback-composition).
 Proof, step 1: choose a K-flat resolution on Z (lem-pc-kflat-resolution). Pullback
 preserves K-flatness (lem-pc-kflat-pullback-preservation), so successive derived
-pullbacks are represented by successive termwise tensor pullbacks (def-pc-derived-pullback):
-the counits at a K-flat complex and at its pullback are invertible. The canonical underived
-identification then makes the induced morphism into `L(g ∘ f)^*` invertible, natural in
-the complex.
+pullbacks are represented by successive termwise tensor pullbacks
+(lemma-coherent-base-change-invertible-sheaves--2): the counits at a K-flat complex and at its
+pullback are invertible. The canonical underived identification then makes the induced morphism into
+`L(g ∘ f)^*` invertible, natural in the complex.
 Step 2: identity pullback is the tensor unitor. On a K-flat representative the two
 unit laws are the tensor unit laws, and the two triple-composition paths are the two
 reassociations of the same tensor expression; tensor associativity makes them equal.

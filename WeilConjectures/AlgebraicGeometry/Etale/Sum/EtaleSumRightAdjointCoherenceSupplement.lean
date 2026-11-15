@@ -342,7 +342,7 @@ Source: blueprint Step 1; Stacks Tags 0F7J, 0F7K
 Proof: The sum adjunction counit folds each summand; after two extensions it sends a nested
 summand to its original section. Sheafification proves equality of the two sheaf counits.
 Apply this degreewise and descend through localization, using
-lem-amb-etale-adjoint-locality and lem-weil-pbc-localization-universal-property.
+lemma-affine-space-etale-localization--4 and lem-weil-pbc-localization-universal-property.
 The proper-support/sum comparison of lem-sfb-quasifinite-compact-support-exact intertwines
 this sum compositor with the actual compact-support compositor. Conjugate that equality
 using def-weil-pbc-adjunction-conjugate and lem-weil-pbc-mate-pasting. The conjugate of the

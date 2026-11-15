@@ -8,8 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.PurityTransport.Coefficient.Tran
 
 /-! # Purity transport statement interfaces
 
-Source: current blueprint sk-thm-purity-transport, canonical comparison clauses.
-(blueprint: def-pur-transport-root-coordinates). -/
+Source: current blueprint theorem-smooth-purity-all-admissible-coefficients, canonical comparison
+clauses. (blueprint: def-pur-transport-root-coordinates). -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

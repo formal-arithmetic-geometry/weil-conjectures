@@ -54,8 +54,8 @@ private theorem restrict_homotopy_P_to_subopen
 
 /-- Two specified pairs of endomorphisms become homotopic after shrinking.
 
-Source: blueprint lem-pc-perfect-locus, finite matrix extension argument, as expanded
-in lem-pc-finite-free-stalk-homotopy-spread, steps 2 and 3.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension
+argument, as expanded in lem-pc-finite-free-stalk-homotopy-spread, steps 2 and 3.
 (blueprint: lem-pc-finite-free-stalk-homotopy-pair-shrink).
 
 Proof: Work on an affine neighbourhood of y inside V, with finite bases in the

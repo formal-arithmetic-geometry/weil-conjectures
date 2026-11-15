@@ -24,8 +24,9 @@ Under the extension of scalars `T : 𝒪_E ⟶ E` it becomes the `E`-supported r
 (`FixedLocus.map_supportedRestrictionIntegral_comp`), given the compatibility of base change with
 the coefficient comparisons (blueprint `sk-thm-sf-compatibility`, (7):
 `boundedConstructibleLowerShriekBaseChange_extendScalars`). With the `f^!` clause of blueprint
-`sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekExtendScalars`) this transports the
-vanishing of a stalk of the supported restriction from `𝒪_E` to `E`
+`proposition-six-operations-change-coefficients`
+(`isIso_boundedConstructibleUpperShriekExtendScalars`) this transports the vanishing of a stalk of
+the supported restriction from `𝒪_E` to `E`
 (`FixedLocus.upperStar_map_supportedRestrictionE_eq_zero_of_supportedRestrictionIntegral`).
 
 -/
@@ -126,8 +127,8 @@ theorem map_supportedRestrictionIntegral_comp
 /-- **Transport of the vanishing of the supported restriction from `𝒪_E` to `E`**: if the stalk
 along `z : T ⟶ Fix(c)` of the extension of scalars to `E` of the `𝒪_E`-supported restriction of
 `P` vanishes, so does the stalk of the `E`-supported restriction of `E ⊗ P`. This uses the `f^!`
-clause of blueprint `sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekExtendScalars`)
-for the support `c`. -/
+clause of blueprint `proposition-six-operations-change-coefficients`
+(`isIso_boundedConstructibleUpperShriekExtendScalars`) for the support `c`. -/
 theorem upperStar_map_supportedRestrictionE_eq_zero_of_supportedRestrictionIntegral
     {T : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
     [IsSeparated T.hom] (z : T ⟶ F.F)

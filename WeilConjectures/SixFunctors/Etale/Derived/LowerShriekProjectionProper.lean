@@ -30,7 +30,8 @@ projection formula is the direct-image projection formula
 `f = 𝟙 X` the latter holds for any coefficients
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_id_app_app`).
 
-These are the identity and proper clauses of blueprint `sk-prop-sf-pf-coherence`.
+These are the identity and proper clauses of blueprint
+`proposition-composition-base-change-rf-shriek--1`.
 -/
 
 @[expose] public section

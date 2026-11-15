@@ -22,8 +22,8 @@ import WeilConjectures.SixFunctors.FiniteFieldDatum.FrobeniusSquareCartesian
 # Scheme and geometric Frobenius of a purity datum
 
 Source: main-20261015 blueprint, `sec-smooth-purity/sk-def-sf-weil-complexes`,
-`def-pur-scheme-geometric-frobenius`, order 2579
-(blueprint: def-pur-scheme-geometric-frobenius).
+`sec-Weil-complexes`, order 2579
+(blueprint: sec-Weil-complexes).
 
 The maps use the chosen fibre product and the unrestricted `galoisMap` interface.
 The comparison is the specified composite of pullback composition and the canonical

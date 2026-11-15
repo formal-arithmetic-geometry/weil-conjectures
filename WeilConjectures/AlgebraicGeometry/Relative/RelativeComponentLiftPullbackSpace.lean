@@ -95,7 +95,6 @@ private theorem components_homeomorph {X Y : Type u} [TopologicalSpace X]
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 -- The two chosen construction witnesses have large specifications; keep them folded.
 /-- The inverse limit of finite clopen stages is naturally the component-site scheme.
 Its topological space is the subspace pullback, its structure sheaf is the inverse
@@ -168,8 +167,11 @@ theorem relative_component_lift_pullback_space (T : Scheme.{u}) [IsAffine T] :
   let r : ∀ E : Over (affineComponentSpace T), C((U.obj E).left, E.left) :=
     (Scheme.ProEt.affine_component_site_projection T).choose_spec.choose
   have hU := (Scheme.ProEt.affine_component_site_projection T).choose_spec.choose_spec
-  obtain ⟨hr, hmapU⟩ := component_mapping_property T U r
+  -- Direct projections avoid reducing the large chosen specifications during destructuring.
+  have hUmapping := component_mapping_property T U r
     (fun E ↦ ⟨(hU.1 E).2.2.1, (hU.1 E).2.2.2.1⟩)
+  have hr := hUmapping.1
+  have hmapU := hUmapping.2
   let L := F ⋙ Scheme.ProEt.forget T
   let M := U ⋙ Scheme.ProEt.forget T
   have extL (W : Over T) (E : Over (affineComponentSpace T))

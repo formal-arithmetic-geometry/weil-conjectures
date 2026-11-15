@@ -35,7 +35,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- A homogeneous basis identifies its associated sheaf with the coproduct of Proj twists.
 Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7;
-blueprint lem-sc-p1-graded-resolution, shifted-free clause.
+blueprint theorem-riemann-roch-coherent-serre-duality, shifted-free clause.
 (blueprint: lem-sc-p1-homogeneous-basis-proj-coproduct).
 
 Proof: The basis coordinate equivalence identifies M with the finite product of S.

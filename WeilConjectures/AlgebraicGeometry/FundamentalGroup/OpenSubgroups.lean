@@ -20,11 +20,11 @@ group `π₁(Y, s)`).
   the geometric fibre `P_s`. These are the Galois objects of the Galois category `FÉt(Y)`
   (`AlgebraicGeometry.Scheme.FiniteEtale.isGaloisCover_iff_isGalois`).
 - `AlgebraicGeometry.Scheme.FiniteEtale.galois_openSubgroups` (blueprint
-  `cor-galois-open-subgroups`): the stabilizers of the points of the geometric fibres of
-  connected finite étale covers are exactly the open subgroups of `G`; two connected covers are
-  isomorphic if and only if their stabilizers are conjugate (and pointed covers are isomorphic
-  if and only if the stabilizers of the points agree); the degree of a connected cover is the
-  index of the stabilizer.
+  `lemma-cohomology-near-two-transverse-divisors--1`): the stabilizers of the points of the
+  geometric fibres of connected finite étale covers are exactly the open subgroups of `G`; two
+  connected covers are isomorphic if and only if their stabilizers are conjugate (and pointed covers
+  are isomorphic if and only if the stabilizers of the points agree); the degree of a connected
+  cover is the index of the stabilizer.
 -/
 
 @[expose] public section
@@ -215,7 +215,8 @@ theorem nonempty_iso_iff (P Q : Y.FiniteEtale) [IsConnected P] [IsConnected Q]
   · rintro ⟨g, hg⟩
     exact ⟨((exists_iso_fiber_map_eq_iff s G P Q x (g • y)).2 hg).choose⟩
 
-/-- Blueprint `cor-galois-open-subgroups`: Open subgroups and finite etale covers.
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`: Open subgroups and finite etale
+covers.
 
 Let `Y` be connected with geometric point `s`, and `G` the fundamental group `π₁(Y, s)` (any
 fundamental group of the fibre functor `F_s`). Assigning to a connected finite étale cover `P`

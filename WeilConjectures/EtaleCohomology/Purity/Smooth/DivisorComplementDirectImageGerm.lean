@@ -25,8 +25,8 @@ the higher direct images of `ℤ/ℓ` along the inclusion of the complement `X_t
 `R⁰j_* ℤ/ℓ ≅ ℤ/ℓ`, `R¹j_* ℤ/ℓ ≅ i_* ℤ/ℓ` and `R^q j_* ℤ/ℓ = 0` for `q ≥ 2`
 
 on a neighbourhood `X₀` of `x`, for every open immersion `j` onto `X₀ ∩ X_t` and a closed
-immersion `i` onto `X₀ - X_t` (blueprint `det-tf-transverse-corner-constant`, the local chart of
-an étale limit of smooth surfaces).
+immersion `i` onto `X₀ - X_t` (blueprint `lemma-punctured-surface-punctured-curve--1`, the local
+chart of an étale limit of smooth surfaces).
 
 ## Main statements
 
@@ -128,8 +128,8 @@ theorem exists_isRegularImmersion_zeroLocusSubschemeι_of_germ {k : Type u} [Fie
 namespace Etale
 
 /-- **Direct images from the complement of the zero locus of a function** (blueprint
-`det-tf-transverse-corner-constant`). Let `X` be smooth over an algebraically closed field `k`,
-`t` a function on an open `V` of `X` and `x ∈ V` a point at which the germ of `t` lies in
+`lemma-punctured-surface-punctured-curve--1`). Let `X` be smooth over an algebraically closed field
+`k`, `t` a function on an open `V` of `X` and `x ∈ V` a point at which the germ of `t` lies in
 `𝔪ₓ \ 𝔪ₓ²`. There are an open neighbourhood `X₀ ⊆ V` of `x` and a closed immersion `i₀` onto
 `X₀ - X_t` such that every open immersion `j₀` onto `X₀ ∩ X_t` has the higher direct images of
 the complement of the divisor `i₀`:
