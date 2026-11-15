@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 import WeilConjectures.AlgebraicGeometry.ProEtale.Projective
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.CategoryTheory.SiteCoveringAxioms

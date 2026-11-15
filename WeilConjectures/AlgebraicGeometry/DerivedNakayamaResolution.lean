@@ -494,6 +494,7 @@ def uniformizerMap : integerRing l E ⟶ integerRing l E := by
 
 /-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
 `O_E`, as an endomorphism of the regular `O_E`-module object. -/
+@[no_expose]
 def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   refine .of (Mod.homMk (uniformizerMap l E) ?_)
@@ -684,9 +685,10 @@ on `ℓ` being invertible on `X` is made. The sequence on the point is short exa
 (sectionwise, by continuous division by the uniformizer power and continuous lifting along the
 finite discrete quotient), and the pullback from the point is exact. -/
 theorem shortExact_pullback_reductionShortComplex (X : Scheme.{u}) (n : ℕ) :
-    ((ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
-      (reduction_zero l E n)).map (pullback l E X)).ShortExact :=
-  (pointResolution l E n).map_of_exact (pullback l E X)
+    ∃ h : (pullback l E X).map (uniformizerEnd l E ^ n).asHom ≫
+      (pullback l E X).map (reductionHom l E n) = 0,
+      (ShortComplex.mk _ _ h).ShortExact :=
+  ⟨_, (pointResolution l E n).map_of_exact (pullback l E X)⟩
 
 private def unitEndOnX (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E))) :
@@ -787,8 +789,7 @@ theorem derived_nakayama_resolution :
   refine ⟨uniformizerEnd l E, uniformizerEnd_apply l E,
     reductionHom l E, fun _ ↦ rfl, i, q, hi, hq, ?_⟩
   intro X n hn
-  have hs := shortExact_pullback_reductionShortComplex l E X n
-  refine ⟨⟨_, hs⟩, naturalCone l E X n, ?_⟩
+  refine ⟨shortExact_pullback_reductionShortComplex l E X n, naturalCone l E X n, ?_⟩
   intro m hm hmn K
   obtain ⟨hz, hshort⟩ := hseq m n
   let A := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

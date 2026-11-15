@@ -82,7 +82,7 @@ private theorem ofArrows_comp_mem {V : T.ProEt} {ι : Type u} {U : ι → T.ProE
   refine (topology T).pullback_stable c ((topology T).superset_covering ?_ (hW i))
   rintro Z d ⟨_, e, _, ⟨j⟩, rfl⟩
   rw [Sieve.pullback_apply, Category.assoc]
-  exact (Sieve.ofArrows _ _).downward_closed (Sieve.ofArrows_mk _ _ ⟨i, j⟩) e
+  exact (Sieve.ofArrows _ _).downward_closed (Sieve.ofArrows_mk _ _ (⟨i, j⟩ : Σ i, κ i)) e
 
 /-- Every object of the small pro-étale site is covered by objects whose underlying scheme is
 the spectrum of a w-contractible ring: the affine pro-étale objects form a basis of the site
@@ -143,14 +143,15 @@ theorem exists_isWContractibleRing_cover (V : T.ProEt) :
       (Precoverage.generate_mem_toGrothendieck (R := .singleton (w x a)) ?_))
     · rintro _ _ ⟨_, d, _, ⟨⟩, rfl⟩
       rw [Sieve.pullback_apply, Category.assoc]
-      exact (Sieve.ofArrows _ _).downward_closed (Sieve.ofArrows_mk _ _ ⟨a⟩) d
+      exact (Sieve.ofArrows _ _).downward_closed
+        (Sieve.ofArrows_mk _ _ (⟨a⟩ : ULift.{u} (Fin (n x)))) d
     · rw [mem_precoverage_iff, Presieve.map_singleton]
       exact Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale)
         (f := Spec.map (φ x a) ≫ (Y x a).left.isoSpec.inv) inferInstance
+  have hcov := ofArrows_comp_mem hU hW
   exact ⟨Σ x : 𝒜.I₀, ULift.{u} (Fin (n x)), fun p ↦ W p.1 p.2.down,
     fun p ↦ (w p.1 p.2.down ≫ g p.1 p.2.down) ≫ ofOpenImmersionHom V (𝒜.f p.1),
-    fun p ↦ ⟨CommRingCat.of (S p.1 p.2.down), hw p.1 p.2.down, ⟨Iso.refl _⟩⟩,
-    ofArrows_comp_mem hU hW⟩
+    fun p ↦ ⟨CommRingCat.of (S p.1 p.2.down), hw p.1 p.2.down, ⟨Iso.refl _⟩⟩, hcov⟩
 
 /-- The base change of an object of the small pro-étale site of `Y` whose underlying scheme is
 the spectrum of a w-contractible ring along a finite morphism of finite presentation is weakly
