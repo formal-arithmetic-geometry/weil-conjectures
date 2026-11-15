@@ -14,9 +14,9 @@ public import Mathlib.CategoryTheory.Sites.Subcanonical
 /-!
 # Enough affine weakly contractible objects
 
-Source: the Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
-`sk-thm-pe-weakly-contractible-basis`; Stacks Project, Tag 098F
-(blueprint: sk-thm-pe-weakly-contractible-basis).
+Source: the Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
+`theorem-enough-affine-weakly-contractible-objects`; Stacks Project, Tag 098F
+(blueprint: theorem-enough-affine-weakly-contractible-objects).
 -/
 
 @[expose] public section
@@ -35,14 +35,15 @@ and that represented sheaf is projective. The splitting clause is the representa
 form of `GrothendieckTopology.IsWeaklyContractible` on this subcanonical site.
 
 Stacks Project, Tag 098F
-(blueprint: sk-thm-pe-weakly-contractible-basis).
+(blueprint: theorem-enough-affine-weakly-contractible-objects).
 
 Proof:
-1. Apply `det-pe-wcb-cover` to each object of `X.ProEt`. Forget the additional
+1. Apply `theorem-enough-affine-weakly-contractible-objects--1` to each object of `X.ProEt`. Forget
+the additional
    factorization through an affine open, retaining the covering family and the
    identification of each member with the spectrum of a w-contractible ring.
 2. For any w-contractible ring `D` and weakly etale `Spec D → X`, apply
-   `det-pe-wcb-projective`. Its first clause splits every epimorphism onto the
+   `lemma-w-contractible-affines-projective`. Its first clause splits every epimorphism onto the
    represented sheaf. Its second clause says evaluation over this affine object
    sends every epimorphism to a surjection. Yoneda identifies maps from the
    represented sheaf with sections; a preimage under that surjection is exactly

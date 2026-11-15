@@ -124,7 +124,7 @@ noncomputable def rightDerivedLowerShriekCongrIso {X Y : Scheme.{u}} {f f' : X �
 variable [Finite Λ]
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the unbounded derived categories,
-for torsion coefficients: the isomorphism of `sk-thm-sf-comp-composition`
+for torsion coefficients: the isomorphism of `proposition-composition-base-change-rf-shriek--1`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) as data. -/
 noncomputable def rightDerivedLowerShriekCompIso {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]

@@ -116,7 +116,7 @@ opens under f and its diagonal to obtain qcqs, without separatedness.
 `lem-weil-pbc-finite-ring-constructible-derived-origin` to the intrinsic hypothesis to
 obtain a bounded constructible etale L and an isomorphism alpha : nu_X^* L ≅ C.
 Its interval reflection also gives boundedness below for L.
-3. Apply `thm-dg-finite-type-constructibility` to L with the given annihilator m.
+3. Apply `proposition-six-operations-dctf--2` to L with the given annihilator m.
 The finite-type hypotheses, mB = 0 and invertibility in k give bounded constructibility
 of the ordinary etale direct image; no separatedness is required.
 4. Apply `lem-weil-pbc-comparison-direct-image-canonical-mate` using qcqs and boundedness

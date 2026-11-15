@@ -21,14 +21,14 @@ Let `W` be the Weil group of a smooth geometrically connected curve `C₀` over 
 the étale fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`), and `ℓ ≠ p`. This
 file proves that a continuous character `χ : W → ℚ̄_ℓˣ` has finite geometric image, and hence
 that the rank-one Weil sheaf it defines is punctually `ι`-pure of weight
-`2 log_q |ι (χ γ)|` (blueprint subsection `sk-p-real-rankone`).
+`2 log_q |ι (χ γ)|` (blueprint subsection `theorem-rank-one-sheaves-have-finite`).
 
 The proof of finiteness follows the blueprint. The values of `χ` on `π₁(C)` lie in a finite
-extension `E / ℚ_ℓ` (`sk-p-real-integral`); some power `χ ^ N` takes values in `1 + ℓ² 𝒪_E`, on
-which the logarithm is an injective homomorphism (`det-d-real-log`). The coordinates of
-`log ∘ χ ^ N` in a `ℚ_ℓ`-basis of `E` are continuous homomorphisms `π₁(C) → ℚ_ℓ` invariant
-under conjugation by the Frobenius lift, hence zero
-(`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant`).
+extension `E / ℚ_ℓ` (`proposition-lattices-representations-normal-scheme`); some power `χ ^ N` takes
+values in `1 + ℓ² 𝒪_E`, on which the logarithm is an injective homomorphism
+(`theorem-rank-one-sheaves-have-finite`). The coordinates of `log ∘ χ ^ N` in a `ℚ_ℓ`-basis of `E`
+are continuous homomorphisms `π₁(C) → ℚ_ℓ` invariant under conjugation by the Frobenius lift, hence
+zero (`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant`).
 
 ## Main statements
 
@@ -50,7 +50,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 
 namespace WeilGroup
 
-/-- Blueprint `lem-tw-root-of-unity-modulus`: Modulus of a root of unity.
+/-- Blueprint `corollary-rank-one-weights`: Modulus of a root of unity.
 
 A root of unity has weight `0` for every `ι` and every residue cardinality. -/
 theorem frobeniusWeight_eq_zero_of_pow_eq_one {E : Type*} [Field E] (ι : E →+* ℂ) (qx : ℕ)
@@ -106,7 +106,7 @@ theorem eq_one_of_conj_invariant_of_continuous (b : W.geometric →* Multiplicat
     (pow_ne_zero _ (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero))
   exact Multiplicative.toAdd.injective h3
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
+/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
 rank-one Weil character on a curve.
 
 A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` has finite geometric image: there is `N ≥ 1` with
@@ -222,7 +222,7 @@ theorem exists_pow_eq_one_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   rw [Units.val_pow_eq_pow_val, ← hu g, hu1]
   rfl
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
+/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
 rank-one Weil character on a curve.
 
 A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` takes finitely many values on `π₁(C)`. -/
@@ -235,7 +235,7 @@ theorem finite_range_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   rintro _ ⟨g, rfl⟩
   exact ⟨⟨χ g, (mem_rootsOfUnity _ _).mpr (h g)⟩, rfl⟩
 
-/-- Blueprint `cor-wf-rank-one-punctual-purity-curve`: Punctual purity of a rank-one Weil
+/-- Blueprint `corollary-rank-one-weights--1`: Punctual purity of a rank-one Weil
 character on a curve.
 
 A continuous character `χ` of the Weil group is punctually `ι`-pure of weight
@@ -268,7 +268,7 @@ theorem frobeniusWeight_eq_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   field_simp
   exact mul_div_cancel_left₀ _ hd'
 
-/-- Blueprint `cor-wf-rank-one-punctual-purity-curve`: Punctual purity of a rank-one Weil
+/-- Blueprint `corollary-rank-one-weights--1`: Punctual purity of a rank-one Weil
 character on a curve.
 
 The weight `2 log |ι (χ s)| / log q` does not depend on the choice of the element `s` of degree

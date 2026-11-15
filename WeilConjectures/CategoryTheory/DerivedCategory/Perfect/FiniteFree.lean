@@ -33,7 +33,8 @@ locally on `Spec A`:
   quasi-isomorphism `P ⟶ A_s ⊗[A] K`. Over a Noetherian ring it suffices that `K` has finitely
   generated cohomology (`DerivedCategory.exists_quasiIso_free_away_of_finite_homology`).
 
-This is the chain-level input for blueprint `det-thm-picard-coherence` (a) (Mumford's complex).
+This is the chain-level input for blueprint `lemma-coherent-base-change-invertible-sheaves` (a)
+(Mumford's complex).
 -/
 
 @[expose] public section
@@ -337,7 +338,7 @@ Then there are `s ∉ p` and a complex `P` of free `A_s`-modules of finite rank,
 degrees `[a, b]`, with a quasi-isomorphism `P ⟶ A_s ⊗[A] K`.
 
 This is the chain-level input for the perfectness of higher direct images, towards blueprint
-`det-thm-picard-coherence` (a) (Mumford's complex). -/
+`lemma-coherent-base-change-invertible-sheaves` (a) (Mumford's complex). -/
 theorem exists_quasiIso_free_away_of_isPerfect (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b] (hK : ∀ n, Module.Flat A (K.X n))
     (hKP : (Q.obj K).IsPerfect) (p : Ideal A) [p.IsPrime] :

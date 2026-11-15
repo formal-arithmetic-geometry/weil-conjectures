@@ -167,7 +167,7 @@ localization] $\Omega_{F_0(t)/k}$ is the localization of $\Omega_{F_0[t]/k}$ and
 dc_1,\dots,\mathrm dc_t,\mathrm dt$ is an $F_0(t)$-basis of it. Transporting along the
 $k$-algebra isomorphism $F_0(t)\cong F$, $t\mapsto\alpha$, identity on $F_0$ (step 8), $\mathrm
 dc_1,\dots,\mathrm dc_t,\mathrm d\alpha$ is an $F$-basis of $\Omega_{F/k}$.
-Uses: lem-weil-pbc-kahler-differentials-polynomial-extension, def-weil-pbc-kahler-differentials,
+Uses: theorem-finite-etale-covers-proper-henselian--2, def-weil-pbc-kahler-differentials,
 lem-weil-pbc-kahler-differentials-localization.
 
 10. *Case S: the field $F_1=F_0(\beta)$ (as in 07FI, case algebraic).* $\alpha$ is algebraic
@@ -224,7 +224,7 @@ $\bar\Lambda$ containing $A_0$, Artinian local, flat into $\bar\Lambda$, with $\
 m_A\bar\Lambda=\mathfrak m_{A_0}\bar\Lambda=\bar{\mathfrak m}$ and residue field
 $F=F_1=F_0(\beta)\subseteq K$ (step 11), finitely generated over $k$; as in step 8, $k\to F$ is
 essentially of finite type [def-weil-pbc-essentially-finite-type-algebra] [def-weil-pbc-finite-
-type-algebra] and so is $k\to A$ [lem-weil-pbc-artinian-local-essentially-finite-type-residue].
+type-algebra] and so is $k\to A$ [theorem-finite-etale-covers-proper-henselian--2].
 So $A$ is admissible and $A_0\subseteq A$. By the Claim (step 5) for $D_1=A$ (local with
 $\mathfrak m_A=A\cap\bar{\mathfrak m}$, step 1) and $x=\bar s^Q$, whose residue $\beta\in F$ is
 nonzero, $\bar s^{Qq'}\in A$ for a power $q'$ of $p$ with $q'\ge\max(n,p)$. Put $N=Qq'$, a power

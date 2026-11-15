@@ -19,7 +19,7 @@ induced on `Hᵠ` by the base change map
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap`). Hence the latter is an isomorphism if and only
 if all the degree-wise maps are
 (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap`).
-This is used in the proof of blueprint `lem-kun-0f1j`.
+This is used in the proof of blueprint `lemma-kunneth-field-coefficients--1`.
 -/
 
 @[expose] public section

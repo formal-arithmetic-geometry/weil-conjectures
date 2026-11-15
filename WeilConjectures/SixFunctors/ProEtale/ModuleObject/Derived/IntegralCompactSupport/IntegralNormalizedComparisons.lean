@@ -206,8 +206,8 @@ private theorem comparisonsForCoefficient
 
 /-- Normalized comparison maps and their groupoid equations.
 
-Source: blueprint det-sf-comp-coherence-cocycle, common dense refinement construction,
-and det-prop-int-brown-construction, comparison paragraph.
+Source: blueprint proposition-construction-independence-rf-shriek, common dense refinement
+construction, and proposition-construction-independence-rf-shriek, comparison paragraph.
 (blueprint: lem-sfb-total-derived-normalized-comparisons).
 
 Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity

@@ -16,8 +16,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusEx
 # Direct image from an open and closed section
 
 Source: blueprint, sec-smooth-purity/sk-def-sf-operations,
-lemma lem-weil-pbc-clopen-section-direct-image
-(blueprint: lem-weil-pbc-clopen-section-direct-image).
+lemma proposition-construction-independence-rf-shriek--7
+(blueprint: proposition-construction-independence-rf-shriek--7).
 -/
 
 @[expose] public section
@@ -69,8 +69,9 @@ private theorem exact_derived_counit_isIso
 /-- Restriction to an open and closed section gives `Rp_* s_! ≅ id` on bounded below
 étale derived categories with coefficients in any commutative ring. Source: blueprint,
 part-six-operations/sec-six-functors-basics/sec-brown-construction/
-sec-construction-of-rf/sk-prop-sf-comp-coherence, lemma lem-weil-pbc-clopen-section-direct-image
-(blueprint: lem-weil-pbc-clopen-section-direct-image).
+sec-construction-of-rf/sk-prop-sf-comp-coherence, lemma
+proposition-construction-independence-rf-shriek--7 (blueprint:
+proposition-construction-independence-rf-shriek--7).
 
 The equation characterizes the canonical isomorphism: after the unit identifying `K`
 with `s^* s_! K`, its component is restriction along `s`, namely the derived unit for
@@ -181,8 +182,8 @@ theorem clopenSectionDirectImage_of_commRing (Λ : Type (u + 1)) [CommRing Λ]
   simp only [Category.id_comp, Category.comp_id]
 
 /-- The finite-coefficient case of `clopenSectionDirectImage_of_commRing`, kept for its existing
-users. Source: blueprint, lemma lem-weil-pbc-clopen-section-direct-image
-(blueprint: lem-weil-pbc-clopen-section-direct-image). -/
+users. Source: blueprint, lemma proposition-construction-independence-rf-shriek--7
+(blueprint: proposition-construction-independence-rf-shriek--7). -/
 theorem clopenSectionDirectImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
     (hs : IsClosed (Set.range s.base)) (hsp : s ≫ p = 𝟙 X) :

@@ -17,7 +17,7 @@ import WeilConjectures.WeilSheaf.DerivedHomPrecomposition
 
 Source: Stacks Project, Tag 0A95, equivariant analogue; native models in
 `WeilConjectures.WeilSheaf.DerivedHom` and `WeilConjectures.WeilSheaf.Fourier`
-(used for `lem-sf-hom-finite-projective`).
+(used for `proposition-six-operations-dctf--15`).
 
 The projection to source degree zero is specified on complexes. The comparison below
 is normalized by precomposition for every K-injective resolution of the source.
@@ -193,7 +193,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
 
 /-- Projection to source degree zero commutes with the differentials.
 Source: Stacks Tag 0A95, degree-zero specialization
-(used for `lem-sf-hom-finite-projective`).
+(used for `proposition-six-operations-dctf--15`).
 
 Proof: in the product-Hom differential the source differential is zero. Projection
 onto p = 0 leaves only postcomposition with the target differential; its sign is +1.
@@ -224,7 +224,7 @@ theorem singleResolutionProjection_comm (A : ProEtaleWeilSheaf k₀ l X)
 
 /-- The canonical projection from the Hom complex with source A[0] to termwise H_A.
 Source: Stacks Tag 0A95, degree-zero specialization
-(used for `lem-sf-hom-finite-projective`). -/
+(used for `proposition-six-operations-dctf--15`). -/
 noncomputable def singleResolutionProjection (A : ProEtaleWeilSheaf k₀ l X)
     (I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X)
@@ -238,7 +238,7 @@ noncomputable def singleResolutionProjection (A : ProEtaleWeilSheaf k₀ l X)
 
 /-- Projection to source degree zero is a chain isomorphism.
 Source: Stacks Tag 0A95, degree-zero specialization
-(used for `lem-sf-hom-finite-projective`).
+(used for `proposition-six-operations-dctf--15`).
 
 Proof: every factor with p ≠ 0 is H(0,I^(p+n)), hence zero. The inverse inserts the
 chosen section in the p = 0 factor and zero in every other factor. The product
@@ -284,7 +284,7 @@ theorem singleResolutionProjection_isIso (A : ProEtaleWeilSheaf k₀ l X)
 /-- Postcomposition on the native Hom model, before replacing the target.
 The source is the same chosen K-injective object used by bifunctorRHomOfComplex.
 Source: native bifunctor in BifunctorHom.lean, Tags 070I and 0A95
-(used for `lem-sf-hom-finite-projective`). -/
+(used for `proposition-six-operations-dctf--15`). -/
 noncomputable def singleResolutionMapRight (A : ProEtaleWeilSheaf k₀ l X)
     {I I' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ} (g : I ⟶ I') :
     (DerivedCategory.bifunctorRHomOfComplex (ihomBifunctor k₀ l X) I).obj
@@ -361,7 +361,7 @@ The comparison is represented by precomposition with every K-injective resolutio
 of A[0], followed by the canonical source-degree-zero projection. It is independent
 of the resolutions and natural contravariantly in A and covariantly in the target.
 Source: Stacks Tag 0A95, equivariant analogue, and Tags 08BJ, 070I, 070K
-(used for `lem-sf-hom-finite-projective`).
+(used for `proposition-six-operations-dctf--15`).
 
 Proof:
 1. For T = Frobenius pullback, the fixed-pair forgetful functor U is faithful and
@@ -382,7 +382,7 @@ Proof:
 6. Projection to p=0 identifies Hom(A[0],I) with H_A(I), as specified above.
    The fixed-pair category is Grothendieck: U creates colimits, filtered colimits
    are exact, and L of a generator generates by the adjunction and faithfulness.
-   lem-sfb-grothendieck-k-injective supplies resolutions. The termwise K-injective
+   prose-03-02 supplies resolutions. The termwise K-injective
    computation of def-sfb-right-derived-functor identifies Q(H_A(I)) with RH_A(QI).
 7. By lem-weil-pbc-kinjective-hom-derived, derived arrows into K-injectives are
    represented by chain maps unique up to homotopy. The comparison for two source

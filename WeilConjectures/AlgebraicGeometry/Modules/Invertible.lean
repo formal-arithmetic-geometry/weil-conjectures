@@ -139,7 +139,7 @@ instance isInvertible_tensorUnit : (𝟙_ X.Modules).IsInvertible where
 /-- The tensor product `M ⊗_{𝒪_X} N` of two `𝒪_X`-modules: the sheafification of the tensor
 product of the underlying presheaves of modules (`SheafOfModules.tensorObjIsoSheafification`).
 It is the tensor product `M ⊗ N` of the monoidal category `X.Modules`. -/
--- TODO(unify): sk-def-picard-pic
+-- TODO(unify): definition-relative-picard-functor
 noncomputable abbrev tensorObj (M N : X.Modules) : X.Modules :=
   M ⊗ N
 

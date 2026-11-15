@@ -22,8 +22,8 @@ an isomorphism `F X ≅ X'` (`CategoryTheory.Functor.trace_eq_unitEndRingHom_tra
 
 For the derived extension of scalars `- ⊗ᴸ_A B` along a homomorphism of coefficient rings
 `ρ : A → B` this is the scalar-extension law `ρ (tr_A (v ∣ P)) = tr_B (v ⊗ᴸ B ∣ P ⊗ᴸ B)` of the
-categorical trace (blueprint `prop-trf-trace-formal-laws`, item (3)), used for blueprint
-`thm-trf-finite-coefficient-map`.
+categorical trace (blueprint `proposition-properties-trace`, item (3)), used for blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`.
 -/
 
 @[expose] public section
@@ -68,7 +68,7 @@ lemma unitEndRingHom_apply [Preadditive C] [Preadditive D] [F.Additive] (t : End
     F.unitEndRingHom t = .of (ε F ≫ F.map t.asHom ≫ η F) :=
   rfl
 
-/-- **Scalar-extension law of the trace** (blueprint `prop-trf-trace-formal-laws`, item (3)):
+/-- **Scalar-extension law of the trace** (blueprint `proposition-properties-trace`, item (3)):
 if an isomorphism `e : F X ≅ X'` intertwines `F f` with an endomorphism `f'` of `X'`, then
 `tr (f') = ρ_F (tr f)`. -/
 theorem trace_eq_unitEndRingHom_trace [Preadditive C] [Preadditive D] [F.Additive] {X : C}

@@ -47,7 +47,7 @@ field `k((t))` at infinity, where the inertia group acts:
 `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
 `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity` (extension to a lisse sheaf across `∞`):
 relating that condition to the inertia action at `∞` needs the fundamental representation of a
-lisse Weil sheaf (`def-wf-fundamental-representation`), which does not exist yet, and a direct
+lisse Weil sheaf (`situation-weil`), which does not exist yet, and a direct
 proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 
 ## Main statements
@@ -61,11 +61,11 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 
 The local boundary pairing follows the Verdier duality argument of the blueprint. The nodes of
 other sections it uses are stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`,
-each with its blueprint id: `det-pd-biduality-coefficients` (the adjunction `Rf₀! ⊣ Rf^!`,
-biduality, `Rf^! = 𝔻 f^* 𝔻`), `fix-cor-verdier-exchange` (for `j`),
-`cor-pur-adic-and-rational-smooth-dualizing-complexes` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
-`lem-sf-hom-finite-projective` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`) and
-`prop-sf-localization-all-stages` (`Ri^! Rj_* = 0`). The steps proved here are:
+each with its blueprint id: `theorem-verdier-biduality` (the adjunction `Rf₀! ⊣ Rf^!`,
+biduality, `Rf^! = 𝔻 f^* 𝔻`), `lemma-internal-adjunction-two-exchange-formulas--2` (for `j`),
+`corollary-dualizing-complex-smooth-scheme--1` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
+`proposition-six-operations-dctf--15` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`) and
+`lemma-local-cohomology-right-adjoint--2` (`Ri^! Rj_* = 0`). The steps proved here are:
 1. `𝔻_C Rj_* G ≅ j_! 𝔻_U G` (exchange and biduality);
 2. `Ri^! 𝔻_C K ≅ 𝔻_Z i^* K`;
 3. `Ri^! j_! G ≅ i^* Rj_* G [-1]` (open–closed triangle and `j^* Rj_* = 𝟭`);
@@ -217,7 +217,7 @@ closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perf
 
 It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`-dual of `(R¹j_*F)_s̄`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
-twist. (blueprint: `lem-a1-local-boundary-duality`, `sk-i-dl-a1-local`)
+twist. (blueprint: `lemma-local-duality-point-c-u--1`)
 -/
 theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
@@ -424,7 +424,7 @@ Hence there are Frobenius-equivariant maps forming an exact sequence
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`,
 
 and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`.
-(blueprint: `prop-a1-curve-boundary-sequence`) -/
+(blueprint: `lemma-extreme-degrees-affine-curve`) -/
 theorem exists_exact_compactlySupportedCohomology_boundary
     {U C Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))]

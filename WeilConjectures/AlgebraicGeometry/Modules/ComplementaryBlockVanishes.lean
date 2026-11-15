@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeMapResidueDetection
 
 /-! # Vanishing of the complementary block on a reduced scheme
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), larger minors vanish.
+Source: `lemma-triviality-fibres--2`, proof (3), larger minors vanish.
 (blueprint: lem-pc-complementary-block-vanishes)
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A block diagonal form with an invertible a by a pivot has zero complementary
 block if its field-valued fibre ranks are at most a on a reduced scheme.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), reducedness step in the
+Source: `lemma-triviality-fibres--2`, proof (3), reducedness step in the
 normal-form claim. (blueprint: lem-pc-complementary-block-vanishes)
 
 Proof: For each z in U choose the field-valued point g from hrank. Its image is

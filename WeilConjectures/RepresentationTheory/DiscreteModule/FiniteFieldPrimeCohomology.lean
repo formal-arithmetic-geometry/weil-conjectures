@@ -80,8 +80,8 @@ private theorem H_two_of_coker_generator_surjective
 coefficients prime to the characteristic vanishes.
 
 Source: blueprint `sk-lem-base-field-cd-finite-field.proof.md`, paragraphs
-Finite modules and Consequences; `det-base-field-cd-cochains`, clause (3), and
-`det-base-field-cd-inflation`, final clause.
+Finite modules and Consequences; `lemma-cohomological-dimension-base-field`, clause (3), and
+`lemma-cohomological-dimension-base-field--2`, final clause.
 (blueprint: lem-sfb-finite-field-prime-degree-two)
 
 Proof: The absolute Galois group of K is the profinite completion of the integers,

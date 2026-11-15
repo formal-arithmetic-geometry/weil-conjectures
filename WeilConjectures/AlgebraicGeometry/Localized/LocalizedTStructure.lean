@@ -110,7 +110,7 @@ Proof:
    has an integral representative, so this proves the existence axiom.
 5. Integral bounds give bounds on every rational representative. This proves
    boundedness. The definitions of the two parts give t-exactness of Q.
-6. By lem-weil-heart-short-exact-triangles, uniqueness of truncation triangles with
+6. By lemma-perverse-sheaves-curve--1, uniqueness of truncation triangles with
    identity on QK gives the lower and upper
    comparison isomorphisms. Their counit, respectively unit, equations and the
    adjunctions show naturality at every integral morphism. The fraction formula

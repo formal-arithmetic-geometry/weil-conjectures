@@ -152,8 +152,8 @@ morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` comp
 Besides restrictions to opens
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`),
 this is the formal part of the generic-slicing step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "the composition compatibility in (2)"), where `ρ` is the
-base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
+`proposition-external-kunneth-formula-nearby-cycles`, "the composition compatibility in (2)"), where
+`ρ` is the base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
 (SGA 4½, [Th. finitude], §3). -/
 theorem isIso_map_kunnethMap_iff_of_isIso_pullbackExchange {φ₁ : P.Hom M f₁ f₁'}
     {φ₂ : P.Hom N f₂ f₂'} {φ₁U : PU.Hom MU e₁ e₁'} {φ₂U : PU.Hom NU e₂ e₂'}

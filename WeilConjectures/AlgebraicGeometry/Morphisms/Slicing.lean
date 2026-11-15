@@ -386,10 +386,10 @@ theorem Smooth.exists_etale_factorization_of_mem {X S : Scheme.{u}} (f : X ⟶ S
     hV, hqc, hs, ?_⟩
   rw [← Category.assoc, hqr, Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc]
 
-/-- **Slicing a smooth morphism** (blueprint `sbc-lem-slicing`). Let `f : X ⟶ S` be smooth.
-Then there is an étale covering `p i : U i ⟶ X` of `X` such that each composite `p i ≫ f`
-factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` a smooth morphism of
-affine schemes with geometrically connected fibres admitting a section:
+/-- **Slicing a smooth morphism** (blueprint `theorem-smooth-base-change-classical-torsion`). Let
+`f : X ⟶ S` be smooth. Then there is an étale covering `p i : U i ⟶ X` of `X` such that each
+composite `p i ≫ f` factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` a smooth
+morphism of affine schemes with geometrically connected fibres admitting a section:
 
 ```
 U i --q i--> V i
@@ -401,7 +401,7 @@ p i          r i
 
 This is Stacks `0EY4`, assembled pointwise from
 `AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. 
-(blueprint: sbc-lem-slicing)
+(blueprint: theorem-smooth-base-change-classical-torsion)
 -/
 @[stacks 0EY4]
 theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :

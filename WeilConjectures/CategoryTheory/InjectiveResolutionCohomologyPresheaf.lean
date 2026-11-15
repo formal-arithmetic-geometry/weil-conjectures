@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.InjectiveResolutionCohomologyPresheafData
 /-!
 # The cohomology presheaf computed by an injective resolution
 
-Source: blueprint det-thm-picard-cech, Step 2, evaluation comparison.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, evaluation comparison.
 -/
 
 @[expose] public section
@@ -25,8 +25,8 @@ namespace CategoryTheory
 /-- Evaluation of an injective resolution computes the Ext cohomology presheaf,
 naturally in the object of the site.
 
-Source: blueprint det-thm-picard-cech, Step 2; lem-sc-cech-spectral, Step 1.
-Proof: for V in C, the sheafification adjunction, the free abelian group adjunction,
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2; lem-sc-cech-spectral,
+Step 1. Proof: for V in C, the sheafification adjunction, the free abelian group adjunction,
 and Yoneda identify Hom from the sheafification of the free abelian representable
 of V into any abelian sheaf G with G(V), as abelian groups. This identification is
 natural in G and V, so it identifies the Hom complex of the injective resolution

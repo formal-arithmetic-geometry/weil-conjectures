@@ -30,7 +30,7 @@ Let `Z` be a finite étale `U`-scheme and `t` a point of `Z` over `η` fixed by 
 lies in a connected component of `Z`.
 
 This is the geometric input for the surjectivity part of blueprint
-`lem-wf-boundary-stalk-invariants`: an inertia invariant of the generic stalk of a finite locally
+`lemma-boundary-stalk--1`: an inertia invariant of the generic stalk of a finite locally
 constant sheaf comes from a section over the punctured part of an étale neighbourhood of the
 boundary point.
 -/

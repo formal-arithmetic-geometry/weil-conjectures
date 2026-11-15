@@ -416,10 +416,10 @@ open Algebra.TensorProduct CosimplicialObject
 variable (A B M : Type u) [CommRing A] [CommRing B] [Algebra A B] [AddCommGroup M] [Module A M]
 
 /-- The augmented Amitsur complex `0 → M → M ⊗_A B → M ⊗_A B ⊗_A B → ⋯` of a faithfully flat
-`A`-algebra `B` is exact (blueprint: lem-pc-cech-exact): the augmentation `M → M ⊗_A B` is
-injective, the complex is exact at `M ⊗_A B` (the kernel of the first differential is the image
-of the augmentation), and the Amitsur complex `amitsurComplex A B M` is exact in all positive
-degrees.
+`A`-algebra `B` is exact (blueprint: proposition-p-torsion-smooth-proper-curve): the augmentation
+`M → M ⊗_A B` is injective, the complex is exact at `M ⊗_A B` (the kernel of the first differential
+is the image of the augmentation), and the Amitsur complex `amitsurComplex A B M` is exact in all
+positive degrees.
 
 The proof follows the classical argument: after tensoring with `B`, the augmented complex admits
 the contracting homotopy `b ⊗ m ⊗ b₀ ⊗ ⋯ ⊗ bₙ ↦ b b₀ ⊗ m ⊗ b₁ ⊗ ⋯ ⊗ bₙ`, so it is exact, and

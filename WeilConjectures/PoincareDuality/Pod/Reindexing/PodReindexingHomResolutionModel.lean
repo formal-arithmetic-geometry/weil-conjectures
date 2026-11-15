@@ -121,7 +121,7 @@ import all WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomSh
 
 /-! # Reindexing, completed coefficients, and Hom resolution models
 
-Source: blueprint `prop-pod-dual-tate-data-compatibility`, proof Steps 1--2;
+Source: blueprint `theorem-poincare-duality-frobenius--2`, proof Steps 1--2;
 Stacks Project, Tags 03EL, 0GMX, 0A8X, 0A95 and 08J7
 (blueprint: lem-pod-reindexing-hom-resolution-model).
 -/

@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 
 /-! # Compact support and restriction to an arbitrary open
 
-Source: blueprint `prop-asd-smooth-base-change`, coherences (i) and (iii).
-The graph comparisons specify the comparison even when the open is not quasi-compact.
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherences (i) and
+(iii). The graph comparisons specify the comparison even when the open is not quasi-compact.
 (blueprint: def-asd-open-restriction-comparisons)
 -/
 
@@ -38,7 +38,7 @@ def openRestrictionGraphIso {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- Open extension commutes with compact support on a cartesian square. The comparison
 is constructed from graph comparison, proper/open interchange, and open composition.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 (blueprint: def-asd-open-restriction-comparisons) -/
 def openRestrictionCompactSupportIso {X Y U V : Scheme.{u}}
     {f : X ⟶ Y} [HasCompactification f] {j : U ⟶ Y} [IsOpenImmersion j]
@@ -64,7 +64,7 @@ def openRestrictionCompactSupportIso {X Y U V : Scheme.{u}}
     Functor.associator _ _ _
 
 /-- The right adjoint comparison obtained from the explicitly constructed support comparison.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (iii).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (iii).
 (blueprint: def-asd-open-restriction-comparisons) -/
 def openRestrictionExceptionalIso {X Y U V : Scheme.{u}}
     {f : X ⟶ Y} [HasCompactification f] {j : U ⟶ Y} [IsOpenImmersion j]

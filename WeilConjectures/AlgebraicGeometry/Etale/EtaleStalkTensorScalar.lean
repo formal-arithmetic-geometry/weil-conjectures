@@ -102,9 +102,9 @@ private theorem stalk_tensorator
 
 /-- Source: Stacks 007K, 008B, 03EL, 04FM
 (blueprint: lem-pod-etale-stalk-tensor-scalar), clause 1.
-Step 1 uses `lem-weil-pbc-sheafification-geometric-stalk` to identify the tensor
+Step 1 uses `definition-torsion-sheaves--3` to identify the tensor
 presheaf stalk with the tensor sheaf stalk. Step 2 uses
-`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`: represent two germs on a common
+`definition-torsion-sheaves--3`: represent two germs on a common
 refinement and tensor their sections; further refinements prove independence of choices.
 The inverse sends a pure tensor section to the tensor of its germs, and the two composites
 are identities on generators. Step 3 checks uniqueness on those generators. -/
@@ -155,10 +155,10 @@ variable {R S : Type (u + 1)} [Ring R] [Ring S] (f : R →+* S)
 /-- Source: Stacks 007K, 008B and 04FM
 (blueprint: lem-pod-etale-stalk-tensor-scalar), clause 2, individual-map uniqueness.
 Step 4: form balanced maps on sections and pass to the filtered neighborhood colimit
-using `lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`. A tensor of a germ maps
+using `definition-torsion-sheaves--3`. A tensor of a germ maps
 to the class of its tensor section, independently of the representative. The inverse
 maps that section class to its tensor of germs. The composites fix generators.
-`lem-weil-pbc-sheafification-geometric-stalk` then identifies the target with the
+`definition-torsion-sheaves--3` then identifies the target with the
 sheafified stalk. Uniqueness follows on generators, including every `a ⊗ s` by
 left `S`-linearity. The two existing comparison isomorphisms define that same map. -/
 theorem etale_stalk_scalar_component_unique

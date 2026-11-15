@@ -67,7 +67,7 @@ theorem IsReal.conj_map_trace_frobeniusEnd_pow {ι : PadicAlgCl l →+* ℂ} {G 
 `AlgebraicGeometry.WeilSheaf.constantCoeff_lFactor`). The traces of the powers of the local
 Frobenius of `G ⊗ G` are the squares `(ι tr(Gₓᵏ))²` of real numbers, and the logarithmic
 derivative of the local factor is their generating series.
-(blueprint: `lem-rp-even-tensor-positivity`, the case of tensor squares) -/
+(blueprint: `lemma-positivity-euler-factors--1`, the case of tensor squares) -/
 theorem IsReal.hasNonnegCoeffs_lFactor_tensorObj {ι : PadicAlgCl l →+* ℂ}
     {G : WeilSheaf k₀ l X} (hG : G.IsLisse) (hreal : G.IsReal ι) (x : X.finitePoints) :
     ((G.tensorObj G hG).lFactor ι x).HasNonnegCoeffs := by
@@ -104,7 +104,7 @@ connected affine curve and `G` a lisse Weil sheaf on `U₀`. Then, as power seri
 stated as `L(U₀, G, t) · ι det(1 - F t | H_c²(U, G)) = ι det(1 - F t | H_c¹(U, G))`. This is the
 graded form of the Grothendieck–Lefschetz trace formula on the curve, `H_c⁰(U, G)` vanishing
 (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero`).
-(blueprint: `cor-rp-euler-product`) -/
+(blueprint: `theorem-trace-formula-euler-product--4`) -/
 theorem lSeries_mul_localPolynomial_compactlySupportedCohomology_two (ι : PadicAlgCl l →+* ℂ)
     (G : WeilSheaf k₀ l U) (hG : G.IsLisse) :
     G.lSeries ι *

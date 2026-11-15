@@ -163,8 +163,8 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 
 /-! # Native modules, scalar local models, and bounded constructibility
 
-Source: blueprint, lem-fix-weil-operations, internal-Hom paragraph, and
-sk-def-sfb-constructible, clauses 1--2; Stacks 03CW, 03CY, 03EK and 05RU.
+Source: blueprint, prose-10-20, internal-Hom paragraph, and
+definition-constructible-sheaves, clauses 1--2; Stacks 03CW, 03CY, 03EK and 05RU.
 (blueprint: lem-sf-weil-verdier-module-constructibility-comparison).
 
 The ordinary category is the existing sectionwise module category of the reconstructed
@@ -235,7 +235,7 @@ abbrev nativeToOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
     (nativeOrdinaryPresentation ℓ T).functor
 
 /-- Restriction in the ordinary presentation is the existing coefficient-module pullback.
-Source: blueprint sk-def-sfb-constructible, opening restriction convention
+Source: blueprint definition-constructible-sheaves, opening restriction convention
 (blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
 abbrev ordinaryModuleRestriction (ℓ : ℕ) [Fact ℓ.Prime]
     {S T : Scheme.{u}} (h : S ⟶ T) :
@@ -672,8 +672,8 @@ private theorem nativeConstructibility (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The native/ordinary comparison, including its normalization, exactness, restrictions,
 finite scalar models on the same covers, constructibility, and derived support intervals.
-Source: blueprint lem-fix-weil-operations, internal-Hom realization paragraph;
-sk-def-sfb-constructible clauses 1--2; native Adic/Module.lean and Constructible.lean;
+Source: blueprint prose-10-20, internal-Hom realization paragraph;
+definition-constructible-sheaves clauses 1--2; native Adic/Module.lean and Constructible.lean;
 Stacks 03CW, 03CY, 03EK and 05RU.
 (blueprint: lem-sf-weil-verdier-module-constructibility-comparison).
 

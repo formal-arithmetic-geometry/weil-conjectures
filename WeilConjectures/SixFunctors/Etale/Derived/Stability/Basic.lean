@@ -77,7 +77,7 @@ noncomputable def rightDerivedUpperShriekIsoOfIsFiniteOfEtale {X Y : Scheme.{u}}
 
 /-! ### Stability of `Dctf` under the six operations -/
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (i), constructibility: the pullback of a bounded constructible complex is bounded
@@ -91,7 +91,7 @@ theorem boundedConstructible_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ 
     (hbc.mapDerivedCategory_upperStar f)
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (i), amplitude: `Lf^*` preserves the Tor amplitude interval unchanged, the pullback of
@@ -116,7 +116,7 @@ theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ a b fun n ↦ ?_)
   exact Functor.PreservesFlat.flat_obj (F := (f)^*[A]) (hP n)
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (i): `Lf^* : Dctf(Y, A) ⥤ Dctf(X, A)` is defined. -/
@@ -129,7 +129,7 @@ theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {
   exact ⟨boundedConstructible_leftDerivedUpperStar A f hbc,
     a, b, torAmplitudeIn_leftDerivedUpperStar A f a b hta⟩
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
 image.
 
 Clause (i), finite étale case: for a finite étale `f`, `Rf^!` preserves the constructible
@@ -151,11 +151,12 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
       (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (ii), amplitude: Tor amplitudes add under the derived tensor product,
-`[a, b], [c, d] ↦ [a + c, b + d]`. This is blueprint `lem-sf-tensor-ctf` (ii), Tor amplitude. -/
+`[a, b], [c, d] ↦ [a + c, b + d]`. This is blueprint `proposition-six-operations-dctf--14` (ii), Tor
+amplitude. -/
 theorem torAmplitudeIn_tensor (X : Scheme.{u}) (a b c d : ℤ)
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hKt : torAmplitudeIn A X a b K) (hMt : torAmplitudeIn A X c d M) :

@@ -13,9 +13,10 @@ public import WeilConjectures.TraceFormula.PurityDevissage
 # Compatibilities of smooth purity used by the Künneth–Verdier theorem
 
 The Künneth–Verdier theorem for `ℚ̄_ℓ`-coefficients
-(`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, blueprint `thm-trf-kunneth-verdier`) uses
-smooth purity through a single statement: for `Y` smooth over `k`, the exceptional Künneth map
-`α : M ⊠ ω_Y ⟶ Rp_X^! M` of the projection `p_X : X ⨯ Y ⟶ X` is an isomorphism
+(`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, blueprint
+`lemma-external-duality-trace-morphism--1`) uses smooth purity through a single statement: for `Y`
+smooth over `k`, the exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp_X^! M` of the projection
+`p_X : X ⨯ Y ⟶ X` is an isomorphism
 (`ProEtale.CondensedRing.isIso_exceptionalKunnethMap_of_smooth`).
 
 The map `α` factors as the exceptional base change map of the product square at the unit,
@@ -32,11 +33,11 @@ The map `α` factors as the exceptional base change map of the product square at
 ## Smooth purity
 
 - `ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`: smooth purity for arbitrary
-  coefficients (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `sk-thm-sp-qbar`), proved in
+  coefficients (SGA 4, Exposé XVIII, Théorème 3.2.5; blueprint `theorem-sp-qbar`), proved in
   `WeilConjectures.TraceFormula.PurityDevissage`.
 - `ProEtale.CondensedRing.isIso_upperShriekBaseChange_of_smooth`: `Rf^!` commutes with base
   change for `f` smooth (SGA 4, Exposé XVIII, Théorème 3.2.5 and Théorème 2.9 (Var 4); blueprint
-  `sk-prop-sp-purity-bc`).
+  `proposition-compatibility-purity-base-change`).
 
 -/
 
@@ -93,12 +94,12 @@ variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- **The exceptional inverse image along a smooth morphism commutes with base change** (SGA 4,
 Exposé XVIII, Théorème 3.2.5 together with the compatibility of the trace with base change,
-Théorème 2.9 (Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square with `f` smooth,
-the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism. By the
-compatibility of the purity map with base change (`isIso_upperShriekBaseChange_of_isIso_unit`)
-this follows from smooth purity for `f` and its base change `f'`
-(`isIso_upperShriekUnitTensorMap_of_smooth`) and from the base change of the relative dualizing
-complex (`isIso_upperShriekBaseChange_unit_of_smooth`). -/
+Théorème 2.9 (Var 4); blueprint `proposition-compatibility-purity-base-change`): for a cartesian
+square with `f` smooth, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an
+isomorphism. By the compatibility of the purity map with base change
+(`isIso_upperShriekBaseChange_of_isIso_unit`) this follows from smooth purity for `f` and its base
+change `f'` (`isIso_upperShriekUnitTensorMap_of_smooth`) and from the base change of the relative
+dualizing complex (`isIso_upperShriekBaseChange_unit_of_smooth`). -/
 theorem isIso_upperShriekBaseChange_of_smooth (sq : IsPullback g' f' f g) [Smooth f.left]
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (upperShriekBaseChange ℓ sq L) := by
@@ -170,8 +171,9 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
     Adjunction.homEquiv_naturality_left]
   rfl
 
-/-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
-`Y` be smooth over `k`. The exceptional Künneth map
+/-- **Purity for a smooth projection** (blueprint `theorem-sp-qbar`,
+`proposition-compatibility-purity-base-change`). Let `Y` be smooth over `k`. The exceptional Künneth
+map
 ```
 α : Lp_X^* M ⊗ᴸ Lp_Y^* ω_Y ⟶ Rp_X^! M
 ```

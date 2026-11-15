@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 
 Source: literature/blueprint/master/blueprint/sec-six-functors/
 `sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md`
-(blueprint: cor-sf-direct-image-ctf-nonproper).
+(blueprint: proposition-six-operations-dctf--2).
 -/
 
 @[expose] public section
@@ -58,7 +58,7 @@ most twice the source dimension.  No properness or compactification is assumed.
 
 Source: literature/blueprint/master/blueprint/sec-six-functors/
 `sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md`, node order 2191
-(blueprint: cor-sf-direct-image-ctf-nonproper).
+(blueprint: proposition-six-operations-dctf--2).
 
 Proof plan: specialize the global finite-field étale direct-image vanishing statement to the
 coefficient ring `A = O_E / ϖ_E^n O_E`, obtaining the uniform bound `2 * d` for all module

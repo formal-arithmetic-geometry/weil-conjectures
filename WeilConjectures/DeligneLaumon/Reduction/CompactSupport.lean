@@ -49,7 +49,7 @@ variable {ι}
 
 /-- In an exact sequence `A ⟶ B ⟶ C` of Weil sheaves whose outer terms have punctual weights at
 most `v`, so has the middle term: the stalks form an exact sequence of Frobenius modules
-(blueprint: `lem-zl-morphism-open-closed-reduction`, step 0, punctual form). -/
+(blueprint: `lemma-weight-bounds-partitions`, step 0, punctual form). -/
 theorem HasWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact) {v : ℝ}
     (h₁ : S.X₁.HasWeightsAtMost ι v) (h₃ : S.X₃.HasWeightsAtMost ι v) :
     S.X₂.HasWeightsAtMost ι v := by
@@ -78,7 +78,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_of_iso {X : Scheme
 `k₀`-scheme `X` of finite type and a morphism `f : X ⟶ Spec k₀` over `k₀` (that is, the structure
 morphism), `H_c^0(Spec k₀, Rʳf₀!F) ≅ H_c^r(X, F)` as Frobenius modules: `R(id)₀!` is concentrated
 in degree zero on Weil sheaves, and `R(f ≫ id)₀! ≅ R(id)₀! ∘ Rf₀!` (blueprint:
-`lem-zl-relative-curve-punctual`, the stalks of `Rʳf₀!F` over a point). -/
+`theorem-pure-lisse-sheaves-over-relative--1`, the stalks of `Rʳf₀!F` over a point). -/
 theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -112,8 +112,8 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerSh
 /-- **Compactly supported cohomology along a quasi-finite morphism.** For a separated
 quasi-finite morphism `f : X ⟶ Y` of separated `k₀`-schemes of finite type and a Weil sheaf `F`
 on `X`, `H_c^r(X, F) ≅ H_c^r(Y, f₀!F)` as Frobenius modules, for every `r`: `Rf₀!F` is `f₀!F`
-placed in degree zero, and `R(f ≫ a_Y)₀! ≅ R(a_Y)₀! ∘ Rf₀!` (blueprint: `lem-zl-quasi-finite`,
-`lem-zl-shriek-composition`). -/
+placed in degree zero, and `R(f ≫ a_Y)₀! ≅ R(a_Y)₀! ∘ Rf₀!` (blueprint:
+`lemma-finite-quasi-finite-direct-images`, `proposition-composition-base-change-rf-shriek--1`). -/
 theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_zero
     {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]

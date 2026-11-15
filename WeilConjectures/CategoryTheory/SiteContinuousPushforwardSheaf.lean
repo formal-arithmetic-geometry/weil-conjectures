@@ -41,14 +41,14 @@ Proof:
    compatibly with both projections (00WV).
 2. The sheaf on the target satisfies the equalizer condition on `R.map F`.
    The definition of sheaf and its algebraic-valued version are those of
-   lem-weil-pbc-sheaf-algebraic-structures-objects.
+   situation-conventions.
 3. Transport this equalizer along the comparison isomorphisms. Its sections and
    maps are precisely those of `F.op ⋙ G.obj` on `R`. This proves the per-covering
    equivalence and the sheaf condition on every covering (00WW). The comparison
    between covering-family sheaves and generated-topology sheaves gives `IsSheaf`.
 4. For abelian groups the same argument on underlying sets applies: restrictions
    and comparison maps are homomorphisms, so the equalizer is also an equalizer
-   of abelian groups, using lem-weil-pbc-sheaf-algebraic-structures-objects. -/
+   of abelian groups, using situation-conventions. -/
 theorem siteContinuous_pushforward_isSheaf
     {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
     (J : Precoverage C) (K : Precoverage D)

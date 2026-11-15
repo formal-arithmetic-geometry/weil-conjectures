@@ -133,7 +133,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The isomorphism locus of the specified ambient exchange is triangulated.
 No properness or finiteness hypothesis is required for this exactness assertion.
-Source: blueprint main-20261015, det-proper-base-change-unbounded-extension,
+Source: blueprint main-20261015, proposition-proper-base-change-localizing-categories--1,
 steps 2--4 (blueprint: lem-sfb-condensed-ambient-exchange-triangulated).
 
 Proof: transport the termwise coherent shifts to each total inverse image through

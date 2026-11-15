@@ -110,12 +110,12 @@ variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc :
   {X : Scheme.{u}} {g : X ⟶ c.pt} {R : RelativeAffinePresentation c g} (M : R.ChartModels)
   [QuasiSeparatedSpace X]
 
-/-- Blueprint `def-nagata-finite-presentation-descent` (scheme): the scheme `X^desc_{λ_rel}`
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (scheme): the scheme `X^desc_{λ_rel}`
 obtained by gluing the valid relative datum `R_{X,λ_rel}`. -/
 noncomputable def descended : Scheme.{u} :=
   RelativeGluingDatum.glued (M.isValid_validDatum hc)
 
-/-- Part of blueprint `def-nagata-finite-presentation-descent`: the structure morphism
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the structure morphism
 `X^desc_{λ_rel} ⟶ D_{λ_rel}`. -/
 noncomputable def descendedHom : M.descended hc ⟶ D.obj (M.relStage hc).left :=
   RelativeGluingDatum.toBase (M.isValid_validDatum hc)
@@ -169,8 +169,9 @@ lemma limitChartMap_ι_compat (a b : R.J) :
   rw [← hκ, Category.assoc, ← Scheme.Hom.resLE_comp_ι_assoc (M.limitChartMap hc a) (hT.V_eq a b).le,
     ← RelativeGluingDatum.glue_condition, ← hT.map_chartMap_assoc, reassoc_of% hκ']
 
-/-- Part of blueprint `def-nagata-finite-presentation-descent`: the morphism `X ⟶ X^desc_{λ_rel}`
-glued from the chartwise identifications `Wₐ ≅ Yₐ ×_{D_i} lim Dⱼ ⟶ Yₐ ×_{D_i} D_{λ_rel}`. -/
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the morphism
+`X ⟶ X^desc_{λ_rel}` glued from the chartwise identifications
+`Wₐ ≅ Yₐ ×_{D_i} lim Dⱼ ⟶ Yₐ ×_{D_i} D_{λ_rel}`. -/
 noncomputable def toDescended : X ⟶ M.descended hc :=
   (M.limitCover).glueMorphisms (fun a ↦ M.limitChartMap hc a ≫ M.descendedι hc a)
     (M.limitChartMap_ι_compat hc)
@@ -205,7 +206,7 @@ lemma preimage_toDescended (a : R.J) :
   rw [SetLike.mem_coe, Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, e₁, SetLike.mem_coe, e₂]
   rfl
 
-/-- Part of blueprint `lemma-nagata-finite-presentation-descends`: the morphism
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the morphism
 `X ⟶ X^desc_{λ_rel}` exhibits `X` as the base change of `X^desc_{λ_rel} ⟶ D_{λ_rel}` along
 `lim Dⱼ ⟶ D_{λ_rel}`. -/
 theorem isPullback_toDescended :
@@ -219,7 +220,7 @@ theorem isPullback_toDescended :
       rw [ℓ_comp, descendedHom, RelativeGluingDatum.ι_toBase]
       exact isPullback_baseChangeCone_π D c (M.p a) (M.relStage hc))
 
-/-- Blueprint `def-nagata-finite-presentation-descent` (comparison): the isomorphism
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (comparison): the isomorphism
 `ε_X : X^desc_{λ_rel} ×_{D_{λ_rel}} lim Dⱼ ≅ X` over `lim Dⱼ`, the inverse of the morphism
 `X ⟶ X^desc_{λ_rel} ×_{D_{λ_rel}} lim Dⱼ` induced by the glued chartwise identifications. -/
 noncomputable def descendedIso :
@@ -276,19 +277,19 @@ noncomputable abbrev finitePresentationDescentModels :
 noncomputable abbrev finitePresentationDescentStage : I :=
   ((finitePresentationDescentModels hc g).relStage hc).left
 
-/-- Blueprint `def-nagata-finite-presentation-descent`: Finite-presentation descent
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-presentation descent
 construction. The scheme `X^desc_{λ_rel}`, glued from the valid relative datum
 `R_{X,λ_rel}` of the selected presentation. -/
 noncomputable abbrev finitePresentationDescent : Scheme.{u} :=
   (finitePresentationDescentModels hc g).descended hc
 
-/-- Part of blueprint `def-nagata-finite-presentation-descent`: the structure morphism
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the structure morphism
 `X^desc_{λ_rel} ⟶ D_{λ_rel}`. -/
 noncomputable abbrev finitePresentationDescentHom :
     finitePresentationDescent hc g ⟶ D.obj (finitePresentationDescentStage hc g) :=
   (finitePresentationDescentModels hc g).descendedHom hc
 
-/-- Part of blueprint `def-nagata-finite-presentation-descent`: the comparison isomorphism
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the comparison isomorphism
 `ε_X : X^desc_{λ_rel} ×_{D_{λ_rel}} lim Dⱼ ≅ X`, obtained by gluing the chartwise
 identifications. -/
 noncomputable abbrev finitePresentationDescentIso :
@@ -296,7 +297,7 @@ noncomputable abbrev finitePresentationDescentIso :
       ≅ X :=
   (finitePresentationDescentModels hc g).descendedIso hc
 
-/-- Blueprint `lemma-nagata-finite-presentation-descends` (concrete form): the constructed
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (concrete form): the constructed
 `X^desc_{λ_rel} ⟶ D_{λ_rel}` is of finite presentation (locally of finite presentation,
 quasi-compact and quasi-separated), and `ε_X` is an isomorphism over `lim Dⱼ`: the square formed
 by `X ⟶ X^desc_{λ_rel}`, `g` and the projections is cartesian.

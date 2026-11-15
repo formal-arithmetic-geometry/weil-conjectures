@@ -116,8 +116,8 @@ private theorem derivedCompleteIntegers_nearbyCycles_baseChangeSpecial_obj
           (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε _ hA₀))))
 
 /-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de
-monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"; Illusie, *Autour du théorème
+de monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait
 `S = Spec k'⟦t⟧` of models `M`, `N` of finite type, a coordinate `b` of `M` and bounded
 constructible `𝒪_E`-complexes `A₀`, `B₀`, if the Künneth map of the geometric slice
 (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`) is invertible, so is the pullback

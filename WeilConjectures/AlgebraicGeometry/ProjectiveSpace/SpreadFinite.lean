@@ -16,7 +16,7 @@ Let `A` be a Noetherian domain with fraction field `K` and `T ⟶ Spec A` projec
 morphism `Y₀ ⟶ T_K` to the generic fibre, i.e. a finite coherent `𝒪_{T_K}`-algebra, is the
 generic fibre of a finite morphism `Y ⟶ T_U` over a nonempty open `U` of `Spec A`; finitely many
 of them (the factors of a finite product decomposition) can be spread out simultaneously
-(`lem-fin-spread-finite-algebra`).
+(`proposition-proper-direct-image-finite-coefficients`).
 
 ## Main statements
 
@@ -40,8 +40,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.ProjectiveSpace
 
-/-- Blueprint `lem-fin-spread-finite-algebra`: Spreading a finite algebra from the generic
-fibre.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Spreading a finite algebra from
+the generic fibre.
 
 Let `A` be a Noetherian domain with fraction field `K`, `η : Spec K ⟶ Spec A` the generic point,
 and `f : T ⟶ Spec A` projective (`f = π ∘ i` for a closed immersion `i : T ⟶ ℙ(n; Spec A)`).

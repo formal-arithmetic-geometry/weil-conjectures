@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-! # Generic support, resolution, and derived-mate proofs
 
 Proved categorical subarguments for compact-support coefficient transport.
-Sources: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Sources: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 -/
 
 @[expose] public noncomputable section
@@ -80,7 +80,7 @@ private theorem chosen_unit_isIso_congr
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- An inverse mate is invertible when its unit and relevant counits are invertible.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-inverse-mate-supported-counit).
 Proof: Expand the inverse mate through its unit and counit. Each factor is an isomorphism, so
 every component and hence the natural transformation is invertible. -/
@@ -149,7 +149,7 @@ end ExactSupport
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
 /-- Scalar restriction preserves the derived essential image of open extension.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-derived-scalar-open-support).
 Proof: The ordinary open unit is invertible. The ordinary support theorem makes its counit
 invertible on scalar-restricted extensions. Transport that counit through exact derived functors
@@ -250,7 +250,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A continuous flat site direct image preserves the scalar-restricted injective resolution used
 for coefficient transport.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-continuous-scalar-resolution).
 Proof: Pass both sites to their small equivalent models. Construct the ringed direct-image models
 and the sectionwise identity comparison isomorphisms. Equivalences are exact and preserve
@@ -493,7 +493,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A derived mate is invertible when the ordinary mate is invertible and restricted resolutions
 remain quasi-isomorphisms.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-derived-mate-resolution-criterion).
 Proof: Resolve the scalar-restricted image of each K-injective complex. The resolution condition
 makes the target derived unit invertible, and the source unit is invertible on K-injectives. The

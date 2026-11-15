@@ -1214,7 +1214,7 @@ private theorem proper_qbar_of_finite
 ell-adic complex is constructible, over a Noetherian base.
 
 Source: Bhatt--Scholze, Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15;
-blueprint sk-thm-sfb-proper-base-change,
+blueprint proposition-proper-direct-image-constructible-complexes,
 integral and rational proper finiteness, constructibility clauses.
 (blueprint: lem-sfb-noetherian-proper-constructible-cohomology)
 

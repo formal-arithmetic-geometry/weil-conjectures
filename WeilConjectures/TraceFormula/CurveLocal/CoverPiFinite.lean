@@ -12,7 +12,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 # Finiteness of `π : T' ⟶ T`
 
 For a cover datum the morphism `π : T' ⟶ T` of strict localizations is finite
-(`CoverDatum.isFinite_π`, blueprint `det-tf-restriction-zero-covers` (ii): `T'` is finite over
+(`CoverDatum.isFinite_π`, blueprint `lemma-tangent-cones-on-cover` (ii): `T'` is finite over
 `T`): `p × p` factors as the finite morphism `C × C ⟶ U × U` followed by the open immersion
 `U × U ⟶ X × X`; along the first, the strict localization `T'` is an open and closed subscheme of
 the finite base change of the strict localization of `U × U`
@@ -85,7 +85,7 @@ lemma π_eq : D.π = strictLocalizationMap D.gU D.s' ≫
       spec_map_strictHenselizationEval_comp_strictLocalizationMap,
       spec_map_strictHenselizationEval_comp_eqToHom D.s'_gU_jUU]
 
-/-- **`π : T' ⟶ T` is finite** (blueprint `det-tf-restriction-zero-covers` (ii)). -/
+/-- **`π : T' ⟶ T` is finite** (blueprint `lemma-tangent-cones-on-cover` (ii)). -/
 instance isFinite_π : IsFinite D.π := by
   rw [π_eq]
   have : IsFinite (strictLocalizationMap D.gU D.s') := by

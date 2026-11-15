@@ -15,8 +15,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
 /-!
 # Exactness of tensoring by a finite locally free module
 
-Source: the Picard-duality blueprint, proof of `lem-sc-ext-locally-free`; Stacks Project,
-Tags 01C6 and 05NE (blueprint: lem-sc-ext-tensor-exact).
+Source: the Picard-duality blueprint, proof of `theorem-riemann-roch-coherent-serre-duality--2`;
+Stacks Project, Tags 01C6 and 05NE (blueprint: lem-sc-ext-tensor-exact).
 -/
 
 @[expose] public section
@@ -31,8 +31,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 limits and finite colimits, equivalently short exact sequences in the abelian module category.
 The local finite ranks may vary across the scheme.
 
-Source: the Picard-duality blueprint, proof of `lem-sc-ext-locally-free`; Stacks Project,
-Tags 01C6, 01CB, 01AG and 05NE (blueprint: lem-sc-ext-tensor-exact).
+Source: the Picard-duality blueprint, proof of `theorem-riemann-roch-coherent-serre-duality--2`;
+Stacks Project, Tags 01C6, 01CB, 01AG and 05NE (blueprint: lem-sc-ext-tensor-exact).
 
 Proof:
 1. For each point choose a neighbourhood trivializing `P` with finite rank `d`. Taking germs

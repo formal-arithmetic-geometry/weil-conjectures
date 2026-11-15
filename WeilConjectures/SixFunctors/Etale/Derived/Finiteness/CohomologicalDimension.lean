@@ -21,11 +21,11 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 Over an algebraically closed field `k'`, a `k'`-scheme `X` of finite type and dimension at most
 `d` has no cohomology above `2d` with coefficients in a sheaf of modules over a finite ring
 (`AlgebraicGeometry.Etale.subsingleton_H_forget₂_of_two_mul_lt`, blueprint
-`fin4-lem-fibrewise-cohomological-dimension`). Consequently, for a separated morphism of finite
-type `f : X ⟶ Y` between schemes of finite type over a field whose geometric fibres have
+`proposition-proper-direct-image-finite-coefficients`). Consequently, for a separated morphism of
+finite type `f : X ⟶ Y` between schemes of finite type over a field whose geometric fibres have
 dimension at most `d`, `Rᵠf_! F = 0` for `q > 2d`
 (`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt`,
-blueprint `lem-dg-compact-support-amplitude`).
+blueprint `theorem-results-from-etale-theory--5`).
 -/
 
 @[expose] public section
@@ -135,7 +135,7 @@ end ProperFibre
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `fin4-lem-fibrewise-cohomological-dimension`: Cohomological dimension over an
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Cohomological dimension over an
 algebraically closed field.
 
 Let `k'` be an algebraically closed field, `X` a `k'`-scheme of finite type of dimension at most
@@ -158,7 +158,7 @@ theorem subsingleton_H_forget₂_of_two_mul_lt {k' : Type u} [Field k'] [IsAlgCl
   change Fintype.card Λ • y = 0
   rw [← one_smul Λ y, ← smul_assoc, card_nsmul_eq_zero, zero_smul]
 
-/-- Blueprint `lem-dg-compact-support-amplitude`: The compact-support bound uses the original
+/-- Blueprint `theorem-results-from-etale-theory--5`: The compact-support bound uses the original
 fibres.
 
 Let `f : X ⟶ Y` be a separated morphism of finite type (here: one admitting a compactification)

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallySplitShortComplexHomolog
 /-! # Homology of a complex with constant differential ranks over a reduced scheme
 
 Source: the reduced-ring normal-form claim and its application in the proof of
-`thm-pc-semicontinuity-base-change`, part (3).
+`lemma-triviality-fibres--2`, part (3).
 (blueprint: lem-pc-constant-rank-complex-homology)
 -/
 
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 local freeness of the homology on an open subscheme. It suffices to test each point over
 one field extension of its residue field.
 
-Source: `thm-pc-semicontinuity-base-change`, proof of (3), the normal-form claim and the
+Source: `lemma-triviality-fibres--2`, proof of (3), the normal-form claim and the
 following kernel/image argument.
 (blueprint: lem-pc-constant-rank-complex-homology)
 

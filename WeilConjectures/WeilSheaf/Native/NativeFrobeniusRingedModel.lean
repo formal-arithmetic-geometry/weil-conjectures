@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusHomNatur
 /-! # An ordinary coefficient model intertwining geometric Frobenius
 
 Source: the underived coefficient comparison in the internal-Hom paragraph of
-cor-coef-verdier-weil-equivariance; Stacks 00YV and 03D6.
+prose-10-20; Stacks 00YV and 03D6.
 -/
 
 @[expose] public section
@@ -88,7 +88,7 @@ attribute [instance] NativeFrobeniusRingedModel.category NativeFrobeniusRingedMo
 /-- Ordinary native adic sheaves have a small sectionwise coefficient realization
 intertwining their Frobenius pullback.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom paragraph; native ringed
+Source: prose-10-20, internal-Hom paragraph; native ringed
 presentation step 1; Stacks 00YV and 03D6
 (blueprint: lem-sf-native-frobenius-ringed-model).
 

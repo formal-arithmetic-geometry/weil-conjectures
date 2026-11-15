@@ -17,9 +17,9 @@ of a nonzero global function `h`, and `L` a bounded constructible `ℚ̄_ℓ`-co
 `Li^* L = 0`. The defect `C_{X,Z}(L)` of `ProEtale.CondensedRing.specializationDefect` vanishes at
 every generic point of `Z`, that is, over a dense open subset of `Z`
 (`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect`). This is the node
-`det-sp-generic-divisor` of the blueprint subsection `sk-lem-tf-sp-generic-divisor`, stated here
-for `ℚ̄_ℓ`-coefficients as an input of the proof of blueprint
-`det-sp-zero-section-affine-space`.
+`lemma-vanishing-generic-points-principal-divisor--1` of the blueprint subsection
+`lemma-vanishing-generic-points-principal-divisor`, stated here for `ℚ̄_ℓ`-coefficients as an input
+of the proof of blueprint `theorem-verdier-s-theorem-specialization-zero`.
 
 Since `Li^* L = 0`, the target `Ψ_Z(Li^* L)` of the zero-section map vanishes, so the defect is
 `Le^* Ψ_X(L)[1]` (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_shift`). By the
@@ -36,8 +36,8 @@ open–closed triangle `L ≅ j_! Lj^* L` and the lisse generators of `Dᵇc(X �
 away from the closure of the support of the generator. The remaining sorried case,
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, is the
 local computation of nearby cycles along the divisor at a codimension-one point (blueprint
-`det-sp-generic-divisor`, proof), which needs finite-coefficient nearby cycles over the trait
-and their comparison with `ℚ̄_ℓ`-coefficients, not available yet.
+`lemma-vanishing-generic-points-principal-divisor--1`, proof), which needs finite-coefficient nearby
+cycles over the trait and their comparison with `ℚ̄_ℓ`-coefficients, not available yet.
 
 -/
 
@@ -59,11 +59,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **Vanishing of the restricted specialization near a generic point of a principal divisor**
-(the local computation of the proof of blueprint `det-sp-generic-divisor`): let `X` be normal,
-`Z = V(h)` for a nonzero global function `h`, `L` bounded constructible with `Li^* L = 0`, and `ζ`
-a generic point of an irreducible component of `Z` (a point of codimension one of `X`). Then the
-restriction `Le^* Ψ_X(L)` of the specialization `Ψ_X(L)` of `L` to the zero section vanishes over a
-neighbourhood of `ζ`. -/
+(the local computation of the proof of blueprint
+`lemma-vanishing-generic-points-principal-divisor--1`): let `X` be normal, `Z = V(h)` for a nonzero
+global function `h`, `L` bounded constructible with `Li^* L = 0`, and `ζ` a generic point of an
+irreducible component of `Z` (a point of codimension one of `X`). Then the restriction `Le^* Ψ_X(L)`
+of the specialization `Ψ_X(L)` of `L` to the zero section vanishes over a neighbourhood of `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_of_isGeneric (hX : IsNormalScheme X.left)
     {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
@@ -82,13 +82,13 @@ theorem exists_isZero_upperStar_nearbyCycles_of_isGeneric (hX : IsNormalScheme X
     L hL
 
 /-- **Generic vanishing of the defect along a principal divisor** (blueprint
-`det-sp-generic-divisor`, a node of the subsection `sk-lem-tf-sp-generic-divisor`, for
-`ℚ̄_ℓ`-coefficients): let `X` be normal, `Z = V(h)` the effective Cartier divisor of a nonzero
-global function `h`, and `L` bounded constructible with `Li^* L = 0`. Then the defect `C_{X,Z}(L)`
-vanishes at every generic point of `Z`: there is a dense open `U ⊆ Z` such that the restriction of
-`C_{X,Z}(L)` to the inverse image of `U` in `N_⊥ Z ≅ Z ⊗ k'` is zero. Since `Li^* L = 0`, the defect
-is `Le^* Ψ_X(L)[1]`, which vanishes near the generic points of `Z`
-(`exists_isZero_upperStar_nearbyCycles_of_isGeneric`). -/
+`lemma-vanishing-generic-points-principal-divisor--1`, a node of the subsection
+`lemma-vanishing-generic-points-principal-divisor`, for `ℚ̄_ℓ`-coefficients): let `X` be normal,
+`Z = V(h)` the effective Cartier divisor of a nonzero global function `h`, and `L` bounded
+constructible with `Li^* L = 0`. Then the defect `C_{X,Z}(L)` vanishes at every generic point of
+`Z`: there is a dense open `U ⊆ Z` such that the restriction of `C_{X,Z}(L)` to the inverse image of
+`U` in `N_⊥ Z ≅ Z ⊗ k'` is zero. Since `Li^* L = 0`, the defect is `Le^* Ψ_X(L)[1]`, which vanishes
+near the generic points of `Z` (`exists_isZero_upperStar_nearbyCycles_of_isGeneric`). -/
 theorem exists_dense_isZero_specializationDefect (hX : IsNormalScheme X.left)
     {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))

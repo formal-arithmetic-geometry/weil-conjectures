@@ -194,15 +194,15 @@ B_X-linear (def-weil-l-adic-coefficient-extension, def-weil-pbc-constant-sheaf).
 lem-sf-derived-homology-long-exact to obtain the cohomology exact sequences.
 5. Induction gives cohomology in [a,b] for all K_n. The exact sequence in degree b
 also makes each canonical transition on H^b epimorphic.
-6. Apply det-pe-milnor-sequence to this strict tower. By det-pe-products-derived,
+6. Apply proposition-milnor-sequence--2 to this strict tower. By proposition-exact-products--2,
 its termwise product represents the product in D(Mod(B_X)), and localization
 identifies 1-T with the tower transition endomorphism. Rotating the cone triangle
 gives a Roos triangle (def-weil-abstract-derived-category,
 def-weil-triangulated-category, def-weil-derived-limit). Completeness and the
-uniqueness clause of lem-weil-derived-limit-existence identify K up to isomorphism
+uniqueness clause of lemma-reduction-derived-nakayama identify K up to isomorphism
 with this Milnor middle term.
 7. For j<a and j>b+1 both outer Milnor terms vanish. At j=b+1, the right term is
-zero and det-pe-milnor-epimorphic kills R^1 lim H^b(K_n), since its transitions are
+zero and proposition-milnor-sequence--3 kills R^1 lim H^b(K_n), since its transitions are
 epimorphic. Exactness gives the asserted vanishing in every remaining degree. -/
 theorem complete_residue_cohomology_bounds
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Der
 /-!
 # Proper exchange along a commuting triangle
 
-Source: blueprint det-sf-comp-composition-base-change, proof (3), proper mate pasting.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3), proper mate pasting.
 -/
 
 @[expose] public noncomputable section
@@ -43,7 +43,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Direct-image composition followed by the specified equality of scheme maps.
-Source: blueprint det-sf-comp-composition-base-change, proof (3).
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3).
 (blueprint: lem-sfb-compact-support-proper-triangle). -/
 def compactSupportPushforwardTriangle
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -55,7 +55,7 @@ def compactSupportPushforwardTriangle
     Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ e)
 
 /-- Pull back a morphism of triangles to the two literal fibre products.
-Source: blueprint det-sf-comp-composition-base-change, proof (3).
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3).
 (blueprint: lem-sfb-compact-support-proper-triangle). -/
 def compactSupportTrianglePullback
     {A B Y Y' : Scheme.{u}} (a : A ⟶ B) (p : B ⟶ Y) (q : A ⟶ Y)

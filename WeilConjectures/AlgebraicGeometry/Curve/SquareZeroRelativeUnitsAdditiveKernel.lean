@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.SquareZeroUnitsAdditiveKernelOfSe
 
 /-! # A square-zero closed immersion identifies its unit and additive kernels.
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
 (blueprint: lem-sc-square-zero-relative-units-additive-kernel)
 -/
@@ -25,7 +25,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A square-zero closed immersion identifies its unit and additive kernels.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
 (blueprint: lem-sc-square-zero-relative-units-additive-kernel)
 

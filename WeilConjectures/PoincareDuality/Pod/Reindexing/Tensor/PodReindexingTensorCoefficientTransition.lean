@@ -40,7 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Scalar transition of fixed normalized completion and tensor comparisons.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Step 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Step 5;
 Stacks 03EL, 06YY, 0941
 (blueprint: lem-pod-reindexing-tensor-coefficient-transition).
 

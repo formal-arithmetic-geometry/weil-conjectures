@@ -164,8 +164,8 @@ of units and its restriction to roots of unity commute with the power maps, so t
 short exact Kummer sequences is a `ShortComplex.Hom`. Apply `Sheaf.H.map_δSucc` and the
 functoriality of the pullback maps to obtain the long-exact-sequence ladder. The degree-zero and
 Picard assertions are the recorded pullback lemmas. For an affine curve, use the compactification
-and Jacobian quotient from `lem-sc-pic-affine`, clauses (c) and (d) of `thm-av-final`, and
-`lem-sc-divisible-quotient-torsion`.
+and Jacobian quotient from `proposition-cohomology-smooth-affine-curve--3`, clauses (c) and (d) of
+`thm-av-final`, and `proposition-cohomology-smooth-affine-curve--3`.
 -/
 theorem kummer_base_change_compatibility
     (k k' : Type u) [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']

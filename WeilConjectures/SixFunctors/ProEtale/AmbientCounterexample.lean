@@ -47,8 +47,8 @@ cocontinuous functor `U_H` to `Λ[H]`-modules whose right adjoint `V_H` is exact
   (`AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety`).
 
 The sheaf `F` is not of étale origin. On the étale-origin class the exceptional adjoint is the
-unconditional constructible `Rf^!` of `det-def-sf-operations` (vi), which is the only exceptional
-functor used downstream (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
+unconditional constructible `Rf^!` of `theorem-f-shriek-ell-adic-coefficients--4` (vi), which is the
+only exceptional functor used downstream (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
 
 In particular, the exceptional right adjoint of `Rf_!` on unbounded (or bounded below) pro-étale
 complexes does not exist in general.
