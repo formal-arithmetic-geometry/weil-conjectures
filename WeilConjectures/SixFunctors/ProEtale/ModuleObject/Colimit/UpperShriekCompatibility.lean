@@ -29,10 +29,15 @@ change `E ⟶ ℚ̄_ℓ`. The comparisons (Pull), (Push) and (Shriek) for open i
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClIso`), the restriction of
   `ProEtale.CondensedRing.derivedPushHom`, an isomorphism at bounded below complexes.
 * **(Shriek)** for an open immersion `j`: `j_!^E ⋙ T_X ≅ T_U ⋙ j_!^{ℚ̄_ℓ}`
-  (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso`), and for
-  every `f`: `Rf_!^E ⋙ T_Y ≅ T_X ⋙ Rf_!^{ℚ̄_ℓ}`
-  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekToPadicAlgClIso`), composed from the
-  two along the chosen compactification.
+  (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso`); along a
+  compactification `c` of `f`, the change-of-coefficients map
+  `Rf_!(c)^E ⋙ T_Y ⟶ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}`
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom`),
+  (Push) for the proper part followed by (Shriek) for the open immersion, is an isomorphism
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso`), and
+  for every `f`: `Rf_!^E ⋙ T_Y ≅ T_X ⋙ Rf_!^{ℚ̄_ℓ}`
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekToPadicAlgClIso`), along the chosen
+  compactification.
 * **The exchange for `f^!`**: the mate `Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}` of the inverse of
   (Shriek) under the adjunctions `Rf_! ⊣ Rf^!`
   (`ProEtale.CondensedRing.boundedConstructibleUpperShriekToPadicAlgCl`). For an open immersion
@@ -76,10 +81,36 @@ section OfCompactification
 
 variable {f : X ⟶ Y} (c : Compactification f.left)
 
+/-- **The change-of-coefficients map for `Rf_!`** on bounded constructible complexes along a
+compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, for the inclusion `E ⟶ ℚ̄_ℓ`:
+`Rf_!(c)^E ⋙ T_Y ⟶ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}` is the (Push) comparison for the proper `g`
+(`boundedConstructibleLowerStarToPadicAlgClHom`), whiskered by `i_!`, followed by `Rg_*` of the
+(Shriek) isomorphism for the open immersion `i`
+(`boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso`). -/
+noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom :
+    ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ⟶
+      boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
+        boundedConstructibleLowerShriekOfCompactification ℓ c :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft _ (boundedConstructibleLowerStarToPadicAlgClHom ℓ E c.overG) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight
+      (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).hom _ ≫
+    (Functor.associator _ _ _).hom
+
+/-- The change-of-coefficients map for `Rf_!(c)` is an isomorphism, (Push) being one for the
+proper part `g` of the compactification. -/
+instance isIso_boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom :
+    IsIso (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom ℓ E c) := by
+  unfold boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom
+  infer_instance
+
 /-- **(Shriek)** on bounded constructible complexes along a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, for the inclusion `E ⟶ ℚ̄_ℓ`:
-`Rf_!(c)^E ⋙ T_Y ≅ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}`, composed of (Shriek) for the open immersion `i` and
-(Push) for the proper `g`. -/
+`Rf_!(c)^E ⋙ T_Y ≅ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}`, the change-of-coefficients map
+`boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom`, composed of (Shriek) for the
+open immersion `i` and (Push) for the proper `g`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso :
     ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙
         boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
@@ -91,6 +122,13 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClI
     Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI) _ ≪≫
     Functor.associator _ _ _
+
+/-- The isomorphism `boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso` is the
+change-of-coefficients map `boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom`. -/
+lemma boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso_hom :
+    (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).hom =
+      boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom ℓ E c :=
+  rfl
 
 /-- The exchange `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_{ℚ̄_ℓ}` for the proper part `g` of a compactification:
 the mate of the inverse of (Push) under the adjunctions `Rg_* ⊣ Rg^!`. -/

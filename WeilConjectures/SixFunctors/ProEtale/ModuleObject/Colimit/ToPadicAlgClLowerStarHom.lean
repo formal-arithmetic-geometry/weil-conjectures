@@ -11,9 +11,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 /-!
 # The extension of scalars `E ⟶ ℚ̄_ℓ` and the proper direct image on underlying complexes
 
-The comparison `boundedConstructibleLowerStarToPadicAlgClIso` of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility`, computed
-on the underlying complexes (`boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom`).
+The comparison `boundedConstructibleLowerStarToPadicAlgClHom` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility` and the
+isomorphism `boundedConstructibleLowerStarToPadicAlgClIso` it induces, computed on the underlying
+complexes (`boundedConstructibleLowerStarToPadicAlgClHom_app_hom`,
+`boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom`).
 -/
 
 @[expose] public section
@@ -50,22 +52,28 @@ section Proper
 
 variable (p : X ⟶ Y) [IsProper p.left]
 
-lemma boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom
+/-- The comparison `boundedConstructibleLowerStarToPadicAlgClHom` is, on the underlying
+complexes, the derived (Push) comparison `derivedPushHom`. -/
+lemma boundedConstructibleLowerStarToPadicAlgClHom_app_hom
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    ((boundedConstructibleLowerStarToPadicAlgClIso ℓ E p).hom.app K).hom =
+    ((boundedConstructibleLowerStarToPadicAlgClHom ℓ E p).app K).hom =
       (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p.left).app K.obj := by
   simp only [Functor.comp_obj, boundedConstructibleToPadicAlgCl_obj_obj,
     ContinuousMapRingObj.boundedConstructibleLowerStar_obj_obj,
-    boundedConstructibleLowerStar_obj_obj, boundedConstructibleLowerStarToPadicAlgClIso,
+    boundedConstructibleLowerStar_obj_obj, boundedConstructibleLowerStarToPadicAlgClHom,
     Functor.whiskeringRight_obj_obj, boundedConstructibleToPadicAlgClCompatibility,
     ObjectProperty.liftCompιIso, ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility,
-    boundedConstructibleLowerStarCompatibility, Functor.FullyFaithful.preimageIso_hom,
-    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom, Iso.symm_hom,
-    Functor.isoWhiskerRight_hom, asIso_hom, Iso.refl_inv,
+    boundedConstructibleLowerStarCompatibility, Iso.refl_hom, Iso.refl_inv,
     Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, ObjectProperty.ι_obj,
     Functor.associator_hom_app, Functor.whiskerLeft_app, NatTrans.id_app,
     ObjectProperty.lift_obj_obj, Functor.associator_inv_app, Functor.whiskerRight_app,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
+
+lemma boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom
+    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
+    ((boundedConstructibleLowerStarToPadicAlgClIso ℓ E p).hom.app K).hom =
+      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p.left).app K.obj :=
+  boundedConstructibleLowerStarToPadicAlgClHom_app_hom ℓ E p K
 
 end Proper
 
