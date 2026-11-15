@@ -537,7 +537,7 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
       (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) (by simp) _ hM
   have hslarge (I : Type (u + 2)) :
       PreservesColimitsOfShape (Discrete I) (P.ι ⋙ F) :=
-    preservesCoproducts_of_small (P.ι ⋙ F) hs I
+    Functor.preservesColimitsOfShape_discrete_of_small (P.ι ⋙ F) hs I
   have hsums (I : Type (u + 2))
       (D : Discrete I ⥤ DerivedCategory (FiniteDiscreteOrdinary.Internal A X))
       (hD : ∀ i : I, P (D.obj ⟨i⟩)) : PreservesColimit D F := by
