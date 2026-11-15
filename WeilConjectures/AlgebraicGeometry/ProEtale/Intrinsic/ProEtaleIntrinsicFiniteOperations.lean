@@ -14,7 +14,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 # Canonical intrinsic finite-coefficient inverse image
 
 The existing arbitrary-ring and continuous-function interfaces are reexported.
-Here the canonical fixed-scalar inverse image is transported through the intrinsic constant-ring realization, without choosing a coefficient identification.
+Here the canonical fixed-scalar inverse image is transported through the intrinsic constant-ring
+realization, without choosing a coefficient identification.
 
 ## References
 

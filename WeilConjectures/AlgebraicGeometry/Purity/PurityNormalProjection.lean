@@ -42,8 +42,8 @@ noncomputable def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
     (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase
     (purityNormalCone_kernel i)
 
-/-- For a section, the canonical factorization to Z is precisely the normal-cone projection formed using its retraction. Thus the normal object in the
-DNC statement uses this same associated-graded cone over Z. -/
+/-- For a section `g` of `i`, the canonical factorization to `Z` is the normal-cone projection
+formed using the retraction `g`. -/
 theorem purityNormalProjection_eq {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (g : X ⟶ Z) (hs : i ≫ g = 𝟙 Z) :
     purityNormalProjection i = normalConeProj g i := by

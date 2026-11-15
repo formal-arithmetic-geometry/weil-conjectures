@@ -196,10 +196,7 @@ open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
 /-- Derived extension of scalars on the ordinary constant-ring pro-etale categories.
-
-The functor is computed by a K-flat representative, and the target category carries
-its action through the right tensor factor.  Its construction is the `scalarExtension`; no second tensor or localization is introduced here.
--/
+The target category carries its action through the right tensor factor. -/
 noncomputable def scalarExtensionFunctor {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u}) :
     Scheme.proEtaleDerivedCategory T A ⥤ Scheme.proEtaleDerivedCategory T B :=
