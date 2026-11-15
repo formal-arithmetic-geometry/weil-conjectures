@@ -38,15 +38,14 @@ every `t ≠ 0` of `ℚ̄_ℓ`, which is the identity of rational functions over
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.map_zetaSeries_eq_inv_alternatingCharpolyRevProd`: the
-  cohomological product for the zeta function (blueprint
-  `corollary-point-counting-zeta-function`).
+  cohomological product for the zeta function.
 - `Polynomial.alternatingProdEval_inv_mul_inv_of_roots_eq_map_inv` and
   `Polynomial.prod_leadingCoeff_sq_of_roots_eq_map_inv`: the functional equation of an
   alternating product of polynomials whose roots are exchanged by `z ↦ (c z)⁻¹`.
 - `AlgebraicGeometry.Scheme.functional_equation_frobeniusCharpolyRev`: the functional equation in
-  terms of the Frobenius on the cohomology (blueprint `corollary-functional-equation`), with the
-  duality inputs as hypotheses: the library's Poincaré duality
-  (`AlgebraicGeometry.WeilSheaf.poincareDuality`) is not yet sorry-free.
+  terms of the Frobenius on the cohomology, with the
+  duality inputs as hypotheses, supplied by the library's Poincaré duality
+  (`AlgebraicGeometry.WeilSheaf.poincareDuality`, sorry-free).
 -/
 
 @[expose] public section
