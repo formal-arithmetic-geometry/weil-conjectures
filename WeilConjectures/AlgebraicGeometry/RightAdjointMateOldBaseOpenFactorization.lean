@@ -16,7 +16,6 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 ## References
 
-* Stacks Project, Remark 48.6.1 (Tag 0E9S).
 * Stacks Project, Lemma 48.5.2 (Tag 0ATR) and Remark 48.6.1 (Tag 0E9S).
 -/
 

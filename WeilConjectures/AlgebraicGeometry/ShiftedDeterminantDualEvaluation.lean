@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 
 ## References
 
-* Stacks Project, Tag 0BRT, determinant inversion in the conclusion of the proof.
+* Stacks Project, Tag 0BRT.
 -/
 
 @[expose] public section

@@ -16,13 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Tags 008X, 0095, 0096.
-* Stacks, Tag 0096. Proof: by the change-of-rings adjunction (Tag 008A), `Hom_{O_X}(P_g G, F)` is
-  `Hom_{g⁻¹O_Y}(g⁻¹G, F)` via `u ↦ (m ↦ u(1 ⊗ m))`. By the inverse-image/direct-image module
-  adjunction (Tag 008Y) this is `Hom_{O_Y}(G, g_* F)`, where `O_Y` acts on `g_* F` through `ρ ∘
-  η_{O_Y}`. Since `ρ` is adjoint to `g^♯`, `ρ_{g⁻¹V} ∘ η_{O_Y,V} = g^♯_V`, so this is the
-  pushforward module. The composite bijection is natural in both modules, and its unit is the stated
-  sectionwise formula.
+* Stacks Project, Tags 008A, 008X, 008Y, 0095 and 0096.
 -/
 
 @[expose] public section

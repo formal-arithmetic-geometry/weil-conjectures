@@ -12,7 +12,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 import WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 
-/-! Relative coefficient-dual finiteness and biduality. -/
+/-! # Relative coefficient-dual finiteness and biduality -/
 
 @[expose] public section
 
@@ -27,7 +27,7 @@ open Scheme _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory in
 attribute [local instance 20000] Etale.sheafBraidedCategory in
-/-- Dualizability in the derived monoidal structure, at generic coefficients.. -/
+/-- Dualizability in the derived monoidal structure, at generic coefficients. -/
 def smoothRelativeDualizable
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -35,7 +35,7 @@ def smoothRelativeDualizable
     (X : Scheme.{u}) (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   IsDualizable N
 
-/-- The explicitly constructed relative internal dual.. -/
+/-- The explicitly constructed relative internal dual. -/
 @[irreducible]
 noncomputable def smoothRelativeDual
     (A : Type uA) [Category.{u + 1} A] [Abelian A]

@@ -21,7 +21,7 @@ right-adjoint composition comparison, and by the given overlap map on the U side
 
 ## References
 
-* Stacks Project, Tag 08DG, lemma `glue` in `cohomology.tex`.
+* Stacks Project, Tag 08DG.
 -/
 
 @[expose] public noncomputable section

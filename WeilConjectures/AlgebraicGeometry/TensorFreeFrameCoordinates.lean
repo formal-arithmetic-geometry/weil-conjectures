@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 
 ## References
 
-* Stacks Project, Tag 0GKU, proof of.
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section

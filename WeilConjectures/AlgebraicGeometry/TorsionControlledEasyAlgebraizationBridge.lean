@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import WeilConjectures.AlgebraicGeometry.TorsionControlledAffineAlgebraization
 import WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationDescent
 
-/-! A bridge from componentwise annihilation to torsion-controlled algebraization.
+/-! # A bridge from componentwise annihilation to torsion-controlled algebraization
 
 ## References
 

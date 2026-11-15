@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
-/-! Natural comparison transformation for the derived stalk extension.
+/-! # Natural comparison transformation for the derived stalk extension
 
 ## References
 

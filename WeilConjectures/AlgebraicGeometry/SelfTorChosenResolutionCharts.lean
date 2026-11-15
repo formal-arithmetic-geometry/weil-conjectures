@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 ## References
 
-* Stacks Project, Tags 06YH, 06YG and 00LS.
 * Stacks Project, Tags 06YH, 06YG, 00LS and 01I6.
 -/
 

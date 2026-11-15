@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 ## References
 
-* Stacks Project, Proposition 0BXD, final paragraph.
+* Stacks Project, Proposition 0BXD.
 -/
 
 @[expose] public section

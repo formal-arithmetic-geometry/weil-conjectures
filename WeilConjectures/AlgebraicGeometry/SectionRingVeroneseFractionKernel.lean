@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseNumeratorTransition
 
 ## References
 
-* Stacks Project, Properties, equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese
-  localization in the proof of Lemma 01Q1.
+* Stacks Project, Properties, Tag 0B5L, Lemma 01PW(2) and Lemma 01Q1.
 -/
 
 @[expose] public section

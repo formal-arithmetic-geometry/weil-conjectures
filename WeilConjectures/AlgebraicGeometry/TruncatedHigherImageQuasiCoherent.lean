@@ -27,10 +27,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 ## References
 
-* Stacks Project, Tag 08D5, bounded-below paragraph, and Tag 015J.
-* Stacks Project, Tag 08D5, proof of part (1), bounded-below paragraph; Tag 015J supplies the
-  bounded-below hypercohomology spectral sequence, and Tag 01XJ, part (1), supplies quasi-coherence
-  of ordinary higher direct images.
+* Stacks Project, Tags 08D5 (1), 015J and 01XJ (1).
 -/
 
 @[expose] public section

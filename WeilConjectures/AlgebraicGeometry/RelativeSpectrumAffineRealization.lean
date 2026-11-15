@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeSpectrumStructureAlgebra
 
 ## References
 
-* Stacks Project, Constructions, Lemmas 01LP and 01LV.
 * Stacks Project, Constructions, Lemmas 01LP and 01LV, Lemma 01LX (1), (3).
 -/
 

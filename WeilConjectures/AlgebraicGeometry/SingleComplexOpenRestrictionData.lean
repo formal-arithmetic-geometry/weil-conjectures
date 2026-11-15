@@ -13,13 +13,14 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Canonical open pullback and restricted coefficient data
 
-These are the unchanged constructions formerly in SingleComplexOpenRestrictionComparison.
-They are isolated here so independent compatibility calculations can import them without a cycle.
+## Implementation details
+
+These constructions are isolated in their own file so that independent compatibility
+calculations can import them without an import cycle.
 
 ## References
 
-* Stacks Project, Tag 0DJ9, first paragraph; Tag 08HY, counit description.
-* Stacks Project, Tag 08DW, restriction of derived pullback.
+* Stacks Project, Tags 08DW, 08HY and 0DJ9.
 -/
 
 @[expose] public section

@@ -18,9 +18,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 ## References
 
-* Stacks Project, Tags 0BDL and 08CR, second proof.
-* Stacks Project, Tag 0BDL, zero-matrix chart; Tag 08CR, second proof, and Tag 0D5S, composition of
-  derived pullbacks.
+* Stacks Project, Tags 0BDL, 08CR and 0D5S.
 -/
 
 @[expose] public section

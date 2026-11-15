@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RectangleOrdinaryGeometricDirect
 
 ## References
 
-* Stacks Project, Tag 0ATR, Lemma 48.5.2.
 * Stacks Project, Tags 0ATR, 08HY, 0ATM and 0D5S.
 -/
 

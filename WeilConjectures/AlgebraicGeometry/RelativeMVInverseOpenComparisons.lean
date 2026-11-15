@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVInverseOpenMate
 
 ## References
 
-* Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY.
 * Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories of Schemes, Tag 0DJ9, the
   open vertices of the induction diagram.
 -/

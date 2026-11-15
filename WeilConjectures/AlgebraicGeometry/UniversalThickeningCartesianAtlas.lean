@@ -15,8 +15,7 @@ import Mathlib.AlgebraicGeometry.Gluing
 
 ## References
 
-* Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3), paragraph beginning "Choose
-  an affine open covering".
+* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3).
 -/
 
 @[expose] public section

@@ -19,7 +19,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 ## References
 
-* Stacks Project, Tag 08DQ, proof of; Tag 08DM, the bounded Hom calculation.
+* Stacks Project, Tags 08DQ and 08DM.
 -/
 
 @[expose] public section

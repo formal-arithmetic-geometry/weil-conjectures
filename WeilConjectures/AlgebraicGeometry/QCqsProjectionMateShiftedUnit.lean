@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 ## References
 
-* Stacks Project, Tag 08EU, final sentence of the proof.
+* Stacks Project, Tag 08EU.
 -/
 
 @[expose] public section

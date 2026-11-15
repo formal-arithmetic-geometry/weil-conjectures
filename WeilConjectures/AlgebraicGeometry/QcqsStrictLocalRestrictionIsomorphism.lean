@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective
 
 ## References
 
-* Stacks Project, Tag 03Q9, degree zero and canonical restriction maps.
 * Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
 -/
 

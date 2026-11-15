@@ -12,9 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleMaps
 
 ## References
 
-* Stacks Project, Tags 09Z1 and 0EZM.
-* Stacks Project, Tag 09Z1 proof (restriction to an affine etale object), and Tag 03CB inverse-image
-  composition comparisons.
+* Stacks Project, Tags 09Z1, 0EZM and 03CB.
 -/
 
 @[expose] public section

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalDerivedExchangeGlobalSection
 
 ## References
 
-* Stacks Project, Tag 03Q9, final injective-complex paragraph.
+* Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section

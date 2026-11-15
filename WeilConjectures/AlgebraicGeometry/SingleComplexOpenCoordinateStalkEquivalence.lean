@@ -15,17 +15,13 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCoordinateStalkTransportData
 
-/-! # Stalkwise conjugacy for transported open coordinates.
+/-! # Stalkwise conjugacy for transported open coordinates
 
-The proof is the termwise stalk calculation: open-immersion stalk isomorphisms
-identify the four local rings and complexes, and naturality of tensor extension,
-homology, and the representing map conjugates the two comparison arrows.
+The two comparison arrows for transported open coordinates are conjugate on stalks.
 
 ## References
 
-* Stacks Project, Tag 0DJ9, localization calculation.
-* Stacks Project, equation-bc preceding Tag 0DJ8 and Tag 0DJ9, first paragraph;
-  Tags 08HY and 08FE.
+* Stacks Project, Tags 0DJ8, 0DJ9, 08HY and 08FE.
 -/
 
 @[expose] public section

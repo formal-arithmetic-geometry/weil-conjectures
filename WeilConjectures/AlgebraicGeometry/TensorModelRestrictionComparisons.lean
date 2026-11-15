@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence
 
 ## References
 
-* Stacks Project, Tags 08DJ and 08DL.
 * Stacks Project, Tags 08DJ and 08DL, and Tag 06YH.
 -/
 

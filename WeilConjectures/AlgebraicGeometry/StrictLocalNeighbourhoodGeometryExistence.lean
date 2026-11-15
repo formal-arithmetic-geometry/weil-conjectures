@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 ## References
 
-* Stacks Project, Tag 03Q9, first proof paragraph.
+* Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section

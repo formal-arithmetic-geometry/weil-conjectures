@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 ## References
 
-* Stacks Project, Tags 01N8 and 01NK, uniqueness arguments, and Tag 01CY.
+* Stacks Project, Tags 01N8, 01NK and 01CY.
 -/
 
 @[expose] public section

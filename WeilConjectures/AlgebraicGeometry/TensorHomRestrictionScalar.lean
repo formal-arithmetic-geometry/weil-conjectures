@@ -15,7 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 ## References
 
-* Stacks Project, Modules, Tag 01CN and Tag 01YB, tensor-Hom paragraph.
+* Stacks Project, Modules, Tags 01CN and 01YB.
 -/
 
 @[expose] public section

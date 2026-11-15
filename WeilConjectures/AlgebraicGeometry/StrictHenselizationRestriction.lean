@@ -30,12 +30,7 @@ for that unique `r`.
 
 ## References
 
-* Stacks, Tag 03Q9, its restriction construction.
-* Stacks, Tag 03QO (strictly henselian local schemes have exact global sections). Proof: the pointed
-  étale neighbourhood colimit is the strict henselian local ring (Stacks, used in 03Q9). Every étale
-  covering of its closed point has a section over this strictly henselian local scheme. Thus a
-  locally surjective map of sheaves is surjective on global sections. The global sections functor is
-  already left exact, so it preserves finite colimits.
+* Stacks Project, Tags 03Q9 and 03QO.
 -/
 
 @[expose] public section
@@ -271,7 +266,7 @@ noncomputable def strictHenselizationLerayHomologyIso
 inverse image with cohomology, apply the derived base-change mate `g⁻¹ Rf_* ⟶ Rf'_* p⁻¹`
 (the mate of the pullback-square comparison under the derived adjunctions), then the exact
 global sections and Leray isomorphism. The canonical restriction
-`ρ^q : (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` of the node is `r ≫` this map, for the unique
+`ρ^q : (R^q f_* F)_s ⟶ H^q(X ×_S S_(s), p⁻¹F)` is `r ≫` this map, for the unique
 `r` with `IsStrictHenselizationStalkRestriction s (R^q f_* F) r`. -/
 noncomputable def strictHenselizationCohomologyComparison
     {X : Scheme.{v}} (f : X ⟶ S)

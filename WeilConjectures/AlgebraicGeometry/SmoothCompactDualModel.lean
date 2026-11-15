@@ -37,7 +37,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
   CategoryTheory.Functor.rightDerivedFunctor
 
 /-- The total derived inverse image, with coefficient parameters kept generic.
-This is definitionally `L(upperStar A v)`.. -/
+This is definitionally `L(upperStar A v)`. -/
 noncomputable abbrev smoothCompactPullback
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]

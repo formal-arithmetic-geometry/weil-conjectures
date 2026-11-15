@@ -22,9 +22,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 ## References
 
-* Stacks Project, Tag 01YH, proof, the sentence "By (3)(c) we see that r = 1.".
-* Stacks Project, Tag 01YH, proof, the first ideal inclusion and the rank-one calculation using Tag
-  01YE.
+* Stacks Project, Tags 01YH and 01YE.
 -/
 
 @[expose] public section

@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 ## References
 
-* Stacks Project, Tag 055Q, last two paragraphs, using Tag 055J.
+* Stacks Project, Tag 055Q, using Tag 055J.
 -/
 
 @[expose] public section

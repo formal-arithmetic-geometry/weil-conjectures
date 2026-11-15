@@ -15,9 +15,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquare
 
 ## References
 
-* Stacks Project, Tags 08FE and 08HY.
-* Stacks Project, Tag 08FE, the sectionwise identity in its proof; Tag 08HY, the adjoint
-  construction of the base-change map; Tag 0D5S, composition of pullbacks.
+* Stacks Project, Tags 08FE, 08HY and 0D5S.
 -/
 
 @[expose] public section

@@ -37,7 +37,7 @@ attribute [local implicit_reducible] EtaleGraphPresentation.functor
   derivedTensorRightDerivedLowerShriek
   rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
 
-/-- The specified graph compositor intertwines the forward compactification projections.. -/
+/-- The specified graph compositor intertwines the forward compactification projections. -/
 theorem sfEtaleCompactProjectionForward_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

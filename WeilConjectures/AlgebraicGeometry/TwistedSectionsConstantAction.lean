@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 ## References
 
-* Stacks Project, Lemma 01YS, proof of (5); homogeneous fraction construction of the twisting sheaf,
-  Tag 01M6.
+* Stacks Project, Lemma 01YS (5) and Tag 01M6.
 -/
 
 @[expose] public section

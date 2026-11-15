@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.TensorStalkChainCoordinates
 
 ## References
 
-* Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
 * Stacks Project, Tag 0DJA(1), the tensor-transitivity computation of Tag 0BYJ, with
   equation-bc before Tag 0DJ8 and the canonical tensor equation.
 -/

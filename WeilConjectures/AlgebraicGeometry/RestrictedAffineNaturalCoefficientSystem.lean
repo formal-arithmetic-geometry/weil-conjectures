@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomologyMapFormula
 
 ## References
 
-* Stacks Project, Tag 09Z1 proof and Tag 0EZM.
+* Stacks Project, Tags 09Z1 and 0EZM.
 -/
 
 @[expose] public section

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport
 
 ## References
 
-* Stacks Project, Tag 03Q9.
 * Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
 -/
 

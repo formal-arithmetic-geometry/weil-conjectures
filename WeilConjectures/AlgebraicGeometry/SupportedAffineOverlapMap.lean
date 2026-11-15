@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 ## References
 
-* Stacks Project, Tag 09IM, the construction on the affine member before gluing.
-* Stacks Project, Tag 09IM, first two-open paragraph, Tags 08EK and 08EH.
+* Stacks Project, Tags 09IM, 08EK and 08EH.
 -/
 
 @[expose] public section

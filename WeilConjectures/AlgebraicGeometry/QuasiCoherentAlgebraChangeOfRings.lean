@@ -29,7 +29,7 @@ have the scalar factor first (`C(W) ⊗[B(W)] P(W)`). This is the usual tensor p
 
 ## References
 
-* Stacks Project, Morphisms, proof of Lemma 01SB; Schemes, Lemma 01I8 (1) and Section 01LA.
+* Stacks Project, Morphisms, Lemma 01SB; Schemes, Lemma 01I8 (1) and Section 01LA.
 -/
 
 @[expose] public section

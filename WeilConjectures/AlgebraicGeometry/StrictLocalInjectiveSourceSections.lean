@@ -24,7 +24,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 ## References
 
-* Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
+* Stacks Project, Tags 03Q8 and 03Q9.
 -/
 
 @[expose] public section

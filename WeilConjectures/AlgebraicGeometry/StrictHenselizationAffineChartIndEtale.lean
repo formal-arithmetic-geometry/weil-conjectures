@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesColimit
 
 ## References
 
-* Stacks Project, Tag 04HX, proof, and Tags 04GW and 04GP.
+* Stacks Project, Tags 04HX, 04GW and 04GP.
 -/
 
 @[expose] public section

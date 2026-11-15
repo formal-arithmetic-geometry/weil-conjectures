@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 
 ## References
 
-* Stacks Project, Properties, Lemma 01PW, proof of part (2).
+* Stacks Project, Properties, Lemma 01PW(2).
 -/
 
 @[expose] public section

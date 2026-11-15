@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 ## References
 
-* Stacks Project, Tag 0559 (second proof); Tags 051T and 052A.
+* Stacks Project, Tags 0559, 051T and 052A.
 -/
 
 @[expose] public section

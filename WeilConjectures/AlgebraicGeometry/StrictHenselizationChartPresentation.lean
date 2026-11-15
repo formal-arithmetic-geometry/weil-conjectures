@@ -19,12 +19,14 @@ Let `i : Spec R ⟶ S` be an open immersion and `xR : Spec Ω ⟶ Spec R` a geom
 algebraically closed. The strict henselization of `S` at `xR ≫ i` is the ring-theoretic strict
 henselization (`Algebra.IsStrictHenselization`) of the local ring `R_q` of `R` at the image `q`
 of `xR`, compatibly with a ring map `ρ : R ⟶ 𝒪^{sh}_{S, xR ≫ i}` such that `Spec ρ ≫ i` is the
-structure map of the strict localization (Stacks, Tag 04HX).
+structure map of the strict localization.
 
 This is the chart version of
-`AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation`; the proof is that of the
-private chart lemma of `WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation`,
-made available here for a non-affine `S`.
+`AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation`, for a non-affine `S`.
+
+## References
+
+* Stacks Project, Tag 04HX.
 -/
 
 @[expose] public section

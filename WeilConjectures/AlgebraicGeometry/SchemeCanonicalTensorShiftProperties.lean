@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShiftRightUnitor
 
 ## References
 
-* Stacks Project, Tag 06YH and the Koszul unitor identity.
 * Stacks Tag 06YH; total-complex shift/unitor calculation used in Tag 08EU.
 -/
 @[expose] public section

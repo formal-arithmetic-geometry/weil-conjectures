@@ -12,15 +12,12 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.ClosedPointDimensionLocalRing
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-/-! Auxiliary reductions for rational point local dimension base change.
+/-!
+# Auxiliary reductions for base change of local dimension at rational points
 
 ## References
 
-* Stacks Project, Lemma 10.114.6, Tag 00OU, applied on an affine open chart. Proof: A section over
-  the one-point scheme Spec k is a closed immersion, so its image x is closed. Choose an affine open
-  immersion a : Spec R -> X whose image contains x, and write x = a(z). Since a is injective and
-  continuous, z is closed and its prime ideal is maximal. The composite a followed by f is locally
-  of finite type.
+* Stacks Project, Lemma 10.114.6 (Tag 00OU).
 -/
 
 @[expose] public section

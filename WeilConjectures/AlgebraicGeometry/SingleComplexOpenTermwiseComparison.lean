@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseCounitCompatib
 
 ## References
 
-* Stacks Project, Tag 0DJ9 first paragraph and equation-bc preceding Tag 0DJ8;
-  Tags 08HY and 08FE.
+* Stacks Project, Tags 0DJ9, 0DJ8, 08HY and 08FE.
 -/
 
 @[expose] public section

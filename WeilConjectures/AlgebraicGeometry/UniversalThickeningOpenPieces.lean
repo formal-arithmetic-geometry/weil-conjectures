@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 
 ## References
 
-* Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3), the general remarks preceding
-  the affine case.
+* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3).
 -/
 
 @[expose] public section

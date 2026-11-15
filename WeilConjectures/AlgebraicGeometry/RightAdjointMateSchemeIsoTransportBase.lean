@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 ## References
 
-* Stacks Project, Duality for Schemes, Tag 0ATR.
 * Stacks Project, Duality for Schemes, Tag 0ATR, Lemma 48.5.2, and Tag 0E9S, invariance under the
   cartesian restriction identification.
 -/

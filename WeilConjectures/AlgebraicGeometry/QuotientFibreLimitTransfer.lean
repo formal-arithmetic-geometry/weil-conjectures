@@ -16,9 +16,7 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 ## References
 
-* Stacks Project, Tags 0GS2 and 0A0P.
-* Stacks Project, Tag 0GS2, General case, the quotient-ring and closed-fibre limit paragraphs; Tags
-  01YW and 01YX for affine inverse limits.
+* Stacks Project, Tags 0GS2, 0A0P, 01YW and 01YX.
 -/
 
 @[expose] public section

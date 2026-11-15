@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionFormulas
 
 ## References
 
-* Stacks Project, Tag 03Q9, the neighbourhood-colimit construction and the injective-complex
-  restriction maps in its final proof paragraph.
-* Stacks Project, Tag 03Q9, proof paragraphs 1 and 3; Tag 03Q8.
+* Stacks Project, Tags 03Q9 and 03Q8.
 -/
 
 @[expose] public section

@@ -19,7 +19,7 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 ## References
 
-* Stacks Project, More on Algebra, Tag 07M7, first paragraph.
+* Stacks Project, More on Algebra, Tag 07M7.
 -/
 
 @[expose] public section

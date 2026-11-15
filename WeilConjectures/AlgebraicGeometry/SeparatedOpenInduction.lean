@@ -13,8 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 ## References
 
-* Stacks Project, Cohomology of Schemes, Lemma 08DR, proof, first induction for separated
-  quasi-compact opens.
+* Stacks Project, Cohomology of Schemes, Tag 08DR.
 -/
 
 @[expose] public section

@@ -11,9 +11,7 @@ import WeilConjectures.AlgebraicGeometry.RingCechConeDifferential
 
 ## References
 
-* Stacks Project, section-alternating-cech.
-* Stacks Project, section-alternating-cech, its differential formula and
-  localization base change; Tag 0996.
+* Stacks Project, Section on alternating Čech complexes; Tag 0996.
 -/
 
 @[expose] public noncomputable section

@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonNor
 
 ## References
 
-* Stacks Project, Cohomology, Tag 0FKU.
 * Stacks Project, Cohomology, Tags 01DZ and 0FKU (Lemma 20.31.1).
 -/
 

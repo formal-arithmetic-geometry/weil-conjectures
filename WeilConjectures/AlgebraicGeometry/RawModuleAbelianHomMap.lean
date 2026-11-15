@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalC
 
 ## References
 
-* Stacks Project, Tag 03FD, and the free represented sections adjunction.
 * Stacks Project, Tag 03FD, and Tags 03D3 and 03D7.
 -/
 

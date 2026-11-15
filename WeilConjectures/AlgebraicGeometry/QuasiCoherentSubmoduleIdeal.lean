@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 ## References
 
-* Stacks Project, Tag 01XF, coordinate-filtration paragraph.
+* Stacks Project, Tag 01XF.
 -/
 
 @[expose] public section

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractionsFormula
 
 ## References
 
-* Stacks Project, Properties, Tag 0B5L (equation module-invert-s), Lemma 01PW(2), and the proof of
-  Lemma 01Q1.
+* Stacks Project, Properties, Tag 0B5L and Lemmas 01PW (2) and 01Q1.
 -/
 
 @[expose] public section

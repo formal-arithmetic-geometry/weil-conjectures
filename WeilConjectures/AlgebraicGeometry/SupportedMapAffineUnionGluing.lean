@@ -17,8 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 ## References
 
-* Stacks Project, Tag 09IM, two-open construction before ambient extension.
-* Stacks Project, Tag 09IM, proof assuming a two-open cover, using Tags 08EK, 08EH, and 08DG.
+* Stacks Project, Tags 09IM, 08EK, 08EH and 08DG.
 -/
 
 @[expose] public section

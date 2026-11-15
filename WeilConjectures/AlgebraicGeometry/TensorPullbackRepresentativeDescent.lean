@@ -10,11 +10,7 @@ public import Mathlib.CategoryTheory.Localization.Prod
 
 ## References
 
-* Stacks Project, Categories, Tag 04VK; Cohomology on Sites, Tag 07A4. Proof: on the product of
-  representative categories compose the inverse source tensor identification, the comparison on the
-  tensor, the chain tensor comparison, the target tensor identification, and the inverse comparisons
-  on each factor. Fully faithful restriction lifts this natural isomorphism. Cancel the source
-  tensor identification and the two factor comparisons to prove the square and uniqueness.
+* Stacks Project, Categories, Tag 04VK; Cohomology on Sites, Tag 07A4.
 -/
 
 @[expose] public section

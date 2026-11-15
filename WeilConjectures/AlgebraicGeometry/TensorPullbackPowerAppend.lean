@@ -13,16 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 
 ## References
 
-* Stacks Project, Tag 01CD, functorial pullback of tensor products.
-* Stacks Project, Tag 01CD, the functorial tensor comparison, with its associator and unit
-  coherence; Tag 09MS, the tensor powers in coherent-equation-ses. Proof: Use the proved private
-  pullback_power_add of BoundaryCoefficientDegreeSplit at exponents e and 1. Transport the monoidal
-  structure across boundaryPullbackComparison and use pullback_monoidal_unit_comparison to identify
-  the degree-zero inverse comparison with the transported unit map. Monoidal right unitality then
-  identifies the inverse right unitor followed by the degree-one inverse comparison with the
-  pullback of the inverse right unitor of B. Precompose the required equation with the invertible
-  degree-e comparison tensored with the identity of the final factor. Tensorator naturality moves
-  the appended inverse right unitor through pullback.
+* Stacks Project, Tags 01CD and 09MS.
 -/
 
 @[expose] public section

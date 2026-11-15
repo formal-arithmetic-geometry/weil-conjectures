@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNatura
 
 ## References
 
-* Stacks Project, Tag 03Q8 and its cited restriction lemmas.
 * Stacks Project, Tag 03Q8; Cohomology on Sites, the restriction arguments in Tags 072W and 0BKV
   (Lemmas 21.7.4 and 21.20.3).
 -/

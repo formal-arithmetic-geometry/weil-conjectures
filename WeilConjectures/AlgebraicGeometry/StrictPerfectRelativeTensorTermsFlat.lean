@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 ## References
 
-* Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
 * Stacks Project, Tags 0DJQ and 08CI, local relative Tor calculation; Tag 05NE, flatness detected on
   stalks.
 -/

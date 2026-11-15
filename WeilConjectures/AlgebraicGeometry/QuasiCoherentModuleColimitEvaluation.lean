@@ -16,7 +16,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 ## References
 
-* Stacks Project, Schemes, Lemma 01ID and Section 26.24, item (4).
 * Stacks Project, Schemes, Lemma 01ID and Lemma 01I7.
 -/
 

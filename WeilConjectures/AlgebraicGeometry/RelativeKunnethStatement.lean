@@ -26,7 +26,7 @@ compact-support product after restriction to closed subschemes.
 
 Every comparison in `relativeKunnethBaseChangeCompatibility` is a canonical comparison; no
 auxiliary map is chosen. `relativeKunnethExteriorPullbackIso` is the explicit
-pullback-composition/tensor comparison occurring in the proof of
+pullback-composition/tensor comparison also used in
 `nonempty_iso_leftDerivedUpperStar_externalProduct`, with no choice from `Nonempty`.
 -/
 

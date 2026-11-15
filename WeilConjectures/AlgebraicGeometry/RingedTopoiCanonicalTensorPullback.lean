@@ -26,15 +26,9 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonConstruction
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E; Modules on Sites, Tag 03EL.
-* Stacks 07A4 and Modules on Sites 03D7. Proof: each inverse ordinary comparison is invertible. The
-  adjunction identifies maps out of a pulled-back coproduct with families of maps out of the
-  pulled-back summands, so its coproduct comparison is invertible. Each degree of beta is the
-  composite of these two isomorphisms. A degreewise isomorphism of complexes is an isomorphism of
-  complexes.
-* Stacks 06YY and 07A4.
-* Stacks 03EK. Proof: the additive tensorLeft and tensorRight functors of MonoidalFree give the four
-  zero and addition laws of MonoidalPreadditive. Assemble those four laws.
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E.
+* Stacks Project, Modules on Sites, Tags 03D7 and 03EL.
+* Stacks Project, Tags 03EK and 06YY.
 -/
 
 @[expose] public section

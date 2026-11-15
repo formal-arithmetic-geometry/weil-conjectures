@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 
 ## References
 
-* Stacks Project, Algebra, proof of Tag 07RI.
+* Stacks Project, Algebra, Tag 07RI.
 -/
 
 @[expose] public section

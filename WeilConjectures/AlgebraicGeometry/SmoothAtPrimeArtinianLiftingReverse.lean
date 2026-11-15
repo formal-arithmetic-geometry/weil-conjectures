@@ -22,11 +22,10 @@ of Artinian local rings at a prime `q`, then it is smooth on an open neighbourho
 
 ## Implementation details
 
-The proof uses the localized polynomial presentation, conormal splitting modulo the maximal ideal,
-and Mathlib's local finite-free residue-field splitting criterion, which gives formal smoothness
-of the localization and a smooth principal open neighbourhood. The private helper transports the
-quotient retraction through the tensor/quotient equivalences; only reduction modulo the maximal
-ideal is needed.
+The formalisation goes through the localized polynomial presentation and Mathlib's local
+finite-free residue-field splitting criterion. The private helper transports the quotient
+retraction through the tensor/quotient equivalences; only reduction modulo the maximal ideal is
+needed.
 
 ## References
 

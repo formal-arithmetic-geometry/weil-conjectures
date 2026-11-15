@@ -17,17 +17,7 @@ import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
 
 ## References
 
-* Stacks Project, Tag 0559, second proof, reduction and inseparable extension.
-* Stacks Project, Tag 0559, second proof, reductions through the finite purely inseparable
-  extension; Tags 051T and 052A. Proof: the nonempty generic fibre implies that the generic point
-  belongs to V. Factor through V and reduce source and base. Reduction preserves geometric fibre
-  spaces, and an irreducible reduced base is integral. Apply generic flat finite presentation and
-  shrink to a principal open, whose inverse image in the affine source is affine. The reduced flat
-  source embeds in its generic fibre, a domain. Let K be the base fraction field and L the fraction
-  field of the generic fibre. A finite purely inseparable K'/K makes the reduced tensor product of L
-  with K' separably generated. For each generator b with b^q=a/d, replace b by db, whose q-th power
-  is a*d^(q-1). Adjoin these scaled generators to the base ring. This finite integral radicial
-  domain has fraction field K'.
+* Stacks Project, Tags 0559, 051T and 052A.
 -/
 
 @[expose] public section

@@ -17,17 +17,7 @@ import WeilConjectures.AlgebraicGeometry.GenericPointedClopenFibres
 
 ## References
 
-* Stacks Project, Tag 055N, using Tag 055M.
-* Stacks Project, Tag 055N, proof, using Tag 055M. Proof: give the closure of y its reduced closed
-  subscheme structure. Base change the morphism and section to this integral scheme; Tag 055M
-  identifies the section locus with the inverse image of the original locus. The generic fibre is a
-  finite type scheme over a field, hence noetherian. Its section component and its complement are
-  clopen. Take their closures in the total space. Tag 054Y permits shrinking the integral base so
-  these two closures cover the total space; Tag 054W permits further shrinking to make their
-  intersection empty. The first closure is now clopen. Its generic fibre is connected and has the
-  rational point supplied by the section, so it is geometrically connected by Tag 04KV. Tag 055G
-  permits shrinking the base again so that all its fibres are geometrically connected. Intersect
-  also with the inverse image under the section of the first closure.
+* Stacks Project, Tags 055N, 055M, 054Y, 054W, 04KV and 055G.
 -/
 
 @[expose] public section

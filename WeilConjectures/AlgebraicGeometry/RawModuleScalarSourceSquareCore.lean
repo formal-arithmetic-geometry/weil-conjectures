@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! Generic derived source-square calculation used by the scalar source square.
+/-! # Generic derived source-square calculation used by the scalar source square
 
 The theorem is the generic part of the single-complex argument: it packages
 the compatibility of the three derived composition comparisons with arbitrary

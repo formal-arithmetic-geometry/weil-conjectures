@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenSquareCompariso
 
 ## References
 
-* Stacks Project, Tag 0D5S, and Tag 0DJ9, first paragraph.
+* Stacks Project, Tags 0D5S and 0DJ9.
 -/
 
 @[expose] public section

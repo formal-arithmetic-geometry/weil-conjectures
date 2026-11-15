@@ -16,22 +16,8 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVSESPresentation
 
 ## References
 
-* Stacks Project, Cohomology, Tags 08HY and 08HZ.
-* Stacks Project, Cohomology, Tags 08BV and 08HZ; Tag 0DJ9, induction diagram. Proof: The qcqs
-  morphisms f and its base change over the affine bases have qcqs sources. The base change g' of the
-  affine morphism g is affine. Its inverse images of U, V and their overlap are quasi-compact. Use
-  the functorial K-injective Mayer--Vietoris construction for these two covers. Identify exact open
-  restriction with derived pullback by its derived universal property and the canonical underived
-  open-pullback comparison. Identify composite direct images by the right-adjoint mates of the same
-  pinned pullback composition comparisons. Thus the first two maps become exactly
-  relativeMVSourceFirst/Second and relativeMVTargetFirst/Second. Apply the triangulated functors Lg*
-  Rf* and Rf'* and transport the boundaries as well as the first two arrows along these comparisons
-  and the additive biproduct comparisons. This proves the two distinguishedness claims. Transpose
-  the object map under Lg'* adjoint to Rg'*. Functoriality of the K-injective short-exact-sequence
-  boundary, and compatibility of this construction with direct image, give its boundary square.
-  Transpose back using the shift-compatible derived adjunction. The mates calculation of Tag 08HY
-  and associativity of pullback composition identify the overlap component with the specified local
-  arrow, including the equality transport of the pullback projections.
+* Stacks Project, Cohomology, Tags 08BV, 08HY and 08HZ.
+* Stacks Project, Tag 0DJ9.
 -/
 
 @[expose] public section

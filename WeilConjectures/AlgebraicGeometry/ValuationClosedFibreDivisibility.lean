@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ValuationClosedFibreSectionDivisible
 
 ## References
 
-* Stacks Project, More on Morphisms, Tag 0EX8, general-case proof, second paragraph.
+* Stacks Project, More on Morphisms, Tag 0EX8.
 -/
 
 @[expose] public section

@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Flat.Localization
 
 ## References
 
-* Stacks Project, Tag 0A6R, and the finite localization calculation in its proof.
+* Stacks Project, Tag 0A6R.
 -/
 
 @[expose] public section

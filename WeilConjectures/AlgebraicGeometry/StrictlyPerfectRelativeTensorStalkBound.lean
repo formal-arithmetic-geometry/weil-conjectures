@@ -27,8 +27,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Tag 0B6G, verification of condition (3), and Cohomology of Sheaves, Tags 08CG,
-  09U9, and 06YB.
 * Stacks Project, Tag 0B6G, condition (3); Cohomology of Sheaves, Tags 08CG, 09U9, and 06YB; More on
   Algebra, Tag 064L.
 -/

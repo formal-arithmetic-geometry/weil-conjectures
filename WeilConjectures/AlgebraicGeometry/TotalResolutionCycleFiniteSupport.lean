@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 ## References
 
-* Stacks Project, Homology, Tag 09IZ, proof, finite-support representation.
+* Stacks Project, Homology, Tag 09IZ.
 -/
 
 @[expose] public section

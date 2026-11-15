@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionCoherence
 
 /-! # Exceptional tensor maps under composition and etale restriction
 
-proof.md`, paragraph 3
-.
-
 All categories are ordinary unbounded etale module derived categories. We use
 supplied compactifications and the graph-normalized compositor, with no qc or
 Noetherian hypotheses. The exact inverse image is represented by its canonically

@@ -14,17 +14,7 @@ public import Mathlib.Algebra.Homology.Single
 
 ## References
 
-* Stacks Project, Tag 09M1, proof, first paragraph.
-* Stacks Project, Tag 09M1, proof, first paragraph, and Tag 0B6A. Proof: For a complex J, a chain
-  map from O_X[0] is an O_X-linear morphism O_X to J^0 whose composite with d^0 is zero. Evaluate at
-  one on the total open. The inverse takes a global cycle z to the morphism whose value on an open U
-  at r is r times the restriction of z to U. Naturality and linearity give inverse additive maps.
-  The identical cycle z determines the A-linear chain map from A[0] to the termwise global-sections
-  complex. A homotopy between two maps on either side is a degree minus one section t with d(t)
-  equal to the difference of the degree zero cycles. Thus evaluation and its inverse identify the
-  homotopy relations, and descend to inverse additive maps on the quotient. Postcomposition with a
-  chain map sends z to its degree zero image, so commutes with evaluation. Every morphism in the
-  homotopy category has a chain-map representative.
+* Stacks Project, Tags 09M1 and 0B6A.
 -/
 
 @[expose] public section

@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.SymmetricAlgebraSmooth
 
 ## References
 
-* Stacks Project, More on Algebra, Tag 07M7, first paragraph.
+* Stacks Project, More on Algebra, Tag 07M7.
 -/
 @[expose] public section
 universe u

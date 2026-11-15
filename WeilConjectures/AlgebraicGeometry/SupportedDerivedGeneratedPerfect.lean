@@ -15,13 +15,15 @@ import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 
 /-! # Building supported derived objects from a perfect complex
 
+## Implementation details
+
 Coproducts are specified by colimiting cofans, so the statement does not require a chosen
 coproduct instance. Distinguished triangles are taken in the ambient derived category;
 the sequence objects lie in its full quasi-coherent subcategory.
 
 ## References
 
-* Stacks Project, proof of Lemma 48.4.3(3) (Tag 0E4G), using Lemmas 36.15.4 (Tag 0A9A) and 13.37.3
+* Stacks Project, Lemma 48.4.3(3) (Tag 0E4G), using Lemmas 36.15.4 (Tag 0A9A) and 13.37.3
   (Tag 09SN).
 -/
 

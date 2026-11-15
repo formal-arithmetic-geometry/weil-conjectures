@@ -15,9 +15,7 @@ This module constructs that comparison and verifies its unit normalization.
 
 ## References
 
-* Stacks Project, More on Algebra, section-alternating-cech.
-* the tensor comparison and unit step of the localization tensor calculation, Stacks Project, More
-  on Algebra, section-alternating-cech.
+* Stacks Project, More on Algebra, Section on alternating Čech complexes.
 -/
 
 @[expose] public noncomputable section

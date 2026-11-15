@@ -14,10 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 ## References
 
-* Stacks Project, Cohomology of Schemes, Tag 01Y8, proof; Schemes, Tag 01I6 (affine quasi-coherent
-  modules).
-* Stacks Project, Tag 01Y8, proof; the basic-open localization of Tag 01IA and sheaf gluing supply
-  the local-to-global step.
+* Stacks Project, Cohomology of Schemes, Tag 01Y8; Schemes, Tags 01I6 and 01IA.
 -/
 
 @[expose] public section

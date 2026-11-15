@@ -23,7 +23,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Tags 0DJQ and 08CI, the local relative Tor calculation.
 * Stacks Project, Tags 0DJQ, 08CI and 08CG.
 -/
 

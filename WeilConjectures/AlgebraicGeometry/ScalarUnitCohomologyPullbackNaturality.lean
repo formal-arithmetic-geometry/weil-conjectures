@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 ## References
 
-* Stacks Project, Tag 01F7.
 * Stacks Project, Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; Tag 03FD.
 -/
 

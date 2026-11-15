@@ -19,9 +19,7 @@ import WeilConjectures.AlgebraicGeometry.OpenOrdinaryTensorGermTransport
 
 ## References
 
-* Stacks Project, equation-bc before Tag 0DJ8 and Tag 0DJ9.
-* Stacks Project, equation-bc before Tag 0DJ8 and Tag 0DJ9, first paragraph;
-  Tags 08HY and 08FE.
+* Stacks Project, Tags 0DJ8, 0DJ9, 08HY and 08FE.
 -/
 
 @[expose] public section

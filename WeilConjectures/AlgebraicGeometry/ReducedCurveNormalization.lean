@@ -23,8 +23,8 @@ import WeilConjectures.AlgebraicGeometry.Regular
 
 ## References
 
-* Stacks Project, Varieties, Tags 0BXR and 0B8Y, as used in the proof of Etale Cohomology, Tag 0A3Q.
-* Stacks Project, Varieties 0BXR and Morphisms 0BAJ, 01WK, 0CYI, as used in Etale Cohomology 0A3Q.
+* Stacks Project, Varieties, Tags 0BXR and 0B8Y; Morphisms, Tags 0BAJ, 01WK and 0CYI;
+  Étale Cohomology, Tag 0A3Q.
 -/
 
 @[expose] public section

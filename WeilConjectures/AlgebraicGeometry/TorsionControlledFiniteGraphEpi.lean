@@ -16,12 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 
 ## References
 
-* Stacks Project, Tag 0889(1), formal gluing of comparison morphisms.
-* Stacks Project, Tag 0889(1), affine comparison argument using Tag 05EK. Proof: work on an affine
-  open Spec(A), where all coherent sheaves give finite modules. The graph is the kernel of the
-  displayed discrepancy on F ×_H F'. Complete over A. Completion is flat and exact for finite
-  modules over the Noetherian ring A, so the completed graph is this same kernel in the completed
-  pullback. The map x ↦ (x, θ(x)) lies in that kernel, by hθ and its level n+1 component.
+* Stacks Project, Tag 0889(1); Tag 05EK.
 -/
 
 @[expose] public section

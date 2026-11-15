@@ -17,7 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Modules, Lemma 01CP, first paragraph.
+* Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section

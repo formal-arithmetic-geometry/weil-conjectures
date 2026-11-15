@@ -15,7 +15,7 @@ public import Mathlib.Topology.Instances.Discrete
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
-/-! Intermediate geometric facts for zero-dimensional base change.
+/-! # Intermediate geometric facts for zero-dimensional base change
 
 ## References
 

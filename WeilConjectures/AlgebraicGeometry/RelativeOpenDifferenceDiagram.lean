@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 ## References
 
-* Stacks Project, Tag 08DG, the difference arrow and its split restrictions.
 * Stacks Project, Cohomology, Tag 08DG, construction of the difference arrow; Tag 08FE for
   restriction of direct images.
 -/

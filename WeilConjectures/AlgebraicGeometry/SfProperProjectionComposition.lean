@@ -9,8 +9,6 @@ import all WeilConjectures.AlgebraicGeometry.ShriekTensorComposition
 
 /-! # Composition coherence of proper projection maps
 
-.
-
 ## References
 
 * Stacks Project, Tags 0B56 and 0DV0.

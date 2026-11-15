@@ -18,8 +18,8 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 ## References
 
-* Stacks Project, Etale Cohomology, Lemma 0GY0 (label), line 14228, proof.
-* Stacks Project, Cohomology on Sites, Section 01FT and Lemma 01FW, proof.
+* Stacks Project, Étale Cohomology, Lemma 0GY0.
+* Stacks Project, Cohomology on Sites, Section 01FT and Lemma 01FW.
 -/
 
 @[expose] public section

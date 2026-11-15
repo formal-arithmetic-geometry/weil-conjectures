@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 ## References
 
-* Stacks Project, Proposition 0BXD, final paragraph.
+* Stacks Project, Proposition 0BXD.
 -/
 
 @[expose] public section

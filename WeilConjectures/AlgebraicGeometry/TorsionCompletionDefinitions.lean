@@ -20,7 +20,6 @@ The extended ideal is constructed as the kernel of the constant quotient map.
 ## References
 
 * Stacks Project, Tags 099P and 099Q (1), (4), (5).
-* Stacks Tags 03DA, 099Q.
 * Stacks Tags 03DA, 03DJ, 099Q.
 -/
 

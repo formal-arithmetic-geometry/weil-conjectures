@@ -17,10 +17,11 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianStalkExchange
 /-!
 # Exchange on total-space cohomology over strictly henselian bases
 
+The comparison involves total spaces, not closed fibres.
+
 ## References
 
-* Stacks Project, Tags 03QO and 03FD, and the stalk-map calculation in the proof of Tag 095T. This
-  comparison involves total spaces, not closed fibres.
+* Stacks Project, Tags 03QO, 03FD and 095T.
 -/
 
 @[expose] public section

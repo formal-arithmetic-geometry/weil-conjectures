@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms
 
 ## References
 
-* Stacks Project, Tag 03Q9, final injective-complex paragraph.
-* Stacks, Tags 03Q9 and 03QO.
+* Stacks Project, Tags 03Q9 and 03QO.
 -/
 
 @[expose] public section

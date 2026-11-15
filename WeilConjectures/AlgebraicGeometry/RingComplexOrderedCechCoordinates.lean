@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RingComplexOrderedCechSectionCoordinate
 
 ## References
 
-* Stacks Project, Tag 099D(d), Cohomology, ordered Čech complexes.
 * Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
 -/
 

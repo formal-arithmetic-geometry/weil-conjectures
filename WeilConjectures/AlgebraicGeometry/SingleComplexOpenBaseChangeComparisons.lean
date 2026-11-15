@@ -15,9 +15,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 ## References
 
-* Stacks Project, Tags 08FE, 08HY and 0DJ9.
-* Stacks Project, Tags 08FE and 08BS.
-* Stacks Project, Tags 08FE, 0D5S and 0DJ9, first paragraph.
+* Stacks Project, Tags 08FE, 08HY, 08BS, 0D5S and 0DJ9.
 -/
 
 @[expose] public section

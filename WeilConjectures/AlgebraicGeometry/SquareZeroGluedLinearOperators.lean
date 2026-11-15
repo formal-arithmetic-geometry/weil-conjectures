@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.SquareZeroGluedScalarExistsUnique
 
 ## References
 
-* Stacks Project, Cohomology, Lemma 0B8S, first paragraph of the proof.
+* Stacks Project, Cohomology, Lemma 0B8S.
 -/
 
 @[expose] public section

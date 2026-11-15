@@ -15,15 +15,8 @@ public import Mathlib.RingTheory.Localization.BaseChange
 
 ## References
 
-* Stacks Project, section-alternating-cech, and localization base
-  change.
-* Stacks Project, section-alternating-cech.
-* the ordered-subset partition in Stacks Project, section-alternating-cech.
-* Stacks Project, section-alternating-cech, canonical face maps.
-* Stacks Project, localization universal property.
-* Stacks Project, section-alternating-cech, formula (2).
-* Stacks Project, localization base change.
-* Stacks Project, localization base change, and section-alternating-cech.
+* Stacks Project, Section on alternating Čech complexes.
+* Stacks Project, Algebra, universal property of localization and localization base change.
 -/
 
 @[expose] public noncomputable section

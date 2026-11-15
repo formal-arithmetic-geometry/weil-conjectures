@@ -17,9 +17,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 ## References
 
-* Stacks Project, Tag 03Q5, with the colimit preservation and module compatibility used in the proof
-  of Tag 03SA(3).
-* Stacks Project, Tag 03Q5, with Tags 03DB, 03CO and 03D6.
+* Stacks Project, Tags 03Q5, 03SA (3), 03DB, 03CO and 03D6.
 -/
 
 @[expose] public section

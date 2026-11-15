@@ -14,9 +14,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 ## References
 
-* Stacks Project, Tag 03Q9; ILO, Exposé XIII, Proposition 2.3.4, printed p. 198. This is the
-  stalk-comparison part of the independent principal-open estimate needed by, not the affine
-  Lefschetz estimate itself.
+* Stacks Project, Tag 03Q9.
+* ILO, Exposé XIII, Proposition 2.3.4.
 -/
 
 @[expose] public section

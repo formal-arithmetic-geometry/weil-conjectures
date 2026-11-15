@@ -16,7 +16,6 @@ public import WeilConjectures.RingTheory.ConormalExteriorModule
 ## References
 
 * Stacks Project, Tags 01I6 and 0096.
-* Stacks Project, Tag 01R3.
 * Stacks Project, Tags 01R3 and 09PQ.
 -/
 

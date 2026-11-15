@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionZeroComp
 
 ## References
 
-* Stacks Project, Tags 07A6 and 0D6F.
 * Stacks Project, Tags 07A6, 0D6F and 03Q8.
 -/
 

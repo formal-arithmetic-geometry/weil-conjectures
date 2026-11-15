@@ -22,7 +22,7 @@ import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
 * Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ;
   Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
-* Stacks 06YU and 07A4.
+* Stacks Project, Tag 06YU.
 -/
 
 @[expose] public noncomputable section

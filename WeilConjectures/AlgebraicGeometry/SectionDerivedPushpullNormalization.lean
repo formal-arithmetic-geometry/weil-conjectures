@@ -17,13 +17,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 /-! # Normalization of derived section push-pull
 
 The statement records the comparison of the fixed internal module operations with
-the section-module operations after passage to derived categories.  All functors,
-equivalences, and comparison maps are the constructions imported from the preceding
-section-module modules.
+the section-module operations after passage to derived categories.
 
 ## References
 
-* Stacks Project, Tags 09T5 and 08BJ, and Tags 07A6 and 0FPI.
+* Stacks Project, Tags 09T5, 08BJ, 07A6 and 0FPI.
 -/
 
 @[expose] public noncomputable section

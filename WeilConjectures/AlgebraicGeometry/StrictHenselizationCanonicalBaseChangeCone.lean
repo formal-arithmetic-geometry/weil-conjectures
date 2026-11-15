@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 ## References
 
-* Stacks Project, Tag 03Q9, proof: fibre products commute with limits.
+* Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section

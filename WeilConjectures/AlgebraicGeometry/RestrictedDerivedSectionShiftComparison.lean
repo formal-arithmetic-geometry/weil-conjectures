@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsSingle
 
 ## References
 
-* Stacks Project, Tags 07A6 and 0D6F.
 * Stacks Project, Tags 07A6 and 0D6F; Tag 03Q8 for restriction of cohomology.
 -/
 

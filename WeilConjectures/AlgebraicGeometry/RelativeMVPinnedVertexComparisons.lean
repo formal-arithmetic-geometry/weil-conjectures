@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 ## References
 
-* Stacks Project, Cohomology, Tags 08HY and 08HZ.
 * Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories of Schemes, Tag 0DJ9, the
   induction diagram.
 -/

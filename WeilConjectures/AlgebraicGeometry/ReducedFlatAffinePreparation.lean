@@ -18,9 +18,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePreparationRestriction
 
 ## References
 
-* Stacks Project, Tag 0559, second proof, first two paragraphs.
-* Stacks Project, Tag 0559, second proof, reduction and first flat shrinking; Tags 051T and 052A.
-  Proof: factor f through the given affine open V. Reduce X and V.
+* Stacks Project, Tags 0559, 051T and 052A.
 -/
 
 @[expose] public section

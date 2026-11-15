@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
-/-! Identity law for pullback on structure-sheaf cohomology.
+/-! # Identity law for pullback on structure-sheaf cohomology
 
 ## References
 

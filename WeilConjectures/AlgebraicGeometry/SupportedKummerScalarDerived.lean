@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.SixFunctors.Finite.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Products
 
-/-! Derived universal properties of normalized supported scalar maps.
+/-! # Derived universal properties of normalized supported scalar maps
 
 ## References
 

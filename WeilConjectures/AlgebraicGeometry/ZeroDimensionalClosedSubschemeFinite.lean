@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Dimension
 
 ## References
 
-* Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0), algebraic case; Morphisms, Tag
-  03J3, opening paragraph.
+* Stacks Project, Varieties, Tag 06LH; Morphisms, Tag 03J3.
 -/
 
 @[expose] public section

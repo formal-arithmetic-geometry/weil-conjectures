@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 
 ## References
 
-* Stacks Project, Cohomology, Tag 0FKU.
 * Stacks Project, Modules, Tags 0096 and 01CA; Cohomology, Tag 0FKU.
 -/
 

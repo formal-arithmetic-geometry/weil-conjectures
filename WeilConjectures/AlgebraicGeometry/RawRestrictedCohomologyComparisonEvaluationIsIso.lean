@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedResolutionEvaluation
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 
 /-! # Evaluation part of the raw restricted comparison
-.
 
 ## References
 

@@ -14,9 +14,7 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw
 
 ## References
 
-* Stacks Project, Tags 09Z1 and 0EZM.
-* Stacks Project, Tag 09Z1 proof (restriction to an affine etale object), and the inverse-image
-  composition comparisons of Tag 03CB.
+* Stacks Project, Tags 03CB, 09Z1 and 0EZM.
 -/
 
 @[expose] public section

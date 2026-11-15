@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHomIsIso
 
 ## References
 
-* Stacks Project Tags 03Q1 (4) and 0A5G, final paragraph.
-* Stacks Project Tags 03Q1 (4), 03RV and 0A5G, final paragraph.
+* Stacks Project, Tags 03Q1 (4), 03RV and 0A5G.
 -/
 
 @[expose] public section

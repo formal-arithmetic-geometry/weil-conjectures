@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 
 ## References
 
-* Stacks Project, Tag 0A9A, induction paragraphs.
+* Stacks Project, Tag 0A9A.
 -/
 
 @[expose] public section

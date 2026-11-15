@@ -13,11 +13,15 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Section components in a cartesian square
 
+## Implementation details
+
+The argument for an arbitrary cartesian square generalizes the one in
+`WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat`, which cannot be imported here because
+its slicing theorem depends on the section-component noetherian model.
+
 ## References
 
-* Stacks Project, Tag 055M. The arbitrary-square proof generalizes the argument in
-  `WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat`, which cannot be imported here because
-  its slicing theorem depends on the section-component noetherian model.
+* Stacks Project, Tag 055M.
 -/
 
 @[expose] public section

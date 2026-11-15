@@ -12,11 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsoCore
 import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsIso
 
-/-! Intermediate comparison isomorphism for the derived stalk extension.
+/-! # Intermediate comparison isomorphism for the derived stalk extension
 
 ## References
 
-* Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6; equation-bc preceding Tag 0DJ8 (Tag 0DJ7).
+* Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tags 06Y6 and 0DJ7.
 -/
 
 @[expose] public section

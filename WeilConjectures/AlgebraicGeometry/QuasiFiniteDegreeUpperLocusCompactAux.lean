@@ -10,11 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteDegreeSublevelFiniteEquations
 
-/-! Auxiliary finite-generation conclusion for the successor degree locus.
+/-! # Finite generation for the successor degree locus
 
 ## References
 
-* Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
+* Stacks Project, More on Morphisms, Tag 07RZ.
 -/
 
 @[expose] public section

@@ -15,9 +15,8 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 ## References
 
-* Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof; Algebra, Tags 05N7 (3) and
-  05LI (1).
-* Stacks Project, Sheaves, Tags 0095 and 0096; Limits, Tag 01ZR (3).
+* Stacks Project, Limits, Tag 01ZR (3); Algebra, Tags 05N7 (3) and 05LI (1); Sheaves, Tags 0095
+  and 0096.
 -/
 
 @[expose] public section

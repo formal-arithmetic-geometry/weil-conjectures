@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 ## References
 
-* the coproduct and restriction gluing in, step 3 (Stacks Project, Morphisms, Tag 0BAJ,
-  componentwise reduction).
+* Stacks Project, Morphisms, Tag 0BAJ.
 -/
 
 @[expose] public section

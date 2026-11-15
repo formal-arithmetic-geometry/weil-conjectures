@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
 These transparent aliases expose the existing constructions in the two imported
 comparison modules. They introduce no replacement functors, maps, or tensors.
-The comparison theorems about these data remain proof dependencies of consumers.
 
 ## References
 

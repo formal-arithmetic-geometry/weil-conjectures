@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.SectionCohomologyPrincipalTorsion
 
 ## References
 
-* Stacks Project, Tag 09MR, tensor-unit specialization.
 * Stacks Project, Tag 09MR, Lemma 30.17.3, and Tag 01E4.
 -/
 

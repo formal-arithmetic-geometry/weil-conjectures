@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 import WeilConjectures.AlgebraicGeometry.SRMatchingObjectOneMember
 import WeilConjectures.AlgebraicGeometry.EtaleSimplicialMatching
 
-/-! Conversion of the semi-representable hypercover condition to the scheme form.
+/-! # Conversion of the semi-representable hypercover condition to the scheme form
 
 ## References
 

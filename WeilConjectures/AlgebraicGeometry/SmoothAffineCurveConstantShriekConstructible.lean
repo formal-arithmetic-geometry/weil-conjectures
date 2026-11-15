@@ -42,9 +42,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 The theorem states constructibility of every cohomology sheaf of the bounded-below derived
 lower shriek of a finite constant module on a separated affine smooth relative curve over an
-affine Noetherian finite-dimensional base. The proof follows the closed-subset induction,
-compact-support base change, good-curves diagram, quasi-finite boundary, proper-smooth models,
-open-closed triangles, and descent steps recorded in the DAG node.
+affine Noetherian finite-dimensional base.
 
 ## References
 

@@ -22,15 +22,7 @@ truncation of a bounded-above finite free model (Stacks Project, Tag 0A6H, claus
 
 ## References
 
-* Stacks Project, Tag 0A6H, clause (1), affine-local finite-free calculation. Proof: choose the
-  local bounded-above finite-free model P supplied by pseudo-coherence. Restriction preserves the
-  lower bound and quasi-coherent cohomology of L. Represent its restriction by a bounded-below
-  K-injective complex I with quasi-coherent cohomology. If I vanishes below m, cutting P below m - n
-  - 1 changes no Hom factors in degrees n - 1, n, n + 1: discarded factors have zero target. The
-  product universal properties make the comparison an isomorphism in these three degrees, hence on
-  H^n. The truncated source is a bounded finite-free complex, so finiteFree_homComplex_qc_cohomology
-  applies. The K-injective RHom computation and restriction comparison identify this with the
-  restriction of the desired cohomology sheaf. Quasi-coherence glues along the chosen cover.
+* Stacks Project, Tag 0A6H, clause (1).
 -/
 
 @[expose] public section

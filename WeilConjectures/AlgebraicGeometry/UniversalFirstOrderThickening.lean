@@ -22,10 +22,8 @@ public import WeilConjectures.AlgebraicGeometry.Thickening
 
 ## References
 
-* Stacks Project, More on Morphisms, Section 37.7 (Tag 04F2), opening paragraph, and Definition
-  37.7.2 (Tag 04F4).
-* Stacks Project, Section 37.7 (Tag 04F2), opening paragraph and Lemma 37.7.1 (Tag 04F3), first
-  general remark.
+* Stacks Project, More on Morphisms, Section 37.7 (Tag 04F2), Lemma 37.7.1 (Tag 04F3) and
+  Definition 37.7.2 (Tag 04F4).
 -/
 
 @[expose] public section

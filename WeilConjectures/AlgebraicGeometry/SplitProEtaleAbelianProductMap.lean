@@ -18,7 +18,7 @@ import Mathlib.AlgebraicGeometry.Limits
 
 ## References
 
-* Stacks Project, Tag 095B, proof by sections over a split finite cover.
+* Stacks Project, Tag 095B.
 -/
 
 @[expose] public section

@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 ## References
 
-* Stacks Project, Tag 08EE, proof invoking Tag 08ED.
+* Stacks Project, Tags 08EE and 08ED.
 -/
 
 @[expose] public section

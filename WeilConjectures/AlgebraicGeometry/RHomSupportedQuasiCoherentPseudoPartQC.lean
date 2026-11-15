@@ -13,14 +13,12 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCC
 
 /-! # Quasi-coherence of internal Hom out of a pseudo-coherent complex
 
-The quasi-coherence clause of the pseudo-coherent internal-Hom lemma, obtained from the
-affine-local finite free calculation and local gluing (Stacks Project, Tag 0A6H,
+The quasi-coherence clause of the pseudo-coherent internal-Hom lemma (Stacks Project, Tag 0A6H,
 clause (1)).
 
 ## References
 
-* Stacks Project, Tag 0A6H, clause (1). The proof is the affine-local finite-free calculation,
-  followed by local gluing of quasi-coherent cohomology.
+* Stacks Project, Tag 0A6H, clause (1).
 -/
 
 @[expose] public section

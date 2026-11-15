@@ -25,7 +25,6 @@ import WeilConjectures.RingTheory.SelfTorRestrictionResolutionIndependence
 
 ## References
 
-* Stacks Project, Tags 06YH, 06YG and 00LS.
 * Stacks Project, Tags 06YH and 06YG (K-flat comparison), 00LS (resolution comparison), and 01I6
   (associated sheaves).
 -/

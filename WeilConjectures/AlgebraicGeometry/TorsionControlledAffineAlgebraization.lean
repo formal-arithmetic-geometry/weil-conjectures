@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKern
 
 ## References
 
-* Stacks Project, Tag 0889(1), affine paragraph, using Tags 087W, 0ALK and 05EU.
+* Stacks Project, Tag 0889(1), using Tags 087W, 0ALK and 05EU.
 -/
 
 @[expose] public section

@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 ## References
 
 * Stacks Project, Modules on Sites, Definition 093Q; Cohomology on Sites, Tag 094H.
-* Stacks, sheafification, Tags 00W1 and 094H. Proof: equality after the unit is locally equality
-  before it by sheafification.
+* Stacks Project, Tag 00W1.
 -/
 
 @[expose] public section

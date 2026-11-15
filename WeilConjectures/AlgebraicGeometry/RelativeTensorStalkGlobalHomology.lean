@@ -24,16 +24,12 @@ import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
-/-! # RelativeTensorStalkGlobalHomology
-.
+/-! # Stalks of a K-flat relative tensor representative
 
 ## References
 
-* Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG, 09U9; Sheaves Tags 008H and 0098; Modules
-  Tag 01AG. Proof: form the inverse-image ringed space with underlying space X. The canonical
-  inverse-image ring stalk isomorphism identifies its stalk ring with A=O_Y,f(y). Take M to be the
-  actual module stalk of F restricted along that isomorphism. The stalk criterion makes P_y K-flat.
-  Exactness of stalks sends q to a quasi-isomorphism.
+* Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG and 09U9; Sheaves, Tags 008H and 0098;
+  Modules, Tag 01AG.
 -/
 
 @[expose] public section

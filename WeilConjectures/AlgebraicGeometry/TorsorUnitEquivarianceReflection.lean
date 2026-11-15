@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 ## References
 
-* Stacks Project Tag 0A5G, final paragraph.
+* Stacks Project, Tag 0A5G.
 -/
 
 @[expose] public section

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 ## References
 
-* Stacks Project, Tags 087T, 0880 and 088A.
 * Stacks Project, Tag 088A, second application of Remark 0888, using Tag 087T and the natural
   completion comparison (equation 0880).
 -/

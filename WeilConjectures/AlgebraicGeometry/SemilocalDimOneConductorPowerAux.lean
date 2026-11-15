@@ -15,7 +15,7 @@ import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 import WeilConjectures.AlgebraicGeometry.IntegralOverringJacobsonPower
 import WeilConjectures.AlgebraicGeometry.AdjoinFiniteFractionSpec
 
-/-! Auxiliary finite adjoin construction for the conductor-power argument.
+/-! # Auxiliary finite adjoin construction for the conductor-power argument
 
 ## References
 

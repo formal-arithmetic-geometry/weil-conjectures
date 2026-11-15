@@ -28,7 +28,6 @@ other factor is invertible.
 ## References
 
 * Stacks Project, Tags 07A7 and 0E47 (coefficient dévissage).
-* Stacks 07A6.
 * Stacks 03EK, 07A6, 0D6D.
 -/
 

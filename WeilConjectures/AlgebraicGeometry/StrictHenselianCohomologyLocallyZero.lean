@@ -21,7 +21,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 ## References
 
-* Stacks Project, Étale Cohomology, Tag 09AX, proof, Tags 03Q6 and 03QO.
+* Stacks Project, Étale Cohomology, Tags 03Q6, 03QO and 09AX.
 -/
 
 @[expose] public section

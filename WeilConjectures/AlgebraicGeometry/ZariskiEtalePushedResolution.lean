@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtalePushedResolutionQuasiIso
 
 ## References
 
-* Stacks Project, Tags 072W and 0733(1).
 * Stacks Project, Tags 072W and 0733(1); Etale Cohomology, Tag 09AX; Modules on Sites, Tag 03DJ.
 -/
 

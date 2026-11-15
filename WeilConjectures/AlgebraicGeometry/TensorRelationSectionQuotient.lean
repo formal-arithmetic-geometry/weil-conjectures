@@ -15,8 +15,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 ## References
 
-* Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-* Stacks Project, Schemes, Lemma 01I8 (1); Modules, Section 01CA.
+* Stacks Project, Morphisms, Lemma 01SB; Sheaves, Lemma 0089; Schemes, Lemma 01I8 (1); Modules,
+  Section 01CA.
 -/
 
 @[expose] public section

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT
 
 ## References
 
-* Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction to the opens in its proof;
-  Cohomology of Schemes, Tag 09MR, affine-open paragraph.
+* Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW; Cohomology of Schemes, Tag 09MR.
 -/
 
 @[expose] public section

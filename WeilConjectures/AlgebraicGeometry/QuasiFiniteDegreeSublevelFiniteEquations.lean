@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEquationsOfClosedAffine
 
 ## References
 
-* Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
+* Stacks Project, More on Morphisms, Tag 07RZ.
 -/
 
 @[expose] public section

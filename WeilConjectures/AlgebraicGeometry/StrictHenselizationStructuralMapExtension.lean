@@ -20,7 +20,7 @@ every affine pointed étale neighbourhood; this module names that canonical morp
 
 ## References
 
-* Stacks Project, Tag 03Q9, proof.
+* Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section

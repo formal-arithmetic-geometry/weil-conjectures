@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 ## References
 
-* Stacks Project, Tag 0096.
 * Stacks Project, Tags 0096 and 0D5S.
 -/
 

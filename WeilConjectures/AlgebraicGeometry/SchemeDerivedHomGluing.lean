@@ -15,16 +15,7 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 ## References
 
 * Stacks Project, Tag 08DG (Lemma 20.45.1).
-* Stacks Project, Cohomology, Tag 08BW, exactness at the local Hom pair. Proof: transport a and b
-  backwards through the derived equivalences induced by Scheme.Modules.overEquiv U and V. Their
-  transported restrictions to the localized overlap site coincide: the two displayed comparisons are
-  obtained by cancelling these equivalences with their inverses and composing overFunctorMap.
-  Naturality of their units and the derived composition comparisons identifies this equality with
-  equality of derivedOpenHomRestriction on the transported maps. Apply exactness at the local Hom
-  pair in derived_hom_mayer_vietoris to their pair; the difference is zero. The resulting global f
-  has the two transported maps as restrictions. Apply the equivalences forwards and cancel their
-  units to obtain the prescribed a and b. No uniqueness is asserted. Empty opens and disjoint opens
-  are allowed, since the Mayer--Vietoris exactness has no nonemptiness premise.
+* Stacks Project, Cohomology, Tag 08BW.
 -/
 
 @[expose] public section

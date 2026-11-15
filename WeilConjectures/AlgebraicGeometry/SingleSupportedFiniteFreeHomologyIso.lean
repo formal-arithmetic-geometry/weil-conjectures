@@ -18,10 +18,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 ## References
 
-* Stacks Project, Tag 08I5, the one-column Hom calculation.
-* Stacks Project, Tag 08I5, the finite-free column calculation in its proof; Tag 0A8X, the product
-  Hom differential. Proof: in each Hom degree project to source degree k. Every other factor is zero
-  because its source is zero.
+* Stacks Project, Tags 08I5 and 0A8X.
 -/
 
 @[expose] public section

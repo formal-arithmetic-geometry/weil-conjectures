@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
-/-! Invertibility of the derived stalk comparison from its K-flat equation.
+/-! # Invertibility of the derived stalk comparison from its K-flat equation
 
 ## References
 

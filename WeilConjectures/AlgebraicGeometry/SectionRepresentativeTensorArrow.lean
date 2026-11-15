@@ -15,11 +15,7 @@ codomain. It changes neither the representative transformation nor its normaliza
 
 ## References
 
-* Stacks 07A4 and 06YU.
-* Stacks 05RU. This names the pre-existing localization instance.
-* Stacks 07A6. This is the same source functor read by internalDerivedPullback, without retaining
-  its unused comparison-isomorphism argument in the computational expression.
-* Stacks 06YN. Proof: the functor is the uncurried canonical cochain tensor.
+* Stacks Project, Tags 05RU, 06YN, 06YU, 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section

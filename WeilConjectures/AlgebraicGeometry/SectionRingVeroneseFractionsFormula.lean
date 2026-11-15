@@ -23,7 +23,7 @@ are chosen from an existence theorem.
 
 ## References
 
-* Stacks Project, Properties, Tag 0B5L, Lemma 01PW(2), and the proof of Lemma 01Q1.
+* Stacks Project, Properties, Tags 0B5L, 01PW and 01Q1.
 -/
 
 @[expose] public section

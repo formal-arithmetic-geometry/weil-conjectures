@@ -8,19 +8,13 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # The normalized comparison with fixed cochain tensor types
 
-This interface retains the existing summand-normalized totalComparison. Its explicit
-source and target use the canonical tensor of cochain complexes. No new tensor or
-comparison map is constructed. The existing compact tensor instances live here so
-all consumers use the same instance arguments.
+This file restates the summand-normalized `totalComparison` with source and target given by
+the canonical tensor of cochain complexes. The compact tensor instances live here so that all
+consumers use the same instance arguments.
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tag 07A4 and Modules on Sites, Tag 03EL.
-* Stacks 06YN and 07A4. Proof: ordinaryTensorComparison is the natural comparison supplied by the
-  fixed internal-section tensor equivalence, by uniqueness of its pure-tensor normalization.
-  Precompose the desired total equality with each direct-sum inclusion. The defining summand
-  equation reduces it to ordinary naturality. Coproduct extensionality and the faithful section
-  equivalence imply equality of the chain maps.
+* Stacks Project, Cohomology on Sites, Tag 07A4; Modules on Sites, Tags 03EL and 06YN.
 -/
 
 /-! The shared interface also retains the canonical cochain unit objects. -/

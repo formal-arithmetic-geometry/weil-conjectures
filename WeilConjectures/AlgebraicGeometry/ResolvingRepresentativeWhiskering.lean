@@ -15,12 +15,7 @@ set_option linter.privateModule false
 
 ## References
 
-* Stacks Project, Categories, Tags 04VI--04VK; Cohomology on Sites, Tag 06YS. Proof: resolve the
-  extra vertices of Ore squares and equality refinements to restrict the right calculus of fractions
-  to the resolving subcategory. The induced localization functor is full by refining roofs, faithful
-  by refining common roofs, and essentially surjective by resolving objects. Restriction along it is
-  fully faithful, also on its product with itself. The full, surjective-on-objects quotient
-  restricts to a full, essentially surjective functor of representative categories.
+* Stacks Project, Categories, Tags 04VI--04VK; Cohomology on Sites, Tag 06YS.
 -/
 
 @[expose] public section

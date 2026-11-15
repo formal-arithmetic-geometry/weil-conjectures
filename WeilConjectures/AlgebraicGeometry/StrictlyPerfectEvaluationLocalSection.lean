@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 
 ## References
 
-* Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of; Tags 08DM and 08DL.
+* Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
 -/
 
 @[expose] public section

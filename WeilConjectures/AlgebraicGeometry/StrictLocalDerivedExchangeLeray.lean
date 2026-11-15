@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalSectionsUnitLeray
 
 ## References
 
-* Stacks Project, Tag 03Q9, final injective-complex paragraph.
+* Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section

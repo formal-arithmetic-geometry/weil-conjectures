@@ -29,7 +29,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectionFormulaLocality
 
 ## References
 
-* Stacks Project, Tag 08EU.
 * Stacks Project, Tag 08EU, and the fourth Hom equality in Tag 0A9Q (-RSheafHom).
 -/
 

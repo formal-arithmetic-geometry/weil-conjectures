@@ -19,9 +19,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity
 
 ## References
 
-* Stacks Project, Tag 0DJ9, first paragraph; Tag 08HY, counit description.
-* Stacks Project, Tag 0DJ9, first paragraph; Tag 08HY (derived
-  base-change counit), and Tag 08FE (direct-image restriction).
+* Stacks Project, Tags 0DJ9, 08HY and 08FE.
 -/
 
 @[expose] public section

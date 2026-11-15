@@ -10,12 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.ModuleRingedToposDerivedComparis
 /-! # Constructed regular-coefficient pullback comparisons
 
 The ordinary and exact derived comparisons are independent of the projection-mate theorem.
-.
 
 ## References
 
-* Stacks 07A4.
-* Stacks 07A4 and 07A6.
+* Stacks Project, Tags 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section

@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 ## References
 
-* Stacks Project, Tags 01XJ and 01XK; Tag 08D5, proof of (2).
+* Stacks Project, Tags 01XJ, 01XK and 08D5.
 -/
 
 @[expose] public section

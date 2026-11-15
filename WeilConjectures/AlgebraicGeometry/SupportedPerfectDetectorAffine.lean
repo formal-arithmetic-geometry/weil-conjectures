@@ -18,8 +18,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 ## References
 
-* Stacks Project, Tag 0A9A, affine case.
-* Stacks Project, Tag 0A9A, affine paragraph, and Tag 09IR.
+* Stacks Project, Tags 0A9A and 09IR.
 -/
 
 @[expose] public section

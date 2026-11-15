@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineBasicOpen
 
 ## References
 
-* Stacks Project, Morphisms, Lemma 05JU and Definition 05JV.
 * Stacks Project, Morphisms, Lemma 05JU and Definition 05JV, with Lemma 01QQ.
 -/
 

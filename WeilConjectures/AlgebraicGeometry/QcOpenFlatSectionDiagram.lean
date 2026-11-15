@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 
 ## References
 
-* Stacks Project, Tag 0APJ, proof of, and Tag 02KH.
+* Stacks Project, Tags 0APJ and 02KH.
 -/
 
 @[expose] public section

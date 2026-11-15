@@ -27,8 +27,7 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 
 ## References
 
-* Stacks Project, Duality for Schemes, Tag 0E4G.
-* Stacks Project, Tag 0E4G, proof of Lemma 48.4.3(3), using Tags 0A9A and 09SN.
+* Stacks Project, Duality for Schemes, Lemma 48.4.3(3) (Tag 0E4G), using Tags 0A9A and 09SN.
 -/
 
 @[expose] public section

@@ -22,9 +22,7 @@ first produces a thickening with the lifting property for affine test schemes.
 
 ## References
 
-* Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3), affine construction. Proof: choose an affine
-  open cover, apply the affine square-zero construction, glue the pieces using uniqueness on
-  overlaps, and verify the lifting property whenever both the test schemes are affine.
+* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3).
 -/
 
 @[expose] public section

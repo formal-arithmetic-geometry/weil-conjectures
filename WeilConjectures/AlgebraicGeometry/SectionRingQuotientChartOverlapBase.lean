@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapPointwis
 
 ## References
 
-* Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
+* Stacks Project, Constructions, Tags 01N8 and 01NK.
 -/
 
 @[expose] public section

@@ -23,7 +23,7 @@ by applying the constant-sheaf functor to both terms and differentials.
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tag 094G, proof of.
+* Stacks Project, Cohomology on Sites, Tag 094G.
 -/
 
 @[expose] public section

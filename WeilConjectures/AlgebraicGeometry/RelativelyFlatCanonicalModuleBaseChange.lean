@@ -19,7 +19,7 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 ## References
 
-* Stacks Project, Tag 0A1D, and the finite affine Cech proof of.
+* Stacks Project, Tag 0A1D.
 -/
 
 @[expose] public section

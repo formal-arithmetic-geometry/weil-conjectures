@@ -8,17 +8,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
-/-! Compatibility of affine-chart transport for relative differentials with the derivation.
+/-! # Affine-chart transport of relative differentials and the derivation
+
+This file shows that the affine-chart transport of relative differentials is compatible with the
+universal derivation.
 
 ## References
 
-* Stacks Project, Tags 01US and 01UT. Proof: construct T as the composite displayed in its equality
-  below. The inverse of the base-open comparison sends d(b) to d(b), by
-  relativeDifferentialsCompIso's universal-property definition and
-  relativeDifferentialsHomEquiv_symm_app_d. Equality induction shows that relativeDifferentialsCongr
-  does the same. The inverse source-restriction comparison sends d(b) to the restricted derivation,
-  by relativeDifferentialsToRestrict_app_d. Composing these three identities proves the assertion
-  for every b. T is completely determined by the stated equality.
+* Stacks Project, Tags 01US and 01UT.
 -/
 
 @[expose] public section

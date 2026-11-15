@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.TangentVectorsVectorSpaceOperations
 
 ## References
 
-* Stacks Project, Tag 0B2B, Lemma 33.16.2 and its proof, with base `Spec k`.
+* Stacks Project, Tag 0B2B, Lemma 33.16.2, with base `Spec k`.
 -/
 
 @[expose] public section

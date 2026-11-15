@@ -14,21 +14,11 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
-/-! # RelativeTensorGlobalLocalStalkDerivedIso
-.
+/-! # Derived comparison of global and open-local module stalks
 
 ## References
 
 * Stacks Project, Modules Tag 01AG; Sheaves Tags 008H and 0098; Cohomology of Sheaves Tag 08CG.
-  Proof: neighbourhoods of y contained in V are cofinal among neighbourhoods of y. The resulting
-  natural stalk comparison identifies the composite of restriction to the slice over V and
-  openModuleStalkFunctor with the global module stalk. The open immersion stalk map in the latter
-  functor is exactly the scalar transport of this comparison. Both functors are exact, hence their
-  comparison induces an isomorphism of derived functors compatible with Q. Apply the open stalk
-  derived functor to eL and compose with the comparison at QK. Finally apply exact restriction of
-  scalars along f.stalkMap y and its commutation isomorphism with Q. The result is the displayed
-  isomorphism. The construction requires only y in V and is valid also for zero or acyclic
-  complexes.
 -/
 
 @[expose] public section

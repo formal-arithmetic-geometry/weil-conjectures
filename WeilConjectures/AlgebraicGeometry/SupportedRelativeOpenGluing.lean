@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 ## References
 
-* Stacks Project, Tag 08DG; Tag 08CM for local perfectness.
 * Stacks Project, Tags 08DG and 08CM, used in Tag 09IM.
 -/
 

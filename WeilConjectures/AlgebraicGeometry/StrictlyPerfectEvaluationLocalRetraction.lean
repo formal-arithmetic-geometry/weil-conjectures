@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 
 ## References
 
-* Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of; Tags 08DM and 08DL.
+* Stacks Project, Cohomology of Sheaves, Tags 08DL, 08DM and 08DQ.
 -/
 
 @[expose] public section

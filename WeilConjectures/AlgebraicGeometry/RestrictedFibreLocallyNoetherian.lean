@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 ## References
 
-* Stacks Project, Tag 054U, fibre topology in the proof.
+* Stacks Project, Tag 054U.
 -/
 
 @[expose] public section

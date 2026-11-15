@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOverlapCocycle
 
 ## References
 
-* Stacks Project, More on Morphisms, Tag 04F3, the overlap construction in the proof of Lemma
-  37.7.1.
+* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3).
 -/
 
 @[expose] public section

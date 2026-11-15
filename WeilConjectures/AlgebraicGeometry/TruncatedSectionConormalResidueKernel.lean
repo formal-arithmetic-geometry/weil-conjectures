@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Smooth.Kaehler
 
 ## References
 
-* Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1).
+* Stacks Project, Algebra, Tag 02HT.
 -/
 
 @[expose] public section
@@ -135,9 +135,6 @@ private theorem truncated_kernel_to_residue_conormal
 set_option backward.isDefEq.respectTransparency false in
 /-- A section at a truncation satisfying the Artin--Rees bound detects the residue kernel.
 -/
-/- Structural form of the truncated-section residue-kernel comparison.
-The proof is the Artin--Rees and square-zero conormal argument of Stacks Tag 02HT;
-see the parent theorem for the complete mathematical reduction.-/
 theorem truncated_section_conormal_residue_kernel_comap
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]

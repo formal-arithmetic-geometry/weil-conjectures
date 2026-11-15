@@ -19,7 +19,6 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 
 ## References
 
-* Stacks Project, Tags 0889(1), 0ALK(1) and 0888.
 * Stacks Project, Tag 0889(1), affine construction using 0ALK(1), 087W and 0888.
 -/
 

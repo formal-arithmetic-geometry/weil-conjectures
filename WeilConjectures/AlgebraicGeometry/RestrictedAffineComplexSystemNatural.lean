@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
 
 ## References
 
-* Stacks Project, Tag 09Z1 proof, and Tag 0EZM for the canonical maps.
+* Stacks Project, Tags 09Z1 and 0EZM.
 -/
 
 @[expose] public section

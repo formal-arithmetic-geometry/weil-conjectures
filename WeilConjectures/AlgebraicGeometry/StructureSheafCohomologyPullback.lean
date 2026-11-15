@@ -21,8 +21,7 @@ public import Mathlib.Topology.Sheaves.Functors
 
 ## References
 
-* Stacks Project, Varieties, Tag 0BED, the functoriality maps in the proof.
-* Stacks Project, Varieties, Tag 0BED, proof; Cohomology of Sheaves, Section 01F7.
+* Stacks Project, Varieties, Tag 0BED; Cohomology of Sheaves, Section 01F7.
 -/
 
 @[expose] public section

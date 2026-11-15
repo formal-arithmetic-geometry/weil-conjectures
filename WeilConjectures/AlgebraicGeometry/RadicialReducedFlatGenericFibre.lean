@@ -20,15 +20,7 @@ import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 
 ## References
 
-* Stacks Project, Tag 0559, second proof, finite purely inseparable extension.
-* Stacks Project, Tag 0559, second proof, paragraphs beginning "Write X = Spec(B)" and "Let K'/K";
-  Algebra, Tag 030R. Proof: write the affine integral base as Spec A and the reduced affine source
-  as Spec B. Let K be the fraction field of A. Flatness injects B into B tensor_A K, which is
-  reduced by localization. Geometric irreducibility makes this nonempty ring a domain. Its fraction
-  field L is finitely generated over K. Choose a finite purely inseparable K'/K so that (L tensor_K
-  K')_red is a separably generated field. In characteristic zero take K'=K. For finitely many
-  generators b of K'/K choose a prime power q with b^q=a/d in K, with a,d in A and d nonzero.
-  Replace b by d*b.
+* Stacks Project, Tag 0559; Algebra, Tag 030R.
 -/
 
 @[expose] public section

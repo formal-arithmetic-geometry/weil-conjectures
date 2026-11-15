@@ -13,18 +13,8 @@ public import Mathlib.RingTheory.Ideal.Maps
 
 ## References
 
-* Stacks Project, Modules on Sites, finite type ideals; Algebraization, Tags 0999 and 099I.
-* Stacks Project, Modules on Sites.
-* Stacks Project, Modules on Sites, ideal subsheaves.
-* Stacks Project, Modules on Sites. Proof: after the inclusion into the ambient ring, the law is the
-  identity law of `R`. Subtype extensionality gives equality of the maps.
-* Stacks Project, Modules on Sites. Proof: include each output into the ambient ring and use the
-  composition law of `R`.
-* Stacks Project, Modules on Sites. Proof: glue a matching family in the ambient ring sheaf. The
-  restrictions of the glued section lie in the ideal on the covering sieve, so `local_mem` puts it
-  in the ideal. Uniqueness follows from uniqueness of the ambient ring-sheaf gluing.
-* Stacks Project, Modules on Sites, ideal subsheaves. Proof: both composites send an ideal section
-  to its restriction in the ambient ring.
+* Stacks Project, Modules on Sites, finite type ideals and ideal subsheaves; Algebraization,
+  Tags 0999 and 099I.
 -/
 
 @[expose] public section

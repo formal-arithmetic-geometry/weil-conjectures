@@ -18,7 +18,7 @@ is the unique-factorization property for every compatible family, in the categor
 
 ## References
 
-* Stacks Project, Limits of Schemes, proof of Tag 0GWT and Tag 01YW.
+* Stacks Project, Limits of Schemes, Tags 0GWT and 01YW.
 -/
 
 @[expose] public section

@@ -15,18 +15,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapB
 
 ## References
 
-* Stacks Project, Tag 01UT.
-* Stacks Project, Tag 01UT; Tag 08S2, affine calculation. Proof: restrict differentials along the
-  open immersion of `U`, using `relativeDifferentialsRestrictIso`. Factor the restricted morphism
-  through `V` and use `relativeDifferentialsCompIso` to remove the open immersion of the base.
-  Identify `U` and `V` with the spectra of their section rings, using their canonical affine
-  isomorphisms and `IsAffineOpen.SpecMap_appLE_fromSpec`. Apply `relativeDifferentialsSpecΓIso` on
-  global sections. The restriction formulas `relativeDifferentialsToRestrict_app_d`, the
-  derivation-preserving formula in `relativeDifferentialsIsoOfDerivation`, and
-  `relativeDifferentialsSpecΓHom_d` show that the inverse of the resulting equivalence sends the
-  ring differential of `a` to the sheaf differential of `a`. Scalar transport is through the
-  canonical section ring isomorphisms, so this equivalence is linear over the original ring
-  `Γ(X,U)`.
+* Stacks Project, Tags 01UT and 08S2.
 -/
 
 @[expose] public section

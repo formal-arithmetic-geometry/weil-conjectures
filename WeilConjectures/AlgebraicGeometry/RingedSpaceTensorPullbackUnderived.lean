@@ -17,14 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Tags 008A and 008Y.
-* Stacks, Tag 0095.
-* Stacks, Tag 0095. Proof: inverse image of `a` is linear and commutes with restriction (008X). The
-  map `id ⊗ g⁻¹a` therefore commutes with restrictions on pure tensors.
-* Stacks, Tag 0096. Proof: apply the tensor/restriction adjunction to the change of rings, then the
-  inverse-image/direct-image module adjunction (008Y). The resulting bijection is natural and its
-  right-hand module action is restriction along `g.hom.c`, hence the recorded pushforward. These are
-  the first two steps of this node, using.
+* Stacks Project, Tags 008A, 008X, 008Y, 0095 and 0096.
 -/
 
 @[expose] public section

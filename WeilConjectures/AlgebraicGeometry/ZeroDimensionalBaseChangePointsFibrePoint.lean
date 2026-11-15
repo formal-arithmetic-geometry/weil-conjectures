@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 
-/-! Intermediate fibre facts for zero-dimensional base change.
+/-! # Intermediate fibre facts for zero-dimensional base change
 
 ## References
 

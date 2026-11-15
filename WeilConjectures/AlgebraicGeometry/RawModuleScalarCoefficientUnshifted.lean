@@ -16,7 +16,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 import WeilConjectures.AlgebraicGeometry.RawModuleScalarSheafComposition
 
-/-! Unshifted coefficient identity used by the shifted scalar square.
+/-! # Unshifted coefficient identity used by the shifted scalar square
 
 ## References
 

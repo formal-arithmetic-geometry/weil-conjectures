@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 ## References
 
-* Stacks Project, Tag 08EV, proof, second displayed equality and hypothesis (3); Cohomology, Lemma
-  20.27.4.
+* Stacks Project, Tag 08EV; Cohomology, Lemma 20.27.4.
 -/
 
 @[expose] public section

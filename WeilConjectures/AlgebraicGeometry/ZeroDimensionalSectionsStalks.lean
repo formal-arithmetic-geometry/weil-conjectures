@@ -21,7 +21,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 
 ## References
 
-* Stacks Project, Étale Cohomology, Tag 03QO; Algebra, Tags 00KH and 06RS.
 * Stacks Project, Tags 03QO, 00KH, 06RS and 040R.
 -/
 

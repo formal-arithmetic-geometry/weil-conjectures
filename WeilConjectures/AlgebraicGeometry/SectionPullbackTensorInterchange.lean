@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
 /-! # Tensor interchange for the inverse pullback-square comparison
-.
 -/
 
 @[expose] public section

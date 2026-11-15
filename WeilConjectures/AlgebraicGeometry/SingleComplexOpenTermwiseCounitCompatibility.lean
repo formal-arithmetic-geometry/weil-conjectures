@@ -15,8 +15,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 ## References
 
-* Stacks Project, Tags 08HY, 08FE and 0D5S.
-* Stacks Project, Tags 08HY, 08FE and 0D5S; Tag 0DJ9, first paragraph.
+* Stacks Project, Tags 08HY, 08FE, 0D5S and 0DJ9.
 -/
 
 @[expose] public section

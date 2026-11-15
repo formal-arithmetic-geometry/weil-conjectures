@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart
 
 ## References
 
-* Stacks Project, Derived Categories of Schemes, Tag 0A6H (1), (2), and the support observation in
-  the proof of Tag 0A9C.
+* Stacks Project, Derived Categories of Schemes, Tag 0A6H (1), (2), and Tag 0A9C.
 -/
 
 @[expose] public section

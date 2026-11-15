@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 ## References
 
-* Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
 * Stacks Project, Remark 088F, Lemma 087T and equation 0880.
 -/
 

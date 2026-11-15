@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.EquivalenceRightAdjointCounitTransport
 
 ## References
 
-* Stacks Project, Tag 0ATR, Lemma 48.5.2.
 * Stacks Project, Tag 0ATR, Lemma 48.5.2; Tags 08HY, 0ATM and 0D5S.
 -/
 

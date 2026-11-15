@@ -16,7 +16,7 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 
 ## References
 
-* Stacks Project, Tag 095T, and Tag 0A4B, proof paragraphs 1–3.
+* Stacks Project, Tags 095T and 0A4B.
 -/
 
 @[expose] public section

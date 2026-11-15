@@ -10,10 +10,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 /-! # Tensor comparison in a category whose objects are flat
 
 This is the K-flat comparison step in the diagonal-summand argument for field coefficients.
-
-## References
-
-* the first paragraph of the finite-ring Kunneth proof, K-flat comparison step.
 -/
 
 @[expose] public noncomputable section

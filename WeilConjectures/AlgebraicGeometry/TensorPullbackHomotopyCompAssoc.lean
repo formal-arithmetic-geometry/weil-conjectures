@@ -9,16 +9,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Homology.HomotopyCategory
 
-/-! Associativity of the pinned tensor pullback comparisons on homotopy categories.
+/-! # Associativity of tensor pullback comparisons on homotopy categories
+
+Associativity of the pinned tensor pullback comparisons on homotopy categories.
 
 ## References
 
-* Stacks Project, Cohomology, Tag 0D5S. Proof: For each scheme morphism choose the adjunction
-  pinned by `exists_tensorPullbackAdjunction`. Its composition comparison is exactly the inverse
-  mate of `pushforwardComp`. Apply `Adjunction.leftAdjointCompIso_assoc` to the six adjunctions
-  belonging to h, f, g, h≫f, f≫g, and the total composite. The hypothesis is the pushforward
-  associativity identity, inverted to match these mates. Identify the two total composites by
-  Category.assoc, transporting the chosen adjunction too.
+* Stacks Project, Cohomology, Tag 0D5S.
 -/
 
 @[expose] public section

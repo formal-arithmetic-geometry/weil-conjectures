@@ -12,8 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 /-! # Canonical normalization of identity projection
 
-.
-
 ## References
 
 * Stacks Project, Tags 0B56 and 0DV0.

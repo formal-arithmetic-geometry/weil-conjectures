@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.LocalStalkSectionsDescentSections
 
 ## References
 
-* Stacks Project, Tag 03Q6, degree zero and proof steps (1)-(3).
+* Stacks Project, Tag 03Q6.
 -/
 
 @[expose] public section

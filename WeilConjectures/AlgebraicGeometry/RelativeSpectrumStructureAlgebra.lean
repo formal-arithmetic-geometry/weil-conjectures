@@ -15,9 +15,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 ## References
 
-* Stacks Project, Constructions, proof of Lemma 01LV.
-* Stacks Project, Constructions, proof of Lemma 01LV, first paragraph, and Lemma 01LX (3); Sheaves,
-  Lemma 009U.
+* Stacks Project, Constructions, Lemmas 01LV and 01LX (3); Sheaves, Lemma 009U.
 -/
 
 @[expose] public section

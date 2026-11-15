@@ -20,7 +20,7 @@ on the `moduleRings` carrier, as in the sibling extension lemmas.
 
 ## References
 
-* Stacks Project, Properties, Lemma 01PE, part (3) and its proof.
+* Stacks Project, Properties, Lemma 01PE, part (3).
 -/
 
 @[expose] public section

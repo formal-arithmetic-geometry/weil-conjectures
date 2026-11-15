@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Cohomology, Tags 06YJ and 06YC.
 * Stacks Project, Cohomology, Tags 06YJ and 06YC; Cohomology on Sites, Tag 06YT.
 -/
 

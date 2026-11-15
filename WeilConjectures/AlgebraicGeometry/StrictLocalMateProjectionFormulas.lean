@@ -14,8 +14,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 
 ## References
 
-* Stacks Project, Tag 03Q9, final injective-complex paragraph.
-* Stacks, Tag 03Q9, final injective-complex paragraph; Tag 03Q8.
+* Stacks Project, Tags 03Q9 and 03Q8.
 -/
 
 @[expose] public section

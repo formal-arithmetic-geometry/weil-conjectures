@@ -19,7 +19,7 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComp
 
 ## References
 
-* Stacks Project, Tag 03FD, second paragraph of its proof.
+* Stacks Project, Tag 03FD.
 -/
 
 @[expose] public section

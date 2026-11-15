@@ -20,7 +20,7 @@ import WeilConjectures.RingTheory.SectionDifferentialBasisQuotient
 
 ## References
 
-* Stacks Project, More on Algebra, Tag 07M7, proof up to the final idempotent localization.
+* Stacks Project, More on Algebra, Tag 07M7.
 -/
 
 @[expose] public section

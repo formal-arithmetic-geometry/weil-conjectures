@@ -22,7 +22,6 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 ## References
 
-* Stacks Project, Tag 0F09, specialized to a field base and a degree-zero sheaf.
 * Stacks Project, Lemma 59.89.3, Tag 0F09; limit comparison Tag 0EZT.
 -/
 

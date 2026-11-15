@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 ## References
 
-* Stacks Project, Derived Categories, Tag 015B (4).
 * Stacks Project, Derived Categories, Tag 015B (4); Cohomology on Sites, Tag 0730; Homology, Tag
   010T.
 -/

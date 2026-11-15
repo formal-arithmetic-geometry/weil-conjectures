@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Coherent
 
 ## References
 
-* Stacks Project, Tag 0889(1), construction from affine limit maps.
 * Stacks Project, Tag 0889(1), construction, using Tags 0ALK and 05EU.
 -/
 

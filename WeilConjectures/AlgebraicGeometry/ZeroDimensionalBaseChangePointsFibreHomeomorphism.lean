@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreTopology
 
-/-! Intermediate fibre facts for zero-dimensional base change.
+/-! # Intermediate fibre facts for zero-dimensional base change
 
 ## References
 

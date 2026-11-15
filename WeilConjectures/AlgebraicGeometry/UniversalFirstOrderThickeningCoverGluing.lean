@@ -13,10 +13,11 @@ import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningGluedAtlas
 /-!
 # Gluing universal first order thickenings on an open cover
 
+This gluing statement does not assume formal unramifiedness.
+
 ## References
 
-* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3), last two paragraphs. This gluing
-  assertion does not assume formal unramifiedness.
+* Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3).
 -/
 
 @[expose] public section

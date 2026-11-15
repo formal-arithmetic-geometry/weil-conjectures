@@ -20,7 +20,6 @@ set_option linter.privateModule false
 
 ## References
 
-* Stacks Tag 0GL1.
 * Stacks Tags 0GL1 and 0E48.
 * Stacks Tags 015F and 0GL1.
 -/

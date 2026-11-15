@@ -15,17 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentNoetherianModelCo
 
 ## References
 
-* Stacks Project, Tag 055Q.
-* Stacks Project, Tag 055Q, first two paragraphs, and Tag 055M. Proof: choose an affine
-  neighbourhood V of g x and put W = g⁻¹(V). Restrict the section and the smooth finitely presented
-  morphism to V. Write the coordinate ring of V as a filtered colimit of finite type Z-algebras.
-  Descend the finitely presented morphism and section to a stage, increasing the stage so that the
-  section identity and smoothness hold. This produces g₀ and σ₀ over a noetherian affine scheme T₀;
-  quasi-compactness and quasi-separatedness hold because the descended morphism is finitely
-  presented. The projection a from the base change W to P₀ is a scheme morphism. Restricting the
-  base has not changed any fibre or its section point. Tag 055M identifies the component locus on
-  the base change with the inverse image of the locus on P₀. Therefore the displayed equivalence
-  holds for every w, independently of any specialization or membership assumption on x.
+* Stacks Project, Tags 055Q and 055M.
 -/
 
 @[expose] public section

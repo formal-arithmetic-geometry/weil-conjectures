@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 
 ## References
 
-* Stacks Project, Tag 03EK.
 * Stacks, Tags 03EK and 05V4.
 -/
 

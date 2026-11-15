@@ -11,11 +11,11 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import WeilConjectures.AlgebraicGeometry.DerivedInternalHomRestrictOpen
 
 
-/-! # SupportPart of derived internal Hom
+/-! # The support part of derived internal Hom
 
 ## References
 
-* Stacks Project, Tag 0A9C proof.
+* Stacks Project, Tag 0A9C.
 -/
 
 @[expose] public section

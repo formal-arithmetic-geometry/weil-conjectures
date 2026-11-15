@@ -14,8 +14,8 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 ## References
 
-* Stacks Project, Sites and Sheaves, Proposition 7.44.3, and Modules on Sites, Tag 03D3, the
-  abelian-sheaf adjunction in its proof.
+* Stacks Project, Sites and Sheaves, Proposition 7.44.3.
+* Stacks Project, Modules on Sites, Tag 03D3.
 -/
 
 @[expose] public section

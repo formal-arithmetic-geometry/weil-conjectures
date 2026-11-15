@@ -24,7 +24,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tag 094H.
 * Stacks Project, Cohomology on Sites, Tag 094H, truncation and finite-free computation; Tags 06YS,
   06YQ, and Modules on Sites, Tag 0E8J.
 -/

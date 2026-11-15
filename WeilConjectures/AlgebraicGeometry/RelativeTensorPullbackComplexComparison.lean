@@ -19,7 +19,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 ## References
 
-* Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
+* Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE).
 -/
 
 @[expose] public section
