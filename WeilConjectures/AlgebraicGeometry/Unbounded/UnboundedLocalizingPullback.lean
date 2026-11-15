@@ -51,77 +51,6 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local instance] unboundedLocalizingPullbackCommShift
 
-private theorem coproduct_small_support.{w, v, u₂, v₂}
-    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [LocallySmall.{w} D]
-    {I : Type v} (K : I → D) (t : Cofan K) (ht : IsColimit t) :
-    Small.{w} {i // ¬ IsZero (K i)} := by
-  classical
-  let p (i : I) : t.pt ⟶ K i := ht.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
-  have hp (i j : I) : t.inj j ≫ p i = Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
-    ht.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
-  apply small_of_injective (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ t.inj i.val)
-  intro i j hij
-  apply Subtype.ext
-  by_contra hne
-  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
-  have hi : t.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
-  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
-  have hid : 𝟙 (K i.val) = 0 := by
-    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
-  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
-
-/-- Shrinking nonzero support extends preservation to every indexing universe. -/
-private theorem preservesCoproducts_of_small.{w, v, u₁, u₂, v₁, v₂}
-    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [LocallySmall.{w} D]
-    {C : Type u₁} [Category.{v₁} C] [Preadditive C]
-    (c : D ⥤ C) [c.PreservesZeroMorphisms]
-    (hsmall : ∀ J : Type w, PreservesColimitsOfShape (Discrete J) c)
-    (I : Type v) : PreservesColimitsOfShape (Discrete I) c := by
-  classical
-  have hpres (K : I → D) : PreservesColimit (Discrete.functor K) c := by
-    refine ⟨fun {t} ht ↦ ⟨?_⟩⟩
-    let t₀ : Cofan K := t
-    have hsupport : Small.{w} {i // ¬ IsZero (K i)} := coproduct_small_support K t₀ ht
-    let J := {i // ¬ IsZero (K i)}
-    have : PreservesColimitsOfShape (Discrete (Shrink.{w} J)) c := hsmall _
-    have : PreservesColimitsOfShape (Discrete J) c :=
-      preservesColimitsOfShape_of_equiv (Discrete.equivalence (equivShrink J)).symm c
-    let U : J → D := fun i ↦ K i.val
-    let r : Cofan U := Cofan.mk t.pt (fun i ↦ t₀.inj i.val)
-    have hr : IsColimit r := by
-      refine Cofan.IsColimit.mk r (fun s ↦ ht.desc (Cofan.mk s.pt
-        (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-      · intro s i
-        obtain ⟨i, hi⟩ := i
-        change t.ι.app (Discrete.mk i) ≫ _ = _
-        rw [ht.fac]
-        simp only [Cofan.mk_ι_app, dite_eq_left hi]
-      · intro s m hm
-        apply ht.hom_ext
-        intro ⟨i⟩
-        rw [ht.fac]
-        by_cases hi : ¬ IsZero (K i)
-        · simpa only [r, cofan_mk_inj, t₀, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-            using hm ⟨i, hi⟩
-        · exact (not_not.mp hi).eq_of_src _ _
-    let q : Cofan (fun i ↦ c.obj (U i)) :=
-      Cofan.mk (c.obj t.pt) (fun i ↦ c.map (t₀.inj i.val))
-    have hq : IsColimit q := isColimitCofanMkObjOfIsColimit c U _ hr
-    refine { desc := fun s ↦ hq.desc (Cofan.mk s.pt
-        (fun i ↦ s.ι.app (Discrete.mk i.val))), fac := ?_, uniq := ?_ }
-    · intro s ⟨i⟩
-      by_cases hi : ¬ IsZero (K i)
-      · exact hq.fac (Cofan.mk s.pt (fun i ↦ s.ι.app (Discrete.mk i.val)))
-          (Discrete.mk ⟨i, hi⟩)
-      · exact (c.map_isZero (not_not.mp hi)).eq_of_src _ _
-    · intro s m hm
-      apply Cofan.IsColimit.hom_ext hq
-      intro i
-      exact (hm (Discrete.mk i.val)).trans
-        (hq.fac (Cofan.mk s.pt (fun i ↦ s.ι.app (Discrete.mk i.val)))
-          (Discrete.mk i)).symm
-  exact preservesColimitsOfShape_of_discrete c
-
 private theorem pullback_exact
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Y' Y : Scheme.{u}} (g : Y' ⟶ Y) :
@@ -281,7 +210,7 @@ private theorem pullback_of_constructible
             restrictionExact := ?_
             restrictionSums := ?_ }⟩
   · infer_instance
-  · exact fun I ↦ preservesCoproducts_of_small R hrsmall I
+  · exact fun I ↦ Functor.preservesColimitsOfShape_discrete_of_small R hrsmall I
 
 -- Elaborating all six coefficient instances needs the same heartbeat budget.
 /-- Exact inverse image preserves small sums, bounded constructible finite-Tor objects,
