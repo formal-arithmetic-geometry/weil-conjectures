@@ -98,7 +98,7 @@ private theorem localizing_large.{v, w}
       intro ⟨i⟩
       exact (hm i).trans (colimit.ι_desc (c s) ⟨i⟩).symm
   let J := {i // ¬ IsZero (K i)}
-  have : Small.{v} J := coproduct_small_support.{v, w, w, v} K t ht
+  have : Small.{v} J := coproduct_small_support.{v, v, w, v} K t ht
   let : P.IsClosedUnderColimitsOfShape (Discrete J) :=
     ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
       (Discrete.equivalence (equivShrink J)).symm
@@ -133,7 +133,7 @@ private theorem localizing_small.{v}
   let : P.IsClosedUnderColimitsOfShape (Discrete (ULift.{v + 1} J)) :=
     ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
       rintro _ ⟨F, hF⟩
-      exact hP.2.2 F inferInstance (fun i ↦ hF ⟨i⟩))
+      exact hP.prop_colimit F inferInstance (fun i ↦ hF ⟨i⟩))
   exact ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
     (Discrete.equivalence Equiv.ulift)
 
@@ -163,7 +163,7 @@ private theorem localizing_inverseImage
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro I G hG h
   let := hG
-  have hcol : P (colimit (G ⋙ F)) := hP.2.2 (G ⋙ F) inferInstance h
+  have hcol : P (colimit (G ⋙ F)) := hP.prop_colimit (G ⋙ F) inferInstance h
   exact P.prop_of_iso (preservesColimitIso F G).symm hcol
 
 private theorem localizing_tensor_closed

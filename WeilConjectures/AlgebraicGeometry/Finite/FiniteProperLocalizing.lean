@@ -143,7 +143,7 @@ private theorem maps_localizingClosure
     (hT : IsLocalizingSubcategory (localizingClosure T))
     (hgen : ∀ K, S K → P K)
     (hpres : ∀ K, S K → T (F.obj K))
-    (hsums : ∀ (I : Type u) (J : Discrete I ⥤ C),
+    (hsums : ∀ (I : Type v) (J : Discrete I ⥤ C),
       (∀ i : I, P (J.obj ⟨i⟩)) → PreservesColimit J F) :
     ∀ K, localizingClosure S K → localizingClosure T (F.obj K) := by
   let Q := localizingClosure T
@@ -159,10 +159,36 @@ private theorem maps_localizingClosure
     letI := hsums I J (fun i ↦ (hJR i).1)
     exact ⟨hP.2.2 J hJ (fun i ↦ (hJR i).1),
       Q.prop_of_iso (preservesColimitIso F J).symm
-        (hT.2.2 (J ⋙ F) inferInstance (fun i ↦ (hJR i).2))⟩
+        (hT.prop_colimit (J ⋙ F) inferInstance (fun i ↦ (hJR i).2))⟩
   intro K hK
   exact (hK R hR (fun L hL ↦ ⟨hgen L hL,
     fun V _ hV ↦ hV _ (hpres L hL)⟩)).2
+
+/-- A functor preserves an existing direct sum of objects of a localizing subcategory as soon as
+its restriction to the subcategory preserves direct sums of that shape: the subcategory is closed
+under the direct sum (`IsLocalizingSubcategory.isClosedUnderColimitsOfShape_discrete`), so its
+inclusion creates it. -/
+private theorem preserves_of_localizing
+    {C D : Type*} [Category* C] [Category* D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) (hP : IsLocalizingSubcategory P) (F : C ⥤ D)
+    {I : Type*} [PreservesColimitsOfShape (Discrete I) (P.ι ⋙ F)]
+    (K : Discrete I ⥤ C) (hK : ∀ i : I, P (K.obj ⟨i⟩)) : PreservesColimit K F := by
+  apply PreservesColimit.mk'
+  intro hcol
+  let := hcol
+  let := hP.2.1
+  let : P.IsClosedUnderColimitsOfShape (Discrete I) :=
+    hP.isClosedUnderColimitsOfShape_discrete I
+  let L := P.lift K (fun j ↦ hK j.as)
+  letI : HasColimit (L ⋙ P.ι) := hcol
+  letI : CreatesColimit L P.ι :=
+    createsColimitFullSubcategoryInclusionOfClosed (Discrete I) P L
+  letI : HasColimit L := hasColimit_of_created L P.ι
+  have hh := isColimitOfPreserves (P.ι ⋙ F) (colimit.isColimit L)
+  exact preservesColimit_of_preserves_colimit_cocone
+    (isColimitOfPreserves P.ι (colimit.isColimit L)) hh
 
 private theorem preserves_on_subcategory
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
@@ -503,13 +529,8 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
     letI : HasColimitsOfShape (Discrete I)
         (DerivedCategory (FiniteDiscreteOrdinary.Internal A X)) :=
       Adjunction.hasColimitsOfShape_of_equivalence (E X).fixedDerived.functor
-    let : P.IsClosedUnderColimitsOfShape (Discrete (ULift.{u + 2} I)) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
-        rintro _ ⟨D, hD⟩
-        exact hP.2.2 D inferInstance (fun j ↦ hD ⟨j⟩))
     let : P.IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-        (Discrete.equivalence Equiv.ulift)
+      hP.isClosedUnderColimitsOfShape_discrete I
     apply preserves_on_subcategory P (E X).fixedDerived (E Y).fixedDerived F G i
     intro M hM
     exact ordinary_preserves_coproduct (ULift.{u + 1} A) f
@@ -520,25 +541,13 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
   have hsums (I : Type (u + 2))
       (D : Discrete I ⥤ DerivedCategory (FiniteDiscreteOrdinary.Internal A X))
       (hD : ∀ i : I, P (D.obj ⟨i⟩)) : PreservesColimit D F := by
-    apply PreservesColimit.mk'
-    intro hcol
-    let := hcol
-    let := hP.2.1
-    let : P.IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
-        rintro _ ⟨D, hD⟩
-        exact hP.2.2 D inferInstance (fun j ↦ hD ⟨j⟩))
-    let L := P.lift D (fun j ↦ hD j.as)
     let := hslarge I
-    letI : HasColimit (L ⋙ P.ι) := hcol
-    letI : CreatesColimit L P.ι :=
-      createsColimitFullSubcategoryInclusionOfClosed (Discrete I) P L
-    letI : HasColimit L := hasColimit_of_created L P.ι
-    letI : PreservesColimit L (P.ι ⋙ F) :=
-      (hslarge I).preservesColimit
-    have hh := isColimitOfPreserves (P.ι ⋙ F) (colimit.isColimit L)
-    exact preservesColimit_of_preserves_colimit_cocone
-      (isColimitOfPreserves P.ι (colimit.isColimit L)) hh
+    exact preserves_of_localizing P hP F D hD
+  have hsumsSmall (I : Type (u + 1))
+      (D : Discrete I ⥤ DerivedCategory (FiniteDiscreteOrdinary.Internal A X))
+      (hD : ∀ i : I, P (D.obj ⟨i⟩)) : PreservesColimit D F := by
+    let := hs I
+    exact preserves_of_localizing P hP F D hD
   let ff : SX ⟶ SY := Over.homMk f (by
     change f ≫ (Y ↘ Spec (.of k)) = X ↘ Spec (.of k)
     exact comp_over f _)
@@ -558,7 +567,7 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
         fun M ↦ _root_.DerivedCategory.finiteTorAmplitude _ M)
       (constantModelBoundedConstructible (FiniteDiscreteOrdinary.coefficient A) Y ⊓
         fun M ↦ _root_.DerivedCategory.finiteTorAmplitude _ M) F P hP hQ hgen
-      (fun K hK ↦ hpres ⟨K, hK⟩) hsums
+      (fun K hK ↦ hpres ⟨K, hK⟩) hsumsSmall
   · intro T hT _ _ _
     exact Functor.map_distinguished _ T hT
   · intro I D hD

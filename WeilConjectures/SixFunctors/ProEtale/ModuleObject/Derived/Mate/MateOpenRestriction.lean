@@ -166,7 +166,7 @@ theorem mateOpenImmersion
         adjF.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit
       have : HasColimit (D ⋙ F) := inferInstance
       exact P.prop_of_iso (preservesColimitIso F D).symm
-        (hP.2.2 (D ⋙ F) inferInstance hobj)
+        (hP.prop_colimit (D ⋙ F) inferInstance hobj)
     exact K.property (P.inverseImage F) hR (fun L hL ↦
       hS _ (openPullback_generators Λ ℓ k p _hp _hpℓ _hΛ j ⟨L, hL⟩))
   have ht : ∀ K, localizingClosureProEtale Λ U K → localizingClosureProEtale Λ X

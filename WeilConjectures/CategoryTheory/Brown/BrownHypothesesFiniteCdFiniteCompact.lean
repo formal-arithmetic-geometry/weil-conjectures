@@ -294,10 +294,8 @@ theorem brownHypotheses_compact_of_finite_cd_finite
           let _ := ht.1
           let _ := ht.2.1
           have hbig (I : Type (u + 2)) :
-              T.IsClosedUnderColimitsOfShape (Discrete I) := by
-            apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-            rintro _ ⟨F, hF⟩
-            exact ht.2.2 F inferInstance (fun i ↦ hF ⟨i⟩)
+              T.IsClosedUnderColimitsOfShape (Discrete I) :=
+            ht.isClosedUnderColimitsOfShape_discrete I
           have _ (I : Type (u + 1)) :
               T.IsClosedUnderColimitsOfShape (Discrete I) :=
             ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
