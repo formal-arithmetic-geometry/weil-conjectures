@@ -155,63 +155,10 @@ lemma derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app {X Y : Scheme.{u}} (f 
   -- (Push) is the transpose, along `L(Ext) ⊣ D(Res)`, of the isomorphism
   -- `Rf_* ⋙ D(Res) ≅ D(Res) ⋙ Rf_*`; these isomorphisms compose along `E ⊆ F ⊆ ℚ̄_ℓ`, and
   -- transposes of composites are composites.
-  have H : (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f).app K =
-      (Mod.derivedExtendScalarsCompIso
-          (coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) Y)
-          (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) Y)
-          (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y)
-          (coefficientMap_comp_eq (Profinite.padicSubfieldRingObjMap ℓ h)
-            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
-            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-            (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) Y)).hom.app
-          (R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj K) ≫
-        L(Mod.extendScalars
-          (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) Y)).map
-          ((derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f).app K) ≫
-        (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) f).app
-          (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) X)).obj K) ≫
-        R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-          ((Mod.derivedExtendScalarsCompIso
-            (coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) X)
-            (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) X)
-            (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X)
-            (coefficientMap_comp_eq (Profinite.padicSubfieldRingObjMap ℓ h)
-              (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
-              (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-              (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) X)).inv.app K) :=
-    Adjunction.pushHomOfComapIso_app_eq_comp
-      (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) X))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) X))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) Y))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) Y))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y))
-      (derivedComapLowerStarIso (Profinite.padicSubfieldRingObjMap ℓ h) f)
-      (derivedComapLowerStarIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) f)
-      (derivedComapLowerStarIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f)
-      (Mod.mapDerivedCategoryComapCompIso _ _ _
-        (coefficientMap_comp_eq (Profinite.padicSubfieldRingObjMap ℓ h)
-          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
-          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-          (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) X))
-      (Mod.mapDerivedCategoryComapCompIso _ _ _
-        (coefficientMap_comp_eq (Profinite.padicSubfieldRingObjMap ℓ h)
-          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
-          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-          (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) Y))
-      (derivedComapLowerStarIso_hom_app_comp (Profinite.padicSubfieldRingObjMap ℓ h)
-        (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
-        (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f
-        (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h)) K
-  have hA := derivedExtendScalarsCompIso_inv_app ℓ h Y
-    (R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj K)
-  have hD := derivedExtendScalarsCompIso_hom_app ℓ h X K
+  have H := derivedPushHom_app_eq_comp_of_comp_eq (Profinite.padicSubfieldRingObjMap ℓ h)
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f
+    (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) K
   with_reducible exact H.trans ((eq_whisker hA _).symm.trans (whisker_eq _ (whisker_eq _
     (whisker_eq _ (R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).congr_map hD.symm)))))
 

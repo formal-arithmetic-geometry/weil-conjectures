@@ -52,6 +52,7 @@ section Proper
 
 variable (p : X ⟶ Y) [IsProper p.left]
 
+omit [IsProper p.left] in
 /-- The comparison `boundedConstructibleLowerStarToPadicAlgClHom` is, on the underlying
 complexes, the derived (Push) comparison `derivedPushHom`. -/
 lemma boundedConstructibleLowerStarToPadicAlgClHom_app_hom

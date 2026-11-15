@@ -99,13 +99,6 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClH
       (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).hom _ ≫
     (Functor.associator _ _ _).hom
 
-/-- The change-of-coefficients map for `Rf_!(c)` is an isomorphism, (Push) being one for the
-proper part `g` of the compactification. -/
-instance isIso_boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom :
-    IsIso (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom ℓ E c) := by
-  unfold boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom
-  infer_instance
-
 /-- **(Shriek)** on bounded constructible complexes along a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, for the inclusion `E ⟶ ℚ̄_ℓ`:
 `Rf_!(c)^E ⋙ T_Y ≅ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}`, the change-of-coefficients map
@@ -129,6 +122,13 @@ lemma boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso_hom :
     (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).hom =
       boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom ℓ E c :=
   rfl
+
+/-- The change-of-coefficients map for `Rf_!(c)` is an isomorphism, (Push) being one for the
+proper part `g` of the compactification. -/
+instance isIso_boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom :
+    IsIso (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClHom ℓ E c) := by
+  rw [← boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso_hom]
+  infer_instance
 
 /-- The exchange `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_{ℚ̄_ℓ}` for the proper part `g` of a compactification:
 the mate of the inverse of (Push) under the adjunctions `Rg_* ⊣ Rg^!`. -/
