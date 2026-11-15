@@ -342,26 +342,32 @@ private theorem fixed_section_bound
   exact isZero_rightDerived_sectionsFunctor_of_upperStar
     (ModuleCat.{u + 1} A) ((Scheme.toProEt X).obj W) H q hglobal
 
-private theorem section_tail_bound
+/-- **Truncation and pro-étale sections.** Let `W` be an object of the small pro-étale site of
+`X` and `e` a bound such that `H^q(W, F) = 0` for `q > e` and every classical sheaf `F` of
+`A`-modules on `X_proét`. If `K` is a complex of pro-étale sheaves of `A`-modules with classical
+cohomology sheaves and `H^q(K) = 0` for `q > b`, then `H^j RΓ(W, K) = 0` for `j > b + e + 1`.
+
+The complex is the derived limit of its truncations `τ_{≥ -n} K`, which are bounded; on each
+truncation the vanishing range follows from the hypothesis on classical sheaves, and the derived
+limit costs at most one further degree. -/
+theorem section_tail_bound
     (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
-    (W : X.Etale) [IsAffine W.left] (e : ℕ)
+    (W : X.ProEt) (e : ℕ)
     (hb : ∀ H : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A),
       IsClassicalModuleFor X A H → ∀ q : ℕ, e < q →
-        IsZero (((sectionsFunctor (ModuleCat.{u + 1} A)
-          ((Scheme.toProEt X).obj W)).rightDerived q).obj H))
+        IsZero (((sectionsFunctor (ModuleCat.{u + 1} A) W).rightDerived q).obj H))
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
     (b : ℤ) [K.IsLE b]
     (hc : ∀ q : ℤ, q ≤ b → IsClassicalModuleFor X A
       ((DerivedCategory.homologyFunctor
         (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) q).obj K)) :
-    (((sectionsFunctor (ModuleCat.{u + 1} A)
-      ((Scheme.toProEt X).obj W)).rightDerivedFunctor).obj K).IsLE (b + e + 1) := by
+    (((sectionsFunctor (ModuleCat.{u + 1} A) W).rightDerivedFunctor).obj K).IsLE (b + e + 1) := by
   let C := Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)
   let : Abelian C := inferInstance
   have (q : ℤ) : (DerivedCategory.homologyFunctor C q).PreservesZeroMorphisms :=
     inferInstance
   let F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) ⥤
-      ModuleCat.{u + 1} A := sectionsFunctor (ModuleCat.{u + 1} A) ((Scheme.toProEt X).obj W)
+      ModuleCat.{u + 1} A := sectionsFunctor (ModuleCat.{u + 1} A) W
   have : F.Additive := inferInstance
   have : PreservesLimitsOfShape (Discrete ℕ) F := by
     dsimp only [F, sectionsFunctor]
@@ -516,10 +522,8 @@ private theorem boundedCounit (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
   let b := (comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus
   let Kp : DerivedCategory.Plus
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) := ⟨K, n, inferInstance⟩
-  have hu := (boundedBelowComparison X Λ).1
   have hb : IsIso (b.counit.app Kp) :=
-    (classicalDerivedEquivalence X Λ
-      (fun M ↦ by let := hu; infer_instance)).2.1 Kp hK
+    (classicalDerivedEquivalence X Λ).2.1 Kp hK
   let c : L.mapDerivedCategoryPlus ⊣ R.rightDerivedFunctorPlus := a.restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     L.mapDerivedCategoryPlusCompatibility.symm R.rightDerivedFunctorPlusCompatibility.symm
@@ -622,7 +626,7 @@ theorem comparisonUpperStar_isClassicalComplexFor
     have hR : (R.rightDerivedFunctor.obj J).IsLE (n + e) := by
       apply comparison_isLE_of_sections X A J (n + e)
       intro W _
-      have hh := section_tail_bound X A W e
+      have hh := section_tail_bound X A ((Scheme.toProEt X).obj W) e
         (fun H hH q hq ↦ fixed_section_bound k hbase ℓ hℓ A hA X W H hH q hq)
         J (n - 1) hclassJ
       convert hh using 1

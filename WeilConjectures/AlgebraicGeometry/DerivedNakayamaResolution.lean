@@ -479,7 +479,9 @@ private theorem quotientDiscrete (n : ℕ) :
     rw [← isQuotientMap_quot_mk.isOpen_preimage]
     exact hq.isOpen_fiber _
 
-private def uniformizerMap : integerRing l E ⟶ integerRing l E := by
+/-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
+`O_E`, as a morphism of sheaves of abelian groups. -/
+def uniformizerMap : integerRing l E ⟶ integerRing l E := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   refine ⟨{ app := fun S ↦ ?_, naturality := ?_ }⟩
   · exact AddCommGrpCat.ofHom
@@ -490,7 +492,9 @@ private def uniformizerMap : integerRing l E ⟶ integerRing l E := by
   · intro S T f
     rfl
 
-private def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
+/-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
+`O_E`, as an endomorphism of the regular `O_E`-module object. -/
+def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   refine .of (Mod.homMk (uniformizerMap l E) ?_)
   change MonObj.mul ≫ uniformizerMap l E =
@@ -513,7 +517,9 @@ private def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
     f.down x * (Padic.coefficientExtensionUniformizer l E * g.down x)
   ring
 
-private def reductionHom (n : ℕ) :
+/-- The quotient map `O_E ⟶ O_E/π_E^n` of continuous condensed rings, as a morphism of
+`O_E`-module objects from the regular module to the quotient with its restricted action. -/
+def reductionHom (n : ℕ) :
     Mod.regular (integerRing l E) ⟶ quotientModule l E n :=
   Mod.homMk (reductionRing l E n) (by
     change MonObj.mul ≫ reductionRing l E n =
@@ -554,7 +560,8 @@ private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
       (((uniformizerEnd l E).asHom.hom.hom.app S) f)).down s = _
     rw [ih, uniformizerEnd_apply, pow_succ, mul_assoc]
 
-private theorem reduction_zero (n : ℕ) :
+/-- Multiplication by `π_E^n` followed by the quotient map `O_E ⟶ O_E/π_E^n` is zero. -/
+theorem reduction_zero (n : ℕ) :
     (uniformizerEnd l E ^ n).asHom ≫ reductionHom l E n = 0 := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   apply Mod.hom_ext
@@ -667,6 +674,20 @@ private theorem pointResolution (n : ℕ) :
   have : Epi S.g := Functor.epi_of_epi_map (Mod.forget _) hs.epi_g
   exact ⟨(S.exact_map_iff_of_faithful (Mod.forget _)).mp hs.exact⟩
 
+/-- **The finite quotients of the coefficient sheaf on `X_proét`.** For every `n` the sequence
+`0 ⟶ O_{E,X} ⟶ O_{E,X} ⟶ (O_E/π_E^n)_X ⟶ 0` of `O_{E,X}`-module objects on the small pro-étale
+site of `X`, with first map multiplication by `π_E^n` and second map the quotient map, is short
+exact. The coefficient sheaves are the pullbacks from the point of the continuous condensed
+integer ring and of its finite quotient (with its restricted `O_E`-action), and the arrows are
+the pullbacks of multiplication by the uniformizer power and of the quotient map; no assumption
+on `ℓ` being invertible on `X` is made. The sequence on the point is short exact
+(sectionwise, by continuous division by the uniformizer power and continuous lifting along the
+finite discrete quotient), and the pullback from the point is exact. -/
+theorem shortExact_pullback_reductionShortComplex (X : Scheme.{u}) (n : ℕ) :
+    ((ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
+      (reduction_zero l E n)).map (pullback l E X)).ShortExact :=
+  (pointResolution l E n).map_of_exact (pullback l E X)
+
 private def unitEndOnX (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E))) :
     UnitScalar.Scalars (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -766,7 +787,7 @@ theorem derived_nakayama_resolution :
   refine ⟨uniformizerEnd l E, uniformizerEnd_apply l E,
     reductionHom l E, fun _ ↦ rfl, i, q, hi, hq, ?_⟩
   intro X n hn
-  have hs := (pointResolution l E n).map_of_exact (pullback l E X)
+  have hs := shortExact_pullback_reductionShortComplex l E X n
   refine ⟨⟨_, hs⟩, naturalCone l E X n, ?_⟩
   intro m hm hmn K
   obtain ⟨hz, hshort⟩ := hseq m n

@@ -135,4 +135,35 @@ theorem proetale_weakContractible_equivalences
     · intro D _ _ f _
       exact (proetale_wContractible_projective X D f).1
 
+/-- **Weak contractibility and projectivity of the representable sheaf.** An object `W` of the
+small pro-étale site of `X` is weakly contractible (every epimorphism of sheaves of sets is
+surjective on sections over `W`) if and only if the representable sheaf `h_W` is projective:
+epimorphisms of sheaves of sets are the locally surjective morphisms
+(`CategoryTheory.Sheaf.isLocallySurjective_iff_epi`), and the second equivalence of
+`AlgebraicGeometry.Scheme.proetale_weakContractible_equivalences` identifies the surjectivity
+condition with projectivity. -/
+theorem isWeaklyContractible_iff_projective (X : Scheme.{u}) (W : X.ProEt) :
+    (ProEt.topology X).IsWeaklyContractible.{u + 1} W ↔
+      Projective ((ProEt.topology X).uliftYoneda.{u + 1}.obj W) := by
+  rw [(proetale_weakContractible_equivalences X W).2.1]
+  constructor
+  · intro h F G φ _
+    exact h φ ((Sheaf.isLocallySurjective_iff_epi φ).2 inferInstance)
+  · intro h F G φ hφ
+    have : Epi φ := (Sheaf.isLocallySurjective_iff_epi φ).1 hφ
+    exact h F G φ
+
+/-- **Weak contractibility by splitting of epimorphisms onto the representable sheaf.** An object
+`W` of the small pro-étale site of `X` is weakly contractible if and only if every epimorphism
+of sheaves of sets `F ⟶ h_W` admits a section: both conditions are equivalent to the
+projectivity of `h_W` (`AlgebraicGeometry.Scheme.isWeaklyContractible_iff_projective` and the
+first equivalence of `AlgebraicGeometry.Scheme.proetale_weakContractible_equivalences`). -/
+theorem isWeaklyContractible_iff_forall_epi_splits (X : Scheme.{u}) (W : X.ProEt) :
+    (ProEt.topology X).IsWeaklyContractible.{u + 1} W ↔
+      ∀ (F : Sheaf (ProEt.topology X) (Type (u + 1)))
+        (φ : F ⟶ (ProEt.topology X).uliftYoneda.{u + 1}.obj W) [Epi φ],
+        ∃ s : (ProEt.topology X).uliftYoneda.{u + 1}.obj W ⟶ F, s ≫ φ = 𝟙 _ :=
+  (isWeaklyContractible_iff_projective X W).trans
+    (proetale_weakContractible_equivalences X W).1.symm
+
 end AlgebraicGeometry.Scheme

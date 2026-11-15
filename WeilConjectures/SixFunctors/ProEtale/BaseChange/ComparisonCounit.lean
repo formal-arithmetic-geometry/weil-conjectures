@@ -160,7 +160,12 @@ theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
   simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using
     underived_comparison_counit Λ f K
 
-private theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
+/-- **The canonical comparison of direct images and the counits**, on bounded below derived
+categories and for an arbitrary morphism `f : U ⟶ V`: the pullback comparison `a` (the inverse
+of `ν^* f^* ≅ f^* ν^*` on `D⁺`) at `R⁺f_* K`, followed by `f^*` of the canonical base change
+morphism `ν_V^* R⁺f_* K ⟶ R⁺f_* ν_U^* K` of right derived functors and the pro-étale counit at
+`ν_U^* K`, is `ν_U^*` of the étale counit `f^* R⁺f_* K ⟶ K`. -/
+theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     let a := (Functor.mapDerivedCategoryPlusCompIso
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) V)
