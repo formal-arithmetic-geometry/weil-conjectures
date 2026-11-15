@@ -590,12 +590,69 @@ private theorem pasteFunctorComparisonSquares
     (Iso.app ph (k.obj M)) (Iso.app pk M) (Iso.app pL M) (Iso.app pR M)
     (Iso.app iL (ED.obj M)) (Iso.app iR (ED.obj M)) (Iso.app ti (ED.obj M)) hl hr hc
 
+-- Assemble the square over an arbitrary finite ring before specializing its coefficients.
+private theorem native_pullback_square (A : Type u) [CommRing A] [Finite A]
+    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (sq : IsPullback h f' f g)
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :
+    (proEtaleConstantRingDerivedPullback A f').map
+        ((derivedComparison A g).inv.app M) ≫
+      (derivedComparison A f').inv.app
+        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+          g).leftDerivedFunctor.obj M) ≫
+      (sfIntrinsicModuleEquivalence X' A).functor.mapDerivedCategory.map
+        ((leftDerivedUpperStarSquareIso
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) sq.toCommSq).hom.app M) =
+    (proEtaleConstantRingPullbackComposition f' g A ≪≫
+        eqToIso (congrArg (fun a ↦
+          proEtaleConstantRingDerivedPullback A a) sq.w.symm) ≪≫
+        (proEtaleConstantRingPullbackComposition h f A).symm).hom.app
+          ((sfIntrinsicModuleEquivalence Y A).functor.mapDerivedCategory.obj M) ≫
+      (proEtaleConstantRingDerivedPullback A h).map
+        ((derivedComparison A f).inv.app M) ≫
+      (derivedComparison A h).inv.app
+        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+          f).leftDerivedFunctor.obj M) := by
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  have he := pasteFunctorComparisonSquares
+    (derivedComparison A f') (derivedComparison A g)
+    (derivedComparison A h) (derivedComparison A f)
+    (derivedComparison A (f' ≫ g)) (derivedComparison A (h ≫ f))
+    (leftDerivedUpperStarComp B f' g) (leftDerivedUpperStarComp B h f)
+    (leftDerivedUpperStarCongr B sq.w.symm)
+    (proEtaleConstantRingPullbackComposition f' g A).symm
+    (proEtaleConstantRingPullbackComposition h f A).symm
+    (eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback A a) sq.w.symm)) M
+    (by
+      have H := native_comp_square A f' g M
+      simp only [Iso.symm_hom]
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+        exactByConversion h)
+    (by
+      have H := native_comp_square A h f M
+      simp only [Iso.symm_hom]
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+        exactByConversion h)
+    (by
+      have H := native_congr_square A sq.w.symm M
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+        exactByConversion h)
+  simp only [B, Iso.symm_hom, Iso.symm_inv, leftDerivedUpperStarSquareIso,
+    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] at he ⊢
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+    exactByConversion h
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
-set_option maxHeartbeats 600000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words. -/
 theorem strictFinitePullbackSquareCoherence (b : Base l E)
@@ -623,37 +680,9 @@ theorem strictFinitePullbackSquareCoherence (b : Base l E)
         ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
           f).leftDerivedFunctor.obj M) := by
   letI := b.finite n
-  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
-  have he := pasteFunctorComparisonSquares
-    (comparisonFinitePull l E b f' n) (comparisonFinitePull l E b g n)
-    (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f n)
-    (comparisonFinitePull l E b (f' ≫ g) n) (comparisonFinitePull l E b (h ≫ f) n)
-    (leftDerivedUpperStarComp B f' g) (leftDerivedUpperStarComp B h f)
-    (leftDerivedUpperStarCongr B sq.w.symm)
-    (proEtaleConstantRingPullbackComposition f' g (R l E n)).symm
-    (proEtaleConstantRingPullbackComposition h f (R l E n)).symm
-    (eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a) sq.w.symm)) M
-    (by
-      have H := native_comp_square (R l E n) f' g M
-      simp only [Iso.symm_hom]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-        exactByConversion h)
-    (by
-      have H := native_comp_square (R l E n) h f M
-      simp only [Iso.symm_hom]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-        exactByConversion h)
-    (by
-      have H := native_congr_square (R l E n) sq.w.symm M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-        exactByConversion h)
-  simp only [B, Iso.symm_hom, Iso.symm_inv, leftDerivedUpperStarSquareIso,
-    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] at he ⊢
+  have H := native_pullback_square (R l E n) sq M
   run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek

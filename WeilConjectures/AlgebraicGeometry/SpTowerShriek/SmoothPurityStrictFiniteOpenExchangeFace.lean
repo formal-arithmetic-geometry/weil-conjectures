@@ -482,6 +482,13 @@ private theorem rotate_face {C : Type*} [Category C] {A B D E F G : C}
   rw [h]
   simp only [Iso.hom_inv_id_assoc]
 
+-- Normalize the unit equation before specializing to the derived categories.
+private theorem unit_equation_of_homEquiv
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (a : L ⊣ R) {X : C} {Y : D} {f : L.obj X ⟶ Y} {g : X ⟶ R.obj Y}
+    (h : a.homEquiv X Y f = g) : a.unit.app X ≫ R.map f = g := by
+  simpa only [Adjunction.homEquiv_unit] using h
+
 -- Explicit comparison congruences are checked within this declaration.
 private theorem native_open_unit_mate (A : Type u) [CommRing A]
     {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
@@ -518,7 +525,6 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
-set_option maxHeartbeats 400000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}
@@ -560,14 +566,11 @@ private theorem inverse_pull_square (b : Base l E)
       ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).leftDerivedFunctor.obj M))
     (by
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h)
+      simp only [Iso.app, Functor.mapIso_hom, Iso.symm_hom, Iso.symm_inv]
+      exact HC)
   simp only [Iso.app, Functor.mapIso_inv,
     Iso.symm_hom, Iso.symm_inv] at he
-  run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h
+  exact he
 
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_scalar_from_comparisons
@@ -601,7 +604,6 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
-set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
     (o : Operations l E b) (levels : ComparisonLevels l E b o)
@@ -625,6 +627,7 @@ private theorem open_exchange_inverse (b : Base l E)
         ((openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
   let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
+  -- Share the converted mate and cube proofs so the kernel checks their conversions once.
   have H := open_scalar_from_comparisons
     (comparisonFinitePull l E b g n).symm (comparisonFinitePull l E b h n).symm
     (comparisonFinitePull l E b j n).symm (comparisonFinitePull l E b j' n).symm
@@ -643,34 +646,37 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h) (by
+      simp only [B, Iso.symm_inv, Functor.comp_obj]
+      exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h)
+      simp only [B, Iso.symm_inv, Functor.comp_obj]
+      exact HU)
     (by
-      intro M
-      have HU := native_open_unit_mate (R l E n) sq M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h)
+      as_aux_lemma =>
+        intro M
+        have HU := native_open_unit_mate (R l E n) sq M
+        simp only [B, Iso.symm_hom, Functor.comp_obj]
+        exact HU)
     (fun K ↦ by
-      have he := levels.openExchange_mate h j' j g sq n K
-      simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
-        Iso.symm_inv, NatTrans.comp_app, Category.assoc,
-        eqToIso.inv] at he ⊢
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h)
+      as_aux_lemma =>
+        have he := unit_equation_of_homEquiv (comparisonLevelOpenAdjunction l E b j' n)
+          (levels.openExchange_mate h j' j g sq n K)
+        simp only [Iso.symm_hom, Iso.trans_inv,
+          Iso.symm_inv, NatTrans.comp_app, Category.assoc,
+          eqToIso.inv, Functor.comp_obj, Functor.id_obj] at he ⊢
+        run_tac Lean.Elab.Tactic.withMainContext do
+          let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+          exactByConversion h)
     (by
-      intro M
-      have HC := inverse_pull_square l E b sq n M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h) N
+      as_aux_lemma =>
+        intro M
+        have HC := inverse_pull_square l E b sq n M
+        simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+        run_tac Lean.Elab.Tactic.withMainContext do
+          let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+          exactByConversion h) N
+  simp only [B, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
