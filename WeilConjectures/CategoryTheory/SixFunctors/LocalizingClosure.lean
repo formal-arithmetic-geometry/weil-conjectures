@@ -123,7 +123,7 @@ theorem coproduct_small_nonzero_support [LocallySmall.{w'} C] {I : Type w} (K : 
 
 /-- An existing direct sum is the direct sum of its nonzero summands: the arrows out of the
 omitted zero summands are unique. -/
-theorem Cofan.isColimit_restrict_nonzero {I : Type w} (K : I → C) (c : Cofan K)
+noncomputable def Cofan.isColimit_restrict_nonzero {I : Type w} (K : I → C) (c : Cofan K)
     (hc : IsColimit c) :
     IsColimit (Cofan.mk c.pt (fun i : {i // ¬ IsZero (K i)} ↦ c.inj i.val)) := by
   classical
