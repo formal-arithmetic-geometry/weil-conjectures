@@ -25,8 +25,52 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
-set_option maxHeartbeats 700000 in
--- Transport through the complex and homotopy localization interfaces.
+
+private lemma schemeMV_localization_unit_app
+    {X Y : Scheme.{u}} (h : X ⟶ Y)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    (schemeMVDirectImageLocalization h).app I =
+      (DerivedCategory.quotientCompQhIso _).inv.app
+          (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
+            (.up ℤ)).obj I) ≫
+        (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ _).obj I) ≫
+        (schemeDerivedDirectImage h).map
+          ((DerivedCategory.quotientCompQhIso _).hom.app I) := by
+  dsimp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+  erw [DerivedCategory.Qh.map_id, Category.id_comp]
+
+-- Cancel the quotient comparisons before specializing to derived categories of modules.
+private lemma schemeMV_transport_composition_unit
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (F : B ⥤ D) (RX : A ⥤ B) (G : A ⥤ C) (RY : C ⥤ D)
+    (β : RX ⋙ F ≅ G ⋙ RY)
+    {U₀ U₁ : A} {X₀ X₁ : B} {V₀ V₁ : C} {Y₀ Y₁ Z₀ Z₁ : D}
+    (e : U₀ ≅ U₁) (ex : X₀ ≅ X₁) (ev : V₀ ≅ V₁)
+    (ey : Y₀ ≅ Y₁) (ez : Z₀ ≅ Z₁)
+    (ux : X₀ ⟶ RX.obj U₀) (uf : Y₀ ⟶ F.obj X₀)
+    (ug : V₀ ⟶ G.obj U₀) (uy : Z₀ ⟶ RY.obj V₀)
+    (b : Y₁ ⟶ Z₁) (bh : Y₀ ⟶ Z₀)
+    (hb : b ≫ ez.inv = ey.inv ≫ bh)
+    (hn : uf ≫ F.map ux ≫ β.hom.app U₀ = bh ≫ uy ≫ RY.map ug) :
+    (ey.inv ≫ uf ≫ F.map ex.hom) ≫
+        F.map (ex.inv ≫ ux ≫ RX.map e.hom) ≫ β.hom.app U₁ =
+      b ≫ (ez.inv ≫ uy ≫ RY.map ev.hom) ≫
+        RY.map (ev.inv ≫ ug ≫ G.map e.hom) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← F.map_comp_assoc, ex.hom_inv_id, F.map_id, Category.id_comp]
+  rw [← RY.map_comp_assoc, ev.hom_inv_id, RY.map_id, Category.id_comp]
+  have hβ := β.hom.naturality e.hom
+  dsimp only [Functor.comp_map] at hβ
+  rw [hβ, reassoc_of% hb]
+  simpa only [Functor.comp_map, Category.assoc] using
+    congrArg (fun t ↦ ey.inv ≫ t ≫ RY.map (G.map e.hom)) hn
+
 /-- The open composition unit equation on any complex on the inverse-image open.
 Source: Stacks Project, Tags 08FE and 0D5T.
 Proof: apply schemeMVOpenComposition_unit_normalization to the homotopy quotient of J.
@@ -87,29 +131,17 @@ theorem schemeMVOpenComposition_complex_localization
     rfl
   dsimp only at hn ⊢
   rw [hb] at hn
-  dsimp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app]
-  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Functor.comp_obj, Functor.map_comp, Category.assoc]
-  repeat erw [DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp]
-  erw [← (schemeDerivedDirectImage h).map_comp_assoc, Iso.hom_inv_id_app,
-    (schemeDerivedDirectImage h).map_id, Category.id_comp]
-  erw [← (schemeDerivedDirectImage W.ι).map_comp_assoc, Iso.hom_inv_id_app,
-    (schemeDerivedDirectImage W.ι).map_id, Category.id_comp]
-  erw [β.hom.naturality, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  repeat erw [Category.id_comp]
-  have ht := congrArg (fun t ↦
-    (DerivedCategory.quotientCompQhIso _).inv.app
-      ((F.mapHomologicalComplex (.up ℤ)).obj ((RX.mapHomologicalComplex (.up ℤ)).obj J)) ≫
-        t ≫ (schemeDerivedDirectImage W.ι).map
-          ((schemeDerivedDirectImage (h ∣_ W)).map
-            ((DerivedCategory.quotientCompQhIso _).hom.app J))) hn
-  dsimp +instances [F, RX, G, RY, b₀, DerivedCategory.Q, DerivedCategory.Qh,
-    schemeDerivedDirectImage, RingedSpace.derivedModuleDirectImage,
-    instCategoryDerivedCategory] at ht ⊢
-  simpa only [Functor.comp_map, Functor.mapHomotopyCategory_obj,
-    HomotopyCategory.quotient_obj_as, Category.assoc] using ht
+  simp only [schemeMV_localization_unit_app]
+  exact schemeMV_transport_composition_unit
+    (schemeDerivedDirectImage h) (schemeDerivedDirectImage (h ⁻¹ᵁ W).ι)
+    (schemeDerivedDirectImage (h ∣_ W)) (schemeDerivedDirectImage W.ι) β
+    ((DerivedCategory.quotientCompQhIso _).app J)
+    ((DerivedCategory.quotientCompQhIso _).app ((RX.mapHomologicalComplex (.up ℤ)).obj J))
+    ((DerivedCategory.quotientCompQhIso _).app ((G.mapHomologicalComplex (.up ℤ)).obj J))
+    ((DerivedCategory.quotientCompQhIso _).app
+      ((F.mapHomologicalComplex (.up ℤ)).obj ((RX.mapHomologicalComplex (.up ℤ)).obj J)))
+    ((DerivedCategory.quotientCompQhIso _).app
+      ((RY.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj J)))
+    _ _ _ _ _ _ (DerivedCategory.quotientCompQhIso_inv_naturality b₀) hn
 
 end AlgebraicGeometry

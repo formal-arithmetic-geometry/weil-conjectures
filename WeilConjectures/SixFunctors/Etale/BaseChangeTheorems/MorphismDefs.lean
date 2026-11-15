@@ -198,7 +198,7 @@ the counit contraction.
 
 Proper base change and smooth base change assert that this single morphism is an
 isomorphism under two different sets of geometric hypotheses; no such hypothesis is
-built into the definition. (blueprint: `sk-def-exchange`) -/
+built into the definition. (blueprint: `definition-derived-base-change-map`) -/
 noncomputable irreducible_def Etale.baseChange (sq : CommSq g' f' f g) :
     R+((f)_*[A]) ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ R+((f')_*[A]) :=
   (Etale.baseChangeUnitStep A f g f') ≫ (Etale.baseChangeSquareStep A sq).hom ≫
@@ -210,8 +210,8 @@ lemma Etale.baseChange_app (sq : CommSq g' f' f g)
       (baseChangeSquareStep A sq).hom.app K ≫ (baseChangeCounitStep A f f' g').app K := by
   simp [Etale.baseChange_def]
 
-/-- Blueprint `sbc-lem-bc-naturality`: the derived base-change map is natural in the complex:
-for `u : K ⟶ K'` the square formed by `BC_sq(K)`, `BC_sq(K')`, `g^* Rf_*(u)` and
+/-- Blueprint `lemma-naturality-pasting-comparison--1`: the derived base-change map is natural in
+the complex: for `u : K ⟶ K'` the square formed by `BC_sq(K)`, `BC_sq(K')`, `g^* Rf_*(u)` and
 `Rf'_* g'^*(u)` commutes, since `AlgebraicGeometry.Etale.baseChange` is a natural
 transformation, being a composite of a unit, a natural isomorphism and a counit. -/
 lemma Etale.baseChange_naturality (sq : CommSq g' f' f g)

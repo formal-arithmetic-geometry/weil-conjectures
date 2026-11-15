@@ -33,7 +33,7 @@ and `S.f`, `S.g` represent the maps `j`, `p`. Tor is derived in its first variab
 Source: Stacks Project, Algebra, proof of Tag 00S2, and Tags 00LY and 00LZ
 (blueprint: lem-weil-pbc-tor-dimension-shift-free).
 
-1. Apply `lem-weil-pbc-free-resolution-ses-split` to `0 → K → K → 0 → 0`
+1. Apply `theorem-finite-etale-covers-proper-henselian--2` to `0 → K → K → 0 → 0`
    with identity first map, obtaining an augmented free resolution `G` of `K`.
 2. Splice this resolution with the given presentation: take `P₀ = F`,
    `Pₙ₊₁ = Gₙ`, first differential `jη`, and augmentation `p : F → M`.

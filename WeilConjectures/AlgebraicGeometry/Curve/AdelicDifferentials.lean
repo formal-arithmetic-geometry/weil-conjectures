@@ -27,7 +27,7 @@ So the residue sequence `0 ⟶ ω ⟶ Ω[K⁄k]_η ⟶ 𝒫 ⟶ 0` gives, for `X
 ```
 (`AlgebraicGeometry.Scheme.differentialsH1Equiv`).
 
-(blueprint: `det-thm-picard-duality`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -279,7 +279,7 @@ of dimension at most one (e.g. a smooth proper connected curve), the residue seq
 `H¹(X, ω) ≅ (⨁_{x closed} Ω[K⁄k] ⧸ ω_x) ⧸ Ω[K⁄k]`, where
 `ω_x = image(Ω[𝒪_{X,x}⁄k] → Ω[K⁄k])` (`coe_stalkLattice_differentialsToGeneric`).
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 noncomputable def differentialsH1Equiv :
     Modules.H (X ↘ Spec (.of k)).relativeDifferentials 1 ≃ₗ[k]
       (Π₀ x : closedPoints X,

@@ -16,7 +16,8 @@ For `g ≫ b = c ≫ q`, `q ≫ p₁ = p₁' ≫ f` and `q ≫ p₂ = p₂' ≫ 
 maps `Rp₁_! Rb_! Lb^* Lp₂^* Rf_* K ⟶ Rf_! Rc₁_! Lc₂^* K` built from the unit of `g`, the counit
 of `f` and the composition isomorphisms agree
 (`ProEtale.CondensedRing.lowerShriek_pushforwardCoeff_coherence`). This is the coherence part of
-the class of the coefficient pushforward (blueprint `lem-trf-trace-source-exchange`, Step 2).
+the class of the coefficient pushforward (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 2).
 
 -/
 

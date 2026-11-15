@@ -64,7 +64,7 @@ variable (X : Scheme.{u})
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
+/-- Blueprint `prose-03-02`: Derived pullback, tensor product, and
 internal Hom; the derived internal Hom, right adjoint to `- ⊗ᴸ -`
 (`AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction₂`).
 

@@ -28,9 +28,9 @@ set_option linter.privateModule false
 # Products and sequential derived limits of open extensions
 
 Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-closed-unit,
-`det-sf-open-closed-extension-zero-limits`, clauses (1)--(3); Stacks Project,
+`proposition-extension-zero-restriction-closed-subscheme`, clauses (1)--(3); Stacks Project,
 Tags 09BN, 0152, 070I and 08TC
-(blueprint: det-sf-open-closed-extension-zero-limits).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme).
 
 The ring sheaf is an arbitrary monoid object in abelian sheaves. The module functors
 are the recorded open-closed module-object functors, without commutative or constant

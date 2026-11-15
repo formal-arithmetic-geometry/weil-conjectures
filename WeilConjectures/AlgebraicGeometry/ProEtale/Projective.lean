@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
 `sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.md`, node
-`det-pe-wcb-projective` (blueprint: det-pe-wcb-projective).
+`lemma-w-contractible-affines-projective` (blueprint: lemma-w-contractible-affines-projective).
 -/
 
 @[expose] public section
@@ -30,29 +30,29 @@ namespace AlgebraicGeometry.Scheme
 /-- If `D` is w-contractible and `Spec D → X` is weakly étale, the represented sheaf
 is projective and sections over it preserve epimorphisms.
 
-Source: blueprint `det-pe-wcb-projective`, parts 1--2; Stacks Project, Tags 00WN and
-098F (blueprint: det-pe-wcb-projective).
+Source: blueprint `lemma-w-contractible-affines-projective`, parts 1--2; Stacks Project, Tags 00WN
+and 098F (blueprint: lemma-w-contractible-affines-projective).
 
 Proof:
-1. By det-pe-topos-functoriality-site, the representable is a sheaf. Apply
-   lem-weil-pbc-site-sheaf-sets-epi-locally-surjective to an epimorphism onto it
+1. By proposition-topos-functoriality--1, the representable is a sheaf. Apply
+   lemma-w-contractible-affines-projective to an epimorphism onto it
    and the identity section. Obtain a covering and local sections lifting its arrows.
-2. By det-pe-wcb-clopen-partition, refine this covering by a finite disjoint clopen
+2. By lemma-w-contractible-affines-projective, refine this covering by a finite disjoint clopen
    partition. Restrict each local lift to its partition piece; naturality says its
    image is the inclusion of that piece.
-3. The partition is a pro-étale covering by sk-def-pe-site. The empty covering
+3. The partition is a pro-étale covering by definition-small-pro-etale-site. The empty covering
    makes every sheaf's value on the empty scheme a singleton. Thus the restricted
    lifts agree on the disjoint intersections and glue by the sheaf equalizer axiom
-   of def-weil-pbc-sites-and-cohomology. Separatedness of the representable identifies
+   of lemma-w-contractible-affines-projective. Separatedness of the representable identifies
    the image of the glued section with the identity. This includes the empty partition.
-4. By lem-galois-yoneda-hom-bijection, the glued section defines a map from the
+4. By lemma-w-contractible-affines-projective, the glued section defines a map from the
    representable to the source sheaf. Naturality makes its composite the identity,
    proving the first clause.
 5. Given an epimorphism `α : F ⟶ G` and `y ∈ G(U)`, Yoneda gives a map `h_U ⟶ G`.
    Form its pullback with `α`: its sections over `V` are pairs `(x,t)` satisfying
    `α(x) = G(t)(y)`. The sheaf axiom glues both coordinates and separatedness of `G`
    preserves this equality. Local surjectivity of `α` makes the pullback projection
-   locally surjective, hence epi by lem-weil-pbc-site-sheaf-sets-epi-locally-surjective.
+   locally surjective, hence epi by lemma-w-contractible-affines-projective.
 6. The first clause splits this projection. Evaluate the splitting at the identity
    and project to `F(U)` to obtain a preimage of `y`. Yoneda identifies this
    surjectivity with projectivity, proving the second clause.

@@ -126,7 +126,6 @@ private theorem isFinitePresentation_of_generators_kernel
       ⟨inferInstanceAs (Finite (r.generators j).I)⟩⟩⟩
   exact D.isFinitePresentation
 
--- Retain the existing budget for the local-presentation construction (162000 measured heartbeats).
 private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
     (h : RingedSpace.IsCoherent X.toRingedSpace F) :
@@ -153,17 +152,32 @@ private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
       F q.I q.X q.coversTop hfp
   exact ⟨inferInstance, h.1⟩
 
-set_option maxHeartbeats 300000 in
--- Check the slice-kernel transport separately from the forward local-presentation construction.
 private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
     (hq : F.IsQuasicoherent) (ht : F.IsFiniteType) :
     RingedSpace.IsCoherent X.toRingedSpace F := by
-  change F.IsFiniteType ∧ ∀ (U : X.Opens) (n : ℕ)
-    (f : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n)) ⟶
-      F.over U), (Limits.kernel f).IsFiniteType
   refine ⟨ht, ?_⟩
   intro U n f
+  -- Reuse the sheafification hypotheses throughout the two sides of the equivalence.
+  have : HasSheafify ((Opens.grothendieckTopology ↥X).over U) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology ↥X).over U).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have : ∀ V : Over U, HasSheafify
+      (((Opens.grothendieckTopology ↥X).over U).over V) AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
+  have : ∀ V : Over U,
+      (((Opens.grothendieckTopology ↥X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := fun _ ↦ inferInstance
+  have : HasSheafify (Opens.grothendieckTopology ↥U) AddCommGrpCat.{u} := inferInstance
+  have : (Opens.grothendieckTopology ↥U).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    inferInstance
+  have : ∀ V : TopologicalSpace.Opens ↥U,
+      HasSheafify ((Opens.grothendieckTopology ↥U).over V) AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
+  have : ∀ V : TopologicalSpace.Opens ↥U,
+      ((Opens.grothendieckTopology ↥U).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    fun _ ↦ inferInstance
   have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
   let e := overEquiv (X := X) U
   have hfree : (SheafOfModules.free

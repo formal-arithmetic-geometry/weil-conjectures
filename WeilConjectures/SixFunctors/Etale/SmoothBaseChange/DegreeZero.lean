@@ -50,7 +50,7 @@ the degree-zero homology of the derived base-change map of
   [Stacks 0A3H].
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`: the underived base-change map
   is an isomorphism for `p` flat, locally of finite presentation with geometrically reduced
-  fibres (blueprint `sbc-lem-degree-zero-flat-base-change`).
+  fibres (blueprint `lemma-degree-zero-calculation--1`).
 - `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`: in degree zero the
   derived base-change map is the underived one.
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero`: degree-zero base change for a flat,
@@ -121,7 +121,7 @@ of the square: for `φ : W ⟶ V ×_S X` and the induced morphism
 `(g_* F)(V) ⟶ (p^* g_* F)(W) ⟶ (h_* e^* F)(W)` is the map
 `F(V ×_S T) ⟶ (e^* F)(W ×_X Y)` attached to `φ'`. The morphism `φ'` is pinned down by its
 first component `hφ'`. This is the computation underlying Step 2 of the blueprint proof of
-`sk-prop-deg0`. -/
+`lemma-degree-zero-calculation--1`. -/
 lemma Etale.upperStarSectionsMap_comp_baseChangeMap_app (sq : CommSq e h g p)
     (F : Sheaf T.smallEtaleTopology A) {V : S.Etale} {W : X.Etale}
     (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
@@ -302,7 +302,7 @@ Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = 
 connected fibres the global sections of an inverse image agree with the global sections
 downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
 hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
-`sk-prop-deg0`. 
+`lemma-degree-zero-calculation--1`. 
 (blueprint: lem-sbc-module-chart-sections-flat-connected)
 -/
 @[stacks 0A3H]
@@ -317,7 +317,7 @@ theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (Module
     (isIso_module_unit_sections_of_flat_connected Λ
       (φ.left ≫ pullback.fst V.hom p) ((V.hom)^*[_].obj G))
 
-/-- Blueprint `sbc-lem-degree-zero-flat-base-change`: degree-zero flat base change.
+/-- Blueprint `lemma-degree-zero-calculation--1`: degree-zero flat base change.
 
 For a Cartesian square
 
@@ -497,7 +497,7 @@ end DegreeZero
 
 variable {X S : Scheme.{u}} (p : X ⟶ S)
 
-/-- Blueprint `sk-prop-deg0`: Degree-zero flat base change.
+/-- Blueprint `lemma-degree-zero-calculation--1`: Degree-zero flat base change.
 
 For a Cartesian square
 

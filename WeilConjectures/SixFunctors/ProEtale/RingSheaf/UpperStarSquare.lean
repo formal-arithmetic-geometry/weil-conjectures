@@ -20,7 +20,7 @@ algebra objects `ProEtale.RingSheaf.squareCoeffHom`, and the two iterated pullba
 sheaves agree up to restriction of scalars along it
 (`ProEtale.RingSheaf.upperStarSquareIso`). This is the bookkeeping of coefficient rings needed
 for the base change isomorphisms of part (4) of blueprint
-`det-sf-open-closed-sequence-ring-sheaf`.
+`proposition-extension-zero-restriction-closed-subscheme`.
 
 Both iterated pullbacks are compared with the pullback `(h₁ ≫ f₁)^*` by the composition
 isomorphisms of pullbacks, which are monoidal; the module-level statement is then
@@ -106,9 +106,9 @@ instance : IsIso (upperStarSquareHom f₁ f₂ h₁ h₂ w (R := R)) := by
   unfold upperStarSquareHom
   infer_instance
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4): for a commutative square
-`h₁ ≫ f₁ = h₂ ≫ f₂`, the isomorphism `h₁^* f₁^* B ≅ h₂^* f₂^* B` of the iterated inverse images
-of a sheaf of `R`-algebras `B` (a morphism of algebra objects), through `(h₁ ≫ f₁)^* B`. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4): for a commutative
+square `h₁ ≫ f₁ = h₂ ≫ f₂`, the isomorphism `h₁^* f₁^* B ≅ h₂^* f₂^* B` of the iterated inverse
+images of a sheaf of `R`-algebras `B` (a morphism of algebra objects), through `(h₁ ≫ f₁)^* B`. -/
 noncomputable def squareCoeffHom :
     (h₁)^*[ModuleCat.{u + 1} R].obj ((f₁)^*[ModuleCat.{u + 1} R].obj B) ⟶
       (h₂)^*[ModuleCat.{u + 1} R].obj ((f₂)^*[ModuleCat.{u + 1} R].obj B) :=
@@ -133,8 +133,8 @@ lemma squareCoeffHom_comp :
       Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) h₁ f₁).inv B := by
   rw [squareCoeffHom, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4): for a commutative square
-`h₁ ≫ f₁ = h₂ ≫ f₂` and a sheaf of `R`-algebras `B`, the two iterated pullbacks of `B`-module
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4): for a commutative
+square `h₁ ≫ f₁ = h₂ ≫ f₂` and a sheaf of `R`-algebras `B`, the two iterated pullbacks of `B`-module
 sheaves agree, up to restriction of scalars along the isomorphism of coefficient rings
 `h₁^* f₁^* B ≅ h₂^* f₂^* B` (`ProEtale.RingSheaf.squareCoeffHom`). -/
 noncomputable def upperStarSquareIso :

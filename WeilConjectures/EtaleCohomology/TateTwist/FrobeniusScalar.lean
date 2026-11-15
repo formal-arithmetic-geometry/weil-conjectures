@@ -23,7 +23,7 @@ the multiplication by a scalar `c_r ∈ Λ`
 `Λ_Y(m) ⊗ Λ_Y(m') ≅ Λ_Y(m + m')` are Weil pairings for the Tate data, these scalars are
 multiplicative, `c_{m + m'} = c_m c_{m'}`; each of them is a unit, so `c_r = c_1 ^ r`.
 
-This is the formal half of the normalization `def-weil-frobenius-coefficient-twists`: geometric
+This is the formal half of the normalization `prose-10-21`: geometric
 Frobenius acts on `Λ(r)` by `q^{-r}`, which comes down to `c_1 = q⁻¹`; that value is computed for
 the genuine Tate twist in `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization`.
 
@@ -142,7 +142,7 @@ theorem exists_frobeniusOperator_tateWeilDatum_eq_smul (r : ℤ) :
 Frobenius operator of `τ_r : Lh^* Λ(r) ≅ Λ(r)` on `H⁰(Spec k, Λ(r)) = Hom(Λ, Λ(r))`, a free
 `Λ`-module of rank one, is the multiplication by `c_r`
 (`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum_eq_smul`). For the geometric Frobenius
-of `k̄` over `𝔽_q` it is `q^{-r}` (`def-weil-frobenius-coefficient-twists`). -/
+of `k̄` over `𝔽_q` it is `q^{-r}` (`prose-10-21`). -/
 noncomputable def tateFrobeniusScalar (r : ℤ) : Λ :=
   (exists_frobeniusOperator_tateWeilDatum_eq_smul Λ h r).choose
 
@@ -244,8 +244,8 @@ theorem tateFrobeniusScalar_eq_zpow (r : ℤ) :
     rw [zpow_sub_one, Units.val_mul, h₁, mul_assoc, ← Units.val_mul, mul_inv_cancel,
       Units.val_one, mul_one]
 
-/-- Blueprint `def-pur-tate-datum` (the formal part of the twist normalization of
-`def-weil-frobenius-coefficient-twists`): over a separably closed field, the Frobenius operator
+/-- Blueprint `definition-weil-structure--1` (the formal part of the twist normalization of
+`prose-10-21`): over a separably closed field, the Frobenius operator
 of the Tate datum `τ_r` on `H⁰(Spec k, Λ(r))` is the multiplication by `c_1 ^ r`, for the unit
 `c_1` by which it acts on `Λ(1)`. -/
 theorem frobeniusOperator_tateWeilDatum_eq_zpow_smul (r : ℤ)

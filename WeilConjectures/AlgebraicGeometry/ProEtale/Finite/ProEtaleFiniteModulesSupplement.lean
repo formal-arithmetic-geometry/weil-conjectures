@@ -29,7 +29,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModules
 # Finite coefficients on the small pro-etale site
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node def-weil-pbc-proetale-modules (blueprint: def-weil-pbc-proetale-modules).
+node definition-small-pro-etale-site--1 (blueprint: definition-small-pro-etale-site--1).
 
 ## Main definitions
 
@@ -113,34 +113,34 @@ variable (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
   [TopologicalSpace Λ] [DiscreteTopology Λ]
 
 /-- The category of left modules over the specified coefficient ring sheaf, with sectionwise
-linear morphisms. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+linear morphisms. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable abbrev FiniteCoefficientModules :=
   ringedSiteModules.{u + 1} (finiteCoefficientRingSheaf T Λ)
 
 /-- Localization of integer-indexed cochain complexes of coefficient modules at
-quasi-isomorphisms. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+quasi-isomorphisms. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable abbrev FiniteCoefficientDerivedCategory :=
   @DerivedCategory (FiniteCoefficientModules T Λ) _ _ (HasDerivedCategory.standard _)
 
 /-- The strictly full bounded below subcategory, using the standard cohomological
-lower bound. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+lower bound. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable abbrev FiniteCoefficientDerivedCategoryPlus :=
   @DerivedCategory.Plus (FiniteCoefficientModules T Λ) _ _ (HasDerivedCategory.standard _)
 
 /-- The etale derived category in the standard fixed-ring module-sheaf encoding.
 The canonical equivalence above identifies its abelian category with modules over
-`finiteCoefficientEtaleRingSheaf`. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+`finiteCoefficientEtaleRingSheaf`. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 abbrev FiniteCoefficientEtaleDerivedCategory :=
   DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
 /-- Realization as modules over the specified ring sheaf: keep the module presheaf,
 then apply the canonical associated-module-sheaf functor along constant scalar sections.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientRealization :
     Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ) ⥤
       FiniteCoefficientModules T Λ :=
@@ -149,8 +149,8 @@ noncomputable def finiteCoefficientRealization :
 
 /-- Realization is additive and exact; it is the canonical identification of fixed-ring
 module sheaves with modules over the coefficient ring sheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules).
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1).
 
 Proof: the scalar map is locally bijective by the level-set argument above.
 The module sheafification adjunction therefore identifies sheaves of fixed-ring modules
@@ -168,76 +168,76 @@ theorem finiteCoefficientRealization_exact :
   exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- Additivity of the canonical coefficient realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientRealization_additive :
     (finiteCoefficientRealization T Λ).Additive :=
   (finiteCoefficientRealization_exact T Λ).1
 
 /-- Left exactness of the canonical coefficient realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientRealization_preservesFiniteLimits :
     PreservesFiniteLimits (finiteCoefficientRealization T Λ) :=
   (finiteCoefficientRealization_exact T Λ).2.1
 
 /-- Right exactness of the canonical coefficient realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientRealization_preservesFiniteColimits :
     PreservesFiniteColimits (finiteCoefficientRealization T Λ) :=
   (finiteCoefficientRealization_exact T Λ).2.2
 
 /-- The specified inverse image on left module sheaves: the comparison inverse image,
 followed by its canonical coefficient-ring realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientComparison :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ FiniteCoefficientModules T Λ :=
   comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⋙ finiteCoefficientRealization T Λ
 
 /-- Additivity inherited from comparison and coefficient realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientComparison_additive :
     (finiteCoefficientComparison T Λ).Additive :=
   inferInstanceAs
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⋙ finiteCoefficientRealization T Λ).Additive
 
 /-- Left exactness inherited from comparison and coefficient realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientComparison_preservesFiniteLimits :
     PreservesFiniteLimits (finiteCoefficientComparison T Λ) :=
   inferInstanceAs (PreservesFiniteLimits
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⋙ finiteCoefficientRealization T Λ))
 
 /-- Right exactness inherited from comparison and coefficient realization.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientComparison_preservesFiniteColimits :
     PreservesFiniteColimits (finiteCoefficientComparison T Λ) :=
   inferInstanceAs (PreservesFiniteColimits
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⋙ finiteCoefficientRealization T Λ))
 
 /-- The chosen localization of ringed module sheaves, with the standard morphism universe.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientModules_hasDerivedCategory :
     HasDerivedCategory.{u + 2} (FiniteCoefficientModules T Λ) :=
   HasDerivedCategory.standard _
 
 /-- Applying the exact comparison termwise to integer-indexed cochain complexes induces
-this functor on their localizations. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+this functor on their localizations. Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable def finiteCoefficientDerivedComparison :
     FiniteCoefficientEtaleDerivedCategory T Λ ⥤ FiniteCoefficientDerivedCategory T Λ :=
   (finiteCoefficientComparison T Λ).mapDerivedCategory
 
 /-- Bounded constructible objects are the essential image of bounded constructible
 etale complexes under the canonical derived comparison functor.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, `definition-small-pro-etale-site--1`
+(blueprint: definition-small-pro-etale-site--1). -/
 def isBoundedConstructibleFiniteCoefficient (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     ObjectProperty (FiniteCoefficientDerivedCategory T Λ) :=
@@ -264,8 +264,8 @@ def isBoundedConstructibleFiniteCoefficient (T : Scheme.{u}) (Λ : Type (u + 1))
     (finiteCoefficientDerivedComparison T Λ)
 
 /-- Equivalence structure on the canonical coefficient realization.
-Source: blueprint, def-weil-pbc-proetale-modules
-(blueprint: def-weil-pbc-proetale-modules). -/
+Source: blueprint, definition-small-pro-etale-site--1
+(blueprint: definition-small-pro-etale-site--1). -/
 noncomputable instance finiteCoefficientRealizationIsEquivalenceRing (T : Scheme.{u})
     (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (finiteCoefficientRealization T Λ).IsEquivalence :=
@@ -274,8 +274,8 @@ noncomputable instance finiteCoefficientRealizationIsEquivalenceRing (T : Scheme
 
 /-- The canonical realization identifies fixed-ring module sheaves with modules over the
 continuous-function coefficient sheaf, including finite noncommutative coefficient rings.
-Source: blueprint, def-weil-pbc-proetale-modules
-(blueprint: def-weil-pbc-proetale-modules).
+Source: blueprint, definition-small-pro-etale-site--1
+(blueprint: definition-small-pro-etale-site--1).
 Proof: the constant-scalar map is locally bijective by the level-set argument in
 finiteCoefficientScalarMap_locallyBijective. The associated-module-sheaf adjunction
 therefore has invertible unit and counit on sheaves. Its inverse restricts scalars

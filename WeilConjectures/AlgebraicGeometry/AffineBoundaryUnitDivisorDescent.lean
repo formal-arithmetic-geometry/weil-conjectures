@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 
 /-! # Descent of principal boundary divisors
 
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Every boundary divisor of a unit after extension descends to a boundary divisor of a unit.
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine unit quotient paragraph.
 (blueprint: lem-sc-affine-boundary-unit-divisor-descent).
 
 Proof: on each curve, boundary_divisor_pic_kernel identifies the boundary divisors of

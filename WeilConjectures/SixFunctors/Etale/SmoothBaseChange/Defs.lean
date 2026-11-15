@@ -34,7 +34,7 @@ at `F` of the natural transformation
 `AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. The property `BC(p, Λ, q)` of the
 blueprint is that this map is an isomorphism for every such square and every `F`.
 
-The base-change square of the blueprint (`sbc-def-base-change-square`) is a Cartesian square
+The base-change square of the blueprint (`definition-derived-base-change-map`) is a Cartesian square
 recorded as `CategoryTheory.IsPullback e h g p`; the coefficient conventions
 (`sbc-def-coefficient-conventions`) are a commutative ring `Λ` and sheaves of `Λ`-modules on the
 small étale site, `Sheaf T.smallEtaleTopology (ModuleCat Λ)`, with the derived categories of
@@ -60,7 +60,7 @@ yet available: the isomorphisms `Etale.leftDerivedUpperStarHomologyFunctorIso` a
 derived category, and their bounded below counterparts are not in Mathlib. Recording them
 is the first thing a file connecting these statements to the classical ones needs.
 
-The compatibilities of the base-change map asserted by the blueprint subsection `sk-def-bc`
+The compatibilities of the base-change map asserted by the blueprint subsection `prose-08-06`
 are proved elsewhere: naturality in `F` is
 `AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality` (and
 `AlgebraicGeometry.Etale.baseChange_naturality` for the derived map), while compatibility with
@@ -171,7 +171,7 @@ noncomputable def Etale.baseChangeHomologyMap (sq : IsPullback e h g p) (q : ℤ
   (Etale.baseChangeHomologyNatTrans Λ sq q).app F
 
 /-- The base-change map is natural in the coefficient sheaf. This is the naturality
-asserted by the blueprint subsection `sk-def-bc`, and the input to the comparison of the
+asserted by the blueprint subsection `prose-08-06`, and the input to the comparison of the
 two long exact sequences in `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`. -/
 lemma Etale.baseChangeHomologyMap_naturality (sq : IsPullback e h g p) (q : ℤ)
     {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) :
@@ -184,7 +184,7 @@ end BaseChangeMap
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `sk-def-bc`, `sbc-def-base-change-property`: The recorded base-change property.
+/-- Blueprint `prose-08-06`: The recorded base-change property.
 
 `BC(p, Λ, q)` holds when, for every quasi-compact quasi-separated `g : T ⟶ S`, every sheaf
 `F` of `Λ`-modules on `T_ét` and every Cartesian square
@@ -202,7 +202,7 @@ the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` of
 plays the role of `ℤ/nℤ` in the blueprint; the hypothesis that `n` be invertible on `S` is
 not part of the property and is carried separately by the statements that need it.
 
-The Cartesian squares are the base-change squares of blueprint `sbc-def-base-change-square`,
+The Cartesian squares are the base-change squares of blueprint `definition-derived-base-change-map`,
 recorded as `IsPullback e h g p`; following blueprint `sbc-def-coefficient-conventions`, the
 coefficients are sheaves of modules over a commutative ring `Λ` on the small étale sites. -/
 def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
@@ -213,7 +213,7 @@ def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
 
 /-- The base-change property `BC(p, Λ, q)` holds *universally* when it holds for every base
 change `p' : X' ⟶ S'` of `p` along a morphism `a : S' ⟶ S`. This is the form of the property
-in which the blueprint subsection `sk-def-bc` states it. -/
+in which the blueprint subsection `prose-08-06` states it. -/
 def Etale.UniversalBaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
   ∀ ⦃S' X' : Scheme.{u}⦄ (a : S' ⟶ S) (b : X' ⟶ X) (p' : X' ⟶ S'),
     IsPullback b p' p a → Etale.BaseChangeProperty Λ p' q

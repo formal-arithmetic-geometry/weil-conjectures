@@ -46,7 +46,8 @@ Proof (the eight steps of the blueprint node):
    and lem-weil-pbc-qcqs-morphism-permanence make them qcqs. By
    lem-weil-pbc-limit-affine-transition their limit exists; the universal property of
    def-pc-fibre-product and commuting limits identify it with Y₀.
-4. Descend V by thm-pd-spreading-out; increase the stage until its morphism is finite
+4. Descend V by proposition-jacobian-over-ground-field--1; increase the stage until its morphism is
+finite
    and étale by lem-weil-pbc-descend-finite and lem-weil-pbc-descend-etale. The finite
    presentation hypotheses follow from def-weil-finite-integral-morphism,
    def-weil-etale-morphism and def-sbc-locally-finite-presentation.

@@ -31,7 +31,7 @@ An object `Q X` of the rationalization is zero if and only if `X` is `M`-torsion
 of recollement data (in the sense of `WeilConjectures.CategoryTheory.Triangulated.Recollement`)
 is again recollement data, so that the closed part `map M i` of the rationalized data has a right
 adjoint and the supported localization triangle exists at the rational stage (blueprint
-`prop-sf-localization-all-stages`, rational stage `E`).
+`lemma-local-cohomology-right-adjoint--2`, rational stage `E`).
 
 Finally, we provide the `R`-linearity of the functors `ObjectProperty.liftFullSubcategory`, so
 that all this applies to triangulated full subcategories of `R`-linear triangulated categories.
@@ -251,7 +251,7 @@ variable {M} {i : C ⥤ D} {jUp : D ⥤ E} {jLow : E ⥤ D} [i.CommShift ℤ] [i
 
 omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
   [∀ n : ℤ, (shiftFunctor D n).Linear R] in
-/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: if `j^* i = 0` then the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, rational stage `E`: if `j^* i = 0` then the
 same holds for the rationalizations. -/
 lemma isZero_map_obj_map_obj (h₀ : ∀ X, IsZero (jUp.obj (i.obj X)))
     (X : Rationalization M C) : IsZero ((map M jUp).obj ((map M i).obj X)) := by
@@ -261,8 +261,8 @@ lemma isZero_map_obj_map_obj (h₀ : ∀ X, IsZero (jUp.obj (i.obj X)))
 
 omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
   [∀ n : ℤ, (shiftFunctor D n).Linear R] in
-/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: in a recollement situation,
-every object of the rationalization killed by `map M jUp` lies in the essential image of
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, rational stage `E`: in a recollement
+situation, every object of the rationalization killed by `map M jUp` lies in the essential image of
 `map M i`. The proof: write the object as `Q K`; then `jUp K` is `M`-torsion, hence so is
 `jLow (jUp K)`, so that the first map of the triangle `F ⟶ K ⟶ jLow (jUp K) ⟶` (with `F` in the
 essential image of `i`) becomes invertible in the rationalization. -/
@@ -283,7 +283,7 @@ lemma essImage_map_of_isZero (adj : jUp ⊣ jLow) [IsIso adj.counit]
 
 variable [i.Full] [i.Faithful]
 
-/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: the closed part of the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, rational stage `E`: the closed part of the
 rationalized recollement data has a right adjoint (the rational `Ri^!`). -/
 lemma isLeftAdjoint_map (adj : jUp ⊣ jLow) [IsIso adj.counit]
     (h₀ : ∀ X, IsZero (jUp.obj (i.obj X))) (hess : ∀ K, IsZero (jUp.obj K) → i.essImage K) :
@@ -292,9 +292,9 @@ lemma isLeftAdjoint_map (adj : jUp ⊣ jLow) [IsIso adj.counit]
     (Functor.FullyFaithful.ofFullyFaithful _) (isZero_map_obj_map_obj h₀)
     (essImage_map_of_isZero adj hess)
 
-/-- Blueprint `prop-sf-localization-all-stages`, rational stage `E`: the supported localization
-triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶` of the rationalized recollement data, for any right
-adjoint `G'` of `map M i`, exists and has a unique third map. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, rational stage `E`: the supported
+localization triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶` of the rationalized recollement data, for any
+right adjoint `G'` of `map M i`, exists and has a unique third map. -/
 theorem existsUnique_distTriang_counit_unit_map (adj : jUp ⊣ jLow) [IsIso adj.counit]
     (h₀ : ∀ X, IsZero (jUp.obj (i.obj X))) (hess : ∀ K, IsZero (jUp.obj K) → i.essImage K)
     {G' : Rationalization M D ⥤ Rationalization M C} (adj' : map M i ⊣ G')

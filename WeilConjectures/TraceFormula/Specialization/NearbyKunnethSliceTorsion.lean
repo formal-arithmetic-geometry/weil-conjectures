@@ -19,8 +19,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 
 Let `P` be the product over `S = Spec k'⟦t⟧` of models `M`, `N` of finite type, `b` a coordinate
 of `M` and `D` a generic slice trait `S'` of `𝔸¹_S`. The generic-slicing step modulo `ϖ` (blueprint
-`sk-prop-tf-nearby-external-kunneth`, identification (2) and projection formula (3)) goes in three
-steps:
+`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3))
+goes in three steps:
 
 1. from the geometric slice over `Spec K⟦t⟧` to the configuration `M_{S'} ⟵ P_{S'} ⟶ N` of the
    slices over `S'`: the changes of trait have invertible exchanges (Th. finitude 3.7 with
@@ -159,10 +159,10 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
     h₀
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
-/-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
-identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
-geometric slice of the product along a coordinate `b` of `M` is invertible, so is the pullback of
-`Π_{A,B}` to the special fibre of the slice of `P`. -/
+/-- **The generic-slicing step modulo `ϖ`** (blueprint
+`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3),
+coefficients `𝔽_E`): if the Künneth map of the geometric slice of the product along a coordinate `b`
+of `M` is invertible, so is the pullback of `Π_{A,B}` to the special fibre of the slice of `P`. -/
 theorem isIso_map_kunnethMap_of_isIso_sliceFst_residueField (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

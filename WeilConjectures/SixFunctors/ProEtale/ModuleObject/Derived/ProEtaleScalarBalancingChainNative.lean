@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
 
 /-! # Condensed scalar balancing and its unbounded chain normalization
 
-Source: det-sp-reduction-direct-image, proof Step 1, ordinary pullback/tensor comparison
+Source: lemma-sp-reduction--1, proof Step 1, ordinary pullback/tensor comparison
 (blueprint: lem-sp-proetale-scalar-balancing-chain).
 
 The scalar-last tensor is the recorded relative tensor with the restricted regular coefficient
@@ -39,19 +39,19 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The coefficient `r_Z S_Z`, with its canonical restricted regular action.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 abbrev balancingCoefficient (Z : Scheme.{u}) :
     Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z) :=
   (Mod.comap (coefficientMap a Z)).obj (Mod.regular (condensedRingObj Λ' Z))
 
 /-- The ordinary scalar-last tensor, using the existing relative tensor functor.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 abbrev balancingTensor (Z : Scheme.{u}) := tensorRight (balancingCoefficient a Z)
 
 /-- The scalar-last to scalar-first presentation, with the scalar action on the scalar factor.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 def balancingExtensionIso (Z : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
@@ -68,7 +68,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The full pairing equation for the inverse-image unit-section formula. Applying the sheaf
 inverse-image adjunction and then evaluating pure local tensors gives exactly
 `f⁻¹(x ⊗ s) ↦ f⁻¹x ⊗ α_S(f⁻¹s)`; this equation also covers tensors which are only locally pure.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 def IsCondensedScalarBalancing
     (t : balancingTensor a Y ⋙ upperStar Λ f ≅ upperStar Λ f ⋙ balancingTensor a X) : Prop :=
@@ -354,7 +354,7 @@ private lemma balancingChain_normalization
 
 -- The proof compares several presentations of the degree-zero coefficient total.
 /-- Ordinary condensed scalar balancing, its transported scalar action and chain normalization.
-Source: det-sp-reduction-direct-image, proof Step 1
+Source: lemma-sp-reduction--1, proof Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain).
 
 Proof:

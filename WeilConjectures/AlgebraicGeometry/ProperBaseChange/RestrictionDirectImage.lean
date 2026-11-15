@@ -23,7 +23,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 Source: Weil conjectures blueprint, sec-proper-base-change/sk-thm-properbasechange,
 order 1302; Stacks Project, Tags 05TC, 08J5, 09AK and 09AL
-(blueprint: prop-weil-pbc-restriction-direct-image).
+(blueprint: proposition-proper-direct-image-finite-coefficients--1).
 -/
 
 @[expose] public section

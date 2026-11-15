@@ -23,8 +23,8 @@ then the trace classes are additive, `Tr_c(u) = Tr_c(u') + Tr_c(u'')`
 (`ProEtale.CondensedRing.Correspondence.traceClass_eq_add_of_distTriang`). For an open–closed
 triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K` along a `c`-invariant closed subscheme these groups vanish
 by support considerations (`WeilConjectures.TraceFormula.PieceVanishing`), which gives the
-additivity of blueprint `lem-trf-trace-triangle-compatibility` and
-`prop-trf-trace-class-additivity`.
+additivity of blueprint `proposition-additivity-trace-classes--2` and
+`proposition-additivity-trace-classes--2`.
 
 The proof writes `Tr_c(u)` as the image of `e_K ∘ ũ` (evaluation kernel and supported class,
 `Correspondence.traceClass_eq_traceClassOfKernel`) and applies the triangulated lemma
@@ -84,7 +84,8 @@ namespace Correspondence
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
 /-- **Additivity of trace classes along a distinguished triangle** (blueprint
-`lem-trf-trace-triangle-compatibility`, `sk-i-additivity`): see the module docstring. -/
+`proposition-additivity-trace-classes--2`, `proposition-additivity-trace-classes`): see the module
+docstring. -/
 theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
     {K' K'' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {ε : K' ⟶ K} {η : K ⟶ K''}
     {δ : K'' ⟶ K'⟦(1 : ℤ)⟧} (hT : Triangle.mk ε η δ ∈ distTriang _)

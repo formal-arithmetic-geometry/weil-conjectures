@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
 sec-the-trace-map-of-affine-space/sk-def-sp-representing-pair/_section.md, Definition
-Representing objects, entire definition (blueprint: sk-def-sp-representing-pair).
+Representing objects, entire definition (blueprint: definition-representing-objects).
 
 Both the representing object and K are ambient unbounded objects. Only the test object
 is bounded constructible of finite Tor amplitude. No base-field or existence hypothesis
@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- An ambient object with a specified counit representing Hom(Rf!(-), K) on all finite
 ctf tests, on the small etale site. Source: Definition Representing objects, entire text
-(blueprint: sk-def-sp-representing-pair). -/
+(blueprint: definition-representing-objects). -/
 structure FiniteRepresentingPair (ell n : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Smooth f] (c : Compactification f)
     (K : DerivedCategoryModule (ULift.{u + 1} (ZMod (ell ^ n))) Y) where
@@ -59,7 +59,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- An ambient object with a specified counit representing Hom(Rf!(-), K) on every
 intrinsically constructible bounded finite-Tor test, on the small pro-etale site.
 Source: Definition Representing objects, entire text
-(blueprint: sk-def-sp-representing-pair). -/
+(blueprint: definition-representing-objects). -/
 structure FiniteRepresentingPair (ell n : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Smooth f] (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y)

@@ -186,7 +186,7 @@ private theorem proper_from_encoded_bound
 
 /-- Proper base change on an affine chart over the algebraic closure of a finite field.
 Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism,
-affine-chart application of det-thm-sfb-proper-base-change-rational (3).
+affine-chart application of proposition-proper-direct-image-constructible-complexes (3).
 (blueprint: lem-sf-native-affine-proper-base-change).
 
 Proof: properness over the affine base makes X separated and finite type over k;

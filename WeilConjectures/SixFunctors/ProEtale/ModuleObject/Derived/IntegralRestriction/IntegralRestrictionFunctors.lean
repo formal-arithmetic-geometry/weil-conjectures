@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 
 /-! # Functors for integral line and affine-space purity
 
-These are the published functors of `det-thm-int-restriction-line`, factored into a
+These are the published functors of `theorem-f-shriek-ell-adic-coefficients--1`, factored into a
 statement-only interface so that its geometric proof steps can import them independently.
 The definitions and their signatures are unchanged.
 -/

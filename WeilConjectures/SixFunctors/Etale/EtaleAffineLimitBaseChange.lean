@@ -14,11 +14,12 @@ Let `D : I ⥤ Scheme` be a cofiltered diagram with affine étale transition map
 cone of `D`. For a stage `i` and an open `V ⊆ Dᵢ`, the projection `c.pt ⊇ πᵢ⁻¹(V) ⟶ V` is the
 limit of the étale `V`-schemes `Dⱼ ⊇ D(j ⟶ i)⁻¹(V)`, `j ⟶ i`
 (`AlgebraicGeometry.isLimitOpensCone`). Smooth base change in the limit form (blueprint
-`lem-kun-0f09`, `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth'`)
-therefore holds along it: the base change maps `π⁻¹ R^q g_* F ⟶ R^q g'_* F'` are
-isomorphisms for quasi-compact quasi-separated `g : T ⟶ V` and sheaves `F` which are torsion
-of orders invertible on `V` (blueprint `det-tf-transverse-corner-constant`, base change to a
-local chart of an étale limit of surfaces).
+`corollary-open-direct-image-over-field--2`,
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth'`) therefore holds along it:
+the base change maps `π⁻¹ R^q g_* F ⟶ R^q g'_* F'` are isomorphisms for quasi-compact
+quasi-separated `g : T ⟶ V` and sheaves `F` which are torsion of orders invertible on `V` (blueprint
+`lemma-punctured-surface-punctured-curve--1`, base change to a local chart of an étale limit of
+surfaces).
 
 ## Main statements
 

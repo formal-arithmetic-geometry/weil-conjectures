@@ -15,7 +15,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 namespace WeilConjectures
 
 /-- The derived identity comparison on a complex is its localized degreewise comparison.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-identity-derived-factors).
 
 Proof: the factor formula for the derived identity functor evaluates its comparison

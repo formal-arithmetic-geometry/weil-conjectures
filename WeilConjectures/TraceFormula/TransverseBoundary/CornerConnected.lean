@@ -13,8 +13,8 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.CornerStrictLocali
 
 The strict localization `S` of the regular surface `Z` at a geometric point is irreducible
 (`AlgebraicGeometry.Scheme.irreducibleSpace_strictLocalization_of_isRegular`), so its open
-subscheme `S - (X_S ∪ Y_S)` is preconnected (blueprint `det-tf-transverse-corner-vanishing`,
-dévissage on a connected scheme).
+subscheme `S - (X_S ∪ Y_S)` is preconnected (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`, dévissage on a connected scheme).
 
 ## Main statements
 
@@ -33,7 +33,7 @@ variable {k : Type u} [Field k] (C : TransverseCorner k) {Ω : Type u} [Field Ω
   (zbar : Spec (.of Ω) ⟶ C.Z)
 
 /-- `S - (X_S ∪ Y_S)` is preconnected, being open in the irreducible strict localization `S`
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem preconnectedSpace_strictLocalizationComplement :
     PreconnectedSpace (C.strictLocalizationComplement zbar) := by
   have := irreducibleSpace_strictLocalization_of_isRegular zbar

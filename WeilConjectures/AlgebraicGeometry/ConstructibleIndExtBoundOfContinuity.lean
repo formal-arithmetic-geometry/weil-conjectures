@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 
 /-! Ind-constructible Ext vanishing from an unrestricted continuity theorem.
 
-Source: blueprint `sk-cor-ind-heart-ii`, vanishing clause.
+Source: blueprint `corollary-ind-heart-b`, vanishing clause.
 (blueprint: lem-finite-window-ind-ext-bound-continuity-vanishing)
 -/
 
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- A continuity theorem for constructible sources extends any uniform constructible
 Ext bound to ind-constructible targets.
 
-Source: blueprint `sk-cor-ind-heart-ii`, vanishing clause.
+Source: blueprint `corollary-ind-heart-b`, vanishing clause.
 (blueprint: lem-finite-window-ind-ext-bound-continuity-vanishing).
 Proof: use the filtered presentation supplied by `ObjectProperty.ind`, apply the
 factorization property to each derived morphism, and transport the stagewise zero

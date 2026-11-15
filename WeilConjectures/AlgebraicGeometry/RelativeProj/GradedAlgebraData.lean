@@ -33,7 +33,7 @@ restriction map identifies `A(U)` with the coefficientwise localization `A(V)[1/
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.GradedAlgebraData` — quasi-coherent graded algebras on `X`, described
-  on affine opens (the input of `def-nagata-relative-proj`).
+  on affine opens (the input of `definition-admissible-blow-up--1`).
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.Hom` — degree-preserving morphisms, and the
   category structure.
 -/
@@ -53,7 +53,8 @@ For every affine open `U` we are given a graded `Γ(X, U)`-algebra `A.grading U`
 restriction homomorphism `A.res : A.grading V →+*ᵍ A.grading U`, functorial in `U ≤ V`.
 **Quasi-coherence** is encoded by `isGradedBaseChangeAlong`: every restriction map is, in each
 degree `n`, the base change `A(U)ₙ = Γ(X, U) ⊗_{Γ(X, V)} A(V)ₙ` along the restriction map
-`Γ(X, V) → Γ(X, U)` of the structure sheaf. (blueprint: input of `def-nagata-relative-proj`) -/
+`Γ(X, V) → Γ(X, U)` of the structure sheaf. (blueprint: input of
+`definition-admissible-blow-up--1`) -/
 structure GradedAlgebraData (X : Scheme.{u}) where
   /-- The sections over an affine open. -/
   obj : X.affineOpens → Type u

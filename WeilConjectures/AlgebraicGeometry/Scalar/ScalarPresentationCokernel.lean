@@ -55,11 +55,11 @@ Proof:
    [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and its pure-tensor comparison
    [lem-pe-internal-section-tensor-comparison]. Commutativity identifies the coequalizer
    for extension [def-sfb-modobj-extension] with the relative tensor
-   [def-sfb-modobj-relative-tensor], preserving the coefficient-ring action.
+   [prose-03-02], preserving the coefficient-ring action.
 2. The constant presheaf diagram is a cokernel objectwise, with natural factorizations
    forced by uniqueness. Module sheafification [lem-cbc-sieve-module-sheafification]
    preserves this cokernel and finite free sums, being a left adjoint
-   [lem-weil-pbc-left-adjoint-preserves-colimits]. It preserves standard basis sections.
+   [situation-conventions]. It preserves standard basis sections.
 3. Extension by the canonical scalar map is the tensor left adjoint of
    [lem-weil-pbc-ringed-topoi-module-adjunction]. It preserves that specified cokernel,
    zero maps and finite sums; no flatness assumption is required.
@@ -68,12 +68,12 @@ Proof:
    [lem-pc-sites-sheaf-tensor-bilinear-universal] prove the inverse identities, including
    the empty-sum case. This gives exactly the displayed basis normalization.
 5. On each basis vector the transported matrix sends e_j to ∑ φ(a_ij)e_i.
-   Thus it is the existing scalarMatrix of [det-def-sfb-constructible-local-model],
+   Thus it is the existing scalarMatrix of [definition-constructible-sheaves--1],
    with the original entries mapped by the canonical scalar map.
 6. Transport the cokernel universal property along these free comparisons. Its
    factorization and uniqueness give the asserted IsColimit, and then the unique
    isomorphism to the chosen cokernel commuting with the quotient arrows
-   [def-sfb-finitely-presented-module]. -/
+   [definition-constructible-sheaves--1]. -/
 theorem scalar_presentation_cokernel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (U : Scheme.{u}) (m n : ℕ)

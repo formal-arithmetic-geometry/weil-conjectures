@@ -41,7 +41,7 @@ pushforward `π_*` is exact, so the Grothendieck spectral sequence of `Γ_Y ∘ 
 this is the Leray isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso` with
 `Rπ_* = π_*` (`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`).
-(blueprint: `lem-fd-finite-pushforward-cohomology`) -/
+(blueprint: `lemma-finite-morphisms-cohomology--2`) -/
 noncomputable def mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso :
     ((π)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory ⋙
         rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y ≅

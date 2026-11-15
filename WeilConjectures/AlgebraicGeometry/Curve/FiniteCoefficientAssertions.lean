@@ -21,7 +21,7 @@ In particular the assertions for `F` and for `j_! j^* F` are equivalent for ever
 without any condition on the torsion of `F`.
 
 Source: Stacks Project, Theorem 03SC and Lemma 0GJA (blueprint: `app:curve-package`,
-`sk-lem-curve-dense-open`).
+`lemma-removing-finitely-many-points`).
 -/
 
 @[expose] public section
@@ -54,7 +54,7 @@ finite ring, `F` a sheaf of `Λ`-modules on `X_ét` and `j : U ⟶ X` an open im
 `C(X, F)` holds if and only if `C(X, j_! j^* F)` holds. No condition on the torsion of `F` is
 needed, and the statement holds for every open `U`, in particular for every dense open.
 
-Source: Stacks Project, Lemma 0GJA (blueprint: `sk-lem-curve-dense-open`).
+Source: Stacks Project, Lemma 0GJA (blueprint: `lemma-removing-finitely-many-points`).
 
 Proof: both sides hold by `AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`. -/
 theorem assertions_iff_dense_open_of_finite_coefficients (Λ : Type (u + 1)) [CommRing Λ]

@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 Let `ℓ` be a prime and `k` a field in which `ℓ` is invertible. For a proper morphism
 `p : Z ⟶ Y` of separated `k`-schemes of finite type and the `ℓ`-adic coefficient rings
 `Λ = E, 𝒪_E, ℚ̄_ℓ`, the derived pushforward `Rp_* : Dᵇc(Z)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` is a left adjoint
-when `k` is finite or separably closed (blueprint `det-cor-existence-ii-restriction`):
+when `k` is finite or separably closed (blueprint `theorem-exceptional-inverse-image--18`):
 
 * `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed`,
 * `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finite_or_isSepClosed`,
@@ -27,27 +27,29 @@ when `k` is finite or separably closed (blueprint `det-cor-existence-ii-restrict
 ## Proof
 
 The trivial compactification `Z ⟶[𝟙] Z ⟶[p] Y` of `p` (`Compactification.ofIsProper`) has
-`Rp_!(c) = Rp_* ∘ (𝟙)_! ≅ Rp_*`. By Brown representability (blueprint `sk-prop-sf-existence`,
-`exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj` and its analogues)
-its restriction to the localizing closures `Loc(Dᵇc(Z)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)` has a right adjoint
-`p^!`; this is where `k` finite or separably closed is used, for the compact generation. By the
-restriction theorems (blueprints `sk-thm-restriction` and `sk-thm-int-restriction`), `p^!` maps
-`Dᵇc(Y)⟦Λ⟧` into `Dᵇc(Z)⟦Λ⟧`. The adjunction `Rp_* ⊣ p^!` then restricts to the full
+`Rp_!(c) = Rp_* ∘ (𝟙)_! ≅ Rp_*`. By Brown representability (blueprint
+`theorem-existence-exceptional-inverse-image`,
+`exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj` and its analogues) its
+restriction to the localizing closures `Loc(Dᵇc(Z)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)` has a right adjoint `p^!`;
+this is where `k` finite or separably closed is used, for the compact generation. By the restriction
+theorems (blueprints `theorem-f-shriek-ell-adic-coefficients` and `sk-thm-int-restriction`), `p^!`
+maps `Dᵇc(Y)⟦Λ⟧` into `Dᵇc(Z)⟦Λ⟧`. The adjunction `Rp_* ⊣ p^!` then restricts to the full
 subcategories `Dᵇc ⊆ Loc(Dᵇc)` (`CategoryTheory.Adjunction.isLeftAdjoint_of_essImage`,
 `isLeftAdjoint_lift_rightDerivedLowerStar_of_localizing`).
 
 ## The restriction theorems
 
-The restriction theorems (blueprints `sk-thm-restriction` and `sk-thm-int-restriction`:
+The restriction theorems (blueprints `theorem-f-shriek-ell-adic-coefficients` and
+`sk-thm-int-restriction`:
 `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj`,
 `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj` and
-`boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj`) are
-proved from the existence of the right adjoint of `Rp_*` on `Dᵇc` for proper `p` over any field
-(`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` and its analogues,
-in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint`):
-for a compactification `c = (X ⟶[i] X̄ ⟶[p] Y)`, the restriction of `Rf_!(c)` to `Dᵇc` is
-`i_! ⋙ Rp_*`, a left adjoint, and the objects of `Dᵇc` detect isomorphisms of `Loc(Dᵇc)`, so every
-right adjoint on `Loc(Dᵇc)` agrees on `Dᵇc` with the right adjoint on `Dᵇc`
+`boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj`) are proved
+from the existence of the right adjoint of `Rp_*` on `Dᵇc` for proper `p` over any field
+(`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` and its analogues, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint`): for a
+compactification `c = (X ⟶[i] X̄ ⟶[p] Y)`, the restriction of `Rf_!(c)` to `Dᵇc` is `i_! ⋙ Rp_*`, a
+left adjoint, and the objects of `Dᵇc` detect isomorphisms of `Loc(Dᵇc)`, so every right adjoint on
+`Loc(Dᵇc)` agrees on `Dᵇc` with the right adjoint on `Dᵇc`
 (`boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint`).
 
 ## Relation to the general case
@@ -100,7 +102,7 @@ noncomputable def ιOfLEcompRightDerivedLowerShriekLocalizingIso
           Functor.leftUnitor _) ≪≫
       (ObjectProperty.liftCompιIso _ _ _).symm)
 
-/-- Blueprint `det-cor-existence-ii-restriction`, formal part: for a proper `p : Z ⟶ Y`, if
+/-- Blueprint `theorem-exceptional-inverse-image--18`, formal part: for a proper `p : Z ⟶ Y`, if
 `Rp_*` maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧` and the lower shriek of the trivial compactification on
 the localizing closures has a right adjoint `G` mapping `Dᵇc(Y)⟦Λ⟧` into `Dᵇc(Z)⟦Λ⟧`, then the
 restriction `Rp_* : Dᵇc(Z)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` is a left adjoint. -/
@@ -132,11 +134,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated aY] {f : X ⟶ Y} (c : Compactification f)
 
 include aX in
-/-- Blueprint `sk-thm-restriction` (for `Λ = E`): for the coefficient ring `E̲` of a finite
-subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a
+/-- Blueprint `theorem-f-shriek-ell-adic-coefficients` (for `Λ = E`): for the coefficient ring `E̲`
+of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a
 compactification `c` of `f`, every right adjoint `f^!` of the compact-support direct image
-`Rf_! : Loc(Dᵇc(X)⟦E⟧) ⥤ Loc(Dᵇc(Y)⟦E⟧)` (blueprint `sk-prop-sf-existence`) maps `Dᵇc(Y)⟦E⟧`
-into `Dᵇc(X)⟦E⟧`.
+`Rf_! : Loc(Dᵇc(X)⟦E⟧) ⥤ Loc(Dᵇc(Y)⟦E⟧)` (blueprint `theorem-existence-exceptional-inverse-image`)
+maps `Dᵇc(Y)⟦E⟧` into `Dᵇc(X)⟦E⟧`.
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`
@@ -170,11 +172,11 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_cont
   exact boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint _ adj L hL
 
 include aX in
-/-- Blueprint `sk-thm-int-restriction`: for the coefficient ring `𝒪_E` of a finite extension
-`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a compactification `c`
-of `f`, every right adjoint `f^!` of the compact-support direct image
-`Rf_! : Loc(Dᵇc(X)⟦𝒪_E⟧) ⥤ Loc(Dᵇc(Y)⟦𝒪_E⟧)` (blueprint `sk-prop-int-brown`) maps
-`Dᵇc(Y)⟦𝒪_E⟧` into `Dᵇc(X)⟦𝒪_E⟧`.
+/-- Blueprint `theorem-f-shriek-ell-adic-coefficients--1`: for the coefficient ring `𝒪_E` of a
+finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a
+compactification `c` of `f`, every right adjoint `f^!` of the compact-support direct image
+`Rf_! : Loc(Dᵇc(X)⟦𝒪_E⟧) ⥤ Loc(Dᵇc(Y)⟦𝒪_E⟧)` (blueprint `theorem-f-shriek-ell-adic-coefficients--1`)
+maps `Dᵇc(Y)⟦𝒪_E⟧` into `Dᵇc(X)⟦𝒪_E⟧`.
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`
@@ -210,10 +212,11 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
   exact boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint _ adj L hL
 
 include aX in
-/-- Blueprint `sk-thm-restriction` (for `Λ = ℚ̄_ℓ`): for the coefficient ring `ℚ̄_ℓ`, a separated
-finite-type `k`-morphism `f : X ⟶ Y` and a compactification `c` of `f`, every right adjoint `f^!`
-of the compact-support direct image `Rf_! : Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧) ⥤ Loc(Dᵇc(Y)⟦ℚ̄_ℓ⟧)` (blueprint
-`sk-prop-sf-existence`) maps `Dᵇc(Y)⟦ℚ̄_ℓ⟧` into `Dᵇc(X)⟦ℚ̄_ℓ⟧`.
+/-- Blueprint `theorem-f-shriek-ell-adic-coefficients` (for `Λ = ℚ̄_ℓ`): for the coefficient ring
+`ℚ̄_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a compactification `c` of `f`, every
+right adjoint `f^!` of the compact-support direct image
+`Rf_! : Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧) ⥤ Loc(Dᵇc(Y)⟦ℚ̄_ℓ⟧)` (blueprint
+`theorem-existence-exceptional-inverse-image`) maps `Dᵇc(Y)⟦ℚ̄_ℓ⟧` into `Dᵇc(X)⟦ℚ̄_ℓ⟧`.
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`
@@ -256,7 +259,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y) [IsProper g.left]
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`, for `k` finite or separably closed:
+/-- Blueprint `theorem-exceptional-inverse-image--16`, for `k` finite or separably closed:
 for a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint. -/
 theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed
@@ -271,7 +274,7 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_fini
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj
         ℓ Z.hom Y.hom _ E (Over.w g) adj L hL
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, for `k` finite or separably closed:
+/-- Blueprint `theorem-exceptional-inverse-image--15`, for `k` finite or separably closed:
 for a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint. -/
 theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finite_or_isSepClosed
@@ -288,7 +291,7 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_fini
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj
         ℓ Z.hom Y.hom _ E (Over.w g) adj L hL
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, for `k` finite or separably
+/-- Blueprint `theorem-exceptional-inverse-image--17`, for `k` finite or separably
 closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint. -/
 theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_or_isSepClosed

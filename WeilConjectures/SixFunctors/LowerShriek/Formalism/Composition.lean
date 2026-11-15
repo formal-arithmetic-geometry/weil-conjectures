@@ -18,7 +18,7 @@ proper base change, this file constructs the composition isomorphism
 
 `F.compIso T : F.shriek T.cf ⋙ F.shriek T.cg ≅ F.shriek T.cfg`
 
-of blueprint `sk-thm-sf-comp-composition`: it is the exchange isomorphism
+of blueprint `proposition-composition-base-change-rf-shriek--1`: it is the exchange isomorphism
 `(cg.i)_! (cf.g)_* ≅ p_* q_!` of the cartesian square of `T`, followed by the composition
 isomorphisms `(cf.i)_! ⋙ q_! ≅ (cfg.i)_!` and `p_* ⋙ (cg.g)_* ≅ (cfg.g)_*`.
 
@@ -84,7 +84,7 @@ variable (F : CompactSupportFormalism.{w, v, u}) [F.HasProperExchange]
 ```
 built from the exchange isomorphism of the cartesian square `cf.g ≫ cg.i = q ≫ p`
 (`CategoryTheory.ExchangeFormalism.compIso`).
-(blueprint: `sk-thm-sf-comp-composition`) -/
+(blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
 noncomputable def compIso (T : Compactification.Triangle f g) :
     F.shriek T.cf ⋙ F.shriek T.cg ≅ F.shriek T.cfg :=
   haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
@@ -104,7 +104,8 @@ lemma compIso_hom_app (T : Compactification.Triangle f g) (K : F.obj X) :
 
 /-- **Naturality of the composition isomorphism**: for a morphism of triangles `φ : T' ⟶ T`,
 the comparisons along the refinements of `φ` intertwine the composition isomorphisms of `T` and
-`T'`. (blueprint: `sk-thm-sf-comp-composition`, independence of the compactifications) -/
+`T'`. (blueprint: `proposition-composition-base-change-rf-shriek--1`, independence of the
+compactifications) -/
 theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T) :
     (F.compIso T).hom ≫ F.refinementComparison φ.rfg φ.isPullback_rfg =
       NatTrans.hcomp (F.refinementComparison φ.rf φ.isPullback_rf)
@@ -123,7 +124,8 @@ theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T
 /-- **Independence of the triangle of compactifications**: the composition isomorphisms of two
 triangles `T₁` and `T₂` agree up to the comparison isomorphisms `F.shriekIso` of their
 compactifications. The proof compares both with the common refinement `T₁.inf T₂`.
-(blueprint: `sk-thm-sf-comp-composition`, independence of all compactification choices) -/
+(blueprint: `proposition-composition-base-change-rf-shriek--1`, independence of all compactification
+choices) -/
 theorem compIso_hom_eq [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
     (T₁ T₂ : Compactification.Triangle f g) :
     (F.compIso T₁).hom =

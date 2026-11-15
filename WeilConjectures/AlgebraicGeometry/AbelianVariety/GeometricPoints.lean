@@ -147,7 +147,7 @@ section BaseChange
 
 variable {K' : Type u} [Field K'] [Algebra K K']
 
-/-- Blueprint `lem-sc-mult-n-etale-kernel`: Multiplication by `d` prime to the characteristic
+/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
 is étale (the geometric fibre of `A[n]`).
 
 Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
@@ -172,7 +172,7 @@ theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [C
   refine ⟨S, hS, ?_, e⟩
   rw [hcard, Scheme.Hom.finrankΓ_pullback_snd, finrankΓ_torsionSubgroupScheme n hn]
 
-/-- Blueprint `lem-sc-mult-n-etale-kernel`: Multiplication by `d` prime to the characteristic
+/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
 is étale (the geometric points of `A[n]`).
 
 Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be

@@ -142,7 +142,7 @@ Proof plan:
 1. Use lem-weil-pbc-ringed-topos-site-presentation to present the geometric morphism by
    a continuous finite-limit-preserving site functor, up to ringed-topos equivalences.
 2. Such equivalences preserve exactness and tensor products, hence flatness.
-3. By lem-weil-pbc-presheaf-pullback-sets-left-exact and
+3. By situation-conventions and
    lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, inverse image is the
    sheafification of the filtered-colimit presheaf. The underlying-set and module
    sheafification interfaces identify the transported algebraic structures.

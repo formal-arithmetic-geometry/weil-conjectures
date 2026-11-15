@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 This file extends the finite-coefficient pro-étale smooth base change
 `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth` (blueprint
-`sbc-thm-finite-proetale-smooth-base-change`) from coefficient rings killed by an integer `N`
+`theorem-smooth-base-change-all-admissible--1`) from coefficient rings killed by an integer `N`
 invertible on the base to complexes killed by such an integer, over an arbitrary coefficient ring
 `Λ`. This is the form needed at the finite levels of the adic theorem, where the coefficient ring
 is `𝒪_E` and the reductions `K ⊗ᴸ 𝒪_E/𝔪ⁿ` are killed by `ℓⁿ`.

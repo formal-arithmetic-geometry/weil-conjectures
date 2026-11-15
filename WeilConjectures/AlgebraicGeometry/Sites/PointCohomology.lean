@@ -203,7 +203,7 @@ particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q �
 blueprint argues via the equivalence of étale sheaves on `Spec k` with discrete Galois modules,
 the Galois group being trivial; we use directly that the constant sheaf `ℤ` is projective
 (`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`).
-(blueprint: `lem-sc-point-z-cohomology`) -/
+(blueprint: `lemma-cohomology-multiplicative-group`) -/
 theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec (.of k)).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) (q + 1)) :=
@@ -454,7 +454,7 @@ end Field
 cohomology, and a continuous homomorphism from the profinite group `Gal(Kˢᵉᵖ/K)` to the
 discrete group `ℤ` has finite image, hence is trivial. This is the version for a commutative
 ring which is a field, see `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_field`.
-(blueprint: `lem-sc-brauer-injectivity`, Step 2) -/
+(blueprint: `lemma-cohomology-multiplicative-group--8`, Step 2) -/
 theorem subsingleton_H_one_constantSheaf_of_isField (K : CommRingCat.{u}) (hK : IsField K) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec K).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) 1) := by

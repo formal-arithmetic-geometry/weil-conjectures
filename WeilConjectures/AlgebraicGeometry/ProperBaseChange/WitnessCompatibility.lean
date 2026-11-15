@@ -31,7 +31,7 @@ Stacks Tags 09C9, 09C2, 06YY and 07A4
 (blueprint: def-weil-pbc-witness-compatibility).
 
 All finite coefficient categories use their canonical fixed-ring presentation. The
-coefficient realization in def-weil-pbc-proetale-modules identifies them with modules
+coefficient realization in definition-small-pro-etale-site--1 identifies them with modules
 over the continuous-function coefficient sheaf. All outputs are ambient derived objects.
 -/
 

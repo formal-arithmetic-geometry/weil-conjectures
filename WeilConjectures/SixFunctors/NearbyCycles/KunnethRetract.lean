@@ -22,11 +22,11 @@ When the exchanges are not invertible, but `α_{ρ_N}` is and `α_{ρ_M}`, `α_{
 monomorphisms whose retractions are compatible with `Π'`, the map `Lρ'^* Π_{A,B}` is still a
 retract of `Π'`, hence invertible if `Π'` is
 (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`). This is the shape of the
-generic-slicing step of Gabber's Künneth formula (blueprint `sk-prop-tf-nearby-external-kunneth`,
-"Finite support"): there `α_{ρ_M}` and `α_{ρ_P}` are the inclusions of the invariants under a
-pro-`p` group `P` acting trivially on the nearby cycles of `N'`, the retractions are the averaging
-projections, and their compatibility with `Π'` is the projection formula for invariants (blueprint
-`det-nearby-kunneth-invariants`).
+generic-slicing step of Gabber's Künneth formula (blueprint
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): there `α_{ρ_M}` and
+`α_{ρ_P}` are the inclusions of the invariants under a pro-`p` group `P` acting trivially on the
+nearby cycles of `N'`, the retractions are the averaging projections, and their compatibility with
+`Π'` is the projection formula for invariants (blueprint `prose-E-10`).
 
 The retraction data are predicates on the equation of the square
 (`CategoryTheory.IsSquareRetract`, `CategoryTheory.IsTensorRetract`), so that the vertical maps are

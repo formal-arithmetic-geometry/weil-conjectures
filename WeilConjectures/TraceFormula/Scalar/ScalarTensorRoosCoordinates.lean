@@ -95,6 +95,20 @@ private theorem roosMap_level
   simpa only [HomologicalComplex.comp_f, Category.assoc] using
     congrArg ((CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫ ·) h
 
+private theorem roosMap_level_iso_hom
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {P Q : CochainComplex A ℤ} {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (f : P ⟶ Q) (g : Q ⟶ integralOperationsRoosFunctor.obj V)
+    (e : W ≅ V) (n : ℕ) (i : ℤ) :
+    ((f ≫ g ≫ integralOperationsRoosFunctor.map e.inv).f i ≫
+        (CochainComplex.mappingCocone.fst (scalarRoosBoundary W)).f i ≫
+        (Pi.π (fun m : ℕ ↦ W.obj (op m)) n).f i) ≫ (e.hom.app (op n)).f i =
+      (f ≫ g).f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
+        (Pi.π (fun m : ℕ ↦ V.obj (op m)) n).f i := by
+  simp only [HomologicalComplex.comp_f, Category.assoc, roosMap_level]
+  rw [← HomologicalComplex.comp_f, Iso.inv_hom_id_app, HomologicalComplex.id_f,
+    Category.comp_id]
+
 attribute [local irreducible] HasDerivedCategory.standard
   integralComparisonSequenceScalarModel coefficientSequenceRestriction coefficientSequenceLimit
   integralScalarExtensionOfUniverses completedDerivedScalarExtension
@@ -165,8 +179,40 @@ private theorem scalarInverseCoordinate
     ]
   rfl
 
-set_option maxHeartbeats 800000 in
--- Elaborating the transported coefficient and derived-category instances needs extra heartbeats.
+private theorem scalarAssociatorCoordinate
+    (P : CochainComplex (integralTowerModules l E X) ℤ)
+    (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)
+    (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
+    (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)
+    (x : (P.X i).val.obj U) :
+    ((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
+        (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫
+        (completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
+        (CochainComplex.mappingCocone.fst
+          (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
+        (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E F (j.comp ι) X).obj P).obj
+          (op m)) n).f i).val.app U)
+        (completedScalarTensorSection l L F j X
+          (((completedOrdinaryScalarComplex l E L ι X).obj P).X i) U s
+          (completedScalarTensorSection l E L ι X (P.X i) U t x)) =
+      integralScalarTensorSection l E F (j.comp ι) X n (P.X i) U
+        ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U
+          (s * (completedCoefficientMap l L F j X).hom.app U t)) x := by
+  change ((((completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
+    (CochainComplex.mappingCocone.fst
+      (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
+    (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E F (j.comp ι) X).obj P).obj
+      (op m)) n).f i).val.app U)
+      (((CompletedLineTensor.associatorData l E X L ι F j).sheaf.hom.app
+        (P.X i)).val.app U
+        (completedScalarTensorSection l L F j X _ U s
+          (completedScalarTensorSection l E L ι X (P.X i) U t x))) = _
+  have hOrd := (CompletedLineTensor.associatorData_existsUnique l E X L ι F j).exists.choose_spec.1
+    (P.X i) U t s x
+  change ((CompletedLineTensor.associatorData l E X L ι F j).sheaf.hom.app
+    (P.X i)).val.app U _ = _ at hOrd
+  rw [hOrd, (completedScalarChainComparison_spec l E F (j.comp ι) X).1]
+
 /-- Tensor associativity identifies the scalar change of a quotient augmentation
 with the direct augmentation. This is entirely a statement about strict chain
 maps, before localization or insertion of a derived counit.
@@ -309,36 +355,18 @@ theorem scalarTensorRoosCoordinates
       ((HomologicalComplex.eval _ (.up ℤ) i).mapIso ((wa ≪≫ qEF).app (op n)))
     apply (ConcreteCategory.bijective_of_isIso eU.hom).1
     dsimp only [eU, Functor.mapIso_hom]
-    simp only [HomologicalComplex.comp_f, Category.assoc]
-    erw [roosMap_level]
-    change (((((qEF.inv ≫ wa.inv) ≫ (wa ≪≫ qEF).hom).app (op n)).f i).val.app U)
-        (((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
-          (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫
-          (completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
-          (CochainComplex.mappingCocone.fst
-            (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
-          (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E F (j.comp ι) X).obj P).obj
-            (op m)) n).f i).val.app U)
-          (completedScalarTensorSection l L F j X _ U s
-            (completedScalarTensorSection l E L ι X (P.X i) U t x))) = _
-    simp only [Iso.trans_hom, Category.assoc, Iso.inv_hom_id_assoc,
-      Iso.inv_hom_id, NatTrans.id_app, HomologicalComplex.id_f,
-      SheafOfModules.id_val]
-    change ((((completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
-      (CochainComplex.mappingCocone.fst
-        (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
-      (Pi.π (fun m ↦ ((integralScalarTowerFunctor l E F (j.comp ι) X).obj P).obj
-        (op m)) n).f i).val.app U)
-        (((CompletedLineTensor.associatorData l E X L ι F j).sheaf.hom.app
-          (P.X i)).val.app U
-          (completedScalarTensorSection l L F j X _ U s
-            (completedScalarTensorSection l E L ι X (P.X i) U t x))) = _
-    have hOrd :=
-      (CompletedLineTensor.associatorData_existsUnique l E X L ι F j).exists.choose_spec
-    have hOrd := hOrd.1 (P.X i) U t s x
-    change ((CompletedLineTensor.associatorData l E X L ι F j).sheaf.hom.app
-      (P.X i)).val.app U _ = _ at hOrd
-    rw [hOrd, (completedScalarChainComparison_spec l E F (j.comp ι) X).1]
+    change (((((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
+        (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫
+        (completedScalarChainComparison l E F (j.comp ι) X).app P ≫
+        integralOperationsRoosFunctor.map (wa ≪≫ qEF).inv).f i ≫
+        (CochainComplex.mappingCocone.fst (scalarRoosBoundary _)).f i ≫
+        (Pi.π (fun m : ℕ ↦
+          (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
+            (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+              (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i) ≫
+        ((wa ≪≫ qEF).hom.app (op n)).f i).val.app U) _ = _
+    erw [roosMap_level_iso_hom _ _ (wa ≪≫ qEF) n i]
+    refine (scalarAssociatorCoordinate l E L F ι j X P n i U s t x).trans ?_
     have hSeq := (integralComparisonSequenceScalarComposition_existsUnique
       l E L ι F j X).exists.choose_spec (C.X i) (op (n, U.unop)) sF tL z
     change ((integralComparisonSequenceScalarComposition l E L ι F j X).hom.app

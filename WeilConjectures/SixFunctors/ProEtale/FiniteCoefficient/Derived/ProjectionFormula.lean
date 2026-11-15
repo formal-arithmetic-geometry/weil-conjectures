@@ -68,10 +68,10 @@ comparison carries the étale projection map of `Rg_*` to the pro-étale one
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite` at the finite
 stages (`sk-thm-sf-pf-finite`) and
 `AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map` at the integral
-stage (`sk-thm-sf-pf-adic`, assuming the two sides of the étale projection map derived
-complete); the rational stage is the image of the integral one under the
-rationalization (`sk-thm-sf-pf-field`). The finite Tor amplitude of `L` keeps
-`i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to commute with `Rg_*`.
+stage (`lemma-projection-formula-integral-coefficients`, assuming the two sides of the étale
+projection map derived complete); the rational stage is the image of the integral one under the
+rationalization (`proposition-projection-formula-rational-coefficients`). The finite Tor amplitude
+of `L` keeps `i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to commute with `Rg_*`.
 
 The blueprint's "étale-origin witnesses" are explicit: at the finite stages they are built into
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor` (pro-étale bounded
@@ -394,8 +394,8 @@ with the given étale-origin witnesses, and assume that both sides `Rf_! K₀ �
 projection formula at the integral stage transported along the comparison `ν^*`
 (`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). The étale
 input is the plain projection map of `D(Y_ét, 𝒪_E)`, an isomorphism because its reduction modulo
-`𝔪_E` is (`sk-thm-sf-pf-adic`, Steps 1 and 2) and both its sides are derived complete
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`).
+`𝔪_E` is (`lemma-projection-formula-integral-coefficients`, Steps 1 and 2) and both its sides are
+derived complete (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`).
 
 The derived completeness of the two sides is a hypothesis: the étale integral stage
 (`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`) only gives the projection formula
@@ -442,7 +442,7 @@ The rational stage is the rationalization `D(Y_proét, 𝒪_E)[1/ℓ]` of the in
 Verdier quotient by the objects killed by a nonzero element of `𝒪_E`, and the projection map
 over `E` for objects obtained by rationalization from the integral stage is the image of the
 integral projection map under the localization functor. It is an isomorphism, as in the blueprint
-(`thm-sf-pf-field`): the integral projection map is
+(`lemma-kunneth-formula-compact-supports--3`): the integral projection map is
 (`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`, which assumes
 that both sides of the étale projection map are derived complete). -/
 theorem isIso_rationalization_map_projectionMap (f : X ⟶ Y) [HasCompactification f]

@@ -22,8 +22,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.Conde
 # Proper base change on the admissible constant-model generators
 
 Source: blueprint sec-six-functors-basics/sk-thm-sfb-proper-base-change and
-sk-thm-sf-comp-composition, proper base change in proof (2), with the recorded
-coefficient convention of sk-def-localizing-closure.
+proposition-composition-base-change-rf-shriek--1, proper base change in proof (2), with the recorded
+coefficient convention of definition-localizing-subcategory.
 -/
 
 @[expose] public section
@@ -564,8 +564,8 @@ private theorem integral_exchange_generator
 coefficient, including coefficients isomorphic to the listed representatives.
 The square may use any chosen Cartesian realization of the pullback.
 
-Source: blueprint sk-thm-sfb-proper-base-change, finite (2), integral (3), rational (3),
-and det-sf-comp-composition-base-change, proof step 2.
+Source: blueprint proposition-proper-direct-image-constructible-complexes, finite (2), integral (3),
+rational (3), and proposition-composition-base-change-rf-shriek--4, proof step 2.
 (blueprint: lem-sfb-proper-base-change-admissible-generators).
 
 Proof: restrict the scalar extension of a coefficient isomorphism to its exact

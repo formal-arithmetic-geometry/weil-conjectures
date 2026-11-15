@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusEvaluati
 
 /-! # Native pullback versus translation on the fixed ordinary model
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 native ringed-model proof, steps 2 and 3; Stacks 03D6 and 03EO.
 -/
 
@@ -54,7 +54,7 @@ Hom comparison, native pushforward by an inverse scheme isomorphism is translati
 compatibly with internal Hom. No site, ring, module equivalence, or Hom isomorphism
 is chosen by this statement: all of those have already been constructed.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 ordinary native ringed-model proof steps 2--3; Stacks 03D6 and 03EO.
 (blueprint: lem-sf-native-frobenius-comparison)
 

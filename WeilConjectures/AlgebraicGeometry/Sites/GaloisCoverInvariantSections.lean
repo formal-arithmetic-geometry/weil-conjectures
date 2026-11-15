@@ -17,7 +17,7 @@ The group `G` acts on the sections `E(P)` of `E` over the étale `V`-scheme `P`,
 along the automorphisms `c.smul g`. A section over `P` which is invariant under this action is
 the restriction of a unique section over `V`: two morphisms `p₁, p₂ : Z ⟶ P` over `V` differ,
 locally on `Z`, by an element of `G`, since the graphs `(g • -, id) : P ⟶ P ×_V P` cover the
-fibre product (blueprint `det-tf-transverse-corner-vanishing`, dévissage step).
+fibre product (blueprint `lemma-cohomology-near-two-transverse-divisors--1`, dévissage step).
 
 ## Main statements
 
@@ -38,12 +38,12 @@ variable {V : Scheme.{u}} {G : Type (u + 1)} [Group G] [Finite G] (c : V.GaloisC
 attribute [local instance] GaloisCover.etale GaloisCover.surjective
 
 /-- The total space of a Galois cover, as an object of the small étale site of the base
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 noncomputable abbrev etaleObj : V.Etale :=
   Scheme.Etale.mk c.π
 
 /-- The action of `g : G` on the total space of a Galois cover, as an endomorphism in the small
-étale site of the base (blueprint `det-tf-transverse-corner-vanishing`). -/
+étale site of the base (blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 noncomputable def smulEtale (g : G) : c.etaleObj ⟶ c.etaleObj :=
   MorphismProperty.Over.homMk (c.smul g) (c.smul_π g)
 
@@ -52,17 +52,17 @@ lemma smulEtale_left (g : G) : (c.smulEtale g).left = c.smul g :=
   rfl
 
 /-- The unit of `G` acts trivially on the total space of a Galois cover, as an object of the
-small étale site (blueprint `det-tf-transverse-corner-vanishing`). -/
+small étale site (blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma smulEtale_one : c.smulEtale 1 = 𝟙 _ :=
   EtaleTorsor.etaleHom_ext c.one_smul
 
 /-- The action of `G` on the total space of a Galois cover, as an object of the small étale
-site, is a left action (blueprint `det-tf-transverse-corner-vanishing`). -/
+site, is a left action (blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma smulEtale_mul (g h : G) : c.smulEtale (g * h) = c.smulEtale h ≫ c.smulEtale g :=
   EtaleTorsor.etaleHom_ext (c.mul_smul g h)
 
 /-- The graph `(g • -, id) : P ⟶ P ×_V P` of the action of `g` on a Galois cover
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 noncomputable def graph (g : G) : c.P ⟶ pullback c.π c.π :=
   pullback.lift (c.smul g) (𝟙 _) (by simp [c.smul_π])
 
@@ -77,7 +77,7 @@ instance isOpenImmersion_graph (g : G) : IsOpenImmersion (c.graph g) := by
   infer_instance
 
 /-- The graphs of the action of `G` on a Galois cover cover the fibre product `P ×_V P`
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma exists_graph_apply_eq (w : ↥(pullback c.π c.π)) : ∃ (g : G) (x : c.P), c.graph g x = w := by
   have := c.isIso_sigmaDesc
   let d := Sigma.desc fun g : G ↦
@@ -92,7 +92,7 @@ lemma exists_graph_apply_eq (w : ↥(pullback c.π c.π)) : ∃ (g : G) (x : c.P
 variable {c} in
 /-- Two morphisms `p₁, p₂ : Z ⟶ P` over `V` into a Galois cover differ by the action of `g`
 on the open subscheme `Z ×_{P ×_V P} P` of `Z` where `(p₁, p₂)` meets the graph of `g`
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma pullback_fst_comp_eq_snd_comp_smul {Z : Scheme.{u}} {p₁ p₂ : Z ⟶ c.P}
     (h : p₁ ≫ c.π = p₂ ≫ c.π) (g : G) :
     pullback.fst (pullback.lift p₁ p₂ h) (c.graph g) ≫ p₁ =
@@ -103,7 +103,7 @@ lemma pullback_fst_comp_eq_snd_comp_smul {Z : Scheme.{u}} {p₁ p₂ : Z ⟶ c.P
 
 variable {c} in
 /-- The second projection of `Z ×_{P ×_V P} P`, for the graph of `g`, is the restriction of `p₂`
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma pullback_fst_comp_eq_snd {Z : Scheme.{u}} {p₁ p₂ : Z ⟶ c.P}
     (h : p₁ ≫ c.π = p₂ ≫ c.π) (g : G) :
     pullback.fst (pullback.lift p₁ p₂ h) (c.graph g) ≫ p₂ =
@@ -114,7 +114,7 @@ lemma pullback_fst_comp_eq_snd {Z : Scheme.{u}} {p₁ p₂ : Z ⟶ c.P}
 
 variable {c} in
 /-- The open subschemes `Z ×_{P ×_V P} P` for the graphs of the elements of `G` cover `Z`
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma iUnion_range_pullback_fst_graph {Z : Scheme.{u}} {p₁ p₂ : Z ⟶ c.P}
     (h : p₁ ≫ c.π = p₂ ≫ c.π) :
     ⋃ g : G, Set.range (pullback.fst (pullback.lift p₁ p₂ h) (c.graph g)) = Set.univ := by
@@ -124,7 +124,8 @@ lemma iUnion_range_pullback_fst_graph {Z : Scheme.{u}} {p₁ p₂ : Z ⟶ c.P}
   exact Set.mem_iUnion.2 ⟨g, w, hw⟩
 
 /-- The morphism from the total space of a Galois cover to the terminal object of the small
-étale site of the base is surjective (blueprint `det-tf-transverse-corner-vanishing`). -/
+étale site of the base is surjective (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`). -/
 lemma surjective_terminal_from_left : Function.Surjective (terminal.from c.etaleObj).left := by
   let hT := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale V
   let e : Scheme.Etale.mk (𝟙 V) ≅ ⊤_ V.Etale := hT.uniqueUpToIso terminalIsTerminal
@@ -136,10 +137,10 @@ lemma surjective_terminal_from_left : Function.Surjective (terminal.from c.etale
   rw [he, Etale.comp_left_eq, h₁, Scheme.Hom.comp_base, TopCat.coe_comp]
   exact e.hom.left.homeomorph.surjective.comp c.surjective.surj
 
-/-- **Galois descent of invariant sections** (blueprint `det-tf-transverse-corner-vanishing`):
-a section of a sheaf of sets on the small étale site of `V` over the total space of a Galois
-cover which is invariant under the action of the group is the restriction of a section over
-`V`. -/
+/-- **Galois descent of invariant sections** (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`): a section of a sheaf of sets on the small étale
+site of `V` over the total space of a Galois cover which is invariant under the action of the group
+is the restriction of a section over `V`. -/
 theorem exists_map_eq_of_forall_smul {E : V.Etaleᵒᵖ ⥤ Type w}
     (hE : Presheaf.IsSheaf V.smallEtaleTopology E) (x : E.obj (op c.etaleObj))
     (hx : ∀ g : G, E.map (c.smulEtale g).op x = x) :

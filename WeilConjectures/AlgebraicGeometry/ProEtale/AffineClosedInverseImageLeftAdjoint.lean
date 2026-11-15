@@ -305,7 +305,7 @@ Source: Stacks Project, Tag 09BL, clause (3), and Tag 09BK
 Proof plan:
 1. Restrict to the full affine ind-etale bases. Cover-density and the induced topology
    give restriction equivalences R_X and R_Z, with quasi-inverses E_X and E_Z
-   (lem-weil-pbc-ind-etale-basis and lem-pc-fppf-dense-sheaf-equivalence).
+   (proposition-pro-etale-affines-form-basis and lem-pc-fppf-dense-sheaf-equivalence).
 2. Put T = R_Z i⁻¹ E_X for the ordinary base-change inverse image. The canonical
    closed-site lift v and its evaluation formula identify T(F)(V) naturally with F(v(V))
    for weakly contractible V (lem-weil-pbc-affine-closed-site-functor-properties and

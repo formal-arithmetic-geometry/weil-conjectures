@@ -63,8 +63,8 @@ Proof:
 4. Scalar restriction is exact: the underlying sheaves, kernels and cokernels are
    unchanged. Choose a K-injective representative I of K. Rg-star and Rf-star are the
    same complex f-star I with different scalar structures
-   (`def-pc-ringed-spaces-derived-direct-image`, `def-pc-derived-direct-image`). Hence
-   scalar restriction of the equivalence is naturally isomorphic to Rf-star. -/
+   (`def-pc-ringed-spaces-derived-direct-image`, `lemma-coherent-base-change-invertible-sheaves`).
+   Hence scalar restriction of the equivalence is naturally isomorphic to Rf-star. -/
 theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

@@ -105,9 +105,10 @@ The cocycle rule for these units on triple intersections is
 `ProjectiveSpace.transitionUnit_mul_transitionUnit` (blueprint `lem-pc-twist-cocycle`), the section
 `xᵢ` of `𝒪(1)` is `ProjectiveSpace.coordinateSection`, and the identifications
 `𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`, `𝒪(0) ≅ 𝒪` are `ProjectiveSpace.nonempty_tensorObj_twist_iso`
-(blueprint `lem-pc-twist-tensor`); for a module `ℱ`, `ℱ(d)` stands for `ℱ ⊗ 𝒪(d)`.
+(blueprint `theorem-riemann-roch-coherent-serre-duality`); for a module `ℱ`, `ℱ(d)` stands for
+`ℱ ⊗ 𝒪(d)`.
 
-(blueprint: `def-pc-projective-space-twist`, `rem-ptr-pc-projective-space-twist-17`) -/
+(blueprint: `def-pc-projective-space-twist`, `lemma-coherent-base-change-invertible-sheaves--1`) -/
 def twist (m : ℤ) : (ℙ(n; S)).Modules :=
   (Scheme.Modules.pullback (toProjInt n S)).obj
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)
@@ -177,7 +178,7 @@ open MonoidalCategory in
 corresponding isomorphism `Proj.nonempty_tensorObj_twist_iso` of the integral model, the pullback
 of a tensor product being the tensor product of the pullbacks.
 
-(blueprint: `lem-pc-twist-tensor`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem nonempty_tensorObj_twist_iso (a b : ℤ) :
     Nonempty (twist n S a ⊗ twist n S b ≅ twist n S (a + b)) := by
   obtain ⟨e₁⟩ := Scheme.Modules.nonempty_pullback_tensorObj_iso (toProjInt n S)

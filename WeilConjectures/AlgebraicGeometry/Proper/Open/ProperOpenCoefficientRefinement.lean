@@ -444,10 +444,10 @@ Source: Stacks 0F7I and 0GL6, with the explicit clopen-section argument
 
 Proof:
 1. Form V = T1 times over T2 X and its section s = (j1,id). By
-   lem-weil-pbc-proper-open-section the section is clopen. The actual pullback
+   proposition-construction-independence-rf-shriek--7 the section is clopen. The actual pullback
    square gives inverse-image/open-extension base change by
-   cor-cbc-derived-extension-zero-base-change, and extension composition is
-   lem-cbc-extension-zero-composition. The original refinement square need not
+   proposition-extension-zero-restriction-closed-subscheme--11, and extension composition is
+   proposition-composition-base-change-rf-shriek--1. The original refinement square need not
    be cartesian. Exactness descends these identifications to derived categories.
 2. The clopen sheaf product equivalence of lem-weil-pbc-etale-sheaf-clopen-product
    is also an exact equivalence for modules, complexes and their localizations
@@ -479,7 +479,7 @@ Proof:
    The source and target are extended from V, so full faithfulness of b extension
    and the product equivalence give equality on T1.
 7. Transpose the asserted equality under the unbounded B-geometric adjunction
-   from def-kun-projection-formula-map. Counit naturality and the definition of
+   from definition-projection-formula-map--1. Counit naturality and the definition of
    chi replace its transpose by beta after Q of the A-projection after lambda.
    Naturality of lambda with respect to alpha gives the left side of step 6.
 8. The other transpose is the B-projection after inverse image of beta, the

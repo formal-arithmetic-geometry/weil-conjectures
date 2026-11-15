@@ -75,7 +75,7 @@ which is an isomorphism by étale base change for the pushforward
 `f'_* g'^* I ⟶ Rf'_* g'^* I`, which is an isomorphism since the pullback along the étale
 morphism `g'` preserves injectives (`AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale`).
 This is the compatibility of the higher direct images with étale localisation used in blueprint
-`sbc-lem-etale-locality` (Stacks 0D6G). -/
+`prose-08-06` (Stacks 0D6G). -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_of_etale (sq : IsPullback g' f' f g) [Etale g] :
     IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   have : Etale g' := MorphismProperty.of_isPullback sq.flip inferInstance

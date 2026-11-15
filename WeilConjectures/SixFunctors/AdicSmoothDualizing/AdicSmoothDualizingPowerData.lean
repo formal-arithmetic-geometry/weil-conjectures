@@ -58,7 +58,7 @@ attribute [local irreducible] finiteEtaleTateTensorFamily
 
 /-- Reassociation of the nonnegative etale Tate powers, with the unit at degree zero.
 Source: corollary proof and the detailed coefficient-twist conventions
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
+(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
 abbrev etalePowerProduct (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ) :=
   letI := Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
   finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
@@ -67,7 +67,7 @@ abbrev etalePowerProduct (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ
 
 /-- The underlying sheaf tensor unitor, before endpoint presentation transport.
 Source: corollary, zero-power tensor normalization
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
+(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
 def etalePowerUnitor (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
   letI := Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
   λ_ (finiteEtaleTateLine T P.diagonalExponent P.Coefficient
@@ -75,7 +75,7 @@ def etalePowerUnitor (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
 
 /-- The zero power-step has the specified tensor-unitor data.
 Source: corollary, coefficient unit at power zero
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes).
+(blueprint: corollary-dualizing-complex-smooth-scheme--1).
 Proof: the zero finite Tate power and the tensor unit are the same constant regular
 module sheaf, obtained by sheafifying that constant presheaf. Thus the unitor has
 exactly these endpoints. Heterogeneous equality fixes its data uniquely. -/
@@ -90,7 +90,7 @@ theorem existsUnique_etalePowerZero (P : PurityFiniteSetting.{u}) (T : Scheme.{u
 
 /-- A subsequent sheaf tensor power is literally the preceding power tensor the line.
 Source: corollary, positive tensor powers
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes).
+(blueprint: corollary-dualizing-complex-smooth-scheme--1).
 Proof: this is the successor clause of finiteEtaleTateTwist, with the same sheaf
 monoidal structure. Its comparison is identity, so the prescribed data is unique. -/
 theorem existsUnique_etalePowerPositive (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
@@ -106,7 +106,7 @@ theorem existsUnique_etalePowerPositive (P : PurityFiniteSetting.{u}) (T : Schem
 /-- The power-step comparison is exactly the tensor unitor at zero and identity
 thereafter. Its specified data is preserved by the endpoint transports.
 Source: corollary proof, positive tensor powers
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
+(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
 def etalePowerStep (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
     (d : ℕ) → etalePowerProduct P T d ≅
       finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
@@ -116,7 +116,7 @@ def etalePowerStep (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
 
 /-- Every nonnegative finite Tate power is flat, including the coefficient unit.
 Source: corollary proof and finite Tate descent
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes).
+(blueprint: corollary-dualizing-complex-smooth-scheme--1).
 Proof: the normalized root line is locally free of rank one because ell is invertible.
 Its positive tensor powers remain locally free of rank one; power zero is the unit.
 Tensoring with a locally free rank-one sheaf is locally the identity and hence exact. -/
@@ -134,7 +134,7 @@ theorem etalePowerFlat (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
 
 /-- The finite Tate sheaf placed in degree zero.
 Source: the corollary's finite coefficient model
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
+(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
 abbrev etaleSingle (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ) :=
   (DerivedCategory.singleFunctor _ 0).obj
     (finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
@@ -142,7 +142,7 @@ abbrev etaleSingle (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ) :=
 
 /-- The existing ordered derived tensor, with its site and coefficients explicit.
 Source: the corollary's ordered tensor convention
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
+(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
 abbrev etaleTensor (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
   Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) T
 
@@ -150,7 +150,7 @@ abbrev etaleTensor (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
 flat single-complex comparison, and sheaf-power step. HEq only transports their
 endpoint presentations; it fixes the data of every factor.
 Source: the corollary's normalized finite powers
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes).
+(blueprint: corollary-dualizing-complex-smooth-scheme--1).
 Proof: at zero use the zero-shift unitor. At the successor tensor the preceding
 comparison with the shifted root line. Move the two shifts outside tensor using
 derivedTensorShiftIso, use singleFunctorObjTensorIso for the flat Tate power,
