@@ -159,6 +159,9 @@ lemma derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app {X Y : Scheme.{u}} (f 
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f
     (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) K
+  have hA := derivedExtendScalarsCompIso_inv_app ℓ h Y
+    (R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj K)
+  have hD := derivedExtendScalarsCompIso_hom_app ℓ h X K
   with_reducible exact H.trans ((eq_whisker hA _).symm.trans (whisker_eq _ (whisker_eq _
     (whisker_eq _ (R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).congr_map hD.symm)))))
 
