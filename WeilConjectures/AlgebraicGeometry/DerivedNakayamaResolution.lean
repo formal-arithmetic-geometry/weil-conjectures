@@ -481,7 +481,7 @@ private theorem quotientDiscrete (n : ℕ) :
 
 /-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
 `O_E`, as a morphism of sheaves of abelian groups. -/
-def uniformizerMap : integerRing l E ⟶ integerRing l E := by
+def resolutionUniformizerMap : integerRing l E ⟶ integerRing l E := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   refine ⟨{ app := fun S ↦ ?_, naturality := ?_ }⟩
   · exact AddCommGrpCat.ofHom
@@ -495,11 +495,11 @@ def uniformizerMap : integerRing l E ⟶ integerRing l E := by
 /-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
 `O_E`, as an endomorphism of the regular `O_E`-module object. -/
 @[no_expose]
-def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
+def resolutionUniformizerEnd : End (Mod.regular (integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  refine .of (Mod.homMk (uniformizerMap l E) ?_)
-  change MonObj.mul ≫ uniformizerMap l E =
-    integerRing l E ◁ uniformizerMap l E ≫ MonObj.mul
+  refine .of (Mod.homMk (resolutionUniformizerMap l E) ?_)
+  change MonObj.mul ≫ resolutionUniformizerMap l E =
+    integerRing l E ◁ resolutionUniformizerMap l E ≫ MonObj.mul
   apply Sheaf.tensor_hom_ext
   simp only [Functor.map_comp]
   rw [← Category.assoc, Sheaf.μ_sheafToPresheaf_comp_map_mul_sheafCompose]
@@ -520,7 +520,7 @@ def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
 
 /-- The quotient map `O_E ⟶ O_E/π_E^n` of continuous condensed rings, as a morphism of
 `O_E`-module objects from the regular module to the quotient with its restricted action. -/
-def reductionHom (n : ℕ) :
+def resolutionReductionHom (n : ℕ) :
     Mod.regular (integerRing l E) ⟶ quotientModule l E n :=
   Mod.homMk (reductionRing l E n) (by
     change MonObj.mul ≫ reductionRing l E n =
@@ -531,7 +531,7 @@ def reductionHom (n : ℕ) :
 
 private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (x : S.unop) :
-    (((uniformizerEnd l E).asHom.hom.hom.app S) f).down x =
+    (((resolutionUniformizerEnd l E).asHom.hom.hom.app S) f).down x =
       Padic.coefficientExtensionUniformizer l E * f.down x := by
   rfl
 
@@ -549,7 +549,7 @@ private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E 
 
 private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (s : S.unop) :
-    (((uniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s =
+    (((resolutionUniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s =
       Padic.coefficientExtensionUniformizer l E ^ n * f.down s := by
   induction n generalizing f with
   | zero =>
@@ -557,13 +557,13 @@ private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     simp
   | succ n ih =>
     rw [pow_succ, End.mul_asHom]
-    change (((uniformizerEnd l E ^ n).asHom.hom.hom.app S)
-      (((uniformizerEnd l E).asHom.hom.hom.app S) f)).down s = _
+    change (((resolutionUniformizerEnd l E ^ n).asHom.hom.hom.app S)
+      (((resolutionUniformizerEnd l E).asHom.hom.hom.app S) f)).down s = _
     rw [ih, uniformizerEnd_apply, pow_succ, mul_assoc]
 
 /-- Multiplication by `π_E^n` followed by the quotient map `O_E ⟶ O_E/π_E^n` is zero. -/
-theorem reduction_zero (n : ℕ) :
-    (uniformizerEnd l E ^ n).asHom ≫ reductionHom l E n = 0 := by
+theorem resolutionReduction_zero (n : ℕ) :
+    (resolutionUniformizerEnd l E ^ n).asHom ≫ resolutionReductionHom l E n = 0 := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   apply Mod.hom_ext
   apply Sheaf.hom_ext
@@ -575,7 +575,7 @@ theorem reduction_zero (n : ℕ) :
   apply ContinuousMap.ext
   intro s
   change Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
-      ((((uniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s) = 0
+      ((((resolutionUniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s) = 0
   rw [uniformizerPower_apply, map_mul]
   have h : Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
       (Padic.coefficientExtensionUniformizer l E ^ n) = 0 := by
@@ -608,10 +608,10 @@ private instance pullbackFiniteColimits (X : Scheme.{u}) :
   infer_instance
 
 private theorem pointResolution (n : ℕ) :
-    (ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
-      (reduction_zero l E n)).ShortExact := by
-  let S := ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
-    (reduction_zero l E n)
+    (ShortComplex.mk (resolutionUniformizerEnd l E ^ n).asHom (resolutionReductionHom l E n)
+      (resolutionReduction_zero l E n)).ShortExact := by
+  let S := ShortComplex.mk (resolutionUniformizerEnd l E ^ n).asHom (resolutionReductionHom l E n)
+    (resolutionReduction_zero l E n)
   have hs : (S.map (Mod.forget _)).ShortExact := by
     apply shortExact_of_sectionwise
     intro T
@@ -626,8 +626,8 @@ private theorem pointResolution (n : ℕ) :
       apply ContinuousMap.ext
       intro t
       have h' := congrArg (fun f ↦ f.down t) h
-      change (((uniformizerEnd l E ^ n).asHom.hom.hom.app T) f).down t =
-        (((uniformizerEnd l E ^ n).asHom.hom.hom.app T) g).down t at h'
+      change (((resolutionUniformizerEnd l E ^ n).asHom.hom.hom.app T) f).down t =
+        (((resolutionUniformizerEnd l E ^ n).asHom.hom.hom.app T) g).down t at h'
       rw [uniformizerPower_apply, uniformizerPower_apply] at h'
       exact mul_left_cancel₀ (pow_ne_zero n (uniformizer_ne_zero l E)) h'
     have hg : Function.Surjective S'.g := by
@@ -662,7 +662,7 @@ private theorem pointResolution (n : ℕ) :
       apply ULift.ext
       apply ContinuousMap.ext
       intro t
-      change (((uniformizerEnd l E ^ n).asHom.hom.hom.app T)
+      change (((resolutionUniformizerEnd l E ^ n).asHom.hom.hom.app T)
         (ULift.up (⟨g, hg⟩ : C(T.unop, Padic.coefficientExtensionIntegers l E)))).down t = _
       rw [uniformizerPower_apply]
       exact Subtype.ext (by simpa using hgf t)
@@ -685,8 +685,8 @@ on `ℓ` being invertible on `X` is made. The sequence on the point is short exa
 (sectionwise, by continuous division by the uniformizer power and continuous lifting along the
 finite discrete quotient), and the pullback from the point is exact. -/
 theorem shortExact_pullback_reductionShortComplex (X : Scheme.{u}) (n : ℕ) :
-    ∃ h : (pullback l E X).map (uniformizerEnd l E ^ n).asHom ≫
-      (pullback l E X).map (reductionHom l E n) = 0,
+    ∃ h : (pullback l E X).map (resolutionUniformizerEnd l E ^ n).asHom ≫
+      (pullback l E X).map (resolutionReductionHom l E n) = 0,
       (ShortComplex.mk _ _ h).ShortExact :=
   ⟨_, (pointResolution l E n).map_of_exact (pullback l E X)⟩
 
@@ -711,23 +711,23 @@ private theorem scalarOnComplex_eq (X : Scheme.{u})
 
 private theorem naturalCone (X : Scheme.{u}) (n : ℕ) :
     Nonempty (DerivedCategory.Q ⋙ reductionFunctor l E X n ≅
-      coneFunctor l E X (uniformizerEnd l E ^ n)) := by
+      coneFunctor l E X (resolutionUniformizerEnd l E ^ n)) := by
   let A := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (integerRing l E) X)
-  let r : UnitScalar.Scalars A := unitEndOnX l E X (uniformizerEnd l E ^ n)
+  let r : UnitScalar.Scalars A := unitEndOnX l E X (resolutionUniformizerEnd l E ^ n)
   let τ : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ :=
     NatTrans.mapHomologicalComplex
-      (scalarOnModules l E X (uniformizerEnd l E ^ n)) (.up ℤ)
+      (scalarOnModules l E X (resolutionUniformizerEnd l E ^ n)) (.up ℤ)
   have hτ : τ = UnitScalar.scalarNat r := by
     apply NatTrans.ext
     funext C
-    exact scalarOnComplex_eq l E X (uniformizerEnd l E ^ n) C
+    exact scalarOnComplex_eq l E X (resolutionUniformizerEnd l E ^ n) C
   change Nonempty (DerivedCategory.Q ⋙
     (curriedTensor (Derived l E X)).flip.obj
       ((DerivedCategory.singleFunctor A 0).obj
         ((pullback l E X).obj (quotientModule l E n))) ≅ UnitScalar.coneOf τ)
-  let S := (ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
-    (reduction_zero l E n)).map (pullback l E X)
+  let S := (ShortComplex.mk (resolutionUniformizerEnd l E ^ n).asHom (resolutionReductionHom l E n)
+    (resolutionReduction_zero l E n)).map (pullback l E X)
   exact UnitScalar.reductionComparisonViaIso (.of S.f) S.g S.zero
     ((pointResolution l E n).map_of_exact (pullback l E X))
     (regularPullbackIso l E X) r rfl τ hτ
@@ -784,10 +784,10 @@ theorem derived_nakayama_resolution :
                 Triangle.mk ((reductionMap l E X (i m n)).app K)
                   ((reductionMap l E X (q m n)).app K) δ ∈ distTriang (Derived l E X)) := by
   obtain ⟨i, q, hi, hq, hseq⟩ := PowerQuotients.sequences
-    (uniformizerEnd l E) (quotientModule l E) (reductionHom l E)
-    (reduction_zero l E) (pointResolution l E)
-  refine ⟨uniformizerEnd l E, uniformizerEnd_apply l E,
-    reductionHom l E, fun _ ↦ rfl, i, q, hi, hq, ?_⟩
+    (resolutionUniformizerEnd l E) (quotientModule l E) (resolutionReductionHom l E)
+    (resolutionReduction_zero l E) (pointResolution l E)
+  refine ⟨resolutionUniformizerEnd l E, uniformizerEnd_apply l E,
+    resolutionReductionHom l E, fun _ ↦ rfl, i, q, hi, hq, ?_⟩
   intro X n hn
   refine ⟨shortExact_pullback_reductionShortComplex l E X n, naturalCone l E X n, ?_⟩
   intro m hm hmn K
