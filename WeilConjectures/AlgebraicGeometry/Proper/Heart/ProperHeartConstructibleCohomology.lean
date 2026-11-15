@@ -37,17 +37,15 @@ private lemma constantModelBoundedConstructible_eq_rational
     (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
       Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨
       Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
-    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
+    (k : Type u) [Field k]
     (T : Scheme.{u}) [T.Over (Spec (.of k))]
-    [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
-    [QuasiCompact (T ↘ Spec (.of k))] :
+    [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] :
     constantModelBoundedConstructible Λ.X T = boundedConstructible (condensedRingObj Λ.X T) := by
-  have h := (finiteCoefficientDescentTwoColimit k p₀ ℓ hp₀ hpℓ T).2.2.2
   rcases hΛ with ⟨E, hE⟩ | hQ
   · subst Λ
-    exact (h.1 E).1
+    exact constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E T
   · subst Λ
-    exact h.2.1.1
+    exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ T
 
 attribute [local irreducible] Functor.rightDerivedFunctor
 
@@ -90,7 +88,7 @@ theorem properHeart_constructible_cohomology
       [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
       [QuasiCompact (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) :=
-    constantModelBoundedConstructible_eq_rational ℓ (Mon.mk Λ) hΛ k p₀ hp₀ hpℓ T
+    constantModelBoundedConstructible_eq_rational ℓ (Mon.mk Λ) hΛ k T
   have : Fact (ringChar k).Prime := ⟨by
     rw [ringChar.eq k p₀]
     exact (CharP.char_is_prime_or_zero k p₀).resolve_right hp₀.ne'⟩
