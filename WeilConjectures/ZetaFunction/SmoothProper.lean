@@ -33,6 +33,9 @@ the functional equation and the Riemann hypothesis, and `Pᵢ` realizes the dete
 - `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity
   (`theorem-weil-conjectures-smooth-proper-schemes`,
   `corollary-purity-cohomology-smooth-proper-variety--1`).
+- `AlgebraicGeometry.Scheme.isUniversallyPureOfWeight_map_frobeniusCharpolyRev`: the reciprocal
+  roots of `P_{i,ℓ}` are `q`-Weil numbers of weight `i`, under every embedding of their number
+  fields.
 - `AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`: the Weil conjectures
   for `X₀`, with the realization of the factors for every `ℓ`.
 -/
@@ -116,6 +119,32 @@ theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
   have hnorm := hpure α hα'
   have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
   rw [Function.comp_apply, norm_inv, hnorm, ← Real.rpow_neg hq.le, Int.cast_natCast, neg_div]
+
+/-- Universal purity of the determinant factors: for `X₀` smooth, proper and geometrically
+connected of pure dimension `d`, a field embedding `ι : ℚ̄_ℓ → ℂ` and `0 ≤ i ≤ 2d`, every root `z`
+of `ι P_{i,ℓ}` is algebraic over `ℚ` and every conjugate of `z` over `ℚ` has absolute value
+`q^{-i/2}`; equivalently every reciprocal root `α` of `ι P_{i,ℓ}` satisfies `|τ(α)| = q^{i/2}` for
+every embedding `τ : ℚ(α) → ℂ`. Every embedding of the number field `ℚ(α) ⊆ ℚ̄_ℓ` into `ℂ` extends
+to `ℚ̄_ℓ` (`PadicAlgCl.exists_ringHom_complex_apply_eq`), and purity holds for every extension
+(`AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`); the roots are algebraic
+because `Z(X₀, T)` has integer coefficients. -/
+theorem isUniversallyPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
+    [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ) {i : ℕ}
+    (hi : i ≤ 2 * d) :
+    ((frobeniusCharpolyRev k₀ l X i).map ι).IsUniversallyPureOfWeight (Nat.card k₀) i := by
+  obtain ⟨D, -, hDP, hN⟩ := exists_traceDatum k₀ l X d
+  have hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l))
+      (X ↘ Spec (CommRingCat.of k₀)).zetaSeries = D.zeta :=
+    D.map_zetaSeries _ hN
+  have hq : 1 < Nat.card k₀ := Finite.one_lt_card
+  have h := D.isUniversallyPureOfWeight_map_P hq
+    (fun _ _ hβ hz ↦ PadicAlgCl.exists_ringHom_complex_apply_eq l hβ hz)
+    (fun ι' j ↦ by rw [hDP]; exact isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι' j) hZ
+    (X ↘ Spec (CommRingCat.of k₀)).exists_int_zetaSeries ι ⟨i, by omega⟩
+  rw [hDP] at h
+  exact h
 
 /-- The Weil conjectures for `X₀` at the prime `ℓ`: the factorization, the functional equation
 and the Riemann hypothesis for integer polynomials `Pᵢ` with `Pᵢ^{(ℓ)} = P_{i,ℓ}`. -/
