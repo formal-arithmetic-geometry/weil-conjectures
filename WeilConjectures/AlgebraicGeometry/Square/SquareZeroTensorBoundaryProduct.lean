@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryGradedRe
 
 /-! # The two-section product identity for transported tensor boundaries
 
-Source: Stacks Project, Tags 09MS and 0B8S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -29,10 +31,7 @@ noncomputable section
 
 /-- The boundary of a product of two arbitrary sections is the sum of their two acted-on
 boundaries. The second section is arbitrary in degree e+1, rather than a power of the
-first; no sequence of classes or exponent recurrence is asserted.
-
-Source: Stacks Project, Tag 09MS, the direct-sum exact sequence after equation (30.17.5.1), and Tag
-0B8S, the square-zero boundary derivation calculation. -/
+first; no sequence of classes or exponent recurrence is asserted. -/
 theorem transportedTensorBoundary_product
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

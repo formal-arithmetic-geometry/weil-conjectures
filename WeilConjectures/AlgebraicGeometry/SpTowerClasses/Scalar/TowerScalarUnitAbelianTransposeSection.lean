@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarUnitAbelianTransposeSectionNormalized
 
 /-! # The abelian transpose of the coefficient-unit comparison
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -29,12 +33,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 This module isolates the section calculation used by the abelian transpose theorem.
 -/
 
-/-- Sectionwise form of the coefficient-unit transpose.
-
-Source: Stacks 03EL. This is the sectionwise calculation underlying
-`scalarUnit_abelianTranspose`.
-The remaining theorem only assembles these equalities by extensionality.
--/
+/-- Sectionwise form of the coefficient-unit transpose: the identity of
+`scalarUnit_abelianTranspose` evaluated on a section at a fixed level and chart. -/
 theorem scalarUnit_abelianTranspose_section
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

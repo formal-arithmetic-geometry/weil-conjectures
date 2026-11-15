@@ -16,14 +16,19 @@ import WeilConjectures.Compactification.CategoryBaseChange
 /-!
 # Compatible compactification towers over arbitrary bases
 
-Source: Stacks Project, Tag 0F7J (proof), with supplied compactifications over arbitrary bases
-as in `WeilConjectures.Compactification.Comp` and `WeilConjectures.Compactification.Triangle`.
+For composable separated finite-type quasi-compact morphisms `X ⟶ Y ⟶ Z`, given
+compactifications extend to a compatible tower, towers are stable under arbitrary base change,
+and any two towers have a common refinement.
 
 ## Implementation details
 
-`Triangle` records the intermediate scheme only up to its unique isomorphism with the
-fibre product; the first clause of `exists_compactifiable_compatible_tower` uses the literal
-fibre product via `restrict`.
+`Compactification.Triangle` records the intermediate scheme up to its unique isomorphism with
+the corresponding fibre product; the first clause of `exists_compactifiable_compatible_tower`
+uses the literal fibre product via `Compactification.restrict`.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7J
 -/
 
 @[expose] public section
@@ -35,9 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Supplied compactifications extend to a compatible tower; towers survive arbitrary base
-change and any two have a common refinement.
-
-Source: Stacks Project, Tag 0F7J (proof). -/
+change and any two have a common refinement. -/
 theorem exists_compactifiable_compatible_tower
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

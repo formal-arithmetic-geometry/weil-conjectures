@@ -138,8 +138,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 /-!
 # Constant strict towers and normalized direct image
 
-Source: Stacks, Tags 08BJ, 070K, 0940, 0941, 0A07, 06YS, 07A4 and 0B56.
-
 The index n denotes positive exponent n+1. Quotients need not be finite sets.
 All tower derived categories localize strict diagrams before evaluation.
 
@@ -152,7 +150,12 @@ All tower derived categories localize strict diagrams before evaluation.
 
 ## Main statements
 
-* `constantTowerDirectImageNormalization`: the four normalizations.
+* `constantTowerDirectImageNormalization`: the four requested normalizations.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08BJ, 070K, 0940, 0941, 0A07, 06YS, 07A4,
+  0B56, 06YY, 07A5, 03EK, 00YV, 099M, 03EL
 -/
 
 @[expose] public noncomputable section
@@ -183,8 +186,7 @@ variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w�
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
 /-- The literal ordinary-square normalization on every K-injective representative.
-The formula includes the exact-localization and derived-resolution comparisons.
-Source: Stacks 070K. -/
+The formula includes the exact-localization and derived-resolution comparisons. -/
 def IsDirectImageNormalizedOnKInjectives
     (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
     [PreservesFiniteLimits P] [PreservesFiniteColimits P]
@@ -204,8 +206,7 @@ def IsDirectImageNormalizedOnKInjectives
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app J)
 
 /-- The canonical pullback/reduction square at a homotopy representative. The two
-counits and exact-localization factors specify the whole-tower tensor comparison.
-Source: Stacks 06YY, 07A4. -/
+counits and exact-localization factors specify the whole-tower tensor comparison. -/
 def IsReductionPullAt
     (P : C ⥤ T) [P.Additive] (Q : D ⥤ U) [Q.Additive]
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -786,25 +787,20 @@ private theorem restrictionPullback_unit
 
 end ScalarPullback
 
-/-- Exact diagonal, using the existing strict tower category.
-Source: Stacks 0941. -/
+/-- Exact diagonal, using the existing strict tower category. -/
 abbrev delta (X : Scheme.{u}) :=
   (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).mapDerivedCategory
 
-/-- Ordinary direct image in the same identified constant coefficients.
-Source: Stacks 07A5. -/
+/-- Ordinary direct image in the same identified constant coefficients. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) := (moduleDirectImage A f).rightDerivedFunctor
 
-/-- Ordinary exact inverse image.
-Source: Stacks 03EK. -/
+/-- Ordinary exact inverse image. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (modulePullback A f).mapDerivedCategory
 
-/-- The existing unbounded derived inverse limit on the original small site.
-Source: Stacks 0941. -/
+/-- The existing unbounded derived inverse limit on the original small site. -/
 abbrev L (X : Scheme.{u}) := completedRlim X (coefficients A X)
 
-/-- The canonical ordinary constant/inverse-image square, with identity components.
-Source: Stacks 00YV. -/
+/-- The canonical ordinary constant/inverse-image square, with identity components. -/
 def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     delta A Y ⋙ G A f ≅ pull A f ⋙ delta A X :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -812,7 +808,7 @@ def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact diagonal preserves K-injectives because it is right adjoint to exact
-terminal-index evaluation. Source: Stacks 08BJ. -/
+terminal-index evaluation. -/
 @[instance] theorem delta_preservesKInjective (X : Scheme.{u}) :
     (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).PreservesKInjectiveComplexes := by
   let adj₀ : (evaluation ℕᵒᵖ (Modules A X)).obj (op 0) ⊣ Functor.const ℕᵒᵖ :=
@@ -836,8 +832,7 @@ terminal-index evaluation. Source: Stacks 08BJ. -/
 
 /-- The canonical derived direct-image/diagonal isomorphism. Both composition
 comparisons retain their universal derived units; the middle comparison has identity
-components on ordinary modules.
-Source: Stacks 08BJ, 070K. -/
+components on ordinary modules. -/
 def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
     push A f ⋙ delta A Y ≅ delta A X ⋙ R A f :=
   (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (moduleDirectImage A f)
@@ -846,8 +841,7 @@ def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
   Functor.rightDerivedFunctorCompIso (Functor.const ℕᵒᵖ) (towerDirectImage A f) ≪≫
   Functor.isoWhiskerRight
     (Functor.rightDerivedFunctorIsoMapDerivedCategory (Functor.const ℕᵒᵖ)) (R A f)
-/-- Evaluation of a diagonal is canonically the identity.
-Source: Stacks 0941. -/
+/-- Evaluation of a diagonal is canonically the identity. -/
 def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
@@ -898,22 +892,19 @@ attribute [local irreducible] completedAdicChange
 
 variable {A} (I : Ideal A)
 
-/-- The genuine quotient map of constant coefficient sheaves at positive exponent n+1.
-Source: Stacks 099M. -/
+/-- The genuine quotient map of constant coefficient sheaves at positive exponent n+1. -/
 def quotient (X : Scheme.{u}) (n : ℕ) :
     coefficients A X ⟶ coefficients (A ⧸ I ^ (n + 1)) X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (Ideal.Quotient.mk _))
 
-/-- The quotient transition of constant sheaves, including its coefficient action.
-Source: Stacks 099M. -/
+/-- The quotient transition of constant sheaves, including its coefficient action. -/
 def quotientStep (X : Scheme.{u}) (n : ℕ) :
     coefficients (A ⧸ I ^ (n + 2)) X ⟶ coefficients (A ⧸ I ^ (n + 1)) X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (Ideal.Quotient.factorPow I (Nat.le_succ (n + 1))))
 
-/-- Ordinary tensor with a quotient, restricted back to the original coefficients.
-Source: Stacks 06YY. -/
+/-- Ordinary tensor with a quotient, restricted back to the original coefficients. -/
 def level (X : Scheme.{u}) (n : ℕ) : Modules A X ⥤ Modules A X :=
   reductionChange X (quotient I X n) ⋙ reductionRestrict X (quotient I X n)
 
@@ -1234,8 +1225,7 @@ private theorem quotientStep_comp (X : Scheme.{u}) (n : ℕ) :
   rw [← Functor.map_comp]
   congr 1
 
-/-- Quotient transitions are the unique maps on sheafified pure tensors.
-Source: Stacks 06YY. -/
+/-- Quotient transitions are the unique maps on sheafified pure tensors. -/
 theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
     ∃! τ : level I X (n + 1) ⟶ level I X n,
       ∀ (M : Modules A X) (U : X.ProEtᵒᵖ)
@@ -1265,13 +1255,11 @@ theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
     intro U s x
     exact (hf U s x).trans (hg U s x).symm
 
-/-- The strict reduction functor, including all coefficient transition maps.
-Source: Stacks 099M. -/
+/-- The strict reduction functor, including all coefficient transition maps. -/
 def reductionModule (X : Scheme.{u}) : Modules A X ⥤ Towers A X :=
   (Functor.ofOpSequence (fun n ↦ (step_existsUnique I X n).exists.choose)).flip
 
-/-- Reduction is additive before localization.
-Source: Stacks 06YY. -/
+/-- Reduction is additive before localization. -/
 @[instance] theorem reductionModule_additive (X : Scheme.{u}) :
     (reductionModule I X).Additive := by
   constructor
@@ -1283,8 +1271,7 @@ Source: Stacks 06YY. -/
     infer_instance
   exact (level I X n.unop).map_add
 
-/-- The homotopy functor to be left derived.
-Source: Stacks 06YY. -/
+/-- The homotopy functor to be left derived. -/
 def reductionHomotopy (X : Scheme.{u}) :
     HomotopyCategory (Modules A X) (.up ℤ) ⥤ Derived A X :=
   (reductionModule I X).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
@@ -1292,7 +1279,7 @@ def reductionHomotopy (X : Scheme.{u}) :
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- A derived reduction pair, retaining its determining universal property and K-flat
-computation. Source: Stacks 06YS, 06YY. -/
+computation. -/
 structure ReductionModel (X : Scheme.{u}) where
   functor : DerivedCategory (Modules A X) ⥤ Derived A X
   counit : DerivedCategory.Qh ⋙ functor ⟶ reductionHomotopy I X
@@ -1302,8 +1289,7 @@ structure ReductionModel (X : Scheme.{u}) where
     CochainComplex.IsKFlatIndependentCoefficients (R := coefficients A X) P →
     IsIso (counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
-/-- Universal derived reduction, with its K-flat representative normalization.
-Source: Stacks 06YS, 06YY. -/
+/-- Universal derived reduction, with its K-flat representative normalization. -/
 theorem reduction_exists (X : Scheme.{u}) : Nonempty (ReductionModel I X) := by
   let H := HomotopyCategory.quotient (Modules A X) (.up ℤ)
   let F := reductionHomotopy I X
@@ -1348,24 +1334,20 @@ theorem reduction_exists (X : Scheme.{u}) : Nonempty (ReductionModel I X) := by
     Functor.leftDerived_from_resolvingClass (Modules A X) (Derived A X) F S hres hinv
   exact ⟨⟨LF, ε, hLF, fun P hP ↦ hε (H.obj P) ⟨P, hP, rfl⟩⟩⟩
 
-/-- Select the derived pair by its universal property, retaining its comparison.
-Source: Stacks 06YY. -/
+/-- Select the derived pair by its universal property, retaining its comparison. -/
 def reductionModel (X : Scheme.{u}) : ReductionModel I X :=
   Classical.choice (reduction_exists I X)
 
-/-- Reduction is the functor of the universal derived pair.
-Source: Stacks 06YY. -/
+/-- Reduction is the functor of the universal derived pair. -/
 def reduction (X : Scheme.{u}) : DerivedCategory (Modules A X) ⥤ Derived A X :=
   (reductionModel I X).functor
 
-/-- The universal reduction counit.
-Source: Stacks 06YY. -/
+/-- The universal reduction counit, retained rather than forgotten. -/
 def reductionCounit (X : Scheme.{u}) :
     DerivedCategory.Qh ⋙ reduction I X ⟶ reductionHomotopy I X :=
   (reductionModel I X).counit
 
-/-- Ordinary quotient augmentation, uniquely fixed by the tensor unit at every level.
-Source: Stacks 06YY. -/
+/-- Ordinary quotient augmentation, uniquely fixed by the tensor unit at every level. -/
 theorem ordinaryAugmentation_existsUnique (X : Scheme.{u}) :
     ∃! η : (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) ⟶ reductionModule I X,
       ∀ (M : Modules A X) (n : ℕ) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -1401,14 +1383,13 @@ theorem ordinaryAugmentation_existsUnique (X : Scheme.{u}) :
     ext U x
     exact (hη' M n.unop U x).trans (levelUnitMap_apply I X n.unop M U x).symm
 
-/-- The actual ordinary quotient augmentation.
-Source: Stacks 06YY. -/
+/-- The actual ordinary quotient augmentation. -/
 def ordinaryAugmentation (X : Scheme.{u}) :
     (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) ⟶ reductionModule I X :=
   (ordinaryAugmentation_existsUnique I X).exists.choose
 
 /-- The ordinary augmentation after homotopy localization, with the diagonal
-localization factor. Source: Stacks 06YY. -/
+localization factor. -/
 def augmentationHomotopy (X : Scheme.{u}) :
     DerivedCategory.Qh ⋙ delta A X ⟶ reductionHomotopy I X :=
   (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).mapDerivedCategoryFactorsh.hom ≫
@@ -1417,8 +1398,7 @@ def augmentationHomotopy (X : Scheme.{u}) :
 
 /-- The specified tensor-with-quotient map i_M, constructed by the determining
 universal property of derived reduction. Its factorization is the ordinary
-x maps to 1 tensor x formula after homotopy localization.
-Source: Stacks 06YY. -/
+x maps to 1 tensor x formula after homotopy localization. -/
 def augmentation (X : Scheme.{u}) : delta A X ⟶ reduction I X :=
   have : (reduction I X).IsLeftDerivedFunctor (reductionCounit I X)
       (HomotopyCategory.quasiIso (Modules A X) (.up ℤ)) := (reductionModel I X).universal
@@ -1496,8 +1476,7 @@ private theorem levelPull_step {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   rw [quotientStep_direct_comm]
 
 /-- Ordinary tensor/pullback comparison on the entire strict quotient tower.
-Its formula is imposed on all inverse-image generators.
-Source: Stacks 07A4, 03EL. -/
+Its formula is imposed on all inverse-image generators, not only constant sections. -/
 theorem ordinaryReductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! σ : reductionModule I Y ⋙ towerPullback A f ≅
         modulePullback A f ⋙ reductionModule I X,
@@ -1560,8 +1539,7 @@ theorem ordinaryReductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
           (reductionTensorSection Y (quotient I Y n.unop) M (op U) s x))
     exact (hτ M n.unop U s x).trans (levelPull_formula I f n.unop M U s x).symm
 
-/-- The normalized ordinary comparison, retaining its strict transition maps.
-Source: Stacks 07A4. -/
+/-- The normalized ordinary comparison, retaining its strict transition maps. -/
 def ordinaryReductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (ordinaryReductionPull_existsUnique I f).exists.choose
 
@@ -1574,8 +1552,7 @@ private theorem reductionCounit_isIso (X : Scheme.{u})
 section
 attribute [local irreducible] modulePullback reductionModule reduction reductionCounit
   reductionModel
-/-- Derived tensor/pullback comparison characterized on K-flat representatives.
-Source: Stacks 06YS, 07A4. -/
+/-- Derived tensor/pullback comparison characterized on K-flat representatives. -/
 theorem reductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! τ : reduction I Y ⋙ G A f ≅ pull A f ⋙ reduction I X,
       ∀ P : CochainComplex (Modules A Y) ℤ,
@@ -1593,15 +1570,13 @@ theorem reductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 end
 
-/-- The canonical whole-tower tensor/pullback comparison.
-Source: Stacks 07A4. -/
+/-- The canonical whole-tower tensor/pullback comparison. -/
 def reductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (reductionPull_existsUnique I f).exists.choose
 
 /-- The projection map h, defined by its counit-tensor adjunction mate. The comparison
 being transposed is the canonical tensor balancing map on the full quotient diagram.
-Its source includes the diagonal identification chi.
-Source: Stacks 0B56. -/
+Its source therefore includes precisely the diagonal identification chi. -/
 def projection {X Y : Scheme.{u}} (f : X ⟶ Y) :
     push A f ⋙ reduction I Y ⟶ reduction I X ⋙ R A f :=
   mateEquiv

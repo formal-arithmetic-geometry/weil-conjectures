@@ -101,7 +101,8 @@ private theorem directImageUnderlyingIso_apply
   have h₃ := forget_apply e.hom U x
   exact h₁.heq.trans (h₂.heq.trans h₃.heq)
 
-/-- Forgetting a system direct image has the same underlying sheaf as ordinary direct image. -/
+/-- Forgetting a system direct image has the same underlying sheaf as ordinary direct image.
+The identity comparison is checked on an arbitrary module, before specializing to coefficients. -/
 @[irreducible] private def pushEvaluationUnderlying
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f) (N : SpTowerShriek.S l E X) (n : ℕ) :

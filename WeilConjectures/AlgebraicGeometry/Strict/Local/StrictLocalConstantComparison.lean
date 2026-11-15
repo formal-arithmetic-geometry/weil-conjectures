@@ -36,7 +36,9 @@ import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 /-!
 # A germ-compatible constant model on a strict-local fibre
 
-Source: Stacks Project, Tag 0GJR.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GJR
 -/
 
 @[expose] public section
@@ -146,8 +148,7 @@ private theorem constantSection_pullback
   exact Adjunction.unit_leftAdjointUniq_hom_app ((adjY.comp adj).ofNatIsoRight e) adjZ N
 
 /-- A locally constant sheaf on a strict-local fibre is the constant sheaf on its
-original geometric stalk, with the canonical alpha map equal to constant sections.
-Source: Stacks Project, Tag 0GJR. -/
+original geometric stalk, with the canonical alpha map equal to constant sections. -/
 theorem exists_strictLocalConstantComparison
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']

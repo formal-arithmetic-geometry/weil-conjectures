@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Transport of maps between square-zero tensor kernels
 
-Source: Stacks Project, Tags 09MS, 01XC and 01F8.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 01XC, 01F8, 08KS
 -/
 
 @[expose] public section
@@ -26,7 +28,8 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
 /-- Identify the degree kernel with the pushforward of its coefficient module.
-Source: Stacks Project, Tags 09MS and 08KS. -/
+The ideal-kernel isomorphism is characterized by its inclusion equation. The unit is
+invertible by square-zero annihilation. All maps here are explicit composites. -/
 def tensorBoundaryKernelPushforwardIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ) :
@@ -40,8 +43,7 @@ def tensorBoundaryKernelPushforwardIso {X Z : Scheme.{u}} (j : Z ⟶ X)
       (j.ker.toModules ⊗ L.tensorPow (n * (e + 1)))) ≪≫
     (pushforward j).mapIso (boundaryCoefficientDegreeIso j L n e)
 
-/-- Transport an arbitrary coefficient morphism back to the degree kernels.
-Source: Stacks Project, Tags 09MS and 08KS. -/
+/-- Transport an arbitrary coefficient morphism back to the degree kernels. -/
 def tensorBoundaryKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)
@@ -111,9 +113,7 @@ private theorem comparison_inv_eq {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 attribute [local irreducible] boundaryCoefficientCohomologyIso
 
-/-- The canonical coefficient comparisons intertwine every transported kernel map.
-Source: Stacks Project, Tag 01XC (affine comparison), Tag 01F8 (functoriality), and Tag 09MS (ideal
-and tensor-degree identifications). -/
+/-- The canonical coefficient comparisons intertwine every transported kernel map. -/
 theorem tensorBoundaryKernelMap_naturality {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)

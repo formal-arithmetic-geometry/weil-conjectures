@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFiniteUn
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSectionGeometryExistence
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassUnitSuccessorCompatibility
 
-/-! # Compatible finite coordinates for the coefficient unit -/
+/-! # Compatible finite coordinates for the coefficient unit
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -80,9 +85,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Finite free-rank-one pullback maps commute with the actual quotient transitions.
-
-Source: Stacks 03D2, 03EL. -/
+/-- Finite free-rank-one pullback maps commute with the actual quotient transitions. -/
 theorem exists_unitLevelCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       (∀ (n : ℕ)

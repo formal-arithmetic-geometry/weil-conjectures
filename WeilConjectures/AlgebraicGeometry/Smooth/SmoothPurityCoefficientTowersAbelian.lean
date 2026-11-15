@@ -44,20 +44,27 @@ import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 /-!
 # The abelian category of smooth-purity coefficient towers
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 3.5.3.
-
-The input category is the recorded `spCoefficientTowers`, not a tower of modules
-with one fixed coefficient ring. The equivalence below only uncurries its product-site
-module presheaves into the already defined strict semilinear systems. Its four
-normalizations fix every section module, restriction, transition and morphism.
-The existing scalar models and their normalized associators specify the derived
-scalar extensions. All positive levels are represented: index n means level n+1.
+This file shows that the category `spCoefficientTowers` of smooth-purity coefficient towers is
+a Grothendieck abelian category with levelwise kernels, cokernels and filtered colimits.
 
 ## Main statements
 
 - `sp_coefficient_towers_abelian`: Grothendieck abelianness, levelwise kernels,
   cokernels and filtered colimits, exact derived evaluation, and natural reduction
   maps induced by the strict transitions, with identity and composition compatibility.
+
+## Implementation details
+
+The input category is `spCoefficientTowers`, not a tower of modules with one fixed
+coefficient ring. The equivalence below only uncurries its product-site module presheaves
+into the strict semilinear systems. Its four normalizations fix every section module,
+restriction, transition and morphism. The existing scalar models and their normalized
+associators specify the derived scalar extensions. Index n means level n+1.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DA, 03DB
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Definition 3.5.3
 -/
 
 @[expose] public noncomputable section
@@ -817,8 +824,7 @@ private def coefficientEquivalence : spCoefficientTowers l E T ≌
 
 end
 
-/-- The abelian axioms for the existing componentwise preadditive structure.
-Source: Stacks 03DA and 03DB. -/
+/-- The abelian axioms for the existing componentwise preadditive structure. -/
 theorem sp_coefficient_towers_abelian_axioms :
     IsNormalMonoCategory (spCoefficientTowers l E T) ∧
       IsNormalEpiCategory (spCoefficientTowers l E T) ∧
@@ -881,10 +887,9 @@ section
 attribute [local irreducible] DerivedCategory CategoryTheory.Functor.mapDerivedCategory
   SheafOfModules.systemRingHasDerived spCoefficientCommRings
 
-/-- The structure of the coefficient-tower category: its identification with strict
-semilinear systems, Grothendieck abelianness with levelwise limits and colimits, and the
-derived reduction maps along coefficient transitions with their unit and composition laws.
-Source: Bhatt--Scholze, Definition 3.5.3. -/
+/-- The three clauses of the coefficient-tower lemma, with the actual tower category
+and all identifications fixed on sections. The scalar and tensor fields are the
+existing canonical derived-change models, not arbitrary maps or isomorphisms. -/
 structure SpCoefficientTowersAbelian where
   /-- Uncurrying into the existing varying-coefficient strict systems. -/
   equivalence : spCoefficientTowers l E T ≌

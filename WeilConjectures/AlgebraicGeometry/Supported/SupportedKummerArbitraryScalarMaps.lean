@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /--
 For arbitrary commutative rings and a closed immersion, normalized coefficient maps exist on
-both small étale sites. Their components send a constant `r` to the constant `φ r`.
+both small étale sites.  Their components send a constant `r` to the constant `φ r`.
 The direct-image composite is the corresponding restriction-of-scalars map on the ambient site,
 with the same component formula.
 -/

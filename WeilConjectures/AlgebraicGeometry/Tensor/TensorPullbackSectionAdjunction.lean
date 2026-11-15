@@ -11,13 +11,15 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # The section-normalized tensor-pullback adjunction
 
-Source: Stacks Project, Sheaves, Tags 0095, 0096 and 0097.
-
 ## Main declarations
 
-* `tensorPullbackSection`: the section `1 ⊗ m`.
+* `tensorPullbackSection`: the actual section `1 ⊗ m`.
 * `existsUnique_tensorPullbackSectionAdjunction`: its uniquely normalized adjunction.
 * `tensorPullbackSectionComp` and `tensorPullbackSectionId`: the induced comparisons.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0095, 0096, 0097, 008X
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ open CategoryTheory Opposite TopologicalSpace
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The section `1 ⊗ m`, using inverse image and module sheafification.
-Source: Stacks, Tags 0095, 008X. -/
+/-- The actual section `1 ⊗ m`, using inverse image and module sheafification. -/
 noncomputable def tensorPullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : Y.Modules) (U : Y.Opens) (m : Γ(M, U)) :
     Γ((tensorPullback g).obj M, g ⁻¹ᵁ U) :=
@@ -44,8 +45,8 @@ noncomputable def tensorPullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
           (Opens.grothendieckTopology X)).unit.app
             ((SheafOfModules.toSheaf _).obj M)).hom.app (op U) m))
 
-/-- The tensor adjunction is uniquely fixed by its unit on sections.
-Source: Stacks, Tag 0096. -/
+/-- The tensor adjunction is uniquely fixed by its unit on sections, which sends `m` to the
+section `1 ⊗ m`. -/
 theorem existsUnique_tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ∃! adj : tensorPullback g ⊣ pushforward g,
       ∀ (M : Y.Modules) (U : Y.Opens) (m : Γ(M, U)),
@@ -65,14 +66,12 @@ theorem existsUnique_tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X �
   ext m
   exact (hother M V.unop m).trans (hnormalized M V.unop m).symm
 
-/-- A choice of the uniquely section-normalized tensor-pullback adjunction.
-Source: Stacks, Tag 0096. -/
+/-- The uniquely section-normalized tensor-pullback adjunction. -/
 noncomputable def tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) :
     tensorPullback g ⊣ pushforward g :=
   Classical.choose (existsUnique_tensorPullbackSectionAdjunction g)
 
-/-- Canonical composition of tensor pullbacks, induced by normalized adjunctions.
-Source: Stacks, Tag 0097. -/
+/-- Canonical composition of tensor pullbacks, induced by normalized adjunctions. -/
 noncomputable def tensorPullbackSectionComp {X Y Z : Scheme.{u}}
     (g : X ⟶ Y) (h : Y ⟶ Z) :
     tensorPullback (g ≫ h) ≅ tensorPullback h ⋙ tensorPullback g :=
@@ -80,8 +79,7 @@ noncomputable def tensorPullbackSectionComp {X Y Z : Scheme.{u}}
     (((tensorPullbackSectionAdjunction h).comp (tensorPullbackSectionAdjunction g)).ofNatIsoRight
       (pushforwardComp g h))
 
-/-- Canonical identity pullback, induced by the normalized adjunction.
-Source: Stacks, Tag 0097. -/
+/-- Canonical identity pullback, induced by the normalized adjunction. -/
 noncomputable def tensorPullbackSectionId (X : Scheme.{u}) :
     tensorPullback (𝟙 X) ≅ 𝟭 X.Modules :=
   ((tensorPullbackSectionAdjunction (𝟙 X)).ofNatIsoRight (pushforwardId X)).leftAdjointUniq

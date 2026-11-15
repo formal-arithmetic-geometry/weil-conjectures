@@ -56,11 +56,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHo
 /-!
 # Acyclic components of injective coefficient towers
 
-Source: Stacks Tags 03FD, 015E and 05TH.
-
 Index n denotes the positive level n+1. The tower direct image is the actual
 product-site module pushforward. Its scalar map is the existing constant-section
 map, so both coefficients and transitions are fixed, including for the identity map.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 015E, 05TH
 -/
 
 @[expose] public noncomputable section

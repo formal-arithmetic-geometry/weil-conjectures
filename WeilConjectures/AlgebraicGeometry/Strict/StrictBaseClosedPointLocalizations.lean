@@ -50,7 +50,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizatio
 
 /-! # Strict localizations above the closed point of a strict-local base change
 
-Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0GIP, 0GJS, 0GJU
 -/
 
 @[expose] public section
@@ -221,14 +223,9 @@ private theorem strict_pointed_hom_ext
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Strict-local base change preserves strict localizations above its closed point.
-Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU.
-
-`hcart` allows any presentation of the specified fibre product. The canonical
-closed-point lift is `Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))`.
-The functorial maps `b`, `d`, `q` are specified by their structural equations and their
-compatibility with the canonical geometric-point lifts.
-Here `b` is the map from the strict localization of the new base to that of the old
-base, `d` is the strict-local map induced by `f`, and `q` is induced by `p`. -/
+Here `b`, `d` and `q` are the canonical maps of strict localizations induced by the
+base change, by `f` and by `p`, characterized by their structural and pointed equations;
+the conclusion identifies the strict localizations of the two bases and the fibres. -/
 theorem strictBaseClosedPointLocalizations
     {X S X' : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

@@ -13,10 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleProperProjectio
 /-!
 # Compact-support projection from strict étale transports
 
-Source: Zheng, Construction 5.15 and Lemma 5.22.
+This is the geometric mate assembly after exact coefficient transports have been
+constructed.  It leaves coefficient transport construction to a separate node.
 
-This is the geometric mate assembly, given exact coefficient transports; the coefficient
-transports themselves are constructed separately.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Lemma 5.22
 -/
 
 @[expose] public noncomputable section

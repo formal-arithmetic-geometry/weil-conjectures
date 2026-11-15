@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerFiniteReduction
 
 /-! # Canonical reconstruction adjunction for completed ell-power towers
 
-Source: Bhatt--Scholze, Lemma 3.5.7.
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public section

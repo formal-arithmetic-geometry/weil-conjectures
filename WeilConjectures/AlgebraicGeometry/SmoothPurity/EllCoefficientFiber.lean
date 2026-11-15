@@ -49,11 +49,13 @@ import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
 
 /-! # Regular completed coefficients and quotient Koszul fibers
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Section 3.5.
-
 All natural-number level indices denote the positive exponent index+1. The site
 and field universes are independent. The completed ring and all finite constant
 rings are the existing coefficient-tower objects.
+
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Section 3.5
 -/
 
 @[expose] public noncomputable section

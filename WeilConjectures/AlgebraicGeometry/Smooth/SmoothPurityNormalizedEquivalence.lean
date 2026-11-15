@@ -60,8 +60,6 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionCo
 /-!
 # Normalized coefficient towers and derived-complete integral complexes
 
-Source: Bhatt--Scholze, Lemma 3.5.7.
-
 ## Main definitions and statements
 
 - `spCompletedReduction`: the existing reduction transported to completed coefficients.
@@ -69,6 +67,10 @@ Source: Bhatt--Scholze, Lemma 3.5.7.
 - `spCompletedTotalProjection`: the resolution-normalized limit projections.
 - `SpNormalizedEquivalence`: the adjunction, its isomorphisms, and constructible restriction.
 - `sp_normalized_equivalence`: existence of this normalized equivalence data.
+
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section

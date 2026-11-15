@@ -55,7 +55,12 @@ import all WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
 import all WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
-/-! # StrictIntegralCompletionPresentation -/
+/-! # StrictIntegralCompletionPresentation
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 014E, 08TC
+-/
 
 @[expose] public section
 
@@ -144,9 +149,7 @@ private theorem coordinates_cast_congr {A : Type*} [Category A] [Abelian A]
 
 -- Unpacking the normalized cone and Roos comparison involves many dependent fields.
 /-- The canonical integral completion has a Presentation with all strict coordinates
-and derived units fixed by the completion-triangle comparison.
-
-Source: Stacks Tags 014E and 08TC. -/
+and derived units fixed by the completion-triangle comparison. -/
 theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
     ∃ S : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X),
       IsIntegral l E X S := by

@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFinite
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarChernArrow
 
-/-! # Evaluation of the scalar first Chern construction -/
+/-! # Evaluation of the scalar first Chern construction
+
+## Implementation details
+
+The endpoints and comparison maps agree definitionally; the statement is phrased with `HEq`
+so that the type transports are not expanded downstream.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,7 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Evaluating and forgetting the scalar arrow recovers evaluatedChern. -/
+/-- Evaluating and forgetting the scalar arrow recovers `evaluatedChern`. -/
 theorem forgetEvaluatedArrow_firstChernR (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) (n : ℕ) :

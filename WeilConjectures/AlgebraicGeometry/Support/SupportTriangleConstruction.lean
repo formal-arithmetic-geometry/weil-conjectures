@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- The supported kernel functor is additive. -/
+/-- The supported-sections functor `finiteSupportedSections Λ j` is additive. -/
 theorem supportKernelAdditive {X U : Scheme.{u}} (j : U ⟶ X) :
     (finiteSupportedSections Λ j).Additive := by
   constructor

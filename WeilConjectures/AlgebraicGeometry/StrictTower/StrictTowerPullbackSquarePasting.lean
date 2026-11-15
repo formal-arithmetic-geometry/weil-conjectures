@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 /-!
 # Pasting of the normalized strict-tower inverse-image square
 
-Source: Stacks, Tag 07A7.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A7
 -/
 
 @[expose] public section
@@ -42,8 +44,7 @@ private theorem squareG_eq {V W S T : Scheme.{u}}
   exact normalizeIsoSquare (gComp B r i) (gComp B k p) (congrArg (G B) w.symm)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The inverse-image comparisons of successive commutative squares paste.
-Source: Stacks, Tag 07A7. -/
+/-- The inverse-image comparisons of successive commutative squares paste. -/
 theorem squareG_pasting_inv {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
     (j : U ⟶ X) (j₁ : U₁ ⟶ X₁) (j₂ : U₂ ⟶ X₂)
     (g : X₁ ⟶ X) (h : X₂ ⟶ X₁) (a : U₁ ⟶ U) (b : U₂ ⟶ U₁)

@@ -7,6 +7,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitPresentation
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import WeilConjectures.Algebra.Homology.BaseDerivedExtensionResolution
+
+/-!
+# Derived scalar-extension pairs for the flat counit localization
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -15,8 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 /-- Existence of the universal derived scalar-extension pair for a bounded-above
-termwise-flat stalk complex under the affine presentation hypothesis.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
+termwise-flat stalk complex under the affine presentation hypothesis. -/
 theorem standardSingleFlatCounit_localization_pair
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

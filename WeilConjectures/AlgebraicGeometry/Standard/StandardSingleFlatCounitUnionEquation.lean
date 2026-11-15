@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 /-! # The counit factorization at a supplied union complex
 
-Source: Stacks Project, Tag 0DJ9, relative Mayer--Vietoris induction.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0DJ9
 -/
 
 @[expose] public section
@@ -48,8 +50,9 @@ private theorem unionEquation_factor
 set_option linter.unusedVariables false in
 -- Preserve the original names of the nondependent forall proof binders.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and
-counit data for a bounded flat union complex (Stacks, Tag 0DJ9). -/
+/-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and counit data:
+for any bounded-above flat complex `K` with an identification `e` of the derived direct image
+of `N` from `U ⊔ V`, the standard base change map factors through the counit at `K`. -/
 theorem standardSingleFlatCounitUnionEquation
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

@@ -19,7 +19,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 
-/-! # Principal quotient tensor models for strict section cones -/
+/-! # Principal quotient tensor models for strict section cones
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 06YS, 06YT, 08TC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -177,9 +182,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The scalar-cone presentation computes the actual principal quotient tensors,
-with their normalized tensor models and augmented Roos completion.
-
-Source: Stacks Tags 03EK, 06YS, 06YT and 08TC. -/
+with their normalized tensor models and augmented Roos completion. -/
 theorem strictSectionPrincipalQuotientModels (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1}
       (Modules (DerivedNakayama.integerRing l E) X))

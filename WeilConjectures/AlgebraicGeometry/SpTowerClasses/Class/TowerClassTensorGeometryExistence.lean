@@ -11,7 +11,14 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassTensorLe
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerOrdinaryUnitEvaluation
 
-/-! # Normalized unit and ordinary tensor coordinates for geometric tower pullback -/
+/-! # Normalized unit and ordinary tensor coordinates for geometric tower pullback
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03EL, 07A4
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,10 +64,7 @@ private theorem systemHom_ext {T : Scheme.{u}}
   ext V x
   exact congrArg (fun k ↦ k.val.app (op V.unop.2) x) (h V.unop.1)
 
-/-- The geometric tower operations can be chosen with their ordinary unit and tensor maps.
-
-Source: Zheng Construction 4.1, Lemma 4.10; Stacks 03D2, 03EL and 07A4.
--/
+/-- The geometric tower operations can be chosen with their ordinary unit and tensor maps. -/
 theorem exists_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       Nonempty (CoefficientPullback l E b f g) ∧ Nonempty (TensorPullback l E f g) := by

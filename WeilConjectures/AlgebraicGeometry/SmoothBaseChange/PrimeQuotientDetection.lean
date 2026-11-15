@@ -15,8 +15,17 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Detecting a prime cyclic coefficient inside a nonzero ring quotient
 
-Source: Stacks Project, Tag 03FD, with the vector-space retract argument needed in the
-arbitrary-ring reading of the coefficient step in Tag 0F08.
+For a prime `r` that is not a unit in `Λ`, vanishing of the higher direct image of the
+constant sheaf `Λ / rΛ` implies vanishing for the constant sheaf `ZMod r`.
+
+## Implementation details
+
+The comparison takes place in abelian sheaves: `ZMod r` is an additive retract of the
+`ZMod r`-vector space `Λ / rΛ`, and no `Λ`-linear decomposition is asserted.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 0F08
 -/
 
 @[expose] public section
@@ -77,11 +86,8 @@ private theorem preservesSheafification_forget_modules
     Functor.isLeftAdjoint_of_iso e
   infer_instance
 
-/-- Vanishing for Lambda/rLambda implies vanishing for the prime cyclic coefficient
-whenever r is prime and is not a unit in Lambda.
-
-Source: Stacks Project, Tag 03FD, module/abelian cohomology comparison; Tag 0F08, proof's
-coefficient reduction. -/
+/-- If `r` is a prime that is not a unit in `Λ` and the higher direct image of the constant
+sheaf `Λ / rΛ` vanishes in degree `q`, then so does that of the constant sheaf `ZMod r`. -/
 theorem isZero_prime_cyclic_higherDirectImage_of_quotient
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) (r : ℕ) (hr : r.Prime) (hunit : ¬ IsUnit (r : Λ))

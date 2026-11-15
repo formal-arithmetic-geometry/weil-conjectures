@@ -66,7 +66,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedRealizationTensor
 
 /-! # Realization of negative exterior factors as negative two-term factors
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW; algebraization.tex, Tag 0A0E.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -305,11 +307,7 @@ private theorem negativeTensorInduction
       rfl
 
 /-- Scalar realization of the ordered algebraic negative factors is the ordered
-tensor of the explicit negative two-term factors on the completed site.
-This assertion has no internal Hom or positive Koszul complex.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW; algebraization.tex, Tag 0A0E,
-finite free terms. -/
+tensor of the explicit negative two-term factors on the completed site. -/
 theorem negativeKoszulTensorRealization
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

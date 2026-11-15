@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 
 /-! # Ordinary strict-local direct-image comparison
 
-Source: Stacks Project, Tag 03Q9, degree zero.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 @[expose] public section
@@ -127,7 +129,7 @@ private theorem ordinaryExchangeArrowIso
     hδ K
   let e₂ := @Arrow.isoOfFac _ _ _ _ H _ _ _ _ _
     (δ.app (DerivedCategory.Plus.Qh.obj K)) m a b c hfac ha' hb' hc'
-  -- in degree `0`, the map of complexes is the underived base-change map
+  -- step 3: in degree `0`, the map of complexes is the underived base-change map
   have e3eq : (DerivedCategory.Plus.homologyFunctor _ 0).map (DerivedCategory.Plus.Qh.map
       ((NatTrans.mapHomotopyCategoryPlus τ).app K)) =
       (DerivedCategory.homologyFunctor _ 0).map (DerivedCategory.Qh.map
@@ -155,8 +157,7 @@ private theorem ordinaryExchangeArrowIso
         (DerivedCategory.quotientCompQhIso _).symm.app _)).symm
   exact ⟨Arrow.isoMapApp δ (DerivedCategory.Plus.homologyFunctor _ 0) ε.symm ≪≫ e₂ ≪≫ e₃⟩
 
-/-- The canonical ordinary exchange comparison on strict-local sections is invertible.
-Source: Stacks Project, Tag 03Q9, degree zero. -/
+/-- The canonical ordinary exchange comparison on strict-local sections is invertible. -/
 theorem isIso_strictLocalOrdinaryDirectImageComparison
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

@@ -18,10 +18,12 @@ public import WeilConjectures.CategoryTheory.SixFunctors.LocalizingClosure
 
 /-! # The canonical localizing pullback preservation proposition
 
-The canonical shift-commutation of the derived inverse image, constructed from the
-exact-derived comparison, and the proposition stating the ambient and restricted
-preservation properties used by
-`WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback`.
+These two declarations are moved from
+`WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback` with their
+names, signatures, and bodies unchanged. The canonical shift is constructed from the
+existing exact-derived comparison; the proposition records the ambient and restricted
+preservation clauses without asserting them. The localizing hull and constant-model
+constructibility are the existing imported definitions.
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +39,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical shift-commutation of the total derived inverse image `Lg^*`: the one of the
 termwise functor `D(g^*)` (Mathlib's `Functor.mapDerivedCategory`), transported along the
-canonical isomorphism `CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`. -/
+canonical isomorphism `CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`. Exactness of
+`Lg^*` is asserted for this shift structure, not for an arbitrary one. -/
 @[instance_reducible]
 def unboundedLocalizingPullbackCommShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

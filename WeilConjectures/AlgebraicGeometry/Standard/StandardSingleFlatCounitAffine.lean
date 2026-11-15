@@ -26,7 +26,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Affine case of flat counit presentations
 
-Source: Stacks Project, Tags 0A1D and 0DJ9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A1D, 0DJ9, 08HY
 -/
 
 @[expose] public section
@@ -131,9 +133,7 @@ private theorem affine_single_unit_iso
     (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r)) _
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- The single complex of the affine direct image realizes the pinned comparison.
-Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY, base-change mate; Tag 0DJ9,
-initial affine case. -/
+/-- The single complex of the actual affine direct image realizes the pinned comparison. -/
 private theorem affine_single_counit_comparison
     {X B A : Scheme.{u}} [IsAffine X] [IsAffine B] [IsAffine A]
     (f : X ⟶ B) (g : A ⟶ B)
@@ -276,8 +276,7 @@ private theorem affine_single_counit_comparison
         erw [reassoc_of% hn]
   exact ((derivedPullback.{u, u + 1} g).mapIso e.symm).eq_inv_comp.mpr heq
 
-/-- Affine source charts have bounded flat presentations over affine bases.
-Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 0DJ9, initial affine case. -/
+/-- Affine source charts have bounded flat presentations over affine bases. -/
 theorem standardSingleFlatCounitOnOpen_affine
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [IsAffine B] [IsAffine A]
     (g : A ⟶ B) (U : Y.Opens) (hU : IsAffineOpen U) :

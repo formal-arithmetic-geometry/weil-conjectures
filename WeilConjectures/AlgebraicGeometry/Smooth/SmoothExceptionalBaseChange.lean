@@ -16,6 +16,12 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothDualityBaseChangeCo
 The exceptional comparison is the transpose of the inverse compact-support exchange
 followed by the pulled-back counit. The coefficient-unit and tensor comparisons below
 are the canonical ones; no orientation or arbitrary comparison is chosen.
+
+## Implementation details
+
+All functors act on ordinary unbounded derived categories. The left derived inverse image is
+canonically identified with the exact degreewise inverse image by
+`leftDerivedUpperStarIsoMapDerivedCategory`.
 -/
 
 @[expose] public section
@@ -32,10 +38,8 @@ attribute [local instance] Scheme.Etale.essentiallySmall
 
 attribute [local instance high] CategoryTheory.SymmetricCategory.toBraidedCategory
 
-/-- The canonical exceptional base-change morphism, obtained by transposing the pulled-back
-counit through the inverse compact-support exchange. All functors act on ordinary
-unbounded categories. The occurrence of the left derived inverse image is canonically identified
-with the exact degreewise inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`. -/
+/-- The canonical exceptional base-change morphism `g'^* f^! K ⟶ f'^! g^* K`, obtained by
+transposing the pulled-back counit through the inverse compact-support exchange. -/
 noncomputable def smoothExceptionalBaseChangeMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]
@@ -283,9 +287,10 @@ private lemma dualizing_tensor_base_change
       ((projectionMap (ModuleCat.{u + 1} A) (pullback.snd f g)).naturality φ) N))
     (leftDerivedUpperStarTensorComparison_leftUnitor_hom (ModuleCat.{u + 1} A) g) K
 
-/-- Arbitrary base change for smooth ambient duality on ordinary unbounded etale
-module derived categories, including the dualizing-complex and tensor compatibilities.
--/
+/-- Arbitrary base change for smooth ambient duality: for `f` separated and smooth of relative
+dimension `d` between Noetherian schemes, with `N = 0` in `A` and `N` invertible on `S`, the
+exceptional base-change map is an isomorphism, so is the base-change map of dualizing complexes,
+and the smooth tensor-duality maps are compatible with base change along `g`. -/
 theorem smooth_exceptional_base_change
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

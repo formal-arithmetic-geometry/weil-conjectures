@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.Module.ModuleCohomologyExtHMap
 
 /-! The module-to-abelian comparison for structure modules.
 
-Source: Stacks Project, Tags 03FD and 01F7. -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 01F7, 01FB
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,8 +36,7 @@ noncomputable def structureModuleAbelianEquiv
 
 -- Transporting the fixed resolution comparison through the module aliases is expensive.
 /-- The fixed resolution comparison `structureModuleAbelianEquiv` respects every structure
-h-map.
-Source: Stacks Project, Tags 03FD (comparison) and 01FB (coefficient factorization). -/
+h-map. -/
 theorem structure_module_abelian_comparison
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

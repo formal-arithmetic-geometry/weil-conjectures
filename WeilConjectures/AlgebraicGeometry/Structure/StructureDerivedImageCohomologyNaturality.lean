@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.Structure.StructureDerivedImageC
 
 /-! # Naturality of affine-base sections of a structure-module direct image
 
-Source: Stacks Project, Tags 01XK, 01FB and 03FD.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01XK, 01FB, 03FD
 -/
 
 @[expose] public section
@@ -57,8 +59,7 @@ noncomputable def structureDerivedImageCohomologyTargetEquiv
 -- Composing the module and abelian comparisons requires large category transports.
 /-- The affine-base Leray comparisons `structureDerivedImageCohomologyEquiv q` and
 `structureDerivedImageCohomologyTargetEquiv q j hj` for structure modules respect a map
-`j` of total spaces.
-Source: Stacks Project, Tag 01XK; Tag 01FB; Tag 03FD. -/
+`j` of total spaces. -/
 theorem structure_derived_image_cohomology_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

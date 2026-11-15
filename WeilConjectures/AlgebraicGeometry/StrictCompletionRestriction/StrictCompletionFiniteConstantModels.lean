@@ -106,7 +106,12 @@ import all WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
 import all WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-/-! # StrictCompletionFiniteConstantModels -/
+/-! # StrictCompletionFiniteConstantModels
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D7, 03EK
+-/
 
 @[expose] public section
 
@@ -296,8 +301,7 @@ private theorem pointMatrixModels (X : Scheme.{u})
     exact (h j k U x).trans (pointScalarValue l E X (a j k) U x).symm
 
 /-- The section-action equivalence identifies finite constant local models with the
-specified finite scalar-matrix cokernel models on the actual pro-etale cover.
-Source: Stacks Tags 03D7 and 03EK. -/
+specified finite scalar-matrix cokernel models on the actual pro-etale cover. -/
 theorem strictCompletionFiniteConstantModels (X : Scheme.{u}) (M : AdicCompletion.Modules l E X) :
     HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X M ↔
       HasSectionFiniteConstantLocalModel l E X

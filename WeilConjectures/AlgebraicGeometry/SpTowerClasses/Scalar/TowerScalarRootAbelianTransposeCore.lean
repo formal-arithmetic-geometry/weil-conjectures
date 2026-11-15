@@ -14,7 +14,12 @@ import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineTransi
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLinePullbackLowerTensor
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionSectionNaturality
 
-/-! # Core finite-level root normalization comparison -/
+/-! # Core finite-level root normalization comparison
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -201,9 +206,7 @@ private theorem rightSection
 
 /--
 The finite root normalization comparison after expanding both scalar adjunction
-transposes to their units. This is the χ-free core of the component calculation.
-
-Source: Stacks 03EL.
+transposes to their units.  This is the χ-free core of the component calculation.
 -/
 theorem scalarRoot_abelianTranspose_core
     {X Y : Scheme.{u}} (f : X ⟶ Y)

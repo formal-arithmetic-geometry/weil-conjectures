@@ -21,6 +21,10 @@ The existing SpTowerShriek interfaces name the strict quotient tower, its
 identity-section presentation, and the actual counit/open-mate words. No
 invertibility of a proper projection or exchange is included here. Level n in
 this module means the positive exponent n+1.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 05TI, 070J
 -/
 
 @[expose] public noncomputable section
@@ -254,8 +258,7 @@ def StrictSystemComparisons (b : Base l E) (o : Operations l E b) : Prop :=
         (((o.geometry f).generic.levelPush r).rightDerivedFunctor.obj Q) ≫
       (comparisonCoefficientMate l E b o f (h.trans k)).app Q)
 
-/-- Compatibility with bounded-below injective-resolution derivation.
-Source: Stacks 05TI, 070J. -/
+/-- Compatibility with bounded-below injective-resolution derivation. -/
 def StrictPlusComparisons (b : Base l E) (o : Operations l E b)
     [enoughInjectives : ∀ T : Scheme.{u}, EnoughInjectives (S l E T)] : Prop :=
   ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -386,7 +389,8 @@ def comparisonFiniteF (b : Base l E) (a : StrictFiniteCoordinates l E b)
     Functor.isoWhiskerRight (comparisonFiniteOpen l E b c.i n) _
 
 /-- The finite exchange is the recorded ambient exchange, and on every specified
-etale witness it is the transported etale exchange. -/
+etale witness it is the transported etale exchange. Coordinates in this square
+are fixed by ordinary sections and adjunction units, not chosen for this arrow. -/
 def StrictFiniteExchangeComparisons (b : Base l E) (o : Operations l E b)
     (levels : ComparisonLevels l E b o) (a : StrictFiniteCoordinates l E b) : Prop :=
   (∀ {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}

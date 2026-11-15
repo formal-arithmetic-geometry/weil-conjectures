@@ -27,8 +27,9 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
   cartierProKummerUnit cartierProRootMap diagonalFiniteToPadic diagonalForget
   diagonalScalarExtension diagonalScalarAdjunction
 
-/-- Normalized target data, with its coefficient classes kept as parameters: the existential
-roots comparison and its unit equation. -/
+/-- Normalized target data, with its coefficient classes kept as parameters.
+This is the existential roots comparison and its unit equation, packaged to avoid
+unfolding coefficient constructions while checking a concrete specialization. -/
 @[irreducible] def KummerUnitNormalizedTarget
     {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [Category B] [abB : Abelian B]
@@ -62,8 +63,8 @@ roots comparison and its unit equation. -/
           (shiftFunctorAdd (DerivedCategory A) (1 : ℤ) 1).inv.app
             ((DerivedCategory.singleFunctor A 0).obj ((V n).obj (P n))))
 
-/-- If the shifted Kummer complex is concentrated in degree `-2`, then pure kernel
-normalization gives the normalized Kummer target. -/
+/-- The t-structure constructs the strict comparison from vanishing; kernel
+normalization then supplies its roots and finite-level identifications. -/
 private theorem kummer_target_of_concentration
     {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [Category B] [abB : Abelian B]

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedBoundaryPr
 
 /-! # Homogeneous realization of tensor boundaries
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum over degrees; Tag 0B8S,
-the quotient action on the square-zero kernel.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -52,11 +53,9 @@ private theorem graded_section_projection {X Z : Scheme.{u}} {j : Z ⟶ X}
 end GradedProjectionHelpers
 
 /-- Realize the three homogeneous boundary/action terms in a single square-zero algebra
-extension, for every compatible resolution presentation and every action satisfying the
-displayed local formulas.
-
-Source: Stacks Project, Tag 09MS, the graded direct-sum sequence; Tag 0B8S, the quotient action
-on the kernel. -/
+extension. This is a comparison theorem: it asserts no derivation identity, either for
+that algebra extension or for tensor boundaries. The comparison holds for every compatible
+resolution presentation and every action satisfying the displayed local formulas. -/
 theorem tensorBoundary_graded_realization
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

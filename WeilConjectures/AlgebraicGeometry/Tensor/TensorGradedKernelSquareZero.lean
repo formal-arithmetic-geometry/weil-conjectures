@@ -12,7 +12,9 @@ import Mathlib.Topology.Sheaves.CommRingCat
 
 /-! # Square-zero kernel of the graded tensor quotient
 
-Source: Stacks Project, Tag 09MS, the square-zero direct-sum ideal sequence.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -27,8 +29,8 @@ noncomputable section
 attribute [local irreducible] tensorGradedAlgebraMap tensorGradedUnit
   commAlgebraSheafModule tensorPullback
 
-/-- The homogeneous quotient has square-zero kernel when the immersion does.
-Source: Stacks Project, Tag 09MS, the square-zero direct-sum ideal sequence. -/
+/-- If the ideal of the closed immersion `j` squares to zero, then any two sections of the
+graded algebra `A.B` killed by the quotient map `A.p` have zero product. -/
 theorem tensorGradedKernel_squareZero {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]
     (A : TensorGradedAlgebraData j L) (hI : j.ker ^ 2 = ⊥) :

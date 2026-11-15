@@ -11,7 +11,9 @@ import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 
 /-! # Sectionwise comparison before sheafification
 
-Source: Stacks Project, Constructions, Lemma 01LN; Schemes, Lemma 01I8; Algebra, Lemma 0C6F.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01LN
 -/
 
 @[expose] public section
@@ -43,8 +45,7 @@ theorem symmetricCongr_ι {R M N : Type u}
     symmetricCongr e (SymmetricAlgebra.ι R M m) = SymmetricAlgebra.ι R N (e m) := by
   exact SymmetricAlgebra.lift_ι_apply _ _
 
-/-- Affine restriction of the sectionwise symmetric algebra is extension of scalars.
-Source: Stacks Project, Constructions, Lemma 01LN; Algebra, Lemma 0C6F. -/
+/-- Affine restriction of the sectionwise symmetric algebra is extension of scalars. -/
 theorem exists_sectionTensorEquiv {X : Scheme.{u}}
     (F : X.Modules) [F.IsQuasicoherent] {U W : X.Opens}
     (hU : IsAffineOpen U) (hW : IsAffineOpen W) (hUW : U ≤ W) :
@@ -205,8 +206,7 @@ private theorem restriction_comp {X : Scheme.{u}} (F : X.Modules)
   exact (CategoryTheory.congr_fun ((presheaf F).map_comp i j) a).symm
 
 /-- The restricted sectionwise symmetric algebra maps to the tilde of its affine sections,
-on the affine basis, bijectively on each affine open, with composite the unit.
-Source: Stacks Project, Constructions, Lemma 01LN; Algebra, Lemma 0C6F; Schemes, Lemma 01I8. -/
+on the affine basis, bijectively on each affine open, with composite the unit. -/
 theorem exists_affineSectionComparison {X : Scheme.{u}}
     (F : X.Modules) [F.IsQuasicoherent] {W : X.Opens} (hW : IsAffineOpen W) :
     let B : (Spec Γ(X, W)).affineOpens → (Spec Γ(X, W)).Opens := Subtype.val

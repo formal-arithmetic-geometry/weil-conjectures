@@ -79,7 +79,8 @@ private theorem transport_unit_evaluation (b : Base l E)
   exact h
 
 /-- Evaluation carries the normalized ordinary system unit to the constant-ring
-unit, after the specified push and pull comparisons. -/
+unit, after the specified push and pull comparisons: the evaluated system unit, followed
+by the push comparison and the pushforward of the pull comparison, is the finite unit. -/
 theorem geometry_unit_evaluation (b : Base l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) (n : ℕ) (M : S l E Y) :
     (ev l E Y n).map (g.ordinaryAdjunction.unit.app M) ≫

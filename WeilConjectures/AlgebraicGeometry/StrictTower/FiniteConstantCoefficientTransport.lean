@@ -25,10 +25,13 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenComparisonUnitNormalization
 /-!
 # Normalized finite coefficient and etale-origin transport
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
-
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7, 09AE, 00W1,
+  03DA, 099R, 0D6E, 03EK, 09AF, 05RU, 0B65
 -/
 
 @[expose] public section
@@ -45,16 +48,14 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- Forgetting commutativity commutes with sheafification at the original site universes.
-Source: Stacks, Tags 00W1 and 03DA. -/
+/-- Forgetting commutativity commutes with sheafification at the original site universes. -/
 @[instance]
 theorem constantRingForget_preservesSheafification (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).PreservesSheafification
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
   exact GrothendieckTopology.instPreservesSheafification _ _
 
-/-- The canonical coefficient map sends a scalar to its constant function after φ.
-Source: Stacks, Tags 03DA and 099R. -/
+/-- The canonical coefficient map sends a scalar to its constant function after φ. -/
 noncomputable def finiteScalarMap (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (sheafCompose (Scheme.ProEt.topology X)
@@ -66,15 +67,13 @@ noncomputable def finiteScalarMap (X : Scheme.{u}) (Λ : Type (u + 1))
   ((sheafificationAdjunction (Scheme.ProEt.topology X) RingCat.{u + 1}).homEquiv
     _ _).symm (finiteCoefficientScalarMap X Λ)
 
-/-- Actual restriction of module scalars along the specified constant-section map.
-Source: Stacks, Tag 03DA. -/
+/-- Actual restriction of module scalars along the specified constant-section map. -/
 noncomputable def finiteRestriction (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     FiniteCoefficientModules X Λ ⥤ Modules B X :=
   SheafOfModules.restrictScalars (finiteScalarMap B X Λ φ)
 
-/-- Restriction of scalars is exact; no flatness of φ is required.
-Source: Stacks, Tag 03DA. -/
+/-- Restriction of scalars is exact; no flatness of φ is required. -/
 theorem finiteRestriction_exact (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (finiteRestriction B X Λ φ).Additive ∧
@@ -98,23 +97,24 @@ theorem finiteRestriction_exact (X : Scheme.{u}) (Λ : Type (u + 1))
   exact ⟨inferInstanceAs (SheafOfModules.restrictScalars (finiteScalarMap B X Λ φ)).Additive,
     inferInstance, inferInstance⟩
 
-/-- Additivity of scalar restriction. Source: Stacks, Tag 03DA. -/
+/-- Additivity of scalar restriction. -/
 noncomputable instance finiteRestriction_additive (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (finiteRestriction B X Λ φ).Additive := (finiteRestriction_exact B X Λ φ).1
 
-/-- Left exactness of scalar restriction. Source: Stacks, Tag 03DA. -/
+/-- Left exactness of scalar restriction. -/
 noncomputable instance finiteRestriction_finiteLimits (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     PreservesFiniteLimits (finiteRestriction B X Λ φ) := (finiteRestriction_exact B X Λ φ).2.1
 
-/-- Right exactness of scalar restriction. Source: Stacks, Tag 03DA. -/
+/-- Right exactness of scalar restriction. -/
 noncomputable instance finiteRestriction_finiteColimits (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     PreservesFiniteColimits (finiteRestriction B X Λ φ) := (finiteRestriction_exact B X Λ φ).2.2
 
-/-- A scalar etale origin of `K`: a finite coefficient ring `Λ` over `B` and a complex with an
-etale origin over `Λ` whose restriction of scalars is identified with `K`. -/
+/-- A level may have its own finite coefficient ring and its own lower bound. The
+etale witness is exactly the recorded dependency's witness, followed by actual
+restriction of scalars. -/
 structure ScalarEtaleOrigin (X : Scheme.{u}) (K : DerivedCategory (Modules B X)) where
   Λ : Type (u + 1)
   [ring : CommRing Λ]
@@ -129,15 +129,13 @@ structure ScalarEtaleOrigin (X : Scheme.{u}) (K : DerivedCategory (Modules B X))
 attribute [instance] ScalarEtaleOrigin.ring ScalarEtaleOrigin.finite
   ScalarEtaleOrigin.topology ScalarEtaleOrigin.discrete
 
-/-- Realize finite fixed-ring sheaves, then restrict the specified scalar action.
-Source: Stacks, Tags 03DA and 099R. -/
+/-- Realize finite fixed-ring sheaves, then restrict the specified scalar action. -/
 noncomputable def C (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤ Modules B X :=
   finiteCoefficientRealization X Λ ⋙ finiteRestriction B X Λ φ
 
-/-- The realization comparison is uniquely normalized on the sheafification unit.
-Source: Stacks, Tag 03DA. -/
+/-- The realization comparison is uniquely normalized on the sheafification unit. -/
 theorem cUnderlying_existsUnique (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     ∃! e : C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅
@@ -170,8 +168,7 @@ theorem cUnderlying_existsUnique (X : Scheme.{u}) (Λ : Type (u + 1))
     ext U m
     exact (he' F U m).trans (ConcreteCategory.congr_hom (congr_app (he F) U) m).symm
 
-/-- The specified underlying-sheaf identification, fixed on all unit sections.
-Source: Stacks, Tag 03DA. -/
+/-- The specified underlying-sheaf identification, fixed on all unit sections. -/
 noncomputable def cUnderlying (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅
@@ -297,8 +294,7 @@ private theorem moduleDirectImage_scalarUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [hρ]
   exact congrArg (fun r ↦ r • m) hu
 
-/-- Direct image commutes with this scalar realization by identity on sections.
-Source: Stacks, Tag 0D6E. -/
+/-- Direct image commutes with this scalar realization by identity on sections. -/
 theorem cDirect_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     ∃! e : ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f ⋙ C B Y Λ φ ≅
@@ -375,23 +371,20 @@ theorem cDirect_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1)
             ((Scheme.proEtaleBaseChange f).op.obj U))
       exact (h _).symm)
 
-/-- The canonical sectionwise scalar/direct-image comparison.
-Source: Stacks, Tag 0D6E. -/
+/-- The canonical sectionwise scalar/direct-image comparison. -/
 noncomputable def cDirect {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f ⋙ C B Y Λ φ ≅
       C B X Λ φ ⋙ moduleDirectImage B f :=
   Classical.choose (cDirect_existsUnique B f Λ φ)
 
-/-- The actual etale-to-pro-etale comparison followed by scalar realization.
-Source: Stacks, Tag 099R. -/
+/-- The actual etale-to-pro-etale comparison followed by scalar realization. -/
 noncomputable def H (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ Modules B X :=
   comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⋙ C B X Λ φ
 
-/-- The canonical inverse-image-square mate, followed by identity on scalar sections.
-Source: Stacks, Tags 099R, 0D6E and 07A7. -/
+/-- The canonical inverse-image-square mate, followed by identity on scalar sections. -/
 noncomputable def hDirect {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     Etale.lowerStar (ModuleCat.{u + 1} Λ) f ⋙ H B Y Λ φ ⟶
@@ -405,8 +398,7 @@ noncomputable def hDirect {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
   Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
     (cDirect B f Λ φ).hom ≫ (Functor.associator _ _ _).inv
 
-/-- The inverse-image comparison is precisely the inverse mate of hDirect.
-Source: Stacks, Tags 03EK and 07A7. -/
+/-- The inverse-image comparison is precisely the inverse mate of hDirect. -/
 noncomputable def hPullbackInv {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     H B Y Λ φ ⋙ modulePullback B f ⟶
@@ -898,8 +890,7 @@ private theorem cPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end FixedCoefficients
 
-/-- The specified coefficient/site pullback comparison is invertible.
-Source: Stacks, Tags 03EK and 099R. -/
+/-- The specified coefficient/site pullback comparison is invertible. -/
 theorem hPullbackInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     IsIso (hPullbackInv B f Λ φ) := by
@@ -1135,8 +1126,7 @@ private theorem cOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 end OpenComparison
 
-/-- The inverse open comparison is the open-adjunction inverse mate of pullback.
-Source: Stacks, Tag 09AF. -/
+/-- The inverse open comparison is the open-adjunction inverse mate of pullback. -/
 noncomputable def hOpenInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1146,8 +1136,7 @@ noncomputable def hOpenInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (ModuleCat.{u + 1} Λ) j) (moduleJAdj B j)).symm
     (@inv _ _ _ _ (hPullbackInv B j Λ φ) (hPullbackInv_isIso B j Λ φ)))
 
-/-- The specified inverse open comparison is invertible.
-Source: Stacks, Tag 09AF. -/
+/-- The specified inverse open comparison is invertible. -/
 theorem hOpenInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1193,8 +1182,7 @@ theorem hOpenInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     infer_instance
   exact ((inverseMate_vComp oa ob oc γ δ)).symm ▸ hu
 
-/-- The forward open comparison is the inverse of the specified open-adjunction mate.
-Source: Stacks, Tag 09AF. -/
+/-- The forward open comparison is the inverse of the specified open-adjunction mate. -/
 noncomputable def hOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1202,8 +1190,7 @@ noncomputable def hOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
       H B U Λ φ ⋙ moduleJ B j :=
   (@asIso _ _ _ _ (hOpenInv B j Λ φ) (hOpenInv_isIso B j Λ φ)).inv
 
-/-- The normalized forward open comparison is invertible.
-Source: Stacks, Tag 09AF. -/
+/-- The normalized forward open comparison is invertible. -/
 theorem hOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1211,8 +1198,7 @@ theorem hOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   dsimp only [hOpen]
   infer_instance
 
-/-- The comparison functor is additive and exact.
-Source: Stacks, Tags 03DA and 099R. -/
+/-- The comparison functor is additive and exact. -/
 theorem h_exact (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (H B X Λ φ).Additive ∧ PreservesFiniteLimits (H B X Λ φ) ∧
@@ -1220,23 +1206,22 @@ theorem h_exact (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   dsimp only [H, C]
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Additivity of H. Source: Stacks, Tag 099R. -/
+/-- Additivity of H. -/
 noncomputable instance h_additive (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (H B X Λ φ).Additive := (h_exact B X Λ φ).1
 
-/-- Left exactness of H. Source: Stacks, Tag 099R. -/
+/-- Left exactness of H. -/
 noncomputable instance h_finiteLimits (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     PreservesFiniteLimits (H B X Λ φ) := (h_exact B X Λ φ).2.1
 
-/-- Right exactness of H. Source: Stacks, Tag 099R. -/
+/-- Right exactness of H. -/
 noncomputable instance h_finiteColimits (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     PreservesFiniteColimits (H B X Λ φ) := (h_exact B X Λ φ).2.2
 
-/-- The bounded-below comparison included into the unbounded target.
-Source: Stacks, Tags 099R and 05RU. -/
+/-- The bounded-below comparison included into the unbounded target. -/
 noncomputable def HD (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
@@ -1244,7 +1229,7 @@ noncomputable def HD (X : Scheme.{u}) (Λ : Type (u + 1))
   (H B X Λ φ).mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι
 
 /-- Canonical derived direct-image comparison; its unit normalization is built into
-rightDerivedFunctorPlusBaseChange. Source: Stacks, Tags 099R and 0B65. -/
+rightDerivedFunctorPlusBaseChange. -/
 noncomputable def hR {U X : Scheme.{u}} (f : U ⟶ X) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙ HD B X Λ φ ⟶
@@ -1309,8 +1294,7 @@ private theorem h_rightAcyclic {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (lowerStar (ModuleCat.{u + 1} B) f).rightAcyclic.prop_of_iso
     ((cFixed B X Λ φ).app F).symm h
 
-/-- This particular direct-image comparison is an isomorphism for qcqs maps.
-Source: Stacks, Tag 099R. -/
+/-- This particular direct-image comparison is an isomorphism for qcqs maps. -/
 theorem hR_isIso {U X : Scheme.{u}} (f : U ⟶ X) [QuasiCompact f] [QuasiSeparated f]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1327,8 +1311,7 @@ theorem hR_isIso {U X : Scheme.{u}} (f : U ⟶ X) [QuasiCompact f] [QuasiSeparat
 
 end DerivedComparison
 
-/-- Derived open comparison with the same open-unit normalization.
-Source: Stacks, Tag 09AF. -/
+/-- Derived open comparison with the same open-unit normalization. -/
 noncomputable def hJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :

@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-! # Construction of the symmetric algebra sheaf
 
-Source: Stacks Project, Modules, Lemma 01CG.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01CG
 -/
 
 @[expose] public section

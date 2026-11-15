@@ -17,9 +17,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.I
 /-!
 # Localization for the ambient bounded-below exceptional inverse image
 
-The categories are all constant-coefficient module sheaves, as for local cohomology;
-there is no constructibility condition. The right derived functors below are the existing
-ordinary injective-derived functors on `D⁺`.
+The categories are all categories of sheaves of modules over a constant ring of coefficients;
+there is no constructibility condition. The right derived
+functors below are the existing ordinary injective-derived functors on `D⁺`.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 070J, 08FI
 -/
 
 @[expose] public section
@@ -107,7 +111,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   [hs : IsClosedImmersion s] [hj : IsOpenImmersion j] [hqc : QuasiCompact j]
   (hPair : IsCompl (Set.range s) (Set.range j))
 
-/-- The termwise-induced closed direct image on D⁺, using its exactness. -/
+/-- The termwise-induced closed direct image on D⁺, using its exactness, rather than
+an independently chosen functor. -/
 noncomputable def supportClosedDerivedPlus :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
@@ -115,8 +120,7 @@ noncomputable def supportClosedDerivedPlus :
   (lowerStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus
 
 set_option linter.unusedSectionVars false in
-/-- A model in the stated class is K-injective.
-Source: Stacks Tag 070J. -/
+/-- A bounded below complex of injectives is K-injective. -/
 theorem supportModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) : I.IsKInjective := by
   obtain ⟨⟨n, hn⟩, hInj⟩ := hI
@@ -126,8 +130,7 @@ theorem supportModelKInjective (I : SupportComplex Λ X)
 
 include hj in
 set_option linter.unusedSectionVars false in
-/-- Open restriction of a bounded below injective model is K-injective.
-Source: Stacks Tag 08FI. -/
+/-- Open restriction of a bounded below injective model is K-injective. -/
 theorem supportOpenModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) :
     CochainComplex.IsKInjective
@@ -143,7 +146,7 @@ theorem supportOpenModelKInjective (I : SupportComplex Λ X)
   exact CochainComplex.isKInjective_of_injective _ n
 
 /-- The canonical computation of Rs^! on the chosen model, normalized by the derived
-functor unit and by the bounded/unbounded comparison. -/
+functor unit and by the bounded/unbounded comparison; no model isomorphism is chosen. -/
 noncomputable def supportShriekModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))

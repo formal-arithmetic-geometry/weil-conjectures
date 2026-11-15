@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TensorCoordinates
 
 /-! # Coordinates for finite tensor adjunctions
 
-Source: Stacks 03EL; Zheng Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -57,8 +61,7 @@ private abbrev sitePair {C : Type c} [Category.{v} C]
   let := SemilinearSections.locallyBijective.{c, v, max c v r} J
   SheafOfModules.siteSheafTensorTmul M N U x y
 
-/-- The constructed comparison is conjugation by the two explicit site tensor bridges.
-Source: Stacks 03EL. -/
+/-- The constructed comparison is conjugation by the two explicit site tensor bridges. -/
 theorem tensorComparison_coordinates {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (B' : ℕ → Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})

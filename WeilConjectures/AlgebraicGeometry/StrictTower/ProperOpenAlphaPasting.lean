@@ -10,18 +10,20 @@ public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 -- Vertical uses singleAlpha_restriction_normalized; horizontal uses singleAlpha_restriction.
--- Both restriction identities must coexist when these modules are imported.
+-- Both restriction identities must coexist when these dependency branches are imported.
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaVerticalModules
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaHorizontalModules
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaBaseChangeModules
 
 /-! # Intrinsic clopen alpha commutes with pasting and pullback before derivation
 
-Source: Stacks Project, Tags 0F7C, 0F7D, 0F7F, 09AH and 09BN.
-
 Each law includes equality on module sheaves, on strict towers, on their unbounded
 complexes, and on their ordinary unbounded derived categories. The two ordinary paths
 are written with all inverse-image and open-extension compositors inserted.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7C, 0F7D, 0F7F, 09AH, 09BN
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +39,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The alphaVerticalPasted ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+/-- The alphaVerticalPasted ordinary path, with the canonical compositors inserted. -/
 def alphaVerticalPasted {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -55,8 +56,7 @@ def alphaVerticalPasted {A C E B₀ D F : Scheme.{u}}
     Functor.whiskerLeft (modulePullback B r₂) (singleAlpha B k r₁ p₁ i h₁) ≫
     (Functor.associator _ _ _).inv
 
-/-- The alphaVerticalOuter ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+/-- The alphaVerticalOuter ordinary path, with the canonical compositors inserted. -/
 def alphaVerticalOuter {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -69,8 +69,7 @@ def alphaVerticalOuter {A C E B₀ D F : Scheme.{u}}
   singleAlpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h ≫
     Functor.whiskerRight (moduleGComp B r₁ r₂).hom (moduleJ B k)
 
-/-- The alphaHorizontalOuter ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+/-- The alphaHorizontalOuter ordinary path, with the canonical compositors inserted. -/
 def alphaHorizontalOuter {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (q : E ⟶ F)
@@ -83,8 +82,7 @@ def alphaHorizontalOuter {A C E B₀ D F : Scheme.{u}}
   Functor.whiskerRight (openBetaModuleJComp B i j).hom (modulePullback B q) ≫
     singleAlpha B (k ≫ l) r q (i ≫ j) h
 
-/-- The alphaHorizontalPasted ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+/-- The alphaHorizontalPasted ordinary path, with the canonical compositors inserted. -/
 def alphaHorizontalPasted {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -101,8 +99,7 @@ def alphaHorizontalPasted {A C E B₀ D F : Scheme.{u}}
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (modulePullback B r) (openBetaModuleJComp B k l).hom
 
-/-- The alphaCubeOriginal ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+/-- The alphaCubeOriginal ordinary path, with the canonical compositors inserted. -/
 def alphaCubeOriginal {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -125,8 +122,7 @@ def alphaCubeOriginal {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (moduleSquareG B d r₁ r c wr).inv (moduleJ B k₁)
 
-/-- The alphaCubeChanged ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+/-- The alphaCubeChanged ordinary path, with the canonical compositors inserted. -/
 def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -148,8 +144,7 @@ def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
 
 attribute [local irreducible] G J
 
-/-- Intrinsic alpha obeys vert pasting at the four specified levels.
-Source: Stacks, Tag 0F7C. -/
+/-- Intrinsic alpha obeys vertical pasting at the four specified levels. -/
 theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -192,8 +187,7 @@ theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   refine ⟨hm, ?_, ?_, ?_, vertical_derived B k i j r₁ r₂ p₁ p₂ h₁ h₂ h⟩
   all_goals rw [hm]
 
-/-- Intrinsic alpha obeys horiz pasting at the four specified levels.
-Source: Stacks, Tag 0F7D. -/
+/-- Intrinsic alpha obeys horizontal pasting at the four specified levels. -/
 theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -236,8 +230,7 @@ theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   refine ⟨hm, ?_, ?_, ?_, horizontal_derived B k l i j r p q h₁ h₂ h⟩
   all_goals rw [hm]
 
-/-- Intrinsic alpha obeys cube pasting at the four specified levels.
-Source: Stacks, Tag 0F7F. -/
+/-- Intrinsic alpha obeys cube pasting at the four specified levels. -/
 theorem alpha_baseChange_beforeDerivation {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)

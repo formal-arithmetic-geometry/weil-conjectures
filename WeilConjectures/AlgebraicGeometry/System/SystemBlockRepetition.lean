@@ -34,13 +34,22 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Exact block repetition of ordinary derived semilinear systems
 
-Source: Zheng, Construction 4.1 (printed p. 21) and the geometric morphism paragraph preceding Lemma
-4.10 (printed p. 23); Stacks Tags 08BJ, 070I, 070Y, 079P, 09T5.
+Block repetition and first-endpoint reindexing of semilinear systems on the sequence site,
+their adjunction, and compatibility with extension by zero.
 
-Indices here start at zero: index n denotes the paper's index n+1. The actual
-module-sheaf categories are `SemilinearSections.Systems`, with ordinary unbounded
-localizations `DS`. Section formulas specify the functors, not just their objects
-in the derived category. Derived comparisons are normalized before evaluation.
+## Implementation details
+
+Indices start at zero: index n denotes the paper's index n+1. The module-sheaf categories are
+`SemilinearSections.Systems`, with ordinary unbounded localizations `DS`. Section formulas
+specify the functors, not just their objects in the derived category. Derived comparisons are
+normalized before evaluation. The extension-by-zero comparison is normalized to be the identity
+on component sections, so no levelwise automorphism twists it.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08BJ, 070I, 070Y, 079P, 09T5
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -208,8 +217,7 @@ private theorem pushforwardEvaluationEquality
   rw [h]
 
 attribute [local irreducible] systemRing ringPresheaf rings in
-/-- Exact endpoint/repetition adjunction on the dependency's actual module-sheaf categories.
-Source: Zheng 4.1, finite-block generalization; Stacks 08BJ. -/
+/-- Exact endpoint/repetition adjunction on the dependency's actual module-sheaf categories. -/
 theorem systemBlockRepetition : Nonempty (SystemBlockRepetition J B τ t) := by
   let siteAdj : blockSite (C := C) t.endpoints ⊣ blockSite t.index :=
     { unit :=
@@ -335,8 +343,7 @@ variable {C' : Type c} [Category.{v} C']
 
 /-- The actual repeated geometric functors on the repeated coefficient categories.
 All level realizations are fixed to the given topos morphism. The square is the
-identity on sections, including all transitions, before localization.
-Source: Zheng 4.1 and paragraph preceding 4.10. -/
+identity on sections, including all transitions, before localization. -/
 structure SystemBlockGeometry where
   /-- Levelwise inverse image for D, on the actual repeated coefficient rings. -/
   pull : Systems J (blockCoefficients B₀ t) (blockTransitions J B₀ τ₀ t) ⥤
@@ -405,8 +412,7 @@ attribute [instance] SystemBlockGeometry.pull_additive SystemBlockGeometry.pull_
   SystemBlockGeometry.pull_colimits SystemBlockGeometry.push_additive
 
 /-- All supplied exact block functors preserve K-injectives, so the canonical
-comparison is available directly on the actual system categories.
-Source: Zheng 4.1 finite-block generalization; Stacks 070Y. -/
+comparison is available directly on the actual system categories. -/
 def SystemBlockGeometry.comparison
     (H : SystemBlockGeometry J t J' B₀ τ₀ A uInv uPush adjSet G RX RY) :=
   letI := H.resolutions
@@ -421,8 +427,7 @@ variable [EssentiallySmall.{max c v r} C]
   (B₀ : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ₀ : ∀ n : ℕ, B₀ (n + 1) ⟶ B₀ n) (U : C)
 
-/-- The ring identification for repetition after restriction to an open slice.
-Source: Zheng 4.1, open-localization consequence. -/
+/-- The ring identification for repetition after restriction to an open slice. -/
 theorem blockOpenRepeatRing :
     ((blockSite (C := Over U) t.index).sheafPushforwardContinuous RingCat.{max c v r}
       (coefficientSequenceTopology (J.over U))
@@ -455,8 +460,7 @@ theorem blockOpenRepeatRing :
   exact hh
 
 /-- Actual restriction/repetition on the open sequence site, retaining its coefficient
-presentation. It has exactly the data of blockRepeat on the restricted tower.
-Source: Zheng 4.1, open-localization consequence. -/
+presentation. It has exactly the data of blockRepeat on the restricted tower. -/
 def blockOpenRepeat :
     Systems (J.over U) (openRings.{c, v, r} J B₀ U) (openTransitions.{c, v, r} J B₀ τ₀ U) ⥤
       Systems (J.over U) (openRings.{c, v, r} J (blockCoefficients B₀ t) U)
@@ -499,9 +503,8 @@ private theorem blockOpenRepeat_restrictions
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] evaluation systemRing ringPresheaf rings blockOpenRepeat in
-/-- Exact extension by zero commutes with repetition, by a comparison that is the identity on
-every component section under the level realizations `e_n j_! = j_! e_n`.
-Source: Zheng 4.1, ordinary levelwise operations, open-localization consequence. -/
+/-- Exact extension by zero commutes with repetition: the comparison is the identity on every
+component section under the level realizations of the open presentations. -/
 theorem blockRepeat_extensionByZero
     (R : SystemBlockRepetition J B₀ τ₀ t) :
     ∃ (O : OpenSystems.{c, v, r} J B₀ τ₀ U)

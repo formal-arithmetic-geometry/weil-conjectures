@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorPowerBoundary
 
 /-! # The obstruction-and-lifting conjunct
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ private theorem nsmul_addHom_zero {A B : Type*} [AddZeroClass A] [AddMonoid B]
     (b : A →+ B) (k : ℕ) : k • b 0 = 0 := by
   rw [b.map_zero, nsmul_zero]
 
-/-- Core obstruction and lifting criterion, omitting quasi-coherence.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS. -/
+/-- Core obstruction and lifting criterion, omitting quasi-coherence. -/
 theorem square_zero_section_power_obstruction_core
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j]

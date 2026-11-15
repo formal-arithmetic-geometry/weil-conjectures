@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.TotalClassicalResolutionC
 
 /-! # Agreement of classical resolution classes and derived local classes
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -53,8 +55,7 @@ open Scheme.Modules
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Agreement of classical resolution classes and derived local classes.
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X. -/
+/-- Agreement of classical resolution classes and derived local classes. -/
 theorem squareResolution_localClass {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)
     (U : X.Opens) (hU : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U) :

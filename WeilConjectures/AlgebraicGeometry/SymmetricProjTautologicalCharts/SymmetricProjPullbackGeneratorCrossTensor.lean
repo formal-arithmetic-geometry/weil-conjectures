@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjCrossTensorFromLocal
 
 /-! # Degree-two relation on pulled module generators.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -24,9 +28,7 @@ attribute [local instance 2000] CategoryTheory.Abelian.hasFiniteLimits
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 open Scheme.Modules CategoryTheory.MonoidalCategory
 
-/-- The degree-two cross relation on actual pulled generators over affine opens.
-
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR, and 01OB. -/
+/-- The degree-two cross relation on actual pulled generators over affine opens. -/
 theorem normalized_pullback_generator_cross_tensor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

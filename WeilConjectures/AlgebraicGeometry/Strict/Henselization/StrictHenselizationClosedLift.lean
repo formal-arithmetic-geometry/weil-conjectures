@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 /-!
 # The distinguished geometric closed point lies over the original point
 
-Source: Stacks Project, Tag 04HX.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 04HX
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The coordinate-ring evaluation gives the canonical closed-point lift over `s`.
-Source: Stacks Project, Tag 04HX. -/
+/-- The coordinate-ring evaluation gives the canonical closed-point lift over `s`. -/
 theorem strictHenselizationClosedLift_over
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

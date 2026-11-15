@@ -40,8 +40,13 @@ set_option linter.privateModule false
 
 /-! # The reduction tower is normalized
 
-This file proves that the reduction tower of an integral complex is a normalized
-constructible tower. Positive level n+1 is indexed by n.
+The data declarations are re-exported unchanged from SmoothPurityReductionTowerData.
+The proof assembles strict descent, the actual reduction adjuncts, the Tor interval
+comparison and finite-level constructibility. Positive level n+1 is indexed by n.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00YV
 -/
 
 @[expose] public noncomputable section
@@ -62,8 +67,7 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- Reconstruct the section-ring isomorphism from its multiplicative abelian map.
-Source: IntegralCriterionReductions.liftSectionRingIso, Stacks 00YV. -/
+/-- Reconstruct the section-ring isomorphism from its multiplicative abelian map. -/
 private theorem ringPresheafMon_eq
     {C : Type*} [Category C] (J : GrothendieckTopology C)
     [HasWeakSheafify J Ab.{u + 1}] [(J.W (A := Ab.{u + 1})).IsMonoidal]

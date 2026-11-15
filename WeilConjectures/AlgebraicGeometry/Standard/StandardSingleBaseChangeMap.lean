@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 
 /-! # Canonical comparison for a module in degree zero
 
-Source: Stacks Project, Tag 08HY, Remark base-change, and Tag 0A1D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08HY, 0A1D
 -/
 
 @[expose] public section
@@ -23,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical base-change map followed by direct image of the single-complex
-pullback counit, for every module and every base morphism.
-Source: Stacks Project, Tag 08HY and Tag 0A1D. -/
+pullback counit. This is a construction for every module and every base morphism;
+it asserts neither monicity nor epicity. -/
 noncomputable def standardSingleBaseChangeMap
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :
     letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard

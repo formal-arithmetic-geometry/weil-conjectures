@@ -11,10 +11,13 @@ import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 /-!
 # Exact open extension on strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
-
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7, 09AE, 03DI,
+  03DJ
 -/
 
 @[expose] public section
@@ -31,8 +34,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The right-adjoint instance records the localized-site universal property.
-Source: Stacks, Tags 03DI and 09AE. -/
+/-- The right-adjoint instance records the localized-site universal property. -/
 noncomputable instance openPullback_rightAdjoint {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] : (modulePullback B j).IsRightAdjoint := by
   simpa only [modulePullback] using
@@ -40,17 +42,15 @@ noncomputable instance openPullback_rightAdjoint {U X : Scheme.{u}}
       (coefficients B X) (coefficients B U) (constantRingIso B j))
 
 /-- Open extension, determined up to its unit-preserving unique isomorphism by the
-localized-site adjunction. Source: Stacks, Tag 09AE. -/
+localized-site adjunction. -/
 noncomputable abbrev moduleJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (modulePullback B j).leftAdjoint
 
-/-- The ordinary open extension adjunction, with its specified unit and counit.
-Source: Stacks, Tag 09AE. -/
+/-- The ordinary open extension adjunction, with its specified unit and counit. -/
 noncomputable def moduleJAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     moduleJ B j ⊣ modulePullback B j := Adjunction.ofIsRightAdjoint _
 
-/-- Open extension is additive and exact, also on the empty open.
-Source: Stacks, Tags 03DI and 03DJ. -/
+/-- Open extension is additive and exact, also on the empty open. -/
 theorem moduleJ_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (moduleJ B j).Additive ∧ PreservesFiniteLimits (moduleJ B j) ∧
       PreservesFiniteColimits (moduleJ B j) := by
@@ -68,15 +68,15 @@ theorem moduleJ_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     preservesFiniteColimits_of_natIso e
   exact ⟨hA, hL, hC⟩
 
-/-- Additivity of open extension. Source: Stacks, Tag 03DI. -/
+/-- Additivity of open extension. -/
 noncomputable instance moduleJ_additive {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : (moduleJ B j).Additive := (moduleJ_exact B j).1
 
-/-- Left exactness of open extension. Source: Stacks, Tag 03DJ. -/
+/-- Left exactness of open extension. -/
 noncomputable instance moduleJ_finiteLimits {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : PreservesFiniteLimits (moduleJ B j) := (moduleJ_exact B j).2.1
 
-/-- Right exactness of open extension. Source: Stacks, Tag 03DJ. -/
+/-- Right exactness of open extension. -/
 noncomputable instance moduleJ_finiteColimits {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : PreservesFiniteColimits (moduleJ B j) := (moduleJ_exact B j).2.2
 
@@ -84,7 +84,7 @@ noncomputable instance moduleJ_finiteColimits {U X : Scheme.{u}} (j : U ⟶ X)
 noncomputable abbrev towerJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B U) (Modules B X)).obj (moduleJ B j)
 
-/-- Exactness persists on strict towers. Source: Stacks, Tag 03DJ. -/
+/-- Open extension on strict towers is exact. -/
 theorem towerJ_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteLimits (towerJ B j) ∧ PreservesFiniteColimits (towerJ B j) := by
   constructor
@@ -99,21 +99,18 @@ noncomputable instance towerJ_finiteLimits {U X : Scheme.{u}} (j : U ⟶ X)
 noncomputable instance towerJ_finiteColimits {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : PreservesFiniteColimits (towerJ B j) := (towerJ_exact B j).2
 
-/-- Exact open extension on derived strict towers.
-Source: Stacks, Tag 09AE. -/
+/-- Exact open extension on derived strict towers. -/
 noncomputable def J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Derived B U ⥤ Derived B X := (towerJ B j).mapDerivedCategory
 
-/-- The exact derived open adjunction, retaining its termwise units.
-Source: Stacks, Tag 09AE. -/
+/-- The exact derived open adjunction, retaining its termwise units. -/
 noncomputable def jAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J B j ⊣ G B j :=
   Adjunction.ofNatIsoRight
     (((moduleJAdj B j).whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction)
     (towerPullback B j).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Composition of open extension with the composition-adjunction normalization.
-Source: Stacks, Tags 03DI and 0F7D. -/
+/-- Composition of open extension with the composition-adjunction normalization. -/
 noncomputable def jComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k] : J B j ⋙ J B k ≅ J B (j ≫ k) :=
   Adjunction.leftAdjointCompIso (jAdj B j) (jAdj B k) (jAdj B (j ≫ k))
@@ -130,8 +127,7 @@ noncomputable def jCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J B f ≅ J B g :=
   eqToIso (J_congr B h)
 
-/-- The normalized open-extension identity.
-Source: Stacks, Tag 09AE. -/
+/-- The normalized open-extension identity. -/
 noncomputable def jId (X : Scheme.{u}) : J B (𝟙 X) ≅ 𝟭 (Derived B X) :=
   Adjunction.leftAdjointIdIso (jAdj B (𝟙 X)) (gId B X)
 

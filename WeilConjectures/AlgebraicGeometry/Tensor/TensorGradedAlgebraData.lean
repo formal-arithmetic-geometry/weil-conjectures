@@ -18,7 +18,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Graded algebra and quotient of tensor powers
 
-Source: Stacks Project, Tag 09MS, the direct-sum algebra sequence.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0096
 -/
 
 @[expose] public section
@@ -31,21 +33,18 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 noncomputable section
 
-/-- The underlying module map, with its source and target stated explicitly.
-Source: Stacks Project, Tag 09MS, the quotient in the graded ideal sequence. -/
+/-- The underlying module map, with its source and target stated explicitly. -/
 def tensorGradedAlgebraMap {X : Scheme.{u}} {B C : X.CommAlgebraSheaf} (p : B ⟶ C) :
     commAlgebraSheafModule X.sheaf B ⟶ commAlgebraSheafModule X.sheaf C :=
   (commAlgebraSheafModuleFunctor X.sheaf).map p
 
-/-- Read a section of the underlying module as a section of the algebra sheaf.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
+/-- Read a section of the underlying module as a section of the algebra sheaf. -/
 def tensorGradedAlgebraSection {X : Scheme.{u}} (B : X.CommAlgebraSheaf) (U : X.Opens)
     (z : Γ(commAlgebraSheafModule X.sheaf B, U)) : B.right.obj.obj (op U) := z
 
 attribute [local irreducible] tensorGradedAlgebraMap commAlgebraSheafModule
 
-/-- The chosen tensor-pullback unit, with a compact explicit module-map type.
-Source: Stacks Project, Tag 0096, the tensor-pullback adjunction. -/
+/-- The chosen tensor-pullback unit, with a compact explicit module-map type. -/
 def tensorGradedUnit {X Z : Scheme.{u}} (j : Z ⟶ X) (M : X.Modules) :
     M ⟶ (pushforward j).obj ((tensorPullback j).obj M) :=
   (Classical.choose (exists_tensorPullbackAdjunction j)).unit.app M
@@ -53,8 +52,7 @@ def tensorGradedUnit {X Z : Scheme.{u}} (j : Z ⟶ X) (M : X.Modules) :
 attribute [local irreducible] tensorGradedUnit tensorPullback
 
 /-- The two graded algebra sheaves, with their underlying module coproducts.
-No exactness, kernel, or degree projection data are included.
-Source: Stacks Project, Tag 09MS, the direct-sum algebra sequence. -/
+No exactness, kernel, or degree projection data are included. -/
 structure TensorGradedAlgebraData {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) where
   B : X.CommAlgebraSheaf
@@ -152,8 +150,7 @@ private theorem restrictionCofanIsColimit {X Z : Scheme.{u}} (j : Z ⟶ X)
     rw [hn, Category.assoc]
     exact congrArg (fun t ↦ a.unit.app (D d) ≫ t) (hm d)
 
-/-- The tensor powers and their restrictions form a graded algebra quotient.
-Source: Stacks Project, Tag 09MS, the direct-sum sequence after the ideal short exact sequence. -/
+/-- The tensor powers and their restrictions form a graded algebra quotient. -/
 theorem tensorGradedAlgebraData_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] :
     Nonempty (TensorGradedAlgebraData j L) := by

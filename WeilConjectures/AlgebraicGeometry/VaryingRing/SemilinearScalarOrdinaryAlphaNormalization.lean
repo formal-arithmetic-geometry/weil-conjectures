@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProp
 
 /-! # Canonical normalization of the ordinary scalar alpha
 
-Source: Stacks, Tags 03D7, 03DI and 0F7B.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D7, 03DI, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -335,8 +337,7 @@ private theorem towerAlpha_eq_word4
   simp only [StrictTower.towerJTail, StrictTower.towerGTail, StrictTower.clopenTowerPi]
   exact termwise_word4 _ _ _ _ _ _ _ _ _ _ _ _
 
-/-- The alpha of a normalized ordinary scalar package is canonical.
-Source: Stacks, Tags 03D7, 03DI and 0F7B, and the intrinsic proper/open word. -/
+/-- The alpha of a normalized ordinary scalar package is canonical. -/
 theorem scalarOrdinaryAlphaNormalization (D : OrdinaryScalarComparison R φ B ψ)
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

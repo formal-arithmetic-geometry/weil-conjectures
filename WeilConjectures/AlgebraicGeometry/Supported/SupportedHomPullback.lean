@@ -36,7 +36,10 @@ import all WeilConjectures.AlgebraicGeometry.Support.SupportSiteComparison
 /-!
 # Supported Hom and pullback of closed pairs
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4 and Example 9.5, pp. 66--67.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06XR, 070I, 099R
+* J. S. Milne, *Lectures on étale cohomology*, Section 9, Theorem 9.4, Example 9.5
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +55,7 @@ namespace AlgebraicGeometry
 
 /-- Site data used to spell out the same normalized identification in both topologies.
 The site, restriction arrow, supported constant, and its actual restriction map are data,
-not a replacement definition of supported sections.
-Source: Milne, Section 9, Ext proof. -/
+not a replacement definition of supported sections. -/
 structure SupportHomPair (A : Type (u + 1)) [CommRing A] where
   Site : Type (u + 1)
   [category : Category.{u} Site]
@@ -75,24 +77,20 @@ namespace SupportHomPair
 
 variable {A : Type (u + 1)} [CommRing A] (S : SupportHomPair A)
 
-/-- The already defined support kernel in the given pair.
-Source: Milne, Section 9. -/
+/-- The already defined support kernel in the given pair. -/
 abbrev sections :=
   Sheaf.supportedSectionsFunctor S.topology (ModuleCat.{u + 1} A) S.restriction
 
-/-- The degree-a cohomology of the published bounded-below right derived support functor.
-Source: Milne, Theorem 9.4. -/
+/-- The degree-a cohomology of the published bounded-below right derived support functor. -/
 abbrev group (K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) (a : ℤ) :=
   (Sheaf.supportHypercohomologyFunctor S.topology
     (ModuleCat.{u + 1} A) S.restriction a).obj K
 
-/-- Termwise support on an injective representative, using the existing kernel functor.
-Source: Milne, Ext proof. -/
+/-- Termwise support on an injective representative, using the existing kernel functor. -/
 abbrev complex (I : CochainComplex.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) :=
   (S.sections.mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj
 
-/-- Image of a supported cocycle under the canonical right-derived-unit comparison.
-Source: Milne, Ext proof. -/
+/-- Image of a supported cocycle under the canonical right-derived-unit comparison. -/
 def cycleClass (I : CochainComplex.Plus (Sheaf S.topology (ModuleCat.{u + 1} A)))
     [∀ n : ℤ, Injective (I.obj.X n)] (a : ℤ) (x : (S.complex I).cycles a) :
     S.group (DerivedCategory.Plus.Q.obj I) a :=
@@ -100,15 +98,15 @@ def cycleClass (I : CochainComplex.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))
     (DerivedCategory.Plus.Q.obj I) (Iso.refl _) a).hom ((S.complex I).homologyπ a x)
 
 /-- Derived morphisms from the supported single object, with the original integer shift.
-Source: Milne, Theorem 9.4. -/
+This names the existing Hom type, so checking its users does not repeatedly compute
+that type's universe through the chosen derived-category localization. -/
 abbrev derivedHom
     (K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) (a : ℤ) :
     Type (u + 1) :=
   (DerivedCategory.singleFunctor (Sheaf S.topology (ModuleCat.{u + 1} A)) 0).obj
     S.supported ⟶ K.obj⟦a⟧
 
-/-- The localized map defined by a Hom cocycle, with the canonical cochain shift.
-Source: Stacks 06XR, 070I; Milne, Ext proof. -/
+/-- The localized map defined by a Hom cocycle, with the canonical cochain shift. -/
 def cocycleMorphism
     (I : CochainComplex.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) (a : ℤ)
     (f : S.supported ⟶ I.obj.X a) (hf : f ≫ I.obj.d a (a + 1) = 0) :
@@ -117,9 +115,9 @@ def cocycleMorphism
   supportedHomLocalizedCocycle I.obj a f hf ≫
     ((DerivedCategory.Plus.QCompιIso _).inv.app I)⟦a⟧'
 
-/-- The normalized supported-Hom identification, from the actual derived support group,
-given by `f ↦ (f ρ)(1)` on every injective representative.
-Source: Milne, Theorem 9.4, Example 9.5 and Ext proof. -/
+/-- The normalized supported-Hom identification. The cocycle clause fixes its value by
+`f ↦ (f ρ)(1)` on every injective representative, so no arbitrary natural isomorphism
+can satisfy this interface. Its source is the actual derived support group. -/
 structure Identification where
   chi : SupportedHomChi S.topology A S.restriction S.supported
   naturality : SupportedHomChiNatural S.topology A S.restriction S.supported chi
@@ -140,8 +138,7 @@ end AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Constant restriction along a continuous site functor: sheafify the constant
-presheaf unit and then restrict it. This sends each scalar to that same constant scalar.
-Source: Milne, Example 9.5. -/
+presheaf unit and then restrict it. This sends each scalar to that same constant scalar. -/
 def supportHomConstantDirectImage {A : Type (u + 1)} [CommRing A]
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (J' : GrothendieckTopology D)
@@ -162,9 +159,10 @@ variable (L : Sheaf S.topology (ModuleCat.{u + 1} A) ⥤
   Sheaf T.topology (ModuleCat.{u + 1} A))
 variable (adj : L ⊣ B.sheafPushforwardContinuous (ModuleCat.{u + 1} A) S.topology T.topology)
 
-/-- The three canonical comparisons `constantIso`, `closedIso` and `supportUnit` of a
-transport, normalized by constant sections, constant restriction and kernel inclusion.
-Source: Milne, Theorem 9.4, Ext proof and kernel construction. -/
+/-- The three canonical comparisons used in the statement, in one interface.
+`constantIso` is fixed by its adjoint constant sections, `closedIso` by the epic
+constant restriction, and `supportUnit` by its kernel inclusion. The terminal and open
+arrows are actual site arrows, so the last formula is the unit-induced section map. -/
 structure Transport where
   terminalMap : T.terminal ⟶ B.obj S.terminal
   complementMap : T.complement ⟶ B.obj S.complement
@@ -188,8 +186,7 @@ variable {S T B L adj}
 variable [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
 
 /-- The actual derived kernel pullback, through the existing right-derived base-change
-construction; it does not assume inverse image preserves injectives.
-Source: Milne, Theorem 9.4. -/
+construction; it does not assume inverse image preserves injectives. -/
 def Transport.derivedMap (e : Transport S T B L adj) :
     S.sections.rightDerivedFunctorPlus ⟶
       L.mapDerivedCategoryPlus ⋙ T.sections.rightDerivedFunctorPlus :=
@@ -201,15 +198,13 @@ def Transport.derivedMap (e : Transport S T B L adj) :
       ((Functor.rightUnitor _).hom ≫ e.supportUnit)
 
 /-- Pull a derived Hom back and precompose with closed exchange inverse, with the
-published single-object and shift comparisons.
-Source: Milne, Ext proof. -/
+published single-object and shift comparisons. -/
 def Transport.homMap (e : Transport S T B L adj)
     (K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) (a : ℤ) :
     (f : S.derivedHom K a) → T.derivedHom (L.mapDerivedCategoryPlus.obj K) a :=
   Functor.representableTransportHom L e.closedIso K a
 
-/-- The displayed equality for every supported class in the indicated coefficient object.
-Source: Milne, Theorem 9.4 and Example 9.5. -/
+/-- The displayed equality for every supported class in the indicated coefficient object. -/
 def Transport.Compatible (e : Transport S T B L adj)
     (chi : S.Identification) (chi' : T.Identification)
     (K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) (a : ℤ) : Prop :=
@@ -219,7 +214,7 @@ def Transport.Compatible (e : Transport S T B L adj)
 end SupportHomPair
 
 /-- The etale pair uses the recorded scheme site, open complement, underived direct
-image and constant sheaf. Source: Milne, Section 9. -/
+image and constant sheaf. -/
 abbrev etaleSupportHomPair (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     SupportHomPair P.Coefficient where
@@ -237,7 +232,7 @@ abbrev etaleSupportHomPair (P : WeilConjectures.PurityFiniteSetting.{u})
       (MorphismProperty.Over.pullback @Etale ⊤ i)
 
 /-- The identical kernel construction in the pro-etale topology, with its ordinary
-constant module. Source: Milne, Section 9. -/
+constant module. -/
 abbrev proEtaleSupportHomPair (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     SupportHomPair P.Coefficient where
@@ -259,8 +254,7 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Etale inverse image and its actual adjunction in the normalized transport interface.
-Source: Milne, Section 9. -/
+/-- Etale inverse image and its actual adjunction in the normalized transport interface. -/
 abbrev etaleSupportHomTransport (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X Z' X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (i' : Z' ⟶ X') [IsClosedImmersion i'] (h : X' ⟶ X) : Type (u + 2) := by
@@ -272,8 +266,7 @@ abbrev etaleSupportHomTransport (P : WeilConjectures.PurityFiniteSetting.{u})
     (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) h)
     (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) h)
 
-/-- Pro-etale inverse image and its actual adjunction, on the original small sites.
-Source: Milne, Section 9. -/
+/-- Pro-etale inverse image and its actual adjunction, on the original small sites. -/
 abbrev proEtaleSupportHomTransport (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X Z' X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (i' : Z' ⟶ X') [IsClosedImmersion i'] (h : X' ⟶ X) : Type (u + 2) := by
@@ -285,8 +278,7 @@ abbrev proEtaleSupportHomTransport (P : WeilConjectures.PurityFiniteSetting.{u})
     (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) h)
     (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) h)
 
-/-- The comparison inverse image and its actual adjunction in the same interface.
-Source: Milne, Section 9; Stacks 099R. -/
+/-- The comparison inverse image and its actual adjunction in the same interface. -/
 abbrev siteSupportHomTransport (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : Type (u + 2) := by
   letI : (Scheme.toProEt X).IsContinuous
@@ -297,8 +289,7 @@ abbrev siteSupportHomTransport (P : WeilConjectures.PurityFiniteSetting.{u})
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X)
     (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) X)
 
-/-- The published comparison of the two composite pullbacks, restricted canonically to D+.
-Source: Stacks 099R. -/
+/-- The published comparison of the two composite pullbacks, restricted canonically to D+. -/
 def supportHomDerivedComparison (P : WeilConjectures.PurityFiniteSetting.{u})
     {X' X : Scheme.{u}} (h : X' ⟶ X) :
     (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) h).mapDerivedCategoryPlus ⋙
@@ -321,8 +312,7 @@ def supportHomDerivedComparison (P : WeilConjectures.PurityFiniteSetting.{u})
 
 /-- Site comparison commutes with supported pullback and with the supported-constant
 exchange. The first equation is in the actual derived support objects; the second uses
-exactly the published inverse-image comparison, evaluated on the supported constant.
-Source: Milne, Ext proof. -/
+exactly the published inverse-image comparison, evaluated on the supported constant. -/
 def SupportHomSquareCoherent (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X Z' X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (i' : Z' ⟶ X') [IsClosedImmersion i'] (h : X' ⟶ X)
@@ -1282,12 +1272,7 @@ private theorem supportHomSquare
 /-- The canonical supported-Hom identifications commute with arbitrary pullback of a
 closed pair in the etale topology and, for etale-origin coefficients, in the pro-etale
 topology. They also commute with comparison on both schemes, and the comparison
-squares for supported groups and closed constants commute. Each identification is
-normalized on every supported cocycle; each transport is fixed by the inverse-image
-unit and the epic constant restriction.
-
-Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4 and Example 9.5, pp. 66--67, Ext
-proof. -/
+squares for supported groups and closed constants commute. -/
 theorem supportedHom_pullback (P : WeilConjectures.PurityFiniteSetting.{u}) :
     ∃ chiE : ∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i],
         (etaleSupportHomPair P i).Identification,

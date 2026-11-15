@@ -82,7 +82,12 @@ import all WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
 import all WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-/-! # StrictCompletionRestrictionLimits -/
+/-! # StrictCompletionRestrictionLimits
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AA, 00Y0, 03DB
+-/
 
 @[expose] public section
 
@@ -136,9 +141,7 @@ private theorem module_limits
     (F.mapMod R ⋙ Mod.extendScalars (condensedPullbackHom Λ f)))
 
 /-- Inverse image along the multiplicative closure of immersions and weakly etale
-maps preserves all limits in the coefficient universe.
-
-Source: Stacks Tag 09AA and the localized-site description, Tags 00Y0 and 03DB. -/
+maps preserves all limits in the coefficient universe. -/
 theorem strictCompletionRestrictionLimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

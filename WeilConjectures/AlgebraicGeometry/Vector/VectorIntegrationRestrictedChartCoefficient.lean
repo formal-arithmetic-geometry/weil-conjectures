@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Successive inverse-image coefficient identifications for a frame on V and its
-restriction to U equal direct coefficient descent in the pasted inverse-chart square.
-No compact-support functor or exchange map occurs in this equality. -/
+restriction to U equal direct coefficient descent in the pasted inverse-chart square. -/
 theorem vectorIntegration_restricted_chart_coefficient
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 
 /-! # Scalar restriction preserves ordinary open support
 
-Source: Stacks Project, Modules on Sites, Tag 03DI, the sheafified direct-sum construction of
-extension by zero.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -104,9 +105,7 @@ private theorem localizedOpen_unit_isIso
     ⟨SheafOfModules.localizedModuleAdjunctionIndependent R U, b⟩
   exact triple.isIso_unit_iff_isIso_counit.mpr inferInstance
 
-/-- Restricting a single constant coefficient action preserves open support.
-
-Source: Stacks Project, sites-modules.tex, Tag 03DI, using Tag 03CY. -/
+/-- Restricting a single constant coefficient action preserves open support. -/
 theorem restrictScalars_openCounit_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     {U X : Scheme.{u}} (a : coefficients B X ⟶ coefficients A X)

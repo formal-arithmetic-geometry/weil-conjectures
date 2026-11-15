@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleTensorHomTransposeNaturality
 
 /-! # Tensor-Hom shift comparison from evaluation
 
-The categorical diagram chase underlying the étale Hom comparison shift square. -/
+The categorical diagram chase underlying the étale Hom comparison shift square.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08JC, 08J9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -99,8 +104,7 @@ private theorem iso_left_cancel {D : Type*} [Category D]
 end
 
 /-- An evaluation transpose preserves normalized Hom shifts when the tensor comparison
-preserves cancellation of opposite shifts.
-Source: Stacks Project, Tags 08JC and 08J9. -/
+preserves cancellation of opposite shifts. -/
 private theorem tensorHomShiftComparison_aux
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasShift C ℤ]
     {D : Type u₂} [Category.{v₂} D] [Preadditive D] [HasShift D ℤ]
@@ -178,8 +182,8 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
-/-- `EtaleHomShiftNormalization` in the form used by the abstract chase,
-stated for both coefficient categories. -/
+/-- `EtaleHomShiftNormalization` in the form used by the abstract chase. Stated once for both
+coefficient categories, so the kernel unfolds the normalization only here. -/
 private theorem etaleHomShiftNormalization_apply
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -194,8 +198,7 @@ private theorem etaleHomShiftNormalization_apply
       (derivedTensorHomAdjunction C (X := X) (K⟦-n⟧)).counit.app M := by
   exact h K n
 
-/-- Derived tensor-Hom comparison respects normalized shifts.
-Source: Stacks Project, Tags 08JC and 08J9. -/
+/-- Derived tensor-Hom comparison respects normalized shifts. -/
 theorem derivedTensorHomShiftComparison_component
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.tensorGradedAction_projection_sec
 
 /-! # Projection of homogeneous quotient actions
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence; Tag 0B8S, the quotient
-action on a square-zero ideal.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S, 01XC
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ noncomputable section
 
 set_option linter.unusedVariables false in
 /-- The homogeneous quotient actions commute with the coefficient projections.
-
-Source: Stacks Project, Tag 09MS, the graded ideal sequence; Tag 0B8S, the quotient action;
-Tag 01XC, functoriality of the affine cohomology edge. -/
+This statement concerns only actions: it has no connecting map or resolution presentation. -/
 theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

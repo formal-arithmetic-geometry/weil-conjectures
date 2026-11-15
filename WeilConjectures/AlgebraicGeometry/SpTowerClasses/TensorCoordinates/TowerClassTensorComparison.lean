@@ -28,7 +28,11 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Transport of ordinary tensor comparisons to explicit site tensors
 
-Source: Stacks 03EK and 03EL.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +56,7 @@ section Site
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max c v r})
 
-/-- The explicit site tensor and the monoidal tensor use the same sheafification.
-Source: Stacks 03EK. -/
+/-- The explicit site tensor and the monoidal tensor use the same sheafification. -/
 abbrev siteTensorIso (N : SemilinearSections.Mod.{c, v, max c v r} J R) :
     let := SemilinearSections.abelianSheafify.{c, v, max c v r} J
     let := SemilinearSections.locallyBijective.{c, v, max c v r} J
@@ -94,8 +97,7 @@ private theorem siteTensorIso_component (M N : SemilinearSections.Mod.{c, v, max
   simp only [Category.assoc, MonoidalCategory.tensorHom_def]
   rfl
 
-/-- The bridge preserves the sheafification-unit pairing.
-Source: Stacks 03EK. -/
+/-- The bridge preserves the sheafification-unit pairing. -/
 theorem siteTensorIso_pure (M N : SemilinearSections.Mod.{c, v, max c v r} J R)
     (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
     let := SemilinearSections.abelianSheafify.{c, v, max c v r} J
@@ -130,8 +132,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (L : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
     (P : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r))) (adj : L ⊣ P)
 
-/-- Retain the ordinary fields of a geometric calculus on arbitrary sites.
-Source: Zheng 4.1. -/
+/-- Retain the ordinary fields of a geometric calculus on arbitrary sites. -/
 def ordinaryOfGeometry (G : SemilinearSections.Geometry.{c, v, r} J B τ A J' L P adj) :
     SemilinearSections.GeometryOrdinary.{c, v, r} J B τ J' L P adj :=
   { G with }
@@ -141,8 +142,7 @@ end Geometry
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Forget the derived fields while retaining every ordinary normalization.
-Source: Zheng Construction 4.1. -/
+/-- Forget the derived fields while retaining every ordinary normalization. -/
 def ordinaryGeometry {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f) :
     SemilinearSections.GeometryOrdinary.{u + 1, u, u + 1}
@@ -157,8 +157,7 @@ def ordinaryGeometry {b : SpTowerShriek.Base l E}
     (Scheme.proEtaleSheafDirectImage f (Type (u + 1)))
     (Scheme.proEtaleSheafAdjunction f (Type (u + 1))) g.generic
 
-/-- Transport a monoidal system tensor comparison along the specified coordinates.
-Source: Stacks 03EL. -/
+/-- Transport a monoidal system tensor comparison along the specified coordinates. -/
 def comparisonOfCoordinates {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (B' : ℕ → Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
@@ -193,8 +192,7 @@ def comparisonOfCoordinates {b : SpTowerShriek.Base l E}
       (siteTensorIso.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology X))
         (systemRing l E X) (g.pull.obj N)).symm
 
-/-- The system comparison constructed from a normalized ordinary geometric tensor.
-Source: Stacks 03EL. -/
+/-- The system comparison constructed from a normalized ordinary geometric tensor. -/
 def comparison {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (T : SemilinearSections.GeometryOrdinaryTensor.{u + 1, u, u + 1}

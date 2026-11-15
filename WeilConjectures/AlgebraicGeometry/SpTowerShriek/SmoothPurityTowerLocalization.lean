@@ -12,7 +12,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-! # Localization triangle for normalized strict coefficient towers
 
-Source: Stacks 09AH and 09BM.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AH, 09BM
 -/
 
 @[expose] public noncomputable section

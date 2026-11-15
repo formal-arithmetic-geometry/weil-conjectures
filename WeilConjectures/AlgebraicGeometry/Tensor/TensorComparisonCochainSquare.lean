@@ -108,7 +108,9 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemCochainTensorReduction
 
 /-! # Cochain compatibility of four normalized tensor models
 
-Source: Stacks 07A4.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -167,8 +169,7 @@ variable {C₀ C₁ C₂ C₃ : Type c}
 include ho in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Compatibility of four ordinary tensor comparisons implies compatibility of
-these comparisons on total tensor cochain complexes.
-Source: Stacks 07A4, the signed total comparison. -/
+these comparisons on total tensor cochain complexes. -/
 theorem tensorComparisonCochainSquare
     (P Q : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ) :
     tG.chain ((F.mapHomologicalComplex (.up ℤ)).obj P)

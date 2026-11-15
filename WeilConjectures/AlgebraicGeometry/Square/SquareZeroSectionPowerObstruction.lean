@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Square-zero section-power obstruction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -29,10 +31,7 @@ universe u
 
 /-- A section has a quasi-coherent degree-one obstruction on the closed subscheme.
 If a tensor power of the section kills it, the next power lifts. No affine-open
-hypothesis is needed to construct the obstruction or establish this implication.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1), and Cohomology,
-Lemma 0B8S. -/
+hypothesis is needed to construct the obstruction or establish this implication. -/
 theorem exists_square_zero_section_power_obstruction
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j]

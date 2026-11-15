@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Flat scalar-extension coordinates for a single-module comparison
 
-Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and relative Mayer--Vietoris
-induction.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A1D, 0DJ9
 -/
 
 @[expose] public section
@@ -29,10 +30,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Flat scalar-extension coordinates for the canonical comparison at one base point.
-
-Source: Stacks Project, Tag 0A1D, specialized to the structure sheaf and M[0], and Tag 0DJ9, affine
-calculation and relative Mayer--Vietoris induction. -/
+/-- Flat scalar-extension coordinates for the canonical comparison at one base point: the
+stalk at `a` of the degree-`n` homology of the standard base change map factors through a
+bounded-above complex `P` of flat modules over the stalk of `B` at `g a` and a left-derived
+scalar extension `LF`. -/
 theorem exists_standardSingle_stalk_flat_counit_model
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A) :

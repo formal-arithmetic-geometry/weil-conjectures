@@ -11,7 +11,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-!
 # Tensor compatibility of cochain horizontal reduction adjoints
 
-Source: Zheng Construction 4.1; Stacks 03EK, 06YN, 07A4.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 06YN, 07A4
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +35,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   (J : GrothendieckTopology C) (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- The degreewise ordinary horizontal adjoints form a cochain morphism.
-Source: Zheng Construction 4.1; Stacks 06YN. -/
+/-- The degreewise ordinary horizontal adjoints form a cochain morphism. -/
 def cochainReduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj
@@ -58,8 +61,7 @@ private theorem cochainReduction_f (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : 
     (cochainReduction.{c, v, r} J B τ A h P).f k =
       ordinaryReduction.{c, v, r} J B τ A h (P.X k) := rfl
 
-/-- The degreewise construction agrees with the induced cochain adjunction.
-Source: Stacks 06YN. -/
+/-- The degreewise construction agrees with the induced cochain adjunction. -/
 theorem cochainReduction_eq_transpose (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     cochainReduction.{c, v, r} J B τ A h P =
@@ -150,8 +152,7 @@ private theorem cochainReduction_summand_paste {D E : Type*} [Category D] [Categ
 
 set_option backward.isDefEq.respectTransparency true in
 -- The summand calculation compares three dependent ringed module categories.
-/-- Cochain reduction commutes with the normalized total tensor comparisons.
-Source: Zheng Construction 4.1; Stacks 06YN, 07A4. -/
+/-- Cochain reduction commutes with the normalized total tensor comparisons. -/
 theorem cochain_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     (A.scalarTensorModel h).chain

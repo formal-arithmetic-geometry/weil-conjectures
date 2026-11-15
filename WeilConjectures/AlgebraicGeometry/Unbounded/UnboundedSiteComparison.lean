@@ -15,7 +15,7 @@ set_option autoImplicit false
 /-!
 # Unbounded comparison on the small etale and pro-etale sites
 
-The theorem states exactness, full faithfulness, and arbitrary small-coproduct preservation
+This file proves exactness, full faithfulness, and arbitrary small-coproduct preservation
 of the canonical finite-coefficient comparison on unbounded derived categories.
 -/
 
@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- For a finite or algebraically closed field and a finite primary coefficient ring, the
 termwise comparison from the etale to the pro-etale module derived category is exact,
-fully faithful, and preserves arbitrary small direct sums.
--/
+fully faithful, and preserves arbitrary small direct sums. -/
 theorem finiteCoefficientDerivedComparison_fullyFaithful
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     {ℓ : ℕ} [Fact ℓ.Prime]

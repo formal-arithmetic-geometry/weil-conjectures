@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 
 /-! # Degree-one section compatibility for affine symmetric Proj comparisons
 
-Source: Stacks Project, Constructions, Tags 01NR, 01OB and 01N2.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01OB, 01N2
 -/
 
 @[expose] public section
@@ -250,7 +252,8 @@ private theorem comparison_of_normalized_sections {P X Y : Scheme.{u}}
   refine (congrArg (fun s ↦ qU.app O (sectionAt jU L WU O le_rfl s)) hs.symm).trans ?_
   exact (congrArg (qU.app O) (sectionAt_self jU L WU sU)).trans hgU
 
-/-- A normalized generator equation, stated over arbitrary schemes. -/
+/-- A normalized generator equation, stated over arbitrary schemes so that specialization
+keeps the pushforward section types abstract. -/
 private def moduleSectionEquation {S P X : Scheme.{u}} (p : P ⟶ S) (j : X ⟶ P)
     (E : S.Modules) (L : P.Modules) (N : X.Modules)
     (σ : E ⟶ (pushforward p).obj L)
@@ -404,7 +407,7 @@ private theorem compatibility_on_generator
   exact H.trans hu'
 
 /-- The affine comparison carries every normalized degree-one section to its
-restriction. Source: Stacks, Tags 01NR, 01OB and 01N2. -/
+restriction. -/
 theorem section_compatibility_of_affine_comparison
     {S : Scheme.{u}} (E : S.Modules) [E.IsQuasicoherent]
     (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)

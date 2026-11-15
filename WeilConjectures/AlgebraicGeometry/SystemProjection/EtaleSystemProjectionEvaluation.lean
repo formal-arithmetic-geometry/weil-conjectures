@@ -12,7 +12,11 @@ import WeilConjectures.CategoryTheory.Adjunction.MateCube
 
 /-! # Evaluation of the normalized system scalar mate
 
-Source: Zheng, Constructions 4.1 and 5.14--5.15, Lemma 5.16; Stacks Tag 0GL6.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GL6
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Constructions 4.1 and 5.14--5.15, Lemma 5.16
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale.SystemProjection
 
-/-- Evaluation of the system coefficient mate is the proper/open projection map.
-Source: Zheng Lemma 5.16; Stacks Tag 0GL6. -/
+/-- Evaluation of the system coefficient mate is the published proper/open map. -/
 theorem etaleSystemProjection_evaluation
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l) :
     (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)

@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 /-!
 # Reflection of higher-direct-image vanishing under restriction of coefficients
 
-Source: Stacks Project, Tag 03FD and Tag 0D6J.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 0D6J
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Restriction of scalars detects vanishing of a higher direct image.
-
-Source: Stacks Project, Tags 03FD and 0D6J. -/
+/-- Restriction of scalars detects vanishing of a higher direct image. -/
 theorem isZero_higherDirectImage_restrictScalars_iff
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]

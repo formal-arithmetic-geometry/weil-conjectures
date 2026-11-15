@@ -29,11 +29,23 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover
 /-!
 # Centred affine coordinates for a smooth section
 
-Source: Stacks Tags 054L, 024T, 067U, 00LN and 0633.
-
 The chart witness packages the affine neighbourhoods, the actual etale map and its
 coordinate functions. Its conormal frame and monomial formulas use the published
 conormal algebra and symmetric comparison, including their restriction maps.
+
+## Implementation details
+
+In `Chart`, `T` and `U` are affine opens of the original schemes. The containment `mapsInto`
+identifies `U` with an open in the base change to `T`, and `sectionPreimage` says that its
+intersection with the section is exactly `T`. The Cartesian square `zeroFiber` specifies the
+scheme-theoretic zero fibre. The coordinate ring map is polynomial evaluation in the actual
+pullbacks of the standard affine-space coordinates. The conormal basis lives on `s ⁻¹ᵁ U`,
+which is the same open as `T`; the monomial formulas are stated on sections of fixed degree
+pieces, so they commute with restrictions.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 054L, 024T, 067U, 00LN, 0633, 0631
 -/
 
 @[expose] public noncomputable section
@@ -46,11 +58,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.SmoothSectionCentredCoordinates
 
-/-- One centred affine chart, with the algebra and monomial conclusions, for the section.
-Here `T` and `U` are affine opens of the original schemes, `U` lies in the base change to
-`T` and meets the section exactly in `T`, and the conormal basis on `s ⁻¹ᵁ U` is sent by the
-canonical comparison to the classes of the coordinate monomials.
-Source: Stacks Tags 054L, 024T, 00LN, 0631--0633. -/
+/-- A centred affine étale chart for the section `s`: affine opens `T ⊆ S` and `U ⊆ V`, an
+étale map `e : U ⟶ 𝔸^d_T` with zero fibre the section, its regular coordinate sequence, and
+a conormal basis whose monomials are the classes of the coordinate monomials. -/
 structure Chart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
     (s : S ⟶ V) [IsClosedImmersion s] where
   T : S.affineOpens
@@ -144,10 +154,8 @@ private theorem algebra_isIso_of_module {S : Scheme.{u}} {A B : S.CommAlgebraShe
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A smooth separated finite-type map with a closed section has a Zariski affine cover
-with centred separated etale coordinates, regular coordinate sequence and the specified
-conormal monomial description. The section is regular of codimension `d`, its conormal
-module is locally free of rank `d`, and its canonical symmetric comparison is invertible.
-Source: Stacks Tags 054L, 024T, 067U, 00LN and 0633. -/
+by centred charts. The section is a regular immersion of codimension `d`, its conormal
+module is locally free of rank `d`, and its canonical symmetric comparison is invertible. -/
 theorem exists_centred_coordinates {V S : Scheme.{u}} [IsNoetherian S]
     (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g]
     [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]

@@ -14,7 +14,9 @@ open CategoryTheory Opposite
 open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.SymmetricProjTautologicalCharts
 open Scheme.Modules CategoryTheory.MonoidalCategory
-/-- A local coefficient factorization implies the degree-two cross relation. -/
+/-- A local coefficient factorization implies the degree-two cross relation.
+This is the sheaf-separatedness and scalar-commutation step, independent of
+Proj charts and therefore strictly simpler than the parent theorem. -/
 theorem cross_tensor_of_local_coefficients_public {S T : Scheme.{u}} (f : T ⟶ S)
     (E : S.Modules) {P Q : T.Modules}
     (q : (tensorPullback f).obj E ⟶ P) (q' : (tensorPullback f).obj E ⟶ Q)

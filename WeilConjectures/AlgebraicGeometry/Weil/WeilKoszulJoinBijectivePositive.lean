@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinGraded
 
 /-! # Positive-degree vanishing for graded exterior multiplication
 
-We prove the positive-degree part of `koszulJoinGraded_bijective`, where source and target
-are zero.
+This file proves the positive-degree part of `koszulJoinGraded_bijective`.
 -/
 
 @[expose] public section

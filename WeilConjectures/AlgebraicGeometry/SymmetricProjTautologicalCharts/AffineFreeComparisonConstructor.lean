@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 # Construct an ordered affine comparison from its chart witnesses
 
 This constructor isolates the conversion to the existing comparison predicate.
-Source: Stacks Project, Constructions, Tags 01OE and 01OB.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB
 -/
 
 @[expose] public section
@@ -45,9 +48,7 @@ private theorem comparisonLogic {α δ ε θ : Type u}
   ⟨a, hp, hq, hr, h, c, hc, ht, d, k, f, hn, hd, hj⟩
 
 /-- The explicit ordered polynomial, twist and relative-chart witnesses give the affine
-comparison predicate with precisely those witnesses.
-
-Source: Stacks Project, Constructions, Tags 01OE and 01OB. -/
+comparison predicate with precisely those witnesses. -/
 theorem affineFreeComparison_mk {S : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅

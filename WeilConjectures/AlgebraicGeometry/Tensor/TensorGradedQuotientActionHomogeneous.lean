@@ -11,7 +11,9 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # Degree support of the quotient action
 
-Source: Stacks Project, Tags 09MS and 0B8S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -24,11 +26,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 noncomputable section
 
-/-- A homogeneous quotient section sends each ideal summand into the summand
-whose degree is increased by the degree of that section. This assertion uses no
-canonical coefficient comparison and no output projection.
-
-Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum; Tag 0B8S. -/
+/-- A homogeneous quotient section of degree `a` sends the degree-`d` ideal summand into the
+degree-`d + a` summand: the given action restricted to `k_d` factors through `k_(d+a)`. -/
 theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]
     (T : TensorGradedPresentation j L) (a d : ℕ)

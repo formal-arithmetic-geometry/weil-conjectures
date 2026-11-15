@@ -11,6 +11,10 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarUnitAb
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarRootAbelianTranspose
 
 /-! # Ordinary scalar association for a fixed integral geometric inverse image
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -52,9 +56,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Balanced scalar association for already constructed integral inverse image.
 The coefficient arrows are specified by their ordinary adjuncts; no derived
-counit or K-flatness condition occurs in the statement.
-
-Source: balanced association of scalar extension (Stacks 03EL). -/
+counit or K-flatness condition occurs in the statement. -/
 theorem ordinaryScalarAssociation_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

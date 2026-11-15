@@ -11,7 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 
 /-! # Projection restriction formulas for the strict-local mate
 
-Source: Stacks Project, Tag 03Q9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q9, 03Q8
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -30,8 +32,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived neighbourhood sections identify with stage hypercohomology, compatibly
-with transition pullbacks and with projection restriction for the derived mate.
-Source: Stacks, Tags 03Q9 and 03Q8. -/
+with transition pullbacks and with projection restriction for the derived mate. -/
 theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

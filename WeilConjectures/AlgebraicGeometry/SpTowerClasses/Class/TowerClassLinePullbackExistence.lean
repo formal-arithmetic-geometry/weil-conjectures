@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassLinePull
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerOrdinaryUnitEvaluation
 
-/-! # Pullback of the ordinary roots-of-unity line -/
+/-! # Pullback of the ordinary roots-of-unity line
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -67,10 +72,7 @@ private theorem adjoint_evaluation
       (SpTowerShriek.geometry_unit_evaluation l E b g n M) h
 
 set_option linter.unusedVariables false in
-/-- The normalized Tate line is cartesian for the unit-normalized tensor inverse image.
-
-Source: Stacks 03EL and roots base change.
--/
+/-- The normalized Tate line is cartesian for the unit-normalized tensor inverse image. -/
 theorem linePullback_nonempty
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : SpTowerShriek.Geometry l E b f)

@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # Naturality of normalized derived local classes
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -24,8 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry.RingedSpace
 variable {Y : RingedSpace.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]
-/-- Naturality of the normalized derived local class.
-Source: Stacks Project, Cohomology, Tag 0BKJ. -/
+/-- Naturality of the normalized derived local class. -/
 theorem squareLocalClass_naturality (q : ℤ)
     {K L : DerivedCategory (SheafOfModules.{u} (moduleRings Y))} (a : K ⟶ L) :
     (localHypercohomologyPresheaf Y q).map a ≫ topEdgeLocalClass Y q L =

@@ -13,12 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 /-!
 # Composition pasting for strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F.
-
-## Implementation details
-
 The shared constructions live in `StrictTowerCompositionMaps`, so refinement
 independence can be used here without an import cycle.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7J, 0F7C, 0F7D, 0F7F
 -/
 
 @[expose] public section
@@ -919,10 +919,8 @@ private theorem compositionFactor_isIso {A C D E F H : Type*}
 
 /-- Composition pasting is invertible on the stated finite-origin inputs, commutes with
 all compatible proper refinements, and satisfies vertical interchange under arbitrary
-base change. The latter two are equalities of natural transformations on the whole derived
-strict-tower categories.
-
-Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F. -/
+base change. The latter two clauses are equalities of natural transformations on the
+whole derived strict-tower categories. -/
 theorem compositionPastingCoherence :
     (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
       [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -984,8 +982,7 @@ private theorem refinementFactor_isIso {A C D E : Type*}
   dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   infer_instance
 
-/-- Both boundaries of the refinement square are invertible on finite-origin objects.
-Source: Stacks, Tag 0F7J, choice independence. -/
+/-- Both boundaries of the refinement square are invertible on finite-origin objects. -/
 theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
@@ -1016,8 +1013,7 @@ theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y �
   exact ⟨hc, IsIso.of_isIso_comp_right _ ((compositionD B T₁).app M)⟩
 
 /-- The horizontal and hf comparisons from a common refining compatible tower, on a
-finite-origin input, in right-to-left notation H₂⁻¹H₁ and C₂⁻¹C₁.
-Source: Stacks, Tag 0F7J, common refinements. -/
+finite-origin input. In right-to-left composition order they are H₂⁻¹H₁ and C₂⁻¹C₁. -/
 noncomputable def compositionCommonComparison
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

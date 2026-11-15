@@ -11,6 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree
 import all WeilConjectures.AlgebraicGeometry.Tate.TateInverseLimitBaseChangeSupplement
 
 /-! # Universal property of the finite Tate line
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -84,8 +88,7 @@ private def forgetHomEquiv (T : Scheme.{u}) (k : ℕ) (hk : 0 < k)
   left_inv f := by ext U x; rfl
   right_inv f := by ext U x; rfl
 
-/-- The finite Tate line represents additive maps out of the finite roots sheaf.
-Source: finite coefficient extension, and Stacks 03EK. -/
+/-- The finite Tate line represents additive maps out of the finite roots sheaf. -/
 theorem finiteTateLine_universal (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] (n : ℕ) (a : ZMod (l ^ (n + 1)) →+* B) :
     ∃ Ψ : ∀ N : SheafOfModules.{u + 1}

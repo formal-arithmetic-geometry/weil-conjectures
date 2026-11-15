@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 /-! # Coordinate compatibility for the ordered twist line
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -46,10 +48,7 @@ private theorem hom_ext_on_affine_base {S X : Scheme.{u}} (p : X ⟶ S)
         congrArg (fun k ↦ adj.unit.app M ≫ (Scheme.Modules.pushforward (p ⁻¹ᵁ V.1).ι).map k) (h V)
       _ = g ≫ adj.unit.app N := (adj.unit.naturality g).symm
 
-/-- An affinely normalized ordered twist comparison preserves coordinates globally.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
--/
+/-- An affinely normalized ordered twist comparison preserves coordinates globally. -/
 theorem ordered_twist_coordinate_compatibility (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)

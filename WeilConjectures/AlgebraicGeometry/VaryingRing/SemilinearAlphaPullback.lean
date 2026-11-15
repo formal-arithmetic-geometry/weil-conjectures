@@ -14,18 +14,17 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearPullbackCubeCoher
 /-!
 # Pullback compatibility of the intrinsic semilinear alpha
 
-Source: Stacks Project, Tag 0F7F (alpha-level open case), extended to arbitrary strict
-semilinear systems.
-
-The pullback cube for the semilinear alpha commutes on ordinary systems, and hence, after
-exact localization, on unbounded derived systems, before any proper direct-image mate.
+This file proves that the intrinsic semilinear alpha comparison is compatible with pullback:
+first the cube on ordinary systems, then its exact localization, which is the derived cube
+prior to taking any proper direct-image mate.
 
 ## Implementation details
 
-The ordinary cube is proved by factoring through `T = V ×_Z W`, where the canonical lift is
-clopen: on the complement the common target is zero, on the image both paths restrict to the
-inverse open unit, and sheaf uniqueness on this disjoint cover concludes. The derived statement
-follows by applying the ordinary transformations degreewise and localizing.
+The auxiliary isomorphisms only localize the dependency's specified ordinary comparisons.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7F, 09AE, 07A7
 -/
 
 @[expose] public noncomputable section
@@ -365,8 +364,8 @@ private theorem localize_cube_functors
     (ExactFunctor.of Df)
     al0 al₁0 bi0 bk0 gp0 gr0 hOrd M
 
-/-- Exact localization of the specified unit-normalized open comparison.
-Source: Stacks, Tags 09AE and 0F7F. -/
+/-- Exact localization of the specified unit-normalized open comparison `moduleBeta`, with
+the standard composition isomorphisms. -/
 def alphaPullbackBeta {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -375,10 +374,8 @@ def alphaPullbackBeta {U' U X' X : Scheme.{u}}
     Functor.mapDerivedCategoryNatIso (moduleBeta R φ a j' j g h hsq) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Exact localization of the specified inverse-image square compositor.
-Source: Stacks, Tags 07A7 and 0F7F.
-The square comparison is induced by moduleGComp, hence by the section-normalized
-ordinary direct-image comparison, with its prescribed adjunction units. -/
+/-- Exact localization of the specified inverse-image square compositor, induced by
+`moduleGComp`. -/
 def alphaPullbackSquareG {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     (h : k ≫ p = r ≫ i) : G R φ i ⋙ G R φ r ≅ G R φ p ⋙ G R φ k :=
@@ -458,8 +455,7 @@ private theorem square_inv_localized {V W S T : Scheme.{u}}
         (moduleSquareG R φ k r p i h).inv := by
   exact (localizedArrow_iso_inv _ _ _ _ _).symm
 
-/-- The pullback cube already commutes on ordinary semilinear systems.
-Source: Stacks, Tag 0F7F, alpha-level open case. -/
+/-- The pullback cube already commutes on ordinary semilinear systems. -/
 theorem moduleAlpha_baseChange
     {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}
     (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)
@@ -524,8 +520,7 @@ theorem moduleAlpha_baseChange
       w w₁ wk wi wp wr ((extension R φ i).obj M))
 
 /-- The two displayed alpha cube paths agree after exact localization, on every
-unbounded derived system, prior to taking any proper direct-image mate.
-Source: Stacks, Tag 0F7F, alpha-level open case. -/
+unbounded derived system, prior to taking any proper direct-image mate. -/
 theorem alpha_baseChange
     {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}
     (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)

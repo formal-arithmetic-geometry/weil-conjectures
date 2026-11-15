@@ -23,9 +23,14 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedExchangeModuleTermwiseSu
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
-# Unbounded proper/open AdjunctionNormalization
+# Unbounded proper/open adjunction normalization
 
-Source: Stacks Project, Tags 0F7B.
+This file shows that proper/open comparisons normalized on K-injective representatives
+satisfy the adjunction normalization, for unbounded complexes.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7B
 -/
 
 @[expose] public section
@@ -310,9 +315,7 @@ private lemma iso_of_normalization
     change gamma.hom.app X = (b.homEquiv _ _).symm (b.homEquiv _ _ (gamma.hom.app X))
     exact ((b.homEquiv _ _).symm_apply_apply (gamma.hom.app X)).symm
 
-/-- Adjunction normalization of comparisons normalized on K-injective representatives.
-Source: Stacks Project, Tags 0F7B.
--/
+/-- Adjunction normalization of comparisons normalized on K-injective representatives. -/
 theorem unboundedProperOpenAdjunctionNormalization_of_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}

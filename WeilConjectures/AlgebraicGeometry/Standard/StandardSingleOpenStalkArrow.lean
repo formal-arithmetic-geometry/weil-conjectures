@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local comparison factors
 
-Source: Stacks Project, perfect.tex, Tags 0DJ7 and 0DJ9; cohomology.tex, Tags 06YB and 0D5S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ7, 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -151,8 +153,8 @@ private theorem transportArrow
   simp only [G.map_comp, Category.assoc, ← G.map_comp_assoc, Iso.hom_inv_id,
     G.map_id, Category.id_comp]
 
-/-- Restriction of the canonical single-module base-change arrow to target opens,
-then transport of its stalk back to the original local ring. -/
+/-- Restriction of the canonical single-module base-change arrow to target opens, then
+transport of its degree-`n` homology stalk back to the original local ring at `a`. -/
 theorem standardSingle_open_stalk_arrow
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) (g : A ⟶ B) (a : A)

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
 
 /-! # Open restriction of the canonical single-module derived arrow
 
-Source: Stacks Project, Tags 08HY, 0DJ9 and 08FE.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08HY, 0DJ9, 08FE
 -/
 
 @[expose] public section
@@ -173,7 +175,9 @@ private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     hε hr (Scheme.single_map_normalize f M) (Scheme.single_map_normalize f N)
 
 -- The coefficient transports compare dependent derived-category witnesses.
-/-- The derived arrow square before taking homology or stalks. -/
+/-- The derived arrow square before taking homology or stalks: restricting the canonical
+single-module derived base change arrow to `V` agrees, up to isomorphisms `s` and `t`, with
+the arrow for the restrictions of `p` and `M` over `S`. -/
 theorem standardSingle_open_derived_arrow
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B)
     (S : B.Opens) (V : A.Opens) (hVS : V ≤ g ⁻¹ᵁ S) :

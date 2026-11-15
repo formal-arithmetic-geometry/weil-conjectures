@@ -19,7 +19,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProp
 
 /-! # The coefficient comparison for the clopen alpha
 
-Source: Stacks Project, Tags 03DA, 099R, 09AF and 07A7.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DA, 099R, 09AF, 07A7
 -/
 
 @[expose] public noncomputable section
@@ -36,14 +38,13 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]
   [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
 
-/-- The ordinary inverse pullback comparison, with its specified inverse.
-Source: Stacks Tags 03DA and 099R. -/
+/-- The ordinary inverse pullback comparison, with its specified inverse. -/
 def hPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     H B Y Λ φ ⋙ modulePullback B f ≅
       Etale.upperStar (ModuleCat.{u + 1} Λ) f ⋙ H B X Λ φ :=
   @asIso _ _ _ _ (hPullbackInv B f Λ φ) (hPullbackInv_isIso B f Λ φ)
 
-/-- Exact descent of the inverse pullback comparison. Source: Stacks Tags 03DA and 07A7. -/
+/-- Exact descent of the inverse pullback comparison. -/
 def hPullbackPlus {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (H B Y Λ φ).mapDerivedCategoryPlus ⋙ (modulePullback B f).mapDerivedCategoryPlus ≅
       (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus ⋙
@@ -53,7 +54,7 @@ def hPullbackPlus {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (hPullbackIso B Λ φ f) ≪≫
     Functor.mapDerivedCategoryPlusCompIso _ _
 
-/-- Exact descent of the forward extension-by-zero comparison. Source: Stacks Tag 09AF. -/
+/-- Exact descent of the forward extension-by-zero comparison. -/
 def hOpenPlus {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus ⋙
         (H B X Λ φ).mapDerivedCategoryPlus ≅
@@ -864,9 +865,7 @@ private lemma fcTransport
 
 attribute [local irreducible] hOpen hPullbackIso singleAlpha
 
-/-- Coefficient realization preserves the clopen alpha before taking proper mates.
-Source: Stacks Project, proetale.tex Tags 099R and 09AF, sites-modules.tex Tag 03DA, and
-sites-cohomology.tex Tag 07A7. -/
+/-- Coefficient realization preserves the clopen alpha before taking proper mates. -/
 theorem finiteCoefficientClopenAlpha
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

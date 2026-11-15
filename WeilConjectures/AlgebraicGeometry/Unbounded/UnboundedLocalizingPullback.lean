@@ -28,15 +28,13 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Inverse image on localizing categories
 
-The restriction uses the ordinary unbounded derived module-object categories and the
-constant-scalar-model definition of constructibility. No derived completion is imposed.
+This file proves that exact inverse image preserves small sums, bounded constructible
+finite-Tor objects, and their localizing closure.
 
 ## Implementation details
 
-Preservation of coproducts indexed in the larger universe is reduced to small coproducts by
-embedding the nonzero support of a coproduct into its endomorphisms via coordinate idempotents.
-Finite Tor amplitude is preserved by representing objects by bounded flat complexes
-(`DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`).
+The restriction uses the ordinary unbounded derived module-object categories and the
+constant-scalar-model definition of constructibility. No derived completion is imposed.
 -/
 
 @[expose] public noncomputable section

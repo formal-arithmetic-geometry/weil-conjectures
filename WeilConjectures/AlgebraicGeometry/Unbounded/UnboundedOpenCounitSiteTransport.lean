@@ -45,16 +45,19 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
 set_option linter.privateModule false
 
 /-!
-# Unbounded open adjunctions and site-comparison counits
-
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF.
+# Actual unbounded open adjunctions and site-comparison counits
 
 The sheaf adjunctions are the specified Kan-extension/sheafification adjunctions.
-`Adjunction.mapHomologicalComplex` gives their degreewise units and counits,
+`Adjunction.mapHomologicalComplex` gives their actual degreewise units and counits,
 `Adjunction.mapHomotopyCategory` descends them to homotopy categories, and
 `Adjunction.mapDerivedCategoryAdjunction` gives their unbounded derived adjunctions.
-Its normalization on localized representatives is
-`Adjunction.mapDerivedCategoryAdjunction_unit_app_Qh_obj` and its counit counterpart.
+Its normalization on localized representatives is recorded in the imported
+`Adjunction.mapDerivedCategoryAdjunction_unit_app_Qh_obj` and counit counterpart.
+Thus no independent adjunction or comparison is selected here.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03DJ, 09AF
 -/
 
 @[expose] public section

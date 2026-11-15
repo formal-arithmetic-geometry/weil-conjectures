@@ -34,7 +34,10 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictOrdinar
 
 /-! # Constant-section geometric coordinates on strict ell-power systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section

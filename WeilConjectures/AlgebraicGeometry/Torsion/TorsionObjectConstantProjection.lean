@@ -22,13 +22,21 @@ import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 /-!
 # Constant-module projection for bounded torsion objects
 
-Source: Stacks Project, Tag 0F12, relative fixed-exponent extension; and the docstring of
-`torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing` in
-`WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage`.
+This file proves that the derived projection map of a separated morphism of finite type
+`k`-schemes is invertible at a constant module in degree zero, for an object of bounded
+torsion exponent.
 
-The constant-module projection map is invertible for bounded torsion objects. Its target
-is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant inverse-image isomorphism.
-The statement concerns the uncompleted tensor in the ordinary unbounded derived category.
+## Implementation details
+
+The map is the existing counit mate `rightDerivedLowerStarProjectionMap`, a natural
+transformation of bifunctors, restricted along the constant-sheaf functor and the degree-zero
+embedding. Its target is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant
+inverse-image isomorphism. The statement concerns the uncompleted tensor in the ordinary
+unbounded derived category.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F10, 0F12
 -/
 
 @[expose] public section
@@ -43,11 +51,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The constant-module projection map is invertible for a bounded torsion object of finite
-Tor amplitude over Noetherian coefficients, with no finiteness or flatness condition on the module.
-
-Source: Stacks Project, Tag 0F12.
--/
+/-- The constant-module projection map is invertible for an object `E` killed by a
+positive integer `N`, over Noetherian coefficients and for an arbitrary module `M`. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     (k : Type u) [Field k] {X Y : Scheme.{u}}

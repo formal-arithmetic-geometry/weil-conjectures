@@ -38,7 +38,8 @@ attribute [local instance 4000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheaf
 /-- Towers of abelian sheaves. -/
 abbrev Ab (T : Scheme.{u}) := ℕᵒᵖ ⥤ DiagonalAb T
 
-/-- The abelian structure on towers of abelian sheaves. -/
+/-- The existing abelian structure on towers, shared by name to avoid rebuilding
+its sheafification witnesses. -/
 instance (priority := 3000) towerAbelian (T : Scheme.{u}) : Abelian (Ab T) :=
   inferInstance
 
@@ -89,7 +90,7 @@ def powerUnits (l : ℕ) (T : Scheme.{u}) : Ab T :=
 /-- Identity-transition units. -/
 abbrev units (T : Scheme.{u}) := (constant T).obj (Scheme.proEtaleUnitsSheaf T)
 
-/-- The Kummer exact sequence, with the inclusions and power maps at every positive level. -/
+/-- The exact sequence uses the actual inclusions and power maps at every positive level. -/
 structure Kummer (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) where
   inclusion : roots l T ⟶ powerUnits l T
   inclusion_eq : ∀ n : ℕ,
@@ -99,13 +100,13 @@ structure Kummer (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) where
   zero : inclusion ≫ power = 0
   exact : (ShortComplex.mk inclusion power zero).ShortExact
 
-/-- Ringed sequence-site systems. -/
+/-- Ringed sequence-site systems, with the dependency's exact site universes. -/
 abbrev Systems (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
   SemilinearSections.Systems.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
     (fun n ↦ B.obj (op n)) (fun n ↦ B.map (homOfLE (Nat.le_succ n)).op)
 
-/-- The abelian structure on ringed sequence-site systems. -/
+/-- Share the published abelian witness of the ringed sequence-site category. -/
 instance (priority := 5000) systemsAbelian (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :
     Abelian (Systems T B) :=
@@ -119,7 +120,7 @@ abbrev D (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
   DerivedCategory (Systems T B)
 
-/-- The coefficient module: the unit module over the ring of the coefficient systems. -/
+/-- The actual coefficient module, not a free source-object parameter. -/
 def coefficient (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) : Systems T B :=
   SheafOfModules.unit (SemilinearSections.ring.{u + 1, u, u + 1}
@@ -132,7 +133,8 @@ abbrev unit (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
   (DerivedCategory.singleFunctor (Systems T B) 0).obj (coefficient T B)
 
-/-- The canonical forgetful functor is specified on every section, restriction and map. -/
+/-- The canonical forgetful functor is specified on every section, restriction and map.
+These equalities identify a functor, rather than assuming a free map between categories. -/
 structure Forget (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) where
   F : Systems T B ⥤ Ab T

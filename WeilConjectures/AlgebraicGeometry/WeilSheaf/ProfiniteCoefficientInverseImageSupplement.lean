@@ -38,12 +38,17 @@ public import WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 /-!
 # Inverse image of profinite coefficient rings
 
-Source: Stacks Project, Tags 098T (2), 097N, 04D3 and 01YW.
+This file shows that inverse image on small pro-étale sites is compatible with the limit of
+a countable tower of finite commutative rings.
 
 ## Implementation details
 
 The value universe is `u+1`, as required by sheafification on the small site; finite rings
 in universe `u` are included by their canonical `ULift`.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 098T, 097N, 04D3, 01YW
 -/
 
 @[expose] public section
@@ -116,15 +121,14 @@ private theorem proEtaleConstantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y
   rw [he]
   infer_instance
 
-/-- The constant ring-sheaf tower; index `op n` means the paper's level `n+1`.
-Source: Stacks, Tags 098T (2), 097N and 01YW. -/
+/-- The constant ring-sheaf tower; index `op n` means the paper's level `n+1`. -/
 noncomputable abbrev proEtaleCoefficientTower (X : Scheme.{u})
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :=
   Q ⋙ constantSheaf (ProEt.topology X) CommRingCat.{u + 1}
 
 /-- The specific infinite-limit comparison, without assuming preservation of limits.
 Its data is the universal limit comparison followed by the map induced by the canonical
-constant comparisons. Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW. -/
+constant comparisons. -/
 noncomputable def proEtaleProfiniteComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -239,9 +243,8 @@ private theorem proEtaleConstantComparison_comp {X Y Z : Scheme.{u}}
     (proEtaleConstantDirectImageMap g CommRingCat.{u + 1} A)
     (proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A)
 
-/-- Compatible canonical inverse image of a countable tower of finite commutative rings.
-No surjectivity of transitions is required.
-Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW. -/
+/-- Compatible canonical inverse image of a countable tower of finite commutative rings,
+with no surjectivity assumption on the transition maps. -/
 theorem proEtale_profinite_coefficient_inverse_image
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (Q.obj n)] :
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕᵒᵖ),

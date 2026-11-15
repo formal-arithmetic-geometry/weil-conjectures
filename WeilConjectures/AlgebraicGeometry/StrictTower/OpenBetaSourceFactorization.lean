@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerPullbackSqua
 /-!
 # Source factorization of the normalized inverse open comparison
 
-Source: Stacks, Tags 03DI, 07A7 and 0F7B.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 07A7, 0F7B
 -/
 
 @[expose] public section
@@ -90,9 +92,7 @@ private theorem transpose_conjugate
   simp only [Iso.inv_hom_id_app, Category.comp_id]
 
 /-- Factoring the source open through another open inserts precisely its open
-adjunction counit in the inverse comparison, as transformations on the full derived
-category; no properness or cartesianness is assumed.
-Source: Stacks 03DI, 07A7 and 0F7B. -/
+adjunction counit in the inverse comparison. -/
 theorem betaInv_source_factorization {V P W S T : Scheme.{u}}
     (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S)
     (k : V ⟶ W) (r : V ⟶ S) (i : S ⟶ T) (p : W ⟶ T)

@@ -34,8 +34,9 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
+-- These two private calculations follow TowerChernScalarUnit.
 /-- Ordinary inverse image and balanced scalar association, normalized at the unit
-and root modules; the last two equations hold in the abelian category of A-systems. -/
+and root modules. The last two equations are in the abelian category of A-systems. -/
 theorem tower_chernOrdinaryScalar_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

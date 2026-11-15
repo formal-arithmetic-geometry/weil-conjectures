@@ -12,14 +12,14 @@ import WeilConjectures.AlgebraicGeometry.ObjectSectionsNaturality
 
 /-! # Restriction of the underived stage sections comparison
 
-Source: Stacks Project, Tags 03Q9 and 03S2, restriction of an injective complex.
+## References
 
-## Implementation details
-
-This is the small-model counterpart of the module
-`WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality`;
-the spectrum and structure morphism are those of the small coordinate-ring colimit.
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q9, 03S2
 -/
+
+/- This original-model counterpart follows the proved calculation in
+WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality.
+The spectrum and structure morphism are those of the small coordinate-ring colimit. -/
 
 @[expose] public section
 
@@ -54,9 +54,7 @@ set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The stage comparison intertwines restriction already at the chain level.
-Source: Stacks Project, Tag 03Q9, final paragraph, and Tag 03S2, etale restriction and its left
-adjoint. -/
+/-- The stage comparison intertwines restriction already at the chain level. -/
 theorem smallModel_sourceStageSectionsIso_naturality {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j)

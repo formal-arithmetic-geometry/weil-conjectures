@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarRootAbelianTransposeComponent
 
 /-! # The abelian transpose of the ordinary root comparison
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -24,10 +28,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Kernel restriction and the normalized finite line have the same abelian transpose.
-Neither the existence nor the invertibility of scalar association is asserted here.
-
-Source: Stacks 03EL. -/
+/-- Kernel restriction and the normalized finite line have the same abelian transpose. -/
 theorem scalarRoot_abelianTranspose
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

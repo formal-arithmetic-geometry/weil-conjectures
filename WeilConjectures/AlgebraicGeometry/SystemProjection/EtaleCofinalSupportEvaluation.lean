@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemCofi
 
 /-! # Evaluation of the normalized cofinal support comparison
 
-Source: Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section

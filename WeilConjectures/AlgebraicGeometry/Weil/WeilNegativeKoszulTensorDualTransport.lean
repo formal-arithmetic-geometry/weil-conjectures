@@ -77,7 +77,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 
 /-! # Transport of the one-generator tensor model to the positive dual
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E; Modules on Sites, Tags 03D8, 03EK and 0GMW.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 03D8, 03EK, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -110,10 +112,7 @@ private theorem negativeKoszulDualityAux
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The scalar realization of the tensor of negative rank-one factors is the
-internal dual of the tensor of positive rank-one factors.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite-free dual identification; Modules
-on Sites, Tags 03D8, 03EK and 0GMW, tensor and inverse image of module sheaves. -/
+internal dual of the tensor of positive rank-one factors. -/
 theorem negativeKoszulTensorDualTransport
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

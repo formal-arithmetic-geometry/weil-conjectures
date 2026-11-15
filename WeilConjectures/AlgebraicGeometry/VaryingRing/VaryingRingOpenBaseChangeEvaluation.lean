@@ -13,8 +13,13 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 /-!
 # Coefficient realization of cartesian open base change
 
-Source: the clopen construction in Stacks 0F7B and Zheng, Construction 4.1.
 The comparison concerns only the cartesian lift map, before inserting any clopen projector.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 09AE, 03DI
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -546,8 +551,7 @@ private theorem strictBetaForward (n : ℕ) {V W S T : Scheme.{u}}
   simpa only [Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom] using he
 
 /-- Coefficient evaluation preserves the cartesian open base-change comparison,
-using the specified pullback and open-extension comparisons.
-Source: Stacks 09AE and 03DI; Zheng, Construction 4.1. -/
+using the specified pullback and open-extension comparisons. -/
 theorem openBaseChangeEvaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     (h : r ≫ i = k ≫ p) (hsq : IsPullback r k i p) (n : ℕ) :

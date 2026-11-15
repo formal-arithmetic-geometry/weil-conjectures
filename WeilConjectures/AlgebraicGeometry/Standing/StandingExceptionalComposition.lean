@@ -17,8 +17,18 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 # Composition comparison for the standing exceptional inverse images
 
 The comparison is the transpose of the canonical compact-support compositor followed by the
-standing counit. The relative adjunctions use the canonical comparison; no right adjoint on the
-ambient pro-etale category is assumed.
+standing counit.
+
+## Implementation details
+
+The relative adjunctions use the canonical comparison; no right adjoint on the ambient
+pro-étale category is assumed. The standing Hom bijection is computed from a retained
+étale-origin representative of `K`: conjugate by its isomorphism, then apply the fixed
+compact-support comparison, the comparison adjunction, the étale adjunction and the fully
+faithful comparison pullback, in that order. The transposition order in
+`standingExceptionalComposition` is that of `Adjunction.comp_homEquiv`. Its values are written
+in `rightDerivedUpperShriek` form; they are isomorphic to the `sfFiniteExceptionalAt` values at
+the chosen compactifications, both being right adjoints of étale compact-support pushforward.
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +39,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The standing Hom bijection for `rightDerivedLowerShriek` and `rightDerivedUpperShriek` on
-etale-origin sources, computed using the canonical compact-support comparison. -/
+/-- The standing Hom bijection `(Rf_! K ⟶ L) ≃ (K ⟶ Rf^! L)` for `K` of étale origin and
+`L` bounded below, built from the canonical compact-support comparison. -/
 def standingExceptionalHomEquiv (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -57,8 +67,9 @@ def standingExceptionalHomEquiv (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (((Etale.rightDerivedUpperShriekAdjunction Λ f).homEquiv K' (RνY.obj L)).trans
       (pullback.trans e.homFromEquiv))))
 
-/-- The comparison morphism `(gf)^! L ⟶ f^! g^! L` for the finite-level standing choices,
-in the ambient small pro-etale derived category, written in `rightDerivedUpperShriek` form. -/
+/-- The comparison morphism `(f ≫ g)^! L ⟶ f^! (g^! L)` for the finite-level standing choices:
+the transpose, first through `g` and then through `f`, of the compact-support compositor at
+`(f ≫ g)^! L` followed by the standing counit for `f ≫ g`. -/
 def standingExceptionalComposition (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

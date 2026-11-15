@@ -15,8 +15,9 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 /-!
 # Vanishing of constant coefficients from all finite submodules
 
-Source: Stacks Project, Tag 0739, applied on affine etale objects; Tag 0F08, cyclic-coefficient
-reduction.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0739, 0F08
 -/
 
 @[expose] public section
@@ -44,9 +45,7 @@ private theorem finite_fg_submodule
   simpa using hM x
 
 /-- Higher direct image of a constant bounded torsion module vanishes if it vanishes
-for all finite submodules. The submodule index is allowed to live in the module's universe.
-
-Source: Stacks Project, Tag 0739, and Tag 0F08, cyclic-coefficient reduction. -/
+for all finite submodules. -/
 theorem isZero_higherDirectImage_constant_of_finite_submodules
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]
     (q : ℤ) (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ))

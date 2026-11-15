@@ -15,7 +15,9 @@ set_option linter.privateModule false
 
 /-! # Strict reduction in the chosen coefficient-tower presentation
 
-Source: Stacks Tags 00YV, 06YS, 06YY, 0G7D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 00YV, 06YS, 06YY, 0G7D
 -/
 
 @[expose] public noncomputable section

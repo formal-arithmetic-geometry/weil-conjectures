@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoher
 
 /-! # Pasting a Cartesian affine prefix with a base-change square
 
-We show that a Cartesian affine prefix, after base change, is the prefix of the pasted square.
+The prefix of a Cartesian affine chart after base change is the prefix of the pasted square.
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +38,7 @@ private lemma inverse_paste
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     _ = _ := by rw [hh]
 
-/-- A Cartesian affine prefix after base change is the prefix for the pasted square.
-This concerns arbitrary Cartesian maps, without module frames or a trace counit.
--/
+/-- A Cartesian affine prefix after base change is the prefix for the pasted square. -/
 theorem vectorIntegrationCartesianPrefix_baseChange
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

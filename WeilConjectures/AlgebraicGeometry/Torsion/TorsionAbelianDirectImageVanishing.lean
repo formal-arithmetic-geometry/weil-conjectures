@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 /-!
 # Uniform vanishing for torsion abelian higher direct images
 
-Source: Stacks Project, Tag 0F10, and the separable-closure descent proof in
-`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension`.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F10
 -/
 
 @[expose] public section
@@ -184,7 +185,7 @@ private theorem module_vanishing
       ((Etale.upperStarId (ModuleCat.{u + 1} Λ) X).app F).symm)))
 
 /-- A uniform dimension bound after extension of the ground field bounds higher direct
-images of every torsion abelian sheaf. Source: Stacks Project, Tag 0F10. -/
+images of every torsion abelian sheaf. -/
 theorem isZero_torsion_higherDirectImage_of_forall_field_dimension_le
     {K : Type u} [Field K] {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))

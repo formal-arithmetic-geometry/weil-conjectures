@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingClopenArrowEvalu
 /-!
 # Proper/open projection and pasting for varying coefficient rings
 
-Source: Stacks Project, Tags 0F7B, 0F7C and 0F7D, open-immersion cases.
-
 Every map below lives on the ordinary derived category of strict semilinear systems.
 The ordinary system maps and their two pasting equations are stated separately, so
 these equalities precede evaluation. No invertibility of gamma on arbitrary inputs
@@ -27,6 +25,10 @@ is asserted.
 - `moduleAlpha_vertical`, `moduleAlpha_horizontal`: intrinsic system pasting.
 - `alpha_vertical`, `alpha_horizontal`, `properOpenPasting`: derived pasting laws.
 - `alpha_identities`, `gamma_identities`, `gamma_evaluation`: normalization and evaluation.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7D, 09AE, 07A7
 -/
 
 @[expose] public noncomputable section
@@ -396,8 +398,7 @@ private theorem module_disjoint_extension {U X C : Scheme.{u}}
   apply ((moduleJAdj R φ s).homEquiv _ _).injective
   exact (module_disjoint_direct R φ s c hc _).eq_of_tgt _ _
 
-/-- The system clopen projection is identity on its image and zero on the complement.
-Source: Stacks 09AE. -/
+/-- The system clopen projection is identity on its image and zero on the complement. -/
 theorem modulePi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
     (hc : Set.range c = (Set.range s)ᶜ) (M : Modules R φ X) :
@@ -608,8 +609,7 @@ private theorem ordinaryRealization_jointlyFaithful {X : Scheme.{u}}
   ext x
   exact congrArg (fun a ↦ a.val.app (op U.unop.2) x) (he U.unop.1)
 
-/-- Intrinsic moduleAlpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C -/
+/-- Intrinsic moduleAlpha agrees with vertical pasting on every input. -/
 theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -651,8 +651,7 @@ theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (ha k r₁ p₁ i h₁) (ha i r₂ p₂ j h₂) (ha k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
     (StrictTower.alpha_vertical (R n) k i j r₁ r₂ p₁ p₂ h₁ h₂ h) N
 
-/-- Intrinsic moduleAlpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D -/
+/-- Intrinsic moduleAlpha agrees with horizontal pasting on every input. -/
 theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -696,8 +695,7 @@ theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
 
 end OrdinaryPastingProofs
 
-/-- Intrinsic alpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C -/
+/-- Intrinsic alpha agrees with vertical pasting on every input. -/
 theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -721,8 +719,7 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
       (moduleAlpha R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
       (fun X ↦ moduleAlpha_vertical R φ k i j r₁ r₂ p₁ p₂ h₁ h₂ h X) N
 
-/-- Intrinsic alpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D -/
+/-- Intrinsic alpha agrees with horizontal pasting on every input. -/
 theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -746,8 +743,7 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (moduleAlpha R φ (k ≫ l) r q (i ≫ j) h)
       (fun X ↦ moduleAlpha_horizontal R φ k l i j r p q h₁ h₂ h X) N
 
-/-- Both normalized proper/open mate-pasting laws, as system transformations.
-Source: Stacks 0F7C and 0F7D. -/
+/-- Both normalized proper/open mate-pasting laws, as system transformations. -/
 theorem properOpenPasting :
     (∀ {A C E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
@@ -1236,8 +1232,7 @@ private theorem alpha_second {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
   apply (cancel_epi ((alpha R φ (𝟙 U) p p (𝟙 X) h).app ((J R φ (𝟙 X)).obj M))).1
   simpa only [Functor.map_comp, Category.assoc, Functor.comp_obj] using ht'.symm
 
-/-- Identity normalizations of the intrinsic inverse-image/open-extension arrow.
-Source: Stacks 07A7, 0F7B. -/
+/-- Identity normalizations of the intrinsic inverse-image/open-extension arrow. -/
 theorem alpha_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived R φ U),
@@ -1255,8 +1250,7 @@ theorem alpha_identities :
   · intro U X p _ h M
     exact alpha_second R φ p h M
 
-/-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7. -/
+/-- Identity normalizations of gamma in both directions. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived R φ U),

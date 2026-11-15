@@ -38,7 +38,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Units endpoint in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section
@@ -50,10 +52,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- Units endpoint square for the etale-to-pro-etale pullback.
-
-Source: Stacks Project, Tag 00WX.
--/
+/-- Units endpoint square for the etale-to-pro-etale pullback. -/
 theorem integral_site_pullback_units_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶
       Scheme.proEtaleUnitsSheaf X)

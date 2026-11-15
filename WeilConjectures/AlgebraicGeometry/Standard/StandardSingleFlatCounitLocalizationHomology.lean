@@ -10,6 +10,15 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitLocali
 import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleOpenStalkArrow
 import all WeilConjectures.AlgebraicGeometry.Open.OpenFlatComplexStalkCounit
+
+/-!
+# Stalk homology of the standard base change map via flat counit presentations
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -46,8 +55,10 @@ private theorem mapped_counit_factorization
   simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc, hc]
 
 set_option linter.unusedVariables false in
-/-- Homology identifications and counit compatibility for fixed stalk data.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
+/-- Homology identifications and counit compatibility for fixed stalk data: the stalk at
+`g a` of the chosen presentation complex, transported to the stalk ring of `B`, is bounded
+above, termwise flat, and computes the stalk of the degree-`n` homology of the standard
+base change map through a left-derived scalar extension. -/
 theorem standardSingleFlatCounit_localization_homology
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

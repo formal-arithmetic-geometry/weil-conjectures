@@ -72,12 +72,14 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # The periodic resolution for an exact square-zero divisor
 
-Source: Stacks Project, Tags 064K, 06YQ, 093J and 03CY.
-
 ## Main statements
 
 * `ModuleCat.square_zero_periodic_resolution_tensor`: the rank-one free resolution and self-Tor.
 * `AlgebraicGeometry.Scheme.square_zero_periodic_tensor`: the constant-sheaf calculation.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 064K, 06YQ, 093J, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -301,8 +303,7 @@ private def periodicDerivedTensorIso [HasDerivedCategory.{w} (ModuleCat.{r} R)]
       (-(q : ℤ)) ≪≫
     (tensorRight F).mapIso (P.cochainComplexXIso (-(q : ℤ)) q rfl) ≪≫ λ_ F
 
-/-- The multiplication-by-`t` resolution and its self-tensor calculation.
-Source: Stacks Tag 064K. -/
+/-- The multiplication-by-`t` resolution and its self-tensor calculation. -/
 theorem square_zero_periodic_resolution_tensor (R : Type r) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{r} R)]
     (t : R) (ht : t ^ 2 = 0)

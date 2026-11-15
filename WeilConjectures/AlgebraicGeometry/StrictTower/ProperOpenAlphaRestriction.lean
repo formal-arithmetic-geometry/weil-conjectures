@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 
 /-! # Restriction of the intrinsic proper/open arrow
 
-Source: Stacks, Tags 09BN and 0F7B.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BN, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The inverse of the specified open adjunction unit. It identifies restriction
-of extension by zero with the original module. Source: Stacks, Tag 09BN. -/
+of extension by zero with the original module. -/
 def moduleOpenUnitInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     moduleJ B j ⋙ modulePullback B j ⟶ 𝟭 (Modules B U) :=
   @inv _ _ _ _ (moduleJAdj B j).unit (clopenModule_openUnit_isIso B j)
@@ -407,8 +409,7 @@ private theorem factor_restriction
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Restriction of intrinsic alpha is the canonical square comparison followed
-by the inverse open unit.
-Source: Stacks, Tags 09BN and 0F7B. -/
+by the inverse open unit. -/
 theorem singleAlpha_restriction {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

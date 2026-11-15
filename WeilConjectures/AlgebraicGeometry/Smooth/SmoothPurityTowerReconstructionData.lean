@@ -75,11 +75,13 @@ import all WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTower
 /-!
 # Completed evaluations and the canonical tower reconstruction map
 
-Source: Stacks Project, Tags 0940 and 099P.
-
 The natural index n denotes positive exponent n+1. A Roos triangle specifies the
 actual derived inverse limit and its projections. The comparison at each finite level
 is the tensor-restriction adjoint of that projection, in the finite-coefficient category.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0940, 099P
 -/
 
 @[expose] public noncomputable section
@@ -101,7 +103,8 @@ instance (priority := 4000) spReconstructionSiteSmall : EssentiallySmall.{u + 1}
   essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The fixed-universe abelian structure used by the reconstruction interface.
-Source: Stacks, Modules on Sites. -/
+This specializes the ordinary module-sheaf structure without leaving the coefficient
+universe undetermined. -/
 instance (priority := 3000) spReconstructionModulesAbelian
     (R : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1}) :
     Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
@@ -154,8 +157,8 @@ private theorem spCompletedEllCommProjection_comp {m n : ℕ} (h : m ≤ n) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The unique ordinary transition, fixed on every section by the original strict
-semilinear tower. -/
+/-- There is a unique transition between consecutive completed evaluations that agrees on
+every section with the transition of the strict semilinear tower. -/
 theorem spCompletedTransition_existsUnique (n : ℕ) :
     ∃! τ : spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n,
       ∀ (M : spCoefficientTowers l E T) (U : T.ProEtᵒᵖ)
@@ -212,7 +215,8 @@ theorem spCompletedTransition_existsUnique (n : ℕ) :
     ext M U x
     exact hσ M U x
 
-/-- The original transition with its restricted scalar action. -/
+/-- The original transition with its restricted scalar action, selected only from
+its sectionwise unique characterization. -/
 def spCompletedTransition (n : ℕ) :
     spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n :=
   (spCompletedTransition_existsUnique l E T D n).exists.choose

@@ -15,8 +15,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 /-!
 # Unit normalization of ordinary open realization
 
-Source: Zheng, Constructions 4.1 and 4.22 (4.22.1); Stacks, Tags 03DI and 09AE.
 This is the one-open-adjunction normalization used before taking cartesian mates.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09AE
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Constructions 4.1 and 4.22
 -/
 
 @[expose] public noncomputable section
@@ -341,8 +346,7 @@ private theorem pasteComparison_hom (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : L₂ 
 
 end PasteComparison
 
-/-- The inverse open comparison is the mate of the specified pullback comparison.
-Source: Zheng, Constructions 4.1 and 4.22 (4.22.1); Stacks, Tags 03DI and 09AE. -/
+/-- The inverse open comparison is the mate of the specified pullback comparison. -/
 theorem ordinaryOpen_mate (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     mateEquiv (moduleJAdj R φ j) (StrictTower.jAdj (R n) j)

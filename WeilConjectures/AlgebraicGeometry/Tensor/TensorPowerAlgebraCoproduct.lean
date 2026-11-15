@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.InvertibleSymmetricAlgebraCoprodu
 
 /-! # The algebra coproduct of tensor powers of a line bundle
 
-Source: Stacks Project, Tag 09MS, the direct sum in the ideal short exact sequence.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -29,9 +31,7 @@ universe u
 noncomputable section
 
 /-- Tensor powers of a line bundle have a commutative algebra coproduct, with the
-usual multiplication of homogeneous sections.
-
-Source: Stacks Project, Tag 09MS, the direct sum in the ideal short exact sequence. -/
+usual multiplication of homogeneous sections. -/
 theorem exists_tensorPowerAlgebraCoproduct {X : Scheme.{u}}
     (L : X.Modules) [L.IsInvertible] :
     ∃ (B : X.CommAlgebraSheaf)

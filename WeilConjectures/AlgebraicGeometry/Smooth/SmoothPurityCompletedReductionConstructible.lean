@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionCo
 
 /-! # Constructibility of the completed ell-power reduction
 
-Source: Bhatt--Scholze, Lemma 3.5.7.
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public section

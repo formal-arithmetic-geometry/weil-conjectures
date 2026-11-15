@@ -16,10 +16,12 @@ import Mathlib.RingTheory.GradedAlgebra.TensorProduct
 /-!
 # Canonical affine-basis symmetric algebra
 
-Source: Stacks Project, Constructions, Tag 01OB; Modules, Tags 01CG and 01CL.
-
 The rings, grades and restriction homomorphisms are specified constructions. Restriction
 preserves the grading and is coefficientwise base change for quasi-coherent modules.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OB, 01CG, 01CL, 00DM, 01LN
 -/
 
 @[expose] public section
@@ -34,9 +36,8 @@ namespace AlgebraicGeometry.SymmetricAlgebraSheaf
 
 open scoped TensorProduct
 
-/-- The canonical symmetric grading on an affine section algebra, whose decomposition is the
-inverse of the summation map.
-Source: Stacks Project, Algebra, Section 00DM; Constructions, Tag 01OB. -/
+/-- The canonical symmetric grading on an affine section algebra. The decomposition is the
+unique inverse of the summation map; it chooses no algebra or grading. -/
 noncomputable instance sectionGradedAlgebra {X : Scheme.{u}} (E : X.Modules)
     (U : X.affineOpens) :
     GradedAlgebra (fun n : ℕ ↦ (SymmetricAlgebra.ι Γ(X, U.1)
@@ -46,8 +47,7 @@ noncomputable instance sectionGradedAlgebra {X : Scheme.{u}} (E : X.Modules)
   simp only [Submodule.map_pow, ← LinearMap.range_comp] at h
   exact DirectSum.IsInternal.gradedAlgebra h
 
-/-- Restriction preserves every symmetric degree.
-Source: Stacks Project, Modules, Tag 01CG; Constructions, Tag 01OB. -/
+/-- Restriction preserves every symmetric degree. -/
 theorem restriction_mem_symmetricDegree {X : Scheme.{u}} (E : X.Modules)
     {U V : X.affineOpens} (h : U ≤ V) (n : ℕ)
     (a : sections E (op V.1))
@@ -66,8 +66,7 @@ theorem restriction_mem_symmetricDegree {X : Scheme.{u}} (E : X.Modules)
     rw [map_mul, restriction_ι, pow_succ']
     exact Submodule.mul_mem_mul (LinearMap.mem_range_self _ _) ih
 
-/-- The actual symmetric-algebra restriction, bundled with its degree-preservation proof.
-Source: Stacks Project, Modules, Tag 01CG; Constructions, Tag 01OB. -/
+/-- The actual symmetric-algebra restriction, bundled with its degree-preservation proof. -/
 noncomputable def gradedRestriction {X : Scheme.{u}} (E : X.Modules)
     {U V : X.affineOpens} (h : U ≤ V) :
     (fun n : ℕ ↦ (SymmetricAlgebra.ι Γ(X, V.1) (E.val.obj (op V.1))).range ^ n) →+*ᵍ
@@ -93,8 +92,7 @@ private theorem graded_bijective_degree
     change f (DirectSum.decompose D a n) = (b : B)
     rw [f.map_directSumDecompose, ha, DirectSum.decompose_of_mem_same D' b.property]
 
-/-- Affine restriction is coefficientwise base change in each symmetric degree.
-Source: Stacks Project, Modules, Tags 01CG and 01CL; Constructions, Tag 01LN. -/
+/-- Affine restriction is coefficientwise base change in each symmetric degree. -/
 theorem gradedRestriction_isGradedBaseChangeAlong {X : Scheme.{u}} (E : X.Modules)
     [E.IsQuasicoherent] {U V : X.affineOpens} (h : U ≤ V) :
     (gradedRestriction E h).IsGradedBaseChangeAlong
@@ -142,8 +140,7 @@ theorem gradedRestriction_isGradedBaseChangeAlong {X : Scheme.{u}} (E : X.Module
 
 /-- The canonical affine-basis graded algebra of Sym(E). Its section rings are the
 sectionwise symmetric algebras, its degree-n part is the nth power of the degree-one
-inclusion range, and its restrictions are the canonical symmetric-algebra restrictions.
-Source: Stacks Project, Constructions, Tag 01OB; Modules, Tags 01CG and 01CL. -/
+inclusion range, and its restrictions are the canonical symmetric-algebra restrictions. -/
 noncomputable def gradedAlgebraData {X : Scheme.{u}} (E : X.Modules)
     [E.IsQuasicoherent] : X.GradedAlgebraData where
   obj U := sections E (op U.1)

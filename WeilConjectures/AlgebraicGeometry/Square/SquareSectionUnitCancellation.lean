@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareSectionUnitForward
 
 /-! # Cancelling the normalized square on a cochain section unit
 
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5X.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5T, 0D5X
 -/
 
 @[expose] public section
@@ -30,8 +32,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- A square transports the canonical section unit to the identity on the upstairs
-section complex, on the target injective representative.
-Source: Stacks Project, Tags 0D5T and 0D5X. -/
+section complex. This concerns only the target injective representative: it has no
+source coefficient, coefficient morphism, numerator, denominator or replacement complex. -/
 theorem squareSectionUnit_cancellation {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (G : Z.Modules) (J : InjectiveResolution G) (q : ℕ) (V : S.Opens) :

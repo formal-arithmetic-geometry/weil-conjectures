@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Finite inverse image of the scalar-extended root line, with its tensor formula.
--/
+/-- Finite inverse image of the scalar-extended root line, with its tensor formula. -/
 theorem finiteLineComparisons_exists
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hY : IsUnit (l : Γ(Y, ⊤))) :

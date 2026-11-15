@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleInverseTranspor
 
 /-! # Composition of normalized compact-support coefficient projections
 
-Source: Zheng, Construction 5.15 and Proposition 2.29(2).
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Proposition 2.29(2)
 -/
 
 -- After pruning, this module only keeps private declarations.

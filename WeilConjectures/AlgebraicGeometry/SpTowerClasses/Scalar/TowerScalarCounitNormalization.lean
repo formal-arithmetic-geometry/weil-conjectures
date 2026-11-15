@@ -8,6 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScala
 import Mathlib.Algebra.Homology.Monoidal
 
 /-! # Normalized scalar counit on the coefficient module
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A6
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,8 +63,7 @@ private theorem singleAdjunct
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The normalized ordinary scalar counit on the coefficient module.
-Source: Stacks 06YY and 07A6. -/
+/-- The normalized ordinary scalar counit on the coefficient module. -/
 theorem scalarCounitNormalization {T : Scheme.{u}} (c : Chern l E T)
     (nc : c.Normalized l E)
     (e : c.scalar.model.E.obj (coefficient T (Rrings l T)) ⟶

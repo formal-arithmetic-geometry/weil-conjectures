@@ -15,7 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # Local hypercohomology of a normalized coefficient square
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -97,8 +99,7 @@ private theorem cancel_roof {C : Type*} [Category C]
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Local hypercohomology of a normalized coefficient square.
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X. -/
+/-- Local hypercohomology of a normalized coefficient square. -/
 theorem square_localHypercohomology {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)

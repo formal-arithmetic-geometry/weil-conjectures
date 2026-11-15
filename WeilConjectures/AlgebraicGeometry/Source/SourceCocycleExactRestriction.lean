@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Source.SourceLocalizedCocycleHom
 
 /-! # Restriction of a cocycle through exact strict-local functors
 
-Source: Stacks Project, Tags 03Q9 and 03QO, restriction and exact global sections.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q9, 03QO
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -52,10 +54,8 @@ private theorem exactHomologyProjection
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation and restriction of a single-source cocycle commute with the homology
-comparisons for exact inverse image and exact strict-local sections.
-
-Source: Stacks Project, Tags 03Q9 (restriction of an injective complex) and 03QO (exactness of
-strict-local sections). -/
+comparisons for exact inverse image and exact strict-local sections, at the level of
+complexes and their homology. -/
 private theorem sourceSectionsCocycleRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -198,10 +198,7 @@ private theorem exactHomologyTransport
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A natural transformation from neighbourhood sections to exact strict-local sections
-sends the sections cohomology class of a cocycle to the restriction of its homology section.
-
-Source: Stacks Project, Tags 03Q9 and 03QO, the restriction of an injective complex and commutation
-of exact inverse image and strict-local sections with homology. -/
+sends the sections cohomology class of a cocycle to the restriction of its homology section. -/
 theorem smallModel_sourceCocycleExactRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

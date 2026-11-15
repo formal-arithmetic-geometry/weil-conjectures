@@ -35,7 +35,12 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
-/-! The mate calculation for the integer endpoint square. -/
+/-! The mate calculation used by the integer endpoint square.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -129,9 +134,7 @@ private theorem etale_constant_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).naturality
       (PreservesTerminal.iso f.Etale).inv.op).symm.trans (Category.id_comp _)
 
-/-- The comparison mate for the integer endpoint maps.
-
-Source: Stacks Project, Tag 00WX. -/
+/-- The comparison mate for the integer endpoint maps. -/
 theorem integral_site_pullback_integer_endpoint_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let A := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ))

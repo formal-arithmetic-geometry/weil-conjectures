@@ -16,12 +16,18 @@ import WeilConjectures.Compactification.NagataCompactification
 /-!
 # Compactifiability over a field
 
-Source: Stacks Project, Tags 0ATT, 0F41.
+A separated finite-type morphism between finite-type schemes over a field admits a
+compactification (`hasCompactification_of_finiteType_over_field`).
 
-The defining clause uses the existing `AlgebraicGeometry.Compactification` and
+## Implementation details
+
+Compactifiability is expressed by the existing `AlgebraicGeometry.Compactification` and
 `AlgebraicGeometry.HasCompactification`: a scheme `Z`, an open immersion `i`, a proper
 morphism `g`, and the equality `f = i ≫ g`. No new compactifiability predicate is introduced.
-The statement below records existence of compactifications over a field.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0ATT, 0F41, 01OV, 01T6, 01OY
 -/
 
 @[expose] public section
@@ -32,11 +38,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A separated finite-type morphism between finite-type schemes over a field is compactifiable.
-Source: Stacks Project, Tags 01OV, 01T6, 01OY, 0F41.
-
-Here `HasCompactification f` means that a factorization `f = i ≫ g` exists, with `i` an
-open immersion and `g` proper, as recorded by the existing structure `Compactification f`. -/
+/-- A separated finite-type morphism between finite-type schemes over a field is compactifiable:
+it factors as an open immersion followed by a proper morphism. -/
 theorem hasCompactification_of_finiteType_over_field
     (k : Type u) [Field k] (X S : Scheme.{u})
     [X.Over (Spec (.of k))] [S.Over (Spec (.of k))]

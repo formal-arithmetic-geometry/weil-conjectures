@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilFiniteKoszulTensorModel
 
 /-! # Exterior multiplication for splitting the first Koszul generator
 
-Source: Stacks Project, More on Algebra, Tag 0664.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0664
 -/
 
 @[expose] public noncomputable section
@@ -25,18 +27,15 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (u + 1)} [CommRing A]
 
-/-- Inclusion of the first generator.
-Source: Stacks, Tag 0664. -/
+/-- Inclusion of the first generator. -/
 def koszulHeadInclusion (r : ℕ) : (Fin 1 →₀ A) →ₗ[A] Fin (r + 1) →₀ A :=
   Finsupp.lmapDomain A A (fun _ ↦ 0)
 
-/-- Inclusion of the remaining generators.
-Source: Stacks, Tag 0664. -/
+/-- Inclusion of the remaining generators. -/
 def koszulTailInclusion (r : ℕ) : (Fin r →₀ A) →ₗ[A] Fin (r + 1) →₀ A :=
   Finsupp.lmapDomain A A Fin.succ
 
-/-- Multiplication of two homogeneous exterior elements.
-Source: Stacks, Tag 0664. -/
+/-- Multiplication of two homogeneous exterior elements. -/
 def koszulExteriorMul (s n k : ℕ) :
     (⋀[A]^n (Fin s →₀ A) ⊗[A] ⋀[A]^k (Fin s →₀ A)) →ₗ[A]
       ⋀[A]^(n + k) (Fin s →₀ A) :=
@@ -52,8 +51,7 @@ def koszulExteriorMul (s n k : ℕ) :
     (by intro x y z; apply Subtype.ext; exact mul_add _ _ _)
     (by intro c x y; apply Subtype.ext; exact mul_smul_comm _ _ _))
 
-/-- Wedge multiplication after the head and tail inclusions, in fixed exterior degrees.
-Source: Stacks, Tag 0664. -/
+/-- Wedge multiplication after the head and tail inclusions, in fixed exterior degrees. -/
 @[irreducible] def koszulJoinWedge (r n k : ℕ) :
     (⋀[A]^n (Fin 1 →₀ A) ⊗[A] ⋀[A]^k (Fin r →₀ A)) →ₗ[A]
       ⋀[A]^(n + k) (Fin (r + 1) →₀ A) :=
@@ -61,8 +59,7 @@ Source: Stacks, Tag 0664. -/
     (TensorProduct.map (exteriorPower.map n (koszulHeadInclusion r))
       (exteriorPower.map k (koszulTailInclusion r)))
 
-/-- The multiplication formula on a pure tensor.
-Source: Stacks, Tag 0664. -/
+/-- The multiplication formula on a pure tensor. -/
 theorem koszulJoinWedge_tmul_coe (r n k : ℕ)
     (x : ⋀[A]^n (Fin 1 →₀ A)) (y : ⋀[A]^k (Fin r →₀ A)) :
     (koszulJoinWedge r n k (x ⊗ₜ[A] y) : ExteriorAlgebra A (Fin (r + 1) →₀ A)) =
@@ -71,16 +68,14 @@ theorem koszulJoinWedge_tmul_coe (r n k : ℕ)
   unfold koszulJoinWedge
   rfl
 
-/-- The reindexing isomorphism in a nonpositive degree.
-Source: Stacks, Tag 0664. -/
+/-- The reindexing isomorphism in a nonpositive degree. -/
 def koszulGradedTermIso (r : ℕ) (a : Fin r → A) (m : ℕ) (i : ℤ) (hi : i ≤ 0) :
     (completedKoszulPower (A := A) r a m).X i ≅
       ModuleCat.of A (⋀[A]^((-i).toNat) (Fin r →₀ A)) :=
   (ExteriorAlgebra.koszulComplex A r (fun j ↦ a j ^ (m + 1))).extendXIso
     ComplexShape.embeddingDownNat (by change -(((-i).toNat : ℕ) : ℤ) = i; omega)
 
-/-- Multiplication on one summand of the total tensor, with zero in positive degrees.
-Source: Stacks, Tag 0664. -/
+/-- Multiplication on one summand of the total tensor, with zero in positive degrees. -/
 def koszulJoinSummand (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ)
     (p q i : ℤ) (h : p + q = i) :
     (completedKoszulPower (A := A) 1 (fun _ ↦ a 0) m).X p ⊗
@@ -97,8 +92,7 @@ def koszulJoinSummand (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ)
     else 0
   else 0
 
-/-- Exterior multiplication from the degreewise coproduct defining the total tensor.
-Source: Stacks, Tag 0664. -/
+/-- Exterior multiplication from the degreewise coproduct defining the total tensor. -/
 def koszulJoinGraded (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (i : ℤ) :
     (HomologicalComplex.tensorObj
       (completedKoszulPower (A := A) 1 (fun _ ↦ a 0) m)

@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
 /-!
 # Adjoint of a tensor-projected morphism
 
-The adjoint of the symmetrized projection map after tensoring with a morphism is the tensor
-product of the inverse-image factor with the adjoint of that morphism.
+This file computes the adjoint, under the derived inverse-image/direct-image adjunction, of
+the symmetrized projection map after tensoring with a morphism.
 -/
 
 @[expose] public section
@@ -115,9 +115,11 @@ private theorem tensor_projection_adjunct_general
 attribute [local instance high] SymmetricCategory.toBraidedCategory in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize in
-/-- For an arbitrary scheme morphism and commutative coefficient ring, the adjoint of the
+/--
+For an arbitrary scheme morphism and commutative coefficient ring, the adjoint of the
 symmetrized projection map after tensoring with `a` is tensoring the adjoint of `a` with the
-fixed inverse-image factor. -/
+fixed inverse-image factor.
+-/
 theorem tensorProjectionAdjunct
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K M : DerivedCategoryModule Λ Y) (E : DerivedCategoryModule Λ X)

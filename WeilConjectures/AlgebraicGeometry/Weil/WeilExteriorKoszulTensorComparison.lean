@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulAdjoinGenerator
 
 /-! # The algebraic exterior-to-tensor comparison
 
-Source: Stacks Project, More on Algebra, Tag 0664.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0664
 -/
 
 @[expose] public noncomputable section
@@ -83,9 +85,7 @@ private theorem emptyKoszulIso_hom_f_zero {A : Type (u + 1)} [CommRing A]
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (ModuleCat.of A A)).inv := by
   simp [emptyKoszulIso]
 
-/-- Joining one-generator exterior complexes gives the exterior complex of the list.
-
-Source: Stacks Project, More on Algebra, Tag 0664. -/
+/-- Joining one-generator exterior complexes gives the exterior complex of the list. -/
 theorem exteriorNegativeKoszulTensorComparison
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin r → A) :
     ∃ e : ∀ m : ℕ, completedKoszulPower (A := A) r a m ≅

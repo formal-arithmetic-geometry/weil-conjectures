@@ -106,7 +106,9 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 /-!
 # Cartier pullback of the supported Kummer boundary
 
-Source: Stacks 03PL and 0A45.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 0A45
 -/
 
 @[expose] public noncomputable section
@@ -363,8 +365,7 @@ private theorem boundary_equation (A : Type (u + 1)) [CommRing A]
   simpa only [Ext.comp_assoc] using hext
 
 /-- Cartier pullback preserves the normalized supported Kummer class, with the
-canonical closed exchange and any roots-normalized twist transport.
-Source: Stacks 03PL, 0A45. -/
+canonical closed exchange and any roots-normalized twist transport. -/
 theorem supported_kummer_boundary_pullback (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

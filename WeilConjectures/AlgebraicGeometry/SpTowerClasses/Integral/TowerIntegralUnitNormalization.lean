@@ -20,8 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The coefficient unit comparison is normalized on constant integer sections.
--/
+/-- The coefficient unit comparison is normalized on constant integer sections. -/
 theorem integralInverseSystem_unit_normalization (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

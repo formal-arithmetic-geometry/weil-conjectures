@@ -370,11 +370,8 @@ private theorem abelian_kummer_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
         rfl }
   exact ⟨k, inferInstance, (fun _ ↦ rfl), rfl⟩
 
-/-- Construct inverse image at the integral quotient stage, independently of any
-ordinary or derived extension to the coefficient ring A. The middle Kummer map
-is the pullback of full units, as is the last map required by the data record.
-
-Source: Stacks Project, chapters "Cohomology on Sites" and "Modules on Sites". -/
+/-- Inverse-image data exist at the integral quotient stage, independently of any
+ordinary or derived extension to the coefficient ring A. -/
 theorem integralCoefficientPullback_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

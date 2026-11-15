@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 /-! # Evaluation of a specified normalized Isom presheaf map
 
-Source: Stacks Project, Tags 09BV and 0F63.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BV, 0F63, 03DA, 03ED, 098K
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +26,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Pull a coefficient-normalization arrow to an etale object, using the canonical mate.
-Source: Stacks Tags 03DA and 03ED. -/
+/-- Pull a coefficient-normalization arrow to an etale object, using the canonical mate. -/
 def etaleIsomorphismNormalizationArrow (Y : Scheme.{t})
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R))}
@@ -525,10 +526,7 @@ end EvaluationHelpers
 namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation respects an already specified presheaf map whose generators satisfy
-normalization.
-
-Source: Stacks Project, Tags 09BV and 0F63, with the canonical coefficient mate of Tags 03DA and
-098K. -/
+normalization. -/
 theorem sourceIsomorphism_normalized_presheaf_evaluation
     (Y : Scheme.{t}) {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (C K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R)))

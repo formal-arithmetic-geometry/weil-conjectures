@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Source.SourceDerivedSectionsNaturalityC
 
 /-! # Naturality of the derived Hom to sections comparison
 
-Source: Stacks Project, Tag 03Q8, computation with injective complexes.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q8
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -26,8 +28,7 @@ open CochainComplex CochainComplex.HomComplex
 
 namespace AlgebraicGeometry.Etale
 
-/-- Localizing Hom classes and evaluating the free generator commutes with restriction.
-Source: Stacks Project, Tag 03Q8, injective-complex computation of higher direct images. -/
+/-- Localizing Hom classes and evaluating the free generator commutes with restriction. -/
 theorem smallModel_sourceDerivedSections_naturality
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]

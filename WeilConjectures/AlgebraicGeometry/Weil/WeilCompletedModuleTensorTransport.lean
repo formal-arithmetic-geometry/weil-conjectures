@@ -11,7 +11,9 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedDirectImagePai
 
 /-! # Ordinary tensor comparison for completed coefficient transport
 
-Source: Stacks Project, Modules on Sites, Tags 03DA and 03EK.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DA, 03EK
 -/
 
 @[expose] public noncomputable section
@@ -84,9 +86,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The ordinary module comparison, normalized at the regular module.
-Source: Stacks Project, Modules on Sites, Tags 03DA and 03EK, the balanced bilinear universal
-property and its invariance under an equivalence of ringed sites. -/
+/-- The ordinary module comparison, normalized at the regular module. -/
 theorem completedCechModuleTensorTransport
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients

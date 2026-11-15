@@ -18,7 +18,13 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Filt
 /-!
 # Qcqs higher direct images preserve a fixed set of torsion primes
 
-Source: Stacks Project, Tags 0DDD (1) and 0DDC (1), fixed-prime refinement.
+If every stalk element of an abelian étale sheaf is killed by a positive integer with prime
+divisors in a set `P`, the same holds for its higher direct images along a quasi-compact
+quasi-separated morphism.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DDD, 0DDC
 -/
 
 @[expose] public section
@@ -29,8 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The small divisibility index for the restricted kernel union in Stacks Tag 0DDC.
-The integer 1 is allowed even when P has no prime members. -/
+/-- The positive integers whose prime divisors lie in `P`, used to index the kernels of
+multiplication. The integer 1 is allowed even when `P` has no prime members. -/
 private structure PrimeAnnihilator (P : Set ℕ) where
   val : ℕ
   pos : 0 < val
@@ -48,8 +54,9 @@ private instance (P : Set ℕ) : PartialOrder (PrimeAnnihilator P) where
     congr
     exact Nat.dvd_antisymm hnm hmn
 
-/-- The restricted kernel union from Stacks Tags 0DDC and 0DDD, followed by an
-additive functor preserving small filtered colimits. -/
+/-- If every geometric stalk of `F` is torsion with annihilators having prime divisors in `P`,
+then so is every element of `H.obj F`, for any additive functor `H` preserving filtered
+colimits. -/
 private theorem prime_torsion_of_filtered_functor
     {X : Scheme.{u}} (P : Set ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -156,7 +163,8 @@ private theorem prime_torsion_of_filtered_functor
   change n.val • (H.map (α.app n)) z = 0
   rw [← map_nsmul, hz, map_zero]
 
-/-- Integer-module coefficients carry precisely the data of an abelian sheaf. -/
+/-- The forgetful functor from sheaves of `ULift ℤ`-modules to abelian sheaves is an
+equivalence. -/
 private theorem integerSheafForget_isEquivalence (X : Scheme.{u}) :
     (moduleAbelianForget (ULift.{u + 1} ℤ) X).IsEquivalence := by
   let E := forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}
@@ -174,8 +182,7 @@ private theorem integerSheafForget_isEquivalence (X : Scheme.{u}) :
 
 /-- Higher direct images along a quasi-compact quasi-separated scheme morphism preserve
 stalkwise torsion whose annihilators have prime divisors in a fixed set `P`.
-Only prime members of `P : Set ℕ` are tested, so this encodes an arbitrary set of primes.
-Source: Stacks Project, Tags 0DDD (1) and 0DDC (1), fixed-prime refinement. -/
+Only prime members of `P : Set ℕ` are tested, so this encodes an arbitrary set of primes. -/
 theorem qcqs_higherDirectImages_prime_torsion
     {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f]
     (P : Set ℕ) (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})

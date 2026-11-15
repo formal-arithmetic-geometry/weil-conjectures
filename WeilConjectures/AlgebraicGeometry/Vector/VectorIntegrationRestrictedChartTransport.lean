@@ -49,8 +49,7 @@ private theorem exchange_paste_named
   exact affineLinearExchange_paste A sq₁ sq₂ K
 
 /-- Restricting the prefix for a single frame is exchange for the composite inverse
-chart with its coefficient descended directly from the base. There is no second frame,
-change-of-frame matrix, action or trace counit in this assertion. -/
+chart with its coefficient descended directly from the base. -/
 theorem vectorIntegration_restricted_chart_transport
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 
 /-! # Comparison of normalized quotient lines along a fixed Proj comparison
 
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01NQ, 01OB
 -/
 
 @[expose] public section
@@ -67,10 +69,7 @@ private theorem iso_of_common_frame_coefficients {T : Scheme.{u}}
   exact isoOfIsFreeGenerator_hom_app_smul hU hs ht hc i inf_le_left c
 
 /-- For fixed normalized quotients and a fixed generator-preserving graded pullback
-comparison, the quotient lines agree along its induced relative Proj map.
-
-Source: Stacks Project, Constructions, Tag 01NQ, the degree-one part of theta; Tag 01NR, uniqueness;
-Tag 01OB, the quotient normalization. -/
+comparison, the quotient lines agree along its induced relative Proj map. -/
 theorem quotient_comparison_of_normalized_pullbackData
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

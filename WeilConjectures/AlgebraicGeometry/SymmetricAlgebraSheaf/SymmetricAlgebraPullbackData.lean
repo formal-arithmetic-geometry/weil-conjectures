@@ -15,7 +15,9 @@ import Mathlib.RingTheory.GradedAlgebra.TensorProduct
 
 /-! # Normalized pullback data for symmetric graded algebras
 
-Source: Stacks Project, Modules; Constructions, Tag 01OB.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01OB
 -/
 
 @[expose] public section
@@ -291,9 +293,7 @@ private theorem unitSection_map_res {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modu
     (homOfLE (g.preimage_mono hUV)).op (homOfLE h).op _).symm
 
 /-- Canonical coefficientwise pullback data for the symmetric graded algebra, with its
-specified degree-one generator formula.
-
-Source: Stacks Project, Modules; Constructions, Tag 01OB. -/
+specified degree-one generator formula. -/
 theorem exists_normalized_pullbackData {X S : Scheme.{u}} (g : X ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent] :

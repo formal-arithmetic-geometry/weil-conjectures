@@ -23,9 +23,11 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Transporting the finite Koszul comparison through products and signed fibers
 
-Source: Stacks Project, Tag 0A0E and sites-cohomology.tex Tag 0941.
-
 All product preservation, cone signs and the precise zero-homotopy unit are proved here.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941
 -/
 
 @[expose] public noncomputable section
@@ -395,9 +397,7 @@ attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundT
 attribute [local irreducible] completedCechModulesEquiv
 
 -- Checking the fixed coefficient and site presentations needs extra elaboration steps.
-/-- The published exterior product fiber is the tensor-dual Roos fiber, with its unit.
-
-Source: Stacks Tag 0A0E and sites-cohomology.tex Tag 0941. -/
+/-- The published exterior product fiber is the tensor-dual Roos fiber, with its unit. -/
 theorem completed_fiber_roos_comparison_on_complex
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

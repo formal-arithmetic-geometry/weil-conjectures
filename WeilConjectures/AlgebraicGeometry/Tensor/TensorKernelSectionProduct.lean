@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedPre
 
 /-! # Tensor products with a kernel section
 
-Source: Stacks Project, Tags 08KS and 09MS, the ideal-tensor kernel sequence.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08KS, 09MS
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ private theorem ideal_tensor_shuffle {C : Type*} [Category C] [MonoidalCategory 
   simp only [comp_whiskerRight, Category.assoc]
   monoidal
 
-/-- Multiplying a tensor-power section by a kernel section stays in the next kernel.
-Source: Stacks Project, Tag 08KS (kernel of the closed-immersion unit) and Tag 09MS (the
-tensor-power ideal sequence). -/
+/-- Multiplying a tensor-power section by a kernel section stays in the next kernel. -/
 theorem tensorKernel_section_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (a d : ℕ)
     (U : X.Opens) (s : Γ(L.tensorPow a, U))

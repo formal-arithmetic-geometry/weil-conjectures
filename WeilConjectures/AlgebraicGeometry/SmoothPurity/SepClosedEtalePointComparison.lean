@@ -12,9 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # Comparing etale points after extending a separably closed field
 
-Etale lifts are unchanged by extending a separably closed field.
+## References
 
-Source: Stacks Project, Tag 04FN.
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 04FN
 -/
 
 @[expose] public section

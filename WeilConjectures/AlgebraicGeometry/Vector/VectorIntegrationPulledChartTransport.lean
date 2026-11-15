@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceUnitCompactBase
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoherence
 
 /-! # Pulling a single frame chart along an arbitrary map
-
-We show that an inverse frame chart stays Cartesian after pullback of its base, and restrict
-the prefix of one frame along an arbitrary map to its frame open.
+.
 -/
 
 @[expose] public noncomputable section
@@ -352,9 +350,7 @@ private theorem exchange_paste_named
   subst hz hc
   exact affineLinearExchange_paste A sq₁ sq₂ K
 
-/-- Restrict the prefix of one frame along an arbitrary map to its frame open.
-There is no second frame, linear action, or trace counit in this identity.
--/
+/-- Restrict the prefix of one frame along an arbitrary map to its frame open. -/
 theorem vectorIntegration_pulled_chart_transport
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

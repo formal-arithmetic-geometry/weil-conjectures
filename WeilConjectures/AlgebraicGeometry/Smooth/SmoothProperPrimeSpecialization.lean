@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothLocalAcyclicity
 /-!
 # Prime-to-characteristic specialization for smooth proper morphisms
 
-Source: Stacks Project, Tag 0GKD.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0GKD, 0GJW
 -/
 
 @[expose] public section
@@ -31,11 +33,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Restrict a geometric germ through the strict localization and then take its germ
-at `t`. The first arrow is the uniquely characterized pointed-neighbourhood restriction;
-the last arrow is the canonical inverse-image stalk comparison. Thus this is the
-specified specialization map, with target at the composite point on `S`.
-Source: Stacks Project, Tag 0GKD and the specialization construction preceding Tag 0GJW. -/
+/-- The specialization map on stalks: restrict a geometric germ at `s` through the strict
+localization and take its germ at `t`, viewed as a point of `S`. -/
 noncomputable def strictLocalSpecialization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -58,10 +57,9 @@ noncomputable def strictLocalSpecialization
     (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1}
       (Scheme.strictHenselizationStructuralMap s) t).hom.app G
 
-/-- Prime-to-characteristic specialization invariance, with no finite-stalk or
-relative-dimension condition. Higher direct images here are formed after forgetting
-scalars to abelian sheaves.
-Source: Stacks Project, Tag 0GKD, degree-q consequence. -/
+/-- Prime-to-characteristic specialization for a smooth proper morphism: for a locally
+constant sheaf of `ZMod ell`-modules with `ell` invertible on `S`, the specialization maps on
+higher direct images (formed after forgetting scalars to abelian sheaves) are isomorphisms. -/
 theorem isIso_strictLocalSpecialization_smooth_proper_prime
     {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [IsProper f]
     (ell : ℕ) [Fact ell.Prime]

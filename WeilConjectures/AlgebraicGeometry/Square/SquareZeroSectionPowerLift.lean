@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroSectionPowerObstructio
 
 /-! # Lifting a tensor power of a section across a square-zero immersion
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the boundary
-calculation following it.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -31,10 +32,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 
 /-- Some positive tensor power of the given section lifts, after the tensor-power
-and pullback identifications, as an equality of section morphisms.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the following
-boundary calculation. -/
+and pullback identifications. The conclusion is equality of section morphisms;
+it makes no assertion about nonvanishing loci or affineness upstairs. -/
 theorem exists_section_power_lift_of_square_zero
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] [IsLocallyNoetherian X] [CompactSpace X]

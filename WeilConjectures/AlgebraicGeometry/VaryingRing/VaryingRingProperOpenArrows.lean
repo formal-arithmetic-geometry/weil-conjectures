@@ -15,8 +15,6 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 /-!
 # Intrinsic proper/open arrows for varying rings
 
-Source: Stacks Project, Tags 0F7B, 03DI and 09AE.
-
 All intrinsic maps are first constructed on module systems, then localized termwise.
 Their derived proper/open comparison is the specified ordinary adjunction mate.
 
@@ -25,6 +23,12 @@ Their derived proper/open comparison is the specified ordinary adjunction mate.
 - `moduleBeta`, `modulePi`: the intrinsic open comparison and clopen projection.
 - `moduleAlpha`, `alpha`, `gamma`: the actual system arrow, its localization and mate.
 - `constantGamma`: the arbitrary constant-ring comparison from the strict-tower calculus.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 03DI, 09AE, 07A7, 05RU
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +41,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- The square comparison is uniquely fixed by the explicit compositor formula.
-Source: Stacks, Tag 07A7. -/
+/-- The square comparison is uniquely fixed by the explicit compositor formula. -/
 theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ∃! e : pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k,
@@ -46,15 +49,13 @@ theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V �
         moduleGComp R φ k p := by
   exact ⟨_, rfl, fun _ he ↦ he⟩
 
-/-- Canonical comparison of the two iterated inverse images around any commutative square.
-Source: Stacks, Tag 07A7. -/
+/-- Canonical comparison of the two iterated inverse images around any commutative square. -/
 noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k :=
   (moduleSquareG_existsUnique R φ k r p i h).choose
 
-/-- The square comparison retains exactly its original compositor formula.
-Source: Stacks, Tag 07A7. -/
+/-- The square comparison retains exactly its original compositor formula. -/
 theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     moduleSquareG R φ k r p i h =
@@ -62,8 +63,7 @@ theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
         moduleGComp R φ k p :=
   (moduleSquareG_existsUnique R φ k r p i h).choose_spec.1
 
-/-- The inverse cartesian open comparison is defined by precisely the open-unit transpose.
-Source: Stacks, Tags 09AE and 07A7. -/
+/-- The inverse cartesian open comparison is defined by precisely the open-unit transpose. -/
 noncomputable def moduleBetaInvApp {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -73,7 +73,7 @@ noncomputable def moduleBetaInvApp {U' U X' X : Scheme.{u}}
     ((pull R φ gU).map ((moduleJAdj R φ j).unit.app M) ≫
       (moduleSquareG R φ gU j' j g h).inv.app ((extension R φ j).obj M))
 
-/-- Naturality of the specified open-unit transpose. Source: Stacks, Tag 09AE. -/
+/-- Naturality of the specified open-unit transpose. -/
 theorem moduleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -92,8 +92,7 @@ theorem moduleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
   simp only [Functor.comp_map] at hn ⊢
   rw [hn]
 
-/-- The inverse comparison as a natural transformation with the specified transpose.
-Source: Stacks, Tag 09AE. -/
+/-- The inverse comparison as a natural transformation with the specified transpose. -/
 noncomputable def moduleBetaInv {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g) :
@@ -145,7 +144,7 @@ private theorem derived_open_unit_iso {U X : Scheme.{u}} (j : U ⟶ X)
     exact IsIso.of_isIso_comp_right _ ((evalG R φ j n).hom.app ((J R φ j).obj M))
   exact NatIso.isIso_of_isIso_app _
 
-/-- The open-extension unit is invertible. Source: Stacks, Tags 03DI and 09AE. -/
+/-- The open-extension unit is invertible. -/
 theorem moduleJAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (moduleJAdj R φ j).unit := by
   have := derived_open_unit_iso R φ j
@@ -230,7 +229,7 @@ private theorem ordinary_open_image {U X : Scheme.{u}} (j : U ⟶ X)
     (DerivedCategory.singleFunctorCompHomologyFunctorIso (Modules R φ X) 0).app _⟩
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary rings. Source: Stacks, Tag 09AE -/
+arbitrary rings. -/
 theorem moduleBetaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -257,8 +256,7 @@ theorem moduleBetaInv_isIso {U' U X' X : Scheme.{u}}
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU.
-Source: Stacks, Tag 09AE. -/
+/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU. -/
 noncomputable def moduleBeta {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -267,7 +265,7 @@ noncomputable def moduleBeta {U' U X' X : Scheme.{u}}
     (moduleBetaInv_isIso R φ gU j' j g h hsq)).symm
 
 /-- The canonical map from open extension to direct image is the counit mate of the
-inverse open unit. Source: Stacks, Tags 03DI and 09AE. -/
+inverse open unit. -/
 noncomputable def moduleOpenToP {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     extension R φ j ⟶ push R φ j :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (extension R φ j) (moduleAdj R φ j).unit ≫
@@ -375,8 +373,7 @@ private theorem ordinary_clopen_iso {U X : Scheme.{u}} (j : U ⟶ X)
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft S
       (Functor.isoWhiskerRight e H) ≪≫ h⟩
 
-/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Source: Stacks, Tag 09AE -/
+/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible. -/
 theorem moduleOpenToP_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (moduleOpenToP R φ j) := by
   obtain ⟨e⟩ := ordinary_clopen_iso R φ j
@@ -393,29 +390,26 @@ theorem moduleOpenToP_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- The intrinsic clopen component projection, with no arbitrary splitting choice.
-Source: Stacks, Tag 09AE -/
+/-- The intrinsic clopen component projection, with no arbitrary splitting choice. -/
 noncomputable def modulePi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
     [IsClosedImmersion s] : 𝟭 (Modules R φ X) ⟶ pull R φ s ⋙ extension R φ s :=
   (moduleAdj R φ s).unit ≫ Functor.whiskerLeft (pull R φ s)
     (@inv _ _ _ _ (moduleOpenToP R φ s) (moduleOpenToP_isIso R φ s))
 
-/-- Equality transport for open extension.
-Source: Stacks 03DI. -/
+/-- Open extensions along equal open immersions are equal functors. -/
 theorem moduleJ_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     extension R φ f = extension R φ g := by
   subst g
   rfl
 
-/-- The canonical equality transport for ordinary extension by zero.
-Source: Stacks 03DI. -/
+/-- The canonical equality transport for ordinary extension by zero. -/
 def moduleJCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :=
   eqToIso (moduleJ_congr R φ h)
 
 /-- The normalized non-cartesian open comparison uses moduleBeta and the intrinsic clopen
-projection, followed by the open and pullback compositors. Source: Stacks, Tag 0F7B. -/
+projection, followed by the open and pullback compositors. -/
 noncomputable def moduleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -436,8 +430,7 @@ noncomputable def moduleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((moduleGComp R φ (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
       (eqToIso (congrArg (pull R φ) (pullback.lift_snd k r h))).hom) (extension R φ k)
 
-/-- The intrinsic derived arrow is the localization of the constructed system map.
-Source: Stacks 0F7B; Zheng 4.1. -/
+/-- The intrinsic derived arrow is the localization of the constructed system map. -/
 def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -452,8 +445,7 @@ def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
           DerivedCategory.Q) ≫
       (Functor.mapDerivedCategoryCompIso _ _).inv
 
-/-- The normalized proper/open map is exactly the unit-square-counit mate.
-Source: Stacks 0F7B, 07A7. -/
+/-- The normalized proper/open map is exactly the unit-square-counit mate. -/
 def gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -465,8 +457,7 @@ abbrev constantDerived (B : Type (u + 1)) [CommRing B] (X : Scheme.{u}) :
     DerivedCategory (StrictTower.Modules B X) ⥤ StrictTower.Derived B X :=
   StrictTower.ConstantNormalization.delta B X
 
-/-- Evaluation of this constant tower is canonically the original derived complex.
-Source: Stacks 05RU. -/
+/-- Evaluation of this constant tower is canonically the original derived complex. -/
 def constantEval (B : Type (u + 1)) [CommRing B] (X : Scheme.{u}) :
     constantDerived B X ⋙ StrictTower.ev B X 0 ≅
       𝟭 (DerivedCategory (StrictTower.Modules B X)) :=

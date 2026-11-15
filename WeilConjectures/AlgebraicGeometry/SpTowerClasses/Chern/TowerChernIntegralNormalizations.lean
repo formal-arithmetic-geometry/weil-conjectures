@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 
 /-! # Extract the integral part of normalized Chern data
+
+## Implementation details
+
+The coefficient diagrams are kept as parameters, so that extracting this equation does not
+construct or expand the scalar-unit normalization at concrete coefficients.
 -/
 
 @[expose] public noncomputable section

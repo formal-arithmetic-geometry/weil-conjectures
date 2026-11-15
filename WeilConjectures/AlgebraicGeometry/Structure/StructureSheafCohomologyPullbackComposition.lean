@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import WeilConjectures.AlgebraicGeometry.Structure.StructureSheafCohomologyPullbackCompositionPointwise
 
 /-! Composition law for pullback on structure-sheaf cohomology.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01F7, 01FB
 -/
 
 @[expose] public section
@@ -19,8 +23,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Pullback on structure-sheaf cohomology reverses composition.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7 and Remark 01FB. -/
+/-- Pullback on structure-sheaf cohomology reverses composition. -/
 theorem structureSheafCohomologyPullback_comp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) :
     structureSheafCohomologyPullback (f ≫ g) n =

@@ -105,8 +105,7 @@ private theorem lineScalarSection_natural {T : Scheme.{u}} (c : Chern l E T)
 attribute [local irreducible] lineModule
 
 /-- Evaluation carries the actual tower transition on a unit tensor to the unit tensor
-of the actual roots transition.
--/
+of the actual roots transition. -/
 theorem lineEvaluation_transition_tensor {T : Scheme.{u}} (c : Chern l E T)
     {m n : ℕ} (h : n ≤ m) (U : T.ProEtᵒᵖ)
     (z : (Scheme.proEtaleRootsOfUnitySheaf T (l ^ (m + 1))).obj.obj U) :

@@ -32,8 +32,11 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # Tensor compatibility of the actual semilinear reductions
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 06YS, and the horizontal restriction maps
-of Zheng, Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A4, 06YS
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -465,9 +468,7 @@ private def tensorReductionRight (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward true in
 /-- Actual tensor reduction is the tensor of the two reduction adjoints under
-canonical evaluation and scalar-extension comparisons. No normalization is assumed.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 06YS, applied to the horizontal
-transitions in Zheng, Construction 4.1. -/
+canonical evaluation and scalar-extension comparisons. No normalization is assumed. -/
 theorem tensor_reduction_formula (A : Data.{c, v, r} J B τ)
     (P Q : DS.{c, v, max c v r} J B τ) :
     ∀ {m n : ℕ} (h : n ≤ m),

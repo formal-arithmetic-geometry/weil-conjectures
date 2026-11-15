@@ -12,6 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficie
 
 The records and their normalized projection composition are separated from the
 existence theorem so the construction can be proved in independent stages.
+
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Lemma 5.22
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor SheafOfModules
 namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
-/-- The normalized open and proper faces of a quotient projection square.
-Source: Zheng, Construction 5.15 and Lemma 5.22. -/
+/-- The normalized open and proper faces of a quotient projection square. -/
 structure StrictEtaleQuotientProjection
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
@@ -46,8 +50,7 @@ structure StrictEtaleQuotientProjection
       (mateEquiv (S.properDerived.level m).adjunction (S.properDerived.level n).adjunction
         (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom))
 
-/-- Compose the open and proper quotient faces.
-Source: Zheng, Construction 5.15. -/
+/-- Compose the open and proper quotient faces. -/
 def StrictEtaleQuotientProjection.projection
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}

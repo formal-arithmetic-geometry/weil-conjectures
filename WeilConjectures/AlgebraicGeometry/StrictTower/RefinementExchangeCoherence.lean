@@ -18,11 +18,13 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenCalcul
 /-!
 # Refinement exchange coherence for strict pro-etale towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C and 0F7F.
+`compositionF`, `compositionC` and `compositionE` are the already published canonical
+compactification candidate, refinement comparison and proper/open exchange. The wrappers
+below only supply quasi-compactness and invertibility, not a new choice of any operation.
 
-`compositionF`, `compositionC` and `compositionE` are the canonical compactification
-candidate, refinement comparison and proper/open exchange. The wrappers below supply
-quasi-compactness and invertibility.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7F, 07A7
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -41,8 +43,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The proper-adjunction mate determines the proper/open comparison uniquely.
-Source: Stacks, Tag 07A7. -/
+/-- The proper-adjunction mate determines the proper/open comparison uniquely. -/
 private theorem refinementGamma_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -50,16 +51,14 @@ private theorem refinementGamma_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W
       δ = gamma B k r p i h := by
   exact ⟨_, rfl, fun _ hδ ↦ hδ⟩
 
-/-- The proper/open comparison is exactly the proper-adjunction mate of alpha.
-Source: Stacks, Tags 0F7B and 07A7. -/
+/-- The proper/open comparison is exactly the proper-adjunction mate of alpha. -/
 private noncomputable def refinementGamma {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) : R B r ⋙ J B i ⟶ J B k ⋙ R B p :=
   Classical.choose (refinementGamma_existsUnique B k r p i h)
 
-/-- The normalized comparison is the original proper-adjunction mate.
-Source: Stacks, Tag 07A7. -/
+/-- The normalized comparison is the original proper-adjunction mate. -/
 private theorem refinementGamma_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

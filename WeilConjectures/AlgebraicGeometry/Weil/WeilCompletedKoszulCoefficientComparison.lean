@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilNegativeKoszulTensorDualTransp
 
 /-! # The finite coefficient comparison, before tensoring with an input complex
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, with Modules on Sites, Tags 03DA and 03EK.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 03DA, 03EK, 0664
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The finite exterior coefficient tower is the dual positive tensor tower.
-
-Source: Stacks Project, More on Algebra, Tag 0664, and algebraization.tex, Tag 0A0E. -/
+/-- The finite exterior coefficient tower is the dual positive tensor tower. -/
 theorem completedKoszulCoefficientComparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

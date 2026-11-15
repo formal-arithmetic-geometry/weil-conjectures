@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarUnitAbelianTransposeSection
 
 /-! # The abelian transpose of the coefficient-unit comparison
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The coefficient-unit normalization after forgetting and taking abelian adjuncts.
-There is no scalar-association map or adjunction for d.pull in this assertion.
-
-Source: Stacks 03EL. -/
+The statement involves no scalar-association map or adjunction for `d.pull`. -/
 theorem scalarUnit_abelianTranspose
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

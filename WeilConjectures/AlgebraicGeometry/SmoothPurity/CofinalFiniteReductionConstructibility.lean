@@ -124,11 +124,13 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # Cofinal finite reductions and constructibility
 
-Source: Stacks Tags 0D6D and 0G7E.
-
 Index n means positive exponent n+1. The ordinary and derived tensors below are the
 published universal presentations. Their normalization records the pure-tensor formula,
 K-flat counit calculation, and naturality under commuting coefficient squares.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D6D, 0G7E
 -/
 
 @[expose] public noncomputable section

@@ -80,8 +80,6 @@ import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseIm
 
 /-! # Strict tower exchange and the canonical mate
 
-Source: Stacks Tag 07A7.
-
 The comparison functors are termwise functors on module towers, localized only
 **after** forming the tower category. The strict finite exchange is the
 projection-formula realization in `CompletedTowerCompatibility`. Restriction
@@ -93,6 +91,11 @@ comparisons retain their normalization on ordinary modules and K-injectives.
 * `StrictTowerRingedSquare.exchangeTowerMate`: the canonical termwise adjunction mate.
 * `exchangeCornerB`, `exchangeCornerD`: the specified natural corner comparisons.
 * `strictTowerExchangeMateNormalization`: strict realization and mate equality.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A7, 099M, 03D3, 0D6D, 07A5, 0D6E, 0B56,
+  0E48
 -/
 
 @[expose] public noncomputable section
@@ -200,8 +203,7 @@ private theorem exchangeConstantComparisonComp {X Y Z : Scheme.{t}}
     (proEtaleConstantDirectImageMap g CommRingCat.{t + 1} A)
     (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A)
 
-/-- Constant coefficient identifications agree around the chosen scheme square.
-Source: Stacks 07A7. -/
+/-- Constant coefficient identifications agree around the chosen scheme square. -/
 theorem exchangeConstant_coherent (sq : ChosenCartesianSquare g' f' f g) :
     HEq (proEtaleRingCompositeCoefficients g' f
       (exchangeConstantRing Y A) (exchangeConstantRing X A) (exchangeConstantRing X' A)
@@ -220,8 +222,7 @@ theorem exchangeConstant_coherent (sq : ChosenCartesianSquare g' f' f g) :
     congr_arg_heq (fun u ↦ exchangeConstantIso u A) sq.w
   exact (heq_of_eq (hc g' f)).trans (hw.trans (heq_of_eq (hc f' g).symm))
 
-/-- The constant-coefficient ringed square uses the specific constant-section identifications.
-Source: Stacks 07A7. -/
+/-- The constant-coefficient ringed square uses the specific constant-section identifications. -/
 def exchangeConstantSquare (sq : ChosenCartesianSquare g' f' f g) :
     StrictTowerRingedSquare sq where
   RY := exchangeConstantRing Y A
@@ -234,15 +235,13 @@ def exchangeConstantSquare (sq : ChosenCartesianSquare g' f' f g) :
   cf' := exchangeConstantIso f' A
   coherent := exchangeConstant_coherent sq
 
-/-- The coefficient map sends a constant to its compatible residues in the finite tower.
-Source: Stacks 099M. -/
+/-- The coefficient map sends a constant to its compatible residues in the finite tower. -/
 abbrev exchangeScalar (T : Scheme.{t}) : exchangeConstantRing T A ⟶ d.completedRing T :=
   adicDatumScalar T
     { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
       quotientFinite := d.quotientFinite } ≫ (pbcCompletedComparison T d).hom
 
-/-- The scalar maps commute with the canonical coefficient inverse images.
-Source: Stacks 099M. -/
+/-- The scalar maps commute with the canonical coefficient inverse images. -/
 theorem exchangeScalar_comm {U V : Scheme.{t}} (f : U ⟶ V) :
     (exchangeConstantIso f A).hom ≫ exchangeScalar d U =
       (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map (exchangeScalar d V) ≫
@@ -277,8 +276,7 @@ theorem exchangeScalar_comm {U V : Scheme.{t}} (f : U ⟶ V) :
     ((proEtaleConstantComparison f).naturality
       (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n.unop + 1))))).symm
 
-/-- Termwise restriction changes the scalar action but retains the whole strict diagram.
-Source: Stacks 03D3. -/
+/-- Termwise restriction changes the scalar action but retains the whole strict diagram. -/
 abbrev exchangeTowerModuleRes (T : Scheme.{t}) :
     exchangeTowers T (d.completedRing T) ⥤ exchangeTowers T (exchangeConstantRing T A) :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingRestrictScalars (exchangeScalar d T))
@@ -325,8 +323,7 @@ private theorem exchangeTowerModuleRes_kinjective (T : Scheme.{t}) :
     (E := completedAdicChange T c) (F := proEtaleRingRestrictScalars c) adj
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exactness of restriction on strict diagrams, with all transition maps retained.
-Source: Stacks 03D3. -/
+/-- Exactness of restriction on strict diagrams, with all transition maps retained. -/
 theorem exchangeTowerModuleRes_exact (T : Scheme.{t}) :
     PreservesFiniteLimits (exchangeTowerModuleRes d T) ∧
       PreservesFiniteColimits (exchangeTowerModuleRes d T) := by
@@ -358,27 +355,23 @@ instance exchangeTowerModuleRes_finiteLimits (T : Scheme.{t}) :
 instance exchangeTowerModuleRes_finiteColimits (T : Scheme.{t}) :
     PreservesFiniteColimits (exchangeTowerModuleRes d T) := (exchangeTowerModuleRes_exact d T).2
 
-/-- Exact restriction on derived strict towers.
-Source: Stacks 03D3. -/
+/-- Exact restriction on derived strict towers. -/
 abbrev exchangeTowerRes (T : Scheme.{t}) :
     DerivedCategory (exchangeTowers T (d.completedRing T)) ⥤
       DerivedCategory (exchangeTowers T (exchangeConstantRing T A)) :=
   (exchangeTowerModuleRes d T).mapDerivedCategory
 
-/-- Constant-coefficient inverse image on derived strict towers.
-Source: Stacks 07A7. -/
+/-- Constant-coefficient inverse image on derived strict towers. -/
 abbrev exchangeConstantPull {U V : Scheme.{t}} (f : U ⟶ V) :=
   exchangeTowerPull f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
-/-- Total right derived constant-coefficient direct image on strict towers.
-Source: Stacks 07A7. -/
+/-- Total right derived constant-coefficient direct image on strict towers. -/
 abbrev exchangeConstantPush {U V : Scheme.{t}} (f : U ⟶ V) :=
   exchangeTowerPush f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
-/-- The ordinary scalar-restriction comparison before forming strict diagrams.
-Source: Stacks Tag 0D6D. -/
+/-- The ordinary scalar-restriction comparison before forming strict diagrams. -/
 def exchangeOrdinaryResPull {U V : Scheme.{t}} (f : U ⟶ V) :
     proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
         (d.integralRingIso f) ⋙ proEtaleRingRestrictScalars (exchangeScalar d U) ≅
@@ -396,8 +389,7 @@ def exchangeOrdinaryResPull {U V : Scheme.{t}} (f : U ⟶ V) :
       (exchangeScalar d V) (exchangeScalar d U)
       (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f))).symm
 
-/-- The ordinary restriction/pullback comparison is the termwise normalized module mate.
-Source: Stacks 0D6D. -/
+/-- The ordinary restriction/pullback comparison is the termwise normalized module mate. -/
 def exchangeModuleResPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerModulePull f ⋙ exchangeTowerModuleRes d U ≅
       exchangeTowerModuleRes d V ⋙ exchangeTowerModulePull f
@@ -409,15 +401,13 @@ def exchangeModuleResPull {U V : Scheme.{t}} (f : U ⟶ V) :
       funext n
       exact (exchangeOrdinaryResPull d f).hom.naturality (a.app n))
 
-/-- The derived comparison is exact descent of the ordinary identity on inverse-image sheaves.
-Source: Stacks 0D6D. -/
+/-- The derived comparison is exact descent of the ordinary identity on inverse-image sheaves. -/
 def exchangeResPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerPull f ⋙ exchangeTowerRes d U ≅
       exchangeTowerRes d V ⋙ exchangeConstantPull (A := A) f :=
   Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d f)
 
-/-- The canonical right-derived unit on strict tower complexes, using complex localization.
-Source: Stacks 07A5. -/
+/-- The canonical right-derived unit on strict tower complexes, using complex localization. -/
 def exchangeTowerDerivedUnit {U V : Scheme.{t}} (f : U ⟶ V)
     (R : Sheaf (ProEt.topology V) CommRingCat.{t + 1})
     (S : Sheaf (ProEt.topology U) CommRingCat.{t + 1})
@@ -431,8 +421,7 @@ def exchangeTowerDerivedUnit {U V : Scheme.{t}} (f : U ⟶ V)
       ((HomotopyCategory.quotient _ _).obj C) ≫
     (exchangeTowerPush f R S c).map ((DerivedCategory.quotientCompQhIso _).hom.app C)
 
-/-- Ordinary direct image commutes with restriction by identity on every section and index.
-Source: Stacks 0D6E. -/
+/-- Ordinary direct image commutes with restriction by identity on every section and index. -/
 def exchangeModuleResPush {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerModulePush f ⋙ exchangeTowerModuleRes d V ≅
       exchangeTowerModuleRes d U ⋙ exchangeTowerModulePush f
@@ -444,8 +433,7 @@ def exchangeModuleResPush {U V : Scheme.{t}} (f : U ⟶ V) :
       (exchangeScalar d V) (exchangeScalar d U)
       (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f))
 
-/-- The complex-level unit of a total right derived functor.
-Source: Stacks Tag 07A5. -/
+/-- The complex-level unit of a total right derived functor. -/
 def exchangeDerivedUnit
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
@@ -456,8 +444,7 @@ def exchangeDerivedUnit
     R.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
     R.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app K)
 
-/-- Unit normalization of exact descent of a right-adjoint comparison.
-Source: Stacks Tags 07A5 and 099M. -/
+/-- Unit normalization of exact descent of a right-adjoint comparison. -/
 def ExchangeDerivedPushNormalized
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -480,7 +467,7 @@ def ExchangeDerivedPushNormalized
       exchangeDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K)
 
 /-- Normalization of the direct-image comparison by the universal right-derived units.
-Source: Stacks 0D6E. -/
+It records the identity on the full diagram before deriving, rather than evaluations alone. -/
 def ExchangeResPushNormalized {U V : Scheme.{t}} (f : U ⟶ V)
     (e : d.towerPush f ⋙ exchangeTowerRes d V ≅
       exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f) : Prop :=
@@ -621,8 +608,7 @@ private theorem exchangeModuleResPull_mate {U V : Scheme.{t}} (f : U ⟶ V) :
   exact congrArg (fun z ↦ z.app (M.obj n)) h
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction/direct-image comparison is uniquely determined by the universal units.
-Source: Stacks 0D6E and 099M. -/
+/-- Restriction/direct-image comparison is uniquely determined by the universal units. -/
 theorem exchangeResPush_existsUnique {U V : Scheme.{t}} (f : U ⟶ V) :
     ∃! e : d.towerPush f ⋙ exchangeTowerRes d V ≅
         exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f,
@@ -637,15 +623,13 @@ theorem exchangeResPush_existsUnique {U V : Scheme.{t}} (f : U ⟶ V) :
     (exchangeModuleResPull d f).symm (exchangeModuleResPush d f)
     (exchangeModuleResPull_mate d f)
 
-/-- The specified strict-tower direct-image comparison, with the unit normalization retained.
-Source: Stacks 0D6E. -/
+/-- The specified strict-tower direct-image comparison, with the unit normalization retained. -/
 def exchangeResPush {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerPush f ⋙ exchangeTowerRes d V ≅
       exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f :=
   (exchangeResPush_existsUnique d f).choose
 
-/-- The left strict corner comparison, natural in the complete input tower.
-Source: Stacks 0D6D--0D6E. -/
+/-- The left strict corner comparison, natural in the complete input tower. -/
 def exchangeCornerB {X Y' Y : Scheme.{t}} (f : X ⟶ Y) (g : Y' ⟶ Y) :
     (d.towerPush f ⋙ d.towerPull g) ⋙ exchangeTowerRes d Y' ≅
       exchangeTowerRes d X ⋙
@@ -655,8 +639,7 @@ def exchangeCornerB {X Y' Y : Scheme.{t}} (f : X ⟶ Y) (g : Y' ⟶ Y) :
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (exchangeResPush d f) _ ≪≫ Functor.associator _ _ _
 
-/-- The right strict corner comparison, natural in the complete input tower.
-Source: Stacks 0D6D--0D6E. -/
+/-- The right strict corner comparison, natural in the complete input tower. -/
 def exchangeCornerD {X' X Y' : Scheme.{t}} (g' : X' ⟶ X) (f' : X' ⟶ Y') :
     (d.towerPull g' ⋙ d.towerPush f') ⋙ exchangeTowerRes d Y' ≅
       exchangeTowerRes d X ⋙
@@ -666,27 +649,23 @@ def exchangeCornerD {X' X Y' : Scheme.{t}} (g' : X' ⟶ X) (f' : X' ⟶ Y') :
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (exchangeResPull d g') _ ≪≫ Functor.associator _ _ _
 
-/-- The explicit strict H: inverse pullback/reduction identification followed by h.
-Its source is R(M), its target is B, and its projection factor is the adjunct
-of the ambient counit tensored with the whole quotient diagram.
-Source: Stacks 0B56. -/
+/-- The explicit strict `H`: the inverse pullback/reduction identification followed by
+pullback of the tower projection-formula map. -/
 def exchangeRealizationH (K : d.derived X) :
     (completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K)) ≅
       (d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K)) :=
   ((d.reductionTowerPullbackIso g).symm.app ((d.push f).obj K)) ≪≫
     (d.towerPull g).mapIso (asIso (d.towerProjection f K))
 
-/-- The explicit strict H prime, from R(N) to D: the diagram projection formula
-for E followed by direct image of the inverse reduction/pullback identification.
-Source: Stacks 0B56. -/
+/-- The explicit strict `H'`: the tower projection-formula map for `g'^* K` followed by
+direct image of the inverse reduction/pullback identification. -/
 def exchangeRealizationHPrime (K : d.derived X) :
     (completedReductionTower Y' d).obj ((d.push f').obj ((d.pull g').obj K)) ≅
       (d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K)) :=
   asIso (d.towerProjection f' ((d.pull g').obj K)) ≪≫
     (d.towerPush f').mapIso ((d.reductionTowerPullbackIso g').symm.app K)
 
-/-- The specified strict lift commutes with every morphism of the input object.
-Source: Stacks 0E48. -/
+/-- The specified strict lift commutes with every morphism of the input object. -/
 theorem exchangeStrict_naturality (sq : ChosenCartesianSquare g' f' f g)
     {K L : d.derived X} (a : K ⟶ L) :
     (d.towerPull g).map ((d.towerPush f).map ((completedReductionTower X d).map a)) ≫
@@ -705,7 +684,8 @@ theorem exchangeStrict_naturality (sq : ChosenCartesianSquare g' f' f g)
     Functor.isoWhiskerRight (d.reductionTowerPullbackIso g').symm (d.towerPush f')
   exact (H.inv ≫ v ≫ H'.hom).naturality a
 
-/-- The specified finite exchange is a natural transformation on strict derived towers. -/
+/-- The specified finite exchange is a natural transformation on strict derived towers.
+Its naturality is inherited from the already specified projection-formula tower maps. -/
 def exchangeStrictNatTrans (sq : ChosenCartesianSquare g' f' f g) :
     (completedReductionTower X d ⋙ d.towerPush f) ⋙ d.towerPull g ⟶
       (completedReductionTower X d ⋙ d.towerPull g') ⋙ d.towerPush f' where

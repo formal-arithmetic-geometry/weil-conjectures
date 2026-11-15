@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryLeibniz
 
 /-! # The square-zero formula for the canonical boundary of a tensor power
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, and Cohomology, Lemma 0B8S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -71,12 +73,9 @@ private theorem tensor_boundary_recurrence_formula {Z : Scheme.{u}} (F N : Z.Mod
     rw [hc, ih, map_nsmul, hcomp, ← succ_nsmul]
 
 /-- The boundary of a section power is the corresponding multiple of its acted-on
-first obstruction, for the canonical connecting map. The additive comparison `b`
-transports the coefficient module on the closed subscheme back to
-the kernel of the degree `n * (e + 1)` unit sequence.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1), and Cohomology,
-Lemma 0B8S. -/
+first obstruction. This is a formula for the canonical connecting map, with no lifting
+assertion. The additive comparison `b` transports the coefficient module on the closed
+subscheme back to the kernel of the degree `n * (e + 1)` unit sequence. -/
 theorem square_zero_tensor_power_boundary
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralBou
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteComparedKummerBoundary
 
 /-! # Evaluating the integral Kummer composite
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- Evaluation of the integral tower Kummer class is the comparison image of the
-etale Kummer class. Source: Stacks 03PL. -/
+etale Kummer class. -/
 theorem finiteKummer_integral_evaluation (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
     (L : T.Pic) :

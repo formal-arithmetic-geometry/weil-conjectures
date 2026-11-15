@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
-/-! # Finite constant-coefficient pullback of the regular module -/
+/-! # Finite constant-coefficient pullback of the regular module
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -243,8 +248,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] finiteUnitIso
 
 /-- The actual finite constant-ring adjunction preserves its regular module,
-with its transpose fixed on every section.
-Source: Stacks 03D2 and 03D7. -/
+with its transpose fixed on every section. -/
 theorem exists_finiteUnitIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃ d : (Scheme.proEtaleConstantRingPullback (SpTowerShriek.R l E n) f).obj
         ((SpTowerShriek.ev l E Y n).obj (coefficient Y (Arings l E Y))) ≅

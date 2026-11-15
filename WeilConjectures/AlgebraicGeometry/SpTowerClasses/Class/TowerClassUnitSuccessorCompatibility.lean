@@ -7,7 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 
-/-! # Quotient compatibility of normalized finite unit maps -/
+/-! # Quotient compatibility of normalized finite unit maps
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -519,8 +526,7 @@ private theorem normalized_naturality
     ((heq_of_eq (coefficient_ring_naturality l E f n U x₀)).trans hsX.symm))
 
 /-- The adjacent horizontal equation for already supplied finite maps, without an
-existence or invertibility assertion.
-Source: Stacks 03D2, 03D7; Zheng Construction 4.1. -/
+existence or invertibility assertion. -/
 theorem unit_successor_compatibility {X Y : Scheme.{u}} {f : X ⟶ Y}
     {b : SpTowerShriek.Base l E} (g : SpTowerShriek.Geometry l E b f)
     (hpush : ∀ (n : ℕ)

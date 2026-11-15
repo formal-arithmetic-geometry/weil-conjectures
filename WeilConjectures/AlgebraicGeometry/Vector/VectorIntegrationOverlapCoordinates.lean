@@ -296,8 +296,7 @@ private theorem restrict_chart
   simp only [IsIso.inv_hom_id_assoc]
   exact tower_map_iso (S.homOfLE h) d
 
-/-- The two restricted inverse frames differ by an invertible linear coordinate map.
-This statement concerns scheme maps only and has no coefficient ring or exchange map. -/
+/-- The two restricted inverse frames differ by an invertible linear coordinate map. -/
 theorem vectorIntegration_overlap_coordinates
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]

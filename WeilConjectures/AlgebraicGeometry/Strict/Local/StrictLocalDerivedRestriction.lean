@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 
 /-! # The canonical derived restriction to the small strict-local model
 
-Source: Stacks Project, Tags 03Q9, 03QO and 0GJ2.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q9, 03QO, 0GJ2, 0GJV
 -/
 
 @[expose] public section
@@ -19,8 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- The unique pointed-neighbourhood restriction, natural in the sheaf.
-Source: Stacks Project, Tag 03Q9, the restriction construction. -/
+/-- The unique pointed-neighbourhood restriction, natural in the sheaf. -/
 noncomputable def strictLocalRestrictionNat
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -83,9 +84,8 @@ noncomputable def strictLocalRestrictionNat
     erw [ht]
     rfl
 
-/-- The derived restriction from the derived stalk at `s` to derived sections on the strict
-henselization, obtained by deriving the pointed-neighbourhood restriction.
-Source: Stacks Project, Tags 03Q9 and 03QO. -/
+/-- Derive the uniquely specified restriction and use exactness of inverse image and
+strict-local sections to separate the two derived functors. -/
 noncomputable def strictLocalDerivedRestriction
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -106,8 +106,7 @@ noncomputable def strictLocalDerivedRestriction
       (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{u + 1}).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv
 
-/-- The comparison is germ restriction, exchange for the strict-base square, and Leray.
-Source: Stacks Project, Tag 0GJV. -/
+/-- The comparison is germ restriction, exchange for the strict-base square, and Leray. -/
 noncomputable def strictLocalSheafComparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -22,7 +22,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSuppleme
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! Specialized comparison square for the site-comparison open exchange. -/
+/-! Specialized comparison square for the site-comparison open exchange.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 099R, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -143,7 +148,7 @@ private theorem component_unpack
       K₂.map (se.hom.app F) ≫ c₂'.inv.app (L₁'.obj F) ≫ R₂'.map (c₁'.inv.app F) := h
 
 /-- Specialized inverse-image comparison square used by the open exchange calculation.
-Source: canonical comparison-square coherence, Stacks Tags 099R and 0B65. -/
+No open-immersion assumption is needed. -/
 theorem fixSiteOpenExchangeSquare (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} (sq : ChosenCartesianSquare gU j' j g)

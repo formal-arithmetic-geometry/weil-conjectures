@@ -16,10 +16,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionS
 
 /-! # Forward restriction evaluation cube for ordinary systems
 
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks Tag 0GL6.
-
 This is the forward cube whose cancellation gives the inverse restriction
 comparison in `EtaleSystemRestrictionEvaluation`.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GL6
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 5.16
 -/
 
 @[expose] public noncomputable section
@@ -637,10 +641,7 @@ private theorem supportCube
     ← reassoc_of% (hp ((t.support C).openImage.J.obj N)), reassoc_of% ht]
 
 attribute [local irreducible] eqToHom in
-/-- The forward compact-support restriction evaluation cube.
-
-Source: Zheng Construction 4.1 and Lemma 5.16; Stacks Tag 0GL6.
--/
+/-- The forward compact-support restriction evaluation cube. -/
 theorem etaleSystemRestriction_evaluation_forward
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l)
     (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)

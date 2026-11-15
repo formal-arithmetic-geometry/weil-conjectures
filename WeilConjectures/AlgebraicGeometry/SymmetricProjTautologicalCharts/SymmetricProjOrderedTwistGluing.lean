@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-!
 # Gluing the ordered tautological twist comparison
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
+The line of a tautological quotient is identified with the pullback of the standard twist,
+compatibly with the coordinate sections.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -34,11 +39,9 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
   Scheme.Modules.boundaryPullbackComparison
 
-/-- Once the ordered scheme and affine twist comparisons are supplied, normalization
-of a tautological quotient identifies its line and coordinate quotients with the pullback
-of the standard twist.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB, and 01MS. -/
+/-- Given the ordered scheme and affine twist comparisons, the line of a tautological quotient
+`D` is isomorphic to the pullback of the standard twist, by an isomorphism `t` sending each
+pulled-back coordinate section `X_i` to the quotient of `b(e_i)`. -/
 theorem exists_ordered_twist_comparison (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)

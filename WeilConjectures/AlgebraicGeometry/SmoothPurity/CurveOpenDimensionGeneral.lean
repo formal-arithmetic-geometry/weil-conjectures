@@ -15,6 +15,15 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveOpenDirectImage
 
 /-!
 # Open direct-image dimension on arbitrary curves
+
+Higher direct images along an open immersion into a finite-type scheme of dimension at most one
+vanish above degree one, for finite prime-power-torsion coefficient rings.
+
+## Implementation details
+
+This is a specialization of `isZero_higherDirectImage_of_isOpenImmersion`, which holds over any
+ground field and for any additively torsion coefficient ring; the hypotheses on the field, the
+prime `ℓ` and the torsion exponent are not used.
 -/
 
 @[expose] public section

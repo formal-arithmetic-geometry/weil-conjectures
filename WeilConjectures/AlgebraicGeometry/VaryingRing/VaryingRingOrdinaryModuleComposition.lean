@@ -11,9 +11,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Ordinary component evaluation and pullback composition
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE.
 This is the original module-level calculation, separated from the realization
 constructions to keep each compilation small.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09AE
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -141,8 +146,7 @@ private lemma mateSquare
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Ordinary component evaluation preserves the specified inverse-image compositor.
-Source: Zheng, Construction 4.1 and Lemma 4.10. -/
+/-- Ordinary component evaluation preserves the specified inverse-image compositor. -/
 theorem ordinaryModuleEvalG_comp (n : ℕ) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (N : Modules R φ Z) :
     (eval R φ X n).map ((moduleGComp R φ f g).hom.app N) ≫

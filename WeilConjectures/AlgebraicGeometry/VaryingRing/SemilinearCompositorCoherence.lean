@@ -16,12 +16,14 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPa
 /-!
 # Coherence of normalized semilinear compositors
 
-Source: Stacks Project, Tags 0D6D and 0D6E.
-
-The inverse-image functor denoted `P` in the source is `VaryingRing.G`; its direct-image
-functor `S` is `VaryingRing.P`. The forward inverse-image compositor is `gComp.inv`.
+The inverse-image functor is `VaryingRing.G` and its direct-image functor is
+`VaryingRing.P`. The forward inverse-image compositor is `gComp.inv`.
 All functors, compositors and identity comparisons are those of the specified adjunctions.
 The associativity clauses allow independently named intermediate and total composites.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D6D, 0D6E, 0B65, 0DV0, 04VG
 -/
 
 @[expose] public section
@@ -881,8 +883,7 @@ private theorem coherence_clause_9 :
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Associativity and both unit laws for the three normalized semilinear compositors,
-including transport along arbitrary equalities identifying intermediate and total maps.
-Source: Stacks Project, Tags 0D6D, 0D6E, 0B65, 0DV0 and 04VG. -/
+including transport along arbitrary equalities identifying intermediate and total maps. -/
 theorem semilinear_compositor_coherence
     (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n) :
     (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)

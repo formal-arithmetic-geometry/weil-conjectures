@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Injectivity of relatively flat single base change
 
-Source: Stacks Project, Tag 0A1D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A1D, 0DJ9
 -/
 
 @[expose] public section
@@ -64,9 +66,7 @@ private theorem single_qcoh_terms (X : Scheme.{u}) (M : X.Modules) [M.IsQuasicoh
       (h.iso (isZero_kernel_of_mono (𝟙 M))).symm inferInstance
 
 -- The stalk and pinned counit comparisons unfold several shared module carriers.
-/-- The canonical single-module base-change comparison is injective on cohomology.
-
-Source: Stacks Project, Tag 0A1D, specialized to E = O_Y[0] and G = M[0], and Tag 0DJ9. -/
+/-- The canonical single-module base-change comparison is injective on cohomology. -/
 theorem standard_flat_single_baseChange_homology_mono
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (n : ℤ) :

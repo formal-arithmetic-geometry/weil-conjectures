@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitLocali
 
 /-! # From local sheaf presentations to flat stalk coordinates
 
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -22,9 +24,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Affine-base presentations give stalk scalar-extension coordinates on arbitrary bases.
-Source: Stacks Project, Tag 0DJ9, locality paragraph; Tags 06YB and 0D5S, exact stalks and
-pullback-stalk comparison. -/
+/-- Affine-base presentations give stalk scalar-extension coordinates on arbitrary bases:
+the stalk at `a` of the degree-`n` homology of the standard base change map factors through
+a bounded-above complex `P` of flat modules over the stalk of `B` at `g a` and a left-derived
+scalar extension `LF`. -/
 theorem standardSingleFlatCounit_localization
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TensorCoordinates.TowerC
 
 /-! # Adjunction normalization of the constructed ordinary tensor comparison
 
-Source: Stacks 03EL; Zheng Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +50,7 @@ attribute [local implicit_reducible] spCoefficientCommRings SemilinearSections.e
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The constructed comparison has the ordinary finite adjunction's pure-tensor formula.
-
-Source: Stacks 03EL, Zheng Construction 4.1. -/
+/-- The constructed comparison has the ordinary finite adjunction's pure-tensor formula. -/
 theorem comparison_normalization {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (T : SemilinearSections.GeometryOrdinaryTensor

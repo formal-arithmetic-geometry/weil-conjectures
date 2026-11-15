@@ -38,8 +38,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Res
 /-!
 # Comparison of ordinary supported sections between the two sites
 
-Source: Stacks Project, Tags 099W, 099V, 09B1 and 09XP.
-
 ## Main definitions and statements
 
 * `ProEtale.supportComparison`: the natural bounded-below comparison map.
@@ -48,6 +46,10 @@ Source: Stacks Project, Tags 099W, 099V, 09B1 and 09XP.
   `ProEtale.supportComparison_open`: forgetting, full-support normalization, and restriction.
 * `ProEtale.supportExteriorCoefficientIso`: the specified tensor/pullback comparison theta.
 * `ProEtale.supportComparison_exterior`: equality of the supported exterior-product maps.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 099W, 099V, 09B1, 09XP
 -/
 
 @[expose] public section
@@ -117,8 +119,8 @@ private theorem supportEvaluation_hom (A : Type (u + 1)) [CommRing A]
   rfl
 
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The canonical identification of the global-section kernel with the restriction
-kernel used by the support long exact sequence. -/
+/-- There is a unique identification of the global-section kernel with the restriction
+kernel used by the support long exact sequence, compatible with the kernel inclusions. -/
 theorem supportKernelEvaluationIso_existsUnique :
     ∃! e : Etale.supportedEtaleSections A T i.openComplement ≅ etaleSupportKernel A i,
       e.hom ≫ Sheaf.supportedSectionsInclusion T.smallEtaleTopology

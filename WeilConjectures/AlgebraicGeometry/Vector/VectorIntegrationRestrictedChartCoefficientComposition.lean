@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition
 import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 
 /-! # Geometric coefficient composition after tower descent
-
-Coefficient descent for a frame restricted through two nested opens.
+.
 -/
 
 @[expose] public noncomputable section

@@ -21,7 +21,10 @@ public import WeilConjectures.CategoryTheory.TermwiseAdjunctionSquareUnit
 
 /-! # Scalar restriction and proper/open coherence
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03DI. -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CZ, 03D7, 03DI, 0F7B, 03D8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -336,8 +339,7 @@ private theorem tailHomWord {D : Type*} [Category D]
   rw [reassoc_of% hn₂, hd, reassoc_of% hc, reassoc_of% hn₁,
     reassoc_of% hn₃, reassoc_of% hπ, reassoc_of% hn₄, reassoc_of% hn₅]
 
-/-- The intrinsic ordinary projector is an actual composite of natural transformations.
-Source: Stacks 03DI and 0F7B. -/
+/-- The intrinsic ordinary projector is an actual composite of natural transformations. -/
 def scalarOrdinaryPi
     (κ : ∀ {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s],
       StrictTower.towerJ B s ≅ StrictTower.towerDirectImage B s)
@@ -347,8 +349,7 @@ def scalarOrdinaryPi
   (scalarTowerAdj B s).unit ≫
     Functor.whiskerLeft (StrictTower.towerPullback B s) (κ s).inv
 
-/-- The intrinsic proper/open arrows and their compatibility with scalar restriction.
-Source: Stacks 03D8, 03DI and 0F7B. -/
+/-- The intrinsic proper/open arrows and their compatibility with scalar restriction. -/
 structure OrdinaryScalarProperOpen (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C) where
   /-- The constant-tower cartesian open comparison, fixed by its transpose below. -/
@@ -1115,7 +1116,8 @@ private theorem scalarAlpha_factorTail (C : OrdinaryScalarRestriction R φ B ψ)
       ((scalarOrdinaryPi B (scalarClopen B) s).app Q))
     (normalizedMapTriple _ _ _ _) hc hn₁ hn₂ hd hn₃.symm hπ hn₄.symm hn₅.symm
 
-/-- Combine tail compatibility with a compatible first factor. -/
+/-- Combine tail compatibility with a compatible first factor. Composite functor
+objects are retained in the input types to match the defining component equations. -/
 private theorem scalarAlpha_factorWord (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C)
     {V X W S : Scheme.{u}} (s : V ⟶ X) (b : X ⟶ W) (q : X ⟶ S)
@@ -1335,8 +1337,7 @@ private theorem scalarAlpha_comparison (C : OrdinaryScalarRestriction R φ B ψ)
     (scalarBeta_comparison R φ B ψ C G (pullback.snd p i) (pullback.fst p i) i p
       pullback.condition.symm (IsPullback.of_hasPullback p i).flip M)
 
-/-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha.
-Source: Stacks 03D8, 03DI and 0F7B. -/
+/-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha. -/
 theorem ordinaryScalarProperOpen (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
     (C : OrdinaryScalarRestriction R φ B ψ) (G : OrdinaryScalarAdjunctions R φ B ψ C) :
     Nonempty (OrdinaryScalarProperOpen R φ B ψ C G) := by

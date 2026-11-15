@@ -232,9 +232,14 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompositio
 public import WeilConjectures.AlgebraicGeometry.UnboundedProperOpenPasting
 
 /-!
-# Unbounded proper/open Pasting
+# Unbounded proper/open pasting
 
-Source: Stacks Project, Tags 0F7C and 0F7D.
+This file proves the pasting and identity equations for unbounded proper/open comparisons
+normalized by the homotopy derived units.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7C, 0F7D
 -/
 
 @[expose] public section
@@ -584,9 +589,7 @@ private theorem derived_identity_fac
     (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso A).hom.app _ = _
   rw [← Category.assoc, hf, exact_identity_fac, Iso.inv_hom_id_app_assoc]
 
-/-- Pasting and identities for comparisons normalized by the homotopy derived units.
-Source: Stacks Project, Tags 0F7C and 0F7D, including their identity cases.
--/
+/-- Pasting and identities for comparisons normalized by the homotopy derived units. -/
 theorem unboundedProperOpenPasting_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}
         [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]

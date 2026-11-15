@@ -17,11 +17,16 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 
 /-! # Ordinary étale compact-support system presentations
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15; Stacks Project, Tag 0GL6.
-
 All module categories below are the recorded modules on the vertical sequence site.
 Ordinary direct image is specified on that site, including its horizontal restrictions.
 The inverse and open functors are specified by adjunctions to that direct image.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0GL6, 05RU, 03CZ, 03Q2, 00W1, 03D7, 03D2,
+  07A4, 03S2, 06YY, 03CV, 03EK, 06YT
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Constructions 5.14--5.15, Construction 5.14, Construction 5.15, Lemma 5.16
 -/
 
 @[expose] public noncomputable section
@@ -34,34 +39,28 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures.SemilinearSections
 namespace AlgebraicGeometry.Etale.SystemProjection
 
-/-- Constant coefficients at each positive level; n represents n+1.
-Source: Zheng Construction 4.1. -/
+/-- Constant coefficients at each positive level; n represents n+1. -/
 abbrev coefficients (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) (n : ℕ) :=
   (constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).obj (B.obj (op n))
 
-/-- The given, unrestricted adjacent coefficient maps.
-Source: Zheng Construction 4.1. -/
+/-- The given, unrestricted adjacent coefficient maps. -/
 abbrev transitions (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) (n : ℕ) :=
   (constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).map
     (B.map (homOfLE (Nat.le_succ n)).op)
 
-/-- Strict systems are the existing module sheaves on the ringed sequence site.
-Source: Zheng Construction 4.1. -/
+/-- Strict systems are the existing module sheaves on the ringed sequence site. -/
 abbrev Modules (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :=
   Systems.{u + 1, u, u + 1} W.smallEtaleTopology (coefficients W B) (transitions W B)
 
-/-- Their ordinary unbounded derived category, without a cartesianness condition.
-Source: Stacks Tag 05RU. -/
+/-- Their ordinary unbounded derived category, without a cartesianness condition. -/
 abbrev Derived (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :=
   DS.{u + 1, u, u + 1} W.smallEtaleTopology (coefficients W B) (transitions W B)
 
-/-- The actual ring sheaf on the vertical sequence site.
-Source: Zheng Construction 4.1. -/
+/-- The actual ring sheaf on the vertical sequence site. -/
 abbrev rings (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :=
   systemRing.{u + 1, u, u + 1} W.smallEtaleTopology (coefficients W B) (transitions W B)
 
-/-- The coefficient-system map, with its compatibility supplied by naturality.
-Source: Zheng Construction 4.1. -/
+/-- The coefficient-system map, with its compatibility supplied by naturality. -/
 def ringMap (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C) :
     rings W B ⟶ rings W C :=
   systemMap.{u + 1, u, u + 1} W.smallEtaleTopology (coefficients W B) (transitions W B)
@@ -73,18 +72,16 @@ def ringMap (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B �
         (fun h ↦ (constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).map h)
         (a.naturality (homOfLE (Nat.le_succ n)).op).symm)
 
-/-- Exact scalar restriction on the actual ordinary derived systems.
-Source: Stacks Tag 03CZ. -/
+/-- Exact scalar restriction on the actual ordinary derived systems. -/
 abbrev restriction (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C) :=
   resD.{u + 1, u, u + 1} (ringMap W a)
 
-/-- Base change of an étale object, retaining the coefficient index.
-Source: Stacks Tag 03Q2. -/
+/-- Base change of an étale object, retaining the coefficient index. -/
 abbrev siteMap {X Y : Scheme.{u}} (g : X ⟶ Y) :=
   (𝟭 ℕ).prod (MorphismProperty.Over.pullback @Etale ⊤ g)
 
-/-- A normalized structural ring map on the actual sequence sites.
-Source: Zheng Construction 4.1; Stacks 00W1, 03D7. -/
+/-- A normalized structural ring map on the actual sequence sites. Its normalization
+on constant generators determines the map uniquely, by sheafification. -/
 structure DirectImage {X Y : Scheme.{u}} (g : X ⟶ Y)
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) where
   [continuous : (siteMap g).IsContinuous (WeilConjectures.coefficientSequenceTopology
@@ -101,8 +98,7 @@ structure DirectImage {X Y : Scheme.{u}} (g : X ⟶ Y)
           ((MorphismProperty.Over.pullback @Etale ⊤ g).op.obj U) b
 
 /-- The direct image is the actual module-sheaf pushforward along the structural map;
-thus its maps include all the strict-system transition maps.
-Source: Stacks Tag 03D7. -/
+thus its maps include all the strict-system transition maps. -/
 def DirectImage.push {X Y : Scheme.{u}} {g : X ⟶ Y}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : DirectImage g B) : Modules X B ⥤ Modules Y B :=
   letI := d.continuous
@@ -110,8 +106,7 @@ def DirectImage.push {X Y : Scheme.{u}} {g : X ⟶ Y}
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map d.structural)
 
 /-- Ordinary image and exact inverse image with their actual adjunction. The inverse
-is determined up to its unique unit-compatible isomorphism by the fixed pushforward.
-Source: Zheng Construction 4.1; Stacks Tag 03D2. -/
+is determined up to its unique unit-compatible isomorphism by the fixed pushforward. -/
 structure Image {X Y : Scheme.{u}} (g : X ⟶ Y)
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) extends DirectImage g B where
   inverse : Modules Y B ⥤ Modules X B
@@ -122,8 +117,7 @@ structure Image {X Y : Scheme.{u}} (g : X ⟶ Y)
   [pushAdditive : toDirectImage.push.Additive]
   [kinjectives : Abelian.HasKInjectiveResolutions (Modules X B)]
 
-/-- The normalized ordinary-derived geometric adjunction.
-Source: Stacks Tag 07A4. -/
+/-- The normalized ordinary-derived geometric adjunction. -/
 abbrev Image.derivedAdjunction {X Y : Scheme.{u}} {g : X ⟶ Y}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : Image g B) :=
   letI := d.inverseAdditive
@@ -134,8 +128,7 @@ abbrev Image.derivedAdjunction {X Y : Scheme.{u}} {g : X ⟶ Y}
   d.adjunction.mapDerivedCategoryRightDerivedAdjunction
 
 /-- Exact extension by zero, characterized as the left adjoint of the actual open
-inverse image. All data are ordinary functors before termwise localization.
-Source: Zheng Construction 5.14; Stacks Tag 03S2. -/
+inverse image. All data are ordinary functors before termwise localization. -/
 structure OpenImage {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) extends Image j B where
   [targetKinjectives : Abelian.HasKInjectiveResolutions (Modules Z B)]
@@ -145,16 +138,14 @@ structure OpenImage {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
   [extensionLimits : PreservesFiniteLimits extension]
   [extensionColimits : PreservesFiniteColimits extension]
 
-/-- The actual proper/open presentation for a fixed compactification.
-Source: Zheng Constructions 5.14--5.15. -/
+/-- The actual proper/open presentation for a fixed compactification. -/
 structure Support {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) where
   proper : Image c.g B
   openImage : OpenImage c.i B
 
 /-- Ordinary unbounded compact support: exact open extension followed by the total
-right derived proper direct image, with no bound on the input.
-Source: Zheng Construction 5.15. -/
+right derived proper direct image, with no bound on the input. -/
 def Support.F {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (s : Support c B) : Derived X B ⥤ Derived Y B :=
   letI := s.openImage.extensionAdditive
@@ -164,8 +155,7 @@ def Support.F {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
   letI := s.proper.kinjectives
   s.openImage.extension.mapDerivedCategory ⋙ s.proper.toDirectImage.push.rightDerivedFunctor
 
-/-- The canonical inverse-image functor on ordinary unbounded systems.
-Source: Stacks Tag 07A4. -/
+/-- The canonical inverse-image functor on ordinary unbounded systems. -/
 abbrev Image.P {X Y : Scheme.{u}} {g : X ⟶ Y}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : Image g B) :=
   letI := d.inverseAdditive
@@ -173,16 +163,14 @@ abbrev Image.P {X Y : Scheme.{u}} {g : X ⟶ Y}
   letI := d.inverseColimits
   d.inverse.mapDerivedCategory
 
-/-- The total right derived image computed on the system category itself.
-Source: Stacks Tag 07A4. -/
+/-- The total right derived image computed on the system category itself. -/
 abbrev Image.R {X Y : Scheme.{u}} {g : X ⟶ Y}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : Image g B) :=
   letI := d.pushAdditive
   letI := d.kinjectives
   d.toDirectImage.push.rightDerivedFunctor
 
-/-- Exact open extension localized termwise.
-Source: Stacks Tag 03S2. -/
+/-- Exact open extension localized termwise. -/
 abbrev OpenImage.J {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : OpenImage j B) :=
   letI := d.extensionAdditive
@@ -190,8 +178,7 @@ abbrev OpenImage.J {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
   letI := d.extensionColimits
   d.extension.mapDerivedCategory
 
-/-- The exact derived open adjunction with its ordinary unit normalization.
-Source: Stacks Tag 03S2. -/
+/-- The exact derived open adjunction with its ordinary unit normalization. -/
 abbrev OpenImage.derivedAdjunction {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : OpenImage j B) :=
   letI := d.extensionAdditive
@@ -206,8 +193,7 @@ abbrev OpenImage.derivedAdjunction {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmer
 
 /-- The ordinary restriction/direct-image identification is identity on all sections.
 The inverse-image comparison is its mate; the derived image comparison is the mate
-of its exact localization. This specifies the normalization before any evaluation.
-Source: Stacks Tag 0GL6 and Zheng Lemma 5.16. -/
+of its exact localization. This specifies the normalization before any evaluation. -/
 structure RestrictionImage {X Y : Scheme.{u}} {g : X ⟶ Y}
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C)
     (d : Image g B) (e : Image g C) where
@@ -234,8 +220,7 @@ structure RestrictionImage {X Y : Scheme.{u}} {g : X ⟶ Y}
     (mateEquiv e.derivedAdjunction d.derivedAdjunction
       (TwoSquare.mk _ _ _ _ derivedInverse.hom))
 
-/-- Open restriction is the mate of the fixed inverse-image comparison.
-Source: Stacks 03S2 and 0GL6. -/
+/-- Open restriction is the mate of the fixed inverse-image comparison. -/
 structure RestrictionOpen {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C)
     (d : OpenImage j B) (e : OpenImage j C) where
@@ -244,8 +229,7 @@ structure RestrictionOpen {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
   mate : ordinary.hom = ((mateEquiv e.openAdjunction d.openAdjunction).symm
     (TwoSquare.mk _ _ _ _ image.inverseImage.inv))
 
-/-- Exact localization of the canonical open restriction identification.
-Source: Stacks 03S2 and 0GL6. -/
+/-- Exact localization of the canonical open restriction identification. -/
 def RestrictionOpen.derived {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {a : B ⟶ C}
     {d : OpenImage j B} {e : OpenImage j C} (r : RestrictionOpen a d e) :
@@ -258,16 +242,14 @@ def RestrictionOpen.derived {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
   letI := e.extensionColimits
   Functor.mapDerivedCategorySquareIso r.ordinary
 
-/-- Restriction comparisons for the fixed proper/open factorization.
-Source: Stacks 0GL6. -/
+/-- Restriction comparisons for the fixed proper/open factorization. -/
 structure RestrictionSupport {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C)
     (s : Support c B) (t : Support c C) where
   proper : RestrictionImage a s.proper t.proper
   openImage : RestrictionOpen a s.openImage t.openImage
 
-/-- The canonical restriction comparison is pasted before evaluation.
-Source: Stacks 0GL6. -/
+/-- The canonical restriction comparison is pasted before evaluation. -/
 def RestrictionSupport.iso {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {a : B ⟶ C}
     {s : Support c B} {t : Support c C} (r : RestrictionSupport a s t) :
@@ -279,14 +261,12 @@ def RestrictionSupport.iso {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactificatio
     Functor.associator _ _ _
 
 /-- A scalar model uses the actual cochain change of rings, with the insertion unit
-and its derived transpose fixed by the universal localization comparison.
-Source: Stacks 03D7, 06YY. -/
+and its derived transpose fixed by the recorded universal localization comparison. -/
 abbrev Scalar (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C) :=
   SheafOfModules.SystemScalarModel.{u + 1, u, u + 1} (ringMap W a)
 
 /-- The coefficient projection is the unique scalar adjunct of the inverse
-restriction comparison.
-Source: Stacks 0GL6. -/
+restriction comparison. This is an actual natural transformation on derived systems. -/
 def projection {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {a : B ⟶ C}
     {s : Support c B} {t : Support c C} (r : RestrictionSupport a s t)
@@ -295,7 +275,7 @@ def projection {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     (TwoSquare.mk _ _ _ _ r.iso.inv))
 
 /-- Restriction from the constant ring sheaf to constant scalars, leaving sections
-unchanged. Source: Stacks 03CV. -/
+unchanged. -/
 def constantModule (W : Scheme.{u}) (A : CommRingCat.{u + 1}) :
     WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1} W.smallEtaleTopology
       ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).obj A) ⥤
@@ -327,21 +307,19 @@ def constantModule (W : Scheme.{u}) (A : CommRingCat.{u + 1}) :
   map_comp _ _ := by ext U x; rfl
 
 /-- Evaluation at a coefficient level followed by the actual restriction to constant
-scalars. Source: Zheng 4.1. -/
+scalars. -/
 def level (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) (n : ℕ) :
     Modules W B ⥤ Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} (B.obj (op n))) :=
   evaluation W.smallEtaleTopology (coefficients W B) (transitions W B) n ⋙
     constantModule W (B.obj (op n))
 
-/-- Exactness data for the specified evaluation, not a choice of evaluation functor.
-Source: Zheng 4.1. -/
+/-- Exactness data for the specified evaluation, not a choice of evaluation functor. -/
 structure Evaluation (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) (n : ℕ) where
   [additive : (level W B n).Additive]
   [limits : PreservesFiniteLimits (level W B n)]
   [colimits : PreservesFiniteColimits (level W B n)]
 
-/-- Exact ordinary evaluation localized to the whole unbounded derived category.
-Source: Stacks 05RU. -/
+/-- Exact ordinary evaluation localized to the whole unbounded derived category. -/
 abbrev Evaluation.E {W : Scheme.{u}} {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {n : ℕ}
     (e : Evaluation W B n) :=
   letI := e.additive
@@ -351,7 +329,7 @@ abbrev Evaluation.E {W : Scheme.{u}} {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {n 
 
 /-- Normalized evaluation of geometric direct image. The ordinary comparison is
 identity on sections, inverse image is its mate, and derived image is the mate after
-exact localization. Source: Zheng 4.1; Stacks 03D2, 07A4. -/
+exact localization. -/
 structure ImageEvaluation {X Y : Scheme.{u}} {g : X ⟶ Y}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : Image g B) (n : ℕ)
     (ex : Evaluation X B n) (ey : Evaluation Y B n)
@@ -386,7 +364,7 @@ structure ImageEvaluation {X Y : Scheme.{u}} {g : X ⟶ Y}
       (TwoSquare.mk _ _ _ _ derivedInverse.hom))
 
 /-- Open restriction preserves finite colimits because it is left adjoint to
-ordinary direct image. Source: Stacks 03S2. -/
+ordinary direct image. -/
 instance openRestrictionColimits {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (A : CommRingCat.{u + 1}) :
     PreservesFiniteColimits (openImmersionRestriction (ModuleCat.{u + 1} A) j) :=
@@ -394,7 +372,7 @@ instance openRestrictionColimits {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersi
   inferInstance
 
 /-- Normalized open evaluation: the comparison is fixed by the ordinary open
-adjunction, then localized exactly. Source: Zheng 4.1, 5.14. -/
+adjunction, then localized exactly. -/
 structure OpenEvaluation {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (d : OpenImage j B) (n : ℕ)
     (ex : Evaluation X B n) (ez : Evaluation Z B n) where
@@ -410,8 +388,7 @@ structure OpenEvaluation {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} (B.obj (op n))) j)).symm
       (TwoSquare.mk _ _ _ _ image.inverse.inv))
 
-/-- Exact localization of normalized open evaluation.
-Source: Zheng 4.1, 5.14. -/
+/-- Exact localization of normalized open evaluation. -/
 def OpenEvaluation.derived {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {d : OpenImage j B} {n : ℕ}
     {ex : Evaluation X B n} {ez : Evaluation Z B n} (e : OpenEvaluation d n ex ez) :
@@ -428,8 +405,7 @@ def OpenEvaluation.derived {X Z : Scheme.{u}} {j : X ⟶ Z} [IsOpenImmersion j]
   letI := d.extensionColimits
   Functor.mapDerivedCategorySquareIso e.ordinary
 
-/-- Evaluation data for each factor of compact support.
-Source: Zheng 4.1, 5.14--5.15. -/
+/-- Evaluation data for each factor of compact support. -/
 structure SupportEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (s : Support c B) (n : ℕ)
     (ex : Evaluation X B n) (ez : Evaluation c.Z B n) (ey : Evaluation Y B n) where
@@ -438,8 +414,7 @@ structure SupportEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactificati
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (B.obj (op n))) c.g)
   openImage : OpenEvaluation s.openImage n ex ez
 
-/-- The proper/open evaluation comparison obtained by pasting the normalized factors.
-Source: Zheng 4.1, 5.15. -/
+/-- The proper/open evaluation comparison obtained by pasting the normalized factors. -/
 def SupportEvaluation.iso {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {s : Support c B} {n : ℕ}
     {ex : Evaluation X B n} {ez : Evaluation c.Z B n} {ey : Evaluation Y B n}
@@ -454,8 +429,7 @@ def SupportEvaluation.iso {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification
     Functor.associator _ _ _
 
 /-- Evaluation of the scalar adjunction: restriction is identity on sections, and the
-scalar comparison is its adjoint mate.
-Source: Stacks 03D7, 06YY; Zheng 4.1. -/
+scalar comparison is its adjoint mate, rather than a freely chosen isomorphism. -/
 structure ScalarEvaluation (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}}
     (a : B ⟶ C) (s : Scalar W a) (n : ℕ)
     (eb : Evaluation W B n) (ec : Evaluation W C n) where
@@ -481,15 +455,14 @@ structure ScalarEvaluation (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u 
         (TwoSquare.mk _ _ _ _ restriction.hom))
 
 /-- Finite coefficient sequences with unrestricted, possibly nonflat, transition maps.
-The exponent may depend on the level; exponent zero includes the zero ring.
-Source: Zheng 4.1; Stacks 0GL6. -/
+The exponent may depend on the level; exponent zero includes the zero ring. -/
 structure Coefficients (l : ℕ) where
   rings : ℕᵒᵖ ⥤ CommRingCat.{u + 1}
   finite : ∀ n : ℕ, Finite (rings.obj (op n))
   torsion : ∀ n : ℕ, ∃ m : ℕ, (l ^ m : rings.obj (op n)) = 0
 
-/-- The coefficient ring-sheaf functor.
-Source: Zheng 4.1. -/
+/-- The actual coefficient ring-sheaf functor. Functor laws follow on each section
+from the constant-sheaf functor laws and uniqueness of the ring-system map. -/
 def coefficientFunctor (W : Scheme.{u}) :
     (ℕᵒᵖ ⥤ CommRingCat.{u + 1}) ⥤
       Sheaf (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology)
@@ -527,23 +500,22 @@ def coefficientFunctor (W : Scheme.{u}) :
     simp
 
 /-- Canonical balanced tensor associator, determined by normalized scalar adjunctions.
-On representatives it multiplies the two coefficient factors.
-Source: Stacks 03EK and 06YT. -/
+On representatives it multiplies the two coefficient factors. -/
 def associator (W : Scheme.{u}) {B C D : ℕᵒᵖ ⥤ CommRingCat.{u + 1}}
     {a : B ⟶ C} {b : C ⟶ D} (x : Scalar W a) (y : Scalar W b)
     (z : Scalar W (a ≫ b)) : x.model.T ⋙ y.model.T ≅ z.model.T :=
   SheafOfModules.systemScalarModelDerivedComposition
     ((coefficientFunctor W).map_comp a b) x y z
 
-/-- The canonical tensor unit comparison for an identity coefficient map.
-Source: Stacks 03EK and 06YT. -/
+/-- The canonical tensor unit comparison for an identity coefficient map. -/
 def unit (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1})
     (x : Scalar W (𝟙 B)) : x.model.T ≅ 𝟭 (Derived W B) :=
   SheafOfModules.systemScalarModelDerivedUnit ((coefficientFunctor W).map_id B) x
 
-/-- Normalized ordinary étale system operations for a fixed compactification,
-with comparison fields given by ordinary section maps and adjunction mates.
-Source: Zheng 4.1, 5.14--5.16; Stacks 0GL6. -/
+/-- Normalized ordinary étale system operations for a fixed compactification.
+All categories, scalar models and evaluation functors are the actual constructions
+above; the comparison fields are fixed by ordinary section maps and adjunction mates.
+No projection invertibility or coherence law is assumed here. -/
 structure Theory {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) where
   support : ∀ B : Coefficients.{u} l, Support c B.rings
   evaluationX : ∀ (B : Coefficients.{u} l) (n : ℕ), Evaluation X B.rings n
@@ -560,15 +532,13 @@ structure Theory {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : 
   restriction : ∀ {B C : Coefficients.{u} l} (a : B.rings ⟶ C.rings),
     RestrictionSupport a (support B) (support C)
 
-/-- The specified coefficient projection for the normalized ordinary system operations.
-Source: Stacks 0GL6. -/
+/-- The specified coefficient projection for the normalized ordinary system operations. -/
 abbrev Theory.q {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}
     (t : Theory c l) {B C : Coefficients.{u} l} (a : B.rings ⟶ C.rings) :=
   projection (t.restriction a) (t.scalarX a) (t.scalarY a)
 
 /-- The ordinary single-ring restriction comparison, pasted from the canonical
-proper restriction mate and the exact open restriction identification.
-Source: Stacks 0GL6. -/
+proper restriction mate and the exact open restriction identification. -/
 def singleRestriction {A B : CommRingCat.{u + 1}} (a : A ⟶ B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c ⋙
@@ -581,8 +551,7 @@ def singleRestriction {A B : CommRingCat.{u + 1}} (a : A ⟶ B)
     Functor.whiskerRight (derivedRestrictScalarsCompOpenImmersionLowerShriekIso
       a.hom c.i).inv (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor
 
-/-- The single-ring composition word under the balanced scalar associators.
-Source: Stacks 0GL6. -/
+/-- The single-ring composition word under the published balanced scalar associators. -/
 def singlePath {A B D : CommRingCat.{u + 1}} (a : A ⟶ B) (b : B ⟶ D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙

@@ -20,7 +20,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -36,11 +38,9 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source derived Hom, neighbourhood restriction, and the sections map of the mate
-computed on a specified bounded-below complex of injectives. The intermediate groups
-are homology of actual termwise sections, not stage hypercohomology. At the limit
-only the canonical map to derived sections is used; it need not be invertible.
-Source: Stacks, Tags 03Q8 and 03Q9. -/
+/-- Source derived Hom, neighbourhood restriction, and the sections map of the mate,
+computed on a specified bounded-below complex of injectives via homology of termwise
+sections. -/
 theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

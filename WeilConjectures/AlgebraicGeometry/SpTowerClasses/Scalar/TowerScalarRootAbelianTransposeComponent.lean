@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerRestrictedSc
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassPullback
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarRootAbelianTransposeCore
 
-/-! # Finite-level component of the scalar root abelian transpose -/
+/-! # Finite-level component of the scalar root abelian transpose
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,10 +28,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The finite-level component calculation underlying the scalar root transpose.
-
-Source: Stacks 03EL.
--/
+/-- The finite-level component calculation underlying the scalar root transpose. -/
 theorem scalarRoot_abelianTranspose_component
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

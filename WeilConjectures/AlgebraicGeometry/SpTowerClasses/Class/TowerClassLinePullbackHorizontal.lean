@@ -93,8 +93,7 @@ private theorem finiteLine_hom_ext (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
   have hg := hp N g U 1 z
   simpa only [one_smul] using hf.trans ((h U z).trans hg.symm)
 
-/-- The finite coefficient/root formula respects horizontal tower restrictions.
--/
+/-- The finite coefficient/root formula respects horizontal tower restrictions. -/
 theorem linePullback_components_horizontal
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y) (cX : Chern l E X)

@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFinite
 
 /-! # Evaluating the integral Kummer composite
+
+## References
+
+* Grothendieck
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +42,7 @@ def finiteIntegralTowerDerived (T : Scheme.{u}) :
 theorem finiteIntegralTowerExt (T : Scheme.{u}) :
     HasExt.{u + 2} (ℕᵒᵖ ⥤ DiagonalAb T) := abExt T
 
-/-- The existing small localization of pro-etale abelian sheaves.
-Source: Grothendieck abelian sheaves. -/
+/-- The existing small localization of pro-etale abelian sheaves. -/
 @[instance_reducible]
 def finiteIntegralAbDerived (T : Scheme.{u}) :
     HasDerivedCategory.{u + 1} (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) :=
@@ -52,8 +55,7 @@ theorem finiteIntegralAbExt (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) :=
   hasExt_of_hasDerivedCategory _
 
-/-- The existing small localization of etale abelian sheaves.
-Source: Grothendieck abelian sheaves on the small etale site. -/
+/-- The existing small localization of etale abelian sheaves. -/
 @[instance_reducible]
 def finiteIntegralEtaleDerived (T : Scheme.{u}) :
     HasDerivedCategory.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=

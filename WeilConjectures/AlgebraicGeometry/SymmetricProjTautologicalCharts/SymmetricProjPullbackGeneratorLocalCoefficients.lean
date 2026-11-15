@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjPullbackGeneratorLocalCoefficientsQPrime
 
 /-! Local coefficient charts for the normalized pullback generator relation.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -62,9 +66,9 @@ private theorem pair_local_coefficients {S T : Scheme.{u}} (f : T ⟶ S)
   obtain ⟨b', hqZ'⟩ := hq' U W h x Z hZW hxZ a c hqZ
   exact ⟨Z, hZW, hxZ, a, b', c, fun t ↦ ⟨hqZ t, hqZ' t⟩⟩
 
-/-- Local factorization and coefficient formulas on one affine chart.
-
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB. -/
+/-- Local coefficient formulas on one affine chart: near every point there are sections `a`, `b'`
+and coefficients `c` such that `q` and `q'` send each pulled generator `t` to `c t • a` and
+`c t • b'` respectively. -/
 theorem normalized_pullback_generator_local_coefficients
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

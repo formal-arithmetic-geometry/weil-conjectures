@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorCoefficientActionSupport
 
 /-! # The homogeneous coefficient action before cohomology
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence; Tag 0B8S, the quotient
-action on a square-zero ideal.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S, 08KS
 -/
 
 @[expose] public section
@@ -29,8 +30,7 @@ noncomputable section
 
 /-- Identify the pushed-forward coefficient module with the degreewise kernel.
 The map uses only the explicit tensor-degree comparison, the inverse annihilated-module
-unit, and the ideal-kernel comparison determined by its inclusion equation.
-Source: Stacks Project, Tags 09MS and 08KS. -/
+unit, and the ideal-kernel comparison determined by its inclusion equation. -/
 def tensorCoefficientSheafIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ) :
@@ -43,8 +43,7 @@ def tensorCoefficientSheafIso {X Z : Scheme.{u}} (j : Z ⟶ X)
       (j.ker.toModules ⊗ L.tensorPow (n * (e + 1))))).symm ≪≫
     boundaryIdealKernelIso j (L.tensorPow (n * (e + 1)))
 
-/-- Transport an explicit coefficient morphism to the degreewise kernels.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
+/-- Transport an explicit coefficient morphism to the degreewise kernels. -/
 def tensorCoefficientKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)
@@ -59,11 +58,7 @@ def tensorCoefficientKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 attribute [irreducible] tensorCoefficientSheafIso tensorCoefficientKernelMap
 
-/-- The first homogeneous action square, as an equality of sheaf morphisms.
-There is no cohomology or cohomology action in this statement.
-
-Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the graded direct sum;
-Tag 0B8S. -/
+/-- The first homogeneous action square, as an equality of sheaf morphisms. -/
 theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

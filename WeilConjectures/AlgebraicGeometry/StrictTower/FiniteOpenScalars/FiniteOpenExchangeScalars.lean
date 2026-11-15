@@ -15,10 +15,12 @@ import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbac
 /-!
 # Finite open exchange and coefficient restriction
 
-Source: Stacks Project, Tag 03DI, direct-sum adjunction construction.
-
-The constructions use the constant-ring module coordinates and the inverse open-unit
+We use the recorded constant-ring module coordinates and the recorded inverse open-unit
 transpose. All complex functors below are termwise, before derived localization.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03CY, 03D2, 09AE
 -/
 
 @[expose] public noncomputable section
@@ -39,27 +41,23 @@ attribute [local irreducible] Functor.leftAdjoint
 
 variable {B C : Type (u + 1)} [CommRing B] [CommRing C]
 
-/-- The map of constant coefficient sheaves induced by a ring homomorphism.
-Source: Stacks Tag 03CY. -/
+/-- The map of constant coefficient sheaves induced by a ring homomorphism. -/
 abbrev coefficientMap (a : B →+* C) (X : Scheme.{u}) :
     coefficients B X ⟶ coefficients C X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (CommRingCat.ofHom a)
 
-/-- The underlying ring sheaf of the recorded commutative constant coefficients.
-Source: Stacks Tag 03CY. -/
+/-- The underlying ring sheaf of the recorded commutative constant coefficients. -/
 abbrev ringCoefficients (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :=
   (sheafCompose (Scheme.ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients A X)
 
-/-- The same coefficient homomorphism after forgetting commutativity.
-Source: Stacks Tag 03CY. -/
+/-- The same coefficient homomorphism after forgetting commutativity. -/
 abbrev ringCoefficientMap (a : B →+* C) (X : Scheme.{u}) :
     ringCoefficients B X ⟶ ringCoefficients C X :=
   (sheafCompose (Scheme.ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (coefficientMap a X)
 
-/-- The recorded restriction of scalars, leaving the abelian sheaf unchanged.
-Source: Stacks Tag 03CY. -/
+/-- The recorded restriction of scalars, leaving the abelian sheaf unchanged. -/
 abbrev res (a : B →+* C) (X : Scheme.{u}) : Modules C X ⥤ Modules B X :=
   Scheme.proEtaleRingRestrictScalars (coefficientMap a X)
 
@@ -86,16 +84,14 @@ private def resFixed (a : B →+* C) (X : Scheme.{u}) :
         (scalarUnit C X).app V (a b) • (show M.val.obj V from m)
       rw [scalarUnit_naturality])
 
-/-- The constant-preserving coefficient maps commute with a coefficient homomorphism.
-Source: Stacks Tags 03D2 and 03CY. -/
+/-- The constant-preserving coefficient maps commute with a coefficient homomorphism. -/
 theorem coefficientSquare (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (constantRingIso B f).hom ≫ coefficientMap a Y =
       (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (coefficientMap a X) ≫
         (constantRingIso C f).hom := by
   exact (Scheme.proEtaleConstantInverseImageMap_naturality f (CommRingCat.ofHom a)).symm
 
-/-- Canonical pullback/scalar identification, the mate of identity on direct-image sections.
-Source: Stacks Tags 03D2 and 03CY. -/
+/-- Canonical pullback/scalar identification, the mate of identity on direct-image sections. -/
 def pullRes (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     res a X ⋙ modulePullback B f ≅ modulePullback C f ⋙ res a Y :=
   @asIso _ _ _ _ (Scheme.proEtaleRingRestrictionPullbackInv f
@@ -107,8 +103,7 @@ def pullRes (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
       (coefficientMap a X) (coefficientMap a Y) (constantRingIso B f) (constantRingIso C f)
       (coefficientSquare a f))
 
-/-- Canonical direct-image/scalar identification, identity on every section.
-Source: Stacks Tag 03CY. -/
+/-- Canonical direct-image/scalar identification, identity on every section. -/
 def pushRes (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     moduleDirectImage C f ⋙ res a X ≅ res a Y ⋙ moduleDirectImage B f :=
   Scheme.proEtaleRingRestrictionDirectImage f
@@ -287,8 +282,7 @@ private theorem pullRes_comp (a : B →+* C) {V W Z : Scheme.{u}}
 
 end
 
-/-- The scalar comparison for extension is the mate of the inverse pullback comparison.
-Source: Stacks Tag 03DI, direct-sum adjunction construction. -/
+/-- The scalar comparison for extension is the mate of the inverse pullback comparison. -/
 def openResMap (a : B →+* C) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     res a U ⋙ moduleJ B j ⟶ moduleJ C j ⋙ res a X :=
   (mateEquiv (moduleJAdj C j) (moduleJAdj B j)).symm (pullRes a j).inv
@@ -298,8 +292,7 @@ section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 
-/-- The normalized open scalar mate is invertible, including for the empty open.
-Source: Stacks Tag 03DI. -/
+/-- The normalized open scalar mate is invertible, including for the empty open. -/
 theorem openResMap_isIso [Finite B] [Finite C] (a : B →+* C)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : IsIso (openResMap a j) := by
   -- Paste through fixed coefficient coordinates, then take open inverse mates.
@@ -372,16 +365,14 @@ theorem openResMap_isIso [Finite B] [Finite C] (a : B →+* C)
 
 end
 
-/-- The canonical scalar-restriction identification for open extension.
-Source: Stacks Tag 03DI. -/
+/-- The canonical scalar-restriction identification for open extension. -/
 def openRes [Finite B] [Finite C] (a : B →+* C)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     res a U ⋙ moduleJ B j ≅ moduleJ C j ⋙ res a X :=
   @asIso _ _ _ _ (openResMap a j) (openResMap_isIso a j)
 
 /-- The recorded canonical open exchange on sheaves, before degreewise extension.
-Its inverse is exactly singleBetaInv, the pulled-back open-unit transpose.
-Source: Stacks Tag 09AE. -/
+Its inverse is exactly singleBetaInv, the pulled-back open-unit transpose. -/
 def beta (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -390,8 +381,7 @@ def beta (A : Type (u + 1)) [CommRing A] [Finite A]
   (@asIso _ _ _ _ (singleBetaInv A gU j' j g h)
     (singleBetaInv_isIso A gU j' j g h hsq)).symm
 
-/-- The scalar identification on the source of open exchange.
-Source: Stacks Tags 03DI and 03CY. -/
+/-- The scalar identification on the source of open exchange. -/
 def sourceRes [Finite B] [Finite C] (a : B →+* C)
     {U X' X : Scheme.{u}} (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] :
     res a U ⋙ (moduleJ B j ⋙ modulePullback B g) ≅
@@ -400,8 +390,7 @@ def sourceRes [Finite B] [Finite C] (a : B →+* C)
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (pullRes a g) ≪≫
     (Functor.associator _ _ _).symm
 
-/-- The scalar identification on the target of open exchange.
-Source: Stacks Tags 03DI and 03CY. -/
+/-- The scalar identification on the target of open exchange. -/
 def targetRes [Finite B] [Finite C] (a : B →+* C)
     {U' U X' : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X') [IsOpenImmersion j'] :
     res a U ⋙ (modulePullback B gU ⋙ moduleJ B j') ≅
@@ -415,8 +404,7 @@ abbrev resC (a : B →+* C) (X : Scheme.{u}) :
     CochainComplex (Modules C X) ℤ ⥤ CochainComplex (Modules B X) ℤ :=
   (res a X).mapHomologicalComplex (.up ℤ)
 
-/-- The complex-level exchange, from the recorded sheaf exchange term by term.
-Source: Stacks Tag 09AE. -/
+/-- The complex-level exchange, from the recorded sheaf exchange term by term. -/
 def betaC (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -439,8 +427,7 @@ def targetResC [Finite B] [Finite C] (a : B →+* C)
       ((modulePullback C gU ⋙ moduleJ C j') ⋙ res a X').mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex (targetRes a gU j') (.up ℤ)
 
-/-- Scalar restriction preserves the inverse-image/direct-image unit and counit.
-Source: Stacks Tags 03D2 and 03CY. -/
+/-- Scalar restriction preserves the inverse-image/direct-image unit and counit. -/
 theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
     {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (∀ F : Modules C X,
@@ -482,8 +469,7 @@ theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
     rw [hm] at hc
     exact hc.symm
 
-/-- Restriction along the identity has its unique identity-on-sections identification.
-Source: Stacks Tag 03CY. -/
+/-- Restriction along the identity has its unique identity-on-sections identification. -/
 theorem resId_existsUnique (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     ∃! e : res (RingHom.id A) X ≅ 𝟭 (Modules A X),
       ∀ (M : Modules A X) (W : X.ProEtᵒᵖ) (m : M.val.obj W),
@@ -523,14 +509,12 @@ theorem resId_existsUnique (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
   ext m
   exact he' M W m
 
-/-- The identity-on-sections identification for identity restriction.
-Source: Stacks Tag 03CY. -/
+/-- The identity-on-sections identification for identity restriction. -/
 def resId (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     res (RingHom.id A) X ≅ 𝟭 (Modules A X) :=
   Classical.choose (resId_existsUnique A X)
 
-/-- Compatible ambient coefficient actions give a unique identity-on-sections comparison.
-Source: Stacks Tag 03CY. -/
+/-- Compatible ambient coefficient actions give a unique identity-on-sections comparison. -/
 theorem ambientRes_existsUnique (a : B →+* C) (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1})
     (rB : R ⟶ ringCoefficients B X) (rC : R ⟶ ringCoefficients C X)
@@ -566,8 +550,7 @@ theorem ambientRes_existsUnique (a : B →+* C) (X : Scheme.{u})
   ext m
   exact he' M W m
 
-/-- The fixed comparison for restriction to compatible ambient actions.
-Source: Stacks Tag 03CY. -/
+/-- The fixed comparison for restriction to compatible ambient actions. -/
 def ambientRes (a : B →+* C) (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1})
     (rB : R ⟶ ringCoefficients B X) (rC : R ⟶ ringCoefficients C X)
@@ -576,8 +559,7 @@ def ambientRes (a : B →+* C) (X : Scheme.{u})
       SheafOfModules.restrictScalars.{u + 1} rC :=
   Classical.choose (ambientRes_existsUnique a X R rB rC hr)
 
-/-- Constant coefficient maps respect composition.
-Source: Stacks Tag 03CY. -/
+/-- Constant coefficient maps respect composition. -/
 theorem coefficientMap_comp {D : Type (u + 1)} [CommRing D]
     (a : B →+* C) (b : C →+* D) (X : Scheme.{u}) :
     ringCoefficientMap a X ≫ ringCoefficientMap b X = ringCoefficientMap (b.comp a) X := by
@@ -588,8 +570,7 @@ theorem coefficientMap_comp {D : Type (u + 1)} [CommRing D]
   rw [← Functor.map_comp, ← Functor.map_comp]
   rfl
 
-/-- The identity-on-sections comparison between successive and composite restriction.
-Source: Stacks Tag 03CY. -/
+/-- The identity-on-sections comparison between successive and composite restriction. -/
 def resComp {D : Type (u + 1)} [CommRing D] (a : B →+* C) (b : C →+* D)
     (X : Scheme.{u}) : res b X ⋙ res a X ≅ res (b.comp a) X :=
   ambientRes b X (ringCoefficients B X) (ringCoefficientMap a X)
@@ -644,8 +625,7 @@ private theorem pull_identity_aux (A : Type (u + 1)) [CommRing A] [Finite A]
     (pushRes (RingHom.id A) f).hom
     (pull_unit_counit (RingHom.id A) f).1 (push_identity A f) M
 
-/-- The canonical inverse-image and extension scalar identifications preserve identities.
-Source: Stacks Tags 03D2 and 03DI. -/
+/-- The canonical inverse-image and extension scalar identifications preserve identities. -/
 theorem scalar_identity (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (∀ M : Modules A X,
@@ -776,8 +756,7 @@ private theorem pull_composition_aux {D : Type (u + 1)} [CommRing D]
     (pull_unit_counit b f).1 (pull_unit_counit a f).1
     (pull_unit_counit (b.comp a) f).1 (push_composition a b f) M
 
-/-- Pullback and open-extension identifications compose along arbitrary coefficient maps.
-Source: Stacks Tags 03D2 and 03DI. -/
+/-- Pullback and open-extension identifications compose along arbitrary coefficient maps. -/
 theorem scalar_composition {D : Type (u + 1)} [CommRing D]
     [Finite B] [Finite C] [Finite D] (a : B →+* C) (b : C →+* D)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -823,8 +802,7 @@ theorem scalar_composition {D : Type (u + 1)} [CommRing D]
         erw [CategoryTheory.Functor.map_id]
       simp only [Category.id_comp, Category.comp_id]
 
-/-- Pullback scalar identifications preserve the identity for arbitrary scheme maps.
-Source: Stacks Tags 03D2 and 03CY. -/
+/-- Pullback scalar identifications preserve the identity for arbitrary scheme maps. -/
 theorem pull_identity (A : Type (u + 1)) [CommRing A] [Finite A]
     {Y X : Scheme.{u}} (f : Y ⟶ X) (M : Modules A X) :
     (pullRes (RingHom.id A) f).hom.app M ≫

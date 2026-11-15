@@ -31,7 +31,14 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricOperationsTransition
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictBaseCoordinates
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFiniteSectionInverseImages
 
-/-! # Geometry with the actual direct-image section coordinates -/
+/-! # Geometry with the actual direct-image section coordinates
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -277,8 +284,8 @@ private theorem unitModel_transport
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.trans_refl] using hu
 
 -- The geometry records require many dependent category and instance checks.
-/-- There is a geometry whose level direct images have the actual section coordinates.
-Source: Stacks 03D2, 03D7; Zheng Construction 4.1 and Lemma 4.10. -/
+/-- There is a geometry for `f` whose level direct images are the identity on underlying
+sections; no coefficient-unit comparison is constructed. -/
 theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       ∀ (n : ℕ)

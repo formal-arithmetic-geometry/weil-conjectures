@@ -13,9 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry.Li
 
 /-! Local `q'` coefficient frames for the normalized pullback generator relation.
 
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 The statement isolates the second (normalized) quotient formula after a local
 frame and coefficient formula for `q` have been chosen.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -195,13 +198,9 @@ private theorem coefficients_for_definitions {S : Scheme.{u}} (E : S.Modules)
 
 -- Keep the existing public binders, including the point-membership witness.
 set_option linter.unusedVariables false in
-/-- The matching local frame for the normalized second quotient map.
-
-Given the open, the first frame, and its coefficient map, the second frame and its
-formula exist.
-
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
--/
+/-- The matching local frame for the normalized second quotient map: given an open `Z`, a
+section `a` and coefficients `c` with `q(t) = c(t) • a`, there is a section `b'` with
+`q'(t) = c(t) • b'`. -/
 theorem normalized_pullback_generator_local_coefficients_qprime
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

@@ -23,8 +23,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSuppleme
 /-!
 # The normalized pro-etale transpose of the etale projection
 
-Source: Stacks Tags 0E48 and 07A4.
-
 All categories are ordinary uncompleted constant-ring module categories, in their
 fixed-ring sheaf presentation. The coefficient on X is written as the canonical
 pullback of B_Y, and its pro-etale realization as the pullback of nu_Y^* B_Y.
@@ -36,6 +34,10 @@ endpoints, without an arbitrary choice of comparison or any flatness assumption.
 * `spDirectImageComparisonIso`: the recorded normalized comparison, included from D+.
 * `spEtaleMate`: the transported etale projection, including both tensor comparisons.
 * `spEtaleMate_transpose`: its normalized counit transpose and conditional invertibility.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0E48, 07A4, 099R, 0B65
 -/
 
 @[expose] public noncomputable section
@@ -101,8 +103,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-/-- B_Y in degree zero, with its A-action given by the specified ring homomorphism.
-Source: Stacks 0E48. -/
+/-- B_Y in degree zero, with its A-action given by the specified ring homomorphism. -/
 def spEtaleCoefficient {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) (Y : Scheme.{u}) :
     DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
@@ -111,9 +112,9 @@ def spEtaleCoefficient {A B : Type (u + 1)} [CommRing A] [CommRing B]
       ((ModuleCat.restrictScalars a).obj (ModuleCat.of B B)))
 
 /-- Include the recorded normalized D+ comparison into the unbounded categories.
-The middle arrow is `fixedComparisonDirectImageMatePlus`, conjugated by the standard
-compatibilities of exact and right derived functors with the D+ inclusion.
-Source: Stacks 099R and 0B65. -/
+The four endpoint isomorphisms are the standard exact-functor and right-derived
+compatibilities with the fully faithful D+ inclusion. In particular the middle
+arrow is exactly fixedComparisonDirectImageMatePlus, not a chosen endpoint isomorphism. -/
 def spDirectImageComparisonIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))

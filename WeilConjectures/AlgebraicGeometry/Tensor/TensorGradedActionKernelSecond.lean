@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedActionKernelSecondDi
 
 /-! # Homogeneous quotient multiplication on degree kernels
 
-Source: Stacks Project, Tags 09MS and 0B8S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -28,9 +30,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
 /-- Multiplication by x followed by the output projection factors through the input
-projection and the explicit transported tensor-by-x map, already on sheaves.
-Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the graded direct sum;
-Tag 0B8S, quotient multiplication on the square-zero ideal. -/
+projection and the explicit transported tensor-by-x map, already on sheaves. -/
 theorem tensorGradedAction_kernel_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

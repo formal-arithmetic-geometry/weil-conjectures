@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 /-!
 # Ordered relative-Proj comparison on polynomial charts
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -537,8 +539,7 @@ theorem orderedRelativeComparison_hom_π {S : Scheme.{u}} {E : S.Modules}
 
 /-- On every affine chart, the ordered relative comparison `orderedRelativeComparison b` is
 compatible with the affine polynomial and degree-one twist models.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB, and 01MS. -/
+This assertion does not involve a global tautological quotient or standard projective space. -/
 theorem orderedRelativeComparison_affineFreeComparison {S : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (V : S.affineOpens) :

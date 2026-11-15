@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TensorCoordinates.TowerC
 
 /-! # Coordinates for the normalized finite unit
 
-Source: Stacks 03EL; Zheng Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section

@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinGraded
 
 /-! # The contraction formula on a head-tail tensor summand
 
-Source: Stacks Project, More on Algebra, Tags 0622 and 0664.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0622, 0664
 -/
 
 @[expose] public section
@@ -297,9 +299,7 @@ private theorem koszul_sign_smul (r : ℕ) (p q : ℤ) (n : ℕ) (hp : -(n : ℤ
   rw [← hp, Int.negOnePow_neg, Units.smul_def, ← Int.cast_smul_eq_zsmul A,
     Int.cast_negOnePow_natCast, Algebra.smul_def]
 
-/-- The nonpositive-degree part of the local Leibniz equation.
-
-Source: Stacks Project, Tags 0622 and 0664. -/
+/-- The nonpositive-degree part of the local Leibniz equation. -/
 theorem koszulJoinSummand_leibniz_nonpositive
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)
     (m : ℕ) (p q : ℤ) (hp : p ≤ 0) (hq : q ≤ 0) :
@@ -359,8 +359,6 @@ theorem koszulJoinSummand_leibniz_nonpositive
       ModuleCat.Hom.hom, mul_assoc] using! hlei
 
 /-- The local Leibniz equation before assembling the total tensor differential.
-
-Source: Stacks Project, Tag 0622, and Tag 0664.
 -/
 theorem koszulJoinSummand_leibniz
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)

@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # The canonical tensor action on the surviving ideal summand
 
-Source: Stacks Project, Tags 09MS and 0B8S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -27,10 +29,7 @@ universe u
 noncomputable section
 
 /-- On the degree-n summand, homogeneous quotient multiplication is the
-canonical transported tensor-by-x map followed by the output inclusion.
-This statement concerns one summand only, before applying any degree projection.
-
-Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum; Tag 0B8S. -/
+canonical transported tensor-by-x map followed by the output inclusion. -/
 theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

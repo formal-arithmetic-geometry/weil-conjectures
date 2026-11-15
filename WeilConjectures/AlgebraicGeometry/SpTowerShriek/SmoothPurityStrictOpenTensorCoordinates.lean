@@ -15,7 +15,11 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdju
 
 /-! # Open extension and the invertible normalized tensor transpose
 
-Source: Zheng Construction 4.1; Stacks 03DI, 0E8I and 0GL1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 0E8I, 0GL1
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section

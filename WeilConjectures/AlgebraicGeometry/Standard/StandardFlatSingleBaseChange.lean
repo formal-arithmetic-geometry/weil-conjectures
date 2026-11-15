@@ -14,10 +14,12 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardFlatSingleBaseChangeEp
 
 /-! # Standard flat single base change for the canonical pullback
 
-Source: Stacks Project, Tag 0A1D.
-
-The standard-localization degree-zero flat comparison, an intermediate result
+The standard-localization degree-zero flat comparison is the intermediate result
 needed by the localized cartesian comparison.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0A1D
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Standard-localization degree-zero flat base change.
-
-Source: Stacks Project, Tag 0A1D, specialized to E = O_Y[0] and G = M[0]. -/
+/-- Standard-localization degree-zero flat base change. -/
 theorem standard_flat_single_baseChange
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) :

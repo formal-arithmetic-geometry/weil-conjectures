@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorIdealSectionCoefficientCom
 
 /-! # Action on one ideal summand equals tensor multiplication
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence; Tag 0B8S, the quotient
-action on a square-zero ideal.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
-/-- On one source summand the homogeneous action is the canonical tensor multiplication.
-Source: Stacks Project, Tag 09MS, graded ideal sequence; Tag 0B8S, quotient action. -/
+/-- On one source summand the homogeneous action is the canonical tensor multiplication. -/
 theorem tensorGradedCoefficient_action_on_summand {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

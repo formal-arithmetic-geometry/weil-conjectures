@@ -15,6 +15,10 @@ import WeilConjectures.SixFunctors.BaseChange.Etale
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conservative
 
 /-! # Generic restriction of locally constant module sheaves on a normal base
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09Z5
 -/
 
 @[expose] public section
@@ -29,9 +33,8 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- On a normal base, the generic-point adjunction unit is invertible on locally constant
-module sheaves.
-Source: Stacks Project, Tag 09Z5. -/
+/-- On a normal integral scheme, the generic-point adjunction unit is invertible on locally
+constant sheaves. -/
 theorem isIso_normalGeneric_locallyConstant_unit
     (Λ : Type (u + 1)) [CommRing Λ] (V : Scheme.{u})
     [IsIntegral V] (hV : IsNormalScheme V)

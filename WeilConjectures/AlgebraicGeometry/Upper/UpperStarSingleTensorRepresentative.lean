@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # The tensor comparison with a coefficient sheaf in degree zero
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0FPH.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A4, 0FPH
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +36,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints in
 /-- Specializing the derived pullback tensor square to a sheaf in degree zero agrees
-with the ordinary tensor square on every cochain complex.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0FPH. -/
+with the ordinary tensor square on every cochain complex. -/
 theorem upperStar_single_tensor_representative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}

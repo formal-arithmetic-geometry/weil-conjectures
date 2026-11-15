@@ -9,16 +9,22 @@ public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCouni
 import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitUnionCore
 import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitUnionEquation
 
+/-!
+# Flat counit presentations on a union of two opens
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0DJ9
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The presentation for one module on a union is obtained from presentations on
-the two opens and their overlap.
-
-Source: Stacks Project, Tag 0DJ9, relative Mayer--Vietoris induction step. -/
+/-- The flat counit presentation for one module on a union is obtained from presentations on
+the two opens and their overlap. -/
 theorem standardSingleFlatCounitPresentation_union_of_open_presentations
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

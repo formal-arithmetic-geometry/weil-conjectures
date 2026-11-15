@@ -39,7 +39,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Integer endpoint in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section
@@ -51,10 +53,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- Integer endpoint square for the etale-to-pro-etale pullback.
-
-Source: Stacks Project, Tag 00WX.
--/
+/-- Integer endpoint square for the etale-to-pro-etale pullback. -/
 theorem integral_site_pullback_integer_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f
     let z := ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm

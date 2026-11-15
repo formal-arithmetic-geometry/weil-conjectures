@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemRestriction
 
 /-! # Evaluation of the restriction comparison for ordinary systems
 
-Source: Zheng, Constructions 4.1 and 5.14--5.15, Lemma 5.16; Stacks Tag 0GL6.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GL6
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Constructions 4.1 and 5.14--5.15, Lemma 5.16, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale.SystemProjection
 
-/-- Evaluation commutes with the inverse restriction comparison for compact support.
-Source: Zheng Construction 4.1 and Lemma 5.16; Stacks Tag 0GL6. -/
+/-- Evaluation commutes with the inverse restriction comparison for compact support. -/
 theorem etaleSystemRestriction_evaluation
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l)
     (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)

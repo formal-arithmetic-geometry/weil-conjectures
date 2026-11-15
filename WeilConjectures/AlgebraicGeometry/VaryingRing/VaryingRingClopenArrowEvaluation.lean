@@ -12,9 +12,14 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingClopenSectionEva
 /-!
 # Coefficient realization of the clopen inverse-image arrow
 
-Source: Stacks Project, Tag 0F7B, open case; Zheng, Construction 4.1 and Lemma 4.10.
 The comparison is made for the exact inverse-image/open-extension arrow, before taking
 proper-adjunction mates.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7B
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- The two factors of the clopen arrow have a common coefficient realization.
-Source: Stacks 0F7B, open case. -/
+/-- The two factors of the clopen arrow have a common coefficient realization. -/
 theorem clopenArrowEvaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

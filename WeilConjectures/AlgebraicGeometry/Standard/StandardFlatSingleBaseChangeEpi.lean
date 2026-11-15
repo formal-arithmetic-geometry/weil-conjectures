@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Surjectivity of relatively flat single base change
 
-Source: Stacks Project, Tag 0A1D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A1D, 0DJ9
 -/
 
 @[expose] public section
@@ -24,9 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The canonical single-module base-change comparison is surjective on cohomology.
-
-Source: Stacks Project, Tag 0A1D, specialized to E = O_Y[0] and G = M[0], and Tag 0DJ9. -/
+/-- The canonical single-module base-change comparison is surjective on cohomology. -/
 theorem standard_flat_single_baseChange_homology_epi
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (n : ℤ) :

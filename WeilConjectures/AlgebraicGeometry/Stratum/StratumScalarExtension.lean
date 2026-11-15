@@ -148,6 +148,10 @@ import Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Stratum pullback and scalar-extension comparison
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0H7J
 -/
 
 @[expose] public section
@@ -169,8 +173,7 @@ noncomputable def proEtaleConstantRingMap {T : Scheme.{u}} {A B : Type u}
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (RingHom.ulift α))
 
-/-- A constant module presheaf is left adjoint to evaluation at a terminal object.
-Source: the constant-sheaf universal property, Stacks Tag 0H7J. -/
+/-- A constant module presheaf is left adjoint to evaluation at a terminal object. -/
 private noncomputable def constantPresheafHomEquiv (Y : Scheme.{u}) (A : Type u) [CommRing A]
     (T : Y.ProEt) (hT : IsTerminal T)
     (M : ModuleCat.{u + 1} (ULift.{u + 1} A))

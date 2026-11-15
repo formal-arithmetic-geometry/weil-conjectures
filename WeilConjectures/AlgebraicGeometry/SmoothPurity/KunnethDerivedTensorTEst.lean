@@ -18,19 +18,20 @@ import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 /-!
 # Connectivity of the derived tensor product
 
-Source: Stacks Project, Tag 0F1J, first reduction paragraph, using Tag 0F1M and the lower truncation
-of Tag 0118.
-
-If the first factor has Tor amplitude in `[a, ∞)` and the second has no cohomology
-below `b`, then their derived tensor product has no cohomology below `a + b`.
+If the first factor has Tor amplitude in `[a, ∞)` and the second factor has no
+cohomology below `b`, then their derived tensor product has no cohomology below `a + b`.
 
 ## Implementation details
 
-Bounded dévissage (`DerivedCategory.isGE_obj_of_isGE`) is applied to each canonical
-upper truncation of the second factor, using a categorical K-flat model of the first
-factor. The truncations have colimit the original complex, and exactness of filtered
-colimits (`colim.exact_mapShortComplex`) transfers the bound, so no comparison between
-the coefficient K-flat predicate and categorical K-flatness is needed.
+The bound is first proved for bounded second factors by dévissage
+(`DerivedCategory.isGE_obj_of_isGE`) and then passed to the colimit of the canonical upper
+truncations, using an unrestricted categorical K-flat model of the first factor and exactness
+of filtered colimits (`colim.exact_mapShortComplex`). Thus no comparison between the
+coefficient K-flat predicate and categorical K-flatness is needed.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F1J, 0F1M, 0118
 -/
 
 @[expose] public section
@@ -156,9 +157,7 @@ private theorem etale_tensor_isGE_of_single
   exact tensor_isGE_of_single A B a b hsingle
 
 /-- If `A` has Tor amplitude in `[a, ∞)` and `B` has no cohomology below `b`,
-then the derived tensor `A ⊗ᴸ B` has no cohomology below `a + b`.
-Source: Stacks Project, Tag 0F1J.
--/
+then the derived tensor `A ⊗ᴸ B` has no cohomology below `a + b`. -/
 theorem derivedTensor_isZero_homology_of_torAmplitudeGE
     (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u})
     (A B : DerivedCategoryModule Λ T) (a b : ℤ)

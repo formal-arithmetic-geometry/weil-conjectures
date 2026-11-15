@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 /-! # Lifting the nonvanishing open of a section across a square-zero immersion
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, square-zero case, from the tensor exact
-sequence through the lifting of a power of a section.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -33,8 +34,7 @@ universe u
 
 /-- An affine nonvanishing open downstairs is the inverse image of the nonvanishing
 locus of a section of a positive multiple of the original tensor degree upstairs.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1). -/
+This asserts neither ampleness nor affineness of the open upstairs. -/
 theorem exists_section_power_locus_of_square_zero
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] [IsLocallyNoetherian X] [CompactSpace X]

@@ -26,10 +26,12 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerPullbackSquarePa
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
-
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7, 09AE
 -/
 
 @[expose] public section
@@ -150,8 +152,7 @@ private theorem derived_disjoint_extension {U X C : Scheme.{u}}
   exact hz.of_iso ((Functor.mapDerivedCategoryCompIso (towerJ B s)
     (towerPullback B c)).app N)
 
-/-- The clopen projection is identity on the image and zero on the complementary open.
-Source: Stacks, Tag 09AE. -/
+/-- The clopen projection is identity on the image and zero on the complementary open. -/
 theorem pi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
     (hc : Set.range c = (Set.range s)ᶜ) (M : Derived B X) :
@@ -163,8 +164,7 @@ theorem pi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     exact disjoint_compl_right
   exact (derived_disjoint_extension B s c hc' ((G B s).obj M)).eq_of_tgt _ _
 
-/-- Cartesian squares recover beta from the intrinsic clopen construction.
-Source: Stacks, Tag 0F7B. -/
+/-- Cartesian squares recover beta from the intrinsic clopen construction. -/
 theorem alpha_cartesian {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -816,8 +816,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] gComp gId adj jAdj G R J alpha
 
-/-- Beta is normalized to identity on an identity base change.
-Source: Stacks, Tag 09AE. -/
+/-- Beta is normalized to identity on an identity base change. -/
 theorem beta_id {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (hsq : IsPullback (𝟙 U) j j (𝟙 X))
     (M : Derived B U) :
@@ -862,8 +861,7 @@ private theorem betaInv_unit {A A' Y Y' : Scheme.{u}}
   exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
 
 end NormalizedIdentities
-/-- Beta commutes with composition of open immersions, before evaluation.
-Source: Stacks, Tag 09AE. -/
+/-- Beta commutes with composition of open immersions, before evaluation. -/
 theorem beta_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
     (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
@@ -880,8 +878,7 @@ theorem beta_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
       (beta B b (k₁ ≫ j₁) (k ≫ j) g w s).hom.app M := by
   exact beta_open_comp_aux B k j k₁ j₁ a b g wk wj w sk sj s M
 
-/-- Intrinsic alpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C. -/
+/-- Intrinsic alpha agrees with vertical pasting on every input. -/
 theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -897,8 +894,7 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
         (J B k).map ((gComp B r₁ r₂).hom.app N) := by
   exact (alpha_vertical_beforeDerivation B k i j r₁ r₂ p₁ p₂ h₁ h₂ h).2.2.2.2 N
 
-/-- Intrinsic alpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D. -/
+/-- Intrinsic alpha agrees with horizontal pasting on every input. -/
 theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -914,8 +910,7 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
         (jComp B k l).hom.app ((G B r).obj N) := by
   exact (alpha_horizontal_beforeDerivation B k l i j r p q h₁ h₂ h).2.2.2.2 N
 
-/-- Intrinsic alpha commutes with the canonical pullback cube.
-Source: Stacks, Tag 0F7F. -/
+/-- Intrinsic alpha commutes with the canonical pullback cube. -/
 theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -938,14 +933,15 @@ theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
   exact (alpha_baseChange_beforeDerivation B k i r p k₁ i₁ r₁ p₁ a b c d
     h h₁ wk wi wp wr sk si sp sr).2.2.2.2 N
 
-/-- The second witness of a nested existential `∃ a c, P a c`. -/
+/-- Select the second witness without repeatedly expanding a large normalization
+predicate in the kernel. This is precisely the nested choice used by the finite
+proper/open coherence theorem, not a new choice of unnormalized comparison. -/
 noncomputable def secondWitness {A : Sort v} {C : Sort w} {P : A → C → Prop}
     (h : ∃ a c, P a c) : C :=
   h.choose_spec.choose
 
-/-- The finite etale proper/open comparison, determined by its section and derived-unit
-normalizations.
-Source: Stacks, Tag 0F7B. -/
+/-- The finite etale comparison determined by its section and derived-unit
+normalizations, including the refinement case. -/
 @[no_expose] noncomputable def finiteGamma (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
@@ -991,8 +987,8 @@ noncomputable def finiteTarget {V W T : Scheme.{u}} (k : V ⟶ W) (p : W ⟶ T)
   (moduleDirectImage B p).rightDerivedFunctor.mapIso ((evalJ B k n).symm.app M) ≪≫
   ((@asIso _ _ _ _ (evalR B p n) (evalR_isIso B p n)).app ((J B k).obj M)).symm
 
-/-- The `n`-th evaluation of gamma is the normalized finite comparison `finiteGamma`.
-Source: Stacks, Tag 0F7B. -/
+/-- The n-th evaluation is this particular normalized finite comparison, including
+refinements, and not just some isomorphism between the same objects. -/
 theorem gamma_evaluation {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
@@ -1056,8 +1052,7 @@ private theorem isIso_of_evaluations
         (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategory.map f))
       infer_instance)
 /-- Proper/open interchange is invertible for independently bounded finite etale
-origins at every positive level, with no uniform bound on those origins.
-Source: Stacks, Tag 0F7B. -/
+origins at every positive level, with no uniform bound on those origins. -/
 theorem gamma_isIso {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1079,7 +1074,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived strict-tower categories, without assuming evaluation
-faithful. Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+faithful. -/
 theorem normalizedProperOpenCalculus :
     (∀ {A C E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
@@ -1298,8 +1293,7 @@ private theorem mate_identity_horizontal
   simpa only [← Category.assoc, Iso.hom_inv_id_app,
     Category.id_comp, Category.comp_id] using hh'
 
-/-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7. -/
+/-- Identity normalizations of gamma in both directions. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived B U),

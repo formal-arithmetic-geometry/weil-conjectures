@@ -23,7 +23,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 The additive comparison of constant residue towers lifts uniquely to modules.
 
-Source: Stacks 03CY.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03CY
 -/
 
 @[expose] public noncomputable section

@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.ConstantFiniteSubmodul
 /-!
 # Prime-coefficient vanishing for a constant bounded torsion group
 
-Source: Stacks Project, Tag 0F08, cyclic-coefficient step; Tag 0739, colimits.
+The higher direct image of a constant sheaf with bounded torsion coefficients vanishes as soon
+as it vanishes for the relevant prime cyclic coefficients.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F08, 0739
 -/
 
 @[expose] public section
@@ -27,10 +32,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- A constant bounded torsion group has zero higher direct image if its relevant prime
-cyclic coefficients do. A prime is irrelevant if multiplication by it is injective.
-
-Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 0739, cohomology and
-filtered colimits; Mathlib.GroupTheory.FiniteAbelian.Basic. -/
+cyclic coefficients do. A prime is irrelevant if multiplication by it is injective. -/
 theorem isZero_higherDirectImage_constant_of_prime_vanishing
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]
     (q : ℤ) (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ))

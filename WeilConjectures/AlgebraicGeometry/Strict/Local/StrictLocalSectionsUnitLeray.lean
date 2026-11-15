@@ -14,7 +14,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Derived sections unit followed by Leray on a representative
 
-Source: Stacks Project, Tag 03Q9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -151,10 +153,7 @@ private lemma sections_unit_on_complex {S : Scheme.{v}}
 -- The long naturality calculation elaborates several composed derived functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The direct-image unit followed by Leray is the derived sections unit.
-
-Source: Stacks Project, Tag 03Q9, and the unit factorization
-defining `Functor.rightDerivedFunctorCompIso`. -/
+/-- The direct-image unit followed by Leray is the derived sections unit. -/
 theorem smallModel_strictLocalSections_unit_leray {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     {Y : Scheme.{v}} (t : Y ⟶ Scheme.strictHenselizationScheme s)

@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 /-!
 # Prime cyclic detection of a geometric-point coefficient
 
-Source: Stacks Project, Tag 0F08, coefficient reduction in the proof, with underlying-abelian
-comparison from Tag 03FD and qcqs colimits from Tag 0739.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F08, 03FD, 0739
 -/
 
 @[expose] public section
@@ -78,11 +79,9 @@ private theorem prime_cyclic_vanishing_in_integer_coefficients
     DerivedCategory.Plus.homologyFunctor _ q
   exact (HZ.mapIso ci).isZero_iff.mp hz'
 
-/-- Nonvanishing with a geometric-point coefficient detects a prime cyclic abelian
-coefficient, with a prime that is not a unit in the original coefficient ring.
-
-Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 03FD for forgetting
-coefficients; Tag 0739 for qcqs cohomology and filtered colimits. -/
+/-- If the base-change target functor is nonzero on a sheaf `F` over `Spec K`, then the
+higher direct image of the constant sheaf `ZMod r` on `Y` is nonzero for some prime `r ∣ n`
+that is not a unit in `Λ`. -/
 theorem exists_prime_cyclic_higherDirectImage
     (Λ : Type (u + 1)) [CommRing Λ] {K : Type u} [Field K] [IsAlgClosed K]
     {X Y : Scheme.{u}} (e : Y ⟶ Spec (.of K)) (h : Y ⟶ X)

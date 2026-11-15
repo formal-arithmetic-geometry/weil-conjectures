@@ -9,14 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiv
 
 /-! # Evaluation of a localized cocycle on the cohomology sheaf
 
-Source: Stacks Project, Tag 03Q8, computation with an injective complex.
+## References
 
-## Implementation details
-
-This is the small-model counterpart of the module
-`WeilConjectures.AlgebraicGeometry.SourceLocalizedCocycleHomology`;
-the spectrum and structure morphism are those of the small coordinate-ring colimit.
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q8
 -/
+
+/- This original-model counterpart follows the proved calculation in
+WeilConjectures.AlgebraicGeometry.SourceLocalizedCocycleHomology.
+The spectrum and structure morphism are those of the small coordinate-ring colimit. -/
 
 @[expose] public section
 
@@ -27,8 +27,7 @@ open AlgebraicGeometry CochainComplex CochainComplex.HomComplex
 namespace AlgebraicGeometry.Etale
 
 /-- The homology section of a cocycle, evaluated at the free generator.
-It is the homology of the cycle map, transported along `r`.
-Source: Stacks Project, Tag 03Q8. -/
+This construction uses the actual cycle map and transports homology along `r`. -/
 noncomputable def smallModel_sourceCocycleHomologySection {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -43,10 +42,8 @@ noncomputable def smallModel_sourceCocycleHomologySection {S : Scheme.{v}}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation of a localized single-source cocycle is its actual homology section.
-This is a comparison on the base site, before taking stalks or restricting to any scheme.
-
-Source: Stacks Project, Tag 03Q8, injective-complex computation. -/
+/-- Evaluation of a localized single-source cocycle is its actual homology section, as a
+comparison on the base site. -/
 theorem smallModel_sourceLocalizedCocycleHomology {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)

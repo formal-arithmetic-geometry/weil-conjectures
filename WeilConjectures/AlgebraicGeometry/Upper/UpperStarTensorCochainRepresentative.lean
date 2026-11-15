@@ -18,7 +18,9 @@ import all Mathlib.Logic.Small.Defs
 /-!
 # The tensor counit square on cochain representatives
 
-Source: Stacks Project, Tags 07A4 and 0FPH.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A4, 0FPH
 -/
 
 @[expose] public noncomputable section
@@ -105,8 +107,7 @@ private theorem representative_quotient
   rw [hi]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- The defining derived tensor counit square on arbitrary cochain complexes.
-Source: Stacks Project, Tags 07A4 and 0FPH. -/
+/-- The defining derived tensor counit square on arbitrary cochain complexes. -/
 theorem upperStar_tensor_cochain_representative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     : LaxSquareHδ (Q₁ := DerivedCategory.Q) (Q₂ := DerivedCategory.Q)

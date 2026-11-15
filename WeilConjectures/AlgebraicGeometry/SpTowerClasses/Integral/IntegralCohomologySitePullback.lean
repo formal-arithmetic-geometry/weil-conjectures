@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-derived transport through the etale-to-pro-etale square
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section
@@ -164,8 +168,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Change of site preserves an arbitrary integral units cohomology class with its
-specified integer and full-units endpoints.
-Source: Stacks Tag 00WX for the adjunction square. -/
+specified integer and full-units endpoints. -/
 theorem integral_cohomology_site_pullback {X Y : Scheme.{u₁}} (f : X ⟶ Y)
     (e : Sheaf.H Y.gmSheaf 1)
     (a : (upperStar AddCommGrpCat.{u₁ + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

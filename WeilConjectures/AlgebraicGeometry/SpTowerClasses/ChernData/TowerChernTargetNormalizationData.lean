@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 
 /-! # Extract the positive Kummer equation of normalized Chern data
+
+## Implementation details
+
+The coefficient diagrams are kept as parameters, sharing the categories of the source
+normalization without expanding the actual scalar generator or coefficient map.
 -/
 
 @[expose] public noncomputable section

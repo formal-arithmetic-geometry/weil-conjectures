@@ -81,10 +81,13 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 /-!
 # Comparing the published Koszul fiber with the strict derived limit
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, and sites-cohomology.tex, Tags 0941 and 0A0A.
-
 This is a comparison of constructions, including the specified units. It makes no
 assertion about Cech complexes, completeness, or the mapping property of completion.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941, 0A0A
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Proposition 3.1.9
 -/
 
 @[expose] public noncomputable section
@@ -99,10 +102,7 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDa
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The published signed Koszul fiber computes the prescribed strict derived limit,
-including the canonical degree-zero unit, after the explicit ringed-site equivalence.
-
-Source: Stacks Project, Tag 0A0E; Tags 0A0A and 0941; Bhatt--Scholze, Proposition 3.1.9.
--/
+including the canonical degree-zero unit, after the explicit ringed-site equivalence. -/
 theorem completed_fiber_strict_limit_comparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinBijectiveNonpositive
 
 /-! # Bijectivity of graded exterior multiplication
 
-Source: Stacks Project, More on Algebra, Tag 0664.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0664
 -/
 
 @[expose] public section
@@ -22,9 +24,7 @@ universe u
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Exterior multiplication is bijective in each degree, independently of any differential.
-
-Source: Stacks Project, Tag 0664. -/
+/-- Exterior multiplication is bijective in each degree, independently of any differential. -/
 theorem koszulJoinGraded_bijective {A : Type (u + 1)} [CommRing A]
     (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (i : ℤ) :
     Function.Bijective (koszulJoinGraded r a m i).hom := by

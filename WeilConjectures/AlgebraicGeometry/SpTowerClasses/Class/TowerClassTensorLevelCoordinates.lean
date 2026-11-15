@@ -26,7 +26,14 @@ import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 
-/-! # Compatible finite coordinates for ordinary tensor pullback -/
+/-! # Compatible finite coordinates for ordinary tensor pullback
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,9 +48,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The finite ordinary tensor comparisons, before assembly on the sequence site.
-
-Source: Stacks 03EL and Zheng Construction 4.1. -/
+/-- The finite ordinary tensor comparisons, before assembly on the sequence site. -/
 theorem exists_tensorLevelCoordinates {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (hpush : ∀ (n : ℕ)

@@ -94,6 +94,10 @@ import all Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-!
 # Integral equation of a normalized supported Kummer boundary
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 0A45
 -/
 
 @[expose] public noncomputable section
@@ -111,8 +115,7 @@ attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- Forgetting coefficients and evaluating at the integral supported generator identifies
 any normalized supported Kummer boundary with the common pole extension followed by
-its Kummer extension and coefficient root map. No finiteness or positivity is needed.
-Source: Stacks 03PL and 0A45. -/
+its Kummer extension and coefficient root map. No finiteness or positivity is needed. -/
 theorem supported_kummer_integral_equation
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)

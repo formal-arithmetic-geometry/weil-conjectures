@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Filt
 /-!
 # Higher direct images and filtered diagrams at coefficient size
 
-Source: Stacks Project, Tags 0739 and 03Q8, and the proof of Tag 09Z1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0739, 03Q8, 09Z1
 -/
 
 @[expose] public section
@@ -26,10 +28,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Higher direct image along a qcqs morphism preserves filtered diagrams indexed
-in the coefficient universe, without a torsion assumption.
-
-Source: Stacks Project, Tag 0739, Tag 03Q8 (higher-image cohomology presheaf), and Tag 09Z1. -/
+/-- Higher direct image along a qcqs morphism preserves colimits of filtered diagrams
+indexed in the coefficient universe. -/
 theorem preservesColimitsOfShape_higherDirectImage_large
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)
     [QuasiCompact h] [QuasiSeparated h] (q : ℤ)

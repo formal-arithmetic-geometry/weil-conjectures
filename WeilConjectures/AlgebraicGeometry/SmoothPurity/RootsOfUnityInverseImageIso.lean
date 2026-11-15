@@ -38,8 +38,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Compatibility of inverse-image roots of unity
 
-Source: Deligne, Weil I, (2.2), pp. 280--281; Stacks Project, Tags 03PK, 00WX and 03CY.
-
 ## Main statements
 
 - `proEtaleRootsOfUnityInverseImageIso`: the three comparison properties.
@@ -47,6 +45,11 @@ Source: Deligne, Weil I, (2.2), pp. 280--281; Stacks Project, Tags 03PK, 00WX an
 
 The inverse-image action is specified on every adjunction-unit section and commutes with
 restrictions. These conditions uniquely fix the action produced by inverse image.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PK, 00WX, 03CY, 00YV
+* Deligne
 -/
 
 @[expose] public section
@@ -501,8 +504,7 @@ private theorem roots_iso_clause {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (N :
   exact isIso_of_reflects_iso (proEtaleRootsOfUnityInverseImageMap f N)
     (sheafToPresheaf (ProEt.topology X) AddCommGrpCat.{u + 1})
 
-/-- The inverse-image coefficient ring for the roots-of-unity sheaf.
-Source: Stacks Project, Tags 00YV and 03CY. -/
+/-- The inverse-image coefficient ring for the roots-of-unity sheaf. -/
 noncomputable abbrev proEtaleRootsOfUnityInverseImageRing {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
   (proEtaleSheafInverseImage f RingCat.{u + 1}).obj
@@ -510,8 +512,7 @@ noncomputable abbrev proEtaleRootsOfUnityInverseImageRing {X Y : Scheme.{u}} (f 
 
 /-- The induced action is normalized on the actual inverse-image adjunction units and
 commutes with all restrictions. This is the coefficient action on the inverse image,
-with the underlying ring and abelian sheaf kept fixed.
-Source: Stacks Project, Tags 00YV and 03CY. -/
+with the underlying ring and abelian sheaf kept fixed. -/
 def IsProEtaleRootsOfUnityInverseImageAction {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) (hN : 0 < N)
     (M : ∀ U : X.ProEtᵒᵖ, Module
@@ -541,8 +542,8 @@ def IsProEtaleRootsOfUnityInverseImageAction {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj
           (proEtaleRootsOfUnitySheaf Y N)).obj.map b x)
 
-/-- The inverse image of the coefficient action is uniquely determined by unit sections.
-Source: Stacks Project, Tags 00YV and 03CY. -/
+/-- There is a unique sectionwise action of the inverse-image coefficient ring on the inverse
+image of `μ_N` that is normalized on adjunction-unit sections and commutes with restrictions. -/
 theorem existsUnique_proEtaleRootsOfUnityInverseImageAction {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) (hN : 0 < N) :
     ∃! M : ∀ U : X.ProEtᵒᵖ, Module
@@ -623,8 +624,7 @@ theorem existsUnique_proEtaleRootsOfUnityInverseImageAction {X Y : Scheme.{u}} (
     rw [hi] at hev
     exact hev
 
-/-- The actual inverse-image action, selected from its uniquely normalized construction.
-Source: Stacks Project, Tags 00YV and 03CY. -/
+/-- The actual inverse-image action, selected from its uniquely normalized construction. -/
 @[instance_reducible]
 noncomputable def proEtaleRootsOfUnityInverseImageAction {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) (hN : 0 < N) (U : X.ProEtᵒᵖ) :
@@ -633,8 +633,10 @@ noncomputable def proEtaleRootsOfUnityInverseImageAction {X Y : Scheme.{u}} (f :
         (proEtaleRootsOfUnitySheaf Y N)).obj.obj U) :=
   (existsUnique_proEtaleRootsOfUnityInverseImageAction f N hN).exists.choose U
 
-/-- All three compatibility clauses for the canonical comparison on roots of unity.
-Source: Deligne, Weil I, (2.2), pp. 280--281; Stacks Project, Tags 03PK, 00WX and 03CY. -/
+/-- Compatibilities of the canonical comparison `f⁻¹ μ_N ⟶ μ_N`: it commutes with the
+transition maps, assembles into a map of `ℓ`-power towers, is semilinear over the constant-ring
+comparison, and for an isomorphism `f` it is an isomorphism given on sections by the
+identification of inverse images. -/
 theorem proEtaleRootsOfUnityInverseImageIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ (N N' : ℕ) (hN : 0 < N) (hN' : 0 < N') (h : N ∣ N'),
       (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map

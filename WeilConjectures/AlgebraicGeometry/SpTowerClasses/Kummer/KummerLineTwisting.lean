@@ -151,8 +151,7 @@ private theorem positive_isEquivalence
   exact (Functor.isEquivalence_iff_of_iso
     (SheafOfModules.siteSheafTensorRightIso R L)).mpr e.isEquivalence_functor
 
-/-- The root module already present in Chern data defines the normalized tensor/Hom twist.
-No existence or normalization of Chern arrows is asserted here. -/
+/-- The root module already present in Chern data defines the normalized tensor/Hom twist. -/
 theorem nonempty_kummerLineTwisting (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))) (c : Chern l E T) :

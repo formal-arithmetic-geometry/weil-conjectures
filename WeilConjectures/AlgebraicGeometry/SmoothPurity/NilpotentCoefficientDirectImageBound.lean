@@ -17,13 +17,18 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 /-!
 # Nilpotent coefficient extensions preserve a higher direct-image bound
 
-Source: Stacks Project, Derived Categories, Tag 015B, part (1); compare Bhatt--Scholze,
-Lemma 6.5.11.
+If the higher direct images of all `R ⧸ I`-module sheaves vanish above degree `N` and `I` is
+nilpotent, the same holds for all `R`-module sheaves.
 
 ## Implementation details
 
-The nilpotent coefficient case uses a sheafified descending I-adic filtration of the
-module sheaf.
+The reduction uses a sheafified descending `I`-adic filtration, following
+Bhatt–Scholze, Lemma 6.5.11.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 015B
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 6.5.11
 -/
 
 @[expose] public section
@@ -147,9 +152,7 @@ private theorem idealPowerPresheaf_isZero {C : Type*} [Category* C]
 
 /-- A common higher direct-image vanishing bound for quotient coefficients remains a bound
 for the original coefficients when the coefficient ideal is nilpotent. The same integer
-`N` is retained for every positive nilpotency exponent and every module sheaf.
-
-Source: Stacks Project, Tag 015B, part (1); compare Bhatt--Scholze, Lemma 6.5.11. -/
+`N` is retained for every positive nilpotency exponent and every module sheaf. -/
 theorem isZero_higherDirectImage_of_nilpotent_quotient_bound
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (R : Type (u + 1)) [CommRing R] (I : Ideal R) (t : ℕ)

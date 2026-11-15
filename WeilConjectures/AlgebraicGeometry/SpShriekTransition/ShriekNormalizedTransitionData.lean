@@ -10,9 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionDirectImageCo
 
 /-! # Normalized scalar coordinates of actual tower transitions
 
-All systems and evaluations are the published ordinary derived sequence-site model.
-Index n denotes the positive exponent n+1. Scalar coordinates below are fixed by
-adjunction uniqueness, rather than a choice of maps between evaluated objects.
+## Implementation details
+
+All systems and evaluations use the ordinary derived sequence-site model.
+Index `n` denotes the positive exponent `n + 1`. Scalar coordinates are fixed by
+adjunction uniqueness, rather than by a choice of maps between evaluated objects.
 -/
 
 @[expose] public noncomputable section

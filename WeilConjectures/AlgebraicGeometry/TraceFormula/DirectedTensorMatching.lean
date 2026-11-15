@@ -13,7 +13,10 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
 
 The module is constructed as a multiequalizer of pushforwards. Its construction
 uses arbitrary transitions; their cocycle is needed only for local invertibility.
-Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN; Constructions, Tag 01LI.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 00AL, 00AM, 04TN, 01LI
 -/
 
 @[expose] public section
@@ -195,7 +198,7 @@ def tensorMatchingDiagram : MulticospanIndex (tensorMatchingShape 𝒰) X.Module
     (𝒰.f a.val.1) (𝒰.trans_map a.property.some) (M a.val.2) (M a.val.1)
     (t a.property.some).hom
 
-/-- The module of matching sections, as a multiequalizer. -/
+/-- The actual module of matching sections, built by limits, without an existence theorem. -/
 def tensorMatchingModule : X.Modules := multiequalizer (tensorMatchingDiagram 𝒰 M t)
 
 /-- Projection of a matching family to a chart, before adjunction. -/

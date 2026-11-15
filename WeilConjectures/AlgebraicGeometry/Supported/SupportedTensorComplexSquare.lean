@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalNatTrans
 
-/-! # Passing coefficient tensor squares to signed total complexes -/
+/-! # Passing coefficient tensor squares to signed total complexes
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F1E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -17,8 +22,8 @@ universe w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory HomologicalComplex
 namespace AlgebraicGeometry.Etale
 
-/-- The square of signed total coefficient comparisons.
-Source: Tag 0F1E. -/
+/-- The square of signed total coefficient comparisons, packaged before specialization
+so its repeated tensor-complex structures remain shared. -/
 @[irreducible]
 noncomputable def supportedTensorComplexSquareCondition
     {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category.{w} E]
@@ -49,8 +54,7 @@ noncomputable def supportedTensorComplexSquareCondition
         (Functor.mapHomologicalComplexCompNatTrans F₂ H F₂' a₂ Q)
         (curriedTensor E) (.up ℤ)
 
-/-- An ordinary coefficient tensor square induces the same square on signed total complexes.
-Source: Tag 0F1E. -/
+/-- An ordinary coefficient tensor square induces the same square on signed total complexes. -/
 theorem supportedTensorComplex_square
     {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category.{w} E]
     [Preadditive C] [Preadditive D] [Preadditive E]

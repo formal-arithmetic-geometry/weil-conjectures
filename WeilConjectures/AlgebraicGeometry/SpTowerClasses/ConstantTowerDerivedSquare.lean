@@ -189,8 +189,7 @@ def derivedShiftedSingleEndpoint
     ((P.mapDerivedCategorySingleFunctor 0).hom.app B)⟦(1 : ℤ)⟧' ≫
     ((DerivedCategory.singleFunctor D 0).map t)⟦(1 : ℤ)⟧'
 
-/-- Transport a sheaf-level derived square through exact constant towers.
--/
+/-- Transport a sheaf-level derived square through exact constant towers. -/
 theorem constant_tower_derived_square {X Y : Scheme.{u}}
     [hDiagY : HasDerivedCategory.{u + 1} (DiagonalAb Y)]
     [hDiagX : HasDerivedCategory.{u + 1} (DiagonalAb X)]

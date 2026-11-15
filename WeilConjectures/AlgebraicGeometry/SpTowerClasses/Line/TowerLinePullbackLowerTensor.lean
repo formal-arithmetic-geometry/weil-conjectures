@@ -195,9 +195,7 @@ private theorem map_conjugate
   simp only [Functor.map_comp, Category.assoc]
 
 /-- A normalized comparison at the lower level computes the adjunct of the lower
-path on each higher-level pure tensor. No comparison at the higher level, target
-Chern datum, system isomorphism, or horizontal square is assumed or constructed.
--/
+path on each higher-level pure tensor. -/
 theorem linePullback_lower_tensor
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y)

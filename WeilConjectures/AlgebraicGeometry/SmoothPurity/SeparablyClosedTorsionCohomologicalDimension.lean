@@ -13,7 +13,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Torsion cohomological dimension of a separably closed field
 
-Source: Stacks Project, Tags 03QO, 04JQ and 04JM.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03QO, 04JQ, 04JM
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ universe u
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A separably closed field has torsion étale cohomological dimension at most zero.
-Source: Stacks Project, Tags 03QO, 04JQ and 04JM. -/
+/-- A separably closed field has torsion étale cohomological dimension at most zero. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed
     (K : Type u) [Field K] [IsSepClosed K] :
     HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 0 := by

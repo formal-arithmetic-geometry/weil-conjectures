@@ -20,7 +20,10 @@ public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 
 /-! The affine Leray comparison before passing from modules to abelian sheaves.
 
-Source: Stacks Project, Tags 01XK, 01FB and 03FD. -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01XK, 01FB, 03FD, 0BKJ
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -270,9 +273,7 @@ noncomputable def affineLerayTargetEquiv
       (affineLerayEquiv qY).symm
 
 /-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
-`affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
-Source: Stacks Project, Tags 01XK (affine higher-image vanishing), 01FB (h-maps), and 03FD (module
-cohomology); local classes and sheafification as in Tag 0BKJ. -/
+`affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces. -/
 theorem structure_derived_image_module_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

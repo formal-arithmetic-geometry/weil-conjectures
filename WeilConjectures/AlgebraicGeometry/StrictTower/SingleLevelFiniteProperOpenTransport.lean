@@ -20,7 +20,9 @@ import all WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopen
 This is the coefficient-realization step between the finite site comparison and
 strict-tower evaluation. It contains no strict-tower object or evaluation functor.
 
-Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DA, 07A7, 099R, 09AF
 -/
 
 @[expose] public section
@@ -327,8 +329,7 @@ private theorem coefficientPlusCounit
   rw [mateEquiv_counit]
   exact Iso.inv_hom_id_app_assoc (hPullbackPlus B Λ φ f) _ _
 
-/-- The canonical coefficient realization transports the normalized finite etale mate.
-Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF. -/
+/-- The canonical coefficient realization transports the normalized finite etale mate. -/
 theorem singleLevelFiniteProperOpenTransport
     (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)

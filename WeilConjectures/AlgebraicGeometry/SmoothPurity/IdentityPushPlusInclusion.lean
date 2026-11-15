@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
-/-! # Identity direct-image comparison across the bounded-below inclusion -/
+/-! # Identity direct-image comparison across the bounded-below inclusion
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 015F, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -63,8 +68,8 @@ private theorem plus_identity_unit
     NatTrans.comp_app, Functor.map_comp, Functor.rightDerivedFunctorPlusNatIso,
     Iso.symm_hom, a, R, e, d, C, Functor.id_obj, Category.assoc] using hv
 
-/-- The canonical identity direct-image normalization agrees across D+ inclusion.
-Source: Stacks Tags 015F and 0B65. -/
+/-- The canonical identity direct-image normalization agrees across the inclusion of the
+bounded-below derived category. -/
 theorem identityPush_plus_inclusion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
     (K : DerivedCategory.Plus

@@ -37,6 +37,10 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-! # Reconstruction in the actual completed coefficient presentation
 
 The canonical quotient transitions are the adjuncts of the quotient units.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 091N, 0DVC
 -/
 
 @[expose] public noncomputable section
@@ -573,8 +577,7 @@ private theorem reconstructionLimit_transport
   · change (E.inv ≫ δ) ≫ (shiftFunctor C (1 : ℤ)).map (𝟙 L) = E.inv ≫ δ
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- An intrinsically complete object is a Roos limit of its actual quotient reductions.
-Source: Stacks Tags 091N and 0DVC. -/
+/-- An intrinsically complete object is a Roos limit of its quotient reductions. -/
 theorem pbc_actual_completed_reduction_reconstruction
     [HasCountableProducts (PbcCompletedDerived T d)]
     (K : PbcCompletedDerived T d) (hK : PbcIsIntrinsicallyComplete T d K) :

@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearScalarRest
 
 /-! # Transition compatibility of normalized scalar direct-image components
 
-Source: Zheng, Construction 4.1. -/
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -81,8 +85,7 @@ private theorem scalarPushedLevel_heq (C : OrdinaryScalarRestriction R φ B ψ)
   exact (scalarLevelSection_heq R φ B ψ C X n M
     ((Scheme.proEtaleBaseChange f).op.obj H) _).trans h
 
-/-- Normalized direct-image component maps respect the successor transitions.
-Source: Zheng, Construction 4.1. -/
+/-- Normalized direct-image component maps respect the successor transitions. -/
 theorem ordinaryScalarDirectComponents_step (C : OrdinaryScalarRestriction R φ B ψ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules R φ X)
     (d : ∀ n : ℕ, (((C.rho Y).obj ((push R φ f).obj M)).obj (op n)) ≅

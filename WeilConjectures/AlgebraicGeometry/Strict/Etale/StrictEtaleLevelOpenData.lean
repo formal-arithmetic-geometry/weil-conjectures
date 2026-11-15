@@ -21,6 +21,20 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! Levelwise data for strict étale extension by zero.
 
 This isolates the fixed coefficient-level transport from the subsequent system assembly.
+
+## Implementation details
+
+Each level is the fixed-coefficient open extension by zero, transported along the additive
+equivalence between modules over the constant quotient-ring sheaf and fixed-coefficient module
+sheaves obtained by restriction along the constant-presheaf sheafification unit. The
+restriction isomorphism is the inverse mate of `I.restrictInverse.inv`, which is invertible
+because extension by zero is fully faithful.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -550,10 +564,10 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- The levelwise pieces of ordinary strict étale extension by zero.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
 
 The record contains the transported lower-shriek functors, their exact adjunctions,
-and the normalized scalar-restriction mates. -/
+and the normalized scalar-restriction mates.  It is strictly below the system theorem:
+it has no system extension, system adjunction, or system evaluation comparison. -/
 structure StrictEtaleLevelOpenData where
   level : ∀ n, strictEtaleLevel X O t n ⥤ strictEtaleLevel Z O t n
   [levelAdditive : ∀ n, (level n).Additive]
@@ -568,8 +582,7 @@ structure StrictEtaleLevelOpenData where
 
 attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
-/-- The levelwise transport exists.
-Source: Stacks Project 03S2, 03DI and 03DJ; Zheng, Construction 4.1. -/
+/-- The levelwise transport data for strict étale extension by zero exists. -/
 theorem strictEtaleLevelOpenData_exists :
     Nonempty (StrictEtaleLevelOpenData O t j I) := by
   have (n : ℕ) : (StrictEtaleOpenProof.fixed X

@@ -37,7 +37,9 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricPureFibrePointDimens
 /-!
 # The d-th Fitting ideal and the smooth locus
 
-Source: Stacks Project, Divisors, Tag 0C3K.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0C3K
 -/
 
 @[expose] public section
@@ -48,15 +50,14 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Relative differentials of a locally finitely presented morphism are finite type.
-Source: Stacks Project, Divisors, Tag 0C3K. -/
+/-- Relative differentials of a locally finitely presented morphism are finite type. -/
 theorem relativeDifferentials_isFiniteType {T B : Scheme.{u}} (g : T ⟶ B)
     [LocallyOfFinitePresentation g] : g.relativeDifferentials.IsFiniteType := by
   obtain ⟨_, _, c, _, _, _, _, hfinite⟩ := g.relativeDifferentialSheaf_baseChange (𝟙 B)
   exact (hfinite inferInstance).1
 
 /-- Relative differentials are quasi-coherent on a scheme for a locally finitely
-presented morphism. Source: Stacks Project, Divisors, Tag 0C3K. -/
+presented morphism. -/
 theorem relativeDifferentials_isQuasicoherent {T B : Scheme.{u}} (g : T ⟶ B)
     [LocallyOfFinitePresentation g] : g.relativeDifferentials.IsQuasicoherent := by
   exact (g.relativeDifferentialSheaf_baseChange (𝟙 B)).1

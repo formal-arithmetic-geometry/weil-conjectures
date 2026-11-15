@@ -157,8 +157,6 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
 /-!
 # Geometric operations for varying constant coefficient rings
 
-Source: Stacks Project, Tags 03DI, 03DJ, 07A6, 09AE and 0F7B; Zheng, Construction 4.1.
-
 Systems and their ordinary unbounded derived categories are the existing sequence-site
 module categories. Direct image is actual continuous module pushforward. Its left adjoint,
 and open extension, are selected by their universal properties; all compositors are
@@ -170,6 +168,13 @@ unit-preserving adjoint comparisons.
 - `push`, `pull`, `extension`, `P`, `G`, `J`: actual ordinary and derived operations.
 - `modulePComp`, `gComp`, `pComp`, `jComp`: normalized composition.
 - `evalG`, `evalP`, `evalJ`: canonical coefficient evaluation.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03DJ, 07A6, 09AE, 0F7B, 098K, 00W1,
+  00YV, 05RU, 03DA, 03EK, 079P, 0D6D, 07A7, 0F7D
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10, Construction 4.10
 -/
 
 @[expose] public noncomputable section
@@ -197,54 +202,45 @@ private local instance evaluationContinuousFixed {C : Type (u + 1)} [Category.{u
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- The small pro-etale site fits the coefficient universe, retaining Hom universe u.
-Source: Stacks 098K. -/
+/-- The small pro-etale site fits the coefficient universe, retaining Hom universe u. -/
 instance siteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-/-- The vertical sequence site has the same smallness bound.
-Source: Zheng 4.1. -/
+/-- The vertical sequence site has the same smallness bound. -/
 instance sequenceSiteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} (ℕ × X.ProEt) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-/-- Ring-valued sheafification with all site and value universes fixed explicitly.
-Source: Stacks 00W1. -/
+/-- Ring-valued sheafification with all site and value universes fixed explicitly. -/
 instance ringSheafify (X : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   HasSmallSiteSheafify.hasSheafify_of_essentiallySmall.{u + 2, u, u, u + 1}
     CommRingCat.{u + 1} (Scheme.ProEt.topology X)
 
-/-- Constant coefficient sheaves, with arbitrary commutative rings.
-Source: Stacks 00YV. -/
+/-- Constant coefficient sheaves, with arbitrary commutative rings. -/
 abbrev coefficients (X : Scheme.{u}) (n : ℕ) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj (R n)
 
-/-- The actual adjacent ring-sheaf maps.
-Source: Zheng 4.1. -/
+/-- The actual adjacent ring-sheaf maps. -/
 def coefficientTransition (X : Scheme.{u}) (n : ℕ) :
     coefficients R X (n + 1) ⟶ coefficients R X n :=
   (constantSheaf.{u, u + 1, u + 1, u + 2}
     (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (φ n)
 
-/-- The already constructed module category on the vertical sequence site.
-Source: Zheng 4.1. -/
+/-- The already constructed module category on the vertical sequence site. -/
 abbrev Modules (X : Scheme.{u}) :=
   Systems.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
     (coefficientTransition R φ X)
 
-/-- Its ordinary unbounded derived category, with no cartesianness condition.
-Source: Stacks 05RU. -/
+/-- Its ordinary unbounded derived category, with no cartesianness condition. -/
 abbrev Derived (X : Scheme.{u}) :=
   DS.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X) (coefficientTransition R φ X)
 
-/-- The functor on sequence sites leaves the coefficient index unchanged.
-Source: Stacks 09AE; Zheng 4.1. -/
+/-- The functor on sequence sites leaves the coefficient index unchanged. -/
 def baseChange {X Y : Scheme.{u}} (f : X ⟶ Y) : ℕ × Y.ProEt ⥤ ℕ × X.ProEt :=
   (𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)
 
-/-- Continuity on the vertical sequence topology.
-Source: Stacks 09AE; Zheng 4.1. -/
+/-- Continuity on the vertical sequence topology. -/
 theorem baseChange_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (baseChange f).IsContinuous (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
@@ -269,8 +265,7 @@ theorem baseChange_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
 attribute [instance] baseChange_continuous
 
 /-- The coefficient structure map at a sequence-site object is the canonical map on
-constant sections at that same index.
-Source: Stacks 00YV, 09AE. -/
+constant sections at that same index. -/
 def ringMapApp {X Y : Scheme.{u}} (f : X ⟶ Y) (U : (ℕ × Y.ProEt)ᵒᵖ) :
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).obj
         ((coefficients R Y U.unop.1).obj.obj (op U.unop.2)) ⟶
@@ -301,8 +296,7 @@ private theorem constantMap_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((toSheafification (Scheme.ProEt.topology X) CommRingCat.{u + 1}).naturality
       ((Functor.const X.ProEtᵒᵖ).map a))
 
-/-- Naturality includes the horizontal, possibly nonflat, coefficient maps.
-Source: Stacks 00YV; Zheng 4.1. -/
+/-- Naturality includes the horizontal, possibly nonflat, coefficient maps. -/
 theorem ringMapApp_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {U V : (ℕ × Y.ProEt)ᵒᵖ} (a : U ⟶ V) :
     (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology Y))
@@ -330,8 +324,7 @@ theorem ringMapApp_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         CommRingCat.{u + 1})))
   exact (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).congr_map (ε.naturality a)
 
-/-- The real ring-sheaf map defining direct image on semilinear systems.
-Source: Stacks 03DA; Zheng 4.1. -/
+/-- The real ring-sheaf map defining direct image on semilinear systems. -/
 def ringMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ring.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology Y))
         (systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology Y) (coefficients R Y)
@@ -344,8 +337,7 @@ def ringMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
               (coefficientTransition R φ X))) :=
   ⟨{ app := ringMapApp R f, naturality := fun _ _ a => ringMapApp_naturality R φ f a }⟩
 
-/-- Direct image retains sections M_n(H ×_Y X) and their semilinear transitions.
-Source: Stacks 03DA; Zheng 4.1. -/
+/-- Direct image retains sections M_n(H ×_Y X) and their semilinear transitions. -/
 def push {X Y : Scheme.{u}} (f : X ⟶ Y) : Modules R φ X ⥤ Modules R φ Y :=
   SheafOfModules.pushforward (ringMap R φ f)
 
@@ -431,8 +423,7 @@ private theorem largePush_isRightAdjoint
     intro U
     rfl
 
-/-- Existence of inverse image as the left adjoint of the actual section functor.
-Source: Stacks 03EK; Zheng 4.1. -/
+/-- Existence of inverse image as the left adjoint of the actual section functor. -/
 theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).IsRightAdjoint := by
   exact largePush_isRightAdjoint (C := ℕ × Y.ProEt) (D := ℕ × X.ProEt)
@@ -442,19 +433,16 @@ theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [instance] push_isRightAdjoint
 
-/-- Inverse image selected by its universal property, not by a noncanonical map.
-Source: Stacks 03EK. -/
+/-- Inverse image selected by its universal property, not by a noncanonical map. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (push R φ f).leftAdjoint
 
-/-- The universal-property adjunction fixes every subsequent mate and compositor.
-Source: Stacks 03EK. -/
+/-- The universal-property adjunction fixes every subsequent mate and compositor. -/
 def moduleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : pull R φ f ⊣ push R φ f :=
   Adjunction.ofIsRightAdjoint _
 
 attribute [local irreducible] moduleAdj
 
-/-- Direct image is additive on all section modules.
-Source: Stacks 03DA. -/
+/-- Direct image is additive on all section modules. -/
 theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).Additive := by
   constructor
@@ -526,8 +514,7 @@ private theorem towerFunctor_preservesLimits
       F hEval (op V.unop.2)
   exact preservesLimits_of_reflects_of_preserves F T
 
-/-- Exact ordinary evaluation of a semilinear system.
-Source: Zheng 4.1. -/
+/-- Exact ordinary evaluation of a semilinear system. -/
 abbrev eval (X : Scheme.{u}) (n : ℕ) :
     Modules R φ X ⥤ StrictTower.Modules (R n) X :=
   SemilinearSections.evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
@@ -704,8 +691,7 @@ private theorem moduleEvalP_specialized {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Elaborating the section-carrier normalization unfolds both continuous module functors.
-/-- Ordinary pushforward evaluation is identity on every section carrier.
-Source: Zheng 4.1. -/
+/-- Ordinary pushforward evaluation is identity on every section carrier. -/
 theorem moduleEvalP_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! d : push R φ f ⋙ eval R φ Y n ≅
         eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f,
@@ -714,8 +700,7 @@ theorem moduleEvalP_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
         (d.hom.app N).val.app (op U) x = x :=
   moduleEvalP_specialized R φ f n
 
-/-- The actual componentwise direct-image identification.
-Source: Zheng 4.1. -/
+/-- The actual componentwise direct-image identification. -/
 def moduleEvalP {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     push R φ f ⋙ eval R φ Y n ≅
       eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f :=
@@ -1086,9 +1071,7 @@ attribute [local irreducible] coFor coForAdj coFunctor coAdj
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Existence of the unit-normalized ordinary pullback evaluation comparison.
-Source: Zheng 4.1.
--/
+/-- Existence of the unit-normalized ordinary pullback evaluation comparison. -/
 theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃ d : pull R φ f ⋙ eval R φ X n ≅
         eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,
@@ -1153,9 +1136,7 @@ theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   exact (congrArg (fun z ↦ adj.unit.app ((eval R φ Y n).obj N) ≫ z)
     ((StrictTower.moduleDirectImage (R n) f).map_id _)).trans (Category.comp_id _)
 
-/-- Uniqueness of the unit-normalized ordinary pullback evaluation comparison.
-Source: Zheng 4.1.
--/
+/-- Uniqueness of the unit-normalized ordinary pullback evaluation comparison. -/
 theorem moduleEvalG_unique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (d e : pull R φ f ⋙ eval R φ X n ≅
       eval R φ Y n ⋙ StrictTower.modulePullback (R n) f)
@@ -1207,8 +1188,7 @@ private theorem moduleEvalP_hom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     IsIso (moduleEvalP R φ f n).hom := by
   infer_instance
 
-/-- The normalized ordinary pullback evaluation comparison.
-Source: Zheng 4.1. -/
+/-- The normalized ordinary pullback evaluation comparison. -/
 def moduleEvalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     pull R φ f ⋙ eval R φ X n ≅
       eval R φ Y n ⋙ StrictTower.modulePullback (R n) f :=
@@ -1233,8 +1213,7 @@ private theorem exact_of_componentwise
   exact (ShortComplex.exact_iff_of_iso (s.mapNatIso (e n))).mpr
     ((hs.map (T n)).map (H n))
 
-/-- Inverse image is additive and exact on all systems.
-Source: Zheng 4.1; Stacks 03EK. -/
+/-- Inverse image is additive and exact on all systems. -/
 theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pull R φ f).Additive ∧ PreservesFiniteLimits (pull R φ f) ∧
       PreservesFiniteColimits (pull R φ f) := by
@@ -1249,8 +1228,7 @@ theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (fun n ↦ StrictTower.modulePullback (R n) f)
     A.systems.componentwise (moduleEvalG R φ f)
 
-/-- Open restriction has the extension-by-zero left adjoint.
-Source: Stacks 03DI, 09AE. -/
+/-- Open restriction has the extension-by-zero left adjoint. -/
 theorem pull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (pull R φ j).IsRightAdjoint := by
   let : IsGrothendieckAbelian.{u + 1} (Modules R φ X) :=
@@ -1277,23 +1255,19 @@ theorem pull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 attribute [instance] pull_isRightAdjoint
 
-/-- Additivity needed for the actual exact derived inverse image.
-Source: Zheng 4.1. -/
+/-- Additivity needed for the actual exact derived inverse image. -/
 instance pullAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) : (pull R φ f).Additive :=
   (pull_exact R φ f).1
 
-/-- Left exactness of the actual inverse image.
-Source: Zheng 4.1. -/
+/-- Left exactness of the actual inverse image. -/
 instance pullLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (pull R φ f) := (pull_exact R φ f).2.1
 
-/-- Right exactness of the actual inverse image.
-Source: Zheng 4.1. -/
+/-- Right exactness of the actual inverse image. -/
 instance pullColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (pull R φ f) := (pull_exact R φ f).2.2
 
-/-- K-injective resolutions on the actual ringed sequence site.
-Source: Stacks 079P; Zheng 4.1. -/
+/-- K-injective resolutions on the actual ringed sequence site. -/
 theorem modules_kInjective (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (Modules R φ X) := by
   let :=
@@ -1306,18 +1280,15 @@ theorem modules_kInjective (X : Scheme.{u}) :
 
 attribute [instance] modules_kInjective
 
-/-- Exact inverse image on the ordinary derived system category.
-Source: Zheng 4.1. -/
+/-- Exact inverse image on the ordinary derived system category. -/
 abbrev G {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived R φ Y ⥤ Derived R φ X :=
   (pull R φ f).mapDerivedCategory
 
-/-- Total right derived direct image, computed on the system category itself.
-Source: Stacks 079P. -/
+/-- Total right derived direct image, computed on the system category itself. -/
 abbrev P {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived R φ X ⥤ Derived R φ Y :=
   (push R φ f).rightDerivedFunctor
 
-/-- The canonical derived adjunction is induced from the ordinary one.
-Source: Stacks 07A6. -/
+/-- The canonical derived adjunction is induced from the ordinary one. -/
 def adj {X Y : Scheme.{u}} (f : X ⟶ Y) : G R φ f ⊣ P R φ f :=
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
     (L := pull R φ f) (R := push R φ f) (moduleAdj R φ f)
@@ -1366,8 +1337,7 @@ private theorem constantMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   rw [Category.id_comp] at hn
   exact hn.symm
 
-/-- Ordinary direct-image composition is fixed on every section and coefficient index.
-Source: Stacks 0D6D. -/
+/-- Ordinary direct-image composition is fixed on every section and coefficient index. -/
 theorem modulePComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃! d : push R φ f ⋙ push R φ g ≅ push R φ (f ≫ g),
       ∀ (N : Modules R φ X) (n : ℕ) (U : Z.ProEt)
@@ -1425,13 +1395,11 @@ theorem modulePComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   ext x
   exact (hd' N U.unop.1 U.unop.2 x).trans (hd N U.unop.1 U.unop.2 x).symm
 
-/-- The section-normalized compositor for ordinary direct image.
-Source: Stacks 0D6D. -/
+/-- The section-normalized compositor for ordinary direct image. -/
 def modulePComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
   (modulePComp_existsUnique R φ f g).choose
 
-/-- Inverse-image composition is its unit-preserving conjugate.
-Source: Stacks 0D6D. -/
+/-- Inverse-image composition is its unit-preserving conjugate. -/
 def moduleGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     pull R φ (f ≫ g) ≅ pull R φ g ⋙ pull R φ f :=
   (Adjunction.leftAdjointCompIso
@@ -1440,23 +1408,20 @@ def moduleGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (moduleAdj R φ g) (moduleAdj R φ f)
     (moduleAdj R φ (f ≫ g)) (modulePComp R φ f g)).symm
 
-/-- Derived inverse-image composition is localized from the actual system comparison.
-Source: Stacks 0D6D. -/
+/-- Derived inverse-image composition is localized from the actual system comparison. -/
 def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G R φ (f ≫ g) ≅ G R φ g ⋙ G R φ f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp R φ f g) ≪≫
     (Functor.mapDerivedCategoryCompIso (pull R φ g) (pull R φ f)).symm
 
-/-- Proper direct-image composition is the conjugate of inverse-image composition.
-Source: Stacks 0D6D. -/
+/-- Proper direct-image composition is the conjugate of inverse-image composition. -/
 def pComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     P R φ f ⋙ P R φ g ≅ P R φ (f ≫ g) :=
   conjugateIsoEquiv (L₁ := G R φ g ⋙ G R φ f) (R₁ := P R φ f ⋙ P R φ g)
     (L₂ := G R φ (f ≫ g)) (R₂ := P R φ (f ≫ g))
     ((adj R φ g).comp (adj R φ f)) (adj R φ (f ≫ g)) (gComp R φ f g)
 
-/-- The identity comparison for ordinary direct image is the pullback graph map.
-Source: Stacks 07A7. -/
+/-- The identity comparison for ordinary direct image is the pullback graph map. -/
 theorem modulePId_existsUnique (X : Scheme.{u}) :
     ∃! d : push R φ (𝟙 X) ≅ 𝟭 (Modules R φ X),
       ∀ (N : Modules R φ X) (n : ℕ) (U : X.ProEt)
@@ -1529,32 +1494,27 @@ theorem modulePId_existsUnique (X : Scheme.{u}) :
   ext x
   exact (hd' N U.unop.1 U.unop.2 x).trans (hd N U.unop.1 U.unop.2 x).symm
 
-/-- The uniquely normalized ordinary identity comparison.
-Source: Stacks 07A7. -/
+/-- The uniquely normalized ordinary identity comparison. -/
 def modulePId (X : Scheme.{u}) := (modulePId_existsUnique R φ X).choose
 
-/-- The inverse-image identity is localized from the adjoint identity comparison.
-Source: Stacks 07A7. -/
+/-- The inverse-image identity is localized from the adjoint identity comparison. -/
 def gId (X : Scheme.{u}) : G R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
   Functor.mapDerivedCategoryNatIso
     (Adjunction.leftAdjointIdIso (F := pull R φ (𝟙 X)) (G := push R φ (𝟙 X))
       (moduleAdj R φ (𝟙 X)) (modulePId R φ X)) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
-/-- The right-adjoint identity is fixed by the same unit normalization.
-Source: Stacks 07A7. -/
+/-- The right-adjoint identity is fixed by the same unit normalization. -/
 def pId (X : Scheme.{u}) : P R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
   (conjugateIsoEquiv (L₁ := 𝟭 (Derived R φ X)) (R₁ := 𝟭 (Derived R φ X))
     (L₂ := G R φ (𝟙 X)) (R₂ := P R φ (𝟙 X))
     Adjunction.id (adj R φ (𝟙 X)) (gId R φ X)).symm
 
-/-- Open extension chosen by the localized module universal property.
-Source: Stacks 03DI. -/
+/-- Open extension chosen by the localized module universal property. -/
 abbrev extension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (pull R φ j).leftAdjoint
 
-/-- The actual ordinary open-extension adjunction.
-Source: Stacks 03DI. -/
+/-- The actual ordinary open-extension adjunction. -/
 def moduleJAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     extension R φ j ⊣ pull R φ j := Adjunction.ofIsRightAdjoint _
 
@@ -2096,8 +2056,7 @@ end OpenEvaluationMates
 
 attribute [local instance] fixedEvalContinuous
 
-/-- Exactness of extension by zero, including the empty open.
-Source: Stacks 03DJ. -/
+/-- Exactness of extension by zero, including the empty open. -/
 theorem extension_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (extension R φ j).Additive ∧ PreservesFiniteLimits (extension R φ j) ∧
       PreservesFiniteColimits (extension R φ j) := by
@@ -2112,28 +2071,23 @@ theorem extension_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (fun n ↦ StrictTower.moduleJ (R n) j) A.systems.componentwise
     (fun n ↦ (extensionEvaluation_exists R φ j n).some)
 
-/-- Additivity of extension by zero.
-Source: Stacks 03DI. -/
+/-- Additivity of extension by zero. -/
 instance extensionAdditive {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (extension R φ j).Additive := (extension_exact R φ j).1
 
-/-- Left exactness of extension by zero.
-Source: Stacks 03DJ. -/
+/-- Left exactness of extension by zero. -/
 instance extensionLimits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteLimits (extension R φ j) := (extension_exact R φ j).2.1
 
-/-- Right exactness of extension by zero.
-Source: Stacks 03DJ. -/
+/-- Right exactness of extension by zero. -/
 instance extensionColimits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteColimits (extension R φ j) := (extension_exact R φ j).2.2
 
-/-- Exact extension on the ordinary derived category of systems.
-Source: Stacks 03DJ. -/
+/-- Exact extension on the ordinary derived category of systems. -/
 abbrev J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (extension R φ j).mapDerivedCategory
 
-/-- The derived open adjunction retains the ordinary units and counits.
-Source: Stacks 03DI, 07A6. -/
+/-- The derived open adjunction retains the ordinary units and counits. -/
 def jAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : J R φ j ⊣ G R φ j :=
   Adjunction.ofNatIsoRight (F := (pull R φ j).rightDerivedFunctor) (G := G R φ j)
     (H := J R φ j)
@@ -2141,8 +2095,7 @@ def jAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : J R φ j ⊣ G R
       (L := extension R φ j) (R := pull R φ j) (moduleJAdj R φ j))
     (pull R φ j).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Ordinary open composition has the inverse-image composition as its conjugate.
-Source: Stacks 03DI, 0F7D. -/
+/-- Ordinary open composition has the inverse-image composition as its conjugate. -/
 def moduleJComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     extension R φ i ⋙ extension R φ j ≅ extension R φ (i ≫ j) :=
@@ -2152,25 +2105,21 @@ def moduleJComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     (moduleJAdj R φ i) (moduleJAdj R φ j)
     (moduleJAdj R φ (i ≫ j)) (moduleGComp R φ i j).symm
 
-/-- Derived open composition is localized from that ordinary comparison.
-Source: Stacks 0F7D. -/
+/-- Derived open composition is localized from that ordinary comparison. -/
 def jComp {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] : J R φ i ⋙ J R φ j ≅ J R φ (i ≫ j) :=
   Functor.mapDerivedCategoryCompIso (extension R φ i) (extension R φ j) ≪≫
     Functor.mapDerivedCategoryNatIso (moduleJComp R φ i j)
 
-/-- Identity extension with its canonical adjoint normalization.
-Source: Stacks 03DI. -/
+/-- Identity extension with its canonical adjoint normalization. -/
 def jId (X : Scheme.{u}) : J R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
   Adjunction.leftAdjointIdIso (F := J R φ (𝟙 X)) (G := G R φ (𝟙 X))
     (jAdj R φ (𝟙 X)) (gId R φ X)
 
-/-- Evaluation on the ordinary unbounded derived category.
-Source: Zheng 4.1. -/
+/-- Evaluation on the ordinary unbounded derived category. -/
 abbrev ev (X : Scheme.{u}) (n : ℕ) := (eval R φ X n).mapDerivedCategory
 
-/-- Derived evaluation is localization of the actual ordinary comparison.
-Source: Zheng 4.1. -/
+/-- Derived evaluation is localization of the actual ordinary comparison. -/
 def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     G R φ f ⋙ ev R φ X n ≅
       ev R φ Y n ⋙ (StrictTower.modulePullback (R n) f).mapDerivedCategory :=
@@ -2185,8 +2134,7 @@ def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       (Functor.mapDerivedCategoryCompIso (eval R φ Y n)
         (StrictTower.modulePullback (R n) f)).symm
 
-/-- The ordinary exact-level adjunction, derived with its original unit.
-Source: Stacks 07A6. -/
+/-- The ordinary exact-level adjunction, derived with its original unit. -/
 def levelAdj {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
     (L := Scheme.proEtaleRingModulePullback f (coefficients R Y n) (coefficients R X n)
@@ -2196,8 +2144,7 @@ def levelAdj {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
     (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n) (coefficients R X n)
       (StrictTower.constantRingIso (R n) f))
 
-/-- Evaluation of total direct image is the canonical mate, before inversion.
-Source: Zheng 4.1, Lemma 4.10. -/
+/-- Evaluation of total direct image is the canonical mate, before inversion. -/
 def evalPMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     P R φ f ⋙ ev R φ Y n ⟶
       ev R φ X n ⋙ (StrictTower.moduleDirectImage (R n) f).rightDerivedFunctor :=
@@ -2534,21 +2481,18 @@ private theorem derived_finiteMate_iso
     (levelAdj R f n) (adj R φ f) (evalG R φ f n).inv hD
 end FiniteEvaluationLeftAdjoints
 
-/-- The canonical direct-image evaluation mate is invertible on all systems.
-Source: Zheng 4.10. -/
+/-- The canonical direct-image evaluation mate is invertible on all systems. -/
 theorem evalPMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (evalPMate R φ f n) := by
   exact derived_finiteMate_iso R φ f n
 
 attribute [local irreducible] evalPMate
 
-/-- The normalized derived direct-image evaluation.
-Source: Zheng 4.10. -/
+/-- The normalized derived direct-image evaluation. -/
 def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   @asIso _ _ _ _ (evalPMate R φ f n) (evalPMate_isIso R φ f n)
 
-/-- The exact-level open-extension adjunction.
-Source: Stacks 03DI, 07A6. -/
+/-- The exact-level open-extension adjunction. -/
 def levelJAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :=
   Adjunction.ofNatIsoRight
     (F := (StrictTower.modulePullback (R n) j).rightDerivedFunctor)
@@ -2559,8 +2503,7 @@ def levelJAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :=
       (StrictTower.moduleJAdj (R n) j))
       (StrictTower.modulePullback (R n) j).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- The open-extension evaluation comparison is fixed by the pullback comparison.
-Source: Stacks 03DI; Zheng 4.1. -/
+/-- The open-extension evaluation comparison is fixed by the pullback comparison. -/
 def evalJInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     ev R φ U n ⋙ (StrictTower.moduleJ (R n) j).mapDerivedCategory ⟶
       J R φ j ⋙ ev R φ X n :=
@@ -2896,16 +2839,14 @@ private theorem derivedOpenMateIso
     (levelJAdj R j n) (exactAdj (StrictTower.moduleJAdj (R n) j))
     (ev R φ U n) (ev R φ X n) (evalG R φ j n)
 
-/-- The open-extension mate is the localization of the coefficientwise lift map.
-Source: Stacks 03DI, 03DJ. -/
+/-- The open-extension mate is the localization of the coefficientwise lift map. -/
 theorem evalJInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     IsIso (evalJInv R φ j n) := by
   exact derivedOpenMateIso R φ j n
 
 attribute [local irreducible] evalJInv
 
-/-- Derived open evaluation with its specified unit normalization.
-Source: Stacks 03DI. -/
+/-- Derived open evaluation with its specified unit normalization. -/
 def evalJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :=
   (@asIso _ _ _ _ (evalJInv R φ j n) (evalJInv_isIso R φ j n)).symm
 

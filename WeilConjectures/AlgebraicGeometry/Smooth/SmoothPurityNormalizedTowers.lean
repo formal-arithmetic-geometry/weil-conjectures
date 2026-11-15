@@ -15,9 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 
 The natural index n denotes positive level n+1. The finite-level category and both
 tower categories are full subcategories of the ordinary derived categories. The
-parameter D is the sectionwise normalized coefficient-tower interface
-`SpCoefficientTowersAbelian`, which supplies exact evaluation and the canonical
-reduction natural transformation, including its tensor-unitor normalization.
+parameter D is the sectionwise normalized coefficient-tower interface, which supplies
+exact evaluation and the canonical reduction natural transformation, including its
+tensor-unitor normalization.
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local instance 2000] WeilConjectures.sfAbBijective
 
-/-- The ell-power quotient `O_E/(ell)^(n+1)` is finite. -/
+/-- The ell-power quotients of the ring of integers of `E` are finite. -/
 instance spEllQuotientFinite (n : ℕ) :
     Finite (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)) :=
   let h := (sp_coefficient_ideals_cofinal l E).2 (n + 1)

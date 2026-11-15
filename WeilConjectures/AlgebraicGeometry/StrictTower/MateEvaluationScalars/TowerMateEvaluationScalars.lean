@@ -20,12 +20,14 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficie
 
 /-! # Evaluation and scalar restriction of the clopen proper/open mate
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A7 and 0D6E; sites-modules.tex, Tags 03DI and
-03DJ.
-
 The single-level arrow is the exact descent of the existing ordinary clopen arrow.
 All comparison maps are constructed from the specified adjunctions. Index `n` means
 positive level `n+1`; no boundedness, flatness or finite-coefficient assumption occurs.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A7, 0D6E, 03DI, 03DJ, 03DA, 03EK, 07A6,
+  07A5, 015F, 0H7J, 0D6D, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -364,8 +366,7 @@ variable (B : Type (u + 1)) [CommRing B]
 
 attribute [local instance] WeilConjectures.sfAbBijective
 
-/-- The existing abelian structure with its coefficient universe made explicit.
-Source: Stacks 03DA. -/
+/-- The existing abelian structure with its coefficient universe made explicit. -/
 instance modulesAbelian (X : Scheme.{u}) : Abelian (Modules B X) :=
   @SheafOfModules.instAbelian.{u + 1, u, u + 1, u + 1} _ _ _
     ((sheafCompose (Scheme.ProEt.topology X)
@@ -373,37 +374,31 @@ instance modulesAbelian (X : Scheme.{u}) : Abelian (Modules B X) :=
     (SheafOfModules.hasSheafify_coefficientUniverse.{u + 1, u, u + 1})
     (SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1})
 
-/-- The existing single-level exact inverse image, abbreviated for the formulas below.
-Source: Stacks 03EK, 07A6. -/
+/-- The existing single-level exact inverse image, abbreviated for the formulas below. -/
 abbrev g {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (Modules B Y) ⥤ DerivedCategory (Modules B X) :=
   (modulePullback B f).mapDerivedCategory
 
-/-- The existing single-level total direct image.
-Source: Stacks 07A5. -/
+/-- The existing single-level total direct image. -/
 abbrev r {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (Modules B X) ⥤ DerivedCategory (Modules B Y) :=
   (moduleDirectImage B f).rightDerivedFunctor
 
-/-- Exact descent of the existing single-level extension by zero.
-Source: Stacks 03DI, 03DJ. -/
+/-- Exact descent of the existing single-level extension by zero. -/
 abbrev j {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     DerivedCategory (Modules B U) ⥤ DerivedCategory (Modules B X) :=
   (moduleJ B f).mapDerivedCategory
 
-/-- The specified single-level derived adjunction.
-Source: Stacks 07A6. -/
+/-- The specified single-level derived adjunction. -/
 abbrev dAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : g B f ⊣ r B f :=
   (clopenModuleAdj B f).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The exact single-level open adjunction, with its original unit and counit.
-Source: Stacks 03DI, 03DJ. -/
+/-- The exact single-level open adjunction, with its original unit and counit. -/
 def dJAdj {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] : j B f ⊣ g B f :=
   (moduleJAdj B f).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
     (modulePullback B f).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Exact descent of the specified ordinary alpha, with both composition factors.
-Source: Stacks 07A7. -/
+/-- Exact descent of the specified ordinary alpha, with both composition factors. -/
 def singleDerivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
@@ -419,16 +414,14 @@ def singleDerivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
         (NatTrans.mapHomologicalComplex (singleAlpha B k f p i h) (.up ℤ)) DerivedCategory.Q) ≫
     (Functor.mapDerivedCategoryCompIso _ _).inv
 
-/-- The single-level proper mate of the same clopen projector.
-Source: Stacks 07A7. -/
+/-- The single-level proper mate of the same clopen projector. -/
 def singleDerivedGamma {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
     (h : k ≫ p = f ≫ i) : r B f ⋙ j B i ⟶ j B k ⋙ r B p :=
   mateEquiv (dAdj B f) (dAdj B p) (singleDerivedAlpha B k f p i h)
 
-/-- The existing exact evaluation factorization with the original coefficient universe.
-Source: Stacks 015F. -/
+/-- The existing exact evaluation factorization with the original coefficient universe. -/
 def evaluationFactors (X : Scheme.{u}) (n : ℕ) :=
   @Functor.mapDerivedCategoryFactors (Towers B X) inferInstance
     (clopenTowerAbelian B X) (towers_hasDerivedCategory B X)
@@ -437,8 +430,7 @@ def evaluationFactors (X : Scheme.{u}) (n : ℕ) :=
     ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)) inferInstance inferInstance inferInstance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation preserves the same alpha, including the specified clopen section projector.
-Source: Stacks 03DI, 03DJ, 07A7. -/
+/-- Evaluation preserves the same alpha, including the specified clopen section projector. -/
 theorem evaluation_alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
@@ -457,8 +449,7 @@ theorem evaluation_alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
   rw [hα, evalJ_eq, evalJ_eq, evalG_eq, evalG_eq]
   exact he
 
-/-- Evaluation carries the proper mate to the single-level mate of the same projector.
-Source: Stacks 07A7, 0D6E. -/
+/-- Evaluation carries the proper mate to the single-level mate of the same projector. -/
 theorem evaluation_gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
@@ -487,44 +478,37 @@ theorem evaluation_gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
 
 variable {B} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Apply the existing constant-sheaf functor to the coefficient homomorphism.
-Source: Stacks 0H7J. -/
+/-- Apply the existing constant-sheaf functor to the coefficient homomorphism. -/
 def coefficientMap (φ : B →+* Λ) (X : Scheme.{u}) : coefficients B X ⟶ coefficients Λ X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (CommRingCat.ofHom φ)
 
-/-- Constant-section identifications commute with any coefficient homomorphism.
-Source: Stacks 0H7J, 0D6D. -/
+/-- Constant-section identifications commute with any coefficient homomorphism. -/
 theorem coefficient_square (φ : B →+* Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (constantRingIso B f).hom ≫ coefficientMap φ X =
       (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (coefficientMap φ Y) ≫
         (constantRingIso Λ f).hom := by
   exact (Scheme.proEtaleConstantInverseImageMap_naturality f (CommRingCat.ofHom φ)).symm
 
-/-- The recorded sectionwise restriction functor for the actual constant ring-sheaf map.
-Source: Stacks 03DA. -/
+/-- The recorded sectionwise restriction functor for the actual constant ring-sheaf map. -/
 abbrev moduleRes (φ : B →+* Λ) (X : Scheme.{u}) :=
   Scheme.proEtaleRingRestrictScalars (coefficientMap φ X)
 
-/-- Exactness on kernels, before localization.
-Source: Stacks 03CY. -/
+/-- Exactness on kernels, before localization. -/
 instance moduleRes_limits (φ : B →+* Λ) (X : Scheme.{u}) :
     PreservesFiniteLimits (moduleRes φ X) :=
   (Scheme.proEtaleRingRestrictScalars_properties (coefficientMap φ X)).1
 
-/-- Exactness on cokernels, before localization.
-Source: Stacks 03CY. -/
+/-- Exactness on cokernels, before localization. -/
 instance moduleRes_colimits (φ : B →+* Λ) (X : Scheme.{u}) :
     PreservesFiniteColimits (moduleRes φ X) :=
   (Scheme.proEtaleRingRestrictScalars_properties (coefficientMap φ X)).2.1
 
-/-- Exact descent of scalar restriction, on ordinary unbounded derived categories.
-Source: Stacks 015F. -/
+/-- Exact descent of scalar restriction, on ordinary unbounded derived categories. -/
 abbrev Res (φ : B →+* Λ) (X : Scheme.{u}) :
     DerivedCategory (Modules Λ X) ⥤ DerivedCategory (Modules B X) :=
   (moduleRes φ X).mapDerivedCategory
 
-/-- The canonical ordinary scalar/inverse-image comparison, with direction as displayed.
-Source: Stacks 0D6D. -/
+/-- The canonical ordinary scalar/inverse-image comparison, with direction as displayed. -/
 def scalarGModule (φ : B →+* Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     modulePullback Λ f ⋙ moduleRes φ X ≅ moduleRes φ Y ⋙ modulePullback B f :=
   (@asIso _ _ _ _
@@ -535,24 +519,21 @@ def scalarGModule (φ : B →+* Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (coefficients B X) (coefficients Λ X) (coefficientMap φ Y) (coefficientMap φ X)
       (constantRingIso B f) (constantRingIso Λ f) (coefficient_square φ f))).symm
 
-/-- The canonical inverse-image scalar comparison after exact descent.
-Source: Stacks 0D6D. -/
+/-- The canonical inverse-image scalar comparison after exact descent. -/
 def scalarG (φ : B →+* Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     g Λ f ⋙ Res φ X ≅ Res φ Y ⋙ g B f :=
   Scheme.proEtaleRingRestrictionDerivedPullback f (coefficients B Y) (coefficients Λ Y)
     (coefficients B X) (coefficients Λ X) (coefficientMap φ Y) (coefficientMap φ X)
     (constantRingIso B f) (constantRingIso Λ f) (coefficient_square φ f)
 
-/-- The ordinary open comparison in the inverse direction, fixed by its open-unit transpose.
-Source: Stacks 03DI. -/
+/-- The ordinary open comparison in the inverse direction, fixed by its open-unit transpose. -/
 def scalarJInv (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     moduleRes φ U ⋙ moduleJ B f ⟶ moduleJ Λ f ⋙ moduleRes φ X :=
   ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm (scalarGModule φ f).hom)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The open-unit transpose is invertible for arbitrary coefficient maps.
-Source: Stacks 03DI, 03DJ. -/
+/-- The open-unit transpose is invertible for arbitrary coefficient maps. -/
 theorem scalarJInv_app_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     [IsOpenImmersion f] (M : Modules Λ U) :
     IsIso ((scalarJInv φ f).app M) := by
@@ -638,14 +619,12 @@ theorem scalarJInv_isIso (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     fun M ↦ scalarJInv_app_isIso φ f M
   exact NatIso.isIso_of_isIso_app _
 
-/-- The canonical section-normalized ordinary open scalar comparison.
-Source: Stacks 03DI. -/
+/-- The canonical section-normalized ordinary open scalar comparison. -/
 def scalarJModule (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     moduleJ Λ f ⋙ moduleRes φ X ≅ moduleRes φ U ⋙ moduleJ B f :=
   (@asIso _ _ _ _ (scalarJInv φ f) (scalarJInv_isIso φ f)).symm
 
-/-- Exact descent of the same identity on extension presheaves.
-Source: Stacks 03DI, 03DJ, 015F. -/
+/-- Exact descent of the same identity on extension presheaves. -/
 def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     j Λ f ⋙ Res φ X ≅ Res φ U ⋙ j B f :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -654,8 +633,7 @@ def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar comparisons preserve the specified ordinary open unit and counit.
-These equations normalize the identity on extension-presheaf generators.
-Source: Stacks 03DI, 03DJ. -/
+These equations normalize the identity on extension-presheaf generators. -/
 theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
     [IsOpenImmersion f] :
     ((∀ N : Modules Λ U,

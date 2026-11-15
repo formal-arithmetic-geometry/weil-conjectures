@@ -82,10 +82,8 @@ def vectorIntegrationOverlapPrefix (N : ℕ) (hN : 0 < N)
     affineTraceUnitBaseChange A N hA t (S.homOfLE hUV)
       (affineTracePullbackInvertible N V.ι hS) d
 
-/-- On a common smaller open the two inverse-frame comparisons differ by the actual
-linear-coordinate pullback action. No counit, projective-line datum, sheaf Hom
-correspondence, or descent assertion occurs in this statement.
--/
+/-- On a common smaller open the two inverse-frame comparisons differ by the
+linear-coordinate pullback action `affineLinearTraceAction`. -/
 theorem vectorIntegration_overlap_chart_prefix (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

@@ -41,12 +41,15 @@ import all WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSu
 /-!
 # Levelwise truncations of an adic reduction tower
 
-Source: Stacks Tags 0118, 08J5, 09C1, 09C7, 099M, 099N and 09C2.
-
 The strict tower and its quotient-linear levels remain distinct. Standard truncations
 are Mathlib's canonical functors. The output data retain both exact evaluation comparisons
 and the normalization of the entire truncation triangle. Higher Tor vanishing is required
 only for normalization, never for the unconditional strict-tower cohomology formulas.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0118, 08J5, 09C1, 09C7, 099M, 099N, 09C2,
+  03DA, 06YY, 06YU
 -/
 
 @[expose] public noncomputable section
@@ -77,24 +80,21 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   Functor.leftAdjoint
 attribute [local irreducible] pbcComplexCounit pbcExtensionCounit
 
-/-- Exact scalar restriction inherits the existing termwise derived shift comparison.
-Source: Stacks Tag 03DA. -/
+/-- Exact scalar restriction inherits the existing termwise derived shift comparison. -/
 instance pbcLevelwiseRestrictionCommShift
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedRestrict φ).CommShift ℤ :=
   inferInstanceAs ((pbcRestrict φ).mapDerivedCategory.CommShift ℤ)
 
 /-- The scalar-extension shift comparison is the canonical mate of exact restriction's
-specified shift comparison under the tensor-unit normalized adjunction.
-Source: Stacks Tag 06YY. -/
+specified shift comparison under the tensor-unit normalized adjunction. -/
 instance pbcLevelwiseScalarCommShift
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedExtend φ).CommShift ℤ :=
   (pbcDerivedScalarAdjunction φ).leftAdjointCommShift ℤ
 
 /-- The higher-Tor condition at precisely the degrees above the cutoff. The module
-H^q(M_(n + 1)) is placed in degree zero before scalar extension; positive p means degree -p.
-Source: Stacks Tag 06YU. -/
+H^q(M_(n + 1)) is placed in degree zero before scalar extension; positive p means degree -p. -/
 def PbcLevelwiseTorVanishing (M : AdicTower T d) (m : ℤ) : Prop :=
   ∀ (n : ℕ) (q : ℤ), m + 1 ≤ q → ∀ p : ℕ, 0 < p →
     IsZero ((DerivedCategory.homologyFunctor _ (-(p : ℤ))).obj
@@ -102,10 +102,8 @@ def PbcLevelwiseTorVanishing (M : AdicTower T d) (m : ℤ) : Prop :=
         ((DerivedCategory.singleFunctor _ 0).obj
           ((DerivedCategory.homologyFunctor _ q).obj (M.level (n + 1))))))
 
-/-- Both adic truncations, retaining the actual strict tower, canonical quotient-linear
-levels, and their canonical exact evaluation comparisons. These equalities specify
-objects, not additional hypotheses on the input.
-Source: Stacks Tags 0118 and 08J5. -/
+/-- Both adic truncations, retaining the strict tower, the canonical quotient-linear
+levels, and their canonical exact evaluation comparisons. -/
 structure PbcLevelwiseTruncationData (M : AdicTower T d) (m : ℤ) where
   /-- The lower normalized tower, with its transitions and full quotient cocycle. -/
   lower : AdicTower T d
@@ -168,8 +166,7 @@ variable (T d)
 
 /-- The end normalizations identify the entire reduced truncation triangle, including
 its connecting arrow, with the canonical triangle at the lower level. Uniqueness with
-the given middle normalization specifies the canonical comparison, also for equal levels.
-Source: Stacks Tag 08J5; BBD 1.1.9 and 1.1.10(ii). -/
+the given middle normalization specifies the canonical comparison, also for equal levels. -/
 def PbcIsLevelwiseTruncation {M : AdicTower T d} {m : ℤ}
     (N : PbcLevelwiseTruncationData T d M m) : Prop :=
   ∀ (b a : ℕ) (hab : a ≤ b),
@@ -245,8 +242,7 @@ private lemma truncGE_restriction_unit
 set_option backward.isDefEq.respectTransparency false in
 /-- Unconditional cohomology at the quotient-linear levels, and its naturality for
 the strict transitions. The maps are H of the canonical truncation counit and unit;
-their squares with all semilinear transitions commute before taking cohomology.
-Source: Stacks Tag 0118. -/
+their squares with all semilinear transitions commute before taking cohomology. -/
 theorem pbc_levelwise_truncation_cohomology (M : AdicTower T d) (m : ℤ) :
     (∀ (n : ℕ) (i : ℤ), i ≤ m →
       IsIso ((DerivedCategory.homologyFunctor _ i).map
@@ -297,8 +293,7 @@ section ReductionTowerPresentation
 attribute [local semireducible] completedReductionCoefficient
 attribute [local irreducible] CategoryTheory.Limits.limit
 
-/-- The fixed K-flat evaluation comparison for the reduction of one completed object.
-Source: Stacks Tag 06YY. -/
+/-- The fixed K-flat evaluation comparison for the reduction of one completed object. -/
 def pbcReductionEvaluationIso (K : PbcCompletedDerived T d) (n : ℕ) :
     (pbcDerivedRestrict (pbcAdicProjection T d n)).obj
         ((pbcCompletedReduction T d n).obj K) ≅
@@ -553,8 +548,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The canonical reduction tower satisfies the strict-transition equation and full
-quotient cocycle, before any truncation or Tor hypothesis.
-Source: Stacks Tag 06YY. -/
+quotient cocycle, before any truncation or Tor hypothesis. -/
 theorem pbc_reduction_adic_tower_laws (K : PbcCompletedDerived T d) :
     (∀ (b a : ℕ) (hab : a ≤ b),
       (pbcDerivedRestrict (pbcAdicProjection T d b)).map
@@ -632,8 +626,8 @@ theorem pbc_reduction_adic_tower_laws (K : PbcCompletedDerived T d) :
       (pbcAdicProjection_comp T d c a (hab.trans hbc))
       (pbcAdicProjection_comp T d b a hab) K
 
-/-- The reduction tower of K, built from the recorded K-flat universal construction and
-balancing maps. -/
+/-- The reduction tower of K, built from the K-flat universal construction and the balancing
+maps. -/
 def pbcReductionAdicTower (K : PbcCompletedDerived T d) : AdicTower T d where
   tower := (completedReductionTower T d).obj K
   level n := (pbcCompletedReduction T d n).obj K
@@ -1281,9 +1275,7 @@ private theorem construct_truncations (M : AdicTower T d) (m : ℤ)
   · intro σ hσ
     exact (allpair_truncation_triangle T d M m hTor b a hab).unique hσ.2.1 (hτ b a hab)
 
-/-- Under (TC), both canonical levelwise truncations are normalized adic towers.
-Their stored tower/level/evaluation data and unique triangle comparisons retain all
-strict transition equations, natural cohomology identifications and quotient cocycles. -/
+/-- Under (TC), both canonical levelwise truncations are normalized adic towers. -/
 theorem pbc_adic_levelwise_truncations (M : AdicTower T d) (m : ℤ)
     (_hTor : PbcLevelwiseTorVanishing T d M m) :
     ∃ N : PbcLevelwiseTruncationData T d M m, PbcIsLevelwiseTruncation T d N := by
@@ -1510,8 +1502,7 @@ end ResidueCounterexampleProof
 
 attribute [local semireducible] completedReductionCoefficient in
 /-- Uniform bounded constructibility is preserved under (TC), for any coefficient datum whose
-ideal is generated by a nonzero element of a domain.
-Source: Stacks Tags 09C1, 09C7 and 09C2. -/
+ideal is generated by a nonzero element of a domain. -/
 theorem pbc_levelwise_truncations_constructible_of_principal [IsNoetherian T] [IsDomain A]
     (π : A) (hI : d.ideal = Ideal.span {π}) (hπ : π ≠ 0)
     (K : PbcCompletedDerived T d) (m d₀ d₁ : ℤ)
@@ -1626,9 +1617,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local semireducible] completedReductionCoefficient in
 /-- Uniform bounded constructibility is preserved under (TC), with the stated sharp
-cohomological windows. The conclusion uses the full common-local-model predicate;
-it does not claim that the original model truncations have finite free terms.
-Source: Stacks Tags 09C1, 09C7 and 09C2. -/
+cohomological windows. -/
 theorem pbc_levelwise_truncations_constructible [IsNoetherian T]
     (K : PbcCompletedDerived T (pbcIntegralDatum l E)) (m d₀ d₁ : ℤ)
     (N : PbcLevelwiseTruncationData T (pbcIntegralDatum l E)

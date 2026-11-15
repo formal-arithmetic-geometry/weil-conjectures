@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitUnionP
 
 /-! # Gluing flat counit presentations
 
-Source: Stacks Project, Tags 0DJ9 and 08DR.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 08DR
 -/
 
 @[expose] public section
@@ -22,9 +24,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Bounded flat presentations glue across a two-open cover.
-Source: Stacks Project, Tag 0DJ9, relative Mayer--Vietoris induction step; Tag 08DR,
-quasi-compact-open induction. -/
+/-- Bounded flat presentations glue across a two-open cover: if they exist on `U`, `V` and
+`U ⊓ V`, with `U` quasi-compact and `V` affine, then they exist on `U ⊔ V`. -/
 theorem standardSingleFlatCounitOnOpen_union
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

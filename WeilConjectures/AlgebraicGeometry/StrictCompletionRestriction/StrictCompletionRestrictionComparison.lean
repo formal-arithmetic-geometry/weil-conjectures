@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictSecti
 import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictIntegralScalarPullback
 import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictSectionPrincipalQuotientModels
 
-/-! # Strict completion under section action and pro-etale restriction -/
+/-! # Strict completion under section action and pro-etale restriction
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AA, 03EK, 03DB, 014E, 08TC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -61,13 +66,8 @@ private def coefficientUnit (X : Scheme.{u}) :
   exact congrArg (fun f ↦ f.hom.app U x)
     (AdicCompletion.quotient_transition l E X n).symm
 
-/-- Strict completion is compatible with section action and with restriction along composites
-of immersions and weakly etale maps: there are integral presentations on every scheme, section
-action preserves finite constant local models and is compared with section-integral
-presentations, and these restrictions preserve products and are compared with the
-presentations. There are no boundedness, Noetherianity or prime-invertibility assumptions.
-
-Source: Stacks 09AA, 03EK, 03DB, 014E, 08TC. -/
+/-- The entire section-action and restriction assertion, with no boundedness,
+Noetherianity or prime-invertibility assumptions. -/
 theorem strict_completion_restriction_comparison :
     ∃ S : ∀ X : Scheme.{u}, Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X),
       (∀ X : Scheme.{u}, IsIntegral l E X (S X)) ∧

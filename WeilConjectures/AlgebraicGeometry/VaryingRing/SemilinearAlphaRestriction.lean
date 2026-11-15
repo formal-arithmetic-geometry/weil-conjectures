@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearCompositorCoh
 
 /-! # Ordinary semilinear restriction normalization
 
-Source: Stacks Project, Tags 03DI, 0F7B and 0F7F.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 0F7B, 0F7F
 -/
 
 @[expose] public noncomputable section
@@ -423,8 +425,7 @@ attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [local irreducible] compEq moduleAlpha modulePi moduleJCongr push eqToIso factor in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction of intrinsic alpha is the inverse of the open unit, under the specified
-inverse-image square comparison.
-Source: Stacks Project, Tags 03DI and 0F7B; the restriction calculation in Tag 0F7F. -/
+inverse-image square comparison. -/
 theorem moduleAlpha_restriction
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

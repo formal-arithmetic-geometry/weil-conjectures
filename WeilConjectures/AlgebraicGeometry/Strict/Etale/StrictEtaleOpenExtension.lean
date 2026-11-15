@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleSystemOpenAssem
 
 /-! # Ordinary extension by zero for strict coefficient systems
 
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +33,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- Ordinary open extension, its evaluation adjunctions and scalar transition equations.
-All functors here act on abelian categories, before passing to complexes or localization.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1. -/
+All functors here act on abelian categories, before passing to complexes or localization. -/
 structure StrictEtaleOrdinaryOpen where
   extension : strictEtaleCoefficientSystem X O t ⥤ strictEtaleCoefficientSystem Z O t
   [additive : extension.Additive]
@@ -60,9 +63,8 @@ structure StrictEtaleOrdinaryOpen where
 
 attribute [instance] StrictEtaleOrdinaryOpen.additive StrictEtaleOrdinaryOpen.levelAdditive
 
-/-- Construct ordinary extension by zero with its actual scalar-restriction mates.
-Source: Stacks 03S2 (the presheaf formula), 03DI (the adjunction), 03DJ (exactness); Zheng,
-Construction 4.1. -/
+/-- Ordinary extension by zero for strict coefficient systems exists, with its
+scalar-restriction mates. -/
 theorem strictEtaleOrdinaryOpen_exists : Nonempty (StrictEtaleOrdinaryOpen O t j I PX PZ) := by
   obtain ⟨L⟩ := strictEtaleLevelOpenData_exists O t j I
   obtain ⟨A⟩ := strictEtaleSystemOpenAssembly_exists O t j I PX PZ L

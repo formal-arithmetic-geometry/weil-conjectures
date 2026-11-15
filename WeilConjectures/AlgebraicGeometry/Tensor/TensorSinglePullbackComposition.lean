@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSinglePullbackCompos
 import WeilConjectures.AlgebraicGeometry.TensorCoefficientPullbackComposition
 
 /-! # Composition of tensor coefficient single-pullback comparisons
-Source: Stacks Project, Tag 0D5S.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5S, 0096
 -/
 
 @[expose] public section
@@ -68,9 +71,7 @@ private theorem paste_maps {D : Type*} [Category D]
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- The single-complex coefficient morphism of a commuting triangle.
-It uses the fixed ordinary-to-tensor identification, without inverting the
-single-pullback map. Source: Stacks Project, Tags 0096 and 0D5S. -/
+/-- The single-complex coefficient morphism of a commuting triangle. -/
 @[irreducible]
 def tensorSingleCoefficientMap {A B X : Scheme.{v}}
     (q : A ⟶ X) (q1 : B ⟶ X) (a : B ⟶ A) (h : a ≫ q = q1)
@@ -86,8 +87,7 @@ def tensorSingleCoefficientMap {A B X : Scheme.{v}}
       (SheafOfModules.{v} (moduleRings B.toRingedSpace)) 0).map
         (Scheme.Modules.tensorCoefficientComparison q q1 a h L).hom
 
-/-- Defining equation of the single-complex coefficient morphism.
-Source: Stacks Project, Tags 0096 and 0D5S. -/
+/-- Defining equation of the single-complex coefficient morphism. -/
 theorem tensorSingleCoefficientMap_eq {A B X : Scheme.{v}}
     (q : A ⟶ X) (q1 : B ⟶ X) (a : B ⟶ A) (h : a ≫ q = q1)
     (L : X.Modules) :
@@ -191,8 +191,7 @@ private theorem derived_glue {A B C : Scheme.{v}} (a : B ⟶ A) (b : C ⟶ B)
           (SheafOfModules.{v} (moduleRings A.toRingedSpace)) 0).obj M))
     (Scheme.Modules.canonicalSinglePullbackMap (b ≫ a) M) hn hd' hc
 
-/-- Coefficient comparisons compose, before any direct image or base-change mate.
-Source: Stacks Project, Tag 0D5S. -/
+/-- Coefficient comparisons compose, before any direct image or base-change mate. -/
 theorem tensorSinglePullback_composition
     {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X)
     (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A)
@@ -233,8 +232,7 @@ theorem tensorSinglePullback_composition
       (Scheme.Modules.tensorCoefficientComparison q1 q2 b h2 L).hom
       (Scheme.Modules.tensorCoefficientComparison q q2 (b ≫ a) h3 L).hom hd'
 
-/-- Composition API for the fixed single-complex coefficient morphisms.
-Source: Stacks Project, Tag 0D5S. -/
+/-- Composition of the fixed single-complex coefficient morphisms. -/
 theorem tensorSingleCoefficientMap_composition
     {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X)
     (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A)

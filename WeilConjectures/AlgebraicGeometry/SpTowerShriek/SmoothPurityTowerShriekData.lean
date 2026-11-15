@@ -35,6 +35,12 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 Index n denotes the positive exponent n+1. All localizations are ordinary derived
 categories of strict semilinear systems, never diagrams in derived categories.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AH, 09BM
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.10
 -/
 
 @[expose] public noncomputable section
@@ -53,7 +59,7 @@ open WeilConjectures
 
 namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 
-/-- The ell-power quotient ring at index `n`, in the recorded tower's indexing. -/
+/-- The actual ell-power quotient, retaining the recorded tower's indexing. -/
 abbrev R (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :=
   Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)
@@ -61,12 +67,12 @@ abbrev R (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The constant commutative ring sheaf at the positive level n+1. -/
+/-- The existing constant commutative ring sheaf, at the paper's positive level n+1. -/
 abbrev B (T : Scheme.{u}) (n : ℕ) :
     Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
   Scheme.proEtaleConstantRing T (R l E n)
 
-/-- The adjacent quotient map between consecutive levels. -/
+/-- The actual adjacent quotient map, not a chosen ring map. -/
 def tau (T : Scheme.{u}) (n : ℕ) : B l E T (n + 1) ⟶ B l E T n :=
   (spCoefficientCommRings l E T).map (homOfLE (Nat.le_succ n)).op
 
@@ -75,17 +81,17 @@ object and morphism universes unchanged. -/
 instance (priority := 2000) small (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
 
-/-- The ringed sequence-site model of these strict varying-ring systems. -/
+/-- The published ringed sequence-site model of these strict varying-ring systems. -/
 abbrev S (T : Scheme.{u}) :=
   SemilinearSections.Systems.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T)
 
-/-- The ordinary unbounded localization of the system category. -/
+/-- The ordinary unbounded localization of the actual system category. -/
 abbrev D (T : Scheme.{u}) :=
   SemilinearSections.DS.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T)
 
-/-- Exact ordinary evaluation in the sequence-site model. -/
+/-- Exact ordinary evaluation in the published sequence-site model. -/
 abbrev ev (T : Scheme.{u}) (n : ℕ) :=
   SemilinearSections.evaluation.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T) n
@@ -96,7 +102,7 @@ abbrev Ev (T : Scheme.{u}) (n : ℕ) :=
     (Scheme.ProEt.topology T) (B l E T) (tau l E T) n
 
 /-- Canonically normalized presentations of the recorded tower category and its tensor.
-The equivalence fixes every section and map; the tensor is the signed K-flat
+The equivalence fixes every section and map; the tensor is the existing signed K-flat
 sequence-site tensor. -/
 class Base where
   /-- Ramification index of the specified uniformizer. -/
@@ -130,7 +136,7 @@ class Base where
   morphisms : ∀ (T : Scheme.{u}) {M N : spCoefficientTowers l E T} (a : M ⟶ N)
     (U : (ℕ × T.ProEt)ᵒᵖ),
     HEq (((realization T).functor.map a).val.app U) (a.hom.app U)
-  /-- The ordinary unbounded derived calculus. -/
+  /-- The already published ordinary unbounded derived calculus. -/
   calculus : ∀ T : Scheme.{u},
     SemilinearSections.Data.{u + 1, u, u + 1}
       (Scheme.ProEt.topology T) (B l E T) (tau l E T)
@@ -147,12 +153,13 @@ class Base where
 
 attribute [instance] Base.finite Base.kinjective
 
-/-- The K-flat tensor on the ringed sequence site. -/
+/-- The existing K-flat tensor on the actual ringed sequence site. -/
 abbrev tensor (b : Base l E) (T : Scheme.{u}) := (b.calculus T).closed.tensor
 
 /-- Horizontal compatibility expressed for a supplied family of finite adjunctions.
-The auxiliary section y and its HEq premise express the unchanged carrier of coefficient
-restriction. -/
+Keeping these adjunctions as parameters avoids unfolding their sheafification models
+while checking the formula. The auxiliary section y and its HEq premise express
+the unchanged carrier of coefficient restriction without unfolding its scalar action. -/
 @[irreducible] def OrdinaryUnitTransitionModel {X Y : Scheme.{u}}
     (P : ∀ n : ℕ, SemilinearSections.Mod.{u + 1, u, u + 1}
       (Scheme.ProEt.topology Y) (B l E Y n) ⥤
@@ -190,8 +197,9 @@ restriction. -/
         (RX h).map ((e n).hom.app M))).val.app U x)
       (((adj n).unit.app ((EY n).obj M)).val.app U y)
 
-/-- The horizontal compatibility of the constant-ring finite adjunction units, for the
-specified finite functors and adjunctions. -/
+/-- The horizontal compatibility of the actual constant-ring finite adjunction units.
+The generic formula is specialized to the specified finite functors and adjunctions,
+not to arbitrarily supplied underlying-sheaf identifications. -/
 @[irreducible] def OrdinaryUnitTransition {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : S l E Y ⥤ S l E X)
     (e : ∀ n : ℕ, F ⋙ ev l E X n ≅
@@ -214,8 +222,7 @@ specified finite functors and adjunctions. -/
 
 /-- Geometric operations in the fixed constant-coefficient coordinates. The HEq fields
 are transports of the *specified* generic geometric calculus, whose units, counits,
-coefficient mates and signed K-flat tensor comparisons are normalized before evaluation.
-Source: Zheng 4.10. -/
+coefficient mates and signed K-flat tensor comparisons are normalized before evaluation. -/
 structure Geometry (b : Base l E) {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The source of the normalization, on the actual small pro-etale topoi. -/
   generic : SemilinearSections.Geometry.{u + 1, u, u + 1}
@@ -279,7 +286,8 @@ structure Geometry (b : Base l E) {X Y : Scheme.{u}} (f : X ⟶ Y) where
     ev l E Y n ⋙ proEtaleConstantRingPullback (R l E n) f
   ordinaryPullEvaluation_eq : ∀ n : ℕ,
     HEq (ordinaryPullEvaluation n) (generic.ordinaryPullEvaluation n)
-  /-- The finite adjunction units commute with horizontal restrictions. -/
+  /-- The actual finite adjunction units commute with horizontal restrictions,
+  independently of the auxiliary generic underlying-sheaf comparisons. -/
   ordinaryUnitTransition : OrdinaryUnitTransition l E f pull ordinaryPullEvaluation
   /-- Exact inverse-image evaluation. -/
   pullEvaluation : ∀ n : ℕ,
@@ -339,12 +347,12 @@ abbrev pull (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b 
 abbrev push (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) :=
   g.push.rightDerivedFunctor
 
-/-- The canonical derived adjunction between inverse and direct image. -/
+/-- The canonical derived adjunction, prior to every evaluation. -/
 def adjunction (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : Geometry l E b f) : pull l E b g ⊣ push l E b g :=
   g.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction
 
-/-- Exact termwise descent of a transformation of tower functors. -/
+/-- Exact termwise descent of a transformation of actual tower functors. -/
 def deriveMap {T T' : Scheme.{u}} {F G : S l E T ⥤ S l E T'}
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⟶ G) :
@@ -363,8 +371,9 @@ def finiteOpenAdjunction (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T)
   (sfIntrinsicOpenAdjunction (R l E n) j).ofNatIsoRight
     (openSquarePullbackModel (R l E n) j).symm
 
-/-- The exact open operation on strict systems, with its termwise adjunction, fixed by
-two ordinary evaluation equations. -/
+/-- The exact open operation on strict systems, with its actual termwise adjunction.
+The two ordinary evaluation equations fix the adjunction, hence do not posit a lift
+of any family of derived maps. -/
 structure Open (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
     (g : Geometry l E b j) where
   extension : S l E U ⥤ S l E T
@@ -463,7 +472,7 @@ abbrev F (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}} {f : X ⟶ Y}
   openD l E b (o.openOp c.i) ⋙ push l E b (o.geometry c.g)
 
 /-- The canonical projection arrow: proper counit transpose, open projection,
-then pullback composition. -/
+then pullback composition. It exists before any Tor or origin hypotheses. -/
 def projection (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (K : D l E X) (L : D l E Y) :
     (tensor l E b Y).obj ((F l E b o c).obj K, L) ⟶
@@ -540,7 +549,7 @@ abbrev finiteF (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
   sfIntrinsicDerivedOpen (R l E n) c.i ⋙
     (proEtaleConstantRingPushforward (R l E n) c.g).rightDerivedFunctor
 
-/-- Natural level comparison of the compactification composite. -/
+/-- Natural level comparison of the actual compactification composite. -/
 def Fcomparison (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (n : ℕ) :
     F l E b o c ⋙ Ev l E Y n ≅ Ev l E X n ⋙ finiteF l E b c n :=
@@ -551,7 +560,7 @@ def Fcomparison (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
     Functor.associator _ _ _
 
 /-- A retained origin at one level, using the dependency's fixed-scalar witness.
-The witness is specified independently for each n, with no transition equations. -/
+This specifies a witness independently for each n; it imposes no transition equations. -/
 structure Origin (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) where
   level : DerivedCategory.Plus
     (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n))))
@@ -560,7 +569,7 @@ structure Origin (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) where
   witness : FixedEtaleOriginWitness T (ULift.{u + 1} (R l E n)) level
 
 /-- Equality transport of quotient coefficients, induced by the identity on O_E.
-It is defined by equality elimination. -/
+This is a real functor defined by equality elimination; no equivalence is chosen. -/
 def quotientTransport (T : Scheme.{u})
     (I J : Ideal (Padic.coefficientExtensionIntegers l E)) (h : I = J) :
     proEtaleDerivedCategory T (Padic.coefficientExtensionIntegers l E ⧸ I) ⥤
@@ -580,8 +589,7 @@ def GoodLevel (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) : Prop :=
 
 /-- Exact closed direct image and the open--closed distinguished triangle.
 The first two arrows are the termwise localized counit and unit. Exact evaluation
-carries this same triangle to a distinguished finite triangle, including its boundary.
-Source: Stacks 09AH and 09BM. -/
+carries this same triangle to a distinguished finite triangle, including its boundary. -/
 structure LocalizationData (b : Base l E) (o : Operations l E b)
     {Z U T : Scheme.{u}} (i : Z ⟶ T) (a : U ⟶ T)
     [IsClosedImmersion i] [IsOpenImmersion a] [QuasiCompact a]
@@ -605,8 +613,7 @@ structure LocalizationData (b : Base l E) (o : Operations l E b)
             (o.geometry i).push).inv).app C.obj) δ) ∈
       distTriang (proEtaleDerivedCategory T (R l E n))
 
-/-- The three compact-support laws, with the precise domains of the invertibility claims.
-Origin witnesses occur only in the testing hypotheses. -/
+/-- The compact-support laws, including the precise domains of the invertibility claims. -/
 structure Laws (b : Base l E) (o : Operations l E b) (x : OpenExchange l E b o) : Prop where
   bounded : ∀ {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (C : DerivedCategory.Plus (S l E X)),

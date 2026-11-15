@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 /-! # Canonical neighbourhood geometry on the small colimit model
 
 Transport upstream's geometry along the canonical spectrum-colimit isomorphism.
-Source: Stacks Project, Tag 03Q9.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The canonical comparison of the two strict-local pullbacks, over X.
-Source: Stacks Project, Tag 03Q9. -/
+/-- The canonical comparison of the two strict-local pullbacks, over X. -/
 noncomputable def strictLocalSmallModelPullbackIso {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     pullback f (Scheme.strictHenselizationStructuralMap s) ≅
@@ -35,8 +37,7 @@ noncomputable def strictLocalSmallModelPullbackIso {X S : Scheme.{v}} (f : X ⟶
 
 namespace StrictLocalNeighbourhoodGeometry
 
-/-- Upstream's legs expressed on the small coordinate-ring colimit model.
-Source: Stacks Project, Tag 03Q9. -/
+/-- Upstream's legs expressed on the small coordinate-ring colimit model. -/
 noncomputable def smallModelLegs {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s) :
@@ -45,16 +46,14 @@ noncomputable def smallModelLegs {X S : Scheme.{v}} {f : X ⟶ S}
         strictLocalNeighbourhoodDiagram f s :=
   (Cone.mk _ Q.legs).extend (strictLocalSmallModelPullbackIso f s).hom |>.π
 
-/-- Transport preserves the limiting property of the cone.
-Source: Stacks Project, Tag 03Q9. -/
+/-- Transport preserves the limiting property of the cone. -/
 noncomputable def smallModelIsLimit {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s) : IsLimit (Cone.mk _ Q.smallModelLegs) :=
   Q.isLimit.ofIsoLimit
     (Cone.extendIso (Cone.mk _ Q.legs) (strictLocalSmallModelPullbackIso f s).symm)
 
-/-- The transported legs have the original projection to X.
-Source: Stacks Project, Tag 03Q9. -/
+/-- The transported legs have the original projection to X. -/
 theorem smallModelOver {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s)
@@ -65,8 +64,7 @@ theorem smallModelOver {X S : Scheme.{v}} {f : X ⟶ S}
   rw [Q.over]
   simp [strictLocalSmallModelPullbackIso]
 
-/-- The transported base component is exactly the small-model colimit leg.
-Source: Stacks Project, Tag 03Q9. -/
+/-- The transported base component is exactly the small-model colimit leg. -/
 theorem smallModelFirst {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s)

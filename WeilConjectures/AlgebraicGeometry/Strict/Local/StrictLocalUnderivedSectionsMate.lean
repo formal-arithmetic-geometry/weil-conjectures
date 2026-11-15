@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
-/-! # The underived mate on pointed neighbourhood sections -/
+/-! # The underived mate on pointed neighbourhood sections
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
+-/
 
 /- This original-model counterpart follows the proved calculation in
 WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate.
@@ -29,6 +34,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Pointwise form of the restriction comparison unit equation.
+-- Adapted from the proved helper in EtaleChartSectionsObjectComparison.
 private theorem restriction_unit
     {T Y : Scheme.{v}} (f : T ⟶ Y) [Etale f]
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -58,6 +64,7 @@ private theorem restriction_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Pointwise form of the composition unit equation, after restriction.
+-- Adapted from the proved helper in EtaleChartSectionsObjectComparison.
 private theorem composition_unit
     {T Y R : Scheme.{v}}
     (f : T ⟶ Y) (g : Y ⟶ R) (t : T ⟶ R) (ht : t = f ≫ g)
@@ -374,8 +381,7 @@ private theorem lowerStarSections_eval {T Y : Scheme.{v}} (h : T ⟶ Y)
       (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app H = _
   rw [hz]
 
-/-- The underived exchange map evaluated after restriction to the strict-local base.
-Source: Stacks Project, Tag 03Q9. -/
+/-- The underived exchange map evaluated after restriction to the strict-local base. -/
 noncomputable def smallModel_strictLocalUnderivedMateSections {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -406,9 +412,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluating the underived mate on sections is restriction along the cone leg.
-This is an equality of transformations of sheaves, before complexes or derivation.
-
-Source: Stacks Project, Tag 03Q9. -/
+This is an equality of transformations of sheaves, before complexes or derivation. -/
 theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (Q : StrictLocalNeighbourhoodGeometry f s)

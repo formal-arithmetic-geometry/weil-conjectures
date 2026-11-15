@@ -8,6 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitPresentation
 import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitLocalizationHomology
 
+/-!
+# Stalkwise completion of the flat counit localization
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -16,8 +24,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Completion from the localized sheaf presentation data.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
+/-- Given a flat counit presentation on affine opens `S ∋ g a` and `V ∋ a` with
+`V ≤ g ⁻¹ᵁ S`, the stalk at `a` of the degree-`n` homology of the standard base change map
+factors through a bounded-above complex `P` of flat modules over the stalk of `B` at `g a`
+and a left-derived scalar extension `LF`. -/
 theorem standardSingleFlatCounit_localization_completion
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

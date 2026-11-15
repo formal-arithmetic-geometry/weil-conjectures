@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 
 /-! # Coefficient coordinates for homogeneous ideal multiplication
 
-Source: Stacks Project, Tag 09MS, tensor powers in the graded ideal sequence; Tag 01CD, monoidal
-pullback of modules.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 01CD
 -/
 
 @[expose] public section
@@ -232,10 +233,8 @@ private theorem raw_cast {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules)
   simp only [eqToHom_refl]
   rw [(tensorPullback j).map_id (L.tensorPow a), Category.comp_id]
 
-/-- Coefficient-degree coordinates turn raw ideal multiplication into multiplication
-by f on the last tensor-power factor. This is solely a monoidal comparison on Z:
-no graded algebra, ideal action, kernel, pushforward, or cohomology map occurs.
-Source: Stacks Project, Tag 09MS, tensor powers; Tag 01CD, tensor pullback. -/
+/-- In coefficient-degree coordinates, raw ideal multiplication by `tensorPowSection f 1`
+becomes multiplication by `f` on the last tensor-power factor (`mulTensorPowSection`). -/
 theorem tensorIdealSectionMultiply_coefficient_comparison {X Z : Scheme.{u}}
     (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]
     (hI : j.ker ^ 2 = ⊥) (n : ℕ) (D : TensorBoundaryComparisonData j L n)

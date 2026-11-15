@@ -34,7 +34,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.DiagonalIntegralUnitEpi
 
 /-! # Morphisms from closed direct images of the integer sheaf
 
-Source: Milne, Section 9, p. 67, exact sequence (*).
+## References
+
+* J. S. Milne, *Lectures on étale cohomology*, Section 9
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +49,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Morphisms from a closed direct image of the integer sheaf agree if they agree on
-constant integer generators on all pulled-back charts.
-Source: Milne, Section 9, p. 67, exact sequence (*), and the sheafification adjunction. -/
+constant integer generators on all pulled-back charts. -/
 theorem closedIntegral_hom_ext {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {N : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}}
     {q q' : (lowerStar AddCommGrpCat.{u + 1} i).obj

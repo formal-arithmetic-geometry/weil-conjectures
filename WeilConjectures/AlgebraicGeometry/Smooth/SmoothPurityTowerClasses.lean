@@ -32,10 +32,10 @@ open SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (S : Scheme.{u})
 
-/-- The canonical classes of coefficient towers: normalized Kummer Chern classes on `S`,
-on the projective line and on the diagonal surface, with their finite-level normalizations,
-the supported diagonal class, and the projective-line splitting `b_q` (an isomorphism)
-whose trace kills the twisted unit and sends the hyperplane class to one. -/
+/-- The canonical classes on the coefficient towers over `S`: normalized Chern data on `S`,
+on the projective line and on the diagonal surface, the diagonal class, and the projective-line
+data, such that the map `b_q` built from the unit and the hyperplane Chern class is an
+isomorphism and the trace kills the twisted unit and sends the hyperplane class to one. -/
 structure TowerClasses (hS : IsUnit (l : Γ(S, ⊤))) where
   base : SpTowerShriek.Base l E
   chernS : Chern l E S
@@ -45,7 +45,7 @@ structure TowerClasses (hS : IsUnit (l : Γ(S, ⊤))) where
   chernP_normalized : chernP.Normalized l E
   chernW_normalized : chernW.Normalized l E
   /-- Every finite evaluation is the finite Kummer boundary with the quotient
-  source and the actual root-tensor target. -/
+  source and the root-tensor target. -/
   chernS_levels : FiniteChernNormalization l E chernS
   chernP_levels : FiniteChernNormalization l E chernP
   chernW_levels : FiniteChernNormalization l E chernW
@@ -54,15 +54,14 @@ structure TowerClasses (hS : IsUnit (l : Γ(S, ⊤))) where
   diagonal : Diagonal l E base S chernW
   diagonal_levels : FiniteDiagonalNormalization l E diagonal
   projective : Projective l E base S chernS chernP twistS twistP
-  /-- This is the actual biproduct map defined from the unit and c1(O(1)). -/
+  /-- The biproduct map defined from the unit and c1(O(1)) is an isomorphism. -/
   [splitting : IsIso (projective.bq l E)]
   /-- The finite trace vanishes on the finite twisted-unit component. -/
   trace_unit :
     ∀ n : ℕ,
       (SpTowerShriek.Ev l E S n).map (projective.twistedUnit l E) ≫
         (SpTowerShriek.Ev l E S n).map (projective.trace l E) = 0
-  /-- The finite trace sends the finite hyperplane class to one. Together with
-  the finite projective-line decomposition this characterizes its usual trace. -/
+  /-- The finite trace sends the finite hyperplane class to one. -/
   trace_chern :
     ∀ n : ℕ,
       (SpTowerShriek.Ev l E S n).map (projective.chernAdjoint l E) ≫

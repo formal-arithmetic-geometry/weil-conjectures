@@ -14,14 +14,16 @@ public import WeilConjectures.AlgebraicGeometry.StrictTowerOperations
 
 /-! # Canonical operations on strict module towers
 
-Source: Stacks 07A7 and 0D6D.
-
 ## Main definitions
 
 * `exchangeTowerPull`, `exchangeTowerPush`: strict diagram derived functors.
 * `exchangeTowerAdjunction`: the derived termwise normalized module adjunction.
 * `StrictTowerRingedSquare.exchangeTowerSquare`: canonical pullback composition.
 * `StrictTowerRingedSquare.exchangeTowerMate`: its specified adjunction mate.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A7, 0D6D, 0DVC
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +34,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Coefficient sheaves and their compatible inverse-image identifications on a square.
-Source: Stacks 07A7. -/
+/-- Coefficient sheaves and their compatible inverse-image identifications on a square. -/
 structure StrictTowerRingedSquare
     {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) where
@@ -48,8 +49,7 @@ structure StrictTowerRingedSquare
   coherent : HEq (proEtaleRingCompositeCoefficients g' f RY RX RX' cf cg')
     (proEtaleRingCompositeCoefficients f' g RY RY' RX' cg cf')
 
-/-- Strict towers over an arbitrary coefficient sheaf on the original small site.
-Source: Stacks 07A7. -/
+/-- Strict towers over an arbitrary coefficient sheaf on the original small site. -/
 abbrev exchangeTowers (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   ℕᵒᵖ ⥤ proEtaleRingModules T R
@@ -64,18 +64,15 @@ variable {U V : Scheme.{t}} (f : U ⟶ V)
   (S : Sheaf (ProEt.topology U) CommRingCat.{t + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj R ≅ S)
 
-/-- Termwise inverse image of strict module towers with identified coefficients.
-Source: Stacks 07A7. -/
+/-- Termwise inverse image of strict module towers with identified coefficients. -/
 abbrev exchangeTowerModulePull : exchangeTowers V R ⥤ exchangeTowers U S :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingModulePullback f R S c)
 
-/-- Termwise direct image, including all transition maps.
-Source: Stacks 07A7. -/
+/-- Termwise direct image, including all transition maps. -/
 abbrev exchangeTowerModulePush : exchangeTowers U S ⥤ exchangeTowers V R :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingModuleDirectImage f R S c)
 
-/-- Exactness of termwise inverse image on the whole strict diagram category.
-Source: Stacks 07A7. -/
+/-- Exactness of termwise inverse image on the whole strict diagram category. -/
 theorem exchangeTowerModulePull_exact :
     PreservesFiniteLimits (exchangeTowerModulePull f R S c) ∧
       PreservesFiniteColimits (exchangeTowerModulePull f R S c) := by
@@ -93,26 +90,22 @@ instance exchangeTowerModulePull_finiteColimits :
     PreservesFiniteColimits (exchangeTowerModulePull f R S c) :=
   (exchangeTowerModulePull_exact f R S c).2
 
-/-- Exact termwise inverse image descends to the localization of strict towers.
-Source: Stacks 07A7. -/
+/-- Exact termwise inverse image descends to the localization of strict towers. -/
 abbrev exchangeTowerPull : DerivedCategory (exchangeTowers V R) ⥤
     DerivedCategory (exchangeTowers U S) :=
   (exchangeTowerModulePull f R S c).mapDerivedCategory
 
-/-- Total right derived termwise direct image, using K-injective strict towers.
-Source: Stacks 07A7. -/
+/-- Total right derived termwise direct image, using K-injective strict towers. -/
 abbrev exchangeTowerPush : DerivedCategory (exchangeTowers U S) ⥤
     DerivedCategory (exchangeTowers V R) :=
   (exchangeTowerModulePush f R S c).rightDerivedFunctor
 
-/-- The ordinary adjunction on strict towers is the termwise normalized module adjunction.
-Source: Stacks 07A7. -/
+/-- The ordinary adjunction on strict towers is the termwise normalized module adjunction. -/
 def exchangeTowerModuleAdjunction :
     exchangeTowerModulePull f R S c ⊣ exchangeTowerModulePush f R S c :=
   (proEtaleRingModuleAdjunction f R S c).whiskerRight ℕᵒᵖ
 
-/-- The derived adjunction uses precisely the termwise normalized module adjunction.
-Source: Stacks 0DVC. -/
+/-- The derived adjunction uses precisely the termwise normalized module adjunction. -/
 def exchangeTowerAdjunction :
     exchangeTowerPull f R S c ⊣ exchangeTowerPush f R S c :=
   (exchangeTowerModuleAdjunction f R S c).mapDerivedCategoryRightDerivedAdjunction
@@ -120,8 +113,7 @@ def exchangeTowerAdjunction :
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-/-- The two coefficient paths agree over the equality of composite scheme maps.
-Source: Stacks 07A7. -/
+/-- The two coefficient paths agree over the equality of composite scheme maps. -/
 theorem StrictTowerRingedSquare.exchangeCoefficients_eq (r : StrictTowerRingedSquare sq) :
     (⟨f' ≫ g, proEtaleRingCompositeCoefficients f' g r.RY r.RY' r.RX' r.cg r.cf'⟩ :
       Σ q : X' ⟶ Y,
@@ -129,8 +121,7 @@ theorem StrictTowerRingedSquare.exchangeCoefficients_eq (r : StrictTowerRingedSq
       ⟨g' ≫ f, proEtaleRingCompositeCoefficients g' f r.RY r.RX r.RX' r.cf r.cg'⟩ := by
   exact Sigma.ext sq.w.symm r.coherent.symm
 
-/-- The canonical module pullback comparison around the chosen ringed square.
-Source: Stacks 07A7, 0D6D. -/
+/-- The canonical module pullback comparison around the chosen ringed square. -/
 def StrictTowerRingedSquare.exchangeModuleSquare (r : StrictTowerRingedSquare sq) :
     proEtaleRingModulePullback g r.RY r.RY' r.cg ⋙
         proEtaleRingModulePullback f' r.RY' r.RX' r.cf' ≅
@@ -150,8 +141,7 @@ def StrictTowerRingedSquare.exchangeModuleSquare (r : StrictTowerRingedSquare sq
     a ≪≫ eqToIso hfun
   exact a' ≪≫ b
 
-/-- The strict square is obtained by termwise application before localization.
-Source: Stacks 07A7. -/
+/-- The strict square is obtained by termwise application before localization. -/
 def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq) :
     exchangeTowerPull g r.RY r.RY' r.cg ⋙ exchangeTowerPull f' r.RY' r.RX' r.cf' ≅
       exchangeTowerPull f r.RY r.RX r.cf ⋙ exchangeTowerPull g' r.RX r.RX' r.cg' :=
@@ -168,8 +158,7 @@ def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq)
     (exchangeTowerModulePull f r.RY r.RX r.cf)
     (exchangeTowerModulePull g' r.RX r.RX' r.cg')).symm
 
-/-- The canonical mate in the derived category of strict towers.
-Source: Stacks 07A7. -/
+/-- The canonical mate in the derived category of strict towers. -/
 def StrictTowerRingedSquare.exchangeTowerMate (r : StrictTowerRingedSquare sq) :
     exchangeTowerPush f r.RY r.RX r.cf ⋙ exchangeTowerPull g r.RY r.RY' r.cg ⟶
       exchangeTowerPull g' r.RX r.RX' r.cg' ⋙ exchangeTowerPush f' r.RY' r.RX' r.cf' :=

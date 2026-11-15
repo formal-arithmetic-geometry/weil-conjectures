@@ -56,7 +56,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Integral line-bundle classes commute with pullback to full units, in the ordinary
- derived category of abelian towers. No torsion coefficient or root comparison occurs. -/
+derived category of abelian towers. -/
 theorem tower_integralClass_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : Y.Modules) [Scheme.Modules.IsInvertible L] :
     (abPull f).mapDerivedCategory.map (lineBundleClass Y (Scheme.Pic.ofIsInvertible L)) ≫

@@ -46,8 +46,7 @@ private theorem mapExtensionEndpoints_add
     Preadditive.comp_add, Preadditive.add_comp]
 
 /-- Tensor multiplication becomes addition in the integral line class after changing
-from the etale site to the pro-etale site.
--/
+from the etale site to the pro-etale site. -/
 theorem tower_lineBundleEtaleClass_mul (T : Scheme.{u}) (L M : T.Pic) :
     lineBundleEtaleClass T (L * M) =
       lineBundleEtaleClass T L + lineBundleEtaleClass T M := by

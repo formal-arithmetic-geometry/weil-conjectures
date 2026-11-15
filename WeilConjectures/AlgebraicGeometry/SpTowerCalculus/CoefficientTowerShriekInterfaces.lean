@@ -26,15 +26,13 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparis
 /-!
 # Interfaces for compact support on strict varying-coefficient towers
 
-Source: Stacks Project, Tags 0F7J and 03S5.
-
 All categories are ordinary derived categories. Natural-number level n means exponent
-n+1.
-
-## Implementation details
-
-The section-preserving presentation in the recorded shriek-level theorem is used
+n+1. The section-preserving presentation in the recorded shriek-level theorem is used
 only to transport its constructed operations to the recorded strict tower category.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7J, 03S5, 03DI, 03DJ, 0F7I
 -/
 
 @[expose] public noncomputable section
@@ -56,7 +54,8 @@ namespace AlgebraicGeometry.ProEtale.SpTowerCalculus
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The derived equivalence induced by the dependency's section-preserving realization. -/
+/-- The derived equivalence induced by the dependency's section-preserving realization.
+-/
 def realization (b : SpTowerShriek.Base l E) (T : Scheme.{u})
     (a : SpCoefficientTowersAbelian l E T) :
     spDerivedCoefficientTowers l E T a ≌ SpTowerShriek.D l E T := by
@@ -90,9 +89,9 @@ abbrev systemRestriction (T : Scheme.{u}) {m n : ℕ} (h : m ≤ n) :=
 -- These operation interfaces do not use constructor injectivity or SizeOf equations.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- A coordinate identification of the two canonical scalar functors: the ordinary
+/-- A coordinate identification of the two canonical scalar functors. The ordinary
 restriction identification is the identity on every section, and the scalar comparison
-preserves the normalized adjunction. -/
+preserves the normalized adjunction. Thus it cannot introduce a scalar automorphism. -/
 structure ScalarCoordinates (T : Scheme.{u}) (a : SpCoefficientTowersAbelian l E T)
     {m n : ℕ} (h : m ≤ n) where
   restriction : systemRestriction l E T h ≅
@@ -127,8 +126,9 @@ def reduction (T : Scheme.{u}) (a : SpCoefficientTowersAbelian l E T)
 -- These operation interfaces do not use constructor injectivity or SizeOf equations.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- Evaluation and scalar coordinate changes for the recorded tower category,
-obtained from the section-fixing ordinary comparisons by exact localization. -/
+/-- Evaluation and scalar coordinate changes for the already recorded tower category.
+The ordinary evaluation comparison fixes sections, so its derived comparison is obtained
+by exact localization. -/
 structure Coordinates (b : SpTowerShriek.Base l E) where
   abelian : ∀ T : Scheme.{u}, SpCoefficientTowersAbelian l E T
   ordinaryEvaluation : ∀ (T : Scheme.{u}) (n : ℕ),
@@ -150,8 +150,8 @@ def scalarUnit (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
   exact (q.scalar T (Nat.le_refl n)).scalar.symm ≪≫
     (q.abelian T).tensor.derivedUnit (spCoefficientCommRings l E T) n
 
-/-- Canonical reduction associator in intrinsic coordinates, given by the
-balanced derived tensor associator. -/
+/-- Canonical reduction associator in intrinsic coordinates. Each coordinate change
+preserves the scalar adjunction, so this is the balanced derived tensor associator. -/
 def scalarAssoc (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
     (T : Scheme.{u}) {r m n : ℕ} (h : r ≤ m) (v : m ≤ n) :
     scalarExtensionFunctor (quotient l E v) T ⋙
@@ -163,7 +163,8 @@ def scalarAssoc (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
     (q.abelian T).tensor.derivedAssoc (spCoefficientCommRings l E T) h v ≪≫
     (q.scalar T (h.trans v)).scalar
 
-/-- The exact-localization comparison of the preceding ordinary section identity. -/
+/-- The exact-localization comparison of the preceding ordinary section identity.
+-/
 def levelComparison (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
     (T : Scheme.{u}) (n : ℕ) :
     (realization l E b T (q.abelian T)).functor ⋙ SpTowerShriek.Ev l E T n ≅
@@ -179,8 +180,7 @@ def levelComparison (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
     Functor.mapDerivedCategoryNatIso (q.ordinaryEvaluation T n)
 
 /-- The finite sheaf extension along an etale localization is left Kan extension followed
-by sheafification, transported by the existing intrinsic module equivalences.
-Source: Stacks 03DI, 03S5. -/
+by sheafification, transported by the existing intrinsic module equivalences. -/
 def finiteEtaleExtension {U T : Scheme.{u}} (e : U ⟶ T) [Etale e]
     (A : Type u) [CommRing A] [Finite A] :
     proEtaleRingModules U (proEtaleConstantRing U A) ⥤
@@ -196,7 +196,7 @@ def finiteEtaleExtension {U T : Scheme.{u}} (e : U ⟶ T) [Etale e]
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- Identify the canonical direct-image coordinates by the identity on underlying
-sections. -/
+sections. This fixes every later finite-coordinate change, including adjunction units. -/
 structure FiniteCoordinates where
   direct : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ),
     proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f ≅
@@ -216,7 +216,7 @@ def finiteSupportCoordinates (b : SpTowerShriek.Base l E) (z : FiniteCoordinates
   Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorNatIso (z.direct c.g n))
 
 /-- Finite compact support in fixed module coordinates, with its existing normalized
-proper comparison. -/
+proper comparison. This is an explicit word in realization units and counits. -/
 def fixedSupportCoordinates (b : SpTowerShriek.Base l E) (z : FiniteCoordinates l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ) :
     reductionCompactSupport (SpTowerShriek.R l E n) c.i c.g ⋙
@@ -229,9 +229,8 @@ def fixedSupportCoordinates (b : SpTowerShriek.Base l E) (z : FiniteCoordinates 
       (sfIntrinsicCompactSupportComparison (SpTowerShriek.R l E n) c).compInverseIso)
 
 /-- The finite etale adjunction, with the sheafification/Kan-extension unit and the
-sum counit. Its right-coordinate change is the left-adjoint comparison against the
-section-normalized direct image.
-Source: Stacks 03DI, 03S5. -/
+sum counit. The right-coordinate change is uniquely fixed as a left-adjoint comparison
+against the section-normalized direct image, so no choice of adjunction is introduced. -/
 def finiteEtaleAdjunction (b : SpTowerShriek.Base l E) (z : FiniteCoordinates l E)
     {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] (n : ℕ) :
     finiteEtaleExtension e (SpTowerShriek.R l E n) ⊣
@@ -253,9 +252,9 @@ def finiteEtaleAdjunction (b : SpTowerShriek.Base l E) (z : FiniteCoordinates l 
 -- These operation interfaces do not use constructor injectivity or SizeOf equations.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- Exact etale sum-extension on strict systems, before derived localization, together
-with its ordinary finite units and counits and the induced unbounded derived adjunction.
-Source: Stacks 03DI--03DJ, 03S5. -/
+/-- Exact etale sum-extension on strict systems, before derived localization. Its
+ordinary finite units and counits fix every comparison. The equations under Q fix the
+ordinary unbounded derived adjunction, rather than lifting evaluated derived maps. -/
 structure EtaleOperation (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     (z : FiniteCoordinates l E) {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] where
   extension : SpTowerShriek.S l E U ⥤ SpTowerShriek.S l E T
@@ -295,8 +294,7 @@ structure EtaleOperation (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operati
 attribute [instance] EtaleOperation.additive EtaleOperation.limits EtaleOperation.colimits
 
 /-- Canonical compactification comparison on the full finite etale-origin class.
-It is the unique preimage of the existing normalized comparison on etale D+.
-Source: Stacks 0F7I. -/
+It is the unique preimage of the existing normalized comparison on etale D+. -/
 def fixedRefinement (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c d : Compactification f) :
     (ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).ι ⋙
@@ -307,8 +305,7 @@ def fixedRefinement (A : Type (u + 1)) [CommRing A] [Finite A]
     |>.fullyFaithfulInverse).preimageIso (fixedCompactSupportOriginIso A c d)
 
 /-- The canonical finite composition with arbitrary compactifications, obtained by
-conjugating the existing canonical compositor by the canonical refinement maps.
-Source: Stacks 0F7J. -/
+conjugating the existing canonical compositor by the canonical refinement maps. -/
 def fixedComposition (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiCompact f] [QuasiCompact g]
@@ -332,11 +329,13 @@ def fixedComposition (A : Type (u + 1)) [CommRing A] [Finite A]
     originCompositionAmbient A f g ≪≫
     (fixedRefinement A e (HasCompactification.compactification (f ≫ g))).symm
 
-/-- The actual full constructible finite-Tor tower category; no normalization is imposed. -/
+/-- The actual full constructible finite-Tor tower category; no normalization is imposed.
+-/
 abbrev C (b : SpTowerShriek.Base l E) (q : Coordinates l E b) (T : Scheme.{u}) :=
   spConstructibleTorTowerCategory l E T (q.abelian T)
 
-/-- Its full inclusion into the original ordinary derived category. -/
+/-- Its full inclusion into the original ordinary derived category.
+-/
 abbrev inclusion (b : SpTowerShriek.Base l E) (q : Coordinates l E b) (T : Scheme.{u}) :=
   (spConstructibleTorTowers l E T (q.abelian T)).ι
 
@@ -390,8 +389,7 @@ abbrev fixedLevel (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
   spDerivedCoefficientEvaluation l E T (q.abelian T) n ⋙
     (sfIntrinsicDerivedEquivalence T (SpTowerShriek.R l E n)).inverse
 
-/-- Canonical finite composition using the supplied compactifications as existence witnesses.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+/-- Canonical finite composition using the supplied compactifications as existence witnesses. -/
 def finiteCanonicalComposition (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiCompact f] [QuasiCompact g]
@@ -401,16 +399,14 @@ def finiteCanonicalComposition (A : Type (u + 1)) [CommRing A] [Finite A]
   letI := e.hasCompactification
   fixedComposition A f g c d e
 
-/-- Etale extension on the original ordinary derived tower category, by exact localization.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+/-- Etale extension on the original ordinary derived tower category, by exact localization. -/
 def etaleExtension (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     (q : Coordinates l E b) (z : FiniteCoordinates l E)
     {U T : Scheme.{u}} {e : U ⟶ T} [Etale e] (d : EtaleOperation l E b o z e) :=
   (realization l E b U (q.abelian U)).functor ⋙ d.extension.mapDerivedCategory ⋙
     (realization l E b T (q.abelian T)).inverse
 
-/-- Exact inverse image on the original ordinary derived tower category.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+/-- Exact inverse image on the original ordinary derived tower category. -/
 def etalePullback (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     (q : Coordinates l E b) {U T : Scheme.{u}} (e : U ⟶ T) :=
   (realization l E b T (q.abelian T)).functor ⋙
@@ -418,8 +414,8 @@ def etalePullback (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E
     (realization l E b U (q.abelian U)).inverse
 
 /-- The etale adjunction on the entire ordinary unbounded derived category, transported through
-the realization equivalences.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+  the
+  real realization equivalences. -/
 def etaleAdjunction (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     (q : Coordinates l E b) (z : FiniteCoordinates l E)
     {U T : Scheme.{u}} {e : U ⟶ T} [Etale e] (d : EtaleOperation l E b o z e) :
@@ -427,8 +423,7 @@ def etaleAdjunction (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l
   ((realization l E b U (q.abelian U)).toAdjunction.comp d.derivedAdjunction).comp
     (realization l E b T (q.abelian T)).symm.toAdjunction
 
-/-- Exact finite etale extension, derived termwise on all complexes.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+/-- Exact finite etale extension, derived termwise on all complexes. -/
 def finiteEtaleDerived (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
     (z : FiniteCoordinates l E) {U T : Scheme.{u}} {e : U ⟶ T} [Etale e]
     (d : EtaleOperation l E b o z e) (n : ℕ) :=
@@ -438,17 +433,15 @@ def finiteEtaleDerived (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operation
   (finiteEtaleExtension e (SpTowerShriek.R l E n)).mapDerivedCategory
 
 /-- Vanishing outside the specified cohomological interval, using the existing ordinary cohomology
-functor.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+  functor. -/
 def cohomologicalInterval (T : Scheme.{u}) (n : ℕ)
     (K : proEtaleDerivedCategory T (SpTowerShriek.R l E n)) (a b : ℤ) : Prop :=
   ∀ i : ℤ, (i < a ∨ b < i) → IsZero
     ((DerivedCategory.homologyFunctor
       (proEtaleRingModules T (proEtaleConstantRing T (SpTowerShriek.R l E n))) i).obj K)
 
-/-- Compact support along separated finite-type maps over `k` preserves constructible finite-Tor
-towers.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+/-- The property that the coefficient-tower operations satisfy the preservation assumption at
+the separated finite-type maps over `k` where compact support is restricted. -/
 def Preservation (k : Type u) [Field k] (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations
   l E b)
     (q : Coordinates l E b) : Prop :=
@@ -464,8 +457,7 @@ def Preservation (k : Type u) [Field k] (b : SpTowerShriek.Base l E) (o : SpTowe
       spConstructibleTorTowers l E Y (q.abelian Y) ((F l E b o q c).obj K)
 
 /-- The genuine restriction of compact support to the full ordinary constructible finite-Tor tower
-categories, under the stated preservation assumption.
-Source: Stacks 0F7J, 03DI--03DJ, 03S5. -/
+  categories, under the stated preservation assumption. -/
 def restrictedSupport (k : Type u) [Field k] (b : SpTowerShriek.Base l E) (o :
   SpTowerShriek.Operations l E b)
     (q : Coordinates l E b)
@@ -489,8 +481,7 @@ def openExtension (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E
     (realization l E b T (q.abelian T)).inverse
 
 /-- The etale construction is extension by zero for an open immersion, with the
-unique comparison preserving the ordinary adjunction and hence its canonical counit.
-Source: Stacks 03S5. -/
+unique comparison preserving the ordinary adjunction and hence its canonical counit. -/
 def openEtaleCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (q : Coordinates l E b)
     (z : FiniteCoordinates l E) {U T : Scheme.{u}}
@@ -518,8 +509,7 @@ def composeTransport (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _).symm
 
 /-- The canonical composition of open extensions is the unique left-adjoint
-comparison to composition of exact inverse images.
-Source: Stacks 0F7J. -/
+comparison to composition of exact inverse images; this fixes the open counits. -/
 def sequenceOpenComposition (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) {U X Y : Scheme.{u}}
     (j : U ⟶ X) (i : X ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion i] :
@@ -531,9 +521,8 @@ def sequenceOpenComposition (b : SpTowerShriek.Base l E)
       ((((o.openOp j).ordinaryAdjunction.comp (o.openOp i).ordinaryAdjunction).ofNatIsoRight
         (o.ordinaryComp j i)).leftAdjointUniq (o.openOp (j ≫ i)).ordinaryAdjunction)
 
-/-- Canonical open normalization F_h u_! = F_(hu), built from the normalized
-ordinary open composition and realization counits.
-Source: Stacks 0F7J. -/
+/-- Canonical open normalization F_h u_! = F_(hu). The word uses the normalized
+ordinary open composition and realization counits, before any finite evaluation. -/
 def openComposition (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (q : Coordinates l E b)
     {U X Y : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
@@ -545,8 +534,7 @@ def openComposition (b : SpTowerShriek.Base l E)
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- FiniteNormalization for the ordinary strict tower calculus.
-Source: Stacks 0F7J, 03S5. -/
+/-- FiniteNormalization for the ordinary strict tower calculus. -/
 structure FiniteNormalization (k : Type u) [Field k] (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (q : Coordinates l E b)
     (z : FiniteCoordinates l E) where
@@ -563,8 +551,7 @@ structure FiniteNormalization (k : Type u) [Field k] (b : SpTowerShriek.Base l E
 -- These operation interfaces do not use constructor injectivity or SizeOf equations.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- CompositionOperations for the ordinary strict tower calculus.
-Source: Stacks 0F7J, 03S5. -/
+/-- CompositionOperations for the ordinary strict tower calculus. -/
 structure CompositionOperations (k : Type u) [Field k] (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (q : Coordinates l E b)
     (z : FiniteCoordinates l E) where
@@ -600,8 +587,7 @@ structure CompositionOperations (k : Type u) [Field k] (b : SpTowerShriek.Base l
 -- These operation interfaces do not use constructor injectivity or SizeOf equations.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- CompositionCoherence for the ordinary strict tower calculus.
-Source: Stacks 0F7J, 03S5. -/
+/-- CompositionCoherence for the ordinary strict tower calculus. -/
 structure CompositionCoherence (k : Type u) [Field k] (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (q : Coordinates l E b)
     (z : FiniteCoordinates l E)

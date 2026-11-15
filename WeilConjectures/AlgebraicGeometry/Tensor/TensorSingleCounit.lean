@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # Tensor counit squares with a coefficient in degree zero
 
-Source: Stacks Project, Tags 07A4 and 0FPH.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A4, 0FPH
 -/
 
 @[expose] public noncomputable section
@@ -143,8 +145,7 @@ private theorem tensorCounitSingleDiagram
     (fun z ↦ L.map (Functor.LaxMonoidal.μ Q P S) ≫ g (P ⊗ S) ≫ R.map z) hq
   simpa only [Functor.map_comp, Category.assoc] using h
 
-/-- The tensor counit square after fixing a coefficient in degree zero.
-Source: Stacks Project, Tags 07A4 and 0FPH. -/
+/-- The tensor counit square after fixing a coefficient in degree zero. -/
 def TensorSingleCounitSquare
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D]
@@ -176,8 +177,7 @@ def TensorSingleCounitSquare
             (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ tensorRight N))
               (.up ℤ)).symm).hom.app P)
 
-/-- The cochain tensor counit square implies its single-coefficient specialization.
-Source: Stacks Project, Tags 07A4 and 0FPH. -/
+/-- The cochain tensor counit square implies its single-coefficient specialization. -/
 theorem tensor_single_cochain_counit
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D]

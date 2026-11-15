@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Closed.ClosedLiftStalkSpecialization
 
 /-! # Fibre maps factor through restriction on the strict-local base
 
-Source: Stacks Project, Tag 0GJV.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GJV
 -/
 
 @[expose] public section
@@ -21,8 +23,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Fibre-map factorization through strict-local restriction.
-Source: Stacks Project, Tag 0GJV. -/
+/-- Fibre-map factorization through strict-local restriction: there is a map `a` from the
+derived stalk of `Rf_* G` at `s` to derived sections over the strict-local base change,
+through which the fibre maps at `t` (after stalk specialization) and at the closed lift
+factor by restriction to the corresponding fibres. -/
 theorem strictBaseSheafFiberMap_factorization
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

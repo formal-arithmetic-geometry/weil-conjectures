@@ -52,13 +52,13 @@ theorem supportedHasWeakSheafify
 
 attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
-/-- The existing preadditive tensor structure on sheaves of modules. -/
+/-- Use the existing preadditive tensor structure without reopening sheafification
+instance search under each tensor-complex binder. -/
 noncomputable instance supportedSheaf_monoidalPreadditive (A : Type (u + 1)) [CommRing A]
     (X : Scheme.{u}) : MonoidalPreadditive (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   Sheaf.monoidalPreadditive
 
-/-- The cochain tensor is the signed total tensor complex.
-Source: Mathlib cochain monoidal structure. -/
+/-- The cochain tensor is the signed total tensor complex. -/
 theorem supportedComplexTensor_eq
     {D : Type*} [Category.{w} D] [Abelian D] [HasColimitsOfSize.{0, 0} D]
     [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
@@ -384,9 +384,7 @@ private lemma normalization_ΓMap_unit_app_eq (M : Sheaf X.smallEtaleTopology C)
   simp
 
 /-- The global sections of the inclusion `𝒢_Z M ⟶ M` of the sections supported on the closed
-complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`: `Γ` preserves the kernel
-`𝒢_Z M` of `M ⟶ j_* j^* M`, and `Γ(X, M) ⟶ Γ(X, j_* j^* M)` is the restriction `Γ(X, M) ⟶ M(U)`
-followed by an isomorphism (`AlgebraicGeometry.Etale.normalization_ΓMap_unit_app_eq`). -/
+complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`. -/
 private noncomputable def normalization_isLimitΓMapSectionsWithSupportι
     (M : Sheaf X.smallEtaleTopology C) :
     IsLimit (KernelFork.ofι _ (normalization_ΓMap_sectionsWithSupportι_app_comp_ΓRes C j M)) :=

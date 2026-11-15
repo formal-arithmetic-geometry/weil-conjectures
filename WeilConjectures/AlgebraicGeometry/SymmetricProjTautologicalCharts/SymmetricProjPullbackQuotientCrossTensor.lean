@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Degree-two relation for the normalized pullback quotients
 
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 
 @[expose] public section
@@ -103,9 +105,7 @@ private theorem cross_tensor_of_pulled_generators {S T : Scheme.{u}} (h : T ⟶ 
   exact cross_tensor_affine h E q q' U ⟨W, hW⟩ (hWV.trans inf_le_right)
     (hpure U ⟨W, hW⟩ (hWV.trans inf_le_right)) _ _
 
-/-- The two normalized quotients satisfy the degree-two cross relation.
-
-Source: Stacks Project, Constructions, Tag 01N2, Tag 01NQ, Tag 01NR, and Tag 01OB. -/
+/-- The two normalized quotients satisfy the degree-two cross relation. -/
 theorem normalized_pullback_cross_tensor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

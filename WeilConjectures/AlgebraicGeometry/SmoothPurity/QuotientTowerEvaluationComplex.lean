@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.SmoothPurity.ComplexFunctorSquar
 
 /-! # Evaluation of a quotient-tower complex with explicit complex endpoints
 
-Source: Stacks Tags 0940, 0941 and 099M.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0940, 0941, 099M
 -/
 
 @[expose] public noncomputable section
@@ -24,15 +26,13 @@ namespace CategoryTheory.ConstantCompletion
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
 
-/-- Ordinary finite evaluation retains the quotient scalar action.
-Source: Stacks Tags 0940 and 099M. -/
+/-- Ordinary finite evaluation retains the quotient scalar action. -/
 def quotientEvaluationIso :
     reductionTower J A I false ⋙ (evaluation ℕᵒᵖ (Mod (constant J A))).obj (op n) ≅
       change (quotient J A I n) ⋙ res (quotient J A I n) :=
   Iso.refl _
 
-/-- Finite evaluation with both iterated complex functors visible in its type.
-Source: Stacks Tags 0941 and 099M. -/
+/-- Finite evaluation with both iterated complex functors visible in its type. -/
 @[irreducible]
 def quotientEvaluationComplexIso :
     (reductionTower J A I false).mapHomologicalComplex (.up ℤ) ⋙

@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCouni
 import WeilConjectures.AlgebraicGeometry.Picard.UnionBoundedAboveModel
 import WeilConjectures.AlgebraicGeometry.BoundedAboveModelFlatReplacement
 
+/-! # Bounded flat model for the union in flat counit presentations
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 077J
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option linter.style.haveILetI false
@@ -16,9 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The Mayer--Vietoris construction supplies the bounded flat complex and its
-base direct-image identification.
-Source: Stacks Project, Tag 0DJ9. -/
+/-- The Mayer--Vietoris construction supplies a bounded-above complex of flat modules on `B`
+identified with the derived direct image of `N` from `U ⊔ V`. -/
 theorem standardSingleFlatCounitUnionCore
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

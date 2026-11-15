@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Naturality of homogeneous boundary projections
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 01DZ
 -/
 
 @[expose] public section
@@ -35,10 +37,9 @@ attribute [local instance] boundary_enoughInjectives
 noncomputable section
 
 /-- Cohomology of a degree projection carries the canonical section boundary to the
-boundary of its quotient projection.
-
-Source: Stacks Project, Tag 01DZ, naturality of the cohomology boundary; Tag 09MS, projections of
-the graded direct-sum short exact sequence. -/
+boundary of its quotient projection. This statement concerns one short-complex morphism,
+not products, actions, or the realization existential. Compatible resolutions only
+present the single boundary whose degree projection is computed. -/
 theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

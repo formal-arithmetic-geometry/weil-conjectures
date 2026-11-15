@@ -13,14 +13,21 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Base change of affine relative component lifts
 
-Source: Hemo--Richarz--Scholbach, construction preceding (4.1), pp. 8--9; Bhatt--Scholze, Lemma
-2.2.8 and its more precise statement.
+This file compares the relative component lift of an affine scheme with base change along a
+morphism of affine schemes.
+
+## Implementation details
 
 The relative lift and its coordinate are taken from the characterized functor of
 `component_relative_profinite_site`. The universal property determines that functor up to
 unique coordinate-preserving isomorphism. No arbitrary affine test object is substituted.
 Mathlib's `Over.pullback f` orders the factors as `X_E ×_X Y`.
 The symmetry isomorphism identifies this with the displayed `Y ×_X X_E` in the source.
+
+## References
+
+* T. Hemo, T. Richarz and J. Scholbach, *Constructible sheaves on schemes*, Corollary 4.4(2)
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 2.2.8
 -/
 
 @[expose] public section
@@ -34,21 +41,18 @@ open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry.ProEtale
 
 /-- The relative component-lift functor, with values in schemes over the affine base.
-Source: Hemo--Richarz--Scholbach, before (4.1).
 The chosen witness is characterized by the universal property in the cited theorem. -/
 noncomputable def relativeComponentLift (T : Scheme.{u}) [IsAffine T] :
     Over (affineComponentSpace T) ⥤ Over T :=
   (component_relative_profinite_site T).choose ⋙ Scheme.ProEt.forget T
 
-/-- The continuous profinite coordinate of the characterized relative lift.
-Source: Hemo--Richarz--Scholbach, before (4.1); Bhatt--Scholze, Lemma 2.2.8. -/
+/-- The continuous profinite coordinate of the characterized relative lift. -/
 noncomputable def relativeComponentCoordinate (T : Scheme.{u}) [IsAffine T]
     (E : Over (affineComponentSpace T)) :
     C(((relativeComponentLift T).obj E).left, E.left) :=
   (component_relative_profinite_site T).choose_spec.2.1.choose E
 
-/-- The map on the actual quotient spaces of connected components induced by a scheme map.
-Source: Hemo--Richarz--Scholbach, naturality of the construction before (4.1). -/
+/-- The map on the actual quotient spaces of connected components induced by a scheme map. -/
 def affineComponentMap {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X) :
     affineComponentSpace Y ⟶ affineComponentSpace X :=
   ConcreteCategory.ofHom
@@ -779,10 +783,7 @@ end
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The two affine base-change functors are canonically naturally isomorphic, with
-projection, identity, composition, finite-clopen, and all finite-presentation normalizations.
-
-Source: Hemo--Richarz--Scholbach, construction preceding (4.1), pp. 8--9 and Corollary 4.4(2);
-Bhatt--Scholze, Lemma 2.2.8 and its more precise statement. -/
+projection, identity, composition, finite-clopen, and all finite-presentation normalizations. -/
 theorem component_lift_base_change :
     ∃ c : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
         relativeComponentLift X ⋙ Over.pullback f ≅

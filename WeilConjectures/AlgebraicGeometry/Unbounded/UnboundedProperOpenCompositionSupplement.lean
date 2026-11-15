@@ -233,7 +233,12 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenHorizontal
 /-!
 # Unbounded proper/open composition
 
-Source: Stacks Project, Tags 0F7C and 0F7D.
+This file proves the vertical and horizontal pasting equations for normalized unbounded
+proper/open interchange.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7C, 0F7D
 -/
 
 @[expose] public section
@@ -635,9 +640,7 @@ private theorem ordinary_vertical (Λ : Type (u + 1)) [CommRing Λ]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hr
   rw [hr]
 
-/-- The two pasting equations for normalized unbounded proper/open interchange.
-Source: Stacks Project, Tags 0F7C and 0F7D.
--/
+/-- The two pasting equations for normalized unbounded proper/open interchange. -/
 theorem unboundedProperOpenComposition_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}
         [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackQuasiCoherent
 /-!
 # Open restriction of the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01NQ, 01OB
 -/
 
 @[expose] public section
@@ -44,9 +46,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Open restriction of the normalized symmetric Proj quotient.
-
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB. -/
+/-- Open restriction of the normalized symmetric Proj quotient. -/
 theorem open_compatibility_of_normalized_quotient (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E) :
     ProjectiveBundleQuotientGeometry.HasOpenCompatibility D := by

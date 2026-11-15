@@ -28,7 +28,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
   diagonalScalarExtension diagonalScalarAdjunction
 
 /-- Identify the surviving cohomology with roots, including its scalar action
-and the unit equation, after a pure strict-system comparison has been supplied. -/
+and the unit equation, given a pure strict-system comparison. -/
 theorem strict_kummer_pure_kernel_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

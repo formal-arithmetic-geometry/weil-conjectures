@@ -11,14 +11,21 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedBaseChangeSourceTransport
 import WeilConjectures.AlgebraicGeometry.Open.OpenSingleCoefficientTransport
 
+/-!
+# Restriction of the standard base change map to the top open
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5S, 08HY
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The derived pullback unit for a scheme isomorphism is invertible.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The derived pullback unit for a scheme isomorphism is invertible. -/
 theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
     [∀ X : Scheme.{u},
       HasDerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -39,8 +46,7 @@ theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
   infer_instance
 
 set_option linter.unusedVariables false in
-/-- Canonical source restriction comparison for the top open.
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+/-- Canonical source restriction comparison for the top open. -/
 noncomputable def standardSingleBaseChange_topRestriction_sourceIso
     {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :
     letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
@@ -71,8 +77,9 @@ noncomputable def standardSingleBaseChange_topRestriction_sourceIso
     (schemeDerivedDirectImage (j ≫ p)).mapIso a
 
 set_option linter.unusedVariables false in
-/-- Compatibility equation for the canonical source restriction comparison.
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+/-- Compatibility equation for the canonical source restriction comparison: for
+`e = standardSingleBaseChange_topRestriction_sourceIso p M` there is an isomorphism `t` of
+targets with `standardSingleBaseChangeMap p M g = Lg*(e) ≫ (comparison for j ≫ p) ≫ t`. -/
 theorem standardSingleBaseChange_topRestriction_compatibility
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :
     letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard

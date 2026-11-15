@@ -171,10 +171,17 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 /-!
 # Transporting the explicit Koszul comparison between derived representatives
 
-Source: Stacks Project, Tag 0A0E and sites-cohomology.tex Tag 0941.
+This file transports the explicit Koszul fiber comparison, with its prescribed unit equation,
+to every specified derived representative.
+
+## Implementation details
 
 The finite construction comparison is used only at the actual termwise transported
-complex. All representative transport and its prescribed unit equation are proved here.
+complex.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941
 -/
 
 @[expose] public noncomputable section
@@ -293,9 +300,7 @@ namespace AlgebraicGeometry.Scheme
 universe v
 
 -- Checking the two presentations of the exact derived equivalence needs extra elaboration.
-/-- The explicit Koszul fiber comparison for every specified derived representative.
-
-Source: Stacks Project, Tag 0A0E and sites-cohomology.tex Tag 0941. -/
+/-- The explicit Koszul fiber comparison for every specified derived representative. -/
 theorem completed_fiber_roos_comparison
     (X : Scheme.{v}) {A : Type (v + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

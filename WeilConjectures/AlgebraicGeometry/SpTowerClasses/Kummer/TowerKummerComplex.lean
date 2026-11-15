@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSystems
 
 /-! # Share the actual Kummer complex and its positive boundary
+
+## Implementation details
+
+The positive Kummer boundary is stated with the literal tower endpoints, which keeps endpoint
+projection conversions out of larger equations.
 -/
 
 @[expose] public noncomputable section
@@ -29,10 +34,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 variable {l : ℕ} [Fact l.Prime] {T : Scheme.{u}}
 
-/-- The actual Kummer arrows as a short complex for the named Abelian structure.
-
-The construction uses the recorded inclusion, power and zero relation.
-Its named exactness and boundary share those same arrows at every use. -/
+/-- The Kummer arrows (inclusion, power map and zero relation) as a short complex. -/
 abbrev Kummer.shortComplex (q : Kummer l T) :=
   ShortComplex.mk q.inclusion q.power q.zero
 
@@ -40,8 +42,8 @@ abbrev Kummer.shortComplex (q : Kummer l T) :=
 theorem Kummer.shortComplex_exact (q : Kummer l T) : q.shortComplex.ShortExact := by
   exact q.exact
 
-/-- The positive Kummer boundary with its literal tower endpoints.
-This is the derived boundary of the recorded short exact sequence. -/
+/-- The positive Kummer boundary with its literal tower endpoints: the derived boundary of
+the recorded short exact sequence. -/
 def Kummer.boundary (q : Kummer l T) :
     (DerivedCategory.singleFunctor (Ab T) 0).obj (units T) ⟶
       ((DerivedCategory.singleFunctor (Ab T) 0).obj (roots l T))⟦(1 : ℤ)⟧ :=

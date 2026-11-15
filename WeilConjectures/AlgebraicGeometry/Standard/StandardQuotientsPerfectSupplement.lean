@@ -33,7 +33,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Perfectness of the standard coefficient quotients
 
-Source: Stacks Project, Tag 0657.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0657, 0115
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +48,7 @@ open CategoryTheory CategoryTheory.Limits HomologicalComplex
 
 namespace AlgebraicGeometry
 
-/-- An exact scalar presentation gives its normalized two-term finite-free resolution.
-Source: Stacks Tags 0115 and 0657. -/
+/-- An exact scalar presentation gives its normalized two-term finite-free resolution. -/
 private theorem twoTermResolution {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R)
     (q : ModuleCat.of R R ⟶ M)
@@ -157,8 +158,7 @@ private theorem principalExact {R : Type u} [CommRing R]
   obtain ⟨y, hy⟩ := this
   exact ⟨y, hy.symm⟩
 
-/-- The canonical quotient identification retains the specified reduction homomorphism.
-See Mathlib `PadicInt.ker_toZModPow`. -/
+/-- The canonical quotient identification retains the specified reduction homomorphism. -/
 private theorem baseEquiv (l : ℕ) [Fact l.Prime] (n : ℕ) :
     ∃ e : ZMod (l ^ n) ≃+* PadicInt l ⧸
       (Ideal.span ({(l : PadicInt l)} : Set (PadicInt l))) ^ n,
@@ -192,8 +192,7 @@ private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime] (E : Type u) [Field
 set_option linter.unusedVariables false in
 /-- The standard ℓ-adic and finite-extension quotient modules are represented by the
 corresponding two-term finite-free complexes and are finite as sets.
-
-Source: Stacks Project, Tag 0657. -/
+-/
 theorem standard_quotients_perfect
     (l : ℕ) [Fact l.Prime] (n : ℕ) (hn : 1 ≤ n) :
     (∃ (e : ZMod (l ^ n) ≃+* PadicInt l ⧸

@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Underived supported sections as Hom
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, proof of Theorem 9.4, p. 67.
+## References
+
+* J. S. Milne, *Lectures on étale cohomology*, Section 9, Theorem 9.4
 -/
 
 -- After pruning, this module only keeps private declarations.

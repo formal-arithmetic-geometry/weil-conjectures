@@ -118,7 +118,12 @@ import all Mathlib.Algebra.Homology.ShortComplex.Ab
 import all Mathlib.CategoryTheory.Sites.ConstantSheaf
 import all Mathlib.CategoryTheory.Sites.PreservesSheafification
 
-/-! # The normalized derived coefficient unit on the ordinary Tate root line -/
+/-! # The normalized derived coefficient unit on the ordinary Tate root line
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PK, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -207,8 +212,7 @@ private theorem boundaryScalarLineMap_unit
     (boundaryScalarLineMap_universal φ T N hR hS)
 
 /-- The coefficient map on the ordinary Tate root line, normalized on pure roots,
-is an unbounded derived scalar unit, without flatness of the target coefficient ring.
-Source: Stacks 03PK and 07A6. -/
+is an unbounded derived scalar unit, without flatness of the target coefficient ring. -/
 theorem supported_kummer_root_scalar_unit
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)

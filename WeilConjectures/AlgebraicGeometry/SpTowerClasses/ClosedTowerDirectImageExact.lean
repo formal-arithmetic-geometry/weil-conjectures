@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Exactness of closed direct image on coefficient systems
 
-Source: Bhatt--Scholze, Lemma 6.1.17.
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 6.1.17
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +58,7 @@ private theorem constantRingPushforward_exact
         f ⋙ eT.functor) := inferInstance
   exact preservesFiniteColimits_of_natIso q
 
-/-- A closed immersion locally of finite presentation has exact ordinary system direct image.
-Source: Bhatt--Scholze, Lemma 6.1.17, applied to each finite coefficient level. -/
+/-- A closed immersion locally of finite presentation has exact ordinary system direct image. -/
 theorem closedTowerPush_exact {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] [LocallyOfFinitePresentation f]
     (g : SpTowerShriek.Geometry l E b f) :

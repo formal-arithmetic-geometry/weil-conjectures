@@ -74,7 +74,9 @@ import WeilConjectures.AlgebraicGeometry.Supported.SupportedKummerScalarOfSource
 /-!
 # Derived scalar extension of the supported Kummer boundary
 
-Source: Stacks 03PL and 0A45.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 0A45, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -89,8 +91,7 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- The normalized supported boundary over A is the derived scalar extension of
-its normalized Z/N boundary, with the sectionwise coefficient maps.
-Source: Stacks 07A4, 03PL. -/
+its normalized Z/N boundary, with the sectionwise coefficient maps. -/
 theorem supported_kummer_boundary_scalar (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     [NeZero N]
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

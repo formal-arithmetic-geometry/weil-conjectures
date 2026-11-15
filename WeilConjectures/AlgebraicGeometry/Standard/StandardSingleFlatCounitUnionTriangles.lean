@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleUnionSESPresenta
 
 /-! # The union comparison as a morphism of distinguished triangles
 
-Source: Stacks Project, Tags 0DJ9, 08BV and 08FE.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 08BV, 08FE
 -/
 
 @[expose] public section
@@ -156,10 +158,9 @@ private theorem unionTriangles_transport
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The relative Mayer--Vietoris diagram for a relatively flat module has invertible
-middle and overlap components.
-
-Source: Stacks Project, Tag 0DJ9, induction diagram; Tags 08BV and 08FE. -/
+/-- The relative Mayer--Vietoris diagram for a relatively flat module: the standard base change
+maps for `U ⊔ V`, `U`, `V` and `U ⊓ V` form a morphism of distinguished triangles whose
+middle and overlap components are invertible. -/
 theorem standardSingleFlatCounitUnionTriangles
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

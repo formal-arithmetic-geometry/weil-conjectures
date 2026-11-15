@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Open pullback of the supported coefficient tensor comparison
 
-Source: Stacks Project, Tags 09XP and 0F1E.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09XP, 0F1E
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
 /-- Identify the derived first coefficient functor with coefficients followed by the
-canonical derived projection inverse image.
-Source: Stacks Tag 0F1E. -/
+canonical derived projection inverse image. -/
 noncomputable def supportFirstCoefficientProjectionIso (A : Type (u + 1)) [CommRing A]
     {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
     [IsClosedImmersion b] :
@@ -42,8 +43,7 @@ noncomputable def supportFirstCoefficientProjectionIso (A : Type (u + 1)) [CommR
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
         (pullback.fst f g)).symm
 
-/-- The analogous comparison for the second projection.
-Source: Stacks Tag 0F1E. -/
+/-- The analogous comparison for the second projection. -/
 noncomputable def supportSecondCoefficientProjectionIso (A : Type (u + 1)) [CommRing A]
     {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
     [IsClosedImmersion d] :
@@ -70,8 +70,7 @@ section
 variable {C D E C' D' E' : Type*}
   [Category C] [Category D] [Category E] [Category C'] [Category D'] [Category E']
 
-/-- Compatibility of a tensor comparison `t` with `τ` along the given comparison maps and
-lax monoidal structures. -/
+/-- The normalization equation is kept abstract when specialized to sheaf functors. -/
 @[irreducible]
 private def tensorNormalization [MonoidalCategory C] [MonoidalCategory D]
     [MonoidalCategory C'] [MonoidalCategory D']
@@ -237,8 +236,7 @@ variable {C D : Type*} [Category.{w} C] [Category.{w} D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
   [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
 
-/-- `tensorNormalization` for a complex-level tensor comparison `τ` and its derived
-counterpart `t`, along the localization functors. -/
+/-- Keep the complex and localization tensor structures behind a base-category interface. -/
 @[irreducible]
 private def tensorNatNormalization
     (τ : (Functor.postcompose₂.obj (G.mapHomologicalComplex (.up ℤ))).obj

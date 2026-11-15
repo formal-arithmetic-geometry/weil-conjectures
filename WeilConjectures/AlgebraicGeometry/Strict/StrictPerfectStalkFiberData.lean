@@ -17,7 +17,9 @@ import Mathlib.RingTheory.LocalRing.Module
 
 /-! # Strictly perfect stalks and derived residue cohomology
 
-Source: Stacks Project, Tags 0BCD, 08EB and 06YB.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0BCD, 08EB, 06YB
 -/
 
 @[expose] public section
@@ -27,11 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- The stalk of a locally strictly perfect object is pseudo-coherent, and any finite-free
-representative of it computes the derived residue fibre.
-
-Source: Stacks Project, Tag 0BCD, local-ring paragraph; Tags 08EB and 06YB.
--/
+/-- The stalk of a locally strictly perfect object is pseudo-coherent, and the chosen
+finite-free representative of it computes the derived residue fibre cohomology. -/
 theorem strictPerfect_stalk_fiberData
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

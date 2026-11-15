@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 
 /-! # Exact sections on the affine-neighbourhood strict henselization
 
-Source: Stacks Project, Tag 03QO.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03QO
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Global sections on the spectrum of the pointed-neighbourhood colimit are exact.
-
-Source: Stacks Project, Tag 03QO. -/
+/-- Global sections on the spectrum of the pointed-neighbourhood colimit are exact. -/
 instance strictHenselizationScheme_globalSections_preservesFiniteColimits
     {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

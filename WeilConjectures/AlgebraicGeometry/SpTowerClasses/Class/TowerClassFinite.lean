@@ -11,12 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteTateLineUni
 
 /-! # Finite for canonical tower classes
 
-## Implementation details
+## References
 
-`forgetEvaluatedArrow`, `finiteBoundaryEquality` and `kummerComposite` are stated for general
-categories before specializing the coefficient rings, so that the finite normalization formulas
-share the same category, single-functor and shift witnesses. `finiteBoundaryEquality` relates
-its arrows through heterogeneous equalities that record the endpoint transports.
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +43,7 @@ abbrev finiteForget (T : Scheme.{u}) (n : ℕ) :=
     (SemilinearSections.ring.{u + 1, u, u + 1}
       (Scheme.ProEt.topology T) (SpTowerShriek.B l E T n))
 
-/-- Forgetting the action retains the underlying sheaf kernels and sheafified
-cokernels. -/
+/-- Forgetting the action preserves finite limits and finite colimits. -/
 theorem finiteForget_exact (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (finiteForget l E T n) ∧
       PreservesFiniteColimits (finiteForget l E T n) := by
@@ -147,8 +143,9 @@ def evaluatedChern {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) (n : ℕ) :
   mapSingleArrow (SpTowerShriek.ev l E T n) (2 : ℤ) (firstChern l E c L) ≫
     ((DerivedCategory.singleFunctor _ 0).map (lineEvaluation l E c n).hom)⟦(2 : ℤ)⟧'
 
-/-- Evaluate and forget an arrow: successive exact evaluation, the target-line comparison,
-and forgetting scalars. -/
+/-- Evaluate and forget an arrow using shared category witnesses before specializing
+its coefficient rings. The formula is exactly successive exact evaluation, the
+specified target-line comparison, and forgetting scalars. -/
 def forgetEvaluatedArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
     {H : Type u₃} [Category.{v₃} H] [Abelian H]
@@ -165,15 +162,20 @@ def forgetEvaluatedArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
     (mapSingleArrow F (2 : ℤ) a ≫
       ((DerivedCategory.singleFunctor D 0).map e.hom)⟦(2 : ℤ)⟧')
 
-/-- The finite boundary comparison: the coefficient-linear arrow after the integer quotient
-agrees with the integral boundary after the root-to-tensor map. -/
+/-- The finite boundary comparison, formed before specializing its supported source.
+It compares actual arrows: the coefficient-linear arrow after the integer quotient
+and the integral boundary after the root-to-tensor map. Heterogeneous equalities
+fix both intermediate arrows to the supplied canonical arrows while recording their
+endpoint transports explicitly; the final condition is an ordinary equality. -/
 def finiteBoundaryEquality {D : Type u₁} [Category.{v₁} D]
     {X X' Y Y' : D} (q : X ⟶ X') (r : Y ⟶ Y')
     {A B : Type v₁} (a : A) (beta : B) : Prop :=
   ∃ (a' : X' ⟶ Y') (beta' : X ⟶ Y),
     HEq a' a ∧ HEq beta' beta ∧ q ≫ a' = beta' ≫ r
 
-/-- Compose an integral extension with the Kummer boundary. -/
+/-- Compose an integral extension with the Kummer boundary before specializing the
+abelian category. This shares the exact single and shift witnesses in the finite
+normalization formulas. -/
 def kummerComposite {C : Type u₁} [Category.{v₁} C] [Abelian C]
     [HasDerivedCategory.{w₁} C] (s : ShortComplex C) (hs : s.ShortExact)
     {X : C} (f : (DerivedCategory.singleFunctor C 0).obj X ⟶
@@ -186,7 +188,8 @@ def kummerComposite {C : Type u₁} [Category.{v₁} C] [Abelian C]
 
 /-- Concrete finite Kummer normalization: forget scalars, evaluate on the integer
 quotient, and obtain exactly the finite Kummer boundary followed by z -> 1 tensor z.
-Source: Stacks 03PL. -/
+This is the usual finite first Chern class, characterized by evaluation on one;
+it is not an arbitrary proposition-valued comparison. -/
 def FiniteChernNormalization {T : Scheme.{u}} (c : Chern l E T) : Prop :=
   ∀ (L : T.Pic) (n : ℕ),
     let a := mapSingleArrow (finiteForget l E T n) (2 : ℤ) (evaluatedChern l E c L n)

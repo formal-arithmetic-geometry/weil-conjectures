@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerRestrictedScalarAdjunction
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineTransitionTensor
 
-/-! # Normalized coefficient-unit transpose section calculation -/
+/-! # Normalized coefficient-unit transpose section calculation
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -139,8 +144,6 @@ noncomputable def canonicalScalarUnit {T : Scheme.{u}} (c : Chern l E T) :
 /--
 The sectionwise transpose identity in the normalized case, where the two scalar
 maps are the canonical adjuncts of `scalarGenerator`.
-
-Source: Stacks 03EL.
 -/
 theorem scalarUnit_abelianTranspose_section_normalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)

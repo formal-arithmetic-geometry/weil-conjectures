@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryProduct
 
 /-! # The graded Leibniz recurrence for square-zero tensor boundaries
 
-Source: Stacks Project, Tags 09MS and 0B8S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -28,10 +30,8 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   canonicalTensorBoundaryComparisons
 
 /-- The degreewise canonical boundaries, transported through the kernel and closed-immersion
-cohomology comparisons, satisfy the two-term Leibniz recurrence.
-
-Source: Stacks Project, Tag 09MS, equation (30.17.5.1) and the direct-sum exact sequence following
-it; Tag 0B8S, the Leibniz calculation for the connecting map. -/
+cohomology comparisons, satisfy the two-term Leibniz recurrence. This asserts only the
+recurrence; the closed power formula requires a separate induction. -/
 theorem exists_square_zero_tensor_boundary_leibniz
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

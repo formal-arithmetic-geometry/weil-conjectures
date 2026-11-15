@@ -17,7 +17,11 @@ import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionS
 
 /-! # Single-ring normalization and coefficient cocycle
 
-Source: Zheng, Constructions 4.1 and 5.14--5.15, Lemma 5.16; Stacks Tag 0GL6.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GL6
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Constructions 4.1 and 5.14--5.15, Lemma 5.16, Construction 2.26
 -/
 
 @[expose] public noncomputable section
@@ -237,8 +241,7 @@ private theorem single_coefficient_chain
   rw [single_proper_chain]
   simp only [Category.assoc, CommRingCat.hom_comp, derivedExtension, Functor.comp_obj]
 
-/-- The ordinary coefficient projection has its restriction adjunct and scalar cocycle.
-Source: Zheng Construction 2.26, Lemma 5.16; Stacks Tag 0GL6. -/
+/-- The ordinary coefficient projection has its restriction adjunct and scalar cocycle. -/
 theorem etaleSingleCoefficientProjection
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) :
     (∀ (A B : CommRingCat.{u + 1}) (_hA : Finite A) (_hB : Finite B)

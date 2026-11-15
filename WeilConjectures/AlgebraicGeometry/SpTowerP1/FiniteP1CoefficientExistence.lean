@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonPureSections
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # Existence of normalized finite coefficient coordinates
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CY, 03EK, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -81,9 +85,7 @@ attribute [local irreducible] coefficientEvaluationMap
 /-- The normalized coefficient coordinates at a finite level: the unit coordinate is the
 constant-object comparison followed by the realization unit and coefficient evaluation, and
 the line coordinate is the root-site comparison followed by the intrinsic root-tensor
-comparison.
-
-Source: Stacks Tags 03CY, 03EK and 0GLZ. -/
+comparison. -/
 @[no_expose] def finiteP1CoefficientCoordinates (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) :

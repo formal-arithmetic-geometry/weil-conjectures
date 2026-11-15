@@ -181,15 +181,19 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 /-!
 # Restriction of the quotient completion unit and finite-stratum detection
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.5.8(1),(2) and Proposition
-6.6.11, reverse implication; Stacks Tags 03EL, 0941, 099M, 0A0E.
-
 The coefficient rings, reduction functors, quotient normalizations and completion
 unit are the published constructions. Positive level n means exponent n+1.
 The ordinary tower comparison is fixed by the quotient augmentation. Its derived
 comparison is fixed on K-flat representatives by the universal reduction counits.
 The inverse-limit map is the mate of the constant-tower comparison. Thus the
 completion comparison includes its specified map from the restricted object.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EL, 0941, 099M, 0A0E, 06YY, 06YS, 015F,
+  09AA, 03DB, 0E8K, 09AH, 09AB
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8(1), Proposition 6.6.11,
+  Lemma 6.5.8
 -/
 
 @[expose] public noncomputable section
@@ -202,8 +206,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The restrictions in the statement: a locally closed immersion, a site-object
 restriction, or either order of their composite. A weakly etale morphism is exactly
-an object of the small pro-etale site over its target.
-Source: Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11. -/
+an object of the small pro-etale site over its target. -/
 def IsAdicStratumRestriction {X Y : Scheme.{u}} (f : Y ⟶ X) : Prop :=
   IsImmersion f ∨ WeaklyEtale f ∨
     (∃ (Z : Scheme.{u}) (i : Z ⟶ X) (j : Y ⟶ Z),
@@ -214,8 +217,7 @@ def IsAdicStratumRestriction {X Y : Scheme.{u}} (f : Y ⟶ X) : Prop :=
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X Y : Scheme.{u}} (f : Y ⟶ X)
 
-/-- The actual module inverse image with the canonical completed coefficient transport.
-Source: Bhatt--Scholze, Lemma 6.5.8(1). -/
+/-- The actual module inverse image with the canonical completed coefficient transport. -/
 abbrev stratumModulePull :=
   proEtaleRingModulePullback f (d.completedRing X) (d.completedRing Y) (d.integralRingIso f)
 
@@ -354,8 +356,7 @@ private theorem stratumModuleLevelIso (n : ℕ)
 
 end
 
-/-- The ordinary strict reduction comparison is uniquely fixed by its quotient unit.
-Source: Stacks Tag 03EL; Bhatt--Scholze, Lemma 6.5.8(1). -/
+/-- The ordinary strict reduction comparison is uniquely fixed by its quotient unit. -/
 theorem stratumModuleReductionIso_exists :
     ∃! e : completedReductionModuleTowerFunctor X d ⋙ d.towerModulePull f ≅
         stratumModulePull d f ⋙ completedReductionModuleTowerFunctor Y d,
@@ -384,8 +385,7 @@ theorem stratumModuleReductionIso_exists :
     rw [Category.id_comp]
     exact he
 
-/-- The ordinary comparison selected by its unique augmentation normalization.
-Source: Stacks Tag 03EL. -/
+/-- The ordinary comparison selected by its unique augmentation normalization. -/
 def stratumModuleReductionIso := (stratumModuleReductionIso_exists d f).exists.choose
 
 attribute [local instance] completedReductionModuleTowerFunctor_additive
@@ -396,9 +396,9 @@ attribute [local irreducible] completedAdicChangeData completedReductionCoeffici
   CategoryTheory.Functor.mapDerivedCategoryFactors CategoryTheory.Functor.mapDerivedCategoryFactorsh
   CategoryTheory.Functor.mapDerivedCategoryNatIso
 
-/-- The representative equation for the comparison of entire derived strict towers, in
-terms of the universal reduction counits and the ordinary strict comparison.
-Source: Stacks Tags 06YY, 03EL. -/
+/-- The representative equation for the comparison of entire derived strict towers.
+It uses actual universal counits and the ordinary strict comparison, so evaluations
+alone do not specify a morphism in the derived category of towers. -/
 def StratumReductionFormula
     (e : completedReductionTower X d ⋙ d.towerPull f ≅
       d.pull f ⋙ completedReductionTower Y d) : Prop :=
@@ -619,8 +619,7 @@ private theorem unique_of_between {T : Sort*} (P Q R : T → Prop)
   obtain ⟨x, hx, hu⟩ := h
   exact ⟨x, hPQ x hx, fun y hy ↦ hu y (hQR y hy)⟩
 
-/-- The normalized strict tower comparison exists uniquely.
-Source: Stacks Tags 06YS, 06YY, 03EL. -/
+/-- The normalized strict tower comparison exists uniquely. -/
 theorem stratumReductionIso_exists :
     ∃! e : completedReductionTower X d ⋙ d.towerPull f ≅
         d.pull f ⋙ completedReductionTower Y d,
@@ -632,13 +631,11 @@ theorem stratumReductionIso_exists :
   · intro τ hτ P hP
     exact hτ P hP.1
 
-/-- Canonical comparison of the actual strict quotient reduction towers.
-Source: Stacks Tag 06YY. -/
+/-- Canonical comparison of the actual strict quotient reduction towers. -/
 def stratumReductionIso := (stratumReductionIso_exists d f).exists.choose
 
 /-- The inverse-limit comparison is the mate of the canonical constant-tower
-comparison under the two derived constant/limit adjunctions.
-Source: Stacks Tag 0941. -/
+comparison under the two derived constant/limit adjunctions. -/
 def stratumRlimComparison (T : DerivedCategory (d.towers X)) :
     (d.pull f).obj ((completedRlim X (d.completedRing X)).obj T) ⟶
       (completedRlim Y (d.completedRing Y)).obj ((d.towerPull f).obj T) :=
@@ -648,8 +645,7 @@ def stratumRlimComparison (T : DerivedCategory (d.towers X)) :
       ((d.derivedConstantPullbackIso f).inv.app ((completedRlim X (d.completedRing X)).obj T) ≫
         (d.towerPull f).map ((d.constantRlimAdjunction X).counit.app T))
 
-/-- The canonical map between quotient completions, retaining its strict-tower map.
-Source: Stacks Tags 0941 and 099M. -/
+/-- The canonical map between quotient completions, retaining its strict-tower map. -/
 def stratumCompletionComparison (K : d.derived X) :
     (d.pull f).obj ((completedRlim X (d.completedRing X)).obj
       ((completedReductionTower X d).obj K)) ⟶
@@ -658,8 +654,7 @@ def stratumCompletionComparison (K : d.derived X) :
   stratumRlimComparison d f ((completedReductionTower X d).obj K) ≫
     (completedRlim Y (d.completedRing Y)).map ((stratumReductionIso d f).hom.app K)
 
-/-- Termwise exact tower pullback commutes with evaluation by identity components.
-Source: Stacks Tag 015F. -/
+/-- Termwise exact tower pullback commutes with evaluation by identity components. -/
 def stratumTowerEvaluationIso (n : ℕ) :
     d.towerPull f ⋙ reductionTowerDerivedEvaluation Y
         (reductionModuleRing Y (d.completedRing Y)) n ≅
@@ -878,9 +873,7 @@ private theorem stratumOrdinaryEvaluation (n : ℕ)
   rw [stratumModuleUnit_component]
   exact hu.trans (he M).symm
 
-/-- Evaluation of the normalized strict comparison on a flat-term K-flat representative.
-Source: Stacks Tags 03EL, 06YY and 015F.
--/
+/-- Evaluation of the normalized strict comparison on a flat-term K-flat representative. -/
 theorem stratumReduction_evaluation_on_KFlat
     (n : ℕ) (P : CochainComplex (reductionModules X (d.completedRing X)) ℤ)
     (hP : P.IsKFlatIndependentCoefficients)
@@ -998,8 +991,7 @@ theorem stratumReduction_evaluation_on_KFlat
 
 end
 
-/-- Evaluations of the strict comparison are the actual finite-coefficient comparisons.
-Source: Stacks Tags 03EL, 06YY and 015F. -/
+/-- Evaluations of the strict comparison are the finite-coefficient comparisons. -/
 theorem stratumReduction_evaluation (n : ℕ) (K : d.derived X) :
     (reductionTowerDerivedEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n).map
         ((stratumReductionIso d f).hom.app K) ≫
@@ -1044,8 +1036,7 @@ theorem stratumReduction_evaluation (n : ℕ) (K : d.derived X) :
 
 attribute [local irreducible] completedReductionTowerUnit completedReductionModuleUnit
 
-/-- The strict comparison preserves the actual augmentation from the constant tower.
-Source: Stacks Tags 03EL, 06YY. -/
+/-- The strict comparison preserves the augmentation from the constant tower. -/
 theorem stratumReduction_augmentation (K : d.derived X) :
     (d.towerPull f).map ((completedReductionAugmentation d X).app K) ≫
         (stratumReductionIso d f).hom.app K =
@@ -1056,8 +1047,7 @@ theorem stratumReduction_augmentation (K : d.derived X) :
     (stratumReductionIso_exists d f).exists.choose_spec (stratumPull_flatKFlat d f) K
 
 /-- These module inverse images are exact and preserve small limits; coefficient
-identification is by the canonical completed map with its fixed finite projections.
-Source: Bhatt--Scholze, Lemma 6.5.8(1); Stacks Tags 09AA, 03DB, 0E8K. -/
+identification is by the canonical completed map with its fixed finite projections. -/
 theorem stratumRestriction_limits (hf : IsAdicStratumRestriction f) :
     (stratumModulePull d f).Additive ∧
       PreservesFiniteLimits (stratumModulePull d f) ∧
@@ -1119,8 +1109,7 @@ theorem stratumRestriction_limits (hf : IsAdicStratumRestriction f) :
   exact ⟨inferInstance, inferInstance, inferInstance, hmod, d.projection_comm f⟩
 
 /-- The canonical mate commutes with total derived strict inverse limit for the
-specified restrictions, including schemes Y which are not Noetherian.
-Source: Stacks Tag 0941; Bhatt--Scholze, Lemma 6.5.8. -/
+specified restrictions, including schemes `Y` which are not Noetherian. -/
 theorem stratumRlimComparison_isIso (hf : IsAdicStratumRestriction f)
     (T : DerivedCategory (d.towers X)) : IsIso (stratumRlimComparison d f T) := by
   let F := stratumModulePull d f
@@ -1153,10 +1142,9 @@ theorem stratumRlimComparison_isIso (hf : IsAdicStratumRestriction f)
   rw [hm]
   infer_instance
 
-/-- Restriction identifies the quotient completion and its unit, including the map
-from the restricted input. The isomorphism is the prescribed strict-limit mate
-followed by the normalized reduction-tower comparison.
-Source: Bhatt--Scholze, Lemma 6.5.8(1),(2); Stacks Tags 0941, 099M. -/
+/-- Restriction identifies the quotient completion and its unit: the completion comparison
+is invertible and carries the restricted completion unit to the completion unit of the
+restriction. -/
 theorem stratumCompletionComparison_unit [IsLocallyNoetherian X] [CompactSpace X]
     (hf : IsAdicStratumRestriction f) (K : d.derived X) :
     IsIso (stratumCompletionComparison d f K) ∧
@@ -1216,8 +1204,8 @@ theorem stratumCompletionComparison_unit [IsLocallyNoetherian X] [CompactSpace X
     rw [Category.assoc, ← R.map_comp, ← R.map_comp, hb]
     rfl
 
-/-- Intrinsic completeness is preserved, with arbitrary representative realizations.
-Source: Bhatt--Scholze, Lemma 6.5.8; Stacks Tags 099M, 0A0E. -/
+/-- Intrinsic completeness is preserved by the stratum restriction, with arbitrary
+representative realizations. -/
 theorem stratumIntrinsicComplete_preserved [IsLocallyNoetherian X] [CompactSpace X]
     (hf : IsAdicStratumRestriction f)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
@@ -1317,9 +1305,8 @@ private theorem stratumPull_detects (X : Scheme.{u})
   exact (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
     (P.map_distinguished _ hT)).2 (hg i j)
 
-/-- Intrinsic completeness is detected by every chosen pro-etale cover of every
-stratum of a finite locally closed stratification.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Tags 09AH, 09AB. -/
+/-- Intrinsic completeness is detected by every chosen pro-étale cover of every
+stratum of a finite locally closed stratification. -/
 theorem stratum_completion_unit_restriction (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X]
     (S : FiniteLocallyClosedStratification X)

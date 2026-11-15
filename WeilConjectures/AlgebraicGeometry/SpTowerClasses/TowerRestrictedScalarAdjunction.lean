@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.HomCongr
 
 /-! # Restriction of coefficients in the ordinary geometric adjunction
 
-Source: Stacks 03EL, ordinary coefficient extension.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -567,9 +569,7 @@ private theorem restrictedAdjunction_spec (M : Systems Y (Rrings l Y))
 end HomConstruction
 
 /-- The normalized restriction/direct-image square and its integral Hom adjunction.
-This statement involves neither a coefficient-unit arrow nor a Tate-line comparison.
-
-Source: Stacks 03EL, ordinary module inverse image and scalar restriction. -/
+This statement involves neither a coefficient-unit arrow nor a Tate-line comparison. -/
 theorem restrictedScalarAdjunction_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

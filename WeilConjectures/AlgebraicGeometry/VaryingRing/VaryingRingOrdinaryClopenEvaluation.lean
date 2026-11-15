@@ -14,10 +14,15 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.OrdinarySquareComparison.Va
 /-!
 # Ordinary coefficient evaluation of the clopen comparison
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tags 09AE and 0F7B.
 The evaluation used here first takes an ordinary system component, then makes a
 constant tower concentrated in degree zero. Its faithfulness concerns ordinary
 system morphisms only.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AE, 0F7B
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +60,7 @@ private theorem ordinaryClopenComparison_factor (n : ℕ) :
   simpa only [hf, strictAlpha_factorization] using hh
 
 /-- Ordinary evaluation preserves the specified inverse-image and open-extension
-comparisons and the single-square clopen arrow.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 09AE and 0F7B. -/
+comparisons and the single-square clopen arrow. -/
 theorem ordinaryClopenEvaluation (n : ℕ) :
     ∃ (gIso : OrdinaryPullComparison R φ n) (jIso : OrdinaryOpenComparison R φ n),
       OrdinaryPullComposition R φ n gIso ∧ OrdinaryOpenComposition R φ n jIso ∧

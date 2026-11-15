@@ -34,8 +34,7 @@ private theorem mapSingleArrow_add
   simp only [mapSingleArrow, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 /-- Tensor multiplication becomes addition for the integral line class in the
-ordinary derived category of constant towers.
--/
+ordinary derived category of constant towers. -/
 theorem tower_lineBundleClass_mul (T : Scheme.{u}) (L M : T.Pic) :
     lineBundleClass T (L * M) = lineBundleClass T L + lineBundleClass T M := by
   simp only [lineBundleClass, tower_lineBundleEtaleClass_mul, mapSingleArrow_add]

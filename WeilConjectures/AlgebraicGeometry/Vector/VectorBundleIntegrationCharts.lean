@@ -165,8 +165,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 
 /-! # Vector-bundle integration charts and local trace maps
 
-These are the existing coefficient, chart and normalization constructions. Cohomology
-concentration follows by exact inverse image and the affine-space trace on a frame cover.
+These are the coefficient, chart and normalization constructions for vector-bundle
+integration, together with the concentration of the compact-support complex in degree zero.
 -/
 
 @[expose] public noncomputable section
@@ -177,14 +177,14 @@ open scoped CategoryTheory.Functor ZeroObject
 namespace AlgebraicGeometry.Etale
 
 /-- Reuse concrete sheafification on each Zariski slice when elaborating finite-rank
-module frames. -/
+module frames. This packages the existing Mathlib instance without a new assumption. -/
 instance vectorIntegrationZariskiWeakSheafify (S : Scheme.{u}) :
     ∀ V : S.Opens, HasWeakSheafify
       ((Opens.grothendieckTopology S).over V) AddCommGrpCat.{u} :=
   fun V ↦ sheafToPresheaf_isRightAdjoint ((Opens.grothendieckTopology S).over V)
     AddCommGrpCat.{u}
 
-/-- The local-bijection characterization of sheafification on each Zariski slice. -/
+/-- Reuse the existing local-bijection characterization of sheafification on each slice. -/
 instance vectorIntegrationZariskiLocallyBijective (S : Scheme.{u}) :
     ∀ V : S.Opens,
       ((Opens.grothendieckTopology S).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
@@ -198,8 +198,7 @@ instance vectorIntegrationZariskiLocallyBijective (S : Scheme.{u}) :
       fun P ↦ Presheaf.isLocallySurjective_toSheafify' J P
     GrothendieckTopology.WEqualsLocallyBijective.mk' J AddCommGrpCat.{u}
 
-/-- The geometric properties needed to form the ordinary compact support of the bundle.
--/
+/-- The geometric properties needed to form the ordinary compact support of the bundle. -/
 theorem vectorIntegration_geometry (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
     IsAffineHom (VectorBundleZeroSection.π S d F) ∧
@@ -240,7 +239,7 @@ def vectorIntegrationBaseCoefficientPullback (A : Type (u + 1)) [CommRing A] (N 
 
 /-- A_E(d)[2d], written as inverse image of the existing ordered shifted Tate tensor.
 Each of the d factors is the concrete finite roots-of-unity Tate line shifted by two;
-the zero-fold tensor is the constant complex. -/
+the zero-fold tensor is the constant complex. This uses no additional twist definition. -/
 def vectorIntegrationCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -248,7 +247,8 @@ def vectorIntegrationCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)).obj
     (affineLinearBaseCoefficient A N hA S d)
 
-/-- C_pi = R pi_! A_E(d)[2d], using the canonical chosen compactification. -/
+/-- C_pi = R pi_! A_E(d)[2d], using the canonical chosen compactification. Nagata applies
+because the bundle is separated and finite type and the Noetherian base is qcqs. -/
 def vectorIntegrationSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -268,7 +268,7 @@ def vectorIntegrationSheaf (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (_root_.DerivedCategory.homologyFunctor _ 0).obj (vectorIntegrationSource A N hA S d F)
 
 /-- The inverse frame from the coordinate-tower affine space to the restricted bundle,
-followed by the open inclusion into E. -/
+followed by the actual open inclusion into E. No coordinate isomorphism is chosen. -/
 def vectorIntegrationChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
     (e : VectorBundleZeroSection.Trivialization S d F V) :
@@ -278,8 +278,7 @@ def vectorIntegrationChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     inv (VectorBundleZeroSection.trivializationMap S d F V e) ≫
       ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V).ι
 
-/-- The inverse-frame square over V → S is Cartesian.
--/
+/-- The inverse-frame square over V → S is Cartesian. -/
 theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
     (e : VectorBundleZeroSection.Trivialization S d F V) :
@@ -300,7 +299,9 @@ theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d :
   simpa only [vectorIntegrationChart, Category.id_comp, Category.assoc] using
     hi.paste_horiz (isPullback_morphismRestrict (VectorBundleZeroSection.π S d F) V).flip
 
-/-- Canonical coefficient identification in the inverse-frame square. -/
+/-- Canonical coefficient identification in the inverse-frame square. The equality of
+its two composites is used between the inverse-image composition comparisons; then the
+base Tate tensor is pulled back and the existing affine coefficient descent is inverted. -/
 def vectorIntegrationChartCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

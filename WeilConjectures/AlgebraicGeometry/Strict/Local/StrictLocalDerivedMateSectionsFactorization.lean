@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalDerivedExchange
 
 /-! # The derived mate on the complex of neighbourhood sections
 
-Source: Stacks Project, Tag 03Q9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -29,10 +31,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The derived mate on an injective representative is computed by the underived
-exchange map followed by the derived-sections unit.
-
-Source: Stacks Project, Tag 03Q9, and the generic
-factorization of derived adjunction mates on complexes. -/
+exchange map followed by the derived-sections unit. -/
 theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

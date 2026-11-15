@@ -69,7 +69,12 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 import Mathlib.CategoryTheory.Localization.Predicate
 import all WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSupplement
 
-/-! # Normalized tensor models for section principal quotients -/
+/-! # Normalized tensor models for section principal quotients
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 06YS, 06YT, 08TC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -734,9 +739,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized tensor identification of the section reductions, without the
-completion assertion.
-
-Source: Stacks 03EK, 06YS, 06YT and 08TC. -/
+completion assertion. -/
 theorem strictSectionQuotientTensorModels (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1}
       (Modules (DerivedNakayama.integerRing l E) X))

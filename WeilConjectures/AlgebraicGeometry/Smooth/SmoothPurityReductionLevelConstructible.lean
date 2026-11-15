@@ -19,7 +19,9 @@ set_option linter.privateModule false
 
 /-! # Constructible cohomology of the evaluated strict reductions
 
-Source: Stacks Tags 093M, 093U, 06YY, 08J5.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 093M, 093U, 06YY, 08J5
 -/
 
 @[expose] public noncomputable section

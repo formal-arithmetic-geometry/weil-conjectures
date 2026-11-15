@@ -125,7 +125,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Comparing the published Koszul fiber with Cech internal Hom
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, and sites-cohomology.tex, Tags 0941 and 0A0A.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941, 0A0A
 -/
 
 @[expose] public noncomputable section
@@ -136,8 +138,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The published Koszul fiber is Cech internal Hom, with its specified unit.
-Source: Stacks Project, Tag 0A0E. -/
+/-- The published Koszul fiber is Cech internal Hom, with its specified unit. -/
 theorem completed_fiber_cech_comparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

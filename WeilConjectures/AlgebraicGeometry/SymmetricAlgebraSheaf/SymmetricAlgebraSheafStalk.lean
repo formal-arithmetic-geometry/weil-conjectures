@@ -12,7 +12,9 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-! # Symmetric algebras commute with taking stalks
 
-Source: Stacks Project, Modules, Lemma 01CH; Sheaves, Lemma 007K.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01CH
 -/
 
 @[expose] public section
@@ -210,8 +212,7 @@ private theorem stalkInverse_sectionToStalk (U : X.Opens) (hx : x ∈ U)
   | add a b ha hb => simp only [map_add, ha, hb]
 
 /-- The canonical stalk isomorphism for the symmetric algebra sheaf fixes scalar germs
-and sends every germ of a degree-one generator to the generator of the module germ.
-Source: Stacks Project, Modules, Lemma 01CH; Sheaves, Lemma 007K. -/
+and sends every germ of a degree-one generator to the generator of the module germ. -/
 theorem stalk_iso :
     ∃ e : TopCat.Presheaf.stalk (C := CommRingCat) (algebra F).right.obj x ≅
         CommRingCat.of (SymmetricAlgebra (X.presheaf.stalk x)

@@ -15,7 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # Tensor comparison for completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -208,10 +210,7 @@ attribute [local irreducible] completedCechModulesEquiv pbcCompletedComparison
   completedKoszulConstant completedKoszulOne completedCechCoefficientUnit
 
 /-- Completed constant realization commutes with total tensor products, naturally
-and with the specified normalization on the (0,0) pure tensor summand.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW; algebraization.tex, Tag 0A0E,
-the finite free coefficient realization. -/
+and with the specified normalization on the (0,0) pure tensor summand. -/
 theorem completedRealizationTensor
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor

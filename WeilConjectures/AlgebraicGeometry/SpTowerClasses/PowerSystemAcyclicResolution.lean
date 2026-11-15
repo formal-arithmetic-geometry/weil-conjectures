@@ -17,7 +17,12 @@ import Mathlib.Algebra.Category.Grp.Adjunctions
 import Mathlib.Algebra.FreeAbelianGroup.Finsupp
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 
-/-! # Flat resolutions adapted to simultaneous prime-power reduction -/
+/-! # Flat resolutions adapted to simultaneous prime-power reduction
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YS, 06YY, 06XN, 05SE
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -416,9 +421,7 @@ private theorem reduction_preserves_regular_quasiIso (l : ℕ) [Fact l.Prime] (T
     (powerShortComplex_exact l T r P hP) (powerShortComplex_exact l T r Q hQ)
     (PowerTransition.quasiIso_map l f) hf
 
-/-- Every abelian tower complex has a reduction-acyclic resolution with torsion-free terms.
-
-Source: Stacks 06YS, 06YY, 06XN, 05SE. -/
+/-- Every abelian tower complex has a reduction-acyclic resolution with torsion-free terms. -/
 theorem powerSystem_acyclic_resolution (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Reduction T (Rrings l T)) (K : CochainComplex (Ab T) ℤ) :
     ∃ (P : CochainComplex (Ab T) ℤ) (q : P ⟶ K),

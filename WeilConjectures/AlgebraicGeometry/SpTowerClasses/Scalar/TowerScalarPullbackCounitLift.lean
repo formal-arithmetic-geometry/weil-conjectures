@@ -15,6 +15,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjuncti
 import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Derived lifting of ordinary scalar association on whole systems
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A4, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -173,11 +177,7 @@ private theorem counit_square_single
   simp only [Category.assoc]
   erw [hsingle]
 
-/-- A scalar-association isomorphism lifts through the universal scalar counits.
-Only preservation of the flat K-flat resolving class is needed. Neither coefficient
-nor root endpoint normalizations are asserted here.
-
-Source: Stacks 06YY, 07A4 and 0G7E. -/
+/-- A scalar-association isomorphism lifts through the universal scalar counits. -/
 theorem tower_scalarPullback_counitLift
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {b : SpTowerShriek.Base l E} (g : SpTowerShriek.Geometry l E b f)

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.BoundaryPullbackTensorUnit
 
 /-! # Local tensor multiplication under the canonical kernel comparisons
 
-Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its ideal coefficient.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 08KS
 -/
 
 @[expose] public section
@@ -50,11 +52,7 @@ private theorem whiskerLeft_section {Z : Scheme.{u}} (F N : Z.Modules)
   exact whiskerLeft_app_tmulSection _ _ _
 
 /-- In a local lift of a homogeneous quotient section, the transported
-kernel map is ordinary tensor multiplication after the kernel inclusion.
-There is no graded presentation, ring action or degree projection in this statement.
-
-Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the identification of its ideal
-coefficient over Z; Modules, Tag 08KS, the closed-immersion quotient. -/
+kernel map is ordinary tensor multiplication after the kernel inclusion. -/
 theorem tensorBoundaryKernelMap_local_multiplication {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ)

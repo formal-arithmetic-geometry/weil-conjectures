@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearCompositorCoheren
 
 /-! # Packaging the actual varying-ring proper/open calculus
 
-Source: Stacks 0F7B--0F7D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7D, 03DI
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +42,7 @@ private theorem iso_trans_app {C D : Type*} [Category* C] [Category* D]
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R (n + 1) ⟶ R n)
 
-/-- Equality transport of open extension, including the open-immersion instance.
-Source: Stacks 03DI. -/
+/-- Equality transport of open extension, including the open-immersion instance. -/
 def openCongr {X Y : Scheme.{u}} {f g : X ⟶ Y}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J R φ f ≅ J R φ g := by
   subst g
@@ -160,8 +161,7 @@ theorem namedOpenAssoc {X Y Z W : Scheme.{u}}
 universe v w
 
 set_option linter.checkUnivs false in
-/-- The functor data underlying a proper/open calculus, retaining both universes.
-Source: Stacks 0F7B--0F7D. -/
+/-- The functor data underlying a proper/open calculus, retaining both universes. -/
 structure ProperOpenInputs (A : Scheme.{u} → Prop) where
   obj : {X : Scheme.{u} // A X} → Type w
   [category (X : {X : Scheme.{u} // A X}) : Category.{v} (obj X)]
@@ -187,8 +187,7 @@ structure ProperOpenInputs (A : Scheme.{u} → Prop) where
 
 attribute [instance] ProperOpenInputs.category
 
-/-- The proper/open equations, referring to one fixed record of functor data.
-Source: Stacks 0F7B--0F7D. -/
+/-- The proper/open equations, referring to one fixed record of functor data. -/
 structure ProperOpenEquations {A : Scheme.{u} → Prop}
     (D : ProperOpenInputs.{u, v, w} A) : Prop where
   pAssoc (X Y Z W : {X : Scheme.{u} // A X})
@@ -291,8 +290,7 @@ def assembleProperOpen {A : Scheme.{u} → Prop} (D : ProperOpenInputs.{u, v, w}
   verticalIdentity := L.verticalIdentity
   horizontalIdentity := L.horizontalIdentity
 
-/-- The actual derived functors and their specified comparison isomorphisms.
-Source: Stacks 0F7B--0F7D. -/
+/-- The actual derived functors and their specified comparison isomorphisms. -/
 def actualProperOpenInputs (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -349,9 +347,8 @@ theorem actualProperOpenEquations (A : Scheme.{u} → Prop)
       dsimp only [actualProperOpenInputs]
       simpa only [asIso_hom] using (gamma_identities R φ).2 p h M }
 
-/-- Invertibility is the only additional input to the existing proper/open equations.
-All functors and maps are the actual varying-ring constructions.
-Source: Stacks 0F7B--0F7D. -/
+/-- The proper/open calculus of the actual varying-ring operations on schemes satisfying
+`A`, given that every comparison `gamma` is invertible. -/
 def properOpenModel (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

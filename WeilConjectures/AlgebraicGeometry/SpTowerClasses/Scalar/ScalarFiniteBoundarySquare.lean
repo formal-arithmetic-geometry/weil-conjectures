@@ -33,9 +33,7 @@ attribute [local irreducible] scalarFiniteBoundary_eval scalarFiniteBoundary_int
 
 /--
 The evaluated scalar arrow and the underlying integral arrow have the same finite
-boundary composite. This is the composition identity used to construct the
-`Fact` in `scalarFiniteBoundary`.
--/
+boundary composite. -/
 theorem scalarFiniteBoundary_composition (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)

@@ -35,7 +35,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 /-!
 # Smooth morphisms are universally locally acyclic
 
-Source: Stacks Project, Tag 0GJQ.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GJQ
 -/
 
 @[expose] public section
@@ -446,9 +448,7 @@ private theorem smooth_isLocallyAcyclic
       cohomology AddCommGrpCat.{u + 1} (localAcyclicityFiber f x t) (q : ℤ)
     exact (hstalk.2 q hq).of_iso (H.mapIso e).symm
 
-/-- Smooth morphisms are universally locally acyclic, and in particular locally acyclic.
-There is no properness or relative-dimension hypothesis.
-Source: Stacks Project, Tag 0GJQ. -/
+/-- Smooth morphisms are universally locally acyclic, and in particular locally acyclic. -/
 theorem smooth_localAcyclicity {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     IsUniversallyLocallyAcyclic f ∧ IsLocallyAcyclic f := by
   exact ⟨fun _ _ ↦ smooth_isLocallyAcyclic _, smooth_isLocallyAcyclic f⟩

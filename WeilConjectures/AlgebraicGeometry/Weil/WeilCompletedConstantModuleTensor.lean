@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 
 /-! # Ordinary tensor comparison for completed constant modules
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -208,9 +210,7 @@ private theorem constant_tensor (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     Functor.isoWhiskerLeft (P.prod P) e.symm⟩
 
 /-- Completed constant extension preserves the ordinary module tensor product,
-with its regular coefficient map normalized by the section `1 tensor 1`.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW. -/
+with its regular coefficient map normalized by the section `1 tensor 1`. -/
 theorem completedConstantModuleTensor
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : ProEtaleAdicCoefficientDatum A) :

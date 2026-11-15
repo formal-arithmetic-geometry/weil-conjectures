@@ -8,15 +8,19 @@ module
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOrdinaryEvaluationComparisons
 
 /-! Pasting of two ordinary realization comparison equations.
-Source: Zheng, Construction 4.1. -/
+
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public section
 set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 
-/-- Comparison equations for consecutive natural transformations compose.
-Source: functoriality and associativity in Zheng, Construction 4.1. -/
+/-- Comparison equations for consecutive natural transformations compose. -/
 theorem OrdinarySquareComparison.trans
     {A B C D M A' B' C' D' M' : Type*}
     [Category A] [Category B] [Category C] [Category D]

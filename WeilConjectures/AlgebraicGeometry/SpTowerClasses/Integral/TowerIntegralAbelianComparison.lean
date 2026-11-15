@@ -13,6 +13,11 @@ import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Abelian comparison for integral ordinary inverse systems
+
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -391,9 +396,7 @@ end Ordinary
 
 attribute [local irreducible] Rrings
 
-/-- The underlying abelian tower comparison supplied by an ordinary inverse system.
-Source: Zheng Construction 4.1.
--/
+/-- The underlying abelian tower comparison supplied by an ordinary inverse system. -/
 theorem integralInverseSystem_abelian_comparison (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeProjectiveSpace.FreeProjectiveB
 /-!
 # Ordered free comparisons for the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -34,9 +36,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
   Scheme.Modules.boundaryPullbackComparison
 
-/-- Ordered free comparisons for the normalized symmetric Proj quotient.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS. -/
+/-- Ordered free comparisons for the normalized symmetric Proj quotient. -/
 theorem free_compatibility_of_normalized_quotient (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E) :
     ProjectiveBundleQuotientGeometry.HasFreeCompatibility D := by

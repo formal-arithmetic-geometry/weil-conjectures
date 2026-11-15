@@ -85,7 +85,9 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 - `spCoefficientRings`: the positive ell-power constant coefficient ring tower.
 - `spCoefficientTowers`: module presheaves on the coefficient diagram, sheaves at each level.
 
-The natural number n always denotes the paper's positive level n+1. In the product
+## Implementation details
+
+The natural number n always denotes the positive level n+1. In the product
 category `ℕ × T.ProEt`, presheaf restrictions run from higher levels to lower levels.
 Their scalar maps are exactly the quotient maps, so Mathlib's `PresheafOfModules`
 encodes the required semilinearity. The full subcategory imposes only the levelwise
@@ -359,8 +361,7 @@ private theorem spCompletedLimit_exists :
   exact hscalar _ _ (hpow (op n))
 
 /-- The completed coefficient sheaf is also the limit of the ell-power constant sheaves.
-It is the existing uniformizer-power completion, whose identification with the pullback
-of condensed integers is clause (3) of `sfb_integral_coefficient_limit`. -/
+The isomorphism is unique subject to compatibility with the finite quotient maps. -/
 theorem sp_completed_coefficient_limit :
     ∃! e : WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E T ≅
         limit (spCoefficientRings l E T),

@@ -10,6 +10,19 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleInverseTransition
 
 /-! Assembly of levelwise strict étale extension data.
+
+## Implementation details
+
+The extension of a system `M` has `n`th level `(L.level n).obj (M.level n)`; its successor
+transition is the next-level extension of the source transition followed by `L.restriction`.
+The adjunction is assembled from the level adjunctions `L.levelAdjunction`, using
+`L.restrictionMate` to match the transition-compatibility conditions.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -312,10 +325,11 @@ private theorem openSystemTransition {m n : ℕ} (h : n ≤ m)
   exact he
 
 /-- The system-level assembly data for ordinary strict étale extension.
-Source: Zheng, Construction 4.1 and Stacks 03S2, 03DI and 03DJ.
 
-The record contains the system functor, its exact adjunction, evaluation mate and
-transition law; the levelwise functors and their restriction mates come from `L`. -/
+This record supplies only the system functor, its exact adjunction, evaluation mate,
+and transition law.  The levelwise functors and their restriction mates are supplied
+by `L`; hence this is a proper assembly step rather than a restatement of the full
+ordinary-open theorem. -/
 structure StrictEtaleSystemOpenAssembly where
   extension : strictEtaleCoefficientSystem X O t ⥤ strictEtaleCoefficientSystem Z O t
   [additive : extension.Additive]
@@ -337,8 +351,7 @@ structure StrictEtaleSystemOpenAssembly where
 attribute [instance] StrictEtaleSystemOpenAssembly.additive
 
 set_option linter.unusedSectionVars false in
-/-- The system-level assembly exists for every levelwise package.
-Source: Zheng, Construction 4.1; Stacks Project 03S2, 03DI and 03DJ. -/
+/-- The system-level assembly exists for every levelwise package. -/
 theorem strictEtaleSystemOpenAssembly_exists :
     Nonempty (StrictEtaleSystemOpenAssembly O t j I PX PZ L) := by
   refine ⟨{

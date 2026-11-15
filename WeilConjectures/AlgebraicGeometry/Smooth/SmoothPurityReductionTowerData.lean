@@ -37,6 +37,10 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 The source is the sectionwise realization of the pulled-back condensed integer ring.
 Its comparison with the completed ring is fixed on the underlying abelian sheaf by
 `sfb_integral_coefficient_limit`. Positive exponent n+1 is represented by n : ℕ.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00YV
 -/
 
 @[expose] public noncomputable section
@@ -68,8 +72,7 @@ instance spIntegralCondensedComm : IsCommMonObj (spIntegralCondensed l E) :=
   Profinite.isCommMonObj_continuousMapRingObjOfUniverse
     (Padic.coefficientExtensionIntegers l E)
 
-/-- The section-ring realization of the actual pulled-back integral coefficient sheaf.
-Source: Stacks 00YV. -/
+/-- The section-ring realization of the actual pulled-back integral coefficient sheaf. -/
 abbrev spIntegralSectionRing :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
     (condensedRingObj (spIntegralCondensed l E) T)
@@ -84,8 +87,7 @@ abbrev spIntegralSectionModules :=
 instance spIntegralSectionHasDerived : HasDerivedCategory (spIntegralSectionModules l E T) :=
   HasDerivedCategory.standard _
 
-/-- The recorded equivalence, with unchanged underlying sections and linear maps.
-Source: Stacks 00YV. -/
+/-- The recorded equivalence, with unchanged underlying sections and linear maps. -/
 abbrev spIntegralModuleEquivalence :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
     (condensedRingObj (spIntegralCondensed l E) T)
@@ -100,7 +102,8 @@ def spIntegralInternalization :
   (spIntegralModuleEquivalence l E T).inverse.mapDerivedCategory
 
 /-- The canonical integral comparison selected by its projection normalization on
-profinite test objects. -/
+profinite test objects. The existence theorem determines this object uniquely after
+its finite-label representation is chosen; it is not a choice of an arbitrary map. -/
 def spIntegralAbComparison :
     (condensedRingObj (spIntegralCondensed l E) T) ≅ sfbCompletedIntegersAb l E T :=
   (sfb_integral_coefficient_limit l E T).choose_spec.choose_spec.choose_spec.2.2.2.2.2.choose
@@ -133,8 +136,9 @@ def spReductionOrdinaryLevels (D : SpCoefficientTowersAbelian l E T)
   ∀ n : ℕ, ordinary ⋙ spCoefficientEvaluation l E T D.equivalence n ≅
     (D.scalar (spIntegralReductionScalar l E T coefficient n)).model.E
 
-/-- The scalar-first local pure tensor generator, transported to the strict ordinary
-reduction tower. -/
+/-- The local tensor generator transported to the strict ordinary reduction tower.
+Naming this map keeps the kernel from repeatedly comparing the sectionwise scalar-model
+presentations in the transition predicate. It is the same scalar-first pure tensor. -/
 def spReductionGenerator (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
@@ -149,7 +153,8 @@ def spReductionGenerator (D : SpCoefficientTowersAbelian l E T)
       (spIntegralReductionScalar l E T coefficient n)).model M U c x)
 
 /-- The section function of the actual strict transition, after forgetting restriction
-of scalars. Its underlying additive sections are unchanged. -/
+of scalars. Its underlying additive sections are unchanged. Keeping the ring tower
+abstract here avoids unfolding its concrete constant quotient rings in kernel conversion. -/
 def spStrictTransitionSection
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (C : StrictRingSystem.{u + 1, u, u + 1} B) {m n : ℕ} (h : m ≤ n)

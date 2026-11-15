@@ -62,9 +62,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # Relative condensed derived tensor and its geometric Frobenius
 
-`wfCondensedTensor` is the native relative derived tensor on modules over the pulled-back
-condensed ring; its first argument is computed by a K-flat representative.
-`wfCondensedTensorFrobenius` composes the normalized tensor
+The main construction is `wfCondensedTensor`, the native relative derived tensor
+on modules over the pulled-back condensed ring. Its first argument is computed by
+a K-flat representative. `wfCondensedTensorFrobenius` composes the normalized tensor
 comparison of exact pullback with the tensor of the given Weil isomorphisms.
 
 ## Main definitions
@@ -86,6 +86,11 @@ No preservation of constructibility or exactness on Weil pairs is assumed here.
 The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
 these are the valuation-ring data transported along `Shrink.algEquiv`, with the
 actual field inclusions conjugated by that canonical equivalence.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 06YT
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10
 -/
 
 @[expose] public noncomputable section
@@ -334,8 +339,7 @@ private theorem derivedBilinear :
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 set_option backward.isDefEq.respectTransparency false in
-/-- The localization model's natural comparison on flat-term K-flat representatives.
-Source: Stacks 06YT. -/
+/-- The localization model's natural comparison on flat-term K-flat representatives. -/
 theorem wfTensorRepresentative_exists :
     ∃ i :
       (((proEtaleFlatRepresentatives X (pbcAdicCompletion X d)).ι.prod
@@ -416,14 +420,12 @@ theorem wfTensorRepresentative_exists :
       (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))))
   exact WfTensorLinearity.uniqueComparison _ ff' i b.representative
 
-/-- The existing pullback-comparison interface with this very localized tensor.
-Source: Stacks 06YT. -/
+/-- The existing pullback-comparison interface with this very localized tensor. -/
 def wfTensorModel : ProEtaleTensorModel X (pbcAdicCompletion X d) where
   tensor := wfOrdinaryDerivedTensor X d
   representative := (wfTensorRepresentative_exists X d).choose
 
-/-- Integral completed tensor is ordinary derived tensor followed by the Koszul reflector.
-Source: Bhatt--Scholze Definition 3.4.10. -/
+/-- Integral completed tensor is ordinary derived tensor followed by the Koszul reflector. -/
 def wfIntegralTensor : WfCompleteCategory X d r a ha × WfCompleteCategory X d r a ha ⥤
     WfCompleteCategory X d r a ha :=
   ((ObjectProperty.ι (WfIsComplete X d r a ha)).prod
@@ -1265,7 +1267,7 @@ abbrev wfAmbientFrobenius := wfAmbientRationalPullback (D.geometricFiber X₀).l
   (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
   (wfUniformizer_generates D c E) (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
-/-- Inclusion of the carriers of Weil complexes into the stipulated ambient category. -/
+/-- Inclusion of the Weil-complex carriers into the stipulated ambient category. -/
 abbrev wfWeilCarrier (K : WeilD D c X₀ E) : WfAmbient D c X₀ E :=
   (wfConstructibleInclusion (D.geometricFiber X₀).left
     (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)

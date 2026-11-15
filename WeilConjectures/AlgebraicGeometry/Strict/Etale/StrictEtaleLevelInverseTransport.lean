@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficie
 
 /-! # Normalized finite inverse-image transport
 
-Source: Zheng, Construction 5.15 and Proposition 2.29(2).
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Proposition 2.29(2)
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +29,8 @@ attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 /-- A finite inverse-image/scalar square, normalized by insertion of the tensor unit
 and by its universal derived computation arrow. No exactness of scalar extension is
-assumed.
-Source: Zheng, Construction 5.15 and Proposition 2.29(2). -/
+assumed. The ordinary square and the computation equation fix the derived square on
+flat-term K-flat representatives, hence on every object by naturality. -/
 structure StrictEtaleLevelInverseTransport
     {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     {phi : O →+* O'} {index : ℕ →o ℕ}

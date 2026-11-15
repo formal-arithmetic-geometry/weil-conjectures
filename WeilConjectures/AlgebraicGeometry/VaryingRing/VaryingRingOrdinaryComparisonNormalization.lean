@@ -13,7 +13,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 /-!
 # Normalization of the ordinary realization comparisons
 
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DI and 09AE.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09AE
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -373,8 +377,8 @@ private theorem open_composition (n : ℕ)
     (ordinaryPullComparison R φ n U X (i ≫ j))
     (moduleGComp R φ i j) (StrictTower.gComp (R n) i j) (hp i j)
 
-/-- The two construction normalizations, before any cartesian or section arrow.
-Source: Zheng, Construction 4.1; Stacks 03DI and 09AE. -/
+/-- The ordinary pullback and open realization comparisons are compatible with
+composition. -/
 theorem ordinaryComparisonNormalization (n : ℕ) :
     OrdinaryPullComposition R φ n (ordinaryPullComparison R φ n) ∧
       OrdinaryOpenComposition R φ n (ordinaryOpenComparison R φ n) := by

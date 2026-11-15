@@ -10,7 +10,15 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleUnionSESChainDat
 
 /-! # Short exact presentations of the single-module union comparison
 
-Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0DJ9.
+## Implementation details
+
+The strict morphism of short exact rows is produced by the functorial mapping cylinder: for a
+chain map `t : C ⟶ D`, the row `C ⟶ D ⊞ Cone(𝟙 C) ⟶ Cone(t)` is degreewise split exact, and
+its contractible summand disappears after localization.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08BV, 08FE, 08HY, 0DJ9, 013N, 013O
 -/
 
 @[expose] public section
@@ -203,14 +211,8 @@ private lemma cyl_presentation [HasDerivedCategory.{w} C]
 
 end
 
-/-- The three canonical comparisons are obtained from a morphism of short exact
-complexes, after identifying their localized vertices. No comparison is asserted
-invertible. The coefficients need not be quasi-coherent or relatively flat, and
-there is no compactness assumption on the two opens.
-
-Source: Stacks Project, Tags 08BV (the injective restriction-difference sequence), 08FE (restriction
-of direct image), 08HY (the base-change map), and 0DJ9 (the relative Mayer--Vietoris induction
-diagram); Tags 013N--013O for cylinders. -/
+/-- The three canonical comparisons for `U ⊔ V`, `U`, `V` and `U ⊓ V` are obtained from a
+morphism of short exact sequences of complexes, after identifying their localized vertices. -/
 theorem standardSingle_union_ses_presentation
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U V : Y.Opens)
     (N : (U ⊔ V).toScheme.Modules) :

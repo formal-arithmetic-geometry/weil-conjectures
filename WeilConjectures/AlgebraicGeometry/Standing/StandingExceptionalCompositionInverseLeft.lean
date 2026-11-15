@@ -407,7 +407,8 @@ private meta partial def coefficientHEq (lhs rhs : Expr) (fuel : Nat := 160) :
   return h
 
 -- Allow explicit congruence across the standing derived-category formulas.
-/-- One inverse equation for the explicit counit-transpose candidate. -/
+/-- The standing exceptional compositor followed by its explicit inverse candidate is the
+identity. -/
 theorem standingExceptionalComposition_inverse_hom (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

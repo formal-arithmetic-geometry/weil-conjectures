@@ -26,9 +26,14 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
-# Unbounded proper/open BaseChange
+# Unbounded proper/open base change
 
-Source: Stacks Project, Tags 0F7F.
+This file proves base change for unbounded proper/open interchange families that are
+normalized on sheaves and on every K-injective representative.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7F
 -/
 
 @[expose] public section
@@ -596,9 +601,7 @@ private theorem derived_open_comparison
   rfl
 
 -- Elaborating the specialization compares the eight sheaf categories of the cube.
-/-- BaseChange for families normalized on sheaves and on every K-injective representative.
-Source: Stacks Project, Tags 0F7F.
--/
+/-- Base change for families normalized on sheaves and on every K-injective representative. -/
 theorem unboundedProperOpenBaseChange_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}
         [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]

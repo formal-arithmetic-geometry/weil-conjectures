@@ -16,13 +16,15 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenAr
 
 /-! # Ordinary clopen arrows for constant-coefficient strict towers
 
-Source: Stacks Project, Tags 09BN, 0F7B.
-
-These are the ordinary constructions underlying the derived arrows, built from the
-constant-ring module operations.
+These are the ordinary constructions underlying the recorded derived arrows. All
+functors and adjunctions are the already specified constant-ring module operations.
 The open unit, its direct-image transpose, and the clopen projector are imported
 from ProperOpenClopenProjector. Cartesian beta and the open-extension compositor
 are imported from TowerOpenBetaNormalization.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BN, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -41,15 +43,13 @@ variable (B : Type (u + 1)) [CommRing B]
 
 attribute [local irreducible] Functor.leftAdjoint modulePullback
 
-/-- Unit-preserving open-adjoint transport along equality of scheme morphisms.
-Source: Stacks, Tag 09BN. -/
+/-- Unit-preserving open-adjoint transport along equality of scheme morphisms. -/
 def singleJCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : moduleJ B f ≅ moduleJ B g :=
   ((moduleJAdj B f).ofNatIsoRight
     (eqToIso (congrArg (modulePullback B) h))).leftAdjointUniq (moduleJAdj B g)
 
-/-- The intrinsic ordinary alpha: cartesian beta, clopen projection, and compositors.
-Source: Stacks, Tag 0F7B. -/
+/-- The intrinsic ordinary alpha: cartesian beta, clopen projection, and compositors. -/
 def singleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -74,8 +74,7 @@ def singleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((moduleGComp B (squareLift k r p i h) (pullback.snd p i)).inv ≫
       (eqToIso (congrArg (modulePullback B) (pullback.lift_snd k r h))).hom) (moduleJ B k)
 
-/-- Termwise alpha on strict towers, before taking complexes.
-Source: Stacks, Tag 0F7B. -/
+/-- Termwise alpha on strict towers, before taking complexes. -/
 def towerAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -966,8 +965,7 @@ private theorem module_localization_paste
 end DescentCalculus
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow.
-Source: Stacks, Tag 0F7B. -/
+/-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow. -/
 theorem alpha_eq_localized_singleAlpha {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

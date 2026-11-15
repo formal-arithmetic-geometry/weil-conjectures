@@ -9,8 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiv
 
 /-! # Naturality of the source derived-sections comparison
 
-Source: Stacks Project, Tags 03Q8 and 03Q9. We check precomposition on cochains,
+We check precomposition on cochains,
 cocycles, their quotient, and the corresponding derived morphisms.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -26,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Naturality of the localization and derived Hom part of the source comparison.
-Source: Stacks Project, Tags 03Q8 and 03Q9. -/
+/-- Naturality of the localization and derived Hom part of the source comparison. -/
 theorem smallModel_sourceDerivedSections_naturality_core
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]
@@ -174,7 +177,10 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Naturality of evaluation of the Hom complex at the free sheaf generator.
-Source: Stacks Project, Tags 03Q8 and 03Q9. -/
+
+This is the degreewise Yoneda calculation: the free-sheaf evaluation sends
+precomposition by the map induced by `a` to restriction of sections, and the
+left-homology comparison is functorial. -/
 theorem smallModel_sourceDerivedSections_naturality_evaluation
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]
@@ -213,8 +219,7 @@ theorem smallModel_sourceDerivedSections_naturality_evaluation
   rw [← Functor.map_comp, sourceFreeSectionsComplexIso_naturality, Functor.map_comp]
 
 /-- Composition of the localization and evaluation squares gives the displayed
-source comparison square.
-Source: Stacks Project, Tags 03Q8 and 03Q9. -/
+source comparison square. This is the categorical pasting step in Tags 03Q8--03Q9. -/
 theorem smallModel_sourceDerivedSections_naturality_compose
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]

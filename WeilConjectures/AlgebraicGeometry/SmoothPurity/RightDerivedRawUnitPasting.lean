@@ -10,7 +10,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 import all WeilConjectures.AlgebraicGeometry.Normalized.NormalizedDerivedUnitPasting
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
 
-/-! # Pasting raw units with a nonexact first input -/
+/-! # Pasting raw units with a nonexact first input
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7J, 0D6E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,9 +44,7 @@ private lemma expand_raw_unit
     Category.assoc, Iso.hom_inv_id_app_assoc] using hh
 
 /-- Raw homotopy units paste across a mixed exchange when the first input is right derived
-and the second is exact.
-
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
+and the second is exact. -/
 theorem rightDerived_raw_unit_pasting
     {C U Y X Z B : Type*}
     [Category C] [Category U] [Category Y] [Category X] [Category Z] [Category B]

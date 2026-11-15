@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
 import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalComplexSectionsMate
 import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalLocalizedHomGerm
 
-/-! # The derived mate on a neighbourhood germ -/
+/-! # The derived mate on a neighbourhood germ
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
+-/
 
 /- This original-model counterpart follows the proved calculation in
 WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceDerivedRestriction.
@@ -28,8 +33,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
-/-- The germ leg and derived mate agree with restriction of stage hypercohomology.
-Source: Stacks Project, Tags 03Q8 and 03Q9. -/
+/-- The germ leg and derived mate agree with restriction of stage hypercohomology. -/
 theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

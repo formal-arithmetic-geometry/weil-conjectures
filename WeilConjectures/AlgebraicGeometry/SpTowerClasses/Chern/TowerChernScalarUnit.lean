@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassC
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherence
 import Mathlib.Algebra.Homology.Monoidal
 
-/-! # The scalar comparison on the coefficient unit -/
+/-! # The scalar comparison on the coefficient unit
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -63,9 +68,7 @@ private theorem singleAdjunct
   rfl
 
 /-- Scalar extension carries the coefficient unit to the coefficient unit, with
-its comparison fixed by the ordinary quotient ring map.
-
-Source: Stacks 06YY and 07A6. -/
+its comparison fixed by the ordinary quotient ring map. -/
 theorem exists_normalizedScalarUnit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u})

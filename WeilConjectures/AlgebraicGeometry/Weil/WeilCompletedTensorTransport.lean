@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # The tensor comparison for completed coefficient and site transport
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, with Modules on Sites, Tags 03DA and 03EK.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 03DA, 03EK
 -/
 
 @[expose] public noncomputable section
@@ -80,10 +82,7 @@ attribute [local irreducible] completedCechModulesEquiv intrinsicPresentationRou
 -- Elaborate the unbounded tensor comparison across the two coefficient models.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Coefficient restriction and site transport commute with total tensor and its unit.
-
-Source: Stacks Project, Modules on Sites, Tags 03DA and 03EK; algebraization.tex, Tag 0A0E, the
-finite-free tensor calculation after coefficient and site transport. -/
+/-- Coefficient restriction and site transport commute with total tensor and its unit. -/
 theorem completedCechTensorTransport
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :

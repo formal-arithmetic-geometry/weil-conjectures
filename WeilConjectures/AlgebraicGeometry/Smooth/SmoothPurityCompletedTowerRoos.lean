@@ -14,10 +14,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # Exact completed-coefficient tower functors and their Roos presentation
 
-Source: Stacks 0941.
+The five completed-tower constructions are moved verbatim from
+SmoothPurityNormalizedEquivalence. Evaluation proves exactness of scalar forgetting.
 
-This file defines the completed-coefficient tower functors (scalar forgetting, reduction,
-total derived inverse limit and its projections) and shows that scalar forgetting is exact.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0941
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +50,7 @@ def spCompletedReduction (D : SpCoefficientTowersAbelian l E T)
 
 /-- Total derived inverse limit after the exact scalar-forgetting functor. The
 fixed-ring limit is the existing K-injective total derived inverse limit, including its
-resolution-normalized projections. Source: Stacks 0941. -/
+resolution-normalized projections. -/
 def spCompletedTotalLimit (D : SpCoefficientTowersAbelian l E T)
     [(spCompletedStrictTower l E T D).Additive]
     [PreservesFiniteLimits (spCompletedStrictTower l E T D)]

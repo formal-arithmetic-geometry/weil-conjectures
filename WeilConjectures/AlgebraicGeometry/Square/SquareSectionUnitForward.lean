@@ -19,7 +19,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIs
 
 /-! # Forward normalized square comparison before endpoint cancellation
 
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5X.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5T, 0D5X
 -/
 
 @[expose] public section
@@ -759,8 +761,8 @@ private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
 end Helpers
 
 /-- The normalized square comparison reaches the raw target endpoint before its
-inverse is applied.
-Source: Stacks Project, Tags 0D5T and 0D5X.
+inverse is applied. This is the forward equation needed for cancellation in the
+section-unit identity.
 -/
 theorem squareSectionUnit_forward {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)

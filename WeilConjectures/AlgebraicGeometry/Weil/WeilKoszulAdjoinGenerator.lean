@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinLeibniz
 
 /-! # Adjoining one generator to an exterior Koszul complex
 
-Source: Stacks Project, More on Algebra, Tag 0664.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0664
 -/
 
 @[expose] public noncomputable section
@@ -149,8 +151,7 @@ private theorem joinSummand_transition (r : ℕ) (a : Fin (r + 1) → A)
     · simp [koszulJoinSummand, hp, hq]
   · simp [koszulJoinSummand, hp]
 
-/-- Exterior multiplication commutes with all power transitions.
-Source: Stacks, Tag 0664. -/
+/-- Exterior multiplication commutes with all power transitions. -/
 private theorem koszulJoinGraded_transition (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (i : ℤ) :
     (HomologicalComplex.tensorHom
       (completedKoszulTransition (A := A) 1 (fun _ ↦ a 0) m)
@@ -173,8 +174,7 @@ private theorem zeroEquiv_symm_coe (s : ℕ) (c : A) :
   change c • (ExteriorAlgebra.ιMulti A 0 _) = _
   rw [ExteriorAlgebra.ιMulti_zero_apply, Algebra.smul_def, mul_one]
 
-/-- Multiplication sends the tensor of the exterior units to the exterior unit.
-Source: Stacks, Tag 0664. -/
+/-- Multiplication sends the tensor of the exterior units to the exterior unit. -/
 private theorem koszulJoinGraded_unit (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) :
     (ρ_ (ModuleCat.of A A)).inv ≫
         (finiteKoszulExteriorUnitZero 1 (fun _ ↦ a 0) m ⊗ₘ
@@ -251,9 +251,7 @@ private instance koszulJoinMap_isIso {A : Type (u + 1)} [CommRing A]
     (ConcreteCategory.isIso_iff_bijective _).mpr (koszulJoinGraded_bijective r a m i)
   exact HomologicalComplex.Hom.isIso_of_components _
 
-/-- Splitting off the first exterior generator gives a tensor with a rank-one complex.
-
-Source: Stacks Project, More on Algebra, Tag 0664. -/
+/-- Splitting off the first exterior generator gives a tensor with a rank-one complex. -/
 theorem koszulAdjoinGenerator
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A) :
     ∃ e : ∀ m : ℕ, completedKoszulPower (A := A) (r + 1) a m ≅

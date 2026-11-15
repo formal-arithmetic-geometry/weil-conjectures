@@ -12,6 +12,11 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralAb
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralUnitNormalization
 
 /-! # Normalization of integral ordinary inverse systems
+
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The ordinary inverse-system construction has its underlying abelian and unit comparisons.
-Source: Zheng Construction 4.1. -/
+/-- The ordinary inverse-system construction has its underlying abelian and unit comparisons. -/
 theorem integralInverseSystem_normalization (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

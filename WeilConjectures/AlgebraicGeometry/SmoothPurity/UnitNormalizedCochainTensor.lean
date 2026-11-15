@@ -31,7 +31,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # The unit-normalized cochain tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +71,7 @@ variable {C D : Type c} [Category.{v} C] [Category.{v} D]
     ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map phi))
 
 /-- The normalized ordinary tensor comparisons determine a unique normalized comparison
-on arbitrary unbounded cochain complexes.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4. -/
+on arbitrary unbounded cochain complexes. -/
 theorem unitNormalizedCochainTensor
     (data : OrdinaryTensorPullbackData J K U R S phi F adj) :
     ∃! e : coefficientTotalTensor.{r, c, v} J R ⋙ F.mapHomologicalComplex (.up ℤ) ≅

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalDerivedMateSect
 
 /-! # The derived mate on the complex of neighbourhood sections
 
-Source: Stacks Project, Tag 03Q9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -33,9 +35,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived mate, on restricted sections of the direct-image representative,
-is the canonical comparison of termwise restriction to fibre hypercohomology.
-
-Source: Stacks Project, Tag 03Q9. -/
+is the canonical comparison of termwise restriction to fibre hypercohomology. -/
 theorem smallModel_strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

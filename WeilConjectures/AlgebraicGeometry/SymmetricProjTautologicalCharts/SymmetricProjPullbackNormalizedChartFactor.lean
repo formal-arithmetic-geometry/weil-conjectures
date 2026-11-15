@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! The normalized tautological quotients intertwine on affine-pair Proj charts.
 
-Source: Stacks Project, Constructions, Tags 01MY, 01N2, 01NR and 01OB.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01MY, 01N2, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -477,10 +479,7 @@ attribute [local irreducible] Proj.twist
   Proj.unitToTwist sectionOn quotientSymmetricGenerator Proj.map
   Proj Proj.twistPullbackMap unitSectionsEquiv
 
-/-- On an affine pair, the normalized pulled quotients admit an intertwining morphism.
-
-Source: Stacks Project, Constructions, Tags 01MY, 01N2, 01NR and 01OB.
--/
+/-- On an affine pair, the normalized pulled quotients admit an intertwining morphism. -/
 theorem normalized_pullback_quotient_chart_factor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

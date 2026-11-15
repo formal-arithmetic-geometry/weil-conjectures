@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteTateLineUni
 
 /-! # Intrinsic realization of the finite root tensor
 
-Source: Stacks Project, Tags 03CY and 03EK.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CY, 03EK
 -/
 
 @[expose] public noncomputable section
@@ -149,9 +151,8 @@ private theorem rootHomEquiv_tensor (n : ℕ) [Finite (SpTowerShriek.R l E n)]
   exact (f.val.app W).hom.map_smul _ _
 
 /-- Associated-module realization identifies the two sheafified presentations of
-scalar extension of the finite roots, with every pure tensor fixed.
-
-Source: Stacks Tags 03CY and 03EK. -/
+scalar extension of the finite roots, with every pure tensor fixed; this identification is
+unique. -/
 theorem finiteP1_intrinsic_root_tensor (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) :
     ∃! e : (realization l E n T).obj

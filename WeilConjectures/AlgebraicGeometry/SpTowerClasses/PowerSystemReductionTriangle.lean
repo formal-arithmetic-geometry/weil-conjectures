@@ -143,8 +143,7 @@ private theorem power_triangle_assembly
   exact resolution_triangle hS ((DerivedCategory.singleFunctor C 0).map (mu.app X))
     (ad.unit.app ((DerivedCategory.singleFunctor C 0).obj X)) e₁ e₂ e₃ hf hg
 
-/-- Reduction of the constant units tower has the power-system multiplication triangle.
-No invertibility of the prime on the scheme or surjectivity of the power map is assumed. -/
+/-- Reduction of the constant units tower has the power-system multiplication triangle. -/
 theorem powerSystem_reduction_triangle (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Reduction T (Rrings l T)) (p : powerUnits l T ⟶ units T)
     (hp : ∀ n : ℕ, p.app (op n) = Scheme.proEtaleUnitsPower T (l ^ (n + 1))) :

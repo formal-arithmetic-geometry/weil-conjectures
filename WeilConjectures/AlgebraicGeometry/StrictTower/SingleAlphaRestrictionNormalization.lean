@@ -12,7 +12,9 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.ProperOpenCompositeTransf
 
 /-! # Restriction of intrinsic proper/open alpha
 
-Source: Stacks Project, Tags 09BN and 0F7C.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BN, 0F7C
 -/
 
 @[expose] public noncomputable section
@@ -290,8 +292,7 @@ private theorem singleAlpha_restriction_iso {V W S T : Scheme.{u}}
     (IsPullback.of_hasPullback p i).flip hcomp (singleAlpha B k r p i h)
     (singleAlpha_word B k r p i h) M
 
-/-- Restriction of the intrinsic clopen alpha, with its specified open units.
-Source: Stacks Project, Tags 09BN and 0F7C. -/
+/-- Restriction of the intrinsic clopen alpha, with its specified open units. -/
 theorem singleAlpha_restriction_normalized {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

@@ -13,7 +13,9 @@ import WeilConjectures.ConstructibleSheaf.Defs
 /-!
 # Pulling back module sheaves from an algebraically closed point
 
-Source: Stacks Project, Tags 03P5, 0A3H and 03Q1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03P5, 0A3H, 03Q1
 -/
 
 @[expose] public section
@@ -25,9 +27,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse image of a module sheaf from an algebraically closed geometric point is
-constant, with a module as its value.
-
-Source: Stacks Project, Tags 03P5, 0A3H and 03Q1. -/
+constant, with a module as its value. -/
 theorem exists_constant_module_upperStar_geometricPoint
     (Λ : Type (u + 1)) [CommRing Λ] {K : Type u} [Field K] [IsAlgClosed K]
     {Y : Scheme.{u}} (e : Y ⟶ Spec (.of K))

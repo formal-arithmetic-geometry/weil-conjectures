@@ -59,12 +59,23 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualTowerCore
 
 /-! # Root-projection reduction of finite ramified Tate coefficients
 
-Source: Stacks Project, Tags 0990, 090K, 03EK and 03EL.
+The projection from the pro-étale root tower to a finite level identifies the finite
+ramified Tate twist with finite roots of unity tensored with the coefficients, compatibly
+with pullback (`ambTateRootProjectionReduction`).
+
+## Implementation details
 
 All levels below are positive: index `r` means exponent `r + 1`, and coefficient
 index `n` means quotient by the uniformizer to exponent `n + 1`. Pullback maps
 are specified by their direct-image adjuncts. This retains the specified maps,
 and expresses their coherence using the actual fibre-product comparisons.
+The inverses constructed use only that the finite coefficients are killed by the relevant
+power of `ℓ`; neither flatness over `ℤ/ℓ^r` nor divisibility of `n` by the ramification index
+is assumed.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0990, 090K, 03EK, 03EL, 03D1
 -/
 
 @[expose] public noncomputable section
@@ -105,8 +116,7 @@ def ambTateReduced (T : Scheme.{u}) :
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (ambTateScalar l E n T) (ambTateConstantRootModule l T)
 
-/-- A pure tensor in H, with the coefficient written first as in change of rings.
-Source: Stacks Tag 03EK. -/
+/-- A pure tensor in H, with the coefficient written first as in change of rings. -/
 def ambTateReducedPure (T : Scheme.{u}) (U : T.ProEt)
     (a : (WeilConjectures.integralCoefficientCommRingSheaf l E T n).obj.obj (op U))
     (x : (purTwistZlOne T l).obj.obj (op U)) :
@@ -115,8 +125,8 @@ def ambTateReducedPure (T : Scheme.{u}) (U : T.ProEt)
     (WeilConjectures.integralCoefficientCommRingSheaf l E T n)
     (ambTateScalar l E n T) (ambTateConstantRootModule l T) U a x
 
-/-- The unique finite scalar map, given by the characteristic divisibility criterion.
-Source: Stacks Tag 03EK. -/
+/-- The unique finite scalar map, constructed using the characteristic divisibility
+criterion; it requires no flatness. -/
 def ambTateFiniteScalar (T : Scheme.{u}) (r : AmbTateLevel l E n) :
     purTwistFiniteRing T l r.val ⟶
       WeilConjectures.integralCoefficientCommRingSheaf l E T n :=
@@ -130,15 +140,13 @@ def ambTateFiniteScalar (T : Scheme.{u}) (r : AmbTateLevel l E n) :
 
 attribute [irreducible] ambTateFiniteScalar
 
-/-- D_r is the recorded finite roots module tensored over the constant Z/l^r with A.
-Source: Stacks Tag 03EK. -/
+/-- D_r is the recorded finite roots module tensored over the constant Z/l^r with A. -/
 def ambTateFiniteRoots (T : Scheme.{u}) (r : AmbTateLevel l E n) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (ambTateFiniteScalar l E n T r) (purTwistRootsModule T l r.val)
 
-/-- Pure tensors in D_r, using the existing sheafification unit.
-Source: Stacks Tag 03EK. -/
+/-- Pure tensors in D_r, using the existing sheafification unit. -/
 def ambTateFinitePure (T : Scheme.{u}) (r : AmbTateLevel l E n) (U : T.ProEt)
     (a : (WeilConjectures.integralCoefficientCommRingSheaf l E T n).obj.obj (op U))
     (x : (proEtaleRootsOfUnitySheaf T (l ^ (r.val + 1))).obj.obj (op U)) :
@@ -158,15 +166,13 @@ def ambTateSourcePure (T : Scheme.{u}) (U : T.ProEt)
     (purTwistIntegralQuotient T l E n) (purTwistIntegralOne T l E) U a
     (purTwistIntegralTensor T l E (op U) b x)
 
-/-- The existing constant-coefficient direct image, with its coefficient type displayed.
-Source: Stacks Tag 03D1. -/
+/-- The existing constant-coefficient direct image, with its coefficient type displayed. -/
 def ambTateDirectImage {T T' : Scheme.{u}} (v : T' ⟶ T) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T' n) ⥤
       SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n) :=
   proEtaleConstantModuleDirectImage v (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- Evaluation of an adjunct on a local section, exposing its target section type.
-Source: Stacks Tag 03D1. -/
+/-- Evaluation of an adjunct on a local section, exposing its target section type. -/
 def ambTateDirectSection {T T' : Scheme.{u}} (v : T' ⟶ T)
     {M : SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n)}
     {N : SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T' n)}
@@ -174,9 +180,9 @@ def ambTateDirectSection {T T' : Scheme.{u}} (v : T' ⟶ T)
     (x : M.val.obj (op U)) : N.val.obj (op ((proEtaleBaseChange v).obj U)) :=
   f.val.app (op U) x
 
-/-- The root-projection reduction data, with every map fixed by its specified root or
-tensor formula. The fields c and b are the direct-image adjuncts of c_L and b_v, and the
-square is the adjunct of the inverse-image base-change square. -/
+/-- The conclusion, with every map fixed by its specified root or tensor formula.
+The fields `c` and `b` are the direct-image adjuncts of `c_L` and `b_v`, so the square is the
+adjunct of the inverse-image reduction square. -/
 structure AmbTateRootProjectionData where
   /-- Reassociation for the prescribed finite twist. -/
   j : ∀ T : AmbTateBase l, purTwistFiniteOne T.val l E n ≅ ambTateReduced l E n T.val
@@ -906,9 +912,8 @@ private theorem ambSquare (d : AmbRootTowerPullbackCoherence.{u} l)
     _ _ _ _ (d.square (Padic.coefficientExtensionRing l E (n + 1))
       r.val r.property v)
 
-/-- Root-projection reduction with arbitrary ramification and annihilated finite coefficients.
-Source: Stacks Tags 0990, 090K, 03EK and 03EL.
--/
+/-- Root-projection reduction with arbitrary ramification and annihilated finite coefficients:
+the data `AmbTateRootProjectionData l E n` exist. -/
 theorem ambTateRootProjectionReduction :
     Nonempty (AmbTateRootProjectionData l E n) := by
   classical

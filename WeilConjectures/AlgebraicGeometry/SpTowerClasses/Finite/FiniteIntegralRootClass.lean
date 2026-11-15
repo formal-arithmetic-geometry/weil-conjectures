@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # Exact comparison of an integral root class
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +32,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- The comparison image of an arbitrary degree-two etale root class, with the
-canonical integral source and roots endpoints. Source: Stacks 03PL and exact site comparison. -/
+canonical integral source and roots endpoints. -/
 def finiteIntegralRootClass (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
     (x : Sheaf.H (T.rootsOfUnitySheaf (l ^ (n + 1))) 2) :
     FiniteIntegralBoundaryArrow l T n :=

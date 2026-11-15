@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChangeTopRes
 
 /-! # Local affine presentation data
 
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -52,8 +54,9 @@ private theorem localizationPresentation_flatOver_restrict
   exact congrArg (fun x ↦ (M.smul x).asHom.hom m) (congrArg (fun x ↦ x.hom r) heq)
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- Concrete localized presentation witnesses used by completion.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
+/-- Concrete localized presentation witnesses: there are affine opens `S ∋ g a` and `V ∋ a`
+with `V ≤ g ⁻¹ᵁ S` carrying a flat counit presentation for the restriction of `p` and `M`
+over `S`. -/
 theorem standardSingleFlatCounit_localization_presentation_data
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

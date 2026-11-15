@@ -14,7 +14,9 @@ import all WeilConjectures.CategoryTheory.ExactDerivedPasting.ExactDerivedPastin
 
 /-! # Intrinsic alpha horizontal identity on module sheaves
 
-Source: Stacks Project, Tag 0F7D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -91,8 +93,7 @@ private theorem moduleOpenUnitInv_comp {U V X : Scheme.{u}}
     Iso.symm_hom, NatIso.inv_inv_app, Iso.symm_inv, moduleOpenUnitInv,
     openBetaModuleJComp, NatIso.isIso_inv_app, Functor.comp_obj, Category.assoc] using hi.symm
 
-/-- Intrinsic alpha obeys horizontal pasting on module sheaves.
-Source: Stacks, Tag 0F7D. -/
+/-- Intrinsic alpha obeys horizontal pasting on module sheaves. -/
 theorem singleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)

@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Local ideal coefficients of the graded quotient kernel
 
-Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 04CJ
 -/
 
 @[expose] public section
@@ -193,9 +195,7 @@ private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 end KernelFactor
 
-/-- Two sections of the graded quotient kernel locally lie in the extended base ideal.
-No square-zero assumption, multiplication law, or invertibility assumption is used.
-Source: Stacks Project, Tag 09MS, direct-sum ideal sequence, and Tag 04CJ (1). -/
+/-- Two sections of the graded quotient kernel locally lie in the extended base ideal. -/
 theorem tensorGradedKernel_locally_ideal {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L)
     (U : X.Opens) (a b : A.B.right.obj.obj (op U))

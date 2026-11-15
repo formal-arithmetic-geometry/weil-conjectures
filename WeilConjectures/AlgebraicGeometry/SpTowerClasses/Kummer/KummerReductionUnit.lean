@@ -162,7 +162,7 @@ private theorem assemble_reduction
       ha).trans he
 
 /-- Reduction of units is the roots module shifted once, with the unshifted positive
-Kummer boundary as its adjunct. No comparison on the integer source is involved. -/
+Kummer boundary as its adjunct. -/
 theorem exists_kummerReductionUnit (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (k : Kummer l T)
     (r : Reduction T (Rrings l T)) :

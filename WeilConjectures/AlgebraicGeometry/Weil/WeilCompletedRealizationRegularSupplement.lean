@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedKoszulSite
 
 /-! # The regular module under completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK, and Tag 0GMW.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -220,9 +222,7 @@ private theorem transportedUnit_isIso
       (congrArg (fun f ↦ f.hom.app V) (pbcCompletedComparison X d).hom_inv_id) x'
 
 /-- The specified coefficient unit identifies the realized regular module with the
-regular coefficient sheaf, and it intertwines multiplication by every scalar.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK, and Tag 0GMW. -/
+regular coefficient sheaf, and it intertwines multiplication by every scalar. -/
 theorem completedRealizationRegular
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor

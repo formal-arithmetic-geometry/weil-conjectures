@@ -33,11 +33,17 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleReplete
 
 /-! # Root tower projections and normalized finite tensor reduction
 
-Source: Stacks Project, proetale.tex Tag 0990, etale-cohomology.tex Tag 03PL, and sites-modules.tex
-Section 03EK and Tag 03CY.
+This file studies the projections from the pro-étale root tower to finite roots of unity and
+the resulting normalized reduction of finite tensors (`rootTower_finite_tensor`).
+
+## Implementation details
 
 The natural-number level `r` denotes the positive exponent `r + 1`.
-All tensors are ordinary sheafified tensors. No flatness or finiteness of B is assumed.
+All tensors are ordinary sheafified tensors. No flatness or finiteness of `B` is assumed.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0990, 03PL, 03EK, 03CY, 03DB, 03CO, 00WK
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +58,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing limit projection, indexed by positive exponent `r + 1`.
-Source: Stacks Tags 03DB and 03CO. -/
+/-- The existing limit projection, indexed by positive exponent `r + 1`. -/
 abbrev rootTowerProjection (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : ℕ) :=
   limit.π (proEtaleRootsOfUnityTower T l (Fact.out : l.Prime)) (op r)
 
@@ -64,8 +69,7 @@ def rootTowerTensorScalar (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom ((algebraMap ℤ_[l] B).comp ULift.ringEquiv.toRingHom))
 
-/-- The unique residue-ring scalar homomorphism, using only annihilation.
-Source: Stacks 03EK. -/
+/-- The unique residue-ring scalar homomorphism, using only annihilation. -/
 def rootTowerResidueScalar (l : ℕ) (r : ℕ) (B : Type (u + 1)) [CommRing B]
     (hB : ((l ^ (r + 1) : ℕ) : B) = 0) : ZMod (l ^ (r + 1)) →+* B :=
   ZMod.castHom ((CharP.cast_eq_zero_iff B (ringChar B) (l ^ (r + 1))).mp hB) B
@@ -80,8 +84,7 @@ def rootTowerTensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (purTwistZlCompletionMap T l))).obj (purTwistZlModule T l))
 
-/-- A pure tensor x tensor b in H, with the scalar written first by change of rings.
-Source: Stacks 03EK. -/
+/-- A pure tensor x tensor b in H, with the scalar written first by change of rings. -/
 def rootTowerTensorPure (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] [Algebra ℤ_[l] B] (U : T.ProEt)
     (b : (tateFiniteCoefficient T B).obj.obj (op U))
@@ -586,8 +589,9 @@ private def rootTensorIso (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} _ _ U b x
     erw [SheafOfModules.scalarExtensionSection_smul.{u + 1, u, u + 1, u + 1}, mul_one]
 
-/-- Root projections, their sectionwise shift division, and normalized finite tensor reduction.
-Source: Stacks 0990, 03PL, 03EK, 03CY and 00WK. -/
+/-- Root projections are locally surjective, their kernels are the multiples of `l ^ (r + 1)`
+with a sectionwise shift division, and for `l ^ (r + 1) B = 0` the root-tower tensor with `B`
+is isomorphic to the finite Tate line, normalized on pure tensors and local lifts. -/
 theorem rootTower_finite_tensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (hT : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) (r : ℕ) :
     Sheaf.IsLocallySurjective (rootTowerProjection T l r) ∧

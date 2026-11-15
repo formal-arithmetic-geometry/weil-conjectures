@@ -94,12 +94,18 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Finite exterior and tensor-dual Koszul comparison
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, and sites-cohomology.tex, Tags 0941 and 0A0A.
+This file compares the finite exterior Koszul tower with the ordered tensor-dual tower,
+including transitions and augmentation, and constructs the termwise-limit comparison.
+
+## Implementation details
 
 The site and coefficient transports are publicly re-exported from the lower site module.
-The termwise-limit comparison is constructed here. The finite comparison is assembled
-from coefficient comparison and tensor transport, including transitions and augmentation.
-Products, cones and derived transport are proved by consumers.
+The finite comparison is assembled from coefficient comparison and tensor transport.
+Products, cones and derived transport are handled in downstream files.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941, 0A0A, 0664
 -/
 
 @[expose] public noncomputable section
@@ -113,8 +119,7 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical comparison between limits of complexes and termwise limits.
-Source: Stacks Tag 0941. -/
+/-- The canonical comparison between limits of complexes and termwise limits. -/
 def completedKoszulTermwiseLimitIso {B : Type*} [Category B] [Abelian B] [HasLimitsOfShape ℕᵒᵖ B] :
     HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
       (lim : (ℕᵒᵖ ⥤ CochainComplex B ℤ) ⥤ CochainComplex B ℤ) ≅
@@ -268,10 +273,7 @@ attribute [local irreducible] ringedKoszulDualTower ringedKoszulDiagram
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The finite exterior Koszul tower agrees with the ordered tensor-dual tower.
-
-Source: Stacks Project, more-algebra.tex Tag 0664, Lemma 15.29.12 (tensor decomposition), and
-algebraization.tex Tag 0A0E (finite-free duality identification). -/
+/-- The finite exterior Koszul tower agrees with the ordered tensor-dual tower. -/
 theorem completedKoszulFiniteComparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

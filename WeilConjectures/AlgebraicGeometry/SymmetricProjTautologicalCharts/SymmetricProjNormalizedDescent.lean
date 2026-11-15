@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-!
 # Descent of the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01NR, 01OB, 01MS and 01N2.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01OB, 01MS, 01N2
 -/
 
 @[expose] public section
@@ -36,8 +38,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- The affine twist comparison with its chart and homogeneous-section normalizations.
-Source: Stacks, Tags 01NR and 01OB. -/
+/-- The affine twist comparison with its chart and homogeneous-section normalizations. -/
 structure NormalizedAffineRestriction {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (U V : S.affineOpens) (h : U ≤ V) where
@@ -71,9 +72,7 @@ structure NormalizedAffineRestriction {S : Scheme.{u}} (E : S.Modules)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized degree-one quotient descends from the affine symmetric Proj twists.
-Its comparison on affine restriction carries every degree-one section to its image.
-
-Source: Stacks, Tags 01NR, 01OB, 01MS and 01N2. -/
+Its comparison on affine restriction carries every degree-one section to its image. -/
 theorem exists_normalized_quotient_with_affine_restriction
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent] :
     ∃ D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E,

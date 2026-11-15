@@ -10,7 +10,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 
 /-! The canonical ringed inverse-image square is exact localization of its ordinary square.
-Source: Stacks Project, Tag 0D6D. -/
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0D6D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,8 +74,7 @@ private theorem localization_transport
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
 
-/-- The ambient pullback square is the exact descent of the ordinary square.
-Source: Stacks Project, Tag 0D6D. -/
+/-- The published ambient pullback square is the exact descent of the ordinary square. -/
 theorem StrictTowerRingedSquare.ambientSquare_localization
     {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}

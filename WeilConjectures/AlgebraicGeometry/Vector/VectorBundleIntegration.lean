@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleSheafHomFamilyGluing
 The coefficient is expressed by the existing ordered tensor of shifted finite Tate lines:
 its pullback to E is A_E(d)[2d]. The local map is the actual compact-support exchange for
 the inverse frame, followed by the canonical Tate comparison and the existing affine trace.
-The global map is the unique morphism obtained by gluing these local traces.
 
 ## Main definitions
 
@@ -25,6 +24,13 @@ The global map is the unique morphism obtained by gluing these local traces.
 - `vectorIntegrationLocalTrace`: the prescribed trace on each linear trivialization.
 - `VectorIntegrationNormalization`: the local characterization, for every frame.
 - `vectorBundleIntegration`: the unique global map with those restrictions.
+
+## Implementation details
+
+The unique-gluing theorem `existsUnique_vectorIntegrationGluing` determines a unique pair of
+a truncation isomorphism and a glued sheaf map; `vectorBundleIntegration` is assembled from
+that pair (sheaf gluing followed by the canonical truncation roof), so no unconstrained map
+or orientation is chosen.
 -/
 
 @[expose] public noncomputable section
@@ -107,9 +113,9 @@ private theorem existsUnique_normalized_sheaf_trace (N : ℕ) (hN : 0 < N)
   exact huniq μ (fun i ↦
     (local_normalization_iff N hN A hA S hS d F α μ).1 hμ t D (V i) (e i).some)
 
-/-- The unique sheaf-glued derived trace. This is the existence and uniqueness needed
-by the definition, not a choice of a morphism from a mere nonempty Hom set.
--/
+/-- The source `C_pi` has cohomology only in degree zero, and there is a unique pair of an
+`H^0`-normalized isomorphism `C_pi ≅ H^0(C_pi)[0]` and a sheaf map `H^0(C_pi) ⟶ A_S` whose
+composite has the prescribed affine trace on every linear trivialization. -/
 theorem existsUnique_vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -135,8 +141,8 @@ theorem existsUnique_vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
   intro α
   exact existsUnique_normalized_sheaf_trace N hN A hA S hS d F α
 
-/-- The canonical truncation identification alpha_pi and the glued sheaf map lambda.
-The H^0 normalization determines alpha_pi, and all frame restrictions determine lambda. -/
+/-- The canonical truncation identification `alpha_pi` and the glued sheaf map `lambda`,
+uniquely determined by the `H^0` normalization and all frame restrictions. -/
 def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -146,7 +152,7 @@ def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
     (vectorIntegrationSheaf A N hA S d F ⟶ ordinaryFiniteConstant A S) :=
   (existsUnique_vectorIntegrationGluing N hN A hA S hS d F).2.exists.choose
 
-/-- Integration t_pi, the unique map restricting on each linear trivialization to the
+/-- Integration `t_pi`: the unique map restricting on each linear trivialization to the
 specified affine-space trace. -/
 def vectorBundleIntegration (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

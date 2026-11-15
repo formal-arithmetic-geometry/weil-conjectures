@@ -10,7 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Quasi-coherence of the tensor-formula pullback
 
-Source: Stacks Project, Modules on Schemes, Tag 01BG.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01BG
 -/
 
 @[expose] public section
@@ -20,15 +22,13 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option autoImplicit false
 
 /-- The canonical comparison of tensor pullback with ordinary module pullback.
-It is the unique comparison of left adjoints determined by their specified units.
-Source: Stacks Project, Modules, Tag 01BG. -/
+It is the unique comparison of left adjoints determined by their specified units. -/
 noncomputable def tensorOrdinaryPullbackIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     tensorPullback g ≅ pullback g :=
   (Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq
     (pullbackPushforwardAdjunction g)
 
-/-- Tensor pullback preserves quasi-coherent modules.
-Source: Stacks Project, Modules on Schemes, Tag 01BG. -/
+/-- Tensor pullback preserves quasi-coherent modules. -/
 @[instance]
 theorem isQuasicoherent_tensorPullback {X Y : Scheme.{u}} (g : X ⟶ Y)
     (F : Y.Modules) [F.IsQuasicoherent] : ((tensorPullback g).obj F).IsQuasicoherent := by

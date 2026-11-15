@@ -125,8 +125,7 @@ private theorem exchange_paste_named
   exact affineLinearExchange_paste A sq₁ sq₂ K
 
 /-- Precomposing a Cartesian chart with a linear automorphism acts on its prefix by
-exactly the specified affine trace action. The only geometric hypothesis is equality
-of the chart maps; frames, restrictions and existential matrices are absent. -/
+the specified affine trace action. -/
 theorem vectorIntegrationCartesianPrefix_action
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

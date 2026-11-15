@@ -19,10 +19,19 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 /-!
 # Finite-type affine frames for a vector bundle
 
-Source: Stacks Project, Tags 01T6, 01T2, 01IT, 01C6, 01M1, 01S8 and 02G2.
+For a vector bundle of constant finite rank on a finite-type scheme over a field, this file
+constructs finitely many affine module frames whose bundle charts have separated finite-type
+total spaces, and compares the frames on affine refinements of the overlaps.
+
+## Implementation details
 
 The Noetherian base is a conclusion, supplied as an existential witness before using the
 existing bundle construction. No separatedness assumption is imposed on the base.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01T6, 01T2, 01IT, 01C6, 01M1, 01S8, 02G2,
+  01S7
 -/
 
 @[expose] public section
@@ -184,9 +193,7 @@ private theorem restrictFrame_section (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
 set_option linter.unusedVariables false in
 /-- A finite-type scheme over a field has finite affine module frames for every bundle
 of constant finite rank. Their induced bundle charts have separated finite-type total
-spaces, and frames compare on affine refinements of overlaps.
-
-Source: Stacks Tags 01T6, 01T2, 01IT, 01C6, 01M1, 01S8, 01S7 and 02G2. -/
+spaces, and frames compare on affine refinements of overlaps. -/
 theorem finite_type_frames (k : Type u) [Field k] (S : Scheme.{u})
     (f : S ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]
     (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] :
