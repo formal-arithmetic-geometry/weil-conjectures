@@ -77,7 +77,6 @@ open Pseudofunctor.LocallyDiscreteOpToCat Modules
 
 variable (X : Scheme.{u})
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Étale descent for the structure sheaf.** The presheaf `V ↦ Γ(V, 𝒪_V)` is a sheaf on the
@@ -100,11 +99,14 @@ theorem isSheaf_etaleStructurePresheaf_aux :
           exact ⟨c, hc.symm⟩⟩
   refine Presieve.isSheaf_iso _ (NatIso.ofComponents (fun V ↦ (eqv V).toIso) ?_).symm h
   intro V W f
-  ext a
-  change smulMor _ (f.unop.left.appTop a) =
-    pullHom (F := modulesPseudofunctor) (smulMor _ a) f.unop.left (G.obj W.unop).hom
-      (G.obj W.unop).hom (MorphismProperty.Over.w f.unop) (MorphismProperty.Over.w f.unop)
-  unfold smulMor
-  exact (pullHom_smulHom _ _ _ _ _ _).symm
+  -- Keep the maps as function applications so their composition can be reduced directly.
+  apply ConcreteCategory.hom_ext
+  intro a
+  dsimp only [types_comp_apply, Equiv.toIso_hom_hom_apply, eqv, Equiv.ofBijective_apply,
+    etaleHom, Functor.comp_map, Functor.op_map, Pseudofunctor.presheafHom_map,
+    TypeCat.ofHom_apply, Quiver.Hom.unop_op, CommRingCat.forget_map_apply, Scheme.Γ_map,
+    Over.forget_map, G]
+  exact (pullHom_smulHom (unitObj X) V.unop.hom f.unop.left W.unop.hom
+    (MorphismProperty.Over.w f.unop) a).symm
 
 end AlgebraicGeometry.Scheme

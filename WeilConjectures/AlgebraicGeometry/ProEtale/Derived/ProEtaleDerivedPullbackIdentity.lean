@@ -220,7 +220,6 @@ private def cancelScalarTransport {X : Scheme.{u}}
     ext x
     rfl
 
-set_option maxHeartbeats 1000000 in
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A] :
@@ -269,7 +268,8 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
         _ = M.val.map (p.inv.app U).op (M.val.map (p.hom.app U).op m) :=
           congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (hd M U m)
         _ = M.val.map ((p.hom.app U).op ≫ (p.inv.app U).op) m :=
-          (M.val.map_comp_apply _ _ m).symm
+          ConcreteCategory.congr_hom (M.val.map_comp (p.hom.app U).op
+            (p.inv.app U).op).symm m
         _ = m := by
           rw [← op_comp, p.inv_hom_id_app]
           exact ConcreteCategory.congr_hom (M.val.map_id (op U)) m

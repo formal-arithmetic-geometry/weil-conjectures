@@ -27,8 +27,6 @@ open scoped TensorProduct
 
 namespace Algebra.Presentation
 
-set_option maxHeartbeats 1500000 in
--- The dependent ideal-span inductions also elaborate the presentation type aliases.
 /-- The two strictly standard conditions split the localized conormal differential.
 Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CA, first paragraph,
 using the matrix identity of Lemma Tag 07ET.
@@ -102,14 +100,13 @@ theorem strictlyStandard_localized_conormal_split
           simp only [map_zero]
           exact N.zero_mem
         | add z z' hz hz' ih ih' =>
-          change F (Extension.Cotangent.mk (P := P.toExtension)
-            (⟨z, hK hz⟩ + ⟨z', hK hz'⟩)) ∈ N
-          rw [map_add, map_add]
-          exact N.add_mem ih ih'
+          have hm := N.add_mem ih ih'
+          rw [← map_add, ← map_add] at hm
+          exact hm
         | smul r z hz ih =>
-          change F (Extension.Cotangent.mk (P := P.toExtension) (r • ⟨z, hK hz⟩)) ∈ N
-          rw [map_smul, ← algebraMap_smul A, map_smul, ← algebraMap_smul S]
-          exact N.smul_mem _ ih
+          have hm := N.smul_mem (algebraMap A S (algebraMap P.toExtension.Ring A r)) ih
+          rw [algebraMap_smul, ← map_smul, algebraMap_smul, ← map_smul] at hm
+          exact hm
       have hf (j : Fin m) : F (f j) ∈ N := by
         by_cases hj : j.val < c
         · let k : Fin c := ⟨j.val, hj⟩

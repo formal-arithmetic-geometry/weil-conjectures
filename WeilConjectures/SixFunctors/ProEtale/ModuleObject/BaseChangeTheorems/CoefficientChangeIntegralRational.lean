@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The base-change morphism and the coefficient change `𝒪_E ⟶ E`
@@ -62,8 +63,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
--- the instances of the transfer theorem are unified with the concrete coefficient rings
 /-- Blueprint `lemma-naturality-pasting-comparison`, its last assertion for the localization
 `𝒪_E ⟶ E` of `proposition-six-operations-change-coefficients`: the extension of scalars
 `E ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral base-change morphism and the base-change morphism of
@@ -87,16 +86,12 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational
     have : QuasiSeparated (f'.left ≫ Y'.hom) := by rw [Over.w f']; infer_instance
     exact QuasiSeparated.of_comp f'.left Y'.hom
   have ha := K₀.property.1.1.choose_spec
-  set a := K₀.property.1.1.choose
+  let a := K₀.property.1.1.choose
   have : K₀.obj.IsGE a := ha
-  have h₂ : IsIso ((derivedPushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) f'.left).app
-      ((g'.left)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀.obj)) := by
-    have : ((g'.left)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj
-        K₀.obj).IsGE a := isGE_leftDerivedUpperStar_obj _ g'.left K₀.obj a
-    exact isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f'.left _ a
+  have : ((g'.left)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj
+      K₀.obj).IsGE a := isGE_leftDerivedUpperStar_obj _ g'.left K₀.obj a
   have H : DerivedPullIsoCompCoherence (padicIntegersRingObjToContinuousMapRingObj.{u} ℓ E) :=
     derivedPullIsoCompCoherence _
-  have h₁ := isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f.left K₀.obj a
   have key := nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E) ℓ H sq
     (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E.1 f K)
@@ -108,7 +103,13 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational
     (PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq)
     (PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E.1 sq)
     (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq)
-    (ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E sq) K₀ h₁ h₂
+    (ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E sq) K₀ ?h₁ ?h₂
+  -- Compare the concrete and generic coefficient instances by proof irrelevance without
+  -- unfolding the surrounding derived functors during unification.
+  case h₁ => exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f.left K₀.obj a
+  case h₂ =>
+    exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f'.left
+      ((g'.left)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K₀.obj) a
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing

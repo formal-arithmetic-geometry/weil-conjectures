@@ -32,8 +32,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 600000 in
--- Comparing the iterated over-category cones needs additional elaboration heartbeats.
 /-- Punctured root charts commute with cofiltered affine ring colimits over R. -/
 theorem punctured_root_colimit_continuity
     (R H : CommRingCat.{u}) (f : R) (n : ℕ) (b : R ⟶ H)
@@ -80,7 +78,8 @@ theorem punctured_root_colimit_continuity
   have hcE : IsLimit cE := isLimitOfPreserves Scheme.Spec
     (isLimitConeRightOpOfCocone F hc₀)
   let cH := cE.extend (Spec.map e₀.hom)
-  have hcH : IsLimit cH := hcE.extendIso (Spec.map e₀.hom)
+  -- Infer the extended cone from the specified morphism before checking its type.
+  have hcH := IsLimit.extendIso (Spec.map e₀.hom) hcE
   have hlegs : ∀ j, cH.π.app j ≫ s.app j = Spec.map b := by
     intro j
     change Spec.map e₀.hom ≫ Spec.map (c₀.ι.app (Opposite.op j)) ≫
