@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestric
 
 ## References
 
-* Stacks Project, Tags 0BLH and 05ER
 * Stacks Project, Tag 0BLH, proof (construction of the chart algebras), and Tag 05ER, proof
   (localized first-projection comparison)
 -/

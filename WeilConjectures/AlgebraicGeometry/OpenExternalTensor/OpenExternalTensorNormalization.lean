@@ -24,7 +24,6 @@ All comparisons are the canonical adjunction, base-change and projection maps.
 
 * Stacks Project, Tags 0GL1, 03S6, 0B65
 * Stacks 03DI
-* proof steps 3 and 4, Stacks 03S6 and 0GL1
 -/
 
 @[expose] public noncomputable section

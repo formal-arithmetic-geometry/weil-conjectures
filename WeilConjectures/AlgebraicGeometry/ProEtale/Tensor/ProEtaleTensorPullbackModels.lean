@@ -160,8 +160,6 @@ The object universe of the site is u+1 and its morphism universe is u.
 
 * Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E
 * Modules on Sites, Tag 03EL
-* Stacks 03EL
-* Stacks 07A4
 -/
 
 @[expose] public section

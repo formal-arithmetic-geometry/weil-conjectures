@@ -94,7 +94,6 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemsExisten
 ## References
 
 * Zheng Construction 4.1
-* Stacks
 * Stacks sites-cohomology
 -/
 

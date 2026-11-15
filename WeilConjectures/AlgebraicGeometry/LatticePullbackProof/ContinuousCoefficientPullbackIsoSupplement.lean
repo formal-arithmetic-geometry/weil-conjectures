@@ -75,7 +75,6 @@ import Mathlib.CategoryTheory.Sites.Pullback
 ## References
 
 * Bhatt--Scholze, Section 6.8
-* Stacks Project, Tag 03D2
 * Bhatt--Scholze, Section 6.8, continuous coefficients
 * Stacks Tag 03D2
 -/

@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 ## References
 
 * Stacks Project, Tags 08J9 and 08JC
-* Stacks Project, Tag 08JC
 -/
 
 @[expose] public noncomputable section

@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSec
 ## References
 
 * Stacks Project, Tag 0EYJ, local computation
-* Tags 0EYI and 0EY9
 * Stacks Project, formal section calculation
 * Tag 0EYI (split-section trait test), Tag 0EY9 (power series full faithfulness), and Tag 0EY6 (flat
   base change for the depth-two extension)

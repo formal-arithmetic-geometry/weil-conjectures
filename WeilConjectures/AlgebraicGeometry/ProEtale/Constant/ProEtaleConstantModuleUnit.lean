@@ -15,9 +15,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 ## References
 
 * Stacks Project, Tags 00YV and 03CY, associated module sheaves and restriction of scalars
-* Stacks, Tag 03CY
-* Stacks, Tag 00YV
-* Stacks, Tags 00YV and 03CY
 -/
 
 @[expose] public section
@@ -31,7 +28,7 @@ noncomputable abbrev proEtaleConstantModule (X : Scheme.{u}) (A : Type u) [CommR
   SheafOfModules.unit ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A))
 
-/-- The fixed-scalar constant rank-one module before the published intrinsic realization. -/
+/-- The fixed-scalar constant rank-one module before the intrinsic realization. -/
 noncomputable abbrev proEtaleFixedConstantModule (X : Scheme.{u})
     (A : Type u) [CommRing A] :=
   (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).obj

@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 
 * Zheng Construction 4.1
 * Stacks 03D2 and 03DA
-* Stacks 03D7
 * Zheng Construction 4.1, paragraph before Lemma 4.10
 * Zheng Construction 4.1 and Stacks 03D7
 -/

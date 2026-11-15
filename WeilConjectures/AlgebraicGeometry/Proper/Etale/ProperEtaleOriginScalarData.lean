@@ -27,15 +27,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 ## References
 
-* Stacks Project, Tag 0F0G
 * Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar mate
 * Stacks 03D1 and 0H7J
 * Stacks 03D2 and 00YV
-* Stacks 0F0G
-* Stacks 06YY
 * Stacks 06YY, 07A4 and 0D6D
-* Stacks 09A6
-* Stacks 09A6 and 00YV
 * Stacks 0B56 and 0F0G
 -/
 
@@ -109,7 +104,7 @@ at general coefficients keeps specialization to lifted rings small. -/
 /-- The canonical comparison F(M tensor B) = U S F(M). It is the tensor
 comparison specialized to the constant coefficient B, expressed using the
 representative-normalized scalar/tensor identifications. All its factors are
-published normalized comparisons, including the scalar-adjunction mate. -/
+normalized comparisons, including the scalar-adjunction mate. -/
 @[irreducible] def properOriginTensorIso
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u})

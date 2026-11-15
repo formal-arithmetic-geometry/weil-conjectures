@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionL
 
 ## References
 
-* Stacks Project, Tags 04J0, 08FI, 0FN5 and 07A4
 * Stacks Project, Modules on Sites, Tag 04J0
 * Cohomology on Sites, Tags 08FI, 0FN5 and 07A4
 -/

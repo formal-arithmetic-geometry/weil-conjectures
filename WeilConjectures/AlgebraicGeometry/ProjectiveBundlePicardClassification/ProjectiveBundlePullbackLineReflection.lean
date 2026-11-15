@@ -21,12 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 ## References
 
 * EGA II, Remark 4.2.7
-* Stacks, Tags 04TN, 01XS
 * EGA II, Remark 4.2.7, printed p.75
 * Stacks Project, Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, Lemma
   glue-maps (Tag 04TN)
-* Stacks, Tag 04TN
-* Tag 01XS
 -/
 
 @[expose] public section

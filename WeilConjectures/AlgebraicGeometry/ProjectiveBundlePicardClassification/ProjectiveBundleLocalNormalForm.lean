@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveBundlePicardClassification.Pr
 ## References
 
 * EGA II, Remark 4.2.7
-* Stacks, Tags 0BXJ, 07VK and 0B8W
 * Stacks, Tag 0BXJ
 * Tag 07VK
 * Tag 0B8W

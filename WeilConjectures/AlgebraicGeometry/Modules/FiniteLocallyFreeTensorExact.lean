@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
 
 ## References
 
-* Stacks Project, Tags 01C6 and 05NE
 * Stacks Project, Tags 01C6, 01CB, 01AG and 05NE
 -/
 

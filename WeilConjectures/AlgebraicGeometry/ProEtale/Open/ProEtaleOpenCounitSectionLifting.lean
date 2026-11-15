@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 ## References
 
 * Stacks Project, Tags 00WK and 09AE
-* Stacks Project, Tag 09AE
 -/
 
 @[expose] public section

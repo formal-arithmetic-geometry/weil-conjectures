@@ -119,10 +119,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedFilteredC
 
 ## References
 
-* Stacks Project, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738
 * Stacks, Modules on Sites, Tag 03D1
 * Stacks, Tags 09A5 and 03D6
-* Stacks, Tags 03DI and 03DJ
 * Stacks, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738
 -/
 

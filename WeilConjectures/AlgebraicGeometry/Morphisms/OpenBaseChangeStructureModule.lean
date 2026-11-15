@@ -14,7 +14,6 @@ public import Mathlib.AlgebraicGeometry.Limits
 ## References
 
 * Stacks Project, Tags 008C and 0094, and the open-base-change calculation used in Tag 0EY6
-* Stacks Project, Tags 008C and 0094
 * Tag 0EY6, base-change identification
 -/
 

@@ -55,7 +55,6 @@ vanishing prove preservation by extension by zero and closed direct image.
 
 ## References
 
-* Tag 09AH, Tag 095L, Tag 03ER
 * Stacks Tags 095L, 03ER and 05VD
 * Stacks Tags 09AH, 03DI and 05VD
 -/

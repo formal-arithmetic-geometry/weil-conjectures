@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Derived.DerivedAdjunctionCochainUnit
 
 ## References
 
-* Stacks Project, Tags 04J0, 07A6 and 08FI
 * Stacks Project, Tag 04J0 and Categories, the mates correspondence
 * Stacks Project, Modules on Sites, Tag 04J0
 * Cohomology on Sites, Tags 07A6 and 08FI

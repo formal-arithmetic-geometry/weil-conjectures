@@ -527,7 +527,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralContinuousEncodingCons
 
 * Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, Definitions 6.8.1, 6.8.3 and
   6.8.10
-* Lemma 6.8.2(1)
+* Bhatt--Scholze, Lemma 6.8.2(1)
 * Bhatt--Scholze, Lemma 6.8.13
 -/
 

@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 ## References
 
-* Stacks Tags 06YY, 099Z, 09B1 and 03DA
 * Stacks Project, Tags 099Z and 09B1 (bounded-below full faithfulness), 06YY (scalar extension),
   03DA and 0H7J (restriction and inverse image)
 -/

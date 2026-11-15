@@ -51,7 +51,6 @@ These definitions are shared by the strict-model descent and its derived-limit c
 * Stacks 03D7
 * Stacks 03EL
 * Stacks 03EK, 099N(5)
-* Stacks 06YY
 * Stacks 06YY, 099N(5)
 * Stacks 0940, 099N(5)
 -/

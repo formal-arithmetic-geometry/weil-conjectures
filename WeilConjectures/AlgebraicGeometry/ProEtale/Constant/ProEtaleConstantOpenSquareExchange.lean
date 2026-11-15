@@ -18,7 +18,6 @@ below is uniquely fixed by the sectionwise units, and is descended termwise.
 
 ## References
 
-* Stacks Project, Tags 03S6 and 04J0
 * Stacks Tags 03S6, 03D3 and 00YV
 * Stacks Tags 03S6 and 04J0
 -/

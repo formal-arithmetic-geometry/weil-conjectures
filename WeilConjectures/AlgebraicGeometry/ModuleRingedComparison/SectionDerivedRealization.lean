@@ -109,8 +109,6 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 * Stacks Project, Sites, Tag 00YV
 * Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ
 * Cohomology on Sites, Tags 07A4, 07A6 and 0B56
-* Stacks 03DI
-* Stacks 03DJ
 -/
 
 @[expose] public noncomputable section

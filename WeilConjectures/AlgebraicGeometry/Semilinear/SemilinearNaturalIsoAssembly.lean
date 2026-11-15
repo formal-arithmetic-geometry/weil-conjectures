@@ -111,7 +111,6 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 ## References
 
 * Stacks Project, Tag 0941, strict coefficient systems
-* Stacks 0941
 -/
 
 @[expose] public noncomputable section

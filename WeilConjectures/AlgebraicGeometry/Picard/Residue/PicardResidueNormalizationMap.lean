@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorCoefficientComparison
 
 ## References
 
-* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
 * Stacks Project, Tags 0096 and 01F7
 * Stacks Project, Tags 0096 and 0D5S
 * Stacks Project, Tags 0096 and 06YJ

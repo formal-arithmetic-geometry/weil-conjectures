@@ -66,12 +66,12 @@ def ProjectionMateFamily := ∀ {X S : Scheme.{u}} (f : X ⟶ S)
   (moduleObjectDerivedPushforward Λ f).obj A ⊗ B ⟶
     (moduleObjectDerivedPushforward Λ f).obj (A ⊗ (moduleObjectDerivedPullback Λ f).obj B)
 
-/-- Retain the representative-normalized published projection mate, pointwise. -/
+/-- Retain the representative-normalized projection mate, pointwise. -/
 def ProjectionMateNormalized (a : ProjectionMateFamily Λ) : Prop :=
   ∀ {X S : Scheme.{u}} (f : X ⟶ S) (A : DerivedCategory (Modules Λ X))
     (B : DerivedCategory (Modules Λ S)), HEq (a f A B) (moduleObjectProjectionMate Λ f A B)
 
-/-- The published mate uniquely determines the family in the shared interface. -/
+/-- The mate uniquely determines the family in the shared interface. -/
 theorem projectionMate_existsUnique :
     ∃! a : ProjectionMateFamily Λ, ProjectionMateNormalized Λ a := by
   unfold ProjectionMateFamily ProjectionMateNormalized
@@ -83,7 +83,7 @@ theorem projectionMate_existsUnique :
     funext X S f A B
     exact eq_of_heq (ha f A B)
 
-/-- The same published projection mate in the fixed shared interface. -/
+/-- The same projection mate in the fixed shared interface. -/
 def projectionMateMap : ProjectionMateFamily Λ := (projectionMate_existsUnique Λ).exists.choose
 
 -- Keep fixed site and derived comparisons folded during elaboration.

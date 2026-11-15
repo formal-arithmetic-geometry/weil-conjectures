@@ -16,8 +16,6 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 ## References
 
-* Stacks Project, Tag 099M
-* Tags 0940 and 0941
 * Stacks Project, Tag 099M, Tags 0940 and 0941, normalized strict Roos comparison
 -/
 

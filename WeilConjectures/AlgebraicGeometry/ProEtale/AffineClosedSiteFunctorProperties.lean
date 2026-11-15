@@ -21,7 +21,6 @@ The geometric inclusion below is the spectrum of the retained algebra map.
 
 ## References
 
-* Stacks Project, Tag 09BK
 * Stacks Project, Tag 09BK, the map V → v(V)
 -/
 

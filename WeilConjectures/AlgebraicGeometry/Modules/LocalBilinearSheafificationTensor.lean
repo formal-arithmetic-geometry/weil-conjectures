@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinea
 ## References
 
 * Stacks Project, Tag 0GMW, and the open restriction adjunction
-* Stacks Project, Tag 0GMW
 -/
 
 @[expose] public section

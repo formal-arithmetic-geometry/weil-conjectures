@@ -22,8 +22,6 @@ unrelated scheme-pullback coherence modules.
 
 ## References
 
-* Stacks Tags 03EO, 03EL, 08J7
-* Stacks Tag 03EL
 * Stacks Tags 03EL, 08J7
 * Stacks Tags 03EO, 03EL
 -/

@@ -19,10 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 /-!
 # Lifting a fibre isomorphism as a morphism near the base point
-
-## References
-
-* Stacks Project
 -/
 
 @[expose] public section

@@ -54,7 +54,6 @@ class is the negative of the existing raw lifting-cocycle equivalence.
 
 * Stacks Project, Tags 03AJ, 06XR, 06XV and 0A45, relative refinement
 * Stacks Tag 03AJ, relative refinement using Tag 0A45
-* Stacks Tags 03AJ and 0A45
 * Stacks Tag 0A45, closed base change
 * Stacks Tag 03AJ, pullback of framed torsors
 -/

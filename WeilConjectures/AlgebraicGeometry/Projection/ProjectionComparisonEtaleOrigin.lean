@@ -30,7 +30,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Projection
 ## References
 
 * Stacks Tags 0E48, 09AF and 0GL1
-* Stacks Tag 099R
 * Stacks Tags 07A4 and 099R
 -/
 

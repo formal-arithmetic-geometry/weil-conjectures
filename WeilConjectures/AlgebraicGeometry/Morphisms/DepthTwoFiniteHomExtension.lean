@@ -17,9 +17,8 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 ## References
 
-* Stacks Project, Tags 0EY6, 0AUK and 0E9I
 * Stacks Project, Tag 0EY6, converse in the proof of (2), using Tags 0AUK and 0E9I
-* affine structure algebras, Tag 01SA
+* Stacks Project, Tag 01SA
 -/
 
 @[expose] public section

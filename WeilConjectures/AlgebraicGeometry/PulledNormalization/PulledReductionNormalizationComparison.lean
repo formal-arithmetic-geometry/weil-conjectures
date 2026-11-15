@@ -264,11 +264,6 @@ The maps retain the finite coefficient action and the universal computation coun
 
 ## References
 
-* Stacks Project, Tags 07A4, 0D6D and 0G7E
-* Stacks 06YY
-* Stacks 0D6D
-* Stacks 03EL
-* Stacks 06YY, 0D6D
 * Stacks 0D6D, 07A4
 * Stacks 06YY, 03EL
 * Stacks 03EL, 0D6D and 0G7E
@@ -599,7 +594,7 @@ abbrev quotientComp (T : Scheme.{t}) (b a : ℕ) (h : a ≤ b) :
     (congrArg (fun f ↦ exchangeScalar d T ≫ f)
       (completedReductionProjection_comp T d b a h))
 
-/-- The recorded normalization interface, with the published coefficient sheafification
+/-- The recorded normalization interface, with the coefficient sheafification
 and locally-bijective comparison specified at the existing coefficient universe. -/
 abbrev ScalarNormalization (T : Scheme.{t}) :=
   @Normalization.{t + 1, t, t + 1, t + 2} T.ProEt inferInstance

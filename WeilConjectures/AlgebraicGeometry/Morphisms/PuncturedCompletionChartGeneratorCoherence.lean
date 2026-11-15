@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 * Stacks Project, Tag 0BLH, first two proof paragraphs
 * Tag 05EL, item (1)
-* Stacks Project, Tag 0BLH
 * Stacks Project, Tag 0BLH, second proof paragraph
 * Tag 01I6, sections of a principal open in an affine scheme
 * Tag 01I6, affine section modules and base change

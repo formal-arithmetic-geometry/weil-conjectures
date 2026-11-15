@@ -13,23 +13,10 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 
 ## References
 
-* Stacks Project, Tag 0GL1, Tag 0E8I
-* Stacks 06YY, 07A6, 07A4
-* Stacks 06YY, 07A6
 * Stacks 06YY
-* Stacks 07A6
-* Stacks 07A4
-* Stacks 03DA
-* Stacks 08FJ
-* Stacks 03DA, 07A6
-* Stacks 07A4, 07A6
-* Stacks 08FJ, 07A6
 * Stacks 03CY, 08FJ
-* Stacks 07A4, 0D6D
 * Stacks 07A6, 07A4, 05V4
 * Stacks 03DA, 07A4
-* Stacks 0GL1, 0E8I
-* Stacks 0D6D, 07A6
 * Stacks 0GL1, 0E8I, 07A6, 0D6D
 -/
 
@@ -59,7 +46,7 @@ abbrev scalarPair {A B : Type u} [CommRing A] [CommRing B]
 abbrev scalar {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) := (scalarPair m φ T).derived
 
-/-- Identification with the published scalar functor by its normalized adjunction. -/
+/-- Identification with the scalar functor by its normalized adjunction. -/
 def scalarIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) : scalar m φ T ≅ scalarExtension φ T :=
   (scalarPair m φ T).adjunction.leftAdjointUniq
@@ -78,7 +65,7 @@ abbrev coefficient {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   (scalarRestriction φ T).obj (unit m B T)
 
-/-- The exact open adjunction already used by the published operations. -/
+/-- The exact open adjunction already used by the operations. -/
 abbrev openAdj (A : Type u) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] :=
   proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X A)
@@ -106,8 +93,8 @@ def lambda {A B : Type u} [CommRing A] [CommRing B]
   Functor.isoWhiskerRight (scalarIso m φ X) _ ≪≫ tensorPullbackIso φ j ≪≫
     Functor.isoWhiskerLeft _ (scalarIso m φ U).symm
 
-/-- The published common-right-adjoint open scalar comparison, transported by `scalarIso`.
-Its components retain the published B-linear action. -/
+/-- The common-right-adjoint open scalar comparison, transported by `scalarIso`.
+Its components retain the B-linear action. -/
 def beta {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     openExtension (A := A) j ⋙ scalar m φ X ≅
@@ -216,7 +203,7 @@ def coefficientPullback {A B : Type u} [CommRing A] [CommRing B] [Finite B]
 
 /-- The forward open projection isomorphism with its inverse adjunct prescribed.
 This is the normalization of `derivedOpenImmersionLowerShriekProjectionIso`, transported
-to these presentations of derived tensor, with its direction reversed. Its published
+to these presentations of derived tensor, with its direction reversed. Its
 `derivedOpenImmersionLowerShriekProjectionMap` is precisely the adjunct prescribed below. -/
 structure Projection (A : Type u) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] where

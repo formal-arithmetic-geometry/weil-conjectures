@@ -16,7 +16,6 @@ public import Mathlib.RingTheory.Nakayama
 
 ## References
 
-* Stacks Project, Tags 0311 and 00LL
 * Stacks Project, Tags 0311 and 00LL, detection at associated primes and regular elements avoiding
   associated primes
 -/

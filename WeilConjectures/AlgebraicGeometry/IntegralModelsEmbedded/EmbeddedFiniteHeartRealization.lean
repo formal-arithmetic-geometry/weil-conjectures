@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 ## References
 
 * Stacks Tags 03ET and 00YV
-* Stacks Tag 03ET
 -/
 
 @[expose] public noncomputable section

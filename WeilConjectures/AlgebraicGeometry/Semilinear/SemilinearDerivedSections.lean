@@ -131,7 +131,6 @@ and equations; there are no free proposition-valued parameters.
 * Zheng 4.1 and 4.10
 * Stacks 06YY, 07A4, 08J7--08JB
 * Zheng 4.10
-* Stacks 07A4
 * Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.17
 * Stacks 079P, 06YS, 06YY, 07A4, 07A6, 08J7--08JB
 -/

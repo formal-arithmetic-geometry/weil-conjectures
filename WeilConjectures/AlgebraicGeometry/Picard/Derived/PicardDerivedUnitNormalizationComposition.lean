@@ -16,8 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposit
 
 ## References
 
-* Stacks Project, Tags 08HY and 0D5S
-* Stacks Project, Tag 0D5S
 * Stacks Project, Tag 0D5S and Tag 08HY
 -/
 

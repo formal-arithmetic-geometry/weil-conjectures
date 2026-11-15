@@ -20,7 +20,6 @@ public import Mathlib.CategoryTheory.Sites.Subcanonical
 
 ## References
 
-* Stacks Project, Tags 0F4P and 0DB1
 * Stacks Project, Tag 0F4P, and Tag 0DB1, hypotheses (a)-(c)
 -/
 

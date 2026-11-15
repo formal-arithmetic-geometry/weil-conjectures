@@ -23,18 +23,13 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalCompletedPullbackIdent
 /-! # Composition and identity of normalized rational pullback
 
 The ordinary maps are fixed on sheafified tensor generators and derived computation
-counits. Completed maps retain the published strict quotient-tower units; their raw
+counits. Completed maps retain the strict quotient-tower units; their raw
 rationalizations retain all fraction arrows.
 
 ## References
 
 * Bhatt--Scholze, Remark 6.8.15, p. 62
-* Stacks Tags 03CB, 0D6D, 07A4 and 099N
-* BS Remark 6.8.15
 * Stacks 03D2
-* Stacks 03CB, 0D6D, 07A4, 099N
-* Stacks 0D6D, 099N
-* BS Remark 6.8.15, p. 62
 * Stacks 03CB, 0D6D, 07A4 and 099N
 -/
 

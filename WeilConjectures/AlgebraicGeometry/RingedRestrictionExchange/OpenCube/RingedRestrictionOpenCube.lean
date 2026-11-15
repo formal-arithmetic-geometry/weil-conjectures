@@ -12,9 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtal
 
 ## References
 
-* Stacks Project, Tags 09A5, 03CB and 00XZ
 * Stacks 09A5, 03CB and 00XZ
-* Stacks 03CB
 -/
 
 @[expose] public noncomputable section

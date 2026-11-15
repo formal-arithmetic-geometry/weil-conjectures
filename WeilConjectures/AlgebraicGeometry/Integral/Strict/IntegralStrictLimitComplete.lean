@@ -20,7 +20,6 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 ## References
 
-* Stacks Project, Tag 099M
 * Stacks Project, Tag 099M, and the principal orthogonality argument of Tags 091Q and 0999
 -/
 

@@ -23,8 +23,6 @@ are used throughout. The witness statements retain each original local trivializ
 ## References
 
 * Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
-* Stacks Tags 03D2, 093I and 093Q
-* Stacks Tag 09AJ
 -/
 
 -- After pruning, this module only keeps private declarations.

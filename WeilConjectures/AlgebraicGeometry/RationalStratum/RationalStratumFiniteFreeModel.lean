@@ -205,8 +205,6 @@ import all WeilConjectures.CategoryTheory.ConstantScalarTowerComparison
 * Bhatt--Scholze, Definition 6.8.6 and Proposition 6.8.14(2)
 * Stacks, Section 03EK
 * Bhatt--Scholze, paragraph before Definition 6.8.6
-* Stacks 03EK
-* Stacks 03EI and 03EK
 * Stacks 03EK and 0GMW
 -/
 

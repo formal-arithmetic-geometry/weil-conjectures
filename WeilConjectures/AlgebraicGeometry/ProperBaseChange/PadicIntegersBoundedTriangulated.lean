@@ -203,10 +203,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 ## References
 
-* Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1), (3), as implemented by
-  the integral constructible Serre theorem
-* Bhatt--Scholze, Section 6.8, as implemented by `CondensedRing.integralConstructible_serre` and the
-  conditional homology-property theorem
+* Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1), (3)
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public section

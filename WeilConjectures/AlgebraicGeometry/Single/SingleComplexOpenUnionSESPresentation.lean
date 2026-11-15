@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Single.SingleComplexOpenUnionSESCompati
 ## References
 
 * Stacks Project, Cohomology, Tags 08HZ and 08HY
-* Tag 0DJ9
 * Stacks Project, Tags 08HZ (relative Mayer--Vietoris), 08HY (the counit base-change construction),
   0DJ9 (the source-open induction diagram), and 013N--013O (the cylinder replacement and its
   homotopy equivalence)

@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 
 ## References
 
-* Stacks Project, Tags 07A4 and 07A6
 * Stacks 07A4 and 07A6
 -/
 

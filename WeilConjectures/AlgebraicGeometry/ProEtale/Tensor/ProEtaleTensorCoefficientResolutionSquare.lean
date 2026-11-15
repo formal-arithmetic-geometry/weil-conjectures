@@ -40,15 +40,13 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The coefficient-resolution square for pro-etale tensor pullback
 
-The ordinary comparison, localization factors and derived comparison are the published
-canonical constructions. The bottom-right complex is written as the tensor with F(N[0]);
+The ordinary comparison, localization factors and derived comparison are the canonical constructions. The bottom-right complex is written as the tensor with F(N[0]);
 the canonical termwise single-complex identification identifies this with FP tensor FN.
 
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 07A4 and 06YU
 * Stacks, Tag 06YM
-* Stacks, Tag 06YU
 * Stacks, Tags 06YP and 06YU
 -/
 

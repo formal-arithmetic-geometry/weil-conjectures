@@ -21,12 +21,10 @@ fixes the derived comparison on every cochain representative.
 
 ## References
 
-* Stacks Project, Tag 09A5, identity specialization of `section-morphism`
 * Stacks, Tags 09A5 and 03D2
 * Stacks, Tags 09A5 and 00WX
 * Stacks, Tag 03EK
 * Stacks, Tag 05RU
-* Stacks, Tag 09A5
 -/
 
 @[expose] public noncomputable section
@@ -68,7 +66,7 @@ def proEtaleIdentityModuleCoprojection (X : Scheme.{u}) (A : Type u) [CommRing A
               (AsSmall.up.op.obj (op U)) m)
 
 /-- The sheafification-unit image of `m ⊗ a` in the specified tensor pullback.
-The published construction writes the scalar factor first. -/
+The construction writes the scalar factor first. -/
 def proEtaleIdentityPullbackTmul (X : Scheme.{u}) (A : Type u) [CommRing A]
     (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEtᵒᵖ)
     (m : ((proEtaleModuleInverseImage (𝟙 X) (proEtaleConstantRing X A)).obj M).val.obj U)
@@ -95,7 +93,7 @@ def proEtaleIdentityPullbackTmul (X : Scheme.{u}) (A : Type u) [CommRing A]
         ((proEtaleCoefficientInverseImageMap (𝟙 X) A).hom.app U).hom] m)
 
 /-- The existing unbounded localization in the precise coefficient universes of the
-published pro-etale operations. Only existing sheafification instances are instantiated;
+pro-etale operations. Only existing sheafification instances are instantiated;
 the functor is Mathlib's Q. -/
 abbrev proEtaleIdentityLocalization (X : Scheme.{u}) (A : Type u) [CommRing A] :
     CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ ⥤

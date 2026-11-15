@@ -145,8 +145,7 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.
 ## References
 
 * Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases
-* Stacks, Tags 0F7C, 0F7D and 0F7F
-* Stacks, Tags 0F7B and 07A7, steps 6 and 10
+* Stacks Project, Tags 0F7B and 07A7
 * Stacks 09AE and the proof of 0F7B
 -/
 
@@ -397,7 +396,7 @@ open SheafOfModules.OpenTensorNormalization in
 private alias exact_inverse_mate_isIso :=
   SemilinearProperOpenEvaluationAliases.exact_inverse_mate_isIso
 
--- Keep both proper-face pullback hypotheses of the published cube statement.
+-- Keep both proper-face pullback hypotheses of the cube statement.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.unusedVariables false in

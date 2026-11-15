@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 
 ## References
 
-* Stacks Project, Tags 03DI and 09AE
 * Stacks, Tags 03DI and 09AE
 -/
 

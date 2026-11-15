@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageSectionN
 
 ## References
 
-* Stacks Project, Tags 0B91 and 08HY
 * Stacks Project, Tag 0B91, arbitrary base change
 * Tag 08HY, canonical mate
 * Tag 01IQ, residue fibre image

@@ -265,7 +265,7 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestriction
 /-!
 # Rational realization of the specified completed-pullback unit
 
-The integral unit is the published strict quotient-tower unit. The ordinary
+The integral unit is the strict quotient-tower unit. The ordinary
 comparison is fixed on tensor generators and by its derived computation counits.
 Its descent retains all raw fraction arrows, without taking a Karoubi envelope.
 
@@ -358,7 +358,7 @@ structure RationalPullIntegral (g : X ⟶ Y) where
   completed_mem : ∀ K : PbcBoundedConstructibleComplete Y (pbcIntegralDatum l E),
     PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)
       ((pbcActualStrictCompletedPull (pbcIntegralDatum l E) g).obj K.obj)
-  /-- This is the published unit, with its strict quotient augmentation. -/
+  /-- This is the unit, with its strict quotient augmentation. -/
   unit_isIso : ∀ K : PbcBoundedConstructibleComplete Y (pbcIntegralDatum l E),
     IsIso ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g).app K.obj)
 

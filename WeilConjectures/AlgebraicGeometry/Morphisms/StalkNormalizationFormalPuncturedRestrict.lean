@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 ## References
 
-* Stacks Project, Tags 0EYJ, 035I and 03GV
 * Stacks Project, Tags 035I and 03GV (relative normalization and smooth base change), Tag 0EYJ (the
   punctured local-base calculation)
 -/

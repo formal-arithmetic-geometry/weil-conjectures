@@ -24,9 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedP
 ## References
 
 * Stacks Project, Tag 0EYA, with the boundary depth calculation of Tag 0337
-* Stacks Project, Tag 0EYA
 * Tag 0EY6(1), (2), (a), (b)
-* Tag 0337
 -/
 
 @[expose] public section

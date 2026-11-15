@@ -148,9 +148,6 @@ are the existing unit-normalized comparisons. Raw fractions retain integral Hom 
 
 * Stacks Project, Tags 0G7E and 0D6D
 * Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
-* BS 6.8.2
-* Stacks 0D6D
-* BS 6.8.14(2)
 * Stacks 00CO and 0D6D
 -/
 
@@ -577,7 +574,7 @@ variable (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H
 
 attribute [-instance] ULift.module in
 /-- Equality coefficients have the multiplication unitor, with its cochain computation.
-Conjugation by the published raw tensor unit makes the raw source functor literally id. -/
+Conjugation by the raw tensor unit makes the raw source functor literally id. -/
 theorem rationalBalancedIdentity :
     rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X = 𝟙 _ ∧
     ∃ (o : pbcExtend (rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X) ≅ 𝟭 _)

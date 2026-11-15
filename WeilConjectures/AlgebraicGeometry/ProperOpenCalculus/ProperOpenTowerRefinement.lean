@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.ProperOpenCal
 
 ## References
 
-* Stacks Project, Tag 0F7J
 * Stacks Project, Tag 0F7J, six-square calculation
 -/
 

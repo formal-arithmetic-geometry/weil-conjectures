@@ -19,8 +19,6 @@ The private comparison data live in
 
 * Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J
 * Modules on Sites, Tags 03D2 and 03EK
-* pro-etale functoriality, Tag 09A5
-* Stacks, Tags 00XZ, 0H7J and 03D2
 * Tag 09A5
 -/
 

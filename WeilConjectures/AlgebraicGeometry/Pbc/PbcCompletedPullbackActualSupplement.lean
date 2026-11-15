@@ -83,7 +83,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import WeilConjectures.AlgebraicGeometry.PbcCompletedPullbackActual
 
-/-! # Completed pullback on the published completed-coefficient categories
+/-! # Completed pullback on the completed-coefficient categories
 
 The coefficient structure is fixed on all quotient projections. Ordinary pullback
 is its total derived sheafified tensor inverse image. Completion is characterized
@@ -92,13 +92,10 @@ by its reflection universal property on the actual intrinsic complete subcategor
 ## References
 
 * Tag 099N (2), (5)
-* Stacks 099N
 * Stacks 03D2 and 099N
-* 03D7
-* 099N
-* Stacks Tag 099N
-* 099N (2),(5), 099B and 0A0E
-* 099N (2),(5)
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 099N, (2) and (5), and Tags 099B and 0A0E
+* Stacks Project, Tag 099N, (2) and (5)
 -/
 
 @[expose] public noncomputable section
@@ -229,10 +226,10 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
-/-- The published sectionwise module direct image. -/
+/-- The sectionwise module direct image. -/
 abbrev pbcActualModulePush := completedModuleDirectImage g d
 
-/-- The published module inverse image followed by completed scalar tensor. -/
+/-- The module inverse image followed by completed scalar tensor. -/
 abbrev pbcActualModulePull := completedModulePullback g d
 
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
@@ -249,7 +246,7 @@ def pbcActualModuleUnitSection (M : pbcModules Y (pbcAdicCompletion Y d))
         ((proEtaleModuleToModel ((adicLisseForget Y).obj (pbcAdicCompletion Y d))).obj M)).val.app
           (op (AsSmall.up.obj U)) x)
 
-/-- The published pullback and direct image have the uniquely normalized tensor adjunction. -/
+/-- The pullback and direct image have the uniquely normalized tensor adjunction. -/
 theorem pbcActualModuleAdjunction_exists :
     ∃! adj : pbcActualModulePull g d ⊣ pbcActualModulePush g d,
       ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt) (x : M.val.obj (op U)),
@@ -315,10 +312,10 @@ instance pbcActualModulePull_additive : (pbcActualModulePull g d).Additive :=
 instance pbcActualModulePush_additive : (pbcActualModulePush g d).Additive :=
   (pbcActualModuleOperations_additive g d).2
 
-/-- The published ordinary total derived pullback with its fixed resolving pair. -/
+/-- The ordinary total derived pullback with its fixed resolving pair. -/
 abbrev pbcActualDerivedPull := completedOrdinaryPullback g d
 
-/-- The published universal ordinary-pullback counit. -/
+/-- The universal ordinary-pullback counit. -/
 abbrev pbcActualPullCounit := completedOrdinaryPullbackCounit g d
 
 /-- Its computation on cochain representatives retains the universal counit. -/
@@ -816,7 +813,7 @@ def pbcActualCompletionUnit : 𝟭 (PbcCompletedDerived T d) ⟶ pbcActualComple
 
 /-- Ordinary derived pullback followed by the unit-normalized completion reflector.
 This is equivalently the derived limit of the pulled-back strict reduction tower,
-with its quotient augmentation, as asserted by the source's canonical comparison. -/
+with its quotient augmentation. -/
 def pbcActualCompletedPull : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   pbcActualDerivedPull g d ⋙ pbcActualCompletion d X
 
@@ -988,7 +985,7 @@ private theorem actualPush_eq_datum : pbcActualDerivedPush g d = d.push g := by
   cases hm
   rfl
 
--- Use the published perfect-projection tower mate and its completion-unit equation.
+-- Use the perfect-projection tower mate and its completion-unit equation.
 private theorem quotientDirectComparison :
     ∃ e : d.push g ⋙ (completedReductionTower Y d ⋙ completedRlim Y (d.completedRing Y)) ≅
         (completedReductionTower X d ⋙ completedRlim X (d.completedRing X)) ⋙ d.push g,

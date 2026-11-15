@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.Properties
 ## References
 
 * Stacks Project, Tag 03SF, finite Galois covers and their permutation sets
-* Stacks Project, Tag 03SF
 * Stacks Project, Tag 03SF (connected cover)
 * Stacks Project, Tag 03SF, the equivalence with finite permutation sets
 -/

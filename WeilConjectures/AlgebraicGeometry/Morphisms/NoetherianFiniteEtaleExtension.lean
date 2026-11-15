@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.EnlargeOpenFiniteEtaleModel
 
 ## References
 
-* Stacks Project, Tag 0EYJ
 * Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8
 -/
 

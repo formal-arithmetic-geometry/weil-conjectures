@@ -22,7 +22,6 @@ import WeilConjectures.ProEtaleCoefficients.SingleAffineHypercover
 
 ## References
 
-* Stacks Project, Tag 09A1
 * Stacks Project, Tag 09A1, part (2)
 * Tags 094K, 0DAV and 0DB2
 -/

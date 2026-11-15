@@ -48,12 +48,6 @@ is imposed on the sheaf.
 
 * Stacks Project, Tags 09AE and 09BN (open functors), with etale analogue Tag 0F7B
 * Stacks, Tags 00YV and 03D1
-* Stacks, Tag 09AE
-* Stacks, Tags 00YV and 09AE
-* Stacks, Tag 09BN
-* Stacks, Tags 09AE and 09BN
-* etale analogue Tag 0F7B
-* etale analogue 0F7B
 -/
 
 @[expose] public section

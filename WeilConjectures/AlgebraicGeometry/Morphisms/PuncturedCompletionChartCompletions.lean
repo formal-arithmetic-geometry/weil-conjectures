@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 ## References
 
-* Stacks Project, Tags 0BLH and 05EL
 * Stacks Project, Tag 0BLH, first two proof paragraphs
 * Tag 05EL, item (1)
 -/

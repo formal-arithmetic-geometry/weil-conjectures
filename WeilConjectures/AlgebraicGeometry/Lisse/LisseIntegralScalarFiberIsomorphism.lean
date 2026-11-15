@@ -16,7 +16,7 @@ import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSupplement
 
 * Deligne, Weil II (1.1.1) b), d), pp. 146-147
 * Weil II (1.1.1) b), d), pp. 146-147
-* the finite-module reconstruction of Stacks Tag 09B8 and right exactness of scalar extension
+* Stacks Project, Tag 09B8
 -/
 
 @[expose] public section

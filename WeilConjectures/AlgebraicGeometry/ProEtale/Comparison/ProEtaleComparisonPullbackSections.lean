@@ -16,8 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalRestriction
 
 ## References
 
-* Stacks Project, Tag 0GLZ, and Tag 099R
-* Stacks Project, Tag 0GLZ
 * Sites, Tags 03CB and 03CC
 * Stacks Project, Tag 0GLZ, paragraph `F = epsilon_* a(F)`
 * Tag 099R

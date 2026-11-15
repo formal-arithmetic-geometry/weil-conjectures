@@ -108,12 +108,12 @@ def ProjectionFamily := ∀ {X S : Scheme.{u}} (f : X ⟶ S)
     (CondensedRing.moduleObjectDerivedPushforward Λ f).obj
       ((CondensedRing.moduleObjectDerivedPullback Λ f).obj K ⊗ N)
 
-/-- Fix every arrow to the published canonical projection, including its Koszul symmetries. -/
+/-- Fix every arrow to the canonical projection, including its Koszul symmetries. -/
 def ProjectionNormalized (a : ProjectionFamily Λ) : Prop :=
   ∀ {X S : Scheme.{u}} (f : X ⟶ S) (K : DerivedCategory (Modules Λ S))
     (N : DerivedCategory (Modules Λ X)), HEq (a f K N) (CondensedRing.traceProjection Λ f K N)
 
-/-- The published projection has a unique realization in the fixed shared tensor interface. -/
+/-- The projection has a unique realization in the fixed shared tensor interface. -/
 theorem projection_existsUnique : ∃! a : ProjectionFamily Λ, ProjectionNormalized Λ a := by
   unfold ProjectionFamily ProjectionNormalized internalMonoidal internalTensorBundle
     nativeTensorBundle

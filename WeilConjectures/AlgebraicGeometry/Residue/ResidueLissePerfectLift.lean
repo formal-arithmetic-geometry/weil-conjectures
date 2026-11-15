@@ -41,16 +41,13 @@ localized site, without identifying it with a separately chosen small skeleton.
 
 ## References
 
-* Stacks Project, Tag 09C6
 * Bhatt--Scholze, Lemma 6.6.8 and Proposition 6.6.11
 * Stacks Tags 03CY and 09C6
-* Stacks Tags 05RU and 09C6
 * Stacks Tag 05RU
 * Stacks Tags 0H7J and 09C6
 * Stacks Tag 03DA
 * Stacks Tag 099M
 * Stacks Tags 03DJ and 08JB
-* Stacks Tag 03DJ
 -/
 
 @[expose] public noncomputable section

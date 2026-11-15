@@ -22,7 +22,6 @@ of gluing: over any open its sections are the product of the sections on the str
 * EGA II, Remark 4.2.7
 * Stacks Project, Sheaves, Tags 00AL and 00AM
 * Stacks, Tag 01CR
-* Stacks, Tags 00AL and 00AM
 -/
 
 @[expose] public section

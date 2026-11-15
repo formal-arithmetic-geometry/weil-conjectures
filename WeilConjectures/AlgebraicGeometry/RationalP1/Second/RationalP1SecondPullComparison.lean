@@ -26,7 +26,7 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] coefficient line twist firstProjection secondProjection square
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
-/-- The published square comparison through the fixed module-object functor names. -/
+/-- The square comparison through the fixed module-object functor names. -/
 @[irreducible]
 def ambientPullbackComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

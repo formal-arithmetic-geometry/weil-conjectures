@@ -138,7 +138,6 @@ derived categories of the recorded internal module objects. No completion is app
 
 * Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944
 * Stacks 06YY
-* Stacks 07A6
 -/
 
 @[expose] public noncomputable section

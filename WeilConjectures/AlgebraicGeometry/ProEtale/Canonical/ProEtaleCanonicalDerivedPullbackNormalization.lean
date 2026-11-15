@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 ## References
 
 * Stacks Project, Tags 0D6D and 0E47, coefficient inverse-image comparisons
-* Stacks Tag 0D6D
 -/
 
 @[expose] public noncomputable section

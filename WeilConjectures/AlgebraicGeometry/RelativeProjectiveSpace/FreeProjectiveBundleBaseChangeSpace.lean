@@ -30,7 +30,6 @@ polynomial identifications and the local scheme maps.
 
 * Stacks Project, Constructions, Tags 01NF and 01O3
 * Morphisms, Tag 087S
-* Stacks Project, Tags 01NF and 01O3
 * Stacks Project, Tags 01NF, 01O3 and 01N2
 -/
 

@@ -166,13 +166,9 @@ R tensor_C (C/pi^n) = R/pi^n, including the prescribed quotient projection.
 
 ## References
 
-* first paragraph and Comparison with the Stacks Project
-* Stacks Tags 093M and 0G7E
 * Stacks 093J
 * Stacks 03CS
-* Stacks 06YN
 * Stacks 06YN and 03ER
-* Stacks 093M
 * Stacks 093M and 0G7E
 -/
 

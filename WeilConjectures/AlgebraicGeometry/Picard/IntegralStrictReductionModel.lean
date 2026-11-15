@@ -21,7 +21,6 @@ projection comparison; a family of isomorphisms after evaluation is insufficient
 ## References
 
 * Bhatt--Scholze, Definition 3.5.2, p. 24
-* Stacks Tags 06YY, 06XN, 0941
 * Bhatt--Scholze, Definition 3.5.2
 * Stacks 06YY, 06XN, 0941
 -/

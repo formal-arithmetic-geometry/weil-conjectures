@@ -43,7 +43,6 @@ termwise identifications uniquely, so it does not permit a different choice of m
 ## References
 
 * Stacks Tags 0GJ1, 04CA, 09AF, 099R and 0B65
-* Stacks 0GJ1 and 0B65
 -/
 
 @[expose] public noncomputable section

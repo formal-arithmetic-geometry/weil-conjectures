@@ -25,7 +25,6 @@ import WeilConjectures.RingTheory.NormalLocalDepthTwo
 
 ## References
 
-* Stacks Project, Tags 0EYJ, 0EY6 and 0EY9
 * Stacks Project, Tag 0EYJ, final local computation
 * Tags 0EY6 and 0EY9
 -/

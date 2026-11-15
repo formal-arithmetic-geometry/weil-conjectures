@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 ## References
 
-* Stacks Project, Tag 0BQM
 * Stacks Project, Tag 0BQM, proof (full faithfulness over the generic point)
 -/
 

@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 ## References
 
-* Stacks Project, Tag 0BF2
 * Stacks Project, Tag 0BF2, fibre triviality and degree-zero differential argument
 -/
 

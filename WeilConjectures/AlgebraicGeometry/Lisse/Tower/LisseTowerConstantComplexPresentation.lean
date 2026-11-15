@@ -22,7 +22,6 @@ and the ordinary natural isomorphisms represented by all derived comparisons inv
 * Sites, Tag 0H7J
 * Cohomology on Sites, Tag 06YY
 * Derived Categories, Tag 05RU
-* Stacks Tags 03DA and 0H7J
 -/
 
 public noncomputable section

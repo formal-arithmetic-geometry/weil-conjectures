@@ -35,9 +35,9 @@ public import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbac
 /-!
 # Composition of canonical constant-ring maps on pro-etale sites
 
-The inverse-image comparison is the published adjunction mate of the canonical
+The inverse-image comparison is the adjunction mate of the canonical
 fibre-product associativity comparison on direct images. The coefficient maps are
-exactly the adjuncts of the published constant-section maps.
+exactly the adjuncts of the constant-section maps.
 
 ## References
 

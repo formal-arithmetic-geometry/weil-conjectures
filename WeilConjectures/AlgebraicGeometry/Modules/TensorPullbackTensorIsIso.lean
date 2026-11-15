@@ -19,7 +19,7 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 
 * Stacks Project, Modules, Tag 01CD
 * Sheaves, Tag 0098
-* Modules, Tag 01CB
+* Stacks Project, Tag 01CB
 -/
 
 @[expose] public section

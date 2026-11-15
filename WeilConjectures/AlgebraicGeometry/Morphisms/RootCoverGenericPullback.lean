@@ -18,7 +18,6 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 ## References
 
-* Stacks Project, Tags 01JT and 00PD
 * Stacks Project, Tag 01JT (fibre products of affine schemes), Tag 00PD (discrete valuation rings)
 -/
 

@@ -18,7 +18,7 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransport
 ## References
 
 * Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1
-* Lemma 4.2.12 and Lemma 6.8.2(1)
+* Bhatt--Scholze, Lemma 4.2.12 and Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section

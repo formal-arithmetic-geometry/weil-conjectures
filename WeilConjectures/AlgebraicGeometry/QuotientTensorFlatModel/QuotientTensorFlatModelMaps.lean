@@ -17,15 +17,7 @@ ordinary paths retain the canonical balancing isomorphism and signed tensorators
 
 ## References
 
-* Stacks Project, Tags 03EL, 07A4 and 0G7E
-* Stacks 0G7E
-* Stacks 06YY
-* Stacks 07A4
-* Stacks 03EL
 * Stacks 03EL and 07A4
-* Stacks 06YY and 0G7E
-* Stacks 06YY and 07A4
-* Stacks 06YY, 0G7E
 * Stacks 06YY, 07A4 and 0G7E
 -/
 

@@ -18,7 +18,6 @@ import Mathlib.AlgebraicGeometry.Limits
 
 ## References
 
-* Stacks Project, Tags 04GH and 04GK
 * Stacks Project, Tags 04GH, 04GK and 0EYG
 -/
 

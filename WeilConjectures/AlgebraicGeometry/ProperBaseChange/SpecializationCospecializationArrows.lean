@@ -17,12 +17,9 @@ public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CohomologyPullb
 
 ## References
 
-* Stacks Project, Tags 0GJ2, 0GJU and 0GJV
-* Stacks Project, Tag 03Q1
 * Stacks Project, Tag 03Q1, exactness of geometric stalks
 * Stacks Project, Tag 0GJ2
 * Stacks Project, Tag 03Q1 (3)
-* Stacks Project, Tag 0GJV
 * Stacks Project, Tags 0GJU and 0GJV
 -/
 

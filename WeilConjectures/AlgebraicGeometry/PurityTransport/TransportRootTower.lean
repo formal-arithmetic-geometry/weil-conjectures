@@ -239,7 +239,7 @@ private theorem normalizedFreeRootTower
 
 
 
-/- The published definitions abstract class proofs into auxiliary constants.
+/- The definitions abstract class proofs into auxiliary constants.
 Transport those proofs explicitly before comparing their induced category data;
 a single conversion through all the six-functor definitions is prohibitively large.
 The routines below only prepare congruences from Subsingleton.elim. -/

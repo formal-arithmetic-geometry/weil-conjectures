@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 ## References
 
-* Stacks Project, Tag 0GLZ
 * Stacks Project, Tag 0GLZ, the identification of F with its comparison restriction
 * Sites, Tags 03CB and 03CC
 -/

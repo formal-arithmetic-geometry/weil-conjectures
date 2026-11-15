@@ -23,7 +23,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.M
 ## References
 
 * Stacks Project, Tags 096V, 09AG and 09AH
-* Stacks, Tags 09AG and 09AH
 -/
 
 @[expose] public section

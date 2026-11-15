@@ -219,7 +219,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbeddedR
 
 ## References
 
-* Stacks Project, Tags 099L and 099I
 * Stacks Tags 093M, 099L, 099I and 0A07
 -/
 

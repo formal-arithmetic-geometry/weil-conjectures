@@ -160,7 +160,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 
 ## References
 
-* Stacks Project, Tags 03PL and 0A45
 * Stacks 03PL and 0A45
 -/
 

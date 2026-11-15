@@ -35,20 +35,13 @@ the good representative and resolution used to evaluate the recorded completed p
 
 ## References
 
-* Stacks Project, Tags 03D6 and 08TC
 * Bhatt--Scholze, Section 6.5
 * Stacks Tags 03D2 and 00YV
-* Stacks Tag 03D6
-* Stacks Tags 03CO and 03D6
 * Stacks Tags 03CO and 0H7J
-* Stacks Tag 03CO
 * Stacks Tags 09A5, 00WX and 03CO
 * Stacks Tag 05RU
-* Stacks Tags 03D6 and 04JC
 * Stacks Tag 04JC
-* Stacks Tags 03D6 and 00YV
 * Stacks Tags 03D6 and 08TC
-* Stacks Tag 08TC
 -/
 
 @[expose] public noncomputable section

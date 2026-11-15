@@ -16,7 +16,6 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 * Stacks Project, Tags 03DI, 03DJ and 09AE
 * Stacks, Tag 00YV
-* Stacks, Tags 03DI and 09AE
 -/
 
 @[expose] public section

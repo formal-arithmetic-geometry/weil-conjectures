@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
 ## References
 
-* Stacks Project, Tags 0EYJ, 01ZM, 01ZO, and 07RP
 * Stacks Project, Tag 0EYJ (choice of an initial open), Tag 01ZM (descending finite presentation),
   Tag 01ZO (finiteness), and Tag 07RP (étaleness)
 -/

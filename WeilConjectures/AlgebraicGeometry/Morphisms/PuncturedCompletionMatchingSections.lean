@@ -15,11 +15,9 @@ public import Mathlib.Algebra.Category.Ring.Limits
 ## References
 
 * Stacks Project, Tags 0BLH and 05ER (the functor H⁰)
-* Stacks Project, Tag 0BLH
 * Stacks Project, Tag 05ER, the construction H⁰
 * Stacks Project, Tag 0BLH, set Y = Spec B
 * Stacks Project, Tag 05ER, the natural comparison Ψ
-* Stacks Project, Tag 05ER
 -/
 
 @[expose] public section

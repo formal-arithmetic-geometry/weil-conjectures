@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteQuotientEtaleOr
 ## References
 
 * Stacks Project, Tags 09AL and 09B1, and coefficient transport in Tag 09C6
-* Stacks Project, Tags 09AL, 09B1 and 09C6
 * Stacks Project, Tag 09AL (compare-constructible-derived), Tag 09B1 (compare-derived), and Tag
   09C6, construction of an individual etale origin
 -/

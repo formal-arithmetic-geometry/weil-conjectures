@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedActual
 
 ## References
 
-* Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J
 * Stacks Tags 03CY and 0H7J
 * Stacks Tags 03DA, 06YY and 0H7J
 -/

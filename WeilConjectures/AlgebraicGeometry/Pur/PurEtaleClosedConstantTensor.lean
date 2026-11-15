@@ -62,17 +62,11 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 ## References
 
-* Tag 03Q1
 * Stacks Tag 03QP(1)
 * Stacks Tag 01JA
 * Tag 03Q1(3)
-* Stacks Tag 03EL
-* Tags 03EL and 03Q1
 * Stacks Tag 03Q1(3)
-* Stacks Tags 03Q1 and 03EL
-* Tag 03EL
 * Stacks Tags 03Q1 and 03PU
-* Stacks Tag 06YQ
 * Stacks Tags 06YQ and 03EL
 -/
 

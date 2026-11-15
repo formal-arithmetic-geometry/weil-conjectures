@@ -20,7 +20,6 @@ derived categories of the recorded internal module objects. No completion is app
 ## References
 
 * Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944
-* Stacks 0D6D
 * Stacks 0D6D, 0G7E
 -/
 

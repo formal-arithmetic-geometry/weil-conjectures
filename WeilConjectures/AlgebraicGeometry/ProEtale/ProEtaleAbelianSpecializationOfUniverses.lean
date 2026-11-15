@@ -42,7 +42,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 
 ## References
 
-* Stacks Project, Tag 09AC
 * Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed immersions into affine schemes
 * Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK
 * Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification

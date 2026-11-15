@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
 
 ## References
 
-* Stacks 03D6, 0F7B
 * Stacks 03DI, 03D6, 0F7B
 -/
 

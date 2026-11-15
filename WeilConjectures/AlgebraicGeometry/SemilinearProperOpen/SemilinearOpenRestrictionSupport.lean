@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 ## References
 
 * Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-* Stacks Project, Tags 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section

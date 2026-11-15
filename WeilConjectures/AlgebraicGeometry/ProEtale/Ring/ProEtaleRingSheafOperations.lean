@@ -44,12 +44,9 @@ and base-change arguments.
 
 ## References
 
-* Stacks Tags 03D3, 03DI, 03CB and 03CC
 * Stacks, Tags 03D2 and 09A5
 * Stacks, Tag 03D3 and Pro-etale Cohomology, section 09A5
-* Stacks, Tag 03D3
 * Stacks, Tags 03DI, 03DJ and 09AE
-* Stacks, Tag 03DI
 * Stacks, Tags 03CB and 03CC
 -/
 

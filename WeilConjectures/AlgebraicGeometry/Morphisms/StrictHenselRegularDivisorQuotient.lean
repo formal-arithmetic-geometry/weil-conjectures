@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuo
 ## References
 
 * Stacks Project, Tag 0EYG, strict henselization paragraph
-* Tags 06LN and 05WS
 * Stacks Project, Tag 0EYG, strict henselization paragraph, using quotient compatibility (Tag 05WS)
   and regularity of strict henselizations (Tag 06LN)
 -/

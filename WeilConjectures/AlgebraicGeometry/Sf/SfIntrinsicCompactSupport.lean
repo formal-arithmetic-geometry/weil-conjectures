@@ -12,13 +12,12 @@ public import WeilConjectures.Compactification.Defs
 /-!
 # Compact-support candidate in the intrinsic constant-ring presentation
 
-This is the same compactification formula, using the published canonical realization
+This is the same compactification formula, using the canonical realization
 of module-valued sheaves as modules over the constant ring sheaf. Compactification
 independence remains confined to the separately specified etale-origin subcategory.
 
 ## References
 
-* Stacks Project, Tags 03DI and 03DA
 * Stacks, Tags 03DI and 03DA
 -/
 

@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.FinitePerfectQuotientMod
 ## References
 
 * Bhatt--Scholze, Proposition 6.6.11, forward implication
-* Lemma 6.6.8
+* Bhatt--Scholze, Lemma 6.6.8
 -/
 
 @[expose] public section

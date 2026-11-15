@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenSt
 ## References
 
 * Stacks Project, Tag 0GMW
-* Tag 0FPQ
 * Stacks Project, Tag 0FPQ
 -/
 

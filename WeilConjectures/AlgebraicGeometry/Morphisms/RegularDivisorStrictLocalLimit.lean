@@ -21,7 +21,6 @@ import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 ## References
 
 * Stacks Project, Tag 0EYG, strict henselization paragraph
-* Tags 04GP, 04HX, 06LN and 05WS
 * Tags 04GP, 04HX, 06LN and 05WS for strict henselization and passage to the quotient
 -/
 

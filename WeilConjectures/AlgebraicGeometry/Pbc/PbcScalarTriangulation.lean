@@ -183,7 +183,7 @@ instance pbcScalarRationalPretriangulated : Pretriangulated (PbcRationalCategory
   ((pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2
     ).choose_spec.choose_spec.2.choose
 
-/-- Expose the existing isomorphism closure of the published integral predicate. -/
+/-- Expose the existing isomorphism closure of the integral predicate. -/
 instance pbcScalarIntegralIsoClosure :
     ObjectProperty.IsClosedUnderIsomorphisms
       (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) :=

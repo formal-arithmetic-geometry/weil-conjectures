@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 ## References
 
-* Stacks Project, Tags 01IB and 01HV
 * Stacks Project, Tag 01IB (quasi-coherent modules on an affine scheme) and Tag 01HV (stalk of the
   associated sheaf)
 -/

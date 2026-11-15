@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusH
 ## References
 
 * Stacks 03D6 and 03EO
-* Stacks 03EO
 -/
 
 @[expose] public noncomputable section

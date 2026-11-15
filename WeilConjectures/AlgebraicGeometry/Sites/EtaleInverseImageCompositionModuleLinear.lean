@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleInverseImageCompositionModul
 ## References
 
 * Stacks Project, Modules on Sites, Tags 03D8 and 03D7
-* Stacks Project, Tags 03D8 and 03D7
 
 ## Implementation details
 

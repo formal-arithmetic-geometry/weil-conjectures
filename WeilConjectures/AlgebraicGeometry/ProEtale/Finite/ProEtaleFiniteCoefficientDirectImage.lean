@@ -50,7 +50,6 @@ then by the universal property of ring sheafification.
 * Stacks Section 07A5
 * Stacks, Modules on Sites, sheafification of modules
 * Stacks, Modules on Sites
-* Stacks
 * Stacks, Tag 04JC
 -/
 

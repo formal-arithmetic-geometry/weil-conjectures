@@ -16,7 +16,6 @@ names expose precisely the right-hand composite of its derived-unit formula.
 ## References
 
 * Stacks Project, Tags 01EZ, 01F8 and 08J6
-* Stacks Project, Tag 01EZ
 * Stacks Project, Tags 01F8 and 0GJV
 -/
 

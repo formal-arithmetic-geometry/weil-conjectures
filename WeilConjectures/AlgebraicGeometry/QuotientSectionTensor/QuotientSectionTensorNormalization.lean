@@ -22,8 +22,6 @@ and geometric realizations, always using the same scalar section models.
 
 ## References
 
-* Stacks 03EL, 06YY, 07A4 and 07A6
-* Stacks 03EK, 03EL, 06YY, 07A4 and 07A6
 * Stacks Tags 03EK, 03EL, 06YY, 07A4 and 07A6
 -/
 

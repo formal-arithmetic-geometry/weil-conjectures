@@ -14,14 +14,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 # Canonical intrinsic finite-coefficient inverse image
 
 The existing arbitrary-ring and continuous-function interfaces are reexported.
-Here the canonical fixed-scalar inverse image is transported through the published
-intrinsic constant-ring realization, without choosing a coefficient identification.
+Here the canonical fixed-scalar inverse image is transported through the intrinsic constant-ring realization, without choosing a coefficient identification.
 
 ## References
 
 * Stacks Project, Modules on Sites
 * Stacks, Tag 00YV
-* Stacks
 * Stacks, Tag 04JC
 * Stacks, Modules on Sites
 * Stacks, Section 0735
@@ -39,7 +37,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- The realization equivalence has its published additive functor. -/
+/-- The realization equivalence has its additive functor. -/
 noncomputable instance sfIntrinsicModuleEquivalence_functor_additive (X : Scheme.{u}) :
     (sfIntrinsicModuleEquivalence X A).functor.Additive :=
   inferInstanceAs (ProEtale.finiteCoefficientIntrinsicRealization X A).Additive

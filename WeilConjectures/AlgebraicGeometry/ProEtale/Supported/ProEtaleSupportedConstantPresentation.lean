@@ -61,14 +61,11 @@ argument below does not require a quasi-compact open complement.
 * Milne, Lectures on Etale Cohomology, Section 9, proof of Theorem 9.4, p. 67
 * Stacks Project, Tag 09AH is the quasi-compact-open model only
 * Milne, Section 9
-* Stacks, Tag 09AE
 * Stacks, Tags 09AE and 00YV
 * Stacks, Tags 09A5 and 03D1
 * Bhatt--Scholze, Lemma 4.2.12
-* Stacks, Tag 09AH
 * Milne Section 9 and Stacks Tag 09AH
 * Milne, Section 9, proof of Theorem 9.4, p. 67
-* finite pro-etale adaptation of Stacks, Tag 09AH
 -/
 
 @[expose] public section

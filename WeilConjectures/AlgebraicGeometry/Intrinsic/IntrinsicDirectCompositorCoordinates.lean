@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicDirectCompositorCoor
 
 ## References
 
-* Stacks 00YV, 03D3, 07A5 and 07A6
 * Stacks 00YV and 03D3 (transport of the module adjunction), 07A5 and 07A6 (K-injective direct image
   and its adjunction)
 -/

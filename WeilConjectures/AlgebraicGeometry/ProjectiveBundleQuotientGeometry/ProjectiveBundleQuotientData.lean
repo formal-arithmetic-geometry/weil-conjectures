@@ -27,12 +27,8 @@ of representatives for isomorphism classes of quotient pairs.
 ## References
 
 * Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE
-* Stacks, Tags 01OB, 01NR, 01O4
-* Stacks, Tag 01OA
-* Stacks, Tags 01O9, 01OA
 * Stacks, Tags 01NQ, 01NR, 01OA
 * Stacks, Tags 01OE, 01OB, 01MN
-* Stacks, Tag 01OE
 -/
 
 @[expose] public section

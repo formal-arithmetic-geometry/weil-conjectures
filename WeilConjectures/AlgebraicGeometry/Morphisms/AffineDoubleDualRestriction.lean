@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 
 ## References
 
-* Stacks Project, Tags 0583 and 0EY6
 * Stacks Project, Tag 0583 (localization of Hom) and Tag 0EY6 proof of (1)
 -/
 

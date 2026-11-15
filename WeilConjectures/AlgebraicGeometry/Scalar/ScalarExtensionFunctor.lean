@@ -174,8 +174,6 @@ and the canonical associativity comparisons.
 
 ## References
 
-* Stacks Tags 06YY and 06YS
-* Stacks 06YY
 * Stacks 06YS, 06YY
 * Stacks 094H, 06YY
 * Stacks 06YQ
@@ -200,8 +198,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Derived extension of scalars on the ordinary constant-ring pro-etale categories.
 
 The functor is computed by a K-flat representative, and the target category carries
-its action through the right tensor factor.  Its construction is the published
-`scalarExtension`; no second tensor or localization is introduced here.
+its action through the right tensor factor.  Its construction is the `scalarExtension`; no second tensor or localization is introduced here.
 -/
 noncomputable def scalarExtensionFunctor {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u}) :

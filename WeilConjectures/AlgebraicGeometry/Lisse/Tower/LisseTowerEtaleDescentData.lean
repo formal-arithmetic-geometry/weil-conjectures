@@ -20,14 +20,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 ## References
 
 * Stacks Tags 099Z, 09B1, 099Y, 09BV and 06YY
-* Stacks Tag 031C
-* Stacks Tag 06YY
-* Stacks Tags 099Z, 09B1, 099Y and 06YY
-* Stacks Tags 06YY, 099Z and 09B1
-* Stacks Tag 0H7J
-* Stacks Tags 031C and 0H7J
 * Stacks Tags 03CY and 0H7J
-* Stacks Tag 03CY
 * Stacks Tags 031C, 03CY and 05RU
 -/
 

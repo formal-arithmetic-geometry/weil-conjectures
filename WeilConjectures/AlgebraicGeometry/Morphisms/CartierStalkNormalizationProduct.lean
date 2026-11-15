@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkFieldCoprod
 
 ## References
 
-* Stacks Project, Tags 0307 and 09EB
 * Stacks Project, Tags 0307, 09EB, 03SF and 03QR
 -/
 

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque
 
 ## References
 
-* Stacks Project, Tags 09T2 and 0A6T
 * Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1
 -/
 

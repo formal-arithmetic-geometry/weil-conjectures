@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjunctionSingle
 
 ## References
 
-* Stacks Project, Tag 0GJU
 * Stacks Project, Tag 0GJU, identification with alpha following the stalk calculation
 * Tag 0GJP
 -/

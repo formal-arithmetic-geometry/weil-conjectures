@@ -11,14 +11,14 @@ public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.FiniteS
 
 /-! # The specified candidate compact-support compositor
 
-This is the four-factor construction formerly in CartesianCompactSupportCompositor.
-It is shared by the Cartesian assembly and its canonical site square so both use
-one declaration without unfolding the four comparison factors.
+## Implementation details
+
+The four-factor construction is shared by the Cartesian assembly and its canonical site square,
+so both use one declaration without unfolding the four comparison factors.
 
 ## References
 
 * Stacks Project, Tags 0F7J and 0F7K
-* Stacks 0F7J
 -/
 
 @[expose] public noncomputable section

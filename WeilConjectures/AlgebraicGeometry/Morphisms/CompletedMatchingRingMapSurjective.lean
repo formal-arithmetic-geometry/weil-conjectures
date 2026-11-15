@@ -14,7 +14,6 @@ import Mathlib.RingTheory.Nakayama
 
 ## References
 
-* Stacks Project, Tags 0BLH, 05ER and 05EU
 * Stacks Project, Tag 05ER, cokernel argument
 * Tags 0BLH and 05EU
 -/

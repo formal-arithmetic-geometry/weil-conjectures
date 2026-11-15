@@ -20,7 +20,6 @@ this lets the kernel compare their specializations without unfolding sheaf funct
 ## References
 
 * Stacks Project, Tags 01OV, 01IO, 03D2 and 03D8
-* Stacks, Tag 03D8
 * Stacks, Tags 02V0 and 09AH
 -/
 

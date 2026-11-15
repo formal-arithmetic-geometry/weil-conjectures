@@ -24,18 +24,9 @@ Existing declarations extracted from `PbcScalarExtension` to bound compilation c
 ## References
 
 * Milne, Section 19
-* Stacks Tag 0D6E
-* Stacks Tag 0D6D
-* Stacks Tag 06YY
 * Stacks Tag 03ER
 * Stacks Tags 06YY and 0943
-* Stacks Tag 03EK
-* Stacks Tag 03EL
-* Stacks Tags 06YY and 0D6D
-* Stacks Tags 03EK and 03EL
-* Stacks Tags 03EK, 06YY and 07A6
 * Stacks Tags 03EK, 06YY, 0D6D and 07A6
-* Stacks Tags 0D6D and 0D6E
 * Stacks Tags 03EL, 0D6D, 0D6E and 07A6
 -/
 
@@ -232,7 +223,7 @@ abbrev pbcScalarRestrictionDirectImage :=
     (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
     (pbcScalarCoefficientInverseSquare l E F i g)
 
-/-- The canonical comparison from termwise pullback to the published derived pullback,
+/-- The canonical comparison from termwise pullback to the derived pullback,
 obtained by conjugating the identity of the common derived direct image. -/
 def pbcPullComparison {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     proEtaleRingDerivedPullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
@@ -374,7 +365,7 @@ theorem pbcScalarRestrict_flatKFlat (T : Scheme.{u})
     (pbcScalarCoefficient_flat l E F i T) K hK.1
   exact ⟨h.1, h.2 hK.2⟩
 
-/-- The termwise pullback is the published module pullback. -/
+/-- The termwise pullback is the module pullback. -/
 theorem pbcModulePull_eq {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
         (pbcCompletedCoefficientIso g d) = pbcActualModulePull g d := by
@@ -394,7 +385,7 @@ def pbcModulePullIso {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A
         (pbcCompletedCoefficientIso g d) ≅ pbcActualModulePull g d :=
   eqToIso (pbcModulePull_eq g d)
 
-/-- The published pullback counit is invertible on K-flat complexes. -/
+/-- The pullback counit is invertible on K-flat complexes. -/
 theorem pbcActualPullComplexCounit_isIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
@@ -445,7 +436,7 @@ private theorem iteratedMate_transport {C₁ C₂ D₁ D₂ : Type*} [Category C
     h.trans (Equiv.apply_symm_apply (conjugateEquiv (aY.comp adjF') (adjE'.comp aX)) δ)
   exact ((Equiv.eq_symm_apply _).2 h')
 
-/-- The ring-module and published module adjunctions have compatible units. -/
+/-- The ring-module and module adjunctions have compatible units. -/
 private theorem pbcModuleAdjunction_unit_compat {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : pbcModules Y (pbcAdicCompletion Y d)) :
     (proEtaleRingModuleAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
@@ -701,7 +692,7 @@ private theorem mapDerivedCategoryFactors_two {C D : Type*} [Category C] [Catego
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The published pullback preserves flat-term K-flat complexes.
+-- The pullback preserves flat-term K-flat complexes.
 private theorem pbcPull_flatKFlat {A : Type (u + 1)} [CommRing A] (dA : AdicCoefficientDatum A)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y dA)) ℤ) (hp : PbcFlatKFlat Y dA P) :
     PbcFlatKFlat X dA (((pbcActualModulePull g dA).mapHomologicalComplex (.up ℤ)).obj P) := by

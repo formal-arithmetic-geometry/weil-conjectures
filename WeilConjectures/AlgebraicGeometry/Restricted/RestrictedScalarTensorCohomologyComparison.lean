@@ -87,9 +87,6 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
 
 ## References
 
-* Stacks Project, Tags 06YY, 06YU and 00YV
-* Stacks Project, Tag 06YY
-* Stacks Project, Tag 06YU
 * Stacks Project, Tags 06YY, 06YU, 03DA and 00YV
 -/
 

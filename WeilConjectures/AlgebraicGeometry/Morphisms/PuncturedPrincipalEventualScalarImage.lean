@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningSectionsLi
 
 ## References
 
-* Stacks Project, Tags 0H3E, 0BK0 and 0AVY
 * Stacks Project, Tags 0H3E (Example 20.39.3), 0BK0 (Lemma 51.8.2) and 0AVY (Lemma 47.11.1)
 -/
 

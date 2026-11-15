@@ -92,5 +92,3 @@ theorem siteComparison_boundedBelow (T : Scheme.{u}) (Λ : Type (u + 1))
   exact ⟨⟨f⟩, inferInstance⟩
 
 end AlgebraicGeometry.ProEtale
-
-/- Stage-2 comparison interface rebuild for the compatible uniform category. -/

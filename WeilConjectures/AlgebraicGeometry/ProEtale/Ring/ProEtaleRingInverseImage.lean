@@ -37,7 +37,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 ## References
 
 * Stacks Project, Tags 09A5, 00YV and 03D2
-* Stacks, Tags 00YV and 03D2
 -/
 
 @[expose] public section

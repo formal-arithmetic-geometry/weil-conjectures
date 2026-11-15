@@ -13,9 +13,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 ## References
 
-* Stacks Project, Tag 09T2
 * Stacks Project, Tags 0A6T and 09T2
-* Stacks Project, Tag 0A6T
 -/
 
 @[expose] public noncomputable section

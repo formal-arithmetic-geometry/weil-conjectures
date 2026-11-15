@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedPrincipalEventualSca
 
 ## References
 
-* Stacks Project, Tags 0BLD, 0H3E, 0BK0 and 0AVY
 * Stacks Project, Tags 0H3E (the pro-isomorphism of cones with ordinary quotients), 0BLD (degree
   zero), 0BK0 and 0AVY
 -/

@@ -18,14 +18,13 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 The module and derived units are those of the recorded constant-ring adjunction.
 The terminal comparison uses its sectionwise direct image, identified with the canonical
-fixed-scalar realization by the published section-normalized comparison. Thus its final
+fixed-scalar realization by the section-normalized comparison. Thus its final
 map is evaluation at the actual terminal base change, X times_Y Y = X.
 
 ## References
 
 * Stacks Project, Tags 07A6, 08J6 and 0D6E
 * Tags 070I, 08BJ and 0FND
-* Stacks Tag 08J6
 * Stacks Tags 03D1 and 0H7J
 -/
 
@@ -83,7 +82,7 @@ noncomputable def proEtaleUnitLerayFixedTerminalIso {X Y : Scheme.{u}} (h : X �
     (Sheaf.ΓNatIsoSheafSections _ _ (terminalIsTerminal (C := X.ProEt))).symm
 
 /-- Terminal-object identification for the recorded direct image. First identify its
-coefficient map with the constant-section map by adjunction. The published comparison
+coefficient map with the constant-section map by adjunction. The comparison
 is normalized on scalar-unit sections. Cancel the realization equivalences and evaluate
 base change at the terminal object, X times_Y Y = X. -/
 noncomputable def proEtaleUnitLerayTerminalIso {X Y : Scheme.{u}} (h : X ⟶ Y) :

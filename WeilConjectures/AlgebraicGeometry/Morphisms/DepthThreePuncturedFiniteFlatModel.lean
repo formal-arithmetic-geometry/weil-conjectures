@@ -20,9 +20,8 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 
 ## References
 
-* Stacks Project, Tags 0BLS, 0BLL, 0BLH, 0BM6 and 09ZL
 * Stacks Project, proof of Tag 0BLS through Tags 0BLL, 0BLH, 0BM6 and 09ZL
-* depth and local cohomology are related by Tag 0AVY
+* Stacks Project, Tag 0AVY
 -/
 
 @[expose] public section

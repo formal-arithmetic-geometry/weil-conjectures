@@ -55,11 +55,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 ## References
 
 * Zheng Construction 4.1
-* Stacks 03EK, 06YY, 07A4
-* Stacks 07A4
-* Stacks 03CZ, 06YY
 * Stacks 03EK, 03CZ, 06YY
-* Stacks 06YN
 * Stacks 06YN, 07A4
 -/
 

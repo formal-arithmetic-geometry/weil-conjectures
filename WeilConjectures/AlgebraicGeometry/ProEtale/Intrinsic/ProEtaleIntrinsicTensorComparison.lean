@@ -38,7 +38,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 ## References
 
 * Stacks Project, Modules on Sites, Tags 03EK and 03EL, and Tag 00YV
-* Stacks Project, Tags 03EK, 03EL and 00YV
 -/
 
 @[expose] public section

@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 ## References
 
 * Stacks Project, Tag 09BH, Proposition 59.74.1, reduction to an irreducible étale neighbourhood
-* component isolation uses Tag 0BA8
+* Stacks Project, Tag 0BA8
 -/
 
 @[expose] public section

@@ -15,8 +15,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 ## References
 
-* the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, step 2
-* expanding determinant inversion in Stacks Project
+* Stacks Project, Tag 0BRT
 -/
 
 @[expose] public section

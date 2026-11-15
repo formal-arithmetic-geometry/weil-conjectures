@@ -56,7 +56,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 ## References
 
 * Stacks Project, Tag 093R, specialized to the small pro-etale topoi
-* Stacks Project, Tag 093R
 -/
 
 @[expose] public section

@@ -83,11 +83,8 @@ the completion units, and the comparison data built from them, are in
 
 ## References
 
-* strict coefficient supplement, Stacks Tags 099M, 099N, 0A07 and 0E48
-* Stacks 099M
+* Stacks Project, Tags 099M, 099N, 0A07 and 0E48
 * Stacks 099M, 06YY
-* Stacks 0A07
-* Stacks 0E48
 -/
 
 @[expose] public noncomputable section

@@ -32,7 +32,6 @@ No ambient pro-etale adjunction is used or assumed.
 
 * Stacks Tag 099R and localization
 * Stacks Tags 099R and 07A5
-* Stacks Tag 099R
 -/
 
 @[expose] public section

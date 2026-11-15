@@ -175,7 +175,6 @@ import WeilConjectures.AlgebraicGeometry.Embedded.EmbeddedIntegralResidueTranspo
 
 ## References
 
-* the integral-models Stacks criterion, Stacks Project Tag 09C1
 * Stacks Project Tag 09C1
 -/
 

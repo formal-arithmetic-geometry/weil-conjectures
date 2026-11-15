@@ -46,7 +46,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteTowerRepr
 
 * Stacks Project, Tags 098T (2), 097D, 04D3 and 00YV
 * Stacks Project, Tags 098T (2) and 097D
-* Tags 04D3 and 00YV
 -/
 
 @[expose] public section

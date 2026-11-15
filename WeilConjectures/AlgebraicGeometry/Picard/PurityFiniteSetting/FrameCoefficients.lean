@@ -26,7 +26,7 @@ namespace WeilConjectures.PurityFiniteSetting
 
 
 /-- The finite clause of the coefficient twists, in fixed-scalar coordinates.
-This reuses the published finite Tate sheaves and exact comparison inverse image. -/
+This reuses the finite Tate sheaves and exact comparison inverse image. -/
 def frameCoefficientTwist (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u}) (d : ℕ) :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient) :=
@@ -34,7 +34,7 @@ def frameCoefficientTwist (P : PurityFiniteSetting.{u})
     (Scheme.finiteEtaleTateTwist X P.exponent P.Coefficient
       (P.exponent_coefficient_eq_zero h) d)
 
-/-- Multiplication of nonnegative finite twists, obtained from the published tensor
+/-- Multiplication of nonnegative finite twists, obtained from the tensor
 powers through the strong monoidal comparison. Degree zero uses its unit constraint. -/
 def frameCoefficientTensorNext (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u}) :

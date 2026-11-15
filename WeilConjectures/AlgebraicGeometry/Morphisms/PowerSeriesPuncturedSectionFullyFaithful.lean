@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionIn
 ## References
 
 * Stacks Project, Tag 0EY9 (Lemma 58.26.1)
-* Stacks Project, Tag 0EY9
-* its proof uses Tags 0BK0, 0EKP and 0EL8
+* Stacks Project, Tags 0BK0, 0EKP and 0EL8
 -/
 
 @[expose] public section

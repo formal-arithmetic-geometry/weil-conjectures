@@ -28,8 +28,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalMo
 ## References
 
 * Stacks Project, Tags 09AJ and 093U
-* Stacks Project, Tags 03CY and 093U
-* Stacks Project, Tags 03CY and 03A0
 * Stacks Project, Tags 03CY, 03A0, 093U, and 00IK
 -/
 

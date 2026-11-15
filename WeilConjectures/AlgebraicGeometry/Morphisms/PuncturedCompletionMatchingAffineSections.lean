@@ -13,9 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineSect
 
 ## References
 
-* Stacks Project, Tags 0BLH, 05ER and 05EU
 * Stacks Project, Tag 0BLH, proof, and the localized comparison in Tag 05ER
-* the algebra compatibility is Tag 05EU
+* Stacks Project, Tag 05EU
 -/
 
 @[expose] public section

@@ -13,7 +13,6 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 ## References
 
-* Stacks Project, Tags 03EL and 06YY
 * Stacks Project, Tags 03EL, 03DA and 06YY
 -/
 

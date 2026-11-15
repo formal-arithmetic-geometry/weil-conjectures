@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerRootLineComputa
 /-!
 # Kummer computations with arbitrary finite ring coefficients
 
-The coefficient sheaf and insertions are the published Kummer module coefficient
+The coefficient sheaf and insertions are the Kummer module coefficient
 functor. Multiplication on the coefficient ring gives its canonical ring action
 on cohomology. Scalar extension uses `ModuleCat.extendScalars`, so no algebra
 structure or flatness assumption is imposed on an arbitrary ring homomorphism.

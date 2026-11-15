@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
 
 ## References
 
-* Stacks Project, Tags 0EYJ, 09EB, 0EYG and 0EYH
 * Stacks Project, Tag 0EYJ, trait paragraph
 * Tags 09EB, 0EYG and 0EYH
 -/

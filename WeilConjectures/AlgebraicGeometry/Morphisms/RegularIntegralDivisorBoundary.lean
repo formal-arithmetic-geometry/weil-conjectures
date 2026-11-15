@@ -17,7 +17,6 @@ import WeilConjectures.RingTheory.RegularRingOfQuotientAway
 
 ## References
 
-* Stacks Project, Tags 00NU, 0EYE and 0EYJ
 * Stacks Project, Tag 01WS (local principal nonzerodivisor description)
 * Stacks Project, Tag 0EYE, proof
 * Tag 00NU

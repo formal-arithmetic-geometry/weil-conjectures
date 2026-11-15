@@ -17,11 +17,8 @@ exchange (`constantExchange_reduction`).
 
 ## References
 
-* Stacks 07A7
-* Stacks 0B56
 * Stacks 07A7, 0D6D, 0E48
 * Stacks 07A7, 0B56, 099M
-* Stacks 099M, 0E48
 
 ## Implementation details
 

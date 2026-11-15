@@ -156,18 +156,18 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Native adic encoding, independently of Weil fixed pairs
 
-The unchanged native declarations formerly in NativeEncodingDerivedOperations are
-separated from its Weil-sheaf imports to make them available before native finiteness.
+## Implementation details
+
+These native declarations do not import the Weil-sheaf files, so that they are available
+before native finiteness.
 
 ## References
 
 * Bhatt--Scholze, Definitions 6.8.1 and 6.8.3
 * Bhatt--Scholze 6.8.1--6.8.3
 * Stacks 03EK
-* Stacks 015F
 * Stacks 015F and 070I
 * Stacks 03D6--03D7
-* Stacks 03D7
 * Stacks 070I and 070Y
 -/
 

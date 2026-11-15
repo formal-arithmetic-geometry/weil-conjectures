@@ -17,7 +17,6 @@ this interface retains the induced maps and additivity needed for complexes.
 ## References
 
 * Stacks Project, Tags 0F6B and 002F
-* Stacks Tag 0F6B
 -/
 
 @[expose] public section

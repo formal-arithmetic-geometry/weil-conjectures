@@ -29,7 +29,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 ## References
 
 * Stacks Project, Tag 09AF, Tag 0GL1
-* Stacks Project, Tag 09AF
 * Stacks Project, Tag 099R
 -/
 

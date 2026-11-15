@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 ## References
 
-* Stacks Project, Tags 033B and 01UA
 * Stacks Project, Tag 033B (smooth algebras over reduced rings), and Tag 01UA (flat morphisms
   locally of finite presentation are open)
 -/

@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 ## References
 
 * EGA II, Remark 4.2.7
-* arbitrary-base descent in Stacks, Tag 0B8W
 * EGA II, Remark 4.2.7, degree-zero case of projective-bundle Picard classification
 * Stacks, Tag 0B8W, for descent to finite-presentation models
 -/

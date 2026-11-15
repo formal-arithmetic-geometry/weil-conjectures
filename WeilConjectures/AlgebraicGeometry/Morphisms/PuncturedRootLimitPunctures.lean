@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 ## References
 
 * Stacks Project, Tags 0BSK, 05N9 and 01YW
-* Stacks Project, Tags 05N9 and 01YW
 -/
 
 @[expose] public section

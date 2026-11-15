@@ -270,11 +270,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (S : Scheme.{u})
   [∀ x : S, Invertible (l : S.residueField x)]
 
-/-- The published completed signed line in degree zero, with no finite-field datum. -/
+/-- The completed signed line in degree zero, with no finite-field datum. -/
 abbrev sfIntegralTwistingObject (m : ℤ) : DerivedCategory (scalarReductionSource l E S) :=
   (DerivedCategory.singleFunctor _ 0).obj (integralTwistLine l E S m)
 
-/-- Intrinsic membership of the published completed signed line. -/
+/-- Intrinsic membership of the completed signed line. -/
 theorem sfIntegralTwistingObject_mem (m : ℤ) :
     sfIntegralConstructible l E S (sfIntegralTwistingObject l E S m) := by
   obtain ⟨p, hlp, hp⟩ := Nat.exists_infinite_primes (l + 1)

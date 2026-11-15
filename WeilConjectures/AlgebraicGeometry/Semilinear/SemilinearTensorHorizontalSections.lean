@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReductio
 ## References
 
 * Zheng Construction 4.1
-* Stacks 03EL
 * Stacks Tags 03EK and 03EL
 -/
 

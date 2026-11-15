@@ -548,7 +548,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstr
 ## References
 
 * Bhatt--Scholze, Definition 6.8.10
-* Stacks Project, Tag 00YV
 * Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3)
 * Stacks 00YV
 

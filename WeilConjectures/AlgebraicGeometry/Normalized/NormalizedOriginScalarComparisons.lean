@@ -51,7 +51,7 @@ def normalizedOriginScalarUnit
     (Functor.mapDerivedCategoryNatIso (normalizedOriginRestrictionUnit J φ hφ) ≪≫
       Functor.mapDerivedCategoryIdIso _)
 
-/-- Direct quotient scalar extension, in the published fixed-ring presentation. -/
+/-- Direct quotient scalar extension, in the fixed-ring presentation. -/
 abbrev normalizedOriginReduction
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {A : Type (u + 1)} [CommRing A]

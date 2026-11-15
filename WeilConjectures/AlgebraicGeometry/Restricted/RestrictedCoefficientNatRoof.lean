@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 ## References
 
 * Stacks Project, Cohomology, Tags 01E4 and 01FB
-* Stacks Project, Tags 01E4 and 01FB
 -/
 @[expose] public section
 set_option autoImplicit false

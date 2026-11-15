@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 
 ## References
 
-* Stacks Project, Tags 0BMA, 0EY7, 0EY6 and 0H2W
 * Stacks Project, Tag 0BMA (local purity), Tag 0EY7 (extension), and Tag 0EY6(2) (uniqueness), and
   Tag 0H2W, final paragraph (the locally Noetherian form)
 -/

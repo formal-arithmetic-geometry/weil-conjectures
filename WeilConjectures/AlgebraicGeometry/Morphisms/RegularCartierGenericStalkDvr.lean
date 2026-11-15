@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 ## References
 
-* Stacks Project, Tags 0EYG and 00PD
 * Stacks Project, Tag 0EYG (the height-one divisor calculation), and Tag 00PD (the one-dimensional
   regular local ring criterion)
 -/

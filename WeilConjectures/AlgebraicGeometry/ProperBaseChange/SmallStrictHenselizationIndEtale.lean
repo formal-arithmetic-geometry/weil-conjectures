@@ -16,7 +16,6 @@ representative colimit with the full affine pointed-neighbourhood colimit.
 
 ## References
 
-* Stacks Project, Tags 04HX and 04GW
 * Stacks Project, Tag 04HX, with independence of the neighbourhood presentation from Tag 04GW
 -/
 

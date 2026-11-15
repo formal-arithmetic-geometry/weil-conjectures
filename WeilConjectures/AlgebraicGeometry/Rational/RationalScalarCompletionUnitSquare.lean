@@ -54,14 +54,12 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 The coefficient maps, derived tensors, raw categories and quotient-tower units are
 those of the imported dependency nodes. Comparison arrows below only orient the
-published canonical comparisons and transport them through the unit-normalized
+canonical comparisons and transport them through the unit-normalized
 ambient quotient comparison.
 
 ## References
 
-* Stacks Project, Tags 0A0E and 0A0G
 * Stacks 099M and 099N (2), (5)
-* Stacks 0A0E and 0A0G
 * Stacks 099M, 099N, 0A0E and 0A0G
 -/
 
@@ -172,7 +170,7 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
   [Algebra ℚ_[l] E] [Algebra ℚ_[l] L]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (i : E →ₐ[ℚ_[l]] L)
 
-/-- The inverse reflected coefficient-square comparison, with the published normalization. -/
+/-- The inverse reflected coefficient-square comparison, with the normalization. -/
 def rationalScalarReflectedBeta {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pbcActualCompletedPull g (pbcIntegralDatum l E) ⋙ pbcEmbeddingAmbientTensor l E L i X ≅
       pbcEmbeddingAmbientTensor l E L i Y ⋙ pbcActualCompletedPull g (pbcIntegralDatum l L) :=

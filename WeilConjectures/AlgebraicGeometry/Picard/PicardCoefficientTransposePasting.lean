@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedSquareVerticalPasting
 ## References
 
 * Stacks Project, Tags 08HY and 0D5S
-* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section

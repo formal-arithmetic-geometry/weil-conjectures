@@ -21,7 +21,6 @@ calculation uses the independent characterization of the quotient completion uni
 
 ## References
 
-* Stacks Tags 091N, 0941 and 099M
 * Stacks Tags 091N, 099M and 0941
 -/
 

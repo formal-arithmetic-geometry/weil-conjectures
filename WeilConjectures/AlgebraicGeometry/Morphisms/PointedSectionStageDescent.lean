@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 ## References
 
-* Stacks Project, Tag 01ZM
 * Stacks Project, Tag 01ZM, morphism descent
 -/
 

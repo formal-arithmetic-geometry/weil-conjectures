@@ -23,7 +23,6 @@ import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquiv
 * Bhatt--Scholze, Lemma 6.8.2(1)
 * Stacks Tag 03DA
 * Stacks Tags 0999, 099B and 0A0E
-* Stacks Project, Tags 099B and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -44,7 +43,7 @@ variable (l : ℕ) [Fact l.Prime]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
     (W : Scheme.{u})
 
-/-- The completed scalar inclusion in the published coefficient presentation. -/
+/-- The completed scalar inclusion in the coefficient presentation. -/
 private theorem pbcScalarModelCoefficientSquare :
     WeilConjectures.completedCoefficientMap l E F i W ≫
         (WeilConjectures.purCoefficientIso l F W).inv =
@@ -91,7 +90,7 @@ private def pbcScalarModelRestrictionIso :
     eqToIso (congrArg SheafOfModules.restrictScalars.{u + 1} h) ≪≫
     (scalarRestrictionCompose _ _).symm
 
-/-- Derived restriction in the published model commutes with the scalar restriction. -/
+/-- Derived restriction in the model commutes with the scalar restriction. -/
 private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcIntegralDatum l F)) :
     (pbcDerivedRestrict (WeilConjectures.purCoefficientIso l E W).inv).obj
         ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) ≅
@@ -195,7 +194,7 @@ private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
 end LocalCriterion
 
 /-- Restriction along the completed scalar inclusion preserves derived completeness in
-the published coefficient model. -/
+the coefficient model. -/
 private theorem pbcScalarModelRestrictionComplete
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :

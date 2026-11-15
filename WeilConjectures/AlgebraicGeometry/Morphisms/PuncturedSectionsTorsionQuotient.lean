@@ -16,10 +16,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 ## References
 
-* Stacks Project, Tags 0BK0, 0A6T, and 09T2
 * Stacks Project, Tag 0BK0, Lemma 51.8.2
 * Tag 0A6T, Lemma 51.2.1
-* and Tag 09T2, Lemma 36.8.1
+* Stacks Project, Tag 09T2
 -/
 
 @[expose] public section

@@ -22,7 +22,6 @@ constructibility.
 ## References
 
 * Stacks Project, Tags 09AJ and 093U
-* Stacks Project, Tag 09AJ
 -/
 
 @[expose] public section

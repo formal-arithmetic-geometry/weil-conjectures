@@ -15,7 +15,6 @@ localized realization; it has no constant-model comparison or algebraic-arrow as
 
 ## References
 
-* Stacks Project, Tags 03CY, 03DA and 06YY
 * Stacks Project, Modules on Sites, Tags 03CY and 03DA
 * Cohomology on Sites, Tag 06YY
 -/

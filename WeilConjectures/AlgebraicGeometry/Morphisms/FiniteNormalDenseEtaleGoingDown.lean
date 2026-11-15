@@ -21,7 +21,6 @@ import Mathlib.RingTheory.IntegralClosure.GoingDown
 
 ## References
 
-* Stacks Project, Tags 00H8, 0357 and 01UA
 * Stacks Project, Tags 00H8 (going down over a normal domain), 0357 (normal components), and 01UA
   (flat finite presentation maps are open)
 -/

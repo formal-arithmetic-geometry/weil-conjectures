@@ -21,7 +21,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 ## References
 
-* Stacks Project, Tags 04TS, 015F and 0F63
 * Stacks Project, Tags 04TS (gluing sheaves), 015F (exact derived functors), and 0F63 (finite
   disjoint union criterion)
 -/

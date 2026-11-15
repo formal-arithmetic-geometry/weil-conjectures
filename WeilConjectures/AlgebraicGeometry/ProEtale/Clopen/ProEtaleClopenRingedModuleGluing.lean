@@ -36,8 +36,6 @@ on sections, morphisms and restriction maps.
 ## References
 
 * Stacks Project, Tags 04TQ, 04TR and 04TS, finite-disjoint module expansion
-* Stacks Project, Tag 04TR
-* Stacks Project, Tag 04TS
 * Stacks Project, Tags 04TQ, 04TR, 04TS and 03DB
 -/
 

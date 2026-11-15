@@ -16,9 +16,7 @@ they do not involve a descended tower or choices of its level markings.
 ## References
 
 * Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03D3, and Cohomology on Sites, Tag 0D6D
-* Stacks Tags 03D2 and 03D3
 * Stacks Tags 03DA and 0D6D
-* Stacks Tags 03CY, 03D2, 03D3 and 0D6D
 * Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03D3 (sheafification and inverse image of
   modules), and Cohomology on Sites, Tag 0D6D (composition)
 -/

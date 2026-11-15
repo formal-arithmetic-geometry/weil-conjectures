@@ -15,10 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line.ProjectiveLineFibr
 ## References
 
 * EGA II, Remark 4.2.7
-* arbitrary-base extension by Stacks, Tag 0B8W
+* Stacks Project, Tag 0B8W
 * EGA II, Remark 4.2.7, printed p.75, the tautological-line clause for projective-bundle
   isomorphisms
-* arbitrary bases follow by finite-presentation descent as in Stacks, Tag 0B8W
 -/
 
 @[expose] public noncomputable section

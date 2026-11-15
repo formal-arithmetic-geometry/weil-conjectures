@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoClosedFibe
 ## References
 
 * Stacks Project, Tag 0EYB, formal completion step
-* Tags 0EYA and 0EY6
 * Stacks Project, formal completion step, with Tags 0EYA and 0EY6(2), (a), (b)
 -/
 

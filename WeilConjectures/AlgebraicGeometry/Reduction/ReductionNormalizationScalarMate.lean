@@ -67,7 +67,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibi
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 
-/-! # The scalar adjunction of the published quotient normalization
+/-! # The scalar adjunction of the quotient normalization
 
 ## References
 

@@ -98,7 +98,7 @@ theorem pullSectionIso_eq (Y : Scheme.{u})
   rfl
 
 /-- The canonical single/unit comparison in the bundled interface, uniquely fixed by the
-published comparison. -/
+comparison. -/
 theorem singleUnit_existsUnique (X : Scheme.{u}) :
     ∃! e : unit Λ X ≅ 𝟙_ (DerivedCategory (Modules Λ X)),
       HEq e (DerivedCategory.singleFunctorObjUnitIso (Modules Λ X)) := by
@@ -107,7 +107,7 @@ theorem singleUnit_existsUnique (X : Scheme.{u}) :
   intro e he
   exact eq_of_heq he
 
-/-- The published single/unit isomorphism in the shared tensor interface. -/
+/-- The single/unit isomorphism in the shared tensor interface. -/
 def singleUnitIso (X : Scheme.{u}) : unit Λ X ≅ 𝟙_ (DerivedCategory (Modules Λ X)) :=
   (singleUnit_existsUnique Λ X).exists.choose
 

@@ -14,10 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOp
 
 ## References
 
-* Stacks Project, Tag 09AH
 * Stacks Tag 09AH, iterated
-* finite-tree argument over Tag 09AH
-* Stacks Tag 09AH
 -/
 
 @[expose] public noncomputable section

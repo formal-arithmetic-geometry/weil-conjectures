@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 * Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
 * Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R
-* Example constant-sheaf and Tags 04TR and 04TS
 * Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS
 * Stacks Project, Tag 0DV5 (3), Tag 0DV6, and Tags 04TR and 04TS
 -/

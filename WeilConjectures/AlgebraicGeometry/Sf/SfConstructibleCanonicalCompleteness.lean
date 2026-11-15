@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotien
 
 /-! # Presentation witnesses imply canonical actual completeness
 
-The hypothesis is the published existential presentation witness. The conclusions
+The hypothesis is the existential presentation witness. The conclusions
 use the actual completed ring, every generating tuple and representative, the
 reflector's canonical representative, and the specified strict quotient-tower unit.
 

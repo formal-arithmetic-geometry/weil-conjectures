@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoeffici
 
 ## References
 
-* Stacks Project, Tags 09B5, 03RZ and 093U
 * Stacks Project, Tags 09B5 and 093U, with the common global partition argument of Tag 03RZ
 -/
 

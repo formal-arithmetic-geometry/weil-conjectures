@@ -48,7 +48,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 ## References
 
 * Stacks Project, Tags 093I, 09AJ and 099Y, using global finite partitions
-* Stacks Project, Tags 093I, 09AJ and 099Y
 
 ## Implementation details
 

@@ -13,8 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsConservative
 
 ## References
 
-* Stacks Project, Tag 09A2
-* Stacks Project, Tag 01GE
 * Stacks Project, Tags 09A2 and 01GE
 -/
 

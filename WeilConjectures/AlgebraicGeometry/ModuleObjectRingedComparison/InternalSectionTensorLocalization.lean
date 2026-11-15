@@ -107,7 +107,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalSectionTensorLocalizatio
 
 ## References
 
-* Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9
 * Stacks 03CV, 03EK, 06YL, 06YS and 08J9
 -/
 

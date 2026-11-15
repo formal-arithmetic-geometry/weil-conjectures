@@ -22,7 +22,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.C
 
 ## References
 
-* Stacks 015F, 07A7
 * Stacks Project, Tags 015F and 07A7
 -/
 

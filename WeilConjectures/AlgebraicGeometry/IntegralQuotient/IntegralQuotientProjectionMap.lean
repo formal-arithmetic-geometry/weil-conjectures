@@ -21,7 +21,6 @@ n + 1 and every tensor product is the ordinary, uncompleted derived tensor produ
 
 * Stacks 0D6D, cartesian coefficients
 * Stacks 0G7E
-* Stacks 0D6D
 * Stacks 0944, 0B56
 -/
 

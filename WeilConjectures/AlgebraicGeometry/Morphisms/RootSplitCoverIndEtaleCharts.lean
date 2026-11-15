@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOrbits
 
 ## References
 
-* Stacks Project, Tag 0EYG
 * Stacks Project, Tag 0EYG, strict henselization and intermediate-root paragraphs
 * Tags 02LA and 02VN for descent from the punctured root cover
 -/

@@ -11,14 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanon
 /-!
 # Ordinary pro-etale operations with arbitrary constant coefficients
 
-This supplies the arbitrary-constant-ring specialization of the published ring-sheaf
+This supplies the arbitrary-constant-ring specialization of the ring-sheaf
 operations. The intrinsic finite-coefficient interface remains available.
 
 ## References
 
 * Stacks Project, Modules on Sites, and Tag 0H7J
-* Stacks, Tag 0H7J
-* Stacks
 * Stacks, Section 0735
 -/
 

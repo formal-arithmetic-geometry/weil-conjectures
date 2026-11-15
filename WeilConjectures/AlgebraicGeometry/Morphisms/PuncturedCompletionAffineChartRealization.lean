@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChar
 ## References
 
 * Stacks Project, Tag 0BLH, first two proof paragraphs
-* Tag 05EL
 * Tag 05EL, item (1)
 -/
 

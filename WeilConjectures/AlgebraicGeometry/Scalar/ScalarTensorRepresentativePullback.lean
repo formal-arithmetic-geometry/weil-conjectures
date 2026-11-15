@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarTensorRepresentativ
 
 ## References
 
-* Stacks Project, Tags 07A4 and 0FPH
 * Stacks 07A4 and 0FPH
 -/
 

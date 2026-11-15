@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion
 
 ## References
 
-* Stacks Project, Tags 0AVY and 0BK0
 * Stacks Project, Tag 0BK0, Lemma 51.8.2(2), Tag 0A6T, Lemma 51.2.1, and Tag 0AVY, Lemma 47.11.1
   (the Ext-colimit description)
 -/

@@ -13,15 +13,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 ## References
 
-* Stacks Tags 0944 and 099M
-* Stacks 0944, 099M
-* Stacks 0941
-* Stacks 0A07
-* Stacks 099M, 099N
-* Stacks 0B56, 099M
-* Stacks 099M, 0E48
 * Stacks 0A07, 099N
-* ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
+* Stacks Project, Tags 099M, 099N, 0E48, 0941, 0B56 and 0944
 -/
 
 @[expose] public noncomputable section

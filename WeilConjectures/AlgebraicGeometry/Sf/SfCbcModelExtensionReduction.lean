@@ -19,11 +19,8 @@ import all WeilConjectures.AlgebraicGeometry.Sf.SfCbcExtensionModel
 * Stacks Project, Modules on Sites, Tags 03D1 and 03DA
 * Stacks Project, Modules on Sites, Tag 03D1
 * Stacks Project, Modules on Sites, Tag 03DJ
-* Stacks Project, Tag 099L
 * Stacks Project, Tags 00VC and 099L
 * Stacks Project, Sites, Tag 00XZ
-* Stacks Project, Tags 00VC and 03D1
-* Stacks Project, Tags 03D1 and 03DA
 * Stacks Project, Categories, Tag 001J
 * Stacks Project, Modules on Sites, Tags 03DA and 03DI
 * Stacks Project, Modules on Sites, Tags 03DA and 03DJ

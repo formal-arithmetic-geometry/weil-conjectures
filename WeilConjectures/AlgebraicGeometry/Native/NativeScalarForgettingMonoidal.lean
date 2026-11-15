@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 ## References
 
 * Stacks Tags 03EK and 07A4, relative tensor and extension of scalars
-* Stacks Tags 03EK and 07A4
 -/
 
 @[expose] public section

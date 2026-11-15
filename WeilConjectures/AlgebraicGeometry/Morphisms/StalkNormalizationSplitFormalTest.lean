@@ -28,7 +28,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit
 ## References
 
 * Stacks Project, Tag 0EYJ, the completion and splitting paragraphs
-* Tags 05D5, 00MB, 0EY9 and 0EY6
 * Stacks Project, Tag 0EYJ, last three paragraphs
 * Tags 05D5, 00MB, 0EY9 and 0EY6(2), (a), (b)
 -/

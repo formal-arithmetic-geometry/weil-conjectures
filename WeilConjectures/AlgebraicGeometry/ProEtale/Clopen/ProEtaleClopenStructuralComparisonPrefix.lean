@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenTotalTens
 
 ## References
 
-* Stacks Project, Tag 0GMW
-* Tag 0FPQ
 * Stacks Project, Tags 0GMW and 0FPQ
 -/
 

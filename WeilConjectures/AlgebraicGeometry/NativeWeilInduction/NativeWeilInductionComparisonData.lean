@@ -20,9 +20,7 @@ Weil objects and fixed pairs in the ordinary derived category is asserted.
 
 ## References
 
-* Stacks Tags 079P, 08BJ, 070Y
-* native framework and comparison proof step 4, Stacks Tags 079P and 08BJ
-* comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y
+* Stacks Project, Tags 079P, 08BJ and 070Y
 -/
 
 @[expose] public noncomputable section

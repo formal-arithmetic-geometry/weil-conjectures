@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 ## References
 
 * Stacks Project, Tags 08J9 and 08JC
-* Stacks Project, Tag 08JC
 -/
 
 @[expose] public noncomputable section

@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 ## References
 
-* Stacks Project, Tags 01MY and 01N2
 * Stacks Project, Tag 01N2, clause (3), standard-open proof
 * Tag 01MY, the map on localized graded modules
 -/

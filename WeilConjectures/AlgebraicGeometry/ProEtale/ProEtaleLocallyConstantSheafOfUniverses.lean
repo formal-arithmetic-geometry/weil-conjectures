@@ -32,10 +32,8 @@ no data is chosen from an existence assertion.
 ## References
 
 * Bhatt--Scholze, *The pro-etale topology for schemes*, Definition 7.3.1(1)
-* the module version of Bhatt--Scholze 7.3.1(1)
-* the constant-sheaf construction in Bhatt--Scholze 7.3.1(1)
+* Bhatt--Scholze, Lemma 7.3.1(1)
 * Bhatt--Scholze 7.3.1(1), module version
-* localization of the constant sheaf, Bhatt--Scholze 7.3.1(1)
 * Bhatt--Scholze 7.3.1(1)
 -/
 

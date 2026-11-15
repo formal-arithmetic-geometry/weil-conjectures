@@ -16,7 +16,6 @@ import WeilConjectures.RingTheory.Smooth.AugmentationCompletionPowerSeries
 
 ## References
 
-* Stacks Project, Tags 0EYB, 05D5 and 00MB
 * Stacks Project, Tag 0EYB, the completion paragraph
 * Tags 05D5 and 00MB
 -/

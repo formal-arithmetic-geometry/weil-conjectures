@@ -67,10 +67,8 @@ Scalar tensors use the existing sheafified tensor, with scalar written first.
 
 ## References
 
-* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified quotient
-  towers
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4)
 * Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4) for completed pullback
-* not a quoted assertion of Bhatt--Scholze
 -/
 
 @[expose] public noncomputable section

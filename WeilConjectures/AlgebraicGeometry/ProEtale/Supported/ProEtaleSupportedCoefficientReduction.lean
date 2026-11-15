@@ -57,7 +57,6 @@ existence assertion for a Kummer class and no chosen map or resolution.
 * Stacks 03D0
 * Stacks 07A6
 * Stacks 0A45 and 09A5
-* the canonical supported constant sheaf, Stacks 09A5
 -/
 
 @[expose] public noncomputable section
@@ -146,7 +145,7 @@ def IsCartierDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
             (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ).mapDerivedCategory.map f)
 
 /-- The pro-etale reduction equation; the coefficient maps preserve constants and
-send x tensor b to x tensor bar(b) in the published finite twists. -/
+send x tensor b to x tensor bar(b) in the finite twists. -/
 @[irreducible]
 def CartierKummerReduction (c : CartierKummerFamily l E) : Prop :=
   ∀ (a b : ℕ) (hab : a ≤ b) {D T : Scheme.{u}} (i : D ⟶ T)

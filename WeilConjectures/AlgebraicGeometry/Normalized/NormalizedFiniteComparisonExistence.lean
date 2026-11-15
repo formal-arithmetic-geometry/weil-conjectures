@@ -64,7 +64,6 @@ K-flat representatives. Uniqueness is proved separately in the parent module.
 
 ## References
 
-* Stacks 099N, 03DI and 06XN
 * Stacks 099N, 03DI, 06XN
 -/
 

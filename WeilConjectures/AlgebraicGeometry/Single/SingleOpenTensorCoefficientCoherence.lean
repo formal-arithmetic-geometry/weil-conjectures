@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 ## References
 
 * Stacks Project, Tags 06YJ, 0D5S and 01JR
-* Stacks Project, Tags 06YJ and 0D5S
 -/
 
 @[expose] public section

@@ -59,11 +59,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 
 /-!
-# Normalized comparison with the published derived tensor
-
-## References
-
-* Stacks Project
+# Normalized comparison with the derived tensor
 -/
 
 @[expose] public noncomputable section
@@ -93,7 +89,7 @@ private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
   rfl
 
 -- Compare the two normalized representative interfaces without unfolding their tensor data.
-/-- A tensor model is naturally identified with the published derived tensor, with
+/-- A tensor model is naturally identified with the derived tensor, with
 its specified representative comparison. -/
 theorem ringedProjectionTensorModelIso (a : TensorModel R) :
     ∃ e : SheafOfModules.siteDerivedTensorIndependentCoefficients J R ≅ a.functor,

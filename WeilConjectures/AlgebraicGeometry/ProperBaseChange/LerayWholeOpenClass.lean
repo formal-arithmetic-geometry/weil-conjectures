@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormula
 ## References
 
 * Stacks Project, Tags 01E4, 01F4 and 01FB
-* Stacks Project, Tags 01E4 and 01F4
 -/
 
 @[expose] public section

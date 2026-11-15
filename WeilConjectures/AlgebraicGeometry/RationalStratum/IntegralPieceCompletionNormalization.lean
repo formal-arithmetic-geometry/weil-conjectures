@@ -44,7 +44,6 @@ fractions, including the separate open and closed maps.
 
 * Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and Remark
   6.8.15, pp. 59--62
-* Stacks Tag 03EK
 * Bhatt--Scholze, Lemma 6.8.2(2)
 * Stacks Tags 00CM, 03CY and 03EK
 * Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Strict.StrictBaseClosedPointLocalizatio
 
 ## References
 
-* Stacks Project, Tag 0GJU
 * Stacks Project, Tag 0GJU, first two paragraphs of the proof
 -/
 

@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 ## References
 
-* Stacks Project, Schemes, Tag 01IE, affine extension lifting, together with the proved affine
-  finite locally free section criterion in `LocallyFreeRank`
+* Stacks Project, Schemes, Tag 01IE
 -/
 
 @[expose] public section

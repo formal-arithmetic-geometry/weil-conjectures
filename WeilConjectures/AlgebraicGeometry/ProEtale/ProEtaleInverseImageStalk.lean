@@ -53,8 +53,6 @@ and reflection of equality at image geometric points are stated in both coeffici
 
 ## References
 
-* Stacks Project, Tags 05V1 and 0F4F
-* pro-etale geometric points and neighbourhoods, Tags 0F6B, 0F6C and 0993
 * Stacks Project, Tags 05V1, 0F4F, 0F6B, 0F6C and 0993
 -/
 

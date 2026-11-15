@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 ## References
 
-* Stacks Project, Tags 08DW and 06YJ
 * Stacks Project, Tag 08DW, compatibility with open restriction, and Tag 06YJ
 -/
 

@@ -260,13 +260,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 
 * Hemo--Richarz--Scholbach, Proposition 4.3(1), equation (4.1), and its globalization over the
   w-contractible affine basis
-* the canonical comparison specifications of Stacks 07A4 and HRS (4.1)
-* Stacks 07A4 and 0G7D
+* Stacks Project, Tag 07A4, and Hemo--Richarz--Scholbach, (4.1)
 * HRS Section 3
 * HRS (4.1)
 * Stacks 03EL, 07A4
 * Stacks 07A4, 0G7D
-* Stacks 08J9
 * HRS (4.1), Stacks 08J9
 * HRS Proposition 4.3(1), (4.1)
 * HRS (4.1), and the recorded profinite-point composition comparisons
@@ -392,9 +390,7 @@ def exactEvaluation {C : Type c} [Category.{v + 1} C] [Abelian C]
   evaluationComparison F.mapDerivedCategory t
 
 /-- The comparison beta, defined before any invertibility assertion. Its right-tensor
-transpose is the inverse tensor comparison followed by pullback of evaluation.
-The native left-tensor adjunction writes K first; symmetry writes the same map with
-the Hom factor first as in the source, using the native Koszul braidings. -/
+transpose is the inverse tensor comparison followed by pullback of evaluation. -/
 def comparison (X : Scheme.{u}) : HomComparisonFamily (derivedPull Λ X) :=
   exactEvaluation (pull Λ X) (tensorComparison Λ X)
 

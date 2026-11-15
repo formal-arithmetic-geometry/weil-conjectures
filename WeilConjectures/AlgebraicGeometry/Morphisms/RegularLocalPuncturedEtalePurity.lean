@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthThreePuncturedEtaleLifti
 
 ## References
 
-* Stacks Project, Tag 0BMA
 * Stacks Project, Tag 0BMA, assertion (1)
 -/
 

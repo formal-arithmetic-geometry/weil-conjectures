@@ -20,14 +20,8 @@ only collect the coefficient data and equations appearing in the hypotheses.
 ## References
 
 * Stacks Project, Tag 03EK, section-tensor-product
-* Stacks 03EK and 09A5
-* Stacks 03EK
-* Stacks 03EL
 * Stacks 03EK and 03EL
-* Stacks 03D2
-* Stacks 09A5 and 00WX
 * Stacks 03D2, 09A5 and 00WX
-* Stacks 03D2 and 03EK
 -/
 
 @[expose] public noncomputable section

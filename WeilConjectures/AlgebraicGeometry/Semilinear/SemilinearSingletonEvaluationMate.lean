@@ -117,7 +117,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 ## References
 
 * Zheng Construction 4.1
-* Stacks 06YT and 0FND
 * Stacks 06YT, 0FND
 -/
 

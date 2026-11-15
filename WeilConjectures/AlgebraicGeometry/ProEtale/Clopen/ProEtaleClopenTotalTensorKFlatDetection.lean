@@ -50,11 +50,9 @@ its own component and zero elsewhere. This covers every zero insertion supplied 
 ## References
 
 * Stacks Project, Tag 0GMW and its bilinear universal property
-* Tags 06YN and 0FPQ
 * Stacks 03D7
 * Stacks 04TR
 * Stacks 06YN
-* Stacks 0GMW
 * Stacks 0FPQ
 * Stacks Project, Tag 0GMW and the following bilinear universal property
 * Tag 03ER (3)

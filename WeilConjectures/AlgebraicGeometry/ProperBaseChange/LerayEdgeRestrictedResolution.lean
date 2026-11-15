@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LerayWholeOpenClass
 
 ## References
 
-* Stacks Project, Tags 01E4, 01F4 and 01FB
 * Stacks Project, Tag 01E4
 * Tag 01F4(2), and Tag 01FB
 -/

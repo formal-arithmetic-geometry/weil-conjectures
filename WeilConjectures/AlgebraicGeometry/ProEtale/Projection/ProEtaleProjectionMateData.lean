@@ -22,7 +22,6 @@ model. Arbitrary independently chosen shift structures do not suffice.
 ## References
 
 * Stacks, Cohomology on Sites, Tags 06YU, 07A4, 07A6 and 0B56
-* Stacks, Tags 06YU, 07A4, 07A6 and 0B56
 -/
 
 @[expose] public noncomputable section

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 
 ## References
 
-* Stacks Project, Tags 01QQ and 0H3E
 * Stacks Project, Tag 01QQ (affine closed subschemes), and Tag 0H3E (the ordinary quotient sheaf in
   the comparison)
 -/

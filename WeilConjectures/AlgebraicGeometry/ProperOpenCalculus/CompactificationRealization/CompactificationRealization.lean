@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Whiskering
 ## References
 
 * Stacks 0F7J--0F7K, conjugation by the fixed realization equivalences
-* Stacks 0F7K
 -/
 
 @[expose] public noncomputable section

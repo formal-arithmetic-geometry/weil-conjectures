@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 ## References
 
 * Stacks Project, Tags 03DI and 03DJ
-* Stacks 03DJ
 -/
 
 @[expose] public noncomputable section

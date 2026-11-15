@@ -16,7 +16,6 @@ operations below use that map. No replacement of the small pro-etale site is mad
 
 ## References
 
-* Stacks Project, Tag 09AH
 * Stacks 09A5
 * Stacks 03D2
 * Stacks 03D6

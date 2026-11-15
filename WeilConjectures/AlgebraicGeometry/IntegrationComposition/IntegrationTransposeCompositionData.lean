@@ -120,7 +120,7 @@ def theta (f : X ⟶ Y) [HasCompactification f]
       ((derivedTensor (ModuleCat.{u + 1} A) Y).obj L).map (adj.counit.app (𝟙_ _)) ≫
       (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y L).hom)
 
-/-- Exact pullback of tensor, using the published K-flat tensor comparison and exact descent. -/
+/-- Exact pullback of tensor, using the K-flat tensor comparison and exact descent. -/
 def pullTensorIso (f : X ⟶ Y) (K M : DerivedCategoryModule A Y) :
     (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
       (((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).obj M) ≅

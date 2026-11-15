@@ -21,11 +21,8 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoUniqueness
 
 ## References
 
-* Stacks Project, Tag 0GL6, Tags 07A4, 0G7E and 07A7
-* Stacks 07A4, 0G7E and 07A7
-* Stacks 07A4 and 0G7E
 * Stacks 0GL6
-* sites-cohomology.tex 07A4, 0G7E and 07A7
+* Stacks Project, Tags 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section

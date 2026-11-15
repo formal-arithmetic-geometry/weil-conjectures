@@ -33,10 +33,8 @@ specialization also retains the noninvertible completed coefficient structure ma
 
 ## References
 
-* Stacks Tags 03D8, 0D6D and 099N
 * Stacks Tag 03D8
 * Stacks Tag 0D6D
-* Stacks 099N
 * Stacks Tag 099N
 -/
 @[expose] public noncomputable section

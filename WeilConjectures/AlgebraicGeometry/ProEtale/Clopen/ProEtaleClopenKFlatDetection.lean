@@ -17,7 +17,6 @@ acyclicity and zero insertion.
 ## References
 
 * Stacks Project, Tags 06YN and 0FPQ
-* Tag 06YN
 -/
 
 @[expose] public noncomputable section

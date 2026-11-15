@@ -16,8 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorReduction
 * Zheng, Construction 4.1 and Proposition 4.17
 * Stacks Tags 06YY, 07A4, 07A6 and 08J9
 * Zheng Construction 4.1
-* Stacks 07A4 and 07A6
-* Stacks 07A4, 07A6 and 08J9
 -/
 
 @[expose] public noncomputable section

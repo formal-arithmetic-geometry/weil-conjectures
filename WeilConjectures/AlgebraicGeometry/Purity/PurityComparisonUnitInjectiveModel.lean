@@ -16,7 +16,7 @@ set_option autoImplicit false
 
 ## References
 
-* Lemma Tags 0DVC and 09T5
+* Stacks Project, Tags 0DVC and 09T5
 -/
 
 @[expose] public section

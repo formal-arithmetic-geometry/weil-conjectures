@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 * Bhatt--Scholze, Remark 6.8.15, p. 62
 * Stacks Tags 03CB, 0D6D, 07A4, 099N
 * Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0
-* BS Remark 6.8.15
 -/
 
 @[expose] public noncomputable section

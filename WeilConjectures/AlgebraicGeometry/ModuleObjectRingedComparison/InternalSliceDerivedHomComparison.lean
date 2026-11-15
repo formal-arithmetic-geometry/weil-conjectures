@@ -127,20 +127,12 @@ import Mathlib.Algebra.Ring.Ext
 
 ## References
 
-* Stacks Project, Tags 03DH, 08J9 and 08JB
-* Stacks 08J9
 * Stacks 08JB, Step 5
 * Stacks 00YV, 03DH
 * Stacks 05RU
-* Stacks 03DH, 08JB
-* Stacks 03EK
-* Stacks 06YS
-* Stacks 03DH, 06YL
-* Stacks 06YL
 * Stacks 03EK, 06YL
 * Stacks 06YS, 08J9
 * Stacks 08J9, Step 5
-* Stacks 08J9, 08JB
 -/
 
 @[expose] public noncomputable section

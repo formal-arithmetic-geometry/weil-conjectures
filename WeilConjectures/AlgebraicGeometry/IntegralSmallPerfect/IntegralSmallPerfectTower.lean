@@ -21,7 +21,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexG
 ## References
 
 * Stacks Tags 064Z and 09C6
-* Stacks Tag 064Z
 -/
 
 @[expose] public noncomputable section

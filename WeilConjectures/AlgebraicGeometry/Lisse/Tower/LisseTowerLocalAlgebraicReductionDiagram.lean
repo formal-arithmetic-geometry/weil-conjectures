@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantUnb
 ## References
 
 * Stacks Project, Tag 09BV, and the bounded-derived local-constancy argument in amplification (c)
-* Stacks Project, Tag 09BV
 -/
 
 @[expose] public noncomputable section

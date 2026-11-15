@@ -20,7 +20,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 ## References
 
-* Stacks Project, Tag 09AF, Tag 0GL1
 * Stacks Project, Tag 09AF
 * Tag 0GL1
 -/

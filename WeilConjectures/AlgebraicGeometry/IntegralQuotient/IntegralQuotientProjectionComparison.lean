@@ -21,13 +21,8 @@ modulo a uniformizer. Positive levels are indexed by n + 1, as in the dependency
 
 ## References
 
-* Stacks Project, Tags 0B56, 07A4, 07A6 and 0D6D
 * Stacks 07A4, change-of-rings specialization
 * Stacks 07A4, identity-topos scalar extension
-* Stacks 07A4 and 0D6D
-* Stacks 07A4
-* Stacks 0B56
-* Stacks 0B56 and 07A6
 * Stacks 0B56, 07A4, 07A6, 0D6D
 -/
 

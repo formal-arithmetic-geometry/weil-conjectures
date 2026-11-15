@@ -49,7 +49,6 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 ## References
 
-* Stacks Project, Tags 04J0 and 07A4
 * Stacks Project, Modules on Sites, Tag 04J0
 * Cohomology on Sites, Tag 07A4
 -/

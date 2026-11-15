@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 ## References
 
-* Stacks Project, Tags 03CY, 03DA and 00YV
 * Stacks Project, Tags 03CY, 03DA, 00YV and 06YU
 -/
 

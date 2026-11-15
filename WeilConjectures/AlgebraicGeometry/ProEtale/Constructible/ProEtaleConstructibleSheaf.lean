@@ -25,7 +25,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstant
 
 ## References
 
-* compare Stacks Tag 09AJ, whose affine-local convention differs from this global one
+* Stacks Project, Tag 09AJ (with an affine-local convention)
 
 ## Implementation details
 

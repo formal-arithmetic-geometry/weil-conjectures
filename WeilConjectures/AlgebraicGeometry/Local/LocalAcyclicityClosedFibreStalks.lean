@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 ## References
 
-* Stacks Project, Tag 0GJU
 * Stacks Project, Tag 0GJU, displayed stalk calculation
 -/
 

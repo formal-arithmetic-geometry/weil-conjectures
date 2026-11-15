@@ -343,8 +343,7 @@ private theorem directComp_hom_apply
   unfold directComp
   exact (constantData h k A).hd N U m
 
-/-- The published finite-coefficient comparison is localization of the published
-ordinary module comparison, with its tensor-unit normalization. -/
+/-- The finite-coefficient comparison is localization of the ordinary module comparison, with its tensor-unit normalization. -/
 theorem proEtaleConstantRingPullbackComposition_eq_mapModuleComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] [Finite A] :

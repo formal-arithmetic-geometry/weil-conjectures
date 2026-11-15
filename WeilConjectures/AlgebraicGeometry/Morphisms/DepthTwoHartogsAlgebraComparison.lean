@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 ## References
 
 * Stacks Project, Tag 0E9I
-* stalks as filtered colimits, Tag 009E
+* Stacks Project, Tag 009E
 -/
 
 @[expose] public section

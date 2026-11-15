@@ -80,7 +80,6 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 ## References
 
-* the residue test, proof step 3, and Stacks Project Tags 0GMW and 03EI
 * Stacks Project, Modules on Sites, Tags 0GMW (tensor and sheafification) and 03EI (exact
   sheafification)
 -/

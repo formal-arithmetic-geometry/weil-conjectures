@@ -18,7 +18,6 @@ with TensorProduct.toIntegralClosure_bijective_of_isLocalization.
 
 ## References
 
-* Stacks Project, Tags 0307, 035I and 02KH
 * Stacks Project, Tag 0307 (localization of integral closure), Tag 035I, and Tag 02KH (flat base
   change of sections, degree zero)
 -/

@@ -13,9 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 ## References
 
-* Stacks Project, Tags 03DI and 03DJ
 * Stacks, Tags 03DI and 03DJ
-* Stacks, Tag 03DJ
 -/
 
 @[expose] public section

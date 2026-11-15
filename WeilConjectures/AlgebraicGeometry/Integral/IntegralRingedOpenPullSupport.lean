@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RingedRestrictionExchange.RingedOrdinar
 ## References
 
 * Stacks Project, Tags 03DI, 04J0 and 09AE, ringed localization and extension by zero
-* Stacks Project, Tags 03DI, 04J0 and 09AE
 -/
 
 @[expose] public noncomputable section

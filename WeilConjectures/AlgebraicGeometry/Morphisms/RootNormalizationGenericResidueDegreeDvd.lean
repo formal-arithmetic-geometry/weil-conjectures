@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalk
 
 ## References
 
-* Stacks Project, Tags 09EB and 0307
 * Stacks Project, Tag 09EB (Galois DVR degree formula) and Tag 0307 (localization of integral
   closure)
 -/

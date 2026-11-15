@@ -21,7 +21,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerScalar
 
 ## References
 
-* Stacks Project, Tag 07A6
 * Stacks 07A6
 -/
 

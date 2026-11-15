@@ -21,7 +21,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 ## References
 
 * Stacks Project, Tags 08HZ, 08HY, 0DJ9 and 013N--013O
-* Stacks Project, Tags 08HZ, 08HY and 0DJ9
 * Tags 013N--013O for strictification of the resolved diagram
 -/
 

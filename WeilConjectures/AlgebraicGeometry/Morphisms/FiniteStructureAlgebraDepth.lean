@@ -18,7 +18,6 @@ import Mathlib.RingTheory.Regular.Flat
 ## References
 
 * Stacks Project, Tag 0AUK, applied as in the proof of Tag 0EY6(2)
-* Stacks Project, Tag 0AUK
 * Tag 0EY6, proof of (2)
 -/
 

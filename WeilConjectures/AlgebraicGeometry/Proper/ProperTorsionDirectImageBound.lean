@@ -37,7 +37,6 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 ## References
 
 * Stacks Project, Etale Cohomology, Tag 095U
-* Stacks Project, Tag 095U
 -/
 
 @[expose] public section

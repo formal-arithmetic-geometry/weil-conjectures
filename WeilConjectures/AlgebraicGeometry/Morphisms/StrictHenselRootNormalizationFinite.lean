@@ -38,7 +38,6 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 ## References
 
-* Stacks Project, Tags 0EYG, 0EYH and 032L
 * Stacks Project, Tag 0EYG, root-algebra paragraph, Tag 0EYH, local regularity verification, and Tag
   032L (finite separable integral closure)
 -/

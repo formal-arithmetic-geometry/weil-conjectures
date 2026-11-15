@@ -224,9 +224,7 @@ theorem postnikovComparison_condition (K : CochainComplex A ℤ) :
   simp [hzero]
 
 /-- The canonical comparison with the sequential derived limit: its first coordinate
-is the family K -> tau_(>=-n) K and its second coordinate is zero. Mathlib's
-mappingCocone is Cone(1-T)[-1], with the same first projection as the source's (x,y)
-coordinates; the zero second coordinate is unchanged by the cone sign convention. -/
+is the family K -> tau_(>=-n) K and its second coordinate is zero. -/
 def postnikovComparison (K : CochainComplex A ℤ) :
     K ⟶ WeilConjectures.integralOperationsRoos (postnikovTower K) :=
   CochainComplex.mappingCocone.lift

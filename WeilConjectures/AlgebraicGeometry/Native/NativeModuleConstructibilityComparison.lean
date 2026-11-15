@@ -173,7 +173,6 @@ The comparison to native modules is normalized by the canonical coefficient real
 ## References
 
 * Stacks 03CW, 03CY, 03EK and 05RU
-* Stacks 03CW
 * Stacks 03CW, ordinary presentation in the module comparison
 * Stacks 05RU and the size convention in the module comparison
 -/

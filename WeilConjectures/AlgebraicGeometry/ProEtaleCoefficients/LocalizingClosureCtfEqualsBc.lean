@@ -122,7 +122,7 @@ def finiteRingTruncationFailure (ℓ : ℕ) : Prop :=
         ((DerivedCategory.TStructure.t.truncGE 0).obj K)
 
 /-- The Tor-amplitude, boundedness, and localizing-closure assertions for the five
-coefficient rings in the source statement. The degree-zero object associated to a module
+coefficient rings. The degree-zero object associated to a module
 is represented by `DerivedCategory.singleFunctor`. -/
 def localizingClosureCtfEqualsBcAssertions
     (ℓ : ℕ) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]

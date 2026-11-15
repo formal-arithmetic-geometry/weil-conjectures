@@ -129,7 +129,6 @@ import WeilConjectures.CategoryTheory.ClosedScalarHom.ClosedScalarHomComparison
 
 ## References
 
-* Stacks Project, Tags 08J9, 08JA and 08JB
 * Stacks 06YS
 * Stacks 06YL
 * Stacks Project, Tags 08J9, 08JA, 08JB

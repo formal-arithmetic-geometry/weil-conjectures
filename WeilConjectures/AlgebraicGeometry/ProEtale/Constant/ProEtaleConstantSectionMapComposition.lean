@@ -37,8 +37,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 ## References
 
-* Stacks Project, Tag 09A5, section `section-morphism`, final paragraphs
-* Stacks Project, Tag 09A5, section `section-morphism`
+* Stacks Project, Tag 09A5, final paragraphs
 -/
 
 @[expose] public section

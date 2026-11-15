@@ -17,7 +17,6 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 ## References
 
 * Stacks Project, Tags 0BLH, 05ER and 05EU
-* the localization argument in Stacks Project, Tag 05ER
 * Stacks Project, Tag 05ER, torsion-submodule base-change kernel argument
 -/
 

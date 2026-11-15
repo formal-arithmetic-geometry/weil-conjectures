@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 
 * Stacks Project, Tag 0EZJ, generic-fibre limit assertion
 * Stacks Project, Tag 0EZJ, the function-field part of the generic-fibre limit assertion
-* the affine ring calculation is the same limit calculation as Tag 01ZA
+* Stacks Project, Tag 01ZA
 -/
 
 @[expose] public section

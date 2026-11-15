@@ -16,7 +16,6 @@ are the canonical derived mates.
 
 ## References
 
-* Stacks Tags 03DA and 098K
 * Stacks Tags 03DA and 098K, pasting coefficient and localization mates
 -/
 

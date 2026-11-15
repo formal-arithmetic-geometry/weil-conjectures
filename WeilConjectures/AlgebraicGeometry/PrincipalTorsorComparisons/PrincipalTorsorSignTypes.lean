@@ -40,11 +40,8 @@ The formula uses the actual open-closed sequence, not a freely supplied sequence
 
 ## References
 
-* Stacks Project, Tags 03AJ and 06XU
-* Stacks Tag 0A45
 * Stacks Tags 03AJ, 0A45, 06XU
 * Stacks 0G78 and 03AJ
-* Stacks 03AJ
 -/
 
 @[expose] public noncomputable section
@@ -61,7 +58,7 @@ open HomologicalComplex
 namespace AlgebraicGeometry.Etale
 
 /-- The closed term of integral localization, cached to keep the normalized Ext types small.
-This is the actual closed term of the published open--closed sequence. -/
+This is the actual closed term of the open--closed sequence. -/
 def principalTorsorClosedTerm {T Z : Scheme.{u}} (i : Z ⟶ T)
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ) :
     Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
@@ -70,7 +67,7 @@ def principalTorsorClosedTerm {T Z : Scheme.{u}} (i : Z ⟶ T)
     ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).X₃
 
-/-- The published localization sequence on the integral constant sheaf. Its end terms
+/-- The localization sequence on the integral constant sheaf. Its end terms
 are canonically `j_! Z_W` and `i_* Z_Z`, by constant inverse-image comparison. -/
 def principalTorsorLocalization {T Z : Scheme.{u}} (i : Z ⟶ T)
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ) :

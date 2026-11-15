@@ -68,7 +68,7 @@ private noncomputable def zmodScalarExtensionIso
           rfl }
   exact (ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} f).leftAdjointUniq adj'
 
-/-- The published finite twist line is the existing abelian-sheaf scalar extension. -/
+/-- The finite twist line is the existing abelian-sheaf scalar extension. -/
 private noncomputable def finiteEtaleLineAbIso
     (T : Scheme.{u}) (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     Scheme.finiteEtaleTateLine T N A hA ≅

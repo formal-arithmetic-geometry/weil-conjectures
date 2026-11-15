@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 * Stacks, Modules on Sites, Tag 04IF
 * Cohomology on Sites, Tags 08FI and 0B56
-* Stacks Project, Tags 04IF, 08FI and 0B56
 * Stacks Project, Tags 04IF, 08FI, 07A4 and 0B56
 -/
 

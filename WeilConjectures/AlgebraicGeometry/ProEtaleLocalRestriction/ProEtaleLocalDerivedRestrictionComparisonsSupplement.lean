@@ -90,7 +90,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleLocalDerivedRestrictionC
 
 ## References
 
-* Stacks Project, Tag 015F
 * Tags 03D2, 03DA, 04IX
 * Bhatt--Scholze, Proposition 6.8.11(3)
 * Stacks, Tag 015F

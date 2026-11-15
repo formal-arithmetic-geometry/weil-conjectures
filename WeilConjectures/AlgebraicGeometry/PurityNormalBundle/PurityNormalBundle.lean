@@ -34,8 +34,6 @@ The regular case uses the conormal module itself, with no globally chosen frame.
 * Stacks Project, Divisors, Tags 0636, 0637, 063M
 * Algebra, Tag 00LN
 * Stacks Tags 0630, 0636
-* Stacks Tag 0636
-* Stacks Tags 0636, 01LX
 * Stacks Tags 0636, 01LX, 01QO
 -/
 

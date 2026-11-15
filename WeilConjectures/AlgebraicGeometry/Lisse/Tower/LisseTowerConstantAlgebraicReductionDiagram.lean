@@ -88,7 +88,7 @@ private theorem reduction_square_of_units
   simp only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj] at h'
   simpa only [Category.assoc, Category.comp_id, hn] using h'
 
--- Keep the published name of the compatibility binder, unused in its conclusion.
+-- Keep the name of the compatibility binder, unused in its conclusion.
 set_option linter.unusedVariables false in
 /-- Finite local diagrams and effective cones over the constant algebraic ring.
 This assertion has no completed ring sheaf, completed realization or scalar maps

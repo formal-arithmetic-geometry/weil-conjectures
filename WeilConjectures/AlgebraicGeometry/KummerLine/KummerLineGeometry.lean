@@ -21,7 +21,6 @@ Laurent polynomial spectra, and restriction uses the canonical inverse-image com
 ## References
 
 * Stacks Project, Tags 03PK and 03PL
-* Stacks, Tag 03PK
 -/
 
 @[expose] public noncomputable section

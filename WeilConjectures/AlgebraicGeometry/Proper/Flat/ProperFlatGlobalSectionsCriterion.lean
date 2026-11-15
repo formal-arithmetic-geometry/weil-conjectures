@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Global
 ## References
 
 * Stacks Project, Tag 0E62, Lemma 36.32.5 (a)
-* Stacks Project, Tag 0E62, Lemma 36.32.5 (a)
 -/
 
 @[expose] public section

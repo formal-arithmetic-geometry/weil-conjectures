@@ -25,7 +25,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusEx
 
 * Stacks Project, More on Etale Cohomology, Tags 0GK3 and 0GKM, finite-ring bounded-below
   specialization
-* Stacks Project, Tags 0GK3 and 0GKM
 * Stacks Project, Tags 035C, 01TD, 0GK3 and 0GKM
 -/
 

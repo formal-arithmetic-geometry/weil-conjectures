@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowe
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletionCompletedSupplement
 
 /-!
-# Transport of the published intrinsic completion
+# Transport of the intrinsic completion
 
-The published Koszul fiber is reused through the canonical comparison between
+The Koszul fiber is reused through the canonical comparison between
 its completed quotient-ring presentation and the continuous-functions presentation.
 Both rings are inverse limits of the finite quotient sheaves. Neither is identified
 with the constant sheaf associated to A. The transport preserves the prescribed
@@ -30,7 +30,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The same arithmetic datum in the published completion interface. -/
+/-- The same arithmetic datum in the completion interface. -/
 def intrinsicPresentationDatum {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : ProEtaleAdicCoefficientDatum A where
   toCompleteCoefficientDatum := d.toCompleteCoefficientDatum
@@ -38,7 +38,7 @@ def intrinsicPresentationDatum {A : Type (t + 1)} [CommRing A]
 
 variable (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- Exact restriction to the published completed-ring presentation. -/
+/-- Exact restriction to the completed-ring presentation. -/
 abbrev intrinsicPresentationModules : pbcModules T (pbcAdicCompletion T d) ⥤
     adicDatumModules T (intrinsicPresentationDatum d) :=
   pbcRestrict (pbcCompletedComparison T d).hom
@@ -91,7 +91,7 @@ def intrinsicPresentationRoundTrip : 𝟭 (pbcModules T (pbcAdicCompletion T d))
 abbrev intrinsicPresentationComplex :=
   (intrinsicPresentationModules T d).mapHomologicalComplex (.up ℤ)
 
-/-- Return the published explicit Koszul fiber to the specified coefficient ring. -/
+/-- Return the explicit Koszul fiber to the specified coefficient ring. -/
 def intrinsicCompletionComplex (r : ℕ) (a : Fin r → A)
     (C : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :=
   ((intrinsicPresentationModulesBack T d).mapHomologicalComplex (.up ℤ)).obj
@@ -129,14 +129,14 @@ theorem intrinsicCompletionUnitComponent_comm (r : ℕ) (a : Fin r → A)
     ((intrinsicPresentationModules T d).map (C.d q k))) ≫ B.map (u.f k) = _
   rw [← hη, Category.assoc]
 
-/-- The published completion chain map, transported with its fixed section normalization. -/
+/-- The completion chain map, transported with its fixed section normalization. -/
 def intrinsicCompletionComplexUnit (r : ℕ) (a : Fin r → A)
     (C : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     C ⟶ intrinsicCompletionComplex T d r a C where
   f q := intrinsicCompletionUnitComponent T d r a C q
   comm' q k _ := intrinsicCompletionUnitComponent_comm T d r a C q k
 
-/-- Intrinsic completion uses the published explicit Koszul fiber on any representative.
+/-- Intrinsic completion uses the explicit Koszul fiber on any representative.
 Exact mutually inverse coefficient restrictions preserve its product, differential,
 transitions and unit. No representative or unrelated fiber is chosen. -/
 def intrinsicCompletion (r : ℕ) (a : Fin r → A)
@@ -147,7 +147,7 @@ def intrinsicCompletion (r : ℕ) (a : Fin r → A)
     reductionDerivedCategory T (completedReductionCoefficient T d) :=
   DerivedCategory.Q.obj (intrinsicCompletionComplex T d r a C)
 
-/-- The transported published (u,0) completion unit, with the supplied realization. -/
+/-- The transported (u,0) completion unit, with the supplied realization. -/
 def intrinsicCompletionUnit (r : ℕ) (a : Fin r → A)
     (ha : Ideal.span (Set.range a) = d.ideal)
     (K : reductionDerivedCategory T (completedReductionCoefficient T d))

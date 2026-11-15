@@ -39,7 +39,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Reindexing completed modules and strict reductions by scheme isomorphisms
 
-The ordinary pullbacks are the published tensor presentations of inverse-image
+The ordinary pullbacks are the tensor presentations of inverse-image
 reindexing, with the canonical completed coefficient identifications. The predicates
 below expand the clauses of this one statement; they introduce no new coefficient,
 completion, reduction, or direct-image construction. All tower derived categories
@@ -49,9 +49,8 @@ are derived categories of actual strict diagrams, with positive level n+1 indexe
 
 * Stacks Tags 09A5, 0A07, 07A4, 0G7E, 099N and 07A7
 * Stacks Tag 07A7, using the completed coefficient composition equations
-* Stacks Tag 07A7
 * Stacks Tag 07A7 on the ringed diagram site
-* Stacks Tag 07A7, with the published coherent completed coefficient maps
+* Stacks Tag 07A7, with the coherent completed coefficient maps
 -/
 
 @[expose] public noncomputable section

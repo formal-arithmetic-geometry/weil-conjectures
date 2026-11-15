@@ -29,7 +29,7 @@ algebraically closed fields. Stalks are the fibres of the lifted point
 ## References
 
 * Stacks Project, sites-modules, 093V, 03EL
-* etale-cohomology, 095D, 04FM, 03PN
+* Stacks Project, Tags 095D, 04FM and 03PN
 -/
 
 @[expose] public section

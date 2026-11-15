@@ -18,8 +18,6 @@ and localization counits, rather than by an arbitrary isomorphism of functors.
 
 ## References
 
-* Stacks Project, Tags 0D6D and 07A4
-* Stacks 07A4
 * Tags 0D6D and 07A4
 
 ## Implementation details

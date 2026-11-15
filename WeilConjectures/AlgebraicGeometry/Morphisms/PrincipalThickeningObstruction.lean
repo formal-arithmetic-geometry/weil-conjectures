@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningCokernelSe
 
 ## References
 
-* Stacks Project, Tags 01IH, 01QP and 01DZ
 * Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and Tag 01DZ, Section 20.2
   (cohomology as a universal delta-functor)
 -/

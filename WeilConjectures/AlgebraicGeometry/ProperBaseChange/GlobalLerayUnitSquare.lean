@@ -19,7 +19,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 ## References
 
-* Stacks Project, Tags 01E4 and 01FB
 * Stacks Project, Tag 0096
 * Stacks Project, Tag 01F2
 * Stacks Project, Tags 01FB and 08HY

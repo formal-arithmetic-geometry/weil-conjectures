@@ -114,9 +114,7 @@ import WeilConjectures.CategoryTheory.TowerComparisonOfUniversal
 
 * Stacks Project Tags 099M, 099N and 0941
 * Stacks Project, Tags 05S7 and 06XN
-* Stacks Tag 0E8I
 * Stacks Tags 00VC and 05RU
-* Stacks Tag 06YY
 * Stacks Tags 06YY, 0E8I and 0941
 -/
 

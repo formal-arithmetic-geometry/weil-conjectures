@@ -44,7 +44,6 @@ are specified without division: the scalar times the denominator section is the 
 ## References
 
 * Stacks Project, Constructions, Tags 01NK and 01O9, local construction and affine-base gluing
-* Stacks, Tag 01NK
 -/
 
 @[expose] public section

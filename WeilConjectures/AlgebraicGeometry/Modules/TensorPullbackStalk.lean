@@ -22,7 +22,6 @@ canonical symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
 ## References
 
 * Stacks Project, Sheaves, Lemma 6.26.4 (Tag 0098)
-* Stacks Project, Tag 0098
 -/
 
 @[expose] public section

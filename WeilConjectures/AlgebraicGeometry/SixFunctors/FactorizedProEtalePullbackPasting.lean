@@ -101,7 +101,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 ## References
 
-* Stacks Project, Tag 0D6D
 * Stacks Tag 0D6D
 -/
 
@@ -117,7 +116,7 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleConstantRingCom
   Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategory
 
-/-- The ordinary compositor with the published unit-section normalization.
+/-- The ordinary compositor with the unit-section normalization.
 The unit-section equation in the cited theorem determines its maps: the adjunction
 identifies a map out of pullback with its composite with the unit. Thus this choice
 selects the canonical isomorphism, rather than an unspecified witness of existence. -/

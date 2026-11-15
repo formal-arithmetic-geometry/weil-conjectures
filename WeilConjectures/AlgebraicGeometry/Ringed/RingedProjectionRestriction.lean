@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedRestrictionLocalIso
 
 ## References
 
-* Stacks Project, Tags 04J0, 08FI, 07A4, 0B56 and 0944
 * Stacks 04J0, 08FI, 0FN5, 07A4, 0B56 and 0944
 -/
 

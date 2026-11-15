@@ -13,8 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 ## References
 
 * Stacks Project, Tags 00YV and 09AE
-* Stacks Project, Tag 00YV
-* Stacks Tag 00YV
 -/
 
 @[expose] public section

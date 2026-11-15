@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentatio
 
 ## References
 
-* Stacks Project, Tags 0BSK and 05N9
 * Tag 0EYG, descent paragraph
 * Stacks Project, Tags 0BSK and 05N9, and the descent paragraph of 0EYG
 -/

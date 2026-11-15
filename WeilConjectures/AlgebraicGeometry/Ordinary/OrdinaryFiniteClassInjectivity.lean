@@ -15,7 +15,6 @@ import Mathlib.Algebra.Module.Equiv.Basic
 ## References
 
 * Stacks Project, Tags 03FD and 03PL
-* Stacks Project, Tag 03FD
 -/
 
 @[expose] public noncomputable section

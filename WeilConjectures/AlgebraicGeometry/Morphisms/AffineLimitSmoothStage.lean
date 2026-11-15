@@ -18,9 +18,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 ## References
 
-* Stacks Project, Tag 0C0C
 * Stacks Project, Tag 0C0C, with Situation 081D
-* affine descent via 0CAQ and comparison via 01ZM(2)-(3)
+* Stacks Project, Tags 0CAQ and 01ZM
 -/
 
 @[expose] public section

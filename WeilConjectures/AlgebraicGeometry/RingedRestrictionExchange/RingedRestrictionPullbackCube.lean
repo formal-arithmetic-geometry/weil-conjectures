@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 
 ## References
 
-* Stacks Project
 * Stacks Project, composition of morphisms of sites, morphisms of pro-etale sites
 -/
 

@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 ## References
 
-* Stacks Project, Tags 09AL, 09B1 and 09C6
 * Stacks Project, Tags 09AL, 09B1 and 09C6, before local constancy
 * Stacks Project, the paragraph constructing the normalized algebraic diagram, before local
   constancy

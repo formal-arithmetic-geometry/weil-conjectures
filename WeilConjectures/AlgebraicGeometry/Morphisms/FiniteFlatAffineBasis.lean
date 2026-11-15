@@ -16,8 +16,6 @@ import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
 ## References
 
-* Stacks Project, Tags 02K9 and 00NX
-* Tag 0BVH
 * Stacks Project, Tag 0BVH, construction before Lemma 49.3.1
 * Tags 02K9 and 00NX
 -/

@@ -25,7 +25,6 @@ import Mathlib.RingTheory.Localization.Finiteness
 
 ## References
 
-* Stacks Project, Tags 0AV8, 0AVN, 05AM, 00LL and 00LX
 * Stacks Project, surjectivity argument of Tag 0AV8, as used in 0E9I
 * Tags 0AVN, 05AM, 00LL and 00LX
 -/

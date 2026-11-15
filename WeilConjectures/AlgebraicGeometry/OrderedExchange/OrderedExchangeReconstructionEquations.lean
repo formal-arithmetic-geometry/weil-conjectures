@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeLambdaDi
 
 ## References
 
-* Stacks 099N
-* Stacks 099M, 099N
-* Stacks 099M, 0A07
 * Stacks Tags 099M, 099N, 0A07 and 0E48
 -/
 

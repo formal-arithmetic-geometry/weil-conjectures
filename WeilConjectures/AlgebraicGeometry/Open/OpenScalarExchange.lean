@@ -27,9 +27,7 @@ below.
 
 * Stacks Project, Tag 03S6, together with Tags 07A4 and 09AE
 * Stacks Tag 06YY
-* Stacks Tag 07A6
 * Stacks Section 0735
-* Stacks Tags 03DI and 09AE
 * Stacks Tags 07A4 and 0G7E
 * Stacks Tags 07A6 and 03DI
 -/

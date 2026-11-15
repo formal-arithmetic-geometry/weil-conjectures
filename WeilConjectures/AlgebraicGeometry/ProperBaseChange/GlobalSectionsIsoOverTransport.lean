@@ -13,7 +13,6 @@ public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
 * Stacks Project, Tags 0GJP and 0GJU, transport of the variety of vanishing cycles
 * Stacks Project, Tag 0GJU, first paragraph and displayed fibre identification
-* Tag 0GJP
 -/
 
 @[expose] public section

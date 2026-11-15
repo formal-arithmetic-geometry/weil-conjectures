@@ -40,7 +40,6 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 * Stacks Project, pro-etale functoriality (09A5), Sites (00XZ, 03CB, 03CF), and Modules on Sites
   (03D3, 04J0)
-* Tag 09A5
 * Stacks Sites, Tag 03CB
 * Stacks Sites, Tag 00XZ
 * Stacks Sites, Tag 03CF

@@ -191,7 +191,6 @@ and first-residue etale-origin predicate used by the integral-model theorem.
 
 ## References
 
-* Stacks Tag 09C1
 * Stacks Tags 099I and 09C1
 -/
 

@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Etale
 namespace OrdinaryChart
 
 /-- The ordered affine-space left functor compared with a specified compactification.
-Every factor is the published proper/open composition or common-refinement comparison.
+Every factor is the proper/open composition or common-refinement comparison.
 The identity step uses the two exact identity functors, so no orientation is chosen. -/
 def affineLeftIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) :

@@ -24,8 +24,6 @@ computation and the theorem identifying its geometric mate with projection.
 ## References
 
 * Stacks Project, Tags 07A4, 07A6 and 07A7
-* Stacks 07A4
-* Stacks 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section

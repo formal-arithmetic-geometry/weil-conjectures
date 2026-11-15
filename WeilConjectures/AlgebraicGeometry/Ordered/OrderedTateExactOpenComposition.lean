@@ -171,7 +171,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 ## References
 
-* and Stacks 06XS
+* Stacks Project, Tag 06XS
 -/
 
 @[expose] public noncomputable section

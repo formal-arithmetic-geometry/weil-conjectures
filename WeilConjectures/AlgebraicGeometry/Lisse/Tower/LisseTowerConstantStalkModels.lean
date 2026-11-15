@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerCompatibleStalkMa
 ## References
 
 * Stacks Tag 09BV, finite derived local constancy and compatible trivializations
-* Tag 09BV
 -/
 
 @[expose] public noncomputable section

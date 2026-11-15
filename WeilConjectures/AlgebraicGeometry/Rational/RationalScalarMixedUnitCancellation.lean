@@ -57,14 +57,8 @@ The ordinary zeta is normalized on tensor generators and derived computation cou
 ## References
 
 * Bhatt--Scholze, Remark 6.8.15, pp. 61--62
-* Stacks Tags 0G7E, 0D6D and 07A4
-* BS 6.8.15
-* Stacks 0A0E, 099N
 * Stacks 0D6D, 0A0E and 0A0G
-* BS Remark 6.8.15, pp. 61--62
-* Stacks 0G7E, 0D6D, 07A4
 * Stacks 0D6D, 099N
-* BS 6.8.15, pp. 61--62
 * Stacks 0G7E, 0D6D and 07A4
 -/
 

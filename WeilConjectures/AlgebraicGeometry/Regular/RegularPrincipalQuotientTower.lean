@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 
 ## References
 
-* Stacks Project, Tag 099M
 * Stacks Project, Tag 099M, using the free two-term resolution of the principal coefficients
 -/
 

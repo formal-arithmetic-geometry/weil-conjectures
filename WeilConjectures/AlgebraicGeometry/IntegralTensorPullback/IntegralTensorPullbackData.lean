@@ -41,7 +41,6 @@ These definitions are shared by its two independent normalization lemmas.
 * Stacks Tags 099I and 099N(2), (5)
 * Stacks 08TC
 * Stacks 099N(5)
-* Stacks 099I
 * Stacks 099N(2), (5)
 -/
 

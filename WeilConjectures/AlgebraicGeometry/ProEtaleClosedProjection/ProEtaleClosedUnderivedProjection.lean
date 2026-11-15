@@ -70,14 +70,10 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Underived projection for a closed pro-etale immersion
 
-The projection consequence is
-agent-formulated.
-
 ## References
 
 * Stacks Project, Tags 09AA and 09AH, Section 03EK and Tag 03EL
 * Stacks, Tags 03D2, 03D3 and 09AA
-* Stacks, Tags 03EL and 09AA
 * Stacks, Section 03EK
 -/
 

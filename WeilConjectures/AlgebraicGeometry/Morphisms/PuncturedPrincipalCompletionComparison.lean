@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedPrincipalRestriction
 
 ## References
 
-* Stacks Project, Tags 0BLD, 0AVY and 0BK0
 * Stacks Project, Tag 0BLD (Lemma 52.3.2, p = 0), as used in Tag 0EII
 * Tags 0AVY and 0BK0
 -/

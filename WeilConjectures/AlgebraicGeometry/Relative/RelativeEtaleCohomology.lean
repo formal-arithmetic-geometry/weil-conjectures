@@ -17,9 +17,7 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 ## References
 
 * Stacks Project, Cohomology on Sites, Tag 03AJ, relative refinement
-* compare Cohomology, Tags 0G71 and 0G78
 * Stacks Project, Tag 03AJ, relative refinement
-* compare Tag 0G71
 * Stacks Project, Tag 0G78, mapping-fibre functoriality
 * Stacks Project, Tag 0G71, first arrow of the relative triangle
 -/

@@ -133,8 +133,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 ## References
 
 * Stacks Project, Modules on Sites, exactness of inverse image and constants (Tags 03DC and 093J)
-* locally constant comparison (Tag 099Y)
-* Stacks Project
+* Stacks Project, Tag 099Y
 -/
 
 @[expose] public noncomputable section

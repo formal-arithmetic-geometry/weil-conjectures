@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFinitePuri
 
 ## References
 
-* Stacks Project, Tags 0EYB and 0EY6
 * Stacks Project, Tag 0EYB, Lemma 58.26.3, and Tag 0EY6, Lemma 58.21.5
 -/
 

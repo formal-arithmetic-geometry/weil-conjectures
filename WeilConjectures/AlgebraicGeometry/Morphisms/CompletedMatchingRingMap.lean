@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMat
 
 ## References
 
-* Stacks Project, Tags 05ER and 05EU
 * Stacks Project, Tag 05ER, definition of the comparison
 * Stacks Project, Tags 05ER (the comparison Ψ) and 05EU (algebra structure)
 -/

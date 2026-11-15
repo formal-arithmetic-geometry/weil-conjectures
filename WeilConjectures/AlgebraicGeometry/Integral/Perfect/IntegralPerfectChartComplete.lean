@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CechPerfectModelComple
 ## References
 
 * Bhatt--Scholze, Proposition 6.6.11, reverse implication
-* Lemma 6.5.8(1),(2)
+* Bhatt--Scholze, Lemma 6.5.8(1), (2)
 -/
 
 @[expose] public noncomputable section

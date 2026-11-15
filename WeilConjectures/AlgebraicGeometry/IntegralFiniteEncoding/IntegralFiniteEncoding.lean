@@ -213,7 +213,6 @@ import all WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
 
 ## References
 
-* Stacks Tags 00YV, 03CY, and 099Y
 * Stacks Tags 00YV and 03CY
 * Stacks Tag 099Y
 -/

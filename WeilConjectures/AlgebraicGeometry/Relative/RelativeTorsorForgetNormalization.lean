@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
 
 ## References
 
-* Stacks Project, Tag 03AJ, relative refinement, step 6
+* Stacks Project, Tag 03AJ
 * Tags 06XR and 06XV
 -/
 

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.FullyF
 
 ## References
 
-* Stacks Project, Tags 0EL8 and 0BQB
 * Stacks Project, Tag 0BQB (invariance under a thickening), as used in Tag 0EL8
 -/
 

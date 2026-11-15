@@ -13,10 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.Diago
 
 The input Chern arrows are supplied with their whole-system normalization. No arrow
 is chosen by a mere existence assertion.
-
-## References
-
-* Cartesian Tate comparison in the second rational P1 triangle
 -/
 
 @[expose] public noncomputable section

@@ -138,7 +138,6 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneral
 * Bhatt--Scholze, Remark 6.8.15, p. 62
 * Stacks Tags 03CB, 0D6D, 07A4, 099N
 * Stacks Tags 03CB, 03EL, 0D6D and 07A4
-* BS Remark 6.8.15
 -/
 
 @[expose] public noncomputable section

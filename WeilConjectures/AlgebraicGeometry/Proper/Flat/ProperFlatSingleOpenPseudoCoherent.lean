@@ -38,7 +38,6 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 ## References
 
 * Stacks Project, Tag 0A1H, Noetherian approximation paragraph
-* Tag 08E7
 * Stacks Project, Tag 0A1H, approximation paragraph, with E=O_X and G=F[0]
 * Tags 02O5, 08E7, 08E5
 -/

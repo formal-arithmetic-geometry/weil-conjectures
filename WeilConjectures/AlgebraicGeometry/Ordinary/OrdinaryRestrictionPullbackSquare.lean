@@ -16,8 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafC
 ## References
 
 * Stacks, Modules on Sites, Tags 03D8 and 03D7
-* Stacks Tag 03D7
-* Stacks Tag 03D8
 -/
 
 @[expose] public noncomputable section

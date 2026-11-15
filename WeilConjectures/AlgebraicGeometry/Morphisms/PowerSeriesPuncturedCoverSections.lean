@@ -18,7 +18,6 @@ import Mathlib.RingTheory.MvPowerSeries.Equiv
 
 ## References
 
-* Stacks Project, Tags 0EY9 and 0EKP
 * Stacks Project, Tag 0EY9, structure-sheaf comparison, followed by Tag 0EKP, implication (1) to (3)
 -/
 

@@ -17,7 +17,6 @@ is required for this equation.
 
 ## References
 
-* Stacks Project, Tags 07A4 and 0G7E
 * Stacks Project 07A4 and 0G7E
 -/
 

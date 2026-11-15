@@ -24,7 +24,6 @@ public import Mathlib.Algebra.Regular.SMul
 
 ## References
 
-* Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG
 * Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, construction of C
 -/
 

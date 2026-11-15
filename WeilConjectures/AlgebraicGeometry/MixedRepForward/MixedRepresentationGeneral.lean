@@ -21,10 +21,6 @@ This is the coefficient-generic form of clause (3) of
 
 Stating it for an abstract coefficient category keeps elaboration and kernel checking cheap;
 the finite coefficient statements are obtained by instantiation.
-
-## References
-
-* Stacks Project
 -/
 
 @[expose] public section

@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 * Zheng, Construction 4.1 and Proposition 4.17
 * Stacks Tags 06YY, 07A4, 07A6 and 08J9
 * Zheng Construction 4.1
-* Stacks 06YY and 07A6
 -/
 
 @[expose] public noncomputable section

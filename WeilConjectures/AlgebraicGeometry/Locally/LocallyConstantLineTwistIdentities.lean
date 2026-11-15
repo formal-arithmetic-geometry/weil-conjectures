@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 ## References
 
-* Stacks, Tags 00AL, 00AM, 01CD and 01CR
 * EGA II, Remark 4.2.7
 * Stacks, Tags 00AL and 00AM
 * Tags 01CD and 01CR

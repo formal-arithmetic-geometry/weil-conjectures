@@ -144,7 +144,6 @@ Hom equivalence is precisely the two-counit formula for Adj_B.
 ## References
 
 * Stacks Project, Tag 0E46, with the normalized comparisons of Tags 07A7, 0D6D and 0D6E
-* Stacks Project, Tag 0E46
 -/
 
 @[expose] public section

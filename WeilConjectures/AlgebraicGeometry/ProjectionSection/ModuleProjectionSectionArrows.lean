@@ -45,7 +45,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 ## References
 
-* clause (1), and Stacks 0B56
 * Stacks 07A4
 * Stacks 0B56
 -/
@@ -118,7 +117,7 @@ def projection {Z B : Scheme.{u}} (f : Z ⟶ B)
           (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app N))
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The canonical section pullback comparison, using the published composition and
+/-- The canonical section pullback comparison, using the composition and
 identity comparisons. -/
 def pullbackSection {X V : Scheme.{u}} (r : V ⟶ X) (i : X ⟶ V) (h : i ≫ r = 𝟙 X) :
     (moduleDerivedPullback Λ r) ⋙

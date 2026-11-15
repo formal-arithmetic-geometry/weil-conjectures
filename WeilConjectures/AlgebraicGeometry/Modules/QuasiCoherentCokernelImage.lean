@@ -25,7 +25,7 @@ the local-image formula below identifies it with the subsheaf of local images.
 ## References
 
 * Stacks Project, Schemes, Tags 01IC, 01IB, 01LB
-* Modules, Tag 01AH
+* Stacks Project, Tag 01AH
 -/
 
 @[expose] public section

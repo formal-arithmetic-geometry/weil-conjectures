@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUnique
 ## References
 
 * Stacks Project, Tag 0EYA and the last completion step of Tag 0EYB
-* Stacks Project, Tag 0EYA
 * Tag 0EY6(2), (a), (b)
 * Tag 0337
 -/

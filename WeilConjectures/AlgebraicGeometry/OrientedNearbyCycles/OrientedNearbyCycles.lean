@@ -75,8 +75,6 @@ coverings nor the associated topoi and accommodates independent scheme/coefficie
 * Stacks 079P
 * Illusie §1.4
 * Stacks 06YS, 06YT
-* Stacks 07A4
-* Stacks 06YT
 * Stacks 03EL, 07A4
 -/
 

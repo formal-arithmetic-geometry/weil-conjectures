@@ -16,8 +16,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 
 ## References
 
-* the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, steps 1 and
-* expanding Stacks Project, determinant inversion
+* Stacks Project, Tag 0BRT
 -/
 
 @[expose] public section

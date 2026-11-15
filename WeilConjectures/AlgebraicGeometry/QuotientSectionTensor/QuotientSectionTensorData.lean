@@ -135,18 +135,8 @@ extension by the finite quotient is not assumed exact. Natural levels n mean n +
 
 ## References
 
-* Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6
-* Stacks 03EL
-* Stacks 06YY
-* Stacks 03EL and 07A4
-* Stacks 07A4
-* Stacks 03EK, 03EL, 06YY
-* Stacks 03EL, 06YY
-* Stacks 03EL, 07A4
 * Stacks 03EK, 03EL and 07A4
 * Stacks 03EL, 06YY and 07A4
-* Stacks 07A4, 07A6
-* Stacks 03EL, 0D6D and 0G7E
 * Stacks 0D6D, 0G7E, 07A6
 -/
 

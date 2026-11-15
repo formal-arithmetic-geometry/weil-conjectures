@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedPuncturedQuotientFul
 
 ## References
 
-* Stacks Project, Tags 0BLS, 0BM6, 09ZL and 0AVY
 * Stacks Project, proof of Tag 0BLS, Tags 0BM6, 09ZL, 0AVY and 0A02
 -/
 

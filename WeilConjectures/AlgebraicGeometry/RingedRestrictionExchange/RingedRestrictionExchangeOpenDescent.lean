@@ -37,21 +37,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 `actualSquare p h R` has exactly the four rings in the statement. The general
 `StrictTowerRingedSquare` interfaces allow their canonically isomorphic presentations;
 no arbitrary exchange transformation is an input. Every pullback here is exact.
-The tensor presentation in the published module pullback is extension only along an
+The tensor presentation in the module pullback is extension only along an
 isomorphism: its contraction is s ⊗ m ↦ c⁻¹(s)m, so it is precisely inverse image
 with transported action. No coefficient extension or finiteness condition is imposed.
 
 ## References
 
-* Stacks Project, Tags 08FI, 09T5, 09A5 and 00XZ
-* Stacks 09T5
 * Stacks 070I and 070K
-* Stacks 08FI, 09A5 and 00XZ
 * Stacks 08FI, 09T5, 09A5, 03CB and 00XZ
-* Stacks 09A5 and 00XZ
-* Stacks 09A5
-* Stacks 03CB and 09A5
-* Stacks 09A5 and 09T5
 -/
 
 @[expose] public noncomputable section

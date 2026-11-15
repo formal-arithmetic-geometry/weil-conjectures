@@ -37,7 +37,6 @@ are proved in `WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree`.
 
 ## References
 
-* Stacks Project, Tag 03PK
 * Stacks Tag 03PK
 * Stacks Tag 03EK
 -/

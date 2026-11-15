@@ -17,7 +17,6 @@ import WeilConjectures.RingTheory.CompleteLocalSubideal
 
 ## References
 
-* Stacks Project, Tags 0EII, 0AVY and 0BK0
 * Stacks Project, Tag 0EII (Lemma 52.12.7), with M = R and a = m
 * Tags 0AVY and 0BK0
 -/

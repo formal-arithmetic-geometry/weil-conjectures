@@ -21,8 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricRegularitySmoothFiel
 ## References
 
 * Stacks Project, Tags 0BX2, 038X, 00P3, 033M, and the proof of Tag 0GK5
-* Stacks Project, Tags 0BX2, 038X, 00P3, 033M
-* proof of Tag 0GK5
 -/
 
 @[expose] public section

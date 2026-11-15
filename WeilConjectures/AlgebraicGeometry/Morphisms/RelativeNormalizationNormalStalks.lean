@@ -18,7 +18,6 @@ import WeilConjectures.RingTheory.IntegralClosureFiniteNormalProduct
 
 ## References
 
-* Stacks Project, Tag 035L
 * Stacks Project, Tag 035L, with Tags 0357, 0358 and 034L
 -/
 

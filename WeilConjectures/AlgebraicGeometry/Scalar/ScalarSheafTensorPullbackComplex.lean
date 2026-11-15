@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorRepre
 
 ## References
 
-* Stacks Project, Tag 07A4
 * Stacks 07A4
 -/
 

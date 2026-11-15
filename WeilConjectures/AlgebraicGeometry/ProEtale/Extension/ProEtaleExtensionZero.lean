@@ -50,8 +50,6 @@ is fixed before invertibility is asserted.
 ## References
 
 * Stacks Project, Tags 09AE, 03DI, 03DJ and 03CY
-* Stacks Project, Tags 03DJ and 09AE
-* Stacks Project, Tag 03CY
 -/
 
 @[expose] public noncomputable section

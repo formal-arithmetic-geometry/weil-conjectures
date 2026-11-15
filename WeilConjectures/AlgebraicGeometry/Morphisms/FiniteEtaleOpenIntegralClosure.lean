@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
 ## References
 
 * Stacks Project, Tag 032L (finite separable integral closure)
-* Stacks Project
 -/
 
 @[expose] public section

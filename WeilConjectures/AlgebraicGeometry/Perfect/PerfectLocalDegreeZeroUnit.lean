@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AbelianVariety.ConnectiveRankOneModelSt
 
 ## References
 
-* Stacks Project, Tags 0E62 and 0BCD
 * Stacks Project, Tag 0E62, local argument, and Tag 0BCD
 -/
 

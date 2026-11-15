@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 
 ## References
 
-* Stacks Project, Tag 0GMW
 * Tag 0FPQ
 * Stacks Project, Modules on Sites, Tags 03EL and 0GMW
 -/

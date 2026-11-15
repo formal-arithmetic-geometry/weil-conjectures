@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 ## References
 
 * Stacks Tags 0D6E and 07A6, the factorization of the derived adjunction mate
-* Stacks Tags 0D6E and 07A6
 -/
 
 @[expose] public noncomputable section

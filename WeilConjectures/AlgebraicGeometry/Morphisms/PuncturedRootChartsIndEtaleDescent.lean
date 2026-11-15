@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineFpIsoIndEtaleDescent
 
 ## References
 
-* Stacks Project, Tags 0EYG and 05N9
 * Stacks Project, Tag 0EYG, the finite-presentation descent paragraph
 * Tag 05N9 (2), (3) for descent of morphisms and their identities
 -/

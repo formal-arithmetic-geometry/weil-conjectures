@@ -17,8 +17,6 @@ coproduct preservation, and the zero-insertion adjunction.
 
 ## References
 
-* Stacks Project, Tag 0GMW
-* Tag 0FPQ
 * Tag 0GMW, Tag 0FPQ
 -/
 

@@ -286,10 +286,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivale
 
 ## References
 
-* Stacks Tag 0H7J
 * Stacks Tags 00VC, 03A0, and 0H7J
-* Stacks Tags 03A0 and 03D1
-* Stacks Tag 03D1
 * Stacks Tags 03D1 and 05RU
 -/
 

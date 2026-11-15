@@ -14,12 +14,7 @@ The functors and scalar comparison are explicit transports across an equivalence
 ## References
 
 * Stacks Project, Tags 03CY, 03D2, 03D3 and 0D6D
-* Stacks Tag 03CY
-* Stacks Tags 03CY and 03DA
-* Stacks Tags 03CY and 03D2
-* Stacks Tags 03D2 and 03DA
 * Stacks Tags 03CY, 03DA and 03D3
-* Stacks Tag 03D3
 -/
 
 @[expose] public noncomputable section

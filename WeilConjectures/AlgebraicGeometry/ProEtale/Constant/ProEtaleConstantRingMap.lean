@@ -44,11 +44,6 @@ precomposition with the fibre-product projection and then extended by sheafifica
 
 ## References
 
-* Stacks Project, Tags 04B3, 0H7J and 09A5
-* Stacks Tag 09A5
-* Stacks Tags 0H7J and 09A5
-* Stacks Tag 0H7J
-* Stacks Tags 04B3 and 0H7J
 * Stacks Tags 04B3, 0H7J and 09A5
 -/
 

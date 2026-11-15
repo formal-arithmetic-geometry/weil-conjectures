@@ -28,14 +28,9 @@ The original site equivalence, comparison, and constant-module results are reexp
 
 ## References
 
-* Stacks Project, Tags 09A5 and 00WX
-* Stacks Tag 09A5
-* Stacks Tags 09A5 and 00WX
 * Stacks Tags 09A5, 00WX and 0038
-* Stacks Tags 09A5, 00WX and 0H7J
 * Stacks Tag 0H7J
 * Stacks Tags 00WX and 03D2
-* Stacks Tags 00WX and 03DA
 * Stacks Tag 03DA
 -/
 

@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Proper.Flat.ProperFlatStructureSheafSta
 
 * Stacks Project, Tag 0E62, proof, localized at one point
 * Stacks Project, Tag 0E62, proof
-* the local finite free model used in that proof is Tag 0BCD, `lift-perfect-from-residue-field`
+* Stacks Project, Tag 0BCD
 -/
 
 @[expose] public section

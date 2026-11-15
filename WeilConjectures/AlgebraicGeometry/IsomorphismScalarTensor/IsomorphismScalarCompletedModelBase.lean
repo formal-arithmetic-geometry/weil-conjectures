@@ -63,13 +63,8 @@ Scalar tensors use the existing sheafified tensor, with scalar written first.
 
 ## References
 
-* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified quotient
-  towers
-* Stacks 03EK and 06YY
-* Stacks 03EK
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4)
 * Stacks 03D6
-* Stacks 03EL
-* Stacks 03EK and 03EL
 * Stacks 03D2
 * Stacks 03EK, 03EL and 06YY
 -/

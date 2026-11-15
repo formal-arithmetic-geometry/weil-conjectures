@@ -16,8 +16,7 @@ below are proved; this module introduces no postponed proof.
 
 ## References
 
-* Stacks 03DI--03DJ, with the `OpenSystems` normalization identities
-* Stacks 03DI--03DJ and the normalized `OpenSystems.unit_evaluation` identity
+* Stacks Project, Tags 03DI--03DJ
 -/
 
 @[expose] public noncomputable section

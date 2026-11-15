@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 ## References
 
 * Stacks Project, More on Etale Cohomology, Tags 0F7B and 0F7I
-* Stacks Project, Tags 0F7B and 0F7I
 -/
 
 @[expose] public section

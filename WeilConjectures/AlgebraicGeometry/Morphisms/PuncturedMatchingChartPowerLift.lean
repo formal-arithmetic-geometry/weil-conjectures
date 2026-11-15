@@ -18,7 +18,6 @@ import Mathlib.Data.Fin.Tuple.Basic
 
 * Stacks Project, Tags 0BLH and 05ER, localized chart comparison
 * Stacks Project, Tag 05ER, the localized chart comparison in its proof, using 05EP and 05EQ
-* the geometric charts are those of Tag 0BLH
 -/
 
 @[expose] public section

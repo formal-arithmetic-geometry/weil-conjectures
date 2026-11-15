@@ -27,8 +27,7 @@ coefficient ring map is the existing `Scheme.proEtaleConstantRingMap`
 
 ## References
 
-* construction references Stacks Tags 06YY, 07A6, 07A4, 08FJ and 03DJ
-* Stacks Tag 07A6
+* Stacks Project, Tags 06YY, 07A6, 07A4, 08FJ and 03DJ
 -/
 
 @[expose] public noncomputable section

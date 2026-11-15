@@ -72,10 +72,6 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
 /-! Ringed pro-etale localization: a geometric step of the open-closed argument.
-
-## References
-
-* Stacks Project
 -/
 
 @[expose] public section

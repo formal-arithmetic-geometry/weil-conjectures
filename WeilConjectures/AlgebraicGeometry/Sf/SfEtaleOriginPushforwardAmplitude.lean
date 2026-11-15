@@ -27,7 +27,7 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 /-!
 # Direct-image amplitude for bounded complexes of etale origin
 
-The comparison is the published termwise inverse image with canonical constant-ring
+The comparison is the termwise inverse image with canonical constant-ring
 realization. Direct images are ordinary uncompleted unbounded right derived functors.
 
 ## References

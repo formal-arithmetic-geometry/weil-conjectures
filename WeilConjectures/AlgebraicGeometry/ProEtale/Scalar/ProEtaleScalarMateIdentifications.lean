@@ -88,14 +88,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateThic
 
 ## References
 
-* Stacks Project, Tag 0B56
-* Stacks 03EK
 * Stacks 0B56
 * Stacks 03EK, 06YY
 * Stacks 0D6E
-* Stacks 06YY
-* Stacks 06YY, 07A4
-* Stacks 03EL
 * Stacks 03EL, 0D6D
 * Stacks 07A4
 -/

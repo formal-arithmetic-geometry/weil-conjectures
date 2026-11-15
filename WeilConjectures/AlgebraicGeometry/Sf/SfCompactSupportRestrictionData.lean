@@ -25,12 +25,7 @@ functors and maps.
 ## References
 
 * Bhatt--Scholze, Sections 6.5 and 6.7
-* Stacks Tags 03DI, 0D6E and 0D6J
-* Stacks Tag 03DA
 * Stacks Tags 00YV and 03DA
-* Stacks Tag 00YV
-* Stacks Tag 03DI
-* Stacks Tags 03DI and 00YV
 * Stacks Tags 0D6E and 0D6J
 * Bhatt--Scholze, Lemma 6.7.7
 * Stacks Tags 03DI and 0D6E

@@ -110,7 +110,6 @@ import all WeilConjectures.Algebra.Homology.DivisibleReduction.DivisibleExtensio
 ## References
 
 * Stacks 06YY, 07A6, and the representative equation in ScalarData
-* Stacks 06YY and 07A6
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

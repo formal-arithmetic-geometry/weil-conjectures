@@ -42,7 +42,6 @@ The product law is stated on local sections, which generate the sheaf tensor pro
 
 ## References
 
-* Stacks Project, Tags 01N2, 01MY and 01MZ
 * Stacks 01N2(3), 01MY, 01MZ
 -/
 

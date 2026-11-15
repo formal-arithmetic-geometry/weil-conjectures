@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardQuotientsPerfectSupple
 /-! # The base-change package's adic coefficient domain
 
 The ring assertion is independent of the site universe. The scheme assertion uses
-exactly the published completed coefficient ring and three-clause integral domain.
+exactly the completed coefficient ring and three-clause integral domain.
 -/
 
 @[expose] public noncomputable section

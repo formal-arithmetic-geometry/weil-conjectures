@@ -13,7 +13,6 @@ public import WeilConjectures.SixFunctors.WeilFrobeniusAction.WeilFrobeniusActio
 
 ## References
 
-* Stacks 03D6 and 03EO
 * Stacks 03D6
 * Stacks 03EO
 -/

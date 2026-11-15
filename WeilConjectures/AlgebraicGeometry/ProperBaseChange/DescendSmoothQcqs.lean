@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 ## References
 
 * Stacks Project, Limits, Tag 0C0C, in Situation 081D
-* persistence at later stages by Morphisms, Tag 01VB
 * Stacks Project, Limits, Tag 0C0C, Situation 081D
 * Morphisms, Tag 01VB
 -/

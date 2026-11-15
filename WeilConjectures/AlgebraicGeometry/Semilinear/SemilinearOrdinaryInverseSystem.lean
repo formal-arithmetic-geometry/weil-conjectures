@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinarySource.SemilinearOrdinarySource
 
 * Zheng Construction 4.1
 * Stacks 03D2 and 03DA
-* Stacks 03D2
 * Zheng Construction 4.1, paragraph before Lemma 4.10
 -/
 

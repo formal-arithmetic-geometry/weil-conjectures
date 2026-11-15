@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 
 * Stacks Project, More on Morphisms, Tag 0F2N, with the quasi-compact and quasi-separated finite
   factor made explicit
-* Stacks Project, Tag 0F2N
 -/
 
 @[expose] public section

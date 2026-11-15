@@ -163,7 +163,7 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] coefficient line twist projectionMap tensorShiftIso
 attribute [local implicit_reducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
-/-- The published native braiding through the fixed tensor bundle. -/
+/-- The native braiding through the fixed tensor bundle. -/
 @[irreducible]
 def tensorBraiding
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

@@ -27,7 +27,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 ## References
 
-* Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH
 * Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH, through the construction of B' and tame
   normalization
 -/

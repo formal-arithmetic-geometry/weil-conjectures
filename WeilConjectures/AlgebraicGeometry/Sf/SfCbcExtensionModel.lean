@@ -107,26 +107,11 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 ## References
 
 * Stacks Project Tags 099M, 099N and 0941
-* Stacks Tags 098K and 00XZ
-* Stacks Tags 098K and 03DI
-* Stacks Tags 03DI and 03DJ
-* Stacks Tag 03DI
-* Stacks Tag 03DJ
 * Stacks Tags 098K and 00VC
-* Stacks Tags 00VC and 00XZ
 * Stacks Tag 00XZ
-* Stacks Tags 00VC and 03D1
-* Stacks Tag 00VC
 * Stacks Tag 03D1
-* Stacks Tag 05RU
-* Stacks Tags 00VC and 05RU
 * Stacks 05RU
-* Stacks Tag 099M
-* Stacks Tags 0941 and 00VC
 * Stacks Tags 06YS, 03DI and 0E8I
-* Stacks Tags 00VC and 03DI
-* Stacks Tags 03DJ and 00VC
-* Stacks Tag 0941
 * Stacks Tags 03DJ and 0941
 * Stacks Tags 099M and 06YY
 -/
@@ -451,7 +436,7 @@ abbrev sfCbcDerivedExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j
     proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory X A :=
   (sfCbcOpenExtension j A).mapDerivedCategory
 
-/-- Constant coefficients on the published small model of the pro-etale site. -/
+/-- Constant coefficients on the small model of the pro-etale site. -/
 abbrev sfCbcModelRing (X : Scheme.{t}) (A : Type t) [CommRing A] :=
   ConstantCompletion.constant (proEtaleModelTopology X) (ULift.{t + 1, t} A)
 
@@ -615,7 +600,7 @@ def sfCbcModelDerived (X : Scheme.{t}) (A : Type t) [CommRing A] :
     proEtaleDerivedCategory X A ≌ ConstantCompletion.D (sfCbcModelRing X A) :=
   (sfCbcModelModules X A).asEquivalence.mapDerivedCategory
 
-/-- The standard factorization, expressed with the published model equivalence. -/
+/-- The standard factorization, expressed with the model equivalence. -/
 def sfCbcModelDerivedFactors (X : Scheme.{t}) (A : Type t) [CommRing A] :
     adicLocalization X A ⋙ (sfCbcModelDerived X A).functor ≅
       (sfCbcModelModules X A).mapHomologicalComplex (.up ℤ) ⋙
@@ -1022,7 +1007,7 @@ def sfCbcTowerExtensionFactors {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion
         ConstantCompletion.TQ (sfCbcModelRing X A) :=
   (sfCbcTowerExtension j A).mapDerivedCategoryFactors
 
-/-- The published universal K-flat presentation of strict reductions on the small model. -/
+/-- The universal K-flat presentation of strict reductions on the small model. -/
 abbrev sfCbcQuotientPresentation (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : CompleteCoefficientDatum A) :=
   ConstantCompletion.quotientPresentation (proEtaleModelTopology X)

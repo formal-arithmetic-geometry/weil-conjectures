@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 ## References
 
 * Stacks Project, Tag 0BJH
-* Stacks Project
 -/
 
 @[expose] public section

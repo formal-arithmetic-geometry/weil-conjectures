@@ -63,10 +63,8 @@ public import WeilConjectures.RingTheory.ProperBaseChange.IndEtaleStability
 
 ## References
 
-* Stacks Project, Tags 05V1 and 0F4F
 * Stacks Tags 0F4F and 0993
 * Stacks Tags 0F6B and 0F4F
-* Stacks Tags 05V1 and 0F4F
 * Stacks Tags 05V1 and 09A5
 * Stacks Tag 0D6D
 -/

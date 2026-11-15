@@ -21,10 +21,8 @@ data; its nominal type keeps kernel reduction of module objects small.
 
 ## References
 
-* Stacks Project, Tags 01IO, 09AA, 09BN, 03DI and 03DJ
 * Stacks, Tag 01IO
 * Stacks, Tags 03DI--03DJ
-* Stacks, Tag 03DI
 * Stacks, Tags 09AA, 09BN
 -/
 

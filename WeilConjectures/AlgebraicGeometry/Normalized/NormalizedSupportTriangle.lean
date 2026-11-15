@@ -27,13 +27,11 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Canonically normalized support localization
 
-This extends the published existence interface with the injective-complex normalization
+This extends the existence interface with the injective-complex normalization
 of the boundary. The ordinary arrows are uniquely fixed by the support kernel inclusions.
 
 ## References
 
-* Stacks Project, Tag 09XP
-* Tag 09XP
 * Tag 09XP, restriction construction
 -/
 

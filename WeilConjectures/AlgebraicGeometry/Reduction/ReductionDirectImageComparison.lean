@@ -26,7 +26,7 @@ of s to the intrinsic-pullback unit of s. Explicitly, the equation is
 `(e.hom.app M).val.app (op ((proEtaleBaseChange f).obj V))
   (((proEtaleConstantRingAdjunction A f).unit.app M).val.app (op V) s) =
   ((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app (op V) s`.
-Its source and proof are in the published declaration's docstring (Stacks 03D3, 00YV).
+Its source and proof are in the declaration's docstring (Stacks 03D3, 00YV).
 The unique normalized object, rather than a choice from bare existence, supplies the
 change of coordinates used below. No existing definition is duplicated or renamed.
 

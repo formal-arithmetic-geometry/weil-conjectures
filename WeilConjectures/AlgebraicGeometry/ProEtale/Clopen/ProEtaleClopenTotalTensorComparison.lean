@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ClopenData.ProEtaleClopenTotalTe
 
 ## References
 
-* Stacks Project, Tag 0FPQ
 * Stacks 0FPQ
 -/
 

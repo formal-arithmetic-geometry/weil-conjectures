@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 
 ## References
 
-* Stacks Project, Tags 00RC and 01WM
 * Stacks Project, Tag 00RC (openness of flatness) and Tag 01WM (finite morphisms are closed)
 -/
 

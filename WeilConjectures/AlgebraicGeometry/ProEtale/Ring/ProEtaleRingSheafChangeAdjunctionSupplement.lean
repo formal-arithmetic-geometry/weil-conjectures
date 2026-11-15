@@ -174,9 +174,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunctio
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6
-* Stacks, Tag 0D6D
 * Stacks, Tag 07A5
-* Stacks, Tag 0D6E
 * Stacks, Tags 05RT, 0D6D, 0D6E and 07A6
 -/
 

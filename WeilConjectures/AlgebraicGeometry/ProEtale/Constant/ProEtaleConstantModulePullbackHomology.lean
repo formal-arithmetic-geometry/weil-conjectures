@@ -14,10 +14,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 ## References
 
-* Stacks Project, Tags 03D2 and 0735
 * Stacks Project, Tag 03D2
 * Stacks Project, Tag 0735, termwise exact inverse image
-* Stacks Project, Tag 0735
 -/
 
 @[expose] public section

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExtendLocalFreeMap
 ## References
 
 * Stacks Project, Tag 0EKP, proof of (2) to (3), via denominator clearing
-* Stacks Project, Tag 0EKP, proof of (2) to (3), and the section-clearing theorem
-  `exists_tensorPowSection_eq_restrict`
+* Stacks Project, Tag 0EKP, proof of (2) to (3)
 -/
 
 @[expose] public section

@@ -148,12 +148,7 @@ The site retains object universe t+1 and morphism universe t.
 ## References
 
 * Stacks Tags 099M, 099N and 0E48
-* Stacks 099M
 * Stacks 0941
-* Stacks 099M, 06YY
-* Stacks 06YY
-* Stacks Tag 06YY
-* Stacks 099N
 * Stacks 06YY and 0D6D
 * Stacks 03EL and 06YY
 * Stacks 0B56, 099M

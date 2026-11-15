@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedBaseChangeTra
 ## References
 
 * Stacks Project, Constructions, Tag 01O3
-* Stacks Project, Tag 01O3
 -/
 
 @[expose] public section

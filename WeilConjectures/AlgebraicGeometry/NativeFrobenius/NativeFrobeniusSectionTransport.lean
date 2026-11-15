@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 ## References
 
 * Stacks 03D6 and 03EO
-* Stacks 03D6
 -/
 
 @[expose] public section

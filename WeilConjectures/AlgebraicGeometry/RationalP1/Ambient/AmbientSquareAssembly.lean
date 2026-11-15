@@ -41,7 +41,7 @@ private theorem assemble_from_leg_equations
   rw [h₁, he, ← h₂, Iso.inv_hom_id_app_assoc]
 
 /-- Ambient square assembly: expand the pullback comparison and cancel the
-published compositor. The two leg equations and commutativity of the square
+compositor. The two leg equations and commutativity of the square
 reduce the result to associativity. -/
 theorem ambient_square_assembly
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

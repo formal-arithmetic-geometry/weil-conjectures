@@ -104,16 +104,9 @@ public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDerivedPull
 ## References
 
 * Stacks Project, Tags 0B8Q, 0B8N, 06YQ, 07A4 and 0FNH
-* Stacks Project, Tag 07A4
-* Stacks 06YQ
-* Stacks 0FNH and 06YQ
-* Stacks 099R
-* Stacks 0GMX
 * Stacks 07A4 and 0GMX
 * Stacks 099R and 0FNH
-* Stacks 07A4
 * Stacks finite coefficient setting
-* Stacks 0B8Q
 -/
 
 @[expose] public noncomputable section

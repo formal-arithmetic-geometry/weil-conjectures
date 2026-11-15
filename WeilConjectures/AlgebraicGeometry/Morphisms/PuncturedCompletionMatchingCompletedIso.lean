@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapSurje
 
 ## References
 
-* Stacks Project, Tags 0BLH, 05ER and 05EU
 * Stacks Project, Tag 0BLH, via Tags 05ER and 05EU
 -/
 

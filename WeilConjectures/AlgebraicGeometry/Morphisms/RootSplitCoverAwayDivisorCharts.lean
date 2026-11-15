@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
 * Stacks Project, Tag 0EYG, first paragraph of the proof (the point off the divisor), and Tags 02LA,
   02VN and 04HN
 * Stacks Project, Tag 0EYG, first proof paragraph
-* Tags 02LA, 02VN and 04HN
 -/
 
 @[expose] public section

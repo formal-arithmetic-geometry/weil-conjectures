@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleOpenRestriction.ProEtaleOpe
 
 ## References
 
-* Stacks Project
 * Stacks Project, section-morphism
 -/
 

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Localized.LocalizedStrictPerfectResidue
 
 ## References
 
-* Stacks Project, Tags 0E62, 06YJ and 0D5S
 * Stacks Project, Tag 0E62, residue-field argument
 * Tags 06YJ and 0D5S
 -/

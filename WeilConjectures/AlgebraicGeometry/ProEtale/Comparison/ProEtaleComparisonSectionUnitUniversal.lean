@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 
 ## References
 
-* Stacks Project, Tag 0GLZ
 * Stacks Project, Tag 0GLZ, the sectionwise transpose and verification of its two inverse composites
 -/
 

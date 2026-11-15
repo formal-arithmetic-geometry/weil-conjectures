@@ -206,12 +206,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInversePair
 
 /-! The self-symmetry of the even shifted rational Tate line.
-
-## References
-
-* rational projective-line triangle calculation, Second identity, interchange of its two shifted
-  Tate factors
-* the root-frame description of the positive Tate line
 -/
 
 @[expose] public noncomputable section

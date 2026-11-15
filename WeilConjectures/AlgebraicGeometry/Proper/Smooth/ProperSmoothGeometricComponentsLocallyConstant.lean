@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperReducedGlobalSectionsProdu
 ## References
 
 * Stacks Project, Tag 0E0N, specialized to smooth morphisms
-* Stacks Project, Tag 0E0N
 -/
 
 @[expose] public section

@@ -26,7 +26,7 @@ import Mathlib.CategoryTheory.Monad.Adjunction
 
 The structures below package the witnesses in this single coherence assertion.
 They do not choose a functor from a mere existence theorem. The only categories and
-inverse/direct images used are the published module-sheaf constructions. An open
+inverse/direct images used are the module-sheaf constructions. An open
 extension is specified by its adjunction, equivalently by slice extension followed
 by module sheafification. Closed extensions are identified with actual direct image.
 All derived functors are the exact termwise localizations of these same functors.

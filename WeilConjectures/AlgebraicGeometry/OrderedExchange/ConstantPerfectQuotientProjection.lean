@@ -17,14 +17,10 @@ import WeilConjectures.AlgebraicGeometry.SignedProjectionResolution.SignedProjec
 
 ## References
 
-* Stacks Tags 0944, 06YY and 099M
 * Stacks 0941
 * Stacks 0B56, 099M
-* Stacks 0B56, 0944
-* Stacks 06YY
 * Stacks 0944, reduction from finite-projective to finite-free coefficients
 * Stacks 06YY and the strict-perfect coefficient step of Stacks 0944
-* Stacks Tag 0944, and Tag 06YY
 -/
 
 @[expose] public noncomputable section

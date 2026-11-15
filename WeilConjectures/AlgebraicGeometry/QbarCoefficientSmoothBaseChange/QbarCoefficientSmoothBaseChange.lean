@@ -232,7 +232,7 @@ theorem tensorModel_eq (W : Scheme.{u}) :
           (⟨(pbcAmbientScalarExtension l Ω V a).obj K.obj,
             pbcAmbientCompleteTensor_preserves l Ω V a K⟩))
 
-/-- The canonical integral comparisons, specified by the published scalar mate and
+/-- The canonical integral comparisons, specified by the scalar mate and
 unit-normalized completed tensor comparison. -/
 structure IntegralComparisons where
   push : sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙

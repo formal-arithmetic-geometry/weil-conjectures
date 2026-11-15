@@ -19,17 +19,8 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 ## References
 
-* Stacks Project, Tags 03DA, 06YY, 099Z and 09B1
-* Stacks Tags 03CY and 06YY
-* Stacks Tag 05RU
-* Stacks Tag 03CY
 * Stacks Tag 03CZ
-* Stacks Tags 099Z and 03CY
-* Stacks Tags 03DA and 06YY
-* Stacks Tag 03DA
-* Stacks Tags 03CY and 03DA
 * Stacks Tags 05RU and 03DA
-* Stacks Tags 06YY, 099Z and 09B1
 * Stacks Tags 06YY and 03ED
 * Stacks Project, Tags 03CY, 03DA, 06YY, 099Z and 09B1
 -/

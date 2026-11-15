@@ -30,7 +30,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 * Stacks Project, Tag 09AF, common-right-adjoint proof
 * Stacks Project, Tags 099R and 09AF
-* Stacks Project, Tag 09AF
 -/
 
 @[expose] public section

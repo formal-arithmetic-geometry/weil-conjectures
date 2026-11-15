@@ -17,10 +17,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Flat single base change on a cartesian source
-
-## References
-
-* Stacks Project
 -/
 
 @[expose] public section

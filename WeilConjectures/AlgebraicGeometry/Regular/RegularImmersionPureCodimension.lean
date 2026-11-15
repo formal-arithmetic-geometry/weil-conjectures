@@ -14,10 +14,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 /-!
 # Regular closed immersions with the purity chapter's codimension convention
 
-The upstream affine-local `IsRegularImmersion` does not include the stipulated stalkwise
-Krull-dimension equality. This definition records precisely the chapter's two stalkwise
-conditions. The parenthetical reference to smooth-pair linearization is a forward pointer,
-not an additional defining condition.
+The affine-local `IsRegularImmersion` does not include the stalkwise Krull-dimension
+equality. This definition imposes both stalkwise conditions.
 -/
 
 @[expose] public section

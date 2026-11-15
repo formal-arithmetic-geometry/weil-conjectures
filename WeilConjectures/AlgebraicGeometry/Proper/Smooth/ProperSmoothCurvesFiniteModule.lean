@@ -28,7 +28,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 ## References
 
-* Stacks Project, Tag 0GKW
 * Tag 0GK3 for dimension zero, Tag 02G1 for the fibre-dimension decomposition
 * Stacks Project, Tag 0GKW (dimension one), Tag 0GK3 (dimension zero), and Tag 02G1 (locally
   constant smooth fibre dimension)

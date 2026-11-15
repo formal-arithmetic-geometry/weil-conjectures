@@ -30,8 +30,7 @@ scalar functor or chosen comparison equivalence is needed.
 ## References
 
 * Stacks Tags 09AL, 09BU--09BX and 09AV
-* Stacks Tag 09AL
-* agent assembly of Stacks 09AL, 09BU--09BX, 09AV
+* Stacks Project, Tags 09AL, 09BU--09BX and 09AV
 -/
 
 @[expose] public noncomputable section

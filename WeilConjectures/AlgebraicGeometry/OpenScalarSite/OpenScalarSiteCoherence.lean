@@ -116,7 +116,6 @@ import all WeilConjectures.AlgebraicGeometry.Open.OpenComparisonUnitNormalizatio
 * Stacks Project, Tags 0GL1, 0E8I, 09AF, 06YQ and 0G7E
 * Stacks 03EL, 03EK
 * Stacks 0GL1, 0E8I, 06YY
-* Stacks 03DI, 09AF
 * Stacks 03DI, 0E8I, 0GL1
 -/
 

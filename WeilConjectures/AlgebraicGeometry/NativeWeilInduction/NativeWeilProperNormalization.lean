@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedExactCompositionComparison
 
 ## References
 
-* comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y
+* Stacks Project, Tags 079P, 08BJ and 070Y
 -/
 
 @[expose] public noncomputable section

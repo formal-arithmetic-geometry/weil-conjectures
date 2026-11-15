@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.System.SystemEvaluationTopos
 * Zheng Construction 4.1 and Lemma 4.10
 * Stacks 06YS, 07A4 and 08J9
 * Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26
-* Stacks 07A4 and 08J9, step 2
 -/
 
 @[expose] public noncomputable section

@@ -22,8 +22,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 * Stacks Project, Tags 0BTV and 01ZM, used in the last paragraph of Tag 0EZJ
 * Stacks Project, Tag 01ZM, parts (2) and (3), and Tag 0BTV, the equivalence of finite étale
   categories
-* applied in Tag 0EZJ, final paragraph
-* Stacks Project, Tags 0BTV and 01ZM
+* Stacks Project, Tag 0EZJ, final paragraph
 * Tag 0EZJ, final paragraph
 -/
 

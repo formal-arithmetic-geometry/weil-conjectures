@@ -191,8 +191,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalSectionTotalComparison
 ## References
 
 * Stacks Project, Tags 08J9, 08JA and 08JB
-* Stacks 06YL
-* Stacks 03EK
 * Stacks 03EK, 06YL
 * Stacks 06YS
 * Stacks 05RU

@@ -16,7 +16,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 /-!
 # Coherent scalar restriction for open extension by zero
 
-The comparisons are the published `sfOpenRestriction` and its exact termwise
+The comparisons are the `sfOpenRestriction` and its exact termwise
 localization. Normalization is expressed on the open adjunction unit: on each
 nonzero summand of the defining extension presheaf it is the identity; maps from
 all remaining values, which are zero, are unique. Thus this unit equation is
@@ -24,12 +24,7 @@ precisely the pre-sheafification normalization, without a choice of stalks.
 
 ## References
 
-* Stacks Project, Tags 03DI and 03CY
-* Tag 015F
 * Tag 04VG
-* Stacks Tag 00YV
-* Stacks Tag 03DA
-* Stacks Tags 00YV and 03DA
 * Stacks Tags 03DI and 03CY
 * Stacks Tags 03DI and 03DA
 * Stacks Tags 03DI and 00YV
@@ -372,7 +367,7 @@ private theorem open_normalized {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersio
   simp only [Functor.comp_map] at n1 n2
   erw [n2, reassoc_of% n1, Iso.hom_inv_id_app_assoc]
 
-/-- The published comparison is the unique comparison inducing identity on the
+/-- The comparison is the unique comparison inducing identity on the
 extension presheaves, equivalently satisfying the displayed open-unit equation. -/
 theorem sfOpenRestriction_normalized_unique {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :

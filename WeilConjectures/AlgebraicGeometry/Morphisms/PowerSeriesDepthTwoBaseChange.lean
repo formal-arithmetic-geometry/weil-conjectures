@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteMod
 * Stacks Project, Tag 0EYA, identification C = C0 tensor B
 * Tags 0EY9 and 0EY6
 * Stacks Project, Tag 0EYA, construction of the isomorphism Psi
-* 0EY6(2),(a),(b)
+* Stacks Project, Tag 0EY6 (2)(a), (2)(b)
 -/
 
 @[expose] public section

@@ -121,15 +121,10 @@ import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantRed
 
 ## References
 
-* Stacks Project, Tags 0GL1 and 0E8I
-* Stacks 00XZ
 * Stacks 00XZ, the datum's finite coefficient presheaf
-* Stacks 03DI, 03DJ
-* Stacks 03DI
 * Stacks 03DA, 03DI
 * Stacks 0E8I, 0GL1
 * Stacks 03DJ
-* Stacks 0GL1
 -/
 
 @[expose] public noncomputable section

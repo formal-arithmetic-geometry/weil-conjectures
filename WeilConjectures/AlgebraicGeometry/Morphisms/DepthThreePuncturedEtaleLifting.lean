@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteUnramifiedPrincipalQuot
 
 ## References
 
-* Stacks Project, Tag 0BLM
 * Stacks Project, Tag 0BLM, Lemma 58.20.7, and its proof through Tag 0BLS
 -/
 

@@ -19,8 +19,6 @@ The scalar associator is normalized by its universal computation counits.
 
 ## References
 
-* Stacks Project, Tags 0D6D, 0G7E and 07A6
-* Stacks 07A6
 * Stacks 0D6D, 0G7E, 07A6
 -/
 

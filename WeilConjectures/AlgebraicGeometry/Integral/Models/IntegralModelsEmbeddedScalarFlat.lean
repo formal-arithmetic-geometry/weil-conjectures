@@ -399,8 +399,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModel
 
 ## References
 
-* Stacks Project, Tag 093M, and the integral-models proof, paragraph (1)
-* Stacks Project
+* Stacks Project, Tag 093M
 -/
 
 @[expose] public noncomputable section

@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.Stalk
 ## References
 
 * Stacks Project, Tag 0EY9, finite-index calculation
-* Tag 0337
 * Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0337
 -/
 

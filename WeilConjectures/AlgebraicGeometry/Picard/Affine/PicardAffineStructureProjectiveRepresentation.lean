@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 
 ## References
 
-* Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0
 * Stacks Project, Tag 08FE, and the tensor pullback composition and unit comparisons
 * Stacks Project, Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0
 -/

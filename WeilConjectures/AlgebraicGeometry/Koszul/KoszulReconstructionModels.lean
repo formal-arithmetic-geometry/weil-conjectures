@@ -112,7 +112,6 @@ normalized on all K-flat representatives by the ordinary quotient maps.
 * Stacks Tag 00W1
 * Stacks Tags 079B and 079Q
 * Stacks Tag 0941
-* Stacks Tag 06YY
 * Stacks Tags 06XN and 06YY
 -/
 

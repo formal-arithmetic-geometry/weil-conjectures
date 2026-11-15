@@ -23,13 +23,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModul
 
 ## References
 
-* Stacks Project Tag 099R
-* Stacks Tag 099R
-* Stacks Tags 00YV and 099R
-* Stacks Tags 00YV and 00WJ
 * Stacks Tag 00WJ
 * Stacks Tag 00YV
-* Stacks 09BT
 * Stacks 03DA, 09BT
 * Stacks 099R, 09BT
 -/
@@ -142,7 +137,7 @@ end AlgebraicGeometry.Scheme
 @[expose] public noncomputable section
 namespace AlgebraicGeometry.Scheme
 
-/-- The finite constant coefficient sheaf in its published function presentation. -/
+/-- The finite constant coefficient sheaf in its function presentation. -/
 abbrev finiteOriginFunctionRing (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] := AdicCoefficients.coefficientRing T Λ
 
@@ -185,7 +180,7 @@ theorem finiteOriginConstantComparison_isIso (T : Scheme.{u}) (Λ : Type (u + 1)
   exact ((ProEt.topology T).W_iff (AdicCoefficients.constants T Λ)).mp
     ((ProEt.topology T).W_of_isLocallyBijective (AdicCoefficients.constants T Λ))
 
-/-- The constants-to-functions transport retains exactly the published section map. -/
+/-- The constants-to-functions transport retains exactly the section map. -/
 def finiteOriginConstantIso (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] : etaleOriginRing T Λ ≅ finiteOriginFunctionRing T Λ :=
   @asIso _ _ _ _ (AdicCoefficients.constantComparison T Λ)

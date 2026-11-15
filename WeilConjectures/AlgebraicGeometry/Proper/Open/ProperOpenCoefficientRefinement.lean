@@ -23,11 +23,8 @@ and the K-flat-normalized scalar/pullback comparison are existing constructions.
 
 ## References
 
-* Stacks Project, Tags 0F7I and 0GL6
 * Stacks 0G7E and 0GL6
-* Stacks 0GL6
 * Stacks 03DJ, 06YS and 0GL6
-* Stacks 0F7I
 * Stacks 0F7I and 0GL6, with the explicit clopen-section argument
 -/
 

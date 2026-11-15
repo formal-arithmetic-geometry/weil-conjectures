@@ -26,7 +26,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraitGenericNormalizationChar
 
 ## References
 
-* Stacks Project, Tags 0EYJ, 0EYG and 0EYH
 * Stacks Project, Tags 0EYJ (trait paragraph), 0EYG and 0EYH
 -/
 

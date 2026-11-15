@@ -16,7 +16,6 @@ is built into this construction.
 ## References
 
 * Stacks Project, Tag 03Q9, restriction from germs
-* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section

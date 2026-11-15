@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseIm
 
 * Stacks Project, Modules on Sites, Tag 03EL
 * Cohomology on Sites, Tags 06YS, 0G7E and 06YY
-* Stacks 00XZ and 03EL
 * Stacks 00XZ, 03EL and 03CZ
 -/
 

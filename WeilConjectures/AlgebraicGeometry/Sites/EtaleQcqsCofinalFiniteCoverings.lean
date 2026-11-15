@@ -15,9 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 ## References
 
-* Section 59.51, Tag 03Q4 (label section-colimit), first paragraph
-* Section 59.51, Tag 03Q4 (label section-colimit), first paragraph, using Topologies, Lemma Tag 0218
-  and Sites, Lemma Tag 0738
+* Stacks Project, Tag 03Q4, first paragraph
+* Stacks Project, Tags 03Q4, 0218 and 0738
 -/
 
 @[expose] public section

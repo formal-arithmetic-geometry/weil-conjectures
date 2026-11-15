@@ -22,18 +22,12 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 ## References
 
 * Stacks Project, Cohomology on Sites, Tag 03AJ
-* compare Cohomology Tags 0G71 and 0G78
+* Stacks Project, Tags 0G71 and 0G78
 * Stacks Project, Tag 03AJ, relative refinement
-* Tag 0G78
-* Stacks Project, Tag 0G78
 * Stacks Project, Tag 03AJ, canonical extension class
 * Stacks Project, Tag 03AJ, relative cone construction
 * Stacks Project, Tag 013T and the relative refinement of Tag 03AJ
-* Stacks Project, Tag 013T
-* relative refinement of Tag 03AJ
 * Stacks Project, Tag 013T and Tag 03AJ, relative refinement
-* Stacks Project, Tags 0G71 and 0G78
-* Tag 013T
 * Tag 03AJ, relative refinement
 -/
 

@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalDerivedReductionEx
 
 ## References
 
-* Stacks Project, Tag 099M
 * Stacks Project, Tag 099M, using its Koszul-tower proof
 -/
 

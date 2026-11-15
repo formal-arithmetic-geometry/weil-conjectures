@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
 
 ## References
 
-* Stacks Project, Tags 0B3M and 05AR
 * Stacks Project, Tag 0B3M, the cyclic image argument, and Tag 05AR
 -/
 

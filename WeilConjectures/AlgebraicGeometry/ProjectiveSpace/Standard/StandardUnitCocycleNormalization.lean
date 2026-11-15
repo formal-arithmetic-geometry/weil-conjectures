@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Standard.StandardUnitCo
 
 ## References
 
-* Stacks Project, Tag 0BXJ
 * Stacks Project, Tag 0BXJ, the double- and triple-overlap calculations
 -/
 

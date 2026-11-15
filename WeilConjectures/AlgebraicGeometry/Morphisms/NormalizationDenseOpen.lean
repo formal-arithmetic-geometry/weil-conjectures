@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSectio
 
 ## References
 
-* Stacks Project, Tags 0357, 035I and 0AB1
 * Stacks Project, Tags 0357 (normal components), 035I (relative normalization), and 0AB1 (integral
   birational maps to normal schemes)
 -/

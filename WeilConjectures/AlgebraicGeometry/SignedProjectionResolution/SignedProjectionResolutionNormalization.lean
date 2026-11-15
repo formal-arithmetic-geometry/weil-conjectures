@@ -158,7 +158,7 @@ def targetModel :
     (@asIso _ _ _ _ (derivedComparison f R S c (targetComplex f R S c I F))
       (model_properties f R S c I hI F package bounded).2.2.2.2).symm
 
-/-- The ordinary signed total counit mate t, using the published total construction. -/
+/-- The ordinary signed total counit mate t, using the total construction. -/
 def totalMate : sourceComplex f R S c I F ⟶ pushTargetComplex f R S c I F := by
   letI := SheafOfModules.monoidalCategory R
   letI := SheafOfModules.monoidalCategory S

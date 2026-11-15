@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 
 ## References
 
-* Stacks Project, Tags 0BMA and 0EY7
 * Stacks Project, Tags 0BMA, 0EY7, and 0EY6(2)
 -/
 

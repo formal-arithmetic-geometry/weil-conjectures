@@ -21,7 +21,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 ## References
 
-* Stacks Project, Tag 0BF2
 * Stacks Project, Tag 0BF2, target complexes
 * Tags 08CR, 08EB and 0B91
 -/

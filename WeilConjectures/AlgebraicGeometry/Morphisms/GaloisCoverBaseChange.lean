@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 ## References
 
 * Stacks Project, Tag 0EZJ, final pullback step
-* finite étale torsors as in Tag 0BTV
 * Tag 0BTV
 -/
 

@@ -38,7 +38,7 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-! # Normalized reconstruction of composable completed operations
 
-All categories are the published equivalent small models of the small pro-etale sites.
+All categories are the equivalent small models of the small pro-etale sites.
 The model enlarges only Hom universes. Letters carry scheme maps, and both functors
 are computed from those maps. Words are indexed composable chains.
 
@@ -60,7 +60,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The published small model, retaining every pro-etale object. -/
+/-- The small model, retaining every pro-etale object. -/
 def sfCbcSite (T : Scheme.{t}) : AdicSites.Site.{t + 1} where
   objects := proEtaleSiteModel T
   topology := proEtaleModelTopology T
@@ -153,7 +153,7 @@ def SfCbcLetter.complete {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     sfCbcModelDerivedExtension j A ⋙ (sfCbcSite T).completion _ (sfCbcModelIdeal d)
 
 /-- The strict functor is termwise inverse image, derived termwise direct image,
-or the published exact termwise extension, according to the letter. -/
+or the exact termwise extension, according to the letter. -/
 def SfCbcLetter.strict {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     (sfCbcSite S).towerDerived (ULift.{t + 1, t} A) ⥤
       (sfCbcSite T).towerDerived (ULift.{t + 1, t} A) :=
@@ -209,7 +209,7 @@ def sfCbcDirectQ {U V : Scheme.{t}} (u : U ⟶ V) :
 
 /-- The three specified one-letter maps. Pullback is inverse reduced unit followed by
 strict pullback/tensor comparison. Direct image is the diagram counit-tensor mate.
-Open extension uses exactly the normalized tensor comparison of the published extension
+Open extension uses exactly the normalized tensor comparison of the extension
 lemma, preceded by inverse reduced unit, hence is its q_j in the small model. -/
 def SfCbcLetter.q (hunit : SfCbcReducedUnitsInvertible d)
     {S T : Scheme.{t}} (F : SfCbcLetter S T) :
@@ -227,7 +227,7 @@ def SfCbcLetter.q (hunit : SfCbcReducedUnitsInvertible d)
       (@asIso _ _ _ _ (sfCbcModelReducedUnit d T) (hunit T)).inv ≫
         (sfCbcTensorComparison_existsUnique j d).exists.choose.hom
 
-/-- The strict comparison is recursively defined by the stipulated concatenation formula.
+/-- The strict comparison is recursively defined by the concatenation formula.
 For the empty word it is the identity, expressed by the canonical functor unitors. -/
 def SfCbcWord.q (hunit : SfCbcReducedUnitsInvertible d) :
     {S T : Scheme.{t}} → (W : SfCbcWord S T) →

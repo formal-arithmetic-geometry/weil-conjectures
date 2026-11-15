@@ -30,8 +30,6 @@ its extension-by-zero adjunction to the intrinsic coefficient presentation.
 
 ## References
 
-* Stacks Project, Tags 03DI, 03CY and 09AE
-* Stacks, Tags 03CY and 09AE
 * Stacks, Tags 03DI, 03CY and 09AE
 -/
 

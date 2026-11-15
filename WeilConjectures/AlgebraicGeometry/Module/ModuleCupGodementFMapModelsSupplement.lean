@@ -73,7 +73,7 @@ The remaining construction takes place entirely before alternating cofaces and e
 
 ## References
 
-* Stacks Project, Tags 0FKR and 0FKU, extended by the coordinate argument below
+* Stacks Project, Tags 0FKR and 0FKU
 -/
 
 -- After pruning, this module only keeps private declarations.

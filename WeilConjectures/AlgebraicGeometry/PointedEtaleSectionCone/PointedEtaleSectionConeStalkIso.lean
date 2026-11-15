@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 ## References
 
 * Stacks Project, Tags 03Q9 and 03QO, the pointed germ comparison
-* Stacks Project, Tags 03Q9 and 03QO
 -/
 
 @[expose] public section

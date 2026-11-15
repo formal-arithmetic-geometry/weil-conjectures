@@ -35,7 +35,7 @@ monomorphism or finiteness hypothesis.
 
 * Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J
 * Modules on Sites, Tags 03D2 and 03EK
-* pro-etale functoriality, Tag 09A5
+* Stacks Project, Tag 09A5
 -/
 
 -- After pruning, this module only keeps private declarations.

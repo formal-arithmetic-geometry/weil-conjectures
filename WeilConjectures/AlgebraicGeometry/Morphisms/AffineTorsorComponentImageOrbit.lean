@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 ## References
 
-* Stacks Project, Tag 03SF
 * Stacks Project, Tag 03SF, stabilizer quotients of Galois covers
 -/
 

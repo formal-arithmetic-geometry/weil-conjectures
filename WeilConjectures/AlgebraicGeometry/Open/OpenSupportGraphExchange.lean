@@ -297,7 +297,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGraphFromOpenBaseChange
 ## References
 
 * Stacks Project, Tag 0F7F, the product-graph base-change calculation
-* Stacks Project, Tag 0F7F
 -/
 
 @[expose] public section

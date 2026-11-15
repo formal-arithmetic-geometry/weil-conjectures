@@ -56,7 +56,6 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 * Stacks Project, Modules on Sites, Tags 093J--093M
 * Pro-etale Cohomology, Tags 09BT and 09BV
 * Stacks, Tags 093J--093M
-* Tags 09BT and 09BV
 -/
 
 @[expose] public noncomputable section

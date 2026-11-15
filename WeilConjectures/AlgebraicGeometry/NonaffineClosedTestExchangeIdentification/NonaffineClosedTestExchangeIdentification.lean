@@ -27,8 +27,6 @@ the identification with the actual ambient mate, and the compatibility clauses.
 ## References
 
 * Stacks Project, Tags 09BK and 09BL, Tag 0D6F
-* derived-functor convention, Tag 0D6F
-* Tag 0D6F
 -/
 
 @[expose] public noncomputable section

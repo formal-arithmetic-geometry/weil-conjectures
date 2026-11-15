@@ -26,7 +26,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 * Bhatt--Scholze, Lemma 6.3.14, final paragraph, as used in Lemma 6.8.12
 * Bhatt--Scholze, Lemma 6.3.14, final devissage
-* Proposition 6.6.11
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section

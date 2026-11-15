@@ -17,9 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
 
 ## References
 
-* Stacks Project, Tags 0EZJ, 0BTV and 01ZM
 * Stacks Project, Tag 0EZJ, last paragraph of the limit reduction
-* Lemma 58.14.1 (Tag 0BTV) and finite-presentation descent (Tag 01ZM)
+* Stacks Project, Tags 0BTV and 01ZM
 -/
 
 @[expose] public section

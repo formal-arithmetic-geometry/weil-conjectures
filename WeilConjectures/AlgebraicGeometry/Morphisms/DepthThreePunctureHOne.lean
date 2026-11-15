@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedHOneLocalCohomologyC
 
 ## References
 
-* Stacks Project, Tags 0BK0 and 0AVY
 * Stacks Project, Tag 0BK0 (Lemma 51.8.2) and Tag 0AVY (Lemma 47.11.1)
 -/
 

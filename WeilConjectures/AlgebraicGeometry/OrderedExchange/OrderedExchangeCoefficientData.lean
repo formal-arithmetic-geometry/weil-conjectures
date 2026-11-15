@@ -85,17 +85,10 @@ normalizations. The ambient constant and completed module categories remain dist
 
 ## References
 
-* strict coefficient supplement, Stacks Tags 099M, 099N, 0A07 and 0E48
-* Stacks 099M
 * Stacks Tags 099M, 0941 and 0A07
-* Stacks 0E48
 * Stacks 0D6D
-* Stacks 099M, 099I
 * Stacks Tags 099C, 099I and 099M
-* Stacks 099M, 099N
-* Stacks Tags 099M and 099N
 * Stacks 099N
-* Stacks 0A07
 * Stacks 099M, 0E48
 -/
 

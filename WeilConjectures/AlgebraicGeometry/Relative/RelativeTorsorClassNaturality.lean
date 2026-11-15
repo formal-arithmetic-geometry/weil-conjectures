@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Whiskering
 
 ## References
 
-* Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8
+* Stacks Project, Tag 03AJ
 * Tag 0G78
 -/
 

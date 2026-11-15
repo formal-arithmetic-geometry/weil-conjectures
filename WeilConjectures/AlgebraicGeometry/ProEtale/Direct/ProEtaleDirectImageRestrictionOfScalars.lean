@@ -16,10 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingO
 
 ## References
 
-* Stacks Project, Tags 0D6E, 0D6J and 015F
 * Stacks Tags 03DA and 015F
-* Stacks Tag 015F
-* Stacks Tag 0D6E
 * Stacks Tags 0D6E, 0D6J, 015F
 -/
 

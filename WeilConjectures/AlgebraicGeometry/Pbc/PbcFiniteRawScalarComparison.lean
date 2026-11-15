@@ -19,9 +19,8 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 ## References
 
-* BS Proposition 6.8.14(2), Remark 6.8.15
+* Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15
 * Stacks 03EK and 0D6D
-* BS 6.8.14(2), 6.8.15
 -/
 
 @[expose] public noncomputable section

@@ -20,11 +20,9 @@ precisely the pre-sheafification normalization, without a choice of stalks.
 
 ## References
 
-* Stacks Project, Tags 03DI and 03CY
 * Tag 015F
 * Tag 04VG
 * Stacks Tags 03DI and 03CY
-* Stacks Tag 03DA
 * Stacks Tags 03CY and 03DA
 -/
 

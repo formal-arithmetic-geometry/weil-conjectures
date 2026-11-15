@@ -23,7 +23,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 ## References
 
-* Stacks Tags 09AA, 09BM and 09AH
 * Stacks Tags 09AA, 09BM, 09AG, 09AH and 03DA
 -/
 

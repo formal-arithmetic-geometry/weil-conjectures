@@ -141,15 +141,11 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 ## References
 
-* Stacks Project, Tags 03CB, 0D6D, 07A4
 * Bhatt--Scholze, Remark 6.8.15
 * Stacks 099M
-* BS 6.8.15
-* Stacks 03EL
 * Stacks 06YY
 * Stacks 03D2
 * Stacks 03EL, 0D6D, 07A4
-* Stacks 0D6D, 07A4
 * Stacks 03CB
 -/
 

@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 
 ## References
 
-* Stacks Project, Tag 02GF
 * Stacks Project, Tag 02GF, openness of the unramified locus
 -/
 

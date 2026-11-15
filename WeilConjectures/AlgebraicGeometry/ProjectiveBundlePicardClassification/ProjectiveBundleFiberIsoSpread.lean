@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 ## References
 
 * EGA II, Remark 4.2.7 (classification announcement)
-* Stacks Project
 -/
 
 @[expose] public section

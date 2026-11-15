@@ -138,8 +138,6 @@ sheaves valued in `ModuleCat`, without a constructibility condition.
 ## References
 
 * Stacks Project, Tags 03DA, 09BN and 09AH
-* Stacks Tag 09AH
-* Stacks Tag 03DA
 -/
 
 @[expose] public section

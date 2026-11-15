@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
 ## References
 
-* Stacks 07A4 and 06YS
 * Stacks 07A4, 06YS
 -/
 

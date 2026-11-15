@@ -76,7 +76,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 
 ## References
 
-* Stacks Tags 03ET, 00YV and 06YQ
 * Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL
 -/
 

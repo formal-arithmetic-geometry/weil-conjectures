@@ -19,10 +19,6 @@ import WeilConjectures.WeilSheaf.IsotypicPullback
 
 The assertion is the natural base-change isomorphism for the actual native extension by
 zero and pullback functors on the ordinary derived categories of all native Weil sheaves.
-
-## References
-
-* Stacks Project
 -/
 
 @[expose] public section

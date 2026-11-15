@@ -23,7 +23,6 @@ Every ring and every line below is constructed, not selected from an existence a
 ## References
 
 * Bhatt--Scholze, Section 6.8
-* root-tower construction of Tate twists
 -/
 
 @[expose] public noncomputable section

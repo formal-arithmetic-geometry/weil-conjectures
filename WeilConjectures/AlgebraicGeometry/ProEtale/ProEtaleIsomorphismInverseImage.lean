@@ -47,8 +47,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppl
 
 ## References
 
-* Stacks Project, Tags 09A5 and 00WX
-* Stacks Project, Tag 09A5
 * Stacks Project, Tags 09A5, 00WX and 0H7J
 -/
 

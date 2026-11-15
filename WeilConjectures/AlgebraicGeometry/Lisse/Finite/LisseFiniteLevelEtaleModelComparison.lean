@@ -16,7 +16,6 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 ## References
 
 * Stacks Tags 099Y, 099Z and 09B1
-* Stacks Project
 -/
 
 @[expose] public noncomputable section

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtale
 ## References
 
 * Stacks Project, Tag 0BJH, as applied in Tag 0EY6(3)
-* Stacks Project
 -/
 
 @[expose] public section

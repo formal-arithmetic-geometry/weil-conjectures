@@ -21,8 +21,6 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarDirectNormalizat
 
 ## References
 
-* Stacks Tags 03DI and 0D6E
-* Stacks Tag 0D6E
 * Bhatt--Scholze, Sections 6.5 and 6.7
 * Stacks Tags 03DI, 0D6E and 0D6J
 -/

@@ -48,7 +48,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 * Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and Proposition
   6.8.14(2), pp. 60--62
 * Bhatt--Scholze, Lemma 6.8.13
-* Stacks Tag 03DI
 * Stacks Tag 03EK
 * Bhatt--Scholze, Lemma 6.8.2
 * Bhatt--Scholze, Lemma 6.8.2(1)
@@ -109,7 +108,7 @@ def finiteComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (Scheme.discreteContinuousCoefficientIso X).app (Scheme.finiteCoefficientRing l E n)
 
 /-- Completed membership in degree zero, with the coefficient identification fixed by
-all finite residue maps. The predicate used is the published three-clause predicate,
+all finite residue maps. The predicate used is the three-clause predicate,
 including compatible etale origins. No completion or model is substituted for N. -/
 def IsCompletedModel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})

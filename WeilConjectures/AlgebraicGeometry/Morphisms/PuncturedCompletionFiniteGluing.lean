@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 ## References
 
-* Stacks Project, Tag 0BLH
 * Stacks Project, Tag 0BLH and More on Algebra, Proposition 15.91.16
 -/
 

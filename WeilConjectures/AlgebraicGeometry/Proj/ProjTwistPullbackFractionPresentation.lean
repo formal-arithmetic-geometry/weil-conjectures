@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 ## References
 
-* Stacks Project, Tags 01MY, 01N2 and 01M7
 * Stacks Project, Tags 01MY and 01N2, the standard-open calculation, and Tag 01M7 for the associated
   graded-module sheaf
 -/

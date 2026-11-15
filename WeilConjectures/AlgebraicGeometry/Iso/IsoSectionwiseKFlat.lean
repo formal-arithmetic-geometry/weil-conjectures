@@ -231,7 +231,6 @@ import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 * Stacks Project, Tag 06YN
 * Stacks Project, Modules on Sites, Tag 03D2
 * Cohomology on Sites, Tag 0DEP
-* Stacks Project
 -/
 
 @[expose] public section

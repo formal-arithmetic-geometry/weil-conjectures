@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 ## References
 
-* Stacks Project, Tags 02KG, 0096 and 01CA
 * Stacks Project, Tag 02KG, and Tags 0096 and 01CA for the structure-sheaf pullback
 -/
 

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueCoefficient
 
 ## References
 
-* Stacks Project, Tags 0A1D, 08HY, 0D5S and 01F7
 * Stacks Project, Tag 0A1D, relatively flat derived base change
 * Tags 08HY and 0D5S, the base-change mate and pullback composition
 * Tag 01F7, functoriality under the residue-point and fibre isomorphisms

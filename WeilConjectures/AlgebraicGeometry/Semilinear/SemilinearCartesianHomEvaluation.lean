@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 * Zheng, Construction 4.1 and Proposition 4.17
 * Stacks Tags 06YY, 07A4, 07A6 and 08J9
 * Zheng Proposition 4.17
-* Stacks 08J9
 -/
 
 @[expose] public noncomputable section

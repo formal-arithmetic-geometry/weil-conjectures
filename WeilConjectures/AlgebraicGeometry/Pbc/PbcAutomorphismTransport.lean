@@ -597,8 +597,7 @@ theorem pbcIsoAmbientPullback_preserves
       (pbcIsoAmbientPullback f d) e
 
 include hf in
-/-- The completed comparison is invertible on the stipulated integral complete objects.
--/
+/-- The completed comparison is invertible on the integral complete objects. -/
 @[instance] theorem pbcIsoCompletedComparison_isIso
     (K : PbcBoundedConstructibleComplete Y d) :
     IsIso (completedPullbackComparison f d K.obj) := by

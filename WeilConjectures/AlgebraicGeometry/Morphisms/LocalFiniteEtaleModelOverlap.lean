@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhood
 
 ## References
 
-* Stacks Project, Tag 0EYJ
 * Stacks Project, Tag 0EYJ, local claim and spreading, and Tags 0BQ5 and 0EY3
 -/
 

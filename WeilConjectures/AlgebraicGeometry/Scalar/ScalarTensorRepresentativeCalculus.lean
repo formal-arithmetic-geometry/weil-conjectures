@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorRepre
 ## References
 
 * Stacks Project, Tags 06YY, 07A4 and 0FPH
-* Stacks 06YY
 -/
 
 @[expose] public noncomputable section

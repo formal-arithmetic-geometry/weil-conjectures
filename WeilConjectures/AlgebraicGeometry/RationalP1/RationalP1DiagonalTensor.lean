@@ -197,7 +197,7 @@ theorem diagonalTensorMap_isIso (Y : Scheme.{u})
     (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The inverse canonical diagonal comparison in the source's orientation. -/
+/-- The inverse of the canonical diagonal comparison. -/
 @[irreducible]
 def diagonalTensorIso (Y : Scheme.{u}) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     (moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj M ≅

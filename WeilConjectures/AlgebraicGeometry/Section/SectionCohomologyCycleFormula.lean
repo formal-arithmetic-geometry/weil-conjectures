@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 ## References
 
 * Stacks Project, Tags 01E4, 01F4 and 01FB
-* Stacks Project, Tag 01E4
 -/
 
 @[expose] public section

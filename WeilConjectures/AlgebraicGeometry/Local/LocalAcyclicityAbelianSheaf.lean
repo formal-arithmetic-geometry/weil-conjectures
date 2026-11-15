@@ -38,7 +38,6 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
 
 ## References
 
-* Stacks Project, Tag 0GJP
 * Stacks Project, Tag 0GJP, preceding diagram
 * Tags 04GU and 04HX
 -/

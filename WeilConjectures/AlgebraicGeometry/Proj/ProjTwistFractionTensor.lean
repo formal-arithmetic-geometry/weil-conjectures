@@ -15,8 +15,6 @@ import Mathlib.Tactic.Ring
 ## References
 
 * Stacks Project, Tags 01MY and 01N2, standard-open calculation
-* Stacks, Tags 01MY and 01N2
-* Stacks, Tag 01MY
 * Stacks, Tag 01N2, standard-open zero criterion
 -/
 

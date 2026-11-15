@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCycli
 
 ## References
 
-* Stacks Project
 * Stacks Project, strict henselization and descent paragraphs
 -/
 

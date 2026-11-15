@@ -50,8 +50,6 @@ categories are ordinary and uncompleted. Natural numbers index positive exponent
 
 * Stacks Project, Cohomology on Sites, Tags 0B56 and 0944, and More on Algebra, Tag 0657
 * Stacks 098T
-* Stacks 0B56
-* Stacks 0944
 * Stacks 0944 and 093M
 -/
 

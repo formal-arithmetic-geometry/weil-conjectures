@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.Strict.IntegralStrictLimitAugm
 ## References
 
 * Stacks Project, Tag 099M
-* the unique integer action, Stacks 099M
-* sectionwise integer actions, Stacks 099M
-* the integral coefficient specialization of Stacks 099M
-* Stacks 099M and the source-library completion adjunction
 * Stacks 06YY, uniqueness of total derived functors
 -/
 

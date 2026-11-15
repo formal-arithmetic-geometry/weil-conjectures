@@ -17,7 +17,6 @@ The comparison is natural in the tower index and preserves the specified augment
 
 ## References
 
-* Stacks Project, Tag 099M
 * Stacks Project, Tag 099M, the two-term free resolution of the principal coefficients
 -/
 

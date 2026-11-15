@@ -29,13 +29,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Open pro-etale pullback evaluation and its specified adjunction unit
 
-The pullback and unit are the published small-model module constructions.
+The pullback and unit are the small-model module constructions.
 The coefficient comparison below is normalized on constant sections.
 
 ## References
 
 * Stacks Project, Tags 09BN, 00VE, 00WH, 00WX, 00XZ and 03D3
-* Stacks Project, Tags 00XZ and 09BN
 -/
 
 @[expose] public section

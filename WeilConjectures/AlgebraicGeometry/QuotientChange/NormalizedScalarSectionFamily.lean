@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 ## References
 
 * Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47
-* Stacks 03EK, 0D6D and 07A6
 -/
 
 @[expose] public noncomputable section

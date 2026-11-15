@@ -66,7 +66,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Scheme
 
-/-- Canonical completed-coefficient inverse image, reusing the published finite-quotient
+/-- Canonical completed-coefficient inverse image, reusing the finite-quotient
 comparison and the constant-section-normalized presentation of the completed ring. -/
 noncomputable def cbcCompletedCoefficientIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

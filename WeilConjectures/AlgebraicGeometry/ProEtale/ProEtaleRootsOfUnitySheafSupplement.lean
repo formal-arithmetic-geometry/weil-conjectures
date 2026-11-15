@@ -39,9 +39,7 @@ sectionwise global-sections rings. No invertibility hypothesis on the exponent i
 ## References
 
 * Stacks Project, Section 59.28, Tag 03PK
-* Definition 59.23.1, Tag 03P4
-* Stacks Project, Tag 03PK
-* Stacks Project
+* Stacks Project, Tag 03P4
 -/
 
 @[expose] public section

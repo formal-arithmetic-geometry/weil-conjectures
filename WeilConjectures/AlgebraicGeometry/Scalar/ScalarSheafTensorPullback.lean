@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdent
 
 * Stacks Project, Tags 07A4 and 07A7
 * Stacks 03EK
-* Stacks 07A4
 -/
 
 @[expose] public noncomputable section

@@ -19,7 +19,7 @@ public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 # The supported-kernel construction with the finite-coefficient interface
 
 The attached legacy module imports a second copy of the star functors. This interface
-uses the same kernel construction with the published finite-coefficient star functors.
+uses the same kernel construction with the finite-coefficient star functors.
 The kernel is taken in the functor category, so its action on morphisms is canonical.
 -/
 

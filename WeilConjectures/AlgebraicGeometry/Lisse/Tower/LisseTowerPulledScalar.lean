@@ -15,7 +15,6 @@ mate, and the specified restriction-of-scalars compositor.
 
 ## References
 
-* Stacks Project, Tags 03CY, 03DA and 06YY
 * Stacks Tags 03CY and 03DA
 * Stacks Tags 03DA and 05RU
 * Stacks Tags 03DA and 06YY

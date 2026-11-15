@@ -26,7 +26,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 ## References
 
 * Stacks Project, Tag 0A1H, single-module case
-* Tags 08CG and 08CI
 * Stacks Project, Tag 0A1H with E=O_X and G=F[0]
 * Tags 01XD, 08CG, 08CI
 -/

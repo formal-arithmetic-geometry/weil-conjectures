@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 ## References
 
 * Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ
-* Stacks Project, Tag 01MY
 * Stacks Project, Constructions, Tags 01N2 and 01MY
 -/
 

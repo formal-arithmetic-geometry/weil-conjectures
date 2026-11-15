@@ -19,7 +19,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 * Stacks Project, Tag 0BF2, derived fibre equality preceding the first complex
 * Tags 0BF0 and 0B91(2)
 * Stacks Project, Tag 0BF2, the displayed derived fibre equality
-* Tags 0BF0 and 0B91
 -/
 
 @[expose] public section

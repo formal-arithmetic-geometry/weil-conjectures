@@ -15,8 +15,6 @@ followed by the existing intrinsic realization. No coefficient isomorphism is ch
 ## References
 
 * Stacks Tags 03ET and 00YV
-* Stacks Tag 03ET
-* Stacks Tag 099L
 * Stacks Tags 099L and 03ET
 -/
 

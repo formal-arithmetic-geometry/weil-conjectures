@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalSectionStableAnnihilator
 
 ## References
 
-* Stacks Project, Tags 0H3E, 0BLD, 0BK0 and 0AVY
 * Stacks Project, Tag 0H3E (the pro-isomorphism preceding the displayed diagram), and Tags 0BLD,
   0BK0 and 0AVY
 -/

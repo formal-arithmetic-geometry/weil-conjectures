@@ -11,15 +11,14 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSuppl
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 
-/-! # Functor and completion interface for the published strict-tower pullback
-The published quotient tower, resolving pullback, derived limit and comparison
+/-! # Functor and completion interface for the strict-tower pullback
+The quotient tower, resolving pullback, derived limit and comparison
 are retained. This interface supplies their functor and unit-compatible natural
 isomorphism to the intrinsic completion reflector used by scalar comparisons.
 
 ## References
 
 * Stacks 099N (2), (5)
-* Stacks 099N
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-/-- The functor underlying exactly the published completedPullbackObject. -/
+/-- The functor underlying exactly the completedPullbackObject. -/
 abbrev pbcActualStrictCompletedPull :=
   (completedReductionTower Y d ⋙ completedTowerPullback g d) ⋙ completedTowerRlim d X
 

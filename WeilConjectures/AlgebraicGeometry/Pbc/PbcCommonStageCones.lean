@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemCommonStageC
 
 The recorded generic commonStageCone and CommonStageDistinguished constructions
 are reused, with their literal cone object and all three specified arrows. This
-module supplies only their missing specialization to the published coefficient
+module supplies only their missing specialization to the coefficient
 category and its normalized rational triangulation.
 
 ## References
@@ -133,7 +133,7 @@ theorem qbarStagePretriangulated_exists (E : Padic.FiniteCoefficientFields l Qba
   let M := Submonoid.powers p
   let Q := pbcStageLocalization l Qbar T E
   have : Q.IsLocalization (Rationalization.W M C) := stageLocalization R C p
-  -- Use the published shift directly; no comparison of HasShift structures is needed.
+  -- Use the shift directly; no comparison of HasShift structures is needed.
   let t := Triangulated.Localization.pretriangulated Q (Rationalization.W M C)
   refine ⟨t, ?_, ?_⟩
   · intro D

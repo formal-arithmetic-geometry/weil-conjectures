@@ -162,7 +162,7 @@ def pbcCanonicalReductionDiagram (K : PbcCompletedDerived T d) :
         (pbcAdicProjection_comp T d (n + 1) n (Nat.le_succ n))).hom.app
           ((pbcCompletedReduction T d n).obj K))
 
-/-- The higher-Tor vanishing formulation of the source's compatibility condition,
+/-- The higher-Tor vanishing formulation of the compatibility condition,
 required above every cutoff. The single cohomology module is placed in degree zero. -/
 def PbcTruncationTorCompatible (K : PbcCompletedDerived T d) : Prop :=
   ∀ (n : ℕ) (q p : ℤ), p < 0 →
@@ -495,7 +495,7 @@ theorem pbc_flat_cohomology_torCompatible (K : PbcCompletedDerived T d)
       ((DerivedCategory.homologyFunctor _ p).mapIso e)
 
 /-- On the integral constructible category, the all-level compatibility condition
-is equivalent to flat cohomology of the local models, as stipulated in the source.
+is equivalent to flat cohomology of the local models.
 Flatness is expressed by K-flatness of each actual cohomology module in degree zero. -/
 theorem pbc_torCompatible_iff_flat_cohomology
     (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) :

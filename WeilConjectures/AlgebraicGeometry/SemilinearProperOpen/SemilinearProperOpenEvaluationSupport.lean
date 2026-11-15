@@ -31,7 +31,6 @@ the compilation limit. The original constructions and their properties are retai
 * Stacks 03EK
 * Zheng 4.10
 * Stacks 03DI and the ring-sheaf change adjunction
-* Stacks 03DI
 -/
 
 @[expose] public noncomputable section

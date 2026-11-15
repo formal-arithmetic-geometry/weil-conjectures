@@ -85,7 +85,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 * Stacks Project, Tags 06YU, 07A4 and 0FNH
 * Stacks 0735
-* Stacks 06YU and 07A4
 -/
 
 @[expose] public noncomputable section

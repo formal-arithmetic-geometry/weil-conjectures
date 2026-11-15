@@ -17,8 +17,6 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 ## References
 
-* Stacks Project, Tags 079V and 0A1G
-* Stacks, Tag 079V
 * Stacks, Tags 079V and 0A1G
 -/
 

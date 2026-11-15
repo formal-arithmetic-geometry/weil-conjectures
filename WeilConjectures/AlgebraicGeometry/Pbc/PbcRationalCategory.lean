@@ -106,7 +106,7 @@ abbrev pbcRationalization (p : A) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The finite-extension rational category on the stipulated base. The hypotheses
+/-- The finite-extension rational category on the base `T`. The hypotheses
 restrict the scope of this notation; the category itself is the raw localization. -/
 abbrev PbcRationalDerivedCategory (T : Scheme.{u}) [IsNoetherian T]
     (_hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)

@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 ## References
 
 * Stacks Project, Tag 008C (direct image on opens), and Tag 0094 (restriction to an open subspace)
-* Stacks Project, Tags 008C and 0094
 -/
 
 @[expose] public section

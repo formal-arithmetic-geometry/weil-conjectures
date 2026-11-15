@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 ## References
 
-* Stacks Project, Tags 08J9 and 08JC
 * Stacks Project, Tags 08J9 and 08JC, tensor-Hom adjunction and total-tensor signs
 -/
 

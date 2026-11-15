@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdj
 
 ## References
 
-* Stacks Project, Tags 093I and 03D3
 * Stacks Project, Tags 093I, 03D3 and 098T(2)
 -/
 

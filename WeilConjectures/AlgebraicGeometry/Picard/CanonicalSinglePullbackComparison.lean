@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 ## References
 
-* Stacks Project, Tags 06YD, 06YJ and 08HY
 * Stacks, Tag 0D5S
 * Stacks, Tags 06YJ and 08HY
 * Stacks, Tags 06YD and 06YJ

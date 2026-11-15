@@ -101,7 +101,6 @@ the pro-etale site's object and morphism universes stay different.
 
 ## References
 
-* Stacks Project, Tag 09A2
 * Stacks Project, Tag 09A2, the construction of `s(E(K))`
 * Stacks Project, Tag 09A2, construction of the total complex
 -/

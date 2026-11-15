@@ -69,10 +69,10 @@ set_option linter.privateModule false
 /-!
 # Integral models of the open and closed pieces
 
-The continuous coefficients use the published lattice encoding. `WithAbs` equips the
+The continuous coefficients use the lattice encoding. `WithAbs` equips the
 finite extension with its canonical topology, and `latticeCoefficientIntegers` is its
 valuation subring. The four constructions, publicly reexported from the basic module, are explicit
-specializations of the published module operations; no module or coefficient ring is chosen.
+specializations of the module operations; no module or coefficient ring is chosen.
 
 ## References
 

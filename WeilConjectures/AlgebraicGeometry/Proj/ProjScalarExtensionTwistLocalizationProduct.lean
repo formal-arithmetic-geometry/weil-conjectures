@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistDat
 
 ## References
 
-* the elementary localization calculation in Stacks, Constructions, Tag 01N2
+* Stacks Project, Tag 01N2
 -/
 
 @[expose] public section

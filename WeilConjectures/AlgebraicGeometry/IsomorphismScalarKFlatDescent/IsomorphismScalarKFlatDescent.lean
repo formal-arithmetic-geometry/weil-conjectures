@@ -180,7 +180,6 @@ fixes its descent on every resolution and includes the two- and three-resolution
 
 ## References
 
-* Stacks Project, Tags 0G7D, 0G7E, 06YT and 06YU
 * Tag 04VG
 * Stacks 0G7D
 * Stacks 03D3, 0G7E

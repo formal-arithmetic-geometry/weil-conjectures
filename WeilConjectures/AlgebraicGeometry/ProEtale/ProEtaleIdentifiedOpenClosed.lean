@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedEssen
 
 * Stacks Project, Modules on Sites, Tags 03DI and 03DJ
 * Pro-etale Cohomology, Tags 09BN and 09AH
-* Stacks Project, Tags 03DI, 03DJ, 09BN and 09AH
 * Stacks Project, Tags 03DI, 03DJ, 09AA, 09BM, 09BN and 09AH
 -/
 

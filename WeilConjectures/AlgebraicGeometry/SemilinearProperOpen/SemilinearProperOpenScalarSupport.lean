@@ -24,7 +24,6 @@ the compilation limit. The original constructions and their properties are retai
 
 ## References
 
-* Stacks 03CZ
 * Zheng 4.1
 * Stacks 03CZ and 03D7
 * Stacks 03EK

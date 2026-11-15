@@ -47,8 +47,6 @@ slice restriction. Every comparison is constructed from the existing adjunctions
 
 * Stacks Project, Tags 08J9, 08JB and 08JC
 * Stacks 07A4
-* Stacks 08JC
-* Stacks 08J9, 08JC
 -/
 
 @[expose] public noncomputable section

@@ -96,11 +96,6 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 ## References
 
-* Stacks Project, Tags 09AA, 09BM, 09BN and 09AH
-* Tags 070I, 070K and 08BJ
-* Stacks, Tag 09AH
-* Stacks, Tags 09AA and 09AH
-* Stacks, Tags 070I and 070K
 * Stacks, Tags 09AA, 09BM, 09BN, 09AH, 070I, 070K, 08BJ and 079P
 -/
 

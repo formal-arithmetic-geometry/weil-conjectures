@@ -16,7 +16,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 ## References
 
 * Stacks, Cohomology on Sites, Tags 06YU, 07A4, 07A6 and 0B56
-* Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56
 -/
 
 @[expose] public noncomputable section

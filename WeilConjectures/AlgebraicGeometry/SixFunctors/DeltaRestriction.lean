@@ -34,7 +34,6 @@ All categories are ordinary unbounded categories of constant-ring module sheaves
 ## References
 
 * Stacks Project, Tags 08J9 and 08JB
-* Stacks 08J9
 -/
 
 @[expose] public noncomputable section

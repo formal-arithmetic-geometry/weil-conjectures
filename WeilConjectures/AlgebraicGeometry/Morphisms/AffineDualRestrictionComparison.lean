@@ -21,8 +21,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 ## References
 
 * Stacks Project, Tag 0583, as used in Tag 0EY6, proof of (1)
-* Stacks Project, Tag 0583
-* Stacks Project, Tag 0583, as used in Tag 0EY6, proof of (1)
 -/
 
 @[expose] public section

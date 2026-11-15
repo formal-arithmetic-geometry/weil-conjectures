@@ -22,12 +22,6 @@ No Noetherian hypothesis or global choice of relative dimension is required.
 
 * Stacks Project, Constructions, Tags 01M2, 01LW and 01LX
 * Stacks Tags 01UM, 01CL and 01M2
-* Stacks Tags 01M2 and 01LX
-* Stacks Tag 01M2
-* Stacks Tags 01CL and 01M2
-* Stacks Tags 01LX and 01M2
-* Stacks Tag 01LX
-* Stacks Tags 01CL and 01LX
 -/
 
 @[expose] public noncomputable section

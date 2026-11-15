@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPastin
 ## References
 
 * Stacks Project, Tags 015F, 07A7 and 0F7B
-* Stacks Project, Tags 0F7B and 07A7
 -/
 
 @[expose] public noncomputable section

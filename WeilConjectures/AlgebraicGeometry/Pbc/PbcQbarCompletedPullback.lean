@@ -15,16 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 
 /-! # Completed pullback on the actual common-stage Qbar category
 
-The published strict-tower pullback is retained. Its integral restriction and the
+The strict-tower pullback is retained. Its integral restriction and the
 normalized completed scalar comparisons descend it to the existing pair category.
 
 ## References
 
 * Stacks Tag 099N (2), (5)
 * Bhatt--Scholze, Section 6.8, Remark 6.8.15
-* BS 6.8.2 and Remark 6.8.15
-* Stacks 099N
-* BS Remark 6.8.15
 -/
 
 @[expose] public noncomputable section

@@ -54,9 +54,6 @@ normalizations that specify the comparisons, rather than just their isomorphism 
 
 * Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15
 * Stacks Tags 0G7E, 0D6D, 0A0E and 0A0G
-* BS 6.8.2, 6.8.14(2), 6.8.15
-* Stacks 0D6D
-* BS 6.8.14--6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -197,7 +194,7 @@ variable {Y : Scheme.{u}} [IsNoetherian Y]
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
 variable (j : F →ₐ[ℚ_[l]] G)
 
-/-- The successive-extension diagram with exactly the published raw tensor associators. -/
+/-- The successive-extension diagram with exactly the raw tensor associators. -/
 structure RationalRealizationScalarTower
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)
     (sG : RationalModuleRealization l G X)

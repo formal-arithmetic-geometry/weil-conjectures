@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationRootNotSquar
 
 ## References
 
-* Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307
 * Stacks Project, Tag 09EB (Galois degree formula), Tag 0BRM (Abhyankar), Tag 09E7 (index-one
   clause), and Tag 0307 (localization of integral closure)
 -/

@@ -17,7 +17,6 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 ## References
 
 * Stacks Project, Tag 0EYG, off-divisor branch
-* Stacks Project, Tag 0EYG
 -/
 
 @[expose] public section

@@ -21,7 +21,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 ## References
 
-* Stacks Project, Tag 0E9I
 * Stacks Project, Lemma 31.5.11, Tag 0E9I
 -/
 

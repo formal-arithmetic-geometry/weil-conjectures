@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 * Stacks Project, Constructions, Tags 01OA and 01OE
 * EGA II, Remark 4.2.7, residue-field normalization
 * EGA II, Remark 4.2.7, field normalization
-* the tensor-power convention is Tag 01CR
+* Stacks Project, Tag 01CR
 -/
 
 @[expose] public section

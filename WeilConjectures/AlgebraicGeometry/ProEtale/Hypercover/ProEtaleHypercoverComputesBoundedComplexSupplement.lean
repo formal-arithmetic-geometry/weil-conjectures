@@ -66,8 +66,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleHypercoverComputesBounde
 
 ## References
 
-* Stacks Project, Tag 09A2
-* Tag 0946
 * Stacks Project, Tags 09A2 and 0946, with ringed-module coefficients
 -/
 

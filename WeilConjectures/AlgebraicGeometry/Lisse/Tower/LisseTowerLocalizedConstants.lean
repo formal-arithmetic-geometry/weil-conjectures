@@ -16,7 +16,6 @@ The three scheme morphisms need no relation to one another.
 
 ## References
 
-* Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J
 * Stacks Project, Modules on Sites, Tags 03CY and 03DA
 * Sites, Tag 0H7J
 * Cohomology on Sites, Tag 06YY

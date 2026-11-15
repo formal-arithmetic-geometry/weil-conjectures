@@ -20,8 +20,6 @@ naturality holds for all derived morphisms.
 
 ## References
 
-* Stacks Project, Tag 099M
-* Stacks 099M
 * Stacks 099M, canonical completion-map construction
 -/
 

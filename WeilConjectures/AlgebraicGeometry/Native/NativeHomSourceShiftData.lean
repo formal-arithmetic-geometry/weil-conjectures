@@ -18,8 +18,6 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 * Stacks Project, Tags 08J9 and 08JC
 * Stacks 08JC, total-tensor signs
 * Stacks 0A8X, 08JC
-* Stacks 08JC
-* Stacks Project, Tag 08JC
 -/
 
 @[expose] public noncomputable section

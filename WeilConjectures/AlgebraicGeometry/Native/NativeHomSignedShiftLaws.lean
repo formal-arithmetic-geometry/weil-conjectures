@@ -13,7 +13,6 @@ import Mathlib.Tactic.Ring
 
 ## References
 
-* Stacks Project, Tags 08J9 and 08JC
 * Stacks Project, Tags 08J9 and 08JC, signed total-tensor evaluation
 -/
 

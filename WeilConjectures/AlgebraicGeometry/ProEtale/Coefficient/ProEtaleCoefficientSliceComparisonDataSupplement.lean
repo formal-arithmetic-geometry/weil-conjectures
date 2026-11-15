@@ -24,20 +24,10 @@ Comparison data and their defining section and representative equations.
 
 * Hemo--Richarz--Scholbach, Lemma 4.5, and Stacks Project, Tags 03CE, 03EL, 07A4, 08J7, 08J9, 08JB
   and 0FPT
-* Stacks 03CE, 08JB
-* Stacks 08JB
 * Stacks 03CZ, 03CY and 07A4
-* Stacks 08J9
 * Stacks 06YN, 07A4
-* Stacks 07A4
-* Stacks 03CE
 * Stacks 03CE and 05RT
-* Stacks 07A4 and 0FPT
-* Stacks 0FPT
 * Hemo--Richarz--Scholbach Lemma 4.5
-* Stacks 03CE, 07A4, 08J9, 08JB and 0FPT
-* Stacks 03CE, 07A4, 0FPT
-* Stacks 03CE, 07A4, 08J9 and 08JB
 
 ## Implementation details
 
@@ -96,7 +86,7 @@ def proEtaleFlatToKFlat (X : Scheme.{u})
     (P' := CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := O))
     (fun P hP ↦ (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP.1)
 
-/-- Restrict the published tensor presentation to the published flat representatives. -/
+/-- Restrict the tensor presentation to the flat representatives. -/
 def proEtaleClosedTensorModel (X : Scheme.{u})
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))
@@ -209,14 +199,14 @@ structure ProEtaleSliceTensorDescent {X Y : Scheme.{u}}
   /-- Its value is the specified exact localization square. -/
   model : ProEtaleSliceTensorModel O B K S SB T TB chain kflat rho
 
-/-- The ordinary coefficient module; this abbreviates the published tensor unit. -/
+/-- The ordinary coefficient module; this abbreviates the tensor unit. -/
 abbrev proEtaleCoefficientUnit (X : Scheme.{u})
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   SheafOfModules.unit ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)
 
 /-- Degree-zero localization of the ordinary unit comparison. Conjugating with the
-published `RingedDerivedTensorCoherence.unitIso` gives the derived tensor-unit map. -/
+`RingedDerivedTensorCoherence.unitIso` gives the derived tensor-unit map. -/
 def proEtaleDerivedCoefficientUnit {X Y : Scheme.{u}}
     {O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {B : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}

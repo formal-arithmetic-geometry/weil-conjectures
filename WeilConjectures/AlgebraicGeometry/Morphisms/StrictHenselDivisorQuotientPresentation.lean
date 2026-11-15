@@ -19,7 +19,6 @@ import WeilConjectures.RingTheory.StrictHenselizationLocalizedDivisorQuotient
 
 ## References
 
-* Stacks Project, Tags 04HX and 05WS
 * Stacks Project, Tag 04HX (Lemma on stalks of the structure sheaf) and Tag 05WS (Lemma on strict
   henselization of a quotient)
 -/

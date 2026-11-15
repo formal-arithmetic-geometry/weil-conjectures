@@ -20,7 +20,6 @@ The comparison is the existing adjunction mate
 
 ## References
 
-* Stacks Project
 * Stacks Project, Tags 09AE and 03EH
 * Stacks Project, Tag 09AF
 -/

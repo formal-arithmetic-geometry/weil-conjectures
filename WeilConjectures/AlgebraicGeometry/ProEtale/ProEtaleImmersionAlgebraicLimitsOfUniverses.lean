@@ -82,7 +82,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 
 * Stacks Tags 09AA and 09BL, including Zariski localization and the finite-operation descriptions of
   rings and abelian groups (Tag 00YV)
-* Tag 09AA, and Tag 09BL
 -/
 
 @[expose] public section

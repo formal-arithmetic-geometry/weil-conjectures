@@ -35,7 +35,6 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 ## References
 
 * Stacks Project, Tags 08FC and 05VD
-* Stacks Project
 -/
 
 @[expose] public section

@@ -25,7 +25,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr
 
 ## References
 
-* Stacks Project, Tags 09EB and 0307
 * Stacks Project, Tags 0307 and 09EB
 -/
 

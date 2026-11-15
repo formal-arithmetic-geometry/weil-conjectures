@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.CompactificationRefi
 ## References
 
 * Stacks 0F7J--0F7K, independence of a common refining tower
-* Stacks 0F7J
-* Stacks 0F7K
 -/
 
 @[expose] public noncomputable section

@@ -21,7 +21,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 
 The statement records the canonical reconstruction of a module sheaf supported on a
 closed subscheme and then on an open stratum.  The underlying ring sheaf is transported
-to additive sheaves only to use the published module-object realization; no coefficient
+to additive sheaves only to use the module-object realization; no coefficient
 or functor is chosen privately.
 
 ## References

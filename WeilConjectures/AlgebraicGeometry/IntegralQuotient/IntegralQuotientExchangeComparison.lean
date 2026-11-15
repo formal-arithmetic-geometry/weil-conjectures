@@ -24,12 +24,9 @@ As in the direct-image comparison, n denotes quotient exponent n + 1.
 ## References
 
 * Stacks Project, Tags 07A7, 0E47 and 0E48
-* Stacks 07A7
 * Stacks 0D6D and 07A7
 * Stacks 07A6
 * Stacks 03EK, 06YY and 09T5
-* Stacks 07A7 and 0E48
-* Stacks 03EK
 -/
 
 @[expose] public noncomputable section

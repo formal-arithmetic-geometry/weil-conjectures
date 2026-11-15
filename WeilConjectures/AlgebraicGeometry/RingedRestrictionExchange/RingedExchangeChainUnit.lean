@@ -15,10 +15,7 @@ import WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjuncti
 ## References
 
 * Stacks Project, Derived Categories, Tags 070K and 09T5
-* Stacks 09A5
 * Stacks 09T5 and 09A5
-* Stacks 09T5
-* Stacks 070K
 -/
 
 @[expose] public noncomputable section

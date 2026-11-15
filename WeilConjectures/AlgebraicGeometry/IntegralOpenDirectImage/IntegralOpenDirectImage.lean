@@ -199,7 +199,6 @@ ordinary derived categories of internal modules over the continuous condensed co
 
 ## References
 
-* Stacks Tags 099L, 09A6 and 09C1
 * Stacks Tags 099L, 09A6, 09C1
 -/
 

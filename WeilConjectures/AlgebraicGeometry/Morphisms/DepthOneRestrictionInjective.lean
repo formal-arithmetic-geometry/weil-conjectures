@@ -20,7 +20,6 @@ public import Mathlib.RingTheory.Nakayama
 
 ## References
 
-* Stacks Project, Tags 0B3M and 05AR
 * Stacks Project, Tags 0B3M (restriction avoiding weakly associated points), 05AR (associated and
   weakly associated points on a locally Noetherian scheme), and 00LL (depth zero and associated
   primes)

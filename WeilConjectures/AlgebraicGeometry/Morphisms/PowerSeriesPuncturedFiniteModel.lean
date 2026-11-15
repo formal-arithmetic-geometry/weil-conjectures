@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFu
 ## References
 
 * Stacks Project, Tag 0EYA, the construction preceding Psi
-* Tags 0EY9 and 0EY6
 * Stacks Project, Tag 0EYA, paragraphs defining W0 and C0 and their comparison on U times_X Y
 * Tags 0EY9 and 0EY6(1), (2)
 -/

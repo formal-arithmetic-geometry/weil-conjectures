@@ -18,7 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 
 ## References
 
-* Stacks Project, Tag 09C6
 * Stacks Project, Tags 09AL, 09B1 and 09C6, transporting `K_n = epsilon^(-1) L_n` along a supplied
   local constant model
 -/

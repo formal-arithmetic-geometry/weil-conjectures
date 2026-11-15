@@ -92,17 +92,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorCompar
 
 ## References
 
-* Stacks Project, Tags 03EK, 03EL and 09A5
 * Stacks, Section 03EK
-* Stacks, Tag 03CB
-* Stacks, Tag 03D2
 * Stacks Project, Modules on Sites, Section 03EK and Tag 03D7
-* Stacks, Tag 03EL
 * Stacks Project, Modules on Sites, Tag 03D2
-* Stacks, Tags 03CB and 03D2
-* Stacks, Tag 00VE
-* Stacks, Tags 00VE and 03D2
-* Stacks, Tag 00YV
 * Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2
 * Stacks, Tags 03EK, 03EL and 09A5, with Tags 00VE, 00WH, 00WX and 03CB for coherence
 -/

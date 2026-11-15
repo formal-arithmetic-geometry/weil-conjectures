@@ -21,14 +21,7 @@ computations live in
 
 * Stacks Project, Sites and Sheaves, Tags 03CE, 00Y0, 00VE and 00WX
 * Modules on Sites, Tag 03EL
-* Stacks, Tags 00VE, 00WX and 03CE
-* Stacks, Tags 03CE and 00Y0
-* Stacks, Tag 03CE
-* Stacks, Tag 00Y0
-* Stacks, Tags 00Y0 and 03EL
 * Stacks, Tags 00Y0, 0H7J and 03EL
-* Stacks, Tags 00Y0 and 03CE
-* Stacks, Tag 03EL
 * Stacks, Sites and Sheaves, Tags 00VE, 00WX, 03CE and 00Y0
 -/
 

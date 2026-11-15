@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
 ## References
 
 * Stacks Project, Constructions, Tags 01NO and 01NP
-* Stacks, Tag 01LH
-* Stacks, Tag 01NO
-* Stacks, Tags 01LH and 01NO
-* Stacks, Tag 01NQ
 * Stacks, Tags 01LH and 01NQ
 -/
 
@@ -237,7 +233,7 @@ lemma gradeIso_naturality {V W : X.affineOpens} (h : W ≤ V) :
   apply Proj.map_congr
   exact GradedRingHom.ext fun _ ↦ rfl
 
-/-- Identify the source-library affine chart with the inverse image of its base open. -/
+/-- Identify the affine chart of `relProj` with the inverse image of its base open. -/
 noncomputable def affineRestrictionIso (V : X.affineOpens) :
     Proj (A.affineData.grading V) ≅ (A.affineData.relProjHom ⁻¹ᵁ V.1).toScheme := by
   apply IsOpenImmersion.isoOfRangeEq (A.affineData.relProjι V)
@@ -246,7 +242,7 @@ noncomputable def affineRestrictionIso (V : X.affineOpens) :
   exact congrArg (fun U : A.affineData.relProj.Opens ↦ (U : Set A.affineData.relProj))
     (A.affineData.relProjHom_preimage V).symm
 
-/-- The restriction identification followed by inclusion is the source-library chart map. -/
+/-- The restriction identification followed by inclusion is the chart map of `relProj`. -/
 lemma affineRestrictionIso_hom_ι (V : X.affineOpens) :
     (A.affineRestrictionIso V).hom ≫ (A.affineData.relProjHom ⁻¹ᵁ V.1).ι =
       A.affineData.relProjι V := by
@@ -254,9 +250,8 @@ lemma affineRestrictionIso_hom_ι (V : X.affineOpens) :
   exact IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The source-library relative Proj, equipped with the sheaf-input chart interface.
-This explicitly constructs the datum; no witness is selected from an existence theorem.
-The glued scheme and its structure map are the source library's `relProj` and `relProjHom`. -/
+/-- The relative Proj `relProj`, with structure map `relProjHom`, equipped with the sheaf-input
+chart interface. -/
 noncomputable def realization : RelativeProjData A where
   gluing := A.affineData.relProjGluingData
   localIso V := (A.gradeIso V).symm

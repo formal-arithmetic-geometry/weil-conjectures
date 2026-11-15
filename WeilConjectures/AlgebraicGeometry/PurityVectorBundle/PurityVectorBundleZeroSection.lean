@@ -23,8 +23,6 @@ over the fixed field; it is supplied by the existing theorem, never an extra hyp
 ## References
 
 * Stacks Project, Constructions, Tags 01M2, 01LW and 01LX
-* Stacks Tag 01M2
-* Stacks Tags 01M2 and 01LX
 -/
 
 @[expose] public section

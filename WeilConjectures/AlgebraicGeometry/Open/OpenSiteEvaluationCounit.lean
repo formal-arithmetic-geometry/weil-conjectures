@@ -36,7 +36,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 ## References
 
 * Stacks Project, Tags 09A6, 09AF and 099R
-* Stacks Project, Tags 09AF and 099R
 -/
 
 @[expose] public noncomputable section

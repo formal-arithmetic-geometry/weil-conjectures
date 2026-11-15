@@ -17,7 +17,6 @@ import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 ## References
 
 * Stacks Project, Tag 0311, with associated-prime localization, Tag 0310
-* Stacks Project, Tags 0311 and 0310
 -/
 
 @[expose] public section

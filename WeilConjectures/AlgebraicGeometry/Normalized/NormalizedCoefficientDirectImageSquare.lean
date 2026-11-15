@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientDirectImageR
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 0D6D and 0D6E
-* Stacks 0D6E
 * Stacks Project, together with the uniqueness of right derivation
 -/
 

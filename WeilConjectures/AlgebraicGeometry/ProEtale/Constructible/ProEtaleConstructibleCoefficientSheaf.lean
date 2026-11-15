@@ -20,7 +20,6 @@ coefficient sheaves and are linear over those sheaves.
 ## References
 
 * Stacks Tags 09AI and 09AJ
-* Stacks 09AJ
 -/
 
 @[expose] public noncomputable section

@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.ScalarPullbackSquareCoherence
 
 * Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47
 * Stacks 07A7
-* Stacks 0D6D and 0E47
 -/
 
 @[expose] public noncomputable section

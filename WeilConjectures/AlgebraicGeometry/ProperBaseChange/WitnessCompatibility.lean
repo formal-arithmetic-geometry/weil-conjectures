@@ -719,7 +719,7 @@ instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     DiscreteTopology (PbcQuotient d n) := ⟨rfl⟩
 
-/-- The published canonical quotient homomorphism at positive coefficient levels. -/
+/-- The canonical quotient homomorphism at positive coefficient levels. -/
 noncomputable def pbcWitnessQuotientMap {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     PbcQuotient d b →+* PbcQuotient d a :=
@@ -1057,7 +1057,7 @@ def pbcWitnessBoundedConstructible (T : Scheme.{u}) (d : Scheme.AdicCoefficientD
     ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj K)
 
 /-- Reflect the retained origin isomorphism through the canonical realization. This
-uses the published retained-pair definition without defining another notion of origin. -/
+uses the retained-pair definition without defining another notion of origin. -/
 noncomputable def pbcFixedOriginAlpha (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))

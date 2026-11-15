@@ -28,7 +28,6 @@ public import Mathlib.RingTheory.Nakayama
 
 ## References
 
-* Stacks Project, Tags 0AV8, 0AVN and 0E9I
 * Stacks Project, Tags 01LC, 01HV and 008C
 * Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL
 -/

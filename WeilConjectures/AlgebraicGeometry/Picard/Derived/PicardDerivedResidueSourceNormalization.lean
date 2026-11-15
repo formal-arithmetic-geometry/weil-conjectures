@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Flat.FlatInvertibleCanonicalDerivedBase
 ## References
 
 * Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
-* Stacks Project, Tags 0A1D, 08HY and 0096
 -/
 
 @[expose] public section

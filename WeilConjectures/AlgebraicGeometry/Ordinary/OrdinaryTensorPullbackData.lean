@@ -110,9 +110,7 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.TensorSection
 
 ## References
 
-* Stacks 03EK, 03EL and 0G7E
 * Stacks 03EK
-* Stacks 03EL
 * Stacks 03EL and 0G7E
 -/
 

@@ -17,12 +17,7 @@ import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeTowerExc
 
 ## References
 
-* Stacks 099M
-* Stacks 099M, 0D6D
-* Stacks 0D6D, 0D6E
-* Stacks 099M, 0D6E
 * Stacks 099M, 0D6D, 0D6E
-* Stacks 099M, 0E48
 * Stacks Tags 099M, 099N, 0A07 and 0E48
 
 ## Implementation details

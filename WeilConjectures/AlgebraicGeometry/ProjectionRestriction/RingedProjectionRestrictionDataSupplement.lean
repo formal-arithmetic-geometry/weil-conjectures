@@ -73,15 +73,10 @@ interfaces so the construction lemmas can be imported without a cycle.
 * Stacks 07A4, Mathlib BifunctorShift
 * Stacks 0735
 * Stacks 03D7
-* Stacks 04J0
 * Stacks 07A5
-* Stacks 07A6
 * Stacks 03EL
-* Stacks 07A4
 * Stacks 03DJ
 * Stacks 07A4 and 07A6
-* Stacks 04J0, 08FI and 0FN5
-* Stacks 0B56
 -/
 
 @[expose] public noncomputable section

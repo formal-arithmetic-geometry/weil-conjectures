@@ -18,7 +18,7 @@ composition coherence of derived inverse-image functors.
 ## References
 
 * Stacks 07A4 and 03EL
-* the monoidal composition square used in the tensor refinement of Stacks 0F7B
+* Stacks Project, Tag 0F7B
 -/
 
 @[expose] public noncomputable section

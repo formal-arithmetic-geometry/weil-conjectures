@@ -94,17 +94,17 @@ def proetSigma (V : Type v) [Category.{u + 1} V] [Abelian V]
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The published derived tensor, with its coefficient specialization named. -/
+/-- The derived tensor, with its coefficient specialization named. -/
 abbrev tensor (Y : Scheme.{u}) (M N : FiniteD A Y) : FiniteD A Y :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M).obj N
 
-/-- Map both arguments of the published derived tensor bifunctor. -/
+/-- Map both arguments of the derived tensor bifunctor. -/
 def tensorMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ⟶ M') (g : N ⟶ N') : tensor A Y M N ⟶ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).map f).app N ≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M').map g
 
-/-- Map two isomorphisms under the same published derived tensor bifunctor. -/
+/-- Map two isomorphisms under the same derived tensor bifunctor. -/
 def tensorIsoMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ≅ M') (g : N ≅ N') : tensor A Y M N ≅ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).mapIso f).app N ≪≫

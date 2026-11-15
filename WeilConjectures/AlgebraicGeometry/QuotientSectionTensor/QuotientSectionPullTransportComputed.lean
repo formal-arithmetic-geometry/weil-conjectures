@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPu
 
 ## References
 
-* Stacks Project, Tags 06YY, 0D6D and 07A6
 * Stacks 06YY, 0D6D and 07A6
 -/
 

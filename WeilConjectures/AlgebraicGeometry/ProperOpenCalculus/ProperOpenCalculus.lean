@@ -19,10 +19,7 @@ The compositors accept a named composite and its equality, avoiding hidden trans
 ## References
 
 * Stacks Project, Tags 0F7C, 0F7D, 0F7J and 0F7K, the formal pasting calculus
-* Stacks 0F7C
-* Stacks 0F7J
 * Stacks 0F7J, six-square diagram
-* Stacks 0F7K
 * Stacks 0F7K, identity towers
 -/
 

@@ -143,9 +143,6 @@ completed coefficient structure maps, which need not be isomorphisms.
 ## References
 
 * Stacks Tags 03EL, 06YY, 0D6D and 099N
-* Stacks Tag 03EL
-* Stacks Tag 0D6D
-* Stacks Tags 06YY and 0D6D
 -/
 
 @[expose] public noncomputable section

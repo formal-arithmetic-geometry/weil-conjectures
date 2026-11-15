@@ -21,8 +21,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 /-!
 # Clopen dimension loci in proper smooth connected families
 
-Agent-formulated consequence.
-
 ## References
 
 * Stacks Project, Morphisms, Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH

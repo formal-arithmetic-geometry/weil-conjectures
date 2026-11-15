@@ -22,7 +22,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 ## References
 
 * Stacks Project, Pro-etale Cohomology, Tag 09AH
-* Stacks Project, Tag 09AH
 -/
 
 -- After pruning, this module only keeps private declarations.

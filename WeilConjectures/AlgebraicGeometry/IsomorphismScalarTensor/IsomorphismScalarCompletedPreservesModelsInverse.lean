@@ -223,11 +223,9 @@ for the sectionwise inverse-image model.
 
 ## References
 
-* Stacks Project
 * Stacks Project, Modules on Sites, Tag 03D2
 * Cohomology on Sites, Tag 0DEP
-* using the sectionwise inverse-image equivalence, K-flatness via points and the local equational
-  criterion for flatness (Stacks Tags 0DEN, 0DEP, 08FC and 09A5)
+* Stacks Project, Tags 0DEN, 0DEP, 08FC and 09A5
 -/
 
 @[expose] public noncomputable section

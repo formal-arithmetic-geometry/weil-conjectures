@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericResid
 
 ## References
 
-* Stacks Project, Tags 09EB, 0BRM and 0EYG
 * Stacks Project, Tags 09EB, 0BRM and 0EYG, the root-extension calculation
 -/
 

@@ -88,14 +88,6 @@ at the final pro-etale object, and inversion of the uniformizer.
 * BBD 1.3.3
 * BBD 1.3.1
 * Stacks Tag 06YY
-* BS 6.8.2(1)
-* BS 6.8, geometric hypotheses
-* BS 6.8.11 and 6.8.14
-* BS 6.8
-* BS 6.8.11
-* BS 6.8.14
-* BS 6.8.14, common finite stages
-* BS 6.8.2(1) and 6.8.14
 -/
 
 @[expose] public noncomputable section

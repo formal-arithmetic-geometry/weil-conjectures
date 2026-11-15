@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.InternalPullNormalizationExistence
 
 ## References
 
-* Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E
 * Stacks 03EL, 06YY, 07A4 and 0G7E
 -/
 

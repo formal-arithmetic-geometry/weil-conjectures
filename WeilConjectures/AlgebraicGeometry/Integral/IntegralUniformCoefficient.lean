@@ -15,11 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardQuotientsPerfectSupple
 import Mathlib.GroupTheory.OrderOfElement
 
 /-!
-# Finite-extension specialization and scalars for the published complete category
+# Finite-extension specialization and scalars for the complete category
 
-The category is the published PbcIsBoundedConstructibleComplete, specialized to the
+The category is the PbcIsBoundedConstructibleComplete, specialized to the
 actual unlifted valuation ring in Type (u+1). Its completion, uniform reductions and
-compatible origins are reused without redefining them. The published finite-extension
+compatible origins are reused without redefining them. The finite-extension
 convenience abbreviation instead takes E in Type u and lifts its valuation ring.
 
 ## References

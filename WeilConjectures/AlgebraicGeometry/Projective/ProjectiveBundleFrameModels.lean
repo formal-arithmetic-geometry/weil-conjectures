@@ -24,7 +24,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 ## References
 
 * Stacks Project, Tags 01OB, 01O3, 01OE
-* Stacks Project, Tags 01OB and 01OE
 * Stacks Project, Constructions, Tags 01OB, 01OE, 01NR, 01MN and 01MS
 -/
 

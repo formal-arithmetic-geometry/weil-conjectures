@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 ## References
 
 * Stacks Project, Tags 0GJ2 and 0GKD, the geometric-germ construction
-* Stacks Project, Tags 0GJ2 and 0GKD
 * Tag 0GKV, case (a), coefficient comparison
 -/
 

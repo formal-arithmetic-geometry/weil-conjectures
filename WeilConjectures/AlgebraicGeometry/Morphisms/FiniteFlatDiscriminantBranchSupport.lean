@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraceDiscriminantFibreEtaleCr
 ## References
 
 * Stacks Project, Tag 0BVH
-* Stacks Project, Tag 0BVH
 -/
 
 @[expose] public section

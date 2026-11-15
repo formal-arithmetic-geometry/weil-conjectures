@@ -19,7 +19,6 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 ## References
 
 * Stacks Tags 09BV, 09AV, and bounded finite truncations
-* Stacks, Tag 09BV
 * Tags 09AV and 066E
 -/
 

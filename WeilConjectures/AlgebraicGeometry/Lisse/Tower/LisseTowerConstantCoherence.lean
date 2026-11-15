@@ -19,8 +19,6 @@ consecutive quotients; localization gives the coherence of the derived compariso
 * Stacks Project, Modules on Sites, Tags 03CY and 03DA
 * Sites, Tag 0H7J
 * Derived Categories, Tag 05RU
-* Stacks Tags 03CY, 03DA and 0H7J
-* Stacks Tags 03CY, 03DA and 05RU
 -/
 
 public noncomputable section

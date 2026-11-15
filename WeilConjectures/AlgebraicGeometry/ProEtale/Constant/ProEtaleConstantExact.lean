@@ -65,8 +65,6 @@ constant-preserving coefficient identifications written explicitly.
 ## References
 
 * Stacks Project, Tags 00WJ, 03D2, and 04JC
-* Stacks Tag 03D2
-* Stacks Tags 00YV and 03D2
 * Stacks Tags 00W1 and 00YV
 * Stacks Tags 0H7J and 09A5
 -/

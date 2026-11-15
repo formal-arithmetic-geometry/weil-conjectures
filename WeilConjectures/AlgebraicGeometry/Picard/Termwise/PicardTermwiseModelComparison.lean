@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseTargetCoh
 ## References
 
 * Stacks Project, Tags 06YJ and 0D5S
-* open restriction via Tag 08DW
+* Stacks Project, Tag 08DW
 -/
 
 @[expose] public section

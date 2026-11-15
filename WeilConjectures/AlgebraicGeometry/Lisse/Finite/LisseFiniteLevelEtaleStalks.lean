@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleStalk
 
 ## References
 
-* Stacks Tags 099Y and 09BV
 * Stacks Project, Tags 099Y and 09BV
 -/
 

@@ -19,7 +19,6 @@ import Mathlib.RingTheory.MvPowerSeries.Equiv
 
 ## References
 
-* Stacks Project, Tags 0EY9, 0EKP and 0EL8
 * Stacks Project, Tag 0EY9, the comparison argument of Tag 0EKP and algebra-map verification of Tag
   0EL8
 -/

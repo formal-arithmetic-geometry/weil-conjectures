@@ -72,8 +72,6 @@ The comparison theorems about these data remain proof dependencies of consumers.
 
 * Stacks Project, Sites, Tag 00YV
 * Modules on Sites, Tags 03D6, 03D7, 03DI, 03DJ, 03EK and 0GMW
-* Stacks 03DI
-* Stacks 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section

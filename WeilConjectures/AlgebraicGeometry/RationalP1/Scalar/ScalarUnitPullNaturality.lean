@@ -45,7 +45,7 @@ attribute [local reducible] derivedScalars moduleObjectDerivedPullback
   moduleObjectDerivedPushforward
 
 -- The proof helpers below use their own instance context; the public statements are
--- elaborated after this section, in the context of the published module.
+-- elaborated after this section, in the context of the module.
 section ProofHelpers
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafMonoidalCategory
 attribute [local implicit_reducible] ProEtale.sheafMonoidalCategory

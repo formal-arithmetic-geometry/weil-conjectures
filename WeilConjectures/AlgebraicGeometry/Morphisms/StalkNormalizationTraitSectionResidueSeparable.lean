@@ -25,7 +25,6 @@ import Mathlib.FieldTheory.SeparableDegree
 
 ## References
 
-* Stacks Project, Tag 0EYH
 * Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ
 -/
 

@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.PrincipalMilno
 
 ## References
 
-* Stacks Project, Tag 099M
 * Stacks Project, Tag 099M, the principal Koszul proof of derived completion
 -/
 

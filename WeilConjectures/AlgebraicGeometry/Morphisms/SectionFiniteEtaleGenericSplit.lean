@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Extensive
 
 ## References
 
-* Stacks Project, Tags 0EYJ and 0BQM
 * Stacks Project, Tag 0EYJ, section fibre calculation
 * Stacks Project, Tag 0EYJ, the section fibre calculation
 * Tag 0BQM, full faithfulness

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Affine.PicardAffineStructureProj
 
 ## References
 
-* Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0
 * Stacks Project, Tag 0BF2, perfect base-change paragraph
 * Tags 0B91, 08EB, 06Z0
 -/

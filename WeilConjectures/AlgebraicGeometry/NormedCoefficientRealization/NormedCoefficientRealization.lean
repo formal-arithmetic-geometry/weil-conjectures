@@ -116,7 +116,6 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 * Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.1 and Remark 6.8.15
 * Bhatt--Scholze, Definition 6.8.1
-* Stacks 03CZ
 * Bhatt--Scholze, Remark 6.8.15
 * Stacks 03CZ, 010N, 015F, 09T5
 * Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15

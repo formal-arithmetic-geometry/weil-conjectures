@@ -36,7 +36,6 @@ independently.
 ## References
 
 * Stacks Project, Tags 01MY and 01N2
-* Stacks 01MY
 -/
 
 @[expose] public section

@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 ## References
 
-* the standard projective-line charts and Stacks Tag 01X0
-* the equation T1 = 0 on P1, and Stacks Tag 01X0
+* Stacks Project, Tag 01X0
 -/
 
 @[expose] public noncomputable section

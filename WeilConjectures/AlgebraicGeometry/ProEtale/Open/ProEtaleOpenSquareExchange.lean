@@ -23,11 +23,7 @@ include restriction normalization, both identity laws and both pasting laws.
 
 ## References
 
-* Stacks Project, Tags 03S6 and 04J0
 * Stacks, Tags 03DI and 00YV
-* Stacks, Tag 03DI
-* Stacks, Tag 04J0
-* Stacks, Tag 03S6
 * Stacks, Tag 05RU
 * Stacks, Section 0735
 * Stacks, Tags 03S6 and 04J0

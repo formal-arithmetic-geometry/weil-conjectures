@@ -23,12 +23,10 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 ## References
 
 * EGA II, Remark 4.2.7
-* Stacks, Tags 00AL, 00AM, 01XS
 * EGA II, Remark 4.2.7, printed p.75
 * Stacks Project, Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, Lemma
   glue-maps (Tag 04TN)
 * Stacks, Tags 00AL, 00AM, 04TN
-* Tag 01XS
 -/
 
 @[expose] public section

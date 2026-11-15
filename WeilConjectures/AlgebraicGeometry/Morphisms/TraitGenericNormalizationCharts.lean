@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
 
 ## References
 
-* Stacks Project, Tags 0EYJ, 0EYG and 0EYH
 * Stacks Project, Tag 0EYJ, first paragraph
 * Tags 0EYG and 0EYH
 -/

@@ -29,8 +29,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
 
 ## References
 
-* Stacks Project, Tags 0EY6, 0G41 and 0E9I
-* the double-dual kernel calculation underlying Tags 0EBI and 0EBJ
+* Stacks Project, Tags 0EBI and 0EBJ
 * Stacks Project, Tag 0EY6 proof of (1), Tag 0G41(2), and Tag 0E9I
 
 ## Implementation details

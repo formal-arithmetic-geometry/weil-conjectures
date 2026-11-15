@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCodimensionTwoEtaleExt
 
 ## References
 
-* Stacks Project, Tag 0EYE
 * Tag 0EYJ, second paragraph
 * Stacks Project, Tag 0EYE (Lemma 58.31.3), applied as in Tag 0EYJ
 -/

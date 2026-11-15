@@ -169,11 +169,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 ## References
 
 * Stacks Project, Tags 09BP, 03DI, 03DJ and 03CY
-* Stacks 03DJ, 05RU
 * Stacks 05RU
 * Stacks 0941
 * Stacks 03DI, the two explicit Hom maps
-* Stacks 03DJ
 -/
 
 @[expose] public noncomputable section

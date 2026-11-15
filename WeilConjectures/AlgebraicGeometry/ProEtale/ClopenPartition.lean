@@ -23,7 +23,6 @@ inherited by every clopen subscheme of `W`
 
 ## References
 
-* Stacks Project, Tags 098F and 090M
 * Stacks Project, Tag 098F
 * Stacks Project, Tag 090M
 -/

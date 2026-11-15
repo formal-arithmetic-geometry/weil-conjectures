@@ -226,7 +226,6 @@ Every helper constructs data from the existing free adjunctions and inverse imag
 ## References
 
 * Stacks Project, Cohomology on Sites, Tags 08FI and 08J7
-* Stacks 08FI, 08J7
 * HRS Section 3
 * Stacks 03D2
 -/

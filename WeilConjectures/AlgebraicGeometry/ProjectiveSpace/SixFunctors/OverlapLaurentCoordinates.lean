@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Polynomial.Laurent
 * Stacks Project, Tag 0BXJ, proof
 * Stacks Project, Tag 0BXJ, proof, the displayed
   computation of the units on D_+(T_i T_j)
-* also Constructions, Tag 01M7
+* Stacks Project, Tag 01M7
 -/
 
 @[expose] public section

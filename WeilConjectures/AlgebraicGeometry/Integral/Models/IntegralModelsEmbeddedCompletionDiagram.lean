@@ -17,11 +17,7 @@ import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 
 ## References
 
-* Stacks Tags 099L and 093M
-* Stacks Tag 099L
-* Stacks Tag 093M
-* integral-models proof paragraph (1), the integral coefficient limit comparison, and Stacks Tags
-  099L and 093M
+* Stacks Project, Tags 099L and 093M
 -/
 
 @[expose] public noncomputable section

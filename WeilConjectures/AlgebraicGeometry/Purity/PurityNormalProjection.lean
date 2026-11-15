@@ -17,7 +17,6 @@ comparison with the relative spectrum of the conormal graded algebra.
 ## References
 
 * Stacks Tags 062Z and 0630
-* Stacks Tag 0630
 -/
 
 @[expose] public section
@@ -43,8 +42,7 @@ noncomputable def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
     (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase
     (purityNormalCone_kernel i)
 
-/-- For a section, the canonical factorization to Z is precisely the published
-normal-cone projection formed using its retraction. Thus the normal object in the
+/-- For a section, the canonical factorization to Z is precisely the normal-cone projection formed using its retraction. Thus the normal object in the
 DNC statement uses this same associated-graded cone over Z. -/
 theorem purityNormalProjection_eq {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (g : X ⟶ Z) (hs : i ≫ g = 𝟙 Z) :

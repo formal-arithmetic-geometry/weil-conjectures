@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDensePart
 
 ## References
 
-* Stacks Project, Tags 035L, 035K, 035I, 0307 and 0EYJ
 * Stacks Project, Tags 035L (normality of relative normalization), 035K (locality), 035I
   (dominance), 0307 (localization), and 0EYJ
 -/

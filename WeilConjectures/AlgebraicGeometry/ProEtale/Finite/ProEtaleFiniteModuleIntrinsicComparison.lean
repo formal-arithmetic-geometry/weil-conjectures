@@ -22,8 +22,6 @@ sheafification unit. It does not choose an abstract equivalence or a new inverse
 
 ## References
 
-* and Stacks Project, Tags 099R and 00YV
-* Stacks, Tag 00YV
 * Stacks, Tags 099R and 00YV
 -/
 

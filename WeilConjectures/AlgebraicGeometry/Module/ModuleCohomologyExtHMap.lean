@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
 
 ## References
 
-* Stacks Project, Tags 01FB and 03FD
 * Stacks Project, Tag 01FB (coefficient factorization) and Tag 03FD (comparison)
 -/
 

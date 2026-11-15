@@ -39,7 +39,7 @@ fibre-product pasting and conjugation, not independently chosen isomorphisms.
 
 ## References
 
-* six-functors-basics, and Stacks Tag 0F6W
+* Stacks Project, Tag 0F6W
 -/
 
 -- After pruning, this module only keeps private declarations.

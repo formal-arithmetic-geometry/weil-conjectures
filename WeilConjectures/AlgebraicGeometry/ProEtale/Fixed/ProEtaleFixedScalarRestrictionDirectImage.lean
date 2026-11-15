@@ -21,7 +21,6 @@ The comparison is the actual adjunction mate of the canonical inverse-image comp
 
 ## References
 
-* Stacks, Tags 0D6E and 07A6
 * Stacks Tag 03D6
 * Stacks Tag 07A6
 * Stacks Tag 0D6E
@@ -157,7 +156,7 @@ private theorem restriction_underived_mate
 
 attribute [local irreducible] upperStar
 
-/-- The canonical inverse-image/restriction square, with its published normalization. -/
+/-- The canonical inverse-image/restriction square, with its normalization. -/
 noncomputable abbrev fixedScalarRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
@@ -689,7 +688,7 @@ inherited from the named mate theorem. -/
   letI := fixedScalarRestrictionDirectImageMap_isIso φ f
   (asIso (fixedScalarRestrictionDirectImageMap φ f)).symm
 
-/-- The inverse of the forward coefficient comparison is the published derived mate. -/
+/-- The inverse of the forward coefficient comparison is the derived mate. -/
 theorem fixedScalarRestrictionDirectImage_inv
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

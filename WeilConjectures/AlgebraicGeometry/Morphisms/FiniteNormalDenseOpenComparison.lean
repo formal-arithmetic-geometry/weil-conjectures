@@ -20,9 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 
 ## References
 
-* Stacks Project, Tags 035I, 035L and 0BQM
-* the comparison in Tag 0EYJ
-* Stacks Project, Tag 033C, through `RingHom.Etale.isNormalRing`
+* Stacks Project, Tag 033C
 * Stacks Project, Tags 035I and 035L (relative normalization), Tag 0BQM (integral-closure
   description), and the comparison in Tag 0EYJ
 -/

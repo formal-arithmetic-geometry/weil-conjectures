@@ -27,11 +27,7 @@ The normalization on the scalar-unit sections fixes the comparison, including it
 
 ## References
 
-* Stacks Project, Tags 00YV and 03D1
-* Stacks Tag 00YV
-* Stacks Tags 00YV and 03D1
 * Stacks Tag 03D1
-* Stacks Tags 00YV and 07A5
 * Stacks Tag 07A5
 * Stacks Tags 00YV and 03D3
 * Stacks Tag 04JC

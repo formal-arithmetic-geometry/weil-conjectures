@@ -37,7 +37,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 * Stacks Project, Tag 0GKY, specialized to finite coefficient rings and affine finite-type integer
   bases
-* Stacks Project, Tag 0GKY
 -/
 
 @[expose] public section

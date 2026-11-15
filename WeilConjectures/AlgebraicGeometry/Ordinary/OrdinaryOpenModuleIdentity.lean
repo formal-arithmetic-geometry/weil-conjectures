@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdj
 
 ## References
 
-* Stacks Project
 * Stacks 03D8 and 03DI
 -/
 

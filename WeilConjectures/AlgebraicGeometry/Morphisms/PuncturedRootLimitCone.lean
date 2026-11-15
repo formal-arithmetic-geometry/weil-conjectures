@@ -17,8 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 ## References
 
 * Stacks Project, Tags 0BSK, 05N9 and 01YW
-* Stacks Project, Tag 0BSK
-* canonical structural map, Tag 03Q9
+* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section

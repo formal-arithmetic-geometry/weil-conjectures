@@ -25,10 +25,7 @@ constant sheaf. Insertion of a coefficient is defined on sections before sheafif
 
 ## References
 
-* Stacks Project, Tags 03PK and 03EK
-* Stacks, Tag 03PK
 * Stacks, Tags 03PK and 03EK
-* Stacks, Tag 03EK
 -/
 
 @[expose] public noncomputable section

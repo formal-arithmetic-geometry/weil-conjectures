@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Nested open restriction of a single direct image
-
-## References
-
-* Stacks Project
 -/
 
 @[expose] public section
