@@ -67,7 +67,7 @@ which needs `[Finite Λ]`. The proof
 `δ₀ = Rz_* Λ = Rz_! Λ`, moves `p₁^*` past it by base change, applies the projection formula for
 the base change `ξ ↦ (0, ξ)` of `z`, along which the kernel is trivial, and ends with
 `R(p₂ ∘ (0, 1))_! = R(𝟙)_!`.
-(sketch blueprint: `lem-fd-first-formula`) -/
+(sketch blueprint: `lemma-fourier-transform-constant-sheaf`) -/
 theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
         (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _)) := by
@@ -136,7 +136,7 @@ The proof is compact-support base change of `Rp₂,!` along the cartesian square
 `ι × 1`, `p₂`, `p₂` and `𝟙`, so the same compactification of `p₂` is used on both sides;
 `[Finite Λ]` enters through that base change
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`).
-(sketch blueprint: `def-fd-transform`, remark; `lem-fd-as-lisse`) -/
+(sketch blueprint: `sec-Fourier-inversion`, remark; `lemma-artin-schreier-character-sheaf--2`) -/
 theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
         D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) := by

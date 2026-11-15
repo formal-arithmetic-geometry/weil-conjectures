@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Homogeneous bases give finite sums of twists
 
-Source: blueprint `lem-sc-p1-graded-resolution`, shifted-free clause;
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, shifted-free clause;
 Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
 (blueprint: lem-sc-p1-homogeneous-basis-sheaf-twists).
 -/
@@ -36,7 +36,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The inverse transport of an associated sheaf of a finite graded free module is the
 finite sum of twists with the prescribed basis degrees. No resolution or exactness is assumed.
-Source: blueprint `lem-sc-p1-graded-resolution`, shifted-free clause;
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, shifted-free clause;
 Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
 (blueprint: lem-sc-p1-homogeneous-basis-sheaf-twists).
 

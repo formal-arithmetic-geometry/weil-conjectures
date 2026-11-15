@@ -94,9 +94,9 @@ section Purity
 
 variable [Finite Λ]
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
-Blueprint `thm-pur-regular-immersion-purity` (the detailed form of the same theorem).
+Blueprint `lemma-class-of-point--1` (the detailed form of the same theorem).
 
 **Purity for a regular closed immersion.** Let `i : Z ⟶ X` be a regular closed immersion of
 pure codimension `c`, with `X` smooth of relative dimension `n` over a perfect field `k` and
@@ -160,7 +160,7 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
     shiftTateObjectAddIso Λ Z m (-(n : ℤ)) ≪≫ eqToIso (by rw [hmn]) ≪≫
     (twistShiftConstantComplexIso Λ Z _).symm⟩
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 The twisted form of purity, `Ri^! (Λ_X(c)[2c]) ≅ Λ_Z`: the co-projection formula moves the
 invertible twist out of `Ri^!`, and `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`
@@ -194,7 +194,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersi
     (shiftFunctorZero' _ (2 * (0 : ℤ)) (by lia)).app _ ≪≫
     HasTateTwist.twistObjectZeroIso (Λ := Λ) Z⟩
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 *The local form of purity.* Let `i : Z ⟶ X` be a regular closed immersion of pure codimension
 `c`, with `X` smooth over a perfect field `k` and `Z` regular. Every point of `Z` has an affine
@@ -247,7 +247,7 @@ attribute [local instance] HasInvertibleExponent.opens
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ X]
   {k : Type u} [Field k] [PerfectField k] (c) (i) [IsRegularImmersion c i]
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(a) Concentration in degree zero.** `Ri^! (Λ_X(c)[2c])` has no cohomology sheaves outside
 degree `0`. The hypotheses are stable under étale base change `X' ⟶ X`, so this holds after
@@ -272,7 +272,7 @@ theorem isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion
   exact (isZero_zero _).of_iso (asIso (0 : (_root_.DerivedCategory.homologyFunctor _ n).obj
     ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ⟶ 0))
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(a) Rank one.** `𝓗⁰(Ri^! (Λ_X(c)[2c]))` is free of rank one étale-locally: there is an étale
 cover of `Z` on each member of which it becomes the constant sheaf `Λ`. Consequently
@@ -296,7 +296,7 @@ theorem exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isReg
     (_root_.DerivedCategory.homologyFunctor _ 0).mapIso (e z).some ≪≫
     homologyZeroConstantComplexIso Λ _
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(a) Lisse in degree zero.** `𝓗⁰(Ri^! (Λ_X(c)[2c]))` is a locally constant sheaf on `Z_ét`:
 it is constant on the members of an étale cover of `Z`.
@@ -313,7 +313,7 @@ theorem isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegula
   rw [isConstant_over_iff_upperStar]
   exact Sheaf.isConstant_of_iso _ (h𝒰 a).some
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 Classes with supports `H^{2c}_Z(X, Λ(c))` are sections of a sheaf: `Ri_! Ri^! (Λ_X(c)[2c])` is a
 sheaf placed in degree zero, since `Ri^! (Λ_X(c)[2c])` is (clause (a)) and `Ri_! = i_*` is exact.
@@ -340,7 +340,7 @@ theorem exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion
   exact ⟨G, ⟨e.app K ≪≫
     ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorIsoMapDerivedCategory.app K ≪≫ e'⟩⟩
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 *Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` are equal if every
 point of `Z` lies in a Zariski frame on which their restrictions agree. The classes are sections
@@ -391,7 +391,7 @@ theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smoot
     rw [← NatIso.naturality_2 comp γ, ← NatIso.naturality_2 comp γ', Functor.comp_map,
       Functor.comp_map, he]
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 *Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` whose restrictions to
 every Zariski frame agree are equal
@@ -535,7 +535,7 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
     exact key w' hw' g₀ hg₀
   rw [h₁, h₂]
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(b) The fundamental class.** Let `i : Z ⟶ X` be a regular closed immersion of pure
 codimension `c`, with `X` smooth over the perfect field `k` and `Z` regular. The frame classes
@@ -698,7 +698,7 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
   exact ⟨γ, hall, fun γ' hγ' ↦ eq_of_frameRestriction_eq Λ c i aX hZ fun F _ ↦ by
     rw [hγ' F, hall F]⟩
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 The *fundamental class* `[Z ⊂ X] = cl_{Z/X} ∈ H^{2c}_Z(X, Λ(c))` of a regular closed immersion
 `i : Z ⟶ X` of pure codimension `c`, with `X` smooth over a perfect field and `Z` regular: the
@@ -719,7 +719,7 @@ theorem frameRestriction_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     frameRestriction Λ F (fundamentalClass Λ c i aX hZ) = frameClass Λ F :=
   (existsUnique_fundamentalClass Λ c i aX hZ).exists.choose_spec F
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`: the adjoint
 (`AlgebraicGeometry.Etale.supportedClassMap`) of the fundamental class
@@ -731,7 +731,7 @@ noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
       (R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) :=
   supportedClassMap Λ i (fundamentalClass Λ c i aX hZ)
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(d) Étale base change**, `[Z_{X'} ⊂ X'] = [Z ⊂ X]|_{X'}`: for an étale `e : X' ⟶ X` and the
 base change `i' : Z' ⟶ X'` of `i`, the restriction of supports along `e`

@@ -20,8 +20,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 # Existence and thickness of the localizing closure
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node det-def-localizing-closure-existence, clauses (1)--(3)
-(blueprint: det-def-localizing-closure-existence).
+node definition-localizing-subcategory--1, clauses (1)--(3)
+(blueprint: definition-localizing-subcategory--1).
 
 Coefficients are arbitrary condensed rings, including noncommutative rings. The
 module category is Mathlib's category of internal left modules over the actual
@@ -126,8 +126,8 @@ Hom types live in that universe: an existing larger coproduct has only that
 many nonzero summands. The generating class `S` need not be small.
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node det-def-localizing-closure-existence, clauses (1)--(3)
-(blueprint: det-def-localizing-closure-existence).
+node definition-localizing-subcategory--1, clauses (1)--(3)
+(blueprint: definition-localizing-subcategory--1).
 
 Proof:
 1. The source theorem `Mod.isGrothendieckAbelian` applies directly to internal

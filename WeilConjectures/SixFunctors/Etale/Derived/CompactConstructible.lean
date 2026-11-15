@@ -18,9 +18,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 /-!
 # Objects of `Dctf(X, Λ)` are compact in `D(X_ét, Λ)`
 
-Blueprint `det-ctf-finite-compact-etale`. Let `k` be a field of finite cohomological dimension
-for `Λ`-modules, `X` a finite-type `k`-scheme and `Λ` a finite ring whose exponent is invertible
-on `X`. Every object `C` of `Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)`, and has *bounded
+Blueprint `proposition-compactness-finite-coefficients`. Let `k` be a field of finite cohomological
+dimension for `Λ`-modules, `X` a finite-type `k`-scheme and `Λ` a finite ring whose exponent is
+invertible on `X`. Every object `C` of `Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)`, and has *bounded
 morphisms*: `Hom(C, G) = 0` for `G` in sufficiently negative degrees
 (`AlgebraicGeometry.Etale.compactBoundedHom_of_constructibleFiniteTor`).
 
@@ -29,7 +29,7 @@ retracts (`DerivedCategory.compactBoundedHom`), and are transported along left a
 right adjoints preserve coproducts and have bounded amplitude
 (`DerivedCategory.compactBoundedHom_of_adjunction`). By the dévissage
 `AlgebraicGeometry.Etale.constructibleFiniteTor_eq_triangEnvelope_ctfGenerators` it suffices to
-treat the generators `Rg_* Rj_! L`. Starting from `Λ[0]` in `D(Λ)`, one applies successively:
+treat the generators `Rg_* j_! L`. Starting from `Λ[0]` in `D(Λ)`, one applies successively:
 
 * the constant sheaf functor at the point `Spec k`, right adjoint `RΓ(Spec k, -)` of finite
   cohomological dimension;
@@ -199,9 +199,10 @@ lemma compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion (hΛ : IsAddT
   exact compactBoundedHom_of_adjunction (derivedLowerStarClosedUpperShriekAdjunction g V.ι hij) c
     (fun N n hN ↦ hc N n hN) hK
 
-/-- Blueprint `det-ctf-finite-compact-etale`: on a finite-type scheme `X` over a field `k` of
-finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)` and
-has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on `X`. -/
+/-- Blueprint `proposition-compactness-finite-coefficients`: on a finite-type scheme `X` over a
+field `k` of finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in
+`D(X_ét, Λ)` and has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on
+`X`. -/
 theorem compactBoundedHom_of_constructibleFiniteTor [Finite Λ] {k : Type u} [Field k]
     (hk : HasFiniteCohomologicalDimension Λ (Spec (.of k))) {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [QuasiSeparated aX]
@@ -212,7 +213,7 @@ theorem compactBoundedHom_of_constructibleFiniteTor [Finite Λ] {k : Type u} [Fi
   have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
   rw [constructibleFiniteTor_eq_triangEnvelope_ctfGenerators Λ aX] at hK
   refine (ObjectProperty.triangEnvelope_le_iff (ctfGenerators Λ X)).2 ?_ K hK
-  rintro K ⟨str, i, Ubar, j, _, _, g, _, -, -, L, _, hL, ⟨e⟩⟩
+  rintro K ⟨str, i, Ubar, j, _, g, _, -, -, L, _, hL, ⟨e⟩⟩
   have : TopologicalSpace.NoetherianSpace (str.domain i) :=
     have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
     have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
@@ -222,11 +223,8 @@ theorem compactBoundedHom_of_constructibleFiniteTor [Finite Λ] {k : Type u} [Fi
   have h₁ := compactBoundedHom_unit_of_finiteType Λ hΛ hk (j ≫ g ≫ aX)
   have h₂ := compactBoundedHom_singleFunctor_of_isFiniteLocallyConstantSheaf Λ h₁ L hL
   have h₃ := compactBoundedHom_mapDerivedCategory_openImmersionLowerShriek Λ j h₂
-  have h₃' : compactBoundedHom _ ((R(j)_![ModuleCat.{u + 1} Λ]).obj ((singleFunctor _ 0).obj L)) :=
-    (compactBoundedHom _).prop_of_iso
-      ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app _).symm h₃
   exact (compactBoundedHom _).prop_of_iso e.symm
-    (compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion Λ hΛ aX g h₃')
+    (compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion Λ hΛ aX g h₃)
 
 end Etale
 

@@ -26,7 +26,7 @@ abelian sheaf is a constructible prime-field sheaf.
 This inductive predicate records a finite extension tree, without any cohomological
 assertion. A zero object is included as a prime-field factor with zero value.
 Source: Stacks Project, Theorem 03SC, second proof paragraph.
-(blueprint: def-v2-prime-field-filtration) -/
+(blueprint: theorem-cohomology-curves) -/
 inductive HasPrimeFieldFiltration (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) → Prop
   | prime (r : ℕ) [Fact r.Prime]

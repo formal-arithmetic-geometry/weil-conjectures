@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.BinaryBiproductCone
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
+def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
 
 Suppose that every K-flat complex with bounded below cohomology admits a quasi-isomorphism to
 a K-flat complex on which the support unit is invertible. Then the resolution normalization

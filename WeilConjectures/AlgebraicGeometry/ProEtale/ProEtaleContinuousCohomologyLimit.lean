@@ -30,10 +30,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleProductsDerived
 /-!
 # Derived sections of epimorphic inverse limits on the pro-etale site
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
 sk-prop-pe-continuous-cohomology/sk-prop-pe-continuous-cohomology-limit.md;
 Bhatt--Scholze, Propositions 3.1.9 and 3.1.10
-(blueprint: det-pe-continuous-cohomology-limit).
+(blueprint: proposition-continuous-cohomology-pro-etale-cohomology).
 
 Abelian sheaves are represented by modules over the constant integer ring sheaf.
 The abbreviations below specialize the recorded constant-sheaf, module-sheaf and
@@ -52,8 +52,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The constant integer ring sheaf on the unchanged small pro-etale site.
-Source: blueprint main-20261015, det-pe-continuous-cohomology-limit, first proof paragraph
-(blueprint: det-pe-continuous-cohomology-limit). -/
+Source: blueprint main-20261015, proposition-continuous-cohomology-pro-etale-cohomology, first proof
+paragraph (blueprint: proposition-continuous-cohomology-pro-etale-cohomology). -/
 noncomputable abbrev continuousCohomologyIntegerSheaf (X : Scheme.{t}) :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{t + 1}).obj
     (CommRingCat.of (ULift.{t + 1} ℤ))
@@ -61,8 +61,8 @@ noncomputable abbrev continuousCohomologyIntegerSheaf (X : Scheme.{t}) :=
 /-- Abelian sheaves, presented as modules over the constant integer sheaf.
 The integer action on any abelian sheaf extends uniquely to locally constant integer
 sections, so this imposes no additional structure on the abelian sheaves of the statement.
-Source: blueprint main-20261015, det-pe-continuous-cohomology-limit, first proof paragraph
-(blueprint: det-pe-continuous-cohomology-limit). -/
+Source: blueprint main-20261015, proposition-continuous-cohomology-pro-etale-cohomology, first proof
+paragraph (blueprint: proposition-continuous-cohomology-pro-etale-cohomology). -/
 noncomputable abbrev continuousCohomologyAbelianSheaves (X : Scheme.{t}) :=
   ringedSiteModules.{t + 1}
     ((sheafCompose (Scheme.ProEt.topology X)

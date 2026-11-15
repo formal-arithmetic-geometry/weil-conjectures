@@ -332,9 +332,6 @@ private theorem residue_kernel_comparison (φ : R ⟶ B) (q : R ⟶ S) (p : B �
 
 end ResidueKernels
 
-set_option maxHeartbeats 500000 in
--- The reconstructed coefficient-map types require additional definitional-equality checks.
-attribute [-instance] integralModel_coefficientMonObj in
 /-- The embedded scalar map is flat and identifies the residue quotient, and extension
 of the constant residue kernel is exactly the completed residue kernel.
 
@@ -373,7 +370,8 @@ theorem integralModelsEmbeddedCoefficientKernels
             (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)).obj
             (SheafOfModules.unit (siteModuleRings _))) ∧
       I.IsQuotientIso φ ∧ I.extension φ = ConstantCompletion.kernelIdeal qB := by
-  obtain ⟨e, r, hq, hw, hR, hB⟩ := integralModelsEmbeddedResidueSections ℓ E π hπ X
+  have hsections := integralModelsEmbeddedResidueSections ℓ E π hπ X
+  rcases hsections with ⟨e, r, hq, hw, hR, hB⟩
   let φ := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)
   let q := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.residueMap ℓ E π X)
   let qB := IntegralModelsStacks.smallMap X

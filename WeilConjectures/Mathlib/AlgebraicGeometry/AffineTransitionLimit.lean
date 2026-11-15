@@ -695,9 +695,6 @@ lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : Fin E.n) {y : Γ(E.X, E.V)}
   rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_sV_res l, CommRingCat.comp_apply, hy,
     map_zero]
 
-set_option maxHeartbeats 1600000 in
--- The defeq checks between `algebraMap`s of the two `Algebra` structures in scope and the
--- structure sheaf restriction maps are expensive on the opens diagram of the approximation.
 /-- (Implementation, Stacks 01Z9) The sections over the basic open `Wⱼ(r l)` are the
 localization of the coefficient algebra of the stage away from the tautological element
 `(b l, r l)`. Surjectivity is the condition `hgen` of the stage; injectivity combines the
@@ -707,20 +704,19 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : Fin E.n) :
     IsLocalization.Away (T.h l)
       Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := by
   let := (T.ρRes l).hom.toAlgebra
-  have := isLocalization_basicOpen_of_qcqs (X := E.WD.obj T.j) (U := ⊤)
-    isCompact_univ isQuasiSeparated_univ (T.r l)
-  refine ⟨fun ⟨_, m, rfl⟩ ↦ ?_, fun z ↦ ?_, fun {a a'} hd ↦ ?_⟩
-  · simp only [RingHom.algebraMap_toAlgebra, map_pow]
-    refine IsUnit.pow _ ?_
+  refine IsLocalization.Away.mk (T.h l) ?_ (fun z ↦ ?_) (fun a a' hd ↦ ?_)
+  · change IsUnit (((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom (T.r l))
     exact RingedSpace.isUnit_res_basicOpen (E.WD.obj T.j).toRingedSpace (T.r l)
   · obtain ⟨m, p, hp, hres⟩ := T.hgen l z
-    refine ⟨(⟨p, hp⟩, ⟨T.h l ^ m, m, rfl⟩), ?_⟩
-    simp only [RingHom.algebraMap_toAlgebra, map_pow]
+    refine ⟨m, ⟨p, hp⟩, ?_⟩
+    change z * ((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom (T.r l) ^ m =
+      ((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom p.2
     exact hres.symm
   · -- The second components agree after multiplication by a power of `r l`.
     have hres : a.1.2 |_ (E.WD.obj T.j).basicOpen (T.r l) =
         a'.1.2 |_ (E.WD.obj T.j).basicOpen (T.r l) := hd
-    obtain ⟨k, hk⟩ := exists_of_res_eq_of_qcqs_of_top hres
+    obtain ⟨k, hk⟩ := exists_of_res_eq_of_qcqs_of_top (X := E.WD.obj T.j)
+      (f := a.1.2) (g := a'.1.2) (s := T.r l) hres
     have hk' : T.r l ^ k * (a.1.2 - a'.1.2) = 0 := by
       rw [mul_sub, sub_eq_zero]
       exact hk
@@ -731,7 +727,7 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : Fin E.n) :
       rw [map_mul, map_pow, map_sub, T.hA _ a.2, T.hA _ a'.2, ← map_sub]
       exact ht
     obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_sV_eq_zero l hV0
-    refine ⟨⟨T.h l ^ (K + k), K + k, rfl⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
+    refine ⟨K + k, Subtype.ext (Prod.ext ?_ ?_)⟩
     · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_h, Prod.fst_mul,
         Prod.pow_fst]
       rw [← sub_eq_zero, ← mul_sub, pow_add, mul_assoc]
@@ -2174,7 +2170,8 @@ variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D)
 variable {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
 
 set_option backward.defeqAttrib.useBackward true in
-/-- Blueprint `def-nagata-basechanged-system`: Base-changed system over a chosen stage.
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Base-changed system over a chosen
+stage.
 
 The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a morphism
 `p : Y ⟶ Dᵢ`, indexed by the cofinal subsystem `Over i`; its transition maps are the base
@@ -3157,7 +3154,8 @@ The affine case is
 `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
 general case follows by induction over a finite cover of `X` by affine opens each of which
 lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
-(Blueprint: `lemma:nagata-finite-presentation-descends`; `thm-pd-spreading-out`, part (1).) -/
+(Blueprint: `lemma:nagata-finite-presentation-descends`;
+`proposition-jacobian-over-ground-field--1`, part (1).) -/
 @[stacks 01ZM]
 theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)
@@ -3538,7 +3536,7 @@ its composite `ψ` with the projection to `W`, is the base change of a morphism
 Part (1) is `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`, part (3) is
 `AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`.
 
-(blueprint: `thm-pd-spreading-out`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 @[stacks 01ZM]
 theorem Scheme.exists_pullback_hom_of_isLimit [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
@@ -3566,7 +3564,7 @@ quasi-separated schemes with affine transition maps, let `V`, `W` be of finite p
 stage `Dᵢ` and let `ψ χ : V ⟶ W` be morphisms over `Dᵢ` whose base changes to `lim Dⱼ` agree.
 Then their base changes to some later stage `Dⱼ` agree.
 
-(blueprint: `thm-pd-spreading-out`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 @[stacks 01ZM]
 theorem Scheme.exists_pullback_fst_comp_eq_of_isLimit [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
@@ -3841,7 +3839,7 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
 transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage.
-(Blueprint: `lemma-nagata-separated-stage-exists-absolute`.) -/
+(Blueprint: `theorem-nagata-s-compactification-theorem--1`.) -/
 @[stacks 086Q]
 theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
@@ -3911,8 +3909,8 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over a base
 `S`, with affine transition maps and quasi-compact structure morphisms. If `lim Dᵢ ⟶ S` is
 separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage.
-(Blueprint: `lemma-nagata-fixed-base-separated-stage-exists`,
-`lemma-nagata-fixed-base-separated-eventually`.) -/
+(Blueprint: `theorem-nagata-s-compactification-theorem--1`,
+`theorem-nagata-s-compactification-theorem--1`.) -/
 @[stacks 01ZH]
 theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     [IsSeparated (c.π.app i₀ ≫ t.app i₀)] :
@@ -4521,8 +4519,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The finite presentation approximation of `f : X ⟶ S` determined by a closed immersion
 `i : X ⟶ Y` over `S` into an `S`-scheme `Y` that is quasi-compact, quasi-separated and locally of
 finite presentation over `S`: the system of closed subschemes of `Y` cut out by the subideal
-sheaves of finite type of the kernel of `i`. (Blueprint: `def-nagata-closed-subscheme-fp-system`,
-`def-nagata-finite-type-fp-model-system`.) -/
+sheaves of finite type of the kernel of `i`. (Blueprint:
+`theorem-nagata-s-compactification-theorem--1`, `theorem-nagata-s-compactification-theorem--1`.) -/
 noncomputable def Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion
     {X Y S : Scheme.{u}} {f : X ⟶ S} [CompactSpace S] [QuasiSeparatedSpace S] (q : Y ⟶ S)
     (i : X ⟶ Y) [IsClosedImmersion i] [LocallyOfFinitePresentation q] [QuasiCompact q]
@@ -4566,7 +4564,8 @@ closed immersions.
 
 The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
 cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`, `lemma-nagata-finite-type-fp-model-system`.)
+(Blueprint: `lemma:nagata-finite-type-fp-model-system`,
+`theorem-nagata-s-compactification-theorem--1`.)
 -/
 @[stacks 09ZQ]
 theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
@@ -4759,7 +4758,7 @@ quasi-compact open of `T'` has `P`, as otherwise its closed complement would be 
 subscheme with `P`. Take a nonempty affine open `Spec A` of `T'` and a minimal prime `p` of `A`;
 then `Spec A_p` is the cofiltered limit of the nonempty basic opens `Spec A[1/f]`, `f ∉ p`, so
 it has `P`, and it is a thickening of the spectrum of its residue field, as `A_p` has a single
-prime ideal. (Blueprint: `sk-lem-minimal`, `sbc-lem-bc-minimal-counterexample`.) -/
+prime ideal. (Blueprint: `lemma-reduction-field`.) -/
 @[stacks 0F06]
 theorem exists_spec_field_of_isQcqsLocalProperty (T : Scheme.{u})
     [CompactSpace T] [QuasiSeparatedSpace T]

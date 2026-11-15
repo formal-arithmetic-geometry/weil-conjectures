@@ -16,7 +16,7 @@ import Mathlib.Tactic.LinearCombination
 
 /-! # Recognition of condensed character images
 
-Source: blueprint lem-fd-as-characters, proof Step 5, and the finite-torsor
+Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5, and the finite-torsor
 isotypic argument in `WeilConjectures.SixFunctors.Finite.Isotypic`.
 -/
 
@@ -409,7 +409,7 @@ private theorem average_evaluation_mono
 
 -- Explicit internal-module comparisons require additional elaboration heartbeats.
 /-- Evaluation on a character-projector image is monic on a transitive finite cover.
-Source: blueprint lem-fd-as-characters Step 5, the eigenfunction calculation, and
+Source: blueprint lemma-artin-schreier-character-sheaf Step 5, the eigenfunction calculation, and
 Etale.mono_sheafFiber_map_image_ι_isotypicIdempotent_comp_stalkRestrict
 (blueprint: lem-fd-as-condensed-character-image-evaluation-mono).
 

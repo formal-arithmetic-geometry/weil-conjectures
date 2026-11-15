@@ -20,7 +20,8 @@ the irreducible subquotients. Irreducibility itself is `Representation.IsIrreduc
 `Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Invariants of the
 composition factors counted with multiplicity are recorded by
 `Subrepresentation.factorMultiset` (in `WeilConjectures.RepresentationTheory.CompositionFactors`);
-the rank `N_γ` and the weight sum `B_γ` of blueprint `sk-d-real-detweights` are sums over it.
+the rank `N_γ` and the weight sum `B_γ` of blueprint `definition-determinant-weight--1` are sums
+over it.
 
 ## Main definitions
 
@@ -51,7 +52,7 @@ namespace Representation
 variable {k G V V' : Type*} [Field k] [Monoid G]
   [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
 
-/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
+/-- Blueprint `definition-weil-representation`: Operations, constituents and coinvariants.
 
 `σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
 to a subquotient of `ρ`. By Jordan-Hölder these are exactly the irreducible successive
@@ -243,7 +244,7 @@ variable {k G H V W : Type*} [Field k] [Group G] [Group H] [AddCommGroup V] [Mod
 /-- **Schur's scalar lemma.** An endomorphism `c` of a finite-dimensional irreducible representation
 over an algebraically closed field commuting with the action is a scalar `a • 1` for a unique
 `a`: an eigenspace of `c` is a nonzero subrepresentation, hence everything.
-(blueprint: `lem-wf-schur-scalar`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 theorem IsIrreducible.existsUnique_eq_smul_id [IsAlgClosed k] [FiniteDimensional k V]
     (hρ : ρ.IsIrreducible) (c : Module.End k V)
     (hc : ∀ g, c ∘ₗ ρ g = ρ g ∘ₗ c) : ∃! a : k, c = a • LinearMap.id := by
@@ -302,7 +303,7 @@ variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
 
 /-- The contragredient of a finite-dimensional irreducible representation is irreducible: the
 annihilator in `V` of an invariant subspace of `V^∨` is invariant, hence `0` or `V`.
-(blueprint: part L3 of `sk-r-linear-library`) -/
+(blueprint: part L3 of `lemma-tensor-exterior-powers-filtered-representations--3`) -/
 theorem IsIrreducible.dual [FiniteDimensional k V] (h : ρ.IsIrreducible) :
     ρ.dual.IsIrreducible := by
   obtain ⟨hV, hU⟩ := isIrreducible_iff.1 h

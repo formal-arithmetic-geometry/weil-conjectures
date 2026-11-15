@@ -54,8 +54,8 @@ local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
 /-- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_square` for `ℚ̄_ℓ`-coefficients, with
 the base change morphism of the square of bases and the pushforward exchange of `ψ'` invertible by
-proper base change (blueprint `sk-thm-sfb-proper-base-change`) and by the proper exchange
-(blueprint `det-sp-nearby-cycles-exchanges` (2)): it suffices that the square of bases is
+proper base change (blueprint `proposition-proper-direct-image-constructible-complexes`) and by the
+proper exchange (blueprint `prose-E-03` (2)): it suffices that the square of bases is
 cartesian with `g` proper and with noetherian bases over fields `k₁` and `k₂` in which `ℓ` is
 invertible, that `P` and `P₁` are models of finite type over the trait `Spec k₀⟦t⟧` with `ℓ`
 invertible in `k₀`, that `ψ'` is proper and cartesian on special fibres and identifications, and

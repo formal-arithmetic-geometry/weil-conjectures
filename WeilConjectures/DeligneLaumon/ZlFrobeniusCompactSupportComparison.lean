@@ -18,9 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Frobenius comparison on completed compact-support representatives
 
-Source: blueprint main-20261015, sec-deligne-laumon-general,
+Source: blueprint main-20261015, chap-The-Deligne-Laumon-theorem-in-general,
 sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md;
-lem-fix-weil-operations, composition-comparison clause
+prose-10-20, composition-comparison clause
 (blueprint: def-zl-frobenius-compact-support-comparison).
 
 The open comparison is the inverse of the open-adjunction mate. The proper
@@ -258,7 +258,7 @@ private theorem geometricPull_isEquivalence {X Y : Scheme.{u}} (g : X ⟶ Y) [Is
   exact Functor.isEquivalence_mapDerivedCategory _
 
 /-- Both prescribed mates are invertible for geometric Frobenius.
-Source: blueprint lem-fix-weil-operations; Stacks 099N and 03DI
+Source: blueprint prose-10-20; Stacks 099N and 03DI
 (blueprint: def-zl-frobenius-compact-support-comparison).
 Proof: geometric Frobenius and its middle-model map are scheme isomorphisms.
 Their exact inverse-image equivalences identify each square with an identity
@@ -285,7 +285,7 @@ theorem zlFrobeniusMates_isIso :
 
 /-- The canonical compact-support Frobenius comparison on completed representatives.
 It is proper exchange followed by the inverse open mate.
-Source: blueprint lem-fix-weil-operations, compact-support clause
+Source: blueprint prose-10-20, compact-support clause
 (blueprint: def-zl-frobenius-compact-support-comparison). -/
 def zlCompactSupportFrobenius :
     image (completed l E) (zlGeometricCompactification D f₀ c₀) ⋙

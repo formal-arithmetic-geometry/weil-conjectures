@@ -13,17 +13,17 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 # Nearby duality: global sections and finite support
 
 In Illusie's proof of Gabber's theorem (*Autour du théorème de monodromie locale*, Thm. 4.2;
-blueprint `sk-prop-tf-nearby-duality-foundation`, "Dimension induction"), the cone `C` of the
-duality map `δ_{M,K}` of a proper model has no global sections (global duality and proper
-exchange, blueprint `det-tf-nearby-duality-proper` (3)) and is supported on finitely many closed
-points (generic slicing, blueprint `det-tf-nearby-duality-slice`); hence it vanishes. This file
-proves the last, formal step:
+blueprint `proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"), the cone `C`
+of the duality map `δ_{M,K}` of a proper model has no global sections (global duality and proper
+exchange, blueprint `lemma-nearby-duality-proper-direct-image` (3)) and is supported on finitely
+many closed points (generic slicing, blueprint `lemma-nearby-duality-slice--1`); hence it vanishes.
+This file proves the last, formal step:
 
 * a morphism `f` of bounded constructible complexes on a separated scheme of finite type over a
   separably closed field is an isomorphism as soon as `RΓ(f)` and the restriction of `f` to the
   complement of finitely many closed points are
   (`ProEtale.CondensedRing.isIso_of_isIso_upperStar_finsetComplOpens_of_isIso_lowerStar`, from
-  blueprint `det-nearby-kunneth-finite-support`,
+  blueprint `lemma-finite-support-global-sections--1`,
   `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`);
 * hence the duality map `δ_{M,K}` is an isomorphism as soon as `RΓ(X', δ_{M,K})` and its
   restriction away from finitely many closed points of the special fibre are
@@ -57,7 +57,7 @@ isomorphisms**: let `X` be a separated scheme of finite type over a separably cl
 whose restriction to `X ∖ S` and whose global sections `RΓ(X, f)` are isomorphisms is an
 isomorphism: its cone vanishes by
 `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`
-(blueprint `det-nearby-kunneth-finite-support`). -/
+(blueprint `lemma-finite-support-global-sections--1`). -/
 theorem isIso_of_isIso_upperStar_finsetComplOpens_of_isIso_lowerStar (S : Finset X.left)
     (hS : ∀ x ∈ S, IsClosed {x}) {A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : A ⟶ B)
     (hU : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -105,8 +105,8 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime]
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- **The cone of the duality map vanishes if it has no global sections and finite support**
-(blueprint `sk-prop-tf-nearby-duality-foundation`, "Dimension induction", last step): the
-duality map `δ_{M,K}` is an isomorphism as soon as its global sections `RΓ(X', δ_{M,K})` and its
+(blueprint `proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction", last step):
+the duality map `δ_{M,K}` is an isomorphism as soon as its global sections `RΓ(X', δ_{M,K})` and its
 restriction to the complement of a finite set of closed points of the special fibre are. -/
 theorem isIso_nearbyDualityMap_of_isIso_lowerStar (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)

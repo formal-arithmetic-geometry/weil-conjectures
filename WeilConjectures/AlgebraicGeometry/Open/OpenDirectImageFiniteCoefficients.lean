@@ -17,8 +17,8 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 # Open direct images with finite allowable coefficients
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc,
-cor-fin-deligne-open-finite-coefficients
-(blueprint: cor-fin-deligne-open-finite-coefficients).
+corollary-open-direct-image-over-field--1
+(blueprint: corollary-open-direct-image-over-field--1).
 
 Bounded constructibility is the recorded finite-stratification predicate on ordinary
 etale derived categories, with no condition on Tor amplitude.
@@ -35,8 +35,8 @@ namespace AlgebraicGeometry.Etale
 /-- An open immersion of finite-type schemes over a field preserves bounded constructible
 complexes with arbitrary finite allowable commutative coefficients.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc,
-cor-fin-deligne-open-finite-coefficients
-(blueprint: cor-fin-deligne-open-finite-coefficients).
+corollary-open-direct-image-over-field--1
+(blueprint: corollary-open-direct-image-over-field--1).
 
 Proof: use the source library's open-image theorem, which already allows arbitrary
 finite coefficients of invertible exponent, on each constructible sheaf. The proved

@@ -41,8 +41,8 @@ open Scheme _root_.DerivedCategory.TStructure
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {Z U X : Scheme.{u}}
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3), pulled back to the pro-étale site:
-for a closed immersion `i : Z ⟶ X` and the complementary quasi-compact open immersion
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3), pulled back to the pro-étale
+site: for a closed immersion `i : Z ⟶ X` and the complementary quasi-compact open immersion
 `j : U ⟶ X`, and a bounded below `M ∈ D(X_ét, Λ)`, there are bounded below `C ∈ D(Z_ét, Λ)` and
 `N ∈ D(U_ét, Λ)` (namely `Ri^! M` and `j^* M`) and a distinguished triangle
 `Ri_* ν_Z^* C ⟶ ν_X^* M ⟶ Rj_* ν_U^* N ⟶ (Ri_* ν_Z^* C)⟦1⟧` in `D(X_proét, Λ)`. -/

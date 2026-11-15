@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficient
 /-! # Change of coefficients and base change for the diagonal class
 
 Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: det-prop-diagonal-tower-coefficients).
+(blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 ## Main statements
 
@@ -50,9 +50,9 @@ uniformizer quotient, rational coefficients and the finite-extension-valued
 algebraic closure preserves the diagonal class, its traces and both integration
 identities.
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.md, clauses 1--2
-(blueprint: det-prop-diagonal-tower-coefficients).
+(blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 Proof: A finite free Z_l-basis of O_E identifies scalar extension with a finite
 biproduct functor. It is exact, commutes with products and hence with the cone

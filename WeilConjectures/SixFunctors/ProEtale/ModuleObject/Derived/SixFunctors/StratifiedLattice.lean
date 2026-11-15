@@ -22,8 +22,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Spe
 # Integral lattices after finite stratification
 
 Source: Weil conjectures blueprint, main-20261015, six-functors basics,
-`sk-lem-stratified-lattice`, statement and proof; Bhatt--Scholze, Section 6.8,
-Proposition 6.8.4(6) and Lemma 6.8.13 (blueprint: sk-lem-stratified-lattice).
+`lemma-lattices-after-finite-stratification`, statement and proof; Bhatt--Scholze, Section 6.8,
+Proposition 6.8.4(6) and Lemma 6.8.13 (blueprint: lemma-lattices-after-finite-stratification).
 
 The coefficients are the pulled condensed topological rings, and modules are internal
 module objects. The lattice inclusion is monic, and its scalar-extension adjoint is an
@@ -159,9 +159,9 @@ ring has the subspace topology. Scalar extension along its inclusion is inversio
 No uniformizer enters this conclusion; any chosen uniformizer in the coefficient datum
 is allowed. The nodal-curve example in the source explains why stratification is necessary.
 
-Source: blueprint main-20261015, `sk-lem-stratified-lattice`, and its proof paragraphs
-"Sheaf of lattices", stratification, and "Pushing down by the trace";
-Bhatt--Scholze, Section 6.8 (blueprint: sk-lem-stratified-lattice).
+Source: blueprint main-20261015, `lemma-lattices-after-finite-stratification`, and its proof
+paragraphs "Sheaf of lattices", stratification, and "Pushing down by the trace";
+Bhatt--Scholze, Section 6.8 (blueprint: lemma-lattices-after-finite-stratification).
 
 Proof. The structure map makes X Noetherian. Apply the etale-local lattice theorem,
 then stratify its qcqs etale cover so that its restrictions are finite etale.

@@ -20,7 +20,7 @@ geometric restrictions are irreducible local systems. Through any nonempty finit
 `k̄`-points of `X` there is a smooth connected affine curve `C ⊆ X`, defined over a finite
 extension of `k₀`, on which every `𝒮ⱼ` stays irreducible
 (`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`,
-blueprint `lem-zl-curve-testing-irreducibility`).
+blueprint `corollary-curve-preserving-geometric-irreducibility--1`).
 
 ## Implementation notes
 
@@ -51,12 +51,12 @@ namespace AlgebraicGeometry
 open Scheme.FiniteEtale ProEtale
 
 /-- **Curve testing for irreducible local systems** (blueprint:
-`lem-zl-curve-testing-irreducibility`). Let `f : X₀ ⟶ Spec k₀` be a smooth geometrically connected
-affine scheme of relative dimension `d ≥ 1` over a finite field, with geometric fiber `X`, let
-`F₁, …, Fᵣ` be irreducible `ℓ`-adic local systems on `X`, and let `S` be a nonempty finite set of
-`k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a smooth connected affine curve over
-`k̄` through `S`, stable under a power of the geometric Galois Frobenius of `X`, such that every
-`i^* Fⱼ` is still an irreducible local system. -/
+`corollary-curve-preserving-geometric-irreducibility--1`). Let `f : X₀ ⟶ Spec k₀` be a smooth
+geometrically connected affine scheme of relative dimension `d ≥ 1` over a finite field, with
+geometric fiber `X`, let `F₁, …, Fᵣ` be irreducible `ℓ`-adic local systems on `X`, and let `S` be a
+nonempty finite set of `k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a smooth
+connected affine curve over `k̄` through `S`, stable under a power of the geometric Galois Frobenius
+of `X`, such that every `i^* Fⱼ` is still an irreducible local system. -/
 theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperStar
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] {X₀ : Scheme.{u}}
     (f : X₀ ⟶ Spec (.of k₀)) [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d) [SmoothOfRelativeDimension d f]
@@ -142,12 +142,12 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
     exact ⟨γ, hγ, Set.mem_iInter.1 hγU j⟩
 
 /-- **Curve testing for geometric irreducibility**
-(blueprint: `lem-zl-curve-testing-irreducibility`). Let `X₀` be a smooth geometrically connected
-affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric fiber `X`, let
-`𝒮₁, …, 𝒮ᵣ` be Weil sheaves on `X₀` whose geometric restrictions are irreducible local systems,
-and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion
-`i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a finite
-extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
+(blueprint: `corollary-curve-preserving-geometric-irreducibility--1`). Let `X₀` be a smooth
+geometrically connected affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric
+fiber `X`, let `𝒮₁, …, 𝒮ᵣ` be Weil sheaves on `X₀` whose geometric restrictions are irreducible
+local systems, and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed
+immersion `i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a
+finite extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
 every `𝒮ⱼ` remains geometrically irreducible. -/
 theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
     [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ : Scheme.{u}}

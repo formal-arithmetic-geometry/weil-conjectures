@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 
 /-! # Pullback of the integral pro-etale line-bundle class
 
-Source: blueprint sec-smooth-purity, classes proof (2).
+Source: blueprint chap-Smooth-purity, classes proof (2).
 -/
 
 @[expose] public noncomputable section

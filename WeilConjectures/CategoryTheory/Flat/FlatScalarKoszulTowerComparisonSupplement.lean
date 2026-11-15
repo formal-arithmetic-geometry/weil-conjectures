@@ -818,7 +818,6 @@ private theorem derivedUnitRestrictionOnComplex (φ : R ⟶ B) (r : ℕ)
       (ringedKoszulLimitUnit R r a ((restrictComplex φ).obj N))
       (ordinaryUnitRestriction φ r a h hu N)
 
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent endpoints of the chosen tower and localization functors.
 private theorem normalizedProjectionSquare (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
@@ -909,7 +908,6 @@ private theorem normalizedProjectionSquare (φ : R ⟶ B) (r : ℕ)
     rw [← t₁.naturality, ← t₂.naturality, hI I hi]
   exact NatTrans.congr_app ht M
 
-set_option maxHeartbeats 800000 in
 -- Assemble the independently normalized comparisons without unfolding their models.
 /-- Scalar restriction identifies strict Koszul towers, with the identity on each ordered
 exterior coordinate, their coaugmentations, and their normalized total derived limits.
@@ -1005,13 +1003,21 @@ theorem flatScalarKoszulTowerComparison (φ : R ⟶ B)
         (∀ E, DR.unit E ≫ eR.hom.app E = 𝟙 E) ∧
         ∀ E, gamma.hom.app E ≫ eR.hom.app ((restrictDerived φ).obj E) =
           (restrictDerived φ).map (eB.hom.app E)) := by
-  obtain ⟨h, hc, hu⟩ := strictScalarKoszulComparison φ r a
-  obtain ⟨DB, hB0⟩ := existsPresentation B r (imageSections φ a)
-  obtain ⟨DR, hR0⟩ := existsPresentation R r a
-  obtain ⟨hD, hd⟩ := descendedTensorComparison φ r a DB DR h
-  obtain ⟨alpha, ha⟩ := normalizedLimitComparison φ _hflat r a DB DR
-  obtain ⟨pB, hpB⟩ := normalizedProjections B DB
-  obtain ⟨pR, hpR⟩ := normalizedProjections R DR
+  let h := (strictScalarKoszulComparison φ r a).choose
+  have hc := (strictScalarKoszulComparison φ r a).choose_spec.1
+  have hu := (strictScalarKoszulComparison φ r a).choose_spec.2
+  let DB := (existsPresentation B r (imageSections φ a)).choose
+  have hB0 := (existsPresentation B r (imageSections φ a)).choose_spec
+  let DR := (existsPresentation R r a).choose
+  have hR0 := (existsPresentation R r a).choose_spec
+  let hD := (descendedTensorComparison φ r a DB DR h).choose
+  have hd := (descendedTensorComparison φ r a DB DR h).choose_spec
+  let alpha := (normalizedLimitComparison φ _hflat r a DB DR).choose
+  have ha := (normalizedLimitComparison φ _hflat r a DB DR).choose_spec
+  let pB := (normalizedProjections B DB).choose
+  have hpB := (normalizedProjections B DB).choose_spec
+  let pR := (normalizedProjections R DR).choose
+  have hpR := (normalizedProjections R DR).choose_spec
   let gamma : DB.completion ⋙ restrictDerived φ ≅ restrictDerived φ ⋙ DR.completion :=
     Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft DB.tensorTower alpha ≪≫

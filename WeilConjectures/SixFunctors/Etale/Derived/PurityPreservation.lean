@@ -23,16 +23,16 @@ with explicit bounds:
 
 * for `f` smooth of pure relative dimension `d`, `[a', b'] = [a - 2d, b - 2d]`
   (`AlgebraicGeometry.Etale.smooth_preservationClauses`, blueprint
-  `cor-pur-smooth-admissibility`), by smooth duality `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` with `L` locally
-  free of rank one (`thm-asd-smooth-tensor`);
+  `theorem-f-shriek-finite-coefficients`), by smooth duality `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` with `L`
+  locally free of rank one (`proposition-exceptional-inverse-image-smooth-morphism`);
 * for `f` separated of finite type, covered by affine charts `U ↪ 𝔸^{d_U}_V` (closed immersions
   over affine opens `V ⊆ Y`) whose open complements `W_U ⊆ 𝔸^{d_U}_V` satisfy the open-complement
   condition with constants `c_U`, `[a', b'] = [a - 2D, b - 2D + c]` for `D ≥ d_U` and
   `c ≥ c_U + 1 + 2(D - d_U)` (`AlgebraicGeometry.Etale.preservationClauses_of_charts`, blueprint
-  `thm-pur-general-admissibility`);
+  `theorem-f-shriek-finite-coefficients`);
 * the open-complement condition holds with `c_U = 2(d_U + dim Y)`
   (`AlgebraicGeometry.Etale.preservationClauses_of_charts_of_topologicalKrullDim_le`, blueprint
-  `cor-pur-general-admissibility-datum`), and such charts always exist, so every separated
+  `theorem-f-shriek-finite-coefficients--1`), and such charts always exist, so every separated
   finite-type `f` satisfies both clauses without any hypothesis
   (`AlgebraicGeometry.Etale.exists_preservationClauses`).
 -/
@@ -80,7 +80,8 @@ lemma constructibleIn_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{
     homologyConcentratedIn_of_iso _ ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm
       (((j)^*[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj hK.2)⟩
 
-/-- Blueprint `cor-pur-smooth-admissibility`: Smooth morphisms satisfy the preservation clauses.
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Smooth morphisms satisfy the preservation
+clauses.
 
 Let `f : X ⟶ Y` be smooth (and compactifiable, hence separated of finite type) of pure relative
 dimension `d`, and `Λ` a finite ring whose exponent is invertible on `Y`. Then `f` satisfies
@@ -90,12 +91,12 @@ the two preservation clauses with `c_f^- = c_f^+ = -2d`:
 2. (finite Tor amplitude) if `K` is bounded constructible with Tor amplitude in `[a, b]`, then
    `Rf^! K` is bounded constructible with Tor amplitude in `[a - 2d, b - 2d]`.
 
-By smooth duality (`thm-asd-smooth-tensor`, `cor-pur-dualizing-object-purity`)
-`Rf^! K ≅ Lf^* K ⊗ᴸ ω_f` with `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free rank-one
-`Λ`-modules (étale-locally `Λ_X(d)`): `Lf^*` is exact, tensoring with the flat `L` preserves
-the homology interval and the Tor amplitude, and `[2d]` shifts both intervals by `-2d`. The
-ambient adjoint `Rf^!` is the right adjoint of `Rf_!` on the unbounded derived categories, which
-exists unconditionally here. -/
+By smooth duality (`proposition-exceptional-inverse-image-smooth-morphism`,
+`proposition-smooth-purity-finite-coefficients--1`) `Rf^! K ≅ Lf^* K ⊗ᴸ ω_f` with `ω_f ≅ L[2d]` for
+a locally constant sheaf `L` of free rank-one `Λ`-modules (étale-locally `Λ_X(d)`): `Lf^*` is exact,
+tensoring with the flat `L` preserves the homology interval and the Tor amplitude, and `[2d]` shifts
+both intervals by `-2d`. The ambient adjoint `Rf^!` is the right adjoint of `Rf_!` on the unbounded
+derived categories, which exists unconditionally here. -/
 theorem smooth_preservationClauses {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
     [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f] :
     (∀ (a b : ℤ) (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -142,12 +143,12 @@ theorem smooth_preservationClauses {X Y : Scheme.{u}} [HasInvertibleExponent Λ 
       f d a b ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
     exact ⟨h.1.1, h.2⟩
 
-/-- The chart step of `thm-pur-general-admissibility`: for a closed immersion
+/-- The chart step of `theorem-f-shriek-finite-coefficients`: for a closed immersion
 `c : U ⟶ 𝔸ⁿ_V` over an affine open `v : V ⟶ Y`, whose open complement `j : W ⟶ 𝔸ⁿ_V` satisfies
 the open-complement condition with constant `c_U`, `R(c ≫ π ≫ v)^!` carries `[a, b]` to
 `[a - 2n, b - 2n + c_U + 1]`, in both preservation clauses: `Rv^! = v^*`, the smooth clause for
-`π : 𝔸ⁿ_V ⟶ V` and the closed-immersion clauses (`lem-exc-closed-amplitude`,
-`prop-exc-closed-tor`). -/
+`π : 𝔸ⁿ_V ⟶ V` and the closed-immersion clauses (`theorem-f-shriek-finite-coefficients--1`,
+`theorem-f-shriek-finite-coefficients--1`). -/
 theorem preservationClauses_closedChart {k : Type u} [Field k] {U V W Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] (v : V ⟶ Y) [IsOpenImmersion v] [IsAffine V] {n : ℕ}
@@ -205,7 +206,7 @@ theorem preservationClauses_closedChart {k : Type u} [Field k] {U V W Y : Scheme
     exact ⟨(DerivedCategory.boundedConstructible _ U).prop_of_iso (e K).symm hb₃,
       (torAmplitudeIn (ModuleCat.{u + 1} Λ) U _ _).prop_of_iso (e K).symm ht₃⟩
 
-/-- Blueprint `thm-pur-general-admissibility`: Preservation for an affine base, modulo the
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for an affine base, modulo the
 open-complement condition.
 
 Let `f : X ⟶ Y` be separated of finite type (compactifiable and quasi-compact), with `Y` of
@@ -213,8 +214,8 @@ finite type over a field `k`, and `Λ` a finite ring whose exponent is invertibl
 `U₁, …, U_m` be affine opens covering `X` and `V₁, …, V_m` affine opens of `Y`, with closed
 immersions `cᵢ : Uᵢ ⟶ 𝔸^{dᵢ}_{Vᵢ}` over `Vᵢ` (so `f ∣_{Uᵢ}` is `cᵢ` followed by the projection and
 `Vᵢ ⊆ Y`), and let `jᵢ : Wᵢ ⟶ 𝔸^{dᵢ}_{Vᵢ}` be the open complements. Assume the open-complement
-condition (`def-exc-open-complement-bound`) for every pair `(Wᵢ, 𝔸^{dᵢ}_{Vᵢ})` with constant
-`cᵢ'`, and let `D ≥ dᵢ` and `c ≥ cᵢ' + 1 + 2(D - dᵢ)` for all `i` (the blueprint takes
+condition (`theorem-f-shriek-finite-coefficients--1`) for every pair `(Wᵢ, 𝔸^{dᵢ}_{Vᵢ})` with
+constant `cᵢ'`, and let `D ≥ dᵢ` and `c ≥ cᵢ' + 1 + 2(D - dᵢ)` for all `i` (the blueprint takes
 `D = maxᵢ dᵢ` and `c = maxᵢ (cᵢ' + 1 + 2(D - dᵢ))`). Then:
 
 1. `Rf^!` carries `D_c^[a, b](Y, Λ)` into `D_c^[a - 2D, b - 2D + c](X, Λ)`;
@@ -301,7 +302,7 @@ theorem preservationClauses_of_charts {k : Type u} [Field k] {X Y : Scheme.{u}}
 
 /-- The open-complement condition for an open subscheme `W` of an affine space `𝔸ⁿ_V` over an
 affine open `V` of a finite-type `k`-scheme `Y` with `dim Y ≤ d_Y`: it holds with the constant
-`2(d_Y + n)`, independently of `Λ` (`lem-exc-open-complement-known`, as
+`2(d_Y + n)`, independently of `Λ` (`theorem-f-shriek-finite-coefficients--1`, as
 `dim 𝔸ⁿ_V ≤ d_Y + n`). -/
 theorem openComplementCondition_affineSpace {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {Y : Scheme.{u}}
@@ -334,15 +335,15 @@ theorem openComplementCondition_affineSpace {k : Type u} [Field k]
     exact add_le_add hV le_rfl
   exact openComplementCondition_two_mul (π ≫ v ≫ aY) j (dY + n) hdim
 
-/-- Blueprint `cor-pur-general-admissibility-datum`: Preservation for a general separated
+/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Preservation for a general separated
 finite-type morphism.
 
 In the situation of `AlgebraicGeometry.Etale.preservationClauses_of_charts`
-(`thm-pur-general-admissibility`), with closed affine charts `cᵢ : Uᵢ ⟶ 𝔸^{dᵢ}_{Vᵢ}` of `f` and
-without assuming the open-complement condition: let `Λ` be a finite ring whose exponent is
+(`theorem-f-shriek-finite-coefficients`), with closed affine charts `cᵢ : Uᵢ ⟶ 𝔸^{dᵢ}_{Vᵢ}` of `f`
+and without assuming the open-complement condition: let `Λ` be a finite ring whose exponent is
 invertible in `k`, `dim Y ≤ d_Y` and `D ≥ dᵢ` for all `i`. The open complement
 `Wᵢ = 𝔸^{dᵢ}_{Vᵢ} ∖ Uᵢ` satisfies the open-complement condition with `cᵢ' = 2(dᵢ + d_Y)`
-(`lem-exc-open-complement-known`, as `dim 𝔸^{dᵢ}_{Vᵢ} ≤ dᵢ + d_Y`), so with
+(`theorem-f-shriek-finite-coefficients--1`, as `dim 𝔸^{dᵢ}_{Vᵢ} ≤ dᵢ + d_Y`), so with
 `c = 2D + 2d_Y + 1 = maxᵢ (cᵢ' + 1 + 2(D - dᵢ))` (for `D = maxᵢ dᵢ`) the two preservation
 clauses hold with the interval `[a - 2D, b - 2D + c] = [a - 2D, b + 2d_Y + 1]`:
 
@@ -396,7 +397,7 @@ spaces of a finite family of closed affine charts of `f`, which exist by
 `AlgebraicGeometry.exists_isClosedImmersion_affineSpace_of_isAffine`) such that for `dim Y ≤ d_Y`
 the exceptional inverse image `Rf^!` carries `[a, b]` to `[a - 2D, b + 2d_Y + 1]` in both clauses
 (`AlgebraicGeometry.Etale.preservationClauses_of_charts_of_topologicalKrullDim_le`,
-`cor-pur-general-admissibility-datum`). -/
+`theorem-f-shriek-finite-coefficients--1`). -/
 theorem exists_preservationClauses {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]

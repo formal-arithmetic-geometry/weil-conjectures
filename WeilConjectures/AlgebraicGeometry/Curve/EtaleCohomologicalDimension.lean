@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 # Etale cohomological dimension of a smooth connected curve
 
 Source: blueprint sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-cohomological-dimension.md;
-Stacks Project, Tag 03SC (1) (blueprint: lem-sc-cohomological-dimension).
+Stacks Project, Tag 03SC (1) (blueprint: theorem-cohomology-curves--1).
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry
 abelian etale sheaf has zero cohomology above degree two. Cohomology is the homology of derived
 global sections, applied to the sheaf in degree zero.
 Source: blueprint sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-cohomological-dimension.md,
-and Stacks Project, Tag 03SC (1) (blueprint: lem-sc-cohomological-dimension).
+and Stacks Project, Tag 03SC (1) (blueprint: theorem-cohomology-curves--1).
 
 Proof (the nine steps of the node):
 1. Choose an affine open U with finite complement of closed points using
@@ -63,7 +63,7 @@ Proof (the nine steps of the node):
    sequence, inductively obtaining vanishing in every degree at least three for n-killed F.
 9. By lemma-weil-pbc-torsion-filtered-union, an arbitrary torsion F is the filtered union
    of its integer-torsion subsheaves. The curve is quasi-compact and quasi-separated, so
-   lem-weil-pbc-cohomology-filtered-colimit identifies its cohomology with the colimit of
+   lemma-finiteness-small-etale-topoi--2 identifies its cohomology with the colimit of
    the zero groups from step 8. This proves vanishing for all q > 2. -/
 theorem IsConnectedCurve.subsingleton_etaleCohomology_of_two_lt
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}

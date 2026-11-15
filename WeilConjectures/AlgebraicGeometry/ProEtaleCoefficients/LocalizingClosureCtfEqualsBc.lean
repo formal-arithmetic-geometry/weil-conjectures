@@ -518,8 +518,8 @@ therefore have finite Tor amplitude, so the bounded and localizing closures agre
 The statement also records finite-ring thickness and the square-zero counterexamples.
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node det-def-localizing-closure-ctf-equals-bc
-(blueprint: det-def-localizing-closure-ctf-equals-bc).
+node proposition-ctf-equals-bc--1
+(blueprint: proposition-ctf-equals-bc--1).
 
 Proof: apply the finite-constant-local-model Tor theorem and the stratified devissage
 with unchanged endpoints. The cohomology-interval theorem gives [a-1,b]; boundedness

@@ -422,7 +422,7 @@ at a closed point `z` of `X` over `x = φ z`, with `r = [κ(z) : κ(x)]`, the lo
 The blueprint states this for the inclusion `X_y ⟶ X` of the fibre of a morphism `X ⟶ Y` over a
 closed point `y`, with purity on `X_y` relative to `κ(y)`; since residue cardinalities do not
 depend on the base field, purity relative to `κ(y)` and relative to `k₀` agree
-(blueprint: `lem-tw-punctual-rescaling`). -/
+(blueprint: `proposition-weights-under-usual-operations--7`). -/
 theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l Y}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :

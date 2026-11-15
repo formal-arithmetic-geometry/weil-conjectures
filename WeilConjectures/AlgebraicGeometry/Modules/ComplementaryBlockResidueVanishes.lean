@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- At one point, the rank bound kills the complementary matrix in the residue field.
 No reducedness assumption is needed.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), reduced-ring normal form,
+Source: `lemma-triviality-fibres--2`, proof (3), reduced-ring normal form,
 rank calculation before the reducedness argument.
 (blueprint: lem-pc-complementary-block-residue-vanishes)
 

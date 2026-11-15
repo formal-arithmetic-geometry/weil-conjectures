@@ -119,8 +119,6 @@ private theorem internalHom_shortExact_of_finiteFree_retract
         SheafOfModules.homObjMap_comp_homObjMap (R := R), hιπ, Category.id_comp,
         SheafOfModules.homObjMap_id]) hF
 
-set_option maxHeartbeats 500000 in
--- finite bounded-filtration elaboration
 /-- On an affine open, the ordinary Hom complex from a strictly perfect complex represents
 its derived internal Hom. For every functorial K-injective replacement `η : 𝟭 ⟶ I`, the
 canonical map `𝓗om^•(P, M) ⟶ 𝓗om^•(P, I(M))` becomes an isomorphism in the derived
@@ -164,7 +162,11 @@ theorem isIso_homComplex_resolution_of_isStrictlyPerfect
         QuasiIso (η.app N) ∧ (I.obj N).IsKInjective) →
         IsIso (DerivedCategory.Q.map
           (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map (η.app M))) := by
-  let A := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
+  -- Use the same presentation as internal Hom so instance search reuses the structure.
+  let A := SheafOfModules.{u}
+    ((sheafCompose ((Opens.grothendieckTopology X).over U)
+      (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))
+  let : Abelian A := inferInstance
   have hexact (n : ℤ) (S : ShortComplex A) (hS : S.ShortExact) :
       ∃ hz : SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X n)) S.f ≫
           SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X n)) S.g = 0,

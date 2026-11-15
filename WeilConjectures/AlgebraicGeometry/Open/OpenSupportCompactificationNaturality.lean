@@ -276,7 +276,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenSupportRefinementExchange
 
 /-! # Changing the compactifications in an open-support comparison
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -403,8 +403,8 @@ private theorem support_change_source
   rw [← Iso.trans_hom, graphIso_change]
 
 /-- Changing both supplied compactifications commutes with the open-support comparison.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i), comparison of the
-compactification diagram with its restriction to an open.
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i),
+comparison of the compactification diagram with its restriction to an open.
 
 Proof: the existing graph-normalization and cocycle API identifies graph comparisons
 with the common-refinement comparison and with the specified comparison for one

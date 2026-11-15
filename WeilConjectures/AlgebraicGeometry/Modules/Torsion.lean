@@ -30,7 +30,8 @@ scheme `M_tors` is quasi-coherent if `M` is
 - `AlgebraicGeometry.Scheme.Modules.torsion`: the torsion subsheaf `M_tors`.
 - `AlgebraicGeometry.Scheme.Modules.torsionι`: its inclusion `M_tors ⟶ M`.
 
-(blueprint: `lem-sc-riemann-roch`, `sk-thm-picard-rr`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
+`theorem-riemann-roch-coherent-serre-duality`)
 -/
 
 @[expose] public section
@@ -165,7 +166,7 @@ variable (M) in
 open subset of their domain. On an integral scheme it is the kernel of `M → M_η`, `η` the
 generic point.
 
-(blueprint: `lem-sc-riemann-roch`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 noncomputable def torsion : X.Modules where
   val := (torsionSubmodule M).toPresheafOfModules
   isSheaf := isSheaf_torsionSubmodule

@@ -99,7 +99,7 @@ abelian vanishing (lem-weil-pbc-right-derived-plus-injective).
 R^q p_* F with R^q s_* t_! J. Extension-by-zero base change supplies the coefficient
 identification. Step 4 therefore makes all geometric stalks over C zero
 (lemma-weil-pbc-torsion-assembly,
-sbc-prop-extension-by-zero-and-arbitrary-base-change, lem-kun-stalks-of-cohomology).
+proposition-extension-zero-restriction-closed-subscheme--11, lem-kun-stalks-of-cohomology).
 6. At a geometric point outside C, the base change of A is empty by commutativity.
 The base change of F is consequently zero, by extension-by-zero base change and the
 empty cover. Proper base change identifies the stalk of R^q p_* F with a higher

@@ -138,7 +138,7 @@ Proof plan:
 formulas. The identity is $(0,1_U)$. Both associations of three arrows $(n,f),(m,h),(l,a)$ have
 degree $n+m+l$ and map $s^{n+m}(a)\circ s^n(h)\circ f$, so define a category $D$. Each hom set is
 the small union $\coprod_{n\in\mathbf Z}\operatorname{Hom}_C(U,s^nV)$; hence $D$ is small in
-[def-weil-size-convention]. Write $a_{n,V}=(n,1_{s^nV}):s^nV\to V$; its inverse is $a_{-n,s^nV}$.
+[prose-01-10]. Write $a_{n,V}=(n,1_{s^nV}):s^nV\to V$; its inverse is $a_{-n,s^nV}$.
 Every arrow $(n,f)$ factors uniquely as $a_{n,V}\circ(0,f)$.
 
 2. A pullback of $(n,f):U\to W$ and $(m,h):V\to W$ is obtained from $P=s^{-n}U\times_Ws^{-m}V$ in
@@ -166,12 +166,12 @@ intertwining maps. Step 2 restricts this correspondence to sheaves of sets.
 their coherence is forced by iteration, so it gives a ring sheaf $R_{\rtimes}$, restricting
 literally to $R$. Apply the same construction to an $R$-module with its semilinear $t_1$. The
 equation $t_n(rx)=t_n(r)t_n(x)$ is preserved under composition and inversion and says exactly
-that all $F(n,f)$ are semilinear restriction maps. Thus [def-weil-sheaf-of-modules-category]
+that all $F(n,f)$ are semilinear restriction maps. Thus [situation-conventions]
 identifies its objects with $R_{\rtimes}$-modules; its morphisms are precisely the intertwining
 module morphisms. The constructions are inverse on sections and maps, and respect sums of maps,
 proving the additive equivalence with $\mathcal B$.
 
-5. Limits and colimits exist in $\mathcal A$ by [lem-weil-pbc-module-sheaves-colimits-forgetful].
+5. Limits and colimits exist in $\mathcal A$ by [situation-conventions].
 The autoequivalence $\sigma$ preserves each: apply its inverse to a test cone or cocone and use
 the original universal property. For a diagram of fixed pairs and its underlying limit $L$, there
 is a unique $\sigma L\to L$ whose composite with $p_i$ is $\theta_i\sigma(p_i)$; the analogous
@@ -182,7 +182,7 @@ values $\iota_i\theta_i$ on $\sigma\iota_i$; the same uniqueness proves invertib
 equivariance of the universal map. This creates all small limits and colimits, including the
 empty diagrams. For an invertible underlying intertwiner $f$, multiplying $f\theta=\theta'\sigma
 f$ by inverses shows $f^{-1}$ intertwines. Thus forgetting is conservative. Both categories are
-abelian by step 4 and [def-weil-sheaf-of-modules-category]; creation of kernels and cokernels
+abelian by step 4 and [situation-conventions]; creation of kernels and cokernels
 proves exactness.
 
 6. For sheaves of sets the identical limit construction works by [lem-weil-pbc-site-sheaf-sets-

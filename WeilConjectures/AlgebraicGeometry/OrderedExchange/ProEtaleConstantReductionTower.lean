@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Perfect projection for strict constant-coefficient reduction towers
 
-Source: Stacks Tags 0944 and 099M; smooth-purity blueprint, fix-lem-exchanges,
-Step 4 (blueprint: lem-sp-completion-mate-comparison).
+Source: Stacks Tags 0944 and 099M; smooth-purity blueprint,
+proposition-composition-base-change-rf-shriek, Step 4 (blueprint:
+lem-sp-completion-mate-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -172,8 +173,8 @@ namespace CategoryTheory.AdicSites.OrderedExchangeInterface
 /-- Reexport the existing whole-diagram mate comparison, including invertibility and
 the two finite coefficient normalization clauses. No second postponed proof is introduced.
 
-Source: smooth-purity blueprint, fix-lem-exchanges Proof Step 4; ingredient sources
-Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Proof Step 4;
+ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
 (blueprint: lem-sp-completion-mate-comparison).
 
 Proof, following the ten steps of the DAG node:

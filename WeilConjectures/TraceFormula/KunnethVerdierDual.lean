@@ -257,9 +257,9 @@ variable {X Y : Over (Spec (.of k))}
 /-! ### The base case -/
 
 /-- **The Künneth–Verdier map for dualizable `N`** (the base case of the dévissage in `N` of the
-proof of blueprint `thm-trf-kunneth-verdier`): if `N` has a left dual `N'` and the exceptional
-Künneth map `α : M ⊠ ω_Y ⟶ Rp^! M` is an isomorphism, then `κ_{M,N}` is an isomorphism, as
-`κ = RHom(1, α) ∘ β` and the external Hom map `β` is an isomorphism for dualizable `N`. -/
+proof of blueprint `lemma-external-duality-trace-morphism--1`): if `N` has a left dual `N'` and the
+exceptional Künneth map `α : M ⊠ ω_Y ⟶ Rp^! M` is an isomorphism, then `κ_{M,N}` is an isomorphism,
+as `κ = RHom(1, α) ∘ β` and the external Hom map `β` is an isomorphism for dualizable `N`. -/
 theorem isIso_kunnethVerdierMap_of_exactPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N N' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) [ExactPairing N' N]
     [IsIso (exceptionalKunnethMap ℓ (Y := Y) M)] : IsIso (kunnethVerdierMap ℓ M N) := by

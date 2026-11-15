@@ -64,7 +64,7 @@ native category Grothendieck, with exact conservative carrier creating limits an
 2. Write the locally finite function sheaf as the sheafified colimit of finite-extension
 continuous function sheaves. The canonical pullback maps for these are isomorphisms by
 `lem-weil-pbc-continuous-coefficient-general-pullback-isIso`. Inverse image preserves the
-colimit (`lem-weil-pbc-module-sheaves-colimits-forgetful` and
+colimit (`situation-conventions` and
 `def-weil-proetale-inverse-image`), so the canonical coefficient pullback is an isomorphism.
 3. The module adjunction (`lem-weil-pbc-ringed-topoi-module-adjunction`) consequently has
 exact left adjoint (`lem-weil-pbc-site-pullback-abelian-exact`). The unit and counit commute
@@ -83,7 +83,7 @@ any bound or constructibility restriction.
 The exact module extension by zero of `lem-weil-pbc-ringed-sheaf-slice-adjunction` has the
 framework's carrier. Its unit and counit commute with Frobenius on sections, so the lifted
 native extension is exact, using the conservative carrier from step 1.
-8. Exact-functor descent (`lem-sf-exact-functor-derived-triangulated`) gives precisely
+8. Exact-functor descent (`situation-conventions`) gives precisely
 `mapDerivedCategory`. Its cohomology is extension by zero of the cohomology, so it preserves
 the finite cohomological interval.
 9. `lem-sf-native-weil-open-exact-constructible` supplies the framework's locally finite

@@ -88,8 +88,17 @@ private theorem pushforwardCongr_eqToIso
   ext M V x
   rfl
 
-set_option maxHeartbeats 2000000 in
--- Comparing the two chosen pullback adjunctions unfolds the sectionwise pushforward models.
+private theorem unit_leftAdjointUniq_ofNatIsoRight
+    {C D : Type*} [Category C] [Category D]
+    {F F' : C ⥤ D} {G G' : D ⥤ C} (a : F ⊣ G) (b : F' ⊣ G')
+    (e : G ≅ G') (c : F ≅ F') (hc : c = (a.ofNatIsoRight e).leftAdjointUniq b) (M : C) :
+    a.unit.app M ≫ e.hom.app (F.obj M) ≫ G'.map (c.hom.app M) = b.unit.app M := by
+  subst c
+  simpa only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Category.assoc] using
+    Adjunction.unit_leftAdjointUniq_hom_app (a.ofNatIsoRight e) b M
+
+-- Keep the pullback comparison named while transporting the direct-image unit.
 private theorem finitePullback_native
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -108,18 +117,10 @@ private theorem finitePullback_native
       SheafOfModules.pushforwardCongr hm := pushforwardCongr_eqToIso f hm
   apply (openSquarePullbackModel_existsUnique A f).unique
   · intro M V x
-    have h := Adjunction.unit_leftAdjointUniq_hom_app
-      ((proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f)).ofNatIsoRight
-        (eqToIso (finiteDirectImage_eq l E n f)))
-      (sfIntrinsicConstantModuleAdjunction f A) M
-    simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
-      Functor.whiskerLeft_app] at h
-    change (proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f)).unit.app M ≫
-      (eqToIso (finiteDirectImage_eq l E n f)).hom.app
-        ((proEtaleRingModulePullback f (R.ring Y) (R.ring X) (R.pull f)).obj M) ≫
-      (proEtaleConstantModuleDirectImage f A).map
-        ((finitePullbackIso l E n f).hom.app M) =
-      (sfIntrinsicConstantModuleAdjunction f A).unit.app M at h
+    have h := unit_leftAdjointUniq_ofNatIsoRight
+      (proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f))
+      (sfIntrinsicConstantModuleAdjunction f A) (eqToIso (finiteDirectImage_eq l E n f))
+      (finitePullbackIso l E n f) rfl M
     rw [he] at h
     have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) x) h
     exact hv

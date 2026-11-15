@@ -146,7 +146,7 @@ private theorem lower_bound_rightDerived
 
 /-- The finite constant-module tensor tests of `Rj_*L` vanish outside `[a,b+e]`.
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md`,
 the closed-support paragraph; the detailed argument is steps 1--3 of
 `lem-sf-open-tor-bound-arbitrary-field`

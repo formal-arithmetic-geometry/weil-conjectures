@@ -92,7 +92,7 @@ lemma coordinateSection_app_top_one (i : n) :
 coordinate section `xᵢ` of `𝒪(1)` (applied to `1`) is `(xᵢ / xⱼ) • e_j^{(1)}`, where
 `xᵢ / xⱼ = coordRatio n S j i` and `e_j^{(1)} = twistGenerator n S 1 j` is the local generator.
 
-(blueprint: `rem-ptr-pc-projective-space-twist-17`, `det-thm-picard-pn`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 theorem coordinateSection_app_standardOpen (i j : n) :
     (coordinateSection n S i).app (standardOpen n S j) (1 : Γ(ℙ(n; S), standardOpen n S j)) =
       coordRatio n S j i • twistGenerator n S 1 j := by
@@ -114,7 +114,7 @@ theorem coordinateSection_app_standardOpen (i j : n) :
 /-- **`𝒪 ≅ 𝒪(0)` on the charts**: on the standard open `Uⱼ`, the isomorphism
 `unitIsoTwistZero : 𝒪 ≅ 𝒪(0)` sends `1` to the local generator `e_j^{(0)}` of `𝒪(0)`.
 
-(blueprint: `rem-ptr-pc-projective-space-twist-17`, `det-thm-picard-pn`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 theorem unitIsoTwistZero_hom_app_standardOpen (j : n) :
     Hom.app (unitIsoTwistZero n S).hom (standardOpen n S j)
       (1 : Γ(ℙ(n; S), standardOpen n S j)) =

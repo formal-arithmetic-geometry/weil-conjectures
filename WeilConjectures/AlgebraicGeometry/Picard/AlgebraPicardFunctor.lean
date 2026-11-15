@@ -13,11 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.Picard.AffineRestriction
 
 Let `k` be a commutative ring and `f : X ⟶ Spec k` a `k`-scheme. In the chapter on smooth curves
 the Picard functor of a curve `X / k` is presented on `k`-algebras, as the fppf sheafification of
-`R ↦ Pic (X ×_k Spec R)` (blueprint `def-sc-picard-functor`). We define this functor on
-`(CommAlgCat k)ᵒᵖ`, the fppf topology being induced along `Spec : (CommAlgCat k)ᵒᵖ ⥤ Over (Spec k)`
-(`AlgebraicGeometry.algSpec`), and show that it agrees with the restriction of the relative Picard
-functor `Pic_{X/k}` of `AlgebraicGeometry.picardFunctor` along `Spec`
-(blueprint `lem-pc-picard-functor-agrees-sc`).
+`R ↦ Pic (X ×_k Spec R)` (blueprint `definition-relative-picard-functor--1`). We define this functor
+on `(CommAlgCat k)ᵒᵖ`, the fppf topology being induced along
+`Spec : (CommAlgCat k)ᵒᵖ ⥤ Over (Spec k)` (`AlgebraicGeometry.algSpec`), and show that it agrees
+with the restriction of the relative Picard functor `Pic_{X/k}` of `AlgebraicGeometry.picardFunctor`
+along `Spec` (blueprint `lem-pc-picard-functor-agrees-sc`).
 
 ## Main definitions
 
@@ -82,7 +82,7 @@ noncomputable abbrev algPicardPresheaf (f : X ⟶ Spec k) : (CommAlgCat k)ᵒᵖ
 sheafification on `k`-algebras of `R ↦ Pic (X ×_k Spec R)`. For `X` a proper smooth connected curve
 over a field `k` this is the Picard functor `Pic_{X/k}` of the chapter on smooth curves.
 
-(blueprint: `def-sc-picard-functor`) -/
+(blueprint: `definition-relative-picard-functor--1`) -/
 noncomputable def algPicardFunctor (f : X ⟶ Spec k) :
     Sheaf (algFppfTopology k) (Type (u + 1)) :=
   (presheafToSheaf (algFppfTopology k) (Type (u + 1))).obj (algPicardPresheaf f)

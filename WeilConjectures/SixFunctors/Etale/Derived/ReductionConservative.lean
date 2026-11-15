@@ -22,8 +22,8 @@ invertibly is zero, a morphism between objects which are derived complete for `(
 isomorphism as soon as its reduction modulo `ϖ` is.
 
 This is the passage to the limit in the proof of the projection formula at the integral stage
-`𝒪_E` (blueprint `sk-thm-sf-pf-adic`, Step 3, and `thm-sf-pf-adic`: "the reduction functors
-are conservative on derived-complete complexes").
+`𝒪_E` (blueprint `lemma-projection-formula-integral-coefficients`, Step 3, and `thm-sf-pf-adic`:
+"the reduction functors are conservative on derived-complete complexes").
 
 ## Main statements
 

@@ -19,7 +19,7 @@ import Mathlib.Algebra.Field.Rat
 # The compactification category and base change
 
 Source: blueprint, sec-nagata-compactification/sk-prop-nagata-sketch-comp-category,
-prop-nagata-compactification-category (blueprint: prop-nagata-compactification-category).
+remark-base-change-compactification--1 (blueprint: remark-base-change-compactification--1).
 -/
 
 @[expose] public section
@@ -32,12 +32,12 @@ namespace AlgebraicGeometry.Compactification
 
 set_option linter.unusedVariables false in
 /-- Source: blueprint sec-nagata-compactification/sk-prop-nagata-sketch-comp-category,
-prop-nagata-compactification-category (blueprint: prop-nagata-compactification-category).
+remark-base-change-compactification--1 (blueprint: remark-base-change-compactification--1).
 
 Proof plan (the eleven steps of the node). Refinements are proper by
 lemma-nagata-proper-to-separated-target and compose by proper composition. Nagata's theorem
-(thm-nagata-compactification) supplies an object. For two objects use the image of their graph
-in the fibre product: the ambient product is proper, and the graph is a quasi-compact
+(theorem-nagata-s-compactification-theorem--1) supplies an object. For two objects use the image of
+their graph in the fibre product: the ambient product is proper, and the graph is a quasi-compact
 immersion by separatedness and open-immersion base change. The immersion-compactification
 lemmas make its image a compactification with dense open, and its two projections are
 refinements. Iterate for a finite family, including the empty family by nonemptiness.

@@ -57,7 +57,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `sk-cor-nagata-sketch-proper-extension`: Extension to a proper target.
+/-- Blueprint `corollary-extension-proper-target`: Extension to a proper target.
 
 Let `X` be quasi-compact and quasi-separated over `S`, let `U ⊆ X` be a dense quasi-compact
 open and let `y : Y ⟶ S` be proper. Then every `S`-morphism `f : U ⟶ Y` extends to a

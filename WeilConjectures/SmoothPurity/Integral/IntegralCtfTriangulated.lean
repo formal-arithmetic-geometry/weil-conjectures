@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.Integral.IntegralDerivedReductionSupplement
 # Integral constructible complexes with uniformly finite Tor amplitude
 
 Source: Stacks Project, Cohomology on Sites, Tag 08G2, part (2), applied to each
-reduction; Weil blueprint, integral-stage paragraph of `def-weil-finite-tor-amplitude`
+reduction; Weil blueprint, integral-stage paragraph of `definition-constructible-sheaves`
 (blueprint: lem-weil-integral-ctf-triangulated).
 -/
 

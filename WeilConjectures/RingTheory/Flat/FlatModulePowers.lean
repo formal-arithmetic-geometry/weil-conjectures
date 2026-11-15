@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.RingTheory.Filtration
 # Flatness from flatness modulo every power of an ideal
 
 Source: Stacks Project, Algebra, Lemma 10.99.11 (Tag 0523)
-(blueprint: lem-weil-pbc-flat-module-powers).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -26,8 +26,8 @@ universe u v w
 namespace Module.Flat
 
 /-- Stacks Project, Algebra, Lemma 10.99.11 (Tag 0523)
-(blueprint: lem-weil-pbc-flat-module-powers). The algebra structure represents the ring map
-`R → S`, and the scalar tower says that the `R`-action on `M` is its restriction.
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). The algebra structure represents the
+ring map `R → S`, and the scalar tower says that the `R`-action on `M` is its restriction.
 
 Proof (the Artin–Rees argument of Stacks Tag 0523, applied to every ideal):
 1. For an ideal `J`, a tensor `x` in the kernel of `M ⊗ J → M` maps to zero in

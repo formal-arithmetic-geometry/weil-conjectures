@@ -27,7 +27,7 @@ through the single refinement `j` of the first compactification by the second
 
 ## Compactification coherence
 
-The clauses of blueprint `prop-compactification-coherence-detailed` (subsection
+The clauses of blueprint `proposition-construction-independence-rf-shriek` (subsection
 `sk-prop-sf-cbc` of the six-functor chapter) used here, for the lower shriek of bounded
 constructible complexes attached to compactifications (proved in
 `…LowerShriek.RefinementCoherence` through the equalizer of two refinements):
@@ -66,7 +66,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated Z₁.hom] [LocallyOfFiniteType Z₂.hom] [QuasiCompact Z₂.hom] [IsSeparated Z₂.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- Blueprint `prop-compactification-coherence-detailed`, transitivity clause ("these
+/-- Blueprint `proposition-construction-independence-rf-shriek`, transitivity clause ("these
 transformations are identities for identity refinements and are transitive under
 composition"): for refinements `h : Z ⟶ Z₁` and `h₁ : Z₁ ⟶ Z₂` of factorizations
 `X ⟶[i] Z ⟶[p] Y`, `X ⟶[i₁] Z₁ ⟶[p₁] Y` and `X ⟶[i₂] Z₂ ⟶[p₂] Y`, the comparison along the
@@ -92,7 +92,7 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
-/-- Blueprint `prop-compactification-coherence-detailed`, cocycle clause ("the resulting
+/-- Blueprint `proposition-construction-independence-rf-shriek`, cocycle clause ("the resulting
 comparison is independent of that choice and satisfies the cocycle condition for triples of
 compactifications"), for bounded constructible `ℚ̄_ℓ`-sheaves. -/
 theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
@@ -102,8 +102,8 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
       boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₃ :=
   boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans_eq ℓ c₁ c₂ c₃
 
-/-- Blueprint `prop-compactification-coherence-detailed`, refinement clause ("for a refinement
-`u : c₁ → c₂`, the canonical transformation between the compact-support candidates is the
+/-- Blueprint `proposition-construction-independence-rf-shriek`, refinement clause ("for a
+refinement `u : c₁ → c₂`, the canonical transformation between the compact-support candidates is the
 composite of the proper-composition isomorphism with the isomorphism `Ru_* j_{1!} ≅ j_{2!}`";
 "comparison through a common refinement gives a natural isomorphism", independent of the choice
 of the refinement): the comparison of `c₁` with a refinement `c` of `c₁` is the comparison along
