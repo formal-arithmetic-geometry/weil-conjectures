@@ -316,7 +316,7 @@ private theorem object_checks
     cases c with
     | none => exact Or.inr ⟨Iso.refl _⟩
     | some E => exact Or.inl ⟨E, ⟨Iso.refl _⟩⟩
-  have htensor := (constantModelBoundedConstructible_derivedTensor l p (Fact.out : p.Prime).pos hpl
+  have htensor := (constantModelBoundedConstructible_derivedTensor l p hpl
     (Z ↘ Spec (.of k)) (coefficient l c).X hcoeff).2
   have hloc := (localizingClosure_exists (coefficient l c).X Z
     (constantModelBoundedConstructible (coefficient l c).X Z)).2.2.2

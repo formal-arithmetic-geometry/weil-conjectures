@@ -394,6 +394,55 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
+/-- The equality part of clause (4) of `finiteCoefficientDescentTwoColimit` on its own: for a
+finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian qcqs scheme `X`, the constant-model
+bounded constructible complexes with `E`-coefficients are the bounded constructible ones (the
+clause also carries the compatibilities under extension of scalars, which stay in the bundle).
+Every user of the descent bundle needs only this equality. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_subfield
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] [TopologicalSpace.NoetherianSpace X] :
+    constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
+      boundedConstructible (padicSubfieldRingObj X ℓ E) :=
+  constantModel_eq_of_localFree _ (finite_lf ℓ E) X
+
+/-- The equality part of clause (4) of `finiteCoefficientDescentTwoColimit` on its own: for a
+noetherian qcqs scheme `X`, the constant-model bounded constructible complexes with
+`ℚ̄_ℓ`-coefficients are the bounded constructible ones. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl
+    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] [TopologicalSpace.NoetherianSpace X] :
+    constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
+      boundedConstructible (padicAlgClRingObj X ℓ) :=
+  constantModel_eq_of_localFree _ (algcl_lf ℓ) X
+
+/-- `constantModelBoundedConstructible_eq_boundedConstructible_subfield` for a scheme of finite
+type over a field, the form the six-functor files use. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType
+    (k : Type u) [Field k] (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
+    constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
+      boundedConstructible (padicSubfieldRingObj X ℓ E) := by
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let : IsNoetherian X := {}
+  exact constantModelBoundedConstructible_eq_boundedConstructible_subfield ℓ E X
+
+/-- `constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl` for a scheme of finite
+type over a field, the form the six-functor files use. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType
+    (k : Type u) [Field k] (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
+    constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
+      boundedConstructible (padicAlgClRingObj X ℓ) := by
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let : IsNoetherian X := {}
+  exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl ℓ X
+
 /-- Ordinary derived Hom descent, with the degree-zero comparison normalized once. -/
 private lemma finiteDescentDerivedHom_bijective
     (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact p.Prime] [Fact ℓ.Prime]

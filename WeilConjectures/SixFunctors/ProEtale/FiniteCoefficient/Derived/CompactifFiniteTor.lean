@@ -57,7 +57,7 @@ theorem Etale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification {
   obtain ⟨hbc, a, b, hta⟩ := hK
   have h := Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
     ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
-  exact Etale.constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl
+  exact Etale.constructibleFiniteTor_rightDerivedLowerStar_of_isProper Λ (c.g ≫ aY) aY c.g rfl
     ⟨h.1.1, a, b, h.2⟩
 
 namespace ProEtale
