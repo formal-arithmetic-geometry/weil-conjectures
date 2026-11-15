@@ -35,8 +35,8 @@ namespace CategoryTheory
 
 /-- A property describes a full replete triangulated subcategory closed under
 all direct sums that exist in the ambient category: the sums indexed by a type of the
-universe `v` of the morphisms, "arbitrary direct sums" in the notes meaning set-indexed sums
-(Blueprint bot, Zulip #3571; as in Mathlib's `HasCoproducts.{v}`). It is the class
+universe `v` of the morphisms (set-indexed sums, as in Mathlib's `HasCoproducts.{v}`). It is the
+class
 `CategoryTheory.ObjectProperty.IsLocalizing`
 (`CategoryTheory.isLocalizingSubcategory_iff_isLocalizing`).
 

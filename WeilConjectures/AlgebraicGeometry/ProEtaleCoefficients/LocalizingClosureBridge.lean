@@ -12,14 +12,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 /-!
 # The two localizing closures of the pro-étale coefficients agree
 
-The notes' localizing subcategory: `Loc(Dctf(X, Λ))`, the localizing closure of the
-bounded constructible complexes of finite Tor amplitude, is
-`AlgebraicGeometry.ProEtale.localizingClosureProEtale` (the definition of the notes, for every
-condensed ring `Λ`). The six operations with `ℓ`-adic coefficients are built on
+`Loc(Dctf(X, Λ))`, the localizing closure of the bounded constructible complexes of finite Tor
+amplitude, is `AlgebraicGeometry.ProEtale.localizingClosureProEtale` (defined for every condensed
+ring `Λ`). The six operations with `ℓ`-adic coefficients are built on
 `AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`, the localizing closure of
 the bounded constructible complexes `Dᵇc` in the sense of locally finitely presented
 constructibility. For the `ℓ`-adic coefficient rings on a compact, locally noetherian,
-quasi-separated scheme the two agree (the notes' comparison of the constructibility notions):
+quasi-separated scheme the two agree:
 
 * `boundedConstructible = constantModelBoundedConstructible`
   (`AlgebraicGeometry.ProEtale.adicConstructibilityPredicateComparison`);
@@ -29,8 +28,7 @@ quasi-separated scheme the two agree (the notes' comparison of the constructibil
   (`CategoryTheory.localizingClosure_eq_objectProperty`).
 
 This is the bridge lemma
-`AlgebraicGeometry.ProEtale.localizingClosureProEtale_eq_localizingBoundedConstructible`
-(Blueprint bot, Zulip #3561 1(a) and #3571).
+`AlgebraicGeometry.ProEtale.localizingClosureProEtale_eq_localizingBoundedConstructible`.
 -/
 
 @[expose] public section
@@ -41,9 +39,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- **The localizing closures agree** (the notes' localizing subcategory and their comparison of
-the constructibility notions): for an `ℓ`-adic coefficient ring `Λ` and a compact, locally
-noetherian, quasi-separated scheme `X`, the localizing closure of `Dctf(X, Λ)` of the notes
+/-- **The localizing closures agree**: for an `ℓ`-adic coefficient ring `Λ` and a compact, locally
+noetherian, quasi-separated scheme `X`, the localizing closure of `Dctf(X, Λ)`
 (`AlgebraicGeometry.ProEtale.localizingClosureProEtale`) is the localizing closure of `Dᵇc(X)⟦Λ⟧`
 used by the six operations
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). The hypothesis `hΛ`
