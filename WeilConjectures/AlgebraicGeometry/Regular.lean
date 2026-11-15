@@ -115,7 +115,7 @@ theorem isRegularLocalRing_stalk_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etal
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
 regular local rings, hence domains (`IsRegularLocalRing.isDomain`). Near any point `X` is étale
 over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps preserve regularity.
- -/
+-/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [Smooth f] : IsRegular X :=
   ⟨Smooth.isRegularLocalRing_stalk f⟩

@@ -55,7 +55,6 @@ identifying the cohomology on `V` and `i(V)` with homology of the evaluated reso
 which `fstar` followed by the counit corresponds to the homology map of `b`.
 
 Stacks Project, Tags 01FB, 013P, 015B (4), 0730 and 0733 (1). -/
-
 theorem zariski_etale_resolution_homology_data_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

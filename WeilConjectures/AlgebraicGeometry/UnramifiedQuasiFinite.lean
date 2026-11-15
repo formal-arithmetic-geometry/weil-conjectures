@@ -31,7 +31,6 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 Stacks Project, Morphisms, Lemma 02V5 and Algebra, Lemma 02UR.
 -/
-
 theorem isLocallyQuasiFinite_of_unramified
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hf : LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)) :

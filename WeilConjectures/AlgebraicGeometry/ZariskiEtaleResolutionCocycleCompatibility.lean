@@ -18,7 +18,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 `y`, then the homology map of `f` sends the class of `x` to the class of `y`.
 
 Stacks Project, Section 01FT; Tag 06XR (1). -/
-
 theorem zariski_etale_resolution_cocycle_compatibility
     {K L : CochainComplex AddCommGrpCat.{u + 1} ℕ} (f : K ⟶ L)
     (q : ℕ) (x : K.X q) (hx : (K.d q (q + 1)).hom x = 0)

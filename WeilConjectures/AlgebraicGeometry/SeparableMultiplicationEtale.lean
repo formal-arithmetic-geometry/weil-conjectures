@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 /-- **The multiplication of a finite separable extension is étale.** For a finite separable
 field extension `k'/k`, the morphism `Spec k' ⟶ Spec (k' ⊗[k] k')` induced by the multiplication
 `μ : k' ⊗[k] k' → k'` is étale; in particular `μ` is a smooth ring map.
- -/
+-/
 theorem finite_separable_multiplication_etale (k k' : Type u) [Field k] [Field k'] [Algebra k k']
     [FiniteDimensional k k'] [Algebra.IsSeparable k k'] :
     Etale (Spec.map (CommRingCat.ofHom

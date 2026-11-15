@@ -24,7 +24,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 /-- Comparisons with equal augmentations induce equal maps of section homology.
 Stacks Project, Tags 01FB, 013P and 015B. -/
-
 theorem zariski_etale_resolution_homology_independent
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

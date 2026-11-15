@@ -37,7 +37,6 @@ first cohomology of every successive kernel with a single bound. The index `op k
 represents F_(k+1); the kernel in the zero case is F_1 itself. Tensor exponents `d` are
 natural numbers; the bound `d₀` is an integer.
 Stacks Project, Cohomology of Schemes, Lemma 0884. -/
-
 theorem coherentFormalModule_kernel_twist_vanishing
     {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]

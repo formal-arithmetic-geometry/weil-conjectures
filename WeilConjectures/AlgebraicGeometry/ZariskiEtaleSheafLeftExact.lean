@@ -24,7 +24,6 @@ namespace AlgebraicGeometry
 /-- For a continuous, representably flat functor `i` from Zariski opens to the small étale
 site, the sheaf pullback along `i` preserves finite limits, with coefficients in an arbitrary
 universe. Stacks Project, Tag 00X5 (using Tags 00X3 and 00WJ). -/
-
 theorem zariski_to_etale_sheaf_left_exact
     (X : Scheme.{u})
     (i : X.Opens ⥤ X.Etale)

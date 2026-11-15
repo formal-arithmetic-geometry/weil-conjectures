@@ -43,7 +43,6 @@ precomposed with a free-representable map whose generator is the adjunction unit
 
 Stacks Project, Derived Categories, Tag 015B (4); Cohomology on Sites, Tag 0730;
 Homology, Tag 010T. -/
-
 theorem zariski_etale_pullback_eq_mapExt
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

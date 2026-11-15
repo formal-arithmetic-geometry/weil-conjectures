@@ -26,7 +26,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 /-- An augmented comparison from a resolution to the pushed complex exists.
 
 Stacks Project, Derived Categories, Tag 013P. -/
-
 theorem zariski_etale_resolution_comparison_chain_map_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

@@ -134,7 +134,6 @@ private theorem scheme_affine_representative
 refinement of a given zero-bottom chart. Its homology map in the bottom degree
 is invertible; invertibility of its component is not part of this assertion.
 Stacks Project, Tags 0BDL, 08CR and 0D5S. -/
-
 theorem zeroBottomArrow_affine_chain_model
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

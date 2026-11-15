@@ -35,7 +35,6 @@ namespace AlgebraicGeometry
 /-- The underlying point type of a separated finite-type zero-dimensional scheme
 over an algebraically closed field is finite.
 Stacks Project, Tag 00KH. -/
-
 theorem zero_dimensional_etale_finite
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
     (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]

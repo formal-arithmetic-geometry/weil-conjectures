@@ -176,7 +176,6 @@ private theorem exact_sheaf_section_locally_boundary {X : Scheme.{u}}
 
 Stacks Project, Etale Cohomology, Lemma 0GY0; Cohomology on Sites, Lemma 01FW.
 -/
-
 theorem zariski_cohomology_class_locally_zero {X : Scheme.{u}}
     [HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

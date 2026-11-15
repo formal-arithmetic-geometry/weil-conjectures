@@ -168,7 +168,6 @@ set_option linter.unusedVariables false in
 assuming the closed fibre is integral.
 Stacks Project, More on Morphisms, Tag 0EX8.
 -/
-
 theorem closed_fibre_section_is_divisible
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))

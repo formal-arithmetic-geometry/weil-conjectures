@@ -70,7 +70,6 @@ to the small étale site lifting `X.restrictFunctor` which is cover-preserving, 
 representably flat, preserves finite limits, and sends `⊤` to a terminal object.
 
 Stacks Project, Sites, Tags 00X6 and 00X5; Morphisms, Tag 02GP; Schemes, Tag 01JR. -/
-
 theorem zariski_to_etale_core (X : Scheme.{u}) :
     ∃ (i : X.Opens ⥤ X.Etale),
       (i ⋙ Scheme.Etale.forget X = X.restrictFunctor) ∧

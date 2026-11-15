@@ -25,7 +25,7 @@ point `η`, there are an integral affine `S` with a universal homeomorphism `q :
 affine `Y` with `g : Y ⟶ S` locally of finite type whose generic fibre is geometrically reduced,
 and a universal homeomorphism `h` from `Y` to the base change of `f` along `q` with
 `h ≫ pullback.snd = g`. Stacks Project, Tag 0559; Tags 051T and 052A.
- -/
+-/
 theorem exists_radicial_preparation_construction
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

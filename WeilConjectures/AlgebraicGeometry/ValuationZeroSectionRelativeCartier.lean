@@ -42,7 +42,6 @@ relative effective Cartier over a valuation base (Stacks, Tags 0EX8 and 062Y).
 Module pullback is `tensorPullback`; the restriction of `s` to the
 fibre `X₀ = f.fiber x₀` is the unit of its canonical adjunction
 applied to `s`. -/
-
 theorem valuation_zero_section_relative_cartier
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (.of A))

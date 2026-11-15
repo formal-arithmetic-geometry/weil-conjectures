@@ -28,7 +28,6 @@ pushforward of the resolution `I`, compatible with the augmentations, together w
 equivalences `e₁`, `e₂` identifying the cohomology on `V` and `i(V)` with homology of the
 evaluated resolutions, under which `fstar` followed by the counit corresponds to the homology
 map of `b`. Stacks Project, Tags 01FB, 013P and 015B. -/
-
 theorem zariski_etale_resolution_comparison_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

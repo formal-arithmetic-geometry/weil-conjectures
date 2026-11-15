@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 /-- Positive étale cohomology is zero, and the canonical degree-zero comparison
 followed by the product of the chosen geometric stalk germs is invertible.
 Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1. -/
-
 theorem zero_dimensional_etale_cohomology_rest
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
     (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]

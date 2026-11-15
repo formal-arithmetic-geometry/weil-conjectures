@@ -30,7 +30,6 @@ equivalences `e₁`, `e₂` from the cohomology groups on `V` and `i(V)` to the 
 evaluated resolutions such that, whenever cocycles `a` and `c` have sections at the identity
 generator related by `b`, the homology map of `b` sends `e₁` of the class of `a` to `e₂` of
 the class of `c`. Stacks Project, Section 01FT; Tag 06XR (1). -/
-
 theorem zariski_etale_resolution_cocycle_homology
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

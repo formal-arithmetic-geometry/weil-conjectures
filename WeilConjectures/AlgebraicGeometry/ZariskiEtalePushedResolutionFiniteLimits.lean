@@ -20,7 +20,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX;
 Modules on Sites, Tag 03DJ. -/
-
 theorem zariski_etale_pushed_resolution_finite_limits
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

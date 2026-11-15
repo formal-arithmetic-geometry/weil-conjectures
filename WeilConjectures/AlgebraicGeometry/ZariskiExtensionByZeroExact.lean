@@ -54,7 +54,6 @@ theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
 `zariski_extensionByZero_additive`) carries every short exact sequence to a short exact
 sequence, and in particular carries monomorphisms to monomorphisms.
 Stacks Project, Modules on Sites, Lemma 03DJ. -/
-
 theorem zariski_extensionByZero_exact (X : Scheme.{u}) (U : X.Opens) :
     (∀ S : ShortComplex (Sheaf ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u}),
       S.ShortExact →

@@ -98,7 +98,6 @@ In degree zero the comparison is the identity on global sections: a section sent
 `Γ → R⁰Γ` and `e 0`, then evaluated (via `Ext⁰` from the sheafified free abelian
 representable) at the identity of the top open, is the original section.
 Stacks Project, Lemma Tag 03FD. -/
-
 theorem zariskiModuleAbelianCohomologyAgree (X : Scheme.{u}) :
     ∃ e : ∀ q : ℕ,
       (RingedSpace.moduleCohomology X.toRingedSpace q ⋙

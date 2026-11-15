@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 /-- A zero-dimensional finite-type scheme over an algebraically closed field is finite and
  discrete, and its structure morphism induces residue-field isomorphisms at every (closed)
  point. Stacks Project, Lemma 00KH and Theorem 00FV. -/
-
 theorem zeroDimensional_baseChange_geometry
     (k : Type v) [Field k] [IsAlgClosed k]
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

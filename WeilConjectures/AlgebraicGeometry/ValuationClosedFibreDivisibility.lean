@@ -38,7 +38,6 @@ integral, and a global section of `L` vanishing on the closed fibre is divisible
 of the maximal ideal.
 
 Stacks Project, More on Morphisms, Tag 0EX8. -/
-
 theorem closed_fibre_vanishing_is_divisible
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))

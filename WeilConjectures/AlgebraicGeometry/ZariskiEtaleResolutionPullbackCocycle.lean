@@ -41,7 +41,6 @@ private noncomputable def resolutionSectionEquiv
 section cocycle obtained by an augmented comparison.
 
 Stacks Project, Tags 01FB, 013P, 015B (4), 0730 and Section 01FT. -/
-
 theorem zariski_etale_resolution_pullback_cocycle
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

@@ -57,7 +57,7 @@ private theorem geometricallyReduced_of_schemeTheoreticallyDominant
 `q : S' ⟶ S` from an integral affine scheme such that the reduced pullback of `g` along `q` has
 geometrically reduced fibre over the generic point of `S'`.
 Stacks Project, Tags 0559 and 030R.
- -/
+-/
 theorem exists_radicial_reduced_flat_generic_fibre
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]

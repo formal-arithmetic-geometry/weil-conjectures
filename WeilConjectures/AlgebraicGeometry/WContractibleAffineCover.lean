@@ -29,7 +29,6 @@ rings, with each covering map factoring through an affine open by a faithfully f
 ind-etale ring map. The isomorphism `e` identifies the covering object with `Spec D`;
 `j` identifies `Spec B` with an affine open of the target.
 -/
-
 theorem exists_wContractible_affine_cover (X : Scheme.{u}) (U : X.ProEt) :
     ∃ (I : Type u) (W : I → X.ProEt) (f : ∀ i : I, W i ⟶ U),
       Presieve.ofArrows W f ∈ precoverage X U ∧

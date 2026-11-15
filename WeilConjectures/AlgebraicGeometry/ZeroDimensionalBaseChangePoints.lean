@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 /-- A zero-dimensional finite-type scheme over an algebraically closed field has the
 same finite discrete set of points after extension of the ground field.
 Stacks Project, Lemmas 00KH and 00P4, Theorem 00FV, Lemma 01JT. -/
-
 theorem zeroDimensional_baseChange_points
     (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k']
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

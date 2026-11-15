@@ -30,7 +30,6 @@ namespace AlgebraicGeometry.Etale
 /-- Pullback on global sections of an abelian etale sheaf is bijective for a
  zero-dimensional finite-type scheme over an algebraically closed field, along its base
  change to an algebraically closed extension field. Stacks Project, Tags 03Q1 and 0GJA. -/
-
 theorem bijective_globalSectionsUpperStarMap_of_dim_zero {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)

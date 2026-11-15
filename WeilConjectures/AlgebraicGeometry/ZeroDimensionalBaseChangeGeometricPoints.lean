@@ -21,7 +21,6 @@ closed field `k` of dimension at most zero and `C'` is its base change to an alg
 closed field `k'`, then `C'` is a curve of dimension at most zero, the projection `C' → C` is a
 bijection on points, and every point of `C'` is the image of a `k'`-point.
 Stacks Project, Tags 00KH, 00FV and 01JT. -/
-
 theorem zeroDimensional_baseChange_geometric_points {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)

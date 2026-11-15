@@ -30,7 +30,6 @@ of a valuative commutative square. The square carries a valuation ring `sq.R`, i
 fraction field `sq.K`, a map `sq.i₂ : Spec sq.R ⟶ S`, and a map `sq.i₁ : Spec sq.K ⟶ Z`.
 Its commutativity says that the generic restriction of `sq.i₂` equals `sq.i₁ ≫ j`.
 Stacks Project, Morphisms, Lemma 29.6.5, Tag 02JQ. -/
-
 theorem exists_valuativeCommSq_of_mem_closure_range
     {Z S : Scheme.{u}} (j : Z ⟶ S) [QuasiCompact j] [IsImmersion j]
     {s : S} (hs : s ∈ closure (Set.range j)) :

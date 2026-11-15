@@ -161,7 +161,6 @@ theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : �
 
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
 Stacks Project, Lemma Tag 03FD. -/
-
 theorem zariskiModuleAbelianCohomologyNatural (X : Scheme.{u}) (q : ℕ) :
     Nonempty ((RingedSpace.moduleCohomology X.toRingedSpace q ⋙
         forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))

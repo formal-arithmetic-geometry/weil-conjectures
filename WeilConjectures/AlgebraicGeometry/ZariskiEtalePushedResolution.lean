@@ -35,7 +35,6 @@ preserves finite limits and the pushed-forward augmentation of every injective r
 
 Stacks Project, Tags 072W and 0733(1); Etale Cohomology, Tag 09AX;
 Modules on Sites, Tag 03DJ. -/
-
 theorem zariski_etale_pushed_resolution
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

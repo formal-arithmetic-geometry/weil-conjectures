@@ -52,7 +52,6 @@ set_option linter.unusedVariables false in
 the étale cohomology of `F` on `i(V)` are additively equivalent to the degree-`q` homology at
 `V` of the resolution `R` and of the pushforward of `I`, respectively. Stacks Project,
 Section 01FT. -/
-
 theorem zariski_etale_resolution_cocycle_equivalences
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

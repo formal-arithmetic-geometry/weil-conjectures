@@ -33,7 +33,7 @@ namespace AlgebraicGeometry
 affine scheme), the generic fibre of the reduced pullback of `g` receives a quasi-compact,
 scheme-theoretically dominant map from `Spec F`, compatible with the structure maps, where `F` is
 a separably generated field over the residue field at `η'`. Stacks Project, Tags 0559 and 030R.
- -/
+-/
 theorem exists_radicial_separating_generic_field
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]

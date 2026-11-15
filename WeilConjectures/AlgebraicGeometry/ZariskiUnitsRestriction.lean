@@ -38,7 +38,6 @@ image to the Ext class, identify inverse image of the constant integer sheaf wit
 constant integer sheaf, then apply the counit `i⁻¹ i_* O_Zˣ → O_Zˣ`. For a closed immersion
 this is the inverse of the canonical cohomology identification of Tag 02UV.
 Stacks Project, Tags 01F7 and 02UV. -/
-
 noncomputable def unitsPushforwardCohomologyComparison {Z X : Scheme.{u}} (i : Z ⟶ X)
     (p : ℕ) :
     Sheaf.H (((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u}

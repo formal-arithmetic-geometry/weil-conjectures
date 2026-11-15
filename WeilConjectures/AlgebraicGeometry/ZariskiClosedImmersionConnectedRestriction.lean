@@ -31,7 +31,6 @@ namespace AlgebraicGeometry
 /-- For a closed immersion `i : Z ⟶ X` into a quasi-compact quasi-separated scheme such that
 every point closure meets `Z` in a connected set, the unit of the inverse-image adjunction for
 sheaves of sets on `X` is bijective on global sections. -/
-
 theorem zariski_restriction_universe_transport
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

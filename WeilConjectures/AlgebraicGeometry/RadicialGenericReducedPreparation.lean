@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
  generic fibre, whose fibres are geometrically irreducible exactly when the corresponding fibres
  of `f` are; flatness and finite presentation are not asserted.
  Stacks Project, Tag 0559; Tags 051T and 052A.
- -/
+-/
 theorem exists_radicial_generic_reduced_preparation
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

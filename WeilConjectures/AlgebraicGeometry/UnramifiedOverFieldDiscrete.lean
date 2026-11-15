@@ -29,7 +29,6 @@ namespace AlgebraicGeometry
 
 /-- A scheme unramified over a field has discrete underlying topological space.
 Stacks Project, Morphisms, Lemma 02G7, part (1). -/
-
 theorem discreteTopology_of_unramified_over_field {k : Type u} [Field k]
     {Y : Scheme.{u}} (g : Y ⟶ Spec (CommRingCat.of k))
     [LocallyOfFiniteType g] [IsOpenImmersion (pullback.diagonal g)] :

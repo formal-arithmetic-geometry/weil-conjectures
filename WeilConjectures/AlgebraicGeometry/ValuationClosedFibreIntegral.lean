@@ -23,7 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 of `f` is integral.
 Stacks Project, More on Morphisms, Tag 0EX8.
 -/
-
 theorem closed_fibre_is_integral
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))

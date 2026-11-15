@@ -32,7 +32,6 @@ namespace AlgebraicGeometry
 /-- A closed subscheme of a finite-type scheme over a field, with topological dimension
 at most zero, is finite over the field and affine, with finite-dimensional global sections.
 Stacks Project, Tags 06LH and 03J3. -/
-
 theorem closed_subscheme_finite_of_topologicalKrullDim_le_zero
     {k : Type u} [Field k] {X Z : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]

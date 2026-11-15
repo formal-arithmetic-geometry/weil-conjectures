@@ -31,7 +31,6 @@ inverse image, such that `r ≫ strictHenselizationCohomologyComparison xbar f F
 isomorphism.
 
 Stacks Project, Tag 03Q9, first assertion. -/
-
 theorem unrestricted_strictHenselization_stalk
     {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type w} [Field Ω] [IsAlgClosed Ω]

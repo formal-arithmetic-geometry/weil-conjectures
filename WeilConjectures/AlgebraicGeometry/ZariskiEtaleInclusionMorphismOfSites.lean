@@ -40,7 +40,6 @@ and sending `⊤` to a terminal object, whose sheaf pushforward has an exact lef
 
 Stacks Project, Sites, Tags 00X6 and 00X5.
 -/
-
 theorem zariski_to_etale_is_morphism (X : Scheme.{u}) :
     ∃ (i : X.Opens ⥤ X.Etale),
       (i ⋙ Scheme.Etale.forget X = X.restrictFunctor) ∧

@@ -82,7 +82,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- If `h : Y ⟶ pullback f r` is a universal homeomorphism, then for every `s : S` the fibre of
 `h ≫ pullback.snd f r` over `s` is geometrically irreducible iff the fibre of `f` over `r s` is.
 Stacks Project, Tags 0553, 0559 and 04DF.
- -/
+-/
 theorem exists_radicial_preparation_fibre_comparison
     {X T S Y : Scheme.{u}} (f : X ⟶ T) (r : S ⟶ T)
     (h : Y ⟶ pullback f r) [IsUniversalHomeomorphism h] (s : S) :

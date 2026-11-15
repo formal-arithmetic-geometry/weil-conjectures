@@ -106,7 +106,6 @@ private theorem isAmple_tensorUnit_of_affine (Y : Scheme.{u}) [CompactSpace Y]
 /-- A Noetherian separated scheme of topological Krull dimension at most zero is affine,
 and its trivial invertible module is ample. The empty scheme is included.
 Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS. -/
-
 theorem isAffine_and_isAmple_tensorUnit_of_dim_le_zero (Y : Scheme.{u})
     [IsLocallyNoetherian Y] [CompactSpace Y] [Y.IsSeparated]
     (hdim : topologicalKrullDim Y ≤ 0) :

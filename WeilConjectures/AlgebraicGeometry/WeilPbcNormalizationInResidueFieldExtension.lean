@@ -98,7 +98,6 @@ morphism from an integral normal scheme whose generic point has residue field `K
 
 Stacks Project, Morphisms Lemmas 035H, 035I, 035L and Etale Cohomology Lemma 09Z6.
 -/
-
 theorem normalization_in_finite_residue_field_extension
     (X : Scheme.{u}) [QuasiSeparatedSpace X] (x : X) (K : Type u) [Field K]
     [Algebra (X.residueField x) K] [Module.Finite (X.residueField x) K] :

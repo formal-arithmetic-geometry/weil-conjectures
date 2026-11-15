@@ -20,7 +20,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 /-- Local cohomology vanishing makes the fixed pushed augmentation a quasi-isomorphism.
 
 Stacks Project, Cohomology on Sites, Tags 072W and 0733(1). -/
-
 theorem zariski_etale_pushed_resolution_quasi_iso
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

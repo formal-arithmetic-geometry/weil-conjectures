@@ -218,7 +218,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A section vanishing on the closed fibre vanishes modulo a nonzero element of the
 maximal ideal: if `s` restricts to zero on `X ×_A Spec (A ⧸ m)`, then it restricts to zero
 on `X ×_A Spec (A ⧸ (π))` for some nonzero `π ∈ m`. Stacks Project, Tag 0EX8. -/
-
 theorem exists_nonzero_maximalIdeal_section_eq_zero
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (hA : ¬ IsField A)
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))

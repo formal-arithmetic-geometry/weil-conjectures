@@ -32,7 +32,6 @@ of `f.asFiber x` is open in `f.fiber (f x)`, it is the only point of the fibre o
 
 Stacks Project, Morphisms, Definition 02G4 and Lemma 02G7.
 -/
-
 theorem unramified_fibre_point_isolated
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (x : X)
     (h_unramified : ∃ U : X.Opens, x ∈ U ∧

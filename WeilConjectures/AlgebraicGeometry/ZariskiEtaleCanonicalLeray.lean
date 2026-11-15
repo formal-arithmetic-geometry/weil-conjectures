@@ -38,7 +38,6 @@ connecting homomorphisms and its degree-zero value (`hfstar`); the conclusion ho
 degree, including degree zero, and needs no strict-henselian hypothesis.
 
 Stacks Project, Cohomology on Sites, Tags 072W and 0733(1); Etale Cohomology, Tag 09AX. -/
-
 theorem zariski_etale_canonical_leray
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

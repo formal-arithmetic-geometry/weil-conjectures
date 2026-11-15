@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 any nonnegative upper bound for its topological Krull dimension.
 Stacks Project, Cohomology, Proposition 02UZ.
 -/
-
 theorem isZero_zariskiCohomology_of_dimension_bound
     (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X]
     (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
