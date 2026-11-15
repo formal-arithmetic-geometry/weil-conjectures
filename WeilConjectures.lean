@@ -3798,6 +3798,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeMod
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierCohomologyEpi
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierFrobeniusExactRows
+public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierGenusBound
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierPrimeBaseChangeModel
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierProperDegreeZero
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierPullbackRows
@@ -3976,6 +3977,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.NilIdealUnitsImageLineariz
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalSmooth
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
+public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationMonoProperties
 public import WeilConjectures.AlgebraicGeometry.Curve.OpenAffine
 public import WeilConjectures.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
@@ -16852,6 +16854,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
 public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
 public import WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
+public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergyFiniteSupport
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
