@@ -12,8 +12,8 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 A constructible sheaf of modules over a finite ring `Λ` on a scheme of finite type over a field
 embeds into a finite direct sum of pushforwards of constant sheaves with finite values along
-finite morphisms (`lem-fin-finite-type-pushforward-embedding`). A scheme of finite type over a
-field is Noetherian, so this is the Noetherian case
+finite morphisms (`proposition-proper-direct-image-finite-coefficients`). A scheme of finite type
+over a field is Noetherian, so this is the Noetherian case
 `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian`; a finitely generated
 module over a finite ring is finite.
 
@@ -34,8 +34,8 @@ open Scheme Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-fin-finite-type-pushforward-embedding`: Finite-pushforward embeddings over a
-field.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Finite-pushforward embeddings
+over a field.
 
 Let `X` be of finite type over a field `k` and `F` a constructible sheaf of `Λ`-modules on
 `X_ét`, for a finite ring `Λ`. There are finitely many finite morphisms `hᵢ : Yᵢ ⟶ X`, finite

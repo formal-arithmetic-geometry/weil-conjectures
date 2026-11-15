@@ -15,7 +15,7 @@ For finite étale Galois covers `P₁ ⟶ Y₁` and `P₂ ⟶ Y₂` with groups 
 `a₁ : Y₁ ⟶ S`, `a₂ : Y₂ ⟶ S`, the fibre product `P₁ ×_S P₂ ⟶ Y₁ ×_S Y₂` is a finite étale
 Galois cover with group `G₁ × G₂` (`AlgebraicGeometry.Scheme.GaloisCover.prod`).
 
-This is used in blueprint `det-tf-restriction-zero-covers` (i): the termwise monodromy of an
+This is used in blueprint `lemma-tangent-cones-on-cover` (i): the termwise monodromy of an
 external tensor product `N' ⊠ Q'` factors through the finite `ℓ`-group `P₁ × P₂`.
 
 -/
@@ -113,7 +113,7 @@ instance isIso_prodPairMap : IsIso (prodPairMap c₁ c₂ a₁ a₂) := by
     · apply pullback.hom_ext <;> simp [prodPairMap, prodPairMapInv]
     · apply pullback.hom_ext <;> simp [prodPairMap, prodPairMapInv]
 
-/-- **Product of Galois covers** (blueprint `det-tf-restriction-zero-covers` (i)): for finite
+/-- **Product of Galois covers** (blueprint `lemma-tangent-cones-on-cover` (i)): for finite
 étale Galois covers `P₁ ⟶ Y₁`, `P₂ ⟶ Y₂` with groups `G₁`, `G₂` and morphisms `a₁ : Y₁ ⟶ S`,
 `a₂ : Y₂ ⟶ S`, the fibre product `P₁ ×_S P₂ ⟶ Y₁ ×_S Y₂` is a finite étale Galois cover with
 group `G₁ × G₂`. In the blueprint this shows that the termwise monodromy of `N' ⊠ Q'` factors

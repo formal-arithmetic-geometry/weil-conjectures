@@ -201,7 +201,7 @@ so j is quasi-compact by the affine criterion (def-weil-finite-type-morphism). C
 reduced closed complement (lem-weil-pbc-reduced-induced-closed-subscheme). Identify
 inverse-image constant coefficients (lem-pur-proetale-constant-coefficient-comparison)
 and apply lem-weil-pbc-proetale-ringed-open-closed.
-2. Exactness and lem-sf-exact-functor-derived-triangulated give termwise derived extension.
+2. Exactness and situation-conventions give termwise derived extension.
 The exact-functor cohomology comparison (lem-weil-pbc-exact-functor-complex-cohomology)
 is natural in representatives and descends through quasi-isomorphisms.
 3. Keep every original stratum immersion, composed with j, and add the reduced complement.
@@ -210,7 +210,7 @@ Locally closed subsets of an open remain locally closed in the ambient scheme
 (lem-weil-pbc-noetherian-scheme-closed-subsets-minimal) makes all these subsets constructible
 (def-weil-constructible-subset). Omitting any chosen empty strata preserves disjointness
 and coverage, giving the stratification
-(def-constructible-stratification).
+(definition-constructible-sheaves--2).
 4. Constant-coefficient pullback composition (lem-pur-proetale-module-pullback-composition)
 and the open unit identify restrictions on the original strata with the original sheaves.
 The complementary restriction is zero by lem-weil-pbc-proetale-ringed-open-closed.
@@ -220,7 +220,7 @@ The complement has the constant zero module with singleton stalks
 The cohomology comparison transports these witnesses to the output cohomology.
 6. Outside [a,b], input cohomology is zero and additive extension preserves zero.
 The output therefore has the same interval (def-weil-cohomological-support), finite
-cohomological support, and constructible cohomology (def-weil-finite-torsion-constructibility).
+cohomological support, and constructible cohomology (definition-constructible-sheaves).
 This includes the empty open, the identity open, zero complexes, and empty strata. -/
 theorem open_finite_constructibility_interval
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]

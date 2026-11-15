@@ -34,24 +34,27 @@ which can be fed to the relative affine-line bound one at a time, as the bluepri
 
 ## Implementation notes
 
-The blueprint derives this statement from a purely ring-theoretic one, `lem-zl-spread-normalization`
-("spreading affine normalization to a principal open"): for a domain `A` and a finitely generated
-`A`-algebra `B` there are `0 ≠ s ∈ A`, `d ≥ 0` and coordinates `t ∈ (B_s)^d` making `A_s[t] → B_s`
-finite. It is `Algebra.FiniteType.exists_finite_aeval_away` in
+The blueprint derives this statement from a purely ring-theoretic one,
+`lemma-relative-noether-normalization-over-stratification--1` ("spreading affine normalization to a
+principal open"): for a domain `A` and a finitely generated `A`-algebra `B` there are `0 ≠ s ∈ A`,
+`d ≥ 0` and coordinates `t ∈ (B_s)^d` making `A_s[t] → B_s` finite. It is
+`Algebra.FiniteType.exists_finite_aeval_away` in
 `WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean`; the coordinates map of blueprint
-`def-zl-localized-coordinates` is `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`.
+`lemma-relative-noether-normalization-over-stratification--1` is
+`AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`.
 
 ## Main statements
 
 - `AlgebraicGeometry.exists_isFinite_toIteratedAffineLine_basicOpen`: Noether normalization over a
   principal open of an affine open of an integral base.
 - `AlgebraicGeometry.exists_dense_isFinite_toIteratedAffineLine`: the generic relative Noether
-  normalization (blueprint `sk-l-dl-general-normalization`).
+  normalization (blueprint `lemma-relative-noether-normalization-over-stratification`).
 - `AlgebraicGeometry.Scheme.exists_partition_isImmersion_isAffine_isReduced`: a quasi-compact
   scheme has a finite partition by reduced affine locally closed subschemes (blueprint
-  `lem-zl-affine-partition`).
+  `lemma-relative-noether-normalization-over-stratification--1`).
 - `AlgebraicGeometry.exists_partition_isFinite_toIteratedAffineLine`: relative Noether
-  normalization over finite partitions of source and target (blueprint `thm-zl-relative-noether`).
+  normalization over finite partitions of source and target (blueprint
+  `lemma-relative-noether-normalization-over-stratification--1`).
 
 ## References
 
@@ -170,8 +173,8 @@ morphism to the `d`-fold relative affine line. If `Γ(Y, U) → Γ(X, f⁻¹ U)`
 morphism is surjective and `d` is the dimension of the generic fibre.
 
 This is the geometric form of `Algebra.FiniteType.exists_finite_aeval_away`
-(blueprint `lem-zl-spread-normalization`), using the coordinates of blueprint
-`def-zl-localized-coordinates`. -/
+(blueprint `lemma-relative-noether-normalization-over-stratification--1`), using the coordinates of
+blueprint `lemma-relative-noether-normalization-over-stratification--1`. -/
 theorem exists_isFinite_toIteratedAffineLine_basicOpen {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsIntegral Y] [IsAffineHom f] [LocallyOfFiniteType f] {U : Y.Opens} (hU : IsAffineOpen U)
     [Nonempty U] :
@@ -248,7 +251,7 @@ f ⁻¹ᵁ V ----- ν -----> iteratedAffineLine V r
           `----------------->  V
 ```
 
-(blueprint: `sk-l-dl-general-normalization`). -/
+(blueprint: `lemma-relative-noether-normalization-over-stratification`). -/
 @[stacks 07NA]
 theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegral X]
     [IsIntegral Y] [IsAffineHom f] [LocallyOfFiniteType f] [IsDominant f] (r : ℕ)
@@ -284,8 +287,8 @@ theorem exists_dense_isFinite_toIteratedAffineLine {X Y : Scheme.{u}} (f : X ⟶
     exact hs
   exact ⟨Y.basicOpen s, (Y.basicOpen s).isOpen.dense hsY, ν, hfin, hsurj, hν⟩
 
-/-- Blueprint `lem-zl-affine-partition`: a quasi-compact (e.g. Noetherian) scheme `X` has a finite
-partition by locally closed reduced affine subschemes.
+/-- Blueprint `lemma-relative-noether-normalization-over-stratification--1`: a quasi-compact (e.g.
+Noetherian) scheme `X` has a finite partition by locally closed reduced affine subschemes.
 
 Choose a finite affine open cover `U₁, …, Uₙ` and take the `i`-th piece to be
 `Uᵢ ∖ ⋃_{j < i} Uⱼ` with its reduced closed subscheme structure inside `Uᵢ`. Every point lies in
@@ -353,10 +356,10 @@ section RelativeNoether
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The conclusion of blueprint `thm-zl-relative-noether` over a subset `Z` of the target `Y`: there
-are finite partitions of `Z` and of `f ⁻¹ Z` into reduced locally closed subschemes such that every
-source piece maps into a target piece `T` through a finite morphism to an iterated relative affine
-line over `T`. -/
+/-- The conclusion of blueprint `lemma-relative-noether-normalization-over-stratification--1` over a
+subset `Z` of the target `Y`: there are finite partitions of `Z` and of `f ⁻¹ Z` into reduced
+locally closed subschemes such that every source piece maps into a target piece `T` through a finite
+morphism to an iterated relative affine line over `T`. -/
 def Scheme.Hom.HasNoetherPartitionOver (Z : Set Y) : Prop :=
   ∃ (ιT : Type) (_ : Finite ιT) (T : ιT → Scheme.{u}) (j : ∀ b, T b ⟶ Y),
     (∀ b, IsImmersion (j b) ∧ IsReduced (T b) ∧ Set.range (j b) ⊆ Z) ∧
@@ -416,15 +419,17 @@ lemma Scheme.Hom.HasNoetherPartitionOver.union {Z₁ Z₂ : Set Y} (h : Disjoint
     · exact hν₁ a
     · exact hν₂ a
 
-/-- The induction step of blueprint `thm-zl-relative-noether`: a nonempty closed subset `Z` of the
-target contains a nonempty subset `Z₁` with closed complement `Z ∖ Z₁` over which the partition
-exists.
+/-- The induction step of blueprint `lemma-relative-noether-normalization-over-stratification--1`: a
+nonempty closed subset `Z` of the target contains a nonempty subset `Z₁` with closed complement
+`Z ∖ Z₁` over which the partition exists.
 
 Take an irreducible component of `Z ∩ V` for an affine open `V = Spec A`, i.e. a minimal prime
 `p` over the ideal of `Z ∩ V`, and a function `f₀` vanishing on the other components only. Cover
 the base change of `f` to the integral scheme `Spec (A ⧸ p)` by finitely many reduced affine pieces
-(blueprint `lem-zl-affine-partition`), spread out Noether normalization for each of them
-(blueprint `lem-zl-spread-normalization`) and shrink to a common principal open `D(s)`. -/
+(blueprint `lemma-relative-noether-normalization-over-stratification--1`), spread out Noether
+normalization for each of them (blueprint
+`lemma-relative-noether-normalization-over-stratification--1`) and shrink to a common principal open
+`D(s)`. -/
 lemma Scheme.Hom.exists_hasNoetherPartitionOver_nonempty [IsNoetherian Y] [QuasiCompact f]
     [LocallyOfFiniteType f] {Z : Set Y} (hZ : IsClosed Z) (hne : Z.Nonempty) :
     ∃ Z₁ ⊆ Z, Z₁.Nonempty ∧ IsClosed (Z \ Z₁) ∧ f.HasNoetherPartitionOver Z₁ := by
@@ -594,7 +599,8 @@ lemma Scheme.Hom.hasNoetherPartitionOver_of_isClosed [IsNoetherian Y] [QuasiComp
   have := Scheme.Hom.HasNoetherPartitionOver.union f Set.disjoint_sdiff_right hP (ih Z₂ hlt)
   rwa [Set.union_sdiff_cancel hZ₁Z] at this
 
-/-- Blueprint `thm-zl-relative-noether`: relative Noether normalization.
+/-- Blueprint `lemma-relative-noether-normalization-over-stratification--1`: relative Noether
+normalization.
 
 Let `f : X ⟶ Y` be a morphism of finite type to a Noetherian scheme (for instance a separated
 morphism of finite type between separated schemes of finite type over a field). There are finite

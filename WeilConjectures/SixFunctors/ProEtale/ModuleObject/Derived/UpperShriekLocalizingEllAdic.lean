@@ -22,7 +22,8 @@ inputs of the existence theorem
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing`) are the
 theorems
 
-| `Λ` | `sk-lem-brown-hypotheses` | `det-sf-comp-coherence-single` |
+| `Λ` | `lemma-hypotheses-brown-representability` |
+`proposition-construction-independence-rf-shriek` |
 | --- | --- | --- |
 | `E` | `compactlyGenerates_continuousMapRingObj` | `lowerShriek_continuousMapRingObj` |
 | `𝒪_E` | `compactlyGenerates_padicIntegersRingObj` | `lowerShriek_padicIntegersRingObj` |
@@ -31,10 +32,10 @@ theorems
 (all in the namespace `AlgebraicGeometry.ProEtale.CondensedRing`), and the existence theorem
 follows (`exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj`, ...).
 
-The statements of `det-sf-comp-coherence-single` take a separated base `Y` of finite type over
-`k`, the setting of the blueprint, in which the ind-constructible heart is available. A
-noetherian base is needed in any case: over a merely quasi-compact quasi-separated base, `Rp_*`
-need not preserve constructibility. For instance the inclusion `p` of the origin into
+The statements of `proposition-construction-independence-rf-shriek` take a separated base `Y` of
+finite type over `k`, the setting of the blueprint, in which the ind-constructible heart is
+available. A noetherian base is needed in any case: over a merely quasi-compact quasi-separated
+base, `Rp_*` need not preserve constructibility. For instance the inclusion `p` of the origin into
 `Y = Spec k[x₁, x₂, …]` is proper, but `p_* Λ` is supported on the closed point, which is not a
 constructible subset of `Y`.
 
@@ -46,24 +47,25 @@ proofs use the reduction to residue field coefficients, which imports the formal
 
 - The inputs of `isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj`,
   `isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj` (blueprint
-  `sk-thm-constructible-compactness`) and
+  `theorem-compactness-rational-coefficients`) and
   `isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj` (blueprint
-  `sk-prop-int-compactness`), that constructible sheaves are compact in `Loc(Dᵇc(X)⟦Λ⟧)`: the
-  closure properties of the ind-constructible sheaves (`sk-prop-ind-heart`), the continuity of
-  `Ext` out of a constructible sheaf (`sk-lem-constructible-ext-continuity`) and the uniform
-  `Ext` bound (`sk-lem-uniform-constructible-ext`), see
+  `proposition-compactness-proper-direct-image`), that constructible sheaves are compact in
+  `Loc(Dᵇc(X)⟦Λ⟧)`: the closure properties of the ind-constructible sheaves
+  (`proposition-ind-constructible-sheaves`), the continuity of `Ext` out of a constructible sheaf
+  (`lemma-continuity-ext-out-constructible-complex--1`) and the uniform `Ext` bound
+  (`lemma-uniform-ext-bound`), see
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic`. The
-  compactness follows by the finite-window argument and left completeness. By dévissage, all
-  bounded constructible complexes are compact
+  compactness follows by the finite-window argument and left completeness. By dévissage, all bounded
+  constructible complexes are compact
   (`isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible`).
 - The inputs of `properLowerStarHypotheses_continuousMapRingObj`,
   `properLowerStarHypotheses_padicAlgClRingObj` and
   `properLowerStarHypotheses_padicIntegersRingObj` (for `p` proper, `Rp_*` preserves `Dᵇc` and
   direct sums on `Loc(Dᵇc)`): that `Rp_*` preserves `Dᵇc` (blueprint
-  `sk-thm-sfb-proper-base-change`) and has finite amplitude and commutes with direct sums on the
-  ind-constructible heart (blueprints `sk-lem-proper-heart-bound`,
-  `det-prop-int-compactness-direct-sums` (1)), see
-  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`. The
+  `proposition-proper-direct-image-constructible-complexes`) and has finite amplitude and commutes
+  with direct sums on the ind-constructible heart (blueprints
+  `lemma-uniform-bound-proper-direct-image`, `proposition-compactness-proper-direct-image--2` (1)),
+  see `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`. The
   commutation with direct sums on `Loc(Dᵇc)` follows by dévissage and left completeness
   (`ProperLowerStarHeartHypotheses.preservesColimitsOfShape`).
 -/
@@ -90,9 +92,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k �
 
 /-! #### The coefficient ring `E` -/
 
-/-- Blueprint `sk-thm-constructible-compactness` (`det-constructible-compactness-sheaf`): for the
-coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`,
-the constructible sheaves are compact objects of `Loc(Dᵇc(X)⟦E⟧)`. -/
+/-- Blueprint `theorem-compactness-rational-coefficients`
+(`theorem-compactness-rational-coefficients`): for the coefficient ring `E` of a finite extension
+`E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, the constructible sheaves are compact
+objects of `Loc(Dᵇc(X)⟦E⟧)`. -/
 theorem isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj (E : Type)
     [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
@@ -103,7 +106,7 @@ theorem isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj (
       (singleLocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X M hM) :=
   isCompactObj_singleFunctor_continuousMapRingObj ℓ E aX hk M hM _
 
-/-- Blueprint `sk-thm-constructible-compactness`: for the coefficient ring `E` of a finite
+/-- Blueprint `theorem-compactness-rational-coefficients`: for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, the bounded constructible
 complexes are compact objects of `Loc(Dᵇc(X)⟦E⟧)`, by dévissage to constructible sheaves. -/
 theorem isCompactObj_boundedConstructible_continuousMapRingObj (E : Type) [NormedField E]
@@ -115,8 +118,8 @@ theorem isCompactObj_boundedConstructible_continuousMapRingObj (E : Type) [Norme
   isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible _ X
     (isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj ℓ E aX hk) K hK
 
-/-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for the
-coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` (including `E = ℚ_ℓ`) and a separated
+/-- Blueprint `lemma-hypotheses-brown-representability`: Hypotheses of Brown representability, for
+the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` (including `E = ℚ_ℓ`) and a separated
 finite-type `k`-scheme `X`. The category `Loc(Dᵇc(X)⟦E⟧)` is locally small, triangulated and has
 direct sums (by construction); it has split idempotents, and `Dᵇc(X)⟦E⟧ = Dctf(X, E)` is
 essentially small, with a small skeleton forming a set of compact generators. -/
@@ -131,10 +134,10 @@ theorem compactlyGenerates_continuousMapRingObj (E : Type) [NormedField E]
   compactlyGenerates_of_isCompactObj _ X
     (isCompactObj_boundedConstructible_continuousMapRingObj ℓ E aX hk)
 
-/-- Blueprints `sk-thm-sfb-proper-base-change` and `sk-prop-proper-image-localizing`: for the
-coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a
-separated finite-type `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧` and preserves direct
-sums on `Loc(Dᵇc(Z)⟦E⟧)`. -/
+/-- Blueprints `proposition-proper-direct-image-constructible-complexes` and
+`proposition-proper-direct-image-extension-zero`: for the coefficient ring `E` of a finite extension
+`E` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated finite-type `k`-scheme, `Rp_*` maps
+`Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧` and preserves direct sums on `Loc(Dᵇc(Z)⟦E⟧)`. -/
 theorem properLowerStarHypotheses_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
@@ -145,11 +148,11 @@ theorem properLowerStarHypotheses_continuousMapRingObj (E : Type) [NormedField E
       E,
     (properLowerStarHeartHypotheses_continuousMapRingObj ℓ E aY p).preservesColimitsOfShape⟩
 
-/-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
-localizing category, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a
-separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`,
-`Rp_* ∘ j_!` maps `Loc(Dctf(X, E))` into `Loc(Dctf(Y, E))` and `Dctf(X, E)` into `Dctf(Y, E)`, and
-preserves direct sums on `Loc(Dctf(X, E))`. -/
+/-- Blueprint `proposition-construction-independence-rf-shriek`: Compact support along one
+compactification on the localizing category, for the coefficient ring `E` of a finite extension `E`
+of `ℚ_ℓ` and a separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)`
+of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, E))` into `Loc(Dctf(Y, E))` and `Dctf(X, E)` into
+`Dctf(Y, E)`, and preserves direct sums on `Loc(Dctf(X, E))`. -/
 theorem lowerShriek_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
@@ -162,9 +165,9 @@ theorem lowerShriek_continuousMapRingObj (E : Type) [NormedField E]
 
 /-! #### The coefficient ring `𝒪_E` -/
 
-/-- Blueprint `sk-prop-int-compactness` (compactness of constructible sheaves): for the
-coefficient ring `𝒪_E` of the ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a
-separated finite-type `k`-scheme `X`, the constructible sheaves are compact objects of
+/-- Blueprint `proposition-compactness-proper-direct-image` (compactness of constructible sheaves):
+for the coefficient ring `𝒪_E` of the ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and
+a separated finite-type `k`-scheme `X`, the constructible sheaves are compact objects of
 `Loc(Dᵇc(X)⟦𝒪_E⟧)`. -/
 theorem isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj (E : Type)
     [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
@@ -177,10 +180,10 @@ theorem isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj (
       (singleLocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X M hM) :=
   isCompactObj_singleFunctor_padicIntegersRingObj ℓ E aX hk M hM _
 
-/-- Blueprint `sk-prop-int-compactness`: for the coefficient ring `𝒪_E` of the ring of integers
-of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, the bounded
-constructible complexes are compact objects of `Loc(Dᵇc(X)⟦𝒪_E⟧)`, by dévissage to constructible
-sheaves. -/
+/-- Blueprint `proposition-compactness-proper-direct-image`: for the coefficient ring `𝒪_E` of the
+ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme
+`X`, the bounded constructible complexes are compact objects of `Loc(Dᵇc(X)⟦𝒪_E⟧)`, by dévissage to
+constructible sheaves. -/
 theorem isCompactObj_boundedConstructible_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
@@ -191,8 +194,8 @@ theorem isCompactObj_boundedConstructible_padicIntegersRingObj (E : Type) [Field
   isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible _ X
     (isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj ℓ E aX hk) K hK
 
-/-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for the
-coefficient ring `𝒪_E` of the ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
+/-- Blueprint `lemma-hypotheses-brown-representability`: Hypotheses of Brown representability, for
+the coefficient ring `𝒪_E` of the ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
 (including `ℤ_ℓ`, for `E = ℚ_ℓ`) and a separated finite-type `k`-scheme `X`: `Loc(Dᵇc(X)⟦𝒪_E⟧)`
 has split idempotents, and `Dᵇc(X)⟦𝒪_E⟧ = Dctf(X, 𝒪_E)` is essentially small, with a small
 skeleton forming a set of compact generators. -/
@@ -208,10 +211,11 @@ theorem compactlyGenerates_padicIntegersRingObj (E : Type) [Field E] [Algebra E 
   compactlyGenerates_of_isCompactObj _ X
     (isCompactObj_boundedConstructible_padicIntegersRingObj ℓ E aX hk)
 
-/-- Blueprints `sk-thm-sfb-proper-base-change` and `sk-prop-int-compactness` (direct sums): for
-the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism
-`p : Z ⟶ Y` to a separated finite-type `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧` and
-preserves direct sums on `Loc(Dᵇc(Z)⟦𝒪_E⟧)`. -/
+/-- Blueprints `proposition-proper-direct-image-constructible-complexes` and
+`proposition-compactness-proper-direct-image` (direct sums): for the coefficient ring `𝒪_E` of a
+finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated finite-type
+`k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧` and preserves direct sums on
+`Loc(Dᵇc(Z)⟦𝒪_E⟧)`. -/
 theorem properLowerStarHypotheses_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
@@ -222,11 +226,11 @@ theorem properLowerStarHypotheses_padicIntegersRingObj (E : Type) [Field E]
       E,
     (properLowerStarHeartHypotheses_padicIntegersRingObj ℓ E aY p).preservesColimitsOfShape⟩
 
-/-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
-localizing category, for the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
-and a separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`,
-`Rp_* ∘ j_!` maps `Loc(Dctf(X, 𝒪_E))` into `Loc(Dctf(Y, 𝒪_E))` and `Dctf(X, 𝒪_E)` into
-`Dctf(Y, 𝒪_E)`, and preserves direct sums on `Loc(Dctf(X, 𝒪_E))`. -/
+/-- Blueprint `proposition-construction-independence-rf-shriek`: Compact support along one
+compactification on the localizing category, for the coefficient ring `𝒪_E` of a finite extension
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `Y`: for a compactification
+`c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, 𝒪_E))` into `Loc(Dctf(Y, 𝒪_E))` and
+`Dctf(X, 𝒪_E)` into `Dctf(Y, 𝒪_E)`, and preserves direct sums on `Loc(Dctf(X, 𝒪_E))`. -/
 theorem lowerShriek_padicIntegersRingObj (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -239,9 +243,9 @@ theorem lowerShriek_padicIntegersRingObj (E : Type) [Field E] [Algebra E (PadicA
 
 /-! #### The coefficient ring `ℚ̄_ℓ` -/
 
-/-- Blueprint `sk-thm-constructible-compactness` (`det-constructible-compactness-sheaf`): for the
-coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `X`, the constructible sheaves are
-compact objects of `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)`. -/
+/-- Blueprint `theorem-compactness-rational-coefficients`
+(`theorem-compactness-rational-coefficients`): for the coefficient ring `ℚ̄_ℓ` and a separated
+finite-type `k`-scheme `X`, the constructible sheaves are compact objects of `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)`. -/
 theorem isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
     (hk : Finite k ∨ IsSepClosed k)
@@ -251,8 +255,8 @@ theorem isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj {X :
       (singleLocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X M hM) :=
   isCompactObj_singleFunctor_padicAlgClRingObj ℓ aX hk M hM _
 
-/-- Blueprint `sk-thm-constructible-compactness`: for the coefficient ring `ℚ̄_ℓ` and a separated
-finite-type `k`-scheme `X`, the bounded constructible complexes are compact objects of
+/-- Blueprint `theorem-compactness-rational-coefficients`: for the coefficient ring `ℚ̄_ℓ` and a
+separated finite-type `k`-scheme `X`, the bounded constructible complexes are compact objects of
 `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)`, by dévissage to constructible sheaves. -/
 theorem isCompactObj_boundedConstructible_padicAlgClRingObj {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
@@ -262,9 +266,9 @@ theorem isCompactObj_boundedConstructible_padicAlgClRingObj {X : Scheme.{u}}
   isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible _ X
     (isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj ℓ aX hk) K hK
 
-/-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for the
-coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `X`: `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)` has split
-idempotents, and `Dᵇc(X)⟦ℚ̄_ℓ⟧ = Dctf(X, ℚ̄_ℓ)` is essentially small, with a small skeleton
+/-- Blueprint `lemma-hypotheses-brown-representability`: Hypotheses of Brown representability, for
+the coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `X`: `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)` has
+split idempotents, and `Dᵇc(X)⟦ℚ̄_ℓ⟧ = Dctf(X, ℚ̄_ℓ)` is essentially small, with a small skeleton
 forming a set of compact generators. -/
 theorem compactlyGenerates_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
@@ -276,9 +280,10 @@ theorem compactlyGenerates_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (
   compactlyGenerates_of_isCompactObj _ X
     (isCompactObj_boundedConstructible_padicAlgClRingObj ℓ aX hk)
 
-/-- Blueprints `sk-thm-sfb-proper-base-change` and `sk-prop-proper-image-localizing`: for the
-coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated finite-type `k`-scheme,
-`Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧` and preserves direct sums on `Loc(Dᵇc(Z)⟦ℚ̄_ℓ⟧)`. -/
+/-- Blueprints `proposition-proper-direct-image-constructible-complexes` and
+`proposition-proper-direct-image-extension-zero`: for the coefficient ring `ℚ̄_ℓ` and a proper
+morphism `p : Z ⟶ Y` to a separated finite-type `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into
+`Dᵇc(Y)⟦ℚ̄_ℓ⟧` and preserves direct sums on `Loc(Dᵇc(Z)⟦ℚ̄_ℓ⟧)`. -/
 theorem properLowerStarHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (p : Z ⟶ Y) [IsProper p] :
     ProperLowerStarHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) p :=
@@ -286,11 +291,11 @@ theorem properLowerStarHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}} (aY : Y �
   ⟨boundedConstructible_rightDerivedLowerStar_of_isProper_padicAlgClRingObj_of_finiteType ℓ p aY,
     (properLowerStarHeartHypotheses_padicAlgClRingObj ℓ aY p).preservesColimitsOfShape⟩
 
-/-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
-localizing category, for the coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `Y`:
-for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, ℚ̄_ℓ))` into
-`Loc(Dctf(Y, ℚ̄_ℓ))` and `Dctf(X, ℚ̄_ℓ)` into `Dctf(Y, ℚ̄_ℓ)`, and preserves direct sums on
-`Loc(Dctf(X, ℚ̄_ℓ))`. -/
+/-- Blueprint `proposition-construction-independence-rf-shriek`: Compact support along one
+compactification on the localizing category, for the coefficient ring `ℚ̄_ℓ` and a separated
+finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!`
+maps `Loc(Dctf(X, ℚ̄_ℓ))` into `Loc(Dctf(Y, ℚ̄_ℓ))` and `Dctf(X, ℚ̄_ℓ)` into `Dctf(Y, ℚ̄_ℓ)`, and
+preserves direct sums on `Loc(Dctf(X, ℚ̄_ℓ))`. -/
 theorem lowerShriek_padicAlgClRingObj {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] {f : X ⟶ Y}
     (c : Compactification f) :
@@ -306,9 +311,9 @@ variable {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [
   (hk : Finite k ∨ IsSepClosed k)
 
 include aX hk in
-/-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for the
-coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` (including `ℚ_ℓ`) and separated
-finite-type `k`-schemes `X`, `Y`. For a compactification `c` of `f : X ⟶ Y`, the
+/-- Blueprint `theorem-existence-exceptional-inverse-image`: Existence of the exceptional inverse
+image, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` (including `ℚ_ℓ`) and
+separated finite-type `k`-schemes `X`, `Y`. For a compactification `c` of `f : X ⟶ Y`, the
 coproduct-preserving functor `Rf_! : Loc(Dctf(X, E)) ⥤ Loc(Dctf(Y, E))` has a right adjoint
 `f^!`, which commutes with shifts compatibly with the adjunction, is exact (triangulated),
 preserves direct sums and is unique up to unique isomorphism compatible with the adjunction. -/
@@ -332,9 +337,9 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingO
     (compactlyGenerates_continuousMapRingObj ℓ E aY hk).1
 
 include aX hk in
-/-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for the
-coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (including `ℤ_ℓ`) and
-separated finite-type `k`-schemes `X`, `Y`. For a compactification `c` of `f : X ⟶ Y`, the
+/-- Blueprint `theorem-existence-exceptional-inverse-image`: Existence of the exceptional inverse
+image, for the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (including `ℤ_ℓ`)
+and separated finite-type `k`-schemes `X`, `Y`. For a compactification `c` of `f : X ⟶ Y`, the
 coproduct-preserving functor `Rf_! : Loc(Dctf(X, 𝒪_E)) ⥤ Loc(Dctf(Y, 𝒪_E))` has a right adjoint
 `f^!`, which commutes with shifts compatibly with the adjunction, is exact (triangulated),
 preserves direct sums and is unique up to unique isomorphism compatible with the adjunction. -/
@@ -359,9 +364,9 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingO
     (compactlyGenerates_padicIntegersRingObj ℓ E aY hk).1
 
 include aX hk in
-/-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for the
-coefficient ring `ℚ̄_ℓ` and separated finite-type `k`-schemes `X`, `Y`. For a compactification
-`c` of `f : X ⟶ Y`, the coproduct-preserving functor
+/-- Blueprint `theorem-existence-exceptional-inverse-image`: Existence of the exceptional inverse
+image, for the coefficient ring `ℚ̄_ℓ` and separated finite-type `k`-schemes `X`, `Y`. For a
+compactification `c` of `f : X ⟶ Y`, the coproduct-preserving functor
 `Rf_! : Loc(Dctf(X, ℚ̄_ℓ)) ⥤ Loc(Dctf(Y, ℚ̄_ℓ))` has a right adjoint `f^!`, which commutes with
 shifts compatibly with the adjunction, is exact (triangulated), preserves direct sums and is
 unique up to unique isomorphism compatible with the adjunction. -/

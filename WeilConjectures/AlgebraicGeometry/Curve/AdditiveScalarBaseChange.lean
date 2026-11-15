@@ -28,7 +28,10 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.IsCurve
 
-private theorem exists_additive_cohomology_scalar_action
+/-- For a sheaf `G` identified with the additive sheaf of `C`, multiplication of sections by the
+images of scalars `c : k` gives sheaf endomorphisms `μ_c` of `G`, and these make the first
+cohomology `H¹(G)` a `k`-module on which `μ_c` acts as `c •`. -/
+theorem exists_additive_cohomology_scalar_action
     {k : Type u} [Field k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k))
     (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})

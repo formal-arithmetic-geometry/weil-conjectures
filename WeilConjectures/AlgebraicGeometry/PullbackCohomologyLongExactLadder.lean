@@ -47,11 +47,11 @@ Proof (the node's eleven steps):
    the initial injection in degree zero.
 5. The pullback is the natural derived adjunction unit, followed by the global sections
    comparison (`lem-weil-pbc-cohomology-pullback-derived-unit`,
-   `prop-weil-pbc-derived-inverse-image-adjunction`).
+   `prose-04-06`).
 6. Exact inverse image preserves the canonical triangle and its boundary
    (`lem-weil-pbc-exact-functor-ses-triangle-image`).
 7. Naturality of that unit and comparison gives naturality in the derived object
-   (`lem-weil-pbc-cohomology-pullback-functorial`).
+   (`proposition-cohomology-p-1-over-henselian--1`).
 8. Shift K-injective representatives (`lem-weil-pbc-kinjective-shift`), using uniqueness
    of comparisons, to see that the natural transformation commutes with shifts.
 9. `lem-weil-pbc-commshift-nattrans-triangle-morphism` gives a morphism of triangles.

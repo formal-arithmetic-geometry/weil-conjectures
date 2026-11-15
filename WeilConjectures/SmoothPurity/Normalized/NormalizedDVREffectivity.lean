@@ -16,8 +16,8 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Effectivity of normalized DVR towers
 
-Source: Weil conjectures blueprint, sec-six-functors, sk-prop-sf-biduality-general,
-order 2132 (blueprint: lem-coef-normalized-dvr-effectivity).
+Source: Weil conjectures blueprint, chap-The-six-operations-on-Dbctf, sk-prop-sf-biduality-general,
+order 2132 (blueprint: lemma-sp-tower-adjunction-foundation--2).
 
 The derived limit is specified by its Roos triangle on actual derived evaluations.
 Comparisons are adjoints of the specified limit projections. Coherence is an equality
@@ -61,7 +61,7 @@ attribute [local instance] normalizedDVREffectivityLocal3
 /-- The actual completed-coefficient tensor-restriction adjunction, normalized on
 K-flat representatives by the tensor unit x ↦ x tensor 1.
 Source: Stacks Tags 06YY and 0DVC; blueprint order 2132
-(blueprint: lem-coef-normalized-dvr-effectivity). -/
+(blueprint: lemma-sp-tower-adjunction-foundation--2). -/
 def normalizedDVRIntegralAdjunction (n : ℕ) :
     scalarReductionDerivedExtension l E X n ⊣ scalarReductionDerivedRestriction l E X n :=
   (derivedScalarExtensionRestrictionAdjunction l E X n).choose
@@ -69,7 +69,7 @@ def normalizedDVRIntegralAdjunction (n : ℕ) :
 /-- The canonical reduction transition is adjoint to the smaller quotient unit,
 transported through the canonical composition comparison for restrictions.
 Source: blueprint order 2132, last proof paragraph
-(blueprint: lem-coef-normalized-dvr-effectivity). -/
+(blueprint: lemma-sp-tower-adjunction-foundation--2). -/
 def normalizedDVRReductionTransition (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     {m n : ℕ} (h : n ≤ m)
     (M : completedIntegralDerivedCategory l E X D hl) :
@@ -83,7 +83,7 @@ def normalizedDVRReductionTransition (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The counit comparison at a finite level is the adjoint of that limit projection.
 Source: blueprint order 2132, comparison in the statement
-(blueprint: lem-coef-normalized-dvr-effectivity). -/
+(blueprint: lemma-sp-tower-adjunction-foundation--2). -/
 def normalizedDVRCounitComparison (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)
     [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]
@@ -417,7 +417,7 @@ private theorem normalizedDVRComplete_of_isIso
 /-- A normalized DVR tower is recovered by derived reduction of its derived inverse
 limit, through coherent canonical counit isomorphisms; that inverse limit is derived
 complete. Source: blueprint order 2132; Bhatt--Scholze, Lemmas 3.5.4--3.5.7
-(blueprint: lem-coef-normalized-dvr-effectivity).
+(blueprint: lemma-sp-tower-adjunction-foundation--2).
 
 Proof: use the strict normalized adic cone model for the restricted derived finite
 reduction. The adopted theorem on strict normalized adic towers makes its augmented

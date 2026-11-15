@@ -46,7 +46,7 @@ all sufficiently late stages. This is independent of diagrams, their comparison
 isomorphisms, and étaleness of the arrows.
 
 Source: Stacks Project, Limits, Tag 07RR in Situation 081D;
-steps 5--6 of lem-weil-pbc-etale-finite-data-descent.
+steps 5--6 of lemma-acyclicity-pulled-back-injectives.
 (blueprint: lem-weil-pbc-finite-family-joint-surjectivity-stage).
 
 Proof:

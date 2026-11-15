@@ -60,6 +60,8 @@ namespace CategoryTheory.Functor
 
 /-! ### Morphisms out of complexes concentrated in degree `0` -/
 
+section Homotopy
+
 variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
   [Preadditive C₁] [Preadditive C₂] [Preadditive C₃]
   [HasZeroObject C₁] [HasZeroObject C₂] [HasZeroObject C₃]
@@ -155,6 +157,57 @@ lemma mapHomotopyCategorySingleHom_comp {F : C₁ ⥤ C₃} {G : C₁ ⥤ C₂} 
       H.map_id, Category.id_comp]
   · exact (F.map_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn)).eq_of_src _ _
 
+end Homotopy
+
+section Derived
+
+open _root_.DerivedCategory
+
+variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+  [Abelian C₁] [Abelian C₂] [Abelian C₃]
+  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+  [MonoidalCategory C₁] [MonoidalPreadditive C₁] [HasCountableCoproducts C₁]
+  [HasColimitsOfShape ℤ C₁] [HasExactColimitsOfShape ℤ C₁]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C₁), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₁), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₁), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X : C₁), PreservesColimitsOfShape ℤ ((curriedTensor C₁).obj X)]
+  [∀ (X : C₁), PreservesColimitsOfShape ℤ ((curriedTensor C₁).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C₁]
+  [MonoidalCategory C₂] [MonoidalPreadditive C₂] [HasCountableCoproducts C₂]
+  [HasColimitsOfShape ℤ C₂] [HasExactColimitsOfShape ℤ C₂]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C₂), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₂), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C₂), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).obj X)]
+  [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C₂]
+
+/-- The composition comparison of exact derived functors respects morphisms out of complexes
+concentrated in degree `0`, after composing with the derived counits. -/
+private lemma leftDerivedFunctorFactorIso_hom_app_single
+    {F : C₁ ⥤ C₃} {G : C₁ ⥤ C₂} {H : C₂ ⥤ C₃}
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (e : F ≅ G ⋙ H) {A : C₁} {B : C₂} {D : C₃}
+    (φ : G.obj A ⟶ B) (ψ : H.obj B ⟶ D) :
+    (leftDerivedFunctorFactorIso e).hom.app
+        (Qh.obj ((HomotopyCategory.quotient C₁ (.up ℤ)).obj
+          ((HomologicalComplex.single C₁ (.up ℤ) 0).obj A))) ≫
+      H.leftDerivedFunctor.map (G.leftDerivedFunctorCounit.app _ ≫
+        Qh.map (mapHomotopyCategorySingleHom G φ)) ≫
+      (H.leftDerivedFunctorCounit.app _ ≫ Qh.map (mapHomotopyCategorySingleHom H ψ)) =
+    F.leftDerivedFunctorCounit.app _ ≫
+      Qh.map (mapHomotopyCategorySingleHom F (e.hom.app A ≫ H.map φ ≫ ψ)) := by
+  rw [← mapHomotopyCategorySingleHom_comp, Functor.map_comp, Functor.map_comp, Functor.map_comp]
+  simp only [Category.assoc]
+  erw [reassoc_of% (leftDerivedFunctorCounit_naturality
+    (A := H) (mapHomotopyCategorySingleHom G φ)),
+    reassoc_of% (leftDerivedFunctorFactorIso_hom_app_comp_counit e _)]
+
+end Derived
+
 end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -184,8 +237,6 @@ lemma leftDerivedUpperStarId_hom_app_unit (X : Scheme.{u}) :
     ← Functor.mapHomotopyCategorySingleHom_id]
   exact Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj (upperStarId Λ X) (𝟙_ _)
 
-set_option maxHeartbeats 1000000 in
--- the instances of the general lemmas are found for each of the categories of module objects
 /-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of the derived pullbacks of module
 objects is compatible with the unit comparisons. -/
 lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -193,18 +244,11 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
         L((f)^*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ g).hom ≫
           (leftDerivedUpperStarUnitIso Λ f).hom =
       (leftDerivedUpperStarUnitIso Λ (f ≫ g)).hom := by
-  rw [leftDerivedUpperStarUnitIso_hom_eq, leftDerivedUpperStarUnitIso_hom_eq,
-    leftDerivedUpperStarUnitIso_hom_eq, ← upperStarComp_hom_app_unit,
-    ← Functor.mapHomotopyCategorySingleHom_comp, Functor.map_comp, Functor.map_comp,
-    Functor.map_comp]
-  have hn := Functor.leftDerivedFunctorCounit_naturality (A := (f)^*⟦Λ⟧)
-    (Functor.mapHomotopyCategorySingleHom (g)^*⟦Λ⟧ (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv)
-  have hc := Functor.leftDerivedFunctorFactorIso_hom_app_comp_counit (upperStarComp Λ f g)
-    (𝟙_ _)
-  rw [← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso] at hc
-  simp only [Category.assoc]
-  erw [reassoc_of% hn, reassoc_of% hc]
-  rfl
+  have h := Functor.leftDerivedFunctorFactorIso_hom_app_single (upperStarComp Λ f g)
+    (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv
+  simp only [upperStarComp_hom_app_unit,
+    ← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso] at h
+  exact h
 
 /-! ### Bounded constructible complexes -/
 

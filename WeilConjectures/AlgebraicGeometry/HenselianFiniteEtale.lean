@@ -116,8 +116,8 @@ henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre 
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
 of the two rings; equivalently the open and closed subschemes of `Y₀` are exactly the closed
 fibres of those of `Y`. The restriction map itself need not be bijective.
-(blueprint: `thm-weil-pbc-henselian-idempotent-lifting`) 
-(blueprint: thm-weil-pbc-henselian-idempotent-lifting)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 @[stacks 0A0B]
 theorem Scheme.bijective_appTop_idempotent_of_henselianRing
@@ -150,8 +150,8 @@ Then base change along `i` is an equivalence from the category of finite étale 
 to the category of finite étale `Y₀`-schemes. In particular morphisms, and hence finite
 group actions (finitely many automorphisms subject to finitely many equations), lift
 uniquely.
-(blueprint: `thm-weil-pbc-finite-etale-lifting`) 
-(blueprint: thm-weil-pbc-finite-etale-lifting)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 @[stacks 0A48]
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
@@ -193,8 +193,8 @@ change along `i` is an equivalence from the category of finite étale `Y`-scheme
 category of finite étale `Y₀`-schemes; in particular morphisms and finite group actions
 lift uniquely. This is the case `I = 𝔪` of
 `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
-(blueprint: `lemma-weil-pbc-finite-etale-henselian-lifting`) 
-(blueprint: lemma-weil-pbc-finite-etale-henselian-lifting)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
     {A : Type u} [CommRing A] [HenselianLocalRing A]
@@ -212,8 +212,8 @@ bijective. Both sides classify `M`-torsors, i.e. finite étale schemes with a si
 transitive `M`-action (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`),
 and these correspond under the finite étale lifting
 `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
-(blueprint: `lemma-weil-pbc-h1-torsor-comparison`) 
-(blueprint: lemma-weil-pbc-h1-torsor-comparison)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--3`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--3)
 -/
 theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]

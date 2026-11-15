@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.RoosEventually
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-unbounded-window,
 `sk-lem-proper-unbounded-window-arbitrary.md` and its proof
-(blueprint: det-proper-unbounded-window-arbitrary).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
 
 The two statements retain the actual condensed coefficients, respectively a finite
 subextension of ℚ_ℓ and the finite-subextension-valued condensed algebraic closure.
@@ -224,8 +224,8 @@ namespace AlgebraicGeometry.ProEtale
 /-- Proper direct image for a finite subextension of ℚ_ℓ: eventual truncation stabilization,
 ind-constructible cohomology, and both cohomological amplitude bounds, for arbitrary K.
 Source: blueprint sk-lem-proper-unbounded-window-arbitrary, all four proof paragraphs;
-standing hypotheses inherited from det-proper-unbounded-window-bounded-below
-(blueprint: det-proper-unbounded-window-arbitrary).
+standing hypotheses inherited from lemma-proper-direct-image-unbounded-complexes--1
+(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
 
 Proof:
 1. The canonical lower Postnikov cone is a homotopy-limit cone, and cohomology
@@ -316,8 +316,8 @@ theorem proper_indConstructible_unbounded
 /-- Proper direct image for the condensed algebraic closure: eventual truncation stabilization,
 ind-constructible cohomology, and both cohomological amplitude bounds, for arbitrary K.
 Source: blueprint sk-lem-proper-unbounded-window-arbitrary, all four proof paragraphs;
-standing hypotheses inherited from det-proper-unbounded-window-bounded-below
-(blueprint: det-proper-unbounded-window-arbitrary).
+standing hypotheses inherited from lemma-proper-direct-image-unbounded-complexes--1
+(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
 
 Proof:
 1. The canonical lower Postnikov cone is a homotopy-limit cone, and cohomology

@@ -346,7 +346,7 @@ Proof:
    scalar unit on the full supported sheaf. Its Hom universal property makes the
    normalized reduction unique as a module-derived arrow, not only after forgetting
    coefficients or after precomposing by the global constant-to-support map.
-9. The class of sk-lem-geo-cartier has this relative normalization and comparison
+9. The class of lemma-cycle-class-cartier-divisor has this relative normalization and comparison
    mate. Uniqueness identifies it with cartierReducedPro, giving the last clause. -/
 theorem cartier_reduction_site_comparison (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) (hr : 0 < r)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ℓ ^ r : ℕ) : A) = 0)

@@ -21,7 +21,8 @@ with the same frame class, and restriction of supports along the composite `e' â
 composite of the restrictions, so the restricted fundamental class has the frame classes as frame
 restrictions, which characterizes `[Z' âŠ‚ X']` (`HasThomFrames.existsUnique_fundamentalClass`).
 This is the first step of the base change compatibility of the canonical orientation of a smooth
-morphism along an isomorphism of pairs (blueprint `sk-prop-sp-purity-bc`, the Frobenius square).
+morphism along an isomorphism of pairs (blueprint `proposition-compatibility-purity-base-change`,
+the Frobenius square).
 -/
 
 @[expose] public section

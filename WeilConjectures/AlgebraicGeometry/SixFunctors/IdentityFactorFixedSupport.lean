@@ -297,7 +297,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 /-- The geometric compositor on an etale-origin input is the pair of identity unit maps.
 This statement involves no intrinsic coefficient presentation or retained finite witness.
 
-Source: lem-amb-etale-compact-comparisons, the arbitrary-triangle formula; and
+Source: proposition-construction-independence-rf-shriek--7, the arbitrary-triangle formula; and
 lem-pur-compact-support-site-coherence, its composition square.
 (blueprint: lem-sf-identity-factor-fixed-support).
 

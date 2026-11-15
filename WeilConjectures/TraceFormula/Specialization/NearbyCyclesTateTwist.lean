@@ -77,6 +77,42 @@ lemma whiskerLeft_unit_comp_homEquiv (A : C) (B : D) :
 
 end CategoryTheory.Adjunction
 
+namespace CategoryTheory.Adjunction
+
+/-- A strong monoidal functor carries the projection formula, followed by a change of
+the second factor along an isomorphism, to an isomorphism. -/
+private lemma isIso_map_whiskerLeft_unit_comp_tensor
+    {B C D S : Type*} [Category B] [Category C] [Category D] [Category S]
+    [MonoidalCategory B] [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory S]
+    [BraidedCategory D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.Monoidal]
+    (E : B ⥤ C) (I : D ⥤ S) [E.Monoidal] [I.Monoidal]
+    {W : D} (hW : IsDualizable W) {T : B} (e : E.obj T ≅ F.obj W) (A : B) :
+    IsIso (I.obj (G.obj (E.obj A)) ◁ I.map (adj.unit.app W ≫ G.map e.inv) ≫
+      (Functor.LaxMonoidal.μ I _ _ ≫ I.map
+        (adj.homEquiv _ _ (Functor.OplaxMonoidal.δ F _ _ ≫
+          (adj.counit.app (E.obj A) ⊗ₘ adj.counit.app (E.obj T))) ≫
+            G.map (Functor.LaxMonoidal.μ E A T)))) := by
+  let := adj.rightAdjointLaxMonoidal
+  have hp := adj.isIso_projectionMorphism_of_isDualizable hW (E.obj A)
+  have hunit : G.obj (E.obj A) ◁ adj.unit.app W ≫
+      Functor.LaxMonoidal.μ G (E.obj A) (F.obj W) =
+        adj.projectionMorphism (E.obj A) W :=
+    adj.whiskerLeft_unit_comp_homEquiv (E.obj A) W
+  have key : G.obj (E.obj A) ◁ (adj.unit.app W ≫ G.map e.inv) ≫
+      Functor.LaxMonoidal.μ G (E.obj A) (E.obj T) =
+        adj.projectionMorphism (E.obj A) W ≫ G.map (E.obj A ◁ e.inv) := by
+    rw [MonoidalCategory.whiskerLeft_comp, Category.assoc,
+      Functor.LaxMonoidal.μ_natural_right, ← Category.assoc, hunit]
+  change IsIso (I.obj (G.obj (E.obj A)) ◁ I.map (adj.unit.app W ≫ G.map e.inv) ≫
+    (Functor.LaxMonoidal.μ I _ _ ≫ I.map
+      (Functor.LaxMonoidal.μ G (E.obj A) (E.obj T) ≫
+        G.map (Functor.LaxMonoidal.μ E A T))))
+  rw [Functor.LaxMonoidal.μ_natural_right_assoc, ← I.map_comp,
+    ← Category.assoc, key, Category.assoc]
+  infer_instance
+
+end CategoryTheory.Adjunction
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -115,8 +151,6 @@ noncomputable def twistSpecializationMap
   L((M.i)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app W ≫
     R((M.j)_*⟦Λ⟧).map e.inv)
 
-set_option maxHeartbeats 1000000 in
--- the derived functors of the model unfold to large terms when rewriting
 attribute [local instance] DerivedCategory.braidedCategory' in
 /-- **Nearby cycles commute with twists by dualizable objects**: for a dualizable `W` on the total
 space and `e : Lε^* T ≅ Lj^* W`, the lax tensor map `Ψ A ⊗ Ψ T ⟶ Ψ (A ⊗ T)`, precomposed with
@@ -131,28 +165,8 @@ theorem isIso_whiskerLeft_twistSpecializationMap_comp_tensorMap
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     IsIso ((M.nearbyCycles Λ).obj A ◁ M.twistSpecializationMap Λ e ≫ M.tensorMap Λ A T) := by
-  have hp := (derivedUpperStarLowerStarAdjunction Λ M.j).isIso_projectionMorphism_of_isDualizable
-    hW (L((M.ε)^*⟦Λ⟧).obj A)
-  have key : R((M.j)_*⟦Λ⟧).obj (L((M.ε)^*⟦Λ⟧).obj A) ◁
-      ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app W ≫ R((M.j)_*⟦Λ⟧).map e.inv) ≫
-        lowerStarTensorMap' Λ M.j (L((M.ε)^*⟦Λ⟧).obj A) (L((M.ε)^*⟦Λ⟧).obj T) =
-      (derivedUpperStarLowerStarAdjunction Λ M.j).projectionMorphism (L((M.ε)^*⟦Λ⟧).obj A) W ≫
-        R((M.j)_*⟦Λ⟧).map (L((M.ε)^*⟦Λ⟧).obj A ◁ e.inv) := by
-    rw [MonoidalCategory.whiskerLeft_comp, Category.assoc,
-      lowerStarTensorMap'_natural_right Λ M.j (L((M.ε)^*⟦Λ⟧).obj A) e.inv,
-      ← Category.assoc, lowerStarTensorMap']
-    exact congrArg (· ≫ R((M.j)_*⟦Λ⟧).map (L((M.ε)^*⟦Λ⟧).obj A ◁ e.inv))
-      ((derivedUpperStarLowerStarAdjunction Λ M.j).whiskerLeft_unit_comp_homEquiv _ W)
-  have hμ : (M.nearbyCycles Λ).obj A ◁ M.twistSpecializationMap Λ e ≫
-      Functor.LaxMonoidal.μ L((M.i)^*⟦Λ⟧) (R((M.j)_*⟦Λ⟧).obj (L((M.ε)^*⟦Λ⟧).obj A))
-        (R((M.j)_*⟦Λ⟧).obj (L((M.ε)^*⟦Λ⟧).obj T)) =
-      Functor.LaxMonoidal.μ L((M.i)^*⟦Λ⟧) _ _ ≫ L((M.i)^*⟦Λ⟧).map
-        (R((M.j)_*⟦Λ⟧).obj (L((M.ε)^*⟦Λ⟧).obj A) ◁
-          ((derivedUpperStarLowerStarAdjunction Λ M.j).unit.app W ≫
-            R((M.j)_*⟦Λ⟧).map e.inv)) :=
-    Functor.LaxMonoidal.μ_natural_right L((M.i)^*⟦Λ⟧) _ _
-  rw [tensorMap, reassoc_of% hμ, ← Functor.map_comp, ← Category.assoc, key, Category.assoc]
-  infer_instance
+  exact (derivedUpperStarLowerStarAdjunction Λ M.j).isIso_map_whiskerLeft_unit_comp_tensor
+    L((M.ε)^*⟦Λ⟧) L((M.i)^*⟦Λ⟧) hW e A
 
 
 /-- **Nearby cycles of a twist by a dualizable object**: `Ψ (A ⊗ T) ≅ Ψ A ⊗ Li^* W` for a

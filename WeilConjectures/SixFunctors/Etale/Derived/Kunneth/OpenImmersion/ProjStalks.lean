@@ -21,7 +21,7 @@ the stalk at the image `s ≫ uX`
 Moreover, whether a morphism of sheaves is an isomorphism on the stalk at a geometric point only
 depends on the underlying point (`AlgebraicGeometry.Etale.isIso_sheafFiber_map_of_apply_eq`).
 These are the inputs for transporting the hypothesis of the projective case of blueprint
-`lem-kun-0f1h` to the base change to a separable closure.
+`corollary-open-direct-image-over-field--2` to the base change to a separable closure.
 -/
 
 @[expose] public section

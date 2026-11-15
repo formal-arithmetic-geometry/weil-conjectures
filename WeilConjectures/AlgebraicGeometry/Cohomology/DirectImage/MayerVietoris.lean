@@ -68,18 +68,16 @@ lemma le_of_image_preimage_ι_comp {W W' : X.Opens} (h : W' ≤ W) (V : T.Opens)
   rw [image_preimage_ι_comp, image_preimage_ι_comp]
   exact inf_le_inf_left _ h
 
-set_option maxHeartbeats 1000000 in
--- composing the restriction maps unfolds the sections of pushforwards and restrictions
 lemma pushforwardRestrictMapApp_app {W W' : X.Opens} (h : W' ≤ W) (M : X.Modules)
     (V : T.Opens) :
     (pushforwardRestrictMapApp f h M).app V =
       M.presheaf.map (homOfLE (le_of_image_preimage_ι_comp f h V)).op := by
   simp only [pushforwardRestrictMapApp, Hom.comp_app, pushforward_map_app,
     restrictAdjunction_unit_app_app, pushforwardComp_hom_app_app, pushforwardCongr_hom_app_app,
-    restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app]
+    restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app, restrict_map,
+    ← Functor.map_comp]
   erw [Category.id_comp]
-  rw [restrict_map (M.restrict W.ι) (X.homOfLE h), restrict_map M W.ι, restrict_map M W.ι]
-  rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp]
+  simp only [← Functor.map_comp]
   rfl
 
 /-- The restriction map `f_{W,*} (M|_W) ⟶ f_{W',*} (M|_{W'})` for opens `W' ≤ W` of `X`, as a

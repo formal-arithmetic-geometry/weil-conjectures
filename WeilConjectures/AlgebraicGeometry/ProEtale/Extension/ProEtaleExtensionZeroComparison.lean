@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 Source: Stacks Project, Tag 09AF (`lemma-jshriek-comparison`); Weil conjectures
 blueprint, `sec-smooth-purity/sk-prop-sf-cbc`
-(blueprint: lem-cbc-proetale-extension-zero-comparison).
+(blueprint: proposition-comparison-immersions--1).
 
 The comparison is the existing adjunction mate
 `openImmersionLowerShriekComparisonUpperStarIso`, not a chosen isomorphism.
@@ -185,7 +185,7 @@ namespace AlgebraicGeometry.ProEtale
 extension to iterated extension. It is the unique left-adjoint comparison for the
 canonical composition of inverse images, exactly as on the etale site.
 Source: Stacks Project, Tags 09AE and 03EH; blueprint proof, step 7
-(blueprint: lem-cbc-proetale-extension-zero-comparison). -/
+(blueprint: proposition-comparison-immersions--1). -/
 noncomputable def proEtaleOpenExtensionComp (Λ : Type (u + 1)) [CommRing Λ]
     {V U X : Scheme.{u}} (k : V ⟶ U) (j : U ⟶ X)
     [IsOpenImmersion k] [IsOpenImmersion j] :
@@ -536,25 +536,25 @@ private lemma comparison_identity (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.
 with composition and identity open immersions. Naturality in `F` is built into the
 existing natural isomorphism `openImmersionLowerShriekComparisonUpperStarIso`.
 Source: Stacks Project, Tag 09AF; Weil conjectures blueprint, order 1584
-(blueprint: lem-cbc-proetale-extension-zero-comparison).
+(blueprint: proposition-comparison-immersions--1).
 
 Proof plan (the node's eight steps):
 1. The etale restriction formula and extension adjunction identify the right adjoint
-   of `ν_X^* j_!` (lem-weil-pbc-etale-composition-cancellation,
+   of `ν_X^* j_!` (definition-torsion-sheaves--3,
    lem-weil-pbc-etale-inverse-image-restriction,
    lem-weil-pbc-extension-by-zero-adjunction). The identities respect scalar actions.
 2. Pro-etale localization and extension adjunction give the other right adjoint
    (lem-weil-proetale-weakly-etale-localization,
-   lem-weil-extension-by-zero-adjunction). No stalk conservativity is used.
+   prose-03-02). No stalk conservativity is used.
 3. Both right adjoints evaluate at `W → U` as `M(W → U → X)` with the same
-   restriction and scalar maps (def-weil-pbc-site-comparison-morphism).
+   restriction and scalar maps (proposition-comparison-morphism-inverse-image).
 4. Compose the comparison and extension adjunction Hom bijections; insert this
    identity-on-sections right-adjoint comparison to obtain the natural bijection Ψ.
 5. Evaluating Ψ and its inverse on identities gives mutually inverse maps β and α.
    The existing comparison is exactly α, the inverse mate of that section identity.
 6. Naturality of the Hom bijections in their source gives naturality in `F`.
 7. The two extension composition maps are the mates of composition of restrictions
-   (lem-cbc-extension-zero-composition, def-pur-localized-ringed-site and the
+   (proposition-composition-base-change-rf-shriek--1, def-pur-localized-ringed-site and the
    two extension adjunctions). Their transposes are the same section identities.
 8. Pasting the two Ψ bijections cancels the intermediate comparison adjunction;
    transitivity of section identities gives Ψ for `k ≫ j`. Evaluate at identity

@@ -30,19 +30,19 @@ over `f₂`, because `f₁` and `f₂` define the same object of `Over Y`.
 ## Main definitions
 
 - `CategoryTheory.Over.DescentDatum`: a descent datum on `V : Over X` relative to `p : X ⟶ Y`
-  (blueprint `def-pd-descent-datum`).
+  (blueprint `proposition-jacobian-over-ground-field--1`).
 - `CategoryTheory.Over.DescentDatum.IsEffective`: the datum comes from an object over `Y`
-  (blueprint `def-pd-descent-datum`).
+  (blueprint `proposition-jacobian-over-ground-field--1`).
 - `CategoryTheory.Over.DescentDatum.IsBaseChange`: a descent datum is the base change of
   another one.
 - `CategoryTheory.Functor.RepresentableBy.overDescentDatum`: the canonical descent datum on an
   object representing the restriction of a presheaf to `Over X` (blueprint
-  `lem-pd-canonical-descent-datum`).
+  `proposition-jacobian-over-ground-field--1`).
 
 ## Main statements
 
 - `CategoryTheory.Functor.RepresentableBy.overTransport_overTransport`: the cocycle condition for
-  the canonical descent datum (blueprint `lem-pd-descent-cocycle`).
+  the canonical descent datum (blueprint `proposition-jacobian-over-ground-field--1`).
 -/
 
 @[expose] public section
@@ -72,7 +72,7 @@ pseudofunctor `F` on `C`: its `hom` compares the pullbacks of the object along a
 pseudofunctor `X ↦ Over X` available, and the points of `V` are what the descent arguments
 below manipulate.
 
-(blueprint: `def-pd-descent-datum`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 structure DescentDatum (V : Over X) where
   /-- The transport of points of `V` over `f₁` to points of `V` over `f₂`. -/
   transport {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) : (Over.mk f₁ ⟶ V) → (Over.mk f₂ ⟶ V)
@@ -97,7 +97,7 @@ variable {p} {V : Over X}
 `p` of an object `V₀` over `Y`, through a morphism `q : V ⟶ V₀` which is invariant under the
 transport. Equivalently, `V ≅ V₀ ×_Y X` over `X` and the datum is the one induced by `V₀`.
 
-(blueprint: `def-pd-descent-datum`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 def IsEffective (D : DescentDatum p V) : Prop :=
   ∃ (V₀ : Over Y) (q : V.left ⟶ V₀.left), IsPullback q V.hom V₀.hom p ∧
     ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
@@ -245,7 +245,7 @@ triangle
 ```
 commutes, where `V(f)` denotes the points of `V` over `f`.
 
-(blueprint: `lem-pd-descent-cocycle`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 theorem overTransport_overTransport {T : C} (f₁ f₂ f₃ : T ⟶ X) (h₁₂ : f₁ ≫ p = f₂ ≫ p)
     (h₂₃ : f₂ ≫ p = f₃ ≫ p) (a : Over.mk f₁ ⟶ V) :
     r.overTransport f₂ f₃ h₂₃ (r.overTransport f₁ f₂ h₁₂ a) =
@@ -266,7 +266,7 @@ presheaf `F` on `Over Y` to `Over X`, then `V` carries a canonical descent datum
 datum is the unique isomorphism between them compatible with the representations. No choice is
 involved, which is what makes the datum canonical.
 
-(blueprint: `lem-pd-canonical-descent-datum`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`) -/
 def overDescentDatum : Over.DescentDatum p V where
   transport := r.overTransport
   transport_homMk_comp := r.overTransport_homMk_comp

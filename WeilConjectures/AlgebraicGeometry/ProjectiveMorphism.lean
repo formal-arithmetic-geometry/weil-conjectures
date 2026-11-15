@@ -24,8 +24,8 @@ projective space `ℙ(n; Y)` followed by the projection) are the H-projective mo
 - `AlgebraicGeometry.isProper_isStableUnderBaseChange_and_comp` (blueprint
   `lem-kun-proper-stability`).
 - `AlgebraicGeometry.exists_isHProjective_compactification_of_isAffine` (blueprint
-  `lem-kun-compactification-affine`): an affine scheme of finite type over a field is a dense
-  open subscheme of a projective scheme of the same dimension.
+  `corollary-open-direct-image-over-field--2`): an affine scheme of finite type over a field is a
+  dense open subscheme of a projective scheme of the same dimension.
 -/
 
 @[expose] public section
@@ -62,8 +62,8 @@ theorem isProper_isStableUnderBaseChange_and_comp :
         (b : Y ⟶ Spec (.of k)) [IsProper a], IsProper (pullback.snd a b) :=
   ⟨inferInstance, inferInstance, fun _ _ ↦ inferInstance⟩
 
-/-- Blueprint `lem-kun-compactification-affine`: **compactification of an affine scheme.** Let
-`X` be an affine scheme of finite type over a field `K`. There is an open immersion
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **compactification of an affine scheme.**
+Let `X` be an affine scheme of finite type over a field `K`. There is an open immersion
 `j : X ⟶ X̄` over `K` with dense image into a projective `K`-scheme `X̄`, and
 `dim X̄ = dim X`. Take an immersion `X ⟶ ℙ(n; K)` and let `X̄` be the scheme-theoretic
 closure of its image: it is a closed subscheme of `ℙ(n; K)`, the immersion factors through it as

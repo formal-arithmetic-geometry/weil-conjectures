@@ -43,10 +43,10 @@ with degree zero equal to `G` and negative powers formed from the inverse torsor
 surjective with kernel `G`, and its fibre over one is the given torsor.
 (2) The long exact sequence (`def-sc-topological-abelian-cohomology`) supplies the
 boundary map. The boundary characterization (`lem-sc-torsor-h1-zariski-boundary-class`)
-identifies the class of the fibre under the canonical bijection (`lem-sc-torsor-h1`)
-with the boundary of one. The fibre is isomorphic to the original torsor by (1).
-(3) For every short exact sequence, the same boundary characterization constructs its
-fibre as a `G`-torsor and identifies its class with the boundary of one.
+identifies the class of the fibre under the canonical bijection
+(`lemma-cohomology-multiplicative-group--3`) with the boundary of one. The fibre is isomorphic to
+the original torsor by (1). (3) For every short exact sequence, the same boundary characterization
+constructs its fibre as a `G`-torsor and identifies its class with the boundary of one.
 (blueprint: lem-sc-torsor-h1-boundary-representative) -/
 theorem torsor_h1_boundary_representative (X : Scheme.{u})
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (T : G.Torsor) :

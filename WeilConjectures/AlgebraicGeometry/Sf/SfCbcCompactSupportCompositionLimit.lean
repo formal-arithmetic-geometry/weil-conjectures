@@ -38,8 +38,8 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-! # Normalized reconstruction of composable completed operations
 
-Source: blueprint fix-lem-exchanges, Proof Step 5, and its strict-diagram refinement
-(blueprint: lem-sf-cbc-compact-support-composition-limit).
+Source: blueprint proposition-composition-base-change-rf-shriek, Proof Step 5, and its
+strict-diagram refinement (blueprint: lem-sf-cbc-compact-support-composition-limit).
 
 All categories are the published equivalent small models of the small pro-etale sites.
 The model enlarges only Hom universes. Letters carry scheme maps, and both functors
@@ -133,7 +133,7 @@ def sfCbcMorphism {U V : Scheme.{t}} (u : U ⟶ V) :
       (sfCbcModelInverse u) (sfCbcModelDirect u) (sfCbcModelAdjunction u)) }
 
 /-- A letter contains exactly its geometric map, with open immersions certified.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 inductive SfCbcLetter : Scheme.{t} → Scheme.{t} → Type (t + 1) where
   | pullback {U V : Scheme.{t}} (u : U ⟶ V) : SfCbcLetter V U
@@ -142,7 +142,7 @@ inductive SfCbcLetter : Scheme.{t} → Scheme.{t} → Type (t + 1) where
       SfCbcLetter U V
 
 /-- A finite composable chain; the indices enforce source/target matching.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 inductive SfCbcWord : Scheme.{t} → Scheme.{t} → Type (t + 1) where
   | nil (T : Scheme.{t}) : SfCbcWord T T
@@ -151,7 +151,7 @@ inductive SfCbcWord : Scheme.{t} → Scheme.{t} → Type (t + 1) where
 variable {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
 
 /-- The completed functor of a letter is computed from its map.
-Source: Stacks 099N; blueprint fix-lem-exchanges Step 5
+Source: Stacks 099N; blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcLetter.complete {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     (sfCbcSite S).derived (ULift.{t + 1, t} A) ⥤
@@ -165,7 +165,7 @@ def SfCbcLetter.complete {S T : Scheme.{t}} (F : SfCbcLetter S T) :
 
 /-- The strict functor is termwise inverse image, derived termwise direct image,
 or the published exact termwise extension, according to the letter.
-Source: Stacks 0941, 099N; blueprint fix-lem-exchanges Step 5
+Source: Stacks 0941, 099N; blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcLetter.strict {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     (sfCbcSite S).towerDerived (ULift.{t + 1, t} A) ⥤
@@ -178,7 +178,7 @@ def SfCbcLetter.strict {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     sfCbcDerivedTowerExtension j A
 
 /-- Completed word functors are recursive composites, with identity at length zero.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcWord.complete {S T : Scheme.{t}} (W : SfCbcWord S T) :
     (sfCbcSite S).derived (ULift.{t + 1, t} A) ⥤
@@ -188,7 +188,7 @@ def SfCbcWord.complete {S T : Scheme.{t}} (W : SfCbcWord S T) :
   | .snoc W F => complete W ⋙ F.complete d
 
 /-- Strict word functors are recursive composites of the actual strict letters.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcWord.strict {S T : Scheme.{t}} (W : SfCbcWord S T) :
     (sfCbcSite S).towerDerived (ULift.{t + 1, t} A) ⥤
@@ -198,7 +198,7 @@ def SfCbcWord.strict {S T : Scheme.{t}} (W : SfCbcWord S T) :
   | .snoc W F => strict W ⋙ F.strict (A := A)
 
 /-- The specified reduced completion unit, before any tower evaluation.
-Source: Stacks 099M; blueprint fix-lem-exchanges Steps 1--2
+Source: Stacks 099M; blueprint proposition-composition-base-change-rf-shriek Steps 1--2
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def sfCbcModelReducedUnit (T : Scheme.{t}) :
     (sfCbcSite T).reduction _ (sfCbcModelIdeal d) ⟶
@@ -209,13 +209,13 @@ def sfCbcModelReducedUnit (T : Scheme.{t}) :
 
 /-- The proof needed to take the unique inverse of the specified reduced unit.
 It is a conclusion of the reconstruction theorem, never an assumption of that theorem.
-Source: Stacks 099M; blueprint fix-lem-exchanges Step 2
+Source: Stacks 099M; blueprint proposition-composition-base-change-rf-shriek Step 2
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcReducedUnitsInvertible : Prop := ∀ T : Scheme.{t}, IsIso (sfCbcModelReducedUnit d T)
 
 /-- The counit-tensor projection map as one natural transformation of strict towers.
 Its component is exactly AdicSites.Morphism.towerProjection.
-Source: Stacks 0B56; blueprint fix-lem-exchanges Step 3
+Source: Stacks 0B56; blueprint proposition-composition-base-change-rf-shriek Step 3
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def sfCbcDirectQ {U V : Scheme.{t}} (u : U ⟶ V) :
     (sfCbcMorphism u).push (ULift.{t + 1, t} A) ⋙
@@ -234,7 +234,7 @@ def sfCbcDirectQ {U V : Scheme.{t}} (u : U ⟶ V) :
 strict pullback/tensor comparison. Direct image is the diagram counit-tensor mate.
 Open extension uses exactly the normalized tensor comparison of the published extension
 lemma, preceded by inverse reduced unit, hence is its q_j in the small model.
-Source: blueprint fix-lem-exchanges Steps 2--4
+Source: blueprint proposition-composition-base-change-rf-shriek Steps 2--4
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcLetter.q (hunit : SfCbcReducedUnitsInvertible d)
     {S T : Scheme.{t}} (F : SfCbcLetter S T) :
@@ -254,7 +254,7 @@ def SfCbcLetter.q (hunit : SfCbcReducedUnitsInvertible d)
 
 /-- The strict comparison is recursively defined by the stipulated concatenation formula.
 For the empty word it is the identity, expressed by the canonical functor unitors.
-Source: blueprint fix-lem-exchanges Steps 1 and 5
+Source: blueprint proposition-composition-base-change-rf-shriek Steps 1 and 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcWord.q (hunit : SfCbcReducedUnitsInvertible d) :
     {S T : Scheme.{t}} → (W : SfCbcWord S T) →
@@ -265,7 +265,7 @@ def SfCbcWord.q (hunit : SfCbcReducedUnitsInvertible d) :
       whiskerRight (SfCbcWord.q hunit W) (F.strict (A := A))
 
 /-- Reconstruction is eta followed by derived strict inverse limit of q, by definition.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcWord.a (hunit : SfCbcReducedUnitsInvertible d)
     {S T : Scheme.{t}} (W : SfCbcWord S T) :
@@ -275,7 +275,7 @@ def SfCbcWord.a (hunit : SfCbcReducedUnitsInvertible d)
     whiskerRight (W.q d hunit) ((sfCbcSite T).rlim _)
 
 /-- Concatenation appends the letters of V after those of W, with matching middle scheme.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcWord.append {S U T : Scheme.{t}} (W : SfCbcWord S U)
     (V : SfCbcWord U T) : SfCbcWord S T :=
@@ -284,7 +284,7 @@ def SfCbcWord.append {S U T : Scheme.{t}} (W : SfCbcWord S U)
   | .snoc V F => (append W V).snoc F
 
 /-- The same canonical reassociation for the actual strict tower functors.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcWord.appendStrictIso {S U T : Scheme.{t}} (W : SfCbcWord S U)
     (V : SfCbcWord U T) :
@@ -295,7 +295,7 @@ def SfCbcWord.appendStrictIso {S U T : Scheme.{t}} (W : SfCbcWord S U)
       Functor.associator _ _ _
 
 /-- A parenthesized expression in composable subwords. Every finite bracketing is included.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 inductive SfCbcExpression : Scheme.{t} → Scheme.{t} → Type (t + 1) where
   | word {S T : Scheme.{t}} (W : SfCbcWord S T) : SfCbcExpression S T
@@ -303,7 +303,7 @@ inductive SfCbcExpression : Scheme.{t} → Scheme.{t} → Type (t + 1) where
       SfCbcExpression S T
 
 /-- Forget the parentheses, retaining the complete composable chain.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcExpression.flatten {S T : Scheme.{t}} (E : SfCbcExpression S T) : SfCbcWord S T :=
   match E with
@@ -311,7 +311,7 @@ def SfCbcExpression.flatten {S T : Scheme.{t}} (E : SfCbcExpression S T) : SfCbc
   | .comp E F => (flatten E).append (flatten F)
 
 /-- The completed functor with precisely the parentheses of the expression.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcExpression.complete {S T : Scheme.{t}} (E : SfCbcExpression S T) :
     (sfCbcSite S).derived (ULift.{t + 1, t} A) ⥤
@@ -321,7 +321,7 @@ def SfCbcExpression.complete {S T : Scheme.{t}} (E : SfCbcExpression S T) :
   | .comp E F => complete E ⋙ complete F
 
 /-- The strict functor with the same parentheses.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcExpression.strict {S T : Scheme.{t}} (E : SfCbcExpression S T) :
     (sfCbcSite S).towerDerived (ULift.{t + 1, t} A) ⥤
@@ -331,7 +331,7 @@ def SfCbcExpression.strict {S T : Scheme.{t}} (E : SfCbcExpression S T) :
   | .comp E F => strict E ⋙ strict F
 
 /-- Reassociation from the flattened strict chain to the chosen parentheses.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcExpression.strictIso {S T : Scheme.{t}} (E : SfCbcExpression S T) :
     E.flatten.strict (A := A) ≅ E.strict (A := A) :=
@@ -342,7 +342,7 @@ def SfCbcExpression.strictIso {S T : Scheme.{t}} (E : SfCbcExpression S T) :
       isoWhiskerLeft (E.strict (A := A)) (strictIso F)
 
 /-- The comparison obtained by composing with the chosen parentheses.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcExpression.q (hunit : SfCbcReducedUnitsInvertible d)
     {S T : Scheme.{t}} (E : SfCbcExpression S T) :
@@ -354,7 +354,7 @@ def SfCbcExpression.q (hunit : SfCbcReducedUnitsInvertible d)
       whiskerRight (SfCbcExpression.q hunit E) (F.strict (A := A))
 
 /-- Reconstruction with the chosen parentheses uses the same eta then L(q) rule.
-Source: blueprint fix-lem-exchanges Step 5
+Source: blueprint proposition-composition-base-change-rf-shriek Step 5
 (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
 def SfCbcExpression.a (hunit : SfCbcReducedUnitsInvertible d)
     {S T : Scheme.{t}} (E : SfCbcExpression S T) :

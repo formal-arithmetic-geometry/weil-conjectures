@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 Let `k₀` be a finite field with `q` elements, `k̄` an algebraic closure, `σ : k̄ ≅ k̄` the geometric
 Frobenius (the inverse of `x ↦ x ^ q`) and `ℓ ≠ p` a prime. The geometric Frobenius acts on the
-Tate twists by `q^{-m}` (blueprint `def-weil-frobenius-coefficient-twists`), at every coefficient
+Tate twists by `q^{-m}` (blueprint `prose-10-21`), at every coefficient
 stage:
 
 * at the finite stages, on `μ_{ℓ^N}(k̄)`: `σ(ζ) = ζ^{c}` with `c q = 1` in `ℤ/ℓ^N`
@@ -65,7 +65,7 @@ lemma cyclotomicCharacter_frobenius :
     ← pow_eq_pow_mod _ ((mem_rootsOfUnity _ _).mp ht)]
   simp
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: Frobenius on coefficient twists
+/-- Blueprint `prose-10-21`: Frobenius on coefficient twists
 
 At the integral stage: the geometric Frobenius `σ` of `k̄` acts on `ℤ_ℓ(1) = lim μ_{ℓ^r}(k̄)` by
 `q⁻¹`, that is, its `ℓ`-adic cyclotomic character `χ_ℓ(σ)` satisfies `χ_ℓ(σ) q = 1`. -/
@@ -78,7 +78,7 @@ theorem cyclotomicCharacter_geometricFrobenius_mul :
         (AlgebraicClosure k₀)).toRingEquiv⁻¹ := rfl
   rw [hinv, map_inv, ← cyclotomicCharacter_frobenius, Units.inv_mul]
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: Frobenius on coefficient twists
+/-- Blueprint `prose-10-21`: Frobenius on coefficient twists
 
 At the finite stages: the geometric Frobenius `σ` of `k̄` acts on `μ_{ℓ^N}(k̄)` by `q⁻¹`, that is,
 `σ(ζ) = ζ^c` for the value `c ∈ (ℤ/ℓ^N)ˣ` of the modular cyclotomic character, and `c q = 1`. This
@@ -97,7 +97,7 @@ end Fintype
 
 variable [Finite k₀] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: Frobenius on coefficient twists
+/-- Blueprint `prose-10-21`: Frobenius on coefficient twists
 
 At the stage `ℚ̄_ℓ`: geometric Frobenius acts on the Tate twist `ℚ̄_ℓ(m)` by `q^{-m}`, for every
 `m ∈ ℤ`: as a Weil sheaf, `ℚ̄_ℓ(m)` is the constant Weil twist of the constant sheaf `ℚ̄_ℓ` by a
@@ -110,7 +110,7 @@ theorem exists_tateTwistSheaf_iso_constantTwist (m : ℤ) :
       Nonempty (tateTwistSheaf k₀ l X m ≅ (adicConstant k₀ l X).constantTwist c) :=
   ⟨cyclotomicUnit k₀ l ^ m, cyclotomicUnit_zpow_eq m, ⟨tateTwistSheafIso k₀ l X m⟩⟩
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: Frobenius on coefficient twists
+/-- Blueprint `prose-10-21`: Frobenius on coefficient twists
 
 In particular geometric Frobenius acts on `ℚ̄_ℓ(-d)` by multiplication by `q^d`, for
 `d ∈ ℤ_{≥ 0}`. -/

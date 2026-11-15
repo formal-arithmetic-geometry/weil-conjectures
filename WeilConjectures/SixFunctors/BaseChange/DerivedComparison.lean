@@ -40,8 +40,9 @@ general computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac`.
 `AlgebraicGeometry.Etale.baseChange` commutes with the shifts
 (`AlgebraicGeometry.Etale.commShift_baseChange`).
 
-This is the identification of the base-change map of blueprint `sbc-def-base-change-map` with
-the derived exchange morphism of the proper base change chapter.
+This is the identification of the base-change map of blueprint
+`definition-derived-base-change-map--1` with the derived exchange morphism of the proper base change
+chapter.
 -/
 
 @[expose] public section
@@ -166,7 +167,7 @@ omit [HasSmallSiteSheafify A] in
 `AlgebraicGeometry.Etale.baseChange`, built from the units and counits of the derived
 adjunctions, is the derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`,
 characterised by being computed by the underived base change map on complexes.
-(blueprint: `sk-def-exchange`, `def-weil-pbc-derived-exchange`) -/
+(blueprint: `definition-derived-base-change-map`) -/
 theorem Etale.baseChange_eq_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     Etale.baseChange A sq = Etale.derivedBaseChangeMapPlus A sq := by
   refine Etale.derivedBaseChangeMapPlus_ext A sq _ fun K => ?_

@@ -76,7 +76,7 @@ Source: Stacks Project, Tag 09A1, qcqs subsite paragraph, and Tag 098M.
 (auxiliary; not a blueprint node)
 
 Proof plan:
-1. Every map between objects is weakly etale (`lem-trf-weakly-etale-between-objects`).
+1. Every map between objects is weakly etale (`lemma-stability--5`).
    Weakly etale maps are stable under base change and composition
    (`lem-weil-pbc-weakly-etale-composition-base-change`). A map from a qcqs scheme
    to a qcqs scheme is qcqs, and these properties persist under base change and

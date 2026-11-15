@@ -34,7 +34,7 @@ The structure maps hᵢ of the node are `h.app (op i)`; its induced limit map h 
 Proof:
 1. Fix an index b. Its upper tail is directed and cofinal. Choose a finite affine open
    cover V₁, …, Vₙ of T; n may be zero (def-pc-scheme,
-   def-weil-pbc-scheme-conventions).
+   definition-ind-etale-pro-etale-weakly--3).
 2. Put Wⱼᵢ = hᵢ⁻¹(Vⱼ) and Wⱼ = f⁻¹(Vⱼ). Compatibility identifies these on the
    tail with inverse images of Wⱼᵦ under the transition maps and the limit projection.
    Wⱼ is affine because f is affine (pqf-def-affine-morphism). Each Wⱼᵢ is qcqs:

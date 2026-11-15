@@ -1132,7 +1132,6 @@ private theorem rational_abelian :
     ⟨fun J ↦ Adjunction.hasLimitsOfShape_of_equivalence (d.eR E).functor⟩
   exact ⟨abelianOfEquivalence (d.eR E).functor⟩
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem rational_tensor_from_integral
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d)
@@ -1145,10 +1144,8 @@ private theorem rational_tensor_from_integral
     (rR := fun F ↦ ((d.eR E).functor.obj F).obj)
     (hloc := ?_) (hIT := hIT E)
   intro F
-  obtain ⟨η, hη, _⟩ := hcanon.localization E F
-  exact ⟨η, hη⟩
+  exact (hcanon.localization E F).imp fun _ h ↦ h.1
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem rational_unit_from_integral
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d)
@@ -1161,8 +1158,7 @@ private theorem rational_unit_from_integral
     (rR := fun F ↦ ((d.eR E).functor.obj F).obj)
     (hloc := ?_) (hIU := hIU E)
   intro F
-  obtain ⟨η, hη, _⟩ := hcanon.localization E F
-  exact ⟨η, hη⟩
+  exact (hcanon.localization E F).imp fun _ h ↦ h.1
 
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 omit [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]

@@ -142,8 +142,9 @@ import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Models for constant-coefficient strict reduction on the original pro-etale site
 
-Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint, fix-lem-exchanges,
-Step 4 (blueprint: lem-sp-completion-mate-comparison).
+Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint,
+proposition-composition-base-change-rf-shriek, Step 4 (blueprint:
+lem-sp-completion-mate-comparison).
 
 This is the original-site specialization of the existing strict quotient-tower construction.
 The site retains object universe t+1 and morphism universe t.

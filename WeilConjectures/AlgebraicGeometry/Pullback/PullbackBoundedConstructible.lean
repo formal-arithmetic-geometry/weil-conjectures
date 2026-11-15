@@ -24,7 +24,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 Source: Weil conjectures blueprint, proper base change, node order 1303;
 Stacks, Tags 09AK, 09AL and 09B5
-(blueprint: lem-weil-pbc-pullback-preserves-bounded-constructible).
+(blueprint: lemma-inverse-image-tensor-product--1).
 
 The coefficient categories and the essential-image predicate are the recorded
 `FiniteCoefficientDerivedCategory` and `isBoundedConstructibleFiniteCoefficient`.

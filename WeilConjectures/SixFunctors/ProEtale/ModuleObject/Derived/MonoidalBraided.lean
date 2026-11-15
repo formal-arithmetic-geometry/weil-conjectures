@@ -136,8 +136,6 @@ lemma derivedBraiding_hom_μ_Qh {Z : Scheme.{u}}
     (β_ (Qh.obj K) (Qh.obj M)).hom ≫ μ Qh M K = μ Qh K M ≫ Qh.map (β_ K M).hom :=
   DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso _ _) K M
 
-set_option maxHeartbeats 2000000 in
--- the images of complexes in the homotopy category are unfolded
 /-- The tensor comparison of `Lf^*` commutes with the derived braidings at images of K-flat
 complexes. -/
 lemma leftDerivedUpperStarTensor_braiding_Qh
@@ -151,6 +149,20 @@ lemma leftDerivedUpperStarTensor_braiding_Qh
       ((leftDerivedUpperStarTensor Λ f).app _).app _ ≫
         (β_ (L((f)^*⟦Λ⟧).obj (Qh.obj ((HomotopyCategory.quotient _ _).obj A)))
           (L((f)^*⟦Λ⟧).obj (Qh.obj ((HomotopyCategory.quotient _ _).obj B)))).hom := by
+  have := CachedModInstances.cached_hasTensor₄ObjExt Λ
+  have := CachedModInstances.cached_hasGoodTensor₁₂Tensor Λ
+  have := CachedModInstances.cached_hasGoodTensorTensor₂₃ Λ
+  have := CachedModInstances.cached_hasColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasExactColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasCountableCoproducts Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorRight Λ
+  have := CachedModInstances.cached_hasFunctorialFlatResolution Λ
+  have := CachedModInstances.cached_hasTensor Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorRight Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorLeft Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorRight Λ
   have hA' := (HomotopyCategory.kFlat_quotient_obj_iff A).2 hA
   have hB' := (HomotopyCategory.kFlat_quotient_obj_iff B).2 hB
   have : IsIso ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj A)) :=
@@ -170,8 +182,6 @@ lemma leftDerivedUpperStarTensor_braiding_Qh
     (derivedBraiding_hom_μ_Qh Λ _ _) (derivedBraiding_hom_μ_Qh Λ _ _)
     (upperStarTensorHomotopyHom_braiding Λ f A B)
 
-set_option maxHeartbeats 1000000 in
--- the K-flat replacements are unfolded
 /-- **The derived pullback of module objects is braided**: the tensor comparison
 `m : Lf^* (K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` commutes with the derived braidings,
 `Lf^* β_{K, M} ≫ m_{M, K} = m_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
@@ -181,15 +191,25 @@ theorem leftDerivedUpperStarTensor_braiding
     L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K =
       ((leftDerivedUpperStarTensor Λ f).app K).app M ≫
         (β_ (L((f)^*⟦Λ⟧).obj K) (L((f)^*⟦Λ⟧).obj M)).hom := by
-  have (Z : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-      PreservesColimitsOfShape ℤ ((curriedTensor _).obj Z) := inferInstance
-  obtain ⟨P, hP, ⟨eP⟩⟩ := DerivedCategory.exists_kFlat_iso K
-  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := DerivedCategory.exists_kFlat_iso M
-  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-  have key := leftDerivedUpperStarTensor_braiding_Qh Λ f A B
-    ((HomotopyCategory.kFlat_quotient_obj_iff A).1 hP)
-    ((HomotopyCategory.kFlat_quotient_obj_iff B).1 hQ)
+  have := CachedModInstances.cached_hasTensor₄ObjExt Λ
+  have := CachedModInstances.cached_hasGoodTensor₁₂Tensor Λ
+  have := CachedModInstances.cached_hasGoodTensorTensor₂₃ Λ
+  have := CachedModInstances.cached_hasColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasExactColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasCountableCoproducts Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorRight Λ
+  have := CachedModInstances.cached_hasFunctorialFlatResolution Λ
+  have := CachedModInstances.cached_hasTensor Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorRight Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorLeft Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorRight Λ
+  obtain ⟨P, hP, ⟨eP⟩⟩ := exists_kFlat_iso_Qh_obj Λ K
+  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := exists_kFlat_iso_Qh_obj Λ M
+  have key := leftDerivedUpperStarTensor_braiding_Qh Λ f P.as Q.as
+    ((HomotopyCategory.kFlat_quotient_obj_iff P.as).1 hP)
+    ((HomotopyCategory.kFlat_quotient_obj_iff Q.as).1 hQ)
   exact map_braiding_comp_of_iso (fun K M ↦ ((leftDerivedUpperStarTensor Λ f).app K).app M)
     (leftDerivedUpperStarTensor_naturality Λ f) eP eQ key
 

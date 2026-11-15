@@ -41,7 +41,7 @@ of coordinates:
 * for `d ≥ 1` the last isomorphism is the one induced by the perfect pairing
   `A[xᵢ]_{-m-d-1} × Hᵈ(𝒪(m)) → Hᵈ(𝒪(-d-1)) ≅ A` given by multiplication
   (`monomialCechPairing`, `monomialCechComplexHomologyTopLinearEquivDual_apply`), following
-  the blueprint proof of `lem-pc-projective-space-serre-pairing`.
+  the blueprint proof of `theorem-riemann-roch-coherent-serre-duality--2`.
 
 ## Implementation notes
 
@@ -881,10 +881,10 @@ variable (n A m) in
 /-- **The top cohomology of the monomial Čech complex as a dual**: with `d + 1` coordinates,
 `Hᵈ ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d - 1`. In the monomial bases, the class of the cocycle
 `x^{-f-1}` on `E` is the dual basis vector of the monomial `x^f`; this is the perfect pairing of
-`lem-pc-projective-space-serre-pairing`.
+`theorem-riemann-roch-coherent-serre-duality--2`.
 
 (blueprint: `lem-pc-projective-space-twist-cohomology` (ii),
-`lem-pc-projective-space-serre-pairing`) -/
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 def monomialCechComplexHomologyTopLinearEquivDual {d : ℕ} (hn : Fintype.card n = d + 1)
     (hm : m ≤ -(d : ℤ) - 1) :
     (monomialCechComplex n A m).homology d ≃ₗ[A]
@@ -1029,7 +1029,7 @@ variable (n A) in
 a homogeneous polynomial `f` of degree `D`, i.e. a global section of `𝒪(D)`, pairs with a class
 in `Hᵈ(𝒪(m))` to the trace of the product, `⟨f, x⟩ = tr (f · x) ∈ Hᵈ(𝒪(-d-1)) ≅ A`.
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def monomialCechPairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1)
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
@@ -1077,7 +1077,7 @@ and `m ≤ -d - 1`, the isomorphism `Hᵈ(𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` o
 `monomialCechPairing` induced by multiplication. In the monomial bases, `x^f` pairs to `1` with
 the class of `x^{-f-1}` and to `0` with the other basis elements.
 
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem monomialCechComplexHomologyTopLinearEquivDual_apply {p : ℕ}
     (hn : Fintype.card n = p + 1 + 1) (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (x : (monomialCechComplex n A m).homology (p + 1))

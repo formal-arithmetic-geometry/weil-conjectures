@@ -13,7 +13,7 @@ set_option linter.privateModule false
 /-!
 # Projection formula and finite coefficient reduction
 
-Source: current blueprint latest, sec-six-functors,
+Source: current blueprint latest, chap-The-six-operations-on-Dbctf,
 sk-prop-sf-pf-coherence/prop-sf-pf-reduction (blueprint: prop-sf-pf-reduction).
 The proposition uses ordinary unbounded etale categories and reduction retained
 as an endofunctor of the original coefficient category.

@@ -63,7 +63,7 @@ private theorem torsion_of_mono
   exact he
 
 /-- Finite-stalk torsion approximation of a torsion generic sheaf.
-Source: blueprint `lem-sc-affine-generic-second`, finite stable subgroup construction.
+Source: blueprint `theorem-cohomology-curves--2`, finite stable subgroup construction.
 (blueprint: lem-sc-generic-torsion-finite-stalk-colimit-finite)
 The finite stable subgroups of the corresponding discrete continuous Galois module form a
 filtered poset and transport through the sheaf/module equivalence to the asserted cocone.

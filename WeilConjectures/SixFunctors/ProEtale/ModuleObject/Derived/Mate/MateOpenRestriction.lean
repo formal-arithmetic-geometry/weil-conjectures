@@ -32,8 +32,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactificatio
 # Open restriction of the Brown exceptional inverse image
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-sf-mate,
-det-sf-mate-open-restriction, clauses (1)--(3) and proof
-(blueprint: det-sf-mate-open-restriction).
+proposition-composition-open-restriction-compactifications-f, clauses (1)--(3) and proof
+(blueprint: proposition-composition-open-restriction-compactifications-f).
 
 The exceptional functors are arbitrary right adjoints of the recorded compactification
 lower shrieks, hence include the compactification-independent Brown adjoints. All comparison
@@ -95,8 +95,8 @@ private theorem normalized_conjugate
 /-- Open extension is left adjoint to exact restriction on precisely Loc(Dctf). The Hom
 bijection is the restriction of the existing termwise open adjunction. Every Brown right
 adjoint is identified with restriction by the unique counit-compatible isomorphism.
-Source: blueprint det-sf-mate-open-restriction (1)
-(blueprint: det-sf-mate-open-restriction).
+Source: blueprint proposition-composition-open-restriction-compactifications-f (1)
+(blueprint: proposition-composition-open-restriction-compactifications-f).
 
 Proof: The existing exact derived open adjunction already supplies the ambient Hom
 bijections. Obtain open-extension preservation from openImmersionLowerShriek_localizing.

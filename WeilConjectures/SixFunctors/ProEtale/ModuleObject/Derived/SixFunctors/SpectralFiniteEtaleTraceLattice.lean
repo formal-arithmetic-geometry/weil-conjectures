@@ -671,8 +671,8 @@ private theorem normedDiagram_finiteLattice
   exact normedFiniteEtaleTrace_lattice l E X
 
 /-- Finite etale trace descent gives an integral lattice over spectral coefficients.
-Source: blueprint main-20261015, sk-lem-stratified-lattice, "Pushing down by the trace";
-Bhatt--Scholze, Section 6.8.
+Source: blueprint main-20261015, lemma-lattices-after-finite-stratification, "Pushing down by the
+trace"; Bhatt--Scholze, Section 6.8.
 (blueprint: lem-sfb-spectral-finite-etale-trace-lattice).
 
 Proof. Split the finite etale surjection etale locally. Sum the sheet counits to define

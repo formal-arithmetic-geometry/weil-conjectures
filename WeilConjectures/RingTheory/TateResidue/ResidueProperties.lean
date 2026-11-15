@@ -51,7 +51,8 @@ variable {k K V V₁ V₃ : Type*} [Field k] [CommRing K] [Algebra k K]
 
 /-- **Additivity of the residue in exact sequences**: for a short exact sequence
 `0 → V₁ → V → V₃ → 0` of `K`-modules and an admissible `A ⊆ V`,
-`res_{V,A} = res_{V₁, i⁻¹ A} + res_{V₃, q A}` (blueprint: `det-thm-picard-duality`). -/
+`res_{V,A} = res_{V₁, i⁻¹ A} + res_{V₃, q A}` (blueprint:
+`theorem-riemann-roch-coherent-serre-duality--2`). -/
 theorem res_eq_add_of_exact (i : V₁ →ₗ[K] V) (q : V →ₗ[K] V₃) (hi : Function.Injective i)
     (hq : Function.Surjective q) (hex : Function.Exact i q) {A : Submodule k V}
     (hA : Admissible K A) :
@@ -124,7 +125,7 @@ lemma Admissible.prod {A : Submodule k V} {B : Submodule k V₂} (hA : Admissibl
   exact ⟨⟨x, hx, rfl⟩, ⟨y, hy, rfl⟩⟩
 
 /-- **(R4)** The residue of a product: `res_{V × V₂, A × B} = res_{V,A} + res_{V₂,B}`
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 theorem res_prod {A : Submodule k V} {B : Submodule k V₂} (hA : Admissible K A)
     (hB : Admissible K B) : res K (A.prod B) = res K A + res K B := by
   have hex : Function.Exact (LinearMap.inl K V V₂) (LinearMap.snd K V V₂) := by
@@ -139,7 +140,8 @@ theorem res_prod {A : Submodule k V} {B : Submodule k V₂} (hA : Admissible K A
     simp only [mem_map, mem_prod, restrictScalars_apply, snd_apply, Prod.exists]
     exact ⟨by rintro ⟨_, _, ⟨_, h⟩, rfl⟩; exact h, fun h ↦ ⟨0, y, ⟨A.zero_mem, h⟩, rfl⟩⟩
 
-/-- **(R3)** `res_{A + B} + res_{A ∩ B} = res_A + res_B` (blueprint: `det-thm-picard-duality`). -/
+/-- **(R3)** `res_{A + B} + res_{A ∩ B} = res_A + res_B` (blueprint:
+`theorem-riemann-roch-coherent-serre-duality--2`). -/
 theorem res_sup_add_res_inf {A B : Submodule k V} (hA : Admissible K A) (hB : Admissible K B) :
     res K (A ⊔ B) + res K (A ⊓ B) = res K A + res K B := by
   let d : V →ₗ[K] V × V := LinearMap.prod LinearMap.id LinearMap.id
@@ -189,7 +191,7 @@ noncomputable def quotAct (A : Submodule k V) (g u : K) (huA : ∀ a ∈ A, u �
 
 /-- **(R5) Tate's formula**: if `u, g ∈ K` preserve `A`, `g` is a unit and `A / g A` is
 finite-dimensional, then `res (u g⁻¹ dg) = Tr_k (u | A / g A)`
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 theorem res_mul_inv_smul_D (hA : Admissible K A) {u g : K} (hg : IsUnit g)
     (hgA : ∀ a ∈ A, g • a ∈ A) (huA : ∀ a ∈ A, u • a ∈ A)
     [FiniteDimensional k (A ⧸ smulSub A g)] :

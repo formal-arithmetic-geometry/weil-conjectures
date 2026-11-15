@@ -18,18 +18,20 @@ import Mathlib.Algebra.Order.Star.Real
 /-!
 # The ingredients of the Rankin–Selberg bound
 
-This file collects the inputs of the Rankin–Selberg argument of `sk-p-real-rankin`, which
-bounds the local Frobenius eigenvalues of an `ι`-real lisse Weil sheaf on an affine curve by
-the largest determinant weight of its constituents.
+This file collects the inputs of the Rankin–Selberg argument of
+`proposition-bound-largest-determinant-weight--1`, which bounds the local Frobenius eigenvalues of
+an `ι`-real lisse Weil sheaf on an affine curve by the largest determinant weight of its
+constituents.
 
 * Tensor squares: the tensor square `ℱ ⊗ ℱ` of a lisse, `ι`-real Weil sheaf is lisse and
   `ι`-real, and `α ^ 2` is a local eigenvalue of `ℱ ⊗ ℱ` whenever `α` is one of `ℱ`.
-* `lem-tw-tate-twist-weight-shift`: a Tate twist `ℱ (n)` shifts weights by `-2 n`.
-* `lem-rp-even-tensor-positivity`: the inverse local factors of the tensor square of an
+* `proposition-weights-under-usual-operations--14`: a Tate twist `ℱ (n)` shifts weights by `-2 n`.
+* `lemma-positivity-euler-factors--1`: the inverse local factors of the tensor square of an
   `ι`-real sheaf have nonnegative coefficients.
-* `lem-rp-hc2-eigenvalue-determinant-weight`: the eigenvalues of the geometric Frobenius on
+* `proposition-bound-largest-determinant-weight`: the eigenvalues of the geometric Frobenius on
   the coinvariant Tate twist `V_{π₁(U)} (-1) = H_c² (U, ℱ)` are determinant weights.
-* `cor-rp-euler-product`: the Euler series of `ℱ` times `det (1 - F T ∣ H_c² (U, ℱ))` is a
+* `theorem-trace-formula-euler-product--4`: the Euler series of `ℱ` times
+`det (1 - F T ∣ H_c² (U, ℱ))` is a
   polynomial, namely `det (1 - F T ∣ H_c¹ (U, ℱ))`.
 
 ## Implementation notes
@@ -105,7 +107,7 @@ theorem IsLisse.tprod (hρ : W.IsLisse l ρ) (hσ : W.IsLisse l σ) : W.IsLisse 
         ((hρ.continuous_apply _ _).mul (hσ.continuous_apply _ _)).mul continuous_const
     | add x y hx hy => exact (hx.add hy).congr fun g ↦ by simp
 
-/-- Blueprint `p-linear-spectra`: the local eigenvalues of a tensor product are the
+/-- Blueprint `lemma-filtrations-spectra`: the local eigenvalues of a tensor product are the
 pairwise products of the local eigenvalues of the factors. -/
 theorem localEigenvalues_tprod (x : C.finitePoints) :
     W.localEigenvalues l (ρ.tprod σ) x =
@@ -191,7 +193,7 @@ theorem localEigenvalues_tprod_tateLine (n : ℤ) (x : C.finitePoints) :
   | empty => simp
   | cons a s ih => simp [ih]
 
-/-- Blueprint `lem-tw-tate-twist-weight-shift`: Weight shift under a Tate twist.
+/-- Blueprint `proposition-weights-under-usual-operations--14`: Weight shift under a Tate twist.
 
 If `ℱ` is punctually `ι`-pure of weight `w`, its Tate twist `ℱ (n)` is punctually `ι`-pure of
 weight `w - 2 n`: at a closed point `y` of degree `e` the local Frobenius of the twist is
@@ -207,7 +209,7 @@ theorem IsPunctuallyPure.tprod_tateLine {w : ℝ} (h : W.IsPunctuallyPure l ρ �
     Scheme.Hom.pointNorm_eq_pow_degreeOver p x.2, frobeniusWeight_zpow_card ι he]
   ring
 
-/-- Blueprint `lem-tw-tate-twist-weight-shift`: Weight shift under a Tate twist.
+/-- Blueprint `proposition-weights-under-usual-operations--14`: Weight shift under a Tate twist.
 
 If `ℱ` has weights at most `w`, its Tate twist `ℱ (n)` has weights at most `w - 2 n`. -/
 theorem HasWeightsAtMost.tprod_tateLine {w : ℝ} (h : W.HasWeightsAtMost l ρ ι w) (n : ℤ) :
@@ -292,7 +294,7 @@ theorem IsReal.conj_sum_map_pow_localEigenvalues (hρ : W.IsReal l ρ ι) (x : C
   conv_rhs => rw [← hA]
   simp [map_multiset_sum, Multiset.map_map]
 
-/-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive,
+/-- Blueprint `lemma-positivity-euler-factors--1`: Even tensor powers of a real sheaf are positive,
 for the tensor square.
 
 If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
@@ -322,12 +324,12 @@ section TopCohomology
 variable (ρ)
 
 variable (W l) in
-/-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.
+/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on an affine curve.
 
 For a lisse Weil sheaf `ℱ` on a smooth geometrically connected affine curve `U₀` with local
 generic fibre `V`, there is a canonical Frobenius-equivariant isomorphism
 `H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)`, by global Verdier duality on a smooth compactification and the
-description of global sections as invariants (`p-real-sections`).
+description of global sections as invariants (`lemma-degree-zero-top-cohomology--1`).
 
 Compactly supported cohomology of a Weil representation is not available, so the right-hand
 side is used as the model of `H_c² (U, ℱ)`: this is the geometric Frobenius acting on it, `q`
@@ -336,7 +338,7 @@ noncomputable def compactTopFrobenius :
     Module.End (PadicAlgCl l) (Representation.Coinvariants (ρ.comp W.geometric.subtype)) :=
   (Nat.card K : PadicAlgCl l) • ρ.toCoinvariants W.geometric W.frobeniusLift
 
-/-- Blueprint `lem-rp-hc2-eigenvalue-determinant-weight`: Eigenvalues of `H_c²` are
+/-- Blueprint `proposition-bound-largest-determinant-weight`: Eigenvalues of `H_c²` are
 determinant weights.
 
 Let `ℱ` be a Weil representation on `V`, and let `α` be an eigenvalue of the geometric
@@ -462,7 +464,8 @@ theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
   ring
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `cor-rp-euler-product`: Euler product of the `L`-function of a lisse sheaf.
+/-- Blueprint `theorem-trace-formula-euler-product--4`: Euler product of the `L`-function of a lisse
+sheaf.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on it.
 Then, as power series in `T`,
@@ -472,8 +475,9 @@ acts as `q` times the endomorphism induced by `γ`. Here the numerator `ι det (
 is only recorded as some polynomial `P`.
 
 This is the curve case of the Euler-product form of the Grothendieck–Lefschetz trace formula,
-together with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`) and the coinvariant description of
-`H_c²` (`lem-a1-affine-hc2`), for `ℓ ≠ char 𝔽_q`, applied to the lisse Weil sheaf attached to `ρ`
+together with `H_c⁰ (U, ℱ) = 0` (`lemma-degree-zero-top-cohomology--4`) and the coinvariant
+description of `H_c²` (`lemma-degree-zero-top-cohomology--2`), for `ℓ ≠ char 𝔽_q`, applied to the
+lisse Weil sheaf attached to `ρ`
 (`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`). -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :

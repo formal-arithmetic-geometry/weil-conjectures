@@ -225,10 +225,10 @@ invariant sections over `E`.
 to its connected component, and apply `lem-weil-pbc-etale-fibre-discrete-separable-points`
 to represent a germ over a finite separable field. Enlarge it to a finite Galois extension
 of `L` using `lem-weil-pbc-finite-galois-receiving-separable-extensions`. The germ map
-there is injective: use `lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered` and observe
+there is injective: use `definition-torsion-sheaves--3` and observe
 that every pointed neighbourhood mapping to this one-point spectrum is nonempty and
 etale, hence surjective. Its restriction map is injective by the sheaf equalizer condition
-(`def-weil-pbc-etale-sheaf-of-sets`). Lift each automorphism of `E/L` to the subgroup
+(`situation-conventions`). Lift each automorphism of `E/L` to the subgroup
 fixing `L`; invariance of the germ and this injectivity give invariance of its representative.
 Finite Galois descent now gives a unique section over `L`. Conversely, germs of sections
 over `L` are fixed by its fixing subgroup.

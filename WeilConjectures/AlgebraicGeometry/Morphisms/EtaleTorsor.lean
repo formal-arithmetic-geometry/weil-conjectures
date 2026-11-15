@@ -41,16 +41,16 @@ admits a section.
 Two refinements of Stacks `02NE` recorded in the sketch are not part of the statement.
 
 The first is the naturality of the bijection in the pair `(Y, M)`. The proof of the vanishing
-theorem `sk-thm-vanishing` uses naturality in `Y`: it pulls a torsor back along a morphism
-`Y' ⟶ Y` and concludes that its class dies. This is stated, in terms of the pullback map
-`AlgebraicGeometry.Etale.cohomologyMap` on sheaf cohomology, as
+theorem `proposition-base-change-larger-algebraically-closed--1` uses naturality in `Y`: it pulls a
+torsor back along a morphism `Y' ⟶ Y` and concludes that its class dies. This is stated, in terms of
+the pullback map `AlgebraicGeometry.Etale.cohomologyMap` on sheaf cohomology, as
 `AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`.
 
 The second is the criterion, for `Y` connected and `M = ℤ/dℤ`, that the torsor attached to a
 class be connected — a Galois cover with group `ℤ/dℤ`, which is the input of
-`sk-prop-input-spreading` — exactly when the corresponding homomorphism out of the étale
-fundamental group is surjective. Mathlib has no étale fundamental group, so this is left to
-the prose.
+`proposition-base-change-larger-algebraically-closed` — exactly when the corresponding homomorphism
+out of the étale fundamental group is surjective. Mathlib has no étale fundamental group, so this is
+left to the prose.
 
 ## Main definitions
 

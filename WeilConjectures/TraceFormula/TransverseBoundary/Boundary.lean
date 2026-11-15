@@ -22,10 +22,10 @@ finite commutative `ℓ`-primary ring and `E` a bounded complex of `Λ`-modules 
 with finite locally constant cohomology whose monodromy factors through a finite `ℓ`-group. Put
 `M = Rj_* i_! E`. Then `M_z = 0`, `M|_{Y - z}` has finite locally constant cohomology, and if `Y`
 is connected, then for every geometric point `s̄` of `Y - z` the restriction map
-`RΓ(Y, M|_Y) ⟶ M_s̄` is zero in `D(Λ)` (blueprint `sk-lem-tf-transverse-boundary`).
+`RΓ(Y, M|_Y) ⟶ M_s̄` is zero in `D(Λ)` (blueprint `lemma-cohomology-near-two-transverse-divisors`).
 
-The first two assertions are `det-tf-transverse-corner-vanishing` and
-`det-tf-transverse-tame-local-constancy`. The last one is the generization square
+The first two assertions are `lemma-cohomology-near-two-transverse-divisors--1` and
+`lemma-cohomology-near-two-transverse-divisors--1`. The last one is the generization square
 (`AlgebraicGeometry.Etale.derivedGlobalSectionsRestriction_eq_zero_of_isZero_of_isLocallyConstant`):
 the restriction to `s̄` followed by the specialization isomorphism `M_s̄ ≅ M_η̄` to a geometric
 generic point of `Y` factors through `M_z = 0`. Forgetting the `Λ`-action only serves to detect
@@ -53,8 +53,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {ℓ : 
   (hℓ : (ℓ : k) ≠ 0) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
 
 include hℓ hΛ in
-/-- Blueprint `sk-lem-tf-transverse-boundary`, last assertion: if `Y` is connected, then for
-every geometric point `s̄` of `Y - z` the restriction map `RΓ(Y, M|_Y) ⟶ M_s̄` is zero in
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors`, last assertion: if `Y` is connected,
+then for every geometric point `s̄` of `Y - z` the restriction map `RΓ(Y, M|_Y) ⟶ M_s̄` is zero in
 `D(Λ)`, where `M = Rj_* i_! E`. -/
 theorem derivedGlobalSectionsRestriction_boundaryComplex_eq_zero [ConnectedSpace C.Y]
     (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -89,9 +89,9 @@ theorem derivedGlobalSectionsRestriction_boundaryComplex_eq_zero [ConnectedSpace
     exact hs ⟨x, by rw [Scheme.Hom.comp_apply, hzY]⟩
 
 include hℓ hΛ in
-/-- Blueprint `sk-lem-tf-transverse-boundary`: Transverse boundary calculation. For a bounded
-complex `E` on `Z - (X ∪ Y)` with finite locally constant cohomology whose monodromy factors
-through a finite `ℓ`-group, `M = Rj_* i_! E` satisfies:
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors`: Transverse boundary calculation. For
+a bounded complex `E` on `Z - (X ∪ Y)` with finite locally constant cohomology whose monodromy
+factors through a finite `ℓ`-group, `M = Rj_* i_! E` satisfies:
 
 1. `M_z̄ = 0` at every geometric point `z̄` over the corner point;
 2. `M|_{Y - z}` has finite locally constant cohomology sheaves;

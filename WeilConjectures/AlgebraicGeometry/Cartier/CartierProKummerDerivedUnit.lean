@@ -40,10 +40,10 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 
 /-- Let n>0 be invertible on Z, R=ULift(Z/n), A a commutative ring killed by n, i:D→Z any scheme
 morphism and φ:R→A. If two Cartier Ext classes have GeoCartierScalarCompatibility
-[sk-lem-geo-cartier], then the normalized full pro-etale Kummer class G_m,pro→forget(A_Z(1))[1] is a
-degree-one scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-cartier-pro-kummer-derived-unit).
+[lemma-cycle-class-cartier-divisor], then the normalized full pro-etale Kummer class
+G_m,pro→forget(A_Z(1))[1] is a degree-one scalar unit [def-sfb-cartier-reduction-data,
+def-sp-derived-scalar-ext-unit]. Source: blueprint Cartier derived reduction and comparison
+paragraphs; Stacks 0152, 06YY and 0GLZ (blueprint: lem-sp-cartier-pro-kummer-derived-unit).
 Proof: The pro-etale residue root map is an isomorphism: it is the inverse roots comparison, the
 image of the residue etale root isomorphism, and the coefficient-forgetting comparison isomorphism.
 Apply the residue Kummer unit theorem to the full pro-etale Kummer sequence through this kernel

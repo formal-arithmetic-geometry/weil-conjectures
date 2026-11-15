@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 
 Let `Λ` be a finite commutative ring and `k` a field which is finite or separably closed, so
 that `cd_ℓ(k)` is finite (the standing base field of the blueprint). For a scheme `X` the
-localizing closure `Loc(Dctf(X, Λ))` (blueprint `sk-def-localizing-closure`) is the smallest
+localizing closure `Loc(Dctf(X, Λ))` (blueprint `definition-localizing-subcategory`) is the smallest
 triangulated subcategory of `D(X_proét, Λ)` containing `Dctf(X, Λ)` and closed under direct sums
 (`AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor`). It is
 pretriangulated and has direct sums, computed in `D(X_proét, Λ)`.
@@ -31,7 +31,8 @@ For a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f : X ⟶ Y`, the funct
 By Brown representability it has a right adjoint
 `f^! : Loc(Dctf(Y, Λ)) ⥤ Loc(Dctf(X, Λ))`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizing`), which is triangulated, preserves
-direct sums and is unique up to unique isomorphism (blueprint `sk-prop-sf-existence`,
+direct sums and is unique up to unique isomorphism (blueprint
+`theorem-existence-exceptional-inverse-image`,
 `AlgebraicGeometry.ProEtale.exists_rightAdjoint_rightDerivedLowerShriekLocalizing`).
 
 The finite coefficient rings `A` of the blueprint are those whose exponent is invertible on the
@@ -43,14 +44,14 @@ and `Hom(Λ, ∏ₙ Λ[n]) = ∏ₙ Hⁿ(ℝ, 𝔽₂)` is not a direct sum, so 
 ## Inputs
 
 - `ProEtale.DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor`
-  (blueprint `sk-lem-brown-hypotheses`): `Loc(Dctf(X, Λ))` has split idempotents, and
-  `Dctf(X, Λ)` is essentially small and compactly generates `Loc(Dctf(X, Λ))`. Essential
+  (blueprint `lemma-hypotheses-brown-representability`): `Loc(Dctf(X, Λ))` has split idempotents,
+  and `Dctf(X, Λ)` is essentially small and compactly generates `Loc(Dctf(X, Λ))`. Essential
   smallness is `AlgebraicGeometry.ProEtale.DerivedCategory.exists_skeleton_constructibleFiniteTor`,
   compactness is
   `AlgebraicGeometry.ProEtale.DerivedCategory.isCompactObj_of_constructibleFiniteTor`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor_lowerShriek`
-  (blueprint `det-sf-comp-coherence-single`): `Rf_!(c)` maps `Loc(Dctf(X, Λ))` into
-  `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and preserves direct sums of objects of
+  (blueprint `proposition-construction-independence-rf-shriek`): `Rf_!(c)` maps `Loc(Dctf(X, Λ))`
+  into `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and preserves direct sums of objects of
   `Loc(Dctf(X, Λ))`; see
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizingLowerShriek`.
 
@@ -72,8 +73,8 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `sk-def-localizing-closure`: the localizing closure `Loc(Dctf(X, Λ))`, the smallest
-triangulated subcategory of `D(X_proét, Λ)` closed under isomorphisms and direct sums which
+/-- Blueprint `definition-localizing-subcategory`: the localizing closure `Loc(Dctf(X, Λ))`, the
+smallest triangulated subcategory of `D(X_proét, Λ)` closed under isomorphisms and direct sums which
 contains `Dctf(X, Λ)`, for a finite coefficient ring `Λ`. -/
 noncomputable abbrev DerivedCategory.localizingConstructibleFiniteTor (X : Scheme.{u}) :
     ObjectProperty
@@ -87,8 +88,8 @@ abbrev DerivedCategoryLocalizingFiniteTor (X : Scheme.{u}) : Type _ :=
 
 variable {k : Type u} [Field k]
 
-/-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for a finite
-coefficient ring `Λ` whose exponent is invertible on a separated finite-type `k`-scheme `X`.
+/-- Blueprint `lemma-hypotheses-brown-representability`: Hypotheses of Brown representability, for a
+finite coefficient ring `Λ` whose exponent is invertible on a separated finite-type `k`-scheme `X`.
 The category `Loc(Dctf(X, Λ))` is locally small, triangulated and has direct sums (by
 construction); it has split idempotents, and `Dctf(X, Λ)` is essentially small, with a small
 skeleton forming a set of compact generators of `Loc(Dctf(X, Λ))`. The base field `k` has finite
@@ -110,11 +111,11 @@ theorem DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteT
       (fun C hC ↦ DerivedCategory.isCompactObj_of_constructibleFiniteTor hk aX C hC),
     ObjectProperty.isIdempotentComplete_localizingClosure _⟩
 
-/-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
-localizing category, for a finite coefficient ring `Λ` whose exponent is invertible on a
-quasi-compact quasi-separated scheme `Y` of finite type over a field `k`. For a compactification
-`c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, the functor `Rp_* ∘ j_! = Rf_!(c)` (triangulated) maps
-`Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and its
+/-- Blueprint `proposition-construction-independence-rf-shriek`: Compact support along one
+compactification on the localizing category, for a finite coefficient ring `Λ` whose exponent is
+invertible on a quasi-compact quasi-separated scheme `Y` of finite type over a field `k`. For a
+compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, the functor `Rp_* ∘ j_! = Rf_!(c)` (triangulated)
+maps `Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and its
 restriction to `Loc(Dctf(X, Λ))` preserves direct sums.
 
 The finiteness hypothesis `aY` is needed: over an arbitrary quasi-compact quasi-separated `Y`
@@ -163,7 +164,7 @@ variable {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [
 
 /-- The compact-support direct image `Rf_! = Rp_* ∘ j_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` on
 the localizing closures, attached to a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`: the
-restriction of `Rf_!(c)` (blueprint `det-sf-comp-coherence-single`). -/
+restriction of `Rf_!(c)` (blueprint `proposition-construction-independence-rf-shriek`). -/
 noncomputable abbrev rightDerivedLowerShriekLocalizing :
     DerivedCategoryLocalizingFiniteTor Λ X ⥤ DerivedCategoryLocalizingFiniteTor Λ Y :=
   ObjectProperty.localizingClosureLift _ _
@@ -181,7 +182,7 @@ noncomputable def rightDerivedLowerShriekLocalizingCompιIso :
   ObjectProperty.localizingClosureLiftCompιIso _ _ _ _
 
 /-- `Rf_!` on the localizing closures preserves direct sums (blueprint
-`det-sf-comp-coherence-single`). -/
+`proposition-construction-independence-rf-shriek`). -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedLowerShriekLocalizing Λ aY c) :=
   have := (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteType
@@ -199,8 +200,8 @@ variable (hk : Etale.HasFiniteCohomologicalDimension Λ (Spec (.of k))) {X Y : S
   [IsSeparated aY] [HasInvertibleExponent Λ Y] {f : X ⟶ Y} (c : Compactification f)
 
 include hk aX in
-/-- Blueprint `det-sf-existence-brown` (1): `Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` is a left
-adjoint, by Brown representability. -/
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (1):
+`Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` is a left adjoint, by Brown representability. -/
 theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing :
     (rightDerivedLowerShriekLocalizing Λ aY c).IsLeftAdjoint :=
   have := (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteType
@@ -209,7 +210,7 @@ theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing :
     (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ hk aX).1
 
 include hk aX in
-/-- Blueprint `det-sf-existence-brown`: the exceptional inverse image
+/-- Blueprint `theorem-existence-exceptional-inverse-image`: the exceptional inverse image
 `f^! : Loc(Dctf(Y, Λ)) ⥤ Loc(Dctf(X, Λ))` attached to a compactification `c` of `f`, a right
 adjoint of `Rf_!` (Brown representability). It is an arbitrary choice of right adjoint, unique
 up to unique isomorphism (`Adjunction.existsUnique_iso_comp_counit`); only the adjunction
@@ -220,8 +221,8 @@ noncomputable def rightDerivedUpperShriekLocalizing :
   have := isLeftAdjoint_rightDerivedLowerShriekLocalizing Λ hk aX aY c
   (rightDerivedLowerShriekLocalizing Λ aY c).rightAdjoint
 
-/-- Blueprint `det-sf-existence-brown` (1): the adjunction `Rf_! ⊣ f^!` on the localizing
-closures, `Hom(Rf_! M, N) ≃ Hom(M, f^! N)`. -/
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (1): the adjunction `Rf_! ⊣ f^!` on the
+localizing closures, `Hom(Rf_! M, N) ≃ Hom(M, f^! N)`. -/
 noncomputable def rightDerivedUpperShriekLocalizingAdjunction :
     rightDerivedLowerShriekLocalizing Λ aY c ⊣ rightDerivedUpperShriekLocalizing Λ hk aX aY c :=
   have := isLeftAdjoint_rightDerivedLowerShriekLocalizing Λ hk aX aY c
@@ -236,13 +237,14 @@ noncomputable instance : (rightDerivedUpperShriekLocalizing Λ hk aX aY c).CommS
 instance : (rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c).CommShift ℤ :=
   (rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c).commShift_of_leftAdjoint ℤ
 
-/-- Blueprint `det-sf-existence-brown` (2): `f^!` is triangulated. -/
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (2): `f^!` is triangulated. -/
 instance : (rightDerivedUpperShriekLocalizing Λ hk aX aY c).IsTriangulated :=
   (rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c).isTriangulated_rightAdjoint
 
 include hk aX in
-/-- Blueprint `det-sf-existence-direct-sums`: `f^!` preserves direct sums, since `Rf_!` maps the
-compact generators `Dctf(X, Λ)` to compact objects `Dctf(Y, Λ)` of `Loc(Dctf(Y, Λ))`. -/
+/-- Blueprint `theorem-existence-exceptional-inverse-image--4`: `f^!` preserves direct sums, since
+`Rf_!` maps the compact generators `Dctf(X, Λ)` to compact objects `Dctf(Y, Λ)` of
+`Loc(Dctf(Y, Λ))`. -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedUpperShriekLocalizing Λ hk aX aY c) :=
   have h := DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteType
@@ -254,9 +256,9 @@ instance (J : Type (u + 1)) :
     (rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c) J
 
 include hk aX in
-/-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for a finite
-coefficient ring `Λ` whose exponent is invertible on separated finite-type `k`-schemes `X`, `Y`,
-over a field `k` which is finite or separably closed.
+/-- Blueprint `theorem-existence-exceptional-inverse-image`: Existence of the exceptional inverse
+image, for a finite coefficient ring `Λ` whose exponent is invertible on separated finite-type
+`k`-schemes `X`, `Y`, over a field `k` which is finite or separably closed.
 For a compactification `c` of `f : X ⟶ Y`, the coproduct-preserving functor
 `Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` has a right adjoint `f^!`, which commutes with
 shifts compatibly with the adjunction, is exact (triangulated), preserves direct sums and is

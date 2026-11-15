@@ -107,7 +107,7 @@ since the derivative `nTⁿ⁻¹` is invertible modulo `Tⁿ - t`
 stable under base change.
 
 This is the main step of the proof of exactness of the Kummer sequence
-(blueprint: `lem-sc-kummer-exact`). -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`). -/
 theorem exists_etale_surjective_pow_eq_appTop {U : Scheme.{u}} {n : ℕ} (hn₀ : n ≠ 0)
     (hn : IsUnit (n : Γ(U, ⊤))) {t : Γ(U, ⊤)} (ht : IsUnit t) :
     ∃ (V : Scheme.{u}) (f : V ⟶ U), Etale f ∧ Surjective f ∧
@@ -147,7 +147,7 @@ noncomputable def rootsOfUnitySheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{
 on `X`, the second map being `ω ↦ ωⁿ` and `μₙ = ker(n)` the sheaf of `n`-th roots of unity.
 Its exactness is `AlgebraicGeometry.Scheme.kummerSequence_shortExact` and is *not* part of
 the definition.
-(blueprint: `def-sc-kummer-sequence`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 noncomputable def kummerSequence :
     ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   ShortComplex.mk (kernel.ι (n • 𝟙 X.gmSheaf)) (n • 𝟙 X.gmSheaf) (kernel.condition _)
@@ -155,7 +155,7 @@ noncomputable def kummerSequence :
 /-- The `n`-th power map `n • 𝟙` on `𝔾ₘ` is locally surjective for the étale topology when `n` is
 invertible on `X`: a unit `t` on an étale `X`-scheme `U` acquires an `n`-th root on the
 surjective étale cover of `AlgebraicGeometry.Scheme.exists_etale_surjective_pow_eq_appTop`.
-(blueprint: `lem-sc-kummer-exact`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 theorem isLocallySurjective_nsmul_gmSheaf (hn : IsUnit (n : Γ(X, ⊤))) :
     Sheaf.IsLocallySurjective (n • 𝟙 X.gmSheaf) where
   imageSieve_mem {U} s := by
@@ -209,7 +209,7 @@ an epimorphism because it is locally surjective
 root on the finite étale surjective cover `Spec 𝒪[T]/(Tⁿ - t)`. The hypothesis is necessary: in
 characteristic `p` the `p`-th power map is not an epimorphism of étale sheaves, and the correct
 replacement is the Artin–Schreier sequence.
-(blueprint: `lem-sc-kummer-exact`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 theorem kummerSequence_shortExact (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerSequence n).ShortExact :=
   have := X.isLocallySurjective_nsmul_gmSheaf n hn
@@ -231,7 +231,7 @@ lemma kummerSequence_g_app_apply (U : X.Etaleᵒᵖ) (x : (X.kummerSequence n).X
 cohomology sequence of the Kummer sequence, for `n` invertible on `X`
 (`AlgebraicGeometry.Scheme.kummerSequence_shortExact`). The group of units is written
 additively.
-(blueprint: `lem-sc-kummer-les`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 noncomputable def kummerδ₀ (hn : IsUnit (n : Γ(X, ⊤))) :
     Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1 :=
   (Sheaf.H.δSections (X.kummerSequence_shortExact n hn)
@@ -241,7 +241,7 @@ noncomputable def kummerδ₀ (hn : IsUnit (n : Γ(X, ⊤))) :
 /-- The connecting homomorphism `α : H¹(X, 𝔾ₘ) → H²(X, μₙ)` of the long exact cohomology
 sequence of the Kummer sequence, for `n` invertible on `X`
 (`AlgebraicGeometry.Scheme.kummerSequence_shortExact`).
-(blueprint: `lem-sc-kummer-les`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 noncomputable def kummerδ₁ (hn : IsUnit (n : Γ(X, ⊤))) :
     X.CohomologicalPicardGroup →+ Sheaf.H (X.rootsOfUnitySheaf n) 2 :=
   Sheaf.H.δSucc (X.kummerSequence_shortExact n hn) 1
@@ -296,7 +296,7 @@ connecting homomorphism `AlgebraicGeometry.Scheme.kummerδ₀` and `β` is induc
 
 Exactness at `H⁰(X, 𝔾ₘ)` gives `ker α`, exactness at `H¹(X, μₙ)` gives `ker β = im α`, and
 exactness at `H¹(X, 𝔾ₘ)`, where the next map is multiplication by `n`, gives `im β`.
-(blueprint: `det-prop-h1`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime--2`) -/
 theorem exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerδ₀ n hn).ker = (zsmulAddGroupHom (α := Additive Γ(X, ⊤)ˣ) (n : ℤ)).range ∧
       Function.Exact (X.kummerδ₀ n hn) (Sheaf.H.map (kernel.ι (n • 𝟙 X.gmSheaf)) 1) ∧
@@ -307,7 +307,7 @@ theorem exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
 
 /-- The short exact sequence `0 → Γ(X, 𝒪)ˣ/n → H¹(X, μₙ) → H¹(X, 𝔾ₘ)[n] → 0` of
 `AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_one`, with the maps forgotten.
-(blueprint: `det-prop-h1`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime--2`) -/
 theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     ∃ (α : Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1)
       (β : Sheaf.H (X.rootsOfUnitySheaf n) 1 →+ X.CohomologicalPicardGroup),
@@ -318,7 +318,7 @@ theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
 /-- **`H¹(X, μₙ) = H¹(X, 𝔾ₘ)[n]`.** If `n` is invertible on `X` and every unit on `X` is an
 `n`-th power, then `H¹(X, μₙ) ≅ H¹(X, 𝔾ₘ)[n]`: the first term `Γ(X, 𝒪)ˣ/n` of the short exact
 sequence `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes.
-(blueprint: `det-prop-h1`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime--2`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
     (hdiv : ∀ u : Γ(X, ⊤)ˣ, ∃ v : Γ(X, ⊤)ˣ, v ^ n = u) :
     Nonempty (Sheaf.H (X.rootsOfUnitySheaf n) 1 ≃+
@@ -385,7 +385,7 @@ noncomputable abbrev constantZMod : Sheaf X.smallEtaleTopology AddCommGrpCat.{u 
 
 /-- The global sections of the constant sheaf `ℤ/n` on a connected scheme are `ℤ/n`:
 `H⁰(X_ét, ℤ/n) ≅ ℤ/n`.
-(blueprint: `sk-thm-curveestimate`) -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
 theorem nonempty_addEquiv_sheafH_zero_constantZMod [ConnectedSpace X] :
     Nonempty (Sheaf.H (X.constantZMod n) 0 ≃+ ZMod n) := by
   -- the sections of a constant étale sheaf over `X` are the locally constant functions

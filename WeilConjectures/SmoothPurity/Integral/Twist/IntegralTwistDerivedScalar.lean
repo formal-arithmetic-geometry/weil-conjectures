@@ -295,7 +295,7 @@ end
 variable [∀ x : S, Invertible (l : S.residueField x)]
 
 /-- Twisting commutes with completed integral scalar extension by the specified chain map.
-Source: blueprint `prop-weil-twist-preserves`, final integral/common-stage sentence
+Source: blueprint `definition-tate-twists--10`, final integral/common-stage sentence
 (blueprint: lem-weil-integral-twist-derived-scalar).
 
 Proof:

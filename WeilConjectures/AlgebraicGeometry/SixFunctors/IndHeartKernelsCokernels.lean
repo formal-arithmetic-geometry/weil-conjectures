@@ -22,7 +22,7 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-ind-heart/
 sk-prop-ind-heart-kernels-cokernels.md and its proof
-(blueprint: det-ind-heart-kernels-cokernels).
+(blueprint: proposition-ind-constructible-sheaves).
 
 The square category is `CostructuredArrow ι.mapArrow (Arrow.mk f)`, where ι is the
 constructible inclusion. Its tautological arrow cocone is Mathlib's pointwise left
@@ -44,7 +44,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Source projection of the category of squares from arrows of C to f onto J(B).
 This is the standard comma-category map induced by the source functors.
 Source: blueprint sk-prop-ind-heart-kernels-cokernels.md, definition of P_f and its projections
-(blueprint: det-ind-heart-kernels-cokernels). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 def indHeartSquareSource {C : Type u} [Category.{v} C] {M : Type w} [Category.{t} M]
     (ι : C ⥤ M) {B B' : M} (f : B ⟶ B') :
     CostructuredArrow ι.mapArrow (Arrow.mk f) ⥤ CostructuredArrow ι B :=
@@ -53,7 +53,7 @@ def indHeartSquareSource {C : Type u} [Category.{v} C] {M : Type w} [Category.{t
 /-- Target projection of the category of squares from arrows of C to f onto J(B').
 This is the standard comma-category map induced by the target functors.
 Source: blueprint sk-prop-ind-heart-kernels-cokernels.md, definition of P_f and its projections
-(blueprint: det-ind-heart-kernels-cokernels). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 def indHeartSquareTarget {C : Type u} [Category.{v} C] {M : Type w} [Category.{t} M]
     (ι : C ⥤ M) {B B' : M} (f : B ⟶ B') :
     CostructuredArrow ι.mapArrow (Arrow.mk f) ⥤ CostructuredArrow ι B' :=
@@ -61,7 +61,7 @@ def indHeartSquareTarget {C : Type u} [Category.{v} C] {M : Type w} [Category.{t
 
 /-- The canonical cocone of constructible squares at f, with legs the squares themselves.
 Source: blueprint sk-prop-ind-heart-kernels-cokernels.md, f = colim v
-(blueprint: det-ind-heart-kernels-cokernels). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 def indHeartSquareCocone {C : Type u} [Category.{v} C] {M : Type w} [Category.{t} M]
     (ι : C ⥤ M) {B B' : M} (f : B ⟶ B') :
     Cocone (CostructuredArrow.proj ι.mapArrow (Arrow.mk f) ⋙ ι.mapArrow) :=
@@ -183,7 +183,7 @@ objects belong to the same replete filtered-colimit closure of constructible mod
 Smallness is relative to u+1, as in the canonical-presentation dependency; universal
 properties on the full category are equivalent to those on any small skeleton.
 Source: blueprint sk-prop-ind-heart-kernels-cokernels.md, entire statement
-(blueprint: det-ind-heart-kernels-cokernels). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 def IndHeartKernelsCokernelsAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u}) : Prop :=
@@ -279,7 +279,7 @@ private theorem assertions_of_ring (ℓ : ℕ) [Fact ℓ.Prime]
 presentation by constructible squares, for both canonical coefficient rings.
 Source: blueprint sk-prop-ind-heart-kernels-cokernels.md and its proof, with the
 standing setting in sk-def-sfb-dc-setting
-(blueprint: det-ind-heart-kernels-cokernels).
+(blueprint: proposition-ind-constructible-sheaves).
 
 Proof (the node's six steps):
 1. By sk-def-sfb-pulled-back-coefficients the coefficient is a commutative ring object.
@@ -287,7 +287,7 @@ Use sk-def-sfb-module-objects and sk-def-sfb-sheaf-tensor, then
 def-weil-pbc-internal-abelian-sheaf-module-equivalence and
 lem-weil-pbc-ring-sheaves-grothendieck to obtain ambient abelianness, all small colimits
 and exact filtered colimits. Transport across the equivalence by universal properties.
-2. By sk-lem-coefficient-heart constructibles are essentially small and closed under
+2. By lemma-constructible-sheaves constructibles are essentially small and closed under
 kernels and cokernels. Squares form an essentially small category: choose representatives
 of their constructible vertices and use the sets of maps between them and to B and B'.
 The zero square gives nonemptiness; direct sums give common successors. For parallel
@@ -299,7 +299,7 @@ A comma object represented by u:C -> C_p receives the unique pair (u,v_p u).
 Thus the source projection is final, directly from nonempty connected comma categories.
 4. For j'=(D,d) in J(B'), the square (0,D,0,0,d) is initial in (j' down target).
 The unique map to a comma object represented by u:D -> D_p is (0,u), proving finality.
-5. By det-ind-heart-canonical-presentation the canonical J(B) and J(B') cocones are
+5. By proposition-ind-constructible-sheaves the canonical J(B) and J(B') cocones are
 colimits. Reindex along the two final projections. Explicitly restrict source cocones
 to (C,C,id,c,fc) and target cocones to (0,D,0,0,d); the maps (id,v_p) and (0,id) show
 these operations invert pullback of cocones. Hence the component cocones have vertices
@@ -309,8 +309,8 @@ the component universal properties give the universal property in the arrow cate
 0 -> im(v) -> D -> coker(v) -> 0. Exact filtered colimits identify the kernel and
 cokernel of f with the colimits of ker(v) and coker(v), respectively. The induced legs
 are the canonical kernel and cokernel maps of each square, by their universal properties.
-By sk-lem-coefficient-heart the individual kernels and cokernels are constructible;
-by det-ind-heart-full-faithfulness(2) their small filtered colimits are ind-constructible. -/
+By lemma-constructible-sheaves the individual kernels and cokernels are constructible;
+by proposition-ind-constructible-sheaves(2) their small filtered colimits are ind-constructible. -/
 theorem indHeart_kernelsCokernels
     (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p]
     (hp : 0 < p) (hne : p ≠ ℓ)

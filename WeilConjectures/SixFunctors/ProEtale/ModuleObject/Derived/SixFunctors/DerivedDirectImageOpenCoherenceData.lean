@@ -15,8 +15,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Canonical maps and predicates for derived direct-image coherence
 
-Source: blueprint main-20261015, `sk-thm-sf-comp-composition`, Composition isomorphism
-and Canonicity and associativity; Stacks Tags 08BJ, 070I, 070Y and 0D6E
+Source: blueprint main-20261015, `proposition-composition-base-change-rf-shriek--1`, Composition
+isomorphism and Canonicity and associativity; Stacks Tags 08BJ, 070I, 070Y and 0D6E
 (blueprint: def-sfb-derived-direct-image-open-coherence-data).
 
 All categories below are the ordinary unbounded derived categories of internal modules

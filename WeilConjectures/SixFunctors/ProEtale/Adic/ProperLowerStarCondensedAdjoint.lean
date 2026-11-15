@@ -119,7 +119,7 @@ theorem exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar
 variable (k₀) in
 include k₀ in
 /-- **The proper direct image on `Dᵇc(-, ℚ̄_ℓ)` is a left adjoint** (blueprint
-`lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, in the model of `ℓ`-adic sheaves): for a
+`theorem-exceptional-inverse-image--17`, in the model of `ℓ`-adic sheaves): for a
 proper morphism `f : Y ⟶ X`, with `X` separated of finite type over an algebraic closure `k` of a
 finite field `k₀` with `ringChar k ≠ ℓ`, the direct image `Rf_* : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` has
 a right adjoint. It is transported from the condensed model

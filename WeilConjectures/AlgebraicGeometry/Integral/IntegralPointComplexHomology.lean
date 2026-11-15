@@ -25,7 +25,7 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
 /-! # Finite presentation of integral point-complex cohomology
 
-Source: current blueprint sk-prop-integral-criterion, (3) implies (1).
+Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1).
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +37,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finite free integral point complexes have finitely presented cohomology.
-Source: current blueprint sk-prop-integral-criterion, (3) implies (1)
+Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1)
 (blueprint: lem-sfb-integral-point-complex-homology).
 
 Proof: the scalar ring of integers of the finite coefficient extension is a DVR,

@@ -249,8 +249,28 @@ private theorem normalized_full_cube
     _ _ _ _ _ _ hN hS a.hom d.hom hA hD hc
 
 end FullCube
-set_option maxHeartbeats 3000000 in
--- The concrete normalization needs the coefficient-system elaboration budget.
+
+-- Expose the localization equation without unfolding the whole coherence package.
+private theorem brown_restriction_factors
+    (O : Type (u + 1)) [CommRing O] (t : O) (V : Scheme.{u})
+    (P : StrictEtaleEvaluation V O t) (R : StrictEtaleBrownRealization O t V P)
+    {m n : ℕ} (h : m ≤ n) :
+    let := R.val.ordinaryAdditive
+    ∀ I : CochainComplex (strictEtaleLevel V O t m) ℤ,
+      (R.val.restriction h).hom.app (DerivedCategory.Q.obj I) ≫
+          (Sheaf.derivedRestrictScalars V.smallEtaleTopology
+            (strictEtaleBrownRingMap O t h)).map ((R.val.factors m).hom.app I) ≫
+          (Sheaf.restrictScalars V.smallEtaleTopology
+            (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
+              (((strictEtaleBrownConstant O t V m).mapHomologicalComplex (.up ℤ)).obj I) =
+        (R.val.derived n).map ((P.scalar h).restrictionFactors.hom.app I) ≫
+          (R.val.factors n).hom.app
+            (((coefficientRestriction (J := V.smallEtaleTopology) O t h).mapHomologicalComplex
+              (.up ℤ)).obj I) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex (R.val.ordinaryRestriction h) (.up ℤ)).hom.app I) :=
+  R.property.2.1 h
+
 /-- Exact scalar restriction commutes with the normalized Brown image square.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6E.
 (blueprint: lem-pur-brown-restriction-image-cube).
@@ -290,41 +310,43 @@ theorem etaleBrownRestrictionImageCube
   have : IsGrothendieckAbelian.{u + 1} (strictEtaleLevel V O t m) :=
     isGrothendieckAbelian_coefficientUniverse _
   have : Abelian.HasKInjectiveResolutions (strictEtaleLevel V O t m) := inferInstance
-  let qV := coefficientRestriction.{u + 1, u, u + 1} (J := V.smallEtaleTopology) O t h
-  let qW := coefficientRestriction.{u + 1, u, u + 1} (J := W.smallEtaleTopology) O t h
-  let eV (k : ℕ) := strictEtaleBrownConstant O t V k
-  let eW (k : ℕ) := strictEtaleBrownConstant O t W k
-  let rV := Sheaf.restrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h)
-  let rW := Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h)
-  let dV := Sheaf.derivedRestrictScalars V.smallEtaleTopology
-    (strictEtaleBrownRingMap O t h)
-  let dW := Sheaf.derivedRestrictScalars W.smallEtaleTopology
-    (strictEtaleBrownRingMap O t h)
-  let G (k : ℕ) := Etale.lowerStar
-    (ModuleCat.{u + 1} (strictEtaleBrownRing O t k)) g
-  let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
-    (.mk _ _ _ _ (A.restrictInverse h).hom))
-  exact normalized_full_cube (A.right m) (A.right n) (G m) (G n)
-    qV qW (eV m) (eW m) (eV n) (eW n) rV rW
+  exact normalized_full_cube (A.right m) (A.right n)
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g)
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)
+    (coefficientRestriction.{u + 1, u, u + 1} (J := V.smallEtaleTopology) O t h)
+    (coefficientRestriction.{u + 1, u, u + 1} (J := W.smallEtaleTopology) O t h)
+    (strictEtaleBrownConstant O t V m) (strictEtaleBrownConstant O t W m)
+    (strictEtaleBrownConstant O t V n) (strictEtaleBrownConstant O t W n)
+    (Sheaf.restrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
+    (Sheaf.restrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
     (B.level m).direct (B.level n).direct
-    (G m).rightDerivedFunctor (G n).rightDerivedFunctor
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g).rightDerivedFunctor
+    (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).rightDerivedFunctor
     (PV.scalar h).restriction (PW.scalar h).restriction
-    (RV.derived m) (RW.derived m) (RV.derived n) (RW.derived n) dV dW
+    (RV.val.derived m) (RW.val.derived m) (RV.val.derived n) (RW.val.derived n)
+    (Sheaf.derivedRestrictScalars V.smallEtaleTopology (strictEtaleBrownRingMap O t h))
+    (Sheaf.derivedRestrictScalars W.smallEtaleTopology (strictEtaleBrownRingMap O t h))
     (B.level m).directUnit (B.level n).directUnit
-    (rightUnitNT (G m)) (rightUnitNT (G n)) (B.level m).computes
+    (rightUnitNT (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) g))
+    (rightUnitNT (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g))
+    (B.level m).computes
     (PV.scalar h).restrictionFactors (PW.scalar h).restrictionFactors
-    (RV.factors m) (RW.factors m) (RV.factors n) (RW.factors n)
-    rV.mapDerivedCategoryFactors rW.mapDerivedCategoryFactors
+    (RV.val.factors m) (RW.val.factors m) (RV.val.factors n) (RW.val.factors n)
+    (Sheaf.restrictScalars V.smallEtaleTopology
+      (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
+    (Sheaf.restrictScalars W.smallEtaleTopology
+      (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
     (RV.val.restriction h) (RW.val.restriction h) (B.restrictedDirect h) δ
     (rg m).right.hom (rg n).right.hom
-    α (rg m).val.ordinaryRight.hom (rg n).val.ordinaryRight.hom
+    (mateEquiv (A.levelAdj m) (A.levelAdj n) (.mk _ _ _ _ (A.restrictInverse h).hom))
+    (rg m).val.ordinaryRight.hom (rg n).val.ordinaryRight.hom
     (Etale.lowerStarRestrictScalarsIso (strictEtaleBrownRingMap O t h) g).hom
     (coefficient_right_normalized O t g A PW PV B h)
     (brown_image_normalized O t g A PW PV B RV RW rg m)
     (brown_image_normalized O t g A PW PV B RV RW rg n)
-    (by rw [hδ]; exact geometric_restriction_normalized _ g)
+    (hδ.symm ▸ geometric_restriction_normalized (strictEtaleBrownRingMap O t h) g)
     (RV.val.ordinaryRestriction h) (RW.val.ordinaryRestriction h)
-    (RV.property.2.1 h) (RW.property.2.1 h)
+    (brown_restriction_factors O t V PV RV h) (brown_restriction_factors O t W PW RW h)
     (etaleBrownOrdinaryRestrictionCube O t g A PW PV B RV RW rg h)
 
 end AlgebraicGeometry

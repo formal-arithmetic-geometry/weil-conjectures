@@ -18,8 +18,8 @@ import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 
 /-! # Sectionwise module direct-image and open-restriction pasting
 
-Source: blueprint `sk-thm-sf-comp-composition`, Composition isomorphism and Canonicity
-and associativity; Stacks Project, proetale.tex, Tag 09A5, section-morphism;
+Source: blueprint `proposition-composition-base-change-rf-shriek--1`, Composition isomorphism and
+Canonicity and associativity; Stacks Project, proetale.tex, Tag 09A5, section-morphism;
 sites.tex, Tag 00XZ, section-localize; sites-modules.tex, Tags 03D3, 03D6, 03DH
 (blueprint: lem-sfb-module-direct-image-open-pasting).
 

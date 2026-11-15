@@ -18,7 +18,7 @@ space and `M''` the generic slice model of `b` (`NearbyCyclesModel.genericSliceM
 model over the generic base `(Frac K⟦t⟧, X₂)`, with special fibre `Y = 𝒳''_s`. This file sets up
 the proof of the slice compatibility of nearby duality
 (`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`, blueprint
-`det-tf-nearby-duality-slice` (2) with `det-tf-invariants-duality`):
+`lemma-nearby-duality-slice--1` (2) with `lemma-duality-invariants-pro-p--1`):
 
 * the pullback `Lg^*` of bounded constructible complexes along a morphism of schemes of finite
   type over possibly different fields (`boundedConstructibleUpperStarOfMap`), strong monoidal;
@@ -35,7 +35,8 @@ the proof of the slice compatibility of nearby duality
 The other inputs of the slice step are in separate files: the averaging splitting of `α`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`, in
 `WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceAveraging`), the
-commutation of the pullbacks with internal Hom (blueprint `det-pd-generic-closed-hom` (2), in
+commutation of the pullbacks with internal Hom (blueprint
+`lemma-restriction-geometric-generic-fibre` (2), in
 `WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceClosedHom`) and the
 dualizing map of the slice
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`, in
@@ -325,7 +326,7 @@ lemma uncurry_genericSliceDualityMap
 omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
   [Fact (ringChar (FractionRing (PowerSeries K))).Prime] [IsSeparated (genericSliceBase x hb).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice x)).hom] in
-/-- **The slice exchange is monoidal** (blueprint `det-tf-nearby-duality-slice`, "the pairing"):
+/-- **The slice exchange is monoidal** (blueprint `lemma-nearby-duality-slice--1`, "the pairing"):
 `Ψ_{M''}(μ_{c^*}) ∘ μ_{M''} ∘ (α ⊗ α) = α ∘ p^*(μ_M) ∘ μ_{p^*}`. This is the restriction to
 bounded constructible complexes of `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`
 (with `μ = δ⁻¹` for the strong monoidal pullbacks). -/

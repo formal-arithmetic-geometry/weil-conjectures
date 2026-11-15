@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-! # Signed powers of a native local line
-Source: prop-weil-twist-preserves, step 1 (blueprint: lem-twist-native-signed-line).
+Source: definition-tate-twists--10, step 1 (blueprint: lem-twist-native-signed-line).
 -/
 
 @[expose] public noncomputable section
