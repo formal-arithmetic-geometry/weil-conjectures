@@ -13,9 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 /-! # The Ext-to-abelian-sections part of the comparison
 
-## References
-
-* [Stacks, Tags 015E and 03FD]
+Source: Stacks Project, Tags 015E and 03FD.
+(blueprint: new-module-cohomology-ext-sections-factorization)
 -/
 
 @[expose] public section
@@ -51,10 +50,39 @@ private theorem moduleComparisonEquiv_apply_of_component
   rw [h]
   rfl
 
-set_option maxHeartbeats 800000 in
--- Elaborating the specialized derived-functor types needs additional instance conversions.
-/-- The fixed module-to-Ext comparison factors through abelian derived sections
-(Stacks, Tags 015E and 03FD). -/
+private theorem comparisonNatIso_symm_app
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D} (e : F ≅ G) (X : C) :
+    e.symm.app X = (e.app X).symm := rfl
+
+private theorem siteSectionsSourceChange_app
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    (U : C) (F : Sheaf J AddCommGrpCat.{u}) (p : ℕ)
+    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
+        (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) :
+    ((siteSectionsNatIso J U p).symm ≪≫ siteExtNatIso J U p ≪≫
+      extSourceNatIso e p ≪≫ siteHNatIso J p).app F =
+      (siteSectionsObjIso J U F p).symm ≪≫
+        (Abelian.Ext.precompAddEquiv e F p).symm.toAddCommGrpIso := by
+  simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl,
+    NatIso.trans_app, comparisonNatIso_symm_app, siteSectionsObjIso,
+    extSourceNatIso, NatIso.ofComponents.app]
+
+/-- The fixed module-to-Ext comparison factors through abelian derived sections.
+Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
+composite in ModuleCohomologyExtResolutionNaturality.
+(blueprint: new-module-cohomology-ext-sections-factorization)
+
+Proof: Unfold the fixed comparison and its natural isomorphism. Its constructor
+composes the common-resolution section comparison, the inverse site-section
+comparison, and the terminal Ext-source comparison. First evaluate this three-map
+composite for arbitrary functors, before specializing to the scheme. Apply that
+component formula and unfold the definition of module cohomology and the Ext-valued
+cohomology type. The inverse site component is siteSectionsObjIso.inv, and the
+terminal component is precompAddEquiv.symm. Their composite gives the asserted
+formula. This never unfolds the acyclic-resolution comparison inside the first
+factor, and includes degree zero, zero coefficients and empty schemes. -/
 theorem ext_sections_factorization
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ)
     (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :
@@ -105,8 +133,8 @@ theorem ext_sections_factorization
       siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
         extSourceNatIso (terminalSourceIso X) p ≪≫
           siteHNatIso (Opens.grothendieckTopology X) p).app (T.obj F) = _
-    simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
-    rfl
+    exact siteSectionsSourceChange_app (Opens.grothendieckTopology X) ⊤ (T.obj F) p
+      (terminalSourceIso X)
   have h := moduleComparisonEquiv_apply_of_component
     (moduleCohomologyExtResolutionNatIso X p) F (a.app F) b c.symm hcomp x
   dsimp only [id, Functor.comp_obj, RingedSpace.moduleCohomology,

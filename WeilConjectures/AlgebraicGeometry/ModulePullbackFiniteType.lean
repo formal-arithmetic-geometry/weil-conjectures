@@ -30,8 +30,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 600000 in
--- The over-site equivalences and tensor-pullback object require extra definitional reductions.
 /-- For a morphism of schemes, the pullback of a finite type module is of finite type
 (Stacks, Tag 01B6). The second conjunct records that the pullback of any epimorphism from
 `free (ULift (Fin n))` over an open `V` is an epimorphism over `f⁻¹ V`. -/
@@ -48,6 +46,17 @@ theorem tensorPullback_isFiniteType (X Y : Scheme.{u}) (f : X ⟶ Y) (G : Y.Modu
               ((tensorPullback f).obj G).over ((TopologicalSpace.Opens.map f.base).obj V),
             Epi ψ := by
   classical
+  -- These instances are shared by the free modules and local generators below.
+  have : ∀ V : Y.Opens, HasSheafify ((Opens.grothendieckTopology Y).over V)
+      AddCommGrpCat.{u} := inferInstance
+  have : ∀ V : Y.Opens,
+      ((Opens.grothendieckTopology Y).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
+  have : ∀ U : X.Opens, HasSheafify ((Opens.grothendieckTopology X).over U)
+      AddCommGrpCat.{u} := inferInstance
+  have : ∀ U : X.Opens,
+      ((Opens.grothendieckTopology X).over U).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   have hlocal : ∀ (V : Y.Opens) (n : ℕ)
       (φ : SheafOfModules.free (R := Y.ringCatSheaf.over V) (ULift.{u} (Fin n)) ⟶
         G.over V), Epi φ → ∃ ψ : SheafOfModules.free

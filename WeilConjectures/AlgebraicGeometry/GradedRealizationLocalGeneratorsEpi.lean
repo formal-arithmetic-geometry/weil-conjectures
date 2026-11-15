@@ -25,8 +25,36 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
--- The comparison of the two scalar actions requires additional elaboration.
+/-- Equality of morphisms over an open can be checked locally on each section. -/
+private theorem over_hom_ext_of_locally_eq {X : Scheme.{u}}
+    {R : X.toTopCat.Sheaf RingCat.{u}} {U : X.Opens}
+    {M : SheafOfModules.{u} R} {N : SheafOfModules.{u} (R.over U)}
+    (p q : M.over U ⟶ N)
+    (h : ∀ (V : Over U) (t : M.val.obj (op V.left)) (y : X), y ∈ V.left →
+      ∃ (W : X.Opens) (hWV : W ≤ V.left), y ∈ W ∧
+        let W' : Over U := Over.mk (homOfLE (hWV.trans V.hom.le))
+        p.val.app (op W') (M.val.map (homOfLE hWV).op t) =
+          q.val.app (op W') (M.val.map (homOfLE hWV).op t)) : p = q := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext t
+  let S : Sieve V.unop := Presheaf.equalizerSieve (F := N.val.presheaf)
+    (p.val.app V t) (q.val.app V t)
+  have hcover : S ∈ (Opens.grothendieckTopology X).over U V.unop := by
+    rw [GrothendieckTopology.mem_over_iff]
+    intro y hy
+    obtain ⟨W, hWV, hyW, ht⟩ := h V.unop t y hy
+    let W' : Over U := Over.mk (homOfLE (hWV.trans V.unop.hom.le))
+    let v : W' ⟶ V.unop := Over.homMk (homOfLE hWV)
+    refine ⟨W, homOfLE hWV, ?_, hyW⟩
+    rw [Sieve.overEquiv_iff]
+    change N.val.presheaf.map v.op _ = N.val.presheaf.map v.op _
+    erw [← PresheafOfModules.naturality_apply p.val,
+      ← PresheafOfModules.naturality_apply q.val]
+    exact ht
+  exact N.isSheaf.isSeparated V.unop S hcover _ _ (fun W v hv ↦ hv)
+
 /-- The specified finite homogeneous sections generate the algebra-module direct image
 on a fixed open. This is purely a local generation statement: the morphism need not be
 affine and the module need not be quasi-coherent. (Stacks, Tag 0897) -/
@@ -104,68 +132,39 @@ theorem gradedRealization_local_generators_epi
   have heq : T.map p = T.map q := by
     apply hcol.hom_ext
     rintro ⟨m⟩
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro V
-    ext t
-    change p.val.app V ((iota m).val.app (op V.unop.left) t) =
-      q.val.app V ((iota m).val.app (op V.unop.left) t)
-    let S : Sieve V.unop := Presheaf.equalizerSieve (F := N.val.presheaf)
-      (p.val.app V ((iota m).val.app (op V.unop.left) t))
-      (q.val.app V ((iota m).val.app (op V.unop.left) t))
-    have hcover : S ∈ (Opens.grothendieckTopology X).over U V.unop := by
-      rw [GrothendieckTopology.mem_over_iff]
-      intro y hy
-      obtain ⟨W, hWV, hyW, ht⟩ := hgen m V.unop.left V.unop.hom.le t y hy
-      let W' : Over U := Over.mk (homOfLE (hWV.trans V.unop.hom.le))
-      let v : W' ⟶ V.unop := Over.homMk (homOfLE hWV)
-      refine ⟨W, homOfLE hWV, ?_, hyW⟩
-      rw [Sieve.overEquiv_iff]
-      change N.val.presheaf.map v.op _ = N.val.presheaf.map v.op _
-      erw [← PresheafOfModules.naturality_apply p.val,
-        ← PresheafOfModules.naturality_apply q.val]
-      change p.val.app (op W') (M.val.map (homOfLE hWV).op _) =
-        q.val.app (op W') (M.val.map (homOfLE hWV).op _)
-      erw [← PresheafOfModules.naturality_apply (iota m).val]
-      let Lp := ((O.map (iota m)) ≫ T.map p).val.app (op W')
-      let Lq := ((O.map (iota m)) ≫ T.map q).val.app (op W')
-      change Lp ((G m).val.map (homOfLE hWV).op t) =
-        Lq ((G m).val.map (homOfLE hWV).op t)
-      generalize he : (G m).val.map (homOfLE hWV).op t = t' at ht ⊢
-      clear he
-      induction ht using Submodule.span_induction with
-      | mem z hz =>
-          obtain ⟨i, hdi, b, hz⟩ := hz
-          generalize hk : m - d i = k at b hz
-          have hd : d i + k = m := by simpa only [hk] using Nat.add_sub_of_le hdi
-          subst m
-          have hz' := eq_of_heq hz
-          subst z
-          let si := (G (d i)).val.map
-            (homOfLE (hWV.trans V.unop.hom.le)).op (s i)
-          have hc := congrArg (fun e ↦ e.val.app (op W) si) (hcompat k (d i) b)
-          let c := (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val)
-          change (iota (d i + k)).val.app (op W) ((mu (d i) k b).val.app (op W) si) =
-            (F.smulHom c).app (pi ⁻¹ᵁ W) ((iota (d i)).val.app (op W) si) at hc
-          rw [Scheme.Modules.smulHom_app_apply] at hc
-          change p.val.app (op W') ((iota (d i + k)).val.app (op W) _) =
-            q.val.app (op W') ((iota (d i + k)).val.app (op W) _)
-          erw [hc]
-          rw [(p.val.app (op W')).hom.map_smul, (q.val.app (op W')).hom.map_smul]
-          congr 1
-          have hi := PresheafOfModules.naturality_apply (iota (d i)).val
-            (homOfLE (hWV.trans V.unop.hom.le)).op (s i)
-          have hb := hbasis i (op W')
-          change p.val.app (op W') (M.val.map
-            (homOfLE (hWV.trans V.unop.hom.le)).op _) =
-            q.val.app (op W') (M.val.map
-              (homOfLE (hWV.trans V.unop.hom.le)).op _) at hb
-          erw [← hi] at hb
-          exact hb
-      | zero => exact (Lp.hom.map_zero).trans (Lq.hom.map_zero).symm
-      | add z w hz hw ihz ihw => simp only [map_add, ihz, ihw]
-      | smul c z hz ih => simp only [map_smul, ih]
-    exact N.isSheaf.isSeparated V.unop S hcover _ _ (fun W v hv ↦ hv)
+    apply over_hom_ext_of_locally_eq
+    intro V t y hy
+    obtain ⟨W, hWV, hyW, ht⟩ := hgen m V.left V.hom.le t y hy
+    refine ⟨W, hWV, hyW, ?_⟩
+    let W' : Over U := Over.mk (homOfLE (hWV.trans V.hom.le))
+    let Lp := ((O.map (iota m)) ≫ T.map p).val.app (op W')
+    let Lq := ((O.map (iota m)) ≫ T.map q).val.app (op W')
+    change Lp ((G m).val.map (homOfLE hWV).op t) =
+      Lq ((G m).val.map (homOfLE hWV).op t)
+    refine LinearMap.eqOn_span (f := Lp.hom) (g := Lq.hom) ?_ ht
+    intro z hz
+    obtain ⟨i, hdi, b, hz⟩ := hz
+    generalize hk : m - d i = k at b hz
+    have hd : d i + k = m := by simpa only [hk] using Nat.add_sub_of_le hdi
+    subst m
+    have hz' := eq_of_heq hz
+    subst z
+    let si := (G (d i)).val.map
+      (homOfLE (hWV.trans V.hom.le)).op (s i)
+    have hc := congrArg (fun e ↦ e.val.app (op W) si) (hcompat k (d i) b)
+    let c := (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val)
+    change (iota (d i + k)).val.app (op W) ((mu (d i) k b).val.app (op W) si) =
+      (F.smulHom c).app (pi ⁻¹ᵁ W) ((iota (d i)).val.app (op W) si) at hc
+    rw [Scheme.Modules.smulHom_app_apply] at hc
+    change p.val.app (op W') ((iota (d i + k)).val.app (op W) _) =
+      q.val.app (op W') ((iota (d i + k)).val.app (op W) _)
+    erw [hc]
+    rw [(p.val.app (op W')).hom.map_smul, (q.val.app (op W')).hom.map_smul]
+    congr 1
+    have hi := PresheafOfModules.naturality_apply (iota (d i)).val
+      (homOfLE (hWV.trans V.hom.le)).op (s i)
+    exact (congrArg (p.val.app (op W')) hi).trans
+      ((hbasis i (op W')).trans (congrArg (q.val.app (op W')) hi).symm)
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro V

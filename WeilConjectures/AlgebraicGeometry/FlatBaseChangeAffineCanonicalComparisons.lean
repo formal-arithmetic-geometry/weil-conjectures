@@ -36,8 +36,6 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 800000 in
--- Explicit homology transports need more elaboration than the default budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical source and target affine comparisons, compatible with the cohomological
@@ -80,16 +78,16 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
               (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                 ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (e0.symm xi)))) := by
   classical
-  dsimp only
   let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
-  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
-  let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F
+  intro h N P Q
   let : ∀ G : S.Modules, Module Γ(S, V)
       Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
     fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
-  obtain ⟨c, hc, hs, ht, _⟩ :=
-    Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
+  refine (Scheme.Modules.exists_tensorPullback_affine_sections
+    g ⟨V, hV⟩ ⟨W, hW⟩ eVW).elim fun c sections ↦ ?_
+  have hc := sections.1
+  have hs := sections.2.1
+  have ht := sections.2.2.1
   have target :=
     Scheme.Modules.exists_flatBaseChange_target_leray_comparison
       f g F I J p V W hV hW eVW D
@@ -100,8 +98,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
   have edge :=
     Scheme.Modules.exists_affine_cohomology_section_equiv f F I p V hV D.source E hE
   obtain ⟨e, he⟩ := edge
-  have hP : P.IsQuasicoherent := by
-    exact ordinaryHigherImage_isQuasicoherent f F inferInstance p
+  have hP := ordinaryHigherImage_isQuasicoherent f F inferInstance p
   let k : (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) →ₗ[Γ(S', W)]
       Γ((Scheme.Modules.tensorPullback g).obj P, W) :=
     { toFun := fun t ↦ c P hP ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm t)
@@ -121,12 +118,12 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
     change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
     have he' : e xi = D.sourceClass p (eH.symm xi) := by
       rw [heH]
+      dsimp only [Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass]
       exact he xi
     exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
       ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op
         (Scheme.Modules.Hom.app
           ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
           V z)) he')
-  · dsimp only at hb0
-    exact hb0
+  · exact hb0
 end AlgebraicGeometry

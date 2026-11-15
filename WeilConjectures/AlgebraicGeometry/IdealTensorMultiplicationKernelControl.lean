@@ -191,9 +191,6 @@ private theorem ideal_tensor_balancing {X : Scheme.{u}} (J : X.IdealSheafData)
   rw [← smul_tmulSection, he, smul_tmulSection, tmulSection_smul]
 
 
-set_option maxHeartbeats 400000 in
--- Affine tensor and kernel section identifications require extra elaboration heartbeats;
--- the file still compiles within the unchanged 60-second wall limit.
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor multiplication source is coherent and its quasi-coherent kernel is
 annihilated by the same ideal power.
@@ -256,8 +253,8 @@ theorem ideal_tensor_multiplication_kernel_control
         ((quasiCoherent_tensor_product_affine_sections J.toModules H).2 U.1 U.2).2 z
       induction w using TensorProduct.inductionOn with
       | tmul b h =>
-        simp only [tensorSectionsMap_tmul, hμ]
-        change r • tmulSection b h = tmulSection a _
+        -- Expose the linear map so that its value is computed by tensorSectionsMap_tmul.
+        simp only [L, tensorSectionsMap_tmul, hμ]
         rw [← ha]
         exact ideal_tensor_balancing J H U.1 a b h
       | add x y hx hy => simp only [map_add, smul_add, hx, hy]

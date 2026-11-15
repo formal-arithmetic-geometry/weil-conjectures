@@ -73,7 +73,20 @@ private theorem forget_augmentation {C : Type*} [Category* C] [Abelian C]
     InjectiveResolution.toRightDerivedZero'_comp_iCycles]
   rfl
 
-set_option maxHeartbeats 800000 in
+-- Cancel abstract isomorphisms without unfolding the concrete resolution comparisons.
+private theorem augmentation_diagram_cancel {C : Type*} [Category* C]
+    {A B C₁ D E F K L : C} (rJ : B ≅ C₁) (sJ : D ≅ C₁)
+    (rI : E ≅ F) (sI : K ≅ F) (aJ : A ⟶ B) (aI : A ⟶ E)
+    (b : D ⟶ L) (m : K ⟶ L) [IsIso m]
+    (h : aJ ≫ rJ.hom ≫ sJ.inv ≫ b = aI ≫ rI.hom ≫ sI.inv ≫ m) :
+    aJ ≫ rJ.hom ≫ sJ.inv ≫ b ≫ inv m ≫ sI.hom ≫ rI.inv = aI := by
+  apply (cancel_mono rI.hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  apply (cancel_mono sI.inv).1
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  apply (cancel_mono m).1
+  simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using h
+
 -- Comparing the module and abelian-group homology models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero resolution formula commutes with the canonical augmentations
@@ -129,23 +142,20 @@ theorem ModuleCohomologyFMapData.map_zero_augmentation {X Y : Scheme.{u}} {h : X
         congrArg (fun f ↦ f ≫ HomologicalComplex.homologyπ _ 0) hc
     let UX := forget₂
       (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
-    apply (cancel_mono
-      (UX.map (D.I.isoRightDerivedObj
-        (RingedSpace.globalSectionsFunctor X.toRingedSpace) 0).hom)).1
-    dsimp only [ModuleCohomologyFMapData.map]
-    simp only [Category.assoc]
-    rw [← UX.map_comp, Iso.inv_hom_id, UX.map_id, Category.comp_id]
-    apply (cancel_mono
-      (((RingedSpace.globalSectionsComplex D.I).sc 0).mapHomologyIso UX).inv).1
-    simp only [Category.assoc]
-    dsimp only [UX]
-    erw [Iso.hom_inv_id]
-    rw [Category.comp_id]
+    let UY := forget₂
+      (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
     have : IsIso (H.map μ) := D.invertible 0
-    apply (cancel_mono (H.map μ)).1
+    dsimp only [ModuleCohomologyFMapData.map]
+    refine augmentation_diagram_cancel
+      (UY.mapIso (D.J.isoRightDerivedObj
+        (RingedSpace.globalSectionsFunctor Y.toRingedSpace) 0))
+      (((RingedSpace.globalSectionsComplex D.J).sc 0).mapHomologyIso UY)
+      (UX.mapIso (D.I.isoRightDerivedObj
+        (RingedSpace.globalSectionsFunctor X.toRingedSpace) 0))
+      (((RingedSpace.globalSectionsComplex D.I).sc 0).mapHomologyIso UX)
+      _ _ (H.map b) (H.map μ) ?_
+    dsimp only [Functor.mapIso_hom]
     simp only [Category.assoc]
-    erw [IsIso.inv_hom_id]
-    rw [Category.comp_id]
     erw [reassoc_of% (forget_augmentation
         (RingedSpace.globalSectionsFunctor Y.toRingedSpace) D.J),
       reassoc_of% (forget_augmentation

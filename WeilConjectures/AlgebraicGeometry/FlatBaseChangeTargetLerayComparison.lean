@@ -30,10 +30,17 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
+private theorem equiv_transport_commutative_square
+    {A B C D : Type*} (e : A ≃ B) {a : A → C} {k : B → C}
+    {b : C → D} {r : A → D}
+    (hk : ∀ x, a x = k (e x)) (hb : ∀ x, b (a x) = r x) :
+    ∀ y, b (k y) = r (e.symm y) := by
+  intro y
+  exact (congrArg b ((hk (e.symm y)).trans
+    (congrArg k (e.apply_symm_apply y)))).symm.trans (hb (e.symm y))
+
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
-set_option maxHeartbeats 800000 in
--- The section and Ext models require explicit derived-cohomology conversions.
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change
@@ -76,34 +83,40 @@ theorem exists_flatBaseChange_target_leray_comparison
   classical
   letI : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
   intro h N Q
-  let T : Scheme.{u} := baseChangedScheme (S := Γ(S', W)) h
-  let M : T.Modules := baseChangedModule (S := Γ(S', W)) h N
   let c := (restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F
-  obtain ⟨E, E', hE, hE', hmap⟩ := exists_moduleCohomology_ext_pullback_comparison
-    (B := Γ(S', W)) h p
+  refine (exists_moduleCohomology_ext_pullback_comparison (B := Γ(S', W)) h p).elim
+    fun E comparison ↦ ?_
+  refine comparison.elim fun E' compatibility ↦ ?_
+  have hE := compatibility.1
+  have hE' := compatibility.2.1
+  have hmap := compatibility.2.2
   let e0 : ((RingedSpace.moduleCohomology
       (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
         ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+ HOver h N p :=
     (E ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
     (H.mapLinearEquiv c p).toAddEquiv
   refine ⟨E, hE, e0, rfl, ?_⟩
-  obtain ⟨b, hb⟩ := exists_flatBaseChange_module_leray_comparison
-    f g F I J p V W hV hW eVW D rfl E' hE'
-  refine ⟨b, ?_⟩
-  intro xi
-  generalize hxi : e0.symm xi = x
-  have hx : E N
-      (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
-      = xi := by
-    rw [hE _ _ c.hom x]
-    exact (congrArg e0 hxi.symm).trans (e0.apply_symm_apply xi)
-  have hp := hmap N
-    (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
-  have hb' := hb x
-  have hp' := congrArg (fun z : HOver (baseChangeSnd (S := Γ(S', W)) h) M p ↦ b z)
-    hp.symm
-  have hx' := congrArg (fun z : HOver h N p ↦
-    b (H.baseChangeLinear (S := Γ(S', W)) h N p z)) hx.symm
-  exact Eq.trans hx' (Eq.trans hp' hb')
+  refine (exists_flatBaseChange_module_leray_comparison
+    f g F I J p V W hV hW eVW D rfl E' hE').elim fun b hb ↦ ?_
+  let L := (restrictFunctor (f ⁻¹ᵁ V).ι).obj F
+  let C := RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p
+  let M := baseChangedModule (S := Γ(S', W)) h N
+  let a : C.obj L → HOver (baseChangeSnd (S := Γ(S', W)) h) M p := fun x ↦
+    E' M (moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)
+      (baseChangeUnit (S := Γ(S', W)) h N) p ((C.map c.hom).hom x))
+  let k : HOver h N p → HOver (baseChangeSnd (S := Γ(S', W)) h) M p :=
+    H.baseChangeLinear (S := Γ(S', W)) h N p
+  let r : C.obj L → Γ(Q, W) := fun x ↦
+    Q.presheaf.map (homOfLE eVW).op
+      (D.targetClass p
+        (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
+          ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p x))
+  refine ⟨b, equiv_transport_commutative_square e0.toEquiv
+    (a := a) (k := k) (b := b) (r := r) ?_ hb⟩
+  intro x
+  have hx : E N ((C.map c.hom).hom x) = e0 x := hE _ _ c.hom x
+  calc
+    a x = k (E N ((C.map c.hom).hom x)) := hmap N ((C.map c.hom).hom x)
+    _ = k (e0 x) := congrArg k hx
 
 end AlgebraicGeometry.Scheme.Modules

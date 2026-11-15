@@ -39,8 +39,27 @@ private theorem finiteType_neighborhood (X : RingedSpace.{u})
   obtain ⟨a, ⟨j⟩⟩ := hi
   exact ⟨q.X a, (leOfHom j) hxW, q.generators a, hq.isFiniteType a⟩
 
-set_option maxHeartbeats 700000 in
--- Elaborating the restricted free coproduct and its scalar restrictions needs extra heartbeats.
+private theorem map_generators_hom_eq_zero.{u₁, v₁, u₂, v₂}
+    {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {D : Type u₂} [Category.{v₂} D] [Limits.HasZeroMorphisms D]
+    (T : SheafOfModules.{u} R ⥤ D) [Limits.PreservesColimitsOfSize.{u, u} T]
+    [T.PreservesEpimorphisms] {M : SheafOfModules.{u} R}
+    (σ : M.GeneratingSections) {N : D} (ψ : T.obj M ⟶ N)
+    (h : ∀ a, T.map (M.unitHomEquiv.symm (σ.s a)) ≫ ψ = 0) : ψ = 0 := by
+  apply (cancel_epi (T.map σ.π)).mp
+  rw [Limits.comp_zero]
+  refine (Limits.isColimitOfPreserves T
+    (SheafOfModules.isColimitFreeCofan σ.I)).hom_ext (fun a ↦ ?_)
+  change T.map (SheafOfModules.ιFree a.as) ≫ T.map σ.π ≫ ψ = _
+  rw [← Category.assoc, ← T.map_comp,
+    ← SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply]
+  have hs : M.freeHomEquiv σ.π a.as = σ.s a.as :=
+    congrFun (M.freeHomEquiv.apply_symm_apply σ.s) a.as
+  rw [hs, Limits.comp_zero]
+  exact h a.as
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem zero_on_generators (X : RingedSpace.{u}) (F G : Modules X)
     (A U V : Opens X) (j : V ⟶ A) (i : V ⟶ U)
@@ -53,45 +72,33 @@ private theorem zero_on_generators (X : RingedSpace.{u}) (F G : Modules X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)
   let T := SheafOfModules.overMap R j
   let ψ : F.over V ⟶ G.over V := ⟨PresheafOfModules.restrictOverMap i φ⟩
-  have hepi : Epi (T.map σ.π) := inferInstance
-  have hz : T.map σ.π ≫ ψ = 0 := by
-    refine (CategoryTheory.Limits.isColimitOfPreserves T
-      (SheafOfModules.isColimitFreeCofan σ.I)).hom_ext (fun a ↦ ?_)
-    change T.map (SheafOfModules.ιFree a.as) ≫ T.map σ.π ≫ ψ = _
-    rw [← Category.assoc, ← T.map_comp]
-    rw [← SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply]
-    have hs : (F.over A).freeHomEquiv σ.π a.as = σ.s a.as :=
-      congrFun ((F.over A).freeHomEquiv.apply_symm_apply σ.s) a.as
-    rw [hs]
-    rw [Limits.comp_zero]
+  have hψ : ψ = 0 := by
+    apply map_generators_hom_eq_zero T σ ψ
+    intro a
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro W
     ext
     have hunit := congrArg (fun s ↦ s.val (op ((Over.map j).obj W.unop)))
-      ((F.over A).unitHomEquiv.apply_symm_apply (σ.s a.as))
-    change ((F.over A).unitHomEquiv.symm (σ.s a.as)).val.app
+      ((F.over A).unitHomEquiv.apply_symm_apply (σ.s a))
+    change ((F.over A).unitHomEquiv.symm (σ.s a)).val.app
       (op ((Over.map j).obj W.unop)) (1 : R.obj.obj (op W.unop.left)) = _ at hunit
     change φ.app (op ((Over.map i).obj W.unop))
-      (((F.over A).unitHomEquiv.symm (σ.s a.as)).val.app
+      (((F.over A).unitHomEquiv.symm (σ.s a)).val.app
         (op ((Over.map j).obj W.unop)) (1 : R.obj.obj (op W.unop.left))) = 0
     rw [hunit]
     change φ.app (op (Over.mk (W.unop.hom ≫ i)))
-      ((σ.s a.as).val (op (Over.mk (W.unop.hom ≫ j)))) = 0
+      ((σ.s a).val (op (Over.mk (W.unop.hom ≫ j)))) = 0
     have hn := PresheafOfModules.naturality_apply φ
       (Over.homMk W.unop.hom : Over.mk (W.unop.hom ≫ i) ⟶ Over.mk i).op
-      ((σ.s a.as).val (op (Over.mk j)))
-    have hs' := PresheafOfModules.sections_property (σ.s a.as)
+      ((σ.s a).val (op (Over.mk j)))
+    have hs' := PresheafOfModules.sections_property (σ.s a)
       (Over.homMk W.unop.hom : Over.mk (W.unop.hom ≫ j) ⟶ Over.mk j).op
     change F.val.map W.unop.hom.op _ = _ at hs'
     change φ.app (op (Over.mk (W.unop.hom ≫ i)))
       (F.val.map W.unop.hom.op _) = G.val.map W.unop.hom.op _ at hn
-    rw [hs', h a.as, map_zero] at hn
+    rw [hs', h a, map_zero] at hn
     exact hn
-  have hψ : ψ = 0 := by
-    apply (cancel_epi (T.map σ.π)).mp
-    rw [Limits.comp_zero]
-    exact hz
   exact congrArg SheafOfModules.Hom.val hψ
 
 /-- A local morphism from a finite type sheaf whose induced stalk map is zero

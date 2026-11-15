@@ -114,8 +114,28 @@ private theorem local_section_lift
   obtain ⟨g, hg⟩ := hf
   exact ⟨U, leOfHom f, hxU, g, hg⟩
 
-set_option maxHeartbeats 400000 in
--- Comparing the two restrictions of a free sheaf unfolds slice-site module functors.
+private theorem free_comp_eq_of_sections
+    {C D : Type*} [Category C] [Category D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {R : Sheaf J RingCat.{u}} {S : Sheaf K RingCat.{u}}
+    [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    [HasSheafify K AddCommGrpCat.{u}] [K.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    (F : SheafOfModules.{u} R ⥤ SheafOfModules.{u} S) (I : Type u)
+    [CategoryTheory.Limits.PreservesColimitsOfShape (Discrete I) F]
+    (η : unit S ≅ F.obj (unit R)) {M : SheafOfModules.{u} R} {N : SheafOfModules.{u} S}
+    (l : free I ⟶ N) (p : N ⟶ F.obj M) (q : free I ⟶ M)
+    (h : ∀ i, sectionsMap p (N.freeHomEquiv l i) =
+      (F.obj M).unitHomEquiv (η.hom ≫ F.map (ιFree i ≫ q))) :
+    l ≫ p = (mapFreeIso F I η).hom ≫ F.map q := by
+  apply CategoryTheory.Limits.Cofan.IsColimit.hom_ext (isColimitFreeCofan I)
+  intro i
+  simp only [freeCofan_inj]
+  rw [← Category.assoc, ← Category.assoc, ιFree_mapFreeIso_hom,
+    Category.assoc η.hom, ← F.map_comp]
+  apply (F.obj M).unitHomEquiv.injective
+  rw [unitHomEquiv_comp_apply]
+  exact h i
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem finite_free_lift
     (X : TopCat.{u}) (R : X.Sheaf RingCat.{u}) (V K : TopologicalSpace.Opens X) (hKV : K ≤ V)
@@ -163,18 +183,10 @@ private theorem finite_free_lift
   refine ⟨U, hUA.trans hAK, hxU, n, l, ?_⟩
   have heq : l ≫ F.map p =
       (mapFreeIso FA I (overMapUnitIso (R := R) (homOfLE hUA)).symm).hom ≫ FA.map q := by
-    apply CategoryTheory.Limits.Cofan.IsColimit.hom_ext (isColimitFreeCofan I)
-    intro i
-    simp only [freeCofan_inj]
-    rw [← Category.assoc, ← Category.assoc, ιFree_mapFreeIso_hom]
-    simp only [overMapUnitIso, Iso.symm_hom, Iso.refl_inv]
-    change (ιFree i ≫ l) ≫ F.map p = (𝟙 _ ≫ FA.map (ιFree i)) ≫ FA.map q
-    rw [Category.id_comp, ← FA.map_comp]
-    apply (H.over U).unitHomEquiv.injective
-    rw [unitHomEquiv_comp_apply]
-    change sectionsMap (F.map p) ((F.obj G).freeHomEquiv l i) = _
-    simp only [l, Equiv.apply_symm_apply]
-    ext Z
+    refine free_comp_eq_of_sections FA I _ (M := H.over A) l (F.map p) q (fun i ↦ ?_)
+    simp only [l, Equiv.apply_symm_apply, overMapUnitIso, Iso.symm_hom, Iso.refl_inv]
+    apply PresheafOfModules.sections_ext
+    intro Z
     change p.val.app (Opposite.op ((Over.map (homOfLE
       (hUA.trans (hAK.trans hKV)))).obj Z.unop)) (G.val.map
       (Over.homMk (homOfLE ((leOfHom Z.unop.hom).trans (hUB i))) :

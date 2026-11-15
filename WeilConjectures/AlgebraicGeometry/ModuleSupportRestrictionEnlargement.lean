@@ -24,8 +24,29 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 600000 in
--- Comparing iterated and direct restriction unfolds module pushforward functors.
+private theorem restrict_unit_factorization
+    (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    (V U W Z : X.Opens) (hUV : U ≤ V) (hWU : W ≤ U) (hZU : Z ≤ U) (hZW : Z ≤ W)
+    {M N P : SheafOfModules.{u} (R.over V)}
+    (p : M ⟶ N) (q : N ⟶ P) (r : M ⟶ P) (hpq : p ≫ q = r)
+    (b : unit (R.over U) ⟶ (overMap R (homOfLE hUV)).obj P)
+    (a : unit (R.over W) ⟶ (overMap R (homOfLE (hWU.trans hUV))).obj M)
+    (ha : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map r =
+      (overMap R (homOfLE hWU)).map b) :
+    ((overMap R (homOfLE hZW)).map a ≫
+        (overMap R (homOfLE (hZU.trans hUV))).map p) ≫
+        (overMap R (homOfLE (hZU.trans hUV))).map q =
+      (overMap R (homOfLE hZU)).map b := by
+  subst r
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro T
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro t
+  exact congrArg
+    (fun k ↦ k.val.app (Opposite.op ((Over.map (homOfLE hZW)).obj T.unop)) t) ha
+
 set_option backward.isDefEq.respectTransparency false in
 /-- An existing one-section factorization stays a factorization after further
 restriction and inclusion into a larger finite support. -/
@@ -55,14 +76,9 @@ theorem enlarge_restricted_unit_support
       (isColimitFreeCofan (R := R.over V) S)
     intro i
     simp only [freeCofan_inj, ιFree_freeMap_assoc, ιFree_freeMap]
-  let F := overMap R (homOfLE hZU)
-  let G := overMap R (homOfLE (hZU.trans hUV))
-  let aZ : F.obj (unit (R.over U)) ⟶ G.obj (free (R := R.over V) S) :=
-    (overMap R (homOfLE hZW)).map a
-  change (aZ ≫ G.map _) ≫ G.map _ = F.map b
-  rw [Category.assoc, ← G.map_comp, hfree]
-  have h := congrArg ((overMap R (homOfLE hZW)).map) ha
-  rw [Functor.map_comp] at h
-  exact h
+  exact restrict_unit_factorization X R V U W Z hUV hWU hZU hZW
+    (freeMap (R := R.over V) (fun j : S ↦ (⟨j.val, hST j.property⟩ : T)))
+    (freeMap (R := R.over V) ((↑) : T → I))
+    (freeMap (R := R.over V) ((↑) : S → I)) hfree b a ha
 
 end AlgebraicGeometry.Scheme.Modules

@@ -30,8 +30,6 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- The coefficient functor and section scalar structures require repeated definitional transport.
 /-- A coefficient comparison morphism with the unit formula is bijective on affine opens.
 This is a single-open statement: no tuples, face maps, or gluing are involved.
 (Stacks, Tag 02KG; Tags 01I9 and 01IA.) -/
@@ -82,9 +80,8 @@ theorem coefficientComparison_affine_bijective {X T : Scheme.{u}} (f : X ⟶ T)
         b.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) := by
     have hs : a.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) =
         P.presheaf.map (homOfLE le_top).op (coefficientGenerator g N s) := by
-      apply a.injective
-      rw [a.apply_symm_apply, ha]
-    rw [hs]
+      exact a.injective ((a.apply_symm_apply _).trans (ha s).symm)
+    refine (congrArg (q.app B) hs).trans ?_
     apply (ConcreteCategory.bijective_of_isIso (coefficientSupportIso f' M W B).hom).1
     have hn := congrArg (fun k ↦ k (coefficientGenerator g N s))
       (q.mapPresheaf.naturality (homOfLE (le_top : B ≤ ⊤)).op)
@@ -93,7 +90,12 @@ theorem coefficientComparison_affine_bijective {X T : Scheme.{u}} (f : X ⟶ T)
         (coefficientGenerator g N s)) =
       Q.presheaf.map (homOfLE le_top).op
         (q.app ⊤ (coefficientGenerator g N s)) at hn
-    rw [hn, coefficientSupportIso_naturality, hq, hb]
+    refine (congrArg (coefficientSupportIso f' M W B).hom hn).trans ?_
+    refine (coefficientSupportIso_naturality f' M W (homOfLE le_top) _).trans ?_
+    refine (congrArg (M.presheaf.map (homOfLE (inf_le_inf le_rfl
+      ((TopologicalSpace.Opens.map f'.base).map
+        (homOfLE (le_top : B ≤ ⊤))).le)).op) (hq s)).trans ?_
+    refine Eq.trans ?_ (hb s).symm
     simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     rfl
   let qlin : Γ(P, B) →ₗ[Γ(T', B)] Γ(Q, B) := (q.val.app (op B)).hom

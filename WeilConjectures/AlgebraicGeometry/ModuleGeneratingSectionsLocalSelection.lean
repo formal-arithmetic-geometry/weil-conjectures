@@ -26,8 +26,26 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 700000 in
--- Comparing iterated slice restrictions requires additional elaboration steps.
+private theorem epi_overMap_of_factorization
+    {X : TopCat.{u}} (R : X.Sheaf RingCat.{u})
+    {V U W : TopologicalSpace.Opens X} (hUV : U ≤ V) (hWU : W ≤ U)
+    {M N P : SheafOfModules.{u} (R.over V)}
+    {L : SheafOfModules.{u} (R.over U)} (m : M ⟶ N) (p : N ⟶ P)
+    (l : L ⟶ (overMap R (homOfLE hUV)).obj N)
+    (a : (overMap R (homOfLE hWU)).obj L ⟶
+      (overMap R (homOfLE (hWU.trans hUV))).obj M)
+    (ha : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map m =
+      (overMap R (homOfLE hWU)).map l)
+    [Epi (l ≫ (overMap R (homOfLE hUV)).map p)] :
+    Epi ((overMap R (homOfLE (hWU.trans hUV))).map (m ≫ p)) := by
+  let F := overMap R (homOfLE hWU)
+  have hE : Epi (F.map (l ≫ (overMap R (homOfLE hUV)).map p)) := F.map_epi _
+  have hfac : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map (m ≫ p) =
+      F.map (l ≫ (overMap R (homOfLE hUV)).map p) := by
+    rw [Functor.map_comp, ← Category.assoc, ha, Functor.map_comp]
+    rfl
+  exact @epi_of_epi_fac _ _ _ _ _ a _ _ hE hfac
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Near any point of an open on which a module sheaf is of finite type, finitely many
 members of a specified global generating family generate. Compactness is not assumed
@@ -46,20 +64,7 @@ theorem exists_finset_generatingSections_near_point
   obtain ⟨W, hWU, hxW, S, a, ha⟩ := exists_finite_free_local_support X V U
     (hUK.trans hKV) σ.I n l ⟨x.val, hxU⟩
   refine ⟨W, hWU.trans hUK, hxW, S, ?_⟩
-  let F := overMap (moduleRings X.toRingedSpace) (homOfLE hWU)
-  have : F.PreservesEpimorphisms := Functor.preservesEpimorphisms_of_adjunction
-    (overMapPushforwardAdj (moduleRings X.toRingedSpace) (homOfLE hWU))
-  have : Epi (F.map (l ≫ (overMap (moduleRings X.toRingedSpace)
-      (homOfLE (hUK.trans hKV))).map σ.π)) := by
-    have := hl
-    exact F.map_epi _
-  have hfac : a ≫ (overMap (moduleRings X.toRingedSpace)
-      (homOfLE ((hWU.trans hUK).trans hKV))).map
-        (freeMap (R := (moduleRings X.toRingedSpace).over V) ((↑) : S → σ.I) ≫ σ.π) =
-      F.map (l ≫ (overMap (moduleRings X.toRingedSpace)
-        (homOfLE (hUK.trans hKV))).map σ.π) := by
-    rw [Functor.map_comp, ← Category.assoc, ha, Functor.map_comp]
-    rfl
-  exact epi_of_epi_fac hfac
+  exact epi_overMap_of_factorization (moduleRings X.toRingedSpace) (hUK.trans hKV) hWU
+    (freeMap (R := (moduleRings X.toRingedSpace).over V) ((↑) : S → σ.I)) σ.π l a ha
 
 end AlgebraicGeometry.Scheme.Modules

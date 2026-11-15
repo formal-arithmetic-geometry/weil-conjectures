@@ -26,8 +26,61 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option maxHeartbeats 700000 in
--- Elaborating the nested derived, forgetful and evaluation comparisons needs a larger limit.
+private theorem homology_comparison_commutes
+    {C D T : Type*} [Category* C] [Category* D] [Category* T]
+    [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroMorphisms T]
+    (A : ShortComplex C) (B : ShortComplex D) [A.HasHomology] [B.HasHomology]
+    (F : C ⥤ T) (G : D ⥤ T) [F.PreservesZeroMorphisms] [G.PreservesZeroMorphisms]
+    [F.PreservesLeftHomologyOf A] [F.PreservesRightHomologyOf A]
+    [G.PreservesLeftHomologyOf B] [G.PreservesRightHomologyOf B]
+    (α : F ⟶ F) (β : G ⟶ G) (i : A.map F ⟶ B.map G)
+    (hi : A.mapNatTrans α ≫ i = i ≫ B.mapNatTrans β) :
+    α.app A.homology ≫ (A.mapHomologyIso F).inv ≫
+        ShortComplex.homologyMap i ≫ (B.mapHomologyIso G).hom =
+      (A.mapHomologyIso F).inv ≫ ShortComplex.homologyMap i ≫
+        (B.mapHomologyIso G).hom ≫ β.app B.homology := by
+  have hm := congrArg (fun q ↦ ShortComplex.homologyMap q) hi
+  simp only [ShortComplex.homologyMap_comp, ShortComplex.homologyMap_mapNatTrans] at hm
+  have hm' := congrArg
+    (fun q ↦ (A.mapHomologyIso F).inv ≫ q ≫ (B.mapHomologyIso G).hom) hm
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+    Category.comp_id] using hm'
+
+private theorem pushforward_top_homology_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
+    (K : CochainComplex Z.Modules ℕ) (p : ℕ) (t : S.presheaf.obj (op ⊤)) :
+    let A := ((RingedSpace.globalSectionsFunctor Z.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj K
+    let L := ((Scheme.Modules.pushforward h).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj K
+    let B := ((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj L
+    let cA := (A.sc p).mapHomologyIso (forget₂ _ AddCommGrpCat.{u})
+    let cB := (B.sc p).mapHomologyIso (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
+      (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))
+    ∀ z : (A.sc p).homology,
+      cB.hom (cA.inv (h.appTop.hom t • z)) =
+        t • (show (B.sc p).homology.obj (op ⊤) from cB.hom (cA.inv z)) := by
+  intro A L B cA cB z
+  let U := forget₂ (ModuleCat.{u} ((moduleRings Z.toRingedSpace).obj.obj (op ⊤)))
+    AddCommGrpCat.{u}
+  let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
+    (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let τ : E ⟶ E := {
+    app := fun M ↦ ((M.obj (op ⊤)).smul t).asHom
+    naturality := fun M N q ↦ by
+      ext z
+      exact ((q.app (op ⊤)).hom.map_smul t z).symm }
+  let α := (ModuleCat.smulNatTrans
+    ((moduleRings Z.toRingedSpace).obj.obj (op ⊤)) (h.appTop.hom t)).asHom
+  have hscalar : (A.sc p).mapNatTrans α = (B.sc p).mapNatTrans τ := by
+    ext m <;> rfl
+  have hc := homology_comparison_commutes (A.sc p) (B.sc p) U E α τ (𝟙 _)
+    (by simpa only [Category.comp_id, Category.id_comp] using hscalar)
+  simp only [ShortComplex.homologyMap_id, Category.id_comp] at hc
+  change ((A.sc p).homology.smul (h.appTop.hom t)).asHom ≫ cA.inv ≫ cB.hom =
+    cA.inv ≫ cB.hom ≫ τ.app (B.sc p).homology at hc
+  exact congrArg (fun q ↦ q z) hc
+
 private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     {G : Z.Modules} (K : InjectiveResolution G) (p : ℕ)
     (t : S.presheaf.obj (op ⊤))
@@ -46,31 +99,16 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     (ComplexShape.up ℕ)).obj K.cocomplex
   let B := ((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj L
-  let U := forget₂ (ModuleCat.{u} (Z.ringCatSheaf.obj.obj (op ⊤))) AddCommGrpCat.{u}
+  let U := forget₂ (ModuleCat.{u} ((moduleRings Z.toRingedSpace).obj.obj (op ⊤)))
+    AddCommGrpCat.{u}
   let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
     (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
-  let τ : E ⟶ E := {
-    app := fun M ↦ ((M.obj (op ⊤)).smul t).asHom
-    naturality := fun M N q ↦ by
-      ext z
-      exact ((q.app (op ⊤)).hom.map_smul t z).symm }
   let cA := (A.sc p).mapHomologyIso U
   let cB := (B.sc p).mapHomologyIso E
-  have hscalar : (A.sc p).mapNatTrans
-      ((ModuleCat.smulNatTrans (Z.ringCatSheaf.obj.obj (op ⊤)) (h.appTop.hom t)).asHom) =
-      (B.sc p).mapNatTrans τ := by
-    ext m <;> rfl
-  have hm := congrArg (fun q ↦ ShortComplex.homologyMap q) hscalar
-  rw [ShortComplex.homologyMap_mapNatTrans,
-    ShortComplex.homologyMap_mapNatTrans] at hm
-  have hm' := congrArg (fun q ↦ cA.inv ≫ q ≫ cB.hom) hm
-  have hc : ((A.sc p).homology.smul (h.appTop.hom t)).asHom ≫ cA.inv ≫ cB.hom =
-      cA.inv ≫ cB.hom ≫ τ.app (B.sc p).homology := by
-    simpa [cA, cB, U, Category.assoc, ModuleCat.smulNatTrans] using hm'
   have hc' (z : (A.sc p).homology) :
       cB.hom (cA.inv (h.appTop.hom t • z)) =
-        t • (show (B.sc p).homology.obj (op ⊤) from cB.hom (cA.inv z)) := by
-    exact congrArg (fun q ↦ q z) hc
+        t • (show (B.sc p).homology.obj (op ⊤) from cB.hom (cA.inv z)) :=
+    pushforward_top_homology_smul h K.cocomplex p t z
   let e := (K.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p).hom
   let θ := (Scheme.Modules.sectionCohomologyTheta L p).app (op ⊤)
   dsimp only [Scheme.Modules.resolutionSectionClass]
@@ -79,7 +117,8 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
   erw [Category.id_comp]
   change θ (cB.hom (cA.inv (e (h.appTop.hom t • x)))) =
     t • (show (L.homology p).val.obj (op ⊤) from θ (cB.hom (cA.inv (e x))))
-  rw [e.hom.map_smul, hc', θ.hom.map_smul]
+  exact (congrArg (fun z ↦ θ (cB.hom (cA.inv z))) (e.hom.map_smul _ _)).trans
+    ((congrArg θ (hc' (e x))).trans (θ.hom.map_smul _ _))
 
 private theorem local_germ_smul {Y : Scheme.{u}} (y : Y)
     (G : (Spec (CommRingCat.of (Y.presheaf.stalk y))).Modules)

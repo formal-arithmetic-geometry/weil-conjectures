@@ -36,8 +36,26 @@ private theorem isIso_of_components
   have : IsIso ((SheafOfModules.forget R).map f) := ‹IsIso f.val›
   exact isIso_of_reflects_iso f (SheafOfModules.forget _)
 
-set_option maxHeartbeats 500000 in
--- Evaluating the slice-site adjunction requires additional elaboration.
+private theorem overMap_unit_component_isIso
+    {C : Type*} [Category C] [HasPullbacks C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{u}) {X Y : C} (j : X ⟶ Y)
+    (M : SheafOfModules.{u} (R.over Y)) (A : Over Y)
+    [IsIso ((Over.mapPullbackAdj j).counit.app A)] :
+    IsIso (((overMapPushforwardAdj R j).unit.app M).val.app (op A)) := by
+  apply (ConcreteCategory.isIso_iff_bijective _).2
+  change Function.Bijective (M.val.presheaf.map ((Over.mapPullbackAdj j).counit.app A).op)
+  exact (ConcreteCategory.isIso_iff_bijective _).1 (inferInstance)
+
+private theorem overMap_counit_component_isIso
+    {C : Type*} [Category C] [HasPullbacks C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{u}) {X Y : C} (j : X ⟶ Y)
+    (M : SheafOfModules.{u} (R.over X)) (A : Over X)
+    [IsIso ((Over.mapPullbackAdj j).unit.app A)] :
+    IsIso (((overMapPushforwardAdj R j).counit.app M).val.app (op A)) := by
+  apply (ConcreteCategory.isIso_iff_bijective _).2
+  change Function.Bijective (M.val.presheaf.map ((Over.mapPullbackAdj j).unit.app A).op)
+  exact (ConcreteCategory.isIso_iff_bijective _).1 (inferInstance)
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The concrete pullback restricts to `Q` on `V`. -/
 theorem binarySubmodule_on_V
@@ -60,11 +78,12 @@ theorem binarySubmodule_on_V
       let g : A.left ⟶ CategoryTheory.Limits.pullback A.hom j :=
         pullback.lift (𝟙 _) T.unop.hom (Subsingleton.elim _ _)
       exact ⟨⟨g, Subsingleton.elim _ _, Subsingleton.elim _ _⟩⟩
-    have hη : IsIso ((adj.unit.app (H.over (W ⊔ V))).val.app (op A)) := by
-      apply (ConcreteCategory.isIso_iff_bijective _).2
-      have hmap := (H.val.presheaf.map_isIso (pullback.fst A.hom j).op)
-      exact (ConcreteCategory.isIso_iff_bijective
-        (H.val.presheaf.map (pullback.fst A.hom j).op)).1 hmap
+    have : IsIso ((Over.mapPullbackAdj j).counit.app A) := by
+      have : IsIso ((Over.forget (W ⊔ V)).map ((Over.mapPullbackAdj j).counit.app A)) :=
+        hfst
+      exact isIso_of_reflects_iso _ (Over.forget (W ⊔ V))
+    have hη : IsIso ((adj.unit.app (H.over (W ⊔ V))).val.app (op A)) :=
+      overMap_unit_component_isIso R j (H.over (W ⊔ V)) A
     have hp := (SheafOfModules.evaluation.{u} (R.over (W ⊔ V)) (op A)).map_isPullback
       (IsPullback.of_hasPullback (adj.unit.app (H.over (W ⊔ V)))
         (binarySubmoduleMap X W V H Q ι))
@@ -74,11 +93,8 @@ theorem binarySubmodule_on_V
         Over.homMk (pullback.fst A.hom j) (Subsingleton.elim _ _)
       exact ⟨⟨g, (by ext; apply Subsingleton.elim),
         (by ext; apply Subsingleton.elim)⟩⟩
-    have hε : IsIso ((adj.counit.app Q).val.app T) := by
-      apply (ConcreteCategory.isIso_iff_bijective _).2
-      have hmap := Q.val.presheaf.map_isIso ((Over.mapPullbackAdj j).unit.app T.unop).op
-      exact (ConcreteCategory.isIso_iff_bijective
-        (Q.val.presheaf.map ((Over.mapPullbackAdj j).unit.app T.unop).op)).1 hmap
+    have hε : IsIso ((adj.counit.app Q).val.app T) :=
+      overMap_counit_component_isIso R j Q T.unop
     have hs' : IsIso (((overMap R j).map snd).val.app T) := hs
     change IsIso (((overMap R j).map snd).val.app T ≫ (adj.counit.app Q).val.app T)
     infer_instance
