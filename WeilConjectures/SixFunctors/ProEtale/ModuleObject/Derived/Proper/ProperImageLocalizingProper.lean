@@ -480,10 +480,8 @@ private theorem properHypotheses_rational
     (localizingClosure_ctf_equals_bc ℓ X Λ.X hc).1.2.2.1
     (localizingClosure_ctf_equals_bc ℓ Y Λ.X hc).1.2.2.1
   · intro K hK
-    have hX := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k
-      (ringChar k) (Fact.out : (ringChar k).Prime).pos Fact.out X
-    have hY := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k
-      (ringChar k) (Fact.out : (ringChar k).Prime).pos Fact.out Y
+    have hX := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k X
+    have hY := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k Y
     apply (congrFun hY _).mpr
     have : LocallyOfFiniteType (X.asOver (Spec (.of k))).hom :=
       inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (.of k)))
