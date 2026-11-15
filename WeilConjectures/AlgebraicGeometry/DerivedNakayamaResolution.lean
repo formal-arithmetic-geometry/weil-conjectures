@@ -684,17 +684,6 @@ def resolutionUniformizerEnd : End (Mod.regular (integerRing l E)) := uniformize
 @[no_expose]
 def resolutionReductionHom (n : ℕ) :
     Mod.regular (integerRing l E) ⟶ quotientModule l E n :=
-  Mod.homMk (reductionRing l E n) (by
-    change MonObj.mul ≫ reductionRing l E n =
-      integerRing l E ◁ reductionRing l E n ≫
-        reductionRing l E n ▷ quotientRing l E n ≫ MonObj.mul
-    simpa only [tensorHom_def', Category.assoc] using
-      (IsMonHom.mul_hom (reductionRing l E n)))
-
-private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
-    (f : (integerRing l E).obj.obj S) (x : S.unop) :
-    (((uniformizerEnd l E).asHom.hom.hom.app S) f).down x =
-      Padic.coefficientExtensionUniformizer l E * f.down x :=
   reductionHom l E n
 
 /-- Multiplication by `π_E^n` followed by the quotient map `O_E ⟶ O_E/π_E^n` is zero. -/
