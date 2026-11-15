@@ -16,8 +16,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Exact derived pullback-square pasting
 
-Source: Stacks Project, Tag 03S6; coherence of exact inverse images.
-(blueprint: lem-pur-etale-exact-pullback-square-pasting).
+## References
+
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public section
@@ -41,19 +42,7 @@ private lemma exact_word_cell_iso
     Word.cell C alpha.hom = P.comparison.inv ≫
       (Functor.mapDerivedCategoryNatIso alpha).hom ≫ R.comparison.hom := rfl
 
-/-- Inverse exact pullback-square comparisons paste under successive Cartesian changes.
-Source: Stacks Project, Tag 03S6, and the sheaf inverse-image square-pasting law.
-(blueprint: lem-pur-etale-exact-pullback-square-pasting).
-
-Proof: Apply the ordinary square-pasting law to the flipped squares. The comparison for
-such a square is the inverse of the original comparison. Cancel the source compositor
-and apply the target compositor to obtain the displayed inverse-square equation on sheaves.
-Encode its two sides as finite expressions in exact inverse-image functors and square and
-compositor cells. Exact-derived transformation pasting descends this equation. Its word
-comparison formula identifies the derived square cells with exactDerivedSquareUpperStarIso
-and the two compositor cells with unboundedEtaleUpperStarCompIso. Evaluation at K proves
-the equation on the entire unbounded category. No finiteness or Noetherian assumption is
-used; identity arrows and empty schemes are included. -/
+/-- Inverse exact pullback-square comparisons paste under successive Cartesian changes. -/
 theorem etaleExactPullbackSquarePasting
     (A : Type (u + 1)) [CommRing A]
     {U U' U'' X X' X'' : Scheme.{u}}

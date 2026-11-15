@@ -19,11 +19,12 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # Uniform perfect models of finite quotients
 
-Source: Stacks Tags 09C2 and 094I
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-
 This interface records finite-level models without asserting a completed realization.
 All coefficient identifications are normalized on constant sections.
+
+## References
+
+* Stacks Project, Tags 09C2, 094I, 093M, 09C6, 03DJ, 05RU
 -/
 
 @[expose] public noncomputable section
@@ -38,11 +39,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The normalized comparisons preserve the actual consecutive quotient maps.
-Source: Stacks Tags 093M and 09C6
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: it suffices to test on constant presheaf sections. Naturality of the two
-sheafification units reduces both composites to the same constant quotient function. -/
+/-- The normalized comparisons preserve the actual consecutive quotient maps. -/
 private theorem finitePerfectModelsComparison_step (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -95,12 +92,7 @@ private theorem finitePerfectModelsComparison_step (X : Scheme.{t}) {A : Type t}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The completed scalar map is normalized by the finite quotient comparisons.
-Source: Stacks Tags 093M and 09C6
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: test the equality after the constant presheaf unit. The scalar map's defining
-projection equation gives the left side, and naturality of the sheafification unit
-followed by normalization of the finite comparison gives the right side. -/
+/-- The completed scalar map is normalized by the finite quotient comparisons. -/
 private theorem finitePerfectModelsScalar_projection (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -132,13 +124,7 @@ private theorem finitePerfectModelsScalar_projection (X : Scheme.{t}) {A : Type 
   rw [← hq, hnorm]
   exact hs
 
-/-- Normalization on constant sections determines a compatible coefficient system.
-Source: Stacks Tags 093M and 09C6
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: precompose each required square with the constant-presheaf sheafification unit.
-Naturality identifies the consecutive quotient maps. The defining projection equation
-for the completed scalar map identifies the scalar squares. Sheafification's universal
-property reflects both equalities back to maps of sheaves. -/
+/-- Normalization on constant sections determines a compatible coefficient system. -/
 theorem finitePerfectModels_normalized_compatible (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -149,12 +135,7 @@ theorem finitePerfectModels_normalized_compatible (X : Scheme.{t})
     finitePerfectModelsScalar_projection X d φ hnorm⟩
 
 /-- Further restriction is exact and preserves the representative-based derived
-restriction isomorphisms. Source: Stacks Tag 03DJ
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: the underlying sheaf functor is pullback to the localized site. It preserves
-finite limits and colimits, and the faithful exact forgetful functor reflects short
-exactness. Derived composition and the representative localization factors then
-identify further restriction with restriction to the smaller chart. -/
+restriction isomorphisms. -/
 private theorem finitePerfectModelsOverMap_exact (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V) :
     (SheafOfModules.overMap.{t + 1} R f).Additive ∧
@@ -179,9 +160,7 @@ private theorem finitePerfectModelsOverMap_exact (X : Scheme.{t})
       ((hS.map_of_exact (SheafOfModules.toSheaf.{t + 1} (R.over V))).map_of_exact H)
   exact ⟨hAdd, (Functor.exact_tfae F).out 1 4 |>.mp h⟩
 
-/-- The exact derived restriction agrees with the chosen representative formula.
-Source: Stacks Tags 03DJ and 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+/-- The exact derived restriction agrees with the chosen representative formula. -/
 private def finitePerfectModelsRestrictionComparison (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
@@ -194,9 +173,7 @@ private def finitePerfectModelsRestrictionComparison (X : Scheme.{t})
   exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
-/-- A local isomorphism persists on every smaller chart.
-Source: Stacks Tag 03DJ
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+/-- A local isomorphism persists on every smaller chart. -/
 private theorem finitePerfectModelsRestrictIso_further (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V)
     (M N : DerivedCategory (SheafOfModules.{t + 1} R))
@@ -225,27 +202,7 @@ private theorem finitePerfectModelsRestrictIso_further (X : Scheme.{t})
       finitePerfectModelsRestrictionComparison X R U K
   exact ⟨(c M).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫ c N⟩
 /-- One step of the perfect-residue coefficient filtration preserves local models
-and their fixed Tor interval. No completeness or simultaneous trivialization is assumed.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094I; proetale.tex, Tag 09C2;
-connected etale perfect constancy.
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-
-Proof: refine the two etale covers giving the residue and previous-level models to
-one cover. Tensor the constant quotient sequence with a flat K-flat representative
-of M. Its kernel term is the residue model tensored with I^(n+1)/I^(n+2), by
-balancing. This is a bounded constant complex with finite cohomology. The previous
-model supplies the other outer term. The weak Serre theorem over the Noetherian
-finite coefficient ring gives locally constant finite cohomology of the middle
-term, with the same bounds. Finite-ring constructible derived origin descends it to
-the etale site. Full faithfulness transports its residue marking. Nilpotent-reduction
-lissity makes its etale cohomology finite locally constant. For the Tor bound, tensor
-with an arbitrary module and use its finite ideal filtration: each quotient is an
-A/I-module, so balancing with the residue model gives vanishing outside [a,b].
-Connected etale perfect constancy now provides local perfect constant values.
-Represent them by finite-projective complexes in [a,b], using this Tor bound.
-The coefficient squares identify each tensor and reduction with the specified
-quotient functors. Compose the local coverings. Empty charts use empty covers. -/
+and their fixed Tor interval. -/
 theorem residuePerfect_quotient_models_succ
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
@@ -304,11 +261,7 @@ theorem residuePerfect_quotient_models_succ
       ((completedAdicDerivedChange X (φ (n + 1))).mapIso c) ≪≫
     finitePerfectModelsRestrictionComparison X R U _⟩
 
-/-- Widening the fixed interval preserves a finite perfect local model.
-Source: the interval monotonicity in the definition of `FinitePerfectModelsOn`.
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-This is proved by reusing the same covering, complexes, and restriction
-isomorphisms; only the two degree bounds are weakened. -/
+/-- Widening the fixed interval preserves a finite perfect local model. -/
 private theorem finitePerfectModelsOn_mono (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
@@ -326,14 +279,7 @@ private theorem finitePerfectModelsOn_mono (X : Scheme.{t}) {A : Type t} [CommRi
     P.isStrictlyLE_of_le b b' hb, hP, e⟩
 
 /-- A perfect constant residue model gives uniformly bounded perfect constant models
-at all finite levels, on etale refinements. Completeness of M is not assumed.
-
-Source: Stacks Tags 094I and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: keep the given residue covering. Enlarge a possibly empty interval to
-[min a b,b]. Further exact slice restriction gives the same residue model on every
-smaller chart. This proves the zero-level case. Induct on the quotient level with
-the one-step coefficient-filtration theorem, preserving this fixed interval. -/
+at all finite levels, on etale refinements. -/
 theorem residuePerfect_finite_quotient_models
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

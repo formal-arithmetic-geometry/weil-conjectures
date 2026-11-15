@@ -17,7 +17,12 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonSquareTransportSupplement
 
-/-! # Compatibility of canonical derived site comparisons -/
+/-! # Compatibility of canonical derived site comparisons
+
+## References
+
+* [Stacks Project, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
+-/
 
 @[expose] public section
 
@@ -27,17 +32,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The fixed pullback comparisons commute with the fixed square isomorphisms.
-Source: blueprint transport proof, step 4; Stacks Project, Tag 0B65.
-(blueprint: stage3-proetale-comparison-square)
-
-Proof: the underived comparison is the conjugate of the canonical comparison of
-restriction functors. Both restriction composites around the square send a test object
-to the same iterated fibre product, and the maps are the canonical projection maps.
-Their equality follows by the pullback universal property. Conjugation transports
-this equality to pullbacks. Apply the exact functors termwise to complexes; the
-composition comparisons for mapDerivedCategory and the canonical identifications
-with left derived pullbacks preserve this equality. Restrict the input to D+. -/
+/-- The fixed pullback comparisons commute with the fixed square isomorphisms. -/
 theorem comparison_square {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)
     (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

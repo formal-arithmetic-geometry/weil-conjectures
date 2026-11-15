@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.Exceptio
 
 /-! # The published scalar comparisons satisfy their normalizations
 
-Keep the normalization choose-spec calculations at generic coefficient rings.
+## Implementation details
+
+The normalization choose-spec calculations are kept at generic coefficient rings.
+
+## References
+
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public section
@@ -22,14 +28,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale.ExceptionalCoefficients
 
 /-- The actual published unit and tensor comparisons satisfy their all-complex
-representative equations.
-Source: Stacks 07A4; the unique normalizations defining these comparisons
-(blueprint: lem-coef-etale-scalar-normalizations).
-
-Proof: unitIso is chosen from unitIso_existsUnique, whose choose_spec gives its
-normalization. The site tensorIso is heterogeneously equal to the comparison chosen
-from tensorIso_existsUnique. Convert that equality to equality and transport the
-latter comparison's choose_spec normalization along it. -/
+representative equations. -/
 theorem scalarExtension_normalizations
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :
     UnitNormalization φ T (unitIso φ T) ∧ TensorNormalization φ T (tensorIso φ T) := by

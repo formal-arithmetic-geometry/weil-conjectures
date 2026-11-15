@@ -18,8 +18,9 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # Ordinary homology of the finite constant tensor model
 
-Source: Stacks Project, sites-cohomology.tex, Tags 094H and 06YU.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-model-homology-identification).
+## References
+
+* Stacks Project, Tags 094H, 06YU
 -/
 
 @[expose] public noncomputable section
@@ -143,18 +144,7 @@ private theorem baseConstantExact (X : Scheme.{t}) (B : Type t) [CommRing B] :
 /--
 The homology of the derived constant realization of a tensor complex is the
 ordinary constant realization of its algebraic homology when the coefficient
-maps are isomorphisms.  This is the termwise homology calculation together
-with transport along the coefficient isomorphism and restriction to the chart.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094H (locally constant tensor
-products) and Tag 06YU (bounded-above flat-complex calculation).
-Proof: for the isomorphic coefficient map, the chosen derived change is
-identified with ordinary scalar change.  Evaluate the constant realization
-termwise and apply the canonical homology comparison for a mapped homological
-complex.  Exact coefficient transport and chart over-restriction preserve the
-resulting isomorphism with the ordinary homology of
-`finiteQuotientLayerTensorComplex`.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-model-homology-identification).
+maps are isomorphisms.
 -/
 theorem finiteQuotient_layer_tensor_model_homology_identification
     (X : Scheme.{t})

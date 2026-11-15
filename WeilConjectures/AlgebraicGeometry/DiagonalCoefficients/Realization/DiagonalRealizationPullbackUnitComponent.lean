@@ -288,22 +288,7 @@ private theorem canonical_derived_unit
 
 set_option linter.unusedVariables false in
 -- The fixed public signature retains invertibility and line endpoint parameters.
-/-- The canonical derived comparison has the prescribed completed-unit component.
-Source: diagonal coefficient changes paragraph (3), endpoint transport.
-(blueprint: lem-sfb-diagonal-realization-pullback-unit-component).
-
-Proof: use `hc` to identify the coefficient isomorphism with the canonical one.
-At the ordinary completed unit, cancel the ordinary comparison isomorphism and apply
-the condensed upper-star adjunction's Hom bijection. Its transpose is the formula
-`diagonalPullbackOrdinaryComparison_transpose`. The normalization of the ordinary
-right square identifies its underlying sheaf map with direct image of the realization
-comparison. The completed-unit adjoint normalization in `d`, the scalar direct-image
-formula for completed realization, and the specified normalization of `unit` identify
-the two transposes. Faithfulness after forgetting module action gives the ordinary
-unit equation. Apply the exact-derived square and its single-functor component
-formulas. Insert `eS.singleUnit` and `eX.singleUnit`, cancel the canonical geometric
-upper-star comparison, and use naturality of the single comparison. This gives
-precisely the displayed derived equation. -/
+/-- The canonical derived comparison has the prescribed completed-unit component. -/
 theorem diagonalRealization_pullback_unit_component
     (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian X] [IsNoetherian S]

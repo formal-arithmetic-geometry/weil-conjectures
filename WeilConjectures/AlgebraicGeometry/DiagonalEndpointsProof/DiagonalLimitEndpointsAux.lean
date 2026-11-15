@@ -112,9 +112,6 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistRootTransitions
 import WeilConjectures.CategoryTheory.Finite.FiniteTowerLimitOrthogonality
 
 /-! # Proved helpers for completed diagonal endpoints
-
-Source: the diagonal tower limit proof, paragraphs (1) and (3).
-(blueprint: lem-sfb-diagonal-root-limit-linear).
 -/
 
 @[expose] public noncomputable section
@@ -233,18 +230,7 @@ private theorem ordinaryRlim_isIso_of_unit
   unfold diagonalOrdinaryRlim
   infer_instance
 
-/-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison.
-
-Source: the Milnor passage to the limit in the diagonal trace proof, paragraph (1).
-(blueprint: new-sfb-diagonal-trace-ordinary-rlim-epi).
-
-Proof: transfer the Milnor difference-map epimorphism and exact countable products
-from modules over the constant ring sheaf. For the single complex of the tower,
-the ordinary limit is the kernel of its degreewise epic difference map. The
-zero-second-coordinate map into the Roos fibre is therefore a quasi-isomorphism.
-The normalized Roos comparison identifies its localization with the given derived
-unit, so every factor of the ordinary-to-derived comparison is invertible.
--/
+/-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison. -/
 private theorem ordinaryRlim_isIso_of_epi (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l T)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems l T)] (L : DiagonalRlim (DiagonalMod l T))
@@ -420,18 +406,7 @@ private def liftToTorsion (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
         exact ConcreteCategory.congr_hom (f.hom.naturality g) x }
 
 /-- The prescribed abelian root-limit comparison lifts uniquely to a constant
-p-adic module comparison, with exactly the prescribed underlying inverse.
-
-Source: diagonal tower limit proof, paragraph (1), target ordinary limit.
-(blueprint: lem-sfb-diagonal-root-limit-linear).
-
-Proof: every finite root level is annihilated by the corresponding prime power.
-An additive map into such a module is p-adic linear: approximate the scalar by
-its integer residue and kill the error. Apply this to every coordinate of the
-inverse abelian limit comparison. These lifted coordinates form a module cone.
-Its unique limit lift has the prescribed underlying map because scalar forgetting
-preserves limits and is faithful. That underlying map is invertible, and scalar
-forgetting reflects isomorphisms, so the lift is invertible as well. -/
+p-adic module comparison, with exactly the prescribed underlying inverse. -/
 theorem root_limit_iso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (H : DiagonalSystems l X)
     (roots : H ⋙ diagonalForget l X ≅

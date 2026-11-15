@@ -8,7 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 /-! # Inverse image of a represented open free sheaf
 
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0 and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -63,20 +65,7 @@ private theorem inverseFreeHomEquiv_naturality {X Y : Scheme.{u}} (p : Y ⟶ X)
   erw [adj.homEquiv_naturality_right]
   exact openFreeSectionsEquiv_naturality W (J.map f) (adj.homEquiv _ F a)
 
-/-- Inverse image carries the free sheaf of an open to that of its preimage.
-Source: Stacks Project, Tag 04J0 and Section 01F7; inverse-image adjunction.
-(blueprint: lem-pc-inverse-image-open-free-sheaf)
-
-Proof: For any abelian sheaf F on Y, the inverse-image/direct-image adjunction
-identifies morphisms from the inverse image of the free sheaf of W with morphisms
-from that free sheaf to the direct image of F. The Yoneda, free/forgetful and
-sheafification adjunctions identify these with sections of the direct image on W,
-which by definition are sections of F on p⁻¹W. The same adjunctions identify these
-sections with morphisms from the free sheaf of p⁻¹W to F. All identifications are
-natural in F, so Yoneda gives the claimed object isomorphism. Empty opens give
-zero objects, and the top open gives the usual constant-sheaf comparison. No
-flatness, separation or coefficient condition is required.
--/
+/-- Inverse image carries the free sheaf of an open to that of its preimage. -/
 theorem H.invImage_openFreeSheaf_iso {X Y : Scheme.{u}} (p : Y ⟶ X) (W : X.Opens) :
     Nonempty ((invImage p).obj (H.openFreeSheaf W) ≅ H.openFreeSheaf (p ⁻¹ᵁ W))  := by
   exact ⟨(Coyoneda.ext _ _ (fun a => (inverseFreeHomEquiv p W _).symm a)

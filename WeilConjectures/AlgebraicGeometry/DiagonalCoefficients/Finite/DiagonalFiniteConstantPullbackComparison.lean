@@ -249,18 +249,7 @@ private theorem finite_constant_pullback_raw (A : Type (u + 1)) [CommRing A]
     (Functor.OplaxMonoidal.η (upperStar (ModuleCat.{u + 1} A) f)) ho
 
 /-- The finite unit comparison intertwines the canonical constant pullback with
-its degree-zero pro-etale pullback. Source: diagonal tower coefficient changes (1),
-the constant coefficient unit and the etale/pro-etale inverse-image square.
-(blueprint: lem-diagonal-finite-constant-pullback-comparison).
-
-Proof: the regular module is the tensor unit. Uniqueness of the constant-sheaf
-left adjoint identifies its comparison with the oplax monoidal unit. The etale
-constant pullback is the corresponding unit map as well. Monoidality of the
-comparison square therefore gives the ordinary constant pullback square.
-Naturality of the exact-derived single-object comparisons, their compatibility
-with composition and natural isomorphisms, and cancellation of the left-derived
-comparison isomorphisms lift that square to the displayed derived equality.
-The argument uses no nontriviality or nonemptiness hypothesis. -/
+its degree-zero pro-etale pullback. -/
 theorem finite_constant_pullback_comparison (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (geoP1UnitPullback A f).hom ≫ (finiteUnitComparison A X).hom =

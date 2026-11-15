@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperSheafTransposeUnitCalculus
 
-/-! # Normal form of the derived etale transpose of a sheaf map -/
+/-! # Normal form of the derived etale transpose of a sheaf map
+
+## References
+
+* Stacks Project, Tags 0D6E, 0F7B
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,9 +32,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   upperStarLowerStarAdjunction Adjunction.mapDerivedCategoryAdjunction
 
 /-- The exact-derived transpose of the sheaf-induced map is the homotopy
-transpose and ordinary base-change mate followed by the target right-derived unit.
-Source: Stacks Project Tags 0F7B and 0D6E, localization and mixed-mate unit identities.
-(blueprint: lem-pur-proper-sheaf-transpose-normalization). -/
+transpose and ordinary base-change mate followed by the target right-derived unit. -/
 theorem properSheaf_transpose_normal
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) (v : V ⟶ Y) [Etale v]

@@ -88,7 +88,9 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Normalized clopen scalar comparison
 
-Source: Stacks Project, Tags 06YY and 0D6D.
+## References
+
+* Stacks Project, Tags 06YY, 0D6D
 -/
 
 -- After pruning, this module only keeps private declarations.

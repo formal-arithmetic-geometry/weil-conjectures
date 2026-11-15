@@ -60,9 +60,7 @@ import WeilConjectures.NumberTheory.Padics.LocalFieldCoefficientStages
 public import WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjointCore
 /-!
 # The strict étale coefficient-system adjoint
-Source: Zheng, Six Operations and Lefschetz--Verdier, Constructions 5.14--5.15,
-Lemmas 5.16 and 5.22, and Proposition 5.24 (blueprint:
-lem-pur-etale-coefficient-system-adjoint).
+
 The structure records the actual compact-support system functor, its right adjoint,
 the finite-level adjunctions, and the asserted coefficient-system coherences.
 * `StrictEtaleCompactSupport` specifies the ordinary and unbounded derived functors.
@@ -70,10 +68,16 @@ the finite-level adjunctions, and the asserted coefficient-system coherences.
 * `StrictEtaleExceptionalTransport` specifies the scalar and cofinal comparison maps.
 * `etaleCoefficientSystemAdjoint` and its scalar/cofinal companions assert existence.
 * The identity/composition theorems state coherence with canonical tensor identifications.
+
+## Implementation details
 The records, the integer-ring and coefficient-change definitions, the scalar transport
 projection and the identity/composition theorems are in
 `WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjointCore`,
 re-exported here (split for the per-file compile limit).
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 5.14--5.15,
+  Lemmas 5.16 and 5.22, and Proposition 5.24
 -/
 @[expose] public noncomputable section
 

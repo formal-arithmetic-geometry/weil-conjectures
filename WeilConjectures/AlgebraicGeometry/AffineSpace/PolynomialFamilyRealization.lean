@@ -9,7 +9,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import WeilConjectures.RingTheory.Rescaling.PolynomialRescaling
 
-/-! # Realization of polynomial rescaling on relative affine space -/
+/-! # Realization of polynomial rescaling on relative affine space
+
+## References
+
+* Furter--Poloni, Lemma 3.1, pp. 5--6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -180,13 +185,7 @@ private lemma peval_endpoint (a : Γ(S, ⊤)) (p : Poly σ S) :
   exact DFunLike.congr_fun h p
 
 /-- A polynomial rescaling family realized by the universal property of relative
- affine space. Source: Furter--Poloni, Lemma 3.1, pp. 5--6, with the coordinate
- realization written by J1. Proof: identify global sections with the polynomial
- ring using the affine-space spectrum isomorphism. Apply polynomial rescaling.
- Evaluate its coordinate polynomials on the total space; the inverse coordinate
- polynomials give the inverse morphism. Polynomial extensionality shows that
- substitution commutes with evaluation and with the two parameter sections.
- (blueprint: lem-pur-polynomial-family-realization). -/
+ affine space. -/
 theorem polynomial_deformation [IsAffine S] [Fintype σ] [DecidableEq σ]
     (e : AffineSpace σ S ≅ AffineSpace σ S)
     (he : e.hom ≫ AffineSpace σ S ↘ S = AffineSpace σ S ↘ S) :

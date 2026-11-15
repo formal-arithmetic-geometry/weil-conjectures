@@ -12,7 +12,12 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRestrictionCoherence
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRestrictionData
 
-/-! # The intrinsic realization of the open scalar comparison -/
+/-! # The intrinsic realization of the open scalar comparison
+
+## References
+
+* Stacks Project, Tags 03DI, 00YV
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -375,29 +380,7 @@ private theorem realization_restriction_cube
     (sfInverseRealizationRestriction X φ) (sfFixedOpenRestriction j φ)
     (inverse_realization_inverse_unit X φ) M
 
-/-- Intrinsic realization preserves the fixed-coefficient open scalar mate.
-
-Source: Stacks Tags 03DI and 00YV; the realization part of Step 2 of
-lem-finite-open-scalar-transport.
-(blueprint: lem-finite-open-scalar-realization-transport).
-
-Proof: conjugate the open/coefficient restriction square by the canonical
-realization equivalences at X and Z. Its value is sfOpenRestriction by its
-definition. The coefficient comparisons are sfRealizationRestriction and its
-inverse-equivalence conjugate, and the open comparison is the equivalence unit.
-More explicitly, this conjugation first applies the inverse-realization
-restriction square at X, then the fixed open restriction square, then the
-inverse forward-realization square at Z, all whiskered by the inverse realization
-at X and the forward realization at Z. Inserting the open comparison cancels
-the adjacent forward/inverse realization pair. The inverse-realization square
-is itself the forward square conjugated by the equivalence unit and counit.
-Their two triangle identities cancel those inserted unit/counit pairs, leaving
-the same fixed open restriction square on both paths.
-Exact localization preserves the cube. Take the scalar mates, using the chosen
-scalar adjunctions on both presentations. Their unit-preserving uniqueness map
-is realizationScalarIso. Naturality and the triangle identities give the two
-paths displayed here. No change of site, etale-origin witness, boundedness,
-flatness, nonzero coefficient ring or nonempty scheme is involved. -/
+/-- Intrinsic realization preserves the fixed-coefficient open scalar mate. -/
 theorem fixedOpenScalar_realization_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

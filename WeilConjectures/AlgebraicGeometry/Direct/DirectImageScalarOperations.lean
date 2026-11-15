@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAmbientRingedEx
 /-! # Constant-coefficient scalar operations
 
 The canonical constructions used by scalar exchange and its pullback cube.
-Source: Stacks Tags 03EL, 06YY, 07A6, and 0D6D.
+
+## References
+* Stacks Project, Tags 03EL, 06YY, 07A5, 07A6, 07A7, 0D6D, 0E47
 -/
 
 @[expose] public noncomputable section
@@ -28,16 +30,14 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
 /-- The universal derived extension along the actual map of constant ring sheaves.
-The defining functor carries its universal counit and K-flat tensor computation.
-Source: Stacks Tag 06YY (blueprint: lem-fix-direct-image-scalar-exchange). -/
+The defining functor carries its universal counit and K-flat tensor computation. -/
 abbrev directImageScalarExtension {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     Scheme.proEtaleDerivedCategory T A ⥤ Scheme.proEtaleDerivedCategory T B :=
   Scheme.proEtaleRingDerivedExtension (Scheme.proEtaleConstantRingMap (T := T) φ)
 
 /-- Canonical constant-coefficient derived direct image, using its normalized adjunction.
-This is a specialization of the existing ordinary, uncompleted ringed direct image.
-Source: Stacks Tags 07A5 and 07A6 (blueprint: lem-fix-direct-image-scalar-exchange). -/
+This is a specialization of the existing ordinary, uncompleted ringed direct image. -/
 abbrev directImageConstantPush (A : Type u) [CommRing A]
     {T V : Scheme.{u}} (f : T ⟶ V) :
     Scheme.proEtaleDerivedCategory T A ⥤ Scheme.proEtaleDerivedCategory V A :=
@@ -46,9 +46,7 @@ abbrev directImageConstantPush (A : Type u) [CommRing A]
     (Scheme.proEtaleConstantRingComparison f A)
 
 /-- The actual canonical geometric adjunction, with its constant-coefficient
-functors explicit in the interface. This preserves the original normalized data.
-Source: Stacks Tags 07A5 and 07A6
-(blueprint: lem-fix-direct-image-scalar-exchange). -/
+functors explicit in the interface. -/
 def directImageConstantAdjunction (A : Type u) [CommRing A]
     {T V : Scheme.{u}} (f : T ⟶ V) :
     Scheme.proEtaleConstantRingDerivedPullback A f ⊣ directImageConstantPush A f :=
@@ -56,14 +54,10 @@ def directImageConstantAdjunction (A : Type u) [CommRing A]
     (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRing T A)
     (Scheme.proEtaleConstantRingComparison f A)
 
-/-- The canonical scalar/inverse-image isomorphism. The existing reduction/pullback
-construction is the inverse mate of the exact restriction comparison, whose ordinary
-map is fixed by identity on sections. Its tensor-unit normalization is the balancing
-map on flat K-flat representatives, sending the pullback of x tensor b to the
-pullback of x tensor b. Naturality of the constant-section comparison supplies the
-coefficient square, with no extra hypothesis.
-Source: Stacks Tags 03EL, 06YY and 0D6D
-(blueprint: lem-fix-direct-image-scalar-exchange). -/
+/-- The canonical scalar/inverse-image isomorphism: the inverse mate of the exact restriction
+comparison, whose ordinary map is fixed by identity on sections. Its tensor-unit normalization
+is the balancing map on flat K-flat representatives, sending the pullback of x tensor b to the
+pullback of x tensor b. -/
 def directImageScalarPullbackIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {T V : Scheme.{u}} (f : T ⟶ V) :
     directImageScalarExtension φ V ⋙ Scheme.proEtaleConstantRingDerivedPullback B f ≅
@@ -79,8 +73,7 @@ def directImageScalarPullbackIso {A B : Type u} [CommRing A] [CommRing B]
       (CommRingCat.ofHom (RingHom.ulift φ))).symm
 
 /-- The direct-image scalar map chi is the mate of the specified tensor comparison,
-under the canonical tensor-unit-normalized geometric adjunctions.
-Source: Stacks Tag 0E47 (blueprint: lem-fix-direct-image-scalar-exchange). -/
+under the canonical tensor-unit-normalized geometric adjunctions. -/
 def directImageScalarComparison {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {T V : Scheme.{u}} (f : T ⟶ V) :
     directImageConstantPush A f ⋙ directImageScalarExtension φ V ⟶
@@ -90,8 +83,7 @@ def directImageScalarComparison {A B : Type u} [CommRing A] [CommRing B]
     (directImageConstantAdjunction B f)
     (directImageScalarPullbackIso φ f).hom)
 
-/-- The canonical geometric pullback-square comparison with constant coefficients.
-Source: Stacks Tag 0D6D (blueprint: lem-fix-direct-image-scalar-exchange). -/
+/-- The canonical geometric pullback-square comparison with constant coefficients. -/
 def directImageConstantPullbackIso (A : Type u) [CommRing A]
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare h f' f g) :
@@ -112,11 +104,9 @@ def directImageConstantPullbackIso (A : Type u) [CommRing A]
           (heq_of_eq (Scheme.proEtaleConstantRingCompositeCoefficients_eq f' g A)).symm))
 
 /-- The ambient ringed exchange specialized to the canonical constant rings.
-Its pullback square is built from the canonical composition comparisons. The two
+Its pullback square is built from the canonical composition comparisons; the two
 composite coefficient identifications are the constant comparison for the same
-scheme map; the proof below supplies that compatibility, rather than assuming it.
-Source: Stacks Tags 07A7, 0D6D and 0E47
-(blueprint: lem-fix-direct-image-scalar-exchange). -/
+scheme map. -/
 def directImageConstantExchange (A : Type u) [CommRing A]
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare h f' f g) :

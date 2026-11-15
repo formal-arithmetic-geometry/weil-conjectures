@@ -16,8 +16,10 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 /-!
 # Sections and cocycles of a simultaneous étale Čech presentation
 
-Source: Stacks Project, Tags 099S, 099T and 099U; finite representatives and eventual equality
-in filtered colimits, Tag 002W.
+## References
+
+* Stacks Project, Tags 099S, 099T and 099U; Tag 002W (finite representatives and eventual
+  equality in filtered colimits)
 -/
 
 @[expose] public section

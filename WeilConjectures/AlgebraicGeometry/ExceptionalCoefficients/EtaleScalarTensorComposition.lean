@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformationOpla
 
 /-! # Tensor compatibility of the fixed scalar comparisons
 
-Source: Stacks 07A4 and 0D6D, the tensor clause of the finite-Hom domain calculation.
+## References
+
+* Stacks Project, Tags 07A4, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -624,22 +626,7 @@ private theorem scalar_comp_tensor_kFlat
     (scalarRepresentativeTransformation_isIso χ T) P Q hP hQ
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints in
-/-- The published scalar tensor comparison respects the fixed scalar compositor.
-Source: blueprint lemma-change-coefficients-internal-hom--1, successive coefficient paragraph;
-Stacks 07A4, 0D6D (blueprint: lem-coef-etale-scalar-tensor-composition).
-
-Proof: choose flat-term K-flat complexes P,Q representing U,V. Ordinary scalar extension
-preserves their flatness and K-flatness, including for nonflat ring maps. The compositor
-is the adjunction mate of the actual restriction compositor; its normalized representative
-is ordinary reassociation (x tensor b) tensor c mapped to x tensor psi(b)c. The normalized
-tensorator sends (x tensor y) tensor b to (x tensor b) tensor (y tensor 1). Both routes in
-the square send ((x tensor y) tensor b) tensor c to
-(x tensor psi(b)c) tensor (y tensor 1). These are balanced maps on sheafified tensors,
-and their degreewise equalities extend through the direct sums of the signed total
-complex. Paste this ordinary square with the all-complex tensor normalization equations
-and the scalar-compositor representative equation. All representative maps are
-isomorphisms on these models, so cancellation proves the square there. Naturality along
-the representing isomorphisms gives the equation for arbitrary unbounded U,V. -/
+/-- The published scalar tensor comparison respects the fixed scalar compositor. -/
 theorem scalarTensor_comp
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (hχ : χ = ψ.comp φ)

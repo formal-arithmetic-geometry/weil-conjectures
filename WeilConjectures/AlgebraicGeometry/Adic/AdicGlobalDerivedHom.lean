@@ -71,13 +71,15 @@ public import Mathlib.Algebra.Homology.Functor
 
 /-! # Global derived Hom with completed adic coefficients
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12;
-Stacks Project, Tag 08JA (blueprint: def-weil-pbc-adic-global-derived-hom).
-
 ## Main definitions
 
 * `adicGlobalSections`: evaluation at the final object, with the canonical A action.
 * `adicGlobalDerivedHom`: derived global sections of the recorded internal derived Hom.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 6.8.2(1) and Lemma 6.8.12
+* Stacks Project, Tag 08JA
 -/
 
 @[expose] public noncomputable section
@@ -92,8 +94,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The constant residue section of the finite coefficient sheaf. Source: Bhatt--Scholze,
-6.8.2(1) (blueprint: def-weil-pbc-adic-global-derived-hom). -/
+/-- The constant residue section of the finite coefficient sheaf. -/
 def adicFiniteConstant (n : ℕ) (U : T.ProEtᵒᵖ) :
     A →+* ((pbcAdicRings T d).obj (op n)).obj.obj U :=
   letI := d.quotientFinite n
@@ -123,14 +124,7 @@ private theorem adicFiniteConstant_compat (U : T.ProEtᵒᵖ) (n : ℕ) :
   ext a
   rfl
 
-/-- The canonical scalar homomorphism is uniquely specified by all its finite residues.
-Source: Bhatt--Scholze, 6.8.2(1)
-(blueprint: def-weil-pbc-adic-global-derived-hom).
-Proof: the constant residue homomorphisms commute with each quotient map, since
-both routes send a to its constant residue class. They form a cone on the evaluated
-inverse system. Limits of ring sheaves are evaluated sectionwise, so the limit
-universal property supplies the homomorphism. The projections are jointly injective,
-which proves uniqueness. This argument includes the empty scheme and zero rings. -/
+/-- The canonical scalar homomorphism is uniquely specified by all its finite residues. -/
 theorem adicScalar_exists (U : T.ProEtᵒᵖ) :
     ∃! ρ : A →+* (pbcAdicCompletion T d).obj.obj U,
       ∀ n : ℕ, ((pbcAdicProjection T d n).hom.app U).hom.comp ρ =
@@ -156,28 +150,22 @@ theorem adicScalar_exists (U : T.ProEtᵒᵖ) :
       exact (congrArg CommRingCat.ofHom (hρ n.unop)).trans (hc.fac c n).symm
     exact congrArg CommRingCat.Hom.hom h
 
-/-- The scalar map into completed sections, determined by its actual finite residues.
-Source: Bhatt--Scholze, 6.8.2(1)
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+/-- The scalar map into completed sections, determined by its actual finite residues. -/
 def adicScalar (U : T.ProEtᵒᵖ) : A →+* (pbcAdicCompletion T d).obj.obj U :=
   (adicScalar_exists T d U).exists.choose
 
 /-- Global sections as A-modules: evaluation at the final pro-etale object followed
-by restriction along the constant completed scalar map. Source: Stacks Project,
-Tag 08JA (blueprint: def-weil-pbc-adic-global-derived-hom). -/
+by restriction along the constant completed scalar map. -/
 def adicGlobalSections : pbcModules T (pbcAdicCompletion T d) ⥤ ModuleCat.{u + 1} A :=
   SheafOfModules.evaluation _ (op (⊤_ T.ProEt)) ⋙
     ModuleCat.restrictScalars (adicScalar T d (op (⊤_ T.ProEt)))
 
-/-- Evaluation and scalar restriction are additive. Source: Stacks Project, Tag 08JA
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+/-- Evaluation and scalar restriction are additive. -/
 instance adicGlobalSections_additive : (adicGlobalSections T d).Additive := by
   dsimp [adicGlobalSections, SheafOfModules.evaluation]
   infer_instance
 
-/-- The unbounded right derived functor of global sections, with its A-module action.
-Source: Stacks Project, Tag 08JA
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+/-- The unbounded right derived functor of global sections, with its A-module action. -/
 def adicDerivedGlobalSections :
     DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤
       DerivedCategory (ModuleCat.{u + 1} A) :=
@@ -187,9 +175,7 @@ def adicDerivedGlobalSections :
   (adicGlobalSections T d).rightDerivedFunctor
 
 /-- Global derived Hom is RΓ of internal derived Hom, in the derived category of
-A-modules, without replacing the completed coefficient sheaf by a constant sheaf.
-Source: Bhatt--Scholze, Lemma 6.8.12; Stacks Project, Tag 08JA
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+A-modules, without replacing the completed coefficient sheaf by a constant sheaf. -/
 def adicGlobalDerivedHom :
     (DerivedCategory (pbcModules T (pbcAdicCompletion T d)))ᵒᵖ ×
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤
@@ -197,8 +183,7 @@ def adicGlobalDerivedHom :
   derivedInternalHomOfUniverses.{u + 1, u, u + 1} (ProEt.topology T) (pbcAdicCompletion T d) ⋙
     adicDerivedGlobalSections T d
 
-/-- Fix the contravariant argument of global derived Hom. Source: Bhatt--Scholze,
-Lemma 6.8.12 (blueprint: def-weil-pbc-adic-global-derived-hom). -/
+/-- Fix the contravariant argument of global derived Hom. -/
 def adicGlobalRHom (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) :
     DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤
       DerivedCategory (ModuleCat.{u + 1} A) :=

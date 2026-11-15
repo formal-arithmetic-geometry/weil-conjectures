@@ -23,14 +23,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 attribute [local irreducible] comparisonUpperStar cartierRootsComparison cartierRootsIso
   forgetComparisonIso cartierForgetComparison
 
-/-- A kernel-normalized finite roots comparison gives the canonical scalar root map.
-Source: diagonal coefficient changes (1), root endpoint normalization.
-(blueprint: lem-diagonal-finite-roots-canonical-map).
-Proof: the two roots isomorphisms have identical composites with the monic kernel
-inclusion into units. Cancel that inclusion to identify them. The scalar-forgetting
-comparison is the same adjunction mate in both definitions, so substitution gives
-the displayed equality. Positive N and its invertibility provide the canonical root
-isomorphism; the proof also applies to zero coefficient rings and empty schemes. -/
+/-- A kernel-normalized finite roots comparison gives the canonical scalar root map. -/
 theorem finiteRoots_toLine_eq_cartierProRootMap {X : Scheme.{u}} {N : ℕ} (r : FiniteRoots X N)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)
     (hN : 0 < N) (hX : IsUnit (N : Γ(X, ⊤))) :

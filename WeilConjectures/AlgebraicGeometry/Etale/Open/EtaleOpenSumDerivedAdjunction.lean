@@ -12,7 +12,13 @@ public import Mathlib.Algebra.Homology.Localization
 
 import all Mathlib.Algebra.Homology.Localization
 
-/-! # Agreement of open and etale sum adjunctions on derived categories -/
+/-! # Agreement of open and etale sum adjunctions on derived categories
+
+## References
+
+* Stacks Project, Étale Cohomology, Tags 03S3, 03S5
+* Stacks Project, Derived Categories, Tag 0FND
+-/
 
 @[expose] public section
 
@@ -46,18 +52,7 @@ private lemma exact_factor_hom_quotient
   erw [F.mapDerivedCategory.map_id, Category.id_comp, Category.id_comp,
     DerivedCategory.Qh.map_id, Category.comp_id]
 
-/-- The canonical open and etale-sum derived adjunctions agree for an open immersion.
-Source: Stacks Project, Etale Cohomology, Tags 03S3 and 03S5; derived.tex Tag 0FND.
-(blueprint: lem-pur-etale-open-sum-derived-adjunction).
-
-Proof: an adjunction is determined by its unit. Evaluate the two units on a complex
-representative under the derived localization. For the open adjunction, the standard
-unit factorization through the homotopy category gives the ordinary degreewise unit
-followed by the inverse exact-functor factorizations. The homotopy and cochain exact
-factorizations agree on quotient complexes, because both quotient comparison maps
-have identity components. The localization unit formula gives exactly the same
-composite for the etale sum adjunction. Cancel the invertible exact factorizations,
-use quotient-localization naturality, and extend the equality by localization. -/
+/-- The canonical open and etale-sum derived adjunctions agree for an open immersion. -/
 theorem etaleOpenSumDerivedAdjunction
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :

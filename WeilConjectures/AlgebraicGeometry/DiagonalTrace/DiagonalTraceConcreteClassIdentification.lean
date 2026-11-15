@@ -47,9 +47,7 @@ private theorem transport_proposition {α : Sort _} (P : α → Prop) {x y : α}
   rw [← h]
   exact hx
 
-/-- The finite lift and the geometric antecedent have the same etale class.
-Source: finite lift, integral normalization, and ordinary finite Chern uniqueness.
-(blueprint: lem-sfb-diagonal-trace-concrete-class-identification). -/
+/-- The finite lift and the geometric antecedent have the same etale class. -/
 theorem diagonalTrace_concreteClass_identification
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

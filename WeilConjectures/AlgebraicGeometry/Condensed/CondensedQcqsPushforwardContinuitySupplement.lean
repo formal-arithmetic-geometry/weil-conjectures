@@ -154,9 +154,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedQcqsPushforwardContinui
 
 /-!
 # Continuity of ordinary condensed-coefficient pushforward
-
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)
-(blueprint: lem-weil-pbc-condensed-qcqs-pushforward-continuity).
 -/
 
 -- After pruning, this module only keeps private declarations.

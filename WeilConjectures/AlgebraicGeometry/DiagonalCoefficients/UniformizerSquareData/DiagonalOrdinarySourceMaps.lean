@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalCoefficientRouteComparison
 
 /-! # Constructed ordinary supported source maps
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: def-diagonal-ordinary-source-maps).
 -/
 
 @[expose] public noncomputable section
@@ -54,8 +51,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
   (q : UniformizerSquareData l Y E π n A hA)
 
-/-- The ordinary cyclic endpoint transpose, constructed from the supplied maps.
-(blueprint: def-diagonal-ordinary-source-maps). -/
+/-- The ordinary cyclic endpoint transpose, constructed from the supplied maps. -/
 @[irreducible] def cyclicOrdinary :
     source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y ⟶
       q.cyclicRight.obj ((lowerStar (ModuleCat.{u + 1} (diagonalResidue.{u} l n))
@@ -66,8 +62,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
       (q.cyclic.eW.F.asEquivalence.toAdjunction.homEquiv _ _
         q.cyclic.sourceComparison.iso.hom)
 
-/-- The ordinary composite supported scalar map.
-(blueprint: def-diagonal-ordinary-source-maps). -/
+/-- The ordinary composite supported scalar map. -/
 @[irreducible] def quotientScalarOrdinary :
     source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y ⟶
       (ScalarCompatibility.compositeRestriction q.route.first q.route.second).obj
@@ -76,8 +71,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     (Mod.comap (coefficientMap (integralMap l E) (diagonalSurface Y))).map
       q.route.second.supported.semilinear.hom
 
-/-- The ordinary successive endpoint transpose, followed by finite realization.
-(blueprint: def-diagonal-ordinary-source-maps). -/
+/-- The ordinary successive endpoint transpose, followed by finite realization. -/
 @[irreducible] def quotientOrdinary :
     source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y ⟶
       q.quotientRight.obj ((lowerStar (ModuleCat.{u + 1} A) (diagonalImmersion Y)).obj

@@ -23,15 +23,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 /-- Restriction along a normalized map of finite coefficient rings preserves bounded
-constructibility. Source: integral-finite-levels, first paragraph; the finite scalar
-restriction step of integral-criterion reductions.
-(blueprint: lem-pe-finite-scalar-bounded-transport).
-
-Proof: use normalized encodings for both finite rings. Their coefficient square identifies
-internal restriction with ordinary restriction, which preserves constructible sheaves.
-Transport back through the coefficient comparison. Exact restriction preserves the standard
-cohomological bounds and commutes with each homology functor, so the sheaf statement in
-every degree proves the assertion for complexes. -/
+constructibility. -/
 theorem finite_scalar_bounded_transport
     (A B : Type u) [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]

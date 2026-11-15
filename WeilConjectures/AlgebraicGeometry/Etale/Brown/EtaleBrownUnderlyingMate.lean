@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjection
 
 /-! # The ordinary restriction and Brown image cube
 
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 and Lemma 5.16
+* Stacks Project, Tags 03CV, 03CZ
 -/
 
 @[expose] public noncomputable section
@@ -306,15 +308,7 @@ private theorem underlyingMate_right_section
 end UnderlyingMateSections
 
 -- Check the section calculation independently of the derived assembly.
-/-- The ordinary Brown restriction/image cube, before deriving.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ.
-(blueprint: lem-pur-brown-ordinary-restriction-cube).
-Proof: transpose the inverse-image restriction square using the two ordinary
-adjunctions. The underlying-set Hom formulas identify its transpose with the
-set-sheaf direct-image restriction identity. Evaluate at an etale object and a
-section; the Brown image section equations and the scalar restriction section
-equations identify the two routes. No properness or finite-coefficient hypothesis
-is used, including for identity coefficient transitions and the zero ring. -/
+/-- The ordinary Brown restriction/image cube, before deriving. -/
 theorem etaleBrownOrdinaryRestrictionCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

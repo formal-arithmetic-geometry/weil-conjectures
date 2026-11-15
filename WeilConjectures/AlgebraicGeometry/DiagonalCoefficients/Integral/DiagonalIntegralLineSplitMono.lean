@@ -71,18 +71,7 @@ private theorem zlLine_epi_end_isIso (l : ℕ) [Fact l.Prime]
   have : IsIso r.asHom := integral_epi_end_isIso l X (bottomField l) r
   exact hr ▸ F.map_isIso r.asHom
 
-/-- Every split monomorphism from the shifted integral Tate line to itself is invertible.
-
-Source: the local rank-one Tate-line calculation and the fully faithful single functor
-(blueprint: lem-diagonal-integral-line-split-mono).
-
-Proof: an epic endomorphism of the integral line is invertible. On a common root cover,
-its section-module morphism is an epic map between free rank-one modules; the local
-rank-one criterion proves it invertible, and invertibility descends. The bottom-field
-coefficient inclusion is an isomorphism, so restriction of scalars transfers this fact
-to the specified Z_l line. Fully faithfulness of the shifted single functor lifts a
-retraction of the given map to a retraction of an endomorphism of this line. That
-retraction is epic, hence invertible; its section is therefore invertible too. -/
+/-- Every split monomorphism from the shifted integral Tate line to itself is invertible. -/
 theorem diagonalIntegralLine_splitMono_isIso (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     (q : End (((DerivedCategory.singleFunctor

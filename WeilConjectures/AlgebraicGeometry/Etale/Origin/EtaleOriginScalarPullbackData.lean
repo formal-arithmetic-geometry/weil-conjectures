@@ -11,9 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.Projection.ProjectionComparisonEtal
 
 /-! # Pullback coordinates for the etale-origin scalar comparison
 
-Source: Stacks Project, Tags 07A4, 0B56 and 0E48. The comparisons below are
-constructed from the published coefficient realizations and geometric adjunctions.
-(blueprint: def-fix-etale-origin-scalar-pullback-data).
+The comparisons below are constructed from the published coefficient realizations and
+geometric adjunctions.
+
+## References
+
+* Stacks Project, Tags 00YV, 06YY, 07A4, 07A5, 07A6, 09A6, 0B56, 0D6D, 0E48
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   Functor.leftDerivedFunctor Etale.scalarTensorIso Scheme.completedAdicDerivedChange
 
-/-- The normalized direct-image comparison for intrinsic realization.
-Source: Stacks 00YV and 07A5
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+/-- The normalized direct-image comparison for intrinsic realization. -/
 def originRealizationPushIso (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
     (Scheme.sfIntrinsicDerivedEquivalence Z A).functor ⋙ directImageConstantPush A p ≅
@@ -38,9 +39,7 @@ def originRealizationPushIso (A : Type u) [CommRing A] [Finite A]
   Functor.isoWhiskerLeft _ (properOriginPushIso A p) ≪≫
     Scheme.sfIntrinsicDerivedDirectImageComparison p A
 
-/-- The ambient direct-image mate, including the intrinsic coefficient realization.
-Source: Stacks 09A6, 00YV and 07A6
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+/-- The ambient direct-image mate, including the intrinsic coefficient realization. -/
 def originMate (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
     (Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p).rightDerivedFunctor ⋙
@@ -60,9 +59,7 @@ def originMate (A : Type u) [CommRing A] [Finite A]
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (Scheme.FiniteCompactScalar.intrinsicSiteFunctorIso A Z).inv _
 
-/-- The left mate of the canonical ambient site/direct-image comparison.
-Source: Stacks 09A6, 00YV and 07A6
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+/-- The left mate of the canonical ambient site/direct-image comparison. -/
 def originPullback (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
     finiteCoefficientIntrinsicDerivedComparison Y A ⋙
@@ -75,10 +72,7 @@ def originPullback (A : Type u) [CommRing A] [Finite A]
     (directImageConstantAdjunction A p)).symm
       (TwoSquare.mk _ _ _ _ (originMate A p)))
 
-/-- On bounded-below inputs the ambient mate is the specified included mate.
-Source: Stacks 09A6 (blueprint: def-fix-etale-origin-scalar-pullback-data).
-Proof: the fixed-coefficient inclusion formula identifies the middle component;
-all remaining factors are exactly the intrinsic realization factors. -/
+/-- On bounded-below inputs the ambient mate is the specified included mate. -/
 theorem originMate_app
     (A : Type u) [CommRing A] [Finite A] {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     [QuasiCompact p] [QuasiSeparated p]
@@ -97,9 +91,7 @@ theorem originMate_app
   rw [← (properOriginPushIso A p).inv.naturality]
   rfl
 
-/-- The counit identity for the canonical site comparison, without a bound on input.
-Source: Stacks 07A6 (blueprint: def-fix-etale-origin-scalar-pullback-data).
-Proof: this is the inverse mates correspondence's counit identity. -/
+/-- The counit identity for the canonical site comparison, without a bound on input. -/
 theorem originMate_counit
     (A : Type u) [CommRing A] [Finite A] {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     (K : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) Z) :
@@ -117,8 +109,7 @@ theorem originMate_counit
     (directImageConstantAdjunction A p) (TwoSquare.mk _ _ _ _ (originMate A p)) K
 
 /-- Restriction of scalars commutes with geometric pullback, in the direction
-used before taking right mates. Source: Stacks 0D6D and 07A6
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+used before taking right mates. -/
 def originRestrictionPullback
     {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) :=
@@ -131,9 +122,7 @@ def originRestrictionPullback
     (Scheme.proEtaleConstantInverseImageMap_naturality p
       (CommRingCat.ofHom (RingHom.ulift φ))).symm).inv
 
-/-- The scalar extension/restriction pullback map, before taking its right mate.
-Source: Stacks 0D6D, 07A6 and 0B56
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+/-- The scalar extension/restriction pullback map, before taking its right mate. -/
 def originScalarPullback
     {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
@@ -147,9 +136,7 @@ def originScalarPullback
     Functor.whiskerRight (directImageScalarPullbackIso φ p).hom _ ≫
     (Functor.associator _ _ _).hom
 
-/-- The etale tensor/pullback comparison with the constant B coefficient.
-Source: Stacks 07A4 and 0B56
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+/-- The etale tensor/pullback comparison with the constant B coefficient. -/
 def originEtaleTensorPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
@@ -163,9 +150,7 @@ def originEtaleTensorPullback
     Functor.whiskerLeft _ ((Etale.derivedTensor (ModuleCat.{u + 1} A) Z).flip.map
       (Etale.scalarCoefficientPullbackIso φ p).hom)
 
-/-- The published constant-coefficient tensor comparison as a natural isomorphism.
-Source: Stacks 06YY and 00YV
-(blueprint: def-fix-etale-origin-scalar-pullback-data). -/
+/-- The published constant-coefficient tensor comparison as a natural isomorphism. -/
 def originTensorComparison
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -182,9 +167,7 @@ def originTensorComparison
     Functor.isoWhiskerRight (Scheme.FiniteCompactScalar.siteScalarIso φ T).symm _ ≪≫
     Functor.associator _ _ _
 
-/-- Its component is the existing tensor comparison, with no change of normalization.
-Source: the definitions (blueprint: def-fix-etale-origin-scalar-pullback-data).
-Proof: expand the two composites; all associators have identity components. -/
+/-- Its component is the existing tensor comparison, with no change of normalization. -/
 theorem originTensorComparison_hom_app
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u})

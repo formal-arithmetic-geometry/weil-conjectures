@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
 /-!
 # Essential surjectivity of the canonical Galois stalk functor
 
-Source: Stacks Project, Tags 03QT and 03QR.
+## References
+
+* Stacks Project, Tags 03QT, 03QR
 -/
 
 @[expose] public section

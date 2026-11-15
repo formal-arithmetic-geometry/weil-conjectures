@@ -133,7 +133,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Completed scalar restriction for the projective-line trace
 
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1).
+## References
+
+* Stacks Project, Tags 099I, 099L
 -/
 
 @[expose] public noncomputable section
@@ -194,28 +196,7 @@ private def rightDerivedComparison
     (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
 
 /-- Completed scalar restriction is fully faithful on the two complete objects
-used as the source and target of the trace.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), derived completeness
-and passage from constant to completed coefficients; Stacks Tags 099I and 099L.
-(blueprint: lem-sfb-diagonal-trace-completed-hom-bijection).
-
-Proof: the completed unit and Tate line are derived l-complete. This may be checked
-on the compatible-root pro-etale cover, where the line is the completed unit;
-completeness is local. The unit hypothesis pulls back along f, so this cover
-is available on X as well as S. Shifts preserve completeness. Derived direct image preserves
-completeness: its right-adjoint description commutes with the derived limits in
-the completion criterion, or equivalently its pullback carries l-invertible objects
-to l-invertible objects. Thus Rc(completedLine(X)[2]) and completedUnit(S) are both
-complete. The coefficient map from the constant Z_l sheaf to the completed ring
-sheaf is flat and induces the canonical isomorphism at every finite quotient.
-The constant/completed equivalence on derived-complete objects is induced by this
-restriction functor. Its fullness and faithfulness give respectively surjectivity
-and injectivity on the indicated ambient Hom set, since the subcategories of
-complete objects are full. The specified Rc is a total derived direct image, so
-its universal comparison identifies it with that used in this completeness
-argument. No trace arrow is chosen and no finite reductions are used to assert
-uniqueness of arbitrary derived morphisms. -/
+used as the source and target of the trace. -/
 theorem diagonalTrace_completedHom_bijective
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

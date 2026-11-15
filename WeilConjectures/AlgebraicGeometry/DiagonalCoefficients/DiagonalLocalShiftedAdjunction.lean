@@ -9,8 +9,6 @@ public import Mathlib.Algebra.Group.Int.Defs
 public import Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Transposition of a shifted local arrow through scalar adjunctions
-
-Source: diagonal tower coefficient changes (1), naturality of scalar transposition.
 -/
 
 @[expose] public noncomputable section
@@ -20,14 +18,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Transposing a scalar-reduced arrow cancels its source endpoint and shifts its
-ordinary target transpose.
-Source: diagonal tower coefficient changes (1), scalar adjunction naturality.
-(blueprint: lem-diagonal-local-shifted-adjunction).
-Proof: move the source endpoint and the following composite across the adjunction
-using naturality of homEquiv. Cancel the endpoint isomorphism. Expand homEquiv
-using the unit, move the right functor's shift comparison by naturality, and
-apply compatibility of the adjunction unit with shifts. The two inverse shift
-comparisons then cancel. No coefficient or Chern normalization is assumed. -/
+ordinary target transpose. -/
 theorem local_shifted_adjunction {C D : Type*} [Category C] [Category D]
     [HasShift C ℤ] [HasShift D ℤ]
     (F : C ⥤ D) (R : D ⥤ C) [F.CommShift ℤ] [R.CommShift ℤ]

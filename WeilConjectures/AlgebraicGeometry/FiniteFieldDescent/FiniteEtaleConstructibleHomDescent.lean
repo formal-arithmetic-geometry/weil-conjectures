@@ -18,10 +18,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-! # Finite-stage descent and Hom continuity for constructible finite-coefficient complexes
 
-Source: `literature/stacks-project/etale-cohomology.tex`, Lemma 09YU (3),
-constructible sheaves over inverse limits with affine transition maps; bounded finite-Tor
-complexes are obtained by finite flat resolutions and descent of morphisms.
-(blueprint: lem-sfb-finite-etale-constructible-hom-descent).
+## References
+
+* Stacks Project, Lemma 09YU (3)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry.Etale.FiniteFieldDescent
 
 variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
 
-/-- The canonical compositor for two successive field-stage pullbacks.
-Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+/-- The canonical compositor for two successive field-stage pullbacks. -/
 noncomputable def pullCompIso {A B C : Type u} [Field A] [Field B] [Field C]
     [Algebra K A] [Algebra K B] [Algebra K C]
     (Λ : Type (u + 1)) [CommRing Λ] (h : A →ₐ[K] B) (i : B →ₐ[K] C) :
@@ -46,8 +44,7 @@ noncomputable def pullCompIso {A B C : Type u} [Field A] [Field B] [Field C]
       · simp [projection, Category.assoc, ← Spec.map_comp]
         congr 1)
 
-/-- The canonical compositor from a finite intermediate stage to `L`.
-Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+/-- The canonical compositor from a finite intermediate stage to `L`. -/
 noncomputable def pullValCompIso {L : Type u} [Field L] [Algebra K L]
     {E E' : IntermediateField K L} (hEE' : E ≤ E')
     (Λ : Type (u + 1)) [CommRing Λ] :
@@ -59,8 +56,7 @@ noncomputable def pullValCompIso {L : Type u} [Field L] [Algebra K L]
     (pullCompIso f Λ (IntermediateField.inclusion hEE')
       (IntermediateField.val E'))
 
-/-- Finite intermediate stages above a fixed finite stage.
-Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+/-- Finite intermediate stages above a fixed finite stage. -/
 def finiteStageIndex {L : Type u} [Field L] [Algebra K L]
     (E₀ : IntermediateField K L) :=
   {E : IntermediateField K L // E₀ ≤ E ∧ FiniteDimensional K E}
@@ -72,8 +68,7 @@ instance finiteStageIndexSemilatticeSup {L : Type u} [Field L] [Algebra K L]
     let _ := hy.2
     exact ⟨hx.1.trans le_sup_left, inferInstance⟩)
 
-/-- The canonical transition on finite-stage Hom sets.
-Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+/-- The canonical transition on finite-stage Hom sets. -/
 noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
     (Λ : Type (u + 1)) [CommRing Λ]
     {E₀ : IntermediateField K L}
@@ -98,8 +93,7 @@ noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
       (pull f Λ (A := E.1) (B := E'.1) (IntermediateField.inclusion hEE')).map u ≫
     compIso.inv.app Q₀
 
-/-- The canonical leg from a finite-stage Hom set to the limiting Hom set.
-Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+/-- The canonical leg from a finite-stage Hom set to the limiting Hom set. -/
 noncomputable def finiteStageHomLeg {L : Type u} [Field L] [Algebra K L]
     (Λ : Type (u + 1)) [CommRing Λ]
     {E₀ : IntermediateField K L}
@@ -113,8 +107,7 @@ noncomputable def finiteStageHomLeg {L : Type u} [Field L] [Algebra K L]
       (pull f Λ (IntermediateField.val E.1)).map u ≫
     (pullValCompIso f E.property.1 Λ).inv.app Q₀
 
-/-- A concrete pullback Hom cocone over all finite stages above `E₀`.
-Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+/-- A concrete pullback Hom cocone over all finite stages above `E₀`. -/
 structure FiniteStageHomSystem {L : Type u} [Field L] [Algebra K L]
     (Λ : Type (u + 1)) [CommRing Λ]
     {E₀ : IntermediateField K L}
@@ -162,23 +155,7 @@ private theorem finiteStageHomTransition_map {L : Type u} [Field L] [Algebra K L
   rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
   simp
 
-/-- The canonical finite-stage Hom system is colimiting.
-
-Source: Stacks Lemma 09YU (3), with derived internal-Hom comparison and cohomology
-continuity (blueprint: lem-sfb-finite-etale-constructible-hom-descent).
-
-Proof: the finite intermediate fields above E₀ form a directed nonempty system and
-present Y_L as an affine inverse limit of qcqs schemes. Express Hom as degree-zero
-cohomology of derived global sections of RHom(P₀,Q₀). Its source is bounded below:
-P₀ is bounded above and Q₀ bounded below. The affine ind-etale comparison identifies
-its pullback with RHom at each stage and at L, naturally in P₀ and Q₀. Derived etale
-cohomology continuity therefore makes the resulting H⁰ cocone colimiting. Transport
-from H⁰ to Hom using the evaluation adjunction; its naturality fixes the maps to be
-finiteStageHomTransition and finiteStageHomLeg. These canonical maps satisfy identity,
-composition and cocone naturality by coherence of leftDerivedUpperStarComp. Define F
-on the actual Hom sets, choose identity object and vertex equivalences, and apply the
-transported colimit universal property. The construction includes zero objects, the
-empty scheme and L = K. -/
+/-- The canonical finite-stage Hom system is colimiting. -/
 theorem finiteEtaleConstructibleHomContinuity
     {L : Type u} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
     [Algebra.IsSeparable K L] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
@@ -190,14 +167,7 @@ theorem finiteEtaleConstructibleHomContinuity
   sorry
 
 /-- Finite-stage descent and Hom continuity. The first three clauses are essential surjectivity,
-descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison.
-Proof steps: (1) finite intermediate fields give a filtered affine finite-etale system; (2) bounded
-finite-flat constructible models and their differentials descend simultaneously; (3) internal-Hom
-and derived-cohomology continuity gives finite-stage representatives; (4) injectivity of that
-continuity gives eventual equality of morphisms; (5) the concrete `FiniteStageHomSystem` has
-objects the finite-stage Hom sets, transitions `finiteStageHomTransition`, and legs
-`finiteStageHomLeg`, and its cocone is colimiting. Source: Stacks Lemma 09YU (3)
-(blueprint: lem-sfb-finite-etale-constructible-hom-descent). -/
+descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison. -/
 theorem finiteEtaleConstructibleHomDescent
     {L : Type u} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
     [Algebra.IsSeparable K L] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]

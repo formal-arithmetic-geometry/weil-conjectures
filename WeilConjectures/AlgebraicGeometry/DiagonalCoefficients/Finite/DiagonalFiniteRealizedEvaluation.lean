@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFin
 
 These proposition wrappers have exactly the original equation bodies. Their
 irreducibility keeps existential proof motives small during kernel checking.
-Source: diagonal tower coefficient changes (1).
-(blueprint: lem-diagonal-finite-realized-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -39,11 +37,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 attribute [local semireducible] cyclicExtRepresentative
   threeFunctorRepresentativeEquation
 
-/-- Scalar change, finite realization and exact restriction on representatives.
-Source: coefficient changes (1) (blueprint: lem-diagonal-finite-realized-evaluation).
-Proof: the general finite-realization representative identity determines the
-cochain before restriction. Map its Ext class by H and apply the generic
-three-functor calculation. All calculations precede coefficient specialization. -/
+/-- Scalar change, finite realization and exact restriction on representatives. -/
 theorem finiteRealizedClass_evaluation
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {A : Type (u + 1)} [CommRing A]

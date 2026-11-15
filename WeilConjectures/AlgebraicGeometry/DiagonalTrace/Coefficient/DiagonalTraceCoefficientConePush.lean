@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.Diago
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
 
 /-! # The ordinary coefficient cone and direct image
-
-Source: diagonal tower trace proof (2), the unital coefficient square.
 -/
 
 @[expose] public noncomputable section
@@ -225,28 +223,7 @@ private theorem completed_push_section
 
 /-- The completed coefficient unit and the finite coefficient cones commute
 with ordinary direct image. This is an equality of sheaf morphisms before any
-right derivation or passage to a derived category.
-
-Source: diagonal tower trace proof (2), ordinary coefficient square;
-geometric classes proof (3), coefficient-pullback normalization.
-(blueprint: lem-sfb-diagonal-trace-coefficient-cone-push).
-
-Proof: apply ordinary limit extensionality. At level n, use limit.post_π
-and the two cone lift equations. Forget the module structure, using the
-faithful forgetful functor, and compose with coefficientsX.coefficientForget.
-The coefficient_projection equations identify both cone components with the
-actual ring-limit projections. The completed_sections and varying_sections
-normalizations identify both direct-image comparisons with the identity on
-sections. CoefficientPullback.normalization identifies the ordinary adjunct
-with restriction of the finite constant coefficient ring. The unital
-coefficient identifications are canonical: on a chart where a finite
-constant-ring section is constant it is an integer multiple of one, so
-additivity and coefficient_one determine them; the sheaf condition then
-gives the equality for all sections. The ring-limit projections commute
-with direct image because diagonalCompletedCoefficientMap is the lift of
-the finite coefficient maps. This proves each level equation, hence the
-ordinary limit equation. The argument includes n = 0, identity morphisms,
-and empty charts; it does not assert faithfulness of derived evaluation. -/
+right derivation or passage to a derived category. -/
 theorem diagonalTrace_coefficient_cone_push
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

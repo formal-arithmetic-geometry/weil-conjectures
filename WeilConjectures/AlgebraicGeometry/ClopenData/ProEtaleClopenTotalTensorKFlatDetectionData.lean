@@ -43,13 +43,15 @@ import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Tensor restriction and flatness on finite clopen pro-etale partitions
 
-Source: Stacks Project, sites-modules.tex, Tag 0GMW and its bilinear universal property;
-sites-cohomology.tex, Tags 06YN and 0FPQ; finite-clopen application in the node's proof.
-(blueprint: lem-pur-clopen-total-tensor-kflat-detection)
-
 All abbreviations below expose the recorded sectionwise restriction and tensor constructions.
 The zero insertion in the last clause is characterized by its restrictions: the identity at
 its own component and zero elsewhere. This covers every zero insertion supplied by gluing.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMW and its bilinear universal property
+* Stacks Project, Cohomology on Sites, Tags 06YN, 0FPQ
+* Stacks Project, Tags 03D7, 04TR
 -/
 
 @[expose] public noncomputable section
@@ -74,21 +76,18 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 namespace ClopenData
 
-/-- The recorded module category, in the fixed universe containing the small site.
-Source: Stacks 03D7 (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- The recorded module category, in the fixed universe containing the small site. -/
 abbrev clopenTensorModules {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   ringedSiteModules.{max u (t + 1)}
     ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)
 
-/-- Commutative-ring restriction along the same composition functor as ring restriction.
-Source: Stacks 04TR (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- Commutative-ring restriction along the same composition functor as ring restriction. -/
 abbrev clopenTensorRings {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] :=
   (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).sheafPushforwardContinuous
     CommRingCat.{max u (t + 1)} (topology Y) (topology X)
 
-/-- The dependency's actual restriction, with its sectionwise module actions unchanged.
-Source: Stacks 04TR (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- The actual restriction, with its sectionwise module actions unchanged. -/
 abbrev clopenTensorRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     clopenTensorModules.{t, u} R ⥤
@@ -97,22 +96,19 @@ abbrev clopenTensorRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion
     ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)}
       RingCat.{max u (t + 1)})).obj R)
 
-/-- The recorded additivity instance, exposed for degreewise restriction.
-Source: Stacks 04TR (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- The recorded additivity instance, exposed for degreewise restriction. -/
 instance clopenTensorRestrictionAdditive {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :
     (clopenTensorRestriction.{t, u} j R).Additive :=
   clopenModuleRestriction_additive j _
 
-/-- Degreewise restriction of unbounded cochain complexes.
-Source: Stacks 06YN (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- Degreewise restriction of unbounded cochain complexes. -/
 abbrev clopenTensorComplexRestriction {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   (clopenTensorRestriction.{t, u} j R).mapHomologicalComplex (.up ℤ)
 
-/-- The comparison in the direction displayed in the node is the inverse tensorator.
-Its input structure contains the associativity, symmetry and both unit diagrams.
-Source: Stacks 0GMW (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- The comparison is the inverse tensorator.
+Its input structure contains the associativity, symmetry and both unit diagrams. -/
 def clopenTensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (clopenTensorRestriction.{t, u} j R).Braided) (F H : clopenTensorModules.{t, u} R) :
@@ -121,8 +117,7 @@ def clopenTensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   letI := h
   (Functor.Monoidal.μIso (clopenTensorRestriction.{t, u} j R) F H).symm
 
-/-- Restriction of the module tensor unit is the component ring module.
-Source: Stacks 0GMW (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- Restriction of the module tensor unit is the component ring module. -/
 def clopenTensorUnitComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (clopenTensorRestriction.{t, u} j R).Braided) :
@@ -131,8 +126,7 @@ def clopenTensorUnitComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion
   letI := h
   (Functor.Monoidal.εIso (clopenTensorRestriction.{t, u} j R)).symm
 
-/-- A local pure tensor, using the existing sheafification unit and tensor comparison.
-Source: Stacks 0GMW (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- A local pure tensor, using the existing sheafification unit and tensor comparison. -/
 def clopenTensorPure {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (F H : clopenTensorModules.{t, u} R) (U : X.ProEtᵒᵖ)
@@ -143,8 +137,7 @@ def clopenTensorPure {X : Scheme.{t}}
     (SheafOfModules.tensorObjIsoSheafification (R := R) F H).inv.val).app U)
     (x ⊗ₜ[R.obj.obj U] y)
 
-/-- The actual total-tensor summand inclusion, with its total bifunctor explicit.
-Source: Stacks 0FPQ (blueprint: lem-pur-clopen-total-tensor-kflat-detection). -/
+/-- The actual total-tensor summand inclusion, with its total bifunctor explicit. -/
 def clopenTotalTensorSummand {X : Scheme.{t}}
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ)

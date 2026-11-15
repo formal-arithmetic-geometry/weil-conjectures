@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Integral.DiagonalIntegralRootMap
 
 /-! # Realizing completed coefficients as condensed coefficients
-
-Source: the initial coefficient identification in diagonal tower coefficient changes.
-(blueprint: lem-diagonal-completed-coefficient-realization).
 -/
 
 @[expose] public noncomputable section
@@ -109,24 +106,7 @@ private def sectionUnitIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     exact ConcreteCategory.congr_hom (e.inv.hom.naturality f) x
 
 /-- The completed coefficient category has an exact condensed realization, with
-its underlying sheaf, regular module, and root-limit normalizations.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), using the integral
-comparison in lemma-comparison-completed-coefficients.
-(blueprint: lem-diagonal-completed-coefficient-realization).
-
-Proof: the completed ring and the pulled-back condensed Z_l ring are limits of
-canonically identified finite constant rings. Their projections give a ring
-isomorphism. Apply the internal/sectionwise module equivalence and transport
-scalars by this ring isomorphism. Both operations are exact equivalences and
-preserve the underlying abelian sheaf. The image of the regular module is the
-regular module, with normalization checked after every finite ring projection.
-The completed Tate module and the integral condensed line are limits of the
-same finite root modules. Their projection maps determine the line comparison;
-its underlying map is the root-limit comparison followed by the free-module
-units. These maps commute with the power transitions. Invertibility of l makes
-the root modules invertible locally, so these comparisons are isomorphisms. -/
+its underlying sheaf, regular module, and root-limit normalizations. -/
 theorem completedCoefficientRealization_exists (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (l : Γ(X, ⊤))) :
     Nonempty (CompletedRealization l X) := by

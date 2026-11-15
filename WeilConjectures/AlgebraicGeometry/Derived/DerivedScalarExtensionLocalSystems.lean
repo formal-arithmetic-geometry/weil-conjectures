@@ -27,8 +27,9 @@ import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.Ringe
 /-!
 # Localized derived extension of coefficients and comparison
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0D6D, 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-derived-scalar-extension-local-systems)
+## References
+
+* Stacks Project, Tags 06YY, 0D6D, 07A4, 0G7E
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -40,7 +40,13 @@ import all Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
-/-! # Algebraic isomorphism extracted from a constant adic quotient realization -/
+/-! # Algebraic isomorphism extracted from a constant adic quotient realization
+
+## References
+
+* Stacks Project, Tag 031C (completion quotients), Tag 093J (exact constants), and the
+  section "Points" of the chapter on sites (constant sheaves and fibers).
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -71,25 +77,7 @@ private def pulledConstantIso {X Z : Scheme.{u}} (h : Z ⟶ X)
             (ModuleCat.{u + 1} B) h)).leftAdjointUniq
               (constantSheafΓAdj _ (ModuleCat.{u + 1} B))
 
-/-- The point-stalk extraction step underlying the homology-level lift.
-
-Source: Stacks Project, algebra.tex, Tag 031C (completion quotients);
-sites-modules.tex, Tag 093J (exact constants); sites.tex, section "Points"
-(constant sheaves and fibers).
-(blueprint: lem-weil-pbc-constant-adic-quotient-realization-iso-lift).
-
-Proof: restriction along the finite-quotient/completion-quotient ring map is an
-equivalence. Transport the realized isomorphism across the coefficient
-comparison and the scalar-restriction/pullback square. Decode the resulting
-constant-ring module sheaves as sheaves of modules over the coefficient ring.
-Pullback takes a constant sheaf to the corresponding constant sheaf. Choose a
-geometric point above the supplied point of the etale chart. Its exact fiber
-functor, composed with the constant-sheaf functor, is naturally isomorphic to
-the identity. Deriving these natural comparisons recovers an isomorphism of
-coefficient complexes after quotient scalar restriction. The latter is an
-equivalence, so it lifts that isomorphism to the original coefficient category.
-Take its forward morphism.
--/
+/-- The point-stalk extraction step underlying the homology-level lift. -/
 theorem constantAdicQuotientRealization_iso_lift
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

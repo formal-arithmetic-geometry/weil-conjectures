@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 
 /-! # Finite-open transfer for prime module coefficients
 
-Source: Stacks Project, etale-cohomology.tex, 0A5D and 0GJ1.
+## References
+
+* Stacks Project, Tags 0A5D, 0GJ1, 03SD
 -/
 
 @[expose] public section
@@ -41,8 +43,7 @@ private theorem invertibleOrder_of_iso {Λ : Type (u + 1)} [CommRing Λ]
     rw [← he, ← map_nsmul, hx, map_zero]
 
 /-- Assertions descend along a split monomorphism when the conditional hypotheses
-pass to the larger sheaf. This applies to genuine retracts, without an isomorphism.
-Source: Stacks Project, 03SD, first proof paragraph (retract devissage). -/
+pass to the larger sheaf. This applies to genuine retracts, without an isomorphism. -/
 private theorem assertions_of_retraction {Λ : Type (u + 1)} [CommRing Λ]
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -109,26 +110,7 @@ private theorem assertions_of_retraction {Λ : Type (u + 1)} [CommRing Λ]
     exact hsurj g 2 (h.surjective_cohomologyMap_of_isOpenImmersion g)
 
 /-- Transfer assertions across a finite-open square, allowing a supplied
-isomorphism of the sheaf on the upper open. No filtration or constant-case
-hypothesis is part of this result.
-
-Source: Stacks Project 0A5D (lemma-finite-pushforward-statements) and
-0GJ1 (lemma-compatible-shriek-push-finite).
-(blueprint: r1-prime-module-finite-open-assertions-transfer)
-
-Proof: Apply a_! to e and transport the eight assertions to a_! H. Finite
-pushforward preserves them: its cohomology comparison is an isomorphism in
-all degrees, since finite pushforward has no positive derived functors.
-For C2 a finite scheme over an affine is affine; for C5 and C7 a finite
-scheme over a proper scheme is proper. The torsion conditions in C3 and C6
-pass from p_* a_! H to a_! H by the finite stalk formula, a finite product
-of geometric stalks. Constructibility passes in the same direction when
-needed for C4 and C5. Finite base change makes the cohomology comparisons
-commute with field extension and restriction to opens, giving C6--C8.
-All sheaves are r-torsion because the coefficient ring has characteristic r.
-Finally the finite-open exchange identifies p_* a_! H with j_! v_* H,
-and its naturality transports all eight assertions to the latter sheaf.
-This includes zero sheaves and empty opens and does not require surjectivity. -/
+isomorphism of the sheaf on the upper open. -/
 theorem prime_module_finite_open_assertions_transfer
     {k : Type u} [Field k] [IsAlgClosed k] {X U V Y : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] (p : Y ⟶ X) [IsFinite p]

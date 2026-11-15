@@ -8,8 +8,6 @@ module
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! # Identifying a completed arrow by its whole-system equation
-
-Source: blueprint coefficient changes, paragraph (3).
 -/
 
 @[expose] public section
@@ -20,9 +18,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- An endpoint transported through a fully faithful realization, using the
-specified source and target realizations and the prescribed realized endpoint.
-Source: blueprint coefficient changes (3), realization
-(blueprint: lem-diagonal-completed-arrow-transport). -/
+specified source and target realizations and the prescribed realized endpoint. -/
 noncomputable def diagonalTransportedEndpoint
     {C C' E E' : Type*}
     [Category C] [Category C'] [Category E] [Category E']
@@ -34,11 +30,7 @@ noncomputable def diagonalTransportedEndpoint
   F'.preimageIso (e.app X ≪≫ V.mapIso s ≪≫ a ≪≫ s'.symm)
 
 /-- Transport through a fully faithful realization satisfies the full endpoint
-square, by cancellation of the target realization.
-Source: blueprint coefficient changes (3), realization
-(blueprint: lem-diagonal-completed-arrow-transport).
-Proof: apply the defining preimage equation, expand the composite isomorphism,
-and cancel the inverse target realization with its forward map. -/
+square, by cancellation of the target realization. -/
 theorem diagonalTransportedEndpoint_normalization
     {C C' E E' : Type*}
     [Category C] [Category C'] [Category E] [Category E']
@@ -52,9 +44,7 @@ theorem diagonalTransportedEndpoint_normalization
     Functor.map_preimage, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom,
     Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
-/-- The full realization equation for a transported mapped endpoint.
-Source: blueprint coefficient changes (3), realization
-(blueprint: lem-diagonal-completed-arrow-transport). -/
+/-- The full realization equation for a transported mapped endpoint. -/
 def DiagonalTransportedEndpointMapProperty
     {C C' E E' D : Type*}
     [Category C] [Category C'] [Category E] [Category E'] [Category D]
@@ -66,10 +56,7 @@ def DiagonalTransportedEndpointMapProperty
     (i : P.obj X ≅ X') : Prop :=
   e.hom.app X ≫ V.map s.hom ≫ a.hom ≫ G.map b.hom = F'.map i.hom ≫ s'.hom
 
-/-- The directly transported mapped endpoint satisfies its named normalization.
-Source: blueprint coefficient changes (3), realization
-(blueprint: lem-diagonal-completed-arrow-transport).
-Proof: apply the preimage normalization to the composite endpoint and expand its hom. -/
+/-- The directly transported mapped endpoint satisfies its named normalization. -/
 theorem diagonalTransportedEndpointMap_normalization
     {C C' E E' D : Type*}
     [Category C] [Category C'] [Category E] [Category E'] [Category D]
@@ -85,15 +72,7 @@ theorem diagonalTransportedEndpointMap_normalization
       diagonalTransportedEndpoint_normalization P F F' V e s s' (a ≪≫ G.mapIso b)
 
 /-- Scalar comparison and uniqueness of a completed lift recover a completed
-square from its entire restricted square.
-
-Source: blueprint coefficient changes (3), identification of completed arrows.
-(blueprint: lem-diagonal-completed-arrow-transport).
-
-Proof: conjugate the pulled arrow by the source and target isomorphisms.
-Naturality of scalar comparison identifies its restriction with the given new
-arrow. The uniqueness clause identifies these two completed arrows. Cancel the
-source isomorphism to obtain the completed square. -/
+square from its entire restricted square. -/
 theorem diagonalCompletedArrow_of_restricted_square
     {C D C' D' : Type*}
     [Category C] [Category D] [Category C'] [Category D']
@@ -129,15 +108,7 @@ theorem diagonalCompletedArrow_of_restricted_square
   simpa only [← Category.assoc, a.hom_inv_id, Category.id_comp] using hz'
 
 /-- A comparison of realization functors carries any completed arrow square
-through prescribed source and target realization endpoints.
-
-Source: blueprint coefficient changes (3), final realization.
-(blueprint: lem-diagonal-completed-arrow-transport).
-
-Proof: expand the realized arrow using its source and target isomorphisms.
-The source endpoint equation cancels the inverse source realization. Naturality
-of the functor comparison moves the arrow to the new realization. Substitute the
-completed square, then use the target endpoint equation. -/
+through prescribed source and target realization endpoints. -/
 theorem diagonalCompletedArrow_realize
     {C C' E E' : Type*}
     [Category C] [Category C'] [Category E] [Category E']
@@ -180,13 +151,7 @@ theorem diagonalCompletedArrow_realize
         congrArg (fun z ↦ z ≫ F'.map δ' ≫ t'.hom) hs'
 
 /-- Realize a completed square with a mapped source endpoint, retaining its named
-normalization predicate until the category parameters are abstract.
-
-Source: blueprint coefficient changes (3), supported-source realization.
-(blueprint: lem-diagonal-completed-arrow-transport).
-
-Proof: unfold the named source normalization in abstract categories, apply the
-realization diagram chase, and reassociate the two factors of the source map. -/
+normalization predicate until the category parameters are abstract. -/
 theorem diagonalCompletedMappedArrow_realize
     {C C' E E' D : Type*}
     [Category C] [Category C'] [Category E] [Category E'] [Category D]

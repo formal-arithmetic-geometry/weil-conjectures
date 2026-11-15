@@ -19,11 +19,6 @@ set_option linter.privateModule false
 /-!
 # Pullback naturality of the etale–pro-etale cohomology comparison
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6E and 08J6, Section 072X;
-Pro-etale Cohomology, Tag 099W; latest blueprint, prose-09-07,
-base-change compatibility of the Kummer class
-(blueprint: lem-sfb-etale-proetale-comparison-pullback-naturality).
-
 ## Main definitions
 
 * `AlgebraicGeometry.ProEtale.cohomologyMap`: canonical pro-etale cohomology pullback.
@@ -31,6 +26,11 @@ base-change compatibility of the Kummer class
 ## Main statements
 
 * `AlgebraicGeometry.ProEtale.comparisonCohomologyMap_pullback`: the comparison square.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0D6E, 08J6, Section 072X
+* Stacks Project, Pro-étale Cohomology, Tag 099W
 -/
 
 @[expose] public section

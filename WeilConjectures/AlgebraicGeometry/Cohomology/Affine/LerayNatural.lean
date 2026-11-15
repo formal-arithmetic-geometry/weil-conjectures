@@ -102,9 +102,7 @@ lemma isAffineOpen_iInf_fin {ι : Type u} {U : ι → X.Opens}
 /-- **Leray's natural isomorphism.** A fixed choice of natural isomorphism, on the abelian
 sheaves which are Čech-acyclic on affine opens, between the Čech cohomology of an open covering
 all of whose nonempty finite intersections are affine and sheaf cohomology
-(`TopCat.Sheaf.nonempty_cechCohomologyFunctor_iso_functorH`).
-
-(blueprint: `lem-pc-cech-computes`) -/
+(`TopCat.Sheaf.nonempty_cechCohomologyFunctor_iso_functorH`). -/
 noncomputable def cechHNatIso {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
     (q : ℕ) :
@@ -126,9 +124,7 @@ noncomputable abbrev toCechAcyclicOnAffines (ℱ : X.Modules)
 /-- **Leray's theorem for quasi-coherent sheaves, as a named isomorphism.** For an open covering
 `𝔘 = (U i)` all of whose nonempty finite intersections are affine and a quasi-coherent
 `𝒪_X`-module `ℱ`, `Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `Γ(X, ⊤)`-modules, through the natural isomorphism
-`cechHNatIso`. It is natural in `ℱ` (`cechComplexHomologyLinearEquivH_map`).
-
-(blueprint: `lem-pc-cech-computes`) -/
+`cechHNatIso`. It is natural in `ℱ` (`cechComplexHomologyLinearEquivH_map`). -/
 noncomputable def cechComplexHomologyLinearEquivH {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
     (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
@@ -173,9 +169,7 @@ lemma cechComplexHomologyLinearEquivH_map {ι : Type u} (U : ι → X.Opens)
 
 /-- **Leray's theorem, linearly over a ring mapping to the global sections.** For a ring
 homomorphism `φ : A →+* Γ(X, ⊤)` (e.g. `Γ(S, 𝒪_S) → Γ(X, 𝒪_X)` for `X` over `S = Spec A`),
-`cechComplexHomologyLinearEquivH` is `A`-linear after restricting scalars along `φ`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-pc-cech-computes`) -/
+`cechComplexHomologyLinearEquivH` is `A`-linear after restricting scalars along `φ`. -/
 noncomputable def cechComplexHomologyRestrictScalarsLinearEquivH {A : Type u} [CommRing A]
     (φ : A →+* Γ(X, ⊤)) {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
@@ -199,9 +193,7 @@ lemma cechComplexHomologyRestrictScalarsLinearEquivH_apply {A : Type u} [CommRin
 separated over `S = Spec A` and let `𝔘 = (U i)` be a covering of `X` by open affines. Then for
 every quasi-coherent `𝒪_X`-module `ℱ` and every `q`, `Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `A`-modules,
 both sides being `A`-modules by restriction of scalars along
-`A ≅ Γ(Spec A, ⊤) → Γ(X, ⊤)`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-pc-cech-computes`) -/
+`A ≅ Γ(Spec A, ⊤) → Γ(X, ⊤)`. -/
 theorem nonempty_cechComplex_restrictScalars_linearEquiv_H_of_isSeparated {A : Type u}
     [CommRing A] (f : X ⟶ Spec (.of A)) [IsSeparated f] {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤) (ℱ : X.Modules)
@@ -218,9 +210,7 @@ theorem nonempty_cechComplex_restrictScalars_linearEquiv_H_of_isSeparated {A : T
 
 /-- **Čech cohomology computes sheaf cohomology over a field, `k`-linearly.** For a scheme `X`
 separated over `Spec k` and a covering `𝔘 = (U i)` of `X` by open affines,
-`Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `k`-vector spaces for every quasi-coherent `ℱ`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-pc-cech-computes`) -/
+`Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `k`-vector spaces for every quasi-coherent `ℱ`. -/
 theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated_field (k : Type u) [Field k]
     [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤) (ℱ : X.Modules)

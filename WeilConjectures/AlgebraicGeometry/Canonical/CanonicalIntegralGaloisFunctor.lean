@@ -31,8 +31,10 @@ import all WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicFiberFunctors
 import all WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSupplement
 /-! # The canonical continuous integral Galois fibre functor
 
-Source: Weil II (1.1.1) b), (1.1.6); Stanford L19, Proposition 1.1.9.
-(blueprint: new-e7-canonical-integral-galois-functor).
+## References
+
+* Deligne, Weil II, (1.1.1) b), (1.1.6)
+* Stanford L19, Proposition 1.1.9
 -/
 
 @[expose] public section

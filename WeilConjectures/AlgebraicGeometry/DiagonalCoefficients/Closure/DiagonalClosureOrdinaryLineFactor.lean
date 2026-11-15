@@ -21,14 +21,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor MonObj
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The prescribed finite-field leg factors through ordinary scalar extension.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), colimit-leg
-factorization.  The compatible rational root bases identify the scalar extension
-of the finite line with the corresponding colimit leg.  Passing to the sheafified
-coefficient colimit gives the displayed factorization; no invertibility assertion
-is used here.
-(blueprint: lem-diagonal-closure-ordinary-line-factor).
 -/
 theorem diagonalClosure_ordinaryLine_factor
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)

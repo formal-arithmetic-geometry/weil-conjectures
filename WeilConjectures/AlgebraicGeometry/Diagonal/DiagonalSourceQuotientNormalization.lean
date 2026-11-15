@@ -14,9 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
-/-! # The normalized ordinary quotient of the supported integral constant
-Source: diagonal tower system proof, source paragraph of step (3).
-(blueprint: lem-sfb-diagonal-source-quotient-normalization). -/
+/-! # The normalized ordinary quotient of the supported integral constant -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -194,29 +192,7 @@ private theorem supportedReduction_cokernel (ℓ n : ℕ) [Fact ℓ.Prime]
     (by erw [Category.id_comp])
 
 /-- The ordinary reduction of the supported integral constant is the supported
-residue constant, with its specified quotient generator.
-
-Source: diagonal tower system proof, step (3), source paragraph; Cartier unit
-proof, supported integral/residue sequence
-(blueprint: lem-sfb-diagonal-source-quotient-normalization).
-
-Proof: the supported integral/residue sequence is short exact: its geometric
-stalks are the integer/residue sequence on the diagonal and zero off it.
-Extend the supported integral constant to the constant p-adic scalars. The
-coefficient projection is onto because every finite residue class has an integer
-representative; PadicInt.ker_toZModPow identifies its kernel with the prime-power
-ideal. Transport this calculation through ULift and the constant-ring module-sheaf
-equivalence. On the etale site, extension of the supported constant has the
-corresponding coefficient stalk on the diagonal and zero stalk off it. Exact
-comparison pullback preserves the resulting quotient diagram. Thus the residue
-constant, restricted along the residue projection, is the cokernel of multiplication
-by the indicated prime power. The insertion-of-one scalar adjunction identifies
-its quotient generator with the original integral
-generator. The specified ordinary reduction is another cokernel of the same
-map. The unique cokernel comparison is therefore invertible and has exactly
-the displayed generator normalization. This argument is independent of derived
-reduction, the units sheaf, a Cartier boundary, and invertibility of the prime
-on the base; on the empty base it is the unique isomorphism of zero objects. -/
+residue constant, with its specified quotient generator. -/
 theorem diagonal_source_quotient_normalization (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u})
     (D : DiagonalReductionPresentation ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))

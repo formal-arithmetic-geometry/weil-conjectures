@@ -9,8 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarCoefficientEquivale
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateThickLocus
 
 /-! # The ordinary coefficient restriction cube
-Source: Stacks Project, Cohomology on Sites, Tags 0D6E and 07A6.
-(blueprint: lem-pbc-coefficient-direct-image-restriction-cube).
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A6, 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -57,14 +59,7 @@ private theorem coefficientComparison_apply
 
 attribute [local irreducible] proEtaleRingRestrictionDirectImage
 
-/-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
-Source: Stacks 0D6E and 07A6, ordinary direct image and restriction of coefficients.
-(blueprint: lem-pbc-coefficient-direct-image-restriction-cube).
-
-Proof: every restriction compositor and canonical direct-image coefficient comparison
-is the identity on sections. The supplied comparison has the same property by `hi`;
-its inverse does too, by cancellation. Expand composition and direct image on sections.
-Both paths are the identity map, so sectionwise faithfulness proves the equality. -/
+/-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves. -/
 theorem coefficientDirectImageRestrictionCube
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

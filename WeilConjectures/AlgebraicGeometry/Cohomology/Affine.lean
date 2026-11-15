@@ -33,7 +33,7 @@ of the covering. We take the coefficients in `ℱ.presheafModuleCat`, the preshe
 
 ## Implementation notes
 
-The blueprint states Leray's theorem as "the edge map of the Čech-to-derived spectral sequence
+Leray's theorem is usually stated as "the edge map of the Čech-to-derived spectral sequence
 is an isomorphism". The edge map is not available as a definition, so
 `nonempty_cechComplex_linearEquiv_H` only records the existence of a `Γ(X, ⊤)`-linear
 isomorphism, without identifying it with the edge map. For `X` over a base `S`, linearity over

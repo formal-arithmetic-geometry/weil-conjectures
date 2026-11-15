@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Full faithfulness of the canonical Galois stalk functor
 
-Source: Stacks Project, Tags 03QT and 04JM.
+## References
+
+* Stacks Project, Tags 03QT, 04JM
 -/
 
 @[expose] public section

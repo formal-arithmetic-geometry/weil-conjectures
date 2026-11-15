@@ -111,8 +111,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Canonical coefficient mates and tensor projection maps
 
-Source: Zheng Lemma 4.10; Stacks 07A4
-(blueprint: def-coef-semilinear-geometry-ops).
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -145,17 +147,14 @@ namespace Geometry
 
 variable (G : Geometry.{c, v, r} J B τ A J' uInv uPush adjSet)
 
-/-- The coefficient projection arrow b is exactly the dependency's adjunction mate.
-Source: Zheng 4.10; Stacks 07A4
-(blueprint: def-coef-semilinear-geometry-ops). -/
+/-- The coefficient projection arrow `b` is exactly the adjunction mate. -/
 def coefficientMate {m n : ℕ} (h : n ≤ m) :
     (G.levelPush m).rightDerivedFunctor ⋙ (A.scalar h).T ⟶
       (G.target.scalar h).T ⋙ (G.levelPush n).rightDerivedFunctor :=
   (mateEquiv (G.derivedLevelAdjunction m) (G.derivedLevelAdjunction n)
     (TwoSquare.mk _ _ _ _ (G.coefficientPullback h).hom))
 
-/-- The exact extension-form transition formula for GN.
-Source: Zheng 4.10 (blueprint: def-coef-semilinear-geometry-ops). -/
+/-- The exact extension-form transition formula for GN. -/
 def TransitionFormula : Prop :=
   ∀ {m n : ℕ} (h : n ≤ m)
     (N : DS.{c, v, max c v r} J' G.coefficients G.coefficientTransition),
@@ -168,8 +167,7 @@ def TransitionFormula : Prop :=
           (reduction.{c, v, max c v r} J' G.coefficients G.coefficientTransition h
             (G.target.scalar h) N)
 
-/-- The general tensor projection arrow is the indicated counit transpose.
-Source: Stacks 07A4 (blueprint: def-coef-semilinear-geometry-ops). -/
+/-- The general tensor projection arrow is the indicated counit transpose. -/
 def tensorProjection (N : DS.{c, v, max c v r} J' G.coefficients G.coefficientTransition)
     (P : DS.{c, v, max c v r} J B τ) :
     A.closed.tensor.obj (G.push.rightDerivedFunctor.obj N, P) ⟶
@@ -179,8 +177,7 @@ def tensorProjection (N : DS.{c, v, max c v r} J' G.coefficients G.coefficientTr
     ((G.tensorPullback).hom.app (G.push.rightDerivedFunctor.obj N, P) ≫
       G.target.closed.tensor.map (Prod.mkHom (G.adjunction.counit.app N) (𝟙 _)))
 
-/-- The pullback reduction equation uses the inverse of the same tensor comparison.
-Source: Zheng 4.1 (blueprint: def-coef-semilinear-geometry-ops). -/
+/-- The pullback reduction equation uses the inverse of the same tensor comparison. -/
 def PullTransitionFormula : Prop :=
   ∀ {m n : ℕ} (h : n ≤ m) (M : DS.{c, v, max c v r} J B τ),
     reduction.{c, v, max c v r} J' G.coefficients G.coefficientTransition h
@@ -192,8 +189,7 @@ def PullTransitionFormula : Prop :=
           (G.coefficients n) (G.inverseImage n).modules).map
             (reduction.{c, v, max c v r} J B τ h (A.scalar h) M)
 
-/-- The levelwise tensor projection is the ordinary counit transpose.
-Source: Stacks 07A4 (blueprint: def-coef-semilinear-geometry-ops). -/
+/-- The levelwise tensor projection is the ordinary counit transpose. -/
 def levelTensorProjection (n : ℕ) (N : D.{c, v, max c v r} J' (G.coefficients n))
     (P : D.{c, v, max c v r} J (B n)) :
     (A.levelClosed n).tensor.obj ((G.levelPush n).rightDerivedFunctor.obj N, P) ⟶
@@ -206,8 +202,7 @@ def levelTensorProjection (n : ℕ) (N : D.{c, v, max c v r} J' (G.coefficients 
       (G.target.levelClosed n).tensor.map
         (Prod.mkHom ((G.derivedLevelAdjunction n).counit.app N) (𝟙 _)))
 
-/-- Evaluation of the constructed system projection is the level projection word.
-Source: Stacks 07A4 (blueprint: def-coef-semilinear-geometry-ops). -/
+/-- Evaluation of the constructed system projection is the level projection word. -/
 def ProjectionEvaluation : Prop :=
   ∀ (n : ℕ) (N : DS.{c, v, max c v r} J' G.coefficients G.coefficientTransition)
     (P : DS.{c, v, max c v r} J B τ),

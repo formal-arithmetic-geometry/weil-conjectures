@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 import Mathlib.CategoryTheory.CofilteredSystem
 
 /-! # Covers mapping to finite etale towers
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV.
-(blueprint: lem-weil-pbc-finite-etale-tower-cone-cover).
+
+## References
+
+* Stacks Project, Tags 01YW, 0990; finite-stalk adaptation of Tag 09BV
 -/
 
 @[expose] public section
@@ -80,16 +82,7 @@ private theorem seqLimit_surjective {S : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite etale tower with finite nonempty geometric fibers has a compatible
-cone whose legs to the base form a pro-etale cover.
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV.
-(blueprint: lem-weil-pbc-finite-etale-tower-cone-cover).
-Proof: Pull the tower back to each affine open of X. Its affine inverse limit is
-Spec of the direct limit of the rings, and is weakly etale because the rings are
-ind-etale. At a geometric point, finite inverse-system compactness gives compatible
-points of all stages, hence a point of the affine limit by its limit property.
-Thus the limit is surjective over the affine open and its singleton covers.
-Compose these singleton covers with the affine open cover of X. The limit
-projections are the required compatible maps. No contractible refinement is asserted. -/
+cone whose legs to the base form a pro-etale cover. -/
 theorem finite_etale_tower_cone_cover
     (X : Scheme.{u}) (P : ℕ → X.Etale) (p : ∀ n : ℕ, P (n + 1) ⟶ P n)
     (hfin : ∀ n : ℕ, IsFinite (P n).hom)

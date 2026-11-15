@@ -237,8 +237,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 public import WeilConjectures.AlgebraicGeometry.EtaleSupportedDiagonalUnit
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(blueprint: lem-z8-etale-supported-diagonal-unit).
 
 # The supported diagonal unit -/
 @[expose] public noncomputable section

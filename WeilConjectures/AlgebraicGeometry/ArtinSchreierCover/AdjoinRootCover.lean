@@ -14,8 +14,7 @@ public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 For a scheme `S` and a polynomial `P` over `Γ(S, ⊤)`, the `S`-scheme
 `adjoinRootCover S P` is the base change along `S.toSpecΓ` of `Spec Γ(S)[T]/(P)`. Its
 morphisms from an `S`-scheme `Z` are the roots of `P` in `Γ(Z, ⊤)`: this is the universal
-property used for the Artin–Schreier cover (blueprint: lemma-artin-schreier-character-sheaf, step
-(2); lem-weil-pbc-morphism-into-affine-scheme).
+property used for the Artin–Schreier cover.
 -/
 
 @[expose] public section

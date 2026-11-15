@@ -41,22 +41,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
 /-- The shifted root endpoint equation for a quotient-unit-preserving comparison.
-This is the target half of the normalized endpoint argument.
-
-Source: coefficient changes (1), root endpoint; diagonal limit (3), normalized
-root cone.
-(blueprint: lem-diagonal-cyclic-quotient-normalized-target-endpoint).
-
-Proof: ht0 identifies each limit projection of t0 with the actual root projection.
-IntegralRoots uniqueness identifies the two integral-root maps. The finite root
-maps coincide because their inclusions into the units sheaf agree and that
-inclusion is monic. Use p.lineEndpoint.normalization and ht, transpose p.line.iso
-by scalar adjunction, and apply the assumed quotient-unit square he and hta. The
-root quotient is a flat rank-one finite line, so its normalized unit detects the
-remaining degree-zero map. Exact-single and shift naturality give the displayed
-shifted equation. No derived arrow is inferred merely from its finite evaluations;
-the cancellation is only at this prescribed flat coefficient endpoint. The empty
-scheme and n = 0 follow from the same maps and cancellation statements. -/
+This is the target half of the normalized endpoint argument. -/
 theorem diagonalCyclicQuotient_normalizedTargetEndpoint
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

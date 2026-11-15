@@ -40,14 +40,12 @@ theorem unitSection_comp_hom : unitSection G ≫ G.hom = 𝟙 S :=
   Over.w η[G]
 
 /-- The `𝒪_S`-module `ω_{G/S} = e^*Ω¹_{G/S}`: the cotangent sheaf of `G/S` pulled back along the
-identity section. For smooth `G` it is locally free, and `Lie(G/S)` is its dual.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+identity section. For smooth `G` it is locally free, and `Lie(G/S)` is its dual. -/
 noncomputable def omega : S.Modules :=
   (Scheme.Modules.pullback (unitSection G)).obj G.hom.cotangentSheaf
 
 /-- The Lie algebra sheaf `Lie(G/S) = ℋom_{𝒪_S}(ω_{G/S}, 𝒪_S)` of a group scheme `G` over `S`: the
-sheaf of relative tangent vectors along the identity section. (blueprint:
-`def-wf-lie-algebra-derivation`) -/
+sheaf of relative tangent vectors along the identity section. -/
 noncomputable def lieAlgebraSheaf : S.Modules :=
   Scheme.Modules.dual (omega G)
 
@@ -64,8 +62,7 @@ theorem lieAlgebraSheaf_iso_pullback_tangentSheaf [Smooth G.hom] :
 
 /-- The Lie algebra `Lie(G) = Hom_{𝒪_S}(ω_{G/S}, 𝒪_S)` of a group scheme `G` over `S`: the global
 sections of the Lie algebra sheaf, the module of relative tangent vectors at the identity. Its Lie
-bracket is constructed in `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket`.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+bracket is constructed in `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket`. -/
 def Lie : Type u :=
   omega G ⟶ Scheme.Modules.unitModule S
 

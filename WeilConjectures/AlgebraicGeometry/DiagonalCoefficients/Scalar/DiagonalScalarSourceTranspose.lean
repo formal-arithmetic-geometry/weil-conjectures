@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSourceAdjunctionTransport
 
 /-! # Transpose of the successive supported endpoint
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-scalar-source-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -71,11 +68,7 @@ variable {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (s : ScalarCompatibility a Y L₀ L₁ m d₀ d₁)
   (t : ScalarCompatibility b Y L₁ L₂ v d₁ d₂)
 
-/-- The two supported scalar normalizations compose under the collected adjunction.
-Source: coefficient changes (1). (blueprint: lem-diagonal-scalar-source-transpose).
-Proof: apply composite exact-single adjunction transport to the two supplied endpoint
-normalizations. Its ordinary map is the first semilinear map followed by restriction
-of the second; the composition-single comparison collects the exact right functors. -/
+/-- The two supported scalar normalizations compose under the collected adjunction. -/
 theorem scalar_compatibility_transpose :
     (ScalarCompatibility.compositeAdjunction s t).homEquiv _ _
         (ScalarCompatibility.compositeSource s t).hom =

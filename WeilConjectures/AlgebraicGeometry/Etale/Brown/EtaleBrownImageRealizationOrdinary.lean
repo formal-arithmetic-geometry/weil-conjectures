@@ -10,7 +10,9 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! Ordinary part of the normalized image realization.
 
-(blueprint: lem-pur-etale-brown-image-realization-ordinary)
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15
+* Stacks Project, Tags 03CY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +31,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- Evaluating a constant generator on a singleton section gives its sheafification image.
-Proof: the constant singleton is already a sheaf, so every section comes from its unit.
-The assertion then follows from the sheafification adjunction triangle identity. -/
+/-- Evaluating a constant generator on a singleton section gives its sheafification image. -/
 private theorem constantSection_apply
     {C : Type*} [Category* C] (J : GrothendieckTopology C)
     [HasWeakSheafify J (Type (u + 1))] [HasWeakSheafify J CommRingCat.{u + 1}]
@@ -58,12 +58,8 @@ private theorem constantSection_apply
         (CategoryTheory.forget CommRingCat.{u + 1}))
   exact congrArg (fun f ↦ f.app U t) h
 
-/-- Construction of the section-normalized ordinary comparison.
-Source: Zheng, Construction 5.15; Stacks 03CY and 07A4.
-(blueprint: lem-pur-etale-brown-image-realization-ordinary).
-
-The comparison is induced by the ordinary right-underlying comparison and its
-section formula. The construction is independent of properness and finiteness.
+/-- Construction of the section-normalized ordinary comparison, induced by the
+ordinary right-underlying comparison and its section formula.
 -/
 theorem etaleBrownImageRealization_ordinaryRight_exists
     (O : Type (u + 1)) [CommRing O] (t : O)

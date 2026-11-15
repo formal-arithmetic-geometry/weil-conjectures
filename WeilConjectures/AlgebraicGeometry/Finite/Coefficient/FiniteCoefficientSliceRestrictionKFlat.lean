@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSli
 
 /-! # K-flatness of fixed scalar chart coordinates
 
-Source: Stacks Project, Tags 03CY, 06YN and 03DH.
+## References
+
+* Stacks Project, Tags 03CY, 06YN, 0E8K, 03DH
 -/
 
 @[expose] public noncomputable section
@@ -25,18 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The fixed-scalar encoding followed by restriction to a weakly etale chart carries K-flat
 complexes over the constant ring sheaf to K-flat complexes of sheaves of `B`-modules on the
-chart.
-Source: Stacks Project, Tags 03CY, 06YN, 0E8K and 03DH.
-
-Proof: restriction of modules to the slice at the chart preserves K-flatness
-(`SheafOfModules.ringedSite_restriction_exact_kflat`, Tag 0E8K). Sheaves of `B`-modules on
-the chart are identified with modules over the restricted constant ring sheaf by an additive
-equivalence compatible with the sheafified tensor products
-(`proEtaleSliceRealization_tensor`), which carries the chart coordinates to the slice
-restriction (`finiteCoefficientSliceRestrictionRealizationIso`). Such an equivalence preserves
-and reflects the acyclic tensor test
-(`finiteCoefficientSliceRestriction_acyclicTensorTest`), and the acyclic tensor test gives
-K-flatness for quasi-isomorphisms by the symmetry of the tensor product. -/
+chart. -/
 theorem finiteCoefficientSliceRestriction_kFlat_of_constant
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

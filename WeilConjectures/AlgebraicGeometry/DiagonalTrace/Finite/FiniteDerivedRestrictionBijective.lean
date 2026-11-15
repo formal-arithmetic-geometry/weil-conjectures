@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 
-/-! Exact-functor Ext comparison by a degree-zero generator and acyclic injectives.
-(blueprint: lem-sfb-finite-derived-restriction-bijective). -/
+/-! Exact-functor Ext comparison by a degree-zero generator and acyclic injectives. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -231,15 +231,7 @@ lemma localSection_comp_map (a b : M) :
     rw [← t.add_vadd, neg_sub, sub_eq_neg_add]
 
 /-- A torsor with a section `σ` is trivial: the sections `sₐ` exhibit `U ×_Y P` as the coproduct
-`∐_{a ∈ M} U`. The square
-```
-  U ───sₐ───▶ U ×_Y P
-  │              │ (σ ∘ pr₁, pr₂)
-σ ≫ (-a)        ▼
-  P ──(a, 𝟙)──▶ P ×_Y P
-```
-is cartesian, and the bottom maps form the coproduct decomposition of `P ×_Y P` defining the
-torsor. -/
+`∐_{a ∈ M} U`. -/
 lemma isIso_sigmaDesc_localSection :
     IsIso (Sigma.desc fun a : M ↦ t.localSection f σ hσ a) := by
   have := t.isIso_sigmaDesc

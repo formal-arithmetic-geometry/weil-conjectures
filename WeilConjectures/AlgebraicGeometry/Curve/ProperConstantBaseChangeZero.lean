@@ -64,9 +64,7 @@ private theorem standard_baseChange_zero {K : Type u} [Field K] [Algebra k K]
     refine ⟨Sheaf.H.map a.hom 0 x, ?_⟩
     rw [Etale.cohomologyMap_map, hx]
 
-/-- Proper constant-sheaf base change in the zero degree.
-(blueprint: lemma-weil-pbc-smooth-curve-proper-base-change-zero)
-Proof: apply the corresponding degree part of the proper base-change argument. -/
+/-- Proper constant-sheaf base change in the zero degree. -/
 theorem proper_constant_base_change_zero [IsCurve f] [Smooth f] [ConnectedSpace C]
     [IsProper f] (r : ℕ) [Fact r.Prime] (k' : Type u) [Field k']
     [IsAlgClosed k']

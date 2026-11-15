@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.CompletedCoefficientScalarPush
 
 /-! # Section actions through the underlying completed pushforward
-
-Source: the ordinary coefficient square, its local action calculation.
-(blueprint: lem-sfb-diagonal-completed-push-action).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +30,7 @@ private theorem completed_push_smul {l : ℕ} [Fact l.Prime]
   rfl
 
 /-- Regard the given underlying comparison on a pushed module as a comparison to
-ordinary abelian direct image. Source: the completed ringed direct-image construction
-(blueprint: lem-sfb-diagonal-completed-push-action). -/
+ordinary abelian direct image. -/
 def completedPushInputIso {l : ℕ} [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (eS : CompletedRealization l S)
@@ -44,10 +40,7 @@ def completedPushInputIso {l : ℕ} [Fact l.Prime]
         ((diagonalCompletedRestriction l X ⋙ diagonalForget l X).obj M) :=
   eS.underlying.app ((diagonalTracePush l f).obj M)
 
-/-- The comparison has exactly the prescribed underlying map.
-Source: the completed ringed direct-image construction
-(blueprint: lem-sfb-diagonal-completed-push-action).
-Proof: both maps are the same underlying comparison, with definitionally equal targets. -/
+/-- The comparison has exactly the prescribed underlying map. -/
 theorem completedPushInputIso_hom_heq {l : ℕ} [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (eS : CompletedRealization l S)
@@ -56,9 +49,7 @@ theorem completedPushInputIso_hom_heq {l : ℕ} [Fact l.Prime]
       (eS.underlying.hom.app ((diagonalTracePush l f).obj M)) := by
   rfl
 
-/-- The underlying push comparison evaluated with its original module section type.
-Source: the completed direct-image construction
-(blueprint: lem-sfb-diagonal-completed-push-action). -/
+/-- The underlying push comparison evaluated with its original module section type. -/
 def completedPushInputSection {l : ℕ} [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) (eS : CompletedRealization l S)
     (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
@@ -67,15 +58,7 @@ def completedPushInputSection {l : ℕ} [Fact l.Prime]
   (completedPushInputIso f eS M).hom.hom.app U x
 
 /-- The underlying comparison on a pushed module carries its internal action to the
-completed scalar action on the original module's sections.
-
-Source: lem-diagonal-completed-ordinary-square, first action calculation.
-(blueprint: lem-sfb-diagonal-completed-push-action).
-
-Proof: apply the single-site section-action identity to the pushed module and the section
-obtained by the underlying comparison. Cancel the inverse underlying comparison. The
-completed pushforward action is restriction of scalars, hence multiplication by the
-coefficient map applied to the coefficient; applying it to one gives completedPushScalar. -/
+completed scalar action on the original module's sections. -/
 theorem completedPushInputIso_section_action {l : ℕ} [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) (eS : CompletedRealization l S)
     (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)

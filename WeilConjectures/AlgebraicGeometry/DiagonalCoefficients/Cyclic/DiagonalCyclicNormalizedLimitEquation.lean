@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Supported.DiagonalTraceSupportedSourceConeNormalization
 
 /-! # Supplied normalized diagonal limit data
-
-Source: diagonal limit (3).
-(blueprint: def-diagonal-cyclic-normalized-limit-equation).
 -/
 
 @[expose] public noncomputable section
@@ -48,9 +45,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalIntegralBoundary diagonalSingleLimitComparison
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- Normalized coefficient cones and their whole-limit equation, with supplied objects.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-normalized-limit-equation).
-No witness is selected by this predicate. -/
+/-- Normalized coefficient cones and their whole-limit equation, with supplied objects. -/
 @[irreducible] def cyclicNormalizedLimitEquation (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [dAb : HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]
     [dMod : HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]

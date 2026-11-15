@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalEvaluationUnit
 
 /-! # The actual underlying cyclic quotient unit
-
-Source: coefficient changes (1), the scalar-extension adjunction.
-(blueprint: def-diagonal-cyclic-quotient-augmentation).
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +28,7 @@ attribute [local semireducible] cyclicDiscreteRestriction
 attribute [local irreducible] Functor.mapDerivedCategory derivedScalars
   cyclicEvaluationFunctor cyclicFiniteEvaluationFunctor
 
-/-- Finite realization and scalar restriction retain the same underlying sheaf.
-Source: finite realization's underlying comparison and exact scalar restriction
-(blueprint: def-diagonal-cyclic-quotient-augmentation). -/
+/-- Finite realization and scalar restriction retain the same underlying sheaf. -/
 def cyclicFiniteUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     (p : CyclicCartierFrame l Y n) :
     p.eW.F ⋙ diagonalFiniteToPadic l n (diagonalSurface Y) ⋙
@@ -41,9 +36,7 @@ def cyclicFiniteUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
   Functor.isoWhiskerLeft p.eW.F
     (diagonalFiniteForgetIso l n (diagonalSurface Y)).symm ≪≫ p.eW.underlying
 
-/-- Exact-functor comparison before applying the scalar adjunction unit.
-Source: completed realization's specified underlying comparison
-(blueprint: def-diagonal-cyclic-quotient-augmentation). -/
+/-- Exact-functor comparison before applying the scalar adjunction unit. -/
 def cyclicCompletedUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) :
@@ -56,8 +49,7 @@ def cyclicCompletedUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The underlying cyclic evaluation is the derived scalar quotient followed by
-forgetting its finite action. Source: exact-functor composition and finite realization
-(blueprint: def-diagonal-cyclic-quotient-augmentation). -/
+forgetting its finite action. -/
 def cyclicEvaluationUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) (p : CyclicCartierFrame l Y n) :
@@ -75,9 +67,7 @@ def cyclicEvaluationUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : �
   exact Functor.isoWhiskerLeft
     (eW.F.mapDerivedCategory ⋙ derivedScalars (cyclicMap l n) (diagonalSurface Y)) f
 
-/-- The underlying unit of derived scalar extension.
-Source: the actual scalar adjunction
-(blueprint: def-diagonal-cyclic-quotient-augmentation). -/
+/-- The underlying unit of derived scalar extension. -/
 def scalarUnderlyingUnit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -103,9 +93,7 @@ def scalarUnderlyingUnit
       ((Functor.mapDerivedCategoryCompIso R U) ≪≫ r).hom
 
 /-- The scalar adjunction unit transported through the specified realizations.
-Every component is constructed independently of a quotient model or limit cone.
-Source: coefficient changes (1), derived scalar adjunction
-(blueprint: def-diagonal-cyclic-quotient-augmentation). -/
+Every component is constructed independently of a quotient model or limit cone. -/
 def cyclicEvaluationAugmentation (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (eW : CompletedRealization l (diagonalSurface Y)) (p : CyclicCartierFrame l Y n) :

@@ -12,9 +12,6 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # The complement of a dense open in a curve
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization).
-(blueprint: lem-sc-dense-open-finite-complement)
 -/
 
 @[expose] public section
@@ -26,21 +23,7 @@ open CategoryTheory Topology TopologicalSpace
 namespace AlgebraicGeometry.IsCurve
 
 /-- The complement of a dense open in a curve over an algebraically closed field is a finite
-set of closed points with separably closed residue fields.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization).
-(blueprint: lem-sc-dense-open-finite-complement)
-
-Proof: The curve is Noetherian because it is finite type over a field. For every
-irreducible component Z, the complement W of all the other components is open and
-has closure Z. Thus W is nonempty and density forces V to meet W, hence Z. The
-subspace Z is irreducible and has dimension at most one. Its nonempty open V ∩ Z
-therefore has closed points as its complement, by the dimension-one specialization
-chain argument. For x outside V, apply this to a component containing x. Since Z
-is closed in C, the singleton {x} is closed in C. The closed complement of V is then
-finite by the Noetherian closed-points finiteness theorem. Finally the residue field
-of each closed point is isomorphic to the algebraically closed base field by the
-Nullstellensatz, hence is algebraically closed and separably closed. The empty curve
-and the empty complement satisfy all three clauses vacuously. -/
+set of closed points with separably closed residue fields. -/
 theorem dense_open_finite_complement {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (V : C.Opens) (hV : Dense (V : Set C)) :

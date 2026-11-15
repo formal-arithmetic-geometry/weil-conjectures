@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalLimitNormalizat
 
 These definitions spell out the existing specification with shared endpoint and
 normalization functions. No coefficient object or boundary is changed.
-(blueprint: def-sfb-diagonal-limit-specification-api).
 -/
 
 @[expose] public noncomputable section
@@ -42,10 +41,7 @@ def DiagonalTypedLimitSpec (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (diagonalLimitRoots ℓ Y) (diagonalLimitFiniteNormalization ℓ Y hY D)
     (diagonalLimitSourceNorm ℓ Y D) (diagonalLimitTargetNorm ℓ Y)
 
-/-- The named-data assertion gives the original limit specification verbatim.
-Source: the definition of DiagonalCompletedLimitSpec
-(blueprint: def-sfb-diagonal-limit-specification-api).
-Proof: unfold only the named functions; each is the original function body. -/
+/-- The named-data assertion gives the original limit specification verbatim. -/
 theorem diagonalLimitSpec_of_typed (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

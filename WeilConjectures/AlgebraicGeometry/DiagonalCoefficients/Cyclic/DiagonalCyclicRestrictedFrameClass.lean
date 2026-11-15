@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicCartierFrame
 
 /-! # The actual restricted finite frame class
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-restricted-frame-class).
 -/
 
 @[expose] public noncomputable section
@@ -47,11 +44,7 @@ attribute [local irreducible] cyclicLine cyclicLineMap derivedScalars
 
 attribute [local irreducible] CyclicCartierFrame.reduce
 
-/-- The actual cyclic-frame class after restriction to discrete integral coefficients.
-Source: coefficient changes (1)
-(blueprint: def-diagonal-cyclic-restricted-frame-class).
-The body is the supplied frame reduction followed by exact scalar restriction;
-this definition chooses no object from an existence theorem. -/
+/-- The actual cyclic-frame class after restriction to discrete integral coefficients. -/
 @[irreducible] def cyclicRestrictedFrameClass
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l Y]

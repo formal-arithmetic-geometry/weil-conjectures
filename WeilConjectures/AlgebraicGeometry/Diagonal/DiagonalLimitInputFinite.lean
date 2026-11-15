@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalCompletedDataAs
 /-! # Finite equations before homogeneous equality conversion
 
 The predicate is the finite part of the given normalized strict system.
-(blueprint: def-sfb-diagonal-limit-input-finite).
 -/
 
 @[expose] public noncomputable section

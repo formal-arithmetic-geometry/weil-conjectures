@@ -51,10 +51,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Tensor with a flat constructible etale sheaf
 
-Source: Stacks Project, Etale Cohomology, Tags 095I and 0961, with the exact-functor
-cohomology computation of Homology, Tag 010N
-(blueprint: lem-fd-flat-constructible-tensor).
-
 The two auxiliary bifunctors express naturality in both the bounded constructible complex
 and the flat constructible sheaf. They use the existing small-etale module-sheaf tensor,
 its unbounded derived tensor, and the recorded finite-value constructibility predicates.
@@ -69,6 +65,11 @@ its unbounded derived tensor, and the recorded finite-value constructibility pre
 
 * `flatConstructibleTensor_cohomology_and_bounds`: the natural comparison,
   constructibility, bounded constructibility, and preservation of every cohomology interval.
+
+## References
+
+* Stacks Project, Etale Cohomology, Tags 095I, 0961
+* Stacks Project, Homology, Tag 010N
 -/
 
 -- After pruning, this module only keeps private declarations.

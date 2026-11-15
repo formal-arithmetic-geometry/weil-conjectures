@@ -45,14 +45,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Convert finite coordinates to the named supported Cartier equation.
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: lem-sfb-diagonal-trace-supported-finite-boundary-coordinate-conversion).
-
-Proof: expand the named coordinate and supported boundary predicates. The source
-comparison, root transport, coefficient unit map and finite Cartier map contain
-precisely the same single, shift and projection composites. Expanding the canonical
-finite Cartier class and the unit/line aliases identifies both equations. -/
+/-- Convert finite coordinates to the named supported Cartier equation. -/
 theorem diagonalTrace_supportedFiniteBoundary_of_coordinates
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

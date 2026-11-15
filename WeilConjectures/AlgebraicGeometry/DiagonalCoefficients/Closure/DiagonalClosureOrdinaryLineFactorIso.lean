@@ -130,22 +130,7 @@ private theorem mappedColimitBasis
     simpa only [Category.assoc] using hb i
 
 /-- Any module morphism realizing the normalized finite-field colimit leg is an
-isomorphism. On the compatible-root cover, take the colimit of the normalized
-finite-field bases, retaining its equation on each leg. Tensor-colimit
-extensionality proves that this basis is linear for the prescribed closure
-action. Extend the finite-field basis with its unit normalization. Composing it
-with the restriction of f gives the same map as the colimit basis: their leg
-equations show equality after the coefficient inclusion, hence equality on one,
-and regular-module hom extensionality finishes. Both bases are isomorphisms,
-so f is an isomorphism on each slice. The cover detects isomorphisms of sheaves,
-and the forgetful functor reflects isomorphisms of internal modules.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), normalized
-colimit comparison.  This lemma supplies only the invertibility step; the
-factorization itself is the preceding lemma.
-(blueprint: lem-diagonal-closure-ordinary-line-factor-iso).
--/
+isomorphism. -/
 theorem diagonalClosure_ordinaryLine_factor_isIso
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (X : Scheme.{u}) (hX : IsUnit (l : Γ(X, ⊤)))

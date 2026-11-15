@@ -143,11 +143,7 @@ theorem nonempty_higherDirectImage_comp_Γab_iso_functorH (q : ℕ) :
 
 /-- **The sections of the higher direct images to the spectrum of a field.** For
 `f : X ⟶ Spec K`, the global sections of `R^q f_* ℱ` are the sheaf cohomology `H^q(X, ℱ)`, by
-additive isomorphisms natural in the `𝒪_X`-module `ℱ`.
-
-This is the case `T = Spec K` of
-`AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H`, which holds
-here for every `f` and `ℱ`. -/
+additive isomorphisms natural in the `𝒪_X`-module `ℱ`. -/
 theorem exists_addEquiv_sections_higherDirectImage_H_of_field (q : ℕ) :
     ∃ e : ∀ ℱ : X.Modules, Γ((higherDirectImage f q).obj ℱ, ⊤) ≃+ ℱ.H q,
       ∀ (ℱ 𝒢 : X.Modules) (φ : ℱ ⟶ 𝒢) (x : Γ((higherDirectImage f q).obj ℱ, ⊤)),

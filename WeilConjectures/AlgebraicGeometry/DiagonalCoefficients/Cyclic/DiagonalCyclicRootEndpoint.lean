@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLoca
 import WeilConjectures.AlgebraicGeometry.SmoothPurity.RootTowerFiniteTensor
 
 /-! # The cyclic quotient of the integral Tate line
-
-Source: diagonal tower coefficient changes (1), and the root-line reduction in
-the diagonal tower limit proof.
-(blueprint: lem-diagonal-cyclic-root-endpoint).
 -/
 
 @[expose] public noncomputable section
@@ -224,27 +220,7 @@ private theorem cyclicRootProjection_isIso
   exact isIso_of_reflects_iso q S.functor
 
 /-- The ordinary tensor quotient of the integral root line is the finite cyclic
-Tate line, with its actual root projection.
-
-Source: latest blueprint, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md (1), together with the paragraph
-beginning "Here the Tate twist" in sk-prop-diagonal-tower.proof.md.
-(blueprint: lem-diagonal-cyclic-root-endpoint).
-
-Proof: identify the bottom integer ring with Z_l and factor the actual continuous
-PadicInt.toZModPow through its ell-power quotient. Restrict the n-th integral
-root projection to Z_l and extend it along this factorization. The scalar-unit
-formula gives a map q from cyclicLine to the free cyclic module on finite roots,
-normalized by the actual root projection. That projection is locally surjective,
-so q is epic. On the compatible-root cover, the bottom integral line is free of
-rank one. Restricting along the bottom coefficient isomorphism and extending to
-the cyclic ring retains this basis, without flatness. The finite root basis and
-the annihilation of the cyclic coefficient ring give a rank-one target as well.
-The existing local rank-one theorem makes q an isomorphism on this cover, hence
-globally. The generic finite-root endpoint constructor compares the realized
-free root module with the Cartier line, preserving its root unit. Composing with
-q gives precisely the required LineEndpoint. The argument includes the zero ring,
-the empty scheme and n=0. It uses no extension field or uniformizer. -/
+Tate line, with its actual root projection. -/
 theorem diagonalCyclicRootEndpoint
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     (hX : IsUnit (l : Γ(X, ⊤))) (n : ℕ)

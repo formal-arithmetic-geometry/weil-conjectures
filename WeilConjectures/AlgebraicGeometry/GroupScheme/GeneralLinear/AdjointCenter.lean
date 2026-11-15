@@ -31,11 +31,6 @@ is an open immersion.
 - `AlgebraicGeometry.GrpObj.mem_range_differential_centerι_iff`: `Lie(Z(G)) = 𝔷(Lie G)`.
 - `AlgebraicGeometry.GrpObj.mem_range_differential_identityComponent_center_iff`:
   `Lie(Z(G)°) = 𝔷(Lie G)`.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`, `lemma-stable-subspaces-center--2`: `Lie(Z(G)°) = 𝔷(Lie G)` for a
-connected algebraic group.
 -/
 
 @[expose] public section
@@ -136,7 +131,7 @@ variable [QuasiCompact G.hom] [ConnectedSpace G.left]
 
 /-- **The centre is the kernel of the adjoint representation.** For a connected group scheme of
 finite type over an algebraically closed field of characteristic zero, `Z(G) = ker Ad` as closed
-subgroup schemes of `G`. (blueprint: `lemma-stable-subspaces-center`) -/
+subgroup schemes of `G`. -/
 noncomputable def centerIsoKerAdjoint : center G ≅ CategoryTheory.GrpObj.ker (adjoint b) where
   hom := (exists_center_comp_kerι b).choose
   inv := (exists_kerι_comp_center b).choose
@@ -171,7 +166,7 @@ instance : IsMonHom (centerIsoKerAdjoint b).inv := by
 
 /-- **The Lie algebra of the centre** of a connected group scheme of finite type over an
 algebraically closed field of characteristic zero is the centre of its Lie algebra:
-`Lie(Z(G)) = Lie(ker Ad) = ker(ad) = 𝔷(Lie G)`. (blueprint: `lemma-stable-subspaces-center`) -/
+`Lie(Z(G)) = Lie(ker Ad) = ker(ad) = 𝔷(Lie G)`. -/
 theorem mem_range_differential_centerι_iff (x : Lie G) :
     x ∈ (differential (centerι G)).range ↔ x ∈ LieAlgebra.center k (Lie G) := by
   classical
@@ -192,7 +187,7 @@ theorem mem_range_differential_centerι_iff (x : Lie G) :
 
 /-- **The Lie algebra of the identity component of the centre** of a connected group scheme of
 finite type over an algebraically closed field of characteristic zero is the centre of its Lie
-algebra: `Lie(Z(G)°) = Lie(Z(G)) = 𝔷(Lie G)`. (blueprint: `lemma-stable-subspaces-center--2`) -/
+algebra: `Lie(Z(G)°) = Lie(Z(G)) = 𝔷(Lie G)`. -/
 theorem mem_range_differential_identityComponent_center_iff (x : Lie G) :
     x ∈ (differential (identityComponentι (center G) ≫ centerι G)).range ↔
       x ∈ LieAlgebra.center k (Lie G) := by

@@ -49,7 +49,9 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Extension of the ordinary scalar comparison from the rank-one quotient
 
-Source: Stacks Project, Tags 093J, 093M and 03CY.
+## References
+
+* Stacks Project, Tags 093J, 093M and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -142,18 +144,7 @@ private theorem ordinaryTarget_colimits
   unfold finitePerfectAdicOrdinaryScalarTarget finitePerfectAdicScalarModelOrdinary
   infer_instance
 
-/-- A rank-one ordinary scalar comparison extends to every quotient module.
-
-Source: Stacks Project, Tags 093J and 093M; Tag 03CY for finite presentations.
-(blueprint: new-s3-finite-perfect-adic-ordinary-scalar-compatibility)
-
-Proof: both ordinary functors are exact and preserve finite coproducts.  A
-finite presentation of a quotient module by free modules reduces the desired
-square to the rank-one square on its generators; the completed projection
-formula identifies the two maps there.  Cokernels and naturality then descend
-the equality to the presented module.  The same argument handles zero modules
-and empty charts.
--/
+/-- A rank-one ordinary scalar comparison extends to every quotient module. -/
 theorem finitePerfectAdicOrdinaryScalar_compatibility
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Diagonal
 import WeilConjectures.CategoryTheory.SixFunctors.IntegrationTransport
 
 /-! # Condensed realization of the completed diagonal diagram
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-completed-diagram-realization).
 -/
 
 @[expose] public noncomputable section
@@ -41,28 +38,7 @@ private theorem singleUnit_isIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   infer_instance
 
 /-- Realize a completed diagonal diagram as a condensed Z_l diagram, without
-performing any extension of coefficient fields or quotient reduction.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), initial Z_l stage.
-(blueprint: lem-diagonal-completed-diagram-realization).
-
-Proof: The normalized integral coefficient limit at the bottom finite field
-identifies the completed coefficient ring with the pulled-back condensed Z_l
-ring. Internal abelian module sheaves and sectionwise module sheaves are
-equivalent, retaining their underlying sheaves. Transport along this ring
-comparison gives exact equivalences on Y, P and W. The coefficient projections
-normalize the regular module comparisons, and the root-limit projections
-normalize the positive-line comparisons. Direct image retains the underlying
-sheaf, so these equivalences give ordinary direct-image squares. Their unique
-right-derived extensions are fixed by the full universal units. Use these
-squares to transport δ, the three given traces, and the two supported sources.
-Naturality of the squares and the two assumed integration equalities prove
-integration for the transported diagram. The supported-source and root
-normalizations are preserved by construction. The resulting Reference only
-uses the Z_l component of a family, so it applies to every family having this
-component. This construction does not claim that separate finite reductions
-detect arbitrary derived morphisms. -/
+performing any extension of coefficient fields or quotient reduction. -/
 theorem diagonalCompletedDiagram_realization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

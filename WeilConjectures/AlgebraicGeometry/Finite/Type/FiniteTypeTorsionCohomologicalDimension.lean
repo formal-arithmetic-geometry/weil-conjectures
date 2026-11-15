@@ -14,9 +14,6 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 
 /-!
 # Torsion cohomological dimension of a finite-type scheme
-
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-thm-sc-finite-type-torsion-cd.md (blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -51,19 +48,7 @@ private theorem subsingleton_H_of_subsingleton_derivedCohomology
     Limits.terminalIsTerminal q F).2 hz'
 
 /-- A finite-type scheme of dimension `d` over a field of torsion étale cohomological
- dimension at most `c` has torsion étale cohomological dimension at most `2 * d + c`.
-
-Source: blueprint, sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md
-(blueprint: lemma-uniform-bounds-pro-etale-affines).
-
-Proof: Apply the affine-to-global Leray reduction
-`new-thm-sc-finite-type-torsion-cd-affine-reduction`, supplying the affine finite-type
-calculation `new-thm-sc-affine-torsion-cd-bound`. The comparison from the étale to the
-Zariski site has exact inverse image, so gives a Leray spectral sequence. Its higher
-direct-image stalks are filtered colimits of cohomology on affine neighborhoods and
-vanish above `d + c` by the affine calculation. Zariski cohomology vanishes above `d`.
-Thus all surviving total degrees are at most `2 * d + c`, for every locally torsion
-abelian étale sheaf, with ordinary derived-section cohomology throughout. -/
+ dimension at most `c` has torsion étale cohomological dimension at most `2 * d + c`. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_of_finiteType
     (K : Type u) [Field K] (c d : ℕ)
     (hK : HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) c)

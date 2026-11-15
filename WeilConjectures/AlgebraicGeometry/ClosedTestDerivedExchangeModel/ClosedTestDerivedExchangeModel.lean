@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.NonaffineClosedTestExchangeIdentificati
 /-!
 # The canonical derived exchange on closed lifted tests
 
-Source: Stacks Project, Tags 09BL and 0D6F, and the unit--counit calculation
-(blueprint: lem-sfb-closed-test-derived-exchange-model).
-
 ## Main definitions
 
 * `exchange`: the specified derived adjunction mate.
@@ -35,6 +32,10 @@ Source: Stacks Project, Tags 09BL and 0D6F, and the unit--counit calculation
 * `section_comparison_base_change_naturality`: compatibility with localization cubes.
 * `derived_restriction_localization`: localization of canonical restriction.
 * `closed_test_coefficient_naturality`: compatibility with actual coefficient maps.
+
+## References
+
+* Stacks Project, Tags 09BL, 0D6E, 0D6F
 -/
 
 @[expose] public noncomputable section
@@ -189,9 +190,7 @@ section Coefficients
 variable {Λ} {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ'] [IsCommMonObj Λ'] (c : Λ ⟶ Λ') [IsMonHom c]
 
-/-- The existing exact restriction of scalars on ordinary unbounded derived categories.
-Source: scalar clause and Tag 0D6E
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+/-- The existing exact restriction of scalars on ordinary unbounded derived categories. -/
 def restrict (X : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ' X)) ⥤
@@ -200,9 +199,7 @@ def restrict (X : Scheme.{u}) :
   (Mod.comap (coefficientMap c X)).mapDerivedCategory
 
 /-- The canonical right-derived direct-image coefficient comparison. Its direction is fixed
-by the ordinary section identity; no preservation of injectives by restriction is assumed.
-Source: the statement's coefficient clause and proof step 10
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+by the ordinary section identity; no preservation of injectives by restriction is assumed. -/
 def restrictPush {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CondensedRing.moduleObjectDerivedPushforward Λ' f ⋙ restrict c Y ⟶
       restrict c X ⋙ CondensedRing.moduleObjectDerivedPushforward Λ f :=
@@ -212,26 +209,20 @@ def restrictPush {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.comapLowerStarIso c f).hom
 
 /-- The derived coefficient map on global sections, induced by the literal underlying
-section identity and the universal right-derived unit.
-Source: coefficient clause, proof step 10
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+section identity and the universal right-derived unit. -/
 def restrictSections (X : Scheme.{u}) :
     (condensedModuleSections Λ' X).rightDerivedFunctor ⟶
       restrict c X ⋙ (condensedModuleSections Λ X).rightDerivedFunctor :=
   Functor.rightDerivedPullback (Mod.comap (coefficientMap c X)) (𝟙 _)
 
-/-- Coefficient restriction on localized sections uses the existing exact pullback comparison.
-Source: coefficient clause and Tag 0D6F
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+/-- Coefficient restriction on localized sections, via the existing exact pullback comparison. -/
 def restrictSectionsOver {X W : Scheme.{u}} (b : W ⟶ X) :
     sectionsOver Λ' b ⟶ restrict c X ⋙ sectionsOver Λ b :=
   Functor.whiskerLeft (pull Λ' b) (restrictSections c W) ≫
     Functor.whiskerRight (CondensedRing.derivedComapUpperStarIso c b).hom
       (condensedModuleSections Λ W).rightDerivedFunctor
 
-/-- The actual ordinary extension unit in degree zero, with exact restriction of scalars.
-Source: the final sentence of the item, x ↦ 1 tensor x
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+/-- The actual ordinary extension unit in degree zero, with exact restriction of scalars. -/
 def scalarUnit (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     (DerivedCategory.singleFunctor _ 0).obj M ⟶
@@ -242,9 +233,7 @@ def scalarUnit (X : Scheme.{u})
     ((Mod.comap (coefficientMap c X)).mapDerivedCategorySingleFunctor 0).inv.app
       ((Mod.extendScalars (coefficientMap c X)).obj M)
 
-/-- Commutativity of the section-comparison square for the actual coefficient map.
-Source: coefficient clause, proof steps 10--11
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+/-- Commutativity of the section-comparison square for the actual coefficient map. -/
 def CoefficientSectionComparison {X U T W : Scheme.{u}} {f : X ⟶ U} {b : W ⟶ U}
     {h : T ⟶ X} {fW : T ⟶ W} (w : CommSq h fW f b)
     (N : DerivedCategory
@@ -255,9 +244,7 @@ def CoefficientSectionComparison {X U T W : Scheme.{u}} {f : X ⟶ U} {b : W ⟶
       (sectionComparison Λ w).app ((restrict c X).obj N) =
     (sectionComparison Λ' w).app N ≫ (restrictSectionsOver c h).app N
 
-/-- Commutativity of derived restriction and the actual coefficient section map.
-Source: coefficient clause and Tag 0D6F
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
+/-- Commutativity of derived restriction and the actual coefficient section map. -/
 def CoefficientRestriction {X W W' : Scheme.{u}} (b : W ⟶ X) (a : W' ⟶ W)
     (N : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))) : Prop :=

@@ -56,8 +56,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 The first object uses the actual kernel of the quotient of coefficient sheaves;
 the last object is the restriction of the previous quotient complex.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data).
+
+## References
+
+* Stacks Project, Tag 0942
 -/
 
 @[expose] public noncomputable section
@@ -68,9 +70,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The actual quotient map, regarded as a map of rank-one coefficient modules.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data). -/
+/-- The actual quotient map, regarded as a map of rank-one coefficient modules. -/
 def finiteQuotientUnitMap (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     SheafOfModules.unit (completedAdicFiniteRing X d (n + 1)) ⟶
@@ -95,9 +95,7 @@ def finiteQuotientUnitMap (X : Scheme.{t}) {A : Type t} [CommRing A]
         (completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n))).hom.naturality f) _
 
 /-- Tensor the successor reduction with the actual kernel of the quotient map.
-The kernel, not a chosen witness of existence, defines the coefficient layer.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data). -/
+The kernel, not a chosen witness of existence, defines the coefficient layer. -/
 def finiteQuotientLayerObject (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (M : DerivedCategory (CompletedAdicModules X d))
     (n : ℕ) : DerivedCategory (SheafOfModules.{t + 1}
@@ -109,9 +107,7 @@ def finiteQuotientLayerObject (X : Scheme.{t}) {A : Type t} [CommRing A]
       (DerivedCategory.singleFunctor _ 0).obj (kernel (finiteQuotientUnitMap X d n)))
 
 /-- The previous derived quotient regarded over the successor coefficient ring.
-Restriction is performed on the canonical complex representative of the localization.
-Source: Stacks Project, Tag 0942.
-(blueprint: def-weil-pbc-finite-quotient-coefficient-layer-data). -/
+Restriction is performed on the canonical complex representative of the localization. -/
 def finiteQuotientPreviousObject (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (M : DerivedCategory (CompletedAdicModules X d))
     (n : ℕ) : DerivedCategory (SheafOfModules.{t + 1}

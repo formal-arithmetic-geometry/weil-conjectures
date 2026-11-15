@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassPositive
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteSplitting
 
 /-! # The components of the twisted projective-line splitting
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -157,29 +155,7 @@ private lemma adjoint_shift
     using congrArg (· ≫ (R.map q)⟦(2 : ℤ)⟧') hu
 
 /-- Evaluation makes the unit/Chern splitting invertible, and its positive twist
-has the geometric twisted unit and Chern adjunct as its two components.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), the unit/Chern
-isomorphism and twisting before second projection.
-(blueprint: lem-sfb-diagonal-trace-twisted-splitting-components).
-
-Proof: the normalized integral Chern construction evaluates to the finite Kummer
-Chern class of the pullback of O(1). The hyperplane section has positive Cartier
-normalization, so the finite projective-line decomposition says that each evaluation
-of bq is invertible. This holds on the specified model by transport along its
-isomorphism with P1. No assertion that evaluation detects arbitrary equalities of
-derived morphisms is needed.
-For the first component, the projection map is the counit mate of the positive-line
-pullback. Apply its defining mate equation and the adjunction triangle identities
-to the coefficient unit. The section normalizations of coefficient pullback,
-line pullback and positive pullback identify this with the geometric twisted unit;
-the positive-unit comparison supplies a. For the second component, substitute the
-definition of Model.second as the negative twist of the Chern adjunct. Positive
-and negative twists cancel by the tensor/Hom evaluation and coevaluation identities.
-Naturality of their shift comparisons cancels shifts -2 and 2, with b the resulting
-contraction. Thus the two displayed equations hold in the derived category of
-systems itself. They are equations before taking the inverse splitting and do not
-assume bq invertible or state a trace normalization. -/
+has the geometric twisted unit and Chern adjunct as its two components. -/
 theorem diagonalTrace_twistedSplitting_components
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

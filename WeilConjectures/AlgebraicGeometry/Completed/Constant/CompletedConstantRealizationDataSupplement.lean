@@ -70,12 +70,13 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantRealizationData
 /-! # Data for completed constant realization
 
-Source: Stacks Tags 093J--093M and 06YU.
-(blueprint: def-weil-pbc-completed-constant-realization-data).
-
 The constructions and interfaces are moved verbatim from
 `CompletedConstantFiniteComplexRealization` so that the module and complex calculations
 can be stated independently without an import cycle.
+
+## References
+
+* Stacks Project, Tags 00MA, 00MB, 05RU, 06YN, 06YU, 093J--093M, 09BT, 09BV
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -84,21 +85,16 @@ universe u v w vD vE
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
-/-- The localization functor for `completedConstantDerived`.
-Source: Stacks Tag 05RU
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+/-- The localization functor for `completedConstantDerived`. -/
 abbrev completedConstantQ (D : Type v) [Category.{w} D] [Abelian D] :
     CochainComplex D ℤ ⥤ completedConstantDerived D :=
   @DerivedCategory.Q D _ _ (HasDerivedCategory.standard D)
-/-- The finite module subcategory, so exactness refers to its finite limits and colimits.
-Source: Stacks Tag 00MB
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+/-- The finite module subcategory, so exactness refers to its finite limits and colimits. -/
 def completedConstantFiniteModules (A : Type (u + 1)) [CommRing A] :
     ObjectProperty (ModuleCat.{u + 1} A) :=
   fun N ↦ Module.Finite A N
-/-- The quotient module over a ring mapping to the completed coefficient sheaf.
-Source: Stacks Tag 06YU, restriction along the quotient projection
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+/-- The quotient module over a ring mapping to the completed coefficient sheaf, by
+restriction along the quotient projection. -/
 abbrev completedConstantQuotient (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (β : R ⟶ adicLisseCompletedRing X I) (n : ℕᵒᵖ) :=
@@ -106,9 +102,7 @@ abbrev completedConstantQuotient (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A
     ((adicLisseForget X).map (β ≫ limit.π (adicLisseRingSystem X I) n))).obj
       (SheafOfModules.unit ((adicLisseForget X).obj ((adicLisseRingSystem X I).obj n)))
 /-- A quotient diagram with the actual quotient maps, characterized on every section.
-`level` and `transition` fix all objects and arrows; this is no arbitrary diagram.
-Source: Stacks Tags 093M and 06YU, proof steps 5--8
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+`level` and `transition` fix all objects and arrows. -/
 structure CompletedConstantQuotientTower (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -119,9 +113,7 @@ structure CompletedConstantQuotientTower (X : Scheme.{u})
       (x : ((adicLisseRingSystem X I).obj m).obj.obj U),
     ((eqToHom (level m).symm ≫ diagram.map g ≫ eqToHom (level n)).val.app U) x =
       ((adicLisseRingSystem X I).map g).hom.app U x
-/-- The total tensor bifunctor, using the existing monoidal structure and total differential.
-Source: Stacks Tags 06YN and 06YU
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+/-- The total tensor bifunctor, using the existing monoidal structure and total differential. -/
 def completedConstantTensor (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     CochainComplex (completedConstantModules X R) ℤ ⥤
@@ -133,17 +125,13 @@ def completedConstantTensor (X : Scheme.{u})
   letI : HasCoproducts.{0} (completedConstantModules X R) := inferInstance
   (MonoidalCategory.curriedTensor _).map₂CochainComplex
 /-- Completed realization by extension of the constant completion ring to completed
-sheaf scalars. The theorem identifies this actual tensor construction with the limit.
-Source: Stacks Tag 093M and proof step 2
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+sheaf scalars. The theorem identifies this actual tensor construction with the limit. -/
 def completedConstantRealization (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I) :=
   adicLisseConstantModules X (AdicCompletion I A) ⋙ completedConstantExtension X φ
 /-- A finite reduction on complexes: tensor the module complex with `P_(n+1)`,
-make it constant, and restrict its scalars along the specified projection.
-Source: Stacks Tag 06YU, proof step 5
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+make it constant, and restrict its scalars along the specified projection. -/
 def completedConstantReductionLevel (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (β : R ⟶ adicLisseCompletedRing X I) (n : ℕ)
@@ -160,10 +148,7 @@ def completedConstantReductionLevel (X : Scheme.{u}) {A : Type (u + 1)} [CommRin
         (ComplexShape.up ℤ)
 /-- Constant reductions, with all quotient transitions fixed on tensor generators.
 Applied to a bounded-above finite-free resolution F, this represents precisely
-`underline(Q tensor^L_C P_n)`, with its specified R-action. The generator condition
-prevents replacing quotient transitions by arbitrary maps.
-Source: Stacks Tag 06YU, proof steps 5 and 8
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+`underline(Q tensor^L_C P_n)`, with its specified R-action. -/
 structure CompletedConstantReductionTower (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -193,35 +178,27 @@ structure CompletedConstantReductionTower (X : Scheme.{u})
         U ((Ideal.Quotient.factorPowSucc I (n + 1) p) ⊗ₜ[(AdicCompletion I A),
           (AdicCompletion.evalₐ I (n + 1)).toRingHom] x)
 /-- Restrict a completion-module to A. On this module I^n N = (IC)^n N, so its
-quotient and completed constant sheaf are exactly those in the node's statement.
-Source: Stacks Tag 00MA, proof step 1
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+quotients and completed constant sheaf are unchanged. -/
 abbrev completedConstantUnderlyingModule {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (N : ModuleCat.{u + 1} (AdicCompletion I A)) :=
   (ModuleCat.restrictScalars.{u + 1} (algebraMap A (AdicCompletion I A))).obj N
-/-- The A-linear map on the actual quotients induced by an A-linear map.
-Source: Stacks Tag 093J and the componentwise limit construction
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+/-- The A-linear map on the actual quotients induced by an A-linear map. -/
 def completedConstantQuotientMap {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) {M N : ModuleCat.{u + 1} A} (f : M ⟶ N) (n : ℕ) :
     ModuleCat.of A (M ⧸ (I ^ (n + 1) • ⊤ : Submodule A M)) ⟶
       ModuleCat.of A (N ⧸ (I ^ (n + 1) • ⊤ : Submodule A N)) :=
   ModuleCat.ofHom ((f.hom.reduceModIdeal (I ^ (n + 1))).restrictScalars A)
-/-- The constant A-action on the completed coefficient ring.
-Source: Stacks Tag 093M and the limit projections
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+/-- The constant A-action on the completed coefficient ring. -/
 def completedConstantBaseMap (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I) :=
   ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (algebraMap A (AdicCompletion I A)))) ≫ φ
 /-- The module-level assertions and the specified realization isomorphisms.
-The limit is formed from the dependency's actual quotient-module system. Its
-linearity condition fixes the completed-scalar action on every finite projection;
-naturality fixes the maps of the realization functor. Restriction to A changes
-no quotient: I^n N = (IC)^n N for a C-module.
-Source: Stacks Tags 093J--093M, 09BT, and 09BV, proof steps 1--3
-(blueprint: def-weil-pbc-completed-constant-realization-data). -/
+The limit is formed from the actual quotient-module system. Its linearity condition
+fixes the completed-scalar action on every finite projection; naturality fixes the
+maps of the realization functor. Restriction to A changes no quotient:
+I^n N = (IC)^n N for a C-module. -/
 structure CompletedConstantModuleRealization (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) where
   scalar : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I

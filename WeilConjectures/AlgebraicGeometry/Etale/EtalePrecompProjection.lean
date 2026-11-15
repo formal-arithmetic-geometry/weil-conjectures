@@ -20,9 +20,6 @@ import all WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositio
 set_option linter.privateModule false
 
 /-! # The normalized projection square for etale precomposition
-
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3, expanded in step 3 of
-lem-asd-tensor-mate-etale-precomp.
 -/
 
 @[expose] public section

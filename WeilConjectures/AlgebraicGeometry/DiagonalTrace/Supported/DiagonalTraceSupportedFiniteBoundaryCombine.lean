@@ -52,14 +52,7 @@ private theorem supportedBoundaryEquation_replace
 
 /-- Transport the fixed finite Cartier boundary equation along its Chern comparison.
 This is only equation assembly: it has no finite-cycle or Chern normalization
-hypotheses and adds no mathematical obligation.
-
-Source: diagonal trace proof (2), combination of the finite source and target equations.
-(blueprint: lem-sfb-diagonal-trace-supported-finite-boundary-combination).
-
-Proof: unfold the two named boundary predicates, which have identical source,
-presentation and root comparisons. Transport the endpoint of the supported
-boundary equation along ht using the generic equation-transport lemma. -/
+hypotheses and adds no mathematical obligation. -/
 theorem diagonalTrace_supportedFiniteBoundary_combine
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

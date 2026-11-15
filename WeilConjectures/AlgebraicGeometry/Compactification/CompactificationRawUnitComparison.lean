@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSuppor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import all WeilConjectures.AlgebraicGeometry.Compactification.CompactificationRefinementHomotopyUnit
 
-/-! # Common refinements preserve the raw homotopy unit -/
+/-! # Common refinements preserve the raw homotopy unit
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0D6E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -153,23 +158,7 @@ private lemma raw_refinement
     (compactificationSheafRefinement A r hcart) rfl K
 
 /-- Common-refinement comparison preserves a sheaf map followed by the mixed derived unit.
-The input sheaf functor is only additive; its exactness is unnecessary because its derived
-functor does not occur.
-
-Source: Stacks Project, Tags 0F7B, 0F7I and 0D6E.
-(blueprint: lem-pur-compactification-raw-unit-comparison).
-
-Proof in words: first take a Cartesian proper refinement. Expand its comparison as the
-adjunct of inverse open base change followed by proper direct-image composition. The
-mixed adjunction unit equation identifies its composite with the open/proper derived
-unit with the homotopy image of the ordinary sheaf refinement followed by the finer unit.
-Direct-image composition preserves the units because proper direct image preserves
-K-injectives. Naturality permits precomposition with any additive sheaf map. For c and d,
-pass to their canonical common refinement. The two sheaf maps into this refinement agree:
-their composites with its monic inclusion in ordinary direct image agree by the hypothesis.
-Apply the refinement identity twice and cancel the invertible finer comparison. The result
-is exactly the common-refinement isomorphism used in the statement. Identity refinements,
-zero input maps and empty schemes require no separate assumption. -/
+The input sheaf functor is only assumed to be additive. -/
 theorem compactification_raw_unit_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

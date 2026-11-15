@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 
 /-! # Canonical Brown comparison normalization
 
-Source: Zheng, Construction 4.1, (5.16.2), and Lemma 5.22.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.15, (5.16.2), Lemma 5.22,
+  pp. 34--35
 -/
 
 @[expose] public noncomputable section
@@ -98,21 +100,7 @@ private theorem proper_evaluation_mate (n : ℕ) :
     exact B.properInsertion_conjugate n
   exact congrArg Iso.inv hi
 
-/-- The insertion comparison and evaluation comparison are adjunction mates.
-Source: Zheng, (5.16.2), Construction 5.15, printed pp. 34--35
-(blueprint: lem-pur-etale-brown-evaluation-mate).
-
-Proof: decompose the insertion into its open and proper factors using
-`leftExtension_def`. For the open factor, transpose the normalized termwise
-open-extension comparison through its derived adjunctions. The representative
-transpose equations identify its mate with the recorded inverse-image evaluation;
-`openInsertion_conjugate` identifies the conjugate insertion with the same map.
-For the proper factor, use `properInsertionMate_def` and the iterated-mate identity.
-`properInsertion_conjugate` identifies its double transpose with proper direct-image
-evaluation. Inverse isomorphisms give the inverse evaluation comparison. Paste the
-open and proper squares using the mate-pasting identity. Functor associators cancel,
-and the defining composite is precisely `S.evaluation n`. This proves equality of
-natural transformations on all derived inputs, without a boundedness restriction. -/
+/-- The insertion comparison and evaluation comparison are adjunction mates. -/
 theorem etaleBrownEvaluationMate (n : ℕ) :
     (mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)
       (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)) =

@@ -94,15 +94,14 @@ import all Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Strict open exchange over completed coefficient rings
 
-Source: blueprint sec-six-functors-basics/sk-prop-sf-cbc,
-lem-cbc-completed-extension-zero-comparison.proof.md, finite exchange before Rlim;
-Stacks Project, Tags 03DI, 03DJ, 04J0 and 06XN.
-(blueprint: def-cbc-completed-strict-open-exchange).
-
 All tower operations precede derived inverse limits. The ordinary inverse exchange
 is the already specified adjoint conjugate of the sectionwise cartesian comparison.
 Its strict lift and its derived descent retain that normalization. Positive level
 n+1 is encoded by n : ℕ. No completeness or quasi-compactness is assumed.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0 and 06XN
 -/
 
 @[expose] public noncomputable section
@@ -240,52 +239,39 @@ private theorem cbcTowerKFlat_resolution (T : Scheme.{u})
     intro n
     exact hε (P.asFunctor.obj n)
 
-/-- Termwise sheafified open extension on actual completed-ring towers.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange). -/
+/-- Termwise sheafified open extension on actual completed-ring towers. -/
 def cbcStrictOpenModule {U X : Scheme.{u}} (j : U ⟶ X) (hj : IsOpenImmersion j) :
     pbcTowers U (pbcAdicCompletion U d) ⥤ pbcTowers X (pbcAdicCompletion X d) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (cbcOpenShriek d j hj)
 
-/-- Additivity is checked at every tower index.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
-Proof: extension presheaves, sheafification and slice transport are additive;
-apply their sum equation to each component of a tower morphism. -/
+/-- Additivity is checked at every tower index. -/
 @[instance] theorem cbcStrictOpenModule_additive {U X : Scheme.{u}}
     (j : U ⟶ X) (hj : IsOpenImmersion j) : (cbcStrictOpenModule d j hj).Additive := by
   dsimp only [cbcStrictOpenModule]
   infer_instance
 
-/-- Exactness of extension on towers is levelwise, with no condition on the open.
-Source: Stacks 03DJ (blueprint: def-cbc-completed-strict-open-exchange).
-Proof: kernels and cokernels of strict diagrams are levelwise. Exactness of
-sheafified slice extension therefore preserves both finite limits and colimits. -/
+/-- Exactness of extension on towers is levelwise, with no condition on the open. -/
 @[instance] theorem cbcStrictOpenModule_limits {U X : Scheme.{u}}
     (j : U ⟶ X) (hj : IsOpenImmersion j) :
     PreservesFiniteLimits (cbcStrictOpenModule d j hj) := by
   dsimp only [cbcStrictOpenModule]
   exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Finite colimits are preserved at each tower index.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
-Proof: the slice extension is left adjoint to restriction, hence preserves finite
-colimits. Colimits of strict diagrams are computed at each index. -/
+/-- Finite colimits are preserved at each tower index. -/
 @[instance] theorem cbcStrictOpenModule_colimits {U X : Scheme.{u}}
     (j : U ⟶ X) (hj : IsOpenImmersion j) :
     PreservesFiniteColimits (cbcStrictOpenModule d j hj) := by
   dsimp only [cbcStrictOpenModule]
   exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Exact open extension on the derived category of strict towers.
-Source: Stacks 03DJ (blueprint: def-cbc-completed-strict-open-exchange). -/
+/-- Exact open extension on the derived category of strict towers. -/
 def cbcStrictOpen {U X : Scheme.{u}} (j : U ⟶ X) (hj : IsOpenImmersion j) :=
   (cbcStrictOpenModule d j hj).mapDerivedCategory
 
 variable {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
   {j : U ⟶ X} {g : X' ⟶ X} (sq : OpenImmersionSquare gU j' j g)
 
-/-- Naturality of the fixed inverse exchange along a strict tower transition.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
-Proof: apply naturality of cbcUnderivedInverseExchange to the specified tower map. -/
+/-- Naturality of the fixed inverse exchange along a strict tower transition. -/
 theorem cbcStrictInverseLevel_naturality
     (M : pbcTowers U (pbcAdicCompletion U d)) (a b : ℕᵒᵖ) (f : a ⟶ b) :
     ((completedTowerModulePullback gU d ⋙
@@ -296,8 +282,7 @@ theorem cbcStrictInverseLevel_naturality
         completedTowerModulePullback g d).obj M).map f := by
   exact (cbcUnderivedInverseExchange d sq).naturality (M.map f)
 
-/-- The inverse exchange as an actual map of strict towers.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange). -/
+/-- The inverse exchange as an actual map of strict towers. -/
 def cbcStrictInverseComponent (M : pbcTowers U (pbcAdicCompletion U d)) :
     (completedTowerModulePullback gU d ⋙
       cbcStrictOpenModule d j' sq.isOpenImmersion').obj M ⟶
@@ -306,10 +291,7 @@ def cbcStrictInverseComponent (M : pbcTowers U (pbcAdicCompletion U d)) :
   app n := (cbcUnderivedInverseExchange d sq).app (M.obj n)
   naturality a b f := cbcStrictInverseLevel_naturality d sq M a b f
 
-/-- Naturality in the original strict tower.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
-Proof: at every index apply ordinary inverse-exchange naturality to that component
-of the tower morphism. Extensionality of natural transformations gives the result. -/
+/-- Naturality in the original strict tower. -/
 theorem cbcStrictInverseComponent_naturality
     (M N : pbcTowers U (pbcAdicCompletion U d)) (f : M ⟶ N) :
     (completedTowerModulePullback gU d ⋙
@@ -324,18 +306,14 @@ theorem cbcStrictInverseComponent_naturality
 
 /-- Simultaneous inverse diagram map. Its component at every index is the fixed
 ordinary inverse exchange, the conjugate of restriction along the cartesian map.
-The forward diagram map is its inverse, already before derived localization.
-Source: Stacks 03DI, 04J0 (blueprint: def-cbc-completed-strict-open-exchange). -/
+The forward diagram map is its inverse, already before derived localization. -/
 def cbcStrictInverseModule :
     completedTowerModulePullback gU d ⋙ cbcStrictOpenModule d j' sq.isOpenImmersion' ⟶
       cbcStrictOpenModule d j sq.isOpenImmersion ⋙ completedTowerModulePullback g d where
   app M := cbcStrictInverseComponent d sq M
   naturality M N f := cbcStrictInverseComponent_naturality d sq M N f
 
-/-- The simultaneous strict maps are inverse, component by component.
-Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
-Proof: the inverse at each index is the forward ordinary exchange. Naturality
-makes both maps strict; their composites are identities at each index. -/
+/-- The simultaneous strict maps are inverse, component by component. -/
 @[instance] theorem cbcStrictInverseModule_isIso : IsIso (cbcStrictInverseModule d sq) := by
   have (M : pbcTowers U (pbcAdicCompletion U d)) :
       IsIso ((cbcStrictInverseModule d sq).app M) := by
@@ -346,8 +324,7 @@ makes both maps strict; their composites are identities at each index. -/
   exact NatIso.isIso_of_isIso_app _
 
 /-- The strict representative equation, using the actual universal pullback counits.
-It specifies the inverse map, so also specifies its forward inverse uniquely.
-Source: Stacks 06XN (blueprint: def-cbc-completed-strict-open-exchange). -/
+It specifies the inverse map, so also specifies its forward inverse uniquely. -/
 def CbcStrictExchangeNormalization
     (b : cbcStrictOpen d j sq.isOpenImmersion ⋙ completedTowerPullback g d ≅
       completedTowerPullback gU d ⋙ cbcStrictOpen d j' sq.isOpenImmersion') : Prop :=
@@ -403,19 +380,7 @@ private theorem modelPullPair_existsUnique
 attribute [local irreducible] cbcStrictOpenModule completedTowerModulePullback
   completedTowerPullbackCounit cbcStrictInverseModule cbcUnderivedInverseExchange
 
-/-- The normalized strict exchange exists uniquely.
-Source: Stacks 03DI, 03DJ, 04J0, 06XN and the blueprint finite-exchange refinement
-(blueprint: def-cbc-completed-strict-open-exchange).
-Proof: (1) localization identifies both restricted completed rings, projection by
-projection. (2) Compose open-extension and module-pullback adjunctions.
-(3) Restriction along the cartesian comparison gives the right-adjoint isomorphism.
-(4) Conjugation gives the already specified ordinary inverse exchange and its inverse.
-(5) Apply these maps simultaneously at every index and cochain degree; naturality
-commutes with all transitions and differentials. (6) Take a strict objectwise
-K-flat flat-term replacement. Open extension preserves this resolving class by
-the slice tensor projection formula. The two maps thus descend through the
-universal left-derived counits. Their strict inverse identities descend as well.
-The displayed representative equation and resolving-class universality give uniqueness. -/
+/-- The normalized strict exchange exists uniquely. -/
 theorem cbcStrictExchange_existsUnique :
     ∃! b : cbcStrictOpen d j sq.isOpenImmersion ⋙ completedTowerPullback g d ≅
         completedTowerPullback gU d ⋙ cbcStrictOpen d j' sq.isOpenImmersion',
@@ -453,13 +418,10 @@ theorem cbcStrictExchange_existsUnique :
     (cbcStrictInverseModule d sq) M₀ (fun _ h ↦ h.1)
     (cbcTowerKFlat_resolution d U) hmap
 
-/-- The canonical strict exchange, selected by its unique representative equation.
-Source: Stacks 03DI, 06XN (blueprint: def-cbc-completed-strict-open-exchange). -/
+/-- The canonical strict exchange, selected by its unique representative equation. -/
 @[irreducible] def cbcStrictExchange := (cbcStrictExchange_existsUnique d sq).exists.choose
 
-/-- The asserted natural isomorphism on reductions of arbitrary completed-ring objects.
-Source: blueprint finite exchange before Rlim
-(blueprint: def-cbc-completed-strict-open-exchange). -/
+/-- The asserted natural isomorphism on reductions of arbitrary completed-ring objects. -/
 def cbcReductionStrictExchange :
     completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
         completedTowerPullback g d ≅

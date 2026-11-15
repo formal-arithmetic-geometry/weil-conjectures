@@ -12,7 +12,12 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemOrdinar
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 
-/-! # Construction of proper/open comparison data -/
+/-! # Construction of proper/open comparison data
+
+## References
+
+* Zheng, Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -206,16 +211,7 @@ private theorem inverseSquare_eq
     IsIso.inv_hom_id_assoc, IsIso.hom_inv_id, Category.comp_id] using hh.symm
 
 -- The system and level mate identities require simultaneous localization comparisons.
-/-- Construct the normalized proper and open compactification comparisons.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22
-(blueprint: lem-sf-exceptional-system-comparison-exists).
-
-Proof: Construct the ordinary proper and open inverse-image squares and localize them
-with their evaluation equations. The finite open inverse mate is invertible by the
-extension-by-zero comparison; joint reflection by the level evaluations gives the
-system mate. Localize this mate using the representative adjunction equations.
-The mate cube gives the ordinary and derived open-evaluation equations, completing
-all fields and coherence equations of the comparison record. -/
+/-- The normalized proper and open compactification comparisons exist. -/
 theorem exceptionalSystemCompactificationComparison_exists
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

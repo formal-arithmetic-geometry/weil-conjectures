@@ -380,16 +380,7 @@ private theorem normalized_evaluation_square
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical finite evaluation isomorphisms commute with each quotient arrow.
-Source: CBC finite-reduction compatibility, Steps 4 and 7--8
-(blueprint: lem-cbc-finite-quotient-transition-compatibility).
-Proof: the prescribed ordinary comparisons commute with the quotient maps. On a
-K-flat representative, the defining finite evaluation and finite target transition
-normalizations identify the two derived composites with this ordinary square.
-The counit of the strict tower is natural in its evaluation transition. Compatibility
-of exact restriction with composition identifies the two restriction presentations.
-The finite computation map is invertible, so cancellation proves the square on
-K-flat representatives. Naturality and a K-flat resolution give it on every object. -/
+/-- The canonical finite evaluation isomorphisms commute with each quotient arrow. -/
 theorem finite_quotient_transition_compatibility
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))
     (a b : ℕ) (h : a ≤ b) :

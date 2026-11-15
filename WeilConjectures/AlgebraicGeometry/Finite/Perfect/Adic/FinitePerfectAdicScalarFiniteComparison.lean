@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CompletedConstantProjection.CompletedCo
 
 /-! # Finite quotient comparison for ordinary scalar extension
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J and 093M
 -/
 
 -- After pruning, this module only keeps private declarations.

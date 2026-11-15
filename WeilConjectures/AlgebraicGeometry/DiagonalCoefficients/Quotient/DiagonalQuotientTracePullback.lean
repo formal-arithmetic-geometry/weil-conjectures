@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.InternalPullNormalizationExistence
 import all WeilConjectures.AlgebraicGeometry.InternalScalarRestrictionMateNormalization
 
 /-! # Scalar pasting of the three trace squares
-
-Source: diagonal tower coefficient changes, paragraph (3), scalar base change.
-(blueprint: lem-diagonal-quotient-trace-pullback).
 -/
 
 @[expose] public noncomputable section

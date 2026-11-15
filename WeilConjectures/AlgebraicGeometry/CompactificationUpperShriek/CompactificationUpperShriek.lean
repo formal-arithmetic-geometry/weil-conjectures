@@ -67,7 +67,6 @@ below objects in general, so it does not restrict to `D⁺`.
 * The composition `R(f ≫ g)^! ≅ R(g)^! ⋙ R(f)^!`, from the corresponding compatibility
   of `Rf_!`.
 * For `f` étale, `Rf^! = f^*`; for `f` proper, `Rf^!` is right adjoint to `Rf_*`.
-
 -/
 
 @[expose] public section

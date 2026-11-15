@@ -11,8 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedCoeffi
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # The integral finite root projection of a completed local arrow
-
-Source: diagonal tower coefficient changes (1), integral coefficient and root endpoints.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- Forget the completed coefficient action while retaining the actual underlying sheaf.
-Source: coefficient changes (1) (blueprint: def-diagonal-local-integral-projection). -/
+/-- Forget the completed coefficient action while retaining the actual underlying sheaf. -/
 def localCompletedForget (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     DiagonalCompleted l T ⥤ DiagonalAb T :=
   SheafOfModules.toSheaf (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l))
@@ -46,8 +43,7 @@ instance (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
   (moduleSheaves_colimits_forgetful
     (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l))).2.2.1
 
-/-- The integer-cast generator of the actual completed unit.
-Source: coefficient changes (1) (blueprint: def-diagonal-local-integral-projection). -/
+/-- The integer-cast generator of the actual completed unit. -/
 def localCompletedGenerator (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     (constantSheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)) ⟶
@@ -55,8 +51,7 @@ def localCompletedGenerator (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
       (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l))) :=
   diagonalCoefficientIntegerMap T (Scheme.purTwistZlCompletion T l)
 
-/-- The completed line has the unchanged underlying inverse limit of roots.
-Source: coefficient changes (1) (blueprint: def-diagonal-local-integral-projection). -/
+/-- The completed line has the unchanged underlying inverse limit of roots. -/
 def localCompletedRoots (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     (localCompletedForget l T).obj (Scheme.purTwistZlModule T l) ≅
       Scheme.purTwistZlOne T l :=
@@ -64,8 +59,7 @@ def localCompletedRoots (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
 
 /-- Forget a completed arrow, insert the integral generator, and project its target to
 finite roots followed by the canonical scalar root map. This is a specified composite,
-independent of any Chern normalization or scalar-extension realization.
-Source: coefficient changes (1) (blueprint: def-diagonal-local-integral-projection). -/
+independent of any Chern normalization or scalar-extension realization. -/
 @[irreducible]
 def completedIntegralProjection (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] (A : Type (u + 1)) [CommRing A]

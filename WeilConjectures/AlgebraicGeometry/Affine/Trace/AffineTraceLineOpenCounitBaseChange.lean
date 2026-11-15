@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # Open counit compatibility for the standard affine-line exchange
-Source: blueprint proposition-purity-vector-bundles, Step 5(b), detailed trace proof step 8.
 -/
 
 @[expose] public noncomputable section
@@ -430,27 +429,7 @@ private lemma line_square_standard (A : Type (u + 1)) [CommRing A]
   exact (affineTraceChart_isPullback g).w
 
 /-- The standard compact-support exchange respects the open counit before the
-projective trace is applied.
-Source: blueprint lemma-integral-linear-character--1, proof step 8
-(blueprint: lem-amb-affine-trace-line-open-counit-base-change).
-
-Proof: first work with the pulled-back projective compactification. Expand its
-exchange as proper direct-image exchange followed by inverse open exchange.
-The identity unit_map_derivedOpenImmersionLowerShriekBaseChangeIso says that open
-exchange is the mate of the pullback square. Apply the open adjunction hom-equivalence
-to the two proposed counit composites: both become the same pullback-square map by
-the unit-counit triangle identity. Thus the open square commutes on every M.
-Naturality of proper direct-image exchange moves the old open counit through the
-proper factor. Transport the resulting square from the pulled-back projective
-compactification to the standard one. The comparison is the composite through a
-common refinement of the proper/open unit, inverse open exchange and direct-image
-composition. The units and composition comparisons cancel by their triangle and
-pasting identities, giving the displayed square for the actual chosen comparison.
-The inverse-image comparisons from derived to exact inverse image are natural, so
-the same equation holds for the left-derived pullbacks in this statement.
-This is a formal mate identity; it applies to arbitrary unbounded M and includes
-identity base change, empty schemes and zero coefficients. No Tate datum or
-projective trace is used. -/
+projective trace is applied. -/
 theorem affineTraceLineExchange_openCounit (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (g : S' ⟶ S)
     (M : DerivedCategoryModule A (ProjectiveLine S)) :
