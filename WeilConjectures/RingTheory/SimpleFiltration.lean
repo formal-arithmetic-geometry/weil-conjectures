@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Length
 # Simple filtrations of finite-length modules
 
 Source: Stacks Project, Algebra, Tags 02LY, 00J1 and 00J3, part (2)
-(blueprint: lem-weil-pbc-finite-length-module-simple-filtration).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -24,7 +24,7 @@ namespace Module
 /-- A finite-length module admits a finite strictly increasing filtration with simple quotients.
 
 Source: Stacks Project, Algebra, Tags 02LY, 00J1 and 00J3, part (2)
-(blueprint: lem-weil-pbc-finite-length-module-simple-filtration).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: By `def-weil-pbc-module-length`, lengths of strict submodule chains are bounded by
 `length R M`. Chains from zero to the whole module exist: use the one-term chain for the

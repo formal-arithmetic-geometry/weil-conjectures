@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 The Artin–Schreier cover of `f` is an `𝔽_p`-torsor over `S` (`Scheme.EtaleTorsor`), whose
 sheaf torsor under the constant sheaf `𝔽_p` is the functor of points of the cover, the constant
 section `a` acting by the translation `T ↦ T + a`.
-Source: blueprint, lem-fd-as-cover, step (5);
+Source: blueprint, lemma-artin-schreier-character-sheaf, step (5);
 lem-weil-pbc-small-etale-representable-presheaf-sheaf.
 -/
 

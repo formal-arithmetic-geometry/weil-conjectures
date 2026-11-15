@@ -86,7 +86,7 @@ private theorem nonempty_iso_free_of_field_rank
   exact ⟨isoFreeOfRestrictIso M _ ej.some⟩
 
 /-- Field-complex splitting into the sole finite locally free cohomology.
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: new-field-complex-homotopy-normal-form).
 
 Proof: Combine negative and nonnegative vanishing to obtain vanishing in all

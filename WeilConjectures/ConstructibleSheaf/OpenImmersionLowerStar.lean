@@ -21,7 +21,7 @@ direct image `j_* F` is constructible on `X_ét`
 (`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion`, blueprint
 `thm-fin-open-degree-zero`), and so is the boundary sheaf `i^* j_* F` on the closed complement
 `i : Z ⟶ X` (`AlgebraicGeometry.Etale.isConstructibleSheaf_upperStar_lowerStar_of_isOpenImmersion`,
-blueprint `lem-fin-boundary-sheaf`).
+blueprint `lemma-extreme-degrees-affine-curve`).
 
 The proof is a Noetherian induction on the closed subset of `X` underlying a closed subscheme.
 Given `j : U ⟶ Z`, choose a nonempty open `V ⊆ U` of `Z` on which `F` is finite locally constant
@@ -289,7 +289,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion {k : Type u} [Field k]
     IsConstructibleSheaf ((j)_*[ModuleCat.{u + 1} Λ].obj F) :=
   isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux aX ⊤ (𝟙 X) (Set.subset_univ _) j F
 
-/-- Blueprint `lem-fin-boundary-sheaf`: Boundary sheaf of an open immersion.
+/-- Blueprint `lemma-extreme-degrees-affine-curve`: Boundary sheaf of an open immersion.
 
 Let `X` be of finite type over a field `k`, `j : U ⟶ X` an open immersion, `i : Z ⟶ X` a
 closed immersion onto the closed complement of `U`, and `F` a constructible sheaf of

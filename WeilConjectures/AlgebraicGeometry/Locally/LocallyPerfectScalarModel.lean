@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Perfect.PerfectScalarChangeModel
 /-! # Locally perfect scalar models
 
 Source: blueprint sec-six-functors-basics/sk-prop-scalar-six,
-det-prop-scalar-six-ctf, clause (1).
+lemma-extension-scalars-preserves-dctf, clause (1).
 (blueprint: def-sfb-locally-perfect-scalar-model).
 -/
 

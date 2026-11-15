@@ -26,7 +26,7 @@ counit of `i ⊣ i^!` and the unit of `j^* ⊣ j_*` extend to a distinguished tr
 `i i^! K ⟶ K ⟶ j_* j^* K ⟶ (i i^! K)⟦1⟧`
 
 whose third map is unique; moreover `i^! j_* = 0`. This is the formal part of the supported
-localization triangle (blueprint `sk-prop-sf-localization`, `prop-sf-localization-all-stages`):
+localization triangle (blueprint `lemma-local-cohomology-right-adjoint--2`):
 it gives the right adjoint `Ri^!` of `Ri_*` on any of the categories `Dᵇc(-, Λ)` that are stable
 under `j^*`, `Rj_*` and the fibres of the open unit, without an ambient exceptional adjoint.
 
@@ -42,7 +42,8 @@ under `j^*`, `Rj_*` and the fibres of the open unit, without an ambient exceptio
   `A ⟶ K ⟶ B ⟶` with `A` in the essential image of `i` and `B` in that of `j_*` is isomorphic to
   the supported localization triangle of `K`, by an isomorphism which is the identity on `K`.
   This is how the supported localization triangle is compared along functors, e.g. for the
-  equivariance of the triangle of Weil complexes (blueprint `prop-sf-localization-all-stages`).
+  equivariance of the triangle of Weil complexes (blueprint
+  `lemma-local-cohomology-right-adjoint--2`).
 - `CategoryTheory.Adjunction.isIso_mateEquiv_app`: a criterion for the mate of an isomorphism
   `ΦZ ⋙ i' ≅ i ⋙ Φ` along adjunctions `i ⊣ G`, `i' ⊣ G'` to be invertible, used to compare the
   right adjoints `i^!` along such functors.

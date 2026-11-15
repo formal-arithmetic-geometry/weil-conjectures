@@ -26,13 +26,13 @@ which are `q`-Weil numbers of weight `i`.
 
 - `AlgebraicGeometry.Scheme.Hom.existsUnique_isNormalizedIntegralFraction_zetaSeries`: the
   zeta series has a unique normalized reduced integral presentation
-  (`prop-weil-zeta-normalized-presentation`).
+  (`prose-19-06`).
 - `AlgebraicGeometry.Scheme.integral_recovery`: the integral Frobenius factors and the
   identification of the normalized presentation with their parity products
-  (`prop-integral-recovery`).
+  (`lemma-reciprocal-roots-zeta`).
 - `AlgebraicGeometry.Scheme.realization_independence`: the stratum polynomials `Qᵢ` of the
   normalized presentation are integral, and their scalar extension along every `ℓ`-adic
-  realization `ℚ̄ ≃ ℚ̄^{(ℓ)} ⊆ ℚ̄_ℓ` is `P_{i,ℓ}` (`thm-weil-realization-independence`).
+  realization `ℚ̄ ≃ ℚ̄^{(ℓ)} ⊆ ℚ̄_ℓ` is `P_{i,ℓ}` (`lemma-reciprocal-roots-zeta--7`).
 -/
 
 @[expose] public section
@@ -49,11 +49,11 @@ section General
 
 variable {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
 
-/-- Blueprint `prop-weil-zeta-normalized-presentation`: the zeta series of a scheme `X₀` of finite
+/-- Blueprint `prose-19-06`: the zeta series of a scheme `X₀` of finite
 type over a finite field has a unique normalized reduced integral presentation: there are unique
 `A, B ∈ ℤ[T]` with `A(0) = B(0) = 1`, `A` and `B` coprime in `ℚ[T]` and `Z(X₀, T) = A(T) / B(T)`.
-The series lies in `(1 + T ℤ⟦T⟧) ∩ ℚ(T)` (`prop-weil-zeta-integral-rational`), so Fatou's lemma
-(`prop-weil-integral-rational-series`) applies. -/
+The series lies in `(1 + T ℤ⟦T⟧) ∩ ℚ(T)` (`prose-19-06`), so Fatou's lemma
+(`lemma-reduced-fractions-integer-coefficients--1`) applies. -/
 theorem Hom.existsUnique_isNormalizedIntegralFraction_zetaSeries (f : X ⟶ Spec (.of k))
     [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃! p : ℤ[X] × ℤ[X], PowerSeries.IsNormalizedIntegralFraction f.zetaSeries p.1 p.2 := by
@@ -103,7 +103,7 @@ theorem map_prod_even_eq_evenFrobeniusProduct {P : Fin (2 * d + 1) → Polynomia
 /-- The parity products `∏_{i odd} Pᵢ` and `∏_{i even} Pᵢ` of the integral Frobenius factors are
 a normalized reduced integral presentation of `Z(X₀, T)`: their constant coefficients are `1`,
 they factor the zeta series, and they are coprime in `ℚ[T]` since their scalar extensions
-`N_ℓ`, `D_ℓ` are coprime (`prop-weight-separation`). -/
+`N_ℓ`, `D_ℓ` are coprime (`lemma-reciprocal-roots-zeta`). -/
 theorem isNormalizedIntegralFraction_prod {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) :
     PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries
@@ -136,7 +136,7 @@ theorem isNormalizedIntegralFraction_prod {P : Fin (2 * d + 1) → Polynomial �
 
 end ParityProducts
 
-/-- Blueprint `prop-integral-recovery` (integral recovery): for `X₀` smooth, proper and
+/-- Blueprint `lemma-reciprocal-roots-zeta` (integral recovery): for `X₀` smooth, proper and
 geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, and `Z(X₀, T) = A / B` the
 normalized reduced integral presentation of its zeta series:
 
@@ -147,7 +147,7 @@ normalized reduced integral presentation of its zeta series:
 * `Z(X₀, T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`;
 * `deg Pᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`.
 
-The normalized presentation is unique (`prop-weil-zeta-normalized-presentation`), and the parity
+The normalized presentation is unique (`prose-19-06`), and the parity
 products of the `Pᵢ` are one (`AlgebraicGeometry.Scheme.isNormalizedIntegralFraction_prod`). -/
 theorem integral_recovery {A B : Polynomial ℤ}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
@@ -177,7 +177,7 @@ theorem integral_recovery {A B : Polynomial ℤ}
       map_prod_even_eq_evenFrobeniusProduct hP l⟩, hfact,
     fun l _ _ i ↦ natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X (hP i) l⟩
 
-/-- Blueprint `thm-weil-realization-independence` (realization independence of the integral
+/-- Blueprint `lemma-reciprocal-roots-zeta--7` (realization independence of the integral
 factors): for `X₀` smooth, proper and geometrically connected of pure dimension `d` over
 `k₀ = 𝔽_q`, `Z(X₀, T) = A / B` the normalized reduced integral presentation of its zeta series
 and `0 ≤ i ≤ 2d`, let `Qᵢ = ∏_{α ∈ Rᵢ} (1 - α T)` be the stratum polynomial of the multiset `Rᵢ`
@@ -189,10 +189,10 @@ weight `i` (`Polynomial.weilStratumPoly`). Then
   (`AlgebraicRealization`), the scalar extension of `Qᵢ` along `ρ` is `P_{i,ℓ}`;
 * `A^{(ℓ)} = N_ℓ` and `B^{(ℓ)} = D_ℓ`.
 
-By `prop-integral-recovery`, `A` and `B` are the parity products of the integral Frobenius factors
-`Pⱼ`, whose reciprocal roots are `q`-Weil numbers of weight `j` (`thm-weil-final-rh`); so the
-weight-`i` stratum of `A` or `B` is the reciprocal-root multiset of `Pᵢ`
-(`Polynomial.weilStratum_prod`), and `Qᵢ = Pᵢ`. -/
+By `lemma-reciprocal-roots-zeta`, `A` and `B` are the parity products of the integral Frobenius
+factors `Pⱼ`, whose reciprocal roots are `q`-Weil numbers of weight `j`
+(`theorem-weil-conjectures-smooth-proper-schemes`); so the weight-`i` stratum of `A` or `B` is the
+reciprocal-root multiset of `Pᵢ` (`Polynomial.weilStratum_prod`), and `Qᵢ = Pᵢ`. -/
 theorem realization_independence {A B : Polynomial ℤ}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
       B) {i : ℕ} (hi : i ≤ 2 * d) :

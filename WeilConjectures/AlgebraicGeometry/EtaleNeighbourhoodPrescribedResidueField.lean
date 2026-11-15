@@ -45,7 +45,7 @@ Proof:
    étale map `R → R'`, a prime `p'` over `p`, and an isomorphism `λ : κ(p') → L` compatible
    with the structure maps.
 4. Set `U = Spec R'`, `u = p'`, and compose `Spec R' → Spec R → S` to obtain `φ`.
-   It is étale by `lem-weil-pbc-etale-composition-cancellation` and maps `u` to `s` by
+   It is étale by `definition-torsion-sheaves--3` and maps `u` to `s` by
    `lem-weil-pbc-spec-map-residue-field-naturality`.
 5. Residue-field maps respect composition. The same Spec naturality lemma identifies
    the map for `Spec R' → Spec R` with `κ(p) → κ(p')`. Composing `λ⁻¹` with the inverse

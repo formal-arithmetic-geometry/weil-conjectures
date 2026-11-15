@@ -165,7 +165,7 @@ private theorem rank_map_ulift {K L : Type u} [Field K] [Field L]
 /-- The residue rank of a local block form is the size of its invertible block plus
 that of its complementary block.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), reduced-ring normal form;
+Source: `lemma-triviality-fibres--2`, proof (3), reduced-ring normal form;
 `lem-pc-complementary-block-residue-vanishes`, steps 1 and 2.
 (blueprint: lem-pc-local-block-residue-rank)
 

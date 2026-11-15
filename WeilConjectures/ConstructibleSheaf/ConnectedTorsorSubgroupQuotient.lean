@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 # Subgroup quotients of connected finite etale torsors
 
 Source: Stacks Project, proof of Tag 0A3R, and Tag 0BND.
-(blueprint: lem-weil-pbc-connected-torsor-subgroup-quotient)
+(blueprint: lemma-covers-degree-prime-to-ell--1)
 -/
 
 @[expose] public section
@@ -131,7 +131,7 @@ private theorem card_geometricFiber_comp
 /-- The quotient of a connected finite Q-torsor by H is connected, of geometric
 fibre cardinality [Q:H], and has the same total space as an H-torsor.
 Source: Stacks Project, Tag 0A3R, proof at T = Y/H; Tag 0BND (1), (3).
-(blueprint: lem-weil-pbc-connected-torsor-subgroup-quotient)
+(blueprint: lemma-covers-degree-prime-to-ell--1)
 
 Proof:
 1. Choose a geometric point of U and a lift to c.P. The fibre is the regular

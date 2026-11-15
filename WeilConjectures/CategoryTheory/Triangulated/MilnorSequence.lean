@@ -74,7 +74,7 @@ Source: Stacks Project, Tags 07KY and 08U5; Tag 08D4, proof of (2)
 Proof, following the node:
 1. Use the defining distinguished Roos triangle (`def-weil-derived-limit`). Exactness of
 countable products in abelian groups (`lem-pc-abelian-groups-exact-products`) and part (2)
-of `lem-weil-derived-limit-existence` identify the cohomology of the product with the
+of `lemma-reduction-derived-nakayama` identify the cohomology of the product with the
 product of the cohomology groups, compatibly with every projection. Under this identification
 cohomology sends the transition endomorphism to the transition endomorphism of the cohomology
 system, since its projection is `pr n - pr (n + 1) ≫ f n`.

@@ -31,11 +31,11 @@ generic point `x = 1 / t` of a dense open `Ū ⊆ 𝔸¹_{k̄}`.
   trivialised `ĀS^* ℒ_ψ` by `ψ(-c)`
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
 
-Together they give the blueprint lemma `lem-a1-artin-schreier-ramified-infinity`: a nonzero
-linear Artin–Schreier sheaf is not unramified at infinity
+Together they give the blueprint lemma `lemma-unramified-at-infinity-no-linear-characters--1`: a
+nonzero linear Artin–Schreier sheaf is not unramified at infinity
 (`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and the case `a ≠ 0` of
-`lem-a1-unramified-nonexceptional`: a lisse sheaf unramified at infinity has no geometric
-constituent `ℒ_{ψ(a x)}|_U` with `a ≠ 0`
+`lemma-unramified-at-infinity-no-linear-characters`: a lisse sheaf unramified at infinity has no
+geometric constituent `ℒ_{ψ(a x)}|_U` with `a ≠ 0`
 (`WeilSheaf.LisseOnDenseOpen.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`).
 The second statement needs no semisimplicity: a subquotient of a constant sheaf on `Spec K` is
 already excluded.
@@ -145,7 +145,7 @@ to a lisse sheaf on a neighbourhood of `∞` in `ℙ¹`: otherwise it would be c
 punctured disc at `∞`
 (`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
 while the inertia group at `∞` acts on it through `ψ`.
-(blueprint: `lem-a1-artin-schreier-ramified-infinity`) -/
+(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
 theorem not_isUnramifiedAtInfinity_artinSchreier (hψ : ψ ≠ 1) {a : k₀} (ha : a ≠ 0) :
     ¬ (artinSchreier ψ a).IsUnramifiedAtInfinity (𝟙 (affineLine k₀)) := by
   intro h
@@ -166,7 +166,7 @@ variable (D : LisseOnDenseOpen k₀ l)
 (`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
 so a geometric constituent becomes a subquotient of a constant sheaf, which `ℒ_{ψ(a x)}` is not
 (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
-(blueprint: `lem-a1-unramified-nonexceptional`, case `a ≠ 0`) -/
+(blueprint: `lemma-unramified-at-infinity-no-linear-characters`, case `a ≠ 0`) -/
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' (hψ : ψ ≠ 1)
     (hinf : D.IsUnramifiedAtInfinity) {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
     ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by

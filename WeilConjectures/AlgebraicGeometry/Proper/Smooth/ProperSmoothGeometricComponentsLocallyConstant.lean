@@ -130,13 +130,13 @@ Proof plan:
    (sbc-lem-smooth-geometrically-reduced). Properness survives base change
    (lem-pc-proper-base-change); the geometric fibre is the residue fibre extended to its
    algebraic closure (def-weil-geometric-fibre).
-2. Apply thm-pc-semicontinuity-base-change, clauses (1) and (2), to the structure sheaf in
+2. Apply lemma-triviality-fibres--2, clauses (1) and (2), to the structure sheaf in
    degree zero. Its stalks are flat over the base by def-weil-flat-morphism. This gives finite
    fibre cohomology and upper semicontinuity, without assuming the base reduced.
 3. A field extension is flat (lem-pc-field-extension-fpqc-cover). Flat cohomological base change
    (lem-pc-flat-base-change-cohom) identifies the extension of H⁰ with the geometric fibre's
    global sections. Properness gives quasi-compactness and quasi-separatedness, using
-   def-weil-proper-morphism, def-weil-pbc-scheme-conventions and def-weil-closed-immersion.
+   def-weil-proper-morphism, definition-ind-etale-pro-etale-weakly--3 and def-weil-closed-immersion.
    By lem-weil-pbc-proper-reduced-algclosed-global-sections-product these sections form a finite
    product of the algebraically closed field, indexed by the connected components. Comparing
    dimensions identifies the component count with the upper semicontinuous H⁰ dimension.

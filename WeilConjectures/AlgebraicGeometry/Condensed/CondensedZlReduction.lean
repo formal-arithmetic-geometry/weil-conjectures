@@ -16,7 +16,7 @@ import Mathlib.NumberTheory.Padics.ProperSpace
 /-!
 # Reduction of pulled-back condensed ell-adic integers
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 `sk-def-sp-tate-twist/_section.md`, integral coefficient comparison, and
 `sk-prop-sfb-qlbar-colimit-x/_section.md`, final paragraph
 (blueprint: lem-pur-condensed-zl-reduction-mod-ell-power).

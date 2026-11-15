@@ -28,7 +28,7 @@ irreducible scheme is finite locally free of rank `rk M`
 
 - `AlgebraicGeometry.Scheme.Modules.rank`: the generic rank `dim_{k(X)} M_η`.
 
-(blueprint: `lem-sc-riemann-roch`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`)
 -/
 
 @[expose] public section
@@ -151,7 +151,7 @@ variable (M) in
 /-- **The rank of an `𝒪_X`-module** on an irreducible scheme: the dimension
 `rk M = dim_{k(X)} M_η` of its stalk at the generic point `η` over the function field.
 
-(blueprint: `lem-sc-riemann-roch`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 noncomputable def rank (M : X.Modules) : ℕ :=
   Module.finrank X.functionField (M.presheaf.stalk (genericPoint X))
 

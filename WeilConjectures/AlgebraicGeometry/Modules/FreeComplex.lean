@@ -27,7 +27,7 @@ gives
 The rank of `A_n(g)` is at least `ρ` if and only if some `ρ × ρ` minor of `A_n` does not vanish at
 the point. Hence the ranks can only go up near a point, and the fibre dimension of the cohomology
 can only go down: it is upper semicontinuous. This is the linear algebra in the proof of the
-semicontinuity theorem (blueprint `thm-pc-semicontinuity-base-change`, part (2)).
+semicontinuity theorem (blueprint `lemma-triviality-fibres--2`, part (2)).
 
 ## Main statements
 
@@ -213,7 +213,7 @@ differentials around degree `q`: on `V` their ranks can only be larger
 can only be smaller
 (`AlgebraicGeometry.Scheme.Modules.finrank_homology_pullback_add_rank_add_rank`).
 
-(blueprint: `thm-pc-semicontinuity-base-change`) -/
+(blueprint: `lemma-triviality-fibres--2`) -/
 theorem exists_finrank_homology_pullback_le {P : CochainComplex Y.Modules ℤ}
     (hP : ∀ n, ∃ r : ℕ, Nonempty (P.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))
     (q : ℤ) {R : CommRingCat.{u}} (hR : IsField R) (g : Spec R ⟶ Y) :

@@ -250,8 +250,8 @@ scheme over a field `k` and let `K/k` be a field extension. Then the base change
 `X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
 `H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
 
-(blueprint: `lem-pc-genus-base-change`) 
-(blueprint: lem-pc-genus-base-change)
+(blueprint: `corollary-serre-duality-field-extension--2`) 
+(blueprint: corollary-serre-duality-field-extension--2)
 -/
 theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] :
@@ -290,13 +290,14 @@ lemma Modules.degree_unit :
     Modules.degree (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 0 :=
   sub_self _
 
-/-- **The degree is invariant under base change** (blueprint `lem-pc-degree-base-change`,
-part (1)). For a quasi-coherent module `M` on a quasi-compact quasi-separated scheme `X` over
-`k` and a field extension `K/k`, `deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in
-`deg M = χ(M) - χ(𝒪_X)` are invariant under flat base change.
+/-- **The degree is invariant under base change** (blueprint
+`theorem-riemann-roch-coherent-serre-duality--1`, part (1)). For a quasi-coherent module `M` on a
+quasi-compact quasi-separated scheme `X` over `k` and a field extension `K/k`,
+`deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in `deg M = χ(M) - χ(𝒪_X)` are invariant
+under flat base change.
 
-(blueprint: `lem-pc-degree-base-change`) 
-(blueprint: lem-pc-degree-base-change)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) 
+(blueprint: theorem-riemann-roch-coherent-serre-duality--1)
 -/
 theorem Modules.degree_pullback (K : Type u) [Field K] [Algebra k K]
     [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules)
@@ -367,7 +368,7 @@ the `U i` (`AlgebraicGeometry.Scheme.Modules.isIso_biproduct_lift_restrictAdjunc
 the pushforward along the inclusion of an open and closed subscheme does not change cohomology
 (`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`).
 
-This is used in the proof of blueprint `lem-sc-ample-positive-degree`. -/
+This is used in the proof of blueprint `proposition-multiplication-n--1`. -/
 theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ)
     [FiniteDimensional k (M.H q)] :

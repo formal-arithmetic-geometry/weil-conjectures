@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover
 /-! # The affine-line Artin–Schreier cover
 
 Source: literature/blueprint/latest/blueprint/sec-fourier-transform/sk-lem-as-properties/
-lem-fd-as-cover-affine-line.md, node statement (blueprint: lem-fd-as-cover-affine-line).
+lem-fd-as-cover-affine-line.md, node statement (blueprint: lemma-integral-linear-character--2).
 
 The affine-line cover is identified with affine one-space by sending the quotient
 coordinate `T` to the affine coordinate `y`. The transported structural morphism
@@ -32,10 +32,10 @@ namespace AlgebraicGeometry
 structural map and prime-field action in the displayed coordinates.
 
 Source: literature/blueprint/latest/blueprint/sec-fourier-transform/sk-lem-as-properties/
-lem-fd-as-cover-affine-line.proof.md, all four proof steps (blueprint: lem-fd-as-cover-affine-line).
-Proof: (1) Write `A` for the affine line and use the defining pullback of the cover,
-with quotient ring `B = Γ(A)[T]/(T^p-T-x)`. Evaluation at `x`, with coefficient
-map `AS_p*`, kills this polynomial. The quotient universal property
+lem-fd-as-cover-affine-line.proof.md, all four proof steps (blueprint:
+lemma-integral-linear-character--2). Proof: (1) Write `A` for the affine line and use the defining
+pullback of the cover, with quotient ring `B = Γ(A)[T]/(T^p-T-x)`. Evaluation at `x`, with
+coefficient map `AS_p*`, kills this polynomial. The quotient universal property
 `AdjoinRoot.lift` gives `B → Γ(A)`, and hence a pullback lift `g : A → Y`.
 (2) Define `f : Y → A` over `k` by `f*x = T`. Then `g ≫ f = 𝟙` by the
 base and coordinate formulas. Pulling back the quotient relation gives
@@ -44,7 +44,7 @@ base and coordinate formulas. Pulling back the quotient relation gives
 previous equality; on the spectrum projection use `AdjoinRoot.ringHom_ext`.
 The coefficient equality follows from `f ≫ AS_p = π`; the root equality
 is `f*x = T`. Thus `f` and `g` give the required isomorphism.
-(4) Take the action from lem-fd-as-cover. Its conjugate fixes the base and
+(4) Take the action from lemma-artin-schreier-character-sheaf. Its conjugate fixes the base and
 sends `x` to `g*(T+a) = x+a`, so `AffineSpace.hom_ext` identifies it with
 the displayed translation. -/
 theorem artinSchreierCover_affineLine (k : Type u) [Field k] (p : ℕ) [Fact p.Prime]

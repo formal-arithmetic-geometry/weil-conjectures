@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 /-!
 # Unit normalization of the proper/open restriction identification
 
-Source: blueprint thm-cbc-finite-torsion, refinement comparison argument;
+Source: blueprint proposition-composition-base-change-rf-shriek, refinement comparison argument;
 Stacks Project, More on Etale Cohomology, Tags 0F7B and 0F7I
 (blueprint: lem-weil-pbc-proper-open-identification-unit).
 -/
@@ -722,8 +722,8 @@ private theorem geometric_restriction (A : Type (u + 2)) [Category.{u + 1} A]
 
 /-- The specified proper/open restriction identification is the canonical restriction map,
 after identifying `K` with `j₁^* j₁! K` by the extension-by-zero unit.
-Source: blueprint thm-cbc-finite-torsion, proof step 5; Stacks Project, Tags 0F7B and 0F7I
-(blueprint: lem-weil-pbc-proper-open-identification-unit).
+Source: blueprint proposition-composition-base-change-rf-shriek, proof step 5; Stacks Project, Tags
+0F7B and 0F7I (blueprint: lem-weil-pbc-proper-open-identification-unit).
 
 Proof:
 1. Put `V = T₁ ×[T₂] X`, with projections `b : V → T₁` and `p : V → X`, and let

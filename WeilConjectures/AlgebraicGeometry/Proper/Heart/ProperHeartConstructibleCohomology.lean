@@ -16,7 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.Integral.IntegralIndConstructibleHe
 /-!
 # Constructibility of proper higher direct images with rational coefficients
 
-Source: blueprint main-20261015, sk-lem-proper-heart-bound, final paragraph
+Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph
 (blueprint: lem-proper-heart-constructible-cohomology).
 -/
 
@@ -37,17 +37,15 @@ private lemma constantModelBoundedConstructible_eq_rational
     (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
       Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨
       Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
-    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
+    (k : Type u) [Field k]
     (T : Scheme.{u}) [T.Over (Spec (.of k))]
-    [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
-    [QuasiCompact (T ↘ Spec (.of k))] :
+    [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] :
     constantModelBoundedConstructible Λ.X T = boundedConstructible (condensedRingObj Λ.X T) := by
-  have h := (finiteCoefficientDescentTwoColimit k p₀ ℓ hp₀ hpℓ T).2.2.2
   rcases hΛ with ⟨E, hE⟩ | hQ
   · subst Λ
-    exact (h.1 E).1
+    exact constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E T
   · subst Λ
-    exact h.2.1.1
+    exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ T
 
 attribute [local irreducible] Functor.rightDerivedFunctor
 
@@ -55,9 +53,9 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 are again finite constant-model constructible, for finite extensions and the condensed
 algebraic closure.
 
-Source: blueprint main-20261015, sk-lem-proper-heart-bound, final paragraph, first sentence;
-sk-thm-sfb-proper-base-change, rational bounded-constructibility clause
-(blueprint: lem-proper-heart-constructible-cohomology).
+Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph, first
+sentence; proposition-proper-direct-image-constructible-complexes, rational bounded-constructibility
+clause (blueprint: lem-proper-heart-constructible-cohomology).
 
 Proof: place M in degree zero. Its degree-zero cohomology is isomorphic to M;
 all other cohomology modules are zero. Transport finite constant local models through
@@ -90,7 +88,7 @@ theorem properHeart_constructible_cohomology
       [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
       [QuasiCompact (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) :=
-    constantModelBoundedConstructible_eq_rational ℓ (Mon.mk Λ) hΛ k p₀ hp₀ hpℓ T
+    constantModelBoundedConstructible_eq_rational ℓ (Mon.mk Λ) hΛ k T
   have : Fact (ringChar k).Prime := ⟨by
     rw [ringChar.eq k p₀]
     exact (CharP.char_is_prime_or_zero k p₀).resolve_right hp₀.ne'⟩

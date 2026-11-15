@@ -11,12 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.BCProperty
 /-!
 # A failure of base change produces an integral normal base
 
-Blueprint `lem-kun-0f1d` (Stacks 0F1D): if `BC(f, n, q - 1)` holds and `BC(f, n, q)` fails for
-some `q ≥ 1`, there is a base change of `f` to an affine, integral, normal scheme `S'` with
-algebraically closed function field and an algebraically closed field `K` over the function field
-such that `R^q h_* (ℤ/d) ≠ 0` on the fibre over `Spec K` for some `d ∣ n`. This is the failure
-lemma `AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage` (Stacks 0F08) of
-the smooth base change theorem, read in the language of
+Blueprint `lemma-kunneth-finite-direct-image--1` (Stacks 0F1D): if `BC(f, n, q - 1)` holds and
+`BC(f, n, q)` fails for some `q ≥ 1`, there is a base change of `f` to an affine, integral, normal
+scheme `S'` with algebraically closed function field and an algebraically closed field `K` over the
+function field such that `R^q h_* (ℤ/d) ≠ 0` on the fibre over `Spec K` for some `d ∣ n`. This is
+the failure lemma `AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage` (Stacks
+0F08) of the smooth base change theorem, read in the language of
 `AlgebraicGeometry.Etale.KunnethBaseChangeProperty`.
 -/
 
@@ -30,7 +30,8 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/-- Blueprint `lem-kun-0f1d`: failure of base change produces an integral normal base.
+/-- Blueprint `lemma-kunneth-finite-direct-image--1`: failure of base change produces an integral
+normal base.
 
 Let `f : X ⟶ S` be a morphism of schemes and `n` an integer invertible on `S`. If for some
 `q ≥ 1` the base change property `BC(f, n, q - 1)` holds but `BC(f, n, q)` does not, there are

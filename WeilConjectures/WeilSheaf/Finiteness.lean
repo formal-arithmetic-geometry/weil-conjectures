@@ -193,7 +193,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--5`: Compact-support finiteness and
+Frobenius.
 
 The compactly supported cohomology `Hʳ_c(X ⊗ k̄, K)` of a Weil complex vanishes outside a finite
 interval of degrees `r`. -/
@@ -307,7 +308,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
+/-- Blueprint `theorem-trace-formula-euler-product--6`: Compact-support finiteness and Frobenius.
 
 If `X` is proper over `k₀`, the compactly supported and the ordinary cohomology
 `Hʳ_c(X ⊗ k̄, K)` and `Hʳ(X ⊗ k̄, K)` are isomorphic as Frobenius modules.

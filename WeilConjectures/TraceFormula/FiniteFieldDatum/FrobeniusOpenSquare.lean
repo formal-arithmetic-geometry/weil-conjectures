@@ -13,7 +13,7 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 Source: Weil conjectures blueprint, `sec-trace-formula/sk-d-weil-push`,
 `lem-trf-frobenius-open-square.md`, order 2368; Stacks, Tags 03SM, 01JR and 01JP
-(blueprint: lem-trf-frobenius-open-square).
+(blueprint: lemma-additivity-open-subscheme-complement--1).
 
 The models are arbitrary schemes over the finite base. The scheme Frobenius is written
 using `Over.pullback.map` applied to the existing absolute Frobenius; this is the defining
@@ -130,7 +130,7 @@ are Cartesian for every nonnegative iterate. The last two identities give semili
 of the Galois maps with respect to the projections to `Spec k`.
 Source: blueprint `sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md`,
 order 2368; Stacks, Tags 03SM, 01JR and 01JP
-(blueprint: lem-trf-frobenius-open-square).
+(blueprint: lemma-additivity-open-subscheme-complement--1).
 
 Proof:
 1. The structure morphisms make `p` vanish on the models, including empty opens.

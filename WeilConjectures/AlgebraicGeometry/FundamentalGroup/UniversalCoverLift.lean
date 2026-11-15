@@ -28,7 +28,7 @@ fields are compared through fibre functors. Lifts are compatible with the morphi
 
 These are used to compare the stalks of lisse sheaves at geometric points with values in
 different fields, as needed for the inertia invariants at a boundary point (blueprint
-`lem-wf-boundary-stalk-invariants`).
+`lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section

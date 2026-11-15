@@ -46,7 +46,7 @@ Proof:
    scalar extension. By `lem-sc-scheme-stalk-dimension-generalization-chains`, the
    dimension of each stalk is at most the dimension of its chart, hence at most one.
 3. The hypothesis makes every such stalk an integrally closed domain. A zero-dimensional
-   local domain is a field, thus regular. In dimension one, `lem-sc-normal-dim1-dvr`
+   local domain is a field, thus regular. In dimension one, `lemma-proper-smooth-model--1`
    makes it a discrete valuation ring, whose principal maximal ideal makes it regular
    (`def-sc-discrete-valuation-ring`). Thus every field base change is regular.
 4. Apply `lem-weil-pbc-geometric-regularity-smooth-field-criterion` to obtain smoothness:

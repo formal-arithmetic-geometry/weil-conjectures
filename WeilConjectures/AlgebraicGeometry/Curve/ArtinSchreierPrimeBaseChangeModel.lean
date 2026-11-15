@@ -73,7 +73,7 @@ private theorem exists_fixedPoints_equiv_of_exact_row
 
 /-- Prime-coefficient first cohomology is the Frobenius kernel, naturally under base change.
 Source: Stacks Project, Tag 0A3P, proof, and Tag 02KH, flat base change.
-(blueprint: lem-pbc-artin-schreier-prime-base-change-model)
+(blueprint: proposition-p-torsion-smooth-proper-curve--2)
 
 Proof: Use H¹(C,O_C) as V, with its scalar action and finite-dimensionality from proper
 coherent cohomology and the étale/Zariski quasi-coherent comparison. The sectionwise

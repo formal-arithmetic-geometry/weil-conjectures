@@ -271,7 +271,6 @@ variable (X : Scheme.{u}) (A E : Type)
   [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [TotallyDisconnectedSpace A]
   [CommRing E] [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
   (φ : A →+* E) (hφ : Continuous φ)
-set_option maxHeartbeats 1000000 in
 -- The two encodings have the same underlying abelian sheaf.
 private def restrictSections
     (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -286,7 +285,6 @@ private def restrictSections
     left_inv := fun _ ↦ rfl
     right_inv := fun _ ↦ rfl
     map_add' := fun _ _ ↦ rfl }
-set_option maxHeartbeats 1000000 in
 -- Reduce the explicit comparison only for its sectionwise scalar equation.
 private theorem restricted_smul
     (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -360,7 +358,6 @@ private def sheetExtensionIso :
   subst g
   exact (pullIso a t).app M ≪≫ (upperStar S t).mapIso e ≪≫
     ((upperStarComp S t p).app P).symm
-set_option maxHeartbeats 1000000 in
 -- The equality compares the full composed module pullback normalizations.
 private theorem sheetEmbedding_unit :
     finiteEtaleLatticeSheetEmbedding a P p M e g t w =
@@ -400,6 +397,15 @@ private def presentationChange (B : X.ProEt) :
   change q.sections B (m ((p.sections B).symm (a • x))) = _
   rw [presentation_symm_smul, m.map_smul, q.smul]
   rfl
+private theorem presentationChange_sections (B : X.ProEt)
+    (x : ((continuousRingModuleEquivalence X E).functor.obj Q).val.obj (op B)) :
+    presentationChange X E p q e B (p.sections B x) =
+      q.sections B
+        (((continuousRingModuleEquivalence X E).functor.map e.hom).val.app (op B) x) := by
+  change q.sections B
+    (((continuousRingModuleEquivalence X E).functor.map e.hom).val.app (op B)
+      ((p.sections B).symm (p.sections B x))) = _
+  rw [AddEquiv.symm_apply_apply]
 private theorem presentationChange_naturality (B D : X.ProEt) (a : D ⟶ B)
     (x : C(B.left, Fin n → E)) :
     presentationChange X E p q e D (x.comp a.left.base.hom) =
@@ -554,8 +560,6 @@ private theorem restrictPresentation_sections (X : Scheme.{u}) (E : Type) [Norme
 attribute [local irreducible] continuousRingModuleEquivalence continuousRingRegularIso
   upperStar upperStarComp comapUpperStarIso pullIso Mod.extendScalars Mod.extendRestrictAdjunction
 
-set_option maxHeartbeats 1000000 in
--- Combining the encoded frame maps requires large categorical instance conversions.
 private theorem freeCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [TotallyDisconnectedSpace E] (Y : Scheme.{u})
@@ -637,19 +641,11 @@ private theorem freeCoordinates
     simp only [Functor.map_comp, SheafOfModules.comp_val,
       PresheafOfModules.comp_app, ModuleCat.comp_apply]
     erw [restrictSections_naturality]
-    change cp.sections B
-      (((continuousRingModuleEquivalence Y E).functor.map (z j).hom).val.app (op B)
-        (restrictSections Y A E A.subtype continuous_subtype_val
-          (Mod.finiteFree (condensedRingObj S Y) (n j)) B
-          (((continuousRingModuleEquivalence Y A).functor.map k).val.app (op B) y))) =
-      cp.sections B (((continuousRingModuleEquivalence Y E).functor.map (z j).hom).val.app
-        (op B) (((freePresentation Y E (n j)).sections B).symm
-          (continuousIntegralVector A ((b j).sections B x))))
-    rw [← hu, AddEquiv.symm_apply_apply]
+    exact (presentationChange_sections Y E (fp j) cp (z j) B _).symm.trans
+      (congrArg (F j B) hu)
 
 attribute [local semireducible] continuousRingModuleEquivalence continuousRingRegularIso
 
-set_option maxHeartbeats 1000000 in
 -- Instantiate the abstract frames with the concrete module pullback constructions.
 /-- Global free frames give natural rational coordinate changes before extracting matrices.
 This assertion concerns the base Y itself, with no restriction to open subschemes.

@@ -18,7 +18,7 @@ public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceBound
 Let `M` be a lisse Weil sheaf on a dense open `j : U₀ ↪ 𝔸¹` with weights at most `w`, and let
 `B = j_*M / j_!M` be its boundary sheaf, supported on the finite complement `S₀` of `U₀`. If the
 Fourier transform of `B` is a shifted Weil sheaf `B'[1]`, then `B'` has weights at most `w`
-(Step 4 of `prop-fd-zero-extension-comparison`).
+(Step 4 of `lemma-fourier-transform-boundary-sequence`).
 
 By boundary semicontinuity `j_*M`, hence its quotient `B`, has weights at most `w`. The Fourier
 trace formula writes the trace function of `B'` as the finite sum
@@ -305,10 +305,10 @@ private lemma traceFunction_fourierTransform_eq_neg_finsum (ψ : AddChar k₀ (P
   simp only [WeilComplex.affineLineTraceFunction, Equiv.symm_apply_apply]
 
 /-- **The transform of the boundary sheaf has weights at most `w`** (Step 4 of
-`prop-fd-zero-extension-comparison`): if `FT_ψ(B) ≅ B'[1]` and `M` has weights at most `w`, then
-`B'` has weights at most `w`. By the Fourier trace formula
+`lemma-fourier-transform-boundary-sequence`): if `FT_ψ(B) ≅ B'[1]` and `M` has weights at most `w`,
+then `B'` has weights at most `w`. By the Fourier trace formula
 `t_{B'}(y) = ∑_x t_B(x) ψ(Tr(x y))`, a sum over the points of the boundary, so the trace
-function of `B'` is `O(q^{nw/2})`. (blueprint: `prop-fd-zero-extension-comparison`) -/
+function of `B'` is `O(q^{nw/2})`. (blueprint: `lemma-fourier-transform-boundary-sequence`) -/
 theorem hasWeightsAtMost_of_iso_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (hw : D.sheaf.HasWeightsAtMost ι w)
     {B' : WeilSheaf k₀ l (affineLine k₀)}

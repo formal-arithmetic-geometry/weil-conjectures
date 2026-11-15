@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 /-!
 # Smooth duality for affine space from the affine line
 
-The induction step of blueprint `cor-amb-affine-space-adjunction`: the projection
+The induction step of blueprint `lemma-affine-space-etale-localization--1`: the projection
 `p_{d+1} : 𝔸^{d+1}_S ⟶ S` is, up to the isomorphism `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the composite of
 the affine-line projection over `𝔸^d_S` and of `p_d`. The canonical tensor maps compose
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_comp_of_forall`), and the dualizing
@@ -132,8 +132,9 @@ variable (Λ) in
 exponent of `Λ` is invertible, the projection `p : 𝔸¹_S ⟶ S` satisfies smooth duality in degree
 `-2`: its dualizing complex is a locally constant sheaf of free rank-one `Λ`-modules placed in
 degree `-2` and its canonical tensor maps are isomorphisms. This is what the affine-line
-adjunction `Rp_! ⊣ p^*(1)[2]` (`cor-amb-affine-space-adjunction` for `d = 1`, from
-`thm-amb-p1-adjunction`) gives, together with its compatibility with the tensor maps. -/
+adjunction `Rp_! ⊣ p^*(1)[2]` (`lemma-affine-space-etale-localization--1` for `d = 1`, from
+`proposition-adjunction-projective-line--1`) gives, together with its compatibility with the tensor
+maps. -/
 def AffineLineSmoothDuality : Prop :=
   ∀ (S : Scheme.{u}) [IsAffine S] [HasInvertibleExponent Λ S],
     SatisfiesSmoothDuality Λ (𝔸(ULift.{u} (Fin 1); S) ↘ S) 2
@@ -146,9 +147,9 @@ theorem satisfiesSmoothDuality_of_isIso (hE : EtaleSmoothDuality Λ) {V W : Sche
   exact ⟨(isShiftedRankOneLocalSystem_unit V).of_iso hω.symm, hθ⟩
 
 /-- **Smooth duality for affine space from the affine line** (the induction of blueprint
-`cor-amb-affine-space-adjunction`): if étale morphisms and affine-line projections over affine
-bases satisfy smooth duality, then so do the projections `p_d : 𝔸^d_S ⟶ S` over affine bases on
-which the exponent of `Λ` is invertible, in degree `-2d`. For `d = 0` the projection is an
+`lemma-affine-space-etale-localization--1`): if étale morphisms and affine-line projections over
+affine bases satisfy smooth duality, then so do the projections `p_d : 𝔸^d_S ⟶ S` over affine bases
+on which the exponent of `Λ` is invertible, in degree `-2d`. For `d = 0` the projection is an
 isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`
 (`AlgebraicGeometry.AffineSpace.sumIso`), the composite of the affine-line projection over
 `𝔸^d_S` and of `p_d`, whose dualizing complexes multiply and whose tensor maps compose. -/
@@ -197,13 +198,14 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
     ring
 
 /-- **Smooth duality from the étale and affine-line cases** (the reduction in the proofs of
-blueprint `thm-asd-smooth-tensor` and `cor-amb-affine-space-adjunction`): if étale morphisms and
-the affine-line projections over affine bases satisfy smooth duality
-(`AlgebraicGeometry.Etale.EtaleSmoothDuality`, `AlgebraicGeometry.Etale.AffineLineSmoothDuality`),
-then for every smooth `f : X ⟶ Y` of relative dimension `d` admitting a compactification, with the
-exponent of `Λ` invertible on `X`, `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free
-rank-one `Λ`-modules and `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`;
-this is the statement of `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`. -/
+blueprint `proposition-exceptional-inverse-image-smooth-morphism` and
+`lemma-affine-space-etale-localization--1`): if étale morphisms and the affine-line projections over
+affine bases satisfy smooth duality (`AlgebraicGeometry.Etale.EtaleSmoothDuality`,
+`AlgebraicGeometry.Etale.AffineLineSmoothDuality`), then for every smooth `f : X ⟶ Y` of relative
+dimension `d` admitting a compactification, with the exponent of `Λ` invertible on `X`,
+`ω_f ≅ L[2d]` for a locally constant sheaf `L` of free rank-one `Λ`-modules and
+`θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`; this is the statement of
+`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine
     (hE : EtaleSmoothDuality Λ) (h₁ : AffineLineSmoothDuality Λ) {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)

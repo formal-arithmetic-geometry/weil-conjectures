@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 Let `k` be a separably closed field, `X` a smooth proper geometrically integral curve of genus
 `g` over `k` with a rational point `σ`, and let `D ⊆ X_T` be a point of `Hilb^g_{X/k}(T)`, e.g.
 the universal divisor over `T = H = Hilb^g_{X/k}`. This file collects the parts of the blueprint
-lemma `lem-pc-universal-adjoint-section` that are not already the per-`T` statement
+lemma `proposition-divisors-degree-g-open-chart--1` that are not already the per-`T` statement
 `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`:
 
 * `AlgebraicGeometry.isQuasicoherent_pushforward_dual_toModules`: the direct image
@@ -57,7 +57,7 @@ For `ℳ = σ_H^* 𝒪(D_univ)^{-1}` this is the canonical isomorphism
 `ℒ_H ⊗ f_H^* 𝒩_H^{-1} ≅ 𝒪(D_univ) ⊗ f_H^* (f_{H,*} 𝒪(D_univ))^{-1}` of the blueprint, over the
 open `W ⊆ H` where `f_{H,*} 𝒪(D_univ)` is invertible.
 
-(blueprint: `lem-pc-universal-adjoint-section`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem Scheme.Modules.nonempty_tensorObj_dual_pullback_pushforward_iso {Y T : Scheme.{u}}
     (π : Y ⟶ T) (L OD : Y.Modules) [L.IsInvertible] [OD.IsInvertible] (M : T.Modules)
     [M.IsInvertible] [((pushforward π).obj OD).IsInvertible]
@@ -84,7 +84,7 @@ quasi-coherent `𝒪_T`-module: `𝒪(D)` is invertible, hence quasi-coherent, a
 hence quasi-compact and quasi-separated
 (`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward`).
 
-(blueprint: `lem-pc-universal-adjoint-section`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem isQuasicoherent_pushforward_dual_toModules [IsProper (X ↘ Spec (.of k))]
     (T : Over (Spec (.of k))) {D : (Limits.pullback (X ↘ Spec (.of k)) T.hom).IdealSheafData}
     (hD : D.IsInvertible) :
@@ -115,7 +115,7 @@ of the adjunction morphism
 (`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`),
 which is `D` by `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`.
 
-(blueprint: `lem-pc-universal-adjoint-section`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem zeroLocus_adjointSection_eq_of_iso
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),

@@ -24,7 +24,7 @@ of the presheaf of modules `U ↦ ⋀ʳ_{𝒪(U)} M(U)` (`PresheafOfModules.exte
   basis `m₁, …, m_r` (on a basis of the topology of `U`), then `m₁ ∧ ⋯ ∧ m_r` is a free generator
   of `⋀ʳ M` on `U`.
 
-(blueprint: `lem-pc-projective-space-canonical`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section

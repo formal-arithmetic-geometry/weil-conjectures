@@ -47,8 +47,42 @@ private theorem adjustComparison {C : Type*} [Category C] {K : C ⥤ C}
   rw [← Category.assoc, ← hn]
   simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]
 
+private theorem affineHom_mapComparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (H : C ⥤ D) (R : D ⥤ C) [H.Additive] [R.Additive]
+    {K T : C ⥤ C} [K.Additive] [T.Additive]
+    (j : H ⋙ R ≅ K) (t : T ≅ 𝟭 C) (p : K ⟶ T) (c : H ⋙ R ⟶ 𝟭 C)
+    (hj : ∀ M, j.hom.app M ≫ p.app M ≫ t.hom.app M = c.app M)
+    {F G : CochainComplex C ℤ ⥤ CochainComplex C ℤ}
+    (bB : F ≅ K.mapHomologicalComplex (.up ℤ))
+    (bO : G ≅ T.mapHomologicalComplex (.up ℤ)) (q : F ⟶ G)
+    (hb : ∀ I, q.app I ≫ bO.hom.app I =
+      bB.hom.app I ≫ (NatTrans.mapHomologicalComplex p (.up ℤ)).app I)
+    (e : G ≅ 𝟭 _) (I : CochainComplex C ℤ) :
+    ∃ d : (R.mapHomologicalComplex (.up ℤ)).obj
+        ((H.mapHomologicalComplex (.up ℤ)).obj I) ≅ F.obj I,
+      d.hom ≫ q.app I ≫ e.hom.app I =
+        (NatTrans.mapHomologicalComplex c (.up ℤ)).app I := by
+  let e₀ := bO ≪≫ NatIso.mapHomologicalComplex t (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso _ (.up ℤ)
+  let d₀ := ((Functor.mapHomologicalComplexCompIso j (.up ℤ)).app I) ≪≫
+    (bB.app I).symm
+  have hc : d₀.hom ≫ q.app I ≫ e₀.hom.app I =
+      (NatTrans.mapHomologicalComplex c (.up ℤ)).app I := by
+    simp only [d₀, e₀, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+      NatTrans.comp_app, Category.assoc]
+    rw [← Category.assoc _ (bO.hom.app I) _, hb I]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+    apply HomologicalComplex.hom_ext
+    intro n
+    change j.hom.app (I.X n) ≫ p.app (I.X n) ≫ t.hom.app (I.X n) ≫ 𝟙 _ =
+      c.app (I.X n)
+    rw [Category.comp_id]
+    exact hj (I.X n)
+  exact adjustComparison e₀ e d₀ (q.app I)
+    ((NatTrans.mapHomologicalComplex c (.up ℤ)).app I) hc
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Unfold the sheaf carrier encodings in the two comparison isomorphisms.
 /-- Degreewise affine Hom comparison data.
 
@@ -117,35 +151,16 @@ theorem affine_hom_complex_d_components
     Functor.additive_of_iso (unitHomIso Y).symm
   obtain ⟨bB, bO, hb⟩ := @homComplex_single_precomposition_iso Y B
     (SheafOfModules.unit Y.ringCatSheaf) k instB instO
-  let t := unitHomIso Y
-  let e₀ := bO ≪≫ NatIso.mapHomologicalComplex t (.up ℤ) ≪≫
-    Functor.mapHomologicalComplexIdIso _ (.up ℤ)
   intro I
-  let d₀ := ((Functor.mapHomologicalComplexCompIso j (.up ℤ)).app I) ≪≫
-    (bB.app I).symm
-  have hc : d₀.hom ≫
-      ((homComplexFunctor (R := Y.sheaf)).map
-        ((CochainComplex.singleFunctor _ 0).map k).op).app I ≫ e₀.hom.app I =
-      (NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I := by
-    change (Functor.mapHomologicalComplexCompIso j (.up ℤ)).hom.app I ≫
-      bB.inv.app I ≫
-      ((homComplexFunctor (R := Y.sheaf)).map
-        ((CochainComplex.singleFunctor _ 0).map k).op).app I ≫
-      bO.hom.app I ≫ (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app I ≫
-      (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).hom.app I = _
-    rw [← Category.assoc _ (bO.hom.app I) _, hb I]
-    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-    apply HomologicalComplex.hom_ext
-    intro n
-    change j.hom.app (I.X n) ≫
-      ((SheafOfModules.homFunctor Y.sheaf).map k.op).app (I.X n) ≫
-      t.hom.app (I.X n) ≫ 𝟙 _ = adj₀.counit.app (I.X n)
-    rw [Category.comp_id]
-    exact hj (I.X n)
-  obtain ⟨d, hd⟩ := adjustComparison e₀ e d₀
-    (((homComplexFunctor (R := Y.sheaf)).map
-      ((CochainComplex.singleFunctor _ 0).map k).op).app I)
-    ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I) hc
+  obtain ⟨d, hd⟩ := affineHom_mapComparison H
+    (SheafOfModules.restrictScalars
+      (R := moduleRings Y.toRingedSpace)
+      (R' := moduleRings (directImageAlgebraSpace f))
+      ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩)
+    j (unitHomIso Y) ((SheafOfModules.homFunctor Y.sheaf).map k.op)
+    adj₀.counit hj bB bO
+    ((homComplexFunctor (R := Y.sheaf)).map
+      ((CochainComplex.singleFunctor _ 0).map k).op) hb e I
   refine ⟨d, ?_⟩
   intro n
   exact congrArg (fun g ↦ g.f n) hd

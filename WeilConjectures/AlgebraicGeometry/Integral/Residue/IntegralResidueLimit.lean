@@ -248,7 +248,7 @@ private noncomputable def residueModuleForgetIso (X : Scheme.{u}) (ℓ : ℕ) [F
   exact asIso t
 /-- The regular condensed integral coefficient module is the inverse limit of its residues.
 
-Source: the blueprint integral-limit formula in `sk-def-sp-tate-twist`.
+Source: the blueprint integral-limit formula in `definition-tate-twists`.
 Proof: the canonical coefficient comparison identifies its underlying abelian sheaf with
 continuous `ℤ_ℓ`-valued functions. On each site object a compatible sequence of residues
 lifts uniquely by `PadicInt.ofCompatible`. Its continuity follows from the open fibers

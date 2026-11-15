@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # Compatibility of Jacobian identifications with base change
-Source: blueprint `lem-sc-genus-invariant`, proof step 3.
+Source: blueprint `proposition-cohomology-smooth-affine-curve--4`, proof step 3.
 -/
 
 @[expose] public section
@@ -27,8 +27,8 @@ namespace AlgebraicGeometry
 -- The original instance binder is used through typeclass inference.
 set_option linter.unusedVariables false in
 /-- The compatibility square for two Jacobian representing objects after base change.
-Source: blueprint `lem-sc-genus-invariant`, proof step 3 (Picard base-change and Yoneda).
-Proof: on each test scheme T over K, the iterated-pullback isomorphism identifies
+Source: blueprint `proposition-cohomology-smooth-affine-curve--4`, proof step 3 (Picard base-change
+and Yoneda). Proof: on each test scheme T over K, the iterated-pullback isomorphism identifies
 C_K ×_K T with C ×_k T. Pullback of invertible modules along this isomorphism preserves
 fibrewise degree, because the two fibres and their Euler characteristics agree. Thus it
 induces an isomorphism of degree-zero Picard presheaves. Restriction along Over.map b
@@ -43,7 +43,7 @@ pullback of L, use the unit compatibility, and invert e.homEquiv. The inverse ad
 sends a map to J_K to its composite with pullback.fst J.hom b, giving exactly the square.
 This construction applies to arbitrary representing identifications, hence also to those
 respecting the group laws. Identity extensions and genus-zero curves are included.
-(blueprint: lem-sc-jacobian-base-change-compatible) -/
+(blueprint: theorem-picard-scheme-jacobian-over-separably--5) -/
 theorem jacobian_compatibility
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

@@ -42,8 +42,8 @@ Proof plan: (1) The quasi-compact open `U` and closed complement `Z` are qcqs, b
 quasi-separated affine-cover criterion and qcqs permanence. The open immersion is separated
 of finite type; the closed immersion is finite and proper, so its composite with `f` is
 separated of finite type as well. No finite presentation of the closed ideal is required.
-(2) Apply `lem-cbc-open-closed-recollement` to obtain the absolute triangle with terms
-`j_! j⁻¹ K`, `K`, `i_* i⁻¹ K`; the closed direct image is exact.
+(2) Apply `proposition-extension-zero-restriction-closed-subscheme--8` to obtain the absolute
+triangle with terms `j_! j⁻¹ K`, `K`, `i_* i⁻¹ K`; the closed direct image is exact.
 (3) Apply `Rp_* j_f!` from `c_f`. Extension by zero is exact; derived direct image is
 triangulated, using enough injectives and the additive left exact module direct image.
 (4) Compactify `j` by `(j, id)` and `i` by `(id, i)`. Their compact-support functors are

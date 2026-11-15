@@ -32,7 +32,8 @@ Examples are stabilizers of subspaces and centralizers of sets of matrices.
 
 ## Blueprint
 
-- `lem-ag-lie-stable-subspace`, `lem-ag-lie-centre`: the stabilizer of a subspace and the
+- `lemma-stable-subspaces-center--1`, `lemma-stable-subspaces-center--2`: the stabilizer of a
+subspace and the
   centralizer of a set of matrices are closed subgroup schemes, cut out by linear equations.
 -/
 

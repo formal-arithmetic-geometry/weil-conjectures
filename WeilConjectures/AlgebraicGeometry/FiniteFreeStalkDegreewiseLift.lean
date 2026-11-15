@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseLocal
 
 /-! # Extending degreewise stalk maps
 
-Source: the finite matrix extension argument of lem-pc-perfect-locus, expanded in
-lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2.
+Source: the finite matrix extension argument of lemma-coherent-base-change-invertible-sheaves--3,
+expanded in lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2.
 (blueprint: lem-pc-finite-free-stalk-degreewise-lift)
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A family of degreewise stalk maps extends, without imposing chain equations.
 
 Source: lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2, expanding the
-finite matrix extension argument of lem-pc-perfect-locus.
+finite matrix extension argument of lemma-coherent-base-change-invertible-sheaves--3.
 
 Proof: Choose the finite free bases of every nonzero term of P and Q. Pullback
 preserves these finite free sheaves, so a component t n between nonzero terms

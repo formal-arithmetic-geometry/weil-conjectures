@@ -158,8 +158,6 @@ end CategoryTheory
 
 namespace SheafOfModules
 
-set_option maxHeartbeats 2000000 in
--- Checking the dependent tensor comparison unfolds large sheafification constructions.
 /-- Localization at an arbitrary sheaf commutes with ordinary ringed-topos pullback.
 
 Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tags 04IF, 04IE,
@@ -273,10 +271,10 @@ theorem geometric_ringed_pullback_slice
                           (elementSheafPullback (f.inverse.obj A)).map
                             (I.moduleUnderlying.inv.app M)).hom.app
                               (elementObj (f.inverse.obj A) W b) m))) := by
-  obtain ⟨fA, slice, a, ha, hr⟩ :=
-    geometric_ringed_pullback_slice_data RX RY f A y x
-      (geometricSliceSetComparison f.inverse f.leftExact A y x)
-  exact ⟨fA, slice, a, ha, hr,
-    geometric_ringed_pullback_slice_modules RX RY f A y x fA slice a hr⟩
+  exact (geometric_ringed_pullback_slice_data RX RY f A y x
+    (geometricSliceSetComparison f.inverse f.leftExact A y x)).elim fun fA h ↦
+    h.elim fun slice h ↦ h.elim fun a h ↦
+      ⟨fA, slice, a, h.1, h.2,
+        geometric_ringed_pullback_slice_modules RX RY f A y x fA slice a h.2⟩
 
 end SheafOfModules

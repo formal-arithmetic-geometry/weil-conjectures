@@ -20,7 +20,7 @@ with `c₂⁻¹(X ∖ {x}) ⊆ c₁⁻¹(X ∖ {x})`. The open piece coefficient
 Rc₁^! ε ∘ u^U = u ∘ Lc₂^* ε.
 ```
 This is the first square of the morphism of open–closed triangles induced by `u` (blueprint
-`prop-trf-trace-class-additivity`, proof of item 1, step (a)).
+`proposition-additivity-trace-classes--2`, proof of item 1, step (a)).
 
 * `ProEtale.CondensedRing.Correspondence.pointOpenPieceCoeff_comp_map_counit`: the statement.
   Both sides are maps out of `j_{V!} Lc_{2,V}^* Lj^* K` after the open base change
@@ -161,13 +161,12 @@ namespace Correspondence
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
   (x : RationalPoint X)
 
-set_option maxHeartbeats 400000 in
 -- Matching the unfolded `pointOpenRestriction` against the triangle identity requires unifying
 -- several presentations of the same objects of `Dᵇc`, which is slow.
-/-- **The open piece coefficient and the counit** (blueprint `prop-trf-trace-class-additivity`,
-proof of item 1, step (a)): `Rc₁^! ε ∘ u^U = u ∘ Lc₂^* ε` for the counit `ε : j_! Lj^* K ⟶ K` of
-the open complement `j : X ∖ {x} ⟶ X` of a rational point, when
-`c₂⁻¹(X ∖ {x}) ⊆ c₁⁻¹(X ∖ {x})`. -/
+/-- **The open piece coefficient and the counit** (blueprint
+`proposition-additivity-trace-classes--2`, proof of item 1, step (a)): `Rc₁^! ε ∘ u^U = u ∘ Lc₂^* ε`
+for the counit `ε : j_! Lj^* K ⟶ K` of the open complement `j : X ∖ {x} ⟶ X` of a rational point,
+when `c₂⁻¹(X ∖ {x}) ⊆ c₁⁻¹(X ∖ {x})`. -/
 @[reassoc]
 theorem pointOpenPieceCoeff_comp_map_counit
     (hle : c.c₂.left ⁻¹ᵁ pointComplOpens x ≤ c.c₁.left ⁻¹ᵁ pointComplOpens x) :

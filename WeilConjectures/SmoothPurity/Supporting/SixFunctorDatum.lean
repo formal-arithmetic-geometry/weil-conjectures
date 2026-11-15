@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 /-!
 # Axiomatized six-functor data
 
-Source: current blueprint main-20261015, sec-proetale-coefficients,
+Source: current blueprint main-20261015, chap-The-pro-etale-site,
 sk-def-sf-operations/def-sf-datum, axioms (A1)--(A6) (blueprint: def-sf-datum).
 
 The operation datum fixes the actual coefficient categories and constructions.

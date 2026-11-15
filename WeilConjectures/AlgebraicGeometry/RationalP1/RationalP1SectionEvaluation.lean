@@ -42,7 +42,6 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
 
 attribute [local irreducible] coefficient line diagram secondLineComparison
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed native functor and tensor instances by structural congruence.
 /-- The kernel-insertion prefix before the terminal first-projection functional.
 Source: the pre-unitor section calculation in the rational projective-line triangle
@@ -130,7 +129,6 @@ theorem first_section_tensor_evaluation_postprefix
   simp only [Category.assoc]
   rw [hcancel]
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the native projection and the two canonical direct-image paths.
 /-- The section/projection paste before the terminal unitors.
 Source: the first identity in the rational projective-line triangle proof, with the

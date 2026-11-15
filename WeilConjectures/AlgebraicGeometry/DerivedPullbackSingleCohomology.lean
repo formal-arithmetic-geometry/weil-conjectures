@@ -36,7 +36,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived pullback of a flat sheaf in one degree is ordinary pullback in that degree.
 
 Source: Stacks Project, Tags 06YD and 06YJ; the shifted-single specialization of
-lem-pc-flat-complex-derived-pullback.
+lemma-coherent-base-change-invertible-sheaves--2.
 This is the flat-single step of (blueprint: lem-pc-derived-pullback-single-cohomology).
 
 Proof: the single complex on M in degree n is bounded above by n. Its only nonzero
@@ -98,8 +98,8 @@ private theorem nonempty_derivedPullback_flat_single_iso
 /-- On a locus where a connective derived object has locally free cohomology in one
 nonnegative degree only, derived pullback cohomology is ordinary pullback cohomology.
 
-Source: blueprint lem-pc-perfect-locus, proof, cohomology-sheaf gluing paragraph and
-termwise pullback paragraph; Stacks Project, Tag 0B9S and its perfect-locus input.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof, cohomology-sheaf gluing
+paragraph and termwise pullback paragraph; Stacks Project, Tag 0B9S and its perfect-locus input.
 (blueprint: lem-pc-derived-pullback-single-cohomology).
 
 Proof: let W be the union of the neighbourhoods in the hypothesis. On each such

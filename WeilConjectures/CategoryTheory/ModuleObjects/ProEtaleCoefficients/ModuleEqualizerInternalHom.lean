@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 /-!
 # The equalizer internal hom for the relative monoidal tensor
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
 unit sk-prop-sfb-module-category, definition def-sfb-modobj-internal-hom
 (blueprint: def-sfb-modobj-internal-hom).
 

@@ -19,8 +19,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperL
 Let `ℓ` be a prime and `k` a field of characteristic `p > 0` with `p ≠ ℓ`. For a proper morphism
 `g : Z ⟶ Y` of separated `k`-schemes of finite type, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` is a left adjoint, for each of the `ℓ`-adic coefficient rings
-`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` (blueprints `lem-sfb-dc-proper-pushforward-left-adjoint-oe`,
-`lem-sfb-dc-proper-pushforward-left-adjoint-e`, `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`):
+`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` (blueprints `theorem-exceptional-inverse-image--15`,
+`theorem-exceptional-inverse-image--16`, `theorem-exceptional-inverse-image--17`):
 
 * `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`,
 * `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`, from the case
@@ -53,7 +53,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y) [IsProper g.left]
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`: for a proper morphism
+/-- Blueprint `theorem-exceptional-inverse-image--15`: for a proper morphism
 `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint (SGA 4 XVIII, 3.1.4; SGA 4½,
 [Th. finitude]; Bhatt–Scholze, Section 6.8). -/
@@ -65,7 +65,7 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (fun E' ↦
       isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper' ℓ E' g) E
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`: for a proper morphism
+/-- Blueprint `theorem-exceptional-inverse-image--16`: for a proper morphism
 `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint: invert `ℓ` in the case of `𝒪̲_E`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
@@ -73,7 +73,7 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
   isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj ℓ g E
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`: for a proper morphism
+/-- Blueprint `theorem-exceptional-inverse-image--17`: for a proper morphism
 `g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint: the
 2-colimit of the cases of the finite subextensions `E ⊆ ℚ̄_ℓ`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :

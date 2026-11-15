@@ -19,8 +19,8 @@ the local term along `B` is the integral of a Borel–Moore section `γ` of the 
 restriction of the trace class to `B` is the pushforward of `γ` along the point of `B`
 (`Correspondence.localTerm_traceClass_eq_integral_of_restrict_eq`). This is the formal last step
 of the computation of local terms at an isolated fixed point, both on the curve route (blueprint
-`lem-trf-local-term-locality`, item 3) and for contracting correspondences. The trace class of a
-correspondence vanishes when the pulled back coefficient does
+`corollary-contracting-local-terms-point`, item 3) and for contracting correspondences. The trace
+class of a correspondence vanishes when the pulled back coefficient does
 (`Correspondence.traceClass_eq_zero_of_isZero`).
 
 -/

@@ -462,8 +462,6 @@ private theorem first_reduction_square
   exact ((upperStarFromPoint X).map_comp _ _).symm.trans
     (((upperStarFromPoint X).congr_map hp).trans ((upperStarFromPoint X).map_comp _ _))
 
-set_option maxHeartbeats 1600000 in
--- Specializing the reconstructed coefficient diagrams requires extra definitional checks.
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Ordinary reduction commutes with restriction of the actual embedded coefficient map.
 
@@ -521,8 +519,14 @@ theorem embeddedFirstReductionOrdinary
       integralModelsEmbedded_scalar_square ℓ E π hπ X,
       integralModelsEmbedded_residue_square ℓ E π X,
       integralModelsEmbedded_reduction_square ℓ E π hπ X⟩
-  obtain ⟨i⟩ := smallQuotientComparisonIso X φ q e p
-    (first_reduction_square ℓ E π X) hd.1 hd.2
+  -- Fix the comparison's type before checking its sectionwise hypotheses.
+  have hi : Nonempty (Mod.comap φ ⋙ Mod.extendScalars (q ≫ e) ≅
+      Mod.extendScalars p) := by
+    apply smallQuotientComparisonIso X φ q e p
+    · exact first_reduction_square ℓ E π X
+    · exact hd.1
+    · exact hd.2
+  obtain ⟨i⟩ := hi
   exact ⟨Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (Mod.comap φ) (Mod.extendScalarsComp q e).symm ≪≫ i⟩
 

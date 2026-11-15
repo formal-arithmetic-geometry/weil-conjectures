@@ -55,7 +55,6 @@ variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] {X : Sch
 
 variable [IsSepClosed k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k' ≠ ℓ)]
 
-set_option maxHeartbeats 8000000 in
 -- the averages over `P' ⧸ V` on the concrete slice are large terms
 /-- **The exchange of the slice of the change of trait is the inclusion of the invariants, given
 the cartesian step**: the analogue of
@@ -112,11 +111,10 @@ theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian 
 
 variable [Fact (ringChar k').Prime]
 
-set_option maxHeartbeats 1600000 in
 -- the statement involves the actions of `P' ⧸ V` on the concrete slice trait
 /-- **Nearby cycles of the slice of the change of trait are the `P'`-invariants** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2); SGA 4½,
-[Th. finitude], §3.7; SGA 7, Exp. XIII, §1.3). The geometric slice `M''` of `M` is the slice of
+`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2); SGA
+4½, [Th. finitude], §3.7; SGA 7, Exp. XIII, §1.3). The geometric slice `M''` of `M` is the slice of
 the change of trait `M_T = M ×_S Spec K⟦t⟧` along the section `x` of `𝔸¹_{K⟦t⟧}`
 (`NearbyCyclesModel.geometricSliceTraitChangeHom`). The pro-`p` kernel
 `P' = Gal(Ω_K / Frac K⟦t⟧ · Ω)` of the map of inertia groups (`NearbyCyclesModel.GenericAut`)
@@ -163,15 +161,14 @@ theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom
     (by transport_exact isIso_pullbackExchange_traitSliceGaloisModelHom hM b hb (ℓ := ℓ) hC)
   exact_mod_proofs key
 
-set_option maxHeartbeats 8000000 in
 -- the statement and the averages involve the nearby cycles of the slice
 /-- **The generic-slicing identification of nearby cycles with invariants** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2)): for a model `M`
-over `S = Spec k'⟦t⟧` with a coordinate `b`, a subgroup `V` of finite index of the pro-`p` kernel
-`P'` acts trivially on the nearby cycles `Ψ_{M''} A` of the geometric slice, and the slicing
-exchange `α : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` is a split monomorphism whose idempotent is `1 / [P' : V]`
-times the sum of the actions of representatives of `P' ⧸ V`. It is the composite of the exchange
-of the change of trait, invertible by
+`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2)): for
+a model `M` over `S = Spec k'⟦t⟧` with a coordinate `b`, a subgroup `V` of finite index of the
+pro-`p` kernel `P'` acts trivially on the nearby cycles `Ψ_{M''} A` of the geometric slice, and the
+slicing exchange `α : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` is a split monomorphism whose idempotent is
+`1 / [P' : V]` times the sum of the actions of representatives of `P' ⧸ V`. It is the composite of
+the exchange of the change of trait, invertible by
 `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, and of the
 inclusion of the `P'`-invariants
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`

@@ -90,7 +90,7 @@ private theorem principal_torsor_yoneda_sign_formula
 /-- A globally framed relative torsor is the inverse-section localization pushout;
 its coefficient Yoneda splice is minus the supported localization boundary.
 All identifications are supplied with their cocycle normalization and naturality.
-Source: Stacks Tags 03AJ and 06XU; blueprint lem-pur-divisor-class, clause (a)
+Source: Stacks Tags 03AJ and 06XU; blueprint lemma-cycle-class-cartier-divisor, clause (a)
 (blueprint: lem-pur-principal-torsor-yoneda-sign).
 
 Proof:

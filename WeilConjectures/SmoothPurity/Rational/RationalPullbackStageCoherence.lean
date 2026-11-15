@@ -14,7 +14,7 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Pullback comparisons on the normalized coefficient stages
 
-Source: the common-stage pullback construction in def-weil-derived-pullback-tensor-hom.
+Source: the common-stage pullback construction in prose-03-02.
 -/
 
 @[expose] public noncomputable section

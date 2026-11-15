@@ -14,7 +14,8 @@ import WeilConjectures.CategoryTheory.ResolutionSectionCohomology
 /-!
 # Total cohomology of the Čech resolution double complex
 
-Source: blueprint det-thm-picard-cech, Step 3; Stacks Project Tags 03AW and 03F6.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3; Stacks Project Tags 03AW
+and 03F6.
 -/
 
 @[expose] public section
@@ -33,8 +34,8 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The total Čech complex of an injective resolution computes sheaf cohomology.
 
-Source: blueprint det-thm-picard-cech, Step 3, and lem-sc-cech-spectral, Step 2;
-Stacks Project Tags 03AW and 03F6.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3, and
+lem-sc-cech-spectral, Step 2; Stacks Project Tags 03AW and 03F6.
 Proof: augment every Čech row by I^q(X), using restrictions of sections. The
 sheaf condition identifies degree-zero row cohomology with I^q(X). Since I^q
 is injective, positive row cohomology vanishes by injective Čech acyclicity

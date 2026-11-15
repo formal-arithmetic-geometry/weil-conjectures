@@ -54,7 +54,6 @@ section Square
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 400000 in
 -- unifying objects of the derived categories of module objects is slow
 /-- **The first derived reduction of the integral base change map**: for every commutative square
 and every bounded below `K ∈ D(𝒪_{E,X})`, the reduction `(Lg^* Rf_* K ⟶ Rf'_* Lg'^* K) ⊗ᴸ 𝔽_E` of

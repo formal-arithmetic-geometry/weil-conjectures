@@ -417,7 +417,7 @@ The localized covering families are exactly `J.comap (Over.forget (U i))`: membe
 means that the underlying family covers in `C`, and its generated topology is
 `J.toGrothendieck.over (U i)` (def-pur-localized-ringed-site). The representables
 are explicitly sheafified; subcanonicity is not assumed. The value and point-index
-universe `max u v w` contains both site universes (def-weil-size-convention).
+universe `max u v w` contains both site universes (prose-01-10).
 Every covering presieve has a presentation indexed in `Type (max u v)`, so the
 finite-refinement condition covers arbitrary presentations, including repetitions.
 

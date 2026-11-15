@@ -11,7 +11,7 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Normalized adjunction comparisons across equivalences
 
 Source: Stacks Project, Tags 0B65 and 0DV0; categorical extension used in the blueprint
-`det-nagata-density-normalization-sheaves`, Steps 1–2.
+`lemma-passing-schematic-closure--1`, Steps 1–2.
 (auxiliary; not a blueprint node)
 
 The three statements give the unique normalized comparison, its compatibility with
