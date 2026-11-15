@@ -322,10 +322,13 @@ private theorem closure_index_eq
   · intro K hK P hP hGP
     have := hP.2.1
     -- `IsLocalizingSubcategory` is indexed by the morphism universe `v₁`: restate `hP` with that
-    -- index written out (so that `localizing_large` reads its index off the term), then enlarge
+    -- index written out and enlarge it with `localizing_large` at the index `v₁`, whose
+    -- `LocallySmall` instance is passed explicitly (instance resolution would pick the ambient
+    -- `LocallySmall.{w} C` and fix the index to `w`)
     have hv : IsLocalizingSubcategoryOfSize.{v₁} P :=
       ⟨hP.1, hP.2.1, fun F hF h ↦ hP.2.2 F hF h⟩
-    have hlarge : IsLocalizingSubcategoryOfSize.{u₁} P := localizing_large P hv
+    have hlarge : IsLocalizingSubcategoryOfSize.{u₁} P :=
+      @localizing_large C _ _ _ _ _ _ (locallySmall_self C) P hv
     apply hK P ?_ hGP
     refine ⟨hP.1, hP.2.1, ?_⟩
     intro I A hA h
