@@ -267,8 +267,7 @@ public import WeilConjectures.AlgebraicGeometry.Constant.ConstantCompletionPullb
 /-!
 # Constant coefficients and their sheafwise adic completion
 
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(blueprint: lem-weil-pbc-constant-completion-equivalence).
+Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
 
 Positive exponents are indexed by `n : ℕ`, meaning `n+1`. All localizations below use
 Mathlib's standard derived category. The extra names only specify the canonical objects,

@@ -31,7 +31,7 @@ pulled back along `g'` and followed by the exceptional base change map
 
 This is a property of the definition `smoothOrientation` of
 `WeilConjectures.SmoothPurity.Defs`: the compatibility of smooth purity with base change
-(blueprint `proposition-compatibility-purity-base-change`, `u^*γ_f(K) = γ_{f'}(v^*K)`) at the unit
+(`u^*γ_f(K) = γ_{f'}(v^*K)`) at the unit
 `K = ℚ̄_ℓ,Y`, owed by the smooth purity section. It is proved here as
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation_baseChange`, from smooth base
 change for `Rf^!` and the compatibility of the reduction modulo `ℓ` with proper base change; the

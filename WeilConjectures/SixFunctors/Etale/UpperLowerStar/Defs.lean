@@ -236,8 +236,7 @@ namespace Etale
 through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g` étale
 the Kan extension hypothesis is automatic by
 `Etale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by restriction,
-see `Etale.upperStarIsoOpenImmersionRestriction`
-(blueprint `def-weil-pbc-inverse-image`). -/
+see `Etale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ g) A

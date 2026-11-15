@@ -32,7 +32,7 @@ model with a proper morphism of models to `ℙ¹_S` is determined by that of `�
 
 The invertibility of the proper exchange rests on
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper` (proper base change for nearby
-cycles, blueprint `prose-E-03` (2)).
+cycles).
 
 -/
 

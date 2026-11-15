@@ -208,11 +208,11 @@ supplied for the sheaf categories by the instances of the folder
 compatibility with colimits provided by its `Monoidal` subfolder, and its preadditivity
 by `CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
-One of those instances is still `sorry`ed, so everything below depends on it:
-`AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf` (functorial flat resolutions
-of étale sheaves), discussed in the module docstring of the file that states it. The
-tensor-colimit input is no longer among them: it is now proved, by Day's reflection
-theorem, in `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`.
+The functorial flat resolutions of étale sheaves are
+`AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf`
+(`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`: a flat separator of
+the sheaf category on an essentially small site, from one of `A`), and the tensor-colimit input
+is `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf` (Day's reflection theorem).
 
 The additivity and exactness of `g^*` are `Etale.additive_upperStar`,
 `Etale.preservesFiniteLimits_upperStar` and `Etale.preservesHomology_upperStar` of

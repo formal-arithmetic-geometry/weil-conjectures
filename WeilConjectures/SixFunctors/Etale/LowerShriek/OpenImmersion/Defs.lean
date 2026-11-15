@@ -339,8 +339,7 @@ are left exact: the first by
 the left exactness of sheafification, which is the content of `HasSheafify` beyond the
 `HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
 coefficient category `A`, the second by the instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`.
-(blueprint: `lem-weil-pbc-extension-by-zero-exact`) -/
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =

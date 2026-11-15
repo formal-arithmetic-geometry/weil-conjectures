@@ -25,9 +25,9 @@ with `j` and `i'` open immersions, the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! 
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`) is an
 isomorphism when `p'` is proper, for the coefficient ring `ℚ̲̄_ℓ`
 (`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl`).
-This is the `ℚ̄_ℓ`-coefficient analogue of part (3) of the blueprint
-lemma on interchanging proper direct image and extension by zero, which is formalised for finite
-coefficients as `AlgebraicGeometry.Etale.existsUnique_openImmersionLowerShriekLowerStarExchange`.
+This is the `ℚ̄_ℓ`-coefficient analogue of the interchange of proper direct image and extension by
+zero with finite coefficients,
+`AlgebraicGeometry.Etale.existsUnique_openImmersionLowerShriekLowerStarExchange`.
 
 ## Proof
 
