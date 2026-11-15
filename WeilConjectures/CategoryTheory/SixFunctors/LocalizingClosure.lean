@@ -36,12 +36,8 @@ namespace CategoryTheory
 /-- A property describes a full replete triangulated subcategory closed under
 all direct sums that exist in the ambient category: the sums indexed by a type of the
 universe `v` of the morphisms (set-indexed sums, as in Mathlib's `HasCoproducts.{v}`). It is the
-class
-`CategoryTheory.ObjectProperty.IsLocalizing`
-(`CategoryTheory.isLocalizingSubcategory_iff_isLocalizing`).
-
-Source: blueprint definition-localizing-subcategory, first paragraph
-(blueprint: definition-localizing-subcategory). -/
+class `CategoryTheory.ObjectProperty.IsLocalizing`
+(`CategoryTheory.isLocalizingSubcategory_iff_isLocalizing`). -/
 def IsLocalizingSubcategory {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

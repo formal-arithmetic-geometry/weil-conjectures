@@ -39,11 +39,7 @@ namespace CategoryTheory
 
 /-- A property describes a full replete triangulated subcategory closed under all
 coproducts indexed by types in the universe `w` that exist in the ambient category.
-At `w = v` (the morphism universe) this is `IsLocalizingSubcategory`.
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-first paragraph, sums indexed in the fixed indexing universe
-(blueprint: definition-localizing-subcategory). -/
+At `w = v` (the morphism universe) this is `IsLocalizingSubcategory`. -/
 def IsLocalizingSubcategoryOfSize {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -56,11 +52,7 @@ def IsLocalizingSubcategoryOfSize {C : Type u} [Category.{v, u} C]
 
 /-- The intersection of all full replete triangulated subcategories containing `S` and
 closed under the existing `w`-indexed coproducts. At `w = v` (the morphism universe) this is
-`localizingClosure`.
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-first paragraph, sums indexed in the fixed indexing universe
-(blueprint: definition-localizing-subcategory). -/
+`localizingClosure`. -/
 def localizingClosureOfSize {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
