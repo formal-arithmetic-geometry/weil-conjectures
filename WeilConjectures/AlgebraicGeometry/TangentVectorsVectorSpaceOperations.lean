@@ -12,9 +12,6 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.DualNumberSchemePushout
 
 /-! Additive and scalar operations on dual-number tangent vectors.
-(blueprint: lem-sc-tangent-vectors-operations)
-
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
 
 Proof: construct addition from the unique two-copy gluing and scalar multiplication
 from the coefficient-scaling map. The point and projection identities show closure
@@ -23,7 +20,12 @@ and the three-copy gluing proves associativity. Gluing two scalar multiples of t
 same vector proves the zero and inverse laws and additivity in the scalar. Scaling
 both coordinates of a two-copy gluing proves distributivity over vector addition.
 Functoriality proves the remaining scalar laws. Assemble these into AddCommGroup
-and Module instances; uniqueness gives the addition formula for every gluing. -/
+and Module instances; uniqueness gives the addition formula for every gluing.
+
+## References
+
+* Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
+-/
 
 @[expose] public section
 universe u
@@ -437,20 +439,7 @@ end AlgebraicGeometry.TangentVectorGluing
 namespace AlgebraicGeometry
 
 
-/-- Additive and scalar operations on dual-number tangent vectors.
-(blueprint: lem-sc-tangent-vectors-operations)
-
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
-
-Proof in words: the finite-copy pushout theorem supplies unique gluing. The explicit
-coordinate maps give operations preserving the two required triangles. Exchanging
-two coordinates proves commutativity; grouping the first two or the last two of
-three coordinates proves associativity. The gluing of scale(r,θ) and scale(t,θ)
-is induced by z ↦ (rz,tz), so its sum restriction is scale(r+t,θ). Taking scalars
-0, 1, and -1 proves the zero and inverse laws. Scaling both coordinates of the
-gluing proves scalar distributivity; composition proves multiplicativity and the
-identity scalar law. Finally assemble the structures and use gluing uniqueness to
-verify the specified addition formula for arbitrary compatible Θ. -/
+/-- Additive and scalar operations on dual-number tangent vectors. -/
 theorem tangentVectors_operations
     (k : Type u) [Field k] (X : Scheme.{u})
     (p : X ⟶ Spec (.of k)) (x : X) :

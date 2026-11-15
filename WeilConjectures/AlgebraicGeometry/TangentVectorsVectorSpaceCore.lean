@@ -20,27 +20,18 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-! Core pushout and gluing assertions for dual-number tangent vectors.
-(blueprint: lem-sc-tangent-vectors-core)
 
 Proof in words: apply the dual-number scheme pushout theorem to the two
 coordinate projections, then use the local-ring description of maps from
 spectra to obtain existence and uniqueness of the glued morphism. The
 compatibility with the structure morphism follows by uniqueness after
-mapping to `Spec k`. -/
-/-- Core pushout and gluing assertions for dual-number tangent vectors.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
-(blueprint: lem-sc-tangent-vectors-core)
+mapping to `Spec k`.
 
-Proof in words: specialize `existsUnique_dualNumberScheme_extension` to two
-copies. The equality of the two composites from the residue point follows
-from the common constant-coordinate projection. Existence and uniqueness
-of extensions into every scheme give the pushout universal property.
-Tangent vectors have the same restriction to the residue point, so they
-satisfy the gluing hypothesis. Finally, the two coordinate inclusions
-followed by the structure map of the square-zero algebra give the structure
-map of the dual numbers. The two given over-base equations therefore make
-both restrictions of the glued structure map equal to those of the required
-map; pushout hom-extensionality gives equality. -/
+## References
+
+* Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
+-/
+/-- Core pushout and gluing assertions for dual-number tangent vectors. -/
 theorem tangentVectors_core
     (k : Type u) [Field k] (X : Scheme.{u})
     (p : X ⟶ Spec (.of k)) (x : X) :

@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SfGraphCompositionTailProjection
 import WeilConjectures.AlgebraicGeometry.SfGraphWordProjectionSquare
 
 /-! # Forward projection square for the specified graph compositor
-
-Source: the graph-pasting steps of `LowerShriekComposition.lean`.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -40,15 +37,7 @@ attribute [local implicit_reducible] EtaleGraphPresentation.functor
   derivedTensorRightDerivedLowerShriek
   rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
 
-/-- The specified graph compositor intertwines the forward compactification projections.
-
-(auxiliary; not a blueprint node).
-
-Proof source: paste the graph-model and composition-tail squares, expand the explicit
-factorization of `sfGraphCompactSupportCompIso`, and use functoriality. This is the
-forward square needed before cancelling the three invertible projection maps. The
-statement is strictly the forward half of the inverse-composition theorem and applies
-to arbitrary schemes and unbounded derived objects. -/
+/-- The specified graph compositor intertwines the forward compactification projections.. -/
 theorem sfEtaleCompactProjectionForward_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

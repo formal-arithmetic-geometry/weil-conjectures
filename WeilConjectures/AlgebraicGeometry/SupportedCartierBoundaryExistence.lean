@@ -18,17 +18,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The normalized relative boundary exists and determines its Ext representative.
 proof.md, paragraphs 1--4;
-Stacks 03PL and 0A45 (auxiliary; not a blueprint node).
-
-Proof: Use existence and uniqueness of the integral pole boundary and of the etale
-Cartier reduction from CartierReductionSiteComparison. A boundary witness is also a
-pole-boundary witness: all complements agree as open subsets. Uniqueness identifies
-its extension class with the canonical pole boundary. Reassociation of Yoneda products
-then makes its final equation exactly CartierEtaleReductionSpec. Conversely the pole
-boundary supplies the torsor witnesses for every complement, and the reduction equation
-supplies their final Ext equation. Transport existence and uniqueness through this
-pointwise equivalence. No arbitrary representative is chosen: the pole and reduced
-classes are both uniquely characterized by their specifications. -/
+Stacks 03PL and 0A45. -/
 theorem supported_cartier_boundary_existsUnique (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

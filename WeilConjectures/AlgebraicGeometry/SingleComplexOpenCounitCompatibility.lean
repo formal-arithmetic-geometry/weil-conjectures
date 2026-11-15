@@ -15,8 +15,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Open pullback squares and restricted counits
 
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-t2-open-counit-compatibility).
+## References
+
+* Stacks Project, Tags 08FE, 08HY and 0D5S.
+* Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.
 -/
 
 @[expose] public section
@@ -40,9 +42,7 @@ private theorem counit_square_of_unit
   rw [hn]
   rw [← Category.assoc (L.map u), hp]
 
-/-- The canonical pullback comparison across a commuting square of open inclusions.
-Source: Stacks Project, Tag 0D5S, applied to the constructed open pullback comparisons.
-(blueprint: def-pc-t2-open-pullback-square-iso). -/
+/-- The canonical pullback comparison across a commuting square of open inclusions. -/
 noncomputable def singleComplexOpenPullbackSquareIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -71,22 +71,7 @@ noncomputable def singleComplexOpenPullbackSquareIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The sectionwise direct-image comparison is the mate of the open pullback square.
-Source: Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.
-(blueprint: lem-pc-t2-open-counit-compatibility).
-
-Proof: Compute direct image on a K-injective complex. Open restriction preserves
-K-injectivity, since exact extension by zero is its left adjoint. The underived
-comparison used in singleComplexOpenDirectImageIso is the sectionwise identity
-on inverse-image opens. Under the tensor-pullback adjunction its mate is the
-open pullback comparison: both counit composites evaluate the same restricted
-tensor on sections. Derive this equality using the right-derived factorization
-identities and the left-derived counits defining the composition comparisons.
-The Hom equivalences of the chosen adjunctions are pinned to these same counits
-and right-derived units by exists_schemeDerivedAdjunction. Thus the equality on
-representatives descends to the displayed equality in the derived category.
-This is an identity of natural transformations, including empty opens and zero
-objects; no boundedness assumption is used. -/
+/-- The sectionwise direct-image comparison is the mate of the open pullback square. -/
 theorem singleComplexOpen_counit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

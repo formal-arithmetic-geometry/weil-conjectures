@@ -631,9 +631,7 @@ private lemma chart_opposite (S : Scheme.{u}) (a : Bool) :
       (ProjectiveLine S ↘ S)).isoPullback_hom_fst
 
 /-- The ordinary exchange from a product projection, with its twist endpoint corrected.
-It is defined before, and independently of, any trace or decomposition.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the proper base-change identification
-for either projection (auxiliary; not a blueprint node). -/
+It is defined before, and independently of, any trace or decomposition. -/
 @[irreducible]
 def projectionExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -710,29 +708,7 @@ private theorem chartExchange_aux
   simpa only [projectionExchange, Iso.app_inv, Category.assoc] using h
 
 /-- The chart pushforward is product exchange followed by projective-space exchange.
-Neither side contains a trace, a Chern class, or a splitting family.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the paragraph identifying each projection with
-base change of q (auxiliary; not a blueprint node).
-
-Proof: Let e be the canonical chart PP -> P times_S P, r:PP -> P and q:P -> S.
-The equations e followed by the selected projection equals r, and e followed by
-its opposite equals ProjectiveSpace.map q, are the two equations of isoPullback
-(or its flipped square). Substitute the adjunction-mate formulas for both
-exchanges. Precompose with the invertible product exchange to remove its inverse.
-The two pullback square comparisons paste to the chart comparison. Substituting
-the composite-adjunction counit and naturality moves the chart adjunction unit
-next to its counit; the triangle identity cancels them. The remaining direct-image
-composition and congruence factors are precisely those in the chart map.
-For the twist factors, the root inclusions determine the root comparison uniquely
-because the kernel inclusion is monic. The pure scalar generators determine the
-coefficient comparison, so these comparisons commute with the same pasted square.
-Deriving and then shifting preserves this equality. Finally transport between exact
-termwise and left-derived inverse images using their canonical comparisons; both
-adjunctions are the canonical derived adjunctions. This gives the displayed
-factorization. The argument uses no trace, normalization of a trace, or diagonal
-integral. It applies to both projections, to an empty base and to the zero ring. -/
+Neither side contains a trace, a Chern class, or a splitting family. -/
 theorem chartExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

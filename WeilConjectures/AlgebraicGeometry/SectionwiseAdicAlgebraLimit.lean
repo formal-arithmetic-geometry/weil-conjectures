@@ -18,7 +18,9 @@ import WeilConjectures.RingTheory.LimitFlatModules
 
 /-! # Sectionwise adic algebra limits
 
-Source: Stacks Project, sites-modules.tex, Tags 093M and 0912 (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, sites-modules.tex, Tags 093M and 0912.
 -/
 
 @[expose] public noncomputable section
@@ -31,10 +33,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Evaluate a constant-ring algebra sheaf as an algebra over the original ring.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). The scalar map is the
-constant-presheaf
-sheafification unit followed by the structural map; no algebra action is chosen. -/
+/-- Evaluate a constant-ring algebra sheaf as an algebra over the original ring. -/
 def adicAlgebraSections {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] (U : Cᵒᵖ) :
     Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)) ⥤ CommAlgCat.{u} A :=
@@ -42,41 +41,35 @@ def adicAlgebraSections {C : Type u} [SmallCategory C] (J : GrothendieckTopology
     Under.map ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app U) ⋙
     (commAlgCatEquivUnder (CommRingCat.of A)).inverse
 
-/-- The algebra of sections of the n+1 term of the given tower.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+/-- The algebra of sections of the n+1 term of the given tower. -/
 abbrev adicTerm {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
     (n : ℕ) (U : Cᵒᵖ) : CommAlgCat.{u} A :=
   (adicAlgebraSections J A U).obj (S.obj (op n))
 
-/-- Sections of the ring-sheaf limit with their induced A-algebra structure.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+/-- Sections of the ring-sheaf limit with their induced A-algebra structure. -/
 abbrev adicLimit {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
     (U : Cᵒᵖ) : CommAlgCat.{u} A :=
   (adicAlgebraSections J A U).obj (limit S)
 
-/-- The transition on algebras of sections.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+/-- The transition on algebras of sections. -/
 def adicTransition {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
     (m n : ℕ) (h : n ≤ m) (U : Cᵒᵖ) : adicTerm J A S m U →ₐ[A] adicTerm J A S n U :=
   ((adicAlgebraSections J A U).map (S.map (homOfLE h).op)).hom
 
-/-- The original limit projection on algebras of sections.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+/-- The original limit projection on algebras of sections. -/
 def adicProjection {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
     (n : ℕ) (U : Cᵒᵖ) : adicLimit J A S U →ₐ[A] adicTerm J A S n U :=
   ((adicAlgebraSections J A U).map (limit.π S (op n))).hom
 
-/-- Canonical comparison into the product of sectionwise tensor products.
-Source: Stacks Project, Tag 0912 (auxiliary; not a blueprint node). Its image will be exactly the
-compatible families. -/
+/-- Canonical comparison into the product of sectionwise tensor products. -/
 def adicTensorComparison {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
@@ -85,9 +78,7 @@ def adicTensorComparison {C : Type u} [SmallCategory C] (J : GrothendieckTopolog
       (∀ n : ℕ, TensorProduct A (adicTerm J A S n U) F) :=
   LinearMap.pi (fun n ↦ (adicProjection J A S n U).toLinearMap.rTensor F)
 
-/-- A constant-ring algebra sheaf regarded as a module over the constant ring sheaf.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). This is restriction of scalars
-of the unit. -/
+/-- A constant-ring algebra sheaf regarded as a module over the constant ring sheaf. -/
 abbrev adicUnderlyingModule {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (B : Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A))) :=
@@ -525,29 +516,7 @@ private theorem adicModuleFactor {C : Type u} [SmallCategory C]
     exact h.trans (hg U b).symm
 
 /-- Flatness, finite tensor comparisons and canonical quotient projections for an adic
-algebra-sheaf tower. Positive exponents are indexed by n : ℕ, meaning n+1.
-Source: Stacks Project, sites-modules.tex, Tag 093M, generalized algebra-tower argument;
-more-algebra.tex, Tag 0912 (auxiliary; not a blueprint node).
-
-Proof:
-1. Evaluate the sheaf limit on U. Apply `ModuleCat.limit_flat_of_flat_quotients` to
-   the section module tower, using the quotient scalar towers, flatness and surjectivity.
-   Swap the two tensor factors to obtain the stated projection formula. On pure tensors
-   restrictions and maps of finite modules commute with every projection.
-2. Regard the limit as a module over the constant presheaf A. Sectionwise flat tensoring
-   preserves kernels and finite products (including the empty product), hence finite
-   limits. Apply `PresheafOfModules.isFlat_sheafification_obj` to obtain flatness over
-   the constant ring sheaf. This does not require enough points or flatness over R(U).
-3. Apply the finite tensor comparison to A/I^(n+1). The reduction hypotheses identify
-   the target with the eventually constant system S_min(m,n), whose limit is S_n.
-   The quotient-tensor equivalence sends b tensor a to the class of ab, so the resulting
-   ring isomorphism is induced by the original projection.
-4. Since A is Noetherian, I^(n+1) has finitely many generators. The cokernel of their
-   action has presheaf sections B(U)/I^(n+1)B(U). The sectionwise quotient is already
-   the sheaf S_n, so sheafification identifies this with the sheaf-module cokernel.
-5. The quotient isomorphisms commute with every transition: both composites on a
-   representative b give its n-th projection. Identity and composite transitions follow
-   from the strict functor laws. -/
+algebra-sheaf tower. Positive exponents are indexed by n : ℕ, meaning n+1. -/
 theorem sectionwise_adic_algebra_limit
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)

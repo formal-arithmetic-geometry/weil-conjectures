@@ -28,8 +28,9 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 
 /-! # Self-duality of endomorphisms of the ring complex
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, sites-cohomology.tex, Section 0A8X.
 -/
 
 @[expose] public section
@@ -92,21 +93,7 @@ private theorem rankOneEndomorphismSelfDual
   rw [← Category.assoc h _ b, ← he]
   simp [b]
 
-/-- An endomorphism of the ring complex is its own dual under evaluation at one.
-
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X (internal Hom complexes),
-and sites-modules.tex, internal Hom evaluated on the rank-one ring module.
-(auxiliary; not a blueprint node).
-
-Proof: a linear endomorphism of the ring module is multiplication by its value
-at one. Two such multiplication maps commute over a commutative ring, so
-precomposition by an endomorphism, followed by evaluation at one, is the same
-as evaluation at one followed by that endomorphism. Transport this identity
-along the degree-zero isomorphism of the single complex, using naturality of
-evaluation. Project the Hom-complex map onto its source degree zero factor.
-The projection formula gives the desired identity in degree zero. In every
-other degree its target is a zero object, so the two morphisms agree. This
-also applies to zero rings and empty sites. -/
+/-- An endomorphism of the ring complex is its own dual under evaluation at one. -/
 theorem ringComplexEndomorphism_selfDual
     {C : Type v} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{v})

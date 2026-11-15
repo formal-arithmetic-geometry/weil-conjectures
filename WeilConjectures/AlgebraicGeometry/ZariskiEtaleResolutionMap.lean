@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionHomologyIndepende
 
 /-! # Resolution representation of canonical cohomology comparison
 
-Source: Stacks Project, Tags 072W and 0733(1).
-(blueprint: lem-weil-pbc-zariski-etale-resolution-map)
+## References
+
+* Stacks Project, Tags 072W and 0733(1).
 -/
 
 @[expose] public section

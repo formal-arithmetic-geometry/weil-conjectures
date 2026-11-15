@@ -17,10 +17,6 @@ import Mathlib.RingTheory.TensorProduct.Pi
 
 /-!
 # Localization of a reduced tensor-product decomposition
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, step 9.
-(blueprint: lem-weil-pbc-reduced-product-localization)
 -/
 
 @[expose] public section

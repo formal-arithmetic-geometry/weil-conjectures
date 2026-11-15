@@ -18,9 +18,13 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 /-!
 # Strict-henselization stalk formula
 
-Source: the blueprint of the Weil conjectures, chapter
-`chap-Cohomology-of-torsion-sheaves-on-curves`, node
-`prop-weil-pbc-strict-henselization-stalk-formula` (Stacks Project, Tag 03Q9).
+## References
+
+* Stacks Project, Tag 03Q9. The proof uses the sheafified higher-direct-image formula, geometric
+  stalks and their sheafification invariance, cofinal affine pointed neighborhoods, the
+  strict-henselization limit and fibre-product limit, and étale cohomology continuity. For the
+  derived clause it uses the bounded-below injective representative and the general continuity
+  comparison.
 -/
 
 @[expose] public section
@@ -47,14 +51,6 @@ this is stated degreewise: in every degree `n` the canonical map
 commuted with cohomology, the derived base-change mate `g⁻¹ Rf_* ⟶ Rf'_* p⁻¹`, and the exact
 global sections and Leray isomorphism `strictHenselizationLerayHomologyIso`, i.e. the
 construction of `strictHenselizationCohomologyComparison` applied to `K`) is an isomorphism.
-
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images
-(blueprint: prop-weil-pbc-strict-henselization-stalk-formula).
-The proof uses the sheafified higher-direct-image formula, geometric stalks and their
-sheafification invariance, cofinal affine pointed neighborhoods, the strict-henselization
-limit and fibre-product limit, and étale cohomology continuity. For the derived clause it
-uses the bounded-below injective representative and the general continuity comparison;
-the restriction maps induce the canonical comparison on cohomology in every degree.
 -/
 theorem strictHenselizationStalkFormula
     {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]

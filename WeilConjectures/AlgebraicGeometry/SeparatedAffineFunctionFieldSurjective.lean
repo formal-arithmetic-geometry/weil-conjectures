@@ -19,8 +19,9 @@ import WeilConjectures.RingTheory.LocalDomainDimOnePrincipalLocalization
 /-!
 # Separated affine and local charts surject onto the function field
 
-Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NB,
-proof, separatedness paragraph (blueprint: lem-sc-separated-affine-function-field-surjective)
+## References
+
+* Stacks Project, Varieties Lemma 09NB, proof, separatedness paragraph.
 -/
 
 @[expose] public section

@@ -14,6 +14,15 @@ import WeilConjectures.AlgebraicGeometry.KFlatSingleTensorRepresentative
 import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorComplexProjection
 import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
 
+/-!
+## References
+
+* Stacks Project, Tags 06YH, 08KS, 01CB and 0098. Proof: compute the derived tensor square using P
+  tensor B[0], identify this complex with the termwise pushforward of tensorPullback(i)(P), apply
+  homology, and use exact closed-immersion module pushforward to commute homology with it. The
+  localization/homology comparison identifies the actual displayed objects.
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -23,12 +32,6 @@ namespace AlgebraicGeometry
 /--
 The K-flat tensor representative and ordinary closed-immersion projection
 comparison give an invertible arrow between the displayed homology objects.
-Source: Stacks Project, Tags 06YH, 08KS, 01CB and 0098.
-Proof: compute the derived tensor square using P tensor B[0], identify this
-complex with the termwise pushforward of tensorPullback(i)(P), apply homology,
-and use exact closed-immersion module pushforward to commute homology with it.
-The localization/homology comparison identifies the actual displayed objects.
-(blueprint: lem-pc-self-tor-projection-homology-termwise-arrow)
 -/
 theorem exists_selfTor_projection_homology_termwise_arrow
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
@@ -66,7 +69,6 @@ This is the derived projection-formula computation followed by comparison with t
 specified K-flat resolution and exact closed-immersion pushforward.  It is separated
 from representative transport so that an arbitrary isomorphic complex can be handled
 functorially in the parent theorem.
-(blueprint: lem-pc-self-tor-projection-homology-termwise).
 -/
 theorem nonempty_selfTor_projection_homology_termwise
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)

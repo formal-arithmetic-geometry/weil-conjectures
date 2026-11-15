@@ -11,8 +11,10 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 
 /-! # The explicit Ext-to-resolution-sections comparison
 
-Source: Stacks Project, Tag 06XR and evaluation at 1 in the constant integer sheaf.
-(blueprint: def-weil-pbc-ext-resolution-sections-iso)
+## References
+
+* Stacks Project, Tag 06XR and evaluation at 1 in the constant integer sheaf.
+* Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
 -/
 
 @[expose] public section
@@ -65,8 +67,6 @@ noncomputable def classSectionsIso (X : Scheme.{u})
     (HomologicalComplex.homologyFunctor _ _ n).mapIso (complexSectionsIso X K)
 
 /-- The canonical comparison of Ext cohomology with sections of the chosen resolution.
-Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
-(blueprint: def-weil-pbc-ext-resolution-sections-iso)
 
 The Ext/resolution equivalence sends an Ext class to its cocycle in the chosen resolution.
 Evaluation at 1 identifies Hom from the constant integer sheaf with global sections in

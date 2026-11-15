@@ -20,6 +20,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 This module records the reindexed system coming from the affine pointed
 neighbourhoods of the geometric generic point.  The index, diagram, and maps are
 required to be the canonical ones, rather than arbitrary affine étale systems.
+
+## References
+
+* Stacks Project, Tags 04HX and 0032.
 -/
 
 @[expose] public section
@@ -38,10 +42,6 @@ noncomputable section
 /-- The canonical affine pointed-neighbourhood system, reindexed by a directed
 poset.  The displayed equations identify every field with the corresponding
 canonical map in the strict-henselization diagram.
-
-Source: Stacks Project, Tags 04HX and 0032; the library declarations
-`strictHenselizationAffineProperties` and `exists_directed_reindexing`.
-(blueprint: new-lem-pd-separable-generic-affine-etale-stages)
 
 The proof first applies the directed-reindexing theorem to the opposite of the
 small affine pointed-neighbourhood category.  It then transports the affine

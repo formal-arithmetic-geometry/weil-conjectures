@@ -14,9 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Sectionwise gluing for a split cover
 
-Source: Stacks Project, etale-cohomology.tex, proof of Lemma 095B,
-and sites.tex, Definition 00VM
-(blueprint: lem-weil-pbc-split-cover-sections-limit).
+## References
+
+* Stacks Project, etale-cohomology.tex, proof of Lemma 095B, and sites.tex, Definition 00VM.
+* Stacks Project, etale-cohomology.tex, proof of Lemma 095B, lines 9982--9991, and sites.tex,
+  Definition 00VM.
 -/
 
 @[expose] public section

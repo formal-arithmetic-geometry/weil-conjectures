@@ -9,9 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentOperator
 
 /-! # Composition of explicit attachment operators
 
-Source: Stacks Project, Tag 0DAV (lemma-hypercovering-object), construction of the
-extension and the final simplicial composition check; Tag 0DAU (lemma-split).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0DAV, construction of the extension and the final simplicial composition
+  check; Tag 0DAU (lemma-split).
 -/
 
 @[expose] public section
@@ -32,25 +33,7 @@ private theorem transport_attachment_equality
     eqToHom hs ≫ f ≫ eqToHom hq.symm =
       eqToHom hs ≫ g ≫ eqToHom hq.symm := by rw [h]
 
-/-- The explicitly constructed attachment operators compose contravariantly.
-Source: Stacks Project, Tag 0DAV, final paragraph of lemma-hypercovering-object;
-expanded by steps 3 and 4 of lem-weil-pbc-site-hypercover-finite-extension.
-(auxiliary; not a blueprint node).
-
-Proof: Work in normalized coordinates in the old degrees. An old summand has label
-`(r,σ,i)` and normalization component `e_(σ,i)`. Factor the composite of an ordinal
-operator and `σ` uniquely into its image epimorphism `ρ` and inclusion `τ`. On a new
-summand use the prescribed compatible cone `p` for the proper image inclusion; on
-an old summand use the old functor. Normalize the resulting old index and compose
-its label with `ρ`. This describes `attachmentMap` in all four old/top cases.
-For two successive operators, factor the second one through the image of the first.
-Both routes have the same image inclusion and concatenated epimorphism. Functoriality
-of `K`, or naturality of `p` on a new summand, identifies their unnormalized maps.
-The intervening component isomorphism and its inverse cancel, and the bijectivity
-of old label normalization identifies their indices. The full-image top case is the
-identity endomorphism and requires no factorization. Morphism extensionality of
-formal coproducts then proves the equality. This works without finite limits,
-finiteness assumptions, or a matching universal property. -/
+/-- The explicitly constructed attachment operators compose contravariantly. -/
 theorem attachmentMap_comp
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D) (p : BoundaryCone K V)

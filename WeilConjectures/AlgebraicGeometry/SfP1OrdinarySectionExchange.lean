@@ -9,9 +9,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryProperUnitInverseExchange
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
 
 /-! # Ordinary diagonal section exchange
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, exchange of the two
-successive constant-object units (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -34,18 +31,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   rightDerivedLowerShriekIsoRightDerivedLowerStar derivedTensorUnit
 
 /-- The ordinary diagonal and projection units paste compatibly with inverse
-proper exchange. Source: blueprint thm-amb-p1-adjunction.proof.md, the equation
-`M = Rp2_* Delta_* M` and substitution of exchange counits
-(auxiliary; not a blueprint node).
-
-Proof: inverse constant-object base change for the diagonal replaces its unit,
-the inverse coefficient comparison and inverse exchange by the self-product
-coefficient inverse followed by pullback of the diagonal unit. Naturality of
-projection exchange moves that pulled-back diagonal unit to the right. Inverse
-constant-object base change for the projection replaces the remaining three
-arrows by the coefficient inverse and pullback of the projection unit. Functoriality
-then joins the two pulled-back units, which define projectiveLineDiagonalAlpha.
-The calculation works for both projections and also for the empty base. -/
+proper exchange. -/
 theorem ordinarySection_exchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

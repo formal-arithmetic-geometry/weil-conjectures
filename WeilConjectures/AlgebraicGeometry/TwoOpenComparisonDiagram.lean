@@ -12,8 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Coherent comparison data for two open restrictions
 
-Source: Stacks Project, Tags 08BV and 08DW.
-(blueprint: def-pc-two-open-comparison-diagram).
+## References
+
+* Stacks Project, Tags 08BV and 08DW.
+* Stacks Project, Tags 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A pullback comparison diagram for two restrictions and their intersection.
 All fields are actual functors, natural isomorphisms, or equations. In particular,
-the two coherence equations concern functors, independently of any gluing object.
-Source: Stacks Project, Tags 08BV and 08DW, restriction of derived pullback.
-(blueprint: def-pc-two-open-comparison-diagram). -/
+the two coherence equations concern functors, independently of any gluing object. -/
 structure TwoOpenComparisonDiagram
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -78,9 +78,7 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
 
 /-- The two-open comparison diagram with its scheme and localized-site functors fixed.
 The structure keeps the large exact-functor expressions behind one projection; no
-comparison data is chosen in the definition.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: def-pc-two-open-comparison-diagram). -/
+comparison data is chosen in the definition. -/
 structure SchemeTwoOpenComparisonDiagram
     (X Y : Scheme.{u}) (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
     [∀ Z : Scheme.{u},

@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.FinCategory.Basic
 /-!
 # Matching schemes and one-member semi-representable families
 
-Source: Stacks Project, Hypercoverings, Tags 01G2, 01G3, 01G5; Simplicial Methods,
-Tag 0186 (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Hypercoverings, Tags 01G2, 01G3, 01G5; Simplicial Methods, Tag 0186.
 -/
 
 @[expose] public section
@@ -246,9 +247,6 @@ terms are étale over `X`. The cones below are limiting after forgetting to `Ove
 universality is tested on all schemes over `X`, rather than only the étale ones. The empty
 proper-face diagram in degree zero has the specified vertex `id_X` and its unique matching
 map is the augmentation.
-
-Source: Stacks, Tags 01G2, 01G3, 01G5, 0186
-(auxiliary; not a blueprint node).
 
 Proof, following the six steps of the node:
 1. The small étale category has terminal object `id_X` and scheme-theoretic pullbacks

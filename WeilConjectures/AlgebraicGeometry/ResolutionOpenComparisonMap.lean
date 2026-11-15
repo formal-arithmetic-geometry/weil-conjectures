@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # The fixed untwisted comparison
 
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: def-pc-resolution-open-comparison-map). -/
+## References
+
+* Stacks Project, Tags 01E1 and 01E4.
+-/
 
 @[expose] public section
 universe u
@@ -24,9 +26,7 @@ attribute [local instance] enoughInjectives
 noncomputable section
 
 /-- The comparison is composed from the actual section isomorphism and resolution
-isomorphism; no witness of an unproved existence theorem is chosen.
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: def-pc-resolution-open-comparison-map). -/
+isomorphism; no witness of an unproved existence theorem is chosen. -/
 def resolutionOpenComparison {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)
     (W : T.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ W)) :

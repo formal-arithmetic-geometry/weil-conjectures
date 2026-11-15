@@ -10,8 +10,6 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.Additive
 
 /-! # Semilinear transport of ordinary tensor complexes
-
-Source: Mathlib `TensorProduct.congr` and `HomologicalComplex.Hom.isoOfComponents`.
 -/
 
 @[expose] public section
@@ -25,19 +23,7 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 
 /-- Compatible ring equivalences and a semilinear chain isomorphism induce an
-additive isomorphism of scalar-extended complexes.
-
-Proof: view eC as an eA-semilinear equivalence after restricting scalars along
-f0 and f1. In each degree alpha is also an eA-semilinear equivalence. Apply
-TensorProduct.congr to these two equivalences. On pure tensors the resulting
-map is eC(c) tensor alpha(q). The chain identity for alpha proves compatibility
-with differentials on pure tensors, and tensor induction proves it everywhere.
-The inverse is the tensor of the inverse equivalences; TensorProduct.congr
-already verifies its inverse equations. No flatness or nonzero-ring assumption
-is used.
-Source: Mathlib `TensorProduct.congr`, `ModuleCat.ExtendScalars.map_tmul`, and
-`HomologicalComplex.Hom.isoOfComponents`.
-(blueprint: lem-pc-semilinear-tensor-complex-iso). -/
+additive isomorphism of scalar-extended complexes. -/
 theorem exists_semilinearTensorComplexIso
     {A₀ A₁ C₀ C₁ : Type u}
     [CommRing A₀] [CommRing A₁] [CommRing C₀] [CommRing C₁]

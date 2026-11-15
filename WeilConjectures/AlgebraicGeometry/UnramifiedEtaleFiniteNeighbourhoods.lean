@@ -18,6 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
 # Finite unramified neighbourhoods after étale localization
 
 The first construction in Stacks Project, Tag 04HI, using Tags 02LM, 02G6 and 02GA.
+
+## References
+
+* Stacks Project, Tag 04HH, used by Tag 04HI; Tag 02LM and Tags 02G6, 02GA.
 -/
 
 @[expose] public section

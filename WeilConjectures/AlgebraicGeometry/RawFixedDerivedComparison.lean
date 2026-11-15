@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.RawRestrictedDerivedComparison
 
 /-! # Fixed-coefficient raw evaluation on an etale chart
 
-Source: Stacks Project, Tags 03Q8, 072W and 0GIT.
+## References
+
+* Stacks Project, Tags 03Q8, 072W and 0GIT.
 -/
 
 @[expose] public section
@@ -24,9 +26,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] upperStar
 
 /-- Evaluate a raw class and identify its coefficient with pullback from the fixed base.
-Every factor is the canonical evaluation or inverse-image composition comparison.
-Source: Stacks Project, Tags 03Q8 and 0GIT.
-(blueprint: def-sc-raw-fixed-derived-comparison). -/
+Every factor is the canonical evaluation or inverse-image composition comparison. -/
 noncomputable def rawFixedDerivedComparison {B T Y : Scheme.{u}}
     (h : Y ⟶ B) (g : Y ⟶ T)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))

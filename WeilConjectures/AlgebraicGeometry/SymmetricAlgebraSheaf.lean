@@ -167,9 +167,7 @@ theorem coequifibered_toSymPresheaf [F.IsQuasicoherent] :
   rw [Algebra.algebraMapSubmonoid, Submonoid.map_powers] at H
   exact H
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-The relative spectrum `Spec_X (Sym^• ℰ)` of the symmetric algebra of a quasi-coherent sheaf,
+/-- The relative spectrum `Spec_X (Sym^• ℰ)` of the symmetric algebra of a quasi-coherent sheaf,
 glued from the affine schemes `Spec (Sym_{Γ(X, U)} Γ(ℰ, U))` over the affine opens `U`. -/
 noncomputable def symSpec [F.IsQuasicoherent] : Scheme.{u} :=
   (AffineZariskiSite.relativeGluingData F.coequifibered_toSymPresheaf).glued
@@ -215,9 +213,7 @@ instance :
     (MorphismProperty.isomorphisms.iff _).mpr
       (by rw [NatTrans.id_app, Spec.map_id]; infer_instance)
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-The *zero section* `X ⟶ Spec_X (Sym^• ℰ)`, defined by the augmentation `Sym^• ℰ ⟶ 𝒪_X`. -/
+/-- The *zero section* `X ⟶ Spec_X (Sym^• ℰ)`, defined by the augmentation `Sym^• ℰ ⟶ 𝒪_X`. -/
 noncomputable def symSpecZeroSection [F.IsQuasicoherent] : X ⟶ F.symSpec :=
   inv (AffineZariskiSite.relativeGluingData (coequifibered_id_restrict (X := X))).toBase ≫
     AffineZariskiSite.relativeGluingMap F.coequifibered_toSymPresheaf coequifibered_id_restrict

@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearDerivedCalculus
 
 /-! # Ordinary geometric operations on semilinear systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 079P and 07A4
-(auxiliary; not a blueprint node).
+## References
+
+* Zheng Construction 4.1 and Lemma 4.10; Stacks 079P and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -43,9 +44,7 @@ variable (A : Data.{c, v, r} J B τ)
 /-- The geometric operations on actual semilinear system categories.
 Coefficient inverse images retain the dependency's algebraic operation equations.
 Both direct images are total right derived functors of the specified ordinary
-right adjoints; none is an arbitrary functor between parameter categories.
-Source: Zheng 4.1 and 4.10; Stacks 079P, 07A4
-(auxiliary; not a blueprint node). -/
+right adjoints; none is an arbitrary functor between parameter categories. -/
 structure GeometryBase where
   /-- The inverse-image coefficient sheaves C_n. -/
   coefficients : ℕ → Sheaf J' CommRingCat.{max c v r}

@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleRingedToposDerivedComparison
 
 /-! # Section localization of right tensor with a degree-zero coefficient
 
-(auxiliary; not a blueprint node)
+## References
+
+* the naturality clause of ordinary_monoidal, Stacks 03EK.
+* Stacks 06YN, 06YU.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -48,9 +51,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)] in
-/-- Naturality of the specified ordinary section tensor comparison.
-Source: the naturality clause of ordinary_monoidal, Stacks 03EK.
-(auxiliary; not a blueprint node). -/
+/-- Naturality of the specified ordinary section tensor comparison. -/
 theorem section_tensor_comparison_naturality (T : Scheme.{u})
     (M M' N N' : Modules Λ T) (f : M ⟶ M') (g : N ⟶ N') :
     (ModuleRingedComparison.equivalence Λ T).functor.map (f ⊗ₘ g) ≫
@@ -60,9 +61,7 @@ theorem section_tensor_comparison_naturality (T : Scheme.{u})
           (ModuleRingedComparison.equivalence Λ T).functor.map g) :=
   (ModuleRingedComparison.ordinary_monoidal Λ T).1 M M' N N' f g
 
-/-- The ordinary section tensor comparison with a fixed right coefficient.
-Source: Stacks 03EK; fixed section equivalence tensor normalization.
-(auxiliary; not a blueprint node). -/
+/-- The ordinary section tensor comparison with a fixed right coefficient. -/
 def sectionTensorRightComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     tensorRight (B₀ a T) ⋙ (ModuleRingedComparison.equivalence Λ T).functor ≅
       (ModuleRingedComparison.equivalence Λ T).functor ⋙
@@ -78,9 +77,7 @@ def sectionTensorRightComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) 
   rw [CategoryTheory.Functor.map_id, tensorHom_id, tensorHom_id] at h
   exact h
 
-/-- The fixed localization and ordinary right-tensor comparison.
-Source: Stacks 06YN, 06YU; localization of the degreewise tensor comparison.
-(auxiliary; not a blueprint node). -/
+/-- The fixed localization and ordinary right-tensor comparison. -/
 def sectionTensorRightLocalization (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     (ModuleRingedComparison.derivedEquivalence Λ T).functor.obj
@@ -254,19 +251,7 @@ private theorem computationPasteMapped
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
   [IsCommMonObj Λ'] in
 /-- The tensor localization comparison commutes with putting the right coefficient
-in degree zero. Source: Stacks 06YN and 06YU; representative clause of
-lem-pd-section-derived-tensor-normalization.
-(auxiliary; not a blueprint node).
-
-Proof: apply the representative equation for qTensor to P and the degree-zero
-complex of B₀. Naturality moves the canonical map-complex/single comparison
-through qTensor. Cancel the two section localization isomorphisms. The remaining
-ordinary square compares the total tensor with a single factor to degreewise
-right tensor. Precompose in each degree with each direct-sum summand injection.
-All summands outside right degree zero vanish; in degree zero both maps are
-exactly the ordinary tensor comparison. The coproduct universal property proves
-the square. Localize it and combine the two localization factors. This argument
-works for all unbounded complexes, with no flatness assumption. -/
+in degree zero. -/
 theorem section_tensor_right_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     (ModuleRingedComparison.tensorComparison Λ T).hom.app (DerivedCategory.Q.obj P, B a T) ≫

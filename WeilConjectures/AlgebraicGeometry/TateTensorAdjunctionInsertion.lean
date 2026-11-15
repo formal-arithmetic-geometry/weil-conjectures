@@ -17,11 +17,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorAdjunctionInsertio
 import WeilConjectures.Tactic.TransportExact
 
 /-! # Tensor of normalized scalar-adjunction insertions
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
-(blueprint: lem-pur-tate-tensor-adjunction-insertion)
 -/
 
 @[expose] public noncomputable section
@@ -109,36 +104,7 @@ private theorem scalarAdjointInsertion_eq_adjointInsertion
 -- derived tensor structures and runs out of memory.
 /-- Tensoring the two normalized scalar insertions agrees with inserting their ordinary
 semilinear tensor product, under the published scalar tensorator and flat-single comparisons.
-The ordinary restriction tensorator is `Functor.LaxMonoidal.μ` of exact scalar restriction.
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
-(blueprint: lem-pur-tate-tensor-adjunction-insertion)
-
-Proof:
-1. The tensor of the two flat source sheaves is flat by exactness of successive tensoring.
-Scalar extension of a flat sheaf is flat: restriction identifies tensoring with its extension
-with ordinary tensoring by that sheaf. Restriction preserves and reflects exactness. This
-uses the sheaf tensor balancing relations and the exact restriction in
-`lem-pur-sheaf-ring-derived-coefficient-adjunction`; no flatness of the ring map is needed.
-2. For each source sheaf and their tensor, use its flat single as a K-flat representative
-(`lem-sf-etale-single-flat-tensor`). The normalized coefficient adjunction identifies its
-insertion with the canonical scalar representative followed by the single of the ordinary
-adjunct, sending x tensor b to b times eta(x). The inverse exact-single comparison in
-`def-sp-exact-degree-zero-adjoint-interface` is precisely the one in this calculation.
-3. The representative square of `def-pur-exceptional-coefficient-normalizations` identifies
-the published tensorIso with balancing (x tensor y) tensor b mapped to
-(x tensor 1) tensor (y tensor b). Apply
-`lem-pur-etale-single-tensorator-naturality` to the two ordinary adjuncts and cancel the
-canonical representative isomorphisms. The desired equation reduces to equality of the
-ordinary balanced tensor maps. All complexes are in degree zero, so no shift sign occurs.
-4. The left ordinary composite sends (x tensor y) tensor b to
-eta1(x) tensor b eta2(y), equal to b times (eta1(x) tensor eta2(y)), the right composite.
-The formulas are balanced and commute with restriction. The presheaf tensor universal
-property and then sheafification prove equality of sheaf maps. This uses
-`def-pur-sheaf-tensor-product`, without any assertion about generation of global sections.
-Apply the single functor and the representative square to obtain the displayed equality. -/
+The ordinary restriction tensorator is `Functor.LaxMonoidal.μ` of exact scalar restriction. -/
 theorem tateTensor_scalarAdjointInsertion
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u})

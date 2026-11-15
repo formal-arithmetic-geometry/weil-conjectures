@@ -15,15 +15,16 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Quasi-coherence and restriction of scalars
 
-Source: Stacks Project, Morphisms, Lemma 0H88; EGA I, Proposition 9.6.1
-(blueprint: lem-weil-pbc-quasi-coherence-scalar-restriction).
-
 The quasi-coherent `𝒪_S`-algebra is the shared form `A : S.CommAlgebraSheaf`
 (`= Under S.sheaf`, def-weil-pbc-comm-algebra-sheaf) with `A.toModule.IsQuasicoherent`;
 `A`-modules are `SheafOfModules` over
 `(sheafCompose _ (forget₂ CommRingCat RingCat)).obj A.right` and their underlying
 `𝒪_S`-modules are obtained by scalar restriction along `A.hom`, as in
 `lem-weil-pbc-quasi-coherent-algebra-change-of-rings`.
+
+## References
+
+* Stacks Project, Morphisms, Lemma 0H88; EGA I, Proposition 9.6.1.
 -/
 
 @[expose] public section
@@ -136,9 +137,6 @@ requires its underlying module `A.toModule` to be quasi-coherent. Mathlib's
 `IsQuasicoherent` is the local
 presentation by arbitrary direct sums of copies of the ring sheaf (Stacks 01BE),
 equivalent on schemes to the affine-local tilde condition of `pqf-def-coherent` (01IA).
-
-Source: Stacks Project, Morphisms, Lemma 0H88; EGA I, Proposition 9.6.1
-(blueprint: lem-weil-pbc-quasi-coherence-scalar-restriction).
 
 Proof, following the six steps of the node:
 1. Forgetting algebra scalars preserves direct sums and exact sequences, since both

@@ -10,10 +10,10 @@ import all WeilConjectures.Algebra.Homology.RingHomExtensionTransport
 
 /-! # The scalar-extension chain map induced by a semilinear chain map
 
-Source: Stacks Project, Tag 099D(c); Modules on Sites, Tag 03EK.
-All data are constructed by the extension/restriction adjunction, rather than chosen
-from an existence assertion.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 099D(c); Modules on Sites, Tag 03EK. All data are constructed by the
+  extension/restriction adjunction, rather than chosen from an existence assertion.
 -/
 
 @[expose] public section
@@ -69,9 +69,7 @@ def ringComplexExtensionPresheaf {A B : CommRingCat.{u}} (φ : A →+* B) :
     intro U
     simp
 
-/-- Termwise scalar extension on the one-object ring site, with its actual morphisms.
-Source: Stacks Project, Tags 099D(c), 03EK.
-(auxiliary; not a blueprint node). -/
+/-- Termwise scalar extension on the one-object ring site, with its actual morphisms. -/
 def ringComplexExtension {A B : CommRingCat.{u}} (φ : A →+* B) :
     RingSiteModules A ⥤ RingSiteModules B :=
   ringComplexExtensionPresheaf φ ⋙ PresheafOfModules.sheafification

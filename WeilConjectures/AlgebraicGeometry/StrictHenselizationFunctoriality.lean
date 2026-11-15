@@ -20,9 +20,6 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
 
 /-! # Strict henselization functoriality
 
-Source: Stacks Project, Tags 04HX, 03PS, 04GU and 08HV
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
-
 Clause (1) is stated for every scheme and geometric point in
 `strictHenselizationResidue`. The canonical map `j_Y` is the existing
 `Scheme.strictLocalizationToBase`, and the canonical maps `c_V` are the legs of
@@ -30,6 +27,18 @@ Clause (1) is stated for every scheme and geometric point in
 over the chosen representatives of the affine pointed neighbourhoods. The functoriality theorem
 takes the residue identifications of clause (1) as data tied by their characterizing equations.
 The algebra structures on Ω are required to be exactly the geometric-point embeddings.
+
+## References
+
+* Stacks Project, Tags 04HX, 03PS, 04GU and 08HV.
+* Stacks Project, paragraph following Tag 03PS, Tags 04GU, 08HV, and the proof of Tag 095T. Proof
+  steps for the node: 1. *Two elementary facts used throughout.* (a) If $X=\operatorname{Spec}B$
+  with $B$ local and $\varphi:X\to Z$ is a morphism of schemes whose closed point maps into an open
+  $Z'\subset Z$, then $\varphi$ factors (uniquely, $Z'\to Z$ being a monomorphism) through $Z'$:
+  every prime of $B$ lies in the maximal ideal, so every point of $X$ generalizes the closed point,
+  its image generalizes a point of $Z'$, and open subsets are stable under generization. (b) For an
+  affine $U=\operatorname{Spec}A$, morphisms $\operatorname{Spec}B\to U$ are the same as ring maps
+  $A\to B$ [].
 -/
 
 @[expose] public section
@@ -43,19 +52,6 @@ set_option backward.isDefEq.respectTransparency false in
 identification of clause (1). The factorization condition forces the residue
 identification to respect the base residue field; using ring equivalences therefore
 also states uniqueness as an equivalence of base-residue-field algebras.
-Source: Stacks Project, Tag 04HX and Definition 03PS
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
-Proof steps for the node:
-1. *Two elementary facts used throughout.* (a) If $X=\operatorname{Spec}B$ with $B$ local and
-$\varphi:X\to Z$ is a morphism of schemes whose closed point maps into an open $Z'\subset Z$,
-then $\varphi$ factors (uniquely, $Z'\to Z$ being a monomorphism) through $Z'$: every prime of
-$B$ lies in the maximal ideal, so every point of $X$ generalizes the closed point, its image
-generalizes a point of $Z'$, and open subsets are stable under generization. (b) For an affine
-$U=\operatorname{Spec}A$, morphisms $\operatorname{Spec}B\to U$ are the same as ring maps $A\to
-B$ [def-weil-affine-spectrum]; for a field $K$ a morphism
-$\operatorname{Spec}K\to\operatorname{Spec}B$ is a ring map $B\to K$, whose kernel is the prime
-that is the image point, and which factors as $B\to\kappa(\mathfrak q)\to K$ with
-$\kappa(\mathfrak q)\to K$ the field map of [def-weil-geometric-point].
 
 2. *$\kappa(\bar x)$ is separably closed (last part of (1)).* $\Omega$ is algebraically closed,
 hence separably closed, so by [def-weil-pbc-relative-separable-closure] the separable algebraic
@@ -285,20 +281,6 @@ Residue compatibility is expressed after the injective embeddings in Ω: the equ
 of the two ring maps to Ω is equivalent to the induced residue map being the inclusion
 of the relative separable closures. Uniqueness is asserted with only the locality,
 base diagram and residue conditions; neighbourhood compatibility is a separate clause.
-Source: Stacks Project, paragraph following Tag 03PS, Tags 04GU, 08HV,
-and the proof of Tag 095T
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
-Proof steps for the node:
-1. *Two elementary facts used throughout.* (a) If $X=\operatorname{Spec}B$ with $B$ local and
-$\varphi:X\to Z$ is a morphism of schemes whose closed point maps into an open $Z'\subset Z$,
-then $\varphi$ factors (uniquely, $Z'\to Z$ being a monomorphism) through $Z'$: every prime of
-$B$ lies in the maximal ideal, so every point of $X$ generalizes the closed point, its image
-generalizes a point of $Z'$, and open subsets are stable under generization. (b) For an affine
-$U=\operatorname{Spec}A$, morphisms $\operatorname{Spec}B\to U$ are the same as ring maps $A\to
-B$ [def-weil-affine-spectrum]; for a field $K$ a morphism
-$\operatorname{Spec}K\to\operatorname{Spec}B$ is a ring map $B\to K$, whose kernel is the prime
-that is the image point, and which factors as $B\to\kappa(\mathfrak q)\to K$ with
-$\kappa(\mathfrak q)\to K$ the field map of [def-weil-geometric-point].
 
 2. *$\kappa(\bar x)$ is separably closed (last part of (1)).* $\Omega$ is algebraically closed,
 hence separably closed, so by [def-weil-pbc-relative-separable-closure] the separable algebraic

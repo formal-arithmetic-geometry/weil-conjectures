@@ -26,10 +26,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Finite free resolutions of scalar models
 
-Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
-ctf-equals-bc proof, Local models; Stacks Tags 03EI, 06YQ, 06YS, 06YP and 06YU
-(auxiliary; not a blueprint node).
-
 ## Main definitions
 
 - `CategoryTheory.siteConstantModuleFunctorIndependent`: constant modules at independent
@@ -40,6 +36,10 @@ ctf-equals-bc proof, Local models; Stacks Tags 03EI, 06YQ, 06YS, 06YP and 06YU
 
 - `scalarModel_finite_flat_resolution_dvr`: the DVR resolution and tensor computation.
 - `scalarModel_finite_free_field`: the field case without flatness of the algebra sheaf.
+
+## References
+
+* Stacks Tags 03EI, 06YQ, 06YS, 06YP and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +65,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 variable [EssentiallySmall.{r} C]
 
-/-- The two-term complex is Mathlib's double complex in precisely degrees -1 and 0.
-Source: blueprint Local models (auxiliary; not a blueprint node). -/
+/-- The two-term complex is Mathlib's double complex in precisely degrees -1 and 0. -/
 abbrev scalarModelTwoTerm {A : Type uA} [Category.{vA} A] [HasZeroMorphisms A]
     [HasZeroObject A] {X Y : A} (f : X ⟶ Y) : CochainComplex A ℤ :=
   HomologicalComplex.double f (by decide : (ComplexShape.up ℤ).Rel (-1) 0)

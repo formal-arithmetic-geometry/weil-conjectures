@@ -23,8 +23,7 @@ lying over a point `x` with `trdeg_K κ(x) > 0`, equivalently a non-closed point
 recall that it is also the limit of the affine pointed étale neighbourhoods of `s`,
 `AlgebraicGeometry.Scheme.isLimitStrictLocalizationConeOver`). Then there is a separably closed
 field `L` over `K` such that `X'` is an `L`-scheme and a cofiltered limit, with affine transition
-maps, of affine schemes `X_i` of finite type over `L` with `dim X_i < dim X`
-(blueprint `corollary-open-direct-image-over-field--2`, Stacks 0F0U).
+maps, of affine schemes `X_i` of finite type over `L` with `dim X_i < dim X`.
 
 ## References
 
@@ -39,9 +38,7 @@ open CategoryTheory Limits Polynomial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: the strict henselization as a limit.
-
-Let `K` be a field, `aX : X ⟶ Spec K` of finite type and `s : Spec Ω ⟶ X` a geometric point
+/-- Let `K` be a field, `aX : X ⟶ Spec K` of finite type and `s : Spec Ω ⟶ X` a geometric point
 (`Ω` separably closed) lying over a non-closed point `x` of `X` (for `X` of finite type over `K`
 this is equivalent to `trdeg_K κ(x) > 0`). Then there are
 

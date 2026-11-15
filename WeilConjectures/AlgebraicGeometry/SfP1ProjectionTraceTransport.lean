@@ -27,31 +27,7 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- Inverse exchange transports an arbitrary ordinary trace through an isomorphism
-of projective lines. This uses no base-change property of that trace.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the paragraphs using qp1 = qp2 and the
-composite-adjunction counit (auxiliary; not a blueprint node).
-
-Proof: Substitute projectionExchange, middleComparison and coordinateTrace.
-Use naturality of proper forget-supports to replace compact-support exchange by
-ordinary exchange. Paste the self-product square for i with the product square
-for q. The mate pasting law identifies the resulting exchanges with the one for
-f = i followed by q. In the direct-image composition comparison, substitute the
-composite-adjunction counit. The inverse-image/direct-image factors for i cancel
-through pushPull, giving exactly the prefix of the explicitly defined trace.
-Naturality moves the arbitrary arrow tau through the remaining exchange factors.
-For the twist comparisons use their roots and pure-generator normalizations:
-monicity of the root inclusion and generation by pure scalars imply compatibility
-with composition and with each of the two product squares. In the second square
-both composites to S agree, so the inverse coordinate comparison is exactly the
-additional factor in coordinateTrace at true. The constant sheaf unit is preserved
-by inverse image; after the single-degree and derived tensor-unit comparisons its
-unit equation identifies the final constantComparison with pullback of constantUnit
-followed by leftDerivedUpperStarDerivedTensorUnitIso. These identities give the
-stated equation. All manipulations are natural in tau, and neither a splitting,
-a trace base-change equation nor a diagonal integral is used. The same calculation
-works for the empty base and zero coefficient ring. -/
+of projective lines. This uses no base-change property of that trace. -/
 theorem projectionTraceTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

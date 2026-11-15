@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 import WeilConjectures.AlgebraicGeometry.RawModuleScalarSheafComposition
 
 /-! Unshifted coefficient identity used by the shifted scalar square.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-unshifted). -/
+
+## References
+
+* Stacks Project, Tags 03D7 and 03Q8.
+-/
 
 @[expose] public section
 
@@ -126,12 +129,7 @@ namespace RawModuleScalarComparison
 
 end RawModuleScalarComparison
 
-/-- The derived scalar pullback comparison commutes with integer shifts.
-Source: Stacks Project, Tags 03D7 and 03Q8. Expand the defining composite
-into its three comparison isomorphisms and apply `NatTrans.shift_app_comm`
-to each factor; compatibility of composition and associativity then give
-the inverse composite's `CommShift` instance for every integer shift.
-(blueprint: lem-sbc-raw-scalar-derived-pullback-shift) -/
+/-- The derived scalar pullback comparison commutes with integer shifts. -/
 theorem rawModuleScalar_derivedPullbackIso_commShift
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     NatTrans.CommShift (moduleAbelianDerivedUpperStarIso Λ f).hom ℤ := by
@@ -157,14 +155,7 @@ theorem rawModuleScalar_derivedPullbackIso_commShift
   infer_instance
 
 /-- The unshifted coefficient-factor square follows by inverting the source-factor square
-at the identity coefficient map and cancelling the derived scalar comparison.
-Source: Stacks Project, Tags 03D7 and 03Q8. Specialize the source square to
-the coefficient sheaf and identity map, use invertibility of its source
-factors, and rewrite with `Functor.map_inv` and associativity. Cancellation
-of the derived scalar comparison yields the displayed equality. This applies
-to identity arrows, zero coefficients, and arbitrary schemes in the stated
-universes.
-(blueprint: lem-sbc-raw-scalar-coefficient-unshifted) -/
+at the identity coefficient map and cancelling the derived scalar comparison. -/
 theorem rawModuleScalar_coefficient_unshifted
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))

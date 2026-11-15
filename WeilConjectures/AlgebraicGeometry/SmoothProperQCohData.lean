@@ -14,19 +14,23 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.DerivedTensorUnitCompact
 public import Mathlib.AlgebraicGeometry.Noetherian
+
+/-!
+## References
+
+* Stacks Project, Tags 08D5, 08DW, 08DX and 09M1. Proof: properness supplies quasi-compactness and
+  quasi-separatedness, so derived direct image preserves quasi-coherent cohomology. Transport
+  quasi-coherence along the existing tensor-unit isomorphism. Derived pullback preserves
+  quasi-coherent cohomology, and canonical derived tensor preserves it.
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
-/-- The quasi-coherent direct-image, unit, and tensor data for a proper noetherian morphism.
-Sources: Stacks Project, Tags 08D5, 08DW, 08DX and 09M1.
-Proof: properness supplies quasi-compactness and quasi-separatedness, so derived direct
-image preserves quasi-coherent cohomology. Transport quasi-coherence along the existing
-tensor-unit isomorphism. Derived pullback preserves quasi-coherent cohomology, and
-canonical derived tensor preserves it; apply these successively to K and E.
-(blueprint: lem-sc-smooth-proper-qcoh-data). -/
+/-- The quasi-coherent direct-image, unit, and tensor data for a proper noetherian morphism. -/
 theorem smoothProper_qcoh_data
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

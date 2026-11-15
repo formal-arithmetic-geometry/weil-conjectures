@@ -21,10 +21,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Characterizations of torsion abelian étale sheaves
-
-Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement, and
-`sec-abelian-varieties/def-weil-pbc-etale-sheaves`
-(blueprint: definition-torsion-sheaves--3).
 -/
 
 @[expose] public section

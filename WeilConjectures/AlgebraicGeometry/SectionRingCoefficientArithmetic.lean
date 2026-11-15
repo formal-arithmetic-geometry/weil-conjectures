@@ -31,7 +31,6 @@ private theorem restrict_mul {X : Scheme.{v}} (L : X.Modules) [L.IsInvertible]
 
 /-- The numerator equation uniquely determines the coefficient function and its ring laws.
 This is the uniqueness and arithmetic part of the quotient construction (Stacks Tags 01N8, 01NK).
-(blueprint: lem-sc-section-ring-coefficient-data-arithmetic)
 
 As in the numerator construction, restriction of s^n is a free generator e_n:
 induct using the unit generator, hs, tensor products and tensorPowAddIso.

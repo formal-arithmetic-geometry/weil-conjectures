@@ -15,7 +15,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Degreewise relative exchange with coefficient maps
 
-Source: Stacks Project, Tags 0EYM and 07A7. -/
+## References
+
+* Stacks Project, Tags 0EYM and 07A7.
+-/
 
 @[expose] public section
 
@@ -27,14 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Degree-q commutative-square exchange followed by the coefficient map.
-
-Source: Stacks Project, Tag 0EYM, first proof paragraph; Tag 07A7, remark-base-change
-(blueprint: def-kun-relative-higher-image-exchange).
-The first factor identifies inverse image of cohomology with cohomology of inverse
-image. The second takes cohomology of the derived mate `derivedBaseChangeMapPlus` and
-of the specified coefficient map, using the exact pullback comparison with degree zero.
-No cartesian or torsion hypothesis enters this construction. -/
+/-- Degree-q commutative-square exchange followed by the coefficient map. -/
 noncomputable def relativeHigherDirectImageExchange
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)

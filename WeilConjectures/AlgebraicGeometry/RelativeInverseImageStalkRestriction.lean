@@ -14,8 +14,20 @@ public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Stalk of restriction along the relative inverse-image ring map
+.
 
-(blueprint: lem-pc-relative-inverse-image-stalk-restriction).
+## References
+
+* Stacks Project, Sheaves Tags 008H and 0098; Modules Tag 01AG. Proof: scalar restriction changes
+  only the scalar action, so the underlying additive stalks on both sides are the same. Write k for
+  the inverse-image ring stalk map and psi for the stalk of tensorPullbackRingMap f. The adjunction
+  defining that ring map, checked on germs of a section of O_Y on a neighborhood of f(y), gives psi
+  k = f.stalkMap y. Represent a scalar and a module element on a common neighborhood of y. The germ
+  formula for the module action then shows that the identity on the additive stalk is linear for the
+  two A-actions. These identities are natural in every sheaf morphism, so their termwise identity
+  isomorphisms commute with the differentials of K and assemble into the displayed complex
+  isomorphism. No K-flatness, boundedness or quasi-isomorphism assumption is used. This includes
+  zero modules and all degrees.
 -/
 
 @[expose] public section
@@ -106,19 +118,7 @@ private theorem restriction_stalk_smul
   erw [← PresheafOfModules.germ_smul (R := X.presheaf) M.val]
   rfl
 
-/-- Taking a stalk after relative scalar restriction agrees with the scheme stalk map.
-Source: Stacks Project, Sheaves Tags 008H and 0098; Modules Tag 01AG.
-Proof: scalar restriction changes only the scalar action, so the underlying additive
-stalks on both sides are the same. Write k for the inverse-image ring stalk map and
-psi for the stalk of tensorPullbackRingMap f. The adjunction defining that ring map,
-checked on germs of a section of O_Y on a neighborhood of f(y), gives psi k = f.stalkMap y.
-Represent a scalar and a module element on a common neighborhood of y. The germ
-formula for the module action then shows that the identity on the additive stalk
-is linear for the two A-actions. These identities are natural in every sheaf morphism,
-so their termwise identity isomorphisms commute with the differentials of K and
-assemble into the displayed complex isomorphism. No K-flatness, boundedness or
-quasi-isomorphism assumption is used. This includes zero modules and all degrees.
-(blueprint: lem-pc-relative-inverse-image-stalk-restriction). -/
+/-- Taking a stalk after relative scalar restriction agrees with the scheme stalk map. -/
 theorem relative_inverseImage_stalk_restriction_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : X)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 /-!
 # Universal-homeomorphism identity coherence
 
-Source: Stacks Project, Tags 04DZ and 03SI.
+## References
+
+* Stacks Project, Tags 04DZ and 03SI.
 -/
 
 set_option linter.style.haveILetI false

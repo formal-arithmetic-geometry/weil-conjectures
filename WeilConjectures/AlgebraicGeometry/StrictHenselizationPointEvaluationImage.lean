@@ -14,8 +14,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnrami
 
 /-! # Image of pointed evaluation
 
-Source: Stacks Project, Tags 04GW and 04HX.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).
+## References
+
+* Stacks Project, Tags 04GW and 04HX.
 -/
 
 @[expose] public section
@@ -25,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation of a section at a field-valued point of an étale morphism is
-separable over the base residue field. Source: Stacks Project, Tag 04GW.
-Factor the point through its residue field, use étaleness of the induced residue-field
-extension, then map the resulting separable element into Ω. -/
+separable over the base residue field. -/
 private theorem affine_eval_mem
     {X S : Scheme.{v}} {Ω : Type v} [Field Ω]
     (g : X ⟶ S) [Etale g] (s : Spec (.of Ω) ⟶ X)
@@ -83,11 +82,7 @@ private theorem affine_eval_mem
   exact hzmem
 
 
-/-- Pointed evaluation lands in the relative separable closure.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).
-Source: Stacks Project, Tag 04HX. Represent a colimit element by an affine pointed
-étale neighbourhood; its residue extension is finite separable over the base residue
-field, so its chosen embedding into Ω lands in the relative separable closure. -/
+/-- Pointed evaluation lands in the relative separable closure. -/
 theorem strictHenselizationPointEvaluation_mem
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)

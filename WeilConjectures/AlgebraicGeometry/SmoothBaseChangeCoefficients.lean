@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # Coefficient conventions for smooth base change
 
-Source: literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/
-`sbc-def-coefficient-conventions.md` (blueprint: sbc-def-coefficient-conventions).
-
 The coefficient hypotheses are collected in `Etale.IsSmoothBaseChangeCoefficients`.
 All sheaf and derived notions are the imported ambient-foundation notions:
 
@@ -40,9 +37,7 @@ commutative ring killed by `N`, and `N` is invertible on `T`. The equality `(N :
 is equivalent to annihilation of every element by `N`, since `Λ` is a unital ring.
 Invertibility on the scheme means that the constant global section `N` is a unit.
 The sheaf and derived categories are precisely the imported ambient-foundation categories,
-including `BoundedConstructibleDerivedCategory` for `Dᵇc`.
-Source: blueprint `sec-smooth-base-change/sk-def-bc/sbc-def-coefficient-conventions.md`
-(blueprint: sbc-def-coefficient-conventions). -/
+including `BoundedConstructibleDerivedCategory` for `Dᵇc`. -/
 def IsSmoothBaseChangeCoefficients (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ]
     (T : Scheme.{u}) : Prop :=
   0 < N ∧ Finite Λ ∧ (N : Λ) = 0 ∧ IsUnit (N : Γ(T, ⊤))

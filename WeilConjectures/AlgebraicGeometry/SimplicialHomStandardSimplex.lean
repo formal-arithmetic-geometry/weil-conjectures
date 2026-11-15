@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
 /-!
 # Hom objects of standard simplices and their boundaries
 
-Source: Stacks Project, Tags 0177, 018V and 0186
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0177, 018V and 0186.
 -/
 
 @[expose] public section

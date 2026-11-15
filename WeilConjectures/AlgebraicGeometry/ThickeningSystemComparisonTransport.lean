@@ -9,6 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
+/-!
+## References
+
+* Stacks Project, Lemma 087T and Remark 088F.
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -61,8 +67,6 @@ private theorem reflector_endomorphism_naturality
       rw [← h, ← Category.assoc, adj.counit_naturality v, Category.assoc]
 
 /-- Comparison isomorphisms induce the same compatible-family subtype.
-Source: Stacks Project, Lemma 087T and Remark 088F.
-(blueprint: lem-weil-pbc-thickening-system-comparison-transport).
 -/
 theorem compatible_family_comparison_equiv
     {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}

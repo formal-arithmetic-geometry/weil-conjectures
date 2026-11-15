@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 import WeilConjectures.AlgebraicGeometry.SRMatchingObjectOneMember
 import WeilConjectures.AlgebraicGeometry.EtaleSimplicialMatching
 
-/-! Conversion of the semi-representable hypercover condition to the scheme form. -/
+/-! Conversion of the semi-representable hypercover condition to the scheme form.
+
+## References
+
+* Stacks Project, Hypercoverings, Tags 01G2, 01G3, 01G5.
+-/
 
 @[expose] public section
 
@@ -24,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 scheme matching-object hypercover property.  The proof compares the singleton
 matching object with the proper-face matching limit in each degree, extends a
 compatible proper-face family along epi-mono factorization, and transports the
-covering condition across the resulting isomorphism.
-Source: Stacks Project, Hypercoverings, Tags 01G2, 01G3, 01G5.
-(auxiliary; not a blueprint node) -/
+covering condition across the resulting isomorphism. -/
 theorem semiRepresentableHypercover_isEtaleHypercover
     {X : Scheme.{u}}
     (K : SimplicialObject X.Etale)
