@@ -29,12 +29,13 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover
 /-!
 # Centred affine coordinates for a smooth section
 
-Source: blueprint main-20261015, lemma-section-normal-bundle, Local construction; Stacks Tags 054L,
-024T, 067U, 00LN and 0633 (blueprint: lem-trf-smooth-section-centred-coordinates).
-
 The chart witness packages the affine neighbourhoods, the actual etale map and its
 coordinate functions. Its conormal frame and monomial formulas use the published
 conormal algebra and symmetric comparison, including their restriction maps.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 054L, 024T, 067U, 00LN, 0633, 0631
 -/
 
 @[expose] public noncomputable section
@@ -57,9 +58,7 @@ the actual pullbacks of the standard affine-space coordinates.
 The conormal basis lives on `s ⁻¹ᵁ U`, which is the very same open as `T`. Products of its
 images under the symmetric-algebra inclusion are sent by the canonical comparison to
 the classes of the coordinate monomials. Those classes are sections of the fixed
-degree pieces, so the formulas commute with restrictions, including on overlaps.
-Source: lemma-section-normal-bundle, Local construction; Stacks Tags 054L, 024T, 00LN, 0631--0633
-(blueprint: lem-trf-smooth-section-centred-coordinates). -/
+degree pieces, so the formulas commute with restrictions, including on overlaps. -/
 structure Chart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
     (s : S ⟶ V) [IsClosedImmersion s] where
   T : S.affineOpens
@@ -156,8 +155,6 @@ set_option backward.isDefEq.respectTransparency false in
 with centred separated etale coordinates, regular coordinate sequence and the specified
 conormal monomial description. The section is regular of codimension `d`, its conormal
 module is locally free of rank `d`, and its canonical symmetric comparison is invertible.
-Source: lemma-section-normal-bundle, Local construction; Stacks Tags 054L, 024T, 067U, 00LN and 0633
-(blueprint: lem-trf-smooth-section-centred-coordinates).
 
 Proof: Choose a centred affine chart at every base point by
 `exists_affineChart`. Apply `regular_ideal_conormal_coordinates` to its regular

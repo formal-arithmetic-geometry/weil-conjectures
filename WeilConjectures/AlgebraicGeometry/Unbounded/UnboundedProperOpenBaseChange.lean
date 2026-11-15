@@ -28,7 +28,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Unbounded proper/open BaseChange
 
-Source: Stacks Project, Tags 0F7F.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7F
 -/
 
 @[expose] public section
@@ -597,8 +599,6 @@ private theorem derived_open_comparison
 
 -- Elaborating the specialization compares the eight sheaf categories of the cube.
 /-- BaseChange for families normalized on sheaves and on every K-injective representative.
-Source: Stacks Project, Tags 0F7F.
-(blueprint: lem-amb-unbounded-proper-open-base-change).
 
 Proof:
 Extend the representative normalization to a right-derived unit identity on every complex.

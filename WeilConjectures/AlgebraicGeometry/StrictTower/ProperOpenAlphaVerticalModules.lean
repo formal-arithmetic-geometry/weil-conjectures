@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.L
 
 /-! # Intrinsic alpha vertical identity on module sheaves
 
-Source: Stacks Project, Tag 0F7C, with the arbitrary-ring underived refinement.
-(blueprint: lem-cbc-proper-open-alpha-vertical-modules)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7C
 -/
 
 @[expose] public noncomputable section
@@ -62,8 +63,6 @@ private theorem open_target_detection {U X : Scheme.{u}} (k : U ⟶ X)
   simp only [R, Functor.map_comp]
 
 /-- Intrinsic alpha obeys vertical pasting on module sheaves.
-Source: Stacks, Tag 0F7C, and the parent restriction argument, steps 1--3 and 4
-(blueprint: lem-cbc-proper-open-alpha-vertical-modules).
 Proof: Detect equality of maps to open extension by its monomorphism into direct image.
 Transport through the fixed-coefficient equivalence and use naturality of the
 restriction/direct-image unit. Equality after open restriction therefore suffices.

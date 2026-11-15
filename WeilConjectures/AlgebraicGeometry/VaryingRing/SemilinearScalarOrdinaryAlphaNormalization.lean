@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProp
 
 /-! # Canonical normalization of the ordinary scalar alpha
 
-Source: Stacks, Tags 03D7, 03DI and 0F7B; the intrinsic proper/open word.
-(blueprint: lem-sf-semilinear-scalar-ordinary-alpha-normalization)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D7, 03DI, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -337,8 +338,6 @@ private theorem towerAlpha_eq_word4
   exact termwise_word4 _ _ _ _ _ _ _ _ _ _ _ _
 
 /-- The alpha of a normalized ordinary scalar package is canonical.
-Source: Stacks, Tags 03D7, 03DI and 0F7B, and the intrinsic proper/open word.
-(blueprint: lem-sf-semilinear-scalar-ordinary-alpha-normalization).
 Proof: beta_unit identifies the inverse cartesian beta by injectivity of the open
 adjunction Hom equivalence. clopen_unit identifies the open-to-direct map with the
 transpose of the inverse open unit; pi_eq then identifies its projector with the

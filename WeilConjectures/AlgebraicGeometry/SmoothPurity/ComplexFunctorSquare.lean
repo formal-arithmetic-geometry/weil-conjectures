@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Homology.Additive
 
 /-! # A square of additive functors lifted to iterated complex functors
 
-Source: the functorial construction of complexes, Stacks Tag 010V.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 010V
 -/
 
 @[expose] public noncomputable section
@@ -17,8 +19,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace CategoryTheory.ConstantCompletion
 
-/-- Lift a square while retaining its two iterated complex functors as endpoints.
-Source: Stacks Tag 010V (blueprint: def-sf-complex-functor-square). -/
+/-- Lift a square while retaining its two iterated complex functors as endpoints. -/
 @[irreducible]
 def mapComplexSquare
     {C D D' E : Type*} [Category C] [Category D] [Category D'] [Category E]

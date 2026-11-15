@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.RingSheafificationRest
 
 /-! # Stalk comparison on an affine chart for the symmetric algebra
 
-Source: Stacks Project, Modules, Lemma 01CH and Schemes, Lemma 01I8.
-(blueprint: lem-weil-pbc-symmetric-algebra-affine-comparison-stalks).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01CH, 01I8, 01CG
 -/
 
 @[expose] public section
@@ -23,9 +24,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.SymmetricAlgebraSheaf
 
 /-- The tilde comparison is bijective on every stalk of the affine chart.
-Source: Stacks Project, Modules, Lemmas 01CG and 01CH; Schemes, Lemma 01I8;
-Algebra, Lemma 0C6F. This is step 6 of the affine symmetric algebra comparison.
-(blueprint: lem-weil-pbc-symmetric-algebra-affine-comparison-stalks).
+This is step 6 of the affine symmetric algebra comparison.
 
 Proof: write R = O_X(W), M = F(W), A = Sym_R(M), and S for the restriction of the
 ring sheafification to Spec R. For each smaller affine V, quasi-coherent affine section

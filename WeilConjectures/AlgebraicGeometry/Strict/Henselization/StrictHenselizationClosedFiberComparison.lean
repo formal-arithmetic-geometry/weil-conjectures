@@ -16,7 +16,9 @@ The canonical colimit isomorphism intertwines the small-model structural map wit
 `strictLocalizationToBase`. This transfers the upstream singleton-fibre theorem without
 exposing its different structural-map compatibility API.
 
-Source: Stacks Project, Tags 04GW, 04GP and 04HX.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 04GW, 04GP, 04HX
 -/
 
 @[expose] public section
@@ -31,8 +33,6 @@ open Limits Opposite in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Spec of the small-to-full colimit comparison commutes with the structure maps.
-Source: Stacks Project, Tag 04HX, and the canonical final-functor colimit comparison.
-(blueprint: lem-weil-pbc-strict-henselization-small-closed-fiber-comparison)
 
 Proof: choose a representative pointed affine neighbourhood. The inverse colimit
 comparison identifies its two coprojections. Apply Spec, identify the inverse of the

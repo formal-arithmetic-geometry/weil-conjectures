@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 /-- The Mayer--Vietoris construction supplies the bounded flat complex and its
 base direct-image identification.  This is the construction part of the
 relative Mayer--Vietoris gluing argument (Stacks Project, Tag 0DJ9).
-(blueprint: new-pc-standard-single-flat-counit-union-core).
 
 Proof: Restrict N to the two opens and their intersection; quasi-coherence and
 relative flatness are preserved by open restriction. Apply the three supplied

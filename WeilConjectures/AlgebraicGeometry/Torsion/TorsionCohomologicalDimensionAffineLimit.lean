@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 
 /-!
 # Torsion cohomological dimension at an affine inverse limit
-
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-lem-sc-cd-affine-limit.md (blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -34,9 +31,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A uniform torsion étale cohomological dimension bound passes to a cofiltered
 limit of quasi-compact quasi-separated schemes with affine transition morphisms.
-
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc, lemma lemma-uniform-bounds-pro-etale-affines,
-statement and proof (blueprint: lemma-uniform-bounds-pro-etale-affines).
 
 Proof:
 1. Mathlib's affine-limit results show that the limit is qcqs. Construct the

@@ -125,9 +125,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Comparing the published Koszul fiber with Cech internal Hom
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, and sites-cohomology.tex, Tags 0941 and 0A0A.
-(blueprint: lem-weil-pbc-completed-fiber-cech-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941, 0A0A
 -/
 
 @[expose] public noncomputable section
@@ -139,8 +139,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The published Koszul fiber is Cech internal Hom, with its specified unit.
-Source: Stacks Project, Tag 0A0E
-(blueprint: lem-weil-pbc-completed-fiber-cech-comparison).
 Proof: compare the explicit fiber with the prescribed strict derived inverse limit.
 The existing single-site Cech--Koszul theorem identifies that strict limit with
 Cech internal Hom and carries the Cech unit to the strict unit. Compose the two

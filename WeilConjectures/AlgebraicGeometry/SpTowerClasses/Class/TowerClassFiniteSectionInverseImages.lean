@@ -40,7 +40,14 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleIn
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
 import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseImageSupplement
 
-/-! # Finite constant-ring section normalization -/
+/-! # Finite constant-ring section normalization
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -358,8 +365,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Finite-level inverse images in the constant quotient coordinates.
-Source: Stacks 03D2 and 03D7; Zheng Construction 4.1; blueprint operations proof (2).
-(blueprint: lem-sfb-tower-class-finite-section-inverse-images).
 
 Proof: transport the algebraic ring and module inverse image through the canonical
 constant-section coefficient comparison. Extension along this ring isomorphism

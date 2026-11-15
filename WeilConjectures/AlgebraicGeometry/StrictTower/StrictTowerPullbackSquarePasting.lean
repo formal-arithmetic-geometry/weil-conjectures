@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 /-!
 # Pasting of the normalized strict-tower inverse-image square
 
-Source: Stacks, Tag 07A7; the pullback composition coherence calculation used in
-(blueprint: lem-cbc-strict-tower-pullback-square-pasting).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A7
 -/
 
 @[expose] public section
@@ -44,8 +45,6 @@ private theorem squareG_eq {V W S T : Scheme.{u}}
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The inverse-image comparisons of successive commutative squares paste.
-Source: Stacks, Tag 07A7, and pullback-composition coherence
-(blueprint: lem-cbc-strict-tower-pullback-square-pasting).
 Proof: expand each square comparison into the two inverse-image compositors and
 the equality of the composite scheme maps. The associativity law for these
 compositors identifies both paths with the same comparison from the inverse image

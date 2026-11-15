@@ -12,9 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local comparison factors
 
-Source: Stacks Project, perfect.tex, Tags 0DJ7 and 0DJ9;
-cohomology.tex, Tags 06YB and 0D5S.
-(blueprint: lem-pc-standard-single-open-stalk-arrow).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ7, 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -173,10 +173,7 @@ the stalk at xV, the open-immersion stalk isomorphism and restriction of scalars
 along its inverse identify these stalks with the original stalk at a. Composing
 these identifications gives s, t and the displayed equality. This does not use
 flatness, quasi-coherence, affineness, or a representative complex. Empty V admits
-no a with hV; for top opens the same comparisons reduce to the identity.
-Source: Stacks Project, perfect.tex, equation-bc (Tag 0DJ7), and
-Lemma lemma-single-complex-base-change (Tag 0DJ9), locality paragraph.
-(blueprint: lem-pc-standard-single-open-stalk-arrow). -/
+no a with hV; for top opens the same comparisons reduce to the identity. -/
 theorem standardSingle_open_stalk_arrow
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) (g : A ⟶ B) (a : A)

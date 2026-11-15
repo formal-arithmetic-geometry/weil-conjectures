@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalDerivedMateSect
 
 /-! # The derived mate on the complex of neighbourhood sections
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -36,9 +38,6 @@ set_option backward.isDefEq.respectTransparency false in
 is the canonical comparison of termwise restriction to fibre hypercohomology.
 This statement starts with cohomology of the complex of sections on S: it contains
 neither localized Hom classes nor their canonical germ map.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-complex-sections-mate).
 
 Proof: let M be the complex underlying J and L = f_*M. The invertible right-derived
 unit on M gives smallModel_sourceInjectiveDirectImageIso. In the homotopy category expand the

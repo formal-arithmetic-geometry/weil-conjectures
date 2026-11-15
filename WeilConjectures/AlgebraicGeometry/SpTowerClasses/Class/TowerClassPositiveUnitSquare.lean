@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSectionA
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSectionAdjointFaithful
 
 /-! # The positive pullback square at the coefficient unit
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1), and the
-section normalizations of the tensor-line projection mate.
 -/
 
 @[expose] public noncomputable section
@@ -157,10 +154,6 @@ private theorem ordinary_unit_square
   exact hleft.trans (hX.symm.trans hright.symm)
 
 /-- The positive pullback comparison respects the coefficient-to-line unit.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), twisting the
-unit component; the section normalizations in `TowerClassTwisting.lean`.
-(blueprint: lem-sfb-positive-pullback-unit-square).
 
 Proof: the normalized ordinary unit isomorphism identifies every section of
 its source with a tensor 1 tensor y. Transpose the two arrows under the ordinary

@@ -164,10 +164,6 @@ private theorem assemble_reduction
 /-- Reduction of units is the roots module shifted once, with the unshifted positive
 Kummer boundary as its adjunct. No comparison on the integer source is involved.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and NormalizedKummerReduction proof steps 3--4.
-(blueprint: lem-sfb-kummer-reduction-unit).
-
 Proof: apply the coefficient-resolution unit triangle. Compare it by TR3 with the
 rotation of the distinguished single triangle of the supplied Kummer short exact
 sequence, using identities on its first two objects. The triangulated five lemma

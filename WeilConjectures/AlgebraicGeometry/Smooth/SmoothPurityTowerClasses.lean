@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFiniteDiagonal
 
 /-! # Kummer and diagonal classes of coefficient towers
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: proposition-sp-tower-geometric).
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +36,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 system category and its ordinary unbounded derived category. All named maps above
 are definitions; the fields below assert the specified normalizations and that
 b_q, formed from the unit and the hyperplane Chern class, is an isomorphism.
-Source: blueprint main-20261015, chap-Smooth-purity,
-sk-prop-sp-tower-geometric-classes (blueprint: proposition-sp-tower-geometric).
 Proof plan from the DAG:
 
 1. Kummer exactness on the pro-etale site is a local consequence of

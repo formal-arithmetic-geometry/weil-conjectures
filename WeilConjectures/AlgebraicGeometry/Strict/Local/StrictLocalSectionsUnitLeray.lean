@@ -14,8 +14,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Derived sections unit followed by Leray on a representative
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-sections-unit-leray).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -153,10 +154,6 @@ private lemma sections_unit_on_complex {S : Scheme.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The direct-image unit followed by Leray is the derived sections unit.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-unit factorization defining `Functor.rightDerivedFunctorCompIso`.
-(blueprint: lem-weil-pbc-strict-local-sections-unit-leray).
 
 Proof: expand the exact sections comparison and the bounded-below/unbounded
 right-derived compatibility. Their defining unit compatibilities identify their

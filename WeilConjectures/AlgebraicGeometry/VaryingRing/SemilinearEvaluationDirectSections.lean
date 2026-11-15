@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperation
 
 /-! # Native section normalization for semilinear direct-image evaluation
 
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-scalar-evaluation-direct-sections). -/
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,7 +29,6 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
 /-- Direct-image evaluation retains sections in the native evaluation carrier.
-Source: Zheng, Construction 4.1 (blueprint: lem-sf-scalar-evaluation-direct-sections).
 Proof: the existing unique comparison is normalized on the common fibre-product
 section carrier. Unfold its choice and apply that normalization to the same section;
 equality on this carrier implies heterogeneous equality in the native carrier. -/

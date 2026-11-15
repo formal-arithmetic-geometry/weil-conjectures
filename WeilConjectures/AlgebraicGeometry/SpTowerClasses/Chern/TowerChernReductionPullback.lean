@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernIntegral
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Kummer.TowerKummerPullbackTranspose
 
 /-! # Pullback of integral reduction to the quotient tower
-
-Source: blueprint classes proof (2), realization steps 2--4, before extension to E
-(blueprint: lem-sp-tower-chern-reduction-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -269,9 +266,6 @@ private theorem integer_transpose
 /-- Integral reduction commutes with an exact inverse image of the quotient module
 towers. Only the Z-to-R stage occurs; no scalar extension to A, Tate tensor line,
 or coefficient/line comparison at A occurs in the conclusion.
-
-Source: blueprint classes proof (2); realization proof steps 2--4
-(blueprint: lem-sp-tower-chern-reduction-pullback).
 
 Proof: identify abelian towers with sheaves on the vertical sequence site, and
 their R-modules with the recorded module systems. The forgetful square identifies

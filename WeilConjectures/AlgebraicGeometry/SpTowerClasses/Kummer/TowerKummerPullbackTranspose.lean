@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernTargetNo
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernRootNormalizationEquation
 
 /-! # Inverse image of the normalized Kummer transpose
-
-Source: classes (2) (blueprint: lem-sp-tower-kummer-pullback-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -601,9 +599,6 @@ private theorem chern_boundary_models
     (chern_root_normalization_equation l X RX AX φX cX hX) aD gD haD hgD
 
 /-- The normalized positive Kummer-boundary transpose square commutes under inverse image.
-
-Source: classes (2), naturality of the positive Kummer boundary
-(blueprint: lem-sp-tower-kummer-pullback-transpose).
 
 Proof: transport the short-exact-sequence boundary through the exact inverse
 image using its canonical single and shift comparisons. Naturality of the

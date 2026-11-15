@@ -68,11 +68,6 @@ private def sectionOverIsLimit {C : Type c} [Category.{v} C] (X : Scheme.{u})
 /-- On one slice with a normalized compatible root basis, the integral limit and its
 rational scalar extension are free of rank one over the constructed coefficients.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), integral and rational cases;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, inverse-limit formula.
-(blueprint: lem-sp-integral-rational-root-basis)
-
 Proof: on the slice over W, tensor e_n with B_E,n = O_E/(ell^(n+1)). The
 finite-discrete condensed/constant comparison and the ZMod scalar-tensor comparison
 identify its target with the actual internal finite level. The basis map sends b to

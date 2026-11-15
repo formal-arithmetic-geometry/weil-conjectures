@@ -13,8 +13,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Ordinary realization of cartesian open base change
 
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DI and 09AE.
-(blueprint: lem-sp-varying-ring-ordinary-cartesian-evaluation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09AE
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -299,8 +302,6 @@ private theorem ordinaryBeta_inv (n : ℕ)
     Category.assoc] using he.symm
 
 /-- Realization preserves the cartesian open factor of the clopen arrow.
-Source: Stacks 09AE; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-cartesian-evaluation).
 Proof: transpose the inverse comparisons under the open adjunction for j'.
 The ordinary transpose is pullback of the unit for j followed by the inverse
 pullback-square comparison. The strict-tower transpose is the same word.

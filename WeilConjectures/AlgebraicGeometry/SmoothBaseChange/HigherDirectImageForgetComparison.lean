@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparis
 /-!
 # Forgetting coefficients in higher direct images
 
-Source: Stacks Project, Tags 03FD and 072W.
-(blueprint: lem-sbc-higher-direct-image-forget-comparison)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 072W
 -/
 
 @[expose] public section
@@ -29,10 +30,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Forgetting the module structure commutes with higher direct images of a sheaf
 placed in degree zero, in every integer degree.
-
-Source: Stacks Project, Tag 03FD (cohomology of modules agrees with abelian
-cohomology), and Tag 072W (higher direct images as sheafified cohomology presheaves).
-(blueprint: lemma-cohomology-modules-underlying-abelian)
 
 Proof: Use the canonical bounded-below derived coefficient comparison
 `moduleAbelianDerivedLowerStarIso` from

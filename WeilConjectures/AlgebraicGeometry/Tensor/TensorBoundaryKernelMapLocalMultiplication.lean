@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.BoundaryPullbackTensorUnit
 
 /-! # Local tensor multiplication under the canonical kernel comparisons
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its ideal coefficient.
-(blueprint: lem-sc-tensor-boundary-kernel-map-local-multiplication).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 08KS
 -/
 
 @[expose] public section
@@ -54,9 +55,6 @@ private theorem whiskerLeft_section {Z : Scheme.{u}} (F N : Z.Modules)
 kernel map is ordinary tensor multiplication after the kernel inclusion.
 There is no graded presentation, ring action or degree projection in this statement.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the identification
-of its ideal coefficient over Z; Modules, Tag 08KS, the closed-immersion quotient.
-(blueprint: lem-sc-tensor-boundary-kernel-map-local-multiplication).
 Proof: It suffices by sheaf separation to work on an open trivializing L, and
 then on a refinement lifting the restricted quotient section. Write ell^r for
 the recursively parenthesized tensor of a local generator ell in degree r;

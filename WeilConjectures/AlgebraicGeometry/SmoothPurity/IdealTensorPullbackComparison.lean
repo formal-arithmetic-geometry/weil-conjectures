@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Tensor pullback of an ideal and its extended ideal
 
-Source: Stacks Project, Modules, Tag 01AJ, and Schemes, Tag 01JU.
-(blueprint: lem-pur-ideal-tensor-pullback-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01AJ, 01JU
 -/
 
 @[expose] public section
@@ -61,8 +62,6 @@ private theorem ideal_product_unit_image {X : Scheme.{u}} {I : X.Modules}
 
 /-- The canonical tensor-pullback map onto the extended ideal is epi, and is an
 isomorphism for flat pullback. Its composite with the ideal inclusion fixes it uniquely.
-Source: Stacks Project, Modules, Tag 01AJ, and Schemes, Tag 01JU.
-(blueprint: lem-pur-ideal-tensor-pullback-comparison).
 
 Proof: Tensor the ideal inclusion and compose with the structure-module comparison.
 The pullback ideal-product image theorem, applied to the unit module, identifies its

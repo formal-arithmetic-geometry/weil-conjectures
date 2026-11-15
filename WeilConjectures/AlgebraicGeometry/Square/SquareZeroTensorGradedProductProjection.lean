@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SquareZeroTensorSectionProductCompariso
 
 /-! # Homogeneous sections and their product in a graded presentation
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -27,9 +28,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
-/-- Include the transported section in its homogeneous degree.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection). -/
+/-- Include the transported section in its homogeneous degree. -/
 def tensorGradedSection {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j]
     {L : X.Modules} {n : ℕ} (T : TensorGradedPresentation j L)
     (D : TensorBoundaryComparisonData j L n) (e : ℕ)
@@ -38,9 +37,7 @@ def tensorGradedSection {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j]
   (T.c (n * (e + 1))).app ⊤ ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))
 
 /-- Take cohomology of a degree projection and then the inverse coefficient comparison.
-This is an explicit composite, with no object selected from an unproved theorem.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection). -/
+This is an explicit composite, with no object selected from an unproved theorem. -/
 def tensorGradedCoefficientProjection {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j] {L : X.Modules} {n : ℕ}
     (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (e : ℕ) :
@@ -52,9 +49,7 @@ def tensorGradedCoefficientProjection {X Z : Scheme.{u}} {j : Z ⟶ X}
     (((RingedSpace.moduleCohomology X.toRingedSpace 1).map
       (T.degree (n * (e + 1))).τ₁).hom.toAddMonoidHom)
 
-/-- Evaluation of the explicit additive coefficient projection.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection). -/
+/-- Evaluation of the explicit additive coefficient projection. -/
 theorem tensorGradedCoefficientProjection_apply {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j] {L : X.Modules} {n : ℕ}
     (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (e : ℕ)
@@ -72,8 +67,6 @@ theorem tensorGradedCoefficientProjection_apply {X Z : Scheme.{u}} {j : Z ⟶ X}
 attribute [irreducible] tensorGradedCoefficientProjection
 
 /-- The raw homogeneous multiplication identity.
-Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection-raw).
 Proof: Work locally where the invertible module is free of rank one, lift both quotient
 sections through the degreewise adjunction unit, apply `b_multiply`, and use `b_quotient`
 and `c_projection`. Tensor-power associativity and the unitors identify the resulting
@@ -116,9 +109,7 @@ theorem tensorGradedSection_product_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
   simp
   rfl
 
-/-- Applying the degree quotient projection to the raw homogeneous product identity.
-Source: Stacks Project, Tag 09MS, the projection relation for the graded quotient.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection-projection). -/
+/-- Applying the degree quotient projection to the raw homogeneous product identity. -/
 theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
@@ -143,8 +134,6 @@ theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
 /-- Projecting a product of the two homogeneous sections gives the transported tensor
 product section. No cohomology boundary, action, or derivation identity occurs here.
 
-Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection).
 Proof: Work locally where L is free of rank one and lift each quotient section through
 the degreewise adjunction unit, which is an epimorphism. The compatibility b_quotient
 identifies its homogeneous image with the image of its homogeneous lift under p.

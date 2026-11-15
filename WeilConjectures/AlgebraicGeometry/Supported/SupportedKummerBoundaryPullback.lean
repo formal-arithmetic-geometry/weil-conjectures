@@ -106,8 +106,9 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 /-!
 # Cartier pullback of the supported Kummer boundary
 
-Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45
-(blueprint: lem-asd-supported-kummer-boundary-pullback).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 0A45
 -/
 
 @[expose] public noncomputable section
@@ -365,8 +366,6 @@ private theorem boundary_equation (A : Type (u + 1)) [CommRing A]
 
 /-- Cartier pullback preserves the normalized supported Kummer class, with the
 canonical closed exchange and any roots-normalized twist transport.
-Source: Stacks 03PL, 0A45; blueprint lemma-cycle-class-cartier-divisor, penultimate paragraph
-(blueprint: lem-asd-supported-kummer-boundary-pullback).
 
 Proof: the boundary witnesses determine the normalized integral pole class.
 The integral Cartier pullback square and the Kummer short-exact-sequence square

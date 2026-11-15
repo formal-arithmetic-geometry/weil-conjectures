@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryLeibniz
 
 /-! # The square-zero formula for the canonical boundary of a tensor power
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, and Cohomology, Lemma 0B8S.
-(blueprint: lem-sc-square-zero-tensor-power-boundary).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -76,9 +77,6 @@ first obstruction. This is a formula for the canonical connecting map, with no l
 assertion. The additive comparison `b` transports the coefficient module on the closed
 subscheme back to the kernel of the degree `n * (e + 1)` unit sequence.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1),
-and Cohomology, Lemma 0B8S.
-(blueprint: lem-sc-square-zero-tensor-power-boundary).
 Proof:
 1. Tensor the ideal sequence by each invertible tensor power of L. Its kernel is
 I tensor L^d and its quotient is the pushforward of j^*L^d. Compare this kernel

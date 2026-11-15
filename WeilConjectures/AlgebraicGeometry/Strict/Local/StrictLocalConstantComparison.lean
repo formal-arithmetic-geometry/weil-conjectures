@@ -36,8 +36,9 @@ import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 /-!
 # A germ-compatible constant model on a strict-local fibre
 
-Source: Stacks Project, Tag 0GJR, proof of lemma-locally-acyclic-locally-constant.
-(blueprint: lem-weil-pbc-strict-local-constant-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GJR
 -/
 
 @[expose] public section
@@ -148,8 +149,6 @@ private theorem constantSection_pullback
 
 /-- A locally constant sheaf on a strict-local fibre is the constant sheaf on its
 original geometric stalk, with the canonical alpha map equal to constant sections.
-Source: Stacks Project, Tag 0GJR, proof of lemma-locally-acyclic-locally-constant.
-(blueprint: lem-weil-pbc-strict-local-constant-comparison).
 
 Proof: pull the locally constant sheaf back to the strict henselization T. A
 trivializing etale cover has a point above its closed point; strict henselianity

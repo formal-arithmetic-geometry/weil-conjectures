@@ -18,8 +18,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Filt
 /-!
 # Qcqs higher direct images preserve a fixed set of torsion primes
 
-Source: Stacks Project, Tags 0DDD (1) and 0DDC (1), fixed-prime refinement
-(blueprint: lem-sbc-qcqs-higher-images-prime-torsion).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DDD, 0DDC
 -/
 
 @[expose] public section
@@ -181,8 +182,6 @@ private theorem integerSheafForget_isEquivalence (X : Scheme.{u}) :
 /-- Higher direct images along a quasi-compact quasi-separated scheme morphism preserve
 stalkwise torsion whose annihilators have prime divisors in a fixed set `P`.
 Only prime members of `P : Set ℕ` are tested, so this encodes an arbitrary set of primes.
-Source: Stacks Project, Tags 0DDD (1) and 0DDC (1), fixed-prime refinement.
-(blueprint: lem-sbc-qcqs-higher-images-prime-torsion)
 
 Proof:
 1. Take an affine pointed etale neighbourhood W of the target geometric point. The scheme Z = U

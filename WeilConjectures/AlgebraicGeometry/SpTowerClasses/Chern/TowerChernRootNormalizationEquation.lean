@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.ChernData.TowerCh
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Kummer.TowerKummerComplex
 
 /-! # The root-normalization equation in derived-arrow coordinates
-
-Source: classes (2) (blueprint: lem-sp-tower-chern-root-normalization-equation).
 -/
 
 @[expose] public noncomputable section
@@ -66,9 +64,6 @@ private theorem mk_target_equation
   exact h
 
 /-- The target normalization identifies the root transpose with the signed Kummer boundary.
-
-Source: classes (2), normalization of integral reduction at the Kummer sequence
-(blueprint: lem-sp-tower-chern-root-normalization-equation).
 
 Proof: unfold the target-normalization predicate. Its four factors are the
 adjunction transpose, shift comparison, single-complex comparison and root

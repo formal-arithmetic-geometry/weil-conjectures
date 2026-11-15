@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulAdjoinGenerator
 
 /-! # The algebraic exterior-to-tensor comparison
 
-Source: Stacks Project, More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-exterior-negative-koszul-tensor).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0664
 -/
 
 @[expose] public noncomputable section
@@ -85,9 +86,6 @@ private theorem emptyKoszulIso_hom_f_zero {A : Type (u + 1)} [CommRing A]
   simp [emptyKoszulIso]
 
 /-- Joining one-generator exterior complexes gives the exterior complex of the list.
-
-Source: Stacks Project, More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-exterior-negative-koszul-tensor).
 
 Proof: split the ordered basis Fin (r+1) into its first vector and its tail.
 In exterior degree k, separate the increasing k-subsets according as they contain

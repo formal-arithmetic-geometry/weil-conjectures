@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedBoundaryPr
 
 /-! # Homogeneous realization of tensor boundaries
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum over degrees;
-Tag 0B8S, the quotient action on the square-zero kernel.
-(blueprint: lem-sc-square-zero-tensor-boundary-graded-realization).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -57,9 +57,6 @@ extension. This is a comparison theorem: it asserts no derivation identity, eith
 that algebra extension or for tensor boundaries. The comparison holds for every compatible
 resolution presentation and every action satisfying the displayed local formulas.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct-sum sequence
-following it; Tag 0B8S, first paragraph of the proof (quotient action on the kernel).
-(blueprint: lem-sc-square-zero-tensor-boundary-graded-realization).
 Proof: form the sheaf direct sum B of L tensor powers, with multiplication given by the
 inverse tensor-power addition isomorphisms. On a trivializing open for L this is the
 polynomial algebra over O_X; the change-of-frame maps preserve multiplication, so these

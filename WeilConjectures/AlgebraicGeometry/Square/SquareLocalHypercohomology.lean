@@ -15,8 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # Local hypercohomology of a normalized coefficient square
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-square-local-hypercohomology).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -99,8 +100,6 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Local hypercohomology of a normalized coefficient square.
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X
-(blueprint: lem-weil-pbc-square-local-hypercohomology).
 
 Proof: Factor each endpoint comparison into the classical-to-section comparison and the
 raw injective local comparison. Choose an injective replacement ell of v_*J, then extend the

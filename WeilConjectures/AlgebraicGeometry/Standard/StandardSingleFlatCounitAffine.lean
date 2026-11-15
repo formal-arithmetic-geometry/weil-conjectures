@@ -26,7 +26,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Affine case of flat counit presentations
 
-Source: Stacks Project, Tags 0A1D and 0DJ9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A1D, 0DJ9, 08HY
 -/
 
 @[expose] public section
@@ -132,8 +134,6 @@ private theorem affine_single_unit_iso
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- The single complex of the actual affine direct image realizes the pinned comparison.
-Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY,
-base-change mate; Tag 0DJ9, initial affine case.
 
 Proof: Put F = f_*N, and K = F[0]. Affine higher direct image vanishing makes
 N acyclic for f_*, so the canonical right-derived unit on N[0], composed with
@@ -295,8 +295,6 @@ private theorem affine_single_counit_comparison
   exact ((derivedPullback.{u, u + 1} g).mapIso e.symm).eq_inv_comp.mpr heq
 
 /-- Affine source charts have bounded flat presentations over affine bases.
-Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 0DJ9,
-initial affine case. (blueprint: lem-pc-standard-single-flat-counit-affine).
 
 Proof: Identify the three affine schemes U, B and A with spectra of their section
 rings. The one-member affine cover of U has alternating section complex N(U) in

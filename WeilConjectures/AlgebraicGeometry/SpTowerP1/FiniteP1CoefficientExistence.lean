@@ -13,9 +13,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # Existence of normalized finite coefficient coordinates
 
-Source: blueprint latest, diagonal-tower trace proof (1), identification of
-finite coefficient units and direct images before the Chern-class calculation.
-(blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CY, 03EK, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -87,8 +87,6 @@ constant-object comparison followed by the realization unit and coefficient eval
 the line coordinate is the root-site comparison followed by the intrinsic root-tensor
 comparison.
 
-Source: diagonal-tower trace (1), constant and root sections; Stacks Tags 03CY,
-03EK and 0GLZ (blueprint: lem-sfb-finite-p1-coefficient-existence).
 Proof: compose the constant-object comparison with the normalized regular-module
 realization and coefficient evaluation. Naturality of the realization unit and
 the monoidal comparison unit equation give its scalar-section formula. For the

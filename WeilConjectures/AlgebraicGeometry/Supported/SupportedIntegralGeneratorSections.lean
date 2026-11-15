@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupp
 import all WeilConjectures.AlgebraicGeometry.Cartier.CartierProIntegralScalar
 
 /-! # Constant sections of the supported integral generator
-
-Source: the source normalization in the diagonal tower construction, step (3).
 -/
 
 @[expose] public noncomputable section
@@ -238,10 +236,6 @@ private theorem supportedGenerator_eq (A : Type (u + 1)) [CommRing A]
   rfl
 
 /-- The supported integral generator sends a constant integer to its coefficient cast.
-
-Source: diagonal tower system proof, step (3), source paragraph; the comparison
-constant-generator calculation in the Cartier site-comparison proof.
-(blueprint: new-sfb-supported-integral-generator-sections).
 
 Proof: first evaluate the etale integral generator using the constant-sheaf/global-
 sections adjunction. At the terminal object it is the coefficient integer cast,

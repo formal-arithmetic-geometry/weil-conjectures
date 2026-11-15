@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Degree-two relation for the normalized pullback quotients
 
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-pullback-quotient-cross-tensor).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 
 @[expose] public section
@@ -105,11 +106,6 @@ private theorem cross_tensor_of_pulled_generators {S T : Scheme.{u}} (h : T ⟶ 
     (hpure U ⟨W, hW⟩ (hWV.trans inf_le_right)) _ _
 
 /-- The two normalized quotients satisfy the degree-two cross relation.
-
-Source: Stacks Project, Constructions, Tag 01N2 (lemma-base-change-map-proj),
-Tag 01NQ (lemma-relative-proj-base-change), Tag 01NR (lemma-glue-relative-proj-twists),
-and Tag 01OB (definition-projective-bundle).
-(blueprint: lem-trf-symmetric-proj-pullback-quotient-cross-tensor).
 
 Proof: work over affine pairs W contained in g inverse U, then on the standard
 opens D_+(b(iota(v))) of Proj Sym(g*E)(W). These opens cover: scalar extension

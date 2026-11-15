@@ -9,9 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedKoszulSite
 
 /-! # The regular module under completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
-lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
-(blueprint: lem-weil-pbc-completed-realization-regular).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -223,10 +223,6 @@ private theorem transportedUnit_isIso
 
 /-- The specified coefficient unit identifies the realized regular module with the
 regular coefficient sheaf, and it intertwines multiplication by every scalar.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
-lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
-(blueprint: lem-weil-pbc-completed-realization-regular).
 
 Proof: compose the scalar-extension/restriction adjunction with the
 constant-module sheafification Hom equivalence and the regular-module/sections

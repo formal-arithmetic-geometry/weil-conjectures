@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomotopySquareRectificatio
 
 /-! # Chain representatives of the single-module union comparison
 
-Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08BV, 08HZ, 08FE, 08HY, 0DJ9, 013N, 013O
 -/
 
 @[expose] public section
@@ -74,9 +76,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A strict first-map square whose cones represent the overlap comparisons.
 Unlike a short exact presentation, this asserts no monomorphism, epimorphism,
 short complex or exactness of complexes on A.
-
-Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY, 0DJ9, 013N--013O.
-(blueprint: new-pc-standard-single-union-ses-chain-data).
 
 Proof:
 Set W = U union V and form its cartesian base change W_A. The opens induced

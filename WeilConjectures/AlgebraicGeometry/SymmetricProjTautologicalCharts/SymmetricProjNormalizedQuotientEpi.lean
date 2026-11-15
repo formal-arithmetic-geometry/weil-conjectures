@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 
 /-! # Epimorphy of the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-normalized-quotient-epi).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01OB, 01O4
 -/
 
 @[expose] public section
@@ -124,8 +125,6 @@ private theorem symmetric_chart_cover {R M : Type u} [CommRing R]
   | add a b ha hb => exact add_mem ha hb
 
 /-- The adjoint of a section-normalized map to the degree-one twist is epic.
-Source: Stacks, Tags 01OB and 01O4 (lemma-apply-relative).
-(blueprint: lem-trf-symmetric-proj-normalized-quotient-epi).
 
 Proof: the standard opens D_+(iota(m)) cover each affine symmetric Proj. Indeed, if a
 homogeneous prime contained all iota(m), it would contain the positive-degree ideal,

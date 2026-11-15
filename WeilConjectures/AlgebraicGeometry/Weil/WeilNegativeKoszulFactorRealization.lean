@@ -67,9 +67,9 @@ import Mathlib.LinearAlgebra.Finsupp.Pi
 
 /-! # Realization of a single exterior Koszul factor
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(blueprint: lem-weil-pbc-negative-koszul-factor-realization).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -346,11 +346,6 @@ private theorem scalar_power
     rw [pow_succ', End.mul_asHom, Category.assoc]
 
 /-- The rank-one exterior complex realizes as the explicit negative two-term factor.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free factors; Modules on Sites,
-Tags 03D8, 03EK and 0GMW for constant sheafification and scalar extension.
-(blueprint: lem-weil-pbc-negative-koszul-factor-realization).
 
 Proof: the basis of A^(Fin 1) identifies its first exterior power with A;
 exteriorPower.zeroEquiv identifies its zeroth power with A. All higher powers

@@ -353,7 +353,12 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! Horizontal composition of unbounded proper/open interchange, Stacks Tag 0F7D. -/
+/-! Horizontal composition of unbounded proper/open interchange, Stacks Tag 0F7D.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7D
+-/
 
 @[expose] public section
 
@@ -365,8 +370,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Horizontal pasting for normalized unbounded proper/open comparison families.
-Source: Stacks Project, Tag 0F7D.
-(blueprint: lem-amb-unbounded-proper-open-horizontal-composition).
 
 Proof:
 Take a K-injective representative J and resolutions rho:k!J→I and sigma:l!I→H.

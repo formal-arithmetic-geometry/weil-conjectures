@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Local multiplication in the ideal tensor kernel
 
-Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-tensor-ideal-section-local-multiplication).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 08KS
 -/
 
 @[expose] public section
@@ -59,9 +60,6 @@ private theorem ideal_tensor_assoc {X : Scheme.{u}} (J M N P : X.Modules)
 lift of the quotient section. This is a statement about tensor modules alone;
 it contains no graded algebra presentation or quotient action.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses, multiplication on the
-ideal coefficient; Tag 08KS, the closed-immersion quotient unit.
-(blueprint: lem-sc-tensor-ideal-section-local-multiplication).
 Proof: Compare the tensor-pullback adjunction unit with the ordinary pullback
 unit via boundaryPullbackComparison. The proved formula for the ordinary
 pullback cotensorator on section tensors therefore gives the same formula for

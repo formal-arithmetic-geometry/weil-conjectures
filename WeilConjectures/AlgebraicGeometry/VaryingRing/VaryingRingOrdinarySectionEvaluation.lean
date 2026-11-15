@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOrdinaryClopenPr
 /-!
 # Ordinary realization of the clopen section factor
 
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DI and 09AE.
-(blueprint: lem-sp-varying-ring-ordinary-section-evaluation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09AE, 0F7B
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -305,8 +308,6 @@ private theorem pull_comp_compatible (n : ℕ) (gIso : OrdinaryPullComparison R 
     (hn s q) (pullComparison_congr R φ n gIso hr)
 
 /-- Realization preserves the section factor, after the cartesian comparison.
-Source: Stacks 0F7B, open-immersion case; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-section-evaluation).
 Proof: put q = pullback.snd p i, b = pullback.fst p i and
 s = squareLift k r p i h. The map s is clopen. The intrinsic projector restricts
 to the open-adjunction unit, by the triangle identity for the adjoint triple.

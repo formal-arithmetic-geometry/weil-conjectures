@@ -23,8 +23,6 @@ attribute [local instance 2000] Abelian.toPreadditive
   Preadditive.preadditiveHasZeroMorphisms
 
 /-- The named actual Kummer complex is short exact.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-canonical-kummer-exact).
 Proof: the named complex has exactly the objects and maps of the complex in the
 exact field of k. The zero-morphism presentations are definitionally equal, and
 the zero-composite proofs are proof irrelevant. Thus k.exact proves the assertion.

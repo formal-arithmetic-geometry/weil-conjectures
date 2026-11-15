@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalDerivedExchange
 
 /-! # Derived exchange on global sections before neighbourhood restriction
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-global-sections).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -32,10 +33,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- The derived exchange computation on the global sections of the pulled-back
 underived direct-image complex. No neighbourhood section restriction occurs.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-adjunction factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-global-sections).
 
 Proof: apply naturality of the exact strict-local sections/homology comparison
 isomorphism to the derived mate. Expand smallModel_strictLocalBaseChangeTargetIso and

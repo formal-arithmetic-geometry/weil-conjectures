@@ -11,8 +11,9 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.TotalClassicalResolutionC
 
 /-! # Agreement of classical resolution classes and derived local classes
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-square-resolution-local-class).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -55,8 +56,6 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Agreement of classical resolution classes and derived local classes.
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X
-(blueprint: lem-weil-pbc-square-resolution-local-class).
 
 Proof: Compute total and classical right-derived cohomology on the same integer extension of I.
 Uniqueness of derived units and the total/plus compatibility identify the cohomology comparison

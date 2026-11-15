@@ -16,9 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroSectionPowerObstructio
 
 /-! # Lifting a tensor power of a section across a square-zero immersion
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1)
-and the boundary calculation following it.
-(blueprint: lem-sc-square-zero-section-power-lift).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -34,10 +34,6 @@ universe u
 /-- Some positive tensor power of the given section lifts, after the tensor-power
 and pullback identifications. The conclusion is equality of section morphisms;
 it makes no assertion about nonvanishing loci or affineness upstairs.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1)
-and the following boundary calculation.
-(blueprint: lem-sc-square-zero-section-power-lift).
 
 Proof:
 1. Put N = j^*L and M_d = I tensor L^d. Invertibility makes tensoring the

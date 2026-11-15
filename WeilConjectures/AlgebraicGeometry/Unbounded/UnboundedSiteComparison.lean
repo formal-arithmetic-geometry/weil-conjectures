@@ -15,10 +15,6 @@ set_option autoImplicit false
 /-!
 # Unbounded comparison on the small etale and pro-etale sites
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.md`
-(blueprint: lem-sfb-unbounded-site-comparison).
-
 The theorem states exactness, full faithfulness, and arbitrary small-coproduct preservation
 of the canonical finite-coefficient comparison on unbounded derived categories.
 -/
@@ -35,8 +31,6 @@ namespace AlgebraicGeometry.ProEtale
 termwise comparison from the etale to the pro-etale module derived category is exact,
 fully faithful, and preserves arbitrary small direct sums.
 
-Source: blueprint `sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.md`,
-statement and proof (blueprint: proposition-unbounded-comparison-finite-coefficients--1).
 Proof:
 1. Write L for the exact comparison inverse image and E for finite coefficient
 realization. Exactness induces the triangulated termwise derived functor, and E is

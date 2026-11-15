@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChangeTopRes
 
 /-! # Local affine presentation data
 
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -53,8 +55,6 @@ private theorem localizationPresentation_flatOver_restrict
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Concrete localized presentation witnesses used by completion.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
-(blueprint: lem-pc-standard-single-flat-counit-localization-presentation-data).
 Proof: choose an affine open S containing g(a), then an affine open V containing a
 inside the open inverse image of S. Put W = p inverse-image S. Restrict M to W
 and p to W -> S. Quasi-compactness and quasi-separatedness persist under this

@@ -31,7 +31,14 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricOperationsTransition
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictBaseCoordinates
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFiniteSectionInverseImages
 
-/-! # Geometry with the actual direct-image section coordinates -/
+/-! # Geometry with the actual direct-image section coordinates
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -278,9 +285,6 @@ private theorem unitModel_transport
 
 -- The geometry records require many dependent category and instance checks.
 /-- Choose geometry before constructing any coefficient-unit comparison.
-Source: Stacks 03D2, 03D7; Zheng Construction 4.1 and Lemma 4.10; blueprint
-`sk-lem-sp-tower-bound-operations.proof.md`, clause (2).
-(blueprint: lem-sfb-tower-class-section-geometry-existence).
 
 Proof: take the ramification and strict sequence-site realization of
 strictBaseCoordinates. At each scheme select the semilinear system

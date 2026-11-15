@@ -30,14 +30,14 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Coherent comparison of etale and pro-etale inverse images
 
-Source: blueprint, chap-Proper-base-change, theorem-proper-base-change-classical-pro,
-node proposition-comparison-etale-derived-category--5; Stacks Project, Tags 098T, 099R, 00WX and
-0B65 (blueprint: proposition-comparison-etale-derived-category--5).
-
 The auxiliary interfaces extend the existing Kan-extension constructions to sets as
 well as abelian groups and finite fixed-ring modules. Every comparison is the mate
 of the canonical base-change isomorphism on restriction functors. No arbitrary
 isomorphism is selected.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 098T, 099R, 00WX, 0B65
 -/
 
 @[expose] public section
@@ -55,17 +55,13 @@ variable [∀ X : Scheme.{u}, HasWeakSheafify X.smallEtaleTopology D]
 variable [∀ X : Scheme.{u}, HasWeakSheafify (Scheme.ProEt.topology X) D]
 
 /-- The constructed etale inverse image for the coefficient category `D`.
-For abelian coefficients this is definitionally the existing `upperStar`.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+For abelian coefficients this is definitionally the existing `upperStar`. -/
 noncomputable abbrev supportSiteEtaleComparisonPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Functor.sheafPullbackConstruction.sheafPullback
     (MorphismProperty.Over.pullback @Etale ⊤ f) D
     Y.smallEtaleTopology X.smallEtaleTopology
 
-/-- The canonical inverse-image adjunction, obtained from Kan extension and sheafification.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+/-- The canonical inverse-image adjunction, obtained from Kan extension and sheafification. -/
 noncomputable abbrev supportSiteEtaleComparisonAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportSiteEtaleComparisonPullback D f ⊣ Etale.lowerStar D f :=
   have : (MorphismProperty.Over.pullback @Etale ⊤ f).IsContinuous
@@ -74,9 +70,7 @@ noncomputable abbrev supportSiteEtaleComparisonAdjunction {X Y : Scheme.{u}} (f 
     (MorphismProperty.Over.pullback @Etale ⊤ f) D
     Y.smallEtaleTopology X.smallEtaleTopology
 
-/-- The composition comparison, adjoint to associativity of chosen fibre products.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+/-- The composition comparison, adjoint to associativity of chosen fibre products. -/
 noncomputable def supportSiteEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     supportSiteEtaleComparisonPullback D (f ≫ g) ≅
       supportSiteEtaleComparisonPullback D g ⋙ supportSiteEtaleComparisonPullback D f :=
@@ -94,25 +88,19 @@ noncomputable def supportSiteEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶
         Z.smallEtaleTopology Y.smallEtaleTopology X.smallEtaleTopology).symm).symm
 
 /-- The constructed proEtale inverse image for the coefficient category `D`.
-For abelian coefficients this is definitionally the existing `upperStar`.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+For abelian coefficients this is definitionally the existing `upperStar`. -/
 noncomputable abbrev supportSiteProEtaleComparisonPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Functor.sheafPullbackConstruction.sheafPullback
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) D
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
-/-- The canonical inverse-image adjunction, obtained from Kan extension and sheafification.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+/-- The canonical inverse-image adjunction, obtained from Kan extension and sheafification. -/
 noncomputable abbrev supportSiteProEtaleComparisonAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) D
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
-/-- The composition comparison, adjoint to associativity of chosen fibre products.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+/-- The composition comparison, adjoint to associativity of chosen fibre products. -/
 noncomputable def supportSiteProEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     supportSiteProEtaleComparisonPullback D (f ≫ g) ≅
       supportSiteProEtaleComparisonPullback D g ⋙ supportSiteProEtaleComparisonPullback D f :=
@@ -124,9 +112,7 @@ noncomputable def supportSiteProEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X 
         (Scheme.ProEt.topology Z) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).symm).symm
 
 /-- The specified square identification: compose through the equal composite morphisms.
-The chosen Cartesian identification supplies the commutativity equation.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+The chosen Cartesian identification supplies the commutativity equation. -/
 noncomputable def supportSiteProEtaleComparisonSquare {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare g' f' f g) :
@@ -138,32 +124,24 @@ noncomputable def supportSiteProEtaleComparisonSquare {X' X Y' Y : Scheme.{u}}
 
 /-- The comparison inverse image, constructed by left Kan extension and sheafification.
 It is definitionally `comparisonUpperStar` for abelian coefficients and the left adjoint
-of `Scheme.proEtaleSiteComparison` for sets.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+of `Scheme.proEtaleSiteComparison` for sets. -/
 noncomputable abbrev supportSiteComparisonCoefficientPullback (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) D
     X.smallEtaleTopology (Scheme.ProEt.topology X)
 
-/-- The canonical comparison adjunction for the common coefficient category.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+/-- The canonical comparison adjunction for the common coefficient category. -/
 noncomputable abbrev supportSiteComparisonCoefficientAdjunction (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Scheme.toProEt X) D
     X.smallEtaleTopology (Scheme.ProEt.topology X)
 
-/-- The comparison inclusion commutes with the actual chosen base change.
-Source: Stacks, Tag 099R; blueprint, proof step 1
-(blueprint: proposition-comparison-etale-derived-category--5). -/
+/-- The comparison inclusion commutes with the actual chosen base change. -/
 noncomputable def supportSiteComparisonSiteBaseChangeIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Scheme.toProEt Y ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ f ≅
       MorphismProperty.Over.pullback @Etale ⊤ f ⋙ Scheme.toProEt X :=
   Iso.refl _
 
 /-- The canonical right-image comparison, induced by the chosen fibre products.
-Its components identify sections over the same base change, including for sets.
-Source: Stacks, Tags 099R and 00WX; blueprint, proof step 1
-(blueprint: proposition-comparison-etale-derived-category--5). -/
+Its components identify sections over the same base change, including for sets. -/
 noncomputable def supportSiteComparisonCoefficientDirectImageIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     lowerStar D f ⋙ comparisonLowerStar D Y ≅
       comparisonLowerStar D X ⋙ Etale.lowerStar D f :=
@@ -189,9 +167,7 @@ noncomputable def supportSiteComparisonCoefficientDirectImageIso {X Y : Scheme.{
 /-- The canonical inverse-image comparison, normalized as the conjugate of
 `supportSiteComparisonCoefficientDirectImageIso`, which evaluates on `W` as the identity on
 sections over `W ×[Y] X`. This extends the inverse of
-`comparisonUpperStarCompUpperStarIso` to set coefficients.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+`comparisonUpperStarCompUpperStarIso` to set coefficients. -/
 noncomputable def supportSiteComparisonCoefficientPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportSiteEtaleComparisonPullback D f ⋙ supportSiteComparisonCoefficientPullback D X ≅
       supportSiteComparisonCoefficientPullback D Y ⋙ supportSiteProEtaleComparisonPullback D f :=
@@ -207,17 +183,12 @@ canonical comparison. This reuses `ComparisonPullbackCoherent`: the support-site
 comparison maps above are definitionally the same canonical maps. Equations are
 componentwise on every sheaf, equivalently
 equalities of natural transformations. The square is the specified one, including
-its commutativity transport; it is not replaced by an arbitrary isomorphism.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: proposition-comparison-etale-derived-category--5). -/
+its commutativity transport; it is not replaced by an arbitrary isomorphism. -/
 abbrev supportSiteComparisonPullbackCoherent : Prop :=
   ComparisonPullbackCoherent D
 
 /-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
 sheaves and sheaves of modules over every finite discrete ring.
-Source: blueprint, chap-Proper-base-change, theorem-proper-base-change-classical-pro,
-proposition-comparison-etale-derived-category--5; Stacks, Tags 098T, 099R and 0B65
-(blueprint: proposition-comparison-etale-derived-category--5).
 
 Proof: (1) the etale-to-pro-etale inclusion commutes with base change: both composites
 have the same fibre products and arrows. Restriction of sheaves therefore gives

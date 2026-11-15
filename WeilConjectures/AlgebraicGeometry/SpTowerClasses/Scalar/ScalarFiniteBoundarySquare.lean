@@ -36,11 +36,6 @@ The evaluated scalar arrow and the underlying integral arrow have the same finit
 boundary composite. This is the composition identity used to construct the
 `Fact` in `scalarFiniteBoundary`.
 
-Source: blueprint latest,
-`sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-evaluation and scalar-extension calculation.
-(blueprint: lem-sfb-scalar-finite-boundary-composition).
-
 Proof: transpose the scalar-extended arrow through the derived scalar adjunction.
 On a K-flat representative, naturality of the universal scalar counit cancels the
 resolution comparison and identifies the transpose with the ordinary scalar unit.

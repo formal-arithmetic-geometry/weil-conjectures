@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerRestrictedSc
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassPullback
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarRootAbelianTransposeCore
 
-/-! # Finite-level component of the scalar root abelian transpose -/
+/-! # Finite-level component of the scalar root abelian transpose
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,10 +29,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The finite-level component calculation underlying the scalar root transpose.
-
-Source: blueprint latest, classes proof (2), Kummer roots followed by ordinary
-coefficient extension; Stacks 03EL.
-(blueprint: lem-sp-tower-scalar-root-abelian-transpose-component)
 
 Proof: evaluate the two displayed tower morphisms at one finite level and one
 pro-etale chart. The Kummer root restriction, the normalized line evaluation,

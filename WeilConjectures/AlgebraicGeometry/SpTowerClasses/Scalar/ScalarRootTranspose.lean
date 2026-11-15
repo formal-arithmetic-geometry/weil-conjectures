@@ -7,7 +7,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 import WeilConjectures.AlgebraicGeometry.ScalarData.ScalarModelUnit
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarCounitNormalization
-/-! # The scalar counit on an arbitrary root module -/
+/-! # The scalar counit on an arbitrary root module
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A6
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -18,8 +23,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local implicit_reducible] spCoefficientCommRings
 
 /-- The transpose of lineComparison is the ordinary scalar unit on the root module.
-Source: classes proof (2), Stacks 06YY and 07A6.
-(blueprint: lem-sfb-scalar-root-transpose).
 Proof: use the arbitrary-complex model-unit equation on the single root complex.
 Naturality of the exact restriction comparison moves the single comparison past
 restriction. The ordinary adjunction on single complexes then gives the single of

@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 /-! # The counit factorization at a supplied union complex
 
-Source: Stacks Project, Tag 0DJ9, relative Mayer--Vietoris induction.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0DJ9
 -/
 
 @[expose] public section
@@ -50,7 +52,6 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and
 counit data for a bounded flat union complex (Stacks, Tag 0DJ9).
-(blueprint: new-pc-standard-single-flat-counit-union-equation).
 
 Proof: Restrict N to U, V and their intersection. Open restriction preserves
 quasi-coherence and relative flatness, so the three hypotheses supply flat

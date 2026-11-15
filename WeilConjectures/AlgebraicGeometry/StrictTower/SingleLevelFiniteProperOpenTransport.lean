@@ -20,8 +20,9 @@ import all WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopen
 This is the coefficient-realization step between the finite site comparison and
 strict-tower evaluation. It contains no strict-tower object or evaluation functor.
 
-Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF
-(blueprint: lem-cbc-single-level-finite-proper-open-transport).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DA, 07A7, 099R, 09AF
 -/
 
 @[expose] public section
@@ -329,9 +330,6 @@ private theorem coefficientPlusCounit
   exact Iso.inv_hom_id_app_assoc (hPullbackPlus B Λ φ f) _ _
 
 /-- The canonical coefficient realization transports the normalized finite etale mate.
-Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF; the coefficient-realization
-part of steps 4--5 of the parent calculus proof
-(blueprint: lem-cbc-single-level-finite-proper-open-transport).
 Proof: factor H as site inverse image, finite-coefficient realization, and restriction
 of scalars. The underlying-sheaf identification of C fixes every sheafification-unit
 section. Its direct-image comparison is cDirect, and the inverse-image comparison is

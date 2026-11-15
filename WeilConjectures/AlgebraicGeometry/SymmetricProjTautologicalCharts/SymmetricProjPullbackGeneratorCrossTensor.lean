@@ -11,8 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjPullbackGeneratorLocalCoefficients
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjCrossTensorFromLocal
 
-/-! # Degree-two relation on pulled module generators
-(blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
+/-! # Degree-two relation on pulled module generators.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -26,11 +29,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 open Scheme.Modules CategoryTheory.MonoidalCategory
 
 /-- The degree-two cross relation on actual pulled generators over affine opens.
-
-Source: Stacks Project, Constructions, Tags 01N2 (lemma-base-change-map-proj),
-01NQ (lemma-relative-proj-base-change), 01NR (lemma-glue-relative-proj-twists),
-and 01OB (definition-projective-bundle).
-(blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
 
 Proof: refine W by inverse images of affine-pair charts for g and by their
 standard opens D_+(b(iota(v))). They cover: the degree-one base-change condition

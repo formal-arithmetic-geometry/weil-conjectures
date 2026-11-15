@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictAdjunctData
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerPureKernelNormalizationStatement
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerNormalizationComponents
 
-/-! # Identification and normalization of the surviving Kummer cohomology
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-strict-kummer-pure-kernel-normalization). -/
+/-! # Identification and normalization of the surviving Kummer cohomology -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,10 +30,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
 /-- Identify the surviving cohomology with roots, including its scalar action
 and the unit equation, after a pure strict-system comparison has been supplied.
 There is no assertion here that such a comparison exists.
-
-Source: diagonal tower system proof, step (3), kernel and transitions, and
-step (4), Kummer-unit calculation
-(blueprint: lem-sfb-strict-kummer-pure-kernel-normalization).
 
 Proof: on a common flat K-flat resolution, compare positive prime-power
 reduction with the two-term coefficient resolution. Its kernel is the roots

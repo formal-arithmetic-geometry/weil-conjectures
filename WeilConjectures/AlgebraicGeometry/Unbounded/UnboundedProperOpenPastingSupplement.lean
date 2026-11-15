@@ -234,7 +234,9 @@ public import WeilConjectures.AlgebraicGeometry.UnboundedProperOpenPasting
 /-!
 # Unbounded proper/open Pasting
 
-Source: Stacks Project, Tags 0F7C and 0F7D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7C, 0F7D
 -/
 
 @[expose] public section
@@ -585,8 +587,6 @@ private theorem derived_identity_fac
   rw [← Category.assoc, hf, exact_identity_fac, Iso.inv_hom_id_app_assoc]
 
 /-- Pasting and identities for comparisons normalized by the homotopy derived units.
-Source: Stacks Project, Tags 0F7C and 0F7D, including their identity cases.
-(blueprint: lem-amb-unbounded-proper-open-pasting).
 
 Proof:
 The two composition equations are the conclusions of the separate composition theorem.

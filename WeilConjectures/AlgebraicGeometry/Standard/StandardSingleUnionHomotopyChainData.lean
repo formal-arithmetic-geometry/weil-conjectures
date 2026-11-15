@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChang
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVCoverHomotopyData
 import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleOpenRelativeArrow
 
-/-! # Homotopy representatives of the resolved cover comparison -/
+/-! # Homotopy representatives of the resolved cover comparison
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08BV, 08HZ, 08FE, 08HY, 0DJ9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -95,8 +100,6 @@ private theorem unionHomotopyChainData_transport
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The resolved cover comparison before cylinder rectification.
-Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
-(blueprint: lem-pc-standard-single-union-homotopy-chain-data).
 
 Proof: Put W = U union V and pull its cover back to W_A. Resolve N[0] and
 its ordinary pullback by functorial injective-term K-injective complexes. The

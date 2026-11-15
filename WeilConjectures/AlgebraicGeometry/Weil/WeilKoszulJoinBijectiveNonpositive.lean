@@ -15,7 +15,11 @@ import Mathlib.LinearAlgebra.Prod
 Projection to the tail and contraction with the head coordinate give an explicit
 inverse to exterior assembly. Only head degrees zero and one survive in the tensor
 coproduct; checking these summands proves the graded join map is bijective.
-(Source: Stacks Project, Tag 0664; blueprint: new-weil-pbc-koszul-join-graded-nonpositive.)
+(
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0664, 0628, 0629
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +39,7 @@ open ExteriorAlgebra
 
 variable (R : Type (u + 1)) [CommRing R] (r : ℕ)
 
-/-- Wedge on the left with the first standard generator, after prefix inclusion.
-Source: Stacks Project, Tags 0628 and 0629
-(head-generator version of the source-library last-generator assembly proof). -/
+/-- Wedge on the left with the first standard generator, after prefix inclusion. -/
 private noncomputable def headWedge (n : ℕ) :
     ⋀[R]^n (Fin r →₀ R) →ₗ[R] ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
   (LinearMap.codRestrict (⋀[R]^(n + 1) (Fin (r + 1) →₀ R))
@@ -50,9 +52,7 @@ private noncomputable def headWedge (n : ℕ) :
       exact Submodule.mul_mem_mul (LinearMap.mem_range_self (ι R) _) x.property)).comp
     (exteriorPower.map n (koszulTailInclusion (A := R) r))
 
-/-- The explicit assembly map `(a,b) ↦ inclusion(a) + e_head ∧ inclusion(b)`.
-Source: Stacks Project, Tags 0628 and 0629
-(head-generator version of the source-library last-generator assembly proof). -/
+/-- The explicit assembly map `(a,b) ↦ inclusion(a) + e_head ∧ inclusion(b)`. -/
 private noncomputable def headAssembly (n : ℕ) :
     (⋀[R]^(n + 1) (Fin r →₀ R) × ⋀[R]^n (Fin r →₀ R)) →ₗ[R]
       ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
@@ -182,9 +182,7 @@ private theorem exterior_split (x : ExteriorAlgebra R (Fin (r + 1) →₀ R)) :
     abel_nf
     simp only [mul_smul_comm, ← mul_assoc]
 
-/-- Source: Stacks Project, Tags 0628 and 0629, splitting the exterior algebra on
-adjoining the first generator
-(head-generator version of the source-library last-generator assembly proof).
+/--
 
 Proof: let `p` be restriction of a finitely supported vector to the tail and
 let `δ` evaluate its head coordinate. Inclusion `j` and restriction satisfy
@@ -558,9 +556,7 @@ private theorem join_zero (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) :
 /-- Exterior projection and contraction split each negative-degree target into
 its head-free and head-containing summands. The tensor coproduct has exactly these
 surviving summands. Degree zero instead uses naturality of the zeroth exterior
-power. This includes rank zero, the zero ring, and exterior degrees above the rank.
-Source: Stacks Project, Tags 0628 and 0664.
-(blueprint: new-weil-pbc-koszul-join-graded-nonpositive). -/
+power. This includes rank zero, the zero ring, and exterior degrees above the rank. -/
 theorem koszulJoinGraded_bijective_of_nonpositive
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)
     (m : ℕ) (i : ℤ) (hi : i ≤ 0) :

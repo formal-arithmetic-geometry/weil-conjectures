@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 
 /-! # Scalar restriction preserves ordinary open support
 
-Source: Stacks Project, Modules on Sites, Tag 03DI, the sheafified direct-sum
-construction of extension by zero (blueprint: lem-sf-scalar-restriction-open-support).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -105,10 +106,6 @@ private theorem localizedOpen_unit_isIso
   exact triple.isIso_unit_iff_isIso_counit.mpr inferInstance
 
 /-- Restricting a single constant coefficient action preserves open support.
-
-Source: Stacks Project, sites-modules.tex, Tag 03DI (lemma-extension-by-zero),
-using Tag 03CY (lemma-sheafification-presheaf-modules)
-(blueprint: lem-sf-scalar-restriction-open-support).
 
 Proof: identify the small pro-etale site of U with the site localized at the
 subterminal open j. The specified module pullback is restriction in these coordinates;

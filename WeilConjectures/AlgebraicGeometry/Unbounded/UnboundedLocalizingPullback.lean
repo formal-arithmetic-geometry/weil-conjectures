@@ -28,10 +28,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Inverse image on localizing categories
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.md
-(blueprint: proposition-proper-base-change-localizing-categories--1).
-
 The restriction uses the ordinary unbounded derived module-object categories and the
 constant-scalar-model definition of constructibility. No derived completion is imposed.
 -/
@@ -292,8 +288,6 @@ private theorem pullback_of_constructible
 -- Elaborating all six coefficient instances needs the same heartbeat budget.
 /-- Exact inverse image preserves small sums, bounded constructible finite-Tor objects,
 and their localizing closure, for each of the six admissible coefficient types.
-Source: blueprint main-20261015, inverse image on the localizing categories
-(blueprint: proposition-proper-base-change-localizing-categories--1).
 
 Proof (the four steps of the node):
 

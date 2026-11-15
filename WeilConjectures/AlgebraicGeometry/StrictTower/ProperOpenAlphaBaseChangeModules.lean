@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.M
 
 /-! # Intrinsic alpha baseChange identity on module sheaves
 
-Source: Stacks Project, Tag 0F7F, with the arbitrary-ring underived refinement.
-(blueprint: lem-cbc-proper-open-alpha-base-change-modules)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7F
 -/
 
 @[expose] public noncomputable section
@@ -218,8 +219,6 @@ private theorem constantSquareCube
   exact H'.symm
 
 /-- Intrinsic alpha obeys cube pasting on module sheaves.
-Source: Stacks, Tag 0F7F, and the parent restriction argument, steps 1--3 and 6
-(blueprint: lem-cbc-proper-open-alpha-base-change-modules).
 Proof: Restriction detects maps into open extension: transport to fixed-scalar sheaves,
 compose with the monomorphism from open extension to direct image, and use the
 restriction/direct-image adjunction. Faithfulness transports equality back to modules.

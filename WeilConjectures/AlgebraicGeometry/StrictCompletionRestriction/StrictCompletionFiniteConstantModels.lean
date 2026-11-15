@@ -106,7 +106,12 @@ import all WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
 import all WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-/-! # StrictCompletionFiniteConstantModels -/
+/-! # StrictCompletionFiniteConstantModels
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D7, 03EK
+-/
 
 @[expose] public section
 
@@ -297,9 +302,6 @@ private theorem pointMatrixModels (X : Scheme.{u})
 
 /-- The section-action equivalence identifies finite constant local models with the
 specified finite scalar-matrix cokernel models on the actual pro-etale cover.
-
-Source: blueprint Locality paragraph and Stacks Tags 03D7 and 03EK
-(blueprint: lem-sfb-strict-completion-finite-constant-models).
 
 Proof: An exact additive functor carries finite free biproducts and the cokernel of
 any finite presentation to their canonical comparisons. Entries of the transported

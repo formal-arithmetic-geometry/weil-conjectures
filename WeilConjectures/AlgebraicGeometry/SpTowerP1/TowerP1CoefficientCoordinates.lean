@@ -15,10 +15,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-coefficient-coordinates).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -46,8 +42,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
 /-- The ordinary site/realization comparison of the constant module and Tate line,
-normalized on constants and on the same root section on every pro-etale test.
-Source: Levels, root comparison (blueprint: def-sp-p1-coefficient-coordinates). -/
+normalized on constants and on the same root section on every pro-etale test. -/
 structure CoefficientCoordinates (T : Scheme.{u})
     (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) where
   unit : (realization l E n T).obj
@@ -98,8 +93,7 @@ structure CoefficientCoordinates (T : Scheme.{u})
 
 attribute [local irreducible] realization CategoryTheory.Functor.mapDerivedCategory
 
-/-- Single-complex compatibility of the composite exact comparison functor.
-Source: Levels (blueprint: def-sp-p1-coefficient-coordinates). -/
+/-- Single-complex compatibility of the composite exact comparison functor. -/
 def nuSingle (T : Scheme.{u})
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (levelRing l E n))) :
     (nu l E n T).obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅
@@ -111,8 +105,7 @@ def nuSingle (T : Scheme.{u})
       (comparisonUpperStar (ModuleCat.{u + 1} (levelRing l E n)) T) 0).app M) ≪≫
     ((realization l E n T).mapDerivedCategorySingleFunctor 0).app _
 
-/-- The constant word; the only coefficient comparison sends one to one.
-Source: Levels (blueprint: def-sp-p1-coefficient-coordinates). -/
+/-- The constant word; the only coefficient comparison sends one to one. -/
 def unitWord (T : Scheme.{u})
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))} (c : CoefficientCoordinates l E n T hT) :
     LevelWord l E n T where
@@ -122,8 +115,7 @@ def unitWord (T : Scheme.{u})
     (DerivedCategory.singleFunctor _ 0).mapIso c.unit ≪≫
     (((SpTowerShriek.ev l E T n).mapDerivedCategorySingleFunctor 0).app _).symm).hom
 
-/-- The shifted line word; its transport includes lineEvaluation and exact shift maps.
-Source: Levels, twists and shifts (blueprint: def-sp-p1-coefficient-coordinates). -/
+/-- The shifted line word; its transport includes lineEvaluation and exact shift maps. -/
 def lineWord {T : Scheme.{u}} (t : SpTowerClasses.Chern l E T)
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))} (c : CoefficientCoordinates l E n T hT) :
     LevelWord l E n T where

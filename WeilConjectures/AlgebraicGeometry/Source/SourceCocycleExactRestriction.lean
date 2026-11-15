@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Source.SourceLocalizedCocycleHom
 
 /-! # Restriction of a cocycle through exact strict-local functors
 
-Source: Stacks Project, Tags 03Q9 and 03QO, restriction and exact global sections.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q9, 03QO
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -55,10 +57,6 @@ set_option backward.isDefEq.respectTransparency false in
 comparisons for exact inverse image and exact strict-local sections. This assertion
 concerns complexes and their homology only, before localization or transport to a
 specified derived object.
-
-Source: Stacks Project, Tags 03Q9 (restriction of an injective complex) and 03QO
-(exactness of strict-local sections).
-(blueprint: lem-weil-pbc-source-cocycle-exact-restriction).
 
 Proof: the inverse of leftHomologyData.homologyIso sends the cohomology class of the
 cocycle to its homology class in the Hom complex. Degreewise free-generator evaluation
@@ -215,10 +213,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A natural transformation from neighbourhood sections to exact strict-local sections
 sends the sections cohomology class of a cocycle to the restriction of its homology section.
 No K-injectivity or localization bijectivity is needed for this assertion.
-
-Source: Stacks Project, Tags 03Q9 and 03QO, the restriction of an injective complex
-and commutation of exact inverse image and strict-local sections with homology.
-(blueprint: lem-weil-pbc-source-cocycle-exact-restriction).
 
 Proof: evaluate the single-source cocycle degreewise using smallModel_sourceFreeSectionsComplexIso.
 Its class in the sections complex is the image of the Hom-complex class under the

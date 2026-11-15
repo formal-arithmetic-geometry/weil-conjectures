@@ -655,8 +655,6 @@ set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words.
-Source: blueprint operations proof (2), pullback compositor normalization.
-(blueprint: new-lem-sp-strict-finite-pullback-square-coherence).
 
 Proof: compare the ordinary pullback compositors by transposing under the
 constant-ring pullback adjunction. The normalization of openSquarePullbackModel

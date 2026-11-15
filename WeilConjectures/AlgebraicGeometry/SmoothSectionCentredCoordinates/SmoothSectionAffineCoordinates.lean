@@ -25,8 +25,10 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 # Affine regular coordinates centred on a smooth section
 
 The geometric construction of centred étale charts, with its affine ideal equations.
-Source: Stacks Tags 054L, 024T and 00LF.
-(blueprint: lem-sc-smooth-section-affine-coordinates).
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 054L, 024T, 00LF, 01IT, 01I4
 -/
 
 @[expose] public noncomputable section
@@ -36,9 +38,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.SmoothSectionCentredCoordinates
 
-/-- The geometric and regular-equation data of an affine centred section chart.
-Source: Stacks Tags 054L, 024T and 00LF.
-(blueprint: lem-sc-smooth-section-affine-coordinates). -/
+/-- The geometric and regular-equation data of an affine centred section chart. -/
 structure AffineChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
     (s : S ⟶ V) [IsClosedImmersion s] where
   T : S.affineOpens
@@ -71,8 +71,6 @@ structure AffineChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
 set_option backward.isDefEq.respectTransparency false in
 /-- Every point of the base has a centred affine étale chart whose coordinate ideal
 is the section kernel and whose coordinates form a regular sequence.
-Source: Stacks Tags 054L, 024T, 01IT, 01I4 and 00LF.
-(blueprint: lem-sc-smooth-section-affine-coordinates).
 
 Proof: Apply the proved adopted-source theorem
 `Scheme.Hom.exists_etale_coordinates_of_mem_range` at t. It supplies affine

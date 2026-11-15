@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Injectivity of relatively flat single base change
 
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor.
-(blueprint: lem-pc-standard-flat-single-base-change-mono).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A1D, 0DJ9
 -/
 
 @[expose] public section
@@ -66,10 +67,6 @@ private theorem single_qcoh_terms (X : Scheme.{u}) (M : X.Modules) [M.IsQuasicoh
 
 -- The stalk and pinned counit comparisons unfold several shared module carriers.
 /-- The canonical single-module base-change comparison is injective on cohomology.
-
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor, specialized to
-E = O_Y[0] and G = M[0], and Tag 0DJ9, lemma-single-complex-base-change.
-(blueprint: lem-pc-standard-flat-single-base-change-mono).
 
 Proof: Work locally on the new base and the original base, so both bases are
 affine. On an affine source chart, relative flatness of M makes its module of

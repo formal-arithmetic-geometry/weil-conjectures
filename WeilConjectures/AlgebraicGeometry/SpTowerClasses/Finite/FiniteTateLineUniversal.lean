@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Tate.TateInverseLimitBaseChangeSupp
 
 /-! # Universal property of the finite Tate line
 
-Source: blueprint sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes (2), evaluation of coefficient extension.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -88,8 +89,6 @@ private def forgetHomEquiv (T : Scheme.{u}) (k : ℕ) (hk : 0 < k)
   right_inv f := by ext U x; rfl
 
 /-- The finite Tate line represents additive maps out of the finite roots sheaf.
-Source: blueprint classes (2), finite coefficient extension, and Stacks 03EK
-(blueprint: lem-sp-finite-tate-line-universal).
 
 Proof: the finite Tate line is the sheafification of the sectionwise tensor
 B tensor over ZMod(ell^(n+1)) with the canonical roots module. The

@@ -10,8 +10,11 @@ import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
 
 /-! # The section-preserving base of strict ell-power coordinates
 
-Source: Zheng Construction 4.1; the coefficient-tower construction in the
-smooth-purity blueprint, and Stacks 07A4.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A4
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -174,9 +177,6 @@ private theorem ramification_factor :
 
 /-- The actual ell-power tower has a section-preserving sequence-site base whose
 calculus is the systems field of semilinear derived sections at every scheme.
-Source: Zheng Construction 4.1; blueprint operations proof (2), coefficient
-presentation step; Stacks 07A4.
-(blueprint: lem-sp-strict-base-coordinates).
 
 Proof: factor ell by the irreducible specified uniformizer in the integer DVR.
 Its absolute value is less than one, so its exponent is positive. Taking powers

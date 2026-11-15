@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Open pullback of the supported coefficient tensor comparison
 
-Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in
-lem-pur-supported-product-localization, steps 5 and 11.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09XP, 0F1E
 -/
 
 @[expose] public section
@@ -29,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
 /-- Identify the derived first coefficient functor with coefficients followed by the
-canonical derived projection inverse image.
-Source: Stacks Tag 0F1E (blueprint: lem-pur-supported-coefficient-open-tensor). -/
+canonical derived projection inverse image. -/
 noncomputable def supportFirstCoefficientProjectionIso (A : Type (u + 1)) [CommRing A]
     {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
     [IsClosedImmersion b] :
@@ -43,8 +43,7 @@ noncomputable def supportFirstCoefficientProjectionIso (A : Type (u + 1)) [CommR
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
         (pullback.fst f g)).symm
 
-/-- The analogous comparison for the second projection.
-Source: Stacks Tag 0F1E (blueprint: lem-pur-supported-coefficient-open-tensor). -/
+/-- The analogous comparison for the second projection. -/
 noncomputable def supportSecondCoefficientProjectionIso (A : Type (u + 1)) [CommRing A]
     {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
     [IsClosedImmersion d] :

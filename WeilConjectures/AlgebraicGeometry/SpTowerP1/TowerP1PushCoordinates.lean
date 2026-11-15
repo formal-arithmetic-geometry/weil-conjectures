@@ -14,10 +14,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-derived-push-coordinates).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -42,8 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
-/-- The direct-image coordinates determined on every K-injective representative.
-Source: Levels (blueprint: def-sp-p1-derived-push-coordinates). -/
+/-- The direct-image coordinates determined on every K-injective representative. -/
 structure PushCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y)
     extends OrdinaryPushCoordinates l E n f where
   derived : (realization l E n X).mapDerivedCategory ⋙

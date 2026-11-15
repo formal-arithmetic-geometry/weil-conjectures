@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # Naturality of normalized derived local classes
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-square-local-class-naturality).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -26,8 +27,6 @@ namespace AlgebraicGeometry.RingedSpace
 variable {Y : RingedSpace.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]
 /-- Naturality of the normalized derived local class.
-Source: Stacks Project, Cohomology, Tag 0BKJ
-(blueprint: lem-weil-pbc-square-local-class-naturality).
 
 Proof: On K-injective representatives, compose naturality of the derived unit,
 localization homology and exact sheafification. Lift an arbitrary derived morphism

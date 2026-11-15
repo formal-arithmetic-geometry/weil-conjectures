@@ -59,13 +59,14 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualTowerCore
 
 /-! # Root-projection reduction of finite ramified Tate coefficients
 
-Source: Stacks Project, Tags 0990, 090K, 03EK and 03EL; the explicit nine-step
-root-limit argument in the DAG (blueprint: lem-amb-tate-root-projection-reduction).
-
 All levels below are positive: index `r` means exponent `r + 1`, and coefficient
 index `n` means quotient by the uniformizer to exponent `n + 1`. Pullback maps
 are specified by their direct-image adjuncts. This retains the specified maps,
 and expresses their coherence using the actual fibre-product comparisons.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0990, 090K, 03EK, 03EL, 03D1
 -/
 
 @[expose] public noncomputable section
@@ -81,38 +82,32 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (n : ℕ)
 
-/-- The schemes allowed in the statement, including the empty scheme.
-Source: the hypothesis on T (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- The schemes allowed in the statement, including the empty scheme. -/
 abbrev AmbTateBase := {T : Scheme.{u} // ∀ x : T, IsUnit (l : T.presheaf.stalk x)}
 
-/-- Admissible positive root exponents, with only the annihilation condition on A.
-Source: the hypothesis on r (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- Admissible positive root exponents, with only the annihilation condition on A. -/
 abbrev AmbTateLevel :=
   {r : ℕ // ((l ^ (r + 1) : ℕ) : Padic.coefficientExtensionRing l E (n + 1)) = 0}
 
-/-- Restrict the existing coordinatewise root action to the constant Z_l sheaf.
-Source: proof step 1 (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- Restrict the existing coordinatewise root action to the constant Z_l sheaf. -/
 def ambTateConstantRootModule (T : Scheme.{u}) :
     SheafOfModules.{u + 1} (purTwistRing T (purTwistZlConstant T l)) :=
   (SheafOfModules.restrictScalars
     ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
       (purTwistZlCompletionMap T l))).obj (purTwistZlModule T l)
 
-/-- The composite constant scalar map Z_l to O_E to A.
-Source: proof step 1 (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- The composite constant scalar map Z_l to O_E to A. -/
 def ambTateScalar (T : Scheme.{u}) :
     purTwistZlConstant T l ⟶ WeilConjectures.integralCoefficientCommRingSheaf l E T n :=
   purTwistConstantIntegersMap T l E ≫ purTwistIntegralQuotient T l E n
 
-/-- The ordinary tensor H = L tensor over the constant Z_l sheaf with A.
-Source: proof step 1 (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- The ordinary tensor H = L tensor over the constant Z_l sheaf with A. -/
 def ambTateReduced (T : Scheme.{u}) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (ambTateScalar l E n T) (ambTateConstantRootModule l T)
 
-/-- A pure tensor in H, with the coefficient written first as in change of rings.
-Source: Stacks Tag 03EK (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- A pure tensor in H, with the coefficient written first as in change of rings. -/
 def ambTateReducedPure (T : Scheme.{u}) (U : T.ProEt)
     (a : (WeilConjectures.integralCoefficientCommRingSheaf l E T n).obj.obj (op U))
     (x : (purTwistZlOne T l).obj.obj (op U)) :
@@ -122,8 +117,7 @@ def ambTateReducedPure (T : Scheme.{u}) (U : T.ProEt)
     (ambTateScalar l E n T) (ambTateConstantRootModule l T) U a x
 
 /-- The unique finite scalar map, constructed using the characteristic divisibility
-criterion; it requires no flatness. Source: Stacks Tag 03EK
-(blueprint: lem-amb-tate-root-projection-reduction). -/
+criterion; it requires no flatness. -/
 def ambTateFiniteScalar (T : Scheme.{u}) (r : AmbTateLevel l E n) :
     purTwistFiniteRing T l r.val ⟶
       WeilConjectures.integralCoefficientCommRingSheaf l E T n :=
@@ -137,15 +131,13 @@ def ambTateFiniteScalar (T : Scheme.{u}) (r : AmbTateLevel l E n) :
 
 attribute [irreducible] ambTateFiniteScalar
 
-/-- D_r is the recorded finite roots module tensored over the constant Z/l^r with A.
-Source: Stacks Tag 03EK (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- D_r is the recorded finite roots module tensored over the constant Z/l^r with A. -/
 def ambTateFiniteRoots (T : Scheme.{u}) (r : AmbTateLevel l E n) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (ambTateFiniteScalar l E n T r) (purTwistRootsModule T l r.val)
 
-/-- Pure tensors in D_r, using the existing sheafification unit.
-Source: Stacks Tag 03EK (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- Pure tensors in D_r, using the existing sheafification unit. -/
 def ambTateFinitePure (T : Scheme.{u}) (r : AmbTateLevel l E n) (U : T.ProEt)
     (a : (WeilConjectures.integralCoefficientCommRingSheaf l E T n).obj.obj (op U))
     (x : (proEtaleRootsOfUnitySheaf T (l ^ (r.val + 1))).obj.obj (op U)) :
@@ -154,8 +146,7 @@ def ambTateFinitePure (T : Scheme.{u}) (r : AmbTateLevel l E n) (U : T.ProEt)
     (WeilConjectures.integralCoefficientCommRingSheaf l E T n)
     (ambTateFiniteScalar l E n T r) (purTwistRootsModule T l r.val) U a x
 
-/-- The double pure tensor in the prescribed P = (L tensor O_E) tensor A.
-Source: proof step 1 (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- The double pure tensor in the prescribed P = (L tensor O_E) tensor A. -/
 def ambTateSourcePure (T : Scheme.{u}) (U : T.ProEt)
     (a : (WeilConjectures.integralCoefficientCommRingSheaf l E T n).obj.obj (op U))
     (b : (purTwistIntegralConstant T l E).obj.obj (op U))
@@ -166,15 +157,13 @@ def ambTateSourcePure (T : Scheme.{u}) (U : T.ProEt)
     (purTwistIntegralQuotient T l E n) (purTwistIntegralOne T l E) U a
     (purTwistIntegralTensor T l E (op U) b x)
 
-/-- The existing constant-coefficient direct image, with its coefficient type displayed.
-Source: Stacks Tag 03D1 (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- The existing constant-coefficient direct image, with its coefficient type displayed. -/
 def ambTateDirectImage {T T' : Scheme.{u}} (v : T' ⟶ T) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T' n) ⥤
       SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n) :=
   proEtaleConstantModuleDirectImage v (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- Evaluation of an adjunct on a local section, exposing its target section type.
-Source: Stacks Tag 03D1 (blueprint: lem-amb-tate-root-projection-reduction). -/
+/-- Evaluation of an adjunct on a local section, exposing its target section type. -/
 def ambTateDirectSection {T T' : Scheme.{u}} (v : T' ⟶ T)
     {M : SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T n)}
     {N : SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E T' n)}
@@ -184,9 +173,7 @@ def ambTateDirectSection {T T' : Scheme.{u}} (v : T' ⟶ T)
 
 /-- The conclusion, with every map fixed by its specified root or tensor formula.
 The fields c and b are the direct-image adjuncts of c_L and b_v. The square is
-therefore exactly the adjunct of the displayed inverse-image square in the node.
-Source: the full statement and proof steps 1--9
-(blueprint: lem-amb-tate-root-projection-reduction). -/
+therefore exactly the adjunct of the displayed inverse-image square in the node. -/
 structure AmbTateRootProjectionData where
   /-- Reassociation for the prescribed finite twist. -/
   j : ∀ T : AmbTateBase l, purTwistFiniteOne T.val l E n ≅ ambTateReduced l E n T.val
@@ -917,8 +904,6 @@ private theorem ambSquare (d : AmbRootTowerPullbackCoherence.{u} l)
       r.val r.property v)
 
 /-- Root-projection reduction with arbitrary ramification and annihilated finite coefficients.
-Source: Stacks Tags 0990, 090K, 03EK and 03EL; explicit root-limit proof below
-(blueprint: lem-amb-tate-root-projection-reduction).
 
 Proof:
 

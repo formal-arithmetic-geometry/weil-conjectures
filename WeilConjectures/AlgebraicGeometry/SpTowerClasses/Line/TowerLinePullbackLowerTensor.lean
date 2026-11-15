@@ -198,10 +198,6 @@ private theorem map_conjugate
 path on each higher-level pure tensor. No comparison at the higher level, target
 Chern datum, system isomorphism, or horizontal square is assumed or constructed.
 
-Source: current classes blueprint, clause (2), scalar extension of the roots tower;
-step 2 of lem-sfb-tower-class-line-pullback-horizontal.
-(blueprint: lem-sfb-tower-line-pullback-lower-tensor).
-
 Proof: the ordinaryUnitTransition equation of the repaired Geometry interface
 identifies the finite adjunct of the lower horizontal restriction with the lower-level
 unit precomposed with the Y transition. Naturality of the finite adjunction and

@@ -155,10 +155,6 @@ private theorem normalize_targets
 
 /-- Shift the unshifted Kummer comparison, preserving its positive boundary adjunct.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2);
-expanded `SmoothPurityTowerClasses`, steps 3--7.
-(blueprint: lem-sfb-normalized-kummer-target).
-
 Proof: obtain the roots module and its once-shifted comparison from the unshifted
 Kummer computation. The adjunction to exact forgetting induces a coherent shift
 structure on the derived extension. Shift its comparison once, prepend the

@@ -19,7 +19,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 
-/-! # Principal quotient tensor models for strict section cones -/
+/-! # Principal quotient tensor models for strict section cones
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 06YS, 06YT, 08TC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -178,10 +183,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The scalar-cone presentation computes the actual principal quotient tensors,
 with their normalized tensor models and augmented Roos completion.
-
-Source: blueprint latest, derived-nakayama-first-reduction proof, Cones paragraph;
-Locality in integral-ctf-equals-bc; Stacks Tags 03EK, 06YS, 06YT and 08TC
-(blueprint: lem-sfb-strict-section-principal-quotient-models).
 
 Proof:
 The canonical datum identifies d with multiplication by the chosen uniformizer.

@@ -13,9 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothDualityBaseChangeCo
 
 /-! # Arbitrary base change for smooth ambient duality
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6).
-
 The exceptional comparison is the transpose of the inverse compact-support exchange
 followed by the pulled-back counit. The coefficient-unit and tensor comparisons below
 are the canonical ones; no orientation or arbitrary comparison is chosen.
@@ -36,9 +33,7 @@ attribute [local instance] Scheme.Etale.essentiallySmall
 attribute [local instance high] CategoryTheory.SymmetricCategory.toBraidedCategory
 
 /-- The canonical exceptional base-change morphism, obtained by transposing the pulled-back
-counit through the inverse compact-support exchange. Source: blueprint
-sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md, first proof paragraph
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6). All functors act on ordinary
+counit through the inverse compact-support exchange. All functors act on ordinary
 unbounded categories. The occurrence of the left derived inverse image is canonically identified
 with the exact degreewise inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`. -/
 noncomputable def smoothExceptionalBaseChangeMap
@@ -58,9 +53,7 @@ noncomputable def smoothExceptionalBaseChangeMap
         ((rightDerivedUpperShriekAdjunction A f).counit.app K))
 
 /-- The base-change morphism on relative dualizing complexes: the exceptional comparison at
-the coefficient unit, followed by the canonical inverse-image identification of that unit.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md,
-clause at `K = A_S` (blueprint: proposition-exceptional-inverse-image-smooth-morphism--6). -/
+the coefficient unit, followed by the canonical inverse-image identification of that unit. -/
 noncomputable def smoothDualizingBaseChangeMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]
@@ -73,10 +66,7 @@ noncomputable def smoothDualizingBaseChangeMap
       (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom
 
 /-- The canonical identification `g'^* f^* K ≅ f'^* g^* K`, formed from the inverse-image
-composition isomorphisms and the equality of the two maps around the pullback square.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md,
-tensor-compatibility identification (blueprint:
-proposition-exceptional-inverse-image-smooth-morphism--6). -/
+composition isomorphisms and the equality of the two maps around the pullback square. -/
 noncomputable def smoothSquarePullbackIso
     (A : Type (u + 1)) [CommRing A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
@@ -90,9 +80,7 @@ noncomputable def smoothSquarePullbackIso
       (pullback.fst f g ≫ f) (pullback.condition)).app K
 
 /-- The tensor-domain identification in the smooth-duality square. Its first factor is the
-canonical K-flat derived tensor-pullback comparison; the second is inverse-image composition.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md,
-last sentence (blueprint: proposition-exceptional-inverse-image-smooth-morphism--6). -/
+canonical K-flat derived tensor-pullback comparison; the second is inverse-image composition. -/
 noncomputable def smoothDualityTensorBaseChangeIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
@@ -297,8 +285,6 @@ private lemma dualizing_tensor_base_change
 
 /-- Arbitrary base change for smooth ambient duality on ordinary unbounded etale
 module derived categories, including the dualizing-complex and tensor compatibilities.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6).
 
 Proof:
 1. First supply the missing unbounded refinement argument, rather than invoke the bounded-below

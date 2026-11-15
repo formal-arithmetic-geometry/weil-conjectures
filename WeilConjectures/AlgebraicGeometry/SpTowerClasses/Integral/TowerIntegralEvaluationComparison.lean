@@ -23,8 +23,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Exact finite evaluation preserves the normalized integral boundary equality.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-integral-evaluation-comparison).
 Proof: project the integral equality from Fact and apply congr_arg_heq to
 mapSingleArrow for exact evaluation, keeping both coefficient towers variable.
 This gives the required heterogeneous equality directly. -/

@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
-/-! # Identity direct-image comparison across the bounded-below inclusion -/
+/-! # Identity direct-image comparison across the bounded-below inclusion
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 015F, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -64,8 +69,6 @@ private theorem plus_identity_unit
     Iso.symm_hom, a, R, e, d, C, Functor.id_obj, Category.assoc] using hv
 
 /-- The canonical identity direct-image normalization agrees across D+ inclusion.
-Source: Step 3 of lem-pur-refinement-mate-plus-compatibility; Stacks Tags 015F
-and 0B65 (blueprint: lem-pur-identity-push-plus-inclusion).
 
 Proof: conjugate the inverse canonical identity pullback under its derived
 adjunction and the identity adjunction. The inverse conjugate is the transpose

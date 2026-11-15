@@ -19,13 +19,13 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 /-!
 # Finite-type affine frames for a vector bundle
 
-Source: blueprint sec-smooth-purity/sk-prop-sp-orientation,
-preparation for sk-prop-sp-orientation-vector-bundle, Steps 1–3;
-Stacks Project, Tags 01T6, 01T2, 01IT, 01C6, 01M1, 01S8 and 02G2.
-(blueprint: lem-pur-vector-bundle-finite-type-frames).
-
 The Noetherian base is a conclusion, supplied as an existential witness before using the
 existing bundle construction. No separatedness assumption is imposed on the base.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01T6, 01T2, 01IT, 01C6, 01M1, 01S8, 02G2,
+  01S7
 -/
 
 @[expose] public section
@@ -189,11 +189,6 @@ set_option linter.unusedVariables false in
 of constant finite rank. Their induced bundle charts have separated finite-type total
 spaces, and frames compare on affine refinements of overlaps.
 
-Source: blueprint sec-smooth-purity/sk-prop-sp-orientation,
-sk-prop-sp-orientation-vector-bundle, geometric preparation for Steps 1–3;
-Stacks Tags 01T6, 01T2, 01IT, 01C6, 01M1, 01S8, 01S7 and 02G2.
-(blueprint: lem-pur-vector-bundle-finite-type-frames).
-
 Proof:
 1. The field is Noetherian. Finite type over its spectrum makes S Noetherian by
 lem-weil-pbc-finite-type-over-noetherian. Choose local module frames by
@@ -202,7 +197,7 @@ lem-weil-pbc-affine-opens-basis, and take a finite subcover by quasi-compactness
 The rings of these opens are finitely generated over k by lem-weil-pbc-lft-affine-pairs.
 2. The quasi-coherent symmetric algebra restricts to the symmetric algebra of sections
 by lem-weil-pbc-quasi-coherent-symmetric-algebra-affine. Relative Spec and its restriction
-compatibility (lem-weil-pbc-affine-morphism-relative-spec) identify each inverse image
+compatibility identify each inverse image
 with the corresponding symmetric-algebra spectrum. The basis-to-polynomial equivalence
 lem-weil-pbc-symmetric-algebra-free-module-polynomial identifies the frame generators
 with variables. Scalars give the polynomial projection; augmentation kills the variables,

@@ -15,9 +15,9 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Detecting a prime cyclic coefficient inside a nonzero ring quotient
 
-Source: Stacks Project, Tag 03FD, with the vector-space retract argument needed
-in the arbitrary-ring reading of the coefficient step in Tag 0F08.
-(blueprint: lem-sbc-prime-quotient-detection)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 0F08
 -/
 
 @[expose] public section
@@ -81,11 +81,8 @@ private theorem preservesSheafification_forget_modules
 /-- Vanishing for Lambda/rLambda implies vanishing for the prime cyclic coefficient
 whenever r is prime and is not a unit in Lambda.
 
-Source: Stacks Project, Tag 03FD, module/abelian cohomology comparison;
-Tag 0F08, proof's coefficient reduction, extended to arbitrary Lambda by the
-following retract argument. This argument takes place in abelian sheaves, so
+This argument takes place in abelian sheaves, so
 no Lambda-linear decomposition of a Lambda-module is asserted.
-(blueprint: lem-sbc-prime-quotient-detection)
 
 Proof:
 1. Since r is not a unit, the ideal (r) is proper: if 1 belongs to it, writing

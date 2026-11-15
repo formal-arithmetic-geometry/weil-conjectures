@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteInte
 
 /-! # Evaluating the integral Kummer composite
 
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-integral-root-boundary-equation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.ofIsGrothendieckAbelian HomologicalComplex.quasiIso
 
 /-- Exact comparison of the positive Kummer boundary is comparison of the
-Yoneda composite, for any units extension. Source: Stacks 03PL and realization
-of the Kummer connecting homomorphism
-(blueprint: lem-sfb-finite-integral-root-boundary-equation).
+Yoneda composite, for any units extension.
 
 Proof: apply the displayed integral roots comparison to the Yoneda composite.
 The positive Kummer class is definitionally composition with the given

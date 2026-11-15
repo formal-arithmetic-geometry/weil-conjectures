@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictAdjunctData
 import WeilConjectures.AlgebraicGeometry.Strict.StrictKummerCohomologyConcentration
 import WeilConjectures.AlgebraicGeometry.Strict.StrictKummerPureKernelNormalization
 
-/-! # Strict Kummer target and normalization of its evaluated units
-Source: diagonal tower system proof, step (3), target paragraph, and step (4).
-(blueprint: lem-sfb-strict-kummer-unit-normalization). -/
+/-! # Strict Kummer target and normalization of its evaluated units -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,9 +29,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
 
 /-- Normalized target data, with its coefficient classes kept as parameters.
 This is the existential roots comparison and its unit equation, packaged to avoid
-unfolding coefficient constructions while checking a concrete specialization.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-strict-kummer-unit-normalization). -/
+unfolding coefficient constructions while checking a concrete specialization. -/
 @[irreducible] def KummerUnitNormalizedTarget
     {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [Category B] [abB : Abelian B]
@@ -104,10 +100,6 @@ private theorem kummer_target_of_concentration
 
 /-- The strict Kummer comparison is normalized on the unit of shifted units.
 There is no arbitrary source, extension class, or residue lift in this statement.
-
-Source: diagonal tower system proof, step (3), target paragraph, and the
-Kummer-unit computation in step (4)
-(blueprint: lem-sfb-strict-kummer-unit-normalization).
 
 Proof: compute simultaneous reduction of comparison units on a common K-flat
 resolution, comparing evaluation with the two-term resolution of each positive

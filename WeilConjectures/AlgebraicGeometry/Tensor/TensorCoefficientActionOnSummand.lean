@@ -10,9 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorIdealSectionCoefficientCom
 
 /-! # Action on one ideal summand equals tensor multiplication
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, the quotient action on a square-zero ideal.
-(blueprint: lem-sc-tensor-coefficient-action-on-summand).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -28,8 +28,6 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
 /-- On one source summand the homogeneous action is the canonical tensor multiplication.
-Source: Stacks Project, Tag 09MS, graded ideal sequence; Tag 0B8S, quotient action.
-(blueprint: lem-sc-tensor-coefficient-action-on-summand).
 Proof: On an open trivializing L, locally lift the restricted section f through the
 closed-immersion unit in degree n. By b_quotient its image in C is the restriction
 of tensorGradedSection. Apply hlocal to this lift and the image under k of an ideal

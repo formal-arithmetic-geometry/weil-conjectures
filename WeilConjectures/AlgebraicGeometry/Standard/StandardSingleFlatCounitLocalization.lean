@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitLocali
 
 /-! # From local sheaf presentations to flat stalk coordinates
 
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -23,9 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Affine-base presentations give stalk scalar-extension coordinates on arbitrary bases.
-Source: Stacks Project, Tag 0DJ9, locality paragraph; Tags 06YB and 0D5S,
-exact stalks and pullback-stalk comparison.
-(blueprint: lem-pc-standard-single-flat-counit-localization).
 
 Proof: Choose an affine neighbourhood S of g(a) and an affine neighbourhood T
 of a inside g inverse-image S. Restrict p to p inverse-image S, M to that source,

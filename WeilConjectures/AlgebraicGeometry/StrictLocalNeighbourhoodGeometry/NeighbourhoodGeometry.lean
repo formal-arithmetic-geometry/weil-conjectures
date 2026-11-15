@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 /-! # Canonical neighbourhood geometry on the small colimit model
 
 Transport upstream's geometry along the canonical spectrum-colimit isomorphism.
-Source: Stacks Project, Tag 03Q9, first proof paragraph.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The canonical comparison of the two strict-local pullbacks, over X.
-Source: Stacks Project, Tag 03Q9; final-functor colimit comparison.
-(blueprint: lem-weil-pbc-strict-local-small-model-geometry-transport). -/
+/-- The canonical comparison of the two strict-local pullbacks, over X. -/
 noncomputable def strictLocalSmallModelPullbackIso {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     pullback f (Scheme.strictHenselizationStructuralMap s) ≅
@@ -36,9 +37,7 @@ noncomputable def strictLocalSmallModelPullbackIso {X S : Scheme.{v}} (f : X ⟶
 
 namespace StrictLocalNeighbourhoodGeometry
 
-/-- Upstream's legs expressed on the small coordinate-ring colimit model.
-Source: Stacks Project, Tag 03Q9.
-(blueprint: lem-weil-pbc-strict-local-small-model-geometry-transport). -/
+/-- Upstream's legs expressed on the small coordinate-ring colimit model. -/
 noncomputable def smallModelLegs {X S : Scheme.{v}} {f : X ⟶ S}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}
     (Q : StrictLocalNeighbourhoodGeometry f s) :
@@ -48,8 +47,6 @@ noncomputable def smallModelLegs {X S : Scheme.{v}} {f : X ⟶ S}
   (Cone.mk _ Q.legs).extend (strictLocalSmallModelPullbackIso f s).hom |>.π
 
 /-- Transport preserves the limiting property of the cone.
-Source: Stacks Project, Tag 03Q9.
-(blueprint: lem-weil-pbc-strict-local-small-model-geometry-transport).
 Proof: extend the upstream limiting cone along the pullback comparison isomorphism;
 `Cone.extendIso` identifies it with the original limit cone. -/
 noncomputable def smallModelIsLimit {X S : Scheme.{v}} {f : X ⟶ S}
@@ -59,8 +56,6 @@ noncomputable def smallModelIsLimit {X S : Scheme.{v}} {f : X ⟶ S}
     (Cone.extendIso (Cone.mk _ Q.legs) (strictLocalSmallModelPullbackIso f s).symm)
 
 /-- The transported legs have the original projection to X.
-Source: Stacks Project, Tag 03Q9.
-(blueprint: lem-weil-pbc-strict-local-small-model-geometry-transport).
 Proof: compose the upstream projection equation with the comparison and use the
 first projection formula for the pullback map. -/
 theorem smallModelOver {X S : Scheme.{v}} {f : X ⟶ S}
@@ -74,8 +69,6 @@ theorem smallModelOver {X S : Scheme.{v}} {f : X ⟶ S}
   simp [strictLocalSmallModelPullbackIso]
 
 /-- The transported base component is exactly the small-model colimit leg.
-Source: Stacks Project, Tag 03Q9.
-(blueprint: lem-weil-pbc-strict-local-small-model-geometry-transport).
 Proof: the inverse final-functor colimit comparison preserves each coprojection.
 Apply Spec, compose with the affine Gamma-Spec identification, then use the second
 projection formula for the pullback comparison and the upstream first-component equation. -/

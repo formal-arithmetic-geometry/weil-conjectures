@@ -92,7 +92,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 
 /-! # Derived inverse-image faces of strict coefficient transport
 
-Source: Stacks Project, Tags 0D6D and 0G7E; Zheng, Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D6D, 0G7E
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 -- After pruning, this module only keeps private declarations.

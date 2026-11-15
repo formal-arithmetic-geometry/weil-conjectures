@@ -20,9 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 
 /-! The affine Leray comparison before passing from modules to abelian sheaves.
 
-Source: Stacks Project, Tags 01XK, 01FB and 03FD.
-(blueprint: new-structure-derived-image-module-naturality)
-
 Proof: Apply the affine Leray edge isomorphisms to the degree-one cohomology of
 the two proper direct images. The cocycle square for the derived adjunction unit,
 the canonical single pullback transpose, and naturality of direct-image composition
@@ -30,7 +27,12 @@ identify the resulting map with `moduleCohomologyFMap` for the structure h-map.
 The identity-base truncated edge is invertible by its local-class formula and
 sheafification of local cohomology. The total/classical comparison is the canonical
 single comparison. This argument is uniform in the finite family and supplies the
-two additive equivalences and their displayed square. -/
+two additive equivalences and their displayed square.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01XK, 01FB, 03FD, 0BKJ
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -281,9 +283,6 @@ noncomputable def affineLerayTargetEquiv
 
 /-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
 `affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
-Source: Stacks Project, Tags 01XK (affine higher-image vanishing), 01FB (h-maps),
-and 03FD (module cohomology); local classes and sheafification as in Tag 0BKJ.
-(blueprint: new-structure-derived-image-module-naturality).
 
 Proof: The cocycle Leray edge is bijective by affine higher-image vanishing; compose
 with the inverse total/classical comparison. The identity-base truncated edge is an

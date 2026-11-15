@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearScalarRest
 
 /-! # Transition compatibility of normalized scalar direct-image components
 
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-scalar-direct-transition-compatibility). -/
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -83,8 +86,6 @@ private theorem scalarPushedLevel_heq (C : OrdinaryScalarRestriction R φ B ψ)
     ((Scheme.proEtaleBaseChange f).op.obj H) _).trans h
 
 /-- Normalized direct-image component maps respect the successor transitions.
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-scalar-direct-transition-compatibility).
 Proof: postcompose with the pushed level comparison, which is an isomorphism.
 On sections, the normalization hd turns the source transition into C.transitions on Y.
 The actual system pushforward changes the site coordinate by pro-etale base change;

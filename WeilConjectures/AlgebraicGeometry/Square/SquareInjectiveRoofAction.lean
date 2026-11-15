@@ -15,8 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # The normalized derived square on an injective roof
 
-Source: Stacks Project, Cohomology, Tags 01FB, 0D5T and 0D5X.
-(blueprint: lem-weil-pbc-square-injective-roof-action).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01FB, 0D5T, 0D5X
 -/
 
 @[expose] public section
@@ -216,9 +217,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived square, on raw section cohomology, is represented by its augmented
 injective roof. This statement contains no classical cohomology or restricted resolution.
-Source: Stacks Project, Tag 01FB (Remark explain-arrow), Tag 0D5T (composition of
-right-derived direct images), Tag 0D5X (local derived sections)
-(blueprint: lem-weil-pbc-square-injective-roof-action).
 
 Proof: Extend I, J and L by zero to integer indices. Their injective terms and lower bound
 make them K-injective. The augmentation equation identifies the derived coefficient map

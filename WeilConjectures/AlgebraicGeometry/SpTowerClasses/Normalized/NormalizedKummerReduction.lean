@@ -24,10 +24,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 /-- Simultaneous integral reduction identifies the integer source and Kummer target,
 with the integer generator and the positive boundary fixing the two comparisons.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2);
-the expanded proof in `SmoothPurityTowerClasses`, steps 3--7.
-(blueprint: lem-sfb-normalized-kummer-reduction).
-
 Proof: view abelian towers as integer modules on the inverse-system topos. Forget
 quotient coefficients on that topos, and take the left adjoint given by tensoring
 with the actual quotient ring system. Apply the K-flat derived change-of-rings

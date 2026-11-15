@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedActionKernelSecondDi
 
 /-! # Homogeneous quotient multiplication on degree kernels
 
-Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-graded-action-kernel-second).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -30,9 +31,6 @@ noncomputable section
 
 /-- Multiplication by x followed by the output projection factors through the input
 projection and the explicit transported tensor-by-x map, already on sheaves.
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct sum;
-Tag 0B8S, quotient multiplication on the square-zero ideal.
-(blueprint: lem-sc-tensor-graded-action-kernel-second).
 Proof: First substitute hD, so the section comparison is boundarySectionDegreeIso.
 Since the inclusion of the ideal is mono, the local lift formula fixes the
 quotient action. Check the asserted morphism identity after each coproduct injection

@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 
 /-! # Comparison of normalized quotient lines along a fixed Proj comparison
 
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01NQ, 01OB
 -/
 
 @[expose] public section
@@ -69,11 +70,6 @@ private theorem iso_of_common_frame_coefficients {T : Scheme.{u}}
 
 /-- For fixed normalized quotients and a fixed generator-preserving graded pullback
 comparison, the quotient lines agree along its induced relative Proj map.
-
-Source: Stacks Project, Constructions, Tag 01NQ (lemma-relative-proj-base-change),
-the degree-one part of theta; Tag 01NR (lemma-glue-relative-proj-twists), uniqueness;
-Tag 01OB (definition-projective-bundle), the quotient normalization.
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison).
 
 Proof: write A = Sym(E), A' = Sym(g*E). On a pair of affine base charts W, U
 with W contained in g inverse U, the map of graded rings is the specified b.map.

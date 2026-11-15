@@ -15,13 +15,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveOpenDirectImage
 
 /-!
 # Open direct-image dimension on arbitrary curves
-
-Source: `literature/blueprint/latest/blueprint/part-six-operations/`
-`sec-constructibility-upper-shriek/`
-`sec-generic-constructibility-of-direct-image-along-an-open-immersion/`
-`sk-cor-geo-open-finiteness/thm-exc-curve-open-dimension-general.md`
-and the adjacent `.proof.md`, statement and all three proof paragraphs
-(blueprint: thm-exc-curve-open-dimension-general).
 -/
 
 @[expose] public section
@@ -37,12 +30,6 @@ namespace AlgebraicGeometry.Etale
 /-- Higher direct images across an arbitrary open immersion into a finite-type scheme of
  dimension at most one over a finite field or its algebraic closure vanish above degree one
  for every module sheaf over a finite prime-power-torsion coefficient ring.
-Source: `literature/blueprint/latest/blueprint/part-six-operations/`
-`sec-constructibility-upper-shriek/`
-`sec-generic-constructibility-of-direct-image-along-an-open-immersion/`
-`sk-cor-geo-open-finiteness/thm-exc-curve-open-dimension-general.md`
-and the adjacent `.proof.md`, all three paragraphs
-(blueprint: thm-exc-curve-open-dimension-general).
 
 Proof: The source-library theorem
 `isZero_higherDirectImage_of_isOpenImmersion` proves the stronger assertion for

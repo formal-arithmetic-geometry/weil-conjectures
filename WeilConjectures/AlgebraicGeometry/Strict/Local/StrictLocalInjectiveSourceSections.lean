@@ -20,8 +20,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-sections).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -41,8 +42,6 @@ namespace AlgebraicGeometry.Etale
 computed on a specified bounded-below complex of injectives. The intermediate groups
 are homology of actual termwise sections, not stage hypercohomology. At the limit
 only the canonical map to derived sections is used; it need not be invertible.
-Source: Stacks, Tags 03Q8 and 03Q9, final injective-complex paragraph
-(blueprint: lem-weil-pbc-strict-local-injective-source-sections).
 
 Proof: identify Rf_*K with f_*J using the right-derived unit on the injective
 representative and the supplied q. Derived adjunction identifies a morphism from

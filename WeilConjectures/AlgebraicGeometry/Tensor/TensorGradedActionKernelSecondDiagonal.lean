@@ -13,8 +13,9 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # The canonical tensor action on the surviving ideal summand
 
-Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-graded-action-kernel-second-diagonal).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -31,9 +32,6 @@ noncomputable section
 canonical transported tensor-by-x map followed by the output inclusion.
 This statement concerns one summand only, before applying any degree projection.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum;
-Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph.
-(blueprint: lem-sc-tensor-graded-action-kernel-second-diagonal).
 Proof: Substitute hD and locally lift the canonically transported x(1)
 through the epi degree-n(e+1) unit. Use the local kernel-map multiplication
 formula to compute the target kernel inclusion as the tensorPowAddIso product

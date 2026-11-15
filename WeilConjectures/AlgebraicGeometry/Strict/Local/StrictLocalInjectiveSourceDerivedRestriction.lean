@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
 import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalComplexSectionsMate
 import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalLocalizedHomGerm
 
-/-! # The derived mate on a neighbourhood germ -/
+/-! # The derived mate on a neighbourhood germ
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
+-/
 
 /- This original-model counterpart follows the proved calculation in
 WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceDerivedRestriction.
@@ -31,8 +36,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The germ leg and derived mate agree with restriction of stage hypercohomology.
 This identity stops before replacing derived restriction by termwise restriction:
 that replacement is the separate theorem `smallModel_injectiveSections_strictLocal_comparison`.
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-derived-restriction).
 
 Proof: write M for the underlying complex of J. The right-derived unit identifies
 Rf_*K with Q(f_*M), using q. Since f_*M is a bounded-below complex of injectives,

@@ -11,8 +11,9 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # Degree support of the quotient action
 
-Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-graded-quotient-action-homogeneous).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -29,9 +30,6 @@ noncomputable section
 whose degree is increased by the degree of that section. This assertion uses no
 canonical coefficient comparison and no output projection.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum;
-Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph.
-(blueprint: lem-sc-tensor-graded-quotient-action-homogeneous).
 Proof: Use the epi closed-immersion unit to lift s locally to t in L^a.
 For a degree-d kernel section y, b_quotient identifies b_a(t) as a lift of
 c_a(s). The equations hglobal, hlocal, k_inclusion and b_multiply identify

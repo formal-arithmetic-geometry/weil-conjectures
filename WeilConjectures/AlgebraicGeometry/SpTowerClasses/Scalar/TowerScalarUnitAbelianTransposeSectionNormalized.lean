@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerRestrictedScalarAdjunction
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineTransitionTensor
 
-/-! # Normalized coefficient-unit transpose section calculation -/
+/-! # Normalized coefficient-unit transpose section calculation
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -144,9 +149,6 @@ fields to identify the two maps on constant integer sections. Cancel the integer
 generator using integral-forgetful full faithfulness: maps from the regular module
 are determined by their values on one, by `SheafOfModules.unitHomEquiv`.
 Empty charts and zero rings are included.
-
-Source: blueprint classes proof (2), ordinary coefficient-unit normalization;
-Stacks 03EL. (blueprint: lem-sp-tower-scalar-unit-abelian-transpose-section-normalized)
 -/
 theorem scalarUnit_abelianTranspose_section_normalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -77,9 +77,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 
 /-! # Transport of the one-generator tensor model to the positive dual
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul;
-Modules on Sites, Tags 03D8, 03EK and 0GMW.
-(blueprint: lem-weil-pbc-negative-koszul-tensor-dual-transport).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 03D8, 03EK, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -113,11 +113,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The scalar realization of the tensor of negative rank-one factors is the
 internal dual of the tensor of positive rank-one factors.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the finite-free dual identification; Modules on
-Sites, Tags 03D8, 03EK and 0GMW, tensor and inverse image of module sheaves.
-(blueprint: lem-weil-pbc-negative-koszul-tensor-dual-transport).
 
 Proof: the one-generator exterior complex has A in degrees -1 and 0 and zero
 elsewhere, using the zeroth and first exterior equivalences and vanishing of

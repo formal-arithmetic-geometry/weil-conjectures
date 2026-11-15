@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Derived lifting of ordinary scalar association on whole systems
 
-Source: blueprint classes proof (2), scalar comparison on K-flat representatives.
-(blueprint: lem-sp-tower-scalar-pullback-counit-lift).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A4, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -179,9 +180,6 @@ private theorem counit_square_single
 /-- A scalar-association isomorphism lifts through the universal scalar counits.
 Only preservation of the flat K-flat resolving class is needed. Neither coefficient
 nor root endpoint normalizations are asserted here.
-
-Source: blueprint latest, classes proof (2), realization step 5; Stacks 06YY,
-07A4 and 0G7E (blueprint: lem-sp-tower-scalar-pullback-counit-lift).
 
 Proof: resolve each entire R-system complex by a flat-term K-flat complex P.
 The source scalar counit at P and the target scalar counit at pull(P) are

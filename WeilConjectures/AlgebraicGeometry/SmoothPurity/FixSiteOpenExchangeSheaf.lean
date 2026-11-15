@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.SmoothPurity.FixSiteOpenExchangeSquare
 /-!
 # The ordinary sheaf calculation for site comparison and open exchange
 
-Source: Stacks Project, Tags 03S6, 09AF and 099R
-(blueprint: lem-fix-site-open-exchange-sheaf).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S6, 09AF, 099R
 -/
 
 @[expose] public noncomputable section
@@ -229,8 +230,7 @@ private theorem pro_baseChange_eq_mate (Λ : Type (u + 1)) [CommRing Λ]
   exact h.symm
 
 /-- The ordinary exchange obtained by conjugating the canonical weakly etale
-base-change map. Source: Stacks Project, Tag 03S6.
-(blueprint: lem-fix-site-open-exchange-sheaf). -/
+base-change map. -/
 noncomputable def fixSiteOpenSheafExchangeIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
@@ -250,8 +250,7 @@ noncomputable def fixSiteOpenSheafExchangeIso
           (ProEtale.isIso_baseChangeMap_of_isPullback (ModuleCat.{u + 1} Λ) hsq))).symm
 
 /-- The inverse of the canonical ordinary exchange has the expected open-adjunction
-transpose. Source: Stacks Project, Tag 03S6.
-(blueprint: lem-fix-site-open-exchange-sheaf).
+transpose.
 
 Proof: The composite-adjunction conjugation unit identity characterizes the inverse
 exchange. The weakly etale base-change map is the iterated mate of the canonical
@@ -284,8 +283,6 @@ theorem fixSiteOpenSheafExchangeIso_unit (Λ : Type (u + 1)) [CommRing Λ] [Fini
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Site comparison intertwines the two specified ordinary sheaf exchanges.
-Source: Stacks Project, Tag 03S6, with Tags 09AF and 099R.
-(blueprint: lem-fix-site-open-exchange-sheaf).
 
 Proof: Invert both composites and apply the Hom bijection for the pro-etale
 open adjunction at j'. The inverse exchange is the transpose of the pulled-back

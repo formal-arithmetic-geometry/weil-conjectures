@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 
 /-! # Degree-one section compatibility for affine symmetric Proj comparisons
 
-Source: Stacks Project, Constructions, Tags 01NR, 01OB and 01N2.
-(blueprint: lem-trf-symmetric-proj-section-compatibility).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01OB, 01N2
 -/
 
 @[expose] public section
@@ -406,8 +407,7 @@ private theorem compatibility_on_generator
   exact H.trans hu'
 
 /-- The affine comparison carries every normalized degree-one section to its
-restriction.  Source: Stacks, Tags 01NR, 01OB and 01N2.
-(blueprint: lem-trf-symmetric-proj-section-compatibility).
+restriction.
 
 Proof: every degree-one symmetric element is iota(m). Use the chart normalization
 of the adjoint of D.quotient on m over V. Pullback naturality and the chart comparison

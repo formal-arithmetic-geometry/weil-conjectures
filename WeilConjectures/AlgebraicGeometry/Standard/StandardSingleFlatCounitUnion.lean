@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitUnionP
 
 /-! # Gluing flat counit presentations
 
-Source: Stacks Project, Tags 0DJ9 and 08DR.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 08DR
 -/
 
 @[expose] public section
@@ -23,9 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Bounded flat presentations glue across a two-open cover.
-Source: Stacks Project, Tag 0DJ9, relative Mayer--Vietoris induction step;
-Tag 08DR, quasi-compact-open induction.
-(blueprint: lem-pc-standard-single-flat-counit-union).
 
 Proof: Put W = U union V. Restrict a relatively flat quasi-coherent module N on W
 to U, V and U intersect V. Relative flatness and quasi-coherence survive these

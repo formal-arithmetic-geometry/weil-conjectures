@@ -10,7 +10,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 import all WeilConjectures.AlgebraicGeometry.Normalized.NormalizedDerivedUnitPasting
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
 
-/-! # Pasting raw units with a nonexact first input -/
+/-! # Pasting raw units with a nonexact first input
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7J, 0D6E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -41,9 +46,6 @@ private lemma expand_raw_unit
 /-- Raw homotopy units paste across a mixed exchange when the first input is right derived
 and the second is exact. This is a categorical calculation, with no scheme, graph or chosen
 compactification.
-
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E; the composition unit identity.
-(blueprint: lem-pur-right-derived-raw-unit-pasting).
 
 Proof in words: evaluate at a homotopy object and expand the exact-right composition unit.
 Naturality moves the first unit and the first comparison through the second comparison.

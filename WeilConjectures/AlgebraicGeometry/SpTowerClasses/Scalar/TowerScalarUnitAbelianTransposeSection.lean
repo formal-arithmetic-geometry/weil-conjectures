@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarUnitAb
 
 /-! # The abelian transpose of the coefficient-unit comparison
 
-Source: blueprint classes proof (2), ordinary coefficient-unit normalization.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +35,8 @@ This module isolates the section calculation used by the abelian transpose theor
 
 /-- Sectionwise form of the coefficient-unit transpose.
 
-Source: blueprint classes proof (2), ordinary coefficient-unit normalization;
-Stacks 03EL.  This is the sectionwise calculation underlying
-`scalarUnit_abelianTranspose` (blueprint: lem-sp-tower-scalar-unit-abelian-transpose).
+This is the sectionwise calculation underlying
+`scalarUnit_abelianTranspose`.
 The remaining theorem only assembles these equalities by extensionality.
 
 Proof: evaluate the two ordinary adjuncts on a fixed level and chart. The equations

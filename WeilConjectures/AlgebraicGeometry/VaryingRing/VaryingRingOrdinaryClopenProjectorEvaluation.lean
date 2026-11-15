@@ -13,8 +13,11 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 /-!
 # Ordinary realization of the intrinsic clopen projector
 
-Source: Stacks Project, Tags 09AE and 0F7B; Zheng, Construction 4.1.
-(blueprint: lem-sp-varying-ring-ordinary-clopen-projector-evaluation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AE, 0F7B
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -97,8 +100,6 @@ private theorem modulePi_image {U X : Scheme.{u}} (s : U ⟶ X)
   exact (Category.id_comp _).symm
 
 /-- Ordinary realization preserves the intrinsic projection onto a clopen component.
-Source: Stacks 09AE and 0F7B, open case; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-clopen-projector-evaluation).
 Proof: for an adjoint triple J ⊣ G ⊣ P, the intrinsic clopen projection
 satisfies G(pi_M) = unit_(G M). This is the triangle identity after cancelling
 the invertible canonical J-to-P comparison. Apply it to ordinary systems and

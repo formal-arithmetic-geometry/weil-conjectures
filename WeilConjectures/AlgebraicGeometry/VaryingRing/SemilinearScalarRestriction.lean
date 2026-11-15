@@ -10,8 +10,10 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Exact levelwise scalar restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03DI
-(blueprint: lem-sf-semilinear-scalar-restriction). -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CZ, 03D7, 03DI, 03CT, 03DA
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,9 +33,7 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
   (B : Type (u + 1)) [CommRing B] (ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n)
 
-/-- The exact restriction functor and its identity-on-sections level identifications.
-Source: Stacks 03CT, 03CZ and 03DA
-(blueprint: lem-sf-semilinear-scalar-restriction). -/
+/-- The exact restriction functor and its identity-on-sections level identifications. -/
 structure OrdinaryScalarRestriction where
   /-- Restriction from actual semilinear systems to actual strict B towers. -/
   rho : ∀ X : Scheme.{u}, Modules R φ X ⥤ StrictTower.Towers B X
@@ -186,8 +186,6 @@ private theorem scalarRho_colimits : PreservesFiniteColimits (scalarRho J S τ A
 end SequenceRestriction
 
 /-- Restrict each coefficient action and retain all section maps.
-Source: Stacks 03CT, 03CZ and 03DA
-(blueprint: lem-sf-semilinear-scalar-restriction).
 Proof: compose each level evaluation with restriction along the constant-sheaf map.
 The equality psi_(n+1) phi_n = psi_n identifies the twice-restricted coefficient
 module with the directly restricted one. Compose that identification with the system

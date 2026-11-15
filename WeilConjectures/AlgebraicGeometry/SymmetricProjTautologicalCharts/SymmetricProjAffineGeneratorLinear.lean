@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
 
 /-! # Linearity of the affine symmetric degree-one section
 
-Source: Stacks Project, Constructions, Tags 01OB and 01NR.
-(blueprint: lem-trf-symmetric-proj-affine-generator-linear).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OB, 01NR
 -/
 
 @[expose] public section
@@ -69,10 +70,6 @@ private theorem affineFraction_smul {R B : Type u} [CommRing R] [CommRing B]
 
 /-- The section m maps to iota(m)/1 is linear over the affine base ring. This assertion
 is entirely on the absolute affine Proj chart and constructs no descended sheaf.
-
-Source: Stacks, Tag 01OB, definition-projective-bundle, and Tag 01NR, its affine
-homogeneous-section map.
-(blueprint: lem-trf-symmetric-proj-affine-generator-linear).
 
 Proof: evaluate sections in the degree-one part of the localization at each point.
 The section associated to m has value iota(m)/1. Additivity follows from additivity

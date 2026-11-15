@@ -10,6 +10,12 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleInverseTransition
 
 /-! Assembly of levelwise strict étale extension data.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -312,8 +318,6 @@ private theorem openSystemTransition {m n : ℕ} (h : n ≤ m)
   exact he
 
 /-- The system-level assembly data for ordinary strict étale extension.
-Source: Zheng, Construction 4.1 and Stacks 03S2, 03DI and 03DJ
-(blueprint: new-lem-pur-strict-etale-system-open-assembly).
 
 This record supplies only the system functor, its exact adjunction, evaluation mate,
 and transition law.  The levelwise functors and their restriction mates are supplied
@@ -341,8 +345,6 @@ attribute [instance] StrictEtaleSystemOpenAssembly.additive
 
 set_option linter.unusedSectionVars false in
 /-- The system-level assembly exists for every levelwise package.
-Source: Zheng, Construction 4.1; Stacks Project 03S2, 03DI and 03DJ.
-(blueprint: new-lem-pur-strict-etale-system-open-assembly)
 
 Proof. Extend the `n`th level of a system `M` by `L.level n`. Define its
 successor transition by applying the next-level extension to the source

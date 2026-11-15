@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerForgetEvaluation
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionEvaluation
 
 /-! # Universal property of the evaluated scalar-extended root tower
-
-Source: blueprint sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes (2), evaluation of coefficient extension.
 -/
 
 @[expose] public noncomputable section
@@ -80,8 +77,6 @@ attribute [local irreducible] constantResidueHomEquiv
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
 /-- Evaluation of scalar extension represents additive maps from the roots sheaf.
-Source: blueprint classes (2), evaluation of coefficient extension
-(blueprint: lem-sp-tower-line-evaluation-universal).
 
 Proof: restrict the sequence-site scalar-extension presheaf to level n. Its value
 at U is A_n(U) tensor over R_n(U) with the evaluated root module. Vertical

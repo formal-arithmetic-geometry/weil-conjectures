@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 
 /-! # Homogeneous action has the expected degree support
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, the quotient action on a square-zero ideal.
-(blueprint: lem-sc-tensor-coefficient-action-support).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -125,8 +125,6 @@ private theorem homogeneous_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 /-- A homogeneous quotient section of degree n carries the d-th ideal summand
 into the (n+d)-th ideal summand. No coefficient transport or projection is asserted.
-Source: Stacks Project, Tag 09MS, graded ideal sequence; Tag 0B8S, quotient action.
-(blueprint: lem-sc-tensor-coefficient-action-support).
 Proof: Set r to the degree-d inclusion followed by the given global action, and
 set v to r followed by the degree-(n+d) projection. Locally lift the homogeneous
 quotient section along the epimorphic tensor-pullback unit. The ideal-kernel

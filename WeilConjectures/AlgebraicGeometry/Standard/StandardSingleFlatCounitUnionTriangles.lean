@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleUnionSESPresenta
 
 /-! # The union comparison as a morphism of distinguished triangles
 
-Source: Stacks Project, Tags 0DJ9, 08BV and 08FE.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ9, 08BV, 08FE
 -/
 
 @[expose] public section
@@ -160,9 +162,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 middle and overlap components. This supplies only the triangle diagram; it does
 not assert invertibility of the union comparison or a factorization at a chosen
 flat complex.
-
-Source: Stacks Project, Tag 0DJ9, induction diagram; Tags 08BV and 08FE.
-(blueprint: new-pc-standard-single-flat-counit-union-triangles).
 
 Proof:
 1. Work on X = U union V and restrict N to the opens induced by U, V and

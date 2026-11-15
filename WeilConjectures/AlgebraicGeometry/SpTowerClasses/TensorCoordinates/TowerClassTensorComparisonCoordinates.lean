@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TensorCoordinates
 
 /-! # Coordinates for finite tensor adjunctions
 
-Source: Stacks 03EL; Zheng Construction 4.1; blueprint tower-operations proof (2).
-(blueprint: lem-sfb-tensor-comparison-coordinate-conjugation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -59,8 +62,6 @@ private abbrev sitePair {C : Type c} [Category.{v} C]
   SheafOfModules.siteSheafTensorTmul M N U x y
 
 /-- The constructed comparison is conjugation by the two explicit site tensor bridges.
-Source: Stacks 03EL; blueprint tower-operations proof, clause (2).
-(blueprint: lem-sfb-tensor-comparison-coordinate-conjugation).
 
 Proof: eliminate the coefficient, transition and pull-functor equalities. The construction
 of comparisonOfCoordinates is then this composite, by definition. -/

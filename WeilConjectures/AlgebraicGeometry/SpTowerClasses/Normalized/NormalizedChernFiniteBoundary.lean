@@ -26,10 +26,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Normalization of the three adjunction comparisons fixes every finite Chern arrow.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2);
-`SmoothPurityTowerClasses`, expanded proof steps 5--8.
-(blueprint: lem-sfb-normalized-chern-finite-boundary).
-
 Proof: write the first Chern arrow as the scalar extension of the reduced
 lineBundleClass, with the stated unit inverse and target comparison. Apply the
 reduction adjunction's Hom bijection. Naturality with respect to lineBundleClass

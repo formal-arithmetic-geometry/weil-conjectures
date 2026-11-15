@@ -69,7 +69,12 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 import Mathlib.CategoryTheory.Localization.Predicate
 import all WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSupplement
 
-/-! # Normalized tensor models for section principal quotients -/
+/-! # Normalized tensor models for section principal quotients
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 06YS, 06YT, 08TC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -735,10 +740,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized tensor identification of the section reductions, without the
 completion assertion.
-
-Source: blueprint latest, integral-ctf-equals-bc proof, Locality; first-reduction
-Cones paragraph; Stacks 03EK, 06YS, 06YT and 08TC
-(blueprint: lem-sfb-strict-section-quotient-tensor-models).
 
 Proof: use strictSectionQuotientConeMaps for the normalized quasi-isomorphism
 from each scalar cone to termwise tensor with the quotient. Its component formula

@@ -18,7 +18,9 @@ import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-! # The Leibniz identity for a fixed quotient action and horseshoe boundary
 
-Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0B8S
 -/
 
 @[expose] public section
@@ -303,8 +305,6 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
 by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
-Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
-(blueprint: lem-sc-square-zero-horseshoe-boundary-leibniz)
 
 Proof:
 1. For global f and g, the sheaf epimorphism p gives a common open cover with lifts

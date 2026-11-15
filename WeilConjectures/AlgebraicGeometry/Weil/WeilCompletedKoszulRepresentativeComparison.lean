@@ -171,12 +171,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 /-!
 # Transporting the explicit Koszul comparison between derived representatives
 
-Source: Stacks Project, Tag 0A0E and sites-cohomology.tex Tag 0941;
-the localization universal property for natural transformations.
-(blueprint: lem-weil-pbc-completed-fiber-roos-representative-comparison).
-
 The finite construction comparison is used only at the actual termwise transported
 complex. All representative transport and its prescribed unit equation are proved here.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941
 -/
 
 @[expose] public noncomputable section
@@ -296,9 +296,6 @@ universe v
 
 -- Checking the two presentations of the exact derived equivalence needs extra elaboration.
 /-- The explicit Koszul fiber comparison for every specified derived representative.
-
-Source: Stacks Project, Tag 0A0E and sites-cohomology.tex Tag 0941.
-(blueprint: lem-weil-pbc-completed-fiber-roos-representative-comparison).
 
 Proof: the right tensor unitor and tensor functoriality make the maps from a complex
 into each Koszul level natural. Limit projections then prove naturality of the ordinary

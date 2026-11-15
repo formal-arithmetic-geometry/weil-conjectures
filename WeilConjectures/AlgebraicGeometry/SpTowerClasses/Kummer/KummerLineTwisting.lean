@@ -154,10 +154,6 @@ private theorem positive_isEquivalence
 /-- The root module already present in Chern data defines the normalized tensor/Hom twist.
 No existence or normalization of Chern arrows is asserted here.
 
-Source: blueprint latest, `sk-prop-diagonal-tower/_section.md`, Tate-twist paragraph;
-`sk-prop-sp-tower-geometric-classes.proof.md`, clause (2), rank-one scalar extension.
-(blueprint: lem-sfb-kummer-line-twisting).
-
 Proof: on the pro-etale covering obtained by adjoining compatible primitive
 l^(n+1)-th roots, identify the actual roots tower with its quotient ring system,
 using the chosen roots as compatible generators. The specified section and map

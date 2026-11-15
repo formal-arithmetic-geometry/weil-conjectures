@@ -28,10 +28,12 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 /-!
 # Supported exterior products and localization triangles
 
-Source: Stacks Tags 09XP and 0F1E, and the refinement in the complete proof of
-lem-pur-supported-product-localization (blueprint: lem-pur-supported-product-localization).
 The third components are the supported exterior products on the actual open product
 schemes, transported through the canonical ambient and coefficient comparisons.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09XP, 0F1E
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -14,8 +14,9 @@ import all WeilConjectures.CategoryTheory.ExactDerivedPasting.ExactDerivedPastin
 
 /-! # Intrinsic alpha horizontal identity on module sheaves
 
-Source: Stacks Project, Tag 0F7D, with the arbitrary-ring underived refinement.
-(blueprint: lem-cbc-proper-open-alpha-horizontal-modules)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -93,8 +94,6 @@ private theorem moduleOpenUnitInv_comp {U V X : Scheme.{u}}
     openBetaModuleJComp, NatIso.isIso_inv_app, Functor.comp_obj, Category.assoc] using hi.symm
 
 /-- Intrinsic alpha obeys horizontal pasting on module sheaves.
-Source: Stacks, Tag 0F7D, and the parent restriction argument, steps 1--3 and 5
-(blueprint: lem-cbc-proper-open-alpha-horizontal-modules).
 Proof: First detect equality of maps to open extension on module sheaves. Transport
 to sheaves of B-modules and compose with the monomorphism from extension by zero
 to direct image. The restriction/direct-image adjunction detects equality there.

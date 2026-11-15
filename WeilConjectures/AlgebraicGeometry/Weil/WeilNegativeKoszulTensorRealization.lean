@@ -66,9 +66,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedRealizationTensor
 
 /-! # Realization of negative exterior factors as negative two-term factors
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(blueprint: lem-weil-pbc-negative-koszul-tensor-realization).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -309,10 +309,6 @@ private theorem negativeTensorInduction
 /-- Scalar realization of the ordered algebraic negative factors is the ordered
 tensor of the explicit negative two-term factors on the completed site.
 This assertion has no internal Hom or positive Koszul complex.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free terms.
-(blueprint: lem-weil-pbc-negative-koszul-tensor-realization).
 
 Proof: in rank one use exteriorPower.zeroEquiv and exteriorPower.oneEquiv,
 followed by the basis of the free module on Fin 1. Higher exterior powers vanish

@@ -30,12 +30,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomology
 
 /-! # Evaluation and cocycle normalization of supported Hom
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, Example 9.5 and the Ext proof
-of Theorem 9.4, pp. 66--67; Stacks Tags 05TH, 05TI, 070I, 070J and 095L
-(blueprint: lem-pur-supported-hom-cocycle-normalization).
-
 The interface below specifies evaluation, the actual derived-unit transport, and the
 localized cocycle map. It uses the existing kernel functor in both topologies.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 05TH, 05TI, 070I, 070J, 095L, 03DI
+* J. S. Milne, *Lectures on étale cohomology*, Section 9, Example 9.5, Theorem 9.4
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +53,7 @@ open CochainComplex.HomComplex
 
 namespace AlgebraicGeometry
 
-/-- Localize the canonical single-object cocycle without exposing its cochain construction.
-Source: Stacks 070I (blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- Localize the canonical single-object cocycle without exposing its cochain construction. -/
 @[irreducible] def supportedHomLocalizedCocycle.{uC, vC, wC}
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
     {B : C} (I : CochainComplex C ℤ) (a : ℤ) (f : B ⟶ I.X a)
@@ -62,8 +62,7 @@ Source: Stacks 070I (blueprint: lem-pur-supported-hom-cocycle-normalization). -/
   ShiftedHom.map (Cocycle.equivHomShift.symm
     (Cocycle.fromSingleMk f (zero_add a) (a + 1) rfl hf)) DerivedCategory.Q
 
-/-- The localized cocycle is the original shifted single-complex map.
-Source: Stacks 070I (blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The localized cocycle is the original shifted single-complex map. -/
 theorem supportedHomLocalizedCocycle_eq.{uC, vC, wC}
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
     {B : C} (I : CochainComplex C ℤ) (a : ℤ) (f : B ⟶ I.X a)
@@ -85,9 +84,7 @@ variable (B : Sheaf J (ModuleCat.{u + 1} A))
 variable (rho : (constantSheaf J (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A) ⟶ B)
 
 /-- A specified resolution induces this isomorphism in D+, using the canonical
-quotient-to-derived comparisons on both complexes.
-Source: Stacks 05TI and 070I; lem-sc-p1-rhom-hom-derived-roof
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+quotient-to-derived comparisons on both complexes. -/
 def supportedHomResolutionIso
     (K I : CochainComplex.Plus (Sheaf J (ModuleCat.{u + 1} A)))
     (e : K ⟶ I) [QuasiIso e.hom] :
@@ -97,35 +94,27 @@ def supportedHomResolutionIso
       asIso (DerivedCategory.Q.map e.hom) ≪≫
       (DerivedCategory.Plus.QCompιIso _).symm.app I)
 
-/-- The type of additive evaluation isomorphisms onto the actual support kernel.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The type of additive evaluation isomorphisms onto the actual support kernel. -/
 abbrev SupportedHomEvaluationIso :=
   preadditiveCoyoneda.obj (op B) ≅
     Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j ⋙
       forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}
 
-/-- Evaluation after the actual constant restriction, at the scalar one.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- Evaluation after the actual constant restriction, at the scalar one. -/
 def SupportedHomEvaluation
     (theta : SupportedHomEvaluationIso J A j B) : Prop :=
   ∀ (M : Sheaf J (ModuleCat.{u + 1} A)) (f : B ⟶ M),
     kernel.ι (M.obj.map j.op) (theta.hom.app M f) =
       ((constantSheafAdj J (ModuleCat.{u + 1} A) hT).homEquiv _ _ (rho ≫ f)) 1
 
-/-- The type of additive comparisons with derived morphisms, in all integer degrees.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The type of additive comparisons with derived morphisms, in all integer degrees. -/
 abbrev SupportedHomChi :=
   ∀ (F : DerivedCategory.Plus (Sheaf J (ModuleCat.{u + 1} A))) (a : ℤ),
     (Sheaf.supportHypercohomologyFunctor J (ModuleCat.{u + 1} A) j a).obj F ≃+
       ((DerivedCategory.singleFunctor (Sheaf J (ModuleCat.{u + 1} A)) 0).obj
         B ⟶ F.obj⟦a⟧)
 
-/-- Naturality of the comparison on the bounded-below derived category.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- Naturality of the comparison on the bounded-below derived category. -/
 def SupportedHomChiNatural (chi : SupportedHomChi J A j B) : Prop :=
   ∀ (F G : DerivedCategory.Plus (Sheaf J (ModuleCat.{u + 1} A)))
       (v : F ⟶ G) (a : ℤ)
@@ -133,9 +122,7 @@ def SupportedHomChiNatural (chi : SupportedHomChi J A j B) : Prop :=
     chi G a ((Sheaf.supportHypercohomologyFunctor J (ModuleCat.{u + 1} A) j a).map v s) =
       chi F a s ≫ (DerivedCategory.Plus.ι.map v)⟦a⟧'
 
-/-- The formula on every injective resolution and every supported cocycle.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The formula on every injective resolution and every supported cocycle. -/
 def SupportedHomChiCocycle
     (theta : SupportedHomEvaluationIso J A j B)
     (chi : SupportedHomChi J A j B) : Prop :=
@@ -160,9 +147,7 @@ def SupportedHomChiCocycle
 
 attribute [local irreducible] supportedHomResolutionIso
 
-/-- Evaluation, naturality, and the roof formula, all with the canonical normalization.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- Evaluation, naturality, and the roof formula, all with the canonical normalization. -/
 structure SupportedHomCocycleNormalization where
   theta : SupportedHomEvaluationIso J A j B
   evaluation : SupportedHomEvaluation J A hT j B rho theta
@@ -170,9 +155,7 @@ structure SupportedHomCocycleNormalization where
   naturality : SupportedHomChiNatural J A j B chi
   cocycle : SupportedHomChiCocycle J A j B theta chi
 
-/-- The actual restriction on abelian groups underlying module-valued sections.
-Source: Milne, Section 9, Example 9.5
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The actual restriction on abelian groups underlying module-valued sections. -/
 def supportedHomAbelianRestriction :
     (sheafSections J (ModuleCat.{u + 1} A)).obj (op T) ⋙
         forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1} ⟶
@@ -181,9 +164,7 @@ def supportedHomAbelianRestriction :
   Functor.whiskerRight ((sheafSections J (ModuleCat.{u + 1} A)).map j.op)
     (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
 
-/-- The inclusion of the actual support kernel, after forgetting scalar multiplication.
-Source: Milne, Section 9, Example 9.5
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The inclusion of the actual support kernel, after forgetting scalar multiplication. -/
 def supportedHomAbelianInclusion :
     Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j ⋙
         forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1} ⟶
@@ -194,9 +175,7 @@ def supportedHomAbelianInclusion :
 
 /-- Agreement on injective representatives with the shifted restriction cone: the
 comparison is exactly kernel inclusion composed with evaluation, hence sends a supported
-section to `(0,s)`. This specifies the comparison itself, including its sign.
-Source: blueprint lemma-cycle-class-cartier-divisor, Hom triangle proof; Milne, Section 9
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+section to `(0,s)`. This specifies the comparison itself, including its sign. -/
 def SupportedHomCocycleNormalization.ConeAgreement
     (N : SupportedHomCocycleNormalization J A hT j B rho) : Prop :=
   ∀ (I : CochainComplex.Plus (Sheaf J (ModuleCat.{u + 1} A)))
@@ -221,9 +200,7 @@ end Site
 
 namespace Etale
 
-/-- The scalar-preserving constant restriction to the open site, obtained by sheafification.
-Source: Milne, Section 9, Example 9.5; Stacks 03DI
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The scalar-preserving constant restriction to the open site, obtained by sheafification. -/
 def supportedHomOpenConstantMap (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A) ⟶
@@ -233,18 +210,14 @@ def supportedHomOpenConstantMap (A : Type (u + 1)) [CommRing A]
     (Functor.whiskerLeft (MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).op
       (toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj (ModuleCat.of A A))))
 
-/-- The actual open counit at the constant module, with the scalar-preserving restriction.
-Source: Milne, Section 9, Example 9.5; Stacks 03DI
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The actual open counit at the constant module, with the scalar-preserving restriction. -/
 def supportedHomOpenCounit (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   ((openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).homEquiv _ _).symm
     (supportedHomOpenConstantMap A j)
 
 /-- Under the two evaluation adjunctions, precomposition with the actual open counit
-is the actual restriction of sections. The site arrow has underlying morphism `j`.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+is the actual restriction of sections. The site arrow has underlying morphism `j`. -/
 def SupportedHomOpenEvaluation (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Prop :=
   ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -261,9 +234,7 @@ def SupportedHomOpenEvaluation (A : Type (u + 1)) [CommRing A]
         (((constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} A)
           (MorphismProperty.Over.mkIdTerminal _ _)).homEquiv _ _ g) 1)
 
-/-- The prescribed etale coefficient object and its constant restriction map.
-Source: Milne, Section 9, proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The prescribed etale coefficient object and its constant restriction map. -/
 def supportedHomConstantRestriction (A : Type (u + 1)) [CommRing A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A) ⟶
@@ -272,9 +243,7 @@ def supportedHomConstantRestriction (A : Type (u + 1)) [CommRing A]
   ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).homEquiv _ _)
     ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).app (ModuleCat.of A A)).hom
 
-/-- Specialization of evaluation normalization to the etale site of the closed pair.
-Source: Milne, Section 9, Example 9.5 and Ext proof of Theorem 9.4
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- Specialization of evaluation normalization to the etale site of the closed pair. -/
 abbrev supportedHomNormalization (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :=
   SupportedHomCocycleNormalization X.smallEtaleTopology P.Coefficient
@@ -286,17 +255,13 @@ end Etale
 
 namespace ProEtale
 
-/-- The actual open counit, adjoint to the existing scalar-preserving constant map.
-Source: Milne, Section 9, Ext proof; pro-etale constant presentation
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- The actual open counit, adjoint to the existing scalar-preserving constant map. -/
 def supportedHomOpenCounit (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   ((openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) j).homEquiv
     _ _).symm (Scheme.proEtaleFixedOpenConstantMap j A)
 
-/-- Evaluation of precomposition by the pro-etale open counit is restriction.
-Source: Milne, Section 9, Example 9.5 and Ext proof, in the pro-etale topology
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+/-- Evaluation of precomposition by the pro-etale open counit is restriction. -/
 def SupportedHomOpenEvaluation (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Prop :=
   ∀ (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} A)))
@@ -316,9 +281,7 @@ def SupportedHomOpenEvaluation (A : Type u) [CommRing A]
           (MorphismProperty.Over.mkIdTerminal _ _)).homEquiv _ _ g) 1)
 
 /-- The same ordinary constant sheaf on the pro-etale site, before its canonical
-identification with the etale-pullback presentation `P.constant`.
-Source: Milne, Section 9, Example 9.5; pro-etale constant presentation
-(blueprint: lem-pur-supported-hom-cocycle-normalization). -/
+identification with the etale-pullback presentation `P.constant`. -/
 abbrev supportedHomNormalization (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :=
   SupportedHomCocycleNormalization (Scheme.ProEt.topology X) P.Coefficient
@@ -1488,10 +1451,6 @@ private theorem normalizationAssemble
 /-- Evaluation at one and the injective-resolution roof normalize supported Hom in
 both topologies. On the etale site the comparison to the shifted restriction cone is
 inclusion of the evaluated support kernel in the shifted source summand.
-
-Source: Milne, Lectures on Etale Cohomology, Section 9, Example 9.5 and the Ext proof
-of Theorem 9.4, pp. 66--67; blueprint lemma-cycle-class-cartier-divisor, Hom triangle proof
-(blueprint: lem-pur-supported-hom-cocycle-normalization).
 
 Proof, following the ten recorded DAG steps:
 1. Use small representatives in the coefficient universe. Ordinary ModuleCat-valued

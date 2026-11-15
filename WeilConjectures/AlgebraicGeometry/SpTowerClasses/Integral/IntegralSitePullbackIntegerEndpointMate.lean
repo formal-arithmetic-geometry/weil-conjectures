@@ -35,7 +35,12 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
-/-! The mate calculation used by the integer endpoint square. -/
+/-! The mate calculation used by the integer endpoint square.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -130,10 +135,6 @@ private theorem etale_constant_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (PreservesTerminal.iso f.Etale).inv.op).symm.trans (Category.id_comp _)
 
 /-- The comparison mate for the integer endpoint maps.
-
-Source: Stacks Project, Tag 00WX; this is the adjunction-mate calculation in the
-integer endpoint step of the change-of-site construction.
-(blueprint: lem-sp-integral-site-pullback-integer-endpoint-mate).
 
 Proof: apply the hom-set adjunctions for the étale and pro-étale inverse images.
 The comparison isomorphism is the conjugate of the direct-image comparison, and

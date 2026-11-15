@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRestrictedChart
 import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRestrictedChartCoefficientComposition
 
 /-! # Coefficient comparison for a restricted inverse frame
-
-Source: blueprint vector integration, overlap calculation, Tate coefficient transport.
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient).
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +21,6 @@ namespace AlgebraicGeometry.Etale
 /-- Successive inverse-image coefficient identifications for a frame on V and its
 restriction to U equal direct coefficient descent in the pasted inverse-chart square.
 No compact-support functor or exchange map occurs in this equality.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-overlap calculation, associativity of the canonical Tate coefficient identifications.
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient).
 
 Proof: expand vectorIntegrationChartCoefficient, affineTraceRightBaseChange and the
 Cartesian coefficient. Compose both sides with affineLinearCoefficientDescent over U.

@@ -14,8 +14,9 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # Ordered quotient frames over one affine base open
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB, 01MS and 01NR.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-affine-frames).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS, 01NR
 -/
 
 @[expose] public section
@@ -349,9 +350,6 @@ private theorem quotient_chart_section (S : Scheme.{u}) (E : S.Modules)
 /-- On one affine base open the ordered quotient sections have the standard free
 frames and homogeneous coordinate ratios. This is a local calculation and does
 not assert a global comparison of line modules.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB, 01MS and 01NR.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-affine-frames).
 
 Proof: unpack the affine comparison into beta, eC, gamma and eR. Compose the chart equation for
 eRel with theta and its integral projection. The normalization of gamma and the integral

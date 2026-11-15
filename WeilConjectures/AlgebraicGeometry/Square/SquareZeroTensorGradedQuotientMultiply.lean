@@ -20,7 +20,7 @@ universe u
 noncomputable section
 
 /-- The closed-immersion unit is locally surjective, also for the adjunction
-chosen in the graded presentation. Source: Stacks Project, Tag 08KS. -/
+chosen in the graded presentation. -/
 private theorem unit_locallySurjective {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) :
     TopCat.Presheaf.IsLocallySurjective (tensorGradedUnit j M).mapPresheaf := by
@@ -38,7 +38,7 @@ private theorem unit_locallySurjective {X Z : Scheme.{u}} (j : Z ⟶ X)
         (Functor.map_epi (SheafOfModules.toSheaf X.ringCatSheaf) _)
 
 /-- Transport the fixed pullback cotensorator formula through the unique
-comparison of left adjoints. Source: Stacks Project, Tags 0096 and 01CD. -/
+comparison of left adjoints. -/
 private theorem unit_tensor {X Z : Scheme.{u}} (j : Z ⟶ X)
     (M N : X.Modules) (U : X.Opens) (s : Γ(M, U)) (t : Γ(N, U)) :
     (boundaryPullbackTensorIso j M N).hom.app (j ⁻¹ᵁ U)
@@ -63,15 +63,13 @@ private theorem unit_tensor {X Z : Scheme.{u}} (j : Z ⟶ X)
           ((tensorGradedUnit j (M ⊗ N)).app U (tmulSection s t)))) = _
   rw [he, pullback_δ_app_unit_tmulSection, tensorHom_app_tmulSection, hei, hei]
 
-/-- The underlying module map and algebra map agree on sections.
-Source: Stacks Project, Tag 09MS, the quotient algebra morphism. -/
+/-- The underlying module map and algebra map agree on sections. -/
 private theorem algebraMap_section {X : Scheme.{u}} {B C : X.CommAlgebraSheaf}
     (p : B ⟶ C) (U : X.Opens) (z : Γ(commAlgebraSheafModule X.sheaf B, U)) :
     tensorGradedAlgebraSection C U (Hom.app (X := X) (tensorGradedAlgebraMap p) U z) =
       p.right.hom.app (op U) (tensorGradedAlgebraSection B U z) := rfl
 
-/-- Multiplication compatibility for sections in the image of the unit.
-Source: Stacks Project, Tag 09MS, the graded direct-sum quotient. -/
+/-- Multiplication compatibility for sections in the image of the unit. -/
 private theorem multiply_lifts {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (T : TensorGradedPresentation j L)
     (a d : ℕ) (U : X.Opens) (s : Γ(L.tensorPow a, U)) (t : Γ(L.tensorPow d, U)) :
@@ -120,8 +118,6 @@ private theorem multiply_lifts {X Z : Scheme.{u}} (j : Z ⟶ X)
   exact hn
 
 /-- Multiplication descends from the homogeneous algebra to the quotient.
-Source: Stacks Project, Tag 09MS, the graded algebra quotient.
-(blueprint: lem-sc-square-zero-tensor-graded-quotient-multiply).
 Proof: The closed-immersion adjunction unit on each tensor power is locally surjective:
 on stalks it is the quotient by the immersion ideal, transported by the unique
 adjunction comparison. Locally lift s and t through these units, refining their

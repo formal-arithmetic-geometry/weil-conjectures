@@ -146,10 +146,6 @@ private theorem power_triangle_assembly
 /-- Reduction of the constant units tower has the power-system multiplication triangle.
 No invertibility of the prime on the scheme or surjectivity of the power map is assumed.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and the coefficient-resolution calculation in step 1 of lem-sfb-kummer-reduction-unit.
-(blueprint: lem-sfb-power-system-reduction-triangle).
-
 Proof: work on the sequence site. The quotient coefficient system has the bounded flat
 integer resolution [Z --l^(n+1)--> Z], in degrees -1 and 0, whose transition is
 multiplication by l in degree -1 and the identity in degree 0. Tensor a flat-term

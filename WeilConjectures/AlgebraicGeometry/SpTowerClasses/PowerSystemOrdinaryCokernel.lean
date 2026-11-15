@@ -109,7 +109,12 @@ import all Mathlib.Algebra.Homology.HomologicalComplex
 import all Mathlib.CategoryTheory.Sites.CoverPreserving
 import Mathlib.Algebra.Module.ZMod
 
-/-! # The ordinary quotient of a tower by its variable positive powers -/
+/-! # The ordinary quotient of a tower by its variable positive powers
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03D7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -504,10 +509,6 @@ private def unitCokernel (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
   exact IsColimit.ofIsoColimit (cokernelIsCokernel μ) (Cofork.ext e he)
 
 /-- The ordinary coefficient unit is the cokernel of the variable-power map.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-coefficient-resolution calculation; Stacks 03D7, ordinary extension of scalars.
-(blueprint: lem-sfb-power-system-ordinary-cokernel).
 
 Proof: at level n the coefficient ring is the constant sheaf Z/l^(n+1).
 Its sections kill l^(n+1), so the ordinary unit kills the indicated power map.

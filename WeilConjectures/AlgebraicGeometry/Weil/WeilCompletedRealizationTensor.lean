@@ -15,8 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # Tensor comparison for completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW.
-(blueprint: lem-weil-pbc-completed-realization-tensor).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -210,10 +211,6 @@ attribute [local irreducible] completedCechModulesEquiv pbcCompletedComparison
 
 /-- Completed constant realization commutes with total tensor products, naturally
 and with the specified normalization on the (0,0) pure tensor summand.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, the finite free coefficient realization.
-(blueprint: lem-weil-pbc-completed-realization-tensor).
 
 Proof: on modules, the balanced tensor universal property identifies extension of
 a tensor product with the tensor product of extensions. Constant sheafification

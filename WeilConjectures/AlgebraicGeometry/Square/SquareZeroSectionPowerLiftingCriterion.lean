@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorPowerBoundary
 
 /-! # The obstruction-and-lifting conjunct
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
-(blueprint: lem-sc-square-zero-section-power-obstruction-core).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -30,8 +31,6 @@ private theorem nsmul_addHom_zero {A B : Type*} [AddZeroClass A] [AddMonoid B]
 
 /-- Core obstruction and lifting criterion, omitting quasi-coherence.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
-(blueprint: lem-sc-square-zero-section-power-obstruction-core).
 Proof: Tensor the ideal sequence by L^d, which is invertible, to obtain an exact
 sequence with kernel I tensor L^d and quotient j_*j^*(L^d). The kernel is killed
 by I, since I^2=0. Identify it with the pushforward of its pullback using the

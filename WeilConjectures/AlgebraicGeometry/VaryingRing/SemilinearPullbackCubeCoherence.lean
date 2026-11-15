@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 
 /-! # Ordinary semilinear inverse-image cube coherence
 
-Source: Stacks Project, Tags 03DI, 0F7B and 0F7F.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 0F7B, 0F7F, 03D8, 07A7
 -/
 
 @[expose] public noncomputable section
@@ -250,8 +252,6 @@ private theorem cubeSquare_swap {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ 
 
 /-- The canonical ordinary inverse-image comparisons agree around a commutative cube.
 No cartesian, open, or proper hypothesis is needed.
-Source: Stacks Project, Tags 03D8, 07A7 and the compositor calculation in Tag 0F7F
-(blueprint: lem-sf-semilinear-pullback-cube-coherence).
 Proof: expand each square comparison as inverse composition, equality transport,
 and forward composition. Direct-image composition is identity on section carriers
 up to the canonical iterated fibre-product comparison. The universal property of

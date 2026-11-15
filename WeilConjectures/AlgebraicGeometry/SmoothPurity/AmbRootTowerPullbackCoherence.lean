@@ -15,13 +15,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Canonical root-tower pullback and tensor coherence
 
-Source: Stacks Project, Tags 03CO, 03DB, 03CB, 03EL and 03D7; vector-bundle purity,
-proof paragraph 1 (blueprint: lem-amb-root-tower-pullback-coherence).
-
 Index `s : ℕ` means the positive exponent `s + 1`. Maps are specified by their
 adjuncts, so identity and composition use the actual fibre-product comparisons.
 The root limit and its completed action are the existing `purTwistZlOne` and
 `purTwistZlModule`. Only restriction to constant scalars is used here.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CO, 03DB, 03CB, 03EL, 03D7, 03EK, 03CY
 -/
 
 @[expose] public noncomputable section
@@ -65,16 +66,14 @@ attribute [local instance] ambRootHasLimit
 -- Keep the chosen scalar structures abstract while elaborating their module carriers.
 attribute [local irreducible] purTwistZlAction purTwistFiniteRingIso
 
-/-- The constant scalar action, by the existing completion map and coordinate action.
-Source: Stacks Tags 03CO/03DB (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The constant scalar action, by the existing completion map and coordinate action. -/
 def ambRootAction (T : Scheme.{u}) (U : T.ProEtᵒᵖ)
     (a : (purTwistZlConstant T l).obj.obj U) (x : (purTwistZlOne T l).obj.obj U) :
     (purTwistZlOne T l).obj.obj U :=
   @SMul.smul _ _ (purTwistZlAction T l U).toSMul
     ((purTwistZlCompletionMap T l).hom.app U a) x
 
-/-- The constant scalar homomorphism induced by the specified Z_l-algebra structure.
-Source: Stacks Tag 03EK (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The constant scalar homomorphism induced by the specified Z_l-algebra structure. -/
 def ambRootScalar (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}) :
     purTwistZlConstant T l ⟶ proEtaleConstantRing T B :=
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
@@ -83,8 +82,7 @@ def ambRootScalar (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u})
 
 attribute [irreducible] ambRootScalar
 
-/-- H_T, the ordinary tensor of the existing root limit with B over constant Z_l.
-Source: Stacks Tag 03EK (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- H_T, the ordinary tensor of the existing root limit with B over constant Z_l. -/
 def ambRootTensor (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}) :
     SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
@@ -93,8 +91,7 @@ def ambRootTensor (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u})
       ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (purTwistZlCompletionMap T l))).obj (purTwistZlModule T l))
 
-/-- The actual sheafification image of x tensor b, written with the scalar first.
-Source: Stacks Tag 03EK (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The actual sheafification image of x tensor b, written with the scalar first. -/
 def ambRootTensorPure (B : Type u) [CommRing B] [Algebra ℤ_[l] B]
     (T : Scheme.{u}) (U : T.ProEt)
     (b : (proEtaleConstantRing T B).obj.obj (op U))
@@ -106,8 +103,7 @@ def ambRootTensorPure (B : Type u) [CommRing B] [Algebra ℤ_[l] B]
       ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (purTwistZlCompletionMap T l))).obj (purTwistZlModule T l)) U b x
 
-/-- The unique finite-ring scalar map on a killed algebra, using ZMod's cast map.
-Source: Stacks Tag 03EK (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The unique finite-ring scalar map on a killed algebra, using ZMod's cast map. -/
 def ambRootFiniteScalar (B : Type u) [CommRing B] (r : ℕ)
     (hB : ((l ^ (r + 1) : ℕ) : B) = 0) (T : Scheme.{u}) :
     purTwistFiniteRing T l r ⟶ proEtaleConstantRing T B :=
@@ -120,16 +116,14 @@ def ambRootFiniteScalar (B : Type u) [CommRing B] (r : ℕ)
 
 attribute [irreducible] ambRootFiniteScalar
 
-/-- D_r,T is the finite root module tensored over its finite constant ring with B.
-Source: Stacks Tag 03EK (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- D_r,T is the finite root module tensored over its finite constant ring with B. -/
 def ambRootFiniteTensor (B : Type u) [CommRing B] (r : ℕ)
     (hB : ((l ^ (r + 1) : ℕ) : B) = 0) (T : Scheme.{u}) :
     SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (ambRootFiniteScalar l B r hB T) (purTwistRootsModule T l r)
 
-/-- The actual sheafification image of a finite root tensor b.
-Source: Stacks Tag 03EK (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The actual sheafification image of a finite root tensor b. -/
 def ambRootFinitePure (B : Type u) [CommRing B] (r : ℕ)
     (hB : ((l ^ (r + 1) : ℕ) : B) = 0) (T : Scheme.{u}) (U : T.ProEt)
     (b : (proEtaleConstantRing T B).obj.obj (op U))
@@ -138,8 +132,7 @@ def ambRootFinitePure (B : Type u) [CommRing B] (r : ℕ)
   purScalarSection (purTwistFiniteRing T l r) (proEtaleConstantRing T B)
     (ambRootFiniteScalar l B r hB T) (purTwistRootsModule T l r) U b x
 
-/-- A named component of canonical root pullback coherence.
-Source: Stacks Tags 03CB and 03CO (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- A named component of canonical root pullback coherence. -/
 def AmbRootConstantIso : Prop :=
 ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -153,8 +146,7 @@ def AmbRootConstantIso : Prop :=
 
 attribute [local irreducible] AmbRootConstantIso
 
-/-- A named component of canonical root pullback coherence.
-Source: Stacks Tags 03CB and 03CO (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- A named component of canonical root pullback coherence. -/
 def AmbRootTransition : Prop :=
 ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -169,8 +161,7 @@ def AmbRootTransition : Prop :=
 
 attribute [local irreducible] AmbRootTransition
 
-/-- The specified finite-root semilinearity proposition, kept abstract during record generation.
-Source: Stacks Tag 03CY (blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The specified finite-root semilinearity proposition, kept abstract during record generation. -/
 def AmbRootFiniteSemilinear : Prop :=
 ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -191,9 +182,7 @@ def AmbRootFiniteSemilinear : Prop :=
 
 attribute [local irreducible] AmbRootFiniteSemilinear
 
-/-- Identity of finite root maps, transposed under the specified adjunction.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Identity of finite root maps, transposed under the specified adjunction. -/
 def AmbRootLawRootId : Prop :=
 ∀ (T : Scheme.{u})
     [∀ x : T, Invertible (l : T.presheaf.stalk x)] (s : ℕ) (U : T.ProEt)
@@ -204,9 +193,7 @@ def AmbRootLawRootId : Prop :=
 
 attribute [local irreducible] AmbRootLawRootId
 
-/-- Composition of the specified finite root maps.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Composition of the specified finite root maps. -/
 def AmbRootLawRootComp : Prop :=
 ∀ {T T' T'' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -223,9 +210,7 @@ def AmbRootLawRootComp : Prop :=
 
 attribute [local irreducible] AmbRootLawRootComp
 
-/-- The specified projection equation, transposed under adjunction.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The specified projection equation, transposed under adjunction. -/
 def AmbRootLawCProjection
     (c : ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -242,9 +227,7 @@ def AmbRootLawCProjection
 
 attribute [local irreducible] AmbRootLawCProjection
 
-/-- Uniqueness among all additive maps with the specified projections.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Uniqueness among all additive maps with the specified projections. -/
 def AmbRootLawCUnique
     (c : ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -263,9 +246,7 @@ def AmbRootLawCUnique
 
 attribute [local irreducible] AmbRootLawCUnique
 
-/-- Constant Z_l-linearity of c_L, in its equivalent adjunct form.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Constant Z_l-linearity of c_L, in its equivalent adjunct form. -/
 def AmbRootLawCLinear
     (c : ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -285,9 +266,7 @@ def AmbRootLawCLinear
 
 attribute [local irreducible] AmbRootLawCLinear
 
-/-- Identity of c_L under the canonical fibre-product identity.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Identity of c_L under the canonical fibre-product identity. -/
 def AmbRootLawCId
     (c : ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -302,9 +281,7 @@ def AmbRootLawCId
 
 attribute [local irreducible] AmbRootLawCId
 
-/-- Composition of c_L under the canonical fibre-product associator.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Composition of c_L under the canonical fibre-product associator. -/
 def AmbRootLawCComp
     (c : ∀ {T T' : Scheme.{u}}
     [∀ x : T, Invertible (l : T.presheaf.stalk x)]
@@ -323,9 +300,7 @@ def AmbRootLawCComp
 
 attribute [local irreducible] AmbRootLawCComp
 
-/-- Tensor normalization: h_v is c_L tensor 1, not an arbitrary map.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Tensor normalization: h_v is c_L tensor 1, not an arbitrary map. -/
 def AmbRootLawHPure
     (H : ∀ (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}),
       SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)))
@@ -357,9 +332,7 @@ def AmbRootLawHPure
 
 attribute [local irreducible] AmbRootLawHPure
 
-/-- Identity of h_v on all sections.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Identity of h_v on all sections. -/
 def AmbRootLawHId
     (H : ∀ (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}),
       SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)))
@@ -378,9 +351,7 @@ def AmbRootLawHId
 
 attribute [local irreducible] AmbRootLawHId
 
-/-- Composition of h_v on all sections, with the canonical associator.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Composition of h_v on all sections, with the canonical associator. -/
 def AmbRootLawHComp
     (H : ∀ (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}),
       SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)))
@@ -402,9 +373,7 @@ def AmbRootLawHComp
 
 attribute [local irreducible] AmbRootLawHComp
 
-/-- The projection formula determining alpha.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The projection formula determining alpha. -/
 def AmbRootLawAlphaPure
     (H : ∀ (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}),
       SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)))
@@ -435,9 +404,7 @@ def AmbRootLawAlphaPure
 
 attribute [local irreducible] AmbRootLawAlphaPure
 
-/-- Normalization of the finite tensor map by the specified root adjunct.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Normalization of the finite tensor map by the specified root adjunct. -/
 def AmbRootLawDPure
     (D : ∀ (B : Type u) [CommRing B] (n : ℕ)
       (_hB : ((l ^ (n + 1) : ℕ) : B) = 0) (T : Scheme.{u}),
@@ -466,9 +433,7 @@ def AmbRootLawDPure
 
 attribute [local irreducible] AmbRootLawDPure
 
-/-- Exactly the displayed reduction square, transposed under module adjunction.
-Source: Stacks Tags 03CO and 03EK
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- Exactly the displayed reduction square, transposed under module adjunction. -/
 def AmbRootLawSquare
     (H : ∀ (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}),
       SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)))
@@ -507,9 +472,7 @@ set_option genSizeOfSpec false in
 set_option genInjectivity false in
 /-- All canonical maps and their normalizations. The maps c, h and d are direct-image
 adjuncts of c_L, h_v and c_r tensor 1; their section equations are equations on the
-original unit sections, not an assertion that pulled-back sections are pure tensors.
-Source: Stacks Tags 03CO, 03DB, 03CB, 03EL and 03D7
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+original unit sections, not an assertion that pulled-back sections are pure tensors. -/
 structure AmbRootTowerPullbackCoherenceData
     (H : ∀ (B : Type u) [CommRing B] [Algebra ℤ_[l] B] (T : Scheme.{u}),
       SheafOfModules.{u + 1} (purTwistRing T (proEtaleConstantRing T B)))
@@ -583,9 +546,7 @@ structure AmbRootTowerPullbackCoherenceData
   /-- Exactly the displayed reduction square, transposed under module adjunction. -/
   square : AmbRootLawSquare.{u} l H D h alpha d
 
-/-- The coherence data for the specified ordinary root tensors.
-Source: Stacks Tags 03CO, 03DB, 03CB, 03EL and 03D7
-(blueprint: lem-amb-root-tower-pullback-coherence). -/
+/-- The coherence data for the specified ordinary root tensors. -/
 abbrev AmbRootTowerPullbackCoherence :=
   AmbRootTowerPullbackCoherenceData l (ambRootTensor l) (ambRootTensorPure l)
     (ambRootFiniteTensor l) (ambRootFinitePure l)
@@ -1558,8 +1519,6 @@ private theorem tensor_reduction_square (B : Type u) [CommRing B] [Algebra ℤ_[
   exact (h1.trans h2).trans (hp.trans (h3.trans h4).symm)
 
 /-- Canonical root-tower pullback, its ordinary tensor extension, and the reduction square.
-Source: Stacks Tags 03CO/03DB, 03CB, 03EL and 03D7; vector-bundle purity proof paragraph 1
-(blueprint: lem-amb-root-tower-pullback-coherence).
 
 Proof:
 1. The constant sheaf adjunction composed with the inverse-image adjunction is the constant

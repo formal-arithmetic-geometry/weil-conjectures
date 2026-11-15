@@ -13,9 +13,13 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 /-!
 # Coefficient realization of cartesian open base change
 
-Source: the clopen construction in Stacks 0F7B and Zheng, Construction 4.1.
 The comparison concerns only the cartesian lift map, before inserting any clopen projector.
-(blueprint: lem-sp-varying-ring-open-base-change-evaluation).
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 09AE, 03DI
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -548,8 +552,6 @@ private theorem strictBetaForward (n : ℕ) {V W S T : Scheme.{u}}
 
 /-- Coefficient evaluation preserves the cartesian open base-change comparison,
 using the specified pullback and open-extension comparisons.
-Source: Stacks 09AE and 03DI; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-open-base-change-evaluation).
 Proof: the ordinary unit-normalized pullback comparison preserves composition.
 The exact-square composition theorem localizes that natural-isomorphism equation
 before taking components. Apply it to the two paths around the square, including

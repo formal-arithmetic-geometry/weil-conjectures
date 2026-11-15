@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceUnitCompactBase
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoherence
 
 /-! # Pulling a single frame chart along an arbitrary map
-
-(blueprint: lem-pur-vector-integration-pulled-chart-transport).
+.
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +33,7 @@ attribute [local irreducible] affineLinearCoefficientDescent affineLinearBaseCoe
 attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
   Scheme.Modules.instCategory sheafIsAbelian
 
-/-- An inverse frame chart remains Cartesian after any pullback of its base.
-Source: vector-bundle purity proof paragraph 2, restriction of a frame.
-(blueprint: lem-pur-vector-integration-pulled-chart-transport). -/
+/-- An inverse frame chart remains Cartesian after any pullback of its base. -/
 theorem vectorIntegrationPulledChart_isPullback
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]
@@ -355,8 +352,6 @@ private theorem exchange_paste_named
 
 /-- Restrict the prefix of one frame along an arbitrary map to its frame open.
 There is no second frame, linear action, or trace counit in this identity.
-Source: blueprint vector-bundle purity proof, paragraph 2, arbitrary base change.
-(blueprint: lem-pur-vector-integration-pulled-chart-transport).
 
 Proof: paste the affine-tower base-change square with the inverse-frame square.
 Naturality moves the chart coefficient through the tower exchange. The canonical

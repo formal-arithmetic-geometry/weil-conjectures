@@ -14,7 +14,10 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Abelian comparison for integral ordinary inverse systems
 
-Source: blueprint classes proof (2), integral reduction.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -394,8 +397,6 @@ end Ordinary
 attribute [local irreducible] Rrings
 
 /-- The underlying abelian tower comparison supplied by an ordinary inverse system.
-Source: blueprint latest, classes proof (2), integral reduction, and Zheng Construction 4.1.
-(blueprint: lem-sp-tower-integral-abelian-comparison).
 
 Proof: at each coefficient level, the moduleUnderlying comparison of the algebraic
 inverse image is composed with the component comparison of the ordinary system and

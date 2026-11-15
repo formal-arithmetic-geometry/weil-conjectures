@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteE
 
 /-! # Evaluating the integral Kummer composite
 
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-kummer-comparison-composite).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +41,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 
 /-- The actual comparison of Kummer short complexes preserves the boundary
 composite of any degree-one extension and any source normalization.
-Source: Stacks 03PL, short-exact extension naturality and Yoneda associativity
-(blueprint: lem-sfb-finite-kummer-comparison-composite).
 
 Proof: apply the generic short-exact comparison formula to the etale Kummer
 sequence, the evaluated tower sequence and finiteKummerSequenceComparison.

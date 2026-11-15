@@ -254,10 +254,6 @@ private theorem equiv_tensor_unit_transpose
 
 /-- The ordinary tensor/restriction adjunction for abelian towers, including its free unit.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and IntegralUnitReduction proof steps 1 and 3.
-(blueprint: lem-sfb-integral-tower-scalar-presentation).
-
 Proof: let O be the constant lifted-integer ring sheaf on the base site, and take R
 to be its constant sequence ring on the vertical sequence site.
 Flattening a tower of abelian sheaves identifies it with an abelian sheaf on this site:

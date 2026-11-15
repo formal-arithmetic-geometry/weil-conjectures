@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Structure.StructureSheafCohomologyPullb
 /-!
 # Functoriality of pullback on structure sheaf cohomology
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-functorial).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01F7
 -/
 
 @[expose] public section
@@ -26,9 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Canonical pullback on structure sheaf cohomology preserves identities and reverses
-composition. Source: Stacks Project, Cohomology of Sheaves, Section 01F7,
-equation-functorial and Remark 20.14.2
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-functorial).
+composition.
 
 Proof: Regard the structure ring map of each scheme morphism as a map of abelian sheaves
 into the direct image. On injective resolutions, lift this map as in Remark 20.14.2 and

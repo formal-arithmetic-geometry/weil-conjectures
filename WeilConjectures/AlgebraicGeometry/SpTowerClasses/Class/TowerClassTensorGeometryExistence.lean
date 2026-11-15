@@ -11,7 +11,14 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassTensorLe
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerOrdinaryUnitEvaluation
 
-/-! # Normalized unit and ordinary tensor coordinates for geometric tower pullback -/
+/-! # Normalized unit and ordinary tensor coordinates for geometric tower pullback
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03EL, 07A4
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -58,11 +65,6 @@ private theorem systemHom_ext {T : Scheme.{u}}
   exact congrArg (fun k ↦ k.val.app (op V.unop.2) x) (h V.unop.1)
 
 /-- The geometric tower operations can be chosen with their ordinary unit and tensor maps.
-
-Source: blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clauses (2)--(4),
-and the geometric realization in `sk-lem-sp-tower-bound-operations.proof.md`;
-Zheng Construction 4.1, Lemma 4.10; Stacks 03D2, 03EL and 07A4.
-(blueprint: lem-sfb-tower-class-tensor-geometry-existence).
 
 Proof: use the coefficient-tower calculus and the ringed sequence site from
 strictSystemGeometricRealization. Realize inverse image by the algebraic inverse

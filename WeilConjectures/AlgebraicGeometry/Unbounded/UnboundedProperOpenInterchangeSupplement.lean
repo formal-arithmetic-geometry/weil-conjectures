@@ -261,14 +261,15 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 /-!
 # Unbounded proper/open interchange and its canonical normalizations
 
-Source: Stacks Project, More on Étale Cohomology, Tags 0F7B (case (b)), 0F7C, 0F7D
-and 0F7F (blueprint: lem-amb-unbounded-proper-open-interchange).
-
 The sheaf isomorphism is specified by equality of its two maps into the common direct
 image. This is precisely equality of the proper-support subsheaves, and fixes the map.
 The derived isomorphism is specified on every K-injective representative and every
 K-injective resolution of its open extension. All composition equations include the
 canonical composition isomorphisms. No boundedness of the input is imposed.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7D, 0F7F
 -/
 
 @[expose] public section
@@ -669,8 +670,6 @@ private noncomputable def constructedDerivedComparison
 set_option linter.unusedVariables false in
 /-- Unbounded proper/open interchange, including its representative, adjunction, pasting,
 identity and arbitrary base-change normalizations.
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F
-(blueprint: lem-amb-unbounded-proper-open-interchange).
 
 Proof:
 

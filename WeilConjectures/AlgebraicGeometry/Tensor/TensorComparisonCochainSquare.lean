@@ -108,8 +108,9 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemCochainTensorReduction
 
 /-! # Cochain compatibility of four normalized tensor models
 
-Source: Stacks 07A4, lemma-pullback-tensor-product.
-(blueprint: lem-coef-semilinear-tensor-comparison-cochain-square)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -169,8 +170,6 @@ include ho in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Compatibility of four ordinary tensor comparisons implies compatibility of
 these comparisons on total tensor cochain complexes.
-Source: Stacks 07A4, lemma-pullback-tensor-product, the signed total comparison.
-(blueprint: lem-coef-semilinear-tensor-comparison-cochain-square).
 
 Proof: compare the degree-k maps on every (p,q) summand. The four model summand
 formulas reduce the two routes to the inverse ordinary comparison square.

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassF
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact single-arrow calculus
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-exact-arrow-calculus).
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +21,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses.FiniteExactArrow
 
 
-/-- Compatibility of exact derived arrows with the indicated functor operation.
-Source: exact functors on Ext and their canonical single/shift comparisons
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Compatibility of exact derived arrows with the indicated functor operation. -/
 theorem mapSingleArrow_ext
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -38,9 +33,7 @@ theorem mapSingleArrow_ext
   simpa only [mapSingleArrow, ShiftedHom.map, Category.assoc] using
     (Ext.mapExactFunctor_hom F x).symm
 
-/-- Compatibility of exact derived arrows with the indicated functor operation.
-Source: exact functors on Ext and their canonical single/shift comparisons
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Compatibility of exact derived arrows with the indicated functor operation. -/
 theorem mapSingleArrow_comp_iso
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -64,8 +57,7 @@ theorem mapSingleArrow_comp_iso
   simpa only [mapSingleArrow, Category.assoc] using h
 
 /-- Composite exact transport of an arbitrary derived arrow, using only Ext in
-its source category. Source: exact functors and the Ext realization equivalence
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+its source category. -/
 theorem mapSingleArrow_comp_iso_arrow
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -89,9 +81,7 @@ theorem mapSingleArrow_comp_iso_arrow
   subst a
   exact mapSingleArrow_comp_iso F G K τ x
 
-/-- Successive exact transport is transport by the composite functor.
-Source: exact composition with its identity natural isomorphism
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Successive exact transport is transport by the composite functor. -/
 theorem mapSingleArrow_comp
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -109,9 +99,7 @@ theorem mapSingleArrow_comp
   simpa only [Iso.refl_inv, Iso.refl_hom, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using h
 
-/-- Three successive exact transports commute with an isomorphic alternate pair.
-Source: composition of exact functors and naturality under a functor isomorphism
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Three successive exact transports commute with an isomorphic alternate pair. -/
 theorem mapSingleArrow_three_comp_iso_arrow
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -137,9 +125,7 @@ theorem mapSingleArrow_three_comp_iso_arrow
   rw [← mapSingleArrow_comp F G, ← mapSingleArrow_comp U V] at h
   exact h
 
-/-- Compatibility of exact derived arrows with the indicated functor operation.
-Source: exact functors on Ext and their canonical single/shift comparisons
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Compatibility of exact derived arrows with the indicated functor operation. -/
 theorem mapSingleArrow_precomp
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -155,9 +141,7 @@ theorem mapSingleArrow_precomp
   dsimp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
 
-/-- Compatibility of exact derived arrows with the indicated functor operation.
-Source: exact functors on Ext and their canonical single/shift comparisons
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Compatibility of exact derived arrows with the indicated functor operation. -/
 theorem mapSingleArrow_postcomp
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -176,8 +160,7 @@ theorem mapSingleArrow_postcomp
   rw [← Functor.map_comp, hn, Functor.map_comp]
 
 /-- The canonical single comparisons for a composite exact functor give successive
-single-arrow transport. Source: exact single and shift functoriality
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+single-arrow transport. -/
 theorem coordinate_composite
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -213,9 +196,7 @@ theorem coordinate_composite
     Functor.map_comp, Functor.commShiftIso_comp_hom_app, Category.assoc]
   rw [Functor.commShiftIso_hom_naturality_assoc]
 
-/-- Exact Yoneda composition and its realization respect the indicated boundary map.
-Source: naturality of short-exact extension classes and exact functors on Ext
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Exact Yoneda composition and its realization respect the indicated boundary map. -/
 theorem kummerComposite_ext
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     [HasDerivedCategory.{t₁} C] [HasExt.{w₁} C]
@@ -224,9 +205,7 @@ theorem kummerComposite_ext
   simp only [kummerComposite, Ext.comp_hom, ShortComplex.ShortExact.extClass_hom,
     ShiftedHom.comp, Int.natCast_one, Int.natCast_add, shiftFunctorAdd'_eq_shiftFunctorAdd]
 
-/-- Exact Yoneda composition and its realization respect the indicated boundary map.
-Source: naturality of short-exact extension classes and exact functors on Ext
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Exact Yoneda composition and its realization respect the indicated boundary map. -/
 theorem mapped_composite_boundary
     {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasExt.{w₁} C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasExt.{w₂} D]
@@ -250,9 +229,7 @@ theorem mapped_composite_boundary
   rw [Ext.comp_assoc_of_second_deg_zero, ← hn, Ext.mapExactFunctor_comp]
   rw [Ext.comp_assoc_of_third_deg_zero]
 
-/-- Exact Yoneda composition and its realization respect the indicated boundary map.
-Source: naturality of short-exact extension classes and exact functors on Ext
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Exact Yoneda composition and its realization respect the indicated boundary map. -/
 theorem mapped_kummer_composite
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -269,9 +246,7 @@ theorem mapped_kummer_composite
 section
 attribute [local instance 100000] CategoryTheory.Abelian.toPreadditive
 
-/-- Exact evaluation cancels constant-system transport of any single arrow.
-Source: functoriality of Ext and the identity of evaluation on constant systems
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Exact evaluation cancels constant-system transport of any single arrow. -/
 theorem mapSingleArrow_eval_const
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {I : Type u₂} [Category.{v₂} I] [Abelian (I ⥤ C)]
@@ -299,9 +274,7 @@ theorem mapSingleArrow_eval_const
 
 end
 
-/-- Exact functors preserve the degree-two Kummer connecting composite.
-Source: naturality of extension classes under exact functors
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- Exact functors preserve the degree-two Kummer connecting composite. -/
 theorem mapSingleArrow_kummerComposite
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -325,9 +298,7 @@ theorem mapSingleArrow_kummerComposite
     kummerComposite_ext (hs.map_of_exact F) (x.mapExactFunctor F)
   exact (mapped_kummer_composite F hs x).trans hr.symm
 
-/-- A map of short exact sequences transports the Kummer boundary of an extension.
-Source: short-exact extension naturality and Yoneda associativity
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- A map of short exact sequences transports the Kummer boundary of an extension. -/
 theorem kummerComposite_comparison
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -355,9 +326,7 @@ theorem kummerComposite_comparison
   simp only [Ext.comp_hom]
   rfl
 
-/-- A source normalization cancels the inverse comparison of a transported arrow.
-Source: exact single-arrow endpoint naturality and inverse cancellation
-(blueprint: lem-sfb-finite-exact-arrow-calculus). -/
+/-- A source normalization cancels the inverse comparison of a transported arrow. -/
 theorem coordinate_transport_of_comparison
     {H : Type u₁} [Category.{v₁} H] [Abelian H]
     {B : Type u₂} [Category.{v₂} B] [Abelian B]

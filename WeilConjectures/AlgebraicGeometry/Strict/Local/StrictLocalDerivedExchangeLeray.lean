@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalSectionsUnitLer
 
 /-! # Derived exchange and Leray before taking homology
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-leray).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -32,10 +33,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- The derived exchange computation on the global sections of the pulled-back
 underived direct-image complex. No neighbourhood section restriction occurs.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-adjunction factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-leray).
 
 Proof: put M = ιJ and L = f_*M. In the bounded-below homotopy category apply
 `Adjunction.derivedPlus_mateEquiv_app_fac` with `squareUpperStarIso`; its square

@@ -11,10 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! Local `q` coefficient frames for the normalized pullback generator relation.
 
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 The statement isolates the first (pulled quotient) coefficient formula from the
 common-coefficient conclusion.
-(blueprint: lem-trf-symmetric-proj-pullback-generator-local-coefficients-q)
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false

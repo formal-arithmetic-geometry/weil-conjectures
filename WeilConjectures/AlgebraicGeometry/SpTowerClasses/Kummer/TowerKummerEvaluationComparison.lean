@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The named boundary evaluates to the existing finite Kummer composite.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-kummer-evaluation-comparison).
 Proof: apply congrArg for exact evaluation to the proved equality between
 composition with the named boundary and the original kummerComposite. No coefficient
 tower or scalar-extension data are involved. Convert equality to HEq. -/

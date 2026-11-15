@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 
 /-! # Pullback of the integral pro-etale line-bundle class
-
-Source: blueprint chap-Smooth-purity, classes proof (2).
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +43,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Pullback of the line-bundle class before making a constant tower.
-Source: blueprint classes proof (2); the already proved Picard cohomology pullback
-formula, transported across the canonical site square.
-(blueprint: lem-sp-line-bundle-proetale-class-pullback).
 
 Proof: the arbitrary-scheme Picard cohomology naturality theorem identifies the
 pulled back class with that of Pic.map f (Pic.ofIsInvertible L). Pulling back the

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteComparedKum
 
 /-! # Evaluating the integral Kummer composite
 
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-kummer-integral-evaluation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03PL
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- Evaluation of the integral tower Kummer class is the comparison image of the
-etale Kummer class. Source: Stacks 03PL; diagonal-tower trace (1).
-(blueprint: lem-sfb-finite-kummer-integral-evaluation).
+etale Kummer class.
 
 Proof: write the line bundle class as the exact comparison image of its Picard
 extension, transported along integerComparison and cartierUnitsComparison.

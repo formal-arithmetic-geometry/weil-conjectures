@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarRootAb
 
 /-! # Ordinary scalar association for a fixed integral geometric inverse image
 
-Source: blueprint classes proof (2), balanced coefficient extension.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -55,11 +57,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Balanced scalar association for already constructed integral inverse image.
 The coefficient arrows are specified by their ordinary adjuncts; no derived
 counit or K-flatness condition occurs in the statement.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-ordinary coefficient extension; balanced association of scalar extension
-(Stacks 03EL).
-(blueprint: lem-sp-tower-ordinary-scalar-association).
 
 Proof: restrictedScalarAdjunction_exists gives the normalized adjunction from
 integral inverse image followed by ordinary scalar extension to geometric direct

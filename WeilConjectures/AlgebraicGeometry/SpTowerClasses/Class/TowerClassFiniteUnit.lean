@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
-/-! # Finite constant-coefficient pullback of the regular module -/
+/-! # Finite constant-coefficient pullback of the regular module
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -244,9 +249,6 @@ attribute [local irreducible] finiteUnitIso
 
 /-- The actual finite constant-ring adjunction preserves its regular module,
 with its transpose fixed on every section.
-Source: Stacks 03D2 and 03D7; Mathlib's pullback-unit argument in
-`SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal`.
-(blueprint: lem-sfb-tower-class-finite-unit).
 
 Proof: direct image preserves global module sections since base change on the
 pro-etale sites preserves terminal objects and is therefore final. The regular

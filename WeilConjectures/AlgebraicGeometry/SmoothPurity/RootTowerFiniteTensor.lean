@@ -33,12 +33,15 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleReplete
 
 /-! # Root tower projections and normalized finite tensor reduction
 
-Source: Stacks Project, proetale.tex Tag 0990, etale-cohomology.tex Tag 03PL,
-and sites-modules.tex Section 03EK and Tag 03CY. Kernel division and the normalized
-inverse are the agent arguments in the node (blueprint: lem-amb-root-tower-finite-tensor).
+Kernel division and the normalized
+inverse are the agent arguments in the node.
 
 The natural-number level `r` denotes the positive exponent `r + 1`.
 All tensors are ordinary sheafified tensors. No flatness or finiteness of B is assumed.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0990, 03PL, 03EK, 03CY, 03DB, 03CO, 00WK
 -/
 
 @[expose] public noncomputable section
@@ -53,29 +56,24 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing limit projection, indexed by positive exponent `r + 1`.
-Source: Stacks Tags 03DB and 03CO (blueprint: lem-amb-root-tower-finite-tensor). -/
+/-- The existing limit projection, indexed by positive exponent `r + 1`. -/
 abbrev rootTowerProjection (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : ℕ) :=
   limit.π (proEtaleRootsOfUnityTower T l (Fact.out : l.Prime)) (op r)
 
-/-- The constant scalar map induced by the given Z_l-algebra structure.
-Source: node scalar-action paragraph (blueprint: lem-amb-root-tower-finite-tensor). -/
+/-- The constant scalar map induced by the given Z_l-algebra structure. -/
 def rootTowerTensorScalar (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] [Algebra ℤ_[l] B] :
     purTwistZlConstant T l ⟶ tateFiniteCoefficient T B :=
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom ((algebraMap ℤ_[l] B).comp ULift.ringEquiv.toRingHom))
 
-/-- The unique residue-ring scalar homomorphism, using only annihilation.
-Source: node proof step 3, Stacks 03EK (blueprint: lem-amb-root-tower-finite-tensor). -/
+/-- The unique residue-ring scalar homomorphism, using only annihilation. -/
 def rootTowerResidueScalar (l : ℕ) (r : ℕ) (B : Type (u + 1)) [CommRing B]
     (hB : ((l ^ (r + 1) : ℕ) : B) = 0) : ZMod (l ^ (r + 1)) →+* B :=
   ZMod.castHom ((CharP.cast_eq_zero_iff B (ringChar B) (l ^ (r + 1))).mp hB) B
 
 /-- H = L tensor B over discrete constant Z_l, using the existing coordinate action
-restricted along the constant-to-completed scalar map.
-Source: node scalar-action paragraph and proof step 3
-(blueprint: lem-amb-root-tower-finite-tensor). -/
+restricted along the constant-to-completed scalar map. -/
 def rootTowerTensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] [Algebra ℤ_[l] B] :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
@@ -84,8 +82,7 @@ def rootTowerTensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (purTwistZlCompletionMap T l))).obj (purTwistZlModule T l))
 
-/-- A pure tensor x tensor b in H, with the scalar written first by change of rings.
-Source: Stacks 03EK and node proof step 3 (blueprint: lem-amb-root-tower-finite-tensor). -/
+/-- A pure tensor x tensor b in H, with the scalar written first by change of rings. -/
 def rootTowerTensorPure (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] [Algebra ℤ_[l] B] (U : T.ProEt)
     (b : (tateFiniteCoefficient T B).obj.obj (op U))
@@ -591,8 +588,6 @@ private def rootTensorIso (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     erw [SheafOfModules.scalarExtensionSection_smul.{u + 1, u, u + 1, u + 1}, mul_one]
 
 /-- Root projections, their sectionwise shift division, and normalized finite tensor reduction.
-Source: Stacks 0990, 03PL, 03EK, 03CY and 00WK; agent extraction, proof steps 1--6
-(blueprint: lem-amb-root-tower-finite-tensor).
 
 Proof:
 1. Use the proved epimorphic root transitions and pro-etale repleteness, after forgetting

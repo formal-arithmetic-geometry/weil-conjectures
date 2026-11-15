@@ -38,10 +38,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Res
 /-!
 # Comparison of ordinary supported sections between the two sites
 
-Source: Stacks Project, Tags 099W, 099V, 09B1 and 09XP, with the supported
-refinement of blueprint `lem-pur-support-site-comparison`
-(blueprint: lem-pur-support-site-comparison).
-
 ## Main definitions and statements
 
 * `ProEtale.supportComparison`: the natural bounded-below comparison map.
@@ -50,6 +46,10 @@ refinement of blueprint `lem-pur-support-site-comparison`
   `ProEtale.supportComparison_open`: forgetting, full-support normalization, and restriction.
 * `ProEtale.supportExteriorCoefficientIso`: the specified tensor/pullback comparison theta.
 * `ProEtale.supportComparison_exterior`: equality of the supported exterior-product maps.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 099W, 099V, 09B1, 09XP
 -/
 
 @[expose] public section
@@ -65,8 +65,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (A : Type (u + 1)) [CommRing A]
   {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
 
-/-- The etale support kernel used by the canonical comparison unit.
-Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison). -/
+/-- The etale support kernel used by the canonical comparison unit. -/
 noncomputable abbrev etaleSupportKernel :=
   Sheaf.supportedSectionsFunctor T.smallEtaleTopology (ModuleCat.{u + 1} A)
     (Etale.supportRestrictionArrow i)
@@ -122,7 +121,6 @@ private theorem supportEvaluation_hom (A : Type (u + 1)) [CommRing A]
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical identification of the global-section kernel with the restriction
 kernel used by the support long exact sequence.
-Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison).
 Proof: the terminal-evaluation isomorphism identifies global restriction with
 restriction from the terminal object. It induces an isomorphism of kernels.
 The kernel inclusion determines its forward map and hence the isomorphism uniquely. -/
@@ -196,8 +194,7 @@ theorem supportKernelEvaluationIso_existsUnique :
     apply (cancel_mono (kernel.ι (F.obj.map (Etale.supportRestrictionArrow i).op))).mp
     exact (NatTrans.congr_app hn' F).trans (hb F).symm
 
-/-- The uniquely kernel-normalized terminal-evaluation transport.
-Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison). -/
+/-- The uniquely kernel-normalized terminal-evaluation transport. -/
 noncomputable def supportKernelEvaluationIso :=
   Classical.choose (supportKernelEvaluationIso_existsUnique A i)
 
@@ -207,8 +204,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.defeqAttrib.useBackward true in
-/-- Derive the recorded coefficient pullback comparison before specializing coefficients.
-Source: blueprint comparison-pullback clause (blueprint: lem-pur-support-site-comparison). -/
+/-- Derive the recorded coefficient pullback comparison before specializing coefficients. -/
 noncomputable def supportDerivedCoefficientPullbackIso
     (D : Type v₁) [Category.{u + 1} D] [Abelian D] [IsGrothendieckAbelian.{u + 1} D]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

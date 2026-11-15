@@ -34,8 +34,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.DiagonalIntegralUnitEpi
 
 /-! # Morphisms from closed direct images of the integer sheaf
 
-Source: Milne, Section 9, p. 67, exact sequence (*).
-(blueprint: lem-sp-closed-integral-hom-ext).
+## References
+
+* J. S. Milne, *Lectures on étale cohomology*, Section 9
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +50,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Morphisms from a closed direct image of the integer sheaf agree if they agree on
 constant integer generators on all pulled-back charts.
-Source: Milne, Section 9, p. 67, exact sequence (*), and the sheafification adjunction.
-(blueprint: lem-sp-closed-integral-hom-ext).
 
 Proof: the ambient integer sheaf maps epimorphically onto the closed direct image.
 Cancel that map. By the sheafification universal property, equality of the resulting

@@ -14,13 +14,13 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearPullbackCubeCoher
 /-!
 # Pullback compatibility of the intrinsic semilinear alpha
 
-Source: Stacks Project, Tag 0F7F, alpha-level open case, and the agent-written
-extension to arbitrary strict semilinear systems
-(blueprint: lem-sf-semilinear-alpha-pullback).
-
 The ordinary system cube is stated first. Its exact localization is the derived
 cube, prior to taking any proper direct-image mate. The auxiliary isomorphisms
 only localize the dependency's specified ordinary comparisons.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7F, 09AE, 07A7
 -/
 
 @[expose] public noncomputable section
@@ -361,7 +361,6 @@ private theorem localize_cube_functors
     al0 al₁0 bi0 bk0 gp0 gr0 hOrd M
 
 /-- Exact localization of the specified unit-normalized open comparison.
-Source: Stacks, Tags 09AE and 0F7F (blueprint: lem-sf-semilinear-alpha-pullback).
 This is the actual ordinary moduleBeta localized, with the standard composition
 isomorphisms; no derived comparison is selected independently. -/
 def alphaPullbackBeta {U' U X' X : Scheme.{u}}
@@ -373,7 +372,6 @@ def alphaPullbackBeta {U' U X' X : Scheme.{u}}
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Exact localization of the specified inverse-image square compositor.
-Source: Stacks, Tags 07A7 and 0F7F (blueprint: lem-sf-semilinear-alpha-pullback).
 The square comparison is induced by moduleGComp, hence by the section-normalized
 ordinary direct-image comparison, with its prescribed adjunction units. -/
 def alphaPullbackSquareG {V W S T : Scheme.{u}}
@@ -456,8 +454,6 @@ private theorem square_inv_localized {V W S T : Scheme.{u}}
   exact (localizedArrow_iso_inv _ _ _ _ _).symm
 
 /-- The pullback cube already commutes on ordinary semilinear systems.
-Source: Stacks, Tag 0F7F, alpha-level open case; agent-written semilinear extension
-(blueprint: lem-sf-semilinear-alpha-pullback).
 Proof (the node's seven steps):
 1. Factor Q through T = V ×_Z W. The canonical lift s : U → T is clopen.
    Base change gives s₁ : U₁ → T₁, its clopen image, and its complementary open.
@@ -546,8 +542,6 @@ theorem moduleAlpha_baseChange
 
 /-- The two displayed alpha cube paths agree after exact localization, on every
 unbounded derived system, prior to taking any proper direct-image mate.
-Source: Stacks, Tag 0F7F, alpha-level open case; agent-written semilinear extension
-(blueprint: lem-sf-semilinear-alpha-pullback).
 Proof (the node's seven steps):
 1. Factor Q through T = V ×_Z W. The canonical lift s : U → T is clopen.
    Base change gives s₁ : U₁ → T₁, its clopen image, and its complementary open.

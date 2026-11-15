@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 
 /-! # Local frame atlas for normalized symmetric Proj pullback
 
-Source: Stacks Project, Constructions, Tags 01NQ, 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison-local).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NQ, 01NR, 01OB, 01N2
 -/
 
 @[expose] public section
@@ -226,10 +227,6 @@ private theorem pullback_atlas_of_cross_tensor
     (@IsInvertible.sheafOfModules_isInvertible T L' hL') hcross
 
 /-- Common local frames and quotient coefficients for the fixed Proj pullback map.
-
-Source: Stacks Project, Constructions, Tags 01NQ and 01N2 (base-change fractions),
-01NR (twist frames and transition ratios), and 01OB (quotient normalization).
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison-local).
 
 Proof: cover the source by degree-one basic opens over pairs of affine base opens.
 Scalar extension preserves the degree-one cover. On each such open choose the

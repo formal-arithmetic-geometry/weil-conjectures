@@ -94,14 +94,14 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Finite exterior and tensor-dual Koszul comparison
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, and sites-cohomology.tex, Tags 0941 and 0A0A.
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison).
-
 The site and coefficient transports are publicly re-exported from the lower site module.
 The termwise-limit comparison is constructed here. The finite comparison is assembled
 from coefficient comparison and tensor transport, including transitions and augmentation.
 Products, cones and derived transport are proved by consumers.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941, 0A0A, 0664
 -/
 
 @[expose] public noncomputable section
@@ -115,9 +115,7 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical comparison between limits of complexes and termwise limits.
-Source: Stacks Tag 0941
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
+/-- The canonical comparison between limits of complexes and termwise limits. -/
 def completedKoszulTermwiseLimitIso {B : Type*} [Category B] [Abelian B] [HasLimitsOfShape ℕᵒᵖ B] :
     HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
       (lim : (ℕᵒᵖ ⥤ CochainComplex B ℤ) ⥤ CochainComplex B ℤ) ≅
@@ -272,11 +270,6 @@ attribute [local irreducible] ringedKoszulDualTower ringedKoszulDiagram
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite exterior Koszul tower agrees with the ordered tensor-dual tower.
-
-Source: Stacks Project, more-algebra.tex Tag 0664, Lemma 15.29.12
-(tensor decomposition), and algebraization.tex Tag 0A0E,
-proof of lemma-derived-completion-koszul (finite-free duality identification).
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison).
 
 Proof: on the free module with ordered basis Fin r, use the sorted subset basis of
 its exterior powers. A k-subset indexes degree -k. Identify its basis vector with the

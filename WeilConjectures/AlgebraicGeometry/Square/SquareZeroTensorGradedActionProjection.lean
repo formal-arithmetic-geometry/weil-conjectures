@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.tensorGradedAction_projection_sec
 
 /-! # Projection of homogeneous quotient actions
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, the quotient action on a square-zero ideal.
-(blueprint: lem-sc-square-zero-tensor-graded-action-projection).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S, 01XC
 -/
 
 @[expose] public section
@@ -32,9 +32,6 @@ set_option linter.unusedVariables false in
 /-- The homogeneous quotient actions commute with the coefficient projections.
 This statement concerns only actions: it has no connecting map or resolution presentation.
 
-Source: Stacks Project, Tag 09MS, the graded ideal sequence; Tag 0B8S, first paragraph
-of the proof (the quotient action); Tag 01XC, functoriality of the affine cohomology edge.
-(blueprint: lem-sc-square-zero-tensor-graded-action-projection).
 Proof: The local lift formula uniquely determines an action on I, since its inclusion
 in B is mono. Cover an open by opens on which the section in question lifts through
 the degreewise adjunction unit. Express local sections of I, after another refinement,

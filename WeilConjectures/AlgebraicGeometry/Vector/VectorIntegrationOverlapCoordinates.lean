@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationCartesianPrefix
 
 /-! # Linear change between restricted inverse frames
-
-Source: blueprint vector integration, overlap calculation, geometric part.
-(blueprint: lem-amb-vector-integration-overlap-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -301,10 +298,6 @@ private theorem restrict_chart
 
 /-- The two restricted inverse frames differ by an invertible linear coordinate map.
 This statement concerns scheme maps only and has no coefficient ring or exchange map.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-identification on overlaps by linear changes of frame, and the coordinate convention
-of proposition-purity-vector-bundles.
-(blueprint: lem-amb-vector-integration-overlap-coordinates).
 
 Proof: restrict each module frame along U into its frame open, using restrictFunctorComp
 and the canonical restriction of the finite free module. Their composite is an

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceUnitCompactBase
 import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRestrictedChartCoefficient
 
 /-! # Restriction of one vector integration chart comparison
-
-Source: blueprint vector integration, overlap calculation, exchange-pasting part.
-(blueprint: lem-amb-vector-integration-restricted-chart-transport).
 -/
 
 @[expose] public noncomputable section
@@ -54,9 +51,6 @@ private theorem exchange_paste_named
 /-- Restricting the prefix for a single frame is exchange for the composite inverse
 chart with its coefficient descended directly from the base. There is no second frame,
 change-of-frame matrix, action or trace counit in this assertion.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-restriction to an overlap, original overlap-chart-prefix proof Steps 3--4.
-(blueprint: lem-amb-vector-integration-restricted-chart-transport).
 
 Proof: paste the Cartesian tower square for U into V with the inverse-frame square.
 Horizontal compact-support exchange pasting identifies the two exchange factors;

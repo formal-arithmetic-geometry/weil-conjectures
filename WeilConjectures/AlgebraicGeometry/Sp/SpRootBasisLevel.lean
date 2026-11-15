@@ -8,10 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sp.SpEllCoefficientTower
 
 /-! # The normalized basis at one finite Tate level
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), finite bases.
-(blueprint: lem-sp-root-basis-level)
 -/
 
 @[expose] public noncomputable section
@@ -195,11 +191,6 @@ private theorem spCoefficient_nsmul (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime
 
 /-- A prescribed root basis gives the normalized linear basis of one finite
 integral twist level on its slice.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), the map
-`a ↦ zeta_n tensor a` at a fixed finite level.
-(blueprint: lem-sp-root-basis-level)
 
 Proof: write N = ell^(n+1) and B = O_E/(N). The canonical finite-discrete
 coefficient comparison identifies the actual coefficient sheaf with constant B,

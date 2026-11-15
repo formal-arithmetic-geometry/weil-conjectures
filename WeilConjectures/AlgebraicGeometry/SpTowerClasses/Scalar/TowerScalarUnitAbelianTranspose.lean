@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarUnitAb
 
 /-! # The abelian transpose of the coefficient-unit comparison
 
-Source: blueprint classes proof (2), ordinary coefficient-unit normalization.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -28,10 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The coefficient-unit normalization after forgetting and taking abelian adjuncts.
 There is no scalar-association map or adjunction for d.pull in this assertion.
-
-Source: blueprint latest, classes proof (2), unit normalization in ordinary
-coefficient extension; Stacks 03EL.
-(blueprint: lem-sp-tower-scalar-unit-abelian-transpose).
 
 Proof: evaluate both tower maps at n. The ordinary scalar adjunction unit sends
 x to 1 tensor x. Thus the assumptions on eY and eX identify their transposes

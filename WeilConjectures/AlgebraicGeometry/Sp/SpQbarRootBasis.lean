@@ -25,11 +25,6 @@ namespace AlgebraicGeometry.ProEtale
 /-- On one slice with a normalized compatible root basis, the specified field colimit
 of rational twists is a free rank-one module over the field-colimit coefficient.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), algebraic-closure case;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, field-colimit formula.
-(blueprint: lem-sp-qbar-root-basis)
-
 Proof: use on this slice the basis b -> b tensor zeta_n at every finite quotient.
 The normalization he and compatibility hζ make these bases commute with the
 coefficient reductions. Taking inverse limits and identifying the cofinal ell-power

@@ -158,11 +158,6 @@ private def localTensorBasisIso (X : Scheme.{u})
 /-- An internal module trivialized on one slice remains trivialized there after
 extension along a map of commutative coefficient rings.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), rational scalar extension;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, slice calculation.
-(blueprint: lem-sp-slice-scalar-extension-basis)
-
 Proof: reconstruct section rings and module actions from the internal rings and
 modules. Internal scalar extension is the sheafification of the sectionwise
 balanced tensor S tensor_R L. On the slice the presheaf tensor has the same

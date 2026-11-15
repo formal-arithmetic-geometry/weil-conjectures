@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # Evaluating the integral Kummer composite
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-evaluated-kummer-composite).
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +32,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.standard DerivedCategory.singleFunctors
   integerComparison cartierRootsComparison cartierUnitsComparison
 
-/-- The evaluated connecting composite with a specified degree-one input.
-Source: exact evaluation of the Kummer sequence
-(blueprint: def-sfb-finite-evaluated-kummer-composite). -/
+/-- The evaluated connecting composite with a specified degree-one input. -/
 def finiteEvaluatedKummerComposite (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ)
     (a : FiniteIntegralEvaluatedLineArrow T n) :
@@ -46,9 +41,7 @@ def finiteEvaluatedKummerComposite (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     ((ShortComplex.mk k.inclusion k.power k.zero).map (abEvaluation T n))
     (k.exact.map_of_exact (abEvaluation T n)) a
 
-/-- The cached connecting composite is its actual defining composite.
-Source: exact evaluation of the tower Kummer sequence
-(blueprint: def-sfb-finite-evaluated-kummer-composite). -/
+/-- The cached connecting composite is its actual defining composite. -/
 theorem finiteEvaluatedKummerComposite_eq (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ)
     (a : FiniteIntegralEvaluatedLineArrow T n) :

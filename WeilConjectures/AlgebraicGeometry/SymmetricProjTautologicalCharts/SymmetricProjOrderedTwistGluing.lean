@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-!
 # Gluing the ordered tautological twist comparison
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-gluing).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -38,10 +39,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 /-- Once the ordered scheme and affine twist comparisons are supplied, normalization
 of a tautological quotient identifies its line and coordinate quotients with the pullback
 of the standard twist. No scheme isomorphism is constructed by this statement.
-
-Source: Stacks Project, Constructions, Tags 01OE (lemma-projective-space-bundle),
-01OB (definition-projective-bundle), and 01MS (lemma-when-invertible).
-(blueprint: lem-trf-symmetric-proj-ordered-twist-gluing).
 
 Proof: Fix an affine V and unpack AffineFreeComparison to get beta, eC, its
 section-preserving twist isomorphism, and gamma and eR. The integral polynomial chart

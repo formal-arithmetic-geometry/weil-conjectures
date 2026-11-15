@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
-/-! # The underived mate on pointed neighbourhood sections -/
+/-! # The underived mate on pointed neighbourhood sections
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
+-/
 
 /- This original-model counterpart follows the proved calculation in
 WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate.
@@ -376,9 +381,7 @@ private theorem lowerStarSections_eval {T Y : Scheme.{v}} (h : T ⟶ Y)
       (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app H = _
   rw [hz]
 
-/-- The underived exchange map evaluated after restriction to the strict-local base.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-underived-sections-mate). -/
+/-- The underived exchange map evaluated after restriction to the strict-local base. -/
 noncomputable def smallModel_strictLocalUnderivedMateSections {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -410,9 +413,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluating the underived mate on sections is restriction along the cone leg.
 This is an equality of transformations of sheaves, before complexes or derivation.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-underived-sections-mate).
 
 Proof: expand the restriction on the base as the inverse-image adjunction unit
 followed by evaluation at the pointed neighbourhood section. Expand baseChangeMap

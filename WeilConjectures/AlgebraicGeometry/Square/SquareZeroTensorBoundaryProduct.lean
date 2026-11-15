@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryGradedRe
 
 /-! # The two-section product identity for transported tensor boundaries
 
-Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-square-zero-tensor-boundary-product).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -32,9 +33,6 @@ noncomputable section
 boundaries. The second section is arbitrary in degree e+1, rather than a power of the
 first; no sequence of classes or exponent recurrence is asserted.
 
-Source: Stacks Project, Tag 09MS, the direct-sum exact sequence after equation
-(30.17.5.1), and Tag 0B8S, the square-zero boundary derivation calculation.
-(blueprint: lem-sc-square-zero-tensor-boundary-product).
 Proof: take the direct sums of the ideal sequences in nonnegative tensor degrees.
 Local frames of L make the middle graded algebra a polynomial algebra; the quotient
 is its restriction to Z and the kernel is square zero because I squared is zero.

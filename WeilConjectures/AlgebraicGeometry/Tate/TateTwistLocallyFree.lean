@@ -24,10 +24,6 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocaliz
 
 /-! # Tate twists are well defined and locally free of rank one
 
-Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.md`, clauses (1)--(3)
-(blueprint: definition-tate-twists).
-
 The helpers specialize the recorded constant sheaf, root module, scalar extension,
 signed line and tensor functors. All positive root levels are indexed by `n + 1`.
 The theorem includes one common cover, normalized generators, canonical Kummer
@@ -204,10 +200,6 @@ private theorem tateQbarInverse
 /-- One common covering trivializes the compatible root generators and all coefficient
 lines; Kummer transitions induce the canonical A-linear isomorphisms; every signed twist
 is a line, with positive and negative twist functors inverse on the specified categories.
-
-Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.md`, all three clauses
-(blueprint: definition-tate-twists).
 
 Proof:
 1. The compatible root-tower local model supplies one pro-etale cover, compatible

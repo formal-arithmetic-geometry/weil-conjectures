@@ -15,12 +15,13 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-!
 # Degree-one charts of the tautological quotient on symmetric Proj
 
-Source: Stacks Project, Constructions, Tags 01OB, 01NR, 01MS and 01OE
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing).
-
 The auxiliary predicates spell out fraction, frame and restriction equations for the
 existing normalized quotient datum. They neither select a line bundle nor assume its
 existence. The only theorem asserts existence, including all these equations.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OB, 01NR, 01MS, 01OE, 01M4, 01N2
 -/
 
 @[expose] public section
@@ -51,9 +52,7 @@ variable {R A M : Type u} [CommRing R] [CommRing A] [Algebra R A]
 
 /-- Explicit chart equations for the specified degree-one generators. The module
 `degreePart` is the actual submodule of ordinary localization. The chart equivalence
-is additive and explicitly respects the action through `awayToSection`, hence is linear.
-Source: Stacks, Tags 01MS, 01OB and 01M4
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing). -/
+is additive and explicitly respects the action through `awayToSection`, hence is linear. -/
 def AffineChartFormulas : Prop :=
   (⨆ m : M, Proj.basicOpen 𝒜 (ι m)) = ⊤ ∧
   (∀ m : M, IsAffineOpen (Proj.basicOpen 𝒜 (ι m))) ∧
@@ -352,9 +351,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The affine-restriction comparison respects the chosen normalization charts of D,
 and sends every degree-one homogeneous section to its restricted section. The formula
-on arbitrary fractions is expressed both in degree zero and on degree-one twist sections.
-Source: Stacks, Tags 01NR, 01N2 and 01OB
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing). -/
+on arbitrary fractions is expressed both in degree zero and on degree-one twist sections. -/
 def AffineRestrictionFormulas
     (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E) : Prop :=
   ∀ (U V : S.affineOpens) (h : U ≤ V),
@@ -380,12 +377,9 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized tautological quotient and its degree-one charts, affine restrictions,
 open-base comparisons and ordered finite-free comparisons.
 
-Source: Stacks Project, Constructions, Tags 01OB, 01NR, 01MS and 01OE
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing).
-
 Proof:
 1. Over each affine U use the canonical symmetric grading. Its positive-degree pieces
-are spanned by products of degree-one generators (lem-weil-pbc-symmetric-algebra-graded).
+are spanned by products of degree-one generators.
 The standard-open theorem prop-nagata-proj-standard-open therefore gives the cover by
 all iota(m); lemma-nagata-relative-proj-exists identifies it with the relative chart.
 2. Take the actual associated sheaf of A(1), using

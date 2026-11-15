@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Square-zero section-power obstruction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
-(blueprint: lem-sc-square-zero-section-power-obstruction).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -31,10 +32,6 @@ universe u
 /-- A section has a quasi-coherent degree-one obstruction on the closed subscheme.
 If a tensor power of the section kills it, the next power lifts. No affine-open
 hypothesis is needed to construct the obstruction or establish this implication.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1),
-and Cohomology, Lemma 0B8S.
-(blueprint: lem-sc-square-zero-section-power-obstruction).
 
 Proof: Tensor the ideal sequence by L^d, which is invertible, to obtain an exact
 sequence with kernel I tensor L^d and quotient j_*j^*(L^d). The kernel is killed

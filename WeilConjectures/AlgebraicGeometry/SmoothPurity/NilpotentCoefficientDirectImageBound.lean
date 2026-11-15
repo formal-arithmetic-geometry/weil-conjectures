@@ -17,10 +17,13 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 /-!
 # Nilpotent coefficient extensions preserve a higher direct-image bound
 
-Source: Stacks Project, Derived Categories, Tag 015B, lemma-higher-derived-functors,
-part (1). The nilpotent coefficient application uses an agent-written sheafified
+The nilpotent coefficient application uses an agent-written sheafified
 descending I-adic filtration, motivated by Bhatt--Scholze, Lemma 6.5.11.
-(blueprint: lem-sf-nilpotent-coefficient-direct-image-bound)
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 015B
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 6.5.11
 -/
 
 @[expose] public section
@@ -145,10 +148,6 @@ private theorem idealPowerPresheaf_isZero {C : Type*} [Category* C]
 /-- A common higher direct-image vanishing bound for quotient coefficients remains a bound
 for the original coefficients when the coefficient ideal is nilpotent. The same integer
 `N` is retained for every positive nilpotency exponent and every module sheaf.
-
-Source: Stacks Project, Tag 015B, lemma-higher-derived-functors, part (1), applied to the
-agent-written finite coefficient filtration, motivated by Bhatt--Scholze, Lemma 6.5.11.
-(blueprint: lem-sf-nilpotent-coefficient-direct-image-bound)
 
 Proof:
 1. On the underlying module presheaf of `M`, form `P_j(U) = I^j M(U)`.

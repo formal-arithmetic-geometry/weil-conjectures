@@ -267,11 +267,6 @@ private theorem sectionSliceTensorBasis (X : Scheme.{u})
 
 /-- Extending a prescribed slice basis gives a basis normalized on the integral unit.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), scalar extension of the
-integral basis; sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md.
-(blueprint: lem-sp-slice-normalized-scalar-extension-basis)
-
 Proof: reconstruct the section rings and modules. The mate of the sectionwise
 restriction-of-scalars comparison identifies internal scalar extension with
 sheafification of the balanced sectionwise tensor product. Restriction to W

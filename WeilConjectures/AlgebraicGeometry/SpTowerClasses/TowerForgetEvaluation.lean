@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSystems
 
 /-! # Additive evaluation for a recorded tower-forgetting functor
-
-Source: blueprint sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes (2), underlying sheaves of ordinary systems.
 -/
 
 @[expose] public noncomputable section
@@ -66,8 +63,6 @@ private theorem forgetEvaluationIso_section (T : Scheme.{u})
   exact transport_element (F.sections M n U) x' x hx.symm
 
 /-- A recorded tower identification agrees with additive module evaluation.
-Source: blueprint classes (2), the section and restriction equations of Forget.
-(blueprint: lem-sp-tower-forget-evaluation).
 
 Proof: the equations F.sections give identity-transport isomorphisms at each
 object, natural by F.restrictions. Lift them to a sheaf isomorphism and compose

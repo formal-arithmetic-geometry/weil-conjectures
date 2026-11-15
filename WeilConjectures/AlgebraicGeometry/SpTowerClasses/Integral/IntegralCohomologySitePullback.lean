@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-derived transport through the etale-to-pro-etale square
 
-Source: blueprint chap-Smooth-purity, classes proof (2).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section
@@ -167,9 +169,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Change of site preserves an arbitrary integral units cohomology class with its
 specified integer and full-units endpoints.
-Source: blueprint classes proof (2), exact transport of integral extension classes;
-Stacks Tag 00WX for the adjunction square.
-(blueprint: lem-sp-integral-cohomology-site-pullback).
 
 Proof: use integral_site_pullback_endpoints for the two ordinary endpoint squares.
 Exact-functor Ext compatibility identifies the two composites under the canonical

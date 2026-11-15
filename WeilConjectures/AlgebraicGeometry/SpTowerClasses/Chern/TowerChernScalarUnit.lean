@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassC
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherence
 import Mathlib.Algebra.Homology.Monoidal
 
-/-! # The scalar comparison on the coefficient unit -/
+/-! # The scalar comparison on the coefficient unit
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -64,10 +69,6 @@ private theorem singleAdjunct
 
 /-- Scalar extension carries the coefficient unit to the coefficient unit, with
 its comparison fixed by the ordinary quotient ring map.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-scalar extension; Stacks 06YY and 07A6.
-(blueprint: lem-sfb-tower-chern-scalar-unit).
 
 Proof: the unit in degree zero is K-flat, since tensoring an acyclic complex
 with it is isomorphic to that complex by the tensor unitor. The universal scalar

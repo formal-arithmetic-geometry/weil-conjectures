@@ -221,10 +221,6 @@ private theorem derivedExtension_of_equivalence
 /-- Any ring system admits derived extension from abelian towers, with its unit comparison
 normalized by the actual integer generator.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and NormalizedKummerReduction proof steps 1--2.
-(blueprint: lem-sfb-integral-unit-reduction).
-
 Proof: regard abelian towers as sheaves of modules over the constant integer ring on
 `coefficientSequenceTopology`. Forgetting the action of the system ring is restriction
 along its unique integer-ring map, and retains exactly the sections, restrictions,

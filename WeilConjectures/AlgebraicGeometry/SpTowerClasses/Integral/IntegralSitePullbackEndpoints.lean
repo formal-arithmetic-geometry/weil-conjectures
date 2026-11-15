@@ -38,8 +38,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Integer and units endpoints in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX; the integral class construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section
@@ -60,10 +61,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 The first equality concerns only constant integer sheaves; the second concerns only
 units sheaves. There is no line bundle, cohomology class or derived-category map in
 this statement.
-
-Source: Stacks Project, Tag 00WX, the change-of-site construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
-(blueprint: lem-sp-integral-site-pullback-endpoints).
 
 Proof: comparisonUpperStarCompUpperStarIso is the mate of the canonical commuting
 square of direct images, oriented from f_proet^* nu_Y^* to nu_X^* f_et^*.

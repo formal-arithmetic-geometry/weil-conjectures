@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearCompositorCoh
 
 /-! # Ordinary semilinear restriction normalization
 
-Source: Stacks Project, Tags 03DI, 0F7B and 0F7F.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 0F7B, 0F7F
 -/
 
 @[expose] public noncomputable section
@@ -424,8 +426,6 @@ attribute [local irreducible] compEq moduleAlpha modulePi moduleJCongr push eqTo
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction of intrinsic alpha is the inverse of the open unit, under the specified
 inverse-image square comparison.
-Source: Stacks Project, Tags 03DI and 0F7B; the restriction calculation in Tag 0F7F
-(blueprint: lem-sf-semilinear-alpha-restriction).
 Proof: factor the square through its canonical fibre product. The lift is clopen.
 The open base-change comparison is the inverse transpose of the open unit, so its
 restriction is the square compositor followed by the inverse open unit. The clopen

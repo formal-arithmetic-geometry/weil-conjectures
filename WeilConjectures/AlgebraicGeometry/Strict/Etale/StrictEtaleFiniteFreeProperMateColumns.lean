@@ -14,7 +14,10 @@ import all WeilConjectures.CategoryTheory.Ringed.Finite.RingedFiniteFreeHomBaseC
 
 /-! # Basis columns of the proper coefficient mate
 
-Source: Zheng, Construction 5.15 and Lemma 5.16.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Lemma 5.16
 -/
 
 @[expose] public noncomputable section

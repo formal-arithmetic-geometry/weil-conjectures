@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryProduct
 
 /-! # The graded Leibniz recurrence for square-zero tensor boundaries
 
-Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-square-zero-tensor-boundary-leibniz).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -32,9 +33,6 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 cohomology comparisons, satisfy the two-term Leibniz recurrence. This asserts only the
 recurrence; the closed power formula requires a separate induction.
 
-Source: Stacks Project, Tag 09MS, equation (30.17.5.1) and the direct-sum exact sequence
-following it; Tag 0B8S, the Leibniz calculation for the connecting map.
-(blueprint: lem-sc-square-zero-tensor-boundary-leibniz).
 Proof:
 1. Tensor the closed-immersion ideal sequence with L^d. Invertibility makes tensoring
 exact, and its multiplication map identifies I tensor L^d with the categorical kernel
@@ -43,8 +41,8 @@ its quotient with j_*j^*(L^d). The tensor-pullback comparisons and tensor-power
 multiplication comparisons give a_e, including e=0 and n=0.
 2. The equality I^2=0 annihilates every ideal-tensor kernel by I. The annihilated-module
 unit isomorphism and the affine cohomology edge identify its H^1 on X with H^1 of
-its pullback on Z. The generic module-pullback tensor comparison
-(lem-weil-pbc-module-pullback-tensor), applied with the ideal-tensor module as
+its pullback on Z. The generic module-pullback tensor comparison, applied with the ideal-tensor
+module as
 first factor, and associativity identify the degree n(e+1) pullback with F tensor N^e.
 Take the inverse edge and kernel comparison on H^1 for the additive equivalence b_e.
 Define c_e by applying its inverse to the canonical

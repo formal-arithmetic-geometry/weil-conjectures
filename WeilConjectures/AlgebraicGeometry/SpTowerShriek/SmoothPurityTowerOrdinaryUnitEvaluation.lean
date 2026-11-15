@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerShriekData
 
 /-! # Evaluation of the normalized ordinary tower unit
-
-Source: blueprint operations proof (2), evaluated transposes of levelwise units.
-(blueprint: lem-sp-tower-ordinary-unit-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -83,11 +80,6 @@ private theorem transport_unit_evaluation (b : Base l E)
 
 /-- Evaluation carries the normalized ordinary system unit to the constant-ring
 unit, after the specified push and pull comparisons.
-
-Source: blueprint operations proof (2), paragraph on transposes of levelwise units;
-`SemilinearSections.Geometry.ordinary_unit_evaluation` and the normalization fields
-of `SpTowerShriek.Geometry`.
-(blueprint: lem-sp-tower-ordinary-unit-evaluation).
 
 Proof: identify the generic coefficient family with B using Geometry.coefficients,
 and the generic transition family with tau using Geometry.transitions. This

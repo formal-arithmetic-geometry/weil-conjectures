@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.ChernData.TowerChernTargetNormalizationData
 
 /-! # The concrete integral target normalization
-
-Source: classes (2) (blueprint: lem-sp-tower-chern-target-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +35,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Extract the positive Kummer-boundary normalization at the actual coefficient towers.
-
-Source: classes (2), normalization of integral reduction
-(blueprint: lem-sp-tower-chern-target-normalization).
 
 Proof: apply the proved target-normalization projection to the actual R and A
 coefficient diagrams and their scalar generator. -/

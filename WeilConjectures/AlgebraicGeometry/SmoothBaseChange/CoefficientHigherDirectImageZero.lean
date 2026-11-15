@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 /-!
 # Reflection of higher-direct-image vanishing under restriction of coefficients
 
-Source: Stacks Project, Tag 03FD and Tag 0D6J.
-(blueprint: lem-sbc-coefficient-higher-direct-image-zero)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03FD, 0D6J
 -/
 
 @[expose] public section
@@ -28,9 +29,6 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Restriction of scalars detects vanishing of a higher direct image.
-
-Source: Stacks Project, Tags 03FD and 0D6J.
-(blueprint: lem-sbc-coefficient-higher-direct-image-zero)
 
 Proof: apply the existing base-change coefficient comparison to the identity Cartesian
 square with right vertical map h. The base-change target identifies with higher direct

@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Naturality of homogeneous boundary projections
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-boundary-projection).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 01DZ
 -/
 
 @[expose] public section
@@ -40,9 +41,6 @@ boundary of its quotient projection. This statement concerns one short-complex m
 not products, actions, or the realization existential. Compatible resolutions only
 present the single boundary whose degree projection is computed.
 
-Source: Stacks Project, Tag 01DZ, naturality of the cohomology boundary;
-Tag 09MS, projections of the graded direct-sum short exact sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-boundary-projection).
 Proof: The snake/triangle comparison for the supplied compatible resolutions identifies
 δ-prime with the canonical section boundary. Apply rightDerived_triangle_connecting
 to global sections. Its triangle comparison

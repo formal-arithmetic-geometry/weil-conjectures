@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarRootAb
 
 /-! # The abelian transpose of the ordinary root comparison
 
-Source: blueprint classes proof (2), naturality of the Kummer kernel.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -28,10 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Kernel restriction and the normalized finite line have the same abelian transpose.
 Neither the existence nor the invertibility of scalar association is asserted here.
-
-Source: blueprint latest, classes proof (2), Kummer roots followed by ordinary
-coefficient extension; Stacks 03EL.
-(blueprint: lem-sp-tower-scalar-root-abelian-transpose).
 
 Proof: the first square of d.kummer says that its root component followed by
 cX.kummer.inclusion equals inverse image of cY.kummer.inclusion followed by

@@ -49,13 +49,13 @@ import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
 
 /-! # Regular completed coefficients and quotient Koszul fibers
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower, proof paragraph 1;
-Bhatt--Scholze, The pro-etale topology for schemes, Section 3.5
-(blueprint: lem-sp-ell-coefficient-fiber).
-
 All natural-number level indices denote the positive exponent index+1. The site
 and field universes are independent. The completed ring and all finite constant
 rings are the existing coefficient-tower objects.
+
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Section 3.5
 -/
 
 @[expose] public noncomputable section
@@ -75,8 +75,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})
 
 /-- The ell-power projection of the existing completion, through the uniquely normalized
-cofinal-limit comparison. Source: coefficient setup in proposition-sp-integral-towers, paragraph 1
-(blueprint: lem-sp-ell-coefficient-fiber). -/
+cofinal-limit comparison. -/
 def spCompletedEllProjection (n : ℕ) :
     completedIntegralCoefficientSheafUnrestricted l E T ⟶ spCoefficientRing l E T n :=
   (sp_completed_coefficient_limit l E T).exists.choose.hom ≫

@@ -12,9 +12,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Invertibility of the integral reduction mate
-
-Source: blueprint classes proof (2), integral quotient reduction.
-(blueprint: lem-sp-tower-reduction-mate-invertible).
 -/
 
 @[expose] public noncomputable section
@@ -243,9 +240,7 @@ private theorem regular_reduction_computes (T : Scheme.{u})
     exact reduction_preserves_regular_quasiIso l T r q hP hQ hq
 
 /-- The canonical mate of the derived forgetful square. Its construction uses only
-adjunction units and counits, with no choices of normalized endpoints.
-Source: classes (2), reduction/pullback comparison
-(blueprint: lem-sp-tower-reduction-mate-invertible). -/
+adjunction units and counits, with no choices of normalized endpoints. -/
 def reductionPullbackMate {X Y : Scheme.{u}} {f : X ⟶ Y}
     {cY : Chern l E Y} {cX : Chern l E X}
     (d : IntegralCoefficientPullback l E f cY cX) :
@@ -256,10 +251,6 @@ def reductionPullbackMate {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- Exact geometric inverse image commutes with integral quotient reduction, before
 specifying either the integer or Kummer normalization.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes proof (2); reduction-pullback proof steps 1--2
-(blueprint: lem-sp-tower-reduction-mate-invertible).
 
 Proof: the ordinary adjunction units are cokernels of the variable-power maps
 on entire towers. Evaluate at each level. Exact abelian inverse image preserves

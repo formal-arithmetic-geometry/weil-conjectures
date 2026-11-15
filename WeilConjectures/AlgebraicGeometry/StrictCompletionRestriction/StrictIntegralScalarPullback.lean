@@ -187,8 +187,6 @@ private theorem pullback_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [regular_scalar_eq, regular_scalar_eq]
   exact pullback_unit_scalar (DerivedNakayama.integerRing l E) f d
 /-- Pullback transports the canonical integral scalar action on the nose.
-Source: canonical coefficient naturality; blueprint Locality, scalar comparison
-(blueprint: lem-sfb-strict-integral-scalar-pullback).
 
 Proof: The canonical point scalar is the specified uniformizer endomorphism for
 every canonical cone datum. Naturality of the coefficient comparison gives the

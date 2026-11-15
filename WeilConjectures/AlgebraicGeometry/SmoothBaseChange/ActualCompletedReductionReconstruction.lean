@@ -37,6 +37,10 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-! # Reconstruction in the actual completed coefficient presentation
 
 The canonical quotient transitions are the adjuncts of the quotient units.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 091N, 0DVC
 -/
 
 @[expose] public noncomputable section
@@ -574,8 +578,6 @@ private theorem reconstructionLimit_transport
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- An intrinsically complete object is a Roos limit of its actual quotient reductions.
-Source: blueprint order 1270, Koszul reconstruction; Stacks Tags 091N and 0DVC.
-(blueprint: lem-weil-pbc-actual-completed-reduction-reconstruction).
 
 Proof: choose a K-flat representative in the constant completed-ring presentation
 used to define intrinsic completeness. The completed Koszul reduction Roos triangle

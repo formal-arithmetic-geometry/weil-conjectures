@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemTensorReductionFormula
 
 /-! # Composition of representative-normalized tensor comparisons
 
-Source: Stacks 07A4, 06YS, 0G7E and 0G7D.
-(blueprint: lem-coef-semilinear-tensor-comparison-composition).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A4, 06YS, 0G7E, 0G7D
 -/
 
 @[expose] public noncomputable section
@@ -323,8 +324,6 @@ private theorem derived_composition
     (S₂.tensor.map (Prod.mkHom (δ.hom.app M) (δ.hom.app N)))).symm.trans hf
 
 /-- Ordinary tensor compatibility implies chain and derived compatibility for exact functors.
-Source: Stacks 07A4, 06YS, 0G7E and 0G7D.
-(blueprint: lem-coef-semilinear-tensor-comparison-composition).
 
 Proof: test the total-complex equality on each tensor summand. The model summand
 formulas and naturality of the compositor reduce it to the inverse ordinary

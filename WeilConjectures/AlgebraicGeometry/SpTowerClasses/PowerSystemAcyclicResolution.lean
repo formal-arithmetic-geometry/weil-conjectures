@@ -17,7 +17,12 @@ import Mathlib.Algebra.Category.Grp.Adjunctions
 import Mathlib.Algebra.FreeAbelianGroup.Finsupp
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 
-/-! # Flat resolutions adapted to simultaneous prime-power reduction -/
+/-! # Flat resolutions adapted to simultaneous prime-power reduction
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YS, 06YY, 06XN, 05SE
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -417,10 +422,6 @@ private theorem reduction_preserves_regular_quasiIso (l : ℕ) [Fact l.Prime] (T
     (PowerTransition.quasiIso_map l f) hf
 
 /-- Every abelian tower complex has a reduction-acyclic resolution with torsion-free terms.
-
-Source: Stacks 06YS, 06YY, 06XN, 05SE; blueprint latest,
-`sk-prop-sp-tower-geometric-classes.proof.md`, clause (2), K-flat computation.
-(blueprint: lem-sfb-power-system-acyclic-resolution).
 
 Proof: sheafify the free abelian presheaf on the sections of a sheaf, and apply this
 construction at every level of a tower. Its evaluation map is epic and its nonzero

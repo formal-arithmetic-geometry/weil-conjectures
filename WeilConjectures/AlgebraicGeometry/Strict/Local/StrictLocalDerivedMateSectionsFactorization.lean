@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalDerivedExchange
 
 /-! # The derived mate on the complex of neighbourhood sections
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -31,10 +33,6 @@ namespace AlgebraicGeometry.Etale
 /-- The derived mate on an injective representative is computed by the underived
 exchange map followed by the derived-sections unit. This statement does not identify
 that exchange map with restriction along any strict-local neighbourhood cone.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the generic
-factorization of derived adjunction mates on complexes.
-(blueprint: lem-weil-pbc-strict-local-derived-mate-sections-factorization).
 
 Proof: put M = ιJ, L = f_*M. Pass first to the homotopy category. Apply
 Adjunction.derivedPlus_mateEquiv_app_fac to the two inverse/direct-image

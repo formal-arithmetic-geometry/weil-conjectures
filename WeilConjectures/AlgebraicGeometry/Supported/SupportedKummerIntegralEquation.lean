@@ -95,7 +95,9 @@ import all Mathlib.CategoryTheory.Sites.PreservesSheafification
 /-!
 # Integral equation of a normalized supported Kummer boundary
 
-Source: blueprint lemma-cycle-class-cartier-divisor, relative boundary and scalar extension.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 0A45
 -/
 
 @[expose] public noncomputable section
@@ -114,8 +116,6 @@ attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
 /-- Forgetting coefficients and evaluating at the integral supported generator identifies
 any normalized supported Kummer boundary with the common pole extension followed by
 its Kummer extension and coefficient root map. No finiteness or positivity is needed.
-Source: blueprint lemma-cycle-class-cartier-divisor, relative extension and scalar paragraph;
-Stacks 03PL and 0A45 (blueprint: lem-asd-supported-kummer-integral-equation).
 
 Proof: specialize the relative boundary specification to the complementary open of D.
 The extension supplied there satisfies the pole-boundary specification for every

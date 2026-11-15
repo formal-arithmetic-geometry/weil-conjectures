@@ -16,13 +16,14 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPa
 /-!
 # Coherence of normalized semilinear compositors
 
-Source: Stacks Project, Tags 0D6D and 0D6E; section-normalized coherence on ringed
-sequence sites (blueprint: lem-sf-semilinear-compositor-coherence).
-
 The inverse-image functor denoted `P` in the node is `VaryingRing.G`; its direct-image
 functor `S` is `VaryingRing.P`. The forward inverse-image compositor is `gComp.inv`.
 All functors, compositors and identity comparisons are those of the specified adjunctions.
 The associativity clauses allow independently named intermediate and total composites.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D6D, 0D6E, 0B65, 0DV0, 04VG
 -/
 
 @[expose] public section
@@ -883,13 +884,11 @@ private theorem coherence_clause_9 :
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Associativity and both unit laws for the three normalized semilinear compositors,
 including transport along arbitrary equalities identifying intermediate and total maps.
-Source: Stacks Project, Tags 0D6D, 0D6E, 0B65, 0DV0 and 04VG
-(blueprint: lem-sf-semilinear-compositor-coherence).
 
 Proof:
 1. The two ordinary direct-image pastings restrict sections along the same map of
-iterated fibre products: their projections agree. The fibre-product universal property
-(def-pc-fibre-product) identifies these maps. The same projection check identifies
+iterated fibre products: their projections agree. The fibre-product universal property identifies
+these maps. The same projection check identifies
 identity composition with the graph-normalized modulePId.
 2. Apply lem-trf-adjoint-composition-coherence to the ordinary inverse-image adjoints,
 using the inverses of these section comparisons on the right adjoints. The composite
@@ -907,7 +906,7 @@ naturality cancels the intermediate factorization maps. They agree by steps 2 an
 Part (3) of lem-weil-pbc-localization-universal-property promotes equality on every
 localized complex to equality on the entire unbounded derived category.
 5. Invert inverse-image coherence and take its conjugate under the fixed derived
-adjunctions (def-weil-pbc-adjunction-conjugate). Composition of conjugates and
+adjunctions. Composition of conjugates and
 lem-weil-pbc-mate-pasting (2) identify the two pastings with the pComp pastings.
 Apply the same argument to inverse unit equations, using mate-pasting (4) for identities.
 6. Apply lem-trf-adjoint-composition-coherence to ordinary open extension left adjoints

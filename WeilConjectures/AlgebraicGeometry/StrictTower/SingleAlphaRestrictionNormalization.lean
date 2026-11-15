@@ -12,8 +12,9 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.ProperOpenCompositeTransf
 
 /-! # Restriction of intrinsic proper/open alpha
 
-Source: Stacks Project, Tags 09BN and 0F7C, with the arbitrary-ring underived refinement.
-(blueprint: lem-cbc-single-alpha-restriction-normalization)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BN, 0F7C
 -/
 
 @[expose] public noncomputable section
@@ -292,9 +293,6 @@ private theorem singleAlpha_restriction_iso {V W S T : Scheme.{u}}
     (singleAlpha_word B k r p i h) M
 
 /-- Restriction of the intrinsic clopen alpha, with its specified open units.
-Source: Stacks Project, Tags 09BN and 0F7C; the restriction calculation in
-lem-cbc-proper-open-alpha-vertical-modules, steps 2--3.
-(blueprint: lem-cbc-single-alpha-restriction-normalization).
 Proof: factor the square through W ×_T S, with open projection b and clopen lift s.
 The inverse-transpose equation for cartesian beta identifies its restriction with
 inverse image of the inverse unit for i. The clopen projector restricts along s to

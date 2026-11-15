@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiv
 
 /-! # Evaluation of a localized cocycle on the cohomology sheaf
 
-Source: Stacks Project, Tag 03Q8, computation with an injective complex.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q8
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -25,9 +27,7 @@ open AlgebraicGeometry CochainComplex CochainComplex.HomComplex
 namespace AlgebraicGeometry.Etale
 
 /-- The homology section of a cocycle, evaluated at the free generator.
-This construction uses the actual cycle map and transports homology along `r`.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: lem-weil-pbc-source-localized-cocycle-homology). -/
+This construction uses the actual cycle map and transports homology along `r`. -/
 noncomputable def smallModel_sourceCocycleHomologySection {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -44,9 +44,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation of a localized single-source cocycle is its actual homology section.
 This is a comparison on the base site, before taking stalks or restricting to any scheme.
-
-Source: Stacks Project, Tag 03Q8, injective-complex computation.
-(blueprint: lem-weil-pbc-source-localized-cocycle-homology).
 
 Proof: the localization isomorphism sends the class of the single-source cocycle to
 its chain map into the shifted complex, then applies the quotient and shift comparison.

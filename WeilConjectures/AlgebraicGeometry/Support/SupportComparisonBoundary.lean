@@ -56,14 +56,14 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 /-!
 # Site-comparison compatibility of the support boundary
 
-Source: Stacks Project, `etale-cohomology.tex`, Tag 09XP, label
-`section-cohomology-support`, with the etale/pro-etale refinement in the blueprint
-(blueprint: lem-pur-support-comparison-boundary).
-
 The statement records the two support long exact sequences and their canonical
 adjunction-unit comparison ladder.  The boundary maps are normalized by the
 snake boundary on every bounded-below injective model, so the sign convention is
 part of the statement.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09XP
 -/
 
 @[expose] public section
@@ -77,8 +77,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The adjunction-unit comparison on sections over any etale object of `T`.
-Source: blueprint comparison-global-cohomology and comparison-pullback clauses;
-(blueprint: lem-pur-support-comparison-boundary).
 Proof: evaluate the actual comparison adjunction unit at the chosen etale object;
 naturality is the componentwise unit naturality equation. -/
 noncomputable def finiteComparisonSectionUnit (T : Scheme.{u}) (A : Type (u + 1)) [Ring A]
@@ -98,8 +96,6 @@ noncomputable def finiteComparisonSectionUnit (T : Scheme.{u}) (A : Type (u + 1)
 At the terminal object this is the same unit-normalized map as
 `finiteComparisonGlobalSections`; at an open complement it is the comparison map
 used in the boundary ladder.
-Source: blueprint comparison-global-cohomology and comparison-pullback clauses;
-(blueprint: lem-pur-support-comparison-boundary).
 Proof: apply right-derived-plus base change to `finiteComparisonSectionUnit`; the
 comparison pullback coherence identifies its pro-etale target with the restriction
 of the comparison on the open complement. -/
@@ -122,8 +118,6 @@ noncomputable def finiteComparisonSection (T : Scheme.{u}) (A : Type (u + 1)) [R
       (γ := 𝟭 (ModuleCat.{u + 1} A)) (finiteComparisonSectionUnit T A V)
 
 /-- The canonical degreewise comparison on sections over an etale object.
-Source: blueprint comparison-map clauses
-(blueprint: lem-pur-support-comparison-boundary).
 Proof: whisker `finiteComparisonSection` by integer homology and reassociate the
 composite functors.  For the terminal object this is the unit-normalized global
 comparison of `finiteComparisonGlobalSections`; for an open object the pullback
@@ -152,7 +146,6 @@ namespace AlgebraicGeometry
 
 /-- A support boundary is the snake boundary on each injective section complex,
 transported through the canonical right-derived comparison maps.
-Source: Stacks Project Tag 09XP and (blueprint: lem-pur-support-comparison-boundary).
 Proof: for an injective complex, the kernel-inclusion and restriction maps form a
 short exact complex; its `ShortExact.δ` is the snake boundary. -/
 def supportBoundaryNormalization {C : Type (u + 1)} [Category.{u} C]

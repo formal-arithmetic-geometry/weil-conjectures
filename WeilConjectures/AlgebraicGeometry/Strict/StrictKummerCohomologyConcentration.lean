@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInte
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalDerivedReductionExists
 
-/-! # Cohomology concentration of reduced shifted comparison units
-Source: diagonal tower system proof, step (3), target computation.
-(blueprint: lem-sfb-strict-kummer-cohomology-concentration). -/
+/-! # Cohomology concentration of reduced shifted comparison units -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -151,9 +149,6 @@ private theorem reduction_of_divisible_concentrated
 /-- Simultaneous reduction of shifted comparison units has cohomology only in
  degree minus two. This assertion specifies no roots identification, comparison
  isomorphism, or unit normalization.
-
-Source: diagonal tower system proof, step (3), target paragraph
-(blueprint: lem-sfb-strict-kummer-cohomology-concentration).
 
 Proof: resolve the degree-zero comparison-units complex by a flat-term K-flat
 complex P. Nonzero-integer multiplication is mono on the constant integral unit,

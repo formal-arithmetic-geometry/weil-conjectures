@@ -233,7 +233,9 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenHorizontal
 /-!
 # Unbounded proper/open composition
 
-Source: Stacks Project, Tags 0F7C and 0F7D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7C, 0F7D
 -/
 
 @[expose] public section
@@ -636,8 +638,6 @@ private theorem ordinary_vertical (Λ : Type (u + 1)) [CommRing Λ]
   rw [hr]
 
 /-- The two pasting equations for normalized unbounded proper/open interchange.
-Source: Stacks Project, Tags 0F7C and 0F7D.
-(blueprint: lem-amb-unbounded-proper-open-composition).
 
 Proof:
 For the ordinary vertical equation, postcompose both sides with the support inclusion

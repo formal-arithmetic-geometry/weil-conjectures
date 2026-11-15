@@ -38,8 +38,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Units endpoint in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX; the integral class construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section
@@ -52,10 +53,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 /-- Units endpoint square for the etale-to-pro-etale pullback.
-
-Source: Stacks Project, Tag 00WX, and the units endpoint part of the
-change-of-site construction in the classes proof.
-(blueprint: lem-sp-integral-site-pullback-units-endpoint).
 
 Proof: transpose through the two inverse-image adjunctions. The hypothesis on
 `a`, the adjunction definition of `cartierUnitsComparison`, and the definition

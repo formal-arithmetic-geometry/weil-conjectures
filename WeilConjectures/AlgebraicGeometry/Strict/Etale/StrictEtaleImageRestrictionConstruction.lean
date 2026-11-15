@@ -32,9 +32,14 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Derived geometric images with their restriction representative equations
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 09T5 and 0FND.
 The assembly retains the representative equation already proved while constructing
 its coefficient restriction square.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09T5, 0FND
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -350,8 +355,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct the derived image while retaining its ordinary restriction square formula.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 09T5 and 0FND
-(blueprint: lem-pur-strict-etale-image-restriction-construction).
 Proof: repeat coefficientSystemUnboundedComparison's assembly, retaining the
 representative equation of the localized ordinary restriction square. The exact
 inverse images and K-injective right images give normalized adjunctions. The derived

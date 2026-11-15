@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChangeTopRes
 
 /-! # Removing a redundant top-open restriction from the single comparison
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08HY, 0D5S
 -/
 
 @[expose] public section
@@ -22,9 +24,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical single-module comparison is compatible with the top-open isomorphism.
-Source: Stacks Project, Tag 08HY, counit description of base change, and Tag 0D5S,
-composition of derived pullback.
-(blueprint: lem-pc-standard-single-base-change-top-restriction).
 
 Proof: Write j for the top-open inclusion of Y and N for its restriction of M.
 Restriction along j is an exact equivalence. The canonical single pullback map for j,

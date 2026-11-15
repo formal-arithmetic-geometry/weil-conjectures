@@ -125,8 +125,11 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Evaluation preserves flat semilinear systems
 
-Source: Zheng, Construction 4.1, and Stacks Project, Tag 08FC.
-(blueprint: lem-pur-system-evaluation-flat).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 08FC
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +209,6 @@ private theorem evaluationCoefficientEquiv_map (n : ℕ) {U V : Cᵒᵖ} (f : U 
 attribute [local irreducible] evaluation evaluationCoefficientEquiv evaluationSectionEquiv
 
 /-- Evaluation preserves flatness on the coefficient sequence site.
-Source: Zheng, Construction 4.1, and Stacks Project, Tag 08FC
-(blueprint: lem-pur-system-evaluation-flat).
 Proof: test the local finite-relation criterion at an object U of the original site.
 Identify evaluated sections and scalars with those of the system at (n,U).
 Apply flatness on the sequence site to this finite relation. Its covering sieve pulls

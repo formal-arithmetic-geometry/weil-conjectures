@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralUn
 
 /-! # Normalization of integral ordinary inverse systems
 
-Source: blueprint classes proof (2), integral reduction.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +27,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The ordinary inverse-system construction has its underlying abelian and unit comparisons.
-Source: blueprint latest, classes proof (2), integral reduction, and Zheng Construction 4.1.
-(blueprint: lem-sp-tower-integral-inverse-system-normalization).
 
 Proof: at each level, the moduleUnderlying comparison of I identifies the underlying set
 sheaf with inverse image. Its moduleAdd and moduleZero graph equations lift this to the

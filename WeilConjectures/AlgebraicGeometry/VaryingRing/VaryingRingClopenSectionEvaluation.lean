@@ -17,9 +17,13 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenAr
 /-!
 # Coefficient realization of the clopen section factor
 
-Source: the clopen construction in Stacks 0F7B and Zheng, Construction 4.1.
 The comparison concerns the clopen projector and its outgoing composition identifications.
-(blueprint: lem-sp-varying-ring-clopen-section-evaluation).
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 09AE
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -259,8 +263,6 @@ private theorem strictSection_descent (B : Type (u + 1)) [CommRing B]
 
 /-- Coefficient evaluation preserves the clopen section projection and its
 outgoing composition identifications.
-Source: Stacks 0F7B, open case, and 09AE; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-clopen-section-evaluation).
 Proof: put q = pullback.snd p i, b = pullback.fst p i and s = squareLift k r p i h.
 The lift s is open and closed. In the ordinary module category the normalized
 map pi_s restricts to the open-adjunction unit on its image and to zero on the

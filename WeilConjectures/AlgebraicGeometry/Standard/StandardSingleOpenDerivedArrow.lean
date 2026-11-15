@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
 
 /-! # Open restriction of the canonical single-module derived arrow
 
-Source: Stacks Project, Tags 08HY, 0DJ9 and 08FE.
-(blueprint: lem-pc-standard-single-open-derived-arrow).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08HY, 0DJ9, 08FE
 -/
 
 @[expose] public section
@@ -190,10 +191,7 @@ with derivedPullback of derivedDirectImage of the single image of that isomorphi
 compose the target comparison with derivedDirectImage of the single image of its
 tensor pullback. Their naturality gives exactly the displayed equation. No homology,
 stalk, finiteness, flatness or quasi-coherence condition is involved. Empty opens
-and top opens use the same natural isomorphisms.
-Source: Stacks Project, Tag 08HY, Remark base-change; Tag 0DJ9, locality paragraph;
-Tag 08FE, restriction of derived direct image.
-(blueprint: lem-pc-standard-single-open-derived-arrow). -/
+and top opens use the same natural isomorphisms. -/
 theorem standardSingle_open_derived_arrow
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B)
     (S : B.Opens) (V : A.Opens) (hVS : V ≤ g ⁻¹ᵁ S) :

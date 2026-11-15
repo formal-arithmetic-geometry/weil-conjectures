@@ -16,11 +16,11 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeTorsorForgetNormalizat
 /-!
 # Relative torsor representatives and boundary signs
 
-Source: Stacks Project, Tag 03AJ, and the relative refinement in blueprint main-20261015,
-sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md, clause (a)
-(blueprint: lem-pur-divisor-torsor-boundary-signs).
-
 -- Q32 revalidation delivery of the reviewed statement.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03AJ, 0G71, 011J, 013T
 -/
 
 @[expose] public noncomputable section
@@ -40,17 +40,14 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] relativeFiberMap
 
-/-- The constant section one of the extension presentation.
-Source: Stacks Tag 03AJ (blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+/-- The constant section one of the extension presentation. -/
 def torsorExtensionOne (T : Scheme.{u}) (U : T.Etale) :
     ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ))).obj.obj (op U) :=
   (toSheafify T.smallEtaleTopology
     ((Functor.const T.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (op U) ⟨1⟩
 
-/-- First signed coordinate of the actual shifted cone, transported out of extension by zero.
-Source: Stacks Tag 03AJ, signed relative refinement
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+/-- First signed coordinate of the actual shifted cone, transported out of extension by zero. -/
 def torsorSignedA (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) (q : ℕ) :
     (relativeSectionComplex T U I).X ((q : ℤ) + 1) ⟶
@@ -62,9 +59,7 @@ def torsorSignedA (T : Scheme.{u}) (U : T.Etale)
       ComplexShape.embeddingUpNat (Nat.cast_add q 1)).hom
 
 /-- Second signed coordinate is minus the ordinary cone's second coordinate.
-Thus the differential reads `(da,res a-db)`.
-Source: Stacks Tag 03AJ, signed relative refinement
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+Thus the differential reads `(da,res a-db)`. -/
 def torsorSignedB (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) (q : ℕ) :
     (relativeSectionComplex T U I).X ((q : ℤ) + 1) ⟶ (I.X q).obj.obj (op U) :=
@@ -75,9 +70,7 @@ def torsorSignedB (T : Scheme.{u}) (U : T.Etale)
         ComplexShape.embeddingUpNat rfl).hom)
 
 /-- A signed pair represents a class precisely when it is the coordinates of a cycle
-mapping to that class under Mathlib's homology quotient.
-Source: Stacks Tag 03AJ, relative refinement
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+mapping to that class under Mathlib's homology quotient. -/
 def TorsorSignedRepresents (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) (q : ℕ)
     (a : (I.X (q + 1)).obj.obj (op (Scheme.Etale.mk (𝟙 T))))
@@ -89,9 +82,7 @@ def TorsorSignedRepresents (T : Scheme.{u}) (U : T.Etale)
     (relativeSectionComplex T U I).homologyπ _ z = x
 
 /-- Localization boundary induced by the actual shifted cone inclusion. In signed
-coordinates it sends `b` to `(0,-b)`.
-Source: Stacks Tag 0G71; Tag 03AJ, relative refinement
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+coordinates it sends `b` to `(0,-b)`. -/
 def torsorLocalizationBoundary (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) (q : ℤ) :
     (relativeSections U I).homology q ⟶ (relativeSectionComplex T U I).homology (q + 1) :=
@@ -101,9 +92,7 @@ def torsorLocalizationBoundary (T : Scheme.{u}) (U : T.Etale)
   homologyMap ((shiftFunctor _ (-1 : ℤ)).map
     (CochainComplex.mappingCone.inr (relativeSectionRestriction T U I))) (q + 1)
 
-/-- The class of an ordinary section cocycle, using the extension-by-zero transport.
-Source: Stacks Tags 011J and 03AJ
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+/-- The class of an ordinary section cocycle, using the extension-by-zero transport. -/
 def TorsorSectionRepresents {T : Scheme.{u}} (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) (q : ℕ)
     (b : (I.X q).obj.obj (op U)) (x : (relativeSections U I).homology (q : ℤ)) : Prop :=
@@ -112,9 +101,7 @@ def TorsorSectionRepresents {T : Scheme.{u}} (U : T.Etale)
       ComplexShape.embeddingUpNat rfl).hom ((relativeSections U I).iCycles q z) = b ∧
     (relativeSections U I).homologyπ q z = x
 
-/-- The evaluated split resolution sequence over the specified open.
-Source: Stacks Tags 011J and 013T
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+/-- The evaluated split resolution sequence over the specified open. -/
 def torsorOpenShortComplex (T : Scheme.{u}) (U : T.Etale)
     (S : ShortComplex
       (CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)) :=
@@ -122,9 +109,7 @@ def torsorOpenShortComplex (T : Scheme.{u}) (U : T.Etale)
     ComplexShape.embeddingUpNat.extendFunctor AddCommGrpCat.{u + 1})
 
 /-- The representative and sign assertions for a simultaneous relative classification.
-The extension presentation and resolution maps are arbitrary models, not chosen maps.
-Source: Stacks Tag 03AJ and blueprint lem-pur-divisor-class.proof.md, clause (a)
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+The extension presentation and resolution maps are arbitrary models, not chosen maps. -/
 structure DivisorTorsorBoundarySigns
     (e : ∀ (T : Scheme.{u}) (W : T.Opens)
       (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G),
@@ -294,9 +279,7 @@ structure DivisorTorsorBoundarySigns
         relativeConnecting T' (Scheme.Etale.mk (h ⁻¹ᵁ W).ι) S' hs' q
 
 /-- Canonical Mathlib sheafification instances cached for the cone calculations.
-These aliases use the existing instances, with local instance registration only.
-Source: Mathlib sheafification and section functors
-(blueprint: lem-pur-divisor-torsor-boundary-signs). -/
+These aliases use the existing instances, with local instance registration only. -/
 private local instance (priority := 3000) torsorBoundaryHasSheafify
     (T : Scheme.{u}) :
     HasSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1} := inferInstance
@@ -1509,9 +1492,6 @@ representatives and the two boundary signs, simultaneously in all resolution mod
 The classification uses the raw lifting cocycle. Its negative forgetful image is
 the Ext-normalized torsor class; the final conjunct specifies the representatives.
 The normalized classification in `relative_torsor_cohomology` is the negative of this one.
-Source: Stacks Tag 03AJ; blueprint main-20261015,
-sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md, clause (a)
-(blueprint: lem-pur-divisor-torsor-boundary-signs).
 
 STATEMENT-DISPUTED: the original positive forgetful clause conflicts with the raw
 representatives and the proved Ext comparison. The statement below corrects that clause.

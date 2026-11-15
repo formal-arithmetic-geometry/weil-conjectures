@@ -10,8 +10,11 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TensorCoordinates.TowerC
 
 /-! # Coordinates for the normalized finite unit
 
-Source: Stacks 03EL; Zheng Construction 4.1; blueprint tower-operations proof (2).
-(blueprint: lem-sfb-tensor-comparison-unit-coordinates).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +48,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The normalized underlying finite unit gives the actual system identity adjoint.
-Source: blueprint tower-operations proof, clause (2), underlying unit normalization.
-(blueprint: lem-sfb-tensor-comparison-unit-coordinates).
 
 Proof: eliminate the specified coefficient, transition, pull-functor, finite adjunction
 and pull-evaluation coordinate equalities. Evaluate the underlying-unit equation on x.

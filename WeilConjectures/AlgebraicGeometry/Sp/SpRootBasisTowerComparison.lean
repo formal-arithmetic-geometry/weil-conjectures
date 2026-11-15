@@ -24,11 +24,6 @@ namespace AlgebraicGeometry.ProEtale
 /-- The prescribed compatible root generators identify the finite-level integral
 Tate tower with the coefficient quotient tower on the same slice.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), finite-level bases and
-compatibility with transition maps.
-(blueprint: lem-sp-root-basis-tower-comparison)
-
 Proof: put N = ell^(n+1) and B = O_E/(N). Finite discrete condensed coefficients
 pull back to the constant B sheaf, naturally under reduction. Since N annihilates
 B and mu_N, tensoring over the integers agrees with tensoring over Z/N: locally

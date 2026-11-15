@@ -157,11 +157,6 @@ def spEllCoefficientCone (E : PadicAlgCl.FiniteIntermediateField ℓ) :
 /-- The specified ell-power reductions make the regular integral coefficient module
 an inverse limit of its quotient coefficient modules.
 
-Source: blueprint latest, sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md,
-integral coefficient comparison and cofinality paragraph;
-sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md, clause (3).
-(blueprint: lem-sp-ell-coefficient-cone-limit)
-
 Proof: the native continuous-function coefficient sheaf is the limit of all
 ell-power quotient sheaves, with its specified reduction projections. The successor
 functor on the opposite natural-number category is initial: predecessor is left

@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleSheafHomFamilyGluing
 /-!
 # Integration along a vector bundle
 
-Source: blueprint sec-smooth-purity/sk-prop-an, order 1972
-(blueprint: proposition-purity-vector-bundles).
-
 The coefficient is expressed by the existing ordered tensor of shifted finite Tate lines:
 its pullback to E is A_E(d)[2d]. The local map is the actual compact-support exchange for
 the inverse frame, followed by the canonical Tate comparison and the existing affine trace.
@@ -113,7 +110,6 @@ private theorem existsUnique_normalized_sheaf_trace (N : ℕ) (hN : 0 < N)
 
 /-- The unique sheaf-glued derived trace. This is the existence and uniqueness needed
 by the definition, not a choice of a morphism from a mere nonempty Hom set.
-Source: blueprint order 1972, full construction (blueprint: proposition-purity-vector-bundles).
 
 Proof:
 1. Use the finite locally free frames of proposition-purity-vector-bundles to cover S.
@@ -123,7 +119,7 @@ The canonical D+ comparisons of proposition-construction-independence-rf-shriek-
 proposition-composition-base-change-rf-shriek identify each restriction with the existing affine
 trace source. lemma-integral-linear-character--1 gives its actual isomorphism to A[0]. Exact inverse
 image (situation-conventions) commutes with cohomology; the cover detects
-vanishing (lem-weil-pbc-etale-cover-detects-iso). Thus C_pi has only H^0 = L_pi.
+vanishing. Thus C_pi has only H^0 = L_pi.
 2. For frames i,j on W, write a_g = phi_i phi_j^{-1}. If e_j = e_i G, then
 phi_j = a_(G transpose) phi_i and g = (G transpose)^{-1}. Thus phi_j^{-1} = phi_i^{-1} a_g.
 Horizontal pasting of the two inverse-coordinate squares and normalized Tate composition
@@ -142,8 +138,8 @@ the descended truncation and projection; naturality of b and c, also after inver
 quasi-isomorphisms, proves independence of the representative and compatibility with
 exact open restriction. H^0(alpha) is the identity under the standard single-H^0 comparison.
 5. Set t_pi = lambda[0] alpha. On a trivializing open, composing a_i with alpha^{-1}
-is a map between degree-zero complexes with H^0 equal to lambda_i. Full faithfulness
-(lem-weil-pbc-derived-single-fully-faithful) gives equality with lambda_i[0]. Hence the
+is a map between degree-zero complexes with H^0 equal to lambda_i. Full faithfulness gives equality
+with lambda_i[0]. Hence the
 constructed map has exactly the displayed local restrictions. The Kummer generator and
 projective counit normalizations in OrdinaryFiniteP1Datum show that this equation uses
 the same affine traces for every normalized t,D, without an extra base-change assumption.
@@ -180,8 +176,7 @@ theorem existsUnique_vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
 
 /-- The canonical truncation identification alpha_pi and the glued sheaf map lambda.
 The H^0 normalization determines alpha_pi, and all frame restrictions determine lambda.
-Thus the theorem used here specifies the pair uniquely, rather than asserting bare existence.
-Source: blueprint order 1972, alpha_pi and lambda (blueprint: proposition-purity-vector-bundles). -/
+Thus the theorem used here specifies the pair uniquely, rather than asserting bare existence. -/
 def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -193,8 +188,7 @@ def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
 
 /-- Integration t_pi, the unique map restricting on each linear trivialization to the
 specified affine-space trace. Its existence proof is precisely sheaf gluing followed by
-the canonical truncation roof; uniqueness determines the data in this definition.
-Source: blueprint order 1972, t_pi (blueprint: proposition-purity-vector-bundles). -/
+the canonical truncation roof; uniqueness determines the data in this definition. -/
 def vectorBundleIntegration (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

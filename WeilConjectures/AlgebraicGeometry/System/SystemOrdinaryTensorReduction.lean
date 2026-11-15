@@ -46,8 +46,11 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-!
 # Tensor compatibility of ordinary horizontal reduction adjoints
 
-Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY.
-(blueprint: lem-pur-system-ordinary-tensor-reduction).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 03CZ, 06YY
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -223,9 +226,7 @@ private theorem transition_apply_cast {m n : ℕ} (h : n ≤ m)
     (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x)
   exact eq_of_heq (hh.trans hy.symm)
 
-/-- The ordinary scalar-adjunction transpose of the actual horizontal restriction.
-Source: Zheng Construction 4.1; Stacks 03CZ, 06YY
-(blueprint: lem-pur-system-ordinary-tensor-reduction). -/
+/-- The ordinary scalar-adjunction transpose of the actual horizontal restriction. -/
 def ordinaryReduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (M : Systems.{c, v, max c v r} J B τ) :
     (A.scalar h).model.E.obj ((evaluation.{c, v, max c v r} J B τ m).obj M) ⟶
@@ -263,8 +264,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Ordinary reduction commutes with tensor under the canonical comparisons.
-Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY
-(blueprint: lem-pur-system-ordinary-tensor-reduction).
 Proof: transpose both maps through extension/restriction adjunction. Precompose with
 inverse tensor evaluation and test on pure tensors, which generate the sheafified
 module tensor. The adjunction unit sends x to its scalar-extension section. The

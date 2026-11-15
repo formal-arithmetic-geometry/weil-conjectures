@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjPullbackGeneratorLocalCoefficientsQPrime
 
 /-! Local coefficient charts for the normalized pullback generator relation.
-(blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -65,7 +68,6 @@ private theorem pair_local_coefficients {S T : Scheme.{u}} (f : T ⟶ S)
 
 /-- Local factorization and coefficient formulas on one affine chart.
 
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 The proof first chooses an affine `V` below the image of a point and lifts the
 point to the relative Proj chart over `V`. The old degree-one basic opens cover
 that chart by symmetric-algebra induction. Choose one generator `v` containing

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 
 /-! # Extract the positive Kummer equation of normalized Chern data
-
-Source: classes (2), the three normalization equations
-(blueprint: lem-sp-tower-chern-target-normalization-data).
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- The positive target-normalization predicate with its category data shared.
-Source: classes (2) (blueprint: lem-sp-tower-chern-target-normalization-data). -/
+/-- The positive target-normalization predicate with its category data shared. -/
 def ChernData.rootNormalized
     (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
@@ -50,9 +46,6 @@ def ChernData.rootNormalized
       c.kummer.exact c.rootIso c.rootForget
 
 /-- The positive Kummer normalization follows from normalized Chern data.
-
-Source: classes (2), the second normalization equation
-(blueprint: lem-sp-tower-chern-target-normalization-data).
 
 Proof: project the second conjunct, then its first conjunct. Keeping the
 coefficient diagrams as parameters shares the source normalization's categories

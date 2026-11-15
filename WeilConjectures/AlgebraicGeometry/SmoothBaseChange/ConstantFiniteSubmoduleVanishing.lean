@@ -15,9 +15,9 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 /-!
 # Vanishing of constant coefficients from all finite submodules
 
-Source: Stacks Project, Tag 0739 (lemma-colimit), applied on affine etale objects;
-Tag 0F08, cyclic-coefficient reduction.
-(blueprint: lem-sbc-constant-finite-submodule-vanishing)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0739, 0F08
 -/
 
 @[expose] public section
@@ -46,10 +46,6 @@ private theorem finite_fg_submodule
 
 /-- Higher direct image of a constant bounded torsion module vanishes if it vanishes
 for all finite submodules. The submodule index is allowed to live in the module's universe.
-
-Source: Stacks Project, Tag 0739 (lemma-colimit), and Tag 0F08,
-cyclic-coefficient reduction.
-(blueprint: lem-sbc-constant-finite-submodule-vanishing)
 
 Proof:
 1. Index by the finitely generated submodules of M, ordered by inclusion. The zero

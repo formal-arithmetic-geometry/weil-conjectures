@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilNegativeKoszulTensorDualTransp
 
 /-! # The finite coefficient comparison, before tensoring with an input complex
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, with Modules on Sites, Tags 03DA and 03EK.
-(blueprint: lem-weil-pbc-completed-koszul-coefficient-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 03DA, 03EK, 0664
 -/
 
 @[expose] public noncomputable section
@@ -26,10 +27,6 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite exterior coefficient tower is the dual positive tensor tower.
-
-Source: Stacks Project, More on Algebra, Tag 0664, and algebraization.tex,
-Tag 0A0E, proof of lemma-derived-completion-koszul.
-(blueprint: lem-weil-pbc-completed-koszul-coefficient-comparison).
 
 Proof: use the increasing-subset bases of the exterior powers of A^(Fin r).
 Identify a degree -k basis vector with the dual tensor coordinate, with sign

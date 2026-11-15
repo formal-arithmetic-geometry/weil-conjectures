@@ -16,7 +16,12 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
-/-! # Identifying a relative open arrow for a single coefficient -/
+/-! # Identifying a relative open arrow for a single coefficient
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08HY, 0D5S, 01JR, 0A1D
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -86,8 +91,6 @@ private theorem single_open_iso
 
 /-- Restricting a single coefficient to an open contained in its domain gives the
 literal tensor-pullback standard comparison, as an isomorphism of arrows.
-Source: Stacks Project, Tags 08HY, 0D5S, 01JR and 0A1D.
-(blueprint: lem-pc-standard-single-open-relative-arrow).
 
 Proof: The open scheme of W inverse image Z is canonically isomorphic to Z,
 with its inclusion into W identified with homOfLE hZ. On the cartesian base

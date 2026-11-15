@@ -87,7 +87,11 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Coherence of inverse image with quotient coefficient extension
 
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks Tag 0D6D.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0D6D
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 5.16
 -/
 
 @[expose] public noncomputable section
@@ -581,10 +585,6 @@ end Images
 
 /-- The normalized inverse-image tensor comparisons preserve the multiplication unit
 and balanced associator of quotient scalar extension.
-
-Source: Zheng, Construction 4.1 and Lemma 5.16, printed pp. 21 and 34--35;
-Stacks Tag 0D6D (derived pullback composition).
-(blueprint: lem-pur-strict-etale-inverse-tensor-coherence).
 
 Proof: first work on ordinary modules. Transpose under the scalar adjunctions.
 The comparison `tensor` is fixed by `tensor_unit`: insertion of `1 tensor x`,

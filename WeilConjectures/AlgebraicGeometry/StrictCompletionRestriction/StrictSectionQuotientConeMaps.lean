@@ -68,7 +68,12 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
-/-! # Section principal cones map to actual quotient tensors -/
+/-! # Section principal cones map to actual quotient tensors
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03EK, 06YS, 06YT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -517,10 +522,6 @@ private theorem quotientConeMap (X : Scheme.{u})
 
 /-- The canonical principal-cone maps to the actual quotient tensors, before Roos
 completion or derived localization.
-
-Source: blueprint latest, derived-nakayama-first-reduction proof, Cones paragraph;
-Locality in integral-ctf-equals-bc; Stacks 03EK, 06YS and 06YT
-(blueprint: lem-sfb-strict-section-quotient-cone-maps).
 
 Proof: use the existing internal principal-cone augmentation. The exact section
 module equivalence identifies its finite coefficient module with the actual

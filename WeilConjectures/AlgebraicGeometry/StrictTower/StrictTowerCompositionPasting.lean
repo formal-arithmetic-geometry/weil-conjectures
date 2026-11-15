@@ -13,9 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 /-!
 # Composition pasting for strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F.
 The shared constructions live in `StrictTowerCompositionMaps`, so refinement
 independence can be used here without an import cycle.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7J, 0F7C, 0F7D, 0F7F
 -/
 
 @[expose] public section
@@ -919,14 +922,10 @@ all compatible proper refinements, and satisfies vertical interchange under arbi
 base change. The latter two clauses are equalities of natural transformations on the
 whole derived strict-tower categories; no evaluation-faithfulness premise is made.
 
-Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F, adapted to strict towers
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence).
-
 Proof plan, following the node's ten steps:
 1. Evaluation commutes with J_c. A scalar etale origin L_n evaluates J_c M as the
    scalar realization of c_! L_n, by finite constant coefficient transport and
-   proposition-comparison-immersions--1. Exactness of etale c_!
-   (lem-weil-pbc-extension-by-zero-exact) retains its individual lower bound.
+   proposition-comparison-immersions--1. Exactness of etale c_! retains its individual lower bound.
 2. Apply gamma_isIso to Q at J_c M, and whisker with R_q. The jComp and rComp
    identifications give exactly compositionD, naturally in M.
 3. For a refinement let A be its c-square, H its i-square, and T its b-square.
@@ -1012,8 +1011,6 @@ private theorem refinementFactor_isIso {A C D E : Type*}
   infer_instance
 
 /-- Both boundaries of the refinement square are invertible on finite-origin objects.
-Source: Stacks, Tag 0F7J, choice independence
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence).
 Proof: apply gamma_isIso to the refinement square for the compactifications of hf;
 its left proper map is identity. Whisker by the outer proper direct image to obtain
 invertibility of C_hf. By compositionPastingCoherence both D's are invertible and
@@ -1049,9 +1046,7 @@ theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y �
   exact ⟨hc, IsIso.of_isIso_comp_right _ ((compositionD B T₁).app M)⟩
 
 /-- The horizontal and hf comparisons from a common refining compatible tower, on a
-finite-origin input. In the node's right-to-left convention they are H₂⁻¹H₁ and C₂⁻¹C₁.
-Source: Stacks, Tag 0F7J, common refinements
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
+finite-origin input. In the node's right-to-left convention they are H₂⁻¹H₁ and C₂⁻¹C₁. -/
 noncomputable def compositionCommonComparison
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

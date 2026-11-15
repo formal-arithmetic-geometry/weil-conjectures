@@ -10,7 +10,10 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnbound
 
 /-! # Iterated strict étale inverse-image transitions
 
-Source: Zheng, Construction 4.1 and Lemma 4.10.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +25,6 @@ namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 /-- The ordinary inverse image respects every normalized iterated transition.
-Source: Zheng, Construction 4.1 and Lemma 4.10.
-(blueprint: lem-pur-strict-etale-inverse-transition)
 
 Proof: compose the underlying map of the inverse-evaluation comparison at level q
 with the algebraic lift's underlying-sheaf comparison, obtaining a map a_q to the

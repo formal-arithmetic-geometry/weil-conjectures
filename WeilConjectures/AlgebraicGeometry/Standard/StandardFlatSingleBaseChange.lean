@@ -14,12 +14,13 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardFlatSingleBaseChangeEp
 
 /-! # Standard flat single base change for the canonical pullback
 
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor.
-(blueprint: lem-pc-standard-flat-single-base-change).
-
 The standard-localization degree-zero flat comparison is the intermediate result
 needed by the localized cartesian comparison. Its proof follows the stalkwise
 K-flat comparison and qcqs single-complex induction described in the DAG node.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0A1D
 -/
 
 @[expose] public section
@@ -29,10 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Standard-localization degree-zero flat base change.
-
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor, specialized to
-E = O_Y[0] and G = M[0].
-(blueprint: lem-pc-standard-flat-single-base-change).
 
 Proof: Construct the canonical forward comparison by composing the derived
 base-change mate with direct image of the universal pullback counit on M[0],

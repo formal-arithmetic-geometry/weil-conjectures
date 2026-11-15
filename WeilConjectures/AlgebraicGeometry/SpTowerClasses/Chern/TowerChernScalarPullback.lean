@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernOrdinary
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarPullbackCounitLift
 
 /-! # Pullback of scalar extension from integral quotient coefficients
-
-Source: blueprint classes proof (2), realization steps 1, 2 and 5
-(blueprint: lem-sp-tower-chern-scalar-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -71,9 +68,6 @@ private theorem scalar_shift_endpoint
 The endpoint equations start on R-modules, not on integral complexes. In particular
 they contain no integral reduction functor, unitIso of Chern data, or rootIso of
 Chern data. They can be used with any reduction model after its separate comparison.
-
-Source: blueprint classes proof (2); realization proof steps 1, 2 and 5
-(blueprint: lem-sp-tower-chern-scalar-pullback).
 
 Proof: present whole abelian and module towers on the vertical sequence site.
 Pullback of the actual constant rings Z/ell^(n+1) preserves their quotient

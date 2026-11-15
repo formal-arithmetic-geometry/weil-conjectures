@@ -34,8 +34,7 @@ private theorem scalarUnitSection
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
 /-- The integer generator followed by scalar restriction and evaluation is the
-canonical finite quotient. Source: classes proof (2), evaluation on constants.
-(blueprint: lem-sfb-finite-source-map).
+canonical finite quotient.
 Proof: the morphism and section equations of Forget identify the composite on
 constant k with its image under the coefficient ring map. This image is k, since
 ring maps preserve integer casts. The uniqueness of finiteQuotient concludes. -/
@@ -61,8 +60,6 @@ theorem finiteBoundary_sourceMap (l : ℕ) [Fact l.Prime]
   exact (finiteScalarForgetIso_section l E c n (coefficient T (Arings l E T)) U _ _ hy).heq
 
 /-- The ordinary scalar unit on roots evaluates to the canonical map z to 1 tensor z.
-Source: classes proof (2), the pure-tensor equation of lineEvaluation.
-(blueprint: lem-sfb-finite-root-map).
 Proof: transport z back along rootForget and then to its actual module section x.
 The section equation of the ordinary scalar unit sends x to its scalarExtensionSection.
 The evaluation comparison forgets only the action. Apply the defining equation of

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineTransition
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLinePullbackLowerTensor
 
 /-! # Horizontal compatibility of the finite root-line comparisons
-
-Source: current classes blueprint, clause (2), scalar extension of the root tower.
-(blueprint: lem-sfb-tower-class-line-pullback-horizontal).
 -/
 
 @[expose] public noncomputable section
@@ -97,11 +94,6 @@ private theorem finiteLine_hom_ext (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
   simpa only [one_smul] using hf.trans ((h U z).trans hg.symm)
 
 /-- The finite coefficient/root formula respects horizontal tower restrictions.
-
-Source: current blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-scalar extension of the root tower, and the transition calculation in the proof of
-`lem-sfb-tower-class-line-pullback-existence`.
-(blueprint: lem-sfb-tower-class-line-pullback-horizontal).
 
 Proof: the finite-line universal property reduces equality of linear maps to their
 values on generators 1 tensor z. Naturality of the scalar-adjunction unit computes

@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerOrdinaryScalarAssoc
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarCounitNormalization
 
 /-! # Ordinary scalar association for the integral quotient tower
-
-Source: blueprint classes proof (2), scalar association before deriving.
-(blueprint: lem-sp-tower-chern-ordinary-scalar-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -41,10 +38,6 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 /-- Ordinary inverse image and balanced scalar association, normalized at the unit
 and root modules. The last two equations are in the abelian category of A-systems;
 there is no derived scalar/pullback comparison in this statement.
-
-Source: blueprint latest, classes proof (2), realization steps 1--4 and the
-ordinary tensor calculation in step 5
-(blueprint: lem-sp-tower-chern-ordinary-scalar-pullback).
 
 Proof: choose the integral inverse image and its flat-term K-flat preservation
 from integralCoefficientPullback_exists. Define eY and eX by applying the inverse

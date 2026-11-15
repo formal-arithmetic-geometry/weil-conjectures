@@ -22,14 +22,13 @@ import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 /-!
 # Constant-module projection for bounded torsion objects
 
-Source: Stacks Project, Tag 0F12, `lemma-pull-out-constant-mod-n`, relative fixed-exponent
-extension; and the docstring of `torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing`
-in `WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage`
-(blueprint: lem-sf-projection-torsion-object-constant).
-
 The map is the existing counit mate, a natural transformation of bifunctors. Its target
 is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant inverse-image isomorphism.
 The statement concerns the uncompleted tensor in the ordinary unbounded derived category.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F12
 -/
 
 @[expose] public section
@@ -50,11 +49,6 @@ on the module and no constructibility condition on the object. Naturality in bot
 is that of `rightDerivedLowerStarProjectionMap`, restricted along the constant-sheaf functor
 and the degree-zero embedding. The canonical constant inverse-image comparison identifies
 its target with `Rf_*(E ⊗ᴸ M_X[0])`, naturally in `M`.
-
-Source: Stacks Project, Tag 0F12, `lemma-pull-out-constant-mod-n`, direct-sum/triangle/unit
-argument adapted to relative direct image and a fixed-exponent torsion object; the docstring
-of `torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing` in the direct-image stability
-module (blueprint: lem-sf-projection-torsion-object-constant).
 
 Proof:
 1. Finite-type schemes over a field are Noetherian and the source is quasi-compact.

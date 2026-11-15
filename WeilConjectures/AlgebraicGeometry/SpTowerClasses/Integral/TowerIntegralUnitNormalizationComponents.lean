@@ -21,8 +21,11 @@ import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerForgetEvaluatio
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-! # Normalizing the integral coefficient-unit comparison
 
-Source: blueprint latest, classes proof (2), integral reduction, and Stacks 03CY.
 The additive comparison of constant residue towers lifts uniquely to modules.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03CY
 -/
 
 @[expose] public noncomputable section
@@ -614,9 +617,6 @@ private theorem coefficientPullIso_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (abConstantComparison f).naturality (integerResidue l n.unop)
 
 /-- Pointwise normalized comparison of constant integral sections.
-Source: blueprint classes proof (2), integral reduction; the coefficient ring
-comparison is constructed levelwise and checked on the integer generators.
-(blueprint: lem-sp-tower-integral-unit-normalization-components).
 
 Proof: identify each forgotten coefficient system with its tower of constant
 residue groups. The canonical inverse-image comparison for constant sheaves is

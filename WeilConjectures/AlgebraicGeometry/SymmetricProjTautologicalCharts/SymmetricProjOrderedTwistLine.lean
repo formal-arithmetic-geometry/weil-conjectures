@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSectionChart
 
 /-! # Existence of the ordered global twist line
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-line).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -43,9 +44,6 @@ private theorem boundary_adjunction_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
 
 set_option linter.unusedVariables false in
 /-- The local normalized affine comparisons glue to a global line isomorphism.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-line).
 
 Proof: on each affine base chart, use the supplied polynomial and normalized
 Proj comparison to identify the standard degree-one frame with the chart frame

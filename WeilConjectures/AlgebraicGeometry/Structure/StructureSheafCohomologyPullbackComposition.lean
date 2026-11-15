@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import WeilConjectures.AlgebraicGeometry.Structure.StructureSheafCohomologyPullbackCompositionPointwise
 
 /-! Composition law for pullback on structure-sheaf cohomology.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-composition)
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01F7, 01FB
 -/
 
 @[expose] public section
@@ -21,8 +24,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Pullback on structure-sheaf cohomology reverses composition.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial
-and Remark 01FB.
 
 Proof: Write Lf and Lg for the exact inverse images and Lfg for inverse image
 along f ≫ g. There is a canonical comparison alpha : Lfg ≅ Lg ⋙ Lf, obtained from
@@ -40,8 +41,7 @@ Ext to move alpha from the coefficient object to Z_Z. Substitute the second equa
 Functoriality of exact-functor maps on Ext and associativity of Yoneda products now
 give cf ; Lf(cg ; Lg(x) ; ag) ; af, which is f*(g*(x)). This proves equality
 pointwise, hence equality of additive homomorphisms. The argument includes degree
-zero, either identity morphism, and empty schemes without extra hypotheses.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-composition) -/
+zero, either identity morphism, and empty schemes without extra hypotheses. -/
 theorem structureSheafCohomologyPullback_comp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) :
     structureSheafCohomologyPullback (f ≫ g) n =

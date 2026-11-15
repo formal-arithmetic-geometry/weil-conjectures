@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackQuasiCoherent
 /-!
 # Open restriction of the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
-(blueprint: lem-trf-symmetric-proj-open-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01NQ, 01OB
 -/
 
 @[expose] public section
@@ -46,9 +47,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Open restriction of the normalized symmetric Proj quotient.
-
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
-(blueprint: lem-trf-symmetric-proj-open-comparison).
 
 Proof: For an open V, tensor pullback preserves quasi-coherence and normalized
 descent supplies a quotient DV over V. The normalized pullback unit and affine

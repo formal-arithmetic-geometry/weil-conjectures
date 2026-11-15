@@ -19,8 +19,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIs
 
 /-! # Forward normalized square comparison before endpoint cancellation
 
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5X.
-(blueprint: lem-weil-pbc-square-section-unit-forward).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5T, 0D5X
 -/
 
 @[expose] public section
@@ -762,8 +763,6 @@ end Helpers
 /-- The normalized square comparison reaches the raw target endpoint before its
 inverse is applied. This is the forward equation needed for cancellation in the
 section-unit identity.
-Source: Stacks Project, Tags 0D5T and 0D5X
-(blueprint: lem-weil-pbc-square-section-unit-forward).
 
 Proof: Resolve the target coefficient by J, use the right-derived mate equation for
 the commuting square, and evaluate the universal Leray and inverse-open

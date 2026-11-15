@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-!
 # Descent of the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01NR, 01OB, 01MS and 01N2.
-(blueprint: lem-trf-symmetric-proj-normalized-descent).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01OB, 01MS, 01N2
 -/
 
 @[expose] public section
@@ -37,9 +38,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- The affine twist comparison with its chart and homogeneous-section normalizations.
-Source: Stacks, Tags 01NR and 01OB
-(blueprint: lem-trf-symmetric-proj-normalized-descent). -/
+/-- The affine twist comparison with its chart and homogeneous-section normalizations. -/
 structure NormalizedAffineRestriction {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (U V : S.affineOpens) (h : U ≤ V) where
@@ -74,9 +73,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized degree-one quotient descends from the affine symmetric Proj twists.
 Its comparison on affine restriction carries every degree-one section to its image.
-
-Source: Stacks, Tags 01NR, 01OB, 01MS and 01N2.
-(blueprint: lem-trf-symmetric-proj-normalized-descent).
 
 Proof: For each affine base open U use the actual sheaf Proj.twist A(U) 1.
 On D_+(iota(m)), multiplication by iota(m) identifies this module with the

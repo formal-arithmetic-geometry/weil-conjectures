@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassLinePull
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerOrdinaryUnitEvaluation
 
-/-! # Pullback of the ordinary roots-of-unity line -/
+/-! # Pullback of the ordinary roots-of-unity line
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -68,10 +73,6 @@ private theorem adjoint_evaluation
 
 set_option linter.unusedVariables false in
 /-- The normalized Tate line is cartesian for the unit-normalized tensor inverse image.
-
-Source: blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clause (4),
-using the scalar extension in clause (2); Stacks 03EL and roots base change.
-(blueprint: lem-sfb-tower-class-line-pullback-existence).
 
 Proof: the existing finite Tate comparison theorem, specialized to every actual
 coefficient quotient, gives normalized finite isomorphisms. Invertibility of ell

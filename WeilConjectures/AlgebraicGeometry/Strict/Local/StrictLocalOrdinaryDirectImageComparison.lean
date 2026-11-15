@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 
 /-! # Ordinary strict-local direct-image comparison
 
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images in degree zero.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03Q9
 -/
 
 @[expose] public section
@@ -156,8 +158,6 @@ private theorem ordinaryExchangeArrowIso
   exact ⟨Arrow.isoMapApp δ (DerivedCategory.Plus.homologyFunctor _ 0) ε.symm ≪≫ e₂ ≪≫ e₃⟩
 
 /-- The canonical ordinary exchange comparison on strict-local sections is invertible.
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images, degree zero.
-(blueprint: lem-weil-pbc-strict-local-ordinary-direct-image-comparison).
 
 Proof: on the single complex F[0], factor the derived exchange through the levelwise
 ordinary exchange and the two right-derived-functor units. Left exactness makes both

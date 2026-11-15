@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 /-! # Evaluation of a specified normalized Isom presheaf map
 
-Source: Stacks Project, Tags 09BV and 0F63; functoriality of comparison and evaluation.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BV, 0F63, 03DA, 03ED, 098K
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +26,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Pull a coefficient-normalization arrow to an etale object, using the canonical mate.
-Source: Stacks Tags 03DA and 03ED.
-(blueprint: def-weil-pbc-etale-isomorphism-normalization-arrow). -/
+/-- Pull a coefficient-normalization arrow to an etale object, using the canonical mate. -/
 def etaleIsomorphismNormalizationArrow (Y : Scheme.{t})
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R))}
@@ -528,10 +528,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Evaluation respects an already specified presheaf map whose generators satisfy
 normalization. This is a preservation statement: it constructs neither a reduction map
 nor normalization universal arrows, and assumes no finite, perfect, or lisse objects.
-
-Source: Stacks Project, Tags 09BV and 0F63, with the canonical coefficient mate of
-Tags 03DA and 098K.
-(blueprint: lem-weil-pbc-source-isomorphism-normalized-presheaf-evaluation).
 
 Proof: the equation on etale generators is an equality of maps of the Isom presheaves
 into the presheaf of morphisms with restricted coefficients. Sheafify that equality and

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinBijectiveNonpositive
 
 /-! # Bijectivity of graded exterior multiplication
 
-Source: Stacks Project, More on Algebra, Tag 0664.
-(blueprint: lem-weil-pbc-koszul-join-graded-bijective).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0664
 -/
 
 @[expose] public section
@@ -24,9 +25,6 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- Exterior multiplication is bijective in each degree, independently of any differential.
-
-Source: Stacks Project, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-koszul-join-graded-bijective).
 
 Proof: for i > 0 every tensor summand has a positive-degree factor and hence is zero;
 the target is also zero. For i = -n, only summands (-j,-k) with j+k=n contribute.

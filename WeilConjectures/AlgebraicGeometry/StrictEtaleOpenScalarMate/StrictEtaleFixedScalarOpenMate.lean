@@ -12,8 +12,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 
 /-! Scalar compatibility of fixed-coefficient open extension by zero.
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
-(blueprint: lem-pur-fixed-scalar-open-inverse-mate). -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03DJ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,8 +24,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 namespace AlgebraicGeometry.StrictEtaleOpenScalarMate
 
 /-- The inverse mate of the scalar restriction square is invertible.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
-(blueprint: lem-pur-fixed-scalar-open-inverse-mate).
 
 Proof: restriction of scalars is left adjoint to scalar coextension. Coextension
 preserves sheaves and commutes literally with restriction to the open subsite.

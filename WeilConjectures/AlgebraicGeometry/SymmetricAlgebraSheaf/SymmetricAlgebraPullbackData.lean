@@ -15,9 +15,9 @@ import Mathlib.RingTheory.GradedAlgebra.TensorProduct
 
 /-! # Normalized pullback data for symmetric graded algebras
 
-Source: Stacks Project, Modules, lemma-pullback-tensor-algebra;
-Constructions, Tag 01OB; Algebra, lemma-tensor-algebra-localization (general base change).
-(blueprint: lem-trf-symmetric-algebra-normalized-pullback-data).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01OB
 -/
 
 @[expose] public section
@@ -294,10 +294,6 @@ private theorem unitSection_map_res {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modu
 
 /-- Canonical coefficientwise pullback data for the symmetric graded algebra, with its
 specified degree-one generator formula.
-
-Source: Stacks Project, Modules, lemma-pullback-tensor-algebra;
-Constructions, Tag 01OB; Algebra, lemma-tensor-algebra-localization (general base change).
-(blueprint: lem-trf-symmetric-algebra-normalized-pullback-data).
 
 Proof: send a scalar by the scheme structure map and send iota(m) to the inclusion
 of the restricted section 1 tensor m. The symmetric universal property constructs

@@ -11,15 +11,15 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Section-normalized ordinary scalar restriction
 
-Source: Stacks Project, Tags 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ and 0F7B;
-blueprint fix-prop-coherence, coefficient comparisons of adjunction units and counits
-(blueprint: lem-sf-semilinear-scalar-ordinary-comparison).
-
 The existence theorem below supplies one simultaneous package on the actual ordinary
 semilinear-system and strict-tower categories. Every comparison has a section or
 adjunction normalization. The constant-tower beta, projector and alpha in the package
 are fixed by the same intrinsic ordinary words as their varying-ring counterparts.
 No choice of a package is made into a definition.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +37,6 @@ variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
   (B : Type (u + 1)) [CommRing B] (ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n)
 
 /-- Ordinary scalar restriction and all its section-normalized comparisons exist.
-Source: Stacks 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ and 0F7B;
-blueprint fix-prop-coherence
-(blueprint: lem-sf-semilinear-scalar-ordinary-comparison).
 Proof: restrict each level along psi and retain the section maps. Compatibility with
 phi makes all transitions B-linear. These prescriptions define rho on objects and
 morphisms. Restriction commutes with module sheafification: both actions uniquely extend

@@ -31,10 +31,6 @@ set_option linter.privateModule false
 
 /-! Finite-level comparison and conservativity for compact-support projection.
 
-Source: paragraph (3) of
-`sk-prop-sp-integral-adjunction-direct-image.proof.md`.
-(blueprint: lem-sp-tower-compact-support-projection-formula)
-
 The proof evaluates the two transposes at each finite coefficient quotient,
 uses the bounded constructible finite-Tor projection theorem and the open
 unit/counit triangles, then applies joint conservativity of the tower

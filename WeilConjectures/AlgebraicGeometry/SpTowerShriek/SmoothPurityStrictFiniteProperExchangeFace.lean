@@ -324,8 +324,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
-Source: blueprint operations proof (2), finite proper exchange face.
-(blueprint: new-lem-sp-strict-finite-proper-exchange-face).
 
 Proof: strictFinitePullbackSquareCoherence identifies the inverse-image cube
 for the four fixed scalar comparisons. The coordinates' counit equations

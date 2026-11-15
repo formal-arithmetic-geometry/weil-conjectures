@@ -17,13 +17,13 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaBaseChan
 
 /-! # Intrinsic clopen alpha commutes with pasting and pullback before derivation
 
-Source: Stacks Project, Tags 0F7C, 0F7D, 0F7F, 09AH and 09BN, with the arbitrary-ring
-underived strict-tower refinement in the blueprint.
-(blueprint: lem-cbc-proper-open-alpha-pasting)
-
 Each law includes equality on module sheaves, on strict towers, on their unbounded
 complexes, and on their ordinary unbounded derived categories. The two ordinary paths
 are written with all inverse-image and open-extension compositors inserted.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7C, 0F7D, 0F7F, 09AH, 09BN
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +39,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The alphaVerticalPasted ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+/-- The alphaVerticalPasted ordinary path, with the canonical compositors inserted. -/
 def alphaVerticalPasted {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -58,9 +56,7 @@ def alphaVerticalPasted {A C E B₀ D F : Scheme.{u}}
     Functor.whiskerLeft (modulePullback B r₂) (singleAlpha B k r₁ p₁ i h₁) ≫
     (Functor.associator _ _ _).inv
 
-/-- The alphaVerticalOuter ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+/-- The alphaVerticalOuter ordinary path, with the canonical compositors inserted. -/
 def alphaVerticalOuter {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -73,9 +69,7 @@ def alphaVerticalOuter {A C E B₀ D F : Scheme.{u}}
   singleAlpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h ≫
     Functor.whiskerRight (moduleGComp B r₁ r₂).hom (moduleJ B k)
 
-/-- The alphaHorizontalOuter ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+/-- The alphaHorizontalOuter ordinary path, with the canonical compositors inserted. -/
 def alphaHorizontalOuter {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (q : E ⟶ F)
@@ -88,9 +82,7 @@ def alphaHorizontalOuter {A C E B₀ D F : Scheme.{u}}
   Functor.whiskerRight (openBetaModuleJComp B i j).hom (modulePullback B q) ≫
     singleAlpha B (k ≫ l) r q (i ≫ j) h
 
-/-- The alphaHorizontalPasted ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+/-- The alphaHorizontalPasted ordinary path, with the canonical compositors inserted. -/
 def alphaHorizontalPasted {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -107,9 +99,7 @@ def alphaHorizontalPasted {A C E B₀ D F : Scheme.{u}}
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (modulePullback B r) (openBetaModuleJComp B k l).hom
 
-/-- The alphaCubeOriginal ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+/-- The alphaCubeOriginal ordinary path, with the canonical compositors inserted. -/
 def alphaCubeOriginal {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -132,9 +122,7 @@ def alphaCubeOriginal {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (moduleSquareG B d r₁ r c wr).inv (moduleJ B k₁)
 
-/-- The alphaCubeChanged ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+/-- The alphaCubeChanged ordinary path, with the canonical compositors inserted. -/
 def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -157,8 +145,6 @@ def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
 attribute [local irreducible] G J
 
 /-- Intrinsic alpha obeys vert pasting at the four specified levels.
-Source: Stacks, Tag 0F7C, and the underived strict-tower refinement, proof steps 1--7
-(blueprint: lem-cbc-proper-open-alpha-pasting).
 Proof: First detect equality of maps to open extension on module sheaves: the image of
 their difference restricts to zero both on the open and its closed complement.
 Exact inverse image and the open/closed short exact sequence force that image to vanish.
@@ -220,8 +206,6 @@ theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   all_goals rw [hm]
 
 /-- Intrinsic alpha obeys horiz pasting at the four specified levels.
-Source: Stacks, Tag 0F7D, and the underived strict-tower refinement, proof steps 1--7
-(blueprint: lem-cbc-proper-open-alpha-pasting).
 Proof: First detect equality of maps to open extension on module sheaves: the image of
 their difference restricts to zero both on the open and its closed complement.
 Exact inverse image and the open/closed short exact sequence force that image to vanish.
@@ -283,8 +267,6 @@ theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   all_goals rw [hm]
 
 /-- Intrinsic alpha obeys cube pasting at the four specified levels.
-Source: Stacks, Tag 0F7F, and the underived strict-tower refinement, proof steps 1--7
-(blueprint: lem-cbc-proper-open-alpha-pasting).
 Proof: First detect equality of maps to open extension on module sheaves: the image of
 their difference restricts to zero both on the open and its closed complement.
 Exact inverse image and the open/closed short exact sequence force that image to vanish.

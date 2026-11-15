@@ -11,14 +11,15 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # The section-normalized tensor-pullback adjunction
 
-Source: Stacks Project, Sheaves, Tags 0095, 0096 and 0097
-(blueprint: def-pc-module-pullback).
-
 ## Main declarations
 
 * `tensorPullbackSection`: the actual section `1 ⊗ m`.
 * `existsUnique_tensorPullbackSectionAdjunction`: its uniquely normalized adjunction.
 * `tensorPullbackSectionComp` and `tensorPullbackSectionId`: the induced comparisons.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0095, 0096, 0097, 008X
 -/
 
 @[expose] public section
@@ -29,8 +30,7 @@ open CategoryTheory Opposite TopologicalSpace
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The actual section `1 ⊗ m`, using inverse image and module sheafification.
-Source: Stacks, Tags 0095, 008X (blueprint: def-pc-module-pullback). -/
+/-- The actual section `1 ⊗ m`, using inverse image and module sheafification. -/
 noncomputable def tensorPullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : Y.Modules) (U : Y.Opens) (m : Γ(M, U)) :
     Γ((tensorPullback g).obj M, g ⁻¹ᵁ U) :=
@@ -46,7 +46,6 @@ noncomputable def tensorPullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
             ((SheafOfModules.toSheaf _).obj M)).hom.app (op U) m))
 
 /-- The tensor adjunction is uniquely fixed by its unit on sections.
-Source: Stacks, Tag 0096 (blueprint: def-pc-module-pullback).
 Proof: compose the inverse-image/direct-image adjunction with extension/restriction
 of scalars. On every pure tensor its Hom equivalence evaluates a map on `1 ⊗ m`, giving
 the displayed unit. Such sections generate the pullback locally: inverse image is a
@@ -73,14 +72,12 @@ theorem existsUnique_tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X �
   exact (hother M V.unop m).trans (hnormalized M V.unop m).symm
 
 /-- Choose the uniquely section-normalized adjunction; only its universal-property proof
-is postponed, while the pullback functor retains the upstream tensor construction.
-Source: Stacks, Tag 0096 (blueprint: def-pc-module-pullback). -/
+is postponed, while the pullback functor retains the upstream tensor construction. -/
 noncomputable def tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) :
     tensorPullback g ⊣ pushforward g :=
   Classical.choose (existsUnique_tensorPullbackSectionAdjunction g)
 
-/-- Canonical composition of tensor pullbacks, induced by normalized adjunctions.
-Source: Stacks, Tag 0097 (blueprint: def-pc-module-pullback). -/
+/-- Canonical composition of tensor pullbacks, induced by normalized adjunctions. -/
 noncomputable def tensorPullbackSectionComp {X Y Z : Scheme.{u}}
     (g : X ⟶ Y) (h : Y ⟶ Z) :
     tensorPullback (g ≫ h) ≅ tensorPullback h ⋙ tensorPullback g :=
@@ -88,8 +85,7 @@ noncomputable def tensorPullbackSectionComp {X Y Z : Scheme.{u}}
     (((tensorPullbackSectionAdjunction h).comp (tensorPullbackSectionAdjunction g)).ofNatIsoRight
       (pushforwardComp g h))
 
-/-- Canonical identity pullback, induced by the normalized adjunction.
-Source: Stacks, Tag 0097 (blueprint: def-pc-module-pullback). -/
+/-- Canonical identity pullback, induced by the normalized adjunction. -/
 noncomputable def tensorPullbackSectionId (X : Scheme.{u}) :
     tensorPullback (𝟙 X) ≅ 𝟭 X.Modules :=
   ((tensorPullbackSectionAdjunction (𝟙 X)).ofNatIsoRight (pushforwardId X)).leftAdjointUniq

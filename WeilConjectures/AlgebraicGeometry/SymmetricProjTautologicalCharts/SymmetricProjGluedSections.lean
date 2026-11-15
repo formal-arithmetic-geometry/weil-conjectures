@@ -13,8 +13,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Normalized degree-one sections of the glued symmetric Proj twist
 
-Source: Stacks Project, Constructions, Tags 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-glued-sections).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01NR, 01OB
 -/
 
 @[expose] public section
@@ -102,9 +103,6 @@ private theorem twist_chart_read_bijective {S : Scheme.{u}} (A : S.GradedAlgebra
 
 /-- The degree-one affine twists glue, together with the sheaf map sending a module
 section to its homogeneous fraction. No invertibility or surjectivity is asserted here.
-Source: Stacks, Tag 01NR (lemma-glue-relative-proj-twists), specialized to degree one
-of the symmetric algebra as in Tag 01OB (definition-projective-bundle).
-(blueprint: lem-trf-symmetric-proj-glued-sections).
 
 Proof: on every affine base open U take the existing module Proj.twist A(U) 1.
 Quasi-coherent affine restriction is coefficientwise scalar extension. On the standard

@@ -17,9 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The derived pullback unit for a scheme isomorphism is invertible.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit) -/
+/-- The derived pullback unit for a scheme isomorphism is invertible. -/
 theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
     [∀ X : Scheme.{u},
       HasDerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -40,9 +38,7 @@ theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
   infer_instance
 
 set_option linter.unusedVariables false in
-/-- Canonical source restriction comparison for the top open.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: def-pc-standard-single-base-change-top-restriction-source-iso) -/
+/-- Canonical source restriction comparison for the top open. -/
 noncomputable def standardSingleBaseChange_topRestriction_sourceIso
     {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :
     letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
@@ -74,8 +70,6 @@ noncomputable def standardSingleBaseChange_topRestriction_sourceIso
 
 set_option linter.unusedVariables false in
 /-- Compatibility equation for the canonical source restriction comparison.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-standard-single-base-change-top-restriction-compatibility)
 
 Proof: Substitute the hypothesis on `e`. Write L_f = derivedPullback f and
 R_f = schemeDerivedDirectImage f; composition of arrows below is written `≫`.

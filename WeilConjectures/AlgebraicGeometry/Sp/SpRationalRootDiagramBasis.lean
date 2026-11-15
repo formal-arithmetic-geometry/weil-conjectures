@@ -299,11 +299,6 @@ private theorem basisNaturality
 /-- The prescribed roots give an isomorphism of the rational coefficient and twist
 abelian-sheaf diagrams on the slice, whose components are linear for each finite field.
 
-Source: blueprint latest, sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md,
-paragraph beginning "These maps commute with every finite-field-extension transition";
-sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md, clause (3).
-(blueprint: lem-sp-rational-root-diagram-basis)
-
 Proof: at level n tensor the normalized map e_n with O_E/(ell^(n+1)). Its inverse
 sends b tensor z to b times the image of e_n inverse applied to z. Balancing gives
 the inverse identities. The normalization of e_n and compatibility of the roots

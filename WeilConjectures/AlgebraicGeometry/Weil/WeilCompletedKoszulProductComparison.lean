@@ -23,10 +23,11 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Transporting the finite Koszul comparison through products and signed fibers
 
-Source: Stacks Project, Tag 0A0E and sites-cohomology.tex Tag 0941.
-(blueprint: lem-weil-pbc-completed-koszul-product-comparison).
-
 All product preservation, cone signs and the precise zero-homotopy unit are proved here.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A0E, 0941
 -/
 
 @[expose] public noncomputable section
@@ -397,9 +398,6 @@ attribute [local irreducible] completedCechModulesEquiv
 
 -- Checking the fixed coefficient and site presentations needs extra elaboration steps.
 /-- The published exterior product fiber is the tensor-dual Roos fiber, with its unit.
-
-Source: Stacks Tag 0A0E and sites-cohomology.tex Tag 0941.
-(blueprint: lem-weil-pbc-completed-koszul-product-comparison).
 
 Proof: the finite tower comparison commutes with transitions and augmentation. Backward
 coefficient restriction preserves limits because the module-to-sheaf functor preserves

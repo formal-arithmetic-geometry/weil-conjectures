@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.ConstantFiniteSubmodul
 /-!
 # Prime-coefficient vanishing for a constant bounded torsion group
 
-Source: Stacks Project, Tag 0F08, cyclic-coefficient step; Tag 0739, colimits.
-(blueprint: lem-sbc-torsion-constant-prime-devissage)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F08, 0739
 -/
 
 @[expose] public section
@@ -29,10 +30,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- A constant bounded torsion group has zero higher direct image if its relevant prime
 cyclic coefficients do. A prime is irrelevant if multiplication by it is injective.
-
-Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 0739,
-cohomology and filtered colimits; Mathlib.GroupTheory.FiniteAbelian.Basic.
-(blueprint: lem-sbc-torsion-constant-prime-devissage)
 
 Proof:
 1. Let P(A) mean that the degree-q higher image of the constant sheaf on A is zero.

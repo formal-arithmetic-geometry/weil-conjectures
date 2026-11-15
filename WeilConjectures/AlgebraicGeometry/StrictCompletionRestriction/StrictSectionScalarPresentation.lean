@@ -120,7 +120,12 @@ import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 
-/-! # A strict scalar presentation on section modules -/
+/-! # A strict scalar presentation on section modules
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 014E, 03EK
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -364,8 +369,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- A strict section scalar presentation, constructed from the scalar cone functor.
-Source: blueprint first-reduction Cones and Locality paragraphs; Stacks 014E and 03EK
-(blueprint: lem-sfb-strict-section-scalar-presentation).
 
 Proof: Conjugate the internal scalar by the exact section equivalence and its counit.
 Naturality and the triangle identities identify its value on every internal module.

@@ -47,7 +47,6 @@ private theorem mapped_counit_factorization
 
 set_option linter.unusedVariables false in
 /-- Homology identifications and counit compatibility for fixed stalk data.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
 Proof: unpack Classical.choose_spec hpres into the upper bound, termwise flatness,
 identifications e and t, and presentation equation for K. Take its termwise stalk at xS
 and restrict scalars along the inverse open-stalk ring isomorphism. Exact additive stalks
@@ -63,8 +62,7 @@ unit-and-counit mate identities identify the restricted base-change map with the
 map. Transport the stalks from S and V to B and A along the open-stalk isomorphisms.
 Exact stalks commute with homology, so applying degree-n homology to the transported
 presentation equation supplies eL, eR and the displayed equality for every integer n,
-using the same P and derived pair.
-(blueprint: lem-pc-standard-single-flat-counit-localization-homology). -/
+using the same P and derived pair. -/
 theorem standardSingleFlatCounit_localization_homology
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

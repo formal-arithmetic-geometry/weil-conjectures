@@ -15,9 +15,6 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 /-!
 # Intrinsic proper/open arrows for varying rings
 
-Source: Stacks Project, Tags 0F7B, 03DI and 09AE, and the explicit lift/projection
-construction in the blueprint (blueprint: def-sp-varying-ring-proper-open-arrows).
-
 All intrinsic maps are first constructed on module systems, then localized termwise.
 Their derived proper/open comparison is the specified ordinary adjunction mate.
 
@@ -26,6 +23,12 @@ Their derived proper/open comparison is the specified ordinary adjunction mate.
 - `moduleBeta`, `modulePi`: the intrinsic open comparison and clopen projection.
 - `moduleAlpha`, `alpha`, `gamma`: the actual system arrow, its localization and mate.
 - `constantGamma`: the arbitrary constant-ring comparison from the strict-tower calculus.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 03DI, 09AE, 07A7, 05RU
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -39,7 +42,6 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
 /-- The square comparison is uniquely fixed by the explicit compositor formula.
-Source: Stacks, Tag 07A7 (blueprint: def-sp-varying-ring-proper-open-arrows).
 Proof: the displayed composite is a witness, and its defining equality gives uniqueness. -/
 theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
@@ -48,15 +50,13 @@ theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V �
         moduleGComp R φ k p := by
   exact ⟨_, rfl, fun _ he ↦ he⟩
 
-/-- Canonical comparison of the two iterated inverse images around any commutative square.
-Source: Stacks, Tag 07A7 (blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- Canonical comparison of the two iterated inverse images around any commutative square. -/
 noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     pull R φ i ⋙ pull R φ r ≅ pull R φ p ⋙ pull R φ k :=
   (moduleSquareG_existsUnique R φ k r p i h).choose
 
 /-- The square comparison retains exactly its original compositor formula.
-Source: Stacks, Tag 07A7 (blueprint: def-sp-varying-ring-proper-open-arrows).
 Proof: this is the defining equality of the uniquely specified comparison. -/
 theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
@@ -65,9 +65,7 @@ theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
         moduleGComp R φ k p :=
   (moduleSquareG_existsUnique R φ k r p i h).choose_spec.1
 
-/-- The inverse cartesian open comparison is defined by precisely the open-unit transpose.
-Source: Stacks, Tags 09AE and 07A7
-(blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- The inverse cartesian open comparison is defined by precisely the open-unit transpose. -/
 noncomputable def moduleBetaInvApp {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -77,8 +75,7 @@ noncomputable def moduleBetaInvApp {U' U X' X : Scheme.{u}}
     ((pull R φ gU).map ((moduleJAdj R φ j).unit.app M) ≫
       (moduleSquareG R φ gU j' j g h).inv.app ((extension R φ j).obj M))
 
-/-- Naturality of the specified open-unit transpose. Source: Stacks, Tag 09AE
-(blueprint: def-sp-varying-ring-proper-open-arrows).
+/-- Naturality of the specified open-unit transpose.
 Proof: use naturality of the open unit, the pullback compositor and the adjunction
 Hom equivalence. The transposes of both sides are the same naturality square. -/
 theorem moduleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
@@ -99,8 +96,7 @@ theorem moduleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
   simp only [Functor.comp_map] at hn ⊢
   rw [hn]
 
-/-- The inverse comparison as a natural transformation with the specified transpose.
-Source: Stacks, Tag 09AE (blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- The inverse comparison as a natural transformation with the specified transpose. -/
 noncomputable def moduleBetaInv {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g) :
@@ -152,8 +148,7 @@ private theorem derived_open_unit_iso {U X : Scheme.{u}} (j : U ⟶ X)
     exact IsIso.of_isIso_comp_right _ ((evalG R φ j n).hom.app ((J R φ j).obj M))
   exact NatIso.isIso_of_isIso_app _
 
-/-- The open-extension unit is invertible. Source: Stacks, Tags 03DI and 09AE
-(blueprint: def-sp-varying-ring-proper-open-arrows).
+/-- The open-extension unit is invertible.
 Proof: on an object lying over the open there is exactly one lift to it, so restriction
 of the extension presheaf is the original module. This survives sheafification,
 termwise extension to strict towers, and exact localization. -/
@@ -241,8 +236,7 @@ private theorem ordinary_open_image {U X : Scheme.{u}} (j : U ⟶ X)
     (DerivedCategory.singleFunctorCompHomologyFunctorIso (Modules R φ X) 0).app _⟩
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary rings. Source: Stacks, Tag 09AE and blueprint, second proof step
-(blueprint: def-sp-varying-ring-proper-open-arrows).
+arbitrary rings.
 Proof: restriction commutes with direct image on the same pulled-back test object.
 The two routes are left adjoint to these canonically identified right adjoints.
 Their unique unit-preserving comparison is invertible and its inverse has exactly
@@ -273,8 +267,7 @@ theorem moduleBetaInv_isIso {U' U X' X : Scheme.{u}}
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU.
-Source: Stacks, Tag 09AE (blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU. -/
 noncomputable def moduleBeta {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -283,8 +276,7 @@ noncomputable def moduleBeta {U' U X' X : Scheme.{u}}
     (moduleBetaInv_isIso R φ gU j' j g h hsq)).symm
 
 /-- The canonical map from open extension to direct image is the counit mate of the
-inverse open unit. Source: Stacks, Tags 03DI and 09AE
-(blueprint: def-sp-varying-ring-proper-open-arrows). -/
+inverse open unit. -/
 noncomputable def moduleOpenToP {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     extension R φ j ⟶ push R φ j :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (extension R φ j) (moduleAdj R φ j).unit ≫
@@ -393,8 +385,6 @@ private theorem ordinary_clopen_iso {U X : Scheme.{u}} (j : U ⟶ X)
       (Functor.isoWhiskerRight e H) ≪≫ h⟩
 
 /-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Source: Stacks, Tag 09AE and blueprint, fourth proof step
-(blueprint: def-sp-varying-ring-proper-open-arrows).
 Proof: over each pro-etale test object split sections into the product of sections on
 the inverse image of the clopen image and on its complement. Both extension and direct
 image give the first factor with zero second factor. The specified comparison is the
@@ -415,16 +405,13 @@ theorem moduleOpenToP_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- The intrinsic clopen component projection, with no arbitrary splitting choice.
-Source: Stacks, Tag 09AE and blueprint, fourth proof step
-(blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- The intrinsic clopen component projection, with no arbitrary splitting choice. -/
 noncomputable def modulePi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
     [IsClosedImmersion s] : 𝟭 (Modules R φ X) ⟶ pull R φ s ⋙ extension R φ s :=
   (moduleAdj R φ s).unit ≫ Functor.whiskerLeft (pull R φ s)
     (@inv _ _ _ _ (moduleOpenToP R φ s) (moduleOpenToP_isIso R φ s))
 
 /-- Equality transport for open extension, independent of proof-irrelevant instances.
-Source: Stacks 03DI (blueprint: def-sp-varying-ring-proper-open-arrows).
 Proof: substitute the equality of scheme maps; proof irrelevance identifies the
 open-immersion instances and hence the chosen universal-property functors. -/
 theorem moduleJ_congr {U X : Scheme.{u}} {f g : U ⟶ X}
@@ -433,15 +420,13 @@ theorem moduleJ_congr {U X : Scheme.{u}} {f g : U ⟶ X}
   subst g
   rfl
 
-/-- The canonical equality transport for ordinary extension by zero.
-Source: Stacks 03DI (blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- The canonical equality transport for ordinary extension by zero. -/
 def moduleJCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :=
   eqToIso (moduleJ_congr R φ h)
 
 /-- The normalized non-cartesian open comparison uses moduleBeta and the intrinsic clopen
-projection, followed by the open and pullback compositors. Source: Stacks, Tag 0F7B
-(blueprint: def-sp-varying-ring-proper-open-arrows). -/
+projection, followed by the open and pullback compositors. -/
 noncomputable def moduleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -462,9 +447,7 @@ noncomputable def moduleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((moduleGComp R φ (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
       (eqToIso (congrArg (pull R φ) (pullback.lift_snd k r h))).hom) (extension R φ k)
 
-/-- The intrinsic derived arrow is the localization of the constructed system map.
-Source: Stacks 0F7B; Zheng 4.1
-(blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- The intrinsic derived arrow is the localization of the constructed system map. -/
 def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -479,23 +462,19 @@ def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
           DerivedCategory.Q) ≫
       (Functor.mapDerivedCategoryCompIso _ _).inv
 
-/-- The normalized proper/open map is exactly the unit-square-counit mate.
-Source: Stacks 0F7B, 07A7
-(blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- The normalized proper/open map is exactly the unit-square-counit mate. -/
 def gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) : P R φ r ⋙ J R φ i ⟶ J R φ k ⋙ P R φ p :=
   mateEquiv (adj R φ r) (adj R φ p) (alpha R φ k r p i h)
 
-/-- Embed a single coefficient complex as a constant strict tower.
-Source: the constant-ring calculus (blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- Embed a single coefficient complex as a constant strict tower. -/
 abbrev constantDerived (B : Type (u + 1)) [CommRing B] (X : Scheme.{u}) :
     DerivedCategory (StrictTower.Modules B X) ⥤ StrictTower.Derived B X :=
   StrictTower.ConstantNormalization.delta B X
 
-/-- Evaluation of this constant tower is canonically the original derived complex.
-Source: Stacks 05RU (blueprint: def-sp-varying-ring-proper-open-arrows). -/
+/-- Evaluation of this constant tower is canonically the original derived complex. -/
 def constantEval (B : Type (u + 1)) [CommRing B] (X : Scheme.{u}) :
     constantDerived B X ⋙ StrictTower.ev B X 0 ≅
       𝟭 (DerivedCategory (StrictTower.Modules B X)) :=

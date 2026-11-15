@@ -22,7 +22,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSuppleme
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! Specialized comparison square for the site-comparison open exchange. -/
+/-! Specialized comparison square for the site-comparison open exchange.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 099R, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -143,8 +148,6 @@ private theorem component_unpack
       K₂.map (se.hom.app F) ≫ c₂'.inv.app (L₁'.obj F) ≫ R₂'.map (c₁'.inv.app F) := h
 
 /-- Specialized inverse-image comparison square used by the open exchange calculation.
-Source: canonical comparison-square coherence, Stacks Tags 099R and 0B65.
-(blueprint: lem-fix-site-open-exchange-square).
 
 Proof: flip the chosen Cartesian square using the pullback symmetry isomorphism.
 The component equation for this flipped square has exactly the required orientation.

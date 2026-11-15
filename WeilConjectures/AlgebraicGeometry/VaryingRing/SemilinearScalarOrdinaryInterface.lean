@@ -9,16 +9,17 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpe
 
 /-! # Section-normalized ordinary scalar restriction
 
-Source: Stacks Project, Tags 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ and 0F7B;
-blueprint fix-prop-coherence, coefficient comparisons of adjunction units and counits
-(blueprint: def-sf-semilinear-scalar-ordinary-interface).
-
 The interface records one simultaneous package on the actual ordinary
 semilinear-system and strict-tower categories. Every comparison has a section or
 adjunction normalization. The constant-tower beta, projector and alpha in the package
 are fixed by the same intrinsic ordinary words as their varying-ring counterparts.
 The existence and uniqueness theorems are in `SemilinearScalarOrdinaryComparison`.
 No choice of a package is made into a definition.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ, 0F7B,
+  03CZ
 -/
 
 @[expose] public noncomputable section
@@ -35,27 +36,23 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
   (B : Type (u + 1)) [CommRing B] (ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n)
 
-/-- The given scalar map on constant sheaves, with no flatness condition.
-Source: Stacks 03CZ (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+/-- The given scalar map on constant sheaves, with no flatness condition. -/
 def ordinaryScalarMap (X : Scheme.{u}) (n : ℕ) :
     StrictTower.coefficients B X ⟶ coefficients R X n :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (ψ n)
 
-/-- The specified termwise ordinary inverse/direct-image adjunction.
-Source: Stacks 03D7 (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+/-- The specified termwise ordinary inverse/direct-image adjunction. -/
 def scalarTowerAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
     StrictTower.towerPullback B f ⊣ StrictTower.towerDirectImage B f :=
   (Scheme.proEtaleRingModuleAdjunction f (StrictTower.coefficients B Y)
     (StrictTower.coefficients B X) (StrictTower.constantRingIso B f)).whiskerRight ℕᵒᵖ
 
-/-- The specified termwise ordinary open adjunction.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+/-- The specified termwise ordinary open adjunction. -/
 def scalarTowerOpenAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     StrictTower.towerJ B j ⊣ StrictTower.towerPullback B j :=
   (StrictTower.moduleJAdj B j).whiskerRight ℕᵒᵖ
 
-/-- The ordinary constant-tower pullback square uses the recorded compositors.
-Source: Stacks 03D8 (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+/-- The ordinary constant-tower pullback square uses the recorded compositors. -/
 def scalarTowerSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     StrictTower.towerPullback B i ⋙ StrictTower.towerPullback B r ≅
@@ -64,8 +61,7 @@ def scalarTowerSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     eqToIso (congrArg (StrictTower.towerPullback B) h.symm) ≪≫
       StrictTower.towerGComp B k p
 
-/-- The ordinary open compositor is the unit-preserving adjoint comparison.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+/-- The ordinary open compositor is the unit-preserving adjoint comparison. -/
 def scalarTowerOpenComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k] :
     StrictTower.towerJ B j ⋙ StrictTower.towerJ B k ≅ StrictTower.towerJ B (j ≫ k) :=
@@ -73,7 +69,6 @@ def scalarTowerOpenComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     (scalarTowerOpenAdj B (j ≫ k)) (StrictTower.towerGComp B j k).symm
 
 /-- Ordinary extension respects equality of the open scheme map.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-ordinary-comparison).
 Proof: substitute the equality of maps. Proof irrelevance identifies the open-immersion
 instances, so both chosen adjoints are definitionally the same functor. -/
 theorem scalarTowerOpen_congr {U X : Scheme.{u}} {f g : U ⟶ X}
@@ -84,9 +79,7 @@ theorem scalarTowerOpen_congr {U X : Scheme.{u}} {f g : U ⟶ X}
 
 /-- All ordinary scalar comparisons with their defining normalizations. The level
 isomorphisms identify the actual restricted module sheaves, including the B action;
-transition and morphism equations retain the underlying section maps.
-Source: Stacks 03D7, 03DI and 0F7B; blueprint fix-prop-coherence
-(blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+transition and morphism equations retain the underlying section maps. -/
 structure OrdinaryScalarComparison where
   /-- Restriction from actual semilinear systems to actual strict B towers. -/
   rho : ∀ X : Scheme.{u}, Modules R φ X ⥤ StrictTower.Towers B X

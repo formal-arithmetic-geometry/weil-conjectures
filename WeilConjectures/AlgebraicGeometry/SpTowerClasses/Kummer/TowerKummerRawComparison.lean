@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Naming the actual Kummer complex does not change its Kummer composite.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-kummer-raw-composite-comparison).
 Proof: the named complex unfolds to the same three objects and two maps, with
 the same zero-composite proof. Its named exactness proof and k.exact prove the
 same proposition. Proof irrelevance identifies them. Apply congrArg to the

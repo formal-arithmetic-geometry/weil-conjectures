@@ -37,10 +37,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.LineBundleTowerPull
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralTowerPullbackSquare
 
 /-! # Integral line-bundle classes and geometric pullback
-
-Source: blueprint, sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes proof (2), and the integral extension argument in steps 1--3 of
-lem-sp-tower-chern-pullback (blueprint: lem-sp-tower-integral-class-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -61,8 +57,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Integral line-bundle classes commute with pullback to full units, in the ordinary
  derived category of abelian towers. No torsion coefficient or root comparison occurs.
-Source: blueprint classes proof (2); lem-sp-tower-chern-pullback, steps 1--3
-(blueprint: lem-sp-tower-integral-class-pullback).
 
 Proof: lineBundle_proEtaleClass_pullback gives the class identity before making
 constant towers. It follows from the already proved arbitrary-scheme Picard

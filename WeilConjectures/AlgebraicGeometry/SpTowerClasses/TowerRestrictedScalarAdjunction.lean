@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.HomCongr
 
 /-! # Restriction of coefficients in the ordinary geometric adjunction
 
-Source: blueprint classes proof (2); Stacks 03EL, ordinary coefficient extension.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -29,16 +31,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Direct image of whole abelian towers, taken componentwise.
-Source: classes (2), ordinary system topos
-(blueprint: lem-sp-tower-restricted-scalar-adjunction). -/
+/-- Direct image of whole abelian towers, taken componentwise. -/
 abbrev abPush {X Y : Scheme.{u}} (f : X ⟶ Y) : Ab X ⥤ Ab Y :=
   (Functor.whiskeringRight ℕᵒᵖ (DiagonalAb X) (DiagonalAb Y)).obj
     (lowerStar AddCommGrpCat.{u + 1} f)
 
-/-- The componentwise ordinary abelian adjunction.
-Source: classes (2), ordinary system topos
-(blueprint: lem-sp-tower-restricted-scalar-adjunction). -/
+/-- The componentwise ordinary abelian adjunction. -/
 def abAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) : abPull f ⊣ abPush f :=
   (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).whiskerRight ℕᵒᵖ
 
@@ -572,10 +570,6 @@ end HomConstruction
 
 /-- The normalized restriction/direct-image square and its integral Hom adjunction.
 This statement involves neither a coefficient-unit arrow nor a Tate-line comparison.
-
-Source: blueprint latest, classes proof (2), balanced coefficient extension;
-Stacks 03EL, ordinary module inverse image and scalar restriction.
-(blueprint: lem-sp-tower-restricted-scalar-adjunction).
 
 Proof: forget the scalar action on the given ordinary direct-image system. At
 (n,U) it is the additive group of the original system at the base-changed chart.

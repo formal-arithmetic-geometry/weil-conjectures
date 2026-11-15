@@ -10,10 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 
 /-!
 # Normalized ordinary scalar maps for arbitrary coefficient homomorphisms
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-lem-amb-cartier-kummer-map.proof.md, final scalar-extension paragraph
-(blueprint: lem-asd-supported-kummer-arbitrary-scalar-maps).
 -/
 @[expose] public noncomputable section
 
@@ -37,8 +33,6 @@ and `lowerStarCompRestrictScalarsIso` to identify the two restriction-of-scalars
 The constructions use `def-weil-pbc-constant-sheaf`, `def-pc-sheaf-restrict-scalars`,
 `def-weil-pbc-sheafification`, and `def-weil-pbc-direct-image`; the resulting ambient map has the
 source and target required by `def-asd-ordinary-supported-kummer-scalar`.
-Source: the final scalar-extension paragraph of the blueprint proof cited above
-(blueprint: lem-asd-supported-kummer-arbitrary-scalar-maps).
 -/
 theorem exists_supported_kummer_arbitrary_scalar_maps
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)

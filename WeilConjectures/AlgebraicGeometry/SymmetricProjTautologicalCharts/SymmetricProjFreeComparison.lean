@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeProjectiveSpace.FreeProjectiveB
 /-!
 # Ordered free comparisons for the normalized symmetric Proj quotient
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-free-comparison).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -36,9 +37,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.boundaryPullbackComparison
 
 /-- Ordered free comparisons for the normalized symmetric Proj quotient.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-free-comparison).
 
 Proof: Fix r and the ordered isomorphism b. On each affine V the free basis and the
 symmetric-algebra universal property give the graded polynomial isomorphism

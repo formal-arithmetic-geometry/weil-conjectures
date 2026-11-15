@@ -26,11 +26,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Scalar extension and finite evaluation preserve the underlying integral arrow.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-scalar extension and evaluation; steps 2--3 of
-`lem-sfb-normalized-chern-finite-boundary`.
-(blueprint: lem-sfb-tower-scalar-finite-boundary).
-
 Proof: transpose the scalar-extended arrow under the derived scalar adjunction.
 The scalar-unit normalization cancels the source comparison. For its target,
 choose a K-flat resolution of the single root module. The representative transpose

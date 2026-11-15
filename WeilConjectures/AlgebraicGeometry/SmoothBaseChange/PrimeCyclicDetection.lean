@@ -15,9 +15,9 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 /-!
 # Prime cyclic detection of a geometric-point coefficient
 
-Source: Stacks Project, Tag 0F08, coefficient reduction in the proof, with
-underlying-abelian comparison from Tag 03FD and qcqs colimits from Tag 0739.
-(blueprint: lem-sbc-prime-cyclic-detection)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F08, 03FD, 0739
 -/
 
 @[expose] public section
@@ -81,10 +81,6 @@ private theorem prime_cyclic_vanishing_in_integer_coefficients
 
 /-- Nonvanishing with a geometric-point coefficient detects a prime cyclic abelian
 coefficient, with a prime that is not a unit in the original coefficient ring.
-
-Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 03FD
-for forgetting coefficients; Tag 0739 for qcqs cohomology and filtered colimits.
-(blueprint: lem-sbc-prime-cyclic-detection)
 
 Proof:
 1. The geometric-point module-constancy theorem supplies a module M and an isomorphism

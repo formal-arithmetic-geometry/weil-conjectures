@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothLocalAcyclicity
 /-!
 # Prime-to-characteristic specialization for smooth proper morphisms
 
-Source: Stacks Project, Tag 0GKD, lemma-sp-isom-proper-loc-cst-torsion.
-(blueprint: lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0GKD, 0GJW
 -/
 
 @[expose] public section
@@ -35,9 +36,7 @@ namespace AlgebraicGeometry.Etale
 /-- Restrict a geometric germ through the strict localization and then take its germ
 at `t`. The first arrow is the uniquely characterized pointed-neighbourhood restriction;
 the last arrow is the canonical inverse-image stalk comparison. Thus this is the
-specified specialization map, with target at the composite point on `S`.
-Source: Stacks Project, Tag 0GKD and the specialization construction preceding Tag 0GJW.
-(blueprint: lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic). -/
+specified specialization map, with target at the composite point on `S`. -/
 noncomputable def strictLocalSpecialization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -63,8 +62,6 @@ noncomputable def strictLocalSpecialization
 /-- Prime-to-characteristic specialization invariance, with no finite-stalk or
 relative-dimension condition. Higher direct images here are formed after forgetting
 scalars to abelian sheaves, as allowed in the node.
-Source: Stacks Project, Tag 0GKD, degree-q consequence.
-(blueprint: lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic).
 
 Proof: forgetting scalars makes F a locally constant abelian sheaf, killed by the
 prime ell. Since ell is a unit in each local ring of S, it remains a unit in every

@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictSecti
 import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictIntegralScalarPullback
 import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictSectionPrincipalQuotientModels
 
-/-! # Strict completion under section action and pro-etale restriction -/
+/-! # Strict completion under section action and pro-etale restriction
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AA, 03EK, 03DB, 014E, 08TC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -63,10 +68,6 @@ private def coefficientUnit (X : Scheme.{u}) :
 
 /-- The entire section-action and restriction assertion, with no boundedness,
 Noetherianity or prime-invertibility assumptions.
-
-Source: blueprint main-20261015, localizing-closure finite-model proof, Locality;
-Stacks 09AA, 03EK, 03DB, 014E, 08TC
-(blueprint: lem-sfb-strict-completion-restriction-comparison).
 
 Proof plan (the seven steps of the node):
 1. Section action is exact and unchanged on sections and scalar matrices. It

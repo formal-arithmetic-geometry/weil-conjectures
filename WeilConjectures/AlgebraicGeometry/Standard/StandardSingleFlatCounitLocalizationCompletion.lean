@@ -17,8 +17,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Completion from the actual localized sheaf presentation data.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
-(blueprint: lem-pc-standard-single-flat-counit-localization-completion).
 Proof: unpack hpres into its bounded flat complex K on S, its direct-image
 identification e, ordinary-pullback identification t, and counit equation. Take
 K's termwise stalk at g(a), regarded as a point of S. Exactness and additivity of

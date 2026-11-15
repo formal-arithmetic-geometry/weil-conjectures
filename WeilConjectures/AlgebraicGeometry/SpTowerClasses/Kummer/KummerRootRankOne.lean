@@ -222,10 +222,6 @@ private def chartAddIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
 /-- The integral root system is locally free of rank one on the
 vertical sequence site.
 
-Source: blueprint latest, `sk-prop-diagonal-tower/_section.md`, Tate-twist paragraph;
-`sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-kummer-root-rank-one).
-
 Proof: choose the common pro-etale primitive-root cover with generators zeta_n
 satisfying zeta_(n+1)^l = zeta_n. On each covering chart the maps a to a zeta_n
 identify the root modules with the constant quotient rings Z/l^(n+1). The

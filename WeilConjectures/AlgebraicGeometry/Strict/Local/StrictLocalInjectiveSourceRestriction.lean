@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalLocalizedHomGer
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-restriction).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -32,8 +33,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- The canonical cycle comparison identifies the strict-local derived mate with
 restriction along the fixed geometric cone leg.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph; Tag 03Q8.
-(blueprint: lem-weil-pbc-strict-local-injective-source-restriction).
 
 Proof: compute the source direct image on the fixed bounded-below injective complex
 J using the right-derived unit. Represent each source morphism by a Hom-complex

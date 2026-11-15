@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Evaluating and forgetting the scalar arrow recovers evaluatedChern.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-chern-evaluation-comparison).
 Proof: expand the constructed scalar arrow and successive exact-functor arrow
 transports. These are precisely firstChern followed by evaluatedChern and the
 finite forgetful functor. All endpoints and comparison maps agree definitionally;

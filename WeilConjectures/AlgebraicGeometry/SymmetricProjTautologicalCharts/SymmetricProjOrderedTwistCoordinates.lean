@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 /-! # Coordinate compatibility for the ordered twist line
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-coordinates).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -48,9 +49,6 @@ private theorem hom_ext_on_affine_base {S X : Scheme.{u}} (p : X ⟶ S)
       _ = g ≫ adj.unit.app N := (adj.unit.naturality g).symm
 
 /-- An affinely normalized ordered twist comparison preserves coordinates globally.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-coordinates).
 
 Proof: inverse images of affine base opens cover the relative Proj. The supplied
 normalization says that the two maps agree after restricting to each member of

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareSectionUnitForward
 
 /-! # Cancelling the normalized square on a cochain section unit
 
-Source: Stacks Project, Cohomology, Tags 0D5T and 0D5X.
-(blueprint: lem-weil-pbc-square-section-unit-cancellation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5T, 0D5X
 -/
 
 @[expose] public section
@@ -33,8 +34,6 @@ variable [∀ Y : Scheme.{u},
 /-- A square transports the canonical section unit to the identity on the upstairs
 section complex. This concerns only the target injective representative: it has no
 source coefficient, coefficient morphism, numerator, denominator or replacement complex.
-Source: Stacks Project, Tags 0D5T and 0D5X
-(blueprint: lem-weil-pbc-square-section-unit-cancellation).
 
 Proof: Identify the right-adjoint mate of the square with the normalized direct-image
 composition square by derivedDirectImage_square_mate. Apply

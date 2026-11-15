@@ -13,9 +13,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Torsion cohomological dimension of a separably closed field
 
-Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lemma-cohomological-dimension-base-field--1; Stacks Project, Tags 03QO, 04JQ and 04JM
-(blueprint: lemma-cohomological-dimension-base-field--1).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03QO, 04JQ, 04JM
 -/
 
 @[expose] public section
@@ -25,9 +25,6 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- A separably closed field has torsion étale cohomological dimension at most zero.
-Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lemma-cohomological-dimension-base-field--1; Stacks Project, Tags 03QO, 04JQ and 04JM
-(blueprint: lemma-cohomological-dimension-base-field--1).
 
 Proof:
 1. Evaluation at the terminal object preserves epimorphisms by

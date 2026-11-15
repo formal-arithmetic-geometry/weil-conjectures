@@ -210,11 +210,6 @@ private def sectionUnitIso (X : Scheme.{u})
 /-- A compatible root tower trivializes every positive signed degree of the
 algebraic-closure coefficient twist on the prescribed slice.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), positive tensor powers
-of the compatible algebraic-closure basis.
-(blueprint: lem-sp-qbar-positive-root-basis)
-
 Proof: construct the normalized finite-level pure-tensor maps from the supplied
 root sections and module isomorphisms. Their transition identities give inverse
 maps on the inverse-limit and finite-subextension diagrams. The compatible

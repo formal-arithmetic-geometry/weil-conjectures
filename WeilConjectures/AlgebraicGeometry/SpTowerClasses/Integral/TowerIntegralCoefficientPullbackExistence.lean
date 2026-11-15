@@ -18,8 +18,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralIn
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryInverseSystemKFlat
 
 /-! # Integral inverse image with its Kummer and flat-complex realizations
-
-Source: blueprint classes proof (2), integral coefficient stage.
 -/
 
 @[expose] public noncomputable section
@@ -375,11 +373,6 @@ private theorem abelian_kummer_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- Construct inverse image at the integral quotient stage, independently of any
 ordinary or derived extension to the coefficient ring A. The middle Kummer map
 is the pullback of full units, as is the last map required by the data record.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-integral reduction; Stacks `sites-cohomology`, lemma-pullback-K-flat, and
-`sites-modules`, lemma-pullback-flat.
-(blueprint: lem-sp-tower-integral-coefficient-pullback-existence).
 
 Proof: realize abelian towers as sheaves on the vertical sequence site. Pull back
 module sheaves with their actions by the exact geometric inverse image. The

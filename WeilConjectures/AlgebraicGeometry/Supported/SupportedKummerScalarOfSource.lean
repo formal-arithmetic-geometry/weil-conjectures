@@ -98,7 +98,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! # Assembly of normalized supported Kummer coefficient squares -/
+/-! # Assembly of normalized supported Kummer coefficient squares
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -153,8 +158,6 @@ attribute [local irreducible] ordinaryFiniteRootMap supportedIntegralGenerator
 
 /-- A normalized supported constant scalar unit extends the normalized supported
 Kummer boundary square to the target root line.
-Source: blueprint lemma-cycle-class-cartier-divisor, final scalar-extension paragraph;
-Stacks 03PL and 07A6 (blueprint: lem-asd-supported-kummer-scalar-of-source).
 
 Proof: take the normalized root-line derived unit. The given constant coefficient
 map preserves the integral supported generator, and the root-line map preserves the

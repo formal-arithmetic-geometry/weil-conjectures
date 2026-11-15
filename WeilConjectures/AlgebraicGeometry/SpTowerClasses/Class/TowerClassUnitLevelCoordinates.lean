@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFiniteUn
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSectionGeometryExistence
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassUnitSuccessorCompatibility
 
-/-! # Compatible finite coordinates for the coefficient unit -/
+/-! # Compatible finite coordinates for the coefficient unit
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -81,10 +86,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Finite free-rank-one pullback maps commute with the actual quotient transitions.
-
-Source: Stacks 03D2, 03EL, and the unit construction in blueprint
-`sk-lem-sp-tower-bound-operations.proof.md`, clause (2).
-(blueprint: lem-sfb-tower-class-unit-level-coordinates).
 
 Proof: use the coefficient calculus and Base of strictSystemGeometricRealization.
 Construct the ordinary geometry on the ringed sequence site using the canonical

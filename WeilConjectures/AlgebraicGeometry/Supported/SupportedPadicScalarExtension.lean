@@ -119,8 +119,6 @@ import all Mathlib.CategoryTheory.Sites.PreservesSheafification
 import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExt
 
 /-! # Scalar extension of the supported integral constant
-
-Source: the source paragraph of step (3) of the diagonal tower construction.
 -/
 
 @[expose] public noncomputable section
@@ -285,10 +283,6 @@ private theorem pro_supported_integral_universal (A : Type (u + 1)) [CommRing A]
 
 /-- Scalar extension carries the supported integral constant to the supported
 constant p-adic module, preserving the integral generator.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md, step (3), source
-paragraph (blueprint: lem-sfb-supported-padic-scalar-extension).
 
 Proof: Over the etale site the constant lifted integer module has the same
 underlying abelian sheaf as the integral constant, and scalar forgetting from

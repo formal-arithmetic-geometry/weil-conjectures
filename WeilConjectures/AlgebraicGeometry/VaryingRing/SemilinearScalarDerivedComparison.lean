@@ -21,13 +21,15 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearAlphaPullback
 
 /-! # Specified derived scalar comparisons
 
-Source: Stacks Project, Tags 03D7, 07A6, 0D6D, 0D6E and 04VG;
-blueprint fix-prop-coherence, coefficient comparisons of units and counits
-(blueprint: lem-sf-semilinear-scalar-derived-comparison).
-
 Localize the given normalized ordinary package. The direct-image map is its actual
 adjunction mate. Its evaluation and the intrinsic proper/open alpha equation are
 statements about these specified transformations on unbounded derived system categories.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D7, 07A6, 0D6D, 0D6E, 04VG, 03CZ, 03DI
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.10
 -/
 
 @[expose] public noncomputable section
@@ -113,39 +115,32 @@ variable {R : ℕ → CommRingCat.{u + 1}} {φ : ∀ n : ℕ, R (n + 1) ⟶ R n}
   {B : Type (u + 1)} [CommRing B] {ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n}
   (D : OrdinaryScalarComparison R φ B ψ)
 
-/-- Additivity supplied by ordinary scalar restriction. Source: Stacks 03CZ
-(blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- Additivity supplied by ordinary scalar restriction. -/
 instance scalarRhoAdditive (X : Scheme.{u}) : (D.rho X).Additive := D.additive X
 
-/-- Left exactness supplied by ordinary scalar restriction. Source: Stacks 03CZ
-(blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- Left exactness supplied by ordinary scalar restriction. -/
 instance scalarRhoLimits (X : Scheme.{u}) : PreservesFiniteLimits (D.rho X) := D.limits X
 
-/-- Right exactness supplied by ordinary scalar restriction. Source: Stacks 03CZ
-(blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- Right exactness supplied by ordinary scalar restriction. -/
 instance scalarRhoColimits (X : Scheme.{u}) : PreservesFiniteColimits (D.rho X) := D.colimits X
 
-/-- Termwise localization of the actual sectionwise restriction. Source: Stacks 04VG
-(blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- Termwise localization of the actual sectionwise restriction. -/
 abbrev scalarRho (X : Scheme.{u}) : Derived R φ X ⥤ StrictTower.Derived B X :=
   (D.rho X).mapDerivedCategory
 
-/-- Exact localization of the specified ordinary inverse-image comparison.
-Source: Stacks 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- Exact localization of the specified ordinary inverse-image comparison. -/
 def scalarB {X Y : Scheme.{u}} (f : X ⟶ Y) :
     G R φ f ⋙ scalarRho D X ≅ scalarRho D Y ⋙ StrictTower.G B f :=
   Functor.mapDerivedCategoryCompIso (pull R φ f) (D.rho X) ≪≫
     Functor.mapDerivedCategoryNatIso (D.b f) ≪≫
       (Functor.mapDerivedCategoryCompIso (D.rho Y) (StrictTower.towerPullback B f)).symm
 
-/-- The specified unit--inverse-b--counit mate, with no choice of a direct-image map.
-Source: Stacks 07A6 (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- The specified unit--inverse-b--counit mate, with no choice of a direct-image map. -/
 def scalarD {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P R φ f ⋙ scalarRho D Y ⟶ scalarRho D X ⋙ StrictTower.R B f :=
   (mateEquiv (adj R φ f) (StrictTower.adj B f) (scalarB D f).inv)
 
-/-- Exact localization of the ordinary open comparison, retaining its open units.
-Source: Stacks 03DI, 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- Exact localization of the ordinary open comparison, retaining its open units. -/
 def scalarA {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J R φ j ⋙ scalarRho D X ≅ scalarRho D U ⋙ StrictTower.J B j :=
   Functor.mapDerivedCategoryCompIso (extension R φ j) (D.rho X) ≪≫
@@ -154,8 +149,7 @@ def scalarA {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
 
 attribute [local instance] WeilConjectures.sfAbBijective
 
-/-- The evaluation identification is the localization of the given identity on sections.
-Source: Stacks 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+/-- The evaluation identification is the localization of the given identity on sections. -/
 def scalarLevel (X : Scheme.{u}) (n : ℕ) :
     scalarRho D X ⋙ StrictTower.ev B X n ≅
       ev R φ X n ⋙
@@ -170,7 +164,7 @@ def scalarLevel (X : Scheme.{u}) (n : ℕ) :
         (res.{u + 1, u, u + 1} (ordinaryScalarMap R B ψ X n))).symm
 
 /-- The level direct-image comparison is precisely the recorded normalized ring-change
-comparison. Source: Stacks 0D6E (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
+comparison. -/
 def scalarLevelD {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   Scheme.proEtaleRingRestrictionDerivedDirectImage f
     (StrictTower.coefficients B Y) (coefficients R Y n)
@@ -547,8 +541,6 @@ private theorem scalarD_evaluation_of_cube
   rfl
 /-- Evaluation of the actual mate is the normalized single-level comparison, through
 exactly the recorded localization and direct-image evaluation identifications.
-Source: Stacks 07A6, 0D6D, 0D6E; Zheng 4.10
-(blueprint: lem-sf-semilinear-scalar-derived-comparison).
 Proof: localize D.level and D.b termwise, using localization uniqueness. The evaluation
 comparisons evalP and StrictTower.evalR are the mates of inverse-image evaluation.
 The evaluation-of-transposes formula of semilinearDerivedSections therefore identifies
@@ -895,8 +887,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 /-- Derived scalar comparisons are invertible specified mates and preserve intrinsic
 alpha before proper mating, for every commutative proper/quasi-compact-open square.
-Source: Stacks 03D7, 07A6, 04VG; blueprint fix-prop-coherence
-(blueprint: lem-sf-semilinear-scalar-derived-comparison).
 Proof: (1) localize D.b and its inverse; localization respects both inverse identities.
 The definition scalarD is the specified adjunction mate of scalarB.inv. (2) By
 scalarD_evaluation its evaluations are the normalized invertible single-level ring-change

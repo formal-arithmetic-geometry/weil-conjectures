@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition
 import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 
 /-! # Geometric coefficient composition after tower descent
-
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient-composition).
+.
 -/
 
 @[expose] public noncomputable section
@@ -274,8 +273,6 @@ private lemma restricted_chart_geometry
       ((ordinaryFinitePullback A V.ι).obj L)) hg hinv'
 
 /-- Coefficient descent for a frame restricted through two nested opens.
-Source: blueprint vector integration, overlap calculation.
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient-composition).
 
 Proof: cancel the affine descent over V and identify the chart's explicit
 compositor with its inverse square comparison. Paste the chart and tower squares,

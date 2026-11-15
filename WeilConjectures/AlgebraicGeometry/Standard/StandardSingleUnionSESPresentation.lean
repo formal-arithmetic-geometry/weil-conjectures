@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleUnionSESChainDat
 
 /-! # Short exact presentations of the single-module union comparison
 
-Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0DJ9.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 08BV, 08FE, 08HY, 0DJ9, 013N, 013O
 -/
 
 @[expose] public section
@@ -207,11 +209,6 @@ end
 complexes, after identifying their localized vertices. No comparison is asserted
 invertible. The coefficients need not be quasi-coherent or relatively flat, and
 there is no compactness assumption on the two opens.
-
-Source: Stacks Project, Tags 08BV (the injective restriction-difference sequence),
-08FE (restriction of direct image), 08HY (the base-change map), and 0DJ9
-(the relative Mayer--Vietoris induction diagram); Tags 013N--013O for cylinders.
-(blueprint: new-pc-standard-single-union-ses-presentation).
 
 Proof:
 Work on W = U union V and on its base change W_A. Resolve N[0] and its ordinary

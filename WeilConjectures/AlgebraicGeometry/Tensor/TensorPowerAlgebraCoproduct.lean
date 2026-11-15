@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.InvertibleSymmetricAlgebraCoprodu
 
 /-! # The algebra coproduct of tensor powers of a line bundle
 
-Source: Stacks Project, Tag 09MS, the direct sum in coherent-equation-ses.
-(blueprint: lem-sc-tensor-power-algebra-coproduct).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09MS
 -/
 
 @[expose] public section
@@ -32,8 +33,6 @@ noncomputable section
 /-- Tensor powers of a line bundle have a commutative algebra coproduct, with the
 usual multiplication of homogeneous sections.
 
-Source: Stacks Project, Tag 09MS, the direct sum in coherent-equation-ses.
-(blueprint: lem-sc-tensor-power-algebra-coproduct).
 Proof: Choose local frames for L. On a frame open use the polynomial algebra over
 its structure sheaf, with degree-d inclusion sending a coefficient to its monomial
 of degree d. If frames differ by a unit v, send the polynomial variable to v times

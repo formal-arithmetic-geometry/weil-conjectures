@@ -25,7 +25,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Unbounded proper/open AdjunctionNormalization
 
-Source: Stacks Project, Tags 0F7B.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7B
 -/
 
 @[expose] public section
@@ -311,8 +313,6 @@ private lemma iso_of_normalization
     exact ((b.homEquiv _ _).symm_apply_apply (gamma.hom.app X)).symm
 
 /-- Adjunction normalization of comparisons normalized on K-injective representatives.
-Source: Stacks Project, Tags 0F7B.
-(blueprint: lem-amb-unbounded-proper-open-adjunction-normalization).
 
 Proof:
 For a cartesian square, apply the sheaf support normalization and restrict along i.

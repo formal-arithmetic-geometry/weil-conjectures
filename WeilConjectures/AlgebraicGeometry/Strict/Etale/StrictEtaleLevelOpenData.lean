@@ -21,6 +21,12 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! Levelwise data for strict étale extension by zero.
 
 This isolates the fixed coefficient-level transport from the subsequent system assembly.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -550,8 +556,6 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- The levelwise pieces of ordinary strict étale extension by zero.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1
-(blueprint: new-lem-pur-strict-etale-level-open-data).
 
 The record contains the transported lower-shriek functors, their exact adjunctions,
 and the normalized scalar-restriction mates.  It is strictly below the system theorem:
@@ -571,8 +575,6 @@ structure StrictEtaleLevelOpenData where
 attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
 /-- The levelwise transport exists.
-Source: Stacks Project 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
-(blueprint: new-lem-pur-strict-etale-level-open-data)
 
 Restrict a module along the constant-presheaf sheafification unit to obtain an
 additive equivalence with fixed-coefficient module sheaves. The ring comparison

@@ -47,10 +47,6 @@ set_option linter.privateModule false
 /-!
 # Actual unbounded open adjunctions and site-comparison counits
 
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF; blueprint
-sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md,
-Locality paragraph (blueprint: lem-sp-unbounded-open-counit-site-transport).
-
 The sheaf adjunctions are the specified Kan-extension/sheafification adjunctions.
 `Adjunction.mapHomologicalComplex` gives their actual degreewise units and counits,
 `Adjunction.mapHomotopyCategory` descends them to homotopy categories, and
@@ -58,6 +54,10 @@ The sheaf adjunctions are the specified Kan-extension/sheafification adjunctions
 Its normalization on localized representatives is recorded in the imported
 `Adjunction.mapDerivedCategoryAdjunction_unit_app_Qh_obj` and counit counterpart.
 Thus no independent adjunction or comparison is selected here.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 03DJ, 09AF
 -/
 
 @[expose] public section

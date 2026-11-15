@@ -683,8 +683,6 @@ private theorem open_exchange_inverse (b : Base l E)
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
-Source: blueprint operations proof (2), finite open exchange face.
-(blueprint: new-lem-sp-strict-finite-open-exchange-face).
 
 Proof: transpose the inverse of both exchange isomorphisms by the normalized
 open adjunction. The open comparison is localization of the realization unit,

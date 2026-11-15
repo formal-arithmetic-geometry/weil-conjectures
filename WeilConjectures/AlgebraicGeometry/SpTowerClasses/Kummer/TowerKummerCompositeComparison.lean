@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The named positive boundary gives exactly the original Kummer composite.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-kummer-composite-comparison).
 Proof: both expressions compose f with the connecting morphism of k.exact shifted
 once and the same inverse shift-addition isomorphism. Unfolding the two names
 therefore proves equality by reflexivity. -/
