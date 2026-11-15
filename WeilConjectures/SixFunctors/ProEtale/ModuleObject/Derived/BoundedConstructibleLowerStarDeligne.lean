@@ -6,7 +6,6 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound
 import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible
@@ -47,18 +46,13 @@ sheaves are constructible
 
 ## Why a separate file
 
-These declarations were stated in `BoundedConstructible`, with the finiteness theorem `sorry`ed.
-Its proof cannot be given there: the finiteness of the direct image of a constructible sheaf goes
-through the comparison of `𝒪̲_E`-modules with `E̲`-modules, which imports
-`WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`, and that file imports
-`BoundedConstructible`. The declarations are therefore here, after
-`EllAdicRationalization` and the finiteness results, with the same names, namespaces and
-statements.
+The finiteness theorem cannot be proved in `BoundedConstructible`: the finiteness of the direct
+image of a constructible sheaf goes through the comparison of `𝒪̲_E`-modules with `E̲`-modules,
+which imports `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`, and that file
+imports `BoundedConstructible`. The declarations are therefore here, after
+`EllAdicRationalization` and the finiteness results, in the namespaces of `BoundedConstructible`.
 
 -/
-
--- The `privateModule` linter alone takes about 20 s on `BoundedConstructible`.
-set_option linter.privateModule false
 
 @[expose] public section
 

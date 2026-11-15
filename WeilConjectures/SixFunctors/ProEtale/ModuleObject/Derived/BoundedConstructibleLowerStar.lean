@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarDeligne
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarOfIsProper
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
@@ -26,11 +28,11 @@ for each of the three `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E̲` and `�
 * the derived lower shriek `Rf_!^c := i_! ⋙ Rp_*` for a compactification `c`
   (`boundedConstructibleLowerShriekOfCompactification`) and `Rf_!` for the compactification
   `compactificationOverField f` (`boundedConstructibleLowerShriek`), with their compatibilities
-  with the derived lower shrieks on the ambient derived categories. As in the notes
-  (`proposition-construction-independence-rf-shriek`, built on
-  `proposition-proper-direct-image-constructible-complexes`), the proper leg `Rp_*` is the
-  proper-only functor `boundedConstructibleLowerStarOfIsProper`, which rests on the proper
-  finiteness theorem and not on Deligne's finiteness theorem for arbitrary `f`;
+  with the derived lower shrieks on the ambient derived categories. As in the notes (the
+  construction of `Rf_!` and its independence of the compactification rest on the proper direct
+  image of constructible complexes), the proper leg `Rp_*` is the proper-only functor
+  `boundedConstructibleLowerStarOfIsProper`, which rests on the proper finiteness theorem and not
+  on Deligne's finiteness theorem for arbitrary `f`;
 * the monoidal closed structure on `Dᵇc(X)⟦Λ⟧`: `isMonoidalClosed_boundedConstructible`
   (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`, by noetherian induction from the lisse case,
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom`, using
