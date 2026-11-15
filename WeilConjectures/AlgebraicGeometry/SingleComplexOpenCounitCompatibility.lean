@@ -24,6 +24,21 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem counit_square_of_unit
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (a : L ⊣ R) {A B E H : C} {W Z : D}
+    (t₁ : A ⟶ B) (t₂ : B ⟶ E) (d : E ⟶ R.obj Z)
+    (q : A ⟶ H) (u : H ⟶ R.obj W) (v : W ⟶ Z) (p : L.obj H ⟶ W)
+    (hu : t₁ ≫ t₂ ≫ d = q ≫ u ≫ R.map v)
+    (hp : L.map u ≫ a.counit.app W = p) :
+    L.map (t₁ ≫ t₂) ≫ (L.map d ≫ a.counit.app Z) = L.map q ≫ p ≫ v := by
+  rw [← L.map_comp_assoc, Category.assoc, hu, L.map_comp, L.map_comp]
+  simp only [Category.assoc]
+  have hn := a.counit.naturality v
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  rw [hn]
+  rw [← Category.assoc (L.map u), hp]
+
 /-- The canonical pullback comparison across a commuting square of open inclusions.
 Source: Stacks Project, Tag 0D5S, applied to the constructed open pullback comparisons. -/
 noncomputable def singleComplexOpenPullbackSquareIso
@@ -54,8 +69,6 @@ noncomputable def singleComplexOpenPullbackSquareIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- The representative calculation elaborates several derived functor comparisons.
 /-- The sectionwise direct-image comparison is the mate of the open pullback square.
 Stacks Project, Tags 08FE, 08BS and 08HY. -/
 theorem singleComplexOpen_counit_compatibility
@@ -101,17 +114,10 @@ theorem singleComplexOpen_counit_compatibility
     rw [← cancel_epi (L₀.map t)]
     change L₀.map t ≫ (L₀.map ((singleComplexOpenDirectImageIso f V).hom.app _) ≫
         (a (f ∣_ V)).counit.app _) = _
-    rw [← L₀.map_comp_assoc]
-    have hu := singleComplexOpen_directImage_unit f V J
-    dsimp only at hu
-    have hu' := hu
-    rw [← Category.assoc] at hu'
-    rw [hu', L₀.map_comp, L₀.map_comp]
-    simp only [Category.assoc]
-    erw [(a (f ∣_ V)).counit.naturality (rX.mapDerivedCategoryFactorsh.inv.app J)]
-    simp only [Functor.id_map]
-    erw [reassoc_of% (singleComplexOpen_pinned_counit_unit (f ∣_ V)
-      ((rX.mapHomotopyCategory (.up ℤ)).obj J))]
+    refine (counit_square_of_unit (a (f ∣_ V)) _ _ _ _ _ _ _
+      (singleComplexOpen_directImage_unit f V J)
+      (singleComplexOpen_pinned_counit_unit (f ∣_ V)
+        ((rX.mapHomotopyCategory (.up ℤ)).obj J))).trans ?_
     have hp := singleComplexOpen_pullback_counit_representative f V J
     simpa only [singleComplexOpenPullbackSquareIso, β, t, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, NatIso.ofComponents_hom_app,
@@ -121,7 +127,9 @@ theorem singleComplexOpen_counit_compatibility
       ((HomotopyCategory.quotient _ (.up ℤ)).obj I) :=
     e ≪≫ ((DerivedCategory.quotientCompQhIso _).app I).symm
   change α.app K = β.app K
-  rw [← cancel_mono (RX.map he.hom), ← α.naturality, ← β.naturality, hrep I]
+  apply (cancel_mono (RX.map he.hom)).1
+  exact (α.naturality he.hom).symm.trans
+    ((congrArg (fun k ↦ P.map he.hom ≫ k) (hrep I)).trans (β.naturality he.hom))
 
 
 end AlgebraicGeometry

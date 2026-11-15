@@ -113,8 +113,34 @@ private noncomputable def coherentSwapSequenceFunctor :
   map_comp f g := by apply SpectralSequence.hom_ext; intros; rfl
 
 
+/-- A complex supported above `a` contributes its whole cohomology at filtration step `a`. -/
+private theorem coherentFiltration_step_top (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (p a : ℤ)
+    (hbelow : ∀ n : ℤ, n < a → IsZero (K.obj.X n)) : (T.H p).step a = ⊤ := by
+  have hepi : Epi ((T.H p).step a).arrow := by
+    apply (AddCommGrpCat.epi_iff_surjective _).2
+    intro x
+    apply (etalePresentation_image_filtration X K T p a x).1
+    refine ⟨K.obj, hbelow, 𝟙 _, x, ?_⟩
+    simp
+  simpa only [Subobject.mk_arrow] using
+    (Subobject.epi_iff_mk_eq_top ((T.H p).step a).arrow).1 hepi
+
+/-- Filtration steps above the cohomological degree vanish. -/
+private theorem coherentFiltration_step_bot (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) (hpq : p < q) :
+    (T.H p).step q = ⊥ := by
+  rw [← Subobject.mk_arrow ((T.H p).step q), Subobject.mk_eq_bot_iff_zero]
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro x
+  have hx := (etalePresentation_image_filtration X K T p q _).2 ⟨x, rfl⟩
+  exact eq_zero_of_inEtaleHypercohomologyFiltration X K.obj p q hpq _ hx
+
+
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 700000 in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
 set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.
@@ -302,34 +328,26 @@ theorem exists_etale_complex_coherent_filtrations
       ((eG i.unop).inv ≫ L.ι.app i))
   let V := fun i ↦ (T₀ (D.obj i) ⟨F i, hFK i⟩).H p
   let W := (T₀ c.pt ⟨L.pt, hLK⟩).H p
-  have htop : W.step a = ⊤ := by
-    have hepi : Epi (W.step a).arrow := by
-      apply (AddCommGrpCat.epi_iff_surjective _).2
-      intro x
-      apply (etalePresentation_image_filtration c.pt ⟨L.pt, hLK⟩
-        (T₀ c.pt ⟨L.pt, hLK⟩) p a x).1
-      refine ⟨L.pt, hlimit, 𝟙 _, x, ?_⟩
-      simp
-    let := hepi
-    simpa only [Subobject.mk_arrow] using
-      (Subobject.epi_iff_mk_eq_top (W.step a).arrow).1 hepi
-  have hbot : W.step (max a (p + 1)) = ⊥ := by
-    rw [← Subobject.mk_arrow (W.step (max a (p + 1))), Subobject.mk_eq_bot_iff_zero]
-    apply AddCommGrpCat.hom_ext
-    apply AddMonoidHom.ext
-    intro x
-    have hx := (etalePresentation_image_filtration c.pt ⟨L.pt, hLK⟩
-      (T₀ c.pt ⟨L.pt, hLK⟩) p (max a (p + 1)) _).2 ⟨x, rfl⟩
-    exact eq_zero_of_inEtaleHypercohomologyFiltration c.pt L.pt p
-      (max a (p + 1)) (by omega) _ hx
+  have htop : W.step a = ⊤ :=
+    coherentFiltration_step_top c.pt ⟨L.pt, hLK⟩ (T₀ c.pt ⟨L.pt, hLK⟩) p a hlimit
+  have hbot : W.step (max a (p + 1)) = ⊥ :=
+    coherentFiltration_step_bot c.pt ⟨L.pt, hLK⟩ (T₀ c.pt ⟨L.pt, hLK⟩) p
+      (max a (p + 1)) (by omega)
+  choose t ht hc hs using fun i : I ↦ hfiltered (X := D.obj i) (Y := c.pt) (c.π.app i)
+    ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩ ((eG i).inv ≫ L.ι.app (op i)) p
+  have ht' (i : I) (z : ℤ) : t i z ≫ (W.step z).arrow =
+      ((V i).step z).arrow ≫ P (c.π.app i) (F i) ≫
+        (cohomology AddCommGrpCat.{u + 1} c.pt p).map
+          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))) := by
+    simpa only [hP₀, Category.assoc] using ht i z
   refine ⟨E, E', v, ?_,
     (fun i r s ↦ (T₀ (D.obj i) ⟨F i, hFK i⟩).firstPageIso r s),
     (fun r s ↦ (T₀ c.pt ⟨L.pt, hLK⟩).firstPageIso r s),
     ?_, ?_, ?_, ?_, V, W, htop, hbot, ?_⟩
   · intro i j f
-    change coherentSwapSequenceMap _ ≫ coherentSwapSequenceMap _ =
-      coherentSwapSequenceMap _
-    exact congrArg coherentSwapSequenceMap (hmcone i.unop j.unop f.unop)
+    change coherentSwapSequenceFunctor.map _ ≫ coherentSwapSequenceFunctor.map _ =
+      coherentSwapSequenceFunctor.map _
+    rw [← Functor.map_comp, hmcone i.unop j.unop f.unop]
   · intro i j f r s
     exact hfirst (D.map f) ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ (φ f) r s
   · intro i r s
@@ -351,12 +369,7 @@ theorem exists_etale_complex_coherent_filtrations
     let e' := eInf c.pt ⟨L.pt, hLK⟩ q p N one_le hR'
     refine ⟨N, one_le, e, e', ?_⟩
     intro i
-    obtain ⟨t, ht, hc, hs⟩ := hfiltered (X := D.obj i) (Y := c.pt) (c.π.app i)
-      ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩ ((eG i).inv ≫ L.ι.app (op i)) p
-    refine ⟨t, ?_, hc, ?_⟩
-    · intro z
-      simpa only [hP₀, Category.assoc] using ht z
-    · exact hs q N one_le (hR i) hR'
+    exact ⟨t i, ht' i, hc i, hs i q N one_le (hR i) hR'⟩
 
 
 end AlgebraicGeometry.Etale

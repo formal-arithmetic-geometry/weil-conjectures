@@ -165,7 +165,16 @@ private theorem target_diagram_cancel
   simp only [Category.assoc]
   rw [hm, IsIso.inv_hom_id, Category.comp_id, hβ, ← Category.assoc, hj]
 
-set_option maxHeartbeats 500000 in
+-- Compose a comparison square before specializing the objects to section complexes.
+private theorem map_comparison_square {A B : Type*} [Category* A] [Category* B]
+    (H : A ⥤ B) {X X' Y Y' Z Z' : A}
+    (a : X ⟶ Y) (a' : X' ⟶ Y') (l : Y ⟶ Z) (l' : Y' ⟶ Z')
+    (i : X ⟶ X') (j : Y ⟶ Y') (q : Z ⟶ Z')
+    (ha : a ≫ j = i ≫ a') (hl : H.map l ≫ H.map q = H.map j ≫ H.map l') :
+    H.map (a ≫ l) ≫ H.map q = H.map i ≫ H.map (a' ≫ l') := by
+  rw [H.map_comp, Category.assoc, hl, ← Category.assoc, ← H.map_comp,
+    ha, H.map_comp, H.map_comp, Category.assoc]
+
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
@@ -208,11 +217,13 @@ private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     have hh := (ΓY.mapHomotopy hl.some).homologyMap_eq p
     change H.map (HY.map (C.lambda ≫ e)) =
       H.map (HY.map (_ ≫ C'.lambda)) at hh
-    dsimp [m, q, i, m']
-    rw [Functor.map_comp, Category.assoc, ← Functor.map_comp, ← HY.map_comp,
-      hh, HY.map_comp, Functor.map_comp, ← Category.assoc, ← Functor.map_comp,
-      sectionsComparison_naturality h b, Functor.map_comp, Category.assoc]
-    rw [Functor.map_comp]
+    exact map_comparison_square H C.a.hom C'.a.hom
+      (HY.map C.lambda) (HY.map C'.lambda)
+      (HX.map (InjectiveResolution.desc b C'.I C.I))
+      (HY.map (((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).map
+        (InjectiveResolution.desc b C'.I C.I))) (HY.map e)
+      (sectionsComparison_naturality h b C C')
+      (by simpa only [Functor.map_comp] using hh)
   have hi := resolutionSectionsIso_naturality
     (RingedSpace.globalSectionsFunctor X.toRingedSpace) b C.I C'.I p
   have hj := resolutionSectionsIso_naturality

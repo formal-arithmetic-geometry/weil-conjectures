@@ -26,8 +26,18 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
--- Elaborating the iterated derived restriction and the biproduct map equation needs this budget.
+private theorem stabilized_biprod_fst_comparison
+    {C : Type*} [Category C] [HasZeroMorphisms C] [HasBinaryBiproducts C]
+    {A B A' B' N P E : C} (e : A ≅ A') (s : B ≅ B')
+    (d : N ≅ A ⊞ B) (h : P ≅ A' ⊞ B')
+    (f : A ⟶ E) (a : A' ⟶ E) (b : P ⟶ E) (g : N ⟶ E)
+    (hf : f = e.hom ≫ a) (hg : g = d.hom ≫ biprod.fst ≫ f)
+    (hb : b = h.hom ≫ biprod.fst ≫ a) :
+    g = (d ≪≫ biprod.mapIso e s ≪≫ h.symm).hom ≫ b := by
+  rw [hg, hf, hb]
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    Iso.inv_hom_id_assoc, biprod.mapIso_hom, biprod.map_fst_assoc]
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine-cover construction extends one finite stabilization of the given map.
 This records the actual iterated object and its first-projection map.
@@ -128,9 +138,9 @@ theorem exists_perfect_supported_stabilized_lift
     let d := biprod.mapIso e
       ((shiftFunctor (schemeDerivedCategory U.toScheme) (1 : ℤ)).mapIso e)
     refine ⟨n + 1, R', β', hR', hRT', e' ≪≫ d ≪≫ (hS n).symm, ?_⟩
-    rw [he', he, ha n]
-    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
-      Iso.inv_hom_id_assoc, d, biprod.mapIso_hom, biprod.map_fst_assoc]
+    exact stabilized_biprod_fst_comparison e
+      ((shiftFunctor (schemeDerivedCategory U.toScheme) (1 : ℤ)).mapIso e)
+      e' (hS n) _ (a n) (a (n + 1)) _ he he' (ha n)
   obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
     (fun V : X.affineOpens ↦ (V.val : Set X)) (fun V ↦ V.val.isOpen) (by
       intro x _

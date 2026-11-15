@@ -62,6 +62,25 @@ lemma exists_retraction_of_eq_comp_map_comp_of_invariant {C D E : Type*} [Catego
     simp only [Category.assoc, Iso.hom_inv_id_assoc]
     rw [← F₂.map_comp_assoc, ← F₁.map_comp, hinv]
 
+/-- A retraction invariant under endomorphisms stays invariant after applying a functor and
+transporting along isomorphisms. If the transported action fixes the inclusion, its projector
+is fixed on both sides. -/
+private lemma exists_invariant_retraction_of_conjugate {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (R : T ⟶ A) (η : A ⟶ T)
+    (hR : η ≫ R = 𝟙 A)
+    (i : P ≅ F.obj A) (κ : F.obj T ≅ Q) (hα : α = i.hom ≫ F.map η ≫ κ.hom)
+    {ι : Type*} (u : ι → (T ⟶ T)) (hinv : ∀ σ, u σ ≫ R = R)
+    (ρ : ι → (Q ⟶ Q)) (hfix : ∀ σ, α ≫ ρ σ = α)
+    (hρ : ∀ σ, ρ σ = κ.inv ≫ F.map (u σ) ≫ κ.hom) :
+    ∃ r, α ≫ r = 𝟙 P ∧ ∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α := by
+  refine ⟨κ.inv ≫ F.map R ≫ i.inv, ?_, fun σ ↦ ⟨?_, ?_⟩⟩
+  · rw [hα]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc, hR, F.map_id,
+      Category.id_comp, Iso.hom_inv_id]
+  · rw [hρ]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc, hinv]
+  · rw [Category.assoc, hfix]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
@@ -72,9 +91,26 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
 
-set_option maxHeartbeats 1600000 in
--- matching the objects of the Galois layer with the unfolded composite of derived functors
--- (`κ`, `α`) is a large defeq check
+/-- The Galois layer exchange is the image of the derived unit, transported by the identity
+and Galois layer exchange isomorphisms. -/
+private lemma pullbackExchange_galoisLayerHom_app_eq_map_unit
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  rw [Functor.map_comp] at hα
+  dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
+    Iso.symm, Iso.app]
+  exact hα
+
 /-- **Invariant retractions of the derived unit give invariant retractions of the exchange.** Let
 `R : Rg_* Lg^* A ⟶ A` be a retraction of the derived unit at `A = Lε^* C`, for the projection
 `g : G_Ω ⟶ N.generic`, which is invariant under the derived unit transports along all the
@@ -100,20 +136,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant
         (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) ≫
             N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C) =
           r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C := by
-  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
-    (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp] at hα
-  have key := exists_retraction_of_eq_comp_map_comp_of_invariant R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧) _
-    ((leftDerivedUpperStarId Λ X').app _) _ (N.galoisLayerExchangeIso h Ω Λ C) rfl _ R hα hR
-    (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
-      (pullbackAction_fst h _ specGaloisAction_comp σ)
-      (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
+  exact exists_invariant_retraction_of_conjugate (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
+    (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
+    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
+    (N.galoisLayerExchangeIso h Ω Λ C)
+    (pullbackExchange_galoisLayerHom_app_eq_map_unit Λ N h Ω C) _ hinv
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
-    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C) hinv
-  obtain ⟨r, h₁, h₂⟩ := key
-  refine ⟨r, h₁, fun σ ↦ ⟨?_, ?_⟩⟩
-  · exact h₂ σ
-  · rw [Category.assoc, pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction]
+    (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
+    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

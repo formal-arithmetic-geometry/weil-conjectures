@@ -95,8 +95,6 @@ def cohomologyOpenRestriction {Y : Scheme.{u}} (G : Y.Modules)
       (pushforward j).map c.hom) p
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 800000 in
--- Comparing section complexes unfolds the scheme and ringed-space module interfaces.
 /-- The normalized resolution class commutes with restriction between arbitrary opens.
 No affineness, quasi-coherence, base change or scalar extension is assumed.
 Stacks Project, Tag 01E4, Lemma 20.7.3; Tag 01FB, Remark 20.14.2. -/
@@ -127,37 +125,59 @@ theorem resolutionSectionClass_open_restriction
     (f.preimage_mono eWV) R R' p
   have hn := sectionClass_open_restriction K V W eWV p
   dsimp only at hn
+  let := RingedSpace.globalSectionsFunctor_additive (f ⁻¹ᵁ V).toScheme.toRingedSpace
+  let := RingedSpace.globalSectionsFunctor_additive (f ⁻¹ᵁ W).toScheme.toRingedSpace
+  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
+  let aV := (forget₂ _ AddCommGrpCat.{u}).map
+    (R.resolution.isoRightDerivedObj
+      (RingedSpace.globalSectionsFunctor (f ⁻¹ᵁ V).toScheme.toRingedSpace) p).hom ≫
+    (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
+      (forget₂ _ AddCommGrpCat.{u})).inv ≫ H.map R.sections.hom
+  let aW := (forget₂ _ AddCommGrpCat.{u}).map
+    (R'.resolution.isoRightDerivedObj
+      (RingedSpace.globalSectionsFunctor (f ⁻¹ᵁ W).toScheme.toRingedSpace) p).hom ≫
+    (((RingedSpace.globalSectionsComplex R'.resolution).sc p).mapHomologyIso
+      (forget₂ _ AddCommGrpCat.{u})).inv ≫ H.map R'.sections.hom
+  let tV := (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
+    (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso
+      (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
+        (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V))).hom ≫
+    ((PresheafOfModules.toPresheaf S.ringCatSheaf.obj).map
+      (sectionCohomologyTheta K p)).app (op V)
+  let tW := (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
+    (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso
+      (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
+        (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op W))).hom ≫
+    ((PresheafOfModules.toPresheaf S.ringCatSheaf.obj).map
+      (sectionCohomologyTheta K p)).app (op W)
+  let r := (NatTrans.mapHomologicalComplex
+    (Functor.whiskerLeft (SheafOfModules.forget X.ringCatSheaf ⋙
+      PresheafOfModules.toPresheaf X.ringCatSheaf.obj)
+      ((CategoryTheory.evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).map
+        (homOfLE (f.preimage_mono eWV)).op)) (ComplexShape.up ℕ)).app I.cocomplex
+  have hrSq : CommSq aV
+      (cohomologyOpenRestriction F (f ⁻¹ᵁ V) (f ⁻¹ᵁ W) (f.preimage_mono eWV) p)
+      (H.map r) aW := by
+    constructor
+    simpa only [aV, aW, Category.assoc, cohomologyOpenRestriction] using hr.symm
+  have hnSq : CommSq tV (H.map r)
+      ((K.homology p).presheaf.map (homOfLE eWV).op) tW := by
+    have hrmap : r = (NatTrans.mapHomologicalComplex
+        (Functor.whiskerLeft (SheafOfModules.forget S.ringCatSheaf ⋙
+          PresheafOfModules.toPresheaf S.ringCatSheaf.obj)
+          ((CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).map
+            (homOfLE eWV).op)) (ComplexShape.up ℕ)).app K := by
+      ext n
+      rfl
+    rewrite [hrmap]
+    constructor
+    simpa only [tV, tW, Category.assoc] using hn.symm
   have hs : cohomologyOpenRestriction F (f ⁻¹ᵁ V) (f ⁻¹ᵁ W)
       (f.preimage_mono eWV) p ≫ resolutionSectionClass R'.resolution K W R'.sections p =
     resolutionSectionClass R.resolution K V R.sections p ≫
       (K.homology p).presheaf.map (homOfLE eWV).op := by
-    unfold resolutionSectionClass
-    simp only [Category.assoc]
-    rw [← hn]
-    have hrmap :
-        ((NatTrans.mapHomologicalComplex
-          (Functor.whiskerLeft (SheafOfModules.forget X.ringCatSheaf ⋙
-            PresheafOfModules.toPresheaf X.ringCatSheaf.obj)
-            ((CategoryTheory.evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).map
-              (homOfLE (f.preimage_mono eWV)).op))
-          (ComplexShape.up ℕ)).app I.cocomplex) =
-        ((NatTrans.mapHomologicalComplex
-          (Functor.whiskerLeft (SheafOfModules.forget S.ringCatSheaf ⋙
-            PresheafOfModules.toPresheaf S.ringCatSheaf.obj)
-            ((CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).map
-              (homOfLE eWV).op))
-          (ComplexShape.up ℕ)).app K) := by
-      ext n
-      rfl
-    rw [hrmap] at hr
-    have hr' := congrArg (fun q ↦ q ≫
-      (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
-        (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso
-          (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
-            (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op W))).hom ≫
-      ((PresheafOfModules.toPresheaf S.ringCatSheaf.obj).map
-        (sectionCohomologyTheta K p)).app (op W)) hr
-    simpa only [Category.assoc, cohomologyOpenRestriction] using hr'
+    simpa only [aV, aW, tV, tW, resolutionSectionClass, Category.assoc] using
+      (hrSq.horiz_comp hnSq).w.symm
   have hφ := ((SheafOfModules.forget S.ringCatSheaf ⋙
     PresheafOfModules.toPresheaf S.ringCatSheaf.obj).map φ).naturality
       (homOfLE eWV).op
@@ -165,7 +185,7 @@ theorem resolutionSectionClass_open_restriction
     Hom.app φ V ≫ Q.presheaf.map (homOfLE eWV).op at hφ
   have ht := congrArg (fun q ↦ q ≫ Hom.app φ W) hs
   simp only [Category.assoc] at ht
-  rw [hφ] at ht
+  rewrite [hφ] at ht
   dsimp only
   intro y
   have hy := ConcreteCategory.congr_hom ht y
