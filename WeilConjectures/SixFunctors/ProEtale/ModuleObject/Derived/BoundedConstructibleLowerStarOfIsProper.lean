@@ -12,20 +12,18 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStar
 
 # The derived pushforward along a proper morphism on bounded constructible complexes
 
-The notes' proper direct image of constructible complexes: for a proper morphism
+The proper direct image of constructible complexes: for a proper morphism
 `p : X ⟶ Y` of `k`-schemes of finite type, `ℓ` invertible in `k`, the derived pushforward `Rp_*`
 carries bounded constructible complexes to bounded constructible complexes, for each of the three
-`ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E`. The notes prove this (chapter 4) from integral
-models, inverting `ℓ` and the continuity of cohomology, before the six operations on `Dᵇc`
-(chapter 7); in Lean the proof is
+`ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E`. The proof is
 `boundedConstructible_rightDerivedLowerStar_of_isProper_*_of_finiteType`
-(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicFiniteness`),
-which does not go through Deligne's finiteness theorem for arbitrary `f`
-(`boundedConstructible_rightDerivedLowerStar_obj`).
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicFiniteness`):
+integral models, inverting `ℓ` and the continuity of cohomology. It does not go through Deligne's
+finiteness theorem for arbitrary `f` (`boundedConstructible_rightDerivedLowerStar_obj`).
 
 This file bundles that proper-only finiteness into the functor and the adjunction that the
-constructions of chapters 5–6 (`Rf_! = i_! ⋙ Rp_*`, its independence of the compactification,
-composition and base change, `f^!`) use for the proper leg, in the setting of
+constructions of `Rf_! = i_! ⋙ Rp_*`, its independence of the compactification, composition and
+base change, and `f^!` use for the proper leg, in the setting of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` (morphisms of
 `Over (Spec (.of k))`), for each coefficient ring:
 

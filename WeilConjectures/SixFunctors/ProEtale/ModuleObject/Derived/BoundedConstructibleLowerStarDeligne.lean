@@ -29,11 +29,10 @@ for `Rf_*`, for each of the three `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E
   composition isomorphism `boundedConstructibleLowerStarComp`.
 
 The derived lower shriek `Rf_! = i_! ⋙ Rp_*` on `Dᵇc` and the monoidal closed structure are in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar`; as in
-the notes (proper direct image of constructible complexes), the proper leg `Rp_*` of
-`Rf_!` is the proper-only functor
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar`; the
+proper leg `Rp_*` of `Rf_!` is the proper-only functor
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarOfIsProper`,
-not the general one of this file (route alignment, LEAN-EDIT-REQUEST U1a).
+not the general one of this file.
 
 ## Proof of the finiteness theorem
 

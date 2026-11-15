@@ -28,11 +28,9 @@ for each of the three `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E̲` and `�
 * the derived lower shriek `Rf_!^c := i_! ⋙ Rp_*` for a compactification `c`
   (`boundedConstructibleLowerShriekOfCompactification`) and `Rf_!` for the compactification
   `compactificationOverField f` (`boundedConstructibleLowerShriek`), with their compatibilities
-  with the derived lower shrieks on the ambient derived categories. As in the notes (the
-  construction of `Rf_!` and its independence of the compactification rest on the proper direct
-  image of constructible complexes), the proper leg `Rp_*` is the proper-only functor
-  `boundedConstructibleLowerStarOfIsProper`, which rests on the proper finiteness theorem and not
-  on Deligne's finiteness theorem for arbitrary `f`;
+  with the derived lower shrieks on the ambient derived categories. The proper leg `Rp_*` is the
+  proper-only functor `boundedConstructibleLowerStarOfIsProper`, which rests on the proper
+  finiteness theorem and not on Deligne's finiteness theorem for arbitrary `f`;
 * the monoidal closed structure on `Dᵇc(X)⟦Λ⟧`: `isMonoidalClosed_boundedConstructible`
   (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`, by noetherian induction from the lisse case,
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom`, using
@@ -84,7 +82,7 @@ variable {f : X ⟶ Y} (c : Compactification f.left)
 constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶[p] Y.left)` of
 `f.left`: the extension by zero along the open immersion `i` followed by the
 derived pushforward along the proper morphism `p` (the proper-only functor
-`boundedConstructibleLowerStarOfIsProper`, as in the notes), both on bounded constructible
+`boundedConstructibleLowerStarOfIsProper`), both on bounded constructible
 complexes, for `i` and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactification :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
@@ -155,7 +153,7 @@ variable {f : X ⟶ Y} (c : Compactification f.left)
 constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶[p] Y.left)` of
 `f.left`: the extension by zero along the open immersion `i` followed by the
 derived pushforward along the proper morphism `p` (the proper-only functor
-`boundedConstructibleLowerStarOfIsProper`, as in the notes), both on bounded constructible
+`boundedConstructibleLowerStarOfIsProper`), both on bounded constructible
 complexes, for `i` and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactification :
     Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
@@ -230,7 +228,7 @@ variable {f : X ⟶ Y} (c : Compactification f.left)
 constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶[p] Y.left)` of
 `f.left`: the extension by zero along the open immersion `i` followed by the
 derived pushforward along the proper morphism `p` (the proper-only functor
-`boundedConstructibleLowerStarOfIsProper`, as in the notes), both on bounded constructible
+`boundedConstructibleLowerStarOfIsProper`), both on bounded constructible
 complexes, for `i` and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactification :
     Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ

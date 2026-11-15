@@ -229,17 +229,7 @@ theorem isIso_algClCoefficientPushHom_boundedBelow
   let : K.IsGE N := hN
   exact isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE ℓ p.left E K N
 
-/-- Proper pushforward preserves bounded constructible complexes with rational coefficients.
-Source: blueprint rational proper direct image, clause 2
-(blueprint: proposition-proper-direct-image-constructible-complexes).
-
-Proof: `p` is proper, so this is the proper-only finiteness of chapter 4
-(`boundedConstructible_rightDerivedLowerStar_obj_of_isProper` for `ℚ̄_ℓ` and for the finite
-subextensions `E`, from
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicFiniteness`),
-selected by the bundled coefficient-ring equality; the general finiteness theorem for every `f`
-(`boundedConstructible_rightDerivedLowerStar_obj`, chapter 7) is not used, as in the notes.
--/
+/-- Proper pushforward preserves bounded constructible complexes with rational coefficients. -/
 theorem properPushforward_boundedConstructible_rational
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     [IsCommMonObj Λ.X]
