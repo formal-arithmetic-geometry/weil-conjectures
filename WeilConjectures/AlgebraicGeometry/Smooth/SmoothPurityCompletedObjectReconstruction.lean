@@ -21,7 +21,7 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # Complete objects as normalized ell-power tower limits
 
-Source: latest blueprint, sec-smooth-purity, sk-lem-sp-tower-equivalence.proof.md.
+Source: latest blueprint, chap-Smooth-purity, sk-lem-sp-tower-equivalence.proof.md.
 (blueprint: lem-sp-completed-object-reconstruction).
 -/
 

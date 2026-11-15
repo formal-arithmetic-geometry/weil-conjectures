@@ -47,7 +47,7 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 /-! # Relative torsor extensions and normalized supported cohomology
 
 Source: Stacks Project, Tags 03AJ, 06XR, 06XV and 0A45, relative refinement;
-blueprint lem-pur-divisor-class, first sentence and forget-support paragraph
+blueprint lemma-cycle-class-cartier-divisor, first sentence and forget-support paragraph
 (blueprint: lem-pur-relative-extension-cohomology-normalization).
 
 The comparison is uniquely specified on every resolution cocycle by evaluation at one

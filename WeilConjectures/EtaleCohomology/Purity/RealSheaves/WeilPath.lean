@@ -17,7 +17,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 Let `C₀` be a curve over the finite field `K` with Weil group `W`, presented through the étale
 fundamental group `π₁(C₀, s)` at the geometric base point `s`, and let `C = C₀ ×_K K̄` be the
 geometric curve with projection `C ⟶ C₀` and geometric Galois Frobenius `Fr`. The Weil
-fundamental representation of a lisse Weil sheaf (`def-wf-fundamental-representation`) is the
+fundamental representation of a lisse Weil sheaf (`situation-weil`) is the
 stalk at a geometric point `t` of `C`, with the action of `π₁(C, t)` and the operator induced by
 the Weil structure after "the usual transport of the stalk from `Fr(t)` to `t`". This file fixes
 the auxiliary data of that construction
@@ -44,7 +44,7 @@ open Scheme.FiniteEtale
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
   (W : WeilGroup p)
 
-/-- The auxiliary data of the Weil fundamental representation (`def-wf-fundamental-representation`):
+/-- The auxiliary data of the Weil fundamental representation (`situation-weil`):
 a `K̄`-rational geometric point `t` of the geometric curve `C`, a path from its image in `C₀` to
 the base point `s` of the Weil group, and a path `β` from `t` to `t ≫ Fr`. -/
 structure BasePointData where

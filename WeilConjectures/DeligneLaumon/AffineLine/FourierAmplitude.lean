@@ -14,7 +14,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 
 This file collects the statements about the ordinary cohomology sheaves of the Fourier–Deligne
 transform `FT_ψ` of the affine line which enter the perverse t-exactness of `FT_ψ`
-(blueprint `thm-a1-fourier-t-exact`):
+(blueprint `proposition-fourier-transform-perverse-heart--1`):
 
 - `FT_ψ` lowers the lower bound of the cohomological amplitude by at most one, since `Rpr₂!` is
   left t-exact and `pr₁^*` and the tensor product with the lisse kernel are exact
@@ -231,7 +231,7 @@ end WeilComplex
 
 /-- **Fourier inversion** on the line: `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`, the shifts
 `[-2][1][1]` of `nonempty_iso_fourierTransform_comp_inv` cancelled.
-(blueprint: `lem-fd-inversion`) -/
+(blueprint: `proposition-fourier-inversion`) -/
 theorem nonempty_fourierTransform_comp_fourierTransform_inv_iso
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     Nonempty (fourierTransform ψ ⋙ fourierTransform ψ⁻¹ ≅

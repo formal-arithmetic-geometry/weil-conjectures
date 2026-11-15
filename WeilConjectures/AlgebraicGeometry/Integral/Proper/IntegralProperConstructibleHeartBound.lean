@@ -130,7 +130,7 @@ theorem integralProperConstructibleHeartBound_of_isNoetherian
 
 set_option linter.unusedVariables false in
 /-- Proper direct image of a constructible integral sheaf vanishes above 2d+1.
-Source: blueprint main-20261015, det-prop-int-compactness-direct-sums, proof (1),
+Source: blueprint main-20261015, proposition-compactness-proper-direct-image--2, proof (1),
 constructible heart estimate (blueprint: lem-sfb-integral-proper-constructible-heart-bound).
 
 Proof: Transport the continuous integer coefficients to the completion convention.

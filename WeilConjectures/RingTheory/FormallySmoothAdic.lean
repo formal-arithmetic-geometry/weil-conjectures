@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 Source: Stacks Project, More on Algebra, Definition 15.38.1 (Tag 07EB),
 Lemma 15.38.2 (Tag 07EC), and Definition 15.38.3 (Tag 07NI)
-(blueprint: def-weil-pbc-formally-smooth-adic).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ namespace Algebra
 is formally smooth over `R` for the `n`-adic topology if every `R`-algebra map
 `g : S → D/J` killing some positive power of `n` lifts across each square-zero ideal
 `J` of every commutative `R`-algebra `D` (Stacks, Tags 07EB and 07NI).
-(blueprint: def-weil-pbc-formally-smooth-adic)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 The power condition says that `g` is continuous from the `n`-adic topology to the
 discrete topology (Tag 07E9). Any lift `f` kills `n ^ (2 * k)` if `g` kills `n ^ k`:

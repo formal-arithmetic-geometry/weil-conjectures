@@ -493,11 +493,36 @@ private theorem option_exchange_paste
 
 end ProofHelpers
 
+-- Assemble and normalize the exchange before specializing the coefficient rings.
+private theorem option_line_exchange_square
+    (l : ℕ) [Fact l.Prime] (c c' : Option (PadicAlgCl.FiniteIntermediateField l))
+    (a : (coefficient.{u} l c).X ⟶ (coefficient l c').X) [IsMonHom a]
+    [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
+    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
+    {mP : (line l c (ProjectiveLine Y)).X ⟶ (line l c' (ProjectiveLine Y)).X}
+    {mW : (line l c (diagonalSurface Y)).X ⟶ (line l c' (diagonalSurface Y)).X}
+    (cP : Endpoint a (line l c (ProjectiveLine Y)) (line l c' (ProjectiveLine Y)) mP)
+    (cW : Endpoint a (line l c (diagonalSurface Y)) (line l c' (diagonalSurface Y)) mW)
+    (he : PullEndpointSquare (derivedPullIso a (firstProjection Y)).hom
+      (cP.shift a) (firstLineComparisonForTrace l c k p hpl Y).hom
+      (firstLineComparisonForTrace l c' k p hpl Y).hom (cW.shift a)) :
+    PullArrowSquare (derivedPullIso a (ProjectiveLine Y ↘ Y))
+      ((derivedPushHom a (ProjectiveLine Y ↘ Y)).app _ ≫
+        (moduleObjectDerivedPushforward (coefficient l c').X (ProjectiveLine Y ↘ Y)).map
+          (cP.shift a))
+      (secondTraceExchange l c k p hpl Y) (secondTraceExchange l c' k p hpl Y)
+      ((derivedPushHom a (secondProjection Y)).app _ ≫
+        (moduleObjectDerivedPushforward (coefficient l c').X (secondProjection Y)).map
+          (cW.shift a)) := by
+  have h := option_exchange_paste l c c' a k p hpl Y cP cW he
+  unfold PullArrowSquare at h ⊢
+  coefficient_finish h
+
 -- At concrete selectors, use the existing monoid and flatness instances of the fields.
 set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
-set_option maxHeartbeats 1700000 in
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
 This is the line-only substep of the rational P1 closure naturality proof; it has
@@ -561,12 +586,13 @@ theorem rational_p1_line_exchange_assembly
     (by
       dsimp only [abelianComparison]
       exact (adicComparison l (firstProjection Y)).qbar_coprojection E)
-  have h := option_exchange_paste l (some E) none a k p hpl Y cP cW (by
+  have h := option_line_exchange_square l (some E) none a k p hpl Y cP cW (by
     unfold firstLineComparisonForTrace
     unfold PullEndpointSquare at he ⊢
     coefficient_finish he)
   unfold LineExchangeSquare finiteSecondTraceExchange closureSecondTraceExchange
   unfold PullArrowSquare at h ⊢
-  coefficient_finish h
+  dsimp only [coefficient, line] at h
+  exact h
 
 end AlgebraicGeometry.ProEtale.RationalP1

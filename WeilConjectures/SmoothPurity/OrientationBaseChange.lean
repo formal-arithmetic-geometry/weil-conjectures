@@ -31,8 +31,8 @@ pulled back along `g'` and followed by the exceptional base change map
 
 This is a property of the sorried definition `smoothOrientation` of
 `WeilConjectures.SmoothPurity.Defs`: the compatibility of smooth purity with base change
-(blueprint `sk-prop-sp-purity-bc`, `u^*γ_f(K) = γ_{f'}(v^*K)`) at the unit `K = ℚ̄_ℓ,Y`, owed by
-the smooth purity section. It is proved here as
+(blueprint `proposition-compatibility-purity-base-change`, `u^*γ_f(K) = γ_{f'}(v^*K)`) at the unit
+`K = ℚ̄_ℓ,Y`, owed by the smooth purity section. It is proved here as
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation_baseChange`, from smooth base
 change for `Rf^!` and the compatibility of the reduction modulo `ℓ` with proper base change; the
 base change compatibilities of the smooth trace and of the purity map are derived from it.
@@ -107,8 +107,8 @@ theorem smoothOrientation_baseChange_of_etaleReductionProperBaseChangeCompatible
     (𝟙_ _)
   exact smoothOrientation_baseChange_of_isIso ℓ sq d inferInstance inferInstance
 
-/-- Blueprint `sk-prop-sp-purity-bc` at the unit (owed by the smooth purity section,
-`sec-smooth-purity`): **the orientation is compatible with base change**. For a
+/-- Blueprint `proposition-compatibility-purity-base-change` at the unit (owed by the smooth purity
+section, `chap-Smooth-purity`): **the orientation is compatible with base change**. For a
 cartesian square with `f` (hence `f'`) smooth of pure relative dimension `d`, the pullback of the
 orientation `γ_f : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, followed by the exceptional base change map at the
 unit and `Rf'^! Lg^* ℚ̄_ℓ,Y ≅ Rf'^! ℚ̄_ℓ,Y'`, is the orientation `γ_{f'}` up to an isomorphism

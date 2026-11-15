@@ -43,7 +43,6 @@ attribute [local irreducible] nativeRingedAssociatorComplex
 variable [HasDerivedCategory.{u + 2}
   (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The ringed cochain monoidal structure needs a deep search for its graded tensor instances.
 /-- The defining chain square commutes with derived localization.
 Source: Stacks 0FPQ, 0FPT

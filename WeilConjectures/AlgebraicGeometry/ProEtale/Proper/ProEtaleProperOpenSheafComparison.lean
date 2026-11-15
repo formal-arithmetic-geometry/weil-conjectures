@@ -40,8 +40,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Proper.ProEtaleProperOpenCouni
 /-!
 # Proper/open comparison for all pro-etale module sheaves
 
-Source: blueprint main-20261015, prop-exc-base-change-proper, proof Steps 3–4;
-Stacks Project, Tags 09AE and 09BN (open functors), with etale analogue Tag 0F7B
+Source: blueprint main-20261015, proposition-composition-open-restriction-compactifications-f--5,
+proof Steps 3–4; Stacks Project, Tags 09AE and 09BN (open functors), with etale analogue Tag 0F7B
 (blueprint: lem-exc-proetale-proper-open-sheaf-comparison).
 
 The comparison uses sectionwise open restriction and the inverse open unit, followed
@@ -178,9 +178,9 @@ theorem sfProperOpenCounit_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
 sheaf over a finite commutative constant ring, with its canonical comparison and naturality.
 There is no quasi-compactness condition on the open immersion and no boundedness or
 etale-origin restriction on the module sheaf.
-Source: blueprint main-20261015, prop-exc-base-change-proper, proof Steps 3–4,
-agent-extracted degree-zero obligation; Stacks, Tags 09AE and 09BN; etale analogue 0F7B
-(blueprint: lem-exc-proetale-proper-open-sheaf-comparison).
+Source: blueprint main-20261015, proposition-composition-open-restriction-compactifications-f--5,
+proof Steps 3–4, agent-extracted degree-zero obligation; Stacks, Tags 09AE and 09BN; etale analogue
+0F7B (blueprint: lem-exc-proetale-proper-open-sheaf-comparison).
 
 Proof plan, following the node's twelve steps:
 1. Restrict the zero-extension presheaf to the open and use localization to identify
@@ -188,7 +188,7 @@ Proof plan, following the node's twelve steps:
    isomorphism. Direct-image evaluation on the identical fibre products gives `λ`.
    The triangle identity says that the open restriction of `γ`, followed by `λ`, is
    the identity (`def-weil-extension-by-zero`, `lem-weil-proetale-weakly-etale-localization`,
-   `def-weil-pbc-proetale-operations`, `lem-weil-extension-by-zero-adjunction`).
+   `prose-03-02`).
 2. The presheaf map defining the open counit is the identity over the open and the map
    from zero otherwise, hence injective. Exact module sheafification makes it monic;
    therefore `γ` is monic. The same argument makes the maps of zero extensions from
@@ -197,8 +197,9 @@ Proof plan, following the node's twelve steps:
    fibre-product evaluation identify the restricted map with the same `γ` for
    `V_Q → Q`; its normalization is preserved by the open adjunction. Properness and
    openness survive base change, and `V_Q` is quasi-compact and separated over Q
-   (`lem-cbc-proetale-extension-zero-base-change`, `lem-weil-pbc-proper-base-change`,
-   `lem-weil-pbc-open-immersion-base-change`, `def-weil-finite-type-morphism`).
+   (`proposition-extension-zero-restriction-closed-subscheme--11`,
+   `lem-weil-pbc-proper-base-change`, `lem-weil-pbc-open-immersion-base-change`,
+   `def-weil-finite-type-morphism`).
 4. First take the open of affine Q to be quasi-compact, hence a finite union of
    principal opens `D(f_a)`, including the empty union. Let I be their ideal and
    localize at the elements invertible modulo I. The principal opens and this closed
@@ -221,7 +222,7 @@ Proof plan, following the node's twelve steps:
    are affine by separatedness over the affine base, and their inverse images in
    the localization have finite principal affine covers
    (`lem-weil-pbc-separated-affine-open-intersection`, `def-weil-closed-immersion`,
-   `def-weil-pbc-proetale-covering`,
+   `definition-small-pro-etale-site--1`,
    `lem-weil-pbc-affine-closed-specialization-localization`).
 8. Apply specialization-zero on each chart of this cover. Open-extension base
    change and sheaf separatedness give `(k_! M)(P) = 0`. Thus the target also has

@@ -74,7 +74,7 @@ private theorem realization_adjunct
 /-- Realization of the positive Chern adjunct, before any untwisting.
 
 Source: `sk-prop-diagonal-tower-trace.proof.md` (1), identification of the
-level map with (G2); `sk-lem-geo-p1-cohomology`, the Chern component of the
+level map with (G2); `lemma-cohomology-projective-line-trace`, the Chern component of the
 positively twisted decomposition.
 (blueprint: lem-sfb-diagonal-trace-finite-chern-comparison).
 

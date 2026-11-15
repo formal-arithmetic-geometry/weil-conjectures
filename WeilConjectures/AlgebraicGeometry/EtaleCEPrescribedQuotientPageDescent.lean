@@ -31,7 +31,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 500000 in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Retain prescribed CE bicomplexes in quotient-page presentations and descend supplied
 filtered augmented comparisons. No bicomplex comparison or total lift is constructed.

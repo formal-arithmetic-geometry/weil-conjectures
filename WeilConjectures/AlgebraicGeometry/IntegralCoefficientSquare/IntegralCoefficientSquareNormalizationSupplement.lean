@@ -159,7 +159,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ExtensionIsoQuot
 
 /-! # Normalized constant-to-integral coefficient pullback
 
-Source: blueprint main-20261015, det-lem-int-tensor-pullback, first paragraph and
+Source: blueprint main-20261015, lemma-inverse-image-tensor-product, first paragraph and
 Comparison with the Stacks Project; Stacks Tags 093M and 0G7E
 (blueprint: lem-sfb-integral-coefficient-square-normalization).
 
@@ -294,7 +294,7 @@ def RingAssertions (p : A) (T : Scheme.{u}) : Prop :=
 /-- All clauses for the actual coefficient ring, square, chain comparison and flat K-flat
 pullbacks. The natural isomorphism is on whole cochain complexes, with normalization in
 all integer degrees; there is no boundedness, completeness or constructibility condition.
-Source: blueprint det-lem-int-tensor-pullback; Stacks 093M and 0G7E
+Source: blueprint lemma-inverse-image-tensor-product; Stacks 093M and 0G7E
 (blueprint: lem-sfb-integral-coefficient-square-normalization). -/
 def Assertions (p : A) {X Y : Scheme.{u}} (g : X ⟶ Y) : Prop :=
   RingAssertions A p X ∧ RingAssertions A p Y ∧

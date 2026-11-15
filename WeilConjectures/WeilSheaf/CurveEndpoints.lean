@@ -239,7 +239,6 @@ lemma quasiCompact_over_of_isOpenImmersion : QuasiCompact (U ↘ Spec (CommRingC
 variable [IsDominant j] [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
-set_option maxHeartbeats 1600000 in
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 /-- *Localization in high degrees.* For a dense open immersion `j : U₀ ↪ C₀` into a smooth
 geometrically connected affine curve and a Weil sheaf `F` on `U₀`, the boundary triangle
@@ -304,7 +303,7 @@ curve and `F` lisse on `U₀`, the compactly supported cohomology `H_c^r(C, j_*F
 every `r` outside `{0, 1, 2}`: in negative degrees because `j_*F` is a sheaf, and in degrees
 above two by the cohomological range of the affine curve `C₀`
 (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`).
-(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
+(blueprint: `lemma-extreme-degrees-affine-curve`) -/
 theorem subsingleton_compactlySupportedCohomology_directImage (_hF : F.IsLisse) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton
@@ -323,7 +322,7 @@ Concretely, for a compactification `C ⟶[i] Z ⟶ Spec k₀`, `H_c^0(C, j_*F) =
 Such a section vanishes near the boundary `Z̄ \ C̄`, which is in the closure of the generic point
 of the irreducible curve `C̄` since `C̄` is affine and not finite; as `F` is lisse, it vanishes
 (`AlgebraicGeometry.ProEtale.eq_zero_of_forall_specializes_notMem_range`).
-(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
+(blueprint: `lemma-extreme-degrees-affine-curve`) -/
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 0).carrier := by
@@ -377,7 +376,7 @@ of the cohomology is `q` times the Frobenius of the coinvariants.
         ▼                 ▼
   H_c²(C, j_*F) ──e──▶ V_{π₁(U)}
 ```
-(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`)
+(blueprint: `lemma-extreme-degrees-affine-curve`)
 -/
 theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
@@ -406,7 +405,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
 weight `w + 2`: the geometric coinvariants are pure of weight `w`
 (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`) and the Tate twist of
 `AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two` raises weights
-by two. (blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
+by two. (blueprint: `lemma-extreme-degrees-affine-curve`) -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (ι : PadicAlgCl l →+* ℂ) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) :

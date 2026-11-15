@@ -23,7 +23,7 @@ public import WeilConjectures.SixFunctors.Etale.ZModCoefficients
 Let `j : V ⟶ W` and `ι : D ⟶ W` be morphisms of schemes and `ℓ` a prime. If the cohomology
 sheaves of `ι^* Rj_* ℤ/ℓ` (with coefficients `ℤ/ℓ`) are finite locally constant, then so are
 those of `ι^* Rj_* N_V` for every finite module `N` killed by `ℓ` over a finite ring `Λ`
-(blueprint `det-tf-transverse-tame-local-constancy`, constant coefficients).
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients).
 
 Indeed, the underlying abelian sheaf of `ℋⁿ(ι^* Rj_* N_V)` is computed from the underlying
 abelian group of `N`, which is a finite direct sum of copies of `ℤ/ℓ`; so it is a finite direct
@@ -52,7 +52,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 /-- A finite abelian group killed by a prime `ℓ` is isomorphic to a finite direct sum of copies
 of `ℤ/ℓ`, being a finite-dimensional vector space over `ZMod ℓ`
-(blueprint `det-tf-transverse-tame-local-constancy`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem AddCommGrpCat.exists_iso_biproduct_of_nsmul_eq_zero {M : Type (u + 1)} [AddCommGroup M]
     [Finite M] {ℓ : ℕ} [Fact ℓ.Prime] (hM : ∀ m : M, ℓ • m = 0) :
     ∃ r : ℕ, Nonempty (AddCommGrpCat.of M ≅
@@ -68,8 +68,9 @@ namespace AlgebraicGeometry.Etale
 variable {W V D : Scheme.{u}} (j : V ⟶ W) (ι : D ⟶ W)
 
 /-- The functor `A ↦ ι^* ℋⁿ(Rj_* A_V[0])` from abelian groups to abelian étale sheaves on `D`,
-where `A_V` is the constant sheaf on `V` (blueprint `det-tf-transverse-tame-local-constancy`).
-It is additive, all its constituents being so. -/
+where `A_V` is the constant sheaf on `V` (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`). It is additive, all its constituents being
+so. -/
 noncomputable def upperStarHomologyDirectImageConstant (n : ℤ) :
     AddCommGrpCat.{u + 1} ⥤ Sheaf D.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
@@ -77,7 +78,7 @@ noncomputable def upperStarHomologyDirectImageConstant (n : ℤ) :
       DerivedCategory.homologyFunctor _ n ⋙ (ι)^*[AddCommGrpCat.{u + 1}]
 
 /-- The functor `A ↦ ι^* ℋⁿ(Rj_* A_V[0])` is additive
-(blueprint `det-tf-transverse-tame-local-constancy`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 instance additive_upperStarHomologyDirectImageConstant (n : ℤ) :
     (upperStarHomologyDirectImageConstant j ι n).Additive := by
   dsimp [upperStarHomologyDirectImageConstant]
@@ -87,7 +88,7 @@ instance additive_upperStarHomologyDirectImageConstant (n : ℤ) :
 `ℋⁿ(Lι^* Rj_* M_V[0])` is `ι^* ℋⁿ(Rj_* A_V[0])` for the underlying abelian group `A` of `M`:
 the derived pullback commutes with cohomology sheaves, and forgetting the module structure
 commutes with pullbacks, higher direct images and constant sheaves
-(blueprint `det-tf-transverse-tame-local-constancy`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem nonempty_forget₂_homology_iso_upperStarHomologyDirectImageConstant (n : ℤ)
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ) :
     Nonempty ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -122,7 +123,7 @@ namespace AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Etale
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
-/-- Blueprint `det-tf-transverse-tame-local-constancy`, constant coefficients: if
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients: if
 `ι^* Rj_* ℤ/ℓ` has finite locally constant cohomology sheaves, then so has `ι^* Rj_* N_V` for
 every finite module `N` killed by `ℓ` over a finite ring `Λ`.
 

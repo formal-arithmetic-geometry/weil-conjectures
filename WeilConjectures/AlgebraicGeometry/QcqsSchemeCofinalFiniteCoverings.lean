@@ -34,7 +34,7 @@ Proof:
    neighbourhood of `x` contained in `V a`. These neighbourhoods cover `X`. Quasi-compactness
    gives a finite subcover (`IsCompact.elim_finite_subcover`). Index it by a finite type `J` and
    retain the chosen indices in `A` to obtain the refinement map. This uses `def-pc-scheme`
-   and `def-weil-pbc-scheme-conventions`.
+   and `definition-ind-etale-pro-etale-weakly--3`.
 2. Each selected affine open is quasi-compact (Stacks 00E8, `IsAffineOpen.isCompact`).
    Quasi-separatedness implies their pairwise intersections are quasi-compact
    (`pqf-lem-qs-intersection-qc`, or directly Stacks 01KO (1) implies (2)). Hence every

@@ -51,8 +51,6 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 
 attribute [instance] topological_pushforwardAb_additive
 
-set_option maxHeartbeats 800000 in
--- Elaborating the nested functor-category and Ext identifications needs additional heartbeats.
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -166,25 +164,23 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
                                     ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
                                     (J.extMk s (p + 1) rfl hs))) =
                                   I.extMk z (p + 1) rfl hz) := by
-  let HX (n : ℕ) :
-      Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
-    Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙
-    (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
-  let HZ (n : ℕ) :
-      Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
-    Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙
-    (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
-  have hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor
-      (Opens.grothendieckTopology X) n ⋙
-        (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
-  have hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor
-      (Opens.grothendieckTopology Z) n ⋙
-        (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
-  obtain ⟨edge, a, ha, hedge⟩ :=
-    exists_topological_induced_cohomology_cocycle f HX HZ hX hZ
-  obtain ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hb, k, hk, he⟩ :=
-    exists_topological_leray_bottom_realization f HX HZ hX hZ edge a ha hedge
-  exact ⟨HX, HZ, hX, hZ, E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht,
-    b, hb₂, hb, k, hk, edge, he, a, ha, hedge⟩
+  refine ⟨_, _, fun _ ↦ rfl, fun _ ↦ rfl, ?_⟩
+  exact (exists_topological_induced_cohomology_cocycle f _ _ (fun _ ↦ rfl)
+    (fun _ ↦ rfl)).elim fun edge h ↦ h.elim fun a h ↦
+      (exists_topological_leray_bottom_realization f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
+        edge a h.1 h.2).imp fun E ↦
+          Exists.imp fun e₂ ↦
+            And.imp_right <|
+              Exists.imp fun T ↦
+                And.imp_right <| And.imp_right <|
+                  Exists.imp fun g ↦
+                    Exists.imp fun e₀ ↦
+                      And.imp_right <|
+                        Exists.imp fun t ↦
+                          And.imp_right <|
+                            Exists.imp fun b ↦
+                              And.imp_right <| And.imp_right <|
+                                Exists.imp fun k ↦
+                                  And.imp_right fun he ↦ ⟨edge, he, a, h.1, h.2⟩
 
 end CategoryTheory

@@ -20,7 +20,7 @@ an immersion into a tower of projective lines
 (`AlgebraicGeometry.Scheme.exists_isImmersion_projectiveLineTower`).
 
 This is the geometry behind the proof of the trace formula for Frobenius correspondences
-(blueprint `sk-thm-tf-coefficient-morphism-formula`): the only compactification used is
+(blueprint `theorem-trace-formula-frobenius-correspondence`): the only compactification used is
 `𝔸¹ ⊆ ℙ¹`, applied in each coordinate.
 
 -/

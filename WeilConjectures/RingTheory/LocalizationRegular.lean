@@ -54,9 +54,10 @@ is the zero ring. These are `lem-weil-pbc-localization-units-or-zero` (Algebra, 
 5. Both fibres are Noetherian. Base change to any finite purely inseparable extension of
 `p.ResidueField` is that extension field or the zero ring. The field is regular by
 `lem-weil-pbc-field-regular-ring`; the zero ring is regular because it has no prime ideals.
-Thus each fibre is geometrically regular, as in `def-weil-pbc-g-ring` (Algebra, 0382, 0381).
+Thus each fibre is geometrically regular, as in `theorem-finite-etale-covers-proper-henselian--2`
+(Algebra, 0382, 0381).
 6. Flatness from step 1 and the fibres from step 5 give regularity by
-`def-weil-pbc-g-ring` (More on Algebra, 07BZ). -/
+`theorem-finite-etale-covers-proper-henselian--2` (More on Algebra, 07BZ). -/
 theorem isRegular_and_fiber
     {S : Type u} {T : Type v} [CommRing S] [CommRing T] [Algebra S T]
     (W : Submonoid S) [IsLocalization W T] :

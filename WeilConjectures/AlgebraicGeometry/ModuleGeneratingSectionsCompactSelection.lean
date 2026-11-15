@@ -61,6 +61,36 @@ private theorem epi_overMap_iff_local_lifts
     rw [Sieve.overEquiv_iff]
     exact ⟨s, hs⟩
 
+-- Epimorphy can be checked on an open cover before specializing the source to a free sheaf.
+private theorem epi_overMap_of_open_cover
+    (X : Scheme.{u}) (V K : X.Opens) (hKV : K ≤ V)
+    {F G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)} (φ : F ⟶ G)
+    {I : Type*} (U : I → X.Opens) (hUK : ∀ i, U i ≤ K)
+    (hcover : (K : Set X) ⊆ ⋃ i, (U i : Set X))
+    (hU : ∀ i, Epi ((overMap (moduleRings X.toRingedSpace)
+      (homOfLE ((hUK i).trans hKV))).map φ)) :
+    Epi ((overMap (moduleRings X.toRingedSpace) (homOfLE hKV)).map φ) := by
+  apply (epi_overMap_iff_local_lifts X V K hKV φ).mpr
+  intro W hWK a x hxW
+  obtain ⟨i, hxi⟩ := Set.mem_iUnion.mp (hcover (hWK hxW))
+  have he := hU i
+  let Q := W ⊓ U i
+  have hQV : Q ≤ V := inf_le_left.trans (hWK.trans hKV)
+  let r : Over.mk (homOfLE hQV) ⟶ Over.mk (homOfLE (hWK.trans hKV)) :=
+    Over.homMk (homOfLE inf_le_left)
+  let b : G.val.obj (.op (Over.mk (homOfLE hQV))) := G.val.map r.op a
+  obtain ⟨Z, hZQ, hxZ, z, hz⟩ :=
+    (epi_overMap_iff_local_lifts X V (U i) ((hUK i).trans hKV) _).mp he
+      Q inf_le_right b x ⟨hxW, hxi⟩
+  refine ⟨Z, hZQ.trans inf_le_left, hxZ, z, ?_⟩
+  change _ = G.val.presheaf.map (Over.homMk (homOfLE hZQ)).op
+    (G.val.presheaf.map
+      (Over.homMk (homOfLE (show Q ≤ W from inf_le_left))).op a) at hz
+  change _ = G.val.presheaf.map
+    (Over.homMk (homOfLE (hZQ.trans inf_le_left))).op a
+  simpa only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+    ← Over.homMk_comp, homOfLE_comp] using hz
+
 -- Elaborating free coproduct maps across slice restriction needs additional steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem freeMap_subset_epi
@@ -84,7 +114,6 @@ private theorem freeMap_subset_epi
   have := hS
   exact epi_of_epi_fac hfac
 
-set_option maxHeartbeats 500000 in
 -- The slice-site section types require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- A specified global generating family has a finite subfamily generating on a
@@ -130,26 +159,14 @@ theorem exists_finset_generatingSections_on_compact
   obtain ⟨t, ht⟩ := hK.elim_finite_subcover (fun x : K ↦ (U x : Set X))
     (fun x ↦ (U x).isOpen) hcover
   let T : Finset σ.I := t.biUnion S
-  refine ⟨T, (epi_overMap_iff_local_lifts X V K hKV _).mpr ?_⟩
-  intro W hWK a x hxW
-  obtain ⟨i, hxi⟩ := Set.mem_iUnion.mp (ht (hWK hxW))
-  obtain ⟨hi, hxi⟩ := Set.mem_iUnion.mp hxi
-  have hST : S i ⊆ T := fun j hj ↦ Finset.mem_biUnion.mpr ⟨i, hi, hj⟩
-  have he := freeMap_subset_epi X V (U i) ((hUK i).trans hKV) H σ (S i) T hST (hS i)
-  let Q := W ⊓ U i
-  have hQV : Q ≤ V := inf_le_left.trans (hWK.trans hKV)
-  let b : (H.over V).val.obj (.op (Over.mk (homOfLE hQV))) :=
-    (H.over V).val.map (Over.homMk (homOfLE (show Q ≤ W from inf_le_left))).op a
-  obtain ⟨Z, hZQ, hxZ, z, hz⟩ :=
-    (epi_overMap_iff_local_lifts X V (U i) ((hUK i).trans hKV) _).mp he
-      Q inf_le_right b x ⟨hxW, hxi⟩
-  refine ⟨Z, hZQ.trans inf_le_left, hxZ, z, ?_⟩
-  change _ = (H.over V).val.presheaf.map (Over.homMk (homOfLE hZQ)).op
-    ((H.over V).val.presheaf.map
-      (Over.homMk (homOfLE (show Q ≤ W from inf_le_left))).op a) at hz
-  change _ = (H.over V).val.presheaf.map
-    (Over.homMk (homOfLE (hZQ.trans inf_le_left))).op a
-  simpa only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
-    ← Over.homMk_comp, homOfLE_comp] using hz
+  refine ⟨T, ?_⟩
+  apply epi_overMap_of_open_cover X V K hKV _ (fun i : t ↦ U i) (fun i ↦ hUK i)
+  · intro x hxK
+    obtain ⟨i, hi⟩ := Set.mem_iUnion.mp (ht hxK)
+    obtain ⟨hit, hxi⟩ := Set.mem_iUnion.mp hi
+    exact Set.mem_iUnion.mpr ⟨⟨i, hit⟩, hxi⟩
+  · intro i
+    exact freeMap_subset_epi X V (U i) ((hUK i).trans hKV) H σ (S i) T
+      (fun j hj ↦ Finset.mem_biUnion.mpr ⟨i, i.property, hj⟩) (hS i)
 
 end AlgebraicGeometry.Scheme.Modules

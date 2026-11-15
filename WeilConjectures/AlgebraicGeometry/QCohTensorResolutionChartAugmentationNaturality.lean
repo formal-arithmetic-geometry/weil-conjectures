@@ -16,7 +16,6 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 600000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The supplied degree-zero augmentation equation gives the affine augmentation square. -/
 theorem tensorResolutionChartAugmentation_naturality {Y : Scheme.{u}}

@@ -41,7 +41,7 @@ Proof:
    quotient ring every polynomial is monic, so this case is included.
 3. Apply `lem-weil-pbc-lift-monic-coprime-factorization-etale` (Tag 0ALH) to obtain
    monic lifted factors after a further étale extension trivial on the quotient.
-4. Compose the two étale extensions using `lem-weil-pbc-etale-composition-cancellation`.
+4. Compose the two étale extensions using `definition-torsion-sheaves--3`.
    The induced quotient map is the composite of the quotient isomorphisms. If `v` is
    the image of `u` in the final ring, multiply the first lifted factor by `v` and
    the second by `v⁻¹`. Their product remains the image of `f`, and their reductions

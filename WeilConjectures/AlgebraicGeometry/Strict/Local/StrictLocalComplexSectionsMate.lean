@@ -29,7 +29,6 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-set_option maxHeartbeats 400000 in
 -- Comparing the composed section functors across localization requires extra defeq work.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

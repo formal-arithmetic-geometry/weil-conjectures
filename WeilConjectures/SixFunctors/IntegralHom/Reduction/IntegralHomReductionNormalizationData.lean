@@ -143,7 +143,6 @@ private theorem actual_ordinaryAdjunction (n : ℕ) :
 
 -- STATEMENT-DISPUTED: repaired; an arbitrary mu need not satisfy the counit square.
 -- Choose the comparison and its normalization together.
-set_option maxHeartbeats 400000 in
 -- The concrete representative conversions require a larger elaboration budget.
 /-- The sectionwise and counit-square normalization data exists for a fixed
 finite target and source presentation.

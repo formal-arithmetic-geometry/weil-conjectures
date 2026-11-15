@@ -50,7 +50,6 @@ attribute [local irreducible] derivedPullIso derivedPushHom derivedComapLowerSta
   firstProjection square upperStarFromPoint pullback limit
   DerivedCategory.monoidalClosed Mod.monoidalClosed CondensedRing.upperStar
 
-set_option maxHeartbeats 400000 in
 -- Check the fixed derived model interfaces while keeping their resolutions folded.
 /-- Assemble normalized-model scalar transport with the unit and line squares.
 Source: diagonal coefficient changes (2)--(3), the native model calculation.

@@ -291,7 +291,7 @@ Proof:
 `lem-weil-pbc-local-acyclicity-closed-fibre-unit`. Strict henselization functoriality
 identifies the closed geometric lift. Properness is preserved by base change. Proper
 maps are qcqs, and `h`, a base change of a map between affine schemes, is affine and qcqs.
-2. Proper base change (`thm-weil-pbc-bounded-below`) identifies the derived stalks of
+2. Proper base change (`theorem-proper-base-change-classical-pro`) identifies the derived stalks of
 `Rf_*G[0]` with the cohomology of the geometric fibres. The Leray identification and
 cohomology pullback derived unit, geometric-point pullback/stalk identification, and
 exact derived inverse image identify these with the canonical exchange fibre maps.

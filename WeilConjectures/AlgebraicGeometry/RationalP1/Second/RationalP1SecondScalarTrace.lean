@@ -85,8 +85,6 @@ private theorem trace_square_of_generators
     rw [reassoc_of% hc, hct', Category.comp_id,
       ← F.map_comp_assoc, hct, F.map_id, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
--- The full derived-category endpoint comparisons exceed the default heartbeat budget.
 /-- The scalar exchange is invertible and carries the normalized second trace to
 pullback of the normalized q trace. There is no arbitrary object K or tensor action
 in this assertion.
@@ -167,24 +165,30 @@ theorem second_scalar_trace
   let c₂ := scalarP2Chern l c Y _reference b
   let tq := trace Λ Y L d
   let t₂ := (secondDiagramPushIso Λ Y L d).inv.app (T (diagonalSurface Y)) ≫ d.trace₂
-  obtain ⟨hq, h₂⟩ :=
+  have hs : IsIso (biprod.desc uq cq) ∧ IsIso (biprod.desc u₂ c₂) :=
     scalar_chern_splittings l c k p hpl Y δ family _reference a ha' b hb'
   have hq0 : uq ≫ tq = 0 := shifted_single_to_single_zero _ _ _
   have h₂0 : u₂ ≫ t₂ = 0 := shifted_single_to_single_zero _ _ _
-  obtain ⟨hq1, h₂1⟩ := scalar_chern_degree l c Y hY δ family _reference a ha' b hb'
-  obtain ⟨hu, hc⟩ := scalar_chern_base_change l c k p hpl Y δ family _reference a ha' b hb'
-  have : IsIso (biprod.desc uq cq) := hq
-  have : IsIso (biprod.desc u₂ c₂) := h₂
+  have hd : cq ≫ tq = 𝟙 _ ∧ c₂ ≫ t₂ = 𝟙 _ :=
+    scalar_chern_degree l c Y hY δ family _reference a ha' b hb'
+  have hc : F.map uq ≫ secondTraceExchange l c k p hpl Y =
+        (scalarQLineIso l c k p hpl Y).hom ≫ u₂ ∧
+      F.map cq ≫ secondTraceExchange l c k p hpl Y = (scalarUnitPullIso Λ Y).hom ≫ c₂ :=
+    scalar_chern_base_change l c k p hpl Y δ family _reference a ha' b hb'
+  have : IsIso (biprod.desc uq cq) := hs.1
+  have : IsIso (biprod.desc u₂ c₂) := hs.2
   have : F.Additive := by
     dsimp only [F]
     unfold moduleObjectDerivedPullback
     exact Functor.additive_of_iso
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (ProjectiveLine Y ↘ Y)).symm
-  obtain ⟨hiso, ht⟩ := trace_square_of_generators F uq cq u₂ c₂
-    (scalarQLineIso l c k p hpl Y) (scalarUnitPullIso Λ Y)
-    (secondTraceExchange l c k p hpl Y) tq t₂ hu hc hq0 hq1 h₂0 h₂1
-  refine ⟨hiso, ?_⟩
-  have ht' := congrArg (fun z ↦ z ≫ (singleUnitIso Λ (ProjectiveLine Y)).hom) ht
+  have ht : IsIso (secondTraceExchange l c k p hpl Y) ∧
+      secondTraceExchange l c k p hpl Y ≫ t₂ = F.map tq ≫ (scalarUnitPullIso Λ Y).hom :=
+    trace_square_of_generators F uq cq u₂ c₂
+      (scalarQLineIso l c k p hpl Y) (scalarUnitPullIso Λ Y)
+      (secondTraceExchange l c k p hpl Y) tq t₂ hc.1 hc.2 hq0 hd.1 h₂0 hd.2
+  refine ⟨ht.1, ?_⟩
+  have ht' := congrArg (fun z ↦ z ≫ (singleUnitIso Λ (ProjectiveLine Y)).hom) ht.2
   simpa only [t₂, F, tq, Λ, L, d, T, scalarUnitPullIso,
     Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
     Iso.inv_hom_id, Category.comp_id, Functor.map_comp] using ht'

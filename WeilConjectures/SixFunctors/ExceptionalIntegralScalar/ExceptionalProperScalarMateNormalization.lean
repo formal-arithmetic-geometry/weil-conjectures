@@ -19,9 +19,7 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- The scalar-adjunction definition of the proper comparison is the geometric
 adjunction mate of the canonical tensor/pullback comparison.
 Source: Stacks Tags 0E46 and 0B56.

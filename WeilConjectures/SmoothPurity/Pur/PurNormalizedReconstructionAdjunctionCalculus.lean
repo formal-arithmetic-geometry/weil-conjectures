@@ -22,7 +22,7 @@ import WeilConjectures.CategoryTheory.AdjointEquivalenceConjugation.AdjointEquiv
 /-!
 # Normalized reconstruction and its adjunction calculus
 
-Source: current Weil blueprint, sec-smooth-purity,
+Source: current Weil blueprint, chap-Smooth-purity,
 prop-pur-adic-reconstruction-trace-coherence, sole proof paragraph
 (blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
 
@@ -262,13 +262,13 @@ theorem purNormalizedReconstructionOfScheme
 Source: the sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence
 (blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
 Proof: (1) K-flat scalar extension shows reduction is normalized, as recorded in S.
-(2) Apply lem-coef-normalized-dvr-effectivity to the evaluated normalized tower.
+(2) Apply lemma-sp-tower-adjunction-foundation--2 to the evaluated normalized tower.
 The resulting scalar-extension comparisons are precisely S.counit_projection;
 joint conservativity of derived evaluation makes the actual counit invertible.
 The same effectivity theorem gives completeness of its total limit.
 (3) The triangle identity makes reduction of the unit invertible. Its first evaluation
 is reduction modulo the uniformizer, by S.unit_projection. Apply
-sk-lem-pe-derived-nakayama between the complete source and complete target.
+lemma-reduction-derived-nakayama between the complete source and complete target.
 Naturality is already that of S.adjunction. No boundedness is used. -/
 theorem purNormalizedReconstruction
     (_hl : IsUnit (l : Γ(W, ⊤))) (S : CoefficientDerivedSystemCalculus l E W) :

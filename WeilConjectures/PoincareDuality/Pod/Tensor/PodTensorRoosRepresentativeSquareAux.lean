@@ -16,7 +16,7 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Ingredients of the canonical representative square
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-tensor-roos-representative-square).
 
 The normalized pullback field of a lawful reindexing package is the fixed completed
@@ -99,7 +99,7 @@ theorem podOrdinaryToCompleted_app_eq
 /-- The coherent limit/tensor comparison, followed by the tensor of the two
 ordinary-to-completed maps, is the ordinary-to-completed map of the tensor followed by
 the canonical completed pullback/tensor comparison.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Step 5; Stacks 07A4, 0941
+Source: blueprint theorem-poincare-duality-frobenius--2, Step 5; Stacks 07A4, 0941
 (blueprint: lem-pod-tensor-roos-representative-square). -/
 theorem podReindexingLimitTensorComparison_canonical
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -162,7 +162,7 @@ theorem podOrdinaryToCompleted_isIso
 /-- A strict tensor tower comparison, equal to a prescribed one at one pair of inputs and to
 a chosen generator-normalized comparison elsewhere, packaged with the induced constructible
 tensor comparison.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-tensor-roos-representative-square). -/
 def podTensorReindexAt
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -250,8 +250,37 @@ theorem podTensorReindexAt_generators
       exact dite_eq_right h
     rw [ht]
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
-set_option maxHeartbeats 2000000 in
--- The two sides of the strict normalization have types equal only after unfolding.
+
+-- Record the good-representative endpoints before using the tensor comparison.
+private def podRepresentativeReindexFactors
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (D : PodCompletionReindex l E g)
+    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
+    (podOrdinaryReindex l E g).obj (DerivedCategory.Q.obj P.obj) ≅
+      DerivedCategory.Q.obj (((podGoodReindex l E g D).obj P).obj) := by
+  let : (isoReductionIntegralInverse l E g).Additive :=
+    isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom
+  let : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=
+    isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom
+  let : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=
+    isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom
+  unfold podOrdinaryReindex podGoodReindex
+  exact (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj
+
+-- Cancel the comparison isomorphisms without expanding the strict Roos morphism.
+private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Category D]
+    (T : C × C ⥤ D) {P Q P' Q' : C} {A B Z : D}
+    (eP : P ≅ P') (eQ : Q ≅ Q') (e : T.obj (P', Q') ≅ B)
+    (k : A ⟶ T.obj (P, Q)) (t : A ⟶ B)
+    (h : HEq (k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom) t)
+    (f : T.obj (P, Q) ⟶ Z) :
+    t ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
+  rw [← eq_of_heq h]
+  simp only [Category.assoc, e.hom_inv_id_assoc]
+  rw [← T.map_comp_assoc]
+  simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
+    ← prod_id', T.map_id, Category.id_comp]
+
 /-- The representative square, assembled from the strict Roos normalization and the
 adjunction calculation of the canonical completed comparison.
 Source: blueprint lem-pod-tensor-roos-representative-square. -/
@@ -305,17 +334,50 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
         ((integralCompletedTensor l E Y).obj
           (DerivedCategory.Q.obj P.obj,DerivedCategory.Q.obj Q.obj)) ≫
       ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom := by
+  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, integralOperationsRoosFunctor,
+    Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at *
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
-  rw [podTensorReindexAt_tower] at hs
-  have hs' := eq_of_heq hs
+  dsimp only [podReindexingTensorFrame, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+    integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj] at hs
+  let eP := podRepresentativeReindexFactors l E g D P
+  let eQ := podRepresentativeReindexFactors l E g D Q
+  let e := (integralCompletedTensorComparison l E X).app
+    ((podGoodReindex l E g D).obj P, (podGoodReindex l E g D).obj Q)
+  dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
+    integralOperationsGoodLocalization, integralOperationsRoosFunctor,
+    Functor.comp_obj, Functor.prod_obj, ObjectProperty.ι_obj] at e
+  let k := podReindexingLimitTensorComparisonHom l E g D hD
+    (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)
+  dsimp only [podReindexingTensorFrame] at k
+  let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
+  let fQ := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)
+  -- Focus the tower rewrite so its derived endpoints stay folded.
+  conv at hs =>
+    rhs
+    arg 2
+    arg 2
+    arg 2
+    arg 2
+    arg 1
+    arg 1
+    rw [podTensorReindexAt_tower]
+  have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
+    eP eQ e k _ hs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
   have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
-  rw [← hs']
-  refine Eq.trans ?_ hc
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [← Functor.map_comp_assoc]
-  simp only [Prod.mkHom, prod_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  dsimp only [eP, eQ, e, k, fP, fQ, podRepresentativeReindexFactors, Iso.app, id,
+    podReindexingTensorFrame, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+    podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
+    integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.lift, ObjectProperty.ι_obj, scalarReductionSource, integralTowerModules,
+    scalarReductionSourceDerived, integralTowerHasDerivedCategory,
+    integralOperationsCommHasDerivedCategory] at finish hc ⊢
+  have final := finish.trans hc
+  assumption
 
 end WeilConjectures

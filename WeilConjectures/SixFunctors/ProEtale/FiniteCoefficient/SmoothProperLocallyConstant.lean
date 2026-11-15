@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 Let `ν : X_proét ⟶ X_ét` be the comparison morphism of sites. For `f : X ⟶ Y` quasi-compact and
 quasi-separated and an étale sheaf `G`, the higher direct images on the pro-étale site of
 `ν^* G` are `ν^*` of the étale higher direct images of `G` (a consequence of
-`prop-weil-pbc-comparison-direct-image`, formalised as
+`theorem-comparison-direct-images--1`, formalised as
 `AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`, and of the exactness
 of `ν^*`). Combined with the étale theorem
 `Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`
@@ -59,7 +59,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- For `f` quasi-compact and quasi-separated and an étale sheaf `G` placed in degree `0`, the
 pro-étale derived direct image of `ν^* G` is `ν^*` of the étale derived direct image of `G`
-(blueprint `prop-weil-pbc-comparison-direct-image`, applied to `L = G[0]`). -/
+(blueprint `theorem-comparison-direct-images--1`, applied to `L = G[0]`). -/
 noncomputable def rightDerivedLowerStarSingleComparisonUpperStarIso
     (G : Sheaf X.smallEtaleTopology A) :
     (R(ProEtale.lowerStar A f)).obj

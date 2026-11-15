@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLow
 
 /-! # Eigenmaps on the product Artin--Schreier torsor
 
-Source: blueprint lem-fd-as-characters, proof Step 5, root addition.
+Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5, root addition.
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +31,7 @@ open AlgebraicGeometry ProEtale ProEtale.CondensedRing
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- The character of the product torsor, (a,b) ↦ ψ(a)ψ(b).
-Source: blueprint lem-fd-as-characters Step 5
+Source: blueprint lemma-artin-schreier-character-sheaf Step 5
 (blueprint: lem-fd-as-tensor-eigenmaps). -/
 def tensorAddCharacter {k R : Type*} [AddCommGroup k] [CommMonoid R]
     (ψ : AddChar k R) : AddChar (k × k) R :=
@@ -816,7 +816,7 @@ private theorem combineRootMaps {X : Scheme.{u}} (Y : Over X)
 set_option linter.unusedVariables false in
 /-- The tensor sheaf and the sum-function sheaf have normalized eigenmaps into the
 same finite etale direct image, with character (a,b) ↦ ψ(a)ψ(b).
-Source: blueprint lem-fd-as-characters Step 5, root addition and eigen-generators
+Source: blueprint lemma-artin-schreier-character-sheaf Step 5, root addition and eigen-generators
 (blueprint: lem-fd-as-tensor-eigenmaps).
 
 Proof: reuse the universal product geometry `artinSchreierMapProd`,

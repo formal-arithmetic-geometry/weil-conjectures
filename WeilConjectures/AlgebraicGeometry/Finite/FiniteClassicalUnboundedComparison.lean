@@ -540,7 +540,7 @@ private theorem boundedCounit (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
 counit is invertible on every classical complex (so every such complex is isomorphic to an
 inverse image), without any boundedness or constructibility condition.
 Source: Bhatt--Scholze, Proposition 5.2.6(3), Remark 5.2.8 and Proposition 5.3.2,
-and the opening comparison in blueprint `sk-lem-geo-affine-local`
+and the opening comparison in blueprint `lemma-affine-space-etale-localization`
 (blueprint: lem-sfb-finite-classical-unbounded-comparison).
 
 Proof:

@@ -35,13 +35,13 @@ Source: Stacks Project, Algebra, Tags 0CXF and 00MT, proof of Tag 00OA
 
 Proof:
 1. When `d = 0`, the given resolution makes `M` projective. Since it is finite,
-   `lem-weil-pbc-finite-projective-prime-local-free` at the maximal ideal makes it
+   `proposition-projective-line-rational-coefficients--1` at the maximal ideal makes it
    finite free: the localizing element outside that ideal is a unit.
 2. For `d ≥ 1`, choose an infinite finite free resolution using
    `lem-weil-pbc-finite-free-resolution-noetherian`. Its `d`-th syzygy is projective by
    `lem-weil-pbc-projective-resolution-kernel-projective` and the given length bound.
    It is finite by `lem-weil-pbc-noetherian-submodule-finite`.
-3. Apply `lem-weil-pbc-finite-projective-prime-local-free` to that syzygy at the
+3. Apply `proposition-projective-line-rational-coefficients--1` to that syzygy at the
    maximal ideal, where localization at a unit does nothing. Substituting it as the
    leftmost term gives a finite free resolution of length at most `d`.
 4. If a differential has a unit matrix entry, use

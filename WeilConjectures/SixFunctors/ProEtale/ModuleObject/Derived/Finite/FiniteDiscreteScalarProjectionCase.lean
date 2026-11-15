@@ -48,7 +48,6 @@ private theorem projection_app_iso
       (show IsIso ((τ.app K).app M) from inferInstance)
   exact (NatTrans.isIso_app_iff_of_iso (τ.app K') eM).1 ht
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the derived comparisons without unfolding the resolving constructions.
 private theorem ordinary_constant_projection
     (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
@@ -161,7 +160,6 @@ private theorem point_counit_isIso :
     infer_instance
   exact (isIso_comp_left_iff _ _).mp h
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the derived comparisons without unfolding the resolving constructions.
 private theorem point_module_model
     (M : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (coefficient A))
@@ -227,7 +225,6 @@ variable (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B]
     [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A]
     [TopologicalSpace B] [DiscreteTopology B] [IsTopologicalRing B]
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the derived comparisons without unfolding the resolving constructions.
 private theorem encoded_restricted_regular
     (a : coefficient A ⟶ coefficient B) [IsMonHom a]
@@ -269,7 +266,6 @@ private def coefficientEncoding_self (T : Scheme.{u}) (e : Encoding A T) :
 
 end SelfEncoding
 
-set_option maxHeartbeats 1600000 in
 -- The proof combines several equivalences between large derived module categories.
 /-- Projection for the restricted regular module of a nonflat finite-ring map.
 

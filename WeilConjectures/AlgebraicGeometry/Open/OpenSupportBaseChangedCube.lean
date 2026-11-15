@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenSupportTailCube
 
 /-! # The open-support cube in base-changed compactifications
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -39,7 +39,7 @@ private theorem supportFactor_hom
     Functor.isoWhiskerRight_hom]
 
 /-- The open-support cube when the output compactifications are the actual base changes.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 
 Proof: factor each support comparison into its specified graph comparison and
 its proper/open and open-composition tail. Construct the map between the two

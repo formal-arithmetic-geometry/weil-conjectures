@@ -168,7 +168,6 @@ private theorem counitComponent_factor
   unfold counitComponent counitProjectionPart
   simp only [whiskerLeft_comp, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- The statement compares several fixed derived pullback and tensor interfaces.
 /-- The forward p2 projection cancels the exchange/projection tail against the
 pulled counit. This equation has no unit insertion, diagonal tensor comparison,

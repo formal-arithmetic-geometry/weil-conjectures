@@ -47,7 +47,7 @@ C represents an object in the existing finite-coefficient bounded-constructible 
 image. Its coefficient transport is restriction along the canonical ring-sheaf comparison,
 termwise before localization. This is just a presentation of the same derived object,
 not an additional condition on the representative.
-Source: blueprint def-weil-pbc-proetale-modules; Stacks Tag 09AL
+Source: blueprint definition-small-pro-etale-site--1; Stacks Tag 09AL
 (blueprint: lem-weil-pbc-normalized-constructible-local-effectivity). -/
 def IsAdicTowerLevelOfBoundedConstructibleEtaleOrigin
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]

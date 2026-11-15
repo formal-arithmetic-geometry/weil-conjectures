@@ -25,8 +25,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Explicit finite-matrix evaluation for ordinary perfect reductions
 
-Source: blueprint `sk-prop-integral-local-structure`, Compatible isomorphisms.
-All choices here are taken from proved finite-basis and finite-coefficient equivalences.
+Source: blueprint `proposition-local-structure-integral-constructible-complexes`, Compatible
+isomorphisms. All choices here are taken from proved finite-basis and finite-coefficient
+equivalences.
 -/
 
 @[expose] public noncomputable section

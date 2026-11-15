@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitClassVanishing
 # Higher direct images and inverse limits of schemes
 
 Source: Stacks Project, Lemma 59.51.7, Tag 09Z1
-(blueprint: sbc-lem-higher-direct-image-limit).
+(blueprint: lemma-reduction-field).
 -/
 
 @[expose] public section
@@ -34,10 +34,10 @@ of their colimit on the limit scheme is an isomorphism.
 `H` records the pulled-back sheaf diagram via `eH` and `hH`; `K` records the higher
 image diagram via `eK` and `hK`; `η` records the canonical comparison cocone via `hη`.
 These are presentations of the diagrams and comparison map, not restrictions on the sheaves.
-Source: Stacks, Tag 09Z1 (blueprint: sbc-lem-higher-direct-image-limit).
+Source: Stacks, Tag 09Z1 (blueprint: lemma-reduction-field).
 
 Proof:
-1. By sbc-lem-higher-direct-image-presheaf (Tag 03Q8), higher direct images are
+1. By proposition-base-change-larger-algebraically-closed (Tag 03Q8), higher direct images are
    sheafifications of `U ↦ H^p(U ×_S X_i, F_i)` and `U ↦ H^p(U ×_S X, F)`.
 2. Cover each etale object by affine etale objects `V`. Base change to `V` gives
    qcqs schemes with affine transitions and limit `V ×_S X`. Apply

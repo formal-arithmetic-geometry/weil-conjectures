@@ -57,7 +57,7 @@ quasi-isomorphic to its `i`-th cohomology placed in degree `i`. There is no deri
 sheaves. The case `i = 0`, `r = 1` is an *invertible module placed in degree `0`*
 (`isFiniteLocallyFreeInDegree_zero_one_iff`).
 
-(blueprint: `def-pc-invertible-in-degree-zero`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) -/
 structure IsFiniteLocallyFreeInDegree (M : ℕ → X.Modules) (i r : ℕ) : Prop where
   isZero (q : ℕ) (hq : q ≠ i) : IsZero (M q)
   isFiniteLocallyFreeOfRank : (M i).IsFiniteLocallyFreeOfRank r
@@ -65,7 +65,7 @@ structure IsFiniteLocallyFreeInDegree (M : ℕ → X.Modules) (i r : ℕ) : Prop
 /-- A family of modules is that of an invertible module placed in degree `0` if and only if it
 vanishes in nonzero degrees and is invertible in degree `0`.
 
-(blueprint: `def-pc-invertible-in-degree-zero`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) -/
 theorem isFiniteLocallyFreeInDegree_zero_one_iff (M : ℕ → X.Modules) :
     IsFiniteLocallyFreeInDegree M 0 1 ↔
       (∀ q ≠ 0, IsZero (M q)) ∧ SheafOfModules.IsInvertible (R := X.ringCatSheaf) (M 0) :=
@@ -108,7 +108,7 @@ the maximal ideal; the remaining complex is then `𝒪^r[-i]` near every point w
 cohomology `κ(y)^r` concentrated in degree `i`, and `U` is the set of such points. The converse
 direction uses that extension of fields is faithfully flat.
 
-(blueprint: `lem-pc-perfect-locus`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) -/
 theorem IsFiniteFreeComplex.exists_opens_range_subset_iff {Y : Scheme.{u}}
     {P : CochainComplex Y.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d) (i r : ℕ) :
     ∃ U : Y.Opens, ∀ {Y' : Scheme.{u}} (g : Y' ⟶ Y), Set.range g.base ⊆ U ↔

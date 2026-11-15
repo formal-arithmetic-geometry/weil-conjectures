@@ -52,7 +52,7 @@ stagewise and use the ring-colimit universal property for uniqueness; (8) since
 `Jʰ = J Bʰ`, the image of `Jʰ` under `ψ` lies in `I'` by `hφ` and ideal closure.
 These steps use `lem-weil-pbc-pair-henselization`, `def-weil-pbc-category-colimit`,
 `lem-weil-pbc-filtered-colimit-algebras-elementwise`,
-`lem-weil-pbc-etale-composition-cancellation`,
+`definition-torsion-sheaves--3`,
 `lem-weil-pbc-etale-ring-base-change`, and
 `lem-weil-pbc-etale-section-idempotent-splitting` as cited by the node.
 -/

@@ -12,9 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-!
 # Detection by open and closed pro-etale restrictions
 
-Source: Weil conjectures blueprint, smooth purity, `sk-prop-sf-closed-unit`,
-`lem-exc-open-closed-detection`; Stacks Project, Tag 09AH, lemma-ses-associated-to-open
-(blueprint: lem-exc-open-closed-detection).
+Source: Weil conjectures blueprint, smooth purity, `lemma-local-cohomology-right-adjoint--1`,
+`proposition-extension-zero-restriction-closed-subscheme`; Stacks Project, Tag 09AH,
+lemma-ses-associated-to-open (blueprint: proposition-extension-zero-restriction-closed-subscheme).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Extension along the coefficient isomorphism reflects vanishing, by its existing
 scalar-transport equivalence and tensor-extension adjunction.
 Source: Stacks, Modules on Sites, lemma-adjoint-push-pull-modules
-(blueprint: lem-exc-open-closed-detection). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
 private theorem inverseImage_isZero_of_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -52,11 +52,12 @@ along a closed immersion and its complementary quasi-compact open immersion are 
 The coefficient isomorphisms are specified, and pullback uses the recorded tensor extension.
 
 Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open; blueprint smooth purity,
-`sk-prop-sf-closed-unit` (blueprint: lem-exc-open-closed-detection).
+`lemma-local-cohomology-right-adjoint--1` (blueprint:
+proposition-extension-zero-restriction-closed-subscheme).
 
 Proof:
 1. Transport the actions back along `ci` and `cj`. By
-   def-weil-pbc-proetale-operations, tensor extension along a coefficient isomorphism
+   prose-03-02, tensor extension along a coefficient isomorphism
    identifies pullback with inverse image: send `m ⊗ r` to `c.inv(r) m`, with inverse
    `m ↦ m ⊗ 1`. Balancing gives the inverse identities, naturally under restrictions.
    Thus the two ordinary module inverse images vanish, without any finiteness or
@@ -67,7 +68,7 @@ Proof:
    the localized-site equivalence in that theorem. No qcqs hypothesis on X is needed
    for this sequence; its additional filtered-colimit assertion is not used.
 3. The closed end term is zero by the sectionwise direct-image formula in
-   def-weil-pbc-proetale-operations. The open end term is zero since the adjunction
+   prose-03-02. The open end term is zero since the adjunction
    `j_! ⊣ j⁻¹` identifies maps out of `j_! 0` with maps out of zero, making it initial
    and hence zero. Exactness at F, in def-weil-pbc-exact-sequence, now identifies the
    zero image with the whole kernel of `F → 0`. Consequently F is zero. -/

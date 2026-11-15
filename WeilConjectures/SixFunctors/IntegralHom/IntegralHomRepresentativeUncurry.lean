@@ -134,7 +134,6 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 
 open CategoryTheory.RingedDerivedNative
 
-set_option maxHeartbeats 800000 in
 -- Compare the two Hom-complex models without unfolding the derived internal Hom.
 /-- Unsigned representative uncurrying agrees with the normalized right-tensor adjunction.
 
@@ -186,7 +185,10 @@ theorem representative_uncurry_evaluation
     let φ' : P ⟶ homComplex (R := R) L
         ((coefficientHomResolution.{u, t + 1, t} J R).obj I) :=
       φ ≫ ((homComplexFunctor (R := R)).obj (op L)).map r
-    obtain ⟨ψ, hψ, hsquare⟩ := T.uncurry_model ⟨P, hP⟩ ⟨L, hL⟩ I φ'
+    have huncurry : CoefficientTensorUncurryModel J R S T.comparison :=
+      T.uncurry_model
+    let hmodels := huncurry ⟨P, hP⟩ ⟨L, hL⟩ I φ'
+    obtain ⟨ψ, hψ, hsquare⟩ := hmodels
     have hψeq : ψ = (chainEquiv.{t + 1, t, u} J R P L
         ((coefficientHomResolution.{u, t + 1, t} J R).obj I)).symm φ' := by
       apply total_generator_ext Y R
@@ -199,26 +201,25 @@ theorem representative_uncurry_evaluation
     have hn := chainEquiv_symm_naturality.{t + 1, t, u} J R
       P P L L I ((coefficientHomResolution.{u, t + 1, t} J R).obj I)
         (𝟙 P) (𝟙 L) r φ
+    have htensor : (coefficientTotalTensor.{u, t + 1, t} J R).map
+        (X := (P, L)) (Y := (P, L)) (𝟙 P, 𝟙 L) = 𝟙 _ :=
+      (coefficientTotalTensor.{u, t + 1, t} J R).map_id (P, L)
+    rw [htensor] at hn
     simp only [op_id] at hn
-    erw [(homComplexFunctor (R := R)).map_id, NatTrans.id_app] at hn
+    erw [CategoryTheory.Functor.map_id, NatTrans.id_app] at hn
     simp only [Category.id_comp] at hn
-    erw [← prod_id', (coefficientTotalTensor.{u, t + 1, t} J R).map_id,
-      Category.id_comp] at hn
     change (chainEquiv.{t + 1, t, u} J R P L _).symm φ' =
       (chainEquiv.{t + 1, t, u} J R P L I).symm φ ≫ r at hn
-    erw [hn, DerivedCategory.Q.map_comp
-      ((chainEquiv.{t + 1, t, u} J R P L I).symm φ) r, Category.assoc] at hsquare
+    rw [hn] at hsquare
+    simp only [CategoryTheory.Functor.map_comp, Category.assoc] at hsquare
     have hr : DerivedCategory.Q.map r ≫
         coefficientHomResolutionInverse.{u, t + 1, t, (max u (t + 1)) + 1} J R I = 𝟙 _ := by
       exact (augmentationIso.{t + 1, t, u, (max u (t + 1)) + 1} J R I).hom_inv_id
     erw [hr, Category.comp_id] at hsquare
-    change _ ≫ (S.transpose _ _ _).symm
-      (DerivedCategory.Q.map φ' ≫ (coefficientHomResolutionIso J R L I).inv) = _ at hsquare
-    dsimp only [φ'] at hsquare
-    erw [DerivedCategory.Q.map_comp] at hsquare
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
-      simpa only [Category.assoc, homModelMap, r] using hsquare
+      simpa only [φ', CategoryTheory.Functor.map_comp, Category.assoc, homModelMap, r]
+        using hsquare
 
 end Representatives
 end WeilConjectures.IntegralHom

@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 # Cohomological smoothness
 
 For `f : X ⟶ Y` smooth separated of pure relative dimension `d` and a finite coefficient ring
-`Λ` whose exponent is invertible on `X` (`sk-prop-cohsm`): the dualizing complex
-`ω_f = Rf^! Λ_Y` is ⊗-invertible, `Rf^! K ≅ Lf^* K ⊗^L ω_f` for every `K ∈ D^b_{ctf}(Y, Λ)`,
-and the formation of `Rf^!` commutes with base change.
+`Λ` whose exponent is invertible on `X` (`proposition-exceptional-inverse-image-smooth-morphism`):
+the dualizing complex `ω_f = Rf^! Λ_Y` is ⊗-invertible, `Rf^! K ≅ Lf^* K ⊗^L ω_f` for every
+`K ∈ D^b_{ctf}(Y, Λ)`, and the formation of `Rf^!` commutes with base change.
 
 These are the inputs of both the deformation to the normal cone
 (`WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation`) and smooth purity
@@ -27,14 +27,14 @@ morphism and its structural properties are in
 
 ## Implementation notes
 
-The three clauses of `sk-prop-cohsm` are read off from the orientation-free smooth duality of
-the ambient chapter, as in the proof of `thm-pur-cohomological-smoothness`: the locally constant
-rank-one shape of `ω_f` and the tensor formula
-(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`, `thm-asd-smooth-tensor`),
-and arbitrary base change for `Rf^!`
+The three clauses of `proposition-exceptional-inverse-image-smooth-morphism` are read off from the
+orientation-free smooth duality of the ambient chapter, as in the proof of
+`proposition-exceptional-inverse-image-smooth-morphism`: the locally constant rank-one shape of
+`ω_f` and the tensor formula (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`,
+`proposition-exceptional-inverse-image-smooth-morphism`), and arbitrary base change for `Rf^!`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`,
-`prop-asd-smooth-base-change`). A locally constant sheaf with free rank-one stalks, placed in any
-degree, is invertible
+`proposition-exceptional-inverse-image-smooth-morphism--6`). A locally constant sheaf with free
+rank-one stalks, placed in any degree, is invertible
 (`AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`).
 The canonical form of clause (b) is
 `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`.
@@ -75,7 +75,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
 
 *Clause (a).* For `f` smooth separated of pure relative dimension `d` the dualizing complex
 `ω_f = Rf^! Λ_Y` is ⊗-invertible: it is a lisse rank-one object, twisted and shifted. This is
@@ -89,7 +89,7 @@ theorem isInvertible_dualizingComplex :
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
 
 *Clause (b), the tensor formula.* For `f` smooth separated of pure relative dimension `d` and
 `K ∈ D^b_{ctf}(Y, Λ)`,
@@ -111,7 +111,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
 
 *Clause (b), the tensor formula, canonical form.* For `f` smooth of pure relative dimension `d`,
 the mate of the projection formula, `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
@@ -123,7 +123,7 @@ theorem isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
 
 *Clause (c), smooth base change for `R^!`.* In the cartesian square
 
@@ -170,9 +170,9 @@ theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}
 
 omit [HasTateTwist Λ] in
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
-ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm` (b) for `e`,
-smooth of relative dimension zero, together with `ω_e ≅ Λ_X`
-(`lem-pur-co-smooth-etale-locality`). -/
+ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of
+`proposition-exceptional-inverse-image-smooth-morphism` (b) for `e`, smooth of relative dimension
+zero, together with `ω_e ≅ Λ_X` (`lem-pur-co-smooth-etale-locality`). -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
     [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

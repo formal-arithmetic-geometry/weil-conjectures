@@ -168,19 +168,20 @@ Proof, following the node (adjoint form of Bhatt--Scholze, Section 6.4):
 2. Module sheaves form Grothendieck abelian categories
    (`lem-weil-pbc-module-sheaves-grothendieck-abelian`), so derived coproducts are termwise
    and exact (`lem-kun-grothendieck-derived-coproducts`). Exact inverse image is a left
-   adjoint (`prop-weil-pbc-inverse-image-modules-exact`), so `g^*, j^*, q^*` and étale slice
+   adjoint (`situation-conventions`), so `g^*, j^*, q^*` and étale slice
    restrictions preserve derived coproducts.
 3. `C` is torsion and `k` separably closed: `lem-etale-finite-type-sep-closed-derived-dimension`
    applied separately to `q` and `a`, with `lem-etale-qcqs-finite-dimension-derived-coproducts`,
    gives that `Rq_*` and `Ra_*` preserve coproducts. Sections on `(Spec k)_ét` are exact and
    preserve sums (`lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant`), so
    `RΓ(V, -)` preserves coproducts.
-4. `g_*` is exact (`lem-cbc-open-closed-recollement`), so `Rg_* = g_*` and the closed counit
-   (`prop-weil-open-closed-recollement-adjunctions`) gives `g^* g_* ≅ id`. Compare the
-   closed-support triangles `g_* Rg^! K → K → Rq_* q^* K` (`lem-exc-closed-support-triangle`,
-   `lem-exc-closed-ambient`) for `K_i` and for `⨁ K_i`; steps 2 and 3 make the last two
-   comparisons isomorphisms, so the first is too, and applying `g^*` shows that `Rg^!`, hence
-   `B = j^* Rg^!`, commutes with coproducts.
+4. `g_*` is exact (`proposition-extension-zero-restriction-closed-subscheme--8`), so `Rg_* = g_*`
+and the closed counit
+   (`proposition-extension-zero-restriction-closed-subscheme`) gives `g^* g_* ≅ id`. Compare the
+   closed-support triangles `g_* Rg^! K → K → Rq_* q^* K`
+   (`lemma-local-cohomology-right-adjoint--2`, `lemma-local-cohomology-right-adjoint--1`) for `K_i`
+   and for `⨁ K_i`; steps 2 and 3 make the last two comparisons isomorphisms, so the first is too,
+   and applying `g^*` shows that `Rg^!`, hence `B = j^* Rg^!`, commutes with coproducts.
 5. On each nonempty member of a trivializing étale cover, `L` is constant with value a finite
    `C`-module `P`, flat as a geometric stalk. `P` is finitely presented (finite kernel of
    `C^n → P`), hence projective (`lem-weil-pbc-finitely-presented-flat-module-projective`),

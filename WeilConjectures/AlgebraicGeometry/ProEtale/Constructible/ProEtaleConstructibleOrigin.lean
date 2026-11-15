@@ -27,8 +27,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleConstructibleOrigin
 /-!
 # Constructible pro-etale coefficients are of etale origin
 
-Source: Weil blueprint, smooth purity, `lem-sf-proetale-constructible-origin`;
-Stacks Project, Tags 09AK and 09AL (blueprint: lem-sf-proetale-constructible-origin).
+Source: Weil blueprint, smooth purity, `theorem-comparison-constructible-sheaves`;
+Stacks Project, Tags 09AK and 09AL (blueprint: theorem-comparison-constructible-sheaves).
 
 The scalar conversion below is induced by constant scalar sections and sheafification.
 It retains the recorded intrinsic constructibility predicate and the recorded category
@@ -47,21 +47,21 @@ variable (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
 
 /-- The recorded finite coefficient ring sheaf with discrete lifted coefficients.
 Source: blueprint, finite coefficient convention
-(blueprint: lem-sf-proetale-constructible-origin). -/
+(blueprint: theorem-comparison-constructible-sheaves). -/
 noncomputable abbrev originCoefficientRing : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1} :=
   @finiteCoefficientRingSheaf.{u} T (ULift.{u + 1, u} B) _ _ ⊥
     (discreteTopology_bot _)
 
 /-- The recorded module category with the discrete coefficient topology fixed.
 Source: blueprint, finite coefficient convention
-(blueprint: lem-sf-proetale-constructible-origin). -/
+(blueprint: theorem-comparison-constructible-sheaves). -/
 noncomputable abbrev OriginModules :=
   ringedSiteModules.{u + 1} (originCoefficientRing T B)
 
 set_option linter.unusedSectionVars false in
 
 /-- The recorded canonical inverse image on module sheaves.
-Source: blueprint, site comparison (blueprint: lem-sf-proetale-constructible-origin). -/
+Source: blueprint, site comparison (blueprint: theorem-comparison-constructible-sheaves). -/
 noncomputable abbrev originComparison :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⥤ OriginModules T B :=
   @finiteCoefficientComparison.{u} T (ULift.{u + 1, u} B) _ _ ⊥ (discreteTopology_bot _)

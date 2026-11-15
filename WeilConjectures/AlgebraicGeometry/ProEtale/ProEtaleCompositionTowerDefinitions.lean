@@ -23,8 +23,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 /-!
 # Constructions on a compatible pro-etale compactification tower
 
-Source: main-20261015, thm-sf-comp-composition, Construction; Stacks Tags 0F7B and 0F7J
-(blueprint: def-trf-proetale-composition-tower-data).
+Source: main-20261015, proposition-composition-base-change-rf-shriek--1, Construction; Stacks Tags
+0F7B and 0F7J (blueprint: def-trf-proetale-composition-tower-data).
 
 The two sides below are independently constructed: the canonical origin compositor,
 conjugated to the supplied candidates by canonical comparisons, and the open adjunct of

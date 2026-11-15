@@ -21,8 +21,8 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 Let `S` be integral and of finite type over a field `k` (in the application `S = 𝔸¹_k`), with
 invertible dualizing complex `ω_S`, let `t : T ⟶ S` lie over the generic point of `S` (in the
 application `T = Spec \overline{k(t)}`), and let `X` be of finite type over `S` with base change
-`g : X_T ⟶ X`. This file proves blueprint `lem-weil-geometric-generic-duality`, Zariski locally
-on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ P` followed by a smooth
+`g : X_T ⟶ X`. This file proves blueprint `lemma-double-dual-geometric-generic-fibre--1`, Zariski
+locally on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ P` followed by a smooth
 `p : P ⟶ S` (e.g. `P = 𝔸^r_S` for `X` affine):
 
 - `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic`:
@@ -70,8 +70,8 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-weil-geometric-generic-duality`, first assertion (Zariski locally): **the
-dualizing complex of a generic fibre.**
+/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1`, first assertion (Zariski
+locally): **the dualizing complex of a generic fibre.**
 
 Let `S` be integral and of finite type over a field `k`, with invertible dualizing complex
 `ω_S` (e.g. `S = 𝔸¹_k`), let `Λ` be a finite ring whose exponent is invertible on `S`, and let
@@ -155,8 +155,8 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
   exact (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso e₁ ≪≫ leftDerivedUpperStarTensorIso _ g _ _ ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X').mapIso e₅).app _
 
-/-- Blueprint `lem-weil-geometric-generic-duality`, second assertion (Zariski locally): **the
-double dual on a geometric generic fibre.**
+/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1`, second assertion (Zariski
+locally): **the double dual on a geometric generic fibre.**
 
 In the setting of
 `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic` (`S`

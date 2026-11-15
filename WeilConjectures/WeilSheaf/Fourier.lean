@@ -892,7 +892,7 @@ lemma affineLine.restriction_map_artinSchreierIdempotent (ψ : AddChar k₀ (Pad
   rw [artinSchreierTranslationSheafHom_hom_app]
   rfl
 
--- TODO(unify): def-fd-artin-schreier-sheaf
+-- TODO(unify): lemma-artin-schreier-character-sheaf--1
 /-- The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine line: the pullback along `x ↦ a x` of
 the `ψ`-isotypic component `ℒ_ψ` of the pushforward of the constant sheaf along the
 Artin–Schreier cover `u^q - u = x`, which is Galois over the line with group `k₀`, so that its
@@ -1159,7 +1159,6 @@ lemma affineLine.artinSchreierAverageModHom_splitModHom_of_restriction
     affineLine.artinSchreierSplitHom_comp_evalHom, affineLine.artinSchreierAverageModHom_hom,
     ProEtale.adicUpperStar_map_hom, h₂, Category.assoc]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
 (of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`
@@ -1226,14 +1225,14 @@ noncomputable def affineLine.geometricSMul (a : AlgebraicClosure k₀) :
 
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
--- TODO(unify): def-real-weil-representation-operations
+-- TODO(unify): definition-weil-representation
 /-- `F.HasLinearArtinSchreierConstituent ψ a j` says that the restriction along `j : U ⟶ 𝔸¹` of
 the geometric linear Artin–Schreier sheaf `ℒ_{ψ(a x)}`, for `a` in the algebraic closure of
 `k₀`, is a constituent of the pullback of `F` to `U ⊗_{k₀} k̄`: a quotient of a lisse subsheaf
 of the underlying sheaf of `F` on `Ū`, that is, a subquotient in the category of lisse sheaves,
 a Jordan–Hölder constituent of the geometric monodromy representation
-(`def-a1-constituent-nonexceptional`). The geometric sheaf `ℒ_{ψ(a x)}` is the pullback of the
-underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x` of `𝔸¹_{k̄}`
+(`proposition-fourier-transform-middle-extension`). The geometric sheaf `ℒ_{ψ(a x)}` is the pullback
+of the underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x` of `𝔸¹_{k̄}`
 (`AlgebraicGeometry.affineLine.geometricSMul`); it is defined over the finite subextension
 `k₀(a)`, where it is `AlgebraicGeometry.artinSchreier` for the character `ψ ∘ Tr`, but only its
 pullback to the geometric affine line is used here. Being lisse of rank one, it is irreducible,
@@ -1495,7 +1494,7 @@ Artin–Schreier sheaf. -/
 theorem isLisse_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierKernel ψ).IsLisse :=
   isLisse_affineSpaceFourierKernel PUnit.{u + 1} ψ
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 /-- The Fourier–Deligne transform `FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]` from Weil complexes
 on the affine line to Weil complexes on the dual affine line, with Laumon's shift by the
 relative dimension one: the case `ι = PUnit` of `AlgebraicGeometry.affineSpaceFourierTransform`.
@@ -1512,16 +1511,16 @@ theorem fourierTransform_eq (ψ : AddChar k₀ (PadicAlgCl l)) :
       shiftFunctor _ (1 : ℤ) :=
   rfl
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive :=
   inferInstanceAs (affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).Additive
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 noncomputable instance (ψ : AddChar k₀ (PadicAlgCl l)) :
     (fourierTransform (l := l) ψ).CommShift ℤ :=
   inferInstanceAs ((affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).CommShift ℤ)
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 /-- The Fourier–Deligne transform is a triangulated functor, as a composite of the triangulated
 functors `pr₁^*`, `- ⊗ μ^* ℒ_ψ`, `Rpr₂!` and the shift. -/
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated :=

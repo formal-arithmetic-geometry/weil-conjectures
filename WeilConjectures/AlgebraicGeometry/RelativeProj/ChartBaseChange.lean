@@ -33,7 +33,7 @@ that tensor products commute with this colimit; we carry this out by hand.
 - `GradedRingHom.IsGradedBaseChange.irrelevant_le` — the irrelevant ideal condition needed for
   `Proj.map`.
 - `GradedRingHom.IsGradedBaseChange.isBaseChange_awayMap` — the chart rings form a base change
-  (blueprint: `prop-nagata-relative-proj-functoriality`, item 4, chart identification).
+  (blueprint: `definition-admissible-blow-up--1`, item 4, chart identification).
 -/
 
 @[expose] public section
@@ -267,7 +267,7 @@ include hs in
 /-- **Chart rings commute with coefficientwise base change**: for `s ∈ 𝒜 d`, the square
 `R → S`, `R → Away 𝒜 s → Away ℬ (φ s)` is a pushout, i.e.
 `S ⊗[R] (A_{(s)})₀ ≅ (B_{(φ s)})₀`, `c ⊗ (a / s ^ m) ↦ c • φ a / φ s ^ m`.
-(blueprint: `prop-nagata-relative-proj-functoriality`, item 4, chart identification) -/
+(blueprint: `definition-admissible-blow-up--1`, item 4, chart identification) -/
 theorem isPushout_away :
     haveI := awayMapAlgebra_isScalarTower s h.map_algebraMap
     Algebra.IsPushout R S (Away 𝒜 s) (Away ℬ (φ s)) := by

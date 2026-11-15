@@ -28,8 +28,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
-set_option maxHeartbeats 800000 in
--- Coordinate comparisons elaborate several completion algebra structures.
 private theorem stage_completion_flat
     (A B H : Type u) [CommRing A] [CommRing B] [CommRing H] [IsNoetherianRing B]
     (I : Ideal A) (f : A →+* B) (η : A →+* H) (ι : B →+* H)
@@ -64,12 +62,10 @@ private theorem stage_completion_flat
     rw [hxa] at hαa
     simp only [AdicCompletion.algebraMap_apply, AdicCompletion.evalₐ_of,
       Algebra.algebraMap_self, RingHom.id_apply] at hαa
-    have hpow : ((I.map f) ^ n).map ι = (I.map η) ^ n := by
-      rw [← Ideal.map_pow, Ideal.map_map, hι, Ideal.map_pow]
     let qBH := Ideal.quotientMap ((I.map η) ^ n) ι
       (show (I.map f) ^ n ≤ (((I.map η) ^ n).comap ι) by
-        rw [← hpow]
-        exact Ideal.le_comap_map)
+        apply Ideal.map_le_iff_le_comap.mp
+        rw [Ideal.map_pow, Ideal.map_map, hι])
     have hb := congrArg qBH hαa
     change Ideal.Quotient.mk ((I.map η) ^ n) (ι b) =
       Ideal.Quotient.mk ((I.map η) ^ n) (ι (f a)) at hb
@@ -83,8 +79,6 @@ private theorem stage_completion_flat
   exact ((RingHom.flat_algebraMap_iff).mpr inferInstance).comp
     (RingHom.Flat.of_bijective α.symm.bijective)
 
-set_option maxHeartbeats 800000 in
--- Transport between colimit vertices elaborates their quotient algebra structures.
 /-- The canonical map from a pair henselization to the base completion is faithfully flat.
 Source: Stacks Project, More on Algebra, Tag 0AGV, middle paragraphs of the proof.
 (blueprint: lem-weil-pbc-henselization-completion-faithfully-flat).
@@ -159,24 +153,24 @@ theorem pair_henselization_completion_faithfullyFlat
   have hπ (h : c.pt.right) : Q (π (γ h)) = Ideal.Quotient.mk J h := by
     obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective
       (AdicCompletion.evalₐ I 1 (γ h))
-    have ht := hθ 1 (γ h) a ha.symm
+    have ht : AdicCompletion.evalₐ J 1 (θ (γ h)) =
+        Ideal.Quotient.mk (J ^ 1) (c.pt.hom.hom a) := hθ 1 (γ h) a ha.symm
     have heval : AdicCompletion.evalₐ J 1
         (algebraMap c.pt.right (AdicCompletion J c.pt.right) h) =
         Ideal.Quotient.mk (J ^ 1) h := by
-      simp [AdicCompletion.algebraMap_apply, AdicCompletion.evalₐ_of]
+      exact AdicCompletion.evalₐ_of J 1 h
     have hγ : θ (γ h) = algebraMap c.pt.right (AdicCompletion J c.pt.right) h :=
       θ.apply_symm_apply _
-    rw [hγ, heval] at ht
+    have hb : Ideal.Quotient.mk (J ^ 1) h =
+        Ideal.Quotient.mk (J ^ 1) (c.pt.hom.hom a) :=
+      heval.symm.trans ((congrArg (AdicCompletion.evalₐ J 1) hγ).symm.trans ht)
     have hπa : π (γ h) = Ideal.Quotient.mk I a := by
       change Ideal.Quotient.factor (show I ^ 1 ≤ I by simp)
         (AdicCompletion.evalₐ I 1 (γ h)) = _
       rw [← ha, Ideal.Quotient.factor_mk]
-    rw [hπa]
+    apply (congrArg Q hπa).trans
     change Ideal.Quotient.mk J (c.pt.hom.hom a) = _
-    change Ideal.Quotient.mk (J ^ 1) h =
-      Ideal.Quotient.mk (J ^ 1) (c.pt.hom.hom a) at ht
-    have ht' := congrArg (Ideal.Quotient.factor (show J ^ 1 ≤ J by simp)) ht.symm
-    simpa only [Ideal.Quotient.factor_mk] using ht'
+    exact congrArg (Ideal.Quotient.factor (show J ^ 1 ≤ J by simp)) hb.symm
   have hflat : γ.Flat := by
     let P : ObjectProperty (Under (CommRingCat.of A)) := fun C ↦
       AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧

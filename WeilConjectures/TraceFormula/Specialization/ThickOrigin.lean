@@ -23,7 +23,7 @@ By base change along universal homeomorphisms
 the pullback exchange of the projection `Y × S ⟶ S` is invertible, so the specialization unit
 `σ_Y` of the constant family is an isomorphism
 (`ProEtale.CondensedRing.isIso_deformationModel_bot_unit_of_isUniversalHomeomorphism`; the case of
-blueprint `det-sp-constant-family-vanishing` needed for blueprint `det-sp-thick-origin`).
+blueprint `lemma-nearby-cycles-constant-family--1` needed for blueprint `lemma-case-z-v-x-m--1`).
 
 Consequently, for a closed subscheme `Z = V(I)` of `X` whose structure morphism is a universal
 homeomorphism, the zero-section map `ε_{X,Z}(Λ)` of the constant complex is an isomorphism, and the
@@ -79,8 +79,8 @@ instance isUniversalHomeomorphism_deformationTotalToTrait_bot (Y : Over (Spec (.
   inferInstanceAs (IsUniversalHomeomorphism (pullback.snd _ _))
 
 /-- **The constant family of a universally homeomorphic point** (blueprint
-`det-sp-constant-family-vanishing`, the case needed for blueprint `det-sp-thick-origin`): if the
-structure morphism of `Y` is a universal homeomorphism, e.g. `Y = Spec k[x]/(x^m)`, the
+`lemma-nearby-cycles-constant-family--1`, the case needed for blueprint `lemma-case-z-v-x-m--1`): if
+the structure morphism of `Y` is a universal homeomorphism, e.g. `Y = Spec k[x]/(x^m)`, the
 specialization unit `σ_Y` of the constant family `Y × S` is an isomorphism. The pullback exchange
 of the projection `Y × S ⟶ S` is invertible by base change along the universal homeomorphism
 `Y × S ⟶ S`, and the point case `ProEtale.CondensedRing.isIso_traitModel_unit` concludes. -/
@@ -96,7 +96,7 @@ theorem isIso_deformationModel_bot_unit_of_isUniversalHomeomorphism [IsSepClosed
 variable (X : Over (Spec (.of k))) (I : X.left.IdealSheafData)
 
 /-- **The zero-section map of the constant complex along a thickened point** (the
-constant-coefficient step of blueprint `det-sp-thick-origin`): if the structure morphism of the
+constant-coefficient step of blueprint `lemma-case-z-v-x-m--1`): if the structure morphism of the
 centre `Z = V(I)` is a universal homeomorphism and the restriction `Le^* σ_{𝒟_Z X}` of the
 specialization unit of the deformation to the zero section is an isomorphism, then the zero-section
 map `ε_{X,Z}(Λ)` is an isomorphism. -/
@@ -109,7 +109,7 @@ theorem isIso_zeroSectionMap_unit_of_isUniversalHomeomorphism [IsSepClosed k']
   exact isIso_zeroSectionMap_unit X I k' Λ
 
 /-- **The defect of the constant complex along a thickened point** (blueprint
-`det-sp-thick-origin`, conditional form): if the structure morphism of the centre `Z = V(I)` is a
+`lemma-case-z-v-x-m--1`, conditional form): if the structure morphism of the centre `Z = V(I)` is a
 universal homeomorphism and the restriction `Le^* σ_{𝒟_Z X}` of the specialization unit of the
 deformation to the zero section is an isomorphism, then `C_{X,Z}(Λ) = 0`. -/
 theorem isZero_specializationDefect_unit_of_isUniversalHomeomorphism [IsSepClosed k']
@@ -120,7 +120,7 @@ theorem isZero_specializationDefect_unit_of_isUniversalHomeomorphism [IsSepClose
   (isZero_specializationDefect_iff X I k' Λ _).2
     (isIso_zeroSectionMap_unit_of_isUniversalHomeomorphism Λ k' X I)
 
-/-- **The thick origin** (blueprint `det-sp-thick-origin`, conditional form): for `m ≥ 1`, the
+/-- **The thick origin** (blueprint `lemma-case-z-v-x-m--1`, conditional form): for `m ≥ 1`, the
 defect `C_{𝔸¹, V(x^m)}(Λ)` of the constant complex vanishes as soon as the restriction
 `Le^* σ_{𝒟}` of the specialization unit of the deformation `𝒟` of `V(x^m) ⊆ 𝔸¹` to the zero
 section is an isomorphism. The centre `V(x^m)` is a universally homeomorphic point

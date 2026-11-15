@@ -24,7 +24,7 @@ quasi-compact open complement `j : U ⟶ X`, `g : X' ⟶ X` a morphism and `i' :
 Together with the identifications of the underlying sheaves of the restrictions
 (`j'^* g^* j_! N ≅ g_U^* N`, `i'^* g^* i_* G ≅ g_Z^* G`, see
 `AlgebraicGeometry.ProEtale.upperStarLowerStarClosedBaseChangeIso`) this is the module-level
-content of part (4) of blueprint `det-sf-open-closed-sequence-ring-sheaf`.
+content of part (4) of blueprint `proposition-extension-zero-restriction-closed-subscheme`.
 -/
 
 @[expose] public section
@@ -47,8 +47,8 @@ variable {R : Type (u + 1)} [CommRing R] {Z U X Z' U' X' : Scheme.{u}}
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
   (hij' : IsCompl (Set.range i'.base) (Set.range j'.base))
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4), for `j_!`: the pullback
-`g^* j_! N` of an extension by zero of module sheaves is the extension by zero of its
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4), for `j_!`: the
+pullback `g^* j_! N` of an extension by zero of module sheaves is the extension by zero of its
 restriction to `U' = g⁻¹ U`, i.e. the counit `j'_! j'^* g^* j_! N ⟶ g^* j_! N` is an isomorphism
 of `g^* B`-module sheaves. -/
 theorem isIso_counit_app_upperStar_obj_openImmersionLowerShriek_obj (hi : i' ≫ g = gZ ≫ i)
@@ -76,9 +76,9 @@ theorem isIso_counit_app_upperStar_obj_openImmersionLowerShriek_obj (hi : i' ≫
 
 omit [IsClosedImmersion i] [QuasiCompact j] in
 include hij hij' in
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4), for `i_*`: the pullback
-`g^* i_* G` of a pushforward of module sheaves along `i` is the pushforward of its restriction
-to `Z' = g⁻¹ Z`, i.e. the unit `g^* i_* G ⟶ i'_* i'^* g^* i_* G` is an isomorphism of
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4), for `i_*`: the
+pullback `g^* i_* G` of a pushforward of module sheaves along `i` is the pushforward of its
+restriction to `Z' = g⁻¹ Z`, i.e. the unit `g^* i_* G ⟶ i'_* i'^* g^* i_* G` is an isomorphism of
 `g^* B`-module sheaves. -/
 theorem isIso_unit_app_upperStar_obj_lowerStar_obj (hj : j' ≫ g = gU ≫ j)
     (G : Mod (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R))

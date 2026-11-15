@@ -104,6 +104,68 @@ private theorem affine_generators_cover {X : Scheme.{u}}
   dsimp [q]
   infer_instance
 
+/-- Finite generation at a terminal object gives finite generating sections whenever
+finite free evaluation detects epimorphisms. -/
+private theorem finite_generators_iff_finite_terminal_sections
+    {C : Type*} [Category* C] {J : GrothendieckTopology C}
+    {R₀ : Sheaf J RingCat.{u}}
+    [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    (N : SheafOfModules.{u} R₀) (T : C) (hT : CategoryTheory.Limits.IsTerminal T)
+    (hepi : ∀ (I : Type u) [Finite I] (s : I → N.sections),
+      Epi (N.freeHomEquiv.symm s) ↔
+        Function.Surjective ((N.freeHomEquiv.symm s).val.app (.op T))) :
+    (∃ σ : N.GeneratingSections, Finite σ.I) ↔
+      Module.Finite (R₀.obj.obj (.op T)) (N.val.obj (.op T)) := by
+  classical
+  constructor
+  · rintro ⟨σ, hσ⟩
+    let : Fintype σ.I := Fintype.ofFinite σ.I
+    have hf : Module.Finite (R₀.obj.obj (.op T))
+        ((SheafOfModules.free (R := R₀) σ.I).val.obj (.op T)) :=
+      Module.Finite.equiv
+        (SheafOfModules.freeSectionsLinearEquiv (R := R₀) σ.I (.op T)).symm
+    have hsurj := (hepi σ.I σ.s).mp σ.epi
+    exact Module.Finite.of_surjective (σ.π.val.app (.op T)).hom hsurj
+  · intro h
+    have : Module.Finite (R₀.obj.obj (.op T)) (N.val.obj (.op T)) := h
+    obtain ⟨k, t, ht⟩ := Module.Finite.exists_fin
+      (R := (R₀).obj.obj (.op T)) (M := N.val.obj (.op T))
+    let τ (W : Cᵒᵖ) : W.unop ⟶ T := hT.from W.unop
+    let s : ULift.{u} (Fin k) → N.sections := fun i ↦
+      PresheafOfModules.sectionsMk
+        (fun W ↦ N.val.map (τ W).op (t i.down))
+        (fun W Z g ↦ by
+          change N.val.presheaf.map g (N.val.presheaf.map (τ W).op (t i.down)) =
+            N.val.presheaf.map (τ Z).op (t i.down)
+          rw [← Functor.map_comp_apply]
+          have hcomp : (τ W).op ≫ g = (τ Z).op := by
+            apply Quiver.Hom.unop_inj
+            exact hT.hom_ext _ _
+          rw [hcomp])
+    let φ := N.freeHomEquiv.symm s
+    have hsurj : Function.Surjective (φ.val.app (.op T)) := by
+      let L := (φ.val.app (.op T)).hom
+      apply LinearMap.range_eq_top.mp
+      apply top_unique
+      rw [← ht]
+      apply Submodule.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      refine ⟨(SheafOfModules.freeSection (R := R₀)
+        (ULift.up i : ULift.{u} (Fin k))).1 (.op T), ?_⟩
+      have he := congrArg (fun a : N.sections ↦ a.1 (.op T))
+        (SheafOfModules.sectionsMap_freeHomEquiv_symm_freeSection s (ULift.up i))
+      have hτ : τ (.op T) = 𝟙 T := by
+        exact hT.hom_ext _ _
+      change (φ.val.app (.op T))
+        ((SheafOfModules.freeSection (R := R₀)
+          (ULift.up i : ULift.{u} (Fin k))).1 (.op T)) =
+            N.val.presheaf.map (τ (.op T)).op (t i) at he
+      rw [hτ] at he
+      simpa only [op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] using he
+    have hφ : Epi φ :=
+      (hepi (ULift.{u} (Fin k)) s).mpr hsurj
+    exact ⟨{ I := ULift.{u} (Fin k), s := s, epi := hφ }, inferInstance⟩
+
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -117,8 +179,6 @@ set_option hygiene false in
 local notation "PUSH" => SheafOfModules.pushforward.{u} (F := Opens.map f.base)
   (S := AR) (R := U.ringCatSheaf) (𝟙 AR)
 
-set_option maxHeartbeats 400000 in
--- The explicit finite-free section calculation needs extra elaboration heartbeats.
 /-- On one affine open, finite global generators of the direct image over its
 sectionwise algebra are equivalent to finite generation of the inverse-image sections.
 Source: Stacks Project, Morphisms, Tag 01SB; Properties, Tag 01PB; Cohomology of
@@ -145,58 +205,9 @@ private theorem affine_pushforward_finite_generators [IsAffineHom f]
     (F : U.Modules) (hF : F.IsQuasicoherent) (V : X.Opens) (hV : IsAffineOpen V) :
     (∃ σ : ((PUSH).obj F |>.over V).GeneratingSections, Finite σ.I) ↔
       Module.Finite Γ(U, f ⁻¹ᵁ V) Γ(F, f ⁻¹ᵁ V)  := by
-  classical
-  let N := ((PUSH).obj F).over V
-  let T : Over V := Over.mk (𝟙 V)
-  constructor
-  · rintro ⟨σ, hσ⟩
-    let : Fintype σ.I := Fintype.ofFinite σ.I
-    have hf : Module.Finite (((AR).over V).obj.obj (.op T))
-        ((SheafOfModules.free (R := (AR).over V) σ.I).val.obj (.op T)) :=
-      Module.Finite.equiv
-        (SheafOfModules.freeSectionsLinearEquiv (R := (AR).over V) σ.I (.op T)).symm
-    have hsurj := (affine_pushforward_free_evaluation f F hF V hV σ.I σ.s).mp σ.epi
-    exact Module.Finite.of_surjective (σ.π.val.app (.op T)).hom hsurj
-  · intro h
-    have : Module.Finite (((AR).over V).obj.obj (.op T)) (N.val.obj (.op T)) := h
-    obtain ⟨k, t, ht⟩ := Module.Finite.exists_fin
-      (R := ((AR).over V).obj.obj (.op T)) (M := N.val.obj (.op T))
-    let τ (W : (Over V)ᵒᵖ) : W.unop ⟶ T :=
-      Over.homMk W.unop.hom (by simp [T])
-    let s : ULift.{u} (Fin k) → N.sections := fun i ↦
-      PresheafOfModules.sectionsMk
-        (fun W ↦ N.val.map (τ W).op (t i.down))
-        (fun W Z g ↦ by
-          change N.val.presheaf.map g (N.val.presheaf.map (τ W).op (t i.down)) =
-            N.val.presheaf.map (τ Z).op (t i.down)
-          rw [← Functor.map_comp_apply]
-          have hcomp : (τ W).op ≫ g = (τ Z).op := by
-            apply Quiver.Hom.unop_inj
-            exact CategoryTheory.Over.mkIdTerminal.hom_ext _ _
-          rw [hcomp])
-    let φ := N.freeHomEquiv.symm s
-    have hsurj : Function.Surjective (φ.val.app (.op T)) := by
-      let L := (φ.val.app (.op T)).hom
-      apply LinearMap.range_eq_top.mp
-      apply top_unique
-      rw [← ht]
-      apply Submodule.span_le.mpr
-      rintro _ ⟨i, rfl⟩
-      refine ⟨(SheafOfModules.freeSection (R := (AR).over V)
-        (ULift.up i : ULift.{u} (Fin k))).1 (.op T), ?_⟩
-      have he := congrArg (fun a : N.sections ↦ a.1 (.op T))
-        (SheafOfModules.sectionsMap_freeHomEquiv_symm_freeSection s (ULift.up i))
-      have hτ : τ (.op T) = 𝟙 T := by
-        exact CategoryTheory.Over.mkIdTerminal.hom_ext _ _
-      change (φ.val.app (.op T))
-        ((SheafOfModules.freeSection (R := (AR).over V)
-          (ULift.up i : ULift.{u} (Fin k))).1 (.op T)) =
-            N.val.presheaf.map (τ (.op T)).op (t i) at he
-      rw [hτ] at he
-      simpa only [op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] using he
-    have hφ : Epi φ :=
-      (affine_pushforward_free_evaluation f F hF V hV (ULift.{u} (Fin k)) s).mpr hsurj
-    exact ⟨{ I := ULift.{u} (Fin k), s := s, epi := hφ }, inferInstance⟩
+  exact finite_generators_iff_finite_terminal_sections
+    (((PUSH).obj F).over V) (Over.mk (𝟙 V)) CategoryTheory.Over.mkIdTerminal
+    (affine_pushforward_free_evaluation f F hF V hV)
 
 
 set_option hygiene false in
@@ -212,7 +223,7 @@ Proof (the five steps of the node):
 1. Transport finite generation through the given `A`-linear isomorphism, reducing to
    `M = f_* F` (`lem-weil-pbc-affine-module-correspondence`). An epimorphism from a
    finite free module means every section is locally a linear combination of its
-   basis images (`def-weil-sheaf-of-modules-category`,
+   basis images (`situation-conventions`,
    `def-weil-pbc-module-finite-type-presentation`). Generation restricts to smaller
    opens. Affine opens form a basis, and their inverse images are affine.
 2. On an affine open `V` of `X`, set `B = O_U(f⁻¹ V)`. A finite family generating

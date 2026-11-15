@@ -29,10 +29,10 @@ Indeed `Ψ_M A ⟶ Ψ_{M_Ω} A` and `Ψ_P (A ⊠ B) ⟶ Ψ_{P_Ω} (A ⊠ B)` are
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin`), `Π_Ω` is
 equivariant (`NearbyCyclesModel.kunnethMap_autAction`) with the Galois group acting trivially on
 the second factor, and invariants commute with the tensor product with a complex with trivial
-action (blueprint `det-nearby-kunneth-invariants`,
+action (blueprint `prose-E-10`,
 `NearbyCyclesModel.isIso_map_kunnethMap_of_coinvariant`). This is the projection formula (3) of
 the generic-slicing step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`), for torsion coefficients.
+`proposition-external-kunneth-formula-nearby-cycles`), for torsion coefficients.
 
 -/
 
@@ -82,8 +82,8 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two product configurations are large terms
 /-- **The Künneth map descends along a Galois layer** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, projection formula (3); torsion coefficients). Let
-`φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` be morphisms of models with the generic fibres of `M`, `P` over `L`,
+`proposition-external-kunneth-formula-nearby-cycles`, projection formula (3); torsion coefficients).
+Let `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` be morphisms of models with the generic fibres of `M`, `P` over `L`,
 and `Ω/L` Galois with degrees invertible in `T₀`. Suppose that `Lε^*` of `A` on `M` and of
 `Lf₁^* A ⊗ Lf₂^* B` on `P` are bounded below of étale origin, and that the exchange
 `α_M : Ψ_M A ⟶ Ψ_{M_Ω} A` of the layer has a retraction `r_M` whose projector, tensored with the

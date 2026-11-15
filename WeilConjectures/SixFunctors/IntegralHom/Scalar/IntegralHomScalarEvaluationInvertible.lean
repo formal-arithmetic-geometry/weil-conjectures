@@ -30,7 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] HasDerivedCategory.standard RingedDerivedNative.monoidal
 
-set_option maxHeartbeats 700000 in
 -- Independent coefficient universes require extra elaboration of localization instances.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The completed-ring transpose of scalar-reduced evaluation is invertible.

@@ -85,7 +85,7 @@ theorem subsingleton_compactlySupportedCohomology_zero_of_isZero (F : WeilSheaf 
   exact ModuleCat.subsingleton_of_isZero
     ((WeilCoefficients.toModuleCat l).map_isZero (h.of_iso e))
 
-/-- Blueprint `lem-a1-affine-hc0`: Vanishing of `H_c⁰` on a nonproper curve.
+/-- Blueprint `lemma-degree-zero-top-cohomology--4`: Vanishing of `H_c⁰` on a nonproper curve.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
 Then `H_c⁰ (U, ℱ) = 0`.
@@ -145,7 +145,8 @@ theorem subsingleton_compactlySupportedCohomology_of_notMem [IsAffine U]
   · exact subsingleton_compactlySupportedCohomology_of_isAffine F hi'
 
 open PowerSeries in
-/-- Blueprint `cor-rp-euler-product`: Euler product of the `L`-function of a lisse sheaf.
+/-- Blueprint `theorem-trace-formula-euler-product--4`: Euler product of the `L`-function of a lisse
+sheaf.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
 Then, as power series in `T`,
@@ -155,9 +156,9 @@ Then, as power series in `T`,
 the product over the closed points being locally finite: for every `n`, the coefficient of
 `T ^ n` of the finite product over any finite set `s` of closed points containing those of
 degree at most `n` is the coefficient of `T ^ n` of the right-hand side. This is the
-Euler-product form of the trace formula (`thm-trf-l-function-euler-product`) for `ℱ` placed in
+Euler-product form of the trace formula (`theorem-trace-formula-euler-product`) for `ℱ` placed in
 degree zero, whose compactly supported cohomology is concentrated in degrees `0, 1, 2`, together
-with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`). -/
+with `H_c⁰ (U, ℱ) = 0` (`lemma-degree-zero-top-cohomology--4`). -/
 theorem coeff_prod_inv_localPolynomial_stalk_eq [IsAffine U]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)

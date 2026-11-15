@@ -257,7 +257,6 @@ private def restrictionInput
     flatB := NativeIsKFlat k₀ l Z }
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- This assembly combines totalization, localization and the fixed-model square.
 private theorem restrictionAbstract
     (E : ProEtaleWeilSheaf k₀ l U ⥤ ProEtaleWeilSheaf k₀ l Z)
@@ -276,6 +275,15 @@ private theorem restrictionAbstract
     (hiB : HEq m.iB (nativeOpenTensorInsertion k₀ l Z))
     (hr : ∀ M N, HEq (m.sheafRestriction M N) (r.app (M, N))) :
     Nonempty (OpenTensorRestrictionDescentData (restrictionInput k₀ l E R) m) := by
+  -- Derive zero preservation directly, avoiding search through the tensor constructions.
+  have : (nativeTensorBifunctor k₀ l U).flip.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
+  have : ∀ M, ((nativeTensorBifunctor k₀ l U).flip.obj M).PreservesZeroMorphisms :=
+    fun M ↦ Functor.preservesZeroMorphisms_of_additive _
+  have : (nativeTensorBifunctor k₀ l Z).flip.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
+  have : ∀ M, ((nativeTensorBifunctor k₀ l Z).flip.obj M).PreservesZeroMorphisms :=
+    fun M ↦ Functor.preservesZeroMorphisms_of_additive _
   obtain ⟨_, _, hTA, hιA⟩ := native_open_tensor_canonical_data k₀ l U
   obtain ⟨_, _, hTB, hιB⟩ := native_open_tensor_canonical_data k₀ l Z
   let c := restrictionInput k₀ l E R

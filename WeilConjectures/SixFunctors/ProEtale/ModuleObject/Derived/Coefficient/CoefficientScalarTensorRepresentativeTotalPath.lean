@@ -84,7 +84,6 @@ attribute [local irreducible] coefficientInternalScalarComplex
   coefficientSectionScalarTotal SheafOfModules.scalarPairComplexComparison
   internalScalarTensorComparison
 
-set_option maxHeartbeats 800000 in
 -- Compare the scalar and localization paths on the signed total tensor.
 /-- Normalize the scalar path through the localized signed total tensor.
 Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.

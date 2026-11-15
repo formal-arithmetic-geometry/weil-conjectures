@@ -50,9 +50,9 @@ Source: Stacks Project, derived.tex, Tags 08J5 and 05TC; proetale.tex, Tags 099T
 (blueprint: lem-sf-etale-origin-pushforward-amplitude).
 
 Proof:
-1. By det-pe-classical-sheaves-modules, comparison inverse image is exact and fully
+1. By theorem-classical-sheaves-essential-image--1, comparison inverse image is exact and fully
 faithful. Its canonical coefficient realization is an exact equivalence by
-def-weil-pbc-proetale-modules. Exactness commutes with cohomology, and faithfulness
+definition-small-pro-etale-site--1. Exactness commutes with cohomology, and faithfulness
 reflects zero objects (apply it to the identity and zero maps). Thus the assumed
 cohomological range of the comparison image gives the same range for L.
 2. Module sheaf categories are Grothendieck abelian and admit K-injective resolutions by
@@ -70,7 +70,7 @@ a finite tower of successive cohomology triangles (08J5), with no completeness a
 identification of lem-weil-pbc-right-derived-universal-delta-functor makes ordinary etale
 direct image zero on every sheaf. Applying it termwise to a K-injective resolution of L
 therefore gives a zero complex, so its ordinary total derived direct image is zero.
-6. Boundedness implies boundedness below, so sk-thm-pe-direct-image-comparison applies
+6. Boundedness implies boundedness below, so theorem-comparison-direct-images applies
 to f, which is qcqs: comparison of the etale derived image is isomorphic to the pro-etale
 derived image of the comparison of L. Exact comparison commutes with cohomology and
 preserves zero. Transfer the interval bound when N is nonnegative and the zero-object

@@ -82,7 +82,7 @@ theorem Scheme.Hom.FiniteApproximation.exists_isOpenImmersion_isClosedImmersion
 
 /-- **Zariski's Main Theorem, finite factorization** (Stacks Project Tag 05K0; blueprint
 `thm-pqf-zmt-factorization`, statement (i) of blueprint
-`lemma-nagata-zmt-open-immersion-affine-factorization`). A separated, quasi-compact, locally
+`proposition-relative-form-zariski-s-main--1`). A separated, quasi-compact, locally
 quasi-finite morphism `f : X ⟶ S` locally of finite type to a quasi-compact quasi-separated scheme
 factors as a quasi-compact open immersion `j : X ⟶ T` followed by a finite morphism `p : T ⟶ S`.
 

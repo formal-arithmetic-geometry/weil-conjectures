@@ -246,7 +246,6 @@ theorem generator_tensorPair (f : RingedPullback R S) (k : Comparison f)
 
 open scoped TensorProduct
 
-set_option maxHeartbeats 600000 in
 -- Repeated sheafification and scalar-extension identifications require extra elaboration.
 /-- Three scalar-extension unit insertions generate the triple sheaf tensor.
 Source: Stacks 03EK and 03EL (auxiliary; not a blueprint node).
