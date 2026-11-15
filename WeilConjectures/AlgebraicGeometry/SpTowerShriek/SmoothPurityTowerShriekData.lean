@@ -613,9 +613,7 @@ structure LocalizationData (b : Base l E) (o : Operations l E b)
             (o.geometry i).push).inv).app C.obj) δ) ∈
       distTriang (proEtaleDerivedCategory T (R l E n))
 
-/-- The three clauses, including the precise domains of the invertibility claims.
-Origin witnesses occur only in the testing hypotheses, never in the construction of
-operations or mates. -/
+/-- The compact-support laws, including the precise domains of the invertibility claims. -/
 structure Laws (b : Base l E) (o : Operations l E b) (x : OpenExchange l E b o) : Prop where
   bounded : ∀ {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (C : DerivedCategory.Plus (S l E X)),

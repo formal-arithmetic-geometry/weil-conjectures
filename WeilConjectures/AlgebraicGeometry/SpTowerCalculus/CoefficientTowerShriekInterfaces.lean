@@ -440,9 +440,8 @@ def cohomologicalInterval (T : Scheme.{u}) (n : ℕ)
     ((DerivedCategory.homologyFunctor
       (proEtaleRingModules T (proEtaleConstantRing T (SpTowerShriek.R l E n))) i).obj K)
 
-/-- The preservation assumption, exactly at the separated finite-type maps where compact support
-  is
-  restricted. No tower normalization is required. -/
+/-- The property that the coefficient-tower operations satisfy the preservation assumption at
+the separated finite-type maps over `k` where compact support is restricted. -/
 def Preservation (k : Type u) [Field k] (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations
   l E b)
     (q : Coordinates l E b) : Prop :=
