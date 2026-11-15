@@ -14,8 +14,8 @@ public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 # Euler products with bounded local roots
 
 This file contains the analytic part (Steps 1–3) of the proof of
-`lem-wf-boundary-semicontinuity`, stated for an abstract Euler product, so that it applies both
-to Weil representations and to Weil sheaves.
+`proposition-weights-j-boundary-points--1`, stated for an abstract Euler product, so that it applies
+both to Weil representations and to Weil sheaves.
 
 Let `J` be a set of "closed points", each with a degree `e x ≥ 1`, only finitely many of any
 bounded degree, and with at most `A qⁿ` points of degree `n`. At every point let
@@ -338,7 +338,7 @@ private theorem coeff_inv_tprod_inv_eulerPoly (he : ∀ x, e x ≠ 0)
   rw [← Polynomial.coeff_coe, ← hFinv, ← sub_eq_zero, ← map_sub]
   exact hinv n (Nat.lt_succ_self n)
 
-/-- Step 1 of `lem-wf-boundary-semicontinuity`: the pole-free region of the open part.
+/-- Step 1 of `proposition-weights-j-boundary-points--1`: the pole-free region of the open part.
 
 Let the closed points of `J`, of degrees `e x ≥ 1`, number at most `A qⁿ` in degree `n`, and let
 the local polynomial at `x` have at most `d` local roots, all of absolute value at most
@@ -391,7 +391,7 @@ theorem le_radius_inv_tprod_inv_eulerPoly (he : ∀ x, e x ≠ 0)
         gcongr
         exact hsum _
 
-/-- The analytic step of `lem-wf-boundary-semicontinuity` (Steps 1–3).
+/-- The analytic step of `proposition-weights-j-boundary-points--1` (Steps 1–3).
 
 In the situation of `PowerSeries.le_radius_inv_tprod_inv_eulerPoly`, suppose that the Euler
 product `L (T) = ∏_x P_x (T)⁻¹` satisfies `L (T) · ∏_{b ∈ S} (1 - b T) = P · B` for polynomials

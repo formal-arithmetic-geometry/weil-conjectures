@@ -1955,7 +1955,7 @@ formula, linear over the target completion.
 is needed. Restriction of scalars preserves cohomology, so all tower level maps
 are quasi-isomorphisms and commute strictly with transitions.
 3. Exact countable products (lem-weil-proetale-countable-products-exact) and
-lem-weil-derived-limit-existence identify termwise products with derived products.
+lemma-reduction-derived-nakayama identify termwise products with derived products.
 The rotated cone triangle is the Roos triangle of def-weil-derived-limit. The
 diagonal product map is a triangle morphism; the distinguished-triangle
 isomorphism criterion makes the cone map invertible. Cohomology detects the

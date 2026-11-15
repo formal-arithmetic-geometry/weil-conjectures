@@ -105,8 +105,8 @@ private theorem propagateFinite
 
 /-- Constructibility and a fixed stratum propagate from the residue reduction.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, first paragraph
-(blueprint: lem-pe-integral-finite-constructibility).
+Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
+(blueprint: lemma-bounds-finite-reductions--1).
 
 Proof: write B for the pulled-back continuous integer ring and A_n for the finite
 quotient of exponent n+1. Resolve K by a K-flat complex with flat terms. The regular

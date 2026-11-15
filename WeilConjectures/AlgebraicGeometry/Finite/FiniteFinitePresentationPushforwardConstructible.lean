@@ -115,7 +115,7 @@ Proof:
 3. Pull back F to F' on X' and then to H on Z. Both are constructible by
    prop-constructible-pullback and the module-sheaf comparison, with unchanged
    constant coefficient ring (def-weil-pbc-inverse-image).
-4. By sbc-lem-thickening-etale-site, i induces an equivalence of etale topoi.
+4. By lemma-reduction-field, i induces an equivalence of etale topoi.
    It preserves constant rings and products, hence module objects and their
    morphisms, and identifies F' with i_*H through the adjunction unit.
    The sectionwise composition isomorphism identifies f'_*F' with e_*H.

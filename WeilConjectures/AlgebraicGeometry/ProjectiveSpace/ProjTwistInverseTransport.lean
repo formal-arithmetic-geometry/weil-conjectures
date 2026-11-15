@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 # Transport of a polynomial Proj twist to the projective line
 
 Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7;
-Section 01MM, chart trivializations; blueprint lem-sc-p1-graded-resolution.
+Section 01MM, chart trivializations; blueprint theorem-riemann-roch-coherent-serre-duality.
 (blueprint: lem-sc-p1-proj-twist-inverse-transport).
 -/
 
@@ -32,7 +32,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Any chart-compatible comparison transports the Proj twist to the projective-space twist.
 Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7;
-blueprint lem-sc-p1-graded-resolution, shifted-free clause.
+blueprint theorem-riemann-roch-coherent-serre-duality, shifted-free clause.
 (blueprint: lem-sc-p1-proj-twist-inverse-transport).
 
 Proof: On D(x_i), the degree-d fractions form a rank-one module with generator x_i^d,

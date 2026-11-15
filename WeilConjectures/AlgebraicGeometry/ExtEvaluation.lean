@@ -33,7 +33,7 @@ Source: blueprint `lem-sc-ext-locally-free.md`, Proof, first sentence
 Proof: (1) Form the presheaf tensor product and the internal Hom sheaf
 [def-pur-sheaf-tensor-product, def-pur-sheaf-hom]. The existing `dualTensorHom` is induced
 by the restriction-compatible bilinear formula `φ ⊗ g ↦ (x ↦ φ(x) • g)`
-[def-weil-sheaf-of-modules-category, def-pur-sheaf-modules-hom-module]. On each open
+[situation-conventions, def-pur-sheaf-modules-hom-module]. On each open
 contained in a trivializing member of the finite locally free cover
 [def-amb-finite-locally-free-module, allowing varying local ranks], maps from the finite
 free sheaf are determined by the images of the standard basis. Both presheaf tensor and

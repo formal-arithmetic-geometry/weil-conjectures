@@ -18,7 +18,7 @@ import Mathlib.Algebra.Category.Grp.Zero
 # Pro-étale and étale primary cohomological dimensions agree
 
 Source: current blueprint, `sec-six-functors-basics/sk-def-cd/`
-`sk-def-cd-etale-comparison.md`, clauses 1--4 (blueprint: det-cd-etale-comparison).
+`sk-def-cd-etale-comparison.md`, clauses 1--4 (blueprint: lemma-cohomological-dimension-base-field).
 -/
 
 @[expose] public section
@@ -114,7 +114,7 @@ private theorem etale_torsion_of_ell {X : Scheme.{u}} (ℓ : ℕ) (hℓ : ℓ.Pr
 
 /-- Torsion transport, absolute and relative comparison, and the all-torsion bound.
 Source: current blueprint, `sk-def-cd-etale-comparison.md`, clauses 1--4
-(blueprint: det-cd-etale-comparison).
+(blueprint: lemma-cohomological-dimension-base-field).
 Proof:
 1. The generic Grothendieck-abelian comparison adjunction has exact fully
 faithful left adjoint, directly for abelian groups.

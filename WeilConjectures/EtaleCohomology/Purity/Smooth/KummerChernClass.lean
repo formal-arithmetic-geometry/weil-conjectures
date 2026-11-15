@@ -53,7 +53,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) [CompactSpace X]
   [QuasiSeparatedSpace X] [HasInvertibleExponent Λ X] [NeZero (ringChar Λ)]
 
 omit [CompactSpace X] [QuasiSeparatedSpace X] in
-/-- Blueprint `lem-pur-kummer-additivity` (the class): the first Chern class
+/-- Blueprint `proposition-purity-vector-bundles` (the class): the first Chern class
 `c₁(L) : Λ_X ⟶ Λ_X(1)[2]` of a line bundle `L`, the image of the class of `L` in
 `H¹(X, 𝔾ₘ) = Pic(X)` under the Kummer boundary `H¹(X, 𝔾ₘ) ⟶ H²(X, μₙ)` followed by the coefficient
 extension `H²(X, μₙ) ⟶ H²(X, μₙ ⊗ Λ) = Hom(Λ_X, Λ_X(1)[2])`. -/

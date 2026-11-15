@@ -14,7 +14,7 @@ import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 
 /-! # The cohomological range of a complete integral reduction tower
 
-Source: blueprint latest, sk-lem-integral-finite-levels, third proof paragraph.
+Source: blueprint latest, lemma-bounds-finite-reductions, third proof paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -89,7 +89,7 @@ private theorem limitTriangle_bounds
 /-- The common cohomological range of the canonical reductions bounds a complete complex
 when the top cohomology transitions are epic.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, third proof paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, third proof paragraph
 (blueprint: lem-pe-integral-finite-tower-bounds).
 
 Proof: use completeness to identify K with its specified augmented Roos model. The

@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 
 For torsion coefficients `Λ` with invertible exponent and schemes of finite type over a field,
 this file proves that the exceptional inverse image `Rf^!` preserves `Dctf`, with the shifts
-of `sk-prop-sf-rf-shriek-preservation`, and constructs the descended functors `Rf_*`, `Rf_!`
+of `theorem-f-shriek-finite-coefficients`, and constructs the descended functors `Rf_*`, `Rf_!`
 and `Rf^!`.
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
@@ -55,7 +55,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### The exceptional inverse image -/
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
 image.
 
 Clause (ii): for a closed immersion `i : Z ⟶ T` into a finite-type `k`-scheme of dimension
@@ -66,7 +66,7 @@ open complement, the vanishing of étale cohomology above twice the dimension gi
 and the triangle the extra `+1`. No bound in terms of the codimension alone holds: for
 `Z = V(y) ⊂ T = Spec k[x, y]/(xy)`, `H²(Ri^!Λ)` is nonzero at the origin, coming from the
 punctured `y`-axis, although `Z` has codimension `0`. For `Z` regular of pure codimension `c` in
-a regular `T`, the sharp `Ri^!Λ_T ≅ Λ_Z(-c)[-2c]` is `sk-thm-regular`. -/
+a regular `T`, the sharp `Ri^!Λ_T ≅ Λ_Z(-c)[-2c]` is `lemma-class-of-point--1`. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     {Z T : Scheme.{u}} (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT]
     [HasInvertibleExponent Λ T] (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
@@ -120,7 +120,7 @@ lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
   exact ObjectProperty.prop_of_iso _ ((GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫
     (hL Ω s).some).symm (ObjectProperty.prop_unit (ObjectProperty.flat (A := ModuleCat.{u + 1} Λ)))
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
 image.
 
 Clause (iii): for `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is
@@ -128,8 +128,8 @@ invertible on `Y`, the exceptional inverse image shifts both intervals by `-2d`,
 `D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. Without choosing an
 orientation, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` for a locally constant sheaf `L` of free rank-one
 `Λ`-modules (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`,
-`thm-asd-smooth-tensor`), and tensoring with the flat constructible `L` changes neither the
-constructible interval nor the Tor amplitude. -/
+`proposition-exceptional-inverse-image-smooth-morphism`), and tensoring with the flat constructible
+`L` changes neither the constructible interval nor the Tor amplitude. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
     {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] (a b : ℤ)
@@ -228,7 +228,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_chart {U V Y : Schem
   rw [hb] at h₄
   exact h₄
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
 image.
 
 Clause (iv), with its constants: let `f : X ⟶ Y` be a separated finite-type morphism admitting
@@ -319,7 +319,7 @@ theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologica
   exact ⟨⟨hbc, _root_.DerivedCategory.TStructure.t.isGE_of_ge _ _ (a - 2 * n x) (by omega),
     hc₂⟩, hta.mono (by omega) le_rfl⟩
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
 image.
 
 Clause (iv), dimension-free form with the shift forgotten: every separated finite-type `f`
@@ -342,7 +342,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek {X Y : 
   obtain ⟨⟨hbc, hconc⟩, hta⟩ := hD d hd a b K hK
   exact ⟨⟨hbc, hconc.mono (by omega) (by omega)⟩, hta.mono (by omega) (by omega)⟩
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (v): `Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` is defined for every separated finite-type `f`
@@ -379,7 +379,7 @@ section Functors
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iii): the restriction
+/-- Blueprint `proposition-six-operations-dctf`, clause (iii): the restriction
 `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the derived direct image to the small categories, for a
 separated morphism of finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on
 `Y`. -/
@@ -393,7 +393,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (aX : X ⟶ Spe
     (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R((f)_*[ModuleCat.{u + 1} Λ]))
     fun K ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf K.property
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
+/-- Blueprint `proposition-six-operations-dctf`, clause (iv): the restriction
 `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the compactly supported direct image to the small
 categories, for a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ`
 whose exponent is invertible on `Y`. -/
@@ -406,7 +406,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (aY : Y ⟶ S
     (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R(f)_![ModuleCat.{u + 1} Λ])
     fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
+/-- Blueprint `proposition-six-operations-dctf`, clause (v): the restriction
 `Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` of the exceptional inverse image to the small categories, for
 a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ` whose exponent
 is invertible on `Y`. -/

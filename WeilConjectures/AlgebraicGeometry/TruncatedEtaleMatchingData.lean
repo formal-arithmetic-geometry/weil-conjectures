@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 /-!
 # Finite matching limits of truncated étale diagrams
 
-Source: blueprint lemma-weil-pbc-finite-hypercover-descent, finite matching-limit paragraph.
+Source: blueprint corollary-cohomology-pro-etale-affine, finite matching-limit paragraph.
 -/
 
 @[expose] public section

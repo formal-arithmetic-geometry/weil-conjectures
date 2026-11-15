@@ -12,6 +12,7 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitTransport
+import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 
 /-!
 # The forward cochain tensor counit square
@@ -77,8 +78,6 @@ local notation "ShX" => Sheaf (Scheme.ProEt.topology X) (ModuleCat A)
 local notation "ShU" => Sheaf (Scheme.ProEt.topology U) (ModuleCat A)
 local notation "pull" => (j)^*[ModuleCat A]
 
-set_option maxHeartbeats 1000000 in
--- Checking the concrete native sheaf tensor instances requires a larger kernel budget.
 /-- The published comparison satisfies its forward counit square on arbitrary complexes.
 
 Proof. Apply `leftDerivedUpperStarTensorComparison_app_app_fac` to the homotopy
@@ -116,24 +115,7 @@ theorem forward_transport
       (DerivedCategory.Q (C := ShU)).map
         (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
           pull).app P).app Q) := by
-  rw [CategoryTheory.Functor.leftDerivedFactors_eq_counit,
-    CategoryTheory.Functor.leftDerivedFactors_eq_counit,
-    CategoryTheory.Functor.leftDerivedFactors_eq_counit]
-  rw [CategoryTheory.Functor.cochainLocalization_tensorator_eq,
-    CategoryTheory.Functor.cochainLocalization_tensorator_eq]
-  have h := leftDerivedUpperStarTensorComparison_app_app_fac
-    (A := ModuleCat.{u + 1} A) j
-    ((HomotopyCategory.quotient ShX (.up ℤ)).obj P)
-    ((HomotopyCategory.quotient ShX (.up ℤ)).obj Q)
-  rw [leftDerivedUpperStarDerivedTensorCounit_app_app,
-    derivedTensorLeftDerivedUpperStarCounit_app_app] at h
-  dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂,
-    Functor.whiskeringLeft, Functor.whiskeringRight, Functor.comp_obj] at h
-  with_unfolding_all
-    simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
-      mapH_quotient, quotient_tensor, cochain_tensor_obj,
-      Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
-      Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc, cast_eq] using h
+  exact forward_transport_general (ModuleCat.{u + 1} A) j P Q
 
 end MixedRepForward
 end AlgebraicGeometry.ProEtale

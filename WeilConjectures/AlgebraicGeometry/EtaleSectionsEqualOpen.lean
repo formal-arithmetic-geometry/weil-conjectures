@@ -34,7 +34,7 @@ Proof:
 1. On the étale site of `V.left`, the presheaf assigning a singleton where the two
    sections agree and the empty set elsewhere is a subsheaf of the final sheaf.
    Restriction preserves agreement; the equalizer sheaf axiom of
-   def-weil-pbc-etale-sheaf-of-sets glues the local singleton sections.
+   situation-conventions glues the local singleton sections.
 2. By lem-weil-pbc-etale-subsheaf-final-open (Tag 04HV), this subsheaf is represented
    by an open `W`. It has the required property for étale test objects. Two candidate
    opens are equal by testing their own open immersions and obtaining both inclusions.

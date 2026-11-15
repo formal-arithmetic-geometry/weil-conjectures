@@ -476,7 +476,7 @@ private theorem zero_cokernel_quasiIso
 
 /-- Normalization identifies each scalar cokernel with the smaller strict level.
 Source: Stacks Tags 03EK, 06YS, 06YY and 05RT; blueprint
-lem-coef-normalized-dvr-effectivity, strict-model step.
+lemma-sp-tower-adjunction-foundation--2, strict-model step.
 (blueprint: lem-coef-normalized-dvr-flat-cokernel).
 
 Proof: compose the semilinear successor maps to obtain a chain map from P_m to

@@ -1175,7 +1175,7 @@ def sixFunctorFiniteWitnessSupport
       (refinementFiniteLevelFixedObject C.l E n hn X.obj.left O)
 
 /-- The recorded origin compositor with precisely the three supplied compactifications.
-Source: thm-sf-comp-composition, witnessed composition
+Source: proposition-composition-base-change-rf-shriek--1, witnessed composition
 (blueprint: def-sf-operation-stages). -/
 def sixFunctorFiniteCompositionComparison
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)

@@ -62,7 +62,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {Y : Scheme.{u}} {h Φ : Y ⟶ Y}
 /-- Scheme-Frobenius forms of Weil equivariance, for an invertible comparison.
 
 For an isomorphism `κ : LΦ^* ≅ Lh^*` (the comparison `κ_Y` of
-`def-pur-scheme-geometric-frobenius`), a square is equivariant for the geometric-Frobenius data
+`sec-Weil-complexes`), a square is equivariant for the geometric-Frobenius data
 `ψ` if and only if it is equivariant for the scheme-Frobenius data `κ ≫ ψ`. -/
 theorem isWeilMorphism_precomp_iff
     (κ : L((Φ)^*[ModuleCat.{u + 1} Λ]) ≅ L((h)^*[ModuleCat.{u + 1} Λ])) {f : M ⟶ N} :
@@ -140,7 +140,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {a : X
   [HasCompactification a] {g : X ⟶ X} {h : Y ⟶ Y}
 
 /-- The compact-support transport `AlgebraicGeometry.Etale.lowerShriekWeilDatum` of
-`def-pur-compact-support-transport` is the transport of Weil data along `Ra_!` with the
+`prose-10-20` is the transport of Weil data along `Ra_!` with the
 exchange `Ex_!`. -/
 lemma lowerShriekWeilDatum_eq_exchangeTransportWeilDatum [QuasiCompact a]
     (sq : IsPullback g a a h) {K : DerivedCategoryModule Λ X}

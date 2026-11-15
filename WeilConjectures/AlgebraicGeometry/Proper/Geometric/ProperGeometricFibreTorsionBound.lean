@@ -55,13 +55,13 @@ extension of the ordinary fibre. Properness survives base change
 dimension. Thus the geometric fibre has dimension at most e.
 3. A nonempty geometric fibre has dimension d with 0 <= d <= e, by
 def-kun-topological-krull-dimension. Its algebraically closed coefficient field is
-separably closed, so lem-sf-separably-closed-torsion-cd gives field torsion dimension
-zero. Apply thm-sc-finite-type-torsion-cd to obtain the bound 2d <= 2e, interpreted
-by def-sc-etale-torsion-cd using ordinary derived-section cohomology. Sectionwise
+separably closed, so lemma-cohomological-dimension-base-field--1 gives field torsion dimension
+zero. Apply lemma-uniform-bounds-pro-etale-affines to obtain the bound 2d <= 2e, interpreted
+by definition-cohomological-dimension using ordinary derived-section cohomology. Sectionwise
 torsion implies the local torsion required there by using the maximal covering sieve.
 No constructibility or invertibility condition is needed.
 4. On an empty fibre, the empty covering forces every abelian sheaf to be zero
-(def-weil-pbc-abelian-etale-sheaves). Its zero resolution computes zero cohomology
+(situation-conventions). Its zero resolution computes zero cohomology
 in every degree (def-weil-pbc-etale-cohomology). This completes all cases. -/
 theorem exists_proper_geometricFibre_torsion_cohomology_bound
     {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] [CompactSpace Y] :

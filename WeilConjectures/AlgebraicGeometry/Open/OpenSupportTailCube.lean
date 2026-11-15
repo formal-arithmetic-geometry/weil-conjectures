@@ -296,7 +296,7 @@ import all WeilConjectures.AlgebraicGeometry.Open.OpenSupportGraphExchange
 
 /-! # The graph-free proper/open part of the support cube
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 (blueprint: lem-asd-open-support-tail-cube)
 -/
 
@@ -553,8 +553,8 @@ private theorem tail_exact
   rfl
 
 /-- The proper/open interchange and open compositor commute with base change.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i), applied to the two
-base changes of the proper/open compactification diagram.
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i), applied
+to the two base changes of the proper/open compactification diagram.
 
 Proof: write k for the first projection of cf.g against j, k' for the corresponding
 projection after base change, and z for the first projection of cf.g against g.

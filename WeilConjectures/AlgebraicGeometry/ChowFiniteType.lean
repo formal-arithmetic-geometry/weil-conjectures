@@ -34,8 +34,9 @@ universe u
 namespace AlgebraicGeometry
 
 /-- Chow's lemma for a separated morphism of finite type over a quasi-compact
-quasi-separated base (Stacks Project, Tag 0202; (blueprint: lem-weil-pbc-chow-finite-type)):
-there are `n`, a proper surjective `π : X' ⟶ X` and an immersion `j : X' ⟶ ℙⁿ_S` over `S`.
+quasi-separated base (Stacks Project, Tag 0202; (blueprint:
+theorem-chow-s-lemma-projective-form--3)): there are `n`, a proper surjective `π : X' ⟶ X` and an
+immersion `j : X' ⟶ ℙⁿ_S` over `S`.
 
 Proof sketch: by Stacks 01ZJ, `f` factors as a closed immersion `i : X ⟶ Y` followed by a
 separated morphism `g : Y ⟶ S` of finite presentation; a solution for `g` pulls back along `i`

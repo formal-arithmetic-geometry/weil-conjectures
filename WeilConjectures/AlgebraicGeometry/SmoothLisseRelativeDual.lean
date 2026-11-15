@@ -58,7 +58,7 @@ theorem smoothRelativeDual_eq
   rfl
 
 /-- The canonical relative bidual map: transpose evaluation using the braiding.
-Source: blueprint lem-asd-smooth-generic-direct-image, construction of the relative dual
+Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, construction of the relative dual
 (auxiliary; not a blueprint node). -/
 noncomputable def smoothRelativeBidualMap
     (A : Type uA) [Category.{u + 1} A] [Abelian A]

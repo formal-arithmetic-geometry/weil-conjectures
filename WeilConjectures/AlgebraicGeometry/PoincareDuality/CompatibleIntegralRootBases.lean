@@ -48,7 +48,7 @@ private noncomputable def tateSystemFreeIso (X : Scheme.{u}) (ℓ : ℕ) [Fact �
 
 /-- A single pro-étale cover identifies the actual free root tower with the residue tower.
 
-Source: `sk-def-sp-tate-twist`, compatible primitive generators and integral construction.
+Source: `definition-tate-twists`, compatible primitive generators and integral construction.
 Proof: take the compatible abelian root bases on one cover. The free-module functor
 commutes with inverse image: the two composites are left adjoints of the same functor,
 by the monoidal sheaf adjunction and its lift to module objects. Apply this comparison

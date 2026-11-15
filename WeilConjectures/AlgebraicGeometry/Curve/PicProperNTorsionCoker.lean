@@ -20,7 +20,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 /-- The prime-to-characteristic Picard cokernel for a proper smooth curve.
-Source: blueprint `lem-sc-pic-proper-ntorsion`, final cokernel calculation.
+Source: blueprint `corollary-torsion-jacobian-field-extension`, final cokernel calculation.
 (blueprint: lem-sc-pic-proper-ntorsion-coker)
 
 Proof: the Picard decomposition gives a subgroup P0 with underlying set `f.picZero`

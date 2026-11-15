@@ -45,7 +45,7 @@ through `B/IB` since it kills `IB`.
 `e` whose localization is `A/I`, with the given section as the localization map.
 4. Lift `e` to `b` in `B` and set `A' = B_b`. Its spectrum is an open subscheme of
 `Spec B` by `lem-weil-pbc-principal-localization-open-immersion`, hence étale over
-`Spec A` by `lem-weil-pbc-etale-composition-cancellation`.
+`Spec A` by `definition-torsion-sheaves--3`.
 5. By `lem-weil-pbc-localization-quotient-commute`, `A'/IA'` is `(B/IB)_e`. The resulting
 isomorphism to `A/I` is inverse to the canonical map induced by `A → A'`, as can be
 checked on every element of `A`.

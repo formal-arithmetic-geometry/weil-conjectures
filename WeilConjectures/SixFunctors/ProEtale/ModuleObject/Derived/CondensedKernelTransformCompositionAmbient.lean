@@ -18,8 +18,8 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 This is the compact-support base-change, projection-formula, tensor-coherence and
 compact-support-composition calculation on the triple fibre product.
-Source: the ambient comparison paragraph of `lem-fd-kernel-composition`
-(blueprint: lem-fd-kernel-composition).
+Source: the ambient comparison paragraph of `proposition-fourier-inversion`
+(blueprint: proposition-fourier-inversion).
 
 The remaining proof is the full six-functor coherence calculation described by the
 source paragraph; it is split from the bounded restriction and Fourier specialization.

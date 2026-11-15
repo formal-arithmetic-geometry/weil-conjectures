@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
 The coordinate map of a unit, its Kummer class and the induced support boundary.
 Part of the construction in
 `WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass`
-(blueprint: def-pur-frame-class).
+(blueprint: proposition-purity-vector-bundles).
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +29,7 @@ Its factorization through the coordinate basic open is the explicit frame map us
 for the Kummer pullback.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: def-pur-frame-class). -/
+step 1 (blueprint: proposition-purity-vector-bundles). -/
 noncomputable def frameCoordinateMap (P : PurityFiniteSetting.{u}) {X : Scheme.{u}}
     (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
     X ⟶ Punctured (Spec (.of P.field.k)) := by
@@ -59,7 +59,7 @@ map to G_m over Spec k. The cartesian twist comparison identifies its target wit
 The inherited divisibility hypothesis is the one required by `coordinateKummer`.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: def-pur-frame-class). -/
+step 1 (blueprint: proposition-purity-vector-bundles). -/
 def frameCoordinateKummer (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level)
     (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
@@ -74,7 +74,7 @@ def frameCoordinateKummer (P : PurityFiniteSetting.{u})
 /-- The frame unit's Kummer class, namely g^* kappa(t) from the affine-line datum.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: def-pur-frame-class). -/
+step 1 (blueprint: proposition-purity-vector-bundles). -/
 def finiteFrameKummer (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level)
     (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
     Abelian.Ext (P.constant X) (P.frameCoefficientTwist h X 1) 1 :=
@@ -84,7 +84,7 @@ def finiteFrameKummer (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
 step 2, restriction of A(1) and the open-immersion counit
-(blueprint: def-pur-frame-class). -/
+(blueprint: proposition-purity-vector-bundles). -/
 def finiteFrameTwistCounit (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
@@ -100,7 +100,7 @@ The source is the first object of the canonical coefficient localization sequenc
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
 step 2, extend the individual Kummer class by zero before the connecting map
-(blueprint: def-pur-frame-class). -/
+(blueprint: proposition-purity-vector-bundles). -/
 def finiteFrameOpenKummer (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
@@ -121,7 +121,7 @@ splice with the canonical short exact localization sequence is the right-derived
 support connecting map, with the usual positive boundary convention. A principal
 basic-open immersion is affine, hence quasi-compact; no quasi-compactness assumption
 on X is imposed. Constant pullback identifies the closed source with i_* A_D.
-Source: thm-pur-with-support-exactness (blueprint: def-pur-frame-class). -/
+Source: thm-pur-with-support-exactness (blueprint: proposition-purity-vector-bundles). -/
 def finiteFrameBoundary (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :

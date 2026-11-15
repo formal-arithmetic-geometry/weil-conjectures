@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.HypercoverDescent
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf of `Λ`-modules on `S`. Then
 `Hᵠ(X, F|_X) = colimᵢ Hᵠ(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ], blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`). For `Λ = ℤ` these are abelian étale sheaves; no
+`corollary-cohomology-pro-etale-affine`). For `Λ = ℤ` these are abelian étale sheaves; no
 torsion hypothesis is needed.
 
 The statement is spelled out elementwise
@@ -24,9 +24,9 @@ comes from some `Xᵢ`, and a class on `Xᵢ` which dies on `X` dies on some `X�
 The proof follows the blueprint: a class on `X` is the class of a cocycle on a qcqs hypercover of
 `X` (`AlgebraicGeometry.Scheme.exists_cohomologyClass_eq_of_isQcqsHypercover`); the truncation of
 the hypercover in degrees `≤ q + 1` descends to some `Xᵢ`
-(blueprint `lemma-weil-pbc-finite-hypercover-descent`), and so do the cocycle and the cocycle
-condition by continuity of sections (blueprint `lem-weil-pbc-etale-section-continuity`). For
-injectivity one descends in the same way a refinement on which the cocycle becomes a coboundary
+(blueprint `corollary-cohomology-pro-etale-affine`), and so do the cocycle and the cocycle
+condition by continuity of sections (blueprint `proposition-comparison-morphism-inverse-image--3`).
+For injectivity one descends in the same way a refinement on which the cocycle becomes a coboundary
 (`AlgebraicGeometry.Scheme.exists_isCoboundary_of_isQcqsHypercover`), the refinement map and the
 primitive.
 
@@ -172,7 +172,7 @@ variable {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
 include hc
 
 /-- **Continuity of étale cohomology, surjectivity** (blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`): every cohomology class of the pullback of `F` to
+`corollary-cohomology-pro-etale-affine`): every cohomology class of the pullback of `F` to
 the limit `X = lim Xᵢ` comes from some `Xᵢ`. -/
 @[stacks 09YQ]
 theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
@@ -265,7 +265,7 @@ theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
 
 -- the descent of the refinement, the cocycle and its primitive is a long elaboration
 /-- **Continuity of étale cohomology, injectivity** (blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`): a cohomology class of the pullback of `F` to some
+`corollary-cohomology-pro-etale-affine`): a cohomology class of the pullback of `F` to some
 `Xᵢ` which vanishes on the limit `X = lim Xᵢ` vanishes on some `Xⱼ`, `j ⟶ i`. -/
 @[stacks 09YQ]
 theorem exists_cohomologyRestrictOver_eq_zero_of_isLimit (q : ℕ) (i : I)

@@ -18,7 +18,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 # Locally constant module sheaves on the small pro-etale site
 
 Source: Bhatt--Scholze, *The pro-etale topology for schemes*, Definition 7.3.1(1),
-with module coefficients as in the Weil blueprint, def-weil-scheme-morphism-properties
+with module coefficients as in the Weil blueprint, definition-ind-etale-pro-etale-weakly--3
 (blueprint: def-weil-proetale-locally-constant-sheaf).
 
 Constant module sheaves are constructed by simultaneous sheafification of the

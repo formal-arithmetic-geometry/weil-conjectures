@@ -14,8 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupChartStri
 The open immersion `D_I X ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])`
 (`AlgebraicGeometry.Scheme.IdealSheafData.deformationSpaceToBlowup`) has image the complement of
 the closure of the locus lying over the zero section `t = 0` off the center, i.e. the complement
-of the strict transform of the zero section (blueprint `def-pur-dnc-section-family`). This is
-checked on the charts over the affine opens of `X`, where it is
+of the strict transform of the zero section (blueprint `definition-deformation-normal-bundle`). This
+is checked on the charts over the affine opens of `X`, where it is
 `AlgebraicGeometry.AffineBlowup.compl_closure_zeroFibreOffCenter`. For `I` of finite type the open
 locus of the zero section off the center has quasi-compact inclusion, so the closure is the strict
 transform (`range_deformationSpaceToBlowup_eq_compl_strictTransform_of_ofFiniteType`).
@@ -138,9 +138,9 @@ lemma chartBlowupHom_blowupι_blowupMap (U : X.AffineZariskiSite) :
   rw [AffineBlowup.hom_toSpec_assoc, IsAffineOpen.isoSpec_inv_ι, CommRingCat.ofHom_hom,
     ι_eq_specMap_sectionsIso_hom_fromSpec X.coequifibered_toPolynomialPresheaf U]
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. The image of
-the Rees model `D_I X` in the blow-up `Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the complement of the
-closure of the locus over the zero section off the center, i.e. of the strict transform of the
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section. The
+image of the Rees model `D_I X` in the blow-up `Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the complement of
+the closure of the locus over the zero section off the center, i.e. of the strict transform of the
 zero section. -/
 theorem range_deformationSpaceToBlowup :
     Set.range I.deformationSpaceToBlowup =
@@ -203,8 +203,8 @@ theorem range_deformationSpaceToBlowup :
     refine ⟨colimit.ι (relativeGluingData I.coequifibered_toReesPresheaf).functor U d', ?_⟩
     exact (congr($(I.ι_deformationSpaceToBlowup U) d')).trans (hloc d')
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. When the
-strict transform of the zero section is the closure of its open locus (e.g. under the
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section. When
+the strict transform of the zero section is the closure of its open locus (e.g. under the
 quasi-compactness hypothesis below, which holds when `I` is of finite type by
 `IdealSheafData.quasiCompact_strictTransformOpen_ι`), the image of `D_I X` in the blow-up model
 is the complement of the strict transform. -/
@@ -317,8 +317,8 @@ lemma quasiCompact_strictTransformOpen_ι (hI : I.ofFiniteType) :
     rwa [Set.image_preimage_eq_inter_range, Scheme.Opens.range_ι, Set.inter_comm]
   infer_instance
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. For an ideal
-sheaf `I` of finite type, the image of the Rees model `D_I X` in the blow-up model
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section. For an
+ideal sheaf `I` of finite type, the image of the Rees model `D_I X` in the blow-up model
 `Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the complement of the strict transform of the zero section
 `X × 0`. -/
 theorem range_deformationSpaceToBlowup_eq_compl_strictTransform_of_ofFiniteType
@@ -338,8 +338,8 @@ noncomputable def blowupModelOpen : I.deformationCenterSheaf.blowup.Opens :=
       ((I.deformationCenterSheaf.support : Set X.polynomialSpec)ᶜ ∩
         Set.range X.polynomialSpecZeroSection)))ᶜ, isClosed_closure.isOpen_compl⟩
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. The Rees model
-`D_I X = Spec_X 𝒪_X[t, I t⁻¹]` is isomorphic to the open subscheme
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section. The
+Rees model `D_I X = Spec_X 𝒪_X[t, I t⁻¹]` is isomorphic to the open subscheme
 `Bl_{V(I) × 0} (Spec_X 𝒪_X[t]) ∖ (closure of the locus over the zero section off the center)` of
 the blow-up model, compatibly with the maps to `Spec_X 𝒪_X[t]`
 (`deformationSpaceIsoBlowupModelOpen_hom_ι`, `deformationSpaceToBlowup_blowupMap`). -/

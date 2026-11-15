@@ -169,7 +169,7 @@ private theorem triangleAdjunction
 /-- Supply the normalized strict cycle system, its unique completed limit, and its
 coefficient realization to the projective-line triangle identities.
 Source: blueprint affine-line proof step 9; projective-line triangle proof and diagonal
-limit and coefficient theorems (blueprint: lem-sfb-rational-p1-adjunction-assembly).
+limit and coefficient theorems (blueprint: proposition-projective-line-rational-coefficients--1).
 Proof plan: the characteristic assumptions make ell a unit in the field and in global
 sections. Construct the strict cycle system with `exists_diagonalTowerSystem`. Apply
 `diagonalTower_limit` and package its unique arrow and normalization as

@@ -169,7 +169,7 @@ Then `t = ωᵖ - ω` on a surjective étale cover of `U`: the base change of
 `Spec Γ(U, 𝒪)[y]/(yᵖ - y - t) ⟶ Spec Γ(U, 𝒪)` along `U ⟶ Spec Γ(U, 𝒪)`. The algebra is étale
 since the derivative of `yᵖ - y - t` is `-1`, and faithfully flat since it is free of rank
 `p ≥ 1`.
-(blueprint: `lem-sc-as-sequence`) -/
+(blueprint: `lemma-p-torsion-affine-curve-characteristic--3`) -/
 theorem exists_etale_surjective_pow_sub_eq_appTop {U : Scheme.{u}} {p : ℕ} (hp : p.Prime)
     (h : (p : Γ(U, ⊤)) = 0) (t : Γ(U, ⊤)) :
     ∃ (V : Scheme.{u}) (f : V ⟶ U), Etale f ∧ Surjective f ∧
@@ -229,7 +229,7 @@ lemma gaArtinSchreier_app_apply (U : X.Etaleᵒᵖ) (x : X.gaSheaf.obj.obj U) :
 
 /-- **`℘` is an epimorphism of étale sheaves**: every section `t` of `𝔾ₐ` is of the form
 `ωᵖ - ω` on the Artin–Schreier cover `Spec 𝒪[y]/(yᵖ - y - t)`.
-(blueprint: `lem-sc-as-sequence`) -/
+(blueprint: `lemma-p-torsion-affine-curve-characteristic--3`) -/
 theorem isLocallySurjective_gaArtinSchreier :
     Sheaf.IsLocallySurjective (X.gaArtinSchreier p hp) where
   imageSieve_mem {U} s := by
@@ -254,7 +254,7 @@ noncomputable def artinSchreierSequence :
     (kernel.condition _)
 
 /-- **Exactness of the Artin–Schreier sequence**: `0 → ker ℘ → 𝔾ₐ → 𝔾ₐ → 0` is short exact.
-(blueprint: `lem-sc-as-sequence`) -/
+(blueprint: `lemma-p-torsion-affine-curve-characteristic--3`) -/
 theorem artinSchreierSequence_shortExact : (X.artinSchreierSequence p hp).ShortExact :=
   have := X.isLocallySurjective_gaArtinSchreier p hp
   { exact := ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel _)
@@ -419,7 +419,7 @@ lemma injective_kernelι_gaArtinSchreier_app (U : X.Etaleᵒᵖ) :
 /-- **`θ : ℤ/p ⟶ ker ℘` is an isomorphism.** It is locally injective
 (`AlgebraicGeometry.Scheme.isLocallyInjective_zmodToGaPresheaf`) and locally surjective
 (`AlgebraicGeometry.Scheme.imageSieve_zmodToGaPresheaf_mem`).
-(blueprint: `lem-sc-as-sequence`) -/
+(blueprint: `lemma-p-torsion-affine-curve-characteristic--3`) -/
 theorem isIso_constantZModToKernelGaArtinSchreier :
     IsIso (X.constantZModToKernelGaArtinSchreier p hp) := by
   set θ := X.constantZModToKernelGaArtinSchreier p hp
@@ -461,7 +461,7 @@ theorem isIso_constantZModToKernelGaArtinSchreier :
     exact Presheaf.isLocallySurjective_of_isLocallySurjective _ (toSheafify _ _) θ.hom
 
 /-- The isomorphism `ℤ/p ≅ ker ℘` of étale sheaves on a scheme with `p = 0`.
-(blueprint: `lem-sc-as-sequence`) -/
+(blueprint: `lemma-p-torsion-affine-curve-characteristic--3`) -/
 noncomputable def constantZModIsoKernelGaArtinSchreier :
     X.constantZMod p ≅ kernel (X.gaArtinSchreier p hp) :=
   haveI := X.isIso_constantZModToKernelGaArtinSchreier p hp
@@ -472,8 +472,8 @@ noncomputable def constantZModIsoKernelGaArtinSchreier :
 /-- **Vanishing of `ℤ/p`-cohomology of an affine scheme in characteristic `p`.** Let `X` be an
 affine scheme with `p = 0` in `Γ(X, 𝒪_X)`. Then `Hᵠ(X_ét, ℤ/p) = 0` for `q ≥ 2`. This combines
 the exactness of the Artin–Schreier sequence `0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` (blueprint
-`lem-sc-as-sequence`) with the vanishing of `Hᵠ(X_ét, 𝔾ₐ)` for `q ≥ 1` on an affine scheme
-(blueprint `lem-sc-etale-affine-qcoherent`). -/
+`lemma-p-torsion-affine-curve-characteristic--3`) with the vanishing of `Hᵠ(X_ét, 𝔾ₐ)` for `q ≥ 1`
+on an affine scheme (blueprint `lemma-p-torsion-affine-curve-characteristic--4`). -/
 theorem subsingleton_sheafH_constantZMod_of_isAffine (X : Scheme.{u}) [IsAffine X] (p : ℕ)
     [Fact p.Prime] (hp : (p : Γ(X, ⊤)) = 0) (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H (X.constantZMod p) q) := by

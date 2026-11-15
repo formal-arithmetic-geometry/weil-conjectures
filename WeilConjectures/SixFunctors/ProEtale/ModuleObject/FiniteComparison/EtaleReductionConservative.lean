@@ -93,7 +93,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (E : Type) [Field E
 
 /-- **The étale reduction modulo `ℓⁿ` reflects isomorphisms**, `n ≠ 0`: a morphism of bounded
 constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ`, read on the small étale site, is an
-isomorphism is an isomorphism (derived Nakayama, blueprint `sk-lem-pe-derived-nakayama`). -/
+isomorphism is an isomorphism (derived Nakayama, blueprint `lemma-reduction-derived-nakayama`). -/
 theorem isIso_of_isIso_etaleReduction_map (hn : n ≠ 0)
     {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧} (φ : K ⟶ L)
     (h : IsIso ((etaleReduction ℓ E n X).map φ)) : IsIso φ := by

@@ -27,7 +27,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 # Bounded constructible pro-etale complexes form a triangulated subcategory
 
 Source: Stacks Project, Tags 09AL, 09B5 and 06UQ; Weil blueprint,
-`def-weil-finite-torsion-constructibility`
+`definition-constructible-sheaves`
 (blueprint: lem-weil-proetale-dbc-triangulated).
 -/
 
@@ -179,7 +179,7 @@ private theorem finite_homology_support_iff_bounded
 
 /-- Bounded globally constructible cohomology is invariant under isomorphisms and
 cuts out a full triangulated subcategory. Source: Stacks Project, Tags 09AL,
-09B5 and 06UQ; Weil blueprint, `def-weil-finite-torsion-constructibility`
+09B5 and 06UQ; Weil blueprint, `definition-constructible-sheaves`
 (blueprint: lem-weil-proetale-dbc-triangulated).
 
 Proof:

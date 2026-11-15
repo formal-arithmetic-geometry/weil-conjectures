@@ -16,8 +16,8 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 /-!
 # Normalization comparison objects on the isomorphism locus
 
-Source: normalization exact-sequence blueprint, unit `sk-thm-p1`.
-(blueprint: lem-weil-pbc-normalization-comparison-on-iso-locus)
+Source: normalization exact-sequence blueprint, unit
+`proposition-proper-base-change-projective-line`. (blueprint: lemma-normalization-constant-sheaf--1)
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 Source: normalization exact-sequence blueprint,
 `sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md`,
 identification over the isomorphism locus.
-(blueprint: lem-weil-pbc-normalization-comparison-on-iso-locus)
+(blueprint: lemma-normalization-constant-sheaf--1)
 
 Proof: Form W = ν⁻¹(V) and T = U ×_X V. The restricted map ν_V : W → V is an
 isomorphism by assumption. Finite base change identifies the restriction of the target

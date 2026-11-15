@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, with rings of integers `𝒪_E ⊆ 𝒪_L`.
 The scalar extension `- ⊗_E L : D_comp(Y, E) ⥤ D_comp(Y, L)` of blueprint
-`def-sfb-rationalization-quotient` is computed on an integral representative `K` by the derived
+`proposition-inverting-ell--2` is computed on an integral representative `K` by the derived
 base change `K ⊗ᴸ_{𝒪_E} 𝒪_L`, followed by rationalization. Here the derived base change is
 characterized by its universal property (`AlgebraicGeometry.Etale.IsDerivedBaseChange`): a
 morphism `η : K ⟶ Res K'` to the restriction of scalars of `K' ∈ D(Y_ét, 𝒪_L)` through which
@@ -468,7 +468,7 @@ lemma integersShrinkMap_nonZeroDivisors_le :
   PadicAlgCl.integersShrinkMap_mem_nonZeroDivisors l E L hx
 
 /-- The scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` of blueprint
-`def-sfb-rationalization-quotient`: the functor induced on the rationalizations by the derived
+`proposition-inverting-ell--2`: the functor induced on the rationalizations by the derived
 base change along `𝒪_E ⟶ 𝒪_L`. -/
 noncomputable abbrev derivedCompleteRationalScalarExtension :
     DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E ⥤
@@ -480,7 +480,7 @@ noncomputable abbrev derivedCompleteRationalScalarExtension :
 /-- Scalar extension is an exact triangulated functor.
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. The scalar extension
-`- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` (`def-sfb-rationalization-quotient`), induced on
+`- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` (`proposition-inverting-ell--2`), induced on
 the rationalizations by the derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L`, is a triangulated
 functor: it commutes with shifts and carries distinguished triangles to distinguished triangles.
 

@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Derived scalar triangles over a quotient coefficient ring
 
-Source: blueprint latest, sk-lem-integral-finite-levels, coefficient filtration paragraph.
+Source: blueprint latest, lemma-bounds-finite-reductions, coefficient filtration paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -51,7 +51,7 @@ private theorem quotientRestrictionFull
 /-- A short exact coefficient sequence yields a distinguished scalar-extension triangle
 linear over its middle quotient ring.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, first paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
 (blueprint: lem-pe-integral-finite-quotient-triangle).
 
 Proof: restriction along q is full, since the maps q tensor Z are epic, so cancelling

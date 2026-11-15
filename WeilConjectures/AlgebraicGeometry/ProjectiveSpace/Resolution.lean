@@ -581,7 +581,7 @@ vanishing), let `F = 𝒢(N)` and `K` the kernel of the evaluation `H⁰(F) ⊗ 
 epimorphism by `epi_of_surjective_H_zero`. Then `H⁰(K) = H¹(K) = 0`, so `K(1)` is trivial by
 `exists_iso_sigma_twist_zero`; twist back by `𝒪(-N)`.
 
-(blueprint: `lem-sc-p1-graded-resolution`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem exists_shortExact_sigma_twist (G : (ProjectiveLine (Spec (.of k))).Modules)
     [G.IsQuasicoherent] [G.IsFinitePresentation] :
     ∃ (J₁ J₀ : Type u) (_ : Finite J₁) (_ : Finite J₀) (d₁ d₀ : ℤ)

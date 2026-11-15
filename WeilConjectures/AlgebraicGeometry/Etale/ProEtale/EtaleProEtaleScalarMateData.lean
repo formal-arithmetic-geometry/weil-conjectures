@@ -146,7 +146,7 @@ abbrev scalarPullbackEtaleIso
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the canonical inverse-image
 square identifies exact termwise inverse images with their left derived functors.
-It specializes `sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+It specializes `theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate). -/
 def directImageComparisonAmbientPullbackIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -165,7 +165,7 @@ def directImageComparisonAmbientPullbackIso
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the ambient site/direct-image
 comparison is the actual counit mate of the specified inverse-image square.
-It specializes `sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+It specializes `theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate). -/
 def directImageComparisonAmbient
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -184,7 +184,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the ambient canonical
 comparison is invertible at every bounded-below input. It specializes
-`sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+`theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate).
 Proof: the site square is the canonical fibre-product square (step 1). Exact inverse
 images preserve lower bounds, and termwise localization constructs the displayed square
@@ -227,7 +227,7 @@ end AmbientComparisonProof
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the inverse of beta is
 taken only at the specified bounded-below input. It specializes
-`sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+`theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate). -/
 def directImageComparisonAmbientIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -15,8 +15,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 # Composition and identity of proper-open comparison maps
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-sf-operations,
-lem-weil-pbc-proper-open-comparison-composition, order 1842
-(blueprint: lem-weil-pbc-proper-open-comparison-composition).
+proposition-construction-independence-rf-shriek--7, order 1842
+(blueprint: proposition-construction-independence-rf-shriek--7).
 -/
 
 @[expose] public section
@@ -125,8 +125,8 @@ private theorem comparison_comp
 
 /-- The canonical composition identification for bounded below derived direct images.
 Source: Stacks Project, Tag 0D6E, and the composition identification in blueprint
-lem-weil-pbc-proper-open-comparison-composition
-(blueprint: lem-weil-pbc-proper-open-comparison-composition).
+proposition-construction-independence-rf-shriek--7
+(blueprint: proposition-construction-independence-rf-shriek--7).
 It derives the fibre-product-pasting isomorphism `lowerStarComp` on injectives.
 The injective-preservation structure comes from the exact inverse-image adjunction. -/
 noncomputable def properOpenDirectImageCompIso (Λ : Type (u + 1)) [CommRing Λ]
@@ -143,8 +143,8 @@ noncomputable def properOpenDirectImageCompIso (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Proper-open comparisons compose, using the canonical derived direct-image identification,
 for any commutative coefficient ring `Λ`.
-Source: blueprint (latest), sk-prop-sf-comp-coherence, order 2508
-(blueprint: lem-weil-pbc-proper-open-comparison-composition).
+Source: blueprint (latest), proposition-construction-independence-rf-shriek, order 2508
+(blueprint: proposition-construction-independence-rf-shriek--7).
 
 Proof:
 Write `t_f = c_f ≫ j₁^*(ε_f)`, where `c_f` is inverse-image composition and
@@ -233,7 +233,7 @@ theorem properOpenComparisonOfCommRing_comp (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The finite-coefficient case of `properOpenComparisonOfCommRing_comp`, kept for its existing
 users (`properOpenComparison` is `properOpenComparisonOfCommRing` at a finite ring).
-(blueprint: lem-weil-pbc-proper-open-comparison-composition). -/
+(blueprint: proposition-construction-independence-rf-shriek--7). -/
 theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃)
     [IsProper f] [IsProper g]

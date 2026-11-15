@@ -26,9 +26,9 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 
 /-! # Ground-field retagging of ordinary strict-tower operations
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 sk-prop-sp-tower-geometric-gamma.proof.md, clauses (2)--(3), and
-thm-pur-weil-equivariance-of-purity-and-trace, proof Step 1
+proposition-purity-trace-commute-frobenius, proof Step 1
 (blueprint: lem-pur-tower-operations-ground-field-retagging).
 
 Retagging is postcomposition of the structure map, not pullback of the scheme.

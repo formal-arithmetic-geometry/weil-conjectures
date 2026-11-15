@@ -37,7 +37,7 @@ public import WeilConjectures.Compactification.Defs
 /-!
 # Integral proper cohomological estimates
 
-Source: blueprint main-20261015, det-prop-int-compactness-direct-sums, proof steps 1--7.
+Source: blueprint main-20261015, proposition-compactness-proper-direct-image--2, proof steps 1--7.
 (blueprint: lem-sfb-integral-proper-cohomological-bounds).
 -/
 
@@ -153,7 +153,7 @@ private theorem integral_upper_from_heart
 argument. This does not assert a window isomorphism, preservation of coproducts, or
 preservation of a localizing closure.
 
-Source: blueprint main-20261015, det-prop-int-compactness-direct-sums, proof steps 1--7;
+Source: blueprint main-20261015, proposition-compactness-proper-direct-image--2, proof steps 1--7;
 Stacks Project, Tags 095U, 099B, 0A0E, 08TB, 08TC and 07KC.
 (blueprint: lem-sfb-integral-proper-cohomological-bounds).
 

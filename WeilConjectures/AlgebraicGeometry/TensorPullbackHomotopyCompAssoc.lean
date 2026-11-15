@@ -20,8 +20,60 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
--- Elaborating the six pinned adjunctions and termwise comparison needs a larger heartbeat budget.
+-- Prove the termwise compatibility with abstract functors so that checking it does not
+-- repeatedly reduce the concrete tensor pullbacks and their chosen adjunctions.
+private theorem mapHomotopyCategory_leftAdjointCompIso_assoc
+    {C₀ C₁ C₂ C₃ : Type*} [Category* C₀] [Category* C₁] [Category* C₂] [Category* C₃]
+    [Preadditive C₀] [Preadditive C₁] [Preadditive C₂] [Preadditive C₃]
+    {F₀₁ : C₀ ⥤ C₁} {F₁₂ : C₁ ⥤ C₂} {F₂₃ : C₂ ⥤ C₃}
+    {F₀₂ : C₀ ⥤ C₂} {F₁₃ : C₁ ⥤ C₃} {F₀₃ : C₀ ⥤ C₃}
+    [F₀₁.Additive] [F₁₂.Additive] [F₂₃.Additive]
+    [F₀₂.Additive] [F₁₃.Additive] [F₀₃.Additive]
+    {G₁₀ : C₁ ⥤ C₀} {G₂₁ : C₂ ⥤ C₁} {G₃₂ : C₃ ⥤ C₂}
+    {G₂₀ : C₂ ⥤ C₀} {G₃₁ : C₃ ⥤ C₁} {G₃₀ : C₃ ⥤ C₀}
+    (a₀₁ : F₀₁ ⊣ G₁₀) (a₁₂ : F₁₂ ⊣ G₂₁) (a₂₃ : F₂₃ ⊣ G₃₂)
+    (a₀₂ : F₀₂ ⊣ G₂₀) (a₁₃ : F₁₃ ⊣ G₃₁) (a₀₃ : F₀₃ ⊣ G₃₀)
+    (e₀₁₂ : G₂₁ ⋙ G₁₀ ≅ G₂₀) (e₁₂₃ : G₃₂ ⋙ G₂₁ ≅ G₃₁)
+    (e₀₁₃ : G₃₁ ⋙ G₁₀ ≅ G₃₀) (e₀₂₃ : G₃₂ ⋙ G₂₀ ≅ G₃₀)
+    (he : Functor.isoWhiskerLeft G₃₂ e₀₁₂ ≪≫ e₀₂₃ =
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₁₂₃ _ ≪≫ e₀₁₃)
+    {ι : Type*} (c : ComplexShape ι) (H : HomotopyCategory C₀ c) :
+    (F₂₃.mapHomotopyCategory c).map
+        ((Functor.mapHomotopyCategoryCompIso
+          (Adjunction.leftAdjointCompIso a₀₁ a₁₂ a₀₂ e₀₁₂) c).hom.app H) ≫
+      (Functor.mapHomotopyCategoryCompIso
+        (Adjunction.leftAdjointCompIso a₀₂ a₂₃ a₀₃ e₀₂₃) c).hom.app H =
+    (Functor.mapHomotopyCategoryCompIso
+        (Adjunction.leftAdjointCompIso a₁₂ a₂₃ a₁₃ e₁₂₃) c).hom.app
+          ((F₀₁.mapHomotopyCategory c).obj H) ≫
+      (Functor.mapHomotopyCategoryCompIso
+        (Adjunction.leftAdjointCompIso a₀₁ a₁₃ a₀₃ e₀₁₃) c).hom.app H := by
+  have hi := Adjunction.leftAdjointCompIso_assoc a₀₁ a₁₂ a₂₃ a₀₂ a₁₃ a₀₃
+    e₀₁₂ e₁₂₃ e₀₁₃ e₀₂₃ he
+  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
+  let q := HomotopyCategory.quotient C₃ c
+  change q.map ((F₂₃.mapHomologicalComplex c).map
+      ((Functor.mapHomologicalComplexCompIso
+        (Adjunction.leftAdjointCompIso a₀₁ a₁₂ a₀₂ e₀₁₂) c).hom.app P)) ≫
+      q.map ((Functor.mapHomologicalComplexCompIso
+        (Adjunction.leftAdjointCompIso a₀₂ a₂₃ a₀₃ e₀₂₃) c).hom.app P) =
+    q.map ((Functor.mapHomologicalComplexCompIso
+      (Adjunction.leftAdjointCompIso a₁₂ a₂₃ a₁₃ e₁₂₃) c).hom.app
+        ((F₀₁.mapHomologicalComplex c).obj P)) ≫
+      q.map ((Functor.mapHomologicalComplexCompIso
+        (Adjunction.leftAdjointCompIso a₀₁ a₁₃ a₀₃ e₀₁₃) c).hom.app P)
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  apply congrArg q.map
+  ext i : 1
+  have hh := congrArg (fun e ↦ e.hom.app (P.X i)) hi
+  change F₂₃.map ((Adjunction.leftAdjointCompIso a₀₁ a₁₂ a₀₂ e₀₁₂).hom.app (P.X i)) ≫
+      (Adjunction.leftAdjointCompIso a₀₂ a₂₃ a₀₃ e₀₂₃).hom.app (P.X i) =
+    (Adjunction.leftAdjointCompIso a₁₂ a₂₃ a₁₃ e₁₂₃).hom.app (F₀₁.obj (P.X i)) ≫
+      (Adjunction.leftAdjointCompIso a₀₁ a₁₃ a₀₃ e₀₁₃).hom.app (P.X i)
+  simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_inv_app, Category.id_comp] using hh.symm
+
 /-- The tensor pullback composition mates are associative after passage to homotopy.
 Source: Mathlib `Adjunction.leftAdjointCompIso_assoc` and
 the component formulas for `Scheme.Modules.pushforwardComp`; Stacks Project, Cohomology, Tag 0D5S.
@@ -54,37 +106,14 @@ theorem tensorPullback_homotopy_comp_assoc
         (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)
     (T h).map ((t f g).hom.app H) ≫ (t h (f ≫ g)).hom.app H =
       (t h f).hom.app ((T g).obj H) ≫ (t (h ≫ f) g).hom.app H := by
-  dsimp only
   let b {X Y : Scheme.{u₁}} (k : X ⟶ Y) :=
     Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)
-  have hi := Adjunction.leftAdjointCompIso_assoc
+  exact mapHomotopyCategory_leftAdjointCompIso_assoc
     (b g) (b f) (b h) (b (f ≫ g)) (b (h ≫ f)) (b (h ≫ f ≫ g))
     (Scheme.Modules.pushforwardComp f g) (Scheme.Modules.pushforwardComp h f)
     (Scheme.Modules.pushforwardComp (h ≫ f) g)
     (Scheme.Modules.pushforwardComp h (f ≫ g)) (by
       ext M U
-      simp)
-  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
-  let e {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
-    Adjunction.leftAdjointCompIso (b g) (b f) (b (f ≫ g))
-      (Scheme.Modules.pushforwardComp f g)
-  let U {X Y : Scheme.{u₁}} (f : X ⟶ Y) :=
-    (Scheme.Modules.tensorPullback f).mapHomologicalComplex (ComplexShape.up ℤ)
-  let tc {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
-    Functor.mapHomologicalComplexCompIso (e f g) (ComplexShape.up ℤ)
-  let q := HomotopyCategory.quotient W.Modules (ComplexShape.up ℤ)
-  change q.map ((U h).map ((tc f g).hom.app P)) ≫ q.map ((tc h (f ≫ g)).hom.app P) =
-    q.map ((tc h f).hom.app ((U g).obj P)) ≫ q.map ((tc (h ≫ f) g).hom.app P)
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  apply congrArg q.map
-  ext i : 1
-  have hh := congrArg (fun e ↦ e.hom.app (P.X i)) hi
-  change (Scheme.Modules.tensorPullback h).map ((e f g).hom.app (P.X i)) ≫
-      (e h (f ≫ g)).hom.app (P.X i) =
-    (e h f).hom.app ((Scheme.Modules.tensorPullback g).obj (P.X i)) ≫
-      (e (h ≫ f) g).hom.app (P.X i)
-  simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.associator_inv_app, Category.id_comp] using hh.symm
+      simp) (ComplexShape.up ℤ) H
 
 end AlgebraicGeometry

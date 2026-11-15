@@ -25,7 +25,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 # Extension by zero preserves finite-Tor constructibility
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-lem-sf-open-ctf,
-order 2161 (blueprint: lem-trf-open-ctf).
+order 2161 (blueprint: proposition-proper-direct-image-extension-zero--8).
 
 The cohomological interval and the Tor interval are independent. The functor on
 derived categories is the termwise descent of the recorded exact extension by zero.
@@ -44,8 +44,8 @@ namespace AlgebraicGeometry.Scheme
 /-- Termwise extension by zero at a positive finite coefficient stage, descended
 along quasi-isomorphisms using its recorded exactness. The coefficient ring is the
 recorded quotient by the chosen uniformizer, with its canonical finiteness witness.
-Source: blueprint lem-trf-open-ctf, proof step 1; Stacks, Tag 03DJ
-(blueprint: lem-trf-open-ctf). -/
+Source: blueprint proposition-proper-direct-image-extension-zero--8, proof step 1; Stacks, Tag 03DJ
+(blueprint: proposition-proper-direct-image-extension-zero--8). -/
 noncomputable def finiteStageDerivedExtensionByZero
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -89,12 +89,12 @@ theorem extension_constructible {U Y : Scheme.{u}} (j : U ⟶ Y)
 /-- Extension by zero preserves bounded constructibility, finite Tor amplitude,
 every cohomological interval, and every Tor interval, independently.
 Source: blueprint sec-six-functors/sk-lem-sf-open-ctf, order 2161
-(blueprint: lem-trf-open-ctf).
+(blueprint: proposition-proper-direct-image-extension-zero--8).
 
 Proof, following the four steps of the node:
 1. Use the finite coefficient convention A = O_E / varpi_E^n, n >= 1 and l != p.
 The prime l is invertible over the global base field. Exactness of j_!
-(lem-weil-extension-by-zero-exact) identifies H^r(j_!K) with j_!H^r(K), by
+(proposition-extension-zero-restriction-closed-subscheme--7) identifies H^r(j_!K) with j_!H^r(K), by
 preservation of kernels, images and their quotients
 (def-weil-derived-cohomology-sheaves). Thus termwise extension descends through
 quasi-isomorphisms and preserves any supplied cohomological range [c,d].
@@ -109,15 +109,15 @@ Pullback composition (lem-weil-pbc-proetale-derived-pullback-composition) applie
 with constant coefficient identifications: both send every constant section to
 the same section. The original strata retain their finite locally constant
 modules; the complement carries the finite zero module. Separate stratifications
-for each r suffice for def-weil-finite-torsion-constructibility.
+for each r suffice for definition-constructible-sheaves.
 4. For an arbitrary degree-zero A-module sheaf M on Y, exact constant-coefficient
 pullback gives j^*(M[0]) = (j^*M)[0]
-(def-weil-derived-pullback-tensor-hom). The open tensor formula
-(lem-trf-open-tensor) identifies (j_!K) tensor^L M with
+(prose-03-02). The open tensor formula
+(proposition-proper-direct-image-extension-zero--8) identifies (j_!K) tensor^L M with
 j_!(K tensor^L j^*M). The Tor hypothesis on K kills its cohomology outside [a,b];
 exactness and step 1 give the same vanishing after j_!. This tests every M,
 without a constructibility assumption on M, and proves the original Tor bound
-and membership in D^b_ctf (def-weil-finite-tor-amplitude). -/
+and membership in D^b_ctf (definition-constructible-sheaves). -/
 theorem finiteStageDerivedExtensionByZero_constructibleFiniteTor
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

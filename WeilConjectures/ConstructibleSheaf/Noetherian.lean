@@ -35,8 +35,8 @@ stalkwise criteria for constructible étale sheaves of `Λ`-modules on `X`:
   `lem-weil-pbc-constructible-subobjects-noetherian`): subsheaves of constructible sheaves are
   constructible.
 - `AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_isConstructible_card` (blueprint
-  `fin4-lem-stalk-constructibility-criterion`): a sheaf with finite stalks is constructible if and
-  only if the loci where its stalks have a given cardinality are constructible.
+  `proposition-proper-direct-image-finite-coefficients`): a sheaf with finite stalks is
+  constructible if and only if the loci where its stalks have a given cardinality are constructible.
 
 The blueprint states these for abelian étale sheaves; a constructible abelian sheaf on a
 Noetherian scheme has finite stalks and finitely many strata, hence is killed by some `N`, so it
@@ -438,7 +438,7 @@ theorem Scheme.IsConstructibleSheaf.of_mono {T : Scheme.{u}} [IsNoetherian T]
     IsConstructibleSheaf.cokernel (Limits.kernel.ι (d (T₀.sup S)))
   exact IsConstructibleSheaf.of_iso (asIso (Abelian.factorThruCoimage (d (T₀.sup S))))
 
-/-- Blueprint `fin4-lem-stalk-constructibility-criterion`: Constructibility from the
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructibility from the
 cardinalities of finite stalks.
 
 Let `X` be Noetherian and `F` a sheaf of `Λ`-modules on `X_ét` with finite geometric stalks. For

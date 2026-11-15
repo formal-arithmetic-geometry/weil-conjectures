@@ -18,9 +18,9 @@ for every `q > e` and every étale sheaf `M` of `Λ`-modules on `T`
 (`AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_of_isAffineHom`).
 
 The proof is that of `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`, with
-the affine bound `thm-sc-affine-torsion-cd` in place of the finite-type bound: for an affine
-`W` étale over `Y`, the scheme `W ×_Y T` is affine, of finite type over `K` and étale over `T`,
-hence of dimension at most `e`, so its cohomology vanishes above `e`.
+the affine bound `lemma-uniform-bounds-pro-etale-affines` in place of the finite-type bound: for an
+affine `W` étale over `Y`, the scheme `W ×_Y T` is affine, of finite type over `K` and étale over
+`T`, hence of dimension at most `e`, so its cohomology vanishes above `e`.
 -/
 
 @[expose] public section
@@ -40,7 +40,7 @@ field.** Let `K` be separably closed, `h : T ⟶ Y` affine with `T` of finite ty
 `dim T ≤ e`, and `Λ` a finite ring. Then `R^q h_* M = 0` for every `q > e` and every étale sheaf
 `M` of `Λ`-modules on `T`: `UDV(h, Λ; e)` holds. For an affine `W` étale over `Y`, the scheme
 `W ×_Y T` is affine, of finite type over `K` and étale over `T`, so its cohomology vanishes
-above `e` by the affine bound `thm-sc-affine-torsion-cd`
+above `e` by the affine bound `lemma-uniform-bounds-pro-etale-affines`
 (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`, with `c = 0`); and
 `R^q h_* M` is the sheafification of these groups. -/
 theorem Etale.hasUniformDirectImageVanishingLE_of_isAffineHom [Finite Λ] {K : Type u} [Field K]

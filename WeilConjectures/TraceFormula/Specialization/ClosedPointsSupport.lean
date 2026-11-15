@@ -18,7 +18,7 @@ Let `V` be a separated scheme of finite type over a separably closed field `k` a
 set of closed points of `V`. A bounded constructible `ℚ̄_ℓ`-complex `C` on `V` whose restriction to
 `V ∖ S` vanishes, and whose global sections `RΓ(V, C)` vanish, is zero
 (`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`, blueprint
-`det-nearby-kunneth-finite-support`).
+`lemma-finite-support-global-sections--1`).
 
 The closed points need not be rational: `k` need not be perfect. This generalises
 `WeilConjectures.TraceFormula.Specialization.PointsSupport` (rational points). The residue field
@@ -476,7 +476,7 @@ theorem isZero_of_isZero_upperStar_finsetComplOpens_of_isZero_lowerStar (S : Fin
         exact ⟨h, hy⟩
 
 /-- **Global sections detect complexes supported at finitely many closed points** (blueprint
-`det-nearby-kunneth-finite-support`): let `X` be a separated scheme of finite type over a
+`lemma-finite-support-global-sections--1`): let `X` be a separated scheme of finite type over a
 separably closed field `k` and `S` a finite set of closed points of `X`. A bounded constructible
 complex `C` on `X` whose restriction to `X ∖ S` vanishes and whose global sections `RΓ(X, C)`
 vanish is zero. The points of `S` need not be rational. -/

@@ -31,10 +31,10 @@ Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 - `AlgebraicGeometry.TwoOpenSide.exists_comparisonFst_comparisonSnd`: a pair of
   valuation-ring extensions of a common generic point of `O₁ ∩ O₂` to the two ambient
   models factors through the comparison space (blueprint:
-  `lemma-nagata-valuation-pair-factors-comparison`);
+  `proposition-compactifying-union-two-opens--1`);
 - `AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids`: key disjointness implies that of
   any such pair at least one avoids its forbidden boundary (blueprint:
-  `lemma-nagata-valuation-open-closed-point`,
+  `proposition-compactifying-union-two-opens--1`,
   `lemma-nagata-one-valuation-avoids-boundary`);
 - `AlgebraicGeometry.TwoOpenPreparation`: the bundled output of the comparison layer,
   consumed by the final assembly of the two-open theorem;
@@ -511,7 +511,7 @@ variable {A K : Type u} [CommRing A] [IsDomain A] [ValuationRing A] [Field K]
 
 omit [ValuationRing A] in
 /-- **The pair of valuation extensions factors through the comparison space** (blueprint:
-`lemma-nagata-valuation-pair-factors-comparison`): if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
+`proposition-compactifying-union-two-opens--1`): if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
 point `Spec K ⟶ O₁ ∩ O₂` over a common morphism to `S`, then `(g₁, g₂)` factors through
 the closed subscheme `X₁₂ ⊆ X₁ ×_S X₂`. Generically the pair lands in `V₁ ×_U V₂`, and a
 morphism from the spectrum of a domain factoring generically through a closed subscheme
@@ -559,11 +559,11 @@ theorem exists_comparisonFst_comparisonSnd
   · rw [comparisonSnd, ← Category.assoc, hl, hĝ₂]
 
 /-- **One valuation extension avoids its forbidden boundary** (blueprint:
-`lemma-nagata-one-valuation-avoids-boundary`): the closed points of `g₁` and `g₂` cannot
+`proposition-compactifying-union-two-opens--1`): the closed points of `g₁` and `g₂` cannot
 both lie in the forbidden boundaries, since the pair factors through the comparison space
 (`exists_comparisonFst_comparisonSnd`) on which the key disjointness holds; and an open of
 `Spec A` containing the closed point is everything (`IsLocalRing.closedPoint_mem_iff`,
-blueprint `lemma-nagata-valuation-open-closed-point`). -/
+blueprint `proposition-compactifying-union-two-opens--1`). -/
 theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)

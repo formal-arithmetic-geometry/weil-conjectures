@@ -18,7 +18,7 @@ For a Noetherian (for instance finite) commutative ring `Λ`, the inverse image
 `ν^* : Sh(X_ét, Λ) ⥤ Sh(X_proét, Λ)` along the inclusion of the small étale site into the small
 pro-étale site sends flat étale sheaves of `Λ`-modules to flat pro-étale sheaves
 (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`, blueprint
-`lem-exc-constant-inverse-image-flat`).
+`corollary-finite-tor-amplitude-under-comparison`).
 
 ## Main results
 
@@ -49,7 +49,7 @@ variable {X} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale and
 -- pro-étale sites take long to synthesize
-/-- Blueprint `lem-exc-constant-inverse-image-flat`: Constant-coefficient inverse image
+/-- Blueprint `corollary-finite-tor-amplitude-under-comparison`: Constant-coefficient inverse image
 preserves flat sheaves.
 
 For a Noetherian commutative ring `Λ`, for instance a finite one, the site inverse image

@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Finite constant local models in every degree on one fixed stratum.
 This generic predicate keeps the coefficient ring explicit in changes of presentation.
-Source: blueprint latest, sk-lem-integral-finite-levels, first paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
 (blueprint: lem-pe-integral-finite-constructibility-triangle). -/
 def finiteLocalModelsOnStratum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -52,7 +52,7 @@ private theorem scalarFiniteLocalModelsOnStratum_iff
 
 /-- All homology sheaves have finite constant local models on this specified stratum.
 This is the generic predicate at the actual positive finite coefficient quotient.
-Source: blueprint latest, sk-lem-integral-finite-levels, first paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
 (blueprint: lem-pe-integral-finite-constructibility-triangle). -/
 def integralFiniteLocalOnStratum
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -65,7 +65,7 @@ def integralFiniteLocalOnStratum
 /-- Constructibility and fixed-stratum finite local models pass through one finite
 quotient-linear distinguished triangle.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, first paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
 (blueprint: lem-pe-integral-finite-constructibility-triangle).
 
 Proof: use the normalized finite internal/ordinary equivalences for all three rings.

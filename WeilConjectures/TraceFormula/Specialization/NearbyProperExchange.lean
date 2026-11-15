@@ -19,7 +19,7 @@ For a morphism `φ : M ⟶ N` of nearby cycles models of finite type over the tr
 `S = Spec k'⟦t⟧` over a proper `f` whose morphism of total spaces is proper and whose squares of
 special fibres and of identifications `ε` are cartesian, the pushforward exchange
 `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` (`NearbyCyclesModel.Hom.pushforwardExchange`) is an isomorphism on
-bounded constructible `ℚ̄_ℓ`-complexes (blueprint `det-sp-nearby-cycles-exchanges` (2), "proper
+bounded constructible `ℚ̄_ℓ`-complexes (blueprint `prose-E-03` (2), "proper
 exchange", `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), provided the
 target `Y` of `f` is noetherian over a field in which `ℓ` is invertible. For the geometric models,
 whose identifications are the inclusions of the geometric generic fibres, this is
@@ -60,7 +60,7 @@ lemma _root_.AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitM
     (hN : N.IsTraitModel) : ∃ a : Y'.left ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a) :=
   ⟨Y'.hom, ⟨hN.exists_isPullback⟩⟩
 
-/-- **Proper base change for nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (2),
+/-- **Proper base change for nearby cycles** (blueprint `prose-E-03` (2),
 proper half; SGA 7 XIII 2.1.7): let `φ : M ⟶ N` be a morphism of models of finite type over the
 trait over `f : X ⟶ Y`, with `Y` noetherian over a field `k` in which `ℓ` is invertible. If the
 morphism of total spaces and `f` are proper and the squares of special fibres and of
@@ -91,7 +91,7 @@ theorem isIso_pushforwardExchange_app_of_isProper {k : Type u} [Field k]
     (Profinite.padicAlgClRingObj ℓ) K (by cast_proofs h₁) (by cast_proofs h₂)
   cast_proofs h₃
 
-/-- **The proper exchange for geometric models** (blueprint `det-sp-nearby-cycles-exchanges` (2)):
+/-- **The proper exchange for geometric models** (blueprint `prose-E-03` (2)):
 let `M` and `N` be models over `Spec k'⟦t⟧`, and `φ : M.geometric ⟶ N.geometric` a morphism of
 their geometric models whose morphism of total spaces `t` is proper and whose squares of geometric
 generic fibres and of special fibres are cartesian. Then the pushforward exchange

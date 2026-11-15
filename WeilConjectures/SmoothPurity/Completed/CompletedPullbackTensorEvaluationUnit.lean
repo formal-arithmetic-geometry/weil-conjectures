@@ -58,7 +58,19 @@ private theorem evaluation_section_heq (W : Scheme.{u})
   have h := transport_heq (coefficientSequenceEvaluationAb_eq l E W M n U).symm x
   exact h
 
-set_option maxHeartbeats 800000 in
+private theorem coefficient_homEquiv_section_heq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    {A : normalizedDVRModules l E Y n} {B : normalizedDVRModules l E X n}
+    (g : (integralOperationsLevelPullback l E f n).obj A ⟶ B)
+    (U : Y.ProEt) (x : A.val.obj (op U)) :
+    HEq (((coefficientProEtaleModuleAdjunction.{u, u} f
+      (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))).homEquiv
+        A B g).val.app (op U) x)
+      (g.val.app (op ((proEtaleBaseChange f).obj U))
+        (((coefficientProEtaleModuleAdjunction.{u, u} f
+          (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))).unit.app A
+            ).val.app (op U) x)) := by
+  rfl
+
 -- The section transports involve two presentations of the module underlying groups.
 private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : coefficientSequenceModules l E Y) (U : Y.ProEt)
@@ -77,9 +89,11 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   change (coefficientProEtaleModuleAdjunction.{u, u} f
     (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))).homEquiv _ _
       ((pullbackTensorSequenceInverseEvaluation l E f n).hom.app M) = _ at h
-  rw [Adjunction.homEquiv_unit] at h
+  dsimp only [Functor.comp_obj] at h
   have hh := congrArg (fun a ↦ a.val.app (op U)
     (coefficientEvaluationSection l E Y M n (op U) x)) h
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at hh
   have hd := (pullbackTensorSequenceDirectEvaluation_existsUnique l E f n).exists.choose_spec
     ((pullbackTensorSequenceInverse l E f).obj M) U
       ((((coefficientSequenceEvaluation l E Y n).map
@@ -104,8 +118,10 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   have hh' : HEq _ _ := heq_of_eq hh
   have hdh : HEq _ _ := hd.trans hmap
   have hdh' : HEq _ _ := hdh.trans hsection.symm
-  have hfinal := eq_of_heq (hh'.trans hdh')
-  exact hfinal
+  have hu := coefficient_homEquiv_section_heq l E f n
+    ((pullbackTensorSequenceInverseEvaluation l E f n).hom.app M) U
+    (coefficientEvaluationSection l E Y M n (op U) x)
+  exact eq_of_heq (hu.symm.trans (hh'.trans hdh'))
 
 private theorem evaluation_complex_f {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅
