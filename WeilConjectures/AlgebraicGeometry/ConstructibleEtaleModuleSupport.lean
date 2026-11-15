@@ -144,12 +144,12 @@ Proof:
    agree, and one zero stalk implies that `x` is outside the support.
 2. Choose the finite locally closed stratification and trivializing etale covers from
    `def-weil-pbc-etale-constructible-sheaf`. Each immersion identifies its domain with
-   the corresponding constructible stratum (`def-constructible-stratification`).
+   the corresponding constructible stratum (`definition-constructible-sheaves--2`).
 3. Identify the pullback stalk at a geometric point of a stratum with the original stalk
    (`lem-weil-pbc-inverse-image-stalk-germ`). Step 1 identifies nonvanishing with membership
    in the support at the underlying point.
 4. On a stratum, a geometric point lifts to each covering member whose image contains
-   its underlying point (`lem-weil-pbc-etale-cover-geometric-point-lift`). Its stalk is
+   its underlying point (`definition-torsion-sheaves--3`). Its stalk is
    the constant finite module there (`lem-weil-pbc-finite-locally-constant-module-values`).
    The support and its complement are the unions of images of covering members with
    respectively nonzero and zero values. Etale maps are open

@@ -59,7 +59,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteQuotientT
 
 /-! # Native quotient-linear uniformizer filtration triangles
 
-Source: blueprint latest, sk-lem-integral-finite-levels, second paragraph.
+Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -94,7 +94,7 @@ private def extensionCongr
   exact Iso.refl _
 
 /-- The consecutive coefficient filtration is a triangle over the larger finite quotient.
-Source: blueprint latest, sk-lem-integral-finite-levels, first paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
 (blueprint: lem-pe-integral-finite-filtration-triangle).
 
 Proof: pull the uniformizer coefficient short exact sequence from the point. Identify

@@ -43,7 +43,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Canonical module projection and section comparisons
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md, clause (1), and Stacks 0B56
 (blueprint: def-sfb-module-projection-section-arrows).
 -/

@@ -26,8 +26,6 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 500000 in
--- Affine counits and the nested derived restriction require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived Hom from each Koszul tail is its Hom-complex cohomology, naturally in

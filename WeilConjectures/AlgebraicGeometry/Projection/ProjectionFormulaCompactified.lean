@@ -93,7 +93,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 # The compactified projection formula for locally perfect coefficients
 
 Source: Weil blueprint, proper base change, lemma 1271
-(blueprint: lemma-weil-pbc-projection-formula-compactified).
+(blueprint: lemma-internal-adjunction-two-exchange-formulas).
 -/
 
 @[expose] public noncomputable section
@@ -178,7 +178,7 @@ variable {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
 
 /-- The derived open adjunction is the localization of the termwise ordinary adjunction.
 Source: Stacks, Tags 03DI and 015F
-(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+(blueprint: lemma-internal-adjunction-two-exchange-formulas). -/
 def proEtaleRingDerivedOpenAdjunction :
     proEtaleRingDerivedOpenExtension j R S c ⊣ proEtaleRingDerivedPullback j R S c :=
   letI : CatCommSq
@@ -198,7 +198,7 @@ def proEtaleRingDerivedOpenAdjunction :
 
 /-- The adjunction projection is exactly the transpose of unit tensor identity.
 Source: Stacks, Tags 03DI and 07A4
-(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+(blueprint: lemma-internal-adjunction-two-exchange-formulas). -/
 def proEtaleOpenProjection
     (a : ProEtaleTensorModel Z R) (b : ProEtaleTensorModel X S)
     (E : DerivedCategory (proEtaleRingModules X S))
@@ -376,7 +376,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Compactification f) [QuasiCompact
 
 /-- The first arrow is the adjoint of counit tensor identity for p and j_!E.
 Source: Weil blueprint, lemma 1271
-(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+(blueprint: lemma-internal-adjunction-two-exchange-formulas). -/
 def compactifiedProjectionPi :=
   derivedProjectionFormulaMate (proEtaleRingDerivedPullback d.g RY RZ cp)
     (proEtaleRingDerivedDirectImage d.g RY RZ cp)
@@ -388,7 +388,7 @@ def compactifiedProjectionPi :=
 The factorization identifies f with d.i followed by d.g; its coefficient identification
 is exactly the composite identification, with no independent third choice.
 Source: Weil blueprint, lemma 1271
-(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+(blueprint: lemma-internal-adjunction-two-exchange-formulas). -/
 def compactifiedProjectionTheta
     (hα : IsIso (proEtaleOpenProjection d.i RZ RX cj b c E
       ((proEtaleRingDerivedPullback d.g RY RZ cp).obj Q))) :
@@ -405,7 +405,7 @@ def compactifiedProjectionTheta
 
 /-- The ordered forward map pi followed by Rp_* theta.
 Source: Weil blueprint, lemma 1271
-(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+(blueprint: lemma-internal-adjunction-two-exchange-formulas). -/
 def compactifiedProjectionForward
     (hα : IsIso (proEtaleOpenProjection d.i RZ RX cj b c E
       ((proEtaleRingDerivedPullback d.g RY RZ cp).obj Q))) :=
@@ -415,7 +415,7 @@ def compactifiedProjectionForward
 
 /-- The reverse ordered map Rp_* theta inverse followed by rho = pi inverse.
 Source: Weil blueprint, lemma 1271
-(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+(blueprint: lemma-internal-adjunction-two-exchange-formulas). -/
 def compactifiedProjectionReverse
     (hα : IsIso (proEtaleOpenProjection d.i RZ RX cj b c E
       ((proEtaleRingDerivedPullback d.g RY RZ cp).obj Q)))
@@ -429,7 +429,7 @@ set_option linter.unusedSectionVars false in
 The local strict-perfect normalization of rho is recorded below on canonical slice
 operations. No uniform bound, completion, constructibility or boundedness of E occurs.
 Source: Weil blueprint, proper base change, lemma 1271
-(blueprint: lemma-weil-pbc-projection-formula-compactified).
+(blueprint: lemma-internal-adjunction-two-exchange-formulas).
 Proof: (1) The exact open adjunction defines alpha for arbitrary coefficients by the
 unit transpose. (2) Localize at each site object. The Hom adjunction chain, using the
 counit-compatible direct-image restriction comparison, identifies restriction of j_!

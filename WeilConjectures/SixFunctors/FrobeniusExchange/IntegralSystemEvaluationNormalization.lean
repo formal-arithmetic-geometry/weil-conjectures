@@ -129,8 +129,53 @@ private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
   rw [ProEtale.VaryingRing.square_symm]
   exact ProEtale.VaryingRing.evalPMate_isIso R q f n
 
-set_option maxHeartbeats 1000000 in
--- Comparing the derived functors in the two coefficient coordinates needs extra elaboration steps.
+/-- Transfer the reference mate in its native module categories, before specializing the tower.
+This keeps comparisons of the coefficient presentations out of the derived construction. -/
+private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
+    (q : ∀ n, R (n + 1) ⟶ R n) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    {L : ProEtale.VaryingRing.Modules R q Y ⥤ ProEtale.VaryingRing.Modules R q X}
+    {T : ProEtale.VaryingRing.Modules R q X ⥤ ProEtale.VaryingRing.Modules R q Y}
+    {L' : ProEtale.StrictTower.Modules (R n) Y ⥤ ProEtale.StrictTower.Modules (R n) X}
+    {S : ProEtale.StrictTower.Modules (R n) X ⥤ ProEtale.StrictTower.Modules (R n) Y}
+    (G : ProEtale.VaryingRing.Modules R q Y ⥤ ProEtale.StrictTower.Modules (R n) Y)
+    (H : ProEtale.VaryingRing.Modules R q X ⥤ ProEtale.StrictTower.Modules (R n) X)
+    [lAdditive : L.Additive] [tAdditive : T.Additive]
+    [lnAdditive : L'.Additive] [sAdditive : S.Additive]
+    [gAdditive : G.Additive] [hAdditive : H.Additive]
+    [lLimits : PreservesFiniteLimits L] [lColimits : PreservesFiniteColimits L]
+    [lnLimits : PreservesFiniteLimits L'] [lnColimits : PreservesFiniteColimits L']
+    [gLimits : PreservesFiniteLimits G] [gColimits : PreservesFiniteColimits G]
+    [hLimits : PreservesFiniteLimits H] [hColimits : PreservesFiniteColimits H]
+    [sourceResolutions : Abelian.HasKInjectiveResolutions (ProEtale.VaryingRing.Modules R q X)]
+    (a : L ⊣ T) (b : L' ⊣ S) (θ : G ⋙ L' ≅ L ⋙ H)
+    (hT : T = ProEtale.VaryingRing.push R q f)
+    (hS : S = ProEtale.StrictTower.moduleDirectImage (R n) f)
+    (hG : G = ProEtale.VaryingRing.eval R q Y n)
+    (hH : H = ProEtale.VaryingRing.eval R q X n)
+    (hθ : IsIso (mateEquiv a b θ.hom)) :
+    IsIso (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
+      b.mapDerivedCategoryRightDerivedAdjunction
+      (Functor.mapDerivedCategorySquareIso θ).hom) := by
+  have hq := ProEtale.VaryingRing.pull_exact R q f
+  have hY := SemilinearSections.evaluation_exact (ProEt.topology Y)
+    (ProEtale.VaryingRing.coefficients R Y) (ProEtale.VaryingRing.coefficientTransition R q Y) n
+  have hX := SemilinearSections.evaluation_exact (ProEt.topology X)
+    (ProEtale.VaryingRing.coefficients R X) (ProEtale.VaryingRing.coefficientTransition R q X) n
+  have hb := ProEtale.VaryingRing.moduleEvalP_hom_isIso R q f n
+  rw [← varyingModuleEvalMate R q f n] at hb
+  exact derivedMate_isIso_of_rightEqualities G H
+    (Q := ProEtale.VaryingRing.pull R q f)
+    (G' := ProEtale.VaryingRing.eval R q Y n)
+    (H' := ProEtale.VaryingRing.eval R q X n)
+    (qAdditive := hq.1) (qLimits := hq.2.1) (qColimits := hq.2.2)
+    (gnAdditive := hY.1) (gnLimits := hY.2.1) (gnColimits := hY.2.2)
+    (hnAdditive := hX.1) (hnLimits := hX.2.1) (hnColimits := hX.2.2)
+    a b (ProEtale.VaryingRing.moduleAdj R q f)
+    (proEtaleRingModuleAdjunction f (ProEtale.VaryingRing.coefficients R Y n)
+      (ProEtale.VaryingRing.coefficients R X n) (ProEtale.StrictTower.constantRingIso (R n) f))
+    θ (ProEtale.VaryingRing.moduleEvalG R q f n).symm hT hS hG hH hθ hb
+    (varyingDerivedMateIso R q f n)
+
 /-- An ordinary invertible evaluation mate for strict integral systems has an
 invertible canonical right-derived mate for the actual integral pullback models.
 Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7
@@ -174,63 +219,26 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
   let : Abelian.HasKInjectiveResolutions (normalizedDVRModules l E X n) :=
     proEtaleRingModules_hasKInjectiveResolutions X
       (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1)))
-  let qadd : (ProEtale.VaryingRing.pull (rs l E) (qs l E) f).Additive :=
-    (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).1
-  have : PreservesFiniteLimits (ProEtale.VaryingRing.pull (rs l E) (qs l E) f) :=
-    (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.1
-  have : PreservesFiniteColimits (ProEtale.VaryingRing.pull (rs l E) (qs l E) f) :=
-    (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.2
-  let G := coefficientSequenceEvaluation l E Y n
-  let H := coefficientSequenceEvaluation l E X n
-  have h₂ : (mateEquiv (ProEtale.VaryingRing.moduleAdj (rs l E) (qs l E) f)
-    (proEtaleRingModuleAdjunction f
-    (ProEtale.VaryingRing.coefficients (rs l E) Y n)
-    (ProEtale.VaryingRing.coefficients (rs l E) X n)
-    (ProEtale.StrictTower.constantRingIso (rs l E n) f))
-      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv) =
-      (ProEtale.VaryingRing.moduleEvalP (rs l E) (qs l E) f n).hom := by
-    exact varyingModuleEvalMate (rs l E) (qs l E) f n
-  have hb : IsIso (mateEquiv
-    (ProEtale.VaryingRing.moduleAdj (rs l E) (qs l E) f) (proEtaleRingModuleAdjunction f
-    (ProEtale.VaryingRing.coefficients (rs l E) Y n)
-    (ProEtale.VaryingRing.coefficients (rs l E) X n)
-    (ProEtale.StrictTower.constantRingIso (rs l E n) f))
-      (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).inv) := by
-    rw [h₂]
-    exact ProEtale.VaryingRing.moduleEvalP_hom_isIso (rs l E) (qs l E) f n
-  have hi := varyingDerivedMateIso (rs l E) (qs l E) f n
-  apply derivedMate_isIso_of_rightEqualities
-    (G := G) (H := H)
-    (Q := ProEtale.VaryingRing.pull (rs l E) (qs l E) f)
-    (qAdditive := qadd)
-    (tAdditive := ProEtale.VaryingRing.push_additive (rs l E) (qs l E) f)
-    (gnAdditive := coefficientSequenceEvaluation_additiveInstance l E Y n)
-    (hnAdditive := coefficientSequenceEvaluation_additiveInstance l E X n)
-    (gnLimits := coefficientSequenceEvaluation_limits l E Y n)
-    (gnColimits := coefficientSequenceEvaluation_colimits l E Y n)
-    (hnLimits := coefficientSequenceEvaluation_limits l E X n)
-    (hnColimits := coefficientSequenceEvaluation_colimits l E X n)
-    (qLimits := (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.1)
-    (qColimits := (ProEtale.VaryingRing.pull_exact (rs l E) (qs l E) f).2.2)
+  apply varyingEvaluationMate_isIso (rs l E) (qs l E) f n
+    (lAdditive := integralComparisonSequencePullbackAdditive l E f)
+    (tAdditive := inferInstanceAs (integralComparisonSequenceDirectImage l E f).Additive)
+    (lnAdditive := sfIntrinsicPullback_additive (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (sAdditive := proEtaleConstantModuleDirectImage_additive f
+      (Padic.coefficientExtensionRing l E (n + 1)))
     (gAdditive := coefficientSequenceEvaluation_additiveInstance l E Y n)
     (hAdditive := coefficientSequenceEvaluation_additiveInstance l E X n)
+    (lLimits := integralComparisonSequencePullbackLimits l E f)
+    (lColimits := integralComparisonSequencePullbackColimits l E f)
+    (lnLimits := sfIntrinsicPullback_preservesFiniteLimits
+      (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (lnColimits := sfIntrinsicPullback_preservesFiniteColimits
+      (Padic.coefficientExtensionRing l E (n + 1)) f)
     (gLimits := coefficientSequenceEvaluation_limits l E Y n)
     (gColimits := coefficientSequenceEvaluation_colimits l E Y n)
     (hLimits := coefficientSequenceEvaluation_limits l E X n)
     (hColimits := coefficientSequenceEvaluation_colimits l E X n)
-    (L := integralComparisonSequencePullback l E f)
-    (R := integralComparisonSequenceDirectImage l E f)
-    (T := ProEtale.VaryingRing.push (rs l E) (qs l E) f)
-    (L' := sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) f)
-    (R' := proEtaleConstantModuleDirectImage f
-      (Padic.coefficientExtensionRing l E (n + 1))) a b
-    (ProEtale.VaryingRing.moduleAdj (rs l E) (qs l E) f) (proEtaleRingModuleAdjunction f
-    (ProEtale.VaryingRing.coefficients (rs l E) Y n)
-    (ProEtale.VaryingRing.coefficients (rs l E) X n)
-    (ProEtale.StrictTower.constantRingIso (rs l E n) f)) θ
-    (ProEtale.VaryingRing.moduleEvalG (rs l E) (qs l E) f n).symm
-    (by rfl) (finitePush_eq l E f n) (by rfl) (by rfl) hθ hb
-    ?_
-  clear h₂ hb
-  exact hi
+    (sourceResolutions := inferInstanceAs
+      (Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)))
+    (coefficientSequenceEvaluation l E Y n) (coefficientSequenceEvaluation l E X n)
+    a b θ (by rfl) (finitePush_eq l E f n) (by rfl) (by rfl) hθ
 end WeilConjectures.FrobeniusExchange

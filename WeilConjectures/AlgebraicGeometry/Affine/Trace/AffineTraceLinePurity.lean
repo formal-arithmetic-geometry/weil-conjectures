@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # AffineTraceLinePurity
-Source: blueprint sk-prop-an, Steps 5(b) and 6.
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6.
 -/
 
 @[expose] public noncomputable section
@@ -85,7 +85,7 @@ private theorem splitTraceIsIsoOfSection {C : Type u} [Category.{v} C] [Preaddit
     simp [e]
 
 /-- The affine-line counit is invertible on every coefficient complex.
-Source: blueprint lem-amb-affine-space-top-trace, proof steps 2--6
+Source: blueprint lemma-integral-linear-character--1, proof steps 2--6
 (blueprint: lem-amb-affine-trace-line-counit-iso).
 
 Proof: apply open-closed localization to the shifted Tate line on the projective

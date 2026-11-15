@@ -48,17 +48,17 @@ with the internal hom of bounded constructible complexes at a finite coefficient
   for `K ∈ Dctf(X_ét, Λ)` and `M` bounded below, `RHom(ν^* K, ν^* M)` is of étale origin, by
   dévissage over the generators `Rg_* Rj_! L` of `Dctf(X_ét, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`
-  (`lem-exc-comparison-tor-interval`): an étale complex has Tor amplitude in `[a, b]` if and only
-  if its pullback to the pro-étale site has.
+  (`corollary-finite-tor-amplitude-under-comparison--1`): an étale complex has Tor amplitude in
+  `[a, b]` if and only if its pullback to the pro-étale site has.
 - `ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar`
-  (`lem-exc-comparison-tor-interval` (ii)): an étale complex whose pullback to the pro-étale
-  site has Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
+  (`corollary-finite-tor-amplitude-under-comparison--1` (ii)): an étale complex whose pullback to
+  the pro-étale site has Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`
-  (`thm-sf-hom-comparison-constructible`): `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)` for `K` in
+  (`proposition-six-operations-dctf--15`): `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)` for `K` in
   `Dctf(X_ét, Λ)` and `M` in `Dᵇc(X_ét, Λ)`, on a finite-type scheme over `k = F̄_p`, glued from
   the separated case
   `ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated`
-  (`lem-weil-finite-duality-site-comparison`).
+  (`proposition-six-operations-dctf--15`).
 
 ## Implementation notes
 
@@ -116,8 +116,8 @@ namespace DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 omit [Finite Λ] in
-/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
-comparison, clause (i).
+/-- Blueprint `corollary-finite-tor-amplitude-under-comparison--1`: Finite Tor amplitude under the
+site comparison, clause (i).
 
 If a complex `K'` of étale `Λ`-sheaves has Tor amplitude in `[a, b]`, then `ν^* K'` has Tor
 amplitude in `[a, b]` on the pro-étale site: a flat model of `K'` in degrees `[a, b]` is carried
@@ -132,8 +132,8 @@ theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj _ hKt
 
 omit [Finite Λ] in
-/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
-comparison, clause (i).
+/-- Blueprint `corollary-finite-tor-amplitude-under-comparison--1`: Finite Tor amplitude under the
+site comparison, clause (i).
 
 The derived comparison pullback `ν^*` carries `Dctf(X_ét, Λ)` into `Dctf(X_proét, Λ)`. -/
 theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
@@ -146,8 +146,8 @@ theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}} [IsNoetherian
 
 variable {Λ} in
 omit [Finite Λ] in
-/-- Blueprint `lem-exc-comparison-tor-interval`: Site comparison preserves and detects Tor
-intervals.
+/-- Blueprint `corollary-finite-tor-amplitude-under-comparison--1`: Site comparison preserves and
+detects Tor intervals.
 
 Let `K` be a complex of étale sheaves of `Λ`-modules. Then `K` has Tor amplitude in `[a, b]` if
 and only if its pullback `ν^* K` to the pro-étale site has. The pullback is exact, faithful and
@@ -162,8 +162,8 @@ theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} [IsNoetherianRing
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff _ a b K
 
 omit [Finite Λ] in
-/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
-comparison, clause (ii).
+/-- Blueprint `corollary-finite-tor-amplitude-under-comparison--1`: Finite Tor amplitude under the
+site comparison, clause (ii).
 
 Let `K'` be a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor amplitude in `[a, b]` on
 `X_proét`, then `K'` has Tor amplitude in `[a, b]` on the étale site.
@@ -233,7 +233,7 @@ lemma isClosedUnderIsomorphisms_plusEtaleOrigin_derivedHom_mapDerivedCategory :
     (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).mapIso
       ((D(ν^*(X)[ModuleCat.{u + 1} Λ])).mapIso e).op.symm).app _) hK
 
-/-- The generator case of the étale-origin step of `lem-weil-finite-duality-site-comparison`.
+/-- The generator case of the étale-origin step of `proposition-six-operations-dctf--15`.
 Let `j : U ⟶ Ū` be a quasi-compact open immersion, `g : Ū ⟶ X` a closed immersion with
 quasi-compact open complement `j' : U' ⟶ X`, `L` a lisse flat sheaf on `U` and `M` a bounded
 below étale complex on `X`. Then `RHom(ν^*(Rg_* Rj_! L), ν^* M)` is of étale origin.
@@ -319,7 +319,7 @@ lemma plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightD
 
 end EtaleOrigin
 
-/-- The étale-origin step of blueprint `lem-weil-finite-duality-site-comparison`: for `X` of
+/-- The étale-origin step of blueprint `proposition-six-operations-dctf--15`: for `X` of
 finite type over a field, `K ∈ Dctf(X_ét, Λ)` and `M` a bounded below étale complex, the
 pro-étale complex `RHom(ν^* K, ν^* M)` is of étale origin: the counit `ν^* Rν_* R ⟶ R` of the
 comparison adjunction is an isomorphism at `R = RHom(ν^* K, ν^* M)`.
@@ -363,7 +363,7 @@ theorem isIso_derivedComparisonAdjunction_counit_app_derivedHom {k : Type u} [Fi
     Λ j g V.ι (by rw [Scheme.Opens.range_ι]; exact (compl_compl _).symm) L hL hM
 
 
-/-- Blueprint `lem-weil-finite-duality-site-comparison`: Finite-stage duality under the site
+/-- Blueprint `proposition-six-operations-dctf--15`: Finite-stage duality under the site
 comparison.
 
 Let `X` be a separated scheme of finite type over an algebraic closure `k` of `𝔽_p`, let `Λ` be
@@ -477,7 +477,7 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
   exact ⟨D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso b ≪≫ e' ≪≫
     (ProEtale.verdierDual Λ aX).mapIso e.op.symm⟩
 
-/-- Blueprint `thm-sf-hom-comparison-constructible`: Internal-Hom comparison for finite-Tor
+/-- Blueprint `proposition-six-operations-dctf--15`: Internal-Hom comparison for finite-Tor
 constructible inputs.
 
 Let `X` be a scheme of finite type over an algebraic closure `k` of `𝔽_p`, let `Λ` be a finite
@@ -485,7 +485,7 @@ ring whose exponent is invertible on `X`, let `K ∈ Dctf(X_ét, Λ)` and `M ∈
 `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`.
 
 The assertion is local on `X`, and on the separated affine opens of a finite cover it is
-`lem-weil-finite-duality-site-comparison`, stated as
+`proposition-six-operations-dctf--15`, stated as
 `ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated`.
 The local isomorphisms are glued through the comparison adjunction: write
 `R = RHom(ν^* K, ν^* M)`. By the projection formula for `ν`

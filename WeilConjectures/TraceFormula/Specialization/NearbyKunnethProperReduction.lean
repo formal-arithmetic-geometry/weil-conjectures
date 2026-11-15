@@ -106,7 +106,8 @@ theorem isIso_kunnethMap_closure_of_forall_isProper
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction of Gabber's Künneth formula to proper models, affine case** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
+`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
+Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
 for all products over the trait of models of finite type along proper structure morphisms, with
 projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,
@@ -166,7 +167,8 @@ theorem isIso_kunnethMap_of_forall_isProper_of_isAffine
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
+`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
+Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth map is an isomorphism
 for all products over the trait of models of finite type along proper structure morphisms, with
 projections compatible with the structure morphisms of the geometric generic fibres to `Spec Ω`,

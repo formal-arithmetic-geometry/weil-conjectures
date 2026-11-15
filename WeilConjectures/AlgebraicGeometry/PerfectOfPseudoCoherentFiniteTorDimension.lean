@@ -149,7 +149,8 @@ Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.5 (08CQ)
 (blueprint: lem-pc-pseudo-coherent-finite-tor-perfect).
 
 Proof:
-1. Choose global Tor bounds `[a,b]`. Perfectness is local (`def-pc-perfect-complex`).
+1. Choose global Tor bounds `[a,b]`. Perfectness is local
+(`lemma-coherent-base-change-invertible-sheaves--1`).
    Pseudo-coherence (`def-pur-pseudo-coherent-complex`) gives local bounded-above
    finite free representatives; refine to affine opens. Restriction of derived tensor
    (`lem-pc-affine-derived-pullback-tensor-tilde`, part 1), testing with the pushforward
@@ -165,7 +166,8 @@ Proof:
 3. Exact tilde carries the quasi-isomorphisms in this derived isomorphism to
    quasi-isomorphisms of sheaf complexes. Finite projective terms sheafify to direct
    summands of finite free sheaves. Thus the resulting complex is strictly perfect,
-   and the local characterization (`def-pc-perfect-complex`) proves perfectness. -/
+   and the local characterization (`lemma-coherent-base-change-invertible-sheaves--1`) proves
+   perfectness. -/
 theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
     [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

@@ -25,7 +25,7 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 
 /-- The positive Tate line, in degree zero, has finite constant local models.
 Source: blueprint latest, rational projective-line unit/counit proof,
-Well-definedness (2)--(3), and sk-def-sp-tate-twist, local-generator paragraph.
+Well-definedness (2)--(3), and definition-tate-twists, local-generator paragraph.
 (blueprint: lem-sfb-rational-p1-positive-line-constructible).
 
 Proof: invertibility of ell gives the common pro-etale cover with compatible roots

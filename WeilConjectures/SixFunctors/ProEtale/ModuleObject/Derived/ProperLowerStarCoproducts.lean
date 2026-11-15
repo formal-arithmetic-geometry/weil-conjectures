@@ -39,17 +39,17 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 # The direct image commutes with direct sums on `Loc(Dᵇc)`, from the heart
 
 Let `Λ` be a commutative condensed ring and `p : Z ⟶ Y` a morphism of schemes. Blueprint
-`det-prop-int-compactness-direct-sums` (2), (3): the derived direct image `Rp_*` on module
+`proposition-compactness-proper-direct-image--2` (2), (3): the derived direct image `Rp_*` on module
 objects over `Λ` commutes with direct sums of objects of `Loc(Dᵇc(Z)⟦Λ⟧)` as soon as it does so
 on the "ind-constructible heart" and has finite amplitude there.
 
 The heart is replaced here by the smallest class of module objects containing the constructible
 ones and closed under isomorphisms, kernels, cokernels, extensions and direct sums
 (`AlgebraicGeometry.ProEtale.CondensedRing.constructibleCoproductClosure`). It is contained in
-the class `IndCons(Z, Λ)` of the blueprint (blueprint `sk-prop-ind-heart`), so the hypotheses
-below are implied by blueprint `det-prop-int-compactness-direct-sums` (1). The complexes with
-cohomology in this class form a localizing subcategory containing `Dᵇc(Z)⟦Λ⟧`, hence
-`Loc(Dᵇc(Z)⟦Λ⟧)`.
+the class `IndCons(Z, Λ)` of the blueprint (blueprint `proposition-ind-constructible-sheaves`), so
+the hypotheses below are implied by blueprint `proposition-compactness-proper-direct-image--2` (1).
+The complexes with cohomology in this class form a localizing subcategory containing `Dᵇc(Z)⟦Λ⟧`,
+hence `Loc(Dᵇc(Z)⟦Λ⟧)`.
 
 The reduction is `DerivedCategory.isIso_sigmaComparison_of_homologyProperty`; its exactness
 hypotheses hold since the pro-étale topos is replete
@@ -89,7 +89,8 @@ instance countableAB4Star_mod (X : Scheme.{u}) :
 
 /-- The smallest class of module objects over `Λ_X` containing the constructible ones and closed
 under isomorphisms, kernels, cokernels, extensions and direct sums. It is contained in the
-ind-constructible sheaves `IndCons(X, Λ)` of the blueprint (`sk-prop-ind-heart`). -/
+ind-constructible sheaves `IndCons(X, Λ)` of the blueprint
+(`proposition-ind-constructible-sheaves`). -/
 abbrev constructibleCoproductClosure (X : Scheme.{u}) :
     ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   ObjectProperty.weakSerreCoproductClosure.{u + 1}
@@ -112,9 +113,9 @@ lemma homologyProperty_of_localizingClosure (X : Scheme.{u}) :
   ObjectProperty.localizingClosure_le fun _ hK n ↦
     ObjectProperty.le_weakSerreCoproductClosure _ _ (hK.2 n)
 
-/-- Blueprint `det-prop-int-compactness-direct-sums` (2), (3), reduced to the heart: if the
-derived direct image `Rp_*` sends the module objects of `constructibleCoproductClosure`, placed in
-degree `0`, into degrees `≤ d`, and commutes with direct sums of them, then its restriction to
+/-- Blueprint `proposition-compactness-proper-direct-image--2` (2), (3), reduced to the heart: if
+the derived direct image `Rp_*` sends the module objects of `constructibleCoproductClosure`, placed
+in degree `0`, into degrees `≤ d`, and commutes with direct sums of them, then its restriction to
 `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums. -/
 theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerStar {Z Y : Scheme.{u}}
     (p : Z ⟶ Y) (d : ℤ)
@@ -141,10 +142,10 @@ theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerStar {Z Y : 
   exact preservesColimitsOfShape_of_discrete _
 
 /-- The properties of the derived direct image `Rp_*` on the heart used for its commutation with
-direct sums (blueprints `sk-lem-proper-heart-bound` and `det-prop-int-compactness-direct-sums`
-(1)): there is a `d` such that `Rp_*` sends the module objects of
-`constructibleCoproductClosure`, placed in degree `0`, into degrees `≤ d`, and `Rp_*` commutes
-with direct sums of such module objects. -/
+direct sums (blueprints `lemma-uniform-bound-proper-direct-image` and
+`proposition-compactness-proper-direct-image--2` (1)): there is a `d` such that `Rp_*` sends the
+module objects of `constructibleCoproductClosure`, placed in degree `0`, into degrees `≤ d`, and
+`Rp_*` commutes with direct sums of such module objects. -/
 def ProperLowerStarHeartHypotheses {Z Y : Scheme.{u}} (p : Z ⟶ Y) : Prop :=
   (∃ d : ℤ, ∀ M, constructibleCoproductClosure Λ Z M →
     (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d) ∧
@@ -153,9 +154,9 @@ def ProperLowerStarHeartHypotheses {Z Y : Scheme.{u}} (p : Z ⟶ Y) : Prop :=
     IsIso (sigmaComparison R((p)_*⟦Λ⟧) fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j))
 
 variable {Λ} in
-/-- Blueprint `det-prop-int-compactness-direct-sums` (3) and `sk-lem-proper-unbounded-window-ii`:
-under `ProperLowerStarHeartHypotheses`, the restriction of `Rp_*` to `Loc(Dᵇc(Z)⟦Λ⟧)` preserves
-direct sums. -/
+/-- Blueprint `proposition-compactness-proper-direct-image--2` (3) and
+`lemma-proper-direct-image-unbounded-complexes`: under `ProperLowerStarHeartHypotheses`, the
+restriction of `Rp_*` to `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums. -/
 theorem ProperLowerStarHeartHypotheses.preservesColimitsOfShape {Z Y : Scheme.{u}}
     {p : Z ⟶ Y} (hp : ProperLowerStarHeartHypotheses Λ p) (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J)

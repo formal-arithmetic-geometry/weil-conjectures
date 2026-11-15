@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 Source: Weil conjectures blueprint, proper base change, definition of derived operations;
 Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules, and Cohomology on Sites,
-Sections 07A5 and 0735 (blueprint: def-weil-pbc-proetale-operations).
+Sections 07A5 and 0735 (blueprint: prose-03-02).
 -/
 
 @[expose] public section
@@ -31,13 +31,13 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Modules over an arbitrary commutative coefficient sheaf on the original small site.
-Source: Stacks, Modules on Sites (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, Modules on Sites (blueprint: prose-03-02). -/
 abbrev proEtaleRingModules (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ringedSiteModules.{u + 1} ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
 /-- The standard localization at quasi-isomorphisms, with no completion or boundedness.
-Source: Stacks, Tag 05RU (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, Tag 05RU (blueprint: prose-03-02). -/
 noncomputable instance proEtaleRingModules_hasDerivedCategory (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     HasDerivedCategory (proEtaleRingModules X R) :=
@@ -97,7 +97,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The ring map adjoint to the fixed identification of inverse-image coefficients.
 Source: Stacks, lemma-adjoint-push-pull-modules
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def proEtaleRingDirectImageMap :
     R ⟶ (proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj S :=
   (proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit.app R ≫
@@ -105,7 +105,7 @@ noncomputable def proEtaleRingDirectImageMap :
 
 /-- Sectionwise direct image, with scalar action through the adjoint coefficient map.
 Source: Stacks, lemma-adjoint-push-pull-modules
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def proEtaleRingModuleDirectImage :
     proEtaleRingModules X S ⥤ proEtaleRingModules Y R :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -119,13 +119,13 @@ noncomputable def proEtaleRingModuleDirectImage :
 
 /-- The displayed inverse image: inverse-image module action followed by sheafified tensor
 extension along `c`. Source: Stacks, lemma-adjoint-push-pull-modules and Tag 03EK
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def proEtaleRingModulePullbackObj (M : proEtaleRingModules Y R) :
     proEtaleRingModules X S :=
   SheafOfModules.changeOfRings.{u, u + 1, u + 1} c.hom ((proEtaleModuleInverseImage f R).obj M)
 
 /-- The inverse-image map followed by the sheafified map on tensors.
-Source: Stacks, Tag 03EK (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, Tag 03EK (blueprint: prose-03-02). -/
 noncomputable def proEtaleRingModulePullbackMap {M N : proEtaleRingModules Y R} (a : M ⟶ N) :
     proEtaleRingModulePullbackObj f R S c M ⟶ proEtaleRingModulePullbackObj f R S c N :=
   SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} c.hom _ ((proEtaleModuleInverseImage f R).map a)
@@ -159,7 +159,7 @@ private noncomputable def proEtaleRingExtension
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj)
 
 /-- The specified tensor maps respect identities and composition.
-Source: Stacks, Tag 03EK (blueprint: def-weil-pbc-proetale-operations).
+Source: Stacks, Tag 03EK (blueprint: prose-03-02).
 Proof: the inverse-image functor respects both operations. On each presheaf tensor,
 `id ⊗ a` respects both operations on pure tensors, which generate the tensor product.
 The sheafification functor preserves these equalities. -/
@@ -179,7 +179,7 @@ theorem proEtaleRingModulePullback_functorial :
 
 /-- The module pullback functor, with the actual sheaf tensor construction as its objects.
 Source: Stacks, lemma-adjoint-push-pull-modules
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def proEtaleRingModulePullback :
     proEtaleRingModules Y R ⥤ proEtaleRingModules X S where
   obj := proEtaleRingModulePullbackObj f R S c
@@ -446,7 +446,7 @@ private theorem proEtaleModuleInverseImage_preservesFiniteLimits :
 
 /-- Both module operations are additive, pullback is exact, and they are adjoint.
 Source: Stacks, lemma-adjoint-push-pull-modules and Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations).
+(blueprint: prose-03-02).
 Proof: compose the model-site module adjunction, transported by the up/down module
 equivalences, with the extension/restriction adjunction. The latter sends a tensor map to
 its value on `1 ⊗ m`; module sheafification extends its inverse uniquely. The composite
@@ -475,25 +475,25 @@ theorem proEtaleRingModuleOperations_properties :
   exact ⟨adj.left_adjoint_additive, inferInstance, hlim, inferInstance, ⟨adj⟩⟩
 
 /-- Additivity of the specified pullback. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance proEtaleRingModulePullback_additive :
     (proEtaleRingModulePullback f R S c).Additive :=
   (proEtaleRingModuleOperations_properties f R S c).1
 
 /-- Additivity of direct image. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance proEtaleRingModuleDirectImage_additive :
     (proEtaleRingModuleDirectImage f R S c).Additive :=
   (proEtaleRingModuleOperations_properties f R S c).2.1
 
 /-- Left exactness of pullback. Source: Stacks, Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance proEtaleRingModulePullback_preservesFiniteLimits :
     PreservesFiniteLimits (proEtaleRingModulePullback f R S c) :=
   (proEtaleRingModuleOperations_properties f R S c).2.2.1
 
 /-- Right exactness of pullback. Source: Stacks, Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance proEtaleRingModulePullback_preservesFiniteColimits :
     PreservesFiniteColimits (proEtaleRingModulePullback f R S c) :=
   (proEtaleRingModuleOperations_properties f R S c).2.2.2.1
@@ -501,7 +501,7 @@ noncomputable instance proEtaleRingModulePullback_preservesFiniteColimits :
 set_option backward.isDefEq.respectTransparency false in
 /-- K-injective resolutions exist in all modules over these coefficients.
 Source: Stacks, Section 07A5 and Theorem 079P
-(blueprint: def-weil-pbc-proetale-operations).
+(blueprint: prose-03-02).
 Proof: transport the site to `proEtaleSiteModel X`, enlarging only the Hom universe.
 Module sheaves on that small site form a Grothendieck abelian category. Transfer this
 property across the module equivalence. The source Grothendieck-category instance then
@@ -523,13 +523,13 @@ theorem proEtaleRingModules_hasKInjectiveResolutions (X : Scheme.{u})
 attribute [instance] proEtaleRingModules_hasKInjectiveResolutions
 
 /-- Ordinary uncompleted derived inverse image, by exact termwise descent.
-Source: Stacks, Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, Section 0735 (blueprint: prose-03-02). -/
 noncomputable abbrev proEtaleRingDerivedPullback :
     DerivedCategory (proEtaleRingModules Y R) ⥤ DerivedCategory (proEtaleRingModules X S) :=
   (proEtaleRingModulePullback f R S c).mapDerivedCategory
 
 /-- Termwise pullback computes the derived pullback on all complexes and chain maps.
-Source: Stacks, Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, Section 0735 (blueprint: prose-03-02). -/
 noncomputable def proEtaleRingDerivedPullbackFactors :
     DerivedCategory.Q ⋙ proEtaleRingDerivedPullback f R S c ≅
       (proEtaleRingModulePullback f R S c).mapHomologicalComplex (ComplexShape.up ℤ) ⋙

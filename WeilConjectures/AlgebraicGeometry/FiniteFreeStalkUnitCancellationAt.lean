@@ -14,8 +14,8 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeComplexUnitCancellation
 
 /-! # Unit cancellation at a specified degree
 
-Source: Stacks Project, Tag 00MT, and blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
+Source: Stacks Project, Tag 00MT, and blueprint lemma-coherent-base-change-invertible-sheaves--3,
+proof step 4. (blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
 -/
 
 @[expose] public section
@@ -68,7 +68,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Cancel the specified nonzero residue differential, retaining every rank equation.
 
 Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`), applied once;
-blueprint lem-pc-perfect-locus, proof step 4.
+blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
 
 Proof: Choose the given free-sheaf identifications. On the affine scheme Spec of

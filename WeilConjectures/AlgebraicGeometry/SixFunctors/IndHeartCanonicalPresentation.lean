@@ -22,12 +22,12 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-ind-heart/
 `sk-prop-ind-heart-canonical-presentation.md` and its proof
-(blueprint: det-ind-heart-canonical-presentation).
+(blueprint: proposition-ind-constructible-sheaves).
 
 `CostructuredArrow` is exactly the category of constructible modules mapping to B.
 `Functor.isDenseAt` asserts the colimit property for its tautological cocone, whose
 leg at (C,c) is c. Small diagrams and essential smallness use universe u+1, as in
-`IndHeartFullFaithfulnessAssertions` and def-weil-size-convention. The universal property
+`IndHeartFullFaithfulnessAssertions` and prose-01-10. The universal property
 over the full essentially small category is equivalent to the one over a small skeleton.
 -/
 
@@ -44,13 +44,13 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical-presentation assertions for the coefficient ring object Λ on X.
 Here IndCons is the replete filtered-colimit closure `ObjectProperty.ind`, as in
-`det-ind-heart-full-faithfulness`. The category J(B) is the existing costructured-arrow
+`proposition-ind-constructible-sheaves`. The category J(B) is the existing costructured-arrow
 category of the constructible inclusion. Density at B means precisely that the cocone
 with legs c at (C,c) is a colimit, rather than just that some colimit object is isomorphic
 to B. The final clause applies to every small filtered constructible colimit presentation,
 with the functor to J(B) induced by its specified cocone legs.
 Source: blueprint sk-prop-ind-heart-canonical-presentation.md, entire statement
-(blueprint: det-ind-heart-canonical-presentation). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 def IndHeartCanonicalPresentationAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u}) : Prop :=
@@ -69,7 +69,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The cofinality argument for a filtered presentation by finitely presentable objects.
 Source: canonical-presentation proof, Cofinality paragraph.
-(blueprint: det-ind-heart-canonical-presentation). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 private theorem final_constructiblePresentation
     {C : Type*} [Category.{u + 1} C] (P : ObjectProperty C)
     (hP : ∀ A : P.FullSubcategory, IsFinitelyPresentable.{u + 1} A.obj)
@@ -105,7 +105,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Assemble a canonical colimit from essential smallness and finite presentation.
 Source: canonical-presentation proof, Essential smallness and Colimit paragraphs.
-(blueprint: det-ind-heart-canonical-presentation). -/
+(blueprint: proposition-ind-constructible-sheaves). -/
 private theorem canonicalPresentation_of_finitePresentation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u})
@@ -133,7 +133,7 @@ private theorem canonicalPresentation_of_finitePresentation
 has its canonical filtered presentation by all constructible objects mapping to it;
 every small filtered constructible presentation induces a final functor to this category.
 Source: blueprint sk-prop-ind-heart-canonical-presentation.md and its proof
-(blueprint: det-ind-heart-canonical-presentation).
+(blueprint: proposition-ind-constructible-sheaves).
 
 Proof:
 1. Finite type over the spectrum of a field makes X locally Noetherian and compact.

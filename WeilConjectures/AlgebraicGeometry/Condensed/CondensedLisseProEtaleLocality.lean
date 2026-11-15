@@ -132,7 +132,6 @@ attribute [local reducible] sheafSymmetricCategory sheafBraidedCategory
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
   Sheaf.symmetricCategory Sheaf.braidedCategory SymmetricCategory.ofCurried
 
-set_option maxHeartbeats 400000 in
 -- The derived-category isomorphisms in the pullback branch need extra unification.
 /-- A single morphism tests dualizability before and after every weakly etale pullback.
 

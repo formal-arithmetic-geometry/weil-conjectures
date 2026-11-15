@@ -20,7 +20,7 @@ the *higher direct images of the complement of the divisor `i`* (with `ℤ/ℓ` 
 
 (`AlgebraicGeometry.Etale.HasDivisorComplementDirectImages`). This is what purity gives near a
 point of a regular divisor `D` of a smooth scheme over an algebraically closed field, the Tate
-twist `ℤ/ℓ(-1)` being trivialized (blueprint `det-tf-transverse-corner-constant`).
+twist `ℤ/ℓ(-1)` being trivialized (blueprint `lemma-punctured-surface-punctured-curve--1`).
 
 The property is transported along every Cartesian square on which the base change maps of the
 constant sheaf `ℤ/ℓ` are isomorphisms
@@ -89,8 +89,8 @@ divisor* `i : D ⟶ X`, with coefficients `ℤ/ℓ`, if
 
 This is the local form of purity for a regular divisor `D` of a smooth scheme over an
 algebraically closed field, the Tate twist `ℤ/ℓ(-1)` being trivialized by a primitive `ℓ`-th
-root of unity (blueprint `det-tf-transverse-corner-constant`). The definition does not tie `i`
-to `j`; in applications `D` is the complement of `U`. -/
+root of unity (blueprint `lemma-punctured-surface-punctured-curve--1`). The definition does not tie
+`i` to `j`; in applications `D` is the complement of `U`. -/
 def HasDivisorComplementDirectImages (ℓ : ℕ) {U X D : Scheme.{u}} (j : U ⟶ X) (i : D ⟶ X) :
     Prop :=
   (∀ q : ℕ, 2 ≤ q → IsZero (higherDirectImage (ZModCoeff.{u} ℓ) j q (constantZModModule U ℓ))) ∧

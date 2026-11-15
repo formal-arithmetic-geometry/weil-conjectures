@@ -22,10 +22,10 @@ For a proper morphism `f : X ⟶ S`, a geometric point `x : Spec Ω ⟶ S` (`Ω`
 and a sheaf `F` of modules over a finite ring, the stalk at `x` of `Rᵠf_* F` is the étale
 cohomology `Hᵠ(X_x, F|)` of the geometric fibre
 (`nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_isProper`,
-blueprint `cor-weil-pbc-geometric-fiber-finite`): by proper base change it is the stalk of the
+blueprint `corollary-cohomology-geometric-fibres--2`): by proper base change it is the stalk of the
 direct image along `X_x ⟶ Spec Ω`, which is computed by the strict-local exchange. For constant
 coefficients `ℤ/ℓ` this gives the stalk criterion used in
-`thm-fin-projective-smooth-curve-finiteness`
+`proposition-proper-direct-image-finite-coefficients`
 (`isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre`).
 -/
 
@@ -191,7 +191,8 @@ instance isSepClosed_residueField_of_isSepClosed (Ω : Type*) [Field Ω] [IsSepC
   have := IsFractionRing.idem Ω
   IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing Ω
 
-/-- Blueprint `cor-weil-pbc-geometric-fiber-finite`: Finite-coefficient geometric-fiber formula.
+/-- Blueprint `corollary-cohomology-geometric-fibres--2`: Finite-coefficient geometric-fiber
+formula.
 
 Let `f : X ⟶ S` be proper, `x : Spec Ω ⟶ S` a geometric point, `X_x = X ×_S Spec Ω` the
 geometric fibre with projection `i : X_x ⟶ X`, and `Λ` a finite ring. For every sheaf `F` of
@@ -252,9 +253,9 @@ noncomputable def sheafComposeForget₂UpperStarConstantSheafIso (ℓ : ℕ) {X'
   (sheafCompose _ _).mapIso ((constantSheafCompUpperStarIso _ i).app _) ≪≫
     (constantCommuteCompose X'.smallEtaleTopology _).app _
 
-/-- Blueprint `cor-weil-pbc-geometric-fiber-finite`, for the constant sheaf `ℤ/ℓ`: for `f : X ⟶ S`
-proper and a point `s` of `S`, the stalk of `Rʳf_*(ℤ/ℓ)` at the geometric point `Spec κ(s)‾ ⟶ S`
-is the étale cohomology group `Hʳ(X_{s̄}, ℤ/ℓ)` of the geometric fibre
+/-- Blueprint `corollary-cohomology-geometric-fibres--2`, for the constant sheaf `ℤ/ℓ`: for
+`f : X ⟶ S` proper and a point `s` of `S`, the stalk of `Rʳf_*(ℤ/ℓ)` at the geometric point
+`Spec κ(s)‾ ⟶ S` is the étale cohomology group `Hʳ(X_{s̄}, ℤ/ℓ)` of the geometric fibre
 `X_{s̄} = X ×_S Spec κ(s)‾`. -/
 theorem nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (ℓ : ℕ) [NeZero ℓ] (s : S) (r : ℕ) :
@@ -300,7 +301,7 @@ By proper base change the stalks of `Rʳf_*(ℤ/ℓ)` are the groups `Hʳ(X_{s̄
 (`nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf`),
 and the stalk criterion `AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_isConstructible_card`
 applies. This is the final step of the blueprint proof of
-`thm-fin-projective-smooth-curve-finiteness`. -/
+`proposition-proper-direct-image-finite-coefficients`. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f] (ℓ : ℕ) [NeZero ℓ] (r : ℤ)
     (hfin : ∀ s : S,

@@ -17,7 +17,7 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 # The Tate twists
 
 Let `Λ` be a commutative ring of positive characteristic `n`. This file constructs the Tate
-twists `Λ_X(m)`, `m ∈ ℤ`, of the blueprint (`def-coefficient-twists-detailed`) on every scheme
+twists `Λ_X(m)`, `m ∈ ℤ`, of the blueprint (`definition-tate-twists`) on every scheme
 `X` on which `n` is invertible, and shows that they form a Tate twist datum
 (`AlgebraicGeometry.Etale.HasTateTwist`) for the coefficient ring `Λ`.
 
@@ -126,7 +126,7 @@ noncomputable def tateIntTensorFamily :=
 
 
 open Classical in
-/-- Blueprint `def-coefficient-twists-detailed`: Coefficient Tate twists.
+/-- Blueprint `definition-tate-twists`: Coefficient Tate twists.
 
 The Tate twisting object `Λ_X(m) ∈ D(X_ét, Λ)`: on a scheme `X` on which the characteristic `n`
 of `Λ` is invertible, the derived pullback of `Λ_S(m)`
@@ -351,7 +351,7 @@ lemma exists_isLocallyConstantSheaf_tateTwistObject (m : ℤ) :
 
 end Sheaf
 
-/-- Blueprint `def-coefficient-twists-detailed`: Coefficient Tate twists.
+/-- Blueprint `definition-tate-twists`: Coefficient Tate twists.
 
 The genuine Tate twist datum of a commutative ring `Λ` of positive characteristic `n`:
 `Λ_X(m) = (μₙ ⊗ Λ)^{⊗ m}` on the schemes `X` on which `n` is invertible

@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.SquareZeroRelativeUnitsAdditiveKe
 
 /-! # Linearizing the unit image into the additive image
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim,
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim,
 as expanded in `lem-sc-nil-ideal-units-image-linearization`, Steps 2 and 3.
 (blueprint: lem-sc-nil-ideal-units-additive-image-comparison)
 -/
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme
 identifies the multiplicative image of the congruence subgroup with the additive
 image of the ideal. This assertion involves only structure rings and their units,
 not the module cokernel or tensor sections.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 `lem-sc-nil-ideal-units-image-linearization`, Steps 2 and 3.
 (blueprint: lem-sc-nil-ideal-units-additive-image-comparison)
 

@@ -12,9 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 /-!
 # Basic properties of the derived tensor product of étale complexes
 
-Inputs of the ordinary Künneth formula (blueprint subsection `sk-prop-sf-kunneth-ordinary`)
-about the derived tensor product `- ⊗ᴸ -` on `D(X_ét)`, for a monoidal Grothendieck abelian
-coefficient category `A` with functorial flat resolutions (for instance `A = ModuleCat Λ`).
+Inputs of the ordinary Künneth formula (blueprint subsection
+`proposition-ordinary-external-kunneth--1`) about the derived tensor product `- ⊗ᴸ -` on `D(X_ét)`,
+for a monoidal Grothendieck abelian coefficient category `A` with functorial flat resolutions (for
+instance `A = ModuleCat Λ`).
 
 ## Main results
 

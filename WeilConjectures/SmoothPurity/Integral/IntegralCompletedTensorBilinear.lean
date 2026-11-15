@@ -484,7 +484,7 @@ end TensorDescent
 for the published constant valuation-ring action.
 Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4); Stacks Project,
 Tags 06YS and 099N; the integral-to-rational tensor construction in blueprint
-`def-weil-derived-pullback-tensor-hom`.
+`prose-03-02`.
 (blueprint: lem-sf-integral-completed-tensor-bilinear).
 
 Proof: represent both inputs by K-flat complexes with flat terms. Finite reduction

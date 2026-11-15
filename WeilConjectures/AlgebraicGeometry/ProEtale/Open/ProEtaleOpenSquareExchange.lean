@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 # Canonical open-square exchange on the small pro-etale site
 
 Source: Weil blueprint, trace formula, order 2367; Stacks Project, Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange).
+(blueprint: proposition-composition-base-change-rf-shriek--4).
 
 All functors act on the published intrinsic constant-ring module categories.
 The comparison is fixed as the inverse of the open-adjunction mate; the data below
@@ -43,7 +43,7 @@ variable (A : Type u) [CommRing A] [Finite A]
 attribute [local irreducible] sfIntrinsicModuleEquivalence
 
 /-- The open adjunction transported through the canonical realization equivalences.
-Source: Stacks, Tags 03DI and 00YV (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tags 03DI and 00YV (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenAdjunction {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : sfIntrinsicExtensionByZero j A ⊣ sfIntrinsicPullback A j :=
   ((sfIntrinsicModuleEquivalence U A).symm.toAdjunction.comp
@@ -52,7 +52,7 @@ noncomputable def sfIntrinsicOpenAdjunction {U Y : Scheme.{u}} (j : U ⟶ Y)
     (sfIntrinsicModuleEquivalence Y A).toAdjunction
 
 /-- Composition of open extensions is the unique comparison respecting composite units.
-Source: Stacks, Tag 03DI (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 03DI (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ Y)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicExtensionByZero (i ≫ j) A ≅
@@ -62,14 +62,14 @@ noncomputable def sfIntrinsicOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U 
       (sfIntrinsicOpenAdjunction A (i ≫ j)) |>.symm
 
 /-- Identity open extension, normalized by its adjunction unit.
-Source: Stacks, Tag 03DI (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 03DI (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenId (Y : Scheme.{u}) :
     sfIntrinsicExtensionByZero (𝟙 Y) A ≅ 𝟭 _ :=
   ((sfIntrinsicOpenAdjunction A (𝟙 Y)).ofNatIsoRight
     (sfIntrinsicPullbackId A Y)).leftAdjointUniq Adjunction.id
 
 /-- Commuting pullbacks for a commutative square, with the canonical coefficient action.
-Source: Stacks, Tag 04J0 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 04J0 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :
@@ -81,7 +81,7 @@ noncomputable def sfIntrinsicSquarePullback {U' U Y' Y : Scheme.{u}}
 /-- The reverse exchange map is the mate of the pullback square. Explicitly it applies
 `j'_!` to `g_U^*` of the open unit, then the pullback-square comparison, and finally the
 open counit. Thus it is a specified map, rather than a freely chosen isomorphism.
-Source: Stacks, Tag 03S6 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 03S6 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenMate {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : gU ≫ j = j' ≫ g) :
@@ -95,13 +95,14 @@ noncomputable def sfIntrinsicOpenMate {U' U Y' Y : Scheme.{u}}
     (sfIntrinsicOpenAdjunction A j').counit
 
 /-- Exact extension by zero on the full, unbounded intrinsic derived category.
-Source: blueprint order 2367, termwise derivation (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367, termwise derivation (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 noncomputable abbrev sfIntrinsicDerivedOpen {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory Y A :=
   (sfIntrinsicExtensionByZero j A).mapDerivedCategory
 
 /-- Descend an actual natural transformation of exact intrinsic functors termwise.
-Source: Stacks, Tag 05RU (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 05RU (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDeriveMap {X Y : Scheme.{u}}
     {F G : proEtaleRingModules X (proEtaleConstantRing X A) ⥤
       proEtaleRingModules Y (proEtaleConstantRing Y A)}
@@ -116,7 +117,8 @@ noncomputable def sfIntrinsicDeriveMap {X Y : Scheme.{u}}
     (whiskerRight (NatTrans.mapHomologicalComplex a (ComplexShape.up ℤ)) DerivedCategory.Q)
 
 /-- The specified derived reverse exchange is the exact termwise descent of the open mate.
-Source: blueprint order 2367; Stacks, Tag 03S6 (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367; Stacks, Tag 03S6 (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : gU ≫ j = j' ≫ g) :
@@ -129,7 +131,7 @@ noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     (sfIntrinsicPullback A g)).inv
 
 /-- The derived open unit, with the localization identity and composition comparisons.
-Source: Stacks, Tag 05RU (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 05RU (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : 𝟭 (proEtaleDerivedCategory U A) ⟶
       sfIntrinsicDerivedOpen A j ⋙ sfIntrinsicDerivedPullback A j :=
@@ -139,7 +141,7 @@ noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
       (sfIntrinsicPullback A j)).inv
 
 /-- Pullback composition on unbounded derived categories.
-Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Section 0735 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     sfIntrinsicDerivedPullback A (f ≫ g) ≅
@@ -148,7 +150,7 @@ noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A f)).symm
 
 /-- Open-extension composition on unbounded derived categories.
-Source: blueprint order 2367 (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ Y)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicDerivedOpen A (i ≫ j) ≅ sfIntrinsicDerivedOpen A i ⋙ sfIntrinsicDerivedOpen A j :=
@@ -157,19 +159,19 @@ noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) 
       (sfIntrinsicExtensionByZero j A)).symm
 
 /-- Identity pullback on the unbounded derived category.
-Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Section 0735 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedPullbackId (Y : Scheme.{u}) :
     sfIntrinsicDerivedPullback A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicPullbackId A Y) ≪≫ mapDerivedCategoryIdIso _
 
 /-- Identity open extension on the unbounded derived category.
-Source: blueprint order 2367 (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenId (Y : Scheme.{u}) :
     sfIntrinsicDerivedOpen A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicOpenId A Y) ≪≫ mapDerivedCategoryIdIso _
 
 /-- The derived pullback identification used to restrict the exchange to the open.
-Source: Stacks, Tag 04J0 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 04J0 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :
@@ -184,7 +186,7 @@ its inverse to the specified mate, so none of its isomorphisms is arbitrary. The
 field is precisely the identity after the two open units and the pullback identification.
 The last four fields express horizontal/vertical identity and pasting, respectively.
 Source: blueprint order 2367; Stacks, Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange). -/
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 structure SfOpenSquareExchangeData where
   exchange : ∀ {U' U Y' Y : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ Y')
     (j : U ⟶ Y) (g : Y' ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -1664,7 +1666,7 @@ private noncomputable def sfExchangeData : SfOpenSquareExchangeData A where
 
 /-- Canonical open-square exchange with finite coefficient ring `A_{E,n}`.
 Source: Weil blueprint, trace formula, order 2367; Stacks, Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange).
+(blueprint: proposition-composition-base-change-rf-shriek--4).
 
 Proof: first work with all sheaves over the constant ring. The localization equivalence
 identifies restriction with open pullback. Evaluate both `j^* g_*` and `g_{U*} j'^*` on

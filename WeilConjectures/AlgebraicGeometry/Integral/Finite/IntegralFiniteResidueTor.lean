@@ -141,7 +141,6 @@ private theorem fixed_scalar
                   (RingCat.of (ULift.{u + 1} A)))).app U a))) x = _
   rw [constant_scalar_unit]
 
-set_option maxHeartbeats 600000 in
 -- Comparing the iterated scalar-restriction structures needs additional reduction.
 private def fixedRestrictionSquare
     (A B : Type u) [CommRing A] [CommRing B]
@@ -429,7 +428,7 @@ private def residueModuleIso {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ 
 /-- Over a finite coefficient quotient, the cohomological interval of the canonical
 residue scalar extension tests the Tor interval of a bounded constructible complex.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, second paragraph
+Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph
 (blueprint: lem-pe-integral-finite-residue-tor).
 
 Proof: choose normalized finite coefficient encodings. Their section-action descriptions

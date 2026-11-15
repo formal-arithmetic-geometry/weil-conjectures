@@ -168,8 +168,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 # Compactification refinement on the ambient localizing category
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-det-sf-comp-coherence-refinement; Stacks Project, Tags 09AH, 08BJ, 015F and 0D6E
-(blueprint: det-sf-comp-coherence-refinement).
+proposition-construction-independence-rf-shriek--7; Stacks Project, Tags 09AH, 08BJ, 015F and 0D6E
+(blueprint: proposition-construction-independence-rf-shriek--7).
 
 The restriction comparison is the canonical counit mate of pullback composition.
 Its inverse, followed by the open adjunction, defines the refinement map on the entire
@@ -621,7 +621,7 @@ private theorem refinementAdjunction_eq {X Y : Scheme.{u}} (h : X ⟶ Y) :
 
 /-- The identity direct-image identification is linear for the pulled-back coefficient ring.
 Source: blueprint refinement clause (3), canonical identity identifications
-(blueprint: det-sf-comp-coherence-refinement).
+(blueprint: proposition-construction-independence-rf-shriek--7).
 Proof: expand the action on lowerStar; condensedPushforwardHom_id is the inverse identity
 identification on the coefficient ring. Naturality and the tensor identity of the abelian
 identity compositor cancel this inverse, leaving exactly the action of M. -/
@@ -639,7 +639,7 @@ theorem refinementLowerStarId_linear (X : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- The linear identity components are natural.
 Source: blueprint refinement clause (3), canonical identity identifications
-(blueprint: det-sf-comp-coherence-refinement).
+(blueprint: proposition-construction-independence-rf-shriek--7).
 Proof: apply the faithful module forgetful functor. Both sides become the naturality
 square of ProEtale.lowerStarId on the underlying abelian-sheaf morphism. -/
 theorem refinementLowerStarId_naturality (X : Scheme.{u})
@@ -659,7 +659,7 @@ theorem refinementLowerStarId_naturality (X : Scheme.{u})
 
 /-- The canonical identity direct-image isomorphism, with its actual abelian-sheaf components.
 Source: blueprint refinement clause (3)
-(blueprint: det-sf-comp-coherence-refinement). -/
+(blueprint: proposition-construction-independence-rf-shriek--7). -/
 def refinementLowerStarId (X : Scheme.{u}) : lowerStar Λ (𝟙 X) ≅ 𝟭 _ :=
   NatIso.ofComponents
     (fun M ↦ Mod.isoMk (M := (lowerStar Λ (𝟙 X)).obj M) (N := M)
@@ -669,7 +669,7 @@ def refinementLowerStarId (X : Scheme.{u}) : lowerStar Λ (𝟙 X) ≅ 𝟭 _ :=
 
 /-- The canonical derived identity identification, obtained by deriving the identity
 identification on module sheaves. Source: blueprint refinement clause (3)
-(blueprint: det-sf-comp-coherence-refinement). -/
+(blueprint: proposition-construction-independence-rf-shriek--7). -/
 def refinementDerivedLowerStarId (X : Scheme.{u}) :
     (lowerStar Λ (𝟙 X)).rightDerivedFunctor ≅ 𝟭 _ :=
   Functor.rightDerivedFunctorNatIso (refinementLowerStarId Λ X) ≪≫
@@ -677,7 +677,7 @@ def refinementDerivedLowerStarId (X : Scheme.{u}) :
 
 /-- The canonical unbounded derived direct-image compositor, normalized by the underived
 module compositor and the K-injective derived-functor units. Source: blueprint refinement
-clause (3); Stacks Tag 0D6E (blueprint: det-sf-comp-coherence-refinement). -/
+clause (3); Stacks Tag 0D6E (blueprint: proposition-construction-independence-rf-shriek--7). -/
 def refinementDerivedLowerStarComp {X Y Z : Scheme.{u}} (a : X ⟶ Y) (h : Y ⟶ Z) :
     (lowerStar Λ (a ≫ h)).rightDerivedFunctor ≅
       (lowerStar Λ a).rightDerivedFunctor ⋙ (lowerStar Λ h).rightDerivedFunctor :=
@@ -724,7 +724,7 @@ private theorem refinementPullback_triangle {W X Y Z : Scheme.{u}}
 
 /-- Open extension followed by open restriction has its invertible canonical unit, also on
 unbounded complexes. Source: blueprint refinement proof step 1; Stacks Tags 09AH and 015F
-(blueprint: det-sf-comp-coherence-refinement).
+(blueprint: proposition-construction-independence-rf-shriek--7).
 Proof: the sheaf open adjunction has invertible unit, since restriction of extension by
 zero is the original module with the same action. Both functors are exact. Descend their
 termwise unit and counit through quasi-isomorphisms; the triangle identities and inverse
@@ -744,7 +744,7 @@ attribute [instance] refinementOpenUnit_isIso
 /-- The canonical restriction map j* Rh* M → j'* M: pullback composition, followed by the
 counit of Lh* ⊣ Rh*. The commuting open triangle fixes every coefficient identification.
 Source: blueprint refinement, The restriction to X, proof steps 1--2
-(blueprint: det-sf-comp-coherence-refinement). -/
+(blueprint: proposition-construction-independence-rf-shriek--7). -/
 def refinementOpenRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : d.Refinement c) :
     (lowerStar Λ r.hom).rightDerivedFunctor ⋙ (upperStar Λ c.i).mapDerivedCategory ⟶
@@ -765,7 +765,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- For a boundary-preserving refinement the specified restriction map is invertible on
 all unbounded complexes; no proper base change for arbitrary complexes is assumed.
 Source: blueprint refinement, The restriction to X, proof step 2
-(blueprint: det-sf-comp-coherence-refinement).
+(blueprint: proposition-construction-independence-rf-shriek--7).
 Proof: choose a K-injective resolution I of M. Over V → X, the inverse-image-open equality
 identifies V ×_Z Z' with V, hence j* h* I = j'* I sectionwise, including the coefficient
 action. The counit mate defining refinementOpenRestriction is exactly this identification.
@@ -865,7 +865,8 @@ private theorem refinementRestriction_comp {X Y : Scheme.{u}} {f : X ⟶ Y}
     Compactification.comp_hom] using hz
 
 /-- The canonical θ_h,K: restriction of Rh*j'!K to X, then the inverse open unit.
-Source: blueprint refinement, displayed θ (blueprint: det-sf-comp-coherence-refinement). -/
+Source: blueprint refinement, displayed θ (blueprint:
+proposition-construction-independence-rf-shriek--7). -/
 def refinementTheta {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification.BoundaryCompactification f} (r : d ⟶ c)
     (K : DerivedCategory
@@ -880,7 +881,7 @@ def refinementTheta {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The refinement map is the adjoint of θ⁻¹, with no choice of an arbitrary isomorphism.
 Source: blueprint refinement, displayed e and clause (1)
-(blueprint: det-sf-comp-coherence-refinement). -/
+(blueprint: proposition-construction-independence-rf-shriek--7). -/
 def localizingRefinementMap {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification.BoundaryCompactification f} (r : d ⟶ c)
     (K : DerivedCategory
@@ -1182,8 +1183,8 @@ private theorem standardBoundaryVanishing
 
 /-- Uniqueness, invertibility on Loc(Dctf), and identity/composition for the canonical
 refinement maps. Uniqueness and coherence hold for arbitrary unbounded K.
-Source: blueprint main-20261015, det-sf-comp-coherence-refinement, clauses (1)--(3)
-(blueprint: det-sf-comp-coherence-refinement).
+Source: blueprint main-20261015, proposition-construction-independence-rf-shriek--7, clauses
+(1)--(3) (blueprint: proposition-construction-independence-rf-shriek--7).
 
 Lean realization: the standard coefficient cases of the closed-support calculation use the
 existing proper/open interchange theorem. Only the all-continuous-map algebraic-closure

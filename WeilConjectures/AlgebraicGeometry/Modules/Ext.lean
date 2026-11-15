@@ -66,7 +66,7 @@ derived category of `𝒪_X`-modules, equivalently the right derived functors of
 evaluated at `𝒢` (`𝒪_X`-modules have enough injectives but in general not enough projectives).
 In degree `0` this is `Hom_{𝒪_X}(ℱ, 𝒢)` (`CategoryTheory.Abelian.Ext.homEquiv₀`).
 
-(blueprint: `def-sc-ext-sheaf`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 abbrev Ext (ℱ 𝒢 : X.Modules) (i : ℕ) : Type u :=
   Abelian.Ext ℱ 𝒢 i
 
@@ -76,7 +76,7 @@ abbrev Ext (ℱ 𝒢 : X.Modules) (i : ℕ) : Type u :=
 Ext^{n₁}(ℱ₁, 𝒢)`. The comparison with sheaf cohomology for finite locally free `ℱ` is
 `AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H`.
 
-(blueprint: `rem-ptr-sc-ext-sheaf-4`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem contravariantSequence_ext_exact {S : ShortComplex X.Modules} (hS : S.ShortExact)
     (𝒢 : X.Modules) (n₀ n₁ : ℕ) (h : 1 + n₀ = n₁) :
     (Abelian.Ext.contravariantSequence hS 𝒢 n₀ n₁ h).Exact :=
@@ -390,7 +390,7 @@ end LocallyFree
 composite of the exact functor `ℱᵛ ⊗ -` with `Γ(X, -)`. In particular
 `Ext^i_X(𝒪_X, 𝒢) = H^i(X, 𝒢)`.
 
-(blueprint: `lem-sc-ext-locally-free`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem nonempty_ext_addEquiv_H (ℱ 𝒢 : X.Modules) [ℱ.IsFiniteLocallyFree] (i : ℕ) :
     Nonempty (Ext ℱ 𝒢 i ≃+ (ℱᵛ ⊗ 𝒢).H i) := by
   have : IsGrothendieckAbelian.{u} X.Modules := SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
@@ -466,7 +466,7 @@ adjoint functors `ℱ ⊗ -` and `Hom(ℱ, -)`), of `Hom(ℱ, 𝒢) ≅ ℱᵛ �
 `AlgebraicGeometry.Scheme.Modules.extUnitAddEquivH`. It is natural in `𝒢`
 (`AlgebraicGeometry.Scheme.Modules.extAddEquivH_comp_mk₀`).
 
-(blueprint: `lem-sc-ext-locally-free`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 noncomputable def extAddEquivH (ℱ 𝒢 : X.Modules) [ℱ.IsFiniteLocallyFree] (i : ℕ) :
     Ext ℱ 𝒢 i ≃+ (ℱᵛ ⊗ 𝒢).H i :=
   (extAddEquivOfIsoLeft (ρ_ ℱ) i).trans

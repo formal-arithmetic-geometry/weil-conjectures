@@ -333,10 +333,20 @@ private theorem composite_complex_epsilon
     Functor.comp_obj, HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
   simp only [Category.id_comp, Category.comp_id]
 
+private theorem square_transport_cancel_iff
+    {C : Type*} [Category C] {A B A' B' D E D' E' : C}
+    {i : A ⟶ A'} [Epi i] {j : B ⟶ B'} {q : D ⟶ D'} [Mono q] {r : E ⟶ E'}
+    {t : A ⟶ B} {t' : A' ⟶ B'} {a : B' ⟶ D} {b : A' ⟶ E}
+    {c : B ⟶ D'} {d : A ⟶ E'} {m : E ⟶ D} {n : E' ⟶ D'}
+    (hc : c = j ≫ a ≫ q) (hd : d = i ≫ b ≫ r)
+    (ht : i ≫ t' = t ≫ j) (hm : m ≫ q = r ≫ n) :
+    (t ≫ c = d ≫ n) ↔ (t' ≫ a = b ≫ m) := by
+  simp only [hc, hd, Category.assoc, ← reassoc_of% ht, ← hm]
+  rw [cancel_epi]
+  simp only [← Category.assoc, cancel_mono]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Elaborate the nested quotient-to-derived transports before cancelling their isomorphisms.
 private theorem square_condition_transport
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (theta : g.left ⋙ k.left ≅ f.left ⋙ h.left)
@@ -360,35 +370,12 @@ private theorem square_condition_transport
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         (s.complexComparison.hom.app P)) := rfl
-  rw [hsquare]
-  rw [composite_complex_epsilon f h P,
-    reassoc_of% (composite_complex_epsilon g k P)]
-  have hn := theta.hom.naturality
-    ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P)
-  dsimp only [Functor.comp_map] at hn
-  simp only [Functor.comp_map]
-  rw [← reassoc_of% hn]
-  have hm := DerivedCategory.quotientCompQhIso_hom_naturality
-    (s.complexComparison.hom.app P)
-  dsimp only [Functor.comp_obj] at hm
-  erw [← hm]
-  dsimp only [Functor.comp_obj, Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift,
-    HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
-  let q := (DerivedCategory.quotientCompQhIso (CornerModules X')).hom.app
-    ((h.pullback.mapHomologicalComplex (.up ℤ)).obj
-      ((f.pullback.mapHomologicalComplex (.up ℤ)).obj P))
-  let i := k.left.map (g.left.map
-    ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
-  have : IsIso q := by dsimp [q]; infer_instance
-  have : IsIso i := by dsimp [i]; infer_instance
-  constructor
-  · intro he
-    apply (cancel_epi i).1
-    apply (cancel_mono q).1
-    simpa only [Category.assoc] using he
-  · intro he
-    have := congrArg (fun z ↦ i ≫ z ≫ q) he
-    simpa only [Category.assoc] using this
+  -- Normalize and cancel in an abstract diagram, avoiding rewrites over the complex types.
+  simpa only [Category.assoc, hsquare, Functor.comp_obj] using
+    (square_transport_cancel_iff
+      (composite_complex_epsilon f h P) (composite_complex_epsilon g k P)
+      (theta.hom.naturality ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
+      (DerivedCategory.quotientCompQhIso_hom_naturality (s.complexComparison.hom.app P)))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -9,8 +9,8 @@ public import WeilConjectures.ZetaWeil.ConstantGeometricStalkUnit.ConstantGeomet
 
 /-! # Scalar extension of return and Weil factors
 
-Source: the constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion
-step 8 (blueprint: lem-zl-return-weil-integral-scalar).
+Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
+expansion step 8 (blueprint: lem-zl-return-weil-integral-scalar).
 -/
 
 @[expose] public noncomputable section

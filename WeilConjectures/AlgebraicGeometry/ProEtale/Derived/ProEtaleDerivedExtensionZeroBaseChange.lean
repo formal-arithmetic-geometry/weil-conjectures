@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 # Ordinary pro-etale extension-by-zero base change
 
 Source: Stacks Project, Tag 03S6 (`lemma-shriek-base-change`), and Tag 09AE;
-blueprint `lem-cbc-proetale-extension-zero-base-change`.
+blueprint `proposition-extension-zero-restriction-closed-subscheme--11`.
 
 This is the ordinary constant-coefficient interface corresponding to the dependency
 node.  The previously recorded strict-tower `singleBeta` interface has a different
@@ -42,7 +42,7 @@ weakly etale base-change isomorphism `ProEtale.baseChangeMap` of the chosen cart
 square: the construction of the upstream `derivedOpenImmersionLowerShriekBaseChangeIso`
 (with the node's orientation), whose module cannot be imported with the side imports.
 Source: Stacks Tag 03S6 (`lemma-shriek-base-change`), and Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
 noncomputable def ordinaryOpenExtensionBaseChangeIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

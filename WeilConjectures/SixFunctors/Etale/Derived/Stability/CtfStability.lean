@@ -15,18 +15,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Typing
 /-!
 # Preservation on the proved finite-Tor domains
 
-This file states blueprint `thm-sf-ctf-stability` (`sk-thm-sf-ctf-stability`) at a finite
-coefficient ring `Λ` whose exponent is invertible on the base field `k`:
+This file states blueprint `proposition-six-operations-dctf` (`proposition-six-operations-dctf`) at
+a finite coefficient ring `Λ` whose exponent is invertible on the base field `k`:
 `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` bundles clauses (i)–(vi) and the
 finite-reduction part of clause (vii), with the Tor intervals of the blueprint. The integral
 part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` (`thm-sf-ctf-stability`).
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` (`proposition-six-operations-dctf`).
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`
-  (`thm-sf-ctf-stability`, clause (v)): `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))` on `Dctf(Y, Λ)`.
-- `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability` (`thm-sf-ctf-stability`,
+  (`proposition-six-operations-dctf`, clause (v)): `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))` on `Dctf(Y, Λ)`.
+- `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`
+(`proposition-six-operations-dctf`,
   clause (vii), integral coefficients).
 
 ## Implementation notes
@@ -34,16 +35,17 @@ part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_st
 * The six operations are those of the ambient derived categories `D(-_ét, Λ)`; their restrictions
   to `Dctf` are `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`, …, and
   the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`
-  (`sk-rem-sf-typing-rule`).
+  (`proposition-six-operations-dctf`).
 * The dimension-free internal-Hom interval `[c - b, d - a]` needs a site-perfect (dualizable)
   first variable; that it fails in general (the origin of `𝔸¹`) is
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which needs a normalized Tate
   twist and is therefore not part of the bundled statement.
 * Of the finite-reduction comparisons of clause (vii), the ones for `Lf^*`, `⊗ᴸ` and `Rf_!` are
   stated; the comparisons for `Rf_*`, internal Hom, `𝔻_X` and `Rf^!` at a finite stage
-  (blueprint `lem-coef-finite-direct-image`, `thm-coef-finite-hom`, `cor-coef-finite-verdier`,
-  `lem-coef-finite-exceptional`) and the passage to the field stages `E`, `ℚ̄_ℓ` are not
-  formalised: the field stages need coefficient categories the library does not have.
+  (blueprint `lemma-change-coefficients-direct-image--1`,
+  `lemma-change-coefficients-internal-hom--1`, `theorem-verdier-biduality--2`,
+  `lemma-change-coefficients-exceptional-inverse-image--1`) and the passage to the field stages `E`,
+  `ℚ̄_ℓ` are not formalised: the field stages need coefficient categories the library does not have.
 -/
 
 @[expose] public section
@@ -69,7 +71,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
-/-- Blueprint `thm-sf-ctf-stability`, clause (v): the exceptional inverse image is
+/-- Blueprint `proposition-six-operations-dctf`, clause (v): the exceptional inverse image is
 `Rf^! = 𝔻_X f^* 𝔻_Y` on `Dctf(Y, Λ)`.
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y`
@@ -92,7 +94,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
     ((verdierDual Λ aY).obj (op K))
   exact ⟨(R(f)^![Λ]).mapIso b ≪≫ e⟩
 
-/-- Blueprint `thm-sf-ctf-stability`: Preservation on the proved finite-Tor domains.
+/-- Blueprint `proposition-six-operations-dctf`: Preservation on the proved finite-Tor domains.
 
 Let `Λ` be a finite ring whose exponent is invertible on the algebraically closed field `k`, and
 `f : X ⟶ Y` a morphism over `k` of separated finite-type `k`-schemes (it is then separated of
@@ -279,7 +281,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Blueprint `thm-sf-ctf-stability`, clause (vii), integral coefficients.
+/-- Blueprint `proposition-six-operations-dctf`, clause (vii), integral coefficients.
 
 Let `Λ` be a Noetherian domain complete for `I = (ϖ)` with `Λ ⧸ I` finite of exponent invertible
 on the algebraically closed field `k` (the stage `𝒪_E`), and `f : X ⟶ Y` a separated
@@ -289,8 +291,8 @@ finite-type morphism of separated finite-type `k`-schemes. Then:
   bounded constructible of Tor amplitude in one common interval, i.e. `Dᵇc(X, 𝒪_E) =
   Dᵇctf(X, 𝒪_E)` (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`);
 * the internal Hom preserves `Dᵇc(X, Λ)` and has the canonical finite reductions
-  `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)` (`cor-coef-integral-internal-hom`,
-  `lem-coef-integral-hom-reduction`);
+  `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)` (`proposition-six-operations-dctf--15`,
+  `proposition-six-operations-change-coefficients--7`);
 * the derived limit `G_f L` of the finite exceptional inverse images of the reductions of
   `L ∈ Dᵇc(Y, Λ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L` compatibly with the maps to the
   `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions.

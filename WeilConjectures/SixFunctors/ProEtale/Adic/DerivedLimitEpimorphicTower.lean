@@ -19,7 +19,7 @@ Let `T` be a tower of complexes of sheaves of `Λ`-modules on the small pro-éta
 transition maps are degreewise epimorphisms. Then the limit `lim Tₙ`, computed degreewise, is
 the derived limit `R lim Tₙ` in the derived category
 (`AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_Q_of_epi`, blueprint
-`det-pe-milnor-epimorphic`, Stacks 0947, 091J): in each degree,
+`proposition-milnor-sequence--3`, Stacks 0947, 091J): in each degree,
 `0 ⟶ lim Tₙ ⟶ ∏ Tₙ ──1 - t──▶ ∏ Tₙ ⟶ 0` is exact, the surjectivity of `1 - t` being checked on
 sections over the weakly contractible objects, which cover the site and over which epimorphisms
 of sheaves are surjective; and countable products are exact on the pro-étale site (repleteness).
@@ -95,7 +95,7 @@ namespace AlgebraicGeometry.ProEtale
 variable {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- **Towers with epimorphic transitions have no derived limit terms** on the pro-étale site
-(blueprint `det-pe-milnor-epimorphic`, Stacks 0947, 091J): for a tower of complexes of sheaves
+(blueprint `proposition-milnor-sequence--3`, Stacks 0947, 091J): for a tower of complexes of sheaves
 of `Λ`-modules on `S_proét` with degreewise epimorphic transitions, the degreewise limit is the
 derived limit, i.e. its image in the derived category is a homotopy limit cone. -/
 theorem isHomotopyLimit_mapCone_Q_of_epi

@@ -55,7 +55,6 @@ private theorem picard_comparison_transport
   simp only [Category.assoc]
   rw [← reassoc_of% hn, hb']
 
-set_option maxHeartbeats 400000 in
 -- The pinned comparison families elaborate large derived-category functor expressions.
 /-- Source and target object comparisons can be chosen simultaneously, so that
 restriction of a localized chain map is represented by a chain map whose zeroth

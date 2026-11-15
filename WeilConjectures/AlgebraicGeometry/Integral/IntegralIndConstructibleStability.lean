@@ -99,8 +99,8 @@ private theorem closedUnderExistingCofan
 arbitrary ambient small coproducts and contains the localizing closure of Dbc.
 There is no assumption about a proper map, a fibre dimension, or an Ext bound.
 
-Source: blueprint main-20261015, det-prop-int-compactness-compact, proof step 9,
-and det-prop-int-compactness-direct-sums, proof steps 7 and 11.
+Source: blueprint main-20261015, proposition-compactness-proper-direct-image--1, proof step 9,
+and proposition-compactness-proper-direct-image--2, proof steps 7 and 11.
 (blueprint: lem-sfb-integral-ind-derived-stability).
 
 Proof:

@@ -73,7 +73,6 @@ private theorem factor_differential
     Preadditive.sub_comp, Preadditive.zsmul_comp, Category.assoc, hα, hβ]
 
 
-set_option maxHeartbeats 500000 in
 -- Specializing both chosen projection families unfolds their product interfaces.
 set_option backward.isDefEq.respectTransparency false in
 /-- Given the natural internal-Hom comparisons for the over-open equivalence, the

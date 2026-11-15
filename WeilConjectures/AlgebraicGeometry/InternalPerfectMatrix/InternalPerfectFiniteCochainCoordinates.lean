@@ -10,8 +10,8 @@ import Mathlib.Algebra.Homology.Embedding.IsSupported
 
 /-! # Finite integral coordinates for bounded Hom cochains
 
-Source: blueprint `sk-prop-integral-local-structure`, Compatible isomorphisms,
-finite matrices in the bounded perfect complex.
+Source: blueprint `proposition-local-structure-integral-constructible-complexes`, Compatible
+isomorphisms, finite matrices in the bounded perfect complex.
 -/
 
 @[expose] public noncomputable section

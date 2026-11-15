@@ -627,8 +627,22 @@ private theorem integral_tensor_mem_range
   obtain ⟨z, hz, _⟩ := tensor_intersection f g hf hg a b hab
   exact ⟨z, (eA.commutes z).symm.trans ((congrArg eA hz).trans ha)⟩
 
-set_option maxHeartbeats 400000 in
--- Elaborating the finite-type subalgebra's localization instances exceeds the default budget.
+-- Prove the total-fraction criterion with abstract algebras, before specializing to subalgebras.
+private theorem integrallyClosed_tensor_of_normal_localizations
+    {k A B K L : Type*} [Field k] [CommRing A] [CommRing B] [Field K] [Field L]
+    [Algebra k A] [Algebra k B] [Algebra k K] [Algebra k L]
+    [Algebra A K] [Algebra B L] [IsScalarTower k A K] [IsScalarTower k B L]
+    [IsDomain A] [IsDomain B] [IsFractionRing A K] [IsFractionRing B L]
+    (hKA : ∀ (p : Ideal (K ⊗[k] B)) [p.IsPrime],
+      IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p))
+    (hBL : ∀ (p : Ideal (A ⊗[k] L)) [p.IsPrime],
+      IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) :
+    IsIntegrallyClosed (A ⊗[k] B) := by
+  apply (isIntegrallyClosed_iff (FractionRing (A ⊗[k] B))).mpr
+  intro x hx
+  exact integral_tensor_mem_range (k := k) (A := A) (B := B)
+    (K := K) (L := L) hKA hBL x hx
+
 private theorem normal_domain_case_common
     {k : Type u} {A B : Type (max u v)} [Field k] [CommRing A] [CommRing B]
     [Algebra k A] [Algebra k B] [IsDomain A] [IsIntegrallyClosed A]
@@ -668,12 +682,7 @@ private theorem normal_domain_case_common
   let : IsReduced (A ⊗[k] D) := isReduced_of_injective f
     (tensor_map_injective _ _ (IsFractionRing.injective A K) Function.injective_id)
   apply (reduced_normal_iff_integrallyClosed_totalFractions (A ⊗[k] D) hfinite).1.mpr
-  apply (isIntegrallyClosed_iff (FractionRing (A ⊗[k] D))).mpr
-  intro x hx
-  refine integral_tensor_mem_range (k := k) (A := A) (B := D)
-    (K := K) (L := L) ?_ ?_ x hx
-  · exact hKD
-  · exact hAL
+  exact integrallyClosed_tensor_of_normal_localizations (K := K) (L := L) hKD hAL
 
 /-- The normal-domain case of tensor normality, allowing different universes for the
 base field and both algebras. The test extensions live in their common universe.

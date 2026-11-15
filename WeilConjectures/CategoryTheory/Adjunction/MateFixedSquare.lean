@@ -39,7 +39,7 @@ Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(Δ_*)
 ```
 
 holds (`CategoryTheory.fixedSquare_of_compactSupportExchange`). This is the abstract form of
-blueprint `sk-lem-tf-nearby-mate-coherences` (6), proved as in the blueprint: after taking
+blueprint `sec-Base-change-for-nearby-cycles` (6), proved as in the blueprint: after taking
 adjoints, both sides are the exchange of the composite `cι = Δd` followed by the counit of
 `d_! ⊣ d^!`.
 
@@ -154,7 +154,7 @@ private lemma baseChange_exchange_comm
   rfl
 
 /-- **The fixed-square identity for exchange transformations** (the abstract form of blueprint
-`sk-lem-tf-nearby-mate-coherences` (6)): if the base change isomorphisms `BC`, `BC'` are the mates
+`sec-Base-change-for-nearby-cycles` (6)): if the base change isomorphisms `BC`, `BC'` are the mates
 of the composition isomorphisms `Sq`, `Sq'`, if the compact-support exchanges `ν_ι`, `ν_Δ` of the
 proper maps are inverse to the proper exchanges `χ_ι`, `χ_Δ` (the mates of `α_ι`, `α_Δ`), and if
 the compact-support exchanges are compatible with the composition `cι = Δd`, then the mates

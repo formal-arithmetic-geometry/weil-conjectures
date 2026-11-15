@@ -28,10 +28,11 @@ import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 # The projection formula with a finitely presented constant module
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma lem-sf-projection-finite-constant (blueprint: lem-sf-projection-finite-constant).
-The ordinary, uncompleted tensor and K-injective direct image are those of the recorded
-unbounded etale framework. The constant inverse-image comparison identifies the target
-with `Rf_*(K ⊗^L M_X)`. No properness or torsion hypothesis is imposed.
+lemma proposition-open-direct-image-preserves-finite--1 (blueprint:
+proposition-open-direct-image-preserves-finite--1). The ordinary, uncompleted tensor and K-injective
+direct image are those of the recorded unbounded etale framework. The constant inverse-image
+comparison identifies the target with `Rf_*(K ⊗^L M_X)`. No properness or torsion hypothesis is
+imposed.
 -/
 
 @[expose] public section
@@ -57,8 +58,8 @@ that module. Its source is `Rf_*K ⊗^L M_Y` and its target is `Rf_*(K ⊗^L M_X
 It is the recorded adjunction-mate projection map, followed by the canonical identification
 of the derived inverse image of the constant sheaf with the constant sheaf on the source.
 Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma lem-sf-projection-finite-constant, first proof paragraph
-(blueprint: lem-sf-projection-finite-constant). -/
+lemma proposition-open-direct-image-preserves-finite--1, first proof paragraph
+(blueprint: proposition-open-direct-image-preserves-finite--1). -/
 noncomputable def finiteConstantProjectionMap
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategoryModule A X) :
@@ -100,7 +101,7 @@ noncomputable def finiteConstantProjectionMap
 
 /-- The projection component before the constant-pullback identification.
 Source: the proof of the finite-constant projection theorem immediately below
-(blueprint: lem-sf-projection-finite-constant).
+(blueprint: proposition-open-direct-image-preserves-finite--1).
 This is the existing proof's intermediate `hα`, named so proof consumers can use the
 projection component without unfolding `finiteConstantProjectionMap`. The same
 finite-free approximation argument proves it; the public theorem then composes it
@@ -193,14 +194,14 @@ private theorem finiteConstantProjectionComponent_isIso
 the canonical projection map is an isomorphism for a bounded-above complex and a finitely
 presented constant module. Naturality in `M` is built into `finiteConstantProjectionMap`.
 Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma lem-sf-projection-finite-constant
-(blueprint: lem-sf-projection-finite-constant).
+lemma proposition-open-direct-image-preserves-finite--1
+(blueprint: proposition-open-direct-image-preserves-finite--1).
 
 Proof plan:
 1. Constant sheaves are exact by exact sheafification
    (lem-weil-pbc-site-r-module-presheaf-sheafification-exact). The constant inverse-image
    isomorphism respects addition and scalars (lem-weil-pbc-sets-etale-inverse-image-constant-sheaf);
-   inverse image is exact (prop-weil-pbc-inverse-image-modules-exact). Thus the mate is natural
+   inverse image is exact (situation-conventions). Thus the mate is natural
    on constant complexes and its value on `M[0]` is the displayed map.
 2. The projection mate is compatible with distinguished triangles and is the identity at
    the tensor unit (lem-weil-pbc-ringed-projection-mate-exact). Finite sums and shifts give
@@ -217,7 +218,7 @@ Proof plan:
    and module sheaves have enough injectives (lem-weil-pbc-module-sheaves-enough-injectives).
    The uniform bound and lem-sf-finite-cd-derived-upper-bound (Stacks 07K7, (4)(c)) give
    `Rf_* D^{≤t} ⊆ D^{≤t+N}`, in particular `Rf_*K ∈ D^{≤b+N}` for an upper bound `b` of `K`.
-5. Bounded-above flat replacements (lem-kun-bounded-flat-replacement) are K-flat
+5. Bounded-above flat replacements (proposition-open-direct-image-preserves-finite) are K-flat
    (lem-kun-kflat-criteria). Their total tensor has no summand above the sum of the upper
    term bounds. Exactness of constant sheaves and Step 4 put both error terms with the
    constant cone in `D^{≤b+N-m-1}`.

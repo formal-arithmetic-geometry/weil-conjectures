@@ -33,7 +33,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-compactness,
 sk-prop-int-compactness-direct-sums.md and its proof
-(blueprint: det-prop-int-compactness-direct-sums).
+(blueprint: proposition-compactness-proper-direct-image--2).
 
 The assertion bundle only expands the three conclusions. The theorem specializes it
 at the actual ordinary unbounded module-object derived pushforward and the recorded
@@ -60,7 +60,7 @@ For sums, a colimit cofan exists and remains a colimit after applying `F`; its
 legs are exactly `F.map` of the source injections. Uniqueness of coproducts makes
 this equivalent to invertibility of the canonical coproduct comparison.
 Source: blueprint main-20261015, sk-prop-int-compactness-direct-sums, clauses 1--3
-(blueprint: det-prop-int-compactness-direct-sums). -/
+(blueprint: proposition-compactness-proper-direct-image--2). -/
 def IntegralProperDirectImageAssertions
     {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
@@ -422,7 +422,7 @@ private theorem finiteWindowOfBounds
 /-- Integral proper direct image has the heart bound `[0,2d+1]`, the canonical
 finite-window property, and preserves arbitrary sums on Dic and on Loc(Dbc).
 Source: blueprint main-20261015, sk-prop-int-compactness-direct-sums, all three clauses
-(blueprint: det-prop-int-compactness-direct-sums).
+(blueprint: proposition-compactness-proper-direct-image--2).
 
 Proof:
 1. Integral proper cohomological bounds supply the two heart estimates,

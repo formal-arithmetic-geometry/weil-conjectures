@@ -20,7 +20,8 @@ pro-étale sheaves, with right adjoint the restriction of scalars `Res`. Restric
 derived extension of scalars is the derived tensor product with the sheaf `S_X` of `R`-modules
 underlying the unit sheaf of `S`-modules: the projection map `K ⊗ S_X ⟶ res (S ⊗_R K)` of
 `AlgebraicGeometry.ProEtale.sheafExtendScalarsProjection` induces an isomorphism
-`L(- ⊗ S_X) ≅ Ψ ⋙ Res` of left derived functors (blueprint `thm-trf-finite-coefficient-map`).
+`L(- ⊗ S_X) ≅ Ψ ⋙ Res` of left derived functors (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`).
 
 We also compute the transpose `Ψ (K ⊗ᴸ S_X) ⟶ Ψ K` of this isomorphism along `Ψ ⊣ Res` on the
 image of a complex: it is induced by the transpose `S ⊗_R (K ⊗ S_X) ⟶ S ⊗_R K` of the

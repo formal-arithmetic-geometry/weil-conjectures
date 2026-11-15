@@ -182,12 +182,12 @@ Proof plan:
    each of the finitely many scalar endomorphisms using
    `lemma-constructible-hom-constant-locally` and refine the covers simultaneously.
    Read the module identities on a geometric stalk, using
-   `lem-weil-pbc-constant-sheaf-geometric-stalk`; the constant values become modules.
+   `definition-torsion-sheaves--3`; the constant values become modules.
    Forgetting scalars gives the converse; restrictions commute with forgetting by
    `lem-weil-pbc-exchange-forget-coefficients`.
 2. By `lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci`, split the base into
    open and closed dimension-zero and dimension-one loci, either of which may be empty.
-   Exact restriction preserves injectives by `lem-weil-pbc-etale-restriction-injectives`
+   Exact restriction preserves injectives by `lemma-acyclicity-pulled-back-injectives`
    and `lem-weil-pbc-site-pullback-abelian-exact`, so higher direct images restrict to
    the corresponding higher direct images. Constant inputs restrict to constants by
    `lemma-constructible-pullback-constant`. Finite stratifications concatenate.
@@ -201,7 +201,7 @@ Proof plan:
    dimensional vector space over the prime field. By `lem-weil-pbc-vector-space-free`
    choose a finite basis, including the empty basis for zero. Constant sheafification
    and additive derived functors preserve finite sums, by
-   `lem-weil-pbc-sheafification-exact` and
+   `situation-conventions` and
    `lem-weil-pbc-right-derived-universal-delta-functor`. Apply
    `lem-weil-pbc-proper-smooth-curves-prime-coefficients`, and combine the summands
    using `thm-constructible-serre` and the coefficient comparison from step 1.

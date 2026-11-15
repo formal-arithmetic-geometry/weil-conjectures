@@ -33,9 +33,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- The scalar-only part of the left comparison construction. It contains neither
 an exceptional operation nor a proper/open comparison.
 Source: Zheng, Construction 4.1 and Proposition 5.24.
@@ -87,9 +85,7 @@ structure ScalarRestrictions (T : Scheme.{u}) where
           (PurCompactSupport.completedChange l E.carrier L.carrier i)
           (Allowed.integral E L i)).functor.obj K).obj) a b
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def IntegralOrigin {s t : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)) : Prop :=
   match s, t with
@@ -99,9 +95,7 @@ private def IntegralOrigin {s t : RingStage.{u} l}
     ∃ i : E.carrier →ₐ[Padic l] L.carrier, ∀ T : Scheme.{u},
       a.map T = completedCoefficientMap l E.carrier L.carrier i T
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem allowed_integralOrigin {s t : RingStage.{u} l}
     (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
     (ha : Allowed l a) : IntegralOrigin l a := by
@@ -133,18 +127,14 @@ private theorem allowed_integralOrigin {s t : RingStage.{u} l}
           exact PurCompactSupport.completedMap_composition
             l S.carrier T.carrier i R.carrier j W
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def stageProperty (T : Scheme.{u}) (s : RingStage.{u} l) :
     ObjectProperty (DerivedCategory (pbcModules T ((s.coefficients l).ring T))) :=
   match s with
   | .finite E n => finiteTorConstructible l E.carrier n n.pos T
   | .integral E => finiteTorConstructibleIntegral l E.carrier T
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem stageProperty_of_iso (T : Scheme.{u}) (s : RingStage.{u} l)
     {K L : DerivedCategory (pbcModules T ((s.coefficients l).ring T))}
     (e : K ≅ L) (h : stageProperty l T s K) : stageProperty l T s L := by
@@ -163,9 +153,7 @@ private theorem stageProperty_of_iso (T : Scheme.{u}) (s : RingStage.{u} l)
       ⟨eN ≪≫ (scalarReductionDerivedExtension l E.carrier T n).mapIso e.symm⟩
       f hf hP M k hk
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem finiteMap_preserves (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -188,9 +176,7 @@ private theorem finiteMap_preserves (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
       exact ExceptionalFiniteScalar.finiteScalar_preserves D l hl E.carrier L.carrier
         m n a T ⟨K, hK⟩
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem allowed_preserves (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -246,9 +232,7 @@ private theorem stageProperty_tri (T : Scheme.{u}) (s : RingStage.{u} l) :
   | finite E n => exact (finite_ctf_isTriangulated l E.carrier n n.pos T).2.1
   | integral E => exact ConstructibleExceptionalCoefficients.integralTriangulated l E T
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def ambientScalar (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -272,15 +256,9 @@ private def ambientScalar (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
       additive := inferInstance
       exact := ObjectProperty.isTriangulated_liftFullSubcategory P Q _ h }
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem ambientScalar_shift (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -293,9 +271,7 @@ private theorem ambientScalar_shift (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   have : (stageProperty l T t).IsTriangulated := stageProperty_tri l T t
   cases s <;> cases t <;> dsimp only [ambientScalar] <;> infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem completedChi_isIso (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
     (T : Scheme.{u}) (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier)
     (K : finiteTorConstructibleIntegralCategory l E.carrier T) :
@@ -323,9 +299,7 @@ private structure ShiftedScalar (T : Scheme.{u}) {s t : RingStage.{u} l}
   scalar : Scalar.{u} l Ω a T
   shift : scalar.realization.hom.CommShift ℤ
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private def completedShifted (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier) :
     ShiftedScalar l Ω T (s := .integral E) (t := .integral L)
@@ -366,9 +340,7 @@ private def completedShifted (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     additive := inferInstance
     exact := hexact }, hshift⟩
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem change_eq_of_map {R S : PurCompactSupport.Coefficients.{u}}
     (a b : PurCompactSupport.Change R S) (h : ∀ T, a.map T = b.map T) : a = b := by
   cases a
@@ -442,9 +414,7 @@ private structure CompletedScalarFacts (T : Scheme.{u})
       ((scalarReductionDerivedExtension l L.carrier T n).obj
         (S.scalar.functor.obj K).obj) a b
 
-set_option maxHeartbeats 1000000 in
 -- Check the three concrete properties before transporting the scalar bundle.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem completedShifted_facts (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) (E L : FieldStage.{u} l)
     (i : E.carrier →ₐ[Padic l] L.carrier) :
@@ -469,7 +439,6 @@ private theorem completedShifted_facts (D : FiniteFieldDatum.{u}) (hl : l ≠ D.
     obtain ⟨eN⟩ := hN
     exact ht.2 N P ⟨eN ≪≫ ec.symm ≪≫ e.app K.obj⟩ f hf hP M k hk
 
-set_option maxHeartbeats 1000000 in
 -- Transport only the required proposition across the uniquely determined embedding.
 private theorem scalarBundle_integral_facts (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
@@ -488,24 +457,12 @@ private theorem scalarBundle_integral_facts (D : FiniteFieldDatum.{u}) (hl : l �
     (completedShifted l Ω D hl T E L) i ⟨i, rfl⟩
     (CompletedScalarFacts l Ω T E L i) (completedShifted_facts l Ω D hl T E L i)
 
-set_option maxHeartbeats 1000000 in
 -- Keep each record field behind its own checked interface.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Keep each record field behind its own checked interface.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Keep each record field behind its own checked interface.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Keep each record field behind its own checked interface.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Keep each record field behind its own checked interface.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1000000 in
 -- Keep each record field behind its own checked interface.
-set_option synthInstance.maxHeartbeats 200000 in
 private def freezeValue {A : Type*} (a : A) : A :=
   Classical.choose (show ∃ b : A, b = a from ⟨a, rfl⟩)
 
@@ -526,9 +483,7 @@ private structure FiniteScalarFacts (T : Scheme.{u}) {s : RingStage.{u} l}
     RingStage.inclusion l Ω T s ⋙ pbcDerivedExtend (a.map T)
   normalized : S.scalar.realization = eqToIso functor_eq
 
-set_option maxHeartbeats 1000000 in
 -- The finite restriction reduces to the literal lift at either source stage.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem scalarBundle_finite_facts (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -550,9 +505,7 @@ private def frozenBundle (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (ha : Allowed l a) : ShiftedScalar l Ω T a :=
   freezeValue (scalarBundle l Ω D hl T a ha)
 
-set_option maxHeartbeats 1000000 in
 -- Transfer the dependent finite equality and its normalization together.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem frozenBundle_finite_facts (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -567,9 +520,7 @@ private theorem frozenBundle_finite_facts (D : FiniteFieldDatum.{u}) (hl : l ≠
     (scalarBundle l Ω D hl T (s := s) (t := .finite E n) a ha)
     (FiniteScalarFacts l Ω T E n a) (scalarBundle_finite_facts l Ω D hl T E n a ha)
 
-set_option maxHeartbeats 1000000 in
 -- The wrapper is equal to the constructed bundle, including all completed data.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem frozenBundle_integral_facts (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
@@ -584,9 +535,7 @@ private theorem frozenBundle_integral_facts (D : FiniteFieldDatum.{u}) (hl : l �
       (PurCompactSupport.completedChange l E.carrier L.carrier i) (Allowed.integral E L i))
     (CompletedScalarFacts l Ω T E L i) (scalarBundle_integral_facts l Ω D hl T E L i)
 
-set_option maxHeartbeats 1000000 in
 -- Assemble the dependent record while its data family is abstract.
-set_option synthInstance.maxHeartbeats 200000 in
 private theorem assembleScalarRestrictions (T : Scheme.{u})
     (bundle : ∀ {s t : RingStage.{u} l}
       (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
@@ -645,9 +594,7 @@ private theorem assembleScalarRestrictions (T : Scheme.{u})
     integralScalar_normalized := integralScalar_normalized
     tor_interval := tor_interval }⟩
 
-set_option maxHeartbeats 1000000 in
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- Scalar restrictions exist independently of any exceptional operation.
 Source: Zheng, Construction 4.1 and Propositions 5.24 and 5.26.
 

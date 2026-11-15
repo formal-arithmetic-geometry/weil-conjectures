@@ -75,8 +75,52 @@ private theorem annihilator_coker_of_square
   rw [map_smul, he, hx]
   exact hz
 
-set_option maxHeartbeats 500000 in
--- Identifying kernels and quotient carriers after restricting scalars needs extra heartbeats.
+private theorem annihilator_pow_of_restrictScalars_square
+    {B R : Type u} [CommRing B] [CommRing R] [Algebra B R] [IsNoetherianRing R]
+    (I : Ideal B) {M N : ModuleCat.{u} B} {P Q : ModuleCat.{u} R}
+    (v : M ⟶ N) (w : P ⟶ Q)
+    (eM : M ≅ (ModuleCat.restrictScalars (algebraMap B R)).obj P)
+    (eN : N ≅ (ModuleCat.restrictScalars (algebraMap B R)).obj Q)
+    (hs : v ≫ eN.hom =
+      eM.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map w)
+    (hk : I.map (algebraMap B R) ≤ (Module.annihilator R (LinearMap.ker w.hom)).radical)
+    (hq : I.map (algebraMap B R) ≤
+      (Module.annihilator R (Q ⧸ LinearMap.range w.hom)).radical) :
+    ∃ t : ℕ, 1 ≤ t ∧
+      I ^ t ≤ Module.annihilator B (LinearMap.ker v.hom) ∧
+      I ^ t ≤ Module.annihilator B (N ⧸ LinearMap.range v.hom) := by
+  let L := I.map (algebraMap B R)
+  obtain ⟨n, hn⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hk
+    (Ideal.fg_of_isNoetherianRing L)
+  obtain ⟨m, hm⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hq
+    (Ideal.fg_of_isNoetherianRing L)
+  let t := max n m + 1
+  have hnt : n ≤ t := (le_max_left n m).trans (Nat.le_succ _)
+  have hmt : m ≤ t := (le_max_right n m).trans (Nat.le_succ _)
+  have hker := (Ideal.pow_le_pow_right hnt).trans hn
+  have hcoker := (Ideal.pow_le_pow_right hmt).trans hm
+  refine ⟨t, Nat.succ_le_succ (Nat.zero_le _), ?_, ?_⟩
+  · intro a ha
+    have haR : algebraMap B R a ∈ L ^ t := by
+      rw [← Ideal.map_pow]
+      exact Ideal.mem_map_of_mem _ ha
+    apply annihilator_ker_of_square (B := B) _ _ eM eN hs
+    rw [Module.mem_annihilator]
+    intro x
+    exact Module.mem_annihilator.mp (hker haR) x
+  · intro a ha
+    have haR : algebraMap B R a ∈ L ^ t := by
+      rw [← Ideal.map_pow]
+      exact Ideal.mem_map_of_mem _ ha
+    apply annihilator_coker_of_square (B := B) _ _ eM eN hs
+    rw [Module.mem_annihilator]
+    intro x
+    obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ x
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero]
+    have hy := Module.mem_annihilator.mp (hcoker haR) (Submodule.Quotient.mk y)
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero] at hy
+    exact hy
+
 /-- The canonical comparison, specified by its quotient and adjunction equations,
 has affine limit kernel and cokernel killed by a positive power of K.
 
@@ -146,36 +190,6 @@ theorem formalSystemsPushPull_affine_annihilation
   obtain ⟨A, D, c, hc, eA, eD, hs⟩ :=
     formalComparison_completed_affine_model J K f hV adj G F β h κ α hκ hα U
   obtain ⟨hk, hq⟩ := coherentAffineMap_support_radical R L A D c hc
-  obtain ⟨n, hn⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hk
-    (Ideal.fg_of_isNoetherianRing L)
-  obtain ⟨m, hm⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hq
-    (Ideal.fg_of_isNoetherianRing L)
-  let t := max n m + 1
-  have hnt : n ≤ t := (le_max_left n m).trans (Nat.le_succ _)
-  have hmt : m ≤ t := (le_max_right n m).trans (Nat.le_succ _)
-  have hker := (Ideal.pow_le_pow_right hnt).trans hn
-  have hcoker := (Ideal.pow_le_pow_right hmt).trans hm
-  refine ⟨t, Nat.succ_le_succ (Nat.zero_le _), ?_, ?_⟩
-  · intro a ha
-    have haR : algebraMap B R a ∈ L ^ t := by
-      rw [← Ideal.map_pow]
-      exact Ideal.mem_map_of_mem _ ha
-    apply annihilator_ker_of_square (B := B) _ _ eA eD hs
-    rw [Module.mem_annihilator]
-    intro x
-    have hx := Module.mem_annihilator.mp (hker haR) x
-    exact hx
-  · intro a ha
-    have haR : algebraMap B R a ∈ L ^ t := by
-      rw [← Ideal.map_pow]
-      exact Ideal.mem_map_of_mem _ ha
-    apply annihilator_coker_of_square (B := B) _ _ eA eD hs
-    rw [Module.mem_annihilator]
-    intro x
-    obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ x
-    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero]
-    have hy := Module.mem_annihilator.mp (hcoker haR) (Submodule.Quotient.mk y)
-    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero] at hy
-    exact hy
+  exact annihilator_pow_of_restrictScalars_square (K.ideal U) _ _ eA eD hs hk hq
 
 end AlgebraicGeometry

@@ -29,7 +29,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- The ambient exchange with constant coefficients.
-Source: Stacks 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+Source: Stacks 07A7 (blueprint: definition-pro-etale-base-change-map--1). -/
 abbrev constantExchange (sq : ChosenCartesianSquare g' f' f g) :
     push (A := A) f ⋙ pull (A := A) g ⟶ pull (A := A) g' ⋙ push (A := A) f' :=
   proEtaleAmbientRingedExchange sq (exchangeConstantRing X A) (exchangeConstantRing Y A)

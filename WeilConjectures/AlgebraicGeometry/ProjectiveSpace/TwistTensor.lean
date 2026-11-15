@@ -19,7 +19,7 @@ section `Tᵢᵐ` of `𝒪(m)` on the integral model `Proj ℤ[Tᵢ]`. The trans
 `e_i^{(m)} = (xᵢ/xⱼ)ᵐ e_j^{(m)}`, which are multiplicative in `m`; hence the local isomorphisms
 `e_i^{(a)} ⊗ e_i^{(b)} ↦ e_i^{(a+b)}` glue to an isomorphism
 `AlgebraicGeometry.ProjectiveSpace.twistTensorIso : 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`
-(blueprint `lem-pc-twist-tensor`).
+(blueprint `theorem-riemann-roch-coherent-serre-duality`).
 -/
 
 @[expose] public section
@@ -112,7 +112,7 @@ restriction to each standard open `D₊(xᵢ)` sends `e_i^{(a)} ⊗ e_i^{(b)}` t
 transition functions `(xᵢ/xⱼ)ᵐ` are multiplicative in `m` (`exists_twistGenerator_transition`),
 and they glue by the sheaf axiom (`Scheme.Modules.isoOfIsFreeGenerator`).
 
-(blueprint: `lem-pc-twist-tensor`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 def twistTensorIso (a b : ℤ) : twist n S a ⊗ twist n S b ≅ twist n S (a + b) :=
   isoOfIsFreeGenerator (iSup_standardOpen n S)
     (fun i ↦ (isFreeGenerator_twistGenerator n S a i).tmulSection
@@ -124,7 +124,7 @@ def twistTensorIso (a b : ℤ) : twist n S a ⊗ twist n S b ≅ twist n S (a + 
 /-- **Local basis property of `twistTensorIso`**: on the standard open `D₊(xᵢ)`, the canonical
 isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `e_i^{(a)} ⊗ e_i^{(b)}` to `e_i^{(a+b)}`.
 
-(blueprint: `lem-pc-twist-tensor`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 lemma twistTensorIso_hom_app_tmulSection (a b : ℤ) (i : n) :
     (twistTensorIso n S a b).hom.app (standardOpen n S i)
         (tmulSection (twistGenerator n S a i) (twistGenerator n S b i)) =
@@ -134,7 +134,7 @@ lemma twistTensorIso_hom_app_tmulSection (a b : ℤ) (i : n) :
 /-- **Local description of `twistTensorIso`**: on an open `W ⊆ D₊(xᵢ)`, the canonical
 isomorphism sends `r • (e_i^{(a)} ⊗ e_i^{(b)})|_W` to `r • e_i^{(a+b)}|_W`.
 
-(blueprint: `lem-pc-twist-tensor`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 lemma twistTensorIso_hom_app_smul (a b : ℤ) (i : n) {W : (ℙ(n; S)).Opens}
     (hW : W ≤ standardOpen n S i) (r : Γ(ℙ(n; S), W)) :
     (twistTensorIso n S a b).hom.app W (r • (twist n S a ⊗ twist n S b).presheaf.map

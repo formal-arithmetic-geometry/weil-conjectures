@@ -34,8 +34,8 @@ set_option linter.privateModule false
 /-!
 # Normalization on a compatible pro-etale compactification tower
 
-Source: main-20261015, thm-sf-comp-composition, Construction; Stacks Tags 0F7B and 0F7J
-(blueprint: lem-trf-proetale-composition-tower-normalization).
+Source: main-20261015, proposition-composition-base-change-rf-shriek--1, Construction; Stacks Tags
+0F7B and 0F7J (blueprint: lem-trf-proetale-composition-tower-normalization).
 
 The two sides below are independently constructed: the canonical origin compositor,
 conjugated to the supplied candidates by canonical comparisons, and the open adjunct of

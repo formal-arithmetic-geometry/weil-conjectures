@@ -73,7 +73,7 @@ variable (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R]
 /-- Module objects have the coproducts used in direct-sum totalization.
 Source: Stacks 03DA--03DB (auxiliary; not a blueprint node).
 Proof: section module sheaves have small colimits by
-lem-weil-pbc-module-sheaves-colimits-forgetful. Transfer their universal property
+situation-conventions. Transfer their universal property
 through sectionModuleEquivalence: applying its inverse to a coproduct gives a
 coproduct of the original internal modules by the equivalence's Hom bijections. -/
 @[instance] theorem comparison_internalColimits :
@@ -83,7 +83,7 @@ coproduct of the original internal modules by the equivalence's Hom bijections. 
 /-- The fixed sectionwise equivalence is additive on morphisms.
 Source: Stacks 00YV (auxiliary; not a blueprint node).
 Proof: its map is the original map on underlying abelian sheaves; addition of module
-maps is computed on those underlying maps (lem-sfb-modobj-abelian). -/
+maps is computed on those underlying maps (prose-03-02). -/
 @[instance] theorem comparison_additive : (sectionModuleEquivalence J R).functor.Additive := by
   have : HasBinaryProducts (Mod (Sheaf J AddCommGrpCat.{u}) R) :=
     Adjunction.hasLimitsOfShape_of_equivalence (sectionModuleEquivalence J R).functor

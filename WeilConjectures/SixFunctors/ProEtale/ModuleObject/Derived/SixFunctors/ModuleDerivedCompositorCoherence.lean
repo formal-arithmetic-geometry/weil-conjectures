@@ -85,8 +85,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
 /-- The canonical comparison `R(gf)_* ≅ Rf_* ⋙ Rg_*`, in inverse-compositor direction.
 The existing exact inverse-image adjunction supplies K-injective preservation; the
 comparison is the universal derived comparison of the existing ordinary compositor.
-Source: Stacks 0D6E and blueprint det-sf-comp-coherence-cocycle, Refinement isomorphisms
-(blueprint: lem-sfb-module-derived-compositor-coherence). -/
+Source: Stacks 0D6E and blueprint proposition-construction-independence-rf-shriek, Refinement
+isomorphisms (blueprint: lem-sfb-module-derived-compositor-coherence). -/
 noncomputable def moduleDerivedCompositor {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     (lowerStar Λ (f ≫ g)).rightDerivedFunctor ≅
@@ -97,8 +97,8 @@ noncomputable def moduleDerivedCompositor {X Y Z : Scheme.{u}}
 
 /-- Associativity of the normalized module-object derived compositor, including
 functor associators and transport along associativity of scheme-map composition.
-Source: Stacks 0D6E and blueprint det-sf-comp-coherence-cocycle, Refinement isomorphisms
-(blueprint: lem-sfb-module-derived-compositor-coherence).
+Source: Stacks 0D6E and blueprint proposition-construction-independence-rf-shriek, Refinement
+isomorphisms (blueprint: lem-sfb-module-derived-compositor-coherence).
 
 Proof plan: (1)-(3) identify the ordinary and derived sectionwise pushforwards and
 normalize on K-injectives as in module_derived_compositor_normalization. (4) Apply

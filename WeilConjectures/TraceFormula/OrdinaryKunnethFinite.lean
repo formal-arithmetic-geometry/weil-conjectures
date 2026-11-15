@@ -18,8 +18,9 @@ complex `M ∈ D(X_ét, Λ)` with `Li^* M = 0` and any `G ∈ D(U_ét, Λ)`, the
 `R(𝟙 × f)_* (Lp_X^* M ⊗ᴸ Lp_U^* G)` vanishes on `Z ⨯ Y`
 (`AlgebraicGeometry.Etale.isZero_upperStar_prodMap_lowerStar_prodMap_tensor`).
 
-By the base change theorem for a pushforward tensored with a complex (blueprint `lem-kun-0f1n`,
-`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) for the cartesian squares
+By the base change theorem for a pushforward tensored with a complex (blueprint
+`lemma-kunneth-field-coefficients--1`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) for the
+cartesian squares
 ```
 X <--p_X-- X ⨯ Y <--(𝟙 × f)-- X ⨯ U
 |            |                  |
@@ -27,7 +28,7 @@ v            v p_Y              v p_U
 Spec k <---- Y <------f-------- U
 ```
 the complex is `Lp_X^* M ⊗ᴸ Lp_Y^* Rf_* G` (the ordinary Künneth formula, blueprint
-`lem-trf-ordinary-kunneth`), and its pullback to `Z ⨯ Y` is `Lp_Z^* Li^* M ⊗ᴸ (…) = 0`.
+`lemma-kunneth-one-identity-factor--1`), and its pullback to `Z ⨯ Y` is `Lp_Z^* Li^* M ⊗ᴸ (…) = 0`.
 
 This is the finite-coefficient stage of the boundary vanishing
 `ProEtale.CondensedRing.isZero_upperStar_lowerStar_externalProduct_lowerShriek`.
@@ -52,8 +53,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 /-- **Vanishing on the boundary, finite coefficients**: for morphisms `f : U ⟶ Y` and
 `i : Z ⟶ X` of `k`-schemes of finite type, `M ∈ D(X_ét, Λ)` with `Li^* M = 0` and
 `G ∈ D(U_ét, Λ)`, the pullback to `Z ⨯ Y` of `R(𝟙 × f)_* (Lp_X^* M ⊗ᴸ Lp_U^* G)` vanishes.
-By the ordinary Künneth formula (blueprint `lem-trf-ordinary-kunneth`, through
-`isIso_tensorBaseChangeMap`, blueprint `lem-kun-0f1n`) the complex is
+By the ordinary Künneth formula (blueprint `lemma-kunneth-one-identity-factor--1`, through
+`isIso_tensorBaseChangeMap`, blueprint `lemma-kunneth-field-coefficients--1`) the complex is
 `Lp_X^* M ⊗ᴸ Lp_Y^* Rf_* G`, whose pullback to `Z ⨯ Y` is `Lp_Z^* Li^* M ⊗ᴸ (…) = 0`. -/
 theorem isZero_upperStar_prodMap_lowerStar_prodMap_tensor (f : U ⟶ Y) (i : Z ⟶ X)
     (M : DerivedCategory (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

@@ -24,7 +24,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBa
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic,
 Integral proper base change on localizing categories
-(blueprint: det-thm-sf-pf-adic-base-change).
+(blueprint: proposition-proper-base-change-localizing-categories--1).
 
 Both endpoints belong to the target localizing closure, and the specified ambient
 exchange is invertible on every object of the source closure. Since these are full
@@ -53,7 +53,7 @@ open Scheme
 open MonoidalCategory MonObj in
 /-- Postcomposition with a topological ring equivalence identifies the continuous-function
 condensed ring objects. Source: the coefficient conventions of the integral localizing
-base-change statement (blueprint: det-thm-sf-pf-adic-base-change). -/
+base-change statement (blueprint: proposition-proper-base-change-localizing-categories--1). -/
 private noncomputable def coefficientMonIso
     {A B : Type} [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
@@ -86,7 +86,7 @@ private noncomputable def coefficientMonIso
 
 /-- The embedded finite extension and its field range have isometric integer rings.
 Source: the coefficient conventions of the integral localizing base-change statement
-(blueprint: det-thm-sf-pf-adic-base-change). -/
+(blueprint: proposition-proper-base-change-localizing-categories--1). -/
 private theorem integral_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
@@ -118,21 +118,20 @@ private theorem integral_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
     (show _ ≃ᵢ _ from ⟨t.toEquiv, ht⟩).symm.continuous
   exact ⟨F, ⟨coefficientMonIso t ht.continuous hti⟩⟩
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the inherited derived functors and full-subcategory structures needs this budget.
 /-- Integral proper base change on the localizing closure of bounded constructibles.
 Source: blueprint main-20261015, sk-thm-sf-pf-adic-base-change
-(blueprint: det-thm-sf-pf-adic-base-change).
+(blueprint: proposition-proper-base-change-localizing-categories--1).
 
 Proof plan:
 1. In the standing positive-characteristic scheme setting, integral proper base
-   change (det-thm-sfb-proper-base-change-integral, clauses 1 and 3) gives the
+   change (proposition-proper-direct-image-constructible-complexes, clauses 1 and 3) gives the
    specified ordinary exchange isomorphism on Dbc. Integral-models clause 3
    preserves its endpoints under inverse image, and proper-fp-permanence makes
    the base-changed vertical arrow proper.
 2. The proper-image-localizing-proper and proper-base-change-unbounded-pullback
    nodes give exact sum-preserving restrictions of the four functors. The equality
-   Dctf = Dbc in sk-lem-integral-models identifies their localizing closures.
+   Dctf = Dbc in lemma-integral-models identifies their localizing closures.
 3. Cartesian condensed coefficients identify pullbacks with the coefficients at
    the other corner. The full module tensor pullback is exact, so its left derived
    functor is its termwise functor (sk-def-sfb-derived-categories).
@@ -144,8 +143,8 @@ Proof plan:
    condensedAmbientExchange is exactly the unit/comparison/counit exchange of
    the unbounded extension lemma, with the derived adjunctions of the same full
    module pullback and pushforward composites.
-6. Apply det-proper-base-change-unbounded-extension to the integral coefficient
-   ring. Step 1 supplies its generator hypothesis; sk-lem-integral-models gives
+6. Apply proposition-proper-base-change-localizing-categories--1 to the integral coefficient
+   ring. Step 1 supplies its generator hypothesis; lemma-integral-models gives
    Dctf = Dbc. The exchange is invertible throughout the stated closure, and
    step 2 places both endpoints in the target closure.
 -/

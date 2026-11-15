@@ -43,7 +43,6 @@ private theorem line_pullback_faithful (A : Type (u + 1)) [CommRing A] (S : Sche
       (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S).symm).symm ≪≫
         upperStarId (ModuleCat.{u + 1} A) S)
 
-set_option maxHeartbeats 800000 in
 -- The mate identity compares large composites of sheaf inverse images.
 private theorem line_counit_isIso (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
     (P : Sheaf (AffineSpace (ULift.{u} (Fin 1)) S).smallEtaleTopology
@@ -175,7 +174,6 @@ private theorem pullback_shifted_sheaf (A : Type (u + 1)) [CommRing A]
       (L((b)^*[ModuleCat.{u + 1} A])).mapIso e ≪≫
       (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) b).app Q⟩⟩
 
-set_option maxHeartbeats 1600000 in
 -- Transport through single complexes, shifts, and the section compositor.
 /-- For arbitrary sheaves placed in a common degree, normalized local comparisons give
 a normalized global comparison with the prescribed restrictions.
