@@ -11,11 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilDual
 /-!
 # The dual of a strict Weil complex
 
-Let `Λ` be a finite coefficient ring, `X` of finite type over an algebraically closed field `k`
-on which the exponent of `Λ` is invertible, and `g` an automorphism of `X` (the geometric
-Frobenius `g_γ`). For a strict Weil complex `(K, φ_K)` (`AlgebraicGeometry.Etale.WeilComplex`)
-this file packages the clauses of blueprint `theorem-poincare-duality-frobenius--2` as
-statements about strict Weil complexes:
+Let `Λ` be a finite coefficient ring, `X` of finite type over a field `k` on which the
+exponent of `Λ` is invertible, and `g` an automorphism of `X` (the geometric Frobenius `g_γ`).
+For a strict Weil complex `(K, φ_K)` (`AlgebraicGeometry.Etale.WeilComplex`) this file packages
+the clauses of blueprint `theorem-poincare-duality-frobenius--2` as statements about strict Weil
+complexes:
 
 * `(K^∨, φ_{K^∨})` is a strict Weil complex
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual`): `K^∨ = RHom(K, Λ_X)` lies in
@@ -63,7 +63,7 @@ theorem constructibleFiniteTor_unit :
       (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
         (ObjectProperty.flat_of_isDualizable isDualizable_unit))⟩
 
-variable {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+variable {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 include aX in
