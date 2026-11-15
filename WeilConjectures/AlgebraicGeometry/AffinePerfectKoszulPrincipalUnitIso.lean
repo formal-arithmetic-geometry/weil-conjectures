@@ -16,8 +16,6 @@ universe a b
 open CategoryTheory
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 500000 in
--- Elaborating the cone comparison unfolds both presentations of the Koszul tail.
 /-- The canonical shifted Koszul augmentation is invertible on the principal-open union.
 Source: Stacks Project, Tag 08CX; More on Algebra, Tags 0626 and 0663.
 (blueprint: lem-sc-affine-perfect-koszul-principal-unit-iso).
@@ -49,17 +47,21 @@ theorem affine_perfect_koszul_principal_unit_iso
   obtain ⟨d, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : e ≠ 0)
   let U : (Spec (.of A)).Opens := ⨆ i : Fin r, (Spec (.of A)).basicOpen
     ((Scheme.ΓSpecIso (.of A)).inv (f i))
+  -- Share the abelian structures used by restriction, localization, and the cone triangle.
+  let : Abelian (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace)) :=
+    inferInstance
+  let : Abelian (SheafOfModules.{a} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) :=
+    inferInstance
   let R := (SheafOfModules.overFunctor
     (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory
   let F := @Functor.mapHomologicalComplex ℤ (ModuleCat.{a} A)
     (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace))
     _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)
   let u := shiftedKoszulAugmentation A r (fun i ↦ f i ^ (d + 1))
-  obtain ⟨c₀, _⟩ := koszulOpen_module_cone_comparison A r f d
-  have hu : HomologicalComplex.extendMap (koszulOpenAugmentation A r f d)
-      ComplexShape.embeddingDownNat = u := by
-    rfl
-  rw [hu] at c₀
+  let c₀ : CochainComplex.mappingCone u ≅
+      (ExteriorAlgebra.koszulComplex A r (fun i ↦ f i ^ (d + 1))).extend
+        ComplexShape.embeddingDownNat :=
+    (koszulOpen_module_cone_comparison A r f d).choose
   have : (tilde.functor (.of A)).Additive :=
     ⟨fun {X Y} g h ↦ tilde.map_add (R := .of A) g h⟩
   let c := (CochainComplex.mappingCone.mapHomologicalComplexIso

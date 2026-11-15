@@ -28,8 +28,26 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
--- Scalar transport unfolds two section functors and the affine chart in quotient types.
+private lemma quotientTransport_comp_mkQ {R : Type*} [CommRing R]
+    (I : Ideal R) {M N P Q : ModuleCat R} (a : M ≅ N) (b : P ⟶ Q)
+    (θ : (N ⧸ (I • (⊤ : Submodule R N))) →ₗ[R] P) (ρ : N ⟶ P)
+    (hθ : θ.comp (Submodule.mkQ (I • (⊤ : Submodule R N))) = ρ.hom) :
+    ModuleCat.ofHom ((b.hom.comp
+      (θ.comp ((a.toLinearEquiv.toLinearMap.reduceModIdeal I).restrictScalars R))).comp
+        (Submodule.mkQ (I • (⊤ : Submodule R M)))) = a.hom ≫ ρ ≫ b := by
+  ext x
+  exact congrArg b (LinearMap.congr_fun hθ (a.hom x))
+
+private lemma limitIsoTransport_π {C D J : Type*}
+    [Category C] [Category D] [Category J]
+    (E : C ⥤ D) (T : J ⥤ C) [HasLimit T] [PreservesLimit T E]
+    (S : J ⥤ D) [HasLimit S] [HasLimit (T ⋙ E)]
+    {A B : D} (c : A ≅ B) (e : B ≅ limit S) (b : S ≅ T ⋙ E) (j : J) :
+    (c ≪≫ e ≪≫ HasLimit.isoOfNatIso b ≪≫ (preservesLimitIso E T).symm).hom ≫
+        E.map (limit.π T j) = c.hom ≫ (e.hom ≫ limit.π S j) ≫ b.hom.app j := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    preservesLimitIso_inv_π, HasLimit.isoOfNatIso_hom_π]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport degree-zero formal functions to an arbitrary affine open of the base.
@@ -86,7 +104,7 @@ theorem formalFunctions_affine_pushforward_sections {X Y : Scheme.{u}} [IsNoethe
   obtain ⟨hg, hP, hK, a, b, hb⟩ :=
     formalFunctions_affine_restriction_dictionary J f F U hU
   let : IsProper g := hg
-  obtain ⟨θ₀, hθ₀, _, e₀, he₀⟩ := globalSections_formal_functions I g K hK P hP
+  obtain ⟨θ₀, hθ₀, _, e₀, he₀⟩ := globalSections_formal_functions (A := R) I g K hK P hP
   let α := a.toLinearEquiv
   let θ : ∀ n : ℕ, (Γ(H, U) ⧸ (I ^ (n + 1) • (⊤ : Submodule R Γ(H, U)))) →ₗ[R]
       E.obj (T.obj (op n)) := fun n ↦ (b.hom.app (op n)).hom.comp
@@ -95,22 +113,15 @@ theorem formalFunctions_affine_pushforward_sections {X Y : Scheme.{u}} [IsNoethe
       ((θ n).comp (Submodule.mkQ (I ^ (n + 1) • (⊤ : Submodule R Γ(H, U))))) =
       E.map ((Scheme.Modules.pushforward f).map
         (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) := by
-    ext x
-    change (b.hom.app (op n)).hom
-      (θ₀ n ((I ^ (n + 1) • (⊤ : Submodule R (G.obj P))).mkQ (α x))) = _
-    have hh := LinearMap.congr_fun (hθ₀ n) (α x)
-    change θ₀ n ((I ^ (n + 1) • (⊤ : Submodule R (G.obj P))).mkQ (α x)) =
-      (G.map (formalModuleQuotientπ K (n + 1) P)).hom (α x) at hh
-    rw [hh]
-    exact ConcreteCategory.congr_hom (hb n) x
+    exact (quotientTransport_comp_mkQ (I ^ (n + 1)) a (b.hom.app (op n))
+      (θ₀ n) (G.map (formalModuleQuotientπ K (n + 1) P)) (hθ₀ n)).trans (hb n)
   let c := ((AdicCompletion.congr I α).restrictScalars R).toModuleIso
   let d := preservesLimitIso E T
   let e := c ≪≫ e₀ ≪≫ HasLimit.isoOfNatIso b ≪≫ d.symm
   refine ⟨θ, hθ, e, ?_⟩
   intro n
-  dsimp only [e, Iso.trans_hom, Iso.symm_hom]
-  rw [Category.assoc, Category.assoc, Category.assoc, preservesLimitIso_inv_π,
-    HasLimit.isoOfNatIso_hom_π, ← Category.assoc e₀.hom, he₀]
+  refine (limitIsoTransport_π E T _ c e₀ b (op n)).trans ?_
+  rw [he₀]
   apply ModuleCat.hom_ext
   ext x
   rfl
