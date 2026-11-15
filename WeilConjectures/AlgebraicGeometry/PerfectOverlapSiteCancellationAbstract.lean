@@ -63,10 +63,7 @@ theorem associator_symm_whiskerRight_hom_app
     Functor.associator_inv_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Functor.comp_obj, Category.id_comp]
 
-/-- A return unit followed by an equivalence counit cancels across any comparison.
-Proof: The triangle identity identifies the image of the inverse unit with
-the counit on the image object. Naturality moves that counit across the
-comparison isomorphism, whose inverse then cancels. -/
+/-- A return unit followed by an equivalence counit cancels across any comparison. -/
 theorem equivalence_return_cancel
     {C D : Type*} [Category* C] [Category* D]
     (e : C ≌ D) (M : C) (N : D) (α : N ≅ e.functor.obj M) :
@@ -96,8 +93,7 @@ theorem equivalence_return_cancel
   rw [hdrop, hn]
   rw [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
-/-- Paste a two-step return triangle with its terminal cancellation.
-The proof is associativity followed by the two supplied equations. -/
+/-- Paste a two-step return triangle with its terminal cancellation. -/
 theorem paste_return_triangle
     {C : Type*} [Category* C] {A B D E F G : C}
     {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ G}
@@ -128,9 +124,7 @@ theorem paste_middle_three
     _ = a ≫ b ≫ x ≫ f := by rw [hmiddle]; simp only [Category.assoc]
     _ = y := houter
 
-/-- Insert a six-map comparison between fixed prefix and suffix morphisms.
-The proof only reassociates composition and substitutes the supplied middle
-equation; no categorical structure beyond associativity is used. -/
+/-- Insert a six-map comparison between fixed prefix and suffix morphisms. -/
 theorem paste_six_with_edges
     {C₀ : Type*} [Category* C₀]
     {A B C D E F G H I J : C₀}
@@ -145,10 +139,7 @@ theorem paste_six_with_edges
     _ = p ≫ (x ≫ y) ≫ q := by rw [hmiddle]
     _ = p ≫ x ≫ y ≫ q := by simp only [Category.assoc]
 
-/-- An equivalence counit is invariant under transport to an isomorphic object.
-Proof: Naturality of the counit moves the isomorphism through the counit;
-its inverse then cancels. This is the object-level cancellation for nested
-open restrictions after the first return triangle. -/
+/-- An equivalence counit is invariant under transport to an isomorphic object. -/
 theorem equivalence_counit_transport_cancel
     {C D : Type*} [Category* C] [Category* D]
     (e : C ≌ D) {X Y : D} (α : X ≅ Y) :
@@ -160,10 +151,7 @@ theorem equivalence_counit_transport_cancel
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
 /-- A natural comparison followed by an equivalence counit ignores transport
-along an isomorphism of its input. Proof: naturality moves the input map
-through the comparison, and counit naturality moves it back; the inverse
-input map then cancels. This is the local-object cancellation in either
-canonical overlap branch. -/
+along an isomorphism of its input. -/
 theorem equivalence_comparison_counit_transport
     {A C D E : Type*} [Category* A] [Category* C] [Category* D] [Category* E]
     (e : C ≌ D) (cart : D ⥤ E) (H : A ⥤ C) (S : A ⥤ D)

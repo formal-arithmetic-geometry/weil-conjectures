@@ -17,9 +17,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackSectionsIsColimit
 /-!
 # Sections of a pulled-back module sheaf over a descended affine etale object
 
-Source: Stacks Project, Etale Cohomology, Lemma 09YU, proof, paragraph 'Fully faithful',
-a special case of Theorem 09YQ in degree 0
-(blueprint: lem-weil-pbc-limit-pullback-sections-colimit).
+## References
+
+* Stacks Project, Etale Cohomology, Lemma 09YU, a special case of Theorem 09YQ in degree 0.
 -/
 
 @[expose] public section
@@ -34,32 +34,11 @@ namespace AlgebraicGeometry.Etale
 transition morphisms, `c` a limit cone, `i₀` a stage, `G` an etale sheaf of `Λ`-modules on
 `X₀ = D.obj (op i₀)` and `V₀ → X₀` an etale morphism with `V₀` affine. For `i ≥ i₀` the
 sections of `G_i = f_{i i₀}^{-1} G` over `V_i = V₀ ×_{X₀} X_i` are the sections at `V₀` of
-`(f_{i i₀})_* (f_{i i₀})^{-1} G`. The maps `ρ_{i' i}` (unit of `f_{i' i}^{-1} ⊣ f_{i' i,*}` at
-`G_i`, then the composition isomorphisms of direct and inverse images) and `ρ_i` (the same with
-the limit projection `f_i`) form a directed system with a compatible family; the induced map
-`colim_{i ≥ i₀} G_i(V_i) → G_∞(V)` is bijective, stated by the elementwise criterion for
-filtered colimits: every section on the limit comes from a stage, and two sections at a stage
-with the same image on the limit agree at a later stage.
-
-Source: Stacks Project, Tag 09YU ('Fully faithful'), Tag 09YQ in degree 0
-(blueprint: lem-weil-pbc-limit-pullback-sections-colimit).
-
-Proof:
-1. The `V_i` are affine, etale over `X_i`, form an inverse system with affine transitions and
-   limit `V = V₀ ×_{X₀} X` (`lem-weil-pbc-scheme-over-limit`,
-   `lem-weil-pbc-affine-morphism-permanence`).
-2. Module inverse images and their units are those of the underlying abelian sheaves
-   (`situation-conventions`); the composition isomorphisms are
-   `Λ`-linear by uniqueness of adjoints (`situation-conventions`).
-3. The sheaves `F_i = w_i^{-1} G` on `V_i` with the composition isomorphisms form a system
-   with colimit `w^{-1} G` on `V` (constant connected diagram).
-4. Theorem 09YQ in degree 0 (`lem-weil-pbc-etale-cohomology-limit-of-schemes`), translated to
-   sections, gives a bijection `colim_i F_i(V_i) → (w^{-1} G)(V)`.
-5. Etale restriction isomorphisms and `lem-weil-pbc-etale-restriction-pullback-unit` identify
-   that system with the maps `ρ`.
-6. Hence the identities of a directed system and the cocone identities hold.
-7. The elementwise criterion for filtered colimits of modules
-   (`lem-weil-pbc-filtered-colimit-modules-elementwise`) gives bijectivity. -/
+`(f_{i i₀})_* (f_{i i₀})^{-1} G`. The maps `ρ_{i' i}` and `ρ_i` form a directed system with a
+compatible family; the induced map `colim_{i ≥ i₀} G_i(V_i) → G_∞(V)` is bijective, stated by
+the elementwise criterion for filtered colimits: every section on the limit comes from a
+stage, and two sections at a stage with the same image on the limit agree at a later stage.
+(Stacks, Tag 09YU) -/
 theorem limit_pullback_sections_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]
     [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]

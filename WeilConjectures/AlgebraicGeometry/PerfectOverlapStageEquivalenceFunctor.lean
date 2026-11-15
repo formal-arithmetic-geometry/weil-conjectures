@@ -20,8 +20,7 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The forward stage equivalence is pullback along the cartesian scheme
-isomorphism. Source: the constructor of `overlapSchemeIsoDerivedEquivalence`. -/
+/-- The forward stage equivalence is pullback along the cartesian scheme isomorphism. -/
 theorem perfectOverlapStageEquivalence_functor_eq
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (q : T ⟶ S) (h : IsPullback g pX pY q)
@@ -31,8 +30,7 @@ theorem perfectOverlapStageEquivalence_functor_eq
         (((isPullback_morphismRestrict g (U ⊓ V)).paste_vert h).isoPullback.inv) := by
   rfl
 
-/-- The stage equivalence maps a morphism by cartesian derived pullback.
-Source: the defining stage equivalence and its forward-functor equation. -/
+/-- The stage equivalence maps a morphism by cartesian derived pullback. -/
 theorem perfectOverlapStageEquivalence_map_eq
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
     (pY : Y ⟶ S) (q : T ⟶ S) (h : IsPullback g pX pY q)

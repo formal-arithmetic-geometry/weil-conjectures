@@ -12,10 +12,12 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSignedComplex
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSingletonAugmentation
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechCoefficientMap
 
-/-! # Functorial subset Čech coordinate construction
+/-!
+# Functorial subset Čech coordinate construction
 
-Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-coordinate-map).
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
 -/
 
 @[expose] public section
@@ -28,28 +30,7 @@ namespace AlgebraicGeometry
 
 /-- Subset Čech coordinates extend any coefficient chain map to a total chain map.
 The target section complex is supplied as an input. No injectivity,
-K-injectivity, quasi-isomorphism or homotopy assumption is required.
-
-Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1), finite totalization.
-(blueprint: lem-sc-principal-open-cech-coordinate-map).
-
-Proof: In degree n take the product over nonempty subsets S of sections of
-I in degree n+1-card(S). Give it the displayed differential: the vertical
-coefficient differential with sign (-1)^(card(S)-1), plus the alternating
-sum of restrictions from one-element deletions. This is A-linear. Its square
-vanishes: two vertical differentials compose to zero; two deletion terms
-cancel in pairs with opposite signs; mixed terms cancel by naturality of
-restriction and the change of the vertical sign on a deletion. Singleton
-restriction from K₁, transported by σ₁, defines α₁, with zero components on
-larger subsets. The differential equation for K₁ and naturality verify the
-vertical chain equation; the horizontal equation is cancellation of the
-two restrictions to each two-element intersection. Define b by applying
-g on every coordinate after τ. The chain-map equation follows from the
-chain-map equation for g and its naturality with respect to restrictions
-and degree transports. This gives the displayed coordinate formula for b. There
-are no nonempty subsets when r=0, so T₁ is the zero product and all these
-identities hold. Empty intersections and repeated opens retain the same
-identities, since coordinates are indexed by subsets of indices. -/
+K-injectivity, quasi-isomorphism or homotopy assumption is required (Stacks, Tag 08C1). -/
 theorem principalOpenCech_coordinate_map_exists
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

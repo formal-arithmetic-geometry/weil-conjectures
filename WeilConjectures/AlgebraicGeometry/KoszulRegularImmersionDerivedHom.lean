@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormalit
 /-!
 # Derived Hom for a Koszul-regular closed immersion
 
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-immersion-derived-hom).
+## References
+
+* Stacks Project, Duality for Schemes, Tag 0BQZ.
 -/
 
 @[expose] public section
@@ -37,24 +38,7 @@ namespace AlgebraicGeometry
 
 /-- The derived internal Hom of the pushed-forward structure sheaf of a
 Koszul-regular closed immersion is the pushforward of the shifted top exterior
-power of the dual conormal sheaf.
-
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ, lemma-regular-immersion-ext
-(blueprint: lem-sc-koszul-regular-immersion-derived-hom).
-
-Proof:
-1. Apply koszulRegularImmersion_extSheaf in every integer degree. It computes the
-   cohomology sheaves by finite free Koszul resolutions, the affine dual comparison,
-   restriction to opens, and gluing the intrinsic determinant identification.
-2. On each rank-n open take the nth exterior power of the restricted dual conormal.
-   The degree terms of locallyRankedExteriorComplex are definitionally the direct
-   images of these sheaves for nonnegative degrees and zero for negative degrees.
-3. Apply closedImmersion_rankStrata_scalar_formality to this family and the
-   degreewise cohomology isomorphisms. It assembles single-degree truncations on
-   neighborhoods isolating the closed rank supports by extension by zero and derived
-   coproducts. This allows arbitrary locally constant rank, without finite image.
-The resulting comparison complex is exactly the termwise pushforward displayed here.
--/
+power of the dual conormal sheaf (Stacks, Tag 0BQZ). -/
 theorem koszulRegularImmersion_derivedInternalHom
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

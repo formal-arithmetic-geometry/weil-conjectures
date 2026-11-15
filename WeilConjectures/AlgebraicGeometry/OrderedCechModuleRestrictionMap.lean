@@ -12,7 +12,9 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Ordered restriction as a module cochain map
 
-Source: Stacks Project, Tags 01FJ, 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FJ, 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -24,20 +26,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Ordered coordinates of the usual differential are the signed face sum.
-Source: Stacks Project, Tags 01FJ and 01FK, ordered restriction.
-(blueprint: lem-pc-ordered-cech-module-restriction-map).
-
-Proof: Transport the extended differential through extendXIso in degrees p and p+1.
-Evaluation of pushforward is evaluation on the inverse-image open. Apply hd to
-replace the differential transported through e by the usual Cech differential.
-Project to the tuple t and expand that differential as the alternating sum of
-its face maps. Restriction along orderedCechTupleOpenMap is additive and commutes
-with integer scalar multiplication, so it passes through the sum. For each face,
-the composite from the ordered full intersection to the categorical face product
-is the composite through the ordered face intersection: opens form a poset, so
-the two arrows with these endpoints agree. The resulting terms are precisely
-the ordered coordinates in the asserted formula. -/
+/-- Ordered coordinates of the usual differential are the signed face sum
+(Stacks, Tags 01FJ and 01FK). -/
 private theorem orderedCechModuleCoordinate_d {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -115,22 +105,8 @@ private theorem orderedCechModuleCoordinate_d {X' T' : Scheme.{u}} (f' : X' ⟶ 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction to increasing coordinates is a morphism of module cochain complexes.
-Source: Stacks Project, Tags 01FJ and 01FK, ordered restriction.
-(blueprint: lem-pc-ordered-cech-module-restriction-map).
-
-Proof: In degree p and on B take the inverse of a p B applied to the family of
-orderedCechModuleCoordinate values. Additivity follows from additivity of a and
-of every coordinate. Apply a to the naturality and scalar equations: hn and hl
-reduce them to the proved naturality and scalar formulas for the coordinates.
-Thus these formulas define morphisms of module sheaves. For the differential,
-apply a and evaluate at an increasing tuple; ha gives the alternating sum of
-restrictions of the ordered faces. The presentation equation hd identifies this
-sum with the ordered coordinate of the usual differential. The restriction
-composites agree since opens form a poset. Put the negative components equal to
-zero. The source is zero in negative degrees, so its boundary equations vanish.
-This proves the chain equation also across degree -1. The coordinate formula is
-exactly the inverse-equivalence identity. Empty tuple index sets cause no exception. -/
+/-- Restriction to increasing coordinates is a morphism of module cochain complexes
+(Stacks, Tags 01FJ and 01FK). -/
 theorem orderedCech_module_restriction {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ) (hK : K.IsStrictlyGE 0)

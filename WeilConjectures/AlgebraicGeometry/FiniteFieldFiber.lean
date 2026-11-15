@@ -12,10 +12,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 /-!
 # Global finite-field datum and geometric base change
 
-Source: Weil conjectures blueprint, `chap-Nagata-compactification-and-Chows-lemma`,
-`sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md`, order 411
-(blueprint: def-weil-finite-field-fiber).
-
 The global datum permits any field with the specified cardinality and any fixed algebraic
 closure. Its inclusion is `algebraMap D.k₀ D.k`. Closed points and residue fields use the
 existing `closedPoints S` and `S.residueField s`, without new definitions.
@@ -42,9 +38,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures
 
 /-- The tuple `(p, a, q, k₀, k)` with `p` prime, `a ≥ 1`, `q = p ^ a`, a field `k₀`
-of cardinality `q`, and a fixed algebraic closure `k` over it.
-Source: blueprint order 411, `def-weil-finite-field-fiber.md`
-(blueprint: def-weil-finite-field-fiber). -/
+of cardinality `q`, and a fixed algebraic closure `k` over it. -/
 structure FiniteFieldDatum where
   p : ℕ
   a : ℕ

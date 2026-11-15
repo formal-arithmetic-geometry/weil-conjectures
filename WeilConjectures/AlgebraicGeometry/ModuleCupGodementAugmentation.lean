@@ -35,16 +35,8 @@ private theorem unit_naturality (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G)
   rw [skyscraperStalkEval_germ, toSkyscraper_app_apply, LinearMap.id_apply,
     Hom.stalkLinearMap_germ]
 
-/-- The germ in degree zero extends to the required cochain augmentation.
-Source: Stacks Project, Tag 0FKR; Banerjee, arXiv:1004.1491, §1.1.4.
-(blueprint: lem-sc-module-cup-godement-augmentation-exists)
-Proof: the two degree-zero cofaces are the two composites of the unit with
-itself and with the endofunctorial image of the unit. Naturality of the unit
-makes them equal, so the germ has zero composite with the first alternating
-differential. The universal constructor for maps from a complex concentrated
-in degree zero then supplies the augmentation; extension by zero transports
-it to integer degrees. The displayed identity follows from the degree-zero
-component of that constructor and the single-object isomorphism. -/
+/-- The germ in degree zero extends to the required cochain augmentation
+(Stacks, Tag 0FKR; Banerjee, §1.1.4). -/
 theorem moduleCup_godement_augmentation_exists (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (h : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1))

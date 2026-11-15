@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
 /-! # Sections of the pullback counit and the normalized Leray unit
-Source: Stacks Project, Tags 079W and 0D5T.
-(blueprint: lem-sc-mixed-pullback-sections-counit-unit).
+
+## References
+
+* Stacks Project, Tags 079W and 0D5T.
 -/
 
 @[expose] public section
@@ -153,24 +155,8 @@ private theorem normalizationRestriction_factors_inv
     rfl
   exact hR
 
-/-- Apply sections to a pullback counit satisfying the underived unit factorization.
-Source: Stacks Project, Tags 079W (derived adjunction) and 0D5T (Leray composition).
-(blueprint: lem-sc-mixed-pullback-sections-counit-unit).
-
-Proof: On the homotopy category write alpha for the ordinary pullback adjunction unit,
- beta for the right-derived direct-image unit, and s for the sections right-derived unit.
-The hypothesis says eta followed by derived direct image of epsilon equals Q(alpha);beta.
-Apply derived S-sections. Naturality of s at alpha moves Q(alpha) to ordinary sections.
-Naturality of the normalized Leray isomorphism at epsilon moves sections of epsilon
-across that isomorphism. Its defining unit equation then replaces s;sections(beta);Leray
-by the ordinary direct-image/sections comparison followed by exact scalar restriction's
-localization factor and restriction of the T-sections unit. The underived comparison is
-identity on sections, so the ordinary map is precisely sections of alpha. Finally
-conjugate by quotientCompQhIso and mapHomotopyCategoryFactors at C and g-star C.
-Naturality of these factors identifies this conjugated ordinary map with Q(d_C), and
-mapDerivedCategoryFactorsh with mapDerivedCategoryFactors. This proves the displayed
-identity. No counit invertibility, affine hypothesis, K-flatness, boundedness or equality
-between w and wA is needed; zero complexes and empty schemes obey the same naturalities. -/
+/-- Apply sections to a pullback counit satisfying the underived unit factorization
+(Stacks, Tags 079W and 0D5T). -/
 theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
     [(Scheme.Modules.tensorPullback g).Additive]
     [(RingedSpace.globalSectionsFunctor S.toRingedSpace).Additive]

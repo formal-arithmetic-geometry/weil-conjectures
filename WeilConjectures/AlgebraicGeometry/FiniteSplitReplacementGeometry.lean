@@ -8,9 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitReplacementStage
 import Mathlib.AlgebraicGeometry.LimitsOver
 
 open CategoryTheory CategoryTheory.Limits Opposite
-/-! Finite matching schemes for split replacement stages. The boundary-index
-construction follows the proved construction in
-`WeilConjectures.CategoryTheory.SiteFiniteBasisHypercoverStep`. -/
+/-! Finite matching schemes for split replacement stages. -/
 
 @[expose] public section
 universe u v
@@ -149,22 +147,8 @@ private def boundaryDiagram {D : Type*} [Category* D] {n : ℕ}
   (CostructuredArrow.proj _ _).op ⋙ K
 
 
-/-- Source: Stacks Project, Hypercoverings, 0DAV; the finite matching limit.
-
-Each nondegenerate object is a finite coproduct of qcqs schemes, hence qcqs.
-The splitting cofans express every retained term as another finite coproduct,
-so they too are qcqs. For this coproduct assertion, map its cofan to schemes
-and use the homeomorphism with a finite topological disjoint union; compact
-opens intersect compactly component by component.
-The property etale, quasi-compact and quasi-separated is stable under composition,
-base change and cancellation of postcomposition by itself. Therefore its over
-category has finite limits and its forgetful functor to Over X preserves them.
-Lift the truncated diagram to this category. The category of arrows from retained
-simplices to [n+1] is finite; its opposite limit is the matching object. Its
-projections give the displayed naturality. Apply preservation to get its limiting
-cone in Over X, which gives existence and uniqueness for every test scheme over X.
-The matching object's structure map is qcqs; since X is qcqs, its source is qcqs.
-(auxiliary; not a blueprint node) -/
+/-- A truncated finite split étale hypercover admits a matching boundary for the next degree
+(Stacks, Tag 0DAV). -/
 theorem exists_replacement_boundary {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {n : ℕ}
     (U : TruncatedFiniteSplitEtaleHypercover X n) : Nonempty (ReplacementBoundary U) := by

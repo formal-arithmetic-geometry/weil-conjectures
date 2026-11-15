@@ -9,9 +9,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassScalarFaithfulness
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-! # Scalar faithfulness after the ordinary inverse-image adjunction
-
-Source: the two components of blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -88,16 +85,7 @@ private theorem kummer_unit_scalar_naturality
     (ordinaryFiniteUnitPullback A f).hom a
 
 /-- Scalar faithfulness of the actual Kummer class implies scalar faithfulness
-of its specified Chern pushforward under the canonical derived adjunction.
-Source: blueprint lemma-cohomology-projective-line-trace, the geometric Chern component.
-(auxiliary; not a blueprint node).
-
-Proof: linearity of inverse image and of the single functors makes the constant
-comparison commute with scalar multiplication. Transpose an annihilated scalar
-multiple through the adjunction defining the Chern pushforward. Naturality and
-injectivity of its hom equivalence show that the same scalar annihilates the
-original representative. Apply ordinaryFiniteClass_scalar_faithful to the actual
-Kummer class specified by the Chern condition. -/
+of its specified Chern pushforward under the canonical derived adjunction. -/
 theorem ordinaryFiniteP1ChernPushforward_scalar_faithful
     (N : ℕ) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))

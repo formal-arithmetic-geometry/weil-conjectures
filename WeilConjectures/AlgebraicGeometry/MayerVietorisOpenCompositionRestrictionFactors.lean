@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 
 /-! # Restriction factors across open composition
 
-Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restriction-factors).
+## References
+
+* Stacks Project, Tags 08FE, 0D5T and 079V.
 -/
 
 @[expose] public section
@@ -40,22 +41,8 @@ private lemma restriction_factors
   simp only [Category.assoc, Functor.map_comp]
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Naturality moves the exact source-restriction factor through open composition.
-Source: Stacks Project, Tags 08FE, 0D5T and 079V.
-
-Proof: let f be the inverse exact restriction factor from QJ to restriction of QI.
-The definition of schemeMVOpenImageLocalization is the open-localization unit followed
-by the open derived direct image of f. The definition of schemeMVOpenComparison is the
-component of beta at restriction of QI followed by the target-open derived direct image
-of the inverse restriction comparison. Expand these two definitions and apply the
-functorial composition equation for the derived direct image of h. Naturality of
-beta.hom along f identifies Rh(Rj_X(f)) followed by the beta component at restriction
-of QI with the beta component at QJ followed by Rj_Y(R(h|W)(f)). Associate the
-composites and combine the two final maps using functoriality of Rj_Y. This gives the
-stated equality without using the h-localization unit or the complex-composition map.
-Only naturality and functoriality are used, so arbitrary complexes, empty and full
-opens and identity morphisms are included; there is no injectivity or cover hypothesis.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restriction-factors). -/
+/-- Naturality moves the exact source-restriction factor through open composition
+(Stacks, Tags 08FE, 0D5T and 079V). -/
 theorem schemeMVOpenComposition_restriction_factors
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

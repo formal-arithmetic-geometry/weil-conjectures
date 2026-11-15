@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 /-!
 # The closed counit on abelian pro-etale sheaves
 
-Source: Stacks Project, Tags 09AA, 09BL and 09BK
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09AA, 09BL and 09BK.
 -/
 
 @[expose] public section
@@ -274,36 +275,8 @@ private theorem isIso_localized_counit
 end Localization
 
 /-- Closed direct image on abelian pro-etale sheaves is fully faithful, expressed by the
-invertibility of the actual inverse-image/direct-image adjunction counit.
-
-Source: Stacks Project, Tags 09AA, 09BL and 09BK
-(auxiliary; not a blueprint node).
-
-Proof:
-1. For a quotient immersion Spec(A/I) → Spec A, take the opposite of the closed-site
-adjunction and whisker with abelian-group-valued presheaves. Its counit is invertible,
-since the original site unit is invertible. Hence precomposition with base change is
-fully faithful. Cocontinuity of the lift gives continuity of base change, so this functor
-restricts to sheaves. Full faithfulness of the sheaf-to-presheaf inclusions then gives
-full faithfulness on the affine bases.
-2. The affine-basis restriction equivalences commute with the actual direct image.
-Cancel the faithful restriction functor to obtain full faithfulness of direct image.
-Every closed immersion into an affine scheme is isomorphic to a quotient immersion;
-composition and isomorphism invariance give full faithfulness in that case as well.
-Its actual adjunction counit is consequently invertible.
-3. For the inverse images of affine opens, restriction base change is induced by the
-canonical comparison of site pullbacks. It is invertible for a cartesian square. Its
-horizontal mate is invertible too: on sections it is induced by the composite of the
-site unit, the comparison, and the site counit, which is the canonical isomorphism between
-iterated pullbacks. The double-mate identity and the mate-counit identity show that each
-open restriction of the global counit is a composite of isomorphisms, using the affine
-counit from step 2.
-4. Restrictions along an open cover are jointly conservative. Indeed, each weakly etale
-object is covered by its base changes along that cover; any member of the generated sieve
-factors through a covering open. The sheaf-local isomorphism criterion applies. Thus every
-component of the global counit, and then the counit itself, is invertible. Empty closed
-schemes and nonreduced closed thickenings are included; there is no finite-presentation
-or quasi-compact-open-complement hypothesis. -/
+invertibility of the actual inverse-image/direct-image adjunction counit
+(Stacks, Tags 09AA, 09BL and 09BK). -/
 theorem abelian_closed_counit {X Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
     IsIso (upperStarLowerStarAdjunction Ab.{u + 1} i).counit := by

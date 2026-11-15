@@ -11,11 +11,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 
 /-! # Proper self-product exchange and forget supports
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md, first triangle, the exchange
-obtained from the same pullback counits on the Cartesian square.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -345,42 +340,7 @@ private lemma inverse_exchange
 /-- The compact-support exchange for the flipped self-product square intertwines the
 actual chosen-compactification forget-supports maps, in both forward and inverse forms.
 The ordinary exchange is `CoordinateTrace.exchange1`, the canonical derived adjunction
-mate in the left-derived presentation of exact inverse image, as specified in
-`definition-derived-base-change-map`. Its inverse is justified by torsion-ring proper base change.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle, the common
-pullback counits (auxiliary; not a blueprint node).
-
-Proof in words:
-1. Exact module inverse images and their right adjoints have the sheaf composition
-normalization of situation-conventions and
-lem-weil-pbc-inverse-image-composition-module-linear. Apply
-lem-sfb-derived-composition-adjunction-normalization in the Grothendieck abelian module
-sheaf categories (lem-weil-pbc-module-sheaves-grothendieck-abelian). Thus the K-injective
-compositors of lem-weil-derived-direct-image-composition are conjugate to the canonical
-pullback compositors. The ordinary exchange mates obey vertical pasting by
-lem-weil-pbc-mate-pasting and lem-kun-derived-pullback-composition-monoidal.
-2. Write the chosen compactification of f as (j,r), its base change as (j',r'), and
-let a be the map between compactifying schemes. Put J=D(j_!), J'=D(j'_!), and let
-b:F_a J -> J' F_v be inverse open exchange. Expanding exchangeFirst gives
-beta^c=E_r(JK);R_r'(b_K), followed by the specified compactification comparison I.
-The forget-supports maps are exactly the gamma maps of
-lem-sf-proper-refinement-forget-supports.
-3. Transpose the open forget-supports square under F_j' adjoint to R_j'. The unit-mate
-identity lem-asd-open-base-change-unit-mate identifies the transpose of b;t_j' with
-that of F_a(t_j);E_j. Indeed, t_j is the adjunct of the inverse open unit; naturality
-of the pullback square and the counit give the same inverse-unit composite on both
-sides. The adjunction hom bijection (def-weil-pbc-adjunction-mate) gives equality.
-4. Substitute that equality in beta^c;gamma_c'. Naturality of E_r moves t_j past E_r;
-vertical mate pasting then identifies E_r;R_r'(E_j);kappa_r',j' with
-F_f(kappa_r,j);E_f. Consequently beta^c;gamma_c'=F_f(gamma_c);E_f.
-5. Apply lem-sf-proper-refinement-forget-supports to the actual common refinement:
-I;gamma_d=gamma_c'. The first equality follows. The projection is proper by
-lem-weil-pbc-proper-base-change, so both proper comparisons apply.
-6. A finite ring is additive torsion. By lem-kun-proper-base-change-torsion-ring,
-E_f is invertible on every unbounded K. Precompose the first equation by beta_f inverse
-and postcompose by E_f inverse to obtain the second equation. Conversely cancel those
-isomorphisms. No trace, boundedness or condition on the base is used. -/
+mate in the left-derived presentation of exact inverse image. -/
 theorem proper_self_exchange_forget_supports
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f]

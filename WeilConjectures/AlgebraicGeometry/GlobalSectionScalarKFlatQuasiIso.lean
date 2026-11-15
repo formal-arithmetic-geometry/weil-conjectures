@@ -15,9 +15,9 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Scalar extension from global sections on K-flat quasi-isomorphisms
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YT; algebraization.tex,
-Tag 099E, final paragraph.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YS, 06YT and 099E.
 -/
 
 @[expose] public section
@@ -270,25 +270,8 @@ private theorem presheaf_quasiIso_of_evaluation
 end TensorPresheaf
 
 /-- The explicit global-section scalar extension preserves a quasi-isomorphism
-between K-flat complexes. No Čech models or augmentations are involved.
-Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YT; algebraization.tex,
-Tag 099E, final paragraph.
-(auxiliary; not a blueprint node).
-
-Proof: form the sectionwise tensor-presheaf functor along the global evaluation map.
-Its explicit extension/restriction adjunction identifies it naturally with the chosen
-presheaf pullback. At each site object X, the bottom-site sheafification unit identifies
-its image of a constant complex with evaluation of the explicit one-point scalar
-extension along A to O(X). The identifications commute with differentials and with alpha,
-as checked on the generating tensors with first coordinate one. This scalar-extension
-functor has definitionally the objects and maps of changeOfRings, so the existing
-changeOfRings_kFlat_quasiIso theorem applies directly to the two K-flat hypotheses.
-Exact evaluation on the bottom site preserves its quasi-isomorphism. Presheaf exactness
-is objectwise, so the sectionwise conclusions assemble to a quasi-isomorphism of module
-presheaf complexes. Naturality of the adjunction uniqueness isomorphism transports it
-to the chosen pullback. Exact module sheafification gives ringFamilyGlobalExtension.
-No flatness of O(X) over A is assumed. The same proof covers an empty site, zero rings
-and zero complexes. -/
+between K-flat complexes. No Čech models or augmentations are involved
+(Stacks, Tags 06YS, 06YT and 099E). -/
 theorem ringFamilyGlobalExtension_quasiIso_of_kflat
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

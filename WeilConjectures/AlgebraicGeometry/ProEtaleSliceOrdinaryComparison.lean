@@ -9,8 +9,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleObjectInverseImageRestricti
 
 /-! # Normalized ordinary pro-etale coefficient slice comparison
 
-Source: Hemo--Richarz--Scholbach, Lemma 4.5; Stacks 03CE, 07A4, 08J9, 08JB.
-(auxiliary; not a blueprint node).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 4.5; Stacks, Tags 03CE, 07A4, 08J9, 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -128,15 +129,7 @@ private theorem comparison_coefficients {X : Scheme.{u}} (U : X.ProEt)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Ordinary module pullback along a site object is restriction followed by the
-fixed scalar transport. Source: Stacks 03CE and 03CZ
-(auxiliary; not a blueprint node).
-Proof: the normalized ring-sheaf comparison intertwines the two adjunction units.
-Its adjoint coefficient map therefore satisfies the coefficient unit and counit
-identities for composition left adjoint to base change. These identities lift
-that site adjunction to modules. Both resulting functors are left adjoint to
-the prescribed module direct image, so uniqueness of left adjoints gives the iso.
-Evaluate its unit equation on a section and use naturality along the distinguished
-index unit. The site adjunction triangle identity gives the section normalization. -/
+fixed scalar transport (Stacks, Tags 03CE and 03CZ). -/
 theorem proEtaleSlice_ordinary_comparison {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})

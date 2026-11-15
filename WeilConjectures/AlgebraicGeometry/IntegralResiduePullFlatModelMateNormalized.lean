@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! The counit-normalized mate calculation for the integral residue pull square.
 
-Source: Bhatt--Scholze, Remark 6.8.15.
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt--Scholze, Remark 6.8.15
 -/
 
 @[expose] public section

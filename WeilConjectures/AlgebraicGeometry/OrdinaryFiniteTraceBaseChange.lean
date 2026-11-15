@@ -11,12 +11,8 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounitComparisons
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceScalarSquare
 
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Base change for the prescribed finite projective-line trace counit
-
-Source: blueprint thm-amb-p1-adjunction.proof.md, the counit base-change square.
 -/
 
 @[expose] public noncomputable section

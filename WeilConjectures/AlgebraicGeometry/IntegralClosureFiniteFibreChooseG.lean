@@ -16,8 +16,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 /-!
 # A lift of the fibre idempotent gives the localization isomorphism
 
-Source: literature/stacks-project/more-algebra.tex:2542-2549, proof of Lemma Tag 09XH
-(blueprint: lem-weil-pbc-integral-closure-finite-fibre-choose-g)
+## References
+
+* Stacks Project, More on Algebra, proof of Lemma 09XH.
 -/
 
 @[expose] public section

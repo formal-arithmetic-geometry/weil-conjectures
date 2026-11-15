@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Generating sections detected by the span of their germs
 
-Source: Stacks Project, Modules, Definition 01AM; Sheaves, Lemma 0H7H(2).
+## References
+
+* [Stacks, Tag 01AM], [Stacks, Tag 0H7H]
 -/
 
 @[expose] public section
@@ -44,24 +46,8 @@ private lemma freeHom_app_ι {Y : Scheme.{u}} (M : Y.Modules) {I : Type u}
     (M.unitHomEquiv.apply_symm_apply (s i))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Global sections generate a module exactly when their germs span every stalk.
-
-Source: Stacks Project, Modules, Definition 01AM; Sheaves, Lemma 0H7H(2).
-(blueprint: lem-weil-pbc-generating-sections-stalk-span).
-
-Proof: The free sheaf morphism sends its i-th basis section to s i. The stalk map
-is linear. For a finite family the identity on the free sheaf is the sum of the
-basis inclusions composed with the coordinate projections. Representing any stalk
-element by a section and applying this identity shows that the image of the stalk
-map is contained in the span of the germs of s i. Conversely each germ of s i is
-the image of the germ of the i-th basis section, so the image contains that span.
-The forgetful functor to abelian sheaves preserves colimits, hence epimorphisms.
-The stalk functor on abelian sheaves is a left adjoint, hence also preserves epis,
-which are surjective in abelian groups. This proves the forward implication. For
-the reverse implication, span equality makes each stalk map surjective, and the
-stalk-surjectivity criterion makes the original module morphism an epimorphism.
-The empty finite family is handled by the same identity with an empty sum; on an
-empty scheme the pointwise conditions are vacuous. -/
+/-- Global sections generate a module exactly when their germs span every stalk
+(Stacks, Tags 01AM, 0H7H). -/
 theorem generating_sections_iff_stalk_span (Y : Scheme.{u}) (M : Y.Modules)
     {I : Type u} [Finite I] (s : I → M.sections) :
     Epi (M.freeHomEquiv.symm s) ↔ ∀ y : Y,

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RoosCohomologySequence
 /-!
 # The Milnor sequence on the small pro-etale site
 
-Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
-sk-prop-pe-milnor/det-pe-milnor-sequence.md (blueprint: proposition-milnor-sequence--2).
-
 The existing strict Roos construction `WeilConjectures.integralOperationsRoos` is
 exactly Cone(1-T)[-1], including its diagonal map on strict tower morphisms.
 -/
@@ -209,30 +206,7 @@ private theorem milnor_sequence_of_exact_products
 /-- All three clauses of the natural Milnor sequence, for arbitrary unbounded towers.
 The chosen isomorphisms e₀ and e₁ compute the cohomology of the degree-zero Roos
 complex. The final short exact complex is the first one with its left endpoint
-rewritten by e₁; in particular it uses the same maps, not unrelated exact sequences.
-
-md (blueprint: proposition-milnor-sequence--2).
-
-Proof:
-1. In the abelian category of ringedSiteModules, apply the cone long exact
-cohomology sequence (proposition-milnor-sequence and
- proposition-milnor-sequence) to 1-T on the termwise product. Exactness
-identifies the cokernel in degree q-1 with the kernel of the outgoing map, and
-its image with the kernel in degree q. By proposition-exact-products--2, using exact
-products from proposition-exact-products--1, the projection-induced product/cohomology
-comparison is an isomorphism. Its coordinate formulas identify the induced map
-with 1-T on cohomology. The kernel is the sheaf inverse limit by
- proposition-milnor-sequence. The diagonal product map on cone summands commutes
-with inclusion and negative projection; factoring through cokernels and kernels
-gives both naturality squares below.
-2. For modules concentrated in degree zero the shifted cone has only degrees
-0 and 1, with differential -(1-T). Negating degree 1 identifies it with the
-usual two-term complex. Its cohomology is the kernel in degree 0, the cokernel
-in degree 1, and zero in every other integer degree. Identify the kernel with
-the sectionwise inverse limit. The constructions commute with tower maps.
-3. Apply the degree-1 calculation to the tower of H^(q-1)(K_n). Composing its
-isomorphism with the first inclusion gives the last displayed short exact
-complex, which is exactly the Milnor sequence in clause 3. -/
+rewritten by e₁; in particular it uses the same maps, not unrelated exact sequences. -/
 theorem milnor_sequence (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)}) :
     ∃ (e₀ : ∀ M : ℕᵒᵖ ⥤ (ringedSiteModules.{max u (t + 1)} R),

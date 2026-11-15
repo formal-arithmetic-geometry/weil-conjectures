@@ -12,11 +12,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 /-! # Closure of finite label sections on an etale neighborhood
 
 The finite-section covering argument for constant abelian neighborhoods.
-Source: the explicit finite-operation refinement in
-`lem-weil-pbc-finite-constant-abelian-neighborhood`, steps 1--3;
-Stacks Project Tag 03RU supplies the finite local constancy definitions.
-The proof uses the already proved finite-section and injectivity lemmas in
-`WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections`.
+
+## References
+
+* Stacks Project, Tag 03RU.
 -/
 
 @[expose] public section
@@ -86,28 +85,7 @@ private theorem finite_label_sections_cover
 set_option backward.isDefEq.respectTransparency false in
 /-- Near a specified point, the finite set of constant label sections is an injective
 set of sections closed under zero, addition and negation. No group structure on the
-labels, or abelian presheaf transformation, is part of this conclusion.
-Source: explicit finite-operation refinement of
-`lem-weil-pbc-finite-constant-abelian-neighborhood`, steps 1--2; Stacks Project Tag 03RU
-supplies the finite local constancy definitions.
-(blueprint: lem-weil-pbc-finite-constant-label-subgroup-neighborhood).
-
-Proof: view G over U on the localized etale site. Its finite set chart provides one
-constant label section for every s in S. Form the zero section, each pairwise sum of
-label sections, and each negative label section at the terminal object. Apply e to
-these finitely many sections of G. They are sections of the constant set sheaf at S.
-Each such section is locally the image of a label under the constant-presheaf
-sheafification map. A finite intersection of their image covering sieves is covering
-(the finite-section lemma in ConstantSheafSections). Choose a member of this cover
-with a point above x. Restrict the chart to this member V, using the compatibility
-of constant sheaves with localization, to get e'. The finitely many lifted labels
-show closure under zero, sum and negation of its terminal label map t. The terminal
-object is not covered by the empty sieve because V has a point above x. Local
-injectivity of the constant-presheaf sheafification map, whose restriction maps are
-identities, therefore makes the label map injective. Composing with the chart
-isomorphism preserves that injectivity. No connectedness of V is needed. If S is
-empty and x exists, local lifting of the zero section gives a contradiction, so the
-assumed finite set chart excludes this edge case. -/
+labels, or abelian presheaf transformation, is part of this conclusion. (Stacks, Tag 03RU.) -/
 theorem finite_constant_label_subgroup_neighborhood {Y : Scheme.{u}}
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : Y.Etale)
     (S : Type (u + 1)) [Finite S]

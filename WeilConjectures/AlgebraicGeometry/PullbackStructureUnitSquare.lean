@@ -11,8 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # The structure-sheaf unit comparison around a square
 
-Source: Stacks Project, Tag 08HY; the ordinary pullback unit calculation.
-(blueprint: lem-sc-pullback-structure-unit-square)
+## References
+
+* Stacks Project, Tag 08HY.
 -/
 
 @[expose] public section
@@ -76,21 +77,8 @@ private theorem structureUnit_congr
   subst g
   simp [pullbackCongr]
 
-/-- Pullback of the structure-sheaf maps commutes with the ordinary square comparison.
-There is no coefficient module, derived category or Picard test section here.
-Source: Stacks Project, Tag 08HY; functoriality of pullback of the structure sheaf.
-(blueprint: lem-sc-pullback-structure-unit-square)
-
-Proof: Each pullbackObjUnitToUnit is the adjoint transpose of the ring-sheaf
- morphism sending 1 to 1. The inverse of pullbackComp is the conjugate of
- pushforward composition, so the composite adjunction identifies its unit
- comparison with successive pullback of these same ring-sheaf morphisms.
- Applying the Hom equivalence for the composite shows that pullbackComp
- followed by the composite unit comparison equals pullback of the first unit
- comparison followed by the second. Transport this identity along the square
- equality by equality elimination, and apply it to both paths. Cancel the
- common composite unit comparison to obtain the square. These are identities
- of ring and module maps and do not require a nonempty scheme or a nonzero ring. -/
+/-- Pullback of the structure-sheaf maps commutes with the ordinary square comparison
+(Stacks, Tag 08HY). -/
 theorem pullbackStructureUnitSquare
     {X S X' S' : Scheme.{v}} (f : X ⟶ S)
     (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')

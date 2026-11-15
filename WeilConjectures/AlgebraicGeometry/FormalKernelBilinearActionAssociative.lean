@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # Associativity of the formal kernel action
 
-Source: Stacks Project, Lemma 087Z, the graded module in its affine proof.
+## References
+
+* Stacks Project, Tag 087Z
 -/
 
 @[expose] public section
@@ -161,26 +163,7 @@ private theorem sections_heq_of_local {X : Scheme.{u}} (K : ℕ → X.Modules)
 
 /-- A natural bilinear family with the local-lift multiplication formula is associative
 for any multiplication induced by ideal-power representatives.
-Source: Stacks Project, Lemma 087Z and Section 0EHN;
-https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-bilinear-action-associative).
-
-Proof: Fix l,m,n,U and coefficient sections a,b and a kernel section x. Around every
-point of U shrink to lift a to I^l, b to I^m and the inclusion of x to a section t
-of F_(l+m+n+1). Quotient projections and transitions are sheaf epimorphisms, so these
-local simultaneous lifts exist. Let t_mid be the reduction of t to F_(m+n+1).
-The action formula says that the inclusion of act(b,x) is b t_mid. Linearity of the
-transition therefore makes b t a lift of that inclusion at the common highest level.
-Applying the action formula again makes the inclusion of act(a,act(b,x)) equal to
-a (b t). The representative multiplication hypothesis supplies c in I^(l+m) whose
-image is a b and whose class is A.mul(a,b). Applying the action formula to c,x,t
-makes the other inclusion equal to (a b)t. Scalar associativity equates these two
-sections. The kernel inclusion is monic and hence sectionwise injective; transport
-the grading index along (l+m)+n=l+(m+n) to obtain the displayed HEq. Naturality of
-act and A.mul identifies these local computations with the restrictions of the two
-original sections, and the sheaf uniqueness axiom glues their equality on U.
-Zero degrees use the identity inclusion for K_0; empty opens and zero modules have
-unique sections. No unit law or existence of act is asserted in this lemma. -/
+(Stacks, Tag 087Z and Section 0EHN.) -/
 theorem formalKernel_bilinear_action_associative {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (A : GradedSheafAlgebra (formalAssociatedGradedPiece I))

@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 
 /-! # Shifts compatible with the composition-pinned pullback counits
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-pinned-pullback-counit-shifts). -/
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -21,11 +24,7 @@ noncomputable section
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The left-derived counit selected by the composition theorem.
-Source: Stacks Project, Tag 0D5S
-(blueprint: lem-pc-ringed-spaces-derived-pullback-composition).
-(blueprint: lem-pc-pinned-pullback-counit-shifts)
--/
+/-- The left-derived counit selected by the composition theorem (Stacks, Tag 0D5S). -/
 abbrev pinnedPullbackCounit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -33,18 +32,8 @@ abbrev pinnedPullbackCounit
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) f
 
-/-- The composition-pinned left-derived counits admit compatible integer shifts.
-Source: Stacks Project, Tags 0D5S and 08HY; derived universal property.
-(blueprint: lem-pc-pinned-pullback-counit-shifts).
-Proof: for each f, compare the two functors obtained by shifting before and after
-Lf*. Both are left derived functors of the corresponding shifted termwise tensor
-pullback. Shift is an equivalence and preserves quasi-isomorphisms, so the
-left-derived universal property supplies a unique comparison compatible with the
-specified counit. Applying the same construction to the inverse shift proves
-invertibility. Uniqueness gives the zero and addition laws, since the termwise
-shift comparisons satisfy them. The compatibility equation is exactly
-NatTrans.CommShift for the specified counit. Do this for every morphism; no
-flatness, boundedness or geometric hypothesis is required. -/
+/-- The composition-pinned left-derived counits admit compatible integer shifts
+(Stacks, Tags 0D5S and 08HY). -/
 theorem exists_pinned_pullback_counit_shifts
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

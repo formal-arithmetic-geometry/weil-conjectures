@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.BalancedActionQuasicoherentRealization
 /-! # Quasi-coherent realization of a graded action
 
-Source: Stacks Project, Tag 0897, relative-spectrum construction; Tags 01LX and 01SB.
-(blueprint: lem-weil-pbc-graded-module-quasicoherent-realization).
+## References
+
+* [Stacks Project, Tags 0897, 01LX, 01SB]
 -/
 
 @[expose] public section
@@ -27,27 +28,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
 /-- A quasi-coherent graded action has a geometric realization, without a finiteness
-assumption on its homogeneous generators, the algebra, or the base.
-
-Source: Stacks Project, Tag 0897, relative-spectrum construction, using 01LX and 01SB.
-(blueprint: lem-weil-pbc-graded-module-quasicoherent-realization).
-
-Proof: On an affine open U = Spec C of X take the direct sum of the modules of
-sections G_m(U). The internal decomposition of B extends the homogeneous maps mu
-uniquely by finite sums to a B-action on this direct sum. Additivity of mu and its
-multiplication law imply the module laws. The scalar formula identifies the A-action
-with the action through A -> C; taking a = 1 gives the identity action. The commuting
-C-action therefore extends to C tensor_A B. Quasi-coherence identifies restrictions
-on affine basic opens with localization. Localization commutes with direct sums and
-with the homogeneous action, so these local modules and actions agree on overlaps.
-They glue to a quasi-coherent module over the pulled-back algebra sheaf. Relative
-Spec base change identifies its spectrum with Y; affine module correspondence gives
-F and an algebra-linear identification of its pushforward with that module. After
-restriction of scalars, the homogeneous inclusions give the coproduct cocone iota.
-On each affine open the action of b on the m-th summand is mu m k b, hence its
-inclusion equals inclusion followed by multiplication by fB^sharp(b). Equality of
-sheaf maps can be checked on the affine cover, giving the asserted global formula.
-The construction uses no finite generators and works for zero summands and empty X. -/
+assumption on its homogeneous generators, the algebra, or the base. (Stacks, Tag 0897) -/
 theorem gradedModule_quasicoherent_realization
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     (graded : ℕ → Submodule A B)

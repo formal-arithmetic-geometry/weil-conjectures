@@ -547,37 +547,11 @@ private def splitting_top {X : Scheme.{u}} {n : ℕ}
         eqToHom (congrArg NondegDegree.N hA) ≫ oldInclusion U V a
     rw [inclusion_attachEpi]
 
-/-- Source: Stacks, Hypercoverings, 0DAV, split extension; 01GJ, matching covers.
-
-Use the old nondegenerate schemes and inclusions below the new degree, and use
-V with the left coproduct injection in the top degree. In a lower degree every
-epi has target degree at most that degree; remove the impossible top labels and
-use U.splitting. In the top degree an epi to itself is the identity. Separate
-this unique new label from all labels of target degree at most n. Their cofan
-is the binary coproduct of V and the coproduct indexed by Labels n (n+1).
-The identity label gives coprod.inl. For each lower label, attachmentMap_epi
-and attachEpi_fac with the identity old label give exactly oldInclusion.
-Therefore the canonical coproduct colimit proves the top splitting cofan.
-
-Keep each old matching scheme, projection and matching map. The new matching
-scheme is Q.M. Every simplex of degree below n+1 lies in the old truncation,
-so Q.pi gives all its projections; Q.naturality gives their equations. Its
-universal property is Q.universal, after transporting along the old restriction
-of attachedSimplicial. Apply that universal property to the cone of top face
-operators attachFace to define the matching map. This cone is natural by
-attachFace_naturality. Uniqueness in Q.universal, after precomposing with the
-new inclusion coprod.inl, identifies its restriction with b. Since b is
-surjective, the matching map is surjective. This choice is determined uniquely
-by all projections, not an arbitrary witness of mere existence.
-
-Use hf for the new nondegenerate finiteness witness and retain every old witness.
-Every lower field is literally retained; the proved restriction identity of
-attachedSimplicial identifies the simplicial fields. Dependent structure
-extensionality, uniqueness of colimit witnesses, and proof irrelevance for
-proposition-valued fields yield the exact restriction equality stated below.
-This theorem has no refinement target K:
-the simplicial object and all its operator laws are already constructed.
-(auxiliary; not a blueprint node) -/
+/-- Attaching `V` along `b : V ⟶ Q.M` (with `b` surjective and `V` a finite coproduct of qcqs
+étale schemes of finite presentation) carries the structure of a truncated finite split étale
+hypercover `U'` of degree `n + 1`, with simplicial object `attachedSimplicial U V Q b` and
+restriction `U`
+(Stacks, Tags 0DAV, 01GJ). -/
 theorem exists_attached_split_structure
     {X : Scheme.{u}} {n : ℕ} (U : TruncatedFiniteSplitEtaleHypercover X n)
     (V : X.Etale) (Q : ReplacementBoundary U) (b : V ⟶ Q.M)

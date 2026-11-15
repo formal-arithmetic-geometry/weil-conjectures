@@ -15,8 +15,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived pushforward through the direct-image algebra
 
-Source: Stacks Project, Tag 0AVW, final pushforward identification
-(blueprint: lem-sc-finite-affine-derived-factorization).
+## References
+
+* [Stacks Project, Tag 0AVW](https://stacks.math.columbia.edu/tag/0AVW)
 -/
 
 @[expose] public section
@@ -36,19 +37,7 @@ private lemma moduleDirectImage_restrictScalars_eq {X Y : Scheme.{u}} (f : X ⟶
       RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
 
 /-- Scalar restriction of the algebra-valued derived pushforward is the scheme pushforward.
-Source: Stacks Project, Tag 0AVW, final pushforward identification
-(blueprint: lem-sc-finite-affine-derived-factorization).
-
-Proof: Restriction of scalars is exact, since the underlying abelian sheaf, kernels,
-images, and cokernels are unchanged. Its right derived functor therefore agrees with
-termwise restriction after localization, with the canonical comparison. Choose the
-functorial K-injective representative I on X used for derived direct image. The
-complexes g_* I and f_* I have identical underlying sheaves and different scalar
-structures; restriction of the former is naturally the latter. The localization
-comparisons identify both composites with this complex-level functor. Full faithfulness
-of precomposition by localization descends this natural identity to the asserted
-isomorphism on the entire derived category. No boundedness or quasi-coherence of the
-input is needed; the zero complex and every shift use the same calculation. -/
+(Stacks, Tag 0AVW.) -/
 theorem finite_affine_derived_factorization {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

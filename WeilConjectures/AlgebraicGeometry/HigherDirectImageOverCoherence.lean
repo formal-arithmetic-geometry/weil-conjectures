@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Functoriality of higher-image transitions
 
-Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
-(blueprint: sbc-lem-higher-image-over-transition-coherence).
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8.
 -/
 
 @[expose] public section
@@ -111,19 +112,8 @@ private theorem over_map_composition
         (R+((U.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map
           ((DerivedCategory.Plus.singleFunctor _ 0).map f))) he).trans ht
 
-/-- Canonical higher-image transitions are contravariantly functorial on schemes over W.
-The maps are the canonical unit/composition/counit transitions of the source library.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps; Tag 03Q8.
-(blueprint: sbc-lem-higher-image-over-transition-coherence).
-
-Proof: Use the triangle identities for derived inverse/direct-image adjunctions to
-cancel the unit and counit for an identity. For two composable arrows, expand both
-units and counits using the composition adjunction. Naturality moves the intervening
-unit past the counit, and the triangle identity cancels them. Associativity of the
-inverse-image composition isomorphisms identifies the remaining factors with the
-single transition for the composite. Apply homology and use the naturality and
-composition coherence of inverse image on complexes concentrated in degree zero.
-The final inverse-image identifications of G compose by upper-star coherence. -/
+/-- Canonical higher-image transitions are contravariantly functorial on schemes over `W`
+(Stacks, Tags 09Z1 and 03Q8). -/
 theorem higher_image_over_transition_coherence
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

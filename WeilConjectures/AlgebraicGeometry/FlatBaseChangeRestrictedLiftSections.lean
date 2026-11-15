@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsFor
 
 /-! # The restriction square on section complexes
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -45,21 +48,8 @@ private def restrictedLiftSectionsIso {Y Z : Scheme.{uBC}} (h : Y ⟶ Z)
   exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
     (A.d n m)).naturality _
 
-/-- Restriction of an augmented lift, together with its canonical section square.
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-pbc-flat-base-change-restricted-lift-sections).
-
-Proof: Put U = f inverse-image V and W = g' inverse-image U. Restrict t to U,
-then conjugate its source and target by the augmentation-preserving comparisons
-in D. Use the restriction/direct-image comparison for g' to obtain k. The
-augmentation equation for t and D.unit_square give the augmentation equation
-for k, by the restriction adjunction. Construct a degreewise by restriction of
-sections along h inverse-image top = top; naturality makes it a complex iso.
-Expand the pushforward square defining q. Its components are restriction of
-sections along the pullback projection identity. The component equations in
-D identify the source and target section comparisons with the same restriction
-maps. Thus q is the conjugate of the section map of k by these comparisons.
-This is an equality of complex maps, checked in each degree; it uses no homology. -/
+/-- Restriction of an augmented lift, together with its canonical section square
+(Stacks, Tags 01FB and 01E4). -/
 theorem flatBaseChangeRestrictedLift_sections {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules}

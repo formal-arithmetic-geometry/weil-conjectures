@@ -21,15 +21,7 @@ noncomputable def Etale.grothendieckRelativeSections {R S : Scheme.{u}} (f : S �
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The unit, inverse-image composition, and fibre-product pasting comparison.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2.
-Whisker the adjunction unit by the opposite base-change functor of f, then whisker the
-inverse-image composition isomorphism, and finally whisker the opposite pullback-pasting natural
-transformation by the target presheaf. All three transformations are natural, so their composition
-is natural. For the composite-unit formula, evaluate the unit compatibility of the inverse-image
-composition isomorphism, use naturality of its inverse, and cancel the isomorphic pasting
-restriction. No elements of A are used.
-(auxiliary; not a blueprint node) -/
+/-- The unit, inverse-image composition, and fibre-product pasting comparison. -/
 noncomputable def Etale.grothendieckRelativeSectionMap {R S T : Scheme.{u}}
     (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
     (F : Sheaf R.smallEtaleTopology A) :

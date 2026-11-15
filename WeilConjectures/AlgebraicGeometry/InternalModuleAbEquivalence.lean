@@ -12,9 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-! # Internal modules in abelian groups and ordinary modules
 
-Source: the tensor-product universal property for bilinear module actions,
-used sectionwise in Bhatt--Scholze, Section 5.3
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, Section 5.3.
 -/
 
 @[expose] public section
@@ -116,25 +116,8 @@ private instance : (internalToModule R).EssSurj where
 
 private instance : (internalToModule R).IsEquivalence where
 
-/-- Internal modules over the ring object associated to R are ordinary R-modules,
-with exactly the same underlying abelian groups and maps.
-
-Source: the universal property of the tensor product over ℤ, applied to a module
-scalar action; the pointwise encoding step used in Bhatt--Scholze, Section 5.3
-(auxiliary; not a blueprint node).
-
-Proof in words. An internal action γ : R ⊗ℤ M → M gives scalar multiplication by
-r • m = γ(r ⊗ m). Evaluate the internal unit equation at 1 ⊗ m and its associativity
-equation at (r ⊗ s) ⊗ m to obtain the module unit and associativity laws. The additive
-laws follow from bilinearity. Evaluating an internal linearity diagram at r ⊗ m
-makes its additive map R-linear. Conversely the bilinear scalar multiplication of an
-ordinary module gives γ by the tensor universal property. Its unit and associativity
-diagrams hold because they hold on pure tensors. Likewise any ordinary linear map
-is internally linear, so the constructed functor is fully faithful. The inverse
-construction on objects realizes each ordinary module, with the identity map on the
-underlying group as the realization isomorphism. This proves essential surjectivity
-and hence equivalence. The functor forgets to the original group and map by definition.
-The zero ring and zero module are included, and no commutativity is required. -/
+/-- Internal modules over the ring object associated to `R` are ordinary `R`-modules,
+with exactly the same underlying abelian groups and maps. -/
 theorem internalModuleAb_equivalence :
     ∃ F : Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleCat.{u} R,
       F.IsEquivalence ∧

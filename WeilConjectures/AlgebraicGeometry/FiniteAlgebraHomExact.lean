@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 
 /-! # Exactness of the algebra-valued finite sheaf-Hom functor
-Source: Stacks Project, Tags 0BUZ and 01C6
-(blueprint: lem-sc-finite-algebra-hom-exact). -/
+
+## References
+
+* Stacks Project, Tags 0BUZ and 01C6
+-/
 
 @[expose] public section
 
@@ -27,15 +30,7 @@ open CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- The algebra-valued Hom functor is exact when its first argument is finite locally free.
-Source: Stacks Project, Duality for Schemes, Tag 0BUZ; Modules, Tag 01C6
-(blueprint: lem-sc-finite-algebra-hom-exact).
-
-Proof: The dual of A is finite locally free. Canonical evaluation identifies tensoring
-by that dual with Hom(A,-), naturally in the coefficient module, by
-`dual_tensor_hom_iso`. Tensoring by the dual preserves finite limits and colimits by
-`finiteLocallyFree_tensorLeft_exact`. Restriction of scalars preserves and reflects
-kernels and cokernels: their underlying sheaves and maps are unchanged. Transport
-exactness through iH and reflect it to H. This includes rank zero and empty schemes. -/
+(Stacks, Tags 0BUZ and 01C6.) -/
 theorem finite_algebraHom_exact {X Y : Scheme.{u}} (f : X ⟶ Y)
     [SheafOfModules.IsFiniteLocallyFree.{u, u, u}
       ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))]

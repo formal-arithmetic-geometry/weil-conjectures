@@ -18,8 +18,7 @@ import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 /-!
 # Global derived Hom on a scheme
 
-Source: Stacks Project, Cohomology of Sheaves, Section 20.44, Tag 0B6A
-(blueprint: def-pc-global-derived-rhom).
+Reference: Stacks Project, Tag 0B6A.
 
 The structure sheaf on the one-point space is the pushforward of O_X: its value on
 that point is A = O_X(X), and on the empty open it is the zero ring. The map of
@@ -50,24 +49,21 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 namespace AlgebraicGeometry
 
-/-- The one-point ringed space with structure ring O_X(X), constructed by pushing O_X
-along the unique continuous map to the point. Source: Stacks, Tag 0B6A
-(blueprint: def-pc-global-derived-rhom). -/
+/-- The one-point ringed space with structure ring `O_X(X)`, constructed by pushing `O_X`
+along the unique continuous map to the point (Stacks, Tag 0B6A). -/
 def globalSectionsPoint (X : Scheme.{u}) : RingedSpace.{u} where
   carrier := TopCat.of PUnit.{u + 1}
   presheaf := (TopCat.Presheaf.pushforward CommRingCat
     (TopCat.ofHom (ContinuousMap.const X.carrier PUnit.unit))).obj X.presheaf
   IsSheaf := TopCat.Sheaf.pushforward_sheaf_of_sheaf _ X.IsSheaf
 
-/-- The ringed-space morphism p to (pt, O_X(X)); p-sharp is the identity, in particular
-on the whole space. Source: Stacks, Tag 0B6A
-(blueprint: def-pc-global-derived-rhom). -/
+/-- The ringed-space morphism `p` from `X` to `(pt, O_X(X))`; `p♯` is the identity on the
+whole space (Stacks, Tag 0B6A). -/
 def toGlobalSectionsPoint (X : Scheme.{u}) : X.toRingedSpace ⟶ globalSectionsPoint X :=
   ⟨{ base := TopCat.ofHom (ContinuousMap.const X.carrier PUnit.unit), c := 𝟙 _ }⟩
 
-/-- RΓ(X,-) valued in D(O_X(X)): the unbounded right derived functor of global sections
-`Γ(X,-) : Mod(O_X) ⥤ Mod(O_X(X))`. Source: Stacks, Tag 0B6A
-(blueprint: def-pc-global-derived-rhom). -/
+/-- `RΓ(X,-)` valued in `D(O_X(X))`: the unbounded right derived functor of global sections
+`Γ(X,-) : Mod(O_X) ⥤ Mod(O_X(X))` (Stacks, Tag 0B6A). -/
 def schemeDerivedGlobalSections (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] :
@@ -76,20 +72,9 @@ def schemeDerivedGlobalSections (X : Scheme.{u})
   (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor
 
 set_option synthInstance.maxSize 2048 in
-/-- RΓ(X,-) is Rp_* to (pt, O_X(X)) followed by the identification of modules on the point
-with O_X(X)-modules: there is an equivalence of module categories whose functor is
-evaluation on the point, and Rp_* followed by it is RΓ(X,-).
-Source: Stacks, Tag 0B6A (blueprint: def-pc-global-derived-rhom).
-Proof:
-1. An A-module M gives the sheaf on the point with M on the whole point and zero on
-   the empty open; the sheaf condition forces every module sheaf to be zero on the
-   empty open, so evaluation and this construction are mutually inverse, including on
-   morphisms. The pushforward structure ring on the whole point is Γ(X,O_X).
-2. By def-pc-ringed-spaces-derived-direct-image, Rp_* is computed by p_* of a
-   K-injective resolution, naturally in the complex.
-3. An equivalence is exact, so its derived-category map is termwise application.
-4. Since p-sharp is the identity, p_* followed by evaluation is Γ(X,-), including
-   its A-action. These natural comparisons descend through localization. -/
+/-- `RΓ(X,-)` is `Rp_*` to `(pt, O_X(X))` followed by the identification of modules on the
+point with `O_X(X)`-modules: there is an equivalence of module categories whose functor is
+evaluation on the point (Stacks, Tag 0B6A). -/
 theorem schemeDerivedGlobalSections_point_comparison (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wPt} (SheafOfModules.{u} (moduleRings (globalSectionsPoint X)))]
@@ -115,12 +100,7 @@ theorem schemeDerivedGlobalSections_point_comparison (X : Scheme.{u})
   exact ⟨(F.rightDerivedFunctorCompMapDerivedCategoryIso G).symm ≪≫
     Functor.rightDerivedFunctorNatIso h⟩
 
-/-- Any K-injective resolution K → I computes RΓ(X,K) by Γ(X,I).
-Source: Stacks, Tag 0B6A (blueprint: def-pc-global-derived-rhom).
-Proof: `schemeDerivedGlobalSections` is the right derived functor of Γ(X,-), and the
-right derived functor is computed on K-injective complexes by termwise application
-(`Functor.rightDerivedFunctorObjQIso`). Since K → I is a quasi-isomorphism,
-Q(K) ≅ Q(I); compose. -/
+/-- Any K-injective resolution `K → I` computes `RΓ(X,K)` by `Γ(X,I)` (Stacks, Tag 0B6A). -/
 theorem schemeDerivedGlobalSections_computed_by_resolution (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]
@@ -134,9 +114,8 @@ theorem schemeDerivedGlobalSections_computed_by_resolution (X : Scheme.{u})
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorObjQIso I⟩
 
 
-/-- Global derived Hom: RΓ(X,R𝓗om(P,Q)) in D(O_X(X)), contravariant in P and
-covariant in Q, encoded as a functor from D(O_X)ᵒᵖ × D(O_X).
-Source: Stacks, Tag 0B6A (blueprint: def-pc-global-derived-rhom). -/
+/-- Global derived Hom: `RΓ(X,R𝓗om(P,Q))` in `D(O_X(X))`, contravariant in `P` and
+covariant in `Q`, encoded as a functor from `D(O_X)ᵒᵖ × D(O_X)` (Stacks, Tag 0B6A). -/
 def schemeGlobalDerivedHom (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] :

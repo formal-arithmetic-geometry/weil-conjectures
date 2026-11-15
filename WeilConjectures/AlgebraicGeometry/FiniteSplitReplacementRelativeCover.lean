@@ -16,19 +16,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Hypercoverings, 01GJ, relative matching construction,
-and 094K, finite affine choices.
-
-Compose the boundary projections with A.f and use the universal matching property
-of K to obtain M(A) to M(K). Pull back the surjective etale arrow K_(n+1) to M(K).
-Its projection to M(A) is still surjective and etale. Its affine opens have open
-images covering the compact space M(A), so finitely many suffice. Take their
-finite disjoint union N and its two maps b to M(A) and g to K_(n+1). The pullback
-equation and K's matching projection equations prove compatibility with every
-lower face. The chosen pieces are affine, hence qcqs; their etale structure maps
-to the qcqs base X are locally of finite presentation, quasi-compact and
-quasi-separated. This uses no compactness hypothesis on any term of K.
-(auxiliary; not a blueprint node) -/
+/-- For an étale hypercover `K` and a finite stage `A` with boundary `Q`, there is a finite
+disjoint union `N` of affine étale pieces with a surjection `b : N ⟶ Q.M` and a map to
+`K_(n+1)` compatible with all lower faces (Stacks, Tags 01GJ, 094K). -/
 theorem exists_finite_relative_boundary_cover
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

@@ -23,32 +23,8 @@ variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- Proper base change on unbounded complexes with coefficients in Z/nZ, n positive.
-Source: Stacks Project, Tag 0F0C (Lemma 59.92.3), with Tags 095U, 07K7, and 079P.
-(blueprint: theorem-results-from-etale-theory--1)
-
-Proof in words: use the existing acyclic-complex criterion for the canonical
-unbounded exchange. Underived proper base change supplies its sheaf exchange
-hypothesis. Bounded-below proper base change makes the inverse image of each
-injective torsion module sheaf acyclic for the base-changed direct image.
-
-For the remaining hypothesis, fix a geometric point of the target. Its fibre
-is proper over an algebraically closed field, hence has some finite dimension d.
-Bounded-below proper base change, exactness of inverse image, and the comparison
-between classical right derived functors and homology of the derived image
-identify the pullback of R^q f'_* M with the higher direct image on this fibre.
-The torsion dimension bound makes this zero for q > 2d, uniformly in M.
-The bound may depend on the point. Geometric-point pullbacks preserve monomorphisms
-and jointly detect zero sheaves. Pointwise finite-dimension shifting therefore
-shows that f'_* preserves exact complexes of f'_*-acyclic sheaves. The unbounded
-exchange criterion now applies: on a K-injective representative with injective
-terms, both comparison units and the termwise underived exchange are invertible,
-and its mate factorization identifies their composite with the canonical exchange.
-
-The coefficient ring is finite because n > 0; consequently it and every module
-sheaf over it are additively torsion. This includes n = 1. There is no global
-quasi-compactness, Noetherian, or invertibility assumption. The pointwise argument
-adapts the existing source-library proof in BaseChangeTheorems.Proper, without
-importing that module, which would create a cycle. -/
+There is no global quasi-compactness, Noetherian, or invertibility assumption.
+(Stacks, Tags 0F0C, 095U, 07K7, 079P) -/
 theorem Etale.isIso_derivedBaseChangeMap_of_isProper_modN
     (n : ℕ) (hn : 0 < n) [IsProper f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMap

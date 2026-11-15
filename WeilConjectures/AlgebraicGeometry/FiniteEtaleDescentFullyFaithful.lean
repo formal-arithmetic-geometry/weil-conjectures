@@ -12,8 +12,9 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Full faithfulness of finite etale descent
 
-Source: Stacks Project, Descent, Tag 02W0, via effective epimorphisms
-(blueprint: lem-galois-descent-fully-faithful).
+## References
+
+* Stacks Project, Tag 02W0
 -/
 
 @[expose] public section
@@ -24,17 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Canonical base change is fully faithful along an etale surjection.
-Source: Stacks Project, Descent, Tag 02W0; Step 3 of `lem-galois-descent`
-(blueprint: lem-galois-descent-fully-faithful).
-
-Proof: the first projection of every pullback is an etale surjection, hence
-an effective epimorphism. A compatible morphism followed by the first
-projection has equal values on any pair of points with the same image:
-transport takes one point to the other by pullback uniqueness. The effective
-epimorphism descends this map uniquely. Its factorization shows it is a map
-over the base. Pullback uniqueness identifies its base change with the given
-map, and epimorphism cancellation proves faithfulness. -/
+/-- Canonical base change is fully faithful along an etale surjection
+(Stacks, Tag 02W0). -/
 theorem finiteEtaleDescent_fullyFaithful {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
     [Surjective g] [Etale g]
     (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)

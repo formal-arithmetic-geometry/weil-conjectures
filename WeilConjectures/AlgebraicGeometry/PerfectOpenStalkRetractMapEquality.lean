@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Shrinking stalk equality for a finite retract sheaf
 
-Source: Stacks Project, Tags 09RE, 0BC7 and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-retract-map-equality).
+## References
+
+* Stacks Project, Tags 09RE, 0BC7 and 01CP.
 -/
 
 @[expose] public section
@@ -26,22 +27,8 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Equality of endomorphisms of a finite free retract at one stalk holds nearby.
-Source: Stacks Project, Tag 01CP, finite-type injectivity proof.
-(blueprint: lem-sc-perfect-open-stalk-retract-map-equality).
-
-Proof: Restrict the finite-free inclusion and retraction to Z and transport them
-through the equivalence with module sheaves on the open subscheme. These functors
-preserve the free coproduct and the splitting identity. Precompose a and b with
-the resulting retraction from the finite free sheaf. Faithfulness of restriction
-of scalars turns the hypothesis into equality of their module stalk maps. Evaluate
-this equality on the germs of the finitely many global basis sections. The proved
-finite-free germ calculation gives a common neighbourhood where the precomposed
-maps agree. Precomposing with the inclusion and using the splitting identity gives
-equality on the retract. Send the neighbourhood to X using the open immersion;
-the restriction composition and over-site comparisons give exactly the requested
-restriction equality. The empty basis is covered by the same coproduct argument.
-No Noetherian hypothesis is used, and repeated equal opens are allowed. -/
+/-- Equality of endomorphisms of a finite free retract at one stalk holds nearby
+(Stacks, Tag 01CP). -/
 theorem exists_open_stalk_retract_map_eq
     (X : Scheme.{u}) (U : X.Opens)
     (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

@@ -19,9 +19,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteSplitLocalReplacementExtension
 import WeilConjectures.AlgebraicGeometry.FiniteSplitLocalReplacementAssembly
 
 /-!
-# Blueprint statements
-
-corollary-cohomology-pro-etale-affine.
+# Refinement of finite split étale hypercovers
 -/
 
 @[expose] public section
@@ -32,7 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
+/-- Finite split étale hypercovers of a qcqs scheme exist, any two have a common refinement,
+and any two parallel refinements become homotopic after refining the source. -/
 theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
     Nonempty (FiniteSplitEtaleHypercover X) ∧
       (∀ U V : FiniteSplitEtaleHypercover X,
@@ -57,7 +56,9 @@ theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedS
     refine ⟨W, d ≫ c, Relation.EqvGen.rel _ _ ?_⟩
     exact ⟨by simpa only [Category.assoc] using H.precomp d⟩
 
-/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
+/-- A finite split étale hypercover has a refinement such that, in each degree up to `r`, the
+nondegenerate part is a finite coproduct of étale `X`-schemes whose maps lie in the given
+covering sieves `R j`. -/
 theorem exists_refinement_solving_local_requirements
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : FiniteSplitEtaleHypercover X) (r k : ℕ) (degree : Fin k → Fin (r + 1))
@@ -129,7 +130,8 @@ theorem exists_refinement_solving_local_requirements
   rw [U.simplicial.map_id, Category.comp_id] at hh
   simpa only [eqToHom_refl, Category.comp_id] using hh
 
-/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
+/-- Every étale hypercover `K` of a qcqs scheme is refined, up to degree `r`, by the
+truncation of a finite split étale hypercover. -/
 theorem exists_truncated_refinement
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

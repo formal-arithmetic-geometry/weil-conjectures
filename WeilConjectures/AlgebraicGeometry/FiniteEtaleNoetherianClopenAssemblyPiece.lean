@@ -19,11 +19,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Data for one generic affine piece and its strict closed complement
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-piece).
-
-Proof data records the integral affine source, its generic open, the induced locally closed
-image, and the strict closed-complement fields used by the induction theorem. -/
+/-- Data for one generic affine piece and its strict closed complement. -/
 structure IntegralAffineGenericPiece (Y : Scheme.{u})
     (P : (B : Scheme.{u}) → (B ⟶ Y) → Prop)
     (T : TopologicalSpace.Closeds Y) where
@@ -43,13 +39,7 @@ structure IntegralAffineGenericPiece (Y : Scheme.{u})
       TopologicalSpace.Closeds Y) < T
 
 /-- A nonempty closed induction piece contains an integral affine generic piece whose
-complement is a strictly smaller closed subset. The proof is the irreducible-component
-selection and affine-open avoidance argument from Tags 01OZ and 01J3
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-piece).
-
-Proof: choose an irreducible component meeting the closed subset, remove the other
-components, choose an affine open in the remaining open, and apply the generic hypothesis.
-The resulting open has a closed complement strictly below the induction subset. -/
+complement is a strictly smaller closed subset. (Stacks, Tags 01OZ and 01J3.) -/
 theorem exists_integral_affine_generic_piece_avoiding_components
     (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y] [IsReduced Y]
     (P : (B : Scheme.{u}) → (B ⟶ Y) → Prop)

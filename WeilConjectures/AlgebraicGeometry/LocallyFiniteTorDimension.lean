@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 
 /-! # Locally finite Tor dimension on schemes
 
-Source: Stacks Project, Cohomology of Sheaves, Definition 08CG
-(cohomology-definition-tor-amplitude) (blueprint: def-pc-locally-finite-tor-dimension).
+## References
+
+* [Stacks, Tag 08CG](https://stacks.math.columbia.edu/tag/08CG)
 -/
 
 @[expose] public section
@@ -25,12 +26,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- `E` locally has finite Tor dimension: every point has an open neighbourhood `U`
 and integers `a ≤ b` such that `H^i(E|_U ⊗ᴸ G) = 0` for every `𝒪_U`-module `G` and
-every `i ∉ [a, b]`. Here `E|_U` is the derived pullback along the open immersion
-`U.ι`, and the vanishing is the scheme predicate
-`schemeDerivedTensorCohomologyVanishes` (a K-flat representative whose total tensor
-with `G[0]` has zero cohomology in degree `i`; Stacks Tags 06YS and 06YU).
-Source: Stacks Project, Definition 08CG (cohomology-definition-tor-amplitude), clause (3)
-(blueprint: def-pc-locally-finite-tor-dimension). -/
+every `i ∉ [a, b]`. Here `E|_U` is the derived pullback along `U.ι`, and the vanishing is
+`schemeDerivedTensorCohomologyVanishes` (Stacks, Tags 08CG, 06YS, 06YU). -/
 def HasLocallyFiniteTorDimension (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

@@ -41,9 +41,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 /-!
 # Existence of an ordinary supported Cartier Kummer map
 
-Source: Stacks Project, Tags 03PL and 0A45; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tags 03PL and 0A45]
 -/
 
 @[expose] public noncomputable section

@@ -15,7 +15,6 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-! The finite operation refinement needed for local constancy of module sheaves.
-(blueprint: lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover)
 -/
 
 @[expose] public section
@@ -351,19 +350,7 @@ private theorem finite_constant_module_value {Y : Scheme.{u}}
   exact @Finite.of_equiv _ _ (hfinite _ (s ≫ U.hom)) eStalk.toEquiv
 
 /-- The module operations lift an underlying constant trivialization.
-
-Source: Stacks Project, Tag 0DV5, proof of (2)--(3), using Tag 093S (1).  Starting
-from a cover on which the underlying sheaf of sets is constant, refine it successively
-for addition, zero, negation, and scalar multiplication (there are finitely many
-scalars).  The resulting constant maps satisfy the module identities after evaluation
-at a geometric point, and hence give a constant sheaf of modules on every member.
-The finite geometric-stalk hypothesis makes every constant model on a nonempty
-member finite. Discard empty covering members. Refine the finite list of operation
-sections, form their range as a submodule, and transport that actual submodule structure
-to the finite labels. The resulting linear map from the constant presheaf is locally
-bijective, so sheafification is an isomorphism. Bind these covers to the original cover.
-No module data are chosen from an unproved existence theorem.
-(blueprint: lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover) -/
+(Stacks, Tags 0DV5 and 093S) -/
 theorem module_operationCompatibleCover
     {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))

@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.HomComplexRestrictSchemeNaturalComponen
 
 /-! # Naturality of restriction of the ordinary internal Hom complex
 
-Source: Stacks Project, Cohomology, Tag 08DL. -/
+## References
+
+* Stacks Project, Tag 08DL
+-/
 
 @[expose] public section
 
@@ -22,17 +25,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Restriction of ordinary internal Hom is natural in the second complex.
-Source: Stacks Project, Cohomology, Tag 08DL, the ordinary Hom computation in its proof.
-(blueprint: lem-sc-hom-complex-restrict-scheme-natural).
-
-Proof: Restrict local module maps to the over-U site and transport them through
-`Scheme.Modules.overEquiv U`. For each source degree and target degree, the sheaf
-Hom identification commutes with postcomposition by every map of target complexes.
-Restriction preserves the products defining each total degree. The identifications
-intertwine both terms of the Hom differential, since restriction preserves composition
-and addition. They therefore define chain isomorphisms. Their postcomposition
-compatibility is the naturality square in the second complex. The construction
-includes unbounded complexes, zero complexes and the empty open. -/
+(Stacks, Tag 08DL) -/
 theorem homComplex_restrict_scheme_natural {Y : Scheme.{u}} (U : Y.Opens)
     (L : CochainComplex Y.Modules ℤ) :
     Nonempty (

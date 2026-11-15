@@ -12,6 +12,8 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 /-!
 # Finite locally constant sheaves of sets
 
+## Implementation details
+
 The predicate and stable finite étale morphism property are kept below henselian comparison
 proofs so that the predicate can be used in those proofs without an import cycle.
 -/

@@ -6,8 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Lower-level canonical diagonal projection maps -/
 @[expose] public noncomputable section
@@ -15,9 +13,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
-/-- Either projection of the chosen fibre square of the projective line.
-Source: blueprint lemma-class-diagonal-projective-line, first sentence
-(blueprint: lemma-class-diagonal-projective-line). -/
+/-- Either projection of the chosen fibre square of the projective line. -/
 def projectiveLineDiagonalProjection (S : Scheme.{u}) (a : Bool) :
     pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) ⟶ ProjectiveLine S :=
   match a with
@@ -25,9 +21,7 @@ def projectiveLineDiagonalProjection (S : Scheme.{u}) (a : Bool) :
   | true => pullback.snd _ _
 
 /-- The canonical projective-line chart for either projection, including its equation
-over the base. It comes from projective-space base change and the flipped square.
-Source: blueprint lemma-class-diagonal-projective-line, proof step 1
-(blueprint: lemma-class-diagonal-projective-line). -/
+over the base. It comes from projective-space base change and the flipped square. -/
 def projectiveLineDiagonalChart (S : Scheme.{u}) (a : Bool) :
     {e : ProjectiveLine (ProjectiveLine S) ≅
       pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) //
@@ -54,9 +48,7 @@ attribute [local instance 100000] ordinaryFiniteClass._proof_1 ordinaryFiniteCla
 
 /-- The canonical source identification A_P → Rp_* RDelta_* A_P. The two units
 compose to the identity-map unit because p Delta = id, so this is the canonical
-derived-composition identification, in the direction required by the integral.
-Source: blueprint lemma-class-diagonal-projective-line, alpha_a and proof steps 3 and 5
-(blueprint: lemma-class-diagonal-projective-line). -/
+derived-composition identification, in the direction required by the integral. -/
 def projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) (a : Bool) :
     ordinaryFiniteUnit A (ProjectiveLine S) ⟶

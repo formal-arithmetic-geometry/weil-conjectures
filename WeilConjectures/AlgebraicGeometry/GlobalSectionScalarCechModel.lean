@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionScalarKFlatQuasiIso
 
 /-! # The localization tensor model after scalar extension from global sections
 
-Source: Stacks Project, algebraization.tex, Tags 0996, 099D(d), 099E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0996, 099D(d) and 099E.
 -/
 
 @[expose] public section
@@ -192,33 +193,7 @@ private theorem augmented_iso_of_good_quasiIso
 
 /-- Scalar extension of a K-flat augmented ordered localization model is the tensor Cech
 complex of the corresponding global list. This comparison does not involve a functorial
-family, its transition maps, or the Godement construction.
-
-Source: Stacks Project, algebraization.tex, Tags 0996, 099D(d) and the final paragraph
-of Tag 099E.
-(auxiliary; not a blueprint node).
-
-Proof: write A for the global ring and choose the ordered localization complex C supplied
-by hP for the specified list. Its degree-zero module is A; degree q > 0 is the finite sum
-of A localized at the products of q distinct generators, and negative terms vanish.
-The given A-algebra localization arrows are the unique localization maps, so these
-coordinates identify C, its differential and its augmentation with the ordered model.
-The terms are flat and the complex is bounded, hence C is K-flat. Represent the augmented
-derived isomorphism between C and P by a common roof and replace its source by a K-flat
-resolution. Since both targets are K-flat, scalar extension to each O(V) preserves the
-quasi-isomorphisms in this roof. Constant presheaves followed by scalar extension and
-exact sheafification therefore give an augmented derived isomorphism from the scalar
-extension of C to that of P.
-For one generator, the fraction isomorphism O(V) tensor_A A[1/f] to O(V)[1/f(V)] sends
-b tensor (a/f^n) to b*a(V)/f(V)^n; its inverse sends b/f(V)^n to b tensor (1/f^n).
-These formulas commute with restriction, so after sheafification they identify the
-localization terms. Expand the ordered tensor of the r two-term complexes by the subset
-of factors in degree one. Its degree-q summands are indexed by increasing q-subsets.
-The sign for inserting j is (-1) to the number of preceding chosen indices, which is the
-ordered alternating differential. The degree-zero identification is multiplication
-O tensor_A A to O, so the augmentation agrees with ringFamilyGlobalExtensionAugmentation.
-Compose the two comparisons. For the empty list both ordered and tensor models are O[0];
-zero or repeated generators and zero section rings obey the same fraction formulas. -/
+family, its transition maps, or the Godement construction (Stacks, Tags 0996, 099D and 099E). -/
 theorem ringFamilyGlobalExtension_cech
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

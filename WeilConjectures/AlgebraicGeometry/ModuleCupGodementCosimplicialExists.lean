@@ -76,22 +76,8 @@ private theorem presentation_full : SimplexCategoryGenRel.toSimplexCategory.Full
   rcases b with ⟨m⟩
   exact presentation_surjective n m f
 
-/-- The unit insertions and multiplication collapses form a cosimplicial object.
-Source: Stacks Project, Tag 0FKR; Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16.
-(blueprint: lem-sc-module-cup-godement-cosimplicial-exists)
-Proof: take the stalk functor to families of stalk modules and its right adjoint,
-the product of stalk skyscrapers. The product of skyscraperHomEquiv gives the
-adjunction. Its endofunctor and unit are the concrete Godement object, map and
-unit; its multiplication is moduleCup_godementMultiply, as seen by projecting
-to each point and evaluating the stalk there. The triangle identities give the
-two unit laws, and the counit naturality gives associativity. In degree n use
-T^(n+1)(F), insert the unit for cofaces and multiplication for codegeneracies.
-The monad laws and naturality prove the coface, codegeneracy and mixed
-identities. Extend to every simplex map by its unique surjection/injection
-factorization; the identities prove independence and preservation of
-composition. The recursive insert and collapse definitions are exactly these
-operators, and the term equalities are reflexivity. Empty products and zero
-modules require no exceptions. This statement constructs no augmentation. -/
+/-- The unit insertions and multiplication collapses form a cosimplicial object
+(Stacks, Tag 0FKR; Banerjee, §1.1.4). -/
 theorem moduleCup_godement_cosimplicial_exists (X : Scheme.{u}) (F : X.Modules) :
     ∃ (A : CosimplicialObject X.Modules)
       (h : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1)),

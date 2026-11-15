@@ -13,9 +13,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSectionDescent
 /-!
 # Local sum characterization of finite étale traces
 
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
-SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-descent)
+## References
+
+* Stacks Project, Tag 03SH
+* SGA 4, Exposé IX, 5.1
 -/
 
 @[expose] public section
@@ -29,37 +30,7 @@ namespace AlgebraicGeometry.Etale
 /-- For a fixed finite étale morphism, descent of the local sums gives a natural
 transformation from pushforward of inverse image to the identity, with the local sum
 characterization on every object of the small étale site.
-Source: Stacks Project, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-descent)
-
-Proof. Write `P_F(W) = F(W ×_X Y)`. The restriction isomorphism identifies this
-sheaf with `f_* f⁻¹ F`, naturally in `F`. For a finite clopen splitting of `W ×_X Y`
-into copies of `W`, form the sum of restrictions along its sections. Pulling a
-splitting back along `W' → W` pulls its sections back, and the pullback universal
-property shows that restriction commutes with this sum.
-
-Two splittings give the same sum. Intersect their clopen pieces and project the
-intersections to `W`; for each fixed index these images partition `W`. At each point
-of `W` this gives a bijection between the two finite sets of pieces. For each such
-bijection intersect the corresponding images to obtain an open of `W`. These opens
-cover `W`, and on each the sections are equal after reindexing: both invert the same
-isomorphism on the intersection. The sums are equal on this cover and hence equal by
-sheaf separatedness. If the index sets have different sizes, the base is empty and
-its group of sections is zero, so the assertion still holds.
-
-Finite étale local splitting (Stacks 04HN) and covering base change give each `W`
-a covering by objects with split pullback of `Y`. For `t ∈ P_F(W)` take its local sums
-on this cover. Restriction compatibility and independence of splitting imply that
-these sums agree on all overlaps, so glue them to a unique section of `F(W)`. To
-compare with a sum on any split object `T → W`, pull the chosen covering back to `T`;
-on its members independence of splitting gives the desired equality, and separatedness
-gives equality on `T`. Thus the glued section has the universal local sum property.
-
-This property and separatedness prove that gluing is additive, commutes with every
-restriction, and commutes with every morphism `F → G`: all of these equalities hold
-for the finite local sums on a splitting cover. The additive maps therefore form a
-sheaf morphism `P_F → F`, natural in `F`. Compose with the restriction isomorphism
-`f_* f⁻¹ F ≅ P_F` to obtain the asserted natural transformation. -/
+(Stacks, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.) -/
 theorem finiteEtaleTrace_descent {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hfin : IsFinite f) (hf : Etale f) :
     ∃ τ : upperStar AddCommGrpCat.{u + 1} f ⋙ lowerStar AddCommGrpCat.{u + 1} f ⟶

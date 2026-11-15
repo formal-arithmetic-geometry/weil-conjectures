@@ -11,9 +11,10 @@ import WeilConjectures.AlgebraicGeometry.MixedTensorPairingBaseChange
 import all WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # Internal Hom exchange with the canonical base-change mate
-Source: Stacks Project, duality.tex, Tag 0AA8, lemma-more-base-change,
-final comparison diagrams; cohomology.tex, Tag 08I3.
-(blueprint: lem-sc-mixed-internal-hom-base-change-exchange).
+
+## References
+
+* Stacks Project, Tags 0AA8 and 08I3.
 -/
 
 @[expose] public section
@@ -183,23 +184,8 @@ private theorem tensorHom_pullback_evaluation
 
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
 /-- The exchange identity before applying global sections.
-Here `p` is the pullback of evaluation transposed by the fixed tensor-Hom bijection.
-Source: Stacks Project, duality.tex, Tag 0AA8, lemma-more-base-change,
-final comparison diagrams; cohomology.tex, Tag 08I3.
-(blueprint: lem-sc-mixed-internal-hom-base-change-exchange).
-
-Proof: transpose both sides by the tensor-Hom bijection on Y'. Naturality in the
-first Hom input replaces precomposition by beta_M with tensoring by beta_M;
-naturality in the second input replaces postcomposition by beta_N with beta_N.
-Use the evaluation-mate equation for the direct-image comparisons, and the
-construction of p as pulled-back evaluation. Transpose beta under the f'
-adjunction: it is the pullback-composition comparison followed by the pullback
-of the f counit. Naturality of that counit and the f' triangle identity cancel
-the unit-counit pairs. The remaining tensor comparisons agree: on K-flat
-representatives both are the ordinary tensor-pullback comparison along the
-commutative square, and uniqueness of the left-derived comparison extends
-this equality to all objects. Thus both transposed composites agree, and
-injectivity of the tensor-Hom bijection gives the equation. -/
+Here `p` is the pullback of evaluation transposed by the fixed tensor-Hom bijection
+(Stacks, Tags 0AA8 and 08I3). -/
 theorem mixedInternalHom_baseChange_exchange
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (M N : schemeDerivedCategory X) :

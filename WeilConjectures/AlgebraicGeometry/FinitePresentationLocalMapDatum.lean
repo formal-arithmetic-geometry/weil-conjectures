@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompat
 
 /-! # Local finite-presentation descent data
 
-Source: Stacks Project, Limits, Tag 01ZR, first proof.
-(blueprint: lem-pc-fp-local-map-datum).
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section
@@ -67,23 +68,7 @@ private theorem local_recovery
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Local maps between fixed models descend compatibly on a cover.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, map descent on overlaps.
-(blueprint: lem-pc-fp-local-map-datum).
-
-Proof: Choose a finite affine cover at stage j. Descend the restrictions of the
-map using Tag 05N7. Cover pairwise intersections by finitely many affine opens;
-the equality clause of 05N7 makes the descended maps agree on these overlaps
-at a common later stage. These local maps and overlap equations form a morphism
-psi of descent data on the pulled-back stage cover U. On the limit cover, the
-local maps recover the prescribed map. The associativity comparison of pullbacks
-is the conjugate of pushforward composition under the canonical tensor adjunctions.
-Thus any map alpha with these components satisfies the displayed equality after
-restriction to the limit cover. This is a condition on local components only:
-no global stage map is constructed or asserted here. Further base changes preserve
-all equations. Empty opens and an empty scheme use the unique local maps.
-Finite presentation supplies finite generators and relations; quasi-separatedness
-supplies finite overlap covers. -/
+/-- Local maps between fixed models descend compatibly on a cover. (Stacks, Tag 01ZR) -/
 theorem exists_finitePresentation_local_map_datum
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

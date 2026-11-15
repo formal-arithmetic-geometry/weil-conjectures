@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureSupportedUnitKernel
 
 /-! # Factor reduced units through a proper supporting quotient
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-unit-quotient-system).
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -272,26 +273,7 @@ private theorem factored_units_compatible
         (fun t ↦ (tensorPullback i).map ((tensorPullback j').map q) ≫
           (tensorPullback i).map v' ≫ t) hψ
 
-/-- The reduced structure maps factor compatibly through one proper supporting quotient.
-Source: Stacks Project, Tag 09ZT, algebra structure paragraph, expanded using 0CYS,
-01XZ, 01Y6, 0096 and affine base change.
-
-Proof: X is Noetherian since it is finite type over the Noetherian affine base.
-Use the scheme-theoretic support Z of G, defined by its annihilator ideal J.
-Tag 0CYS makes Z proper over A. Let Q be the direct image of O_Z, equivalently
-O_X/J, and q the quotient map. Q is quasi-coherent of finite type, hence coherent
-by 01XZ, and has proper support. Pullback is right exact, so j_n^*Q is the quotient
-of O_Xn by the image of J. That image annihilates j_n^*G and therefore the algebra
-p_n,*O_Yn identified with it by psi_n. Acting on 1 shows that its structure map
-kills J. The quotient universal property gives a unique map to p_n,*O_Yn;
-compose with psi_n inverse to get v_n. Naturality of the quotient, base change's
-preservation of 1, hpsi, and the pinned composition comparison show compatibility:
-both sides agree after the epimorphic pullback of q. The section formula follows
-by the canonical adjunction unit, which sends r to 1 tensor r, and pushforward
-composition. No completion, multiplication on G, or lifted map is used here.
-For G=0 the scheme-theoretic support and Q are zero; for I=0 the same quotient
-factorization applies unchanged; on an empty scheme the equations are unique.
-(blueprint: lem-weil-pbc-finite-structure-unit-quotient-system). -/
+/-- The reduced structure maps factor compatibly through one proper supporting quotient. -/
 theorem finite_structure_unit_quotient_system
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A]

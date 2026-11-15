@@ -15,8 +15,10 @@ import Mathlib.RingTheory.Flat.Localization
 
 /-! # Refining regular affine charts
 
-Source: Stacks Project, Tags 062H and 01I1.
-(blueprint: new-s3-koszul-regular-affine-refinement). -/
+## References
+
+* Stacks Project, Tags 062H and 01I1.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,21 +26,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- A regular affine chart can be refined inside another affine neighborhood.
-
-Source: Stacks Project, Tag 062H, flat base change of Koszul regularity;
-Tag 01I1, distinguished opens form a basis.
-(blueprint: new-s3-koszul-regular-affine-refinement).
-
-Proof: Choose a distinguished open D(s) of U containing i(z) and contained in
-U'. The ring of its sections is the localization of Gamma(Y,U) at s. Restrict
-the given generators along this localization. Their ideal is the restricted
-immersion ideal, because quasi-coherent ideals localize on distinguished opens.
-Localization is flat, so the restricted sequence is Koszul-regular by Tag 062H.
-D(s) is affine and contains the chosen point. No affine-intersection hypothesis
-is used. For the empty sequence the ideal remains zero. Empty neighborhoods
-cannot satisfy the point-membership hypotheses; the zero ring causes no extra
-case. -/
+/-- A regular affine chart can be refined inside another affine neighborhood. -/
 theorem koszulRegularImmersion_affine_refinement
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U U' : Y.affineOpens) (z : Z) (hz : i z ∈ U.1) (hz' : i z ∈ U'.1)

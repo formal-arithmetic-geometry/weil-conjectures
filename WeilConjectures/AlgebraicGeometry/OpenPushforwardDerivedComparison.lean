@@ -23,19 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The derived-composition comparison for a module acyclic for open pushforward.
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, proof paragraphs 2 and 3;
-Stacks Project, Derived Categories, Tag 015M.
-(blueprint: lem-pc-open-pushforward-derived-comparison)
-
-Proof: resolve M by an injective resolution I on W. Restriction to W is an exact
-left adjoint of j_*, so j_* preserves injectives. Since M is j_*-acyclic, applying
-j_* to I, with the induced augmentation from j_*M, gives an injective resolution
-of j_*M: its positive homology vanishes by acyclicity, and degree zero is j_*M
-by left exactness. Computing R^q f_* on this resolution gives H^q(f_*j_*I).
-The sectionwise pushforward composition isomorphism identifies this complex with
-(f j)_*I, whose homology computes R^q(f j)_*M. Composing these identifications
-proves the stated comparison in every degree, including degree zero. No affine
-or quasi-coherence hypothesis is needed for this comparison. -/
+(Stacks, Tag 015M) -/
 theorem open_pushforward_rightDerived_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

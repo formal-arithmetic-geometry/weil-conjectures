@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 /-! # Categories for finite discrete coefficients, before bounded constructibility
 
 These are the unchanged ordinary internal module and module-valued sheaf categories.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

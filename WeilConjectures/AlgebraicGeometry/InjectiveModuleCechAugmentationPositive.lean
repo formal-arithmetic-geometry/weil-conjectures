@@ -23,22 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Positive-degree part of the augmented Čech quasi-isomorphism.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EP.
-(blueprint: lem-sc-injective-module-cech-augmentation-positive)
-
-Proof: write n = q + 1. The underlying abelian sheaf of an injective module is
-flasque, so its explicit intersection Čech complex is exact at q + 1. The proved
-comparison cechComplexFunctorHomologyIso identifies its homology with the abelian
-group underlying the homology of Mathlib's Čech complex: categorical products of
-opens are their finite intersections, and both differentials are the same signed
-restriction sum. Thus the target homology is zero, since forgetting the module
-structure reflects subsingletonness. The source is concentrated in degree zero,
-so its positive homology is also zero. Every map between zero objects is an
-isomorphism, in particular the homology map of b. This part needs neither the
-covering equation nor the prescribed zero component. It also holds for an empty
-index type, whose Čech terms are empty products, hence zero modules. -/
+/-- Positive-degree part of the augmented Čech quasi-isomorphism. (Stacks, Tag 01EP.) -/
 theorem injectiveModuleCechAugmentation_quasiIsoAt_positive {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (_hU : iSup U = ⊤) (J : X.Modules) [Injective J]
     (ht : (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op ⊤))).hom =

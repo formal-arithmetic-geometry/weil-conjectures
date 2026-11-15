@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # The second restriction of the binary submodule pullback
 
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
+## References
+
+* Stacks Project, Properties, Lemma 01PF.
 -/
 
 @[expose] public section
@@ -55,12 +57,7 @@ private theorem overMap_counit_component_isIso
   exact (ConcreteCategory.isIso_iff_bijective _).1 (inferInstance)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The concrete pullback restricts to Q on V.
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
-(blueprint: lem-weil-pbc-module-submodule-binary-gluing-second-restriction)
-Proof: On an open contained in V the unit is restriction along an isomorphism.
-The second projection of its pullback is therefore an isomorphism. Compose it
-with the counit, which is also an isomorphism on V, obtaining the stated iso. -/
+/-- The concrete pullback restricts to `Q` on `V`. -/
 theorem binarySubmodule_on_V
     (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))

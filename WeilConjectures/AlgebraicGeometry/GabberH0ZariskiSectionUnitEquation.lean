@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # The canonical section comparison and the étale unit
 
-Source: Stacks Project, Tag 09ZF, pullback-functoriality paragraph and fourth proof paragraph;
-Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-section-unit-equation).
+## References
+
+* [Stacks, Tag 09ZF], [Stacks, Tags 03CB, 03CC]
 -/
 
 @[expose] public section
@@ -31,27 +31,7 @@ private theorem sheafIso_apply {C : Type*} [Category* C]
       e.hom.hom.app U s := rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Core section-isomorphism/unit identity used by the top-open comparison.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-section-unit-equation).
-Proof: Write f = pullback.snd i h, B for base change along f, K = f*h*F,
-p = gabberPreimageEtaleIso f top, b = gabberTopPullbackIso h, and a for the
-first étale-object isomorphism in gabberZariskiSectionIso. Then
- a.inv ≫ p.hom = B.map b.inv.
-To prove this equality, forget to schemes and compare the two pullback projections.
-The projection to X' is forced by the morphisms over the base. The projection to
-the top-open subscheme is forced because its inclusion is an isomorphism. Thus
-pullback uniqueness gives the equality, also when a scheme is empty.
-Contravariant functoriality of K gives
- K.map a.inv.op (K.map p.hom.op q) = K.map (B.map b.inv).op q.
-Apply this to q = the étale unit at the top-open object. Naturality of that unit
-identifies the last expression with the unit at the identity-pullback object
-applied to h*F.map b.inv.op s, which is gabberZariskiLift h F s. The remaining
-factors of gabberZariskiSectionIso are the chosen composition-isomorphism
-component, pullbackComp, and transport along pullback.condition.symm. These
-are exactly the three factors in the right side after unfolding
-etaleSetDescentComparison. Evaluate on every section and use function
-extensionality. This argument needs no closedness or finiteness assumption. -/
+/-- Core section-isomorphism/unit identity used by the top-open comparison. -/
 theorem gabber_h0_zariski_section_unit_equation
     {X Z X' : Scheme.{u}} (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :

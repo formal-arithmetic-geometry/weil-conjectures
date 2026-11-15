@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Lifting a finite diagram with prescribed object models
 
-Source: Stacks Project, Limits, Tag 01ZM (2), (3), and its closing colimit assertion.
-(blueprint: lem-weil-pbc-finite-diagram-lift-of-models).
+## References
+
+* [Stacks Project, Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
 -/
 
 @[expose] public section
@@ -30,18 +31,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Generating arrows lift at one stage, with compatible objectwise comparisons.
-
-Source: Stacks Project, Limits, Tag 01ZM (2), finite common-stage argument.
-
-Proof: Conjugate each generating arrow by the given object isomorphisms. Apply
-01ZM (2) to this morphism between the limit pullbacks of the two prescribed
-finite-presentation models. There are finitely many generators, so directedness
-provides a stage refining their stages and the original stage i. Pull every arrow
-back to this common stage and identify iterated pullbacks by Over.pullbackComp.
-Compose the canonical comparisons with alpha. Naturality of pullback composition
-and the equations from 01ZM (2) give the displayed generator equations. If there
-are no arrows, use i, the identity transition, and Over.pullbackId. -/
+/-- Generating arrows lift at one stage, with compatible objectwise comparisons
+(Stacks, Tag 01ZM (2)). -/
 private theorem finite_generators_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -175,15 +166,8 @@ private theorem finite_generators_lift
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A finite collection of equalities after limit pullback holds at one stage.
-
-Source: Stacks Project, Limits, Tag 01ZM (3), finite common-stage argument.
-
-Proof: For each r apply 01ZM (3) to x r and y r, obtaining a stage where their
-pullbacks agree. Choose a common upper bound of these finitely many stages and i.
-Pullback is functorial, so each equality persists at the common stage; naturality
-of Over.pullbackComp transports it to the direct pullback along the transition.
-For an empty family use i and its identity. -/
+/-- A finite collection of equalities after limit pullback holds at one stage
+(Stacks, Tag 01ZM (3)). -/
 private theorem finite_morphism_equalities_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -243,29 +227,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Given object models at a single stage, the generating arrows and finitely many
 relations lift after one further base change. No object descent or étaleness descent
-is asserted here.
-
-Source: Stacks Project, Limits, Tag 01ZM (2), (3), closing colimit assertion;
-step 4 of lemma-acyclicity-pulled-back-injectives.
-(blueprint: lem-weil-pbc-finite-diagram-lift-of-models).
-
-Proof:
-1. Conjugate each generating arrow of F by the supplied object isomorphisms.
-   Apply 01ZM (2) to each resulting map between pullbacks of the specified models.
-   A common upper bound of the finitely many arrow stages and i exists by directedness.
-   Pull the maps to that bound, keeping their compatibility with the given limit maps.
-2. Lift this quiver map by Paths.lift. The objectwise isomorphisms form a natural
-   isomorphism on paths: prove the naturality equation by induction on a path, using
-   the generator equations in the successor case and identities for the empty path.
-3. The two composites of each relation agree after pullback, by naturality and
-   cancellation of the comparison isomorphisms. Apply 01ZM (3) to these two maps.
-   A common upper bound for the finitely many relation stages makes every relation
-   hold simultaneously. Pull back the functor and comparisons to that stage.
-4. At each change of stage the objects are the canonical pullbacks of V a, using
-   pullback transitivity to identify iterated pullbacks with these specified objects.
-   Transport the arrows through these identifications; functoriality and naturality
-   preserve all equations. For an empty vertex, arrow, or relation type, choose i
-   or the already chosen stage: the respective conditions are vacuous. -/
+is asserted here. (Stacks, Tag 01ZM (2), (3).) -/
 theorem finite_diagram_lift_of_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

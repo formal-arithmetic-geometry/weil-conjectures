@@ -16,8 +16,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 
 /-! # Multiplication in one Koszul coordinate
 
-Source: Stacks Project, Tags 062C and 09IR.
-(blueprint: lem-pc-koszul-coordinate-mul-triangle).
+## References
+
+* Stacks Project, Tags 062C and 09IR.
 -/
 
 @[expose] public section
@@ -43,24 +44,7 @@ private theorem triangle_transport
     (by simp [Category.assoc, ← Functor.map_comp])
 
 /-- Replacing one Koszul generator by a product gives a distinguished triangle.
-Source: Stacks Project, More on Algebra, Tag 062C (lemma-koszul-mult), and
-Derived Categories of Schemes, Tag 09IR (lemma-orthogonal-koszul-complex).
-(blueprint: lem-pc-koszul-coordinate-mul-triangle).
-
-Proof: Let `P` be the extended Koszul complex on the coordinates other than `i`.
-For each scalar `c`, the coordinate-cone isomorphism identifies the sheafified
-Koszul complex with the cone of the sheafified endomorphism `c • id_P`.
-Functoriality and the scalar composition law identify the composite of the
-endomorphisms for `a` and `b` with the endomorphism for `a * b`.
-Mathlib's `mappingConeCompTriangleh_distinguished` gives the distinguished
-triangle of these three cones in the homotopy category of sheaf complexes.
-The triangulated functor `DerivedCategory.Qh` preserves this triangle.
-Compose the localized coordinate-cone isomorphisms with `quotientCompQhIso`
-and transport the triangle to the exact three objects in the statement.
-All maps and commutativity equations are constructed in this proof. No
-regularity, nonvanishing, or quasi-coherence hypothesis is needed. For `r = 0`
-there is no coordinate `i`; zero scalars and the zero ring are included.
--/
+(Stacks, More on Algebra, Tag 062C.) -/
 theorem koszul_coordinate_mul_triangle
     (A : Type u) [CommRing A] (r : ℕ) (g : Fin r → A)
     [HasDerivedCategory.{w}

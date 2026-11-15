@@ -14,8 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite affine sections generating on a compact open
 
-Source: Stacks Project, Properties, Lemma 01PF, finite-numerator step.
-(blueprint: lem-weil-pbc-module-finite-type-affine-generators).
+## References
+
+* [Stacks, Tag 01PF](https://stacks.math.columbia.edu/tag/01PF)
 -/
 
 @[expose] public section
@@ -42,26 +43,7 @@ private theorem exists_affine_generatingSections
   exact V.2.opensRange_fromSpec ▸ ⟨Q.generators⟩
 
 /-- Finitely many sections on an affine open generate a quasi-coherent module on a
-compact open where it is of finite type.
-
-Source: Stacks Project, Properties, Lemma 01PF (label lemma-extend), final paragraph,
-and Lemma 01PB (label lemma-finite-type-module).
-https://stacks.math.columbia.edu/tag/01PF
-(blueprint: lem-weil-pbc-module-finite-type-affine-generators).
-
-Proof: Identify H on V with the associated sheaf of M = H(V) using the affine
-counit isomorphism. Refine a finite-type generating cover on K by principal opens
-D(f) inside K. The affine criterion identifies their modules of sections with
-finitely generated localizations M_f. Compactness gives finitely many such opens.
-For each of their finite generating families, write the generators as m/f^a and
-collect the finitely many numerators m in M. Enumerate them by Fin n and map the
-standard basis of the free module to these sections. On each chosen D(f), f is a
-unit, so the numerators generate whenever the fractions do. The restriction of
-this free-module map is therefore locally surjective on K, hence epimorphic.
-Transport the map to the slice site Over V; the free-module comparison preserves
-its standard basis. No submodule or monomorphism is asserted here. If K is empty,
-use n = 0; every sheaf on the empty open is zero, so the restricted map is epi.
-For K = V, finite generation gives the usual finite free surjection. -/
+compact open where it is of finite type (Stacks, Tag 01PF). -/
 theorem exists_finiteType_affine_generators
     (X : Scheme.{u}) (V : X.affineOpens) (K : X.Opens)
     (hK : IsCompact (K : Set X)) (hKV : K ≤ V.1)

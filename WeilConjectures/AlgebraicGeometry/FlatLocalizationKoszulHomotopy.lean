@@ -11,8 +11,9 @@ set_option linter.privateModule false
 
 /-! # Signed contraction of the sheaf Koszul complex
 
-Source: Stacks Project, Tags 0626, 0663, 0913 and 099H
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0626, 0663, 0913 and 099H
 -/
 
 @[expose] public section
