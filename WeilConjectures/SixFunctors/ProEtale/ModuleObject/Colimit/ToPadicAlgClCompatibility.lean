@@ -233,9 +233,21 @@ noncomputable def boundedConstructibleLowerStarToPadicAlgClHom :
 bounded below, where `derivedPushHom` is invertible
 (`ProEtale.CondensedRing.isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl`). -/
 instance isIso_boundedConstructibleLowerStarToPadicAlgClHom :
-    IsIso (boundedConstructibleLowerStarToPadicAlgClHom ℓ E g) := by
-  unfold boundedConstructibleLowerStarToPadicAlgClHom
-  exact (((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso (asIso _)).isIso_hom
+    IsIso (boundedConstructibleLowerStarToPadicAlgClHom ℓ E g) :=
+  (((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility ℓ E g) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      asIso (Functor.whiskerLeft _
+        (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left)) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ g).symm ≪≫
+      (Functor.associator _ _ _).symm)).isIso_hom
 
 /-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and a proper
 morphism `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the comparison
