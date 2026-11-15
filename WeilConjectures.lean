@@ -7057,6 +7057,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantExtension
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantSheafOfTypes
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurveDualTateModule
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurveDualTateModuleMatrix
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurvePairing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
@@ -17034,6 +17035,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.ConstantExtension
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightDual
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightExterior
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights
@@ -26009,6 +26011,7 @@ public import WeilConjectures.WeilSheaf.ConstantTwistCondensed
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.CurryIsoCriterion
 public import WeilConjectures.WeilSheaf.Curve
+public import WeilConjectures.WeilSheaf.CurveCohomologyWeights
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.CurvePullback
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
