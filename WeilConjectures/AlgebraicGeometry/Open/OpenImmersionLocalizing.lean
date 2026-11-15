@@ -286,15 +286,8 @@ theorem openImmersionLowerShriek_localizing
   intro I
   have closure_sums (T : Scheme.{u})
       (hT : IsLocalizingSubcategory (localizingClosureProEtale Λ T)) :
-      (localizingClosureProEtale Λ T).IsClosedUnderColimitsOfShape (Discrete I) := by
-    have : (localizingClosureProEtale Λ T).IsClosedUnderIsomorphisms := hT.2.1
-    have : (localizingClosureProEtale Λ T).IsClosedUnderColimitsOfShape
-        (Discrete (ULift.{u + 2} I)) := by
-      apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-      rintro _ ⟨D, hD⟩
-      exact hT.2.2 D inferInstance (fun i ↦ hD (Discrete.mk i))
-    exact ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-      (Discrete.equivalence Equiv.ulift)
+      (localizingClosureProEtale Λ T).IsClosedUnderColimitsOfShape (Discrete I) :=
+    hT.isClosedUnderColimitsOfShape_discrete I
   have := closure_sums U hU
   have := closure_sums X hX
   have := (localizingClosure_exists Λ U GU).1

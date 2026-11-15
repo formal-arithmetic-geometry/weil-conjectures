@@ -242,13 +242,10 @@ theorem localizingClosure_exists
     exact derivedCoproductCocone A I K
   · exact triangleCoproducts
   · let P := localizingClosure S
-    let (I : Type (u + 2)) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
+    let (I : Type (u + 1)) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
       apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
       rintro _ ⟨F, hF⟩
-      exact hloc.2.2 F inferInstance (fun i ↦ hF ⟨i⟩)
-    let (I : Type (u + 1)) : P.IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-        (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))
+      exact hloc.prop_colimit F inferInstance (fun i ↦ hF ⟨i⟩)
     let : HasCoproducts.{u + 1} P.FullSubcategory := fun I ↦
       hasColimitsOfShape_of_closedUnderColimits (Discrete I) P
     let : IsIdempotentComplete P.FullSubcategory :=

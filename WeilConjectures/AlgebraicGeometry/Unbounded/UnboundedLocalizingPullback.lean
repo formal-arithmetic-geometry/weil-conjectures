@@ -263,14 +263,8 @@ private theorem pullback_of_constructible
     ((localizingClosureProEtale Λ Y).ι ⋙ F) hm'
   have hrsmall (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I) R := by
     let : (localizingClosureProEtale Λ Y).IsClosedUnderIsomorphisms := hs.2.1
-    let : (localizingClosureProEtale Λ Y).IsClosedUnderColimitsOfShape
-        (Discrete (ULift.{u + 2} I)) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
-        rintro _ ⟨D, hD⟩
-        exact hs.2.2 D inferInstance (fun i ↦ hD (Discrete.mk i)))
     let : (localizingClosureProEtale Λ Y).IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-        (Discrete.equivalence Equiv.ulift)
+      hs.isClosedUnderColimitsOfShape_discrete I
     have : PreservesColimitsOfShape (Discrete I) F :=
       (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).leftAdjoint_preservesColimits
         |>.preservesColimitsOfShape

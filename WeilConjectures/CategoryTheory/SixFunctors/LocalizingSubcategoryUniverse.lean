@@ -55,7 +55,7 @@ private theorem closed_coproducts_of_locallySmall
     {C : Type v} [Category.{w} C] [Preadditive C] [LocallySmall.{u} C]
     (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
     (hP : ∀ I : Type u, P.IsClosedUnderColimitsOfShape (Discrete I))
-    {I : Type v} (K : I → C) (t : Cofan K) (ht : IsColimit t)
+    {I : Type w₂} (K : I → C) (t : Cofan K) (ht : IsColimit t)
     (hK : ∀ i, P (K i)) : P t.pt := by
   classical
   have : Small.{u} {i // ¬ IsZero (K i)} :=
