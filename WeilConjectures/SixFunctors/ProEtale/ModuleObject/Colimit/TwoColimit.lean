@@ -97,9 +97,7 @@ the ordinary-category model of the 2-colimit that they describe.
   an `E_X`-linear direct summand of `ℚ̄_ℓ,X` (`ProEtale.faithful_derivedExtendScalarsToPadicAlgCl`).
 
 These proofs do not use the lemmas `ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj` and
-`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq` (which rest on the blueprint nodes
-`corollary-coefficient-heart-b--2` and `lemma-continuity-ext-out-constructible-complex--1` (1) of
-other subsections).
+`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq`.
 
 This is the input needed to transport base change theorems from finite to `ℚ̄_ℓ`-coefficients:
 by (Obj) every constructible `K` is `T^X_{E,Ω} K_E`, and the compatibility of the base change
