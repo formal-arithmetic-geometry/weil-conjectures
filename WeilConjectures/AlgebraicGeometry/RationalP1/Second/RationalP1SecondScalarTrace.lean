@@ -17,8 +17,6 @@ import Mathlib.Algebra.CharP.Invertible
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Scalar trace base change for the second projective projection
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -87,30 +85,7 @@ private theorem trace_square_of_generators
 
 /-- The scalar exchange is invertible and carries the normalized second trace to
 pullback of the normalized q trace. There is no arbitrary object K or tensor action
-in this assertion.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, trace base change
-(blueprint: lem-sfb-rational-p1-second-scalar-trace).
-
-Proof: Obtain the whole-system-normalized completed Chern adjuncts of q and p2
-from diagonalTrace_completedChern_lift. Realize and extend them by the explicit
-scalarQChern and scalarP2Chern composites. The scalar_chern_splittings lemma
-identifies each direct image with the biproduct of its twisted unit and Chern
-arrows. The scalar_chern_base_change lemma gives the two component equations
-for the specified exchange. An additive pullback preserves binary biproducts;
-its biproduct comparison and the two root/unit endpoint comparisons are
-invertible. Hence the commuting splitting square makes the exchange invertible.
-The trace vanishes on the twisted unit because a degree-zero sheaf shifted by
-two has no morphisms to a degree-zero sheaf. scalar_chern_degree proves its
-value on the Chern generator is one, using the strict twisted splitting and the
-actual realization and coefficient trace squares. Precompose the desired trace
-square with the invertible source splitting; its two components are therefore
-zero and the unit comparison. Cancel that splitting, then cancel the inverse
-singleUnitIso in scalarUnitPullIso to obtain the displayed normalized square.
-The closure coefficient uses the explicit bottom finite-field leg already
-provided by Family. No diagonal class or integration identity is used. -/
+in this assertion. -/
 theorem second_scalar_trace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

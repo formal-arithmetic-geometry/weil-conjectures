@@ -31,10 +31,9 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- **Monomorphisms of étale sheaves are detected on a covering family of geometric stalks.**
-Let `(s i : Spec Ω i ⟶ S)` be geometric points of `S` (the `Ω i` algebraically closed) whose
-images cover `S`. A morphism `φ : F ⟶ G` of abelian sheaves on the small étale site of `S` is a
-monomorphism if and only if every stalk map `φ_{s i} : F_{s i} ⟶ G_{s i}` is injective.
-(blueprint: `lem-weil-pbc-geometric-stalks-detect-mono`) -/
+Let `(s i: Spec Ω i ⟶ S)` be geometric points of `S` (the `Ω i` algebraically closed) whose
+images cover `S`. A morphism `φ: F ⟶ G` of abelian sheaves on the small étale site of `S` is a
+monomorphism if and only if every stalk map `φ_{s i}: F_{s i} ⟶ G_{s i}` is injective. -/
 theorem mono_iff_forall_injective_sheafFiber_map {S : Scheme.{u}} {ι : Type u}
     {Ω : ι → Type u} [∀ i, Field (Ω i)] [∀ i, IsAlgClosed (Ω i)]
     (s : ∀ i, Spec (.of (Ω i)) ⟶ S) (hs : ⋃ i, Set.range (s i) = Set.univ)

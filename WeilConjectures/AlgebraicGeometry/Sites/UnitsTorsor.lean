@@ -603,8 +603,7 @@ lemma Pic.torsorClass_mk (M : X.Modules) [M.IsInvertible] :
 generators is a bijection from the Picard group of `X` onto the set of isomorphism classes of
 `𝒪_Xˣ`-torsors on the Zariski site of `X`. Its inverse sends a torsor `T` to the invertible
 module `(T × 𝒪_X) / 𝒪_Xˣ` (`AlgebraicGeometry.Scheme.Modules.ofUnitsTorsor`), see
-`AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf_symm_mk`.
-(blueprint: `lemma-cohomology-multiplicative-group--3`, Zariski part) -/
+`AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf_symm_mk`. -/
 theorem Pic.bijective_torsorClass : Function.Bijective (Pic.torsorClass (X := X)) := by
   refine ⟨fun L L' h ↦ ?_, fun T ↦ ?_⟩
   · have := Pic.isInvertible L
@@ -638,8 +637,7 @@ lemma picEquivQuotientTorsorUnitsSheaf_symm_mk (T : Sheaf.Torsor X.unitsSheaf) :
   exact _root_.Quotient.sound (equiv_generatorsTorsor_ofUnitsTorsor (T := T))
 
 /-- Invertible modules up to isomorphism are in bijection with `𝒪_Xˣ`-torsors up to
-isomorphism; the bijection is `AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf`.
-(blueprint: `lemma-cohomology-multiplicative-group--3`, Zariski part) -/
+isomorphism; the bijection is `AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf`. -/
 theorem nonempty_pic_equiv_quotient_torsor_unitsSheaf (X : Scheme.{u}) :
     Nonempty (X.Pic ≃ _root_.Quotient (Sheaf.Torsor.setoid (G := X.unitsSheaf))) :=
   ⟨X.picEquivQuotientTorsorUnitsSheaf⟩

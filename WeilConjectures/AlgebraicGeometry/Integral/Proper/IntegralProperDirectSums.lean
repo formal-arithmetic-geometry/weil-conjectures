@@ -31,10 +31,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Integral proper direct image on localizing categories
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-compactness,
-sk-prop-int-compactness-direct-sums.md and its proof
-(blueprint: proposition-compactness-proper-direct-image--2).
-
 The assertion bundle only expands the three conclusions. The theorem specializes it
 at the actual ordinary unbounded module-object derived pushforward and the recorded
 finite constant-model constructible predicates. IndCons is `ObjectProperty.ind`;
@@ -58,9 +54,7 @@ categories. `H₁.ind` and `H₂.ind` are ambient small filtered-colimit closure
 The two `IsIso` statements use the canonical arrows of the truncation zigzag.
 For sums, a colimit cofan exists and remains a colimit after applying `F`; its
 legs are exactly `F.map` of the source injections. Uniqueness of coproducts makes
-this equivalent to invertibility of the canonical coproduct comparison.
-Source: blueprint main-20261015, sk-prop-int-compactness-direct-sums, clauses 1--3
-(blueprint: proposition-compactness-proper-direct-image--2). -/
+this equivalent to invertibility of the canonical coproduct comparison. -/
 def IntegralProperDirectImageAssertions
     {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
@@ -420,33 +414,7 @@ private theorem finiteWindowOfBounds
   · exact lowerWindowOfBounds S F c hupper htrunc _ (htrunc K hK q) q
 
 /-- Integral proper direct image has the heart bound `[0,2d+1]`, the canonical
-finite-window property, and preserves arbitrary sums on Dic and on Loc(Dbc).
-Source: blueprint main-20261015, sk-prop-int-compactness-direct-sums, all three clauses
-(blueprint: proposition-compactness-proper-direct-image--2).
-
-Proof:
-1. Integral proper cohomological bounds supply the two heart estimates,
-   constructible preservation and the bound b+2d+1 on bounded-above Dic objects.
-   Integral ind-constructible stability supplies upper truncation and sum closure
-   of Dic and its containment of Loc(Dbc). Compatibility with bounded-below right
-   derivation gives preservation of every lower cohomological bound.
-2. Apply the triangulated direct image to the upper truncation triangle at q.
-   Lower-bound preservation kills its last vertex in degrees q-1 and q, making
-   the first actual window arrow an isomorphism on H^q. For the lower truncation
-   at q-2d-1, the upper estimate bounds the discarded vertex by q-1. The homology
-   exact sequence makes the second actual window arrow an isomorphism on H^q.
-3. For coproducts only the lower truncation at q-2d-1 is needed. It preserves sums
-   by its reflection universal property: cohomology preserves sums, so its aisle
-   is sum closed. The resulting family has a common lower bound and the existing
-   qcqs coproduct-continuity theorem applies. Naturality gives a square of canonical
-   comparison maps; three sides are isomorphisms, hence so is the fourth.
-   Homology detects isomorphisms, giving the mapped colimit cofan.
-4. Intersect Loc(Dbc_X) with the inverse image of Loc(Dbc_Y). This is replete and
-   triangulated. For an existing coproduct in the larger object universe, its
-   nonzero support injects into the small endomorphism set of its vertex via the
-   orthogonal idempotents. Shrink that support and use the small-sum result to
-   prove sum closure. Proper preservation puts every Dbc_X generator in this
-   intersection; minimality of localizingClosure gives the last two assertions. -/
+finite-window property, and preserves arbitrary sums on Dic and on Loc(Dbc). -/
 theorem integralProperDirectSums
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

@@ -22,12 +22,7 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 /-- Compatibility with two section identifications, for arbitrary functors.
 In the application the functors are the two pullbacks and restriction to the diagonal.
 The proposition has just the displayed equation as its field. Passing the functors
-explicitly keeps their derived-category interfaces fixed during specialization.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, cancellation on the diagonal
-(blueprint: def-sfb-projective-pull-section-compatibility). -/
+explicitly keeps their derived-category interfaces fixed during specialization. -/
 structure PullSectionCompatibility
     {C D : Type*} [Category C] [Category D]
     (F₁ F₂ : C ⥤ D) (G : D ⥤ C)

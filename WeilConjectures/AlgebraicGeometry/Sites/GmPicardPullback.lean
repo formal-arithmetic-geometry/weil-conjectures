@@ -168,11 +168,11 @@ lemma classH1_etaleIsoTorsor_pullback (M : modulesPseudofunctor.obj (.mk (op Y))
     (etaleIsoTorsorPullback_vadd g M)
 
 /-- **Naturality of `Pic = H¹(-, 𝔾ₘ)` under pullback.** Under the identification
-`Pic = H¹(-, 𝔾ₘ)` of `AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup`
-(blueprint `lemma-cohomology-multiplicative-group--3`), the pullback map `H¹(Y, 𝔾ₘ) ⟶ H¹(X, 𝔾ₘ)`
-along any morphism of schemes `g : X ⟶ Y` is the pullback of line bundles along `g`. This is used
+`Pic = H¹(-, 𝔾ₘ)` of `AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup`, the pullback map
+`H¹(Y, 𝔾ₘ) ⟶ H¹(X, 𝔾ₘ)`
+along any morphism of schemes `g: X ⟶ Y` is the pullback of line bundles along `g`. This is used
 for the naturality of the Brauer group computations under restriction and extension of the
-algebraically closed ground field (blueprint `lemma-cohomology-multiplicative-group`). -/
+algebraically closed ground field. -/
 theorem gmCohomologyMap_toCohomologicalPicardGroup (L : Y.Pic) :
     gmCohomologyMap g 1 (Pic.toCohomologicalPicardGroup Y L) =
       Pic.toCohomologicalPicardGroup X (Pic.map g L) := by

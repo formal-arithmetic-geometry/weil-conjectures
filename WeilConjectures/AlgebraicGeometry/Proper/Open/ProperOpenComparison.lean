@@ -13,10 +13,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # The comparison for a proper morphism fixing an open
-
-Source: blueprint, sec-smooth-purity/sk-def-sf-operations,
-proposition-construction-independence-rf-shriek--7 (blueprint:
-proposition-construction-independence-rf-shriek--7).
 -/
 
 @[expose] public section
@@ -27,28 +23,14 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The section of the fibre product induced by `(j₁,id)`.
-Source: blueprint proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+/-- The section of the fibre product induced by `(j₁,id)`. -/
 noncomputable def properOpenSection {T₁ T₂ X : Scheme.{u}}
     (f : T₁ ⟶ T₂) (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (h : j₁ ≫ f = j₂) :
     X ⟶ pullback f j₂ :=
   pullback.lift j₁ (𝟙 X) (h.trans (Category.id_comp j₂).symm)
 
 /-- Geometry of the specified section: it is an open and closed immersion, and its
-square with `j₁` and the first projection is Cartesian.
-Source: blueprint proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7).
-
-Proof: The first projection is an open immersion by
-lem-weil-pbc-open-immersion-base-change. Its composite with the section is `j₁`,
-so the section is an open immersion (uniqueness of maps into an open subscheme).
-The second projection is proper by lem-weil-pbc-proper-base-change and the section
-composes with it to the identity by the pullback projection formula.
-The identity is a closed immersion, so `IsClosedImmersion.of_comp` makes the
-section a closed immersion and hence gives its closed image.
-Finally, if `j₁ t = b v`, then `b s t = b v`; since `b` is a monomorphism,
-`v = s t`. This gives the pullback universal property for the displayed square. -/
+square with `j₁` and the first projection is Cartesian. -/
 theorem properOpenSectionGeometry {T₁ T₂ X : Scheme.{u}}
     (f : T₁ ⟶ T₂) [IsProper f] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ ≫ f = j₂) :
@@ -77,9 +59,7 @@ theorem properOpenSectionGeometry {T₁ T₂ X : Scheme.{u}}
 /-- The specified restriction isomorphism `θ = c ∘ Rp_*(e) ∘ r`.
 Here `r` is the canonical derived exchange, `e` is extension-by-zero base change
 followed by the identity inverse-image identification, and `c` is the uniquely
-characterized component-restriction isomorphism of clopenSectionDirectImage.
-Source: blueprint proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+characterized component-restriction isomorphism of clopenSectionDirectImage. -/
 noncomputable def properOpenIdentification (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -110,9 +90,7 @@ noncomputable def properOpenIdentification (Λ : Type (u + 1)) [CommRing Λ] [Fi
     (pullback.snd f j₂)).mapIso e ≪≫ c
 
 /-- The comparison `α = ε ∘ j₂!(θ⁻¹)` in functional composition order:
-apply extension by zero to the inverse of the specified `θ`, then the descended counit.
-Source: blueprint proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+apply extension by zero to the inverse of the specified `θ`, then the descended counit. -/
 noncomputable def properOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -130,9 +108,7 @@ noncomputable def properOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite
 
 /-- The specified restriction isomorphism `θ = c ∘ Rp_*(e) ∘ r` of
 `properOpenIdentification`, for any commutative coefficient ring `Λ`; the finite-coefficient
-`properOpenIdentification` is its specialization (`properOpenIdentification_eq_ofCommRing`).
-Source: blueprint proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+`properOpenIdentification` is its specialization (`properOpenIdentification_eq_ofCommRing`). -/
 noncomputable def properOpenIdentificationOfCommRing (Λ : Type (u + 1)) [CommRing Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -165,9 +141,7 @@ noncomputable def properOpenIdentificationOfCommRing (Λ : Type (u + 1)) [CommRi
 /-- The comparison `α = ε ∘ j₂!(θ⁻¹)` in functional composition order:
 apply extension by zero to the inverse of the specified `θ`, then the descended counit.
 The coefficient ring `Λ` is any commutative ring; `properOpenComparison` is its
-finite-coefficient case (`properOpenComparison_eq_ofCommRing`).
-Source: blueprint proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+finite-coefficient case (`properOpenComparison_eq_ofCommRing`). -/
 noncomputable def properOpenComparisonOfCommRing (Λ : Type (u + 1)) [CommRing Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -183,8 +157,7 @@ noncomputable def properOpenComparisonOfCommRing (Λ : Type (u + 1)) [CommRing �
       ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K))
 
-/-- At a finite coefficient ring the finite-coefficient identification is the general one.
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+/-- At a finite coefficient ring the finite-coefficient identification is the general one. -/
 theorem properOpenIdentification_eq_ofCommRing (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -193,8 +166,7 @@ theorem properOpenIdentification_eq_ofCommRing (Λ : Type (u + 1)) [CommRing Λ]
     properOpenIdentification Λ f j₁ j₂ h K = properOpenIdentificationOfCommRing Λ f j₁ j₂ h K :=
   rfl
 
-/-- At a finite coefficient ring the finite-coefficient comparison is the general one.
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+/-- At a finite coefficient ring the finite-coefficient comparison is the general one. -/
 theorem properOpenComparison_eq_ofCommRing (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]

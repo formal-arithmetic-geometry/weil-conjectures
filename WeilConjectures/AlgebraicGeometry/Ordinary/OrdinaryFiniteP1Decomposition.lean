@@ -413,9 +413,6 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1Untwist
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerBaseChange
 
 /-! # The ordinary etale projective-line decomposition
-
-Source: main-20261015, thm-amb-p1-decomposition.md and its proof
-(blueprint: lemma-cohomology-projective-line-trace).
 -/
 
 @[expose] public noncomputable section
@@ -460,40 +457,7 @@ private theorem biprodMap_desc {C D : Type*} [Category C] [Category D]
 
 /-- The Kummer-normalized projective-line decomposition and its compatibility with
 every change of base, including non-Noetherian S'. The existential Chern morphisms
-are fixed by `ordinaryFiniteP1ChernSpec`, the actual scalar-extended Kummer boundary.
-Source: main-20261015, thm-amb-p1-decomposition.md and its proof
-(blueprint: lemma-cohomology-projective-line-trace).
-
-Proof:
-1. Use lem-asd-ordinary-finite-p1-adjunction for the twisted decomposition b_q.
-   Projective space is proper (lemma-nagata-projective-space-base-change-proper),
-   and its source is Noetherian by pqf-lem-locnoeth-lft and quasi-compactness.
-   Tensor b_q with A_S(-1)[-2], and apply lemma-cohomology-projective-line-trace.
-   The normalized twist pullback and evaluation of lem-asd-etale-finite-twist-pullback
-   identify the two summands with A_S and A_S(-1)[-2], and the target with Rq_*A_P.
-   Counit naturality and the adjunction triangle identities identify the components:
-   the first has identity adjoint, and the second has adjoint 1 tensor c followed by
-   evaluation. More explicitly, put L=A_S(1)[2] and L_P=A_P(1)[2]. The first
-   component before projection is 1_K tensor eta_L. Its adjoint is the identity by
-   epsilon_(q,q^-1 L) composed with q^-1(eta_L) = 1. The second component is
-   1_K tensor (Rq_*(c) composed with eta_A). Counit naturality and the same triangle
-   identity give epsilon_LP composed with q^-1(Rq_*(c) composed with eta_A) = c.
-   Tensoring by q^-1 K and evaluating is precisely the defining adjoint of h.
-   Thus this map is exactly (1,h). No coefficient flatness is assumed.
-2. For arbitrary g:S'->S, proper torsion-ring exchange is invertible by
-   lem-kun-proper-base-change-torsion-ring. The infinity divisor has ideal (s) on
-   its affine chart and unit ideal on the other; multiplication by s is injective
-   over any ring and after every base change. Its dual ideal is the specified O(1).
-   Hence lem-asd-ordinary-supported-kummer identifies the pulled-back class with
-   the class over S'. The mate formula in definition-derived-base-change-map identifies
-   the pulled-back closed-immersion unit with the new unit, so this also compares
-   the unsupported Chern classes: for the divisor inclusion i, exchange composed
-   with the pulled-back unit u_D equals u_D', since both have identity adjoint.
-   Combining this with the supported-class exchange equation gives c_1'=g'^-1 c_1.
-   Taking q' inverse-image adjoints then compares
-   both components of (1,h). This gives the displayed commuting square. Its upper
-   and exchange arrows are invertible, so (1,h') is invertible without requiring
-   S' to be Noetherian or applying the projection theorem over S'. -/
+are fixed by `ordinaryFiniteP1ChernSpec`, the actual scalar-extended Kummer boundary. -/
 theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :

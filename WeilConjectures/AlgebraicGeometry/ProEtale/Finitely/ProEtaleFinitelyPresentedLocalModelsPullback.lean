@@ -28,7 +28,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 
 /-! # Finitely presented local constant models on the pro-etale site
 
-Source: Stacks Project, Tags 09AJ and 093U.
+## References
+
+* Stacks Project, Tags 09AJ and 093U
 -/
 
 -- After pruning, this module only keeps private declarations.

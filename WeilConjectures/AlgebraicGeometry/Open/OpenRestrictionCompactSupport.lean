@@ -11,9 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 
 /-! # Compact support and restriction to an arbitrary open
 
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherences (i) and
-(iii). The graph comparisons specify the comparison even when the open is not quasi-compact.
-(blueprint: def-asd-open-restriction-comparisons)
+The graph comparisons specify the comparison even when the open is not quasi-compact.
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- The specified graph comparison of two compactifications, without a qc assumption.
-Source: the graph construction in `LowerShriekComposition.lean`.
-(blueprint: def-asd-open-restriction-comparisons) -/
+/-- The specified graph comparison of two compactifications, without a qc assumption. -/
 def openRestrictionGraphIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c d : Compactification f) :
     Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ Rf_!(d)[ModuleCat.{u + 1} Λ] :=
@@ -37,9 +33,7 @@ def openRestrictionGraphIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     Functor.leftUnitor _
 
 /-- Open extension commutes with compact support on a cartesian square. The comparison
-is constructed from graph comparison, proper/open interchange, and open composition.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
-(blueprint: def-asd-open-restriction-comparisons) -/
+is constructed from graph comparison, proper/open interchange, and open composition. -/
 def openRestrictionCompactSupportIso {X Y U V : Scheme.{u}}
     {f : X ⟶ Y} [HasCompactification f] {j : U ⟶ Y} [IsOpenImmersion j]
     {a : V ⟶ X} [IsOpenImmersion a] {p : V ⟶ U}
@@ -63,9 +57,7 @@ def openRestrictionCompactSupportIso {X Y U V : Scheme.{u}}
         mapDerivedCategoryOpenImmersionLowerShriekComp A a cf.i) _ ≪≫
     Functor.associator _ _ _
 
-/-- The right adjoint comparison obtained from the explicitly constructed support comparison.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (iii).
-(blueprint: def-asd-open-restriction-comparisons) -/
+/-- The right adjoint comparison obtained from the explicitly constructed support comparison. -/
 def openRestrictionExceptionalIso {X Y U V : Scheme.{u}}
     {f : X ⟶ Y} [HasCompactification f] {j : U ⟶ Y} [IsOpenImmersion j]
     {a : V ⟶ X} [IsOpenImmersion a] {p : V ⟶ U}

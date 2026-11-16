@@ -42,14 +42,14 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 /-!
 # Extension by zero on the small pro-etale site
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-`proposition-extension-zero-restriction-closed-subscheme`; Stacks Project, Tags 09AE, 03DI, 03DJ and
-03CY (blueprint: proposition-extension-zero-restriction-closed-subscheme).
-
 We use the recorded extension-by-zero functor with fixed module coefficients. Its
 termwise extension is Mathlib's `mapHomologicalComplex`. The scalar comparison is
 specified as the mate of the identity on restricted sections, so its normalization
 is fixed before invertibility is asserted.
+
+## References
+
+* Stacks Project, Tags 09AE, 03DI, 03DJ and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -63,27 +63,20 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The degreewise extension of the recorded `j_!`: terms are `j_!(K.X n)` and
-its differentials are `j_!(K.d n m)`, including for unbounded complexes.
-Source: blueprint lemma, last proof paragraph; Stacks Project, Tags 03DJ and 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+its differentials are `j_!(K.d n m)`, including for unbounded complexes. -/
 abbrev openExtensionCochain (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)
 
-/-- Scalar restriction on fixed-module-valued sheaves is additive, section by section.
-Source: Stacks Project, Tag 03CY, and `def-pc-sheaf-restrict-scalars`
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+/-- Scalar restriction on fixed-module-valued sheaves is additive, section by section. -/
 instance openExtensionScalarRestriction_additive {A B : Type (u + 1)}
     [CommRing A] [CommRing B] (φ : A →+* B) (X : Scheme.{u}) :
     (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)).Additive :=
   sheafCompose_additive.{u, u + 1, u + 1, u + 1, u + 2, u + 2}
     (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)
 
-/-- The identity-on-sections scalar square, transposed along the two recorded
-extension/restriction adjunctions. This is the canonical map
-`j_!^A Res_U ⟶ Res_X j_!^B`; invertibility supplies the comparison in the node's direction.
-Source: blueprint lemma, scalar-restriction proof paragraph; Stacks Project, Tag 03CY
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+/-- The canonical map `j_!^A Res_U ⟶ Res_X j_!^B`, the mate of the identity-on-sections
+scalar square along the two extension/restriction adjunctions. -/
 def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars.{u + 1} φ) ⋙

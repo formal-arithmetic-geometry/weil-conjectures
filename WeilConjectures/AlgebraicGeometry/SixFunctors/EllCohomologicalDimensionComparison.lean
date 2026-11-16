@@ -16,9 +16,6 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Pro-étale and étale primary cohomological dimensions agree
-
-Source: current blueprint, `sec-six-functors-basics/sk-def-cd/`
-`sk-def-cd-etale-comparison.md`, clauses 1--4 (blueprint: lemma-cohomological-dimension-base-field).
 -/
 
 @[expose] public section
@@ -112,26 +109,7 @@ private theorem etale_torsion_of_ell {X : Scheme.{u}} (ℓ : ℕ) (hℓ : ℓ.Pr
   have : L.Additive := (Scheme.pointSmallEtale t).sheafFiber_additive
   exact additive_torsion ℓ hℓ F L hF
 
-/-- Torsion transport, absolute and relative comparison, and the all-torsion bound.
-Source: current blueprint, `sk-def-cd-etale-comparison.md`, clauses 1--4
-(blueprint: lemma-cohomological-dimension-base-field).
-Proof:
-1. The generic Grothendieck-abelian comparison adjunction has exact fully
-faithful left adjoint, directly for abelian groups.
-Exactness preserves `F[ℓ^r]`, and the adjunction preserves their sheaf colimit.
-It therefore sends the canonical annihilator cocone to the corresponding cocone.
-Full faithfulness reflects invertibility of the canonical colimit map. An isomorphism
-of coefficient sheaves preserves this condition, proving clause 1.
-2. Apply the existing `cohomologicalDimension_eq_etaleCohomologicalDimension`.
-It already identifies the sets of nonvanishing degrees by cohomology comparison.
-3. Apply the existing `relativeCohomologicalDimension_eq_etale`, which gives the
-relative supremum using direct-image comparison without qcqs hypotheses on X or Y.
-4. Apply a geometric stalk to the colimiting annihilator cocone. Every germ comes
-from one kernel, so additivity shows it is killed by a positive power of ℓ.
-The existing geometric-stalk characterization gives local torsion. The assumed
-torsion cohomological-dimension bound then vanishes in degrees greater than c.
-Every nonvanishing degree in the étale supremum is at most c, so `sSup_le` proves
-the desired bound, including the empty supremum. -/
+/-- Torsion transport, absolute and relative comparison, and the all-torsion bound. -/
 theorem ellCohomologicalDimension_etale_comparison (ℓ : ℕ) (hℓ : ℓ.Prime)
     (S : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [QuasiCompact g] [QuasiSeparated g] (c : ℕ) :

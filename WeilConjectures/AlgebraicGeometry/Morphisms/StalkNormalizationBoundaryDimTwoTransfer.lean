@@ -17,6 +17,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
+
+/-!
+# Boundary dimension estimate transferred along finite normalizations
+
+## References
+
+* Stacks Project, Tags 0337, 00LK, 033C and 00H8
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -120,11 +129,7 @@ private theorem local_dimension_le_of_goingDown
     (IsLocalRing.maximalIdeal T) (IsLocalRing.le_maximalIdeal_of_isPrime p.asIdeal)
   exact ⟨⟨q, hq⟩, PrimeSpectrum.ext_iff.mpr hlo.over.symm⟩
 
-/-- Finite normalizations transfer the boundary dimension estimate to source stalks.
-Source: Stacks Project, Tags 0337, 00LK, 033C and 00H8.
-(blueprint: new-stalk-normalization-boundary-dimension-two-transfer)
-Proof: on normal affine components, going down for the finite integral normalization
-lifts a strict prime chain of length two from the target stalk to the source stalk. -/
+/-- Finite normalizations transfer the boundary dimension estimate to source stalks. -/
 theorem stalk_normalization_boundary_dimension_two_transfer {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

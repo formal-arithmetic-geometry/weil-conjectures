@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionL
 
 /-! # Canonical projection-formula models
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6.
-(blueprint: lem-weil-pbc-ringed-projection-local-model).
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6
+* Stacks Project, Tags 04J0, 08FI, 0FN5, 07A4 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +25,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
-/-- The uncurried projection map is the adjunct of tensor comparison and counit.
-Source: Stacks 0B56 (blueprint: lem-weil-pbc-ringed-projection-local-model). -/
+/-- The uncurried projection map is the adjunct of tensor comparison and counit. -/
 private theorem projection_eq
     {A B : Type*} [Category A] [Category B]
     (L : A ⥤ B) (R : B ⥤ A) (adj : L ⊣ R)
@@ -35,9 +36,7 @@ private theorem projection_eq
         U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (L.obj P)))) := by
   simp [derivedProjectionFormulaMate, Adjunction.rightAdjointProjectionMap_app_app]
 
-/-- The counit mate equation and a tensor square imply projection compatibility.
-Source: Stacks 0B56; the categorical calculation in RingedExchangeTensorCoherence.
-(blueprint: lem-weil-pbc-ringed-projection-local-model). -/
+/-- The counit mate equation and a tensor square imply projection compatibility. -/
 private theorem projection_square
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D} {S : D ⥤ C}
@@ -97,25 +96,7 @@ private theorem projection_square
   · simpa using (hb E).symm
   · simp
 
-/-- A normalized global projection package admits compatible localization at any object.
-Source: Stacks Project, Tags 04J0, 08FI, 0FN5, 07A4 and 0B56.
-(blueprint: lem-weil-pbc-ringed-projection-local-model).
-
-Proof: localize the site morphism at V and its base change, with the original
-coefficient map evaluated on underlying objects. The ordinary direct-image square
-is the identity on sections; its inverse adjunction mate is the pullback square.
-Restriction is exact and preserves K-injectives. Derived uniqueness therefore
-descends the direct-image square with the displayed representative normalization.
-Its inverse mate gives the pullback square and the counit equation. On all four
-sites localize the flat-term K-flat total tensor. The ordinary tensor comparison
-and restriction send pure tensors to the same pure tensors. Their totalizations
-respect bidegrees and the signed second-variable shifts. Descent gives all tensor
-and shift comparisons. Apply tensor coherence to the ordinary localization square,
-then transpose the counit-tensor composite under the two adjunctions. The counit
-mate equation and tensor coherence identify its two paths; after the specified
-source and target isomorphisms this is precisely ProjectionCompatible. All
-comparisons are determined on representatives, so the construction applies to
-any global package satisfying its normalization fields. -/
+/-- A normalized global projection package admits compatible localization at any object. -/
 theorem localModel_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

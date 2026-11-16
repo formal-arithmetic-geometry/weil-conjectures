@@ -17,8 +17,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Finite-level exceptional inverse image in canonical coefficient coordinates
 
-Source: Weil blueprint, order 1489, sk-def-sf-operations (vi)
-(blueprint: theorem-f-shriek-finite-coefficients).
 The functor below is literally Rν_* followed by the etale right adjoint and then ν^*.
 It is defined on the ordinary derived category; its meaningful domain is D⁺.
 No ambient pro-etale adjunction is used or assumed.
@@ -29,6 +27,11 @@ No ambient pro-etale adjunction is used or assumed.
   fixed-scalar and intrinsic coordinates.
 - `sfFiniteExceptionalOpenComparison`: the canonical comparison-site paste of the
   etale exceptional mate, using the specified site-square and restriction comparisons.
+
+## References
+
+* Stacks Tag 099R and localization
+* Stacks Tags 099R and 07A5
 -/
 
 @[expose] public section
@@ -38,9 +41,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 open Scheme
 
-/-- The ordinary derived support candidate attached to a specified compactification.
-Source: blueprint, sk-def-sf-operations (vi)
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The ordinary derived support candidate attached to a specified compactification. -/
 noncomputable abbrev sfFixedCompactSupport (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory ⋙
@@ -49,9 +50,7 @@ noncomputable abbrev sfFixedCompactSupport (A : Type u) [CommRing A]
 /-- Finite-level exceptional inverse image: the existing etale adjoint, transported
 through the exact comparison pullback and the ordinary right derived comparison image.
 The compactification instance is the one specified by c. Thus no choice of an arbitrary
-pro-etale right adjoint enters the definition.
-Source: blueprint, sk-def-sf-operations (vi)
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+pro-etale right adjoint enters the definition. -/
 noncomputable def sfFiniteExceptionalFixed (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ⥤
@@ -62,17 +61,14 @@ noncomputable def sfFiniteExceptionalFixed (A : Type u) [CommRing A] [Finite A]
       (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory
 
 /-- The same finite-level functor in the recorded intrinsic constant-ring category.
-The realization equivalences are the specified ones, rather than arbitrary equivalences.
-Source: blueprint, sk-def-sf-operations (vi)
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+The realization equivalences are the specified ones, rather than arbitrary equivalences. -/
 noncomputable def sfFiniteExceptional (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A :=
   (sfIntrinsicDerivedEquivalence Y A).inverse ⋙ sfFiniteExceptionalFixed A c ⋙
     (sfIntrinsicDerivedEquivalence X A).functor
 
-/-- Comparison and an open localization commute as restriction functors.
-Source: Stacks Tag 099R and localization (blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- Comparison and an open localization commute as restriction functors. -/
 noncomputable def sfComparisonOpenRestrictionIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     comparisonLowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
@@ -92,8 +88,7 @@ noncomputable def sfComparisonOpenRestrictionIso (A : Type u) [CommRing A]
 /-- The derived comparison direct image commutes with restriction to an open.
 This is derived from the actual identity of localization restrictions. All first
 functors preserve K-injectives: comparison direct image is right adjoint to exact ν^*,
-and open restriction is right adjoint to exact extension by zero.
-Source: Stacks Tags 099R and 07A5 (blueprint: theorem-f-shriek-finite-coefficients). -/
+and open restriction is right adjoint to exact extension by zero. -/
 noncomputable def sfDerivedComparisonOpenRestrictionIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (comparisonLowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).rightDerivedFunctor ⋙
@@ -115,10 +110,7 @@ noncomputable def sfDerivedComparisonOpenRestrictionIso (A : Type u) [CommRing A
       (upperStar
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).rightDerivedFunctorIsoMapDerivedCategory _
 
-/-- Naturality of the identity components of the comparison-site pullback square.
-Source: Stacks Tag 099R (blueprint: theorem-f-shriek-finite-coefficients).
-Proof: both functors form the same scheme fibre product and the same induced map;
-the identity naturality equation follows by the fibre-product projection equations. -/
+/-- Naturality of the identity components of the comparison-site pullback square. -/
 theorem sfToProEtBaseChange_naturality {U X : Scheme.{u}} (j : U ⟶ X)
     {V W : X.Etale} (h : V ⟶ W) :
     (toProEt X ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).map h ≫ 𝟙 _ =
@@ -128,15 +120,13 @@ theorem sfToProEtBaseChange_naturality {U X : Scheme.{u}} (j : U ⟶ X)
   rfl
 
 /-- The canonical site square identifying inclusion followed by base change with base
-change followed by inclusion. Source: Stacks Tag 099R
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+change followed by inclusion. -/
 noncomputable def sfToProEtBaseChangeIso {U X : Scheme.{u}} (j : U ⟶ X) :
     toProEt X ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ j ≅
       MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ j ⋙ toProEt U :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (sfToProEtBaseChange_naturality j)
 
-/-- The site-square identification on direct image. Source: Stacks Tag 099R
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The site-square identification on direct image. -/
 noncomputable def sfComparisonDirectImageCompIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
@@ -163,8 +153,7 @@ noncomputable def sfComparisonDirectImageCompIso (A : Type u) [CommRing A]
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X.smallEtaleTopology
       U.smallEtaleTopology (ProEt.topology U)).symm
 
-/-- The canonical inverse-image comparison is the conjugate of the actual site square.
-Source: Stacks Tag 099R (blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The canonical inverse-image comparison is the conjugate of the actual site square. -/
 noncomputable def sfComparisonPullbackIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
@@ -178,8 +167,7 @@ noncomputable def sfComparisonPullbackIso (A : Type u) [CommRing A]
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j))).symm
     (sfComparisonDirectImageCompIso A j).symm
 
-/-- The exact comparison square on ordinary derived categories.
-Source: Stacks Tag 099R (blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The exact comparison square on ordinary derived categories. -/
 noncomputable def sfDerivedComparisonPullbackIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory ⋙

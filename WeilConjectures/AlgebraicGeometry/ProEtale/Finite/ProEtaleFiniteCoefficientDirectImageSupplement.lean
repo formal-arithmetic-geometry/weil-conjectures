@@ -17,10 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfDirectImageCTFNonproper
 
 /-!
 # Pro-étale direct image for finite-Tor constructible complexes
-
-Source: Weil conjectures blueprint,
-`literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/`
-`cor-sf-direct-image-ctf-proetale.md` (blueprint: proposition-six-operations-dctf--2).
 -/
 
 @[expose] public section
@@ -36,31 +32,6 @@ namespace AlgebraicGeometry.ProEtale
 /-- For a separated finite-type map of finite-type schemes over the fixed algebraic closure,
 bounded constructibility and the specified Tor interval are preserved by the canonical
 finite-coefficient pro-étale derived direct image, with the source-dimension shift.
-
-Source: Weil conjectures blueprint, `sec-six-functors/sk-cor-sf-direct-image-ctf`,
-node order 2195 (blueprint: proposition-six-operations-dctf--2).
-
-Proof plan:
-1. Apply `theorem-comparison-constructible-sheaves` to intrinsic bounded constructibility,
-obtaining a bounded constructible étale complex `K'` and `K ≅ ν_X^* K'`. In particular
-`K'` is bounded below; the derived comparison, not only the sheaf comparison, is used.
-2. The coefficient prime is invertible over `D.k` since `l ≠ D.p`. Apply clause (ii)
-of `lem-sf-comparison-tor-amplitude` to reflect exactly the interval `[a,b]` to `K'`.
-3. Apply `proposition-six-operations-dctf--2` to `f` and `K'`. Its hypotheses are finite
-type over `D.k`, separated finite type of `f`, the source dimension bound, and the
-constructibility and interval already checked. Thus `L = Rf_{Et,*} K'` is bounded
-constructible of Tor amplitude `[a,b+2d]`.
-4. Finite type makes `f` quasi-compact. Its relative diagonal is a closed immersion
-by separatedness (`def-weil-proper-morphism`), hence proper by clause (c) of
-`lem-weil-pbc-proper-fp-permanence`, hence finite type and quasi-compact.
-Thus `f` is also quasi-separated (`def-weil-quasi-separated-morphism`).
-5. Apply `theorem-comparison-direct-images--1` to the bounded-below `K'` and the
-quasi-compact quasi-separated `f`. Combine its isomorphism with `Rf_*` of the origin
-isomorphism to obtain `Rf_{Proet,*} K ≅ ν_Y^* L`.
-6. Clause (i) of `lem-sf-comparison-tor-amplitude` makes `ν_Y^* L` intrinsically
-bounded constructible with interval `[a,b+2d]`. Transfer both properties through the
-last isomorphism: cohomology sheaves, also after tensoring with each degree-zero
-module sheaf, are isomorphic. This treats the original arbitrary intrinsic `K`.
 -/
 theorem finiteCoefficientDirectImage_boundedConstructible_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})

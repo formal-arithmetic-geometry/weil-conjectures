@@ -11,9 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The ordinary native derived exchange map
-
-Source: blueprint sk-def-sfb-base-change-morphism, unit--square--counit construction.
-(blueprint: def-sf-native-derived-exchange-map).
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +22,7 @@ namespace AlgebraicGeometry
 namespace ProEtale
 
 /-- The exact pullback comparison on ordinary native derived categories, obtained by
-localizing the actual composition comparison. Source: native Adic/Module.lean.
-(blueprint: def-sf-native-derived-exchange-map). -/
+localizing the actual composition comparison. -/
 def adicDerivedPullSquare (l : ℕ) [Fact l.Prime]
     {Z' Z T' T : Scheme.{u}} {v : Z' ⟶ Z} {p' : Z' ⟶ T'}
     {p : Z ⟶ T} {g : T' ⟶ T} (sq : CommSq v p' p g) :
@@ -37,9 +33,7 @@ def adicDerivedPullSquare (l : ℕ) [Fact l.Prime]
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The unit--square--counit mate on ordinary native geometric derived categories.
-No boundedness, properness, or Weil structure is needed to construct it.
-Source: blueprint sk-def-sfb-base-change-morphism.
-(blueprint: def-sf-native-derived-exchange-map). -/
+No boundedness, properness, or Weil structure is needed to construct it. -/
 def adicDerivedBaseChange (l : ℕ) [Fact l.Prime]
     {Z' Z T' T : Scheme.{u}} {v : Z' ⟶ Z} {p' : Z' ⟶ T'}
     {p : Z ⟶ T} {g : T' ⟶ T} (sq : CommSq v p' p g) :

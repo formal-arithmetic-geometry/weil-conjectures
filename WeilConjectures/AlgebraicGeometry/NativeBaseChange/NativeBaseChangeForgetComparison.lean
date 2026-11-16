@@ -15,10 +15,6 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 
 /-!
 # Forgetting the canonical native derived base-change mate
-
-Source: blueprint sec-six-functors-basics/sk-thm-sfb-proper-base-change,
-thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure".
-(blueprint: lem-sf-native-base-change-forget-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +29,7 @@ namespace AlgebraicGeometry.NativeBaseChange
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
-/-- Exact forgetting on ordinary unbounded derived categories.
-Source: native WeilSheaf/Category.lean.
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- Exact forgetting on ordinary unbounded derived categories. -/
 abbrev forget (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory
 
@@ -46,9 +40,7 @@ variable {Z' Z T' T : Scheme.{u}}
   [v.IsOver (Spec (CommRingCat.of k₀))] [p'.IsOver (Spec (CommRingCat.of k₀))]
   [p.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- The localized native composition comparison around a commutative square.
-Source: native WeilSheaf/UpperStarComp.lean and UpperStarId.lean.
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- The localized native composition comparison around a commutative square. -/
 def pullSquare (sq : CommSq v p' p g) :
     (ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory ⋙
         (ProEtaleWeilSheaf.upperStar k₀ l p').mapDerivedCategory ≅
@@ -364,9 +356,7 @@ private theorem abelianPullSquare_cube_nat (sq : CommSq v p' p g) :
     (comp_hom_forget_nat k₀ l v p)
     (geometric_pullSquare_nat k₀ l sq hw)
 
-/-- The canonical native mate on the entire ordinary derived category.
-Source: blueprint sk-def-sfb-base-change-morphism, unit--square--counit formula.
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- The canonical native mate on the entire ordinary derived category. -/
 def mate (sq : CommSq v p' p g) :
     (ProEtaleWeilSheaf.lowerStar k₀ l p).rightDerivedFunctor ⋙
         (ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory ⟶
@@ -379,9 +369,7 @@ def mate (sq : CommSq v p' p g) :
       (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p'))
     (TwoSquare.mk _ _ _ _ (pullSquare k₀ l sq).hom))
 
-/-- The exact pullback forgetting comparison, localized from the actual carrier square.
-Source: native WeilSheaf/Category.lean.
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- The exact pullback forgetting comparison, localized from the actual carrier square. -/
 def pullForget {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] :
@@ -399,9 +387,7 @@ private theorem pullForget_eq {X Y : Scheme.{u}}
   unfold pullForget abelianPullForget
   rfl
 
-/-- The direct-image forgetting comparison, normalized on the common K-injective model.
-Source: native RightDerivedFunctor/IsoAlgebra.lean.
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- The direct-image forgetting comparison, normalized on the common K-injective model. -/
 def pushForget {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] :
@@ -460,9 +446,7 @@ private theorem pushForget_mate {X Y : Scheme.{u}}
   erw [Category.id_comp] at hc
   exact hc
 
-/-- The source comparison assembled from the canonical pullback and pushforward comparisons.
-Source: thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure".
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- The source comparison assembled from the canonical pullback and pushforward comparisons. -/
 def sourceComparison (p : Z ⟶ T) (g : T' ⟶ T)
     [p.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))] :
     ((ProEtaleWeilSheaf.lowerStar k₀ l p).rightDerivedFunctor ⋙
@@ -475,9 +459,7 @@ def sourceComparison (p : Z ⟶ T) (g : T' ⟶ T)
     Functor.isoWhiskerRight (pushForget k₀ l p) _ ≪≫
     Functor.associator _ _ _
 
-/-- The target comparison assembled from the canonical pullback and pushforward comparisons.
-Source: thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure".
-(blueprint: lem-sf-native-base-change-forget-comparison). -/
+/-- The target comparison assembled from the canonical pullback and pushforward comparisons. -/
 def targetComparison (v : Z' ⟶ Z) (p' : Z' ⟶ T')
     [v.IsOver (Spec (CommRingCat.of k₀))] [p'.IsOver (Spec (CommRingCat.of k₀))] :
     ((ProEtaleWeilSheaf.upperStar k₀ l v).mapDerivedCategory ⋙
@@ -613,27 +595,7 @@ private theorem pullForget_cube (sq : CommSq v p' p g) :
     forget] using
     localized_pull_cube k₀ l sq
 
-/-- Forgetting the native mate gives the specified geometric mate, with canonical comparisons.
-Source: thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure";
-parent lem-sf-native-weil-proper-natural-base-change, steps 1--4.
-(blueprint: lem-sf-native-base-change-forget-comparison).
-
-Proof: for each vertical morphism, the native abelian counit forgets to the geometric
-counit. Adjunction transposition identifies the abelian direct-image forgetting map with
-the mate of the inverse pullback forgetting map. The single-adjunction theorem
-`Adjunction.derived_exact_forget_mate` therefore identifies the corresponding derived
-mate with the specified, unit-normalized `pushForget`.
-
-For the pullback square, the transported composition isomorphisms forget to the geometric
-composition isomorphisms: the underlying calculation is the identity composition law in
-an abstract iso-algebra. Equality transport handles congruence of the two composite
-morphisms, and the geometricFiberMap composition comparisons paste to the geometric square
-comparison. Thus the six abelian pullback faces form a commuting cube. The proved exact
-localization cube theorem gives the corresponding derived cube. Apply the proved
-`exchangeMate_cube` to the four specified derived adjunctions and replace its two vertical
-mates by `pushForget`. Expand `sourceComparison` and `targetComparison` and cancel the
-invertible target comparison. This gives precisely the asserted equality on K. No
-properness, Cartesian hypothesis, constructibility or boundedness is used. -/
+/-- Forgetting the native mate gives the specified geometric mate, with canonical comparisons. -/
 theorem forget_mate (sq : CommSq v p' p g)
     (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
     (forget k₀ l T').map ((mate k₀ l sq).app K) =
