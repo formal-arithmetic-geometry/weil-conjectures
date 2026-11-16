@@ -1019,8 +1019,8 @@ theorem hasUniformConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
 /-! ### Compactness -/
 
 /-- The `Ext` bound for ind-constructible sheaves, for the coefficient ring `E` and a separated
-finite-type `k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext bound for
-ind-constructible sheaves, from Ext continuity and the uniform Ext bound
+finite-type `k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext
+bound for ind-constructible sheaves, from Ext continuity and the uniform Ext bound
 (`HasIndConstructibleExtBound.of_continuity`). -/
 theorem hasIndConstructibleExtBound_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
@@ -1052,8 +1052,8 @@ theorem isCompactObj_singleFunctor_continuousMapRingObj (E : Type) [NormedField 
     (hasIndConstructibleExtBound_continuousMapRingObj ℓ E aX hk) M hM hL
 
 /-- The `Ext` bound for ind-constructible sheaves, for the coefficient ring `𝒪_E` and a separated
-finite-type `k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext bound for
-ind-constructible sheaves, from Ext continuity and the uniform Ext bound
+finite-type `k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext
+bound for ind-constructible sheaves, from Ext continuity and the uniform Ext bound
 (`HasIndConstructibleExtBound.of_continuity`). -/
 theorem hasIndConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
@@ -1065,8 +1065,9 @@ theorem hasIndConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E]
     (hasUniformConstructibleExtBound_padicIntegersRingObj ℓ E aX hk)
 
 /-- Compactness of constructible sheaves with integral coefficients: for the coefficient ring
-`𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably
-closed, a constructible sheaf placed in degree `0` is compact in `Loc(Dᵇc(X)⟦𝒪_E⟧)`. -/
+`𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k`
+finite or separably closed, a constructible sheaf placed in degree `0` is compact in
+`Loc(Dᵇc(X)⟦𝒪_E⟧)`. -/
 theorem isCompactObj_singleFunctor_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
@@ -1086,8 +1087,8 @@ theorem isCompactObj_singleFunctor_padicIntegersRingObj (E : Type) [Field E]
     (hasIndConstructibleExtBound_padicIntegersRingObj ℓ E aX hk) M hM hL
 
 /-- The `Ext` bound for ind-constructible sheaves, for the coefficient ring `ℚ̄_ℓ` and a separated
-finite-type `k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext bound for
-ind-constructible sheaves, from Ext continuity and the uniform Ext bound
+finite-type `k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext
+bound for ind-constructible sheaves, from Ext continuity and the uniform Ext bound
 (`HasIndConstructibleExtBound.of_continuity`). -/
 theorem hasIndConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
