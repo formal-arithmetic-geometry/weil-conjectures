@@ -14,9 +14,8 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 The external product `M ⊠ N = Lp_X^* M ⊗ Lp_Y^* N` (`ProEtale.CondensedRing.externalProduct`) and
 the Verdier dual `𝔻_X K = RHom(K, Ra^! ℚ̄_ℓ)` (`ProEtale.CondensedRing.verdierDual`) of the trace
 formula are defined with coefficients `ℚ̄_ℓ`. The passage from integral to `ℚ̄_ℓ`-coefficients
-(blueprint `lemma-vanishing-local-term-zero-stalk`, through the integral models of
-`lemma-integral-models-rational-frobenius-correspondences`) needs them for the ring of integers
-`𝒪_E` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` as well. As for the six functors on bounded
+(through the integral models of the rational Frobenius correspondences) needs them for the ring
+of integers `𝒪_E` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` as well. As for the six functors on bounded
 constructible complexes, they are defined for the coefficient ring
 `𝒪̲_E = Profinite.padicIntegersRingObj ℓ E`, in the namespace
 `ProEtale.CondensedRing.PadicIntegersRingObj`:
@@ -50,7 +49,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- The *external product* `M ⊠ N = Lp_X^* M ⊗ Lp_Y^* N` of bounded constructible
-`𝒪_E`-complexes (blueprint `prose-11-08`), with the projections `p_X = prod.fst` and
+`𝒪_E`-complexes, with the projections `p_X = prod.fst` and
 `p_Y = prod.snd`. -/
 noncomputable def boundedConstructibleExternalProduct
     (M : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
@@ -86,3 +85,45 @@ noncomputable def boundedConstructibleVerdierDual
 end Dualizing
 
 end AlgebraicGeometry.ProEtale.CondensedRing.PadicIntegersRingObj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {X S : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
+  [QuasiCompact S.hom] [IsSeparated S.hom] (a : X ⟶ S)
+
+/-- Blueprint `definition-relative-dualizing-complex`: the *relative dualizing complex*
+`ω_{X/S} = Ra^! ℚ̄_ℓ` of `a : X ⟶ S`, with coefficients in `ℚ̲̄_ℓ`. For `S = Spec k` this is
+`AlgebraicGeometry.ProEtale.CondensedRing.dualizingComplex`. -/
+noncomputable def boundedConstructibleDualizingComplex :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)
+
+/-- The *relative Verdier dual* `𝔻_{X/S} K = RHom(K, ω_{X/S})` of `a : X ⟶ S`, with coefficients
+in `ℚ̲̄_ℓ`. -/
+noncomputable def boundedConstructibleVerdierDual (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  (ihom K).obj (boundedConstructibleDualizingComplex ℓ a)
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.ContinuousMapRingObj
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X S : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
+  [QuasiCompact S.hom] [IsSeparated S.hom] (a : X ⟶ S)
+
+/-- Blueprint `definition-relative-dualizing-complex`: the *relative dualizing complex*
+`ω_{X/S} = Ra^! E` of `a : X ⟶ S`, with coefficients in `E̲`. -/
+noncomputable def boundedConstructibleDualizingComplex :
+    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
+  (boundedConstructibleUpperShriek ℓ E a).obj (𝟙_ _)
+
+end AlgebraicGeometry.ProEtale.CondensedRing.ContinuousMapRingObj
