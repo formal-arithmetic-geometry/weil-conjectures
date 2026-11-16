@@ -147,8 +147,7 @@ section BaseChange
 
 variable {K' : Type u} [Field K'] [Algebra K K']
 
-/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
-is étale (the geometric fibre of `A[n]`).
+/-- **Multiplication by `n` prime to the characteristic is étale** (the geometric fibre of `A[n]`).
 
 Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
 prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base change
@@ -221,8 +220,7 @@ theorem dim_pullback [IsAlgClosed K'] (p : ℕ) [CharP K p] :
   have h₂ := Nat.pow_right_injective hℓ.two_le h₁
   omega
 
-/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
-is étale (the geometric points of `A[n]`).
+/-- **Multiplication by `n` prime to the characteristic is étale** (the geometric points of `A[n]`).
 
 Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
 prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
