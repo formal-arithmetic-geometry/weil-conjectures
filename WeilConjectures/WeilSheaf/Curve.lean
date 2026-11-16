@@ -142,7 +142,9 @@ theorem subsingleton_compactlySupportedCohomology_of_notMem [IsAffine U]
   rw [Finset.mem_insert, Finset.mem_singleton] at hi
   obtain rfl | hi' : i = 0 ∨ i < 0 ∨ 2 < i := by omega
   · exact subsingleton_compactlySupportedCohomology_zero F hF
-  · exact subsingleton_compactlySupportedCohomology_of_isAffine F hi'
+  · rcases hi' with hi' | hi'
+    · exact subsingleton_compactlySupportedCohomology_of_neg F hi'
+    · exact subsingleton_compactlySupportedCohomology_of_isLisse hF hi'
 
 open PowerSeries in
 /-- Blueprint `theorem-trace-formula-euler-product--4`: Euler product of the `L`-function of a lisse

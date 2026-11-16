@@ -220,6 +220,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse
       (ringKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (CommRingCat.of k₀)) 1) F hw,
     WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF (Or.inl le_rfl),
     hw.isPureOfWeightOver_compactlySupportedCohomology_two hF,
-    fun r hr ↦ WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine F hr⟩
+    fun r hr ↦ WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF
+      (hr.imp_left le_of_lt)⟩
 
 end AlgebraicGeometry

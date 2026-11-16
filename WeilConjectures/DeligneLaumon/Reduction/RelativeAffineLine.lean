@@ -350,10 +350,9 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
       refine hr ?_
       have : Subsingleton (E'.compactlySupportedCohomology r).carrier := by
         rcases lt_trichotomy r 0 with hr0 | rfl | hr0
-        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E' (Or.inl hr0)
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_neg E' hr0
         · exact h0
-        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
-            (Or.inr (by omega))
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse hE' (by omega)
       rw [Subsingleton.elim ((E'.compactlySupportedCohomology r).frobeniusEnd ^ m) 0, map_zero,
         smul_zero]
   -- the factors `P₁, P₂` of the fibre `L`-function have disjoint root radii, hence are real
@@ -373,8 +372,8 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
       rw [Nat.cast_ofNat]
       exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr2
     | n + 3 =>
-      have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
-        (r := ((n + 3 : ℕ) : ℤ)) (Or.inr (by omega))
+      have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse hE'
+        (r := ((n + 3 : ℕ) : ℤ)) (by omega)
       exact FrobeniusModule.isReal_of_subsingleton ι _
   -- back to the stalk at `y`
   have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) y.2

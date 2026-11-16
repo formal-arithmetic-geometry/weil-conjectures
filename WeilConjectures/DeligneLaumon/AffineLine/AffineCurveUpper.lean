@@ -315,8 +315,9 @@ theorem IsPunctuallyPureOfWeight.isPureOfWeightOver_compactlySupportedCohomology
 
 /-- **Vanishing outside degrees one and two on an affine curve.** Let `C` be a smooth
 geometrically connected affine curve over `k₀` and `𝓕` a lisse Weil sheaf on `C`. Then
-`H_c^r(C, 𝓕) = 0` for `r ∉ {1, 2}`. (blueprint: `lemma-degree-zero-top-cohomology--4`,
-`lemma-cohomological-range-curve--1`) -/
+`H_c^r(C, 𝓕) = 0` for `r ∉ {1, 2}`: in negative degrees because `Rf_!` of a sheaf is concentrated
+in nonnegative degrees, in degree zero because `C` is affine, and above degree two by Poincaré
+duality for the lisse sheaf `𝓕`. (blueprint: `lemma-degree-zero-top-cohomology--4`) -/
 theorem subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -327,9 +328,9 @@ theorem subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine
   have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   rcases hr with hr | hr
   · rcases hr.lt_or_eq with hr | rfl
-    · exact subsingleton_compactlySupportedCohomology_of_isAffine F (Or.inl hr)
+    · exact subsingleton_compactlySupportedCohomology_of_neg F hr
     · exact subsingleton_compactlySupportedCohomology_zero F hF
-  · exact subsingleton_compactlySupportedCohomology_of_isAffine F (Or.inr hr)
+  · exact subsingleton_compactlySupportedCohomology_of_isLisse hF hr
 
 namespace LisseOnDenseOpen
 

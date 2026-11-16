@@ -61,12 +61,13 @@ formalized; when it is not available, `γ_f` is a non-canonical isomorphism
 `γ_f` is an isomorphism (`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothOrientation`). The
 trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace`) is the blueprint composite of `Rf_! γ_f`
-and the counit of `Rf_! ⊣ Rf^!`. The purity isomorphism
-`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` is *defined* from it, as the inverse
-of its adjoint `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` for `Rf_! ⊣ Rf^!`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`, equal to `γ_f`), which is an
+and the counit of `Rf_! ⊣ Rf^!`. The purity map `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`) is `γ_f` itself; it is an
 isomorphism (`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap`, smooth purity
-proper). For an open immersion `j` in relative dimension zero the purity isomorphism is the
+proper), and it is the adjoint of the trace map for `Rf_! ⊣ Rf^!`
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap_eq_homEquiv_smoothTrace`). The purity
+isomorphism `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` is the inverse of the
+purity map. For an open immersion `j` in relative dimension zero the purity isomorphism is the
 canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_zero_of_isOpenImmersion`).
 
@@ -389,6 +390,21 @@ instance isIso_smoothOrientation [SmoothOfRelativeDimension d f.left] :
   rw [smoothOrientation, dite_eq_left (isSmoothImageFactor_smoothImageFactor f d)]
   infer_instance
 
+/-- The **purity map** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative
+dimension `d`: the orientation `γ_f` (`smoothOrientation`). It is the adjoint of the trace map
+`Tr_f` for `Rf_! ⊣ Rf^!` (`smoothPurityMap_eq_homEquiv_smoothTrace`). -/
+noncomputable def smoothPurityMap :
+    boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
+      (boundedConstructibleUpperShriek ℓ f).obj
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
+  smoothOrientation ℓ f d
+
+omit [SmoothOfRelativeDimension d f.left] in
+/-- The purity map is the orientation `γ_f`. -/
+theorem smoothPurityMap_eq_smoothOrientation :
+    smoothPurityMap ℓ f d = smoothOrientation ℓ f d :=
+  rfl
+
 /-- Blueprint `definition-trace-map` (`definition-trace-map`): the **trace map**
 `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`
 (SGA 4, Exposé XVIII, Théorème 2.9): the composite
@@ -412,25 +428,17 @@ theorem smoothTrace_eq :
   unfold smoothTrace
   rfl
 
-/-- The **purity map** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`: the adjoint of the trace `Tr_f` for
-`Rf_! ⊣ Rf^!`. -/
-noncomputable def smoothPurityMap :
-    boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
-      (boundedConstructibleUpperShriek ℓ f).obj
-        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
-
 omit [SmoothOfRelativeDimension d f.left] in
-/-- The purity map is the orientation: the adjunct of `Tr_f ∘ Rf_!(γ_f)` is `γ_f`.
-Source: definition-trace-map (the purity map is recovered from the smooth trace). -/
-theorem smoothPurityMap_eq_smoothOrientation :
-    smoothPurityMap ℓ f d = smoothOrientation ℓ f d := by
-  change (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d) = _
-  rw [smoothTrace_eq]
-  exact (congrArg ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _)
+/-- The purity map is the adjoint of the trace map under `Rf_! ⊣ Rf^!`: the adjunct of
+`Tr_f ∘ Rf_!(γ_f)` is `γ_f`. -/
+theorem smoothPurityMap_eq_homEquiv_smoothTrace :
+    smoothPurityMap ℓ f d =
+      (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d) := by
+  rw [smoothPurityMap_eq_smoothOrientation, smoothTrace_eq]
+  exact ((congrArg ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _)
     ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_counit _ _
       (smoothOrientation ℓ f d))).symm.trans
-    (((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _)
+    (((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _)).symm
 
 -- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
 -- instance-implicit section variables, even under `include`. The elaborated signature has it

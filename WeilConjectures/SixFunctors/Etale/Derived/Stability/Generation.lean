@@ -364,6 +364,22 @@ instance (X : Scheme.{u}) : (ctfGenerators Λ X).Nonempty :=
     IsFiniteLocallyConstantSheaf.of_isZero (isZero_zero _),
     ObjectProperty.flat_of_isZero (isZero_zero _), ⟨Iso.refl _⟩⟩
 
+/-- The direct image along a closed immersion `g : Z ⟶ X` of finite-type `k`-schemes preserves
+the constructible finite-Tor subcategories: `Rg_* = g_*` is exact, so it preserves bounded
+constructibility, and the Tor amplitude of `Rg_* K` is bounded by that of `K` plus twice the
+dimension of `Z`, by the projection formula with the residue field of `Λ`. -/
+theorem constructibleFiniteTor_rightDerivedLowerStar_of_isClosedImmersion {k : Type u} [Field k]
+    {Z X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    (g : Z ⟶ X) [IsClosedImmersion g]
+    {K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z K) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((R((g)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  obtain ⟨hbc, a, b, hta⟩ := hK
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (g ≫ aX)
+  exact ⟨boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion g hbc, a, b + 2 * (d : ℤ),
+    torAmplitudeIn_rightDerivedLowerStar_of_finite Λ (g ≫ aX) aX g rfl d hd a b hta⟩
+
 /-- Blueprint `lemma-flat-models-generators--3`: Constructible dévissage, the thick-subcategory
 generation.
 
@@ -376,8 +392,8 @@ The generators lie in `Dctf(X, Λ)`: a lisse flat sheaf has Tor amplitude `[0, 0
 (`torAmplitudeIn_singleFunctor_obj_of_flat`), and the extension by zero `j_!` and `Rg_*`
 preserve `Dctf`
 (`boundedConstructible_and_torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`,
-`constructibleFiniteTor_rightDerivedLowerStar`); and `Dctf(X, Λ)` is thick. Conversely every
-object of `Dctf(X, Λ)` lies in the envelope by
+`constructibleFiniteTor_rightDerivedLowerStar_of_isClosedImmersion`); and `Dctf(X, Λ)` is thick.
+Conversely every object of `Dctf(X, Λ)` lies in the envelope by
 `ctf_generated_by_rightDerivedLowerStar_openImmersionLowerShriek`. Constant coefficients
 `L = Λ_U` do not suffice, see there. -/
 theorem constructibleFiniteTor_eq_triangEnvelope_ctfGenerators {k : Type u} [Field k]
@@ -403,7 +419,8 @@ theorem constructibleFiniteTor_eq_triangEnvelope_ctfGenerators {k : Type u} [Fie
       Λ j (boundedConstructible_singleFunctor_obj L 0)
       ((_root_.DerivedCategory.homologyConcentratedIn_iff 0 0 _).2 ⟨inferInstance, inferInstance⟩)
       (torAmplitudeIn_singleFunctor_obj_of_flat Λ L hL)
-    exact constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl ⟨h.1, 0, 0, h.2.2⟩
+    exact constructibleFiniteTor_rightDerivedLowerStar_of_isClosedImmersion Λ aX g
+      ⟨h.1, 0, 0, h.2.2⟩
 
 
 end Generation

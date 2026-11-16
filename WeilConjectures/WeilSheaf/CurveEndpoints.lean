@@ -297,21 +297,30 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [I
   [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
-omit [IsDominant j] [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] in
 /-- For a dense open immersion `j : U₀ ↪ C₀` with `C₀` a smooth geometrically connected affine
 curve and `F` lisse on `U₀`, the compactly supported cohomology `H_c^r(C, j_*F)` vanishes for
 every `r` outside `{0, 1, 2}`: in negative degrees because `j_*F` is a sheaf, and in degrees
-above two by the cohomological range of the affine curve `C₀`
-(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`).
+above two because the boundary triangle identifies `H_c^r(C, j_*F)` with `H_c^r(U, F)` for
+`r ≥ 2` (`AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le`),
+which vanishes for `r > 2` by Poincaré duality for the lisse sheaf `F` on the smooth curve `U₀`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse`).
 (blueprint: `lemma-extreme-degrees-affine-curve`) -/
-theorem subsingleton_compactlySupportedCohomology_directImage (_hF : F.IsLisse) {r : ℤ}
+theorem subsingleton_compactlySupportedCohomology_directImage (hF : F.IsLisse) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier := by
   rcases hr with hr | hr
   · exact WeilSheaf.subsingleton_globalSections_of_isZero
       (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg _ hr)
-  · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine _ (Or.inr hr)
+  · have := isSeparated_over_of_isOpenImmersion (k₀ := k₀) j
+    have := locallyOfFiniteType_over_of_isOpenImmersion (k₀ := k₀) j
+    have := quasiCompact_over_of_isOpenImmersion (k₀ := k₀) j
+    have : SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [over_eq_comp j]
+      exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) _)
+    obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le j F hr.le
+    have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse hF hr
+    exact e.toLinearEquiv.toEquiv.symm.subsingleton
 
 /-- In the situation of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`
 the degree-zero compactly supported cohomology `H_c^0(C, j_*F)` vanishes, because a nonzero
