@@ -20,8 +20,7 @@ open neighbourhood `W` in `X` with a smooth morphism `f : W ⟶ 𝔸¹_k` such t
 is isomorphic to that of `j_! ℚ̄_ℓ`. Then the defect `C_{W, Z ∩ W}(L|_W)` vanishes
 (`ProEtale.CondensedRing.isZero_specializationDefect_upperStar_of_smooth`): by the smooth exchange
 for the open immersion `W ⟶ X`, the defect does not see the difference between `j_! ℚ̄_ℓ` and
-`ℚ̄_ℓ`, and `C_{W, Z ∩ W}(ℚ̄_ℓ) = 0` by the smooth exchange along `f` and the thick origin
-(blueprint `lemma-vanishing-generic-points-principal-divisor`).
+`ℚ̄_ℓ`, and `C_{W, Z ∩ W}(ℚ̄_ℓ) = 0` by the smooth exchange along `f` and the thick origin.
 
 Consequently, for an extension by zero `j_! N` which is constant on `W ∖ Z`, the restricted
 specialization `Le^* Ψ_X(j_! N)` vanishes near `ζ`
@@ -47,7 +46,7 @@ coordinate back to a uniformizer of `𝒪_{X,ζ}`
 * Non-constant lisse `M` (finite étale trivialisation, normalisation and proper exchange).
 
 The vanishing of the thick origin,
-`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`, is a sorried node of another
+`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`, is proved in another
 subsection.
 
 -/

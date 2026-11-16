@@ -29,93 +29,47 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- The nonzero summands of an existing coproduct inject into its endomorphisms. -/
-private theorem coproduct_small_support
-    {D : Type v} [Category.{w} D] [Preadditive D] [LocallySmall.{u} D]
-    {I : Type w₂} (K : I → D) (t : Cofan K) (ht : IsColimit t) :
-    Small.{u} {i // ¬ IsZero (K i)} := by
-  classical
-  let p (i : I) : t.pt ⟶ K i := ht.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
-  have hp (i j : I) : t.inj j ≫ p i = Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
-    ht.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
-  apply small_of_injective (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ t.inj i.val)
-  intro i j hij
-  apply Subtype.ext
-  by_contra hne
-  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
-  have hi : t.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
-  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
-  have hid : 𝟙 (K i.val) = 0 := by
-    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
-  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
+/-- The direct-sum clause of `IsLocalizingSubcategoryOfSize.{u}`, as closure under the colimits of
+shape `Discrete I` for `I : Type u`. -/
+theorem IsLocalizingSubcategoryOfSize.isClosedUnderColimitsOfShape_discrete
+    {C : Type v} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {P : ObjectProperty C} (hP : IsLocalizingSubcategoryOfSize.{u} P) (I : Type u) :
+    P.IsClosedUnderColimitsOfShape (Discrete I) := by
+  have := hP.2.1
+  apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
+  rintro _ ⟨E, hE⟩
+  exact hP.2.2 E inferInstance (fun i ↦ hE ⟨i⟩)
 
--- An existing large coproduct has small nonzero support, by the library's
--- idempotent-endomorphism argument. Dropping its zero summands preserves its vertex.
-private theorem closed_coproducts_of_locallySmall
-    {C : Type v} [Category.{w} C] [Preadditive C] [LocallySmall.{u} C]
-    (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
-    (hP : ∀ I : Type u, P.IsClosedUnderColimitsOfShape (Discrete I))
-    {I : Type v} (K : I → C) (t : Cofan K) (ht : IsColimit t)
-    (hK : ∀ i, P (K i)) : P t.pt := by
-  classical
-  have : Small.{u} {i // ¬ IsZero (K i)} :=
-    coproduct_small_support K t ht
-  let J := {i // ¬ IsZero (K i)}
-  have : P.IsClosedUnderColimitsOfShape (Discrete (Shrink.{u} J)) := hP _
-  have : P.IsClosedUnderColimitsOfShape (Discrete J) :=
-    ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-      (Discrete.equivalence (equivShrink J)).symm
-  let r : Cofan (fun i : J ↦ K i.val) := Cofan.mk t.pt (fun i ↦ t.inj i.val)
-  have hr : IsColimit r := by
-    refine Cofan.IsColimit.mk r (fun s ↦ ht.desc (Cofan.mk s.pt
-      (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-    · intro s i
-      obtain ⟨i, hi⟩ := i
-      change t.ι.app (Discrete.mk i) ≫ _ = _
-      rw [ht.fac]
-      simp only [Cofan.mk_ι_app, dite_eq_left hi]
-    · intro s m hm
-      apply ht.hom_ext
-      intro ⟨i⟩
-      rw [ht.fac]
-      by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-          using hm ⟨i, hi⟩
-      · exact (not_not.mp hi).eq_of_src _ _
-  exact P.prop_of_isColimit (J := Discrete J) hr (fun i ↦ hK i.as.val)
+/-- Closure under the existing coproducts of a universe in which the category is locally small is
+closure under all existing coproducts, whatever their index: the nonzero summands of an existing
+coproduct form a small family (`ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small`).
+The triangulated and replete conditions are unchanged. -/
+theorem isLocalizingSubcategoryOfSize_of_locallySmall
+    {C : Type v} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [LocallySmall.{u} C] (P : ObjectProperty C)
+    (hP : IsLocalizingSubcategoryOfSize.{u} P) : IsLocalizingSubcategoryOfSize.{w₂} P := by
+  have : P.IsClosedUnderIsomorphisms := hP.2.1
+  refine ⟨hP.1, hP.2.1, ?_⟩
+  intro I E hE hobj
+  -- the `LocallySmall` instance is passed explicitly: the index of the shared lemma is read off it
+  have : P.IsClosedUnderColimitsOfShape (Discrete I) :=
+    @ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small C _ _ ‹LocallySmall.{u} C› P _
+      hP.isClosedUnderColimitsOfShape_discrete I
+  let := hE
+  exact P.prop_colimit E (fun j ↦ hobj j.as)
 
-/-- Closure under existing coproducts in a universe in which the category is locally
-small implies closure under all existing coproducts in the object universe.
-
-Source: the idempotent-endomorphism proof of
-`lem-exc-coproduct-preservation-universe-extension` and `definition-localizing-subcategory`
-(blueprint: lem-sfb-localizing-subcategory-universe).
-
-Proof: for an existing coproduct, the projection onto a nonzero summand followed by its
-inclusion is a nonzero idempotent of the vertex. Distinct summands give distinct
-idempotents, so their set is small in the hom universe. Discard the zero summands:
-the same vertex is a coproduct of the nonzero summands, since arrows from the omitted
-summands are unique. Reindex these summands by a small equivalent type. The assumed
-closure puts this vertex in the subcategory. This includes empty and entirely zero
-families. The triangulated and replete conditions are unchanged. -/
+/-- Closure under the existing coproducts of a universe in which the category is locally small is
+closure under all existing coproducts in the universe of the morphisms:
+`IsLocalizingSubcategory`. -/
 theorem isLocalizingSubcategory_of_locallySmall
     {C : Type v} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     [LocallySmall.{u} C] (P : ObjectProperty C)
-    (hP : IsLocalizingSubcategoryOfSize.{u} P) : IsLocalizingSubcategory P := by
-  have : P.IsClosedUnderIsomorphisms := hP.2.1
-  refine ⟨hP.1, hP.2.1, ?_⟩
-  intro I E hE hobj
-  have : HasColimit E := hE
-  have hsmall (I : Type u) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
-    apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-    rintro _ ⟨E', hE'⟩
-    exact hP.2.2 E' inferInstance (fun i ↦ hE' ⟨i⟩)
-  let t : Cofan (fun i : I ↦ E.obj ⟨i⟩) :=
-    (Cocone.precompose (Discrete.natIsoFunctor (F := E)).inv).obj (colimit.cocone E)
-  have ht : IsColimit t :=
-    (IsColimit.precomposeHomEquiv (Discrete.natIsoFunctor (F := E)).symm _).2
-      (colimit.isColimit E)
-  exact closed_coproducts_of_locallySmall P hsmall _ t ht hobj
+    (hP : IsLocalizingSubcategoryOfSize.{u} P) : IsLocalizingSubcategory P :=
+  have h : IsLocalizingSubcategoryOfSize.{w} P :=
+    @isLocalizingSubcategoryOfSize_of_locallySmall C _ _ _ _ _ _ ‹LocallySmall.{u} C› P hP
+  ⟨h.1, h.2.1, fun F hF hobj ↦ h.2.2 F hF hobj⟩
 
 end CategoryTheory

@@ -52,9 +52,10 @@ formula of `Rq_*` is the one of `Rq_!` through this identification
 The identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K` is the commutation of the derived tensor
 product with shifts followed by the braiding; the statement that `ε` is a counit does not depend
 on this choice, since a natural automorphism of the right adjoint changes the counit of an
-adjunction into the counit of another one. Likewise, the sign of the trace
-(`AlgebraicGeometry.Etale.projectiveLineTrace` is `-t_q`) does not matter: negating unit and
-counit of an adjunction of additive functors gives an adjunction.
+adjunction into the counit of another one. Likewise, the sign of the trace does not matter
+(`AlgebraicGeometry.Etale.projectiveLineTrace` is the trace `t_q` of the notes, the negative of the
+auxiliary `AlgebraicGeometry.Etale.projectiveLineTraceAux`): negating unit and counit of an
+adjunction of additive functors gives an adjunction.
 
 The adjunction is obtained from the kernel adjunction of the diagonal class
 (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction_of_class`). The definitions of this
@@ -149,7 +150,7 @@ noncomputable def projectiveLineLowerShriekTrace :
         ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ 𝟙_ _ :=
   (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
       (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom.app _ ≫
-    projectiveLineTrace Λ S (isIso_projectiveLineDecompositionMap Λ S)
+    projectiveLineTrace Λ S
 
 set_option checkBinderAnnotations false in
 /-- A proof of a proposition `T` is the proof of `T` found by instance search. Rewriting with it
@@ -168,7 +169,7 @@ theorem rightDerivedLowerShriekIsoRightDerivedLowerStar_inv_app_projectiveLineLo
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).inv.app
         ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
       projectiveLineLowerShriekTrace Λ S =
-      (projectiveLineTrace Λ S (isIso_projectiveLineDecompositionMap Λ S) :
+      (projectiveLineTrace Λ S :
         (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
           ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ 𝟙_ _) := by
   rw [projectiveLineLowerShriekTrace,

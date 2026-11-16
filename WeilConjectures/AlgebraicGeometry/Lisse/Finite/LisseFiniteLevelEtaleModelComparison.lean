@@ -113,19 +113,9 @@ theorem lisse_finite_level_etale_model_comparison
       exact (L.obj G).property
     apply modelClassical_of_iso Z Λ (e ≪≫ (modelHomologyIso Z Λ q).app K)
     exact hG
-  have hunit (L : DerivedCategory.Plus
-      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-      IsIso ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Z).derivedPlus.unit.app L) := by
-    have := ProEtale.isIso_compactSupportComparisonUnit Z Λ
-    have h := NatIso.isIso_app_of_isIso
-      (ProEtale.derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) Z).unit L
-    change IsIso ((ProEtale.comparisonAdjunction
-      (ModuleCat.{u + 1} Λ) Z).derivedAdjunctionPlus.unit.app L) at h
-    rwa [(ProEtale.comparisonAdjunction
-      (ModuleCat.{u + 1} Λ) Z).derivedAdjunctionPlus_eq_derivedPlus] at h
   let adj := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Z).derivedPlus
   have : IsIso (adj.counit.app Kplus) :=
-    (ProEtale.classicalDerivedEquivalence Z Λ hunit).2.1 Kplus hclass
+    (ProEtale.classicalDerivedEquivalence Z Λ).2.1 Kplus hclass
   let R := (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} Λ) Z).rightDerivedFunctorPlus
   let D := (R.obj Kplus).obj
   let e : F.mapDerivedCategory.obj D ≅ K :=

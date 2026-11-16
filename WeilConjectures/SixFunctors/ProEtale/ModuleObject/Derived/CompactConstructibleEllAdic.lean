@@ -603,8 +603,7 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.AlgClRestrictionIndConstruc
 
 For the `ℓ`-adic coefficient rings `Λ = E, 𝒪_E, ℚ̄_ℓ` on a separated finite-type scheme `X` over a
 field `k` which is finite or separably closed, every constructible sheaf placed in degree `0` is
-compact in `Loc(Dᵇc(X, Λ))` (blueprints `theorem-compactness-rational-coefficients`,
-`proposition-compactness-proper-direct-image`):
+compact in `Loc(Dᵇc(X, Λ))`:
 
 * `AlgebraicGeometry.ProEtale.CondensedRing.isCompactObj_singleFunctor_continuousMapRingObj`,
 * `AlgebraicGeometry.ProEtale.CondensedRing.isCompactObj_singleFunctor_padicIntegersRingObj`,
@@ -619,20 +618,15 @@ window, left completeness of the pro-étale derived category by repleteness,
 
 For each of the three coefficient rings, proved here:
 
-* `isIndConstructibleHeart_*` (blueprints `proposition-ind-constructible-sheaves` (2), for `𝒪_E`
-  `lemma-structure-integral-constructible-complexes` and
-  `proposition-compactness-proper-direct-image--1` (1)): the ind-constructible sheaves are closed
+* `isIndConstructibleHeart_*`: the ind-constructible sheaves are closed
   under kernels, cokernels, extensions and direct sums;
-* `hasConstructibleExtContinuity_*` (blueprints `lemma-continuity-ext-out-constructible-complex--1`
-(1), for
-  `𝒪_E` `sk-lem-int-ext` (1)): morphisms `C ⟶ B[n]` out of a constructible sheaf `C` into a
+* `hasConstructibleExtContinuity_*`: morphisms `C ⟶ B[n]` out of a constructible sheaf `C` into a
   filtered colimit `B = colim Bᵢ` of sheaves factor through some `Bᵢ[n]`;
 
-and still sorried:
+and:
 
-* `hasUniformConstructibleExtBound_*` (blueprints `lemma-uniform-ext-bound`, for `𝒪_E`
-  `sk-lem-int-ext` (2)): `Ext^q(C, N) = 0` for `C` constructible, `q > d_C` and all constructible
-  `N`; this uses that `k` is finite or separably closed.
+* `hasUniformConstructibleExtBound_*`: `Ext^q(C, N) = 0` for `C` constructible, `q > d_C` and all
+  constructible `N`; this uses that `k` is finite or separably closed.
 
 The proofs are in the modules `...Derived.IndConstructibleHeart` (the heart, from the
 continuity), `...Derived.HomFilteredColimitEllAdic` (the continuity) and
