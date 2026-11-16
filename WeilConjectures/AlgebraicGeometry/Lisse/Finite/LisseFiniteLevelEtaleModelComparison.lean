@@ -13,8 +13,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Bounded etale models from finite locally constant cohomology models
 
-Source: Stacks Tags 099Y, 099Z and 09B1.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model-comparison).
+Reference: Stacks Project, Tags 099Y, 099Z and 09B1.
 -/
 
 @[expose] public noncomputable section
@@ -78,9 +77,7 @@ private theorem modelClassical_of_iso (Z : Scheme.{u}) (Λ : Type (u + 1))
 models has an etale model with the same bounds and finite locally constant cohomology.
 The comparison is the canonical derived counit, so the chosen model is tied to K.
 
-Source: Stacks Project, proetale.tex, lemma-compare-derived (Tag 09B1) and
-lemma-compare-locally-constant-derived (Tag 099Z).
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model-comparison).
+Reference: Stacks Project, Tags 09B1 and 099Z.
 
 Proof: the cohomology models make K classical. Apply the bounded-below classical
 comparison counit to K and take its derived direct image as D. Exact faithful

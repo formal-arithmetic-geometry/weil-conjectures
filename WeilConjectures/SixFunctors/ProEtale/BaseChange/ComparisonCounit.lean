@@ -192,7 +192,7 @@ theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
   simp
 
 /-- The direct-image comparison is the counit mate of the specified pullback comparison.
-Source: Stacks Project, Tag 0B65; blueprint transport proof, step 2.
+Reference: Stacks Project, Tag 0B65.
 
 Proof: the underived direct-image comparison is the inverse mate of the restriction
 comparison. The pullback comparison is the adjoint conjugate of the same restriction

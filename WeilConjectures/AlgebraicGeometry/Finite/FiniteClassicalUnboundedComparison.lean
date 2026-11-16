@@ -40,10 +40,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # Classical essential image of unbounded finite-coefficient comparison
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 5.2.6(3),
-Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2; blueprint
-`sec-six-functors-basics/sk-lem-geo-affine-local`, opening proof paragraph
-(blueprint: lem-sfb-finite-classical-unbounded-comparison).
+Reference: Bhatt--Scholze, The pro-étale topology for schemes, Proposition 5.2.6(3),
+Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2.
 
 We use fixed-ring module sheaves, the ordinary constant-coefficient presentation.
 The recorded `finiteCoefficientRealization` identifies these with modules over the
@@ -543,9 +541,7 @@ private theorem boundedCounit (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
 /-- Exact inverse image has classical cohomology, and the canonical unbounded derived
 counit is invertible on every classical complex (so every such complex is isomorphic to an
 inverse image), without any boundedness or constructibility condition.
-Source: Bhatt--Scholze, Proposition 5.2.6(3), Remark 5.2.8 and Proposition 5.3.2,
-and the opening comparison in blueprint `lemma-affine-space-etale-localization`
-(blueprint: lem-sfb-finite-classical-unbounded-comparison).
+Reference: Bhatt--Scholze, Proposition 5.2.6(3), Remark 5.2.8 and Proposition 5.3.2.
 
 Proof:
 1. Exact inverse image commutes with cohomology, and its image on sheaves is classical.
