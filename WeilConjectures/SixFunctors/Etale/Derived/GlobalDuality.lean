@@ -24,7 +24,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 Let `X` be smooth, proper and geometrically connected of pure relative dimension `d` over a
 base `S`, with structure morphism `a_X : X ⟶ S`. Global Verdier duality is the case `Y = S`
-of the Verdier-duality exchange `corollary-verdier-exchange-formulas--1`: the coefficient dual of
+of the Verdier-duality exchange formulas: the coefficient dual of
 the compactly supported cohomology of `K` is the ordinary cohomology of the Verdier dual of `K`,
 
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
@@ -45,8 +45,8 @@ is perfect: its tensor–internal-hom adjoint is an isomorphism.
   category in which the projection formula holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`
   (`theorem-global-verdier-duality`): `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`
-  (`theorem-poincare-duality--7`): under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`:
+  under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
 
 ## Implementation notes
 
@@ -65,7 +65,7 @@ geometric connectedness of `X` nor the finiteness of `K` that the blueprint assu
 hypotheses are not imposed. For a general coefficient category the projection formula, and
 with it global duality, can fail.
 
-The subject of `theorem-poincare-duality--7` is the pairing `β_K` — the mixed-support cup
+The subject of derived Poincaré duality is the pairing `β_K` — the mixed-support cup
 product followed by the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` and the normalized trace — and the
 assertion that its tensor–internal-hom adjoint is invertible. The pairing is
 `AlgebraicGeometry.Etale.poincarePairing`, and its perfectness is proved next to it
@@ -143,7 +143,7 @@ It is the tensor–Hom exchange `AlgebraicGeometry.Etale.derivedHomRightDerivedL
 evaluated at the unit `Λ_S`, that is the Verdier-duality exchange for `f = a_X` over the base
 `S` itself, where `𝔻_S` is the coefficient dual (`AlgebraicGeometry.Etale.verdierDualIdIso`).
 Over `S = s = Spec k` the category `D(s_ét)` is the point category, in which `Ra_{X!} K` and
-`Ra_{X*} K` are `RΓ_c(X, K)` and `RΓ(X, K)` (blueprint `theorem-global-verdier-duality`); so this is
+`Ra_{X*} K` are `RΓ_c(X, K)` and `RΓ(X, K)` (`theorem-global-verdier-duality`); so this is
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, natural in `K`. Applying the evaluation at the geometric point
 gives the same isomorphism in `D(Λ)`
 (`AlgebraicGeometry.Etale.nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual`).
@@ -210,9 +210,8 @@ end General
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (aX : X ⟶ S)
   [HasCompactification aX]
 
-/-- Blueprint `theorem-global-verdier-duality`: Global Verdier duality. This is also blueprint
-`theorem-global-verdier-duality--1` (Global Verdier duality at the point); the canonical form of the
-isomorphism is `AlgebraicGeometry.Etale.globalVerdierDualityIso`.
+/-- Blueprint `theorem-global-verdier-duality`: Global Verdier duality, also at the point; the
+canonical form of the isomorphism is `AlgebraicGeometry.Etale.globalVerdierDualityIso`.
 
 For `a_X : X ⟶ S` admitting a compactification, a finite coefficient ring `Λ` and `K` an
 object of `D(X_ét, Λ)`, the coefficient dual of the compactly supported cohomology of `K` is the
@@ -276,7 +275,7 @@ theorem nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual {k : Type
       ((coefficientDualRightDerivedLowerShriekIso Λ aX).app (op K)) ≪≫
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) aX).app _⟩
 
-/-- Blueprint `theorem-poincare-duality--7`: The derived Poincaré pairing is the duality
+/-- Blueprint `theorem-poincare-duality`: The derived Poincaré pairing is the duality
 isomorphism.
 
 With an orientation `o` of `a_X` of relative dimension `d` and with `K` perfect over `Λ_X`,
