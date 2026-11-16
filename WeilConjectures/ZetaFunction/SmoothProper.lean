@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
+public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.FunctionalEquation
@@ -31,8 +32,7 @@ the functional equation and the Riemann hypothesis, and `Pᵢ` realizes the dete
   `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_two_mul`: the endpoint factors
   `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T` (`theorem-weil-conjectures-smooth-proper-schemes`).
 - `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity
-  (`theorem-weil-conjectures-smooth-proper-schemes`,
-  `corollary-purity-cohomology-smooth-proper-variety--1`).
+  (`theorem-weil-conjectures-smooth-proper-schemes`).
 - `AlgebraicGeometry.Scheme.isUniversallyPureOfWeight_map_frobeniusCharpolyRev`: the reciprocal
   roots of `P_{i,ℓ}` are `q`-Weil numbers of weight `i`, under every embedding of their number
   fields.
@@ -92,12 +92,11 @@ theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCa
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
     LinearMap.charpolyRev_smul_one, hfin, pow_one]
 
-/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` and
-`corollary-purity-cohomology-smooth-proper-variety--1` (reciprocal roots have the weight-`i`
-absolute value): for `X₀` smooth, proper and geometrically connected of pure dimension `d` and every
-field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}` satisfies `|ι α| = q^{i/2}`;
-equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal roots are the Frobenius eigenvalues
-(`prose-19-08`), which have this absolute value by
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (reciprocal roots have the
+weight-`i` absolute value): for `X₀` smooth, proper and geometrically connected of pure dimension
+`d` and every field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}` satisfies
+`|ι α| = q^{i/2}`; equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal roots are the
+Frobenius eigenvalues, which have this absolute value by
 `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`. -/
 theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
     [IsProper (X ↘ Spec (CommRingCat.of k₀))]
