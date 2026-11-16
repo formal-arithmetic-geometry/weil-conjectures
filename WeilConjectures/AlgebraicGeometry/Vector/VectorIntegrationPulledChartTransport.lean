@@ -12,9 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceUnitCompactBaseChange
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoherence
 
-/-! # Pulling a single frame chart along an arbitrary map
-.
--/
+/-! # Pulling a single frame chart along an arbitrary map -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

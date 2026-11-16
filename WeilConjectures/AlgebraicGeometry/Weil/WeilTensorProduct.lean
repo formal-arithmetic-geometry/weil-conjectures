@@ -60,27 +60,24 @@ public import WeilConjectures.SixFunctors.WfTensorLinearity.WeilTensorDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-!
-# Relative condensed derived tensor and its geometric Frobenius
+# Completed derived tensor and its geometric Frobenius
 
-The main construction is `wfCondensedTensor`, the native relative derived tensor
-on modules over the pulled-back condensed ring. Its first argument is computed by
-a K-flat representative. `wfCondensedTensorFrobenius` composes the normalized tensor
-comparison of exact pullback with the tensor of the given Weil isomorphisms.
+`wfIntegralTensor` is the ordinary derived tensor over the completed coefficient sheaf,
+computed on a K-flat representative and followed by the Koszul completion reflector.
+`wfRationalTensor` is its rationalization. `WeilConjectures.wfTensorFrobenius` composes the
+pullback/tensor comparison `wfRationalTensorPullback` with the tensor of the given Weil
+isomorphisms.
 
 ## Main definitions
 
-- `wfCondensedTensor`: relative derived tensor for arbitrary condensed coefficients.
-- `wfCondensedTensorPullback`: canonical comparison for exact termwise pullback.
-- `wfCondensedTensorFrobenius`: tensor of the given strict condensed Weil structures.
-- `SheafOfModules.wfSiteDerivedTensor`: the localized K-flat tensor bifunctor.
+- `wfOrdinaryDerivedTensor`: the uncompleted derived tensor over the completed coefficients.
 - `wfIntegralTensor`, `wfRationalTensor`: completed integral and rational tensor.
-- `wfRationalTensorPullback`: the normalized Frobenius/tensor comparison.
+- `wfCompletePullback`: exact pullback on complete objects.
+- `wfIntegralTensorPullback`, `wfRationalTensorPullback`: the pullback/tensor comparisons.
 - `WeilConjectures.wfTensorFrobenius`: tensor of the given Weil structures.
 
 ## Implementation details
 
-The completed adic and rationalized constructions below are retained as presentation
-interfaces for existing consumers. They do not define the condensed tensor.
 No preservation of constructibility or exactness on Weil pairs is assumed here.
 
 The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:

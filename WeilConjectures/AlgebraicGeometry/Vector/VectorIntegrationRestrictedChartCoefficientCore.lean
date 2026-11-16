@@ -167,9 +167,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearLineDescentBa
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
-/-! # Affine tower coefficient base-change recursion
-.
--/
+/-! # Affine tower coefficient base-change recursion -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

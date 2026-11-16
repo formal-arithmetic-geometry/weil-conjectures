@@ -7,12 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFinite
 
-/-! # Evaluating the integral Kummer composite
-
-## References
-
-* Grothendieck
--/
+/-! # Evaluating the integral Kummer composite -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

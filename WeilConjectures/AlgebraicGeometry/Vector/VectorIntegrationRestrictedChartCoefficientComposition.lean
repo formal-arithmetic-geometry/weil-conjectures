@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationCartesia
 import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition
 import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 
-/-! # Geometric coefficient composition after tower descent
-.
--/
+/-! # Geometric coefficient composition after tower descent -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -47,7 +47,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The constant commutative coefficient sheaf in clause (2). -/
+/-- The constant sheaf of commutative rings with value `A`. -/
 abbrev tateFiniteCoefficient (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of A)
 

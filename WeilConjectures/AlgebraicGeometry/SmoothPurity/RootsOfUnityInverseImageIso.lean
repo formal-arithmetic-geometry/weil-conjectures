@@ -49,7 +49,7 @@ restrictions. These conditions uniquely fix the action produced by inverse image
 ## References
 
 * [Stacks Project](https://stacks.math.columbia.edu), Tags 03PK, 00WX, 03CY, 00YV
-* Deligne
+* P. Deligne, *La conjecture de Weil. I*, (2.2), pp. 280--281
 -/
 
 @[expose] public section

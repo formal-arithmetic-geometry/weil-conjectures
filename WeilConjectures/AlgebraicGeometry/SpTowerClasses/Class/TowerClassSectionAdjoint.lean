@@ -30,7 +30,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 -- Comparing the two section carriers traverses the fixed direct-image construction.
 /-- Sectionwise ordinary adjunction with its explicit target carrier.
 
-This is the recorded adjoint followed by that comparison, evaluated on a chart. -/
+This is the recorded adjoint followed by the ordinary evaluation comparison of the
+tower shriek data, evaluated on a chart. -/
 def sectionAdjoint
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)

@@ -37,7 +37,8 @@ predicates and local calculations in
 
 ## Main statements
 
-* `tateTwist_locallyFree` states all three source clauses for all four coefficients.
+* `tateTwist_locallyFree`: the Tate twists are well defined and locally free of rank one, for
+  finite, integral, rational and algebraically closed coefficients.
 -/
 
 @[expose] public noncomputable section
