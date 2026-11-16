@@ -60,8 +60,8 @@ lemma map_hom_app_counit_of_eq_rightAdjointUniq (adj₁ : F ⊣ G) (adj₂ : F �
 
 /-- **Uniqueness of the compatible isomorphism of right adjoints**
 (`proposition-sp-unique-adjoint`): an isomorphism `e : G ≅ G'` between two right adjoints of `F`
-which is compatible with the counits is the canonical one, `rightAdjointUniq adj₁ adj₂`; the converse is
-`map_hom_app_counit_of_eq_rightAdjointUniq`. -/
+which is compatible with the counits is the canonical one, `rightAdjointUniq adj₁ adj₂`; the
+converse is `map_hom_app_counit_of_eq_rightAdjointUniq`. -/
 lemma eq_rightAdjointUniq_of_map_hom_app_counit (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') (e : G ≅ G')
     (he : ∀ x, F.map (e.hom.app x) ≫ adj₂.counit.app x = adj₁.counit.app x) :
     e = adj₁.rightAdjointUniq adj₂ := by

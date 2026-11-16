@@ -15,8 +15,8 @@ The external product `M ⊠ N = Lp_X^* M ⊗ Lp_Y^* N` (`ProEtale.CondensedRing.
 the Verdier dual `𝔻_X K = RHom(K, Ra^! ℚ̄_ℓ)` (`ProEtale.CondensedRing.verdierDual`) of the trace
 formula are defined with coefficients `ℚ̄_ℓ`. The passage from integral to `ℚ̄_ℓ`-coefficients
 (through the integral models of the rational Frobenius correspondences) needs them for the ring
-of integers `𝒪_E` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` as well. As for the six functors on bounded
-constructible complexes, they are defined for the coefficient ring
+of integers `𝒪_E` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` as well. As for the six functors on
+bounded constructible complexes, they are defined for the coefficient ring
 `𝒪̲_E = Profinite.padicIntegersRingObj ℓ E`, in the namespace
 `ProEtale.CondensedRing.PadicIntegersRingObj`:
 
