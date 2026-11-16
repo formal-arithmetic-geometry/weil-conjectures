@@ -31,6 +31,8 @@ universe u
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 namespace ProjectiveSpace
