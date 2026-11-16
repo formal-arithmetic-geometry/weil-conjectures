@@ -46,14 +46,10 @@ proofs use the reduction to residue field coefficients, which imports the formal
 ## Sorried input
 
 - The inputs of `isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj`,
-  `isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj` (blueprint
-  `theorem-compactness-rational-coefficients`) and
-  `isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj` (blueprint
-  `proposition-compactness-proper-direct-image`), that constructible sheaves are compact in
-  `Loc(Dᵇc(X)⟦Λ⟧)`: the closure properties of the ind-constructible sheaves
-  (`proposition-ind-constructible-sheaves`), the continuity of `Ext` out of a constructible sheaf
-  (`lemma-continuity-ext-out-constructible-complex--1`) and the uniform `Ext` bound
-  (`lemma-uniform-ext-bound`), see
+  `isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj` and
+  `isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj`, that constructible
+  sheaves are compact in `Loc(Dᵇc(X)⟦Λ⟧)`: the closure properties of the ind-constructible sheaves,
+  the continuity of `Ext` out of a constructible sheaf and the uniform `Ext` bound, see
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic`. The
   compactness follows by the finite-window argument and left completeness. By dévissage, all bounded
   constructible complexes are compact
@@ -61,11 +57,9 @@ proofs use the reduction to residue field coefficients, which imports the formal
 - The inputs of `properLowerStarHypotheses_continuousMapRingObj`,
   `properLowerStarHypotheses_padicAlgClRingObj` and
   `properLowerStarHypotheses_padicIntegersRingObj` (for `p` proper, `Rp_*` preserves `Dᵇc` and
-  direct sums on `Loc(Dᵇc)`): that `Rp_*` preserves `Dᵇc` (blueprint
-  `proposition-proper-direct-image-constructible-complexes`) and has finite amplitude and commutes
-  with direct sums on the ind-constructible heart (blueprints
-  `lemma-uniform-bound-proper-direct-image`, `proposition-compactness-proper-direct-image--2` (1)),
-  see `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`. The
+  direct sums on `Loc(Dᵇc)`): that `Rp_*` preserves `Dᵇc` and has finite amplitude and commutes
+  with direct sums on the ind-constructible heart, see
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`. The
   commutation with direct sums on `Loc(Dᵇc)` follows by dévissage and left completeness
   (`ProperLowerStarHeartHypotheses.preservesColimitsOfShape`).
 -/
@@ -398,7 +392,7 @@ theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj (E 
     exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj ℓ aX aY c hk E
   ⟨G, ⟨adj⟩⟩
 
-/-- Blueprint `theorem-existence-exceptional-inverse-image--1`, for the coefficient ring `E`:
+/-- The exceptional inverse image with coefficients `E`:
 the exceptional inverse image `f^! : Loc(Dᵇc(Y)) ⥤ Loc(Dᵇc(X))` attached to a compactification
 `c` of `f`, a right adjoint of `Rf_!`. It is an arbitrary choice of right adjoint, unique up to
 unique isomorphism; only the adjunction
@@ -438,7 +432,7 @@ theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj (E 
     exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj ℓ aX aY c hk E
   ⟨G, ⟨adj⟩⟩
 
-/-- Blueprint `theorem-existence-exceptional-inverse-image--1`, for the coefficient ring `𝒪_E`:
+/-- The exceptional inverse image with coefficients `𝒪_E`:
 the exceptional inverse image `f^! : Loc(Dᵇc(Y)) ⥤ Loc(Dᵇc(X))` attached to a compactification
 `c` of `f`, a right adjoint of `Rf_!`. It is an arbitrary choice of right adjoint, unique up to
 unique isomorphism; only the adjunction
@@ -479,7 +473,7 @@ theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj :
     exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj ℓ aX aY c hk
   ⟨G, ⟨adj⟩⟩
 
-/-- Blueprint `theorem-existence-exceptional-inverse-image--1`, for the coefficient ring `ℚ̄_ℓ`:
+/-- The exceptional inverse image with coefficients `ℚ̄_ℓ`:
 the exceptional inverse image `f^! : Loc(Dᵇc(Y)) ⥤ Loc(Dᵇc(X))` attached to a compactification
 `c` of `f`, a right adjoint of `Rf_!`. It is an arbitrary choice of right adjoint, unique up to
 unique isomorphism; only the adjunction
