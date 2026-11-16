@@ -136,6 +136,45 @@ theorem supportedTatePure_projectiveSpaceDiagonal_line :
   supportedTatePure_projectiveSpaceDiagonal Λ S
     (supportedTatePure_diagonal_projectiveSpace_line Λ S)
 
+
+/-- Blueprint `lemma-class-diagonal-projective-line`, *the first diagonal integral*, with the purity
+of the diagonal supplied: for `P = ℙ¹_S` and the diagonal `Δ : P ⟶ W = ℙ¹_P`, with the cycle class
+`δ = c₁(𝒪(Δ))` and the trace of the notes, `Tr_p(δ) = 1`. This is
+`AlgebraicGeometry.Etale.projectiveLineTrace_diagonal` at the purity
+`supportedTatePure_projectiveSpaceDiagonal_line` and the regular immersion
+`isRegularImmersion_projectiveSpaceDiagonal_line`. -/
+theorem projectiveLineTrace_diagonal_line :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+          ℙ(Option (ULift.{u} (Fin 1)); S))).homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ
+            (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+              ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫
+          cartierKummerCycleClass Λ _ (supportedTatePure_projectiveSpaceDiagonal_line Λ S)) ≫
+      projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ :=
+  projectiveLineTrace_diagonal Λ S (supportedTatePure_projectiveSpaceDiagonal_line Λ S)
+
+/-- Blueprint `lemma-class-diagonal-projective-line`, *the second diagonal integral* (the swapped
+factor), with the purity of the diagonal supplied: `Tr_{p₁}(σ^* δ) = 1`. This is
+`AlgebraicGeometry.Etale.projectiveLineTrace_diagonal_swap` at the purity
+`supportedTatePure_projectiveSpaceDiagonal_line`. -/
+theorem projectiveLineTrace_diagonal_swap_line :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+          ℙ(Option (ULift.{u} (Fin 1)); S))).homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ
+            (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+              ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫
+          (leftDerivedUpperStarConstantComplexIso Λ
+            (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).inv ≫
+          (L((ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)^*[ModuleCat.{u + 1}
+            Λ])).map (cartierKummerCycleClass Λ _
+              (supportedTatePure_projectiveSpaceDiagonal_line Λ S)) ≫
+          (leftDerivedUpperStarTateTwoIso Λ
+            (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom) ≫
+      projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ :=
+  projectiveLineTrace_diagonal_swap Λ S (supportedTatePure_projectiveSpaceDiagonal_line Λ S)
+
 end Etale
 
 end AlgebraicGeometry
