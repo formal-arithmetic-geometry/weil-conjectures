@@ -143,6 +143,8 @@ noncomputable def derivedConstantSheafGlobalSectionsAdjunction (S : Scheme.{u}) 
   (constantSheafAdj (Scheme.ProEt.topology S) A
     (Scheme.ProEt.isTerminalMkId S)).mapDerivedCategoryRightDerivedAdjunction
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- **`RΓ(S, -)` preserves arbitrary products**: the derived global sections functor on the
 pro-étale site of a scheme `S` is a right adjoint, so it preserves the products indexed by any
 type `J`. -/
@@ -152,6 +154,8 @@ theorem preservesLimitsOfShape_discrete_rightDerivedGlobalSections (S : Scheme.{
   have := (derivedConstantSheafGlobalSectionsAdjunction A S).rightAdjoint_preservesLimits
   infer_instance
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- **`RΓ(S, R lim Kₙ) = R lim RΓ(S, Kₙ)`** (Stacks 08U1): the derived global sections functor on
 the pro-étale site of a scheme `S`, a triangulated right adjoint, sends a derived limit triangle
 of a tower of complexes of pro-étale sheaves to a derived limit triangle of the image tower. -/

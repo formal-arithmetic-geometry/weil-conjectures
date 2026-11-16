@@ -532,8 +532,9 @@ theorem exists_profinite_iso_of_isAffine (K : Type u) [Field K] [IsSepClosed K]
     ∃ S : Profinite.{u}, Nonempty (U ≅ (profiniteToProEtOf (Spec (.of K))).obj S) :=
   affineClassification K U
 
-/-- Profinite sets as affine objects of the pro-étale site of `Spec K`. -/
-noncomputable def profiniteToAffineProEtOf (K : Type u) [Field K] :
+/-- Profinite sets as affine objects of the pro-étale site of `Spec K` (reducible, so that the
+fullness and faithfulness instances of `ObjectProperty.lift` apply to it). -/
+noncomputable abbrev profiniteToAffineProEtOf (K : Type u) [Field K] :
     Profinite.{u} ⥤
       ObjectProperty.FullSubcategory (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left) :=
   ObjectProperty.lift (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left)
