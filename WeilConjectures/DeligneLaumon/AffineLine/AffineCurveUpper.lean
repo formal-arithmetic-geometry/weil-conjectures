@@ -317,7 +317,7 @@ theorem IsPunctuallyPureOfWeight.isPureOfWeightOver_compactlySupportedCohomology
 geometrically connected affine curve over `k₀` and `𝓕` a lisse Weil sheaf on `C`. Then
 `H_c^r(C, 𝓕) = 0` for `r ∉ {1, 2}`: in negative degrees because `Rf_!` of a sheaf is concentrated
 in nonnegative degrees, in degree zero because `C` is affine, and above degree two by Poincaré
-duality for the lisse sheaf `𝓕`. (blueprint: `lemma-degree-zero-top-cohomology--4`) -/
+duality for the lisse sheaf `𝓕`. -/
 theorem subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
