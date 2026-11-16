@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCompRight
 public import WeilConjectures.TraceFormula.PointNormalizationKunneth
 public import WeilConjectures.TraceFormula.PointNormalizationTau
 public import WeilConjectures.TraceFormula.LocalTerm
@@ -19,8 +19,8 @@ at `Lp₁^* y` is `LΔ^* Lp₁^* y ≅ y` followed by the unit of `Lp₁^* ⊣ R
 (`ProEtale.CondensedRing.Correspondence.transportζ_upperStar_fst`). This rests on the
 compatibility of the units of the adjunctions `Lf^* ⊣ Rf_!` of proper morphisms with the
 composition isomorphisms (`ProEtale.CondensedRing.upperStarLowerShriekAdjunction_comp_unit_app`),
-which is the compatibility of `Rf_! ≅ Rf_*` with composition (blueprint
-`prop-functor-package`, clause (3)).
+which is the compatibility of `Rf_! ≅ Rf_*` with composition (clause (3) of
+`prop-functor-package` in the blueprint).
 
 -/
 
@@ -454,6 +454,33 @@ lemma upperShriekComp_id_left_hom_app {X Y : Over (Spec (.of k))} [LocallyOfFini
       rw [boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
         eqToHom_app]
       exact boundedConstructibleLowerShriekComp_padicAlgCl_id_left ℓ a K) K
+
+/-- **Right unit law of the composition isomorphisms of the exceptional inverse image**:
+`R(a ≫ 𝟙)^! ≅ R(𝟙)^! ⋙ Ra^! ≅ Ra^!` is the identity. This is conjugate to the right unit law of
+the composition isomorphisms of the lower shriek
+(`boundedConstructibleLowerShriekComp_padicAlgCl_id_right`). -/
+lemma upperShriekComp_id_right_hom_app {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    [IsSeparated Y.hom] (a : X ⟶ Y) (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperShriekComp_padicAlgCl ℓ a (𝟙 Y)).hom.app K ≫
+        (boundedConstructibleUpperShriek ℓ a).map
+          ((boundedConstructibleUpperShriekId ℓ Y).hom.app K) =
+      eqToHom (congrArg (fun p : X ⟶ Y ↦
+        (boundedConstructibleUpperShriek ℓ p).obj K)
+          (Category.comp_id a)) := by
+  rw [← conjugateIsoEquiv_eqToIso_hom_app ℓ (Category.comp_id a) K]
+  exact conjugateIsoEquiv_comp_right_hom_app
+    (boundedConstructibleUpperShriekAdjunction ℓ (a ≫ 𝟙 Y))
+    (boundedConstructibleUpperShriekAdjunction ℓ a)
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 Y))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a (𝟙 Y))
+    (boundedConstructibleLowerShriekId ℓ Y)
+    (eqToIso (congrArg (fun p : X ⟶ Y ↦
+      boundedConstructibleLowerShriek ℓ p) (Category.comp_id a)))
+    (fun K ↦ by
+      rw [boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
+        eqToHom_app]
+      exact boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ a K) K
 
 /-- The identification `ω_s ≅ R(𝟙)^! ω_s = Rd^! ω_s ≅ ω_s` for `d = 𝟙` is the identity. -/
 lemma upperShriekIso_inv_comp_dualizingComplexComp {d : point k ⟶ point k} (hd : d = 𝟙 _) :

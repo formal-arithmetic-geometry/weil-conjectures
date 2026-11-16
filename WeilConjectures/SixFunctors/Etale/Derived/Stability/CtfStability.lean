@@ -41,11 +41,9 @@ part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_st
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which needs a normalized Tate
   twist and is therefore not part of the bundled statement.
 * Of the finite-reduction comparisons of clause (vii), the ones for `Lf^*`, `⊗ᴸ` and `Rf_!` are
-  stated; the comparisons for `Rf_*`, internal Hom, `𝔻_X` and `Rf^!` at a finite stage
-  (blueprint `lemma-change-coefficients-direct-image--1`,
-  `lemma-change-coefficients-internal-hom--1`, `theorem-verdier-biduality--2`,
-  `lemma-change-coefficients-exceptional-inverse-image--1`) and the passage to the field stages `E`,
-  `ℚ̄_ℓ` are not formalised: the field stages need coefficient categories the library does not have.
+  stated; the comparisons for `Rf_*`, internal Hom, `𝔻_X` and `Rf^!` at a finite stage and the
+  passage to the field stages `E`, `ℚ̄_ℓ` are not formalised: the field stages need coefficient
+  categories the library does not have.
 -/
 
 @[expose] public section
@@ -240,8 +238,7 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
     have : IsNoetherian Y := {}
     have : QuasiCompact (f ≫ aY) := hf ▸ inferInstance
     exact QuasiCompact.of_comp f aY
-  obtain ⟨hi, hii, hiii, hiv, hdhom, hv, -⟩ :=
-    constructibleFiniteTor_preservation Λ aX aY f hf
+  obtain ⟨hi, hii, hiii, hiv, hdhom, hv⟩ := constructibleFiniteTor_preservation Λ aX aY f hf
   obtain ⟨hti, htii, -, hthom, hthomd, -, htvi, hbid⟩ := torAmplitudeIn_preservation Λ aX aY f hf
   refine ⟨⟨hi, hti⟩, ⟨hii, htii, hdhom, hthom, hthomd,
       fun K M hK ↦ ⟨(nonempty_iso_coefficientDual_tensor hK M).some.symm⟩⟩,
@@ -291,8 +288,7 @@ finite-type morphism of separated finite-type `k`-schemes. Then:
   bounded constructible of Tor amplitude in one common interval, i.e. `Dᵇc(X, 𝒪_E) =
   Dᵇctf(X, 𝒪_E)` (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`);
 * the internal Hom preserves `Dᵇc(X, Λ)` and has the canonical finite reductions
-  `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)` (`proposition-six-operations-dctf--15`,
-  `proposition-six-operations-change-coefficients--7`);
+  `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)`;
 * the derived limit `G_f L` of the finite exceptional inverse images of the reductions of
   `L ∈ Dᵇc(Y, Λ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L` compatibly with the maps to the
   `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions.

@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 
 Every operation of the six-functor formalism is defined on the ambient derived categories
 `D(X_ét, Λ)`; the functors between the small categories `Dctf(X, Λ)` are *restrictions* of the
-ambient ones, and that the restriction exists is a theorem (blueprint
-`proposition-six-operations-dctf`). This file
+ambient ones, and that the restriction exists is a theorem of the blueprint
+(`proposition-six-operations-dctf`). This file
 
 * proves the general fact behind the typing rule: a functor into an ambient category restricts
   to a full subcategory (closed under isomorphisms) exactly when it carries every object into
@@ -84,7 +84,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 section Bifunctors
 
-variable {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
+variable {k : Type u} [Field k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 /-- The tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` restricts to the small category
@@ -353,8 +353,9 @@ theorem sixOperations_typing [QuasiCompact f] [HasCompactification f]
           ((R(i)^![Λ]).obj K)) := by
   have : HasInvertibleExponent Λ X := .of_hom aX
   have : HasInvertibleExponent Λ Y := .of_hom aY
+  obtain ⟨h₁, h₂, h₃, h₄, h₅, h₆⟩ := constructibleFiniteTor_preservation Λ aX aY f hf
   refine ⟨boundedConstructible_preservation Λ aX aY f hf,
-    constructibleFiniteTor_preservation Λ aX aY f hf,
+    ⟨h₁, h₂, h₃, h₄, h₅, h₆, fun K hK ↦ constructibleFiniteTor_verdierDual Λ aX hK⟩,
     torAmplitudeIn_preservation Λ aX aY f hf,
     fun K M hK hM ↦ boundedConstructible_tensor Λ X hK hM.1 hM.2,
     fun g _ d _ a b K hK ↦
