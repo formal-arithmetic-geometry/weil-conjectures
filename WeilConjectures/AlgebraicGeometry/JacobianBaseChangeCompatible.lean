@@ -45,7 +45,7 @@ This construction applies to arbitrary representing identifications, hence also 
 respecting the group laws. Identity extensions and genus-zero curves are included.
 (blueprint: theorem-picard-scheme-jacobian-over-separably--5) -/
 theorem jacobian_compatibility
-    {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
+    {k K : Type u} [Field k] [Field K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     [IsProper f] [GeometricallyIntegral f] :
     let b := Spec.map (CommRingCat.ofHom (algebraMap k K))
