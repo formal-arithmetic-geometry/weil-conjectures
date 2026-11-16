@@ -17,17 +17,14 @@ Tag 0F3X) and for the isomorphism-near-the-boundary theorem (Stacks Project Tag 
 
 First, blow-up formation commutes with restriction to an open subscheme: the blow-up
 of the restricted ideal is the pullback of the blow-up along the open immersion. This
-is the open-immersion case of the blow-up flat base change theorem
-(blueprint: `thm:nagata-blowup-flat-base-change`).
+is the open-immersion case of the blow-up flat base change theorem.
 
 Second, a finite-type center on a quasi-compact open `W` of a quasi-compact
 quasi-separated scheme, admissible with respect to an open `U ≤ W`, extends to a
 `U`-admissible center on the ambient scheme whose blow-up restricts over `W` to the
 blow-up of the original center: extend the ideal by finite-type extension (Stacks
 Project Tag 01PF) and multiply by a finite-type ideal cutting out the boundary of `W`
-(Stacks Project Tag 01PH), in the style of Stacks Project Tag 080M
-(blueprint: `def:nagata-extended-admissible-blowup`,
-`lemma:nagata-extend-admissible-blowup`).
+(Stacks Project Tag 01PH), in the style of Stacks Project Tag 080M.
 
 Third, the canonical lift `Bl_{I·𝒪_Y}(Y) ⟶ Bl_I(X)` of a morphism `f : Y ⟶ X` through
 the universal property of blowing up localizes on the base: over the locus above an
@@ -42,18 +39,18 @@ Fourth, the product of two `U`-admissible centers is `U`-admissible
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_isPullback_blowup_comap` — the
   blow-up of the restriction of an ideal along an open immersion is the restriction of the
-  blow-up (blueprint: `thm:nagata-blowup-flat-base-change`, open-immersion case), and its
+  blow-up (the open-immersion case of flat base change for blow-ups), and its
   corollary `AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso` for
   isomorphisms;
 - `AlgebraicGeometry.IsAdmissible.exists_extend` — extension of admissible centers
-  across a quasi-compact open (blueprint: `def:nagata-extended-admissible-blowup`,
-  `lemma:nagata-extend-admissible-blowup`);
+  across a quasi-compact open;
 - `AlgebraicGeometry.Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup`
   — the canonical lift of a blow-up localizes on the base, and its consequence
   `AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_morphismRestrict_lift_blowup_congr`
   for two centers agreeing over an open;
-- `AlgebraicGeometry.IsAdmissible.mul` — the product of two admissible centers
-  (blueprint: `lemma:nagata-product-ideal-common-blowup`, bookkeeping).
+- `AlgebraicGeometry.IsAdmissible.mul` — the product of two admissible centers, and
+  `AlgebraicGeometry.IsAdmissible.exists_hom_blowup_of_finite` — finitely many admissible
+  blow-ups admit a common admissible blow-up (`lemma-products-composites-u-admissible-blow`).
 
 -/
 
@@ -450,7 +447,7 @@ theorem Scheme.IdealSheafData.isOpenImmersion_morphismRestrict_lift_blowup_congr
   exact MorphismProperty.arrow_mk_iso_iff (P := @IsOpenImmersion) e
 
 /-- **The product of two `U`-admissible centers is `U`-admissible** (bookkeeping for
-blueprint `lemma:nagata-product-ideal-common-blowup`): finite-typeness is stable under
+`lemma-products-composites-u-admissible-blow`): finite-typeness is stable under
 products, and the support of a product is the union of the supports. -/
 def IsAdmissible.mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissible X U) :
     IsAdmissible X U where
@@ -466,5 +463,32 @@ centers. -/
 lemma IsAdmissible.I_mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissible X U) :
     (B₁.mul B₂).I = B₁.I * B₂.I :=
   rfl
+
+/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**
+(`lemma-products-composites-u-admissible-blow`, clause 1): for a finite nonempty family of
+`U`-admissible centres `B i`, the product of the centres is `U`-admissible
+(`AlgebraicGeometry.IsAdmissible.mul`) and its blow-up dominates every `Bl_{B i}(X)` over `X`
+(`Scheme.IdealSheafData.exists_blowup_mul_hom_left`, `_right`), by induction on the family. -/
+theorem IsAdmissible.exists_hom_blowup_of_finite {X : Scheme.{u}} {U : X.Opens} {ι : Type*}
+    [Finite ι] [Nonempty ι] (B : ι → IsAdmissible X U) :
+    ∃ C : IsAdmissible X U, ∀ i, ∃ g : C.I.blowup ⟶ (B i).I.blowup,
+      g ≫ (B i).I.blowupMap = C.I.blowupMap := by
+  classical
+  have : Fintype ι := Fintype.ofFinite ι
+  suffices h : ∀ s : Finset ι, ∃ C : IsAdmissible X U, ∀ i ∈ s,
+      ∃ g : C.I.blowup ⟶ (B i).I.blowup, g ≫ (B i).I.blowupMap = C.I.blowupMap from
+    (h Finset.univ).imp fun C hC i ↦ hC i (Finset.mem_univ i)
+  intro s
+  induction s using Finset.induction_on with
+  | empty => exact ⟨B (Classical.arbitrary ι), fun i hi ↦ absurd hi (Finset.notMem_empty i)⟩
+  | insert a s ha ih =>
+    obtain ⟨C, hC⟩ := ih
+    obtain ⟨g₁, hg₁⟩ := Scheme.IdealSheafData.exists_blowup_mul_hom_left C.I (B a).I
+    obtain ⟨g₂, hg₂⟩ := Scheme.IdealSheafData.exists_blowup_mul_hom_right C.I (B a).I
+    refine ⟨C.mul (B a), fun i hi ↦ ?_⟩
+    rcases Finset.mem_insert.1 hi with rfl | hi
+    · exact ⟨g₂, hg₂⟩
+    · obtain ⟨g, hg⟩ := hC i hi
+      exact ⟨g₁ ≫ g, by rw [Category.assoc, hg, hg₁]; rfl⟩
 
 end AlgebraicGeometry
