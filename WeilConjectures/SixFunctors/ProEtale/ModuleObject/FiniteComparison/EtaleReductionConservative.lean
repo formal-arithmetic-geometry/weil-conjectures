@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
@@ -93,7 +94,12 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (E : Type) [Field E
 
 /-- **The étale reduction modulo `ℓⁿ` reflects isomorphisms**, `n ≠ 0`: a morphism of bounded
 constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ`, read on the small étale site, is an
-isomorphism is an isomorphism (derived Nakayama, blueprint `lemma-reduction-derived-nakayama`). -/
+isomorphism is an isomorphism (`lemma-reduction-derived-nakayama`). The Nakayama step is derived
+completeness: a bounded constructible complex is derived `ℓ`-complete
+(`derivedCompleteIntegers_of_boundedConstructible`,
+`proposition-integral-constructibility-criterion`), and a derived complete complex whose reduction
+vanishes is zero
+(`isZero_of_derivedCompleteIntegers_of_isZero_derivedReduction`). -/
 theorem isIso_of_isIso_etaleReduction_map (hn : n ≠ 0)
     {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧} (φ : K ⟶ L)
     (h : IsIso ((etaleReduction ℓ E n X).map φ)) : IsIso φ := by
@@ -102,7 +108,24 @@ theorem isIso_of_isIso_etaleReduction_map (hn : n ≠ 0)
       ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).map φ)) := h
   have h₁ : IsIso ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).map φ) :=
     (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E n X)).isIso_of_isIso_map _
-  exact isIso_of_isIso_boundedConstructibleIntegersModPowReduction_map ℓ E X.left
-    (fun C hC ↦ isZero_of_isIso_pow_zsmul_id X.left ℓ E hn hC) φ h₁
+  refine isIso_of_isIso_boundedConstructibleIntegersModPowReduction_map ℓ E X.left
+    (fun C hC ↦ ?_) φ h₁
+  -- the reduction of `C` vanishes: `ℓⁿ` kills the residue-field coefficients and acts invertibly
+  have hC₁ : IsZero ((derivedReduction X.left ℓ E).obj C.obj) := by
+    refine DerivedCategory.isZero_of_isIso_zsmul_id
+      (Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero ?_) (m := (ℓ : ℤ) ^ n) ?_
+    · rw [Int.cast_pow, Int.cast_natCast, natCast_eq_zero_residueFieldCoeff, zero_pow hn]
+    · have : (derivedReduction X.left ℓ E).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
+      rw [← (derivedReduction X.left ℓ E).map_id, ← Functor.map_zsmul]
+      infer_instance
+  -- hence `C` vanishes, being derived complete
+  have hC₂ : IsZero C.obj :=
+    isZero_of_derivedCompleteIntegers_of_isZero_derivedReduction (ℓ := ℓ) (E := E)
+      (derivedCompleteIntegers_of_boundedConstructible (ℓ := ℓ) (E := E) C.property) hC₁
+  have : IsIso ((boundedConstructible _).ι.map (0 : C ⟶ C)) := by
+    rw [Functor.map_zero]
+    exact hC₂.isIso hC₂ _
+  have : IsIso (0 : C ⟶ C) := (ObjectProperty.fullyFaithfulι _).isIso_of_isIso_map _
+  exact IsZero.of_mono_zero C C
 
 end AlgebraicGeometry.ProEtale.CondensedRing
