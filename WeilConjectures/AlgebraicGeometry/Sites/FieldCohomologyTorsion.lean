@@ -15,19 +15,21 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 Let `K` be a field and `F` an abelian sheaf on the small étale site of `Spec K`. Every class
 in `Hᵠ⁺¹(Spec K_ét, F)` has finite additive order.
 
-For `q = 0`, embed `F` into an injective sheaf `I` with quotient `Q`; a class `x ∈ H¹(F)` is
-the image of a global section `s` of `Q` under the connecting homomorphism. The section `s`
-lifts to `I` over `Spec L` for a finite separable extension `L / K`, so `x` dies under the unit
-`F ⟶ f_* f^* F` of `f : Spec L ⟶ Spec K`. Composing with the trace
-(`AlgebraicGeometry.Scheme.FieldTrace.unit_comp_trace`) shows `[L : K] • x = 0`. Higher degrees
-follow by dimension shifting.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.exists_nsmul_eq_zero_sheafH_of_field`: every class in positive
   degree is killed by a positive integer.
 - `AlgebraicGeometry.Scheme.isOfFinAddOrder_sheafH_of_field`: every class in positive degree
   has finite additive order.
+
+## Implementation details
+
+For `q = 0`, embed `F` into an injective sheaf `I` with quotient `Q`; a class `x ∈ H¹(F)` is
+the image of a global section `s` of `Q` under the connecting homomorphism. The section `s`
+lifts to `I` over `Spec L` for a finite separable extension `L / K`, so `x` dies under the unit
+`F ⟶ f_* f^* F` of `f : Spec L ⟶ Spec K`. Composing with the trace
+(`AlgebraicGeometry.Scheme.FieldTrace.unit_comp_trace`) shows `[L : K] • x = 0`. Higher degrees
+follow by dimension shifting.
 -/
 
 @[expose] public section
@@ -94,8 +96,7 @@ lemma exists_nsmul_eq_zero_sheafH_one_of_field
     Sheaf.H.map_comp_apply, hzero, map_zero]
 
 /-- **Étale cohomology of a field is torsion in positive degrees.** Every class in
-`Hᵠ⁺¹(Spec K_ét, F)` is killed by a positive integer.
-(used in blueprint `lemma-cohomology-multiplicative-group`) -/
+`Hᵠ⁺¹(Spec K_ét, F)` is killed by a positive integer. -/
 theorem exists_nsmul_eq_zero_sheafH_of_field (q : ℕ)
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : Sheaf.H F (q + 1)) : ∃ n : ℕ, 0 < n ∧ n • x = 0 := by
@@ -111,8 +112,7 @@ theorem exists_nsmul_eq_zero_sheafH_of_field (q : ℕ)
     exact ⟨n, hn, by rw [← map_nsmul, hy, map_zero]⟩
 
 /-- **Étale cohomology of a field is torsion in positive degrees.** Every class in
-`Hᵠ⁺¹(Spec K_ét, F)` has finite additive order.
-(used in blueprint `lemma-cohomology-multiplicative-group`) -/
+`Hᵠ⁺¹(Spec K_ét, F)` has finite additive order. -/
 theorem isOfFinAddOrder_sheafH_of_field
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
     (x : Sheaf.H F (q + 1)) : IsOfFinAddOrder x :=

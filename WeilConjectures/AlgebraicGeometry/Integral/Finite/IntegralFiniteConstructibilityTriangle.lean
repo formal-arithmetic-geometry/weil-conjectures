@@ -28,9 +28,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finite constant local models in every degree on one fixed stratum.
-This generic predicate keeps the coefficient ring explicit in changes of presentation.
-Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
-(blueprint: lem-pe-integral-finite-constructibility-triangle). -/
+This generic predicate keeps the coefficient ring explicit in changes of presentation. -/
 def finiteLocalModelsOnStratum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -51,9 +49,7 @@ private theorem scalarFiniteLocalModelsOnStratum_iff
       finiteLocalModelsOnStratum Λ X S i L := Iff.rfl
 
 /-- All homology sheaves have finite constant local models on this specified stratum.
-This is the generic predicate at the actual positive finite coefficient quotient.
-Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
-(blueprint: lem-pe-integral-finite-constructibility-triangle). -/
+This is the generic predicate at the actual positive finite coefficient quotient. -/
 def integralFiniteLocalOnStratum
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -63,23 +59,7 @@ def integralFiniteLocalOnStratum
   finiteLocalModelsOnStratum (DerivedNakayama.quotientRing l E (n + 1)) X S i L
 
 /-- Constructibility and fixed-stratum finite local models pass through one finite
-quotient-linear distinguished triangle.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
-(blueprint: lem-pe-integral-finite-constructibility-triangle).
-
-Proof: use the normalized finite internal/ordinary equivalences for all three rings.
-Their canonical constant scalar actions identify restriction along each displayed
-coefficient map with ordinary scalar restriction. Finite scalar restriction preserves
-bounded constructibility. The ordinary bounded constructible class is triangulated,
-so the middle term is bounded constructible; return through the same equivalence.
-For the second conclusion apply exact inverse image along the specified immersion,
-commute it with homology, and use the same scalar-restriction comparison on that
-stratum. The class of finite constant local models over its finite Noetherian ring
-is weak Serre: finite lisse models identify it with finitely presented local models,
-which are closed under kernels, cokernels and extensions. Each homology long exact
-sequence then puts the middle homology in that class. This retains the specified
-stratum, and also covers empty strata, the zero complex and n=0. -/
+quotient-linear distinguished triangle. -/
 theorem integral_finite_constructibility_triangle
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

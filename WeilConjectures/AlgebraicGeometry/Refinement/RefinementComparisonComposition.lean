@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Refinement.RefinementComparisonI
 
 /-!
 # Composition of the specified objectwise refinement comparison
-
-Source: blueprint compactification-coherence, proof paragraph 2 and detailed step 6
-(blueprint: lem-sf-refinement-comparison-witness-comp).
 -/
 
 @[expose] public noncomputable section
@@ -537,26 +534,7 @@ private theorem witness_formula
   rw [NatIso.trans_app, ← Iso.trans_assoc]
 
 /-- Composition at one retained witness, before constructing any natural transformation
-or comparison through a common refinement.
-
-Source: main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-prop-compactification-coherence.proof.md, paragraph 2; detailed coherence proof, step 6
-(blueprint: lem-sf-refinement-comparison-witness-comp).
-
-Proof: write J_i for open extension, U and V for derived images of the two refinements,
-and P_i for the proper images to Y. Let q_i = J_i(alpha), and let a_r be the specified
-proper/open comparison on the retained etale L. The inverse witnessed comparison is
-beta_r = U(q_1.inv) followed by a_r.inv followed by q_2.hom. The composition law for
-the bounded-below proper/open comparison, transported through the canonical inclusions
-into the ambient derived categories, gives beta_(r s) = C_(r,s) followed by V(beta_r)
-followed by beta_s. Indeed the two middle q_2 factors cancel; naturality of C moves
-q_1.inv through C. Now expand refinementComparisonAtWitness as C_(r,p_2) followed by
-P_2(beta_r). Naturality of C_(s,p_3) at beta_r moves P_2(beta_r) to its other side.
-Associativity of the canonical direct-image compositors changes the two consecutive
-compositors into C_(r s,p_3) followed by P_3(C_(r,s)). Substitute the beta composition
-identity. Functoriality of P_3 gives exactly the comparison for r s. The eqToIso
-factors express r.hom_g and s.hom_g; their composite is the equality for r s by
-category associativity and proof irrelevance. No Cartesian refinement square is used. -/
+or comparison through a common refinement. -/
 theorem refinementComparisonAtWitness_comp
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ]

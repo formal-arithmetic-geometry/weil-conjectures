@@ -12,9 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupp
 
 /-!
 # The normalized integral quotient cone
-
-Source: the integral-limit proof of the completed coefficient comparison
-(blueprint: lem-pe-normalized-integral-quotient-cone).
 -/
 
 @[expose] public section
@@ -228,28 +225,6 @@ private noncomputable def normalizedConstantPullback (X : Scheme.{u}) :
 
 /-- A compact ring separated by finite discrete ideal-power quotients gives the canonical
 integral limit cone, including its normalization and its preservation under scheme pullback.
-
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md,
-Steps 1--4, and the integral paragraph of the pullback proof
-(blueprint: lemma-comparison-completed-coefficients--1).
-
-Proof: The continuous reductions embed R into the product of its finite quotients.
-Their joint injectivity makes this an embedding, since R is compact and the product
-is Hausdorff. Hence R is profinite. Each compatible sequence of residues has a lift:
-the nonempty closed fibres of the reductions form a nested family of compact sets.
-This gives R as the limit of the quotient profinite sets, with exactly the quotient
-projections. The profinite test-object functor sends this tower to its limit over X;
-Yoneda identifies the represented sheaves with their limit. A finite discrete ring's
-continuous-function sheaf is its constant sheaf: locally a function is constant on
-its finitely many clopen fibres. This identification is natural in ring maps and
-carries a constant function to its value. Apply it at the point to obtain rho, so
-precomposing with constant sections is precisely constant reduction. The same finite
-constant comparison after inverse image identifies the two quotient diagrams.
-Addition, multiplication and unit agree on every reduction, so the underlying limit
-is a limit of ring objects. Finally base change takes the represented test scheme
-Y[R] to X[R] and each reduction to the identical reduction; thus the mapped cone
-is limiting as well. The zero quotient R/I^0 is a singleton and causes no exception.
 -/
 theorem sfb_normalized_integral_quotient_cone (R : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] [CompactSpace R] [T2Space R]

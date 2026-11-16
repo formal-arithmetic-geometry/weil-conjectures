@@ -24,8 +24,8 @@ on sheaves on topological spaces, which are stated in a single universe, apply t
 
 The functor `ε_*` is the pushforward along the representably flat, continuous functor
 `AlgebraicGeometry.Scheme.opensToEtale`; hence it has an exact left adjoint `ε⁻¹` and preserves
-injective objects. The Grothendieck spectral sequence `Hᵖ(X_Zar, Rᵠε_* F) ⟹ Hᵖ⁺ᵠ(X_ét, F)` (used in
-the proof of blueprint `lemma-uniform-bounds-pro-etale-affines`) then gives
+injective objects. The Grothendieck spectral sequence `Hᵖ(X_Zar, Rᵠε_* F) ⟹ Hᵖ⁺ᵠ(X_ét, F)` then
+gives
 
 - `AlgebraicGeometry.Scheme.subsingleton_H_of_isZero_rightDerived_etaleToZariski`: for `X`
   noetherian of dimension at most `d`, if `Rᵠε_* F = 0` for `q > e`, then `Hⁿ(X_ét, F) = 0` for

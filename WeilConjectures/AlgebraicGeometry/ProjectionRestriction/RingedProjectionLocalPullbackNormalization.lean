@@ -11,8 +11,11 @@ import WeilConjectures.CategoryTheory.Derived.DerivedAdjunctionCochainUnit
 
 /-! # Normalization of the localized pullback on complexes
 
-Source: Stacks Project, Tags 04J0, 07A6 and 08FI.
-(blueprint: lem-weil-pbc-ringed-projection-local-pullback-normalization).
+## References
+
+* Stacks Project, Tag 04J0 and Categories, the mates correspondence
+* Stacks Project, Modules on Sites, Tag 04J0
+* Cohomology on Sites, Tags 07A6 and 08FI
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +28,7 @@ namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
 /-- The ordinary inverse adjunction mate of the specified direct-image square.
 This constructs a natural transformation by the mates equivalence, without
-choosing an inverse or assuming a tensor equation.
-Source: Stacks Project, Tag 04J0 and Categories, the mates correspondence.
-(blueprint: lem-weil-pbc-ringed-projection-local-pullback-normalization). -/
+choosing an inverse or assuming a tensor equation. -/
 def localOrdinaryPullbackSquare
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
@@ -219,23 +220,7 @@ private theorem normalize
   simp only [Category.assoc, ← QAv.map_comp, hlam, Functor.id_obj]
 
 /-- The derived square, conjugated by the exact localization comparisons, is
-localization of the ordinary inverse mate on every complex.
-
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites,
-Tags 07A6 and 08FI. (blueprint:
-lem-weil-pbc-ringed-projection-local-pullback-normalization).
-
-Proof: form the ordinary inverse mate by the unit, the direct-image square and
-the local counit. The derived direct-image representative equation identifies
-the derived square on K-injectives with the localization of the ordinary square.
-Every complex admits a K-injective resolution, and restriction preserves those
-resolutions and quasi-isomorphisms, so naturality extends that identification to
-the right-derived comparison. The exact pullbacks have invertible localization
-comparisons on every complex. Apply the local derived adjunction hom equivalence
-and its unit/counit factorization to the displayed two maps. The mate counit law
-and the normalized right-derived comparison give the same transpose as the
-localized ordinary mate. Injectivity proves equality. No tensor comparison or
-K-flatness is used. -/
+localization of the ordinary inverse mate on every complex. -/
 theorem localPullbackNormalization
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

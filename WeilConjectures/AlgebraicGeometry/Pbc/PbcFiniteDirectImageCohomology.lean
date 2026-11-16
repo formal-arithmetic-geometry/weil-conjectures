@@ -26,8 +26,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAd
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
 /-! # Proper finite-coefficient direct image on intrinsic cohomology
-Source: preservation proof, finite-level finiteness step; Stacks Tags 095U, 0GL0 and 09AL
-(blueprint: lem-weil-pbc-finite-direct-image-cohomology).
+
+## References
+
+* Stacks Tags 095U, 0GL0 and 09AL
 -/
 
 -- After pruning, this module only keeps private declarations.

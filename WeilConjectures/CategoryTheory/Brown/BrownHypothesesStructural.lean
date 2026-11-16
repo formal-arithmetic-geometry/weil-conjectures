@@ -55,13 +55,8 @@ theorem brownHypotheses_structural
   have htri : L.IsTriangulated := hloc.1
   let := htri
   have hiso : L.IsClosedUnderIsomorphisms := hloc.2.1
-  have hclosed (I : Type (u + 2)) : L.IsClosedUnderColimitsOfShape (Discrete I) := by
-    constructor
-    rintro K ⟨c⟩ P hP hS
-    let := hP.2.1
-    let : HasColimit c.diag := ⟨_, c.isColimit⟩
-    exact P.prop_of_iso ((colimit.isColimit c.diag).coconePointUniqueUpToIso c.isColimit)
-      (hP.2.2 c.diag inferInstance (fun i ↦ c.prop_diag_obj (Discrete.mk i) P hP hS))
+  have hclosed (I : Type (u + 2)) : L.IsClosedUnderColimitsOfShape (Discrete I) :=
+    hloc.isClosedUnderColimitsOfShape_discrete I
   have hsum : HasCoproducts.{u + 1} L.FullSubcategory := by
     intro I
     have := hclosed (ULift.{u + 2} I)

@@ -109,8 +109,11 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionEvaluationRestric
 
 /-! # Tensor comparison for evaluated scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03CY,
-applied to the vertical sequence topology.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03CY, applied to the vertical sequence
+  topology
+* Stacks Project, Section 03EK, the tensor presheaf restriction maps
 -/
 
 @[expose] public noncomputable section
@@ -145,13 +148,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 
 include he
 
-/-- Sectionwise pure-tensor comparisons commute with restriction.
-Source: Stacks Project, Section 03EK, the tensor presheaf restriction maps.
-(blueprint: lem-sp-scalar-extension-evaluation-naturality).
-
-Proof: extension-of-scalars homomorphisms are determined on 1 tensor x. The
-finite-level restriction and the system restriction both send this generator to
-1 tensor the restriction of x. Apply he at the source and target. -/
+/-- Sectionwise pure-tensor comparisons commute with restriction. -/
 theorem scalarExtension_evaluation_naturality {U V : Cᵒᵖ} (f : U ⟶ V) :
     (SheafOfModules.changeOfRingsPresheaf.{v, c, max c v r} (α n)
       ((evaluation.{c, v, max c v r} J B τ n).obj M)).map f ≫

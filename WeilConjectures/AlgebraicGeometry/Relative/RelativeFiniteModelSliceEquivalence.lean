@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficie
 
 import WeilConjectures.CategoryTheory.Native.NativeRingedRestrictionSlicesSupplement
 
-/-! # Slice equivalence for the explicit relative coefficient transport -/
+/-! # Slice equivalence for the explicit relative coefficient transport
+
+## References
+
+* Stacks Project, Sites, Tag 03A0
+* Stacks Project, Modules on Sites, Tag 03CY
+-/
 
 @[expose] public noncomputable section
 
@@ -51,14 +57,7 @@ private theorem isoRestriction_isEquivalence
   exact inferInstanceAs e.functor.IsEquivalence
 
 /-- The explicit coefficient transport carries isomorphisms on the corresponding
-small and pro-etale slices in both directions.
-
-Source: Stacks Project, Sites, Tag 03A0; Modules on Sites, Tag 03CY.
-(blueprint: lem-weil-pbc-relative-finite-constant-slice-comparison)
-
-The statement is the slice-equivalence part of the proof: precomposition with
-`AsSmall.down` and `AsSmall.up` are inverse equivalences, and pushforward of
-module sheaves preserves the resulting slice isomorphisms. -/
+small and pro-étale slices in both directions. -/
 theorem relativeFiniteModelSliceEquivalence {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B]
     (F G : pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)))

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Open.OpenRestrictionCompactSupport
 
 /-! # The graph-free factors of the open-support comparison
-
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
-(blueprint: def-asd-open-support-factors)
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +19,7 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- The proper/open interchange and open-composition part, after the graph comparison.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
-(blueprint: def-asd-open-support-factors) -/
+/-- The proper/open interchange and open-composition part, after the graph comparison. -/
 def openSupportTailIso {X Y U V : Scheme.{u}}
     {f : X ⟶ Y} {j : U ⟶ Y} [IsOpenImmersion j]
     {a : V ⟶ X} [IsOpenImmersion a] {p : V ⟶ U}

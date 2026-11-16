@@ -11,10 +11,12 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-!
 # Functorial module stalks on the pro-etale site
 
-Source: Stacks Project, Tags 0F6B and 002F
-(blueprint: def-weil-proetale-geometric-stalk).
 The objects and scalar action are the recorded module colimit construction;
 this interface retains the induced maps and additivity needed for complexes.
+
+## References
+
+* Stacks Project, Tags 0F6B and 002F
 -/
 
 @[expose] public section
@@ -24,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 
-/-- The module-valued pointed-neighbourhood colimit, including its action on maps.
-Source: Stacks Tag 0F6B (blueprint: def-weil-proetale-geometric-stalk). -/
+/-- The module-valued pointed-neighbourhood colimit, including its action on maps. -/
 noncomputable def geometricRingModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y)
     (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     SheafOfModules.{u + 1}
@@ -37,11 +38,7 @@ noncomputable def geometricRingModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y)
     PresheafOfModules.colimitFunctor
       (colimit.isColimit (proEtaleGeometricStalkRingDiagram y O))
 
-/-- Additivity of the canonical module stalk.
-Source: Stacks Tag 0F6B (blueprint: def-weil-proetale-geometric-stalk).
-Proof: restriction to neighbourhoods is additive componentwise. The colimit module
-functor is left adjoint to the additive constant-module functor, hence additive.
-The forgetful functor on module sheaves is additive, and so is their composite. -/
+/-- Additivity of the canonical module stalk. -/
 theorem geometricRingModuleStalkFunctor_additive (y : Spec (.of Ω) ⟶ Y)
     (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     (geometricRingModuleStalkFunctor y O).Additive := by
@@ -66,8 +63,7 @@ theorem geometricRingModuleStalkFunctor_additive (y : Spec (.of Ω) ⟶ Y)
 
 attribute [instance] geometricRingModuleStalkFunctor_additive
 
-/-- The finite-coefficient stalk with scalars restricted along the actual constant germ.
-Source: blueprint order 1825 (blueprint: def-weil-proetale-geometric-stalk). -/
+/-- The finite-coefficient stalk with scalars restricted along the actual constant germ. -/
 noncomputable def finiteCoefficientModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] :
     SheafOfModules.{u + 1}
@@ -78,8 +74,7 @@ noncomputable def finiteCoefficientModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y)
   geometricRingModuleStalkFunctor y _ ⋙
     ModuleCat.restrictScalars (proEtaleConstantRingGerm y A)
 
-/-- Additivity follows from the two additive factors of the stalk functor.
-Source: blueprint order 1825 (blueprint: def-weil-proetale-geometric-stalk). -/
+/-- Additivity follows from the two additive factors of the stalk functor. -/
 noncomputable instance finiteCoefficientModuleStalkFunctorAdditive
     (y : Spec (.of Ω) ⟶ Y) (A : Type u) [CommRing A] :
     (finiteCoefficientModuleStalkFunctor y A).Additive :=

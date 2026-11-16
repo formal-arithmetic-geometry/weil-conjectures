@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedIdealDete
 /-!
 # Formal approximation of sections along the punctured zero section
 
-Source: Stacks Project, Tag 0EY9, the first displayed inverse-limit calculation.
-(blueprint: lem-sbc-power-series-punctured-formal-approximation)
+## References
+
+* Stacks Project, Tag 0EY9, the first displayed inverse-limit calculation
+* Stacks Project, Tag 0EY9, first displayed calculation and the following comparison of rings
 -/
 
 @[expose] public section
@@ -75,24 +77,7 @@ private lemma powerSeries_variables_pow_germs
   exact (le_trans (pow_le_pow_left' hI n) (Ideal.le_comap_pow g n)) hb
 
 /-- Every section has a unique power series with the same restrictions to all
-infinitesimal neighbourhoods of the punctured zero section.
-
-Source: Stacks Project, Tag 0EY9, first displayed calculation and the following
-comparison of rings. (blueprint: lem-sbc-power-series-punctured-formal-approximation)
-
-Proof: For each n, finite-order approximation supplies f_n whose restricted
-germs agree with s modulo the n-th power of the zero-section stalk kernel.
-Finite-order ideal detection then puts f_m - f_n in I^m whenever m ≤ n:
-its germ is the difference of the two residual germs, and the n-th power
-is contained in the m-th power. Mathlib's variable-ideal adic completeness
-gives a limit b with f_n - b in I^n for every n. Naturality of global sections
-and stalk maps shows that the variables themselves have germs in each
-zero-section kernel. Ideal comap and power monotonicity therefore send
-I^n to the n-th stalk-kernel power. Adding the residual germ of f_n to the
-germ of f_n - b proves the asserted approximation for b. Finally two such
-approximations have difference in every I^n by finite-order detection.
-Mathlib's variable-ideal separatedness makes this difference zero.
-This is formal approximation; it does not assert equality of sections on V. -/
+infinitesimal neighbourhoods of the punctured zero section. -/
 theorem existsUnique_powerSeries_punctured_formal_approximation
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

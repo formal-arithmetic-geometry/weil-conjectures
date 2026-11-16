@@ -10,11 +10,12 @@ import all WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceRightNormal
 
 /-! # The specified ordered affine right normal form
 
-Source: main-20261015 blueprint, proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: def-sp-ordered-affine-right-normal-form).
-This definition node owns the specified ordered normal form and its degree-zero
-Tate product. It exposes the existing construction used in the trace proof;
-the published trace theorem and its DAG record are unchanged.
+This file defines the specified ordered normal form and its degree-zero Tate product,
+exposing the construction used in the proof of the affine-space trace.
+
+## Implementation details
+
+`orderedAffineRightIso` is the recursive construction itself, not a choice from `Nonempty`.
 -/
 
 public noncomputable section
@@ -27,9 +28,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCateg
   derivedTensor upperStar lowerStar
 set_option backward.isDefEq.respectTransparency true
 
-/-- The direct pullback, ordered Tate power, and accumulated even shift.
-Source: blueprint proposition-purity-vector-bundles, affine right normal form
-(blueprint: def-sp-ordered-affine-right-normal-form). -/
+/-- The direct pullback, ordered Tate power, and accumulated even shift. -/
 @[expose]
 def orderedAffineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) :
@@ -41,10 +40,7 @@ def orderedAffineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
           (Scheme.finiteEtaleTateSheaf A N (affineTraceTower S (d + 1)) hA
             ((d + 1 : ℕ) : ℤ))) ⋙ shiftFunctor _ (2 * ((d + 1 : ℕ) : ℤ))
 
-/-- The actual ordered normal form used to construct the affine-space trace.
-It is the existing recursive construction, not a choice from Nonempty.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b), 6; Charts of reduction-exceptional
-(blueprint: def-sp-ordered-affine-right-normal-form). -/
+/-- The isomorphism between `affineTraceRight` and its ordered normal form `orderedAffineRight`. -/
 @[irreducible]
 def orderedAffineRightIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

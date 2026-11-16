@@ -275,8 +275,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphFromOpenBaseChange
 import WeilConjectures.AlgebraicGeometry.Open.OpenSupportRefinementExchange
 
 /-! # Changing the compactifications in an open-support comparison
-
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -402,23 +400,7 @@ private theorem support_change_source
   rw [support_factor, support_factor, ← Category.assoc, ← Functor.whiskerRight_comp]
   rw [← Iso.trans_hom, graphIso_change]
 
-/-- Changing both supplied compactifications commutes with the open-support comparison.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i),
-comparison of the compactification diagram with its restriction to an open.
-
-Proof: the existing graph-normalization and cocycle API identifies graph comparisons
-with the common-refinement comparison and with the specified comparison for one
-cartesian refinement. Factor each support comparison as a graph map followed by
-its literal-pullback proper/open comparison. The two explicit composition triangles
-(p,j) and (a,f) show that this latter comparison intertwines a refinement with its
-pullback: apply general triangle-composition naturality twice and cancel their common
-output compositor. Thus E(d,b) followed by the refinement map equals E(c,b).
-Graph cocycles also give source-change naturality. Apply both laws to the two
-projections of the actual common refinement inf(cf,df). Expand I(cf,df) as the first
-projection comparison followed by the inverse of the second. Reassociate and cancel
-that second comparison to obtain the displayed equation. Quasi-compactness is used
-only for common refinements; empty opens and zero rings use the same identities.
-(blueprint: lem-asd-open-support-compactification-naturality) -/
+/-- Changing both supplied compactifications commutes with the open-support comparison. -/
 theorem openSupportCompactificationIso_naturality
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y U V : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]

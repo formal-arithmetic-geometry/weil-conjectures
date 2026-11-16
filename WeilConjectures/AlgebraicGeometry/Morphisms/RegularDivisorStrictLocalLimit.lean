@@ -18,8 +18,10 @@ import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-! # Strict local limits of regular divisors
 
-Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 04GP, 04HX, 06LN and 05WS.
-(blueprint: lem-sbc-regular-divisor-strict-local-limit)
+## References
+
+* Stacks Project, Tag 0EYG, strict henselization paragraph
+* Tags 04GP, 04HX, 06LN and 05WS for strict henselization and passage to the quotient
 -/
 
 @[expose] public section
@@ -30,25 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 -- Preserve the original existential instance binder name `hH`.
-/-- A regular divisor has a pointed regular strict local ind-etale limit.
-
-Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 04GP,
-04HX, 06LN and 05WS for strict henselization and passage to the quotient.
-(blueprint: lem-sbc-regular-divisor-strict-local-limit)
-
-Proof: Localize R at y, choose a separable closure of its residue field, and
-form its strict henselization H as the filtered colimit of pointed etale
-neighbourhood algebras. Its structural map from R is ind-etale (localization
-is ind-etale, and so is this filtered etale colimit). H is strictly henselian
-local, and the contraction of its maximal ideal is y; take x to be its
-closed point. The local ring of R at y is regular, so H is regular local
-by Tag 06LN. Flatness of R to H preserves injective multiplication by g.
-Because g belongs to y, its image lies in the maximal ideal of H. The
-quotient H/(g) is the strict henselization of the localization of R/(g)
-at the image of y (Tag 05WS); it is regular local by Tag 06LN. These
-constructions all stay in the universe of R using small representatives.
-Edge cases: y excludes the zero ring, and hy excludes a unit g. A regular
-g=0 can occur only in the zero ring, so cannot satisfy these hypotheses. -/
+/-- A regular divisor has a pointed regular strict local ind-etale limit. -/
 theorem regular_divisor_strict_local_limit
     (R : CommRingCat.{u}) (g : R) [IsRegularRing R]
     (hg : IsSMulRegular R g) [IsRegularRing (R ⧸ Ideal.span {g})]

@@ -79,7 +79,7 @@ private theorem properImage_localizing_of_hypotheses
     let := hD
     refine ⟨hP.2.2 D hD (fun i ↦ (hDR i).1), ?_⟩
     let L := P.lift D (fun i ↦ (hDR i.as).1)
-    have : PreservesColimit (L ⋙ P.ι) F := h.2 I L
+    have : PreservesColimit (L ⋙ P.ι) F := preservesColimit_of_properLocalizingHypotheses Λ p h I L
     have : PreservesColimit D F :=
       preservesColimit_of_iso_diagram F (P.liftCompιIso D (fun i ↦ (hDR i.as).1))
     exact Q.prop_of_iso (preservesColimitIso F D).symm

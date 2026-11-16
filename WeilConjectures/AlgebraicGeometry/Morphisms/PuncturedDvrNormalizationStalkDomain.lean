@@ -56,7 +56,6 @@ private theorem domain_stalk_of_flat {Y Z : Scheme.{u}}
 
 set_option linter.unusedVariables false in
 /-- The normalization stalk in the punctured DVR situation is a domain.
-(blueprint: lem-sbc-punctured-dvr-normalization-stalk-domain)
 -/
 theorem punctured_dvr_normalization_stalk_isDomain
     {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)

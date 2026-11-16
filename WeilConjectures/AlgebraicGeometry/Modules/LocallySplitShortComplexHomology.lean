@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Homology of a short complex with locally split boundaries
-
-Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
-(blueprint: lem-pc-locally-split-short-complex-homology)
 -/
 
 @[expose] public section
@@ -26,18 +23,7 @@ open CategoryTheory Limits SheafOfModules
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The cokernel of a split inclusion between finite locally free modules of fixed ranks
-is finite locally free of the difference of the ranks.
-
-Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
-(blueprint: lem-pc-locally-split-short-complex-homology)
-
-Proof: The retraction gives a split short exact sequence, hence a decomposition of the
-middle sheaf as the product of the source and the cokernel. On every affine open this
-makes the cokernel's sections a retract of a finite projective module. They are finite
-projective and therefore finitely presented and flat. Stalk rank is additive on the
-product, so the cokernel has rank k-b. Cokernels of quasi-coherent sheaves are
-quasi-coherent; the affine criterion for finite local freeness applies. If the scheme
-is empty the criterion is vacuous, so no global inequality b ≤ k is required. -/
+is finite locally free of the difference of the ranks. -/
 private theorem isFiniteLocallyFreeOfRank_cokernel_of_splitMono
     {Z : Scheme.{u}} {M N : Z.Modules} (f : M ⟶ N) (k b : ℕ)
     [M.IsFiniteLocallyFreeOfRank b] [N.IsFiniteLocallyFreeOfRank k] [IsSplitMono f] :
@@ -92,9 +78,6 @@ private theorem isFiniteLocallyFreeOfRank_cokernel_of_splitMono
 /-- The homology of a short complex is canonically isomorphic to the cokernel of the
 induced map from its image to its kernel. This is the standard left-homology
 identification in an abelian category.
-
-Source: Mathlib `Algebra.Homology.ShortComplex.Abelian`, `LeftHomologyData.ofAbelian`.
-(blueprint: lem-pc-locally-split-short-complex-homology)
 -/
 private theorem homology_iso_cokernel_imageToKernel
     {Z : Scheme.{u}} (S : ShortComplex Z.Modules) :
@@ -125,9 +108,6 @@ private theorem homology_iso_cokernel_imageToKernel
 
 /-- If the image inclusion is locally split, the homology has the expected finite
 locally free rank.
-
-Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
-(blueprint: lem-pc-locally-split-short-complex-homology)
 -/
 private theorem isFiniteLocallyFreeOfRank_cokernel_imageToKernel_of_locally_split
     {Z : Scheme.{u}} (S : ShortComplex Z.Modules) (k b : ℕ)
@@ -160,21 +140,7 @@ private theorem isFiniteLocallyFreeOfRank_cokernel_imageToKernel_of_locally_spli
 
 /-- If the outgoing kernel and the incoming image are finite locally free, and the
 incoming image is locally a direct summand of the middle term, homology is finite
-locally free of the difference of their ranks.
-
-Source: `lemma-triviality-fibres--2`, proof (3), kernel/image splitting argument.
-(blueprint: lem-pc-locally-split-short-complex-homology)
-
-Proof: Around each point choose a neighbourhood where the image inclusion has a
-retraction. Restrict that retraction to the outgoing kernel to split the image-to-kernel
-map. A split cokernel sequence gives a product decomposition on affine sections. Its
-cokernel sections are finite projective retracts of the kernel sections, hence finitely
-presented and flat. Additivity of stalk ranks gives quotient rank k-b; the affine
-criterion proves finite local freeness of this rank. Restriction commutes with cokernels,
-so these local assertions glue. Left homology data identify the resulting cokernel with
-homology. On an empty scheme the cover and rank conditions are vacuous; the zero-rank
-cases use zero free modules.
-No reducedness or freeness of the terms of the short complex is required. -/
+locally free of the difference of their ranks. -/
 theorem isFiniteLocallyFreeOfRank_homology_of_locally_split_image
     {Z : Scheme.{u}} (S : ShortComplex Z.Modules) (k b : ℕ)
     (hkernel : (kernel S.g).IsFiniteLocallyFreeOfRank k)

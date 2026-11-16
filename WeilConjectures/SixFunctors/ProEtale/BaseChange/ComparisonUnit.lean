@@ -18,7 +18,9 @@ pullbacks (`ProEtale.leftDerivedUpperStarComparisonIso`) and with the derived di
 (`ProEtale.rightDerivedLowerStarComparisonIso'`), compatibly with the counits of the adjunctions
 `f^* ⊣ Rf_*` (`ProEtale.ComparisonCore.comparison_counit`). Hence the two comparisons are also
 compatible with the units (`ProEtale.comparison_unit`): `ν^*` of the étale unit
-`G ⟶ Rf_* f^* G`, followed by the comparisons, is the pro-étale unit at `ν^* G`.
+`G ⟶ Rf_* f^* G`, followed by the comparisons, is the pro-étale unit at `ν^* G`. For an arbitrary
+morphism `f` the same holds on `D⁺` for the canonical base change morphism
+`ν^* R⁺f_* ⟶ R⁺f_* ν^*` of right derived functors (`ProEtale.comparison_unit_plus`).
 
 As an application, the pro-étale nearby cycles of a constant complex on a strictly henselian local
 ring are trivial: for a strictly henselian local ring `R`, a morphism `t : Spec Ω ⟶ Spec R` from
@@ -87,6 +89,44 @@ theorem comparison_unit {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [Quasi
     (leftDerivedUpperStarComparisonIso f Λ)
     (rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).hom
     (ComparisonCore.comparison_counit Λ f) G
+
+/-- **The canonical comparison of direct images and the units**, on bounded below derived
+categories and for an arbitrary morphism `f : U ⟶ V`: `ν_V^*` of the étale unit
+`G ⟶ R⁺f_* f^* G`, followed by the canonical base change morphism
+`ν_V^* R⁺f_* f^* G ⟶ R⁺f_* ν_U^* f^* G` of right derived functors
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange`) and `R⁺f_*` of the
+pullback comparison `ν_U^* f^* G ≅ f^* ν_V^* G`, is the pro-étale unit
+`ν_V^* G ⟶ R⁺f_* f^* ν_V^* G`. No hypothesis on `f` is needed: this is the unit form of the
+counit compatibility `AlgebraicGeometry.ProEtale.ComparisonCore.comparison_counit_plus`. -/
+theorem comparison_unit_plus {U V : Scheme.{u}} (f : U ⟶ V)
+    (G : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    let a := (Functor.mapDerivedCategoryPlusCompIso
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) V)
+      (upperStar (ModuleCat.{u + 1} Λ) f)).symm ≪≫
+      Functor.mapDerivedCategoryPlusNatIso
+        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f) ≪≫
+      Functor.mapDerivedCategoryPlusCompIso (Etale.upperStar (ModuleCat.{u + 1} Λ) f)
+        (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
+    D+(ν^*(V)[ModuleCat.{u + 1} Λ]).map
+        ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).unit.app G) ≫
+      (rightDerivedLowerStarComparisonPlusBaseChange f (ModuleCat.{u + 1} Λ)).app
+        (D+(Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj G) ≫
+      R+(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).map (a.inv.app G) =
+    (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).unit.app
+      (D+(ν^*(V)[ModuleCat.{u + 1} Λ]).obj G) := by
+  intro a
+  dsimp only [derivedUpperStarLowerStarAdjunctionPlus,
+    Etale.derivedUpperStarLowerStarAdjunctionPlus]
+  rw [Adjunction.derivedAdjunctionPlus_eq_derivedPlus,
+    Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
+  exact Adjunction.map_unit_comp_eq_unit
+    (A₀ := D+(ν^*(V)[ModuleCat.{u + 1} Λ]))
+    (A₁ := D+(ν^*(U)[ModuleCat.{u + 1} Λ]))
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
+    a.symm
+    (rightDerivedLowerStarComparisonPlusBaseChange f (ModuleCat.{u + 1} Λ))
+    (ComparisonCore.comparison_counit_plus Λ f) G
 
 /-- **Pro-étale nearby cycles of constant complexes over a strictly henselian local ring**: let
 `R` be a strictly henselian local ring, `t : Spec Ω ⟶ Spec R` a morphism from the spectrum of a

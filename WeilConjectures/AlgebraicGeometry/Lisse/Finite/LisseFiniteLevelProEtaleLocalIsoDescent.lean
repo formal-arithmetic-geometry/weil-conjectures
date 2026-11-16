@@ -19,9 +19,17 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Geometric descent of a local fixed-realization isomorphism
 
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z, 09B1 and 09BV;
-sites-cohomology.tex, Tag 094G.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-proetale-local-iso-descent).
+## Implementation details
+
+The boundedness and finite local constancy hypotheses on `D` in
+`exists_proetale_local_iso_section_of_fixed_realization_local_model` are essential: independent
+quadratic local systems in infinitely many degrees over `Spec ℚ` become constant on a pro-étale
+cover but have no common étale trivializing neighbourhood.
+
+## References
+
+* Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
+* Tag 094G
 -/
 
 @[expose] public noncomputable section
@@ -188,19 +196,7 @@ private theorem sliceIsoOfPullback
     Functor.mapDerivedCategoryNatIso (overRestrictionIso B V)
   exact ⟨F.mapDerivedCategory.preimageIso ((h.app K) ≪≫ e ≪≫ (h.app D).symm)⟩
 
-/-- Bounded finite-lisse local models descend to actual etale local isomorphisms.
-
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z, 09B1 and 09BV;
-sites-cohomology.tex, Tag 094G.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-proetale-local-iso-descent).
-
-Proof: Finite-ring derived local constancy gives a constant model of D on an etale
-neighbourhood V. Pull back the supplied sieve to V and lift an algebraically closed
-point to a member W. Reflect its marking through fixed realization. The constant
-pullback comparisons identify two constant complexes on W. The exact point fibre
-retracts constant realization, giving an isomorphism of their algebraic values.
-Realize that isomorphism on V and compose with its model marking.
--/
+/-- Bounded finite-lisse local models descend to actual etale local isomorphisms. -/
 theorem exists_etale_local_iso_of_fixed_realization_local_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -267,26 +263,8 @@ theorem exists_etale_local_iso_of_fixed_realization_local_model
   exact ⟨V, Over.homMk v hv, ⟨eV⟩⟩
 
 /-- A local fixed-realization isomorphism on a pro-etale covering sieve gives a local
-section of the derived Isom presheaf through every geometric point.
-
-Statement repair: the former signature omitted boundedness and finite local constancy
-of D. These are essential and were already hypotheses of its caller. For example,
-independent quadratic local systems in infinitely many degrees over Spec Q become
-constant on a pro-etale cover but have no common etale trivializing neighbourhood.
-
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z, 09B1 and 09BV;
-sites-cohomology.tex, Tag 094G.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-proetale-local-iso-descent).
-
-Proof: Use finite-ring derived local constancy to choose a constant model for the bounded
-finite-lisse complex D on an etale neighbourhood V of the given point. Pull the supplied
-covering sieve back to V and lift an algebraically closed point to a member W. Reflect
-its marking through the fixed-realization equivalence. Constant pullback comparisons
-identify this with an isomorphism between the two constant algebraic models on W.
-The exact fibre functor at the lifted point retracts constant realization, so the
-algebraic models are isomorphic. Their constant realizations give the required etale
-local isomorphism, and comparison sends it to the displayed pro-etale section.
--/
+section of the derived Isom presheaf through every geometric point, provided `D` is bounded
+with finite locally constant cohomology sheaves. -/
 theorem exists_proetale_local_iso_section_of_fixed_realization_local_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

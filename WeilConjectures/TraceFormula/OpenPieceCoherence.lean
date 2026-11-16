@@ -61,6 +61,23 @@ lemma Adjunction.exchangeLeft_app_comp_map_counit_app {A B A' B' : Type*} [Categ
   erw [aj.right_triangle_components]
   simp
 
+/-- A base change compatible with an exchange and a comparison of counits also intertwines
+the original counits. -/
+private lemma map_counit_eq_of_baseChange {A B : Type*} [Category A] [Category B]
+    {jL jS : A ⥤ B} {jU : B ⥤ A} {H : A ⥤ A} {H' : B ⥤ B}
+    (e : jL ⟶ jS) (ε : jU ⋙ jL ⟶ 𝟭 B) (εS : jU ⋙ jS ⟶ 𝟭 B)
+    (θ : jU ⋙ H ⟶ H' ⋙ jU) (β : jL ⋙ H' ⟶ H ⋙ jL) (δ : H ⋙ jS ⟶ jS ⋙ H')
+    (M : B) (hε : ε.app M = e.app (jU.obj M) ≫ εS.app M)
+    (hε' : ε.app (H'.obj M) = e.app (jU.obj (H'.obj M)) ≫ εS.app (H'.obj M))
+    (hβ : β.app (jU.obj M) ≫ e.app (H.obj (jU.obj M)) ≫ δ.app (jU.obj M) =
+      H'.map (e.app (jU.obj M)))
+    (hδ : δ.app (jU.obj M) ≫ H'.map (εS.app M) =
+      jS.map (θ.app M) ≫ εS.app (H'.obj M)) :
+    H'.map (ε.app M) = β.app (jU.obj M) ≫ jL.map (θ.app M) ≫ ε.app (H'.obj M) := by
+  rw [hε, hε', Functor.map_comp, ← hβ]
+  simp only [Category.assoc]
+  rw [hδ, reassoc_of% e.naturality (θ.app M)]
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
@@ -150,8 +167,6 @@ lemma weilUpperStarComparison_hom_app_eq {Φ : X ⟶ X} {ΦU : U ⟶ U} (hj : Φ
         sq).hom.app K := by
   rw [weilUpperStarComparison_hom_app, boundedConstructiblePullbackSquareComparison_hom_app]
 
-set_option maxHeartbeats 1000000 in
--- the instances of the categories of sheaves make the rewriting slow
 /-- **The extension by zero commutes with the pullbacks along the Frobenii** (blueprint
 `lemma-additivity-open-subscheme-complement`, Step 2(a), the open piece): for `Φ_U ≫ j = j ≫ Φ`, the
 map `RΓ_c(U, Lj^* K) ≅ RΓ_c(X, Rj_! Lj^* K) --RΓ_c(ε)--> RΓ_c(X, K)` intertwines `Φ_U^♯`
@@ -179,9 +194,6 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
           j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
             ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K)) := by
   have sq := isPullback_of_comp_eq_of_isOpenImmersion j hj
-  have hcp := (compactPullback ℓ Φ).naturality
-    (((boundedConstructibleUpperShriekAdjunction ℓ
-      j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app K)
   have hC1 := boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion ℓ sq
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
   have hEx := Adjunction.exchangeLeft_app_comp_map_counit_app
@@ -195,6 +207,31 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
     (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq] at hEx
   have hB := compactPullback_app_comp_baseChange ℓ sq
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
+  have hε := map_counit_eq_of_baseChange
+    (jL := boundedConstructibleLowerShriek ℓ j)
+    (jS := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (jU := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (H := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU)
+    (H' := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom
+    (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
+      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j).counit
+    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq.flip).hom
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)
+    (boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq) K
+    (counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j K)
+    (counit_app_ofNatIsoRight_upperShriekIsoUpperStar ℓ j _) hC1 hEx
+  rw [weilUpperStarComparison_hom_app_eq ℓ j hj sq.toCommSq.flip]
+  have hcp := (compactPullback ℓ Φ).naturality
+    (((boundedConstructibleUpperShriekAdjunction ℓ j).ofNatIsoRight
+      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app K)
+  have hn := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
+    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      sq.toCommSq.flip).hom.app K)
   have hB' : (compactPullback ℓ Φ).app ((boundedConstructibleLowerShriek
         ℓ j).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ≫
@@ -208,26 +245,10 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
         (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app _ := by
     rw [← reassoc_of% hB, Iso.hom_inv_id_app]
     erw [Category.comp_id]
-  have hn₁ := (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.naturality
-    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-      sq.toCommSq.flip).hom.app K)
-  have hn₂ := congrArg
-    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
-    ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ
-      j).hom.naturality ((boundedConstructiblePullbackSquareComparison
-        (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq.flip).hom.app K))
-  have hEx' := congrArg
-    (boundedConstructibleLowerShriek ℓ (toPoint X)).map hEx
-  have hC1' := congrArg
-    (boundedConstructibleLowerShriek ℓ (toPoint X)).map hC1
-  simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hcp hn₁
-  simp only [Functor.map_comp, Functor.comp_obj, Functor.id_obj] at hn₂ hEx' hC1'
-  rw [hcp, counit_app_ofNatIsoRight_upperShriekIsoUpperStar,
-    counit_app_ofNatIsoRight_upperShriekIsoUpperStar,
-    weilUpperStarComparison_hom_app_eq ℓ j hj sq.toCommSq.flip]
+  simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hcp hn
+  rw [hcp, hε]
   simp only [Functor.map_comp]
-  rw [← reassoc_of% hC1', hEx', reassoc_of% hB', Iso.inv_hom_id_app_assoc, reassoc_of% hn₁,
-    reassoc_of% hn₂]
+  rw [reassoc_of% hB', Iso.inv_hom_id_app_assoc, reassoc_of% hn]
 
 end OpenImmersion
 

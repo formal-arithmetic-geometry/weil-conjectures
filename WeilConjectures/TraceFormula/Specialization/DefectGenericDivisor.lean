@@ -16,28 +16,25 @@ Let `X` be a normal separated `k`-scheme of finite type, `Z = V(h)` the effectiv
 of a nonzero global function `h`, and `L` a bounded constructible `ℚ̄_ℓ`-complex on `X` with
 `Li^* L = 0`. The defect `C_{X,Z}(L)` of `ProEtale.CondensedRing.specializationDefect` vanishes at
 every generic point of `Z`, that is, over a dense open subset of `Z`
-(`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect`). This is the node
-`lemma-vanishing-generic-points-principal-divisor--1` of the blueprint subsection
-`lemma-vanishing-generic-points-principal-divisor`, stated here for `ℚ̄_ℓ`-coefficients as an input
-of the proof of blueprint `theorem-verdier-s-theorem-specialization-zero`.
+(`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect`), stated here for
+`ℚ̄_ℓ`-coefficients as an input of Verdier's specialization theorem.
 
 Since `Li^* L = 0`, the target `Ψ_Z(Li^* L)` of the zero-section map vanishes, so the defect is
 `Le^* Ψ_X(L)[1]` (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_shift`). By the
 reduction to the generic points of `Z` (`genericallyVanishingDefect_of_forall_defectVanishesNear`),
-the node follows from the vanishing of `Le^* Ψ_X(L)` near each generic point of `Z`
+the statement follows from the vanishing of `Le^* Ψ_X(L)` near each generic point of `Z`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_isGeneric`).
 
-## Unfinished
+## The closure case
 
 `ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_isGeneric` is reduced, through the
 open–closed triangle `L ≅ j_! Lj^* L` and the lisse generators of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_lowerShriek`), to
 `ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator`, proved
-away from the closure of the support of the generator. The remaining sorried case,
+away from the closure of the support of the generator. The remaining case,
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, is the
-local computation of nearby cycles along the divisor at a codimension-one point (blueprint
-`lemma-vanishing-generic-points-principal-divisor--1`, proof), which needs finite-coefficient nearby
-cycles over the trait and their comparison with `ℚ̄_ℓ`-coefficients, not available yet.
+local computation of nearby cycles along the divisor at a codimension-one point, which uses
+finite-coefficient nearby cycles over the trait and their comparison with `ℚ̄_ℓ`-coefficients.
 
 -/
 

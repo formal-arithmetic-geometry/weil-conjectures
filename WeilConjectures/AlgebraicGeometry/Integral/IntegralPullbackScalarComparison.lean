@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPu
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
-/-! # Scalar normalization of ordinary integral pullback -/
+/-! # Scalar normalization of ordinary integral pullback
+
+## References
+
+* Stacks Tags 03D3 and 03D8, inverse image adjunction and composition
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -92,15 +97,7 @@ private def derivedPullbackScalarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.mapDerivedCategoryNatIso ei
 
 
-/-- Derived pullback, after scalar normalization, is the raw inverse image.
-Source: Stacks Tags 03D3 and 03D8, inverse image adjunction and composition.
-(blueprint: lem-weil-pbc-integral-pullback-scalar-comparison).
-
-Proof: scalar restriction along a coefficient isomorphism is an exact equivalence.
-Compose its inverse adjunction with the inverse image adjunction. The right
-adjoints identify sectionwise, so uniqueness of left adjoints identifies the
-module pullbacks. Apply the exact-functor derived comparison to this natural
-isomorphism and its identity-coefficient case. -/
+/-- Derived pullback, after scalar normalization, is the raw inverse image. -/
 theorem proEtaleRingDerivedPullback_scalarComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

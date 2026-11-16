@@ -14,7 +14,10 @@ public import Mathlib.RingTheory.Nakayama
 
 /-! # Detecting functions on the punctured spectrum of a depth-two local ring
 
-Source: Stacks Project, Tags 0311 and 00LL.
+## References
+
+* Stacks Project, Tags 0311 and 00LL, detection at associated primes and regular elements avoiding
+  associated primes
 -/
 
 @[expose] public section
@@ -50,23 +53,7 @@ private theorem depth_zero_of_maximal_associated
     exact False.elim (hunion hxreg)
 
 /-- A function on a depth-two local affine scheme is detected by its germs away
-from the closed point.
-
-Source: Stacks Project, Tags 0311 and 00LL, detection at associated primes
-and regular elements avoiding associated primes.
-(blueprint: lem-sbc-depth-two-punctured-function-detection)
-
-Proof: If the maximal ideal were associated, every element of it would be a
-zerodivisor. Thus each regular sequence in it would be empty, and the supremum
-in the definition of depth would be zero. Nakayama ensures that the maximal
-ideal multiple of the nonzero finite module is proper, so the depth cannot be
-infinite by that exceptional clause. This contradicts depth at least two.
-Every associated prime therefore defines a point of the punctured spectrum.
-At each such point the assumed zero germ, transported through the canonical
-spectrum stalk isomorphism, says that a/1 is zero in A_p. The localization
-zero criterion supplies s outside p with s*a=0. The associated-prime detection
-theorem (0311) then gives a=0. This applies to rings with nilpotents and only
-uses vanishing in stalks, not vanishing in residue fields. -/
+from the closed point. -/
 theorem eq_zero_of_depth_two_punctured_germs
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

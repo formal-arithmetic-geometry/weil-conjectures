@@ -13,9 +13,6 @@ import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 
 /-!
 # Free integral modules on finite constant coefficients
-
-Source: the coefficient quotient comparison in the blueprint Tate-twist construction.
-(blueprint: lem-poincare-integral-residue-free-comparison)
 -/
 
 @[expose] public section
@@ -284,22 +281,7 @@ private noncomputable def freeConstantResidueNatIso (X : Scheme.{u}) (ℓ : ℕ)
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale
-/-- Free integral modules on the constant finite coefficients form the actual residue diagram.
-
-Source: `lem-pur-condensed-zl-reduction-mod-ell-power` and the integral construction in
-`definition-tate-twists`.
-Proof: a continuous function into a finite residue ring lifts by its integer representatives.
-A continuous integral function with zero residue divides continuously by `ℓ^n`, using its
-norm bound. Thus the residue map is the cokernel of multiplication by `ℓ^n`, sectionwise,
-and hence as a sheaf. Transfer through the canonical coefficient chart and reflect through
-the module forgetful functor to obtain the linear cokernel. The constant residue group is
-likewise the cokernel of `ℓ^n` on the integral tensor unit. Constant sheafification and the
-free-module left adjoint preserve this cokernel, and their unit comparison identifies its
-source with the regular integral module. The universal cokernel comparison is an isomorphism.
-Its defining projection identity proves that these isomorphisms commute with all successive
-reductions; assemble them by `NatTrans.ofOpSequence`. This includes `n=0`, where the cokernel
-of the identity is zero, and the empty scheme.
-(blueprint: lem-poincare-integral-residue-free-comparison) -/
+/-- Free integral modules on the constant finite coefficients form the actual residue diagram. -/
 theorem constantTateResidueSystem_free_iso (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] :
     Nonempty (constantTateResidueSystem X ℓ ⋙
       Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) X) ≅
