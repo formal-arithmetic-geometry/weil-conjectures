@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Finite operation tables give localized pro-étale module models
 
-Source: Stacks Project, Modules on Sites, Tag 093S.
-(blueprint: lem-sp-proetale-finite-action-local-models).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093S
 -/
 
 @[expose] public section
@@ -72,19 +73,7 @@ private theorem constantModule_over_comparison (X : Scheme.{u})
     (J.over V) A (R.over V) aV).preimageIso e⟩
 
 /-- A finite constant coefficient action on a sheaf with finite locally constant
-underlying sets admits finite module models on localized ringed sites.
-
-Source: Stacks Project, Modules on Sites, Tag 093S.
-(blueprint: lem-sp-proetale-finite-action-local-models).
-
-Proof: apply the finite-operation-table refinement to the small pro-étale precoverage.
-Write the resulting covering presieve of the final object as a family. The constant
-module sheaves in that theorem are global constants restricted to each slice. Restrict
-both coefficient presentations to constant scalars: constant module sheafification
-then identifies with constant fixed-module sheafification, and constant sheafification
-commutes with restriction to a slice. Full faithfulness of constant-scalar restriction
-lifts this comparison back to module sheaves. Compose each refined model with it.
-This uses the original finite module, so preserves its finiteness. -/
+underlying sets admits finite module models on localized ringed sites. -/
 theorem proEtale_finiteLocalModels_of_finiteUnderlying
     (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
     (F : proEtaleRingModules X (proEtaleConstantRing X B))

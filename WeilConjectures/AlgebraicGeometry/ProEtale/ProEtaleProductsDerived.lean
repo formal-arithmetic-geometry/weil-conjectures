@@ -73,10 +73,6 @@ import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 /-!
 # Products in the derived category of pro-etale module sheaves
-
-Source: Weil conjectures blueprint, snapshot main-20261015,
-sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md
-(blueprint: proposition-exact-products--2).
 -/
 
 @[expose] public section
@@ -90,31 +86,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Products of complexes of pro-etale module sheaves are computed termwise in the derived
-category, commute with cohomology, and preserve quasi-isomorphisms.
-
-Source: Weil conjectures blueprint, snapshot main-20261015,
-sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md
-(blueprint: proposition-exact-products--2).
-
-Proof plan:
-1. Form the termwise product using Mathlib's `coneOfHasLimitEval`. Its differential and
-   projections are determined degreewise by the product universal property
-   (proposition-exact-products--2 and proposition-exact-products--2).
-2. By proposition-exact-products--1, products preserve the short exact sequences with cycles,
-   boundaries and cohomology. Thus the canonical map induced by projections identifies
-   the cohomology of this product with the product of the cohomologies, naturally in K.
-3. For a family of quasi-isomorphisms the cohomology comparison identifies the map on
-   product cohomology with the product of the isomorphisms on cohomology. Its inverse
-   is the product of their inverses, so this product map is a quasi-isomorphism.
-4. Use prose-01-10 and proposition-exact-products--2 to regard the
-   arbitrary ring-sheaf module category as Grothendieck abelian. Apply
-   prose-03-02 to choose resolutions K i to J i. By
-   proposition-exact-products--2, their termwise product is K-injective and
-   its localization, with the localized projections, is a product in the derived category.
-5. Step 3 makes the product of the resolution maps a quasi-isomorphism. Its projection
-   squares commute. Invert it and the individual localized resolution maps to transfer
-   existence and uniqueness of the product lift to the localized termwise product of K.
-   Hence the actual localized product cone is limiting for arbitrary derived morphisms. -/
+category, commute with cohomology, and preserve quasi-isomorphisms. -/
 theorem products_derived
     (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)})

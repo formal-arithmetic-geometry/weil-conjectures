@@ -20,9 +20,7 @@ functions `Γ(Uᵢ)` is the polynomial ring over `A` in the ratios `x_k / xᵢ`,
 - `AlgebraicGeometry.ProjectiveSpace.homOfSections_coord_eq`: the morphism
   `𝔸({k // k ≠ i}; S) ⟶ ℙ(n; S)` given by the coordinates and `1` in position `i` is the inverse
   of the chart isomorphism `D₊(xᵢ) ≅ 𝔸({k // k ≠ i}; S)` followed by the inclusion.
-- `AlgebraicGeometry.ProjectiveSpace.chartRingEquiv`: `A[x_k / xᵢ : k ≠ i] ≃ Γ(D₊(xᵢ))`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
+- `AlgebraicGeometry.ProjectiveSpace.chartRingEquiv`: `A[x_k / xᵢ: k ≠ i] ≃ Γ(D₊(xᵢ))`.
 -/
 
 @[expose] public section

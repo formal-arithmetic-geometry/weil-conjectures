@@ -21,7 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSpli
 
 /-! # Splitting the zero slice of the fixed formal test
 
-Source: Stacks Project, Tags 0EYJ and 0EY9.
+## References
+
+* Stacks Project, Tags 0EYJ and 0EY9
+* Stacks Project, Tag 0EYJ (the rational section point and extended action)
+* Tag 0BQM (full faithfulness over a normal integral base)
 -/
 
 @[expose] public section
@@ -113,31 +117,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Splitting over U first makes the minimality hypotheses unnecessary for this proof.
 /-- The normalization test is split on the zero slice of its punctured open.
-This only gives an isomorphism after pulling back to the zero slice.
-
-Source: Stacks Project, Tag 0EYJ (the rational section point and extended action);
-Tag 0BQM (full faithfulness over a normal integral base).
-(blueprint: lem-sbc-stalk-normalization-formal-zero-slice-split)
-
-Proof: Minimality identifies the inverse image of U with the punctured spectrum
-of the normal local ring A = O_{S,s}. On this open relative normalization
-agrees with PA: PA is finite, hence integral, over C_U, and normalization
-commutes with smooth base change along the open inclusion.
-Extend the generic G-action to PA using generic-fibre full faithfulness.
-Pull back along the given section on this punctured local base. The rational
-point over the generic section and its G-translates give an isomorphism of
-its generic fibre with the constant G-indexed cover: simple transitivity
-makes the translates distinct and exhaustive. On the normal integral
-punctured local base, extend that generic isomorphism and its inverse using
-full faithfulness of finite etale restriction to the generic point (0BQM).
-Uniqueness checks both inverse identities. The base compatibility of t and
-its entire zero-section compatibility identify the zero slice of V with
-this punctured base, and identify the pulled-back normalization cover with
-the section pullback of PA. Pullback of the constant coproduct commutes with
-this restriction. Transport the section-cover isomorphism through these
-canonical pullback comparisons to get the displayed finite etale isomorphism.
-This argument applies to zero variables and to disconnected torsors; it
-makes no assertion about the cover away from the zero slice. -/
+This only gives an isomorphism after pulling back to the zero slice. -/
 theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

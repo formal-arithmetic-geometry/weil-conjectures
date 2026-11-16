@@ -18,22 +18,7 @@ universe u
 open CategoryTheory Limits SheafOfModules
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The local normal form in the nonempty open-subscheme case.
-
-Source: `lemma-triviality-fibres--2`, proof (3), normal-form claim.
-(blueprint: lem-pc-constant-rank-map-local-normal-form-nonempty)
-
-Proof: At z choose the field-valued point from hrank. The proved rank-minor
-criterion le_rank_map_appTop_iff gives an a by a minor nonvanishing at j(z).
-Apply exists_local_invertible_minor_block to obtain local decompositions with
-an invertible leading block f. Mathlib's Biprod.gaussian constructs invertible
-row and column operations and a complementary block δ, giving diag(f, δ).
-Apply complementary_block_eq_zero_of_rank_le using the upper bound supplied
-by hrank on U; this is the reducedness step and gives δ = 0. Absorb f into the
-source basis and use the biproduct braiding to place the complementary source
-coordinates first. The biproduct projection/inclusion identities yield the
-claimed equality. The empty minor and zero biproduct summands include rank
-zero and maximal rank without separate cases. -/
+/-- The local normal form in the nonempty open-subscheme case. -/
 theorem exists_local_normal_form_of_constantRank_nonempty
     {Y Z : Scheme.{u}} [IsReduced Y] [Nonempty Z] {M N : Y.Modules} {m n : ℕ}
     (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))

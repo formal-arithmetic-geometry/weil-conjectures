@@ -67,8 +67,7 @@ set_option cleanup.letToHave false in
 the scalar-model counit computation holds on every flat-term K-flat complex.
 This is the representative calculation: expand the endpoint model counits,
 apply the two normalization equations, and use `PullNormalized` for the central
-internal square.
-(blueprint: lem-sfb-quotient-section-pull-transport-kflat-derived). -/
+internal square. -/
 theorem section_pull_transport_kflat_derived {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)

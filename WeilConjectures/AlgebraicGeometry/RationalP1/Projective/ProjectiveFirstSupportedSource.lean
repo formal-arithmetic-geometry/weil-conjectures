@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveOrdinar
 import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.RightDerivedSingleCounit
 
 /-! # First-projection supported source normalization
-
-Source: current blueprint, rational projective-line triangle, First identity.
 -/
 
 @[expose] public noncomputable section
@@ -156,24 +154,6 @@ private theorem cancel_mapped_single_unit
 -- Cancel the exact-single augmentation with fixed native functor instances.
 /-- The normalized supported source agrees with the first-projection section arrow.
 There is no variable tensor factor, kernel class, functional or outer direct image.
-
-Source: current rational projective-line triangle proof, First identity, identification
-Rp1* Delta* = id and the normalized coefficient source
-(blueprint: lem-sfb-projective-first-supported-source).
-
-Proof: expand NormalizedSource.hom as the single functor applied to support1.iso.hom
-followed by diagonalTraceRightSingle. The full-unit equation d.p1_unit identifies
-this latter arrow, after transport by d.p1_canonical, with the canonical right-derived
-unit on the single complex of the supported regular module. The ordinary normalization
-of support1.iso identifies its inverse with the composite lowerStarComp, the equality
-Delta p1 = id and lowerStarId; faithfulness of the underlying sheaf functor gives this
-identity for module morphisms. Derive the ordinary composite adjunction. The unit and
-counit normalizations of the derived adjunction identify its section comparison with
-the conjugate of pullSectionIso, namely firstPushSectionIso. Naturality of the derived
-unit and the exact diagonal direct image give the remaining single-degree comparison,
-which is supportedUnitIso. Cancel the single functor images of support1.iso.inv and
-support1.iso.hom. The resulting equality is precisely the displayed untensored arrow.
-The argument uses neither the diagonal class nor any trace or integration equation.
 -/
 theorem first_supported_source
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

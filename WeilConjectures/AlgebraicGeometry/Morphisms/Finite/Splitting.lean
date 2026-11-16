@@ -32,8 +32,8 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] (y : Spec (.of Ω) ⟶ Y)
 
-/-- Blueprint `lemma-finite-direct-images--1`: the geometric fibre of `f` over `y`, the set of
-geometric points `x : Spec Ω ⟶ X` with `x ≫ f = y` (`AlgebraicGeometry.Scheme.Hom.GeometricFiber`),
+/-- the geometric fibre of `f` over `y`, the set of
+geometric points `x: Spec Ω ⟶ X` with `x ≫ f = y` (`AlgebraicGeometry.Scheme.Hom.GeometricFiber`),
 is the set of `Ω`-points of the scheme-theoretic fibre `X ×_Y Spec Ω` over `Spec Ω`. When `f` is
 finite it is finite (`AlgebraicGeometry.Scheme.Hom.GeometricFiber.finite`). -/
 noncomputable def geometricFiberEquiv :
@@ -77,8 +77,8 @@ lemma eq_basePt_of_comp_eq [IsSepClosed Ω] (s : SplitNbhd f y) (t : GeometricFi
 
 end SplitNbhd
 
-/-- Blueprint `lemma-finite-direct-images`: étale splitting of a finite morphism. For a finite
-`f : X ⟶ Y` and a geometric point `y` of `Y` with algebraically closed residue field, there is
+/-- étale splitting of a finite morphism. For a finite
+`f: X ⟶ Y` and a geometric point `y` of `Y` with algebraically closed residue field, there is
 a pointed étale neighbourhood `(U, u)` of `y` and a decomposition of `U ×_Y X` into pairwise
 disjoint open and closed pieces `X_t` indexed by the (finite) geometric fibre of `f` over `y`
 (the structure `AlgebraicGeometry.Scheme.Hom.SplitNbhd`) such that every `X_t ⟶ U` is finite and

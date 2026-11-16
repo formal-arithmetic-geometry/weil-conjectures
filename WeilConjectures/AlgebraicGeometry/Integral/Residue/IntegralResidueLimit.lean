@@ -70,10 +70,8 @@ import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 /-!
 # The integral coefficient module as the limit of its residue modules
 
-Source: the integral inverse-limit formula in the blueprint Tate-twist unit and
-Bhatt--Scholze, Section 6.8. The residue maps are the actual continuous reductions,
+The residue maps are the actual continuous reductions,
 composed with the canonical condensed-to-continuous coefficient comparison.
-(blueprint: lem-poincare-integral-residue-module-limit)
 -/
 
 @[expose] public section
@@ -246,16 +244,7 @@ private noncomputable def residueModuleForgetIso (X : Scheme.{u}) (ℓ : ℕ) [F
   have : ∀ n, IsIso (t.app n) := fun n ↦ inferInstanceAs (IsIso (𝟙 _))
   have : IsIso t := NatIso.isIso_of_isIso_app t
   exact asIso t
-/-- The regular condensed integral coefficient module is the inverse limit of its residues.
-
-Source: the blueprint integral-limit formula in `definition-tate-twists`.
-Proof: the canonical coefficient comparison identifies its underlying abelian sheaf with
-continuous `ℤ_ℓ`-valued functions. On each site object a compatible sequence of residues
-lifts uniquely by `PadicInt.ofCompatible`. Its continuity follows from the open fibers
-of a finite residue and the bound on the norm of a difference with zero residue.
-The underlying cone is therefore a limit sectionwise. The module forgetful functor
-reflects limits, yielding the asserted linear limit cone, including its level zero.
-(blueprint: lem-poincare-integral-residue-module-limit) -/
+/-- The regular condensed integral coefficient module is the inverse limit of its residues. -/
 theorem tateResidueModuleCone_isLimit (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] :
     Nonempty (IsLimit (tateResidueModuleCone X ℓ)) := by
   refine ⟨?_⟩

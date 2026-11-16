@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-!
 # Local split determinant comparisons
-
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph. (blueprint: new-determinant-split-local).
 -/
 
 @[expose] public section
@@ -24,11 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Converting a natural family of linear maps to equal linear equivalences preserves naturality.
-Source: blueprint, Riemann--Roch determinant paragraph
-(blueprint: new-determinant-split-restriction).
-Proof: substitute the equality with the original linear maps into the restriction equation;
-then apply their assumed naturality. -/
+/-- Converting a natural family of linear maps to equal linear equivalences preserves naturality. -/
 theorem determinant_split_comparison_restriction {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ)
     (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →

@@ -14,13 +14,12 @@ public import WeilConjectures.FieldTheory.HenselianDVRGaloisCohomology
 
 Let `B` be a henselian discrete valuation ring with separably closed residue field, `K` its
 fraction field and `ℓ` a prime invertible in the residue field. We compute the étale cohomology
-of `Spec K` with coefficients in the constant sheaf `ℤ/ℓ` (blueprint
-`lemma-punctured-surface-punctured-curve--1`):
+of `Spec K` with coefficients in the constant sheaf `ℤ/ℓ`:
 `H⁰(Spec K, ℤ/ℓ) ≃ ℤ/ℓ`, `H¹(Spec K, ℤ/ℓ) ≃ ℤ/ℓ` and `Hᵠ(Spec K, ℤ/ℓ) = 0` for `q ≥ 2`.
 
 By `AlgebraicGeometry.Scheme.sheafHConstantSheafAddEquivGaloisH` this is the Galois cohomology
 of the trivial module `ℤ/ℓ` of the absolute Galois group `G` of `K`. This group has a continuous
-character `χ : G → ℤ_ℓ` with `χ τ = 1` whose kernel has finite quotients of order prime to `ℓ`
+character `χ: G → ℤ_ℓ` with `χ τ = 1` whose kernel has finite quotients of order prime to `ℓ`
 (`IsDiscreteValuationRing.exists_isEllAdicQuotient`), so `Hᵠ(G, ℤ/ℓ) = 0` for `q ≥ 2` and
 `H¹(G, ℤ/ℓ) = (ℤ/ℓ)^{ker χ} / (τ - 1) = ℤ/ℓ` (`DiscreteModule.IsEllAdicQuotient.HOneAddEquiv`).
 
@@ -55,8 +54,7 @@ variable {B K : Type u} [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
 variable (K) in
 /-- **Vanishing of the higher cohomology of the generic point of a strictly henselian trait.**
 If `K` is the fraction field of a henselian discrete valuation ring `B` with separably closed
-residue field, in which the prime `ℓ` is invertible, then `Hᵠ(Spec K, ℤ/ℓ) = 0` for `q ≥ 2`.
-(blueprint `lemma-punctured-surface-punctured-curve--1`) -/
+residue field, in which the prime `ℓ` is invertible, then `Hᵠ(Spec K, ℤ/ℓ) = 0` for `q ≥ 2`. -/
 theorem subsingleton_sheafH_constantZMod_spec_of_isFractionRing
     (hℓ : (ℓ : ResidueField B) ≠ 0) (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H ((Spec (.of K)).constantZMod ℓ) q) := by
@@ -67,8 +65,7 @@ theorem subsingleton_sheafH_constantZMod_spec_of_isFractionRing
 variable (K) in
 /-- **The first cohomology of the generic point of a strictly henselian trait.**
 If `K` is the fraction field of a henselian discrete valuation ring `B` with separably closed
-residue field, in which the prime `ℓ` is invertible, then `H¹(Spec K, ℤ/ℓ) ≃ ℤ/ℓ`.
-(blueprint `lemma-punctured-surface-punctured-curve--1`) -/
+residue field, in which the prime `ℓ` is invertible, then `H¹(Spec K, ℤ/ℓ) ≃ ℤ/ℓ`. -/
 theorem nonempty_addEquiv_sheafH_one_constantZMod_spec_of_isFractionRing
     (hℓ : (ℓ : ResidueField B) ≠ 0) :
     Nonempty (Sheaf.H ((Spec (.of K)).constantZMod ℓ) 1 ≃+ ZMod ℓ) := by

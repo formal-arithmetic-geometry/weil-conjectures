@@ -12,8 +12,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Funct
 /-!
 # Base change of `Proj` of a graded algebra
 
-For a graded `R`-algebra `𝒜` we write `Proj.toSpecOfAlgebra 𝒜 : Proj 𝒜 ⟶ Spec R` for the structure
-morphism. If `φ : 𝒜 →+*ᵍ ℬ` is a coefficientwise base change along `R → S`
+For a graded `R`-algebra `𝒜` we write `Proj.toSpecOfAlgebra 𝒜: Proj 𝒜 ⟶ Spec R` for the structure
+morphism. If `φ: 𝒜 →+*ᵍ ℬ` is a coefficientwise base change along `R → S`
 (`GradedRingHom.IsGradedBaseChange`), then
 
 ```
@@ -28,10 +28,9 @@ instances are the localization `𝒜 → 𝒜[1/f]` (restriction of `Proj` to th
 
 ## Main results
 
-- `AlgebraicGeometry.Proj.toSpecOfAlgebra` — the structure morphism `Proj 𝒜 ⟶ Spec R`
-  (blueprint: `definition-admissible-blow-up--1`, structure map composed with `Spec R₀ → Spec R`).
+- `AlgebraicGeometry.Proj.toSpecOfAlgebra` — the structure morphism `Proj 𝒜 ⟶ Spec R`.
 - `AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChange` — the base change square is a
-  pullback (blueprint: `definition-admissible-blow-up--1`, items 1 and 4, affine case).
+  pullback.
 
 This is a generic version of `AlgebraicGeometry.AffineBlowup.isPullback_hom_of_isLocalization`.
 The material of this file would belong to `Mathlib.AlgebraicGeometry.ProjectiveSpectrum`.
@@ -90,10 +89,9 @@ lemma isPullback_awayι_map (φ : 𝒜 →+*ᵍ ℬ)
 attribute [local instance] GradedRingHom.awayAlgebra GradedRingHom.awayMapAlgebra
   GradedRingHom.awayAlgebra_isScalarTower
 
-/-- **Base change for `Proj`**: if `φ : 𝒜 →+*ᵍ ℬ` is a coefficientwise base change along
+/-- **Base change for `Proj`**: if `φ: 𝒜 →+*ᵍ ℬ` is a coefficientwise base change along
 `R → S`, then `Proj ℬ ≅ Spec S ×_{Spec R} Proj 𝒜`, i.e. the square formed by `Proj.map φ` and
-the structure morphisms is a pullback.
-(blueprint: `definition-admissible-blow-up--1`, items 1 and 4, affine case) -/
+the structure morphisms is a pullback. -/
 theorem isPullback_map_of_isGradedBaseChange (φ : 𝒜 →+*ᵍ ℬ) (h : φ.IsGradedBaseChange) :
     IsPullback (Proj.map φ h.irrelevant_le) (toSpecOfAlgebra ℬ) (toSpecOfAlgebra 𝒜)
       (Spec.map (CommRingCat.ofHom (algebraMap R S))) := by
@@ -187,8 +185,7 @@ lemma map_toSpecOfAlgebra_of_comp (f : R →+* S) (φ : 𝒜 →+*ᵍ ℬ)
   haveI : IsScalarTower R S B := .of_algebraMap_eq' rfl
   map_toSpecOfAlgebra φ hφ hirr
 
-/-- **Base change for `Proj`** along a ring homomorphism `f : R →+* S`
-(blueprint: `definition-admissible-blow-up--1`, items 1 and 4, affine case). -/
+/-- **Base change for `Proj`** along a ring homomorphism `f: R →+* S`. -/
 theorem isPullback_map_of_isGradedBaseChangeAlong (f : R →+* S) (φ : 𝒜 →+*ᵍ ℬ)
     (h : φ.IsGradedBaseChangeAlong f) :
     IsPullback (Proj.map φ h.irrelevant_le) (toSpecOfAlgebra ℬ) (toSpecOfAlgebra 𝒜)

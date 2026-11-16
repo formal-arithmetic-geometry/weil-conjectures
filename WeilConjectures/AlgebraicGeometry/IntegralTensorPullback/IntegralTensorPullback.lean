@@ -18,9 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralResidueCriterion
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
 
 /-! # Integral inverse image preserves constructibility and completed pullback
-
-Source: blueprint lemma-inverse-image-tensor-product.
-(blueprint: lemma-inverse-image-tensor-product).
 -/
 
 @[expose] public noncomputable section

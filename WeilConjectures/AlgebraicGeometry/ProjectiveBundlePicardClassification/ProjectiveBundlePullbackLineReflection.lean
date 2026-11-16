@@ -18,8 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-!
 # Pullback to a projective bundle reflects line isomorphism classes
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 04TN, 01XS.
-(blueprint: lem-sfb-projective-bundle-pullback-line-reflection)
+## References
+
+* EGA II, Remark 4.2.7
+* EGA II, Remark 4.2.7, printed p.75
+* Stacks Project, Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, Lemma
+  glue-maps (Tag 04TN)
 -/
 
 @[expose] public section
@@ -125,25 +129,7 @@ private theorem bundle_functions_on_affine (S : Scheme.{u}) (E : S.Modules)
     infer_instance
   exact isIso_app_of_isPullback _ V j _ hj
 
-/-- The canonical map on functions of every base open is bijective.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks Project, coherent.tex,
-Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, and
-sheaves.tex, Lemma glue-maps (Tag 04TN).
-(blueprint: lem-sfb-projective-bundle-pullback-line-reflection)
-
-Proof: choose an affine open cover trivializing E, of constant positive rank r. The symmetric-
-algebra frame comparison identifies the inverse image of each member with projective (r-1)-space
-over its ring of functions, compatibly with the structural morphism. The degree-zero cohomology
-computation, O(0)=O, H0=Gamma and the constant-polynomial equivalence show that global functions
-form a free module of rank one over the coefficient ring. A unital algebra free of rank one is
-its coefficient ring through the canonical algebra map, including zero rings. Apply this on
-affine refinements inside any base open U. A function upstairs has unique scalar preimages on
-these affine members. On their intersections refine again by affine frame opens; injectivity
-there makes the scalar preimages agree. The base sheaf axiom glues them to a function on U.
-Their images agree with the original function on the inverse-image cover, hence globally by
-separation upstairs. The same affine-cover injectivity proves uniqueness. For rank one the same
-computation is projective zero-space; on empty opens both rings are the zero ring. -/
+/-- The canonical map on functions of every base open is bijective. -/
 private theorem projective_bundle_base_functions (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)
@@ -181,19 +167,7 @@ private theorem projective_bundle_base_functions (S : Scheme.{u}) (E : S.Modules
       ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.app V.val)
   exact ConcreteCategory.bijective_of_isIso (a.app U)
 
-/-- Isomorphic pullbacks of two base lines imply that the base lines are isomorphic.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, sheaves.tex, Tag 04TN;
-coherent.tex, Tag 01XS.
-(blueprint: lem-sfb-projective-bundle-pullback-line-reflection)
-
-Proof: the canonical function map is bijective on every base open by the
-positive-rank projective-bundle calculation. It identifies the pushforward of
-the structure sheaf with the base structure sheaf. The projection formula for
-an invertible module therefore gives p_*p^*N isomorphic to N, and similarly for
-N'. Identify tensorPullback with the adjoint-defined pullback by uniqueness of
-left adjoints, push the supplied isomorphism forward, and compose these three
-isomorphisms. The argument includes rank one and empty bases. -/
+/-- Isomorphic pullbacks of two base lines imply that the base lines are isomorphic. -/
 theorem projective_bundle_pullback_line_reflection (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)

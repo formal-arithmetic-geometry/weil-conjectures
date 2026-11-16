@@ -20,15 +20,7 @@ open DiagonalCoefficients CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The normalized diagram source arrow is the canonical supported-unit arrow.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, source normalization after the full second derived unit.
-(blueprint: lem-sfb-projective-supported-source-normalization).
-
-Proof: apply the supported arrow identity before tensor normalization, then
-precompose by `singleUnitIso.inv` and tensor by `M`. -/
+/-- The normalized diagram source arrow is the canonical supported-unit arrow. -/
 theorem supported_source_normalization
     (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L)

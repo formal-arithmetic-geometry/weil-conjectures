@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportInternalData
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! The categorical paste for internal-left scalar tensor transport. -/
+/-! The categorical paste for internal-left scalar tensor transport.
+
+## References
+
+* Stacks Project, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -122,15 +127,8 @@ private theorem paste_map_three {𝒞 𝒟 : Type*} [Category 𝒞] [Category �
 -- Preserve the existing binder names for the three inputs unused by this output-side proof.
 set_option linter.unusedVariables false in
 /--
-The algebraic paste after the three normalization equations have been supplied.
-The proof is the categorical reassociation and cancellation in the proof of the
-internal-left transport lemma; the three displayed equations are its independent
-inputs.  Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 07A4.
-(blueprint: lem-sfb-quotient-section-tensor-transport-internal-left-core)
-
-Proof: reassociate the barB naturality square, substitute the tensor normalization,
-scalar counit normalization, and qTensor normalization equations, then cancel the
-comparison isomorphisms. The result is exactly scalarTensorSectionPath.
+The algebraic paste for internal-left scalar tensor transport, given the three normalization
+equations as hypotheses.
 -/
  theorem section_tensor_transport_internal_left_paste (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)

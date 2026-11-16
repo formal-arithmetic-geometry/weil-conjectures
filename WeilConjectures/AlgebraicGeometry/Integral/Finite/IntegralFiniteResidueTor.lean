@@ -426,25 +426,7 @@ private def residueModuleIso {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ 
 
 -- Match the native derived tensor structures with their normalized finite encodings.
 /-- Over a finite coefficient quotient, the cohomological interval of the canonical
-residue scalar extension tests the Tor interval of a bounded constructible complex.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph
-(blueprint: lem-pe-integral-finite-residue-tor).
-
-Proof: choose normalized finite coefficient encodings. Their section-action descriptions
-identify scalar restriction along the actual internal residue map with restriction along
-the recursive quotient homomorphism: check constant scalar sections by induction, then
-use the encoding normalization and naturality of the sheaf-to-presheaf tensor map.
-On a flat K-flat resolution, exact restriction of the specified derived scalar extension
-is tensor with the restricted regular residue module. The monoidal encoding carries
-this module to the constant quotient by the uniformizer image, using the normalized
-quotient-of-quotient equivalence. That image is nilpotent and generates a maximal ideal.
-The categorical nilpotent residue criterion therefore applies directly to ordinary
-pro-etale module sheaves. Exact restriction and encoding preserve the assumed homology
-interval, and the finite monoidal encoding reflects the resulting Tor interval.
-For n=0 the coefficient ring is already the residue field and the residue map is its
-identity. This argument does not need the retained constructibility and Noetherian
-hypotheses; completeness and an integral lift of L are likewise unnecessary. -/
+residue scalar extension tests the Tor interval of a bounded constructible complex. -/
 theorem integral_finite_residue_tor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

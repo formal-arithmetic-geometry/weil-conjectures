@@ -9,8 +9,6 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
 
 /-! # Naturality of the specified inverse total-tensor comparison at (1,q).
-
-(blueprint: lem-sp-resolution-sigma-naturality)
 -/
 
 @[expose] public noncomputable section

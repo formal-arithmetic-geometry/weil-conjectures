@@ -66,9 +66,9 @@ that the representation respects the group laws is the predicate
 The degree-zero part `Pic^0(X)` of the Picard group is the subgroup
 `AlgebraicGeometry.picardZero`, the kernel of the degree `AlgebraicGeometry.Scheme.picDegreeHom`,
 and the bijections between `Pic^0(X)` and the rational points of the Jacobian are group
-isomorphisms. The `ℓⁿ`-torsion clause `J₀[ℓⁿ](k̄₀) ≅ Pic^0(C)[ℓⁿ]` of
-`proposition-jacobian-over-ground-field` is the restriction of the group isomorphism of
-`AlgebraicGeometry.exists_jacobian_descent` to `ℓⁿ`-torsion, and is not stated separately.
+isomorphisms. The `ℓⁿ`-torsion clause `J₀[ℓⁿ](k̄₀) ≅ Pic^0(C)[ℓⁿ]` is the restriction of the
+group isomorphism of `AlgebraicGeometry.exists_jacobian_descent` to `ℓⁿ`-torsion
+(`AlgebraicGeometry.exists_jacobian_descent_torsion`).
 
 That `P^0` is an open and closed **subgroup scheme** of `P`, the degree homomorphism
 `Pic (X_T) →* (T → ℤ)` with kernel `Pic^0`, and the description of `P^0 ≅ P^d` as tensoring with
@@ -76,7 +76,7 @@ That `P^0` is an open and closed **subgroup scheme** of `P`, the degree homomorp
 the compatible representations of
 `AlgebraicGeometry.exists_decomposition_picardFunctor_representableBy`.
 
-Several clauses of the blueprint statements cannot be expressed and are dropped:
+Several clauses of the classical statements cannot be expressed directly:
 
 * Mathlib has no tangent space of a scheme, so `AlgebraicGeometry.tangentSpaceAt` is defined
   here through the functor of points. It is given a `k`-vector space structure only at the
@@ -101,9 +101,13 @@ Several clauses of the blueprint statements cannot be expressed and are dropped:
   `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree`, which shows that
   `Pic^0_{C₀/k₀}` is represented over `k₀`.
 
+In the descent statements over `k̄₀`, the instances `[SmoothOfRelativeDimension 1 (C ↘ Spec K)]`
+and `[IsProper (C ↘ Spec K)]`, which follow from the cartesian square, are assumed so that
+`Pic^0(C)` is defined.
+
 ## Galois descent
 
-The descent from a separable closure `k_s` to `k` follows the blueprint: the Jacobian `J_s` of
+For the descent from a separable closure `k_s` to `k`, the Jacobian `J_s` of
 `C_{k_s}` represents the restriction of `Pic^0_{C/k}` to `k_s`-schemes and therefore carries a
 canonical descent datum (`CategoryTheory.Functor.RepresentableBy.overDescentDatum`, in the
 transport form `CategoryTheory.Over.DescentDatum`); the datum is defined at a finite separable
@@ -142,41 +146,38 @@ value at an algebraically closed point — are stated separately.
   `AlgebraicGeometry.exists_decomposition_picardFunctor`,
   `AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul` and
   `AlgebraicGeometry.nonempty_iso_of_representableBy`: the degree decomposition of the Picard
-  scheme (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
-- `AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one`: the tangent space of the Jacobian
-  (blueprint `theorem-picard-scheme-jacobian-over-separably--4`).
+  scheme.
+- `AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one`: the tangent space of the Jacobian.
 - `AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree` and
   `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`: the
-  theorem of the base, every `Pic^d_{X/k}` is proper and smooth of dimension `g` (blueprint
-  `theorem-picard-scheme-jacobian-over-separably`).
+  theorem of the base, every `Pic^d_{X/k}` is proper and smooth of dimension `g`.
 - `AlgebraicGeometry.exists_surjective_of_representableBy_picardFunctorDegree_genus`: the Abel map
   `Hilb^g ⟶ Pic^g`, `D ↦ 𝒪_X(D)`, is surjective; with `AlgebraicGeometry.exists_abelClass_eq` (a
   class of degree `g` is effective) this gives properness and geometric integrality of `Pic^g`.
-- `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety (blueprint
-  `theorem-picard-scheme-jacobian-over-separably`,
-  `theorem-picard-scheme-jacobian-over-separably--3`).
-- `AlgebraicGeometry.exists_jacobian_pullback`: the Jacobian over a separable closure (blueprint
-  `theorem-picard-scheme-jacobian-over-separably--3`).
+- `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety.
+- `AlgebraicGeometry.exists_jacobian_pullback`: the Jacobian over a separable closure.
 - `AlgebraicGeometry.nonempty_picardFunctorDegree_iso_of_isPullback`: `Pic^0` commutes with base
-  change (blueprint `theorem-picard-scheme-jacobian-over-separably--5`).
+  change.
 - `AlgebraicGeometry.exists_intermediateField_descentDatum`: the descent datum is defined at a
-  finite separable level (blueprint `proposition-jacobian-over-ground-field--1`).
+  finite separable level.
 - `AlgebraicGeometry.isSheafFor_picardFunctorDegree_singleton`: `Pic^d_{C/k}` satisfies the sheaf
   condition for flat, surjective, quasi-compact morphisms, such as `T_K ⟶ T` for a field
   extension `K/k`.
 - `AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_of_isPullback`: `Pic^0_{C/k}`
-  is represented by the descended scheme (Step 7 of `proposition-jacobian-over-ground-field`).
+  is represented by the descended scheme.
 - `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree`: `Pic^0_{C/k}` is
-  represented by an abelian variety over any field `k` (blueprint
-  `proposition-jacobian-over-ground-field`).
+  represented by an abelian variety over any field `k`.
 - `AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_baseChange`,
   `AlgebraicGeometry.exists_jacobian_baseChange` and
   `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree_baseChange`: the
-  Jacobian commutes with base change of the ground field (blueprint
-  `theorem-picard-scheme-jacobian-over-separably`, `proposition-jacobian-over-ground-field`).
-- `AlgebraicGeometry.exists_jacobian_descent`: the Jacobian over a general base field (blueprint
-  `proposition-jacobian-over-ground-field`), and
+  Jacobian commutes with base change of the ground field.
+- `AlgebraicGeometry.exists_jacobian_descent`: the Jacobian over a general base field, and
   `AlgebraicGeometry.exists_jacobian_descent_torsion`: its `ℓⁿ`-torsion clause.
+
+## References
+
+* Stacks Project, Tag 03GN (properness of `Pic^g` as the image of `Hilb^g`)
+* Stacks Project, Tag 01ZM (spreading out the descent datum to a finite level)
 -/
 
 @[expose] public section
@@ -193,16 +194,11 @@ section DegreeSubfunctor
 
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 
-/-- The degree of a relative Picard class on a fibre.  Let `f : X ⟶ Spec k` be a `k`-scheme, let
+/-- The degree of a relative Picard class on a fibre.  Let `f: X ⟶ Spec k` be a `k`-scheme, let
 `T` be a `k`-scheme and let `L ∈ Pic (X_T)` be a section of the Picard presheaf over `T`.  A
-field-valued point `t : Spec K ⟶ T` of `T` cuts out the fibre `X_K = X ×_{Spec k} Spec K`, and
+field-valued point `t: Spec K ⟶ T` of `T` cuts out the fibre `X_K = X ×_{Spec k} Spec K`, and
 `picardFibreDegree f L t` is the degree `deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_K})` of the pullback of `L`
-to that fibre, in the sense of `AlgebraicGeometry.Scheme.Modules.degree`.
-
-The `K`-scheme structure on `X_K` is the second projection; it is supplied explicitly, since it
-is not an instance on a bare pullback.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
+to that fibre, in the sense of `AlgebraicGeometry.Scheme.Modules.degree`. -/
 noncomputable def picardFibreDegree (f : X ⟶ Spec (.of k)) {T : Over (Spec (.of k))}
     (L : (picardPresheaf f).obj (.op T)) {K : Type u} [Field K] [Algebra k K]
     (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T) : ℤ :=
@@ -211,16 +207,9 @@ noncomputable def picardFibreDegree (f : X ⟶ Spec (.of k)) {T : Over (Spec (.o
     ⟨Limits.pullback.snd f (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))).hom⟩
   Modules.degree K ((fromSkeleton _).obj (Pic.map (baseChangeMap f t) L).val)
 
-/-- The degree-`d` subfunctor of the Picard presheaf of `f : X ⟶ Spec k`: the classes
+/-- The degree-`d` subfunctor of the Picard presheaf of `f: X ⟶ Spec k`: the classes
 `ℒ ∈ Pic (X_T)` all of whose fibres have degree `d`, i.e. `deg ℒ_t = d` for every field-valued
-point `t` of `T`.  It is a subfunctor because the fibres of the pullback of `ℒ` along `T' ⟶ T`
-are among the fibres of `ℒ`.
-
-Over a base with no field-valued points every class satisfies the condition vacuously; see the
-implementation notes of this module.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`,
-`definition-relative-picard-functor--1`) -/
+point `t` of `T`. -/
 noncomputable def picardSubfunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) :
     Subfunctor (picardPresheaf f) where
   obj T := {L | ∀ (K : Type u) [Field K] [Algebra k K]
@@ -239,20 +228,15 @@ noncomputable def picardSubfunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) :
 /-- The degree-`d` part `Pic^d_{X/k}` of the relative Picard functor: the fppf sheafification of
 the degree-`d` subfunctor `AlgebraicGeometry.picardSubfunctorDegree` of the Picard presheaf, in
 the same way that `AlgebraicGeometry.picardFunctor` is the fppf sheafification of the whole
-Picard presheaf.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`,
-`definition-relative-picard-functor--1`) -/
+Picard presheaf. -/
 noncomputable def picardFunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) :
     Sheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1)) :=
   (presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj
     (picardSubfunctorDegree f d).toFunctor
 
 /-- **The degree on a fibre over a field-valued point is the fibrewise degree** at the image
-point: the degree of `ℒ` on the fibre `X_K` over `t : Spec K ⟶ T` is the fibrewise degree
-`deg ℒ_t` of `AlgebraicGeometry.picardPresheafDegree` at the image of the point of `Spec K`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part 3) -/
+point: the degree of `ℒ` on the fibre `X_K` over `t: Spec K ⟶ T` is the fibrewise degree
+`deg ℒ_t` of `AlgebraicGeometry.picardPresheafDegree` at the image of the point of `Spec K`. -/
 theorem picardFibreDegree_eq_picardPresheafDegree (f : X ⟶ Spec (.of k)) [IsProper f]
     [LocallyOfFinitePresentation f] {T : Over (Spec (.of k))}
     (L : (picardPresheaf f).obj (.op T)) {K : Type u} [Field K] [Algebra k K]
@@ -312,9 +296,7 @@ lemma picardFunctorDegreeι_app_toSheafify {T : Over (Spec (.of k))}
   ConcreteCategory.congr_hom (NatTrans.congr_app (toSheafify_sheafifyLift (fppfTopology.over _)
     ((picardSubfunctorDegree f d).ι ≫ toPicardFunctor f) (picardFunctor f).property) (.op T)) M
 
-/-- **`Pic^d_{X/k}` is a subsheaf of `Pic_{X/k}`**: the inclusion is injective on sections, as
-the inclusion of the degree-`d` subfunctor is injective and sheafification preserves local
-injectivity. -/
+/-- **`Pic^d_{X/k}` is a subsheaf of `Pic_{X/k}`**: the inclusion is injective on sections. -/
 lemma injective_picardFunctorDegreeι_app (T : Over (Spec (.of k))) :
     Function.Injective ((picardFunctorDegreeι f d).hom.app (.op T)) := by
   let J := fppfTopology.over (Spec (.of k))
@@ -327,8 +309,7 @@ lemma injective_picardFunctorDegreeι_app (T : Over (Spec (.of k))) :
 
 variable [IsProper f] [LocallyOfFinitePresentation f]
 
-/-- The sections of `Pic^d_{X/k}` have degree `d` at every point, being locally represented by
-classes of fibrewise degree `d`. -/
+/-- The sections of `Pic^d_{X/k}` have degree `d` at every point. -/
 lemma picardDegree_picardFunctorDegreeι {T : Over (Spec (.of k))}
     (s : (picardFunctorDegree f d).obj.obj (.op T)) (t : T.left) :
     picardDegree f ((picardFunctorDegreeι f d).hom.app _ s) t = d := by
@@ -342,8 +323,7 @@ lemma picardDegree_picardFunctorDegreeι {T : Over (Spec (.of k))}
   exact (mem_picardSubfunctorDegree_iff f d a.1).1 a.2 z
 
 /-- **The sections of `Pic^d_{X/k}` are the sections of `Pic_{X/k}` of degree `d`.** A section
-of `Pic_{X/k}` of degree `d` at every point is locally represented by classes of fibrewise
-degree `d`, hence lies locally, and so globally, in the subsheaf `Pic^d_{X/k}`. -/
+of `Pic_{X/k}` of degree `d` at every point lies in the subsheaf `Pic^d_{X/k}`. -/
 lemma exists_picardFunctorDegreeι_app_eq {T : Over (Spec (.of k))}
     (x : (picardFunctor f).obj.obj (.op T)) (hx : ∀ t, picardDegree f x t = d) :
     ∃ s, (picardFunctorDegreeι f d).hom.app _ s = x := by
@@ -393,8 +373,7 @@ variable {T : Over (Spec (.of k))} {K : Type u} [Field K] [Algebra k K]
   (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T)
 
 /-- **The fibrewise degree is additive**: on a smooth proper curve, the degree of `ℒ ⊗ ℳ` on the
-fibre over a field-valued point is the sum of the degrees of `ℒ` and `ℳ`, the fibre being a smooth
-proper curve over that field (`AlgebraicGeometry.Scheme.Modules.degree_tensorObj`). -/
+fibre over a field-valued point is the sum of the degrees of `ℒ` and `ℳ`. -/
 lemma picardFibreDegree_mul [SmoothOfRelativeDimension 1 f] [IsProper f]
     (L M : (pullback f T.hom).Pic) :
     picardFibreDegree f (L * M : (pullback f T.hom).Pic) t =
@@ -424,12 +403,8 @@ end FibreDegree
 
 variable [SmoothOfRelativeDimension 1 f] [IsProper f]
 
-/-- The classes `ℒ ∈ Pic (X_T)` of fibrewise degree zero form a subgroup of `Pic (X_T)`, the
-fibrewise degree being additive (`AlgebraicGeometry.picardFibreDegree_mul`). Its carrier is
-`(AlgebraicGeometry.picardSubfunctorDegree f 0).obj (.op T)`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (1): `Pic^0_{X/k}` is a
-subgroup functor) -/
+/-- The classes `ℒ ∈ Pic (X_T)` of fibrewise degree zero form a subgroup of `Pic (X_T)`. Its
+carrier is `(AlgebraicGeometry.picardSubfunctorDegree f 0).obj (.op T)`. -/
 noncomputable def picardSubgroupDegreeZero (T : Over (Spec (.of k))) :
     Subgroup (pullback f T.hom).Pic where
   carrier := (picardSubfunctorDegree f 0).obj (.op T)
@@ -447,8 +422,6 @@ subgroup `AlgebraicGeometry.picardSubgroupDegreeZero f T` of `Pic (X_T)`, and pu
 subfunctor `AlgebraicGeometry.picardSubfunctorDegree f 0`
 (`AlgebraicGeometry.picardPresheafDegreeZeroGrp_comp_forget`), whose fppf sheafification is
 `Pic^0_{X/k}`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1` part (1))
 -/
 noncomputable def picardPresheafDegreeZeroGrp :
     (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u + 1} where
@@ -478,15 +451,8 @@ omit [SmoothOfRelativeDimension 1 f] [IsProper f] in
 /-- A representation `e` of the degree-zero Picard functor `Pic^0_{X/k}` by a group scheme `J`
 *respects the group laws* if, for every `k`-scheme `T`, the map sending a class `ℒ ∈ Pic (X_T)`
 of fibrewise degree zero to the point of `J` classifying its image in `Pic^0_{X/k}(T)` turns the
-tensor product of invertible modules into the group law of `J`. Equivalently, `e` is an
-isomorphism of group-valued functors between `Pic^0_{X/k}`, with the group law induced by that of
-`AlgebraicGeometry.picardPresheafDegreeZeroGrp`, and the functor of points of `J`.
-
-The product `ℒ ⊗ ℳ` is required to have fibrewise degree zero; for a smooth proper curve this is
-automatic (`AlgebraicGeometry.picardSubgroupDegreeZero`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`,
-`theorem-picard-scheme-jacobian-over-separably--1`) -/
+tensor product of invertible modules into the group law of `J`. The product `ℒ ⊗ ℳ` is required
+to have fibrewise degree zero. -/
 def IsPicardZeroMul {J : Over (Spec (.of k))} [GrpObj J]
     (e : (picardFunctorDegree f 0).obj.RepresentableBy J) : Prop :=
   ∀ {T : Over (Spec (.of k))} (L M : (pullback f T.hom).Pic)
@@ -503,13 +469,7 @@ def IsPicardZeroMul {J : Over (Spec (.of k))} [GrpObj J]
 /-- **`Pic^0` is a commutative group scheme.** Let `X` be a smooth proper curve over a field `k`.
 A `k`-scheme `J` representing the degree-zero part `Pic^0_{X/k}` of the Picard functor carries a
 commutative group scheme structure for which the representation respects the group laws: the
-group law of `J` is the tensor product of invertible modules, through the group law that the
-sheafification `Pic^0_{X/k}` inherits from `AlgebraicGeometry.picardPresheafDegreeZeroGrp`
-(`CategoryTheory.sheafifyGrp`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`,
-`theorem-picard-scheme-jacobian-over-separably--1` part (3): the group scheme structure on
-`Pic^0`) -/
+group law of `J` is the tensor product of invertible modules. -/
 theorem exists_commGrpObj_isPicardZeroMul {J : Over (Spec (.of k))}
     (e : (picardFunctorDegree f 0).obj.RepresentableBy J) :
     ∃ _ : CommGrpObj J, IsPicardZeroMul f e := by
@@ -527,8 +487,7 @@ omit [SmoothOfRelativeDimension 1 f] [IsProper f] in
 respecting the group laws. If a bijection `Φ` from a group `G` to `Pic^0_{X/k}(T)` sends every
 `g ∈ G` to the image of a class `ρ g ∈ Pic (X_T)` of fibrewise degree zero, for a
 multiplicative map `ρ : G → Pic (X_T)`, then `G ≅ J(T)` as groups, through `Φ` followed by the
-representation. This turns the bijections `Pic^0(X) ≃ Pic^0_{X/k}(k)` below into group
-isomorphisms `Pic^0(X) ≃* J(k)`. -/
+representation. -/
 theorem exists_mulEquiv_of_isPicardZeroMul {G : Type*} [Group G] {T : Over (Spec (.of k))}
     {J : Over (Spec (.of k))} [GrpObj J] (e : (picardFunctorDegree f 0).obj.RepresentableBy J)
     (he : IsPicardZeroMul f e) (ρ : G → (pullback f T.hom).Pic)
@@ -555,8 +514,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- **The fibrewise degree of a class pulled back from `X`** is its degree: for `ℒ ∈ Pic X`, a
 `k`-scheme `T` and a field-valued point `t : Spec K ⟶ T`, the pullback of `ℒ` to `X_T` has degree
-`deg ℒ` on the fibre `X_K`, the degree being invariant under extension of the base field
-(`AlgebraicGeometry.Scheme.Modules.degree_pullback`). -/
+`deg ℒ` on the fibre `X_K`. -/
 theorem picardFibreDegree_map_fst [IsProper (X ↘ Spec (.of k))] {T : Over (Spec (.of k))}
     (L : X.Pic) {K : Type u} [Field K] [Algebra k K]
     (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ T) :
@@ -626,10 +584,7 @@ lemma picardSubfunctorDegreeMulMapFst_app_val {d d' e : ℤ} (M : X.Pic)
 
 /-- **Translating the degree.** Tensoring with the pullback of a class `M ∈ Pic X` of degree `e`
 is an isomorphism from the degree-`d` subfunctor of the Picard presheaf onto the degree-`d'`
-subfunctor, `d' = d + e`, with inverse the tensor product with the pullback of `M⁻¹`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4) on the level of
-subfunctors) -/
+subfunctor, `d' = d + e`, with inverse the tensor product with the pullback of `M⁻¹`. -/
 noncomputable def picardSubfunctorDegreeIsoOfDegree {d d' e : ℤ} (M : X.Pic)
     (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) :
     (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor ≅
@@ -704,9 +659,7 @@ lemma pic_map_abelClass {d : ℕ} {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
 
 variable [IsProper f]
 
-/-- **`𝒪(D)` has fibrewise degree `d`** for a point `D` of `Hilb^d_{X/k}(T)`: on the fibre `X_t`,
-`𝒪(D)_t = 𝒪(D_t)` has degree `dim_{κ(t)} Γ(D_t, 𝒪) = d` by Riemann–Roch
-(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`). -/
+/-- **`𝒪(D)` has fibrewise degree `d`** for a point `D` of `Hilb^d_{X/k}(T)`. -/
 lemma abelClass_mem {d : ℕ} {T : Over (Spec (.of k))} (D : (hilbertPresheaf f d).obj (.op T)) :
     abelClass f D ∈ (picardSubfunctorDegree f d).obj (.op T) := by
   have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
@@ -762,9 +715,7 @@ variable {k : Type u} [Field k]
 
 /-- **Sections of an fppf sheafification over an algebraically closed field.** Let `K` be an
 algebraically closed field over `k`. Every section over `Spec K` of the fppf sheafification of a
-presheaf `P` on `k`-schemes comes from a section of `P`: an fppf covering of `Spec K` has a member
-with a closed point, which is a `K`-rational point (Hilbert's Nullstellensatz), i.e. a section of
-the covering. -/
+presheaf `P` on `k`-schemes comes from a section of `P`. -/
 lemma exists_toSheafify_app_eq_of_isAlgClosed {K : Type u} [Field K] [Algebra k K]
     [IsAlgClosed K] (P : (Over (Spec (.of k)))ᵒᵖ ⥤ Type (u + 1))
     (s : (sheafify (fppfTopology.over (Spec (.of k))) P).obj
@@ -794,11 +745,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (
 
 /-- **A class of degree `g` is effective.** Let `X` be a smooth projective curve of genus `g` over
 `k`, let `K/k` be a field extension and let `ℒ ∈ Pic (X_K)` have degree `g`. Then `ℒ ≅ 𝒪(D)` for a
-point `D` of `Hilb^g_{X/k}(K)`: by Riemann–Roch `h⁰(ℒ) ≥ χ(ℒ) = g + 1 - g = 1`, and the zero
-scheme of a nonzero section of `ℒ` on the integral curve `X_K` is an effective Cartier divisor of
-degree `deg ℒ = g`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, surjectivity of `Hilb^g ⟶ Pic^g`) -/
+point `D` of `Hilb^g_{X/k}(K)`. -/
 theorem exists_abelClass_eq (K : Type u) [Field K] [Algebra k K]
     (L : (picardSubfunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).toFunctor.obj
       (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) :
@@ -863,10 +810,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsSepC
 
 set_option linter.unusedSectionVars false in
 /-- **The fibrewise degree is locally constant.** For a connected `k`-scheme `T` and a class
-`ℒ ∈ Pic (X_T)`, all the fibrewise degrees `deg ℒ_t` agree.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`
-part (2): the degree is locally constant) -/
+`ℒ ∈ Pic (X_T)`, all the fibrewise degrees `deg ℒ_t` agree. -/
 theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
     [ConnectedSpace T.left] (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
     {K : Type u} [Field K] [Algebra k K]
@@ -883,13 +827,11 @@ theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
 set_option linter.unusedSectionVars false in
 /-- **The degree decomposition of the Picard scheme, with compatible representations.** Let `X`
 be a smooth projective curve over a separably closed field `k` and let `P` represent the Picard
-functor `Pic_{X/k}`, with universal class of degree `δ : P → ℤ`. Then `P` is the disjoint union
+functor `Pic_{X/k}`, with universal class of degree `δ: P → ℤ`. Then `P` is the disjoint union
 of the open and closed subschemes `P^d = δ⁻¹(d)`, and `P^d` represents the degree-`d` part
 `Pic^d_{X/k}` through a representation `e d` compatible with the inclusions: the point of `P^d`
-classifying a class `ℒ` of fibrewise degree `d` is mapped by `j d : P^d ⟶ P` to the point of `P`
-classifying `ℒ`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (2)) -/
+classifying a class `ℒ` of fibrewise degree `d` is mapped by `j d: P^d ⟶ P` to the point of `P`
+classifying `ℒ`. -/
 theorem exists_decomposition_picardFunctor_representableBy (P : Over (Spec (.of k)))
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
     ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P)
@@ -909,7 +851,7 @@ theorem exists_decomposition_picardFunctor_representableBy (P : Over (Spec (.of 
   set f := X ↘ Spec (.of k)
   intro hP
   let J := Scheme.fppfTopology.over (Spec (.of k))
-  -- the degree `δ : P → ℤ` of the universal class
+  -- the degree `δ: P → ℤ` of the universal class
   let δ := picardDegree f (hP.homEquiv (𝟙 P))
   have hδ : IsLocallyConstant δ := isLocallyConstant_picardDegree f _
   have hδh {T : Over (Spec (.of k))} (h : T ⟶ P) (t : T.left) :
@@ -1017,16 +959,7 @@ set_option linter.unusedSectionVars false in
 /-- **The degree decomposition of the Picard scheme.** Let `X` be a smooth projective curve over
 a separably closed field `k` and let `P` represent the Picard functor `Pic_{X/k}`.  Then `P` is
 the disjoint union `∐_{d ∈ ℤ} P^d` of a family of open and closed subschemes indexed by `ℤ`,
-and `P^d` represents the degree-`d` part `Pic^d_{X/k}`.
-
-The other parts of the detailed statement are `AlgebraicGeometry.picardSubgroupDegreeZero`
-(part (1)), `AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul` (part (3)) and
-`AlgebraicGeometry.nonempty_iso_of_representableBy` (part (4)), strengthened in
-`WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition`. The pointer remark
-`rem-ptr-sc-picard-functor-3` refers to this decomposition.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`
-part (2), `rem-ptr-sc-picard-functor-3`) -/
+and `P^d` represents the degree-`d` part `Pic^d_{X/k}`. -/
 theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
     ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P),
@@ -1042,10 +975,7 @@ theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
 /-- **All the degree components are isomorphic.** Schemes representing `Pic^0_{X/k}` and
 `Pic^d_{X/k}` are isomorphic as `k`-schemes; the isomorphism is tensoring with `𝒪_X(dx)` for a
 rational point `x`. That the isomorphism acts on points as this tensor product is
-`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree_zero`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`
-part (4)) -/
+`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree_zero`. -/
 theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k)))
     (hP₀ : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy P₀)
     (hPd : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy Pd) :
@@ -1066,14 +996,8 @@ theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k))
     ((presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).mapIso e)).symm)⟩
 
 /-- **`Pic^g` is smooth of dimension `g`.** A `k`-scheme representing the degree-`g` part
-`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over `k`:
-it is an open subscheme of the Picard scheme
-(`AlgebraicGeometry.exists_decomposition_picardFunctor`),
-which is smooth of dimension `g`, being covered by translates of an open subscheme of the smooth
-`g`-dimensional `Hilb^g_{X/k}`
-(`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, smoothness of `Pic^g`) -/
+`Pic^g_{X/k}` of the Picard functor, `g` the genus, is smooth of relative dimension `g` over
+`k`. -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
@@ -1094,13 +1018,8 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
 omit [IsSepClosed k] in
 /-- **The Abel map `Hilb^g ⟶ Pic^g` is surjective.** For a `k`-scheme `P` representing
 `Pic^g_{X/k}`, `g` the genus, there are a proper geometrically integral `k`-scheme `H` (the
-Hilbert scheme `Hilb^g_{X/k}`) and a morphism `a : H ⟶ P` of `k`-schemes, `D ↦ 𝒪_X(D)`
-(`AlgebraicGeometry.abelMapPresheaf`), which is surjective: a point `p` of `P` gives a class of
-degree `g` over an algebraic closure `K` of `κ(p)`, which comes from `Pic (X_K)`
-(`AlgebraicGeometry.exists_toSheafify_app_eq_of_isAlgClosed`) and is effective by Riemann–Roch
-(`AlgebraicGeometry.exists_abelClass_eq`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, the map `γ_g : Hilb^g ⟶ Pic^g`) -/
+Hilbert scheme `Hilb^g_{X/k}`) and a morphism `a: H ⟶ P` of `k`-schemes, `D ↦ 𝒪_X(D)`
+(`AlgebraicGeometry.abelMapPresheaf`), which is surjective. -/
 theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
     ∃ (H : Over (Spec (.of k))) (a : H ⟶ P), IsProper H.hom ∧ GeometricallyIntegral H.hom ∧
@@ -1125,7 +1044,7 @@ theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over
     refine (NatTrans.naturality_apply (toSheafify J S.toFunctor) h.op _).symm.trans ?_
     exact congrArg _ (NatTrans.naturality_apply Φ h.op _).symm
   refine ⟨Over.mk q, a, hq, hqi, ⟨fun p ↦ ?_⟩⟩
-  -- a geometric point `x : Spec K ⟶ P` over `p`
+  -- a geometric point `x: Spec K ⟶ P` over `p`
   let κ := P.left.residueField p
   let φ : CommRingCat.of k ⟶ κ := Spec.preimage (P.left.fromSpecResidueField p ≫ P.hom)
   let K := AlgebraicClosure κ
@@ -1155,14 +1074,7 @@ theorem exists_surjective_of_representableBy_picardFunctorDegree_genus (P : Over
   exact Scheme.fromSpecResidueField_apply _ _
 
 /-- **`Pic^g` is proper.** A `k`-scheme `P` representing the degree-`g` part `Pic^g_{X/k}` of
-the Picard functor, `g` the genus, is proper over `k`. The Abel map `Hilb^g_{X/k} ⟶ P`,
-`D ↦ 𝒪_X(D)`, is surjective
-(`AlgebraicGeometry.exists_surjective_of_representableBy_picardFunctorDegree_genus`), so `P` is
-the image of the proper `Hilb^g_{X/k}`; it is locally of finite type, being smooth, and separated,
-being an open subscheme of the Picard scheme, a group scheme over a field. Hence `P` is proper
-(Stacks `03GN`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, properness of `Pic^g`) -/
+the Picard functor, `g` the genus, is proper over `k`. -/
 theorem isProper_of_representableBy_picardFunctorDegree_genus (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
     IsProper P.hom := by
@@ -1215,10 +1127,7 @@ lemma exists_iso_representableBy_picardFunctorDegree_genus (d : ℤ) (P : Over (
 
 /-- **The theorem of the base.** Let `X` be a smooth projective curve of genus `g` over a
 separably closed field `k`.  Every degree component `Pic^d_{X/k}` of the Picard scheme is proper
-over `k`: all of them are isomorphic to `Pic^g_{X/k}`, which is proper by
-`AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree_genus`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`) -/
+over `k`. -/
 theorem isProper_of_representableBy_picardFunctorDegree (d : ℤ) (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
     IsProper P.hom := by
@@ -1228,11 +1137,7 @@ theorem isProper_of_representableBy_picardFunctorDegree (d : ℤ) (P : Over (Spe
 
 /-- **The theorem of the base, smoothness.** Let `X` be a smooth projective curve of genus `g`
 over a separably closed field `k`.  Every degree component `Pic^d_{X/k}` of the Picard scheme is
-smooth of relative dimension `g` over `k`: all of them are isomorphic to `Pic^g_{X/k}`, which is
-smooth of dimension `g` by
-`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`) -/
+smooth of relative dimension `g` over `k`. -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree (d : ℤ)
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
@@ -1243,11 +1148,7 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree (d : �
   exact smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus _ hg
 
 /-- **`Pic^g` is geometrically integral.** A `k`-scheme representing the degree-`g` part
-`Pic^g_{X/k}` of the Picard functor, `g` the genus, is geometrically integral over `k`: it is the
-image of the geometrically integral `Hilb^g_{X/k}` under `D ↦ 𝒪_X(D)`, so geometrically
-irreducible, and it is smooth, hence geometrically reduced.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, connectedness) -/
+`Pic^g_{X/k}` of the Picard functor, `g` the genus, is geometrically integral over `k`. -/
 theorem geometricallyIntegral_of_representableBy_picardFunctorDegree_genus
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
@@ -1263,10 +1164,8 @@ theorem geometricallyIntegral_of_representableBy_picardFunctorDegree_genus
 
 
 /-- **Every degree component is geometrically integral.** A `k`-scheme representing a degree
-component `Pic^d_{X/k}` of the Picard functor is geometrically integral over `k`, being isomorphic
-to `Pic^g_{X/k}`; in particular the Jacobian `Pic^0_{X/k}` is connected.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, connectedness) -/
+component `Pic^d_{X/k}` of the Picard functor is geometrically integral over `k`; in particular
+the Jacobian `Pic^0_{X/k}` is connected. -/
 theorem geometricallyIntegral_of_representableBy_picardFunctorDegree (d : ℤ)
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P) :
@@ -1285,13 +1184,8 @@ variable {k : Type u} [Field k]
 functor of points: it is the fibre over `e` of the restriction map
 `P((Spec k)[ε]) → P(k)`, where `(Spec k)[ε] = Spec k[ε]` is the dual-number thickening
 `AlgebraicGeometry.Scheme.dualNumbersOver (Spec k)` of `Spec k`, `k[ε] = k[T]/(T²)`, and the map
-is induced by the `k`-point `ε ↦ 0` (`AlgebraicGeometry.Scheme.dualNumbersιOver`).
-
-`k`-rational points of `P` are morphisms from the terminal object `𝟙_ (Over (Spec k))` of the
-category of `k`-schemes, so that the unit `η[G]` of a group scheme `G` is directly a point in
-this sense.  Mathlib has no tangent space of a scheme, so this is a genuine definition rather
-than a reuse. At the unit of a group scheme it is a `k`-vector space, its addition being the
-group law; see `AlgebraicGeometry.tangentSubgroup`. -/
+is induced by the `k`-point `ε ↦ 0` (`AlgebraicGeometry.Scheme.dualNumbersιOver`). Here
+`k`-rational points of `P` are morphisms from the terminal object `𝟙_ (Over (Spec k))`. -/
 def tangentSpaceAt (P : Over (Spec (.of k))) (e : 𝟙_ (Over (Spec (.of k))) ⟶ P) : Type u :=
   {v : Scheme.dualNumbersOver (Spec (.of k)) ⟶ P // Scheme.dualNumbersιOver _ ≫ v = e}
 
@@ -1346,10 +1240,7 @@ lemma tangentSubgroup_eq_infPoints : tangentSubgroup P = GrpObj.infPoints P := b
   rfl
 
 /-- The kernel of `P(k[ε]) → P(k)` is commutative, even when `P` is not: it is the group of
-infinitesimal points of `P` (`AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`).
-
-This rests on `AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`
-(`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPointsEquiv.lean`). -/
+infinitesimal points of `P`. -/
 instance : IsMulCommutative (tangentSubgroup P) := by
   rw [tangentSubgroup_eq_infPoints]
   exact GrpObj.isMulCommutative_infPoints P
@@ -1384,11 +1275,7 @@ lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :
     (c • v).1 = dualNumbersScale k c ≫ v.1 :=
   rfl
 
-/-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`.
-
-The proof goes through `AlgebraicGeometry.GrpObj.lieEquiv` and the lemmas on it in
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPointsEquiv.lean` and
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Functoriality.lean`. -/
+/-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`. -/
 theorem tangentSpaceAt.add_smul (c d : k) (v : tangentSpaceAt P η[P]) :
     (c + d) • v = c • v + d • v := by
   -- transport along the bijection `GrpObj.lieEquiv` with the Lie algebra, which turns the group
@@ -1429,8 +1316,7 @@ variable [IsSepClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
 
 /-- **`Pic^0_{X/k}` over a one-point base.** If `T` is a `k`-scheme with a single point, every
 section of `Pic^0_{X/k}` over `T` is the image of a unique class of fibrewise degree zero on
-`X_T`: an invertible module on `T` is trivial, so `Pic (X_T) ≅ Pic_{X/k}(T)` by the split exact
-sequence (`AlgebraicGeometry.bijective_pic_split`). -/
+`X_T`. -/
 lemma bijective_toSheafify_app_picardSubfunctorDegree_zero (T : Over (Spec (.of k)))
     [Subsingleton T.left] (t₀ : T.left) :
     Function.Bijective ((toSheafify (fppfTopology.over (Spec (.of k)))
@@ -1501,9 +1387,7 @@ over a separably closed field `k` and let `J` be a group scheme over `k` represe
 degree-zero part `Pic^0_{X/k}` of the Picard functor, the representation respecting the group
 laws (`AlgebraicGeometry.IsPicardZeroMul`). Then the tangent space of `J` at the unit `η[J]` is
 isomorphic as a `k`-vector space to `H^1(X, 𝒪_X)`, which has dimension `g` by the definition of
-`AlgebraicGeometry.Scheme.arithmeticGenus`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--4`) -/
+`AlgebraicGeometry.Scheme.arithmeticGenus`. -/
 theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (J : Over (Spec (.of k))) [GrpObj J]
@@ -1652,13 +1536,11 @@ section Jacobian
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 variable (k X) in
-/-- The degree-zero part `Pic^0(X) = {ℒ ∈ Pic X : deg ℒ = 0}` of the Picard group of a smooth
+/-- The degree-zero part `Pic^0(X) = {ℒ ∈ Pic X: deg ℒ = 0}` of the Picard group of a smooth
 proper curve `X` over `k`: the kernel of the degree homomorphism
 `AlgebraicGeometry.Scheme.picDegreeHom`, `deg ℒ = χ(ℒ) - χ(𝒪_X)`, a subgroup of `Pic X`. Its
 underlying set is `AlgebraicGeometry.Scheme.Hom.picZero`
-(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, `corollary-degree-jacobian--1`) -/
+(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`). -/
 noncomputable abbrev picardZero [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] : Subgroup X.Pic :=
   (picDegreeHom k X).ker
@@ -1666,11 +1548,7 @@ noncomputable abbrev picardZero [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k)
 /-- **The `k`-points of `Pic^0_{X/k}`.** For a smooth projective curve `X` over a separably
 closed field `k`, the value of the degree-zero part `Pic^0_{X/k}` of the Picard functor on
 `Spec k` is `Pic^0(X)`: the map sending `ℒ ∈ Pic^0(X)` to the image of its pullback to
-`X ×_k k` is a bijection `Pic^0(X) ≃ Pic^0_{X/k}(k)`.  By the split exact sequence with
-`T = Spec k` and `Pic (Spec k) = 0`, `Pic_{X/k}(k) = Pic X`, and its degree-zero part is
-`Pic^0(X)`, the fibrewise degree being invariant under extension of the base field.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`, the `k`-points of `Pic^0_{X/k}`) -/
+`X ×_k k` is a bijection `Pic^0(X) ≃ Pic^0_{X/k}(k)`. -/
 theorem exists_picardZero_equiv_picardFunctorDegree_zero [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] :
@@ -1689,7 +1567,7 @@ theorem exists_picardZero_equiv_picardFunctorDegree_zero [IsSepClosed k]
     rw [picardFibreDegree_map_fst]
     have h := L.2
     rwa [MonoidHom.mem_ker, picDegreeHom_apply, Hom.picDegree_eq, ofAdd_eq_one] at h
-  -- the comparison `β : Pic^0_{X/k} ⟶ Pic_{X/k}` is injective on sections
+  -- the comparison `β: Pic^0_{X/k} ⟶ Pic_{X/k}` is injective on sections
   let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
   let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
     ⟨sheafifyLift J α (picardFunctor f).property⟩
@@ -1765,17 +1643,7 @@ scheme structure which is proper, smooth of relative dimension `g` and geometric
 over `k`, which represents the degree-zero part `Pic^0_{X/k}` of the Picard functor compatibly
 with the group laws, and whose group of `k`-rational points is isomorphic to `Pic^0(X)`: the
 isomorphism `ψ` sends `ℒ ∈ Pic^0(X)` to the `k`-point of `J` which the representation `e`
-attaches to the class of `ℒ` (pulled back to `X ×_k k`) in `Pic^0_{X/k}(k)`.
-
-That `J`, with `e`, is a Jacobian in the sense of `AlgebraicGeometry.IsJacobian` is
-`AlgebraicGeometry.exists_isJacobian`.
-
-The tangent space clause `T_e J ≅ H^1(X, 𝒪_X)` is
-`AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one` and is not repeated here; the
-base-change clause `J(X_{k'}) = J(X) ×_k k'` is
-`AlgebraicGeometry.exists_jacobian_baseChange`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`) -/
+attaches to the class of `ℒ` (pulled back to `X ×_k k`) in `Pic^0_{X/k}(k)`. -/
 theorem exists_jacobian [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] :
@@ -1814,7 +1682,7 @@ end Jacobian
 section Descent
 
 /-- A `k`-algebra automorphism `σ` of `K`, viewed as an automorphism of the `k`-scheme
-`Spec K`.  Base changing along it is the geometric form of the Galois action. -/
+`Spec K`. -/
 noncomputable def specAlgEquivOver {k K : Type u} [CommRing k] [CommRing K] [Algebra k K]
     (σ : K ≃ₐ[k] K) :
     Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶
@@ -1833,8 +1701,7 @@ attribute [local instance] Scheme.smoothOfRelativeDimension_baseChange Scheme.is
 /-- **The geometric curve.** Let `C` be a smooth projective geometrically integral curve of genus
 `g` over `k` and let `k_s` be a separable closure of `k`. Then `k_s` is separably closed and the
 base change `C_{k_s}` is a smooth projective geometrically integral curve of genus `g` over `k_s`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+-/
 theorem isSepClosed_and_pullback_sepClosure (ks : Type u) [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -1858,9 +1725,7 @@ geometrically integral curve of genus `g` over `k` and let `k_s` be a separable 
 Then `Pic^0_{C_{k_s}/k_s}` is represented, compatibly with the group laws, by an abelian variety
 `J_s` of dimension `g` over `k_s`, whose group of `k_s`-points is isomorphic to `Pic^0(C_{k_s})`
 through the canonical identification: the isomorphism `ψ` sends `ℒ` to the `k_s`-point of `J_s`
-which the representation `e` attaches to the class of `ℒ` in `Pic^0_{C_{k_s}/k_s}(k_s)`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`) -/
+which the representation `e` attaches to the class of `ℒ` in `Pic^0_{C_{k_s}/k_s}(k_s)`. -/
 theorem exists_jacobian_pullback (ks : Type u) [Field ks] [Algebra k ks] [IsSepClosure k ks]
     (C : Scheme.{u}) [C.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))]
     [IsProper (C ↘ Spec (.of k))] [GeometricallyIntegral (C ↘ Spec (.of k))] (g : ℕ)
@@ -1943,9 +1808,7 @@ noncomputable def picardSubfunctorDegreeIsoOfIsPullback (q : C' ⟶ C)
 be a proper curve over `k`, let `K/k` be a field extension and let `C' = C ×_k K` be presented by
 a cartesian square. The restriction of `Pic^d_{C/k}` to schemes over `K` is `Pic^d_{C'/K}`,
 through the identifications `C' ×_K T ≅ C ×_k T`; see
-`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--5`) -/
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify`. -/
 noncomputable def picardFunctorDegreeIsoOfIsPullback (q : C' ⟶ C)
     (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
@@ -1977,9 +1840,7 @@ lemma whiskerLeft_toSheafify_picardFunctorDegreeIsoOfIsPullback_hom (q : C' ⟶ 
 /-- **The canonical base change isomorphism of `Pic^d` on classes.** The isomorphism
 `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback` sends the class of an invertible module
 `ℒ` of fibrewise degree `d` on `C ×_k T` to the class of its pullback along
-`C' ×_K T ≅ C ×_k T`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--5`) -/
+`C' ×_K T ≅ C ×_k T`. -/
 lemma picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify (q : C' ⟶ C)
     (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) (T : Over (Spec (.of K)))
@@ -2008,16 +1869,8 @@ end PicardFunctorDegreeBaseChange
 /-- **The degree-zero part is compatible with base change.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `K/k` be a field extension and let `C_K` be the base
 change of `C`, presented by a cartesian square. Then the restriction of `Pic^0_{C/k}` to schemes
-over `K` is `Pic^0_{C_K/K}`.
-
-This follows from the compatibility of the Picard functor with base change
-(`AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`), the fibrewise degree of a class
-being computed on the same fibres in both cases.
-
-The canonical identification which the blueprint asserts is
-`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`; this is its existence corollary.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--5`) -/
+over `K` is `Pic^0_{C_K/K}` (canonically: `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`).
+-/
 theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [Algebra k K]
     {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2059,14 +1912,7 @@ theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [A
 /-- **The base change of a representing object of `Pic^d`.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `K/k` be a field extension and let `C_K` be the base
 change of `C`, presented by a cartesian square. If `J` represents `Pic^d_{C/k}`, then any base
-change `J_K = J ×_k K` of `J` (presented by a cartesian square) represents `Pic^d_{C_K/K}`.
-
-By the adjunction `Over.map ⊣ Over.pullback`, `J ×_k K` represents the restriction of
-`Pic^d_{C/k}` to schemes over `K`, which is `Pic^d_{C_K/K}`
-(`AlgebraicGeometry.nonempty_picardFunctorDegree_iso_of_isPullback`).
-
-(blueprint: `proposition-jacobian-over-ground-field`, the clause `J_K ≅ Pic^0_{C_K/K}`;
-`theorem-picard-scheme-jacobian-over-separably`, the clause `J(C_{k'}) = J(C) ×_k k'`) -/
+change `J_K = J ×_k K` of `J` (presented by a cartesian square) represents `Pic^d_{C_K/K}`. -/
 theorem nonempty_representableBy_picardFunctorDegree_baseChange {K : Type u} [Field K]
     [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2089,12 +1935,7 @@ integral curve of genus `g` over a separably closed field `k`. Then the Jacobian
 base change `J ×_k k'` represents `Pic^0_{X_{k'}/k'}` as a group scheme: `J(X_{k'}) = J(X) ×_k k'`.
 That is, `J ×_k k'` carries a commutative group scheme structure and a representation of
 `Pic^0_{X_{k'}/k'}` respecting the group laws (`AlgebraicGeometry.IsPicardZeroMul`), as for `J`
-itself. In fact any representing object of `Pic^0_{X/k}` has this property
-(`AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_baseChange`,
-`AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, the clause
-`J(C_{k'}) = J(C) ×_k k'`) -/
+itself. -/
 theorem exists_jacobian_baseChange [IsSepClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] :
@@ -2152,14 +1993,7 @@ lemma surjective_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra 
 /-- **`Pic_{C/k}` satisfies the sheaf condition for fpqc coverings.** Let `C` be a smooth
 projective geometrically integral curve over `k` and `π : T' ⟶ T` a flat, surjective,
 quasi-compact morphism of `k`-schemes. Then `Pic_{C/k}` satisfies the sheaf condition for the
-covering `π`, although it is only defined as an fppf sheaf.
-
-A closed point `x` of `C` has a residue field `K'` finite over `k`, so `T_{K'} = T ×_k K' ⟶ T`
-is an fppf covering, and it suffices to check the sheaf condition after base change to the
-`k`-schemes `Y` over `T_{K'}` (`CategoryTheory.Presieve.isSheafFor_trans`). Such a `Y` lies over
-`Spec K'`, where `Pic_{C/k}` restricts to `Pic_{C_{K'}/K'}`
-(`AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`); since `C_{K'}` has the
-`K'`-rational point `x`, this is an fpqc sheaf (`AlgebraicGeometry.isSheaf_fpqc_picardFunctor`). -/
+covering `π`, although it is only defined as an fppf sheaf. -/
 theorem isSheafFor_picardFunctor_singleton (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
     [GeometricallyIntegral (C ↘ Spec (.of k))] {T T' : Over (Spec (.of k))} (π : T' ⟶ T)
@@ -2221,11 +2055,7 @@ theorem isSheafFor_picardFunctor_singleton (C : Scheme.{u}) [C.Over (Spec (.of k
 /-- **`Pic^d_{C/k}` satisfies the sheaf condition for fpqc coverings.** Let `C` be a smooth
 projective geometrically integral curve over `k` and `π : T' ⟶ T` a flat, surjective,
 quasi-compact morphism of `k`-schemes. Then `Pic^d_{C/k}` satisfies the sheaf condition for the
-covering `π`: a section of `Pic^d_{C/k}` over `T'` whose two pullbacks to `T' ×_T T'` agree
-descends to a section of `Pic_{C/k}` over `T`
-(`AlgebraicGeometry.isSheafFor_picardFunctor_singleton`), which has degree `d` at every point
-since `π` is surjective, hence is a section of `Pic^d_{C/k}`
-(`AlgebraicGeometry.exists_picardFunctorDegreeι_app_eq`). -/
+covering `π`. -/
 theorem isSheafFor_picardFunctorDegree_singleton (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
     [GeometricallyIntegral (C ↘ Spec (.of k))] (d : ℤ) {T T' : Over (Spec (.of k))}
@@ -2256,18 +2086,8 @@ theorem isSheafFor_picardFunctorDegree_singleton (C : Scheme.{u}) [C.Over (Spec 
 /-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
 `J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
 with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
-`Spec K ⟶ Spec k` is the trivial one: the projection `q : J_K ⟶ J` is invariant under transport.
-Then `J` represents `Pic^0_{C/k}`.
-
-This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, which applies it at a
-finite separable level `K`. For infinite `K` the morphism `Spec K ⟶ Spec k` is faithfully flat and
-quasi-compact but not locally of finite presentation, so this does not follow from the fppf
-sheaf property of `Pic^0_{C/k}` alone. The points of `J` descend along the base changes
-`T_K ⟶ T` of `Spec K ⟶ Spec k`, which are effective epimorphisms, and `Pic^0_{C/k}` satisfies
-the sheaf condition for them (`AlgebraicGeometry.isSheafFor_picardFunctorDegree_singleton`); this is
-`CategoryTheory.Functor.RepresentableBy.nonempty_representableBy_of_descent`.
-
-(blueprint: `proposition-jacobian-over-ground-field`, Step 7) -/
+`Spec K ⟶ Spec k` is the trivial one: the projection `q: J_K ⟶ J` is invariant under transport.
+Then `J` represents `Pic^0_{C/k}`. -/
 theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
     [Algebra k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2305,12 +2125,7 @@ open Functor.RepresentableBy IntermediateField in
 restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are a finite
 subextension `L` of `k_s/k`, an `L`-scheme `J_L` and a cartesian square `J_s = J_L ×_L k_s`
 through which the transport of points of `J_s` induced by `Pic^0_{C/k}` is trivial along pairs of
-`k_s`-points which agree over `L`.
-
-`J_s` descends to some finite `K'` (Stacks 01ZM). The transport of `Pic^0_{C/k}` and the
-projection to `J_{K'}` give two morphisms over `Spec (k_s ⊗_{K'} k_s)`; they agree on the diagonal
-`Spec k_s`, which is the limit of the `Spec (k_s ⊗_L k_s)`, hence over some
-`Spec (k_s ⊗_L k_s)` (Stacks 01ZM). -/
+`k_s`-points which agree over `L`. -/
 theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2493,11 +2308,7 @@ represent the restriction of `Pic^0_{C/k}` to schemes over a separable closure `
 a finite separable subextension `K` of `k_s/k` and a `K`-scheme `J_K` with `J_K ×_K k_s ≅ J_s`,
 through a projection `q : J_s ⟶ J_K`, such that `J_K` represents the restriction of
 `Pic^0_{C/k}` to schemes over `K` compatibly with `q`: a point `a` of `J_s` and the point `q ∘ a`
-of `J_K` classify the same section of `Pic^0_{C/k}`.
-
-This is the content of `proposition-jacobian-over-ground-field--1` and Step 7 at the finite level:
-`J_s` and its canonical descent datum, being of finite presentation, are defined over a finite
-separable subextension (Stacks 01ZM), and the descended scheme represents `Pic^0_{C/k}` over `K`. -/
+of `J_K` classify the same section of `Pic^0_{C/k}`. -/
 theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2600,9 +2411,7 @@ theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algeb
     exact (Over.w a).symm
 
 /-- A descent `J_K` of the Jacobian `J_s` of `C_{k_s}` to a finite separable level `K` is
-projective over `K`, so every finite set of its points lies in an affine open: `J_s` is a
-proper group scheme, hence quasi-projective, the immersion into projective space descends to
-`J_K`, and it is closed since `J_K` is proper. -/
+projective over `K`, so every finite set of its points lies in an affine open. -/
 lemma exists_isAffineOpen_superset_of_isPullback {ks : Type u} [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2647,12 +2456,7 @@ lemma exists_isAffineOpen_superset_of_isPullback {ks : Type u} [Field ks] [Algeb
 
 /-- A descent `J_K` of the Jacobian `J_s` of `C_{k_s}` to a finite separable level `K` is of
 finite presentation and projective over `K`: `J_K ⟶ Spec K` is locally of finite presentation
-and quasi-compact, and there is a closed immersion `J_K ⟶ ℙ^N_K` over `Spec K`. Indeed `J_s` is a
-proper group scheme, hence quasi-projective, the immersion into projective space descends to
-`J_K`, and it is closed since `J_K` is proper (and smooth, by fpqc descent).
-
-(blueprint: `proposition-jacobian-over-ground-field--1`, the clauses "of finite presentation" and
-"projective") -/
+and quasi-compact, and there is a closed immersion `J_K ⟶ ℙ^N_K` over `Spec K`. -/
 lemma exists_isClosedImmersion_projectiveSpace_of_isPullback {ks : Type u} [Field ks]
     [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2706,15 +2510,7 @@ canonical descent datum `φ` relative to `Spec k_s ⟶ Spec k`
 (`CategoryTheory.Functor.RepresentableBy.overDescentDatum`). Then there are a finite separable
 subextension `K` of `k_s/k`, a `K`-scheme `J_K` with `J_K ×_K k_s ≅ J_s`, and a descent datum
 `φ_K` on `J_K` relative to `Spec K ⟶ Spec k` whose base change to `k_s` is `φ`. Moreover every
-finite set of points of `J_K` lies in an affine open, `J_K` being projective over `K`.
-
-The proof spreads `J_s`, the isomorphism `φ` and a closed immersion `J_s ⟶ ℙ^N` out to a finite
-level (Stacks 01ZM: `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`,
-`AlgebraicGeometry.Scheme.exists_pullback_hom_of_isLimit` and
-`AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`), the cocycle condition
-holding at a finite level because it holds over `k_s`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+finite set of points of `J_K` lies in an affine open. -/
 theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2756,12 +2552,9 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
   · exact exists_isAffineOpen_superset_of_isPullback C Js rs K JK q hq
 
 /-- **The descent datum is defined at a finite separable level**, with `J_K` of finite
-presentation and projective. This is `AlgebraicGeometry.exists_intermediateField_descentDatum`
-together with the facts that `J_K ⟶ Spec K` is locally of finite presentation and quasi-compact
-(so of finite presentation) and admits a closed immersion `J_K ⟶ ℙ^N_K` over `Spec K`
-(`AlgebraicGeometry.exists_isClosedImmersion_projectiveSpace_of_isPullback`).
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+presentation and projective: as `AlgebraicGeometry.exists_intermediateField_descentDatum`, and
+moreover `J_K ⟶ Spec K` is locally of finite presentation and quasi-compact and admits a closed
+immersion `J_K ⟶ ℙ^N_K` over `Spec K`. -/
 theorem exists_intermediateField_descentDatum_isClosedImmersion {ks : Type u} [Field ks]
     [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2787,17 +2580,8 @@ integral curve over `k₀`, let `K` be an algebraically closed extension of `k�
 base change of `C₀` to `K`. Then the value of `Pic^0_{C₀/k₀}` on `Spec K` is `Pic^0(C)`, and the
 identification is equivariant: for a `k₀`-automorphism `σ` of `K`, the automorphism `γ` of `C`
 over `C₀` lying over `Spec σ` acts on `Pic^0(C)` by pullback, and this corresponds to the action of
-`Spec σ` on `Pic^0_{C₀/k₀}(Spec K)`.
-
-The bijection sends `ℒ ∈ Pic^0(C)` to the image of the corresponding class on
-`C₀ ×_{k₀} K ≅ C`. Since `C` has a `K`-point, `Pic(C) ⟶ Pic_{C/K}(K)` is bijective
-(`AlgebraicGeometry.bijective_pic_split` with `Pic(Spec K) = 0`), every fppf covering of `Spec K`
-having a section; the fibrewise degree of a class over the point `Spec K` is its degree on `C`.
-Both maps are natural in `Spec K`, which gives the equivariance. These are Steps 9 and 10 of the
-proof of `AlgebraicGeometry.exists_jacobian_descent`.
-
-The instances `[SmoothOfRelativeDimension 1 (C ↘ Spec K)]` and `[IsProper (C ↘ Spec K)]`, which
-follow from `hC`, are assumed so that `Pic^0(C)` is defined. -/
+`Spec σ` on `Pic^0_{C₀/k₀}(Spec K)`. The bijection sends `ℒ ∈ Pic^0(C)` to the image of the
+corresponding class on `C₀ ×_{k₀} K ≅ C`. -/
 theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k₀] [Field K]
     [Algebra k₀ K] [IsAlgClosed K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
     [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProper (C₀ ↘ Spec (.of k₀))]
@@ -2851,7 +2635,7 @@ theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k�
   have hmem (L : picardZero K C) : Pic.map e.inv L.1 ∈ S.obj (.op T) := fun K' _ _ t ↦ by
     rw [hdegρ]
     exact (hker L.1).1 L.2
-  -- the comparison `β : Pic^0_{C₀/k₀} ⟶ Pic_{C₀/k₀}` is injective on sections
+  -- the comparison `β: Pic^0_{C₀/k₀} ⟶ Pic_{C₀/k₀}` is injective on sections
   let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
   let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
     ⟨sheafifyLift J α (picardFunctor f).property⟩
@@ -2957,24 +2741,7 @@ theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k�
 /-- **The Jacobian over an arbitrary ground field, as a representing object.** Let `C` be a smooth
 projective geometrically integral curve of genus `g` over a field `k`. Then `Pic^0_{C/k}` is
 represented, compatibly with the group laws, by an abelian variety of dimension `g` over `k`. No
-rational point of `C` is assumed.
-
-This is Steps 1–7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`: the Jacobian of
-`C_{k_s}` carries the canonical descent datum, which is defined at a finite separable level `K`,
-is effective there, and descends the geometric properties to `k`. The group law of the descended
-scheme is the one induced by the group law of `Pic^0_{C/k}`
-(`AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul`), so it need not be descended separately.
-
-This is the general-field statement that the scope remarks
-`proposition-jacobian-over-ground-field--1` and `proposition-jacobian-over-ground-field--1` refer
-to: over a separably closed field it is `AlgebraicGeometry.exists_jacobian`, and here it is
-descended from a separable closure, without a rational point.
-
-The clause `J_K ≅ Pic^0_{C_K/K}` for field extensions `K/k` is
-`AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree_baseChange`.
-
-(blueprint: `proposition-jacobian-over-ground-field`; pointed to by
-`proposition-jacobian-over-ground-field--1`, `proposition-jacobian-over-ground-field--1`) -/
+rational point of `C` is assumed. -/
 theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Field ks]
     [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -2983,12 +2750,12 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
       (e : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J),
       IsProper J.hom ∧ SmoothOfRelativeDimension g J.hom ∧ GeometricallyIntegral J.hom ∧
         IsPicardZeroMul _ e := by
-  -- Step 1: the Jacobian `J_s` of `C_{k_s}` represents the restriction of `Pic^0_{C/k}`.
+  -- the Jacobian `J_s` of `C_{k_s}` represents the restriction of `Pic^0_{C/k}`.
   obtain ⟨Js, _, rJs, hJsP, hJsS, hJsG, -, -⟩ := exists_jacobian_pullback ks C g hg
   obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
     (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
     (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
-  -- Steps 2 and 3: `J_s` and its canonical descent datum are defined at a finite separable
+  -- `J_s` and its canonical descent datum are defined at a finite separable
   -- level `K`, where a descent `J_K` of `J_s` represents `Pic^0_{C/k}`.
   obtain ⟨K, _, _, JK, q', hq', rK, -⟩ :=
     exists_intermediateField_representableBy C Js (rJs.ofIso e.symm)
@@ -2997,9 +2764,9 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   have := flat_specMap_algebraMap k K
   have := locallyOfFinitePresentation_specMap_algebraMap k K
   have := surjective_specMap_algebraMap k K
-  -- Step 4: the canonical descent datum `φ_K` of `J_K` is effective, with descended scheme `J`.
+  -- the canonical descent datum `φ_K` of `J_K` is effective, with descended scheme `J`.
   obtain ⟨J, q, hq, hinv⟩ := rK.overDescentDatum.isEffective_of_isFinite hJK
-  -- Step 7, at the finite level `K`: `J` represents `Pic^0_{C/k}`, since `J ×_k K ≅ J_K`
+  -- `J` represents `Pic^0_{C/k}`, since `J ×_k K ≅ J_K`
   -- compatibly with the canonical descent datum of `J_K`.
   obtain ⟨r⟩ := nonempty_representableBy_picardFunctorDegree_of_isPullback
     C JK rK J q hq fun f₁ f₂ h a ↦ by
@@ -3008,10 +2775,10 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   have hs := specMap_algebraMap_comp_specMap_algebraMap k K ks
   have hJ : IsPullback (q' ≫ q) Js.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k ks))) :=
     hs ▸ hq'.paste_horiz hq
-  -- Step 6: the geometric properties descend along `k ⊆ k_s`.
+  -- the geometric properties descend along `k ⊆ k_s`.
   obtain ⟨hP, hS, hG⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux
     J.hom Js.hom (q' ≫ q) hJ g
-  -- Step 5: the group law of `Pic^0_{C/k}` makes `J` a commutative group scheme.
+  -- the group law of `Pic^0_{C/k}` makes `J` a commutative group scheme.
   obtain ⟨_, hr⟩ := exists_commGrpObj_isPicardZeroMul (C ↘ Spec (.of k)) r
   exact ⟨J, inferInstance, r, hP, hS, hG, hr⟩
 
@@ -3020,14 +2787,7 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
 smooth projective geometrically integral curve of genus `g` over a field `k`. Then the Jacobian
 `J` of `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree` can be chosen so
 that moreover, for every field extension `K/k` and every base change `C_K` of `C`, the base
-change `J_K = J ×_k K` represents `Pic^0_{C_K/K}`: `J_K ≅ Pic^0_{C_K/K}`. In fact any
-representing object of `Pic^0_{C/k}` has this property
-(`AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_baseChange`).
-
-The naturality in `K` of the identification asserted by the blueprint is not part of this
-statement; see `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree_pullback`.
-
-(blueprint: `proposition-jacobian-over-ground-field`, the clause `J_K ≅ Pic^0_{C_K/K}`) -/
+change `J_K = J ×_k K` represents `Pic^0_{C_K/K}`: `J_K ≅ Pic^0_{C_K/K}`. -/
 theorem exists_commGrpObj_representableBy_picardFunctorDegree_baseChange (ks : Type u)
     [Field ks] [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -3061,12 +2821,7 @@ which `r` attaches to the class of `ℒ`. The isomorphism is equivariant: every
 `Spec σ`, base change along `γ` preserves `Pic^0(C)`, and the isomorphism intertwines that
 action with the action on `k̄₀`-points by precomposition with
 `AlgebraicGeometry.specAlgEquivOver σ`. Restricted to `ℓⁿ`-torsion, it gives the `Gal(k̄₀/k₀)`-
-equivariant isomorphism `J₀[ℓⁿ](k̄₀) ≅ Pic^0(C)[ℓⁿ]` of the blueprint.
-
-No rational point of `C₀` is assumed. The instances `[SmoothOfRelativeDimension 1 (C ↘ Spec K)]`
-and `[IsProper (C ↘ Spec K)]`, which follow from `hC`, are assumed so that `Pic^0(C)` is defined.
-
-(blueprint: `proposition-jacobian-over-ground-field`) -/
+equivariant isomorphism `J₀[ℓⁿ](k̄₀) ≅ Pic^0(C)[ℓⁿ]`. No rational point of `C₀` is assumed. -/
 theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Field K]
     [Algebra k₀ ks] [Algebra k₀ K] [Algebra ks K] [IsScalarTower k₀ ks K]
     [IsSepClosure k₀ ks] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
@@ -3104,17 +2859,17 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
   have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected (C₀ ↘ Spec (.of k₀))
   have : GeometricallyIntegral (C₀ ↘ Spec (.of k₀)) :=
     .of_geometricallyReduced_of_geometricallyIrreducible _
-  -- Steps 1–7: the Jacobian `J₀` over `k₀`.
+  -- The Jacobian `J₀` over `k₀`.
   obtain ⟨J₀, _, r, hP, hS, hG, hr⟩ :=
     exists_commGrpObj_representableBy_picardFunctorDegree ks C₀ g hg
-  -- Steps 9–11: the geometric points, equivariantly and as groups.
+  -- the geometric points, equivariantly and as groups.
   have : IsAlgClosed K := IsAlgClosure.isAlgClosed k₀
   obtain ⟨Φ, hΦ, hΦσ⟩ := exists_picardZero_equiv_picardFunctorDegree C₀ C p hC
   obtain ⟨ψ, hψ⟩ := exists_mulEquiv_of_isPicardZeroMul _ r hr
     (T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))))
     (fun L : picardZero K C ↦ Pic.map hC.isoPullback.inv L.1)
     (fun a b ↦ Pic.map_mul _ a.1 b.1) Φ hΦ
-  -- Step 8: its base change to `K` represents `Pic^0_{C/K}`, through the canonical
+  -- its base change to `K` represents `Pic^0_{C/K}`, through the canonical
   -- identification of `Pic^0_{C₀/k₀}` restricted to `K`-schemes with `Pic^0_{C/K}`.
   refine ⟨J₀, inferInstance, r, hP, hS, hG, hr,
     ⟨(r.ofAdjunction (Over.mapPullbackAdj _)).ofIso (picardFunctorDegreeIsoOfIsPullback p hC 0),
@@ -3132,11 +2887,9 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
 /-- **The `ℓⁿ`-torsion of the Jacobian over a general base field.** In the situation of
 `AlgebraicGeometry.exists_jacobian_descent` (`C₀` a proper smooth geometrically connected curve
 over an arbitrary field `k₀`, `C = C₀ ×_{k₀} k̄₀`), the Galois-equivariant group isomorphism
-`e : Pic^0(C) ≃* J₀(k̄₀)` restricts, for every `ℓ` and `n`, to an isomorphism of the
+`e: Pic^0(C) ≃* J₀(k̄₀)` restricts, for every `ℓ` and `n`, to an isomorphism of the
 `ℓⁿ`-torsion subgroups `Pic^0(C)[ℓⁿ] ≃* J₀[ℓⁿ](k̄₀)`, which is the restriction of `e` and hence
-`Gal(k̄₀/k₀)`-equivariant. No finiteness of `k₀` and no rational point of `C₀` is assumed.
-
-(blueprint: `proposition-jacobian-over-ground-field`, the `ℓⁿ`-torsion clause) -/
+`Gal(k̄₀/k₀)`-equivariant. No finiteness of `k₀` and no rational point of `C₀` is assumed. -/
 theorem exists_jacobian_descent_torsion (k₀ ks K : Type u) [Field k₀] [Field ks] [Field K]
     [Algebra k₀ ks] [Algebra k₀ K] [Algebra ks K] [IsScalarTower k₀ ks K]
     [IsSepClosure k₀ ks] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
@@ -3186,11 +2939,7 @@ let `C' = C ×_k K` be presented by a cartesian square. Then `J_K = J ×_k K` re
 `Pic^d_{C'/K}` by the representation `rK` obtained from `r` by base change: for `T` over `K`, the
 `T`-point of `J_K` attached by `rK` to a section `y` of `Pic^d_{C/k}` over `T`, viewed as a
 section of `Pic^d_{C'/K}` through `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, is the
-point adjoint (`Over.mapPullbackAdj`) to the point of `J` attached to `y` by `r`. This
-compatibility determines `rK` and expresses the naturality of `J_K ≅ Pic^d_{C_K/K}` in `K`.
-
-(blueprint: `proposition-jacobian-over-ground-field`, the clause `J_K ≅ Pic^0_{C_K/K}` naturally in
-`K`) -/
+point adjoint (`Over.mapPullbackAdj`) to the point of `J` attached to `y` by `r`. -/
 theorem exists_representableBy_picardFunctorDegree_pullback_homEquiv {K : Type u} [Field K]
     [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
     [IsProper (C ↘ Spec (.of k))] [LocallyOfFinitePresentation (C ↘ Spec (.of k))]
@@ -3218,17 +2967,9 @@ extension and let `C' = C ×_k K` be presented by a cartesian square. Then `J_K 
 represents `Pic^0_{C'/K}` by the base change `rK` of `r`
 (`AlgebraicGeometry.exists_representableBy_picardFunctorDegree_pullback_homEquiv`), and the base
 change of the group law of `J` makes `J_K` a commutative group scheme for which `rK` respects the
-group laws: `(J_C)_K ≅ J_{C_K}` as group schemes.
-
-The group law of `J_K` is the base change of that of `J` in the sense of functors of points: for
-every `K`-scheme `T`, the bijection `(T ⟶ J_K) ≃ (T ⟶ J)` of the base change adjunction
-(`Over.mapPullbackAdj`) is a group isomorphism. By the Yoneda lemma this determines the group
-law, and it is the unique one for which `rK` respects the group laws
-(`AlgebraicGeometry.existsUnique_iso_isMonHom_of_isPicardZeroMul`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`,
-`theorem-picard-scheme-jacobian-over-separably`, the clause `J_{C_{k'}} ≅ (J_C)_{k'}`;
-`proposition-jacobian-over-ground-field`, the clause `J_K ≅ Pic^0_{C_K/K}`) -/
+group laws: `(J_C)_K ≅ J_{C_K}` as group schemes. Here the group law of `J_K` is the base change
+of that of `J`: for every `K`-scheme `T`, the bijection `(T ⟶ J_K) ≃ (T ⟶ J)` of the base
+change adjunction (`Over.mapPullbackAdj`) is a group isomorphism. -/
 theorem exists_commGrpObj_representableBy_picardFunctorDegree_pullback_isPicardZeroMul
     {K : Type u} [Field K] [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))]
     [C'.Over (Spec (.of K))] [IsProper (C ↘ Spec (.of k))]
@@ -3307,12 +3048,7 @@ commutative group scheme) representing `Pic^0_{C/k}` by `r`, compatibly with the
 that for every field extension `K/k` and every base change `C' = C ×_k K`, `J_K = J ×_k K`
 represents `Pic^0_{C'/K}` by the base change `rK` of `r`: through the canonical identification
 `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, the `T`-point of `J_K` attached to a
-section `y` is the point adjoint to the `T`-point of `J` attached to `y` by `r`. This
-strengthens `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree_baseChange`
-with the specific identification, which is natural in `K`.
-
-(blueprint: `proposition-jacobian-over-ground-field`, the clause `J_K ≅ Pic^0_{C_K/K}` naturally in
-`K`) -/
+section `y` is the point adjoint to the `T`-point of `J` attached to `y` by `r`. -/
 theorem exists_commGrpObj_representableBy_picardFunctorDegree_pullback (ks : Type u)
     [Field ks] [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
@@ -3346,12 +3082,7 @@ for every field extension `k ⊆ k'` and every base change `X' = X ×_k k'`, the
 (through the canonical identification `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, the
 `T`-point attached by `e'` to a section `y` is adjoint to the point attached to `y` by `e`), and
 the base change of the group law of `J` (on `T`-points, the bijection
-`(T ⟶ J ×_k k') ≃ (T ⟶ J)` is a group isomorphism) makes `e'` respect the group laws. This
-strengthens `AlgebraicGeometry.exists_jacobian_baseChange`, which only gives some group structure
-and some representation on the base change.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`,
-`theorem-picard-scheme-jacobian-over-separably`, the clause `J_{C_{k'}} ≅ (J_C)_{k'}`) -/
+`(T ⟶ J ×_k k') ≃ (T ⟶ J)` is a group isomorphism) makes `e'` respect the group laws. -/
 theorem exists_jacobian_baseChange_isPicardZeroMul [IsSepClosed k] (X : Scheme.{u})
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))] :
@@ -3397,16 +3128,7 @@ every base change `C' = C ×_k K` the base change `J_K = J ×_k K` is the Jacobi
 represents `Pic^0_{C'/K}` by the base change `rK` of `r`, naturally in `K` (through
 `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, the point attached by `rK` to a section
 `y` is adjoint to the point attached to `y` by `r`), and compatibly with the group laws, the group
-law of `J_K` being the base change of that of `J`. No rational point of `C` is assumed.
-
-This is `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree` with the
-blueprint hypothesis "geometrically connected" in place of "geometrically integral": a smooth
-geometrically connected morphism is geometrically integral
-(`AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricallyConnected`). The separable
-closure used in the descent is the one inside an algebraic closure of `k`.
-
-(blueprint: `proposition-jacobian-over-ground-field`, representability and the clause
-`J_K ≅ Pic^0_{C_K/K}` naturally in `K`) -/
+law of `J_K` being the base change of that of `J`. No rational point of `C` is assumed. -/
 theorem exists_jacobian_of_geometricallyConnected (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
     [GeometricallyConnected (C ↘ Spec (.of k))] (g : ℕ) (hg : arithmeticGenus k C = g) :

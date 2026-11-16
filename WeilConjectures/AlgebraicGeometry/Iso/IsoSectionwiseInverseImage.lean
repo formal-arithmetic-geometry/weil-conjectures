@@ -13,9 +13,6 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 /-!
 # Sectionwise inverse image along a scheme isomorphism
 
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-
 This is the sectionwise model of the recorded inverse image under its canonical
 comma-coprojection identification. Coefficients may have any universe containing
 the small site's objects; the site's object and morphism universes stay distinct.
@@ -28,6 +25,13 @@ The original site equivalence, comparison, and constant-module results are reexp
 - `isoSectionwiseConstantMap`: coefficient transport uniquely normalized on constants.
 - `isoSectionwiseModuleInverseImage`: the module action transported through the ring map.
 - `isoSectionwiseModuleInverseImage_exact`: additivity and exactness of that functor.
+
+## References
+
+* Stacks Tags 09A5, 00WX and 0038
+* Stacks Tag 0H7J
+* Stacks Tags 00WX and 03D2
+* Stacks Tag 03DA
 -/
 
 @[expose] public noncomputable section
@@ -37,11 +41,7 @@ universe t r d v w w'
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Postcomposition with an isomorphism preserves the topology.
-Source: Stacks Tag 09A5 (blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: compose structure maps with g or its inverse. The underlying schemes,
-arrows, and fpqc covering families do not change; the two operations are inverse.
-Thus sheaves pull back by precomposition, in every coefficient universe. -/
+/-- Postcomposition with an isomorphism preserves the topology. -/
 @[instance] theorem proEtaleIsoPostcompose_isContinuous
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :
     (proEtaleIsoPostcompose g).IsContinuous (ProEt.topology X) (ProEt.topology Y) := by
@@ -50,9 +50,7 @@ Thus sheaves pull back by precomposition, in every coefficient universe. -/
     (proEtaleIsoPostcompose_equivalence g).2.2.2.1.some
 
 /-- The sectionwise model of inverse image under the canonical site-equivalence
-identification: its value at U is the original sheaf at (U, g ∘ structure).
-Source: Stacks Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+identification: its value at U is the original sheaf at (U, g ∘ structure). -/
 abbrev isoSectionwiseInverseImage {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (D : Type d) [Category.{v} D] :
     Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D :=
@@ -60,13 +58,7 @@ abbrev isoSectionwiseInverseImage {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (ProEt.topology X) (ProEt.topology Y)
 
 /-- The sectionwise model is an equivalence in every coefficient universe, and
-preserves every existing small limit and colimit.
-Source: Stacks Tags 09A5, 00WX and 0038
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: precompose with postcomposition by the inverse scheme isomorphism. The
-canonical identity-on-sections unit and counit are inverse, natural sheaf maps,
-since both site functors preserve covers. Equivalences preserve limits and colimits;
-the projection characterization gives the canonical inverse-limit comparison. -/
+preserves every existing small limit and colimit. -/
 theorem isoSectionwiseInverseImage_equivalence {X Y : Scheme.{t}}
     (g : X ⟶ Y) [IsIso g] (D : Type d) [Category.{v} D] :
     (isoSectionwiseInverseImage g D).IsEquivalence ∧
@@ -126,14 +118,7 @@ private theorem sectionwiseConstantCommIso_normalization
     CommRingCat.{max r (t + 1)} (ProEt.topology X) (ProEt.topology Y)
       ((Functor.const Y.ProEtᵒᵖ).obj A)).symm
 
-/-- The constant coefficient comparison is uniquely fixed by constant sections.
-Source: Stacks Tags 09A5, 00WX and 0H7J
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: the distinguished comma object is terminal in the inverse-image colimit.
-Under its coprojection identification inverse image is sectionwise transport.
-Constant presheaf sections are unchanged; sheafification extends the identity
-uniquely. The inverse site transport gives its inverse. This is the recorded
-constant coefficient comparison, expressed in its canonical sectionwise model. -/
+/-- The constant coefficient comparison is uniquely fixed by constant sections. -/
 theorem isoSectionwiseConstantMap_existsUnique {X Y : Scheme.{t}}
     (g : X ⟶ Y) [IsIso g] (A : CommRingCat.{max r (t + 1)}) :
     ∃! c : (isoSectionwiseInverseImage g RingCat.{max r (t + 1)}).obj
@@ -189,17 +174,12 @@ theorem isoSectionwiseConstantMap_existsUnique {X Y : Scheme.{t}}
     rw [← Category.assoc, ← Category.assoc, hni]
     exact hd'.trans hn.symm
 
-/-- Constant-section coefficient transport, with no choice of an unnormalized map.
-Source: Stacks Tag 0H7J (blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- Constant-section coefficient transport, with no choice of an unnormalized map. -/
 def isoSectionwiseConstantMap {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (A : CommRingCat.{max r (t + 1)}) :=
   (isoSectionwiseConstantMap_existsUnique g A).exists.choose
 
-/-- The specified coefficient map is invertible.
-Source: Stacks Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: inverse site transport gives the inverse constant-section map. Both
-composites are identities on constant sections and hence on their sheafifications. -/
+/-- The specified coefficient map is invertible. -/
 @[instance] theorem isoSectionwiseConstantMap_isIso {X Y : Scheme.{t}}
     (g : X ⟶ Y) [IsIso g] (A : CommRingCat.{max r (t + 1)}) :
     IsIso (isoSectionwiseConstantMap g A) := by
@@ -215,9 +195,7 @@ composites are identities on constant sections and hence on their sheafification
   infer_instance
 
 /-- Inverse image with its action transported through the inverse coefficient map.
-On sections a acts as c inverse(a); all underlying abelian groups are unchanged.
-Source: Stacks Tags 00WX and 03D2
-(blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+On sections a acts as c inverse(a); all underlying abelian groups are unchanged. -/
 def isoSectionwiseModuleInverseImage {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     {RY : Sheaf (ProEt.topology Y) RingCat.{max r (t + 1)}}
     {RX : Sheaf (ProEt.topology X) RingCat.{max r (t + 1)}}
@@ -226,13 +204,7 @@ def isoSectionwiseModuleInverseImage {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
       SheafOfModules.{max r (t + 1)} RX :=
   SheafOfModules.pushforward (F := proEtaleIsoPostcompose g) (inv c)
 
-/-- Scalar transport and site transport are additive and exact.
-Source: Stacks Tags 00WX and 03DA
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: the site equivalence computes kernels and cokernels on their underlying
-abelian sheaves. Transporting an action through a ring isomorphism leaves these
-sheaves and maps unchanged; linearity of kernel inclusions and quotient maps
-transports too. Finite limits, finite colimits and addition are therefore preserved. -/
+/-- Scalar transport and site transport are additive and exact. -/
 theorem isoSectionwiseModuleInverseImage_exact {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     {RY : Sheaf (ProEt.topology Y) RingCat.{max r (t + 1)}}
     {RX : Sheaf (ProEt.topology X) RingCat.{max r (t + 1)}}
@@ -285,8 +257,7 @@ theorem isoSectionwiseModuleInverseImage_exact {X Y : Scheme.{t}} (g : X ⟶ Y) 
   ext U x
   rfl
 
-/-- Additivity supplied by the exact inverse-image theorem.
-Source: Stacks Tag 03DA (blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- Additivity supplied by the exact inverse-image theorem. -/
 instance isoSectionwiseModuleInverseImage_additive {X Y : Scheme.{t}} (g : X ⟶ Y)
     [IsIso g] {RY : Sheaf (ProEt.topology Y) RingCat.{max r (t + 1)}}
     {RX : Sheaf (ProEt.topology X) RingCat.{max r (t + 1)}}
@@ -294,8 +265,7 @@ instance isoSectionwiseModuleInverseImage_additive {X Y : Scheme.{t}} (g : X ⟶
     (isoSectionwiseModuleInverseImage g c).Additive :=
   (isoSectionwiseModuleInverseImage_exact g c).1
 
-/-- Finite-limit preservation supplied by the exact inverse-image theorem.
-Source: Stacks Tag 03DA (blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- Finite-limit preservation supplied by the exact inverse-image theorem. -/
 instance isoSectionwiseModuleInverseImage_limits {X Y : Scheme.{t}} (g : X ⟶ Y)
     [IsIso g] {RY : Sheaf (ProEt.topology Y) RingCat.{max r (t + 1)}}
     {RX : Sheaf (ProEt.topology X) RingCat.{max r (t + 1)}}
@@ -303,8 +273,7 @@ instance isoSectionwiseModuleInverseImage_limits {X Y : Scheme.{t}} (g : X ⟶ Y
     PreservesFiniteLimits (isoSectionwiseModuleInverseImage g c) :=
   (isoSectionwiseModuleInverseImage_exact g c).2.1
 
-/-- Finite-colimit preservation supplied by the exact inverse-image theorem.
-Source: Stacks Tag 03DA (blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- Finite-colimit preservation supplied by the exact inverse-image theorem. -/
 instance isoSectionwiseModuleInverseImage_colimits {X Y : Scheme.{t}} (g : X ⟶ Y)
     [IsIso g] {RY : Sheaf (ProEt.topology Y) RingCat.{max r (t + 1)}}
     {RX : Sheaf (ProEt.topology X) RingCat.{max r (t + 1)}}

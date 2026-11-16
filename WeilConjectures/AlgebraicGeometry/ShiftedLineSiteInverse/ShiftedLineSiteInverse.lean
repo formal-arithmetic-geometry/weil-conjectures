@@ -101,9 +101,12 @@ public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDerivedPull
 
 /-! # Shifted line inverses on the etale and pro-etale sites
 
-Source: main-20261015, proposition-exceptional-inverse-image-smooth-morphism,
-proposition-exceptional-inverse-image-smooth-morphism, first paragraph; Stacks Project, Tags 0B8Q,
-0B8N, 06YQ, 07A4 and 0FNH. (blueprint: lem-pur-shifted-line-site-inverse)
+## References
+
+* Stacks Project, Tags 0B8Q, 0B8N, 06YQ, 07A4 and 0FNH
+* Stacks 07A4 and 0GMX
+* Stacks 099R and 0FNH
+* Stacks finite coefficient setting
 -/
 
 @[expose] public noncomputable section
@@ -119,9 +122,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The canonical comparison for exact inverse image from the etale to the pro-etale
 site. This is an abbreviation for the existing left-derived tensor comparison, with its
 canonical identifications with termwise exact inverse image. It retains the general
-ringed-topos representative normalization and makes no new choice.
-Source: Stacks Project, Tag 07A4
-(blueprint: lem-pur-shifted-line-site-inverse). -/
+ringed-topos representative normalization and makes no new choice. -/
 noncomputable abbrev siteComparisonCanonicalDerivedTensor
     (B : Type v) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
@@ -144,8 +145,7 @@ variable {C : Type v} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   [Abelian.HasFunctorialFlatResolution C]
 
 /-- The canonical single-term tensor comparison, obtained from the localization's lax
-monoidal comparison and the sole degree-zero tensor summand. No inverse is chosen.
-Source: Stacks 06YQ (blueprint: lem-pur-shifted-line-site-inverse). -/
+monoidal comparison and the sole degree-zero tensor summand. No inverse is chosen. -/
 def singleTensorMap (L M : C) :
     (DerivedCategory.singleFunctor C 0).obj L ⊗
       (DerivedCategory.singleFunctor C 0).obj M ⟶
@@ -169,8 +169,7 @@ def singleTensorMap (L M : C) :
 /-- Evaluation of oppositely shifted degree-zero sheaves. Extract the first shift and
 then the second by the signed total-tensor comparisons, cancel their sum, and evaluate
 on the sole degree-zero term. In particular the reverse order is specified separately,
-without inserting the graded braiding.
-Source: Stacks 0FNH and 06YQ (blueprint: lem-pur-shifted-line-site-inverse). -/
+without inserting the graded braiding. -/
 def evaluation (L M : C) (e : L ⊗ M ⟶ 𝟙_ C) (m : ℤ) :
     ((DerivedCategory.singleFunctor C 0).obj L)⟦m⟧ ⊗
       ((DerivedCategory.singleFunctor C 0).obj M)⟦-m⟧ ⟶ 𝟙_ (DerivedCategory C) :=
@@ -188,32 +187,27 @@ variable (B : Type v) [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   (T : Scheme.{u})
 
-/-- The existing exact inverse image in the fixed constant-ring presentation.
-Source: Stacks 099R (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The existing exact inverse image in the fixed constant-ring presentation. -/
 abbrev inverseImage := ProEtale.comparisonUpperStar B T
 
-/-- The termwise derived comparison on the unbounded derived categories.
-Source: Stacks 099R (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The termwise derived comparison on the unbounded derived categories. -/
 abbrev derivedInverseImage := (inverseImage B T).mapDerivedCategory
 
-/-- The canonical comparison of a pulled internal dual with the dual of the pulled line.
-Source: Stacks 0GMX (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The canonical comparison of a pulled internal dual with the dual of the pulled line. -/
 def dualComparison (L : Sheaf T.smallEtaleTopology B) :
     (inverseImage B T).obj ((ihom L).obj (𝟙_ _)) ⟶
       (ihom ((inverseImage B T).obj L)).obj (𝟙_ _) :=
   (Functor.LaxMonoidal.ihomComparison (inverseImage B T) L).app (𝟙_ _) ≫
     (ihom ((inverseImage B T).obj L)).map (Functor.OplaxMonoidal.η (inverseImage B T))
 
-/-- Pullback of a sheaf pairing, with the canonical tensor and coefficient-unit maps.
-Source: Stacks 07A4 and 0GMX (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- Pullback of a sheaf pairing, with the canonical tensor and coefficient-unit maps. -/
 def pulledPairing (L M : Sheaf T.smallEtaleTopology B)
     (e : L ⊗ M ⟶ 𝟙_ _) :
     (inverseImage B T).obj L ⊗ (inverseImage B T).obj M ⟶ 𝟙_ _ :=
   Functor.LaxMonoidal.μ (inverseImage B T) L M ≫
     (inverseImage B T).map e ≫ Functor.OplaxMonoidal.η (inverseImage B T)
 
-/-- Canonical comparison on a shifted single sheaf, including its signed shift map.
-Source: Stacks 099R and 0FNH (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- Canonical comparison on a shifted single sheaf, including its signed shift map. -/
 def shiftedSingleComparison (L : Sheaf T.smallEtaleTopology B)
     (m : ℤ) :
     (derivedInverseImage B T).obj (((DerivedCategory.singleFunctor _ 0).obj L)⟦m⟧) ≅
@@ -221,8 +215,7 @@ def shiftedSingleComparison (L : Sheaf T.smallEtaleTopology B)
   ((derivedInverseImage B T).commShiftIso m).app _ ≪≫
     (shiftFunctor _ m).mapIso (((inverseImage B T).mapDerivedCategorySingleFunctor 0).app L)
 
-/-- The derived coefficient-unit comparison, induced from the ordinary unit comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The derived coefficient-unit comparison, induced from the ordinary unit comparison. -/
 def unitComparison : (derivedInverseImage B T).obj (𝟙_ _) ≅ 𝟙_ _ :=
   (derivedInverseImage B T).mapIso (DerivedCategory.singleFunctorObjUnitIso _).symm ≪≫
   ((inverseImage B T).mapDerivedCategorySingleFunctor 0).app _ ≪≫
@@ -231,8 +224,7 @@ def unitComparison : (derivedInverseImage B T).obj (𝟙_ _) ≅ 𝟙_ _ :=
   DerivedCategory.singleFunctorObjUnitIso _
 
 /-- The commuting square for the specified derived evaluation, using the canonical
-K-flat tensor comparison, signed single-shift comparisons, and coefficient-unit comparison.
-Source: Stacks 07A4 and 0GMX (blueprint: lem-pur-shifted-line-site-inverse). -/
+K-flat tensor comparison, signed single-shift comparisons, and coefficient-unit comparison. -/
 def evaluationComparison [(inverseImage B T).PreservesFlat]
     (L M : Sheaf T.smallEtaleTopology B)
     (e : L ⊗ M ⟶ 𝟙_ _) (m : ℤ) : Prop :=
@@ -250,32 +242,27 @@ end Comparison
 variable (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
 
 /-- Finiteness of the prescribed positive-level quotient, transported by the standard
-universe lift. Source: blueprint purity conventions; Stacks finite coefficient setting
-(blueprint: lem-pur-shifted-line-site-inverse). -/
+universe lift. -/
 instance coefficientFinite (P : WeilConjectures.PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   letI : Finite P.Ring := Padic.finite_coefficientExtensionRing
     P.coefficients.l P.extension P.level P.level_pos
   inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
-/-- The sheaf dual is the existing closed sheaf-category internal Hom into the unit.
-Source: Stacks 0B8Q (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The sheaf dual is the existing closed sheaf-category internal Hom into the unit. -/
 abbrev dual (L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   (ihom L).obj (𝟙_ _)
 
-/-- An etale sheaf placed in the stated shifted degree in the ordinary derived category.
-Source: Stacks 06YQ (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- An etale sheaf placed in the stated shifted degree in the ordinary derived category. -/
 abbrev etaleSingle (L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (m : ℤ) :=
   ((DerivedCategory.singleFunctor _ 0).obj L)⟦m⟧
 
-/-- The specified ordinary evaluation, sending a local basis and its dual to one.
-Source: Stacks 0B8Q (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The specified ordinary evaluation, sending a local basis and its dual to one. -/
 def pairing (L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     L ⊗ dual A T L ⟶ 𝟙_ _ :=
   (ihom.ev L).app (𝟙_ _)
 
-/-- The two factors: false is the line, true is its internal sheaf dual.
-Source: Stacks 0B8Q (blueprint: lem-pur-shifted-line-site-inverse). -/
+/-- The two factors: false is the line, true is its internal sheaf dual. -/
 def factor (L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (b : Bool) :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   if b then dual A T L else L

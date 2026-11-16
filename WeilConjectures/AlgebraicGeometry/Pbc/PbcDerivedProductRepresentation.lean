@@ -34,8 +34,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Products of evaluated strict towers
 
-Source: blueprint, `prop-weil-pbc-derived-product-representation`; Stacks 07KC
-(blueprint: prop-weil-pbc-derived-product-representation).
+## References
+
+* Stacks 07KC
+* Stacks 015F
+* Stacks 05RU
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +52,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (T : Scheme.{u}) {A : Type u} [CommRing A]
 
-/-- Evaluation of a tower complex as a tower of complexes, then localization at each level.
-Source: blueprint order 1244 (blueprint: prop-weil-pbc-derived-product-representation). -/
+/-- Evaluation of a tower complex as a tower of complexes, then localization at each level. -/
 def pbcComplexEvaluation (d : Scheme.AdicCoefficientDatum A) :
     CochainComplex (Scheme.CompletedAdicTowers T d) ℤ ⥤ (ℕᵒᵖ ⥤
     DerivedCategory (Scheme.CompletedAdicModules T d)) :=
@@ -58,12 +60,7 @@ def pbcComplexEvaluation (d : Scheme.AdicCoefficientDatum A) :
     (Functor.whiskeringRight ℕᵒᵖ (CochainComplex (Scheme.CompletedAdicModules T d) ℤ)
       (DerivedCategory (Scheme.CompletedAdicModules T d))).obj DerivedCategory.Q
 
-/-- Evaluation is exact levelwise, so this functor inverts tower quasi-isomorphisms.
-Source: blueprint order 1244; Stacks 015F
-(blueprint: prop-weil-pbc-derived-product-representation).
-Proof: cohomology of a functor-category complex is computed at each object. Thus a
-quasi-isomorphism evaluates to a quasi-isomorphism at each n. Localization sends it to
-an isomorphism, and a natural transformation with invertible components is invertible. -/
+/-- Evaluation is exact levelwise, so this functor inverts tower quasi-isomorphisms. -/
 theorem pbcComplexEvaluation_inverts (d : Scheme.AdicCoefficientDatum A) :
     (HomologicalComplex.quasiIso (Scheme.CompletedAdicTowers T d) (ComplexShape.up ℤ)).IsInvertedBy
       (pbcComplexEvaluation T d) := by
@@ -80,24 +77,20 @@ theorem pbcComplexEvaluation_inverts (d : Scheme.AdicCoefficientDatum A) :
       (ComplexShape.up ℤ)).map f))
   infer_instance
 
-/-- The canonical evaluated derived tower, obtained by the localization universal property.
-Source: blueprint order 1244 (blueprint: prop-weil-pbc-derived-product-representation). -/
+/-- The canonical evaluated derived tower, obtained by the localization universal property. -/
 def pbcDerivedEvaluation (d : Scheme.AdicCoefficientDatum A) :
     DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ (ℕᵒᵖ ⥤
     DerivedCategory (Scheme.CompletedAdicModules T d)) :=
   Localization.lift (pbcComplexEvaluation T d) (pbcComplexEvaluation_inverts T d)
     DerivedCategory.Q
 
-/-- The localization comparison, so evaluation retains the representative's transition maps.
-Source: Stacks 05RU; blueprint product statement
-(blueprint: prop-weil-pbc-derived-product-representation). -/
+/-- The localization comparison, so evaluation retains the representative's transition maps. -/
 def pbcEvaluationFactors (d : Scheme.AdicCoefficientDatum A) :
     DerivedCategory.Q ⋙ pbcDerivedEvaluation T d ≅ pbcComplexEvaluation T d :=
   Localization.fac _ (pbcComplexEvaluation_inverts T d) DerivedCategory.Q
 
 /-- The product fan supplied by a representative tower complex. Its projections are
-localized complex projections followed by the specified representative isomorphism.
-Source: Stacks 07KC (blueprint: prop-weil-pbc-derived-product-representation). -/
+localized complex projections followed by the specified representative isomorphism. -/
 def pbcRepresentativeProductFan (d : Scheme.AdicCoefficientDatum A)
     (M : DerivedCategory (Scheme.CompletedAdicTowers T d))
     (I : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ)
@@ -110,14 +103,7 @@ def pbcRepresentativeProductFan (d : Scheme.AdicCoefficientDatum A)
 
 /-- Countable products in the completed-coefficient derived category exist, and every
 K-injective tower resolution represents their product by its termwise product.
-A resolution C → I and a representative Q(C) ≅ M supply e by inverting Q(C → I).
-Source: Stacks 07KC (blueprint: prop-weil-pbc-derived-product-representation).
-Proof: countable module-sheaf products are exact and sectionwise by
-lem-weil-proetale-countable-products-exact. Apply lem-weil-derived-limit-products-core
-with these exact products. It identifies localization of the product complex with the
-product of the localizations of its levels, with the displayed projections. Transport
-this limiting fan through pbcEvaluationFactors and the representative isomorphism e.
-K-injectivity is allowed but not needed by 07KC, which works for any representatives. -/
+A resolution C → I and a representative Q(C) ≅ M supply e by inverting Q(C → I). -/
 theorem pbcDerivedProductRepresentation (d : Scheme.AdicCoefficientDatum A) :
     HasCountableProducts (DerivedCategory (Scheme.CompletedAdicModules T d)) ∧
     ∀ (M : DerivedCategory (Scheme.CompletedAdicTowers T d))
@@ -169,8 +155,7 @@ theorem pbcDerivedProductRepresentation (d : Scheme.AdicCoefficientDatum A) :
   simp only [Category.id_comp, Discrete.natIso_hom_app]
   rfl
 
-/-- The countable-product existence part of the representation statement.
-Source: Stacks 07KC (blueprint: prop-weil-pbc-derived-product-representation). -/
+/-- The countable-product existence part of the representation statement. -/
 instance pbcDerived_hasCountableProducts (d : Scheme.AdicCoefficientDatum A) :
     HasCountableProducts (DerivedCategory (Scheme.CompletedAdicModules T d)) :=
   (pbcDerivedProductRepresentation T d).1
