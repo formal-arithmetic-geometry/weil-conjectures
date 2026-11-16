@@ -14,9 +14,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Derived sections with closed support
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-formal-closed-support,
-det-lem-formal-closed-support-derived.md, clauses (1)--(3); Stacks Project, Tag 079P
-(blueprint: lemma-sections-support-closed-subscheme).
+The derived form of sections with closed support: the derived adjunction `Ri_* ⊣ RΓ_Z`, the
+global RHom comparison, the support triangle `i_* RΓ_Z K → K → Rj_* j^* K` and the fibre formula
+(Stacks Project, Tag 079P).
 -/
 
 @[expose] public noncomputable section
@@ -140,13 +140,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Derived adjunction, global RHom, injective-unit surjectivity, and the natural support
-triangle and fibre formula, using exactly the kernel functor of the sheaf-support node.
-Source: blueprint main-20261015, lemma-sections-support-closed-subscheme, clauses (1)--(3)
-(blueprint: lemma-sections-support-closed-subscheme).
+triangle and fibre formula, using exactly the kernel functor of `formal_closed_support_sheaves`.
 
 Proof plan:
 1. Only a quasi-compact open immersion j is assumed; no finiteness over a field is needed.
-2. The sheaf adjunction and exact i_* are lemma-sections-support-closed-subscheme--1.
+2. The sheaf adjunction and exact i_* are `formal_closed_support_sheaves`.
    The exact-left-adjoint derived adjunction is adj.mapDerivedCategoryRightDerivedAdjunction.
    On a K-injective I the total right derived functor is computed by H(I), via
    Functor.rightDerivedFunctorObjQIso. The universal pair of lemma-sections-support-closed-subscheme

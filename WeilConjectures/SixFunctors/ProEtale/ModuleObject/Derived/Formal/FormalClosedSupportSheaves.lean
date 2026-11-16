@@ -59,9 +59,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Sections with closed support for condensed module sheaves
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-formal-closed-support,
-node lemma-sections-support-closed-subscheme--1
-(blueprint: lemma-sections-support-closed-subscheme--1); Stacks Project, Tags 09AA and 09AH.
+For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j : V ⟶ X`, the sections
+with support in `Z`, `RΓ_Z M = i^* ker(M ⟶ j_* j^* M)`, give the right adjoint of the exact closed
+direct image `i_*` on condensed module sheaves (Stacks Project, Tags 09AA and 09AH).
 -/
 
 @[expose] public noncomputable section
@@ -280,24 +280,19 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The kernel of the open restriction unit, formed in the functor category, so that
-its maps are precisely the induced kernel maps.
-Source: blueprint lemma-sections-support-closed-subscheme--1, definition of the supported kernel
-(blueprint: lemma-sections-support-closed-subscheme--1). -/
+its maps are precisely the induced kernel maps. -/
 noncomputable def moduleSectionsWithSupport {X V : Scheme.{u}} (j : V ⟶ X) :
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ X :=
   kernel (upperStarLowerStarAdjunction Λ j).unit
 
-/-- The sheaf on the closed subscheme: `i^* ker(M ⟶ j_* j^* M)`.
-Source: blueprint lemma-sections-support-closed-subscheme--1, displayed definition
-(blueprint: lemma-sections-support-closed-subscheme--1). -/
+/-- The sheaf on the closed subscheme: `i^* ker(M ⟶ j_* j^* M)`. -/
 noncomputable def closedModuleSectionsWithSupport {X Z V : Scheme.{u}}
     (i : Z ⟶ X) (j : V ⟶ X) :
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ Z :=
   moduleSectionsWithSupport Λ j ⋙ upperStar Λ i
 
-/-- Sections with closed support give the right adjoint to the exact closed direct image.
-Source: blueprint main-20261015, lemma-sections-support-closed-subscheme--1, clauses (1)--(3);
-Stacks Project, Tags 09AA and 09AH (blueprint: lemma-sections-support-closed-subscheme--1).
+/-- Sections with closed support give the right adjoint to the exact closed direct image
+(Stacks Project, Tags 09AA and 09AH).
 
 Proof plan:
 1. The open complement is quasi-compact by hypothesis; no finiteness over a field is
