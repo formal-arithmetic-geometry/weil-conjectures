@@ -117,12 +117,9 @@ Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions). -/
 def blockSite {C : Type c} [Category.{v} C] (k : ℕ →o ℕ) : ℕ × C ⥤ ℕ × C :=
   k.toFunctor.prod (𝟭 C)
 
-/-- Reindexing preserves the vertical sheaf condition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions).
-Proof: at (m,U) restriction along a vertical cover is exactly restriction of the
-original sheaf along that same cover of U at level k(m); glue there. Thus
-precomposition carries every sheaf to a sheaf, which is the continuity criterion. -/
-theorem blockSite_continuous {C : Type c} [Category.{v} C]
+/-- Continuity for the canonical sequence-site reindexing.
+Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions). -/
+instance blockSiteContinuous {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
     (blockSite (C := C) k).IsContinuous
       (coefficientSequenceTopology J) (coefficientSequenceTopology J) := by
@@ -161,14 +158,6 @@ theorem blockSite_continuous {C : Type c} [Category.{v} C]
     intro V f hf
     exact ⟨(X.1, V), Prod.mkHom (𝟙 _) f, 𝟙 _, hf, by
       ext <;> simp [blockSite]⟩
-
-/-- Continuity for the canonical sequence-site reindexing.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions). -/
-instance blockSiteContinuous {C : Type c} [Category.{v} C]
-    (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
-    (blockSite (C := C) k).IsContinuous
-      (coefficientSequenceTopology J) (coefficientSequenceTopology J) :=
-  blockSite_continuous J k
 
 /-- First endpoints as a bundled monotone map, with actual least-index data.
 Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-constructions). -/

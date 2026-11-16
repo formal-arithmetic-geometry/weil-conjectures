@@ -126,7 +126,7 @@ instance cofinalSiteContinuous (W : Scheme.{u}) (r : ℕ ↪o ℕ) :
     (cofinalSite W r).IsContinuous
       (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology)
       (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology) :=
-  blockSite_continuous W.smallEtaleTopology r.toOrderHom
+  blockSiteContinuous W.smallEtaleTopology r.toOrderHom
 
 private theorem cofinalCoefficientRings (W : Scheme.{u})
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :
