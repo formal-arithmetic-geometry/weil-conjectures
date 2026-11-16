@@ -24,8 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-set_option maxHeartbeats 600000 in
--- Comparing the geometric chart restrictions with the formal datum needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Every chart section lifts to a matching section after clearing a power of `f`.
 
@@ -108,7 +106,9 @@ theorem puncturedMatching_chart_power_lift
   refine ⟨n, b h, ?_⟩
   have hc' : ψ (ρ (b h)) = c (h.val.2 0) := by
     exact hc h
-  rw [hc', hh, c.map_smul, c.apply_symm_apply]
+  refine hc'.trans ((congrArg c hh).trans ((c.map_smul _ _).trans ?_))
+  refine (congrArg (fun x : Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) ↦ g' 0 ^ n • x)
+    (c.apply_symm_apply t)).trans ?_
   change ((ψ.comp ρ).comp D.baseMap.hom) (g' 0 ^ n) * t = _
   simp only [g', Fin.cons_zero, map_pow, RingHom.comp_apply]
 

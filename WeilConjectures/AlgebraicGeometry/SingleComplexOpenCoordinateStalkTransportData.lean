@@ -138,8 +138,6 @@ private theorem map_comp_square
     F.map (f ≫ g) ≫ h = (F.map f ≫ k) ≫ t := by
   rw [Functor.map_comp, Category.assoc, hn, Category.assoc]
 
-set_option maxHeartbeats 1600000 in
--- The tensor-cohomology transports require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The two tensor-cohomology transports require a larger elaboration budget.
@@ -215,8 +213,13 @@ theorem exists_singleComplexOpen_normalized_transport
   have : RX.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _
   let P₀ := (RX.mapHomologicalComplex (.up ℤ)).obj P
   let ν := openDerivedAdditiveStalkIso X' (f' ⁻¹ᵁ V') z i
-  obtain ⟨hP₀, hcP₀, l, hl⟩ := exists_singleComplexOpen_termwise_comparison
+  -- Projections avoid rechecking the large stalk models during existential elimination.
+  have htermwise := exists_singleComplexOpen_termwise_comparison
     f f' g g' sq V V' hV' j hj sq₀ P hP hcP z i
+  have hP₀ := htermwise.choose
+  have hcP₀ := htermwise.choose_spec.choose
+  let l := htermwise.choose_spec.choose_spec.choose
+  have hl := htermwise.choose_spec.choose_spec.choose_spec
   let F₀ := forget₂ (ModuleCat.{u} ((f' ⁻¹ᵁ V').toScheme.presheaf.stalk z))
     AddCommGrpCat.{u}
   let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z.val)) AddCommGrpCat.{u}
@@ -255,13 +258,15 @@ theorem exists_singleComplexOpen_normalized_transport
       l.hom ≫ F.map cP at hl
     set_option backward.isDefEq.respectTransparency.types false in
       simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using hl
-  obtain ⟨d, hn⟩ := additive_representative_transport
+  have hrepresentative := additive_representative_transport
     (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q P₀
     hQ hP₀ hcQ hcP₀ b i
+  let d := hrepresentative.choose
+  have hn := hrepresentative.choose_spec
   have hb : (derivedPullback j).map b.hom ≫ βK =
       (derivedPullback j).map a.hom ≫ θ := by
     dsimp only [βK, b, Iso.trans_hom, Iso.symm_hom]
-    rw [← Functor.map_comp_assoc]
+    simp only [← Functor.map_comp_assoc]
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   refine ⟨ν, d ≪≫ l, ?_⟩
   have h := combine_transport_squares (H₀ ⋙ F₀) (H ⋙ F) RX'.mapDerivedCategory ν

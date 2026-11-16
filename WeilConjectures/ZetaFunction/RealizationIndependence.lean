@@ -27,6 +27,11 @@ which are `q`-Weil numbers of weight `i`.
 - `AlgebraicGeometry.Scheme.Hom.existsUnique_isNormalizedIntegralFraction_zetaSeries`: the
   zeta series has a unique normalized reduced integral presentation
   (`prose-19-06`).
+- `AlgebraicGeometry.Scheme.map_eq_frobeniusProduct_of_isNormalizedIntegralFraction`:
+  `A^{(ℓ)} = N_ℓ` and `B^{(ℓ)} = D_ℓ`, by the uniqueness of reduced normalized fractions over
+  `ℚ̄_ℓ`.
+- `AlgebraicGeometry.Scheme.exists_isWeilNumber_of_mem_roots_reverse`: every reciprocal root of `A`
+  (resp. `B`) is a `q`-Weil number of some odd (resp. even) weight `0 ≤ i ≤ 2d`.
 - `AlgebraicGeometry.Scheme.integral_recovery`: the integral Frobenius factors and the
   identification of the normalized presentation with their parity products
   (`lemma-reciprocal-roots-zeta`).
@@ -135,6 +140,114 @@ theorem isNormalizedIntegralFraction_prod {P : Fin (2 * d + 1) → Polynomial �
     exact hfact.factorization
 
 end ParityProducts
+
+section ReciprocalRoots
+
+/-- The normalized reduced integral presentation `Z(X₀, T) = A / B` of the zeta series becomes the
+parity factorization `N_ℓ / D_ℓ` after scalar extension to `ℚ̄_ℓ`: `A^{(ℓ)} = N_ℓ` and
+`B^{(ℓ)} = D_ℓ`. Both are reduced normalized fractions of `Z(X₀, T)` over `ℚ̄_ℓ`: `A` and `B` remain
+coprime after scalar extension, and `N_ℓ`, `D_ℓ` are coprime and have constant coefficient `1`
+(`AlgebraicGeometry.Scheme.isCoprime_oddFrobeniusProduct_evenFrobeniusProduct`); a reduced
+normalized fraction is unique. -/
+theorem map_eq_frobeniusProduct_of_isNormalizedIntegralFraction (l : ℕ) [Fact l.Prime]
+    [Fact (ringChar k₀ ≠ l)] {A B : Polynomial ℤ}
+    (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
+      B) :
+    A.map (Int.castRingHom (PadicAlgCl l)) = oddFrobeniusProduct k₀ l X d ∧
+      B.map (Int.castRingHom (PadicAlgCl l)) = evenFrobeniusProduct k₀ l X d := by
+  obtain ⟨hA0, hB0, hcop, hZ⟩ := hAB
+  have hmap (Q : Polynomial ℤ) : (Q.map (Int.castRingHom ℚ)).map (algebraMap ℚ (PadicAlgCl l)) =
+      Q.map (Int.castRingHom (PadicAlgCl l)) := by
+    rw [Polynomial.map_map]
+    congr 1
+  -- the presentation `Z B = A`, read in `ℚ̄_ℓ⟦T⟧`
+  have hZℓ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l))
+      (X ↘ Spec (CommRingCat.of k₀)).zetaSeries *
+        (B.map (Int.castRingHom (PadicAlgCl l)) : PowerSeries (PadicAlgCl l)) =
+      (A.map (Int.castRingHom (PadicAlgCl l)) : PowerSeries (PadicAlgCl l)) := by
+    have h := congrArg (PowerSeries.map (algebraMap ℚ (PadicAlgCl l))) hZ
+    rwa [map_mul, ← Polynomial.polynomial_map_coe, ← Polynomial.polynomial_map_coe, hmap, hmap]
+      at h
+  -- cross-multiplication against `Z D_ℓ = N_ℓ`: `N_ℓ B^{(ℓ)} = D_ℓ A^{(ℓ)}`
+  have hcross : oddFrobeniusProduct k₀ l X d * B.map (Int.castRingHom (PadicAlgCl l)) =
+      evenFrobeniusProduct k₀ l X d * A.map (Int.castRingHom (PadicAlgCl l)) := by
+    refine Polynomial.coe_injective (PadicAlgCl l) ?_
+    rw [Polynomial.coe_mul, Polynomial.coe_mul, ← map_zetaSeries_mul_evenFrobeniusProduct k₀ l X d,
+      ← hZℓ]
+    ring
+  have hcop' : IsCoprime (A.map (Int.castRingHom (PadicAlgCl l)))
+      (B.map (Int.castRingHom (PadicAlgCl l))) := by
+    rw [← hmap, ← hmap]
+    exact (Polynomial.isCoprime_map _).2 hcop
+  obtain ⟨h1, h2⟩ := Polynomial.eq_of_coeff_zero_eq_one_of_isCoprime
+    (by rw [Polynomial.coeff_map, hA0, map_one]) (coeff_zero_oddFrobeniusProduct k₀ l X d) hcop'
+    (isCoprime_oddFrobeniusProduct_evenFrobeniusProduct k₀ l X d) hcross
+  exact ⟨h1.symm, h2.symm⟩
+
+/-- The weights of the reciprocal roots of the zeta function: let `Z(X₀, T) = A / B` be the
+normalized reduced integral presentation of the zeta series of `X₀`, smooth, proper and
+geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`. For every reciprocal root `α ∈ ℂ`
+of `A` (resp. of `B`) there is an odd (resp. even) integer `0 ≤ i ≤ 2d` such that `α` is a `q`-Weil
+number of weight `i`: `|τ(α)| = q^{i/2}` for every field embedding `τ : ℚ(α) → ℂ`.
+
+For a prime `ℓ ≠ p`, `A^{(ℓ)} = N_ℓ = ∏_{i odd} P_{i,ℓ}` and `B^{(ℓ)} = D_ℓ = ∏_{i even} P_{i,ℓ}`
+(`AlgebraicGeometry.Scheme.map_eq_frobeniusProduct_of_isNormalizedIntegralFraction`), so under an
+embedding `ι : ℚ̄_ℓ → ℂ` the reciprocal root `α` is a reciprocal root of some `ι P_{i,ℓ}` of the
+right parity, and these are `q`-Weil numbers of weight `i`
+(`AlgebraicGeometry.Scheme.isUniversallyPureOfWeight_map_frobeniusCharpolyRev`). -/
+theorem exists_isWeilNumber_of_mem_roots_reverse {A B : Polynomial ℤ}
+    (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
+      B) :
+    (∀ α ∈ (A.reverse.map (Int.castRingHom ℂ)).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Odd i ∧ IsWeilNumber (Nat.card k₀) i α) ∧
+    ∀ α ∈ (B.reverse.map (Int.castRingHom ℂ)).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Even i ∧ IsWeilNumber (Nat.card k₀) i α := by
+  obtain ⟨l, hl, hne⟩ := exists_prime_ne_ringChar k₀
+  have : Fact l.Prime := ⟨hl⟩
+  have : Fact (ringChar k₀ ≠ l) := ⟨hne⟩
+  obtain ⟨ι⟩ := PadicAlgCl.nonempty_ringHom_complex l
+  obtain ⟨hA, hB⟩ := map_eq_frobeniusProduct_of_isNormalizedIntegralFraction k₀ X d l hAB
+  have hmap (C : Polynomial ℤ) : C.map (Int.castRingHom ℂ) =
+      (C.map (Int.castRingHom (PadicAlgCl l))).map ι := by
+    rw [Polynomial.map_map]
+    congr 1
+    exact RingHom.ext_int _ _
+  -- a reciprocal root of a product of factors `P_{j,ℓ}`, `j ∈ s`, is a Weil number of weight `j`
+  -- for some `j ∈ s`
+  have key (C : Polynomial ℤ) (s : Finset ℕ) (hs : s ⊆ Finset.range (2 * d + 1))
+      (hC : C.map (Int.castRingHom (PadicAlgCl l)) = ∏ j ∈ s, frobeniusCharpolyRev k₀ l X j)
+      (α : ℂ) (hα : α ∈ (C.reverse.map (Int.castRingHom ℂ)).roots) :
+      ∃ j ∈ s, IsWeilNumber (Nat.card k₀) j α := by
+    have hC0 : C.map (Int.castRingHom ℂ) ≠ 0 := by
+      rw [hmap, hC, Polynomial.map_prod]
+      exact Finset.prod_ne_zero_iff.2 fun j _ ↦
+        (isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι j).ne_zero
+    rw [← Polynomial.reverse_map (RingHom.injective_int _), Polynomial.mem_roots_reverse_iff hC0]
+      at hα
+    obtain ⟨hα0, hroot⟩ := hα
+    rw [hmap, hC, Polynomial.map_prod, Polynomial.IsRoot, Polynomial.eval_prod,
+      Finset.prod_eq_zero_iff] at hroot
+    obtain ⟨j, hj, hroot⟩ := hroot
+    refine ⟨j, hj, ?_⟩
+    have hj' : j ≤ 2 * d := by
+      have := Finset.mem_range.1 (hs hj)
+      omega
+    have hz : α⁻¹ ∈ ((frobeniusCharpolyRev k₀ l X j).map ι).roots :=
+      (Polynomial.mem_roots (isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι j).ne_zero).2 hroot
+    have h := (isUniversallyPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι hj').2 _ hz
+    rw [isUniversallyPureOfWeight_iff_isWeilNumber_inv (inv_ne_zero hα0), inv_inv] at h
+    exact h
+  refine ⟨fun α hα ↦ ?_, fun α hα ↦ ?_⟩
+  · obtain ⟨j, hj, h⟩ := key A ((Finset.range (2 * d + 1)).filter Odd)
+      (fun j hj ↦ (Finset.mem_filter.1 hj).1) (by rw [hA, oddFrobeniusProduct]) α hα
+    obtain ⟨hj, hodd⟩ := Finset.mem_filter.1 hj
+    exact ⟨j, by have := Finset.mem_range.1 hj; omega, hodd, h⟩
+  · obtain ⟨j, hj, h⟩ := key B ((Finset.range (2 * d + 1)).filter Even)
+      (fun j hj ↦ (Finset.mem_filter.1 hj).1) (by rw [hB, evenFrobeniusProduct]) α hα
+    obtain ⟨hj, heven⟩ := Finset.mem_filter.1 hj
+    exact ⟨j, by have := Finset.mem_range.1 hj; omega, heven, h⟩
+
+end ReciprocalRoots
 
 /-- Blueprint `lemma-reciprocal-roots-zeta` (integral recovery): for `X₀` smooth, proper and
 geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, and `Z(X₀, T) = A / B` the

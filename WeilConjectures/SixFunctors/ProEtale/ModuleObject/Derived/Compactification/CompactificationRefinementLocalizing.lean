@@ -180,7 +180,7 @@ unbounded module-object derived category. Only its invertibility is restricted t
 
 set_option autoImplicit false
 
-universe u v w
+universe u v w v₁
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.Abelian
@@ -384,14 +384,14 @@ private theorem kernelTriangulated
   exact {}
 
 private theorem extend_zero
-    {C : Type v} {D : Type w} [Category C] [Category D]
+    {C : Type v} {D : Type w} [Category.{v₁} C] [Category D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
     (S : ObjectProperty C) (hloc : IsLocalizingSubcategory (localizingClosure S))
     (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated]
-    (hsums : ∀ (I : Type v) (J : Discrete I ⥤ C),
+    (hsums : ∀ (I : Type v₁) (J : Discrete I ⥤ C),
       (∀ i, localizingClosure S (J.obj (Discrete.mk i))) → PreservesColimit J F)
     (hS : ∀ K, S K → IsZero (F.obj K)) :
     ∀ K, localizingClosure S K → IsZero (F.obj K) := by
@@ -1312,7 +1312,12 @@ theorem localizingRefinement_coherence
     have hz : IsZero (F.obj K) := by
       apply CategoryTheory.extend_zero S hloc F _ _ K hK
       · intro I L hL
-        have : PreservesColimit L (J ⋙ R) := hsums I L hL
+        -- the sum is indexed by the morphism universe: lift its index to the universe of `hsums`
+        have : PreservesColimit L (J ⋙ R) := by
+          let e := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)
+          have h' : PreservesColimit (e.functor ⋙ L) (J ⋙ R) :=
+            hsums (ULift.{u + 2} I) (e.functor ⋙ L) (fun i ↦ hL (Equiv.ulift i))
+          exact Functor.Final.preservesColimit_of_comp (F := e.functor)
         change PreservesColimit L ((J ⋙ R) ⋙ V)
         have : PreservesColimit (L ⋙ J ⋙ R) V :=
           adj.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit

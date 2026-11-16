@@ -255,10 +255,8 @@ private theorem rational_brown_of_single_compact
   let _ := hamb
   let _ : L.IsTriangulated := hloc.1
   let _ : L.IsClosedUnderIsomorphisms := hloc.2.1
-  have hclosed (I : Type (u + 2)) : L.IsClosedUnderColimitsOfShape (Discrete I) := by
-    apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-    rintro _ ⟨F, hF⟩
-    exact hloc.2.2 F inferInstance (fun i ↦ hF ⟨i⟩)
+  have hclosed (I : Type (u + 2)) : L.IsClosedUnderColimitsOfShape (Discrete I) :=
+    hloc.isClosedUnderColimitsOfShape_discrete I
   let _ (I : Type (u + 1)) : L.IsClosedUnderColimitsOfShape (Discrete I) :=
     ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
       (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))

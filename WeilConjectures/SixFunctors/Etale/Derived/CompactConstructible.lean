@@ -29,7 +29,7 @@ retracts (`DerivedCategory.compactBoundedHom`), and are transported along left a
 right adjoints preserve coproducts and have bounded amplitude
 (`DerivedCategory.compactBoundedHom_of_adjunction`). By the dévissage
 `AlgebraicGeometry.Etale.constructibleFiniteTor_eq_triangEnvelope_ctfGenerators` it suffices to
-treat the generators `Rg_* Rj_! L`. Starting from `Λ[0]` in `D(Λ)`, one applies successively:
+treat the generators `Rg_* j_! L`. Starting from `Λ[0]` in `D(Λ)`, one applies successively:
 
 * the constant sheaf functor at the point `Spec k`, right adjoint `RΓ(Spec k, -)` of finite
   cohomological dimension;
@@ -213,7 +213,7 @@ theorem compactBoundedHom_of_constructibleFiniteTor [Finite Λ] {k : Type u} [Fi
   have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
   rw [constructibleFiniteTor_eq_triangEnvelope_ctfGenerators Λ aX] at hK
   refine (ObjectProperty.triangEnvelope_le_iff (ctfGenerators Λ X)).2 ?_ K hK
-  rintro K ⟨str, i, Ubar, j, _, _, g, _, -, -, L, _, hL, ⟨e⟩⟩
+  rintro K ⟨str, i, Ubar, j, _, g, _, -, -, L, _, hL, ⟨e⟩⟩
   have : TopologicalSpace.NoetherianSpace (str.domain i) :=
     have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
     have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
@@ -223,11 +223,8 @@ theorem compactBoundedHom_of_constructibleFiniteTor [Finite Λ] {k : Type u} [Fi
   have h₁ := compactBoundedHom_unit_of_finiteType Λ hΛ hk (j ≫ g ≫ aX)
   have h₂ := compactBoundedHom_singleFunctor_of_isFiniteLocallyConstantSheaf Λ h₁ L hL
   have h₃ := compactBoundedHom_mapDerivedCategory_openImmersionLowerShriek Λ j h₂
-  have h₃' : compactBoundedHom _ ((R(j)_![ModuleCat.{u + 1} Λ]).obj ((singleFunctor _ 0).obj L)) :=
-    (compactBoundedHom _).prop_of_iso
-      ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app _).symm h₃
   exact (compactBoundedHom _).prop_of_iso e.symm
-    (compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion Λ hΛ aX g h₃')
+    (compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion Λ hΛ aX g h₃)
 
 end Etale
 

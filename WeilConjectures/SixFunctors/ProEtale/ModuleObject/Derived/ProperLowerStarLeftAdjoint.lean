@@ -80,4 +80,34 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
   isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall ℓ g
 
+/-! ### The proper-only functor
+
+The same statements for the proper-only functor `boundedConstructibleLowerStarOfIsProper`, which
+is the general one restricted to proper morphisms (`boundedConstructibleLowerStarOfIsProper_eq`).
+-/
+
+/-- `Rg_*` is a left adjoint, for the proper-only functor
+`Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧`. -/
+instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicIntegersRingObj
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    (PadicIntegersRingObj.boundedConstructibleLowerStarOfIsProper ℓ E g).IsLeftAdjoint := by
+  rw [PadicIntegersRingObj.boundedConstructibleLowerStarOfIsProper_eq]
+  infer_instance
+
+/-- `Rg_*` is a left adjoint, for the proper-only functor
+`Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧`. -/
+instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_continuousMapRingObj
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    (ContinuousMapRingObj.boundedConstructibleLowerStarOfIsProper ℓ E g).IsLeftAdjoint := by
+  rw [ContinuousMapRingObj.boundedConstructibleLowerStarOfIsProper_eq]
+  infer_instance
+
+/-- `Rg_*` is a left adjoint, for the proper-only functor
+`Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. -/
+instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicAlgClRingObj :
+    (boundedConstructibleLowerStarOfIsProper ℓ g).IsLeftAdjoint := by
+  rw [boundedConstructibleLowerStarOfIsProper_eq]
+  infer_instance
+
 end AlgebraicGeometry.ProEtale.CondensedRing

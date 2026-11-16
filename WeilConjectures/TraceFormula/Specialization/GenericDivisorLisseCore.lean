@@ -28,13 +28,13 @@ The core holds for every bounded constructible complex on `X ∖ Z`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl`): an
 integral model and derived Nakayama reduce it to `𝔽_E`-coefficients.
 
-## Unfinished
+## The finite-coefficient input
 
 The core depends on the finite-coefficient statement
-`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField`, which is
-`sorry`ed: it is the local acyclicity along a divisor of extensions by zero of constructible
-`𝔽_E`-complexes on the complement (the nearby cycles of the deformation `x = t u` at the zero
-section).
+`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField`
+(`WeilConjectures.TraceFormula.Specialization.GenericDivisorResidue`): the local acyclicity along a
+divisor of extensions by zero of constructible `𝔽_E`-complexes on the complement (the nearby cycles
+of the deformation `x = t u` at the zero section).
 
 -/
 

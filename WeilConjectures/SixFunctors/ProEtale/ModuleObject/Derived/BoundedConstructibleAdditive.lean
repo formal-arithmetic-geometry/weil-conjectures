@@ -51,6 +51,13 @@ instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
   unfold boundedConstructibleLowerStar
   infer_instance
 
+/-- The derived pushforward along a proper morphism on bounded constructible complexes is
+additive. -/
+instance additive_boundedConstructibleLowerStarOfIsProper (f : X ⟶ Y) [IsProper f.left] :
+    (boundedConstructibleLowerStarOfIsProper ℓ f).Additive := by
+  unfold boundedConstructibleLowerStarOfIsProper
+  infer_instance
+
 /-- The derived pullback `Lf^*` on bounded constructible complexes is additive: it is the
 restriction of the left adjoint `L((f)^*⟦Λ⟧)` of the additive functor `R((f)_*⟦Λ⟧)`. -/
 instance additive_boundedConstructibleUpperStar (f : X ⟶ Y) :
@@ -90,6 +97,13 @@ instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
   unfold boundedConstructibleLowerStar
   infer_instance
 
+/-- The derived pushforward along a proper morphism on bounded constructible complexes is
+additive. -/
+instance additive_boundedConstructibleLowerStarOfIsProper (f : X ⟶ Y) [IsProper f.left] :
+    (boundedConstructibleLowerStarOfIsProper ℓ E f).Additive := by
+  unfold boundedConstructibleLowerStarOfIsProper
+  infer_instance
+
 /-- The lower shriek `Rf_!^c` on bounded constructible `E`-complexes attached to a
 compactification is additive. -/
 instance additive_boundedConstructibleLowerShriekOfCompactification {f : X ⟶ Y}
@@ -115,6 +129,13 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 instance additive_boundedConstructibleLowerStar (f : X ⟶ Y) :
     (boundedConstructibleLowerStar ℓ E f).Additive := by
   unfold boundedConstructibleLowerStar
+  infer_instance
+
+/-- The derived pushforward along a proper morphism on bounded constructible complexes is
+additive. -/
+instance additive_boundedConstructibleLowerStarOfIsProper (f : X ⟶ Y) [IsProper f.left] :
+    (boundedConstructibleLowerStarOfIsProper ℓ E f).Additive := by
+  unfold boundedConstructibleLowerStarOfIsProper
   infer_instance
 
 /-- The lower shriek `Rf_!^c` on bounded constructible `𝒪_E`-complexes attached to a

@@ -24,8 +24,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-set_option maxHeartbeats 400000 in
--- Elaborating the semilinear tensor factors and sheaf scalar actions needs more fuel.
 /-- The affine ideal tensor comparison, before identifying its source with `I/I²`.
 Source: Stacks Project, Morphisms, Lemma 01R3 (2), and Schemes, Tag 01I9.
 (blueprint: lem-weil-pbc-affine-ideal-tensor-sections)
@@ -140,7 +138,9 @@ theorem affine_ideal_tensor_sections {X Z : Scheme.{u}} (i : Z ⟶ X)
     rw [hp]
     simp only [homOfLE_refl, op_id, Functor.id_obj, Functor.comp_obj, Functor.op_obj,
       one_smul, pushforward_obj_obj]
-    rw [CategoryTheory.Functor.map_id]
-    rfl
+    exact congrArg (fun k ↦ k
+      (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
+        i.ker.toModules).app U.1 s))
+      (((tensorPullback i).obj i.ker.toModules).presheaf.map_id (Opposite.op V.1))
 
 end AlgebraicGeometry.Scheme.Modules
