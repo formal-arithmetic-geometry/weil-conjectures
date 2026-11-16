@@ -160,6 +160,18 @@ noncomputable def coefficientDualRightDerivedLowerShriekIso
   coefficientDualRightDerivedLowerShriekIsoOfAdjunction (ModuleCat.{u + 1} Λ) aX
     (rightDerivedUpperShriekAdjunction Λ aX)
 
+/-- **Global Verdier duality is the tensor–Hom exchange at the unit**: the component of
+`coefficientDualRightDerivedLowerShriekIso` at `K` is the component at `K` and `Λ_S` of the
+exchange `Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)`
+(`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`, the Lean statement of
+`lemma-internal-adjunction-two-exchange-formulas`), read backwards. -/
+theorem coefficientDualRightDerivedLowerShriekIso_hom_app
+    [IsIso (projectionMap (ModuleCat.{u + 1} Λ) aX)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (coefficientDualRightDerivedLowerShriekIso Λ aX).hom.app (op K) =
+      ((derivedHomRightDerivedLowerShriekIso Λ aX).app (op K)).inv.app (𝟙_ _) :=
+  rfl
+
 section Shift
 
 variable {Z : Scheme.{u}}
