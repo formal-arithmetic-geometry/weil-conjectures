@@ -195,8 +195,7 @@ point `s`, the colimit over the affine pointed étale neighbourhoods `(V, v)` of
 noncomputable def strictHenselization : CommRingCat.{u} :=
   colimit (strictHenselizationDiagram s)
 
-/-- The **strict localization** `S_(s) = Spec 𝒪^{sh}_{S,s}` of `S` at the geometric point `s`.
- -/
+/-- The **strict localization** `S_(s) = Spec 𝒪^{sh}_{S,s}` of `S` at the geometric point `s`. -/
 noncomputable abbrev strictLocalization : Scheme.{u} :=
   Spec (strictHenselization s)
 

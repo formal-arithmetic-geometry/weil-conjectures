@@ -1701,7 +1701,7 @@ attribute [local instance] Scheme.smoothOfRelativeDimension_baseChange Scheme.is
 /-- **The geometric curve.** Let `C` be a smooth projective geometrically integral curve of genus
 `g` over `k` and let `k_s` be a separable closure of `k`. Then `k_s` is separably closed and the
 base change `C_{k_s}` is a smooth projective geometrically integral curve of genus `g` over `k_s`.
- -/
+-/
 theorem isSepClosed_and_pullback_sepClosure (ks : Type u) [Field ks] [Algebra k ks]
     [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]

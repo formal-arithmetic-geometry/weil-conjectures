@@ -40,7 +40,7 @@ attribute [local irreducible] condensedAmbientExchange
 normalized by the literal ambient formulas. No natural transformation or adjunction for the twisted
 functor is assumed.
 No integration identity is used. The completed class need not be a limit class for this calculation.
- -/
+-/
 theorem rationalP1_first_ambient_contraction
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

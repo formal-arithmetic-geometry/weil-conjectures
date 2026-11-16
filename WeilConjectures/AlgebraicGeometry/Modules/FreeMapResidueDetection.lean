@@ -33,8 +33,7 @@ private theorem unit_map_eq_zero_of_top_one {X : Scheme.{u}} {N : X.Modules}
   erw [h]
   simp
 
-/-- Residue-field evaluations detect a morphism between finite free sheaves on a reduced scheme.
- -/
+/-- Residue-field evaluations detect a morphism between finite free sheaves on a reduced scheme. -/
 theorem free_map_eq_zero_of_residue_evaluations
     {X : Scheme.{u}} [IsReduced X] {I J : Type u} [Finite J] [DecidableEq J]
     (δ : free (R := X.ringCatSheaf) I ⟶ free J)
