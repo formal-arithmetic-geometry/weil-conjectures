@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
-public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
 
 /-!
 # Sheaves of continuous maps into topological abelian groups
@@ -18,10 +17,7 @@ sheaves of continuous maps of `WeilConjectures.CategoryTheory.RingObjects.Contin
   `X_proét`, and `continuousMapAddSheafMap` for continuous additive maps;
 - `AlgebraicGeometry.ProEtale.constantSheafIsoContinuousMapAddSheaf`: for `M` discrete, it is the
   constant sheaf with value `M`, naturally in `M`
-  (`constantSheaf_map_comp_constantSheafIsoContinuousMapAddSheaf_hom`); this is the
-  identification `AlgebraicGeometry.ProEtale.constantSheafIsoContinuousSheaf`, the sheaf
-  `continuousMapAddSheaf X M` being the sheaf `continuousSheaf X M` of
-  `WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf`;
+  (`constantSheaf_map_comp_constantSheafIsoContinuousMapAddSheaf_hom`);
 - `AlgebraicGeometry.ProEtale.isLimitContinuousMapAddSheafCone`: for a tower of topological
   abelian groups `Qₙ`, `C(-, lim Qₙ)` is the limit of the sheaves `C(-, Qₙ)`, with
   `lim Qₙ = towerLimitAddSubgroup τ`.
@@ -129,14 +125,13 @@ lemma w_constToContinuousMapAddPresheaf :
     refine congrArg ULift.up (ContinuousMap.ext fun q ↦ ?_)
     exact q.2.symm
 
-/-- **Continuous maps to a discrete abelian group form the constant sheaf.** The sheaf
-`continuousMapAddSheaf X M` is the sheaf `continuousSheaf X M`, with the same sections `C(U, M)`
-and the same restriction maps, and this is the identification `constantSheafIsoContinuousSheaf`
-sending a constant section to the constant function. -/
-noncomputable abbrev constantSheafIsoContinuousMapAddSheaf :
+/-- **Continuous maps to a discrete abelian group form the constant sheaf.** -/
+noncomputable def constantSheafIsoContinuousMapAddSheaf :
     (constantSheaf (ProEt.topology X) Ab.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} M)) ≅
       continuousMapAddSheaf X M :=
-  constantSheafIsoContinuousSheaf X M
+  have := ((ProEt.topology X).W_iff _).1 (w_constToContinuousMapAddPresheaf X M)
+  asIso ((presheafToSheaf _ _).map (constToContinuousMapAddPresheaf X M)) ≪≫
+    asIso ((sheafificationAdjunction _ _).counit.app (continuousMapAddSheaf X M))
 
 variable {M}
 
@@ -158,12 +153,11 @@ lemma constantSheaf_map_comp_constantSheafIsoContinuousMapAddSheaf_hom (τ : M �
   have hc := (sheafificationAdjunction (ProEt.topology X) Ab.{u + 1}).counit.naturality
     (continuousMapAddSheafMap X τ continuous_of_discreteTopology)
   simp only [Functor.comp_map, Functor.id_map] at hc
-  simp only [constantSheafIsoContinuousMapAddSheaf, constantSheafIsoContinuousSheaf, asIso_hom,
-    constantSheafToContinuousSheaf, Adjunction.homEquiv_counit, Category.assoc]
+  simp only [constantSheafIsoContinuousMapAddSheaf, Iso.trans_hom, asIso_hom, Category.assoc]
   refine Eq.trans ?_ (congrArg (fun k ↦ (presheafToSheaf _ _).map
-    (constToContinuousSheaf X M) ≫ k) hc)
+    (constToContinuousMapAddPresheaf X M) ≫ k) hc)
   change (presheafToSheaf _ _).map ((Functor.const _).map (uliftAddMonoidHom τ)) ≫
-    (presheafToSheaf _ _).map (constToContinuousSheaf X M') ≫ _ = _
+    (presheafToSheaf _ _).map (constToContinuousMapAddPresheaf X M') ≫ _ = _
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
   rfl
 
