@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Derived pushforward commutes with derived limits
@@ -135,6 +137,9 @@ K-injective resolutions. -/
 noncomputable def derivedConstantSheafGlobalSectionsAdjunction (S : Scheme.{u}) :
     (constantSheaf (Scheme.ProEt.topology S) A).mapDerivedCategory ⊣
       (globalSectionsFunctor A S).rightDerivedFunctor :=
+  haveI : ((sheafSections (Scheme.ProEt.topology S) A).obj
+      (Opposite.op (Scheme.ProEt.mk (𝟙 S)))).Additive :=
+    inferInstanceAs (globalSectionsFunctor A S).Additive
   (constantSheafAdj (Scheme.ProEt.topology S) A
     (Scheme.ProEt.isTerminalMkId S)).mapDerivedCategoryRightDerivedAdjunction
 

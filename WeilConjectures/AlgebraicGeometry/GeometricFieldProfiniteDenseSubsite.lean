@@ -534,9 +534,10 @@ theorem exists_profinite_iso_of_isAffine (K : Type u) [Field K] [IsSepClosed K]
 
 /-- Profinite sets as affine objects of the pro-étale site of `Spec K`. -/
 noncomputable def profiniteToAffineProEtOf (K : Type u) [Field K] :
-    Profinite.{u} ⥤ (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left).FullSubcategory :=
-  ObjectProperty.lift _ (profiniteToProEtOf (Spec (.of K))) fun S ↦
-    isAffine_profiniteToProEtOf_obj_left K S
+    Profinite.{u} ⥤
+      ObjectProperty.FullSubcategory (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left) :=
+  ObjectProperty.lift (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left)
+    (profiniteToProEtOf (Spec (.of K))) fun S ↦ isAffine_profiniteToProEtOf_obj_left K S
 
 instance essSurj_profiniteToAffineProEtOf (K : Type u) [Field K] [IsSepClosed K] :
     (profiniteToAffineProEtOf K).EssSurj where
@@ -552,7 +553,8 @@ instance isEquivalence_profiniteToAffineProEtOf (K : Type u) [Field K] [IsSepClo
 functor `S ↦ Spec LC(S, K)` is an equivalence between profinite sets and the full subcategory of
 the pro-étale site of `Spec K` on the objects with affine underlying scheme. -/
 noncomputable def profiniteAffineProEtEquivalence (K : Type u) [Field K] [IsSepClosed K] :
-    Profinite.{u} ≌ (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left).FullSubcategory :=
+    Profinite.{u} ≌
+      ObjectProperty.FullSubcategory (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left) :=
   (profiniteToAffineProEtOf K).asEquivalence
 
 end AlgebraicGeometry.ProEtale

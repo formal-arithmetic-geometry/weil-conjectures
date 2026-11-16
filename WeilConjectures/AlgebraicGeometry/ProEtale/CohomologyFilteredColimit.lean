@@ -98,7 +98,12 @@ lemma exists_finite_affine_of_mem_topology {W : S.ProEt} [CompactSpace W.left]
     inferInstance, ?_, ?_⟩
   · exact IsZariskiLocalAtSource.sigmaDesc fun a ↦
       inferInstanceAs (WeaklyEtale ((V a).ι ≫ (f (j a)).left))
-  · exact inferInstanceAs (Surjective (Sigma.desc fun a ↦ 𝒱.f a))
+  · refine Surjective.sigmaDesc_of_union_range_eq_univ (Set.eq_univ_of_forall fun x ↦ ?_)
+    have hx : x ∈ ⋃ a, E.f (j a) '' (V a) := by
+      rw [hcov]
+      trivial
+    obtain ⟨a, y, hy, rfl⟩ := Set.mem_iUnion.1 hx
+    exact Set.mem_iUnion.2 ⟨a, ⟨y, hy⟩, rfl⟩
 
 /-- Quasi-compactness and quasi-separatedness of the underlying scheme are invariant under
 isomorphisms of objects of the small pro-étale site. -/
