@@ -24,15 +24,7 @@ variable {X Z U V : Scheme.{w}}
 variable (i : Z ⟶ X) (u : U ⟶ X) (v : V ⟶ Z) (j : V ⟶ U)
 variable [HasCompactification i] [HasCompactification j] [QuasiCompact j]
 set_option maxRecDepth 2000
-/-- The canonical inverse exceptional exchange commutes with tensor mates.
-Source: sk-lem-coprojection, displayed Hom calculation, and lemma-class-of-point--1 Step 4(ii)
-(blueprint: lem-pur-canonical-tensor-exchange).
-Proof: apply the abstract projectionTensorMap_mateEquiv identity to the two compact-support
-adjunctions. The projection/exchange identity supplies its commuting square, the derived
-pullback tensor comparison supplies the two monoidal maps, and the inverse pullback
-composition comparison supplies kappa. The inverse lower-shriek exchange and its inverse
-identity give the two-square whose mate is the exceptional exchange. Unfolding the two
-canonical tensor mates gives the stated equation. -/
+/-- The canonical inverse exceptional exchange commutes with tensor mates. -/
 theorem tensorMap_restriction (sq : IsPullback j v u i)
     (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) :
     (upperStar (ModuleCat A) v).leftDerivedFunctor.map

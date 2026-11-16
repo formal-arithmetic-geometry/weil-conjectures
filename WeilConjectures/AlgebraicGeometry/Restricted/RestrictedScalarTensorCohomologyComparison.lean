@@ -85,8 +85,9 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
 
 /-! # Underlying cohomology of K-flat coefficient change
 
-Source: Stacks Project, Tags 06YY, 06YU and 00YV.
-(blueprint: lem-sp-restricted-scalar-tensor-cohomology-comparison).
+## References
+
+* Stacks Project, Tags 06YY, 06YU, 03DA and 00YV
 -/
 
 @[expose] public section
@@ -95,9 +96,7 @@ universe u wA wB
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
-/-- The actual constant coefficient map with independently lifted coefficients.
-Source: Stacks Project, Tag 06YY.
-(blueprint: lem-sp-restricted-scalar-tensor-cohomology-comparison). -/
+/-- The actual constant coefficient map with independently lifted coefficients. -/
 noncomputable abbrev restrictedScalarRingMap (T : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     proEtaleConstantRing T A ⟶ proEtaleConstantRing T B :=
@@ -106,9 +105,7 @@ noncomputable abbrev restrictedScalarRingMap (T : Scheme.{u})
       ((ULift.ringEquiv : ULift.{u + 1, u} B ≃+* B).symm.toRingHom.comp
         (f.comp (ULift.ringEquiv : ULift.{u + 1, u} A ≃+* A).toRingHom)))
 
-/-- The target coefficient module, restricted to the source ring and placed in degree zero.
-Source: Stacks Project, Tag 06YU.
-(blueprint: lem-sp-restricted-scalar-tensor-cohomology-comparison). -/
+/-- The target coefficient module, restricted to the source ring and placed in degree zero. -/
 noncomputable def restrictedScalarCoefficientComplex (T : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ :=
@@ -121,9 +118,7 @@ noncomputable def restrictedScalarCoefficientComplex (T : Scheme.{u})
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
           (proEtaleConstantRing T B))))
 
-/-- Standard-universe tensor cohomology, before choosing a localization universe.
-Source: Stacks Project, Tag 06YU.
-(blueprint: lem-sp-restricted-scalar-tensor-cohomology-comparison). -/
+/-- Standard-universe tensor cohomology, before choosing a localization universe. -/
 noncomputable abbrev restrictedScalarTensorCohomology (T : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
@@ -231,21 +226,7 @@ private theorem extensionUnderlyingTensorIso
 
 /-- Forgetting the target coefficient action identifies K-flat scalar extension
 cohomology, after arbitrary pullback, with the underlying cohomology of the tensor
-with the restricted target coefficient in degree zero.
-
-Source: Stacks Project, Tags 06YY, 06YU, 03DA and 00YV.
-(blueprint: lem-sp-restricted-scalar-tensor-cohomology-comparison).
-
-Proof: the K-flat counit of D computes its value on Q(P) by termwise sheafified
-extension. After restricting scalars, the balanced swap sends b tensor p to p tensor b.
-Its inverse sends p tensor b to b tensor p. These maps respect all restriction maps
-and differentials, hence sheafify to an isomorphism of complexes. The single-factor
-total tensor has only the summand (n,0), with differential d_P tensor 1, so is this
-same restricted complex. Exact restriction commutes with its cohomology, by the
-kernel/image description. Constant-coefficient module pullbacks, after forgetting
-their actions, are the same abelian inverse image; the canonical coefficient maps
-are invertible. Apply that inverse image to the cohomology comparison, then forget
-to sets. The statement uses no finiteness, boundedness, or flatness of B over A. -/
+with the restricted target coefficient in degree zero. -/
 theorem restrictedScalarTensorCohomologyComparison
     {T X : Scheme.{u}} (a : X ⟶ T)
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)

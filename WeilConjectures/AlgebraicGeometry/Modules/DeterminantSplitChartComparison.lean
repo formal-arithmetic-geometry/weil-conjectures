@@ -17,9 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Section comparisons on a common free chart for a split sequence
-
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph. (blueprint: new-y3-determinant-split-chart-comparison).
 -/
 
 @[expose] public section
@@ -214,32 +211,7 @@ private theorem topExterior_generator {X : Scheme.{v}} (M : X.Modules)
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- A common free chart identifies the sectionwise exterior and tensor constructions
-with their sheaf counterparts, and evaluates a sheaf splitting as a module splitting.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph, first step of `lem-sc-split-determinant-linear-bijective`.
-(blueprint: new-y3-determinant-split-chart-comparison).
-
-Proof: Choose rank-r and rank-s free covers of the outside terms, using the finite
-locally free rank characterization. At a point of U choose members of both covers
-containing the point and intersect them with U. On every smaller open W, evaluation
-of a finite free sheaf gives a module basis of the same finite size. Restrict the
-splitting to this intersection. Evaluation preserves binary biproducts, and the
-ModuleCat biproduct-to-product isomorphism gives eW; evaluating hf and hg gives its
-two asserted formulas. The restricted middle sheaf is finite free of rank r+s:
-use the product of the two free frames, reindexed by finSumFinEquiv.
-Apply exteriorSheaf_local_free_comparison to all three frames. Its second conclusion
-gives bijectivity of the exterior sheafification units qA, qB and qC on W.
-For the tensor comparison, both top exterior sheaves are free of rank one on the
-chart, including when either original rank is zero. Their top basis wedge sections
-are free generators: on every subopen the unit transports the top exterior basis,
-and restriction takes these wedges to the wedges of the restricted frame.
-The tensor of these generators is a free generator by IsFreeGenerator.tmulSection.
-The tensor product basis has its sole vector equal to this generator under the
-composite of TensorProduct.map qA qC and tensorSectionsMap. Comparing these
-one-element bases proves bijectivity of that composite. Equivalently, apply
-IsFreeGenerator.bijective_tmulSection_right after identifying the two algebraic
-top exterior modules by their bases. No scalar is cancelled, and evaluation and
-basis transport remain valid over zero rings and on empty opens. -/
+with their sheaf counterparts, and evaluates a sheaf splitting as a module splitting. -/
 theorem determinant_split_chart_comparison {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r s : ℕ)
     [S.X₁.IsFiniteLocallyFreeOfRank r] [S.X₃.IsFiniteLocallyFreeOfRank s]

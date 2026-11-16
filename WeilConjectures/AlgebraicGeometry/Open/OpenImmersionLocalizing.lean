@@ -20,10 +20,6 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 /-!
 # Open extension by zero on localizing categories
 
-Source: blueprint main-20261015, sec-six-functors/sk-lem-sf-open-ctf,
-sk-prop-proper-image-localizing-open.md
-(blueprint: proposition-proper-direct-image-extension-zero).
-
 The ambient categories are ordinary unbounded derived categories of module objects.
 Constructibility uses finite constant models. The restricted functor is the canonical
 full-subcategory lift of the existing termwise derived extension by zero.
@@ -197,30 +193,7 @@ private lemma openImmersionLowerShriek_generators
 all small direct sums, and restricts to an exact, sum-preserving functor on their
 localizing closures. The existential triangulated structures below are the closure
 properties needed for the inherited full-subcategory triangulations; the functor is
-explicitly the canonical lift of `D(j_!)`, not an arbitrary functor.
-
-Source: blueprint main-20261015, sk-prop-proper-image-localizing-open.md and its proof
-(blueprint: proposition-proper-direct-image-extension-zero).
-
-Proof:
-1. The existing exact module-object functor has a derived adjunction to exact pullback.
-Its derived functor is triangulated and, as a left adjoint, preserves all small sums.
-2. Exactness preserves boundedness and identifies cohomology with extension by zero
-of cohomology. Apply `constantModelConstructible_openImmersionLowerShriek` to the
-stratification of each source cohomology module. Compose the same local models with
-the restricted cohomology isomorphisms to transport constructibility.
-3. Use the proved source-library `isIso_openImmersionProjectionComparison` for the
-open part of the projection formula. Exact pullback identifies `Lj^*(M[0])` with
-`(j^*M)[0]`. The source Tor interval and exact extension by zero therefore give the
-same Tor interval for the target, for every module M.
-4. The inverse image of the target localizing closure is replete, triangulated and
-closed under all existing coproducts, since the derived extension is a left adjoint.
-It contains the source generators by steps 2 and 3. Evaluate membership in the
-source intersection on this candidate to obtain the canonical restriction.
-5. `localizingClosure_exists` supplies the closure structures and ambient sums.
-Full-subcategory inclusions create the small coproducts. The composite of the source
-inclusion with the derived extension preserves them; the target inclusion reflects
-them. Thus the canonical lift is triangulated and preserves those sums. -/
+explicitly the canonical lift of `D(j_!)`, not an arbitrary functor. -/
 theorem openImmersionLowerShriek_localizing
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)

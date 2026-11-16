@@ -15,10 +15,6 @@ import WeilConjectures.Mathlib.Topology.Constructible
 /-!
 # Complementary stratifications of a Noetherian scheme
 
-Source: blueprint main-20261015, `sk-lem-integral-models-operations.proof.md`, paragraph (3),
-Noetherian quasi-compactness and the geometry of open and closed constructibility preservation
-(blueprint: lem-sfb-noetherian-complementary-stratifications).
-
 The output uses the recorded finite locally closed stratification interface and states
 constructibility separately. Equality of scheme/morphism dependent pairs records the actual
 composites and the given complementary scheme, without replacing either by isomorphic data.
@@ -127,39 +123,7 @@ private theorem append_complementary_stratum
     fun a ↦ (R.isLocallyClosed_stratum a).isConstructible_of_noetherianSpace⟩
 
 /-- Complementary open and closed immersions in a Noetherian scheme preserve finite
-stratifications when the complementary scheme is adjoined as one stratum.
-Source: blueprint main-20261015, `sk-lem-integral-models-operations.proof.md`, paragraph (3)
-(blueprint: lem-sfb-noetherian-complementary-stratifications).
-
-Proof, following the eight reviewed DAG steps:
-1. Every open subscheme of a Noetherian scheme is Noetherian, so every open of `T` is
-   quasi-compact and `U` is Noetherian (lem-weil-pbc-noetherian-open-subscheme-noetherian).
-2. Given an open cover of any subset, finitely many of its ambient opens cover their union,
-   by step 1, hence the subset. This proves every subset compact, including the inverse
-   images of affine opens under `j`, so `j` is quasi-compact (def-weil-finite-type-morphism).
-3. The closed immersion `i` is locally of finite type
-   (lem-weil-pbc-immersion-base-change-lft). Thus `Z` is locally Noetherian
-   (pqf-lem-locnoeth-lft); its space is homeomorphic to a compact subset of `T` by step 2.
-   This proves `Z` Noetherian without changing its possibly nonreduced scheme structure.
-4. Locally Noetherian schemes are quasi-separated
-   (lem-weil-pbc-locally-noetherian-quasi-separated). Apply this to `T`, `U`, and `Z`;
-   their Noetherianity supplies quasi-compactness as well.
-5. Compose each original immersion with `j` or `i`, using immersion composition
-   (lem-weil-pbc-proper-fp-permanence, clause (e)); retain every source scheme.
-6. The image of a locally closed subset under an open or closed embedding is locally
-   closed, by the subspace topology. Every open of `T` is retrocompact by step 2, so every
-   locally closed subset is constructible (def-weil-constructible-subset, Stacks 005L).
-7. For a stratification of `U`, append the given `Z` and `i`. Injectivity of `j` preserves
-   pairwise disjointness, and complementarity gives disjointness from `i(Z)` and coverage
-   of `T` (definition-constructible-sheaves--2). Steps 5 and 6 give all other fields.
-8. For a stratification of `Z`, append the given `U` and `j`, with the same argument using
-   injectivity of `i`. Neither construction changes the old domains or source maps.
-   Empty strata remain; when the old index set is empty only the complementary stratum
-   remains. An empty complementary scheme is retained as an empty stratum.
-
-The equivalences below only identify the output indices with the original indices plus
-one last index. `Fin.snoc` lists precisely the original composite maps followed by `i`
-or `j`; equality in the dependent pair includes equality of their domain schemes. -/
+stratifications when the complementary scheme is adjoined as one stratum. -/
 theorem noetherian_complementary_stratifications
     {T U Z : Scheme.{u}} [IsLocallyNoetherian T] [CompactSpace T]
     (j : U ⟶ T) (i : Z ⟶ T) [IsOpenImmersion j] [IsClosedImmersion i]

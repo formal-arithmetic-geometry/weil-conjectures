@@ -22,10 +22,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 # Finite affine factorizations and gluing of intervals
-
-Source: the Weil conjectures blueprint, main-20261015, `chap-Construction-of-f`,
-`sk-prop-sf-rf-shriek-preservation.proof.md`, opening and final paragraphs
-(blueprint: lem-sf-affine-chart-factorization-gluing).
 -/
 
 @[expose] public section
@@ -326,36 +322,7 @@ private theorem glue_finite_intervals
 /-- Finite affine charts factor through affine space, and local constructibility and
 cohomological and Tor bounds glue with the minimum lower and maximum upper endpoints.
 `IsLeast` and `IsGreatest` specify precisely these extrema of the finite endpoint ranges.
-Restriction is the functor on derived categories induced by exact etale inverse image.
-Source: main-20261015 blueprint, proof of `theorem-f-shriek-finite-coefficients`, first and last
-paragraphs (blueprint: lem-sf-affine-chart-factorization-gluing).
-
-Proof plan:
-1. Choose finitely many affine opens of `Y` and, by quasi-compactness of `f`, finitely
-   many affine opens of their inverse images (def-weil-finite-type-morphism).
-2. Present each finite-type affine algebra as a quotient of a polynomial algebra;
-   the quotient yields the closed immersion (def-weil-closed-immersion), with the
-   standard affine-space projection (def-sbc-affine-space).
-3. That projection is smooth of the specified relative dimension
-   (sbc-lem-affine-space-smooth) and separated. Its finite polynomial generators,
-   together with generators of the base algebra, give finite type over `k`.
-   Affine sources are separated (lem-weil-pbc-affine-source-morphism-separated).
-4. Finite type over the field makes `X` Noetherian
-   (lem-weil-pbc-finite-type-over-noetherian).
-5. Exact inverse image commutes with cohomology
-   (situation-conventions). Jointly surjective inverse images
-   detect zero sheaves (lem-etale-sheaf-jointly-surjective-conservative).
-6. Compare the two constructibility notions
-   (lem-weil-pbc-constructible-etale-module-sheaf-comparison), then use Noetherian
-   open-cover locality (lem-sf-noetherian-constructible-open-local). Outside the
-   minimum and maximum endpoints, every restricted cohomology sheaf is zero;
-   step 5 gives global vanishing, hence bounded constructibility.
-7. For every degree-zero module sheaf, inverse image commutes with derived tensor
-   (lem-kun-inverse-image-monoidal). Apply the same zero test to tensor cohomology
-   to obtain the global Tor interval (def-kun-tor-amplitude).
-8. On the empty scheme the empty covering forces every module sheaf to be zero.
-   Thus `K` is zero, its cohomology and tensor cohomology vanish in every degree,
-   and the empty stratification gives constructibility. No extrema are taken. -/
+Restriction is the functor on derived categories induced by exact etale inverse image. -/
 theorem exists_sf_affine_chart_factorization_gluing
     (k : Type u) [Field k] (X Y : Scheme.{u})
     [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]

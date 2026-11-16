@@ -28,10 +28,9 @@ import Mathlib.CategoryTheory.Sites.Limits
 /-!
 # Equivalent forms of weak contractibility
 
-Weak contractibility of an object `W` of the small pro-étale site has three equivalent
-formulations: every epimorphism of sheaves onto the representable sheaf `h_W` splits, `h_W` is
-projective, and evaluation at `W` takes epimorphisms of sheaves to surjections. Affine objects
-with w-contractible coordinate ring satisfy them.
+## References
+
+* Stacks Project, Tags 001P and 00WN
 -/
 
 @[expose] public section
@@ -46,30 +45,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The three equivalent lifting and evaluation formulations of weak contractibility.
 
-Reference: Stacks Project, Tags 001P and 00WN.
-
 An object satisfying the equivalent conditions is called weakly contractible.
-
-Proof:
-1. The representable `(ProEt.topology X).uliftYoneda.obj W` is a sheaf. Sheaves form
-   a full subcategory of presheaves, and the Yoneda lemma (`uliftYonedaEquiv`) identifies
-   maps from the representable with sections. Naturality (`uliftYonedaEquiv_comp`)
-   identifies the lifting equation with the equation for a preimage under evaluation,
-   proving (2) iff (3).
-2. For (1) implies (2), given an epimorphism and a map from the representable, form
-   the presheaf of pairs with the same image in the target. Glue both coordinates
-   using the sheaf axioms and apply separatedness of the target to verify that
-   the glued pair still has equal images. The resulting sheaf is the pullback.
-3. Epimorphisms of sheaves are locally surjective (`Sheaf.isLocallySurjective_iff_epi`),
-   so each section lifts locally in the first coordinate. The second coordinate restricts
-   along the same
-   cover, so the pullback projection is locally surjective and hence epimorphic.
-4. Condition (1) splits this projection. Compose its section with the other
-   projection to obtain the desired lift. Conversely, (2) lifts the identity of
-   the representable along every epimorphism onto it, proving (1).
-5. For an affine object with w-contractible coordinate ring,
-   `proetale_wContractible_projective` supplies (1), so the equivalences give all three
-   conditions.
 -/
 theorem proetale_weakContractible_equivalences
     (X : Scheme.{u}) (W : X.ProEt) :

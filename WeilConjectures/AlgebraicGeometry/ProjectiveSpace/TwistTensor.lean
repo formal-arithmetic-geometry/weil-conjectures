@@ -18,8 +18,7 @@ On the standard open `Uᵢ = D₊(xᵢ)` of `ℙ(n; S)` the twisting sheaf `𝒪
 section `Tᵢᵐ` of `𝒪(m)` on the integral model `Proj ℤ[Tᵢ]`. The transition functions are
 `e_i^{(m)} = (xᵢ/xⱼ)ᵐ e_j^{(m)}`, which are multiplicative in `m`; hence the local isomorphisms
 `e_i^{(a)} ⊗ e_i^{(b)} ↦ e_i^{(a+b)}` glue to an isomorphism
-`AlgebraicGeometry.ProjectiveSpace.twistTensorIso : 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`
-(blueprint `theorem-riemann-roch-coherent-serre-duality`).
+`AlgebraicGeometry.ProjectiveSpace.twistTensorIso: 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`.
 -/
 
 @[expose] public section
@@ -64,9 +63,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 variable (n : Type u) (S : Scheme.{u})
 
 /-- **The free generator `e_i^{(m)} = xᵢᵐ` of `𝒪(m)` on the standard open `D₊(xᵢ)`** of
-`ℙ(n; S)`: the pullback of the section `Tᵢᵐ` of `𝒪(m)` over `D₊(Tᵢ)` on the integral model.
-
-(blueprint: `def-pc-projective-space-twist`) -/
+`ℙ(n; S)`: the pullback of the section `Tᵢᵐ` of `𝒪(m)` over `D₊(Tᵢ)` on the integral model. -/
 def twistGenerator (m : ℤ) (i : n) : Γ(twist n S m, standardOpen n S i) :=
   pullbackSection (toProjInt n S)
     (Proj.twistPowSection m (X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i))
@@ -110,9 +107,7 @@ lemma exists_twistGenerator_transition (a b : ℤ) (i j : n) (W : (ℙ(n; S)).Op
 restriction to each standard open `D₊(xᵢ)` sends `e_i^{(a)} ⊗ e_i^{(b)}` to `e_i^{(a+b)}`
 (`twistTensorIso_hom_app_tmulSection`). The local isomorphisms agree on the overlaps because the
 transition functions `(xᵢ/xⱼ)ᵐ` are multiplicative in `m` (`exists_twistGenerator_transition`),
-and they glue by the sheaf axiom (`Scheme.Modules.isoOfIsFreeGenerator`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+and they glue by the sheaf axiom (`Scheme.Modules.isoOfIsFreeGenerator`). -/
 def twistTensorIso (a b : ℤ) : twist n S a ⊗ twist n S b ≅ twist n S (a + b) :=
   isoOfIsFreeGenerator (iSup_standardOpen n S)
     (fun i ↦ (isFreeGenerator_twistGenerator n S a i).tmulSection
@@ -122,9 +117,7 @@ def twistTensorIso (a b : ℤ) : twist n S a ⊗ twist n S b ≅ twist n S (a + 
       (isFreeGenerator_twistGenerator n S b) (exists_twistGenerator_transition n S a b))
 
 /-- **Local basis property of `twistTensorIso`**: on the standard open `D₊(xᵢ)`, the canonical
-isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `e_i^{(a)} ⊗ e_i^{(b)}` to `e_i^{(a+b)}`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `e_i^{(a)} ⊗ e_i^{(b)}` to `e_i^{(a+b)}`. -/
 lemma twistTensorIso_hom_app_tmulSection (a b : ℤ) (i : n) :
     (twistTensorIso n S a b).hom.app (standardOpen n S i)
         (tmulSection (twistGenerator n S a i) (twistGenerator n S b i)) =
@@ -132,9 +125,7 @@ lemma twistTensorIso_hom_app_tmulSection (a b : ℤ) (i : n) :
   isoOfIsFreeGenerator_hom_app _ _ _ _ i
 
 /-- **Local description of `twistTensorIso`**: on an open `W ⊆ D₊(xᵢ)`, the canonical
-isomorphism sends `r • (e_i^{(a)} ⊗ e_i^{(b)})|_W` to `r • e_i^{(a+b)}|_W`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+isomorphism sends `r • (e_i^{(a)} ⊗ e_i^{(b)})|_W` to `r • e_i^{(a+b)}|_W`. -/
 lemma twistTensorIso_hom_app_smul (a b : ℤ) (i : n) {W : (ℙ(n; S)).Opens}
     (hW : W ≤ standardOpen n S i) (r : Γ(ℙ(n; S), W)) :
     (twistTensorIso n S a b).hom.app W (r • (twist n S a ⊗ twist n S b).presheaf.map

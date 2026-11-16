@@ -18,10 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.RoosEventually
 /-!
 # Proper direct image of arbitrary ind-constructible complexes
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-unbounded-window,
-`sk-lem-proper-unbounded-window-arbitrary.md` and its proof
-(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
-
 The two statements retain the actual condensed coefficients, respectively a finite
 subextension of ℚ_ℓ and the finite-subextension-valued condensed algebraic closure.
 IndCons is the recorded replete small filtered-colimit closure of finite constant-model
@@ -223,30 +219,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Proper direct image for a finite subextension of ℚ_ℓ: eventual truncation stabilization,
 ind-constructible cohomology, and both cohomological amplitude bounds, for arbitrary K.
-Source: blueprint sk-lem-proper-unbounded-window-arbitrary, all four proof paragraphs;
-standing hypotheses inherited from lemma-proper-direct-image-unbounded-complexes--1
-(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
-
-Proof:
-1. The canonical lower Postnikov cone is a homotopy-limit cone, and cohomology
-   preserves countable products, by lem-module-object-postnikov-roos. This uses the
-   internal/sectionwise module equivalence and exact products; the derived adjunction
-   transports the whole cone through Rp_*, including its canonical projection maps.
-2. Put A = tau_ge(-m) K. Truncation closure keeps both A and tau_le(-m) A in Dic.
-   The latter is supported in degree -m, so the bounded-below theorem puts its
-   direct image in degrees at most -m+2d+1. Apply the long exact sequence to the
-   canonical triangle tau_le(-m) A --> A --> tau_ge(-m+1) A. The second arrow is
-   invertible on H^q when q > -m+2d+1. Idempotence of truncation identifies it with
-   the transition in the lower Postnikov tower.
-3. Taking N = (2d-q+2).toNat makes the transitions invertible in degrees q and q-1
-   for every index at least N. Apply lem-roos-eventually-constant-projection to the
-   mapped Postnikov cone. Its conclusion is invertibility on H^q of the actual
-   map Rp_*(K --> tau_ge(-n) K) for every n at least N.
-4. Fix such an n. The bounded-below theorem gives ind-constructibility of the
-   cohomology of Rp_* tau_ge(-n) K; transport along the projection isomorphism
-   gives it for Rp_* K. If K is at most b, its lower truncation is too, so the
-   same transport gives the upper bound b+2d+1. If K is at least a, it is already
-   bounded below, and the lower bound follows directly from the bounded-below theorem.
 -/
 theorem proper_indConstructible_unbounded
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -315,30 +287,6 @@ theorem proper_indConstructible_unbounded
 
 /-- Proper direct image for the condensed algebraic closure: eventual truncation stabilization,
 ind-constructible cohomology, and both cohomological amplitude bounds, for arbitrary K.
-Source: blueprint sk-lem-proper-unbounded-window-arbitrary, all four proof paragraphs;
-standing hypotheses inherited from lemma-proper-direct-image-unbounded-complexes--1
-(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
-
-Proof:
-1. The canonical lower Postnikov cone is a homotopy-limit cone, and cohomology
-   preserves countable products, by lem-module-object-postnikov-roos. This uses the
-   internal/sectionwise module equivalence and exact products; the derived adjunction
-   transports the whole cone through Rp_*, including its canonical projection maps.
-2. Put A = tau_ge(-m) K. Truncation closure keeps both A and tau_le(-m) A in Dic.
-   The latter is supported in degree -m, so the bounded-below theorem puts its
-   direct image in degrees at most -m+2d+1. Apply the long exact sequence to the
-   canonical triangle tau_le(-m) A --> A --> tau_ge(-m+1) A. The second arrow is
-   invertible on H^q when q > -m+2d+1. Idempotence of truncation identifies it with
-   the transition in the lower Postnikov tower.
-3. Taking N = (2d-q+2).toNat makes the transitions invertible in degrees q and q-1
-   for every index at least N. Apply lem-roos-eventually-constant-projection to the
-   mapped Postnikov cone. Its conclusion is invertibility on H^q of the actual
-   map Rp_*(K --> tau_ge(-n) K) for every n at least N.
-4. Fix such an n. The bounded-below theorem gives ind-constructibility of the
-   cohomology of Rp_* tau_ge(-n) K; transport along the projection isomorphism
-   gives it for Rp_* K. If K is at most b, its lower truncation is too, so the
-   same transport gives the upper bound b+2d+1. If K is at least a, it is already
-   bounded below, and the lower bound follows directly from the bounded-below theorem.
 -/
 theorem proper_indConstructible_unbounded_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]

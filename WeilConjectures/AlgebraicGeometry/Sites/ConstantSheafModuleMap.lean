@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafModule
 On a connected scheme `X`, the constant sheaf functor `M ↦ M_X` on étale sheaves of
 `Λ`-modules is fully faithful, as the unit `M ⟶ Γ(X, M_X)` of the adjunction with global
 sections is an isomorphism. Hence a morphism `N_X ⟶ M_X` is `f_X` for a linear map `f`, which is
-injective as soon as the morphism is injective on global sections (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, dévissage step).
+injective as soon as the morphism is injective on global sections.
 
 ## Main statements
 
@@ -33,7 +32,7 @@ variable {X : Scheme.{u}} [ConnectedSpace X] {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- On a connected scheme, a morphism of constant étale sheaves of modules `N_X ⟶ M_X` which is
 injective on global sections is the constant sheaf morphism of an injective linear map
-`N ⟶ M` (blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+`N ⟶ M`. -/
 theorem exists_injective_constantSheaf_map_eq {M N : ModuleCat.{u + 1} Λ}
     (χ : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N ⟶
       (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)

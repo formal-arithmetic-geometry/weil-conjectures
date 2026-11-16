@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
 /-! # Transport of pullback of sections along isomorphisms over a scheme
 
-Source: Stacks Project, Tags 0GJP and 0GJU, transport of the variety of vanishing cycles.
+## References
+
+* Stacks Project, Tags 0GJP and 0GJU, transport of the variety of vanishing cycles
+* Stacks Project, Tag 0GJU, first paragraph and displayed fibre identification
 -/
 
 @[expose] public section
@@ -32,25 +35,7 @@ private theorem iso_cancellation {C : Type*} [Category C]
 set_option maxRecDepth 4096 in
 /-- Pullback of global sections is unchanged under an isomorphism of its source and
 its target over the coefficient scheme. There are no stalks, strict local schemes,
-closed points or direct-image comparisons in this assertion.
-Source: Stacks Project, Tag 0GJU, first paragraph and displayed fibre identification;
-Tag 0GJP, equation-alpha-K; inverse-image functoriality.
-(blueprint: lem-weil-pbc-global-sections-iso-over-transport).
-
-Proof: identify rho-inverse-image p-inverse-image G with q-inverse-image g-inverse-image G
-using upperStarComp twice and the equality q.hom followed by g = rho followed by p.
-Pullback of global sections along q.hom is invertible, so its inverse followed by this
-coefficient identification gives U. Identify w-inverse-image h-inverse-image p-inverse-image
-G with E.hom-inverse-image (v followed by g)-inverse-image G using inverse-image composition,
-the equation w followed by h = k followed by rho, and the two equations for q and E.
-Invert pullback of sections along E.hom and compose with this coefficient identification
-to obtain B. Naturality of globalSectionsUpperStarMap moves coefficient isomorphisms
-through pullback of sections. Apply its composition law to the three successive maps
-w,h,p and k,rho,p; inverse-image associativity identifies both with pullback along the
-same composite. Apply the same law to E.hom,v,g and k,q.hom,g. The equation
-E.hom followed by v = k followed by q.hom identifies these composites. Cancel the
-invertible section pullbacks along q.hom and E.hom to obtain the displayed equation.
-All these equations hold for an arbitrary G, including the zero sheaf and empty schemes. -/
+closed points or direct-image comparisons in this assertion. -/
 theorem globalSections_iso_over_transport
     {X Y T L Z W V : Scheme.{u}}
     (p : Y ⟶ X) (h : T ⟶ Y) (ρ : L ⟶ Y)

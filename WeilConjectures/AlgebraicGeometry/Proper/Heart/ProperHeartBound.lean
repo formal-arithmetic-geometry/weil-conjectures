@@ -26,9 +26,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # A uniform bound for proper direct image on the ind-constructible heart
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-heart-bound,
-statement and proof (blueprint: lemma-uniform-bound-proper-direct-image).
-
 ## Main statements
 
 - `properHeartBound`: the finite-extension coefficient case.
@@ -52,8 +49,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The functor M ↦ H^q(Rp_*(M[0])) on internal modules over the pulled-back coefficient ring.
-Source: blueprint lemma-uniform-bound-proper-direct-image, definition of R^q p_* in the standing
-conventions (blueprint: lemma-uniform-bound-proper-direct-image). This is the full module-object
+This is the full module-object
 derived direct image. -/
 def properHeartHigherDirectImage
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -69,9 +65,7 @@ ind-constructibility in every nonnegative degree, and preservation of arbitrary 
 of ind-constructibles by each nonnegative higher direct image. Preservation means that the
 image of every colimit cofan is a colimit; its legs are the images of the original injections.
 By fullness, repleteness and ambient-sum closure of IndCons, this is exactly preservation
-of sums in IndCons itself, including the empty sum.
-Source: blueprint lemma-uniform-bound-proper-direct-image, displayed formulas and final assertion
-(blueprint: lemma-uniform-bound-proper-direct-image). -/
+of sums in IndCons itself, including the empty sum. -/
 def ProperHeartBoundAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ) : Prop :=
@@ -167,20 +161,7 @@ private theorem properHeartBound_of_continuity
 
 /-- For a proper morphism in the standing separated finite-type positive-characteristic
 setting, higher direct image of ind-constructible E-modules vanishes above 2d+1, stays
-ind-constructible in nonnegative degrees, and preserves arbitrary direct sums.
-Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, statement and proof
-(blueprint: lemma-uniform-bound-proper-direct-image).
-
-Proof: convert the finite-lower-bound convention for geometric fibre dimension,
-including empty fibres and negative d, and apply the constructible rational vanishing
-bound. Proper higher images of constructibles are constructible by
-properHeart_constructible_cohomology. The internal-module qcqs continuity comparison
-shows that the higher direct-image functor preserves filtered colimits of degree-zero
-complexes. Map the filtered constructible presentation supplied by ObjectProperty.ind:
-its terms vanish above the bound, and in nonnegative degrees they are constructible.
-This proves vanishing and ind-constructibility of the colimit. Finally additivity and
-filtered finite subsums give preservation of every small coproduct, with the actual
-mapped cofan legs and including the empty family. -/
+ind-constructible in nonnegative degrees, and preserves arbitrary direct sums. -/
 theorem properHeartBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -215,15 +196,7 @@ theorem properHeartBound
 
 /-- The uniform proper heart bound for the condensed algebraic closure, whose sections
 are continuous maps valued in some finite subextension, rather than all continuous maps
-into the algebraic closure. Source: blueprint main-20261015,
-lemma-uniform-bound-proper-direct-image, statement and proof (blueprint:
-lemma-uniform-bound-proper-direct-image).
-
-Proof: use the algebraic-closure coefficient cases of the same constructible
-vanishing and constructibility inputs as properHeartBound. Internal-module qcqs
-continuity transports the filtered constructible presentation, yielding vanishing and
-ind-constructibility. Additivity and filtered finite subsums give preservation of all
-small coproduct cofans, including the empty family. -/
+into the algebraic closure. -/
 theorem properHeartBound_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

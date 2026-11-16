@@ -25,9 +25,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 
 /-!
 # Structural stability of integral ind-constructible cohomology
-
-Source: blueprint main-20261015, integral compactness proof step 9 and integral proper
-sums proof steps 7 and 11 (blueprint: lem-sfb-integral-ind-derived-stability).
 -/
 
 @[expose] public noncomputable section
@@ -97,28 +94,7 @@ private theorem closedUnderExistingCofan
 
 /-- Integral ind-constructible cohomology is stable under upper truncation and
 arbitrary ambient small coproducts and contains the localizing closure of Dbc.
-There is no assumption about a proper map, a fibre dimension, or an Ext bound.
-
-Source: blueprint main-20261015, proposition-compactness-proper-direct-image--1, proof step 9,
-and proposition-compactness-proper-direct-image--2, proof steps 7 and 11.
-(blueprint: lem-sfb-integral-ind-derived-stability).
-
-Proof:
-1. Apply integralIndConstructibleHeartClosure to obtain zero, kernel, cokernel,
-   extension and coproduct closure of the abelian ind-constructible class P.
-   The homologyProperty API then makes S = {K | every H^n(K) satisfies P}
-   replete and triangulated, and preserves it under upper good truncations.
-2. Grothendieck module categories have derived coproducts, and each homology
-   functor preserves them. Apply abelian coproduct closure to the mapped cofan
-   in every degree, retaining its actual colimit structure.
-3. To match the localizing definition's larger object-index universe, shrink
-   the nonzero support of any existing coproduct: its indices inject into the
-   small endomorphism set of the vertex via the orthogonal idempotents
-   inj_i projection_i. Dropping zero summands preserves the colimit property.
-   Thus hom-universe sum closure suffices to make S localizing.
-4. Each constructible cohomology object is ind-constructible by its constant
-   filtered presentation. Therefore S contains Dbc. The intersection universal
-   property of localizingClosure gives Loc(Dbc) contained in S. -/
+There is no assumption about a proper map, a fibre dimension, or an Ext bound. -/
 theorem integralIndConstructibleStability
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

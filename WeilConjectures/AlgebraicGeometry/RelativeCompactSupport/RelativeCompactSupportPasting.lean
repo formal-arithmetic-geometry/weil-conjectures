@@ -25,8 +25,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdj
 /-!
 # Horizontal pasting for compactification-relative exchange
 
-Source: Stacks Project, Tag 0E47, and the compactification-relative strict-tower
-argument in the DAG (blueprint: lem-pur-relative-compact-support-pasting).
+## References
+
+* Stacks Project, Tags 0E47 and 09AE
 -/
 
 @[expose] public section
@@ -48,14 +49,11 @@ namespace AlgebraicGeometry.ProEtale.ConstantCompactificationExchange
 open StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The recorded exact ordinary module pullback, without changing its presentation.
-Source: blueprint, finite-coefficient paragraph
-(blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The recorded exact ordinary module pullback, without changing its presentation. -/
 noncomputable abbrev ordinaryG {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (modulePullback B f).mapDerivedCategory
 
-/-- The source pullback compositor, with its K-flat and ordinary-unit normalization.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The source pullback compositor, with its K-flat and ordinary-unit normalization. -/
 noncomputable def sourceGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ordinaryG B (f ≫ g) ≅ ordinaryG B g ⋙ ordinaryG B f :=
   eqToIso (congrArg
@@ -65,22 +63,16 @@ noncomputable def sourceGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
       (coefficients B Z) (coefficients B Y) (coefficients B X)
       (constantRingIso B g) (constantRingIso B f)
 
-/-- The source square built from the specified derived pullback compositors.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The source square built from the specified derived pullback compositors. -/
 noncomputable def sourceSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ordinaryG B i ⋙ ordinaryG B r ≅ ordinaryG B p ⋙ ordinaryG B k :=
   (sourceGComp B r i).symm ≪≫
     eqToIso (congrArg (ordinaryG B) h.symm) ≪≫ sourceGComp B k p
 
-/-- Item-owned finite constant-ring instance of the recorded supplied-data construction.
-This helper constructs an ambient map; agreement with def-exchange-projection is asserted
-below only on that definition's specified A_(E,n) domain.
-The proper factor is the adjunction mate of the canonical derived pullback square.
-The open factor is the existing unit-normalized singleBeta. These are precisely
-Ex_(star,p)(j_! K), followed by Rp'_*(beta_K), in that order.
-Source: blueprint, finite coefficients and chosen compactification paragraphs
-(blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The compactification exchange map for a finite constant coefficient ring: the mate
+`Ex_(*,p)(j_! K)` of the derived pullback square for the proper factor, followed by
+`Rp'_*(β_K)` for the open factor (`singleBeta`). -/
 noncomputable def finiteChosenExchange [Finite B]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
@@ -110,31 +102,26 @@ open StrictTower ConstantCompactificationExchange
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- Ordinary total right derived direct image, with its recorded module action.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- Ordinary total right derived direct image, with its recorded module action. -/
 noncomputable abbrev ordinaryR {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (moduleDirectImage B f).rightDerivedFunctor
 
-/-- Ordinary exact extension by zero from the recorded open adjunction.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- Ordinary exact extension by zero from the recorded open adjunction. -/
 noncomputable abbrev ordinaryJ {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :=
   (moduleJ B j).mapDerivedCategory
 
-/-- The ordinary derived adjunction induced by the specified module adjunction.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The ordinary derived adjunction induced by the specified module adjunction. -/
 noncomputable abbrev ordinaryAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The ordinary compositor descends the section-normalized module compositor.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The ordinary compositor descends the section-normalized module compositor. -/
 noncomputable def ordinaryGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ordinaryG B (f ≫ g) ≅ ordinaryG B g ⋙ ordinaryG B f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp B f g) ≪≫
     (Functor.mapDerivedCategoryCompIso (modulePullback B g) (modulePullback B f)).symm
 
-/-- The ordinary exchange is the unit--square--counit mate of the specified square.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The ordinary exchange is the unit--square--counit mate of the specified square. -/
 noncomputable def ordinaryE {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ordinaryR B p ⋙ ordinaryG B i ⟶ ordinaryG B k ⋙ ordinaryR B r :=
@@ -159,12 +146,7 @@ private theorem moduleOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     (moduleJAdj B j) (fixedRestriction B U) (fixedRestriction B X)
     (openImmersionLowerShriek A j) (fixedOpen B j)
 
-/-- The specified ordinary inverse open comparison is invertible for arbitrary rings.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting).
-Proof: Apply the localized-site extension-by-zero adjunction, without a finiteness
-assumption. On the open image the pulled-back open unit is invertible; on its
-complement both extensions vanish. The adjunction transpose is therefore invertible.
-This is the ordinary version of Step 4, with the same unit normalization. -/
+/-- The specified ordinary inverse open comparison is invertible for arbitrary rings. -/
 theorem ordinaryBetaInv_isIso {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g) :
@@ -185,8 +167,7 @@ theorem ordinaryBetaInv_isIso {U' U X' X : Scheme.{u}}
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- Ordinary open base change, descending the existing open-unit transpose.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- Ordinary open base change, descending the existing open-unit transpose. -/
 noncomputable def ordinaryBeta {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g) :
@@ -195,8 +176,7 @@ noncomputable def ordinaryBeta {U' U X' X : Scheme.{u}}
     (@asIso _ _ _ _ (singleBetaInv B a j' j g sq.w)
       (ordinaryBetaInv_isIso B a j' j g sq))).symm
 
-/-- The tower compactification-relative exchange, with the two specified factors.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The tower compactification-relative exchange, with the two specified factors. -/
 noncomputable def towerH {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
     (a : Y' ⟶ Y) (x : X' ⟶ X) (z : c'.Z ⟶ c.Z)
@@ -210,8 +190,7 @@ noncomputable def towerH {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     Functor.whiskerRight (beta B x c'.i c.i z sj.w sj).hom (R B c'.g) ≫
     (Functor.associator _ _ _).hom
 
-/-- The ordinary compactification-relative exchange, with the two specified factors.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The ordinary compactification-relative exchange, with the two specified factors. -/
 noncomputable def ordinaryH
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
@@ -228,8 +207,7 @@ noncomputable def ordinaryH
     Functor.whiskerRight (ordinaryBeta B x c'.i c.i z sj).hom (ordinaryR B c'.g) ≫
     (Functor.associator _ _ _).hom
 
-/-- Pasting two specified transformations, inserting the supplied pullback compositors.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- Pasting two specified transformations, inserting the supplied pullback compositors. -/
 def paste
     {C₀ C₁ C₂ D₀ D₁ D₂ : Type w}
     [Category.{v} C₀] [Category.{v} C₁] [Category.{v} C₂]
@@ -571,20 +549,7 @@ private theorem ordinaryBeta_comp {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
   erw [(ordinaryG B h).map_id]
   erw [Category.id_comp, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-/-- The three horizontal-pasting equalities in the ordinary derived categories.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting).
-Proof: 1. The Cartesian squares identify the successive compactifications with the
-composite one by their unique projection-preserving isomorphism.
-2. Evaluation on K-injective tower representatives gives the ordinary operations
-and preserves their units, counits and square comparisons (coefficient-exchange-mates).
-3. Apply strict-tower pullback-square pasting and mate-pasting to the proper factor.
-Horizontal compositor changes use identity-adjunction mates; the ambient pullback
-identification uses the unit-preserving conjugate comparison.
-4. The proper/open calculus gives pasting for the specified open-unit comparison.
-5. Expand H, use naturality of the second proper mate at the first beta, then
-functoriality and Steps 3--4. These are transformation equalities before evaluation.
-For ordinary categories repeat the same normalized-mate calculation, or evaluate
-on constant towers using Step 2. No proper exchange or base map is inverted. -/
+/-- The three horizontal-pasting equalities in the ordinary derived categories. -/
 theorem ordinaryPasting {X₀ X₁ X₂ Y₀ Y₁ Y₂ : Scheme.{u}}
     {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂}
     (c₀ : Compactification f₀) (c₁ : Compactification f₁) (c₂ : Compactification f₂)
@@ -658,8 +623,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The evaluation comparison for the specified compact-support composite.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting). -/
+/-- The evaluation comparison for the specified compact-support composite. -/
 noncomputable def supportEval {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     (J B c.i ⋙ R B c.g) ⋙ ev B Y n ≅
@@ -732,15 +696,7 @@ private theorem evaluation_exchange {V W S T : Scheme.{u}}
     (mateEquiv_counit (adj B p) (ordinaryAdj B p) (evalG B p n).inv)
     (mateEquiv_counit (adj B r) (ordinaryAdj B r) (evalG B r n).inv) hc N
 
-/-- Finite evaluation carries E, beta and H to the ordinary specified maps.
-Source: Stacks, Tags 0E47 and 09AE (blueprint: lem-pur-relative-compact-support-pasting).
-Proof: Step 2: evaluation preserves K-injectives, so both evaluated direct images
-are represented by the same direct-image complex. Their comparison is the mate
-of evaluationPullback, hence preserves the derived units and counits. Evaluate
-the unit--square--counit formula to obtain the first equation. Transposing the
-pulled-back open unit gives the second equation, as in beta_evaluation. Composing
-these two equations and using naturality yields the third. These assertions do
-not infer tower identities from faithfulness of evaluation. -/
+/-- Finite evaluation carries E, beta and H to the ordinary specified maps. -/
 theorem finiteEvaluation [Finite B] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
     (a : Y' ⟶ Y) (x : X' ⟶ X) (z : c'.Z ⟶ c.Z)

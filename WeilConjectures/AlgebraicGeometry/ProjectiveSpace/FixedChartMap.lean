@@ -18,8 +18,11 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 /-!
 # Morphisms from associated-sheaf chart data
 
-Source: Stacks Project, Tag 01M7, functoriality; Tag 009U, modules on a basis.
-(blueprint: lem-sc-p1-fixed-chart-map)
+## References
+
+* Stacks Project, Tag 01M7, functoriality
+* Tag 009U, modules on a basis
+* Stacks Project, Tag 01M7 (functoriality), and Tag 009U
 -/
 
 @[expose] public section
@@ -77,22 +80,7 @@ private theorem map_of_basis
   exact ConcreteCategory.congr_hom (ha' i) s
 
 -- Extending chart maps elaborates many dependent section and localization types.
-/-- A degree-preserving map induces a map between any two sheaves with the prescribed charts.
-Source: Stacks Project, Tag 01M7 (functoriality), and Tag 009U.
-(blueprint: lem-sc-p1-fixed-chart-map).
-
-Proof: On D₊(f), localize phi and restrict to equal-degree fractions: a homogeneous
-numerator retains its degree. Invert beta onto its stated range to transport this
-map to sections. Injectivity of beta proves additivity. The scalar equations and
-localization linearity prove linearity over the chart ring; awayToSection is the
-standard-open ring isomorphism, so this is linearity over all ring sections.
-For D₊(g) contained in D₊(f), choose g^e = a*f using standardOpenProperties.
-Every localized element has a powers-of-f denominator. Apply the two restriction
-formulas to y/f^m and use phi(a^m • y) = a^m • phi(y). Injectivity of beta
-proves compatibility. The basis morphism equivalence for modules extends these
-maps uniquely to a sheaf map. Its restriction to each basis open is the constructed
-map, giving the fraction formula. Zero denominators cause no exception: the
-ordinary localized module and the chart section module are both zero. -/
+/-- A degree-preserving map induces a map between any two sheaves with the prescribed charts. -/
 theorem fixed_chart_map (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M)

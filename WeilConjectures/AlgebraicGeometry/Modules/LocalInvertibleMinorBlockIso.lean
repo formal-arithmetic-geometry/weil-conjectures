@@ -14,22 +14,7 @@ universe u
 open CategoryTheory Limits SheafOfModules
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A square map of finite free sheaves with unit determinant is invertible.
-
-Source: `lemma-triviality-fibres--2`, proof (3), the adjugate argument
-in the pivot-minor step, retained in `exists_local_invertible_minor_block`.
-(blueprint: lem-pc-local-invertible-minor-block-iso)
-
-Proof: Let A be the global matrix of f. A unit determinant gives an inverse
-matrix B = det(A)^{-1} adj(A). Construct the sheaf map g from the entries of B:
-each global entry acts by multiplication on the structure sheaf, and the free
-coproduct property assembles these component maps. Composition of free maps
-corresponds to multiplication of their matrices, so the adjugate identities
-BA=AB=1 give f followed by g and g followed by f equal to the identity.
-Equality of matrices determines equality of sheaf maps by the free universal
-property and the identification of maps from the structure sheaf with global
-sections. This also covers the empty index set, where the free object is zero
-and its unique endomorphism is an isomorphism. -/
+/-- A square map of finite free sheaves with unit determinant is invertible. -/
 theorem local_invertible_minor_block_isIso
     {X : Scheme.{u}} {I : Type u} [Fintype I] [DecidableEq I]
     (f : free (R := X.ringCatSheaf) I ⟶ free I)

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.MixedDerivedMateUnit
 
 /-! # Normalization of the canonical derived open exchange
 
-Source: Stacks Project, Tags 0F7B and 0D6E.
-(blueprint: lem-sfb-open-exchange-derived-unit).
+## References
+
+* Stacks Project, Tags 0F7B and 0D6E
 -/
 
 @[expose] public section
@@ -48,9 +49,7 @@ private lemma derived_square_symm
 image of the ordinary mate followed by the target unit. Identify inverse derived base
 change with the exact-derived inverse square by formal symmetry, then apply the mixed
 mate normalization theorem. The source derived adjunctions are precisely the mixed
-adjunctions used there.
-Source: Stacks Project, Tags 0F7B and 0D6E.
-(blueprint: lem-sfb-open-exchange-derived-unit). -/
+adjunctions used there. -/
 theorem openExchangeDerivedUnit
     (A : Type (u + 1)) [CommRing A]
     {U V W Z : Scheme.{u}} (b : U ⟶ V) (q : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

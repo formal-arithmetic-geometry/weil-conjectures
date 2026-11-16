@@ -12,11 +12,13 @@ public import WeilConjectures.Compactification.Defs
 /-!
 # Compact-support candidate in the intrinsic constant-ring presentation
 
-Source: Weil blueprint, `sk-def-sf-operations`, order 1486;
-Stacks Project, Tags 03DI and 03DA (blueprint: proposition-construction-independence-rf-shriek).
-This is the same compactification formula, using the published canonical realization
+This is the same compactification formula, using the canonical realization
 of module-valued sheaves as modules over the constant ring sheaf. Compactification
 independence remains confined to the separately specified etale-origin subcategory.
+
+## References
+
+* Stacks, Tags 03DI and 03DA
 -/
 
 @[expose] public section
@@ -33,8 +35,7 @@ namespace AlgebraicGeometry.Scheme
 termwise exact extension by zero followed by the K-injective total right-derived
 image of `g`, on all unbounded complexes. This is precisely `Rg_* j_!`, expressed
 in the intrinsic constant-ring presentation, with no assertion of unbounded
-compactification independence. Source: blueprint order 1486;
-Stacks, Tags 03DI and 03DA (blueprint: proposition-construction-independence-rf-shriek). -/
+compactification independence. -/
 noncomputable def sfIntrinsicCompactSupport {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (A : Type u) [CommRing A] [Finite A] :
     proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=

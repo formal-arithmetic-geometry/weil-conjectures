@@ -93,10 +93,9 @@ lemma etaleRestrict_comp (F : X.Modules) {V W T : X.Etale} (g : W ⟶ V) (f : T 
           (etaleRestrict_eq F g φ))).symm)
 
 /-- **The étale sheaf `F_ét` of an `𝒪_X`-module `F`**, as a presheaf of abelian groups on the
-small étale site: `u : U ⟶ X` is sent to (the group of morphisms `u^* 𝒪_X ⟶ u^* F`, identified
+small étale site: `u: U ⟶ X` is sent to (the group of morphisms `u^* 𝒪_X ⟶ u^* F`, identified
 with) `Γ(U, u^* F)`, with the pullback restrictions. The sections are lifted to the universe
-`u + 1` of sheaves on the small étale site.
-(blueprint: `proposition-p-torsion-smooth-proper-curve`) -/
+`u + 1` of sheaves on the small étale site. -/
 noncomputable def etalePresheaf (F : X.Modules) : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} where
   obj V := AddCommGrpCat.of (ULift.{u + 1} (EtaleSections F V.unop))
   map g := AddCommGrpCat.ofHom (AddEquiv.ulift.symm.toAddMonoidHom.comp
@@ -116,8 +115,7 @@ lemma etalePresheaf_map_apply (F : X.Modules) {V W : X.Etale} (g : W ⟶ V)
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Descent for quasi-coherent modules**: for a quasi-coherent `𝒪_X`-module `F`, the presheaf
-`u ↦ Γ(U, u^* F)` on the small étale site is a sheaf.
-(blueprint: `proposition-p-torsion-smooth-proper-curve`) -/
+`u ↦ Γ(U, u^* F)` on the small étale site is a sheaf. -/
 theorem isSheaf_etalePresheaf (F : X.Modules) [F.IsQuasicoherent] :
     Presheaf.IsSheaf X.smallEtaleTopology (etalePresheaf F) := by
   have : ((F : modulesPseudofunctor.obj (.mk (op X))) : X.Modules).IsQuasicoherent :=
@@ -129,10 +127,9 @@ theorem isSheaf_etalePresheaf (F : X.Modules) [F.IsQuasicoherent] :
     ((isSheaf_iff_isSheaf_of_type _ _).1 (isSheaf_etaleHom (unitObj X) F))
   exact congrArg ULift.up (etaleRestrict_eq F g x).symm
 
-/-- **The étale sheaf `F_ét` of a quasi-coherent `𝒪_X`-module `F`**: `u : U ⟶ X` is sent to
+/-- **The étale sheaf `F_ét` of a quasi-coherent `𝒪_X`-module `F`**: `u: U ⟶ X` is sent to
 `Γ(U, u^* F)` (realised as morphisms `u^* 𝒪_X ⟶ u^* F`, see
-`AlgebraicGeometry.Scheme.Modules.etaleSectionsEquiv`).
-(blueprint: `proposition-p-torsion-smooth-proper-curve`) -/
+`AlgebraicGeometry.Scheme.Modules.etaleSectionsEquiv`). -/
 noncomputable def etaleSheaf (F : X.Modules) [F.IsQuasicoherent] :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   ⟨etalePresheaf F, isSheaf_etalePresheaf F⟩

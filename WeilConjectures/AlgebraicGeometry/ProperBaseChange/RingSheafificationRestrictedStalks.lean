@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Restricted ring sheafification units on abelian stalks
 
-Source: Stacks Project, Sheaves, Lemmas 007Z and 0087; restriction to an open subspace.
-(blueprint: lem-weil-pbc-ring-sheafification-restricted-stalks).
+## References
+
+* Stacks Project, Sheaves, Lemmas 007Z and 0087
 -/
 
 @[expose] public section
@@ -56,17 +57,7 @@ private theorem restrict_stalk_map_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact IsIso.of_isIso_comp_right _ q
 
 /-- The ring sheafification unit remains bijective on underlying abelian stalks after
-restriction to an open subscheme.
-Source: Stacks Project, Sheaves, Lemmas 007Z and 0087; restriction to an open subspace.
-(blueprint: lem-weil-pbc-ring-sheafification-restricted-stalks).
-
-Proof: forgetting commutative rings to abelian groups preserves sheafification. The
-forgotten unit factors as the abelian sheafification unit followed by the canonical
-sheafification-composition isomorphism, so its stalk map is an isomorphism. For an open
-immersion, the image functor on neighbourhoods is left adjoint to inverse image; its
-opposite is final. The canonical colimit maps therefore identify restricted stalks with
-ambient stalks. Naturality identifies the restricted unit with the ambient unit under
-these isomorphisms. An isomorphism of abelian groups is bijective. -/
+restriction to an open subscheme. -/
 theorem ringSheafification_restricted_stalk_bijective {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsOpenImmersion f] (P : Y.Opensᵒᵖ ⥤ CommRingCat.{u}) (x : X) :
     Function.Bijective ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map

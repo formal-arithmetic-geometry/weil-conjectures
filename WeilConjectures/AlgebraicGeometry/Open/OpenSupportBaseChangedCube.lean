@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenSupportGraphExchange
 import WeilConjectures.AlgebraicGeometry.Open.OpenSupportTailCube
 
 /-! # The open-support cube in base-changed compactifications
-
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -38,19 +36,7 @@ private theorem supportFactor_hom
   simp only [openSupportCompactificationIso, openSupportTailIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom]
 
-/-- The open-support cube when the output compactifications are the actual base changes.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
-
-Proof: factor each support comparison into its specified graph comparison and
-its proper/open and open-composition tail. Construct the map between the two
-iterated pullback ambients by the pullback universal property. Pasting and
-cancellation of pullback squares make its open and proper factor squares Cartesian.
-Apply graph exchange to the supplied compactifications, and the proper/open and
-open-composition cube to the tail. Naturality of open exchange pastes their equations.
-Finally cancel the invertible compact-support exchanges to obtain the displayed
-inverse-exchange equation. No quasi-compactness is needed. The same argument covers
-empty schemes, empty opens, identity base changes and zero coefficient rings.
-(blueprint: lem-asd-open-support-base-changed-cube) -/
+/-- The open-support cube when the output compactifications are the actual base changes. -/
 theorem openSupportBaseChanged_cube
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' U V U' V' : Scheme.{u}}
