@@ -26,7 +26,7 @@ item 30):
   `U` of the qcqs scheme `X`, then after a `U`-admissible blow-up the strict transform of
   `q` is an open immersion.
 - `AlgebraicGeometry.eliminationBlowup`: the blow-up `X^el(q, U) ⟶ X` of blueprint
-  `theorem-elimination-indeterminacy--1`, assembled from its three steps
+  `theorem-elimination-indeterminacy`, assembled from its three steps
   (`eliminationBoundaryIdeal`, `eliminationExtensionCentre`, `eliminationCentre`), and
   `AlgebraicGeometry.isOpenImmersion_strictTransformMap_eliminationBlowup`: the strict
   transform along it is an open immersion.
@@ -94,7 +94,7 @@ namespace AlgebraicGeometry
 
 /-! ### The elimination-of-indeterminacy construction
 
-The three steps of blueprint `theorem-elimination-indeterminacy--1`, each step selecting its
+The three steps of blueprint `theorem-elimination-indeterminacy`, each step selecting its
 output from the corresponding step lemma. -/
 
 section EliminationConstruction
@@ -106,7 +106,7 @@ variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
 finite-type ideal sheaf on `X` whose support is exactly the complement of the quasi-compact
 open `U` (`Scheme.exists_finiteType_ideal_coe_support_eq_compl`, Stacks Project Tag 01PH).
 Its blow-up `X₁ = Bl_{𝓘₀}(X)` is a `U`-admissible blow-up in which `U` is
-scheme-theoretically dense. (blueprint: `theorem-elimination-indeterminacy--1`, step 1) -/
+scheme-theoretically dense. (`theorem-elimination-indeterminacy`, step 1) -/
 noncomputable def eliminationBoundaryIdeal : X.IdealSheafData :=
   (X.exists_finiteType_ideal_coe_support_eq_compl U hU).choose
 
@@ -174,7 +174,7 @@ variable {Z : Scheme.{u}} (q : Z ⟶ X) (hq : IsIso (q ∣_ U))
 
 /-- **Step 2 of the elimination construction, the quasi-domination**: over the preimage of `U`
 in `X₁ = Bl_{𝓘₀}(X)`, the section of the base change `Z ×_X X₁ ⟶ X₁` induced by the inverse of
-the isomorphism `q⁻¹(U) ≅ U`. (blueprint: `theorem-elimination-indeterminacy--1`, step 2) -/
+the isomorphism `q⁻¹(U) ≅ U`. (`theorem-elimination-indeterminacy`, step 2) -/
 noncomputable def eliminationGraphSection :
     ((eliminationBoundaryIdeal hU).blowupMap ⁻¹ᵁ U :
       (eliminationBoundaryIdeal hU).blowup.Opens).toScheme ⟶
@@ -226,7 +226,7 @@ theorem exists_eliminationExtension :
 /-- **Step 2 of the elimination construction: the Conrad extension centre** on
 `X₁ = Bl_{𝓘₀}(X)`, the admissible blow-up centre selected from `exists_eliminationExtension`
 (Conrad's elimination theorem over the base `X₁`, applied to the quasi-domination
-`eliminationGraphSection`). (blueprint: `theorem-elimination-indeterminacy--1`, step 2) -/
+`eliminationGraphSection`). (`theorem-elimination-indeterminacy`, step 2) -/
 noncomputable def eliminationExtensionCentre :
     IsAdmissible (eliminationBoundaryIdeal hU).blowup
       ((eliminationBoundaryIdeal hU).blowupMap ⁻¹ᵁ U) :=
@@ -251,7 +251,7 @@ theorem eliminationExtensionCentre_spec :
 the composition theorem for blow-ups (`Scheme.IdealSheafData.exists_blowup_comp`, Stacks
 Project Tag 080B) applied to the boundary ideal `𝓘₀` and the Conrad extension centre on
 `X₁ = Bl_{𝓘₀}(X)`; thus `Bl_K(X)` is identified over `X` with the composite of the two
-blow-ups. (blueprint: `theorem-elimination-indeterminacy--1`, step 3) -/
+blow-ups. (`theorem-elimination-indeterminacy`, step 3) -/
 noncomputable def eliminationCentre : X.IdealSheafData :=
   (Scheme.IdealSheafData.exists_blowup_comp (eliminationBoundaryIdeal hU)
     (eliminationBoundaryIdeal_ofFiniteType hU) (eliminationExtensionCentre hU q hq).I
@@ -300,13 +300,12 @@ open `U`, the `U`-admissible blow-up of `X` assembled from the blueprint's three
 3. the composite centre `K` on `X` (`eliminationCentre`) with `Bl_K(X) ≅ Bl_𝓘(X₁)` over `X`,
    whose support is exactly `Uᶜ` (`coe_support_eliminationCentre`).
 
-Difference from the blueprint: in step 3 the blueprint blows up `𝓘 · 𝓘₀𝒪_{X₁}` on `X₁`
+Difference from the notes: in step 3 the notes blow up `𝓘 · 𝓘₀𝒪_{X₁}` on `X₁`
 (which dominates `Bl_𝓘(X₁)`) and then composes with `X₁ ⟶ X`. The formalization composes
 `𝓘` itself with `𝓘₀`, so that `Bl_K(X) ≅ Bl_𝓘(X₁)` and the extension of the quasi-domination
 lives directly on it; the support formula of Tag 080B already gives the support `Uᶜ`, and
 the scheme-theoretic density of `U` in `Bl_K(X)` follows from that alone
-(`isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support`).
-(blueprint: `theorem-elimination-indeterminacy--1`) -/
+(`isSchemeTheoreticallyDominant_eliminationBlowup_preimage`). -/
 noncomputable def eliminationBlowup : IsAdmissible X U where
   I := eliminationCentre hU q hq
   finiteType := (eliminationCentre_spec hU q hq).1
@@ -522,7 +521,7 @@ theorem isOpenImmersion_strictTransformMap_of_extension {X : Scheme.{u}} [Compac
   infer_instance
 
 /-- **Elimination of indeterminacy for the constructed blow-up** (Stacks Project Tag 081S;
-blueprint: `theorem-elimination-indeterminacy`; proof order item 30): the strict transform
+`theorem-elimination-indeterminacy`): the strict transform
 of `q` along `AlgebraicGeometry.eliminationBlowup` is an open immersion.
 
 The proof follows the Conrad/Zariski's-Main-Theorem route along the three steps of the
@@ -548,19 +547,40 @@ theorem isOpenImmersion_strictTransformMap_eliminationBlowup {X : Scheme.{u}} [C
   exact isOpenImmersion_strictTransformMap_of_extension hU q hq _ _ _
     (eliminationGraphSection_fst hU q hq) W hUW g hg hext hclosed _ hKft hKsupp e he
 
-/-- **Elimination of indeterminacy** (Stacks Project Tag 081S; blueprint:
-`lemma:nagata-elimination-indeterminacy`; proof order item 30): if `q : Z ⟶ X` is separated,
-of finite type and an isomorphism over a quasi-compact open `U` of the qcqs scheme `X`, then
-after a `U`-admissible blow-up the strict transform of `q` is an open immersion. A witness is
-the constructed blow-up `AlgebraicGeometry.eliminationBlowup`
-(`isOpenImmersion_strictTransformMap_eliminationBlowup`). -/
+/-- **Schematic density of `U` in the constructed blow-up**: the inverse image of `U` in
+`X^el(q, U) = Bl_K(X)` is scheme-theoretically dense, the support of the centre `K` being exactly
+`Uᶜ` (`coe_support_eliminationCentre`), so that `Uᶜ`-supported centres have the density property
+of `isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support`. -/
+theorem isSchemeTheoreticallyDominant_eliminationBlowup_preimage {X : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) {Z : Scheme.{u}}
+    (q : Z ⟶ X) [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q] (hq : IsIso (q ∣_ U)) :
+    IsSchemeTheoreticallyDominant
+      ((eliminationBlowup hU q hq).I.blowupMap ⁻¹ᵁ U :
+        (eliminationBlowup hU q hq).I.blowup.Opens).ι := by
+  have hKcompl : (eliminationCentre hU q hq).support.compl = U := by
+    apply TopologicalSpace.Opens.ext
+    change ((eliminationCentre hU q hq).support : Set X)ᶜ = (U : Set X)
+    rw [coe_support_eliminationCentre, compl_compl]
+  have h := (eliminationCentre
+    hU q hq).isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
+  rwa [hKcompl] at h
+
+/-- **Elimination of indeterminacy** (Stacks Project Tag 081S, blueprint
+`theorem-elimination-indeterminacy`): if `q : Z ⟶ X` is separated, of finite type and an
+isomorphism over a quasi-compact open `U` of the qcqs scheme `X`, then there is a `U`-admissible
+blow-up `X' ⟶ X` in which the inverse image of `U` is scheme-theoretically dense and along which
+the strict transform of `q` is an open immersion. A witness is the constructed blow-up
+`AlgebraicGeometry.eliminationBlowup` (`isOpenImmersion_strictTransformMap_eliminationBlowup`,
+`isSchemeTheoreticallyDominant_eliminationBlowup_preimage`). -/
 theorem exists_admissibleBlowup_isOpenImmersion_strictTransformMap
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) {Z : Scheme.{u}} (q : Z ⟶ X)
     [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q]
     (hq : IsIso (q ∣_ U)) :
     ∃ B : IsAdmissible X U,
-      IsOpenImmersion (strictTransformMap q B.I.blowupMap B.preservedOpen) :=
-  ⟨eliminationBlowup hU q hq, isOpenImmersion_strictTransformMap_eliminationBlowup hU q hq⟩
+      IsOpenImmersion (strictTransformMap q B.I.blowupMap B.preservedOpen) ∧
+        IsSchemeTheoreticallyDominant (B.I.blowupMap ⁻¹ᵁ U : B.I.blowup.Opens).ι :=
+  ⟨eliminationBlowup hU q hq, isOpenImmersion_strictTransformMap_eliminationBlowup hU q hq,
+    isSchemeTheoreticallyDominant_eliminationBlowup_preimage hU q hq⟩
 
 end AlgebraicGeometry

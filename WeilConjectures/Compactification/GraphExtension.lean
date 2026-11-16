@@ -48,7 +48,7 @@ section GraphExtension
 variable {S U : Scheme.{u}}
 
 /-- The data of a **graph extension** of a compactification `c` of a quasi-compact open
-`V ⊆ U` (Stacks Project Tag 0F3Z; blueprint: `def:nagata-graph-extension`). -/
+`V ⊆ U` (Stacks Project Tag 0F3Z). -/
 structure Compactification.ProperExtension (u : U ⟶ S) (V : U.Opens)
     (c : Compactification (V.ι ≫ u)) where
   /-- The `V`-admissible blow-up of the compactification. -/
@@ -87,7 +87,7 @@ theorem Compactification.nonempty_properExtension
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     (V : U.Opens) (hV : IsCompact (V : Set U)) (c : Compactification (V.ι ≫ u)) :
     Nonempty (Compactification.ProperExtension u V c) := by
-  -- The graph construction of the blueprint: `V^gr` is the open strict transform of
+  -- The graph construction of the notes: `V^gr` is the open strict transform of
   -- the scheme-theoretic image of the graph `V ⟶ c.Z ×_S U`, supplied by the
   -- partial-section lemma (`partialSectionRestrictIso`), the image transport
   -- lemma (`Scheme.Hom.ker_lift_admissibleBlowup`) and elimination of indeterminacy
@@ -123,7 +123,7 @@ theorem Compactification.nonempty_properExtension
   have hV₀ : IsCompact ((c.i.opensRange : c.Z.Opens) : Set c.Z) :=
     isCompact_range c.i.continuous
   have hpV₀ : IsIso (p ∣_ c.i.opensRange) := isIso_restrict_imageι_comp_fst c.g u c.i γ hγfst
-  obtain ⟨B, hB⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hV₀ p hpV₀
+  obtain ⟨B, hB, -⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hV₀ p hpV₀
   let π : B.I.blowup ⟶ c.Z := B.I.blowupMap
   let W : c.Z.Opens := B.preservedOpen
   have hOIst : IsOpenImmersion (strictTransformMap p π W) := hB
