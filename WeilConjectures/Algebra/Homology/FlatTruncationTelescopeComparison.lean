@@ -35,8 +35,57 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-set_option maxHeartbeats 1400000 in
--- Comparing the cone maps unfolds repeated dependent sheaf colimits and cochain components.
+-- Compare augmentations in an arbitrary abelian category, before specializing to sheaves.
+private theorem quasiIso_of_cone_map_augmentation
+    {B : Type*} [Category* B] [Abelian B] [HasDerivedCategory B]
+    {X Y X' Y' K : CochainComplex B ℤ}
+    (φ : X ⟶ Y) (ψ : X' ⟶ Y') (a : X ⟶ X') (b : Y ⟶ Y')
+    (hcomm : φ ≫ b = a ≫ ψ) (ha : QuasiIso a) (hb : QuasiIso b)
+    (f : mappingCone φ ⟶ K) (g : mappingCone ψ ⟶ K) (hg : QuasiIso g)
+    (hinl : (mappingCone.inl φ).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0)
+    (hginl : (mappingCone.inl ψ).comp (HomComplex.Cochain.ofHom g) (add_zero _) = 0)
+    (hinr : mappingCone.inr φ ≫ f = b ≫ mappingCone.inr ψ ≫ g) : QuasiIso f := by
+  let m := mappingCone.map φ ψ a b hcomm
+  have hm : QuasiIso m := by
+    have : QuasiIso a := ha
+    have : QuasiIso b := hb
+    apply (DerivedCategory.isIso_Q_map_iff_quasiIso B m).1
+    exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂
+      (DerivedCategory.Q.mapTriangle.map (mappingCone.triangleMap φ ψ a b hcomm))
+      (DerivedCategory.mappingCone_triangle_distinguished φ)
+      (DerivedCategory.mappingCone_triangle_distinguished ψ)
+      (by exact inferInstanceAs (IsIso (DerivedCategory.Q.map a)))
+      (by exact inferInstanceAs (IsIso (DerivedCategory.Q.map b)))
+  have heq : f = m ≫ g := by
+    apply HomologicalComplex.Hom.ext
+    funext i
+    apply (mappingCone.ext_from_iff φ (i + 1) i rfl _ _).2
+    constructor
+    · have hf := congrArg
+        (fun c : HomComplex.Cochain X K (-1) ↦ c.v (i + 1) i (by omega)) hinl
+      have hg' := congrArg
+        (fun c : HomComplex.Cochain X' K (-1) ↦ c.v (i + 1) i (by omega)) hginl
+      rw [HomComplex.Cochain.comp_zero_cochain_v, HomComplex.Cochain.ofHom_v,
+        HomComplex.Cochain.zero_v] at hf hg'
+      change (mappingCone.inl φ).v (i + 1) i (by omega) ≫ f.f i = 0 at hf
+      change (mappingCone.inl ψ).v (i + 1) i (by omega) ≫ g.f i = 0 at hg'
+      simp only [HomologicalComplex.comp_f]
+      rw [← Category.assoc]
+      simp only [m, mappingCone.map, mappingCone.inl_v_desc_f,
+        HomComplex.Cochain.zero_cochain_comp_v, HomComplex.Cochain.ofHom_v,
+        Category.assoc]
+      exact hf.trans ((congrArg (fun z ↦ a.f (i + 1) ≫ z) hg').trans
+        comp_zero).symm
+    · have hc : mappingCone.inr φ ≫ m = b ≫ mappingCone.inr ψ :=
+        (mappingCone.triangleMap φ ψ a b hcomm).comm₂
+      have hr : mappingCone.inr φ ≫ (m ≫ g) = b ≫ mappingCone.inr ψ ≫ g := by
+        rw [← Category.assoc, hc, Category.assoc]
+      exact congrArg (fun z ↦ z.f i) (hinr.trans hr.symm)
+  rw [heq]
+  have : QuasiIso m := hm
+  have : QuasiIso g := hg
+  infer_instance
+
 /-- A canonical augmentation from the telescope of replacements of good truncations
 is a quasi-isomorphism. No flatness or boundedness of the replacements is needed.
 Source: Stacks Project, proof of Lemma 06YS via Lemma 077J; Derived Categories,
@@ -117,51 +166,13 @@ theorem quasiIso_flat_truncation_telescope
     simp only [σ, Category.assoc, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc,
       Sigma.ι_map_assoc, Sigma.ι_map]
     rw [← Category.assoc, hqn, Category.assoc]
-  let m := mappingCone.map φ ψ σ σ hcomm
-  have hm : QuasiIso m := by
-    have : QuasiIso σ := hσ
-    apply (DerivedCategory.isIso_Q_map_iff_quasiIso A m).1
-    exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂
-      (DerivedCategory.Q.mapTriangle.map (mappingCone.triangleMap φ ψ σ σ hcomm))
-      (DerivedCategory.mappingCone_triangle_distinguished φ)
-      (DerivedCategory.mappingCone_triangle_distinguished ψ)
-      (by exact inferInstanceAs (IsIso (DerivedCategory.Q.map σ)))
-      (by exact inferInstanceAs (IsIso (DerivedCategory.Q.map σ)))
-  have heq : f = m ≫ g := by
-    apply HomologicalComplex.Hom.ext
-    funext i
-    apply (mappingCone.ext_from_iff φ (i + 1) i rfl _ _).2
-    constructor
-    · have hf := congrArg
-        (fun c : HomComplex.Cochain (∐ E) G (-1) ↦ c.v (i + 1) i (by omega)) hinl
-      have hg' := congrArg
-        (fun c : HomComplex.Cochain (∐ D) G (-1) ↦ c.v (i + 1) i (by omega)) hginl
-      rw [HomComplex.Cochain.comp_zero_cochain_v, HomComplex.Cochain.ofHom_v,
-        HomComplex.Cochain.zero_v] at hf hg'
-      change (mappingCone.inl φ).v (i + 1) i (by omega) ≫ f.f i = 0 at hf
-      change (mappingCone.inl ψ).v (i + 1) i (by omega) ≫ g.f i = 0 at hg'
-      simp only [HomologicalComplex.comp_f]
-      rw [← Category.assoc]
-      simp only [m, mappingCone.map, mappingCone.inl_v_desc_f,
-        HomComplex.Cochain.zero_cochain_comp_v, HomComplex.Cochain.ofHom_v,
-        Category.assoc]
-      exact hf.trans ((congrArg (fun z ↦ σ.f (i + 1) ≫ z) hg').trans
-        comp_zero).symm
-    · have hr : mappingCone.inr φ ≫ (m ≫ g) =
-          Sigma.desc (fun n : ℕ ↦ q n ≫ G.ιTruncLE (n : ℤ)) := by
-        have hc : mappingCone.inr φ ≫ m = σ ≫ mappingCone.inr ψ :=
-          (mappingCone.triangleMap φ ψ σ σ hcomm).comm₂
-        rw [← Category.assoc, hc, Category.assoc, hginr]
-        apply Sigma.hom_ext
-        intro n
-        rw [Sigma.ι_map_assoc]
-        conv_rhs => rw [Sigma.ι_comp_desc]
-        exact congrArg (fun z ↦ q n ≫ z)
-          (Sigma.ι_comp_desc (fun n : ℕ ↦ G.ιTruncLE (n : ℤ)) n)
-      exact congrArg (fun z ↦ z.f i) (hinr.trans hr.symm)
-  rw [heq]
-  have : QuasiIso m := hm
-  have : QuasiIso g := hg
-  infer_instance
+  apply quasiIso_of_cone_map_augmentation φ ψ σ σ hcomm hσ hσ f g hg hinl hginl
+  rw [hinr, hginr]
+  apply Sigma.hom_ext
+  intro n
+  rw [Sigma.ι_map_assoc]
+  conv_lhs => rw [Sigma.ι_comp_desc]
+  exact (congrArg (fun z ↦ q n ≫ z)
+    (Sigma.ι_comp_desc (fun n : ℕ ↦ G.ιTruncLE (n : ℤ)) n)).symm
 
 end CochainComplex

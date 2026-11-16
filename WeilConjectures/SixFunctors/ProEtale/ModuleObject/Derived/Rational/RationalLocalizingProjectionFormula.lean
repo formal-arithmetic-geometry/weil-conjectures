@@ -600,21 +600,23 @@ private theorem projection_localizing_of_interfaces
     change (boundedConstructible (condensedRingObj Λ X)).localizingClosure = _
     rw [← hbcX]
     apply le_antisymm
-    · let := localizing_small _
+    · let := (isLocalizingSubcategory_iff_isLocalizing _).1
         (localizingClosure_exists Λ X (constantModelBoundedConstructible Λ X)).2.2.2.1
       exact ObjectProperty.localizingClosure_le (fun K hK P _ hSP ↦ hSP K hK)
     · intro K hK
-      exact hK _ (localizing_large _) (ObjectProperty.le_localizingClosure _)
+      exact hK _ ((isLocalizingSubcategory_iff_isLocalizing _).2 inferInstance)
+        (ObjectProperty.le_localizingClosure _)
   have heqY : localizingBoundedConstructible Λ Y =
       localizingClosure (constantModelBoundedConstructible Λ Y) := by
     change (boundedConstructible (condensedRingObj Λ Y)).localizingClosure = _
     rw [← hbcY]
     apply le_antisymm
-    · let := localizing_small _
+    · let := (isLocalizingSubcategory_iff_isLocalizing _).1
         (localizingClosure_exists Λ Y (constantModelBoundedConstructible Λ Y)).2.2.2.1
       exact ObjectProperty.localizingClosure_le (fun K hK P _ hSP ↦ hSP K hK)
     · intro K hK
-      exact hK _ (localizing_large _) (ObjectProperty.le_localizingClosure _)
+      exact hK _ ((isLocalizingSubcategory_iff_isLocalizing _).2 inferInstance)
+        (ObjectProperty.le_localizingClosure _)
   have hpush : ∀ K, localizingBoundedConstructible Λ X K →
       localizingBoundedConstructible Λ Y ((lowerStar Λ p).rightDerivedFunctor.obj K) := by
     intro K hK
@@ -623,7 +625,8 @@ private theorem projection_localizing_of_interfaces
     have h := localizingClosure_map
       (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
       (constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
-      (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩) hp.2
+      (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩)
+      (preservesColimit_of_properLocalizingHypotheses Λ p hp)
     rw [hctfX, hctfY] at h
     exact h K hK
   have hsum : (lowerStar Λ p).rightDerivedFunctor.PreservesCoproductsOn.{u + 1}
@@ -827,8 +830,8 @@ theorem isIso_projectionMate_localizing_finiteExtension
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) := by
-    have heq := ((finiteCoefficientDescentTwoColimit k (ringChar k) ℓ
-      (Fact.out : (ringChar k).Prime).pos Fact.out T).2.2.2.1 F).1
+    have heq :=
+      constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ F T
     funext K
     apply propext
     exact (constantModel_derived_comap_iff e.inv.hom T K).symm.trans
@@ -877,7 +880,6 @@ theorem isIso_projectionMate_localizing_finiteExtension
     intro K M hK hM
     simpa only [derivedTensor, curriedTensor_obj_obj] using
       (constantModelBoundedConstructible_derivedTensor ℓ (ringChar k)
-        (Fact.out : (ringChar k).Prime).pos
         Fact.out (T ↘ Spec (.of k)) Λ (Or.inl ⟨F, ⟨e⟩⟩)).1 K M hK hM
   apply projection_localizing_of_interfaces Λ p (hbc X) (hbc Y) (hctf X) (hctf Y)
     hp hpull (htensor X) (htensor Y) ?_ A B hA hB
@@ -997,8 +999,7 @@ theorem isIso_projectionMate_localizing_padicAlgCl
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) :=
-    (finiteCoefficientDescentTwoColimit k (ringChar k) ℓ
-      (Fact.out : (ringChar k).Prime).pos Fact.out T).2.2.2.2.1.1
+    constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ T
   have hctf (T : Scheme.{u}) [T.Over (Spec (.of k))]
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
@@ -1042,7 +1043,6 @@ theorem isIso_projectionMate_localizing_padicAlgCl
     intro K M hK hM
     simpa only [derivedTensor, curriedTensor_obj_obj] using
       (constantModelBoundedConstructible_derivedTensor ℓ (ringChar k)
-      (Fact.out : (ringChar k).Prime).pos
       Fact.out (T ↘ Spec (.of k)) Λ (Or.inr ⟨Iso.refl _⟩)).1 K M hK hM
   apply projection_localizing_of_interfaces Λ p (hbc X) (hbc Y) (hctf X) (hctf Y)
     hp hpull (htensor X) (htensor Y) ?_ A B hA hB

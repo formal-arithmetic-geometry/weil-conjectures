@@ -81,7 +81,7 @@ set_option hygiene false in
 /-- The trace `Rq_* Lq^* τ ≅ Rq_* Λ_P(1)[2] ⟶ Λ_S` of the projective line, for `τ = Λ_S(1)[2]`. -/
 local notation "𝐭" =>
   ((R(((𝐏 ↘ S))_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarTateTwoIso Λ (𝐏 ↘ S)).hom ≫
-    projectiveLineTrace Λ S (isIso_projectiveLineDecompositionMap Λ S) :
+    projectiveLineTrace Λ S :
       (R(((𝐏 ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
         ((L(((𝐏 ↘ S))^*[ModuleCat.{u + 1} Λ])).obj 𝛕) ⟶ 𝟙_ _)
 

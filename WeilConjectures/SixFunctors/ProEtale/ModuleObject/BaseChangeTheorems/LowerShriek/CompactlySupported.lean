@@ -79,8 +79,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-! ### For a compactification -/
 
-set_option synthInstance.maxHeartbeats 80000 in
--- The instance search through the pasting is slower for `E̲` than for `ℚ̲̄_ℓ`.
 include ℓ k in
 /-- **The base change theorem for the compactly supported direct image attached to a
 compactification** of bounded constructible `E`-sheaves: for a compactification
@@ -95,7 +93,14 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
       ℓ E c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
   rw [ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
-  infer_instance
+  -- Build the pasting explicitly to avoid instance search through the entire composite.
+  refine IsIso.comp_isIso' ?_
+    (IsIso.comp_isIso' ?_ (IsIso.comp_isIso' ?_ (IsIso.comp_isIso' ?_ ?_)))
+  · exact Iso.isIso_hom _
+  · exact Functor.isIso_whiskerLeft _ _
+  · exact Iso.isIso_inv _
+  · exact Functor.isIso_whiskerRight _ _
+  · exact Iso.isIso_hom _
 
 /-- **The base change theorem for the compactly supported direct image attached to a
 compactification** of bounded constructible `ℚ̄_ℓ`-sheaves: for a

@@ -17,8 +17,8 @@ public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 /-!
 # Weight bounds for direct images from an open of the relative affine line
 
-The main statement of this file is the geometric input of the Deligne–Laumon reduction
-(blueprint section `chap-The-Deligne-Laumon-theorem-in-general`): for the projection `h : U ⟶ Y` of
+The main statement of this file is the geometric input of the Deligne–Laumon reduction in
+general: for the projection `h : U ⟶ Y` of
 an open `U` of the relative affine line `𝔸¹_Y` with surjective projection, and `F` lisse and
 punctually pure of weight `w`, the sheaf `Rʳh₀!F` is mixed of weights at most `w + r`.
 
@@ -49,17 +49,17 @@ the coordinates: `𝔸(PUnit; Y)` is the relative affine line — the same spell
 ## Main statements
 
 - `AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`:
-  blueprint `theorem-pure-lisse-sheaves-over-relative`.
-- `AlgebraicGeometry.hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber`: blueprint
-  `theorem-pure-lisse-sheaves-over-relative--1`.
-- `AlgebraicGeometry.isReal_higherLowerShriek_of_isAffine_fiber`: blueprint
-  `theorem-pure-lisse-sheaves-over-relative--1`.
+  purity of `H_c^2` of a pure lisse sheaf on a smooth affine curve.
+- `AlgebraicGeometry.hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber`: the punctual
+  weight bound `w + i` on the stalks of `Rⁱh₀!F` over a relative affine curve.
+- `AlgebraicGeometry.isReal_higherLowerShriek_of_isAffine_fiber`: the direct images of a real
+  lisse sheaf over a relative affine curve are real.
 - `AlgebraicGeometry.exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber`:
-  blueprint `theorem-pure-lisse-sheaves-over-relative`.
-- `AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber`: blueprint
-  `theorem-pure-lisse-sheaves-over-relative--1`.
-- `AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine`: blueprint
-  `theorem-pure-lisse-sheaves-over-relative`.
+  mixedness of the direct images over a relative affine curve.
+- `AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber`: the direct
+  images over a relative affine curve are mixed of weights at most `w + i`.
+- `AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine`: the same for an
+  open of the relative affine line with surjective projection.
 
 ## References
 
@@ -120,7 +120,7 @@ variable {ι} in
 /-- The constant twist `G ⊗ 𝓑_b` of a sheaf mixed of weights at most `v` is mixed of weights at
 most `v + c`, where `2 log_q |ι b| = c`: tensoring a mixed filtration with the rank-one sheaf
 `𝓑_b` is exact, and it multiplies the eigenvalues at a closed point of degree `m` by `bᵐ`, so it
-raises every punctual weight by `c` (blueprint: `theorem-pure-lisse-sheaves-over-relative`). -/
+raises every punctual weight by `c`. -/
 theorem IsMixedOfWeightsAtMost.constantTwist {F : WeilSheaf k₀ l X} {w : ℝ}
     (h : F.IsMixedOfWeightsAtMost ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
     (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
@@ -132,8 +132,8 @@ theorem IsMixedOfWeightsAtMost.constantTwist {F : WeilSheaf k₀ l X} {w : ℝ}
 end WeilSheaf
 
 /-- The spectrum `Spec κ(y)` of the residue field at a closed point `y` of a `k₀`-scheme is étale
-over `k₀`: `κ(y)` is a finite extension of the perfect field `k₀`, hence separable (blueprint:
-`theorem-pure-lisse-sheaves-over-relative--1`, the fibre over `y` is a smooth curve over `k₀`). -/
+over `k₀`: `κ(y)` is a finite extension of the perfect field `k₀`, hence separable. Thus the fibre
+over `y` of a smooth relative curve over `Y` is a smooth curve over `k₀`. -/
 theorem Scheme.etale_fromSpecResidueField_comp {Y : Scheme.{u}}
     (p : Y ⟶ Spec (CommRingCat.of k₀)) (y : Y) (hy : y ∈ Y.finitePoints) :
     Etale (Y.fromSpecResidueField y ≫ p) := by
@@ -166,9 +166,7 @@ variable {U Y : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 compact support base change identifies the local polynomials of the stalks of the `Rⁱh₀!F` at `y`
 with those of the compactly supported cohomology of the fibre: with `d = [κ(y) : k₀]`,
 
-`det (1 - T^d F_y ∣ (Rⁱh₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`
-
-(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
+`det (1 - T^d F_y ∣ (Rⁱh₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`. -/
 theorem exists_fiber_charpolyRev_higherLowerShriek (hfib : ∀ y, IsAffine (h.fiber y))
     (y : Y.finitePoints) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
@@ -268,8 +266,7 @@ punctually `ι`-pure of weight `w`. Then `Rⁱh₀!F` has weights at most `w + i
 supported base change its stalk at a closed point `y` is `H_c^i(U_ȳ, F)`, the restriction of
 `F` to the fibre is pure of weight `w` relative to `κ(y)`
 (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`), and the curve estimate
-applies to each geometric component of the affine fibre
-(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
+applies to each geometric component of the affine fibre. -/
 theorem hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber
     (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
@@ -300,8 +297,7 @@ real coefficients since `E` is real; the reciprocal roots of `P₁` have modulus
 `q_y ^ (1 / 2)` and those of `P₂` modulus `q_y`
 (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`), so the
 fraction is reduced (`Polynomial.isCoprime_of_norm_inv_roots`) and both factors are real
-(`Polynomial.map_conj_eq_self_of_isCoprime`)
-(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
+(`Polynomial.map_conj_eq_self_of_isCoprime`). -/
 theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fiber y))
     (E : WeilSheaf k₀ l U) (hE : E.IsLisse) (hreal : E.IsReal ι)
     (hpure : E.IsPunctuallyPureOfWeight ι 0) (i : ℕ) :
@@ -350,10 +346,9 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
       refine hr ?_
       have : Subsingleton (E'.compactlySupportedCohomology r).carrier := by
         rcases lt_trichotomy r 0 with hr0 | rfl | hr0
-        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E' (Or.inl hr0)
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_neg E' hr0
         · exact h0
-        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
-            (Or.inr (by omega))
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse hE' (by omega)
       rw [Subsingleton.elim ((E'.compactlySupportedCohomology r).frobeniusEnd ^ m) 0, map_zero,
         smul_zero]
   -- the factors `P₁, P₂` of the fibre `L`-function have disjoint root radii, hence are real
@@ -373,8 +368,8 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
       rw [Nat.cast_ofNat]
       exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr2
     | n + 3 =>
-      have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
-        (r := ((n + 3 : ℕ) : ℤ)) (Or.inr (by omega))
+      have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse hE'
+        (r := ((n + 3 : ℕ) : ℤ)) (by omega)
       exact FrobeniusModule.isReal_of_subsingleton ι _
   -- back to the stalk at `y`
   have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) y.2
@@ -388,8 +383,7 @@ Weil sheaf on `U`, punctually `ι`-pure of weight `w`. Then each `Rⁱh₀!F` is
 weights at most some `v`. The direct images of the real envelope `E = F⁰ ⊕ (F⁰)^∨` of `F` are
 real (`AlgebraicGeometry.isReal_higherLowerShriek_of_isAffine_fiber`), hence mixed
 (`AlgebraicGeometry.WeilSheaf.IsReal.isMixed`); `Rⁱh₀!F⁰` is a direct summand of `Rⁱh₀!E`, and
-`Rⁱh₀!F` is its constant twist back by the projection formula
-(blueprint: `theorem-pure-lisse-sheaves-over-relative`). -/
+`Rⁱh₀!F` is its constant twist back by the projection formula. -/
 theorem exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber
     (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
@@ -418,8 +412,7 @@ sheaf on `U`, punctually `ι`-pure of weight `w`. Then `Rⁱh₀!F` is `ι`-mixe
 local Frobenius eigenvalues have weights at most `w + i`
 (`AlgebraicGeometry.hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber`), and the punctual
 bound cuts the mixed filtration down
-(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`)
-(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`). -/
 theorem isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber
     (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
@@ -445,8 +438,7 @@ U --- u ---> 𝔸¹_Y
    \ h         | ↘
     `--------> Y
 ```
-
-(blueprint: `theorem-pure-lisse-sheaves-over-relative`). -/
+-/
 theorem isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine {U Y : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]

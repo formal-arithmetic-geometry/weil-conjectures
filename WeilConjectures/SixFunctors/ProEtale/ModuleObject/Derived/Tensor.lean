@@ -42,7 +42,7 @@ left derived functor of `⊗_{Λ_X}` in two variables, computed on K-flat resolu
 
 This is the module-object counterpart of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor`. The monoidal structure
-on `D(Mod_{Λ_X})` is the instance `Mod.derivedMonoidalCategory`, which rests on the sorried
+on `D(Mod_{Λ_X})` is the instance `Mod.derivedMonoidalCategory`, which rests on the
 inputs of `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` and
 `WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory`; the *type* of
 `derivedTensor` does not mention it.

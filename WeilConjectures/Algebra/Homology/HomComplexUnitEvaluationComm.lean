@@ -30,8 +30,6 @@ private lemma homMap_zero_left
     SheafOfModules.homObjMap (R := R) (0 : A' ⟶ A) g = 0 :=
   SheafOfModules.hom_ext (PresheafOfModules.homObjMap_zero_left g.val)
 
-set_option maxHeartbeats 800000 in
--- Dependent projection and sheaf types require extra elaboration steps.
 /-- Evaluation at one commutes with the Hom-complex differential.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
 (blueprint: lem-sc-hom-complex-unit-evaluation-comm).
@@ -59,7 +57,7 @@ theorem homComplex_unit_evaluation_comm
   have hd := (Classical.choose_spec
     (homComplex_projections_exists.{u, u, u, u} (C := C) (J := J) (R := R))).2.1
       L M n m 0 m n (m - n) h (by omega) (by omega) (by omega)
-  rw [show L.d 0 (m - n) = 0 from rfl, homMap_zero_left J R,
+  simp only [show L.d 0 (m - n) = 0 from rfl, homMap_zero_left J R,
     CategoryTheory.Limits.comp_zero, smul_zero, sub_zero] at hd
   change ((homComplexUnitFunctor J R).obj M).d n m ≫ π L M m 0 m (by omega) =
     π L M n 0 n (by omega) ≫

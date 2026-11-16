@@ -16,14 +16,13 @@ geometrically connected, and `F` a Weil sheaf on `C`, punctually `ι`-pure of we
 
 ## Implementation notes
 
-The blueprint (`theorem-pure-lisse-sheaves-over-relative--1`,
-`theorem-pure-lisse-sheaves-over-relative`) passes to a finite constant extension over which the
-geometric components of `C` are defined. We avoid constant extensions: a finite morphism
-`f : C ⟶ 𝔸¹_{k₀}` (Noether normalization) identifies `H_c^r(C, F)` with `H_c^r(𝔸¹, f₀*F)`; the
-finite direct image `f₀*F` is punctually pure of weight `w` and lisse on a dense open `V ⊆ 𝔸¹`,
-which is a smooth geometrically connected curve, where the curve estimate
-`theorem-weight-bound-curve--2` applies; the finite complement contributes only in degree zero, with
-weights at most `w`.
+Rather than passing to a finite constant extension over which the geometric components of `C`
+are defined, a finite morphism `f : C ⟶ 𝔸¹_{k₀}` (Noether normalization) identifies `H_c^r(C, F)`
+with `H_c^r(𝔸¹, f₀*F)`; the finite direct image `f₀*F` is punctually pure of weight `w` and lisse
+on a dense open `V ⊆ 𝔸¹`, which is a smooth geometrically connected curve, where the estimate on
+dense opens of the line
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology`)
+applies; the finite complement contributes only in degree zero, with weights at most `w`.
 -/
 
 @[expose] public section
@@ -47,8 +46,7 @@ section AffineLine
 `𝔸¹_{k₀}`, punctually `ι`-pure of weight `w`. Then `H_c^r(𝔸¹, G)` has weights at most `w + r`:
 `G` is lisse on a dense open `U` with finite complement `Z`, the curve estimate applies on `U`,
 the finite `Z` only contributes in degree zero with weights at most `w`, and the open–closed exact
-sequence `Rʳ(a_U)₀! G|_U ⟶ Rʳa₀! G ⟶ Rʳ(a_Z)₀! G|_Z` bounds the weights of the middle term
-(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`, via `theorem-weight-bound-curve--2`). -/
+sequence `Rʳ(a_U)₀! G|_U ⟶ Rʳa₀! G ⟶ Rʳ(a_Z)₀! G|_Z` bounds the weights of the middle term. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_affineLine
     (G : WeilSheaf k₀ l 𝔸(PUnit.{u + 1}; Spec (CommRingCat.of k₀))) {w : ℝ}
     (hG : G.IsPunctuallyPureOfWeight ι w) (r : ℕ) :
@@ -128,8 +126,8 @@ end AffineLine
 
 /-- **The curve estimate on an affine curve.** Let `C` be an affine `k₀`-scheme of finite type of
 dimension at most one and `F` a Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then
-`H_c^r(C, F)` has weights at most `w + r` (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`,
-the curve estimate on the geometric components of an affine fibre). -/
+`H_c^r(C, F)` has weights at most `w + r`: this is the curve estimate on the geometric components
+of an affine fibre. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
@@ -156,8 +154,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine {C : Schem
 
 /-- **Purity of the top affine-curve factor.** Let `C` be a smooth affine curve over `k₀`, not
 necessarily geometrically connected, and let `E` be a lisse Weil sheaf on `C`, punctually `ι`-pure
-of weight `0`. Then `H_c^2(C, E)` is `ι`-pure of weight `2` (blueprint:
-`theorem-pure-lisse-sheaves-over-relative`). For a finite morphism `f : C ⟶ 𝔸¹_{k₀}`,
+of weight `0`. Then `H_c^2(C, E)` is `ι`-pure of weight `2`. For a finite morphism
+`f : C ⟶ 𝔸¹_{k₀}`,
 `H_c^2(C, E) ≅ H_c^2(𝔸¹, f₀*E) ≅ H_c^2(V, f₀*E)` for a dense open `V ⊆ 𝔸¹` on which `f₀*E` is
 lisse, and the degree-two endpoint estimate applies on the geometrically connected `V`. -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Scheme.{u}}
@@ -177,11 +175,11 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Sch
 
 /-- **Vanishing of `H_c^0` on a smooth affine curve.** Let `C` be a smooth affine curve over `k₀`,
 not necessarily geometrically connected, and let `E` be a lisse Weil sheaf on `C`. Then
-`H_c^0(C, E) = 0` (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`, the vanishing of the
-degree-zero group of an affine fibre, by `lemma-degree-zero-top-cohomology--4`). For a finite
+`H_c^0(C, E) = 0`, the vanishing of the degree-zero group of an affine fibre. For a finite
 morphism `f : C ⟶ 𝔸¹_{k₀}`, the direct image `f₀*E` is the middle extension of its restriction to a
-dense open `V ⊆ 𝔸¹` on which it is lisse (`lemma-boundary-stalk--2`), and `H_c^0` of a middle
-extension on the geometrically connected `𝔸¹` vanishes. -/
+dense open `V ⊆ 𝔸¹` on which it is lisse, and `H_c^0` of a middle extension on the geometrically
+connected `𝔸¹` vanishes
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_higherLowerShriek_zero`). -/
 theorem WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_isAffine {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l C)
@@ -203,8 +201,7 @@ curve over `k₀` and `F` a lisse Weil sheaf on `C`, punctually `ι`-pure of wei
 `ι`-pure of weight `w + 2`, and `H_c^r(C, F) = 0` for `r ∉ {0, 1, 2}`. The degree-one bound
 comes from a finite morphism `C ⟶ 𝔸¹` and the estimate on dense opens of the line
 (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology`),
-see `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine`.
-(blueprint: `theorem-weight-bound-affine-curve`) -/
+see `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -220,6 +217,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse
       (ringKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (CommRingCat.of k₀)) 1) F hw,
     WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF (Or.inl le_rfl),
     hw.isPureOfWeightOver_compactlySupportedCohomology_two hF,
-    fun r hr ↦ WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine F hr⟩
+    fun r hr ↦ WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF
+      (hr.imp_left le_of_lt)⟩
 
 end AlgebraicGeometry
