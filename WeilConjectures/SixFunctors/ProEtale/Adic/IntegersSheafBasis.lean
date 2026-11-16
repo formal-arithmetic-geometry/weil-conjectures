@@ -174,7 +174,11 @@ lemma sum_padicIntegersSheafCoord_comp_mul :
   refine Eq.trans ?_ this
   change AddEquiv.ulift (∑ j, (padicIntegersSheafCoord X h b hb j ≫
     padicIntegersSheafMulOfLE X h (b j)).hom.app U f) x = _
-  rw [map_sum AddEquiv.ulift, ContinuousMap.sum_apply]
+  rw [show AddEquiv.ulift (∑ j, (padicIntegersSheafCoord X h b hb j ≫
+      padicIntegersSheafMulOfLE X h (b j)).hom.app U f) =
+      ∑ j, AddEquiv.ulift ((padicIntegersSheafCoord X h b hb j ≫
+        padicIntegersSheafMulOfLE X h (b j)).hom.app U f) from map_sum AddEquiv.ulift _ _,
+    ContinuousMap.sum_apply]
   refine Finset.sum_congr rfl fun j _ ↦ ?_
   change b j * integersInclusion l h (b.coord j (f.down x)) = _
   rw [mul_comm]
