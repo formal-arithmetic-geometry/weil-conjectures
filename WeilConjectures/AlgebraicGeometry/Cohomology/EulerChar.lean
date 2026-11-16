@@ -72,8 +72,7 @@ every sheaf of modules vanishes in degrees `q > n`.
 
 This is what makes the `finsum` defining `AlgebraicGeometry.Scheme.Modules.eulerChar` a finite
 sum, hence makes `χ`, the genus and the degree meaningful, for instance on a curve, where
-`n = 1`. 
-(blueprint: lem-sc-noetherian-cohomology-above-dimension)
+`n = 1`.
 -/
 @[stacks 02UZ]
 theorem Modules.subsingleton_H_of_topologicalKrullDim_lt {X : Scheme.{u}} [IsNoetherian X]
@@ -130,9 +129,6 @@ are imposed on `X` here, so for other `X` the value carries no meaning.
 For a smooth proper curve `X ↘ Spec k`, Serre duality identifies this with
 `AlgebraicGeometry.Scheme.Hom.genus (X ↘ Spec k) = dim_k H^0(X, Ω¹_{X/k})`; see
 `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
-
-(blueprint: `def-pc-genus`) 
-(blueprint: def-pc-genus)
 -/
 noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
@@ -160,9 +156,6 @@ applies to `V` and the overlap, while the induction hypothesis applies to `U`.
 Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪ V` in
 all degrees. Apply the induction at the whole scheme and invert the resulting
 `K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) 
-(blueprint: lem-pc-flat-base-change-cohom)
 -/
 @[stacks 02KH]
 theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]
@@ -224,9 +217,6 @@ theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k
 /-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`,
 `dim_K H^q(X_K, M_K) = dim_k H^q(X, M)`.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) 
-(blueprint: lem-pc-flat-base-change-cohom)
 -/
 theorem Modules.finrankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
@@ -259,9 +249,6 @@ theorem Modules.eulerChar_pullback [QuasiCompact (X ↘ Spec (.of k))]
 scheme over a field `k` and let `K/k` be a field extension. Then the base change
 `X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
 `H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
-
-(blueprint: `corollary-serre-duality-field-extension--2`) 
-(blueprint: corollary-serre-duality-field-extension--2)
 -/
 theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] :
@@ -306,9 +293,6 @@ variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 The value is the degree in the usual sense only for an invertible `ℒ` on a proper curve, where
 it agrees with the degree of the associated divisor class; for other sheaves it is just a
 difference of Euler characteristics.
-
-(blueprint: `def-pc-degree-line-bundle`) 
-(blueprint: def-pc-degree-line-bundle)
 -/
 noncomputable def Modules.degree (M : X.Modules) : ℤ :=
   M.eulerChar k - Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf)
@@ -322,14 +306,10 @@ lemma Modules.degree_unit :
     Modules.degree (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 0 :=
   sub_self _
 
-/-- **The degree is invariant under base change** (blueprint
-`theorem-riemann-roch-coherent-serre-duality--1`, part (1)). For a quasi-coherent module `M` on a
+/-- **The degree is invariant under base change.** For a quasi-coherent module `M` on a
 quasi-compact quasi-separated scheme `X` over `k` and a field extension `K/k`,
 `deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in `deg M = χ(M) - χ(𝒪_X)` are invariant
 under flat base change.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) 
-(blueprint: theorem-riemann-roch-coherent-serre-duality--1)
 -/
 theorem Modules.degree_pullback (K : Type u) [Field K] [Algebra k K]
     [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules)
@@ -398,9 +378,7 @@ over `k` through `X`.
 Each `U i` is open and closed, `M` is the direct sum of the pushforwards of its restrictions to
 the `U i` (`AlgebraicGeometry.Scheme.Modules.isIso_biproduct_lift_restrictAdjunction_unit`), and
 the pushforward along the inclusion of an open and closed subscheme does not change cohomology
-(`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`).
-
-This is used in the proof of blueprint `proposition-multiplication-n--1`. -/
+(`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`). -/
 theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ)
     [FiniteDimensional k (M.H q)] :
