@@ -120,7 +120,9 @@ def IsCurvePerverseGE (n : ℤ) (K : WeilComplex k₀ l X) : Prop :=
 
 theorem isCurvePerverseLower_iff_isCurvePerverseGE_zero (K : WeilComplex k₀ l X) :
     K.IsCurvePerverseLower ↔ K.IsCurvePerverseGE 0 := by
-  simp only [IsCurvePerverseLower, IsCurvePerverseGE, zero_sub]
+  have h : ((0 : ℤ) - 1) = -1 := by norm_num
+  unfold IsCurvePerverseLower IsCurvePerverseGE
+  rw [h]
 
 /-- Curve perversity is invariant under isomorphism: the cohomology sheaves of isomorphic
 complexes are isomorphic, hence have the same support. -/
