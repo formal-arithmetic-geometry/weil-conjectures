@@ -92,6 +92,23 @@ theorem Etale.tfae_hasTorsionBaseChange (f : X ⟶ Y) [IsProper f] :
   tfae_have 3 → 1 := Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ f
   tfae_finish
 
+/-- The characterisation of the base change property for torsion coefficients, the standing
+hypothesis of the chapter: for a proper `f` and a coefficient ring `Λ` which is torsion as an
+additive group, `PBC(f)` is the base change isomorphisms on all cohomology sheaves of torsion
+sheaves, and is injective acyclicity `IA(f)` with `Λ` itself
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`). -/
+@[stacks 0A4B]
+theorem Etale.tfae_hasTorsionBaseChange_of_isAddTorsion (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
+    [IsProper f] :
+    List.TFAE [Etale.HasTorsionBaseChange Λ f,
+      ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄
+        (sq : IsPullback g' f' f g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        IsTorsionModuleSheaf F → ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q F),
+      Etale.HasInjectiveAcyclicity Λ f] := by
+  tfae_have 1 ↔ 2 := Etale.hasTorsionBaseChange_iff_forall_isIso_baseChangeHomologyMap Λ f
+  tfae_have 1 ↔ 3 := Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity Λ hΛ f
+  tfae_finish
+
 /-- For a proper morphism and two isomorphic coefficient rings which are torsion as additive
 groups, injective acyclicity with the one coefficient ring is injective acyclicity with the other:
 both are the base change property, which transfers along ring homomorphisms. -/
