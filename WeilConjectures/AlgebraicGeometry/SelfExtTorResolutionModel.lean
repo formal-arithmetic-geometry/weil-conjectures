@@ -128,7 +128,7 @@ theorem exists_selfExt_tor_resolution_model
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 _
   let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
   obtain ⟨g⟩ := nonempty_selfExt_pushforward_homology i P J a b ⟨ha, hP⟩ hb hKI (n : ℤ)
-  obtain ⟨q⟩ := nonempty_selfTor_pushforward_homology i P a ⟨ha, hP⟩ (-(n : ℤ))
+  obtain ⟨q⟩ := nonempty_selfTor_projection_homology_termwise i P a ⟨ha, hP⟩ (-(n : ℤ))
   let e : Scheme.Modules.tensorPullback i ⊣ Scheme.Modules.pushforward i :=
     Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)
   have hc : ∀ N : Z.Modules, IsIso (e.counit.app N) :=

@@ -56,7 +56,7 @@ noncomputable def singleComplexOpenPullbackSquareIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1100000 in
 -- The representative calculation elaborates several derived functor comparisons.
 /-- The sectionwise direct-image comparison is the mate of the open pullback square.
 Source: Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.

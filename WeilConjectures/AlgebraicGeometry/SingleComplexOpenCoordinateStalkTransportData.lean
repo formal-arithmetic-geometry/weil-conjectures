@@ -38,7 +38,6 @@ private theorem composite_naturality
       a₁.app K ≫ a₂.app K ≫ a₃.app K ≫ a₄.app K ≫ a₅.app K ≫ a₆.app K ≫ F₆.map t := by
   simp only [NatTrans.naturality_assoc, NatTrans.naturality]
 
-set_option maxHeartbeats 800000 in
 -- Naturality of the composite pullback comparison expands several functor isomorphisms.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -72,7 +71,6 @@ private theorem restricted_identity_naturality
     Functor.whiskerRight_app, Functor.whiskerLeft_app, eqToHom_app,
     Functor.comp_map, Category.assoc] using h
 
-set_option maxHeartbeats 800000 in
 -- Pinning the stalk scalar actions avoids repeating the tensor-model elaboration downstream.
 open scoped TensorProduct in
 set_option synthInstance.maxSize 2048 in
@@ -140,7 +138,7 @@ private theorem map_comp_square
     F.map (f ≫ g) ≫ h = (F.map f ≫ k) ≫ t := by
   rw [Functor.map_comp, Category.assoc, hn, Category.assoc]
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1500000 in
 -- The tensor-cohomology transports require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

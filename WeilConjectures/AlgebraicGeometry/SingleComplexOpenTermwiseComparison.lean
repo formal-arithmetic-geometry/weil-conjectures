@@ -53,7 +53,7 @@ private theorem comparison_square_cancel
     _ = l ≫ o := ho
     _ = l ≫ p ≫ e := by rw [← h]
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 900000 in
 -- Elaborating the localized tensor and derived-stalk comparisons needs this budget.
 set_option linter.unusedVariables false in
 -- Keep the original unused local H in the statement unchanged.

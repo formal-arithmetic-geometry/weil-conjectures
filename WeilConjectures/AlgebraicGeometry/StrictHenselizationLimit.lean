@@ -135,7 +135,7 @@ theorem exists_isLimit_strictLocalization_of_not_isClosed {K Ω : Type u} [Field
     refine ⟨Algebra.finiteType_adjoin_range ιN, ?_⟩
     refine (ringKrullDim_adjoin_range_add_one_le ιN ht (c := c) (hc.trans hψt.symm)).trans ?_
     rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
-    exact topologicalKrullDim_le_of_locallyQuasiFinite N.hom
+    exact Scheme.Hom.topologicalKrullDim_le_of_locallyQuasiFinite N.hom
   let c := Scheme.Spec.mapCone (Subalgebra.cocone Dset).op
   refine ⟨L, inferInstance, inferInstance, inferInstance, Spec.map (CommRingCat.ofHom ψ),
     Dsetᵒᵖ, inferInstance, inferInstance, (Subalgebra.diagram Dset).op ⋙ Scheme.Spec, c.π,

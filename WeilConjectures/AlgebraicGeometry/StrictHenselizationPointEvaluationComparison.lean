@@ -22,7 +22,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- The nested chart, triple and small-model diagram comparisons need extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The coordinate-ring colimit comparison preserves geometric evaluation.

@@ -27,7 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- In an affine open chart `i : Spec R ⟶ S` through which the geometric point factors as
