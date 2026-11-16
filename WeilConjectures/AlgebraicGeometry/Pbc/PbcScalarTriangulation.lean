@@ -35,6 +35,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
 
+## Implementation details
+
+The `Fact`-based adapters expose the same selected witness as `pbcRationalTriangulationData`,
+with its shift and image-triangle normalizations. They allow instance synthesis when the raw
+category abbreviation erases the geometric proofs.
+
 ## References
 
 * Milne, Section 19
@@ -129,10 +135,8 @@ variable (l : ℕ) [Fact l.Prime]
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
-/-- Expose the existing rational-transport triangulation through Fact hypotheses.
-This is the same selected witness as pbcRationalTriangulationData;
-its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs. -/
+/-- Expose the rational-transport triangulation `pbcRationalTriangulationData` through `Fact`
+hypotheses. -/
 @[instance] theorem pbcScalarRationalZero
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -142,18 +146,14 @@ instance synthesis when the raw category abbreviation erases the geometric proof
     HasZeroObject (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) := by
   exact (pbcRationalTriangulationData l E T Fact.out Fact.out).choose
 
-/-- Expose the existing rational-transport triangulation through Fact hypotheses.
-This is the same selected witness as pbcRationalTriangulationData;
-its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs. -/
+/-- Expose the rational-transport triangulation `pbcRationalTriangulationData` through `Fact`
+hypotheses. -/
 instance pbcScalarRationalHasShift : HasShift (PbcRationalCategory T (pbcIntegralDatum l E)
   (pbcUniformizer l E)) ℤ :=
   (pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose
 
-/-- Expose the existing rational-transport triangulation through Fact hypotheses.
-This is the same selected witness as pbcRationalTriangulationData;
-its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs. -/
+/-- Expose the rational-transport triangulation `pbcRationalTriangulationData` through `Fact`
+hypotheses. -/
 @[instance] theorem pbcScalarRationalShiftAdditive
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -164,20 +164,16 @@ instance synthesis when the raw category abbreviation erases the geometric proof
       (pbcUniformizer l E)) n).Additive := by
   exact (pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2.choose
 
-/-- Expose the existing rational-transport triangulation through Fact hypotheses.
-This is the same selected witness as pbcRationalTriangulationData;
-its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs. -/
+/-- Expose the rational-transport triangulation `pbcRationalTriangulationData` through `Fact`
+hypotheses. -/
 instance pbcScalarRationalLocalizationShift : (ScalarLocalization.localization
   (PbcIntegralRing l E) (PbcBoundedConstructibleComplete T (pbcIntegralDatum l E))
     (pbcUniformizer l E)).CommShift ℤ :=
   ((pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2
     ).choose_spec.choose
 
-/-- Expose the existing rational-transport triangulation through Fact hypotheses.
-This is the same selected witness as pbcRationalTriangulationData;
-its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs. -/
+/-- Expose the rational-transport triangulation `pbcRationalTriangulationData` through `Fact`
+hypotheses. -/
 instance pbcScalarRationalPretriangulated : Pretriangulated (PbcRationalCategory T
   (pbcIntegralDatum l E) (pbcUniformizer l E)) :=
   ((pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2
