@@ -61,7 +61,8 @@ degree.
 * `Representation.toAdd_apply_detCharacter_eq_zero`: a real character kills the determinant of
   a degree-zero element when the geometric determinant is finite.
 * `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair`: the weight readout from a
-  positive central pair, and
+  positive central pair, `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_map`: the
+  same for a subquotient of a tensor construction `r ∘ ρ`, and
   `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible`: its
   version for an irreducible subquotient, where `z` acts as a scalar by Schur's lemma.
 * `DegreeDatum.norm_apply_eq_zpow`: a rank-one character with finite geometric image has constant
@@ -287,6 +288,24 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
     (M := S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype)
   rw [Representation.detWeight, div_eq_div_iff (by positivity) (by positivity)]
   linarith
+
+/-- Blueprint `lemma-determinant-weight-from-central-scalar`: in the setting of a positive central
+pair `(N, z)` for `D`, let `Q = S / U` be a nonzero subquotient of a tensor construction
+`r ∘ ρ` on the defining representation (`r : GL n k →* GL m k` given by polynomials, e.g. an
+exterior power), with finite geometric determinant, on which `z` acts as the scalar `c`. Then
+`dw_χ(Q) = χ(c) / N`: the readout `detWeight_eq_of_isPositiveCentralPair` for the datum `D.map r`
+and the transported pair `(N, r z)` (`IsPositiveCentralPair.map`). -/
+theorem detWeight_eq_of_isPositiveCentralPair_map {m : Type*} [Fintype m] [DecidableEq m]
+    (D : RepresentedDegreeDatum W n k) (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
+    (hz : D.IsPositiveCentralPair N z) (r : GL n k →* GL m k)
+    (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
+    (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g))
+    {U S : Subrepresentation (D.map r).asRepresentation} (hUS : U < S)
+    (hdet : (S.subquotient U).HasFiniteGeometricDet (D.map r).deg) (c : kˣ)
+    (hc : ∀ x ∈ S, Matrix.toLinAlgEquiv' ((r z : GL m k) : Matrix m m k) x - (c : k) • x ∈ U) :
+    (S.subquotient U).detWeight χ (D.map r).degreeOneElement =
+      Multiplicative.toAdd (χ c) / N :=
+  (D.map r).detWeight_eq_of_isPositiveCentralPair χ (hz.map r φ hφ) hUS hdet c hc
 
 /-- The weight readout for an irreducible subquotient, over an algebraically closed field: by
 Schur's lemma the central element `z` acts on a nonzero irreducible subquotient `Q = S / U` as a
