@@ -300,9 +300,8 @@ Source: blueprint main-20261015, lemma-sections-support-closed-subscheme--1, cla
 Stacks Project, Tags 09AA and 09AH (blueprint: lemma-sections-support-closed-subscheme--1).
 
 Proof plan:
-1. The standing scheme is Noetherian by finite type over the field
-   (lem-weil-pbc-finite-type-over-noetherian), so its open complement is quasi-compact.
-   The coefficient comparison alpha is an isomorphism, identifying the recorded module
+1. The open complement is quasi-compact by hypothesis; no finiteness over a field is
+   needed. The coefficient comparison alpha is an isomorphism, identifying the recorded module
    operations with ringed inverse/direct image for the actual pulled-back coefficient ring.
 2. Use lem-weil-pbc-proetale-ringed-open-closed for exact closed direct image, the closed
    counit, vanishing of open restriction of closed direct image, and localization. The
@@ -329,20 +328,13 @@ Proof plan:
    K-injective complex with zero homotopy classes. This proves K-injectivity, including
    unbounded complexes, by def-pur-kinjective-complex.
 
-The admissible coefficients are the recorded predicate of definition-localizing-subcategory.
 The first conjunct is the canonical natural identification of clause (1).
 The existential additive instance only makes the termwise functor on complexes available.
 -/
 theorem formal_closed_support_sheaves
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
     {X Z V : Scheme.{u}}
-    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [V.Over (Spec (.of k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))]
-    (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]
-    (j : V ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range j = (Set.range i)ᶜ) :
     IsIso (Functor.whiskerLeft (moduleSectionsWithSupport Λ j)
       (upperStarLowerStarAdjunction Λ i).unit) ∧
@@ -359,15 +351,6 @@ theorem formal_closed_support_sheaves
               (ComplexShape.up ℤ)).obj I)) ∧
       (∀ I : pulledBackModuleObjects Λ X, Injective I →
         Injective ((closedModuleSectionsWithSupport Λ i j).obj I)) := by
-  have _ := hΛ
-  have hX : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
-    (X ↘ Spec (.of k))
-  have : IsNoetherian X := ⟨⟩
-  have : TopologicalSpace.NoetherianSpace V :=
-    j.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
-  have : QuasiCompact j := inferInstance
   obtain ⟨hAb, hAbsupport⟩ := ProEtale.abelian_closed_support_counit_and_unit i j hij
   have hi := moduleCounitOfAbelian Λ i hAb
   have hzero := openRestrictionPushforwardZero Λ i j hij

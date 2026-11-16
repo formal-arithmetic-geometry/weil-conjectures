@@ -430,18 +430,16 @@ theorem integralRestrictionClosed (k : Type u) [Field k]
       (Profinite.padicIntegersRingObj ℓ E.val) i i.openComplement.ι).Additive,
       integralRestrictionClosedAssertions (k := k) ℓ E i hAdd := by
   let Λ := Profinite.padicIntegersRingObj ℓ E.val
-  have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ :=
-    Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))
   have hij : Set.range i.openComplement.ι = (Set.range i)ᶜ := by
     rw [i.range_eq_compl_range_openComplement_ι, compl_compl]
-  obtain ⟨hAdd, adj, _, _, ⟨δ, hδ⟩, _⟩ :=
-    formal_closed_support_derived Λ ℓ k hΛ i i.openComplement.ι hij
-  let := hAdd
   have : IsLocallyNoetherian X :=
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   have : CompactSpace X :=
     QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   have : IsNoetherian X := ⟨⟩
+  obtain ⟨hAdd, adj, _, _, ⟨δ, hδ⟩, _⟩ :=
+    formal_closed_support_derived Λ i i.openComplement.ι hij
+  let := hAdd
   have : IsLocallyNoetherian Z :=
     LocallyOfFiniteType.isLocallyNoetherian (Z ↘ Spec (.of k))
   have : CompactSpace Z :=

@@ -424,6 +424,29 @@ private theorem constant_model_of_isZero
   · exact hstr X M hM
   · exact fun U _ ↦ hstr _ _ ((CondensedRing.upperStar Λ U.ι).map_isZero hM)
 
+/-- Ext out of a bounded constructible complex with field coefficients commutes with
+filtered colimits of uniformly bounded-below complexes: the corollary of
+`constructible_ext_continuity` for every `C` in `Dᵇc(X, E)` or `Dᵇc(X, ℚ̄_ℓ)`, whose
+generator hypothesis is `bounded_constructible_ext_generated`. -/
+theorem constantModelBoundedConstructible_ext_continuity
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj R)]
+    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
+      R = Profinite.padicAlgClCondensedRing ℓ)
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)))
+    (hC : constantModelBoundedConstructible (coefficientHeartRingObj R) X C)
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    (K : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)) ℤ)
+    (b : ℤ) (hb : ∀ (i : I) (r : ℤ), r < b → IsZero ((K.obj i).X r))
+    (c : Cocone K) (hc : IsColimit c) (q : ℤ) :
+    IsIso (extContinuityComparison C K c q) :=
+  constructible_ext_continuity ℓ E R (hR.imp_right Or.inl) X C
+    (bounded_constructible_ext_generated ℓ E R hR X C hC) K b hb c hc q
+
 /-- In particular all integer Ext functors from a constructible field-coefficient
 sheaf commute with filtered colimits of module objects.
 Source: blueprint lemma-continuity-ext-out-constructible-complex--1, clause 1, in particular

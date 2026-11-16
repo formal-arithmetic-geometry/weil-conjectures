@@ -145,9 +145,7 @@ Source: blueprint main-20261015, lemma-sections-support-closed-subscheme, clause
 (blueprint: lemma-sections-support-closed-subscheme).
 
 Proof plan:
-1. Finite type over the standing field gives a finite cover by Noetherian affine charts
-   (lemma-sections-support-closed-subscheme). Every open is quasi-compact, hence j is
-   quasi-compact and X is quasi-separated. These are consequences, not extra hypotheses.
+1. Only a quasi-compact open immersion j is assumed; no finiteness over a field is needed.
 2. The sheaf adjunction and exact i_* are lemma-sections-support-closed-subscheme--1.
    The exact-left-adjoint derived adjunction is adj.mapDerivedCategoryRightDerivedAdjunction.
    On a K-injective I the total right derived functor is computed by H(I), via
@@ -181,15 +179,9 @@ RHom comparison. Every derived object admits the K-injective representative used
 last clause, whose cone shifted by -1 is the fibre of the specified derived unit.
 -/
 theorem formal_closed_support_derived
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
     {X Z V : Scheme.{u}}
-    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [V.Over (Spec (.of k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))]
-    (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]
-    (j : V ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range j = (Set.range i)ᶜ) :
     ∃ (_ : (closedModuleSectionsWithSupport Λ i j).Additive),
       ∃ adj : lowerStar Λ i ⊣ closedModuleSectionsWithSupport Λ i j,
@@ -229,16 +221,10 @@ theorem formal_closed_support_derived
                     ((NatTrans.mapHomologicalComplex (upperStarLowerStarAdjunction Λ j).unit
                       (ComplexShape.up ℤ)).app I)))))) := by
   classical
-  have : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X :=
-    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  have : IsNoetherian X := ⟨⟩
-  have : QuasiCompact j := inferInstance
   have hji : Set.range i.base = (Set.range j.base)ᶜ := by
     simp only [hij, compl_compl]
   obtain ⟨_, hlim, hcolim, ⟨adj⟩, _, _, hAdd, _⟩ :=
-    formal_closed_support_sheaves Λ ℓ k hΛ i j hij
+    formal_closed_support_sheaves Λ i j hij
   let := hAdd
   let := hlim
   let := hcolim

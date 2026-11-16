@@ -258,7 +258,12 @@ private theorem common_lisse_refinement
       (fun S a ↦ HasFiniteConstantLocalModel Λ₀ S ((CondensedRing.upperStar Λ₀ a).obj M))
       P hP) hc
 
-private theorem coefficientHeart_lisse_filtration (ℓ : ℕ) [Fact ℓ.Prime]
+/-- Every constructible sheaf of `E`- or `ℚ̄_ℓ`-modules on a Noetherian scheme has a finite
+filtration whose successive quotients are extensions by zero `a_! L` of lisse modules `L`
+on the strata of a finite locally closed stratification: the existence form of
+`coefficientHeart_filtration`, with the adapted stratification chosen from
+constructibility. -/
+theorem coefficientHeart_lisse_filtration (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
