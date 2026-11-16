@@ -303,8 +303,7 @@ every `r` outside `{0, 1, 2}`: in negative degrees because `j_*F` is a sheaf, an
 above two because the boundary triangle identifies `H_c^r(C, j_*F)` with `H_c^r(U, F)` for
 `r ≥ 2` (`AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le`),
 which vanishes for `r > 2` by Poincaré duality for the lisse sheaf `F` on the smooth curve `U₀`
-(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse`).
-(blueprint: `lemma-extreme-degrees-affine-curve`) -/
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse`). -/
 theorem subsingleton_compactlySupportedCohomology_directImage (hF : F.IsLisse) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton
@@ -330,8 +329,7 @@ Concretely, for a compactification `C ⟶[i] Z ⟶ Spec k₀`, `H_c^0(C, j_*F) =
 (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_forall_eq_zero`).
 Such a section vanishes near the boundary `Z̄ \ C̄`, which is in the closure of the generic point
 of the irreducible curve `C̄` since `C̄` is affine and not finite; as `F` is lisse, it vanishes
-(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_specializes_notMem_range`).
-(blueprint: `lemma-extreme-degrees-affine-curve`) -/
+(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_specializes_notMem_range`). -/
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 0).carrier := by
@@ -385,7 +383,6 @@ of the cohomology is `q` times the Frobenius of the coinvariants.
         ▼                 ▼
   H_c²(C, j_*F) ──e──▶ V_{π₁(U)}
 ```
-(blueprint: `lemma-extreme-degrees-affine-curve`)
 -/
 theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
@@ -414,7 +411,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
 weight `w + 2`: the geometric coinvariants are pure of weight `w`
 (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`) and the Tate twist of
 `AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two` raises weights
-by two. (blueprint: `lemma-extreme-degrees-affine-curve`) -/
+by two. -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (ι : PadicAlgCl l →+* ℂ) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) :
