@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientAdjointLocality
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationIso
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
@@ -12,8 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 # Étale localization of the exceptional inverse image
 
 For an étale morphism `u : U ⟶ X` and `f : X ⟶ Y` admitting compactifications, the exceptional
-inverse image localizes along `u`: `Lu^* Rf^! ≅ R(u ≫ f)^!` (blueprint
-`lemma-affine-space-etale-localization--4`, a node of the blueprint subsection `sk-prop-sf-cbc`).
+inverse image localizes along `u`: `Lu^* Rf^! ≅ R(u ≫ f)^!`
+(`lemma-affine-space-etale-localization`).
 
 The extension by zero `u_!` is left adjoint to `u^*`, and its derived functor `De_!` agrees with
 the derived lower shriek `Ru_!` (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`).
@@ -23,7 +24,12 @@ uniqueness of right adjoints.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale`
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale`:
+  the localization isomorphism exists;
+- `AlgebraicGeometry.Etale.etaleAmbientAdjointLocalityIso`: on Noetherian schemes, the localization
+  isomorphism normalized by its compatibility with the counits of the two exceptional adjunctions,
+  the unique such isomorphism
+  (`AlgebraicGeometry.Etale.existsUnique_etaleAmbientAdjointLocalityIso`).
 -/
 
 @[expose] public section
@@ -42,7 +48,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lemma-affine-space-etale-localization--4`: Étale localization of the ambient adjoint.
+/-- Blueprint `lemma-affine-space-etale-localization`: Étale localization of the ambient adjoint.
 
 For a separated étale morphism `u : U ⟶ X` of finite type, and `f : X ⟶ Y` such that `f` and
 `h = u ≫ f` admit compactifications, the exceptional inverse image localizes along `u`:
@@ -56,7 +62,8 @@ exact and left adjoint to `u^*`. The isomorphism is the uniqueness of right adjo
 `De_! ≅ Ru_!` (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`); only its
 existence is recorded.
 
-This is a node of the blueprint subsection `lemma-affine-space-etale-localization--4`. -/
+The normalized form of the isomorphism, on Noetherian schemes, is
+`AlgebraicGeometry.Etale.etaleAmbientAdjointLocalityIso`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]
@@ -86,6 +93,61 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) u) ≪≫
       (adj.comp (rightDerivedUpperShriekAdjunction Λ f)).rightAdjointUniq
         ((rightDerivedUpperShriekAdjunction Λ (u ≫ f)).ofNatIsoLeft ec)⟩
+
+section Normalized
+
+variable (A : Type (u + 1)) [CommRing A] [Finite A] {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S)
+  [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
+  [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]
+  (c : Compactification f) (d : Compactification (u ≫ f))
+  {F : DerivedCategoryModule A S ⥤ DerivedCategoryModule A X}
+  {G : DerivedCategoryModule A S ⥤ DerivedCategoryModule A U}
+  (adjF : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ F)
+  (adjG : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G)
+
+/-- Blueprint `lemma-affine-space-etale-localization`, the normalized localization isomorphism:
+for right adjoints `F` of `Rf_!` and `G` of `R(u ≫ f)_!` (given by compactifications `c`, `d`),
+the isomorphism `F ⋙ u^* ≅ G` characterized by its compatibility with the two counits
+(`etaleAmbientAdjointLocalityIso_spec`); it is the unique such isomorphism
+(`etaleAmbientAdjointLocalityIso_unique`, from
+`AlgebraicGeometry.Etale.existsUnique_etaleAmbientAdjointLocalityIso`). -/
+noncomputable def etaleAmbientAdjointLocalityIso :
+    F ⋙ (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory ≅ G :=
+  (existsUnique_etaleAmbientAdjointLocalityIso A u f c d F G adjF adjG).exists.choose
+
+/-- The normalized localization isomorphism is compatible with the counits: `R(u ≫ f)_!` applied
+to its component at `K`, followed by the counit of `adjG`, is the comparison
+`R(u ≫ f)_! u^* ≅ Rf_! u_! u^*`, the counit of `u_! ⊣ u^*` and the counit of `adjF`. -/
+theorem etaleAmbientAdjointLocalityIso_spec (N : EtaleCompactSupportNormalization A)
+    (K : DerivedCategoryModule A S) :
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map
+        ((etaleAmbientAdjointLocalityIso A u f c d adjF adjG).hom.app K) ≫ adjG.counit.app K =
+      (etaleAmbientLeftComparison A N u f c d).inv.app
+          ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+          ((derivedEtaleLowerShriekUpperStarAdjunction
+            (ModuleCat.{u + 1} A) u inferInstance).counit.app (F.obj K)) ≫
+        adjF.counit.app K :=
+  (existsUnique_etaleAmbientAdjointLocalityIso A u f c d F G adjF adjG).exists.choose_spec N K
+
+/-- Any isomorphism `F ⋙ u^* ≅ G` compatible with the counits is the normalized localization
+isomorphism. -/
+theorem etaleAmbientAdjointLocalityIso_unique
+    (e : F ⋙ (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory ≅ G)
+    (he : ∀ (N : EtaleCompactSupportNormalization A) (K : DerivedCategoryModule A S),
+      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map
+          (e.hom.app K) ≫ adjG.counit.app K =
+        (etaleAmbientLeftComparison A N u f c d).inv.app
+            ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫
+          (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+            ((derivedEtaleLowerShriekUpperStarAdjunction
+              (ModuleCat.{u + 1} A) u inferInstance).counit.app (F.obj K)) ≫
+          adjF.counit.app K) :
+    e = etaleAmbientAdjointLocalityIso A u f c d adjF adjG :=
+  (existsUnique_etaleAmbientAdjointLocalityIso A u f c d F G adjF adjG).unique he
+    (etaleAmbientAdjointLocalityIso_spec A u f c d adjF adjG)
+
+end Normalized
 
 end Etale
 
