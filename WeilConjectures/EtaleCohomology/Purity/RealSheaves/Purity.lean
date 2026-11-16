@@ -11,6 +11,7 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightExterior
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
@@ -42,13 +43,13 @@ lemmas of `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction`).
 
 ## Implementation notes
 
-The arithmetic and geometric monodromy groups of `definition-monodromy-groups--1` are the Zariski
+The arithmetic and geometric monodromy groups of `definition-monodromy-groups` are the Zariski
 closures of `ρ (W (C₀))` and `ρ (π₁ C)` inside `GL V`. Zariski closures of subgroups of `GL V`
 are owned by the algebraic groups block (`definition-monodromy-groups`,
-`proposition-central-element-arithmetic-monodromy-group--1`) and do not exist here; only the map
+`proposition-central-element-arithmetic-monodromy-group`) and do not exist here; only the map
 `AlgebraicGeometry.WeilGroup.toLinearAut` whose images they are closures of is recorded, and the
 positive central Frobenius representative of
-`proposition-central-element-arithmetic-monodromy-group--1` is left to that block.
+`proposition-central-element-arithmetic-monodromy-group` is left to that block.
 
 An `AlgebraicGeometry.WeilGroup p` is presented through the étale fundamental group of the
 curve `C₀` over `𝔽_q`; the identification of its geometric part `ker deg` with the étale
@@ -108,7 +109,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V)
 
-/-- Blueprint `definition-monodromy-groups--1`: Arithmetic monodromy and a central representative.
+/-- Blueprint `definition-monodromy-groups`: Arithmetic monodromy and a central representative.
 
 The Weil representation `ρ` viewed as a homomorphism to the automorphism group of `V`: every
 `ρ g` is invertible because `g` is invertible, so `ρ` factors through `GL V = (V →ₗ V)ˣ`,
@@ -226,7 +227,7 @@ theorem det_mem_localEigenvalues_ofCharacter (x : C.finitePoints) :
 
 variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite` (`corollary-determinant-weights--1`): a lisse
+/-- Blueprint `theorem-rank-one-sheaves-have-finite` (`corollary-determinant-weights`): a lisse
 Weil representation `ρ` has determinant weight `wt_{ι, q}(det ρ(γ)) / rank ρ`, for the degree-one
 lift `γ`: its determinant line is a rank-one lisse sheaf, hence punctually pure of the weight
 of its Frobenius scalar. -/
@@ -355,9 +356,9 @@ most `D`. Then every local eigenvalue of `ℋ` has `ι`-weight at most `D + 2`.
 
 The eigenvalues `λ` of the geometric Frobenius on `H_c² (U, ℋ)` satisfy
 `|ι λ| ≤ q ^ (D / 2 + 1)` (`proposition-bound-largest-determinant-weight`), so by the Euler product
-(`theorem-trace-formula-euler-product--4`) the Euler series of `ℋ` converges on the disc of radius
+(`theorem-trace-formula-euler-product`) the Euler series of `ℋ` converges on the disc of radius
 `R = q ^ (-(D / 2 + 1))`. By positivity every local factor converges there as well
-(`lemma-positivity-convergence--1`), so its denominator `ι P_x (ℋ, T ^ e)` has no zero in that
+(`lemma-positivity-convergence`), so its denominator `ι P_x (ℋ, T ^ e)` has no zero in that
 disc; a local eigenvalue `β` produces the zero `T` with `T ^ e = (ι β)⁻¹`, whence
 `|ι β| ^ (-1 / e) ≥ R`. -/
 theorem frobeniusWeight_le_add_two_of_hasNonnegCoeffs [IsAffine C] [Fact (ringChar K ≠ l)]
@@ -477,7 +478,7 @@ local eigenvalue of `ℱ` has `ι`-weight at most `d + 2 ^ (-j)`, for every `j`.
 
 For `j = 0` apply `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_two_of_hasNonnegCoeffs`
 to the tensor square `ℱ ⊗ ℱ`, whose inverse local factors are nonnegative
-(`lemma-positivity-euler-factors--1`) and whose constituents have determinant weight at most `2 d`
+(`lemma-positivity-euler-factors`) and whose constituents have determinant weight at most `2 d`
 (`sk-p-tensor`), and to the local eigenvalue `α ^ 2`; for `j + 1` apply the case `j` to
 `ℱ ⊗ ℱ`, which is again lisse and `ι`-real. -/
 theorem frobeniusWeight_le_add_inv_two_pow_of_isReal [IsAffine C] [Fact (ringChar K ≠ l)]
@@ -520,7 +521,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
-/-- Blueprint `proposition-bound-largest-determinant-weight--1`: Rankin–Selberg upper bound.
+/-- Blueprint `proposition-bound-largest-determinant-weight`: Rankin–Selberg upper bound.
 
 Let `U₀` be an affine smooth geometrically connected curve over `𝔽_q` and let `ℱ ≠ 0` be an
 `ι`-real lisse Weil sheaf on it all of whose irreducible constituents have determinant weight
@@ -636,11 +637,11 @@ weight `w` is punctually `ι`-pure of weight `w` on all of `C₀`.
 
 At a closed point of `U₀` this is the hypothesis, the local Frobenius of `C₀` being conjugate to
 the image of that of `U₀`. At a boundary point `s` the middle extension of `𝒢|_{U₀}` is `𝒢`
-itself (`lemma-boundary-stalk--2`), so the semi-continuity argument runs with the Euler
+itself (`lemma-boundary-stalk`), so the semi-continuity argument runs with the Euler
 product of the lisse sheaf `𝒢` on an affine neighbourhood of `s`
-(`theorem-trace-formula-euler-product--4`); applied to `𝒢` and to its dual `𝒢 ^ ∨`, whose
+(`theorem-trace-formula-euler-product`); applied to `𝒢` and to its dual `𝒢 ^ ∨`, whose
 eigenvalues are the inverses of those of `𝒢`, it gives an upper bound `w` and a lower bound `w`
-(`corollary-unramified-boundary-point--2`,
+(`corollary-unramified-boundary-point`,
 `AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_forall_mem_range`). -/
 theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
@@ -664,7 +665,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
 -- The constituent bound elaborates exterior powers of direct sums of subquotients.
-/-- Steps 1–3 of `theorem-purity-real-sheaves-curves--1`, for the composition factors.
+/-- Steps 1–3 of `theorem-purity-real-sheaves-curves`, for the composition factors.
 
 Let `ρ` be an `ι`-real lisse Weil representation on a smooth geometrically connected affine
 curve, and `0 = F 0 ⋖ F 1 ⋖ ⋯ ⋖ F n = ρ` a composition series. Then every composition factor
@@ -676,7 +677,7 @@ The semisimplification `S = ⨁ i, Q i` has the local polynomials of `ρ`, so it
 real (`proposition-weights-under-usual-operations`); by the exterior-power rule (`sk-p-exterior`)
 its constituents have determinant weight at most `B + γ`, where `B` is the sum of the determinant
 weights of those factors counted with rank. The Rankin–Selberg bound
-(`proposition-bound-largest-determinant-weight--1`) then bounds every local eigenvalue of `E` by
+(`proposition-bound-largest-determinant-weight`) then bounds every local eigenvalue of `E` by
 `B + γ`. At a closed point `x`, the product of an eigenvalue `β` of `Q j` with all eigenvalues of
 the factors of weight `> γ` is such an eigenvalue (`lemma-filtrations-spectra`), of weight
 `wt β + B`; so `wt β ≤ γ`. The weights of the eigenvalues of `Q j` sum to the weight
@@ -756,22 +757,17 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
     have hRirr : (M₁.subquotient N₁).IsIrreducible :=
       eτ.isIrreducible_iff.1 hτ.1
     have hRlisse : W.IsLisse l (M₁.subquotient N₁) := (hSlisse.exteriorPower _).subquotient _ _
+    -- the determinant weights of the constituents of `⋀^(N + 1) S` are sums of `N + 1` entries
+    -- of the rank-counted list of determinant weights of `S`
     obtain ⟨T, hT, hTc, hTs⟩ :=
-      Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
-      (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift S (N + 1)
-      (Representation.directSumSummand Q)
-      (fun i ↦ (Representation.directSumSummandEquiv Q i).isIrreducible_iff.1 (hQirr i))
-      (fun i ↦ ((hQlisse i).of_equiv
-        (Representation.directSumSummandEquiv Q i)).hasFiniteGeometricDet)
-      (Representation.isInternal_directSumSummand Q) hcov.lt hRirr hRlisse.hasFiniteGeometricDet
+      (detWeight_subquotient_exteriorPower ι hSlisse (N + 1)).1 N₁ M₁ hRirr
     have hτnontriv : Nontrivial V' := by
       have := hτ.1
       by_contra h
       rw [not_nontrivial_iff_subsingleton] at h
       exact (bot_ne_top : (⊥ : Subrepresentation τ) ≠ ⊤)
         (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
-    have hγ'eq : γ' = (M₁.subquotient N₁).detWeight (weightCharacter ι (Nat.card K))
-        W.frobeniusLift := by
+    have hγ'eq : γ' = W.detWeight l (M₁.subquotient N₁) ι := by
       have hτlisse : W.IsLisse l τ := hRlisse.of_equiv eτ.symm
       have heq := HasDetWeight.eq (ρ := τ) ι hγ' (hτlisse.hasDetWeight ι) x
       have heq' : γ' = frobeniusWeight ι (Nat.card K)
@@ -779,20 +775,15 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
           Module.finrank (PadicAlgCl l)
             (M₁.toSubmodule ⧸ N₁.toSubmodule.comap M₁.toSubmodule.subtype) := by
         simpa only [eτ.det_apply, eτ.finrank_eq] using heq
-      exact heq'.trans (detWeight_weightCharacter ι _ _ _).symm
-    have hWM : Representation.weightMultiset (weightCharacter ι (Nat.card K)) W.frobeniusLift
-        (Representation.directSumSummand Q) = ∑ i, Multiset.replicate (d i) (w i) := by
-      simp only [Representation.weightMultiset]
+      exact heq'
+    -- the rank-counted list of `S = ⨁ Q i` repeats `w i` exactly `d i` times
+    have hWM : W.rankDetWeightMultiset l S ι = ∑ i, Multiset.replicate (d i) (w i) := by
+      rw [rankDetWeightMultiset_eq_sum ι (Representation.isInternal_directSumSummand Q)
+        (fun i ↦ (Representation.directSumSummandEquiv Q i).isIrreducible_iff.1 (hQirr i))]
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       have e := Representation.directSumSummandEquiv Q i
-      have hdet : (Representation.directSumSummand Q i).toRepresentation.detWeight
-          (weightCharacter ι (Nat.card K)) W.frobeniusLift = w i := by
-        calc
-          _ = (Q i).detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
-            e.detWeight_eq _ _
-          _ = w i := by
-            rw [detWeight_weightCharacter]
-      rw [e.finrank_eq, hdet]
+      rw [e.finrank_eq, detWeight_of_equiv ι e]
+      rfl
     have hfilter : (∑ i, Multiset.replicate (d i) (w i)).filter (γ < ·) =
         ∑ i ∈ A, Multiset.replicate (d i) (w i) := by
       have key (s : Finset (Fin n)) : (∑ i ∈ s, Multiset.replicate (d i) (w i)).filter (γ < ·) =
@@ -856,7 +847,7 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
       obtain ⟨b, hb, rfl⟩ := Multiset.mem_map.1 ha
       exact key b hb) hsum _ (Multiset.mem_map_of_mem _ hα)
 
-/-- Blueprint `theorem-purity-real-sheaves-curves--1`: Purity of real lisse sheaves on curves.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Purity of real lisse sheaves on curves.
 
 Let `C₀ / 𝔽_q` be a smooth geometrically connected curve and `ρ` an `ι`-real lisse Weil
 representation. Every irreducible constituent `σ` of `ρ` is punctually `ι`-pure of its
@@ -1039,19 +1030,19 @@ theorem exists_restriction_isAffine [SmoothOfRelativeDimension 1 p] [Geometrical
     convert h' using 1
     exact (W.toStandard.symm_apply_apply _).symm
 
-/-- Blueprint `theorem-purity-real-sheaves-curves--1`: Purity of real lisse sheaves on curves.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Purity of real lisse sheaves on curves.
 
 The main theorem of the block. Let `C₀ / 𝔽_q` be a smooth geometrically connected curve,
 `ℓ ≠ char 𝔽_q`, and `ℱ` an `ι`-real lisse Weil sheaf on it. Then every irreducible constituent
 `V` of `ℱ` is punctually `ι`-pure of weight `dw_ι (V)`, its own determinant weight. This is also
-the full statement of `theorem-purity-real-sheaves-curves--1`, whose Step 0 is the proof given here.
+the full statement of `theorem-purity-real-sheaves-curves`, whose Step 0 is the proof given here.
 (The hypothesis `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` holds for every Weil group of a
 geometrically connected curve, `AlgebraicGeometry.WeilGroup.isEtaleQuotient`.)
 
 Purity is a condition at each closed point `x` separately. Choose an affine open `U₀ ∋ x`; it is
 again a smooth geometrically connected curve, and `W(C₀)` receives a surjective restriction from
 a Weil group of `U₀` (`AlgebraicGeometry.WeilGroup.Restriction.exists_weilGroup`). The restriction
-`ℱ|_{U₀}` is lisse and `ι`-real, `V|_{U₀}` is a constituent of it (`lemma-boundary-stalk--2`), with
+`ℱ|_{U₀}` is lisse and `ι`-real, `V|_{U₀}` is a constituent of it (`lemma-boundary-stalk`), with
 the same determinant weight, and its local eigenvalues at `x` are those of `V`. The affine case
 (`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine`) applied
 on `U₀` gives purity of `V` at `x`. -/
