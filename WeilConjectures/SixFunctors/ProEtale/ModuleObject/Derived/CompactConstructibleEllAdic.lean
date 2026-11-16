@@ -1019,6 +1019,18 @@ theorem hasUniformConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
 
 /-! ### Compactness -/
 
+/-- Blueprint `corollary-ind-heart-b`, for the coefficient ring `E` and a separated finite-type
+`k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext bound for
+ind-constructible sheaves, from Ext continuity and the uniform Ext bound
+(`HasIndConstructibleExtBound.of_continuity`). -/
+theorem hasIndConstructibleExtBound_continuousMapRingObj (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
+    (hk : Finite k ∨ IsSepClosed k) :
+    HasIndConstructibleExtBound (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X) :=
+  .of_continuity (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
+    (hasUniformConstructibleExtBound_continuousMapRingObj ℓ E aX hk)
+
 /-- Blueprint `theorem-compactness-rational-coefficients`
 (`theorem-compactness-rational-coefficients`): for the coefficient ring `E` of a finite extension
 `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably closed, a
@@ -1038,8 +1050,20 @@ theorem isCompactObj_singleFunctor_continuousMapRingObj (E : Type) [NormedField 
           (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)).localizingClosure) :=
   isCompactObj_singleFunctor_of_isIndConstructibleHeart
     (isIndConstructibleHeart_continuousMapRingObj ℓ E aX)
-    (.of_continuity (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
-      (hasUniformConstructibleExtBound_continuousMapRingObj ℓ E aX hk)) M hM hL
+    (hasIndConstructibleExtBound_continuousMapRingObj ℓ E aX hk) M hM hL
+
+/-- Blueprint `corollary-ind-heart-b`, for the coefficient ring `𝒪_E` and a separated finite-type
+`k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext bound for
+ind-constructible sheaves, from Ext continuity and the uniform Ext bound
+(`HasIndConstructibleExtBound.of_continuity`). -/
+theorem hasIndConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
+    (hk : Finite k ∨ IsSepClosed k) :
+    HasIndConstructibleExtBound (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) :=
+  .of_continuity (hasConstructibleExtContinuity_padicIntegersRingObj ℓ E aX)
+    (hasUniformConstructibleExtBound_padicIntegersRingObj ℓ E aX hk)
 
 /-- Blueprint `proposition-compactness-proper-direct-image`
 (`proposition-compactness-proper-direct-image--1` (3)): for the coefficient ring `𝒪_E` of a finite
@@ -1061,8 +1085,18 @@ theorem isCompactObj_singleFunctor_padicIntegersRingObj (E : Type) [Field E]
           (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)).localizingClosure) :=
   isCompactObj_singleFunctor_of_isIndConstructibleHeart
     (isIndConstructibleHeart_padicIntegersRingObj ℓ E aX)
-    (.of_continuity (hasConstructibleExtContinuity_padicIntegersRingObj ℓ E aX)
-      (hasUniformConstructibleExtBound_padicIntegersRingObj ℓ E aX hk)) M hM hL
+    (hasIndConstructibleExtBound_padicIntegersRingObj ℓ E aX hk) M hM hL
+
+/-- Blueprint `corollary-ind-heart-b`, for the coefficient ring `ℚ̄_ℓ` and a separated finite-type
+`k`-scheme `X`, `k` finite or separably closed: the constructible sheaves have the Ext bound for
+ind-constructible sheaves, from Ext continuity and the uniform Ext bound
+(`HasIndConstructibleExtBound.of_continuity`). -/
+theorem hasIndConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
+    (hk : Finite k ∨ IsSepClosed k) :
+    HasIndConstructibleExtBound (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) :=
+  .of_continuity (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
+    (hasUniformConstructibleExtBound_padicAlgClRingObj ℓ aX hk)
 
 /-- Blueprint `theorem-compactness-rational-coefficients`
 (`theorem-compactness-rational-coefficients`): for the coefficient ring `ℚ̄_ℓ` and a separated
@@ -1082,7 +1116,6 @@ theorem isCompactObj_singleFunctor_padicAlgClRingObj {X : Scheme.{u}}
           (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)).localizingClosure) :=
   isCompactObj_singleFunctor_of_isIndConstructibleHeart
     (isIndConstructibleHeart_padicAlgClRingObj ℓ aX)
-    (.of_continuity (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
-      (hasUniformConstructibleExtBound_padicAlgClRingObj ℓ aX hk)) M hM hL
+    (hasIndConstructibleExtBound_padicAlgClRingObj ℓ aX hk) M hM hL
 
 end AlgebraicGeometry.ProEtale.CondensedRing

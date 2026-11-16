@@ -388,6 +388,123 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj 
     (compactlyGenerates_padicAlgClRingObj ℓ aX hk).1
     (compactlyGenerates_padicAlgClRingObj ℓ aY hk).1
 
+include aX hk in
+/-- `Rf_! : Loc(Dᵇc(X, E)) ⥤ Loc(Dᵇc(Y, E))` is a left adjoint
+(`exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj`). -/
+theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (rightDerivedLowerShriekLocalizing (lowerShriek_continuousMapRingObj ℓ E aY c)).IsLeftAdjoint :=
+  let ⟨G, adj, _⟩ :=
+    exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj ℓ aX aY c hk E
+  ⟨G, ⟨adj⟩⟩
+
+/-- Blueprint `theorem-existence-exceptional-inverse-image--1`, for the coefficient ring `E`:
+the exceptional inverse image `f^! : Loc(Dᵇc(Y)) ⥤ Loc(Dᵇc(X))` attached to a compactification
+`c` of `f`, a right adjoint of `Rf_!`. It is an arbitrary choice of right adjoint, unique up to
+unique isomorphism; only the adjunction
+`rightDerivedUpperShriekLocalizingAdjunction_continuousMapRingObj` should be used about it. -/
+noncomputable def rightDerivedUpperShriekLocalizing_continuousMapRingObj (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y ⥤
+      LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj ℓ aX aY c hk E
+  (rightDerivedLowerShriekLocalizing (lowerShriek_continuousMapRingObj ℓ E aY c)).rightAdjoint
+
+/-- The adjunction `Rf_! ⊣ f^!` on `Loc(Dᵇc)` with coefficients `E`. -/
+noncomputable def rightDerivedUpperShriekLocalizingAdjunction_continuousMapRingObj (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    rightDerivedLowerShriekLocalizing (lowerShriek_continuousMapRingObj ℓ E aY c) ⊣
+      rightDerivedUpperShriekLocalizing_continuousMapRingObj ℓ aX aY c hk E :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj ℓ aX aY c hk E
+  Adjunction.ofIsLeftAdjoint _
+
+/-- `f^!` commutes with shifts, as a right adjoint of `Rf_!`, which commutes with shifts. -/
+noncomputable instance (E : Type)
+    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (rightDerivedUpperShriekLocalizing_continuousMapRingObj ℓ aX aY c hk E).CommShift ℤ :=
+  Adjunction.rightAdjointCommShift
+    (rightDerivedUpperShriekLocalizingAdjunction_continuousMapRingObj ℓ aX aY c hk E) ℤ
+
+
+
+include aX hk in
+/-- `Rf_! : Loc(Dᵇc(X, 𝒪_E)) ⥤ Loc(Dᵇc(Y, 𝒪_E))` is a left adjoint
+(`exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj`). -/
+theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj (E : Type)
+    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    (rightDerivedLowerShriekLocalizing (lowerShriek_padicIntegersRingObj ℓ E aY c)).IsLeftAdjoint :=
+  let ⟨G, adj, _⟩ :=
+    exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj ℓ aX aY c hk E
+  ⟨G, ⟨adj⟩⟩
+
+/-- Blueprint `theorem-existence-exceptional-inverse-image--1`, for the coefficient ring `𝒪_E`:
+the exceptional inverse image `f^! : Loc(Dᵇc(Y)) ⥤ Loc(Dᵇc(X))` attached to a compactification
+`c` of `f`, a right adjoint of `Rf_!`. It is an arbitrary choice of right adjoint, unique up to
+unique isomorphism; only the adjunction
+`rightDerivedUpperShriekLocalizingAdjunction_padicIntegersRingObj` should be used about it. -/
+noncomputable def rightDerivedUpperShriekLocalizing_padicIntegersRingObj (E : Type)
+    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) Y ⥤
+      LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj ℓ aX aY c hk E
+  (rightDerivedLowerShriekLocalizing (lowerShriek_padicIntegersRingObj ℓ E aY c)).rightAdjoint
+
+/-- The adjunction `Rf_! ⊣ f^!` on `Loc(Dᵇc)` with coefficients `𝒪_E`. -/
+noncomputable def rightDerivedUpperShriekLocalizingAdjunction_padicIntegersRingObj (E : Type)
+    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    rightDerivedLowerShriekLocalizing (lowerShriek_padicIntegersRingObj ℓ E aY c) ⊣
+      rightDerivedUpperShriekLocalizing_padicIntegersRingObj ℓ aX aY c hk E :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj ℓ aX aY c hk E
+  Adjunction.ofIsLeftAdjoint _
+
+/-- `f^!` commutes with shifts, as a right adjoint of `Rf_!`, which commutes with shifts. -/
+noncomputable instance (E : Type)
+    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    (rightDerivedUpperShriekLocalizing_padicIntegersRingObj ℓ aX aY c hk E).CommShift ℤ :=
+  Adjunction.rightAdjointCommShift
+    (rightDerivedUpperShriekLocalizingAdjunction_padicIntegersRingObj ℓ aX aY c hk E) ℤ
+
+
+
+include aX hk in
+/-- `Rf_! : Loc(Dᵇc(X, ℚ̄_ℓ)) ⥤ Loc(Dᵇc(Y, ℚ̄_ℓ))` is a left adjoint
+(`exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj`). -/
+theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj :
+    (rightDerivedLowerShriekLocalizing (lowerShriek_padicAlgClRingObj ℓ aY c)).IsLeftAdjoint :=
+  let ⟨G, adj, _⟩ :=
+    exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj ℓ aX aY c hk
+  ⟨G, ⟨adj⟩⟩
+
+/-- Blueprint `theorem-existence-exceptional-inverse-image--1`, for the coefficient ring `ℚ̄_ℓ`:
+the exceptional inverse image `f^! : Loc(Dᵇc(Y)) ⥤ Loc(Dᵇc(X))` attached to a compactification
+`c` of `f`, a right adjoint of `Rf_!`. It is an arbitrary choice of right adjoint, unique up to
+unique isomorphism; only the adjunction
+`rightDerivedUpperShriekLocalizingAdjunction_padicAlgClRingObj` should be used about it. -/
+noncomputable def rightDerivedUpperShriekLocalizing_padicAlgClRingObj :
+    LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y ⥤
+      LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj ℓ aX aY c hk
+  (rightDerivedLowerShriekLocalizing (lowerShriek_padicAlgClRingObj ℓ aY c)).rightAdjoint
+
+/-- The adjunction `Rf_! ⊣ f^!` on `Loc(Dᵇc)` with coefficients `ℚ̄_ℓ`. -/
+noncomputable def rightDerivedUpperShriekLocalizingAdjunction_padicAlgClRingObj :
+    rightDerivedLowerShriekLocalizing (lowerShriek_padicAlgClRingObj ℓ aY c) ⊣
+      rightDerivedUpperShriekLocalizing_padicAlgClRingObj ℓ aX aY c hk :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj ℓ aX aY c hk
+  Adjunction.ofIsLeftAdjoint _
+
+/-- `f^!` commutes with shifts, as a right adjoint of `Rf_!`, which commutes with shifts. -/
+noncomputable instance :
+    (rightDerivedUpperShriekLocalizing_padicAlgClRingObj ℓ aX aY c hk).CommShift ℤ :=
+  Adjunction.rightAdjointCommShift
+    (rightDerivedUpperShriekLocalizingAdjunction_padicAlgClRingObj ℓ aX aY c hk) ℤ
+
+
+
 end EllAdic
 
 end AlgebraicGeometry.ProEtale.CondensedRing
