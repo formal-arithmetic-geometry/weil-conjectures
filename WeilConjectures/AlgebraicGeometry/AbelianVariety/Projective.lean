@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 # Abelian varieties are projective
 
 An abelian variety admits a closed immersion into a projective space over the base field, hence
-carries an ample invertible module (`lemma-symmetric-ample-sheaf`, Stacks 0BFA), and
+carries an ample invertible module (Stacks 0BFA), and
 the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
@@ -65,7 +65,7 @@ noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpOb
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
-/-- Blueprint `lemma-symmetric-ample-sheaf`: Abelian
+/-- Abelian
 varieties are projective.
 
 Every abelian variety `A` over a field `K` admits a closed immersion into a projective space
@@ -85,7 +85,7 @@ theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spe
   have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
   exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Blueprint `lemma-symmetric-ample-sheaf`: Abelian
+/-- Abelian
 varieties are projective.
 
 Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the
@@ -103,7 +103,7 @@ theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
   rw [tensorPow_succ, tensorPow_zero]
   exact (ρ_ _).symm
 
-/-- Blueprint `lemma-symmetric-ample-sheaf`: A symmetric ample module.
+/-- A symmetric ample module.
 
 Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then the
 symmetrisation `L ⊗ [-1]^* L` is ample: `[-1]` is an automorphism, so `[-1]^* L` is ample, and a
@@ -118,7 +118,7 @@ theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpOb
   rw [Over.w ι[A]] at h
   exact hample.tensorObj h
 
-/-- Blueprint `lemma-symmetric-ample-sheaf`: A symmetric ample module.
+/-- A symmetric ample module.
 
 The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is
 *symmetric*, that is `[-1]^* N ≅ N`: since `[-1] ∘ [-1] = id`, one has
@@ -133,7 +133,7 @@ theorem IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation
   exact ⟨e ≪≫ (Iso.refl _ ⊗ᵢ ((pullbackComp ι[A].left ι[A].left).app L ≪≫
     (pullbackCongr h).app L ≪≫ (pullbackId A.left).app L)) ≪≫ β_ _ _⟩
 
-/-- Blueprint `lemma-symmetric-ample-sheaf`: an abelian variety has a symmetric ample invertible
+/-- An abelian variety has a symmetric ample invertible
 module: the symmetrisation `N = L ⊗ [-1]^* L` of an ample invertible module `L`
 (`IsAbelianVariety.exists_isAmple`) is invertible, ample
 (`IsAbelianVariety.isAmple_symmetrisation`) and symmetric, `[-1]^* N ≅ N`
