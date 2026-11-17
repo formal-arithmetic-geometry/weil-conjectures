@@ -38,13 +38,12 @@ is perfect: its tensor–internal-hom adjoint is an isomorphism.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`
- : `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
-- `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`
- : the same isomorphism, natural in `K`, for any coefficient
-  category in which the projection formula holds.
-- `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`
- : `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
+- `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`:
+  `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
+- `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`: the same isomorphism,
+  natural in `K`, for any coefficient category in which the projection formula holds.
+- `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`:
+  `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`:
   under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
 
