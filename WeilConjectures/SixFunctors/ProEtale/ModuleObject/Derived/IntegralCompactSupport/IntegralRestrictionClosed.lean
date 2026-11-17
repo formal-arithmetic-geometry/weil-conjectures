@@ -380,31 +380,31 @@ integral Brown compact-support functor, independently of the chosen boundary com
 
 Proof plan (the node's steps):
 1. Let `j : U ⟶ X` be the open complement `i.openComplement.ι`.  `k` is Noetherian, so `X` is
-   Noetherian (lem-weil-pbc-finite-type-over-noetherian) and every open of `X` is
-   quasi-compact (lem-weil-pbc-noetherian-open-subscheme-noetherian); hence `j` is
-   quasi-compact, of finite type (lem-weil-pbc-qc-open-immersion-finite-type) and separated
-   (lem-weil-pbc-separated-cancellation (a)).  `U` with `a_X ∘ j` is a standing scheme
-   (lem-weil-pbc-proper-fp-permanence (e), def-weil-finite-type-morphism).  The pulled-back
+   Noetherian (finite type over a Noetherian base) and every open of `X` is
+   quasi-compact (opens of a Noetherian scheme are Noetherian); hence `j` is
+   quasi-compact, of finite type (a quasi-compact open immersion is one) and separated
+   (cancellation for separated morphisms).  `U` with `a_X ∘ j` is a standing scheme
+   (permanence of the standing hypotheses).  The pulled-back
    `formal_closed_support_sheaves` applies to `O_E`; its clause (2) makes `i_*` exact.
-2. `i` is proper (lem-weil-pbc-closed-immersion-proper (a)); use the compactification
-   `(id_Z, i)`.  The formula and comparison of proposition-construction-independence-rf-shriek give
+2. `i` is proper (closed immersions are proper); use the compactification
+   `(id_Z, i)`.  The formula and comparison for compact support along a compactification give
    `Ri_! ≅ Ri_* D((id_Z)_!) = Ri_*`, and exactness of `i_*` gives `Ri_* ≅ i_*`.
-3. lemma-sections-support-closed-subscheme (1),(3) with `Λ = O_E`: the natural triangle
+3. Sections with closed support, clauses (1),(3), with `Λ = O_E`: the natural triangle
    `F → K → Rj_* j^* K → F[1]` with `F = i_* RΓ_Z K`, the fibre formula
    `RΓ_Z K ≅ i^* F`, and the adjunction `Hom_X(i_* A, K) ≃ Hom_Z(A, RΓ_Z K)`.
-4. lemma-inverse-image-tensor-product (1) for `j`: `J = j^* K ∈ Dbc(U, O_E)`.
+4. Inverse images preserve `Dbc` (clause (1)) for `j`: `J = j^* K ∈ Dbc(U, O_E)`.
 5. Direct image along the quasi-compact open immersion `j` preserves `Dbc` (for `J`):
    `C = Rj_* J ∈ Dbc(X, O_E)`.
 6. `Dbc(X, O_E)` is triangulated.  Rotating
-   (TR2 of def-weil-triangulated-category) to `C[-1] → F → K → C`, the two-out-of-three
-   condition of def-weil-triangulated-subcategory gives `F ∈ Dbc(X, O_E)`.
-7. lemma-inverse-image-tensor-product (1) for `i`: `i^* F ∈ Dbc(Z, O_E)`; by the fibre formula and
-   isomorphism invariance (definition-constructible-sheaves), `RΓ_Z K ∈ Dbc(Z, O_E)`.  This is the
+   (TR2) to `C[-1] → F → K → C`, the two-out-of-three
+   condition for triangulated subcategories gives `F ∈ Dbc(X, O_E)`.
+7. Inverse images preserve `Dbc` (clause (1)) for `i`: `i^* F ∈ Dbc(Z, O_E)`; by the fibre
+   formula and isomorphism invariance of `Dbc`, `RΓ_Z K ∈ Dbc(Z, O_E)`.  This is the
    first clause.
-8. Put `B = i^! K` (from `G`, the right adjoint of theorem-existence-exceptional-inverse-image for
+8. Put `B = i^! K` (from `G`, the right adjoint of the exceptional inverse image theorem for
 `c`) and
-   `H = RΓ_Z K`.  With det-def-localizing-closure-ctf-equals-bc (2), `K`, `H`, `B` lie in
-   the localizing categories (definition-localizing-subcategory, full).  For `A` in `Loc(Dbc(Z))`,
+   `H = RΓ_Z K`.  With the localizing-closure comparison (2), `K`, `H`, `B` lie in
+   the localizing categories (full subcategories).  For `A` in `Loc(Dbc(Z))`,
    the Brown bijection, step 2 and step 3 give
    `Φ_A : Hom(A, B) ≃ Hom(i_* A, K) ≃ Hom(A, H)`, natural in `A` and `K`.
 9. Yoneda: `α_K = Φ_B (𝟙 B)` and `β_K = Φ_H⁻¹ (𝟙 H)` are inverse, and naturality of `Φ` in

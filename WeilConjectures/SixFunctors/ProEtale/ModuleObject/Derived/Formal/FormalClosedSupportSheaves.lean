@@ -298,7 +298,7 @@ Proof plan:
 1. The open complement is quasi-compact by hypothesis; no finiteness over a field is
    needed. The coefficient comparison alpha is an isomorphism, identifying the recorded module
    operations with ringed inverse/direct image for the actual pulled-back coefficient ring.
-2. Use lem-weil-pbc-proetale-ringed-open-closed for exact closed direct image, the closed
+2. Use the ringed open–closed formalism for exact closed direct image, the closed
    counit, vanishing of open restriction of closed direct image, and localization. The
    immersion-limit-preservation node gives exact inverse image. The open-comparison node
    identifies the open counit with the restriction counit; base-change evaluation makes it
@@ -315,13 +315,14 @@ Proof plan:
 5. Kernel-map uniqueness gives additivity. Right adjoints preserve small limits
    (situation-conventions); in particular this gives left exactness.
 6. Exact closed direct image preserves monomorphisms. Apply the generic
-   lem-exc-rg-right-adjoint-preserves-injectives to obtain the injective-module assertion.
+   fact that right adjoints of exact functors preserve injectives to obtain the injective-module
+   assertion.
 7. Lift the additive adjunction termwise and to homotopy categories using
-   lem-weil-pbc-termwise-adjunction-homotopy. Exact closed direct image takes every
-   acyclic complex to an acyclic complex (lem-sp-exact-functor-preserves-homology).
+   termwise adjunction on homotopy categories. Exact closed direct image takes every
+   acyclic complex to an acyclic complex (exact functors preserve homology).
    Adjunction therefore identifies maps from an acyclic complex to the image of a
    K-injective complex with zero homotopy classes. This proves K-injectivity, including
-   unbounded complexes, by def-pur-kinjective-complex.
+   unbounded complexes, by the definition of K-injective complexes.
 
 The first conjunct is the canonical natural identification of clause (1).
 The existential additive instance only makes the termwise functor on complexes available.
