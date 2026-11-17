@@ -60,7 +60,7 @@ powers `ℱ^{⊗ k}`, whose boundary eigenvalues include the `k`-th powers of th
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: boundary semicontinuity of
   weights on a smooth geometrically connected affine curve.
 
-The case of a general, not necessarily affine, curve (Step 0 of the blueprint proof) is
+The case of a general, not necessarily affine, curve (the reduction to the affine case) is
 `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`
 (`WeilConjectures.WeilSheaf.RealPurity`).
 -/
