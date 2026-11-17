@@ -20,7 +20,7 @@ at `Lp₁^* y` is `LΔ^* Lp₁^* y ≅ y` followed by the unit of `Lp₁^* ⊣ R
 compatibility of the units of the adjunctions `Lf^* ⊣ Rf_!` of proper morphisms with the
 composition isomorphisms (`ProEtale.CondensedRing.upperStarLowerShriekAdjunction_comp_unit_app`),
 which is the compatibility of `Rf_! ≅ Rf_*` with composition (clause (3) of
-`prop-functor-package` in the blueprint).
+the functor package).
 
 -/
 

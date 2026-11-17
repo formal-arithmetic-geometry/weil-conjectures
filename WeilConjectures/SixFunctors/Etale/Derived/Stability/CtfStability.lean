@@ -15,27 +15,26 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Typing
 /-!
 # Preservation on the proved finite-Tor domains
 
-This file states blueprint `proposition-six-operations-dctf` (`proposition-six-operations-dctf`) at
+This file states the six-operations preservation matrix on `Dctf` at
 a finite coefficient ring `Λ` whose exponent is invertible on the base field `k`:
 `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` bundles clauses (i)–(vi) and the
-finite-reduction part of clause (vii), with the Tor intervals of the blueprint. The integral
+finite-reduction part of clause (vii), with the Tor intervals. The integral
 part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` (`proposition-six-operations-dctf`).
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_stability`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`
-  (`proposition-six-operations-dctf`, clause (v)): `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))` on `Dctf(Y, Λ)`.
+  (clause (v)): `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))` on `Dctf(Y, Λ)`.
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`
-(`proposition-six-operations-dctf`,
-  clause (vii), integral coefficients).
+(clause (vii), integral coefficients).
 
 ## Implementation notes
 
 * The six operations are those of the ambient derived categories `D(-_ét, Λ)`; their restrictions
   to `Dctf` are `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`, …, and
   the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`
-  (`proposition-six-operations-dctf`).
+ .
 * The dimension-free internal-Hom interval `[c - b, d - a]` needs a site-perfect (dualizable)
   first variable; that it fails in general (the origin of `𝔸¹`) is
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which needs a normalized Tate
@@ -69,7 +68,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
-/-- Blueprint `proposition-six-operations-dctf`, clause (v): the exceptional inverse image is
+/-- Clause (v) of the preservation matrix: the exceptional inverse image is
 `Rf^! = 𝔻_X f^* 𝔻_Y` on `Dctf(Y, Λ)`.
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y`
@@ -92,7 +91,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
     ((verdierDual Λ aY).obj (op K))
   exact ⟨(R(f)^![Λ]).mapIso b ≪≫ e⟩
 
-/-- Blueprint `proposition-six-operations-dctf`: Preservation on the proved finite-Tor domains.
+/-- Preservation on the proved finite-Tor domains.
 
 Let `Λ` be a finite ring whose exponent is invertible on the algebraically closed field `k`, and
 `f : X ⟶ Y` a morphism over `k` of separated finite-type `k`-schemes (it is then separated of
@@ -251,7 +250,7 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
       ⟨nonempty_iso_reductionModIdeal_leftDerivedUpperStar Λ f J,
         fun K M ↦ ⟨α_ K M _⟩, nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite Λ
           f J⟩⟩
-  · -- (iii): the direct image bound of `sk-thm-sf-direct-image-tor-amplitude`
+  · -- (iii): the Tor-amplitude bound of the direct image
     obtain ⟨N, hN0, hNΛ, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
     have : NeZero N := ⟨hN0.ne'⟩
     have : IsNoetherianRing Λ := inferInstance
@@ -278,7 +277,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Blueprint `proposition-six-operations-dctf`, clause (vii), integral coefficients.
+/-- Clause (vii) of the preservation matrix, integral coefficients.
 
 Let `Λ` be a Noetherian domain complete for `I = (ϖ)` with `Λ ⧸ I` finite of exponent invertible
 on the algebraically closed field `k` (the stage `𝒪_E`), and `f : X ⟶ Y` a separated
