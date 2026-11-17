@@ -147,8 +147,7 @@ section BaseChange
 
 variable {K' : Type u} [Field K'] [Algebra K K']
 
-/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
-is étale (the geometric fibre of `A[n]`).
+/-- **Multiplication by `n` prime to the characteristic is étale** (the geometric fibre of `A[n]`).
 
 Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
 prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base change
@@ -172,37 +171,16 @@ theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [C
   refine ⟨S, hS, ?_, e⟩
   rw [hcard, Scheme.Hom.finrankΓ_pullback_snd, finrankΓ_torsionSubgroupScheme n hn]
 
-/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
-is étale (the geometric points of `A[n]`).
-
-Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
-prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
-`n`-torsion of the group `A(K')` of `K'`-valued points of `A` (the morphisms `Spec K' ⟶ A` over
-`K`) is `(ℤ/nℤ) ^ (2 * g)`.
-
-`A(K')` is the group of `K'`-points of the abelian variety `A_{K'}`
-(`AlgebraicGeometry.Scheme.pointsAddEquivBaseChangePoints`), hence divisible. For a prime
-`ℓ ∣ n`, the `ℓ`-torsion of `A(K')` is the set of `K'`-points of `A[ℓ]`
-(`AlgebraicGeometry.torsionByPointsEquiv`), that is of the finite étale `A[ℓ]_{K'}`, which has
-`ℓ ^ (2 * g)` of them (`AlgebraicGeometry.card_points_eq_finrankΓ`); then
-`AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime` concludes. -/
-theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
-    (hn : 0 < n) (hnp : ¬ p ∣ n) :
-    Nonempty (AddSubgroup.torsionBy
-        (Additive (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K'))) ⟶ A)) (n : ℤ) ≃+
-      (Fin (2 * IsAbelianVariety.dim A) → ZMod n)) := by
+/-- The `ℓ`-torsion of the group `A(K')` of `K'`-points, for a prime `ℓ` prime to the
+characteristic and `K'` algebraically closed, has `ℓ ^ (2 * g)` elements: it is the set of
+`K'`-points of the finite étale `A[ℓ]_{K'}` (`AlgebraicGeometry.torsionByPointsEquiv`,
+`AlgebraicGeometry.card_points_eq_finrankΓ`). -/
+theorem natCard_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (ℓ : ℕ) (hℓ : ℓ.Prime)
+    (hℓp : ¬ p ∣ ℓ) :
+    Nat.card (AddSubgroup.torsionBy
+        (Additive (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K'))) ⟶ A)) (ℓ : ℤ)) =
+      ℓ ^ (2 * IsAbelianVariety.dim A) := by
   set y := Spec.map (CommRingCat.ofHom (algebraMap K K'))
-  have : CharP K' p := charP_of_injective_algebraMap (algebraMap K K').injective p
-  let e := pointsAddEquivBaseChangePoints A y
-  let _ : DivisibleBy (Additive (Over.mk y ⟶ A)) ℤ :=
-    divisibleByOfSMulRightSurj _ _ fun {m} hm x ↦ by
-      obtain ⟨a, ha⟩ := surjective_npow_points (A := (Over.pullback y).obj A) m.natAbs
-        (Int.natAbs_pos.2 hm) (e x).toMul
-      refine ⟨m.sign • e.symm (.ofMul a), show m • (m.sign • _) = x from ?_⟩
-      rw [smul_smul, Int.mul_sign_self, natCast_zsmul, ← map_nsmul, e.symm_apply_eq]
-      exact congrArg Additive.ofMul ha
-  refine AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime _ _ hn.ne' fun ℓ hℓ hℓn ↦ ?_
-  have hℓp : ¬ p ∣ ℓ := fun h ↦ hnp (h.trans hℓn)
   have := isFinite_torsionSubgroupScheme A ℓ hℓ.pos
   have := etale_torsionSubgroupScheme p A ℓ hℓ.pos hℓp
   have : IsFinite ((Over.pullback y).obj (torsionSubgroupScheme A ℓ)).hom :=
@@ -217,6 +195,53 @@ theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p
         card_points_eq_finrankΓ _
     _ = ℓ ^ (2 * IsAbelianVariety.dim A) :=
       (Scheme.Hom.finrankΓ_pullback_snd _ y).trans (finrankΓ_torsionSubgroupScheme ℓ hℓ.pos)
+
+/-- **The dimension of an abelian variety is invariant under base change** to a larger
+algebraically closed field: for a prime `ℓ` prime to the characteristic, the `ℓ`-torsion of
+`A(K') = A_{K'}(K')` has `ℓ ^ (2 * dim A)` elements (`natCard_torsionBy_points`) and
+`ℓ ^ (2 * dim A_{K'})` elements (`nonempty_addEquiv_torsionBy` for `A_{K'}`). -/
+theorem dim_pullback [IsAlgClosed K'] (p : ℕ) [CharP K p] :
+    IsAbelianVariety.dim
+        ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap K K')))).obj A) =
+      IsAbelianVariety.dim A := by
+  set y := Spec.map (CommRingCat.ofHom (algebraMap K K'))
+  have : CharP K' p := charP_of_injective_algebraMap (algebraMap K K').injective p
+  obtain ⟨ℓ, hℓ, hℓp⟩ : ∃ ℓ : ℕ, ℓ.Prime ∧ ¬ p ∣ ℓ := by
+    obtain ⟨ℓ, hpℓ, hℓ⟩ := Nat.exists_infinite_primes (p + 1)
+    refine ⟨ℓ, hℓ, fun h ↦ ?_⟩
+    rcases (Nat.dvd_prime hℓ).1 h with rfl | rfl
+    · exact CharP.char_ne_one K 1 rfl
+    · omega
+  obtain ⟨e⟩ := nonempty_addEquiv_torsionBy (K := K') p ((Over.pullback y).obj A) ℓ hℓ.pos hℓp
+  have h₁ := natCard_torsionBy_points A (K' := K') p ℓ hℓ hℓp
+  rw [Nat.card_congr ((AddSubgroup.torsionByCongr (pointsAddEquivBaseChangePoints A y)
+    (ℓ : ℤ)).trans e).toEquiv] at h₁
+  simp only [Nat.card_fun, Nat.card_zmod, Nat.card_eq_fintype_card, Fintype.card_fin] at h₁
+  have h₂ := Nat.pow_right_injective hℓ.two_le h₁
+  omega
+
+/-- **Multiplication by `n` prime to the characteristic is étale** (the geometric points of `A[n]`).
+
+Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
+prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
+`n`-torsion of the group `A(K')` of `K'`-valued points of `A` (the morphisms `Spec K' ⟶ A` over
+`K`) is `(ℤ/nℤ) ^ (2 * g)`.
+
+`A(K')` is the group of `K'`-points of the abelian variety `A_{K'}` over `K'`
+(`AlgebraicGeometry.Scheme.pointsAddEquivBaseChangePoints`), whose `n`-torsion is
+`(ℤ/nℤ) ^ (2 * dim A_{K'})` by the integral Tate module statement
+`AlgebraicGeometry.nonempty_addEquiv_torsionBy`, and `dim A_{K'} = dim A`
+(`AlgebraicGeometry.IsAbelianVariety.dim_pullback`). -/
+theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
+    (hn : 0 < n) (hnp : ¬ p ∣ n) :
+    Nonempty (AddSubgroup.torsionBy
+        (Additive (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K'))) ⟶ A)) (n : ℤ) ≃+
+      (Fin (2 * IsAbelianVariety.dim A) → ZMod n)) := by
+  set y := Spec.map (CommRingCat.ofHom (algebraMap K K'))
+  have : CharP K' p := charP_of_injective_algebraMap (algebraMap K K').injective p
+  obtain ⟨e⟩ := nonempty_addEquiv_torsionBy (K := K') p ((Over.pullback y).obj A) n hn hnp
+  rw [dim_pullback A p] at e
+  exact ⟨(AddSubgroup.torsionByCongr (pointsAddEquivBaseChangePoints A y) (n : ℤ)).trans e⟩
 
 end BaseChange
 
