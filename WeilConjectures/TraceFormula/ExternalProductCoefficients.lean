@@ -95,7 +95,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
   [QuasiCompact S.hom] [IsSeparated S.hom] (a : X ⟶ S)
 
-/-- Blueprint `definition-relative-dualizing-complex`: the *relative dualizing complex*
+/-- The *relative dualizing complex*
 `ω_{X/S} = Ra^! ℚ̄_ℓ` of `a : X ⟶ S`, with coefficients in `ℚ̲̄_ℓ`. For `S = Spec k` this is
 `AlgebraicGeometry.ProEtale.CondensedRing.dualizingComplex`. -/
 noncomputable def boundedConstructibleDualizingComplex :
@@ -120,7 +120,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
   [QuasiCompact S.hom] [IsSeparated S.hom] (a : X ⟶ S)
 
-/-- Blueprint `definition-relative-dualizing-complex`: the *relative dualizing complex*
+/-- The *relative dualizing complex*
 `ω_{X/S} = Ra^! E` of `a : X ⟶ S`, with coefficients in `E̲`. -/
 noncomputable def boundedConstructibleDualizingComplex :
     Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=

@@ -30,7 +30,7 @@ on the endomorphisms of the terms, for instance the categorical traces of `C`
 chain endomorphism of a bounded complex only depends on its homotopy class
 (`Homotopy.trace_eq`).
 
-This is blueprint `proposition-properties-trace`; the fact that the evaluation and coevaluation
+These are the basic properties of the trace; the fact that the evaluation and coevaluation
 are maps of complexes satisfying the triangle identities is `CochainComplex.exactPairingRightDual`.
 -/
 
@@ -45,24 +45,22 @@ section
 variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
   [BraidedCategory C]
 
-/-- The categorical trace is additive (used for blueprint `proposition-properties-trace`). -/
+/-- The categorical trace is additive. -/
 lemma trace_add {X : C} [HasRightDual X] (f g : X ⟶ X) : trace (f + g) = trace f + trace g := by
   simp [trace]
 
-/-- The categorical trace is linear over a ring `R` for which `C` is `R`-linear monoidal
-(`proposition-properties-trace`, linearity). -/
+/-- The categorical trace is linear over a ring `R` for which `C` is `R`-linear monoidal. -/
 lemma trace_smul {R : Type*} [Semiring R] [Linear R C] [MonoidalLinear R C] {X : C}
     [HasRightDual X] (r : R) (f : X ⟶ X) : trace (r • f) = r • trace f := by
   simp [trace]
 
-/-- The categorical trace as an additive map (used for blueprint
-`proposition-properties-trace`). -/
+/-- The categorical trace as an additive map. -/
 noncomputable def traceAddMonoidHom (X : C) [HasRightDual X] : (X ⟶ X) →+ (𝟙_ C ⟶ 𝟙_ C) where
   toFun := trace
   map_zero' := by simp [trace]
   map_add' := trace_add
 
-/-- The additive categorical trace is the trace (`proposition-properties-trace`). -/
+/-- The additive categorical trace is the trace. -/
 @[simp]
 lemma traceAddMonoidHom_apply {X : C} [HasRightDual X] (f : X ⟶ X) :
     traceAddMonoidHom X f = trace f := rfl
@@ -71,8 +69,7 @@ end
 
 variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
 
-/-- The trace of `f : Y ⟶ Y` may be computed with the dual of an object `X ≅ Y`
-(used for blueprint `proposition-properties-trace`). -/
+/-- The trace of `f : Y ⟶ Y` may be computed with the dual of an object `X ≅ Y`. -/
 lemma trace_eq_of_iso_rightDual {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y)
     (f : Y ⟶ Y) (g : Y ⟶ X) (hg : g = e.inv) :
     η_ X Xᘁ ≫ e.hom ▷ Xᘁ ≫ f ▷ Xᘁ ≫ (β_ Y Xᘁ).hom ≫ Xᘁ ◁ g ≫ ε_ X Xᘁ = trace f := by
@@ -87,7 +84,7 @@ namespace Homotopy
 
 variable {C : Type*} [Category* C] [Preadditive C] {K : CochainComplex C ℤ} {v v' : K ⟶ K}
 
-/-- Blueprint `proposition-properties-trace` (homotopy invariance): let `τ` be a family of
+/-- Let `τ` be a family of
 additive functions on the endomorphisms of the terms of a bounded complex `K` which is cyclic,
 `τ (g ≫ h) = τ (h ≫ g)`. Then `∑ₚ (-1)ᵖ τ(vᵖ)` only depends on the homotopy class of
 `v : K ⟶ K`: if `v - v' = d h + h d`, the terms `τ(dh)` and `τ(hd)` cancel in pairs. -/
@@ -131,7 +128,7 @@ theorem sum_negOnePow_smul_eq (ho : Homotopy v v') (a b : ℤ) [K.IsStrictlyGE a
     by_contra hp'
     exact hp (hg p hp')
 
-/-- Blueprint `proposition-properties-trace` (homotopy invariance): the alternating sum
+/-- The alternating sum
 `∑ₚ (-1)ᵖ tr(vᵖ | Kᵖ)` of the categorical traces of the components of a chain endomorphism `v` of
 a bounded complex only depends on the homotopy class of `v`. -/
 theorem sum_negOnePow_smul_trace_eq {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C]
@@ -143,7 +140,7 @@ theorem sum_negOnePow_smul_trace_eq {C : Type*} [Category C] [Preadditive C] [Mo
   ho.sum_negOnePow_smul_eq a b (fun p ↦ traceAddMonoidHom (K.X p))
     (fun _ _ g h ↦ trace_comp_comm g h)
 
-/-- Blueprint `proposition-properties-trace` (homotopy invariance): for a bounded complex `P` of
+/-- For a bounded complex `P` of
 finite free modules over a commutative ring `R`, the supertrace `∑ᵢ (-1)ⁱ Tr(vⁱ | Pⁱ)` of a chain
 endomorphism `v` only depends on the homotopy class of `v`. -/
 theorem sum_negOnePow_smul_linearMapTrace_eq {R : Type*} [CommRing R]
@@ -167,7 +164,7 @@ section
 variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
   [BraidedCategory C] (K : CochainComplex C ℤ) [∀ n, HasRightDual (K.X n)]
 
-/-- Blueprint `proposition-properties-trace`: the contribution of the summand `Kᵖ ⊗ (K^∨)⁻ᵖ` to
+/-- The contribution of the summand `Kᵖ ⊗ (K^∨)⁻ᵖ` to
 the trace of `v : K ⟶ K` is the trace of `vᵖ`. -/
 lemma rightDual.coevPQ_comp_evalPQ (v : K ⟶ K) (p : ℤ) :
     coevPQ K p (-p) (add_neg_cancel p) ≫ v.f p ▷ K.rightDual.X (-p) ≫
@@ -191,20 +188,20 @@ variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [Monoidal
   [K.IsStrictlyLE b]
 
 /-- The right dual `K^∨` of a bounded complex `K` whose terms have right duals, for the exact
-pairing `CochainComplex.exactPairingRightDual` (`proposition-properties-trace`). -/
+pairing `CochainComplex.exactPairingRightDual`. -/
 @[instance_reducible]
 noncomputable def hasRightDual : HasRightDual K :=
   letI := exactPairingRightDual K a b
   ⟨K.rightDual⟩
 
 /-- The categorical trace of a chain endomorphism of a bounded complex `K`, for the right dual
-`CochainComplex.hasRightDual` (`proposition-properties-trace`). -/
+`CochainComplex.hasRightDual`. -/
 lemma trace_eq (v : K ⟶ K) :
     letI := hasRightDual K a b
     trace v = rightDual.coev K a b ≫ v ▷ K.rightDual ≫ (β_ K K.rightDual).hom ≫
       rightDual.eval K := rfl
 
-/-- Blueprint `proposition-properties-trace` (c): the categorical trace of a chain endomorphism
+/-- The categorical trace of a chain endomorphism
 `v` of a bounded complex `K`, with respect to the Koszul braiding and the termwise dual `K^∨`, is
 the supertrace `∑ₚ (-1)ᵖ tr(vᵖ | Kᵖ)`, as an endomorphism of `(𝟙_).X 0 ≅ 𝟙_ C`. -/
 theorem trace_f_zero (v : K ⟶ K) :
@@ -223,7 +220,7 @@ theorem trace_f_zero (v : K ⟶ K) :
   rw [reassoc_of% rightDual.ι_eval_f, Iso.inv_hom_id, comp_id, mul_neg, Int.negOnePow_neg,
     Int.negOnePow_mul_self, ← rightDual.coevPQ_comp_evalPQ K v p]
 
-/-- Blueprint `proposition-properties-trace` (c): the categorical trace of a chain endomorphism
+/-- The categorical trace of a chain endomorphism
 `v` of a bounded complex `K` is the supertrace `∑ₚ (-1)ᵖ tr(vᵖ | Kᵖ)`, placed in degree `0` of the
 unit complex. -/
 theorem trace_f_zero_eq (v : K ⟶ K) :
@@ -249,7 +246,7 @@ variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [Monoidal
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   {K : CochainComplex C ℤ} [∀ n, HasRightDual (K.X n)]
 
-/-- Blueprint `proposition-properties-trace`: the categorical trace of a chain endomorphism of a
+/-- The categorical trace of a chain endomorphism of a
 bounded complex only depends on its homotopy class. -/
 theorem trace_eq {v v' : K ⟶ K} (ho : Homotopy v v') (a b : ℤ) [K.IsStrictlyGE a]
     [K.IsStrictlyLE b] :
