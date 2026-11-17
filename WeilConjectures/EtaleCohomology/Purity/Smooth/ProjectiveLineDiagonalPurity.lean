@@ -141,7 +141,7 @@ theorem supportedTatePure_projectiveSpaceDiagonal_line :
 
 /-- *The first diagonal integral* of the projective line, with the purity
 of the diagonal supplied: for `P = ℙ¹_S` and the diagonal `Δ : P ⟶ W = ℙ¹_P`, with the cycle class
-`δ = c₁(𝒪(Δ))` and the trace of the notes, `Tr_p(δ) = 1`. This is
+`δ = c₁(𝒪(Δ))` and the trace map, `Tr_p(δ) = 1`. This is
 `AlgebraicGeometry.Etale.projectiveLineTrace_diagonal` at the purity
 `supportedTatePure_projectiveSpaceDiagonal_line` and the regular immersion
 `isRegularImmersion_projectiveSpaceDiagonal_line`. -/
