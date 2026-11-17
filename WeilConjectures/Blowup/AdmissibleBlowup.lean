@@ -18,15 +18,14 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 # Admissible blow-ups and boundary separation
 
 This file records the admissible blow-up vocabulary and the boundary-separation
-interface of the proof of Nagata's compactification theorem, following the revised
-blueprint (`blueprint/src/version/detailed/nagata/nagata_new.tex`). The two-open
+interface of the proof of Nagata's compactification theorem. The two-open
 compactification theorem reaches its target by the boundary-separation route rather
 than by module flattening: it uses blow-ups of sums of ideals to separate boundary
 pieces (Stacks Tag 0F3V), common modifications, and the dense-source valuative
 criterion. Module flattening (Stacks Tags 0815/081R and 081P/081L) is not on the
 formalized route at all: it is the Stacks Project's proof of Tag 081S, but that chain
-bottoms out in the dévissage sections of Stacks §§38.4–38.10, which exist neither in
-Mathlib nor in the blueprint. Tag 081S — which lives in
+bottoms out in the dévissage sections of Stacks §§38.4–38.10, which do not exist in
+Mathlib. Tag 081S — which lives in
 `WeilConjectures.Compactification.EliminationOfIndeterminacy` — is formalized instead via Conrad's
 Theorem 2.4 and Zariski's Main Theorem (`Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`,
 together with Stacks Tag 04II, already available as
@@ -98,7 +97,7 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap` by
   `Scheme.IdealSheafData.quasiCompact_blowupMap` and
   `Scheme.IdealSheafData.isCompact_coe_compl_support`.
 
-## Further inputs (Stacks citations of the revised blueprint)
+## Further inputs (Stacks citations)
 
 The finite-degree approximation on the blow-up itself
 (`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks Tag 0803,
@@ -129,8 +128,7 @@ namespace AlgebraicGeometry
 variable (X : Scheme.{u}) (U : X.Opens)
 
 /-- A `U`-admissible blow-up center on `X`; the associated `U`-admissible blow-up is the
-blow-up `I.blowup` of the center, with structure morphism `I.blowupMap`.
-(Blueprint: `def:nagata-admissible-blowup`.) -/
+blow-up `I.blowup` of the center, with structure morphism `I.blowupMap`. -/
 structure IsAdmissible where
   /-- The center ideal of the blow-up. -/
   I : X.IdealSheafData
@@ -154,16 +152,14 @@ lemma le_preservedOpen : U ≤ B.preservedOpen := by
   exact Set.disjoint_left.mp B.disjoint_support hx
 
 /-- **A `U`-admissible blow-up is proper**: the properness of the blow-up of the
-center (`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
-`thm:nagata-global-blowup-proper`), the finite-typeness input being supplied by
+center (`Scheme.IdealSheafData.isProper_blowupMap`), the finite-typeness input being supplied by
 admissibility. -/
 theorem isProper_blowupMap : IsProper B.I.blowupMap :=
   B.I.isProper_blowupMap fun U ↦ B.finiteType U le_top
 
 /-- A `U`-admissible blow-up is an isomorphism over `U`: the blow-up complement
-theorem (`thm:nagata-global-blowup-complement`) applied to the disjointness of the
-center from `U`.
-(Blueprint: `lemma:nagata-admissible-blowup-over-open`.) -/
+theorem applied to the disjointness of the
+center from `U`. -/
 theorem isIso_blowupMap_restrict : IsIso (B.I.blowupMap ∣_ U) :=
   B.I.isIso_blowupMap_restrict B.disjoint_support
 
@@ -234,9 +230,8 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_p
       exact hmem
 
 /-- **Finite-degree descent of a second blow-up center** (Stacks Project Tag 0803
-together with the support computation of the proof of Tag 080B; blueprint
-`lemma:nagata-proj-closed-center-finite-degree-exists`,
-`lemma:nagata-composition-center-ideal`): given a finite-type center `I` on a qcqs
+together with the support computation of the proof of Tag 080B): given a finite-type center
+`I` on a qcqs
 scheme `X` with blow-up `π = I.blowupMap` and a finite-type center `J` on `I.blowup`,
 there are a positive degree `d` and a finite-type ideal `L ≤ I ^ d` on `X` such that
 the support of `L` is `supp I ∪ π(supp J)` and the inverse image ideal of `L` on the
@@ -258,11 +253,9 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_cente
     Scheme.IdealSheafData.coe_support_eq_of_comap_pow_mul I J hd.ne' hLle hLcomap,
     hLcomap⟩
 
-/-- **Blow-up of a product ideal** (Stacks Project Tag 080A; blueprint
-`thm:nagata-blowup-product-ideal`, `cor:nagata-blowup-product-common-refinement`).
+/-- **Blow-up of a product ideal** (Stacks Project Tag 080A).
 
-The proof follows the comparison strategy of `def:nagata-blowup-product-comparison`
-and `thm:nagata-blowup-product-ideal` of the revised blueprint and runs entirely
+The proof follows the comparison strategy and runs entirely
 through the universal property of blowing up
 (`Scheme.IdealSheafData.exists_lift_blowup` and
 `Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`, Stacks Project Tag 0806): on the
@@ -334,8 +327,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
   rw [← Category.assoc, hγ, hβ]
 
 /-- **Multiplying a center by an invertible ideal does not change the blow-up**
-(consequence of Stacks Project Tags 0807 and 080A; blueprint
-`lemma:nagata-blowup-invertible-factor`).
+(consequence of Stacks Project Tags 0807 and 080A).
 
 The proof runs through the universal property of blowing up
 (`Scheme.IdealSheafData.exists_lift_blowup` and
@@ -452,8 +444,7 @@ The composite center is `K = I * L` for the finite-degree descent `L` of `J`
 `L.comap π = (I.comap π)^d * J`. Base changing, `K.comap f = (I.comap f) * (L.comap f)`
 and, using `ρ ≫ π = (I.comap f).blowupMap ≫ f`,
 `(L.comap f).comap (I.comap f).blowupMap = ((I.comap f) · 𝒪)^d * (J.comap ρ)`, so
-`exists_blowup_mul_iso_of_comap_eq` applies verbatim over `Y`.
-(Blueprint: `thm:nagata-composition-of-blowups`.) -/
+`exists_blowup_mul_iso_of_comap_eq` applies verbatim over `Y`. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp_base_change
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (I : X.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData)
@@ -505,8 +496,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp_base_c
     rw [hinv, ← Category.assoc μ, hμ, Category.assoc, hρ, reassoc_of% he',
       ← Category.assoc, Scheme.IdealSheafData.eqToHom_comp_blowupMap hKf]
 
-/-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form; blueprint
-`thm:nagata-composition-of-blowups`.
+/-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form.
 
 This is the base-change-free part of
 `Scheme.IdealSheafData.exists_blowup_comp_base_change`, obtained by discarding its
@@ -526,8 +516,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp
     Scheme.IdealSheafData.exists_blowup_comp_base_change I hI J hJ
   exact ⟨K, hKft, hKsupp, e, he⟩
 
-/-- **Composition of admissible blow-ups** (Stacks Project Tag 080L; blueprint
-`lemma:nagata-admissible-blowup-comp`).
+/-- **Composition of admissible blow-ups** (Stacks Project Tag 080L).
 
 Difference from the informal statement: Stacks Tag 080L assumes `U` quasi-compact; the
 formal proof needs no such hypothesis.
@@ -703,11 +692,9 @@ section BoundarySeparation
 This is the route the two-open compactification theorem takes instead of module
 flattening: two finite-presentation closed subschemes which are disjoint over `U`
 acquire disjoint strict transforms after blowing up the sum of their ideals
-(Stacks Project Tag 0F3V; revised blueprint `def:nagata-separate-closed-subschemes`,
-`lemma:nagata-separate-closed-subschemes`). -/
+(Stacks Project Tag 0F3V). -/
 
-/-- **The boundary-separation blow-up** (revised blueprint
-`def:nagata-separate-closed-subschemes`): the `U`-admissible blow-up of the sum of the
+/-- **The boundary-separation blow-up**: the `U`-admissible blow-up of the sum of the
 ideals of two finite-type centers whose common support is disjoint from `U`. -/
 def separationBlowup (I₁ I₂ : X.IdealSheafData) (h₁ : I₁.ofFiniteType) (h₂ : I₂.ofFiniteType)
     (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
@@ -922,8 +909,7 @@ lemma quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
     isCompact_iff_compactSpace.mp hcpt
   infer_instance
 
-/-- **Boundary separation** (Stacks Project Tag 0F3V; revised blueprint
-`lemma:nagata-separate-closed-subschemes`).
+/-- **Boundary separation** (Stacks Project Tag 0F3V).
 
 The proof is the chart argument: the charts of
 `Bl_{I₁ ⊔ I₂}(X)` at degree-one elements coming from local sections of `I₁` or of `I₂`

@@ -33,7 +33,7 @@ and the restricted morphism `f ∣_ O`. In particular two centers agreeing over 
 isomorphic lifts over `O`.
 
 Fourth, the product of two `U`-admissible centers is `U`-admissible
-(bookkeeping for blueprint `lemma:nagata-product-ideal-common-blowup`).
+(bookkeeping for the common blow-up of a product ideal).
 
 ## Main results
 
@@ -50,7 +50,7 @@ Fourth, the product of two `U`-admissible centers is `U`-admissible
   for two centers agreeing over an open;
 - `AlgebraicGeometry.IsAdmissible.mul` — the product of two admissible centers, and
   `AlgebraicGeometry.IsAdmissible.exists_hom_blowup_of_finite` — finitely many admissible
-  blow-ups admit a common admissible blow-up (`lemma-products-composites-u-admissible-blow`).
+  blow-ups admit a common admissible blow-up.
 
 -/
 
@@ -65,7 +65,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- **Blow-ups restrict along open immersions** (the open-immersion case of the blow-up
-flat base change theorem, blueprint `thm:nagata-blowup-flat-base-change`).
+flat base change theorem).
 
 The comparison morphism is the canonical lift of `(I.comap q).blowupMap ≫ q` through the
 universal property of `I.blowup`. -/
@@ -257,8 +257,7 @@ theorem Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint {X : Scheme
     exact Set.disjoint_left.mp hGB hxB hy
 
 /-- **Extension of admissible blow-up centers across a quasi-compact open** (in the
-style of Stacks Project Tag 080M; blueprint `def:nagata-extended-admissible-blowup`,
-`lemma:nagata-extend-admissible-blowup`).
+style of Stacks Project Tag 080M).
 
 The extended center is the product of a finite-type extension of `J` (Stacks Project
 Tag 01PF) with a finite-type ideal cutting out the boundary of `W` (Stacks Project
@@ -314,7 +313,7 @@ theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
   exact ⟨⟨I₁ * I₀, hI₁ft.mul hI₀ft, hdisjK⟩, h, hh, hpb⟩
 
 /-- **Extension of an admissible blow-up center across a second quasi-compact open**
-(Stacks Project Tag 080M, blueprint `lemma:nagata-extend-admissible-blowup`): a
+(Stacks Project Tag 080M): a
 finite-type center `J` on a quasi-compact open `A` of a quasi-compact quasi-separated
 scheme `X`, whose support avoids the overlap `A ⊓ B` with a quasi-compact open `B`,
 extends to a `B`-admissible center on `X` whose blow-up restricts over `A` to the
@@ -447,7 +446,7 @@ theorem Scheme.IdealSheafData.isOpenImmersion_morphismRestrict_lift_blowup_congr
   exact MorphismProperty.arrow_mk_iso_iff (P := @IsOpenImmersion) e
 
 /-- **The product of two `U`-admissible centers is `U`-admissible** (bookkeeping for
-`lemma-products-composites-u-admissible-blow`): finite-typeness is stable under
+the common blow-up): finite-typeness is stable under
 products, and the support of a product is the union of the supports. -/
 def IsAdmissible.mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissible X U) :
     IsAdmissible X U where
@@ -465,7 +464,7 @@ lemma IsAdmissible.I_mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissibl
   rfl
 
 /-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**
-(`lemma-products-composites-u-admissible-blow`, clause 1): for a finite nonempty family of
+(products and composites of admissible blow-ups, clause 1): for a finite nonempty family of
 `U`-admissible centres `B i`, the product of the centres is `U`-admissible
 (`AlgebraicGeometry.IsAdmissible.mul`) and its blow-up dominates every `Bl_{B i}(X)` over `X`
 (`Scheme.IdealSheafData.exists_blowup_mul_hom_left`, `_right`), by induction on the family. -/
