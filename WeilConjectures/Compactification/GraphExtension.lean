@@ -16,8 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 # Graph extension of a compactification
 
 This file constructs the **graph extension** of a compactification (Stacks Project
-Tag 0F3Z; blueprint `def:proper-extension`, `thm:0F3Z`, `def:nagata-graph-extension`,
-`lemma:nagata-graph-extension`; proof order item 33):
+Tag 0F3Z):
 
 - `AlgebraicGeometry.Compactification.ProperExtension`: the data of a graph extension of
   a compactification `c` of a quasi-compact open `V ⊆ U`;
@@ -80,8 +79,7 @@ attribute [instance] Compactification.ProperExtension.isProper_ψ
 
 /-- **Graph extension** (Stacks Project Tag 0F3Z): a compactification of a
 quasi-compact open `V ⊆ U` extends, after a `V`-admissible blow-up of the
-compactification, to a proper morphism `V^gr ⟶ U` restricting to the identity on `V`.
-(Blueprint: `lemma:nagata-graph-extension`; proof order item 33.) -/
+compactification, to a proper morphism `V^gr ⟶ U` restricting to the identity on `V`. -/
 theorem Compactification.nonempty_properExtension
     [CompactSpace S] [QuasiSeparatedSpace S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]

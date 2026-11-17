@@ -17,9 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 # Common modifications of two models
 
-This file constructs the **common modification of two models** (Stacks Project Tag 0F3X;
-blueprint `def:common-modification`, `thm:0F3X`, `def:nagata-common-modification`,
-`lemma:nagata-common-modification`; proof order item 32):
+This file constructs the **common modification of two models** (Stacks Project Tag 0F3X):
 
 - `AlgebraicGeometry.CommonModification`: the data of a common modification of two
   separated finite-type models `X₁`, `X₂` of a common open `U` over `S`;
@@ -116,8 +114,7 @@ the blow-up of `V` at the pulled-back centre `B.I.comap p`, so a further finite-
 of an open subscheme of `X'`. Extending `M` across that open
 (`IsAdmissible.exists_extend`) and composing the two admissible blow-ups
 (`IsAdmissible.exists_comp`) exhibits `Bl_M` as an open subscheme of a single
-`U`-admissible blow-up of `X`, lying over `V` as prescribed.
-(Blueprint: part of `lemma:nagata-common-modification`.) -/
+`U`-admissible blow-up of `X`, lying over `V` as prescribed. -/
 theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {U : X.Opens} (p : V ⟶ X) [QuasiCompact p]
     (hpU : (U : Set X) ⊆ Set.range p) (B : IsAdmissible X U)
