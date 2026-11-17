@@ -906,7 +906,7 @@ theorem hasConstructibleExtContinuity_continuousMapRingObj (E : Type) [NormedFie
   hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteType ℓ E aX
 
 omit [Fact (ringChar k ≠ ℓ)] in
-/-- Blueprint `proposition-ind-constructible-sheaves` (2), for the coefficient ring `E` of a finite
+/-- Ind-constructible sheaves, clause (2), for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: the ind-constructible `E`-sheaves
 are closed under kernels, cokernels, extensions and direct sums. -/
 theorem isIndConstructibleHeart_continuousMapRingObj (E : Type) [NormedField E]
@@ -920,10 +920,10 @@ theorem isIndConstructibleHeart_continuousMapRingObj (E : Type) [NormedField E]
   exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
     (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
 
--- The hypothesis `ringChar k ≠ ℓ` of the blueprint statement is kept, although the proof no
+-- The hypothesis `ringChar k ≠ ℓ` of the original statement is kept, although the proof no
 -- longer needs it, so that the statement and its users are unchanged.
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lemma-uniform-ext-bound`, for the coefficient ring `E` of a finite
+/-- The uniform Ext bound, for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably
 closed: `Ext^q(C, N) = 0` for `C` constructible, `q > d_C` and all constructible `N`. -/
 theorem hasUniformConstructibleExtBound_continuousMapRingObj (E : Type) [NormedField E]
@@ -937,7 +937,8 @@ theorem hasUniformConstructibleExtBound_continuousMapRingObj (E : Type) [NormedF
 /-! ### The coefficient ring `𝒪_E` -/
 
 omit [Fact (ringChar k ≠ ℓ)] in
-/-- Blueprint `sk-lem-int-ext` (1), for the coefficient ring `𝒪_E` of a finite extension
+/-- Ext-continuity for integral coefficients, clause (1), for the coefficient ring `𝒪_E` of a
+finite extension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a
 constructible `𝒪_E`-sheaf `C` commutes with filtered colimits of sheaves. -/
 theorem hasConstructibleExtContinuity_padicIntegersRingObj (E : Type) [Field E]
@@ -964,10 +965,11 @@ theorem isIndConstructibleHeart_padicIntegersRingObj (E : Type) [Field E]
   exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
     (hasConstructibleExtContinuity_padicIntegersRingObj ℓ E aX)
 
--- The hypothesis `ringChar k ≠ ℓ` of the blueprint statement is kept, although the proof no
+-- The hypothesis `ringChar k ≠ ℓ` of the original statement is kept, although the proof no
 -- longer needs it, so that the statement and its users are unchanged.
 set_option linter.unusedSectionVars false in
-/-- Blueprint `sk-lem-int-ext` (2), for the coefficient ring `𝒪_E` of a finite extension
+/-- The uniform Ext bound for integral coefficients, clause (2), for the coefficient ring `𝒪_E`
+of a finite extension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably closed:
 `Ext^q(C, N) = 0` for `C` constructible, `q > d_C` and all constructible `N`. -/
 theorem hasUniformConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E]
@@ -991,7 +993,7 @@ theorem hasConstructibleExtContinuity_padicAlgClRingObj {X : Scheme.{u}}
   hasConstructibleExtContinuity_padicAlgClRingObj_of_locallyOfFiniteType ℓ aX
 
 omit [Fact (ringChar k ≠ ℓ)] in
-/-- Blueprint `proposition-ind-constructible-sheaves` (2), for the coefficient ring `ℚ̄_ℓ` and a
+/-- Ind-constructible sheaves, clause (2), for the coefficient ring `ℚ̄_ℓ` and a
 separated finite-type `k`-scheme `X`: the ind-constructible `ℚ̄_ℓ`-sheaves are closed under kernels,
 cokernels, extensions and direct sums. -/
 theorem isIndConstructibleHeart_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
@@ -1004,10 +1006,10 @@ theorem isIndConstructibleHeart_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ S
   exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
     (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
 
--- The hypothesis `ringChar k ≠ ℓ` of the blueprint statement is kept, although the proof no
+-- The hypothesis `ringChar k ≠ ℓ` of the original statement is kept, although the proof no
 -- longer needs it, so that the statement and its users are unchanged.
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lemma-uniform-ext-bound`, for the coefficient ring `ℚ̄_ℓ` and a
+/-- The uniform Ext bound, for the coefficient ring `ℚ̄_ℓ` and a
 separated finite-type `k`-scheme `X`, `k` finite or separably closed: `Ext^q(C, N) = 0` for `C`
 constructible, `q > d_C` and all constructible `N`. -/
 theorem hasUniformConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
@@ -1030,8 +1032,7 @@ theorem hasIndConstructibleExtBound_continuousMapRingObj (E : Type) [NormedField
   .of_continuity (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
     (hasUniformConstructibleExtBound_continuousMapRingObj ℓ E aX hk)
 
-/-- Blueprint `theorem-compactness-rational-coefficients`
-(`theorem-compactness-rational-coefficients`): for the coefficient ring `E` of a finite extension
+/-- For the coefficient ring `E` of a finite extension
 `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably closed, a
 constructible sheaf placed in degree `0` is compact in `Loc(Dᵇc(X)⟦E⟧)`. -/
 theorem isCompactObj_singleFunctor_continuousMapRingObj (E : Type) [NormedField E]
@@ -1097,8 +1098,7 @@ theorem hasIndConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
   .of_continuity (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
     (hasUniformConstructibleExtBound_padicAlgClRingObj ℓ aX hk)
 
-/-- Blueprint `theorem-compactness-rational-coefficients`
-(`theorem-compactness-rational-coefficients`): for the coefficient ring `ℚ̄_ℓ` and a separated
+/-- For the coefficient ring `ℚ̄_ℓ` and a separated
 finite-type `k`-scheme `X`, `k` finite or separably closed, a constructible sheaf placed in degree
 `0` is compact in `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)`. -/
 theorem isCompactObj_singleFunctor_padicAlgClRingObj {X : Scheme.{u}}
