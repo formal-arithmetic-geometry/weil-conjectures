@@ -54,22 +54,22 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap` by
 - `AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary` and its fully proved
   locally Noetherian instance
   `exists_admissibleBlowup_cartierBoundary_of_isLocallyNoetherian`: preparation of a
-  Cartier boundary (`lemma:nagata-cartier-boundary-preparation`, Stacks Tag 080Y);
+  Cartier boundary (Stacks Tag 080Y);
 - `AlgebraicGeometry.separationBlowup` together with its `U`-admissibility
   (`Scheme.IdealSheafData.coe_support_sup` of
   `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic`);
 - `Scheme.exists_finiteType_ideal_coe_support_eq_compl`: a quasi-compact open of a
   qcqs scheme is the complement of the support of a finite-type ideal
-  (`def:nagata-qc-open-complement-ideal`, Stacks Tag 01PH), by applying the gluing
+  (Stacks Tag 01PH), by applying the gluing
   induction `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` of
   `WeilConjectures.Compactification.FiniteTypeExtension` (Stacks Tag 01PF) inside the
   vanishing ideal of the reduced boundary;
 - `IsAdmissible.exists_comp`: a composite of admissible blow-ups is an admissible
-  blow-up (`lemma:nagata-admissible-blowup-comp`, Stacks Tag 080L), derived — via the
+  blow-up (Stacks Tag 080L), derived — via the
   image/preimage disjointness of the composite center — from the composition theorem
   for arbitrary blow-ups `Scheme.IdealSheafData.exists_blowup_comp` below;
 - `Scheme.IdealSheafData.exists_blowup_comp_base_change`: the composition theorem for
-  arbitrary blow-ups (`thm:nagata-composition-of-blowups`, Stacks Tag 080B), in
+  arbitrary blow-ups (Stacks Tag 080B), in
   existential interface form and compatibly with an arbitrary base change `f : Y ⟶ X`.
   The composite center is `K = I * L` for the finite-degree descent `L` of the second
   center; finite-typeness, the support formula and the comparison of blow-ups (product
@@ -78,11 +78,10 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap` by
   universal-property comparisons below. Its base-change-free part is
   `Scheme.IdealSheafData.exists_blowup_comp`;
 - `Scheme.IdealSheafData.exists_blowup_mul_iso`: the product-ideal comparison
-  `Bl_{I·L}(X) ≅ Bl_{L·O}(Bl_I X)` over `X` (`thm:nagata-blowup-product-ideal`,
-  Stacks Tag 080A), and
+  `Bl_{I·L}(X) ≅ Bl_{L·O}(Bl_I X)` over `X` (Stacks Tag 080A), and
   `Scheme.IdealSheafData.exists_blowup_mul_isInvertible_iso`: multiplying a
   center by an invertible ideal does not change the blow-up
-  (`lemma:nagata-blowup-invertible-factor`, Stacks Tag 0807); both are proved from
+  (Stacks Tag 0807); both are proved from
   the universal property of blowing up (Tag 0806) and the invertibility kit of
   `WeilConjectures.Blowup.BlowupUniversal`;
 - `disjoint_range_strictTransformMap_sup`: disjointness of
@@ -100,8 +99,7 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap` by
 ## Further inputs (Stacks citations)
 
 The finite-degree approximation on the blow-up itself
-(`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks Tag 0803,
-`lemma:nagata-proj-closed-center-finite-degree-exists`) is proved in
+(`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks Tag 0803) is proved in
 `WeilConjectures.Blowup.FiniteDegree`; the support formula of the full finite-degree
 statement (`coe_support_eq_of_comap_pow_mul`) is proved here.
 
@@ -615,7 +613,7 @@ locally Noetherian case.
 Difference from `Scheme.exists_finiteType_ideal_coe_support_eq_compl`: no
 quasi-compactness of `U` is needed, every ideal sheaf being of finite type; the ideal is
 the vanishing ideal of the reduced boundary itself. This is the instance used for the
-Noetherian compactification theorem (`thm:nagata-noetherian`). -/
+Noetherian compactification theorem. -/
 theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetherian
     (X : Scheme.{u}) [IsLocallyNoetherian X] (U : X.Opens) :
     ∃ I : X.IdealSheafData, I.ofFiniteType ∧ (I.support : Set X) = (U : Set X)ᶜ :=
@@ -675,8 +673,7 @@ theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparated
 
 Difference from `exists_admissibleBlowup_cartierBoundary`: no compactness of `U` is
 needed, the finite-type boundary ideal being the vanishing ideal of the reduced boundary
-itself. This is the instance needed for the Noetherian compactification theorem
-(`thm:nagata-noetherian`). -/
+itself. This is the instance needed for the Noetherian compactification theorem. -/
 theorem exists_admissibleBlowup_cartierBoundary_of_isLocallyNoetherian
     [IsLocallyNoetherian X] :
     ∃ (B : IsAdmissible X U) (J : B.I.blowup.IdealSheafData), J.IsInvertible ∧

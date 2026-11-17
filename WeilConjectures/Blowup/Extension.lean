@@ -463,8 +463,8 @@ lemma IsAdmissible.I_mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissibl
     (B₁.mul B₂).I = B₁.I * B₂.I :=
   rfl
 
-/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**
-(products and composites of admissible blow-ups, clause 1): for a finite nonempty family of
+/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**: for a
+finite nonempty family of
 `U`-admissible centres `B i`, the product of the centres is `U`-admissible
 (`AlgebraicGeometry.IsAdmissible.mul`) and its blow-up dominates every `Bl_{B i}(X)` over `X`
 (`Scheme.IdealSheafData.exists_blowup_mul_hom_left`, `_right`), by induction on the family. -/
