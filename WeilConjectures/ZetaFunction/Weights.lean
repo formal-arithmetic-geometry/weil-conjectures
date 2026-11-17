@@ -25,9 +25,8 @@ morphism of `X₀` and the constant Weil sheaf, which is punctually pure of weig
 - `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_toComplex_adicConstant`: the constant Weil
   sheaf, as a Weil complex, is mixed of weights at most `0`; together with
   `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant` (the constant Weil sheaf is
-  punctually pure of weight `0`, `corollary-purity-cohomology-smooth-proper-variety`) this is
-  `corollary-purity-cohomology-smooth-proper-variety`
-  (`AlgebraicGeometry.WeilSheaf.weightPurity_adicConstant`).
+  punctually pure of weight `0`) this is the purity of the cohomology of a smooth proper
+  variety (`AlgebraicGeometry.WeilSheaf.weightPurity_adicConstant`).
 - `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.hasWeightsAtMostOver_globalSections`: a
   Weil sheaf on `Spec k₀` mixed of weights at most `w` has global sections of weights at most `w`.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant`:
@@ -78,7 +77,7 @@ namespace WeilSheaf
 
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `corollary-purity-cohomology-smooth-proper-variety` (the complex form): the constant
+/-- The constant
 Weil sheaf, viewed as a Weil complex concentrated in degree `0`, is `ι`-mixed of weights at most
 `0`: its cohomology sheaf in degree `0` is the constant sheaf, punctually pure of weight `0`, and
 the others vanish. -/
@@ -96,7 +95,7 @@ theorem isMixedOfWeightsAtMost_toComplex_adicConstant
   · exact isMixedOfWeightsAtMost_of_isZero
       (WeilComplex.isZero_homologySheaf_singleComplex hb _) _
 
-/-- Blueprint `corollary-purity-cohomology-smooth-proper-variety`: the constant Weil sheaf is
+/-- The constant Weil sheaf is
 `ι`-pure of weight `0`, punctually
 (`AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant`), and as a Weil complex it is
 mixed of weights at most `0`. -/
@@ -129,8 +128,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Clause (2) of `corollary-purity-cohomology-smooth-proper-variety` and of
-`corollary-purity-cohomology-smooth-proper-variety`: for a separated `k₀`-scheme `X₀` of finite
+/-- **Weights of compactly supported cohomology**: for a separated `k₀`-scheme `X₀` of finite
 type, `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-mixed of weights at most `i`: every eigenvalue `α` of the
 geometric Frobenius satisfies `|ι α| ≤ q^{i/2}`. This is the Deligne–Laumon estimate for the
 structure morphism of `X₀` and the constant Weil sheaf, mixed of weights at most `0`. -/

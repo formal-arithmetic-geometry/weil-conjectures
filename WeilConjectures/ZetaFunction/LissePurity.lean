@@ -17,7 +17,7 @@ punctually `ι`-pure of weight `w`. Then `Hⁱ(X₀ ⊗ k̄, F)` is `ι`-pure of
 Deligne–Laumon estimate bounds the weights of `H_c^i = Hⁱ` by `w + i`, and Poincaré duality
 `H_c^i(F) × H^{2d-i}(F^∨(d)) ⟶ ℚ̄_ℓ`, with `F^∨(d)` lisse and punctually pure of weight
 `-w - 2d`, turns the same estimate in degree `2d - i` into the lower bound. This is the absolute
-case `Y₀ = Spec k₀` of `theorem-purity-higher-direct-images-under`.
+case `Y₀ = Spec k₀` of the purity of higher direct images.
 
 ## Main statements
 
@@ -73,8 +73,8 @@ theorem two_mul_logb_norm_cyclotomicUnit_pow_eq (d : ℕ) :
 
 end
 
-/-- **Purity for lisse coefficients** (the absolute case of
-`theorem-purity-higher-direct-images-under`): for `X₀` smooth and proper of pure dimension `d` over
+/-- **Purity for lisse coefficients** (the absolute case of the purity of higher direct
+images): for `X₀` smooth and proper of pure dimension `d` over
 `k₀` and `F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`, the Frobenius module
 `Hⁱ(X₀ ⊗ k̄, F)` is `ι`-pure of weight `w + i` over `k₀`. -/
 theorem isPureOfWeightOver_cohomology_of_isLisse (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
@@ -144,8 +144,7 @@ theorem purity_smoothProper (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
     hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant k₀ l X ι i⟩
 
 include d in
-/-- Blueprint `corollary-purity-cohomology-smooth-proper-variety` (Deligne's purity theorem for
-smooth proper varieties): for `X₀` smooth and proper of pure dimension `d` over `k₀ = 𝔽_q` and
+/-- For `X₀` smooth and proper of pure dimension `d` over `k₀ = 𝔽_q` and
 every `i`,
 
 1. the constant Weil sheaf is punctually `ι`-pure of weight `0`;
