@@ -10040,6 +10040,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.PicardTensorOrdinaryCoeff
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameCoefficients
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameKummer
+public import WeilConjectures.AlgebraicGeometry.Picard.Quotient
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPointBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
