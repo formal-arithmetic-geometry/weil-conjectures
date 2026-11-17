@@ -35,13 +35,12 @@ amplitude from `[a, b]` to `[a, b + 2d]`.
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`,
-  `AlgebraicGeometry.ProEtale.torAmplitudeIn_rightDerivedLowerStar`
- .
-- `ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerivedCategory`
- : the case of a complex `ν^* K'` of étale origin.
-- `AlgebraicGeometry.ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`
- : the case of every bounded constructible complex.
+- `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar` and
+  `AlgebraicGeometry.ProEtale.torAmplitudeIn_rightDerivedLowerStar`.
+- `ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerivedCategory`:
+  the case of a complex `ν^* K'` of étale origin.
+- `AlgebraicGeometry.ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`:
+  the case of every bounded constructible complex.
 
 ## Implementation notes
 
