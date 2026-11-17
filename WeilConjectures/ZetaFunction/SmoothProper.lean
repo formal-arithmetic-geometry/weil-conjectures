@@ -31,8 +31,7 @@ the functional equation and the Riemann hypothesis, and `Pᵢ` realizes the dete
 - `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_zero`,
   `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_two_mul`: the endpoint factors
   `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T`.
-- `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity
- .
+- `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity.
 - `AlgebraicGeometry.Scheme.isUniversallyPureOfWeight_map_frobeniusCharpolyRev`: the reciprocal
   roots of `P_{i,ℓ}` are `q`-Weil numbers of weight `i`, under every embedding of their number
   fields.
