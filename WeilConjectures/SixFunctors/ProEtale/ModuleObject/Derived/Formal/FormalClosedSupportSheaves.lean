@@ -59,9 +59,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Sections with closed support for condensed module sheaves
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-formal-closed-support,
-node lemma-sections-support-closed-subscheme--1
-(blueprint: lemma-sections-support-closed-subscheme--1); Stacks Project, Tags 09AA and 09AH.
+For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j : V ⟶ X`, the sections
+with support in `Z`, `RΓ_Z M = i^* ker(M ⟶ j_* j^* M)`, give the right adjoint of the exact closed
+direct image `i_*` on condensed module sheaves (Stacks Project, Tags 09AA and 09AH).
 -/
 
 @[expose] public noncomputable section
@@ -280,31 +280,25 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The kernel of the open restriction unit, formed in the functor category, so that
-its maps are precisely the induced kernel maps.
-Source: blueprint lemma-sections-support-closed-subscheme--1, definition of the supported kernel
-(blueprint: lemma-sections-support-closed-subscheme--1). -/
+its maps are precisely the induced kernel maps. -/
 noncomputable def moduleSectionsWithSupport {X V : Scheme.{u}} (j : V ⟶ X) :
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ X :=
   kernel (upperStarLowerStarAdjunction Λ j).unit
 
-/-- The sheaf on the closed subscheme: `i^* ker(M ⟶ j_* j^* M)`.
-Source: blueprint lemma-sections-support-closed-subscheme--1, displayed definition
-(blueprint: lemma-sections-support-closed-subscheme--1). -/
+/-- The sheaf on the closed subscheme: `i^* ker(M ⟶ j_* j^* M)`. -/
 noncomputable def closedModuleSectionsWithSupport {X Z V : Scheme.{u}}
     (i : Z ⟶ X) (j : V ⟶ X) :
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ Z :=
   moduleSectionsWithSupport Λ j ⋙ upperStar Λ i
 
-/-- Sections with closed support give the right adjoint to the exact closed direct image.
-Source: blueprint main-20261015, lemma-sections-support-closed-subscheme--1, clauses (1)--(3);
-Stacks Project, Tags 09AA and 09AH (blueprint: lemma-sections-support-closed-subscheme--1).
+/-- Sections with closed support give the right adjoint to the exact closed direct image
+(Stacks Project, Tags 09AA and 09AH).
 
 Proof plan:
-1. The standing scheme is Noetherian by finite type over the field
-   (lem-weil-pbc-finite-type-over-noetherian), so its open complement is quasi-compact.
-   The coefficient comparison alpha is an isomorphism, identifying the recorded module
+1. The open complement is quasi-compact by hypothesis; no finiteness over a field is
+   needed. The coefficient comparison alpha is an isomorphism, identifying the recorded module
    operations with ringed inverse/direct image for the actual pulled-back coefficient ring.
-2. Use lem-weil-pbc-proetale-ringed-open-closed for exact closed direct image, the closed
+2. Use the ringed open–closed formalism for exact closed direct image, the closed
    counit, vanishing of open restriction of closed direct image, and localization. The
    immersion-limit-preservation node gives exact inverse image. The open-comparison node
    identifies the open counit with the restriction counit; base-change evaluation makes it
@@ -321,28 +315,22 @@ Proof plan:
 5. Kernel-map uniqueness gives additivity. Right adjoints preserve small limits
    (situation-conventions); in particular this gives left exactness.
 6. Exact closed direct image preserves monomorphisms. Apply the generic
-   lem-exc-rg-right-adjoint-preserves-injectives to obtain the injective-module assertion.
+   fact that right adjoints of exact functors preserve injectives to obtain the injective-module
+   assertion.
 7. Lift the additive adjunction termwise and to homotopy categories using
-   lem-weil-pbc-termwise-adjunction-homotopy. Exact closed direct image takes every
-   acyclic complex to an acyclic complex (lem-sp-exact-functor-preserves-homology).
+   termwise adjunction on homotopy categories. Exact closed direct image takes every
+   acyclic complex to an acyclic complex (exact functors preserve homology).
    Adjunction therefore identifies maps from an acyclic complex to the image of a
    K-injective complex with zero homotopy classes. This proves K-injectivity, including
-   unbounded complexes, by def-pur-kinjective-complex.
+   unbounded complexes, by the definition of K-injective complexes.
 
-The admissible coefficients are the recorded predicate of definition-localizing-subcategory.
 The first conjunct is the canonical natural identification of clause (1).
 The existential additive instance only makes the termwise functor on complexes available.
 -/
 theorem formal_closed_support_sheaves
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
     {X Z V : Scheme.{u}}
-    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [V.Over (Spec (.of k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))]
-    (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]
-    (j : V ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range j = (Set.range i)ᶜ) :
     IsIso (Functor.whiskerLeft (moduleSectionsWithSupport Λ j)
       (upperStarLowerStarAdjunction Λ i).unit) ∧
@@ -359,15 +347,6 @@ theorem formal_closed_support_sheaves
               (ComplexShape.up ℤ)).obj I)) ∧
       (∀ I : pulledBackModuleObjects Λ X, Injective I →
         Injective ((closedModuleSectionsWithSupport Λ i j).obj I)) := by
-  have _ := hΛ
-  have hX : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
-    (X ↘ Spec (.of k))
-  have : IsNoetherian X := ⟨⟩
-  have : TopologicalSpace.NoetherianSpace V :=
-    j.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
-  have : QuasiCompact j := inferInstance
   obtain ⟨hAb, hAbsupport⟩ := ProEtale.abelian_closed_support_counit_and_unit i j hij
   have hi := moduleCounitOfAbelian Λ i hAb
   have hzero := openRestrictionPushforwardZero Λ i j hij

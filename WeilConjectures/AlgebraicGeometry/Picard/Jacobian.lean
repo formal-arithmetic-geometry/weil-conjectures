@@ -1866,57 +1866,30 @@ lemma picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify (q : C' ⟶ C)
 
 end PicardFunctorDegreeBaseChange
 
-/-- **The degree-zero part is compatible with base change.** Let `C` be a smooth projective
-geometrically integral curve over `k`, let `K/k` be a field extension and let `C_K` be the base
-change of `C`, presented by a cartesian square. Then the restriction of `Pic^0_{C/k}` to schemes
-over `K` is `Pic^0_{C_K/K}` (canonically: `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`).
--/
+/-- **The degree-`d` part is compatible with base change.** Let `C` be proper and locally of
+finite presentation over `k`, let `K/k` be a field extension and let `C_K` be the base change of
+`C`, presented by a cartesian square. Then the restriction of `Pic^d_{C/k}` to schemes over `K`
+is `Pic^d_{C_K/K}` (canonically: `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`). -/
 theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [Algebra k K]
     {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
-    [GeometricallyIntegral (C ↘ Spec (.of k))] (q : C' ⟶ C)
+    [IsProper (C ↘ Spec (.of k))] [LocallyOfFinitePresentation (C ↘ Spec (.of k))]
+    (q : C' ⟶ C)
     (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
     Nonempty ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
       (picardFunctorDegree (C ↘ Spec (.of k)) d).obj ≅
-        (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj) := by
-  set f := C ↘ Spec (.of k)
-  set f' := C' ↘ Spec (.of K)
-  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  have : IsProper f' := IsProper.isStableUnderBaseChange.of_isPullback h ‹_›
-  have : LocallyOfFinitePresentation f' :=
-    MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) h inferInstance
-  -- the identification of the Picard presheaves preserves the fibrewise degrees
-  let eP := picardPresheafIsoOfIsPullback h
-  have hmem (T : Over (Spec (.of K))) (L : (picardPresheaf f).obj (.op ((Over.map g).obj T))) :
-      L ∈ (picardSubfunctorDegree f d).obj (.op ((Over.map g).obj T)) ↔
-        eP.hom.app (.op T) L ∈ (picardSubfunctorDegree f' d).obj (.op T) := by
-    rw [mem_picardSubfunctorDegree_iff, mem_picardSubfunctorDegree_iff]
-    refine forall_congr' fun t ↦ ?_
-    rw [picardPresheafIsoOfIsPullback_hom_app,
-      picardPresheafDegree_pic_map_of_isPullback f f' (𝟙 T.left) _
-        (IsPullback.of_horiz_isIso ⟨by simp⟩) L t]
-    rfl
-  let eS : (Over.map g).op ⋙ (picardSubfunctorDegree f d).toFunctor ≅
-      (picardSubfunctorDegree f' d).toFunctor :=
-    NatIso.ofComponents
-      (fun T ↦ Equiv.toIso ((eP.app T).toEquiv.subtypeEquiv fun L ↦ hmem T.unop L))
-      fun {T T'} φ ↦ by
-        ext L
-        apply Subtype.ext
-        exact NatTrans.naturality_apply eP.hom φ L.1
-  exact ⟨overMapOpCompSheafifyIso g _ ≪≫
-    (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso eS)⟩
+        (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj) :=
+  ⟨picardFunctorDegreeIsoOfIsPullback q h d⟩
 
 
-/-- **The base change of a representing object of `Pic^d`.** Let `C` be a smooth projective
-geometrically integral curve over `k`, let `K/k` be a field extension and let `C_K` be the base
-change of `C`, presented by a cartesian square. If `J` represents `Pic^d_{C/k}`, then any base
-change `J_K = J ×_k K` of `J` (presented by a cartesian square) represents `Pic^d_{C_K/K}`. -/
+/-- **The base change of a representing object of `Pic^d`.** Let `C` be proper and locally of
+finite presentation over `k`, let `K/k` be a field extension and let `C_K` be the base change of
+`C`, presented by a cartesian square. If `J` represents `Pic^d_{C/k}`, then any base change
+`J_K = J ×_k K` of `J` (presented by a cartesian square) represents `Pic^d_{C_K/K}`. -/
 theorem nonempty_representableBy_picardFunctorDegree_baseChange {K : Type u} [Field K]
     [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
-    [GeometricallyIntegral (C ↘ Spec (.of k))] (q : C' ⟶ C)
+    [IsProper (C ↘ Spec (.of k))] [LocallyOfFinitePresentation (C ↘ Spec (.of k))]
+    (q : C' ⟶ C)
     (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) {J : Over (Spec (.of k))}
     (r : (picardFunctorDegree (C ↘ Spec (.of k)) d).obj.RepresentableBy J)
@@ -1924,6 +1897,25 @@ theorem nonempty_representableBy_picardFunctorDegree_baseChange {K : Type u} [Fi
     (hJ : IsPullback qJ JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :
     Nonempty ((picardFunctorDegree (C' ↘ Spec (.of K)) d).obj.RepresentableBy JK) := by
   obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback q h d
+  refine ⟨((r.ofAdjunction (Over.mapPullbackAdj _)).ofIso e).ofIsoObj
+    (Over.isoMk hJ.isoPullback ?_)⟩
+  simp
+
+/-- **The base change of a representing object of the Picard functor.** Let `K/k` be a field
+extension and let `C_K` be the base change of `C`, presented by a cartesian square. If `J`
+represents `Pic_{C/k}`, then any base change `J_K = J ×_k K` of `J` (presented by a cartesian
+square) represents `Pic_{C_K/K}`; no hypothesis on `C` is needed
+(`AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`). -/
+theorem nonempty_representableBy_picardFunctor_baseChange {K : Type u} [Field K]
+    [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
+    (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) {J : Over (Spec (.of k))}
+    (r : (picardFunctor (C ↘ Spec (.of k))).obj.RepresentableBy J)
+    (JK : Over (Spec (.of K))) (qJ : JK.left ⟶ J.left)
+    (hJ : IsPullback qJ JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :
+    Nonempty ((picardFunctor (C' ↘ Spec (.of K))).obj.RepresentableBy JK) := by
+  obtain ⟨e⟩ := nonempty_picardFunctor_iso_of_isPullback h
   refine ⟨((r.ofAdjunction (Over.mapPullbackAdj _)).ofIso e).ofIsoObj
     (Over.isoMk hJ.isoPullback ?_)⟩
   simp
