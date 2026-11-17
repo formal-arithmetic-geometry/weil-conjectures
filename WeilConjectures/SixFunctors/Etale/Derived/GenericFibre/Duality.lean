@@ -22,7 +22,7 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 Let `S` be integral and of finite type over a field `k` (in the application `S = 𝔸¹_k`), with
 invertible dualizing complex `ω_S`, let `t : T ⟶ S` lie over the generic point of `S` (in the
 application `T = Spec \overline{k(t)}`), and let `X` be of finite type over `S` with base change
-`g : X_T ⟶ X`. This file proves blueprint `lemma-double-dual-geometric-generic-fibre`, Zariski
+`g : X_T ⟶ X`. This file proves the double-dual lemma on a geometric generic fibre, Zariski
 locally on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ P` followed by a smooth
 `p : P ⟶ S` (e.g. `P = 𝔸^r_S` for `X` affine):
 
@@ -34,7 +34,7 @@ locally on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ 
 
 ## Proof
 
-As in the blueprint, `ω_X ≅ ω_{X/S} ⊗ᴸ (i ≫ p)^* ω_S` with `ω_S` invertible
+First, `ω_X ≅ ω_{X/S} ⊗ᴸ (i ≫ p)^* ω_S` with `ω_S` invertible
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp_of_isInvertible`), and
 `ω_{X/S} ≅ Ri^! ω_p`. Closed-support generic exchange
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_generic`) gives
@@ -71,7 +71,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lemma-double-dual-geometric-generic-fibre`, first assertion (Zariski
+/-- First assertion of the double-dual lemma on a geometric generic fibre (Zariski
 locally): **the dualizing complex of a generic fibre.**
 
 Let `S` be integral and of finite type over a field `k`, with invertible dualizing complex
@@ -184,7 +184,7 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic_of_smooth {k
     (isInvertible_dualizingComplex_of_smoothOfRelativeDimension Λ aS rS) t ht p r sqP i sqX aX hX
     fT hT
 
-/-- Blueprint `lemma-double-dual-geometric-generic-fibre`, second assertion (Zariski
+/-- Second assertion of the double-dual lemma on a geometric generic fibre (Zariski
 locally): **the double dual on a geometric generic fibre.**
 
 In the setting of
