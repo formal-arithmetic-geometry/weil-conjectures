@@ -89,8 +89,8 @@ theorem Etale.tfae_hasTorsionBaseChange (f : X ⟶ Y) [IsProper f] :
   tfae_have 3 → 1 := Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ f
   tfae_finish
 
-/-- The characterisation of the base change property for torsion coefficients, the standing
-hypothesis of the chapter: for a proper `f` and a coefficient ring `Λ` which is torsion as an
+/-- The characterisation of the base change property for torsion coefficients: for a proper
+`f` and a coefficient ring `Λ` which is torsion as an
 additive group, `PBC(f)` is the base change isomorphisms on all cohomology sheaves of torsion
 sheaves, and is injective acyclicity `IA(f)` with `Λ` itself
 (`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`). -/
