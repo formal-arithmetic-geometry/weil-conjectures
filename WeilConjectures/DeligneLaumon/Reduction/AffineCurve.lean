@@ -209,7 +209,7 @@ curve over `k₀` and `F` a lisse Weil sheaf on `C`, punctually `ι`-pure of wei
 `H_c^r(C, F)` has weights at most `w + r`. More precisely, `H_c^0(C, F) = 0`, `H_c^2(C, F)` is
 `ι`-pure of weight `w + 2`, and `H_c^r(C, F) = 0` for `r ∉ {0, 1, 2}`.
 
-The bound in degree `r ≥ 0` follows the route of the notes: a finite generically étale map
+The bound in degree `r ≥ 0` goes through a finite generically étale map
 `g : C' ⟶ 𝔸¹` from a smooth curve `C' ⊇ C` with finite complement
 (`AlgebraicGeometry.AffineSpace.exists_isOpenImmersion_isFinite_etale_morphismRestrict`), the
 transported sheaf `K = g_* j_! F` on the line, punctually `ι`-pure of weight `w`
