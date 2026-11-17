@@ -139,7 +139,7 @@ theorem supportedTatePure_projectiveSpaceDiagonal_line :
     (supportedTatePure_diagonal_projectiveSpace_line Λ S)
 
 
-/-- Blueprint `lemma-class-diagonal-projective-line`, *the first diagonal integral*, with the purity
+/-- *The first diagonal integral* of the projective line, with the purity
 of the diagonal supplied: for `P = ℙ¹_S` and the diagonal `Δ : P ⟶ W = ℙ¹_P`, with the cycle class
 `δ = c₁(𝒪(Δ))` and the trace of the notes, `Tr_p(δ) = 1`. This is
 `AlgebraicGeometry.Etale.projectiveLineTrace_diagonal` at the purity
@@ -156,7 +156,7 @@ theorem projectiveLineTrace_diagonal_line :
       projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ :=
   projectiveLineTrace_diagonal Λ S (supportedTatePure_projectiveSpaceDiagonal_line Λ S)
 
-/-- Blueprint `lemma-class-diagonal-projective-line`, *the second diagonal integral* (the swapped
+/-- *The second diagonal integral* of the projective line (the swapped
 factor), with the purity of the diagonal supplied: `Tr_{p₁}(σ^* δ) = 1`. This is
 `AlgebraicGeometry.Etale.projectiveLineTrace_diagonal_swap` at the purity
 `supportedTatePure_projectiveSpaceDiagonal_line`. -/
