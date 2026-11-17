@@ -157,6 +157,19 @@ theorem integral_scalar_map_eq
   rw [hmap] at hn
   exact ⟨n.down, by simpa only [Preadditive.comp_nsmul, Category.comp_id] using hn⟩
 
+/-- A bounded constructible `𝒪_{E,X}`-complex whose extension of scalars to `E_X` vanishes is
+killed by a power of `ℓ`: the object form of `integral_scalar_map_eq`, with `f = 𝟙` and
+`g = 0`. -/
+theorem integral_pow_smul_id_eq_zero_of_isZero
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (K : integralConstructible ℓ E X)
+    (hK : IsZero ((integralScalarExtension ℓ E X).obj K.obj)) :
+    ∃ n : ℕ, (ℓ ^ n • 𝟙 K.obj : K.obj ⟶ K.obj) = 0 := by
+  obtain ⟨n, hn⟩ := integral_scalar_map_eq ℓ E X K K (𝟙 K.obj) 0 (hK.eq_of_src _ _)
+  exact ⟨n, hn.trans (smul_zero _)⟩
+
 end CondensedRing
 
 end AlgebraicGeometry.ProEtale

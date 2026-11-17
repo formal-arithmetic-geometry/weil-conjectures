@@ -192,6 +192,15 @@ i.e. the unit of the fppf sheafification adjunction. -/
 noncomputable abbrev toPicardFunctor (f : X ⟶ S) : picardPresheaf f ⟶ (picardFunctor f).obj :=
   toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)
 
+/-- A Picard scheme of `f : X ⟶ S`: a scheme `P` over `S` together with a representation of the
+relative Picard functor `Pic_{X/S}` by `P`, i.e. a natural bijection `Hom_S(T, P) ≃ Pic_{X/S}(T)`.
+-/
+structure PicardScheme (f : X ⟶ S) where
+  /-- The representing scheme over `S`. -/
+  scheme : Over S
+  /-- The representation of `Pic_{X/S}` by `scheme`. -/
+  representableBy : (picardFunctor f).obj.RepresentableBy scheme
+
 section BaseChange
 
 variable {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S} {f' : X' ⟶ S'} {g' : X' ⟶ X}
