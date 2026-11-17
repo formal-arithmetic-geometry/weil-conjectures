@@ -29,8 +29,7 @@ scheme of finite type over `K`. For the cartesian square
 
 the exchange morphism `q⁻¹ R^i j_* F ⟶ R^i h_* p⁻¹ F` is an isomorphism for every sheaf `F` of
 `Λ`-modules on `U_ét`, where `Λ` is killed by an integer `n` invertible in `K`
-(`corollary-open-direct-image-over-field`,
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field`).
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field`).
 
 ## References
 
@@ -47,7 +46,7 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `corollary-open-direct-image-over-field`: base change for open immersions.
+/-- Base change for open immersions.
 
 Let `K` be a field, `n` an integer invertible in `K` which kills `Λ`, `j : U ⟶ X` an open
 immersion of schemes of finite type over `K` and `Y` a scheme of finite type over `K`. Let
@@ -87,7 +86,7 @@ lemma Etale.isIso_baseChangeHomologyMap_congr_of_eq {X S T Y : Scheme.{u}} {p : 
   rfl
 
 /-- Base change for an arbitrary separated morphism of finite type between schemes of finite
-type over a field, deduced from blueprint `corollary-open-direct-image-over-field`.
+type over a field, deduced from the open-immersion case over a field.
 
 Let `K` be a field, `n` an integer invertible in `K` which kills `Λ`, `j : U ⟶ X` a separated
 quasi-compact morphism locally of finite type, `X` and `Y` of finite type over `K`, `W = X ×_K Y`
@@ -99,7 +98,8 @@ Write `j = i ≫ g` with `i` an open immersion and `g` proper (Nagata's compacti
 on `j`
 is the vertical pasting of the one for `g`, an isomorphism by proper base change
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`), and the one for
-`i`, an isomorphism at `F` by blueprint `corollary-open-direct-image-over-field`. -/
+`i`, an isomorphism at `F` by the open-immersion case over a field
+(`isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field`). -/
 theorem Etale.isIso_baseChangeHomologyMap_of_field {K : Type u} [Field K]
     {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -125,7 +125,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field {K : Type u} [Field K]
   rw [Etale.isIso_baseChangeHomologyMap_congr_of_eq Λ hj hl₂.symm sq sq']
   revert i
   rw [← Etale.isIso_baseChange_app_singleFunctor_obj_iff]
-  -- the open immersion part, by blueprint `corollary-open-direct-image-over-field`
+  -- the open immersion part, by the open-immersion case over a field
   have hW' : IsPullback (pullback.fst c.g q₁) (pullback.snd c.g q₁ ≫ q₂) (c.g ≫ aX) aY :=
     sq₂.paste_vert hW
   have h₁ : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq₁.toCommSq).app

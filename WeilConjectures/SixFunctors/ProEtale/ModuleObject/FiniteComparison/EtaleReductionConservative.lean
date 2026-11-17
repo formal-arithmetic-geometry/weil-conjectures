@@ -94,10 +94,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (E : Type) [Field E
 
 /-- **The étale reduction modulo `ℓⁿ` reflects isomorphisms**, `n ≠ 0`: a morphism of bounded
 constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ`, read on the small étale site, is an
-isomorphism is an isomorphism (`lemma-reduction-derived-nakayama`). The Nakayama step is derived
+isomorphism is an isomorphism. The Nakayama step is derived
 completeness: a bounded constructible complex is derived `ℓ`-complete
-(`derivedCompleteIntegers_of_boundedConstructible`,
-`proposition-integral-constructibility-criterion`), and a derived complete complex whose reduction
+(`derivedCompleteIntegers_of_boundedConstructible`), and a derived complete complex whose reduction
 vanishes is zero
 (`isZero_of_derivedCompleteIntegers_of_isZero_derivedReduction`). -/
 theorem isIso_of_isIso_etaleReduction_map (hn : n ≠ 0)
