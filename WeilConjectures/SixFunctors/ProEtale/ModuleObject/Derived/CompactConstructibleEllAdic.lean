@@ -920,8 +920,6 @@ theorem isIndConstructibleHeart_continuousMapRingObj (E : Type) [NormedField E]
   exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
     (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
 
--- The hypothesis `ringChar k ≠ ℓ` of the original statement is kept, although the proof no
--- longer needs it, so that the statement and its users are unchanged.
 set_option linter.unusedSectionVars false in
 /-- The uniform Ext bound, for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, `k` finite or separably
@@ -965,8 +963,6 @@ theorem isIndConstructibleHeart_padicIntegersRingObj (E : Type) [Field E]
   exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
     (hasConstructibleExtContinuity_padicIntegersRingObj ℓ E aX)
 
--- The hypothesis `ringChar k ≠ ℓ` of the original statement is kept, although the proof no
--- longer needs it, so that the statement and its users are unchanged.
 set_option linter.unusedSectionVars false in
 /-- The uniform Ext bound for integral coefficients, clause (2), for the coefficient ring `𝒪_E`
 of a finite extension
@@ -1006,8 +1002,6 @@ theorem isIndConstructibleHeart_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ S
   exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
     (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
 
--- The hypothesis `ringChar k ≠ ℓ` of the original statement is kept, although the proof no
--- longer needs it, so that the statement and its users are unchanged.
 set_option linter.unusedSectionVars false in
 /-- The uniform Ext bound, for the coefficient ring `ℚ̄_ℓ` and a
 separated finite-type `k`-scheme `X`, `k` finite or separably closed: `Ext^q(C, N) = 0` for `C`
