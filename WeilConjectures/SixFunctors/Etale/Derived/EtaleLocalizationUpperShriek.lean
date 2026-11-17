@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 For an étale morphism `u : U ⟶ X` and `f : X ⟶ Y` admitting compactifications, the exceptional
 inverse image localizes along `u`: `Lu^* Rf^! ≅ R(u ≫ f)^!`
-(`lemma-affine-space-etale-localization`).
+(étale localization of the exceptional inverse image).
 
 The extension by zero `u_!` is left adjoint to `u^*`, and its derived functor `De_!` agrees with
 the derived lower shriek `Ru_!` (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`).
@@ -48,14 +48,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lemma-affine-space-etale-localization`: Étale localization of the ambient adjoint.
+/-- Étale localization of the ambient adjoint.
 
 For a separated étale morphism `u : U ⟶ X` of finite type, and `f : X ⟶ Y` such that `f` and
 `h = u ≫ f` admit compactifications, the exceptional inverse image localizes along `u`:
 
 `Lu^* Rf^! K ≅ R(u ≫ f)^! K`,
 
-naturally in `K`. The blueprint also records that the extension by zero `u_!` along `u` is
+naturally in `K`. Recall that the extension by zero `u_!` along `u` is
 exact and left adjoint to `u^*`. The isomorphism is the uniqueness of right adjoints for
 `R(u ≫ f)_! ≅ Ru_! ⋙ Rf_! ⊣ Rf^! ⋙ Lu^*`, where `Ru_! ⊣ Lu^*` is the adjunction
 `De_! ⊣ Le^*` of the extension by zero `u_!`, transported along the comparison isomorphism
@@ -105,7 +105,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A] {U X S : Scheme.{u}} (u : U 
   (adjF : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ F)
   (adjG : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G)
 
-/-- Blueprint `lemma-affine-space-etale-localization`, the normalized localization isomorphism:
+/-- The normalized étale localization isomorphism of the exceptional inverse image:
 for right adjoints `F` of `Rf_!` and `G` of `R(u ≫ f)_!` (given by compactifications `c`, `d`),
 the isomorphism `F ⋙ u^* ≅ G` characterized by its compatibility with the two counits
 (`etaleAmbientAdjointLocalityIso_spec`); it is the unique such isomorphism

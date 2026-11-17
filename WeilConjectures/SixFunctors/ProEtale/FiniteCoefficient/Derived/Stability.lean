@@ -37,17 +37,17 @@ amplitude from `[a, b]` to `[a, b + 2d]`.
 
 - `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`,
   `AlgebraicGeometry.ProEtale.torAmplitudeIn_rightDerivedLowerStar`
-  (`proposition-open-direct-image-preserves-finite`).
+ .
 - `ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerivedCategory`
-  (`proposition-six-operations-dctf`): the case of a complex `ν^* K'` of étale origin.
+ : the case of a complex `ν^* K'` of étale origin.
 - `AlgebraicGeometry.ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`
-  (`proposition-six-operations-dctf`): the case of every bounded constructible complex.
+ : the case of every bounded constructible complex.
 
 ## Implementation notes
 
-The blueprint deduces this corollary from its étale counterpart
-`sk-thm-sf-direct-image-tor-amplitude` by writing a bounded constructible pro-étale complex as
-`ν^* K'` for an étale complex `K'` (`theorem-comparison-constructible-sheaves`). Here bounded
+This corollary is deduced from its étale counterpart (the Tor amplitude of direct images)
+by writing a bounded constructible pro-étale complex as
+`ν^* K'` for an étale complex `K'`. Here bounded
 constructibility on the pro-étale site
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`) is *defined* as étale
 origin, so that lemma is built in. The two comparison inputs are `Rf_* ν^* K' ≅ ν^* Rf_* K'`
@@ -61,7 +61,7 @@ The coefficient category is torsion of order invertible on the base: `N • 𝟙
 `A = ModuleCat (ZMod p)` and the affine line over a separably closed field of characteristic
 `p`, whose `H¹` is infinite by Artin–Schreier theory. Being of finite type over a field is the
 base condition of Deligne's finiteness theorem. These are the finite coefficient stages
-`A_{E,n}` of the blueprint, where étale-origin bounded constructibility is the right notion.
+`A_{E,n}`, where étale-origin bounded constructibility is the right notion.
 
 A dimension bound `dim X ≤ d` is `topologicalKrullDim X ≤ (d : WithBot ℕ∞)`, as in the étale
 file.
@@ -119,7 +119,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 include hN hA s
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Direct image preserves bounded
+/-- Direct image preserves bounded
 constructibility on the pro-étale site.
 
 Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
@@ -149,7 +149,7 @@ theorem boundedConstructible_rightDerivedLowerStar
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedLowerStar_of_finite Λ (f ≫ s) s f rfl hK'))
 
-/-- Blueprint `proposition-six-operations-dctf`: The pro-étale direct image for objects of
+/-- The pro-étale direct image for objects of
 étale origin.
 
 Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
@@ -188,7 +188,7 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerived
       (_root_.DerivedCategory.nsmul_id_eq_zero_of_forall
         (Sheaf.nsmul_id_eq_zero_of_forall hA) K') hNY hbc hta)
 
-/-- Blueprint `proposition-six-operations-dctf`: The pro-étale direct image for all finite-Tor
+/-- The pro-étale direct image for all finite-Tor
 objects.
 
 Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
@@ -217,7 +217,7 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar
   exact ⟨(DerivedCategory.boundedConstructible _ Y).prop_of_iso e' h.1,
     (DerivedCategory.torAmplitudeIn _ Y a (b + 2 * (d : ℤ))).prop_of_iso e' h.2⟩
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Tor amplitude of the pro-étale
+/-- Tor amplitude of the pro-étale
 direct image.
 
 In the situation of `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`,
@@ -241,7 +241,7 @@ section OpenImmersion
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U ⟶ X)
   [IsOpenImmersion j] [QuasiCompact j]
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Scalar projection formula and the
+/-- Scalar projection formula and the
 Tor bound for an open immersion.
 
 Let `Λ` be a finite ring and `j : U ⟶ X` a quasi-compact open immersion whose higher direct
@@ -256,8 +256,7 @@ amplitude in `[a, b]`. Then:
    isomorphism
    (`Etale.isIso_rightDerivedLowerStarProjectionMap_constantSingle_of_cohomologicalDimension`,
    by generation of `D(Λ)` by `Λ` and commutation of
-   `Rj_*` with direct sums, `proposition-open-direct-image-preserves-finite`, instead of computing
-   sections with `proposition-open-direct-image-preserves-finite`);
+   `Rj_*` with direct sums, instead of computing sections);
 2. `Rj_* K` has Tor amplitude in `[a, b + d]` on `X_ét`
    (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension`, by
    the residue test applied to (1));
@@ -288,7 +287,7 @@ theorem projection_torAmplitudeIn_rightDerivedLowerStar_of_isOpenImmersion (d : 
     (DerivedCategory.torAmplitudeIn _ X a (b + d)).prop_of_iso e.symm
       ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff _ _ _).2 h₂)⟩
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite` over a separably closed field: for
+/-- Open direct images preserve finiteness, over a separably closed field: for
 `U` and `X` of finite type over a separably closed field `k` and `j : U ⟶ X` a quasi-compact open
 immersion, the higher direct images `Rᵠj_*` vanish for `q > 2 dim U`
 (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`), so the scalar projection formula
