@@ -471,7 +471,7 @@ theorem exists_norm_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ)
 
 end Envelope
 
-/-- Blueprint `lemma-bounds-squared-traces`, clause 1: if `F` is a lisse Weil sheaf of rank at
+/-- If `F` is a lisse Weil sheaf of rank at
 most `N` on an affine curve `V` over `k₀`, punctually `ι`-mixed of weights at most `w`, and
 `#V(𝔽_{qⁿ}) ≤ d qⁿ`, then `S_n(F) ≤ d N² q^{n(w + 1)}` for all `n ≥ 1`: at
 `y ∈ V(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most `q^{mw/2}`, so
@@ -531,7 +531,7 @@ theorem exists_traceEnergy_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) 
     (topologicalKrullDim_le_of_smoothOfRelativeDimension (V ↘ Spec (CommRingCat.of k₀)) 1)
   exact ⟨(d : ℝ) * N ^ 2, fun n hn ↦ traceEnergy_le_of_hasWeightsAtMost ι F h N hN d hd n hn⟩
 
-/-- Blueprint `lemma-bounds-squared-traces`, clause 2: the `L²`-weight is at most the weight: if
+/-- The `L²`-weight is at most the weight: if
 `F` is a lisse Weil sheaf on the smooth affine curve `V`, punctually `ι`-mixed of weights at most
 `w`, then `‖F‖ ≤ w`, by `AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost` and
 `AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le`. -/
@@ -544,8 +544,8 @@ theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Schem
   obtain ⟨C, hC⟩ := exists_traceEnergy_le_of_hasWeightsAtMost ι F hlisse h
   simpa using F.l2Weight_le_of_traceEnergy_le ι hC
 
-/-- **The trace function of `F ⊗ F̄` is `|t_F|²`** (`proposition-twisting-weight-zero-adding-dual`,
-clause 8): if the local polynomials of `F'` are the complex conjugates under `ι` of those of `F`
+/-- **The trace function of `F ⊗ F̄` is `|t_F|²`**: if the local polynomials of `F'` are the
+complex conjugates under `ι` of those of `F`
 (the sheaf `F̄` of the conjugate local Frobenius eigenvalues), then at every
 `y ∈ X₀(𝔽_{qⁿ})`, `ι Tr(F_y | (F ⊗ F')_ȳ) = |ι Tr(F_y | F_ȳ)|² ≥ 0`. -/
 theorem map_traceFunction_tensorObj_eq_normSq (F F' : WeilSheaf k₀ l X) (hF : F.IsLisse)
@@ -613,7 +613,7 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
 smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weight `w`. Then
 `‖G‖ = w`.
 
-The proof in the blueprint writes `φ_G = L'/L` with `L` the ratio of the determinants of the
+The proof writes `φ_G = L'/L` with `L` the ratio of the determinants of the
 Frobenius on `H_c¹` and `H_c²` of `G ⊗ G`; the denominator is pure of weight `2w + 2` by the
 endpoint lemma, positivity of the local factors forces a surviving pole on `|t| = q^{-w-1}`,
 and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`. -/
@@ -941,7 +941,7 @@ The rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeigh
 semicontinuity, with `D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`. Hence `‖M‖ ≤ ‖j_*M‖` and
 `‖j_*M‖ ≤ max ‖M‖ (w - 1) = w`.
 
-The nonvanishing of `M`, implicit in the blueprint, is needed: the zero sheaf has `‖0‖ = -∞`. -/
+The nonvanishing of `M` is needed: the zero sheaf has `‖0‖ = -∞`. -/
 theorem l2Weight_directImage (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l)
     [IsAffine D.U] [LocallyOfFiniteType (D.U ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (D.U ↘ Spec (CommRingCat.of k₀))]

@@ -289,7 +289,7 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
   rw [Representation.detWeight, div_eq_div_iff (by positivity) (by positivity)]
   linarith
 
-/-- Blueprint `lemma-determinant-weight-from-central-scalar`: in the setting of a positive central
+/-- In the setting of a positive central
 pair `(N, z)` for `D`, let `Q = S / U` be a nonzero subquotient of a tensor construction
 `r ∘ ρ` on the defining representation (`r : GL n k →* GL m k` given by polynomials, e.g. an
 exterior power), with finite geometric determinant, on which `z` acts as the scalar `c`. Then
