@@ -70,8 +70,8 @@ either way — it uses the boundary-separation route of
 The finite-type helper lemmas are already in Mathlib and are not restated in this
 development: properness over a separated target is Mathlib's
 `AlgebraicGeometry.IsProper.of_comp`, and the two halves of
-`lemma:nagata-finite-type-to-separated-target` (hence also
-`lemma:nagata-open-immersion-qc-over-separated-target`) are Mathlib's
+finite type over a separated target (hence also quasi-compactness of an open immersion
+over a separated target) are Mathlib's
 `AlgebraicGeometry.locallyOfFiniteType_of_comp` and
 `AlgebraicGeometry.QuasiCompact.of_comp` (the latter only needs the second leg
 quasi-separated, which separatedness supplies).
@@ -296,11 +296,8 @@ open `U`, the `U`-admissible blow-up of `X` assembled from three steps:
 3. the composite centre `K` on `X` (`eliminationCentre`) with `Bl_K(X) ≅ Bl_𝓘(X₁)` over `X`,
    whose support is exactly `Uᶜ` (`coe_support_eliminationCentre`).
 
-Difference from the notes: in step 3 the notes blow up `𝓘 · 𝓘₀𝒪_{X₁}` on `X₁`
-(which dominates `Bl_𝓘(X₁)`) and then composes with `X₁ ⟶ X`. The formalization composes
-`𝓘` itself with `𝓘₀`, so that `Bl_K(X) ≅ Bl_𝓘(X₁)` and the extension of the quasi-domination
-lives directly on it; the support formula of Tag 080B already gives the support `Uᶜ`, and
-the scheme-theoretic density of `U` in `Bl_K(X)` follows from that alone
+The support formula of Tag 080B gives the support `Uᶜ`, and the scheme-theoretic density of
+`U` in `Bl_K(X)` follows from that alone
 (`isSchemeTheoreticallyDominant_eliminationBlowup_preimage`). -/
 noncomputable def eliminationBlowup : IsAdmissible X U where
   I := eliminationCentre hU q hq

@@ -85,7 +85,7 @@ theorem Compactification.nonempty_properExtension
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     (V : U.Opens) (hV : IsCompact (V : Set U)) (c : Compactification (V.ι ≫ u)) :
     Nonempty (Compactification.ProperExtension u V c) := by
-  -- The graph construction of the notes: `V^gr` is the open strict transform of
+  -- The graph construction: `V^gr` is the open strict transform of
   -- the scheme-theoretic image of the graph `V ⟶ c.Z ×_S U`, supplied by the
   -- partial-section lemma (`partialSectionRestrictIso`), the image transport
   -- lemma (`Scheme.Hom.ker_lift_admissibleBlowup`) and elimination of indeterminacy

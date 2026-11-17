@@ -33,15 +33,13 @@ on the dense compactifications.
 
 ## Main results
 
-- `AlgebraicGeometry.Compactification.refinement_common_dense`
- : the closure `inf c d` of the
+- `AlgebraicGeometry.Compactification.refinement_common_dense`: the closure `inf c d` of the
   diagonal is a dense compactification and both projections are strict refinements;
 - `AlgebraicGeometry.Compactification.exists_isDense_isStrict_refinement`: every finite
   family of compactifications has a common dense strict refinement;
 - `AlgebraicGeometry.Compactification.DenseCategory.isThin` and
   `AlgebraicGeometry.Compactification.DenseCategory.isCofiltered`: the category of dense
-  compactifications is a cofiltered preorder
- .
+  compactifications is a cofiltered preorder.
 
 -/
 

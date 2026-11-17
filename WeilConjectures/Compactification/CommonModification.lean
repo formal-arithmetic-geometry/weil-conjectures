@@ -201,7 +201,7 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
 
 /-- **Existence of a common modification** (Stacks Project Tag 0F3X).
 
-The construction is the one of the notes: form the scheme-theoretic image
+Form the scheme-theoretic image
 `X₁₂ ⊆ X₁ ×_S X₂` of `U`, eliminate the indeterminacy of both projections
 (`exists_admissibleBlowup_isOpenImmersion_strictTransformMap`), dominate the two center
 ideals by their product (`Scheme.IdealSheafData.exists_blowup_mul_iso`) and extend the
