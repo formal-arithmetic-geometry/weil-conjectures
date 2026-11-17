@@ -19,8 +19,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 # Derived pushforward commutes with derived limits
 
 A derived limit of a tower `(Kₙ, fₙ)` in a triangulated category is the first vertex `L` of a
-distinguished triangle `L ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶ L[1]` (`CategoryTheory.IsDerivedLimitTriangle`,
-`def-weil-derived-limit`). A triangulated functor preserving countable products sends such a
+distinguished triangle `L ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶ L[1]` (`CategoryTheory.IsDerivedLimitTriangle`).
+A triangulated functor preserving countable products sends such a
 triangle to a triangle of the same kind (`CategoryTheory.Functor.isDerivedLimitTriangle_map`),
 i.e. it commutes with derived limits: `Φ (R lim Kₙ) = R lim Φ Kₙ`.
 
