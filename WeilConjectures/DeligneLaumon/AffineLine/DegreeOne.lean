@@ -42,7 +42,7 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 ## Implementation notes
 
-The degree-one bound is derived along the blueprint argument from the boundary semicontinuity
+The degree-one bound is derived from the boundary semicontinuity
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.

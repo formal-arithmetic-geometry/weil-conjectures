@@ -81,8 +81,8 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 `Λ = ℚ̲̄_ℓ`, `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B` (Input 2.1
 of `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`). Its first
 factor `PF^*_g` is an isomorphism by the proper projection formula
-(`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`,
-blueprint `proposition-proper-direct-image-constructible-complexes`), since `Di_! K` is bounded
+(`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`),
+since `Di_! K` is bounded
 constructible.
 
 -/
