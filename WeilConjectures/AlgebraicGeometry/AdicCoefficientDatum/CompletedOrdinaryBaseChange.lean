@@ -19,7 +19,16 @@ maps `g^* M ⟶ ĝ^* M` (`AdicCoefficientDatum.ordinaryToCompleted`) form a comm
 ## Main results
 
 - `AlgebraicGeometry.Scheme.AdicCoefficientDatum.ordinaryToCompleted_comp_completedExchange`:
-  the square commutes (blueprint `lemma-completed-ordinary-base-change--1`).
+  the square commutes.
+
+## Implementation details
+
+The square commutes for every `K`; on the inputs of the proper base change theorem for complete
+complexes the completed base change map is `AdicCoefficientDatum.completedBaseChangeMap`.
+Both maps are built from the counit of `f^* ⊣ Rf_*`: the completion map followed by the
+reduction/pullback identification is the completion unit
+(`OrderedExchange.ordinaryToCompleted_reconstruction`), the completion unit is natural, and it
+commutes with `Rf'_*` (`AdicCoefficientDatum.towerProjection_properties`).
 -/
 
 @[expose] public noncomputable section
@@ -35,21 +44,14 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 
 /-- **Completed and ordinary base change.** The square formed by the ordinary base change map
 `g^* Rf_* K ⟶ Rf'_* g'^* K`, the completed base change map `ĝ^* Rf_* K ⟶ Rf'_* ĝ'^* K` and the
-completion maps `g^* Rf_* K ⟶ ĝ^* Rf_* K` and `Rf'_* g'^* K ⟶ Rf'_* ĝ'^* K` commutes. This holds
-for every `K`; on the inputs of the proper base change theorem for complete complexes the
-completed base change map is `AdicCoefficientDatum.completedBaseChangeMap`.
+completion maps `g^* Rf_* K ⟶ ĝ^* Rf_* K` and `Rf'_* g'^* K ⟶ Rf'_* ĝ'^* K` commutes.
 ```
   g^* Rf_* K ----------------> Rf'_* g'^* K
       |                             |
       v                             v
   ĝ^* Rf_* K ----------------> Rf'_* ĝ'^* K
 ```
-
-Both maps are built from the counit of `f^* ⊣ Rf_*`: the completion map followed by the
-reduction/pullback identification is the completion unit
-(`OrderedExchange.ordinaryToCompleted_reconstruction`), the completion unit is natural, and it
-commutes with `Rf'_*` (`AdicCoefficientDatum.towerProjection_properties`).
-(blueprint: lemma-completed-ordinary-base-change--1) -/
+-/
 theorem AdicCoefficientDatum.ordinaryToCompleted_comp_completedExchange (K : d.derived X) :
     d.ordinaryToCompleted g ((d.push f).obj K) ≫ d.completedExchange sq K =
       (d.integralExchange sq).app K ≫ (d.push f').map (d.ordinaryToCompleted g' K) := by

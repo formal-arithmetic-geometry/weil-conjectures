@@ -70,8 +70,7 @@ def AdicCoefficientDatum.completionUnit (T : Scheme.{t}) (K : d.derived T) :
   (d.constantRlimAdjunction T).unit.app K ≫
     (completedRlim T (d.completedRing T)).map ((completedReductionAugmentation d T).app K)
 
-/-- The quotient completion unit is natural.
-Source: blueprint completed pullback (blueprint: thm-cbc-complete-proetale). -/
+/-- The quotient completion unit is natural. -/
 theorem AdicCoefficientDatum.completionUnit_naturality (T : Scheme.{t}) {K L : d.derived T}
     (f : K ⟶ L) :
     f ≫ d.completionUnit T L = d.completionUnit T K ≫
