@@ -26714,6 +26714,7 @@ public import WeilConjectures.ZetaFunction.ExamplesFunctionalEquation
 public import WeilConjectures.ZetaFunction.FinalTheorems
 public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
+public import WeilConjectures.ZetaFunction.IntegralFactorsRecovery
 public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
 public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Rationality

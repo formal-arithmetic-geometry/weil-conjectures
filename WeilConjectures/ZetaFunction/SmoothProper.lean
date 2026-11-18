@@ -91,15 +91,15 @@ theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCa
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
     LinearMap.charpolyRev_smul_one, hfin, pow_one]
 
-/-- For `X₀` smooth, proper and geometrically connected of pure dimension
-`d` and every field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}` satisfies
-`|ι α| = q^{i/2}`; equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal roots are the
-Frobenius eigenvalues, which have this absolute value by
+/-- For `X₀` smooth and proper of pure dimension `d` and every field embedding `ι : ℚ̄_ℓ → ℂ`,
+every reciprocal root `α` of `P_{i,ℓ}` satisfies `|ι α| = q^{i/2}`; equivalently, `ι P_{i,ℓ}` is
+pure of weight `i`. The reciprocal roots are the Frobenius eigenvalues, which have this absolute
+value by
 `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`. -/
 theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
     [IsProper (X ↘ Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ) (i : ℕ) :
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
+    (i : ℕ) :
     ((frobeniusCharpolyRev k₀ l X i).map ι).IsPureOfWeight (Nat.card k₀) i := by
   set M := (WeilSheaf.adicConstant k₀ l X).cohomology i
   have hpure := WeilSheaf.isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i
@@ -117,8 +117,8 @@ theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
   have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
   rw [Function.comp_apply, norm_inv, hnorm, ← Real.rpow_neg hq.le, Int.cast_natCast, neg_div]
 
-/-- Universal purity of the determinant factors: for `X₀` smooth, proper and geometrically
-connected of pure dimension `d`, a field embedding `ι : ℚ̄_ℓ → ℂ` and `0 ≤ i ≤ 2d`, every root `z`
+/-- Universal purity of the determinant factors: for `X₀` smooth and proper of pure
+dimension `d`, a field embedding `ι : ℚ̄_ℓ → ℂ` and `0 ≤ i ≤ 2d`, every root `z`
 of `ι P_{i,ℓ}` is algebraic over `ℚ` and every conjugate of `z` over `ℚ` has absolute value
 `q^{-i/2}`; equivalently every reciprocal root `α` of `ι P_{i,ℓ}` satisfies `|τ(α)| = q^{i/2}` for
 every embedding `τ : ℚ(α) → ℂ`. Every embedding of the number field `ℚ(α) ⊆ ℚ̄_ℓ` into `ℂ` extends
@@ -127,9 +127,8 @@ to `ℚ̄_ℓ` (`PadicAlgCl.exists_ringHom_complex_apply_eq`), and purity holds 
 because `Z(X₀, T)` has integer coefficients. -/
 theorem isUniversallyPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
     [IsProper (X ↘ Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ) {i : ℕ}
-    (hi : i ≤ 2 * d) :
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
+    {i : ℕ} (hi : i ≤ 2 * d) :
     ((frobeniusCharpolyRev k₀ l X i).map ι).IsUniversallyPureOfWeight (Nat.card k₀) i := by
   obtain ⟨D, -, hDP, hN⟩ := exists_traceDatum k₀ l X d
   have hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l))
