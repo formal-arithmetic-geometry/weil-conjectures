@@ -198,16 +198,16 @@ theorem H_map_isColimit_of_isFiltered_small [CompactSpace S] [QuasiSeparatedSpac
 variable (S) in
 /-- **Vanishing of pro-étale cohomology passes to filtered colimits.** On a quasi-compact
 quasi-separated scheme `S`, if the pro-étale sheaves `D k` of a `u + 1`-small filtered diagram
-have vanishing `Hᵠ`, then so does their colimit. -/
+have vanishing `Hᵠ`, then so does their colimit: every class of the colimit comes from some
+`Hᵠ(S_proét, D_k)`, by the continuity of pro-étale cohomology
+(`AlgebraicGeometry.Scheme.ProEt.H_map_isColimit_of_isFiltered_small`). -/
 theorem subsingleton_H_of_isColimit_of_isFiltered [CompactSpace S] [QuasiSeparatedSpace S]
     {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
     {D : K ⥤ Sheaf (topology S) AddCommGrpCat.{u + 1}} {c : Cocone D} (hc : IsColimit c)
     (q : ℕ) (hD : ∀ k, Subsingleton (Sheaf.H (D.obj k) q)) :
-    Subsingleton (Sheaf.H c.pt q) :=
-  Sheaf.subsingleton_H_of_isColimit_of_isFiltered
-    (MorphismProperty.Over.mkIdTerminal @WeaklyEtale S)
-    (fun V : S.ProEt ↦ CompactSpace V.left ∧ QuasiSeparatedSpace V.left)
-    ⟨‹CompactSpace S›, ‹QuasiSeparatedSpace S›⟩
-    (fun _ hV _ hR ↦ exists_finite_cechNerve_of_mem_topology hV hR) hc q hD
+    Subsingleton (Sheaf.H c.pt q) := by
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨k, y, rfl⟩ := (H_map_isColimit_of_isFiltered_small S hc q).1 x
+  rw [Subsingleton.elim y 0, map_zero]
 
 end AlgebraicGeometry.Scheme.ProEt

@@ -14115,6 +14115,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ComparisonNotFormal
 public import WeilConjectures.CategoryTheory.Adjunction.CompositionCounitComparison
 public import WeilConjectures.CategoryTheory.Adjunction.CompositionCounitScalarTransport
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCompRight
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateHomEquiv
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
@@ -26714,6 +26715,7 @@ public import WeilConjectures.ZetaFunction.ExamplesFunctionalEquation
 public import WeilConjectures.ZetaFunction.FinalTheorems
 public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
+public import WeilConjectures.ZetaFunction.IntegralFactorsRecovery
 public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
 public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Rationality
