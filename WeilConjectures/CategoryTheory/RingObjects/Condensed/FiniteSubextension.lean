@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-!
 
@@ -178,6 +179,74 @@ noncomputable def isColimitPadicAlgClRingObjCocone :
   refine isColimitOfReflects (sheafToPresheaf _ _) ?_
   refine evaluationJointlyReflectsColimits _ fun S ↦
     isColimitOfReflects (forget Ab.{u + 1}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
+  · intro x
+    obtain ⟨⟨f, E, hE, hf⟩⟩ := x
+    refine ⟨⟨E, hE⟩, ULift.up (⟨fun x ↦ ⟨f x, hf x⟩,
+      f.continuous.subtype_mk _⟩ : C(S.unop, E)), ?_⟩
+    rfl
+  · intro E x y h
+    refine ⟨E, 𝟙 E, ?_⟩
+    obtain ⟨x⟩ := x
+    obtain ⟨y⟩ := y
+    have h' : ∀ t, (x t : PadicAlgCl ℓ) = y t := fun t ↦
+      congrArg (fun z : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ S.unop) ↦
+        (z.down : C(S.unop, PadicAlgCl ℓ)) t) h
+    have : x = y := ContinuousMap.ext fun t ↦ Subtype.val_injective (h' t)
+    subst this
+    rfl
+
+/-! ### `ℚ̲̄_ℓ` as the colimit of the `E̲` in condensed rings -/
+
+/-- The inclusion `E̲ ⟶ F̲` followed by the inclusion `F̲ ⟶ ℚ̲̄_ℓ` is the inclusion
+`E̲ ⟶ ℚ̲̄_ℓ`, as morphisms of condensed rings. -/
+@[reassoc]
+lemma padicSubfieldCondensedRingMap_comp_toPadicAlgCl {E F : FiniteIntermediateField ℓ}
+    (h : E ≤ F) :
+    padicSubfieldCondensedRingMap.{u} ℓ h ≫ padicSubfieldCondensedRingToPadicAlgCl ℓ F =
+      padicSubfieldCondensedRingToPadicAlgCl ℓ E :=
+  rfl
+
+/-- The diagram `E ↦ E̲` of condensed rings, indexed by the finite subextensions `E ⊆ ℚ̄_ℓ` of
+`ℚ_ℓ` ordered by inclusion. Its composite with the forgetful functor to condensed abelian groups
+is `padicSubfieldRingObjFunctor`. -/
+noncomputable def padicSubfieldCondensedRingFunctor :
+    FiniteIntermediateField ℓ ⥤ Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} where
+  obj E := continuousMapRingSheaf E
+  map f := padicSubfieldCondensedRingMap ℓ (leOfHom f)
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+lemma padicSubfieldCondensedRingFunctor_comp_sheafCompose :
+    padicSubfieldCondensedRingFunctor.{u} ℓ ⋙
+        sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1}) =
+      padicSubfieldRingObjFunctor ℓ :=
+  rfl
+
+/-- The cocone over the diagram `E ↦ E̲` of condensed rings with vertex `ℚ̲̄_ℓ`, given by the
+inclusions `E̲ ⟶ ℚ̲̄_ℓ`. -/
+noncomputable def padicAlgClCondensedRingCocone :
+    Cocone (padicSubfieldCondensedRingFunctor.{u} ℓ) where
+  pt := padicAlgClCondensedRing ℓ
+  ι :=
+    { app E := padicSubfieldCondensedRingToPadicAlgCl ℓ E
+      naturality _ _ f :=
+        (padicSubfieldCondensedRingMap_comp_toPadicAlgCl ℓ (leOfHom f)).trans
+          (Category.comp_id _).symm }
+
+/-- **`ℚ̲̄_ℓ = colim_E E̲` in condensed rings**: the inclusions `E̲ ⟶ ℚ̲̄_ℓ` exhibit the condensed
+ring `ℚ̲̄_ℓ` as the filtered colimit of the condensed rings `E̲` of the finite subextensions
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, in sheaves of rings on profinite sets. The colimit is computed sectionwise
+and on underlying sets, as a filtered colimit of rings; this is the colimit
+`isColimitPadicAlgClRingObjCocone` in condensed abelian groups, lifted to condensed rings. -/
+noncomputable def isColimitPadicAlgClCondensedRingCocone :
+    IsColimit (padicAlgClCondensedRingCocone.{u} ℓ) := by
+  have := preservesSmallestFilteredColimits_of_preservesFilteredColimits (forget RingCat.{u + 1})
+  have : ReflectsColimitsOfShape (FiniteIntermediateField ℓ) (forget RingCat.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  refine isColimitOfReflects (sheafToPresheaf _ _) ?_
+  refine evaluationJointlyReflectsColimits _ fun S ↦
+    isColimitOfReflects (forget RingCat.{u + 1}) ?_
   refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
   · intro x
     obtain ⟨⟨f, E, hE, hf⟩⟩ := x
