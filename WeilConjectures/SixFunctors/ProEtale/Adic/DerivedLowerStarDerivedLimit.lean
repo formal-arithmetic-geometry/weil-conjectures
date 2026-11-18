@@ -9,13 +9,18 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Derived pushforward commutes with derived limits
 
 A derived limit of a tower `(Kₙ, fₙ)` in a triangulated category is the first vertex `L` of a
-distinguished triangle `L ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶ L[1]` (`CategoryTheory.IsDerivedLimitTriangle`,
-`def-weil-derived-limit`). A triangulated functor preserving countable products sends such a
+distinguished triangle `L ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶ L[1]` (`CategoryTheory.IsDerivedLimitTriangle`).
+A triangulated functor preserving countable products sends such a
 triangle to a triangle of the same kind (`CategoryTheory.Functor.isDerivedLimitTriangle_map`),
 i.e. it commutes with derived limits: `Φ (R lim Kₙ) = R lim Φ Kₙ`.
 
@@ -23,8 +28,15 @@ The derived pushforward `Rg_*` of pro-étale sheaves is a right adjoint
 (`AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction`), so it preserves products,
 and it is triangulated; hence `Rg_* (R lim Kₙ) = R lim Rg_* Kₙ`
 (`AlgebraicGeometry.ProEtale.isDerivedLimitTriangle_rightDerivedLowerStar`), the formal input
-`Rf_* R lim = R lim Rf_*` of the passage from the finite levels `ℤ/ℓⁿ` to `ℤ_ℓ` (Stacks 08U1,
-blueprint `lem-pc-derived-functor-commutes-derived-limit`).
+`Rf_* R lim = R lim Rf_*` of the passage from the finite levels `ℤ/ℓⁿ` to `ℤ_ℓ` (Stacks 08U1).
+
+The same right-adjoint argument gives that `Rg_*` preserves arbitrary products
+(`AlgebraicGeometry.ProEtale.preservesLimitsOfShape_discrete_rightDerivedLowerStar`) and that the
+derived global sections `RΓ(S, -)`, right adjoint to the derived constant sheaf functor
+(`AlgebraicGeometry.ProEtale.derivedConstantSheafGlobalSectionsAdjunction`), preserve arbitrary
+products and derived limit triangles
+(`AlgebraicGeometry.ProEtale.preservesLimitsOfShape_discrete_rightDerivedGlobalSections`,
+`AlgebraicGeometry.ProEtale.isDerivedLimitTriangle_rightDerivedGlobalSections`).
 -/
 
 @[expose] public section
@@ -109,5 +121,60 @@ theorem isHomotopyLimit_rightDerivedLowerStar_mapCone {Z Y : Scheme.{u}} (g : Z 
     (hc : IsHomotopyLimit c) : IsHomotopyLimit (R((g)_*[A]).mapCone c) := by
   have := (derivedUpperStarLowerStarAdjunction A g).rightAdjoint_preservesLimits
   exact hc.map _
+
+/-- **`Rg_*` preserves arbitrary products**: the derived pushforward along any morphism of
+schemes is a right adjoint, so it preserves all limits, in particular the products indexed by any
+type `J`. -/
+theorem preservesLimitsOfShape_discrete_rightDerivedLowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (J : Type w) : PreservesLimitsOfShape (Discrete J) R((g)_*[A]) := by
+  have := (derivedUpperStarLowerStarAdjunction A g).rightAdjoint_preservesLimits
+  infer_instance
+
+/-- The derived adjunction `L(const) ⊣ RΓ(S, -)` between the derived constant sheaf functor and
+the derived global sections of pro-étale sheaves on a scheme `S`: the constant sheaf functor is
+exact, so its derived functor is induced termwise, and the global sections functor is derived by
+K-injective resolutions. -/
+noncomputable def derivedConstantSheafGlobalSectionsAdjunction (S : Scheme.{u}) :
+    (constantSheaf (Scheme.ProEt.topology S) A).mapDerivedCategory ⊣
+      (globalSectionsFunctor A S).rightDerivedFunctor :=
+  haveI : ((sheafSections (Scheme.ProEt.topology S) A).obj
+      (Opposite.op (Scheme.ProEt.mk (𝟙 S)))).Additive :=
+    inferInstanceAs (globalSectionsFunctor A S).Additive
+  (constantSheafAdj (Scheme.ProEt.topology S) A
+    (Scheme.ProEt.isTerminalMkId S)).mapDerivedCategoryRightDerivedAdjunction
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
+/-- **`RΓ(S, -)` preserves arbitrary products**: the derived global sections functor on the
+pro-étale site of a scheme `S` is a right adjoint, so it preserves the products indexed by any
+type `J`. -/
+theorem preservesLimitsOfShape_discrete_rightDerivedGlobalSections (S : Scheme.{u})
+    (J : Type w) :
+    PreservesLimitsOfShape (Discrete J) (globalSectionsFunctor A S).rightDerivedFunctor := by
+  have := (derivedConstantSheafGlobalSectionsAdjunction A S).rightAdjoint_preservesLimits
+  infer_instance
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
+/-- **`RΓ(S, R lim Kₙ) = R lim RΓ(S, Kₙ)`** (Stacks 08U1): the derived global sections functor on
+the pro-étale site of a scheme `S`, a triangulated right adjoint, sends a derived limit triangle
+of a tower of complexes of pro-étale sheaves to a derived limit triangle of the image tower. -/
+theorem isDerivedLimitTriangle_rightDerivedGlobalSections (S : Scheme.{u})
+    {K : ℕ → DerivedCategory (Sheaf (Scheme.ProEt.topology S) A)} [HasProduct K]
+    [HasProduct fun n ↦ (globalSectionsFunctor A S).rightDerivedFunctor.obj (K n)]
+    (f : ∀ n, K (n + 1) ⟶ K n) (L : DerivedCategory (Sheaf (Scheme.ProEt.topology S) A))
+    (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧) (h : IsDerivedLimitTriangle f L p δ) :
+    ∃ e : (globalSectionsFunctor A S).rightDerivedFunctor.obj (∏ᶜ K) ≅
+        ∏ᶜ fun n ↦ (globalSectionsFunctor A S).rightDerivedFunctor.obj (K n),
+      (∀ n, e.hom ≫ Pi.π _ n =
+        (globalSectionsFunctor A S).rightDerivedFunctor.map (Pi.π K n)) ∧
+      IsDerivedLimitTriangle
+        (fun n ↦ (globalSectionsFunctor A S).rightDerivedFunctor.map (f n))
+        ((globalSectionsFunctor A S).rightDerivedFunctor.obj L)
+        ((globalSectionsFunctor A S).rightDerivedFunctor.map p ≫ e.hom)
+        (e.inv ≫ (globalSectionsFunctor A S).rightDerivedFunctor.map δ ≫
+          ((globalSectionsFunctor A S).rightDerivedFunctor.commShiftIso (1 : ℤ)).hom.app L) := by
+  have := (derivedConstantSheafGlobalSectionsAdjunction A S).rightAdjoint_preservesLimits
+  exact (globalSectionsFunctor A S).rightDerivedFunctor.isDerivedLimitTriangle_map f L p δ h
 
 end AlgebraicGeometry.ProEtale
