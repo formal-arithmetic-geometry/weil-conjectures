@@ -33,8 +33,7 @@ part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_st
 
 * The six operations are those of the ambient derived categories `D(-_ét, Λ)`; their restrictions
   to `Dctf` are `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`, …, and
-  the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`
- .
+  the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`.
 * The dimension-free internal-Hom interval `[c - b, d - a]` needs a site-perfect (dualizable)
   first variable; that it fails in general (the origin of `𝔸¹`) is
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which needs a normalized Tate

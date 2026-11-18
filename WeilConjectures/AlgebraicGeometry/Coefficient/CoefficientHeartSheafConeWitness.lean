@@ -274,8 +274,7 @@ theorem coefficientHeart_lisse_filtration (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [IsNoetherian X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj Λ) X))
-    (hM : IsConstantModelConstructible (coefficientHeartRingObj Λ) X M)
- :
+    (hM : IsConstantModelConstructible (coefficientHeartRingObj Λ) X M) :
     ∃ (Q : X.FiniteLocallyClosedStratification) (B : Fin (Q.n + 1) → Subobject M),
       B 0 = ⊥ ∧ B (Fin.last Q.n) = ⊤ ∧
       ∃ hle : ∀ a : Fin Q.n, B a.castSucc ≤ B a.succ,
