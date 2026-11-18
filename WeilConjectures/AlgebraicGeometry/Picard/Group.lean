@@ -393,4 +393,29 @@ lemma picardFunctorNormalizedMulEquiv_apply (f : X ⟶ S) (σ : S ⟶ X) (hσ : 
     picardFunctorNormalizedMulEquiv f σ hσ hf T L = (toPicardFunctor f).app (.op T) L.1 :=
   rfl
 
+local instance (Y : Scheme.{u}) :
+    SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf) :=
+  SheafOfModules.instIsInvertibleUnit.{u, u, u}
+
+/-- The normalization of a class `L ∈ Pic(X_T)` along the section `σ`:
+`L ⊗ f_T^*(σ_T^* L)⁻¹`. Its pullback along `σ_T` is trivial
+(`AlgebraicGeometry.picardNormalize_mem_picardFunctorNormalized`). -/
+noncomputable def picardNormalize (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) (T : Over S)
+    (L : (pullback f T.hom).Pic) : (pullback f T.hom).Pic :=
+  L * (Pic.map (pullback.snd f T.hom) (Pic.map (sectionBaseChange f σ hσ T) L))⁻¹
+
+/-- The normalized class `L ⊗ f_T^*(σ_T^* L)⁻¹` is trivial along `σ_T`: it lies in
+`Pic_{X/S,σ}(T)`, since `σ_T^* f_T^* = id`. -/
+theorem picardNormalize_mem_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S) (T : Over S) (L : (pullback f T.hom).Pic) :
+    picardNormalize f σ hσ T L ∈ (picardFunctorNormalized f σ hσ).obj (.op T) := by
+  have h : Pic.map (sectionBaseChange f σ hσ T)
+      (Pic.map (pullback.snd f T.hom) (Pic.map (sectionBaseChange f σ hσ T) L)) =
+      Pic.map (sectionBaseChange f σ hσ T) L := by
+    rw [← Pic.map_comp, sectionBaseChange_snd, Pic.map_id]
+  change Pic.map (sectionBaseChange f σ hσ T) (picardNormalize f σ hσ T L) =
+    Pic.mk (SheafOfModules.unit T.left.ringCatSheaf)
+  rw [← Pic.one_eq_mk_unit, picardNormalize, ← Pic.mapHom_apply (sectionBaseChange f σ hσ T),
+    map_mul, map_inv, Pic.mapHom_apply, Pic.mapHom_apply, h, mul_inv_cancel]
+
 end AlgebraicGeometry
