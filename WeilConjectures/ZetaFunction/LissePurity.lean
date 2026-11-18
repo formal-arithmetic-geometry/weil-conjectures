@@ -17,13 +17,16 @@ punctually `ι`-pure of weight `w`. Then `Hⁱ(X₀ ⊗ k̄, F)` is `ι`-pure of
 Deligne–Laumon estimate bounds the weights of `H_c^i = Hⁱ` by `w + i`, and Poincaré duality
 `H_c^i(F) × H^{2d-i}(F^∨(d)) ⟶ ℚ̄_ℓ`, with `F^∨(d)` lisse and punctually pure of weight
 `-w - 2d`, turns the same estimate in degree `2d - i` into the lower bound. This is the absolute
-case `Y₀ = Spec k₀` of `theorem-purity-higher-direct-images-under`.
+case `Y₀ = Spec k₀` of the purity of higher direct images.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology`: the upper
   bound for `H_c^i` of a sheaf mixed of weights at most `w`.
 - `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_of_isLisse`: purity of `Hⁱ`.
+- `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`,
+  `AlgebraicGeometry.WeilSheaf.purity_smoothProper`, `AlgebraicGeometry.WeilSheaf.deligne_purity`:
+  the case of the constant sheaf, Deligne's purity theorem for smooth proper varieties.
 -/
 
 @[expose] public section
@@ -49,8 +52,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The Deligne–Laumon estimate for compactly supported cohomology: for a separated `k₀`-scheme
 `X₀` of finite type and a Weil sheaf `F` mixed of weights at most `w`, `H_c^i(X₀ ⊗ k̄, F)` has
-weights at most `w + i` over `k₀` (blueprint `theorem-direct-image-mixed-sheaf--1` for the structure
-morphism). -/
+weights at most `w + i` over `k₀` (the Deligne–Laumon estimate for the structure morphism). -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology {F : WeilSheaf k₀ l X} {w : ℝ}
     (hF : F.IsMixedOfWeightsAtMost ι w) (i : ℤ) :
     (F.compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι (w + i) :=
@@ -60,7 +62,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology {F : WeilSheaf k₀ l 
 
 /-- The Tate twist `(d)` multiplies the local Frobenius at a closed point `x` by `q_x⁻ᵈ`, so it
 lowers the weights by `2d`: the constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ` has
-`2 log_q |ι (q⁻ᵈ)| = -2d` (blueprint `proposition-weights-under-usual-operations--13`). -/
+`2 log_q |ι (q⁻ᵈ)| = -2d`. -/
 theorem two_mul_logb_norm_cyclotomicUnit_pow_eq (d : ℕ) :
     2 * Real.logb (Nat.card k₀) ‖ι ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l)‖ =
       -(2 * d) := by
@@ -71,8 +73,8 @@ theorem two_mul_logb_norm_cyclotomicUnit_pow_eq (d : ℕ) :
 
 end
 
-/-- **Purity for lisse coefficients** (the absolute case of
-`theorem-purity-higher-direct-images-under`): for `X₀` smooth and proper of pure dimension `d` over
+/-- **Purity for lisse coefficients** (the absolute case of the purity of higher direct
+images): for `X₀` smooth and proper of pure dimension `d` over
 `k₀` and `F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`, the Frobenius module
 `Hⁱ(X₀ ⊗ k̄, F)` is `ι`-pure of weight `w + i` over `k₀`. -/
 theorem isPureOfWeightOver_cohomology_of_isLisse (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
@@ -114,5 +116,57 @@ theorem isPureOfWeightOver_cohomology_of_isLisse (d : ℕ) [IsProper (X ↘ Spec
   rw [map_inv₀, norm_inv, show (-w + -(2 * d) + ((2 * d - i : ℤ) : ℝ)) / 2 = -((w + i) / 2) by
     push_cast; ring, Real.rpow_neg hq.le] at h
   exact (inv_le_inv₀ hpos (Real.rpow_pos_of_pos hq _)).1 h
+
+section Constant
+
+variable (k₀ l X) (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+
+include d in
+/-- **Purity of the cohomology of a smooth proper variety**: for `X₀` smooth and proper of pure
+dimension `d` over `k₀ = 𝔽_q`, the Frobenius module `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-pure of weight `i`:
+every eigenvalue `α` of the geometric Frobenius satisfies `|ι α| = q^{i/2}`. This is the purity
+theorem for lisse coefficients applied to the constant Weil sheaf, which is lisse and punctually
+pure of weight `0`. -/
+theorem isPureOfWeightOver_cohomology_adicConstant (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
+    ((adicConstant k₀ l X).cohomology i).IsPureOfWeightOver k₀ ι i := by
+  have h := isPureOfWeightOver_cohomology_of_isLisse (ι := ι) d
+    (isLisse_adicConstant (k₀ := k₀) (l := l) (X := X)) isPunctuallyPureOfWeight_adicConstant i
+  rwa [zero_add] at h
+
+include d in
+/-- For `X₀` smooth and proper of pure dimension `d`, for every `i`, `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is
+`ι`-pure of weight `i` and `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-mixed of weights at most `i`. -/
+theorem purity_smoothProper (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
+    ((adicConstant k₀ l X).cohomology i).IsPureOfWeightOver k₀ ι i ∧
+      ((adicConstant k₀ l X).compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι i :=
+  ⟨isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i,
+    hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant k₀ l X ι i⟩
+
+include d in
+/-- For `X₀` smooth and proper of pure dimension `d` over `k₀ = 𝔽_q` and
+every `i`,
+
+1. the constant Weil sheaf is punctually `ι`-pure of weight `0`;
+2. `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-mixed of weights at most `i`;
+3. `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` Frobenius-equivariantly;
+4. `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-pure of weight `i`;
+5. every eigenvalue `α` of the geometric Frobenius on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` has
+   `|ι α| = q^{i/2}`. -/
+theorem deligne_purity (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
+    (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 ∧
+      ((adicConstant k₀ l X).compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι i ∧
+      Nonempty (((adicConstant k₀ l X).compactlySupportedCohomology i).Equiv
+        ((adicConstant k₀ l X).cohomology i)) ∧
+      ((adicConstant k₀ l X).cohomology i).IsPureOfWeightOver k₀ ι i ∧
+      ∀ α : PadicAlgCl l, ((adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue α →
+        ‖ι α‖ = (Nat.card k₀ : ℝ) ^ ((i : ℝ) / 2) :=
+  ⟨isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι),
+    hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant k₀ l X ι i,
+    WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology _ i,
+    isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i,
+    isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i⟩
+
+end Constant
 
 end AlgebraicGeometry.WeilSheaf
