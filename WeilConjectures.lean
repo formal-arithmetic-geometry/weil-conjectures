@@ -10040,6 +10040,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.PicardTensorOrdinaryCoeff
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameCoefficients
 public import WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameKummer
+public import WeilConjectures.AlgebraicGeometry.Picard.Quotient
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPointBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
@@ -14113,6 +14114,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ComparisonNotFormal
 public import WeilConjectures.CategoryTheory.Adjunction.CompositionCounitComparison
 public import WeilConjectures.CategoryTheory.Adjunction.CompositionCounitScalarTransport
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCompRight
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateHomEquiv
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
