@@ -8,7 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScala
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.ScalarRootTranspose
 import WeilConjectures.AlgebraicGeometry.ScalarData.ScalarModelUnit
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Normalized.NormalizedScalarArrow
-/-! # Scalar extension transposes to the ordinary root unit -/
+/-! # Scalar extension transposes to the ordinary root unit
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 07A6
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -19,13 +24,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local implicit_reducible] spCoefficientCommRings
 
 /-- Scalar extension followed by restriction is the integral arrow followed by
-its ordinary scalar unit, with the prescribed normalized source.
-Source: classes proof (2), Stacks 06YY and 07A6.
-(blueprint: lem-sfb-scalar-arrow-transpose).
-Proof: the section and representative equations fix the scalar adjunction, so
-its unit commutes with the specified canonical scalar shift. The source equation
-is unitNormalization and the target equation is scalarRootTranspose. Naturality
-of the unit applied to f combines these two equations. -/
+its ordinary scalar unit, with the prescribed normalized source. -/
 theorem scalarArrowTranspose (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)

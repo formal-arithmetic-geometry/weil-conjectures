@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # The actual evaluated integral line class
-
-Source: diagonal-tower trace (1), exact evaluation of the constant line class.
-(blueprint: def-sfb-finite-evaluated-integral-line-class).
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +22,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local instance 100001] finiteIntegralTowerDerived finiteIntegralTowerExt
   finiteIntegralAbDerived finiteIntegralAbExt
 
-/-- Exact evaluation of the explicitly constructed integral line class.
-Source: the constant-system construction of lineBundleClass
-(blueprint: def-sfb-finite-evaluated-integral-line-class). -/
+/-- Exact evaluation of the explicitly constructed integral line class. -/
 def finiteEvaluatedIntegralLineClass (T : Scheme.{u}) (n : ℕ) (L : T.Pic) :
     FiniteIntegralEvaluatedLineArrow T n :=
   mapSingleArrow (abEvaluation T n) (1 : ℤ) (lineBundleClass T L)

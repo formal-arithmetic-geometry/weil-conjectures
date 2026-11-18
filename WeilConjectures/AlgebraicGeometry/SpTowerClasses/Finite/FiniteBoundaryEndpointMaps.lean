@@ -34,11 +34,7 @@ private theorem scalarUnitSection
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
 /-- The integer generator followed by scalar restriction and evaluation is the
-canonical finite quotient. Source: classes proof (2), evaluation on constants.
-(blueprint: lem-sfb-finite-source-map).
-Proof: the morphism and section equations of Forget identify the composite on
-constant k with its image under the coefficient ring map. This image is k, since
-ring maps preserve integer casts. The uniqueness of finiteQuotient concludes. -/
+canonical finite quotient. -/
 theorem finiteBoundary_sourceMap (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :
@@ -60,14 +56,7 @@ theorem finiteBoundary_sourceMap (l : ℕ) [Fact l.Prime]
     ((coefficientSystemMap l E T).hom.app (op (n, U.unop))).hom k.down)))
   exact (finiteScalarForgetIso_section l E c n (coefficient T (Arings l E T)) U _ _ hy).heq
 
-/-- The ordinary scalar unit on roots evaluates to the canonical map z to 1 tensor z.
-Source: classes proof (2), the pure-tensor equation of lineEvaluation.
-(blueprint: lem-sfb-finite-root-map).
-Proof: transport z back along rootForget and then to its actual module section x.
-The section equation of the ordinary scalar unit sends x to its scalarExtensionSection.
-The evaluation comparison forgets only the action. Apply the defining equation of
-lineEvaluation with scalar 1 and cancel rootForget and its inverse. The uniqueness
-of finiteRootMap concludes. No flatness or generation hypothesis on roots is used. -/
+/-- The ordinary scalar unit on roots evaluates to the canonical map z to 1 tensor z. -/
 theorem finiteBoundary_rootMap (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :

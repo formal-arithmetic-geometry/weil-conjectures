@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictOpenTen
 
 /-! # Constant-section coordinates for strict quotient towers
 
-Source: Zheng Construction 4.1 and Lemma 4.10; blueprint tower operations proof (2).
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section

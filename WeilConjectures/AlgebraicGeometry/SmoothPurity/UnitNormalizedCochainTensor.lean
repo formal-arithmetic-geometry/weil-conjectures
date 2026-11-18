@@ -31,7 +31,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # The unit-normalized cochain tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -69,18 +71,7 @@ variable {C D : Type c} [Category.{v} C] [Category.{v} D]
     ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map phi))
 
 /-- The normalized ordinary tensor comparisons determine a unique normalized comparison
-on arbitrary unbounded cochain complexes.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4
-(blueprint: lem-pur-unit-normalized-cochain-tensor).
-Proof: totalize the inverse ordinary comparisons to obtain a map from the tensor
-of the two pulled back complexes to the pullback of their tensor. The left adjoint
-preserves the coproducts, so this map is an isomorphism. Two-variable naturality
-makes it a natural isomorphism. On each total summand, its inverse satisfies the
-ordinary comparison equation. Naturality of the adjunction unit and the ordinary
-pure-tensor normalization therefore give the stated generator equation. To prove
-uniqueness, transpose a competing map through the ordinary adjunction in each
-degree. Equality on all pure tensors in all summands determines those transposes,
-and injectivity of the adjunction bijection gives equality of the chain maps. -/
+on arbitrary unbounded cochain complexes. -/
 theorem unitNormalizedCochainTensor
     (data : OrdinaryTensorPullbackData J K U R S phi F adj) :
     ∃! e : coefficientTotalTensor.{r, c, v} J R ⋙ F.mapHomologicalComplex (.up ℤ) ≅

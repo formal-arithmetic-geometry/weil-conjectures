@@ -446,7 +446,6 @@ private meta def exactFiniteAmbient (h : Lean.Expr) : Lean.Elab.Tactic.TacticM U
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
 canonical pro-etale compactification base-change map.
-Source: blueprint operations proof (2), finite exchange word.
 The proper mate and the open exchange are transported independently through the
 fixed scalar pullback square, and their pasted word is the displayed equation.
 -/
@@ -529,7 +528,6 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
 compactification base-change map.
-Source: blueprint operations proof (2), individual etale-origin transport.
 The second conjunct of `compactSupport_exchange_transport` identifies the
 witness transport at each specified witness.
 -/

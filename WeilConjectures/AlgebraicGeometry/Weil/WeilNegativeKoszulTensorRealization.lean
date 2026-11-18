@@ -66,9 +66,9 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedRealizationTensor
 
 /-! # Realization of negative exterior factors as negative two-term factors
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(blueprint: lem-weil-pbc-negative-koszul-tensor-realization).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D8, 03EK, 0GMW, 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -307,34 +307,7 @@ private theorem negativeTensorInduction
       rfl
 
 /-- Scalar realization of the ordered algebraic negative factors is the ordered
-tensor of the explicit negative two-term factors on the completed site.
-This assertion has no internal Hom or positive Koszul complex.
-
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free terms.
-(blueprint: lem-weil-pbc-negative-koszul-tensor-realization).
-
-Proof: in rank one use exteriorPower.zeroEquiv and exteriorPower.oneEquiv,
-followed by the basis of the free module on Fin 1. Higher exterior powers vanish
-because their basis index type is empty. The extended exterior complex therefore
-has just A in degrees -1 and 0; contraction is multiplication by a^(m+1).
-The generator transition is multiplication by a in degree -1 and identity in
-degree zero. Constant sheafification and scalar extension send these free bases
-to the regular coefficient sheaf, and their multiplication maps to multiplication
-by the corresponding constant scalars. Restriction along the completed ring
-isomorphism and reindexing along the site equivalence send these scalars to
-completedCechScalar and send the prescribed coefficient unit to section 1.
-Use the tensor comparison of sheafification, extension, restriction along the
-ring isomorphism and reindexing on each finite total summand. These functors
-preserve the required coproducts (extension and sheafification are left adjoints,
-and the last two functors are equivalences). Induct on the ordered factors.
-The total tensor differential, with its existing Koszul sign, is preserved on
-each summand. Naturality of the tensor comparisons gives exactly the recursively
-defined transitions. The comparison on the summand (0,0) sends the tensor of
-the first and tail units to the tensor of their sections 1. Iterating gives
-ringedNegativeKoszulBasis at the empty subset. At rank zero use the unit
-comparison A[0] to O[0]. This involves no duality or exchange of tensor factors.
-All formulas hold for the zero ring, empty site, and zero or unit scalars. -/
+tensor of the explicit negative two-term factors on the completed site. -/
 theorem negativeKoszulTensorRealization
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

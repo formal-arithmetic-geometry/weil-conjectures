@@ -24,35 +24,7 @@ universe u u₁ v₁ u₂ v₂ w₁ w₂
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Normalization of the three adjunction comparisons fixes every finite Chern arrow.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2);
-`SmoothPurityTowerClasses`, expanded proof steps 5--8.
-(blueprint: lem-sfb-normalized-chern-finite-boundary).
-
-Proof: write the first Chern arrow as the scalar extension of the reduced
-lineBundleClass, with the stated unit inverse and target comparison. Apply the
-reduction adjunction's Hom bijection. Naturality with respect to lineBundleClass
-and sourceNormalization replace its precomposition with the integer generator
-by the positive Kummer connecting morphism specified by targetNormalization.
-For scalar extension, apply transpose_model on a K-flat representative and use
-the universal counit naturality to pass to the original object. Together with
-unitNormalization this identifies the second adjunct with that same arrow
-followed by the root map z mapping to 1 tensor z. This does not assume that an
-arbitrary root module in degree zero is K-flat.
-The universal scalar counit supplies lineComparison, so this computation uses
-the actual firstChern definition, including its shift comparison. Evaluate at
-n and forget scalars; these exact functors preserve the single and shift
-comparisons and the Kummer boundary. Their integer map agrees with
-finiteQuotient by its unique values k mapping to k times one on constant
-sections. Their root map agrees with finiteRootMap by its unique formula
-z mapping to 1 tensor z. The pure-tensor equation defining lineEvaluation
-identifies the finite target comparison. Substitute these equalities to get
-the equality of composites in finiteBoundaryEquality, using the endpoint
-transports of the two exact single comparisons for its HEq witnesses. This
-proves the equation separately for every L and n without using any assertion
-that evaluations detect equality of arbitrary derived arrows. The construction
-is natural in L; trivial L and the empty scheme need no separate choices. -/
+/-- Normalization of the three adjunction comparisons fixes every finite Chern arrow. -/
 theorem finiteChernNormalization_of_normalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (hc : c.Normalized l E) :
