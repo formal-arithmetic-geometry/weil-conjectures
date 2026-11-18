@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` with ring of integers `𝒪_E` and maximal ideal
 `𝔪_E = (ϖ)`. This file proves the projection formula at the integral stage of the `ℓ`-adic
-formalism (blueprint `sk-thm-sf-pf-adic`, with its detailed node `thm-sf-pf-adic`): for
-`f : X ⟶ Y` admitting a compactification, `K ∈ D(X_ét, 𝒪_E)` and `L ∈ D(Y_ét, 𝒪_E)`, the
-projection map
+formalism (blueprint `lemma-projection-formula-integral-coefficients`, with its detailed node
+`thm-sf-pf-adic`): for `f : X ⟶ Y` admitting a compactification, `K ∈ D(X_ét, 𝒪_E)` and
+`L ∈ D(Y_ét, 𝒪_E)`, the projection map
 
 ```
   PF_{f, K, L} : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
@@ -30,13 +30,14 @@ isomorphisms.
 ## The statement
 
 The operations of the integral stage are defined levelwise on the finite reductions (blueprint
-`det-def-sf-operations`, adic stages; `def-exchange-projection`: the coefficient categories
-`𝒪_E`, `E`, `ℚ̄_ℓ` "are obtained by derived completion"): the integral `Rf_! K ⊗ᴸ L` is the derived
-limit `R lim_n (Rf_! K_n ⊗ᴸ L_n)` of its reductions, and `PF_{f, K, L}` over `𝒪_E` is the morphism
-realized by the system `(PF_{f, K_n, L_n})_n` (`thm-sf-pf-adic`). Since reduction commutes with
-the plain operations of `D(X_ét, 𝒪_E)` (`lem-fix-operation-reduction`), this derived limit is the
-derived completion `(Rf_! K ⊗ᴸ L)^` of the plain operation, and the integral projection map is the
-derived completion of the plain projection map. So the statement proved here,
+`theorem-f-shriek-ell-adic-coefficients--4`, adic stages; `def-exchange-projection`: the coefficient
+categories `𝒪_E`, `E`, `ℚ̄_ℓ` "are obtained by derived completion"): the integral `Rf_! K ⊗ᴸ L` is
+the derived limit `R lim_n (Rf_! K_n ⊗ᴸ L_n)` of its reductions, and `PF_{f, K, L}` over `𝒪_E` is
+the morphism realized by the system `(PF_{f, K_n, L_n})_n` (`thm-sf-pf-adic`). Since reduction
+commutes with the plain operations of `D(X_ét, 𝒪_E)`
+(`proposition-six-operations-change-coefficients`), this derived limit is the derived completion
+`(Rf_! K ⊗ᴸ L)^` of the plain operation, and the integral projection map is the derived completion
+of the plain projection map. So the statement proved here,
 `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`, is the blueprint statement.
 
 The plain projection map of `D(X_ét, 𝒪_E)` itself is only shown to be an isomorphism when its
@@ -120,9 +121,9 @@ theorem hasProjectionFormula_of_derivedComplete_of_isIso_reductionModIdeal {Λ' 
 the reduction of the projection map modulo `𝔪_E` is an isomorphism, then the projection formula
 holds for `f` at `K` and `L`.
 
-This is the passage to the limit of blueprint `sk-thm-sf-pf-adic` (Step 3) and `thm-sf-pf-adic`:
-the reduction modulo `𝔪_E = (ϖ)` is conservative on derived complete objects
-(`AlgebraicGeometry.Etale.isIso_of_derivedComplete_of_isIso_reductionModIdeal`). -/
+This is the passage to the limit of blueprint `lemma-projection-formula-integral-coefficients`
+(Step 3) and `thm-sf-pf-adic`: the reduction modulo `𝔪_E = (ϖ)` is conservative on derived complete
+objects (`AlgebraicGeometry.Etale.isIso_of_derivedComplete_of_isIso_reductionModIdeal`). -/
 theorem hasProjectionFormula_of_isIso_reductionModIdeal_map (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
@@ -146,15 +147,15 @@ lemma finite_quotient_maximalIdealShrink_pow (n : ℕ) :
     (PadicAlgCl.shrinkRingEquiv l E)
     (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow]; rfl)).toEquiv
 
-/-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`: the reduction of the projection map modulo
-`𝔪_E` is an isomorphism.
+/-- Steps 1 and 2 of blueprint `lemma-projection-formula-integral-coefficients`: the reduction of
+the projection map modulo `𝔪_E` is an isomorphism.
 
 If `K` and `L` are bounded constructible, derived complete for `𝔪_E` and of finite Tor
 amplitude, then `ρ(PF_{f, K, L})`, the image of the projection map under the reduction
 `- ⊗ᴸ (𝒪_E/𝔪_E)_Y`, is an isomorphism. In the blueprint, `ρ(PF_{f, K, L})` is identified with the
 finite-level projection map `PF_{f, K₁, L₁}` by the reduction square of
-`sk-prop-sf-pf-reduction` (`lem-fix-operation-reduction`), and the latter is an isomorphism by
-the finite-level projection formula `sk-thm-sf-pf-finite`
+`sk-prop-sf-pf-reduction` (`proposition-six-operations-change-coefficients`), and the latter is an
+isomorphism by the finite-level projection formula `sk-thm-sf-pf-finite`
 (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`). The hypotheses
 on `K` and `L` are not needed. -/
 theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f : X ⟶ Y)
@@ -177,14 +178,14 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f 
   have h := isIso_reductionModIdeal_map_projectionMap_of_finite hϖ 1 f K L
   rwa [pow_one, ← hI] at h
 
-/-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`, at every level `n`: the reduction of the
-projection map modulo `𝔪_Eⁿ` is an isomorphism.
+/-- Steps 1 and 2 of blueprint `lemma-projection-formula-integral-coefficients`, at every level `n`:
+the reduction of the projection map modulo `𝔪_Eⁿ` is an isomorphism.
 
 For all `K` and `L`, `ρ_n(PF_{f, K, L})`, the image of the projection map under the reduction
 `- ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y`, is an isomorphism: it is identified with the finite-level projection map
 `PF_{f, K_n, L_n}` over `𝒪_E/𝔪_Eⁿ` by the reduction square of `sk-prop-sf-pf-reduction`
-(`lem-fix-operation-reduction`), an isomorphism by the finite-level projection formula
-`sk-thm-sf-pf-finite`
+(`proposition-six-operations-change-coefficients`), an isomorphism by the finite-level projection
+formula `sk-thm-sf-pf-finite`
 (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`). -/
 theorem isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap (f : X ⟶ Y)
     [HasCompactification f]
@@ -220,7 +221,8 @@ theorem isIso_completion_map_of_isIso_reductionModIdeal
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC)
 
 /-- **The projection formula at the integral stage of the étale model** (the étale-site form of
-the old blueprint `sk-thm-sf-pf-adic`; the pro-étale statement of the current blueprint is in
+the old blueprint `lemma-projection-formula-integral-coefficients`; the pro-étale statement of the
+current blueprint is in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic`).
 
 At the integral stage of the `ℓ`-adic formalism, where the coefficients are the ring of

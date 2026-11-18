@@ -52,7 +52,7 @@ Proof following the node's six steps:
    (`lem-weil-pbc-geometric-stalks-detect-mono`) implies `N` kills `P.F`.
 2. Monicity of `α` and epicity of `β` imply `N` also kills `F₁` and `F₂`.
    Sheaves killed by `N` form the full subcategory of abelian sheaves of `Z/N`-module
-   sheaves (`def-weil-pbc-etale-sheaves`, `def-weil-pbc-abelian-etale-sheaves`), closed
+   sheaves (`def-weil-pbc-etale-sheaves`, `situation-conventions`), closed
    under subobjects and quotients. The same sequence is short exact there.
 3. By `lem-weil-pbc-constructible-torsion-modules-agree`, `P.F` is constructible as a
    `Z/N`-module sheaf. On the Noetherian curve every locally closed stratum is

@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralProjectionDi
 /-! # Uniqueness of normalized maps from completed coefficients to a finite quotient
 
 Source: the finite-quotient uniqueness argument in the coefficient-tower comparison,
-blueprint main-20261015, sk-def-sp-coefficient-towers.
+blueprint main-20261015, prose-09-21.
 -/
 
 @[expose] public noncomputable section
@@ -108,7 +108,7 @@ private theorem completedIntegral_approximation
   exact (add_sub_cancel _ _).symm
 
 /-- Maps into one finite constant quotient are determined by their normalized scalar map.
-Source: blueprint main-20261015, coefficient convention in sk-def-sp-coefficient-towers;
+Source: blueprint main-20261015, coefficient convention in prose-09-21;
 the uniqueness step of its completed-coefficient comparison.
 (blueprint: lem-sp-completed-integral-finite-quotient-hom-ext)
 

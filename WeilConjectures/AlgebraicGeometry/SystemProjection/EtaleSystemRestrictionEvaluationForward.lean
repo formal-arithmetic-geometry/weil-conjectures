@@ -114,8 +114,8 @@ private theorem mateCubeReflects
           (mateEquiv a₂ a₄ c').app (h.obj N)) :
     ∀ M : A, L₄.map (e.hom.app M) ≫ c'.app (g.obj M) ≫ w'.map (s.app M) =
       s'.app (v.obj M) ≫ h'.map (c.app M) ≫ d.hom.app (L₁.obj M) := by
-  have ht : Functor.whiskerRight e.hom L₄ ≫ (TwoSquare.hComp s c').natTrans =
-      (TwoSquare.hComp c s').natTrans ≫ Functor.whiskerLeft L₁ d.hom := by
+  have ht : Functor.whiskerRight e.hom L₄ ≫ (TwoSquare.hComp s c') =
+      (TwoSquare.hComp c s') ≫ Functor.whiskerLeft L₁ d.hom := by
     apply (mateEquiv a₁ a₄).injective
     rw [mateEquiv_whiskerRight_comp, mateEquiv_comp_whiskerLeft,
       mateEquiv_vcomp a₁ a₂ a₄, mateEquiv_vcomp a₁ a₃ a₄]
@@ -151,9 +151,8 @@ private theorem openRestrictionMate
       (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j)
       (TwoSquare.mk _ _ _ _ (Iso.refl
         (Sheaf.restrictScalars Z.smallEtaleTopology a ⋙
-          openImmersionRestriction (ModuleCat.{u + 1} A) j)).hom)).natTrans =
+          openImmersionRestriction (ModuleCat.{u + 1} A) j)).hom)) =
       (lowerStarRestrictScalarsIso a j).hom := by
-  apply congrArg TwoSquare.natTrans
   apply mateFromUnit
   intro M
   calc
@@ -176,10 +175,9 @@ private theorem openExtensionMate
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     (mateEquiv (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} B) j)
       (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j)
-      (TwoSquare.mk _ _ _ _ (openImmersionLowerShriekRestrictScalarsIso a j).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (openImmersionLowerShriekRestrictScalarsIso a j).hom)) =
       (Iso.refl (openImmersionRestriction (ModuleCat.{u + 1} B) j ⋙
         Sheaf.restrictScalars X.smallEtaleTopology a)).hom := by
-  apply congrArg TwoSquare.natTrans
   apply mateFromUnit
   intro M
   exact (Category.comp_id _).trans
@@ -215,7 +213,7 @@ private theorem ordinaryInverseCube
       HEq (((sy.hom.app M).hom.app U) x) x)
     (z : Sheaf.restrictScalars Y.smallEtaleTopology (a.app (op n)).hom ⋙ LB ≅
       LC ⋙ Sheaf.restrictScalars X.smallEtaleTopology (a.app (op n)).hom)
-    (hz : (mateEquiv ac ab (TwoSquare.mk _ _ _ _ z.hom)).natTrans =
+    (hz : (mateEquiv ac ab (TwoSquare.mk _ _ _ _ z.hom)) =
       (lowerStarRestrictScalarsIso (a.app (op n)).hom g).hom) :
     ∀ M : Modules Y C,
       LB.map (sy.inv.app M) ≫ eb.inverse.hom.app ((res (ringMap Y a)).obj M) ≫
@@ -229,17 +227,17 @@ private theorem ordinaryInverseCube
     (TwoSquare.mk _ _ _ _ ec.inverse.hom)
     (TwoSquare.mk _ _ _ _ eb.inverse.hom) sy.symm sx.symm
   have hr : (mateEquiv e.adjunction d.adjunction
-      (TwoSquare.mk _ _ _ _ r.inverseImage.hom)).natTrans = r.ordinary.inv := by
+      (TwoSquare.mk _ _ _ _ r.inverseImage.hom)) = r.ordinary.inv := by
     rw [r.inverseImage_mate]
-    exact congrArg TwoSquare.natTrans ((mateEquiv e.adjunction d.adjunction).apply_symm_apply _)
+    exact ((mateEquiv e.adjunction d.adjunction).apply_symm_apply _)
   have hb : (mateEquiv d.adjunction ab
-      (TwoSquare.mk _ _ _ _ eb.inverse.hom)).natTrans = eb.ordinary.hom := by
+      (TwoSquare.mk _ _ _ _ eb.inverse.hom)) = eb.ordinary.hom := by
     rw [eb.inverse_mate]
-    exact congrArg TwoSquare.natTrans ((mateEquiv d.adjunction ab).apply_symm_apply _)
+    exact ((mateEquiv d.adjunction ab).apply_symm_apply _)
   have hc : (mateEquiv e.adjunction ac
-      (TwoSquare.mk _ _ _ _ ec.inverse.hom)).natTrans = ec.ordinary.hom := by
+      (TwoSquare.mk _ _ _ _ ec.inverse.hom)) = ec.ordinary.hom := by
     rw [ec.inverse_mate]
-    exact congrArg TwoSquare.natTrans ((mateEquiv e.adjunction ac).apply_symm_apply _)
+    exact ((mateEquiv e.adjunction ac).apply_symm_apply _)
   have hxi (M : Modules X C) (U : X.Etaleᵒᵖ) (x : M.val.obj (op (n, U.unop))) :
       HEq ((sx.inv.app M).hom.app U x) x := by
     have h := hsx M U ((sx.inv.app M).hom.app U x)
@@ -267,14 +265,14 @@ private theorem ordinaryInverseCube
   intro M
   change (Sheaf.restrictScalars Y.smallEtaleTopology (a.app (op n)).hom).map
       ((mateEquiv e.adjunction ac
-        (TwoSquare.mk _ _ _ _ ec.inverse.hom)).natTrans.app M) ≫
-      (mateEquiv ac ab (TwoSquare.mk _ _ _ _ z.hom)).natTrans.app _ ≫
+        (TwoSquare.mk _ _ _ _ ec.inverse.hom)).app M) ≫
+      (mateEquiv ac ab (TwoSquare.mk _ _ _ _ z.hom)).app _ ≫
       (lowerStar (ModuleCat.{u + 1} (B.obj (op n))) g).map (sx.inv.app M) =
     sy.inv.app (e.toDirectImage.push.obj M) ≫
       (level Y B n).map ((mateEquiv e.adjunction d.adjunction
-        (TwoSquare.mk _ _ _ _ r.inverseImage.hom)).natTrans.app M) ≫
+        (TwoSquare.mk _ _ _ _ r.inverseImage.hom)).app M) ≫
       (mateEquiv d.adjunction ab
-        (TwoSquare.mk _ _ _ _ eb.inverse.hom)).natTrans.app _
+        (TwoSquare.mk _ _ _ _ eb.inverse.hom)).app _
   rw [hc, hz, hr, hb]
   ext U x
   change ((sx.inv.app M).hom.app
@@ -316,11 +314,11 @@ private theorem restriction_exact_mate
         (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
         (TwoSquare.mk _ _ _ _
           (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ f)).hom)
-        ).natTrans := by
+        ) := by
   rw [mapDerivedUpperStarLowerStarAdjunction_eq, mapDerivedUpperStarLowerStarAdjunction_eq]
   ext K
   simp only [scalarRestrictionDirectImageMap, scalarRestrictionPullbackIso,
-    mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
       Category.id_comp, Functor.comp_map,
@@ -500,31 +498,31 @@ private theorem openCube
       sx.symm sy.symm
     have hr : (mateEquiv (t.support C).openImage.openAdjunction
         (t.support B).openImage.openAdjunction
-        (TwoSquare.mk _ _ _ _ r.ordinary.hom)).natTrans = r.image.inverseImage.inv := by
+        (TwoSquare.mk _ _ _ _ r.ordinary.hom)) = r.image.inverseImage.inv := by
       rw [r.mate]
-      exact congrArg TwoSquare.natTrans (Equiv.apply_symm_apply _ _)
+      exact (Equiv.apply_symm_apply _ _)
     have hb : (mateEquiv (t.support B).openImage.openAdjunction
         (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} (B.rings.obj (op n))) c.i)
-        (TwoSquare.mk _ _ _ _ eb.ordinary.inv)).natTrans = eb.image.inverse.inv := by
+        (TwoSquare.mk _ _ _ _ eb.ordinary.inv)) = eb.image.inverse.inv := by
       rw [eb.mate]
-      exact congrArg TwoSquare.natTrans (Equiv.apply_symm_apply _ _)
+      exact (Equiv.apply_symm_apply _ _)
     have he : (mateEquiv (t.support C).openImage.openAdjunction
         (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} (C.rings.obj (op n))) c.i)
-        (TwoSquare.mk _ _ _ _ ec.ordinary.inv)).natTrans = ec.image.inverse.inv := by
+        (TwoSquare.mk _ _ _ _ ec.ordinary.inv)) = ec.image.inverse.inv := by
       rw [ec.mate]
-      exact congrArg TwoSquare.natTrans (Equiv.apply_symm_apply _ _)
+      exact (Equiv.apply_symm_apply _ _)
     intro M
     change (Sheaf.restrictScalars X.smallEtaleTopology (a.app (op n)).hom).map
         ((mateEquiv (t.support C).openImage.openAdjunction
           (openImmersionLowerShriekAdjunction
             (ModuleCat.{u + 1} (C.rings.obj (op n))) c.i)
-          (TwoSquare.mk _ _ _ _ ec.ordinary.inv)).natTrans.app M) ≫
+          (TwoSquare.mk _ _ _ _ ec.ordinary.inv)).app M) ≫
         (mateEquiv
           (openImmersionLowerShriekAdjunction
             (ModuleCat.{u + 1} (C.rings.obj (op n))) c.i)
           (openImmersionLowerShriekAdjunction
             (ModuleCat.{u + 1} (B.rings.obj (op n))) c.i)
-          (TwoSquare.mk _ _ _ _ zb.hom)).natTrans.app
+          (TwoSquare.mk _ _ _ _ zb.hom)).app
             ((level c.Z C.rings n).obj M) ≫
         (openImmersionRestriction (ModuleCat.{u + 1} (B.rings.obj (op n))) c.i).map
           (sy.inv.app M) =
@@ -532,11 +530,11 @@ private theorem openCube
         (level X B.rings n).map
           ((mateEquiv (t.support C).openImage.openAdjunction
             (t.support B).openImage.openAdjunction
-            (TwoSquare.mk _ _ _ _ r.ordinary.hom)).natTrans.app M) ≫
+            (TwoSquare.mk _ _ _ _ r.ordinary.hom)).app M) ≫
         (mateEquiv (t.support B).openImage.openAdjunction
           (openImmersionLowerShriekAdjunction
             (ModuleCat.{u + 1} (B.rings.obj (op n))) c.i)
-          (TwoSquare.mk _ _ _ _ eb.ordinary.inv)).natTrans.app
+          (TwoSquare.mk _ _ _ _ eb.ordinary.inv)).app
             ((res (ringMap c.Z a)).obj M)
     rw [he, hr, hb]
     dsimp only [zb]

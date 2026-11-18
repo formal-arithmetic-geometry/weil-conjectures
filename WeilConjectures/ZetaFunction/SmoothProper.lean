@@ -29,9 +29,13 @@ the functional equation and the Riemann hypothesis, and `Pᵢ` realizes the dete
 
 - `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_zero`,
   `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_two_mul`: the endpoint factors
-  `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T` (`prop-endpoints`).
+  `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T` (`theorem-weil-conjectures-smooth-proper-schemes`).
 - `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity
-  (`thm-weil-final-rh`, `prop-weight-purity-roots`).
+  (`theorem-weil-conjectures-smooth-proper-schemes`,
+  `corollary-purity-cohomology-smooth-proper-variety--1`).
+- `AlgebraicGeometry.Scheme.isUniversallyPureOfWeight_map_frobeniusCharpolyRev`: the reciprocal
+  roots of `P_{i,ℓ}` are `q`-Weil numbers of weight `i`, under every embedding of their number
+  fields.
 - `AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`: the Weil conjectures
   for `X₀`, with the realization of the factors for every `ℓ`.
 -/
@@ -53,8 +57,8 @@ section Endpoints
 variable (k₀) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The degree-zero endpoint of `prop-endpoints`: for `X₀` geometrically connected,
-`H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` with trivial Frobenius
+/-- The degree-zero endpoint of `theorem-weil-conjectures-smooth-proper-schemes`: for `X₀`
+geometrically connected, `H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` with trivial Frobenius
 (`AlgebraicGeometry.WeilSheaf.finrank_cohomology_zero_adicConstant`,
 `AlgebraicGeometry.WeilSheaf.frobenius_cohomology_zero_adicConstant`), so `P_{0,ℓ} = 1 - T`. -/
 theorem frobeniusCharpolyRev_zero [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -68,10 +72,10 @@ theorem frobeniusCharpolyRev_zero [IsSeparated (X ↘ Spec (CommRingCat.of k₀)
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, h, LinearMap.charpolyRev_one,
     WeilSheaf.finrank_cohomology_zero_adicConstant, pow_one]
 
-/-- The top-degree endpoint of `prop-endpoints`: for `X₀` smooth, proper and geometrically
-connected of pure dimension `d`, the trace `H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)` of Poincaré duality is
-a Frobenius-equivariant isomorphism onto a line on which Frobenius acts by `qᵈ`, so
-`P_{2d,ℓ} = 1 - qᵈ T`. -/
+/-- The top-degree endpoint of `theorem-weil-conjectures-smooth-proper-schemes`: for `X₀` smooth,
+proper and geometrically connected of pure dimension `d`, the trace
+`H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)` of Poincaré duality is a Frobenius-equivariant isomorphism onto a
+line on which Frobenius acts by `qᵈ`, so `P_{2d,ℓ} = 1 - qᵈ T`. -/
 theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
@@ -88,12 +92,13 @@ theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCa
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
     LinearMap.charpolyRev_smul_one, hfin, pow_one]
 
-/-- Blueprint `thm-weil-final-rh` and `prop-weight-purity-roots` (reciprocal roots have the
-weight-`i` absolute value): for `X₀` smooth, proper and geometrically connected of pure
-dimension `d` and every field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}`
-satisfies `|ι α| = q^{i/2}`; equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal
-roots are the Frobenius eigenvalues (`prop-weil-reciprocal-roots-eigenvalues`), which have this
-absolute value by `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`. -/
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` and
+`corollary-purity-cohomology-smooth-proper-variety--1` (reciprocal roots have the weight-`i`
+absolute value): for `X₀` smooth, proper and geometrically connected of pure dimension `d` and every
+field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}` satisfies `|ι α| = q^{i/2}`;
+equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal roots are the Frobenius eigenvalues
+(`prose-19-08`), which have this absolute value by
+`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`. -/
 theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
     [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
@@ -114,6 +119,32 @@ theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
   have hnorm := hpure α hα'
   have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
   rw [Function.comp_apply, norm_inv, hnorm, ← Real.rpow_neg hq.le, Int.cast_natCast, neg_div]
+
+/-- Universal purity of the determinant factors: for `X₀` smooth, proper and geometrically
+connected of pure dimension `d`, a field embedding `ι : ℚ̄_ℓ → ℂ` and `0 ≤ i ≤ 2d`, every root `z`
+of `ι P_{i,ℓ}` is algebraic over `ℚ` and every conjugate of `z` over `ℚ` has absolute value
+`q^{-i/2}`; equivalently every reciprocal root `α` of `ι P_{i,ℓ}` satisfies `|τ(α)| = q^{i/2}` for
+every embedding `τ : ℚ(α) → ℂ`. Every embedding of the number field `ℚ(α) ⊆ ℚ̄_ℓ` into `ℂ` extends
+to `ℚ̄_ℓ` (`PadicAlgCl.exists_ringHom_complex_apply_eq`), and purity holds for every extension
+(`AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`); the roots are algebraic
+because `Z(X₀, T)` has integer coefficients. -/
+theorem isUniversallyPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
+    [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ) {i : ℕ}
+    (hi : i ≤ 2 * d) :
+    ((frobeniusCharpolyRev k₀ l X i).map ι).IsUniversallyPureOfWeight (Nat.card k₀) i := by
+  obtain ⟨D, -, hDP, hN⟩ := exists_traceDatum k₀ l X d
+  have hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l))
+      (X ↘ Spec (CommRingCat.of k₀)).zetaSeries = D.zeta :=
+    D.map_zetaSeries _ hN
+  have hq : 1 < Nat.card k₀ := Finite.one_lt_card
+  have h := D.isUniversallyPureOfWeight_map_P hq
+    (fun _ _ hβ hz ↦ PadicAlgCl.exists_ringHom_complex_apply_eq l hβ hz)
+    (fun ι' j ↦ by rw [hDP]; exact isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι' j) hZ
+    (X ↘ Spec (CommRingCat.of k₀)).exists_int_zetaSeries ι ⟨i, by omega⟩
+  rw [hDP] at h
+  exact h
 
 /-- The Weil conjectures for `X₀` at the prime `ℓ`: the factorization, the functional equation
 and the Riemann hypothesis for integer polynomials `Pᵢ` with `Pᵢ^{(ℓ)} = P_{i,ℓ}`. -/

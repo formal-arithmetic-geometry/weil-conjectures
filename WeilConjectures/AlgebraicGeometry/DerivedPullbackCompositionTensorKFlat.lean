@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option maxHeartbeats 400000 in
 -- The selected counits and tensor model maps have large dependent types.
 /-- The fixed composition comparison preserves the normalized tensorator on
 localized K-flat complexes.

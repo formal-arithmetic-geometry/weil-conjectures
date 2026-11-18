@@ -257,7 +257,6 @@ private theorem cancellation_inv_pure
 attribute [local irreducible] LineUnbounded.derived LineUnbounded.normalization
   compute signedLinePower scalarTensorPower
 
-set_option maxHeartbeats 400000 in
 -- The chart-wise computation through the successive derived quotient is slow to elaborate.
 private theorem ordinary_evaluation
     (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}

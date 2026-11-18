@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import Mathlib.Algebra.Category.Grp.Zero
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite

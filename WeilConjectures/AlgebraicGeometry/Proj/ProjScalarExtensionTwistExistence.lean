@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
 /-! # ProjScalarExtensionTwistExistence
 
-Source: Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+## References
+
+* Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ
+* Stacks Project, Constructions, Tags 01N2 and 01MY
+-/
 
 @[expose] public section
 
@@ -34,9 +37,7 @@ variable {A B σ τ : Type u} [CommRing A] [CommRing B]
 
 open HomogeneousLocalization ProjectiveSpectrum.Twist
 
-/-- The ordinary localization map preserves each homogeneous degree.
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- The ordinary localization map preserves each homogeneous degree. -/
 private noncomputable def twistFiberMap
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -51,9 +52,7 @@ private noncomputable def twistFiberMap
   map_zero' := Subtype.ext (map_zero _)
   map_add' s t := Subtype.ext (map_add _ _ _)
 
-/-- The homogeneous fibre map sends a/b to psi(a)/psi(b).
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- The homogeneous fibre map sends a/b to psi(a)/psi(b). -/
 private theorem twistFiberMap_mk
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -66,9 +65,7 @@ private theorem twistFiberMap_mk
   apply Subtype.ext
   exact Localization.localRingHom_mk _ _ _ _ _ _
 
-/-- Apply the homogeneous localization map pointwise to locally-fraction sections.
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- Apply the homogeneous localization map pointwise to locally-fraction sections. -/
 private noncomputable def twistSectionMap
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -84,9 +81,7 @@ private noncomputable def twistSectionMap
     exact (congrArg (twistFiberMap ψ hψ j y.1) (hw ⟨_, y.2.1⟩)).trans
       (twistFiberMap_mk ψ hψ j y.1 a b _ hik)⟩
 
-/-- The pointwise fraction map is semilinear over the Proj structure-sheaf map.
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- The pointwise fraction map is semilinear over the Proj structure-sheaf map. -/
 private theorem twistSectionMap_smul
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -102,9 +97,7 @@ private theorem twistSectionMap_smul
         (HomogeneousLocalization.val_localRingHom
           (f := ψ) (hIJ := rfl) (c.1 ⟨_, x.2⟩)).symm)
 
-/-- The pointwise fraction maps form a morphism to the pushforward twist.
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- The pointwise fraction maps form a morphism to the pushforward twist. -/
 private noncomputable def twistPushforwardMap
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -125,9 +118,7 @@ private noncomputable def twistPushforwardMap
       naturality := fun _ _ _ ↦ rfl }
     (fun U c s ↦ twistSectionMap_smul ψ hψ j U.unop c s)⟩
 
-/-- Transpose the concrete fraction map by the section-normalized tensor adjunction.
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- Transpose the concrete fraction map by the section-normalized tensor adjunction. -/
 private noncomputable def twistPullbackMap
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -136,9 +127,7 @@ private noncomputable def twistPullbackMap
   ((tensorPullbackSectionAdjunction (map ψ hψ)).homEquiv _ _).symm
     (twistPushforwardMap ψ hψ j)
 
-/-- The adjoint comparison on the actual section 1 tensor s is the pointwise fraction map.
-Source: Stacks Project, constructions.tex, Tag 01MY.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- The adjoint comparison on the actual section 1 tensor s is the pointwise fraction map. -/
 private theorem twistPullbackMap_section
     (ψ : 𝒜 →+*ᵍ ℬ)
     (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜))
@@ -162,22 +151,7 @@ private theorem twistPullbackMap_section
 
 end GradedMap
 
-/-- The normalized twist comparison exists, independently of its uniqueness and coherence.
-Source: Stacks Project, Constructions, Tags 01N2 and 01MY.
-
-Proof: Derive the irrelevant-ideal condition by span induction and identify r with
-Mathlib's Proj.map on the standard affine cover, using hchart. Construct the map on
-homogeneous localizations pointwise: a/b maps to psi(a)/psi(b). Pulling back each
-fraction neighborhood proves that sections remain locally fractions. The maps commute
-with restrictions and scalar multiplication, hence give twist A j -> r_*(twist B j).
-Transpose by the normalized tensor-pullback adjunction to obtain the comparison morphism;
-the homEquiv-unit equation proves its formula on the actual sections 1 tensor s.
-The remaining one-chart bijectivity calculation is stated separately in
-scalarExtension_twistMap_basicOpen_bijective. Apply it on the standard cover, then use
-local bijectivity to obtain a global isomorphism, for each j. Finally apply the ordinary
-localization ring map to b*s=a and multiply by c. Associativity gives the required
-normalization on any open U, without cancellation, flatness or degree-one generation.
-(blueprint: lem-sfb-proj-scalar-extension-twist-existence). -/
+/-- The normalized twist comparison exists, independently of its uniqueness and coherence. -/
 theorem scalarExtension_twist_exists
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

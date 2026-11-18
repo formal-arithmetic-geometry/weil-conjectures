@@ -66,7 +66,7 @@ theorem pushHomOfComapIso_app_eq_comp
       Equiv.apply_symm_apply, Equiv.apply_symm_apply]
     ext K
     rw [← cancel_epi (ec.hom.app K), Iso.hom_inv_id_app, h]
-    dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, TwoSquare.natTrans,
+    dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
       TwoSquare.mk]
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.assoc,

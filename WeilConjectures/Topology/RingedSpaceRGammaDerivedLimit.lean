@@ -148,8 +148,52 @@ private theorem openModuleDerivedSections_preservesCountableProducts
   exact preservesLimitsOfShape_of_discrete _
 
 
-set_option maxHeartbeats 800000 in
--- The product/triangle comparisons elaborate across two independent localization universes.
+-- Prove the product/triangle comparison abstractly, so rewriting does not unfold
+-- the localization constructions of the source and target derived categories.
+private theorem map_isDerivedLimitTriangle_of_preservesProduct
+    {C D : Type*} [Category C] [Category D]
+    [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]
+    [Preadditive C] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [Pretriangulated C] [Pretriangulated D]
+    (Φ : C ⥤ D) [Φ.Additive] [Φ.CommShift ℤ] [Φ.IsTriangulated]
+    {K : ℕ → C} [HasProduct K] [HasProduct (fun n ↦ Φ.obj (K n))]
+    [PreservesLimit (Discrete.functor K) Φ]
+    (f : ∀ n, K (n + 1) ⟶ K n) (L : C)
+    (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧)
+    (h : IsDerivedLimitTriangle f L p δ) :
+    ∃ e : Φ.obj (∏ᶜ K) ≅ ∏ᶜ (fun n ↦ Φ.obj (K n)),
+      (∀ n, e.hom ≫ Pi.π _ n = Φ.map (Pi.π K n)) ∧
+      IsDerivedLimitTriangle (fun n ↦ Φ.map (f n)) (Φ.obj L) (Φ.map p ≫ e.hom)
+        (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L) := by
+  let e := PreservesProduct.iso Φ K
+  have he (n : ℕ) : e.hom ≫ Pi.π _ n = Φ.map (Pi.π K n) := by
+    simp [e]
+  refine ⟨e, he, ?_⟩
+  have ht : Φ.map (towerTransitionEndomorphism f) ≫ e.hom =
+      e.hom ≫ towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
+      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
+      Pi.lift_comp_π, Functor.map_sub]
+    rw [← Category.assoc, he, ← Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
+  exact Pretriangulated.isomorphic_distinguished _ (Φ.map_distinguished _ h) _
+    (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
+      (by change (Φ.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ Φ.map p; simp)
+      (by
+        change towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) ≫ e.inv =
+          e.inv ≫ Φ.map (towerTransitionEndomorphism f)
+        apply (cancel_mono e.hom).1
+        simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+          Iso.inv_hom_id_assoc] using congrArg (fun t ↦ e.inv ≫ t) ht.symm)
+      (by
+        change (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L) ≫
+          (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
+            e.inv ≫ (Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L)
+        simp))
+
 /-- Derived sections over an open preserve Roos triangles and satisfy the Milnor
 short exact sequence.  The functor `RΓ(U,-)` is represented by K-injective
 resolutions of complexes of modules, via `openModuleDerivedSections`.
@@ -159,16 +203,16 @@ lemma-RGamma-commutes-with-Rlim (blueprint: lem-pc-ringed-space-rgamma-derived-l
 Proof, following Tag 0D60:
 1. The site of opens is small. K-injective resolutions exist by
    `prop-pur-kinjective-resolutions-exist`, and sections preserve limits by
-   `lem-weil-pbc-module-sheaves-limits-sectionwise`. The right derived functor
+   `situation-conventions`. The right derived functor
    is triangulated (`lem-pc-right-derived-functor-triangulated`). Products exist
    by the generic K-injective product construction and
-   `lem-weil-derived-limit-existence`, using exact products in abelian groups
+   `lemma-reduction-derived-nakayama`, using exact products in abelian groups
    (`lem-pc-abelian-groups-exact-products`).
 2. Resolve each tower term by a K-injective complex. Its termwise product is
    K-injective and represents the derived product
    (`lem-pc-ringed-space-product-kinjective`). Sections identify it with the
    product of the sections complexes; exact products of abelian groups identify
-   this with the target derived product (`lem-weil-derived-limit-existence`).
+   this with the target derived product (`lemma-reduction-derived-nakayama`).
    The projection equations characterize the comparison. The triangulated
    functor sends the Roos triangle to the target Roos triangle
    by a triangle isomorphism. Its middle square follows after every product projection
@@ -218,7 +262,6 @@ theorem rgamma_derivedLimit (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
             (Opposite.op n) =
           (DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).map
             ((openModuleDerivedSections X U).map (p ≫ Pi.π _ n))) := by
-  let A := fun n : ℕ => K.obj (Opposite.op n)
   let f := fun n : ℕ => K.map (homOfLE (Nat.le_succ n)).op
   have hfirst : (∃ e : (openModuleDerivedSections X U).obj
       (∏ᶜ (fun n : ℕ => K.obj (Opposite.op n))) ≅
@@ -229,35 +272,9 @@ theorem rgamma_derivedLimit (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
         ((openModuleDerivedSections X U).obj L) ((openModuleDerivedSections X U).map p ≫ e.hom)
         (e.inv ≫ (openModuleDerivedSections X U).map δ ≫
           ((openModuleDerivedSections X U).commShiftIso (1 : ℤ)).hom.app L)) := by
-    let Φ := openModuleDerivedSections X U
     have := openModuleDerivedSections_preservesCountableProducts X U
-    let e := PreservesProduct.iso Φ A
-    have he (n : ℕ) : e.hom ≫ Pi.π _ n = Φ.map (Pi.π A n) := by
-      simp [e]
-    refine ⟨e, he, ?_⟩
-    have ht : Φ.map (towerTransitionEndomorphism f) ≫ e.hom =
-        e.hom ≫ towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) := by
-      apply Pi.hom_ext
-      intro n
-      simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
-        Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-        Pi.lift_comp_π, Functor.map_sub]
-      rw [← Category.assoc, he, ← Functor.map_comp]
-      rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
-    exact Pretriangulated.isomorphic_distinguished _ (Φ.map_distinguished _ hK) _
-      (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
-        (by change (Φ.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ Φ.map p; simp)
-        (by
-          change towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) ≫ e.inv =
-            e.inv ≫ Φ.map (towerTransitionEndomorphism f)
-          apply (cancel_mono e.hom).1
-          simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
-            Iso.inv_hom_id_assoc] using congrArg (fun t ↦ e.inv ≫ t) ht.symm)
-        (by
-          change (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L) ≫
-            (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
-              e.inv ≫ (Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L)
-          simp))
+    exact map_isDerivedLimitTriangle_of_preservesProduct
+      (openModuleDerivedSections X U) f L p δ hK
   obtain ⟨e, he, hT⟩ := hfirst
   refine ⟨⟨e, he, hT⟩, ?_⟩
   intro m

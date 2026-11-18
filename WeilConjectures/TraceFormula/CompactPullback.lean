@@ -21,8 +21,8 @@ h^♯ : RΓ_c(X, K) = Ra_{X!} K ⟶ Ra_{X!} Rh_* Lh^* K ≅ Ra_{X!} Rh_! Lh^* K 
 of the unit of `Lh^* ⊣ Rh_*`, the identification `Rh_! ≅ Rh_*` of the proper `h` and the
 composition isomorphism of the lower shriek (`ProEtale.CondensedRing.compactPullback`). It is
 the first half of the global operator of a graph correspondence (blueprint
-`prop-trf-graph-operator`): for `c = (𝟙 X, h)` and `v : Lh^* K ⟶ K` the global operator is
-`RΓ_c(X, v) ∘ h^♯`.
+`definition-frobenius-correspondences-their-operators--5`): for `c = (𝟙 X, h)` and `v : Lh^* K ⟶ K`
+the global operator is `RΓ_c(X, v) ∘ h^♯`.
 
 The pullbacks are compatible with composition, `(g ≫ h)^♯ = Lg^*… ∘ g^♯ ∘ h^♯`
 (`ProEtale.CondensedRing.compactPullback_comp_app`), and for the identity of `X` the
@@ -33,8 +33,8 @@ isomorphisms of the pullbacks
 ## Frobenius coefficient morphisms
 
 For an endomorphism `Φ` of `X` and an arbitrary morphism `ψ : LΦ^* K ⟶ K` (a *Frobenius
-coefficient morphism*, blueprint `def-trf-frobenius-coefficient-morphism`) the iterates
-`ψ_m : LΦ_m^* K ⟶ K` are defined as for Weil structures
+coefficient morphism*, blueprint `definition-frobenius-correspondences-their-operators`) the
+iterates `ψ_m : LΦ_m^* K ⟶ K` are defined as for Weil structures
 (`ProEtale.CondensedRing.frobeniusCoefficientIterate`), and for `Φ` proper the global operator
 of degree `m` is `F_{c,m}(ψ) = RΓ_c(X, ψ_m) ∘ Φ_m^♯`
 (`ProEtale.CondensedRing.frobeniusCompactOperator`). It is the `m`-th power of the operator of
@@ -69,8 +69,8 @@ lemma mateEquiv_symm_app_of_iso_aux (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ 
     (h₁ : ∀ M, adj₁.unit.app M ≫ eR₁.hom.app (L₁.obj M) = eL₁.inv.app M)
     (h₂ : ∀ N, adj₂.unit.app N ≫ eR₂.hom.app (L₂.obj N) = eL₂.inv.app N)
     (β : TwoSquare R₁ G G R₂)
-    (hβ : ∀ N, β.natTrans.app N ≫ eR₂.hom.app (G.obj N) = G.map (eR₁.hom.app N)) (M : C) :
-    eL₂.inv.app (G.obj M) ≫ ((mateEquiv adj₁ adj₂).symm β).natTrans.app M =
+    (hβ : ∀ N, β.app N ≫ eR₂.hom.app (G.obj N) = G.map (eR₁.hom.app N)) (M : C) :
+    eL₂.inv.app (G.obj M) ≫ ((mateEquiv adj₁ adj₂).symm β).app M =
       G.map (eL₁.inv.app M) := by
   rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom]
   apply (adj₂.homEquiv _ _).injective
@@ -147,7 +147,8 @@ lemma boundedConstructibleLowerShriekCompToPoint_assoc (g : Z ⟶ Y) (h : Y ⟶ 
   simp only [Category.assoc, eqToHom_trans_assoc]
 
 /-- The *pullback on compactly supported cohomology* `h^♯ : RΓ_c(X, -) ⟶ RΓ_c(Y, Lh^* -)` along
-a proper morphism `h : Y ⟶ X` (blueprint `prop-trf-graph-operator`): the composite
+a proper morphism `h : Y ⟶ X` (blueprint `definition-frobenius-correspondences-their-operators--5`):
+the composite
 ```
 Ra_{X!} K ⟶ Ra_{X!} Rh_* Lh^* K ≅ Ra_{X!} Rh_! Lh^* K ≅ R(h ≫ a_X)_! Lh^* K = Ra_{Y!} Lh^* K
 ```
@@ -245,11 +246,10 @@ lemma compactPullback_comp_aux {DX DY DZ S : Type*} [Category DX] [Category DY] 
     ← cgh.hom.naturality, ← AX.map_comp_assoc, key]
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
 
-set_option maxHeartbeats 1000000 in
 -- matching the unit of the composite adjunction unfolds the restricted `ℚ̲̄_ℓ`-functors
-/-- **Compatibility of the pullbacks with composition** (blueprint `prop-trf-graph-operator`):
-`(g ≫ h)^♯` is `h^♯` followed by `g^♯` and the composition isomorphism
-`Lg^* Lh^* ≅ L(g ≫ h)^*`. -/
+/-- **Compatibility of the pullbacks with composition** (blueprint
+`definition-frobenius-correspondences-their-operators--5`): `(g ≫ h)^♯` is `h^♯` followed by `g^♯`
+and the composition isomorphism `Lg^* Lh^* ≅ L(g ≫ h)^*`. -/
 lemma compactPullback_comp_app (g : Z ⟶ Y) (h : Y ⟶ X) [IsProper g.left] [IsProper h.left]
     [IsProper (g ≫ h).left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (compactPullback ℓ (g ≫ h)).app K =
@@ -449,7 +449,7 @@ lemma boundedConstructibleLowerShriekSquareIso_compToPoint (w : g' ≫ f = f' �
     boundedConstructibleLowerShriekCompToPoint_hom_app_congr ℓ w]
 
 /-- **The pullback on compactly supported cohomology commutes with compact-support base change**
-(the unit compatibility of the mate `Ex_!`, blueprint `lem-trf-weil-shriek-operator-fibres`,
+(the unit compatibility of the mate `Ex_!`, blueprint `lemma-comparison-via-relative-frobenius--4`,
 step (β)): for a cartesian square `g' ≫ f = f' ≫ g` with `g, g'` proper,
 `c_{f'} ∘ RΓ_c(Ex_!) ∘ g^♯ = g'^♯ ∘ c_f`. -/
 lemma compactPullback_app_comp_baseChange (sq : IsPullback g' f' f g) [IsProper g.left]
@@ -500,8 +500,9 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [I
 
 variable {ℓ} in
 /-- The iterates `ψ_m : LΦ_m^* K ⟶ K` of a *Frobenius coefficient morphism* `ψ : LΦ^* K ⟶ K`,
-an arbitrary morphism (blueprint `def-trf-frobenius-coefficient-morphism`), for any coefficient
-ring `Λ`: `ψ_0` is the identity isomorphism `L(𝟙 X)^* K ≅ K` and `ψ_{m+1}` is the composite
+an arbitrary morphism (blueprint `definition-frobenius-correspondences-their-operators`), for any
+coefficient ring `Λ`: `ψ_0` is the identity isomorphism `L(𝟙 X)^* K ≅ K` and `ψ_{m+1}` is the
+composite
 ```
 LΦ_{m+1}^* K = L(Φ ≫ Φ_m)^* K ≅ LΦ^* LΦ_m^* K --LΦ^* ψ_m--> LΦ^* K --ψ--> K.
 ```
@@ -541,8 +542,9 @@ instance isProper_frobeniusIterate [IsProper Φ.left] (m : ℕ) :
     infer_instance
 
 /-- The *global operator in degree `m`* `F_{c,m}(ψ) = T_{c_m}(ψ_m)` of a Frobenius coefficient
-morphism `ψ : LΦ^* K ⟶ K` for a proper `Φ` (blueprint `def-trf-frobenius-coefficient-morphism`),
-in the form of `prop-trf-graph-operator`:
+morphism `ψ : LΦ^* K ⟶ K` for a proper `Φ` (blueprint
+`definition-frobenius-correspondences-their-operators`), in the form of
+`definition-frobenius-correspondences-their-operators--5`:
 ```
 RΓ_c(X, K) --Φ_m^♯--> RΓ_c(X, LΦ_m^* K) --RΓ_c(X, ψ_m)--> RΓ_c(X, K).
 ```
@@ -590,14 +592,13 @@ lemma frobeniusCompactOperator_succ [IsProper Φ.left]
     Category.id_comp, Iso.inv_hom_id_app_assoc]
   rw [Functor.map_comp, compactPullback_naturality_assoc]
 
-/-- **Iteration of the global operator** (blueprint `lem-trf-weil-shriek-iterates`, for an
-arbitrary Frobenius coefficient morphism): `F_{c,m}(ψ) = F_{c,1}(ψ)^m`. -/
+/-- **Iteration of the global operator** (blueprint `lemma-comparison-via-relative-frobenius--2`,
+for an arbitrary Frobenius coefficient morphism): `F_{c,m}(ψ) = F_{c,1}(ψ)^m`. -/
 lemma frobeniusCompactOperator_eq_pow [IsProper Φ.left]
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
     (m : ℕ) :
     frobeniusCompactOperator ℓ ψ m =
-      (show End ((boundedConstructibleLowerShriek ℓ
-        (toPoint X)).obj K) from frobeniusCompactOperator ℓ ψ 1) ^ m := by
+      (End.of (frobeniusCompactOperator ℓ ψ 1) ^ m).asHom := by
   induction m with
   | zero => exact frobeniusCompactOperator_zero ℓ ψ
   | succ m ih =>
@@ -614,11 +615,13 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 variable {ℓ} in
 /-- The iterated Weil structures `φ_m` of a Weil object are the iterates of its structure
 isomorphism `φ` as a Frobenius coefficient morphism (blueprint
-`def-trf-frobenius-coefficient-morphism`, example). -/
+`definition-frobenius-correspondences-their-operators`, example). -/
 lemma iterateStr_hom_eq_frobeniusCoefficientIterate (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
     (K.iterateStr m).hom = frobeniusCoefficientIterate K.str.hom m := by
   induction m with
-  | zero => exact (Category.id_comp _).symm
+  | zero =>
+    simp only [iterateStr, frobeniusCoefficientIterate, Iso.app_hom, eqToHom_refl,
+      Category.id_comp]
   | succ m ih =>
     simp only [iterateStr, frobeniusCoefficientIterate, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
       Functor.mapIso_hom, ih]

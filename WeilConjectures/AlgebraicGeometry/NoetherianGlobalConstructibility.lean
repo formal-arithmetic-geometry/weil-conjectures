@@ -293,7 +293,7 @@ X and every open (lem-sfb-noetherian-space-compact-subsets); this includes the e
 (lem-weil-pbc-locally-noetherian-quasi-separated). Every open in any open subspace is
 retrocompact, so every locally closed part is constructible (def-weil-constructible-subset).
 3. Pull back trivializing etale coverings using lem-weil-pbc-etale-covering-base-change.
-Finite limits of site base change (lem-weil-pbc-etale-base-change-finite-limits) and
+Finite limits of site base change (situation-conventions) and
 lem-weil-pbc-left-exact-site-inverse-image-tensor give geometric inverse image and its
 composition comparisons. Equivalences to the coefficient-sized sites preserve these data.
 4. The scalar identifications and localized composition are
@@ -303,7 +303,7 @@ same module M gives a constant model, with its finite presentation unchanged. Ov
 Module.finitePresentation_of_finite and the converse instance identify the recorded
 finite-generation predicate with finitely presented values.
 5. Under affine-local constructibility, take the partitions on the finite affine cover.
-lem-weil-pbc-etale-stratification-local-gluing-core supplies a global immersed refinement
+theorem-comparison-constructible-sheaves supplies a global immersed refinement
 and actual morphisms from its strata to local strata. Pull back their local models by
 steps 3-4 to prove the right side; image containment alone is not used as factorization.
 6. Conversely, lemma-constructible-pullback-stratification pulls a global partition back
@@ -360,7 +360,7 @@ coefficient-sized site equivalences preserves all these operations and coverings
 comparisons, then lem-sfb-geometric-inverse-image-constant-module on each member of a
 pulled-back trivializing cover. The same finitely presented R-module is the new constant
 value. Thus every scheme pullback preserves these local models.
-5. Apply lem-weil-pbc-etale-stratification-local-gluing-core to the partitions on a
+5. Apply theorem-comparison-constructible-sheaves to the partitions on a
 finite affine cover. It is a geometric refinement statement independent of sheaves and
 coefficients, and it supplies actual factorization morphisms into the local immersed
 strata. Step 4 pulls the locally constant finitely presented models to the global strata.

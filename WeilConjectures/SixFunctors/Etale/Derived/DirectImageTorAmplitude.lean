@@ -20,14 +20,14 @@ Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with 
 `Λ` a finite ring. This file proves that `Rf_*` carries complexes of Tor amplitude in `[a, b]` to
 complexes of Tor amplitude in `[a, b + 2d]`
 (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_finite`, blueprint
-`thm-sf-direct-image-tor-amplitude` and `sk-thm-sf-direct-image-tor-amplitude`), following the
+`proposition-six-operations-dctf--2` and `sk-thm-sf-direct-image-tor-amplitude`), following the
 blueprint:
 
 * the projection map `Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is an isomorphism for every bounded
   above `K` and every finitely generated `Λ`-module `M`
   (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle`,
-  blueprint `lem-sf-projection-finite-constant`). It is an isomorphism for `M = Λ`, hence for
-  `M` free of finite rank, and the way-out argument
+  blueprint `proposition-open-direct-image-preserves-finite--1`). It is an isomorphism for `M = Λ`,
+  hence for `M` free of finite rank, and the way-out argument
   `DerivedCategory.isIso_app_of_exists_distTriang` along the first syzygies of `M` concludes,
   using only that `Rf_*` raises degrees by at most `2d`
   (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj`);
@@ -35,7 +35,8 @@ blueprint:
   `[a, b + 2d]`, `K ⊗ᴸ κ_X` having homology in `[a, b]`;
 * the residue test
   `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn`
-  (blueprint `lem-exc-residue-tor-test`) turns this into Tor amplitude in `[a, b + 2d]`.
+  (blueprint `theorem-f-shriek-finite-coefficients--1`) turns this into Tor amplitude in
+  `[a, b + 2d]`.
 
 Neither separatedness of `f`, nor constructibility of `K`, nor the invertibility of the exponent
 of `Λ` on `Y` is needed.
@@ -205,8 +206,8 @@ variable [Finite Λ] {k : Type u} [Field k] {X Y : Scheme.{u}} (aX : X ⟶ Spec 
   (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
 
 include hf hd in
-/-- Blueprint `lem-sf-projection-finite-constant`: The projection formula with a finitely
-presented constant coefficient.
+/-- Blueprint `proposition-open-direct-image-preserves-finite--1`: The projection formula with a
+finitely presented constant coefficient.
 
 Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, `Λ` a
 finite ring, `K ∈ D(X_ét, Λ)` bounded above and `M` a finitely generated `Λ`-module. Then the
@@ -255,7 +256,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle
       isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_pi Λ f K n⟩
 
 include hf hd in
-/-- Blueprint `thm-sf-direct-image-tor-amplitude`: Direct image and finite Tor amplitude.
+/-- Blueprint `proposition-six-operations-dctf--2`: Direct image and finite Tor amplitude.
 
 Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and `Λ`
 a finite ring. If `K ∈ D(X_ét, Λ)` has Tor amplitude in `[a, b]`, then `Rf_* K` has Tor amplitude

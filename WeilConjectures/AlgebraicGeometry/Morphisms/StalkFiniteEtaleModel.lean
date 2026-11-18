@@ -20,8 +20,12 @@ import Mathlib.AlgebraicGeometry.Normalization
 /-!
 # Extension over a stalk before spreading
 
-Source: Stacks Project, Tag 0EYJ, proof of the local claim.
-(blueprint: lem-sbc-stalk-finite-etale-model)
+## References
+
+* Stacks Project, Tag 0EYJ, proof of the local claim
+* Stacks Project, Tags 004W and 004X, maximal components and generic points
+* Stacks Project, local claim
+* Tags 0BQM, 0EYG, 0EYH, 0EYI, 0EYE, 0EY6, 0EY9, and 0EYB
 -/
 
 @[expose] public section
@@ -32,8 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A generic point of a boundary component has no proper boundary generalization.
-Source: Stacks Project, Tags 004W and 004X, maximal components and generic points. -/
+/-- A generic point of a boundary component has no proper boundary generalization. -/
 private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U ≠ ⊤) :
     ∃ s : S, s ∉ U ∧ ∀ t : S, t ⤳ s → t ∉ U → t = s := by
   classical
@@ -62,32 +65,7 @@ private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U �
   exact congrArg Subtype.val ((isGenericPoint_closure (x := t')).eq
     (heq ▸ isGenericPoint_closure (x := s.1)))
 
-/-- The cover on the open extends after base change to a suitable stalk.
-
-Source: Stacks Project, Tag 0EYJ (pione-lemma-extend-covering), local claim;
-Tags 0BQM, 0EYG, 0EYH, 0EYI, 0EYE, 0EY6, 0EY9, and 0EYB.
-(blueprint: lem-sbc-stalk-finite-etale-model)
-
-Proof:
-Choose a generic point s of an irreducible component of the nonempty closed
-complement of U. Every generalization of s outside U is s itself: its singleton
-closure in the complement contains the component of s, hence maximality and
-sobriety force equality. Thus localization at s sees the punctured spectrum.
-Set f = PA.obj.hom followed by the open inclusion into C, and use the concrete
-relative normalization of f. Its pullback to the local family at s is finite
-by stalk_normalization_finite, and etale by stalk_normalization_etale, using
-the split-section hypothesis only in the latter step. These two properties
-package this actual scheme and morphism as Q, without choosing an arbitrary
-cover from an unproved existence statement.
-For the comparison, the square with top identity, left PA.obj.hom and bottom
-open inclusion is cartesian because the inclusion is a monomorphism. Thus the
-pullback of f over the open is finite, and its own normalization is itself.
-Normalization commutes with smooth base change, in particular the open inclusion.
-This identifies PA with the restriction of f's normalization. Paste this
-cartesian square with the two overlap pullback squares. Both resulting squares
-have the same cospan by the overlap's commutativity. The canonical isomorphism
-between their pullbacks is over the overlap, so lifts through the etale and
-finite full subcategories to precisely the displayed isomorphism. -/
+/-- The cover on the open extends after base change to a suitable stalk. -/
 theorem GaloisCover.exists_stalk_finiteEtale_model {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

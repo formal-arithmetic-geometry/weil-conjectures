@@ -12,9 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplem
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerComparedKernelLevel
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerKernelTransition
 
-/-! # The signed Kummer triangle and its actual root transitions
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-kummer-compared-kernel-triangle). -/
+/-! # The signed Kummer triangle and its actual root transitions. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,25 +55,7 @@ private theorem kernel_data_of_levelwise
 
 /-- The Kummer kernel is the finite Tate line, with its negative shifted boundary
 and its power-ell transition. This is an assertion solely about the Kummer sequence;
-no derived reduction, supplied pure comparison, or evaluated unit occurs.
-
-Source: diagonal tower system proof, step (3), target, and step (4), Kummer sign
-(blueprint: lem-sfb-kummer-compared-kernel-triangle).
-
-Proof: the residue root tensor map is an isomorphism for ULift(Z/ell^(n+1)).
-Exact comparison and the forgetting comparison identify its pro-etale image with
-cartierProRootMap; call this isomorphism r_n. Transport the actual pro-etale Kummer
-sequence through the units comparison isomorphism, and change its kernel by r_n.
-This gives a short exact sequence with inclusion i_n. Its connecting class is exactly
-kummerComparedUnit, by naturality of the SES boundary and the definition of that Ext
-composite. Rotate its single-object triangle and shift by one. Correct the first
-object by minus its identity, and identify the twice-shifted kernel with shift two.
-The second arrow is then the negative of the shifted Kummer class, and the third is
-the negative inclusion followed by shift addition. Finally the power-ell roots
-transition followed by the lower inclusion equals the upper inclusion followed by
-ell; composing with the units comparison inverse gives the displayed compatibility.
-Monicity follows from the original kernel inclusion and the two endpoint isomorphisms.
-The argument includes ell=2, n=0 and the empty scheme and never divides by two. -/
+no derived reduction, supplied pure comparison, or evaluated unit occurs. -/
 theorem kummer_compared_kernel_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)] :

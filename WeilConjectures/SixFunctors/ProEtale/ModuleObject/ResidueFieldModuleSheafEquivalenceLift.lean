@@ -101,9 +101,10 @@ lemma sheafCompose_map_isoOfSheafComposeForget₂_hom_app {𝒜 : Type*} [Catego
 /-- On the lift `moduleLift P ρ hρ`, multiplication by `c` is the action `ρ a c`. -/
 lemma sheafCompose_map_smulEnd_moduleLift_obj {𝒜 : Type*} [Category* 𝒜]
     (P : 𝒜 ⥤ Sheaf J AddCommGrpCat.{w}) (ρ : ∀ a, Λ →+* End (P.obj a))
-    (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ), ρ a c ≫ P.map f = P.map f ≫ ρ b c) (a : 𝒜) (c : Λ) :
+    (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ),
+      (ρ a c).asHom ≫ P.map f = P.map f ≫ (ρ b c).asHom) (a : 𝒜) (c : Λ) :
     (sheafCompose J (forget₂ _ AddCommGrpCat.{w})).map (smulEnd ((moduleLift P ρ hρ).obj a) c) =
-      ρ a c := by
+      (ρ a c).asHom := by
   ext U x
   rfl
 
@@ -111,10 +112,11 @@ lemma sheafCompose_map_smulEnd_moduleLift_obj {𝒜 : Type*} [Category* 𝒜]
 @[reassoc]
 lemma sheafCompose_map_smulEnd_moduleLift_obj_comp_moduleLiftCompIso_hom_app {𝒜 : Type*}
     [Category* 𝒜] (P : 𝒜 ⥤ Sheaf J AddCommGrpCat.{w}) (ρ : ∀ a, Λ →+* End (P.obj a))
-    (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ), ρ a c ≫ P.map f = P.map f ≫ ρ b c) (a : 𝒜) (c : Λ) :
+    (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ),
+      (ρ a c).asHom ≫ P.map f = P.map f ≫ (ρ b c).asHom) (a : 𝒜) (c : Λ) :
     (sheafCompose J (forget₂ _ AddCommGrpCat.{w})).map (smulEnd ((moduleLift P ρ hρ).obj a) c) ≫
         (moduleLiftCompIso P ρ hρ).hom.app a =
-      (moduleLiftCompIso P ρ hρ).hom.app a ≫ ρ a c := by
+      (moduleLiftCompIso P ρ hρ).hom.app a ≫ (ρ a c).asHom := by
   rw [moduleLiftCompIso_hom_app, sheafCompose_map_smulEnd_moduleLift_obj]
   exact (Category.comp_id _).trans (Category.id_comp _).symm
 
@@ -122,8 +124,9 @@ lemma sheafCompose_map_smulEnd_moduleLift_obj_comp_moduleLiftCompIso_hom_app {�
 @[reassoc]
 lemma moduleLiftCompIso_inv_app_comp_sheafCompose_map_smulEnd {𝒜 : Type*}
     [Category* 𝒜] (P : 𝒜 ⥤ Sheaf J AddCommGrpCat.{w}) (ρ : ∀ a, Λ →+* End (P.obj a))
-    (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ), ρ a c ≫ P.map f = P.map f ≫ ρ b c) (a : 𝒜) (c : Λ) :
-    ρ a c ≫ (moduleLiftCompIso P ρ hρ).inv.app a =
+    (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ),
+      (ρ a c).asHom ≫ P.map f = P.map f ≫ (ρ b c).asHom) (a : 𝒜) (c : Λ) :
+    (ρ a c).asHom ≫ (moduleLiftCompIso P ρ hρ).inv.app a =
       (moduleLiftCompIso P ρ hρ).inv.app a ≫
         (sheafCompose J (forget₂ _ AddCommGrpCat.{w})).map
           (smulEnd ((moduleLift P ρ hρ).obj a) c) := by

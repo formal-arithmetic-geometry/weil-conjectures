@@ -61,10 +61,11 @@ pushforward of the action of the constant section `c` of `𝔽_{E,A}` on `N`. -/
 lemma sectionActRingHom_lowerStar_residueFieldSectionRingHom
     (N : Mod (Sheaf (ProEt.topology A) Ab.{u + 1}) (residueFieldRingObj A ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    Mod.sectionActRingHom
+    (Mod.sectionActRingHom
         ((a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)
-        (residueFieldSectionRingHom B ℓ E c) =
-      (a)_*[Ab.{u + 1}].map (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)) := by
+        (residueFieldSectionRingHom B ℓ E c)).asHom =
+      (a)_*[Ab.{u + 1}].map
+        (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)).asHom := by
   rw [residueFieldSectionRingHom_apply, residueFieldSectionRingHom_apply,
     sectionActRingHom_lowerStar_continuousMapCoefficientSectionRingHom]
   rfl
@@ -76,14 +77,15 @@ omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteD
 lemma sectionActRingHom_comp_lowerStarForgetIso_inv_app
     (N : Mod (Sheaf (ProEt.topology A) Ab.{u + 1}) (residueFieldRingObj A ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    Mod.sectionActRingHom
+    (Mod.sectionActRingHom
         ((a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)
-        (residueFieldSectionRingHom B ℓ E c) ≫
+        (residueFieldSectionRingHom B ℓ E c)).asHom ≫
       (lowerStarForgetIso (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E))
         a).inv.app N =
     (lowerStarForgetIso (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E))
         a).inv.app N ≫
-      (a)_*[Ab.{u + 1}].map (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)) := by
+      (a)_*[Ab.{u + 1}].map
+        (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)).asHom := by
   rw [sectionActRingHom_lowerStar_residueFieldSectionRingHom, lowerStarForgetIso, Iso.refl_inv,
     NatTrans.id_app]
   exact (Category.comp_id _).trans (Category.id_comp _).symm
@@ -111,7 +113,7 @@ by `c` on the pushforward of `residueFieldModuleSheaf A ℓ E`. -/
 lemma lowerStar_map_sectionActRingHom_comp_residueFieldModuleSheafCompForgetIso_inv_app
     (N : Mod (Sheaf (ProEt.topology A) Ab.{u + 1}) (residueFieldRingObj A ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    (a)_*[Ab.{u + 1}].map (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)) ≫
+    (a)_*[Ab.{u + 1}].map (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)).asHom ≫
       (a)_*[Ab.{u + 1}].map ((residueFieldModuleSheafCompForgetIso A).inv.app N) ≫
         (lowerStarSheafComposeForget₂Iso a (ResidueFieldCoeff.{u} ℓ E)).inv.app
           ((residueFieldModuleSheaf A ℓ E).obj N) =
@@ -172,10 +174,10 @@ lemma upperStarUnitHom_comp_sectionActRingHom_continuousMapCoefficientSectionRin
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)) (f : C(X, T)) :
     upperStarUnitHom (Profinite.continuousMapRingObj.{u} T) g M ≫
-        Mod.sectionActRingHom ((g)^*⟦Profinite.continuousMapRingObj.{u} T⟧.obj M)
-          (continuousMapCoefficientSectionRingHom X' T (f.comp g.base.hom)) =
+        (Mod.sectionActRingHom ((g)^*⟦Profinite.continuousMapRingObj.{u} T⟧.obj M)
+          (continuousMapCoefficientSectionRingHom X' T (f.comp g.base.hom))).asHom =
       (g)^*[Ab.{u + 1}].map
-          (Mod.sectionActRingHom M (continuousMapCoefficientSectionRingHom X T f)) ≫
+          (Mod.sectionActRingHom M (continuousMapCoefficientSectionRingHom X T f)).asHom ≫
         upperStarUnitHom (Profinite.continuousMapRingObj.{u} T) g M := by
   change upperStarUnitHom (Profinite.continuousMapRingObj.{u} T) g M ≫
       Mod.sectionAct _ (continuousMapCoefficientSectionRingHom X' T (f.comp g.base.hom)).hom =
@@ -218,10 +220,10 @@ lemma upperStarUnitHom_comp_sectionActRingHom_residueFieldSectionRingHom
       (condensedRingObj (residueFieldCommRingObj) B))
     (c : ResidueFieldCoeff.{u} ℓ E) :
     upperStarUnitHom (residueFieldCommRingObj) a M ≫
-        Mod.sectionActRingHom
+        (Mod.sectionActRingHom
           ((a)^*⟦residueFieldCommRingObj⟧.obj M)
-          (residueFieldSectionRingHom A ℓ E c) =
-      (a)^*[Ab.{u + 1}].map (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)) ≫
+          (residueFieldSectionRingHom A ℓ E c)).asHom =
+      (a)^*[Ab.{u + 1}].map (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)).asHom ≫
         upperStarUnitHom (residueFieldCommRingObj) a M := by
   have h := upperStarUnitHom_comp_sectionActRingHom_continuousMapCoefficientSectionRingHom
     (integersResidueField ℓ E) a M (algebraMap _ _ (ULift.ringEquiv c))
@@ -239,13 +241,14 @@ lemma sectionActRingHom_comp_upperStarForgetIso_inv_app
     (M : Mod (Sheaf (ProEt.topology B) Ab.{u + 1})
       (condensedRingObj (residueFieldCommRingObj) B))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    Mod.sectionActRingHom
+    (Mod.sectionActRingHom
         ((a)^*⟦residueFieldCommRingObj⟧.obj M)
-        (residueFieldSectionRingHom A ℓ E c) ≫
+        (residueFieldSectionRingHom A ℓ E c)).asHom ≫
       (upperStarForgetIso (residueFieldCommRingObj)
         a).inv.app M =
     (upperStarForgetIso (residueFieldCommRingObj) a).inv.app M ≫
-      (a)^*[Ab.{u + 1}].map (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)) := by
+      (a)^*[Ab.{u + 1}].map
+        (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)).asHom := by
   have h := upperStarUnitHom_comp_sectionActRingHom_residueFieldSectionRingHom a M c
   rw [← upperStarForgetIso_hom_app] at h
   rw [← cancel_epi ((upperStarForgetIso
@@ -287,7 +290,7 @@ lemma upperStar_map_sectionActRingHom_comp_residueFieldModuleSheafCompForgetIso_
     (M : Mod (Sheaf (ProEt.topology B) Ab.{u + 1})
       (condensedRingObj (residueFieldCommRingObj) B))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    (a)^*[Ab.{u + 1}].map (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)) ≫
+    (a)^*[Ab.{u + 1}].map (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)).asHom ≫
       (a)^*[Ab.{u + 1}].map ((residueFieldModuleSheafCompForgetIso B).inv.app M) ≫
         (sheafComposeForget₂CompUpperStarIso (ResidueFieldCoeff.{u} ℓ E) a).hom.app
           ((residueFieldModuleSheaf B ℓ E).obj M) =

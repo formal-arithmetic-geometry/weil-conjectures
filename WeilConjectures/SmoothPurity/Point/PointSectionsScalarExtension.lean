@@ -175,7 +175,7 @@ import all WeilConjectures.TraceFormula.Supporting.PointFiniteReductionSectionAl
 
 /-! # Sections of the geometric point and integral coefficient extension
 
-Source: blueprint `def-weil-finite-coefficient-point`, final paragraph;
+Source: blueprint `lemma-perfect-complexes-geometric-point`, final paragraph;
 Bhatt--Scholze, Lemmas 4.2.12, 6.8.2(1), Definition 3.4.10 and Lemma 3.4.12
 (blueprint: lem-weil-point-sections-scalar-extension).
 

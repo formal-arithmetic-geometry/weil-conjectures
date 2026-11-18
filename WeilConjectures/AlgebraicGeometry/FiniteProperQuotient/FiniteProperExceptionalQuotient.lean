@@ -129,7 +129,7 @@ Source: blueprint quotient mate, counit transpose; Mathlib mateEquiv
 def b {m n : ℕ} (h : n ≤ m)
     (q : F l E p m ⋙ Q l E Y h ≅ Q l E Z h ⋙ F l E p n) :
     G m ⋙ Q l E Z h ⟶ Q l E Y h ⋙ G n :=
-  (mateEquiv (adj m) (adj n) (.mk _ _ _ _ q.inv)).natTrans
+  (mateEquiv (adj m) (adj n) (.mk _ _ _ _ q.inv))
 
 include G adj in
 /-- Ordinary proper exceptional inverse images preserve ctf and have coherent quotient mates.
@@ -149,8 +149,8 @@ b equation. The identity coefficient comparison and its tensor unitor give the l
 formula. None of these steps assumes flat quotient coefficients or finite cd of k.
 
 The proof dependencies are lem-sfb-ordinary-exceptional-ctf-preservation and
-thm-amb-etale-exceptional-adjoint in step 1; lem-asd-proper-finite-coefficient-extension
-in step 2; def-sf-etale-exceptional-quotient-mate,
+theorem-existence-exceptional-inverse-image--1 in step 1;
+lem-asd-proper-finite-coefficient-extension in step 2; def-sf-etale-exceptional-quotient-mate,
 lem-sfb-ordinary-exceptional-change-of-rings and lem-pur-mate-unit-compatibility in step 3;
 lem-sfb-successive-derived-quotient-normalization,
 lem-pur-ringed-coefficient-projection-cocycle, lem-weil-pbc-mate-pasting and

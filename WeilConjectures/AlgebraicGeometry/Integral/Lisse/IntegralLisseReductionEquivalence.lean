@@ -19,14 +19,15 @@ import WeilConjectures.AlgebraicGeometry.Integral.Lisse.IntegralLisseTowerEffect
 /-!
 # Integral lisse modules and their normalized reduction towers
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4(1),
-pp. 58--59 (blueprint: lem-sfb-integral-lisse-reduction-equivalence).
-
 The finite coefficient sheaves are first presented as continuous functions into the quotient
 rings, with their quotient topology. The statement identifies these with constant sheaves.
 Towers are written in the integral module category by restriction of scalars. Normalization
 is the cokernel universal property for multiplication by the relevant power of the uniformizer;
 this is precisely the induced sheaf tensor quotient, not invertibility of the transition itself.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4(1), pp. 58--59
 -/
 
 @[expose] public noncomputable section

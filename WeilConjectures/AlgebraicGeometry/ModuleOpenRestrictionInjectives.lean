@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-!
 # Exact restriction of module sheaves and injective objects
@@ -70,7 +71,7 @@ inclusion (`SheafOfModules.pushforward (SheafOfModules.pushforwardOver U)`, sect
 Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK
 (blueprint: lem-weil-pbc-module-open-restriction-injectives).
 
-Proof: (1) Restriction is sectionwise additive by `def-weil-sheaf-of-modules-category`.
+Proof: (1) Restriction is sectionwise additive by `situation-conventions`.
 Its stalk at a point of the open is naturally the original stalk: restrict a representative
 section to its intersection with the open; equality of germs is unchanged. Thus exactness
 follows from `lem-weil-pbc-module-stalk-exact` and `def-weil-pbc-exact-sequence`.

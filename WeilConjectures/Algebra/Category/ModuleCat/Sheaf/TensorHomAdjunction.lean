@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Tensor-Hom adjunction on a ringed space

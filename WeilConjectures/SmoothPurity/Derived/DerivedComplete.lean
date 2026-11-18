@@ -31,7 +31,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 /-!
 # Derived complete objects for completed integral pro-etale coefficients
 
-Source: Weil conjectures blueprint, `sec-smooth-purity`, `sk-def-sf-operations`,
+Source: Weil conjectures blueprint, `chap-Smooth-purity`, `sk-def-sf-operations`,
 node `def-weil-derived-complete`; Bhatt--Scholze, Definition 3.5.2
 (blueprint: def-weil-derived-complete).
 

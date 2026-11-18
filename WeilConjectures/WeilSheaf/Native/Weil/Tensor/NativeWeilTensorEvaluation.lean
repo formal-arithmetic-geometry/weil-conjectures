@@ -73,6 +73,25 @@ private theorem evaluation_of_uncurry
   apply congrArg S'.tensor.map
   ext <;> simp
 
+-- Cancel a representative model before specializing the evaluation identity.
+private theorem evaluation_of_representative
+    {E : Type a} [Category.{b} E] {H' : Eᵒᵖ × E ⥤ E}
+    (S' : CoefficientClosedStructure H') (F : D ⥤ E)
+    (t : S.tensor ⋙ F ≅ F.prod F ⋙ S'.tensor)
+    {A K I J : D} (e : A ≅ H.obj (op K, I)) (m : H.obj (op K, I) ≅ J)
+    (φ : A ⟶ J) (hφ : φ = e.hom ≫ m.hom)
+    (χ : F.obj (H.obj (op K, I)) ⟶ H'.obj (op (F.obj K), F.obj I))
+    (h : F.map ((S.transpose A K I).symm (φ ≫ m.inv)) =
+      t.hom.app (A, K) ≫ (S'.transpose (F.obj A) (F.obj K) (F.obj I)).symm
+        (F.map (φ ≫ m.inv) ≫ χ)) :
+    F.map (S.evaluation K I) = t.hom.app (H.obj (op K, I), K) ≫
+      S'.tensor.map (Prod.mkHom χ (𝟙 (F.obj K))) ≫
+        S'.evaluation (F.obj K) (F.obj I) := by
+  have hf : φ ≫ m.inv = e.hom := by
+    rw [hφ, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  rw [hf] at h
+  exact evaluation_of_uncurry S S' F t e χ h
+
 private theorem evaluation_of_iso
     {E : Type a} [Category.{b} E] {H' : Eᵒᵖ × E ⥤ E}
     (S' : CoefficientClosedStructure H') (F : D ⥤ E)
@@ -133,7 +152,6 @@ namespace TensorEvaluation
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 800000 in
 -- The K-flat replacement and K-injective fullness use the two derived model instances.
 private theorem representative_evaluation
     (M : NativeClosedHomModels k₀ l X)
@@ -176,13 +194,10 @@ private theorem representative_evaluation
   obtain ⟨φ, hφ⟩ := CochainComplex.IsKInjective.exists_Q_map_eq Q
     (CochainComplex.bifunctorHomObj (HW) P I)
     (e.hom ≫ (M.weilRepresentatives.model P I hI).hom)
-  have hf : DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model P I hI).inv =
-      e.hom := by rw [hφ, Category.assoc, Iso.hom_inv_id, Category.comp_id]
-  have hu := native_weil_representative_uncurry M S W t N hW χ hχ P Q I hP hQ hI φ
-  dsimp only at hu
-  rw [hf] at hu
-  exact TensorEvaluationFormal.evaluation_of_uncurry W S F t e
-    (χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I)) hu
+  exact TensorEvaluationFormal.evaluation_of_representative W S F t e
+    (M.weilRepresentatives.model P I hI) (DerivedCategory.Q.map φ) hφ
+    (χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I))
+    (native_weil_representative_uncurry M S W t N hW χ hχ P Q I hP hQ hI φ)
 
 end TensorEvaluation
 

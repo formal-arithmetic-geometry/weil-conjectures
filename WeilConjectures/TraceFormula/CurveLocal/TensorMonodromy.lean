@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverPullback
 # Finite `ℓ`-group monodromy of the tensor product of two lisse complexes
 
 This file proves the step "the complex `N' ⊠ Q'` has finite `ℓ`-group monodromy" of blueprint
-`det-tf-restriction-zero-covers` (i). Let `P₁, P₂` be bounded flat complexes on `V₁, V₂` whose
+`lemma-tangent-cones-on-cover` (i). Let `P₁, P₂` be bounded flat complexes on `V₁, V₂` whose
 termwise pullbacks to Galois covers `c₁, c₂` with finite `ℓ`-groups `G₁, G₂` are constant
 complexes on bounded complexes of finite `Λ`-modules, and let `ψᵢ : W ⟶ Vᵢ`. Then
 `E = Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂` is bounded and its cohomology sheaves become constant on finite
@@ -120,7 +120,7 @@ attribute [local instance] Sheaf.monoidalCategory
 /-- Let `P` be a complex of étale sheaves on `V` whose termwise pullback along `π : P' ⟶ V` is
 the constant complex on a complex `C` of `Λ`-modules. If `ψ : W ⟶ V` and `r : T ⟶ W` are such
 that `r ≫ ψ` factors through `π` (as `q ≫ π`), then the termwise pullback of `P` to `T` is
-the constant complex on `C` (blueprint `det-tf-restriction-zero-covers`). -/
+the constant complex on `C` (blueprint `lemma-tangent-cones-on-cover`). -/
 noncomputable def upperStarMapHomologicalComplexConstantIso {V W T P' : Scheme.{u}}
     {π : P' ⟶ V} {ψ : W ⟶ V} (q : T ⟶ P') (r : T ⟶ W) (h : r ≫ ψ = q ≫ π)
     {P : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ}
@@ -188,7 +188,7 @@ noncomputable def homologyQObjConstantSheafIso (X : Scheme.{u})
       (.up ℤ) n).app C
 
 /-- **The tensor product of two complexes with constant pullbacks has constant pulled back
-cohomology** (blueprint `det-tf-restriction-zero-covers`, the complex `N' ⊠ Q'`). Let
+cohomology** (blueprint `lemma-tangent-cones-on-cover`, the complex `N' ⊠ Q'`). Let
 `P₁, P₂` be complexes on `V₁, V₂`, with `P₁` bounded flat, whose termwise pullbacks along
 `π₁ : P₁' ⟶ V₁` and `π₂ : P₂' ⟶ V₂` are the constant complexes on complexes `C₁, C₂` of
 `Λ`-modules. Let `ψᵢ : W ⟶ Vᵢ` and `r : T ⟶ W` be such that each `r ≫ ψᵢ` factors through
@@ -261,7 +261,7 @@ lemma isGE_isLE_derivedTensor_leftDerivedUpperStar {W V₁ V₂ : Scheme.{u}}
     DerivedCategory.TStructure.t.isLE_of_iso e.symm _⟩
 
 /-- **The complex `N' ⊠ Q'` has finite `ℓ`-group monodromy** (blueprint
-`det-tf-restriction-zero-covers` (i)). Let `P₁, P₂` be bounded flat complexes of étale sheaves of
+`lemma-tangent-cones-on-cover` (i)). Let `P₁, P₂` be bounded flat complexes of étale sheaves of
 `Λ`-modules on `V₁, V₂`, and `c₁, c₂` Galois covers of `V₁, V₂` with finite `ℓ`-groups
 `G₁, G₂` such that the termwise pullback of `Pᵢ` to `cᵢ` is (as a complex) the constant complex
 on a bounded complex of finite `Λ`-modules. Then for `ψᵢ : W ⟶ Vᵢ`, the derived tensor product

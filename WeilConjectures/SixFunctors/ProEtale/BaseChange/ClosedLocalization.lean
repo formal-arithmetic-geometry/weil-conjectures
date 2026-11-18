@@ -17,7 +17,7 @@ commutes with the closed direct image, `w^* i_* ≅ i_W* w_Z^*`
 of inverse images agree, `i_W^* w^* ≅ w_Z^* i^*`
 (`AlgebraicGeometry.ProEtale.upperStarSquareIso`). The first isomorphism is the mate of the
 square of direct images, hence compatible with the units and counits of `i^* ⊣ i_*` and
-`i_W^* ⊣ i_W*` (blueprint `lem-exc-closed-localization`).
+`i_W^* ⊣ i_W*` (blueprint `proposition-extension-zero-restriction-closed-subscheme`).
 -/
 
 @[expose] public section
@@ -41,13 +41,14 @@ noncomputable def upperStarSquareIso (sq : CommSq iW wZ w i) :
     (w)^*[A] ⋙ (iW)^*[A] ≅ (i)^*[A] ⋙ (wZ)^*[A] :=
   (upperStarComp A iW w).symm ≪≫ eqToIso (by rw [sq.w]) ≪≫ upperStarComp A wZ i
 
-/-- Blueprint `lem-exc-closed-localization` (subsection `sk-prop-sf-open-closed-triangle`): for the
-cartesian square of a closed immersion `i : Z ⟶ X` and a weakly étale `w : W ⟶ X`, restriction
-to `W` commutes with the underived closed direct image: the base change map
-`i_* ⋙ w^* ⟶ w_Z^* ⋙ i_W*` (`AlgebraicGeometry.ProEtale.baseChangeMap`) is an isomorphism. This is
-the weakly étale base change theorem `AlgebraicGeometry.ProEtale.isIso_baseChangeMap_of_isPullback`
-applied to `i`; that `i` is a closed immersion is not used. The two composites of inverse
-images agree by `AlgebraicGeometry.ProEtale.upperStarSquareIso`. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
+`proposition-extension-zero-restriction-closed-subscheme`): for the cartesian square of a closed
+immersion `i : Z ⟶ X` and a weakly étale `w : W ⟶ X`, restriction to `W` commutes with the underived
+closed direct image: the base change map `i_* ⋙ w^* ⟶ w_Z^* ⋙ i_W*`
+(`AlgebraicGeometry.ProEtale.baseChangeMap`) is an isomorphism. This is the weakly étale base change
+theorem `AlgebraicGeometry.ProEtale.isIso_baseChangeMap_of_isPullback` applied to `i`; that `i` is a
+closed immersion is not used. The two composites of inverse images agree by
+`AlgebraicGeometry.ProEtale.upperStarSquareIso`. -/
 theorem isIso_baseChangeMap_of_isClosedImmersion [WeaklyEtale w] [WeaklyEtale wZ]
     (hsq : IsPullback iW wZ w i) :
     IsIso (baseChangeMap A hsq.toCommSq) :=

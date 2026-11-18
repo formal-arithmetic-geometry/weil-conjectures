@@ -46,9 +46,9 @@ instance : HasColimitsOfShape Iᵒᵖ (Sheaf c.pt.smallEtaleTopology (ModuleCat.
   Sheaf.instHasColimitsOfShape
 
 include hc in
-/-- Blueprint `lem-kun-descent-limit`: **a sheaf on a limit of schemes is the colimit of the
-pullbacks of its pushforwards** (Stacks 0EYN). Let `X = lim Xᵢ` be a cofiltered limit of
-quasi-compact quasi-separated schemes (for example affine schemes, or quasi-compact opens of
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **a sheaf on a limit of schemes is the
+colimit of the pullbacks of its pushforwards** (Stacks 0EYN). Let `X = lim Xᵢ` be a cofiltered limit
+of quasi-compact quasi-separated schemes (for example affine schemes, or quasi-compact opens of
 affine schemes) with affine transition maps, and write `pᵢ : X ⟶ Xᵢ`. For every étale sheaf
 `F` of `Λ`-modules on `X`, the canonical map `colimᵢ pᵢ^* pᵢ_* F ⟶ F` induced by the counits
 `pᵢ^* pᵢ_* F ⟶ F` is an isomorphism. Here `i ↦ pᵢ^* pᵢ_* F` is
@@ -76,7 +76,7 @@ theorem isIso_colimitDesc_descentCocone :
   infer_instance
 
 /-- The counits `pᵢ^* pᵢ_* F ⟶ F` exhibit `F` as the colimit of the sheaves `pᵢ^* pᵢ_* F`
-(blueprint `lem-kun-descent-limit`, see
+(blueprint `corollary-open-direct-image-over-field--2`, see
 `AlgebraicGeometry.Etale.isIso_colimitDesc_descentCocone`). -/
 noncomputable def isColimitDescentCocone :
     IsColimit (descentCocone (ModuleCat.{u + 1} Λ) c F) :=

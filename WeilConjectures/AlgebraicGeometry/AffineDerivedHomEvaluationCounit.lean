@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 import WeilConjectures.AlgebraicGeometry.DerivedInternalHomUnitIso
 import WeilConjectures.AlgebraicGeometry.AffineDerivedHomLocalizedEvaluation
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # AffineDerivedHomEvaluationCounit
 
@@ -50,6 +51,22 @@ private theorem transportEvaluation
   rw [hd]
   rw [adj.counit.naturality_assoc q.inv]
   simp [q.inv_hom_id]
+
+private theorem transportEvaluationFromRepresentatives
+    {C A D : Type*} [Category C] [Category A] [Category D]
+    (Q : D ⥤ C) [Q.EssSurj] {ρ : A ⥤ C} {F G : C ⥤ C}
+    (p : F ⟶ G) (ι : G ≅ 𝟭 C)
+    (h : ∃ (R : C ⥤ A) (L : A ⥤ C) (_e : L ≅ ρ) (adj : L ⊣ R),
+      ∀ (j : G ≅ 𝟭 C) (K : D), ∃ d : L.obj (R.obj (Q.obj K)) ≅ F.obj (Q.obj K),
+        d.hom ≫ p.app (Q.obj K) ≫ j.hom.app (Q.obj K) = adj.counit.app (Q.obj K)) :
+    ∃ (R : C ⥤ A) (adj : ρ ⊣ R) (j : G ≅ 𝟭 C), ∀ K : C,
+      ∃ d : ρ.obj (R.obj K) ≅ F.obj K,
+        d.hom ≫ p.app K ≫ j.hom.app K = adj.counit.app K := by
+  obtain ⟨R, L, e, adj, h⟩ := h
+  refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
+  intro K
+  obtain ⟨d, hd⟩ := h ι (Q.objPreimage K)
+  exact transportEvaluation adj e p ι (Q.objObjPreimageIso K) d hd
 
 private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -88,8 +105,44 @@ private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X 
         T.rightDerivedFunctorIsoMapDerivedCategory.symm
 
 
-set_option maxHeartbeats 900000 in
--- The nested derived-adjunction existentials require additional elaboration heartbeats.
+private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsAffineHom f]
+    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] :
+    let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+    let A := SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))
+    let S := SheafOfModules.restrictScalars
+      (R := moduleRings Y.toRingedSpace)
+      (R' := moduleRings (directImageAlgebraSpace f))
+      ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩
+    let B := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+    let U := (DerivedCategory.singleFunctor C 0).obj (SheafOfModules.unit Y.ringCatSheaf)
+    let M := (DerivedCategory.singleFunctor C 0).obj
+      ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))
+    let p := (Functor.curry.obj B).map
+      (((DerivedCategory.singleFunctor C 0).map
+        (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)
+    ∃ (R : DerivedCategory C ⥤ DerivedCategory A)
+      (L : DerivedCategory A ⥤ DerivedCategory C)
+      (_e : L ≅ S.rightDerivedFunctor) (adj : L ⊣ R),
+      ∀ (ι : (Functor.curry.obj B).obj (op U) ≅ 𝟭 _) (K : CochainComplex C ℤ),
+      ∃ d : L.obj (R.obj (DerivedCategory.Q.obj K)) ≅ B.obj (op M, DerivedCategory.Q.obj K),
+        d.hom ≫ p.app (DerivedCategory.Q.obj K) ≫ ι.hom.app (DerivedCategory.Q.obj K) =
+          adj.counit.app (DerivedCategory.Q.obj K) := by
+  refine (exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f).elim fun H₀ h₀ ↦ ?_
+  refine h₀.elim fun hH₀ h₁ ↦ ?_
+  let _ := hH₀
+  refine h₁.elim fun iH h₂ ↦ ?_
+  refine h₂.elim fun adj₀ h₃ ↦ ?_
+  refine h₃.2.elim fun R h₄ ↦ ?_
+  refine h₄.elim fun β h₅ ↦ ?_
+  refine h₅.elim fun L h₆ ↦ ?_
+  refine h₆.elim fun t h₇ ↦ ?_
+  refine h₇.elim fun adj h₈ ↦ ?_
+  exact ⟨R, L, affineScalarLocalizationIso.{u, wY, wA} f L t, adj, fun ι K ↦
+    affine_derivedHom_localized_evaluation.{u, wY, wA}
+      f H₀ iH adj₀ h₃.1 R β L t adj h₈.1 h₈.2.2.2 ι K⟩
+
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
 This lemma involves neither a quasi-coherent right adjoint of pushforward nor its
 comparison with scalar restriction.
@@ -142,29 +195,13 @@ theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
             (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op, 𝟙 K) ≫
         ι.hom.app K = adjH.counit.app K := by
-  obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
-    exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
-  let _ := hH₀
-  obtain ⟨ι⟩ := derivedInternalHom_unit_iso.{u, wY} Y
-  let e := affineScalarLocalizationIso.{u, wY, wA} f L t
-  refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
-  intro K
-  let Kc := DerivedCategory.Q.objPreimage K
-  let q := DerivedCategory.Q.objObjPreimageIso K
-  obtain ⟨d₀, hd₀⟩ := affine_derivedHom_localized_evaluation.{u, wY, wA}
-    f H₀ iH adj₀ h_eval R β L t adj hR h_counit ι Kc
-  let F := (Functor.curry.obj
-    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj
-      (op ((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-          ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))))
-  let p := (Functor.curry.obj
-    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).map
-      (((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
-          (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)
-  change d₀.hom ≫ p.app (DerivedCategory.Q.obj Kc) ≫
-    ι.hom.app (DerivedCategory.Q.obj Kc) = adj.counit.app (DerivedCategory.Q.obj Kc) at hd₀
-  exact transportEvaluation adj e p ι q d₀ hd₀
+  exact transportEvaluationFromRepresentatives DerivedCategory.Q
+    ((Functor.curry.obj
+      (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).map
+        (((DerivedCategory.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
+            (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op))
+    (Classical.choice (derivedInternalHom_unit_iso.{u, wY} Y))
+    (exists_affine_localizedEvaluation.{u, wY, wA} f)
 
 end AlgebraicGeometry

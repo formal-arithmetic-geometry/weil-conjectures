@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Mathlib.CategoryTheory.Limits.Comma
 
 /-! # Kernels and cokernels commute with exact colimits
-Source: blueprint det-ind-heart-kernels-cokernels, final paragraph.
+Source: blueprint proposition-ind-constructible-sheaves, final paragraph.
 (blueprint: lem-sfb-arrow-exact-colimits) -/
 
 @[expose] public section

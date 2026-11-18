@@ -29,8 +29,8 @@ private theorem homology_scalar_transport
     (A : ShortComplex (ModuleCat.{u} R)) (B : ShortComplex C)
     (E : C ⥤ AddCommGrpCat.{u}) [E.PreservesZeroMorphisms] [E.PreservesHomology]
     (q : A.map (forget₂ _ AddCommGrpCat.{u}) ⟶ B.map E) (r : R) (τ : E ⟶ E)
-    (hq : A.mapNatTrans (ModuleCat.smulNatTrans R r) ≫ q = q ≫ B.mapNatTrans τ) :
-    A.homology.smul r ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
+    (hq : A.mapNatTrans (ModuleCat.smulNatTrans R r).asHom ≫ q = q ≫ B.mapNatTrans τ) :
+    (A.homology.smul r).asHom ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap q ≫ (B.mapHomologyIso E).hom =
     (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap q ≫ (B.mapHomologyIso E).hom ≫ τ.app B.homology := by
@@ -47,8 +47,6 @@ attribute [local instance] enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
--- The nested section, evaluation and homology functors require extra elaboration work.
 /-- The homology comparison of restricted section complexes is semilinear.
 Source: Stacks Project, Tags 01E4 and 01E5.
 (blueprint: lem-pc-resolution-sections-homology-scalar)
@@ -91,21 +89,13 @@ theorem resolutionSectionsHomology_scalar
   let A := RingedSpace.globalSectionsComplex R.resolution
   let B := ((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj K
-  let U := forget₂ (ModuleCat.{u}
-    ((f ⁻¹ᵁ V).toScheme.ringCatSheaf.obj.obj (op ⊤))) AddCommGrpCat.{u}
   let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
     (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
-  let cA := (A.sc p).mapHomologyIso U
-  let cB := (B.sc p).mapHomologyIso E
-  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
-  change ∀ (a : Γ(S, V)) (y : A.homology p), (cA.inv ≫ H.map R.sections.hom ≫ cB.hom)
-    ((((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a) • y) =
-      a • (show (sectionCohomologyPresheaf K p).obj (op V) from
-        (cA.inv ≫ H.map R.sections.hom ≫ cB.hom) y)
+  dsimp only
   intro a y
   let b := ((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a
   let τ : E ⟶ E := {
-    app := fun M ↦ (M.obj (op V)).smul a
+    app := fun M ↦ ((M.obj (op V)).smul a).asHom
     naturality := fun M N q ↦ by
       ext z
       exact ((q.app (op V)).hom.map_smul a z).symm }
@@ -143,7 +133,7 @@ theorem resolutionSectionsHomology_scalar
     exact hw
   let q := (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map
     R.sections.hom
-  have hq : (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ b) ≫ q =
+  have hq : (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ b).asHom ≫ q =
       q ≫ (B.sc p).mapNatTrans τ := by
     apply ShortComplex.hom_ext
     · ext z

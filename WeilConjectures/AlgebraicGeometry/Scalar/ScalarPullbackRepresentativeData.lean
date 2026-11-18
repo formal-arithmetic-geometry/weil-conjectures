@@ -18,11 +18,12 @@ import all Mathlib.Logic.Small.Defs
 /-!
 # Specified scalar/pullback representative data
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 07A6 and 07A7
-(blueprint: def-pur-scalar-pullback-representative-data).
-
 These are the existing comparison constructions, shared by the representative
 computation and the theorem identifying its geometric mate with projection.
+
+## References
+
+* Stacks Project, Tags 07A4, 07A6 and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +39,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   ProEtale.pbcFixedScalarExtension derivedTensor upperStar lowerStar
 
 /-- The ordinary scalar/pullback identification, conjugate to the sectionwise
-restriction/direct-image identity under the two composite adjunctions.
-Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data). -/
+restriction/direct-image identity under the two composite adjunctions. -/
 def scalarSheafPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -52,8 +52,7 @@ def scalarSheafPullbackIso
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f))).symm
     (lowerStarCompRestrictScalarsIso φ f).symm
 
-/-- The same comparison on actual cochain complexes.
-Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data). -/
+/-- The same comparison on actual cochain complexes. -/
 def scalarSheafPullbackComplexIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :=
@@ -86,8 +85,7 @@ private theorem representative_eq
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   rfl
 
-/-- The geometric derived counit, with the homotopy quotient comparison included.
-Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data). -/
+/-- The geometric derived counit, with the homotopy quotient comparison included. -/
 def scalarGeometricRepresentative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     (P : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -103,10 +101,7 @@ def scalarGeometricRepresentative
     (DerivedCategory.quotientCompQhIso _).hom.app
       (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The exact geometric representative through the canonical derived comparison.
-Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data).
-Proof: the defining derived counit factors through the exact-derived comparison;
-the quotient factors cancel their inverse pairs. -/
+/-- The exact geometric representative through the canonical derived comparison. -/
 private theorem scalarGeometricRepresentative_eq
     (A : Type (u + 1)) [CommRing A] {T X : Scheme.{u}} (f : T ⟶ X)
     (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -362,8 +357,7 @@ private theorem scalarGeometricRepresentative_naturality
 end RepresentativeEquations
 end ExactRepresentativeAPI
 
-/-- The single-complex comparison for an exact pullback and a coefficient square.
-Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data). -/
+/-- The single-complex comparison for an exact pullback and a coefficient square. -/
 def exactSingleCoefficientIso
     {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
     [Abelian C] [Abelian D] [Abelian E] [Abelian H]
@@ -377,8 +371,7 @@ def exactSingleCoefficientIso
   ε.app _ ≪≫ (F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor D 0).mapIso (e.app M ≪≫ V.mapIso α)
 
-/-- The specified identification f_A^{-1}B_W[0] = B_Z[0].
-Source: Stacks 07A4 and 07A6 (blueprint: def-pur-scalar-pullback-representative-data). -/
+/-- The specified identification f_A^{-1}B_W[0] = B_Z[0]. -/
 def scalarCoefficientPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :

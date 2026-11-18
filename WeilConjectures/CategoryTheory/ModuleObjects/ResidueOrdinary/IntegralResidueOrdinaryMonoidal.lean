@@ -133,7 +133,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   {R : C} [MonObj R] [IsCommMonObj R] {S : D} [MonObj S] [IsCommMonObj S]
   {G : C ⥤ D} [G.Braided] (ρ : S ⟶ G.obj R) [IsMonHom ρ] [IsIso ρ]
   [PreservesColimitsOfShape WalkingParallelPair (mapModComap ρ)]
-set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 private theorem mapModComap_braided (M N : Mod C R) :
     let := mapModComapMonoidal ρ
@@ -159,7 +158,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local instance 20000] sheafBraidedCategory
 local instance instEssentiallySmallProfinite_integralResidueOrdinaryMonoidal
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
-set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 @[instance_reducible] private noncomputable def ordinary_braided
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

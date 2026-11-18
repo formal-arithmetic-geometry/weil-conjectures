@@ -17,8 +17,6 @@ import Mathlib.Algebra.CharP.Invertible
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Scalar trace base change for the second projective projection
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -85,34 +83,9 @@ private theorem trace_square_of_generators
     rw [reassoc_of% hc, hct', Category.comp_id,
       ← F.map_comp_assoc, hct, F.map_id, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
--- The full derived-category endpoint comparisons exceed the default heartbeat budget.
 /-- The scalar exchange is invertible and carries the normalized second trace to
 pullback of the normalized q trace. There is no arbitrary object K or tensor action
-in this assertion.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, trace base change
-(blueprint: lem-sfb-rational-p1-second-scalar-trace).
-
-Proof: Obtain the whole-system-normalized completed Chern adjuncts of q and p2
-from diagonalTrace_completedChern_lift. Realize and extend them by the explicit
-scalarQChern and scalarP2Chern composites. The scalar_chern_splittings lemma
-identifies each direct image with the biproduct of its twisted unit and Chern
-arrows. The scalar_chern_base_change lemma gives the two component equations
-for the specified exchange. An additive pullback preserves binary biproducts;
-its biproduct comparison and the two root/unit endpoint comparisons are
-invertible. Hence the commuting splitting square makes the exchange invertible.
-The trace vanishes on the twisted unit because a degree-zero sheaf shifted by
-two has no morphisms to a degree-zero sheaf. scalar_chern_degree proves its
-value on the Chern generator is one, using the strict twisted splitting and the
-actual realization and coefficient trace squares. Precompose the desired trace
-square with the invertible source splitting; its two components are therefore
-zero and the unit comparison. Cancel that splitting, then cancel the inverse
-singleUnitIso in scalarUnitPullIso to obtain the displayed normalized square.
-The closure coefficient uses the explicit bottom finite-field leg already
-provided by Family. No diagonal class or integration identity is used. -/
+in this assertion. -/
 theorem second_scalar_trace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
@@ -167,24 +140,30 @@ theorem second_scalar_trace
   let c₂ := scalarP2Chern l c Y _reference b
   let tq := trace Λ Y L d
   let t₂ := (secondDiagramPushIso Λ Y L d).inv.app (T (diagonalSurface Y)) ≫ d.trace₂
-  obtain ⟨hq, h₂⟩ :=
+  have hs : IsIso (biprod.desc uq cq) ∧ IsIso (biprod.desc u₂ c₂) :=
     scalar_chern_splittings l c k p hpl Y δ family _reference a ha' b hb'
   have hq0 : uq ≫ tq = 0 := shifted_single_to_single_zero _ _ _
   have h₂0 : u₂ ≫ t₂ = 0 := shifted_single_to_single_zero _ _ _
-  obtain ⟨hq1, h₂1⟩ := scalar_chern_degree l c Y hY δ family _reference a ha' b hb'
-  obtain ⟨hu, hc⟩ := scalar_chern_base_change l c k p hpl Y δ family _reference a ha' b hb'
-  have : IsIso (biprod.desc uq cq) := hq
-  have : IsIso (biprod.desc u₂ c₂) := h₂
+  have hd : cq ≫ tq = 𝟙 _ ∧ c₂ ≫ t₂ = 𝟙 _ :=
+    scalar_chern_degree l c Y hY δ family _reference a ha' b hb'
+  have hc : F.map uq ≫ secondTraceExchange l c k p hpl Y =
+        (scalarQLineIso l c k p hpl Y).hom ≫ u₂ ∧
+      F.map cq ≫ secondTraceExchange l c k p hpl Y = (scalarUnitPullIso Λ Y).hom ≫ c₂ :=
+    scalar_chern_base_change l c k p hpl Y δ family _reference a ha' b hb'
+  have : IsIso (biprod.desc uq cq) := hs.1
+  have : IsIso (biprod.desc u₂ c₂) := hs.2
   have : F.Additive := by
     dsimp only [F]
     unfold moduleObjectDerivedPullback
     exact Functor.additive_of_iso
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (ProjectiveLine Y ↘ Y)).symm
-  obtain ⟨hiso, ht⟩ := trace_square_of_generators F uq cq u₂ c₂
-    (scalarQLineIso l c k p hpl Y) (scalarUnitPullIso Λ Y)
-    (secondTraceExchange l c k p hpl Y) tq t₂ hu hc hq0 hq1 h₂0 h₂1
-  refine ⟨hiso, ?_⟩
-  have ht' := congrArg (fun z ↦ z ≫ (singleUnitIso Λ (ProjectiveLine Y)).hom) ht
+  have ht : IsIso (secondTraceExchange l c k p hpl Y) ∧
+      secondTraceExchange l c k p hpl Y ≫ t₂ = F.map tq ≫ (scalarUnitPullIso Λ Y).hom :=
+    trace_square_of_generators F uq cq u₂ c₂
+      (scalarQLineIso l c k p hpl Y) (scalarUnitPullIso Λ Y)
+      (secondTraceExchange l c k p hpl Y) tq t₂ hc.1 hc.2 hq0 hd.1 h₂0 hd.2
+  refine ⟨ht.1, ?_⟩
+  have ht' := congrArg (fun z ↦ z ≫ (singleUnitIso Λ (ProjectiveLine Y)).hom) ht.2
   simpa only [t₂, F, tq, Λ, L, d, T, scalarUnitPullIso,
     Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
     Iso.inv_hom_id, Category.comp_id, Functor.map_comp] using ht'

@@ -183,7 +183,7 @@ Proof:
    proper/open interchange (lem-sf-etale-proper-open-tensor-square) for `p₂,j` and `p₁,e`.
    Composing direct images gives exactly `locallyClosedGraphSide₁` and `Side₂`.
 5. The identity-top proper/open interchanges for `s₁,s₂` and the open compositors
-   (lem-cbc-extension-zero-composition) give exactly `locallyClosedGraphMiddle` on the
+   (proposition-composition-base-change-rf-shriek--1) give exactly `locallyClosedGraphMiddle` on the
    intersection: invert the first interchange, combine the open maps, use the pullback
    equality, split the open maps, and apply the second interchange.
 6. Whisker this middle comparison by `R(πp₁)_*`, insert the associators, and compose

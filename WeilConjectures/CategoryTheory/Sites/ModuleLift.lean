@@ -77,7 +77,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 endomorphisms of its sections over `U`. -/
 noncomputable def sectionsEndRingHom (F : Sheaf J AddCommGrpCat.{w}) (U : Cᵒᵖ) :
     End F →+* AddMonoid.End (F.obj.obj U) where
-  toFun f := (f.hom.app U).hom
+  toFun f := (f.asHom.hom.app U).hom
   map_one' := rfl
   map_mul' _ _ := rfl
   map_zero' := rfl
@@ -95,7 +95,8 @@ noncomputable abbrev sectionsModule (F : Sheaf J AddCommGrpCat.{w}) (r : Λ →+
 /-- A morphism of abelian sheaves with an action of `Λ`, commuting with the action, induces
 `Λ`-linear maps on sections. -/
 noncomputable def sectionsModuleMap {F G : Sheaf J AddCommGrpCat.{w}} (r : Λ →+* End F)
-    (r' : Λ →+* End G) (f : F ⟶ G) (hf : ∀ c, r c ≫ f = f ≫ r' c) (U : Cᵒᵖ) :
+    (r' : Λ →+* End G) (f : F ⟶ G) (hf : ∀ c, (r c).asHom ≫ f = f ≫ (r' c).asHom)
+    (U : Cᵒᵖ) :
     sectionsModule F r U ⟶ sectionsModule G r' U :=
   letI := Module.compHom (F.obj.obj U) ((sectionsEndRingHom F U).comp r)
   letI := Module.compHom (G.obj.obj U) ((sectionsEndRingHom G U).comp r')
@@ -108,7 +109,8 @@ noncomputable def sectionsModuleMap {F G : Sheaf J AddCommGrpCat.{w}} (r : Λ �
 
 @[simp]
 lemma sectionsModuleMap_apply {F G : Sheaf J AddCommGrpCat.{w}} (r : Λ →+* End F)
-    (r' : Λ →+* End G) (f : F ⟶ G) (hf : ∀ c, r c ≫ f = f ≫ r' c) (U : Cᵒᵖ)
+    (r' : Λ →+* End G) (f : F ⟶ G) (hf : ∀ c, (r c).asHom ≫ f = f ≫ (r' c).asHom)
+    (U : Cᵒᵖ)
     (x : F.obj.obj U) : sectionsModuleMap r r' f hf U x = f.hom.app U x :=
   rfl
 
@@ -123,7 +125,7 @@ noncomputable def modulePresheaf (F : Sheaf J AddCommGrpCat.{w}) (r : Λ →+* E
       { toFun := F.obj.map g
         map_add' := (F.obj.map g).hom.map_add
         map_smul' := fun c x ↦
-          (ConcreteCategory.congr_hom ((r c).hom.naturality g) x).symm }
+          (ConcreteCategory.congr_hom ((r c).asHom.hom.naturality g) x).symm }
   map_id U := ConcreteCategory.hom_ext _ _ fun x ↦
     ConcreteCategory.congr_hom (F.obj.map_id U) x
   map_comp f g := ConcreteCategory.hom_ext _ _ fun x ↦
@@ -131,7 +133,8 @@ noncomputable def modulePresheaf (F : Sheaf J AddCommGrpCat.{w}) (r : Λ →+* E
 
 variable {𝒜 : Type*} [Category* 𝒜] (P : 𝒜 ⥤ Sheaf J AddCommGrpCat.{w})
   (ρ : ∀ a, Λ →+* End (P.obj a))
-  (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ), ρ a c ≫ P.map f = P.map f ≫ ρ b c)
+  (hρ : ∀ {a b : 𝒜} (f : a ⟶ b) (c : Λ),
+    (ρ a c).asHom ≫ P.map f = P.map f ≫ (ρ b c).asHom)
 
 /-- A functor `P : 𝒜 ⥤ Sheaf J AddCommGrpCat` with an action `ρ a : Λ →+* End (P.obj a)`
 natural in `a` lifts to sheaves of `Λ`-modules. -/
@@ -161,7 +164,7 @@ lemma moduleLift_obj_obj_obj (a : 𝒜) (U : Cᵒᵖ) :
 
 lemma moduleLift_obj_obj_smul (a : 𝒜) (U : Cᵒᵖ) (c : Λ)
     (x : ((moduleLift P ρ hρ).obj a).obj.obj U) :
-    c • x = (ρ a c).hom.app U x :=
+    c • x = (ρ a c).asHom.hom.app U x :=
   rfl
 
 

@@ -21,7 +21,7 @@ coefficients `Λ`, the *étale exchange restriction*
 (`AlgebraicGeometry.Etale.exchangeRestriction`) is the `Rd_! ⊣ Rd^!` adjoint of the inverse of
 compact-support base change followed by `LΔ^*` of the counit of `Rc_! ⊣ Rc^!`
 (`CategoryTheory.Adjunction.exchangeRestriction`). For the fixed square of the Frobenius graph it
-is the étale form of the supported restriction of blueprint `det-tf-supported-restriction`.
+is the étale form of the supported restriction of blueprint `lemma-local-term-restriction-map--1`.
 
 This file sets up its pullback to the strictly local model of a curve
 (`AlgebraicGeometry.Etale.CurveLocalModel`): for a cartesian square `ι ≫ graph = d ≫ diagonal`
@@ -60,14 +60,14 @@ noncomputable def lowerShriekBaseChangeIso (sq : IsPullback ι d c Δ) :
   asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)
 
 /-- The **étale exchange restriction** `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P` of a cartesian square
-`ι ≫ c = d ≫ Δ` (blueprint `det-tf-supported-restriction`, (2)): the `Rd_! ⊣ Rd^!` adjoint of
+`ι ≫ c = d ≫ Δ` (blueprint `lemma-local-term-restriction-map--1`, (2)): the `Rd_! ⊣ Rd^!` adjoint of
 the inverse of compact-support base change followed by `LΔ^*` of the counit of `Rc_! ⊣ Rc^!`. -/
 noncomputable def exchangeRestriction (sq : IsPullback ι d c Δ)
     (P : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (L((ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)^![Λ]).obj P) ⟶
       (R(d)^![Λ]).obj ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj P) :=
   (mateEquiv (rightDerivedUpperShriekAdjunction Λ c) (rightDerivedUpperShriekAdjunction Λ d)
-    (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).natTrans.app P
+    (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).app P
 
 /-- The étale exchange restriction is the `Rd_! ⊣ Rd^!` adjoint of the inverse of compact-support
 base change followed by `LΔ^*` of the counit of `Rc_! ⊣ Rc^!`. -/

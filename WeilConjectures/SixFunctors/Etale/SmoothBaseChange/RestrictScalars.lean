@@ -65,7 +65,7 @@ lemma restrictScalars_map_upperStarLowerStarAdjunction_unit_app
         ((upperStarLowerStarAdjunction _ f).unit.app M) ≫
         (lowerStarCompRestrictScalarsIso φ f).hom.app _ =
       (upperStarLowerStarAdjunction _ f).unit.app _ ≫
-        (f)_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ f).natTrans.app M) :=
+        (f)_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ f).app M) :=
   unit_mateEquiv_symm (upperStarLowerStarAdjunction _ f)
     (upperStarLowerStarAdjunction _ f) (lowerStarCompRestrictScalarsIso φ f).hom M
 
@@ -73,7 +73,7 @@ lemma restrictScalars_map_upperStarLowerStarAdjunction_unit_app
 @[reassoc]
 lemma upperStarRestrictScalars_app_comp_counit
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    (upperStarRestrictScalars φ f).natTrans.app _ ≫
+    (upperStarRestrictScalars φ f).app _ ≫
         (Sheaf.restrictScalars X.smallEtaleTopology φ).map
           ((upperStarLowerStarAdjunction _ f).counit.app M) =
       (f)^*[ModuleCat.{u + 1} Λ].map ((lowerStarCompRestrictScalarsIso φ f).hom.app M) ≫
@@ -114,7 +114,7 @@ lemma upperStarRestrictScalars_comp (a : Z ⟶ W) (b : W ⟶ V) (c : Z ⟶ V) (h
     mateEquiv_hcomp, mateEquiv_upperStarRestrictScalars, mateEquiv_upperStarRestrictScalars,
     mateEquiv_upperStarRestrictScalars, conjugateEquiv_upperStarComp_hom,
     conjugateEquiv_upperStarComp_hom]
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
     lowerStarCompRestrictScalarsIso, Iso.refl_hom]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
@@ -126,12 +126,12 @@ lemma upperStarRestrictScalars_comp (a : Z ⟶ W) (b : W ⟶ V) (c : Z ⟶ V) (h
 @[reassoc]
 lemma upperStarRestrictScalars_comp_app (a : Z ⟶ W) (b : W ⟶ V) (c : Z ⟶ V) (hc : c = a ≫ b)
     (N : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    (upperStarRestrictScalars φ c).natTrans.app N ≫
+    (upperStarRestrictScalars φ c).app N ≫
         (Sheaf.restrictScalars Z.smallEtaleTopology φ).map
           ((upperStarComp _ a b c hc).hom.app N) =
       (upperStarComp _ a b c hc).hom.app _ ≫
-        (a)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ b).natTrans.app N) ≫
-        (upperStarRestrictScalars φ a).natTrans.app _ := by
+        (a)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ b).app N) ≫
+        (upperStarRestrictScalars φ a).app _ := by
   have := congr_app (upperStarRestrictScalars_comp φ a b c hc) N
   simpa using this
 
@@ -143,10 +143,10 @@ commutative square. -/
 lemma squareUpperStarIso_restrictScalars (sq : CommSq e h g p)
     (N : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     (squareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom.app _ ≫
-        (e)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g).natTrans.app N) ≫
-        (upperStarRestrictScalars φ e).natTrans.app _ =
-      (h)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ p).natTrans.app N) ≫
-        (upperStarRestrictScalars φ h).natTrans.app _ ≫
+        (e)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g).app N) ≫
+        (upperStarRestrictScalars φ e).app _ =
+      (h)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ p).app N) ≫
+        (upperStarRestrictScalars φ h).app _ ≫
         (Sheaf.restrictScalars Y.smallEtaleTopology φ).map
           ((squareUpperStarIso (ModuleCat.{u + 1} Λ') sq).hom.app N) := by
   have h₁ := upperStarRestrictScalars_comp_app φ e g (e ≫ g) rfl N
@@ -163,8 +163,8 @@ lemma baseChangeMap_restrictScalars (sq : CommSq e h g p)
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     (p)^*[ModuleCat.{u + 1} Λ].map ((lowerStarCompRestrictScalarsIso φ g).hom.app M) ≫
         (baseChangeMap (ModuleCat.{u + 1} Λ) sq).app _ ≫
-        (h)_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ e).natTrans.app M) =
-      (upperStarRestrictScalars φ p).natTrans.app _ ≫
+        (h)_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ e).app M) =
+      (upperStarRestrictScalars φ p).app _ ≫
         (Sheaf.restrictScalars X.smallEtaleTopology φ).map
           ((baseChangeMap (ModuleCat.{u + 1} Λ') sq).app M) ≫
         (lowerStarCompRestrictScalarsIso φ h).hom.app _ := by
@@ -183,9 +183,9 @@ lemma baseChangeMap_restrictScalars (sq : CommSq e h g p)
   have hg := upperStarRestrictScalars_app_comp_counit φ g M
   have hh := upperStarRestrictScalars_app_comp_counit φ h
     ((e)^*[ModuleCat.{u + 1} Λ'].obj M)
-  have hne := (upperStarRestrictScalars φ e).natTrans.naturality
+  have hne := (upperStarRestrictScalars φ e).naturality
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g).counit.app M)
-  have hnh := (upperStarRestrictScalars φ h).natTrans.naturality
+  have hnh := (upperStarRestrictScalars φ h).naturality
     ((baseChangeMap (ModuleCat.{u + 1} Λ') sq).app M)
   have hsq := squareUpperStarIso_restrictScalars_assoc φ sq
     ((g)_*[ModuleCat.{u + 1} Λ'].obj M)

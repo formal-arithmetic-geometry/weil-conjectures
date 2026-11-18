@@ -92,7 +92,6 @@ theorem finite_direct_counit_coordinates
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso w.symm).inv) N
   have hm := derived_realization_mate A g
   change _ = s.inv at hm
-  dsimp only [TwoSquare.natTrans] at hm
   rw [hm] at hi
   have hw : (Functor.mapDerivedCategorySquareIso w.symm).inv = v.hom :=
     (congrArg Iso.inv

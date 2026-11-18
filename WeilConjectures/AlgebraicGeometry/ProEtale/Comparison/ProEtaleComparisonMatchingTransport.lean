@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 /-! # Transport of matching families to fpqc descent data
 
-Source: Stacks Project, Tag 0GLZ, first paragraph; Tag 09XN.
+## References
+
+* Stacks Project, Tag 0GLZ, first paragraph
+* Tag 09XN
+* Stacks Project, Tag 0GLZ (first proof paragraph); Tags 03CB and 03CC
 -/
 
 @[expose] public section
@@ -147,17 +151,9 @@ private lemma tr_eq {R S T : Scheme.{u}} (e : S ⟶ R)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The overlap equation has several nested inverse-image functors and dependent equality casts.
-/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph; Sites, Tags 03CB and 03CC.
-(blueprint: lem-cbc-comparison-matching-transport).
-Proof: define t_i by the displayed formula. The inverse of the terminal second
-projection is the canonical lift from the identity object. Expanding terminal
-transport therefore identifies t_i with the inverse composition isomorphism applied
-to e_i(s_i). On the overlap Z_i times_Y Z_j, apply the matching equation for s to
-the two projections. Apply the restriction equation hres to both sides. The unit
-compatibility of inverse-image composition and its associativity identify the two
-results with the displayed fpqc compatibility equation. The equality of the two
-maps to Y is pullback.condition; its transport is exactly Eq.mp in that equation.
-This argument needs no covering assumption, including for an empty index type. -/
+/-- A compatible family of sections of `P`, identified via `e` with sections of the étale
+pullbacks of `F`, transports to a family of sections of the iterated pullbacks of `F` that
+agree on the overlaps, i.e. to descent data. -/
 theorem proEtaleComparisonMatchingTransport
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (P : X.ProEtᵒᵖ ⥤ Type (u + 1))

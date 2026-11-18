@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Prime-to-characteristic torsion in the Picard group of a proper curve
 
-Source: blueprint `lem-sc-pic-proper-ntorsion`, the Jacobian calculation.
+Source: blueprint `corollary-torsion-jacobian-field-extension`, the Jacobian calculation.
 (blueprint: lem-sc-pic-proper-ntorsion-torsion)
 -/
 
@@ -52,7 +52,7 @@ private def kernelTorsionEquiv (G : Type*) [CommGroup G] (n : ℕ) :
   map_mul' x y := rfl
 
 /-- The prime-to-characteristic Picard torsion for a proper smooth curve.
-Source: blueprint `lem-sc-pic-proper-ntorsion`, the Jacobian calculation.
+Source: blueprint `corollary-torsion-jacobian-field-extension`, the Jacobian calculation.
 (blueprint: lem-sc-pic-proper-ntorsion-torsion)
 
 Proof in words: Finite type gives local Noetherianity, smoothness gives regularity,

@@ -19,8 +19,8 @@ cone `V(in f) ⊆ Spec gr_𝔪 R`. Two such tangent cones `V(in f)` and `V(in g)
 vertex if and only if the ideal `(in f, in g)` contains all homogeneous elements of large degree,
 that is, if for large `n` every element of `𝔪^n` is congruent modulo `𝔪^(n+1)` to an element of
 `f 𝔪^(n-d) + g 𝔪^(n-e)`. This is the condition `C_t D ∩ C_t B = {0}` of the blueprint
-(`sk-lem-tf-blowup-restriction`); for a regular curve `H = V(h)`, `h ∈ 𝔪 ∖ 𝔪²`, the tangent cone
-is the tangent line `T_t H`.
+(`lemma-vanishing-restrictions-after-blowing-up--1`); for a regular curve `H = V(h)`, `h ∈ 𝔪 ∖ 𝔪²`,
+the tangent cone is the tangent line `T_t H`.
 
 ## Main definitions
 

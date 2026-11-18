@@ -15,6 +15,7 @@ import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Algebra.DirectSum.Module
 import Mathlib.Algebra.Category.ModuleCat.Products
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Finite presentation of a stalk from a supplied local presentation
 

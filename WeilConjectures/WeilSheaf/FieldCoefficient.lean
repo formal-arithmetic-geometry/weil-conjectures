@@ -15,7 +15,7 @@ public import WeilConjectures.WeilSheaf.FrobeniusDerived
 Let `k₀` be a finite field with algebraic closure `k̄`, `X` a scheme over `k₀`, `X̄ = X ×_{k₀} k̄`
 its geometric fiber and `Fr_X : X̄ ≅ X̄` its geometric Galois Frobenius. Let `Λ` be a field with
 an ultrametric norm; the case of the blueprint is a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`,
-`ℓ` prime to the characteristic of `k₀`. Following blueprint `def-weil-weil-sheaf-complex`,
+`ℓ` prime to the characteristic of `k₀`. Following blueprint `definition-weil-structure`,
 
 - a *constructible `E`-Weil sheaf* on `X` is a constructible `E`-adic sheaf `F` on the pro-étale
   site of `X̄`, an object of `Sh_c(X̄, E)`
@@ -71,7 +71,7 @@ isomorphic to the pullback along `Fr_X`
 noncomputable abbrev FieldWeilSheaf.frobeniusPullback :
     FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
       FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᶠ[Λ]
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ]
 
 /-- The Frobenius pullback is an equivalence, `Fr_X` being an automorphism. -/
 instance : (FieldWeilSheaf.frobeniusPullback k₀ Λ X).IsEquivalence :=
@@ -103,7 +103,7 @@ noncomputable abbrev FieldWeilComplex.objectProperty :
 
 end Frobenius
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex, stage `Λ = E`.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, stage `Λ = E`.
 
 The category of constructible `Λ`-Weil sheaves on a `k₀`-scheme `X`, for `Λ` a finite extension
 `E` of `ℚ_ℓ`: constructible `E`-adic sheaves `F` on the pro-étale site of the geometric fiber
@@ -115,7 +115,7 @@ def FieldWeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (Λ : Type) [Norme
     [IsUltrametricDist Λ] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex, stage `Λ = E`.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, stage `Λ = E`.
 
 The triangulated category `D^b_{c,W}(X, E)` of `E`-Weil complexes on a `k₀`-scheme `X`, for
 `Λ = E` a finite extension of `ℚ_ℓ`: the objects of the derived category of pro-étale `E`-Weil
@@ -207,7 +207,7 @@ lemma boundedFieldConstructible_forget_obj (K : FieldWeilComplex k₀ Λ X) :
       (((IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso n).app K.obj)
       (K.property.2 n)⟩
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the forgetful functor
+/-- Blueprint `definition-weil-structure`: the forgetful functor
 `For : D^b_{c,W}(X, Λ) ⥤ D^b_c(X̄, Λ)`, the corestriction of
 `AlgebraicGeometry.FieldWeilComplex.forget` to the bounded constructible complexes. -/
 noncomputable def forgetBoundedConstructible :
@@ -217,7 +217,7 @@ noncomputable def forgetBoundedConstructible :
   ObjectProperty.lift _ forget boundedFieldConstructible_forget_obj
 
 variable (X) in
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex, stage `Λ = E`.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, stage `Λ = E`.
 
 The derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)` of an object `K` of
 `D^b_{c,W}(X, Λ)`, natural in `K`: the isomorphism induced on derived categories by the

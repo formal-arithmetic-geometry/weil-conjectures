@@ -84,7 +84,7 @@ Proof (the eight steps of the node):
 1. The closed fibre E = B/m_A B is complete Noetherian local by
    `lem-weil-pbc-complete-local-quotient`. Its maximal ideal is the image of m_B.
    The induced residue-field isomorphism transports its formal smoothness over
-   k = A/m_A to k₀ = A₀/m₀ (`def-weil-pbc-formally-smooth-adic`).
+   k = A/m_A to k₀ = A₀/m₀ (`theorem-finite-etale-covers-proper-henselian--2`).
 2. Apply `lem-weil-pbc-fs-adic-lift-from-residue-field` to A₀ and E. Obtain a
    complete Noetherian local C, a local formally smooth γ : A₀ → C, and an
    A₀-algebra isomorphism C/m₀C ≅ E. The resulting θ : C → E is surjective,

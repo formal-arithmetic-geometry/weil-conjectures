@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 # Arithmetic and geometric Frobenius
 
 Source: Deligne, Weil II (1.1.7)--(1.1.8), pp. 150--151 and (1.1.14), p. 153
-(blueprint: def-weil-frobenius-detailed).
+(blueprint: prose-10-19).
 
 The arithmetic and geometric field automorphisms are the existing
 `FiniteField.frobeniusAlgEquivOfAlgebraic` and
@@ -39,7 +39,7 @@ namespace WeilConjectures.FiniteFieldDatum
 
 /-- Spec of a base-field automorphism of the closure is a morphism over the base field.
 Source: Deligne, Weil II (1.1.7), pp. 150--151
-(blueprint: def-weil-frobenius-detailed).
+(blueprint: prose-10-19).
 Proof: Spec is contravariant. The required composite corresponds to the composite of the
 base embedding with σ. The latter equals the base embedding since σ is a k₀-algebra map. -/
 theorem specGaloisMap_over (D : WeilConjectures.FiniteFieldDatum.{u})
@@ -54,7 +54,7 @@ theorem specGaloisMap_over (D : WeilConjectures.FiniteFieldDatum.{u})
 
 /-- The actual base-change map id × Spec σ on the geometric fibre, for a fixed closure.
 Source: Deligne, Weil II (1.1.7), pp. 150--151
-(blueprint: def-weil-frobenius-detailed). -/
+(blueprint: prose-10-19). -/
 noncomputable def galoisMap (D : WeilConjectures.FiniteFieldDatum.{u})
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of D.k₀)) (σ : D.k ≃ₐ[D.k₀] D.k) :
     pullback f (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ⟶
@@ -67,7 +67,7 @@ noncomputable def galoisMap (D : WeilConjectures.FiniteFieldDatum.{u})
 
 /-- The inverse base-change map is obtained from the inverse field automorphism.
 Source: Deligne, Weil II (1.1.7), pp. 150--151
-(blueprint: def-weil-frobenius-detailed).
+(blueprint: prose-10-19).
 Proof: composing the two base-change maps has identity on the model and Spec of σσ⁻¹,
 respectively σ⁻¹σ, on the coefficient field. Both are identities. The universal property
 of the fibre product then identifies both composites with its identity morphism. -/
@@ -104,22 +104,23 @@ theorem galoisMap_inverse (D : WeilConjectures.FiniteFieldDatum.{u})
 /-- The geometric Frobenius automorphism id × Spec(φ_q⁻¹). Its inverse has arithmetic
 Frobenius on coefficients; its underlying scheme is the dependency's geometric fibre.
 Source: Deligne, Weil II (1.1.7), pp. 150--151
-(blueprint: def-weil-frobenius-detailed). -/
+(blueprint: prose-10-19). -/
 noncomputable def geometricFrobenius (D : WeilConjectures.FiniteFieldDatum.{u})
     (Y₀ : Over (Spec (CommRingCat.of D.k₀)))
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] :
     Aut (D.geometricFiber Y₀).left :=
   letI := Fintype.ofFinite D.k₀
-  { hom := D.galoisMap Y₀.hom (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
-    inv := D.galoisMap Y₀.hom
-      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).symm
-    hom_inv_id := (D.galoisMap_inverse Y₀.hom _).1
-    inv_hom_id := (D.galoisMap_inverse Y₀.hom _).2 }
+  Aut.of
+    { hom := D.galoisMap Y₀.hom (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
+      inv := D.galoisMap Y₀.hom
+        (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).symm
+      hom_inv_id := (D.galoisMap_inverse Y₀.hom _).1
+      inv_hom_id := (D.galoisMap_inverse Y₀.hom _).2 }
 
 /-- The map fixes the model and is semilinear over the closure, with the stated coefficient
 automorphism. These identities also make it a morphism over the finite base.
 Source: Deligne, Weil II (1.1.7), pp. 150--151
-(blueprint: def-weil-frobenius-detailed).
+(blueprint: prose-10-19).
 Proof: baseChangeMap is the universal lift with first projection unchanged and second
 projection followed by Spec σ. Its defining projection equations prove both identities. -/
 theorem galoisMap_projections (D : WeilConjectures.FiniteFieldDatum.{u})

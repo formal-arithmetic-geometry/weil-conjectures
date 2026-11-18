@@ -14,31 +14,32 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 # Smooth duality from the étale and the affine-space cases
 
 The reduction step of the proof of orientation-free smooth duality (blueprint
-`thm-asd-smooth-tensor`): for `f : X ⟶ Y` smooth of relative dimension `d`, admitting a
-compactification, with the exponent of `Λ` invertible on `X`, the dualizing complex `ω_f` is a
-locally constant sheaf of free rank-one `Λ`-modules placed in degree `-2d` and the canonical
-tensor map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`, *provided* this
-holds for
+`proposition-exceptional-inverse-image-smooth-morphism`): for `f : X ⟶ Y` smooth of relative
+dimension `d`, admitting a compactification, with the exponent of `Λ` invertible on `X`, the
+dualizing complex `ω_f` is a locally constant sheaf of free rank-one `Λ`-modules placed in degree
+`-2d` and the canonical tensor map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every
+`K`, *provided* this holds for
 
 * étale morphisms, with `ω_e ≅ Λ` (`AlgebraicGeometry.Etale.EtaleSmoothDuality`): this is the
-  étale adjoint locality `lem-amb-etale-adjoint-locality`, `Re^! ≅ Le^*`, together with its
-  compatibility with the tensor maps;
+  étale adjoint locality `lemma-affine-space-etale-localization--4`, `Re^! ≅ Le^*`, together with
+  its compatibility with the tensor maps;
 * the projections `p_d : 𝔸^d_S ⟶ S` of relative affine space over affine bases `S` on which the
   exponent of `Λ` is invertible (`AlgebraicGeometry.Etale.AffineSpaceSmoothDuality`): this is the
-  affine-space adjunction `Rp_{d!} ⊣ p_d^*(d)[2d]` (`cor-amb-affine-space-adjunction`), together
-  with its compatibility with the tensor maps.
+  affine-space adjunction `Rp_{d!} ⊣ p_d^*(d)[2d]` (`lemma-affine-space-etale-localization--1`),
+  together with its compatibility with the tensor maps.
 
 As in the blueprint, every point of `X` has an affine open neighbourhood `V` on which `f` is the
 composite `V --e--> 𝔸^d_U --p_d--> U ⊆ Y` of an étale morphism, an affine-space projection over an
-affine open `U` of `Y` and an open immersion (`sbc-thm-etale-local-normal-form`,
+affine open `U` of `Y` and an open immersion
+(`proposition-exceptional-inverse-image-smooth-morphism`,
 `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace`). The canonical tensor maps compose
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_comp_of_forall`) and descend along the
 open cover by these neighbourhoods
-(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_jointlySurjective`); the shape of
-the dualizing complex descends as well
-(`AlgebraicGeometry.Etale.IsShiftedRankOneLocalSystem.of_jointlySurjective`). The exponent of
-`Λ` is first made invertible on the base by restricting `Y` to the open subscheme where it is a
-unit, through which `f` factors.
+(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_jointlySurjective`); the shape of the
+dualizing complex descends as well
+(`AlgebraicGeometry.Etale.IsShiftedRankOneLocalSystem.of_jointlySurjective`). The exponent of `Λ` is
+first made invertible on the base by restricting `Y` to the open subscheme where it is a unit,
+through which `f` factors.
 
 ## Main definitions
 
@@ -80,7 +81,7 @@ variable [Finite Λ]
 compactification, the canonical tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an
 isomorphism for every `K`, and the dualizing complex is trivial, `ω_e ≅ Λ_V`. Together this says
 that `Re^! ≅ Le^*` through the canonical maps: the étale adjoint locality
-`lem-amb-etale-adjoint-locality` with its compatibility with the tensor maps. -/
+`lemma-affine-space-etale-localization--4` with its compatibility with the tensor maps. -/
 def EtaleSmoothDuality : Prop :=
   ∀ ⦃V W : Scheme.{u}⦄ (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [HasCompactification e],
     (∀ K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
@@ -91,8 +92,8 @@ def EtaleSmoothDuality : Prop :=
 exponent of `Λ` is invertible and every `d`, the projection `p_d : 𝔸^d_S ⟶ S` has canonical
 tensor map `θ_{p_d,K}` invertible for every `K`, and its dualizing complex is a locally constant
 sheaf of free rank-one `Λ`-modules placed in degree `-2d`. This is what the affine-space
-adjunction `Rp_{d!} ⊣ p_d^*(d)[2d]` (`cor-amb-affine-space-adjunction`) gives, together with its
-compatibility with the tensor maps. -/
+adjunction `Rp_{d!} ⊣ p_d^*(d)[2d]` (`lemma-affine-space-etale-localization--1`) gives, together
+with its compatibility with the tensor maps. -/
 def AffineSpaceSmoothDuality : Prop :=
   ∀ (d : ℕ) (S : Scheme.{u}) [IsAffine S] [HasInvertibleExponent Λ S],
     (∀ K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
@@ -205,8 +206,8 @@ theorem satisfiesSmoothDuality_of_hasInvertibleExponent {X Y : Scheme.{u}}
     satisfiesSmoothDuality_chart hE hA f d hU hV hVU e hfe⟩
 
 /-- **Smooth duality from the étale and affine-space cases** (the reduction in the proof of
-blueprint `thm-asd-smooth-tensor`): if étale morphisms and affine-space projections satisfy
-smooth duality (`AlgebraicGeometry.Etale.EtaleSmoothDuality`,
+blueprint `proposition-exceptional-inverse-image-smooth-morphism`): if étale morphisms and
+affine-space projections satisfy smooth duality (`AlgebraicGeometry.Etale.EtaleSmoothDuality`,
 `AlgebraicGeometry.Etale.AffineSpaceSmoothDuality`), then so does every smooth morphism
 `f : X ⟶ Y` of relative dimension `d` with the exponent of `Λ` invertible on `X`, in degree
 `-2d`.
@@ -252,11 +253,12 @@ theorem satisfiesSmoothDuality_of_etaleSmoothDuality_of_affineSpaceSmoothDuality
   exact hω'.of_iso c.symm
 
 /-- **Smooth duality from the étale and affine-space cases**, in the form of blueprint
-`thm-asd-smooth-tensor` (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`): if
-étale morphisms and affine-space projections satisfy smooth duality, then for every smooth
-`f : X ⟶ Y` of relative dimension `d` admitting a compactification, with the exponent of `Λ`
-invertible on `X`, `ω_f ≅ L[2d]` for a locally constant sheaf `L` of free rank-one `Λ`-modules
-and `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`. -/
+`proposition-exceptional-inverse-image-smooth-morphism`
+(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`): if étale morphisms and
+affine-space projections satisfy smooth duality, then for every smooth `f : X ⟶ Y` of relative
+dimension `d` admitting a compactification, with the exponent of `Λ` invertible on `X`,
+`ω_f ≅ L[2d]` for a locally constant sheaf `L` of free rank-one `Λ`-modules and
+`θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every `K`. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_etale_of_affineSpace {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] :

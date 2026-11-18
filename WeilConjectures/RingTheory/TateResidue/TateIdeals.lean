@@ -42,7 +42,7 @@ variable {k V V₂ : Type*} [Field k] [AddCommGroup V] [Module k V] [AddCommGrou
   [Module k V₂]
 
 /-- `X` is *almost contained* in `Y`: `X ⊆ Y + W` for a finite-dimensional subspace `W`
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 def AlmostLE (X Y : Submodule k V) : Prop :=
   ∃ W : Submodule k V, W.FG ∧ X ≤ Y ⊔ W
 
@@ -129,7 +129,7 @@ open Submodule
 variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V] (A : Submodule k V)
 
 /-- Tate's algebra `E`: endomorphisms `φ` with `φ(A) ≺ A`
-(blueprint: `det-thm-picard-duality`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 def E (φ : Module.End k V) : Prop := (A.map φ).AlmostLE A
 
 /-- Tate's ideal `E₁`: endomorphisms `φ` with `φ(V) ≺ A`. -/

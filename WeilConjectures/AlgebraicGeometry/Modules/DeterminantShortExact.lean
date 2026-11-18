@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Determinants in short exact sequences
-
-Source: blueprint, `sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md`,
-proof of (*), determinant paragraph (blueprint: lem-sc-determinant-short-exact).
 -/
 
 @[expose] public section
@@ -32,22 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Determinant lines are invertible and multiplicative, with the canonical isomorphism
 characterized on wedges on every open subset. The inverse sends a tensor of wedges to the
 wedge of the included sections followed by any lifts of the quotient sections. Since it is
-a morphism of sheaves, it commutes with restriction; its characterization uses every open.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-determinant-short-exact).
-
-Proof: (1) Apply `lem-sc-local-splitting-finite-free` locally and refine using
-`def-amb-finite-locally-free-module` to trivialize the outside terms with ranks `r₁` and `r₃`.
-(2) Apply `lem-sc-exterior-top-direct-sum` and `lem-weil-pbc-exterior-power-free-basis` on
-these opens; the top exterior powers are free of rank one and the direct-sum identification
-is the displayed wedge formula. (3) Two splittings differ by a map into the first term.
-Expanding the changed wedge gives terms with `r₁ + 1` factors in a rank-`r₁` free module,
-which vanish by `lem-weil-pbc-exterior-power-free-basis`. Thus the map is independent of
-lifts, agrees on overlaps, and glues to the canonical isomorphism. Pure wedges and their
-tensors generate locally, giving uniqueness. Empty wedges give the rank-zero convention
-by `nonempty_exteriorPower_zero_iso`. No sign is introduced: first-term factors precede quotient
-factors, as in the source. -/
+a morphism of sheaves, it commutes with restriction; its characterization uses every open. -/
 theorem determinant_shortExact {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂]

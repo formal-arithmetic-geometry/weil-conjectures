@@ -35,18 +35,19 @@ section Defs
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `def-kun-cd` (for sheaves of `Λ`-modules): the scheme `X` has *finite
-cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with `H^q(X, F) = 0` for
-every étale sheaf `F` of `Λ`-modules and every `q > d`. For a torsion ring `Λ` every such sheaf
-is a torsion abelian sheaf, so this follows from finiteness of the torsion étale cohomological
-dimension `cd(X)` of the blueprint. -/
+/-- Blueprint `definition-cohomological-dimension` (for sheaves of `Λ`-modules): the scheme `X`
+has *finite cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with
+`H^q(X, F) = 0` for every étale sheaf `F` of `Λ`-modules and every `q > d`. For a torsion ring `Λ`
+every such sheaf is a torsion abelian sheaf, so this follows from finiteness of the torsion étale
+cohomological dimension `cd(X)` of the blueprint. -/
 def HasFiniteCohomologicalDimension : Prop :=
   ∃ d : ℤ, ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), d < q →
     IsZero ((cohomology (ModuleCat.{u + 1} Λ) X q).obj
       ((DerivedCategory.singleFunctor _ 0).obj F))
 
 variable {X} in
-/-- Blueprint `def-kun-cd` (for morphisms, and sheaves of `Λ`-modules): the morphism `f` has
+/-- Blueprint `definition-cohomological-dimension` (for morphisms, and sheaves of `Λ`-modules): the
+morphism `f` has
 *finite cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with
 `R^q f_* F = 0` for every étale sheaf `F` of `Λ`-modules and every `q > d`. -/
 def HasFiniteCohomologicalDimensionMorphism {Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=

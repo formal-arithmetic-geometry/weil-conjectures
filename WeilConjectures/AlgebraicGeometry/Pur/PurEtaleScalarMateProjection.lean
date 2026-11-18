@@ -19,9 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoUniqueness
 /-!
 # Restriction of the derived coefficient mate equals the projection morphism
 
-Source: Stacks Project, more-etale.tex, Tag 0GL6, with the canonical counit calculation
-in sites-cohomology.tex, Tags 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-mate-projection).
+## References
+
+* Stacks 0GL6
+* Stacks Project, Tags 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -49,13 +50,13 @@ private theorem restricted_mate_tensor
     (t : ∀ X, F₁.obj (T.obj X) ⟶ T'.obj (F₁.obj X))
     (h : ∀ X, a.app (S.obj X) ≫ U'.map (c.app X) ≫ e'.hom.app (F₁.obj X) =
       F₁.map (e.hom.app X) ≫ t X) (J : D₁) :
-    U.map ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).natTrans.app J) ≫
-        (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).natTrans.app (S'.obj J) =
+    U.map ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).app J) ≫
+        (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).app (S'.obj J) =
       e.hom.app (R₁.obj J) ≫
         adj₁.homEquiv _ _ (t (R₁.obj J) ≫ T'.map (adj₁.counit.app J)) ≫
         R₁.map (e'.inv.app J) := by
-  let b := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).natTrans.app J
-  let d := (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).natTrans.app (S'.obj J)
+  let b := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).app J
+  let d := (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).app (S'.obj J)
   have hb : F₂.map b ≫ adj₂.counit.app (S'.obj J) =
       c.app (R₁.obj J) ≫ S'.map (adj₁.counit.app J) :=
     mateEquiv_counit adj₁ adj₂ (TwoSquare.mk _ _ _ _ c) J
@@ -119,17 +120,7 @@ private theorem scalar_natTrans_ext
   apply (cancel_epi (F.map (_root_.DerivedCategory.Q.map π))).1
   rw [α.naturality, β.naturality, h P hP]
 
-/-- The canonical scalar/pullback comparison is uniquely normalized on K-flat models.
-Source: Stacks 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-mate-projection).
-Proof: resolve the input by a K-flat complex with flat terms (lem-pc-kflat-resolution).
-Inverse image preserves those properties by
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback; scalar extension is termwise
-extension on these models by lem-pur-derived-change-of-rings. Apply the ordinary
-scalar/pullback isomorphism termwise. The derived counits give the displayed square.
-Naturality and invariance under quasi-isomorphisms descend it to derived categories.
-Every object has such a model and the vertical counits on these models are invertible,
-so the displayed equations determine the natural isomorphism uniquely. -/
+/-- The canonical scalar/pullback comparison is uniquely normalized on K-flat models. -/
 theorem scalarPullbackIso_existsUnique
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -150,8 +141,7 @@ theorem scalarPullbackIso_existsUnique
   intro d hd
   exact (scalarPullbackIso_unique φ f (c := c) (d := d) hc hd).symm
 
-/-- The uniquely normalized derived scalar/pullback isomorphism.
-Source: Stacks 07A4 and 0G7E (blueprint: lem-pur-etale-scalar-mate-projection). -/
+/-- The uniquely normalized derived scalar/pullback isomorphism. -/
 def scalarPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -160,8 +150,7 @@ def scalarPullbackIso
   (scalarPullbackIso_existsUnique φ f).choose
 
 /-- The B-linear scalar-change mate; its components are precisely the transposes
-of the scalar extension of the A-geometric counit after scalarPullbackIso.
-Source: Stacks 0GL6 (blueprint: lem-pur-etale-scalar-mate-projection). -/
+of the scalar extension of the A-geometric counit after scalarPullbackIso. -/
 def scalarMate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -169,7 +158,7 @@ def scalarMate
       scalarExtension φ Z ⋙ R(lowerStar (ModuleCat.{u + 1} B) f) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-    (TwoSquare.mk _ _ _ _ (scalarPullbackIso φ f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarPullbackIso φ f).hom))
 
 private theorem scalar_tensor_pullback_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -225,24 +214,7 @@ private theorem scalar_tensor_pullback_square
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- After canonical scalar/tensor and restriction/direct-image identifications,
-the coefficient mate is the specified projection morphism, naturally in J.
-Source: Stacks more-etale.tex 0GL6; sites-cohomology.tex 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-mate-projection).
-
-Proof: apply scalarTensorPullback_normalization_kFlat to the defining
-normalization of scalarPullbackIso on a K-flat model. The two sides form natural
-transformations. Every complex receives a quasi-isomorphism from a flat-term
-K-flat complex, so naturality, cancellation and localization extensionality
-extend the square to every derived object. Apply the A-geometric adjunction
-Hom equivalence to the restricted B-mate followed by the direct-image comparison.
-The two mate counit identities and naturality of the restriction/pullback and
-scalar/tensor comparisons reduce this transpose to the pullback/tensor square
-followed by tensor of the A-geometric counit. Tensor naturality moves the
-coefficient identification past that counit. Naturality of the adjunction Hom
-equivalence identifies the result with the specified projection map followed
-by direct image of the coefficient identification. Finally compose with the
-inverse target scalar/tensor comparison. This ambient argument retains the
-stated boundedness hypotheses without using them. -/
+the coefficient mate is the specified projection morphism, naturally in J. -/
 theorem scalarMate_restrict_eq_projection
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W)
@@ -300,7 +272,7 @@ theorem scalarMate_restrict_eq_projection
     Category.assoc] at hp hm
   rw [hp] at hm
   simpa only [scalarMate, scalarRestrictionDirectImageMap, adj, T, b,
-    TwoSquare.mk, TwoSquare.natTrans, Functor.map_comp,
+    TwoSquare.mk, Functor.map_comp,
     Category.assoc] using hm
 
 end AlgebraicGeometry.Etale

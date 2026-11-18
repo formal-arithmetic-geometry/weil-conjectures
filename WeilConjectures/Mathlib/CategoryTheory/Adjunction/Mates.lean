@@ -170,7 +170,7 @@ lemma Adjunction.map_unit_app_comp_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K 
 
 
 instance Adjunction.isIso_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K)
-    [IsIso (mateEquiv adj adj α.hom).natTrans] [IsIso φ] : IsIso (adj.liftAlgebraStr α φ) := by
+    [IsIso (mateEquiv adj adj α.hom)] [IsIso φ] : IsIso (adj.liftAlgebraStr α φ) := by
   dsimp [liftAlgebraStr]
   infer_instance
 
@@ -314,16 +314,16 @@ variable (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : F₁ ⊣ U�
 provided the units of `F₁ ⊣ U₁` and `F₂ ⊣ U₂` are isomorphisms (i.e. `F₁` and `F₂` are fully
 faithful). Indeed, `U₁` of the mate is, up to these units, the iterated mate, which is the
 conjugate of the isomorphism (`CategoryTheory.iterated_mateEquiv_conjugateEquiv`). -/
-lemma isIso_map_mateEquiv_app_of_isIso (α : TwoSquare F₁ L₁ L₂ F₂) [IsIso α.natTrans]
+lemma isIso_map_mateEquiv_app_of_isIso (α : TwoSquare F₁ L₁ L₂ F₂) [IsIso α]
     [IsIso adj₃.unit] [IsIso adj₄.unit] (b : B) :
-    IsIso (U₁.map ((mateEquiv adj₁ adj₂ α).natTrans.app b)) := by
-  have hβ : IsIso (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans := by
+    IsIso (U₁.map ((mateEquiv adj₁ adj₂ α).app b)) := by
+  have hβ : IsIso (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)) := by
     rw [iterated_mateEquiv_conjugateEquiv]
     infer_instance
   have h := unit_mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α) b
-  have h' : U₁.map ((mateEquiv adj₁ adj₂ α).natTrans.app b) =
+  have h' : U₁.map ((mateEquiv adj₁ adj₂ α).app b) =
       inv (adj₃.unit.app _) ≫ R₁.map (adj₄.unit.app b) ≫
-        (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans.app _ := by
+        (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).app _ := by
     rw [IsIso.eq_inv_comp]
     exact h.symm
   rw [h']
@@ -412,7 +412,7 @@ lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
   apply (adj₂.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
 
-/-- Blueprint `lem-trf-adjoint-mate`: mates along an isomorphism of left adjoints. For
+/-- Blueprint `proposition-sp-unique-adjoint--1`: mates along an isomorphism of left adjoints. For
 adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a natural isomorphism `α : L₁ ≅ L₂`, the conjugate
 `β = conjugateIsoEquiv adj₁ adj₂ α.symm : R₁ ≅ R₂`
 
@@ -467,25 +467,25 @@ variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
 `L₁ ⊣ R₁` and `L₂ ⊣ R₂` is an isomorphism when the vertical functors `G` and `H` are
 equivalences. -/
 theorem isIso_mateEquiv_of_isEquivalence [G.IsEquivalence] [H.IsEquivalence]
-    (α : TwoSquare G L₁ L₂ H) [IsIso α.natTrans] :
-    IsIso (mateEquiv adj₁ adj₂ α).natTrans := by
+    (α : TwoSquare G L₁ L₂ H) [IsIso α] :
+    IsIso (mateEquiv adj₁ adj₂ α) := by
   let adj₃ := G.asEquivalence.toAdjunction
   let adj₄ := H.asEquivalence.toAdjunction
-  have : IsIso (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans := by
+  have : IsIso (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)) := by
     rw [iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄]
-    exact conjugateEquiv_iso (adj₁.comp adj₄) (adj₃.comp adj₂) α.natTrans
-  have (d : D) : IsIso ((mateEquiv adj₁ adj₂ α).natTrans.app d) := by
+    exact conjugateEquiv_iso (adj₁.comp adj₄) (adj₃.comp adj₂) α
+  have (d : D) : IsIso ((mateEquiv adj₁ adj₂ α).app d) := by
     have : IsIso (adj₃.unit.app (R₁.obj d)) := by
       simp only [adj₃, Equivalence.toAdjunction_unit]
       infer_instance
     have : IsIso (adj₄.unit.app d) := by
       simp only [adj₄, Equivalence.toAdjunction_unit]
       infer_instance
-    have h : G.asEquivalence.inverse.map ((mateEquiv adj₁ adj₂ α).natTrans.app d) =
+    have h : G.asEquivalence.inverse.map ((mateEquiv adj₁ adj₂ α).app d) =
         inv (adj₃.unit.app (R₁.obj d)) ≫ R₁.map (adj₄.unit.app d) ≫
-          (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans.app (H.obj d) :=
+          (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).app (H.obj d) :=
       (IsIso.eq_inv_comp _).mpr (unit_mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α) d).symm
-    have : IsIso (G.asEquivalence.inverse.map ((mateEquiv adj₁ adj₂ α).natTrans.app d)) := by
+    have : IsIso (G.asEquivalence.inverse.map ((mateEquiv adj₁ adj₂ α).app d)) := by
       rw [h]
       infer_instance
     exact isIso_of_reflects_iso _ G.asEquivalence.inverse

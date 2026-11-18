@@ -36,8 +36,8 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalC
 ```
 -/
 lemma ihomComparison_ihomUnitTensorToIhom (A Z : C) :
-    μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z =
-      (((ihomComparison G A).natTrans.app (𝟙_ C) ≫ (ihom (G.obj A)).map (η G)) ▷ G.obj Z) ≫
+    μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).app Z =
+      (((ihomComparison G A).app (𝟙_ C) ≫ (ihom (G.obj A)).map (η G)) ▷ G.obj Z) ≫
         ihomUnitTensorToIhom (G.obj A) (G.obj Z) := by
   apply uncurry_injective
   rw [uncurry_eq, uncurry_eq]
@@ -50,7 +50,7 @@ lemma ihomComparison_ihomUnitTensorToIhom (A Z : C) :
     LaxMonoidal.associativity_inv_assoc, ← μ_natural_left_assoc]
   erw [hl]
   rw [associator_inv_naturality_middle_assoc, MonoidalCategory.whiskerLeft_comp]
-  have hR : (G.obj A ◁ (ihomComparison G A).natTrans.app (𝟙_ C) ≫
+  have hR : (G.obj A ◁ (ihomComparison G A).app (𝟙_ C) ≫
       G.obj A ◁ (ihom (G.obj A)).map (η G)) ≫ (ihom.ev (G.obj A)).app (𝟙_ D) =
       (μ G A ((ihom A).obj (𝟙_ C)) ≫ G.map ((ihom.ev A).app (𝟙_ C))) ≫ η G := by
     rw [Category.assoc, ihom.ev_naturality, ihomComparison_ev_assoc, Category.assoc]
@@ -75,7 +75,7 @@ noncomputable def projectionMap (A : C) : tensorLeft (G.obj A) ⋙ L ⟶ L ⋙ t
 conjugate of the projection map `L (G A ⊗ T) ⟶ A ⊗ L T` of its left adjoint. -/
 lemma conjugateEquiv_projectionMap (A : C) :
     conjugateEquiv (adj.comp (ihom.adjunction A)) ((ihom.adjunction (G.obj A)).comp adj)
-      (projectionMap adj A) = (ihomComparison G A).natTrans := by
+      (projectionMap adj A) = (ihomComparison G A) := by
   ext B
   apply uncurry_injective
   rw [uncurry_eq, uncurry_eq, ihomComparison_ev]
@@ -94,7 +94,7 @@ lemma conjugateEquiv_projectionMap (A : C) :
 `L (G A ⊗ T) ⟶ A ⊗ L T` of the left adjoint `L` is an isomorphism, then `G` commutes with
 internal homs out of `A`: the comparison `G [A, B] ⟶ [G A, G B]` is an isomorphism. -/
 lemma isIso_ihomComparison_of_isIso_projectionMap (A : C) [IsIso (projectionMap adj A)] :
-    IsIso (ihomComparison G A).natTrans := by
+    IsIso (ihomComparison G A) := by
   rw [← conjugateEquiv_projectionMap adj A]
   infer_instance
 
@@ -107,17 +107,17 @@ lemma isIso_map_ihomUnitTensorToIhom (A Z : C) [IsIso (projectionMap adj A)]
   have := isIso_ihomComparison_of_isIso_projectionMap adj A
   have h := ihomComparison_ihomUnitTensorToIhom G A Z
   have h' : IsIso (μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫
-      (ihomComparison G A).natTrans.app Z) := by
+      (ihomComparison G A).app Z) := by
     rw [h]
     infer_instance
   have := IsIso.of_isIso_comp_left (μ G _ Z)
-    (G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z)
-  exact IsIso.of_isIso_comp_right _ ((ihomComparison G A).natTrans.app Z)
+    (G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).app Z)
+  exact IsIso.of_isIso_comp_right _ ((ihomComparison G A).app Z)
 
 /-- Conversely, if `G` commutes with internal homs out of `A`, the projection map
 `L (G A ⊗ T) ⟶ A ⊗ L T` of its left adjoint is an isomorphism. -/
 lemma isIso_projectionMap_of_isIso_ihomComparison (A : C)
-    [IsIso (ihomComparison G A).natTrans] : IsIso (projectionMap adj A) := by
+    [IsIso (ihomComparison G A)] : IsIso (projectionMap adj A) := by
   have : IsIso (conjugateEquiv (adj.comp (ihom.adjunction A))
       ((ihom.adjunction (G.obj A)).comp adj) (projectionMap adj A)) := by
     rw [conjugateEquiv_projectionMap]

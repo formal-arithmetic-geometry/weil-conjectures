@@ -30,9 +30,9 @@ attached to the base-changed compactification. -/
 noncomputable def weilRightDerivedLowerShriekCompForgetIso :
     weilRightDerivedLowerShriek Λ c h ⋙
         (Endofunctor.IsoAlgebra.forget
-          (lowerStar Λ t.geometricGaloisFrobenius.inv)).mapDerivedCategory ≅
+          (lowerStar Λ t.geometricGaloisFrobenius.asIso.inv)).mapDerivedCategory ≅
       (Endofunctor.IsoAlgebra.forget
-        (lowerStar Λ s.geometricGaloisFrobenius.inv)).mapDerivedCategory ⋙
+        (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv)).mapDerivedCategory ⋙
         rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h) :=
   exactRightDerivedForgetIso
     (openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso Λ c.i (c.i_comp_g_comp h))
@@ -42,12 +42,12 @@ noncomputable def weilRightDerivedLowerShriekCompForgetIso :
 properness assumption on the original morphism. -/
 theorem bijective_map_comp_weilRightDerivedLowerShriek_of_bounded
     {P : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar Λ s.geometricGaloisFrobenius.inv))}
+      (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv))}
     {N : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar Λ t.geometricGaloisFrobenius.inv))}
+      (lowerStar Λ t.geometricGaloisFrobenius.asIso.inv))}
     (ε : (weilRightDerivedLowerShriek Λ c h).obj P ⟶ N)
     (K : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar Λ s.geometricGaloisFrobenius.inv)))
+      (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv)))
     (hK : DerivedCategory.TStructure.t.bounded
       ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K))
     (hε : ∀ n : ℤ,

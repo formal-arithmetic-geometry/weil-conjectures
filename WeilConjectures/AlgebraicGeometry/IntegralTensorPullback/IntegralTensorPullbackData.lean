@@ -21,13 +21,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteConstantModel.FiniteConstantModel
 /-!
 # Strict comparison data for integral inverse image
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor,
-`det-lem-int-tensor-pullback.md` and its proof; Stacks Tags 099I and 099N(2),(5)
-(blueprint: def-sfb-integral-pullback-comparison-data).
-
 The comparison is constructed on a strict reduction tower, with the quotient
 augmentation and zero shifted coordinate. Constant scalar restriction retains a
-separate coefficient category. Positive exponent n+1 is indexed by n : ℕ.
+separate coefficient category. Positive exponent n+1 is indexed by n: ℕ.
 
 ## Main definitions
 
@@ -39,7 +35,13 @@ separate coefficient category. Positive exponent n+1 is indexed by n : ℕ.
 
 The final preservation theorem is assembled in `IntegralTensorPullback`.
 These definitions are shared by its two independent normalization lemmas.
-(blueprint: def-sfb-integral-pullback-comparison-data).
+
+## References
+
+* Stacks Tags 099I and 099N(2), (5)
+* Stacks 08TC
+* Stacks 099N(5)
+* Stacks 099N(2), (5)
 -/
 
 @[expose] public noncomputable section
@@ -57,12 +59,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralTensorPullback
 section Augmentation
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The strict augmentation has zero composite with 1 minus shift.
-Source: blueprint comparison paragraph; Stacks 08TC
-(blueprint: def-sfb-integral-pullback-comparison-data).
-Proof: compose with each product projection. Compatibility of the consecutive
-legs gives gamma_n minus gamma_(n+1) t_n = 0. The differential of the zero
-homotopy is zero, giving the displayed cocone-lift condition. -/
+/-- The strict augmentation has zero composite with 1 minus shift. -/
 theorem augmentation_condition (P : CochainComplex A ℤ)
     (T : ℕᵒᵖ ⥤ CochainComplex A ℤ)
     (γ : (Functor.const ℕᵒᵖ).obj P ⟶ T) :
@@ -83,9 +80,7 @@ theorem augmentation_condition (P : CochainComplex A ℤ)
       WeilConjectures.integralOperationsTowerStep, Category.assoc, ← hn]
   simp [h, CochainComplex.HomComplex.Cochain.ofHom_zero]
 
-/-- The strict map to the Roos complex, with quotient legs and zero homotopy.
-Source: blueprint comparison paragraph; Stacks 099N(5)
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The strict map to the Roos complex, with quotient legs and zero homotopy. -/
 def augmentation (P : CochainComplex A ℤ) (T : ℕᵒᵖ ⥤ CochainComplex A ℤ)
     (γ : (Functor.const ℕᵒᵖ).obj P ⟶ T) :
     P ⟶ WeilConjectures.integralOperationsRoos T :=
@@ -98,18 +93,12 @@ end Augmentation
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The existing constant condensed ring on the point, for the integer scalar ring.
-Source: blueprint scalar-restriction paragraph; Stacks 099I
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The existing constant condensed ring on the point, for the integer scalar ring. -/
 abbrev constantRing :=
   (sfbPointConstantRing.{u}.obj
     (RingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).X
 
-/-- Constant scalar coefficients are commutative.
-Source: Stacks 099I (blueprint: def-sfb-integral-pullback-comparison-data).
-Proof: the constant presheaf ring has pointwise commutative multiplication. Monoidal
-sheafification sends that multiplication to the constant ring's multiplication and
-preserves the braiding, so its commutativity identity remains valid. -/
+/-- Constant scalar coefficients are commutative. -/
 theorem constantRing_isCommMonObj : IsCommMonObj (constantRing l E) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   exact FiniteConstantModel.constantScalars_commutative
@@ -117,9 +106,7 @@ theorem constantRing_isCommMonObj : IsCommMonObj (constantRing l E) := by
 attribute [instance] constantRing_isCommMonObj
 
 /-- The constant scalar map sends a scalar to its constant continuous function.
-It is the actual sheafification-adjunction map, in the common coefficient universe.
-Source: blueprint scalar-restriction paragraph; Stacks 099I
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+It is the actual sheafification-adjunction map, in the common coefficient universe. -/
 def constantToIntegral : constantRing l E ⟶ DerivedNakayama.integerRing l E :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   ((sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv _ _).symm
@@ -129,11 +116,7 @@ def constantToIntegral : constantRing l E ⟶ DerivedNakayama.integerRing l E :=
           map_add' := fun _ _ ↦ rfl }
       naturality := fun _ _ _ ↦ rfl }
 
-/-- The constant-function map preserves the coefficient unit and multiplication.
-Source: blueprint scalar-restriction paragraph; Stacks 099I
-(blueprint: def-sfb-integral-pullback-comparison-data).
-Proof: constant functions preserve 1 and multiplication pointwise. The monoidal
-sheafification adjunction carries these two identities to the sheaf map. -/
+/-- The constant-function map preserves the coefficient unit and multiplication. -/
 theorem constantToIntegral_isMonHom : IsMonHom (constantToIntegral l E) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   exact FiniteConstantModel.scalarToContinuous_isMonHom
@@ -141,22 +124,17 @@ theorem constantToIntegral_isMonHom : IsMonHom (constantToIntegral l E) := by
 attribute [instance] constantToIntegral_isMonHom
 
 /-- Restrict an internal continuous integral module to its constant integral scalars.
-This uses the recorded restriction-of-scalars operation on module objects.
-Source: blueprint scalar-restriction paragraph; Stacks 099I
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+This uses the recorded restriction-of-scalars operation on module objects. -/
 abbrev restriction (X : Scheme.{u}) :
     AdicCompletion.Modules l E X ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (constantRing l E) X) :=
   Mod.comap ((upperStarFromPoint X).map (constantToIntegral l E))
 
-/-- Constant-coefficient modules remain a distinct category from completed coefficients.
-Source: blueprint scalar-restriction paragraph
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- Constant-coefficient modules remain a distinct category from completed coefficients. -/
 abbrev ConstantModules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (constantRing l E) X)
 
-/-- The strict integral reduction tower before applying inverse image.
-Source: blueprint comparison paragraph (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The strict integral reduction tower before applying inverse image. -/
 def tower (Y : Scheme.{u}) (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (AdicCompletion.Modules l E Y) ℤ :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ (AdicCompletion.level l E Y n).obj P)
@@ -186,11 +164,7 @@ private theorem levelUnit_step (X : Scheme.{u})
     (ρ_ (P.X i)).inv ≫ P.X i ◁ AdicCompletion.finiteUnit l E X n
   rw [Category.assoc, ← whiskerLeft_comp, finiteUnit_step]
 
-/-- The quotient maps are a strict compatible augmentation of the reduction tower.
-Source: blueprint comparison paragraph (blueprint: def-sfb-integral-pullback-comparison-data).
-Proof: at each degree these maps send p to p tensor 1. Consecutive quotient maps
-preserve 1; their composite with the higher quotient is the lower quotient.
-Thus the two tensor-unit maps coincide, giving compatibility. -/
+/-- The quotient maps are a strict compatible augmentation of the reduction tower. -/
 theorem towerUnit_compatible (Y : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) (n : ℕ) :
     ((Functor.const ℕᵒᵖ).obj P).map (homOfLE (Nat.le_succ n)).op ≫
@@ -204,23 +178,19 @@ theorem towerUnit_compatible (Y : Scheme.{u})
   simpa only [tower, Functor.ofOpSequence_map_homOfLE_succ] using
     (levelUnit_step l E Y P n).symm
 
-/-- The strict quotient augmentation, before inverse image.
-Source: blueprint comparison paragraph (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The strict quotient augmentation, before inverse image. -/
 def towerUnit (Y : Scheme.{u}) (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
     (Functor.const ℕᵒᵖ).obj P ⟶ tower l E Y P :=
   NatTrans.ofOpSequence (AdicCompletion.levelUnit l E Y P) (towerUnit_compatible l E Y P)
 
-/-- Apply exact inverse image to the whole strict reduction tower.
-Source: blueprint displayed target of c_K (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- Apply exact inverse image to the whole strict reduction tower. -/
 def pulledTower {X Y : Scheme.{u}} (g : X ⟶ Y)
     (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :=
   tower l E Y P ⋙
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) g).mapHomologicalComplex (.up ℤ)
 
 /-- The canonical comparison on a K-flat representative, using the strict quotient
-augmentation and zero shifted coordinate, rather than a triangulated cone lift.
-Source: blueprint displayed c_K; Stacks 099N(5)
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+augmentation and zero shifted coordinate, rather than a triangulated cone lift. -/
 def comparison {X Y : Scheme.{u}} (g : X ⟶ Y)
     (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :=
   augmentation
@@ -235,12 +205,7 @@ def comparison {X Y : Scheme.{u}} (g : X ⟶ Y)
           (.up ℤ)))
 
 /-- The coefficient inclusion is linear as a map from the constant regular module
-into the restricted integral regular module.
-Source: blueprint scalar-restriction paragraph
-(blueprint: def-sfb-integral-pullback-comparison-data).
-Proof: the multiplication-preservation identity for constantToIntegral says exactly
-that a times b maps to the image of a acting on the image of b. Pullback preserves
-this equation; the transported regular-module actions are the ring multiplications. -/
+into the restricted integral regular module. -/
 theorem constantUnit_linear (X : Scheme.{u}) :
     Mod.act (𝟙_ (ConstantModules l E X)).X ≫
         (upperStarFromPoint X).map (constantToIntegral l E) =
@@ -255,28 +220,22 @@ theorem constantUnit_linear (X : Scheme.{u}) :
   simpa only [tensorHom_def', Category.assoc] using
     (IsMonHom.mul_hom ((upperStarFromPoint X).map (constantToIntegral l E)))
 
-/-- The canonical inclusion of the constant coefficient unit into the integral unit.
-Source: blueprint scalar-restriction paragraph
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The canonical inclusion of the constant coefficient unit into the integral unit. -/
 def constantUnit (X : Scheme.{u}) :
     𝟙_ (ConstantModules l E X) ⟶
       (restriction l E X).obj (𝟙_ (AdicCompletion.Modules l E X)) :=
   Mod.homMk ((upperStarFromPoint X).map (constantToIntegral l E)) (constantUnit_linear l E X)
 
 /-- The same finite constant quotient, now with its constant integral scalar action.
-Finite continuous coefficients are constant; only the integral scalar action changes.
-Source: blueprint scalar-restriction paragraph; Stacks 099N(5)
-(blueprint: def-sfb-integral-pullback-comparison-data). -/
+Finite continuous coefficients are constant; only the integral scalar action changes. -/
 abbrev constantFinite (X : Scheme.{u}) (n : ℕ) :=
   (restriction l E X).obj (AdicCompletion.finiteModule l E X n)
 
-/-- Derived reduction over constant integral coefficients, computed on a K-flat complex.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- Derived reduction over constant integral coefficients, computed on a K-flat complex. -/
 abbrev constantLevel (X : Scheme.{u}) (n : ℕ) :=
   (tensorRight (constantFinite l E X n)).mapHomologicalComplex (.up ℤ)
 
-/-- The transitions in the constant scalar reduction tower are the same quotient maps.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The transitions in the constant scalar reduction tower are the same quotient maps. -/
 def constantStep (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) ℤ) (n : ℕ) :
     (constantLevel l E X (n + 1)).obj Q ⟶ (constantLevel l E X n).obj Q :=
   (NatTrans.mapHomologicalComplex
@@ -285,8 +244,7 @@ def constantStep (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) �
         ((DerivedNakayama.pullback l E X).map (AdicCompletion.quotientStep l E n))))
     (.up ℤ)).app Q
 
-/-- Tensoring with the actual quotient of the constant coefficient unit.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- Tensoring with the actual quotient of the constant coefficient unit. -/
 def constantLevelUnit (X : Scheme.{u})
     (Q : CochainComplex (ConstantModules l E X) ℤ) (n : ℕ) :
     Q ⟶ (constantLevel l E X n).obj Q :=
@@ -296,17 +254,12 @@ def constantLevelUnit (X : Scheme.{u})
         (constantUnit l E X ≫ (restriction l E X).map (AdicCompletion.finiteUnit l E X n)))
     (.up ℤ)).app Q
 
-/-- The strict constant scalar reduction tower.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The strict constant scalar reduction tower. -/
 def constantTower (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) ℤ) :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ (constantLevel l E X n).obj Q)
     (constantStep l E X Q)
 
-/-- Quotient augmentations commute with the constant scalar transitions.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data).
-Proof: the scalar inclusion followed by consecutive quotient reductions equals its
-direct reduction. Tensoring this equality with Q and applying the unitor gives
-compatibility, term by term in the complex. -/
+/-- Quotient augmentations commute with the constant scalar transitions. -/
 theorem constantTowerUnit_compatible (X : Scheme.{u})
     (Q : CochainComplex (ConstantModules l E X) ℤ) (n : ℕ) :
     ((Functor.const ℕᵒᵖ).obj Q).map (homOfLE (Nat.le_succ n)).op ≫
@@ -327,22 +280,19 @@ theorem constantTowerUnit_compatible (X : Scheme.{u})
   rw [Category.assoc, ← whiskerLeft_comp, Category.assoc,
     ← Functor.map_comp, finiteUnit_step]
 
-/-- The strict constant scalar quotient augmentation.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The strict constant scalar quotient augmentation. -/
 def constantTowerUnit (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) ℤ) :
     (Functor.const ℕᵒᵖ).obj Q ⟶ constantTower l E X Q :=
   NatTrans.ofOpSequence (constantLevelUnit l E X Q) (constantTowerUnit_compatible l E X Q)
 
-/-- The exact constant coefficient inverse image applied to the whole reduction tower.
-Source: Stacks 099N(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+/-- The exact constant coefficient inverse image applied to the whole reduction tower. -/
 def constantPulledTower {X Y : Scheme.{u}} (g : X ⟶ Y)
     (Q : CochainComplex (ConstantModules l E Y) ℤ) :=
   constantTower l E Y Q ⋙
     (CondensedRing.upperStar (constantRing l E) g).mapHomologicalComplex (.up ℤ)
 
 /-- The Stacks completed inverse-image unit on a constant-coefficient K-flat model.
-The target is the Roos model of Rlim of the pulled-back constant reductions.
-Source: Stacks 099N(2),(5) (blueprint: def-sfb-integral-pullback-comparison-data). -/
+The target is the Roos model of Rlim of the pulled-back constant reductions. -/
 def constantComparison {X Y : Scheme.{u}} (g : X ⟶ Y)
     (Q : CochainComplex (ConstantModules l E Y) ℤ) :=
   augmentation

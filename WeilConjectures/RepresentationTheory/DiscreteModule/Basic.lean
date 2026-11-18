@@ -56,32 +56,32 @@ variable {G : Type u} [Group G]
 
 @[simp]
 lemma ρ_mul_apply (M : Action AddCommGrpCat.{w} G) (a b : G) (x : M.V) :
-    (M.ρ (a * b)).hom x = (M.ρ a).hom ((M.ρ b).hom x) := by
+    (M.ρ (a * b)).asHom.hom x = (M.ρ a).asHom.hom ((M.ρ b).asHom.hom x) := by
   rw [map_mul]
   rfl
 
 @[simp]
-lemma ρ_one_apply (M : Action AddCommGrpCat.{w} G) (x : M.V) : (M.ρ 1).hom x = x := by
+lemma ρ_one_apply (M : Action AddCommGrpCat.{w} G) (x : M.V) : (M.ρ 1).asHom.hom x = x := by
   rw [map_one]
   rfl
 
 @[simp]
 lemma ρ_inv_apply_apply (M : Action AddCommGrpCat.{w} G) (a : G) (x : M.V) :
-    (M.ρ a⁻¹).hom ((M.ρ a).hom x) = x := by
+    (M.ρ a⁻¹).asHom.hom ((M.ρ a).asHom.hom x) = x := by
   rw [← ρ_mul_apply, inv_mul_cancel, ρ_one_apply]
 
 @[simp]
 lemma ρ_apply_inv_apply (M : Action AddCommGrpCat.{w} G) (a : G) (x : M.V) :
-    (M.ρ a).hom ((M.ρ a⁻¹).hom x) = x := by
+    (M.ρ a).asHom.hom ((M.ρ a⁻¹).asHom.hom x) = x := by
   rw [← ρ_mul_apply, mul_inv_cancel, ρ_one_apply]
 
 lemma hom_comm_apply {M N : Action AddCommGrpCat.{w} G} (f : M ⟶ N) (g : G) (x : M.V) :
-    f.hom.hom ((M.ρ g).hom x) = (N.ρ g).hom (f.hom.hom x) :=
+    f.hom.hom ((M.ρ g).asHom.hom x) = (N.ρ g).asHom.hom (f.hom.hom x) :=
   congr($(f.comm g).hom x)
 
 /-- The stabilizer of an element of an abelian group with an action of `G`. -/
 def stabilizer (M : Action AddCommGrpCat.{w} G) (x : M.V) : Subgroup G where
-  carrier := {g | (M.ρ g).hom x = x}
+  carrier := {g | (M.ρ g).asHom.hom x = x}
   one_mem' := by simp
   mul_mem' {a b} ha hb := by simp_all
   inv_mem' {a} ha := by
@@ -91,7 +91,7 @@ def stabilizer (M : Action AddCommGrpCat.{w} G) (x : M.V) : Subgroup G where
 
 @[simp]
 lemma mem_stabilizer {M : Action AddCommGrpCat.{w} G} {x : M.V} {g : G} :
-    g ∈ M.stabilizer x ↔ (M.ρ g).hom x = x :=
+    g ∈ M.stabilizer x ↔ (M.ρ g).asHom.hom x = x :=
   Iff.rfl
 
 variable [TopologicalSpace G]
@@ -285,11 +285,11 @@ variable (G) in
 def coind₁Action (A : AddCommGrpCat.{max u w}) : Action AddCommGrpCat.{max u w} G where
   V := AddCommGrpCat.of (smoothFunctions G A)
   ρ :=
-    { toFun g := AddCommGrpCat.ofHom (translate g)
-      map_one' := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
-        simp [End.one_def])
-      map_mul' a b := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
-        simp [End.mul_def, mul_assoc]) }
+    { toFun g := .of <| AddCommGrpCat.ofHom (translate g)
+      map_one' := End.ext <| AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
+        simp [End.one_asHom])
+      map_mul' a b := End.ext <| AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
+        simp [End.mul_asHom, mul_assoc]) }
 
 lemma coind₁Action_stabilizer (A : AddCommGrpCat.{max u w}) (f : (coind₁Action G A).V) :
     (coind₁Action G A).stabilizer f = rightStab G f.1 := by
@@ -321,19 +321,20 @@ def coind₁Lift {X : DiscreteModule.{w} G} {A : AddCommGrpCat.{max u w}} (φ : 
     X ⟶ (coind₁ G).obj A :=
   ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom
-        { toFun x := ⟨fun g ↦ φ.hom ((X.obj.ρ g).hom x), Subgroup.isOpen_mono
+        { toFun x := ⟨fun g ↦ φ.hom ((X.obj.ρ g).asHom.hom x), Subgroup.isOpen_mono
             (H₁ := X.obj.stabilizer x) (fun u hu y ↦ by simp [mem_stabilizer.1 hu])
             (X.isOpen_stabilizer x)⟩
           map_zero' := by ext; simp
           map_add' _ _ := by ext; simp }
       comm g := AddCommGrpCat.ext fun x ↦ Subtype.ext (funext fun y ↦ by
-        change φ.hom ((X.obj.ρ y).hom ((X.obj.ρ g).hom x)) = φ.hom ((X.obj.ρ (y * g)).hom x)
+        change φ.hom ((X.obj.ρ y).asHom.hom ((X.obj.ρ g).asHom.hom x)) =
+          φ.hom ((X.obj.ρ (y * g)).asHom.hom x)
         simp) }
 
 @[simp]
 lemma coind₁Lift_apply {X : DiscreteModule.{w} G} {A : AddCommGrpCat.{max u w}}
     (φ : X.obj.V ⟶ A) (x : X.obj.V) (g : G) :
-    ((coind₁Lift φ).hom.hom.hom x).1 g = φ.hom ((X.obj.ρ g).hom x) :=
+    ((coind₁Lift φ).hom.hom.hom x).1 g = φ.hom ((X.obj.ρ g).asHom.hom x) :=
   rfl
 
 variable (G) in
@@ -358,12 +359,12 @@ def coind₁Adjunction : forget₂Ab.{w} G ⊣ coind₁ G :=
           invFun F := (forget₂Ab G).map F ≫ eval₁ G A
           left_inv φ := by
             ext x
-            change φ.hom ((X.obj.ρ 1).hom x) = φ.hom x
+            change φ.hom ((X.obj.ρ 1).asHom.hom x) = φ.hom x
             simp
           right_inv F := by
             ext x
             refine Subtype.ext (funext fun g ↦ ?_)
-            change ((F.hom.hom.hom ((X.obj.ρ g).hom x))).1 1 = (F.hom.hom.hom x).1 g
+            change ((F.hom.hom.hom ((X.obj.ρ g).asHom.hom x))).1 1 = (F.hom.hom.hom x).1 g
             rw [hom_comm_apply]
             change (F.hom.hom.hom x).1 (1 * g) = _
             rw [one_mul] }
@@ -439,7 +440,7 @@ variable (M : DiscreteModule.{w} G)
 
 /-- The subgroup of `G`-invariant elements of a discrete `G`-module. -/
 def invariantsSubgroup : AddSubgroup M.obj.V where
-  carrier := {x | ∀ g, (M.obj.ρ g).hom x = x}
+  carrier := {x | ∀ g, (M.obj.ρ g).asHom.hom x = x}
   zero_mem' := by simp
   add_mem' hx hy g := by simp [hx g, hy g]
   neg_mem' hx g := by simp [hx g]
@@ -467,7 +468,7 @@ def homIntTrivialEquiv : (intTrivial G ⟶ M) ≃+ (invariants G).obj M where
   invFun x := ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom ((zmultiplesHom _ x.1).comp AddEquiv.ulift.toAddMonoidHom)
       comm g := AddCommGrpCat.ext fun n ↦ by
-        change n.down • x.1 = (M.obj.ρ g).hom (n.down • x.1)
+        change n.down • x.1 = (M.obj.ρ g).asHom.hom (n.down • x.1)
         rw [map_zsmul, x.2 g] }
   left_inv f := by
     ext x

@@ -24,7 +24,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 together with the corresponding statements for the universal base-change property. These are
 the reductions "replace `K` by its perfect closure and `X` by its reduction" of the proof of
-blueprint `lem-kun-0f1i`.
+blueprint `lemma-kunneth-field-coefficients--1`.
 -/
 
 @[expose] public section

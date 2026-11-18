@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonP
 /-!
 # The comparison unit for sheaves of sets
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
-`sk-thm-pe-classical-sheaves-unit`; Stacks Project, Tag 099T
-(blueprint: det-pe-classical-sheaves-unit).
+## References
+
+* Stacks Project, Tag 099T
 -/
 
 @[expose] public section
@@ -25,23 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The comparison unit is invertible for every etale sheaf of sets, and comparison
-inverse image induces a bijection on every Hom set.
-Source: Weil conjectures blueprint, main-20261015,
-`sk-thm-pe-classical-sheaves-unit`; Stacks Project, Tag 099T
-(blueprint: det-pe-classical-sheaves-unit).
-
-Proof:
-1. Apply lem-cbc-comparison-pullback-sections. Its normalization clause identifies
-   the comparison unit at each etale object, followed by the section equivalence
-   and the component of the comparison isomorphism, with the usual etale section
-   bijection. This last bijection is also a clause of that theorem, already proved
-   there from lem-weil-pbc-sets-etale-inverse-image-restriction. Cancel the two
-   injective comparison maps to conclude that the unit component is bijective.
-2. A natural transformation of set-valued presheaves is invertible when its
-   components are bijective. The sheaf-to-presheaf functor reflects isomorphisms,
-   so each sheaf unit is invertible, including over the empty scheme.
-3. Apply the adjunction theorem that an invertible unit makes the left adjoint
-   fully faithful, and take its bijection on Hom sets. -/
+inverse image induces a bijection on every Hom set. -/
 theorem proEtaleClassicalSheavesUnit (X : Scheme.{u}) :
     (∀ F : Sheaf X.smallEtaleTopology (Type (u + 1)),
       IsIso ((proEtaleSiteComparison X).unit.app F)) ∧

@@ -336,8 +336,8 @@ sends invertible modules to invertible modules and respects isomorphisms
 (`AlgebraicGeometry.Scheme.Pic.map`), and `(g₁ ∘ g₂)^* = g₂^* g₁^*`, `id^* = id`
 (`AlgebraicGeometry.Scheme.Pic.map_comp`, `AlgebraicGeometry.Scheme.Pic.map_id`).
 
-(blueprint: `def-pc-picard-presheaf`,
-`rem-ptr-pc-picard-presheaf-6`) -/
+(blueprint: `definition-relative-picard-functor`,
+`definition-relative-picard-functor`) -/
 noncomputable def picardPresheaf (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := (Limits.pullback f T.unop.hom).Pic
   map φ := TypeCat.ofHom (Pic.map (baseChangeMap f φ.unop))

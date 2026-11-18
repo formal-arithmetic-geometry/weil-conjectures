@@ -10,8 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormu
 
 /-! # The ordinary local class on cycles
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images.
-(blueprint: lem-weil-pbc-ordinary-local-class-cycles).
+## References
+
+* Stacks Project, Cohomology, Tag 01E4
+* Stacks Project, Tags 01E4 and 0BKJ
 -/
 
 @[expose] public section
@@ -23,19 +25,8 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-set_option maxHeartbeats 600000 in
--- The two exact sheafification comparisons use different homology functors.
 /-- The ordinary abelian sheafification class sends cycles to their module cohomology
 classes through the canonical kernel comparison.
-Source: Stacks Project, Tags 01E4 and 0BKJ.
-(blueprint: lem-weil-pbc-ordinary-local-class-cycles).
-
-Proof: Apply the generic adjunction formula for homology classes to the short complex
-of underlying abelian sheaves. The sheafification comparison is its adjoint homology
-map followed by the exact comparison from module sheaves to abelian sheaves. Move the
-cycle quotient through this last exact comparison. The composite cycle comparison is
-the inverse kernel comparison for abelian presheaf sections, because their composites
-with the monic cycle inclusion agree. This proves the formula in every integer degree.
 -/
 theorem ordinaryLocalClass_cycles {Y : RingedSpace.{u}}
     (I : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ) (q : ℤ) :
@@ -97,7 +88,7 @@ theorem ordinaryLocalClass_cycles {Y : RingedSpace.{u}}
     exact (P.isoCyclesOfIsLimit_inv_ι _).symm
   change k' ≫ U.map ((I.sc q).mapCyclesIso T).hom ≫
     U.map (T.map (I.sc q).homologyπ) = _
-  erw [← Category.assoc, hk]
-  rfl
+  exact (Category.assoc _ _ _).symm.trans
+    (congrArg (fun l ↦ l ≫ U.map (T.map (I.sc q).homologyπ)) hk)
 
 end AlgebraicGeometry

@@ -76,13 +76,13 @@ theorem finitePerfectAdicQuotientTransition_transpose_isIso
   let adjq := ProEtale.sheafExtendScalarsAdjunction
     (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1))) V.left
   have hΘ : IsIso (mateEquiv adjΘ₀ adjΘ₁
-      (finitePerfectAdicFixedScalarStepIso X d φ hcompat n).hom).natTrans := by
+      (finitePerfectAdicFixedScalarStepIso X d φ hcompat n).hom) := by
     have (Y : _) : IsIso ((mateEquiv adjΘ₀ adjΘ₁
-        (finitePerfectAdicFixedScalarStepIso X d φ hcompat n).hom).natTrans.app Y) :=
+        (finitePerfectAdicFixedScalarStepIso X d φ hcompat n).hom).app Y) :=
       isIso_mateEquiv_app_of_isIso_map_counit adjΘ₀ adjΘ₁ _ Y inferInstance
     exact NatIso.isIso_of_isIso_app _
   have hmate : IsIso (mateEquiv (adjΘ₀.comp adjj₀) (adjΘ₁.comp adjj₁)
-      (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n)).natTrans := by
+      (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n)) := by
     rw [finitePerfectAdicQuotientStrictSquare, mateEquiv_hcomp]
     exact TwoSquare.isIso_hComp _ _
   have hμ := isIso_mateEquiv_symm_of_isIso_mateEquiv adjR adjq (adjΘ₁.comp adjj₁)
@@ -100,7 +100,7 @@ theorem finitePerfectAdicQuotientTransition_transpose_isIso
     (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n)
     ((completedAdicChangeQuotientTransition X d n).app N)
   have hiso : IsIso (((mateEquiv adjR adjq).symm
-      (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n)).natTrans.app
+      (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n)).app
         ((completedAdicChange X (completedAdicCommProjection X d (n + 1))).obj N) ≫
       (finitePerfectAdicFixedScalar X d φ n ⋙ ProEtale.localizationRestriction
         (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) V.hom inferInstance).map

@@ -40,7 +40,7 @@ variable {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
   [H.PreservesKInjectiveComplexes]
   (ah : H ⊣ P) (ag : G ⊣ Q)
   (e : P ⋙ F ≅ K ⋙ Q) (m : F ⋙ G ≅ H ⋙ K)
-  (hm : m.hom = ((mateEquiv ah ag).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans)
+  (hm : m.hom = ((mateEquiv ah ag).symm (TwoSquare.mk _ _ _ _ e.hom)))
   (ed : P.rightDerivedFunctor ⋙ F.rightDerivedFunctor ≅
     K.rightDerivedFunctor ⋙ Q.rightDerivedFunctor)
   (hed : rightDerivedFunctorCompUnit P F ≫ whiskerLeft DerivedCategory.Qh ed.hom =
@@ -85,7 +85,7 @@ theorem exactMateComparison_eq :
     (exactMateComparison F K G H m).hom =
       ((mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
         ag.mapDerivedCategoryRightDerivedAdjunction).symm
-          (TwoSquare.mk _ _ _ _ ed.hom)).natTrans := by
+          (TwoSquare.mk _ _ _ _ ed.hom)) := by
   have comparison_unit :
       rightDerivedFunctorCompUnit F G ≫
         whiskerLeft DerivedCategory.Qh
@@ -107,27 +107,25 @@ theorem exactMateComparison_eq :
     ag.mapDerivedCategoryRightDerivedAdjunction sq
   have hunit := derivedMate_pastedUnit F K G H P Q ah ag m.hom
     (exactMateComparison F K G H m).hom comparison_unit
-  have he : (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m.hom)).natTrans = e.hom := by
+  have he : (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m.hom)) = e.hom := by
     have hs : TwoSquare.mk _ _ _ _ m.hom =
         (mateEquiv ah ag).symm (TwoSquare.mk _ _ _ _ e.hom) := by
-      apply TwoSquare.ext
-      intro X
+      refine NatTrans.ext (funext fun X ↦ ?_)
       exact congrArg (fun t => t.app X) hm
     rw [hs, Equiv.apply_symm_apply]
   rw [he] at hunit
-  have hmd : md.natTrans = ed.hom := by
+  have hmd : md = ed.hom := by
     apply (P.rightDerivedFunctor ⋙ F.rightDerivedFunctor).rightDerived_ext
       (rightDerivedFunctorCompUnit P F) (HomotopyCategory.quasiIso C' (.up ℤ))
     exact hunit.trans hed.symm
   have hs : md = TwoSquare.mk _ _ _ _ ed.hom := by
-    apply TwoSquare.ext
-    intro X
+    refine NatTrans.ext (funext fun X ↦ ?_)
     exact congrArg (fun t => t.app X) hmd
   have h := (mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
     ag.mapDerivedCategoryRightDerivedAdjunction).symm_apply_apply sq
   change (mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
     ag.mapDerivedCategoryRightDerivedAdjunction).symm md = sq at h
   rw [hs] at h
-  exact (congrArg TwoSquare.natTrans h).symm
+  exact (h).symm
 
 end CategoryTheory.Functor

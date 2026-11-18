@@ -35,7 +35,6 @@ noncomputable def schemeNormalizedDirectImageCompIso
   Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
     f.toLRSHom.toShHom g.toLRSHom.toShHom)
 
-set_option maxHeartbeats 400000 in
 -- Checking canonical comparison choices expands derived-functor and sheaf instances.
 /-- The mate of the fixed pullback square is the normalized direct-image square.
 Source: Stacks Project, Tags 08HY and 0D5T.

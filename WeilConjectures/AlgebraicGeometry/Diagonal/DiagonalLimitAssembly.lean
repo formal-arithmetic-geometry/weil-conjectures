@@ -16,7 +16,7 @@ universe u v w a b c vc r
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- The complete normalized diagonal limit proposition.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clauses 1 and 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def DiagonalCompletedLimitSpec (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

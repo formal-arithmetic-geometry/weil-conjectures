@@ -11,8 +11,9 @@ import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.R
 
 /-! # Transport of the total tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-(blueprint: lem-weil-pbc-proetale-tensor-total-transport).
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -29,17 +30,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.presheafToSheaf SheafOfModules.monoidalCategory
   proEtaleOrdinaryTensorPullback
 
-/-- Transport a normalized ordinary tensor comparison to its signed total complexes.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, the total-complex construction
-in the proof of lemma-pullback-tensor-product.
-(blueprint: lem-weil-pbc-proetale-tensor-total-transport).
-
-Proof: invert the ordinary compatibility square after cancelling its isomorphisms.
-Compare the two chain maps on every bidegree summand of every degree. Their formulas
-are the inverse ordinary comparisons followed by the mapped summand inclusions.
-The inverse compatibility square reduces equality to naturality of e on that inclusion.
-The direct-sum universal property and extensionality of chain maps finish the proof.
-This works for unbounded complexes, including zero complexes and empty degree sums. -/
+/-- Transport a normalized ordinary tensor comparison to its signed total complexes. -/
 theorem proEtaleTensorTotalTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

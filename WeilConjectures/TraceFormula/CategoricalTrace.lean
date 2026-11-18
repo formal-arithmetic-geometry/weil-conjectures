@@ -86,14 +86,14 @@ a perfect pairing between `V` and `W`. For the pairing between `V` and a right d
 (`CategoryTheory.MonoidalCategory.trace_eq_of_exactPairing`); here the pairing is given by the
 object `W` rather than by a `HasRightDual` instance. -/
 def trace (V W : C) [ExactPairing V W] (T : V ⟶ V) : End (𝟙_ C) :=
-  η_ V W ≫ T ▷ W ≫ (β_ V W).hom ≫ ε_ V W
+  .of (η_ V W ≫ T ▷ W ≫ (β_ V W).hom ≫ ε_ V W)
 
 /-- The trace does not depend on the choice of the perfect pairing. -/
 theorem trace_eq (V W W' : C) [ExactPairing V W] [ExactPairing V W'] (T : V ⟶ V) :
     trace V W T = trace V W' T :=
   letI : HasRightDual V := ⟨W⟩
-  (MonoidalCategory.trace_eq_of_exactPairing W T).symm.trans
-    (MonoidalCategory.trace_eq_of_exactPairing W' T)
+  End.ext ((MonoidalCategory.trace_eq_of_exactPairing W T).symm.trans
+    (MonoidalCategory.trace_eq_of_exactPairing W' T))
 
 end ExactPairing
 
@@ -101,7 +101,7 @@ end ExactPairing
 trace `CategoryTheory.MonoidalCategory.trace` of `T`, that is the trace of `T` with respect to the
 exact pairing between `V` and `Vᘁ`. -/
 noncomputable def categoricalTrace {V : C} [HasRightDual V] (T : V ⟶ V) : End (𝟙_ C) :=
-  MonoidalCategory.trace T
+  .of (MonoidalCategory.trace T)
 
 lemma categoricalTrace_eq_trace {V : C} [HasRightDual V] (T : V ⟶ V) :
     categoricalTrace T = ExactPairing.trace V Vᘁ T :=
@@ -117,17 +117,18 @@ theorem categoricalTrace_congr {V : C} (h h' : HasRightDual V) (T : V ⟶ V) :
 /-- The categorical trace is invariant under conjugation by an isomorphism. -/
 theorem categoricalTrace_conj {V W : C} [HasRightDual V] [HasRightDual W] (e : V ≅ W)
     (T : V ⟶ V) : categoricalTrace (e.inv ≫ T ≫ e.hom) = categoricalTrace T :=
-  (trace_eq_of_iso e T _ (by simp)).symm
+  End.ext (trace_eq_of_iso e T _ (by simp)).symm
 
 /-- The identity of the monoidal unit has trace `1`. -/
 theorem categoricalTrace_id_tensorUnit [HasRightDual (𝟙_ C)] :
     categoricalTrace (𝟙 (𝟙_ C)) = 1 :=
-  trace_id_tensorUnit
+  End.ext trace_id_tensorUnit
 
 /-- An endomorphism of a zero object has trace `0`: the evaluation `Vᘁ ⊗ V ⟶ 𝟙_ C` corresponds to
 a morphism out of `V`, so it is zero. -/
 theorem categoricalTrace_eq_zero_of_isZero [Preadditive C] {V : C} [HasRightDual V]
     (hV : Limits.IsZero V) (T : V ⟶ V) : categoricalTrace T = 0 := by
+  apply End.ext
   have : ε_ V Vᘁ = 0 := (tensorLeftHomEquiv V V Vᘁ (𝟙_ C)).injective (hV.eq_of_src _ _)
   simp [categoricalTrace, MonoidalCategory.trace, this]
 
@@ -160,7 +161,7 @@ theorem traceOrZero_eq_categoricalTrace {V : C} [d : HasRightDual V] (T : V ⟶ 
 
 /-- For any right dual of `V`, `traceOrZero` is the trace computed with that dual. -/
 theorem traceOrZero_eq_trace {V : C} [HasRightDual V] (T : V ⟶ V) :
-    traceOrZero T = trace T :=
+    traceOrZero T = .of (trace T) :=
   traceOrZero_eq_categoricalTrace T
 
 /-- `traceOrZero` is invariant under conjugation by an isomorphism. -/

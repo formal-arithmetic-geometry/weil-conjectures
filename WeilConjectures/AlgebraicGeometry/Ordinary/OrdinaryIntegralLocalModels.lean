@@ -12,7 +12,12 @@ import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorCompariso
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import WeilConjectures.ConstructibleSheaf.Pullback
 
-/-! # Integral local models in scheme chart coordinates -/
+/-! # Integral local models in scheme chart coordinates
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -76,17 +81,7 @@ private theorem localModel_iff {A : Type (u + 1)} [CommRing A]
     exact ⟨normalizedLocalIso d g U K ≪≫ F.mapIso h'' ≪≫
       (normalizedLocalIso d g U ((integralConstantDerived T d).obj P)).symm⟩
 
-/-- Pullback preserves integral stratified perfect models in the datum presentation.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15
-(blueprint: lem-tw-integral-local-model-pullback).
-
-Proof: pull back the finite stratification and its covering sieves. A slice model
-is equivalently a constant-complex model on the underlying scheme chart. Every
-member of the pulled-back sieve maps to an original chart. Pulling the model
-along that map preserves the scalar perfect complex. Composition of inverse
-images and preservation of completed constant realization identify the resulting
-model with the restriction of the pulled-back object. Convert back to slice
-coordinates and retain the original perfectness proof. -/
+/-- Pullback preserves integral stratified perfect models in the datum presentation. -/
 theorem integralStratifiedPerfect_pullback {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))

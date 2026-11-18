@@ -25,7 +25,7 @@ For a finite commutative ring `Λ` and finitely many finite locally constant she
 of `U` on which all of them become constant with finite values.
 
 Source: Stacks Project, Tags 0DV5, 0DV6 and the proof of 0A3R.
-(blueprint: det-tf-restriction-zero-covers, sk-lem-curve-sylow-trace)
+(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
 -/
 
 @[expose] public section
@@ -65,7 +65,7 @@ theorem Scheme.finite_of_iso_constantSheaf {X : Scheme.{u}} [Nonempty X]
 /-- A finite locally constant sheaf of modules over a finite ring is constant, with finite
 value, on a connected finite étale Galois cover. Source: Stacks Project, Tags 0DV5, 0DV6
 and the proof of 0A3R.
-(blueprint: det-tf-restriction-zero-covers, sk-lem-curve-sylow-trace)
+(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
 
 Proof: the underlying sheaf of sets is finite locally constant, hence trivialized by a
 connected Galois cover; the module pullback is then constant, and its value is finite since
@@ -90,7 +90,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- Finitely many finite locally constant sheaves of modules over a finite ring on a
 connected scheme are simultaneously constant, with finite values, on one connected finite
 étale Galois cover. Source: Stacks Project, Tags 0DV5, 0DV6 and the proof of 0A3R.
-(blueprint: det-tf-restriction-zero-covers, sk-lem-curve-sylow-trace)
+(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
 
 Proof: apply `exists_galoisCover_isConstant_upperStar` to the finite direct sum; each
 summand pulls back to a retract of a constant sheaf on a connected scheme, hence is

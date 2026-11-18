@@ -116,7 +116,7 @@ noncomputable def upperStarForget₂ :
       (TwoSquare.mk _ _ _ _ (lowerStarCompForget₂Iso Λ g).hom)
 
 lemma upperStarForget₂_natTrans_app (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (upperStarForget₂ Λ g).natTrans.app G = upperStarForget₂Comparison Λ g G := by
+    (upperStarForget₂ Λ g).app G = upperStarForget₂Comparison Λ g G := by
   apply ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit,
     unit_comp_lowerStar_map_upperStarForget₂Comparison]
@@ -125,7 +125,7 @@ lemma upperStarForget₂_natTrans_app (G : Sheaf Y.smallEtaleTopology (ModuleCat
     (TwoSquare.mk _ _ _ _ (lowerStarCompForget₂Iso Λ g).hom) G
   exact this.symm.trans (Category.comp_id _)
 
-instance isIso_upperStarForget₂ : IsIso (upperStarForget₂ Λ g).natTrans := by
+instance isIso_upperStarForget₂ : IsIso (upperStarForget₂ Λ g) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro G
   rw [upperStarForget₂_natTrans_app]
@@ -218,8 +218,8 @@ lemma mapHomotopyCategoryPlus_baseChangeMap_forget₂ (sq : CommSq g' f' f g)
         ((Φ X).mapHomotopyCategoryPlus.obj K) ≫
       ((f')_*[AddCommGrpCat.{u + 1}]).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus
-          (upperStarForget₂ (ULift.{u + 1} ℤ) g').natTrans).app K) =
-    (NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g).natTrans).app
+          (upperStarForget₂ (ULift.{u + 1} ℤ) g')).app K) =
+    (NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g)).app
         (((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).mapHomotopyCategoryPlus.obj K) ≫
       (Φ Y').mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus
@@ -253,7 +253,7 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_forget₂_iff (sq : CommSq g' f' f 
     ((NatTrans.mapHomotopyCategoryPlus
       (baseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) sq)).app K)
   have h₃ := ((f')_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusUnith.naturality
-    ((NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g').natTrans).app K)
+    ((NatTrans.mapHomotopyCategoryPlus (upperStarForget₂ (ULift.{u + 1} ℤ) g')).app K)
   exact isIso_map_comp_iff_of_reflectsIsomorphisms _ isIso_forget₂_mapDerivedCategoryPlus_map_iff
     _ _ _ _ _ _ _ _ _ (forget₂_map_rightDerivedFunctorPlusUnit_app f' _) _ _ h₁ _ _
     (mapHomotopyCategoryPlus_baseChangeMap_forget₂ sq K) _ h₃

@@ -12,13 +12,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 /-!
 # Geometric stalks of higher direct images and the strict localization
 
-Let `h : X ⟶ S` be quasi-compact and quasi-separated, `F` an abelian étale sheaf on `X`, and
-`s̄` a geometric point of `S` which factors as `s : Spec Ω ⟶ W` followed by an étale
-`ι : W ⟶ S`. If `Hᵠ(X ×_S W_(s), F|) = 0`, where `W_(s)` is the strict localization of `W` at `s`,
+Let `h: X ⟶ S` be quasi-compact and quasi-separated, `F` an abelian étale sheaf on `X`, and
+`s̄` a geometric point of `S` which factors as `s: Spec Ω ⟶ W` followed by an étale
+`ι: W ⟶ S`. If `Hᵠ(X ×_S W_(s), F|) = 0`, where `W_(s)` is the strict localization of `W` at `s`,
 then the geometric stalk of `Rᵠh_* F` at `s̄` vanishes
 (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H`). This is
-the vanishing half of the strict-henselization stalk formula (blueprint
-`prop-weil-pbc-strict-henselization-stalk-formula`).
+the vanishing half of the strict-henselization stalk formula.
 
 `X ×_S W_(s)` is the limit of the `X ×_S V`, `V` running over the affine pointed étale
 neighbourhoods of `s` in `W`, so by continuity of étale cohomology

@@ -23,7 +23,7 @@ of `A` and `B` (`Polynomial.isAlgebraic_of_mem_roots_of_prod_mul_eq`). For the c
 root `z = ι β` with `β ∈ K` algebraic over `ℚ` and a conjugate `y` of `z` give a second
 embedding `ι'` of `K` with `ι' β = y`, provided every embedding of `ℚ(β)` into `ℂ` extends to
 `K`; purity for `ι'` bounds `y`. For `K = ℚ̄_ℓ` the extension property is the blueprint lemma
-`lem-embedding-extension`.
+`lemma-reciprocal-roots-zeta--6`.
 
 ## Main statements
 
@@ -40,7 +40,7 @@ namespace TraceDatum
 variable {K : Type u} [Field K] [CharZero K] {q d : ℕ} (D : TraceDatum.{u, v} K (2 * d))
 
 /-- **Universal purity of an integral trace datum** (the intrinsic-weight step of the blueprint
-proof of `thm-weil-realization-independence`): if every embedding of a number field `ℚ(β) ⊆ K`
+proof of `lemma-reciprocal-roots-zeta--7`): if every embedding of a number field `ℚ(β) ⊆ K`
 into `ℂ` extends to `K`, the counting series of `D` has integer coefficients, and `ι (D.P i)` is
 pure of weight `i` for every embedding `ι : K → ℂ`, then `ι (D.P i)` is universally pure of
 weight `i`. -/

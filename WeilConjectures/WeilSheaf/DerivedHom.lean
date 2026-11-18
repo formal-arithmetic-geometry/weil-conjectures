@@ -21,7 +21,7 @@ derived internal hom
 `RHom(-, L) : D(X̄_proét, Weil)ᵒᵖ ⥤ D(X̄_proét, Weil)`
 
 (`AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`), the internal hom `R𝓗om_{ℚ̄_ℓ}(-, L)` of
-`def-weil-derived-pullback-tensor-hom` with its Weil structure (`lem-fix-weil-operations`).
+`prose-03-02` with its Weil structure (`prose-10-20`).
 -/
 
 @[expose] public section
@@ -45,7 +45,7 @@ noncomputable def ihomMapLeft {A A' : ProEtaleWeilSheaf k₀ l X} (φ : A ⟶ A'
     (B : ProEtaleWeilSheaf k₀ l X) : ihom k₀ l X A' B ⟶ ihom k₀ l X A B :=
   ObjectProperty.homMk ⟨(Mod.ihomMap φ.hom.f).app B.carrier, by
     have h := adicLowerStarCompIhomIso_inv_app_comp_ihomMap l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv φ.hom.f B.carrier
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv φ.hom.f B.carrier
     have hφ : A.str.inv ≫ (WeilSheaf.frobeniusPullback k₀ l X).map φ.hom.f =
         φ.hom.f ≫ A'.str.inv := by
       rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
@@ -105,8 +105,8 @@ instance : (ihomBifunctor k₀ l X).Additive where
 
 variable (k₀ l X) in
 /-- The derived internal hom `RHom(-, L) = R𝓗om_{ℚ̄_ℓ,X̄}(-, L)` of pro-étale Weil sheaves into an
-object `L` of the derived category (blueprint: `def-weil-derived-pullback-tensor-hom`, with the
-Weil structure of `lem-fix-weil-operations`): the hom complex `∏_p 𝓗om(K^p, I^{p + n})` between
+object `L` of the derived category (blueprint: `prose-03-02`, with the
+Weil structure of `prose-10-20`): the hom complex `∏_p 𝓗om(K^p, I^{p + n})` between
 K-injective complexes `K` and `I` representing the two variables. -/
 noncomputable def derivedHom (L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
     (DerivedCategory (ProEtaleWeilSheaf k₀ l X))ᵒᵖ ⥤ DerivedCategory (ProEtaleWeilSheaf k₀ l X) :=

@@ -34,10 +34,10 @@ orientation is an orientation in the sense of the six-functor formalism
 ## Main statements
 
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`
-  (`sk-thm-derived-duality`): at finite coefficients, the derived Poincaré pairing of a Tate
-  orientation is perfect for `K` dualizable.
+  (`corollary-degreewise-duality-over-fields`): at finite coefficients, the derived Poincaré pairing
+  of a Tate orientation is perfect for `K` dualizable.
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_properPoincarePairing`
-  (`thm-pod-proper-poincare-duality`): the same for proper `a`, with `Ra_! ≅ Ra_*`.
+  (`theorem-poincare-duality--8`): the same for proper `a`, with `Ra_! ≅ Ra_*`.
 
 The degreewise consequences over a field are in
 `WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise`.
@@ -103,7 +103,7 @@ noncomputable def toOrientation [SmoothOfRelativeDimension d a] (γ : TateOrient
     Orientation Λ a d :=
   Orientation.ofDualizingComplexIso γ.dualizingComplexIso
 
-/-- Blueprint `sk-def-pairing-data`: The pairing data.
+/-- Blueprint `theorem-poincare-duality--6`: The pairing data.
 
 The smooth trace `Tr_γ : Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y` of a Tate orientation
 (`AlgebraicGeometry.Etale.smoothTrace`). -/
@@ -111,7 +111,7 @@ noncomputable def smoothTrace (γ : TateOrientation Λ a d) :
     (R(a)_![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.smoothTrace (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso
 
-/-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing.
+/-- Blueprint `definition-perfect-pairing`: The derived pairing, and perfectness of a pairing.
 
 The derived Poincaré pairing of a Tate orientation `γ`,
 
@@ -125,8 +125,9 @@ noncomputable def poincarePairing (γ : TateOrientation Λ a d)
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.poincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso K
 
-/-- Blueprint `thm-pod-derived-poincare-duality`: Derived Poincaré duality, at a finite
-coefficient stage `Λ = A`. This is also the derived part of blueprint `sk-thm-derived-duality`.
+/-- Blueprint `theorem-poincare-duality--6`: Derived Poincaré duality, at a finite
+coefficient stage `Λ = A`. This is also the derived part of blueprint
+`corollary-degreewise-duality-over-fields`.
 
 The derived Poincaré pairing of a Tate orientation is perfect, for a finite coefficient ring
 `Λ` and `K` dualizable (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`): the
@@ -149,7 +150,7 @@ noncomputable def properPoincarePairing [IsProper a] (γ : TateOrientation Λ a 
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.properPoincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso K
 
-/-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality.
+/-- Blueprint `theorem-poincare-duality--8`: Proper Poincaré duality.
 
 For `a` proper, the derived Poincaré pairing of a Tate orientation read through
 `Ra_! ≅ Ra_*`, `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`, is perfect for a finite
