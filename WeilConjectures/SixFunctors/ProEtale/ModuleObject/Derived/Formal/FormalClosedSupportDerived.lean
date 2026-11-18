@@ -14,9 +14,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Derived sections with closed support
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-formal-closed-support,
-det-lem-formal-closed-support-derived.md, clauses (1)--(3); Stacks Project, Tag 079P
-(blueprint: lemma-sections-support-closed-subscheme).
+The derived form of sections with closed support: the derived adjunction `Ri_* ⊣ RΓ_Z`, the
+global RHom comparison, the support triangle `i_* RΓ_Z K → K → Rj_* j^* K` and the fibre formula
+(Stacks Project, Tag 079P).
 -/
 
 @[expose] public noncomputable section
@@ -140,36 +140,32 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Derived adjunction, global RHom, injective-unit surjectivity, and the natural support
-triangle and fibre formula, using exactly the kernel functor of the sheaf-support node.
-Source: blueprint main-20261015, lemma-sections-support-closed-subscheme, clauses (1)--(3)
-(blueprint: lemma-sections-support-closed-subscheme).
+triangle and fibre formula, using exactly the kernel functor of `formal_closed_support_sheaves`.
 
 Proof plan:
-1. Finite type over the standing field gives a finite cover by Noetherian affine charts
-   (lemma-sections-support-closed-subscheme). Every open is quasi-compact, hence j is
-   quasi-compact and X is quasi-separated. These are consequences, not extra hypotheses.
-2. The sheaf adjunction and exact i_* are lemma-sections-support-closed-subscheme--1.
+1. Only a quasi-compact open immersion j is assumed; no finiteness over a field is needed.
+2. The sheaf adjunction and exact i_* are `formal_closed_support_sheaves`.
    The exact-left-adjoint derived adjunction is adj.mapDerivedCategoryRightDerivedAdjunction.
    On a K-injective I the total right derived functor is computed by H(I), via
-   Functor.rightDerivedFunctorObjQIso. The universal pair of lemma-sections-support-closed-subscheme
+   Functor.rightDerivedFunctorObjQIso. The universal pair of the sections-with-closed-support lemma
    agrees with this pair by its unit-compatible uniqueness. Apply the sheaf adjunction
    componentwise to the Hom complexes: naturality intertwines their two differentials.
    Both I and H(I) are K-injective, giving the displayed global RHom isomorphism.
-3. Clause (3) of lemma-sections-support-closed-subscheme gives the epimorphic open unit
+3. Clause (3) of the sections-with-closed-support lemma gives the epimorphic open unit
    on injectives, after the canonical coefficient-transport comparison. Equivalently,
    extend j_!j^*I -> I along the monomorphism j_!j^*I -> j_*j^*I by injectivity;
    open full faithfulness makes the extension a section of the unit.
-4. Ring-sheaf modules are Grothendieck; lemma-sections-support-closed-subscheme resolves
+4. Ring-sheaf modules are Grothendieck; the sections-with-closed-support lemma resolves
    every unbounded complex by a K-injective complex with injective terms. Exact j_! is
    left adjoint to j^*, so j^* preserves K-injectives. The kernel identification and
    step 3 give a natural degreewise short exact sequence i_*H(I) -> I -> j_*j^*I.
-5. Apply lemma-sections-support-closed-subscheme. Exact i_* computes its derived action.
+5. Apply the sections-with-closed-support lemma. Exact i_* computes its derived action.
    The termwise homotopy adjunction and the Hom bijection into K-injectives show that
    its second arrow is precisely the derived unit. Chain maps between resolutions
    represent all derived morphisms; additive functors preserve homotopies. Therefore
    the connecting arrows descend to the natural transformation delta in the statement.
 6. Rotate the distinguished triangle and compare it with the cone triangle of this
-   unit. TR3 and lemma-sections-support-closed-subscheme identify i_*RH(K) with its shifted cone.
+   unit. TR3 and the sections-with-closed-support lemma identify i_*RH(K) with its shifted cone.
    Apply exact i^* and its counit i^*i_* = id, giving the fibre formula. This uses the
    actual unit on I, not a functorial cone chosen in an arbitrary triangulated category.
 
@@ -181,15 +177,9 @@ RHom comparison. Every derived object admits the K-injective representative used
 last clause, whose cone shifted by -1 is the fibre of the specified derived unit.
 -/
 theorem formal_closed_support_derived
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
     {X Z V : Scheme.{u}}
-    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [V.Over (Spec (.of k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))]
-    (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]
-    (j : V ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range j = (Set.range i)ᶜ) :
     ∃ (_ : (closedModuleSectionsWithSupport Λ i j).Additive),
       ∃ adj : lowerStar Λ i ⊣ closedModuleSectionsWithSupport Λ i j,
@@ -229,16 +219,10 @@ theorem formal_closed_support_derived
                     ((NatTrans.mapHomologicalComplex (upperStarLowerStarAdjunction Λ j).unit
                       (ComplexShape.up ℤ)).app I)))))) := by
   classical
-  have : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X :=
-    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  have : IsNoetherian X := ⟨⟩
-  have : QuasiCompact j := inferInstance
   have hji : Set.range i.base = (Set.range j.base)ᶜ := by
     simp only [hij, compl_compl]
   obtain ⟨_, hlim, hcolim, ⟨adj⟩, _, _, hAdd, _⟩ :=
-    formal_closed_support_sheaves Λ ℓ k hΛ i j hij
+    formal_closed_support_sheaves Λ i j hij
   let := hAdd
   let := hlim
   let := hcolim
