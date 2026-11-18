@@ -58,6 +58,18 @@ lemma map_hom_app_counit_of_eq_rightAdjointUniq (adj₁ : F ⊣ G) (adj₂ : F �
   subst he
   exact rightAdjointUniq_hom_app_counit adj₁ adj₂ x
 
+/-- **Uniqueness of the compatible isomorphism of right adjoints**: an isomorphism
+`e : G ≅ G'` between two right adjoints of `F`
+which is compatible with the counits is the canonical one, `rightAdjointUniq adj₁ adj₂`; the
+converse is `map_hom_app_counit_of_eq_rightAdjointUniq`. -/
+lemma eq_rightAdjointUniq_of_map_hom_app_counit (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') (e : G ≅ G')
+    (he : ∀ x, F.map (e.hom.app x) ≫ adj₂.counit.app x = adj₁.counit.app x) :
+    e = adj₁.rightAdjointUniq adj₂ := by
+  ext x
+  apply (adj₂.homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, he,
+    rightAdjointUniq_hom_app_counit]
+
 end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry
@@ -124,7 +136,7 @@ noncomputable def rightDerivedLowerShriekCongrIso {X Y : Scheme.{u}} {f f' : X �
 variable [Finite Λ]
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the unbounded derived categories,
-for torsion coefficients: the isomorphism of `proposition-composition-base-change-rf-shriek--1`
+for torsion coefficients: the composition isomorphism
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) as data. -/
 noncomputable def rightDerivedLowerShriekCompIso {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
