@@ -67,13 +67,18 @@ import all WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-!
-# The actual unit on sections from an affine closed-site counit
+# The inverse-image unit on sections from an affine closed-site counit
 
-The affine argument uses the sheafification helpers of
-`AffineClosedInverseImageEvaluation`. The proof-local weakly etale comparison
-adapts the site calculation of
-`WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale` to the finite-coefficient
-API, avoiding its incompatible duplicate upper/lower-star imports.
+## References
+
+* Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification
+
+## Implementation details
+
+The affine argument uses the sheafification helpers of `AffineClosedInverseImageEvaluation`.
+The weakly etale comparison adapts the site calculation of
+`WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale` to the finite-coefficient API,
+avoiding its incompatible duplicate upper/lower-star imports.
 -/
 
 @[expose] public section
@@ -239,7 +244,7 @@ private theorem isIso_affineUnit_sections
     Functor.sheafPushforwardContinuousIso t.symm D (topology X) (ProEt.topology Z) ≪≫
     (Functor.sheafPushforwardContinuousComp r (toProEt Z) D
       (topology X) (topology Z) (ProEt.topology Z)).symm
-  let alpha := ((mateEquiv (proEtaleSheafAdjunction i D) a).symm beta.hom).natTrans
+  let alpha := ((mateEquiv (proEtaleSheafAdjunction i D) a).symm beta.hom)
   have : IsIso alpha := isIso_inverseMate_of_equivalences (proEtaleSheafAdjunction i D) a beta
   have hp := projectiveEvaluation_closedBaseChange A I B hB adj hε
   have hη : IsIso ((a.unit.app (RX.obj F)).hom.app (op B)) := by
@@ -319,7 +324,7 @@ private noncomputable def siteMate (sq : CommSq g' j' j g'') :=
     (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j'
       (inferInstance : WeaklyEtale j') trivial)
     (TwoSquare.mk _ _ _ _ (MorphismProperty.Over.pullbackMapComparison
-      (inferInstance : WeaklyEtale j) (inferInstance : WeaklyEtale j') sq))).natTrans
+      (inferInstance : WeaklyEtale j) (inferInstance : WeaklyEtale j') sq)))
 private theorem siteMate_eq (sq : CommSq g' j' j g'') :
     siteMate sq = (MorphismProperty.Over.pullbackComp g' j).inv ≫
       (MorphismProperty.Over.pullbackCongr (P := @WeaklyEtale) (Q := ⊤) sq.w).hom ≫
@@ -338,13 +343,13 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
     IsIso ((mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq)))) := by
   have hs : IsIso (siteMate sq) := by rw [siteMate_eq]; infer_instance
   have h (F : Sheaf (ProEt.topology U') A) (b : Z.ProEt) :
       ((mateEquiv
         (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
         (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom.app
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom.app
           (op b) = F.obj.map ((siteMate sq).app b).op := by
     simp only [Functor.comp_obj, mateEquiv, ProEtale.localizationRestrictionLowerStarAdjunction,
       Adjunction.sheafPushforwardContinuous, Functor.id_obj,
@@ -364,17 +369,17 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
   have hF (F : Sheaf (ProEt.topology U') A) : IsIso ((mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F) := by
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F) := by
     have hB : ∀ b : Z.ProEtᵒᵖ, IsIso (((mateEquiv
         (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
         (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom.app b) :=
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom.app b) :=
       fun b ↦ by rw [h F b.unop]; infer_instance
     apply (isIso_iff_of_reflects_iso _ (sheafToPresheaf _ A)).mp
     change IsIso (((mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom)
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom)
     exact NatIso.isIso_of_isIso_app _
   exact NatIso.isIso_of_isIso_app _
 
@@ -384,7 +389,7 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem isIso_inverseMate_localRestrictionBaseChange (sq : CommSq g' j' j g'') :
     IsIso (((mateEquiv (proEtaleSheafAdjunction g'' A)
       (proEtaleSheafAdjunction g' A)).symm
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans) := by
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq)))) := by
   let ai := proEtaleSheafAdjunction g'' A
   let ak := proEtaleSheafAdjunction g' A
   let aj := localizationRestrictionLowerStarAdjunction A j inferInstance
@@ -394,15 +399,15 @@ private theorem isIso_inverseMate_localRestrictionBaseChange (sq : CommSq g' j' 
   have hm : mateEquiv ai ak alpha = beta := (mateEquiv ai ak).apply_symm_apply beta
   have h := iterated_mateEquiv_conjugateEquiv ai ak aj ab alpha
   rw [hm] at h
-  have hc : IsIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha.natTrans) := by
+  have hc : IsIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha) := by
     rw [← h]
     exact isIso_mate_localRestrictionBaseChangeMap A sq
   have := hc
   let e := (conjugateIsoEquiv (ai.comp ab) (aj.comp ak)).symm
-    (asIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha.natTrans))
-  have he : e.hom = alpha.natTrans :=
-    (conjugateEquiv (ai.comp ab) (aj.comp ak)).symm_apply_apply alpha.natTrans
-  change IsIso alpha.natTrans
+    (asIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha))
+  have he : e.hom = alpha :=
+    (conjugateEquiv (ai.comp ab) (aj.comp ak)).symm_apply_apply alpha
+  change IsIso alpha
   rw [← he]
   infer_instance
 
@@ -420,8 +425,8 @@ private theorem isIso_unit_sections_of_localization
   let R := proEtaleSheafDirectImage g' A
   let beta := TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A hsq.toCommSq)
   let alpha := (mateEquiv ai ak).symm beta
-  have : IsIso alpha.natTrans := isIso_inverseMate_localRestrictionBaseChange A hsq.toCommSq
-  have : IsIso beta.natTrans := isIso_localRestrictionBaseChangeMap_of_isPullback A hsq
+  have : IsIso alpha := isIso_inverseMate_localRestrictionBaseChange A hsq.toCommSq
+  have : IsIso beta := isIso_localRestrictionBaseChangeMap_of_isPullback A hsq
   have hu := unit_mateEquiv_symm ai ak beta F
   have hu' := congrArg (fun f ↦ f.hom.app (op W)) hu
   change ((ai.unit.app F).hom.app
@@ -488,35 +493,9 @@ private theorem affine_closed_square {X Z : Scheme.{u}}
   · simp
   · simp
 
-/-- Once the affine lift's counit at the identity object is invertible,
-projective evaluation gives the actual inverse-image unit isomorphism on V.
-No specialization assumption is made in this comparison lemma.
-
-Source: Stacks Project, Tag 09BL, lemma-closed-immersion-affines-apply (1),(2),
-and Tag 09AC, localization and unit identification
-(blueprint: new-lem-weil-pbc-specialization-unit-comparison).
-
-Proof. First transfer projective evaluation from B to r(B). A locally surjective
-map admits a lift over a single affine surjective cover of r(B). The lift functor
-v sends this cover to a covering of v(r(B)), which is isomorphic to B by the
-counit. Projectivity and subcanonical Yoneda split this cover. Full faithfulness
-of v brings the section back, giving the required lift at r(B).
-
-Precomposition by v, followed by sheafification, is left adjoint to restriction
-along r. Its unit at B is restriction along the counit followed by the
-sheafification unit at r(B). The set-valued sheafification lemmas make the latter
-bijective; sheafification commutes with forgetting abelian groups, so it is an
-isomorphism of abelian groups. The affine-basis restriction equivalences and the
-inverse-mate unit identity identify this with the actual quotient-immersion unit.
-
-For a general affine V, the first isomorphism theorem constructs the canonical
-quotient-coordinate isomorphism for its closed base change. Restriction along
-weakly etale localization commutes with this cartesian base-change square. On
-the sites the rotated comparison is a composite of pullback-composition
-isomorphisms. Applying a sheaf and conjugating adjunctions makes the inverse
-mate invertible. The mate unit identity transfers the quotient unit to V, and
-pointwise invertibility gives the claimed natural isomorphism. No nonemptiness
-assumption is used; the same arguments apply to the empty scheme. -/
+/-- For affine `V`, if evaluation at the identity object is projective and the counit of the
+affine closed-site lift adjunction is invertible there, then the inverse-image unit is an
+isomorphism on sections over `V`. -/
 theorem isIso_proEtaleUnit_sections_of_closedSiteCounit
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

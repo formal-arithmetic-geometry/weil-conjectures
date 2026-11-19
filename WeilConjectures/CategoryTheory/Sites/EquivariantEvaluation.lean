@@ -60,8 +60,8 @@ variable {C : Type u} [Category.{v} C] {T : C} {H : Type*} [Group H] (a : H →*
   (Λ : Type w') [CommRing Λ]
 
 lemma End.unop_map_mul (g h : H) :
-    MulOpposite.unop (a (g * h)) = (a g).unop ≫ (a h).unop := by
-  rw [map_mul, MulOpposite.unop_mul, End.mul_def]
+    (a (g * h)).unop.asHom = (a g).unop.asHom ≫ (a h).unop.asHom := by
+  rw [map_mul, MulOpposite.unop_mul, End.mul_asHom]
 
 namespace Presheaf
 
@@ -69,9 +69,9 @@ namespace Presheaf
 @[simps]
 noncomputable def sectionsRepresentation (F : Cᵒᵖ ⥤ ModuleCat.{w} Λ) :
     Representation Λ H (F.obj (op T)) where
-  toFun h := (F.map (Quiver.Hom.op (a h).unop)).hom
+  toFun h := (F.map (Quiver.Hom.op (a h).unop.asHom)).hom
   map_one' := by
-    rw [map_one, MulOpposite.unop_one]
+    rw [map_one, MulOpposite.unop_one, End.one_asHom]
     exact congrArg ModuleCat.Hom.hom (F.map_id (op T))
   map_mul' g h := by
     rw [End.unop_map_mul, op_comp, F.map_comp, ModuleCat.hom_comp]
@@ -83,7 +83,7 @@ action `h ↦ F(a h)` of `H`. -/
 noncomputable def evaluationRep : (Cᵒᵖ ⥤ ModuleCat.{w} Λ) ⥤ Rep.{w} Λ H where
   obj F := Rep.of (sectionsRepresentation a Λ F)
   map {F G} f := Rep.ofHom ⟨(f.app (op T)).hom, fun h ↦
-    congrArg ModuleCat.Hom.hom (f.naturality (Quiver.Hom.op (a h).unop))⟩
+    congrArg ModuleCat.Hom.hom (f.naturality (Quiver.Hom.op (a h).unop.asHom))⟩
 
 @[simp]
 lemma evaluationRep_map_hom_apply {F G : Cᵒᵖ ⥤ ModuleCat.{w} Λ} (f : F ⟶ G)
@@ -93,13 +93,13 @@ lemma evaluationRep_map_hom_apply {F G : Cᵒᵖ ⥤ ModuleCat.{w} Λ} (f : F �
 /-- The `H`-equivariant functions `Hom(T, W) → M`, for the action `h • t = a h ≫ t` on
 `Hom(T, W)`. -/
 def equivariantFunctions (M : Rep.{w} Λ H) (W : C) : Submodule Λ ((T ⟶ W) → M) where
-  carrier := {s | ∀ h t, s ((a h).unop ≫ t) = M.ρ h (s t)}
+  carrier := {s | ∀ h t, s ((a h).unop.asHom ≫ t) = M.ρ h (s t)}
   add_mem' {s s'} hs hs' h t := by simp [hs h t, hs' h t]
   zero_mem' h t := by simp
   smul_mem' c s hs h t := by simp [hs h t]
 
 lemma mem_equivariantFunctions {M : Rep.{w} Λ H} {W : C} {s : (T ⟶ W) → M} :
-    s ∈ equivariantFunctions a Λ M W ↔ ∀ h t, s ((a h).unop ≫ t) = M.ρ h (s t) :=
+    s ∈ equivariantFunctions a Λ M W ↔ ∀ h t, s ((a h).unop.asHom ≫ t) = M.ρ h (s t) :=
   Iff.rfl
 
 /-- The presheaf `W ↦ Hom_H(Hom(T, W), M)` of equivariant functions, with restriction given by
@@ -181,7 +181,7 @@ noncomputable def evaluationRepHomEquivInvFun {F : Cᵒᵖ ⥤ ModuleCat.{max v 
     (β.app (op T)).hom), fun h ↦ by
       ext x
       have hβ := congrArg (fun s : equivariantFunctions a Λ M T ↦ s.1 (𝟙 T))
-        (ConcreteCategory.congr_hom (β.naturality (Quiver.Hom.op (a h).unop)) x)
+        (ConcreteCategory.congr_hom (β.naturality (Quiver.Hom.op (a h).unop.asHom)) x)
       have hx := (β.app (op T) x).2 h (𝟙 T)
       rw [Category.comp_id] at hx
       exact hβ.trans ((congrArg (β.app (op T) x).1 (Category.id_comp _)).trans hx)⟩
@@ -261,7 +261,7 @@ lemma isSheaf_coevaluationRepObj (hT : ∀ ⦃S : Sieve T⦄, S ∈ J T → S (�
   rw [Presieve.compatible_iff_sieveCompatible] at hx
   refine ⟨⟨fun t ↦ (x t (hmem t)).1 (𝟙 T), fun h t ↦ ?_⟩, fun Y f hf ↦ ?_, fun y hy ↦ ?_⟩
   · have h₁ := congrArg (fun s : Presheaf.equivariantFunctions a Λ M T ↦ s.1 (𝟙 T))
-      (hx t (a h).unop (hmem t))
+      (hx t (a h).unop.asHom (hmem t))
     exact h₁.trans ((congrArg (x t (hmem t)).1
       ((Category.id_comp _).trans (Category.comp_id _).symm)).trans ((x t (hmem t)).2 h (𝟙 T)))
   · exact Subtype.ext (funext fun t ↦
@@ -314,7 +314,7 @@ sheaf of equivariant functions sends epimorphisms to locally surjective morphism
 equivariant function on a free `H`-set lifts along a surjection. -/
 lemma isLocallySurjective_coevaluationRep_map (hT : ∀ ⦃S : Sieve T⦄, S ∈ J T → S (𝟙 T))
     (hfree : ∀ W : C, ∃ S ∈ J W, ∀ ⦃W' : C⦄ (f : W' ⟶ W), S f →
-      ∀ (h : H) (t : T ⟶ W'), (a h).unop ≫ t = t → h = 1)
+      ∀ (h : H) (t : T ⟶ W'), (a h).unop.asHom ≫ t = t → h = 1)
     {M N : Rep.{max u v} Λ H} (π : M ⟶ N) [Epi π] :
     Sheaf.IsLocallySurjective ((coevaluationRep a Λ hT).map π) := by
   refine ⟨fun {W} s ↦ ?_⟩
@@ -336,7 +336,7 @@ exact. -/
 lemma preservesFiniteColimits_coevaluationRep [HasSheafify J (ModuleCat.{max u v} Λ)]
     (hT : ∀ ⦃S : Sieve T⦄, S ∈ J T → S (𝟙 T))
     (hfree : ∀ W : C, ∃ S ∈ J W, ∀ ⦃W' : C⦄ (f : W' ⟶ W), S f →
-      ∀ (h : H) (t : T ⟶ W'), (a h).unop ≫ t = t → h = 1) :
+      ∀ (h : H) (t : T ⟶ W'), (a h).unop.asHom ≫ t = t → h = 1) :
     PreservesFiniteColimits (coevaluationRep a Λ hT) := by
   have : (coevaluationRep a Λ hT).PreservesEpimorphisms :=
     ⟨fun π _ ↦ have := isLocallySurjective_coevaluationRep_map hT hfree π
@@ -353,7 +353,8 @@ noncomputable def evaluationRepConstantSheafIso [HasWeakSheafify J (ModuleCat.{w
   (Rep.mkIso (Representation.Equiv.mk
     (LinearEquiv.ofBijective ((toSheafify J ((Functor.const Cᵒᵖ).obj X)).app (op T)).hom hX)
     fun h ↦ LinearMap.ext fun x ↦
-      ConcreteCategory.congr_hom ((toSheafify J _).naturality (Quiver.Hom.op (a h).unop)) x)).symm
+      ConcreteCategory.congr_hom
+        ((toSheafify J _).naturality (Quiver.Hom.op (a h).unop.asHom)) x)).symm
 
 end Sheaf
 

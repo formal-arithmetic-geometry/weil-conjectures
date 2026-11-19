@@ -17,7 +17,7 @@ import WeilConjectures.RingTheory.RegularThroughLocalization
 # Backward implication of the G-ring criterion
 
 Source: Stacks Project, More on Algebra, proof of Lemma 07PN.
-(blueprint: lem-weil-pbc-g-ring-check-pairs-of-primes-backward)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 
 @[expose] public section
@@ -61,7 +61,7 @@ private theorem completion_fiber_subsingleton
 /-- Backward implication in the G-ring criterion by pairs of primes. This is the backward
 half of Stacks Project, More on Algebra, Lemma 07PN, using the formal-fibre description of
 regular completion maps and the quotient formal-fibre identification.
-(blueprint: lem-weil-pbc-g-ring-check-pairs-of-primes-backward) -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2) -/
 theorem isGRing_pairsOfPrimes_backward (R : Type u) [CommRing R] [IsNoetherianRing R]
     (h : ∀ (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p),
       let pbar := p.map (Ideal.Quotient.mk q)

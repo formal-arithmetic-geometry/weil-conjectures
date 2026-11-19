@@ -38,7 +38,6 @@ private theorem inverse_square {A : Type*} [Category A] {V W X Z : A}
     _ = a.inv ≫ (a.hom ≫ q) ≫ b.inv := by rw [hp]
     _ = q ≫ b.inv := by simp
 
-set_option maxHeartbeats 800000 in
 -- Keep the four total-complex comparison types explicit.
 /-- The ordinary total tensor comparisons commute with the linear square.
 

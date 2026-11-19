@@ -104,7 +104,7 @@ def StrictEtaleBrownRealizationCoherence (W : Scheme.{u})
     (mateEquiv (P.scalar h).derivedAdj
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
         (strictEtaleBrownRingMap O t h)))
-      (.mk _ _ _ _ (R.scalar h).inv)).natTrans = (R.restriction h).hom)
+      (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom)
 
 /-- The fixed realization with its canonical comparison equations.
 Source: Zheng, Construction 4.1 and Lemma 5.16
@@ -200,7 +200,7 @@ def StrictEtaleBrownImageRealizationCoherence
   ((mateEquiv B.adjunction
     (Etale.upperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).mapDerivedCategoryRightDerivedAdjunction
-    (.mk _ _ _ _ R.inverse.hom)).natTrans = R.right.hom)
+    (.mk _ _ _ _ R.inverse.hom)) = R.right.hom)
 
 /-- The normalized geometric comparison interface, without an existence assertion.
 Source: Zheng, Construction 5.15 and Lemma 5.16

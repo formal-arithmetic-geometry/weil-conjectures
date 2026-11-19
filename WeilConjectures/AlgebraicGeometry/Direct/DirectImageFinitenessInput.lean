@@ -15,7 +15,7 @@ public import Mathlib.Topology.KrullDimension
 /-! # The direct-image finiteness input
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/
-`def-exc-direct-image-input` (blueprint: def-exc-direct-image-input).
+`theorem-results-from-etale-theory` (blueprint: theorem-results-from-etale-theory).
 -/
 
 @[expose] public section
@@ -36,7 +36,7 @@ over separably closed fields `K` with `N` invertible and finite-type `K`-schemes
 dimension at most `d`, requiring vanishing above `2 * d` for every locally torsion
 abelian sheaf; it does not require a uniform annihilator for that sheaf.
 Source: blueprint `sec-smooth-purity/sk-prop-a1-kummer/def-exc-direct-image-input.md`
-(blueprint: def-exc-direct-image-input). -/
+(blueprint: theorem-results-from-etale-theory). -/
 def HasDirectImageFinitenessInput
     (k : Type u) [Field k] (N : ℤ) (_hN : IsUnit (N : k))
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

@@ -16,7 +16,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-lefschetz-verdier/sec-trace-classes-and-the-lefschetz-verdier-formula/
 sk-d-proper-pushforward/sk-thm-sf-compatibility/thm-sf-dual-base-change.md`,
-node `thm-sf-dual-base-change` (blueprint: thm-sf-dual-base-change).
+node `definition-trace-morphism--1` (blueprint: definition-trace-morphism--1).
 
 The dual base change isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!` is the existing
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` (the inverse conjugate
@@ -44,7 +44,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 /-- Horizontal pasting for dual base change: for Cartesian squares `sq` (along `g`) and `sq₂`
 (along `g₂`), the dual base change isomorphism of the pasted square `sq₂.paste_horiz sq` is the
 pasting of those of `sq` and `sq₂`, using the canonical direct-image compositors
-`rightDerivedLowerStarComp` (blueprint: `thm-sf-dual-base-change`, step 4). -/
+`rightDerivedLowerStarComp` (blueprint: `definition-trace-morphism--1`, step 4). -/
 def DualBaseChangeHorizontalPasting {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'} {g₂' : X₂ ⟶ X'}
     {f₂ : X₂ ⟶ Y₂} [HasCompactification f₂] [QuasiCompact f₂]
     (sq : IsPullback g' f' f g) (sq₂ : IsPullback g₂' f₂ f' g₂) : Prop :=
@@ -63,7 +63,7 @@ def DualBaseChangeHorizontalPasting {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'
 /-- Vertical pasting for dual base change: for a Cartesian square `t` stacked on top of `sq`,
 the dual base change isomorphism of the pasted square `t.paste_vert sq` is the pasting of those
 of `t` and `sq`, using the exceptional compositors conjugate to `rightDerivedLowerShriekCompIso`
-(blueprint: `thm-sf-dual-base-change`, step 4). -/
+(blueprint: `definition-trace-morphism--1`, step 4). -/
 def DualBaseChangeVerticalPasting {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g₀' : X₀' ⟶ X₀}
     {f₀' : X₀' ⟶ X'} [HasCompactification e] [HasCompactification (e ≫ f)]
     [QuasiCompact (e ≫ f)] [HasCompactification f₀'] [QuasiCompact f₀']
@@ -88,11 +88,11 @@ with horizontal and vertical pasting of Cartesian squares, and stability of prop
 under the base change, which is what makes the proper form
 `rightDerivedUpperShriekLowerShriekBaseChangeIso` applicable.
 
-Source place: node `thm-sf-dual-base-change` in
+Source place: node `definition-trace-morphism--1` in
 `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-lefschetz-verdier/
 sec-trace-classes-and-the-lefschetz-verdier-formula/sk-d-proper-pushforward/
 sk-thm-sf-compatibility/thm-sf-dual-base-change.md`
-(blueprint: thm-sf-dual-base-change).
+(blueprint: definition-trace-morphism--1).
 
 Proof outline: the exchange `Ex_!` is invertible (A2), the dual isomorphism is its inverse
 conjugate under the composite A1 adjunctions, and the pasting equations follow from mate

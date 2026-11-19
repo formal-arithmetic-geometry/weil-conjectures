@@ -21,7 +21,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-! # Derived reduction and restriction of scalars
 
 Source: Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC;
-blueprint `def-weil-derived-direct-image`, order 1468
+blueprint `prose-03-02`, order 1468
 (auxiliary; not a blueprint node).
 
 The index n denotes exponent n+1. All constructions use the completed coefficient

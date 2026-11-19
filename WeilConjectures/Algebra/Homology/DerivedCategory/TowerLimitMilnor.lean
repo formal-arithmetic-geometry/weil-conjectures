@@ -19,7 +19,7 @@ with countable products, so the long exact cohomology sequence of this triangle 
   0 ⟶ R¹lim Hⁱ(Fₙ) ⟶ Hʲ(R lim Fₙ) ⟶ lim Hʲ(Fₙ) ⟶ 0,
 ```
 where `R¹lim Hⁱ(Fₙ)` is the cokernel of `1 - t` on `∏ Hⁱ(Fₙ)` (Stacks 0CQD, 0940; blueprint
-`det-pe-milnor-sequence`, `sk-prop-pe-milnor`).
+`proposition-milnor-sequence--2`, `proposition-milnor-sequence`).
 
 ## Main results
 
@@ -39,7 +39,7 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
   [Abelian.HasKInjectiveResolutions C] [HasLimitsOfShape (Discrete ℕ) C]
   [HasExactLimitsOfShape (Discrete ℕ) C] {F : ℕᵒᵖ ⥤ DerivedCategory C} {c : Cone F}
 
-/-- **The Milnor short exact sequence** (Stacks 0CQD, blueprint `det-pe-milnor-sequence`).
+/-- **The Milnor short exact sequence** (Stacks 0CQD, blueprint `proposition-milnor-sequence--2`).
 Let `c` be a homotopy limit cone over a tower `F` in `D(C)`, let `i + 1 = j`, let `P` be a
 product of the `Hⁱ(Fₙ)` with its transition endomorphism `t` (components
 `∏ Hⁱ(Fₘ) ⟶ Hⁱ(Fₙ₊₁) ⟶ Hⁱ(Fₙ)`) and let `d` be a limit cone over `n ↦ Hʲ(Fₙ)`. Then there is

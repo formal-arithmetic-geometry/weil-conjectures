@@ -81,7 +81,7 @@ theorem tensorMapBaseChange_bijective (h : Function.Surjective (algebraMap S S')
       rw [smul_tmul', smul_eq_mul, mul_one], hD a.1 a.2, smul_zero]
   have key : ∀ x, tensorMapBaseChange R S S' Q x =
       (mapBaseChange R S S').lTensor Q (e.symm x) := fun x => by
-    rw [tensorMapBaseChange, LinearMap.comp_apply, LinearMap.baseChange_eq_ltensor]
+    rw [tensorMapBaseChange, LinearMap.comp_apply, LinearMap.baseChange_eq_lTensor]
     rfl
   constructor
   · intro x y hxy

@@ -20,7 +20,7 @@ compactification `C` of `N`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification`: `N ⊆ P` open in a trait model
 over the generic base with proper total space, over `ιX : Y ⟶ X`, `ιX' : Y' ⟶ X'`), the
 compact-support exchange of the structure morphism `a : Y ⟶ Spec F` (blueprint
-`det-nearby-exchange-maps` (3)), for the trait as a model of the point `Spec F` along `ε₀`
+`prose-E-15` (3)), for the trait as a model of the point `Spec F` along `ε₀`
 (`ProEtale.CondensedRing.traitModelOfPoint`), is
 ```
 ν_C = χ_{a_P}⁻¹ ∘ Ra'_{P*}(ν_ι) : Ra'_! Ψ_N ⟶ Ψ_S Ra_!
@@ -82,7 +82,7 @@ lemma isIsoOn_pushforwardExchange :
 instance : IsIso (C.hom.pullbackExchange (Profinite.padicAlgClRingObj ℓ)) :=
   C.hom.isIso_pullbackExchange_of_isOpenImmersion _ C.isPullback_hom_j
 
-/-- **The compact-support exchange of a compactification** (blueprint `det-nearby-exchange-maps`
+/-- **The compact-support exchange of a compactification** (blueprint `prose-E-15`
 (3)): for the structure morphisms `a : Y ⟶ Spec F`, `a' : Y' ⟶ Spec k'` and a compactification
 `N ⊆ P` over `ιX : Y ⟶ X`, `ιX' : Y' ⟶ X'`, the exchange `ν = χ_{a_P}⁻¹ ∘ Ra'_{P*}(ν_ι) :
 Ra'_! Ψ_N ⟶ Ψ_S Ra_!` for the trait as a model of the point `Spec F` along
@@ -100,7 +100,7 @@ noncomputable def compactSupportExchange :
     (C.isIsoOn_pushforwardExchange ℓ)
 
 /-- **The compact-support exchange is unchanged along a refinement** (blueprint
-`det-nearby-exchange-maps`, proof): an instance of
+`prose-E-15`, proof): an instance of
 `ProEtale.CondensedRing.compactSupportExchangeOfCompactification_eq_of_refinement`. -/
 theorem compactSupportExchange_eq_of_refinement {C₃ C₁ : h.Compactification}
     (r : C₃.Refinement C₁) : C₃.compactSupportExchange ℓ = C₁.compactSupportExchange ℓ :=
@@ -114,7 +114,7 @@ theorem compactSupportExchange_eq_of_refinement {C₃ C₁ : h.Compactification}
     r.isPullback_ιX'
 
 /-- **The compact-support exchange does not depend on the compactification** (blueprint
-`det-nearby-exchange-maps`): two compactifications have a common refinement
+`prose-E-15`): two compactifications have a common refinement
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_refinement`), along which
 the compact-support exchange is unchanged. -/
 theorem compactSupportExchange_eq (C₁ C₂ : h.Compactification) :
@@ -126,7 +126,7 @@ end Compactification
 
 variable (h) in
 /-- The compact-support exchange `ν_a : Ra'_! Ψ_N ⟶ Ψ_S Ra_!` of the structure morphism of a
-trait model over a generic base (blueprint `det-nearby-exchange-maps` (3)), for the trait as a
+trait model over a generic base (blueprint `prose-E-15` (3)), for the trait as a
 model of the point `Spec F` along `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`: the exchange of any
 compactification, which does not depend on it
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.compactSupportExchange_eq_compactSupportExchange`).

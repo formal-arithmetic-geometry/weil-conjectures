@@ -13,8 +13,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Independence of the geometric point in étale sheaf support
 
-Source: the Weil conjectures blueprint, `sec-smooth-purity`,
-`sk-prop-sf-kunneth-ordinary` (blueprint: lem-kun-support-geometric-point-independent).
+Source: the Weil conjectures blueprint, `chap-Smooth-purity`,
+`proposition-ordinary-external-kunneth--1` (blueprint: lem-kun-support-geometric-point-independent).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 for every étale sheaf of abelian groups. Consequently, the condition defining membership
 in the support of such a sheaf is independent of the geometric point chosen over that point.
 
-Source: Weil conjectures blueprint, `sk-prop-sf-kunneth-ordinary`, node
+Source: Weil conjectures blueprint, `proposition-ordinary-external-kunneth--1`, node
 `lem-kun-support-geometric-point-independent`.
 (blueprint: lem-kun-support-geometric-point-independent)
 

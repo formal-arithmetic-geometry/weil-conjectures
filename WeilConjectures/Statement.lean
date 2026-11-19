@@ -92,7 +92,7 @@ smooth, proper, geometrically integral scheme `X` of dimension `d` over a finite
 `Pᵢ ∈ ℤ[t]`, `Pᵢ(0) = 1`, `P₀ = 1 - t`, `P_{2d} = 1 - qᵈ t`, satisfying the functional
 equation and the Riemann hypothesis: all inverse roots of `Pᵢ` have absolute value
 `q^{i/2}`, and `α ↦ qᵈ / α` matches the inverse roots of `Pᵢ` with those of `P_{2d-i}`.
-(blueprint: `thm-weil-final`) -/
+(blueprint: `theorem-weil-conjectures-smooth-proper-schemes`) -/
 theorem weil_conjectures (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f]
     [GeometricallyIntegral f] :
     ∃ P : Fin (2 * d + 1) → Polynomial ℤ,

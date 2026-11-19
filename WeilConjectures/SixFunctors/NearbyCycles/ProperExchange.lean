@@ -24,7 +24,7 @@ Li_N^* Rj_{N*} Lε_N^* Rf_* K ⟶ Li_N^* Rj_{N*} Rg_* Lε_M^* K      (base chang
   ⟶ Li_N^* Rt_* Rj_{M*} Lε_M^* K                                (composition of direct images)
   ⟶ Rf'_* Li_M^* Rj_{M*} Lε_M^* K                               (base change of the special fibres)
 ```
-as in the proof of blueprint `det-sp-nearby-cycles-exchanges` (2). The middle arrow
+as in the proof of blueprint `prose-E-03` (2). The middle arrow
 (`NearbyCyclesModel.Hom.lowerStarExchange`) is the iterated mate of the pullback comparison of the
 square of geometric generic fibres, hence invertible. So `χ_f` is invertible at `K` as soon as the
 two base change morphisms are
@@ -62,7 +62,7 @@ noncomputable def lowerStarExchange :
     (derivedUpperStarLowerStarAdjunction Λ φ.total)
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom)).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom))
 
 /-- The comparison `Rj_{N*} Rg_* ⟶ Rt_* Rj_{M*}` is invertible: it is the conjugate of the
 pullback comparison `Lt^* Lj_M^* ≅ Lj_N^* Lg^*`
@@ -72,7 +72,7 @@ instance isIso_lowerStarExchange : IsIso (φ.lowerStarExchange Λ) := by
   infer_instance
 
 /-- **The pushforward exchange through base change morphisms** (proof of blueprint
-`det-sp-nearby-cycles-exchanges` (2)): the component of `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` at `K` is
+`prose-E-03` (2)): the component of `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` at `K` is
 `Li_N^* Rj_{N*}` of the base change morphism `Lε_N^* Rf_* K ⟶ Rg_* Lε_M^* K` of the square of
 identifications, followed by `Li_N^*` of the comparison `Rj_{N*} Rg_* ⟶ Rt_* Rj_{M*}`
 (`NearbyCyclesModel.Hom.lowerStarExchange`) and by the base change morphism

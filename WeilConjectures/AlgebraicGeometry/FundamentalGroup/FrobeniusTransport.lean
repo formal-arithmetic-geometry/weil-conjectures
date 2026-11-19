@@ -102,13 +102,13 @@ variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [Com
 the fibre functor as `τ ∘ g ∘ τ⁻¹`. -/
 noncomputable def transportConj (g : G) : G :=
   (toAutMulEquiv (fiber t) G).symm
-    (τ.symm ≪≫ Functor.isoWhiskerLeft (FiniteEtale.mapIso e) (toAut (fiber t) G g) ≪≫ τ)
+    (.of (τ.symm ≪≫ Functor.isoWhiskerLeft (FiniteEtale.mapIso e) (toAut (fiber t) G g).asIso ≪≫ τ))
 
 lemma transportConj_smul (P : Y.FiniteEtale) (g : G)
     (x : (fiber t).obj ((FiniteEtale.mapIso e).obj P)) :
     τ.hom.app P (g • x) = transportConj t τ G g • τ.hom.app P x := by
   rw [← toAut_hom_app_apply (F := fiber t) (G := G)]
-  change _ = ((toAutMulEquiv (fiber t) G) ((toAutMulEquiv (fiber t) G).symm _)).hom.app P _
+  change _ = ((toAutMulEquiv (fiber t) G) ((toAutMulEquiv (fiber t) G).symm _)).asIso.hom.app P _
   rw [MulEquiv.apply_symm_apply]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, FintypeCat.comp_apply]
@@ -124,13 +124,13 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} (p : C ⟶ Spec (.of
 
 @[reassoc (attr := simp)]
 lemma geometricGaloisFrobenius_inv_comp_geometricFiberProj :
-    p.geometricGaloisFrobenius.inv ≫ p.geometricFiberProj = p.geometricFiberProj := by
+    p.geometricGaloisFrobenius.asIso.inv ≫ p.geometricFiberProj = p.geometricFiberProj := by
   rw [Iso.inv_comp_eq, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj]
 
 @[reassoc (attr := simp)]
 lemma geometricGaloisFrobenius_inv_comp_geometricFiberToAlgebraicClosure :
-    p.geometricGaloisFrobenius.inv ≫ p.geometricFiberToAlgebraicClosure ≫
-      (specGeometricFrobenius K).hom = p.geometricFiberToAlgebraicClosure := by
+    p.geometricGaloisFrobenius.asIso.inv ≫ p.geometricFiberToAlgebraicClosure ≫
+      (specGeometricFrobenius K).asIso.hom = p.geometricFiberToAlgebraicClosure := by
   rw [Iso.inv_comp_eq,
     Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure]
 
@@ -139,18 +139,19 @@ isomorphic to its transport `g_* b(P₀)` along the geometric Galois Frobenius `
 `1 ×_{C₀} g⁻¹`, since `g` lies over `C₀`. -/
 noncomputable def pullbackMapIsoIso (P₀ : C.FiniteEtale) :
     (pullback p.geometricFiberProj).obj P₀ ≅
-      (FiniteEtale.mapIso p.geometricGaloisFrobenius).obj ((pullback p.geometricFiberProj).obj P₀)
+      (FiniteEtale.mapIso p.geometricGaloisFrobenius.asIso).obj
+        ((pullback p.geometricFiberProj).obj P₀)
     where
   hom := ObjectProperty.homMk (MorphismProperty.Over.homMk
     (Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj (𝟙 _)
-      p.geometricGaloisFrobenius.inv (𝟙 _) (by simp)
+      p.geometricGaloisFrobenius.asIso.inv (𝟙 _) (by simp)
       (by rw [Category.comp_id, geometricGaloisFrobenius_inv_comp_geometricFiberProj]))
     (by
       change Limits.pullback.map _ _ _ _ _ _ _ _ _ ≫ Limits.pullback.snd _ _ ≫ _ = _
       simp))
   inv := ObjectProperty.homMk (MorphismProperty.Over.homMk
     (Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj (𝟙 _)
-      p.geometricGaloisFrobenius.hom (𝟙 _) (by simp)
+      p.geometricGaloisFrobenius.asIso.hom (𝟙 _) (by simp)
       (by rw [Category.comp_id, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj]))
     (by
       change _ ≫ Limits.pullback.snd _ _ = Limits.pullback.snd _ _ ≫ _
@@ -158,29 +159,29 @@ noncomputable def pullbackMapIsoIso (P₀ : C.FiniteEtale) :
   hom_inv_id := by
     apply hom_ext
     change Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) ≫
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.inv (𝟙 _) (by simp) (by simp) ≫
       Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.hom (𝟙 _) (by simp) (by simp) = 𝟙 _
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.hom (𝟙 _) (by simp) (by simp) = 𝟙 _
     apply Limits.pullback.hom_ext <;> simp
   inv_hom_id := by
     apply hom_ext
     change Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.hom (𝟙 _) (by simp) (by simp) ≫
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.hom (𝟙 _) (by simp) (by simp) ≫
       Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) = 𝟙 _
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.inv (𝟙 _) (by simp) (by simp) = 𝟙 _
     apply Limits.pullback.hom_ext <;> simp
 
 lemma pullbackMapIsoIso_hom_naturality {P₀ Q₀ : C.FiniteEtale} (φ : P₀ ⟶ Q₀) :
     (pullback p.geometricFiberProj).map φ ≫ (pullbackMapIsoIso p Q₀).hom =
       (pullbackMapIsoIso p P₀).hom ≫
-        (FiniteEtale.mapIso p.geometricGaloisFrobenius).map
+        (FiniteEtale.mapIso p.geometricGaloisFrobenius.asIso).map
           ((pullback p.geometricFiberProj).map φ) := by
   apply hom_ext
   change ((pullback p.geometricFiberProj).map φ).hom.left ≫
       Limits.pullback.map Q₀.obj.hom p.geometricFiberProj Q₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) =
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.inv (𝟙 _) (by simp) (by simp) =
     Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) ≫
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.inv (𝟙 _) (by simp) (by simp) ≫
       ((pullback p.geometricFiberProj).map φ).hom.left
   rw [pullback_map_hom_left]
   apply Limits.pullback.hom_ext <;> simp
@@ -188,7 +189,7 @@ lemma pullbackMapIsoIso_hom_naturality {P₀ Q₀ : C.FiniteEtale} (φ : P₀ �
 lemma pullbackMapIsoIso_hom_hom_left (P₀ : C.FiniteEtale) :
     (pullbackMapIsoIso p P₀).hom.hom.left =
       Limits.pullback.map P₀.obj.hom p.geometricFiberProj P₀.obj.hom p.geometricFiberProj
-        (𝟙 _) p.geometricGaloisFrobenius.inv (𝟙 _) (by simp) (by simp) :=
+        (𝟙 _) p.geometricGaloisFrobenius.asIso.inv (𝟙 _) (by simp) (by simp) :=
   rfl
 
 omit [Finite K] in
@@ -205,7 +206,7 @@ lemma sectionOfPoint_congr (A : FiniteEtaleAlgebra K)
 lemma comp_specMap_frobenius (A : FiniteEtaleAlgebra K)
     (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1)) :
     u ≫ Spec.map (CommRingCat.ofHom (A.frobenius : A.1 →+* A.1)) =
-      (specGeometricFrobenius K).inv ≫ u := by
+      (specGeometricFrobenius K).asIso.inv ≫ u := by
   let := Fintype.ofFinite K
   rw [Iso.eq_inv_comp, specGeometricFrobenius_hom, ← Spec.map_preimage u, ← Spec.map_comp,
     ← Spec.map_comp]
@@ -224,7 +225,7 @@ lemma comp_specMap_frobenius (A : FiniteEtaleAlgebra K)
 variable [ConnectedSpace C] [ConnectedSpace p.geometricFiber]
   {t : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber} {s : Spec (.of (AlgebraicClosure K)) ⟶ C}
   (τ : pullback p.geometricFiberProj ⋙ fiber t ≅ fiber s)
-  (τF : FiniteEtale.mapIso p.geometricGaloisFrobenius ⋙ fiber t ≅ fiber t)
+  (τF : FiniteEtale.mapIso p.geometricGaloisFrobenius.asIso ⋙ fiber t ≅ fiber t)
 
 /-- The automorphism `F_s ≅ F_t ∘ b ≅ F_t ∘ g_* ∘ b ≅ F_t ∘ b ≅ F_s` of the fibre functor of
 `C₀` induced by the transport `τF` along the geometric Galois Frobenius and the path `τ`. -/
@@ -259,13 +260,13 @@ variable (G' : Type u) [Group G'] [TopologicalSpace G'] [IsTopologicalGroup G'] 
 /-- The Frobenius element `w ∈ π₁(C₀, s)`: the element acting on the fibre functor as
 `AlgebraicGeometry.Scheme.FiniteEtale.frobeniusAut`. -/
 noncomputable def frobeniusElement : G :=
-  (toAutMulEquiv (fiber s) G).symm (frobeniusAut p τ τF)
+  (toAutMulEquiv (fiber s) G).symm (.of (frobeniusAut p τ τF))
 
 omit [ConnectedSpace p.geometricFiber] in
 lemma frobeniusElement_smul (P₀ : C.FiniteEtale) (y : (fiber s).obj P₀) :
     frobeniusElement p τ τF G • y = (frobeniusAut p τ τF).hom.app P₀ y := by
   rw [← toAut_hom_app_apply (F := fiber s) (G := G)]
-  change ((toAutMulEquiv (fiber s) G) ((toAutMulEquiv (fiber s) G).symm _)).hom.app P₀ y = _
+  change ((toAutMulEquiv (fiber s) G) ((toAutMulEquiv (fiber s) G).symm _)).asIso.hom.app P₀ y = _
   rw [MulEquiv.apply_symm_apply]
 
 omit [Finite K] in
@@ -298,7 +299,8 @@ omit [ConnectedSpace C] [ConnectedSpace p.geometricFiber] in
 lemma sectionOfPoint_comp_pullbackMapIsoIso (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1))
     (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
     sectionOfPoint p A u hu ≫ (pullbackMapIsoIso p (constantCover p A)).hom.hom.left =
-      p.geometricGaloisFrobenius.inv ≫ sectionOfPoint p A ((specGeometricFrobenius K).hom ≫ u)
+      p.geometricGaloisFrobenius.asIso.inv ≫
+        sectionOfPoint p A ((specGeometricFrobenius K).asIso.hom ≫ u)
         (by rw [Category.assoc, hu, specGeometricFrobenius_hom_comp_specAlgebraicClosure]) := by
   rw [pullbackMapIsoIso_hom_hom_left]
   apply hom_ext_pullback_constantCover
@@ -311,7 +313,7 @@ lemma sectionOfPoint_comp_arithmeticFrobenius
     (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
     sectionOfPoint p A u hu ≫
       ((pullback p.geometricFiberProj).map (arithmeticFrobenius p A).hom).hom.left =
-      sectionOfPoint p A ((specGeometricFrobenius K).inv ≫ u)
+      sectionOfPoint p A ((specGeometricFrobenius K).asIso.inv ≫ u)
         (by rw [Category.assoc, hu, Iso.inv_comp_eq,
           specGeometricFrobenius_hom_comp_specAlgebraicClosure]) := by
   rw [pullback_map_hom_left]
@@ -339,8 +341,8 @@ theorem mem_weilGroup_frobeniusElement [GeometricallyConnected p]
   set u := pointOfFiber p A z
   have hu := pointOfFiber_comp_specHom p ht A z
   let x₁ := (fiber t).map (pullbackMapIsoIso p (constantCover p A)).hom z
-  have hx₁ : x₁.left = t ≫ p.geometricGaloisFrobenius.inv ≫
-      sectionOfPoint p A ((specGeometricFrobenius K).hom ≫ u)
+  have hx₁ : x₁.left = t ≫ p.geometricGaloisFrobenius.asIso.inv ≫
+      sectionOfPoint p A ((specGeometricFrobenius K).asIso.hom ≫ u)
         (by rw [Category.assoc, hu, specGeometricFrobenius_hom_comp_specAlgebraicClosure]) := by
     rw [fiber_map_left, hz, Category.assoc, sectionOfPoint_comp_pullbackMapIsoIso]
   have hz' := transport_section t τF _ _ (sectionOfPoint_snd p A _ _) x₁ hx₁

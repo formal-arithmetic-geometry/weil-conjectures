@@ -19,7 +19,10 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseRationalScalarFiberMa
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralFibreScalarComparison
 
 /-! # Rational coefficient comparisons and their path squares
-Source: Deligne, Weil II (1.1.1) c), d), pp.146-147.
+
+## References
+
+* Deligne, Weil II (1.1.1) c), d), pp.146-147
 -/
 
 @[expose] public noncomputable section

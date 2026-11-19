@@ -27,12 +27,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Pointwise basic-open refinement of an open-immersion cover of an affine scheme.
-
-Given an affine scheme `X` and an open-immersion family `f i : Y i ⟶ X` whose
-ranges cover `X`, for each point `x : X` we extract an index `i x : ι` (a chart
-containing `x`) and a global section `g x : Γ(X, ⊤)` whose basic open `D(g x)`
-contains `x` and is contained in the range of `f (i x)`. -/
+/-- Pointwise basic-open refinement of an open-immersion cover `f i : Y i ⟶ X` of an
+affine scheme `X`: for each `x : X` there are an index `i x` and a global section
+`g x : Γ(X, ⊤)` with `x ∈ D(g x)` and `D(g x) ≤ (f (i x)).opensRange`. -/
 lemma exists_basicOpen_refinement_of_isAffine_cover
     {X : Scheme.{u}} [IsAffine X] {ι : Type*} {Y : ι → Scheme.{u}}
     (f : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (f i)]
@@ -48,9 +45,8 @@ lemma exists_basicOpen_refinement_of_isAffine_cover
     (isAffineOpen_top X).exists_basicOpen_le (V := (f (i x)).opensRange) ⟨x, hi x⟩ trivial
   exact ⟨i, g, hg, hle⟩
 
-/-- Variant of `exists_basicOpen_refinement_of_isAffine_cover` packaging the basic
-opens as `Scheme` morphisms factoring through the cover: for each `x : X` we
-get a lift `e x : D(g x) ⟶ Y (i x)` satisfying `e x ≫ f (i x) = (D(g x)).ι`. -/
+/-- Variant of `exists_basicOpen_refinement_of_isAffine_cover` providing lifts
+`e x : D(g x) ⟶ Y (i x)` with `e x ≫ f (i x) = (D(g x)).ι`. -/
 lemma exists_basicOpen_lift_of_isAffine_cover
     {X : Scheme.{u}} [IsAffine X] {ι : Type*} {Y : ι → Scheme.{u}}
     (f : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (f i)]

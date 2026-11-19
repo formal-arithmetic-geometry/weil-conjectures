@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 /-! # Diagonal sections for the étale-to-pro-étale comparison
 
-Source: Stacks Project, Tag 0GLZ.
+## References
+
+* Stacks Project, Tag 0GLZ, the identification of F with its comparison restriction
+* Sites, Tags 03CB and 03CC
 -/
 
 @[expose] public section
@@ -54,22 +57,7 @@ private noncomputable def adj {S T : Scheme.{u}} (f : T ⟶ S) := by
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Diagonal sections commute with a morphism of étale objects, using the same
-terminal transport as the comparison sheaf's restriction law.
-
-Source: Stacks Project, Tag 0GLZ, the identification of F with its comparison
-restriction; Sites, Tags 03CB and 03CC.
-(blueprint: lem-cbc-comparison-diagonal-section-naturality).
-Proof: expand both diagonal sections as the étale inverse-image unit followed
-by restriction along the diagonal. Naturality of the inverse-image unit moves
-the diagonal restriction through the unit for g.left. The composition-unit
-identity identifies the two consecutive units for U.hom and g.left with the
-unit for V.hom, after the canonical pullback-pasting isomorphism. In terminal
-transport, the inverse of the same composition isomorphism cancels it.
-Naturality of the remaining unit moves F(g)(s) to the pulled-back map of g.
-The resulting maps from V to the relevant fibre products agree: their
-projections to U and V are respectively g.left and the identity. Pullback
-uniqueness and the presheaf composition law identify the restrictions. This
-proves the equality for every s, including on empty objects. -/
+terminal transport as the comparison sheaf's restriction law. -/
 theorem proEtaleComparisonDiagonalSection_naturality {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (U V : X.Etale) (g : V ⟶ U) (s : F.obj.obj (op U)) :

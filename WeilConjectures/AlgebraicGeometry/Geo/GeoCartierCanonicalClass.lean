@@ -27,8 +27,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Apply exact comparison inverse image to the uniquely normalized ordinary class
 and identify its supported source by the specified mate.
-Source: blueprint sk-lem-geo-cartier, opening comparison paragraph
-(blueprint: def-sfb-geo-cartier-canonical-class). -/
+Source: blueprint lemma-cycle-class-cartier-divisor, opening comparison paragraph
+(blueprint: lemma-cycle-class-cartier-divisor). -/
 def geoCartierCanonicalClass (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0) {D Z : Scheme.{u}}
     (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
@@ -38,7 +38,7 @@ def geoCartierCanonicalClass (A : Type (u + 1)) [CommRing A] [Finite A]
       (comparisonUpperStar (ModuleCat.{u + 1} A) Z)) (zero_add 2)
 
 /-- The comparison equation holds for the actual supported-source mate.
-Source: blueprint sk-lem-geo-cartier, opening comparison paragraph
+Source: blueprint lemma-cycle-class-cartier-divisor, opening comparison paragraph
 (blueprint: def-sfb-geo-cartier-canonical-class).
 Proof: compose the inverse source mate in the construction with its forward map.
 Associativity of Yoneda composition and the inverse identities cancel them. -/

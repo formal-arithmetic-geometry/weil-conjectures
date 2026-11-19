@@ -16,13 +16,17 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModul
 /-!
 # Specified etale-origin witnesses for constant pro-etale coefficients
 
-Source: blueprint, proper base change, etale-origin witness; Stacks Project Tag 099R
-(blueprint: def-weil-pbc-etale-origin-witness).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.EtaleOriginWitness`:
-  the recorded construction or statement of this node.
+  the data witnessing an étale origin.
+
+## References
+
+* Stacks Tag 00WJ
+* Stacks Tag 00YV
+* Stacks 03DA, 09BT
+* Stacks 099R, 09BT
 -/
 
 @[expose] public section
@@ -37,13 +41,11 @@ namespace AlgebraicGeometry.Scheme
 
 variable (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Constant commutative coefficients in the module universe of the small site.
-Source: Stacks Tag 099R (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Constant commutative coefficients in the module universe of the small site. -/
 noncomputable abbrev etaleOriginRing : Sheaf (ProEt.topology T) CommRingCat.{u + 1} :=
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of Λ)
 
-/-- Constant scalar sections into the specified constant commutative ring sheaf.
-Source: Stacks Tags 00YV and 099R (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Constant scalar sections into the specified constant commutative ring sheaf. -/
 noncomputable def etaleOriginScalars :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of Λ) ⟶
       ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -52,11 +54,7 @@ noncomputable def etaleOriginScalars :
     (toSheafify (ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of Λ)))
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
 
-/-- Constant scalar sections are locally bijective also after forgetting commutativity.
-Source: Stacks Tags 00YV and 00WJ (blueprint: def-weil-pbc-etale-origin-witness).
-Proof: the sheafification unit is locally bijective. The forgetful functor preserves
-finite limits and filtered colimits; its underlying section maps are the same set maps.
-The local injectivity and local surjectivity conditions therefore remain unchanged. -/
+/-- Constant scalar sections are locally bijective also after forgetting commutativity. -/
 theorem etaleOriginScalars_locallyBijective :
     Presheaf.IsLocallyInjective (ProEt.topology T) (etaleOriginScalars T Λ) ∧
       Presheaf.IsLocallySurjective (ProEt.topology T) (etaleOriginScalars T Λ) := by
@@ -74,32 +72,25 @@ theorem etaleOriginScalars_locallyBijective :
           (CategoryTheory.forget CommRingCat.{u + 1}))
     infer_instance
 
-/-- Local injectivity for associated module sheafification.
-Source: Stacks Tag 00WJ (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Local injectivity for associated module sheafification. -/
 noncomputable instance etaleOriginScalars_isLocallyInjective :
     Presheaf.IsLocallyInjective (ProEt.topology T) (etaleOriginScalars T Λ) :=
   (etaleOriginScalars_locallyBijective T Λ).1
 
-/-- Local surjectivity for associated module sheafification.
-Source: Stacks Tag 00WJ (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Local surjectivity for associated module sheafification. -/
 noncomputable instance etaleOriginScalars_isLocallySurjective :
     Presheaf.IsLocallySurjective (ProEt.topology T) (etaleOriginScalars T Λ) :=
   (etaleOriginScalars_locallyBijective T Λ).2
 
 /-- Canonical realization of fixed-ring module sheaves over the constant ring sheaf.
-The module presheaf is the recorded realization and the scalar map is constant sections.
-Source: Stacks Tag 00YV (blueprint: def-weil-pbc-etale-origin-witness). -/
+The module presheaf is the recorded realization and the scalar map is constant sections. -/
 noncomputable def etaleOriginRealization :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} Λ) ⥤
       proEtaleRingModules T (etaleOriginRing T Λ) :=
   sheafToPresheaf _ _ ⋙ ProEtale.finiteCoefficientModulePresheaf T.ProEt Λ ⋙
     PresheafOfModules.sheafification (etaleOriginScalars T Λ)
 
-/-- The realization is an exact additive equivalence.
-Source: Stacks Tag 00YV (blueprint: def-weil-pbc-etale-origin-witness).
-Proof: locally every section of the constant ring sheaf is a constant scalar, so a
-fixed Λ-action extends uniquely to its local sections. Sheaf gluing gives the inverse
-functor and its unit and counit. This equivalence preserves kernels, cokernels and addition. -/
+/-- The realization is an exact additive equivalence. -/
 theorem etaleOriginRealization_properties :
     (etaleOriginRealization T Λ).Additive ∧
       PreservesFiniteLimits (etaleOriginRealization T Λ) ∧
@@ -113,25 +104,21 @@ theorem etaleOriginRealization_properties :
   exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance,
     this⟩
 
-/-- Additivity of the constant-coefficient realization.
-Source: Stacks Tag 00YV (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Additivity of the constant-coefficient realization. -/
 noncomputable instance etaleOriginRealization_additive :
     (etaleOriginRealization T Λ).Additive := (etaleOriginRealization_properties T Λ).1
 
-/-- Left exactness of the constant-coefficient realization.
-Source: Stacks Tag 00YV (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Left exactness of the constant-coefficient realization. -/
 noncomputable instance etaleOriginRealization_preservesFiniteLimits :
     PreservesFiniteLimits (etaleOriginRealization T Λ) :=
   (etaleOriginRealization_properties T Λ).2.1
 
-/-- Right exactness of the constant-coefficient realization.
-Source: Stacks Tag 00YV (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Right exactness of the constant-coefficient realization. -/
 noncomputable instance etaleOriginRealization_preservesFiniteColimits :
     PreservesFiniteColimits (etaleOriginRealization T Λ) :=
   (etaleOriginRealization_properties T Λ).2.2.1
 
-/-- The specified comparison inverse image, with its canonical constant-ring realization.
-Source: Stacks Tag 099R (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- The specified comparison inverse image, with its canonical constant-ring realization. -/
 noncomputable def etaleOriginComparison :
     DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (proEtaleRingModules T (etaleOriginRing T Λ)) :=
@@ -139,9 +126,7 @@ noncomputable def etaleOriginComparison :
     etaleOriginRealization T Λ).mapDerivedCategory
 
 /-- Reuse the recorded retained origin pair for every finite discrete ring, including
-noncommutative rings. Both the input and its etale antecedent are bounded below.
-Source: blueprint etale-origin witness, displayed pair; Stacks Tag 099R
-(blueprint: def-weil-pbc-etale-origin-witness). -/
+noncommutative rings. Both the input and its etale antecedent are bounded below. -/
 abbrev EtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (K : ProEtale.FiniteCoefficientDerivedCategoryPlus T Λ) :=
@@ -152,16 +137,11 @@ end AlgebraicGeometry.Scheme
 @[expose] public noncomputable section
 namespace AlgebraicGeometry.Scheme
 
-/-- The finite constant coefficient sheaf in its published function presentation.
-Source: Stacks 09BT (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- The finite constant coefficient sheaf in its function presentation. -/
 abbrev finiteOriginFunctionRing (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] := AdicCoefficients.coefficientRing T Λ
 
-/-- Constants-to-functions is the canonical finite coefficient isomorphism.
-Source: Stacks 09BT (blueprint: def-weil-pbc-etale-origin-witness).
-Proof: a finite-discrete-valued continuous function is locally constant. Its level sets
-cover the source by opens, so constant sections are locally bijective. Sheafification
-therefore turns the constants map into an isomorphism, including for the zero ring. -/
+/-- Constants-to-functions is the canonical finite coefficient isomorphism. -/
 theorem finiteOriginConstantComparison_isIso (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] : IsIso (AdicCoefficients.constantComparison T Λ) := by
   classical
@@ -200,15 +180,13 @@ theorem finiteOriginConstantComparison_isIso (T : Scheme.{u}) (Λ : Type (u + 1)
   exact ((ProEt.topology T).W_iff (AdicCoefficients.constants T Λ)).mp
     ((ProEt.topology T).W_of_isLocallyBijective (AdicCoefficients.constants T Λ))
 
-/-- The constants-to-functions transport retains exactly the published section map.
-Source: Stacks 09BT (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- The constants-to-functions transport retains exactly the section map. -/
 def finiteOriginConstantIso (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] : etaleOriginRing T Λ ≅ finiteOriginFunctionRing T Λ :=
   @asIso _ _ _ _ (AdicCoefficients.constantComparison T Λ)
     (finiteOriginConstantComparison_isIso T Λ)
 
-/-- Canonical exact restriction from function coefficients to constant coefficients.
-Source: Stacks 03DA, 09BT (blueprint: def-weil-pbc-etale-origin-witness). -/
+/-- Canonical exact restriction from function coefficients to constant coefficients. -/
 abbrev finiteOriginToConstant (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] :
     DerivedCategory (proEtaleRingModules T (finiteOriginFunctionRing T Λ)) ⥤
@@ -221,8 +199,7 @@ abbrev finiteOriginToConstant (T : Scheme.{u}) (Λ : Type (u + 1))
   exact (proEtaleRingRestrictScalars a).mapDerivedCategory
 
 /-- The same retained witness pair after the canonical finite coefficient transport.
-It contains a specified bounded-below etale object and its isomorphism, not just existence.
-Source: Stacks 099R, 09BT (blueprint: def-weil-pbc-etale-origin-witness). -/
+It contains a specified bounded-below etale object and its isomorphism, not just existence. -/
 structure FiniteEtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ]
     (K : DerivedCategory (proEtaleRingModules T (finiteOriginFunctionRing T Λ))) where

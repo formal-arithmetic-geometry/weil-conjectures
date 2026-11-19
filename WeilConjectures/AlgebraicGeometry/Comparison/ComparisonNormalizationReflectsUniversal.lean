@@ -27,13 +27,13 @@ private theorem reflects_universal_of_invertible_mate
     {L : A ⥤ B} {U : B ⥤ A} {L' : D ⥤ E} {U' : E ⥤ D}
     (a : L ⊣ U) (b : L' ⊣ U') (F : A ⥤ D) (G : B ⥤ E)
     [G.ReflectsIsomorphisms] (β : U ⋙ F ≅ G ⋙ U')
-    [IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans)]
+    [IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)))]
     {X : A} {Y : B} (d : X ⟶ U.obj Y)
     (h : StructuredArrow.IsUniversal
       (StructuredArrow.mk (F.map d ≫ β.hom.app Y) : StructuredArrow _ U')) :
     Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk d : StructuredArrow _ U)) := by
   let t := (a.homEquiv X Y).symm d
-  let m := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+  let m := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))
   have ht : a.unit.app X ≫ U.map t = d := by
     simpa only [Adjunction.homEquiv_unit] using (a.homEquiv X Y).apply_symm_apply d
   have hw : b.unit.app (F.obj X) ≫ U'.map (m.app X ≫ G.map t) =
@@ -84,11 +84,11 @@ private theorem comparison_coefficients_eq (Z : Scheme.{u})
     have hm := ProEtale.comparison_restrict_mate Z q
     have hs := congrArg
       (fun z ↦ ((mateEquiv (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} S) Z)
-        (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} R) Z)).symm z).natTrans)
+        (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} R) Z)).symm z))
       (congrArg (fun z ↦ TwoSquare.mk _ _ _ _ z) hm)
     simpa only [Equiv.symm_apply_apply, normalizationPullbackMate,
       ProEtale.comparisonAdjunction, ProEtale.comparisonLowerStar,
-      ProEtale.comparisonUpperStar, Sheaf.restrictScalars, TwoSquare.natTrans,
+      ProEtale.comparisonUpperStar, Sheaf.restrictScalars,
       TwoSquare.mk] using hs.symm
   apply Iso.ext
   simp only [localIsomorphismComparisonCoefficients, he,
@@ -143,7 +143,7 @@ theorem comparisonNormalization_reflects_universal (Z : Scheme.{u})
   let b := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars (ProEt.topology Z) q)
   have : IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _
-      (ProEtale.pbcDerivedComparisonRestrict Z q).symm.hom)).natTrans) := by
+      (ProEtale.pbcDerivedComparisonRestrict Z q).symm.hom))) := by
     change IsIso (ProEtale.pbcComparisonReductionMap Z q)
     exact ProEtale.pbcComparisonReductionMap_isIso Z q
   exact reflects_universal_of_invertible_mate a b

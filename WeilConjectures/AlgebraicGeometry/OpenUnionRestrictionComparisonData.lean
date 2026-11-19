@@ -81,8 +81,6 @@ private theorem directComparison (X : Scheme.{u}) {A Y : X.Opens} (i : A ⟶ Y)
 
 attribute [local irreducible] Functor.mapDerivedCategory transportDerived
 
-set_option maxHeartbeats 400000 in
--- Transporting three localizations and their dependent comparison witnesses needs this limit.
 /-- Comparison equivalences and restriction isomorphisms on the three inverse image opens.
 Source: Stacks Project Tag 08BW, canonical restriction diagram.
 (blueprint: lem-sc-open-union-restriction-comparison-data).
@@ -141,7 +139,9 @@ theorem open_union_restriction_comparison_data
   classical
   rename_i dX dW dV dWV dY
   intro PW PV U T
-  obtain ⟨hO⟩ := nonempty_derivedOpenLocalization (W ⊔ V).toScheme
+  -- Bind each witness before elimination to avoid generalizing the dependent goal.
+  have hO := nonempty_derivedOpenLocalization (W ⊔ V).toScheme
+  obtain ⟨hO⟩ := hO
   let := hO
   let hD (Z : (W ⊔ V).toScheme.Opens) : HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toScheme.toRingedSpace)) :=
@@ -152,12 +152,15 @@ theorem open_union_restriction_comparison_data
   let := hU
   let := hT
   let := hI
-  obtain ⟨eW, ⟨qW⟩⟩ := @directComparison.{u, w} X W (W ⊔ V)
+  have hW := @directComparison.{u, w} X W (W ⊔ V)
     (homOfLE le_sup_left) dW dY hU
-  obtain ⟨eV, ⟨qV⟩⟩ := @directComparison.{u, w} X V (W ⊔ V)
+  obtain ⟨eW, ⟨qW⟩⟩ := hW
+  have hV := @directComparison.{u, w} X V (W ⊔ V)
     (homOfLE le_sup_right) dV dY hT
-  obtain ⟨eI, ⟨qI⟩⟩ := @directComparison.{u, w} X (W ⊓ V) (W ⊔ V)
+  obtain ⟨eV, ⟨qV⟩⟩ := hV
+  have hInt := @directComparison.{u, w} X (W ⊓ V) (W ⊔ V)
     (homOfLE (inf_le_left.trans le_sup_left)) dWV dY hI
+  obtain ⟨eI, ⟨qI⟩⟩ := hInt
   exact ⟨hU, hT, hI, eW, eV, qW, qV, eI, ⟨qI⟩⟩
 
 end

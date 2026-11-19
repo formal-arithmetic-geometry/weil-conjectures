@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 /-!
 # Coherence of comparison with quotient scalar extension
 
-Source: Stacks Tags 06YY, 07A4 and 09B1, coefficient-reduction refinement
-(blueprint: lem-weil-pbc-normalized-origin-comparison-coherence).
+## References
+
+* Stacks Tags 06YY, 07A4 and 09B1, coefficient-reduction refinement
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -69,7 +70,7 @@ private theorem mateUnit
     (e₁ : R₁ ≅ 𝟭 C) (e₂ : R₂ ≅ 𝟭 D) (X : C) :
     ((mateEquiv adj₁ adj₂).symm
       (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight e₁.hom F ≫ Functor.whiskerLeft F e₂.inv))).natTrans.app X ≫
+        (Functor.whiskerRight e₁.hom F ≫ Functor.whiskerLeft F e₂.inv))).app X ≫
       F.map ((adj₁.leftAdjointIdIso e₁).hom.app X) =
     (adj₂.leftAdjointIdIso e₂).hom.app (F.obj X) := by
   let u₁ := adj₁.leftAdjointIdIso e₁
@@ -322,7 +323,7 @@ private theorem comparisonScalarComp (T : Scheme.{u})
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) ψ))
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) χ))
     t₁ t₂ t₃ eA eB ht
-  have hmK := congrArg (fun w ↦ w.natTrans.app K) hm
+  have hmK := congrArg (fun w ↦ w.app K) hm
   dsimp only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app] at hmK

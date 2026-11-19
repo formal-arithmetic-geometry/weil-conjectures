@@ -88,7 +88,7 @@ of the pushforwards of the exchange formalism of `P`. -/
 lemma baseChange_eq_pfBaseChange (sq : CommSq g' f' f g) :
     P.baseChange sq =
       ((𝔽).pfBaseChange (SepFinType.homMk g') (SepFinType.homMk f') (SepFinType.homMk f)
-        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)) := by
   rw [baseChange, Adjunction.exchangeRight_eq_mateEquiv, ExchangeFormalism.pfBaseChange,
     P.boundedConstructiblePullbackSquareComparison_eq_sqIso, ← Iso.symm_hom,
     ExchangeFormalism.sqIso_symm]
@@ -103,7 +103,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_baseChange
     (sq : CommSq g' f' f g) :
     boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq =
       ((𝔽).baseChange (SepFinType.homMk g') (SepFinType.homMk f') (SepFinType.homMk f)
-        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)) := by
   rw [boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft,
     Adjunction.exchangeLeft_eq_mateEquiv_symm, ExchangeFormalism.baseChange,
     P.boundedConstructiblePullbackSquareComparison_eq_sqIso]
@@ -113,7 +113,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_baseChange
 cartesian square of open immersions is an isomorphism. -/
 lemma isIso_baseChange_exchangeFormalism (sq : IsPullback g' f' f g) :
     IsIso ((𝔽).baseChange (SepFinType.homMk g') (SepFinType.homMk f') (SepFinType.homMk f)
-      (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+      (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)) := by
   rw [← P.boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_baseChange]
   exact isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq
 
@@ -125,7 +125,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_hom_eq
     haveI := P.isIso_baseChange_exchangeFormalism sq
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).hom =
       inv ((𝔽).baseChange (SepFinType.homMk g') (SepFinType.homMk f') (SepFinType.homMk f)
-        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+        (SepFinType.homMk g) (SepFinType.homMk_comp_homMk sq.w)) := by
   rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso, Iso.symm_hom, asIso_inv]
   simp only [P.boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_baseChange]
 
@@ -143,7 +143,7 @@ variable {X Z Z₁ Y : Over (Spec (.of k))}
 with an identity as top side. -/
 lemma isIso_baseChange_exchangeFormalism_id (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk i) (SepFinType.homMk i₁)
-      (SepFinType.homMk h) (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w)).natTrans :=
+      (SepFinType.homMk h) (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w)) :=
   P.isIso_baseChange_exchangeFormalism sq
 
 /-- The inverse of the composition isomorphism of the pushforwards of the exchange formalism of

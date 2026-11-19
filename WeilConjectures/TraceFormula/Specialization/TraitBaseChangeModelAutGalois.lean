@@ -185,7 +185,7 @@ lemma toRingAut_eq_of_pow_eq_X (σ : GenericAut k' K) {n : ℕ} (hn : 0 < n)
   have hn'' : (n : traitGenericField k') ≠ 0 := fun h ↦ hn' (by rw [← map_natCast φ, h, map_zero])
   have : NeZero (n : traitGenericField k') := ⟨hn''⟩
   have : NeZero n := ⟨hn.ne'⟩
-  obtain ⟨ξ, hξ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (traitGenericField k') n
+  obtain ⟨ξ, hξ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot (traitGenericField k') n
   have hξ' : IsPrimitiveRoot (φ ξ) n := hξ.map_of_injective hφ
   have hζ : (z / φ w) ^ n = 1 := by rw [div_pow, hz, ← hz₀, div_self (pow_ne_zero _ hw0)]
   obtain ⟨i, -, hi⟩ := hξ'.eq_pow_of_pow_eq_one hζ

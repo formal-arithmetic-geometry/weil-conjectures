@@ -139,10 +139,10 @@ noncomputable def IsoSquare.dualizingComplexIso :
   asIso ((upperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y) ≫
     (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom)
 
-/-- Blueprint `sk-prop-sp-purity-bc` at the unit, for an isomorphism of squares, reduced to the
-single compatibility `hε` of the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`) with the
-exceptional base change, for the identification
+/-- Blueprint `proposition-compatibility-purity-base-change` at the unit, for an isomorphism of
+squares, reduced to the single compatibility `hε` of the composition isomorphisms
+`RΔ^! ω_{p₁} ≅ Λ_X` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`)
+with the exceptional base change, for the identification
 `AlgebraicGeometry.Etale.IsoSquare.dualizingComplexFstIso` of the dualizing complexes of the
 first projections: the statement of
 `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for `g`, `g'` isomorphisms. -/

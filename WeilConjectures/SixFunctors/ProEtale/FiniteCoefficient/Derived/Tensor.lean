@@ -77,7 +77,7 @@ variable [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
+/-- Blueprint `prose-03-02`: Derived pullback, tensor product, and
 internal Hom; the derived tensor product.
 
 The derived tensor product `- ⊗ᴸ - : D(X_proét) ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded
@@ -86,7 +86,7 @@ structure on `D(X_proét)` obtained from the K-flat left derivability structure.
 `A = ModuleCat R` it is `K₁ ⊗ᴸ_R K₂ = P ⊗_R K₂` for a K-flat resolution `P → K₁`
 (`AlgebraicGeometry.ProEtale.isLeftDerivedFunctor₂_derivedTensor`).
 
-(blueprint: `def-weil-derived-tensor`) -/
+(blueprint: `prose-03-02`) -/
 @[implicit_reducible]
 noncomputable def derivedTensor :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤

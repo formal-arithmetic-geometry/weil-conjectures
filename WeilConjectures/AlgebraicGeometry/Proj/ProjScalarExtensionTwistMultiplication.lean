@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistDat
 import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistSectionRestriction
 import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistLocalizationProduct
 
-/-! Multiplication part of the normalized scalar-extension twist laws.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws-multiplication). -/
+/-! Multiplication part of the normalized scalar-extension twist laws. -/
 
 @[expose] public section
 

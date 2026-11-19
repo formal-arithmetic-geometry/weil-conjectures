@@ -227,10 +227,12 @@ noncomputable def descentMap :
       (pullback.fst f f ≫ f)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ unit l (Limits.pullback f f)) :=
   descentMapFst f γ - descentMapSnd f
 
-set_option maxHeartbeats 2000000 in
--- The kernel needs time to unfold the composites of sheaf morphisms in `descentMap`.
 /-- The descent map is the difference of its two halves. -/
-lemma descentMap_eq : descentMap (l := l) f γ = descentMapFst f γ - descentMapSnd f := rfl
+lemma descentMap_eq : descentMap (l := l) f γ = descentMapFst f γ - descentMapSnd f := by
+  -- Compare section maps without unfolding the full composite sheaf morphisms.
+  apply Mod.hom_ext
+  ext T x
+  rfl
 
 /-- The map `T ×_X (W ×_X W) ⟶ T ×_X W` induced by the first projection. -/
 noncomputable abbrev descentρ₁ (T : X.ProEt) :

@@ -67,15 +67,15 @@ theorem realizationScalar_unit (X : A) :
   have hm : (mateEquiv b a
       (TwoSquare.mk _ _ _ _
         (((EA.toAdjunction.comp a).ofNatIsoRight k).leftAdjointUniq
-          (b.comp EB.toAdjunction)).hom)).natTrans =
+          (b.comp EB.toAdjunction)).hom)) =
       (realizationRestrictionFromInverse EA EB k).inv := by
     apply (mateEquiv EB.toAdjunction EA.toAdjunction).injective
     change (mateEquiv EB.toAdjunction EA.toAdjunction
       (mateEquiv b a (TwoSquare.mk _ _ _ _
         (((EA.toAdjunction.comp a).ofNatIsoRight k).leftAdjointUniq
-          (b.comp EB.toAdjunction)).hom))).natTrans =
+          (b.comp EB.toAdjunction)).hom))) =
       (mateEquiv EB.toAdjunction EA.toAdjunction
-        (realizationRestrictionFromInverse EA EB k).inv).natTrans
+        (realizationRestrictionFromInverse EA EB k).inv)
     rw [iterated_mateEquiv_conjugateEquiv, scalar_conjugate]
     apply (mateEquiv EB.toAdjunction EA.toAdjunction).symm.injective
     rw [Equiv.symm_apply_apply]
@@ -88,7 +88,7 @@ theorem realizationScalar_unit (X : A) :
   change EA.functor.map (b.unit.app X) ≫
     (mateEquiv b a (TwoSquare.mk _ _ _ _
       (((EA.toAdjunction.comp a).ofNatIsoRight k).leftAdjointUniq
-        (b.comp EB.toAdjunction)).hom)).natTrans.app (T.obj X) = _ at h
+        (b.comp EB.toAdjunction)).hom)).app (T.obj X) = _ at h
   rw [hm] at h
   have hh := congrArg
     (fun z ↦ z ≫ (realizationRestrictionFromInverse EA EB k).hom.app (T.obj X)) h
@@ -188,23 +188,22 @@ theorem scalarTranspose_inverse_mate
     (a : LA ⊣ QA) (b : LB ⊣ QB) (y : TY ⊣ VY) (z : TZ ⊣ VZ)
     (s : VY ⋙ LA ≅ LB ⋙ VZ) (e : LA ⋙ TZ ≅ TY ⋙ LB)
     (t : VZ ⋙ QA ≅ QB ⋙ VY)
-    (he : (mateEquiv y z e.hom).natTrans = s.hom)
-    (ht : (mateEquiv b a s.hom).natTrans = t.inv) (K : ZA) :
+    (he : (mateEquiv y z e.hom) = s.hom)
+    (ht : (mateEquiv b a s.hom) = t.inv) (K : ZA) :
     (y.homEquiv _ _).symm (QA.map (z.unit.app K) ≫ t.hom.app (TZ.obj K)) =
-      (mateEquiv a b e.inv).natTrans.app K := by
-  dsimp only [TwoSquare.natTrans] at he ht
+      (mateEquiv a b e.inv).app K := by
   have hc : conjugateEquiv (y.comp b) (a.comp z) e.hom = t.inv := by
     rw [← iterated_mateEquiv_conjugateEquiv y z a b e.hom, he, ht]
   have hi : conjugateIsoEquiv (y.comp b) (a.comp z) e = t.symm :=
     Iso.ext hc
   have hi' := congrArg Iso.inv hi
-  have hm : (mateEquiv z y (mateEquiv a b e.inv)).natTrans = t.hom := by
+  have hm : (mateEquiv z y (mateEquiv a b e.inv)) = t.hom := by
     exact (iterated_mateEquiv_conjugateEquiv a b y z e.inv).trans hi'
   apply (y.homEquiv _ _).injective
   rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
   have h := unit_mateEquiv z y (mateEquiv a b e.inv) K
   change QA.map (z.unit.app K) ≫
-    (mateEquiv z y (mateEquiv a b e.inv)).natTrans.app (TZ.obj K) = _ at h
+    (mateEquiv z y (mateEquiv a b e.inv)).app (TZ.obj K) = _ at h
   rw [hm] at h
   exact h
 

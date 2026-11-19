@@ -46,7 +46,6 @@ private theorem nativeSquare_apply
     (R.ring V) (S.ring V) (R.ring U) (S.ring U)
     (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g))).1 N W m
 
-set_option maxHeartbeats 800000 in
 -- Comparing concrete section-module functors requires elaborating the site transports.
 private theorem inverseOrdinaryCube (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) {R S : PurCompactSupport.Coefficients.{u}}

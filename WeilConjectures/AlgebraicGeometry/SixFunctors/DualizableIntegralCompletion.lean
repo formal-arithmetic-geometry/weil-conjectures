@@ -87,25 +87,7 @@ private theorem coneOfTriangle_milnor {A : Type*} [Category A]
   rw [hp, ht]
   exact hT
 
-/-- A dualizable object preserves the recorded continuous-coefficient derived completeness.
-
-Source: blueprint latest, det-lem-int-tensor-product.proof.md, first paragraph, final sentences.
-(blueprint: lem-sfb-dualizable-integral-completion).
-
-Proof: a right dual gives an adjunction with tensoring by M as its right adjoint,
-so this functor preserves countable products. Its exactness preserves Milnor triangles
-and hence sequential homotopy limits. The finite reduction tower of M tensor N is
-naturally isomorphic to the tensor by M of the reduction tower of N, by the coherent
-scalar realization and derived tensor associativity. Completeness of N identifies N
-with its actual strict Roos output. Tensor that output's Milnor cone and transport its
-tower along the comparison. A K-flat representative of M tensor N gives another Roos
-cone for the same tower, so uniqueness of homotopy limits identifies their vertices.
-The latter Roos output is complete by isDerivedComplete_roos. Compose its K-flat
-representative isomorphism with the vertex isomorphism and the tensor of N's completion
-isomorphism. This supplies the required representative for M tensor N, retaining the
-actual invertible augmentation of the complete Roos output. No equality of augmentation
-maps is inferred merely from their quotient projections. The argument also applies to
-zero objects and the empty scheme. -/
+/-- A dualizable object preserves the recorded continuous-coefficient derived completeness. -/
 theorem dualizableIntegralCompletion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -104,7 +104,7 @@ lemma IsTwistedSection.ofPullbackCover {π : T ⟶ Y} {τ : ↥(pullback (pullba
   have e₂ : P₂ ≫ pullback.snd _ _ = pullback.snd _ _ ≫ ψ := by simp [P₂]
   have e₃ : P₂ ≫ twistedPairMap (pullback.snd f π) (𝟙 T) ≫ twistedPairMap f π =
       twistedPairMap f π := by
-    apply pullback.hom_ext <;> (simp [P₂, ψ, twistedPairMap]; try rfl)
+    apply pullback.hom_ext <;> simp [P₂, ψ, twistedPairMap]
   refine ⟨hτ.1.comp_continuous ψ.base.hom.continuous, fun w ↦ ?_⟩
   have := hτ.2 (P₂.base w)
   have h₁ := congrArg (fun g ↦ g.base w) e₁

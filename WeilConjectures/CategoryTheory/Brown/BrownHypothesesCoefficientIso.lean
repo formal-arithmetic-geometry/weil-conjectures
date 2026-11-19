@@ -53,7 +53,7 @@ private theorem localizingClosure_map_of_preservesColimits
     [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
     (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
-    [PreservesColimitsOfSize.{v, v} F]
+    [PreservesColimitsOfSize.{w, w} F]
     (S : ObjectProperty C) (T : ObjectProperty D) (hST : S ≤ T.inverseImage F) :
     localizingClosure S ≤ (localizingClosure T).inverseImage F := by
   intro M hM P hP hTP

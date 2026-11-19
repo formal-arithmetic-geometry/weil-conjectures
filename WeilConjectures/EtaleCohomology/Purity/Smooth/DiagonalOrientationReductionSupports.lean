@@ -24,7 +24,7 @@ Together with the identifications `Ψ Λ_X ≅ Λ'_X` pulled back from the termi
 compatible family of identifications `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]`
 (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData`), this makes `Ψ` a change of
 coefficients with supports (`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`,
-blueprint `det-sp-purity-coefficient-change`), to which
+blueprint `proposition-compatibility-purity-change-coefficients`), to which
 `AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso` applies.
 
 ## Main definitions
@@ -92,7 +92,7 @@ noncomputable def derivedExtendScalarsLowerStarMap :
       derivedExtendScalars hρ ha Z ⋙ R((i)_*[ModuleCat.{u + 1} Λ']) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') i)
-    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsPullbackIso hρ ha i).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsPullbackIso hρ ha i).inv))
 
 omit [IsClosedImmersion i] in
 /-- The comparison `Ψ Ri_* ⟶ Ri_* Ψ` followed by the counit of `Li^* ⊣ Ri_*`. -/
@@ -182,7 +182,7 @@ adjunctions `Ri_! ⊣ Ri^!`, of the commutation `Ψ ⋙ Ri_! ≅ Ri_! ⋙ Ψ`. -
 noncomputable def derivedExtendScalarsUpperShriekMap :
     R(i)^![Λ] ⋙ derivedExtendScalars hρ ha Z ⟶ derivedExtendScalars hρ ha X ⋙ R(i)^![Λ'] :=
   (mateEquiv (rightDerivedUpperShriekAdjunction Λ i) (rightDerivedUpperShriekAdjunction Λ' i)
-    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsLowerShriekIso hρ ha i).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedExtendScalarsLowerShriekIso hρ ha i).inv))
 
 /-- The comparison `Ψ Ri^! ⟶ Ri^! Ψ` is compatible with the counits of `Ri_! ⊣ Ri^!`. -/
 lemma map_derivedExtendScalarsUpperShriekMap_app_comp_counit (L : 𝐃(X, Λ)) :
@@ -262,7 +262,8 @@ structure DerivedExtendScalarsTateShiftData where
 
 variable [Finite Λ] [Finite Λ']
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **The reduction of coefficients as a change of coefficients with supports.** For a surjective
 morphism `ρ : Λ →+* Λ'` of finite coefficient rings with principal kernel (for instance

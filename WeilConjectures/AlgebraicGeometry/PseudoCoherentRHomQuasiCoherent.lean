@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherent
 import WeilConjectures.AlgebraicGeometry.DerivedLocallyBoundedBelowGlobal
 import WeilConjectures.AlgebraicGeometry.DerivedAlgebraQCohOfUnderlying
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Derived internal Hom from a pseudo-coherent algebra
 

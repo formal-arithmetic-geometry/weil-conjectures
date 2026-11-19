@@ -18,10 +18,9 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 /-!
 # Finite support diagrams for the open counit
 
-Source: Stacks Project, Tags 00WK and 09AE; finite representatives and the
-smaller-open comparison in Steps 9--11 of
-`lem-exc-proetale-proper-open-sheaf-comparison`.
-(blueprint: lem-exc-proetale-open-counit-finite-support-diagram)
+## References
+
+* Stacks Project, Tags 00WK and 09AE
 -/
 
 @[expose] public section
@@ -36,38 +35,12 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-set_option maxHeartbeats 800000 in
--- Elaborating both coefficient presentations requires more than the default heartbeat budget.
-
 /-- A section of the pushforward of an open extension has a finite support diagram
 coming from a quasi-compact open in the affine test object. The maps `a` and `b` are
 homomorphisms of section groups and intertwine the two specified open counits.
 Properness is not assumed: quasi-compactness and quasi-separatedness suffice for
 this finite-representative step, which makes no surjectivity assertion about either
-counit.
-
-Source: Stacks Project, Tags 00WK and 09AE; Steps 9--11 of the support argument in
-`lem-exc-proetale-proper-open-sheaf-comparison`.
-(blueprint: lem-exc-proetale-open-counit-finite-support-diagram).
-
-Proof: work in fixed-scalar coordinates and localize the already extended sheaf
-at `Q`. Weakly etale direct-image base change identifies the given section with a
-section on a quasi-compact, quasi-separated test scheme over `V ×_T Q`. The
-sheafification unit gives a covering on which it is zero or factors through the
-original open. A finite affine refinement encloses the images of its nonzero
-members in one compact open `O` inside the inverse image of `W`.
-
-Restrict the localized extended sheaf to the inverse image of `O` and realize this
-restriction to construct `M₀`. The smaller open counit is monic and invertible on
-objects factoring through the smaller open. Its local lifts therefore glue to a
-section `t`. Push its counit forward and compose with inverse weakly etale base
-change to obtain the additive map `b` and the equation `b t = y` in fixed-scalar
-coordinates. The localized larger counit becomes invertible after restriction to
-`O`. Transpose the restriction of `b` followed by this inverse under the `O`-open
-adjunction to obtain `a`; counit naturality gives the commuting square. Finally
-transport this square and `t` through the proved realization section equivalences,
-which intertwine the specified intrinsic counits. Empty covers and zero sections
-are included in the same gluing argument. -/
+counit. -/
 theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
     [QuasiCompact p] [QuasiSeparated p] (i : W ⟶ T) [IsOpenImmersion i]
     (M : proEtaleRingModules (pullback p i)
@@ -133,7 +106,10 @@ theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
   have hloc := ProEtale.openExtension_localSupport R
     (pullback.fst p i) ((sfIntrinsicModuleEquivalence (pullback p i) A).inverse.obj M)
       (Lr.obj Q₀)
-  obtain ⟨S, hS, hsupport⟩ := hloc s
+  -- Select witnesses without repeatedly eliminating into the large dependent diagram goal.
+  let S := (hloc s).choose
+  have hS := (hloc s).choose_spec.1
+  have hsupport := (hloc s).choose_spec.2
   let U : Q.left.Opens := Q.hom ⁻¹ᵁ i.opensRange
   have hs : ∀ (Z : V.ProEt) (f : Z ⟶ Lr.obj Q₀), S f →
       Set.range (f.left ≫ Q₀.hom ≫ pQ) ⊆ U ∨ N.obj.map f.op s = 0 := by
@@ -152,7 +128,12 @@ theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
       rintro _ ⟨z, rfl⟩
       exact ⟨(g ≫ pullback.snd p i) z, congrArg (fun t : Z.left ⟶ T ↦ t z) hw.symm⟩
     · exact Or.inr hz
-  obtain ⟨O, hOc, hOU, t, ht⟩ := ProEtale.finiteSupport_lifting R r pQ Q₀ U N s S hS hs
+  have hlift := ProEtale.finiteSupport_lifting R r pQ Q₀ U N s S hS hs
+  let O := hlift.choose
+  have hOc := hlift.choose_spec.1
+  have hOU := hlift.choose_spec.2.1
+  let t := hlift.choose_spec.2.2.choose
+  have ht := hlift.choose_spec.2.2.choose_spec
   have hO : (O : Set Q.left) ⊆ Q.hom ⁻¹' Set.range i := hOU
   let m₀ := (ProEtale.openImmersionRestriction (ModuleCat.{u + 1} R)
     (pullback.fst pQ O.ι)).obj G
@@ -195,7 +176,9 @@ theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
     change H.obj.map eI.inv.op (H.obj.map eI.hom.op yH) = _
     rw [← Functor.map_comp_apply, ← op_comp, eI.inv_hom_id, op_id, H.obj.map_id]
     rfl
-  obtain ⟨aS, haS⟩ := ProEtale.openCounit_localization_diagram R i H Q O hO H₀ β
+  have hdiag := ProEtale.openCounit_localization_diagram R i H Q O hO H₀ β
+  let aS := hdiag.choose
+  have haS := hdiag.choose_spec
   let CH := (ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} R) i).obj
     ((ProEtale.openImmersionRestriction (ModuleCat.{u + 1} R) i).obj H)
   let aH := (CH.obj.map eI.inv.op).hom.toAddMonoidHom.comp
@@ -211,8 +194,12 @@ theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
         (ModuleCat.{u + 1} R) i).counit.app H).hom eI.inv.op
           (aS.hom.app (op I) x)
     exact hn.trans (congrArg (H.obj.map eI.inv.op) h)
-  obtain ⟨eC, heC⟩ := sfIntrinsicCounit_conjugation A i F H eH (op Q)
-  obtain ⟨eC₀, heC₀⟩ := sfIntrinsicCounit_conjugation A O.ι F₀ H₀ eH₀ (op I)
+  have hconj := sfIntrinsicCounit_conjugation A i F H eH (op Q)
+  let eC := hconj.choose
+  have heC := hconj.choose_spec
+  have hconj₀ := sfIntrinsicCounit_conjugation A O.ι F₀ H₀ eH₀ (op I)
+  let eC₀ := hconj₀.choose
+  have heC₀ := hconj₀.choose_spec
   let z := (ProEtale.fixedSectionEquiv R eH (op Q)).trans
     (sfIntrinsicSectionEquiv A T F (op Q))
   let z₀ := (ProEtale.fixedSectionEquiv R eH₀ (op I)).trans

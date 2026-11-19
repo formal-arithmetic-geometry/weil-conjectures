@@ -20,7 +20,7 @@ Let `T ≅ Spec R` be the spectrum of a strictly henselian local ring and `t : S
 geometric point over the closed point. The global sections functor on `T_ét` is exact and
 computes the stalk at `t`. Consequently, for a bounded below complex `P` of étale sheaves of
 `Λ`-modules on `T` whose pullback `t^* P` vanishes, the derived global sections `RΓ(T, P)`
-vanish (blueprint `det-tf-restriction-zero-localization`, item (ii)).
+vanish (blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii)).
 
 ## Main results
 
@@ -151,7 +151,7 @@ lemma isZero_Γ_homology_of_isZero_mapDerivedCategoryPlus_upperStar
     (((t)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlusHomologyFunctorIso q).app P))
   exact Functor.map_isZero (DerivedCategory.Plus.homologyFunctor _ q) hP
 
-/-- Blueprint `det-tf-restriction-zero-localization`, item (ii): **derived global sections over
+/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii): **derived global sections over
 a strictly local scheme.** Let `T ≅ Spec R` with `R` strictly henselian local, `t : Spec Ω ⟶ T`
 a geometric point over the closed point and `P` a bounded below complex of étale sheaves of
 `Λ`-modules on `T` with `t^* P = 0`. Then `RΓ(T, P) = 0`: the global sections functor is exact,
@@ -171,7 +171,7 @@ theorem isZero_rightDerivedGlobalSections_of_isStrictlyHenselianLocalRing
   exact IsZero.of_iso (isZero_Γ_homology_of_isZero_mapDerivedCategoryPlus_upperStar e t ht P hP q)
     (((Sheaf.Γ T.smallEtaleTopology _).mapDerivedCategoryHomologyFunctorIso q).app _).symm
 
-/-- Blueprint `det-tf-restriction-zero-localization`, item (ii): for a closed immersion
+/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii): for a closed immersion
 `i : Z ⟶ T` into a strictly local scheme `T ≅ Spec R` and a bounded below complex `P` of étale
 sheaves of `Λ`-modules on `T` whose pullback to a geometric point `t` over the closed point
 vanishes, the middle term `RΓ(T, P)` of the localization triangle

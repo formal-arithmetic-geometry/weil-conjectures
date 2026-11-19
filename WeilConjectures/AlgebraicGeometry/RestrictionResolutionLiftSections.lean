@@ -116,7 +116,6 @@ private lemma raw_lift_sections {X Y : Scheme.{uBC}} (p : Y ⟶ X)
     _ = _ := congrArg (fun z ↦ Hom.app v ⊤ ≫ z)
       (app_naturality φ (eqToHom U.ι_image_top.symm))
 
-set_option maxHeartbeats 400000 in
 -- The nested complex functors and their restriction adjunction need extra elaboration fuel.
 /-- Evaluate a restriction-adjunction lift on sections, with arbitrary resolutions
 and their prescribed restriction comparisons. This calculation involves one scheme

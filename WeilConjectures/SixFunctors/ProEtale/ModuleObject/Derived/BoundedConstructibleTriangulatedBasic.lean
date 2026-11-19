@@ -70,6 +70,11 @@ instance isTriangulated_boundedConstructibleLowerStar (f : X ⟶ Y) :
   delta boundedConstructibleLowerStar
   infer_instance
 
+instance isTriangulated_boundedConstructibleLowerStarOfIsProper (f : X ⟶ Y) [IsProper f.left] :
+    (boundedConstructibleLowerStarOfIsProper ℓ f).IsTriangulated := by
+  delta boundedConstructibleLowerStarOfIsProper
+  infer_instance
+
 instance isTriangulated_boundedConstructibleOpenImmersionLowerShriek {U : Over (Spec (.of k))}
     [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
     [IsOpenImmersion j.left] :

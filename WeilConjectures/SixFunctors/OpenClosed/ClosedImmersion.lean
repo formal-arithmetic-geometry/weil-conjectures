@@ -249,16 +249,16 @@ instance Etale.isIso_upperStarLowerStarAdjunction_counit_app
     Etale.isIso_uliftSheafFiber_map_upperStarLowerStarAdjunction_counit_app A i _ H)
 
 include hJ in
-/-- Blueprint `prop-openclosed-lowerstar-fully-faithful`: **The counit of `i^* ⊣ i_*` is an
-isomorphism**, for a closed immersion `i : Z ⟶ X`,
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5`: **The counit of
+`i^* ⊣ i_*` is an isomorphism**, for a closed immersion `i : Z ⟶ X`,
 that is, `i^* i_* H ≅ H` naturally in the sheaf `H` on `Z`. -/
 instance Etale.isIso_upperStarLowerStarAdjunction_counit :
     IsIso (Etale.upperStarLowerStarAdjunction A i).counit :=
   NatIso.isIso_of_isIso_app _
 
 include hJ in
-/-- Blueprint `prop-openclosed-lowerstar-fully-faithful`: **The pushforward along a closed
-immersion is fully faithful.** -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5`: **The pushforward along
+a closed immersion is fully faithful.** -/
 noncomputable def Etale.fullyFaithfulLowerStar : (i)_*[A].FullyFaithful :=
   (Etale.upperStarLowerStarAdjunction A i).fullyFaithfulROfIsIsoCounit
 

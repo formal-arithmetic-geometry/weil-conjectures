@@ -21,7 +21,7 @@ points, and `Λ` a commutative ring. For a complex `M` of étale sheaves of `Λ`
 pullback `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived global sections
 (`CategoryTheory.Functor.rightDerivedPullback` along `π^*` and
 `AlgebraicGeometry.Etale.ΓPullback`) admits a trace `RΓ(Y', π^* M) ⟶ RΓ(Y, M)` such that the
-composite is multiplication by `d` (blueprint `det-tf-restriction-zero-trace-descent`).
+composite is multiplication by `d` (blueprint `lemma-descent-vanishing-finite-etale`).
 
 The trace is `RΓ(Y', π^* M) ⟶ RΓ(Y, π_* π^* M) ⟶ RΓ(Y, M)`: the pullback map of derived global
 sections along the exact functor `π_*`, followed by the counit `π_* π^* ⟶ 𝟭` of `π_* ⊣ π^*`. The
@@ -189,7 +189,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {Y Y' : Scheme.{u}} (π : Y' ⟶ Y) [
   [Etale π] (d : ℕ)
 
 /-- **The finite étale trace on derived global sections** (blueprint
-`det-tf-restriction-zero-trace-descent`): for a finite étale `π : Y' ⟶ Y` all of whose
+`lemma-descent-vanishing-finite-etale`): for a finite étale `π : Y' ⟶ Y` all of whose
 geometric fibres have `d` points, the pullback `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived global
 sections admits a trace `RΓ(Y', π^* M) ⟶ RΓ(Y, M)` whose composite with it is multiplication by
 `d`. -/
@@ -293,7 +293,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {Y Y' : Scheme.{u}} (π : Y' ⟶ Y) [
   [Etale π] (d : ℕ)
 
 /-- **The finite étale trace on the restriction of derived sections** (blueprint
-`det-tf-restriction-zero-trace-descent`): for a finite étale `π : Y' ⟶ Y` all of whose geometric
+`lemma-descent-vanishing-finite-etale`): for a finite étale `π : Y' ⟶ Y` all of whose geometric
 fibres have `d` points, the restriction `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived sections over the
 terminal étale schemes, followed by a trace, is multiplication by `d`. -/
 theorem exists_sectionsRestriction_app_comp_eq_smul

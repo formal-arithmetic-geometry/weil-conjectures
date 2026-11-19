@@ -19,7 +19,8 @@ with the image of `l₀`, form a basis `b = (l₀, t)` of `E`
 triangular: `det_b (l, t') = (l / l₀) · det_{b'} (g ∘ t')` (`Module.Basis.det_cons_of_exact`).
 
 This is the linear algebra behind the multiplicativity `det E ≅ L ⊗ det E'` of determinants of
-locally free sheaves in short exact sequences (blueprint `lem-sc-riemann-roch`).
+locally free sheaves in short exact sequences (blueprint
+`theorem-riemann-roch-coherent-serre-duality--1`).
 -/
 
 @[expose] public section

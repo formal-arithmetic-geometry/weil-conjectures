@@ -32,7 +32,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (R : CommRingCat.{u}) [IsWContractibleRing R]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize
 /-- Over the spectrum of a w-contractible ring, the unit of pro-étale sheaves of `Λ`-modules is

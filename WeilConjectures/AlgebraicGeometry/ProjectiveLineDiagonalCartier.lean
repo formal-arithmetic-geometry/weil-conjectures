@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 /-! # Cartier ideal of the projective-line diagonal
 
 Source: the affine-chart computation in blueprint
-lem-amb-p1-diagonal-integrals (auxiliary; not a blueprint node).
+lemma-class-diagonal-projective-line (auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The diagonal of the projective line over an arbitrary scheme has invertible ideal.
-Source: blueprint lem-amb-p1-diagonal-integrals, proof step 2
+Source: blueprint lemma-class-diagonal-projective-line, proof step 2
 (auxiliary; not a blueprint node).
 
 The proof is the standard four-chart computation: on equal-index product charts the

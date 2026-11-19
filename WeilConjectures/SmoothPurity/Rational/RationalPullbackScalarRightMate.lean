@@ -67,7 +67,7 @@ theorem rationalPullbackScalar_rightMate_isIso
     (aE : rationalDerivedPullback l E f ⊣ RE)
     (aF : rationalDerivedPullback l F f ⊣ RF) :
     IsIso ((mateEquiv aE aF
-      (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv))) := by
   let TX := sfRationalScalarExtension l E X 0
     (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι
   let TY := sfRationalScalarExtension l E Y 0
@@ -80,19 +80,19 @@ theorem rationalPullbackScalar_rightMate_isIso
     TX.leftAdjoint TY.leftAdjoint bX bY
   let α := TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv
   let δ := (mateEquiv bY bX).symm α
-  have hδ : δ.natTrans = e.hom := by
+  have hδ : δ = e.hom := by
     ext K
     apply (bX.homEquiv _ _).injective
-    change bX.unit.app _ ≫ TX.map (δ.natTrans.app K) =
+    change bX.unit.app _ ≫ TX.map (δ.app K) =
       bX.unit.app _ ≫ TX.map (e.hom.app K)
     rw [← he K]
     exact (unit_mateEquiv_symm bY bX α K).symm
-  have : IsIso δ.natTrans := by
+  have : IsIso δ := by
     rw [hδ]
     infer_instance
   have h := iterated_mateEquiv_conjugateEquiv bY bX aF aE δ
   rw [Equiv.apply_symm_apply] at h
-  change IsIso (mateEquiv aE aF α).natTrans
+  change IsIso (mateEquiv aE aF α)
   rw [h]
   infer_instance
 

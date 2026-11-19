@@ -107,7 +107,7 @@ differentials, which vanishes identically when `f` is inseparable (e.g. a Froben
 so for such `f` the comparison is the zero map. Downstream (`nonempty_dual_H_one_iso`) `f` is
 chosen by `exists_isFinite_flat_hom_projectiveLine`, which provides a separable `f` and `hf`.
 
-(blueprint: `lem-sc-finite-duality`, the trace identification) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, the trace identification) -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :

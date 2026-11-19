@@ -33,14 +33,15 @@ the determinant `Δ ∈ O` of their vectorised matrices is nonzero, and for `N` 
 ## Main statements
 
 - `Representation.exists_forall_isIrreducible_baseChange_of_congr`: blueprint
-  `lem-zl-finite-matrix-irreducibility`.
+  `lemma-detecting-irreducibility-finite-quotient--1`.
 
 ## Implementation notes
 
 The stable lattice `L` is recorded as a basis `b` of `V` in which all the matrices of `ρ` have
 entries in `O`; its existence for a continuous representation of a profinite group is
-`sk-p-real-integral` (`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`). Extension of
-scalars of `ρ` to a field `K` is `(Module.End.baseChangeHom E K V).toMonoidHom.comp ρ`.
+`proposition-lattices-representations-normal-scheme`
+(`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`). Extension of scalars of `ρ` to a field `K`
+is `(Module.End.baseChangeHom E K V).toMonoidHom.comp ρ`.
 -/
 
 @[expose] public section
@@ -76,7 +77,7 @@ theorem span_range_eq_top_of_det_ne_zero (c : Basis ι F M) (f : ι × ι → Mo
     Submodule.span F (Set.range f) = ⊤ := by
   have : FiniteDimensional F M := .of_basis c
   have hli : LinearIndependent F (c.endEquivPiProd ∘ f) :=
-    Matrix.linearIndependent_rows_iff_isUnit.mpr ((Matrix.isUnit_iff_isUnit_det _).mpr h.isUnit)
+    Matrix.linearIndependent_row_iff_isUnit.mpr ((Matrix.isUnit_iff_isUnit_det _).mpr h.isUnit)
   refine (LinearIndependent.of_comp c.endEquivPiProd.toLinearMap hli)
     |>.span_eq_top_of_card_eq_finrank' ?_
   rw [c.endEquivPiProd.finrank_eq, Module.finrank_fintype_fun_eq_card]
@@ -93,7 +94,7 @@ theorem exists_det_ne_zero_of_span_range_eq_top {α : Type*} (c : Basis ι F M)
   let e := (Basis.mk hli htop.ge).indexEquiv (Pi.basisFun F (ι × ι))
   refine ⟨a ∘ e.symm, ?_⟩
   exact ((Matrix.isUnit_iff_isUnit_det _).mp
-    (Matrix.linearIndependent_rows_iff_isUnit.mp (hli.comp e.symm e.symm.injective))).ne_zero
+    (Matrix.linearIndependent_row_iff_isUnit.mp (hli.comp e.symm e.symm.injective))).ne_zero
 
 end Module.Basis
 
@@ -167,8 +168,8 @@ variable {O E K G V ι : Type*} [CommRing O] [IsNoetherianRing O] [IsLocalRing O
   [Group G] [AddCommGroup V] [Module E V] [Fintype ι] [DecidableEq ι]
 
 /-- **Absolute irreducibility has a finite matrix witness**
-(blueprint: `lem-zl-finite-matrix-irreducibility`). Let `ρ` be a representation of `G` on an
-`E`-vector space `V` with basis `b`, in which the matrices of `ρ` have entries in `O`, and
+(blueprint: `lemma-detecting-irreducibility-finite-quotient--1`). Let `ρ` be a representation of `G`
+on an `E`-vector space `V` with basis `b`, in which the matrices of `ρ` have entries in `O`, and
 assume that `ρ` is irreducible over an algebraically closed field `K ⊇ E`. Then there is
 `N ≥ 1` such that every subgroup `H ≤ G` whose matrices are congruent modulo `𝔪ᴺ` to all the
 matrices of `ρ(G)` acts absolutely irreducibly on `V`: irreducibly after extension of scalars

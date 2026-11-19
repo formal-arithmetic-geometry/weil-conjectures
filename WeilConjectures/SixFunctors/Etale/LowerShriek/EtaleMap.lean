@@ -54,7 +54,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- **Extension by zero along an étale morphism** `v : W ⟶ X`, on `A`-valued sheaves: the
 sheafification of the presheaf `V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)` on `X_ét`, that is, the left
 Kan extension along the localization functor `W_ét ⟶ X_ét` followed by sheafification.
-(blueprint: `def-weil-pbc-etale-sum-extension`) -/
+(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
 noncomputable def Etale.etaleLowerShriek :
     Sheaf W.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.map ⊤ h)
@@ -98,7 +98,7 @@ instance Etale.preservesFiniteLimits_etaleLowerShriek :
 sends injective sheaves of `Λ`-modules to injective sheaves, since it has the exact left
 adjoint `v_!` (`AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction`,
 `AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek`).
-(blueprint: `lem-weil-pbc-etale-restriction-injectives`) -/
+(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
 theorem Etale.injective_upperStar_obj_of_etale [Etale v]
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
     Injective ((v)^*[ModuleCat.{u + 1} Λ].obj I) := by

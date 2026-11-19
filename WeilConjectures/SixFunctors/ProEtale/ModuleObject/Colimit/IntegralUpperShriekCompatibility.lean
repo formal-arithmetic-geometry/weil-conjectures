@@ -20,21 +20,22 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with 
 `k` a field of characteristic `p ≠ ℓ`. For a separated `k`-scheme of finite type `X` write
 `T_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦E⟧` for the extension of scalars `E_X ⊗ᴸ_{𝒪_{E,X}} -` on bounded
 constructible complexes (`ProEtale.boundedConstructibleExtendScalars`). This file proves the
-clauses of blueprint `sk-prop-scalar-six` on `Rf_*`, `Rf_!` and `f^!` for the coefficient change
-`𝒪_E ⟶ E`:
+clauses of blueprint `proposition-six-operations-change-coefficients` on `Rf_*`, `Rf_!` and `f^!`
+for the coefficient change `𝒪_E ⟶ E`:
 
-* **(Push)** (blueprint `det-prop-scalar-six-direct-image`): the comparison
+* **(Push)** (blueprint `lemma-change-coefficients-direct-image`): the comparison
   `γ : Rg_*^{𝒪_E} ⋙ T_Y ⟶ T_Z ⋙ Rg_*^E`, the composite of the unit of `g^* ⊣ Rg_*`, the pullback
   comparison (`ProEtale.CondensedRing.boundedConstructibleUpperStarExtendScalarsIso`) and the
   counit, that is, the mate of the pullback comparison
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarExtendScalars`), is an isomorphism
   (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarExtendScalars`);
-* **(Shriek)** (blueprint `det-prop-scalar-six-compact-support`): `j_!^{𝒪_E} ⋙ T_X ≅ T_U ⋙ j_!^E`
+* **(Shriek)** (blueprint `lemma-change-coefficients-compact-support`):
+`j_!^{𝒪_E} ⋙ T_X ≅ T_U ⋙ j_!^E`
   for an open immersion `j`
   (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekExtendScalarsIso`) and
   `Rf_!^{𝒪_E} ⋙ T_Y ≅ T_X ⋙ Rf_!^E` for every `f`, along the chosen compactification
   (`ProEtale.CondensedRing.boundedConstructibleLowerShriekExtendScalarsIso`);
-* **(Exceptional)** (blueprint `det-prop-scalar-six-exceptional`): the exchange
+* **(Exceptional)** (blueprint `lemma-change-coefficients-exceptional-inverse-image`): the exchange
   `β : Rf^!_{𝒪_E} ⋙ T_X ⟶ T_Y ⋙ Rf^!_E`, the mate of the inverse of (Shriek)
   (`ProEtale.CondensedRing.boundedConstructibleUpperShriekExtendScalars`), is an isomorphism
   (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekExtendScalars`).
@@ -42,7 +43,7 @@ clauses of blueprint `sk-prop-scalar-six` on `Rf_*`, `Rf_!` and `f^!` for the co
 Both isomorphism statements hold because `T_X` is the rationalization of `Dᵇc(X)⟦𝒪_E⟧`: it is a
 localization functor at the morphisms whose mapping cone is killed by a power of `ℓ`
 (`ProEtale.isLocalization_boundedConstructibleExtendScalars`, blueprint
-`sk-thm-sfb-rationalization-comparison`), and the mate of an isomorphism of left adjoints along
+`proposition-inverting-ell`), and the mate of an isomorphism of left adjoints along
 two rationalizations is an isomorphism
 (`CategoryTheory.Rationalization.isIso_mateEquiv_of_isLocalization`): on `Hom` groups it is the
 localization at `ℓ` of the adjunction bijection.
@@ -92,7 +93,7 @@ variable {Z Y : Over (Spec (.of k))}
   (g : Z ⟶ Y)
 
 /-- **(Push)** on bounded constructible complexes, for the inclusion `𝒪_E ⟶ E` (blueprint
-`det-prop-scalar-six-direct-image`): the comparison `γ : Rg_*^{𝒪_E} ⋙ T_Y ⟶ T_Z ⋙ Rg_*^E`, the
+`lemma-change-coefficients-direct-image`): the comparison `γ : Rg_*^{𝒪_E} ⋙ T_Y ⟶ T_Z ⋙ Rg_*^E`, the
 mate of the inverse of the pullback comparison under the adjunctions `g^* ⊣ Rg_*`, that is, the
 unit of `g^* ⊣ Rg_*`, the pullback comparison and the counit. -/
 noncomputable def boundedConstructibleLowerStarExtendScalars :
@@ -104,7 +105,7 @@ noncomputable def boundedConstructibleLowerStarExtendScalars :
     (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E g)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).inv
 
-/-- **(Push) is an isomorphism** for `𝒪_E ⟶ E` (blueprint `det-prop-scalar-six-direct-image`
+/-- **(Push) is an isomorphism** for `𝒪_E ⟶ E` (blueprint `lemma-change-coefficients-direct-image`
 (1)): the extension of scalars is a rationalization on both sides, and `γ` is the mate of the
 pullback comparison. -/
 theorem isIso_boundedConstructibleLowerStarExtendScalars :
@@ -192,7 +193,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationExtendScalars
 variable (f : X ⟶ Y)
 
 /-- **(Shriek)** on bounded constructible complexes, for the inclusion `𝒪_E ⟶ E` (blueprint
-`det-prop-scalar-six-compact-support`): `Rf_!^{𝒪_E} ⋙ T_Y ≅ T_X ⋙ Rf_!^E`, along the chosen
+`lemma-change-coefficients-compact-support`): `Rf_!^{𝒪_E} ⋙ T_Y ≅ T_X ⋙ Rf_!^E`, along the chosen
 compactification. -/
 noncomputable def boundedConstructibleLowerShriekExtendScalarsIso :
     PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 f ⋙
@@ -203,7 +204,7 @@ noncomputable def boundedConstructibleLowerShriekExtendScalarsIso :
     (compactificationOverField f)
 
 /-- **The exchange for `f^!`**, for the inclusion `𝒪_E ⟶ E` (blueprint
-`det-prop-scalar-six-exceptional`): the canonical natural transformation
+`lemma-change-coefficients-exceptional-inverse-image`): the canonical natural transformation
 `β : Rf^!_{𝒪_E} ⋙ T_X ⟶ T_Y ⋙ Rf^!_E`, the mate of the inverse of (Shriek)
 (`boundedConstructibleLowerShriekExtendScalarsIso`) under the adjunctions `Rf_! ⊣ Rf^!`. -/
 noncomputable def boundedConstructibleUpperShriekExtendScalars :
@@ -221,12 +222,12 @@ lemma boundedConstructibleUpperShriekExtendScalars_eq_mateEquiv :
       (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
         (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
         (TwoSquare.mk _ _ _ _
-          (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)).natTrans :=
+          (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)) :=
   rfl
 
 /-- **The exchange for `f^!` is an isomorphism** for `𝒪_E ⟶ E` (blueprint
-`det-prop-scalar-six-exceptional`): the extension of scalars is a rationalization on both sides,
-and `β` is the mate of the isomorphism (Shriek). -/
+`lemma-change-coefficients-exceptional-inverse-image`): the extension of scalars is a
+rationalization on both sides, and `β` is the mate of the isomorphism (Shriek). -/
 theorem isIso_boundedConstructibleUpperShriekExtendScalars :
     IsIso (boundedConstructibleUpperShriekExtendScalars ℓ E f) := by
   have := noetherianSpace_left_of_over X

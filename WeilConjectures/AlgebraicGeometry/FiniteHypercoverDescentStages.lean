@@ -19,8 +19,8 @@ set_option linter.privateModule false
 /-!
 # Supporting results for `sk-prop-h2`
 
-Supporting results for the blueprint unit `sk-prop-h2` of `sec-curve-estimates`, grouped from
-`FiniteHypercoverDescentParts`.
+Supporting results for the blueprint unit `sk-prop-h2` of
+`chap-Cohomology-of-torsion-sheaves-on-curves`, grouped from `FiniteHypercoverDescentParts`.
 -/
 
 @[expose] public section
@@ -956,7 +956,6 @@ private instance category {r : ℕ} : SmallCategory (FiniteSplitIndex r) where
       dsimp only [Hom, comp] at * <;> try contradiction
     all_goals first
       | rfl
-      | exact Category.assoc _ _ _
       | (obtain ⟨rfl⟩ := f; rfl)
 private def inclusion (r : ℕ) : (SimplexCategory.Truncated r)ᵒᵖ ⥤ FiniteSplitIndex r where
   obj := simplex

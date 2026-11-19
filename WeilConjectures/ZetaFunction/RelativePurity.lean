@@ -26,8 +26,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 
 Let `f : X₀ ⟶ Y₀` be a smooth proper morphism of pure relative dimension `d` of separated
 `k₀`-schemes of finite type, and `F` a lisse Weil sheaf on `X₀` which is punctually `ι`-pure of
-weight `w`. Then for every `i` (blueprint `prop-zl-smooth-proper-relative-purity`, the relative
-clauses of `sk-prop-smooth-proper-purity`):
+weight `w`. Then for every `i` (blueprint `theorem-purity-higher-direct-images-under`, the relative
+clauses of `theorem-purity-higher-direct-images-under`):
 
 - **(a)** `Rⁱf₀!F ≅ Rⁱf₀*F` as Weil sheaves, and this sheaf is lisse;
 - **(b)** it is punctually `ι`-pure of weight `w + i`.
@@ -37,10 +37,10 @@ The upper bound on the weights is the Deligne–Laumon direct-image theorem
 The lower bound in (b) is proved fibrewise rather than by the relative Verdier duality of the
 blueprint proof (Step 3), which needs `RHom`, `Rf^!` and the smooth orientation for Weil
 complexes (not available, see `WeilConjectures.WeilSheaf.Operations`). For a closed point `y`,
-proper base change to `Spec κ(y)` (`thm-weil-pbc-qbar`), the Leray isomorphism over the finite
-étale `Spec κ(y)` and purity of `Hⁱ(X_y ⊗ k̄, F)` for lisse coefficients (Deligne–Laumon and
-degreewise Poincaré duality `thm-pod-degreewise-perfectness-over-a-field` on the smooth proper
-fibre `X_y`) give purity of the stalk of `Rⁱf₀*F` at `y`.
+proper base change to `Spec κ(y)` (`theorem-purity-higher-direct-images-under--2`), the Leray
+isomorphism over the finite étale `Spec κ(y)` and purity of `Hⁱ(X_y ⊗ k̄, F)` for lisse coefficients
+(Deligne–Laumon and degreewise Poincaré duality `corollary-degreewise-duality-over-fields--1` on the
+smooth proper fibre `X_y`) give purity of the stalk of `Rⁱf₀*F` at `y`.
 
 ## Main statements
 
@@ -106,8 +106,8 @@ attribute [local instance] Compactification.over
 /-- **Proper coincidence.** For a proper morphism `f` of `k₀`-schemes the direct image with
 compact support is the direct image: for the chosen compactification `X ⟶[i] Z ⟶[g] Y` of `f`
 the open immersion `i` is proper, so that `Rf_! K = Rg_*(i_! K) ≅ Rg_*(i_* K) ≅ Rf_* K`, as Weil
-complexes (blueprint `prop-zl-smooth-proper-relative-purity`, Step 1, and
-`cor-cbc-proper-coincidence`). -/
+complexes (blueprint `theorem-purity-higher-direct-images-under`, Step 1, and
+`proposition-forgetting-supports-composition--3`). -/
 noncomputable def WeilComplex.derivedLowerShriekObjIsoDerivedLowerStarOfIsProper (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
@@ -145,7 +145,7 @@ noncomputable def WeilComplex.derivedLowerShriekObjIsoDerivedLowerStarOfIsProper
       K.obj
 
 /-- **Proper coincidence for higher direct images** (clause (a) of
-`prop-zl-smooth-proper-relative-purity`, first half): for a proper morphism `f` of `k₀`-schemes,
+`theorem-purity-higher-direct-images-under`, first half): for a proper morphism `f` of `k₀`-schemes,
 `Rⁱf₀!F ≅ Rⁱf₀*F` as Weil sheaves. -/
 noncomputable def WeilSheaf.higherLowerShriekObjIsoOfIsProper (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
@@ -170,10 +170,10 @@ variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Upper bound** (Step 2 of `prop-zl-smooth-proper-relative-purity`): for a proper morphism
+/-- **Upper bound** (Step 2 of `theorem-purity-higher-direct-images-under`): for a proper morphism
 `f` of separated `k₀`-schemes of finite type and a Weil sheaf `F` mixed of weights at most `w`,
 `Rⁱf₀*F ≅ Rⁱf₀!F` is mixed of weights at most `w + i`, by the Deligne–Laumon theorem
-`cor-zl-rfshriek-sheaf`. -/
+`theorem-direct-image-mixed-sheaf--1`. -/
 theorem isMixedOfWeightsAtMost_higherLowerStar_of_isProper {F : WeilSheaf k₀ l X} {w : ℝ}
     (hF : F.IsMixedOfWeightsAtMost ι w) (i : ℕ) :
     ((higherLowerStar f i).obj F).IsMixedOfWeightsAtMost ι (w + i) :=
@@ -182,7 +182,7 @@ theorem isMixedOfWeightsAtMost_higherLowerStar_of_isProper {F : WeilSheaf k₀ l
 
 omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- **Local constancy** (Step 1 of `prop-zl-smooth-proper-relative-purity`, second half of
+/-- **Local constancy** (Step 1 of `theorem-purity-higher-direct-images-under`, second half of
 clause (a)): for a smooth proper morphism `f` and a lisse Weil sheaf `F`, the higher direct
 images `Rⁱf₀*F` are lisse. The underlying `ℓ`-adic sheaf of `Rⁱf₀*F` is the higher direct image
 `Rⁱf̄_* F̄` along the base change `f̄` to the geometric fibres, forgetting the Weil structure
@@ -218,7 +218,7 @@ variable (d : ℕ) [SmoothOfRelativeDimension d f]
 omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 include d in
-/-- **Clause (b) of `prop-zl-smooth-proper-relative-purity`**: for a smooth proper morphism `f`
+/-- **Clause (b) of `theorem-purity-higher-direct-images-under`**: for a smooth proper morphism `f`
 of pure relative dimension `d` between separated `k₀`-schemes of finite type and a lisse Weil
 sheaf `F` punctually `ι`-pure of weight `w`, the sheaf `Rⁱf₀*F` is punctually `ι`-pure of weight
 `w + i`.
@@ -300,10 +300,10 @@ theorem isPunctuallyPureOfWeight_higherLowerStar {F : WeilSheaf k₀ l X} (hF : 
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 include d in
-/-- **Relative smooth-proper purity** (blueprint `prop-zl-smooth-proper-relative-purity`, and the
-relative clauses (a), (b) of `sk-prop-smooth-proper-purity`): let `f : X₀ ⟶ Y₀` be a smooth
-proper morphism of pure relative dimension `d` between separated `k₀`-schemes of finite type and
-`F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`. Then for every `i`:
+/-- **Relative smooth-proper purity** (blueprint `theorem-purity-higher-direct-images-under`, and
+the relative clauses (a), (b) of `theorem-purity-higher-direct-images-under`): let `f : X₀ ⟶ Y₀` be
+a smooth proper morphism of pure relative dimension `d` between separated `k₀`-schemes of finite
+type and `F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`. Then for every `i`:
 
 - (a) the canonical map `Rⁱf₀!F ⟶ Rⁱf₀*F` is an isomorphism of Weil sheaves, namely
   `(higherLowerShriekObjIsoOfIsProper f i F).hom`, and this sheaf is lisse;
@@ -320,9 +320,10 @@ theorem smooth_proper_relative_purity {F : WeilSheaf k₀ l X} (hF : F.IsLisse) 
 omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 include d in
-/-- The case of the constant sheaf (relative form of `cor-zl-purity-smooth-proper`): for a
-smooth proper morphism `f` of separated `k₀`-schemes of finite type, `Rⁱf₀*ℚ̄_ℓ` is punctually
-`ι`-pure of weight `i`, the constant sheaf being lisse and punctually pure of weight `0`. -/
+/-- The case of the constant sheaf (relative form of
+`corollary-purity-cohomology-smooth-proper-variety--1`): for a smooth proper morphism `f` of
+separated `k₀`-schemes of finite type, `Rⁱf₀*ℚ̄_ℓ` is punctually `ι`-pure of weight `i`, the
+constant sheaf being lisse and punctually pure of weight `0`. -/
 theorem isPunctuallyPureOfWeight_higherLowerStar_adicConstant (i : ℕ) :
     ((higherLowerStar f i).obj (adicConstant k₀ l X)).IsPunctuallyPureOfWeight ι i := by
   simpa using isPunctuallyPureOfWeight_higherLowerStar f d (isLisse_adicConstant k₀ l X)
