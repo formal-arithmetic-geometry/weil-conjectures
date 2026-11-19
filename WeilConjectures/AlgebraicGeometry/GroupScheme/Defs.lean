@@ -58,12 +58,12 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `lem-sc-mult-n-homomorphism`: The `n`-fold sum is a homomorphism.
+/-- Blueprint `definition-abelian-variety`: The `n`-fold sum is a homomorphism.
 
 Let `G` be a commutative group scheme over `K`. Then the `n`-fold sum map `[n] : G ⟶ G` is a
 homomorphism of group schemes: it is the `n`-th power of the homomorphism `𝟙 G` in the
 commutative monoid `G ⟶ G`, and such powers are homomorphisms
-(`CategoryTheory.MonObj.isMonHom_pow`, blueprint `lem-sc-mult-n-homomorphism`). -/
+(`CategoryTheory.MonObj.isMonHom_pow`, blueprint `definition-abelian-variety`). -/
 instance isMonHom_npow_id (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     IsMonHom (𝟙 G ^ n) :=
   MonObj.isMonHom_pow _ n
@@ -111,7 +111,7 @@ section Kernel
 
 variable {A B : Over (Spec (.of K))} [GrpObj B]
 
-/-- Blueprint `lem-sc-kernel-subgroup`: the kernel `ker f ⟶ A` of a morphism `f : A ⟶ B` to a
+/-- Blueprint `definition-abelian-variety--3`: the kernel `ker f ⟶ A` of a morphism `f : A ⟶ B` to a
 group scheme over `K` is a closed immersion.
 
 The unit section `Spec K ⟶ B` is a closed immersion, being a section of `B ⟶ Spec K` with
@@ -122,7 +122,7 @@ theorem isClosedImmersion_kerι (f : A ⟶ B) : IsClosedImmersion (GrpObj.kerι 
 
 variable [GrpObj A] (f : A ⟶ B) [IsMonHom f]
 
-/-- Blueprint `lem-sc-kernel-subgroup`: Kernels are normal subgroup schemes.
+/-- Blueprint `definition-abelian-variety--3`: Kernels are normal subgroup schemes.
 
 For a homomorphism `f : A ⟶ B` of group schemes over `K`, the kernel `ker f` is a group scheme
 (`CategoryTheory.GrpObj.instGrpObjKer`) whose `R`-points are the kernel of `f(R)`
@@ -134,7 +134,7 @@ instance isNormalSubgroupScheme_kerι : IsNormalSubgroupScheme (GrpObj.kerι f) 
     rw [GrpObj.range_monoidHom_kerι]
     infer_instance
 
-/-- Blueprint `lem-sc-kernel-subgroup` (and `def-sc-group-scheme`): Kernels are closed
+/-- Blueprint `definition-abelian-variety--3` (and `def-sc-group-scheme`): Kernels are closed
 subgroup schemes.
 
 For a homomorphism `f : A ⟶ B` of group schemes over `K`, `kerι f : ker f ⟶ A` is a closed
@@ -146,7 +146,7 @@ end Kernel
 
 section Etale
 
-/-- Blueprint `lem-sc-finite-etale-algebra-criterion`: Finite étale algebras.
+/-- Blueprint `proposition-multiplication-n--2`: Finite étale algebras.
 
 For a finite algebra `A` over a field `K`, the following are equivalent: `Spec A ⟶ Spec K` is
 étale; `Ω[A⁄K] = 0`; `A` is a *finite étale `K`-algebra*, a finite product of finite separable
@@ -164,7 +164,7 @@ theorem etale_SpecMap_algebraMap_tfae (A : Type u) [CommRing A] [Algebra K A]
   tfae_have 1 ↔ 3 := h.trans (Algebra.Etale.iff_exists_algEquiv_prod K A)
   tfae_finish
 
-/-- Blueprint `lem-sc-finite-etale-algebra-criterion`: a finite scheme `X` over a field `K`, for
+/-- Blueprint `proposition-multiplication-n--2`: a finite scheme `X` over a field `K`, for
 instance a finite group scheme, is étale over `K` if and only if `Γ(X, 𝒪_X)` is a finite étale
 `K`-algebra (`Algebra.Etale.iff_exists_algEquiv_prod`). -/
 theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
@@ -177,9 +177,9 @@ theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
 
 end Etale
 
-/-- Blueprint `def-sc-mult-n`: Multiplication by `n` and `n`-torsion.
+/-- Blueprint `definition-abelian-variety--3`: Multiplication by `n` and `n`-torsion.
 
-This is also blueprint `def-sc-mult-n`.
+This is also blueprint `definition-abelian-variety--3`.
 
 The `n`-torsion subgroup scheme `G[n]` of a group scheme `G` over `K` is the kernel of the
 `n`-th power map `𝟙 G ^ n`, which on points is `a ↦ a + ⋯ + a`:
@@ -217,14 +217,15 @@ theorem torsionSubgroupScheme.ι_pow (G : Over (Spec (.of K))) [GrpObj G] (n : �
   simp only [comp_pow, Category.comp_id] at h
   exact h
 
-/-- Blueprint `def-sc-mult-n`: the `n`-torsion subgroup scheme `G[n]` of a commutative group
-scheme is a closed subgroup scheme of `G`, being the kernel of the homomorphism `[n] = 𝟙 G ^ n`
-(`AlgebraicGeometry.isMonHom_npow_id`, `AlgebraicGeometry.isClosedSubgroupScheme_kerι`). -/
+/-- Blueprint `definition-abelian-variety--3`: the `n`-torsion subgroup scheme `G[n]` of a
+commutative group scheme is a closed subgroup scheme of `G`, being the kernel of the homomorphism
+`[n] = 𝟙 G ^ n` (`AlgebraicGeometry.isMonHom_npow_id`,
+`AlgebraicGeometry.isClosedSubgroupScheme_kerι`). -/
 instance isClosedSubgroupScheme_torsionSubgroupScheme_ι (G : Over (Spec (.of K))) [GrpObj G]
     [IsCommMonObj G] (n : ℕ) : IsClosedSubgroupScheme (torsionSubgroupScheme.ι G n) :=
   isClosedSubgroupScheme_kerι _
 
-/-- Blueprint `def-sc-mult-n`: the `T`-points of the `n`-torsion subgroup scheme.
+/-- Blueprint `definition-abelian-variety--3`: the `T`-points of the `n`-torsion subgroup scheme.
 
 For a commutative group scheme `G` over `K` and a `K`-scheme `T`, the `T`-points of `G[n]` are
 the `n`-torsion of the group `G(T)`, written additively: the `n`-torsion point `x` corresponds to
@@ -259,12 +260,13 @@ theorem torsionByPointsEquiv_comp_ι (G : Over (Spec (.of K))) [GrpObj G] [IsCom
       (x : Additive (T ⟶ G)).toMul :=
   GrpObj.kerLift_kerι _ _ _
 
-/-- Blueprint `def-sc-mult-n`: multiplication by `k` maps `G[m]` to `G[n]` when `m = k * n`.
+/-- Blueprint `definition-abelian-variety--3`: multiplication by `k` maps `G[m]` to `G[n]` when
+`m = k * n`.
 
 This is the morphism `G[m] ⟶ G[n]` through which `G[m] ⟶ G ⟶ G`, the inclusion followed by
 `[k] = 𝟙 G ^ k`, factors; for `G` an abelian variety, `m = ℓ ^ (n + 1)`, `n = ℓ ^ n` and `k = ℓ`
 these are the transition maps of the inverse system defining the Tate module (blueprint
-`def-wf-abelian-tate-module`). -/
+`definition-tate-module`). -/
 noncomputable def torsionSubgroupSchemeMul (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
     (k : ℕ) (h : m = k * n) : torsionSubgroupScheme G m ⟶ torsionSubgroupScheme G n :=
   GrpObj.kerLift (𝟙 G ^ n) (torsionSubgroupScheme.ι G m ^ k) <| by
@@ -278,9 +280,9 @@ theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : 
       torsionSubgroupScheme.ι G m ^ k :=
   GrpObj.kerLift_kerι _ _ _
 
-/-- Blueprint `def-sc-isogeny`: Isogenies and their degree.
+/-- Blueprint `proposition-multiplication-n--1`: Isogenies and their degree.
 
-This is also blueprint `def-sc-isogeny`.
+This is also blueprint `proposition-multiplication-n--1`.
 
 An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
 kernel. The blueprint defines isogenies between abelian varieties; the definition makes sense
@@ -294,7 +296,7 @@ class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) 
 
 attribute [instance] IsIsogeny.isFinite_ker
 
-/-- Blueprint `def-sc-isogeny`: the degree of an isogeny
+/-- Blueprint `proposition-multiplication-n--1`: the degree of an isogeny
 `f : A ⟶ B`, the order of its kernel.
 
 This is only the degree of `f` as a finite flat morphism when `f` is an isogeny of abelian

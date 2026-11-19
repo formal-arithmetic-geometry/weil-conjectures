@@ -60,6 +60,6 @@ theorem nonempty_etale_upperStar_ihom_iso (f : Y ⟶ X) [Etale f]
   have := Etale.isIso_ihomComparison_upperStar
     (ModuleCat.{u + 1} Λ) f F
   exact ⟨asIso ((Functor.LaxMonoidal.ihomComparison
-    (Etale.upperStar (ModuleCat.{u + 1} Λ) f) F).natTrans.app G)⟩
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) f) F).app G)⟩
 
 end AlgebraicGeometry.Scheme

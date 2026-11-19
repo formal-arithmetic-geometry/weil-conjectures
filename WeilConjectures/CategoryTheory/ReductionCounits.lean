@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Reduction of right adjoints by transposition of the counit
 
-Source: current blueprint sk-prop-sp-tower-geometric, final transition paragraph.
+Source: current blueprint proposition-sp-tower-geometric, final transition paragraph.
 (blueprint: lem-sp-reduction-counits-adjunction)
 -/
 
@@ -27,7 +27,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
   (SX : Cn ⥤ Cm) (SY : Dn ⥤ Dm) (b : SX ⋙ Fm ≅ Fn ⋙ SY)
 
 /-- The specified coefficient comparison is the transpose of the scalar-reduced counit.
-Source: blueprint sk-lem-sp-reduction, displayed counit mate.
+Source: blueprint lemma-sp-reduction, displayed counit mate.
 (blueprint: lem-sp-reduction-counits-adjunction) -/
 def coefficientCounitMate (K : Dn) : SX.obj (Gn.obj K) ⟶ Gm.obj (SY.obj K) :=
   am.homEquiv _ _ (b.hom.app (Gn.obj K) ≫ SY.map (an.counit.app K))
@@ -48,7 +48,7 @@ variable {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
 include adj en em hn hm hs
 
 /-- Naturality of the tower counit forces the actual coefficient-reduction formula.
-Source: blueprint sk-prop-sp-tower-geometric, final paragraph, including equal levels.
+Source: blueprint proposition-sp-tower-geometric, final paragraph, including equal levels.
 Proof: apply the inverse finite adjunction bijection at the lower level. The support
 reduction square and naturality of the actual reduction at the tower counit rewrite
 the left transpose as the scalar-reduced upper counit after the compact-support

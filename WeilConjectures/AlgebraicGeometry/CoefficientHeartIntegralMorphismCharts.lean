@@ -125,8 +125,8 @@ theorem exists_extendScalars_map_eq_pow_nsmul {V : Scheme.{u}} [CompactSpace V]
   obtain ⟨⟨k⟩, b, hb⟩ :=
     hP.exists_comp_eq_of_isColimit _ (hc.whiskerEquivalence e) (adj.homEquiv _ _ ψ)
   refine ⟨k, b, ?_⟩
-  let t : End ((Mod.extendScalars φ).obj Q) := inv (ℓ • 𝟙 ((Mod.extendScalars φ).obj Q))
-  have h : (Mod.extendScalars φ).map b ≫ t ^ k = ψ := by
+  let t : End ((Mod.extendScalars φ).obj Q) := .of (inv (ℓ • 𝟙 ((Mod.extendScalars φ).obj Q)))
+  have h : (Mod.extendScalars φ).map b ≫ (t ^ k).asHom = ψ := by
     apply (adj.homEquiv _ _).injective
     rw [adj.homEquiv_naturality_left, ← hb, adj.homEquiv_unit]
     rfl
@@ -262,7 +262,7 @@ Source: latest blueprint,
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/`
 `sk-lem-coefficient-heart.proof.md`, proof (1),
 "First let Lambda = E", through the construction of h = pi^m f.
-This is a step of the proof of `sk-lem-coefficient-heart`
+This is a step of the proof of `lemma-constructible-sheaves`
 (auxiliary; not a blueprint node).
 
 Proof in words: at each point of `X`, take a connected affine etale neighbourhood, which is

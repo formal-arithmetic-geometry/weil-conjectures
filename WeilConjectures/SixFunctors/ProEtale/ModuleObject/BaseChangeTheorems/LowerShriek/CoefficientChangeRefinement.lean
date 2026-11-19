@@ -132,7 +132,9 @@ lemma squareCompatible_lowerStarComp {p : Z₁ ⟶ Y} [IsProper h.left] [IsPrope
     (C.isMateSquare_pull_push (h ≫ p)) (C.pull_comp h p)
 
 /-- The isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement is compatible with the
-coefficient comparisons. -/
+coefficient comparisons: the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` is, and (Push) commutes
+with the composition isomorphism `Rh_* ⋙ Rp_* ≅ R(h ≫ p)_*` since (Push) is the mate of (Pull) and
+transposes of composites are composites. -/
 lemma squareCompatible_lowerShriekRefinementIso [IsProper h.left] (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} [IsProper p₁.left] [IsProper p.left] (wp : h ≫ p₁ = p)
     [IsIso (P.openImmersionLowerShriekRefinementPushforward sq)]
@@ -143,12 +145,19 @@ lemma squareCompatible_lowerShriekRefinementIso [IsProper h.left] (sq : IsPullba
   have : IsProper (h ≫ p₁).left := by
     rw [Over.comp_left]
     infer_instance
+  -- (Push) is compatible with the composition isomorphism `Rh_* ⋙ Rp₁_* ≅ R(h ≫ p₁)_*`: the
+  -- composition isomorphisms are the conjugates of those of the pullbacks, (Push) is the mate of
+  -- (Pull), and (Pull) is compatible with composition; transposes of composites are composites.
+  have hcomp : NatTrans.SquareCompatible (Functor.pasteSquareIso (C.push h) (C.push p₁))
+      (C.push (h ≫ p₁)) (P.lowerStarComp h p₁).hom (P'.lowerStarComp h p₁).hom :=
+    NatTrans.SquareCompatible.conjugateEquiv
+      ((C.isMateSquare_pull_push p₁).comp (C.isMateSquare_pull_push h))
+      (C.isMateSquare_pull_push (h ≫ p₁)) (C.pull_comp h p₁)
   have h₁ := (NatTrans.SquareCompatible.whiskerRight (C.push p₁)
       (C.squareCompatible_openImmersionLowerShriekRefinementPushforward sq)).comp
     ((NatTrans.SquareCompatible.associator_hom _ _ _).comp
     (NatTrans.SquareCompatible.whiskerLeft (C.shriek i)
-      ((C.squareCompatible_lowerStarComp (h := h) (p := p₁)).comp
-      (C.squareCompatible_push_eqToHom wp (by rw [wp]) (by rw [wp])))))
+      (hcomp.comp (C.squareCompatible_push_eqToHom wp (by rw [wp]) (by rw [wp])))))
   simpa only [BoundedConstructiblePushforwardData.lowerShriekRefinementIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, asIso_hom, eqToIso.hom,
     Functor.whiskerLeft_comp] using h₁

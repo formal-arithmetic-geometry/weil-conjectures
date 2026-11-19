@@ -16,10 +16,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Perfect scalar models under arbitrary coefficient change
 
-Source: blueprint sec-six-functors-basics/sk-prop-scalar-six,
-det-prop-scalar-six-ctf.proof.md (2), displayed scalar-change formula.
-(blueprint: lem-sfb-perfect-scalar-change-model).
-
 The scalar ring and constant-sheaf extension are the existing local-model API.
 Finite projectivity is expressed by a splitting off a finite free scalar module,
 including rank zero. The derived functor is ordinary and uncompleted.
@@ -46,9 +42,7 @@ attribute [local irreducible] upperStarFromPoint pointUpperStar
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a]
-/-- The termwise scalar model, using the canonical constant-to-coefficient map.
-Source: blueprint scalar-six proof (2)
-(blueprint: lem-sfb-perfect-scalar-change-model). -/
+/-- The termwise scalar model, using the canonical constant-to-coefficient map. -/
 noncomputable def sfbScalarModelComplex (X : Scheme.{u})
     (C : CochainComplex (Mod Ab.{u + 1} (scalarRingObj Λ)) ℤ) :
     CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

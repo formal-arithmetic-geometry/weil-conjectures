@@ -45,8 +45,18 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] 
 
 namespace SplitNbhd
 
-set_option maxHeartbeats 400000 in
--- many local algebra instances and large fibre-product diagrams
+omit [IsAlgClosed Ω] in
+private lemma affinePoint_comp_ringHomOfSpec_of_comp_eq {Z : Scheme.{u}}
+    {B : Type u} [CommRing B] (pt : Spec (.of Ω) ⟶ Z) {W : Z.Opens}
+    (hW : IsAffineOpen W) (hpt : pt default ∈ W) (g : Z ⟶ Spec (.of B))
+    (ψ : B →+* Ω) (hψ : pt ≫ g = Spec.map (CommRingCat.ofHom ψ)) :
+    (affinePoint pt hW hpt).comp (hW.ringHomOfSpec g) = ψ := by
+  have key : Spec.map (CommRingCat.ofHom ((affinePoint pt hW hpt).comp
+      (hW.ringHomOfSpec g))) = Spec.map (CommRingCat.ofHom ψ) := by
+    rw [CommRingCat.ofHom_comp, Spec.map_comp, hW.SpecMap_ringHomOfSpec,
+      ← Category.assoc, SpecMap_affinePoint_fromSpec, hψ]
+  exact congrArg CommRingCat.Hom.hom (Spec.map_injective key)
+
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Every pointed étale neighbourhood of `t` receives a morphism from a piece of a split
 neighbourhood of `y`.** -/
@@ -85,14 +95,8 @@ theorem exists_pieceFunctor_obj_hom (t : GeometricFiber f y)
   have := ch.subsingleton_pointsOver_pieceRing f hY₀ hy A' φ' hφ' e hval t
   -- the point of `C` given by `(v, (u, t))` lies over the point of `B`
   have hψ : (affinePoint pt hW₁ hpt).comp (algebraMap B C) =
-      (ch.piecePoint f hY₀ hy A' φ' hφ' e hval t).1 := by
-    have key : Spec.map (CommRingCat.ofHom ((affinePoint pt hW₁ hpt).comp (algebraMap B C))) =
-        Spec.map (CommRingCat.ofHom (ch.piecePoint f hY₀ hy A' φ' hφ' e hval t).1) := by
-      rw [CommRingCat.ofHom_comp, Spec.map_comp, RingHom.algebraMap_toAlgebra,
-        hW₁.SpecMap_ringHomOfSpec, ← Category.assoc, SpecMap_affinePoint_fromSpec, hpt₂]
-      rfl
-    have := congrArg CommRingCat.Hom.hom (Spec.map_injective key)
-    simpa using this
+      (ch.piecePoint f hY₀ hy A' φ' hφ' e hval t).1 :=
+    affinePoint_comp_ringHomOfSpec_of_comp_eq pt hW₁ hpt (pullback.snd V.hom ζ) _ hpt₂
   obtain ⟨ψ, hψ₁⟩ : ∃ ψ : PointsOver φ' C, ψ.1 = affinePoint pt hW₁ hpt :=
     ⟨⟨affinePoint pt hW₁ hpt, by
       rw [RingHom.algebraMap_toAlgebra, ← RingHom.comp_assoc, hψ]
@@ -125,12 +129,11 @@ theorem exists_pieceFunctor_obj_hom (t : GeometricFiber f y)
     rw [← hW₁.SpecMap_ringHomOfSpec (pullback.snd V.hom ζ), ← Spec.map_comp,
       ← CommRingCat.ofHom_comp, hh₁']
   have hρ : ρ ≫ V.hom = (s.piece t).ι ≫ pullback.snd _ f := by
-    change (iso.inv ≫ Spec.map (CommRingCat.ofHom h.toRingHom) ≫ hW₁.fromSpec ≫
-      pullback.fst V.hom ζ) ≫ V.hom = _
-    slice_lhs 4 5 => rw [pullback.condition]
-    slice_lhs 2 4 => rw [hSpec]
-    slice_lhs 2 3 => rw [hζ, ← ch.pieceEmb_comp_snd f hY₀ hy A' φ' hφ' e t A'' φ'' hφ'']
-    slice_lhs 1 2 => rw [hiso₁]
+    dsimp only [ρ]
+    rw [Category.assoc, Category.assoc, Category.assoc, pullback.condition,
+      ← Category.assoc hW₁.fromSpec, ← Category.assoc _ _ ζ, hSpec, hζ,
+      ← ch.pieceEmb_comp_snd f hY₀ hy A' φ' hφ' e t A'' φ'' hφ'',
+      ← Category.assoc, hiso₁]
     rfl
   -- the point `(u, t)` of the piece goes to `v`
   have hpiecePt : (s.piecePt t).left =
@@ -141,14 +144,15 @@ theorem exists_pieceFunctor_obj_hom (t : GeometricFiber f y)
     exact (ch.SpecMap_piecePoint₂_comp_pieceEmb f hY₀ hy A' φ' hφ' e hval t A'' φ'' hφ'').symm
   have hq : (ch.piecePoint₂ f hY₀ hy A' φ' hφ' e hval t A'' φ'' hφ'').1.comp h.toRingHom =
       ψ.1 := by
-    rw [← hh₂, Chart.piecePoint₂,
-      Subsingleton.elim (ch.piecePoint f hY₀ hy A' φ' hφ' e hval t) (ψ.restrictScalars φ')]
+    exact (congrArg (fun p : PointsOver φ' B ↦ (p.tensor hφ'').1.comp h.toRingHom)
+      (Subsingleton.elim (ch.piecePoint f hY₀ hy A' φ' hφ' e hval t)
+        (ψ.restrictScalars φ'))).trans hh₂
   refine ⟨s, ⟨Functor.Elements.homMk (MorphismProperty.Over.homMk ρ hρ) ?_⟩⟩
   apply CategoryTheory.Over.OverMorphism.ext
   change (s.piecePt t).left ≫ ρ = d.2.left
   rw [hpiecePt]
-  change _ ≫ iso.hom ≫ iso.inv ≫ Spec.map (CommRingCat.ofHom h.toRingHom) ≫ hW₁.fromSpec ≫
-    pullback.fst V.hom ζ = _
+  dsimp only [ρ]
+  rw [Category.assoc]
   rw [Iso.hom_inv_id_assoc, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hq,
     ← Category.assoc]
   rw [hψ₁, SpecMap_affinePoint_fromSpec, hpt₁]

@@ -14,9 +14,10 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 /-! # The shifted rational Tate-line square
 
-Source: the canonical-map compatibilities in the second rational projective-line
-triangle, together with Cartesian coefficients and twists. The proof lifts the
-prescribed underived composition equation through degree zero and the canonical shift.
+## Implementation details
+
+The square is obtained by lifting the prescribed underived composition equation through
+degree zero and the canonical shift.
 -/
 
 @[expose] public noncomputable section
@@ -192,14 +193,14 @@ private meta structure CoefficientCongrState where
   proofs : Array (Expr × Expr × Expr) := #[]
   congrs : Array (Expr × Nat × CongrTheorem) := #[]
 
-/-- Equality of the types identifies choice values by proof irrelevance. -/
+/-- Choice values in equal nonempty types are heterogeneously equal. -/
 private theorem choice_value_heq {α β : Sort u} (h : α = β)
     (ha : Nonempty α) (hb : Nonempty β) :
     HEq (Classical.choice ha) (Classical.choice hb) := by
   cases h
   rfl
 
-/-- Compare dependent functions at a shared argument before transporting the family. -/
+/-- Dependent functions that are pointwise heterogeneously equal are heterogeneously equal. -/
 private theorem pointwise_heq {α : Sort u} {P Q : α → Sort v}
     {f : ∀ x, P x} {g : ∀ x, Q x} (h : ∀ x, HEq (f x) (g x)) : HEq f g := by
   have hPQ : P = Q := funext (fun x ↦ type_eq_of_heq (h x))
@@ -417,8 +418,7 @@ private theorem shifted_line_square_native
     (scalarLineMap l c g') (scalarLineMap l c f') (shifted_line_square_general l c sq)
 
 /-- The shifted line square follows from the unshifted comparison equation,
-exact single-complex functoriality, and compatibility of the canonical shift.
-(blueprint: lem-sfb-shifted-line-square) -/
+exact single-complex functoriality, and compatibility of the canonical shift. -/
 theorem shifted_line_square
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

@@ -355,13 +355,13 @@ variable (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [Quasi
 
 /-- The Lie algebra of a group scheme of finite type over a field only sees the identity
 component: the differential of the open immersion `G° ⟶ G` is bijective.
-(blueprint: `sk-i-cartier`) -/
+(blueprint: `proposition-cartier-s-theorem`) -/
 theorem differential_identityComponentι_bijective :
     Function.Bijective (differential (identityComponentι G)) :=
   differential_bijective_of_isOpenImmersion (identityComponentι G)
 
 /-- The Lie algebra of a group scheme of finite type over a field is the Lie algebra of its
-identity component. (blueprint: `sk-i-cartier`) -/
+identity component. (blueprint: `proposition-cartier-s-theorem`) -/
 noncomputable def lieEquivIdentityComponent : Lie (identityComponent G) ≃ₗ⁅k⁆ Lie G :=
   lieEquivOfIsOpenImmersion (identityComponentι G)
 

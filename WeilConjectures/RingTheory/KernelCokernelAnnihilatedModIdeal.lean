@@ -17,7 +17,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 Source: Stacks Project, Cohomology of Schemes, Remark 0888, the commutative algebra
 argument and its limit argument
-(blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ open scoped ZeroObject
 namespace LinearMap
 
 /-- Source: Stacks Project, Remark 0888, the exact-sequence hypothesis
-(blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 The kernel/cokernel formulation is equivalent to the exact-sequence formulation.
 Proof: the inclusion of the kernel, `u`, and the projection to `N / range u` give the
@@ -108,7 +108,7 @@ theorem ker_coker_annihilated_iff_exists_exact_sequence
 
 
 /-- Source: Stacks Project, Remark 0888, the final scalar-composite argument
-(blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Each product `f * g` kills the kernel by the first composite and kills the quotient
 by the range by the second composite. Since `K^(2*t) = K^t * K^t`, ideal multiplication
@@ -145,7 +145,7 @@ private theorem annihilated_of_scalar_composites
 
 /-- Source: Stacks Project, Remark 0888, the maps "fg", reduction modulo `J`, and
 compatibility and annihilation used in the limit argument
-(blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof, following the eight elementary steps of the node:
 1. The exact-sequence convention is given by def-weil-pbc-exact-sequence, and its

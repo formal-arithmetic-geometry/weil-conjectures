@@ -70,7 +70,7 @@ The explicit isomorphism locus contains the ring and is closed under isomorphism
 integer shifts, distinguished cones, retracts, and arbitrary set-indexed coproducts.
 
 Source: Zheng, Construction 2.26, printed p. 15; blueprint
-`det-sf-determination-localizing`; Stacks Project, More on Algebra, Tag 09PB
+`lemma-checking-isomorphisms-constructible-complexes--1`; Stacks Project, More on Algebra, Tag 09PB
 (blueprint: lem-pur-coefficient-action-adjoint-generation).
 
 Proof:
@@ -87,7 +87,7 @@ Proof:
    shifts gives epsilon(Y[n]) F(c_G inverse) = epsilon(Y)[n] c_F. These equalities show
    that alpha(V[n]) followed by the composite B-shift and a followed by alpha(V)[n]
    have equal inverse adjuncts. Injectivity gives the stated shift equation.
-4. For each M, apply `det-sf-determination-localizing` to the two exact,
+4. For each M, apply `lemma-checking-isomorphisms-constructible-complexes--1` to the two exact,
    coproduct-preserving coefficient functors and the shift-compatible transformation from
    steps 1 and 3. Its locus is triangulated, coproduct-closed and retract-closed. Naturality
    at an isomorphism conjugates components, giving repleteness. Step 2 supplies the ring.

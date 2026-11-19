@@ -387,15 +387,15 @@ private theorem principal_reflector
     (t : (O.obj ⋙ forget CommRingCat).sections)
     (D : RingedKoszulLimitPresentation O 1 (fun _ ↦ t)) :
     (∀ X, IsLocallyDerivedRingedIdealComplete O
-      (image (ringedKoszulScalar O t)) (image.ι (ringedKoszulScalar O t))
+      (image (ringedKoszulScalar O t).asHom) (image.ι (ringedKoszulScalar O t).asHom)
         (D.completion.obj X)) ∧
     (∀ X Y, IsLocallyDerivedRingedIdealComplete O
-      (image (ringedKoszulScalar O t)) (image.ι (ringedKoszulScalar O t)) Y →
+      (image (ringedKoszulScalar O t).asHom) (image.ι (ringedKoszulScalar O t).asHom) Y →
       Function.Bijective (fun f : D.completion.obj X ⟶ Y ↦ D.unit X ≫ f)) ∧
     (∀ X, IsIso (D.unit X) ↔ IsLocallyDerivedRingedIdealComplete O
-      (image (ringedKoszulScalar O t)) (image.ι (ringedKoszulScalar O t)) X) := by
+      (image (ringedKoszulScalar O t).asHom) (image.ι (ringedKoszulScalar O t).asHom) X) := by
   obtain ⟨D₀, hc, hb, hi, _⟩ := ringedKoszulCompletionReflector O 1 (fun _ ↦ t)
-    (image (ringedKoszulScalar O t)) (image.ι (ringedKoszulScalar O t))
+    (image (ringedKoszulScalar O t).asHom) (image.ι (ringedKoszulScalar O t).asHom)
     (principal_generators O t)
   obtain ⟨θ₀, hθ₀⟩ := exists_ringed_cech_koszul_hom_limit_comparison O 1 (fun _ ↦ t) D₀
   obtain ⟨θ, hθ⟩ := exists_ringed_cech_koszul_hom_limit_comparison O 1 (fun _ ↦ t) D
@@ -446,12 +446,12 @@ private theorem restriction_complete_iff
       PreservesFiniteColimits (SheafOfModules.RingedTensor.tensorFunctor a))
     (t : (R.obj ⋙ forget CommRingCat).sections) (Y : ringedSiteDerived S) :
     IsLocallyDerivedRingedIdealComplete R
-      (image (ringedKoszulScalar R t)) (image.ι (ringedKoszulScalar R t))
+      (image (ringedKoszulScalar R t).asHom) (image.ι (ringedKoszulScalar R t).asHom)
       ((FlatScalarKoszul.restrictDerived a).obj Y) ↔
     IsLocallyDerivedRingedIdealComplete S
-      (image (ringedKoszulScalar S (FlatScalarKoszul.imageSections a (fun _ : Fin 1 ↦ t) 0)))
+      (image (ringedKoszulScalar S (FlatScalarKoszul.imageSections a (fun _ : Fin 1 ↦ t) 0)).asHom)
       (image.ι (ringedKoszulScalar S
-        (FlatScalarKoszul.imageSections a (fun _ : Fin 1 ↦ t) 0))) Y := by
+        (FlatScalarKoszul.imageSections a (fun _ : Fin 1 ↦ t) 0)).asHom) Y := by
   obtain ⟨_, DB, DR, _, _, γ, _, _, hγ⟩ :=
     FlatScalarKoszul.flatScalarKoszulTowerComparison a hflat 1 (fun _ ↦ t)
   have hu := hγ.2.2.2.2.2.1

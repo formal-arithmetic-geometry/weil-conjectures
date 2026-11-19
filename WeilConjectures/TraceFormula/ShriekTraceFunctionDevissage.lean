@@ -29,8 +29,8 @@ inputs, stated here as separate lemmas:
   `Rf_!^Weil K` is the sum of those of `R(j ≫ f)_!^Weil j^* K` and `R(i ≫ f)_!^Weil i^* K`. It
   comes from the localization triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` of Weil objects, the
   compatibility of the Frobenius with its connecting morphism (blueprint
-  `prop-trf-trace-additivity-open-closed`, Step 2) and the additivity of the supertrace along the
-  long exact sequence of stalks of homology sheaves. It is deduced from the Weil distinguished
+  `lemma-additivity-open-subscheme-complement`, Step 2) and the additivity of the supertrace along
+  the long exact sequence of stalks of homology sheaves. It is deduced from the Weil distinguished
   triangles of `ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang` and the
   composition isomorphisms `weilLowerShriekCompIso`.
 - `ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar`: the local trace of a pullback
@@ -252,12 +252,13 @@ lemma unit_comm_weilStr (K : WeilBoundedConstructible ℓ eX.hom) :
 
 omit [Finite k] in
 /-- **The localization triangle of Weil objects** (blueprint
-`prop-sf-open-closed-triangle-all-stages` and `prop-trf-trace-additivity-open-closed`, Step 2):
-for an open immersion `j` with closed complement `i`, both stable under `e_X`, the counit
-`Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_! Li^* K` are morphisms of Weil objects
-(`counit_comm_weilStr`, `unit_comm_weilStr`) and extend to a distinguished triangle of Weil
-objects. The triangle is `ProEtale.CondensedRing.exists_distTriang_openClosed`, through
-`Ri_! ≅ Ri_*`; the Frobenius compatibility of its connecting morphism is
+`proposition-extension-zero-restriction-closed-subscheme--8` and
+`lemma-additivity-open-subscheme-complement`, Step 2): for an open immersion `j` with closed
+complement `i`, both stable under `e_X`, the counit `Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_! Li^* K`
+are morphisms of Weil objects (`counit_comm_weilStr`, `unit_comm_weilStr`) and extend to a
+distinguished triangle of Weil objects. The triangle is
+`ProEtale.CondensedRing.exists_distTriang_openClosed`, through `Ri_! ≅ Ri_*`; the Frobenius
+compatibility of its connecting morphism is
 `ProEtale.CondensedRing.map_comp_connecting_eq_of_isCompl`. -/
 theorem exists_isDistTriang_openClosed
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))

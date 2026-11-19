@@ -81,7 +81,6 @@ theorem strictEtaleBrownCanonicalRestriction_rep
     (B.level m).inverseFactors (B.level n).inverseFactors
     (PV.scalar h).restrictionFactors (A.restrictInverse h)).choose_spec K
 
-set_option maxHeartbeats 1600000 in
 -- Transposing the scalar adjunction exposes several localization factors.
 /-- The tensor comparison is the scalar mate of the exact restriction square.
 Source: Zheng, Construction 4.1; Stacks 06YY and 07A4.
@@ -94,11 +93,11 @@ comparison on this resolution. Naturality and the quasi-isomorphism from the
 resolution identify the components on every derived object. -/
 theorem strictEtaleBrownCanonicalRestriction_mate :
     ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-      (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)).natTrans =
+      (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)) =
         (B.derivedTensor h).inv := by
   let δ := strictEtaleBrownCanonicalRestriction O t g A PW PV B h
   let τ := ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ δ.hom)).natTrans
+    (.mk _ _ _ _ δ.hom))
   have hτ (P : CochainComplex (strictEtaleLevel W O t n) ℤ) :=
     SheafOfModules.derivedLeftSquare_rep (A.lift n).modules
       (coefficientTensor (J := W.smallEtaleTopology) (O := O) (ell := t) h)
@@ -156,7 +155,8 @@ theorem strictEtaleBrownCanonicalRestriction_mate :
   funext X
   obtain ⟨P, q, hP, hf, hq, _⟩ :=
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients
-      (DerivedCategory.Q.objPreimage X)
+      (R := coefficientQuotientSheaf (J := W.smallEtaleTopology) O t n)
+      (DerivedCategory.Q.objPreimage X : CochainComplex (strictEtaleLevel W O t n) ℤ)
   have := hq
   let e : DerivedCategory.Q.obj P ≅ X :=
     asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso X

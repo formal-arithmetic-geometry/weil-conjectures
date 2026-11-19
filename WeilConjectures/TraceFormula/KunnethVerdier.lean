@@ -16,9 +16,9 @@ public import WeilConjectures.TraceFormula.Product
 Let `X, Y` be separated `k`-schemes of finite type, with projections `p_X : X ⨯ Y ⟶ X` and
 `p_Y : X ⨯ Y ⟶ Y` of their product over the base point. The *external product* of
 `M ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and `N ∈ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is `M ⊠ N = Lp_X^* M ⊗ Lp_Y^* N`
-(`ProEtale.CondensedRing.externalProduct`, blueprint `def-trf-external-product`).
+(`ProEtale.CondensedRing.externalProduct`, blueprint `prose-11-08`).
 
-The *Künneth–Verdier map* (blueprint `def-sf-kv-maps`, (iv))
+The *Künneth–Verdier map* (blueprint `lemma-external-duality-trace-morphism`, (iv))
 ```
 κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)
 ```
@@ -27,20 +27,21 @@ The *Künneth–Verdier map* (blueprint `def-sf-kv-maps`, (iv))
 Lp_Y^* N ⊗ (Lp_X^* M ⊗ Lp_Y^* D_Y N) ≅ Lp_X^* M ⊗ (Lp_Y^* N ⊗ Lp_Y^* D_Y N)
   ⟶ Lp_X^* M ⊗ Lp_Y^* (N ⊗ D_Y N) --ev--> Lp_X^* M ⊗ Lp_Y^* ω_Y --α--> Rp_X^! M,
 ```
-where `α = α_{𝟙, a_Y}` is the *exceptional Künneth map* (blueprint `def-sf-kv-maps`, (ii);
-`ProEtale.CondensedRing.exceptionalKunnethMap`): the exceptional adjoint of
+where `α = α_{𝟙, a_Y}` is the *exceptional Künneth map* (blueprint
+`lemma-external-duality-trace-morphism`, (ii); `ProEtale.CondensedRing.exceptionalKunnethMap`): the
+exceptional adjoint of
 ```
 Rp_X! (Lp_X^* M ⊗ Lp_Y^* ω_Y) ≅ Rp_X! (Lp_Y^* ω_Y ⊗ Lp_X^* M) ≅ Rp_X! (Lp_Y^* ω_Y) ⊗ M
   ≅ La_X^* Ra_Y! ω_Y ⊗ M --ε--> La_X^* ℚ̄_ℓ ⊗ M ≅ M,
 ```
 built from the derived projection formula for `p_X`, compact-support base change in the
 cartesian square of the product, and the counit of `Ra_Y! ⊣ Ra_Y^!`; this is the composite
-`Ku_!` of `def-sf-kv-maps` (i) for the pair `(𝟙_X, a_Y)` followed by the counits. Its
-invertibility, the Künneth–Verdier theorem (blueprint `thm-trf-kunneth-verdier`), is
-`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, in
+`Ku_!` of `lemma-external-duality-trace-morphism` (i) for the pair `(𝟙_X, a_Y)` followed by the
+counits. Its invertibility, the Künneth–Verdier theorem (blueprint
+`lemma-external-duality-trace-morphism--1`), is `ProEtale.CondensedRing.isIso_kunnethVerdierMap`, in
 `WeilConjectures.TraceFormula.KunnethVerdierTheorem`. The map `κ_{M,N}`
-factors as `RHom(1, α) ∘ β` through the external Hom map `β` of blueprint `def-sf-kv-maps` (iii)
-(`ProEtale.CondensedRing.kunnethVerdierMap_eq`).
+factors as `RHom(1, α) ∘ β` through the external Hom map `β` of blueprint
+`lemma-external-duality-trace-morphism` (iii) (`ProEtale.CondensedRing.kunnethVerdierMap_eq`).
 
 All constructions are classical: ordinary categories and natural transformations built by
 composition, whiskering and mates from the data of the six functors (blueprint
@@ -80,7 +81,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- The *external product* `M ⊠ N = Lp_X^* M ⊗ Lp_Y^* N` on `X ⨯ Y` (blueprint
-`def-trf-external-product`), with the projections `p_X = prod.fst` and `p_Y = prod.snd`; the
+`prose-11-08`), with the projections `p_X = prod.fst` and `p_Y = prod.snd`; the
 order of the factors is part of the notation. -/
 noncomputable def externalProduct (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -119,9 +120,9 @@ noncomputable def exceptionalKunnethAdjoint (M : Dᵇc(X.left)⟦Profinite.padic
     ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv ▷ M) ≫
     (λ_ M).hom
 
-/-- The *exceptional Künneth map* `α_{𝟙, a_Y} : M ⊠ ω_Y ⟶ Rp_X^! M` (blueprint `def-sf-kv-maps`,
-(ii), for `f₁ = 𝟙_X`, `f₂ = a_Y`, `L₁ = M`, `L₂ = ℚ̄_ℓ`): the exceptional adjoint of
-`exceptionalKunnethAdjoint`. -/
+/-- The *exceptional Künneth map* `α_{𝟙, a_Y} : M ⊠ ω_Y ⟶ Rp_X^! M` (blueprint
+`lemma-external-duality-trace-morphism`, (ii), for `f₁ = 𝟙_X`, `f₂ = a_Y`, `L₁ = M`, `L₂ = ℚ̄_ℓ`):
+the exceptional adjoint of `exceptionalKunnethAdjoint`. -/
 noncomputable def exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ M (dualizingComplex' ℓ Y) ⟶
       (boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
@@ -143,8 +144,9 @@ noncomputable def kunnethVerdierPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgC
     exceptionalKunnethMap ℓ M
 
 /-- The *Künneth–Verdier map* `κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` (blueprint
-`def-sf-kv-maps`, (iv)): the transpose of `kunnethVerdierPairing`, that is the external Hom map
-`β` of the two evaluations followed by the exceptional Künneth map `α_{𝟙, a_Y}`. -/
+`lemma-external-duality-trace-morphism`, (iv)): the transpose of `kunnethVerdierPairing`, that is
+the external Hom map `β` of the two evaluations followed by the exceptional Künneth map
+`α_{𝟙, a_Y}`. -/
 noncomputable def kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ M (verdierDual ℓ N) ⟶
@@ -152,10 +154,11 @@ noncomputable def kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRin
         ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M) :=
   curry (kunnethVerdierPairing ℓ M N)
 
-/-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (blueprint `def-sf-kv-maps` (iv)): through
-the unit identifications `M ≅ RHom(ℚ̄_ℓ, M)` and `ℚ̄_ℓ ⊠ N ≅ Lp_Y^* N`, `κ_{M,N}` is the external
-Hom map `β` of blueprint `def-sf-kv-maps` (iii) for the pairs `(ℚ̄_ℓ, M)` and `(N, ω_Y)` followed
-by the exceptional Künneth map `α`. -/
+/-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (blueprint
+`lemma-external-duality-trace-morphism` (iv)): through the unit identifications `M ≅ RHom(ℚ̄_ℓ, M)`
+and `ℚ̄_ℓ ⊠ N ≅ Lp_Y^* N`, `κ_{M,N}` is the external Hom map `β` of blueprint
+`lemma-external-duality-trace-morphism` (iii) for the pairs `(ℚ̄_ℓ, M)` and `(N, ω_Y)` followed by
+the exceptional Künneth map `α`. -/
 lemma kunnethVerdierMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     kunnethVerdierMap ℓ M N =
@@ -291,7 +294,8 @@ lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicA
   exact curry_naturality_aux _ _ _ (kunnethVerdierPairing_naturality ℓ φ N)
 
 /-- The objects `M` for which the Künneth–Verdier map `κ_{M,N}` is an isomorphism are closed under
-isomorphisms (the first closure property of the dévissage in `M` of `thm-trf-kunneth-verdier`). -/
+isomorphisms (the first closure property of the dévissage in `M` of
+`lemma-external-duality-trace-morphism--1`). -/
 lemma isIso_kunnethVerdierMap_of_iso {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (e : M ≅ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     [IsIso (kunnethVerdierMap ℓ M' N)] : IsIso (kunnethVerdierMap ℓ M N) := by
@@ -305,10 +309,10 @@ private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCa
     f ≫ Verdier.bidualityMap ω M' = Verdier.bidualityMap ω M ≫ (pre ((pre f).app ω)).app ω :=
   toIhomIhom_naturality ω f
 
-/-- **Verdier biduality for the dualizing complex** (blueprint `thm-trf-verdier-biduality`): for
+/-- **Verdier biduality for the dualizing complex** (blueprint `theorem-verdier-biduality--1`): for
 bounded constructible `M` on `Y`, the double-dual morphism `M ⟶ D_Y D_Y M`, the transpose of the
 evaluation `D_Y M ⊗ M ⟶ M ⊗ D_Y M ⟶ ω_Y`, is an isomorphism. It is the constructible biduality
-theorem (`isIso_verdierBiduality`, blueprint `det-pd-biduality-coefficients`). -/
+theorem (`isIso_verdierBiduality`, blueprint `theorem-verdier-biduality`). -/
 noncomputable def verdierBidualityIso (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     M ≅ verdierDual ℓ (verdierDual ℓ M) :=
   haveI := isIso_verdierBiduality ℓ M
@@ -318,7 +322,7 @@ lemma verdierBidualityIso_hom (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj �
     (verdierBidualityIso ℓ M).hom = verdierBiduality ℓ M :=
   rfl
 
-/-- The biduality isomorphism is natural (blueprint `thm-trf-verdier-biduality`). -/
+/-- The biduality isomorphism is natural (blueprint `theorem-verdier-biduality--1`). -/
 @[reassoc]
 lemma verdierBidualityIso_hom_naturality {M M' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (f : M ⟶ M') :

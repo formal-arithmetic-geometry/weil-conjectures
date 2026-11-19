@@ -40,15 +40,15 @@ variable {k : Type u} [Field k] [Finite k]
 /-- The `N`-th power of the geometric Frobenius of `Spec k̄` is `Spec` of the `N`-th power of the
 geometric Frobenius of `k̄`. -/
 lemma geometricFrobeniusField_hom_pow (N : ℕ) :
-    (show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N =
+    (End.of (geometricFrobeniusField k).hom ^ N).asHom =
       Spec.map (CommRingCat.ofHom
         ((geometricFrobenius k (AlgebraicClosure k)) ^ N).toRingEquiv.toRingHom) := by
   induction N with
   | zero =>
-    rw [pow_zero, pow_zero, End.one_def]
+    rw [pow_zero, pow_zero, End.one_asHom]
     exact (Spec.map_id _).symm
   | succ N ih =>
-    rw [pow_succ, End.mul_def, ih, geometricFrobeniusField_hom, ← Spec.map_comp]
+    rw [pow_succ, End.mul_asHom, ih, geometricFrobeniusField_hom, ← Spec.map_comp]
     congr 1
     ext y
     simp [pow_succ', AlgEquiv.mul_apply]
@@ -105,7 +105,7 @@ lemma finite_geometricFrobeniusPowFixedField {N : ℕ} (hN : N ≠ 0) :
 through `Spec L` for the field `L ⊆ k̄` fixed by `σ^N`. -/
 lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
     (x : Spec (.of (AlgebraicClosure k)) ⟶ T)
-    (hx : ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫
+    (hx : (End.of (geometricFrobeniusField k).hom ^ N).asHom ≫
       x = x) :
     ∃ g : Spec (.of (geometricFrobeniusPowFixedField k N)) ⟶ T,
       Spec.map (CommRingCat.ofHom (algebraMap (geometricFrobeniusPowFixedField k N)
@@ -135,7 +135,7 @@ lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
 
 /-- **Finiteness of the points of degree `n + 1`** for an automorphism `e` of finite order of a
 scheme of finite type over a finite field (the finiteness part of blueprint
-`thm-trf-frobenius-fixed-points`, for the Frobenius twisted by `e`): a point `x̄` with
+`lemma-frobenius-fixed-scheme--1`, for the Frobenius twisted by `e`): a point `x̄` with
 `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` is fixed by `σ^{(n+1)(m+1)}` when `e^{m+1} = 𝟙`, so it factors
 through `Spec L` for the finite field `L` fixed by `σ^{(n+1)(m+1)}`. -/
 theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
@@ -145,16 +145,19 @@ theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
   obtain ⟨m, hm⟩ := he
   set N := (n + 1) * (m + 1)
   have hN : N ≠ 0 := Nat.mul_ne_zero (Nat.succ_ne_zero n) (Nat.succ_ne_zero m)
-  have hA : (show End X.left from (e.pow (n + 1)).hom.left) ^ (m + 1) = 𝟙 X.left := by
-    rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul,
-      ← Iso.pow_hom_eq_pow, hm, Iso.refl_hom, ← End.one_def, one_pow]
+  have hm' : End.of e.hom ^ (m + 1) = 1 := by
+    apply End.ext
+    rw [← Iso.pow_hom_eq_pow, hm]
+    rfl
+  have hA : (End.of (e.pow (n + 1)).hom.left ^ (m + 1)).asHom = 𝟙 X.left := by
+    rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul, hm', one_pow]
     rfl
   have hfix : ∀ x : frobeniusFixedPoints e (n + 1),
-      ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫
+      (End.of (geometricFrobeniusField k).hom ^ N).asHom ≫
         x.1 = x.1 := by
     rintro ⟨y, -, hy⟩
-    have h := End.comp_pow_eq_pow_comp y (show End X.left from (e.pow (n + 1)).hom.left)
-      (show End _ from ((geometricFrobeniusField k).pow (n + 1)).hom) hy (m + 1)
+    have h := End.comp_pow_eq_pow_comp y (End.of (e.pow (n + 1)).hom.left)
+      (End.of ((geometricFrobeniusField k).pow (n + 1)).hom) hy (m + 1)
     rw [hA, Category.comp_id, Iso.pow_hom_eq_pow, ← pow_mul] at h
     exact h.symm
   have := finite_geometricFrobeniusPowFixedField (k := k) hN
@@ -180,7 +183,7 @@ theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
 
 /-- **Finiteness of the points of degree `n + 1`** of a separated scheme of finite type over a
 finite field, for the Frobenius twisted by an automorphism `e` (the twisted analogue of the
-finiteness part of blueprint `thm-trf-frobenius-fixed-points`, which is stated for the model
+finiteness part of blueprint `lemma-frobenius-fixed-scheme--1`, which is stated for the model
 Frobenius, `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`): a point `x̄` with
 `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` is fixed by `e^{n+1} ≫ Fr^{(q^{n+1})}`, since
 `σ^{n+1} ≫ Fr^{(q^{n+1})} = 𝟙` on `Spec k̄`, and the fixed points of a Frobenius twisted by an

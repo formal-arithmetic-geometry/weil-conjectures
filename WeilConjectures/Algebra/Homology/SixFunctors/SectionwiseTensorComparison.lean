@@ -54,7 +54,6 @@ variable {C : Type c} [Category.{v} C] {D : Type d} [Category.{z} D]
   [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
   [HasSheafify K AddCommGrpCat.{w}] [K.WEqualsLocallyBijective AddCommGrpCat.{w}]
 
-set_option maxHeartbeats 400000 in
 -- Section evaluation crosses both coefficient-ring and sheafification presentations.
 /-- Module restriction along a continuous and cocontinuous functor with invertible
 coefficient map commutes with the ordinary tensor, naturally in both factors and

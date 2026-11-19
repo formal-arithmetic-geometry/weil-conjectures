@@ -60,11 +60,7 @@ theorem bijective_edgeMap_of_isFinite (f : X ⟶ Y) [IsFinite f]
 /-- **Étale cohomology over a clopen decomposition.** Let `U : ι → X.Opens` be a finite
 family of pairwise disjoint closed opens covering `X`, and let `F` be an abelian étale sheaf
 on `X`. Then the restriction maps `Hⁿ(X, F) ⟶ Hⁿ(Uᵢ, F|_{Uᵢ})` assemble to a bijection
-`Hⁿ(X, F) ⟶ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})`.
-
-The unit maps assemble to an isomorphism `F ≅ ⨁ᵢ ιᵢ_* ιᵢ^* F`, as can be checked after
-restricting to each `Uⱼ`, where all summands but the `j`-th vanish; and
-`Hⁿ(X, ιᵢ_* ιᵢ^* F) = Hⁿ(Uᵢ, ιᵢ^* F)` since `ιᵢ` is a closed immersion, hence finite. -/
+`Hⁿ(X, F) ⟶ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})`. -/
 theorem bijective_pi_cohomologyMap_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (hU : ∀ i, IsClosed (U i : Set X)) (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j))
     (hcov : ∀ x : X, ∃ i, x ∈ U i) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

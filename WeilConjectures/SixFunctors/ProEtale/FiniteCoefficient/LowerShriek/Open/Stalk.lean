@@ -16,9 +16,9 @@ pro-étale sites is the exact left adjoint of `j^*`
 (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction`,
 `AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`), so it acts
 degreewise on complexes, as `D(j_!)`. This file proves the stalk prescription of blueprint
-`lem-cbc-proetale-extension-zero`, in the form of the pullback along an arbitrary morphism
-`s : T ⟶ X` (for instance a geometric point `Spec k̄ ⟶ X`, along which the pullback computes
-the stalk):
+`proposition-extension-zero-restriction-closed-subscheme`, in the form of the pullback along an
+arbitrary morphism `s : T ⟶ X` (for instance a geometric point `Spec k̄ ⟶ X`, along which the
+pullback computes the stalk):
 
 * if `s = t ≫ j` factors through `U`, then `s^* j_! K ≅ t^* K`
   (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekCompUpperStarIsoOfFac`), by base change
@@ -85,7 +85,8 @@ noncomputable def mapDerivedCategoryOpenImmersionLowerShriekCompUpperStarIsoOfFa
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekCompUpperStarIsoOfFac A j t s h)
 
-/-- Blueprint `lem-cbc-proetale-extension-zero`: Extension by zero on the pro-etale site.
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: Extension by zero on the
+pro-etale site.
 
 The extension by zero `j_!` along an open immersion `j : U ⟶ X` on the small pro-étale sites is
 the exact left adjoint of `j^*`
@@ -104,7 +105,8 @@ theorem nonempty_iso_mapDerivedCategory_upperStar_openImmersionLowerShriek (t : 
   ⟨(mapDerivedCategoryOpenImmersionLowerShriekCompUpperStarIsoOfFac A j t s h).app K⟩
 
 /-- The pullback of a complex `D(j_!) K` along a morphism `s` missing the range of the open
-immersion `j` vanishes (blueprint `lem-cbc-proetale-extension-zero`, the stalks outside `U`). -/
+immersion `j` vanishes (blueprint `proposition-extension-zero-restriction-closed-subscheme`, the
+stalks outside `U`). -/
 theorem isZero_mapDerivedCategory_upperStar_openImmersionLowerShriek (s : T ⟶ X)
     (hjs : Set.range j.base ∩ Set.range s.base = ∅)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A)) :

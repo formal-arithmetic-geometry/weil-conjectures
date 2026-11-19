@@ -408,7 +408,7 @@ Noetherian, and its uniformizer generates the ideal. Thus
 identifies invertibility of the unit with local completeness, on an arbitrary Y.
 2. This local condition agrees with `def-weil-derived-complete`. Exact countable
 products (`lem-weil-proetale-countable-products-exact`) and
-`lem-weil-derived-limit-existence` identify the products in the K-injective tower
+`lemma-reduction-derived-nakayama` identify the products in the K-injective tower
 with the original reduction products. Apply
 `lem-weil-derived-limit-tower-core-property-triangle` to obtain the Roos triangle
 on C(M); the composite of its first arrow with the unit has the canonical quotient
@@ -440,7 +440,7 @@ preserve cohomology and constructibility. For a shift by m,
 `lem-sp-derived-cohomology-shift` translates a uniform interval [r,s] to
 [r-m,s-m]. `lem-weil-proetale-dbc-triangulated` supplies finite-level zero,
 isomorphism and shift closure. Its constructibility agrees with
-`def-weil-finite-torsion-constructibility` and
+`definition-constructible-sheaves` and
 `def-weil-proetale-constructible-sheaf`: finite locally closed constructible
 partitions, locally constant restrictions with finite stalks, and bounded
 cohomology. Combine this with step 3 and

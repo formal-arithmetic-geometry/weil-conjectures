@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.AffineModuleTensorCounitLinear
+import WeilConjectures.AlgebraicGeometry.AffineModuleTensorExtensionEpi
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-! # Affine module tensor CoherenceComparisons
@@ -74,8 +75,6 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
-set_option maxHeartbeats 600000 in
--- Transport through three sheaf-module object equalities needs extra elaboration heartbeats.
 /-- The pullback counit factors through scalar extension; its comparison map is epic.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-counit-factor).
@@ -159,8 +158,9 @@ theorem affine_module_tensor_counitFactor
     have h := he (P.obj G) F a' W p
     have hh : eqToHom (q (P.obj G)) ≫ a' =
         (adj.homEquiv (P.obj G) F).symm δ := by simp [a']
-    rw [hh, Equiv.apply_symm_apply] at h
-    exact h.symm
+    exact h.symm.trans (congrArg (fun a ↦ a.val.app W p)
+      ((congrArg (adj.homEquiv (P.obj G) F) hh).trans
+        ((adj.homEquiv (P.obj G) F).apply_symm_apply δ)))
   let a : H.obj G ⟶ F := eqToHom (hobj G) ≫ a'
   refine ⟨⟨a, ?_⟩, ?_⟩
   · apply (cancel_epi (κ.hom.app G)).mp
@@ -168,26 +168,8 @@ theorem affine_module_tensor_counitFactor
     change a'.val.app W
       (((eqToHom (hobj G)).val.app W)
         ((γ.app G).val.app W ((κ.hom.app G).val.app W p))) = _
-    rw [hH.2 G W p, ha W p]
-    exact hδ W p
-  · refine ⟨?_⟩
-    intro Z k₁ k₂ hk
-    let l₁ : SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G) ⟶ Z :=
-      eqToHom (hobj G).symm ≫ k₁
-    let l₂ : SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G) ⟶ Z :=
-      eqToHom (hobj G).symm ≫ k₂
-    have hl : l₁ = l₂ := by
-      apply (cancel_epi (eqToHom (q (P.obj G)))).mp
-      apply (adj.homEquiv (P.obj G) Z).injective
-      ext W p
-      rw [he (P.obj G) Z l₁ W p, he (P.obj G) Z l₂ W p]
-      erw [← hH.2 G W p]
-      change ((eqToHom (hobj G) ≫ l₁).val.app W) _ =
-        ((eqToHom (hobj G) ≫ l₂).val.app W) _
-      simp only [l₁, l₂, ← Category.assoc, eqToHom_trans, eqToHom_refl, Category.id_comp]
-      exact congrArg (fun z ↦ z.val.app W ((κ.hom.app G).val.app W p)) hk
-    have := congrArg (fun l ↦ eqToHom (hobj G) ≫ l) hl
-    simpa [l₁, l₂] using this
+    exact (congrArg (a'.val.app W) (hH.2 G W p)).trans ((ha W p).trans (hδ W p))
+  · exact affine_module_tensor_extension_epi f B b ε P κ H hobj γ hH.2 G
 
 end
 end AlgebraicGeometry.Scheme.Modules

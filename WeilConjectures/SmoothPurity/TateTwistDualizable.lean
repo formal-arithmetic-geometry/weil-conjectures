@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyF
 # The shifted Tate twists are dualizable
 
 For a separated `k`-scheme of finite type `X`, the shifted Tate twist `ℚ̄_ℓ,X(d)[n]` is a
-dualizable object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (blueprint `det-def-sp-tate-twist-locally-free` (3),
-subsection `sk-prop-an`): `ℚ̄_ℓ,X(d)` is locally free of rank one, and shifts of dualizable
-objects are dualizable.
+dualizable object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (blueprint `definition-tate-twists` (3),
+subsection `proposition-purity-vector-bundles`): `ℚ̄_ℓ,X(d)` is locally free of rank one, and shifts
+of dualizable objects are dualizable.
 
 -/
 
@@ -40,10 +40,10 @@ variable {X : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 variable (X) in
-/-- **The Tate twists are invertible** (blueprint `det-def-sp-tate-twist-locally-free` (3),
-subsection `sk-prop-an`: "for `Λ ∈ {A, 𝒪_E, E, ℚ̄_ℓ}` the sheaf `Λ_X(1)` is an invertible
-`Λ_X`-module [...] hence so are `Λ_X(d)` and `Λ_X(-d)`"): the Tate twist `ℚ̄_ℓ,X(d)`, placed in
-degree `0`, is a dualizable bounded constructible complex. -/
+/-- **The Tate twists are invertible** (blueprint `definition-tate-twists` (3),
+subsection `proposition-purity-vector-bundles`: "for `Λ ∈ {A, 𝒪_E, E, ℚ̄_ℓ}` the sheaf `Λ_X(1)` is
+an invertible `Λ_X`-module [...] hence so are `Λ_X(d)` and `Λ_X(-d)`"): the Tate twist `ℚ̄_ℓ,X(d)`,
+placed in degree `0`, is a dualizable bounded constructible complex. -/
 theorem isDualizable_boundedConstructibleTateTwist (d : ℤ) :
     IsDualizable (boundedConstructibleTateTwist ℓ X d 0) := by
   have := neZero_natCast_of_ringChar_ne ℓ (k := k)

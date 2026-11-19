@@ -30,7 +30,7 @@ import WeilConjectures.CategoryTheory.R.RHomDerivedRoof
 # Supported cohomology as morphisms
 
 Source: blueprint sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md,
-order 1940 (blueprint: lem-pur-supported-hom).
+order 1940 (blueprint: lemma-sections-support-closed-subscheme--1).
 
 The coefficient sheaf is pushed forward before being placed in degree zero.
 The derived category is the ambient category of all module sheaves. The natural

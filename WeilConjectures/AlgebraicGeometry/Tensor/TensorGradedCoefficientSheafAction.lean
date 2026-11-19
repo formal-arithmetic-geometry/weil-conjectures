@@ -101,8 +101,8 @@ theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
       T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
-    μ (tensorGradedSection T D 0 (tensorPowSection f 1)) ≫
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+    (μ (tensorGradedSection T D 0 (tensorPowSection f 1))).asHom ≫
         (T.degree (n * ((e + 1) + 1))).τ₁ =
       (T.degree (n * (e + 1))).τ₁ ≫
         tensorCoefficientKernelMap j L hI n e (e + 1)
@@ -119,7 +119,7 @@ theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
       σ μ hlocal hrestrict hglobal
     simp only [← Category.assoc] at h
     have hdiag : T.k (n * (e + 1)) ≫
-        μ (tensorGradedSection T D 0 (tensorPowSection f 1)) =
+        (μ (tensorGradedSection T D 0 (tensorPowSection f 1))).asHom =
       tensorCoefficientKernelMap j L hI n e (e + 1)
         (mulTensorPowSection f ((tensorPullback j).obj
           (j.ker.toModules ⊗ L.tensorPow n)) e 1) ≫

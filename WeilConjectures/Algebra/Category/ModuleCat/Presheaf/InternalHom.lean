@@ -81,11 +81,11 @@ lemma sectionsSMul_app_apply (s : RingCat.sectionsSubring (S ⋙ forget₂ _ Rin
 /-- Multiplication by compatible families of sections of `S`, as a ring homomorphism to the
 endomorphisms of a presheaf of modules over `S`. -/
 noncomputable def sectionsSMulHom : RingCat.sectionsSubring (S ⋙ forget₂ _ RingCat) →+* End N where
-  toFun := sectionsSMul N
-  map_one' := hom_ext fun _ ↦ by ext; exact one_smul _ _
-  map_mul' _ _ := hom_ext fun _ ↦ by ext; exact mul_smul _ _ _
-  map_zero' := hom_ext fun _ ↦ by ext; exact zero_smul _ _
-  map_add' _ _ := hom_ext fun _ ↦ by ext; exact add_smul _ _ _
+  toFun s := .of (sectionsSMul N s)
+  map_one' := End.ext (hom_ext fun _ ↦ by ext; exact one_smul _ _)
+  map_mul' _ _ := End.ext (hom_ext fun _ ↦ by ext; exact mul_smul _ _ _)
+  map_zero' := End.ext (hom_ext fun _ ↦ by ext; exact zero_smul _ _)
+  map_add' _ _ := End.ext (hom_ext fun _ ↦ by ext; exact add_smul _ _ _)
 
 variable {N} in
 /-- Multiplication by a compatible family `s` of sections commutes with morphisms `g : N ⟶ N'`:

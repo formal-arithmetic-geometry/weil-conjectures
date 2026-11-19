@@ -117,7 +117,6 @@ open CompletionUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 800000 in
 -- Keep large coefficient-functor elaboration local to this proof.
 private theorem normalized_comparison (Y : Scheme.{t})
     (S : CoefficientDerivedSystemCalculus l E Y) (M : OrdinaryModel l E Y) :
@@ -223,7 +222,6 @@ private theorem restricted_section_cancel (Y : Scheme.{t})
     abEqToHom_heq (coefficientSequenceEvaluationAb_eq l E Y M n U) y
   exact eq_of_heq (hleft.trans (hcast.trans hright))
 
-set_option maxHeartbeats 800000 in
 -- Keep large coefficient-functor elaboration local to this proof.
 private theorem ordinary_unit_section (Y : Scheme.{t})
     (M : OrdinaryModel l E Y) (P : CochainComplex (scalarReductionSource l E Y) ℤ)
@@ -282,7 +280,6 @@ private theorem constantUnit_eq (Y : Scheme.{t})
   simp [constantLimitUnit, Functor.rightDerivedFunctorUnitQ,
     Functor.mapHomotopyCategoryFactors]
 
-set_option maxHeartbeats 800000 in
 -- Coefficient adjunctions involve large, independently chosen comparison functors.
 /-- Every good complex admits a strict quotient presentation whose comparison is
 the actual adjunction transpose of the strict tensor-unit map.

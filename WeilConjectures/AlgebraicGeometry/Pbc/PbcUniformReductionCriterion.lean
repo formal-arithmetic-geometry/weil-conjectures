@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonDerived
 import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedConstructibleTowerLocalEffectivity
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.LevelwiseAdicTruncations
 
-/-! # A uniform cohomology criterion for compatible constructible reductions
-Source: the uniform triangulation node, steps 2, 6 and 7.
-(blueprint: lem-weil-pbc-uniform-reduction-criterion). -/
+/-! # A uniform cohomology criterion for compatible constructible reductions -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -247,13 +245,7 @@ private theorem levelOrigin_realization (T : Scheme.{u})
 
 /-- A common intrinsic cohomological interval gives the canonical uniform local
 models and compatible bounded-below etale origins. This is the reverse half of the
-uniform criterion.
-Source: the uniform triangulation supplement, steps 5--7
-(blueprint: lem-weil-pbc-uniform-reduction-criterion).
-Proof: apply normalized local effectivity to the canonical reduction tower; use the
-finite-ring derived-origin criterion at each level and lift its normalizations through
-bounded-below comparison full faithfulness. The quotient cocycle and faithfulness
-give the required compatibility equations. -/
+uniform criterion. -/
 theorem pbcUniformReductionCriterion_backward (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) [IsNoetherian T]
@@ -287,9 +279,7 @@ theorem pbcUniformReductionCriterion_backward (l : ℕ) [Fact l.Prime]
   rfl
 
 /-- Uniform local models with compatible etale origins are equivalent to the
-uniform intrinsic cohomology criterion, for the integral coefficient datum.
-Source: blueprint cor-weil-pbc-constructible-complete, triangulation supplement,
-steps 2, 6 and 7 (blueprint: lem-weil-pbc-uniform-reduction-criterion). -/
+uniform intrinsic cohomology criterion, for the integral coefficient datum. -/
 theorem pbcUniformReductionCriterion (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) [IsNoetherian T]

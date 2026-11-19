@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 `sk-prop-sf-existence/det-def-sfb-dc-lower-shriek.md`
-(blueprint: det-def-sfb-dc-lower-shriek).
+(blueprint: proposition-six-operations-dctf--9).
 
 The lower shriek `Rf_!^c = Rp_* ∘ i_!` on bounded constructible complexes, for an arbitrary
 commutative condensed coefficient ring whose derived pushforwards preserve bounded
@@ -21,7 +21,7 @@ constructibility, and the chosen `Rf_! = Rf_!^{c_f}`, are the landed declaration
 `boundedConstructibleLowerShriekOfCompactificationOfPreserves` and
 `boundedConstructibleLowerShriekOfPreserves` of
 `Sheaf.Paper.BoundedConstructibleLowerShriekOfPreserves`
-(blueprint: det-def-sfb-dc-lower-shriek-definition), built on the preservation hypothesis
+(blueprint: proposition-construction-independence-rf-shriek), built on the preservation hypothesis
 `PreservesBoundedConstructiblePushforwards`. This file adds the compatibility of these functors
 with the ambient lower shriek `R(p_*) ∘ D(i_!)` for the same compactification.
 
@@ -62,7 +62,7 @@ and `b : ι_Y G ≅ R(p_*) ι_Z` their inclusion compatibilities, the component 
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 `sk-prop-sf-existence/det-def-sfb-dc-lower-shriek.md`, compatibility paragraph
-(blueprint: det-def-sfb-dc-lower-shriek). -/
+(blueprint: proposition-six-operations-dctf--9). -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreservesCompatibility
     {f : X ⟶ Y} (c : Compactification.BoundaryCompactification f.left) :
     boundedConstructibleLowerShriekOfCompactificationOfPreserves Λ ℓ H c ⋙

@@ -44,7 +44,7 @@ private theorem mate_whiskerTop (τ : TwoSquare EA Fs Fl EB) (γ : EA' ⟶ EA) :
     Functor.whiskerRight_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
     Functor.comp_map, Functor.map_comp, Category.id_comp, Category.assoc]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj, TwoSquare] at τ ⊢
+  dsimp only [Functor.comp_obj, TwoSquare] at τ ⊢
   erw [Category.comp_id]
   have hu := alevel.unit_naturality (γ.app (Gs.obj M))
   simpa only [Category.assoc, Category.comp_id, Category.id_comp,
@@ -60,7 +60,7 @@ private theorem mate_whiskerBottom (τ : TwoSquare EA Fs Fl EB) (γ : EB ⟶ EB'
     Functor.whiskerRight_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
     Functor.comp_map, Functor.map_comp, Category.id_comp, Category.assoc]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj, TwoSquare] at τ ⊢
+  dsimp only [Functor.comp_obj, TwoSquare] at τ ⊢
   erw [Category.comp_id, Category.id_comp]
   have hn := γ.naturality (asys.counit.app M)
   have hh := congrArg (fun f ↦ alevel.unit.app (EA.obj (Gs.obj M)) ≫
@@ -89,7 +89,7 @@ private theorem transition_mates
   let τ₀ : TwoSquare EA₀ Fs Fl EB₀ := α₀.inv
   have hh : (τ₁.hComp τ₂).whiskerTop tA = τ₀.whiskerBottom tB := by
     ext H
-    dsimp only [τ₀, τ₁, τ₂, TwoSquare.natTrans]
+    dsimp only [τ₀, τ₁, τ₂]
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp_app,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
     apply (cancel_epi (α₀.hom.app H)).1
@@ -154,7 +154,7 @@ the schemes is required. -/
 theorem integralSystemDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : Direct l E f) : Nonempty (DirectEvaluation l E d) := by
   let β (n : ℕ) := (mateEquiv d.adj (finiteAdj l E f n)
-    (TwoSquare.mk _ _ _ _ (pullbackTensorDerivedEvaluation l E f n).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (pullbackTensorDerivedEvaluation l E f n).inv))
   have hβ (n : ℕ) : IsIso (β n) := integralDirectEvaluationMate_invertible l E f d n
   let e (n : ℕ) := asIso (β n)
   let r (n : ℕ) := (restrictedDirect_exists l E f n).choose
@@ -179,7 +179,7 @@ theorem integralSystemDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y)
     rw [mateEquiv_counit, Iso.hom_inv_id_app_assoc]
   · intro n M
     let δ := ((mateEquiv (finiteAdj l E f n) (finiteAdj l E f (n + 1))).symm
-      (TwoSquare.mk _ _ _ _ (r n).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (r n).inv))
     have ht := transition_mates d.adj (finiteAdj l E f (n + 1)) (finiteAdj l E f n)
       (normalizedDVRRes l E Y (Nat.le_succ n))
       (normalizedDVRRes l E X (Nat.le_succ n))

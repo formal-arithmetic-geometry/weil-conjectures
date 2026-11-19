@@ -338,7 +338,7 @@ specialized to a complete ring (blueprint: lem-weil-derived-complete-module-fini
 
 Proof:
 1. Exact countable products of modules give countable products in the derived category,
-   preserved by cohomology, by `lem-weil-derived-limit-existence`. Complete the tower
+   preserved by cohomology, by `lemma-reduction-derived-nakayama`. Complete the tower
    endomorphism `1 - s` to a Roos triangle. Derived completeness makes its first vertex
    zero, hence `1 - s` is invertible. Apply degree-zero cohomology and identify the
    product of degree-zero modules with sequences: the resulting invertible linear map

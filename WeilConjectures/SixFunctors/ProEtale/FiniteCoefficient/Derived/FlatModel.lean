@@ -13,8 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 # Bounded flat models on the pro-étale site
 
 Finite Tor amplitude in `[a, b]` of a bounded constructible complex of pro-étale sheaves is the
-same as admitting a bounded flat model concentrated in `[a, b]` (`sk-lem-sf-flat-model`,
-`lem-sf-flat-model`). This is the pro-étale counterpart of
+same as admitting a bounded flat model concentrated in `[a, b]` (`lemma-flat-models-generators`,
+`lemma-flat-models-generators--1`). This is the pro-étale counterpart of
 `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`.
 
 ## Main statements
@@ -42,8 +42,8 @@ variable {X : Scheme.{u}}
 
 namespace ProEtale.DerivedCategory
 
-/-- Blueprint `sk-lem-sf-flat-model` (also `lem-sf-flat-model`): Bounded flat model of finite
-Tor amplitude, on the small pro-étale site.
+/-- Blueprint `lemma-flat-models-generators` (also `lemma-flat-models-generators--1`): Bounded flat
+model of finite Tor amplitude, on the small pro-étale site.
 
 For `K ∈ D^b_c(X_proét, A)` and integers `a ≤ b` the following are equivalent: `K` has Tor
 amplitude in `[a, b]`; and `K` is isomorphic in `D(X_proét, A)` to a bounded complex `P` of flat
@@ -92,7 +92,6 @@ noncomputable def derivedTensorQObjSingleFunctorObjIso {a b : ℤ}
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale site
 -- take long to synthesize
 /-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model, on the small

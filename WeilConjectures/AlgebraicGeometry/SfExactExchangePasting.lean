@@ -278,14 +278,14 @@ private lemma open_exchange_mate_coefficients
         (openImmersionLowerShriekUpperStarAdjunction B l
           ).mapDerivedCategoryAdjunction).symm
         (TwoSquare.mk _ _ _ _
-          (exactDerivedSquareUpperStarIso B sq.toCommSq).inv)).natTrans := by
+          (exactDerivedSquareUpperStarIso B sq.toCommSq).inv)) := by
   let := isIso_openImmersionLowerShriekBaseChangeMap B sq
   have h := mateEquiv_eq_of_unit
     (openImmersionLowerShriekUpperStarAdjunction B r).mapDerivedCategoryAdjunction
     (openImmersionLowerShriekUpperStarAdjunction B l).mapDerivedCategoryAdjunction
     (TwoSquare.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B sq).hom)
     (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq.toCommSq).inv) (fun K ↦ ?_)
-  · exact (congrArg TwoSquare.natTrans ((mateEquiv _ _).symm_apply_eq.mpr h.symm)).symm
+  · exact (((mateEquiv _ _).symm_apply_eq.mpr h.symm)).symm
   have hK := Adjunction.mapDerivedCategoryAdjunction_mate
     (openImmersionLowerShriekUpperStarAdjunction B r)
     (openImmersionLowerShriekUpperStarAdjunction B l)
@@ -330,7 +330,7 @@ private lemma unbounded_open_base_change
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b) :
-    ((unboundedFormalism A).baseChange t l r b sq.w).natTrans =
+    ((unboundedFormalism A).baseChange t l r b sq.w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) sq).hom := by
   rw [ExchangeFormalism.baseChange, unbounded_sq_iso]
@@ -756,9 +756,9 @@ private theorem exact_identity_mate
       Functor.whiskerLeft P e'.hom)
     (M : C) :
     P.map (r.hom.app M) =
-      (mateEquiv a a' (TwoSquare.mk _ _ _ _ sq.hom)).natTrans.app M ≫
+      (mateEquiv a a' (TwoSquare.mk _ _ _ _ sq.hom)).app M ≫
         r'.hom.app (P.obj M) := by
-  have hnat : (mateEquiv a a' (TwoSquare.mk _ _ _ _ sq.hom)).natTrans =
+  have hnat : (mateEquiv a a' (TwoSquare.mk _ _ _ _ sq.hom)) =
       Functor.whiskerRight r.hom P ≫ Functor.whiskerLeft P r'.inv := by
     have hs : (TwoSquare.mk _ _ _ _ sq.hom).whiskerRight e'.inv =
         (TwoSquare.mk P (𝟭 C) (𝟭 D) P
@@ -773,7 +773,7 @@ private theorem exact_identity_mate
       rw [← cancel_mono (P.map (e.hom.app K))]
       simp only [Category.assoc, ← P.map_comp, Iso.inv_hom_id_app,
         P.map_id, Category.comp_id]
-      dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+      dsimp only [TwoSquare.mk]
       rw [h, Iso.inv_hom_id_app]
       simp
     have hm := congrArg (mateEquiv a Adjunction.id) hs
@@ -783,7 +783,7 @@ private theorem exact_identity_mate
       congrArg Iso.hom hr', show conjugateEquiv a Adjunction.id e.inv = r.hom from
       congrArg Iso.hom hr] at hm
     ext K
-    have h := congr_app (congrArg TwoSquare.natTrans hm) K
+    have h := congr_app (hm) K
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app, Category.id_comp] at h ⊢
@@ -874,7 +874,7 @@ private theorem sfExactProperExchange_paste
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Iso.symm_hom, Iso.symm_inv] at h
   change ((unboundedFormalism A).pfBaseChange t (l₁ ≫ l₂) (r₁ ≫ r₂) b
-    (sq₁.vert_comp sq₂).w).natTrans.app K = _ at h
+    (sq₁.vert_comp sq₂).w).app K = _ at h
   rw [unbounded_pf_base_change A (sq₁.vert_comp sq₂),
     unbounded_pf_base_change A sq₁, unbounded_pf_base_change A sq₂] at h
   dsimp only [unboundedFormalism] at h
@@ -922,7 +922,7 @@ private theorem sfExactOpenExchange_paste
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Iso.symm_hom, Iso.symm_inv] at h
-  dsimp only [TwoSquare.natTrans, unboundedFormalism] at h
+  dsimp only [unboundedFormalism] at h
   apply (cancel_mono ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
     (ModuleCat.{u + 1} A) (sq₁.paste_vert sq₂)).hom.app K)).1
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]

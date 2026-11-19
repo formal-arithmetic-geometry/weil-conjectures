@@ -29,8 +29,8 @@ under retracts (`DerivedCategory.compactBoundedHom`), and the property is transp
 adjoints whose right adjoints preserve coproducts and have bounded amplitude
 (`DerivedCategory.compactBoundedHom_of_adjunction`).
 
-These are the closure properties used in blueprint `det-ctf-finite-compact-etale`: the compact
-objects of a triangulated category form a thick subcategory.
+These are the closure properties used in blueprint `proposition-compactness-finite-coefficients`:
+the compact objects of a triangulated category form a thick subcategory.
 -/
 
 @[expose] public section

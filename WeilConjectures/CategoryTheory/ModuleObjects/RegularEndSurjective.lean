@@ -30,7 +30,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [Preadditive C]
 /-- Every endomorphism `t` of the regular module `R` is the multiplication by the global section
 `η ≫ t`. -/
 lemma regularEndRingHom_surjective : Function.Surjective (regularEndRingHom (R := R)) :=
-  fun t ↦ ⟨Γ.ofHom (η[R] ≫ t.hom), regular_hom_ext (by
-    rw [regularEndRingHom_apply, Γ.hom_ofHom, one_comp_regularLift_regular])⟩
+  fun t ↦ ⟨Γ.ofHom (η[R] ≫ t.asHom.hom), End.ext (regular_hom_ext (by
+    rw [regularEndRingHom_apply, Γ.hom_ofHom, one_comp_regularLift_regular]))⟩
 
 end CategoryTheory.Mod

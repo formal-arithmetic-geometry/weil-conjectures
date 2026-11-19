@@ -150,7 +150,7 @@ Proof plan, step by step (the accepted DAG proof):
    flat and locally of finite presentation, so the flat locally finitely presented monomorphism
    lemma makes it open. No quasi-compactness of $j$ was used. Uses: lem-weil-pbc-proper-base-
    change, def-weil-proper-morphism, lem-weil-pbc-section-separated-closed-immersion, lem-weil-
-   pbc-etale-base-change-finite-limits, lem-weil-pbc-etale-composition-cancellation, def-weil-
+   pbc-etale-base-change-finite-limits, definition-torsion-sheaves--3, def-weil-
    etale-morphism, lem-pe-flat-lfp-monomorphism-open.
 2. For a clopen decomposition $X=U\amalg C$, the cited sheaf equivalence extends from abelian
    sheaves to constant-$A$ modules: the endomorphisms giving the action of each $a\in A$, and
@@ -199,7 +199,7 @@ Transpose under $Q\dashv R$. By the defining adjunct of $\pi_q$, the transpose o
    the right side is also $1$. Apply $R(t_{M_K})$, step 4 and naturality of $\pi_q$. As maps
    $M\otimes J\to Rq_*q_Z^*H_{M_K}$ this yields
 $$Rq_*(t_{M_K})\eta_{M_K}=Rq_*(d)\pi_q(q_Z^*H_M,J)((Rq_*t_M\eta_M)\otimes1_J).$$ Uses: def-kun-
-   projection-formula-map, def-kun-unbounded-exchange.
+   projection-formula-map, definition-derived-base-change-map.
 6. A finite ring is torsion: its finite additive group kills $1$. Proper base change is
    therefore invertible for $r$. Apply exchange/projection compatibility to the square
    $(r,q,e,q_Z)$, with $H_M,K$. It gives
@@ -242,9 +242,9 @@ The sum base-change map is the mate of the pullback square. Its unit equation is
    $u'_{h^*M}$. All inverse proper exchanges cancel by their invertibility. Transpose back to
    prove (**). Uses: lem-weil-pbc-etale-shriek-base-change-modules, def-weil-pbc-etale-shriek-
    base-change-map, lem-weil-pbc-exact-functor-derived-functor, lem-weil-pbc-localization-
-   universal-property, lem-weil-pbc-mate-pasting, def-kun-unbounded-exchange, lem-asd-open-base-
-   change-unit-mate, lem-kun-proper-base-change-torsion-ring, lem-kun-derived-pullback-
-   composition-monoidal.
+   universal-property, lem-weil-pbc-mate-pasting, definition-derived-base-change-map,
+   lem-asd-open-base- change-unit-mate, lem-kun-proper-base-change-torsion-ring,
+   lem-kun-derived-pullback- composition-monoidal.
 9. Take $W'=P=\operatorname{Spec}\Omega$ for a geometric point with $\Omega$ algebraically
    closed. The proper fibre $Z_P$ is finite type over the Noetherian affine $P$, hence quasi-
    compact and locally Noetherian. Choose a finite affine Noetherian cover: each member has
@@ -274,7 +274,7 @@ The sum base-change map is the mate of the pullback square. Its unit equation is
    $I=\varnothing$ both sides are zero. This is a computation of derived morphisms using step 2
    and the normalized evaluation lemma; it does not assume bounded resolutions or faithfulness
    of stalks on derived Hom groups. Uses: lem-asd-clopen-geometric-sections-derived-evaluation,
-   def-weil-pbc-etale-sum-extension, lem-weil-pbc-etale-restriction-injectives, def-kun-
+   lemma-acyclicity-pulled-back-injectives, lemma-acyclicity-pulled-back-injectives, def-kun-
    unbounded-exchange, lem-weil-pbc-mate-pasting.
 11. Apply (**) at all algebraic-closure geometric points of $W$. The maps $C_F,C_S$ are
    isomorphisms and all fibre comparisons from step 10 are isomorphisms. Thus every such inverse

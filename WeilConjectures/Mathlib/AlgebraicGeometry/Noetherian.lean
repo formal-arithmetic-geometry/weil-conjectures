@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Nilpotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Ideal
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Connected locally noetherian schemes with integral local rings

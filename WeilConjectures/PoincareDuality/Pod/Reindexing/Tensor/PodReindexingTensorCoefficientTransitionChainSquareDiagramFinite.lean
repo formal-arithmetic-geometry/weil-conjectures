@@ -94,7 +94,6 @@ private theorem quotientUnitSection
   exact h.trans (congrArg (fun c ↦ unrestrictedIntegralTensorSection l E X n
     (((isoReductionIntegralComplex l E g).obj P).X i) (op U) c x) ho)
 
-set_option maxHeartbeats 400000 in
 -- Transposing and evaluating the total tensor maps needs extra elaboration time.
 private theorem finiteSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 
 # The strictly local cover of the curve
 
-For a cover datum `p : C ⟶ X`, `c` of blueprint `det-tf-restriction-zero-covers`, let `X_y` and
+For a cover datum `p : C ⟶ X`, `c` of blueprint `lemma-tangent-cones-on-cover`, let `X_y` and
 `C_c` be the strict localizations of `X` at `y` and of `C` at `c`, and `ρ : C_c ⟶ X_y` the
 induced morphism (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.ρ`). Then:
 

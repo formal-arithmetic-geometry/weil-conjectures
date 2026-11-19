@@ -10,6 +10,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
+public import Mathlib.CategoryTheory.Sites.Subcanonical
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # Representations over disjoint components

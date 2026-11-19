@@ -18,7 +18,7 @@ in `k` and `ζ ∈ k` a primitive `N`-th root of unity. For a unit `g` on `U`, t
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_residue_eq_ord_of_isUnit`): an `N`-th root of `g`
 in a separable closure of `k(C)` is a Kummer element of the torsor. This produces the torsors
 with prescribed residues in the residue sequence of blueprint
-`lem-wf-open-curve-residue-sequence`.
+`proposition-no-fixed-class-degree-one--1`.
 -/
 
 @[expose] public section
@@ -76,9 +76,8 @@ lemma toFunctionField_appTop_topIso_inv (W : C.Opens) (m : U ⟶ W.toScheme) (hm
 variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k)) {N : ℕ}
   [NeZero N] [NeZero (N : k)] [HasEnoughRootsOfUnity k N] [ConnectedSpace U]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` is slow
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: residues of Kummer torsors.
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: residues of Kummer torsors.
 
 For a unit `g` on a nonempty connected open `U` of `C` and a primitive `N`-th root of unity `ζ`
 of `k`, the Kummer torsor of `N`-th roots of `g` has residue `ord_z g mod N` against `ζ` at

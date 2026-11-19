@@ -49,7 +49,7 @@ Proof:
    symmetric opposite. The two tensor adjunctions give the displayed natural Hom
    equivalences for every pair of quasi-coherent complexes.
 3. On an open cover, represent K by strictly perfect complexes. The termwise
-   pullback computes derived pullback (lem-pc-flat-complex-derived-pullback), and
+   pullback computes derived pullback (lemma-coherent-base-change-invertible-sheaves--2), and
    preserves finite free modules and their direct summands. Thus Lg*K is perfect.
    Both pulled objects have quasi-coherent cohomology
    (lem-pc-derived-pullback-tensor-qcoh). The global perfect-RHom comparison on the

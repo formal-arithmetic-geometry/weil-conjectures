@@ -75,7 +75,7 @@ private theorem mixed_component
 
 /-- The mixed tensor square transports a conjugate with coherent pullback endpoints.
 
-Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
+Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
 Proof: Use tensor comparison naturality on the inverse endpoint maps. Pullback tower
 coherence cancels these inverses. Apply the mixed scalar square, followed by naturality
 of the tensor/pullback isomorphism along the source associators. Finally cancel the

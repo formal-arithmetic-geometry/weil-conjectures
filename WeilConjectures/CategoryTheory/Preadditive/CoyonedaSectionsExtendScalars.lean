@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.NumberTheory.NumberField.House
 
 /-!
 # Sections over an object commute with extension of scalars
@@ -44,7 +46,7 @@ noncomputable abbrev coyonedaSections (c : A →+* (End X)ᵐᵒᵖ) : C ⥤ Mod
   preadditiveCoyonedaObj X ⋙ ModuleCat.restrictScalars c
 
 lemma coyonedaSections_smul (c : A →+* (End X)ᵐᵒᵖ) {M : C} (a : A)
-    (m : (coyonedaSections c).obj M) : a • m = (c a).unop ≫ m :=
+    (m : (coyonedaSections c).obj M) : a • m = (c a).unop.asHom ≫ m :=
   rfl
 
 end Sections
@@ -53,7 +55,7 @@ variable {C₁ C₂ : Type*} [Category.{w} C₁] [Category.{w} C₂] [Preadditiv
   {A B : Type w} [CommRing A] [CommRing B] (f : A →+* B)
   {X₁ : C₁} {X₂ : C₂} (c₁ : A →+* (End X₁)ᵐᵒᵖ) (c₂ : B →+* (End X₂)ᵐᵒᵖ)
   (H : C₁ ⥤ C₂) [H.Additive] (e : H.obj X₁ ≅ X₂)
-  (hH : ∀ a, e.inv ≫ H.map (c₁ a).unop = (c₂ (f a)).unop ≫ e.inv)
+  (hH : ∀ a, e.inv ≫ H.map (c₁ a).unop.asHom = (c₂ (f a)).unop.asHom ≫ e.inv)
 
 /-- The `A`-linear map `Hom(X₁, M) ⟶ Hom(X₂, H M)`, `m ↦ e⁻¹ ≫ H m`. -/
 noncomputable def coyonedaSectionsMap :
@@ -100,7 +102,8 @@ lemma coyonedaSectionsExtendScalarsComparison_app_one_tmul {M : C₁}
 endomorphism of `X₁` is the action of a scalar of `A` and if `B` acts bijectively on `X₂`:
 both sides are then `B`. -/
 lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
-    (hc₁ : ∀ t : X₁ ⟶ X₁, ∃ a, (c₁ a).unop = t) (hc₂ : Function.Bijective fun b ↦ (c₂ b).unop) :
+    (hc₁ : ∀ t : X₁ ⟶ X₁, ∃ a, (c₁ a).unop = .of (t))
+    (hc₂ : Function.Bijective fun b ↦ (c₂ b).unop) :
     IsIso ((coyonedaSectionsExtendScalarsComparison f c₁ c₂ H e hH).app X₁) := by
   let α := (coyonedaSectionsExtendScalarsComparison f c₁ c₂ H e hH).app X₁
   let one : (ModuleCat.extendScalars f).obj ((coyonedaSections c₁).obj X₁) :=
@@ -112,7 +115,7 @@ lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
       obtain ⟨a, ha⟩ := hc₁ m
       let i : (coyonedaSections c₁).obj X₁ := 𝟙 X₁
       have hm : @Eq ((coyonedaSections c₁).obj X₁) m (a • i) :=
-        ha.symm.trans (Category.comp_id _).symm
+        (congrArg End.asHom ha).symm.trans (Category.comp_id _).symm
       refine ⟨a • b, ?_⟩
       rw [hm, ← TensorProduct.smul_tmul]
       exact congrArg (· ⊗ₜ[A, f] i) (@mul_one B _ (a • b)).symm
@@ -120,7 +123,7 @@ lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
       obtain ⟨b, rfl⟩ := hz
       obtain ⟨b', rfl⟩ := hz'
       exact ⟨b + b', (add_smul _ _ _).symm⟩
-  have hα (b : B) : α (b • one) = (c₂ b).unop ≫ e.inv := by
+  have hα (b : B) : α (b • one) = (c₂ b).unop.asHom ≫ e.inv := by
     rw [map_smul, coyonedaSectionsExtendScalarsComparison_app_one_tmul, H.map_id,
       Category.comp_id]
     rfl
@@ -128,11 +131,12 @@ lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
   refine ⟨fun z z' h ↦ ?_, fun y ↦ ?_⟩
   · obtain ⟨b, rfl⟩ := hgen z
     obtain ⟨b', rfl⟩ := hgen z'
-    have h' : (c₂ b).unop ≫ e.inv = (c₂ b').unop ≫ e.inv := (hα b).symm.trans (h.trans (hα b'))
-    rw [hc₂.1 ((cancel_mono e.inv).1 h')]
-  · obtain ⟨b, hb⟩ := hc₂.2 (y ≫ e.hom)
+    have h' : (c₂ b).unop.asHom ≫ e.inv = (c₂ b').unop.asHom ≫ e.inv :=
+      (hα b).symm.trans (h.trans (hα b'))
+    rw [hc₂.1 (End.ext ((cancel_mono e.inv).1 h'))]
+  · obtain ⟨b, hb⟩ := hc₂.2 (End.of (y ≫ e.hom))
     refine ⟨b • one, ?_⟩
     rw [hα, Iso.comp_inv_eq]
-    exact hb
+    exact congrArg End.asHom hb
 
 end CategoryTheory

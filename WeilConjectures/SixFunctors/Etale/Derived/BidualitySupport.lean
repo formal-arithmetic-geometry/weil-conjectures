@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Derived
 /-!
 # Complexes supported on a finite set of points
 
-The last step of the proof of blueprint `thm-weil-etale-geometric-biduality`: the cone `Δ` of the
+The last step of the proof of blueprint `theorem-verdier-biduality--1`: the cone `Δ` of the
 double-dual map is supported on a finite set of closed points, and its direct image to the base
 field vanishes, so `Δ = 0`. Here this is the following statement: if `K ∈ D(X_ét, Λ)` restricts to
 zero on the complement of a closed subscheme `i : Z ⟶ X` which is finite over the base `S`, and
@@ -50,7 +50,7 @@ theorem isZero_of_isZero_rightDerivedLowerStar_obj_of_isFinite {X Y : Scheme.{u}
   exact ((_root_.DerivedCategory.homologyFunctor _ q).map_isZero h₁).of_iso
     ((((f)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso q).app N)
 
-/-- Blueprint `thm-weil-etale-geometric-biduality`, the final step: let `a : X ⟶ S`, let
+/-- Blueprint `theorem-verdier-biduality--1`, the final step: let `a : X ⟶ S`, let
 `i : Z ⟶ X` be a closed immersion with `i ≫ a` finite and `j : U ⟶ X` the open complement. If
 `K ∈ D(X_ét, Λ)` restricts to zero on `U` and `Ra_* K = 0`, then `K = 0`. -/
 theorem isZero_of_isZero_rightDerivedLowerStar_of_isFinite {X S Z U : Scheme.{u}} (a : X ⟶ S)

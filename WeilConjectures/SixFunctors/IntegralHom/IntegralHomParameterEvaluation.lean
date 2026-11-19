@@ -10,6 +10,7 @@ import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorKoszulExistence
 import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurryNormalization
 import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationCoefficient
 import WeilConjectures.SixFunctors.IntegralHom.HomComplexTensorPureEquivalence
+import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRepresentativeUncurry
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
 /-! Coherent evaluation for the integral tensor presentation.
@@ -84,10 +85,102 @@ private theorem map_comp_exchange {B : Type*} [Category* B] (F : A ⥤ B)
     a ≫ F.map (f ≫ g) = b ≫ d := by
   rw [Functor.map_comp, ← Category.assoc, h, Category.assoc, h']
 
+private theorem map_comp_swap_evaluation {B : Type*} [Category* B] (F : A ⥤ B)
+    {P Q I : A} {X Y : B} (c : F.obj P ≅ X) (d : F.obj Q ≅ Y)
+    (s : P ⟶ Q) (a : Q ⟶ I) (σ : X ⟶ Y) (e : Y ⟶ F.obj I)
+    (hs : c.hom ≫ σ = F.map s ≫ d.hom) (ha : d.hom ≫ e = F.map a) :
+    c.inv ≫ F.map (s ≫ a) = σ ≫ e := by
+  rw [Functor.map_comp, ← ha, ← Category.assoc (F.map s), ← hs]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+
 end Transport
 
 attribute [local irreducible] derivedInternalHomOfUniverses homComplexFunctor
   completedIntegralCommRingSheaf totalPair evaluate homModelMap
+
+private theorem totalPair_eq_coefficientTensorGenerator
+    (Y : AlgebraicGeometry.Scheme.{t})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    [EssentiallySmall.{t + 1} Y.ProEt]
+    [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)}]
+    [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)}]
+    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ) (i j : ℤ)
+    (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    totalPair.{t, u} Y R P Q i j U x y = coefficientTensorGenerator.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
+  simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
+    CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  rfl
+
+private theorem tensor_presentation_parameter_evaluation_of_coefficients
+    (Y : AlgebraicGeometry.Scheme.{t})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    [EssentiallySmall.{t + 1} Y.ProEt]
+    [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)}]
+    [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)}]
+    (S : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y) R))
+    (T : CoefficientTensorModels (AlgebraicGeometry.Scheme.ProEt.topology Y) R S)
+    : ∃ adj : Functor.curry.obj S.tensor ⊣₂
+        Functor.curry.obj (hom Y R),
+    ∀ (P I S' : CochainComplex (Modules.{t, u} Y R) ℤ)
+      (hP : flat.{t, u} Y R P)
+      (hS : flat.{t, u} Y R S'), I.IsKInjective →
+      ∀ q : S' ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)}
+        (R := R) P I,
+      ∃ beta : ((totalTensor.{t, u} Y R).obj P).obj S' ⟶ I,
+        (∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+          (x : (P.X i).val.obj U) (s : (S'.X j).val.obj U),
+          (beta.f (i + j)).val.app U
+            (totalPair.{t, u} Y R P S' i j U x s) =
+            (i * j).negOnePow • evaluate.{t, u} Y R P I j i U ((q.f j).val.app U s) x) ∧
+        T.comparison.inv.app (⟨P, hP⟩, ⟨S', hS⟩) ≫ DerivedCategory.Q.map beta =
+          S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P))
+            (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)) ≫
+          (adj.adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I) := by
+  let := derivedCategory.{t, u} Y R
+  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  have hkoszul := ringedTensor_koszul_exists.{t + 1, t, u, (max u (t + 1)) + 1} J R S T
+  let σ := hkoszul.choose
+  have hσ := hkoszul.choose_spec
+  refine ⟨swappedParameterAdjunction S σ, ?_⟩
+  intro P I S' hP hS _ q
+  have hcomponent (K) :
+      (swappedParameterAdjunction S σ).adj K = swappedAdjunction S σ K := by
+    rfl
+  simp only [hcomponent]
+  have hrepresentative := hσ P S' hP hS
+  let s := hrepresentative.choose
+  have hs := hrepresentative.choose_spec.1
+  have hsq := hrepresentative.choose_spec.2
+  have huncurry := representative_uncurry_evaluation Y R S T S' P I hS hP q
+  let ψ := huncurry.choose
+  have hψ := huncurry.choose_spec.1
+  have hu := huncurry.choose_spec.2
+  refine ⟨s.hom ≫ ψ, ?_, ?_⟩
+  · intro i j U x y
+    change (ψ.f (i + j)).val.app U
+      ((s.hom.f (i + j)).val.app U _) = _
+    have hs' := hs i j (i + j) rfl (add_comm j i) U x y
+    rw [totalPair_eq_coefficientTensorGenerator]
+    rw [hs']
+    simp only [Units.smul_def, map_zsmul]
+    rw [hψ j i (i + j) (add_comm j i) rfl U y x]
+    simp only [evaluate, projection, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+      ModuleCat.comp_apply]
+  · change (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map (s.hom ≫ ψ) = _
+    exact (map_comp_swap_evaluation DerivedCategory.Q
+      (T.iso J R S P S' hP hS) (T.iso J R S S' P hS hP)
+      s.hom ψ _ _ hsq hu).trans
+      ((swappedAdjunction_uncurry S σ (DerivedCategory.Q.obj P)
+        (DerivedCategory.Q.obj S') (DerivedCategory.Q.obj I)
+        (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)).symm.trans
+          (curry_counit S.tensor (DerivedCategory.Q.obj P)
+            (swappedAdjunction S σ (DerivedCategory.Q.obj P)) _ _ _))
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -96,7 +189,6 @@ variable [EssentiallySmall.{t + 1} Y.ProEt]
   [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{max u (t + 1)}]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
-set_option maxHeartbeats 800000 in
 -- The representative square elaborates independent site and coefficient universes.
 /-- The signed representative evaluation uses an adjunction natural in its tensor parameter.
 
@@ -132,89 +224,6 @@ theorem tensor_presentation_parameter_evaluation
             (DerivedCategory.Q.map q ≫ homModelMap.{t,u} Y
               (completedIntegralCommRingSheaf l E Y D hl) P I)) ≫
           (adj.adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I) := by
-  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
-  let R := completedIntegralCommRingSheaf l E Y D hl
-  have hkoszul := ringedTensor_koszul_exists.{t + 1, t, u, (max u (t + 1)) + 1} J R S T
-  let σ := hkoszul.choose
-  have hσ := hkoszul.choose_spec
-  refine ⟨swappedParameterAdjunction S σ, ?_⟩
-  intro P I S' hP hS _ q
-  have hcomponent (K) :
-      (swappedParameterAdjunction S σ).adj K = swappedAdjunction S σ K := by
-    rfl
-  simp only [hcomponent]
-  have hrepresentative := hσ P S' hP hS
-  let s := hrepresentative.choose
-  have hs := hrepresentative.choose_spec.1
-  have hsq := hrepresentative.choose_spec.2
-  have hpure := homComplexTensor_pure_equivalence.{t, u} Y R S' P I
-  change ∃ e : ((coefficientTotalTensor.{u, t + 1, t} J R).obj (S', P) ⟶ I) ≃
-      (S' ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I),
-    ∀ (f : (coefficientTotalTensor.{u, t + 1, t} J R).obj (S', P) ⟶ I)
-      (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (x : (S'.X i).val.obj U) (y : (P.X j).val.obj U),
-      evaluate.{t, u} Y R P I i j U (((e f).f i).val.app U x) y =
-        (f.f (j + i)).val.app U
-          (coefficientTensorGenerator.{u, t + 1, t} J R S' P i j (j + i)
-            (add_comm i j) U x y) at hpure
-  let e := hpure.choose
-  have he := hpure.choose_spec
-  let ψ : (coefficientTotalTensor.{u, t + 1, t} J R).obj (S', P) ⟶ I := e.symm q
-  have hψ : IsCoefficientTensorCurry.{u, t + 1, t} J R S' P I ψ q := by
-    intro a b U x y
-    have hc := (he ψ a b U x y).symm
-    change _ = evaluate.{t, u} Y R P I a b U (((e (e.symm q)).f a).val.app U x) y at hc
-    rw [Equiv.apply_symm_apply] at hc
-    have hc' (k : ℤ) (h : b + a = k) :
-        (ψ.f k).val.app U
-          (coefficientTensorGenerator.{u, t + 1, t} J R S' P a b k
-            ((add_comm a b).trans h) U x y) =
-        coefficientHomSectionApply.{u, t + 1, t} J R (P.X b) (I.X k) U
-          ((coefficientHomComponent.{u, t + 1, t} J R P I a b k h).val.app U
-            ((q.f a).val.app U x)) y := by
-      subst k
-      rw [evaluate_eq_coefficient] at hc
-      exact hc
-    exact hc' (a + b) (add_comm b a)
-  have hn := coefficientTensorCurry_normalize.{u, t + 1, t, (max u (t + 1)) + 1}
-    J R S T S' P I hS hP ψ q hψ
-  have hinput : DerivedCategory.Q.map
-        (q ≫ ((homComplexFunctor (R := R)).obj (op P)).map
-          ((coefficientHomAugmentation.{u, t + 1, t} J R).app I)) ≫
-        (coefficientHomResolutionIso.{u, t + 1, t, (max u (t + 1)) + 1} J R P I).inv =
-      DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I := by
-    simp only [Functor.map_comp, Category.assoc, homModelMap, coefficientHomAugmentation]
-    rfl
-  rw [hinput] at hn
-  refine ⟨s.hom ≫ ψ, ?_, ?_⟩
-  · intro i j U x y
-    change (ψ.f (i + j)).val.app U
-      ((s.hom.f (i + j)).val.app U _) = _
-    have hs' := hs i j (i + j) rfl (add_comm j i) U x y
-    rw [show totalPair.{t, u} Y R P S' i j U x y =
-      coefficientTensorGenerator.{u, t + 1, t} J R P S' i j (i + j) rfl U x y by
-      simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
-        CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-      rfl]
-    rw [hs']
-    simp only [Units.smul_def, map_zsmul]
-    congr 1
-    have hc := (he ψ j i U y x).symm
-    change _ = evaluate.{t, u} Y R P I j i U (((e (e.symm q)).f j).val.app U y) x at hc
-    rw [Equiv.apply_symm_apply] at hc
-    exact hc
-  · change (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map (s.hom ≫ ψ) = _
-    have hswap : (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map s.hom =
-        σ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj S') ≫
-          (T.iso J R S S' P hS hP).inv := by
-      apply (cancel_epi (T.iso J R S P S' hP hS).hom).1
-      apply (cancel_mono (T.iso J R S S' P hS hP).hom).1
-      simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id,
-        Category.comp_id] using hsq.symm
-    exact (map_comp_exchange DerivedCategory.Q _ _ _ _ s.hom ψ hswap hn.symm).trans
-      ((swappedAdjunction_uncurry S σ (DerivedCategory.Q.obj P)
-        (DerivedCategory.Q.obj S') (DerivedCategory.Q.obj I)
-        (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)).symm.trans
-          (curry_counit S.tensor (DerivedCategory.Q.obj P)
-            (swappedAdjunction S σ (DerivedCategory.Q.obj P)) _ _ _))
+  exact tensor_presentation_parameter_evaluation_of_coefficients Y
+    (completedIntegralCommRingSheaf l E Y D hl) S T
 end WeilConjectures.IntegralHom

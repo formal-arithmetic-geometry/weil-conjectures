@@ -11,7 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicLisseRelativeRestriction
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcFinitePullbackConstructibility
 import all WeilConjectures.AlgebraicGeometry.Relative.RelativeCompletedModuleRealizationExact
 
-/-! Local complexes under an isomorphism of base schemes. -/
+/-! Local complexes under an isomorphism of base schemes.
+
+## References
+
+* Stacks Tags 09AI and 09BT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -80,9 +85,7 @@ variable {X Y U : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (g : U ⟶ Y)
 
 /-- The local coefficient comparison uses composition of inverse images followed by
-inverse image of the completed coefficient comparison for the inverse isomorphism.
-Source: blueprint order 2106, preservation of local models
-(blueprint: def-wf-pbc-automorphism-local-coefficient). -/
+inverse image of the completed coefficient comparison for the inverse isomorphism. -/
 def pbcIsoLocalCoefficient :
     (adicTowerInverseImage (g ≫ inv f)).obj (pbcAdicCompletion X d) ≅
       (adicTowerInverseImage g).obj (pbcAdicCompletion Y d) :=
@@ -90,9 +93,7 @@ def pbcIsoLocalCoefficient :
     (adicTowerInverseImage g).mapIso (d.integralRingIso (inv f))
 
 /-- Relabel the scalar action of each term through the specified local coefficient
-isomorphism. Differentials and underlying sheaves are unchanged. No witness is chosen.
-Source: blueprint order 2106, preservation of local models
-(blueprint: def-wf-pbc-automorphism-local-complex). -/
+isomorphism. Differentials and underlying sheaves are unchanged. No witness is chosen. -/
 def pbcIsoLocalComplex
     (C : CochainComplex (pbcModules U
       ((adicTowerInverseImage g).obj (pbcAdicCompletion Y d))) ℤ) :
@@ -246,18 +247,7 @@ private theorem relativelyAdicLisse_restrict [IsNoetherianRing A] {Z₁ Z₂ : S
     G V hm
 
 /-- Relabeling the completed action preserves adic-lisse terms and finite-lisse
-cohomology of each reduction.
-Source: blueprint order 2106, preservation clause; Stacks Tags 09AI and 09BT.
-Proof: restriction along the displayed coefficient isomorphism is an exact equivalence,
-so it identifies homology after scalar extension. On each
-trivializing cover of a term, compose its linear trivialization with the constant-ring
-comparison for the inverse isomorphism; the presenting finite adic module is unchanged.
-For a finite reduction use the analogous finite constant-ring comparison and the
-projection square, which identifies reduction of the relabeled complex with relabeling
-of the original reduction. Transport its finite constant trivializations through this
-identification. These operations retain both the original degree window and the finite
-module witnesses, with covers allowed to depend on the degree and the reduction level.
-(blueprint: lem-wf-pbc-automorphism-local-complex-properties). -/
+cohomology of each reduction. -/
 theorem pbcIsoLocalComplex_properties
     (M : AdicTower Y d) (a b : ℤ) (L : AdicTowerLocalModel d g M a b) :
     (∀ q : ℤ, @IsRelativelyAdicLisseModule _ _ (g ≫ inv f) A _ d.noetherian d.ideal

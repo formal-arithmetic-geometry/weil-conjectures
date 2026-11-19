@@ -106,30 +106,30 @@ L₃ (H₁ (F₁ K)) ──L₃.map ((mate of σ).app K)──▶ L₃ (F₂ (H�
 -/
 theorem derived_mateEquiv_app_fac (σ : TwoSquare H₁ G₁ G₂ H₂) (θ : TwoSquare H₁' G₁' G₂' H₂')
     (K : C₂)
-    (hθ : θ.natTrans.app (L₁.obj (F₁.obj K)) ≫ H₂'.map (α₁.app (F₁.obj K)) ≫
+    (hθ : θ.app (L₁.obj (F₁.obj K)) ≫ H₂'.map (α₁.app (F₁.obj K)) ≫
         γ₂.app (G₁.obj (F₁.obj K)) =
       G₂'.map (γ₁.app (F₁.obj K)) ≫ α₂.app (H₁.obj (F₁.obj K)) ≫
-        L₄.map (σ.natTrans.app (F₁.obj K))) :
+        L₄.map (σ.app (F₁.obj K))) :
     H₁'.map (β₁.app K) ≫ (mateEquiv (adj₁.derived W₁ W₂ α₁ β₁) (adj₂.derived W₃ W₄ α₂ β₂)
-        θ).natTrans.app (L₂.obj K) ≫ F₂'.map (γ₂.app K) =
-      γ₁.app (F₁.obj K) ≫ L₃.map ((mateEquiv adj₁ adj₂ σ).natTrans.app K) ≫
+        θ).app (L₂.obj K) ≫ F₂'.map (γ₂.app K) =
+      γ₁.app (F₁.obj K) ≫ L₃.map ((mateEquiv adj₁ adj₂ σ).app K) ≫
         β₂.app (H₂.obj K) := by
   have hmate (Z : D₂) : (mateEquiv (adj₁.derived W₁ W₂ α₁ β₁) (adj₂.derived W₃ W₄ α₂ β₂)
-      θ).natTrans.app Z = (adj₂.derived W₃ W₄ α₂ β₂).unit.app (H₁'.obj (F₁'.obj Z)) ≫
-        F₂'.map (θ.natTrans.app (F₁'.obj Z)) ≫
+      θ).app Z = (adj₂.derived W₃ W₄ α₂ β₂).unit.app (H₁'.obj (F₁'.obj Z)) ≫
+        F₂'.map (θ.app (F₁'.obj Z)) ≫
         F₂'.map (H₂'.map ((adj₁.derived W₁ W₂ α₁ β₁).counit.app Z)) := by
     simp [mateEquiv_apply]
-  have hmate' : (mateEquiv adj₁ adj₂ σ).natTrans.app K =
-      adj₂.unit.app (H₁.obj (F₁.obj K)) ≫ F₂.map (σ.natTrans.app (F₁.obj K)) ≫
+  have hmate' : (mateEquiv adj₁ adj₂ σ).app K =
+      adj₂.unit.app (H₁.obj (F₁.obj K)) ≫ F₂.map (σ.app (F₁.obj K)) ≫
         F₂.map (H₂.map (adj₁.counit.app K)) := by
     simp [mateEquiv_apply]
   have h₁ := (adj₂.derived W₃ W₄ α₂ β₂).unit.naturality (H₁'.map (β₁.app K))
-  have h₂ := θ.natTrans.naturality (β₁.app K)
+  have h₂ := θ.naturality (β₁.app K)
   have h₃ := adj₁.derivedε_fac_app W₂ α₁ β₁ K
   have h₄ := γ₂.naturality (adj₁.counit.app K)
   have h₅ := (adj₂.derived W₃ W₄ α₂ β₂).unit.naturality (γ₁.app (F₁.obj K))
   have h₆ := adj₂.derivedη_fac_app W₃ α₂ β₂ (H₁.obj (F₁.obj K))
-  have h₇ := β₂.naturality (σ.natTrans.app (F₁.obj K) ≫ H₂.map (adj₁.counit.app K))
+  have h₇ := β₂.naturality (σ.app (F₁.obj K) ≫ H₂.map (adj₁.counit.app K))
   simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₂ h₄ h₅ h₇
   simp only [derived_unit, derived_counit] at hmate h₁ h₅ ⊢
   rw [hmate]

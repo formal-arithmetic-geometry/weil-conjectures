@@ -15,7 +15,7 @@ public import WeilConjectures.WeilSheaf.Category
 # The lisse locus of a Weil sheaf
 
 A Weil sheaf on a reduced `k₀`-scheme of finite type is lisse on a dense open subscheme
-(generic lissity, used in blueprint `thm-zl-relative-line-stratification`).
+(generic lissity, used in blueprint `proposition-relative-affine-line--1`).
 
 ## Main results
 
@@ -106,7 +106,7 @@ open scoped ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **Generic lissity.** A Weil sheaf on a reduced `k₀`-scheme of finite type is lisse on a dense
-open subscheme (blueprint: `thm-zl-relative-line-stratification`, the lissity loci chosen over
+open subscheme (blueprint: `proposition-relative-affine-line--1`, the lissity loci chosen over
 the finite-field model). -/
 theorem WeilSheaf.exists_dense_isLisse_upperStar {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

@@ -176,7 +176,7 @@ sheaves of `𝒪_E`-modules of finite Tor amplitude. Then for every `E'`, the pr
 `D(Y_proét, 𝒪_{E'}) ⥤ D(Y_proét, 𝒪_{E'})[1/ℓ]` of the projection map over `𝒪_{E'}`, is an
 isomorphism
 (`AlgebraicGeometry.ProEtale.hasProjectionFormula_extendScalars_of_derivedCompleteIntegral`,
-blueprint `thm-sf-pf-field`). -/
+blueprint `lemma-kunneth-formula-compact-supports--3`). -/
 theorem isIso_rationalization_map_projectionMap_extendScalars (f : X ⟶ Y)
     [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}

@@ -68,7 +68,7 @@ lemma exactAt_baseChange_iff (C : CochainComplex (ModuleCat.{u} A) ℤ) (k : ℤ
   rw [exactAt_iff_exact]
   change Function.Exact ((C.d k (k + 1)).hom.baseChange B)
     ((C.d (k + 1) (k + 1 + 1)).hom.baseChange B) ↔ _
-  rw [LinearMap.baseChange_eq_ltensor, LinearMap.baseChange_eq_ltensor]
+  rw [LinearMap.baseChange_eq_lTensor, LinearMap.baseChange_eq_lTensor]
 
 variable {K L : CochainComplex (ModuleCat.{u} A) ℤ} (φ : K ⟶ L)
 

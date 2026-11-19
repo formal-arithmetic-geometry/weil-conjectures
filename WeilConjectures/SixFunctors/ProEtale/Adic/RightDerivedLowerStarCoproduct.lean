@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFil
 For a quasi-compact quasi-separated morphism `f : Y ⟶ X`, the derived direct image
 `Rf_* : D(AdicSheaf l Y) ⥤ D(AdicSheaf l X)` commutes with coproducts of uniformly bounded below
 families (`AlgebraicGeometry.ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar`,
-blueprint `det-pe-bounded-continuity-direct-image`; SGA 4 VI 5.1).
+blueprint `corollary-continuity-cohomology--2`; SGA 4 VI 5.1).
 
 The proof has three steps:
 

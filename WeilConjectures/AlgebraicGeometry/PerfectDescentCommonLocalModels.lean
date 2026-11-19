@@ -25,8 +25,13 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
--- Elaborating the two dependent stage-model families exceeds the default heartbeat budget.
+-- Eliminate the common upper bound while the target is an abstract proposition.
+private theorem of_common_upper_bound
+    {I : Type*} [Preorder I] [IsDirected I (· ≤ ·)] (a b : I) {P : Prop}
+    (h : ∀ k : I, a ≤ k → b ≤ k → P) : P := by
+  obtain ⟨k, hak, hbk⟩ := exists_ge_ge a b
+  exact h k hak hbk
+
 /-- Descend the two restrictions separately and move them to a common stage.
 This supplies no overlap isomorphism and no map into a derived direct image.
 Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
@@ -99,7 +104,7 @@ theorem perfect_descent_common_local_models
     (W := V) (dW := dV) (Z := Z) (f := f) (hW := hVr) (E := E) (hE := hE)
   obtain ⟨jW, hiW, mW⟩ := stepW
   obtain ⟨jV, hiV, mV⟩ := stepV
-  obtain ⟨k, hWk, hVk⟩ := IsDirected.directed (r := (· ≤ ·)) jW jV
+  refine of_common_upper_bound jW jV fun k hWk hVk ↦ ?_
   let hik := hiW.trans hWk
   let Y := pullback (f ≫ s) (Spec.map (R.map (homOfLE hik)))
   let p : Y ⟶ Z := pullback.fst (f ≫ s) (Spec.map (R.map (homOfLE hik)))

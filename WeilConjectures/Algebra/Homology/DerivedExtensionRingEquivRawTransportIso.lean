@@ -58,7 +58,7 @@ theorem kan_precomp_full
   have hfX := congr_app hf X
   dsimp at hmX
   dsimp [β] at hfX
-  simp only [Category.comp_id, Category.id_comp] at hmX hfX
+  simp only [Category.id_comp] at hmX hfX
   simpa [β, W, Category.id_comp] using hmX.trans hfX.symm
 
 set_option backward.isDefEq.respectTransparency false in

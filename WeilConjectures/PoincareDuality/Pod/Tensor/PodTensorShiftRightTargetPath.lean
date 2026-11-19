@@ -56,7 +56,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   [PreservesFiniteLimits (isoReductionIntegralInverse l E g)]
   [PreservesFiniteColimits (isoReductionIntegralInverse l E g)]
 
-set_option maxHeartbeats 600000 in
 -- Keep sharing in the dependent coefficient-category expressions.
 /-- The right-slot target path formula, proved from its model law.
 Use the arbitrary-presentation path calculation and shift-presentation naturality.

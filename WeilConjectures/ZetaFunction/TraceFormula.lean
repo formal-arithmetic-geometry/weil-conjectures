@@ -22,24 +22,25 @@ the constant Weil sheaf `ℚ̄_ℓ` every local trace is `1`, and the right hand
 `N_m = #X₀(𝔽_{qᵐ})` of `𝔽_{qᵐ}`-rational points. If `X₀` is proper, compactly supported
 cohomology is ordinary cohomology.
 
-The trace formula over `ℚ̄_ℓ` itself is the blueprint node `det-thm-tf-uniform-formula-weil`
-of the trace formula chapter (subsection `sk-thm-trace-transport`); it is stated here for the
-Weil complexes of this repository, whose compactly supported cohomology is
+The trace formula over `ℚ̄_ℓ` itself is the blueprint node
+`theorem-grothendieck-lefschetz-trace-formula--8` of the trace formula chapter (subsection
+`theorem-trace-formula-euler-product`); it is stated here for the Weil complexes of this repository,
+whose compactly supported cohomology is
 `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`, and is proved in that chapter.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq`: the trace
-  formula over `ℚ̄_ℓ` (`det-thm-tf-uniform-formula-weil`).
+  formula over `ℚ̄_ℓ` (`theorem-grothendieck-lefschetz-trace-formula--8`).
 - `AlgebraicGeometry.WeilSheaf.traceFunction_adicConstant`: the trace function of the constant
   Weil sheaf is `1`.
 - `AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology` and
   `AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_cohomology`: the point-counting
-  trace formula (`cor-trf-point-counting`).
+  trace formula (`corollary-point-counting-zeta-function--2`).
 - `AlgebraicGeometry.WeilComplex.sum_traceFunction_eq_finsum_trace` and
   `AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology`: the Grothendieck–Lefschetz
   trace formula and its every-iterate form for a smooth proper variety
-  (`thm-weil-grothendieck-lefschetz-trace`, `prop-every-iterate-trace`).
+  (`theorem-grothendieck-lefschetz-trace-formula--8`).
 -/
 
 @[expose] public section
@@ -59,9 +60,9 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `det-thm-tf-uniform-formula-weil` (Grothendieck–Lefschetz formula over `ℚ̄_ℓ`,
-subsection `sk-thm-trace-transport` of the trace formula chapter): for a Weil complex `K` on a
-separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--8` (Grothendieck–Lefschetz formula over
+`ℚ̄_ℓ`, subsection `theorem-trace-formula-euler-product` of the trace formula chapter): for a Weil
+complex `K` on a separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
 
 `∑ᵢ (-1)ⁱ Tr(F^m | H_c^i(X₀ ⊗ k̄, K)) = ∑_{y ∈ X₀(𝔽_{qᵐ})} ∑ⱼ (-1)ʲ Tr(F_{y,m} | 𝓗ʲ(K)_ȳ)`.
 
@@ -87,8 +88,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- Isomorphic Weil sheaves have stalks with the same Frobenius trace. -/
 theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     LinearMap.trace (PadicAlgCl l) _ (G.stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd := by
   obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso s m hs e
@@ -100,8 +101,8 @@ section `ℚ̄_ℓ ⟶ Γ(Spec k̄, s^* ℚ̄_ℓ)` is an isomorphism
 (`AlgebraicGeometry.ProEtale.isIso_unitSection`). -/
 theorem WeilSheaf.finrank_stalkAt_adicConstant
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).stalkAt s m hs).carrier =
       1 := by
   let e₁ : (WeilCoefficients.toModuleCat l).obj (𝟙_ (WeilCoefficients.{u} l)) ≃ₗ[PadicAlgCl l]
@@ -119,8 +120,8 @@ variable (k₀ l) in
 /-- The Frobenius of every stalk of the constant Weil sheaf has trace `1`. -/
 theorem WeilSheaf.trace_frobeniusEnd_stalkAt_adicConstant
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
     LinearMap.trace (PadicAlgCl l) _ ((WeilSheaf.adicConstant k₀ l X).stalkAt s m hs).frobeniusEnd =
       1 := by
   rw [FrobeniusModule.frobeniusEnd, WeilSheaf.adicConstant_stalkAt_frobenius,
@@ -145,10 +146,10 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprints `cor-trf-point-counting` and `prop-every-iterate-trace` (constant-sheaf clause)
-(point-counting trace formula, subsection
-`sk-thm-trace-transport` of the trace formula chapter), compactly supported form: for a
-separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
+/-- Blueprints `corollary-point-counting-zeta-function--2` and
+`theorem-grothendieck-lefschetz-trace-formula--8` (constant-sheaf clause) (point-counting trace
+formula, subsection `theorem-trace-formula-euler-product` of the trace formula chapter), compactly
+supported form: for a separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
 
 `#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ))`.
 
@@ -181,9 +182,9 @@ section Proper
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [IsProper (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprints `cor-trf-point-counting` and `prop-every-iterate-trace` (proper clause)
-(point-counting trace formula), proper form: for a proper
-`k₀`-scheme `X₀` and every `m ≥ 1`,
+/-- Blueprints `corollary-point-counting-zeta-function--2` and
+`theorem-grothendieck-lefschetz-trace-formula--8` (proper clause) (point-counting trace formula),
+proper form: for a proper `k₀`-scheme `X₀` and every `m ≥ 1`,
 
 `#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`,
 
@@ -199,10 +200,10 @@ theorem WeilSheaf.pointCount_eq_finsum_trace_cohomology {m : ℕ} (hm : 1 ≤ m)
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) i
   exact congrArg _ (e.trace_frobeniusEnd_pow m).symm
 
-/-- Blueprints `thm-weil-grothendieck-lefschetz-trace` and `prop-every-iterate-trace` (general
-clause) (Grothendieck–Lefschetz trace formula):
-for a Weil complex `K` on a separated `k₀`-scheme `Y₀` of finite type and `m ≥ 1`, the sum over
-`y ∈ Y₀(𝔽_{qᵐ})` of the local alternating traces `t_K(y)` is the alternating trace of `Fᵐ` on
+/-- Blueprints `theorem-grothendieck-lefschetz-trace-formula--8` and
+`theorem-grothendieck-lefschetz-trace-formula--8` (general clause) (Grothendieck–Lefschetz trace
+formula): for a Weil complex `K` on a separated `k₀`-scheme `Y₀` of finite type and `m ≥ 1`, the sum
+over `y ∈ Y₀(𝔽_{qᵐ})` of the local alternating traces `t_K(y)` is the alternating trace of `Fᵐ` on
 `H_c^•(Y₀ ⊗ k̄, K)`; for `K = ℚ̄_ℓ` and a proper `X₀` this specializes to
 `#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`. -/
 theorem WeilComplex.finsum_traceFunction_eq_and_pointCount_eq {Y : Scheme.{u}}
@@ -220,8 +221,9 @@ theorem WeilComplex.finsum_traceFunction_eq_and_pointCount_eq {Y : Scheme.{u}}
   ⟨(K.finsum_trace_compactlySupportedCohomology_eq hm).symm,
     WeilSheaf.pointCount_eq_finsum_trace_cohomology k₀ l X hm⟩
 
-/-- Blueprint `prop-every-iterate-trace` (every-iterate Grothendieck–Lefschetz identity), smooth
-proper case: for `X₀` smooth and proper of pure dimension `d` and every `n ≥ 1`,
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--8` (every-iterate
+Grothendieck–Lefschetz identity), smooth proper case: for `X₀` smooth and proper of pure dimension
+`d` and every `n ≥ 1`,
 
 `N_n(X₀) = ∑_{i = 0}^{2d} (-1)ⁱ Tr(Fⁿ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`,
 

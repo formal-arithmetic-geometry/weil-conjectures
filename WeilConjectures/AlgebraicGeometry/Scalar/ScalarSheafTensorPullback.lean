@@ -14,8 +14,10 @@ import all WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdent
 /-!
 # Ordinary scalar balancing commutes with pullback
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A7
-(blueprint: lem-pur-scalar-sheaf-tensor-pullback).
+## References
+
+* Stacks Project, Tags 07A4 and 07A7
+* Stacks 03EK
 -/
 
 @[expose] public noncomputable section
@@ -55,11 +57,7 @@ private noncomputable instance extensionMonoidal
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).Monoidal := .ofOplaxMonoidal _
 
-/-- The balancing map is an isomorphism without a flatness hypothesis.
-Source: Stacks 03EK (blueprint: lem-pur-scalar-sheaf-tensor-pullback).
-Proof: the generic sheafified unit projection is invertible because restriction
-preserves sheafification and the module unit projection is the balanced-tensor
-isomorphism m tensor b maps to b tensor m. -/
+/-- The balancing map is an isomorphism without a flatness hypothesis. -/
 theorem scalarSheafTensorMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
@@ -71,8 +69,7 @@ theorem scalarSheafTensorMap_isIso
   exact isIso_sheafAdjunction_unitProjection T.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (algebraMap A B)) M
 
-/-- The ordinary coefficient iso used in the derived coefficient identification.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-sheaf-tensor-pullback). -/
+/-- The ordinary coefficient iso used in the derived coefficient identification. -/
 def scalarCoefficientSheafPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -89,18 +86,17 @@ private theorem ordinary_reverse_of_mate
     {f : A ⥤ C} {rf : C ⥤ A} (af : f ⊣ rf)
     {g : B ⥤ D} {rg : D ⥤ B} (ag : g ⊣ rg)
     (e : rx ⋙ f ≅ g ⋙ rt) (δ : rg ⋙ rx ≅ rt ⋙ rf)
-    (hδ : (mateEquiv ag af (TwoSquare.mk _ _ _ _ e.hom)).natTrans = δ.hom) :
-    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans =
+    (hδ : (mateEquiv ag af (TwoSquare.mk _ _ _ _ e.hom)) = δ.hom) :
+    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e.hom)) =
       ((conjugateIsoEquiv (af.comp at') (ax.comp ag)).symm δ.symm).inv := by
   apply (mateEquiv ax at').injective
   apply (mateEquiv ag af).injective
   rw [Equiv.apply_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   have h := iterated_mateEquiv_conjugateEquiv ax at' af ag
     (TwoSquare.mk _ _ _ _
       ((conjugateIsoEquiv (af.comp at') (ax.comp ag)).symm δ.symm).inv)
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at h hδ
+  dsimp only [TwoSquare.mk] at h hδ
   rw [h, hδ]
   simp only [conjugateIsoEquiv_symm_apply_inv, Iso.symm_inv]
   erw [Equiv.apply_symm_apply]
@@ -124,10 +120,9 @@ private theorem scalarPullback_mate
     (ProEtale.etaleSheafExtendScalarsAdjunction φ Z)
   have h' : e.symm (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom) =
       TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ f).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact NatTrans.congr_app h M
-  have hh := congrArg (fun q ↦ (e q).natTrans) h'
+  have hh := congrArg (fun q ↦ (e q)) h'
   simpa only [Equiv.apply_symm_apply] using hh.symm
 
 private instance scalarPullbackMonoidal
@@ -144,16 +139,7 @@ private instance scalarPullbackMonoidal
   unfold scalarSheafPullbackIso
   exact isMonoidal_conjugateEquiv_symm _ _ _
 
-/-- The scalar balancing square before localization.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A7; step 3 of
-lem-pur-scalar-tensor-pullback-normalization
-(blueprint: lem-pur-scalar-sheaf-tensor-pullback).
-Proof: the scalar/pullback iso is monoidal as the conjugate of the monoidal
-sectionwise direct-image/restriction identity. Taking its scalar-adjunction mate
-is the specified restriction/pullback iso, by iterated mates and uniqueness of
-left adjoints. Apply the generic unit-projection compatibility theorem to this
-monoidal square. Its coefficient map is the restriction/pullback map on the
-B-unit followed by the inverse monoidal unit comparison, exactly the iso above. -/
+/-- The scalar balancing square before localization. -/
 theorem scalarSheafTensorPullback_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

@@ -64,8 +64,8 @@ private theorem unmate_paste
       ((mateEquiv adj₁ lev₁ ξ).vComp (mateEquiv lev₁ lev₂ β)).whiskerRight u) :
     (α.hComp ζ).whiskerBottom v = (ξ.hComp β).whiskerTop u := by
   apply (mateEquiv adj₁ lev₂).injective
-  have h₁ := mate_whisker adj₁ lev₂ (α.hComp ζ).natTrans (𝟙 _) v
-  have h₂ := mate_whisker adj₁ lev₂ (ξ.hComp β).natTrans u (𝟙 _)
+  have h₁ := mate_whisker adj₁ lev₂ (α.hComp ζ) (𝟙 _) v
+  have h₂ := mate_whisker adj₁ lev₂ (ξ.hComp β) u (𝟙 _)
   have e₁ : mateEquiv adj₁ lev₂ ((α.hComp ζ).whiskerBottom v) =
       (mateEquiv adj₁ lev₂ (α.hComp ζ)).whiskerLeft v := by
     simpa only [Functor.whiskerRight_id', Functor.whiskerLeft_id',
@@ -285,14 +285,13 @@ private theorem ordinaryBeta_inv (n : ℕ)
     (by
       rw [ordinaryBetaInv_mate, hm, hm]
       rw [strictBetaInv_mate]
-      apply TwoSquare.ext
-      intro M
+      refine NatTrans.ext (funext fun M ↦ ?_)
       simpa only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
         TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
         Functor.whiskerRight_app, Functor.associator_hom_app,
         Functor.associator_inv_app, Category.id_comp, Category.comp_id,
         Category.assoc] using ordinaryPull_square_inv R φ n gIso hc a b i p h M)
-  have he := congrArg (fun w ↦ w.natTrans.app N) hc
+  have he := congrArg (fun w ↦ w.app N) hc
   simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,

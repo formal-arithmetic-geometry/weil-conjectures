@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # The additive quotient of consecutive nilradical ideal powers
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-ideal-power-quotient)
 -/
 
@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The actual module quotient `N^(j+1)/N^(j+2)` on X. Both ideal modules are
 categorical kernels of restrictions of the structure sheaf. Their inclusion is
 `IdealSheafData.toModulesOfLE`; the quotient is its categorical cokernel.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-ideal-power-quotient) -/
 noncomputable def reductionIdealPowerQuotient (X : Scheme.{u}) (j : ℕ) : X.Modules :=
   cokernel (IdealSheafData.toModulesOfLE (reduction_nilradical_power_le X j))
@@ -46,7 +46,7 @@ Proof: the module of any ideal sheaf is the kernel of the structure sheaf's
 restriction to its closed subscheme. Closed-immersion pushforward preserves
 quasi-coherence, and kernels and cokernels of maps of quasi-coherent modules
 are quasi-coherent. This needs no finite generation or Noetherian assumption.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-ideal-power-quotient) -/
 instance isQuasicoherent_reductionIdealPowerQuotient (X : Scheme.{u}) (j : ℕ) :
     (X.reductionIdealPowerQuotient j).IsQuasicoherent := by

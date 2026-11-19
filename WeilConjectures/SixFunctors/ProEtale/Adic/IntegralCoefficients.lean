@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 /-!
 # Integral `ℓ`-adic functions as limits of their finite levels
 
-This file proves the section-level content of `det-prop-sfb-qlbar-colimit-x-integral-limit`
+This file proves the section-level content of `lemma-comparison-completed-coefficients--1`
 for `E = ℚ_ℓ`: on any topological space `T` (in particular on the underlying space of an object
 of the pro-étale site), the continuous functions `T → ℤ_ℓ` are the compatible families of
 locally constant functions `T → ℤ/ℓⁿ`, as rings. The sections of the constant pro-étale sheaf
@@ -199,7 +199,7 @@ noncomputable def compatibleLocallyConstantToContinuousMap :
   map_mul' a b := ContinuousMap.ext fun t ↦ by simp
 
 /-- **`C(T, ℤ_p) = lim_n LocallyConstant(T, ℤ/pⁿ)`** as rings: the section-level form of
-`ℤ_p,X ≅ lim_n (ℤ/pⁿ)_X` (`det-prop-sfb-qlbar-colimit-x-integral-limit`, for `E = ℚ_p`). -/
+`ℤ_p,X ≅ lim_n (ℤ/pⁿ)_X` (`lemma-comparison-completed-coefficients--1`, for `E = ℚ_p`). -/
 noncomputable def continuousMapRingEquivCompatibleLocallyConstant :
     C(T, ℤ_[p]) ≃+* compatibleLocallyConstant p T :=
   RingEquiv.ofRingHom continuousMapToCompatibleLocallyConstant
@@ -260,7 +260,7 @@ variable {l T}
 
 /-- **Continuous functions on a compact space are integral up to a power of `ℓ`**: for a
 continuous `f : T → ℚ̄_ℓ` on a compact `T`, some `ℓᵐ f` takes values in the closed unit ball
-(the point-level content of `det-prop-sfb-qlbar-colimit-x-invert-ell`). -/
+(the point-level content of `lemma-comparison-completed-coefficients--2`). -/
 lemma exists_norm_pow_mul_le_one [CompactSpace T] (f : C(T, PadicAlgCl l)) :
     ∃ m : ℕ, ∀ t, ‖(l : PadicAlgCl l) ^ m * f t‖ ≤ 1 := by
   obtain ⟨C, hC⟩ := isCompact_univ.exists_bound_of_continuousOn f.continuous.continuousOn
@@ -275,7 +275,7 @@ lemma exists_norm_pow_mul_le_one [CompactSpace T] (f : C(T, PadicAlgCl l)) :
     _ = 1 := inv_mul_cancel₀ (lt_max_of_lt_right one_pos).ne'
 
 /-- **`C(T, ℚ_ℓ) = C(T, ℤ_ℓ)[1/ℓ]` on a compact space**: every continuous `f : T → ℚ_ℓ` on a
-compact `T` is `ℓ⁻ᵐ g` for a continuous `g : T → ℤ_ℓ` (`det-prop-sfb-qlbar-colimit-x-invert-ell`
+compact `T` is `ℓ⁻ᵐ g` for a continuous `g : T → ℤ_ℓ` (`lemma-comparison-completed-coefficients--2`
 on a profinite set, for `E = ℚ_ℓ`). -/
 lemma exists_padicInt_eq_pow_mul [CompactSpace T] (f : C(T, ℚ_[l])) :
     ∃ (m : ℕ) (g : C(T, ℤ_[l])), ∀ t, ((g t : ℤ_[l]) : ℚ_[l]) = (l : ℚ_[l]) ^ m * f t := by

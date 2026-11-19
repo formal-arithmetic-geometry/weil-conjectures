@@ -22,7 +22,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
 /-! # The finite-Tor constructible categories in the two site presentations
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1464 (blueprint: def-weil-finite-tor-amplitude).
+order 1464 (blueprint: definition-constructible-sheaves).
 
 This module supplies the ordinary-etale presentation using the recorded finite-value
 constructibility and Tor-amplitude conventions. The recorded pro-etale, integral and
@@ -41,7 +41,7 @@ namespace WeilConjectures
 
 /-- The etale presentation of `Dᵇ_ctf(Y,A_{E,n})`, using the same quotient ring,
 with its canonical universe lift, and the recorded etale constructibility convention.
-Source: blueprint order 1464 (blueprint: def-weil-finite-tor-amplitude). -/
+Source: blueprint order 1464 (blueprint: definition-constructible-sheaves). -/
 noncomputable def finiteTorConstructibleEtale
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :

@@ -69,21 +69,21 @@ private theorem mate_eq_of_unit
     (s : E ⋙ L' ⟶ L ⋙ F) (r : R ⋙ E ⟶ F ⋙ R')
     (h : ∀ K, E.map (a.unit.app K) ≫ r.app (L.obj K) =
       b.unit.app (E.obj K) ≫ R'.map (s.app K)) :
-    (mateEquiv a b s).natTrans = r := by
-  have hs : s = ((mateEquiv a b).symm r).natTrans := by
+    (mateEquiv a b s) = r := by
+  have hs : s = ((mateEquiv a b).symm r) := by
     ext K
     apply (b.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit]
     exact (h K).symm.trans (unit_mateEquiv_symm a b r K)
   rw [hs]
-  exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply r)
+  exact ((mateEquiv a b).apply_symm_apply r)
 
 private theorem inverse_mate_app
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (a : L ⊣ R) (b : L' ⊣ R') {P : C ⥤ E} {Q : D ⥤ F}
     (r : R ⋙ P ⟶ Q ⋙ R') (K : C) :
-    ((mateEquiv a b).symm r).natTrans.app K =
+    ((mateEquiv a b).symm r).app K =
       (b.homEquiv _ _).symm (P.map (a.unit.app K) ≫ r.app (L.obj K)) := by
   apply (b.homEquiv _ _).injective
   change (b.homEquiv (P.obj K) (Q.obj (L.obj K)))
@@ -118,10 +118,10 @@ private theorem scalar_mate_cube
       EC.functor.map (q.app N) =
         q'.app (EB.functor.obj N) ≫ Rz'.map (eB.hom.app N) ≫ rz.hom.app (JB.obj N))
     (K : C) :
-    ((mateEquiv a' b').symm q').natTrans.app (EA.functor.obj K) ≫
+    ((mateEquiv a' b').symm q').app (EA.functor.obj K) ≫
         IB.map (s.hom.app K) =
       Lz'.map (eA.hom.app K) ≫ sz.hom.app (JA.obj K) ≫
-        ED.functor.map (((mateEquiv a b).symm q).natTrans.app K) ≫
+        ED.functor.map (((mateEquiv a b).symm q).app K) ≫
           eB.inv.app (L.obj K) := by
   have hright (N : D) :
       eA.inv.app (R.obj N) ≫ IA.map (r.inv.app N) ≫ q'.app (EB.functor.obj N) =
@@ -231,19 +231,21 @@ private theorem forward_realization_mate
         (sfIntrinsicModuleEquivalence T A).toAdjunction
         (TwoSquare.mk _ _ _ _ (sfRealizationRestriction T φ).inv) =
       TwoSquare.mk _ _ _ _ (sfInverseRealizationRestriction T φ).inv := by
-  ext M : 1
-  simp only [sfInverseRealizationRestriction, mateEquiv_apply,
-    Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp,
-    Category.assoc]
-  dsimp only [Equivalence.symm, Equivalence.toAdjunction, Equivalence.unit,
-    Equivalence.counit, TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj, Functor.comp_map]
-  simp only [Category.id_comp]
-  all_goals rfl
+  have h {C D E F : Type (u + 2)}
+      [Category.{u + 1} C] [Category.{u + 1} D] [Category.{u + 1} E] [Category.{u + 1} F]
+      (eC : C ≌ E) (eD : D ≌ F) (G : C ⥤ D) (H : E ⥤ F)
+      (e : eC.functor ⋙ H ≅ G ⋙ eD.functor) :
+      mateEquiv eC.toAdjunction eD.toAdjunction e.inv =
+        (isoWhiskerRight eC.counitIso.symm (H ⋙ eD.inverse) ≪≫
+          isoWhiskerLeft eC.inverse (isoWhiskerRight e eD.inverse) ≪≫
+          isoWhiskerLeft (eC.inverse ⋙ G) eD.unitIso.symm).inv := by
+    apply NatTrans.ext
+    funext M
+    simp [mateEquiv_apply, Equivalence.toAdjunction, Equivalence.unit, Equivalence.counit,
+      Category.assoc]
+  exact h (sfIntrinsicModuleEquivalence T B) (sfIntrinsicModuleEquivalence T A)
+    (sfFixedRestriction T φ) (proEtaleCoefficientRestrictScalars T φ)
+    (sfRealizationRestriction T φ)
 
 private theorem inverse_realization_unit
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]

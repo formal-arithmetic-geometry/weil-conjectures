@@ -57,9 +57,9 @@ private theorem inverseMateIsoOfAnyAdj
     {F Q : A ⥤ B} {P : B ⥤ A} {F' Q' : C ⥤ D} {P' : D ⥤ C}
     (a : F ⊣ P) (qa : Q ⊣ P) (b : F' ⊣ P') (qb : Q' ⊣ P')
     (E : A ⥤ C) (E' : B ⥤ D) (d : P ⋙ E ≅ E' ⋙ P')
-    (hi : IsIso ((mateEquiv qa qb).symm d.hom).natTrans) :
-    IsIso ((mateEquiv a b).symm d.hom).natTrans := by
-  let α := ((mateEquiv qa qb).symm d.hom).natTrans
+    (hi : IsIso ((mateEquiv qa qb).symm d.hom)) :
+    IsIso ((mateEquiv a b).symm d.hom) := by
+  let α := ((mateEquiv qa qb).symm d.hom)
   let e := @asIso _ _ _ _ α hi
   let q := e.symm
   have hq (N : A) : E.map (qa.unit.app N) ≫ d.hom.app (Q.obj N) ≫
@@ -83,8 +83,8 @@ private theorem inverseMateIsoOfFunctorEqualities
     {P Q : B ⥤ A} {E H : A ⥤ A} {E' H' : B ⥤ B}
     (hp : P = Q) (he : E = H) (he' : E' = H') (a : F ⊣ P)
     (d : P ⋙ E ⟶ E' ⋙ P) (d' : Q ⋙ H ⟶ H' ⋙ Q) (hd : HEq d d')
-    (hi : ∀ b : F ⊣ Q, IsIso ((mateEquiv b b).symm d').natTrans) :
-    IsIso ((mateEquiv a a).symm d).natTrans := by
+    (hi : ∀ b : F ⊣ Q, IsIso ((mateEquiv b b).symm d')) :
+    IsIso ((mateEquiv a a).symm d) := by
   subst Q
   subst H
   subst H'
@@ -101,21 +101,21 @@ private theorem varyingInverseOpenMate_isIso
     (a : F ⊣ ProEtale.VaryingRing.G R q j) :
     IsIso ((mateEquiv a a).symm
       (Functor.mapDerivedCategorySquareIso
-        (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).inv).natTrans := by
+        (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).inv) := by
   have hm := ProEtale.VaryingRing.betaInv_mate R q gU j j gX sq.w sq
   have he : ((mateEquiv (ProEtale.VaryingRing.jAdj R q j)
       (ProEtale.VaryingRing.jAdj R q j)).symm
       (Functor.mapDerivedCategorySquareIso
-        (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).inv).natTrans =
+        (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).inv) =
       (Functor.mapDerivedCategorySquareIso
         (ProEtale.VaryingRing.moduleBeta R q gU j j gX sq.w sq)).inv := by
-    exact congrArg TwoSquare.natTrans
+    exact
       (((mateEquiv (ProEtale.VaryingRing.jAdj R q j)
         (ProEtale.VaryingRing.jAdj R q j)).symm_apply_eq).2 hm.symm)
   have hi : IsIso ((mateEquiv (ProEtale.VaryingRing.jAdj R q j)
       (ProEtale.VaryingRing.jAdj R q j)).symm
       (Functor.mapDerivedCategorySquareIso
-        (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).inv).natTrans := by
+        (ProEtale.VaryingRing.moduleSquareG R q gU j j gX sq.w)).inv) := by
     rw [he]
     infer_instance
   exact inverseMateIsoOfAnyAdj a (ProEtale.VaryingRing.jAdj R q j)
@@ -158,7 +158,7 @@ private theorem integralInverseOpenMate_isIso
     IsIso ((mateEquiv a a).symm
       ((integralComparisonSystemComposition l E j gX).symm ≪≫
         eqToIso (congrArg (integralComparisonDerivedSequencePullback l E) sq.w.symm) ≪≫
-        integralComparisonSystemComposition l E gU j).inv).natTrans := by
+        integralComparisonSystemComposition l E gU j).inv) := by
   let d := (Functor.mapDerivedCategorySquareIso
     (ProEtale.VaryingRing.moduleSquareG
       (squareRings l E) (squareQuotient l E) gU j j gX sq.w)).inv

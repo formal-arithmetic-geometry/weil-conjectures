@@ -23,8 +23,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Exactly the projection inversion witness needed by the trace counit formula.
-Source: rational projective-line unit/counit, inverse projection in the counit
-(blueprint: def-sfb-rational-p1-counit-inversion-condition).
 The source and target derived-category instances are cached in this definition. -/
 def CounitInversionCondition (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (K : DerivedCategory (Modules Λ Y)) : Prop :=
