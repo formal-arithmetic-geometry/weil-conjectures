@@ -86,13 +86,59 @@ shows that a single top-level binder-domain spelling change is not
 enough. Confidence: confirmed for the transport control; the exact
 contribution of the later nested endpoint remains unresolved.
 
+## B1-W: Expand the nested wrapper representation
+
+EXPERIMENT: B1-W; group: G2-C/G3-A. Hypothesis: aligning
+`DerivedCategoryModule` throughout the supplied proposition
+removes the later quantified-domain cost. BASELINE: original
+application, 28.92 s wall, 27.92 + 1.08 s CPU,
+5,495,832 KB RSS. CONTROL:
+`probes/wp/UnfoldAllWrappers.lean` retains the same
+expanded `hv` equality and helper application, but a
+Lean-level term elaborator performs one delta step on
+each `DerivedCategoryModule` application in the
+supplied hypothesis type. This is one representation
+factor repeated through that proposition; its
+definitionally equal theorem obligation and proof term
+are preserved. Kernel checking is enabled.
+`UnfoldAllWrappersHead.lean` confirms that the
+quantified binder is now raw `DerivedCategory`.
+`UnfoldAllWrappersProofSkip.lean` traverses the
+instantiated pair while skipping proposition-typed
+proof arguments. Its first remaining data-head
+difference moves from the nested derived-category
+wrapper to `EtaleHomLeft` versus `Functor.comp`
+at `nonproof.body.3.1.1.3.5`. The immediate body
+of the `EtaleHomLeft` abbrev is
+`(derivedHom ...).flip.obj M ⋙ scalarExtension φ X`,
+so that head can expose a composition.
+
+RESULT: the same normally checked application takes
+29.12 s wall, 28.10 + 1.13 s CPU, 5,525,772 KB RSS;
+the cost is unchanged. The head and proof-skip
+diagnostics take 28.82 s wall, 28.01 + 0.83 s CPU,
+5,715,520 KB RSS and 28.82 s wall,
+28.07 + 0.88 s CPU, 5,719,296 KB RSS,
+respectively; each ends with diagnostic `sorry`
+after the helper application. Supports: the wrapper
+is one stage of the original comparison, followed
+by a functor representation difference. Weakens:
+wrapper alignment alone suffices. Unresolved:
+which corresponding `Functor.comp` argument
+accounts for the retained cost. Classification:
+unfavorable nested representation path; confidence:
+confirmed negative result for wrapper-only alignment,
+plausible for the next functor argument.
+
 ## Mechanism
 
 The original regular predicate must expose its quantified body. The
 quantified domain initially differs by wrapper/raw representation.
 Aligning only that binder exposes a further wrapper/raw difference in
-the equality body and leaves the application slow. Supplying the
-argument at the exact expected proposition removes the costly
-conversion. This supports a dependent proposition representation
-problem at more than one level; it does not establish which inner
-unfold dominates the Kernel's work.
+the equality body and leaves the application slow. Expanding the
+wrapper throughout the proposition then exposes an
+`EtaleHomLeft`/`Functor.comp` difference and is still slow.
+Supplying the argument at the exact expected proposition removes
+the costly conversion. This supports a dependent proposition
+representation problem at multiple levels; the exact
+`Functor.comp` argument responsible remains unresolved.
