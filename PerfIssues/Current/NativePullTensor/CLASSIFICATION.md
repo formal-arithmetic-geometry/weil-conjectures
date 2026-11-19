@@ -1,26 +1,36 @@
 # NativePullTensor classification
 
-Case ID / family: `exists_nativePullTotalTensor`, `nativePullTotalTensor`, `nativePullTotalTensor_summands`, and `nativeRestrictionDerivedTensor`.
-Module: `WeilConjectures.WeilSheaf.Native.NativePullTensor`.
-Lean / Mathlib: 4.35.0 with built dependencies; revision `1ef1fddac73e`.
-Imports/options: original module imports, `LEAN_NUM_THREADS=1`, `-DElab.async=false`, profiler threshold 50 ms.
+Case ID: `exists_nativePullTotalTensor`, `nativePullTotalTensor`, `nativePullTotalTensor_summands`, and `nativeRestrictionDerivedTensor` in `WeilConjectures.WeilSheaf.Native.NativePullTensor`. Lean 4.35.0, master revision `1ef1fddac73e`, built dependencies, one Lean thread, synchronous elaboration.
 
-## 1. Phase attribution
+## 1. Phase gate
 
-Original source: 272.53 s wall, 268.39 s user CPU, 4.15 s system CPU, 7,926,140 KB peak RSS. Synchronous Kernel skip on identical source: 6.99 s wall, 6.16 s user CPU, 2,661,816 KB RSS. Profiler totals: 265 s Kernel type checking versus 0.751 s tactics. **Kernel phase confirmed.** No full async matrix was needed for this synchronous split.
+The original source takes 268.39 user CPU seconds and 7,926,140 KB peak RSS. With `-Ddebug.skipKernelTC=true`, the same synchronous source takes 6.16 CPU seconds and 2,661,816 KB RSS. Its profiler assigns 265 seconds to Kernel checking and 0.751 seconds to tactics. The four hot declaration checks are 51.5, 80.5, 79.3, and 52.5 seconds respectively. **Kernel phase confirmed.** Skipping the Kernel is diagnostic only.
 
-## 2. Exact cost sites
+## 2. Declared type, value, and final conversion
 
-The four checks are 51.5, 80.5, 79.3, and 52.5 s in the declaration order above. The prefix files in `probes/` add declarations in stages and reproduce the same four costs; the final `nativePullTensor` adds no visible >50 ms check. The first theorem applies `NativeRestrictionDescentProof.exists_restrictionTotalSummands` to concrete `upperStar`, `nativeTensorTotal`, summand insertions, and `nativePullSheafTensor`. The next two declarations extract `.choose` and `.choose_spec` from that existential. The final costly definition applies `NativeRestrictionDescentProof.restrictionDerivedOfTotal` to the native tensor models and K-flat localization witness.
+[KernelReplay.lean](probes/KernelReplay.lean) imports the checked module and calls `Kernel.check` separately on each stored declared type and value, then `Kernel.isDefEq` on the inferred and declared types. This is a fresh imported-environment replay, not an in-situ decomposition, but its 239.98 CPU seconds are close to the original 268.39.
 
-In [HotBodiesSorry.lean](probes/HotBodiesSorry.lean), the bodies of these four declarations and the cheap final definition become typed diagnostic `sorry`. Checks of the same declarations still take 48.9, 24.1, 51.1, and 23.7 s respectively; whole-file wall time remains 154.51 s and RSS 6,162,640 KB. Thus substantial cost survives in declaration type/context checking, especially the two existential statements; the real `.choose` and derived-constructor values add further work. Replacing the earlier abstract `restriction_derived_normalization`, `restrictionDerivedOfTotal`, and `restrictionDerivedOfTotal_normalization` bodies with `sorry` leaves the four checks essentially unchanged (51.4, 80.0, 79.4, 52.9 s).
+| Declaration | Check declared type | Check value | Inferred vs declared conversion |
+|---|---:|---:|---:|
+| `exists_nativePullTotalTensor` | 23.444 s | 3.082 s | 23.260 s |
+| `nativePullTotalTensor` | 0.004 s | 47.457 s | 23.422 s |
+| `nativePullTotalTensor_summands` | 23.625 s | 23.459 s | 23.131 s |
+| `nativeRestrictionDerivedTensor` | 0.007 s | 23.611 s | 23.285 s |
 
-Kernel checking of declared type, value, and final inferred-type reconciliation has not been instrumented as three separate calls. The typed-`sorry` control is evidence for a type/context floor, not a direct timer for `Kernel.check(DeclaredType)`. The exact conversion pair, application prefix, and any generated auxiliary `_proof_n` have not been dumped.
+The type-only [axiom probe](probes/AllTypesOnly.lean) compiles in 54.29 CPU seconds and still has two roughly 24-second checks, while the earlier typed-`sorry` [body probe](probes/HotBodiesSorry.lean) takes 152.56 seconds. Axiom insertion and a theorem with `sorry` take different Kernel paths, so neither is substituted for the direct `Kernel.check` timings above. [SelfVsCross.lean](probes/SelfVsCross.lean) checks the two `nativePullTotalTensor` types against themselves in 0 ms each; their cross-conversion takes 23.167 seconds. Its declared type and value have only 773 and 756 expression objects respectively, so stored size alone does not explain the time.
 
-## 3. Structure and mechanism
+## 3. Value bisection and conversion pair
 
-The expensive statements contain nested concrete functor compositions, natural isomorphisms, K-flat predicates, and object-dependent summand insertions. The `.choose` and `.choose_spec` terms carry dependent existential types. These are candidate representation (E) and dependent-type (C) triggers, but the measured check has not been reduced to an expression pair. `HotBodiesSorry` shows the types remain costly; it does not show which projection or conversion in the Kernel is responsible. No `Expr.equal` test, universe/implicit-argument diff, instance-path diff, recursor/cast count, or shared DAG size was obtained.
+[ValuePrefixes.lean](probes/ValuePrefixes.lean) opens the 12 binders of `nativePullTotalTensor` and replays successive application prefixes of `@Exists.choose.{u + 3}`. The type argument checks in 3 ms. Adding the predicate argument requires a 23.050-second conversion between the predicate's inferred `Iso ... -> Prop` type and `Exists.choose`'s expected binder domain; the prefix then checks in 23.475 seconds. Adding the existential proof argument requires a second 22.981-second domain conversion (`exists t, ...` versus `exists a, ...`), and the completed prefix checks in 47.356 seconds. Each new argument checks on its own in at most 6 ms. This locates the value cost in the two **application-domain conversions**, rather than the argument values.
 
-## 4. Label, confidence, caveats
+The exact expression pairs are the `actual type 1` / `expected domain 1` and `actual type 2` / `expected domain 2` entries printed by that probe with `pp.explicit` and `pp.universes`, plus the full `inferred` / `info.type` pair in `KernelReplay`. [KernelDiff.lean](probes/KernelDiff.lean) finds their first structural differences. In the slowest declaration's final pair, a generated `nativePullTotalTensor._proof_3` appears where the declared path supplies `CategoryTheory.Sheaf.monoidalPreadditive`; the existence theorem's pair first differs at `Abelian.toPreadditive` versus `Endofunctor.IsoAlgebra.instPreadditive`. The summands pair first differs at `Exists.choose` versus the named `nativePullTotalTensor`. These are first positional differences, not individually timed root causes; the complete cross-expression conversion is timed above.
 
-Primary mechanism: **unclassified / insufficient expression-level evidence**. E and C are unresolved hypotheses, not assigned labels. Kernel phase and the four declaration cost sites are **confirmed** by the skip control, profiler, and source prefixes. The type/context floor is **strongly supported** by typed-`sorry` controls. A Kernel replay separating declared-type and value checks, followed by an application-prefix/structural diff on the expensive components, would raise confidence. All probes compile the current source prefix; `sorry` and skip are diagnostic and not valid proof results.
+## 4. Unfolding and mechanism
+
+The in-situ [diagnostics probe](probes/NativeDiagnostics.lean) takes 271.43 CPU seconds and 7,942,652 KB RSS. At the first hot check the Kernel records 1,104,002 `Functor.obj`, 463,500 `Functor.map`, 204,584 `NatTrans.app`, and 129,480 `CategoryStruct.comp` unfolds. The next two checks record about 1.55 million `Functor.obj` unfolds each; `Eq.rec`/`Eq.ndrec` also appear, but no transport-specific conversion was isolated. These counters describe reduction under the expensive `Iso` and existential conversions; a high count for `Functor.obj` alone is not the root cause.
+
+Primary label: **A, Kernel reduction and definitional-equality heavy**. Contributing label: **E, representation/interface mismatch** between the inferred `Exists.choose` application types and the declared concrete functor/instance paths. The costly cross-conversion, cheap self-comparisons, value-prefix jump, structural differences, and repeated concrete-functor unfolding support this assignment. B and C remain possible at individual proof/transport leaves, but the probes do not make either a primary cause.
+
+## 5. Limits
+
+The Kernel API replay imports the completed module, so caches and context differ from the original declaration check. The source-level prefix and typed-placeholder controls reproduce the same four hot declarations, while the replay identifies the internal conversion operations. No library source was modified; axioms, `sorry`, and Kernel skip are diagnostic only.
