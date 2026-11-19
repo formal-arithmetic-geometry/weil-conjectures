@@ -10,7 +10,8 @@ import WeilConjectures.AlgebraicGeometry.PrincipalTensorScalarExtension
 
 /-! # Normalized derived principal quotient cones
 
-(auxiliary; not a blueprint node).
+The scalar principal cones compute the canonical derived quotient functors, with their quotient
+maps, adjunction units and signed shifts.
 -/
 
 @[expose] public noncomputable section
@@ -31,16 +32,12 @@ attribute [local irreducible] upperStarFromPoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The canonical extension followed by restriction, with positive level n+1.
-Source: blueprint Cones paragraph
-(auxiliary; not a blueprint node). -/
+/-- The canonical extension followed by restriction, with positive level n+1. -/
 abbrev reduction (n : ℕ) :=
   AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n
 
 /-- The scalar principal cone computes the canonical derived quotient functor,
 with the quotient maps and adjunction units, and with its standard signed shifts.
-
-(auxiliary; not a blueprint node).
 
 Proof: the scalar formula identifies d with multiplication by the uniformizer.
 The resolution theorem gives the short exact sequence R --d^(n+1)--> R --> B_n.
@@ -62,7 +59,7 @@ include zero complexes and empty sites and use no boundedness assumption. -/
 theorem derived_principal_normalization
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) a).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
         Padic.coefficientExtensionUniformizer l E * a.down s)
     (hs : ∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),
       DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M =
@@ -108,7 +105,7 @@ theorem derived_principal_normalization
   let (n : ℕ) : (DerivedNakayama.reductionFunctor l E X (n + 1)).IsTriangulated := by
     change (tensorRight _).IsTriangulated
     infer_instance
-  obtain ⟨c, hc, hu, hsigned⟩ := principal_cone_tensor_normalization l E X d hd hs
+  obtain ⟨c, hc, hu, hsigned⟩ := principal_cone_tensor_normalization l E X d hd
   obtain ⟨e, he, hunit⟩ := principal_tensor_scalar_extension l E X
   let e' (n : ℕ) : DerivedNakayama.reductionFunctor l E X (n + 1) ≅
       reduction l E X n := e n

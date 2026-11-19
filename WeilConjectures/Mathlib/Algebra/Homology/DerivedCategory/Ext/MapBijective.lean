@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.Algebra.FiveLemma
 
 /-!
 # The edge maps on `Ext` of an adjunction with an exact left adjoint

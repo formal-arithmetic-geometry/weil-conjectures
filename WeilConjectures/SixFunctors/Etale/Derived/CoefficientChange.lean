@@ -31,12 +31,12 @@ the coefficient-change statements
 
 - `isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso`: the canonical
   comparison is an isomorphism on derived base changes of `Dᵇctf` complexes (blueprint
-  `lem-fix-compact-support-coefficient-change`, subsection `sk-def-sfb-coefficient-comparisons`).
+  `lemma-sp-reduction--1`, subsection `sk-def-sfb-coefficient-comparisons`).
   The geometric-stalk analogue is proved in
   `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk`.
 - `derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap`:
   the compatibility of the comparisons with the compact-support exchange map (the "compatible with
-  pullback" clause of `lem-fix-compact-support-coefficient-change`). This is a coherence statement
+  pullback" clause of `lemma-sp-reduction--1`). This is a coherence statement
   for the unbounded derived functors involved; it is proved in
   `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange`.
 -/
@@ -712,7 +712,7 @@ lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app
 
 /-- The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the transport along
 an automorphism `h` of `Spec k` (part of the compatibility with pullback asserted by blueprint
-`lem-fix-compact-support-coefficient-change` and `thm-trf-finite-coefficient-map`). -/
+`lemma-sp-reduction--1` and `theorem-grothendieck-lefschetz-trace-formula--7`). -/
 lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport
     (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso h]
     (M' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :

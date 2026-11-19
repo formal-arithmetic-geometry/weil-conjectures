@@ -113,22 +113,22 @@ fixed sheaf, and satisfy associativity. The base-change comparison in the sectio
 formula is the canonical fibre-product pasting isomorphism.
 
 Proof:
-1. By lem-weil-pbc-etale-inverse-image-algebraic-structures, the unit sends a
+1. By situation-conventions, the unit sends a
    section to its identity-indexed colimit representative followed by sheafification.
    Naturality in site objects and in sheaves gives the two equations in clause (0),
-   using lem-weil-pbc-presheaf-pullback-sets-left-exact and def-weil-pbc-sheafification.
+   using situation-conventions and def-weil-pbc-sheafification.
 2. By lem-weil-pbc-cartesian-square-pasting and def-pc-fibre-product, iterated base
    change is canonically isomorphic to composite base change, naturally in objects.
    Both triple comparisons have the same projections, hence agree.
 3. Apply def-weil-pbc-composite-adjunction to the two inverse-image adjunctions,
-   and lem-weil-pbc-conjugate-iso-unit-equation to the direct-image comparison.
+   and situation-conventions to the direct-image comparison.
    This gives the natural composition isomorphism and its unit equation.
 4. By lem-weil-pbc-site-sheafification-sections-local, applied twice, every section
    of an iterated inverse image is locally a restriction of an iterated pulled-back
    section. Pull back the intermediate covering using
-   lem-weil-pbc-etale-base-change-continuous. A morphism satisfying the unit equation
+   situation-conventions. A morphism satisfying the unit equation
    therefore agrees locally with the comparison, hence equals it by the sheaf axiom
-   of def-weil-pbc-etale-sheaf-of-sets. This proves fixed-sheaf uniqueness.
+   of situation-conventions. This proves fixed-sheaf uniqueness.
 5. On locally generating triple pulled-back sections, unit naturality and the
    composition equations identify both associative composites with the pullback
    along the composite morphism. The triple fibre-product comparisons agree by

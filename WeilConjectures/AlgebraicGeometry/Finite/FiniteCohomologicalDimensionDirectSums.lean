@@ -15,10 +15,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 /-!
 # Direct sums and finite cohomological dimension
 
-Source: the blueprint of the Weil conjectures, chapter `sec-smooth-purity`, unit
-`sk-prop-sf-kunneth-ordinary`, node `lem-kun-0f11`, order 1732; Stacks Project,
-Etale Cohomology, Tag 0F11 (`lemma-finite-cd-mod-n-direct-sums`)
-(blueprint: lem-kun-0f11).
+Source: the blueprint of the Weil conjectures, chapter `chap-Smooth-purity`, unit
+`proposition-ordinary-external-kunneth--1`, node `proposition-open-direct-image-preserves-finite`,
+order 1732; Stacks Project, Etale Cohomology, Tag 0F11 (`lemma-finite-cd-mod-n-direct-sums`)
+(blueprint: proposition-open-direct-image-preserves-finite).
 -/
 
 @[expose] public section
@@ -39,14 +39,14 @@ ring is lifted by the canonical ring equivalence `ULift.ringEquiv` to the univer
 by the existing six-functor and derived-category interfaces.
 
 Source: Stacks Project, Etale Cohomology, Tag 0F11, `lemma-finite-cd-mod-n-direct-sums`,
-assertions (1) and (2) (blueprint: lem-kun-0f11).
+assertions (1) and (2) (blueprint: proposition-open-direct-image-preserves-finite).
 
 Proof:
 1. Put A = Z/nZ. Its module sheaves are torsion. The coefficient-forgetting
    comparison (lem-sbc-higher-direct-image-forget-comparison) identifies their higher
-   images with abelian higher images, so def-kun-cd gives a uniform bound. Express sums
-   as filtered colimits of finite partial sums, including the empty partial sum.
-   Forgetting preserves these colimits (lem-weil-pbc-module-sheaves-colimits-forgetful).
+   images with abelian higher images, so definition-cohomological-dimension gives a uniform bound.
+   Express sums as filtered colimits of finite partial sums, including the empty partial sum.
+   Forgetting preserves these colimits (situation-conventions).
    Apply lemma-weil-pbc-direct-image-filtered-colimit and finite-sum additivity
    (def-sp-left-exact-additive). Exact faithful forgetting reflects the resulting
    canonical higher-image coproduct isomorphisms, also in degree zero.
@@ -68,8 +68,8 @@ Proof:
 5. For (2), use sections at the terminal object (def-weil-pbc-global-sections-functor),
    which is additive and left exact since kernels are sectionwise.
    The coefficient comparison (lem-weil-pbc-etale-module-cohomology-forget) and
-   def-kun-cd give a uniform bound. On a qcqs scheme, apply
-   lem-weil-pbc-cohomology-filtered-colimit to finite partial sums and use additivity
+   definition-cohomological-dimension give a uniform bound. On a qcqs scheme, apply
+   lemma-finiteness-small-etale-topoi--2 to finite partial sums and use additivity
    on their injective resolutions. This gives the canonical coproduct isomorphisms
    for every higher derived sections functor, including degree zero.
 6. Choose representatives I_i and their termwise sum L as in Step 2. Step 5 makes

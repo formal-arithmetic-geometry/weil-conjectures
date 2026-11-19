@@ -38,7 +38,35 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X : Scheme.{u}} (A : modulesPseudofunctor.obj (.mk (op X)))
   [SheafOfModules.IsInvertible.{u, u, u} (A : X.Modules)]
 
-set_option maxHeartbeats 1000000 in
+private lemma etaleIsoTorsorVal_map_mk {V Z : X.Etale} (a : Z ⟶ V)
+    (φ : (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj (unitObj X) ⟶
+      (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj A) (hφ : IsIso φ) :
+    etaleIsoTorsorVal A ((etaleIsoTorsor A).sheaf.obj.map a.op (etaleIsoTorsorMk A φ hφ)) =
+      pullHom (F := modulesPseudofunctor) (M₁ := unitObj X) (M₂ := A)
+        (f₁ := V.hom) (f₂ := V.hom) φ a.left Z.hom Z.hom
+        (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := by
+  change (modulesPseudofunctor.presheafHom (unitObj X) A).map
+    ((toProEt X ⋙ ProEt.forget X).map a).op φ = _
+  simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
+  rfl
+
+omit [SheafOfModules.IsInvertible.{u, u, u} (A : X.Modules)] in
+private lemma homSection_eq_scalar_of_generators {Y : Scheme.{u}} (f : Y ⟶ X)
+    {U₁ U₂ : X.Opens} (e₁ : Γ((A : X.Modules), U₁)) (e₂ : Γ((A : X.Modules), U₂))
+    (he₁ : IsFreeGenerator e₁) (c : Γ(X, U₁ ⊓ U₂))
+    (h : (A : X.Modules).presheaf.map (homOfLE inf_le_right).op e₂ =
+      c • (A : X.Modules).presheaf.map (homOfLE inf_le_left).op e₁)
+    (h₁ : f ⁻¹ᵁ U₁ = ⊤) (h₂ : f ⁻¹ᵁ U₂ = ⊤)
+    (ψ₁ ψ₂ : (pullback f).obj (unit X) ⟶ (pullback f).obj (A : X.Modules))
+    (hs₁ : homSection f ψ₁ = genSection f e₁ h₁)
+    (hs₂ : homSection f ψ₂ = genSection f e₂ h₂)
+    (d : Γ(Y, ⊤)) (hd : smulHom ((pullback f).obj (unit X)) d ≫ ψ₁ = ψ₂) :
+    d = f.appLE (U₁ ⊓ U₂) ⊤ (preimage_inf_eq_top f h₁ h₂).ge c := by
+  have k := congrArg (homSection f (A := (A : X.Modules))) hd
+  rw [homSection_smulHom_comp, hs₁, hs₂, genSection_eq_smul f e₁ e₂ c h h₁ h₂] at k
+  have hg : IsFreeGenerator (genSection f e₁ h₁) := (he₁.pullback_unit_app f).map _
+  exact (Scheme.presheaf_map_id_apply (X := Y) _ _).symm.trans (hg.smul_left_injective k)
+
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The difference of two trivialisations of `Isom(𝒪, A)` attached to generators `e₁`, `e₂` with
@@ -65,20 +93,10 @@ lemma etaleIsoTorsor_sub_eq {V₁ V₂ Z : X.Etale} (a : Z ⟶ V₁) (b : Z ⟶ 
   set x₂ := (etaleIsoTorsor A).sheaf.obj.map b.op (etaleIsoTorsorMk A φ₂ hφ₂)
   have hv := congrArg (etaleIsoTorsorVal A) ((etaleIsoTorsor A).sub_vadd x₁ x₂)
   rw [etaleIsoTorsorVal_vadd] at hv
-  change smulMor _ _ ≫ pullHom (F := modulesPseudofunctor) φ₁ a.left Z.hom Z.hom
-      (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) =
-    pullHom (F := modulesPseudofunctor) φ₂ b.left Z.hom Z.hom
-      (MorphismProperty.Over.w b) (MorphismProperty.Over.w b) at hv
-  have k := congrArg (homSection Z.hom (A := (A : X.Modules))) hv
-  rw [homSection_pullHom V₂.hom b.left Z.hom _ e₂ hU₂ hZ₂ φ₂ hs₂] at k
-  erw [homSection_smulHom_comp] at k
-  rw [homSection_pullHom V₁.hom a.left Z.hom _ e₁ hU₁ hZ₁ φ₁ hs₁,
-    genSection_eq_smul Z.hom e₁ e₂ c h hZ₁ hZ₂] at k
-  have hg : IsFreeGenerator (genSection Z.hom e₁ hZ₁) := (he₁.pullback_unit_app Z.hom).map _
-  have e := hg.smul_left_injective k
-  refine (?_ : _ = _).trans (e.trans ?_)
-  · exact (Scheme.presheaf_map_id_apply (X := Z.left) _ _).symm
-  · rfl
+  simp only [x₁, x₂, etaleIsoTorsorVal_map_mk] at hv
+  exact homSection_eq_scalar_of_generators A Z.hom e₁ e₂ he₁ c h hZ₁ hZ₂ _ _
+    (homSection_pullHom V₁.hom a.left Z.hom _ e₁ hU₁ hZ₁ φ₁ hs₁)
+    (homSection_pullHom V₂.hom b.left Z.hom _ e₂ hU₂ hZ₂ φ₂ hs₂) _ hv
 
 lemma tmulSection_transition {M N : X.Modules} {U₁ U₂ : X.Opens} (s₁ : Γ(M, U₁)) (s₂ : Γ(M, U₂))
     (t₁ : Γ(N, U₁)) (t₂ : Γ(N, U₂)) (c d : Γ(X, U₁ ⊓ U₂))

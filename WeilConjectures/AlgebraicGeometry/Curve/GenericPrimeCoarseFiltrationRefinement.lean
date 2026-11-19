@@ -12,7 +12,7 @@ import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 /-!
 # Refinement of constant-vector-space quotient filtrations
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraphs 1--2.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2.
 (blueprint: lem-sc-generic-prime-coarse-filtration-refinement)
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.IsConnectedCurve
 /-- A coarse finite filtration with finite direct sums of prime constant sheaves as
 quotients admits a refinement with rank-one prime constant quotients and unchanged endpoint.
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraphs 1--2 (refine a basis flag).
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2 (refine a basis flag).
 Proof: prime constant objects generate an isomorphism-closed object property P. Its finite
 filtration closure is closed under extensions. Every finite iterated binary direct sum of
 one prime constant object belongs to that closure, by induction and split exact sequences.

@@ -35,16 +35,16 @@ noncomputable def H.openBaseChangeInclusion (f : X ⟶ Spec (.of R)) (W : X.Open
 
 private lemma coefficientUnit_scalar {Y Z : Scheme.{u}} (j : Z ⟶ Y)
     (M : Y.Modules) (a : Γ(Y, ⊤)) :
-    (invImage j).map (scalarRep M a) ≫ coefficientUnit j M =
-      coefficientUnit j M ≫ scalarRep ((pullback j).obj M) (j.appTop a) := by
+    (invImage j).map (scalarRep M a).asHom ≫ coefficientUnit j M =
+      coefficientUnit j M ≫ (scalarRep ((pullback j).obj M) (j.appTop a)).asHom := by
   apply coeff_naturality
   rw [pushforward_map_smulHom]
   exact smulHom_naturality ((pullbackPushforwardAdjunction j).unit.app M) a
 
 private lemma scalarRep_naturality {Y : Scheme.{u}} {M N : Y.Modules}
     (t : M ⟶ N) (a : Γ(Y, ⊤)) :
-    scalarRep M a ≫ (SheafOfModules.toSheaf Y.ringCatSheaf).map t =
-      (SheafOfModules.toSheaf Y.ringCatSheaf).map t ≫ scalarRep N a := by
+    (scalarRep M a).asHom ≫ (SheafOfModules.toSheaf Y.ringCatSheaf).map t =
+      (SheafOfModules.toSheaf Y.ringCatSheaf).map t ≫ (scalarRep N a).asHom := by
   change (SheafOfModules.toSheaf Y.ringCatSheaf).map (M.smulHom a) ≫
     (SheafOfModules.toSheaf Y.ringCatSheaf).map t =
       (SheafOfModules.toSheaf Y.ringCatSheaf).map t ≫
@@ -110,8 +110,8 @@ theorem H.openRestrictionData (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Op
     let J' := invImage (H.openBaseChangeInclusion (S := S) f W)
     ∃ (e : J.obj (H.openFreeSheaf W) ≅ H.openFreeSheaf (⊤ : W.toScheme.Opens))
       (d : J.obj F ≅ FW) (c : G ⋙ J' ≅ J ⋙ GW) (d' : J'.obj N ≅ NW),
-      (∀ a, J.map (ρ a) ≫ d.hom = d.hom ≫ ρW a) ∧
-      (∀ a, J'.map (τ a) ≫ d'.hom = d'.hom ≫ τW a) ∧
+      (∀ a, J.map (ρ a).asHom ≫ d.hom = d.hom ≫ (ρW a).asHom) ∧
+      (∀ a, J'.map (τ a).asHom ≫ d'.hom = d'.hom ≫ (τW a).asHom) ∧
       J'.map φ ≫ d'.hom = (c.app F).hom ≫ GW.map d.hom ≫ φW := by
   dsimp only
   let j := W.ι
@@ -144,17 +144,17 @@ theorem H.openRestrictionData (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Op
   refine ⟨e ≪≫ eqToIso (congrArg H.openFreeSheaf he),
     d, c, d', ?_, ?_, ?_⟩
   · intro a
-    change (invImage j).map (scalarRep M _) ≫ coefficientUnit j M =
-      coefficientUnit j M ≫ scalarRep ((pullback j).obj M) _
+    change (invImage j).map (scalarRep M _).asHom ≫ coefficientUnit j M =
+      coefficientUnit j M ≫ (scalarRep ((pullback j).obj M) _).asHom
     rw [Scheme.Hom.comp_appTop]
     exact coefficientUnit_scalar j M _
   · intro a
-    change (invImage k).map (scalarRep ((pullback p).obj M) _) ≫
+    change (invImage k).map (scalarRep ((pullback p).obj M) _).asHom ≫
       (coefficientUnit k ((pullback p).obj M) ≫
         (SheafOfModules.toSheaf _).map t.hom) =
       (coefficientUnit k ((pullback p).obj M) ≫
         (SheafOfModules.toSheaf _).map t.hom) ≫
-          scalarRep ((pullback q).obj ((pullback j).obj M)) _
+          (scalarRep ((pullback q).obj ((pullback j).obj M)) _).asHom
     rw [← Category.assoc, coefficientUnit_scalar, Category.assoc, scalarRep_naturality]
     have hh := congrArg Scheme.Hom.appTop hs
     rw [Scheme.Hom.comp_appTop] at hh

@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Homology.KFlat
 import WeilConjectures.AlgebraicGeometry.InverseImageTensorPullbackComparison
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Exact inverse image and K-flat resolutions
 

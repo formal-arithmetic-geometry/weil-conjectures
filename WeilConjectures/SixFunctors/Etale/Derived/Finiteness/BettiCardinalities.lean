@@ -29,7 +29,7 @@ Moreover `dim_k H⁰(Y, 𝒪_Y) = c`.
 Applied to the geometric fibres of a smooth projective family `f : X ⟶ S`, together with the
 constructibility of the geometric fibre dimensions of `𝒪_X`
 (`AlgebraicGeometry.Scheme.Modules.finite_range_and_isConstructible_finrankH_geometricFibre`),
-this gives blueprint `lem-fin-projective-curve-betti-cardinalities`.
+this gives blueprint `proposition-proper-direct-image-finite-coefficients`.
 
 ## Main statements
 
@@ -247,7 +247,7 @@ open Scheme
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `lem-fin-projective-curve-betti-cardinalities`: Betti cardinalities in a smooth
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Betti cardinalities in a smooth
 projective curve family.
 
 Let `S` be Noetherian, `f : X ⟶ S` smooth of relative dimension one and projective

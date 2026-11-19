@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.GradedKernelFinite
 /-!
 # Internal grading on a finite graded kernel
 
-Source: blueprint `lem-sc-p1-graded-resolution`, successive graded kernels.
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, successive graded kernels.
 -/
 
 @[expose] public section
@@ -50,7 +50,7 @@ private theorem finite_homogeneous_spanning {k : Type u} [Field k]
     exact LinearMap.range_eq_top.mpr hf
 
 /-- The inherited grading on the kernel of a graded surjection is internal and finite.
-Source: blueprint `lem-sc-p1-graded-resolution`, proof, successive graded kernels
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, successive graded kernels
 (blueprint: lem-sc-p1-graded-kernel-internal).
 
 Proof: take finite homogeneous generating families for source and target using

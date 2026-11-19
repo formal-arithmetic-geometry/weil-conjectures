@@ -29,13 +29,16 @@ set_option linter.privateModule false
 /-!
 # Projection on constant coefficients for coproduct-preserving compact support
 
-Source: Stacks Project, Cohomology on Sites, projection formula and generation by
-free coefficient complexes.
-(blueprint: lem-exc-proetale-constant-support-projection)
+## Implementation details
 
-Proof: compare the two exact coproduct-preserving coefficient functors, check the
+Compare the two exact coproduct-preserving coefficient functors, check the
 projection on the tensor unit, and extend across the localizing generators of the derived
 module category.
+
+## References
+
+* Stacks Project, Cohomology on Sites, projection formula and generation by free coefficient
+  complexes
 -/
 
 @[expose] public section

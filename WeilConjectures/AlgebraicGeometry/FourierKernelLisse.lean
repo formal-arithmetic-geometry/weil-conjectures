@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierProjectorDescent
 /-! # The Fourier kernel is lisse of rank one
 
 Source: literature/blueprint/latest/blueprint/sec-fourier-transform/sk-thm-inversion/
-prop-kernel-lisse.md (blueprint: prop-kernel-lisse).
+prop-kernel-lisse.md (blueprint: lemma-artin-schreier-character-sheaf).
 -/
 
 @[expose] public noncomputable section
@@ -64,7 +64,7 @@ are the finite small-etale kernel, the degree-`q` small-etale Artin--Schreier mo
 admissible condensed prime-field kernel and the degree-`q` condensed model.
 
 Source: current blueprint, sec-fourier-transform/sk-thm-inversion/prop-kernel-lisse.md,
-all clauses (blueprint: prop-kernel-lisse).
+all clauses (blueprint: lemma-artin-schreier-character-sheaf).
 
 Proof.
 1. For finite coefficients use the proved character multiplication, inverse and Tor

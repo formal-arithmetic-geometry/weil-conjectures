@@ -349,7 +349,6 @@ lemma forgetComparisonUpperStarUnit_comp_map_constantRingMap :
   rw [forgetComparisonUpperStarUnit, forgetComparisonUpperStarUnit, Category.assoc,
     Functor.comp_map, ← Functor.map_comp]
   erw [h]
-  try rfl
 
 omit [CompactSpace S] [QuasiSeparatedSpace S] in
 /-- The isomorphism of the constant pro-étale sheaf with `U ↦ C(U, A)` is natural in `A`. -/

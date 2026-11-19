@@ -237,7 +237,7 @@ import WeilConjectures.Algebra.Homology.ProperBaseChange.ExtensionTensorComparis
 
 /-! # Normalization of scalar pullback on K-flat representatives
 
-Source: blueprint main-20261015, det-prop-scalar-six-pullback (1); Stacks Project,
+Source: blueprint main-20261015, proposition-six-operations-change-coefficients (1); Stacks Project,
 Tags 03EL, 0G7E, 06YY, 07A6 and 0D6D
 (blueprint: lem-sfb-kflat-scalar-comparison-normalization).
 
@@ -338,7 +338,7 @@ def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
     {TY : AY ⥤ BY} {rY : BY ⥤ AY} {TX : AX ⥤ BX} {rX : BX ⥤ AX}
     (dY : TY ⊣ rY) (dX : TX ⊣ rX) {IA : AY ⥤ AX} {IB : BY ⥤ BX}
     (a : rY ⋙ IA ⟶ IB ⋙ rX) : IA ⋙ TX ⟶ TY ⋙ IB :=
-  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a)).natTrans
+  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a))
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def moduleComparison

@@ -14,9 +14,9 @@ public import WeilConjectures.Data.PNat.DvdOrder
 /-!
 # Torsion abelian sheaves on the small étale site
 
-Source: the blueprint of the Weil conjectures, chapter `sec-proper-base-change`, unit
-`sk-def-pbc` (blueprint: def-weil-pbc-torsion-etale-sheaf); Stacks Project, Etale cohomology,
-Section 0DDB.
+Source: the blueprint of the Weil conjectures, chapter `chap-Proper-base-change`, unit
+`sec-Torsion-sheaves-and-acyclicity` (blueprint: definition-torsion-sheaves); Stacks Project, Etale
+cohomology, Section 0DDB.
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The kernel inclusion for positive integers ordered by divisibility. Source: blueprint
-`sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
+`sec-proper-base-change/sk-def-pbc`, statement (blueprint: definition-torsion-sheaves). -/
 theorem torsionKernelTransition_condition {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (n m : PNat.DvdOrder) (hnm : n.val ∣ m.val) :
@@ -38,7 +38,7 @@ theorem torsionKernelTransition_condition {T : Scheme.{u}}
     nsmul_zero]
 
 /-- The canonical kernel inclusions satisfy the identity law. Source: blueprint
-`sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
+`sec-proper-base-change/sk-def-pbc`, statement (blueprint: definition-torsion-sheaves). -/
 theorem torsionKernelTransition_id {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : PNat.DvdOrder) :
     kernel.lift (n.val • 𝟙 F) (kernel.ι (n.val • 𝟙 F))
@@ -47,7 +47,7 @@ theorem torsionKernelTransition_id {T : Scheme.{u}}
   simp only [kernel.lift_ι, Category.id_comp]
 
 /-- The canonical kernel inclusions satisfy the composition law. Source: blueprint
-`sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
+`sec-proper-base-change/sk-def-pbc`, statement (blueprint: definition-torsion-sheaves). -/
 theorem torsionKernelTransition_comp {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (n m k : PNat.DvdOrder) (hnm : n.val ∣ m.val) (hmk : m.val ∣ k.val) :
@@ -61,7 +61,7 @@ theorem torsionKernelTransition_comp {T : Scheme.{u}}
   simp only [Category.assoc, kernel.lift_ι]
 
 /-- Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement
-(blueprint: def-weil-pbc-torsion-etale-sheaf). For a sheaf `F` of abelian groups on the
+(blueprint: definition-torsion-sheaves). For a sheaf `F` of abelian groups on the
 small étale site of `T`, form the filtered diagram indexed by positive natural numbers ordered
 by divisibility, whose value at `n` is `ker (n : F ⟶ F)` and whose transition maps are the
 canonical inclusions. The sheaf `F` is torsion when the canonical map from the colimit of this

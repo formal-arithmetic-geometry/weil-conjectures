@@ -48,7 +48,7 @@ limits of the levelwise traces.
 
 The levels are complexes on the small étale site, where the six functors, the compact-support
 exchange maps and the perfectness of compact cohomology are available
-(`sk-thm-sf-ctf-stability`, `sk-prop-sf-trace-perfectness`); their realization
+(`proposition-six-operations-dctf`, `lemma-perfect-complexes-geometric-point`); their realization
 `R lim_n ν^* L_n` is formed on the pro-étale site, where the cohomological range of the levels is
 preserved (`AlgebraicGeometry.Etale.AdicSystem.realization`). Bounded constructible complexes of
 finite Tor amplitude on the pro-étale site are exactly the `ν^* L` with `L ∈ Dᵇctf(X_ét, A_n)`.
@@ -59,15 +59,16 @@ restriction of an `A_n`-complex is identified with the restriction of its compac
 with `A_n`-coefficients. This identification, the fact that it carries derived base changes
 of constructible complexes of finite Tor amplitude to derived base changes, and its
 compatibility with pullback, are the finite-level coefficient change of compact cohomology
-(`lem-fix-compact-support-coefficient-change`, subsection `sk-def-sfb-coefficient-comparisons`)
+(`lemma-sp-reduction--1`, subsection `sk-def-sfb-coefficient-comparisons`)
 and of geometric stalks
-(`thm-trf-finite-coefficient-map`, subsection `sk-p-trace-coeff`), statements recorded here
-as `AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections` and
-`AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`. The towers are built from
-any such identifications, so that they are data independent of a choice.
+(`theorem-grothendieck-lefschetz-trace-formula--7`, subsection
+`theorem-grothendieck-lefschetz-trace-formula--7`), statements recorded here as
+`AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections` and
+`AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`. The towers are built from any
+such identifications, so that they are data independent of a choice.
 
 Compact cohomology and geometric stalks are read in `D(A_n)` through the point identification
-of blueprint `def-weil-finite-coefficient-point`: `RΓ_c(X, -)` is
+of blueprint `lemma-perfect-complexes-geometric-point`: `RΓ_c(X, -)` is
 `AlgebraicGeometry.Etale.compactlySupportedGlobalSections` and the geometric stalk at
 `x̄ : s ⟶ X` is `RΓ(s, Lx̄^* -)`.
 
@@ -123,7 +124,7 @@ def IsCoefficientChange
 
 variable (Λ) in
 /-- The geometric stalk `K_x̄ = RΓ(s, Lx̄^* K) ∈ D(Λ)` at a point `x̄ : s ⟶ X`, read in `D(Λ)`
-through the point identification of blueprint `def-weil-finite-coefficient-point`. -/
+through the point identification of blueprint `lemma-perfect-complexes-geometric-point`. -/
 noncomputable abbrev geometricStalk {s : Scheme.{u}} (x : s ⟶ X) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (ModuleCat.{u + 1} Λ) :=
@@ -148,7 +149,7 @@ noncomputable def globalSectionsTransport (h : s ⟶ s) [IsIso h] :
 
 variable [Finite Λ] {g : X ⟶ X} {h : s ⟶ s} {a : X ⟶ s} [QuasiCompact a] [HasCompactification a]
 
-/-- Blueprint `def-trf-frobenius-operators` (the transport `g_{γ,c}^*`): the compact-support
+/-- Blueprint `definition-frobenius-operator--1` (the transport `g_{γ,c}^*`): the compact-support
 base change `RΓ_c(X, K) ⟶ RΓ_c(X, Lg^* K)` along an automorphism `g` of `X` lying over an
 automorphism `h` of the base `s` (`sq : g ≫ a = a ≫ h` cartesian):
 ```
@@ -168,7 +169,7 @@ noncomputable def compactPullback (sq : IsPullback g a a h) [IsIso h] :
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) ≫
     (Functor.associator _ _ _).hom
 
-/-- Blueprint `def-trf-frobenius-operators` (2) (the stalk transport `τ_{x,m}`): for a point
+/-- Blueprint `definition-frobenius-operator--1` (2) (the stalk transport `τ_{x,m}`): for a point
 `x̄ : s ⟶ X` fixed by the pair `(g, h)` (`h ≫ x̄ = x̄ ≫ g`), the transport
 `K_x̄ ⟶ (Lg^* K)_x̄` of geometric stalks
 ```

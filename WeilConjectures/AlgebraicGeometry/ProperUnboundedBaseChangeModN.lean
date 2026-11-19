@@ -24,7 +24,7 @@ variable {X Y X' Y' : Scheme.{u}}
 
 /-- Proper base change on unbounded complexes with coefficients in Z/nZ, n positive.
 Source: Stacks Project, Tag 0F0C (Lemma 59.92.3), with Tags 095U, 07K7, and 079P.
-(blueprint: lem-kun-0f0c)
+(blueprint: theorem-results-from-etale-theory--1)
 
 Proof in words: use the existing acyclic-complex criterion for the canonical
 unbounded exchange. Underived proper base change supplies its sheaf exchange

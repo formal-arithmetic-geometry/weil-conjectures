@@ -36,7 +36,7 @@ Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
 def ringedNegativeKoszulFactor {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u})
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) : ringedSiteComplex O :=
-  HomologicalComplex.double ((ringedKoszulScalar O b) ^ (m + 1))
+  HomologicalComplex.double (((ringedKoszulScalar O b) ^ (m + 1)).asHom)
     (by decide : (ComplexShape.up ℤ).Rel (-1) 0)
 
 /-- The ordered tensor of negative factors; the empty tensor is O[0].

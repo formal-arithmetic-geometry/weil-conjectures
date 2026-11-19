@@ -88,13 +88,7 @@ private theorem generic_eq {X W Y : B} (s : X ⟶ W) (q : X ⟶ Y)
   simp only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp]
 
 include hassoc hunit in
-/-- A commutative square with a common section restricts to the two section comparisons.
-Source: the second rational projective-line triangle calculation, cancellation on the diagonal.
-(blueprint: lem-sfb-rational-p1-pull-section-generic-square).
-Proof: compose with the first section isomorphism and precompose with the second
-compositor. Functoriality cancels the second compositor with its inverse. The
-associativity and left-unit laws reduce both sides to inverse total-path compositors.
-Equality induction on the square equation identifies the remaining maps. -/
+/-- A commutative square with a common section restricts to the two section comparisons. -/
 private theorem generic_square {X W Y : B} (s : X ⟶ W) (f₁ f₂ : W ⟶ X)
     (q : X ⟶ Y) (h₁ : s ≫ f₁ = 𝟙 X) (h₂ : s ≫ f₂ = 𝟙 X)
     (e : f₂ ≫ q = f₁ ≫ q) (K : D Y) :
@@ -113,11 +107,7 @@ private theorem generic_square {X W Y : B} (s : X ⟶ W) (f₁ f₂ : W ⟶ X)
     (by rw [← Category.assoc, h₁, Category.id_comp]) K
 
 include hassoc hunit in
-/-- The section calculation through specified ambient and section comparisons.
-Source: the second rational projective-line triangle calculation, cancellation on the diagonal.
-(blueprint: lem-sfb-rational-p1-pull-section-generic-square).
-Proof: substitute the three explicit comparison equations. The abstract square calculation
-then follows by compositor associativity, the left-unit law, and cancellation. -/
+/-- The section calculation through specified ambient and section comparisons. -/
 theorem contravariantPullSectionSquare {X W Y : B} (s : X ⟶ W) (f₁ f₂ : W ⟶ X)
     (q : X ⟶ Y) (h₁ : s ≫ f₁ = 𝟙 X) (h₂ : s ≫ f₂ = 𝟙 X)
     (e : f₂ ≫ q = f₁ ≫ q)

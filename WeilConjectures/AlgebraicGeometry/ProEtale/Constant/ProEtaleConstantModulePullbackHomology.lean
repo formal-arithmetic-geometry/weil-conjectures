@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Exact constant-coefficient restriction and upper cohomological bounds
 
-Source: Stacks Project, Tags 03D2 and 0735
-(blueprint: lem-pur-proetale-constant-module-pullback-homology).
+## References
+
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 0735, termwise exact inverse image
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical constant-coefficient restriction functor.
-Source: Stacks Project, Tag 03D2
-(blueprint: lem-pur-proetale-constant-module-pullback-homology). -/
+/-- The canonical constant-coefficient restriction functor. -/
 noncomputable def proEtaleConstantModulePullbackFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] :
     proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
@@ -56,9 +56,7 @@ instance proEtaleConstantModulePullbackFunctor_preservesFiniteColimits
   unfold proEtaleConstantModulePullbackFunctor
   infer_instance
 
-/-- Exact constant-coefficient pullback commutes with cohomology.
-Source: Stacks Project, Tag 0735, termwise exact inverse image
-(blueprint: lem-pur-proetale-constant-module-pullback-homology). -/
+/-- Exact constant-coefficient pullback commutes with cohomology. -/
 noncomputable def proEtaleConstantModulePullbackHomologyIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A]
     (K : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (i : ℤ) :
@@ -71,15 +69,7 @@ noncomputable def proEtaleConstantModulePullbackHomologyIso {X Y : Scheme.{u}} (
     (proEtaleConstantModulePullbackFunctor f A).mapIso
       ((DerivedCategory.homologyFunctorFactors _ i).app K).symm
 
-/-- Upper cohomological bounds survive the canonical constant-coefficient restriction.
-Source: Stacks Project, Tag 0735 (blueprint:
-lem-pur-proetale-constant-module-pullback-homology).
-
-Proof: the constant coefficient comparison is invertible. The existing module
-pullback therefore preserves finite limits and finite colimits. Map the kernel
-and cokernel defining cohomology to obtain its comparison isomorphism. Above the
-input bound its image is zero, because an additive functor preserves zero objects.
-Transport this zero object across the cohomology comparison. -/
+/-- Upper cohomological bounds survive the canonical constant-coefficient restriction. -/
 theorem proEtaleConstantModulePullback_boundedAbove {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A]
     (K : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ)

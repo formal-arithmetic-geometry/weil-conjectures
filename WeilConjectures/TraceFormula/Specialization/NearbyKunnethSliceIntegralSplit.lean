@@ -123,8 +123,8 @@ theorem isSplitMono_pullbackExchange_coordinateSliceTraitHom_padicIntegers
   exact_mod_proofs h
 
 /-- **The slice exchange splits with `𝒪_E`-coefficients** (SGA 4½, [Th. finitude], Lemme 3.3–3.4;
-blueprint `sk-prop-tf-nearby-external-kunneth`, "Finite support"): for a model `M` of finite type
-over `S = Spec k'⟦t⟧` with a coordinate `b : 𝒳 ⟶ 𝔸¹_S`, the pullback exchange
+blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): for a model `M`
+of finite type over `S = Spec k'⟦t⟧` with a coordinate `b : 𝒳 ⟶ 𝔸¹_S`, the pullback exchange
 `α : Lσ_s^* Ψ_M A₀ ⟶ Ψ_{M''} A₀` with `𝒪_E`-coefficients to the nearby cycles of the geometric
 slice `M''` of `M` along `b` (over `Spec K⟦t⟧`, `K = k'(x)^alg`) is a split monomorphism at every
 `A₀` whose restriction `Lε^* A₀` to the geometric generic fibre is bounded constructible.

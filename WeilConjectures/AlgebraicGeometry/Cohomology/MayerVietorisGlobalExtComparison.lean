@@ -118,15 +118,15 @@ theorem H.globalFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     ∃ (e : ∀ n, HOver f M n ≃+ Ext (H.openFreeSheaf (⊤ : X.Opens)) F n)
       (e' : ∀ n, HOver (baseChangeSnd (S := S) f) (baseChangedModule (S := S) f M) n ≃+
         Ext (G.obj (H.openFreeSheaf (⊤ : X.Opens))) N n),
-      (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧
-      (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧
+      (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n)) ∧
+      (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a).asHom) (add_zero n)) ∧
       (∀ n x, e' n (H.baseChangeLinear (S := S) f M n x) =
         ((e n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by
   exact extComparison (invImage (baseChangeFst (S := S) f)) (topFreeIso X)
     (constIso (baseChangeFst (S := S) f))
     (coeff (baseChangeFst (S := S) f) (baseChangeUnit (S := S) f M))
-    ((scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom))
-    ((scalarRep (baseChangedModule (S := S) f M)).comp
-      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom))
+    (fun a ↦ ((scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom) a).asHom)
+    (fun a ↦ ((scalarRep (baseChangedModule (S := S) f M)).comp
+      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom) a).asHom)
 
 end AlgebraicGeometry.Scheme.Modules

@@ -17,8 +17,8 @@ public import WeilConjectures.WeilSheaf.LowerShriekForget
 
 Let `π : Y ⟶ X` be the trivial line bundle `Y ≅ X ×_{k₀} 𝔸¹` over a `k₀`-scheme `X`, given by a
 cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. This file proves the inputs from which the
-rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]` (blueprint `thm-pur-rank-one-thom`, stated in
-`WeilConjectures.WeilSheaf.FourierInversion.OtherSections`) follows:
+rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]` (blueprint `lemma-integral-linear-character--1`,
+stated in `WeilConjectures.WeilSheaf.FourierInversion.OtherSections`) follows:
 
 - homotopy invariance: the unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism
   (`WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`);
@@ -31,7 +31,7 @@ rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]` (blueprint `thm-pur-ran
   is left adjoint to `(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is also the inverse
   autoequivalence `(-1)[-2]`.
 
-The Weil-equivariant trace of the affine line (`thm-pur-weil-equivariance-of-purity-and-trace`)
+The Weil-equivariant trace of the affine line (`proposition-purity-trace-commute-frobenius`)
 is not formalized for Weil complexes, so the Thom isomorphism itself is not deduced here.
 -/
 
@@ -58,8 +58,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The affine-line adjunction for Weil complexes from a Weil trace** (the Weil form of
-`cor-amb-affine-space-adjunction` for `d = 1`). Let `π : Y ⟶ X` be a separated morphism of finite
-type, for instance the trivial line bundle `Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, and let
+`lemma-affine-space-etale-localization--1` for `d = 1`). Let `π : Y ⟶ X` be a separated morphism of
+finite type, for instance the trivial line bundle `Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, and let
 `ε_P : Rπ₀! π^*(P(1)[2]) ⟶ P` be a natural morphism of Weil complexes whose underlying morphism
 has the universal property of a counit of `Rπ̄_! ⊣ π̄^*(1)[2]` on the geometric fibres: for every
 Weil complex `K` on `Y`, the map `φ ↦ Rπ̄_! φ ≫ For ε_P` out of
@@ -70,7 +70,7 @@ morphisms through free Weil objects, with which `Rπ₀!` commutes
 `AlgebraicGeometry.WeilComplex.bijective_map_comp_derivedLowerShriek`).
 
 For the trivial line bundle such an `ε` is the Weil-equivariant trace of the affine line
-(`thm-pur-weil-equivariance-of-purity-and-trace`); it is not formalized for Weil complexes. -/
+(`proposition-purity-trace-commute-frobenius`); it is not formalized for Weil complexes. -/
 theorem nonempty_adjunction_derivedLowerShriek_of_weilTrace
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     (ε : ((tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) ⋙
@@ -102,12 +102,12 @@ theorem nonempty_adjunction_derivedLowerShriek_of_weilTrace
 
 include hπ in
 /-- **The Weil-equivariant trace of the affine line** (cross-section input: blueprint
-`thm-pur-weil-equivariance-of-purity-and-trace` for the trivial line bundle, together with the
-`ℓ`-adic form of `cor-amb-affine-space-adjunction` for `d = 1` on the geometric fibres). For the
-trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over
-`Spec k₀`, there is a natural morphism of Weil complexes `ε_P : Rπ₀! π^*(P(1)[2]) ⟶ P`, the trace,
-whose underlying morphism is the counit of `Rπ̄_! ⊣ π̄^*(1)[2]` on the geometric fibres: for every
-Weil complex `K` on `Y`, `φ ↦ Rπ̄_! φ ≫ For ε_P` is a bijection
+`proposition-purity-trace-commute-frobenius` for the trivial line bundle, together with the
+`ℓ`-adic form of `lemma-affine-space-etale-localization--1` for `d = 1` on the geometric fibres).
+For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X`
+over `Spec k₀`, there is a natural morphism of Weil complexes `ε_P : Rπ₀! π^*(P(1)[2]) ⟶ P`, the
+trace, whose underlying morphism is the counit of `Rπ̄_! ⊣ π̄^*(1)[2]` on the geometric fibres: for
+every Weil complex `K` on `Y`, `φ ↦ Rπ̄_! φ ≫ For ε_P` is a bijection
 `Hom(For K, For π^*(P(1)[2])) ≃ Hom(Rπ̄_! For K, For P)`.
 
 The geometric adjunction is the `ℓ`-adic transport of
@@ -132,7 +132,7 @@ theorem exists_weilTrace_of_isPullback [LocallyOfFiniteType (Y ↘ Spec (CommRin
 
 include hπ in
 /-- **The affine-line adjunction for Weil complexes** (the Weil form of
-`cor-amb-affine-space-adjunction` for `d = 1`). For the trivial line bundle
+`lemma-affine-space-etale-localization--1` for `d = 1`). For the trivial line bundle
 `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
 direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`,
 with counit the Weil-equivariant trace
@@ -156,11 +156,11 @@ faithful.
 
 For `K = Λ_X` with finite étale coefficients over an algebraically closed field this is
 `AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`; for general `K` it follows from
-the constant case by smooth base change (`sbc-thm-smooth-base-change`) and the acyclicity of
-the affine line over strictly henselian bases. Here it is deduced from the case of a reduced
-scheme (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`): `K` is
-the direct image of its restriction to the reduced subscheme `X_red`, whose open complement is
-empty, and smooth base change carries the unit along this direct image
+the constant case by smooth base change (`theorem-smooth-base-change-classical-torsion--1`) and the
+acyclicity of the affine line over strictly henselian bases. Here it is deduced from the case of a
+reduced scheme (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`):
+`K` is the direct image of its restriction to the reduced subscheme `X_red`, whose open complement
+is empty, and smooth base change carries the unit along this direct image
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_derivedLowerStar_obj`). -/
 theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
     (K : WeilComplex k₀ l X) :

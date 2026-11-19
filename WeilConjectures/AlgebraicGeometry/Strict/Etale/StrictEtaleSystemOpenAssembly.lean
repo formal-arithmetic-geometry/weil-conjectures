@@ -38,13 +38,13 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
 
 private theorem openRestrictionTranspose (am : Fm ⊣ Gm) (an : Fn ⊣ Gn)
     (c : RX ⋙ Fm ≅ Fn ⋙ RZ) (b : RZ ⋙ Gm ≅ Gn ⋙ RX)
-    (hc : (mateEquiv an am (.mk _ _ _ _ c.hom)).natTrans = b.inv)
+    (hc : (mateEquiv an am (.mk _ _ _ _ c.hom)) = b.inv)
     (M : B) (N : D) (f : Fn.obj M ⟶ N) :
     am.homEquiv _ _ (c.hom.app M ≫ RZ.map f) =
       RX.map (an.homEquiv _ _ f) ≫ b.inv.app N := by
   have hu := unit_mateEquiv an am (.mk _ _ _ _ c.hom) M
   change RX.map (an.unit.app M) ≫
-      (mateEquiv an am (.mk _ _ _ _ c.hom)).natTrans.app (Fn.obj M) =
+      (mateEquiv an am (.mk _ _ _ _ c.hom)).app (Fn.obj M) =
     am.unit.app (RX.obj M) ≫ Gm.map (c.hom.app M) at hu
   rw [hc] at hu
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, CategoryTheory.Functor.map_comp,
@@ -56,7 +56,7 @@ private theorem openRestrictionTranspose (am : Fm ⊣ Gm) (an : Fn ⊣ Gn)
 
 private theorem openTransitionTranspose (am : Fm ⊣ Gm) (an : Fn ⊣ Gn)
     (c : RX ⋙ Fm ≅ Fn ⋙ RZ) (b : RZ ⋙ Gm ≅ Gn ⋙ RX)
-    (hc : (mateEquiv an am (.mk _ _ _ _ c.hom)).natTrans = b.inv)
+    (hc : (mateEquiv an am (.mk _ _ _ _ c.hom)) = b.inv)
     {Mm : A} {Mn : B} {Nm : C} {Nn : D}
     (tM : Mm ⟶ RX.obj Mn) (tN : Nm ⟶ RZ.obj Nn)
     (fm : Fm.obj Mm ⟶ Nm) (fn : Fn.obj Mn ⟶ Nn) :
@@ -251,7 +251,7 @@ omit [IsOpenImmersion j] in
 private theorem openSystemEvaluationMate (n : ℕ) :
     (I.inverseEvaluation n).hom =
       (mateEquiv (openSystemAdjunction O t j I L) (L.levelAdjunction n)
-        (.mk _ _ _ _ (openSystemEvaluation O t j I L n).inv)).natTrans := by
+        (.mk _ _ _ _ (openSystemEvaluation O t j I L n).inv)) := by
   apply NatTrans.ext
   funext N
   apply ((L.levelAdjunction n).homEquiv _ _).symm.injective
@@ -329,7 +329,7 @@ structure StrictEtaleSystemOpenAssembly where
       coefficientEvaluation (J := X.smallEtaleTopology) (O := O) (ell := t) n ⋙ L.level n
   evaluationMate : ∀ n, (I.inverseEvaluation n).hom =
     (mateEquiv adjunction (L.levelAdjunction n)
-      (.mk _ _ _ _ (evaluation n).inv)).natTrans
+      (.mk _ _ _ _ (evaluation n).inv))
   transition : ∀ {m n : ℕ} (h : n ≤ m) M,
     (PZ.strictTransition h).app (extension.obj M) ≫
       (coefficientRestriction (J := Z.smallEtaleTopology) O t h).map

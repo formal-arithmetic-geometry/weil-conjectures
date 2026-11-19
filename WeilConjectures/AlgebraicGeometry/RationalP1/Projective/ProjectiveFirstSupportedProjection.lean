@@ -56,22 +56,7 @@ private theorem first_diagonal_tensor_inv
         (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M := by
   simp only [diagonalTensorIso, Iso.symm_inv, asIso_hom, diagonalTensorMap]
 
-/-- The first diagonal section and its tensor comparison evaluate on the supported unit.
-Source: the rational projective-line triangle, First identity, the section case of the
-projection formula and supported-source normalization
-(blueprint: lem-sfb-projective-first-supported-projection).
-
-Proof: specialize projection/composition coherence to the first projection and its diagonal
-section. The conjugate of the canonical pullback section is firstPushSectionIso. On the
-regular coefficient the identity projection is the right-unitor inverse followed by the
-coefficient insertion and the first projection map. Transport the regular coefficient
-through the exact diagonal single comparison supportedUnitIso. On complexes concentrated
-in degree zero, the ordinary section comparison is fixed by d.support1.normalization;
-the full right-derived unit equation d.p1_unit fixes its derived realization. Thus the
-transported insertion is d.support1.hom followed by the canonical functor equality.
-Projection naturality in this coefficient comparison gives the displayed equality.
-This is a forward identity at the supported unit only: there is no arbitrary kernel,
-outer direct image, path change, or inverse projection. Empty Y and zero M are allowed. -/
+/-- The first diagonal section and its tensor comparison evaluate on the supported unit. -/
 theorem first_supported_projection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

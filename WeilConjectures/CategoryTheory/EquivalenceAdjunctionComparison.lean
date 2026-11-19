@@ -11,7 +11,7 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Normalized adjunction comparisons across equivalences
 
 Source: Stacks Project, Tags 0B65 and 0DV0; categorical extension used in the blueprint
-`det-nagata-density-normalization-sheaves`, Steps 1–2.
+`lemma-passing-schematic-closure--1`, Steps 1–2.
 (auxiliary; not a blueprint node)
 
 The three statements give the unique normalized comparison, its compatibility with
@@ -59,9 +59,9 @@ theorem exists_equivalenceAdjunctionComparison
     (adj : J ⊣ U) (adjb : Jb ⊣ Ub)
     (u : U ⋙ EA.functor ≅ EB.functor ⋙ Ub) :
     ∃ j : J ⋙ EB.functor ≅ EA.functor ⋙ Jb,
-      (mateEquiv adj adjb j.inv).natTrans = u.hom ∧
+      (mateEquiv adj adjb j.inv) = u.hom ∧
       (∀ k : J ⋙ EB.functor ≅ EA.functor ⋙ Jb,
-        (mateEquiv adj adjb k.inv).natTrans = u.hom → k = j) ∧
+        (mateEquiv adj adjb k.inv) = u.hom → k = j) ∧
       (∀ (X : A) (Y : B) (f : J.obj X ⟶ Y),
         adjb.homEquiv (EA.functor.obj X) (EB.functor.obj Y)
             (j.inv.app X ≫ EB.functor.map f) =
@@ -70,11 +70,11 @@ theorem exists_equivalenceAdjunctionComparison
         EA.functor.map (adj.unit.app X) ≫ u.hom.app (J.obj X)) ∧
       (∀ Y : B, j.inv.app (U.obj Y) ≫ EB.functor.map (adj.counit.app Y) =
         Jb.map (u.hom.app Y) ≫ adjb.counit.app (EB.functor.obj Y)) := by
-  let alpha := ((mateEquiv adj adjb).symm u.hom).natTrans
+  let alpha := ((mateEquiv adj adjb).symm u.hom)
   let : IsIso alpha := isIso_inverseMate_of_equivalences adj adjb u
   let j : J ⋙ EB.functor ≅ EA.functor ⋙ Jb := (asIso alpha).symm
-  have hj : (mateEquiv adj adjb j.inv).natTrans = u.hom := by
-    exact congrArg TwoSquare.natTrans ((mateEquiv adj adjb).apply_symm_apply u.hom)
+  have hj : (mateEquiv adj adjb j.inv) = u.hom := by
+    exact ((mateEquiv adj adjb).apply_symm_apply u.hom)
   refine ⟨j, hj, ?_, ?_, ?_, ?_⟩
   · intro k hk
     have h : k.inv = j.inv := by
@@ -130,9 +130,9 @@ theorem equivalenceAdjunctionComparison_compositor
     (c01 : L01 ⋙ E1.functor ≅ E0.functor ⋙ Lb01)
     (c12 : L12 ⋙ E2.functor ≅ E1.functor ⋙ Lb12)
     (c02 : L02 ⋙ E2.functor ≅ E0.functor ⋙ Lb02)
-    (h01 : (mateEquiv adj01 adjb01 c01.inv).natTrans = r01.hom)
-    (h12 : (mateEquiv adj12 adjb12 c12.inv).natTrans = r12.hom)
-    (h02 : (mateEquiv adj02 adjb02 c02.inv).natTrans = r02.hom)
+    (h01 : (mateEquiv adj01 adjb01 c01.inv) = r01.hom)
+    (h12 : (mateEquiv adj12 adjb12 c12.inv) = r12.hom)
+    (h02 : (mateEquiv adj02 adjb02 c02.inv) = r02.hom)
     (delta : R21 ⋙ R10 ≅ R20) (deltab : Rb21 ⋙ Rb10 ≅ Rb20)
     (hdelta : ∀ Z : C,
       r01.hom.app (R21.obj Z) ≫ Rb10.map (r12.hom.app Z) ≫
@@ -149,8 +149,6 @@ theorem equivalenceAdjunctionComparison_compositor
   have hm : mateEquiv (adj01.comp adj12) (adjb01.comp adjb12) alpha =
       TwoSquare.hComp r12.hom r01.hom := by
     rw [mateEquiv_hcomp]
-    change TwoSquare.hComp ((mateEquiv adj12 adjb12 c12.inv).natTrans)
-      ((mateEquiv adj01 adjb01 c01.inv).natTrans) = _
     rw [h01, h12]
   have hl := conjugateEquiv_mateEquiv_vcomp adj02 (adj01.comp adj12)
     (adjb01.comp adjb12) a.hom alpha
@@ -173,7 +171,7 @@ theorem equivalenceAdjunctionComparison_compositor
     rw [hdelta Z, ← Category.assoc, ← E0.functor.map_comp]
     simp
   intro X
-  have hx := congrArg (fun t ↦ t.natTrans.app X) he
+  have hx := congrArg (fun t ↦ t.app X) he
   dsimp [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, alpha, TwoSquare.vComp] at hx
   simp only [Category.id_comp, Category.comp_id] at hx
   change (Lb12.map (c01.inv.app X) ≫ c12.inv.app (L01.obj X)) ≫
@@ -230,8 +228,8 @@ theorem equivalenceAdjunctionComparison_inverseMate
     (u' : U' ⋙ EC.functor ≅ ED.functor ⋙ Ub')
     (j : J ⋙ EB.functor ≅ EA.functor ⋙ Jb)
     (j' : J' ⋙ ED.functor ≅ EC.functor ⋙ Jb')
-    (hj : (mateEquiv adj adjb j.inv).natTrans = u.hom)
-    (hj' : (mateEquiv adj' adjb' j'.inv).natTrans = u'.hom)
+    (hj : (mateEquiv adj adjb j.inv) = u.hom)
+    (hj' : (mateEquiv adj' adjb' j'.inv) = u'.hom)
     (P : A ⥤ C) (Q : B ⥤ D) (Pb : Ab ⥤ Cb) (Qb : Bb ⥤ Db)
     (p : P ⋙ EC.functor ≅ EA.functor ⋙ Pb)
     (q : Q ⋙ ED.functor ≅ EB.functor ⋙ Qb)
@@ -244,16 +242,16 @@ theorem equivalenceAdjunctionComparison_inverseMate
           q.hom.app (J.obj X) ≫ Qb.map (j.hom.app X) =
         j'.hom.app (P.obj X) ≫ Jb'.map (p.hom.app X) ≫
           ((mateEquiv adjb adjb').symm bb).app (EA.functor.obj X)) ∧
-      (IsIso (((mateEquiv adj adj').symm b).natTrans) ↔
-        IsIso (((mateEquiv adjb adjb').symm bb).natTrans)) := by
-  let beta := ((mateEquiv adj adj').symm b).natTrans
-  let betab := ((mateEquiv adjb adjb').symm bb).natTrans
-  have halpha : ((mateEquiv adj adjb).symm u.hom).natTrans = j.inv := by
+      (IsIso (((mateEquiv adj adj').symm b)) ↔
+        IsIso (((mateEquiv adjb adjb').symm bb))) := by
+  let beta := ((mateEquiv adj adj').symm b)
+  let betab := ((mateEquiv adjb adjb').symm bb)
+  have halpha : ((mateEquiv adj adjb).symm u.hom) = j.inv := by
     rw [← hj]
-    exact congrArg TwoSquare.natTrans ((mateEquiv adj adjb).symm_apply_apply j.inv)
-  have halpha' : ((mateEquiv adj' adjb').symm u'.hom).natTrans = j'.inv := by
+    exact ((mateEquiv adj adjb).symm_apply_apply j.inv)
+  have halpha' : ((mateEquiv adj' adjb').symm u'.hom) = j'.inv := by
     rw [← hj']
-    exact congrArg TwoSquare.natTrans ((mateEquiv adj' adjb').symm_apply_apply j'.inv)
+    exact ((mateEquiv adj' adjb').symm_apply_apply j'.inv)
   have hu (X : A) : EA.functor.map (adj.unit.app X) ≫ u.hom.app (J.obj X) =
       adjb.unit.app (EA.functor.obj X) ≫ Ub.map (j.inv.app X) := by
     simpa only [halpha, Functor.id_obj] using unit_mateEquiv_symm adj adjb u.hom X
@@ -266,7 +264,7 @@ theorem equivalenceAdjunctionComparison_inverseMate
     have hn := adjunctionMate_transpose adj' adjb' u'.hom
       (P.obj X) (Q.obj (J.obj X)) (beta.app X)
     change adjb'.homEquiv _ _
-      ((((mateEquiv adj' adjb').symm u'.hom).natTrans).app (P.obj X) ≫
+      ((((mateEquiv adj' adjb').symm u'.hom)).app (P.obj X) ≫
         ED.functor.map (beta.app X)) = _ at hn
     rw [halpha'] at hn
     rw [hn]

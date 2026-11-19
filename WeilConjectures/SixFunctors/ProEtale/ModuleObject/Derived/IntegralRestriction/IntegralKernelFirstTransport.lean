@@ -93,7 +93,6 @@ private theorem generic_transport
 
 open Lean Meta Elab Tactic
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-set_option maxHeartbeats 600000 in
 -- Kernel conversion checks the fixed integral Tate casts and derived-category aliases.
 /--
 The normalized restricted components factor through ambient normalized components.

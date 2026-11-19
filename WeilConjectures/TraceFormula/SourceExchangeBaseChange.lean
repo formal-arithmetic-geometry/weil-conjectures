@@ -17,9 +17,9 @@ public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 # The base-change core of the exceptional Künneth part of the source exchange
 
 The base-change core of the exceptional Künneth part of the source exchange
-(blueprint `lem-trf-trace-source-exchange`, Step 3), for a proper `f : X ⟶ Y`, in a generic form
-(`ProEtale.CondensedRing.lowerShriek_exceptionalKunneth_baseChange_generic`). It is proved by
-transposing both sides along `Lf^* ⊣ Rf_*` (`sourceExchange_leftTranspose`,
+(blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3), for a proper `f : X ⟶ Y`, in
+a generic form (`ProEtale.CondensedRing.lowerShriek_exceptionalKunneth_baseChange_generic`). It is
+proved by transposing both sides along `Lf^* ⊣ Rf_*` (`sourceExchange_leftTranspose`,
 `sourceExchange_rightTranspose`) and comparing them on `X × Y` (`sourceExchange_coreTail`).
 
 -/
@@ -327,7 +327,6 @@ lemma sourceExchange_inv_baseChange_paste (sqY : IsPullback π₂ π₁ aY aY)
   rw [hP]
   simp [← Functor.map_comp]
 
-set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The tail of the core identity: the left side through `Rh_*`, `Rr_!` and the projection
 formulas is the transported test map of the exceptional Künneth adjoint of `K`. -/
@@ -423,7 +422,6 @@ variable {P X Y W U V : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
 
-set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The generic form of `lowerShriek_exceptionalKunneth_baseChange`. -/
 theorem lowerShriek_exceptionalKunneth_baseChange_generic

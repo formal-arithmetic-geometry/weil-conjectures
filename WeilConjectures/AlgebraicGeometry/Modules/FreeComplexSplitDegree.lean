@@ -36,11 +36,7 @@ matrices of global functions on `X`, and `y` a point at which
 `rank A₀(y) + rank A₁(y) = |ι₀|`, `rank A₁(y) + rank A₂(y) + k = |ι₁|` and
 `rank A₂(y) + rank A₃(y) = |ι₂|`. Then on an open neighbourhood `W` of `y`, after pulling back
 along any `g : Z ⟶ X` with image in `W`, the middle term of `A₁` and `A₂` is split with
-cohomology free of rank `k`.
-
-The two outer rank conditions give split rank factorisations of `A₁` and `A₂` near `y`
-(`AlgebraicGeometry.Scheme.exists_opens_split_of_rank_add_eq`); the cohomology is then the image
-of an idempotent of rank `k` at `y`, which splits near `y`. -/
+cohomology free of rank `k`. -/
 theorem exists_opens_hasSplitHomology_of_rank_add_eq {κ ι₀ ι₁ ι₂ ι₃ : Type*} [Fintype κ]
     [Fintype ι₀] [Fintype ι₁] [Fintype ι₂] [Finite ι₃] [DecidableEq ι₁]
     (A₀ : Matrix ι₀ κ Γ(X, ⊤)) (A₁ : Matrix ι₁ ι₀ Γ(X, ⊤))

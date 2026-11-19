@@ -47,7 +47,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- The residue criterion in the internal continuous coefficient presentation.
-Source: blueprint `sk-lem-integral-models`, clauses (1)--(2); Stacks 099L, 09C1.
+Source: blueprint `lemma-integral-models`, clauses (1)--(2); Stacks 099L, 09C1.
 (auxiliary; not a blueprint node).
 
 Proof: the integral coefficient limit identifies the continuous integer sheaf with

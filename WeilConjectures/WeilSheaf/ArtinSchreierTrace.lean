@@ -28,7 +28,8 @@ Artin–Schreier covering as the translation by `Tr_{𝔽_{qⁿ}/k₀}(a x)`, si
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier` (`lem-fd-as-trace`): the trace
+- `AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`
+(`lemma-artin-schreier-character-sheaf--6`): the trace
   function of `ℒ_{ψ(a x)}`.
 - `AlgebraicGeometry.affineLine.frobeniusEnd_stalkAt_artinSchreierImage`: the local Frobenius of
   `ℒ_ψ` at a geometric point `s = ĀS ∘ t` with `σⁿ ∘ t = Frⁿ ∘ σ̄_d ∘ t` is the scalar `ψ(-d)`.
@@ -154,20 +155,20 @@ noncomputable def affineLine.artinSchreierImageEval (c : k₀) :
 -/
 lemma affineLine.artinSchreierImageEval_frobenius :
     (ProEtale.upperStarComp _
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       ĀS).hom.app (image (WeilSheaf.artinSchreierIdempotent ψ)).obj.carrier.X ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
           (affineLine.artinSchreierImageEval ψ 0) ≫
         (WeilSheaf.adicConstant k₀ l (affineLine k₀)).frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           (affineLine.artinSchreierMap k₀) (comp_over _ _)).symm).hom.app
           (image (WeilSheaf.artinSchreierIdempotent ψ)).obj.carrier.X ≫
         (ProEtale.upperStarComp _ ĀS
-          (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
+          (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
           (image (WeilSheaf.artinSchreierIdempotent ψ)).obj.carrier.X ≫
         (ĀS)^*[_].map (image (WeilSheaf.artinSchreierIdempotent ψ)).frobeniusStr ≫
         affineLine.artinSchreierImageEval ψ 0 := by
-  have hι : ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+  have hι : ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
       (affineLine.artinSchreierImageι ψ) ≫ affineLine.artinSchreierPushforwardStr k₀ l =
       (image (WeilSheaf.artinSchreierIdempotent ψ)).frobeniusStr ≫
         affineLine.artinSchreierImageι ψ := by
@@ -175,10 +176,10 @@ lemma affineLine.artinSchreierImageEval_frobenius :
     rw [affineLine.frobeniusStr_artinSchreierPushforward] at h
     exact h
   have n₁ := ProEtale.upperStarComp_hom_app_comp_map_map (A := WeilCoefficients.{u} l)
-    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ĀS
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom ĀS
     (affineLine.artinSchreierImageι ψ)
   have n₂ := ProEtale.upperStarComp_hom_app_comp_map_map (A := WeilCoefficients.{u} l) ĀS
-    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
     (affineLine.artinSchreierImageι ψ)
   have n₃ := ProEtale.upperStarCongr_hom_app_comp_map (A := WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
@@ -221,12 +222,12 @@ trivial on `ℚ̄_ℓ`, while moving back along `σ̄_d` multiplies the triviali
 theorem affineLine.frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤ n)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) (d : k₀)
-    (hX : (specGeometricFrobenius k₀ ^ n).hom ≫ t =
+    (hX : (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ t =
       (t ≫ (affineLine.geometricTranslationIso k₀ d).hom) ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom)
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom)
     (hs : (t ≫ ĀS) ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius k₀ ^ n).hom ≫ (t ≫ ĀS)) :
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ (t ≫ ĀS)) :
     ((image (WeilSheaf.artinSchreierIdempotent ψ)).stalkAt (t ≫ ĀS) n hs).frobeniusEnd =
         ψ (-d) • LinearMap.id ∧
       Module.finrank (PadicAlgCl l)
@@ -245,9 +246,9 @@ theorem affineLine.frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤
     rw [hθ₀]
     infer_instance
   -- the Frobenius, through the trivialisation
-  have hY : (specGeometricFrobenius k₀ ^ n).hom ≫ (t ≫ ĀS) =
+  have hY : (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ (t ≫ ĀS) =
       ((t ≫ (affineLine.geometricTranslationIso k₀ d).hom) ≫ ĀS) ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom := by
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom := by
     rw [Category.assoc t, affineLine.geometricTranslation_comp_artinSchreierMap, hs]
   have h₁ := WeilSheaf.globalSectionsTransport_frobeniusPowStr_comp_stalkObjHomOfUpperStar
     (φ := affineLine.artinSchreierMap k₀) (G := WeilSheaf.adicConstant k₀ l (affineLine k₀))
@@ -331,13 +332,13 @@ theorem affineLine.frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤
 theorem affineLine.trace_frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤ n)
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    (hs : s ≫ ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius k₀ ^ n).hom ≫ s)
+    (hs : s ≫ ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ s)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) (ht : t ≫ ĀS = s) (d : k₀)
-    (hX : (specGeometricFrobenius k₀ ^ n).hom ≫ t =
+    (hX : (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ t =
       (t ≫ (affineLine.geometricTranslationIso k₀ d).hom) ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom) :
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom) :
     LinearMap.trace (PadicAlgCl l) _
       ((image (WeilSheaf.artinSchreierIdempotent ψ)).stalkAt s n hs).frobeniusEnd = ψ (-d) := by
   subst ht
@@ -463,10 +464,10 @@ theorem affineLine.exists_comp_geometricArtinSchreierMap_eq {n : ℕ} (hn : n �
     ∃ t : Spec (.of (AlgebraicClosure k₀)) ⟶
         (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber,
       t ≫ ĀS = (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint ι x.1 x.2 ∧
-      (specGeometricFrobenius k₀ ^ n).hom ≫ t =
+      (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ t =
         (t ≫ (affineLine.geometricTranslationIso k₀
           (-Algebra.trace k₀ _ (affineLine.pointCoord x.1))).hom) ≫
-          ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom := by
+          ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom := by
   have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
   let := Fintype.ofFinite k₀
   set s := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint ι x.1 x.2
@@ -498,7 +499,7 @@ theorem affineLine.exists_comp_geometricArtinSchreierMap_eq {n : ℕ} (hn : n �
     (sum_pow_eq_algebraMap_trace (FiniteField.finrank_galoisExtension k₀ n hn) ι _)
   have hinj : Function.Injective (Scheme.ΓSpecIso (.of (AlgebraicClosure k₀))).hom.hom :=
     fun a b h ↦ by simpa using congrArg (Scheme.ΓSpecIso (.of (AlgebraicClosure k₀))).inv.hom h
-  have h₀ : (specGeometricFrobenius k₀ ^ n).hom ≫ t₀ =
+  have h₀ : (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ t₀ =
       t₀ ≫ affineLine.translation k₀ (-Algebra.trace k₀ _ (affineLine.pointCoord x.1)) := by
     refine AffineSpace.hom_ext ?_ fun _ ↦ hinj ?_
     · rw [Category.assoc, hstr, Category.assoc, comp_over, hstr, specGeometricFrobenius_pow_hom,
@@ -530,7 +531,7 @@ end Points
 /-- **Trace function of the Artin–Schreier sheaf.** For an additive character `ψ` of `k₀`,
 `a ∈ k₀` and `n ≠ 0`, the trace function of `ℒ_{ψ(a x)}` at an `𝔽_{qⁿ}`-rational point `x` of
 the affine line is `ψ(Tr_{𝔽_{qⁿ}/k₀}(a x))`, for the local geometric Frobenius.
-(blueprint: `lem-fd-as-trace`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf--6`) -/
 theorem WeilSheaf.traceFunction_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) {n : ℕ}
     (hn : n ≠ 0)
     (x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints

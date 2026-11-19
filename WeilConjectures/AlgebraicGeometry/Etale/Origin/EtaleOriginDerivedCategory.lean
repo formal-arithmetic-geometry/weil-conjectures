@@ -17,8 +17,8 @@ public import Mathlib.CategoryTheory.EssentialImage
 # The category of bounded below complexes with a retained etale origin
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-`def-weil-compact-support-candidate`, order 1472, and the retained witness of
-`def-weil-pbc-etale-origin-witness`, order 1289
+`proposition-construction-independence-rf-shriek`, order 1472, and the retained witness of
+`proposition-proper-direct-image-constructible-complexes--5`, order 1289
 (blueprint: def-sf-etale-origin-subcategory).
 
 Objects retain the pro-etale complex and the complete etale-origin witness. Morphisms
@@ -40,8 +40,8 @@ namespace AlgebraicGeometry.ProEtale
 `K` and the recorded `EtaleOriginWitness`, hence both `L` and `alpha`. The induced
 category has precisely the ambient derived morphisms between the underlying `K`s,
 with the ambient identities and composition.
-Source: Weil blueprint, `def-weil-compact-support-candidate`, order 1472, and
-`def-weil-pbc-etale-origin-witness`, order 1289
+Source: Weil blueprint, `proposition-construction-independence-rf-shriek`, order 1472, and
+`proposition-proper-direct-image-constructible-complexes--5`, order 1289
 (blueprint: def-sf-etale-origin-subcategory). -/
 noncomputable abbrev EtaleOriginDerivedCategory (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :=
@@ -50,7 +50,7 @@ noncomputable abbrev EtaleOriginDerivedCategory (T : Scheme.{u}) (Λ : Type (u +
 
 /-- Forget the retained witness and keep `K` in the bounded below pro-etale category.
 On morphisms this is the identity under `InducedCategory.homEquiv`.
-Source: Weil blueprint, `def-weil-compact-support-candidate`, order 1472
+Source: Weil blueprint, `proposition-construction-independence-rf-shriek`, order 1472
 (blueprint: def-sf-etale-origin-subcategory). -/
 noncomputable def etaleOriginForgetfulPlus (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
@@ -59,7 +59,7 @@ noncomputable def etaleOriginForgetfulPlus (T : Scheme.{u}) (Λ : Type (u + 1))
     (fun P : Σ K : FiniteCoefficientDerivedCategoryPlus T Λ, EtaleOriginWitness T Λ K ↦ P.1)
 
 /-- The forgetful functor is fully faithful by the induced-category construction.
-Source: Weil blueprint, `def-weil-compact-support-candidate`, order 1472;
+Source: Weil blueprint, `proposition-construction-independence-rf-shriek`, order 1472;
 Mathlib, `CategoryTheory.fullyFaithfulInducedFunctor`
 (blueprint: def-sf-etale-origin-subcategory). -/
 noncomputable def etaleOriginForgetfulPlusFullyFaithful (T : Scheme.{u})
@@ -71,7 +71,7 @@ noncomputable def etaleOriginForgetfulPlusFullyFaithful (T : Scheme.{u})
 
 /-- Regard the witness-retaining category as a full subcategory of the unbounded
 pro-etale derived category through the bounded below inclusion.
-Source: Weil blueprint, `def-weil-compact-support-candidate`, order 1472
+Source: Weil blueprint, `proposition-construction-independence-rf-shriek`, order 1472
 (blueprint: def-sf-etale-origin-subcategory). -/
 noncomputable def etaleOriginForgetful (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :

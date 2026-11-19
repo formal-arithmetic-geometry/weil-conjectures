@@ -79,7 +79,7 @@ private def fcPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
   @asIso _ _ _ _
     ((mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
       (openBetaModuleAdj B f)).symm
-        (TwoSquare.mk _ _ _ _ (cDirect B f Λ φ).hom)).natTrans
+        (TwoSquare.mk _ _ _ _ (cDirect B f Λ φ).hom))
     (cPullback_isIso B f Λ φ)
 
 private def fcOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -88,7 +88,7 @@ private def fcOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
   @asIso _ _ _ _
     ((mateEquiv (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (moduleJAdj B j)).symm
-        (TwoSquare.mk _ _ _ _ (fcPull B Λ φ j).inv)).natTrans
+        (TwoSquare.mk _ _ _ _ (fcPull B Λ φ j).inv))
     (cOpen_isIso B j Λ φ)
 
 attribute [local irreducible] C fcPull fcOpen modulePullback
@@ -169,8 +169,7 @@ private lemma fcPull_compSquare {V W Z : Scheme.{u}}
             (coefficients B V) (constantRingIso B (f ≫ g))) (moduleRComp B f g))
     rw [hm]
     rw [conjugateEquiv_upperStarComp_hom]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro Y
@@ -179,7 +178,7 @@ private lemma fcPull_compSquare {V W Z : Scheme.{u}}
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app,
-      ModuleCat.comp_apply, TwoSquare.natTrans]
+      ModuleCat.comp_apply]
     apply (ConcreteCategory.bijective_of_isIso
       (((cUnderlying B V Λ φ).hom.app N).hom.app
         ((Scheme.proEtaleBaseChange (f ≫ g)).op.obj Y))).1
@@ -280,9 +279,9 @@ private lemma fcPull_comp (V W Z : Scheme.{u}) (f : V ⟶ W) (g : W ⟶ Z) :
       (scalarPaste (fcPull B Λ φ g).symm (fcPull B Λ φ f).symm) := by
   apply scalarCompatible_of_inverse
   intro M
-  have hh := congrArg (fun t ↦ t.natTrans.app M) (fcPull_compSquare B Λ φ f g)
+  have hh := congrArg (fun t ↦ t.app M) (fcPull_compSquare B Λ φ f g)
   simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, scalarPaste_inv, Iso.symm_inv,
     Category.assoc] using hh.symm
@@ -384,11 +383,10 @@ private lemma fcOpen_comp {U V X : Scheme.{u}}
     dsimp only [q, r]
     rw [mateEquiv_hcomp, fcOpen_mate, fcOpen_mate, fcOpen_mate]
     rw [scalarJComp_conjugate, fcOpenComp_conjugate]
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     simpa only [ScalarCompatible, scalarPaste_hom, Iso.symm_hom,
       TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
-      TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      TwoSquare.mk, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp, Category.comp_id, Category.assoc] using
@@ -397,13 +395,13 @@ private lemma fcOpen_comp {U V X : Scheme.{u}}
         (fcPull_comp B Λ φ U V X j k)) M).symm
   apply scalarCompatible_of_inverse
   intro M
-  have hh := congrArg (fun z ↦ z.natTrans.app M) hc
+  have hh := congrArg (fun z ↦ z.app M) hc
   simp only [q, r, TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id] at hh
   simpa only [scalarPaste_inv, Iso.symm_inv, Iso.symm_hom,
-    TwoSquare.natTrans, Category.assoc] using hh.symm
+    Category.assoc] using hh.symm
 
 private lemma fcOpen_congr {U X : Scheme.{u}}
     {f g : U ⟶ X} [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
@@ -555,7 +553,7 @@ private lemma fcHCompIso_hom
     (α : G₁ ⋙ P₂ ≅ P₁ ⋙ H₁) (β : G₂ ⋙ P₃ ≅ P₂ ⋙ H₂) :
     (fcHCompIso α β).hom =
       (TwoSquare.hComp (TwoSquare.mk _ _ _ _ α.hom)
-        (TwoSquare.mk _ _ _ _ β.hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ β.hom)) := by
   rfl
 
 private lemma fcHCompIso_inv
@@ -566,7 +564,7 @@ private lemma fcHCompIso_inv
     (α : G₁ ⋙ P₂ ≅ P₁ ⋙ H₁) (β : G₂ ⋙ P₃ ≅ P₂ ⋙ H₂) :
     (fcHCompIso α β).inv =
       (TwoSquare.vComp (TwoSquare.mk _ _ _ _ α.inv)
-        (TwoSquare.mk _ _ _ _ β.inv)).natTrans := by
+        (TwoSquare.mk _ _ _ _ β.inv)) := by
   ext M
   simp [fcHCompIso, TwoSquare.vComp]
 
@@ -574,7 +572,7 @@ private lemma fcSitePull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     hPullbackInv B f Λ φ =
       ((TwoSquare.mk _ _ _ _
         (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv).hComp
-        (TwoSquare.mk _ _ _ _ (fcPull B Λ φ f).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (fcPull B Λ φ f).hom)) := by
   let a := cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f
   let b := cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f
   let c := Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
@@ -612,7 +610,7 @@ private lemma fcSitePullInv {X Y : Scheme.{u}} (f : X ⟶ Y)
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).symm :=
     pullback_comparison_eq Λ f
   rw [fcSitePullIso, fcHCompIso_inv]
-  simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk, Iso.symm_inv,
+  simp only [TwoSquare.vComp, TwoSquare.mk, Iso.symm_inv,
     hs, Iso.symm_hom, cbcComparisonCoefficientPullback, comparisonUpperStar,
     Scheme.smallEtaleTopology]
   rfl
@@ -634,25 +632,24 @@ private lemma fcSiteOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   have hs : mateEquiv oa ob (TwoSquare.mk _ _ _ _ e.inv) =
       TwoSquare.mk _ _ _ _
         (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom := by
-    apply (TwoSquare.equivNatTrans _ _ _ _).injective
     exact comparison_extension_mate Λ j
   have hi : CategoryTheory.inv (hPullbackInv B j Λ φ) =
       ((TwoSquare.mk _ _ _ _
         (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom).vComp
-        (TwoSquare.mk _ _ _ _ (fcPull B Λ φ j).inv)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (fcPull B Λ φ j).inv)) := by
     change (hPullbackIso B Λ φ j).inv = _
     rw [fcSitePullIso, fcHCompIso_inv]
     rfl
   have ho : hOpenInv B j Λ φ =
       ((TwoSquare.mk _ _ _ _ e.inv).hComp
-        (TwoSquare.mk _ _ _ _ (fcOpen B Λ φ j).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (fcOpen B Λ φ j).hom)) := by
     unfold hOpenInv
     rw [hi]
     have hm := mateEquiv_vcomp oa ob oc
       (TwoSquare.mk _ _ _ _ e.inv)
       (TwoSquare.mk _ _ _ _ (fcOpen B Λ φ j).hom)
     rw [hs, fcOpen_mate] at hm
-    exact congrArg TwoSquare.natTrans
+    exact
       ((mateEquiv oa oc).symm_apply_eq.mpr hm.symm)
   have he : @asIso _ _ _ _ (hOpenInv B j Λ φ) (hOpenInv_isIso B j Λ φ) =
       fcHCompIso e.symm (fcOpen B Λ φ j) := by
@@ -661,7 +658,7 @@ private lemma fcSiteOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     exact ho
   change (@asIso _ _ _ _ (hOpenInv B j Λ φ) (hOpenInv_isIso B j Λ φ)).inv.app M = _
   rw [he, fcHCompIso_inv]
-  simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk,
+  simp only [TwoSquare.vComp, TwoSquare.mk,
     NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_inv,
     Category.id_comp, Category.comp_id, e]

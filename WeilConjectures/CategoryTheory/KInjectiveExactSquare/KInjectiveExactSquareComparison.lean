@@ -129,7 +129,7 @@ Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K; exact-squa
 Proof plan:
 1. The units of the fixed universal pairs are invertible on K-injectives by
    def-sfb-right-derived-functor. The preservation hypothesis applies this also to rJ.
-   The canonical factors of lem-weil-pbc-exact-functor-derived-factorization are invertible,
+   The canonical factors of situation-conventions are invertible,
    so a_J and b_J are isomorphisms with common source Q(HrJ).
 2. Additive functors preserve chain homotopies. Naturality of the units and localization
    factors gives A(Qf)a_J = a_J'V(f) and B(Qf)b_J = b_J'V(f). Cancelling a gives naturality

@@ -36,9 +36,9 @@ private theorem mate_rightKan
         (Functor.associator P RD X).hom)) :
     (LD ⋙ Z).IsRightKanExtension
       ((Functor.associator Q LD Z).inv ≫
-        Functor.whiskerRight ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)).natTrans Z ≫
+        Functor.whiskerRight ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)) Z ≫
           (Functor.associator L P Z).hom) := by
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)).natTrans
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β))
   let ε := (Functor.associator Q LD Z).inv ≫ Functor.whiskerRight α Z ≫
     (Functor.associator L P Z).hom
   let βX (X : C ⥤ H) := (Functor.associator R Q X).inv ≫

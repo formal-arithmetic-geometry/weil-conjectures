@@ -13,15 +13,16 @@ public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 # Exchange lemmas for the proper pushforward of the trace class
 
 For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` (blueprint
-`def-trf-coefficient-pushforward`), with `q = f × f`:
+`definition-pushforward-correspondence--1`), with `q = f × f`:
 
 * the kernel class of `[f, g]_! u` is the transported kernel class of `u` (blueprint
-  `lem-trf-trace-source-exchange`; proved in `WeilConjectures.TraceFormula.SourceExchange`);
+  `theorem-proper-pushforward-lefschetz-verdier--1`; proved in
+  `WeilConjectures.TraceFormula.SourceExchange`);
 * the evaluation kernels are exchanged by the kernel pushforward (blueprint
-  `lem-trf-trace-map-exchange`, (1); proved in
+  `theorem-proper-pushforward-lefschetz-verdier--1`, (1); proved in
   `WeilConjectures.TraceFormula.ProperCompatibilityEvaluation`);
 * the support isomorphisms are exchanged by the exchange map of the support square (blueprint
-  `lem-trf-trace-map-exchange`, (2); proved in
+  `theorem-proper-pushforward-lefschetz-verdier--1`, (2); proved in
   `WeilConjectures.TraceFormula.ProperCompatibilitySupport`).
 
 -/
@@ -78,8 +79,8 @@ end Transport
 namespace Correspondence
 
 /-- The trace morphism followed by the support isomorphism is the exceptional adjoint of the
-kernel class followed by the evaluation kernel (blueprint `thm-trf-trace-proper-compatibility`,
-Step 1). -/
+kernel class followed by the evaluation kernel (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 1). -/
 lemma mate_comp_traceMap_comp_supportIso (c : Correspondence ℓ K) (F : c.FixedLocus) :
     c.mate ≫ c.traceMap F ≫ F.supportIso.hom =
       (boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _

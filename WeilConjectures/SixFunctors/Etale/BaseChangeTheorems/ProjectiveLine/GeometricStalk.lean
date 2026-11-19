@@ -117,7 +117,7 @@ field-extension pullback.
 **Form of the statement.** The statement asserts the existence of additive
 isomorphisms of the two stalks with closed-fibre cohomology that make the
 exchange square commute.
-(blueprint: lemma-weil-pbc-p1-exchange-geometric-stalk)
+(blueprint: proposition-proper-base-change-projective-line--1)
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -211,7 +211,7 @@ torsion sheaf `I` the higher direct images `Rᵠp_* I` vanish, and after any bas
 exchange morphism `g⁻¹ Rᵠp_* I ⟶ Rᵠf'_* g'⁻¹ I` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), so the target
 vanishes too.
-(blueprint: `prop-weil-pbc-projective-line`) -/
+(blueprint: `proposition-proper-base-change-projective-line`) -/
 theorem Etale.hasInjectiveAcyclicity_projectiveLine (S : Scheme.{u}) :
     Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) := by
   intro T X' g f' g' sq I hI _ q hq

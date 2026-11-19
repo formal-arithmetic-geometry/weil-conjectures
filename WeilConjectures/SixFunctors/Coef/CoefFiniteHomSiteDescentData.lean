@@ -112,8 +112,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
 
 /-! # Finite Hom scalar/site square and constructible descent
 
-Source: blueprint `thm-coef-finite-hom`, final paragraph and final site-comparison
-sentence, expanded in the seven proof steps of lem-coef-finite-hom-site-descent
+Source: blueprint `lemma-change-coefficients-internal-hom--1`, final paragraph and final
+site-comparison sentence, expanded in the seven proof steps of lem-coef-finite-hom-site-descent
 (blueprint: lem-coef-finite-hom-site-descent).
 
 The indices n,m,r mean the positive exponents n+1,m+1,r+1. The canonical

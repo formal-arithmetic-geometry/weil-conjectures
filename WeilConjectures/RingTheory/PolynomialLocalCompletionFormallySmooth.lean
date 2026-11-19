@@ -44,7 +44,7 @@ Proof:
    `def-weil-pbc-algebra-hom-quotient`; Tags 04EG and 031H).
 3. Discrete formal smoothness implies formal smoothness for the `qT`-adic topology:
    it supplies a lift even without requiring the initial map to kill a power of `qT`
-   (`def-weil-pbc-formally-smooth-adic`; Tag 07EC(1)).
+   (`theorem-finite-etale-covers-proper-henselian--2`; Tag 07EC(1)).
 4. The polynomial ring over the Noetherian ring `A` is Noetherian, so `q` is
    finitely generated (`lem-weil-pbc-finite-type-algebra-noetherian`,
    `def-weil-pbc-noetherian-ring`). By `Ideal.FG.map`, its extension `qT` is

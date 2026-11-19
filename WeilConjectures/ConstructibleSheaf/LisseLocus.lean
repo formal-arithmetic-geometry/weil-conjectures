@@ -92,7 +92,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- Blueprint `fin2-lem-lisse-dense-open`: A lisse locus for a constructible sheaf.
+/-- Blueprint `proposition-purity-lisse-part-fourier-transform`: A lisse locus for a constructible
+sheaf.
 
 Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible sheaf on
 `X_et`. Then there is an open subscheme `U ⊆ X` with `dim (X \ U) < dim X` on which the

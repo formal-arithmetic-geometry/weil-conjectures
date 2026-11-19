@@ -240,7 +240,7 @@ noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : �
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (ModuleCat.preadditiveCoyonedaObjSelfIso Λ)
 
-/-- Blueprint `lem-pur-supported-hom`: Supported cohomology as morphisms
+/-- Blueprint `lemma-sections-support-closed-subscheme--1`: Supported cohomology as morphisms
 
 For a closed immersion `i : Z ⟶ X` and a complex `K` of étale sheaves of `Λ`-modules on `X`, the
 cohomology with support has a natural identification

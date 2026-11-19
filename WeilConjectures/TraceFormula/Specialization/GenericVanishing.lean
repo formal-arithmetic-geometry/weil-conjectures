@@ -33,8 +33,8 @@ meets the image of no morphism `g : W ⟶ Y` with `Lg^* C = 0`
 of closed points of `𝔸¹_k`
 (`ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`). This is
 the last step of the finite-support part of Gabber's Künneth formula for nearby cycles (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support": the support of the cone has no point
-over the generic point of a special-fibre coordinate line; its image in that line is
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support": the support of the cone has
+no point over the generic point of a special-fibre coordinate line; its image in that line is
 constructible and omits the generic point, so is a finite set of closed points).
 
 ## The argument
@@ -351,7 +351,8 @@ subset `s ⊆ Y` such that `C` vanishes on every open disjoint from `s`, and suc
 from the image of every morphism `g` with `Lg^* C = 0`: the union of the supports
 (`ProEtale.CondensedRing.exists_isConstructible_support_of_isConstructibleModuleObject`) of the
 finitely many nonzero cohomology sheaves of `C`, the derived pullbacks commuting with the
-cohomology sheaves. Blueprint `sk-prop-tf-nearby-external-kunneth`, "Finite support". -/
+cohomology sheaves. Blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite
+support". -/
 theorem exists_isConstructible_support
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))}
@@ -399,7 +400,7 @@ then there is a finite set `F` of closed points of `𝔸¹_k` such that `C` vani
 Indeed the constructible support `s` of `C`
 (`ProEtale.CondensedRing.exists_isConstructible_support`)
 has no point over the generic point, so its image `b(s)`, constructible by Chevalley's theorem,
-is a finite set of closed points. Blueprint `sk-prop-tf-nearby-external-kunneth`,
+is a finite set of closed points. Blueprint `proposition-external-kunneth-formula-nearby-cycles`,
 "Finite support". -/
 theorem exists_finset_isZero_leftDerivedUpperStar_of_isZero_of_range
     {n : Type u} [Unique n] (b : Y.left ⟶ 𝔸(n; Spec (.of k))) [LocallyOfFiniteType b]
@@ -426,10 +427,10 @@ theorem exists_finset_isZero_leftDerivedUpperStar_of_isZero_of_range
   exact hyU this
 
 /-- **A bounded constructible complex vanishing over the generic point of a line vanishes away
-from finitely many fibres** (blueprint `sk-prop-tf-nearby-external-kunneth`, "Finite support").
-Let `Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of finite type, `C` a bounded
-constructible `ℚ̄_ℓ`-complex on `Y`, and `ξ : Spec K ⟶ 𝔸¹_k` a point over the generic point. If
-the pullback of `C` to `Y ×_{𝔸¹} Spec K` vanishes, then `C` vanishes on `Y ∖ b⁻¹(F)` for a
+from finitely many fibres** (blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite
+support"). Let `Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of finite type, `C` a
+bounded constructible `ℚ̄_ℓ`-complex on `Y`, and `ξ : Spec K ⟶ 𝔸¹_k` a point over the generic point.
+If the pullback of `C` to `Y ×_{𝔸¹} Spec K` vanishes, then `C` vanishes on `Y ∖ b⁻¹(F)` for a
 finite set `F` of closed points of `𝔸¹_k`: every point of `Y` over the generic point lifts to
 `Y ×_{𝔸¹} Spec K`. -/
 theorem exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback

@@ -32,8 +32,6 @@ open Scheme PadicAlgCl CondensedRing
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
-set_option maxHeartbeats 400000 in
--- Unfolding the derived extension by zero of the reduction is slow.
 /-- The derived pullback `Lj^*` along an open immersion preserves derived complete complexes: it
 is right adjoint to the extension by zero `Dj_!`, which commutes with the first derived
 reduction. -/
@@ -51,12 +49,13 @@ theorem derivedCompleteIntegers_leftDerivedUpperStar_obj_of_isOpenImmersion {U X
     exact ((D((j)_!open⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).map_isZero
       hZ).of_iso ((derivedOpenImmersionShriekIso
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) j).app Z)
+  let e := (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion
+    (Profinite.padicIntegersRingObj ℓ E.1) j).app K
   have h := (CondensedRing.derivedOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.padicIntegersRingObj ℓ E.1) j).eq_zero_of_forall_eq_zero (hK hZ')
-    (g ≫
-      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion _ j).hom.app K)
-  rw [← cancel_mono
-    ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion _ j).hom.app K),
-    h, zero_comp]
+    (g ≫ e.hom)
+  calc
+    g = (g ≫ e.hom) ≫ e.inv := by rw [Category.assoc, e.hom_inv_id, Category.comp_id]
+    _ = 0 := (congrArg (fun f ↦ f ≫ e.inv) h).trans zero_comp
 
 end AlgebraicGeometry.ProEtale

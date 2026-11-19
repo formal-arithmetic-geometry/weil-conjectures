@@ -57,8 +57,6 @@ variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
   (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option maxHeartbeats 800000 in
--- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**, from the bounded
 constructibility of the torsion nearby cycles at an integral model. Let `Ω/L` be Galois with
 finite subextensions of degree prime to `ℓ`, `C` a `ℚ̄_ℓ`-complex and `K₀` a bounded constructible
@@ -111,8 +109,38 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀.obj).symm) ?_
   transport_exact h₁
 
-set_option maxHeartbeats 800000 in
--- the statement involves several large derived functor objects
+/-- Transport stabilization along the identity pullback, then apply finite Galois averaging. -/
+private theorem retraction_of_stabilization
+    {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
+    (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+    (L' : FiniteGaloisIntermediateField L Ω)
+    [IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) •
+      𝟙 (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))]
+    (hL' : IsIso (((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app C)) :
+    (∀ σ ∈ L'.toIntermediateField.fixingSubgroup,
+      (N.galoisLayerAut h Ω σ).autAction (Profinite.padicAlgClRingObj ℓ)
+        (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) = 𝟙 _) ∧
+    ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app C ≫ r =
+        𝟙 _ ∧
+      Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) •
+          (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app C) =
+        ∑ τ : L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField,
+          (N.galoisLayerAut h Ω (τ.liftNormal Ω)).autAction (Profinite.padicAlgClRingObj ℓ)
+          (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
+  have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
+    ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app C).symm
+  have hstab := (NatTrans.isIso_app_iff_of_iso
+    ((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)) e).1 hL'
+  have key := N.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso h Ω
+    L'.toIntermediateField (Profinite.padicAlgClRingObj ℓ) C (by cast_proofs hstab)
+    (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
+  cast_proofs key
+
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles at an
 integral model. Under the hypotheses of
@@ -155,21 +183,23 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel h Ω ℓ hdeg C hC E
     K₀ e htors).elim fun L' hL' ↦ ⟨L', ?_⟩
-  have := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
-    (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
-    (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)
-  have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
-    ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app C).symm
-  have hstab := (NatTrans.isIso_app_iff_of_iso
-    ((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
-      (Profinite.padicAlgClRingObj ℓ)) e).1 hL'
-  have key := N.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso h Ω
-    L'.toIntermediateField (Profinite.padicAlgClRingObj ℓ) C (by cast_proofs hstab)
-    (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
-  cast_proofs key
+  -- Reuse the object fixed by hC instead of elaborating the derived pullback again.
+  let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
+  let : IsIso (Fintype.card (L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField) • 𝟙 K.obj) :=
+    isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
+      (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField)) K.obj
+  exact retraction_of_stabilization N h Ω ℓ C L' hL'
 
-set_option maxHeartbeats 800000 in
--- the statement involves several large derived functor objects
+/-- Eliminate integral models with a generic conclusion, keeping the elimination motive small. -/
+private theorem integralModel_induction (X : Scheme.{u}) [IsNoetherian X]
+    (ℓ : ℕ) [Fact ℓ.Prime] (K : PadicAlgClConstructible X ℓ) {P : Prop}
+    (step : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
+      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)),
+      ((constructibleToPadicAlgCl X ℓ E).obj
+        ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K) → P) : P := by
+  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X ℓ K
+  exact step E K₀ e
+
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles of all
 bounded constructible integral complexes. This is
@@ -208,7 +238,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_forall
           ∑ τ : L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField,
             (N.galoisLayerAut h Ω (τ.liftNormal Ω)).autAction (Profinite.padicAlgClRingObj ℓ)
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
-  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel N.generic ℓ ⟨_, hC⟩
+  let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
+  apply integralModel_induction N.generic ℓ K
+  intro E K₀ e
   exact N.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel h Ω ℓ hdeg C hC E K₀ e
     (htors E K₀.obj K₀.property)
 

@@ -657,7 +657,7 @@ private theorem faithful_composition_path
 
 /-- The binary operation compositor agrees with the canonical origin compositor.
 Source: finiteCompositionNormalization in def-sf-operation-stages and the witnessed
-composition construction in thm-sf-comp-composition
+composition construction in proposition-composition-base-change-rf-shriek--1
 (blueprint: lem-sf-finite-support-origin-binary-normalization).
 
 Proof: fix a bounded constructible input and obtain its bounded etale origin by

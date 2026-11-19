@@ -340,8 +340,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
-      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α) =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)) := by
   ext K
   simp -implicitDefEqProofs [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]

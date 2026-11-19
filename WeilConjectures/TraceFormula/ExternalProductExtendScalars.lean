@@ -19,27 +19,29 @@ Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integer
 constructible complexes, the composite of `E ⊗ᴸ_{𝒪_E} -` and `ℚ̄_ℓ ⊗ᴸ_E -`
 (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`). Let `K₀` be a bounded
 constructible `𝒪_E`-complex on `X` with an isomorphism `e : T_X K₀ ≅ K` (an *integral model* of
-`K`, blueprint `sk-lem-tf-rational-model`). This file identifies the external product of `K` with
-its Verdier dual with the extension of scalars of the integral one:
+`K`, blueprint `lemma-integral-models-rational-frobenius-correspondences`). This file identifies the
+external product of `K` with its Verdier dual with the extension of scalars of the integral one:
 ```
 T_{X ⨯ X} (K₀ ⊠ 𝔻 K₀) ≅ K ⊠ 𝔻 K
 ```
 (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgClExternalProductVerdierDualIso`).
 This is the identification of the coefficients `P = K ⊠ 𝔻 K` of the supported restriction with
 the extension of scalars of an integral `P₀` in the passage from integral to `ℚ̄_ℓ`-coefficients
-of blueprint `sk-lem-tf-curve-restriction-zero`.
+of blueprint `lemma-vanishing-local-term-zero-stalk`.
 
-It is assembled from the coefficient comparisons of blueprint `sk-prop-scalar-six`:
+It is assembled from the coefficient comparisons of blueprint
+`proposition-six-operations-change-coefficients`:
 
-* the pullback clause (`det-prop-scalar-six-pullback` (1)),
+* the pullback clause (`proposition-six-operations-change-coefficients` (1)),
   `ProEtale.CondensedRing.boundedConstructibleUpperStarIntegersToPadicAlgClIso`, the composite of
   the comparisons for `𝒪_E ⟶ E` and `E ⟶ ℚ̄_ℓ`;
-* the tensor clause (`det-prop-scalar-six-tensor-hom` (1)): `T_X` is monoidal;
-* the internal Hom clause (`det-prop-scalar-six-tensor-hom` (2)): the comparison
+* the tensor clause (`proposition-six-operations-change-coefficients` (1)): `T_X` is monoidal;
+* the internal Hom clause (`proposition-six-operations-change-coefficients` (2)): the comparison
   `T_X RHom(A, B) ⟶ RHom(T_X A, T_X B)`, the mate of the tensorator
   (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism
   (`ProEtale.CondensedRing.isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl`);
-* the dualizing complexes (`det-prop-scalar-six-exceptional`, applied to the unit):
+* the dualizing complexes (`lemma-change-coefficients-exceptional-inverse-image`, applied to the
+unit):
   `T_X ω_{X,𝒪_E} ≅ ω_X`
   (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgClDualizingIso`).
 
@@ -51,7 +53,7 @@ For `𝒪_E ⟶ E` these clauses are proved, `E ⊗ᴸ_{𝒪_E} -` being the rat
 `Dᵇc(X)⟦𝒪_E⟧`. For `E ⟶ ℚ̄_ℓ` the internal Hom and `f^!` clauses are the compatibilities
 `ProEtale.CondensedRing.isIso_ihomComparison_constructibleToPadicAlgCl` and
 `ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekToPadicAlgCl` required from
-`sec-six-functors-basics`.
+`chap-Construction-of-f`.
 
 -/
 
@@ -83,7 +85,7 @@ variable {X Y : Over (Spec (.of k))}
 
 /-! ### Pullback -/
 
-/-- **(Pull)** for `𝒪_E ⟶ ℚ̄_ℓ` (blueprint `det-prop-scalar-six-pullback` (1)):
+/-- **(Pull)** for `𝒪_E ⟶ ℚ̄_ℓ` (blueprint `proposition-six-operations-change-coefficients` (1)):
 `Lf^*_{𝒪_E} ⋙ T_X ≅ T_Y ⋙ Lf^*_{ℚ̄_ℓ}`, the comparison for `𝒪_E ⟶ E` followed by the one for
 `E ⟶ ℚ̄_ℓ`. -/
 noncomputable def boundedConstructibleUpperStarIntegersToPadicAlgClIso (f : X ⟶ Y) :
@@ -130,7 +132,8 @@ variable {S : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.h
 
 /-- The extension of scalars of the integral dualizing complex is the dualizing complex:
 `T ω_{X,𝒪_E} = T (Ra^! 𝒪_E) ≅ Ra^! (T 𝒪_E) ≅ Ra^! ℚ̄_ℓ = ω_X`, by the `f^!` clause of blueprint
-`sk-prop-scalar-six` (`det-prop-scalar-six-exceptional`) for `𝒪_E ⟶ E` and for `E ⟶ ℚ̄_ℓ`, and the
+`proposition-six-operations-change-coefficients`
+(`lemma-change-coefficients-exceptional-inverse-image`) for `𝒪_E ⟶ E` and for `E ⟶ ℚ̄_ℓ`, and the
 unit isomorphisms of the monoidal functors `E ⊗ᴸ_{𝒪_E} -` and `ℚ̄_ℓ ⊗ᴸ_E -`. -/
 noncomputable def boundedConstructibleIntegersToPadicAlgClDualizingIso :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj
@@ -151,7 +154,8 @@ variable {K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
 
 /-- The extension of scalars of the integral Verdier dual is the Verdier dual:
 `T 𝔻 K₀ = T RHom(K₀, ω_{X,𝒪_E}) ≅ RHom(T K₀, T ω_{X,𝒪_E}) ≅ RHom(K, ω_X) = 𝔻 K`, by the internal
-Hom clause of blueprint `sk-prop-scalar-six` and the comparison of the dualizing complexes. -/
+Hom clause of blueprint `proposition-six-operations-change-coefficients` and the comparison of the
+dualizing complexes. -/
 noncomputable def boundedConstructibleIntegersToPadicAlgClVerdierDualIso :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj
         (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 a K₀) ≅
@@ -183,7 +187,7 @@ variable {K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
 
 /-- **Extension of scalars of the external product with the Verdier dual**: for an integral model
 `e : T K₀ ≅ K` of `K`, `T (K₀ ⊠ 𝔻 K₀) ≅ K ⊠ 𝔻 K`, the coefficients of the supported restriction
-of blueprint `sk-lem-tf-curve-restriction-zero` being the extension of scalars of integral
+of blueprint `lemma-vanishing-local-term-zero-stalk` being the extension of scalars of integral
 coefficients. -/
 noncomputable def boundedConstructibleIntegersToPadicAlgClExternalProductVerdierDualIso
     (e : (boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K₀ ≅ K) :

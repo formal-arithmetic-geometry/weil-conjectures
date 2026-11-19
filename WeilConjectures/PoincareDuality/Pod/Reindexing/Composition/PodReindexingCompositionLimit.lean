@@ -14,7 +14,7 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Total-limit composition for section-normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 0941. -/
 
 @[expose] public noncomputable section
@@ -84,7 +84,7 @@ private theorem localize_composition_models
   rw [hr]
 
 /-- The total-limit equation, on arbitrary ambient coefficient systems.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 0941 (blueprint: lem-pod-reindexing-composition-limit-equation).
 
 Proof: represent a coefficient system by a strict complex C. RestrictedGenerators

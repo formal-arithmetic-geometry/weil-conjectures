@@ -31,7 +31,7 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 /-- For a commutative ring A, scheme D and a∈A, the etale constant-presheaf generator a, followed by
 the comparison adjunction unit and the canonical constant-sheaf comparison, equals the pro-etale
 constant-presheaf generator a at the terminal object [def-weil-pbc-constant-sheaf,
-def-weil-pbc-site-comparison-morphism].
+proposition-comparison-morphism-inverse-image].
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
 06YY and 0GLZ (blueprint: lem-sp-comparison-constant-generator).
 Proof: The canonical constant comparison is uniqueness of left adjoints between the composite of

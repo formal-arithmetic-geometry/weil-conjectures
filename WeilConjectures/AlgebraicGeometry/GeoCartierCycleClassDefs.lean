@@ -18,7 +18,7 @@ Stacks Project, Tag 03PL
 
 We use the fixed-scalar sheaf presentation of ordinary pro-etale modules, canonically
 realized by `finiteCoefficientRealization` over the coefficient ring sheaf of
-`def-weil-pbc-proetale-modules`. `Ext.homEquiv` identifies every degree-two Ext class
+`definition-small-pro-etale-site--1`. `Ext.homEquiv` identifies every degree-two Ext class
 below with the displayed morphism from the degree-zero supported constant object to
 its finite Tate line shifted by two. No condensed or completed coefficient category occurs.
 The auxiliary definitions only spell out this class and its normalization diagrams.
@@ -54,13 +54,13 @@ instance (priority := 10000) geoCartierModuleExt
   infer_instance
 
 /-- The ordinary pro-etale constant module used in the Cartier class.
-Source: blueprint sk-lem-geo-cartier, statement (auxiliary; not a blueprint node). -/
+Source: blueprint lemma-cycle-class-cartier-divisor, statement (auxiliary; not a blueprint node). -/
 def geoCartierConstant (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) :=
   (constantSheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)
 
 /-- The finite Tate line is exactly comparison inverse image of the etale roots tensor.
-Source: blueprint sk-lem-geo-cartier, displayed definition of Λ(1)
+Source: blueprint lemma-cycle-class-cartier-divisor, displayed definition of Λ(1)
 (auxiliary; not a blueprint node). -/
 def geoCartierLine (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (Z : Scheme.{u}) : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) :=
@@ -69,7 +69,8 @@ def geoCartierLine (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
 
 /-- The supported cycle class, represented through the canonical degree-two Ext/Hom
 bijection. Its source uses ordinary closed direct image, not an arbitrary support object.
-Source: blueprint sk-lem-geo-cartier, displayed c_D (auxiliary; not a blueprint node). -/
+Source: blueprint lemma-cycle-class-cartier-divisor, displayed c_D (auxiliary; not a blueprint
+node). -/
 abbrev GeoCartierClass (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     {D Z : Scheme.{u}} (i : D ⟶ Z) :=
   Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (geoCartierConstant A D))
@@ -77,7 +78,7 @@ abbrev GeoCartierClass (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) =
 
 /-- The comparison on the ordinary supported constant, with its canonical mate and
 constant-sheaf identification. Invertibility is asserted in the main statement.
-Source: blueprint sk-lem-geo-cartier, proof paragraph 1
+Source: blueprint lemma-cycle-class-cartier-divisor, proof paragraph 1
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def geoCartierSourceComparison (A : Type (u + 1)) [CommRing A]
@@ -92,7 +93,7 @@ def geoCartierSourceComparison (A : Type (u + 1)) [CommRing A]
 
 /-- The direct image of the constant-sheaf comparison, typed with the Cartier constant as
 target, is invertible; instance search cannot see through geoCartierConstant itself.
-Source: blueprint sk-lem-geo-cartier, proof paragraph 1
+Source: blueprint lemma-cycle-class-cartier-divisor, proof paragraph 1
 (auxiliary; not a blueprint node).
 Proof: after unfolding the constant, it is the image of an isomorphism under a functor. -/
 instance geoCartierSourceConstant_isIso (A : Type (u + 1)) [CommRing A]

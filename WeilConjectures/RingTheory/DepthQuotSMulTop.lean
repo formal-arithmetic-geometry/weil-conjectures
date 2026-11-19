@@ -13,6 +13,8 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Depth.Rees
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.Algebra.Module.ULift
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Depth drops by one modulo a regular element
@@ -52,7 +54,7 @@ private theorem regular_sequence_shorten_small {R : Type u} [CommRing R]
   exact AddCommGrpCat.subsingleton_of_isZero <|
     CategoryTheory.ShortComplex.Exact.isZero_of_both_zeros
       (CategoryTheory.Abelian.Ext.covariant_sequence_exact₃' N
-        (hreg.smulShortComplex_shortExact (M := ModuleCat.of R M)) i (i + 1) rfl)
+        (IsSMulRegular.smulShortComplex_shortExact (M := ModuleCat.of R M) hreg) i (i + 1) rfl)
       ((AddCommGrpCat.isZero_of_iff_subsingleton.mpr
         (hvan N hN hNfin hsupp i (by omega))).eq_zero_of_src _)
       ((AddCommGrpCat.isZero_of_iff_subsingleton.mpr

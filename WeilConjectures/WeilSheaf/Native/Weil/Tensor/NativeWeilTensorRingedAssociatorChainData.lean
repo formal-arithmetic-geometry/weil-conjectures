@@ -17,7 +17,6 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [local instance] Mod.monoidalCategoryCochainComplex
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the cochain tensor fields of this structure unfolds deep instance terms.
 structure NativeWeilTensorRingedAssociatorChainData
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
@@ -166,7 +165,6 @@ def nativeChainForgetAssociator
         ((c P Q).hom ▷ U.obj N) ≫
         (α_ (U.obj P) (U.obj Q) (U.obj N)).hom
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The ringed cochain monoidal structure needs a deep search for its graded tensor instances.
 def nativeRingedAssociatorComponent
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]

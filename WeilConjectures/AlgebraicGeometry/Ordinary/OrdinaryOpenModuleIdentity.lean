@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdj
 
 /-! # Identity normalization before deriving open exchange
 
-Source: Stacks Project, etale-cohomology.tex, lemma-shriek-base-change,
-and sites-modules.tex, lemma-localize-morphism-ringed-sites.
+## References
+
+* Stacks 03D8 and 03DI
 -/
 
 @[expose] public noncomputable section
@@ -41,9 +42,7 @@ private theorem tensor_transport (T : Scheme.{t})
         (J := ProEt.topology T) φ M).presheaf).app V
             (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] x))) hh
 
-/-- Identity on the ordinary module pullback, with the section-normalized adjunction.
-Source: Stacks 03D8 and 03DI
-(blueprint: lem-cbc-underived-open-exchange-identity). -/
+/-- Identity on the ordinary module pullback, with the section-normalized adjunction. -/
 def cbcModulePullId {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (T : Scheme.{t}) : completedModulePullback (𝟙 T) d ≅ 𝟭 _ :=
   eqToIso (cbcDatumModulePull_eq d (𝟙 T)) ≪≫

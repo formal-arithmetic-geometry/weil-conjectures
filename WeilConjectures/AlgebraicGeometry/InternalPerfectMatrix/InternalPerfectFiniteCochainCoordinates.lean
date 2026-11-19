@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalPerfectMatrix.InternalPe
 import Mathlib.Algebra.Homology.Embedding.IsSupported
 
 /-! # Finite integral coordinates for bounded Hom cochains
-
-Source: blueprint `sk-prop-integral-local-structure`, Compatible isomorphisms,
-finite matrices in the bounded perfect complex.
 -/
 
 @[expose] public noncomputable section
@@ -26,18 +23,14 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The finite set of matrix entries in degree q of a bounded Hom complex.
-Source: blueprint Compatible isomorphisms, finitely many nonzero source degrees.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates). -/
+/-- The finite set of matrix entries in degree q of a bounded Hom complex. -/
 abbrev CoordinateIndex (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (a b q : ℤ) :=
   Σ i : ↥(Finset.Icc a b),
     Fin (Module.finrank (A l E) (P.X i.val)) ×
       Fin (Module.finrank (A l E) (P.X (i.val + q)))
 
-/-- All integral entries in the fixed bases.
-Source: blueprint Compatible isomorphisms, integral matrix coordinates.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates). -/
+/-- All integral entries in the fixed bases. -/
 def cochainCoordinates (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (a b q : ℤ) :
@@ -52,9 +45,7 @@ def cochainCoordinates (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     exact (integralEntry l E P hfree q k.1.val (k.1.val + q) rfl k.2.1 k.2.2).map_smul c z
 
 /-- Reassemble a cochain from its finitely many integral matrix entries, using zero
-outside the specified degree interval.
-Source: blueprint Compatible isomorphisms, bounded finite free source.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates). -/
+outside the specified degree interval. -/
 def cochainFromCoordinates (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (a b q : ℤ) (x : CoordinateIndex l E P a b q → A l E) :
@@ -66,16 +57,7 @@ def cochainFromCoordinates (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
         (basis l E P hfree (i + q)).equivFun.symm fun t ↦ x ⟨⟨i, hi⟩, s, t⟩)
     else 0
 
-/-- Fixed finite integral matrices give all Hom cochains, uniquely.
-Source: blueprint Compatible isomorphisms, finite matrix computation.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates).
-
-Proof: a linear map out of a free module is determined by its values on the fixed
-basis; each value is determined by its target basis coordinates. In degrees outside
-[a,b], the source term is zero by the two strict bounds. Conversely, construct each
-map on the source basis from the prescribed target coordinates, and use zero outside
-[a,b]. Basis reconstruction and coordinate evaluation are inverse. Empty intervals,
-zero ranks and the zero complex require no special nonempty assumption. -/
+/-- Fixed finite integral matrices give all Hom cochains, uniquely. -/
 theorem cochainCoordinates_bijective
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -118,9 +100,7 @@ theorem cochainCoordinates_bijective
     rw [Module.Basis.constr_basis, ← Module.Basis.equivFun_apply,
       LinearEquiv.apply_symm_apply]
 
-/-- The integral Hom cochain module in finite matrix coordinates.
-Source: blueprint Compatible isomorphisms, finite matrix quotient computation.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates). -/
+/-- The integral Hom cochain module in finite matrix coordinates. -/
 def cochainCoordinateEquiv
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -129,9 +109,7 @@ def cochainCoordinateEquiv
       (CoordinateIndex l E P a b q → A l E) :=
   LinearEquiv.ofBijective _ (cochainCoordinates_bijective l E P hfree a b q ha hb)
 
-/-- Coordinates of the actual quotient Hom cochain, formed by entrywise cokernel descent.
-Source: blueprint Compatible isomorphisms, scalar quotient finite matrices.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates). -/
+/-- Coordinates of the actual quotient Hom cochain, formed by entrywise cokernel descent. -/
 def quotientCoordinates
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -149,10 +127,7 @@ def quotientCoordinates
     exact (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl
       k.2.1 k.2.2).hom.map_smul c z
 
-/-- Quotient matrix coordinates on an integral representative are its entrywise residues.
-Source: blueprint Compatible isomorphisms, termwise quotient coordinates.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates).
-Proof: evaluate the entry descent identity at the integral representative. -/
+/-- Quotient matrix coordinates on an integral representative are its entrywise residues. -/
 theorem quotientCoordinates_projection
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -167,17 +142,7 @@ theorem quotientCoordinates_projection
     (quotientEntry_projection l E P hfree n q k.1.val (k.1.val + q) rfl k.2.1 k.2.2)
 
 /-- A bounded finite free Hom complex has precisely finite matrices over the scalar
-quotient in each degree, including for the actual categorical cokernel construction.
-Source: blueprint Compatible isomorphisms, quotient of finite matrices.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates).
-
-Proof: every quotient cochain has an integral representative since the evaluated
-cokernel projection is surjective. If its residue coordinates vanish, each integral
-coordinate is divisible by the uniformizer power. Choose the quotients coordinatewise
-and use the integral coordinate equivalence to reassemble a cochain whose scalar
-multiple is the representative; its cokernel class is zero. For surjectivity, lift
-each prescribed residue entry, reassemble the integral cochain and project it.
-These arguments apply without a nonempty rank or interval assumption. -/
+quotient in each degree, including for the actual categorical cokernel construction. -/
 theorem quotientCoordinates_bijective
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -235,9 +200,7 @@ theorem quotientCoordinates_bijective
     rw [LinearEquiv.apply_symm_apply]
     exact hx k
 
-/-- Coordinates of maps between the finite free terms of a bounded complex.
-Source: blueprint Compatible isomorphisms, finite matrix Hom cochains.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates). -/
+/-- Coordinates of maps between the finite free terms of a bounded complex. -/
 def freeCochainEquiv {C : Type v} [Category.{w} C] [Preadditive C]
     [HasFiniteBiproducts C] (R : C) (K : CochainComplex C ℤ) (r : ℤ → ℕ)
     (e : ∀ i, K.X i ≅ ⨁ fun _ : Fin (r i) ↦ R)
@@ -247,16 +210,16 @@ def freeCochainEquiv {C : Type v} [Category.{w} C] [Preadditive C]
   classical
   let forward := fun (z : CochainComplex.HomComplex.Cochain K K q)
       (k : Σ i : ↥(Finset.Icc a b), Fin (r i.val) × Fin (r (i.val + q))) ↦
-    biproduct.components
+    End.of (biproduct.components
       ((e k.1.val).inv ≫ z.v k.1.val (k.1.val + q) rfl ≫ (e (k.1.val + q)).hom)
-        k.2.1 k.2.2
+        k.2.1 k.2.2)
   let backward :
       ((Σ i : ↥(Finset.Icc a b), Fin (r i.val) × Fin (r (i.val + q))) → End R) →
         CochainComplex.HomComplex.Cochain K K q := fun x ↦
     CochainComplex.HomComplex.Cochain.mk fun i j hij ↦ by
       subst j
       exact if hi : i ∈ Finset.Icc a b then
-        (e i).hom ≫ biproduct.matrix (fun s t ↦ x ⟨⟨i, hi⟩, s, t⟩) ≫ (e (i + q)).inv
+        (e i).hom ≫ biproduct.matrix (fun s t ↦ (x ⟨⟨i, hi⟩, s, t⟩).asHom) ≫ (e (i + q)).inv
       else 0
   refine ⟨forward, backward, ?_, ?_⟩
   · intro z
@@ -276,22 +239,14 @@ def freeCochainEquiv {C : Type v} [Category.{w} C] [Preadditive C]
   · intro x
     funext k
     rcases k with ⟨i, s, t⟩
+    apply End.ext
     dsimp only [forward, backward, CochainComplex.HomComplex.Cochain.mk_v]
     rw [dite_eq_left i.property]
     simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
     erw [biproduct.matrix_components]
 
 /-- Explicit matrix evaluation is bijective in every degree of a bounded finite free
-complex. This is a statement about graded cochains; differential compatibility is separate.
-Source: blueprint Compatible isomorphisms, finite constant matrix entries.
-(blueprint: lem-pe-internal-perfect-finite-cochain-coordinates).
-
-Proof: quotientCoordinates identifies the scalar quotient cochain with finitely many
-residue entries. Locally constant functions commute with this finite product, by flip
-and unflip. The coefficient ring equivalence identifies each locally constant residue
-with a regular-module endomorphism. Finally, freeCochainEquiv reassembles these entries
-in the chosen quotient bases. Its inverse coordinate formula is exactly evaluationHom.
-Universe lifting is an equivalence and does not affect bijectivity. -/
+complex. This is a statement about graded cochains; differential compatibility is separate. -/
 theorem evaluation_bijective (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -340,11 +295,12 @@ theorem evaluation_bijective (W : Scheme.{u})
           (z.map (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl
             k.2.1 k.2.2)) := by
     funext k
+    apply End.ext
     change biproduct.components
       ((e k.1.val).inv ≫
         ((e k.1.val).hom ≫ biproduct.matrix (fun s t ↦
-          coefficientEndEquiv l E W n
-            (z.map (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl s t))) ≫
+          (coefficientEndEquiv l E W n
+            (z.map (quotientEntry l E P hfree n q k.1.val (k.1.val + q) rfl s t))).asHom) ≫
           (e (k.1.val + q)).inv) ≫ (e (k.1.val + q)).hom) k.2.1 k.2.2 = _
     simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
       Category.comp_id, biproduct.matrix_components]

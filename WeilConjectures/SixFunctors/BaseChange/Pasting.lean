@@ -56,7 +56,7 @@ isomorphisms of the pullbacks. Since the mates correspondence is taken with resp
 vertical adjunctions `f^* ⊣ f_*`, the vertical pasting law also involves the change of
 adjunction `(f ≫ e)^* ⊣ (f ≫ e)_*` versus `f^* ⋙ e^* ⊣ …`, i.e. the conjugation lemma
 `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`.
-(blueprint: `lemma-weil-pbc-derived-exchange-coherence`, underived pasting bullets)
+(blueprint: `lemma-identity-pasting`, underived pasting bullets)
 
 -/
 
@@ -151,19 +151,19 @@ variable {X'' X' X Y'' Y' Y : Scheme.{u}} {g'' : X'' ⟶ X'} {g' : X' ⟶ X} {f'
   {f' : X' ⟶ Y'} {f : X ⟶ Y} {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
 
 open scoped TwoSquare in
-/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
 identification, compatibility with horizontal pasting.
 
 **Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted horizontally is the horizontal composite of the two square isomorphisms, modulo the
 composition isomorphisms of the pullbacks along the horizontal maps
-(blueprint `def-weil-pbc-cartesian-square`). -/
+(blueprint `definition-underived-base-change-map`). -/
 lemma Etale.squareUpperStarIso_paste_horiz_hom (sq₁ : CommSq g' f' f g)
     (sq₂ : CommSq g'' f'' f' h) (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
     (Etale.squareUpperStarIso A sq).hom =
       Functor.whiskerRight (Etale.upperStarComp A h g).hom ((f'')^*[A]) ≫
         (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom ≫ₕ
-          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom).natTrans ≫
+          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom) ≫
         Functor.whiskerLeft ((f)^*[A]) (Etale.upperStarComp A g'' g').inv := by
   refine NatTrans.ext (funext fun F => ?_)
   simp only [Etale.squareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -191,7 +191,7 @@ lemma Etale.baseChangeSquare_paste_horiz (sq₁ : CommSq g' f' f g) (sq₂ : Com
       ((TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom ≫ₕ
         TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom).whiskerTop
           (Etale.upperStarComp A h g).hom).whiskerBottom (Etale.upperStarComp A g'' g').inv := by
-    refine TwoSquare.ext _ _ fun F => ?_
+    refine NatTrans.ext (funext fun F => ?_)
     have := NatTrans.congr_app (Etale.squareUpperStarIso_paste_horiz_hom A sq₁ sq₂ sq) F
     simpa only [TwoSquare.whiskerBottom_app, TwoSquare.whiskerTop_app, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using this
@@ -241,19 +241,19 @@ variable {X' X Y' Y Z' Z : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X �
   {e' : Y' ⟶ Z'} {e : Y ⟶ Z} {k : Z' ⟶ Z}
 
 open scoped TwoSquare in
-/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
 identification, compatibility with vertical pasting.
 
 **Vertical pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted vertically is the vertical composite of the two square isomorphisms, modulo the
 composition isomorphisms of the pullbacks along the vertical maps
-(blueprint `def-weil-pbc-cartesian-square`). -/
+(blueprint `definition-underived-base-change-map`). -/
 lemma Etale.squareUpperStarIso_paste_vert_hom (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g e' e k)
     (sq : CommSq g' (f' ≫ e') (f ≫ e) k) :
     (Etale.squareUpperStarIso A sq).hom =
       Functor.whiskerLeft ((k)^*[A]) (Etale.upperStarComp A f' e').hom ≫
         (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom ≫ᵥ
-          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom).natTrans ≫
+          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom) ≫
         Functor.whiskerRight (Etale.upperStarComp A f e).inv ((g')^*[A]) := by
   refine NatTrans.ext (funext fun F => ?_)
   simp only [Etale.squareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -284,7 +284,7 @@ lemma Etale.baseChangeSquare_paste_vert (sq₁ : CommSq g' f' f g) (sq₂ : Comm
       ((TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom ≫ᵥ
         TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom).whiskerRight
           (Etale.upperStarComp A f' e').hom).whiskerLeft (Etale.upperStarComp A f e).inv := by
-    refine TwoSquare.ext _ _ fun F => ?_
+    refine NatTrans.ext (funext fun F => ?_)
     have := NatTrans.congr_app (Etale.squareUpperStarIso_paste_vert_hom A sq₁ sq₂ sq) F
     simpa only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using this

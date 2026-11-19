@@ -132,18 +132,18 @@ private theorem tensor_mate_coherence
     (E : B) (Q : A) :
     G.map (adj.homEquiv _ _ (tF.app (R.obj E, Q) ≫
         U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))) ≫
-      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app
+      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).app
         (U.obj (E, F.obj Q)) ≫
       S.map (tH.app (E, F.obj Q) ≫
         W.map (CategoryTheory.Prod.mkHom (𝟙 (H.obj E)) (theta.inv.app Q))) =
     tG.app (R.obj E, Q) ≫
       V.map (CategoryTheory.Prod.mkHom
-        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app E)
+        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).app E)
         (𝟙 (G.obj Q))) ≫
       adj'.homEquiv _ _ (tK.app (S.obj (H.obj E), G.obj Q) ≫
         W.map (CategoryTheory.Prod.mkHom (adj'.counit.app (H.obj E))
           (𝟙 (K.obj (G.obj Q))))) := by
-  let ex := (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans
+  let ex := (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom))
   let pi := adj.homEquiv _ _ (tF.app (R.obj E, Q) ≫
     U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))
   have hex (Z : B) : K.map (ex.app Z) ≫ adj'.counit.app (H.obj Z) =
@@ -333,10 +333,20 @@ private theorem composite_complex_epsilon
     Functor.comp_obj, HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
   simp only [Category.id_comp, Category.comp_id]
 
+private theorem square_transport_cancel_iff
+    {C : Type*} [Category C] {A B A' B' D E D' E' : C}
+    {i : A ⟶ A'} [Epi i] {j : B ⟶ B'} {q : D ⟶ D'} [Mono q] {r : E ⟶ E'}
+    {t : A ⟶ B} {t' : A' ⟶ B'} {a : B' ⟶ D} {b : A' ⟶ E}
+    {c : B ⟶ D'} {d : A ⟶ E'} {m : E ⟶ D} {n : E' ⟶ D'}
+    (hc : c = j ≫ a ≫ q) (hd : d = i ≫ b ≫ r)
+    (ht : i ≫ t' = t ≫ j) (hm : m ≫ q = r ≫ n) :
+    (t ≫ c = d ≫ n) ↔ (t' ≫ a = b ≫ m) := by
+  simp only [hc, hd, Category.assoc, ← reassoc_of% ht, ← hm]
+  rw [cancel_epi]
+  simp only [← Category.assoc, cancel_mono]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Elaborate the nested quotient-to-derived transports before cancelling their isomorphisms.
 private theorem square_condition_transport
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (theta : g.left ⋙ k.left ≅ f.left ⋙ h.left)
@@ -360,35 +370,12 @@ private theorem square_condition_transport
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         (s.complexComparison.hom.app P)) := rfl
-  rw [hsquare]
-  rw [composite_complex_epsilon f h P,
-    reassoc_of% (composite_complex_epsilon g k P)]
-  have hn := theta.hom.naturality
-    ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P)
-  dsimp only [Functor.comp_map] at hn
-  simp only [Functor.comp_map]
-  rw [← reassoc_of% hn]
-  have hm := DerivedCategory.quotientCompQhIso_hom_naturality
-    (s.complexComparison.hom.app P)
-  dsimp only [Functor.comp_obj] at hm
-  erw [← hm]
-  dsimp only [Functor.comp_obj, Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift,
-    HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
-  let q := (DerivedCategory.quotientCompQhIso (CornerModules X')).hom.app
-    ((h.pullback.mapHomologicalComplex (.up ℤ)).obj
-      ((f.pullback.mapHomologicalComplex (.up ℤ)).obj P))
-  let i := k.left.map (g.left.map
-    ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
-  have : IsIso q := by dsimp [q]; infer_instance
-  have : IsIso i := by dsimp [i]; infer_instance
-  constructor
-  · intro he
-    apply (cancel_epi i).1
-    apply (cancel_mono q).1
-    simpa only [Category.assoc] using he
-  · intro he
-    have := congrArg (fun z ↦ i ≫ z ≫ q) he
-    simpa only [Category.assoc] using this
+  -- Normalize and cancel in an abstract diagram, avoiding rewrites over the complex types.
+  simpa only [Category.assoc, hsquare, Functor.comp_obj] using
+    (square_transport_cancel_iff
+      (composite_complex_epsilon f h P) (composite_complex_epsilon g k P)
+      (theta.hom.naturality ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
+      (DerivedCategory.quotientCompQhIso_hom_naturality (s.complexComparison.hom.app P)))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -477,7 +464,7 @@ noncomputable def RingedTensorSquare.exchange
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     f.right ⋙ g.left ⟶ h.left ⋙ k.right :=
   (mateEquiv f.derivedAdjunction k.derivedAdjunction
-    (TwoSquare.mk g.left f.left k.left h.left s.derivedComparison.hom)).natTrans
+    (TwoSquare.mk g.left f.left k.left h.left s.derivedComparison.hom))
 
 /-- The projection map is the adjunct of tensor comparison followed by counit tensor
 identity. In particular no projection-formula isomorphism is assumed.
