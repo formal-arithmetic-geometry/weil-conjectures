@@ -308,7 +308,7 @@ private theorem mateModel_private
     (hq : q.app B ≫ RX.map v ≫ r₁ = U.map w ≫ t ≫ qo)
     (hOrd : u ≫ η₀ ≫ on = U.map η₁ ≫ t ≫ qo) :
     LX.map u ≫ a ≫ o =
-      (((mateEquiv adY adX).symm (TwoSquare.mk _ _ _ _ q)).natTrans.app K) ≫
+      (((mateEquiv adY adX).symm (TwoSquare.mk _ _ _ _ q)).app K) ≫
         V.map s ≫ v := by
   apply (adX.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]
@@ -316,7 +316,7 @@ private theorem mateModel_private
   have hm := unit_mateEquiv_symm adY adX (TwoSquare.mk _ _ _ _ q) K
   change U.map (adY.unit.app K) ≫ q.app (LY.obj K) =
     adX.unit.app (U.obj K) ≫ RX.map
-      (((mateEquiv adY adX).symm (TwoSquare.mk _ _ _ _ q)).natTrans.app K) at hm
+      (((mateEquiv adY adX).symm (TwoSquare.mk _ _ _ _ q)).app K) at hm
   rw [← reassoc_of% adX.unit.naturality u]
   simp only [comp_obj]
   rw [← reassoc_of% hm]

@@ -58,7 +58,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension, the derived
 pushforward `Rf_*` on unbounded derived categories of étale sheaves of `Λ`-modules commutes with
-direct sums, and similarly for `RΓ(X, -)` (blueprint `lem-kun-0f11`, Stacks 0F11).
+direct sums, and similarly for `RΓ(X, -)` (blueprint
+`proposition-open-direct-image-preserves-finite`, Stacks 0F11).
 
 The proof follows the blueprint. The higher direct images `R^q f_*` of sheaves commute with
 filtered colimits (`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`),
@@ -83,7 +84,8 @@ commutes with filtered colimits on a quasi-compact quasi-separated scheme
 ## Main statements
 
 - `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar` and
-  `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedGlobalSections` (`lem-kun-0f11`).
+  `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedGlobalSections`
+  (`proposition-open-direct-image-preserves-finite`).
 -/
 
 @[expose] public section
@@ -116,7 +118,8 @@ instance preservesColimitsOfShape_rightDerived_lowerStar {X Y : Scheme.{u}} (f :
         q)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Blueprint `lem-kun-0f11`: direct sums and finite cohomological dimension.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: direct sums and finite cohomological
+dimension.
 
 For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension,
 `Rf_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` commutes with direct sums. -/
@@ -213,8 +216,9 @@ instance preservesColimitsOfShape_rightDerived_globalSections (X : Scheme.{u}) [
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Blueprint `lem-kun-0f11`, part (2): for a quasi-compact quasi-separated scheme `X` of finite
-cohomological dimension, `RΓ(X, -)` commutes with direct sums. -/
+/-- Blueprint `proposition-open-direct-image-preserves-finite`, part (2): for a quasi-compact
+quasi-separated scheme `X` of finite cohomological dimension, `RΓ(X, -)` commutes with direct
+sums. -/
 theorem preservesCoproducts_rightDerivedGlobalSections (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
     (ι : Type (u + 1)) :

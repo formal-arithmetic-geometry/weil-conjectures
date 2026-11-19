@@ -78,7 +78,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Schem
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
-                |>.natTrans.app K))) ≫
+                |>.app K))) ≫
         (smallModel_strictLocalBaseChangeTargetIso f s K n).hom =
     (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
       ((NatTrans.mapHomologicalComplex (smallModel_strictLocalUnderivedMateSections f s i)

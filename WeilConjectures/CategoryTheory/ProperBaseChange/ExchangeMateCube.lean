@@ -23,7 +23,7 @@ private theorem mate_app_eq_adjunct
     {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D}
     {K : C ⥤ D} {S : D ⥤ C}
     (a : F ⊣ R) (b : K ⊣ S) (θ : G ⋙ K ⟶ F ⋙ H) (E : B) :
-    (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans.app E =
+    (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).app E =
       b.homEquiv _ _ (θ.app (R.obj E) ≫ H.map (a.counit.app E)) := by
   apply (b.homEquiv _ _).symm.injective
   dsimp only [Functor.comp_obj, Functor.id_obj]
@@ -63,10 +63,10 @@ theorem exchangeMate_cube
       pG.hom.app (R.obj E) ≫
         G'.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).app E) ≫
         (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).app (b.obj E) := by
-  let e := (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans
-  let e' := (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).natTrans
-  let mF := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).natTrans
-  let mK := (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).natTrans
+  let e := (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ))
+  let e' := (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ'))
+  let mF := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv))
+  let mK := (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv))
   have he := mateEquiv_counit adj adjK (TwoSquare.mk _ _ _ _ θ) E
   have he' := mateEquiv_counit adj' adjK' (TwoSquare.mk _ _ _ _ θ') (b.obj E)
   have hmF := mateEquiv_counit adj adj' (TwoSquare.mk _ _ _ _ pF.inv) E

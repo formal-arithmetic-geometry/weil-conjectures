@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! A filtered-colimit factorization condition for constant-model constructible sources.
 
-Source: blueprint `sk-lem-constructible-ext-continuity`, clause (1).
+Source: blueprint `lemma-continuity-ext-out-constructible-complex--1`, clause (1).
 -/
 
 @[expose] public section

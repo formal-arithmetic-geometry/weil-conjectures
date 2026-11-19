@@ -62,7 +62,7 @@ private theorem coherent_pages {S : Scheme.{u}}
  (blueprint: lem-pc-direct-image-bounded-coherent).
 
 Proof:
-1. Represent `E` by a bounded complex and apply `thm-sp-truncation-e2` to the
+1. Represent `E` by a bounded complex and apply `lemma-uniform-bound-proper-direct-image--1` to the
    left exact module direct-image functor. This gives the convergent spectral sequence
    `Rᵖf_* Hᑫ(E) ⇒ Hᵖ⁺ᑫ(Rf_*E)` and finite filtrations on its abutment.
 2. By `lem-pc-coherent-support-proper-higher-direct-image`, each term of its
@@ -70,7 +70,8 @@ Proof:
 3. The filtration pieces are subquotients of these terms; coherence on the locally
    Noetherian target is closed under subquotients and finite extensions. Thus every
    cohomology sheaf of the direct image is coherent.
-4. The lower bound follows from the vanishing quadrant of `thm-sp-truncation-e2`.
+4. The lower bound follows from the vanishing quadrant of
+`lemma-uniform-bound-proper-direct-image--1`.
 5. For each cohomology module of the bounded-below representative, apply
    `lem-pc-proper-support-module-higher-direct-image-bound`. Take the maximum of
    N(q) + max(q,0) over the finite interval [a,b]. Above this maximum every E2 term

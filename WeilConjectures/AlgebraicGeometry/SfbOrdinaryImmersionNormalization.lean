@@ -105,7 +105,6 @@ private noncomputable def sourceNormalization
     (SheafOfModules.pullbackPushforwardAdjunction (F := V) (J := J) (K := K)
       (R := siteModuleRings T) (r.map φ))
 
-set_option maxHeartbeats 1000000 in
 -- The comparison elaborates module actions in two equivalent site presentations.
 /-- The ordinary module inverse image commutes with normalization of the source
 coefficient ring. The target coefficient identification is produced by the algebraic

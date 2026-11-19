@@ -278,7 +278,7 @@ theorem isIso_mateEquiv_etaleReduction_of_isClosedImmersion (d : Z ⟶ Y)
   have : IsIso (Etale.rightDerivedUpperShriekAdjunction
       (integersModPowCoeff.{u} ℓ E n) d.left).unit :=
     NatIso.isIso_of_isIso_app _
-  have : IsIso (TwoSquare.mk _ _ _ _ γ.inv).natTrans := inferInstanceAs (IsIso γ.inv)
+  have : IsIso (TwoSquare.mk _ _ _ _ γ.inv) := inferInstanceAs (IsIso γ.inv)
   have (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :=
     isIso_mateEquiv_app_of_isIso_map_counit
       (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d)

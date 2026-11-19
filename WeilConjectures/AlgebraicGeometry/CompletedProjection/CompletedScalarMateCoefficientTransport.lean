@@ -119,7 +119,7 @@ private theorem literalBeta_transpose
     az.counit.app _ = l.hom.app _ ≫
       (proEtaleRingDerivedExtension (DerivedScalarMate.inverseMap f χ)).map
         (a.counit.app K) at hβ
-  have hm : (mateEquiv az a (TwoSquare.mk _ _ _ _ b.inv)).natTrans =
+  have hm : (mateEquiv az a (TwoSquare.mk _ _ _ _ b.inv)) =
       (DerivedScalarMate.restrictionPush f χ).hom := by
     apply NatTrans.ext
     funext N
@@ -136,7 +136,7 @@ private theorem literalBeta_transpose
           (DerivedScalarMate.restrictionPush f χ).hom.app N at h
     rw [hid, CategoryTheory.Functor.map_id, Category.id_comp] at h
     rw [← h]
-    simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
       Functor.comp_obj, Functor.comp_map, Functor.rightUnitor_inv_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
@@ -146,7 +146,7 @@ private theorem literalBeta_transpose
   have hd := mateEquiv_counit az a (TwoSquare.mk _ _ _ _ b.inv)
     ((proEtaleRingDerivedExtension (DerivedScalarMate.inverseMap f χ)).obj K)
   change (DerivedScalarMate.pull f R).map
-      (((mateEquiv az a (TwoSquare.mk _ _ _ _ b.inv)).natTrans).app _) ≫
+      (((mateEquiv az a (TwoSquare.mk _ _ _ _ b.inv))).app _) ≫
       a.counit.app _ = τ.hom.app _ ≫
       (pbcDerivedRestrict (DerivedScalarMate.inverseMap f χ)).map (az.counit.app _) at hd
   rw [hm] at hd

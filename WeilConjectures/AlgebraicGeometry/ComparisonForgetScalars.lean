@@ -23,7 +23,7 @@ attribute [local irreducible] comparisonUpperStar
 
 /-- For a scheme Z and commutative ring A, there is a canonical natural isomorphism forget_A,et ⋙
 ν*_Ab ≅ ν*_A ⋙ forget_A,pro
-[def-weil-pbc-site-comparison-morphism,
+[proposition-comparison-morphism-inverse-image,
 def-sbc-raw-module-scalar-pullback-comparison]. Its component is adjoint to the
 coefficient-forgotten
 comparison adjunction unit.

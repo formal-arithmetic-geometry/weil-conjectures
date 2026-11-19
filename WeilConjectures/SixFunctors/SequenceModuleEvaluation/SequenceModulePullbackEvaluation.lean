@@ -389,7 +389,7 @@ private theorem coMate_isIso
     IsIso (mateEquiv (coAdj K B n) (coAdj J A n) d.hom) := by
   let β : coFunctor K B n ⋙ SheafOfModules.pushforward φ ⟶
       SheafOfModules.pushforward ψ ⋙ coFunctor J A n :=
-    (mateEquiv (coAdj K B n) (coAdj J A n) d.hom).natTrans
+    (mateEquiv (coAdj K B n) (coAdj J A n) d.hom)
   apply (NatTrans.isIso_iff_isIso_app _).mpr
   intro M
   let T := SheafOfModules.forget A ⋙ PresheafOfModules.toPresheaf A.obj
@@ -488,7 +488,7 @@ private theorem inverseMate_isIso_of_iterated
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂)
     (d : R₁ ⋙ F₁ ⟶ F₂ ⋙ R₂)
     [IsIso (mateEquiv adj₄ adj₃ d)] :
-    IsIso ((mateEquiv adj₁ adj₂).symm d).natTrans := by
+    IsIso ((mateEquiv adj₁ adj₂).symm d) := by
   let α := (mateEquiv adj₁ adj₂).symm d
   have h := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄ α
   rw [Equiv.apply_symm_apply] at h
@@ -534,7 +534,7 @@ theorem sequenceModulePullbackEvaluation_isIso
         SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hA.symm) ≅
       SheafOfModules.pushforward (F := Prod.sectR n D) (eqToHom hB.symm) ⋙
         SheafOfModules.pushforward ψ) :
-    IsIso ((mateEquiv adj adjn).symm d.hom).natTrans := by
+    IsIso ((mateEquiv adj adjn).symm d.hom) := by
   have : IsIso (mateEquiv (coForAdj K B n T hB) (coForAdj J A n S hA) d.hom) :=
     coForMate_isIso J K F A B n φ S T hA hB ψ d
   exact inverseMate_isIso_of_iterated adj adjn

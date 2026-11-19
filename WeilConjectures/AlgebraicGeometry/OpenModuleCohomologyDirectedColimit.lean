@@ -20,6 +20,7 @@ import WeilConjectures.Topology.TopologicalFilteredCohomology
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Directed colimits and module cohomology on quasi-compact opens
 

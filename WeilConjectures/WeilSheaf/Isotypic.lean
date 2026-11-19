@@ -61,7 +61,7 @@ noncomputable def geometricFiberMapIso (e : X₀ ≅ Y₀) (h : e.hom ≫ g = f)
     exact geometricFiberMap_id
 
 /-- The underlying morphism of `AlgebraicGeometry.Scheme.Hom.geometricFiberMapIso`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[simp]
 lemma geometricFiberMapIso_hom (e : X₀ ≅ Y₀) (h : e.hom ≫ g = f) :
     (geometricFiberMapIso e h).hom = geometricFiberMap e.hom h :=
@@ -86,30 +86,33 @@ noncomputable def ProEtaleWeilSheaf.smulEnd (b : PadicAlgCl l) (A : ProEtaleWeil
     rw [ProEtale.AdicSheaf.adicLowerStar_map_smul, ProEtale.AdicSheaf.smul_comp]⟩
 
 /-- The underlying morphism of `AlgebraicGeometry.ProEtaleWeilSheaf.smulEnd`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[simp]
 lemma ProEtaleWeilSheaf.smulEnd_hom_f (b : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
     (ProEtaleWeilSheaf.smulEnd b A).hom.f = ProEtale.AdicSheaf.smul (ULift.up b) A.carrier :=
   rfl
 
-/-- Scalar multiplication commutes with morphisms (blueprint `lem-fd-as-characters`). -/
+/-- Scalar multiplication commutes with morphisms (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_comp (b : PadicAlgCl l) {A B : ProEtaleWeilSheaf k₀ l X}
     (f : A ⟶ B) : ProEtaleWeilSheaf.smulEnd b A ≫ f = f ≫ ProEtaleWeilSheaf.smulEnd b B :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_comp _ _))
 
 /-- Scalar multiplication is multiplicative in the scalar
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_smulEnd (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd b A ≫ ProEtaleWeilSheaf.smulEnd c A =
       ProEtaleWeilSheaf.smulEnd (c * b) A :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_smul _ _ _))
 
-/-- Scalar multiplication by `1` is the identity (blueprint `lem-fd-as-characters`). -/
+/-- Scalar multiplication by `1` is the identity (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_one (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd 1 A = 𝟙 A :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_one _))
 
-/-- Scalar multiplication is additive in the scalar (blueprint `lem-fd-as-characters`). -/
+/-- Scalar multiplication is additive in the scalar (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.smulEnd_add (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd (b + c) A =
       ProEtaleWeilSheaf.smulEnd b A + ProEtaleWeilSheaf.smulEnd c A :=
@@ -121,7 +124,7 @@ lemma ProEtaleWeilSheaf.smulEnd_add (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf 
     rfl)))
 
 /-- A sum of scalar multiplications is the scalar multiplication by the sum
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.sum_smulEnd {ι : Type*} (s : Finset ι) (b : ι → PadicAlgCl l)
     (A : ProEtaleWeilSheaf k₀ l X) :
     ∑ i ∈ s, ProEtaleWeilSheaf.smulEnd (b i) A = ProEtaleWeilSheaf.smulEnd (∑ i ∈ s, b i) A := by
@@ -140,12 +143,12 @@ end Scalar
 section Torsor
 
 /-- The Weil structure of the constant pro-étale Weil sheaf
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.adicConstant_str_hom_hom (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] :
     (ProEtaleWeilSheaf.adicConstant k₀ l X).str.hom.hom =
       (ProEtale.adicConstantSheafLowerStarIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom :=
   rfl
 
 variable {Z W : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
@@ -164,7 +167,7 @@ local notation "π̄" => Scheme.Hom.geometricFiberMap π (comp_over π (Spec (Co
 omit [Finite k₀] in
 variable (k₀) in
 /-- The base changes of the automorphisms of a torsor lie over the base
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma geometricTorsorAut_comp (hτ : ∀ g, (τ g).hom ≫ π = π) (g : G) :
     (geometricTorsorAut k₀ τ g).hom ≫ π̄ = π̄ := by
   rw [Scheme.Hom.geometricFiberMapIso_hom, ← Scheme.Hom.geometricFiberMap_comp]
@@ -187,15 +190,16 @@ lemma ProEtaleWeilSheaf.lowerStar_obj_str (F : ProEtaleWeilSheaf k₀ l W) :
 Frobenius pushforwards followed by `π̄_*` of the Weil structure of `ℚ̄_ℓ`. -/
 lemma ProEtaleWeilSheaf.torsorPushforward_str_hom_hom' :
     (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom =
-      ((ProEtale.lowerStarComp _ π̄ (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+      ((ProEtale.lowerStarComp _ π̄
+          (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr _
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
           (ProEtale.lowerStarComp _
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv π̄).symm).app
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv π̄).symm).app
           (ProEtaleWeilSheaf.adicConstant k₀ l W).carrier.X ≪≫
         (π̄)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom := by
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)).hom := by
   rw [ProEtaleWeilSheaf.lowerStar_obj_str, Iso.trans_hom, Mod.comp_hom',
     Functor.mapIso_hom, ProEtale.adicLowerStar_map_hom]
   erw [ProEtaleWeilSheaf.adicConstant_str_hom_hom]
@@ -209,15 +213,16 @@ lemma ProEtaleWeilSheaf.torsorPushforward_str_hom_hom' :
 /-- The Weil structure of `π_* ℚ̄_ℓ`, on underlying sheaves. -/
 lemma ProEtaleWeilSheaf.torsorPushforward_str_hom_hom :
     (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom =
-      ((ProEtale.lowerStarComp _ π̄ (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+      ((ProEtale.lowerStarComp _ π̄
+          (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr _
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
           (ProEtale.lowerStarComp _
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv π̄).symm).app
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv π̄).symm).app
           (ProEtale.adicConstantSheaf l (W ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
         (π̄)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)).hom :=
   ProEtaleWeilSheaf.torsorPushforward_str_hom_hom' π
 
 /-- The action of `τ_g` on `π_* ℚ̄_ℓ` commutes with its Weil structure: `τ_g` and `π` are
@@ -234,8 +239,8 @@ lemma ProEtaleWeilSheaf.torsorTranslation_comm (g : G) :
     ProEtale.torsorTranslation_hom, ← Endofunctor.IsoAlgebra.str_hom,
     ProEtaleWeilSheaf.torsorPushforward_str_hom_hom]
   exact ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange l π̄
-    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
     (geometricTorsorAut k₀ τ g)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
     (geometricTorsorAut_comp k₀ π τ hτ g)
@@ -249,7 +254,7 @@ noncomputable def ProEtaleWeilSheaf.torsorTranslation (g : G) :
     (geometricTorsorAut_comp k₀ π τ hτ) g, ProEtaleWeilSheaf.torsorTranslation_comm π τ hτ g⟩
 
 /-- The underlying morphism of the translation of pro-étale Weil sheaves
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 @[simp]
 lemma ProEtaleWeilSheaf.torsorTranslation_hom_f (g : G) :
     (ProEtaleWeilSheaf.torsorTranslation (l := l) π τ hτ g).hom.f =
@@ -293,16 +298,18 @@ lemma ProEtaleWeilSheaf.torsorPushforward_str_mul :
         (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom) ≫
       MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
         (W ↘ Spec (CommRingCat.of k₀)).geometricFiber)) =
-      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+          l]
           _ _ ≫
-        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l].map
+        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+          l].map
           (MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
             (W ↘ Spec (CommRingCat.of k₀)).geometricFiber))) ≫
         (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom := by
   rw [ProEtaleWeilSheaf.torsorPushforward_str_hom_hom]
   exact ProEtale.lowerStarExchange_mul π̄
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
-    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm
+    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
 
 
@@ -364,7 +371,8 @@ theorem ProEtaleWeilSheaf.nonempty_iso_ihom_of_isotypic [Etale π] [QuasiCompact
     congrArg (fun f ↦ f.hom.f) (hφ g)
   obtain ⟨r, hr₁, hr₂⟩ := ProEtale.exists_retraction_of_isotypic π̄ (geometricTorsorAut k₀ τ) hτb
     hadd' hsplit' (χ₁ * χ₂) hG φ₃.hom.f (hgeom φ₃ _ hφ₃) hθ₃
-  set Fr := ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+  set Fr :=
+    ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
   have hstr {A B : ProEtaleWeilSheaf k₀ l Z} (f : A ⟶ B) :
       Fr.map f.hom.f.hom ≫ B.str.hom.hom = A.str.hom.hom ≫ f.hom.f.hom := by
     have := congrArg Mod.Hom.hom f.hom.h

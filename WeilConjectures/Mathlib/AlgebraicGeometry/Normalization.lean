@@ -181,12 +181,12 @@ variable (X : Scheme.{u}) [IsIntegral X]
 relative normalization `Spec_X(𝒪̃_X)` of `X` in the generic point `Spec K ⟶ X`, where `𝒪̃_X` is
 the integral closure of `𝒪_X` in the constant sheaf `K`. Finiteness of `X^ν ⟶ X` is a separate
 property, `AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType`.
-(blueprint: `def-sc-normalization`) -/
+(blueprint: `lemma-proper-smooth-model--1`) -/
 noncomputable abbrev normalization : Scheme.{u} :=
   X.fromSpecFunctionField.normalization
 
 /-- The canonical morphism `ν : X^ν ⟶ X` from the normalization of an integral scheme `X` in its
-function field. (blueprint: `def-sc-normalization`) -/
+function field. (blueprint: `lemma-proper-smooth-model--1`) -/
 noncomputable abbrev fromNormalization : X.normalization ⟶ X :=
   X.fromSpecFunctionField.fromNormalization
 
@@ -196,7 +196,7 @@ instance isDominant_fromNormalization : IsDominant X.fromNormalization :=
   .of_comp X.fromSpecFunctionField.toNormalization _
 
 /-- The normalization `ν : X^ν ⟶ X` of an integral scheme in its function field is surjective:
-it is integral, hence closed, and dominant. (blueprint: `lem-sc-normalization-exists`) -/
+it is integral, hence closed, and dominant. (blueprint: `lemma-proper-smooth-model--1`) -/
 instance surjective_fromNormalization : Surjective X.fromNormalization :=
   have : UniversallyClosed X.fromNormalization :=
     (IsIntegralHom.iff_universallyClosed_and_isAffineHom.mp inferInstance).1
@@ -248,7 +248,7 @@ theorem isIso_fromNormalization_app {V : X.Opens} (hV : IsAffineOpen V) [Nonempt
 whose local rings are integrally closed, the normalization `ν : X^ν ⟶ X` restricts to an
 isomorphism `ν⁻¹ U ⟶ U`: over an affine open `Spec A ⊆ U` the ring `A` is an integrally closed
 domain, hence equal to its integral closure in `k(X)`.
-(blueprint: `lem-sc-normalization-over-normal-locus`) -/
+(blueprint: `lemma-proper-smooth-model--1`) -/
 theorem isIso_fromNormalization_restrict (U : X.Opens)
     (hU : ∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) :
     IsIso (X.fromNormalization ∣_ U) := by
@@ -467,7 +467,7 @@ end FiniteExtension
 field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite: over an affine open
 `Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is a
 finite `A`-module by E. Noether's finiteness theorem. In particular `X^ν` is proper over `k` if
-`X` is. (blueprint: `lem-sc-normalization-exists`) -/
+`X` is. (blueprint: `lemma-proper-smooth-model--1`) -/
 theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] : IsFinite X.fromNormalization := by
   have h : X.fromSpecOfAlgebraFunctionField X.functionField = X.fromSpecFunctionField := by
@@ -480,7 +480,7 @@ theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
 
 /-- **The normalization is birational.** For an integral scheme `X` locally of finite type over
 a field `k`, the normalization `ν : X^ν ⟶ X` is an isomorphism over a nonempty, hence dense,
-open subscheme of `X`. (blueprint: `lem-sc-normalization-exists`) -/
+open subscheme of `X`. (blueprint: `lemma-proper-smooth-model--1`) -/
 theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] :
     ∃ U : X.Opens, (U : Set X).Nonempty ∧ IsIso (X.fromNormalization ∣_ U) := by
@@ -520,7 +520,7 @@ theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X �
 /-- **The normalization preserves dimension.** For an integral scheme `X` locally of finite type
 over a field `k`, `dim X^ν = dim X`: the finite surjective morphism `ν` lifts chains of
 specializations, and identifies no two distinct points one of which specializes to the other.
-(blueprint: `lem-sc-normalization-exists`) -/
+(blueprint: `lemma-proper-smooth-model--1`) -/
 theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] : topologicalKrullDim X.normalization = topologicalKrullDim X := by
   have := X.isFinite_fromNormalization_of_locallyOfFiniteType q

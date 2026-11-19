@@ -25,7 +25,7 @@ Galois Frobenius of `X`.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback`: blueprint
-  `lem-zl-bertini-finite-cover-curve`.
+  `lemma-curve-preserving-finite-cover--1`.
 
 ## Implementation notes
 
@@ -52,7 +52,7 @@ open CategoryTheory Limits TensorProduct
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- **Curves through prescribed points preserving a finite cover**
-(blueprint: `lem-zl-bertini-finite-cover-curve`). Let `f : X₀ ⟶ Spec k₀` be a smooth
+(blueprint: `lemma-curve-preserving-finite-cover--1`). Let `f : X₀ ⟶ Spec k₀` be a smooth
 geometrically connected affine scheme of relative dimension `d ≥ 2` over a finite field, with
 geometric fiber `X`, let `π : T ⟶ X` be a finite étale morphism with `T` connected, and let `S`
 be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a
@@ -68,7 +68,8 @@ theorem exists_isClosedImmersion_connectedSpace_pullback {k₀ : Type u} [Field 
     ∃ (C : Scheme.{u}) (i : C ⟶ f.geometricFiber), IsClosedImmersion i ∧ IsAffine C ∧
       SmoothOfRelativeDimension 1 (i ≫ f.geometricFiberToAlgebraicClosure) ∧
       ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧ ConnectedSpace ↑(pullback π i) ∧
-      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C, φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).hom := by
+      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
+        φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom := by
   classical
   let := Fintype.ofFinite k₀
   obtain ⟨R, _, _, eR, heR⟩ := exists_iso_Spec_of_isAffine f
@@ -127,7 +128,7 @@ theorem exists_isClosedImmersion_connectedSpace_pullback {k₀ : Type u} [Field 
   -- the Frobenius
   obtain ⟨m, hm, hJm⟩ :=
     hJfg.exists_map_pow_eq _ (exists_geometricFrobeniusTensor_pow_apply_eq_self k₀ R)
-  obtain ⟨Φ, hΦ⟩ := exists_iso_comp_eq_of_map_eq e (f.geometricGaloisFrobenius ^ m) _
+  obtain ⟨Φ, hΦ⟩ := exists_iso_comp_eq_of_map_eq e (f.geometricGaloisFrobenius ^ m).asIso _
     (f.geometricGaloisFrobenius_pow_hom_comp_geometricFiberIsoSpec_hom eR heR m) J hJm
   have he : e.inv ≫ f.geometricFiberToAlgebraicClosure =
       Spec.map (CommRingCat.ofHom (algebraMap K A)) := by

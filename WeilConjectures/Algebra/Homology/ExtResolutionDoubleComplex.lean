@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.Ext
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # The two edges of the resolution Hom double complex
 

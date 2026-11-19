@@ -77,6 +77,11 @@ private theorem termwiseClopenUnit {I A X : Type*}
     Adjunction.whiskerRight_counit_app_app, Functor.whiskeringRight,
     Functor.comp_obj, Functor.id_obj, Functor.whiskerRight_app, NatTrans.id_app] using hn
 
+private theorem compIsoInvApp_eq {A B : Type*} [Category A] [Category B]
+    {F G : A ⥤ B} (e e' : F ≅ G) (he : e = e') (M : A)
+    {N : B} (f : N ⟶ G.obj M) : f ≫ e.inv.app M = f ≫ e'.inv.app M := by
+  rw [he]
+
 private theorem clopenComparison
     {A X A' X' : Type*} [Category A] [Category X] [Category A'] [Category X']
     {J : A ⥤ X} {P : X ⥤ A} {D : A ⥤ X}
@@ -443,8 +448,6 @@ private theorem scalarSquare_termwise {U' U X' X : Scheme.{u}}
   exact (termwiseIso_square_eq (StrictTower.moduleSquareG B a j' j g h)).trans
     (StrictTower.towerSquare_moduleSquareG B a j' j g h)
 
-set_option maxHeartbeats 700000 in
--- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -457,9 +460,11 @@ private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (StrictTower.openBetaModule B a j' j g h sq)
     (StrictTower.moduleSquareG B a j' j g h)
     (StrictTower.openBetaModule_normalized B a j' j g h sq).2 M
-  exact ht.trans (congrArg (fun e ↦
-    (StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M) ≫
-      e.inv.app ((StrictTower.towerJ B j).obj M)) (scalarSquare_termwise B a j' j g h))
+  exact ht.trans (compIsoInvApp_eq
+    (termwiseIso (I := ℕᵒᵖ) (StrictTower.moduleSquareG B a j' j g h))
+    (scalarTowerSquare B a j' j g h) (scalarSquare_termwise B a j' j g h)
+    ((StrictTower.towerJ B j).obj M)
+    ((StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M)))
 
 private def scalarClopen {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
@@ -488,6 +493,13 @@ private def scalarRComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
       StrictTower.towerDirectImage B (f ≫ g) :=
   (Functor.whiskeringRightObjCompIso _ _) ≪≫
     (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (StrictTower.moduleRComp B f g)
+
+private theorem scalarRComp_hom_app {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : StrictTower.Towers B X) (n : ℕᵒᵖ) :
+    ((scalarRComp B f g).hom.app M).app n =
+      (StrictTower.moduleRComp B f g).hom.app (M.obj n) := by
+  change 𝟙 _ ≫ (StrictTower.moduleRComp B f g).hom.app (M.obj n) = _
+  exact Category.id_comp _
 
 private def scalarSection (C : OrdinaryScalarRestriction R φ B ψ)
     (X : Scheme.{u}) (n : ℕ) (M : Modules R φ X) (H : X.ProEtᵒᵖ)
@@ -523,8 +535,6 @@ private theorem scalarSection_direct (C : OrdinaryScalarRestriction R φ B ψ)
   exact (C.level_sections X n M ((Scheme.proEtaleBaseChange f).op.obj H) _).trans
     ((G.d_sections f M n H x).trans (C.level_sections Y n _ H x).symm)
 
-set_option maxHeartbeats 800000 in
--- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarDirect_comp (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (M : Modules R φ X) :
@@ -551,16 +561,16 @@ private theorem scalarDirect_comp (C : OrdinaryScalarRestriction R φ B ψ)
   erw [(modulePComp_existsUnique R φ f g).choose_spec.1]
   change _ = scalarSection R φ B ψ C X n.unop M
     ((Scheme.proEtaleBaseChange (f ≫ g)).op.obj H) _
-  dsimp only [NatTrans.comp_app, StrictTower.towerDirectImage, Functor.whiskeringRight,
-    Functor.comp_map]
-  erw [StrictTower.directImage_map_apply, StrictTower.directImage_map_apply]
-  unfold scalarRComp
-  dsimp only [Functor.whiskeringRightObjCompIso, Iso.trans_hom, Functor.mapIso_hom,
-    Functor.whiskeringRight, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app]
-  erw [Category.id_comp]
-  erw [StrictTower.directComp_hom_apply f g B]
+  rw [scalarRComp_hom_app]
+  change _ = scalarSection R φ B ψ C X n.unop M
+    ((Scheme.proEtaleBaseChange (f ≫ g)).op.obj H)
+    (((StrictTower.moduleRComp B f g).hom.app (((C.rho X).obj M).obj n)).val.app H
+      (((((G.d f).hom.app M).app n).val.app
+        ((Scheme.proEtaleBaseChange g).op.obj H))
+        (((((G.d g).hom.app ((push R φ f).obj M)).app n).val.app H) x)))
+  rw [StrictTower.directComp_hom_apply f g B]
   erw [scalarSection_restrict]
-  erw [StrictTower.directImage_map_apply, scalarSection_direct, scalarSection_direct]
+  erw [scalarSection_direct, scalarSection_direct]
   rfl
 
 private theorem scalarTowerComp_mate {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -596,7 +606,7 @@ private theorem scalarPull_compSquare (C : OrdinaryScalarRestriction R φ B ψ)
   have hb {A D : Scheme.{u}} (q : A ⟶ D) :
       mateEquiv (moduleAdj R φ q) (scalarTowerAdj B q) (G.b q).inv =
         TwoSquare.mk _ _ _ _ (G.d q).hom := by
-    exact TwoSquare.ext _ _ (fun M ↦ NatTrans.congr_app (G.mate q) M)
+    exact NatTrans.ext (funext (fun M ↦ NatTrans.congr_app (G.mate q) M))
   rw [hb g, hb f, hb (f ≫ g), scalarTowerComp_mate]
   have hc : conjugateEquiv ((moduleAdj R φ g).comp (moduleAdj R φ f))
       (moduleAdj R φ (f ≫ g)) (moduleGComp R φ f g).hom =
@@ -604,10 +614,9 @@ private theorem scalarPull_compSquare (C : OrdinaryScalarRestriction R φ B ψ)
     unfold moduleGComp
     exact Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
   rw [hc]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simpa only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc]
@@ -665,12 +674,12 @@ private theorem scalarPull_comp (C : OrdinaryScalarRestriction R φ B ψ)
     apply NatTrans.ext
     funext N
     simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
-      TwoSquare.mk, TwoSquare.natTrans, Iso.trans_hom, NatTrans.comp_app,
+      TwoSquare.mk, Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp, Category.comp_id, Category.assoc]
-      using congrArg (fun t ↦ t.natTrans.app N) (scalarPull_compSquare R φ B ψ C G f g)
+      using congrArg (fun t ↦ t.app N) (scalarPull_compSquare R φ B ψ C G f g)
   simpa only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Iso.symm_inv, Category.assoc] using congrArg (fun e ↦ e.inv.app M) he.symm
@@ -694,7 +703,7 @@ private theorem scalarOpen_mate (C : OrdinaryScalarRestriction R φ B ψ)
     (scalarTowerOpenAdj B j).unit.app ((C.rho U).obj M) ≫
       (StrictTower.towerPullback B j).map
         (((mateEquiv (moduleJAdj R φ j) (scalarTowerOpenAdj B j)).symm
-          (TwoSquare.mk _ _ _ _ (G.b j).hom)).natTrans.app M) at hu
+          (TwoSquare.mk _ _ _ _ (G.b j).hom)).app M) at hu
   rw [← hu]
   apply (cancel_mono ((StrictTower.towerPullback B j).map ((G.a j).hom.app M))).1
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
@@ -736,10 +745,9 @@ private theorem scalarOpen_comp (C : OrdinaryScalarRestriction R φ B ψ)
       (scalarTowerOpenAdj B (j ≫ k))
     rw [mateEquiv_hcomp, scalarOpen_mate, scalarOpen_mate, scalarOpen_mate]
     rw [scalarOpenComp_mate, varyingOpenComp_mate]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     simpa only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
-      TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      TwoSquare.mk, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp, Category.comp_id, Category.assoc]
@@ -753,12 +761,12 @@ private theorem scalarOpen_comp (C : OrdinaryScalarRestriction R φ B ψ)
     apply NatTrans.ext
     funext N
     simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
-      TwoSquare.mk, TwoSquare.natTrans, Iso.trans_hom, NatTrans.comp_app,
+      TwoSquare.mk, Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp, Category.comp_id, Category.assoc]
-      using congrArg (fun t ↦ t.natTrans.app N) hc
+      using congrArg (fun t ↦ t.app N) hc
   simpa only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Iso.symm_inv, Category.assoc] using congrArg (fun e ↦ e.inv.app M) he.symm

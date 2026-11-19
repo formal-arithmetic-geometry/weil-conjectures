@@ -23,7 +23,7 @@ set_option linter.privateModule false
 
 /-! # Unbounded open restriction of condensed-module direct image
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md, Proof (2)
 (blueprint: lem-sfb-derived-open-square-restriction).
 

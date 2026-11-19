@@ -86,7 +86,7 @@ Proof: Induct on `b - a`. Exact slice restriction preserves cohomology and cones
 (lem-pur-site-restriction-module-adjunction-exact); constant sheaves restrict to
 constant sheaves (lem-weil-pbc-site-constant-restriction), and successive coverings
 compose. On empty slices use the zero complex. If `a = b`, canonical truncation
-(lem-weil-pbc-truncation-descends) identifies the object with its single nonzero
+(theorem-pbc-injective-acyclicity) identifies the object with its single nonzero
 cohomology sheaf; trivialize that sheaf. Otherwise trivialize the top cohomology
 as a finite module M and choose finitely many generators. Exact sheafification
 (lem-weil-pbc-site-module-presheaf-sheafification-exact) and local representatives

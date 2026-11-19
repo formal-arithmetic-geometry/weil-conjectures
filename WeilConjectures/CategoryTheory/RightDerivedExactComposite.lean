@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 /-!
 # Right derived functors after an exact functor
 
-Source: Weil conjectures blueprint, `lem-sc-ext-locally-free`, standard homological algebra
-parenthetical; Stacks Project, Tag 015M (blueprint: lem-sc-ext-derived-composite).
+Source: Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality--2`, standard
+homological algebra parenthetical; Stacks Project, Tag 015M (blueprint:
+lem-sc-ext-derived-composite).
 -/
 
 @[expose] public section
@@ -66,8 +67,8 @@ The isomorphism is canonical: for any injective resolutions `I` of `M` and `J` o
 its forward map is the cohomology map of any lift `φ : T(I) ⟶ J` of the identity, transported
 through the injective-resolution identifications and the complex-composition isomorphism.
 
-Source: blueprint `lem-sc-ext-locally-free`, standard homological algebra parenthetical;
-Stacks Project, Tag 015M, proof (using Tag 015E).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--2`, standard homological algebra
+parenthetical; Stacks Project, Tag 015M, proof (using Tag 015E).
 
 Proof: choose an injective resolution `M ⟶ I` (def-sp-injective-resolutions). Exactness of
 `T` makes `T(M) ⟶ T(I)` a resolution, although its terms need not be injective. The hypothesis

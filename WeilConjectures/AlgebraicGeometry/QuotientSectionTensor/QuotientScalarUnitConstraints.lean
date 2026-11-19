@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarTen
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarDerivedTensorIdentification
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # The regular scalar unit and the derived tensor constraints -/
+/-! # The regular scalar unit and the derived tensor constraints
+
+## References
+
+* Stacks 03EL and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -67,9 +72,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 open ModuleRingedComparison
 
-/-- The regular scalar unit is invertible, by K-flat computation in degree zero.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-sfb-quotient-scalar-unit-constraints). -/
+/-- The regular scalar unit is invertible, by K-flat computation in degree zero. -/
 theorem scalar_regular_unit_isIso (T : Scheme.{u}) :
     IsIso (scalarRegularUnit a T) := by
   let := scalarModuleClosed Λ T
@@ -112,14 +115,7 @@ private theorem derivedTensor_map_id_right (T : Scheme.{u})
   change (f ▷ W) ≫ (V ◁ 𝟙 W) = f ▷ W
   rw [whiskerLeft_id, Category.comp_id]
 
-/-- The normalized tensorator preserves the actual regular scalar unit and constraints.
-Source: Stacks 03EL and 07A4; step 4 of the parent proof.
-(blueprint: lem-sfb-quotient-scalar-unit-constraints).
-Proof: the regular module in degree zero is K-flat, so its computation counit
-and the localization of ordinary scalar multiplication are invertible. The generic
-derived oplax monoidal structure has precisely this unit and tensorator. Its
-associativity and two unit laws give the three constraint equations. Uniqueness
-of the normalized tensorator transfers them to the given b. -/
+/-- The normalized tensorator preserves the actual regular scalar unit and constraints. -/
 theorem scalar_unit_constraints (T : Scheme.{u}) (b : TensorIso a T)
     (hb : TensorNormalized a T b) : UnitCondition a T b := by
   have hbc := normalized_tensor_eq_canonical a T b hb

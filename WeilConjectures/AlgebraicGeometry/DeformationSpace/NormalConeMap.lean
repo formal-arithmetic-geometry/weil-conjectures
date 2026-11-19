@@ -17,9 +17,9 @@ The maps of associated graded algebras `gr_I 𝒪_X ⟶ h_* gr_J 𝒪_{X'}` indu
 cones `N_J X' ⟶ N_I X`, the special fibre of the morphism `D_J X' ⟶ D_I X` of deformation spaces.
 
 The augmentation `gr_I 𝒪_X ⟶ 𝒪_X / I` defines the zero section `V(I) ⟶ N_I X`, a closed immersion.
-Blueprint `det-tf-cone-zero-sections` (2) (Varshavsky, *Lefschetz–Verdier trace formula and a
-generalization of a theorem of Fujiwara*): if moreover `(h^* I)^n ⊆ J^{n+1}` for some `n ≥ 1`, then
-the morphism of normal cones lands set-theoretically in the zero section, since the irrelevant
+Blueprint `lemma-normal-cones-contracting-ideals` (2) (Varshavsky, *Lefschetz–Verdier trace formula
+and a generalization of a theorem of Fujiwara*): if moreover `(h^* I)^n ⊆ J^{n+1}` for some `n ≥ 1`,
+then the morphism of normal cones lands set-theoretically in the zero section, since the irrelevant
 ideal of `gr_I` is mapped to nilpotent elements of `gr_J`.
 
 ## Main definitions
@@ -34,10 +34,10 @@ ideal of `gr_I` is mapped to nilpotent elements of `gr_J`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.normalConeMap_normalConeToDeformationSpace`: the morphism
   of normal cones is the restriction of the morphism of deformation spaces.
 - `AlgebraicGeometry.Scheme.IdealSheafData.range_normalConeMap_subset_range_normalConeZeroSection`:
-  blueprint `det-tf-cone-zero-sections` (2).
+  blueprint `lemma-normal-cones-contracting-ideals` (2).
 - `AlgebraicGeometry.Scheme.IdealSheafData.preimage_range_normalConeZeroSection`: blueprint
-  `det-tf-cone-zero-sections` (1), set-theoretically: if `J = h^* I · 𝒪_{X'}`, the preimage of the
-  zero section of `N_I X` is the zero section of `N_J X'`.
+  `lemma-normal-cones-contracting-ideals` (1), set-theoretically: if `J = h^* I · 𝒪_{X'}`, the
+  preimage of the zero section of `N_I X` is the zero section of `N_J X'`.
 - Over a locally noetherian `X`, the deformation space and the normal cone are locally of finite
   type over `X` (they are affine, hence quasi-compact and separated, over `X` in general).
 -/
@@ -259,10 +259,10 @@ lemma normalConeZeroSection_normalConeMap :
     rw [AddMonoidAlgebra.coeff_mapRingHom]
     rfl).symm
 
-/-- **Blueprint `det-tf-cone-zero-sections` (2).** Let `h : X' ⟶ X` and ideal sheaves `I`, `J` with
-`L = h^* I ⊆ J` and `L^n ⊆ J^{n+1}` for some `n ≥ 1` (on all pairs of affine opens `U' ⊆ h⁻¹ U`).
-Then the morphism of normal cones `N_J X' ⟶ N_I X` lands set-theoretically in the zero section
-`V(I) ⟶ N_I X`. -/
+/-- **Blueprint `lemma-normal-cones-contracting-ideals` (2).** Let `h : X' ⟶ X` and ideal sheaves
+`I`, `J` with `L = h^* I ⊆ J` and `L^n ⊆ J^{n+1}` for some `n ≥ 1` (on all pairs of affine opens
+`U' ⊆ h⁻¹ U`). Then the morphism of normal cones `N_J X' ⟶ N_I X` lands set-theoretically in the
+zero section `V(I) ⟶ N_I X`. -/
 theorem range_normalConeMap_subset_range_normalConeZeroSection {n : ℕ} (hn : 0 < n)
     (hJn : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
       (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ^ n ≤ J.siteIdeal U' ^ (n + 1)) :
@@ -307,9 +307,9 @@ lemma ker_le_of_ι_mem_range_normalConeZeroSection {X : Scheme.{u}} (I : X.Ideal
   rw [range_comap_of_surjective _ _ (I.surjective_normalConeToQuotient_app _)] at hz'
   exact hz'
 
-/-- **Blueprint `det-tf-cone-zero-sections` (1).** If `J = h^* I · 𝒪_{X'}` (on all pairs of affine
-opens `U' ⊆ h⁻¹ U`), then the preimage of the zero section of `N_I X` under the morphism of normal
-cones `N_J X' ⟶ N_I X` is, set-theoretically, the zero section of `N_J X'`. -/
+/-- **Blueprint `lemma-normal-cones-contracting-ideals` (1).** If `J = h^* I · 𝒪_{X'}` (on all pairs
+of affine opens `U' ⊆ h⁻¹ U`), then the preimage of the zero section of `N_I X` under the morphism
+of normal cones `N_J X' ⟶ N_I X` is, set-theoretically, the zero section of `N_J X'`. -/
 theorem preimage_range_normalConeZeroSection
     (hJeq : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
       (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom = J.siteIdeal U') :

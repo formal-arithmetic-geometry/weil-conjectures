@@ -83,7 +83,10 @@ private theorem openBaseChange_transport
     · simp [eV, q, openBaseChangeIso, openBaseChangeInclusion,
         Category.assoc, morphismRestrict_ι]
     · simp [eV, q, openBaseChangeIso, openBaseChangeInclusion, Category.assoc]
-  obtain ⟨_, _, _, comp, _⟩ := exists_derivedPullbackComposition.{u, w}
+  let comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
+    (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))).choose
   obtain ⟨comparison⟩ := hcomp
   refine ⟨(derivedPullback eU.hom).obj B,
     derivedPullback_preserve_perfect eU.hom B hB, ⟨?_⟩⟩
@@ -97,8 +100,6 @@ private theorem openBaseChange_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Elaborating the dependent stage objects and their composed comparison needs more heartbeats.
 /-- Descent on one original open supplies models on its inverse image at every later stage.
 Source: Stacks Project, Tag 09RF, choice and subsequent base change of each local model.
 (blueprint: lem-pc-perfect-descent-open-eventual-model).
@@ -153,7 +154,12 @@ theorem perfect_descent_open_eventual_model
     derivedPullback_preserve_perfect q E hE
   have dr := dW O.toScheme r hr
   dsimp only [r] at dr
-  obtain ⟨j, hij, Ej, hEj, ⟨eEj⟩⟩ := dr Eo hEo
+  have descent := dr Eo hEo
+  let j := descent.choose
+  have hij : i ≤ j := descent.choose_spec.choose
+  let Ej := descent.choose_spec.choose_spec.choose
+  have hEj := descent.choose_spec.choose_spec.choose_spec.1
+  let eEj := descent.choose_spec.choose_spec.choose_spec.2.some
   refine ⟨j, hij, ?_⟩
   intro k hjk
   let Tj : Over (Spec (R.obj i)) := Over.mk (Spec.map (R.map (homOfLE hij)))
@@ -178,7 +184,10 @@ theorem perfect_descent_open_eventual_model
   let B := (derivedPullback a).obj Ej
   have hB : (pullback (O.ι ≫ t) Tk.hom).IsPerfect B :=
     derivedPullback_preserve_perfect a Ej hEj
-  obtain ⟨_, _, _, comp, _⟩ := exists_derivedPullbackComposition.{u, w}
+  let comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
+    (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))).choose
   have hm : baseChangeMap (O.ι ≫ t) βk ≫ a = baseChangeMap (O.ι ≫ t) βj := by
     rw [← baseChangeMap_comp, hβα]
   have hcomp : Nonempty ((derivedPullback (baseChangeMap (O.ι ≫ t) βk)).obj B ≅

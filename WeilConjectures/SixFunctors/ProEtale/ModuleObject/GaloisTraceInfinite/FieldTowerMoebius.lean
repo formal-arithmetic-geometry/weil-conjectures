@@ -186,9 +186,11 @@ theorem exists_galoisTowerMoebiusDecomposition :
     AlgEquiv.restrictNormalHom_surjective (F := L) (K₁ := k) Ω a
   obtain ⟨π, hπdef⟩ : ∃ π : ∀ n, FiniteGaloisIntermediateField L Ω →
       End ((infFunctor Λ (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).obj
-        (K.X n)), ∀ n k, π n k = 𝒫[K.X n, hc n, k] := ⟨_, fun _ _ ↦ rfl⟩
+        (K.X n)), ∀ n k, (π n k).asHom = 𝒫[K.X n, hc n, k] :=
+    ⟨fun n k ↦ End.of 𝒫[K.X n, hc n, k], fun _ _ ↦ rfl⟩
   have hπ : ∀ n x y, π n x * π n y = π n (x ⊓ y) := fun n x y ↦ by
-    rw [End.mul_def, inf_comm, hπdef, hπdef, hπdef]
+    apply End.ext
+    rw [End.mul_asHom, inf_comm, hπdef, hπdef, hπdef]
     exact galoisTower_proj_comp_proj h Λ hd (hc n) y x
   obtain ⟨e, he⟩ : ∃ e : ∀ n, FiniteGaloisIntermediateField L Ω →
       End ((infFunctor Λ (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).obj
@@ -196,7 +198,7 @@ theorem exists_galoisTowerMoebiusDecomposition :
   refine ⟨{ ι := FiniteGaloisIntermediateField L Ω
             i₀ := ⊥
             F := fun j ↦ Finset.Iic j
-            e := fun k n ↦ e n k
+            e := fun k n ↦ (e n k).asHom
             comm := fun k n m ↦ ?_
             e_i₀ := fun n ↦ ?_
             A := fun k ↦ Fin (Fintype.card (k ≃ₐ[L] k))
@@ -210,29 +212,34 @@ theorem exists_galoisTowerMoebiusDecomposition :
             sum_comp_infAction := fun k hk n ↦ ?_
             infTransport_comp_eq_zero := fun j n k hk ↦ ?_
             infTransport_comp_sum := fun j n ↦ ?_ }, fun _ _ ↦ ⟨_, rfl⟩⟩
-  · have h₁ : e n k ≫ (infFunctor Λ _).map (K.d n m) =
-        ∑ x ∈ Finset.Iic k, mu ℤ x k • (π n x ≫ (infFunctor Λ _).map (K.d n m)) := by
+  · have h₁ : (e n k).asHom ≫ (infFunctor Λ _).map (K.d n m) =
+        ∑ x ∈ Finset.Iic k, mu ℤ x k • ((π n x).asHom ≫
+          (infFunctor Λ _).map (K.d n m)) := by
       rw [he]
-      exact map_moebiusComponent (Preadditive.rightComp ((infFunctor Λ _).obj (K.X n))
-        ((infFunctor Λ _).map (K.d n m))) (π n) k
-    have h₂ : (infFunctor Λ _).map (K.d n m) ≫ e m k =
-        ∑ x ∈ Finset.Iic k, mu ℤ x k • ((infFunctor Λ _).map (K.d n m) ≫ π m x) := by
+      exact map_moebiusComponent ((Preadditive.rightComp ((infFunctor Λ _).obj (K.X n))
+        ((infFunctor Λ _).map (K.d n m))).comp End.addEquiv.toAddMonoidHom) (π n) k
+    have h₂ : (infFunctor Λ _).map (K.d n m) ≫ (e m k).asHom =
+        ∑ x ∈ Finset.Iic k, mu ℤ x k • ((infFunctor Λ _).map (K.d n m) ≫
+          (π m x).asHom) := by
       rw [he]
-      exact map_moebiusComponent (Preadditive.leftComp ((infFunctor Λ _).obj (K.X m))
-        ((infFunctor Λ _).map (K.d n m))) (π m) k
+      exact map_moebiusComponent ((Preadditive.leftComp ((infFunctor Λ _).obj (K.X m))
+        ((infFunctor Λ _).map (K.d n m))).comp End.addEquiv.toAddMonoidHom) (π m) k
     rw [h₁, h₂]
     refine Finset.sum_congr rfl fun x _ ↦ ?_
     rw [hπdef, hπdef, galoisTower_proj_naturality]
-  · change e n ⊥ = _
+  · change (e n ⊥).asHom = _
     rw [he, moebiusComponent_bot, hπdef]
     exact galoisTower_proj_bot h Λ hd (hc n)
-  · have h₁ : e n k ≫ π n k = e n k := by
+  · have h₁ : (e n k).asHom ≫ (π n k).asHom = (e n k).asHom := by
       rw [he]
-      exact (mul_moebiusComponent (hπ n) k k).trans (ite_eq_left le_rfl)
-    have h₂ : e n k ≫ π n ⊥ = 0 := by
+      simpa only [End.mul_asHom] using congrArg End.asHom
+        ((mul_moebiusComponent (hπ n) k k).trans (ite_eq_left le_rfl))
+    have h₂ : (e n k).asHom ≫ (π n ⊥).asHom = 0 := by
       rw [he]
-      exact (mul_moebiusComponent (hπ n) k ⊥).trans (ite_eq_right fun hle ↦ hk (le_bot_iff.1 hle))
-    change ∑ i, e n k ≫ _ = 0
+      simpa only [End.mul_asHom, End.zero_asHom] using congrArg End.asHom
+        ((mul_moebiusComponent (hπ n) k ⊥).trans
+          (ite_eq_right fun hle ↦ hk (le_bot_iff.1 hle)))
+    change ∑ i, (e n k).asHom ≫ _ = 0
     rw [← comp_sum, ← h₁, assoc, hπdef,
       Fintype.sum_equiv (Fintype.equivFin _).symm _ (fun a ↦ infAction Λ (K.X n)
         (pullbackAction h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
@@ -240,17 +247,20 @@ theorem exists_galoisTowerMoebiusDecomposition :
         (pullbackAction_fst h _ specGaloisAction_comp (c k a))) fun _ ↦ rfl,
       galoisTower_proj_comp_sum_infAction h Λ hd (hc n) k (c k) (hcl k), comp_nsmul, ← hπdef,
       h₂, nsmul_zero]
-  · have h₀ : π n j ≫ e n k = 0 := by
+  · have h₀ : (π n j).asHom ≫ (e n k).asHom = 0 := by
       rw [he]
-      exact (moebiusComponent_mul (hπ n) k j).trans
-        (ite_eq_right fun hle ↦ hk (Finset.mem_Iic.2 hle))
-    change _ ≫ e n k = 0
+      simpa only [End.mul_asHom, End.zero_asHom] using congrArg End.asHom
+        ((moebiusComponent_mul (hπ n) k j).trans
+          (ite_eq_right fun hle ↦ hk (Finset.mem_Iic.2 hle)))
+    change _ ≫ (e n k).asHom = 0
     rw [← galoisTower_infTransport_comp_proj_self h Λ hd (hc n) j, ← hπdef, assoc, h₀,
       comp_zero]
   · have hs : ∑ k ∈ Finset.Iic (α := FiniteGaloisIntermediateField L Ω) j, e n k = π n j := by
       simp only [he]
       exact sum_Iic_moebiusComponent (π n) j
-    refine (congrArg ((galoisTower Ω h).infTransport Λ (K.X n) j ≫ ·) hs).trans ?_
+    have hs' := congrArg End.asHom hs
+    simp only [End.sum_asHom] at hs'
+    refine (congrArg ((galoisTower Ω h).infTransport Λ (K.X n) j ≫ ·) hs').trans ?_
     rw [hπdef, galoisTower_infTransport_comp_proj_self]
 
 end AlgebraicGeometry.ProEtale

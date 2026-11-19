@@ -40,8 +40,8 @@ lemma curry_hom {A X Y : Q.FullSubcategory} (f : A ⊗ X ⟶ Y) :
 /-- The comparison maps `G [A, B] ⟶ [G A, G B]` of the restriction `G = Q.lift (P.ι ⋙ F) hF`
 of a strong monoidal functor `F` to full monoidal closed subcategories are those of `F`. -/
 lemma ihomComparison_monoidalLift_app_hom (A B : P.FullSubcategory) :
-    ((ihomComparison (Q.lift (P.ι ⋙ F) hF) A).natTrans.app B).hom =
-      (ihomComparison F A.obj).natTrans.app B.obj := by
+    ((ihomComparison (Q.lift (P.ι ⋙ F) hF) A).app B).hom =
+      (ihomComparison F A.obj).app B.obj := by
   rw [ihomComparison_app_eq_curry, ihomComparison_app_eq_curry, curry_hom]
   rfl
 
@@ -49,8 +49,8 @@ lemma ihomComparison_monoidalLift_app_hom (A B : P.FullSubcategory) :
 `F` to full monoidal closed subcategories are isomorphisms if those of `F` are. -/
 lemma isIso_ihomComparison_monoidalLift (A : P.FullSubcategory)
     (h : ∀ B : P.FullSubcategory,
-      IsIso ((ihomComparison F A.obj).natTrans.app B.obj)) :
-    IsIso (ihomComparison (Q.lift (P.ι ⋙ F) hF) A).natTrans := by
+      IsIso ((ihomComparison F A.obj).app B.obj)) :
+    IsIso (ihomComparison (Q.lift (P.ι ⋙ F) hF) A) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro B
   rw [← isIso_iff_of_reflects_iso _ Q.ι]

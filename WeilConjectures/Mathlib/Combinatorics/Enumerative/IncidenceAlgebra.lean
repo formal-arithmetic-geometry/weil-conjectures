@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Module.BigOperators
 public import Mathlib.Combinatorics.Enumerative.IncidenceAlgebra
 
 /-!

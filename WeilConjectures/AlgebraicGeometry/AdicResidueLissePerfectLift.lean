@@ -214,7 +214,7 @@ commutes with the limit sectionwise. Thus $(g_n)$ lifts to a class in $H^0(W,H)$
 $g_1$, an isomorphism. This constructs the compatible map; it does not take a nonfunctorial
 limit of independently chosen isomorphisms.
 Uses: lem-sfb-wcontractible-constant-reductions-ml, lem-weil-pbc-ml-sets-tower-limit-nonempty,
-det-pe-milnor-sequence, lem-weil-proetale-countable-products-exact,
+proposition-milnor-sequence--2, lem-weil-proetale-countable-products-exact,
 lem-weil-derived-countable-products-core, lem-weil-pbc-ringed-strict-tower-homotopy-limit,
 lem-weil-pbc-proetale-weakly-contractible-evaluation-exact.
 8. Let $Q=\operatorname{Cone}(g)$. Local completeness is closed under cones: the

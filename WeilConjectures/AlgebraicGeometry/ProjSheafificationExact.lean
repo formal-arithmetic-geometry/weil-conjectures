@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 # Exactness of associated sheaves on the projective line
 
 Source: Stacks Project, Constructions, Lemma 01M7, final paragraph; the sheafifying
-clause of blueprint `lem-sc-p1-graded-resolution`.
+clause of blueprint `theorem-riemann-roch-coherent-serre-duality`.
 (blueprint: lem-sc-p1-proj-sheafification-exact)
 
 `P = Proj k[x₀,x₁]` is `Proj (homogeneousSubmodule (Fin 2) k)` with the standard

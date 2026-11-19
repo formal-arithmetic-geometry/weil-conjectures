@@ -175,7 +175,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
 normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 prop-pod-dual-tate-data-compatibility Steps 1, 2, 4 and 5.
+main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation).
 
 Finite inputs are unbounded. Integral inputs have exactly the recorded
@@ -219,7 +219,7 @@ with actual system evaluation and transposition. The signed shift, composition,
 completion-unit, reduction and argument-first clauses are the companion
 statements in this module, all listed in the owning node's declaration record.
 Source: Stacks 0GMX and the agent-formulated derived/completed enhancement in
-main-20261015 prop-pod-dual-tate-data-compatibility Steps 1, 2, 4 and 5.
+main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation).
 
 Proof, following the node's complete sixteen-step construction:
@@ -245,7 +245,7 @@ descends to the derived categories with the specified shift comparison. The term
 counit still give inverse derived equivalences. At finite coefficients this derived functor is
 exactly $P=Lg^*$ in the question.
 Uses: def-pur-kinjective-complex, def-pc-kflat-complex,
-lem-pur-isomorphism-inverse-image-tensor-hom, lem-weil-pbc-exact-functor-derived-factorization.
+lem-pur-isomorphism-inverse-image-tensor-hom, situation-conventions.
 
 3. For finite coefficients, and separately in the ambient completed-ring module category, choose
 a representative $K$ of $M$ and a K-injective representative $I$ of $N$. In Hom degree $r$ the
@@ -285,7 +285,7 @@ $H(M[a],N[b])$ reindex the factors and multiply by the usual signs coming from $
 d_K$. Step 3 applies $F$ to the same factors and the same integer signs, so its square with each
 of these identifications commutes as a square of complexes. It therefore commutes in the derived
 category. This checks shifts in both Hom inputs, rather than only a shift of the output.
-Uses: lem-weil-pbc-exact-functor-derived-factorization, def-pur-hom-complex.
+Uses: situation-conventions, def-pur-hom-complex.
 
 7. For a second scheme isomorphism $h:Z\to X$, identify $P_{gh}$ with $P_hP_g$ by the canonical
 derived pullback-composition map. The two candidate internal-Hom comparisons become equal after
@@ -308,7 +308,7 @@ $F(u_K)$ gives the claimed natural identification $FK\cong Lg^*K$, with all its 
 projections fixed.
 Uses: lem-weil-finite-free-completed-scalar-comparison,
 lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-coef-derived-system-evaluation-calculus,
-def-weil-derived-pullback-tensor-hom.
+prose-03-02.
 
 9. The same calculation applied to the actual strict tensor-reduction complexes identifies
 $F(M\widehat\otimes^L N)$ with $FM\widehat\otimes^L FN$. On a flat-term K-flat model it
@@ -378,7 +378,7 @@ by $\lambda_i\nu_j$; similarly the transpose identity is linear in its input. Th
 identities and shift/composition identities localize as well. This proves the assertion for
 arbitrary rational morphisms, rather than just arrows which are integral. These are exactly the
 localized operations specified in the question.
-Uses: def-weil-rationalization-karoubi, def-weil-derived-pullback-tensor-hom.
+Uses: def-weil-rationalization-karoubi, prose-03-02.
 
 15. For a finite coefficient extension $E\subset L$, its completed coefficient sheaf is finite
 free over the original completed coefficient sheaf, and ordinary scalar extension agrees
@@ -404,7 +404,7 @@ and images under $c$ agree there, hence define equal classes. Evaluation, transp
 inverses, composition and shifts can each be checked at that common field using Steps 11 and 14;
 their classes have the required identities. This is precisely the common-stage operation
 construction, and completes all coefficient stages.
-Uses: def-weil-algebraically-closed-coefficients, def-weil-derived-pullback-tensor-hom.
+Uses: def-weil-algebraically-closed-coefficients, prose-03-02.
 -/
 theorem derivedAutomorphismHomEvaluation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

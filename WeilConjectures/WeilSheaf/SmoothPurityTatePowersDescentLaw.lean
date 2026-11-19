@@ -27,17 +27,17 @@ lemma purity_upperStarTateTwistNatIso_geometricFiber
     [NeZero (ℓ : k)] [NeZero (ℓ : AlgebraicClosure k)]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) (d : ℕ) :
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-        a.geometricGaloisFrobenius.hom).map
+        a.geometricGaloisFrobenius.asIso.hom).map
           (upperStarTateTwistNatIso ℓ a.geometricFiberProj a d).hom ≫
-        (upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
+        (upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.asIso.hom
           a.geometricFiberToAlgebraicClosure d).hom =
       (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app
           (tateTwistNat X ℓ d) ≫
         (upperStarTateTwistNatIso ℓ a.geometricFiberProj a d).hom := by
   have h := purity_upperStarTateTwistNatIso_factor ℓ a.geometricFiberProj
-    a.geometricGaloisFrobenius.hom
+    a.geometricGaloisFrobenius.asIso.hom
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj a d
-  rw [purity_upperStarTateTwistNatIso_independent_base ℓ a.geometricGaloisFrobenius.hom
+  rw [purity_upperStarTateTwistNatIso_independent_base ℓ a.geometricGaloisFrobenius.asIso.hom
     (a.geometricFiberProj ≫ a) a.geometricFiberToAlgebraicClosure d,
     ← purity_geometricFiberProjUpperStarFrobeniusIso_eq (Profinite.padicAlgClRingObj ℓ) a] at h
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢

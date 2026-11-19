@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- For finite coefficients, proper étale derived direct image has a right adjoint.
 Source: SGA 4, Exp. XVIII, Theorem 3.1.4; Stacks Project, Tag 0F5Y.
-This is the finite-level step in the proof of `lem-sfb-dc-proper-pushforward-left-adjoint-oe`
+This is the finite-level step in the proof of `theorem-exceptional-inverse-image--15`
 (auxiliary; not a blueprint node).
 
 Proof in words: on each quasi-compact open of the base, a proper morphism is of

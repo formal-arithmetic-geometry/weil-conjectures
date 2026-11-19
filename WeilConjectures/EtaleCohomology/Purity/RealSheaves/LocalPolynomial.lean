@@ -16,7 +16,7 @@ representation `(V, ρ)` under the lisse sheaf–representation equivalence
 (`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`). The local characteristic factor
 `P_x(ℱ, T) = det (1 - T F_x ∣ ℱ_x̄)` at a closed point `x` is `det (1 - T ρ(g) ∣ V)` for every
 member `g` of the Frobenius conjugacy class of `x` in the Weil group (blueprint
-`p-real-operations`).
+`situation-weil`).
 
 ## Main statements
 
@@ -39,7 +39,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-/-- Blueprint `p-real-operations`: Local Frobenius polynomials.
+/-- Blueprint `situation-weil`: Local Frobenius polynomials.
 
 Under the lisse sheaf–representation equivalence `ℱ ↦ (V, ρ)` of
 `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`, the local characteristic factor
@@ -97,7 +97,7 @@ theorem localPolynomial_stalk_eq_charpolyRev_of_equiv
 
 variable (W l)
 
-/-- Blueprint `p-real-operations` (subsection `p-real-operations`): Local Frobenius polynomials
+/-- Blueprint `situation-weil` (subsection `situation-weil`): Local Frobenius polynomials
 of the operations.
 
 Under the lisse sheaf–representation equivalence `ℱ ↦ (V, ρ)` of

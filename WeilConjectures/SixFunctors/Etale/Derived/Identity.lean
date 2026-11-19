@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 
 The derived lower shriek and the exceptional inverse image along the identity of a scheme `S`
 are the identity functors, `R(𝟙_S)_! ≅ 𝟭` and `R(𝟙_S)^! ≅ 𝟭`, and the dualizing complex of the
-identity is the unit (blueprint `lem-sf-point`).
+identity is the unit (blueprint `theorem-global-verdier-duality`).
 
 ## Main definitions
 
@@ -50,10 +50,10 @@ section Point
 
 variable (S : Scheme.{u})
 
-/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the derived lower shriek along
-the identity of `S` is the identity, `R(𝟙_S)_! ≅ 𝟭`. The identity is proper, so `R(𝟙_S)_!` is
-`R(𝟙_S)_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and
-`(𝟙_S)_* ≅ 𝟭`. -/
+/-- Blueprint `theorem-global-verdier-duality` (the dualizing complex of the base): the derived
+lower shriek along the identity of `S` is the identity, `R(𝟙_S)_! ≅ 𝟭`. The identity is proper, so
+`R(𝟙_S)_!` is `R(𝟙_S)_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and `(𝟙_S)_* ≅ 𝟭`. -/
 noncomputable def rightDerivedLowerShriekIdIso : R(𝟙 S)_![A] ≅ 𝟭 _ :=
   rightDerivedLowerShriekIsoRightDerivedLowerStar A (𝟙 S) ≪≫
     Functor.rightDerivedFunctorNatIso (lowerStarId A S) ≪≫
@@ -64,15 +64,15 @@ the identity (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIdIso`). -/
 instance isLeftAdjoint_rightDerivedLowerShriek_id : (R(𝟙 S)_![A]).IsLeftAdjoint :=
   ⟨_, ⟨Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm⟩⟩
 
-/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the exceptional inverse image
-along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to
+/-- Blueprint `theorem-global-verdier-duality` (the dualizing complex of the base): the exceptional
+inverse image along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to
 `R(𝟙_S)_! ≅ 𝟭`. -/
 noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![Λ] ≅ 𝟭 _ :=
   (rightDerivedUpperShriekAdjunction Λ (𝟙 S)).rightAdjointUniq
     (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) S).symm)
 
-/-- Blueprint `lem-sf-point`: for the structure morphism `a_s = 𝟙_s` of the base, the dualizing
-complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
+/-- Blueprint `theorem-global-verdier-duality`: for the structure morphism `a_s = 𝟙_s` of the base,
+the dualizing complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
 noncomputable def dualizingComplexIdIso : dualizingComplex Λ (𝟙 S) ≅ 𝟙_ _ :=
   (rightDerivedUpperShriekIdIso Λ S).app _
 

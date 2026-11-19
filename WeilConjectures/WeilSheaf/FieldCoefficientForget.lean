@@ -106,7 +106,7 @@ is triangulated. -/
 instance toWeilComplex_isTriangulated : (toWeilComplex (l := l) k₀ X).IsTriangulated :=
   StageSystem.descFunctor_isTriangulated _ _ _
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the exact forgetful functor
+/-- Blueprint `definition-weil-structure`: the exact forgetful functor
 `For : D^b_{c,W}(X, ℚ̄_ℓ) ⥤ D^b_c(X̄, ℚ̄_ℓ)` of the `2`-colimit model, `(E, K) ↦ For(ℚ̄_ℓ ⊗_E K)`,
 with values in `D^b_c(X̄, ℚ̄_ℓ)`; followed by the inclusion of `D^b_c(X̄, ℚ̄_ℓ)` it is
 `AlgebraicGeometry.WeilComplexTwoColimit.forget`. -/
@@ -125,7 +125,7 @@ noncomputable instance : (forgetBoundedConstructibleAdic (l := l) k₀ X).CommSh
   dsimp only [forgetBoundedConstructibleAdic]
   infer_instance
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the forgetful functor
+/-- Blueprint `definition-weil-structure`: the forgetful functor
 `For : D^b_{c,W}(X, ℚ̄_ℓ) ⥤ D^b_c(X̄, ℚ̄_ℓ)` is exact. -/
 instance forgetBoundedConstructibleAdic_isTriangulated :
     (forgetBoundedConstructibleAdic (l := l) k₀ X).IsTriangulated := by

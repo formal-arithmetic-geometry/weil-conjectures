@@ -204,7 +204,7 @@ noncomputable def weilHomComparisonApp (K L : Dᵇc(X.left)⟦Profinite.padicAlg
 monoidal functor `Φ` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`). -/
 lemma weilHomComparisonApp_eq (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     weilHomComparisonApp ℓ e K L =
-      (Functor.LaxMonoidal.ihomComparison (weilFrobenius ℓ e) K).natTrans.app L := by
+      (Functor.LaxMonoidal.ihomComparison (weilFrobenius ℓ e) K).app L := by
   rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry, weilHomComparisonApp,
     weilTensorComparison_inv_app]
   rfl
@@ -220,7 +220,7 @@ lemma weilHomComparisonApp_naturality {K K' L L' : Dᵇc(X.left)⟦Profinite.pad
             ((weilFrobenius ℓ e).obj L) ≫
           ((weilRHom ℓ).obj (Opposite.op ((weilFrobenius ℓ e).obj K'))).map
             ((weilFrobenius ℓ e).map ψ)) := by
-  have h₁ := (Functor.LaxMonoidal.ihomComparison (weilFrobenius ℓ e) K').natTrans.naturality ψ
+  have h₁ := (Functor.LaxMonoidal.ihomComparison (weilFrobenius ℓ e) K').naturality ψ
   have h₂ := Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app (weilFrobenius ℓ e) φ L
   simp only [weilHomComparisonApp_eq, Functor.map_comp, Category.assoc]
   erw [h₁, reassoc_of% h₂]

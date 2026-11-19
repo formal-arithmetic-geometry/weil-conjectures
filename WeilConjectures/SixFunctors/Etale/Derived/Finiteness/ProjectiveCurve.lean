@@ -22,15 +22,15 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 Let `f : X ⟶ S` be a projective morphism of finite-type schemes over a field whose geometric
 fibres have dimension at most one. The higher direct images `Rᵠf_* M` of a constant sheaf with
 finite value `M` of order invertible on `S` are constructible. This is the curve case of the
-constructibility of proper direct images (`thm-fin-projective-line-constructible`).
+constructibility of proper direct images (`proposition-proper-direct-image-finite-coefficients`).
 
 The case of a smooth projective family of curves comes first: there the stalks of `Rᵠf_* 𝔽_ℓ`
 are the cohomology groups of the geometric fibres, whose cardinalities `ℓ^c`, `ℓ^{2g}`, `ℓ^c`
 are constructible functions of the base point by coherent base change
-(`lem-fin-projective-curve-betti-cardinalities`, `thm-fin-projective-smooth-curve-finiteness`).
+(`proposition-proper-direct-image-finite-coefficients`).
 The general case is reduced to it by a generic curve model
-(`lem-fin-generic-curve-model`), Noetherian induction and a filtration of `M`
-(`thm-fin-projective-curve-constant`, `cor-fin-projective-curve-finite-group`).
+(`proposition-proper-direct-image-finite-coefficients`), Noetherian induction and a filtration of
+`M` (`proposition-proper-direct-image-finite-coefficients`).
 
 ## Main statements
 
@@ -84,7 +84,7 @@ lemma isUnit_natCast_of_hasInvertibleExponent_zmod (ℓ : ℕ)
   rw [Nat.cast_mul] at hu
   exact isUnit_of_mul_isUnit_left hu
 
-/-- Blueprint `lem-fin-projective-curve-betti-cardinalities`: Betti cardinalities in a smooth
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Betti cardinalities in a smooth
 projective curve family.
 
 Let `S` be Noetherian, `f : X ⟶ S` smooth of relative dimension one and projective
@@ -114,8 +114,8 @@ theorem natCard_sheafH_constantZMod_geometricFibre [IsNoetherian S] (f : X ⟶ S
     ((Set.range g).Finite ∧ ∀ m : ℕ, Topology.IsConstructible (g ⁻¹' {m})) := by
   exact natCard_sheafH_constantZMod_geometricFibre_of_smooth f i hi ℓ hℓ
 
-/-- Blueprint `thm-fin-projective-smooth-curve-finiteness`: Constant-coefficient finiteness for
-projective smooth curves.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constant-coefficient finiteness
+for projective smooth curves.
 
 Let `S` be Noetherian, `f : X ⟶ S` projective and smooth of relative dimension one, and `ℓ` a
 prime invertible on `S`. Every higher direct image `Rʳf_* 𝔽_ℓ` is constructible. -/
@@ -159,15 +159,16 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_smooth [IsNoether
 
 variable {k : Type u} [Field k]
 
-/-- The generic step of `thm-fin-projective-curve-constant`: over an integral base `T` of finite
-type over `k`, the higher direct images of `𝔽_ℓ` along a projective family of dimension at most
-one are constructible over a nonempty open `U` of `T`. A generic curve model
-(`lem-fin-generic-curve-model`) gives a finite surjection `p : S' ⟶ U` and a finite comparison
-`ν : ∐ₐ Yₐ ⟶ T₀` onto the reduction `T₀` of `X_{S'}`, isomorphic off a closed subscheme finite
-over `S'`. The direct images from the `Yₐ` are constructible (smooth curves, or finite
-morphisms), hence so are those from `T₀` (`lem-finrepair-constant-finite-comparison`) and from
-`X_{S'}`; they are the pullbacks along `p` of those over `U` (proper base change), which embed
-into their finite pushforwards along `p`. -/
+/-- The generic step of `proposition-proper-direct-image-finite-coefficients`: over an integral base
+`T` of finite type over `k`, the higher direct images of `𝔽_ℓ` along a projective family of
+dimension at most one are constructible over a nonempty open `U` of `T`. A generic curve model
+(`proposition-proper-direct-image-finite-coefficients`) gives a finite surjection `p : S' ⟶ U` and a
+finite comparison `ν : ∐ₐ Yₐ ⟶ T₀` onto the reduction `T₀` of `X_{S'}`, isomorphic off a closed
+subscheme finite over `S'`. The direct images from the `Yₐ` are constructible (smooth curves, or
+finite morphisms), hence so are those from `T₀`
+(`proposition-proper-direct-image-finite-coefficients`) and from `X_{S'}`; they are the pullbacks
+along `p` of those over `U` (proper base change), which embed into their finite pushforwards along
+`p`. -/
 theorem exists_isConstructibleSheaf_homology_rightDerivedLowerStar_zmod_of_isIntegral
     {T : Scheme.{u}} [IsIntegral T] (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT]
     [QuasiCompact aT] (f : X ⟶ T) {n : Type u} [Finite n] (i : X ⟶ ℙ(n; T))
@@ -284,8 +285,8 @@ theorem exists_isConstructibleSheaf_homology_rightDerivedLowerStar_zmod_of_isInt
   exact Scheme.IsConstructibleSheaf.of_mono
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) p).unit.app E)
 
-/-- Blueprint `thm-fin-projective-curve-constant`: Constant coefficients on projective families
-of dimension at most one.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constant coefficients on
+projective families of dimension at most one.
 
 Let `f : X ⟶ S` be projective (`f = π ∘ i` for a closed immersion `i : X ⟶ ℙ(n; S)`), with `S`
 of finite type over a field `k`, such that every geometric fibre `X ×_S Spec Ω` has dimension at
@@ -334,8 +335,8 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_zmod (aS : S ⟶ Spe
         (IsPullback.of_hasPullback f g) (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))) q).symm ≪≫
     ((upperStarComp _ U.ι g).app _).symm)
 
-/-- Blueprint `cor-fin-projective-curve-finite-group`: Finite constant groups on projective
-curve families.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Finite constant groups on
+projective curve families.
 
 Let `f : X ⟶ S` be projective, with `S` of finite type over a field `k`, such that every
 geometric fibre has dimension at most one. Let `Λ` be a finite ring whose exponent is invertible
@@ -344,7 +345,8 @@ on `S` and `M` a finite `Λ`-module. Every higher direct image `Rᵠf_* M` of th
 
 The blueprint states this for a finite abelian group `M` of order invertible on `S`, i.e. for
 `Λ = ℤ/N` with `N = |M|`; the statement for finite modules over a finite ring is what the
-constructibility of `Rπ_*` on `ℙ¹_S` (`thm-fin-projective-line-constructible`) consumes. -/
+constructibility of `Rπ_*` on `ℙ¹_S` (`proposition-proper-direct-image-finite-coefficients`)
+consumes. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) {n : Type u} [Finite n]

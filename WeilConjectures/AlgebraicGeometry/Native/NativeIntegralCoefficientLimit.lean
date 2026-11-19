@@ -87,9 +87,7 @@ import Mathlib.Topology.ContinuousMap.Compact
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 import Mathlib.CategoryTheory.Abelian.ShortExact
 
-/-! # The native uniformizer coefficient cone
-Source: integral coefficient comparison (blueprint: lem-twist-native-coefficient-limit).
--/
+/-! # The native uniformizer coefficient cone -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

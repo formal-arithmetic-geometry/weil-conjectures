@@ -33,7 +33,7 @@ Properness of `X₀` is deliberately *not* part of the datum: the duality statem
 formulated with compact supports and do not use it. It is imposed explicitly, as an
 `[IsProper …]` instance hypothesis, exactly where `Ra_{X!} ≅ Ra_{X*}` is needed.
 
-The blueprint (`sk-def-set`) imposes no admissibility on `a_X`. In Lean, `Ra_{X!}` and
+The blueprint (`prose-01-10`) imposes no admissibility on `a_X`. In Lean, `Ra_{X!}` and
 `Ra_X^!` are only constructed for morphisms admitting a compactification, so
 `AlgebraicGeometry.HasCompactification` is carried as an instance hypothesis by the statements
 that use them rather than as a field of the datum. For `a_X` this hypothesis is redundant
@@ -42,7 +42,7 @@ mathematically: `a_X` is separated of finite type over the quasi-compact quasi-s
 instance) provides a compactification once those properties of `a_X` are available as
 instances.
 
-The blueprint node `sk-def-set` fixes, besides the geometry, a *coefficient* datum
+The blueprint node `prose-01-10` fixes, besides the geometry, a *coefficient* datum
 `(ℓ, E, 𝒪_E, ϖ_E, Λ)` subject to `ℓ ≠ ring characteristic of k₀`. That half of the datum is
 not recorded here: the coefficient category is a type parameter of the six operations, and
 the constraint `ℓ ≠ p` is a hypothesis of the duality *theorems*, none of which is stated
@@ -65,7 +65,7 @@ namespace AlgebraicGeometry
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀]
 
-/-- Blueprint `sk-def-set`: The fixed setting.
+/-- Blueprint `prose-01-10`: The fixed setting.
 
 The geometric datum of the Poincaré duality chapter over the finite field `k₀`: a scheme `X₀`
 over `k₀` which is smooth of relative dimension `d`, separated of finite type and

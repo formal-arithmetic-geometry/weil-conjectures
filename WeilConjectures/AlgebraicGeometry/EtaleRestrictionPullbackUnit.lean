@@ -48,7 +48,7 @@ Proof (the node's five steps):
 5. Equate steps 3 and 4, cancel c_g,p', and compose with the two restriction
    comparisons. Evaluating at any section gives the assertion. Étaleness of p'
    follows from base-change stability and the isomorphism ι, as in
-   lem-weil-pbc-etale-base-change-finite-limits (1).
+   situation-conventions (1).
 
 The existential proof hp' records the conclusion that p' is étale before using
 it to type the restriction comparison. The equality of abelian-group homomorphisms

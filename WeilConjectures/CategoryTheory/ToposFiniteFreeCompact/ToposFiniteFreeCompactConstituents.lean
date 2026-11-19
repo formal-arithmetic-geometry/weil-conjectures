@@ -422,7 +422,7 @@ Source: Stacks 03CZ, 07A6
 def tensorPullbackInv {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     LA f ⋙ S T ⟶ S W ⋙ LB f :=
   ((mateEquiv (scalarAdj W) (scalarAdj T)).symm
-    (TwoSquare.mk _ _ _ _ (tau f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (tau f).hom))
 
 private theorem constant_map_unit (T : Site.{u, v, r}) {P Q : Type r}
     (f : P ⟶ Q) (V : T.Cᵒᵖ) (x : P) :
@@ -458,7 +458,6 @@ private theorem inverse_constant_hom_ext {T W : ScalarSite.{u, v, r, w} A B}
   simpa only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     ConcreteCategory.comp_apply, constant_map_unit W.toSite, TypeCat.ofHom_apply] using hx
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem inverse_coefficient_square {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) :
@@ -517,7 +516,7 @@ private theorem inverse_coefficient_square {T W : ScalarSite.{u, v, r, w} A B}
 private theorem ordinary_tensor_mate_isIso {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) :
     IsIso (((mateEquiv W.adj T.adj).symm
-      (TwoSquare.mk _ _ _ _ f.restriction.hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ f.restriction.hom))) := by
   let := f.leftExact
   obtain ⟨e, he⟩ := SheafOfModules.ScalarIndependent.exists_scalarInverseImageIndependent
     f.inverse f.direct f.geom f.liftA f.liftB
@@ -543,7 +542,7 @@ private theorem ordinary_tensor_mate_isIso {T W : ScalarSite.{u, v, r, w} A B}
     dsimp only [Functor.comp_map] at hn
     erw [reassoc_of% hn, he M, Iso.hom_inv_id_app_assoc]
   have hm : (((mateEquiv W.adj T.adj).symm
-      (TwoSquare.mk _ _ _ _ f.restriction.hom)).natTrans) = e.inv := by
+      (TwoSquare.mk _ _ _ _ f.restriction.hom))) = e.inv := by
     apply NatTrans.ext
     funext M
     apply (T.adj.homEquiv _ _).injective
@@ -581,7 +580,7 @@ def lambda {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
 Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
 def chi {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     RA f ⋙ S W ⟶ S T ⋙ RB f :=
-  (mateEquiv (adjA f) (adjB f) (TwoSquare.mk _ _ _ _ (lambda f).hom)).natTrans
+  (mateEquiv (adjA f) (adjB f) (TwoSquare.mk _ _ _ _ (lambda f).hom))
 
 /-- The canonical restriction/direct-image comparison, obtained from the underlying
 inverse-image identity by the geometric Hom bijections.
@@ -589,7 +588,7 @@ Source: Stacks 03D7, 07A6
 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
 def restrictionPushforward {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) : RB f ⋙ U W ⟶ U T ⋙ RA f :=
-  (mateEquiv (adjB f) (adjA f) (TwoSquare.mk _ _ _ _ (tau f).hom)).natTrans
+  (mateEquiv (adjB f) (adjA f) (TwoSquare.mk _ _ _ _ (tau f).hom))
 
 /-- Restriction commutes with the derived direct image by its canonical mate.
 Source: Stacks 03D7, 07A6, 0D6E
@@ -660,7 +659,7 @@ Source: Stacks 03DI, 0E8I (blueprint: lem-pur-topos-finite-free-compact-constitu
 def betaInv {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     S V ⋙ IB j ⟶ IA j ⋙ S T :=
   ((mateEquiv (openAdjA j) (openAdjB j)).symm
-    (TwoSquare.mk _ _ _ _ (lambda j.geometric).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (lambda j.geometric).inv))
 
 /-- The balancing mate is invertible, on unbounded inputs.
 Source: Stacks 03DI, 03DJ, 0E8I
@@ -692,7 +691,7 @@ Source: Stacks 03DI, 03CZ
 def restrictionOpen {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     U V ⋙ IA j ⟶ IB j ⋙ U T :=
   ((mateEquiv (openAdjB j) (openAdjA j)).symm
-    (TwoSquare.mk _ _ _ _ (tau j.geometric).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (tau j.geometric).inv))
 
 /-- The constant scalar section, obtained by the associated-sheaf unit.
 Source: Stacks 03CZ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
@@ -757,7 +756,7 @@ localization retains this adjoint equation and both inverse identities. -/
 theorem restrictionOpen_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (restrictionOpen j) := by
   let : IsIso ((mateEquiv j.adjB j.adjA).symm
-      (TwoSquare.mk _ _ _ _ j.geometric.restriction.symm.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ j.geometric.restriction.symm.hom)) := by
     dsimp only [Mod, res, coefficientMap, Iso.symm]
     exact ConstantModuleScalar.open_restriction_mate_isIso T.J V.J A B
       j.geometric.inverse j.geometric.liftA j.geometric.liftB
@@ -905,7 +904,7 @@ private theorem beta_transpose {V T : ScalarSite.{u, v, r, w} A B}
         (restrictionOpen j).app ((S V).obj M) := by
   have he : (beta j).hom =
       ((mateEquiv (scalarAdj V) (scalarAdj T)).symm
-        (TwoSquare.mk _ _ _ _ (restrictionOpen j))).natTrans := by
+        (TwoSquare.mk _ _ _ _ (restrictionOpen j))) := by
     have h := iterated_mateEquiv_conjugateEquiv_symm
       (scalarAdj V) (scalarAdj T) (openAdjA j) (openAdjB j)
       (TwoSquare.mk _ _ _ _ (tau j.geometric).inv)
@@ -916,7 +915,7 @@ private theorem beta_transpose {V T : ScalarSite.{u, v, r, w} A B}
       (conjugateEquiv ((openAdjA j).comp (scalarAdj T))
         ((scalarAdj V).comp (openAdjB j))).symm (tau j.geometric).hom at h'
     change ((mateEquiv (scalarAdj V) (scalarAdj T)).symm
-        (TwoSquare.mk _ _ _ _ (restrictionOpen j))).natTrans =
+        (TwoSquare.mk _ _ _ _ (restrictionOpen j))) =
       (conjugateEquiv ((scalarAdj V).comp (openAdjB j))
         ((openAdjA j).comp (scalarAdj T))).symm (tau j.geometric).inv at h
     have := betaInv_isIso j
@@ -1051,8 +1050,23 @@ def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
 section
 omit [Module.Finite A B] [Module.Free A B]
 
-set_option maxHeartbeats 1600000 in
--- Comparing the dependent module and sheaf presentations needs extra elaboration time.
+-- Perform the composition calculation before specializing to dependent module presentations.
+private theorem restriction_compositor_of_underlying_isos
+    {C₀ D₀ : Type*} [Category C₀] [Category D₀] (F : C₀ ⥤ D₀)
+    {X Y Z : C₀} {P Q R S V H : D₀}
+    (eA : X ≅ Z) (eB : Y ≅ Z)
+    (fA : P ≅ F.obj X) (fA' : Q ≅ F.obj Y) (fB : R ≅ F.obj Y)
+    (hA : S ≅ H) (hB : V ≅ H) (k : H ⟶ F.obj Z)
+    (m : X ⟶ Y) (n : P ⟶ Q)
+    (hm : m = eA.hom ≫ eB.inv)
+    (hn : F.map m ≫ fA'.inv = fA.inv ≫ n) :
+    (hA.hom ≫ k ≫ F.map eA.inv ≫ fA.inv) ≫ n ≫ (fA'.hom ≫ fB.inv) =
+      (hA.hom ≫ hB.inv) ≫ (hB.hom ≫ k ≫ F.map eB.inv ≫ fB.inv) := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← reassoc_of% hn, hm, F.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← F.map_comp_assoc, eA.inv_hom_id, F.map_id, Category.id_comp]
+
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) (M : Mod Z.toSite B) :
@@ -1061,20 +1075,24 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
           f.restriction.hom.app (g.liftB.modules.obj M) =
       h.restriction.hom.app M ≫ (res A B T.toSite).map (c.moduleB.hom.app M) := by
   apply (underlying (constantRing T.J A)).map_injective
-  simp only [Functor.map_comp, Category.assoc, f.restrictionFormula,
-    h.restrictionFormula, c.underlyingA]
-  change _ = h.liftA.moduleUnderlying.hom.app ((res A B Z.toSite).obj M) ≫
-    h.liftB.moduleUnderlying.inv.app M ≫
-      (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
-  erw [c.underlyingB, Iso.inv_hom_id_app_assoc]
-  have hn := f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)
-  dsimp only [Functor.comp_map] at hn
-  erw [← reassoc_of% hn]
-  erw [g.restrictionFormula]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
-  rfl
+  simp only [Functor.map_comp]
+  change _ = (underlying (constantRing T.J A)).map (h.restriction.hom.app M) ≫
+    (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
+  simp only [c.underlyingA, c.underlyingB, f.restrictionFormula, h.restrictionFormula]
+  exact restriction_compositor_of_underlying_isos f.inverse
+    (g.liftA.moduleUnderlying.app ((res A B Z.toSite).obj M))
+    (g.liftB.moduleUnderlying.app M)
+    (f.liftA.moduleUnderlying.app (g.liftA.modules.obj ((res A B Z.toSite).obj M)))
+    (f.liftA.moduleUnderlying.app ((res A B W.toSite).obj (g.liftB.modules.obj M)))
+    (f.liftB.moduleUnderlying.app (g.liftB.modules.obj M))
+    (h.liftA.moduleUnderlying.app ((res A B Z.toSite).obj M))
+    (h.liftB.moduleUnderlying.app M)
+    (c.inverse.hom.app ((underlying (constantRing Z.J B)).obj M))
+    ((underlying (constantRing W.J A)).map (g.restriction.hom.app M))
+    ((underlying (constantRing T.J A)).map (f.liftA.modules.map (g.restriction.hom.app M)))
+    (g.restrictionFormula M)
+    (f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M))
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem tau_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
@@ -1092,7 +1110,6 @@ private theorem tau_comp {T W Z : ScalarSite.{u, v, r, w} A B}
 
 end
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem tensor_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
@@ -1119,7 +1136,7 @@ private theorem tensor_comp {T W Z : ScalarSite.{u, v, r, w} A B}
       Functor.whiskerRight_app, NatTrans.id_app, Functor.map_id, Category.assoc]
     erw [Category.comp_id, Category.id_comp]
     exact tau_comp c N
-  have heM := congrArg (fun α ↦ α.natTrans.app M) he
+  have heM := congrArg (fun α ↦ α.app M) he
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     TwoSquare.hComp_app, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, NatTrans.id_app, Functor.map_id] at heM

@@ -27,13 +27,13 @@ extension theorem `AlgebraicGeometry.exists_admissibleBlowup_extend_section`.
 - `AlgebraicGeometry.QuasiDomination`: the data of a quasi-domination of `X` over `Y`;
 - `AlgebraicGeometry.QuasiDomination.graph`: the graph `U ⟶ Y ×ₛ X` of a quasi-domination;
 - `AlgebraicGeometry.QuasiDomination.Extends`: a quasi-domination extends a morphism defined
-  on a smaller open (blueprint: `def-nagata-conrad-quasi-domination`).
+  on a smaller open (blueprint: `definition-quasi-domination--1`).
 
 ## Main results
 
 - `AlgebraicGeometry.QuasiDomination.of_isSeparated`: a morphism to a separated target is a
   quasi-domination of its own source (blueprint:
-  `lemma-nagata-conrad-morphism-is-quasi-domination`);
+  `corollary-extension-proper-target--1`);
 - `AlgebraicGeometry.QuasiDomination.U_eq_top`: a quasi-domination over a universally closed
   target is defined everywhere (blueprint:
   `lemma:nagata-conrad-quasi-domination-proper-target`).
@@ -52,7 +52,7 @@ namespace AlgebraicGeometry
 
 variable {S X Y : Scheme.{u}}
 
-/-- Blueprint `def-nagata-conrad-quasi-domination`:
+/-- Blueprint `definition-quasi-domination--1`:
 Quasi-domination.
 
 A quasi-domination of `x : X ⟶ S` over a separated `y : Y ⟶ S` is a morphism `hom : U ⟶ Y`
@@ -102,7 +102,7 @@ condition, restated in terms of `AlgebraicGeometry.QuasiDomination.graph`. -/
 theorem isClosed_range_graph (q : QuasiDomination x y) : IsClosed (Set.range q.graph) :=
   q.isClosed_range_lift
 
-/-- Blueprint `def-nagata-conrad-quasi-domination`: the quasi-domination `q` *extends* the
+/-- Blueprint `definition-quasi-domination--1`: the quasi-domination `q` *extends* the
 morphism `f' : U' ⟶ Y` defined on an open `U' ⊆ X`, i.e. `U' ⊆ U` and `q.hom` restricts to
 `f'` on `U'`. -/
 def Extends (q : QuasiDomination x y) {U' : X.Opens} (f' : U'.toScheme ⟶ Y) : Prop :=
@@ -123,7 +123,7 @@ theorem isClosed_range_lift_of_isIso {W : Scheme.{u}} (hom : W ⟶ Y) (j : W ⟶
     IsClosedImmersion.of_comp (pullback.lift hom j h) (pullback.snd y x)
   exact (pullback.lift hom j h).isClosedEmbedding.isClosed_range
 
-/-- Blueprint `lemma-nagata-conrad-morphism-is-quasi-domination`: **a morphism to a
+/-- Blueprint `corollary-extension-proper-target--1`: **a morphism to a
 separated target is a quasi-domination of its own source**.
 
 For a separated `y : Y ⟶ S` and any `hom : U ⟶ Y`, the pair `(U, hom)` is a quasi-domination
@@ -139,7 +139,7 @@ def of_isSeparated {U : Scheme.{u}} (y : Y ⟶ S) [IsSeparated y] (hom : U ⟶ Y
     have : IsIso ((⊤ : U.Opens).ι) := inferInstanceAs (IsIso U.topIso.hom)
     isClosed_range_lift_of_isIso _ _ _
 
-/-- Blueprint `lemma-nagata-conrad-quasi-domination-proper-target`: **a quasi-domination
+/-- Blueprint `prose-A-14`: **a quasi-domination
 over a universally closed target is defined everywhere**.
 
 The projection `pullback.snd y x : Y ×ₛ X ⟶ X` is universally closed, being a base change of

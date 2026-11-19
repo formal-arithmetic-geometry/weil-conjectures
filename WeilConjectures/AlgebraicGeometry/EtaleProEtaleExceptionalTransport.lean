@@ -14,8 +14,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomCompari
 /-!
 # Exceptional adjunction transport from etale to pro-etale sheaves
 
-Source: blueprint main-20261015, sec-six-functors-basics,
-sk-prop-sf-rf-shriek-preservation, final restriction paragraph; the explicit transport
+Source: blueprint main-20261015, chap-Construction-of-f,
+theorem-f-shriek-finite-coefficients, final restriction paragraph; the explicit transport
 argument of the DAG (blueprint: lem-sf-etale-proetale-exceptional-transport).
 
 The domain below uses intrinsic constructible cohomology, rather than assuming etale
@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The intrinsic pro-etale domain of transport: bounded cohomology, every cohomology
 sheaf constructible on a global finite partition, and finite Tor amplitude against all
 pro-etale module sheaves. Source: blueprint main-20261015,
-sk-prop-sf-rf-shriek-preservation, final restriction paragraph
+theorem-f-shriek-finite-coefficients, final restriction paragraph
 (blueprint: lem-sf-etale-proetale-exceptional-transport). -/
 def exceptionalTransportProEtaleObjects (A : Type (u + 1)) [CommRing A] [Finite A]
     (T : Scheme.{u}) : ObjectProperty

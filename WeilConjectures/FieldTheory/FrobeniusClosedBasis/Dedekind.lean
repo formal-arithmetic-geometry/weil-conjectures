@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 module
 
-public import Mathlib.Data.Int.ConditionallyCompleteOrder
 public import Mathlib.RingTheory.DedekindDomain.FiniteAdeleRing
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Polynomial.IsIntegral

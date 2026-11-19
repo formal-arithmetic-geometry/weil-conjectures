@@ -255,7 +255,7 @@ noncomputable def lowerShriekOfCompactificationBaseChange (c : Compactification 
   ((𝔽).shriekBaseChange (SepFinType.homMk c.overI) (SepFinType.homMk c.overG)
     (SepFinType.homMk c'.overI) (SepFinType.homMk c'.overG) (SepFinType.homMk g')
     (SepFinType.homMk h) (SepFinType.homMk g) (SepFinType.homMk_comp_homMk hi.w)
-    (SepFinType.homMk_comp_homMk hp.w)).natTrans
+    (SepFinType.homMk_comp_homMk hp.w))
 
 /-- The pasting `P.lowerShriekOfCompactificationBaseChangePasting c sq` for a compactification
 `c` and its base change is the compact-support exchange map of the pair. -/

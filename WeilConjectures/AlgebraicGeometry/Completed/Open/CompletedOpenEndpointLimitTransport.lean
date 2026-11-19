@@ -186,7 +186,7 @@ private theorem cbcEndpointInverseMate_app
     {L : C ⥤ D} {R : D ⥤ C} {LT : E ⥤ F} {RT : F ⥤ E}
     (a : L ⊣ R) (b : LT ⊣ RT) (P : C ⥤ E) (Q : D ⥤ F)
     (s : R ⋙ P ⟶ Q ⋙ RT) (K : C) :
-    ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ s)).natTrans.app K =
+    ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ s)).app K =
       (b.homEquiv _ _).symm (P.map (a.unit.app K) ≫ s.app (L.obj K)) := by
   apply (b.homEquiv _ _).injective
   erw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
@@ -210,7 +210,7 @@ private theorem cbcEndpointReduction_naturality {U T : Scheme.{t}} (j : U ⟶ T)
       cbcEndpointReductionInv d j K ≫ (completedReductionTower T d).map
         ((cbcEndpointOpen d j).mapDerivedCategory.map k) := by
   let n := ((mateEquiv (cbcEndpointDerivedOpenAdj d j) (cbcEndpointTowerOpenAdj d j)).symm
-    (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso j).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso j).inv))
   have h (M : d.derived U) : n.app M = cbcEndpointReductionInv d j M :=
     cbcEndpointInverseMate_app (cbcEndpointDerivedOpenAdj d j) (cbcEndpointTowerOpenAdj d j)
       (completedReductionTower U d) (completedReductionTower T d)
@@ -362,12 +362,12 @@ private theorem cbcEndpointReduction_isIso {U T : Scheme.{t}} (j : U ⟶ T)
   have : IsIso (b.counit.app ((completedReductionTower T d).obj
       ((cbcEndpointOpen d j).mapDerivedCategory.obj K))) := hc
   let n := ((mateEquiv (cbcEndpointDerivedOpenAdj d j) b).symm
-    (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso j).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (d.reductionTowerPullbackIso j).inv))
   have hn : n.app K = cbcEndpointReductionInv d j K :=
     cbcEndpointInverseMate_app _ _ _ _ _ K
   rw [← hn]
   dsimp only [n]
-  simp only [mateEquiv_symm_apply, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [mateEquiv_symm_apply, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,

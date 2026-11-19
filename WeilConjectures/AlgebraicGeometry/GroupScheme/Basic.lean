@@ -68,7 +68,8 @@ the whole group.
 
 ## Blueprint
 
-- `sk-p-geometry`: the identity component, images of homomorphisms and the dimension criterion.
+- `lemma-connected-components-images-homomorphisms`: the identity component, images of homomorphisms
+and the dimension criterion.
 - `def-wf-algebraic-components`: the identity component `GrpObj.identityComponent`.
 -/
 
@@ -84,18 +85,18 @@ namespace AlgebraicGeometry
 variable {k : Type u} [Field k]
 
 /-- The identity point of a group scheme `G` over a field `k`: the image of the unique point of
-`Spec k` under the unit section. (blueprint: `sk-p-geometry`) -/
+`Spec k` under the unit section. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
 noncomputable def GrpObj.onePoint (G : Over (Spec (.of k))) [GrpObj G] : G.left :=
   η[G].left.base (show Spec (.of k) from ⟨⊥, Ideal.isPrime_bot⟩)
 
 /-- Left translation `x ↦ g * x` on a group scheme `G` over `k` by a rational point `g` of `G`.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 noncomputable def GrpObj.mulLeft (G : Over (Spec (.of k))) [GrpObj G]
     (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : G ⟶ G :=
   lift (toUnit G ≫ g) (𝟙 G) ≫ μ[G]
 
 /-- Left translation by a rational point is an automorphism of the underlying scheme.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.isIso_mulLeft_left (G : Over (Spec (.of k))) [GrpObj G]
     (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : IsIso (GrpObj.mulLeft G g).left := by
   have hmul (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) : GrpObj.mulLeft G g = (toUnit G ≫ g) * 𝟙 G :=
@@ -231,7 +232,7 @@ lemma GrpObj.mulRight_comp_of_isMonHom {H : Over (Spec (.of k))} [GrpObj H] (f :
 end Translation
 
 /-- A group scheme of finite type over a field has finitely many connected components.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem finite_connectedComponents (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
     Finite (_root_.ConnectedComponents G.left) :=
@@ -239,7 +240,7 @@ theorem finite_connectedComponents (G : Over (Spec (.of k))) [GrpObj G]
   inferInstance
 
 /-- The connected component of the identity of a group scheme of finite type over a field is open.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem isOpen_connectedComponent_onePoint (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
     IsOpen (connectedComponent (GrpObj.onePoint G)) :=
@@ -247,7 +248,8 @@ theorem isOpen_connectedComponent_onePoint (G : Over (Spec (.of k))) [GrpObj G]
   TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _
 
 /-- The identity component `G°` of a group scheme `G` of finite type over a field, as an open
-subset of `G`: the connected component of the identity point. (blueprint: `sk-p-geometry`) -/
+subset of `G`: the connected component of the identity point. (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 noncomputable def GrpObj.identityComponentOpens (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : G.left.Opens :=
   ⟨connectedComponent (GrpObj.onePoint G), isOpen_connectedComponent_onePoint G⟩
@@ -371,7 +373,8 @@ Proposition 2.4).
 Having the rational point `e`, the connected scheme `G` is geometrically connected
 (`GeometricallyConnected.of_connectedSpace_of_section`), so its base change to an algebraic
 closure is connected, hence irreducible (`irreducibleSpace_of_connectedSpace_of_isAlgClosed`);
-`G` is the image of this base change. (blueprint: `sk-p-geometry`) -/
+`G` is the image of this base change. (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 theorem irreducibleSpace_of_connectedSpace (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [ConnectedSpace G.left] : IrreducibleSpace G.left := by
   let g : Spec (.of (AlgebraicClosure k)) ⟶ Spec (.of k) :=
@@ -423,12 +426,12 @@ variable (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [Quasi
 /-- The identity component `G°` of a group scheme `G` of finite type over a field, as a scheme
 over `k`: the open subscheme of `G` on the connected component of the identity point. The set
 `π₀(G)` of connected components is `ConnectedComponents G.left`.
-(blueprint: `sk-p-geometry`, `def-wf-algebraic-components`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`, `def-wf-algebraic-components`) -/
 noncomputable abbrev GrpObj.identityComponent : Over (Spec (.of k)) :=
   Over.mk ((GrpObj.identityComponentOpens G).ι ≫ G.hom)
 
 /-- The open immersion `G° ⟶ G` of the identity component into `G`, as a morphism over `k`.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 noncomputable def GrpObj.identityComponentι : GrpObj.identityComponent G ⟶ G :=
   Over.homMk (GrpObj.identityComponentOpens G).ι
 
@@ -494,7 +497,7 @@ theorem GrpObj.isClopen_connectedComponent_onePoint :
 
 /-- Multiplication `G° × G° ⟶ G` lands in the identity component: the product of two connected
 schemes with rational points is connected, and its image contains the identity.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.range_mul_subset_connectedComponent :
     Set.range ((GrpObj.identityComponentι G ⊗ₘ GrpObj.identityComponentι G) ≫ μ[G]).left.base ⊆
       connectedComponent (GrpObj.onePoint G) := by
@@ -507,7 +510,8 @@ theorem GrpObj.range_mul_subset_connectedComponent :
       Category.id_comp, ← Hom.mul_def, ← Hom.one_def, mul_one]
   rw [this, GrpObj.range_identityComponentι]
 
-/-- Inversion maps the identity component into itself. (blueprint: `sk-p-geometry`) -/
+/-- Inversion maps the identity component into itself. (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.range_inv_subset_connectedComponent :
     Set.range (GrpObj.identityComponentι G ≫ ι[G]).left.base ⊆
       connectedComponent (GrpObj.onePoint G) := by
@@ -519,7 +523,8 @@ theorem GrpObj.range_inv_subset_connectedComponent :
   rfl
 
 /-- Conjugation `G × G° ⟶ G`, `(g, h) ↦ g * h * g⁻¹`, lands in the identity component: each
-fibre `g G° g⁻¹` is connected and contains the identity. (blueprint: `sk-p-geometry`) -/
+fibre `g G° g⁻¹` is connected and contains the identity. (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.range_conj_subset_connectedComponent :
     Set.range ((G ◁ GrpObj.identityComponentι G) ≫ GrpObj.conj G).left.base ⊆
       connectedComponent (GrpObj.onePoint G) := by
@@ -537,7 +542,7 @@ theorem GrpObj.range_conj_subset_connectedComponent :
 
 /-- The identity component `G°` is an open subgroup scheme of `G`: the unit, multiplication and
 inversion of `G` restrict to `G°`, and the group axioms follow from those of `G` since `G° ⟶ G`
-is a monomorphism. (blueprint: `sk-p-geometry`) -/
+is a monomorphism. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
 noncomputable instance : GrpObj (GrpObj.identityComponent G) where
   one := GrpObj.identityComponentLift G η[G] (GrpObj.range_one_subset_connectedComponent G)
   mul := GrpObj.identityComponentLift G
@@ -569,14 +574,15 @@ instance : IsMonHom (GrpObj.identityComponentι G) where
   mul_hom := GrpObj.identityComponentLift_comp_identityComponentι G _ _
 
 /-- The identity component `G°` is a normal subgroup scheme of `G`: the conjugation morphism
-`G × G° ⟶ G` factors through `G° ⟶ G`. (blueprint: `sk-p-geometry`) -/
+`G × G° ⟶ G` factors through `G° ⟶ G`. (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 instance : IsMonHom.Normal (GrpObj.identityComponentι G) where
   exists_comp_eq_conj :=
     ⟨GrpObj.identityComponentLift G _ (GrpObj.range_conj_subset_connectedComponent G),
       GrpObj.identityComponentLift_comp_identityComponentι G _ _⟩
 
 /-- The identity component `G°` of a group scheme of finite type over a field is irreducible.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.irreducibleSpace_identityComponent :
     IrreducibleSpace (GrpObj.identityComponent G).left :=
   have : LocallyOfFiniteType (GrpObj.identityComponent G).hom :=
@@ -584,7 +590,7 @@ theorem GrpObj.irreducibleSpace_identityComponent :
   irreducibleSpace_of_connectedSpace (GrpObj.identityComponent G)
 
 /-- The rational points of the identity component `G°` have finite index in the rational points
-of `G`. (blueprint: `sk-p-geometry`) -/
+of `G`. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.finiteIndex_range_identityComponentι :
     (IsMonHom.monoidHom (GrpObj.identityComponentι G)
       (𝟙_ (Over (Spec (.of k))))).range.FiniteIndex := by
@@ -623,7 +629,8 @@ theorem GrpObj.finiteIndex_range_identityComponentι :
 omit [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] in
 /-- The connected components of a group scheme `G` of finite type over a field are the translates
 of the identity component: left translation by a rational point `g` maps `G°` onto the connected
-component of the point `g * 1 = g`. (blueprint: `sk-p-geometry`) -/
+component of the point `g * 1 = g`. (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 theorem GrpObj.image_mulLeft_connectedComponent_onePoint (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
     (GrpObj.mulLeft G g).left.base '' connectedComponent (GrpObj.onePoint G) =
       connectedComponent ((GrpObj.mulLeft G g).left.base (GrpObj.onePoint G)) := by
@@ -635,7 +642,7 @@ theorem GrpObj.image_mulLeft_connectedComponent_onePoint (g : 𝟙_ (Over (Spec 
 end IdentityComponent
 
 /-- Cartier's theorem: a group scheme locally of finite type over a field of characteristic zero
-is reduced (indeed smooth). (blueprint: `sk-i-cartier`) -/
+is reduced (indeed smooth). (blueprint: `proposition-cartier-s-theorem`) -/
 theorem GrpObj.isReduced_of_charZero [CharZero k] (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] : IsReduced G.left :=
   let : GrpObj (Over.mk G.hom) := ‹GrpObj G›
@@ -870,7 +877,8 @@ After base change to an algebraic closure the image is closed by
 `isClosed_range_of_isMonHom_of_isAlgClosed`, and closedness descends along the closed surjection
 from the base change. The matrix-group case over an algebraically closed
 field is `AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff` (blueprint
-`lem-ag-homomorphism-image-closed`). (blueprint: `sk-p-geometry`) -/
+`lemma-connected-components-images-homomorphisms--2`). (blueprint:
+`lemma-connected-components-images-homomorphisms`) -/
 theorem isClosed_range_of_isMonHom {G K : Over (Spec (.of k))} [GrpObj G] [GrpObj K]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType K.hom] (f : G ⟶ K)
     [IsMonHom f] :
@@ -911,7 +919,7 @@ theorem isClosed_range_of_isMonHom {G K : Over (Spec (.of k))} [GrpObj G] [GrpOb
 
 /-- A closed subgroup `J` of a connected reduced group scheme `G` locally of finite type over a
 field, with `J` reduced of the same dimension as `G`, is all of `G`.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem isIso_left_of_topologicalKrullDim_eq {J G : Over (Spec (.of k))} [GrpObj J] [GrpObj G]
     [LocallyOfFiniteType G.hom] [IsReduced J.left] [IsReduced G.left] [ConnectedSpace G.left]
     (f : J ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]
@@ -933,7 +941,7 @@ variable {S : Scheme.{u}} {G H : Over S} [GrpObj G] [GrpObj H]
 every commutator `a b a⁻¹ b⁻¹` of two points `a b : X ⟶ G` of `G`, with values in an arbitrary
 `S`-scheme `X`, factors through `f`. For a subgroup scheme `H ⊆ G` this is the scheme-theoretic
 form of `⁅G, G⁆ ⊆ H`, that is, of the commutativity of the quotient `G ⧸ H`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 class IsMonHom.ContainsCommutators (f : H ⟶ G) [IsMonHom f] : Prop where
   exists_comp_eq_commutator (f) : ∀ {X : Over S} (a b : X ⟶ G),
     ∃ c : X ⟶ H, c ≫ f = a * b * a⁻¹ * b⁻¹

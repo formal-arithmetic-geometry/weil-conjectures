@@ -271,8 +271,15 @@ private theorem restrictionInverseSection (l : ℕ) [Fact l.Prime] (T : Scheme.{
     HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x := by
   change HEq ((eqToHom (r.underlying M n U).symm) x) x
   exact finiteBoundary_cast_heq _ _
-set_option maxHeartbeats 1000000 in
--- Converting the three concrete sheaf module presentations requires extra reduction.
+
+/-- The inverse evaluation comparison is the recorded transport on each chart. -/
+private theorem evalIso_inv_app (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
+    ((evalIso l T r n).inv.app M).hom.app U = eqToHom (r.underlying M n U).symm := by
+  rfl
+
+-- Express the restriction comparison as a section cast before applying line_tensor.
 private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -307,9 +314,13 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n))
     a.line_roots
   rw [hline]
+  dsimp only [abEvaluation, Functor.comp_map, evaluation_obj_map]
   apply Sheaf.hom_ext
   ext U z
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
   let T := diagonalSurface Y
+  rw [evalIso_inv_app l T r n (lineModule l (ULift.{u} (Padic l)) c) U]
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
@@ -324,20 +335,25 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (coefficientSystemMap l (ULift.{u} (Padic l)) T)
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
-      (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
-  let w := ((evalIso l T r n).inv.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  have hw : HEq w v := restrictionInverseSection l T r n _ U v
+  let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
+      (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
+    ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
+        (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  let w : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U :=
+    (eqToHom (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm) v
+  have hw : HEq w v := finiteBoundary_cast_heq
+    (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm v
+  dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
-  change ((cartierProRootMap _ _ _ _ _ _).hom.app U)
-    ((k.lineForget.hom.app (op n)).hom.app U w) = _
-  rw [ht, hi]
-  rfl
+  dsimp only [w, v, η, x'] at ht hi
+  exact congrArg ((cartierProRootMap (diagonalResidue.{u} l n) (l ^ (n + 1))
+    (cartierResidue_cast l (n + 1)) (diagonalSurface Y)
+    (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n)).hom.app U)
+      (ht.trans hi)
 
 private theorem normalizedLift_glue {D : Type*} [Category D] [HasShift D ℤ]
     {I K X Y R S A B A₀ B₀ L : D}
@@ -415,7 +431,6 @@ private theorem moduleForget_apply (A : Type (u + 1)) [CommRing A]
     ((forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}).map f) x = f x := by
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Compare the terminal generators in the two sheafification presentations.
 private theorem integerComparisonGenerator (T : Scheme.{u}) (x : ULift.{u + 1} ℤ) :
     ((integerComparison T).hom.hom.app (op (Scheme.ProEt.mk (𝟙 T))))
@@ -505,7 +520,6 @@ private def siteIntegralGenerator (A : Type (u + 1)) [CommRing A] (T : Scheme.{u
     (forgetComparisonIso A T).hom.app (Etale.ordinaryFiniteConstant A T) ≫
     (cartierForget A T).map (finiteEtaleConstantIso A T).hom
 
-set_option maxHeartbeats 1000000 in
 -- Compare the terminal generators in the two sheafification presentations.
 private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (x : ULift.{u + 1} ℤ) :
@@ -547,7 +561,12 @@ private theorem siteIntegralGenerator_section (A : Type (u + 1)) [CommRing A]
   erw [moduleForget_apply]
   exact hc
 
-set_option maxHeartbeats 1000000 in
+/-- Forgetting scalars preserves the action of a module morphism on sections. -/
+private theorem diagonalForget_section (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    {M N : DiagonalMod l T} (f : M ⟶ N) (U : T.ProEtᵒᵖ) (x : M.obj.obj U) :
+    ((diagonalForget l T).map f).hom.app U x = f.hom.app U x := by
+  rfl
+
 -- Match the concrete evaluation and scalar-restriction module presentations.
 private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))
@@ -565,20 +584,26 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (geoCartierConstant (diagonalResidue.{u} l n) (diagonalSurface Y)) =
       siteIntegralGenerator (diagonalResidue.{u} l n) (diagonalSurface Y) := by
   apply constantAb_ext_one
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
+  erw [diagonalForget_section]
   let T := diagonalSurface Y
   let U := op (Scheme.ProEt.mk (𝟙 T))
+  rw [evalIso_inv_app l T r n (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U]
   let z := (toSheafify (Scheme.ProEt.topology T)
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
       (ULift.up 1)
   let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z
-  let x := ((evalIso l T r n).inv.app
-    (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
+  let x : ((r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T))).obj
+      (op n)).obj.obj U :=
+    (eqToHom (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm) x'
   have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists.choose_spec
       U (ULift.up 1)
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
-  have hx : HEq x x' := restrictionInverseSection l T r n _ U x'
+  have hx : HEq x x' := finiteBoundary_cast_heq
+    (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
   have ha := a.coefficient_one U x (hx.trans hx')
   have hi (y : ((diagonalForget l T).obj ((diagonalFiniteToPadic l n T).obj
       (geoCartierConstant (diagonalResidue.{u} l n) T))).obj.obj U) :

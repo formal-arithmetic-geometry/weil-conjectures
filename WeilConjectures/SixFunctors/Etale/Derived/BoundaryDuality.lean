@@ -17,14 +17,14 @@ For a finite coefficient ring `Λ` whose exponent is invertible on a field `k` a
 separated of finite type over `k`, this file states
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`
-  (`lem-weil-closed-costalk-duality`): `Ri^! 𝔻_T K ≅ 𝔻_Z (i^* K)`;
+  (`corollary-verdier-exchange-formulas--3`): `Ri^! 𝔻_T K ≅ 𝔻_Z (i^* K)`;
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`
-  (`cor-weil-boundary-duality-discharge`): for a closed immersion `i : Z ⟶ T` the boundary
+  (`corollary-verdier-exchange-formulas--7`): for a closed immersion `i : Z ⟶ T` the boundary
   exchange `i^* 𝔻_T L ≅ 𝔻_Z Ri^! L` holds on `Dctf(T)`;
-- `AlgebraicGeometry.Etale.HasBoundaryDuality` (`def-weil-boundary-duality-input`) and
-  `AlgebraicGeometry.Etale.hasBoundaryDuality` (`cor-weil-boundary-duality-discharge`): the
+- `AlgebraicGeometry.Etale.HasBoundaryDuality` (`corollary-verdier-exchange-formulas--7`) and
+  `AlgebraicGeometry.Etale.hasBoundaryDuality` (`corollary-verdier-exchange-formulas--7`): the
   finite-stage boundary duality input, and that it holds over an algebraically closed field;
-- `AlgebraicGeometry.Etale.verdierDual_finiteStage` (`thm-sf-biduality-class`, finite stages):
+- `AlgebraicGeometry.Etale.verdierDual_finiteStage` (`theorem-verdier-biduality`, finite stages):
   `𝔻_X` is an involution of `Dctf(X, Λ)` with the Tor bound `[-b - 2d, -a]`.
 
 The canonical exchange map of the blueprint is not constructed; the exchange is stated as the
@@ -82,7 +82,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedHom {X Y : Scheme.{u}} (f : 
     Functor.isoWhiskerRight (βX.app _).symm (R(f)_![ModuleCat.{u + 1} Λ])
   exact ⟨(adj₁.rightAdjointUniq (adj₂.ofNatIsoLeft e.symm)).app N⟩
 
-/-- Blueprint `lem-weil-closed-costalk-duality`: Exceptional restriction of a Verdier dual.
+/-- Blueprint `corollary-verdier-exchange-formulas--3`: Exceptional restriction of a Verdier dual.
 
 For a morphism `i : Z ⟶ T` (in the blueprint a closed immersion) such that `i`, the structure
 morphism `a_T : T ⟶ S` and `a_Z = i ≫ a_T` admit compactifications, and finite coefficients `Λ`,
@@ -104,7 +104,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual {Z T S : Scheme.{u}} (a
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i aT
   exact ⟨e₁ ≪≫ ((RHom(Z)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂⟩
 
-/-- Blueprint `cor-weil-boundary-duality-discharge`: Discharge of the boundary duality input.
+/-- Blueprint `corollary-verdier-exchange-formulas--7`: Discharge of the boundary duality input.
 
 Let `k` be algebraically closed, and let `i : Z ⟶ T` be a closed immersion of schemes
 separated of finite type over `k` (for instance two locally closed pieces of a separated
@@ -142,7 +142,7 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
     e₁ ≪≫ (R(i)^![Λ]).mapIso b₁.symm
   exact ⟨b₂ ≪≫ (verdierDual Λ (i ≫ aT)).mapIso e.symm.op⟩
 
-/-- Blueprint `def-weil-boundary-duality-input`: The finite-stage boundary duality input.
+/-- Blueprint `corollary-verdier-exchange-formulas--7`: The finite-stage boundary duality input.
 
 For a finite coefficient ring `Λ` and a scheme `Y` with structure morphism `a_Y : Y ⟶ Spec k`,
 the boundary duality input for `(Y, Λ)` consists of two assertions about the locally closed
@@ -174,7 +174,7 @@ def HasBoundaryDuality {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) : Prop :=
         (verdierDual Λ (i ≫ s ≫ aY)).obj
           (op ((R(i)^![Λ]).obj L)))
 
-/-- Blueprint `cor-weil-boundary-duality-discharge`: The finite-stage boundary input is a
+/-- Blueprint `corollary-verdier-exchange-formulas--7`: The finite-stage boundary input is a
 consequence.
 
 For `k` algebraically closed, a finite coefficient ring `Λ` whose exponent is invertible on `k`
@@ -192,7 +192,7 @@ theorem hasBoundaryDuality [IsAlgClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.o
   · have : IsSeparated s := inferInstance
     exact nonempty_iso_leftDerivedUpperStar_verdierDual Λ (s ≫ aY) i hL
 
-/-- Blueprint `thm-sf-biduality-class`: Verdier biduality on the coefficient class, at the finite
+/-- Blueprint `theorem-verdier-biduality`: Verdier biduality on the coefficient class, at the finite
 stages `Λ = A_{E,n}`.
 
 For `X` separated of finite type over an algebraically closed field `k` with `dim X ≤ d` and a

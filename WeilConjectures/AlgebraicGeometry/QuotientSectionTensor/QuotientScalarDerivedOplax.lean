@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSc
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # The regular scalar unit and the derived tensor constraints -/
+/-! # The regular scalar unit and the derived tensor constraints
+
+## References
+
+* Stacks 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -66,9 +71,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 open ModuleRingedComparison
 
-/-- The generic derived oplax structure, with the fixed scalar functor as its target.
-Source: the generic derived monoidal construction; Stacks 07A4
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
+/-- The generic derived oplax structure, with the fixed scalar functor as its target. -/
 @[irreducible] def scalarDerivedOplax (T : Scheme.{u}) : (D a T).OplaxMonoidal := by
   let := scalarModuleClosed Λ T
   let := scalarModuleClosed Λ' T
@@ -82,9 +85,7 @@ Source: the generic derived monoidal construction; Stacks 07A4
   unfold D
   exact (extension a T).leftDerivedFunctorOplaxMonoidal
 
-/-- The derived oplax unit is the specified localization-unit composite.
-Source: the definition of the generic derived oplax structure
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
+/-- The derived oplax unit is the specified localization-unit composite. -/
 theorem scalarDerivedOplax_η (T : Scheme.{u}) :
     letI := scalarDerivedOplax a T
     Functor.OplaxMonoidal.η (D a T) = derivedScalarUnit a T := by
@@ -102,9 +103,7 @@ theorem scalarDerivedOplax_η (T : Scheme.{u}) :
   rw [Functor.mapHomotopyCategory_η]
   rfl
 
-/-- The derived oplax unit is invertible on the K-flat regular module.
-Source: the generic derived-unit theorem; Stacks 07A4
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
+/-- The derived oplax unit is invertible on the K-flat regular module. -/
 theorem scalarDerivedOplax_η_isIso (T : Scheme.{u}) :
     letI := scalarDerivedOplax a T
     IsIso (Functor.OplaxMonoidal.η (D a T)) := by

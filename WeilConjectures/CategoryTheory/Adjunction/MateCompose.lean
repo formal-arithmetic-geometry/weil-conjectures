@@ -31,8 +31,8 @@ under the conjugate isomorphisms `R₃ ≅ R₂ ⋙ R₁` and `R₃' ≅ R₂' �
 
 For nearby cycles `Ψ`, with `L = Rf_!` and `R = Rf^!`, the `ν` are the compact-support exchanges
 `Rf'_! Ψ ⟶ Ψ Rf_!` and their mates are the exceptional exchanges `Ψ Rf^! ⟶ Rf'^! Ψ`; this is the
-composition law `β_{gf} = f_s^! β_g ∘ β_f(g^!)` of blueprint `det-nearby-exceptional-tensor`
-(3).
+composition law `β_{gf} = f_s^! β_g ∘ β_f(g^!)` of blueprint
+`lemma-compatibilities-base-change-maps` (3).
 
 -/
 

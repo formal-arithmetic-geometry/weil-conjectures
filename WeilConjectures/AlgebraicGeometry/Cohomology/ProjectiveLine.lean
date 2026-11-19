@@ -23,8 +23,9 @@ The twisting sheaves are `AlgebraicGeometry.ProjectiveSpace.twist`, which exist 
 invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`; that they are the twisted
 structure sheaves of the standard cover, unique up to unique isomorphism, is
 `AlgebraicGeometry.ProjectiveLine.nonempty_twistData` (blueprint
-`lem-sc-p1-twist-exists`). The cohomology of the twists on `ℙ¹_k` is the case `d = 1` of
-Serre's computation of the cohomology of `ℙᵈ_k`, `det-thm-picard-pn`.
+`theorem-riemann-roch-coherent-serre-duality`). The cohomology of the twists on `ℙ¹_k` is the case
+`d = 1` of Serre's computation of the cohomology of `ℙᵈ_k`,
+`lemma-coherent-base-change-invertible-sheaves--1`.
 
 ## Main statements
 
@@ -162,7 +163,7 @@ Only the existence of a `k`-linear isomorphism is asserted: the twisting sheaf
 `AlgebraicGeometry.ProjectiveSpace.twist` is not constructed from the generating sections
 `g₀, g₁` of the blueprint, so the isomorphism is not pinned down as "taking coefficients".
 
-(blueprint: `lem-sc-p1-twist-sections`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem nonempty_H_zero_twist_equiv_twistSectionPairs (d : ℤ) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0 ≃ₗ[k]
       twistSectionPairs k d) := by
@@ -186,7 +187,7 @@ homogeneous polynomials of degree `d` in `k[x₀, x₁]`, of dimension `d + 1`.
 This is part (i) of the blueprint lemma, the case `ℙ¹` of
 `AlgebraicGeometry.ProjectiveSpace.nonempty_H_zero_twist_equiv`.
 
-(blueprint: `lem-sc-p1-monomial`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem nonempty_H_zero_twist_equiv (d : ℕ) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0 ≃ₗ[k]
       MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin 2)) k d) :=
@@ -198,7 +199,7 @@ negative.
 
 This is the second half of part (i) of the blueprint lemma.
 
-(blueprint: `lem-sc-p1-monomial`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem subsingleton_H_zero_twist_of_neg (d : ℤ) (hd : d < 0) :
     Subsingleton ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0) := by
   obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (ULift.{u} (Fin 2)) k d 0
@@ -210,7 +211,7 @@ theorem subsingleton_H_zero_twist_of_neg (d : ℤ) (hd : d < 0) :
 This is the first half of part (ii) of the blueprint lemma, the case `ℙ¹` of
 `AlgebraicGeometry.ProjectiveSpace.subsingleton_H_twist_top`.
 
-(blueprint: `lem-sc-p1-monomial`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem subsingleton_H_one_twist (d : ℤ) (hd : -1 ≤ d) :
     Subsingleton ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 1) :=
   ProjectiveSpace.subsingleton_H_twist_top _ k 1 one_ne_zero natCard_ulift_fin_two d
@@ -223,7 +224,7 @@ and `H¹(ℙ¹_k, 𝒪(-2)) ≅ k`.
 This is the second half of part (ii) of the blueprint lemma, the case `ℙ¹` of
 `AlgebraicGeometry.ProjectiveSpace.nonempty_H_twist_top_equiv_dual`.
 
-(blueprint: `lem-sc-p1-monomial`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem nonempty_H_one_twist_equiv_dual (d : ℤ) (hd : d ≤ -2) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 1 ≃ₗ[k]
       Module.Dual k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin 2)) k (-d - 2).toNat)) :=
@@ -237,7 +238,7 @@ differs from the transition function `t²` of `𝒪(-2)` by the unit `-1`.
 
 This is part (iii) of the blueprint lemma.
 
-(blueprint: `lem-sc-p1-monomial`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem nonempty_relativeDifferentials_iso_twist :
     Nonempty ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
       ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)) :=
@@ -247,7 +248,7 @@ theorem nonempty_relativeDifferentials_iso_twist :
 `H^q(ℙ¹_k, ℱ) = 0` for all `q ≥ 2`: the Čech complex of the standard cover by the two affine
 opens `U₀`, `U₁` computes the cohomology of `ℱ`, and has length two.
 
-(blueprint: `lem-sc-p1-hi-vanishing`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem subsingleton_H_of_two_le (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     {q : ℕ} (hq : 2 ≤ q) :
@@ -261,7 +262,7 @@ are the kernel and the cokernel of the Čech differential
 
 As elsewhere, "coherent" is spelled as quasi-coherent and of finite presentation.
 
-(blueprint: `lem-sc-p1-coherent-finite`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem finiteDimensional_H (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
@@ -285,7 +286,7 @@ opens covering `X`, and `X` is separated, so the quasi-coherent cohomology of `X
 degrees `≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`), as on `ℙ¹_k`
 (`AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le`).
 
-(blueprint: `lem-pc-curve-coherent-finiteness`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem finiteDimensional_H_of_isCurve {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     [X.Over (Spec (.of k))] [IsIntegral X] [IsCurve (X ↘ Spec (.of k))]
     [Smooth (X ↘ Spec (.of k))] (hX : topologicalKrullDim X = 1) {n : Type u} [Finite n]

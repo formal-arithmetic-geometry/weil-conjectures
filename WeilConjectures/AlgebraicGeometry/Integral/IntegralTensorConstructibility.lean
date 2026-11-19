@@ -133,28 +133,7 @@ private theorem boundedConstructible_comap
     (_root_.constructible_comap φ (hK.2 n))
 
 /-- Ordinary integral derived tensor preserves the finite constant-model constructible category.
-
-Source: blueprint latest, det-lem-int-tensor-product.proof.md, paragraphs
-"Reduction to a stratum" and "The stratum".
-(blueprint: lem-sfb-integral-tensor-constructibility).
-
-Proof: fix L. The integral constructible category is triangulated, and tensor is exact, so
-membership of K tensor L is closed under shifts, extensions and isomorphisms in K. The
-shriek-generation theorem reduces K to a shriek extension a_! M from a locally closed stratum,
-where M has bounded finite free scalar models. The projection formula identifies its tensor
-with a_! (M tensor a^* L). Pullback and shriek preserve integral constructibility, so put
-N = a^* L and work on the stratum. The integral criterion makes N derived complete and its
-residue reduction bounded constructible. M is locally bounded finite free, hence dualizable;
-tensoring with M preserves completeness by its right adjoint product preservation and the
-Milnor description of completion. Reduction of M is bounded constructible. Monoidal scalar
-extension identifies the reduction of M tensor N with the tensor of the two reductions over
-the residue field. This is bounded constructible: over the constant field sheaves are flat,
-common refinements of finite stratifications and trivializing covers identify tensors of
-constructible sheaves locally with finite rank free sheaves, and finite truncation induction
-handles bounded complexes. The residue comparison theorem gives etale origin. The integral
-criterion therefore gives integral constructibility of M tensor N. Apply a_!, the projection
-formula, and the finite extension induction. Rank zero, empty strata and zero complexes cause
-no exception; bounds and free ranks may vary between covering objects. -/
+-/
 theorem integralTensorConstructibility
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

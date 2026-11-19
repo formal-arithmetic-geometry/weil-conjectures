@@ -68,6 +68,14 @@ private theorem mapped_square
     (h : a ≫ v = u ≫ b) : F.map a ≫ F.map v = F.map u ≫ F.map b := by
   simpa only [Functor.map_comp] using congrArg F.map h
 
+private theorem compose_two_squares
+    {C : Type*} [Category C] {A₀ A₁ B₀ B₁ D₀ D₁ : C}
+    (a : A₀ ⟶ A₁) (b : B₀ ⟶ B₁) (d : D₀ ⟶ D₁)
+    (u₀ : A₀ ⟶ B₀) (u₁ : A₁ ⟶ B₁) (v₀ : B₀ ⟶ D₀) (v₁ : B₁ ⟶ D₁)
+    (hu : a ≫ u₁ = u₀ ≫ b) (hv : b ≫ v₁ = v₀ ≫ d) :
+    a ≫ (u₁ ≫ v₁) = (u₀ ≫ v₀) ≫ d := by
+  rw [← Category.assoc, hu, Category.assoc, hv, Category.assoc]
+
 -- The naturality square involves localization of the sheaf single-complex comparisons.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -100,7 +108,6 @@ private theorem single_pullback_naturality
   with_unfolding_all
     simpa only [Scheme.Modules.canonicalSinglePullbackMap, cast_eq, Category.assoc] using! hh
 
-set_option maxHeartbeats 400000 in
 -- The right-derived unit is compared with localized single-complex morphisms.
 private theorem single_directImage_naturality
     [∀ Y : Scheme.{u},
@@ -113,27 +120,45 @@ private theorem single_directImage_naturality
         (SheafOfModules.{u} (moduleRings B.toRingedSpace)) 0).map
           ((Scheme.Modules.pushforward k).map a) ≫
         Scheme.Modules.canonicalSingleDirectImageMap k N := by
-  let β := (RingedSpace.moduleDirectImage k.toLRSHom.toShHom).rightDerivedFunctorUnit
-  have hβ := β.naturality ((HomotopyCategory.singleFunctor _ 0).map a)
-  have hc := (HomologicalComplex.singleMapHomologicalComplex
-    (Scheme.Modules.pushforward k) (ComplexShape.up ℤ) 0).inv.naturality a
-  simp only [Scheme.Modules.canonicalSingleDirectImageMap, cast_eq,
-    DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
-    HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-    SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,
-    Category.assoc] at hβ ⊢
-  erw [← hβ]
-  erw [Functor.mapHomotopyCategory_map]
-  erw [← Functor.map_comp_assoc, ← Functor.map_comp]
-  erw [← Functor.map_comp_assoc]
-  simp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
-    HomotopyCategory.quotient, Quotient.lift_map_functor_map]
-  congr 1
-  simpa only [Functor.comp_map] using! congrArg
-    (DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings B.toRingedSpace))).map hc.symm
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let C_A := SheafOfModules.{u} (moduleRings A.toRingedSpace)
+  let C_B := SheafOfModules.{u} (moduleRings B.toRingedSpace)
+  let F : C_A ⥤ C_B := RingedSpace.moduleDirectImage k.toLRSHom.toShHom
+  let Q := HomotopyCategory.quotient C_B (.up ℤ) ⋙ DerivedCategory.Qh.{w}
+  let β : F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
+      DerivedCategory.Qh ⋙ schemeDerivedDirectImage k := F.rightDerivedFunctorUnit
+  let c := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).inv
+  have hc := mapped_square Q _ _ _ _ (c.naturality a)
+  have hβ := β.naturality ((HomotopyCategory.singleFunctor C_A 0).map a)
+  have hh := compose_two_squares _ _ _ _ _ _ _ hc hβ
+  with_unfolding_all
+    simpa only [Scheme.Modules.canonicalSingleDirectImageMap, cast_eq,
+      Category.assoc] using! hh.symm
 
-set_option maxHeartbeats 500000 in
--- Naturality rewrites elaborate the selected derived functors and localization maps.
+-- Paste the comparison squares around the ordinary structure-map identity.
+private theorem structure_map_pasting
+    {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
+    {A₀ A₁ A₂ A₃ A₄ A₅ : D} {M₀ M₁ M₂ M₃ M₄ : C}
+    (a : A₀ ⟶ A₁) (u : A₁ ⟶ A₂) (e : A₂ ⟶ A₃)
+    (v : A₃ ⟶ A₄) (b : A₄ ⟶ A₅)
+    (c₀ : A₀ ⟶ Q.obj M₀) (c₁ : A₁ ⟶ Q.obj M₁)
+    (d₀ : Q.obj M₂ ⟶ A₄) (d₁ : Q.obj M₄ ⟶ A₅)
+    (a' : M₀ ⟶ M₁) (e' : M₁ ⟶ M₂) (b' : M₂ ⟶ M₄)
+    (s : M₀ ⟶ M₃) (t : M₃ ⟶ M₄)
+    (he : u ≫ e ≫ v = c₁ ≫ Q.map e' ≫ d₀)
+    (hb : d₀ ≫ b = Q.map b' ≫ d₁)
+    (ha : a ≫ c₁ = c₀ ≫ Q.map a')
+    (h : a' ≫ e' ≫ b' = s ≫ t) :
+    a ≫ u ≫ e ≫ v ≫ b = (c₀ ≫ Q.map s) ≫ (Q.map t ≫ d₁) := by
+  calc
+    _ = a ≫ (u ≫ e ≫ v) ≫ b := by simp only [Category.assoc]
+    _ = a ≫ (c₁ ≫ Q.map e' ≫ d₀) ≫ b := by rw [he]
+    _ = (a ≫ c₁) ≫ Q.map e' ≫ (d₀ ≫ b) := by simp only [Category.assoc]
+    _ = (c₀ ≫ Q.map a') ≫ Q.map e' ≫ (Q.map b' ≫ d₁) := by rw [ha, hb]
+    _ = c₀ ≫ Q.map (a' ≫ e' ≫ b') ≫ d₁ := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = _ := by rw [h]; simp only [Functor.map_comp, Category.assoc]
+
 /-- The canonical structure maps commute with the pinned derived exchange map.
 No cartesianness, flatness, vanishing or invertibility assumption is needed.
 Source: Stacks Project, Tag 08HY, mate description, and Tag 0096, pullback of modules.
@@ -209,15 +234,16 @@ theorem canonical_structure_map_base_change
     obtain ⟨mu, mu', _, _, _, _, he⟩ :=
       Scheme.Modules.moduleBaseChangeMap_algebra f f' g p h
     simpa only [Category.assoc] using he
-  simp only [Functor.map_comp, Category.assoc]
-  erw [reassoc_of% (Scheme.Modules.canonicalSingleBaseChangeComparison
-    f f' g p h (SheafOfModules.unit X.ringCatSheaf))]
-  erw [single_directImage_naturality f'
-    (SheafOfModules.pullbackObjUnitToUnit p.toRingCatSheafHom)]
-  erw [reassoc_of% (single_pullback_naturality g
-    (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom))]
-  erw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
-  erw [hb]
-  simp only [Functor.map_comp, Category.assoc]
+  have he := Scheme.Modules.canonicalSingleBaseChangeComparison
+    f f' g p h (SheafOfModules.unit X.ringCatSheaf)
+  have hd := single_directImage_naturality f'
+    (SheafOfModules.pullbackObjUnitToUnit p.toRingCatSheafHom)
+  have hp := single_pullback_naturality g
+    (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)
+  have hh := structure_map_pasting
+    (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0)
+    _ _ _ _ _ _ _ _ _ _ b _ _ _ he hd hp hb
+  simpa only [Functor.map_comp, Category.assoc] using hh
 
 end AlgebraicGeometry

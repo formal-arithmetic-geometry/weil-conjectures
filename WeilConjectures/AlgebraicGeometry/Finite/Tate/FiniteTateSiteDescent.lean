@@ -87,9 +87,9 @@ Proof plan:
    the first comparison repeatedly, using the sheafification-unit tensor generators.
    They give precisely the recorded powers on both sides, with the normalizations below.
    Thus all transition and pullback squares tensor factor by factor. In the derived
-   categories use K-flat total tensors of def-kun-derived-tensor; exact comparison acts
-   termwise and its canonical derived tensor comparison carries these same degree-zero
-   isomorphisms, so the construction has the stipulated derived tensor convention.
+   categories use K-flat total tensors of proposition-open-direct-image-preserves-finite; exact
+   comparison acts termwise and its canonical derived tensor comparison carries these same
+   degree-zero isomorphisms, so the construction has the stipulated derived tensor convention.
 8. The comparison unit is invertible for module sheaves, so inverse image is fully
    faithful. Lift alpha inverse composed with beta, and its inverse, uniquely. Faithfulness
    gives their inverse identities and the unique comparison-preserving isomorphism.

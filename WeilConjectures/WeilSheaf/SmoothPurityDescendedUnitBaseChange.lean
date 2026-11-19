@@ -76,7 +76,7 @@ theorem geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange
       (descendedShriekGeometricExchange l f) e.hom)]
     (d : ℕ) [SmoothOfRelativeDimension d f.left]
     (K : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.inv)))
+      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.asIso.inv)))
     (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
       X.hom.geometricFiber) ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K)) :
     (weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)

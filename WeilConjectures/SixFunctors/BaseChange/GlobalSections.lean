@@ -60,7 +60,7 @@ section, under the identity isomorphism `(𝟙 Y)^* G ≅ G`: the triangle
          `---------> Γ(Y, G)
 ```
 commutes.
-(blueprint: `lemma-weil-pbc-finite-pullback-identity`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 @[reassoc]
 lemma globalSectionsUpperStarMap_id {Y : Scheme.{u}} (G : Sheaf Y.smallEtaleTopology A) :
     globalSectionsUpperStarMap A (𝟙 Y) G ≫
@@ -91,7 +91,7 @@ composition isomorphism `(v ≫ u)^* G ≅ v^* u^* G`: the square
 Γ(T', u^* G) -------v^♯------> Γ(T'', v^* u^* G)
 ```
 commutes.
-(blueprint: `lemma-weil-pbc-finite-pullback-composition`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 @[reassoc]
 lemma globalSectionsUpperStarMap_comp {T'' T' T : Scheme.{u}} (v : T'' ⟶ T') (u : T' ⟶ T)
     (G : Sheaf T.smallEtaleTopology A) :
@@ -148,7 +148,7 @@ pulling a section back along `u` and then along `a` agrees with restricting it a
 then pulling back along `b`, under the square isomorphism `b^* i^* G ≅ a^* u^* G`. It follows
 from `AlgebraicGeometry.Etale.globalSectionsUpperStarMap_comp` applied to the two equal
 composites `a ≫ u = b ≫ i`.
-(blueprint: `lemma-weil-pbc-finite-pullback-closed-fibre`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 @[reassoc]
 lemma globalSectionsUpperStarMap_comp_squareUpperStarIso {Z' T' Z T : Scheme.{u}}
     {a : Z' ⟶ T'} {b : Z' ⟶ Z} {u : T' ⟶ T} {i : Z ⟶ T} (sq : CommSq a b u i)
@@ -165,7 +165,7 @@ over `T'` descended from a section `x` of `G` over `T`, that is `u^♯ x = x'`. 
 equality holds after restriction to a closed fibre: for a commutative square `a ≫ u = b ≫ i`,
 the pullback `a^♯ x'` is the pullback along `b` of the restriction `i^♯ x`, under the square
 isomorphism. Sections are taken with values in an arbitrary object `M`.
-(blueprint: `lemma-weil-pbc-finite-pullback-descent`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 lemma globalSectionsUpperStarMap_descent {Z' T' Z T : Scheme.{u}}
     {a : Z' ⟶ T'} {b : Z' ⟶ Z} {u : T' ⟶ T} {i : Z ⟶ T} (sq : CommSq a b u i)
     (G : Sheaf T.smallEtaleTopology A) {M : A} (x : M ⟶ (Sheaf.Γ _ A).obj G)
@@ -178,7 +178,7 @@ lemma globalSectionsUpperStarMap_descent {Z' T' Z T : Scheme.{u}}
 /-- **The finite-pullback identities**: the pullback of sections is the identity along the
 identity, is compatible with composition, is compatible with restriction to closed fibres,
 and preserves descended sections.
-(blueprint: `lem-weil-pbc-finite-pullback-identities`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 theorem globalSectionsUpperStarMap_identities {Z' T' Z T : Scheme.{u}}
     {a : Z' ⟶ T'} {b : Z' ⟶ Z} {u : T' ⟶ T} {i : Z ⟶ T} (sq : CommSq a b u i)
     (G : Sheaf T.smallEtaleTopology A) :

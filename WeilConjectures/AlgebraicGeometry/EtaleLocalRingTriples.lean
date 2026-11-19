@@ -114,7 +114,7 @@ corresponding ring map, and its residue-field map is the map in `SpecToEquivOfFi
 2. Shrink any pointed neighbourhood to an affine open containing its point
 (lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink).
 3. The category of all neighbourhoods is cofiltered by Tag 03PQ
-(lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered). The pointed chart itself
+(definition-torsion-sheaves--3). The pointed chart itself
 gives a nonempty affine subcategory. Shrink the fibre products and
 equalizers to affine neighbourhoods. Fullness gives cofilteredness of the affine
 subcategory (lem-weil-pbc-colimit-initial-full-subcategory).
@@ -126,7 +126,7 @@ initial, and its opposite preserves the ring colimit
 that of the base (lem-weil-pbc-etale-algebra-residue-field-separable, Tag 04HT).
 Its embedding into Ω therefore lands in the relative separable closure
 (def-weil-pbc-relative-separable-closure). Cancellation of the open immersion shows
-that its ring is étale over A (lem-weil-pbc-etale-composition-cancellation).
+that its ring is étale over A (definition-torsion-sheaves--3).
 The equation that the point lies over x, cancelled through the open immersion,
 shows that q lies over p and that the residue-field embedding is compatible over κ(p).
 6. For morphisms, cancellation of the open immersion identifies Y-morphisms over
@@ -136,7 +136,7 @@ other is exactly commutation of the maps to Ω, equivalently inverse-image equal
 of primes and agreement of residue embeddings. This gives full faithfulness.
 7. Conversely a triple gives its point by composing B → κ(q) → K → Ω.
 Compatibility over κ(p) makes it a point over x. Étale composition gives a
-neighbourhood of Y (lem-weil-pbc-etale-composition-cancellation). Its prime and
+neighbourhood of Y (definition-torsion-sheaves--3). Its prime and
 residue embedding recover the given triple, proving essential surjectivity and
 the claimed equivalence with its specified effect on rings and points.
 8. Under this equivalence the global-section diagram is naturally the diagram B.

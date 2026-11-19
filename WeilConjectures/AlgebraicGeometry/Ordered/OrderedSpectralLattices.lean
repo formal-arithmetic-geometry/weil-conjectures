@@ -150,7 +150,9 @@ import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 
 /-! # Lisse integral lattices on an ordered stratification
 
-Source: blueprint integral-models-generators proof (1), choosing and ordering lattices.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13, first paragraph
 -/
 
 @[expose] public noncomputable section
@@ -376,7 +378,7 @@ private theorem transport_lattice_arrow
       U.functor.map i := by
     rw [Adjunction.homEquiv_unit]
     change U.counitIso.inv.app _ ≫ U.functor.map (U.unitIso.inv.app M₀ ≫ i) = _
-    rw [Functor.map_comp, ← Category.assoc, U.counitIso_functor_comp]
+    rw [Functor.map_comp, ← Category.assoc, U.counitInv_functor_comp]
     exact Category.id_comp _
   have hi : adj'.homEquiv (U.functor.obj M₀) L t' = U.functor.map i ≫ e.hom.app L := by
     rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv,
@@ -736,24 +738,7 @@ private theorem ordered_lattices_of_coefficient_square
 attribute [local irreducible] CondensedRing.upperStar Mod.extendRestrictAdjunction
   Mod.comap Padic.coefficientExtensionIntegers
 
-/-- A lisse spectral-coefficient module has integral lattices on strata with open prefixes.
-
-Source: blueprint integral-models-generators proof (1), first two sentences;
-Bhatt--Scholze, Lemma 6.8.13, first paragraph.
-(blueprint: lem-sfb-ordered-spectral-lattices).
-
-Proof. Choose a small model of the finite dimensional Q_l-algebra E and transport its
-spectral norm, valuation ring, continuous functions and module objects along the induced
-coefficient isomorphisms. Apply the stratified lisse integral lattice theorem to this
-small model and transport its lattice inclusions and their adjoints back to E.
-Refine the resulting finite partition by Noetherian induction so its prefixes are open.
-Realize the refined pieces by fibre products with the original scheme strata, so each
-refinement immersion actually factors through its original stratum, even when those
-strata carry nonreduced structures. Pull back its lattice inclusion. Exact inverse image
-preserves monicity, local free bases pull back, and the coefficient pullback comparison
-identifies the scalar-extension adjoint with the pulled-back rationalization isomorphism.
-This proves every lattice clause on the ordered refinement. Empty schemes permit no
-strata; empty pieces and zero ranks require no strictness or positive-rank assumption. -/
+/-- A lisse spectral-coefficient module has integral lattices on strata with open prefixes. -/
 theorem exists_orderedSpectralLattices (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpℓ : p ≠ ℓ)
