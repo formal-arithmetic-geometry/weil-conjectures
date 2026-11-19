@@ -1,0 +1,7 @@
+# FiniteBaseChangeRestrictionMateTransport
+
+Origin: `0676f555de6` (2026-11-02), `WeilConjectures/Algebra/Category/ModuleCat/Sheaf/OpenTensorNormalization/FiniteBaseChangeRestrictionMateTransport.lean`, declaration `finite_base_change_restriction_mate_transport`. The source commit changed a direct `transport_from_unit` application into an abstracted helper and lowered its scoped heartbeat budget from 4,000,000 to 400,000.
+
+`Before.lean` uses the current, compiling prefix and target statement with only the historical direct proof body restored. This is the minimal API port needed because the old prefix's `mateEquiv` result changed from a `TwoSquare` wrapper to a direct natural transformation. The target proof body itself is unchanged from the parent commit, including its 4,000,000-heartbeat scope. Before passes in 9:37.08 / 23,906,184 KB peak RSS. `After.lean` passes in 4.10 s / 2,322,976 KB RSS. `probes/BeforeReducedBudget.lean` changes only the target budget to the fixed source's 400,000 heartbeats; it reproduces `(kernel) deterministic timeout` at line 167 in 1:28.46 / 5,731,316 KB RSS.
+
+The synchronous Kernel-skipped canonical Before passes in 4.70 s / 2,235,952 KB RSS; the reduced-budget probe passes with Kernel checking skipped in 4.60 s / 2,236,456 KB RSS. The fixed helper abstracts functors and equivalence records so the concrete instantiation's types match syntactically, avoiding a large Kernel conversion in `transport_from_unit`. See `CLASSIFICATION.md` for the phase and mechanism record.

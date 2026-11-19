@@ -1,0 +1,42 @@
+# Kernel timeout dataset
+
+All measurements were run on the Weil server with Lean 4.35.0 / Mathlib 4.35.0, from `the master build tree`, using `LEAN_NUM_THREADS=1`, `timeout 1800`, `nice -n 10`, and `/usr/bin/time -v`. The case sources are standalone files and are not imported by the WeilConjectures library.
+
+| case | origin commit | original symptom | Before on 4.35.0 | After on 4.35.0 | fix kind |
+|---|---|---|---|---|---|
+| [RealPushforward](RealPushforward/README.md) | `ed3d39ddb5d` (2026-11-07), `RealPushforward.lean:isReal_higherLowerShriek_one` | `(kernel) deterministic timeout` at the closing polynomial step, about 90 s at default heartbeats | 54.94 s, kernel timeout, 4,717,104 KB RSS | 2.80 s, ok, 3,126,236 KB RSS | generic `rfl` lemma aligns `charpolyRev`/`localPolynomial` instances |
+| [ImageHomCounit](ImageHomCounit/README.md) | `212f97dd22a` (2026-11-05), `IndEtaleDerivedImageHomCounit.lean:imageHomIso_counit` | kernel-expensive concrete adjunction comparison; the commit removes the costly check | 55.53 s, ok, 7,466,068 KB RSS | 2.60 s, ok, 2,795,040 KB RSS | heterogeneous-equality helper compares arguments one by one before applying the abstract counit lemma |
+| [IntegralComparisonPullbackRealizationShifts](IntegralComparisonPullbackRealizationShifts/README.md) | `b400b43ec29` (2026-11-05), `IntegralComparisonPullbackRealizationShifts.lean:integralComparisonPullbackRealization_commShift` | whole module was a kernel memory/time hotspot; wrapper vocabulary avoids unfolding under localization | 1:42.27, ok, 9,386,264 KB RSS | 23.41 s, ok, 3,874,356 KB RSS | abstract wrapper definitions and syntactically matched localization endpoint types |
+| [F66Adj](F66Adj/README.md) | `f66ad18a9ed` (2026-11-05), `IndEtaleDerivedImageHomAdjunction.lean:imageHomIso_naturality` | expensive kernel comparison; parent scoped 400000 heartbeats | 1:56.47, ok, 12,639,544 KB RSS (cost) | 3.40 s, ok, 2,835,572 KB RSS | explicit coefficient variance and syntactically matched restriction comparison |
+| [EtaleHomComparisonReversedExact](EtaleHomComparisonReversedExact/README.md) | `8ca2e912b93` (2026-11-05), `EtaleHomTransposeExactCommShiftComponent.lean:etaleHomComparison_reversedExact_commShift_component` | costly direct kernel conversion under `derivedHom` | 1:50.07, ok, 12,487,664 KB RSS (cost) | 3.50 s, ok, 3,196,476 KB RSS | transport exact endpoint instead of unfolding derived Hom |
+| [RealPurity](RealPurity/README.md) | `e2d8b540cba` (2026-11-07), `RealPurity.lean:IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight` | `(kernel) deterministic timeout` | 58.94 s, kernel timeout, 5,590,352 KB RSS | 58.84 s, kernel timeout, 5,584,740 KB RSS; Master 6.10 s, ok | historical proof split no longer sufficient on 4.35.0 |
+| [FiniteBaseChangeRestrictionMateTransport](FiniteBaseChangeRestrictionMateTransport/README.md) | `0676f555de6` (2026-11-02), `FiniteBaseChangeRestrictionMateTransport.lean:finite_base_change_restriction_mate_transport` | kernel-expensive direct mate transport | 9:37.08, ok, 23,906,184 KB RSS (current-prefix port, original 4,000,000 heartbeats); 400,000-heartbeat probe: 1:28.46, kernel timeout | 4.10 s, ok, 2,322,976 KB RSS | abstract functor and equivalence arguments before concrete application |
+
+The old forms are kept even when current Lean no longer emits the original timeout. Five canonical Before forms reproduce high Kernel cost and two reproduce hard Kernel timeouts. `FiniteBaseChangeRestrictionMateTransport` also has a reduced-budget timeout probe. `RealPurity` is retained because its Before reproduces a hard Kernel timeout; its historical After also times out on 4.35.0, and `Master.lean` documents the later passing form. See [REPORT.md](REPORT.md) for the guide's phase and mechanism classification.
+
+## Excluded candidates
+
+- `d89eb25ab20`, `a9bedd44ffd`, `8219abe7709` (#2654/#2657/#2667): heartbeat-only cleanup; no standalone kernel failure was identified.
+- `9439ba41195`: the change scopes a kernel-check budget; it does not establish a declaration-level fix independent of a heartbeat increase.
+- Zulip #2185 (`BoundedOpenForget`, `BoundedProperProjectionSquare`, earlier `SmoothPurity`): `whnf`/`isDefEq` elaborator timeouts, not kernel checks.
+- Zulip #1719/#1732 (`finiteSemilinearTraceEquation`): the dump contains only a requested `debug.skipKernelTC` diagnostic, not a confirmed kernel case.
+- `6e654a169f7` (`EtaleScalarConstantPullback`): the parent source reaches a current upstream type mismatch before the target proof, so no honest Before measurement is available.
+- `2f3ec5f4a16` (`DiagonalLocalChernPullbackData`): the parent source fails on a later missing `Additive` instance before the target declaration under current master.
+- `5e80d330d08` (`CanonicalOrdinaryTensorInverseAssociativity`): the parent source fails on a later representation mismatch after about 3 minutes, before a complete kernel result.
+- `a8c848cdde3` (`DiagonalTraceFiniteEtaleIntegralBoundary`): the parent source reaches a later representation mismatch after 4:35.48 and 14,350,036 KB RSS, before a valid target declaration result.
+- Zulip #621/#624 (`PerfectOverlapObjectRealizationCoreData`): a real `@[no_expose]` case is identified, but the old declaration/source attachment is not present in the dumped files and could not be reconstructed without inventing a different term.
+- `f66ad18a9ed` (`imageTensorIso_hom_app_comp`): both parent and fixed files pass on current master in 4.60 s with about 2.86 GB RSS; no measurable cost change.
+- `f66ad18a9ed` (`imageHomIso_counit`): both parent and fixed files reach a current-master `simp`/representation mismatch after 2:26.50 and 2:31.90, at about 9.88 GB RSS; the target cannot be measured honestly without porting unrelated APIs.
+- `6e654a169f7` (`etaleScalarConstantPullback`): the parent `change` no longer matches current scalar-coefficient types; restoring only the fixed proof body still reaches the same current-master `simp` mismatch after 47.03 s and 5.82 GB RSS.
+- `77a08aac58b` (`derivedTensorHomShiftComparison_component`): after the instance rename, both complete source forms fail in the shared `normalized_transpose_aux` helper at line 42, before the target, on a current shift-composition rewrite mismatch; the one-line `Functor.map_comp` port also fails.
+- `7cef97103d4` (`isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers`): both forms fail on missing `HasTensor₄ObjExt` instances (Before 11.71 s, 3,049,984 KB RSS); no target declaration result is available.
+- `77a08aac58b` (`purCoefficientRoosShiftNormalization`): both forms fail on current rewrite-shape mismatches before the target declaration; no kernel result is available.
+- `d6a6682d7e7` (`restrictionTensor_mate_model`): both full historical forms fail before the target on current `HSMul` instance and rewrite-shape errors; Before 2:57.41, After 1:38.16.
+- `9460df68701` (`integralPullbackKFlatReductionCounit`): fixed form passes in 27.42 s and 3,804,552 KB RSS; parent form hits three current API type mismatches in 26.02 s and 3,738,220 KB RSS.
+- `b94d64de19a` (`pointFiberCocone_isFilteredTwoColimit`): both forms fail before the target on current derived-category composition and `CommShift` instance mismatches (Before 1:34.36, 3,194,980 KB RSS; After 1:01.14, 3,223,616 KB RSS).
+- `77a08aac58b` (`finiteEtaleDiagonalClass_postcomp_injective`): both forms hit current application type mismatches and unsolved goals before the target (about 12.3 s and 3.77 GB RSS).
+- `77a08aac58b` (`geoP1Cohomology`): both forms hit current application/`simp` mismatches before the target; Before took 58.34 s and 8,246,012 KB RSS, After 9.60 s and 3,805,856 KB RSS.
+- `5b0d50455a6` (diagonal finite-etale boundary): representative parent probe reaches current stuck typeclass, type, and rewrite errors after more than 3 minutes and about 4.2 GB RSS; no target declaration result.
+- `8afc7df6d06` (point-fiber integral family): representative probe was stopped after the shared-server budget while the parent split file was still compiling; no valid target result.
+- `c3af60ee018` (`SmoothPurityOpenDescentNormalization`): both parent and fixed files hit current unsolved-goal/`simp` mismatches in 4.80 s and 4.20 s respectively, before the target.
+
