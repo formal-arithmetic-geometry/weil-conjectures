@@ -183,7 +183,6 @@ private theorem ringedSite_pushforward_colimits
     { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
-set_option maxHeartbeats 400000 in
 -- Descending the trifunctor comparison requires several large tensor instances.
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] derivedInternalHom homComplexFunctor

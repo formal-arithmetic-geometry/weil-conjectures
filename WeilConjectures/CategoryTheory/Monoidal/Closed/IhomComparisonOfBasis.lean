@@ -77,9 +77,9 @@ lemma homEquiv_δ_uncurry_homEquiv_symm (L : C ⥤ D) [L.Monoidal] {G : D ⥤ C}
     (f : X ⟶ (ihom A).obj B) :
     adj.homEquiv _ _ (OplaxMonoidal.δ L A X ≫ uncurry ((adj.homEquiv _ _).symm
       ((f ≫ adj.unit.app _ ≫ G.map (σ.app (L.obj _))) ≫
-        G.map ((ihomComparison L A).natTrans.app B)))) =
+        G.map ((ihomComparison L A).app B)))) =
       uncurry f ≫ adj.unit.app B ≫ G.map (σ.app (L.obj B)) := by
-  have hnat := σ.naturality ((ihomComparison L A).natTrans.app B)
+  have hnat := σ.naturality ((ihomComparison L A).app B)
   dsimp only [Functor.id_obj, Functor.id_map, Functor.comp_obj] at hnat
   rw [Category.assoc, Category.assoc, ← G.map_comp, ← hnat, ← adj.homEquiv_unit,
     ← adj.homEquiv_naturality_left, Equiv.symm_apply_apply, uncurry_natural_left,
@@ -98,7 +98,7 @@ theorem isIso_ihomComparison_of_isIso_biproductDesc [Preadditive C] [Preadditive
     (σ : ι → (𝟭 D ⟶ 𝟭 D)) (hσ : ∀ (i : ι) (P Z : D), (σ i).app (P ⊗ Z) = P ◁ (σ i).app Z)
     (hθ : ∀ K : C,
       IsIso (biproduct.desc fun i : ι ↦ adj.unit.app K ≫ G.map ((σ i).app (L.obj K))))
-    (A : C) : IsIso (ihomComparison L A).natTrans := by
+    (A : C) : IsIso (ihomComparison L A) := by
   have := Fintype.ofFinite ι
   rw [NatTrans.isIso_iff_isIso_app]
   intro B
@@ -124,7 +124,7 @@ theorem isIso_ihomComparison_of_isIso_biproductDesc [Preadditive C] [Preadditive
   have hu : Function.Bijective (fun (f : ι → (X ⟶ (ihom A).obj B)) (i : ι) ↦ uncurry (f i)) :=
     ⟨fun f g hfg ↦ funext fun i ↦ uncurry_injective (congrFun hfg i),
       fun g ↦ ⟨fun i ↦ curry (g i), funext fun i ↦ uncurry_curry (g i)⟩⟩
-  have hcomp : Function.Bijective ((e ∘ fun g ↦ g ≫ G.map ((ihomComparison L A).natTrans.app B)) ∘
+  have hcomp : Function.Bijective ((e ∘ fun g ↦ g ≫ G.map ((ihomComparison L A).app B)) ∘
       fun f : ι → (X ⟶ (ihom A).obj B) ↦ (∑ i, f i ≫ adj.unit.app ((ihom A).obj B) ≫
         G.map ((σ i).app (L.obj ((ihom A).obj B))) : X ⟶ G.obj (L.obj ((ihom A).obj B)))) := by
     convert hβ.comp hu using 1

@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 # Admissible condensed coefficients for localizing closures
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-coefficient convention (blueprint: sk-def-localizing-closure).
+coefficient convention (blueprint: definition-localizing-subcategory).
 
 This supplies the coefficient convention omitted from the recorded localizing-closure
 interface. The localizing closure itself is the imported `localizingClosureProEtale`.
@@ -24,7 +24,7 @@ It also supplies `IsLocalizingSubcategoryOfSize` and `localizingClosureOfSize`, 
 imported `IsLocalizingSubcategory` and `localizingClosure` with the index universe of
 the direct sums given as a free parameter `w`. At `w = u`, the object universe, they
 are the imported definitions. A fixed index universe shared by two categories of
-different sizes, as in det-proper-image-localizing-principle, needs this form.
+different sizes, as in proposition-proper-direct-image-extension-zero, needs this form.
 -/
 
 @[expose] public section
@@ -39,11 +39,7 @@ namespace CategoryTheory
 
 /-- A property describes a full replete triangulated subcategory closed under all
 coproducts indexed by types in the universe `w` that exist in the ambient category.
-At `w = u` this is `IsLocalizingSubcategory`.
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-first paragraph, sums indexed in the fixed indexing universe
-(blueprint: sk-def-localizing-closure). -/
+At `w = v` (the morphism universe) this is `IsLocalizingSubcategory`. -/
 def IsLocalizingSubcategoryOfSize {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -55,11 +51,8 @@ def IsLocalizingSubcategoryOfSize {C : Type u} [Category.{v, u} C]
         P (colimit F)
 
 /-- The intersection of all full replete triangulated subcategories containing `S` and
-closed under the existing `w`-indexed coproducts. At `w = u` this is `localizingClosure`.
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-first paragraph, sums indexed in the fixed indexing universe
-(blueprint: sk-def-localizing-closure). -/
+closed under the existing `w`-indexed coproducts. At `w = v` (the morphism universe) this is
+`localizingClosure`. -/
 def localizingClosureOfSize {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -78,8 +71,8 @@ rings, and the finite-subextension-valued algebraic closure `padicAlgClRingObj`
 not admissible. Isomorphisms are in monoid objects of condensed abelian groups,
 hence preserve both the additive and ring
 structures. Finite rings can be represented in `Type 0` without restricting their
-isomorphism classes. Source: blueprint sk-def-localizing-closure, coefficient convention
-(blueprint: sk-def-localizing-closure). -/
+isomorphism classes. Source: blueprint definition-localizing-subcategory, coefficient convention
+(blueprint: definition-localizing-subcategory). -/
 def IsLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop :=
   (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)

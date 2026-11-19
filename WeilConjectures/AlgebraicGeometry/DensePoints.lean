@@ -171,7 +171,7 @@ private lemma exists_etale_mvPolynomial (f : X.Hom (Spec (.of k))) [Smooth f] (x
 /-- **Density of separable points.** Let `X` be a smooth scheme over a field `k`. Then the
 closed points `x` of `X` whose residue field `κ(x)` is finite and separable over `k` are dense.
 
-(blueprint: `lem-pc-dense-separable-points`) -/
+(blueprint: `lemma-twisting-h-0-1-h`) -/
 @[stacks 056U]
 theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [Smooth f] :
     Dense {x : X | IsClosed {x} ∧ letI := (f.residueFieldAlgebraMap x).toAlgebra
@@ -198,7 +198,7 @@ theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [
 field `k`, given by its structure morphism `f : X ⟶ Spec k`. Then the image in `X` of the set
 `X(k)` of `k`-rational points is Zariski dense.
 
-(blueprint: `det-prop-picard-dense-points`, `lem-pc-rational-points-dense`) -/
+(blueprint: `lemma-twisting-h-0-1-h`, `lemma-representability-picard-functor`) -/
 theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f] :
     DenseRange fun p : f.fieldPoints k ↦ (p.1.base default : X) := by
   refine f.dense_setOf_isClosed_finite_isSeparable.mono fun x hx ↦ ?_
@@ -212,7 +212,7 @@ theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [S
 /-- **Rational points of a smooth scheme exist.** A nonempty smooth scheme over a separably
 closed field `k` has a `k`-rational point.
 
-(blueprint: `lem-pc-rational-points-dense`) -/
+(blueprint: `lemma-representability-picard-functor`) -/
 theorem Hom.nonempty_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f]
     [Nonempty X] : Nonempty (f.fieldPoints k) :=
   f.denseRange_fieldPoints.nonempty
@@ -273,7 +273,7 @@ separably closed field `k` and let `K` be a field extension of `k`. Then the `K`
 points `x_K` of `X_K = X ×_k Spec K` coming from the `k`-rational points `x` of `X` are
 Zariski dense in `X_K`.
 
-(blueprint: `cor-pc-dense-points-curves-sections`, part (1)) -/
+(blueprint: `lemma-twisting-h-0-1-h`, part (1)) -/
 theorem Hom.denseRange_baseChangeFieldPoint [IsSepClosed k] (f : X.Hom (Spec (.of k)))
     [Smooth f] (K : Type u) [Field K] [Algebra k K] :
     DenseRange fun p : f.fieldPoints k ↦ (f.baseChangeFieldPoint K p).1.base default := by
@@ -292,7 +292,7 @@ separably closed field `k`, let `K` be a field extension of `k` and let `φ` be 
 not vanish identically, i.e. its zero scheme `Z(φ)` is not all of `X_K`, then there is a
 `k`-rational point `x` of `X` such that `φ` does not vanish at `x_K`.
 
-(blueprint: `cor-pc-dense-points-curves-sections`, part (2)) -/
+(blueprint: `lemma-twisting-h-0-1-h`, part (2)) -/
 theorem Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus [IsSepClosed k]
     (f : X.Hom (Spec (.of k))) [Smooth f] (K : Type u) [Field K] [Algebra k K]
     {M N : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules} (φ : M ⟶ N)
@@ -306,7 +306,7 @@ closed field `k`, e.g. a smooth projective curve, and let `φ : ℳ ⟶ 𝒩` be
 invertible `𝒪_X`-modules, e.g. a nonzero global section `s : 𝒪_X ⟶ ℒ`. Then `φ` does not vanish
 at some `k`-rational point of `X`.
 
-(blueprint: `cor-pc-dense-points-curves-sections`, part (3)) -/
+(blueprint: `lemma-twisting-h-0-1-h`, part (3)) -/
 theorem Hom.exists_fieldPoints_notMem_support_zeroLocus [IsSepClosed k]
     (f : X.Hom (Spec (.of k))) [Smooth f] [IsReduced X] {M N : X.Modules}
     [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N]
@@ -326,7 +326,7 @@ is a closed point, so if there were only finitely many of them, their union woul
 by `AlgebraicGeometry.Scheme.Hom.denseRange_fieldPoints`, equal to `X`; then `X` would be a
 finite discrete space, of dimension zero, whereas the curve `X` has dimension one.
 
-(blueprint: `det-prop-picard-dense-points`, `cor-pc-dense-points-curves-sections`, part (3)) -/
+(blueprint: `lemma-twisting-h-0-1-h`, part (3)) -/
 theorem Hom.infinite_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k)))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
     Infinite (f.fieldPoints k) := by

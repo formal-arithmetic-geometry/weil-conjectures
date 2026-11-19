@@ -319,7 +319,6 @@ private theorem derived_map_surjective
   rw [DerivedCategory.quotientCompQhIso_inv_naturality, ht]
   simp [e]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the two sheaf resolutions and their localization maps needs this budget.
 /-- Every derived morphism has these K-flat coordinates.
 Proof: choose a complex representing K and a K-flat resolution P (lem-pc-kflat-resolution).

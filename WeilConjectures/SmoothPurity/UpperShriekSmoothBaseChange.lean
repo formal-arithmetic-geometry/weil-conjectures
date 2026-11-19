@@ -70,7 +70,7 @@ variable {𝒳 𝒴 𝒳' 𝒴' : Type*} [Category* 𝒳] [Category* 𝒴] [Cate
 change. -/
 lemma exceptionalBaseChange_eq_mateEquiv_app (N : 𝒴) :
     exceptionalBaseChange a a' bc N =
-      (mateEquiv a a' (TwoSquare.mk _ _ _ _ (asIso bc).inv)).natTrans.app N := by
+      (mateEquiv a a' (TwoSquare.mk _ _ _ _ (asIso bc).inv)).app N := by
   rw [Adjunction.mateEquiv_app_eq_homEquiv a a' u v (asIso bc) N, exceptionalBaseChange]
   simp [NatIso.isIso_inv_app]
 
@@ -100,7 +100,7 @@ noncomputable def upperShriekBaseChangeNatTrans (sq : IsPullback g' f' f g) :
   (mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleUpperShriekAdjunction ℓ f')
     (TwoSquare.mk _ _ _ _
-      (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv)).natTrans
+      (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).inv))
 
 /-- The exceptional base change map is the component of `upperShriekBaseChangeNatTrans`. -/
 lemma upperShriekBaseChange_eq_upperShriekBaseChangeNatTrans_app (sq : IsPullback g' f' f g)

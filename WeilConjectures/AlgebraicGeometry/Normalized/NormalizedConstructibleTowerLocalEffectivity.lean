@@ -19,16 +19,18 @@ import WeilConjectures.AlgebraicGeometry.Lisse.LisseNormalizedTowerLocalModels
 /-!
 # Local effectivity of normalized bounded constructible towers
 
-Source: blueprint amplification (c); Stacks Tags 09AL, 09BU--09BX and 09AV
-(blueprint: lem-weil-pbc-normalized-constructible-local-effectivity).
-
 The existing AdicTower packages the strict derived tower, quotient-linear levels,
 evaluation identifications, normalization isomorphisms, transitions and quotient cocycle.
-The positive level n+1 is indexed by n : ℕ. Intrinsic constructibility uses the canonical
+The positive level n+1 is indexed by n: ℕ. Intrinsic constructibility uses the canonical
 constant-to-functions coefficient comparison. The etale-origin conclusion uses the
 existing bounded-constructible essential image, transported on actual cochain
 representatives along the canonical coefficient-ring isomorphism. Thus no new derived
 scalar functor or chosen comparison equivalence is needed.
+
+## References
+
+* Stacks Tags 09AL, 09BU--09BX and 09AV
+* Stacks Project, Tags 09AL, 09BU--09BX and 09AV
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +48,7 @@ set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 C represents an object in the existing finite-coefficient bounded-constructible essential
 image. Its coefficient transport is restriction along the canonical ring-sheaf comparison,
 termwise before localization. This is just a presentation of the same derived object,
-not an additional condition on the representative.
-Source: blueprint def-weil-pbc-proetale-modules; Stacks Tag 09AL
-(blueprint: lem-weil-pbc-normalized-constructible-local-effectivity). -/
+not an additional condition on the representative. -/
 def IsAdicTowerLevelOfBoundedConstructibleEtaleOrigin
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : AdicTower X d) (n : ℕ) : Prop :=
@@ -78,20 +78,6 @@ private theorem inverse_normalization_square
 /-- A normalized adic tower with intrinsically constructible cohomology in one common
 interval has bounded constructible etale origin at every level and admits all the common
 local-model data of uniformly bounded constructibility. Local terms need not be projective.
-Source: blueprint amplification (c), agent assembly of Stacks 09AL, 09BU--09BX, 09AV;
-see the source and proof records of the node
-(blueprint: lem-weil-pbc-normalized-constructible-local-effectivity).
-
-Proof: apply finiteCoefficient_constructibleDerived_origin_presentation at each
-quotient to obtain the first conclusion. The common-strata theorem uses the first
-quotient and the common interval to produce simultaneous relative lissity. On each
-stratum apply lisseNormalizedTower_local_models, retaining its covering sieve,
-bounded complex and lissity properties. Invert its realization isomorphisms.
-The private inverse_normalization_square proves their compatibility by cancellation,
-so these data form an AdicTowerLocalModel. The common interval and stratification
-then witness uniformly bounded constructibility. The three intermediate nodes
-record the finite coefficient transport, nilpotent propagation, and reconstruction
-arguments separately.
 -/
 theorem normalizedConstructibleTower_local_effectivity
     (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]

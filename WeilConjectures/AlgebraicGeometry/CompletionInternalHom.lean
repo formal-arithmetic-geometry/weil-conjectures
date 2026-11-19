@@ -75,7 +75,7 @@ Proof (the node's five steps):
    Local inverse images of any compatible morphism agree on affine subopens of overlaps
    by local injectivity, so glue at every level to global sections. Their compatibility
    and the required equality of morphisms hold locally and hence globally by the sheaf
-   condition (def-weil-sheaf-of-modules-category, def-pur-sheaf-hom). -/
+   condition (situation-conventions, def-pur-sheaf-hom). -/
 theorem completion_internal_hom_bijective {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X) :
     (∀ n : ℕ,

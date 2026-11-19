@@ -21,7 +21,7 @@ is the spectrum of the extended Rees algebra `R[t, I t⁻¹]`
 `Spec R[t, I t⁻¹] ≅ Bl_{V(I) × 0} (Spec R × 𝔸¹) ∖ (strict transform of Spec R × 0)`,
 
 which is the blow-up description of the deformation to the normal cone in blueprint
-`def-pur-dnc-section-family`.
+`definition-deformation-normal-bundle`.
 
 The two inclusions:
 - on `D₊(t·X) = Spec R[t, I t⁻¹]`, if `t` vanishes at a point then so does `x = (x t⁻¹)·t` for
@@ -326,7 +326,7 @@ end AwayChart
 
 /-- **The Rees chart is the complement of the strict transform of the zero fibre**: in the
 blow-up of `Spec R[t]` along `J = I R[t] + (t)`, the complement of the closure of the locus over
-`V(t) ∖ V(J)` is the image of `Spec R[t, I t⁻¹]` (blueprint `def-pur-dnc-section-family`,
+`V(t) ∖ V(J)` is the image of `Spec R[t, I t⁻¹]` (blueprint `definition-deformation-normal-bundle`,
 affine-local form). -/
 theorem compl_closure_zeroFibreOffCenter :
     (closure (zeroFibreOffCenter I))ᶜ =
@@ -365,8 +365,8 @@ lemma quasiCompact_strictTransformOpen_ι (hI : I.FG) :
   exact quasiCompact_strictTransformOpen_ι_of_isCompact _ _ _
     (PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr ⟨_, deformationCenter_fg hI, rfl⟩).1
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section, affine-local
-form. For a finitely generated ideal `I ⊆ R` (the ideal of the section `s(B) = V(I)` in
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section,
+affine-local form. For a finitely generated ideal `I ⊆ R` (the ideal of the section `s(B) = V(I)` in
 `V = Spec R`), the Rees model `Spec R[t, I t⁻¹]` of the deformation to the normal cone is, via
 `deformationChart`, the open complement in `Bl_{V(I) × 0} (Spec R[t])` of the strict transform of
 the zero fibre `V × {0} = Spec R`. The chart lies over `Spec R[t]`
@@ -396,8 +396,8 @@ noncomputable def strictTransformCompl : (AffineBlowup (deformationCenter I)).Op
       (centerCompl I)))ᶜ,
     (strictTransformMap _ _ _).isClosedEmbedding.isClosed_range.isOpen_compl⟩
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section, affine-local
-form as an isomorphism of schemes: for finitely generated `I`,
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section,
+affine-local form as an isomorphism of schemes: for finitely generated `I`,
 `Spec R[t, I t⁻¹] ≅ Bl_{V(I) × 0} (Spec R[t]) ∖ (strict transform of Spec R × 0)`. -/
 noncomputable def extendedReesSpecIsoStrictTransformCompl (hI : I.FG) :
     Spec (.of I.extendedReesAlgebra) ≅ (strictTransformCompl I).toScheme :=

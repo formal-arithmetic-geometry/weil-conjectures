@@ -42,7 +42,7 @@ theorem bidual_comm (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
         ((P.dual hP).dual hP.dual).obj.str.hom =
       P.obj.str.hom ≫ Mod.bidual P.obj.carrier (adicConstant k₀ l X).obj.carrier := by
   let Fr := ProEtale.lowerStar (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
   let b := Mod.bidual P.obj.carrier (adicConstant k₀ l X).obj.carrier
   let sP := P.obj.str.hom.hom
   let sD := (P.dual hP).obj.str.hom.hom
@@ -70,7 +70,7 @@ theorem bidual_comm (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
     rfl
   exact Mod.uncurryHom_injective key
 
-/-- **Biduality of a lisse sheaf** (blueprint: `lem-sf-hom-finite-projective`, "the canonical
+/-- **Biduality of a lisse sheaf** (blueprint: `proposition-six-operations-dctf--15`, "the canonical
 map `P ⟶ P^∨∨` is an isomorphism"). -/
 theorem nonempty_iso_dual_dual (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
     Nonempty (P ≅ (P.dual hP).dual hP.dual) := by

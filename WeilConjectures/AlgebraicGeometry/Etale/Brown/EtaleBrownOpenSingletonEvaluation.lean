@@ -56,7 +56,7 @@ theorem etaleBrownOpenSingletonEvaluation
     (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅
       S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived)
     (hq : (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-      (.mk _ _ _ _ q.hom)).natTrans = (S.openDerived.derivedTensor h).inv)
+      (.mk _ _ _ _ q.hom)) = (S.openDerived.derivedTensor h).inv)
     (P : DerivedCategory (strictEtaleLevel X O t n)) :
     let insertion := ((conjugateIsoEquiv
       ((S.PX.derivedAdj n).comp S.derivedOpenAdjunction)

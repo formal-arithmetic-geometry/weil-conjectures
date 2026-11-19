@@ -93,7 +93,7 @@ Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD
 
 Proof: apply `lem-sc-module-abelian-zariski-cohomology` to obtain the comparison in every
 positive degree. In degree zero, both right derived functors are global sections by
-`pqf-def-cohomology` and `def-sc-zariski-cohomology`; choose the identity on sections.
+`pqf-def-cohomology` and `lemma-uniform-bounds-pro-etale-affines`; choose the identity on sections.
 The comparison is natural in the module by the naturality in the cited comparison and by
 functoriality of global sections in degree zero.
 

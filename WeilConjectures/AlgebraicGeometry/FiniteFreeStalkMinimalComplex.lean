@@ -14,8 +14,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkUnitCancellation
 
 /-! # Minimal finite free complexes over a scheme stalk
 
-Source: Stacks Project, Tag 00MT, and blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-minimal-complex)
+Source: Stacks Project, Tag 00MT, and blueprint lemma-coherent-base-change-invertible-sheaves--3,
+proof step 4. (blueprint: lem-pc-finite-free-stalk-minimal-complex)
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A bounded finite free complex over a stalk has a minimal homotopy representative.
 
 Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`), and blueprint
-lem-pc-perfect-locus, proof step 4.
+lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-stalk-minimal-complex).
 
 Proof: Choose a finite free rank for each term and use strong induction on the

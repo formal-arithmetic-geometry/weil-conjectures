@@ -33,7 +33,7 @@ first paragraph, restriction and boundary divisors
 (blueprint: lem-sc-pic-restriction-exact).
 
 Proof:
-1. Apply the divisor-class comparison `lem-sc-divisor-class-curve` to the smooth
+1. Apply the divisor-class comparison `proposition-cohomology-smooth-affine-curve` to the smooth
    connected curves C and c.Z. Restriction of divisors forgets boundary coefficients.
    Every divisor on C extends by zero, so this restriction is surjective.
 2. The dense open immersion identifies the function fields. The valuation at a point

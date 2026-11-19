@@ -50,7 +50,7 @@ theorem isIso_smoothUnitBaseChange_fieldCompactification
     [IsIso ((mateEquiv
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l c.overI)
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l c'.overI)
-      (inv (purityFieldOpenRestrictedExchange l f f' c c' hi).hom)).natTrans.app
+      (inv (purityFieldOpenRestrictedExchange l f f' c c' hi).hom)).app
         ((boundedConstructibleUpperShriek l c.overG).obj (𝟙_ _)))]
     [IsIso (Adjunction.unitBaseChange
       (purityCompactificationProperAdjunction l f c)

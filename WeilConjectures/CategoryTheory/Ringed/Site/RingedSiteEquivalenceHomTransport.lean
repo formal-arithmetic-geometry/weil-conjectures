@@ -218,8 +218,6 @@ private def sheafHomIso (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
 
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem sheafHomIso_naturality
     (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
@@ -256,7 +254,6 @@ private def scalarEquivalence {C : Type c} [Category.{vc} C]
   counitIso := scalarRoundTrip a.symm
   functor_unitIso_comp M := by ext V x; rfl
 
-set_option maxHeartbeats 1800000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- A site equivalence with an identified coefficient sheaf gives a module
  equivalence compatible with the actual derived internal Hom.

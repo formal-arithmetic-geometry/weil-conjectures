@@ -98,7 +98,6 @@ def nativeRingRestrictionSquare {R S : PurCompactSupport.Coefficients.{u}}
       (R.ring V) (S.ring V) (R.ring U) (S.ring U)
       (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv
 
-set_option maxHeartbeats 800000 in
 -- The concrete coefficient functors require elaborating the site and ring transports.
 /-- Natural ring diagrams transport the restriction/direct-image cube.
 The source and target coefficient systems are arbitrary. Only their ordinary ring
@@ -170,8 +169,7 @@ theorem nativeScalarRestrictionCube
   have h := (hk g).choose_spec.choose_spec
   refine ⟨NativeScalarDerivedRestriction.forwardIntegralPush l E a P g x,
     NativeScalarDerivedRestriction.forwardClosurePush l E a P g y, ?_⟩
-  apply TwoSquare.ext
-  intro N
+  refine NatTrans.ext (funext fun N ↦ ?_)
   have hf := forwardCube
     (liftEquivalence (P.closureEquivalence U)) (liftEquivalence (P.integralEquivalence U))
     (liftEquivalence (P.closureEquivalence V)) (liftEquivalence (P.integralEquivalence V))
@@ -193,7 +191,7 @@ theorem nativeScalarRestrictionCube
     (NativeScalarDerivedRestriction.positiveSquare l E g)
     (NativeScalarDerivedRestriction.inverseCube l E a P k g x y h) N
   simpa only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.map_id, Category.id_comp, Category.comp_id,
     nativeRingRestrictionSquare, nativeScalarCompositeRestrictionSquare,

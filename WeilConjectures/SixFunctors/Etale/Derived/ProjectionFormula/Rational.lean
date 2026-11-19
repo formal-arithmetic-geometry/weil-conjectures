@@ -20,16 +20,19 @@ are the derived completions of the plain operations of `D(Y_ét, 𝒪_E)` (see
 `PF_{f, K, L}` over `E`, for `K` and `L` obtained by rationalization from `𝒪_E`-objects, is the
 image of the integral projection map, the derived completion of the plain projection map, under
 the localization functor `DerivedCategoryDerivedCompleteRational.fromIntegral`. This file proves
-that it is an isomorphism (blueprint `thm-sf-pf-field`, rational stage), following the blueprint:
-the integral projection map is an isomorphism (`sk-thm-sf-pf-adic`,
-`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`), and a functor carries
-isomorphisms to isomorphisms.
+that it is an isomorphism (blueprint `lemma-kunneth-formula-compact-supports--3`, rational stage),
+following the blueprint: the integral projection map is an isomorphism
+(`lemma-projection-formula-integral-coefficients`,
+`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`), and a functor carries isomorphisms to
+isomorphisms.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_fromIntegral_map_projectionMap` (`thm-sf-pf-field`): the
+- `AlgebraicGeometry.Etale.isIso_fromIntegral_map_projectionMap`
+(`lemma-kunneth-formula-compact-supports--3`): the
   projection formula over `E` for rationalizations of `𝒪_E`-objects.
-- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap` (`thm-sf-pf-field`):
+- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap`
+(`lemma-kunneth-formula-compact-supports--3`):
   the reductions modulo `𝔪_Eⁿ` of the integral representative are isomorphisms.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_field`: both together.
 
@@ -74,15 +77,17 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `thm-sf-pf-field`: Rational and algebraically closed stages; the rational stage.
+/-- Blueprint `lemma-kunneth-formula-compact-supports--3`: Rational and algebraically closed stages;
+the rational stage.
 
 Over `E`, the projection map `PF_{f, K, L} : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` of the
 rationalizations of `K, L` over `𝒪_E` is the image under the rationalization functor
 `D_comp(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, E)` of the integral projection map, the derived completion of
 the plain projection map. It is an isomorphism: the integral projection map is one
-(`sk-thm-sf-pf-adic`, `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`) and the
-rationalization functor carries isomorphisms to isomorphisms. The blueprint takes `K` and `L`
-bounded constructible, derived complete and of finite Tor amplitude; this is not needed. -/
+(`lemma-projection-formula-integral-coefficients`,
+`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`) and the rationalization functor
+carries isomorphisms to isomorphisms. The blueprint takes `K` and `L` bounded constructible, derived
+complete and of finite Tor amplitude; this is not needed. -/
 theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) :
@@ -91,8 +96,8 @@ theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification 
         (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L))) :=
   @Functor.map_isIso _ _ _ _ _ _ _ _ (isIso_completion_map_projectionMap l E f K L)
 
-/-- Blueprint `thm-sf-pf-field`: Rational and algebraically closed stages; the compatibility
-with finite reduction.
+/-- Blueprint `lemma-kunneth-formula-compact-supports--3`: Rational and algebraically closed stages;
+the compatibility with finite reduction.
 
 The reduction modulo `𝔪_Eⁿ` of the plain projection map `PF_{f, K, L}` over `𝒪_E`, whose derived
 completion is the integral representative of the projection map over `E`, is an isomorphism for
@@ -108,7 +113,8 @@ theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompacti
   isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L n
 
 /-- **The projection formula at the rational stage of the étale model** (the étale-site form of
-the old blueprint `sk-thm-sf-pf-field`; the pro-étale statement of the current blueprint is in
+the old blueprint `proposition-projection-formula-rational-coefficients`; the pro-étale statement of
+the current blueprint is in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField`).
 
 Let `f : X ⟶ Y` admit a compactification and let `E/ℚ_ℓ` be a finite extension inside `ℚ̄_ℓ`.

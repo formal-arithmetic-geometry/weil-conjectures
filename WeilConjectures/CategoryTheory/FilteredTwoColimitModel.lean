@@ -21,7 +21,7 @@ which sends `(i, x)` to `Φ_i x` and a class `[k, g]` to `θ_jk ∘ Φ_k g ∘ �
 `FilteredTwoColimitCharacterization.lean` shows that the cocone is a filtered 2-colimit exactly
 when this comparison is an equivalence.
 
-(blueprint: det-def-sfb-filtered-two-colimit-model).
+(blueprint: proposition-dctf-x-qbar-2-colimit--1).
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ namespace CategoryTheory
 variable {I : Type w} [Preorder I] {C : I → Type u} [∀ i, Category.{v} (C i)]
   {D : Type u'} [Category.{v'} D]
 
-/-- Normalized coherent cocone. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- Normalized coherent cocone. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 structure CoherentCategoryCocone extends CategoryCocone C D where
   tau : ∀ {i j k : I} (hij : i ≤ j) (hjk : j ≤ k),
     T hij ⋙ T hjk ≅ T (hij.trans hjk)
@@ -58,24 +58,24 @@ namespace FilteredTwoColimit
 
 variable (c : CoherentCategoryCocone (C := C) (D := D))
 
-/-- Pair objects. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- Pair objects. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def Object (_c : CoherentCategoryCocone (C := C) (D := D)) : Type (max w u) :=
   Σ i : I, C i
 
 /-- Common upper stages with the inherited preorder.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def CommonStage (i j : I) := {k : I // i ≤ k ∧ j ≤ k}
 
-/-- The inherited order. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- The inherited order. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 instance commonStagePreorder (i j : I) : Preorder (CommonStage i j) :=
   inferInstanceAs (Preorder {k : I // i ≤ k ∧ j ≤ k})
 
-/-- Hom at a common stage. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- Hom at a common stage. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def HomAt (a b : Object c) (k : CommonStage a.1 b.1) : Type v :=
   (c.T k.2.1).obj a.2 ⟶ (c.T k.2.2).obj b.2
 
 /-- Transition by conjugating the transition functor by tau.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def homTransition {a b : Object c} {k l : CommonStage a.1 b.1}
     (h : k ≤ l) (g : HomAt c a b k) : HomAt c a b l :=
   (c.tau k.2.1 h).inv.app a.2 ≫ (c.T h).map g ≫ (c.tau k.2.2 h).hom.app b.2
@@ -93,7 +93,7 @@ private theorem normalized_transport {A B E : Type*} [Category A] [Category B]
   simp
 
 /-- Normalization of tau and T gives identity.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem homTransition_id (a b : Object c) (k : CommonStage a.1 b.1)
     (g : HomAt c a b k) : homTransition c (le_refl k) g = g := by
   exact normalized_transport (c.T (le_refl k.1)) (c.transition_identity k.1)
@@ -102,7 +102,7 @@ theorem homTransition_id (a b : Object c) (k : CommonStage a.1 b.1)
     (c.tau_identity_right k.2.2) a.2 b.2 g
 
 /-- Transitions compose: `t_lm ∘ t_kl = t_km` on Hom sets at common stages.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem homTransition_comp (a b : Object c) {k l m : CommonStage a.1 b.1}
     (h : k ≤ l) (h' : l ≤ m) (g : HomAt c a b k) :
     homTransition c h' (homTransition c h g) = homTransition c (h.trans h') g := by
@@ -126,7 +126,7 @@ theorem homTransition_comp (a b : Object c) {k l m : CommonStage a.1 b.1}
   rw [← Category.assoc ((c.T h').map ((c.T h).map g)), hn]
   simp
 
-/-- The Hom diagram. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- The Hom diagram. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def homDiagram (a b : Object c) : CommonStage a.1 b.1 ⥤ Type v where
   obj k := HomAt c a b k
   map h := TypeCat.ofHom (homTransition c (leOfHom h))
@@ -135,31 +135,31 @@ def homDiagram (a b : Object c) : CommonStage a.1 b.1 ⥤ Type v where
     (fun g => (homTransition_comp c a b (leOfHom h) (leOfHom h') g).symm)
 
 /-- The actual set colimit, with no smallness restriction on the index.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def HomSet (a b : Object c) : Type (max w v) := (homDiagram c a b).ColimitType
 
 /-- A representative consists of a common stage and an arrow there.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def HomRepresentative (a b : Object c) := Σ k, HomAt c a b k
 
-/-- The class of a representative. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- The class of a representative. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def homClass {a b : Object c} (k : CommonStage a.1 b.1) (g : HomAt c a b k) :
     HomSet c a b := (homDiagram c a b).ιColimitType k g
 
 /-- The canonical colimit classes identify an arrow
 with its transition image, by the generating relation of the colimit quotient.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem homClass_transition {a b : Object c} {k l : CommonStage a.1 b.1}
     (h : k ≤ l) (g : HomAt c a b k) :
     homClass c l (homTransition c h g) = homClass c k g := by
   exact (homDiagram c a b).ιColimitType_map (homOfLE h) g
 
-/-- The normalized identity class. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- The normalized identity class. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def identityHom (a : Object c) : HomSet c a a :=
   homClass c ⟨a.1, le_refl a.1, le_refl a.1⟩ (𝟙 _)
 
 /-- The common upper stages of two indices form a filtered preorder.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem commonStage_isFiltered [IsDirected I (· ≤ ·)] (i j : I) :
     IsFiltered (CommonStage i j) := by
   obtain ⟨k, hi, hj⟩ := exists_ge_ge i j
@@ -171,7 +171,7 @@ theorem commonStage_isFiltered [IsDirected I (· ≤ ·)] (i j : I) :
 
 /-- Two representatives define the same class exactly when they agree after transition to a
 common later stage (Stacks 04AX).
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem homClass_eq_iff [IsDirected I (· ≤ ·)] {a b : Object c} (k l : CommonStage a.1 b.1)
     (f : HomAt c a b k) (g : HomAt c a b l) :
     homClass c k f = homClass c l g ↔
@@ -184,7 +184,7 @@ theorem homClass_eq_iff [IsDirected I (· ≤ ·)] {a b : Object c} (k l : Commo
 
 variable [IsDirected I (· ≤ ·)]
 
-/-- Composition at a specified common stage. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- Composition at a specified common stage. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def compAt {a b d : Object c} (f : HomRepresentative c a b)
     (g : HomRepresentative c b d) (m : I) (hf : f.1.1 ≤ m) (hg : g.1.1 ≤ m) :
     HomSet c a d :=
@@ -195,7 +195,7 @@ def compAt {a b d : Object c} (f : HomRepresentative c a b)
         (l := ⟨m, g.1.2.1.trans hg, g.1.2.2.trans hg⟩) hg g.2)
 
 /-- Choose an upper bound of two representative stages, then use the displayed composition.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 noncomputable def compRepresentative {a b d : Object c}
     (f : HomRepresentative c a b) (g : HomRepresentative c b d) : HomSet c a d :=
   compAt c f g (Classical.choose (exists_ge_ge f.1.1 g.1.1))
@@ -228,7 +228,7 @@ private theorem compAt_transition {a b d : Object c}
     homTransition_comp]
 
 /-- The composite class does not depend on the common stage at which it is computed.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem compRepresentative_eq_compAt {a b d : Object c}
     (f : HomRepresentative c a b) (g : HomRepresentative c b d)
     (m : I) (hf : f.1.1 ≤ m) (hg : g.1.1 ≤ m) :
@@ -243,7 +243,7 @@ theorem compRepresentative_eq_compAt {a b d : Object c}
 /-- A generating relation in the
 second input transports it to a later stage. Move both products to one upper stage and use the
 transition law and preservation of products to identify them.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem compRepresentative_rel_right {a b d : Object c}
     (f : HomRepresentative c a b) (g g' : HomRepresentative c b d)
     (h : (homDiagram c b d).ColimitTypeRel g g') :
@@ -265,7 +265,7 @@ theorem compRepresentative_rel_right {a b d : Object c}
 /-- For a generating relation in
 first input, transport both products to a common upper stage and apply the transition law and
 preservation of products. This gives equality of the two classes.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem compRepresentative_rel_left {a b d : Object c}
     (f f' : HomRepresentative c a b) (g : HomRepresentative c b d)
     (h : (homDiagram c a b).ColimitTypeRel f f') :
@@ -285,7 +285,7 @@ theorem compRepresentative_rel_left {a b d : Object c}
   rw [homTransition_comp]
 
 /-- Composition descended to the two set colimits.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 noncomputable def compHom {a b d : Object c}
     (f : HomSet c a b) (g : HomSet c b d) : HomSet c a d :=
   Quot.liftOn₂ f g (compRepresentative c)
@@ -293,7 +293,7 @@ noncomputable def compHom {a b d : Object c}
     (fun f f' g h => compRepresentative_rel_left c f f' g h)
 
 /-- The identity class is a left identity for composition.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem id_compHom {a b : Object c} (f : HomSet c a b) :
     compHom c (identityHom c a) f = f := by
   induction f using Quot.inductionOn with
@@ -308,7 +308,7 @@ theorem id_compHom {a b : Object c} (f : HomSet c a b) :
     rfl
 
 /-- The identity class is a right identity for composition.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem compHom_id {a b : Object c} (f : HomSet c a b) :
     compHom c f (identityHom c b) = f := by
   induction f using Quot.inductionOn with
@@ -335,7 +335,7 @@ private theorem compHom_same {a b d : Object c} (m : I)
 /-- Choose one stage above three representatives;
 independence of stages identifies both bracketings with the products there. Apply associativity
 in that stage category.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem comp_assoc {a b d e : Object c} (f : HomSet c a b)
     (g : HomSet c b d) (h : HomSet c d e) :
     compHom c (compHom c f g) h = compHom c f (compHom c g h) := by
@@ -362,7 +362,7 @@ theorem comp_assoc {a b d e : Object c} (f : HomSet c a b)
         simp only [compHom_same, Category.assoc]
 
 /-- The category with pair objects and filtered-colimit Hom sets.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 noncomputable instance category : Category (Object c) where
   Hom := HomSet c
   id := identityHom c
@@ -372,7 +372,7 @@ noncomputable instance category : Category (Object c) where
   assoc := comp_assoc c
 
 /-- The comparison formula on representatives.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def mapHomRepresentative {a b : Object c} (f : HomRepresentative c a b) :
     (c.Φ a.1).obj a.2 ⟶ (c.Φ b.1).obj b.2 :=
   (c.iso f.1.2.1).inv.app a.2 ≫ (c.Φ f.1.1).map f.2 ≫ (c.iso f.1.2.2).hom.app b.2
@@ -404,7 +404,7 @@ private theorem mapHomRepresentative_transition {a b : Object c}
 
 omit [IsDirected I (· ≤ ·)] in
 /-- The comparison formula is constant on the classes of the Hom colimit.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem mapHomRepresentative_rel {a b : Object c}
     (f g : HomRepresentative c a b) (h : (homDiagram c a b).ColimitTypeRel f g) :
     mapHomRepresentative c f = mapHomRepresentative c g := by
@@ -415,21 +415,21 @@ theorem mapHomRepresentative_rel {a b : Object c}
   rw [e]
   exact (mapHomRepresentative_transition c (leOfHom h) f).symm
 
-/-- Comparison on the set-colimit Hom. (blueprint: det-def-sfb-filtered-two-colimit-model). -/
+/-- Comparison on the set-colimit Hom. (blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 def mapHom {a b : Object c} (f : HomSet c a b) :
     (c.Φ a.1).obj a.2 ⟶ (c.Φ b.1).obj b.2 :=
   Quot.liftOn f (mapHomRepresentative c) (mapHomRepresentative_rel c)
 
 omit [IsDirected I (· ≤ ·)] in
 /-- The comparison sends the identity class to the identity morphism.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem mapHom_id (a : Object c) : mapHom c (identityHom c a) = 𝟙 _ := by
   change mapHomRepresentative c ⟨⟨a.1, le_refl _, le_refl _⟩, 𝟙 _⟩ = _
   simp [mapHomRepresentative]
 
 /-- Represent the two arrows at one
 stage, cancel the middle theta and its inverse, and use that Phi at that stage preserves products.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 theorem mapHom_comp {a b d : Object c} (f : HomSet c a b) (g : HomSet c b d) :
     mapHom c (compHom c f g) = mapHom c f ≫ mapHom c g := by
   induction f using Quot.inductionOn with
@@ -450,7 +450,7 @@ theorem mapHom_comp {a b d : Object c} (f : HomSet c a b) (g : HomSet c b d) :
       simp [mapHomRepresentative, Functor.map_comp, Category.assoc]
 
 /-- The canonical comparison with the cocone vertex.
-(blueprint: det-def-sfb-filtered-two-colimit-model). -/
+(blueprint: proposition-dctf-x-qbar-2-colimit--1). -/
 noncomputable def comparison : Object c ⥤ D where
   obj a := (c.Φ a.1).obj a.2
   map := mapHom c

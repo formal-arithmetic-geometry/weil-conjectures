@@ -53,14 +53,14 @@ theorem balancedAction_quasicoherent_realization
     (M : X.Modules) (hM : M.IsQuasicoherent)
     (rho : B →+* End M)
     (hscalar : ∀ a : A, rho (algebraMap A B a) =
-      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a)) :
+      .of (M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))) :
     let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
     let Y := pullback f g
     let pi : Y ⟶ X := pullback.fst f g
     let fB : Y ⟶ Spec (.of B) := pullback.snd f g
     ∃ (F : Y.Modules), F.IsQuasicoherent ∧
       ∃ (e : M ≅ (Scheme.Modules.pushforward pi).obj F),
-        ∀ b : B, rho b ≫ e.hom = e.hom ≫
+        ∀ b : B, (rho b).asHom ≫ e.hom = e.hom ≫
           (Scheme.Modules.pushforward pi).map
             (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) := by
   classical
@@ -88,7 +88,7 @@ theorem balancedAction_quasicoherent_realization
   intro b
   ext U x
   change (β.app G).val.app (op U) ((e₀.hom.val.app (op U)).hom
-    ((rho b).val.app (op U) x)) = _
+    ((rho b).asHom.val.app (op U) x)) = _
   rw [he₀ b U x]
   rw [map_smul]
   rfl

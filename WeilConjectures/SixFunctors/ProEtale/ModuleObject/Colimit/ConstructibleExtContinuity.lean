@@ -21,7 +21,7 @@ constructible complex `C ∈ Dᵇc(X)⟦E̲⟧`, morphisms in `D(X_proét, E)` f
 colimit `K = colim_j K_j` of complexes of `E_X`-modules which all vanish below a fixed degree are
 the filtered colimit of the morphisms `C ⟶ K_j`, in every shift
 (`ProEtale.CondensedRing.constructibleExtContinuity_continuousMapRingObj`, blueprint
-`sk-lem-constructible-ext-continuity` (1)).
+`lemma-continuity-ext-out-constructible-complex--1` (1)).
 
 ## Proof
 
@@ -62,9 +62,9 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
-/-- Blueprint `sk-lem-constructible-ext-continuity`, lisse case for `E`: on a scheme with
-noetherian underlying space, `Hom(L[0], -[n])` commutes with filtered colimits for every locally
-finitely presented `E_X`-module `L`, which is locally free. -/
+/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1`, lisse case for `E`: on a scheme
+with noetherian underlying space, `Hom(L[0], -[n])` commutes with filtered colimits for every
+locally finitely presented `E_X`-module `L`, which is locally free. -/
 theorem homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj (E : Type)
     [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
@@ -77,9 +77,9 @@ theorem homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj (E : 
   homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree _ X (continuous_lf ℓ E X L hL)
 
 open ZeroObject in
-/-- Blueprint `sk-lem-constructible-ext-continuity` (1), for targets in degree `0`: on a scheme
-with noetherian underlying space, `Hom(C, -[n])` out of a bounded constructible `E`-complex `C`
-commutes with filtered colimits of `E_X`-modules. By dévissage
+/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` (1), for targets in degree `0`: on
+a scheme with noetherian underlying space, `Hom(C, -[n])` out of a bounded constructible `E`-complex
+`C` commutes with filtered colimits of `E_X`-modules. By dévissage
 (`ProEtale.prop_of_boundedConstructibleModule`) it suffices to treat constructible sheaves, which
 is `homCommutesWithFilteredColimits_singleFunctor_of_isConstructibleModuleObject`. -/
 theorem homCommutesWithFilteredColimits_of_boundedConstructible_continuousMapRingObj
@@ -106,8 +106,8 @@ theorem homCommutesWithFilteredColimits_of_boundedConstructible_continuousMapRin
       (fun _ _ ↦ homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj ℓ E.1 _)
       X F hF) C.property
 
-/-- Blueprint `sk-lem-constructible-ext-continuity` (1), for the coefficient ring `E̲` of a finite
-subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. Let `X` be a topologically noetherian scheme,
+/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` (1), for the coefficient ring `E̲`
+of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. Let `X` be a topologically noetherian scheme,
 `C ∈ Dᵇc(X, E)`, and `K = colim_j K_j` a filtered colimit of complexes of `E_X`-modules all of
 which vanish below a fixed degree `a`. Then for every `q ∈ ℤ`, the natural map
 `colim_j Hom(C, K_j[q]) ⟶ Hom(C, K[q])` is bijective:

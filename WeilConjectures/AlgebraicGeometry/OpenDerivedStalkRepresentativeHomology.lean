@@ -145,8 +145,26 @@ private theorem exact_representative_homology_hom
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
   erw [← Iso.app_inv, complex_homology_iso]
 
-set_option maxHeartbeats 1000000 in
--- Localization comparison evaluation needs additional elaboration heartbeats.
+private theorem additive_stalk_representative_homology
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (Y : Scheme.{u}) (y : Y) (i : ℤ)
+    (N : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
+    let F := forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}
+    let L := RingedSpace.moduleStalkFunctor Y.toRingedSpace y
+    F.map (comparisonStalkHomologyIso Y y N i).inv ≫
+        (additiveStalkCohomologyIso Y y i).hom.app (DerivedCategory.Q.obj N) =
+      F.map ((N.sc i).mapHomologyIso L).hom ≫
+        (L ⋙ F).map ((DerivedCategory.homologyFunctorFactors _ i).inv.app N) := by
+  let := HasDerivedCategory.standard (ModuleCat.{u} (Y.presheaf.stalk y))
+  let F := forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}
+  let L := RingedSpace.moduleStalkFunctor Y.toRingedSpace y
+  have h := congrArg (fun k ↦ F.map k) (exact_representative_homology L i N)
+  simpa only [comparisonStalkHomologyIso, additiveStalkCohomologyIso,
+    Iso.trans_inv, Functor.mapIso_inv, Iso.app_hom, Iso.symm_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
+    Iso.app_inv, Functor.comp_map] using h
+
 /-- On a complex, the constructed derived comparison is homology of the inverse
 additive restriction-stalk map, conjugated by the exact forgetful comparisons.
 
@@ -205,29 +223,9 @@ theorem openDerivedStalk_representative_homology
   let := comp_preservesFiniteColimits L0 F0
   let := comp_preservesFiniteLimits R (L0 ⋙ F0)
   let := comp_preservesFiniteColimits R (L0 ⋙ F0)
-  have hZ := congrArg (fun k ↦ F.map k) (exact_representative_homology L i N)
-  have hY := congrArg (fun k ↦ F0.map k)
-    (exact_representative_homology L0 i ((R.mapHomologicalComplex (.up ℤ)).obj N))
-  have hZ' : F.map (comparisonStalkHomologyIso Z (j y) N i).inv ≫
-      (additiveStalkCohomologyIso Z (j y) i).hom.app (DerivedCategory.Q.obj N) =
-      F.map ((N.sc i).mapHomologyIso L).hom ≫
-        (L ⋙ F).map ((DerivedCategory.homologyFunctorFactors _ i).inv.app N) := by
-    simpa only [comparisonStalkHomologyIso, additiveStalkCohomologyIso,
-      Iso.trans_inv, Functor.mapIso_inv, Iso.app_hom, Iso.symm_hom,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
-      Iso.app_inv, Functor.comp_map]
-      using hZ
-  have hY' : F0.map (comparisonStalkHomologyIso Y y
-        ((R.mapHomologicalComplex (.up ℤ)).obj N) i).inv ≫
-      (additiveStalkCohomologyIso Y y i).hom.app
-        (DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj N)) =
-      F0.map ((((R.mapHomologicalComplex (.up ℤ)).obj N).sc i).mapHomologyIso L0).hom ≫
-        (L0 ⋙ F0).map ((DerivedCategory.homologyFunctorFactors _ i).inv.app
-          ((R.mapHomologicalComplex (.up ℤ)).obj N)) := by
-    simpa only [comparisonStalkHomologyIso, additiveStalkCohomologyIso,
-      Iso.trans_inv, Functor.mapIso_inv, Iso.app_hom, Iso.symm_hom,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
-      Iso.app_inv, Functor.comp_map] using hY
+  have hZ' := additive_stalk_representative_homology Z (j y) i N
+  have hY' := additive_stalk_representative_homology Y y i
+    ((R.mapHomologicalComplex (.up ℤ)).obj N)
   simp only [openDerivedStalkIso, openRestrictionRepresentativeIso,
     Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     Iso.app_inv, NatTrans.comp_app,
@@ -235,21 +233,19 @@ theorem openDerivedStalk_representative_homology
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp,
     Category.assoc]
   erw [reassoc_of% hZ']
-  erw [← (comparisonStalkCohomology Y y i ⋙ F0).map_comp_assoc,
-    Iso.inv_hom_id_app]
-  erw [(comparisonStalkCohomology Y y i ⋙ F0).map_id, Category.id_comp]
+  simp only [← Iso.app_inv, ← Iso.app_hom, Iso.inv_hom_id_map_assoc]
   have hn := (additiveStalkCohomologyIso Y y i).inv.naturality
     (R.mapDerivedCategoryFactors.hom.app N)
   simp only [Functor.comp_map] at hn
-  erw [← hn]
+  conv_lhs => arg 2; arg 2; arg 2; arg 2; erw [← hn]
   have ht := (Scheme.Modules.restrictStalkNatIso j y).inv.naturality
     ((DerivedCategory.homologyFunctorFactors _ i).inv.app N)
   simp only [Functor.comp_map] at ht
-  erw [reassoc_of% ht]
+  conv_lhs => arg 2; erw [reassoc_of% ht]
   have hr := exact_representative_homology_hom R i N
   have hr' := congrArg (fun k ↦ (L0 ⋙ F0).map k) hr
   simp only [Functor.map_comp] at hr'
-  erw [reassoc_of% hr']
+  conv_lhs => arg 2; arg 2; erw [reassoc_of% hr']
   have hy : (L0 ⋙ F0).map
         ((DerivedCategory.homologyFunctorFactors _ i).inv.app
           ((R.mapHomologicalComplex (.up ℤ)).obj N)) ≫
@@ -264,11 +260,13 @@ theorem openDerivedStalk_representative_homology
     simp only [Category.assoc, Iso.hom_inv_id_app,
       ← F0.map_comp_assoc, Iso.hom_inv_id, F0.map_id, Category.id_comp]
     erw [Category.comp_id]
-  erw [hy]
-  exact congrArg (fun k ↦ k ≫ F0.map (comparisonStalkHomologyIso Y y
+  conv_lhs => arg 2; arg 2; arg 2; erw [hy]
+  have h := congrArg (fun k ↦ k ≫ F0.map (comparisonStalkHomologyIso Y y
     ((R.mapHomologicalComplex (.up ℤ)).obj N) i).inv)
     (ordinary_representative_homology R L L0 F F0 (N.sc i)
       (show (L ⋙ F) ⟶ (R ⋙ L0 ⋙ F0) from
         (Scheme.Modules.restrictStalkNatIso j y).inv))
+  simp only [Category.assoc] at h
+  exact h
 
 end AlgebraicGeometry.SingleComplexBaseChange

@@ -231,7 +231,7 @@ section Extension
 
 variable (𝒟)
 
-/-- (Implementation) Pointwise data for the extension lemma: on each chart `Uₗ`, a function
+/-- Auxiliary pointwise data for the extension lemma: on each chart `Uₗ`, a function
 `eₗ` restricting to `h tₗᵢ₀ᵐ` on `Uₗ ∩ U_{i₀}`, for a common exponent `m`. -/
 lemma exists_extension_aux [Finite ι] (hU : ∀ i, IsCompact (𝒟.U i : Set X))
     (hU' : ∀ i, IsQuasiSeparated (𝒟.U i : Set X)) (i₀ : ι) (h : Γ(X, 𝒟.U i₀)) :

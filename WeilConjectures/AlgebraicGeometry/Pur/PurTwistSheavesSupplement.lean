@@ -20,9 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.PurTwistSheaves
 
 /-! # The integral Tate line on the pro-etale site
 
-Source: Stacks Project, Tag 03PK; the coefficient-twist blueprint, order 1505
-(blueprint: def-pur-twist-sheaves).
-
 The auxiliary constructions retain the root tower, constant scalar extension and completed
 scalar action. All choices below have a uniqueness specification. The tensor of commutative
 ring sheaves is their pushout, so the coefficient comparison is a morphism of ring sheaves.
@@ -37,6 +34,11 @@ The coefficient rings and their comparison are reexported from
 `WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientRingsSupplement`.
 Local freeness and derived completeness
 are proved in `WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree`.
+
+## References
+
+* Stacks Tag 03PK
+* Stacks Tag 03EK
 -/
 
 @[expose] public section
@@ -52,8 +54,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
-/-- The original root tower's inverse limit, with no replacement of its underlying groups.
-Source: Stacks Tag 03PK (blueprint: def-pur-twist-sheaves). -/
+/-- The original root tower's inverse limit, with no replacement of its underlying groups. -/
 noncomputable def purTwistZlOne :=
   limit (proEtaleRootsOfUnityTower S l (Fact.out : l.Prime))
 
@@ -196,12 +197,7 @@ private theorem purTwistCoordinateModule
   exact (hm' n a x).trans (hsm a x n).symm
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The completed scalar action is determined coordinatewise on the root limit.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves).
-Proof: limits of abelian sheaves are sectionwise compatible tuples. Multiplication
-of each root by its finite coefficient is compatible with reduction and the power
-transition. All module identities and restriction identities hold coordinatewise.
-Joint injectivity of the limit projections gives uniqueness of this module action. -/
+/-- The completed scalar action is determined coordinatewise on the root limit. -/
 theorem purTwistZlAction_existsUnique :
     ∃! M : ∀ U : S.ProEtᵒᵖ,
       Module ((purTwistZlCompletion S l).obj.obj U) ((purTwistZlOne S l).obj.obj U),
@@ -295,14 +291,11 @@ theorem purTwistZlAction_existsUnique :
     funext U
     exact huniq U (M' U) (fun n a x ↦ hM'.2 n U a x)
 
-/-- The unique coordinatewise completed coefficient action.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves). -/
+/-- The unique coordinatewise completed coefficient action. -/
 @[instance_reducible]
 noncomputable def purTwistZlAction := (purTwistZlAction_existsUnique S l).exists.choose
 
-/-- The action commutes with restriction.
-Source: Stacks Tag 03PK (blueprint: def-pur-twist-sheaves).
-Proof: take the restriction clause of the defining unique coordinatewise action. -/
+/-- The action commutes with restriction. -/
 theorem purTwistZlAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ V)
     (a : (purTwistZlCompletion S l).obj.obj U) (x : (purTwistZlOne S l).obj.obj U) :
     (purTwistZlOne S l).obj.map f
@@ -311,8 +304,7 @@ theorem purTwistZlAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ V)
       ((purTwistZlCompletion S l).obj.map f a) ((purTwistZlOne S l).obj.map f x) := by
   exact (purTwistZlAction_existsUnique S l).exists.choose_spec.1 f a x
 
-/-- `Z_l(1)` as a module over the completed coefficient sheaf, with unchanged root limit.
-Source: Stacks Tag 03PK (blueprint: def-pur-twist-sheaves). -/
+/-- `Z_l(1)` as a module over the completed coefficient sheaf, with unchanged root limit. -/
 noncomputable def purTwistZlModule :
     SheafOfModules.{u + 1} (purTwistRing S (purTwistZlCompletion S l)) :=
   letI : ∀ U : S.ProEtᵒᵖ,
@@ -324,8 +316,7 @@ noncomputable def purTwistZlModule :
 
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The integral Tate line is the prescribed scalar extension over the discrete constants.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves). -/
+/-- The integral Tate line is the prescribed scalar extension over the discrete constants. -/
 noncomputable def purTwistIntegralOne :
     SheafOfModules.{u + 1} (purTwistRing S (purTwistIntegralConstant S l E)) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
@@ -334,8 +325,7 @@ noncomputable def purTwistIntegralOne :
       ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (purTwistZlCompletionMap S l))).obj (purTwistZlModule S l))
 
-/-- A pure tensor in the prescribed integral line, after sheafification.
-Source: Stacks Tag 03EK (blueprint: def-pur-twist-sheaves). -/
+/-- A pure tensor in the prescribed integral line, after sheafification. -/
 noncomputable def purTwistIntegralTensor (U : S.ProEtᵒᵖ)
     (b : (purTwistIntegralConstant S l E).obj.obj U)
     (x : (purTwistZlModule S l).val.obj U) :
@@ -351,12 +341,7 @@ noncomputable def purTwistIntegralTensor (U : S.ProEtᵒᵖ)
       (b ⊗ₜ[(purTwistZlConstant S l).obj.obj U,
         ((purTwistConstantIntegersMap S l E).hom.app U).hom] x)
 
-/-- The completed action on the integral tensor is uniquely fixed on pure tensors.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves).
-Proof: the coefficient comparison identifies the completed ring with the ring-sheaf tensor.
-Its action is `(a tensor b)(x tensor c) = (a*x) tensor (b*c)`. This respects balanced
-relations and sheafifies. The section formulas below and local generation by pure tensors
-prove uniqueness; restriction compatibility follows from the same formula. -/
+/-- The completed action on the integral tensor is uniquely fixed on pure tensors. -/
 theorem purTwistIntegralAction_existsUnique :
     ∃! M : ∀ U : S.ProEtᵒᵖ,
       Module ((WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E S).obj.obj U)
@@ -395,15 +380,12 @@ theorem purTwistIntegralAction_existsUnique :
     (purTwistCompletedScalarMap S l E) (purTwistIntegralCompletionMap S l E)
     (purTwistZlModule S l) e he
 
-/-- The unique action on the concrete integral tensor sheaf.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves). -/
+/-- The unique action on the concrete integral tensor sheaf. -/
 @[instance_reducible]
 noncomputable def purTwistIntegralAction :=
   (purTwistIntegralAction_existsUnique S l E).exists.choose
 
-/-- The integral action commutes with restriction.
-Source: Stacks Tag 03EK (blueprint: def-pur-twist-sheaves).
-Proof: take the restriction clause of the uniquely characterized action. -/
+/-- The integral action commutes with restriction. -/
 theorem purTwistIntegralAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ V)
     (a : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E S).obj.obj U)
     (x : (purTwistIntegralOne S l E).val.obj U) :
@@ -414,8 +396,7 @@ theorem purTwistIntegralAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ 
       ((purTwistIntegralOne S l E).val.map f x) := by
   exact (purTwistIntegralAction_existsUnique S l E).exists.choose_spec.1 f a x
 
-/-- The prescribed integral tensor equipped with its canonical completed-ring action.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves). -/
+/-- The prescribed integral tensor equipped with its canonical completed-ring action. -/
 noncomputable def purTwistIntegralModule :
     SheafOfModules.{u + 1}
       (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E S) :=
@@ -427,8 +408,7 @@ noncomputable def purTwistIntegralModule :
     (purTwistIntegralOne S l E).val.presheaf
     (purTwistIntegralAction_restriction S l E), (purTwistIntegralOne S l E).isSheaf⟩
 
-/-- The finite Tate line, exactly the ordinary constant-coefficient tensor in the node.
-Source: coefficient-twist blueprint, order 1505 (blueprint: def-pur-twist-sheaves). -/
+/-- The finite Tate line, the ordinary constant-coefficient tensor reduction at level `n`. -/
 noncomputable def purTwistFiniteOne (n : ℕ) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E S n) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}

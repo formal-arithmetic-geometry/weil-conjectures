@@ -18,9 +18,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
 /-! # Inverse image preserves the native integral Tate tower limit
 
-Source: the Integral twist paragraph of the blueprint proof of
-`sk-prop-sfb-cartesian-coefficients-twists`.
-(blueprint: lem-pur-native-integral-tate-tower-limit).
+## References
+
+* Stacks Project, Sites, Tag 03CF
 -/
 
 @[expose] public noncomputable section
@@ -120,28 +120,7 @@ private noncomputable def abelianForgetInverseImageIso
     (Scheme.proEtaleBaseChange f) (forget AddCommGrpCat.{u + 1})
 
 /-- The particular inverse limit defining the integral Tate line is preserved by
-inverse image. This asserts preservation of this tower, rather than arbitrary limits.
-
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-an,
-`sk-prop-sfb-cartesian-coefficients-twists.proof.md`, Integral twist paragraph;
-Stacks Project, Sites, Tag 03CF.
-(blueprint: lem-pur-native-integral-tate-tower-limit).
-
-Proof: represent each finite level by a finite etale scheme, using the single-level
-representation theorem. Full faithfulness of lifted Yoneda transports every actual
-transition to the representing objects and proves their functor laws, giving an
-isomorphism of whole diagrams. Reindex along AsSmall to use the source library's
-cofiltered affine limit construction with exactly its small-index universes. The
-scheme limit is weakly etale because its stages are affine etale over Y; hence it
-is an object of the pro-etale site. The full embedding into Over Y reflects its
-limit, and scheme base change preserves it. Lifted Yoneda preserves limits and its
-inverse image is the lifted Yoneda sheaf of the base change, by the Kan-extension
-formula on representables. Thus set-valued inverse image preserves the underlying
-Tate diagram's limit. Forgetting abelian groups commutes with inverse image,
-because it preserves the filtered pointwise Kan extensions and sheafification.
-It also preserves and reflects limits. Reflect the preserved set-valued cone back
-to abelian sheaves. Finally internal module forgetting preserves the chosen
-module limit, giving precisely the displayed cone -/
+inverse image. This asserts preservation of this tower, rather than arbitrary limits. -/
 theorem spIntegralTwist_inverseImage_isLimit
     {X Y : Scheme.{u}} (f : X ⟶ Y) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]

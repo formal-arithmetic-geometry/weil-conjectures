@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.Category
 /-!
 # The derived Frobenius isomorphism of a Weil complex
 
-Blueprint `def-weil-weil-sheaf-complex`: an object `K` of the Weil category carries, in addition
+Blueprint `definition-weil-structure`: an object `K` of the Weil category carries, in addition
 to its underlying complex `For(K)`, the derived Frobenius isomorphism
 `θ_K : Fr_X^* For(K) ≅ For(K)`, represented termwise. Here `For`
 (`AlgebraicGeometry.WeilComplex.forget`) is induced by the forgetful functor from pro-étale Weil
@@ -56,7 +56,7 @@ open Endofunctor
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex.
 
 The derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)` of a Weil complex `K`, natural
 in `K`: the isomorphism induced on derived categories by the structure isomorphisms

@@ -31,7 +31,7 @@ comparison (`ProEtale.CondensedRing.finiteEtaleReadingUpperStarIso`).
   `CategoryTheory.mateEquiv_app_cube`.
 
 This is the `ρ`-part of the compatibility of reduction modulo `ℓⁿ` with proper base change
-(blueprint `det-sp-mixed-base-change`).
+(blueprint `proposition-compatibility-purity-base-change`).
 -/
 
 @[expose] public section

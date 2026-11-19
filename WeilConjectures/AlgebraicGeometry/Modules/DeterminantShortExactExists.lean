@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
 /-!
 # Construction of the determinant isomorphism
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-determinant-short-exact-exists).
 -/
 
 @[expose] public section
@@ -31,25 +28,7 @@ open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Existence, without uniqueness or invertibility assertions, of the determinant
-isomorphism with its inverse characterized on wedges and arbitrary quotient lifts.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-determinant-short-exact-exists).
-
-Proof: Use the local splitting of the short exact sequence and refine the cover to
-trivialize the outside terms. On each chart identify the middle term with the direct
-sum by the splitting. Apply `exteriorPower.existsUnique_topDirectSum` to the bases
-of the outside terms, and transport its inverse to the middle term. This sends a
-tensor of wedges to the wedge of the included first-term sections followed by the
-chosen lifts of the quotient sections. Changing a lift changes it by an included
-first-term section. Expand by multilinearity: every changed term contains `r₁ + 1`
-first-term factors, hence vanishes in a free rank-`r₁` module by the exterior-power
-basis theorem. Consequently the formula holds for every lift and is independent of
-the splitting. On intersections the two inverse maps agree on tensors of wedges;
-these generate locally. Therefore the local maps and their inverses agree and glue
-as sheaf morphisms. The two composites are identities locally and hence globally.
-The formula on an arbitrary open follows by restriction to these charts and
-separatedness. Empty wedges treat either rank-zero case. -/
+isomorphism with its inverse characterized on wedges and arbitrary quotient lifts. -/
 theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂]

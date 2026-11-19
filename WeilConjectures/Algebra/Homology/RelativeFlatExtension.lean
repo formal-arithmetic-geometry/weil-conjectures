@@ -55,43 +55,19 @@ private theorem flat_biprod
   exact (exactFunctor _ _).prop_of_iso
     ((MonoidalCategory.curriedTensor _).flip.mapIso e) hk
 
-set_option maxHeartbeats 400000 in
--- The explicit three-summand cone isomorphism requires many dependent-index checks.
-/-- A flat replacement of a mapping cone gives a relative flat replacement,
-strictly as chain maps.
-Termwise epimorphy of the new resolution is not asserted here.
-
-Source: Stacks Project, Derived Categories, Lemma 06XX, triangle construction
-and homotopy correction (https://stacks.math.columbia.edu/tag/06XX).
-(blueprint: lem-pc-relative-flat-extension).
-
-Proof: The prescribed quasi-isomorphism r : Q -> Cone(f), followed by the
-cone projection to E[1], determines a triangle
-E -> F -> Q -> E[1]. Realize it by the shifted cone of this composite; the
-sequence E -> F -> Q is degreewise split and F^i is E^i plus Q^i. Thus F is
-bounded above and flat by finite coproduct flatness. The cone triangle and this
-triangle give a morphism of triangles with identity on E and Q -> C on the
-third term. The middle map g : F -> H is a quasi-isomorphism by the long exact
-cohomology sequences. The square with E commutes up to homotopy. Extend the
-homotopy degreewise from E to F using the split retractions and subtract its
-homotopy differential from g. This changes neither its cohomology maps nor its
-chain-map property and gives t >> g = f strictly. Neither f nor its components
-need be quasi-isomorphisms or epimorphisms. For E = 0 the given Q resolves H;
-for H = 0 the cone construction still applies. Bounds on E and Q may differ. -/
-theorem exists_relative_boundedAbove_flat_extension
-    (E H : CochainComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : E ⟶ H)
+-- The twisted-sum construction only uses the abelian category and closure under biproducts.
+private theorem relative_extension_of_flat_biprod
+    {B : Type*} [Category* B] [Abelian B]
+    (P : B → Prop) (hP : ∀ M N, P M → P N → P (M ⊞ N))
+    (E H : CochainComplex B ℤ) (f : E ⟶ H)
     (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))
-    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i))
-    (Q : CochainComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (r : Q ⟶ mappingCone f)
+    (hflat : ∀ i : ℤ, P (E.X i))
+    (Q : CochainComplex B ℤ) (r : Q ⟶ mappingCone f)
     (hQ : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (Q.X i))
-    (hflatQ : ∀ i : ℤ, SheafOfModules.IsFlat (Q.X i)) (hr : QuasiIso r) :
-    ∃ (F : CochainComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : E ⟶ F) (g : F ⟶ H),
+    (hflatQ : ∀ i : ℤ, P (Q.X i)) (hr : QuasiIso r) :
+    ∃ (F : CochainComplex B ℤ) (t : E ⟶ F) (g : F ⟶ H),
       (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧
-      (∀ i : ℤ, SheafOfModules.IsFlat (F.X i)) ∧ QuasiIso g ∧ t ≫ g = f := by
+      (∀ i : ℤ, P (F.X i)) ∧ QuasiIso g ∧ t ≫ g = f := by
   -- Realize the triangle directly: the cone coordinates of r determine the twisted sum.
   let a (i : ℤ) := r.f i ≫ (mappingCone.fst f).1.v i (i + 1) rfl
   let b (i : ℤ) := r.f i ≫ (mappingCone.snd f).v i i (add_zero i)
@@ -134,7 +110,7 @@ theorem exists_relative_boundedAbove_flat_extension
       ⟨he i (lt_of_le_of_lt (le_max_left _ _) hi),
         hq i (lt_of_le_of_lt (le_max_right _ _) hi)⟩
   · intro i
-    exact flat_biprod (E.X i) (Q.X i) (hflat i) (hflatQ i)
+    exact hP (E.X i) (Q.X i) (hflat i) (hflatQ i)
   -- Cone(g) and Cone(r) have the same three summands, in different orders.
   · let e (i : ℤ) : (mappingCone g).X i ≅ (mappingCone r).X i :=
       { hom :=
@@ -187,21 +163,18 @@ theorem exists_relative_boundedAbove_flat_extension
         (mappingCone.snd f).v i i (add_zero i) =
           (mappingCone.snd g).v i i (add_zero i) := by
       simp [e, Category.assoc, Preadditive.add_comp]
-    have he₁' (i : ℤ) {Z : SheafOfModules.{u}
-        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    have he₁' (i : ℤ) {Z : B}
         (k : Q.X (i + 1) ⟶ Z) :
         (e i).hom ≫ (mappingCone.fst r).1.v i (i + 1) rfl ≫ k =
           (mappingCone.fst g).1.v i (i + 1) rfl ≫ biprod.snd ≫ k := by
       rw [← Category.assoc, he₁, Category.assoc]
-    have he₂' (i : ℤ) {Z : SheafOfModules.{u}
-        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    have he₂' (i : ℤ) {Z : B}
         (k : E.X (i + 1) ⟶ Z) :
         (e i).hom ≫ (mappingCone.snd r).v i i (add_zero i) ≫
           (mappingCone.fst f).1.v i (i + 1) rfl ≫ k =
             (mappingCone.fst g).1.v i (i + 1) rfl ≫ biprod.fst ≫ k := by
       simp only [← Category.assoc, he₂]
-    have he₃' (i : ℤ) {Z : SheafOfModules.{u}
-        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    have he₃' (i : ℤ) {Z : B}
         (k : H.X i ⟶ Z) :
         (e i).hom ≫ (mappingCone.snd r).v i i (add_zero i) ≫
           (mappingCone.snd f).v i i (add_zero i) ≫ k =
@@ -255,5 +228,45 @@ theorem exists_relative_boundedAbove_flat_extension
       ((HomologicalComplex.homologyFunctor _ _ i).mapIso ec)
   · ext i
     simp [t, g]
+
+/-- A flat replacement of a mapping cone gives a relative flat replacement,
+strictly as chain maps.
+Termwise epimorphy of the new resolution is not asserted here.
+
+Source: Stacks Project, Derived Categories, Lemma 06XX, triangle construction
+and homotopy correction (https://stacks.math.columbia.edu/tag/06XX).
+(blueprint: lem-pc-relative-flat-extension).
+
+Proof: The prescribed quasi-isomorphism r : Q -> Cone(f), followed by the
+cone projection to E[1], determines a triangle
+E -> F -> Q -> E[1]. Realize it by the shifted cone of this composite; the
+sequence E -> F -> Q is degreewise split and F^i is E^i plus Q^i. Thus F is
+bounded above and flat by finite coproduct flatness. The cone triangle and this
+triangle give a morphism of triangles with identity on E and Q -> C on the
+third term. The middle map g : F -> H is a quasi-isomorphism by the long exact
+cohomology sequences. The square with E commutes up to homotopy. Extend the
+homotopy degreewise from E to F using the split retractions and subtract its
+homotopy differential from g. This changes neither its cohomology maps nor its
+chain-map property and gives t >> g = f strictly. Neither f nor its components
+need be quasi-isomorphisms or epimorphisms. For E = 0 the given Q resolves H;
+for H = 0 the cone construction still applies. Bounds on E and Q may differ. -/
+theorem exists_relative_boundedAbove_flat_extension
+    (E H : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : E ⟶ H)
+    (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))
+    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i))
+    (Q : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
+    (r : Q ⟶ mappingCone f)
+    (hQ : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (Q.X i))
+    (hflatQ : ∀ i : ℤ, SheafOfModules.IsFlat (Q.X i)) (hr : QuasiIso r) :
+    ∃ (F : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : E ⟶ F) (g : F ⟶ H),
+      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧
+      (∀ i : ℤ, SheafOfModules.IsFlat (F.X i)) ∧ QuasiIso g ∧ t ≫ g = f := by
+  exact relative_extension_of_flat_biprod
+    (B := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+    (SheafOfModules.IsFlat (R := R)) (flat_biprod (R := R))
+    E H f hE hflat Q r hQ hflatQ hr
 
 end CochainComplex

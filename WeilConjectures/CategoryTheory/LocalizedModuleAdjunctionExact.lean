@@ -254,7 +254,7 @@ Proof:
    respects multiplication by sections of the ring sheaf in both directions,
    so it restricts to the natural bijection of module Hom sets.
 3. Forget a short exact sequence to abelian sheaves using
-   `lem-weil-pbc-module-sheaves-colimits-forgetful`. Apply
+   `situation-conventions`. Apply
    `lem-weil-pbc-site-restriction-exact` and reflect exactness through the faithful
    exact forgetful functor. This proves exactness of module restriction.
 4. The underlying abelian extension is isomorphic to the left adjoint of

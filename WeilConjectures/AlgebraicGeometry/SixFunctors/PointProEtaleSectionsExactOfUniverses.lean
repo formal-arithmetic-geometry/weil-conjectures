@@ -18,8 +18,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Exact point sections with independent coefficient universes
 
-Source: Stacks 03CW, 0946; the affine weakly contractible point argument
-(blueprint: lem-weil-point-proetale-sections-exact).
+## References
+
+* Stacks 03CW, 0946
 -/
 
 @[expose] public noncomputable section

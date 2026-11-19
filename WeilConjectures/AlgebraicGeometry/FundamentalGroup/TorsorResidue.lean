@@ -32,7 +32,7 @@ and the Kummer residues against products of roots of unity add up. This defines 
 `res_z(T) : μ_N(k) →+ ℤ / N`, an element of `Hom(μ_N, ℤ / N) = ℤ / N (-1)`
 
 (`AlgebraicGeometry.Scheme.EtaleTorsor.residue`), the residue map of blueprint
-`lem-wf-open-curve-residue-sequence`.
+`proposition-no-fixed-class-degree-one--1`.
 -/
 
 @[expose] public section
@@ -276,7 +276,7 @@ theorem exists_kummerElement [NeZero (N : k)] [HasEnoughRootsOfUnity k N] {ξ : 
       ∀ σ : Gal(Ω/C.functionField), σ x =
         algebraMap C.functionField Ω (p.functionFieldConstants ξ) ^ (T.galoisCharacter j σ).val *
           x := by
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   set ι : k →+* Ω := (algebraMap C.functionField Ω).comp p.functionFieldConstants
   have hζ : IsPrimitiveRoot (ι ζk) N := hζk.map_of_injective ι.injective
   obtain ⟨x₀, hx₀, hx₀σ⟩ := T.exists_kummer_element (T.genericFiberPoint j) hζ
@@ -294,9 +294,9 @@ theorem exists_kummerElement [NeZero (N : k)] [HasEnoughRootsOfUnity k N] {ξ : 
   exact ⟨x₀ ^ b, f, pow_ne_zero _ hx₀, hf, hχ⟩
 
 /-- The **residue** `res_z(T) ∈ Hom(μ_N(k), ℤ / N) = ℤ / N (-1)` of a `ℤ / N`-torsor `T` on `U`
-at a point `z` of `C` (blueprint `lem-wf-open-curve-residue-sequence`): an `N`-th root of unity
-`ξ` is sent to `ord_z (x ^ N) mod N`, for a Kummer element `x` of `T` against `ξ`, i.e. `x ≠ 0`
-in `Ω` with `x ^ N ∈ k(C)` and `σ x = ξ ^ χ_T(σ) x` for `σ ∈ Gal(Ω / k(C))`. -/
+at a point `z` of `C` (blueprint `proposition-no-fixed-class-degree-one--1`): an `N`-th root of
+unity `ξ` is sent to `ord_z (x ^ N) mod N`, for a Kummer element `x` of `T` against `ξ`, i.e.
+`x ≠ 0` in `Ω` with `x ^ N ∈ k(C)` and `σ x = ξ ^ χ_T(σ) x` for `σ ∈ Gal(Ω / k(C))`. -/
 noncomputable def residue [NeZero (N : k)] [HasEnoughRootsOfUnity k N] (z : C) :
     Additive (rootsOfUnity N k) →+ ZMod N where
   toFun ξ := kummerResidue C (T.galoisCharacter j) z

@@ -58,12 +58,12 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [X'.Over (Spec (CommRingCat.of k₀'))] [Y'.Over (Spec (CommRingCat.of k₀'))]
   (θ : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
     (X' ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
-  (hθ : θ.hom ≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
-    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
+  (hθ : θ.hom ≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.hom =
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.hom ≫ θ.hom)
   (θY : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
     (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber)
-  (hθY : θY.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
-    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θY.hom)
+  (hθY : θY.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.hom =
+    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.hom ≫ θY.hom)
   (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
   (φ' : X' ⟶ Y') [φ'.IsOver (Spec (CommRingCat.of k₀'))]
   (hsq : θ.hom ≫ Scheme.Hom.geometricFiberMap φ' (comp_over φ' _) =
@@ -117,8 +117,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀'))]
   (θ : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
     (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
-  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
-    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
+  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.hom =
+    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.hom ≫ θ.hom)
 
 set_option maxRecDepth 10000 in
 -- the Frobenius of the global sections unfolds through deep composites of isomorphisms

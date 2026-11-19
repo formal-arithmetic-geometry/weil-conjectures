@@ -23,8 +23,6 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 500000 in
--- Elaborating the nested complex functors and dependent coordinate sums needs this budget.
 /-- The pulled-back specified model has the ordered section formulas, naturally on all
 opens and linearly over their local rings. This is a termwise statement, before homology.
 Source: Stacks Project, Tag 02KE, affine Čech terms and arbitrary base change.
@@ -98,19 +96,18 @@ theorem finiteAffineCech_baseChange_coordinates {X T : Scheme.{u}} (f : X ⟶ T)
   refine ⟨fun p B ↦ (e p B).trans (AddEquiv.piCongrRight fun t ↦ c p t B), ?_, ?_, ?_⟩
   · intro p B C i s t
     change c p t B (e p B ((L.X (p : ℤ)).presheaf.map i.op s) t) = _
-    rw [en]
-    exact cn p t i _
+    exact (congrArg (c p t B) (en p i s t)).trans (cn p t i _)
   · intro p B b s t
     change c p t B (e p B (b • s) t) = _
-    rw [el]
-    exact cl p t B b _
+    exact (congrArg (c p t B) (el p B b s t)).trans (cl p t B b _)
   · intro p B s t
     change c (p + 1) t B (e (p + 1) B ((L.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).app B s) t) = _
-    rw [ed, map_sum]
+    refine (congrArg (c (p + 1) t B) (ed p B s t)).trans ?_
+    refine (map_sum (c (p + 1) t B) _ _).trans ?_
     apply Finset.sum_congr rfl
     intro j _
-    rw [map_zsmul, cf]
-    rfl
+    exact (map_zsmul (c (p + 1) t B) _ _).trans
+      (congrArg (fun x ↦ (-1 : ℤ) ^ j.val • x) (cf p t j B _))
 
 
 end AlgebraicGeometry.Scheme.Modules

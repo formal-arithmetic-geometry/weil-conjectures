@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # Primary summands of a finite generic sheaf
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 1.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 1.
 (blueprint: lem-sc-generic-finite-primary-decomposition)
 -/
 
@@ -36,7 +36,7 @@ primary summands, with projection and inclusion maps whose composites sum to the
 Only the geometric stalks are asserted finite; no curve, extension, filtration or cohomology
 is involved.
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 1.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 1.
 
 Proof: take a separable closure of K inside its algebraic closure. Apply the abelian
 stalk/Galois-module equivalence to M. The resulting finite abelian group V has an

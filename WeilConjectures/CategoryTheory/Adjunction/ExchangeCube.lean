@@ -63,7 +63,7 @@ variable {A : Type u₁} {B : Type u₂} {A' : Type u₃} {B' : Type u₄}
 `U₂ ⊣ L₂` of the inverse of the conjugate `pullIsoOfComapIso : U₁ ⋙ E₁ ≅ E₂ ⋙ U₂`. -/
 lemma pushHomOfComapIso_eq_mateEquiv :
     pushHomOfComapIso adj₁ adj₂ e =
-      (mateEquiv adjR adjS (pullIsoOfComapIso adj₁ adj₂ adjR adjS e).inv).natTrans := by
+      (mateEquiv adjR adjS (pullIsoOfComapIso adj₁ adj₂ adjR adjS e).inv) := by
   have h := iterated_mateEquiv_conjugateEquiv adjR adjS adj₂ adj₁
     (pullIsoOfComapIso adj₁ adj₂ adjR adjS e).inv
   have he : conjugateEquiv (adjR.comp adj₁) (adj₂.comp adjS)
@@ -73,7 +73,7 @@ lemma pushHomOfComapIso_eq_mateEquiv :
   rw [he] at h
   unfold pushHomOfComapIso
   rw [← h]
-  exact congrArg TwoSquare.natTrans ((mateEquiv adj₁ adj₂).symm_apply_apply _)
+  exact ((mateEquiv adj₁ adj₂).symm_apply_apply _)
 
 end PushHom
 
@@ -97,8 +97,8 @@ theorem nonempty_arrowIso_map_exchangeRight_app (af : Lf ⊣ Rf) (af' : Lf' ⊣ 
     (πg' : Hr ⋙ PX' ≅ PX ⋙ Hs)
     (h : ∀ M, Mf'.map (πg.inv.app M) ≫ πf'.inv.app (Gr.obj M) ≫ PX'.map (θr.hom.app M) =
       θs.hom.app (PY.obj M) ≫ Hs.map (πf.inv.app M) ≫ πg'.inv.app (Lf.obj M))
-    (ρf : Rf ⋙ PY ⟶ PX ⋙ Sf) (hρf : ρf = (mateEquiv af bf πf.inv).natTrans)
-    (ρf' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hρf' : ρf' = (mateEquiv af' bf' πf'.inv).natTrans)
+    (ρf : Rf ⋙ PY ⟶ PX ⋙ Sf) (hρf : ρf = (mateEquiv af bf πf.inv))
+    (ρf' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hρf' : ρf' = (mateEquiv af' bf' πf'.inv))
     (K : DX) (h₁ : IsIso (ρf.app K)) (h₂ : IsIso (ρf'.app (Hr.obj K))) :
     Nonempty (Arrow.mk (PY'.map ((exchangeRight af af' θr).app K)) ≅
       Arrow.mk ((exchangeRight bf bf' θs).app (PX.obj K))) := by
@@ -135,8 +135,8 @@ theorem nonempty_arrowIso_lift_map_exchangeRight_restrictFullyFaithful_app
     (πg' : Hr ⋙ PX' ≅ PX ⋙ Hs)
     (h : ∀ M, Mf'.map (πg.inv.app M) ≫ πf'.inv.app (Gr.obj M) ≫ PX'.map (θr.hom.app M) =
       θs.hom.app (PY.obj M) ≫ Hs.map (πf.inv.app M) ≫ πg'.inv.app (Lf.obj M))
-    (ρf : Rf ⋙ PY ⟶ PX ⋙ Sf) (hρf : ρf = (mateEquiv af bf πf.inv).natTrans)
-    (ρf' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hρf' : ρf' = (mateEquiv af' bf' πf'.inv).natTrans)
+    (ρf : Rf ⋙ PY ⟶ PX ⋙ Sf) (hρf : ρf = (mateEquiv af bf πf.inv))
+    (ρf' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hρf' : ρf' = (mateEquiv af' bf' πf'.inv))
     (hLf : ∀ K : QY.FullSubcategory, QX ((QY.ι ⋙ Lf).obj K))
     (hRf : ∀ K : QX.FullSubcategory, QY ((QX.ι ⋙ Rf).obj K))
     (hLf' : ∀ K : QY'.FullSubcategory, QX' ((QY'.ι ⋙ Lf').obj K))
@@ -194,8 +194,8 @@ theorem nonempty_arrowIso_lift_map_app_of_eq_exchangeRight_restrictFullyFaithful
     (πg' : Hr ⋙ PX' ≅ PX ⋙ Hs)
     (h : ∀ M, Mf'.map (πg.inv.app M) ≫ πf'.inv.app (Gr.obj M) ≫ PX'.map (θr.hom.app M) =
       θs.hom.app (PY.obj M) ≫ Hs.map (πf.inv.app M) ≫ πg'.inv.app (Lf.obj M))
-    (ρf : Rf ⋙ PY ⟶ PX ⋙ Sf) (hρf : ρf = (mateEquiv af bf πf.inv).natTrans)
-    (ρf' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hρf' : ρf' = (mateEquiv af' bf' πf'.inv).natTrans)
+    (ρf : Rf ⋙ PY ⟶ PX ⋙ Sf) (hρf : ρf = (mateEquiv af bf πf.inv))
+    (ρf' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hρf' : ρf' = (mateEquiv af' bf' πf'.inv))
     (hLf : ∀ K : QY.FullSubcategory, QX ((QY.ι ⋙ Lf).obj K))
     (hRf : ∀ K : QX.FullSubcategory, QY ((QX.ι ⋙ Rf).obj K))
     (hLf' : ∀ K : QY'.FullSubcategory, QX' ((QY'.ι ⋙ Lf').obj K))

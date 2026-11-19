@@ -365,7 +365,7 @@ resolution remains a quasi-isomorphism. Ordinary scalar extension commutes with
 cochain shift by the identity on reindexed terms, with differential (-1)^r d.
 5. Apply lem-weil-pbc-ringed-topoi-derived-pushforward-composition to a and g,
 and lem-weil-pbc-ringed-strict-tower-homotopy-limit to g. Exact U localizes
-termwise (lem-weil-pbc-exact-functor-derived-factorization). For K-injective I
+termwise (situation-conventions). For K-injective I
 and a K-injective replacement j:UI to J, the comparison is represented by lim j,
 which is a quasi-isomorphism. Resolutions exist by
 prop-pur-kinjective-resolutions-exist; U need not preserve K-injectives.

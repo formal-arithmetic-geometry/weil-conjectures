@@ -176,8 +176,8 @@ lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g 
       (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq))
     (Functor.baseChangePaste (Etale.baseChangeMap (ModuleCat.{u + 1} Λ') sq.toCommSq)
       (Etale.lowerStarCompRestrictScalarsIso φ h).hom)
-    (asIso (Etale.upperStarRestrictScalars φ p).natTrans)
-    (asIso (Etale.upperStarRestrictScalars φ e).natTrans) (by
+    (asIso (Etale.upperStarRestrictScalars φ p))
+    (asIso (Etale.upperStarRestrictScalars φ e)) (by
       ext M : 2
       simp only [Functor.baseChangePaste, NatTrans.comp_app, Functor.whiskerRight_app,
         Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
@@ -227,13 +227,13 @@ lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g 
           (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq))).app K) ≫
         H.map (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
           ((Functor.mapDerivedCategoryPlusNatIso
-            (asIso (Etale.upperStarRestrictScalars φ e).natTrans)).hom.app K))) := by
+            (asIso (Etale.upperStarRestrictScalars φ e))).hom.app K))) := by
       rw [h₃]
       infer_instance
     exact IsIso.of_isIso_comp_right _
       (H.map (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
           ((Functor.mapDerivedCategoryPlusNatIso
-            (asIso (Etale.upperStarRestrictScalars φ e).natTrans)).hom.app K)))
+            (asIso (Etale.upperStarRestrictScalars φ e))).hom.app K)))
   -- the homology of the base change morphism of the first pasting
   have h₄ := congr_arg H.map hA
   simp only [CategoryTheory.Functor.map_comp] at h₄

@@ -38,7 +38,7 @@ variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 section sub
 
 variable (X : DiscreteModule.{w} G) (S : AddSubgroup X.obj.V)
-  (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).hom x ∈ S)
+  (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).asHom.hom x ∈ S)
 
 /-- The inclusion of the discrete submodule given by a stable subgroup. -/
 def subι : sub X S hS ⟶ X :=
@@ -64,7 +64,7 @@ end sub
 
 /-- The image of a torsion module under the projection onto a quotient is torsion. -/
 lemma isOfFinAddOrder_quotient {X : DiscreteModule.{w} G} (hX : ∀ x : X.obj.V, IsOfFinAddOrder x)
-    (S : AddSubgroup X.obj.V) (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).hom x ∈ S)
+    (S : AddSubgroup X.obj.V) (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).asHom.hom x ∈ S)
     (q : (quotient X S hS).obj.V) : IsOfFinAddOrder q := by
   obtain ⟨y, rfl⟩ := QuotientAddGroup.mk_surjective q
   obtain ⟨N, hN, hNy⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1 (hX y)
@@ -110,7 +110,7 @@ theorem subsingleton_H_two_of_finite_of_forall_prime
   have hℓ : Fact ℓ.Prime := ⟨Nat.minFac_prime hcard⟩
   obtain ⟨x, hx⟩ := exists_prime_addOrderOf_dvd_card' ℓ (Nat.minFac_dvd (Nat.card X.obj.V))
   let S := (nsmulAddMonoidHom (α := X.obj.V) ℓ).ker
-  have hS : ∀ g : G, ∀ y ∈ S, (X.obj.ρ g).hom y ∈ S := by
+  have hS : ∀ g : G, ∀ y ∈ S, (X.obj.ρ g).asHom.hom y ∈ S := by
     intro g y hy
     rw [AddMonoidHom.mem_ker, nsmulAddMonoidHom_apply] at hy ⊢
     rw [← map_nsmul, hy, map_zero]
@@ -146,17 +146,17 @@ theorem subsingleton_H_two_of_isTorsion
     (M : DiscreteModule.{w} G) (hM : ∀ x : M.obj.V, IsOfFinAddOrder x) :
     Subsingleton (H G M 2) := by
   refine subsingleton_H_two_of_forall_finite M fun T hT ↦ ?_
-  let U : Set M.obj.V := ⋃ t ∈ T, Set.range fun g : G ↦ (M.obj.ρ g).hom t
+  let U : Set M.obj.V := ⋃ t ∈ T, Set.range fun g : G ↦ (M.obj.ρ g).asHom.hom t
   have hU : U.Finite := hT.biUnion fun t _ ↦ finite_range_of_forall_mul_eq _
     (M.obj.stabilizer t) (M.isOpen_stabilizer t) fun x u hu ↦ by
       rw [ρ_mul_apply, mem_stabilizer.1 hu]
   have hstab : ∀ g : G, ∀ x ∈ AddSubgroup.closure U,
-      (M.obj.ρ g).hom x ∈ AddSubgroup.closure U := by
+      (M.obj.ρ g).asHom.hom x ∈ AddSubgroup.closure U := by
     intro g x hx
-    refine (AddSubgroup.closure_le (K := (AddSubgroup.closure U).comap (M.obj.ρ g).hom)).2
+    refine (AddSubgroup.closure_le (K := (AddSubgroup.closure U).comap (M.obj.ρ g).asHom.hom)).2
       ?_ hx
     intro u hu
-    obtain ⟨t, ht, h, rfl⟩ : ∃ t ∈ T, ∃ h : G, (M.obj.ρ h).hom t = u := by simpa [U] using hu
+    obtain ⟨t, ht, h, rfl⟩ : ∃ t ∈ T, ∃ h : G, (M.obj.ρ h).asHom.hom t = u := by simpa [U] using hu
     exact AddSubgroup.subset_closure (Set.mem_biUnion ht ⟨g * h, by simp⟩)
   refine ⟨_, hstab, fun t ht ↦ AddSubgroup.subset_closure (Set.mem_biUnion ht ⟨1, by simp⟩), ?_⟩
   have : Finite U := hU.to_subtype

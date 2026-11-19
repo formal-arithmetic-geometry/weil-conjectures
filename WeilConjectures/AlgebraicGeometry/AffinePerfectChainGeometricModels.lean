@@ -35,7 +35,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the affine models and their chosen derived-category comparisons needs this budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine finite-projective models with scalar/geometric Hom equivalences.

@@ -16,7 +16,7 @@ For a morphism `g : V ⟶ B` with a section `s`, the deformation space `D_s V` o
 `AlgebraicGeometry.Scheme.IdealSheafData.deformationSpaceIsoBlowupModelOpen` it is an open
 subscheme of `Bl_{s(B) × 0} (V ×_B 𝔸¹_B)`. Here we record that `g̃ : D_s V ⟶ 𝔸¹_B` is the
 restriction of the blow-up map followed by `V ×_B 𝔸¹_B ⟶ 𝔸¹_B`, and that `s̃` lies over
-`s × 𝔸¹` (blueprint `def-pur-dnc-section-family`).
+`s × 𝔸¹` (blueprint `definition-deformation-normal-bundle`).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {V B : Scheme.{u}} (g : V ⟶ B) (s : B ⟶ V)
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. The map
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section. The map
 `g̃ : D_s V ⟶ 𝔸¹_B` is the composite of the open immersion of `D_s V` into the blow-up
 `Bl_{s(B) × 0} (V ×_B 𝔸¹_B)`, the blow-up map and `V ×_B 𝔸¹_B ⟶ 𝔸¹_B`. -/
 lemma deformationSpaceProj_eq_blowup :

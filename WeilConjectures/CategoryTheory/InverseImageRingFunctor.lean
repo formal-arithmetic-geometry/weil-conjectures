@@ -171,7 +171,7 @@ are equivalent to transporting by the inverses of the canonical comparisons.
 
 Proof:
 1. Use `sheaves_algebraicStructures_objects`
-   (lem-weil-pbc-sheaf-algebraic-structures-objects) on each site to identify ring
+   (situation-conventions) on each site to identify ring
    sheaves with internal commutative ring objects, compatibly with forgetting.
 2. Finite-limit preservation implies preservation of binary products and the terminal
    object. Apply `Adjunction.liftsGroupRingObjects`

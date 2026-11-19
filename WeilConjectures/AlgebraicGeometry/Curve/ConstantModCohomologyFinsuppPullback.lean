@@ -148,7 +148,7 @@ namespace AlgebraicGeometry.Etale
 /-- A single prime-field basis of Λ/pΛ gives direct-sum coordinates on both sides
 of a cohomology pullback, and pullback acts separately on every coordinate.
 Source: Stacks Project, Tags 03Q5 and 0739, together with the coefficient-basis
-construction of `lem-sc-constant-mod-charp-finite-sum-colimit`.
+construction of `proposition-p-torsion-smooth-proper-curve--4`.
 (blueprint: lem-pbc-constant-mod-cohomology-finsupp-pullback)
 
 Proof: Give Λ/pΛ its canonical module structure over the lifted prime field

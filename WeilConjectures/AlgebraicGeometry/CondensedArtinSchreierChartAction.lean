@@ -48,7 +48,7 @@ private theorem translation_deck_eq (a : k) :
 private theorem normalized_deck_evaluation
     {X Y P : Scheme.{u}} (f : X ⟶ Y) (g : X ⟶ X) (hg : g ≫ f = f)
     (v : P ⟶ Y) (t : P ⟶ X) (ht : t ≫ f = v) :
-    (CondensedRing.upperStar Λ v).map (CondensedRing.regularDeckEnd Λ f g hg) ≫
+    (CondensedRing.upperStar Λ v).map (CondensedRing.regularDeckEnd Λ f g hg).asHom ≫
         condensedRegularSheetProjection Λ f v t ht =
       condensedRegularSheetProjection Λ f v (t ≫ g)
         (show (t ≫ g) ≫ f = v by rw [Category.assoc, hg, ht]) := by
@@ -133,7 +133,7 @@ The equality of coefficient unit comparisons under the same transport gives the 
 normalized sheet evaluation, including c=0 and characteristic two. -/
 theorem condensedArtinSchreierChart_translation (a c : k) :
     (CondensedRing.upperStar Λ q).map
-        (condensedArtinSchreierTranslationAction Λ k c) ≫
+        (condensedArtinSchreierTranslationAction Λ k c).asHom ≫
       condensedArtinSchreierChartProjection Λ k a =
     condensedArtinSchreierChartProjection Λ k (a + c) := by
   rw [translation_deck_eq]

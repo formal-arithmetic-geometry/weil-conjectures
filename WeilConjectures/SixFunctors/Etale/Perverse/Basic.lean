@@ -26,12 +26,12 @@ cut out by the two conditions after the shift by `n`.
   largest open on which it vanishes.
 - `AlgebraicGeometry.Etale.DerivedCategory.SupportCondition`,
   `AlgebraicGeometry.Etale.DerivedCategory.CosupportCondition`: `SuppCon` and `CosuppCon`
-  (blueprint `def-per-support-condition`).
+  (blueprint `definition-perverse-sheaves-curve`).
 - `AlgebraicGeometry.Etale.DerivedCategory.IsPerverseLE`,
   `AlgebraicGeometry.Etale.DerivedCategory.IsPerverseGE`,
   `AlgebraicGeometry.Etale.DerivedCategory.IsPerverseHeartCandidate`: the classes
   `ᵖD^{≤n}`, `ᵖD^{≥n}` and the perverse heart candidate
-  (blueprint `def-per-perverse-subcategories`).
+  (blueprint `definition-perverse-sheaves-curve`).
 
 ## Implementation notes
 
@@ -107,7 +107,7 @@ lemma sheafSupport_homology_shift (K : _root_.DerivedCategory (Sheaf X.smallEtal
 
 /-- The *support condition* `SuppCon(K)`: for every `i : ℤ`, the support of the cohomology
 sheaf `𝓗⁻ⁱK` has dimension at most `i`, the empty support having dimension `-∞`. In
-particular `𝓗⁻ⁱK` vanishes for `i < 0`. (blueprint: `def-per-support-condition`) -/
+particular `𝓗⁻ⁱK` vanishes for `i < 0`. (blueprint: `definition-perverse-sheaves-curve`) -/
 def SupportCondition (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   ∀ i : ℤ, (sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-i)).obj K)).Nonempty →
     0 ≤ i ∧ topologicalKrullDim
@@ -136,7 +136,7 @@ lemma SupportCondition.map_iso {C : Type*} [Category C]
   SupportCondition.of_iso (F.mapIso e) h
 
 /-- The class `ᵖD^{≤n}(X) = ᵖD^{≤0}(X)[-n]`: `K` lies in it if `K[n]` satisfies the support
-condition. (blueprint: `def-per-perverse-subcategories`) -/
+condition. (blueprint: `definition-perverse-sheaves-curve`) -/
 def IsPerverseLE (n : ℤ) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   SupportCondition (K⟦n⟧)
 
@@ -157,7 +157,7 @@ variable (a : X ⟶ S) [HasCompactification a]
 
 /-- The *cosupport condition* `CosuppCon(K)`: the support condition for the Verdier dual
 `𝔻_X K = RHom(K, ω_X)`, the dualizing complex being taken relative to `a : X ⟶ S`.
-(blueprint: `def-per-support-condition`) -/
+(blueprint: `definition-perverse-sheaves-curve`) -/
 def CosupportCondition
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   SupportCondition ((verdierDual Λ a).obj (op K))
@@ -170,13 +170,13 @@ lemma CosupportCondition.of_iso
   SupportCondition.map_iso _ e.op.symm hK
 
 /-- The class `ᵖD^{≥n}(X) = ᵖD^{≥0}(X)[-n]`: `K` lies in it if `K[n]` satisfies the
-cosupport condition. (blueprint: `def-per-perverse-subcategories`) -/
+cosupport condition. (blueprint: `definition-perverse-sheaves-curve`) -/
 def IsPerverseGE (n : ℤ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   CosupportCondition a (K⟦n⟧)
 
 /-- The *perverse heart candidate* `Perv^cand(X) = ᵖD^{≤0}(X) ∩ ᵖD^{≥0}(X)`.
-(blueprint: `def-per-perverse-subcategories`) -/
+(blueprint: `definition-perverse-sheaves-curve`) -/
 def IsPerverseHeartCandidate
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   IsPerverseLE 0 K ∧ IsPerverseGE a 0 K

@@ -17,8 +17,8 @@ Let `f : X ⟶ Y` be the base change to `k̄` of a morphism `f₀ : X₀ ⟶ Y�
 field, smooth of relative dimension `d`, and let `g_X`, `g_Y` be the geometric-Frobenius
 automorphisms of `X` and `Y`, which form a cartesian square `g_X ≫ f = f ≫ g_Y`
 (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`). Following
-blueprint `def-pur-tate-datum`, a *strict geometric-Weil datum* on `K ∈ D(Y_ét, Λ)` is an
-isomorphism `φ_K : Lg_Y^* K ≅ K`, a Weil structure in the sense of `sk-def-sf-weil-complexes`
+blueprint `definition-weil-structure--1`, a *strict geometric-Weil datum* on `K ∈ D(Y_ét, Λ)` is an
+isomorphism `φ_K : Lg_Y^* K ≅ K`, a Weil structure in the sense of `definition-weil-structure`
 (`AlgebraicGeometry.Etale.WeilComplex`). This file constructs the Weil data that the smooth purity
 chapter transports through the purity isomorphism:
 
@@ -36,7 +36,8 @@ chapter transports through the purity isomorphism:
   `Lf^* φ_K`, the Tate datum `τ_d` entering through the base change identification;
 * the datum `φ^!_{f,K}` on the exceptional inverse image `Rf^! K`
   (`AlgebraicGeometry.Etale.upperShriekWeilDatum`): the smooth pullback exchange
-  `Ex^{!,sm}_{f,g_Y,K}` of `def-pur-smooth-pullback-exchange` followed by `Rf^!(φ_K)`.
+  `Ex^{!,sm}_{f,g_Y,K}` of `proposition-compatibility-purity-base-change--1` followed by
+  `Rf^!(φ_K)`.
 
 The scheme-Frobenius form `u_K = φ_K ∘ κ_{Y,K}` of a datum is
 `AlgebraicGeometry.Etale.schemeFrobeniusForm` in
@@ -105,13 +106,13 @@ section Tate
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] {X : Scheme.{u}}
   [HasInvertibleExponent Λ X]
 
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
+/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
 
 The *Tate datum* `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)` on the Tate twist `Λ_X(r)` for an endomorphism
 `g` of `X` (for `g = g_{X,γ}` the geometric-Frobenius automorphism): the identification
 `Lg^* Λ_X(r) ≅ Λ_X(r)` of the Tate twist datum
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarTateObjectIso`). This is the canonical Weil
-structure of the twist, the twist normalization of `def-weil-frobenius-coefficient-twists`,
+structure of the twist, the twist normalization of `prose-10-21`,
 on which geometric Frobenius acts by `q^{-r}`. -/
 noncomputable def tateWeilDatum (g : X ⟶ X) (r : ℤ) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ X r) ≅ tateObject Λ X r :=
@@ -148,7 +149,7 @@ private lemma map_twistObjectAddIso_zero_zero :
     ← Category.assoc, HasTateTwist.leftDerivedUpperStar_map_twistObjectAddIso]
   simp only [Category.assoc]
 
-/-- Blueprint `sk-def-sf-weil-complexes`: the canonical Weil structure `φ_Λ` of `Λ_T` is the Tate
+/-- Blueprint `definition-weil-structure`: the canonical Weil structure `φ_Λ` of `Λ_T` is the Tate
 datum `τ_0`.
 
 For every morphism `f : X ⟶ Y` the identification `Lf^* Λ_Y(0) ≅ Λ_X(0)` of the twist datum
@@ -175,7 +176,7 @@ namespace WeilComplex
 variable {Λ} [Finite Λ] (g : X ≅ X)
 
 variable (Λ) in
-/-- Blueprint `sk-def-sf-weil-complexes`: the *Tate line* `(Λ_X(r), τ_r)` as a strict Weil
+/-- Blueprint `definition-weil-structure`: the *Tate line* `(Λ_X(r), τ_r)` as a strict Weil
 complex, for an automorphism `g` of `X` (for `g = g_{X,γ}` the geometric-Frobenius
 automorphism): the Tate twist `Λ_X(r) ∈ Dctf(X, Λ)` with its canonical Weil structure, the Tate
 datum `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`). -/
@@ -191,7 +192,7 @@ lemma tate_frobenius_hom_hom (r : ℤ) :
 variable {g} {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX]
 
-/-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data.
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: Dual and Tate Weil data.
 
 The *twisted dual* `(K^∨(r), φ_{K^∨(r)})` of a strict Weil complex `(K, φ_K)`: the coefficient
 dual `K^∨ = RHom(K, Λ_X)` with the contragredient datum `φ_{K^∨}`
@@ -213,7 +214,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {gY : Y ⟶ Y}
 
 variable (d) in
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
+/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
 
 The datum `φ^pur_{f,K}` induced on the source `Lf^* K(d)[2d]` of smooth purity by a strict Weil
 datum `φ_K : Lg_Y^* K ≅ K` (more generally by any Weil datum `φ_K : Lg_Y^* K ⟶ K`), for a
@@ -236,7 +237,7 @@ noncomputable def smoothPurityWeilDatum (sq : CommSq gX f f gY)
   (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq K).hom ≫
     (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ)
 
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
+/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
 
 The datum `φ^!_{f,K}` induced on the exceptional inverse image `Rf^! K` by a strict Weil datum
 `φ_K : Lg_Y^* K ≅ K` (more generally by any Weil datum `φ_K : Lg_Y^* K ⟶ K`), for a cartesian
@@ -245,7 +246,7 @@ square `g_X ≫ f = f ≫ g_Y`:
                 Ex^{!,sm}_{f,g_Y,K}                 Rf^!(φ_K)
   Lg_X^* Rf^! K ───────────────────▶ Rf^! Lg_Y^* K ──────────▶ Rf^! K,
 ```
-the smooth pullback exchange of `def-pur-smooth-pullback-exchange`
+the smooth pullback exchange of `proposition-compatibility-purity-base-change--1`
 (`AlgebraicGeometry.Etale.smoothPullbackExchange`) followed by `Rf^!(φ_K)`. The identifications
 `θ : ω_f ≅ Λ_X(d)[2d]` and the tensor formulas `φf : Lf^* K ⊗ ω_f ≅ Rf^! K`,
 `φf' : Lf^* Lg_Y^* K ⊗ ω_f ≅ Rf^! Lg_Y^* K` that the exchange is built from are arguments, as in

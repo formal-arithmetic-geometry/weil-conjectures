@@ -143,15 +143,8 @@ private theorem projective_square
     (ambient_eq Λ (square Y)) (section_eq Λ Y (firstProjection Y) h₁)
     (section_eq Λ Y (secondProjection Y) h₂) K
 
-/--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, first factor before the Tate twist.
-(blueprint: lem-sfb-rational-p1-second-pull-section-core-conjugate).
-Proof: expand the ambient square comparison into the normalized inverse-image compositors.
-Restrict along the diagonal, use both diagonal projection identities, and cancel the
-identity compositor. The resulting conjugated comparison is the map below.
--/
+/-- On the diagonal, the pulled-back ambient comparison is the second-projection pull-section
+isomorphism followed by the inverse of the first-projection one. -/
 theorem second_pull_section_core_conjugate
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

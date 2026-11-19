@@ -21,14 +21,14 @@ over `x`. For bounded constructible `𝒪_E`-complexes `M`, `N` on `X` with `M_x
 reductions of `f₀` modulo every `ℓⁿ` factor through classical supported restrictions `ρ_{a,b}`
 on the strictly local model `M_x` at `x` (`Correspondence.frobeniusLocalModel`), with the
 coefficient datum `(𝒪_E ⧸ ℓⁿ, N_{𝒪_E ⧸ ℓⁿ}, M_{𝒪_E ⧸ ℓⁿ})`: this is the reduction clause of
-`Correspondence.HasIntegralReductionModel` (blueprint `sk-lem-tf-curve-restriction-zero`, the
+`Correspondence.HasIntegralReductionModel` (blueprint `lemma-vanishing-local-term-zero-stalk`, the
 passage from the classical finite-coefficient computation to `𝒪_E`).
 
 The proof transports `ρ` to the étale site by the reduction modulo `ℓⁿ`
 (`CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`, with the coefficient
-comparisons of `sk-prop-scalar-six` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`), identifies `X ⨯ X` with the fibre
-product of the model (interchanging the factors), compares the stalk of the étale exchange
-restriction with `ρ_{a,b}`
+comparisons of `proposition-six-operations-change-coefficients` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`), identifies
+`X ⨯ X` with the fibre product of the model (interchanging the factors), compares the stalk of the
+étale exchange restriction with `ρ_{a,b}`
 (`Etale.CurveLocalModel.exists_geometricStalk_map_exchangeRestriction`), and reduces the point
 fibre (`ProEtale.CondensedRing.exists_pointFiberFunctorIntegral_reduction`).
 

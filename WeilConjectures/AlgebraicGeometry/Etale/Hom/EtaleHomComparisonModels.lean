@@ -24,7 +24,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # Models for the étale scalar internal-Hom comparison
 
-Source: blueprint `thm-coef-finite-hom`, proof paragraph 2; Stacks 06YY, 07A4,
+Source: blueprint `lemma-change-coefficients-internal-hom--1`, proof paragraph 2; Stacks 06YY, 07A4,
 08J9 and 08JC (blueprint: `lem-coef-etale-hom-thick-locus`).
 
 The scalar extension functor and the derived internal Hom are the published étale
@@ -52,7 +52,7 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
 variable {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 /-- Scalar extension of Hom, contravariant in K.
-Source: blueprint thm-coef-finite-hom, proof paragraph 2
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
 (blueprint: lem-coef-etale-hom-thick-locus). -/
 abbrev EtaleHomLeft (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X) :
@@ -60,7 +60,7 @@ abbrev EtaleHomLeft (X : Scheme.{u}) (φ : A →+* B)
   (derivedHom (ModuleCat.{u + 1} A) X).flip.obj M ⋙ scalarExtension φ X
 
 /-- Hom of scalar extensions, contravariant in K.
-Source: blueprint thm-coef-finite-hom, proof paragraph 2
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
 (blueprint: lem-coef-etale-hom-thick-locus). -/
 abbrev EtaleHomRight (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X) :
@@ -338,7 +338,7 @@ def etaleHomTensorComparison (X : Scheme.{u}) (φ : A →+* B) :
   (etaleHomTensorComparison_existsUnique X φ).choose
 
 /-- The defining evaluation-transpose equation for the canonical comparison.
-Source: blueprint thm-coef-finite-hom, proof paragraph 2
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
 (blueprint: lem-coef-etale-hom-thick-locus). -/
 def IsEtaleHomTranspose (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X)
@@ -352,7 +352,7 @@ def IsEtaleHomTranspose (X : Scheme.{u}) (φ : A →+* B)
           ((scalarExtension φ X).obj K)).homEquiv _ _).symm (v.app (op K))
 
 /-- Naturality of the family of evaluation transposes in the second variable.
-Source: blueprint thm-coef-finite-hom, proof paragraph 2
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
 (blueprint: lem-coef-etale-hom-thick-locus). -/
 def IsEtaleHomNaturalInM (X : Scheme.{u}) (φ : A →+* B)
     (v : ∀ M : DerivedCategoryModule A X,
@@ -447,7 +447,7 @@ def IsEtaleHomReversedExact (X : Scheme.{u}) (φ : A →+* B)
     (EtaleHomRight X φ M).IsTriangulated ∧ NatTrans.CommShift v ℤ
 
 /-- The isomorphism locus and its thick-subcategory closure properties.
-Source: blueprint thm-coef-finite-hom, proof paragraph 2
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
 (blueprint: lem-coef-etale-hom-thick-locus). -/
 def IsEtaleHomThickIsoLocus (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X)

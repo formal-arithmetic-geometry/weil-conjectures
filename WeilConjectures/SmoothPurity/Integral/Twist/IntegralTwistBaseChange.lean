@@ -25,7 +25,7 @@ Source: main-20261015 blueprint, sec-six-functors-basics/sk-prop-sf-existence,
 (blueprint: lem-weil-integral-twist-base-change).
 
 The line, coefficient inclusion and scalar-extension isomorphism are the published
-constructions of `def-coefficient-twists-detailed`. Scheme naturality is expressed
+constructions of `definition-tate-twists`. Scheme naturality is expressed
 on their underlying semilinear maps, using the actual inverse-image adjunction.
 The helper predicates specify the pullback identifications by roots, powers and evaluation.
 -/

@@ -135,7 +135,7 @@ private def homLocalizedFunctor :
 
 /-- Scalar localization of a permitted contravariant bilinear functor.
 Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `def-weil-derived-pullback-tensor-hom`.
+blueprint `prose-03-02`.
 (blueprint: lem-sf-localized-permitted-hom).
 Proof: Base change the integral bilinear Hom map and compose with the inverse distribution
 isomorphism for base change of tensor products. Curry to obtain the localized separately linear
