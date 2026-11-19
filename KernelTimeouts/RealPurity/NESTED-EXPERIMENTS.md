@@ -61,3 +61,11 @@ for the dominant Kernel cost.
 **Evidence level:** below section-12 Level 1 for the ring-instance
 hypothesis. The negative A controls are conclusive at the original site;
 no B/C or project-level amplification result is available.
+
+## Lead-note follow-up
+
+Fresh exact-site run: probes/nd/AlignBothRing.lean reached the same exact h
+site and timed out deterministically in 58.79 s (58.79 s user, 1.26 s
+system, 5,616,320 KB RSS). The two ring leaves were aligned before the
+timeout, so this remains a negative A control; the remaining object
+representation is not isolated. B and C are not assigned to this case.

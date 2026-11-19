@@ -66,3 +66,15 @@ isolated cost of the accessor leaf.
 **Evidence level:** the one-argument replacement is locally causal but
 changes proof construction. Strict A symmetry and explicit replay are
 missing; below section-12 Level 1. No Level 2/3.
+
+## Lead-note follow-up
+
+Fresh matched control: probes/nd/ReplaceHR.lean checked in 3.49 s
+(2.82 s user, 1.00 s system, 2,857,796 KB RSS). The local restriction
+proof is explicit at the argument site, but the enclosing category and
+derived functor instances are still inferred; this is partial A replay
+evidence.
+
+The assigned B depth harness cannot add provider layers below argument 39
+without changing the Over.left accessor head or the dependent equality
+proposition. No valid depth curve is reported.

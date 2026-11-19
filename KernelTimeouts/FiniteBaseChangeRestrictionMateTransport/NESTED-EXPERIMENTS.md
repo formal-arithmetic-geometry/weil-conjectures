@@ -70,3 +70,15 @@ strongly supported for provenance; no internal Kernel trace is claimed.
 **Evidence level:** the exact expected-proposition transport is locally
 causal, but it changes proof construction and does not satisfy strict A
 symmetry or explicit Kernel replay. Below section-12 Level 1; no Level 2/3.
+
+## Lead-note follow-up
+
+Fresh matched control: probes/nd/TransportHB.lean checked in 4.38 s
+(4.31 s user, 0.90 s system, 2,337,048 KB RSS). The helper's comparison
+and mate arguments are explicit in the replay, but its category instances
+remain inferred; this is partial A replay evidence.
+
+The assigned B depth harness cannot add instance layers while retaining the
+same instantiated dependent hb proposition: doing so either leaves the
+stored helper term unchanged or rebuilds the quantified consumer. No valid
+depth curve is reported.

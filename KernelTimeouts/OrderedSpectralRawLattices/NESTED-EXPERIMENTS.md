@@ -96,3 +96,17 @@ claim about the Kernel's internal reduction order.
 **Evidence level:** below section-12 Level 1 under the strict explicit-replay
 and independent-provider conditions, despite a strong exact-site
 source-availability control. Levels 2 and 3 are not reached.
+
+## Lead-note follow-up
+
+Fresh matched control: probes/nd/After.lean checked in 10.08 s (13.71 s
+user, 0.95 s system, 2,571,072 KB RSS). The A provider availability matrix
+was rerun with the original consumer. It remains a source re-elaboration
+matrix rather than a strict explicit-instance Kernel replay: imported
+theorem arguments cannot be rewritten by local priorities. The generic
+provider terms are therefore recorded as partial replay only.
+
+The assigned B depth and C fanout harnesses were rejected by the validity
+checks. A wrapper class or repeated field which is not used by the imported
+stored theorem changes no term; rebuilding the theorem changes the final
+lattice-predicate conversion. No B/C timing is claimed.

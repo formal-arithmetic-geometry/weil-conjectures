@@ -61,3 +61,11 @@ unresolved for the dominant inner conversion.
 alignment at the exact final conversion, with the qualification that the
 control changes several nested occurrences. No Level 2/3 or strict
 four-quadrant symmetry result.
+
+## Lead-note follow-up
+
+Fresh matched control: probes/nd/UniformInferred.lean checked in 2.59 s
+(1.73 s user, 0.94 s system, 2,815,584 KB RSS). The original consumer and
+proof term are retained. The helper's wrapper and category arguments are
+inferred, so the result is a checked aligned control rather than a complete
+explicit-instance replay. B and C are not assigned to this case.

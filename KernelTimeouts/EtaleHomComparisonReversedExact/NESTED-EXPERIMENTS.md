@@ -70,3 +70,15 @@ strongly supported for this sequence, unresolved for the decisive inner leaf.
 **Evidence level:** the full proposition alignment is locally effective,
 but strict A symmetry and explicit replay are missing. Below section-12
 Level 1; no Level 2/3.
+
+## Lead-note follow-up
+
+Fresh matched control: probes/nd/TransportHV.lean checked in 3.37 s
+(2.46 s user, 1.06 s system, 3,204,732 KB RSS). The explicit helper
+application
+exposes the type and category slots, while remaining wrapper and instance
+arguments are still inferred; it is partial A replay evidence.
+
+The assigned B depth harness cannot vary the provider chain beneath the
+quantified hv domain without replacing the consumer and its exact
+instantiated proposition. No valid depth curve is reported.

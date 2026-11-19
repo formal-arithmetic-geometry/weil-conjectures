@@ -58,3 +58,13 @@ leaf test; dominant downstream difference unresolved.
 **Evidence level:** below section-12 Level 1 for the proposed instance
 cause. The exact-site negative control is informative, but no positive
 single-factor A result or B/C amplification is available. No Level 2/3.
+
+## Lead-note follow-up
+
+With the existing meta helper available, the aligned exact-site probe
+probes/nd/AlignInstance.lean completed in 84.14 s (85.35 s user, 1.35 s
+system, 8,539,300 KB RSS). It is a diagnostic with later sorry, not a
+checked theorem. The changed target still exposes the same downstream
+Functor.obj divergence, so the instance alignment remains a negative A
+control and no explicit replay is claimed. B and C are not assigned to
+this case.
