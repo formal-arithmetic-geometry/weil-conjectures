@@ -191,7 +191,6 @@ private theorem reconstructionTranspose
   have hu := (pbcDerivedScalarAdjunction_exists φ).exists.choose_spec P hP
   change (pbcDerivedScalarAdjunction φ).unit.app _ ≫
     (pbcDerivedRestrict φ).map (pbcComplexCounit φ P) ≫ _ = _ at hu
-  try simp only [Category.assoc]
   erw [reassoc_of% hu]
   rw [← DerivedCategory.Q.map_comp]
   rfl
@@ -298,7 +297,6 @@ private theorem reconstructionTransition_computation
   have hu := (pbcDerivedScalarAdjunction_exists χ).exists.choose_spec P hP
   change (pbcDerivedScalarAdjunction χ).unit.app _ ≫
     (pbcDerivedRestrict χ).map (pbcComplexCounit χ P) ≫ _ = _ at hu
-  try simp only [Category.assoc] at hu ⊢
   erw [reassoc_of% hu]
   rw [← DerivedCategory.Q.map_comp]
   congr 1
@@ -539,7 +537,6 @@ private theorem reconstructionStep_comparison (n : ℕ) :
   erw [hs]
   erw [reassoc_of% (he (n + 1))]
   have hn := τ.naturality q
-  try dsimp only [Functor.comp_map] at hn
   change τ.app _ ≫ (E n).map q ≫ (F n).mapDerivedCategoryFactors.hom.app J = _
   rw [← Category.assoc, ← hn, Category.assoc, ht]
 

@@ -55,27 +55,27 @@ lemma unit_app_comp_map_mateEquiv_app (γ : ΨY ⋙ LS ≅ LR ⋙ ΨZ)
   set x := PR.obj K
   set W := ResY.obj (PS.obj (ΨZ.obj K))
   set f : x ⟶ W := aY.unit.app x ≫ ResY.map (adjS.unit.app (ΨY.obj x)) ≫
-    ResY.map (PS.map ((TwoSquare.natTrans γ.hom).app x)) ≫
+    ResY.map (PS.map ((γ.hom).app x)) ≫
       ResY.map (PS.map (ΨZ.map (adjR.counit.app K))) with hf
   have h₁ : ΨY.map f ≫ aY.counit.app (PS.obj (ΨZ.obj K)) =
-      adjS.unit.app (ΨY.obj x) ≫ PS.map ((TwoSquare.natTrans γ.hom).app x) ≫
+      adjS.unit.app (ΨY.obj x) ≫ PS.map ((γ.hom).app x) ≫
         PS.map (ΨZ.map (adjR.counit.app K)) := by
     simp [hf]
   have h₂ : LS.map (ΨY.map f ≫ aY.counit.app (PS.obj (ΨZ.obj K))) ≫
       adjS.counit.app (ΨZ.obj K) =
-      (TwoSquare.natTrans γ.hom).app x ≫ ΨZ.map (adjR.counit.app K) := by
+      (γ.hom).app x ≫ ΨZ.map (adjR.counit.app K) := by
     rw [h₁]
     simp
-  have h₃ : ΨZ.map (LR.map f) ≫ (TwoSquare.natTrans γ.inv).app W ≫
+  have h₃ : ΨZ.map (LR.map f) ≫ (γ.inv).app W ≫
       LS.map (aY.counit.app (PS.obj (ΨZ.obj K))) ≫ adjS.counit.app (ΨZ.obj K) =
       ΨZ.map (adjR.counit.app K) := by
-    have := (TwoSquare.natTrans γ.inv).naturality f
+    have := (γ.inv).naturality f
     dsimp at this
     rw [reassoc_of% this, ← LS.map_comp_assoc, h₂]
-    have hγ : (TwoSquare.natTrans γ.inv).app x ≫ (TwoSquare.natTrans γ.hom).app x = 𝟙 _ :=
+    have hγ : (γ.inv).app x ≫ (γ.hom).app x = 𝟙 _ :=
       NatTrans.congr_app γ.inv_hom_id x
     rw [reassoc_of% hγ]
-  have h₄ : LR.map f ≫ aZ.unit.app (LR.obj W) ≫ ResZ.map ((TwoSquare.natTrans γ.inv).app W) ≫
+  have h₄ : LR.map f ≫ aZ.unit.app (LR.obj W) ≫ ResZ.map ((γ.inv).app W) ≫
       ResZ.map (LS.map (aY.counit.app (PS.obj (ΨZ.obj K)))) ≫
         ResZ.map (adjS.counit.app (ΨZ.obj K)) =
       adjR.counit.app K ≫ aZ.unit.app K := by
@@ -86,7 +86,7 @@ lemma unit_app_comp_map_mateEquiv_app (γ : ΨY ⋙ LS ≅ LR ⋙ ΨZ)
   have h₅ := congrArg PR.map h₄
   simp only [Functor.map_comp] at h₅
   calc _ = adjR.unit.app x ≫ PR.map (LR.map f) ≫ PR.map (aZ.unit.app (LR.obj W)) ≫
-        PR.map (ResZ.map ((TwoSquare.natTrans γ.inv).app W)) ≫
+        PR.map (ResZ.map ((γ.inv).app W)) ≫
         PR.map (ResZ.map (LS.map (aY.counit.app (PS.obj (ΨZ.obj K))))) ≫
         PR.map (ResZ.map (adjS.counit.app (ΨZ.obj K))) := by
           exact ((adjR.unit_naturality_assoc f _).trans

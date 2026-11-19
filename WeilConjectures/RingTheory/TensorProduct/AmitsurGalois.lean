@@ -182,7 +182,7 @@ coboundary. Let `u` be a unit of `L ⊗_K L ⊗_K L` satisfying the Amitsur cocy
 The proof identifies `L ⊗_K L` with `∏_{σ ∈ G} L` and `L ⊗_K L ⊗_K L` with
 `∏_{(σ, τ) ∈ G × G} L`, turning `u` into the Galois `2`-cocycle
 `(σ, τ) ↦ (1 ⊗ σ ⊗ στ)(u)`.
-(blueprint: `lem-sc-c1-brauer-trivial`, Amitsur-to-Galois step) -/
+(blueprint: `lemma-cohomology-multiplicative-group--7`, Amitsur-to-Galois step) -/
 theorem exists_eq_of_cocycle₂
     (hgal : ∀ f : (L ≃ₐ[K] L) → (L ≃ₐ[K] L) → Lˣ,
       (∀ σ τ ρ, (f σ τ : L) * f (σ * τ) ρ = σ (f τ ρ : L) * f σ (τ * ρ)) →

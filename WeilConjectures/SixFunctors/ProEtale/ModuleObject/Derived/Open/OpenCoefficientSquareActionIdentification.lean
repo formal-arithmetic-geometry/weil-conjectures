@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-! # The identity action normalization of the open coefficient square
 
-Source: main-20261015 blueprint, sec-six-functors-basics,
+Source: main-20261015 blueprint, chap-Construction-of-f,
 sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md and
  def-sfb-derived-comap-upper-star-iso.proof.md
 (blueprint: lem-sfb-open-coefficient-square-action-identification).

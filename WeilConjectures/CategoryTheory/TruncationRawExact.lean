@@ -93,8 +93,8 @@ private theorem exact_cast_last
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Exactness of the raw truncation maps for arbitrary derived-category instances.
-Source: Stacks Tags 08J5, 05SE, 0148, 011Q; blueprint step 1 of thm-sp-truncation-e2
-(blueprint: lem-sp-truncation-raw-exact).
+Source: Stacks Tags 08J5, 05SE, 0148, 011Q; blueprint step 1 of
+lemma-uniform-bound-proper-direct-image--1 (blueprint: lem-sp-truncation-raw-exact).
 
 Proof: The triangle tau<=q-1 K -> tau<=q K -> H^q(K)[-q] with the boundary
 chosen by `TruncationCouple.existsUnique_boundary` is distinguished. Apply the

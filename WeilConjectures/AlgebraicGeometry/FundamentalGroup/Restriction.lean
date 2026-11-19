@@ -125,7 +125,7 @@ lemma fundamentalGroupMap_smul (g : GX) (P : Y.FiniteEtale)
   have := isNaturalSMul_transportMulAction τ GX
   rw [← toAut_hom_app_apply (F := fiber t) (G := GY)]
   change ((toAutMulEquiv (fiber t) GY) ((toAutMulEquiv (fiber t) GY).symm
-    (toAut (fiber t) GX g))).hom.app P _ = _
+    (toAut (fiber t) GX g))).asIso.hom.app P _ = _
   rw [MulEquiv.apply_symm_apply, toAut_hom_app_apply, transportMulAction_smul]
 
 /-- The induced map of fundamental groups is continuous. -/

@@ -59,10 +59,10 @@ variable [HasZeroMorphisms C] {ι : Type*} (z : CatCenter C) (c : ComplexShape �
 /-- The central element of the category of homological complexes acting degreewise as a central
 element `z` of `C`. -/
 noncomputable def mapHomologicalComplex : CatCenter (HomologicalComplex C c) where
-  app K :=
+  asHom.app K :=
     { f i := z.app (K.X i)
       comm' i j _ := (z.naturality (K.d i j)).symm }
-  naturality K L φ := by
+  asHom.naturality K L φ := by
     ext i
     exact z.naturality (φ.f i)
 

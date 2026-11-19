@@ -16,7 +16,9 @@ set_option linter.privateModule false
 
 /-! # Coherence of projective-bundle base change
 
-Source: Stacks Project, Tags 01OB, 01O3, 01OE.
+## References
+
+* Stacks Project, Tags 01OB, 01O3, 01OE
 -/
 
 @[expose] public section

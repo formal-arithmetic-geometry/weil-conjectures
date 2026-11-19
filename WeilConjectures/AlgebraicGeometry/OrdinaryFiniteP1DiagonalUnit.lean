@@ -12,8 +12,8 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
 /-!
 # The diagonal unit for the Kummer-normalized projective-line trace
 
-Source: blueprint thm-amb-p1-adjunction and lem-amb-p1-diagonal-integrals.
-(auxiliary; not a blueprint node).
+Source: blueprint proposition-adjunction-projective-line--1 and
+lemma-class-diagonal-projective-line. (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

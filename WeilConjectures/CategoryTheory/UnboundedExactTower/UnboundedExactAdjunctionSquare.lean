@@ -210,7 +210,7 @@ def constantComparison (a : F ⊣ G) :
         ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor :=
   (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
     (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (constantInterchange F).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (constantInterchange F).hom))
 
 /-- The evaluation comparison is the mate of the inverse of the canonical descended
 termwise/evaluation identity. Source: Stacks 07A7, 0DVC
@@ -221,7 +221,7 @@ def evaluationComparison (a : F ⊣ G) (n : ℕᵒᵖ) :
       ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ⋙ G.rightDerivedFunctor :=
   (mateEquiv (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
     a.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (towerDerivedEvaluationInterchange F n).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (towerDerivedEvaluationInterchange F n).inv))
 
 /-- The canonical cochain-level unit of the existing total right derived functor.
 It is obtained from its homotopy-level unit using the quotient factorization isomorphisms.
@@ -383,7 +383,7 @@ private theorem localized_mate_cochain (a : F ⊣ G) (a' : F' ⊣ G')
             (DerivedCategory.Q.obj I) ≫
         G'.rightDerivedFunctor.map (h.mapDerivedCategoryFactors.hom.app I) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans (.up ℤ)).app I) ≫
+        (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)) (.up ℤ)).app I) ≫
         cochainUnit G' ((h.mapHomologicalComplex (.up ℤ)).obj I) := by
   apply (a'.mapDerivedCategoryRightDerivedAdjunction.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
@@ -405,7 +405,7 @@ private theorem localized_mate_cochain (a : F ⊣ G) (a' : F' ⊣ G')
   erw [cochain_counit]
   erw [reassoc_of% F'.mapDerivedCategoryFactors_hom_naturality
     ((NatTrans.mapHomologicalComplex
-      (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans (.up ℤ)).app I)]
+      (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)) (.up ℤ)).app I)]
   simp only [← Functor.map_comp]
   congr 2
   ext n
@@ -434,7 +434,7 @@ theorem localized_mate_cochain_normalization (a : F ⊣ G) (a' : F' ⊣ G')
             (DerivedCategory.Q.obj I) ≫
         G'.rightDerivedFunctor.map (h.mapDerivedCategoryFactors.hom.app I) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans (.up ℤ)).app I) ≫
+        (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)) (.up ℤ)).app I) ≫
         cochainUnit G' ((h.mapHomologicalComplex (.up ℤ)).obj I) := by
   exact localized_mate_cochain a a' θ I
 
@@ -493,7 +493,7 @@ omit [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
   [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] in
 private theorem constant_mate (a : F ⊣ G) :
     (mateEquiv a (a.whiskerRight ℕᵒᵖ)
-      (TwoSquare.mk _ _ _ _ (Functor.compConstIso ℕᵒᵖ F).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.compConstIso ℕᵒᵖ F).inv)) =
       (Functor.compConstIso ℕᵒᵖ G).hom := by
   ext X n
   simp [mateEquiv]
@@ -533,7 +533,7 @@ private theorem evaluation_mate (a : F ⊣ G) (n : ℕᵒᵖ) :
     (mateEquiv (a.whiskerRight ℕᵒᵖ) a
       (TwoSquare.mk ((evaluation ℕᵒᵖ B).obj n)
         ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) F ((evaluation ℕᵒᵖ A).obj n)
-        (𝟙 (((evaluation ℕᵒᵖ B).obj n) ⋙ F)))).natTrans =
+        (𝟙 (((evaluation ℕᵒᵖ B).obj n) ⋙ F)))) =
       𝟙 (((evaluation ℕᵒᵖ A).obj n) ⋙ G) := by
   ext T
   simp [mateEquiv]

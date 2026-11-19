@@ -16,8 +16,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.Trace
 /-! # Native normalized forward projection squares
 
 The adjunction-mate square is expressed using the same bundled tensor and exchange
-maps as the rational projective-line calculation.
-(blueprint: lem-sfb-native-normalized-self-square-projection). -/
+maps as the rational projective-line calculation. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,7 +35,7 @@ private theorem mate_formula
     {C D V : Type*} [Category C] [Category D] [Category V]
     {F : C ⥤ D} {P : D ⥤ C} {U₁ U₂ : D ⥤ V} {Q : V ⥤ D}
     (a : F ⊣ P) (b : U₂ ⊣ Q) (s : F ⋙ U₂ ≅ F ⋙ U₁) :
-    (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans =
+    (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)) =
       traceAbstractMate a b s := by
   unfold traceAbstractMate
   rfl
@@ -75,9 +74,7 @@ attribute [local instance 20000]
   CondensedRing.projectionSheafMonoidal CondensedRing.projectionModuleMonoidal
 open DiagonalCoefficients CondensedRing
 attribute [local implicit_reducible] ProjectionFamily
-/-- The native exchange for a chosen self-square, with module-object endpoints.
-Source: the adjunction mate of canonical pullback composition
-(blueprint: lem-sfb-native-normalized-self-square-projection). -/
+/-- The native exchange for a chosen self-square, with module-object endpoints. -/
 def nativeSelfSquareExchange
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y W : Scheme.{u}}

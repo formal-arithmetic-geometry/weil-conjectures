@@ -212,10 +212,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceTensorInterc
 public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 
 /-! # Canonical maps for compact-support diagonal integration
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the exchange and projection computations in both triangles.
-(blueprint: def-sf-supported-diagonal-calculus).
 -/
 
 @[expose] public noncomputable section
@@ -240,8 +236,7 @@ namespace AlgebraicGeometry.Etale.SupportedTrace
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The inverse projection formula followed by trace and the left unitor.
-Source: thm-amb-p1-adjunction.proof.md (blueprint: def-sf-supported-diagonal-calculus). -/
+/-- The inverse projection formula followed by trace and the left unitor. -/
 def evaluation {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     {B : DerivedCategoryModule A X}
     (t : (push A f).obj B ⟶ derivedTensorUnit (ModuleCat.{u + 1} A) Y)

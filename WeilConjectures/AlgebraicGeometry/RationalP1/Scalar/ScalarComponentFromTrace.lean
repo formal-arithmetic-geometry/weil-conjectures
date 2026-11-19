@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.AmbientTwistedUnitMa
 import WeilConjectures.AlgebraicGeometry.RationalP1.ShiftedLineSquare
 
 /-! # Twisted-unit compatibility from the scalar trace witness
-
-Source: the second identity of the rational projective-line triangle calculation.
-(blueprint: lem-sfb-scalar-component-from-trace)
 -/
 
 @[expose] public noncomputable section
@@ -82,8 +79,7 @@ private theorem selfSquare_twisted_unit
   exact ambient_twisted_unit_mate Λ (square Y) e e.hom d.hom e₂ h
 
 /-- Assemble the twisted-unit component from the explicit trace witness by
-ambient mate naturality and the shifted line square.
-(blueprint: lem-sfb-scalar-component-from-trace) -/
+ambient mate naturality and the shifted line square. -/
 theorem scalar_component_from_trace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

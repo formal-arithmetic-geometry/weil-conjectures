@@ -20,7 +20,7 @@ coefficients `R` and `S` are compatible with `Ψ`, the commutations `Lg^* Ψ ≅
 the derived pullbacks and the comparison maps `Ψ Rf_!(c) ⟶ Rf_!(c) Ψ`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationExtendScalarsMap`). This
 is an input for the compatibility of compact cohomology with the change of coefficients and the
-Frobenius maps (blueprint `sk-p-trace-coeff`).
+Frobenius maps (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main results
 
@@ -60,7 +60,8 @@ agree, where `BC` is the base change isomorphism of the extension by zero
 (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso`), `ω`
 the commutation of `Ψ` with the extension by zero
 (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekExtendScalarsIso`) and `α` the commutation
-of `Ψ` with the derived pullbacks. This is an input for blueprint `sk-p-trace-coeff`. -/
+of `Ψ` with the derived pullbacks. This is an input for blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`. -/
 theorem leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_extendScalars_app
     (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R))) :
@@ -137,7 +138,7 @@ unlabelled arrows are the comparison maps
 `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationExtendScalarsMap` and `α` is
 the commutation of `Ψ` with the derived pullbacks. This is the input for the compatibility of
 compact cohomology with the change of coefficients and the Frobenius maps (blueprint
-`sk-p-trace-coeff`). -/
+`theorem-grothendieck-lefschetz-trace-formula--7`). -/
 theorem rightDerivedLowerShriekOfCompactificationBaseChange_extendScalars_app
     (hi : IsPullback g' c'.i c.i gZ) (hg : CommSq gZ c'.g c.g g)
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :

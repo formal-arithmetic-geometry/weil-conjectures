@@ -13,7 +13,7 @@ import Mathlib.Algebra.Category.Grp.Biproducts
 /-! # Componentwise curve assertions for finite biproducts
 
 Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C
-(blueprint: lem-pbc-f1-prime-biproduct-unconditional). -/
+(blueprint: theorem-cohomology-curves). -/
 
 @[expose] public section
 
@@ -134,7 +134,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- Componentwise equivalence for the unconditional assertions of a finite sum.
 Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
-(blueprint: lem-pbc-f1-prime-biproduct-unconditional).
+(blueprint: theorem-cohomology-curves).
 
 Proof: The underlying abelian-sheaf functor is additive by definition, as are
 `Sheaf.functorH` and inverse image. Apply `Functor.mapBiproduct` followed by

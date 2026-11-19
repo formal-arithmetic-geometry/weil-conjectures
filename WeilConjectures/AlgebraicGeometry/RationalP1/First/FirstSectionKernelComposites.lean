@@ -25,9 +25,7 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
   DerivedCategory.monoidalClosed
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
-/-- Express a diagram functional in the fixed native first direct image.
-Source: the full-unit-normalized derived model in the First identity
-(blueprint: def-sfb-first-section-kernel-composites). -/
+/-- Express a diagram functional in the fixed native first direct image. -/
 @[irreducible]
 def firstNativeFunctional
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -42,8 +40,7 @@ def firstNativeFunctional
 
 -- Keep the native functor sources fixed while constructing the prefix.
 /-- The supported-kernel insertion, with its source and target fixed before direct image.
-Source: blueprint First identity, the section followed by the diagonal tensor comparison
-(blueprint: def-sfb-first-section-kernel-composites). This is the literal section paste,
+This is the literal section paste,
 followed by the second direct image of the tensor comparison and the supported kernel arrow. -/
 @[irreducible]
 def firstKernelInsertion
@@ -63,8 +60,7 @@ def firstKernelInsertion
 
 -- The terminal functional has the native path objects as its declared endpoints.
 /-- Change direct-image paths and evaluate a first-projection functional.
-Source: blueprint First identity, the functional after trace base change
-(blueprint: def-sfb-first-section-kernel-composites). The arrows are the conjugate path
+The arrows are the conjugate path
 comparison, the inverse projection, identity tensor the given native functional,
 identity tensor singleUnitIso, and the right unitor, in that order. -/
 @[irreducible]

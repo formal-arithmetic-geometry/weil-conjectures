@@ -18,8 +18,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 
 /-! # Affine dual and restriction
 
-Source: Stacks Project, Tag 0583 (algebra-lemma-localize-hom), as used in
-Tag 0EY6, proof of (1).
+## References
+
+* Stacks Project, Tag 0583, as used in Tag 0EY6, proof of (1)
 -/
 
 @[expose] public section
@@ -34,8 +35,7 @@ open Opposite in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Send a module functional to the global section of the sheaf internal Hom defined
-by its associated-sheaf morphism. Source: Stacks Project, Tag 0583.
-(blueprint: new-affine-dual-restriction-comparison) -/
+by its associated-sheaf morphism. -/
 private noncomputable def affineDualGlobalSection (A : CommRingCat.{u}) (M : ModuleCat.{u} A)
     (φ : Module.Dual A M) :
     (SheafOfModules.homObj (R := (Spec A).sheaf) (tilde M)
@@ -48,9 +48,7 @@ private noncomputable def affineDualGlobalSection (A : CommRingCat.{u}) (M : Mod
 open Opposite in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical evaluation map on global sections of the affine dual.
-Source: Stacks Project, Tag 0583.
-(blueprint: new-affine-dual-restriction-comparison) -/
+/-- The canonical evaluation map on global sections of the affine dual. -/
 private noncomputable def affineDualGlobalSectionLinear
     (A : CommRingCat.{u}) (M : ModuleCat.{u} A) :
     Module.Dual A M →ₗ[A]
@@ -143,18 +141,7 @@ private theorem affineDualIso
   exact ⟨(tilde.functor A).mapIso (asIso β) ≪≫ asIso (Modules.fromTildeΓ (R := A) H)⟩
 
 /-- Localization of Hom identifies the restriction of the associated sheaf of the
-module dual with the sheaf dual of the restriction.
-Source: Stacks Project, Tag 0583, as used in Tag 0EY6, proof of (1).
-(blueprint: new-affine-dual-restriction-comparison)
-
-Proof: A finite module over a Noetherian ring is finitely presented. For each
-basic open D(f), localization of Hom identifies (Hom_A(M,A))_f with
-Hom_{A_f}(M_f,A_f). The affine tilde equivalence identifies the latter with
-morphisms of the restricted associated sheaves. These maps send a localized
-functional to its action on localized sections, so commute with further
-localization. Basic opens contained in W form a basis, hence the compatible
-isomorphisms glue uniquely to the sheaf internal Hom on W. This argument
-also applies to the empty open and the zero module. -/
+module dual with the sheaf dual of the restriction. -/
 theorem affine_dual_restriction_comparison
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (M : ModuleCat.{u} A) [Module.Finite A M] :

@@ -11,8 +11,12 @@ import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedS
 import WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjunctionSquare
 
 /-! Shared ordinary operations and the cochain-unit normalization of ringed exchange.
-Source: Stacks Project, Derived Categories, Tags 070K and 09T5.
-(blueprint: lem-sf-ringed-exchange-chain-unit) -/
+
+## References
+
+* Stacks Project, Derived Categories, Tags 070K and 09T5
+* Stacks 09T5 and 09A5
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,46 +36,38 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-/-- The source vertical inverse image. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The source vertical inverse image. -/
 abbrev verticalPull (r : StrictTowerRingedSquare sq) :=
   proEtaleRingModulePullback f r.RY r.RX r.cf
 
-/-- The source vertical direct image. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The source vertical direct image. -/
 abbrev verticalPush (r : StrictTowerRingedSquare sq) :=
   proEtaleRingModuleDirectImage f r.RY r.RX r.cf
 
-/-- The base inverse image. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The base inverse image. -/
 abbrev basePull (r : StrictTowerRingedSquare sq) :=
   proEtaleRingModulePullback g r.RY r.RY' r.cg
 
-/-- The inverse image on the upper side of the square. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The inverse image on the upper side of the square. -/
 abbrev upperPull (r : StrictTowerRingedSquare sq) :=
   proEtaleRingModulePullback g' r.RX r.RX' r.cg'
 
-/-- The target vertical inverse image. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The target vertical inverse image. -/
 abbrev targetPull (r : StrictTowerRingedSquare sq) :=
   proEtaleRingModulePullback f' r.RY' r.RX' r.cf'
 
-/-- The target vertical direct image. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The target vertical direct image. -/
 abbrev targetPush (r : StrictTowerRingedSquare sq) :=
   proEtaleRingModuleDirectImage f' r.RY' r.RX' r.cf'
 
-/-- The ordinary counit mate, prior to deriving. Source: Stacks 09T5 and 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The ordinary counit mate, prior to deriving. -/
 def ordinary (r : StrictTowerRingedSquare sq) :
     verticalPush r ⋙ basePull r ⟶ upperPull r ⋙ targetPush r :=
   (mateEquiv (proEtaleRingModuleAdjunction f r.RY r.RX r.cf)
     (proEtaleRingModuleAdjunction f' r.RY' r.RX' r.cf')
-    (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom))
 
-/-- The derived counit mate for the ordinary-derived adjunctions. Source: Stacks 09T5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The derived counit mate for the ordinary-derived adjunctions. -/
 abbrev exchange (r : StrictTowerRingedSquare sq) :
     (verticalPush r).rightDerivedFunctor ⋙ (basePull r).mapDerivedCategory ⟶
       (upperPull r).mapDerivedCategory ⋙ (targetPush r).rightDerivedFunctor :=
@@ -84,8 +80,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
   (F : C ⥤ D) [F.Additive]
 
-/-- The comparison Q(FK) → RF(QK) for any additive direct image.
-Source: Stacks 070K (blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The comparison Q(FK) → RF(QK) for any additive direct image. -/
 def chainComparison [Abelian.HasKInjectiveResolutions C] (K : CochainComplex C ℤ) :
     DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj K) ⟶
       F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) :=
@@ -102,7 +97,6 @@ private theorem cochainUnit_eq_chainComparison [Abelian.HasKInjectiveResolutions
   repeat first
     | erw [CategoryTheory.Functor.map_id]
     | erw [Category.id_comp]
-    | erw [Category.comp_id]
 end Comparisons
 
 section GenericMate
@@ -128,11 +122,11 @@ private theorem chain_mate (a : F ⊣ G) (a' : F' ⊣ G')
       F.mapDerivedCategory ⋙ H.mapDerivedCategory)
     (hδ : δ = Functor.mapDerivedCategorySquareIso θ)
     (m : G ⋙ P ⟶ H ⋙ G')
-    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans)
+    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)))
     (e : G.rightDerivedFunctor ⋙ P.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ G'.rightDerivedFunctor)
     (he : e = (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)).natTrans)
+      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)))
     (K : CochainComplex A ℤ)
     (β : DerivedCategory.Q.obj ((P.mapHomologicalComplex (.up ℤ)).obj
         ((G.mapHomologicalComplex (.up ℤ)).obj K)) ⟶
@@ -180,11 +174,11 @@ private theorem scheme_chain_mate (a : F ⊣ G) (a' : F' ⊣ G')
       F.mapDerivedCategory ⋙ H.mapDerivedCategory)
     (hδ : δ = Functor.mapDerivedCategorySquareIso θ)
     (m : G ⋙ P ⟶ H ⋙ G')
-    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans)
+    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)))
     (e : G.rightDerivedFunctor ⋙ P.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ G'.rightDerivedFunctor)
     (he : e = (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)).natTrans)
+      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)))
     (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :
     P.mapDerivedCategory.map (chainComparison G K) ≫
         e.app (DerivedCategory.Q.obj K) ≫
@@ -198,29 +192,16 @@ end SchemeMate
 private theorem ordinary_mate (r : StrictTowerRingedSquare sq) :
     ordinary r = (mateEquiv (proEtaleRingModuleAdjunction f r.RY r.RX r.cf)
       (proEtaleRingModuleAdjunction f' r.RY' r.RX' r.cf')
-      (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)).natTrans := rfl
+      (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)) := rfl
 
 private theorem exchange_mate (r : StrictTowerRingedSquare sq) :
     exchange r = (mateEquiv
       (proEtaleRingModuleAdjunction f r.RY r.RX r.cf).mapDerivedCategoryRightDerivedAdjunction
       (proEtaleRingModuleAdjunction f' r.RY' r.RX' r.cf').mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (proEtaleAmbientRingedPullbackComparison sq
-        r.RX r.RY r.RX' r.RY' r.cf r.cg r.cg' r.cf' r.coherent).hom)).natTrans := rfl
+        r.RX r.RY r.RX' r.RY' r.cf r.cg r.cg' r.cf' r.coherent).hom)) := rfl
 
-/-- The chosen exchange commutes with the canonical right-derived cochain units.
-Source: Stacks Project, Derived Categories, Tags 070K and 09T5
-(blueprint: lem-sf-ringed-exchange-chain-unit).
-Proof: identify the ambient inverse-image square with exact localization of
-exchangeModuleSquare using ambientSquare_localization. Apply
-localized_mate_cochain_normalization to the specified module adjunctions. Its
-cochainUnit equals chainComparison because the intermediate
-mapHomotopyCategoryFactors component is the identity on quotient objects.
-Precompose with the inverse lower localization factorization, and cancel it to
-obtain the displayed equation. Specialize first to the specified module categories
-with the six functors still abstract, and then to the actual ringed operations;
-this retains the native instances without unfolding their tensor constructions.
-The ordinary and derived mates are exactly the specified ones, and the calculation
-holds on arbitrary complexes without any resolution choice. -/
+/-- The chosen exchange commutes with the canonical right-derived cochain units. -/
 theorem exchange_chainUnit (r : StrictTowerRingedSquare sq)
     (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :
     (basePull r).mapDerivedCategory.map (chainComparison (verticalPush r) K) ≫

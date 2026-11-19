@@ -117,14 +117,14 @@ private lemma mate_fac
     {G : C₂ ⥤ C₄} {G' : C₁ ⥤ C₃}
     (adj : L ⊣ R) (adj' : L' ⊣ R') (θ : TwoSquare G L L' G')
     {S : C₂} {X : C₁} (u : S ⟶ R.obj X) :
-    G.map u ≫ (mateEquiv adj adj' θ).natTrans.app X =
+    G.map u ≫ (mateEquiv adj adj' θ).app X =
       adj'.unit.app (G.obj S) ≫
-        R'.map (θ.natTrans.app S ≫ G'.map (L.map u ≫ adj.counit.app X)) := by
+        R'.map (θ.app S ≫ G'.map (L.map u ≫ adj.counit.app X)) := by
   have hu := adj'.unit.naturality (G.map u)
-  have ht := θ.natTrans.naturality u
+  have ht := θ.naturality u
   simp only [Functor.id_map, Functor.comp_map] at hu ht
-  have hm : (mateEquiv adj adj' θ).natTrans.app X =
-      adj'.unit.app (G.obj (R.obj X)) ≫ R'.map (θ.natTrans.app (R.obj X)) ≫
+  have hm : (mateEquiv adj adj' θ).app X =
+      adj'.unit.app (G.obj (R.obj X)) ≫ R'.map (θ.app (R.obj X)) ≫
         R'.map (G'.map (adj.counit.app X)) := by
     simp [mateEquiv_apply]
   rw [hm, ← Category.assoc, hu]
@@ -150,12 +150,12 @@ private theorem derived_mate_single
     (θ : TwoSquare G.mapDerivedCategoryPlus L.mapDerivedCategoryPlus
       L'.mapDerivedCategoryPlus G'.mapDerivedCategoryPlus) (J : C₁) :
     G.mapDerivedCategoryPlus.map (R.rightDerivedPlusSingleUnit J) ≫
-      (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app
+      (mateEquiv adj.derivedPlus adj'.derivedPlus θ).app
         ((DerivedCategory.Plus.singleFunctor C₁ 0).obj J) =
       adj'.derivedPlus.unit.app (G.mapDerivedCategoryPlus.obj
         ((DerivedCategory.Plus.singleFunctor C₂ 0).obj (R.obj J))) ≫
         R'.rightDerivedFunctorPlus.map
-          (θ.natTrans.app ((DerivedCategory.Plus.singleFunctor C₂ 0).obj (R.obj J)) ≫
+          (θ.app ((DerivedCategory.Plus.singleFunctor C₂ 0).obj (R.obj J)) ≫
             G'.mapDerivedCategoryPlus.map
               ((L.mapDerivedCategoryPlusSingleFunctor 0).hom.app (R.obj J) ≫
                 (DerivedCategory.Plus.singleFunctor C₁ 0).map (adj.counit.app J))) := by

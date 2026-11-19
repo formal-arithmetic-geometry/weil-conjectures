@@ -101,7 +101,6 @@ theorem exists_iso_homology_zero_rightDerivedLowerStar_tateObject
       homologyOneBiprodShiftIso Λ (tateObject Λ Y 1) hTz ≪≫
       _root_.DerivedCategory.homologyFunctorObjIsoOfIsoSingleFunctor eTY⟩⟩
 
-set_option maxHeartbeats 1000000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY in
 /-- **The Kummer class generates `R¹π_* Λ(1)`.** Suppose that over every algebraically closed

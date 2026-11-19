@@ -216,7 +216,7 @@ Proof plan, node steps 6--12 in the exact case:
    J has contractible kernel, so it is a quasi-isomorphism by the cohomology long exact
    sequence and a homotopy equivalence by the K-injective Hom lemma.
 3. Additivity preserves finite sums, shifts, cones and chain homotopies. An exact H
-   acts termwise on the derived category (lem-sf-exact-functor-derived-triangulated).
+   acts termwise on the derived category (situation-conventions).
    The formula -Qπ (Qq)⁻¹ of Stacks Tag 0152 is consequently preserved, including its sign.
 4. Naturality of e gives the new upper entry H(θ_A)e P′H(u); thus the image extension
    is precisely the normalized extension for the prescribed underlying morphism.

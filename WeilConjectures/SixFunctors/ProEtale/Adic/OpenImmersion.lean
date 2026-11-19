@@ -289,25 +289,26 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 /-- The pullback along the base change `φ̄` of an open immersion commutes with the pushforwards
 along the Frobenii: `(Fr_Y)_* ⋙ φ̄^* ≅ φ̄^* ⋙ (Fr_X)_*`. -/
 noncomputable def adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso :
-    (g.geometricGaloisFrobenius.hom)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ≅
-      (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ⋙ (f.geometricGaloisFrobenius.hom)_*ᵃ[l] :=
-  Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.symm).symm _ ≪≫
+    (g.geometricGaloisFrobenius.asIso.hom)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ≅
+      (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ⋙ (f.geometricGaloisFrobenius.asIso.hom)_*ᵃ[l] :=
+  Functor.isoWhiskerRight
+    (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.asIso.symm).symm _ ≪≫
     (adicUpperStarComp l _ _).symm ≪≫
     adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
     adicUpperStarComp l _ _ ≪≫
-    Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.symm)
+    Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.asIso.symm)
 
 /-- The extension by zero along the base change `φ̄` of an open immersion commutes with the
 Frobenius pullbacks `Fr^* = (Fr⁻¹)_*`: the two sides are left adjoint to the two sides of
 `AlgebraicGeometry.ProEtale.adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso`. -/
 noncomputable def adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] ⋙ (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ≅
-      (f.geometricGaloisFrobenius.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] :=
+    (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] ⋙ (g.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ≅
+      (f.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!ᵃ[l] :=
   (conjugateIsoEquiv
-      ((adicLowerStarEquivalence l f.geometricGaloisFrobenius.symm).toAdjunction.comp
+      ((adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso.symm).toAdjunction.comp
         (adicOpenImmersionLowerShriekAdjunction l _))
       ((adicOpenImmersionLowerShriekAdjunction l _).comp
-        (adicLowerStarEquivalence l g.geometricGaloisFrobenius.symm).toAdjunction)).symm
+        (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso.symm).toAdjunction)).symm
     (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h).symm
 
 omit [IsOpenImmersion φ] in
@@ -319,15 +320,15 @@ pullbacks. Each of its five constituents is conjugate to the identity, to a comp
 isomorphism or to a congruence isomorphism of pushforwards. -/
 lemma conjugateEquiv_adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     conjugateEquiv
-        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius.symm).symm.toAdjunction.comp
+        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso.symm).symm.toAdjunction.comp
           (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
       ((adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)).comp
-        (adicLowerStarEquivalence l f.geometricGaloisFrobenius.symm).symm.toAdjunction)
+        (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso.symm).symm.toAdjunction)
       (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv =
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom := by
   set j := Scheme.Hom.geometricFiberMap φ h
-  set a := f.geometricGaloisFrobenius
-  set b := g.geometricGaloisFrobenius
+  set a := f.geometricGaloisFrobenius.asIso
+  set b := g.geometricGaloisFrobenius.asIso
   set adj := adicUpperStarLowerStarAdjunction l j
   have h₁ := conjugateEquiv_whiskerRight
     (adicLowerStarEquivalence l b.symm).symm.toAdjunction
@@ -374,16 +375,16 @@ lemma conjugateEquiv_adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso
 lemma adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso :
     Functor.whiskerRight
         (adicOpenImmersionLowerShriekToLowerStar l (Scheme.Hom.geometricFiberMap φ h))
-        (g.geometricGaloisFrobenius.inv)_*ᵃ[l] ≫
+        (g.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l] ≫
       (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom =
     (adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l φ h).hom ≫
-      Functor.whiskerLeft (f.geometricGaloisFrobenius.inv)_*ᵃ[l]
+      Functor.whiskerLeft (f.geometricGaloisFrobenius.asIso.inv)_*ᵃ[l]
         (adicOpenImmersionLowerShriekToLowerStar l (Scheme.Hom.geometricFiberMap φ h)) := by
   have := Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom
     (adicOpenImmersionLowerShriekAdjunction l (Scheme.Hom.geometricFiberMap φ h))
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
-    (adicLowerStarEquivalence l f.geometricGaloisFrobenius.symm).symm
-    (adicLowerStarEquivalence l g.geometricGaloisFrobenius.symm).symm
+    (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso.symm).symm
+    (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso.symm).symm
     (adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h) _
     (adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar _)
   rw [conjugateIsoEquiv_apply_hom, Iso.symm_hom,

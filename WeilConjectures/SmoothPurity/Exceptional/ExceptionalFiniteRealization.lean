@@ -173,7 +173,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Finite realization of the strict exceptional adjunction
-Source: blueprint def-weil-exceptional-inverse-image. All changes of quotient-ring
+Source: blueprint theorem-f-shriek-finite-coefficients. All changes of quotient-ring
 presentation act identically on sections. Derived comparisons retain the universal
 right-derived unit, and exceptional comparisons are adjunction mates.
 (blueprint: def-pur-adic-etale-realization).
@@ -391,8 +391,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 attribute [local irreducible] integralExceptionalQuotient
 
-set_option maxHeartbeats 700000 in
--- The sectionwise linearity argument elaborates several sheaf constructions.
 /-- Direct-image realization, uniquely determined by the given set-sheaf comparison
 on every section. This fixes its scalar normalization, not just its isomorphism class.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-etale-realization).
@@ -480,11 +478,11 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
     change (β.hom.app M).hom.app U (x + y) = _ at ht
     change (β.hom.app M).hom.app U x = _ at ha
     change (β.hom.app M).hom.app U y = _ at hb
-    rw [ht, ha, hb]
     dsimp only [id] at h
-    rw [h]
-    exact (((A.levelAdj n).counit.app M).val.app
-      (p.op.obj U)).hom.map_add _ _
+    -- Compose section equations directly to avoid rewriting through the sheaf constructions.
+    let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
+    exact ht.trans ((congrArg ε h).trans
+      ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
   have hsmul (M) (U : Y.Etaleᵒᵖ) (q : integralExceptionalQuotientRing l E n)
       (x : (R.obj M).val.obj U) :
       (β.hom.app M).hom.app U
@@ -553,10 +551,7 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
           from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
     rw [ha] at ht
-    rw [ht]
-    conv_rhs => rw [hb]
     dsimp only [id] at h
-    rw [h]
     have hconst := constantSection_apply (X.smallEtaleTopology)
       (integralExceptionalQuotientRing l E n) q (p.op.obj U)
       ((A.singleton.hom).hom.app (p.op.obj U)
@@ -566,9 +561,9 @@ theorem integralExceptionalEtaleRight_existsUnique (n : ℕ) :
       ((L.map a).hom.app (p.op.obj U)
         ((adj.unit.app T).hom.app U z)) = _ at hc'
     have hs := hc'.trans hconst
-    rw [hs]
-    exact (((A.levelAdj n).counit.app M).val.app
-      (p.op.obj U)).hom.map_smul _ _
+    let ε := (((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom
+    exact ht.trans ((congrArg ε h).trans
+      ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
   let F := R ⋙ integralExceptionalEtaleRealization l E Y n
   let G := integralExceptionalEtaleRealization l E X n ⋙
     Etale.lowerStar (ModuleCat.{u + 1}
@@ -667,7 +662,7 @@ theorem integralExceptionalEtaleInverse_existsUnique (n : ℕ) :
     (ModuleCat.{u + 1} (ULift.{u + 1}
       (Padic.coefficientExtensionRing l E (n + 1)))) g
   let β := integralExceptionalEtaleRight l E g A n
-  let α := ((mateEquiv a b).symm β.hom).natTrans
+  let α := ((mateEquiv a b).symm β.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences a b β
   let e := (asIso α).symm
   have he M N (h : (A.lift n).modules.obj M ⟶ N) :

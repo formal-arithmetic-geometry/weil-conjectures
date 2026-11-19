@@ -49,17 +49,14 @@ lemma Etale.baseChangeMap_paste_horiz' (sq₁ : CommSq g' f' f g) (sq₂ : CommS
   rw [Etale.baseChangeMap_paste_horiz_app A sq₁ sq₂ sq]
   rfl
 
-set_option maxHeartbeats 800000 in
--- the proof is a long chain of rewrites in the bounded below derived categories, each of
--- which is cheap but the heartbeat count is per declaration
 /-- **Horizontal pasting of the derived base change maps**: for two squares pasted
 horizontally, the derived base change map of the pasted square is the composite
 `(h ≫ g)^* Rf_* ≅ h^* g^* Rf_* ⟶ h^* Rf'_* g'^* ⟶ Rf''_* g''^* g'^* ≅ Rf''_* (g'' ≫ g')^*` of
 the derived base change maps of the two squares, modulo the composition isomorphisms
 `AlgebraicGeometry.Etale.upperStarCompDerivedPlus` of the derived pullbacks along the
 horizontal maps.
-(blueprint: `lemma-weil-pbc-derived-exchange-coherence`,
-`lem-weil-pbc-exchange-identity-pasting`) -/
+(blueprint: `lemma-identity-pasting`,
+`lemma-identity-pasting`) -/
 lemma Etale.derivedBaseChangeMapPlus_paste_horiz (sq₁ : CommSq g' f' f g)
     (sq₂ : CommSq g'' f'' f' h) (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
     Etale.derivedBaseChangeMapPlus A sq =

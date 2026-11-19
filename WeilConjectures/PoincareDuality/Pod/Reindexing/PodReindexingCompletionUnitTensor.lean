@@ -21,7 +21,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Projection-normalized reindexing of completion and completed tensor
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-completion-unit-tensor).
 -/
 
@@ -134,7 +134,7 @@ private theorem podRoosBoundary_reindex (D : PodCompletionReindex l E g) :
 
 /-- The ambient reduction and completion assertion with independent scheme and coefficient
 universes. Completeness is required only to invert the specified unit and pullback map.
-Source: blueprint prop-pod-dual-tate-data-compatibility, proof Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-completion-unit-tensor).
 
 Proof: the projection-normalized coefficient isomorphisms give exact inverse equivalences
@@ -177,7 +177,7 @@ theorem podReindexingCompletionUnit {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- Projection-normalized ordinary reindexing commutes with completion and completed tensor.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941
 (blueprint: lem-pod-reindexing-completion-unit-tensor).
 

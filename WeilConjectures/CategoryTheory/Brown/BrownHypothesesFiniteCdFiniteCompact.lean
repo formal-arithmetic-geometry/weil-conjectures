@@ -207,10 +207,10 @@ private theorem finiteCoefficientLiftIso (A : Type) [CommRing A] [TopologicalSpa
 /-- For a finite discrete admissible coefficient, finite ℓ-cohomological dimension of the
 base field gives the objectwise compactness clause in the Noetherian Brown criterion.
 
-Source: blueprint `det-ctf-finite-compact-etale` and `sk-lem-brown-hypotheses.proof.md`,
-compactness paragraph. Proof: transport a bounded constructible finite-Tor complex to the
-finite-coefficient étale model, apply the finite-coefficient compactness argument using the
-finite torsion cohomological-dimension bound supplied by
+Source: blueprint `proposition-compactness-finite-coefficients` and
+`sk-lem-brown-hypotheses.proof.md`, compactness paragraph. Proof: transport a bounded constructible
+finite-Tor complex to the finite-coefficient étale model, apply the finite-coefficient compactness
+argument using the finite torsion cohomological-dimension bound supplied by
 `cohomologicalDimension_lt_top_of_finiteType`, and transport compactness back through the
 finite discrete coefficient equivalence. The construction is uniform in the finite ring,
 the scheme, and the object; the empty scheme and zero ring are included. -/
@@ -294,10 +294,8 @@ theorem brownHypotheses_compact_of_finite_cd_finite
           let _ := ht.1
           let _ := ht.2.1
           have hbig (I : Type (u + 2)) :
-              T.IsClosedUnderColimitsOfShape (Discrete I) := by
-            apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-            rintro _ ⟨F, hF⟩
-            exact ht.2.2 F inferInstance (fun i ↦ hF ⟨i⟩)
+              T.IsClosedUnderColimitsOfShape (Discrete I) :=
+            ht.isClosedUnderColimitsOfShape_discrete I
           have _ (I : Type (u + 1)) :
               T.IsClosedUnderColimitsOfShape (Discrete I) :=
             ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence

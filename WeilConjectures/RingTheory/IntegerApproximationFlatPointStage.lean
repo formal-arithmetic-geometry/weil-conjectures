@@ -18,6 +18,8 @@ import WeilConjectures.RingTheory.NoetherianApproximationLocalizedDiagrams
 import Mathlib.RingTheory.FiniteType
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import WeilConjectures.RingTheory.ColimitEventuallyFlat
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.Algebra.EuclideanDomain.Int
 
 /-! # Descent of one flat point in a supplied integer approximation
 

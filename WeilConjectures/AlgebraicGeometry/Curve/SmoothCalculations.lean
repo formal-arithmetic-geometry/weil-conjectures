@@ -271,7 +271,7 @@ closed field `k` and `n` a prime. Then `Hᵠ(C, 𝐅_n) = 0` for `q > 2`, where 
 sheaf `Λ/nΛ` and `Hᵠ` is the cohomology of its underlying abelian sheaf. This is the
 cohomological dimension bound `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`,
 the constant sheaf being killed by `n`.
-(blueprint: lem-sc-c1)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem subsingleton_sheafH_constantModSheaf_of_two_lt [IsCurve f] [Smooth f] [ConnectedSpace C]
     (n : ℕ) [Fact n.Prime] (q : ℕ) (hq : 2 < q) :
@@ -285,7 +285,7 @@ theorem subsingleton_sheafH_constantModSheaf_of_two_lt [IsCurve f] [Smooth f] [C
 field `k` and `n` a prime. Then `Hᵠ(C, 𝐅_n) = 0` for `q > 1`. This is the cohomological dimension
 bound `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`, the constant sheaf
 being killed by `n`.
-(blueprint: lem-sc-c2)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine [IsCurve f] [Smooth f]
     [ConnectedSpace C] [IsAffine C] (n : ℕ) [Fact n.Prime] (q : ℕ) (hq : 1 < q) :
@@ -300,7 +300,7 @@ smooth separated connected curve over `k`. Then `Hᵠ(C, 𝐅_p) = 0` for `q > 1
 Artin–Schreier sequence `0 → 𝐅_p → 𝒪_C → 𝒪_C → 0` and the surjectivity of `F - 1`, the
 `p`-cohomological dimension of `C` is at most one. The `p`-primary hypothesis of the field
 `C₃` of `AlgebraicGeometry.IsCurve.Assertions` holds automatically for `𝐅_p` and is omitted.
-(blueprint: lem-sc-c3)
+(blueprint: proposition-p-torsion-smooth-proper-curve--3)
 -/
 theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP [IsCurve f] [Smooth f]
     [ConnectedSpace C] (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (hq : 1 < q) :
@@ -319,7 +319,7 @@ closed field `k` and `r` a prime different from `char k`. If `Λ/rΛ` is finite,
 `Hᵠ(C, 𝐅_r)` is finite for every `q`: `C` is proper or affine, and the
 groups are computed by the Kummer sequence. The torsion hypothesis of the field `C₄` of
 `AlgebraicGeometry.IsCurve.Assertions` is replaced by `(r : k) ≠ 0`.
-(blueprint: lem-sc-c4)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem finite_sheafH_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] [ConnectedSpace C]
     (r : ℕ) [Fact r.Prime] (hr : (r : k) ≠ 0)
@@ -392,7 +392,7 @@ field `k` and `r` an arbitrary prime. If `Λ/rΛ` is finite, then `Hᵠ(C, 𝐅_
 every `q`: for `r ≠ char k` by the curve estimates, and for
 `r = char k = p` by the Artin–Schreier sequence, which identifies `H¹(C, 𝐅_p)` with the
 Frobenius-fixed part of `H¹(C, 𝒪_C)` and kills the higher groups.
-(blueprint: lem-sc-c5)
+(blueprint: proposition-p-torsion-smooth-proper-curve--4)
 -/
 theorem finite_sheafH_constantModSheaf_of_isProper [IsCurve f] [Smooth f] [ConnectedSpace C]
     [IsProper f] (r : ℕ) [Fact r.Prime] [Finite (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))]
@@ -494,7 +494,7 @@ the pullback map `Hᵠ(C, 𝐅_r) ⟶ Hᵠ(C', ι'^* 𝐅_r)` is bijective for e
 the standard square this is `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`. The
 torsion hypothesis of the field `C₆` of `AlgebraicGeometry.IsCurve.Assertions` is replaced by
 `(r : k) ≠ 0`.
-(blueprint: lem-sc-c6)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem bijective_cohomologyMap_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f]
     [ConnectedSpace C] (r : ℕ) [Fact r.Prime] (hr : (r : k) ≠ 0) (k' : Type u) [Field k']
@@ -542,7 +542,7 @@ Spec k' -ι-> Spec k
 
 the pullback map `Hᵠ(C, 𝐅_r) ⟶ Hᵠ(C', ι'^* 𝐅_r)` is bijective for every `q`. For `r = char k`
 this is the invariance of the Frobenius-fixed part of `H¹(C, 𝒪_C)` under the extension `k'/k`.
-(blueprint: lem-sc-c7)
+(blueprint: proposition-p-torsion-smooth-proper-curve--4)
 -/
 theorem bijective_cohomologyMap_constantModSheaf_of_isProper [IsCurve f] [Smooth f]
     [ConnectedSpace C] [IsProper f] (r : ℕ) [Fact r.Prime] (k' : Type u) [Field k']
@@ -566,7 +566,7 @@ theorem bijective_cohomologyMap_constantModSheaf_of_isProper [IsCurve f] [Smooth
 closed field `k`, `a : W ⟶ C` an open immersion and `r` a prime. Then the restriction
 `H²(C, 𝐅_r) ⟶ H²(W, a^* 𝐅_r)` is surjective: either `W = C`, or `W` is affine and
 `H²(W, 𝐅_r) = 0`.
-(blueprint: lem-sc-c8)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem surjective_cohomologyMap_constantModSheaf_two [IsCurve f] [Smooth f] [ConnectedSpace C]
     (r : ℕ) [Fact r.Prime] {W : Scheme.{u}} (a : W ⟶ C) [IsOpenImmersion a] :
@@ -654,7 +654,7 @@ Only the assertions are stated here; the explicit groups of part (a) are the cur
 `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one` and
 `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_two`, and their invariance
 under algebraically closed extension is `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`.
-(blueprint: thm-sc-main)
+(blueprint: proposition-p-torsion-smooth-proper-curve--1)
 -/
 theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpace C] (n : ℕ)
     [Fact n.Prime] :
@@ -771,7 +771,7 @@ one (not necessarily connected) and `ℓ` a prime different from `char k`. Then 
 `AlgebraicGeometry.IsCurve.Assertions`; their maps are the pullback maps
 `AlgebraicGeometry.Etale.cohomologyMap`. The proof goes through the Kummer sequence, the
 compactification of `C` and purity for the boundary points.
-(blueprint: lemma-weil-pbc-smooth-curve-kummer-localization)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem assertions_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] (ℓ : ℕ) [Fact ℓ.Prime]
     (hℓ : (ℓ : k) ≠ 0) [Finite (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ))] :
@@ -789,7 +789,7 @@ over `Λ` as `Λ/pΛ`, assumed finite) satisfies all eight assertions
 through the Artin–Schreier sequence `0 → 𝐅_p → 𝒪_C → 𝒪_C → 0`; for proper `C` the invariance
 `C₇` comes from that of the kernel of `F - 1` on `H¹(C, 𝒪_C)` (this description of the map is
 not stated).
-(blueprint: lemma-weil-pbc-smooth-curve-artin-schreier)
+(blueprint: theorem-cohomology-curves)
 -/
 theorem assertions_constantModSheaf_of_charP [IsCurve f] [Smooth f] (p : ℕ) [Fact p.Prime]
     [CharP k p] [Finite (Λ ⧸ (Ideal.span {(p : Λ)} : Ideal Λ))] :

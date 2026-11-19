@@ -147,7 +147,7 @@ private theorem scalarComparison
     letI : IY.Faithful := (ringFullyFaithful.{u, v} l Ω Y t).faithful
     haveI : (whiskerRight q.hom IY).CommShift ℤ := by rw [hq]; exact heShift
     exact commShift_of_whiskerRight (I := IY) q.hom
-  let beta := (mateEquiv A.adjunction B.adjunction q.inv).natTrans
+  let beta := (mateEquiv A.adjunction B.adjunction q.inv)
   letI : IsIso beta := hmate q hnorm
   letI := hqShift
   letI : A.adjunction.CommShift ℤ := ⟨A.unitShift, A.counitShift⟩

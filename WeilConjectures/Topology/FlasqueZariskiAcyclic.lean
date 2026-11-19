@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
 # Flasque sheaves are acyclic
 
 Source: literature/stacks-project/cohomology.tex, Lemma Tag 09SY (lemma-flasque-acyclic)
-(blueprint: lem-sc-zariski-flasque-acyclic).
+(blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace TopCat.Sheaf
 /-- A flasque abelian sheaf on a topological space `X` has vanishing cohomology
 `H^q(X, F) = Sheaf.H' F q ⊤` in every positive degree `q`.
 Source: Stacks Project, `cohomology.tex`, Tag 09SY (`lemma-flasque-acyclic`)
-(blueprint: lem-sc-zariski-flasque-acyclic).
+(blueprint: lemma-uniform-bounds-pro-etale-affines).
 
 Proof:
 1. Apply the source library's `IsFlasque.subsingleton_H` in degree `q = n + 1`.

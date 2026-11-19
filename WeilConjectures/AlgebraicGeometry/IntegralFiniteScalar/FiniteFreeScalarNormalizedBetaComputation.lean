@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFiniteScalarModelDefinitions
 /-! # The forced cochain formula for an augmentation-normalized comparison
-(blueprint: new-sfb-finite-free-scalar-normalized-beta-computation)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,20 +20,9 @@ private instance ring_comm (Λ : ScalarSixRing.{u}) : IsCommMonObj Λ.X := Λ.co
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunctor
   DerivedCategory.monoidalClosed Mod.monoidalClosed Sheaf.monoidalCategory
   AlgebraicGeometry.ProEtale.upperStarFromPoint
-set_option maxHeartbeats 600000 in
 -- Compare the two total tensors using their invertible coefficient summands.
 /-- Augmentation normalization computes beta using any ordinary and total comparisons
-with the prescribed underlying maps and degree-zero summands.
-Source: blueprint scalar-six formal properties, the specified augmentation normalization.
-(blueprint: new-sfb-finite-free-scalar-normalized-beta-computation)
-
-Proof. Faithfulness of the forgetful functor identifies the ordinary comparisons.
-In degree n the (0,n) inclusion becomes invertible after the supplied total
-isomorphism, since its composite is the tensor of the coefficient isomorphism
-followed by the ordinary isomorphism. Cancel that inclusion to identify the total
-comparison chosen in the normalization with the supplied one. Substitute these
-equalities into the normalization equation. Zero coefficients and zero complexes
-are covered by the same isomorphism and cancellation argument. -/
+with the prescribed underlying maps and degree-zero summands. -/
 theorem finiteFreeScalar_normalizedBeta_computes
     {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))

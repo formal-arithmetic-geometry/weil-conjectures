@@ -82,7 +82,6 @@ variable (l : ℕ) [Fact l.Prime]
   [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (i : E →ₐ[ℚ_[l]] L) (T : AlgebraicGeometry.Scheme.{u})
 
-set_option maxHeartbeats 400000 in
 -- The counit equation compares two explicit presentations of the derived scalar functor.
 /-- The canonical ordinary and completed derived scalar models have a shift-compatible
 comparison preserving completion. Source: the universal derived scalar counits and the

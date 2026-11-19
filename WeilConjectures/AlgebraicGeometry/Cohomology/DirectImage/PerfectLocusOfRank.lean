@@ -44,7 +44,7 @@ The isomorphism is only asserted to exist: it is not stated to be the canonical 
 which is not available (see
 `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`).
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlatOver f) {i : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -80,7 +80,7 @@ This also follows from
 case of the inclusion of `U_{i,r}`, and the stability of finite local freeness of rank `r`
 under pullback, which is not available.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f)
     {i r : ℕ} {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -97,7 +97,7 @@ image `R^i f_* ℱ|_U` is finite locally free of rank `r`. This is the case of t
 `U` in
 `AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     (U : T.Opens)
     (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
@@ -130,7 +130,7 @@ This gives `h^q_{ℱ'}(t') = 0` for `q ≠ i` and `h^i_{ℱ'}(t') = r`, and thes
 dimensions of `ℱ` at `g t'` by
 `AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem range_subset_perfectLocusOfRank_of_isPullback (hℱ : ℱ.IsFlatOver f) {i r : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -169,7 +169,7 @@ theorem range_subset_perfectLocusOfRank_of_isPullback (hℱ : ℱ.IsFlatOver f) 
 placed in degree `i`: the higher direct images `R^q f'_* ℱ'` vanish for `q ≠ i` and
 `R^i f'_* ℱ'` is finite locally free of rank `r`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem range_subset_perfectLocusOfRank_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) :
@@ -187,7 +187,7 @@ the locus of points at which the fibre cohomology vanishes outside degree `i` an
 `r` in degree `i` if and only if `R^q f'_* ℱ'` vanishes for `q ≠ i` and `R^i f'_* ℱ'` is finite
 locally free of rank `r`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem range_subset_setOf_hFiber_eq_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) :
@@ -207,8 +207,8 @@ pullback of `ℱ` to `X'`. The set `U_{i,r}` is open by
 `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`, and the factorisation criterion is
 `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`.
 
-(blueprint: `lem-pc-flat-rf-open`) 
-(blueprint: lem-pc-flat-rf-open)
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) 
+(blueprint: lemma-coherent-base-change-invertible-sheaves--3)
 -/
 theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.IsFlatOver f)
     (i r : ℕ) :

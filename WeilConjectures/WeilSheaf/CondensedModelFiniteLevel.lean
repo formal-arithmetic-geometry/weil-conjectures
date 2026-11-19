@@ -401,7 +401,7 @@ variable {K} (θ : K →ₐ[k] AlgebraicClosure k)
 /-- The geometric Frobenius `σ` of `Spec k̄` lies over the geometric Frobenius of `Spec K` along a
 `k`-embedding `θ : K ↪ k̄`. -/
 lemma specGeometricFrobenius_hom_comp_spec_map :
-    (specGeometricFrobenius k).hom ≫ Spec.map (CommRingCat.ofHom θ.toRingHom) =
+    (specGeometricFrobenius k).asIso.hom ≫ Spec.map (CommRingCat.ofHom θ.toRingHom) =
       Spec.map (CommRingCat.ofHom θ.toRingHom) ≫
         Spec.map (CommRingCat.ofHom
           (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k K : K →+* K)) := by
@@ -414,7 +414,7 @@ lemma specGeometricFrobenius_hom_comp_spec_map :
 intertwines the geometric Galois Frobenius `Fr` of `X̄` with the finite-level Frobenius:
 `Fr ≫ ι = ι ≫ Fr_K`. -/
 theorem geometricGaloisFrobenius_hom_comp_geometricFiberToFiniteLevel :
-    f.geometricGaloisFrobenius.hom ≫ f.geometricFiberToFiniteLevel θ =
+    f.geometricGaloisFrobenius.asIso.hom ≫ f.geometricFiberToFiniteLevel θ =
       f.geometricFiberToFiniteLevel θ ≫ f.finiteLevelFrobenius K := by
   refine f.finiteLevel_hom_ext K ?_ ?_
   · simp [finiteLevelFrobenius]

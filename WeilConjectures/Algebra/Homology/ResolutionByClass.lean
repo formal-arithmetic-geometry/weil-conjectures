@@ -13,6 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.HomEquiv
 public import Mathlib.Algebra.Homology.Refinements
 public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import Mathlib.CategoryTheory.Abelian.Refinements
 
 /-!
 # Resolutions by a class of objects lifting along epimorphisms

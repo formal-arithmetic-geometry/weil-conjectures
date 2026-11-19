@@ -19,7 +19,7 @@ morphism `D_I X ⟶ Spec_X 𝒪_X[t]` lifts uniquely to `Bl_K (Spec_X 𝒪_X[t])
 (`AlgebraicGeometry.Scheme.IdealSheafData.deformationSpaceToBlowup`). On the chart over an
 affine open `U ⊆ X` this lift is the affine comparison `AffineBlowup.deformationChart`
 (`ι_deformationSpaceToBlowup`); hence it is an open immersion
-(blueprint `def-pur-dnc-section-family`).
+(blueprint `definition-deformation-normal-bundle`).
 -/
 
 @[expose] public section
@@ -139,8 +139,8 @@ lemma isInvertible_comap_deformationSpaceToPolynomialSpec :
       rw [← comap_comp]
       exact I.isInvertible_comap_chart U
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section, comparison
-morphism from the Rees model to the blow-up model. The morphism
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section,
+comparison morphism from the Rees model to the blow-up model. The morphism
 `D_I X = Spec_X 𝒪_X[t, I t⁻¹] ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` lifting
 `D_I X ⟶ Spec_X 𝒪_X[t]`, given by the universal property of blowing up. -/
 noncomputable def deformationSpaceToBlowup :
@@ -238,7 +238,7 @@ lemma preimage_deformationSpaceToBlowup_chart (U : X.AffineZariskiSite) :
     polynomialSpecChartOpen, ← Scheme.Hom.comp_preimage, deformationSpaceToPolynomialSpec,
     relativeGluingMap_toBase _ _ _ I.toPolynomialPresheaf_comp_polynomialToRees]
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section. The
+/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section. The
 comparison morphism `D_I X ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` from the Rees model to the blow-up
 model is an open immersion. -/
 instance isOpenImmersion_deformationSpaceToBlowup : IsOpenImmersion I.deformationSpaceToBlowup := by

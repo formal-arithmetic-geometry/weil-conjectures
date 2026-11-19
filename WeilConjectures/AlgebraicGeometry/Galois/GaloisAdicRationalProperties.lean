@@ -276,9 +276,9 @@ private theorem stalk_pairing_action
       (pointSmallEtale y).sheafFiber (A := Type (u + 1))))
     (a : ((pointSmallEtale y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} R)).obj F)
     (b : ((pointSmallEtale y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} R)).obj H) :
-    κK (β (κF.symm (σ.hom.app (galoisUnderlyingFLC R F hF) (κF a)) ⊗ₜ[R]
-      κH.symm (σ.hom.app (galoisUnderlyingFLC R H hH) (κH b)))) =
-      σ.hom.app (galoisUnderlyingFLC R K hK) (κK (β (a ⊗ₜ[R] b))) := by
+    κK (β (κF.symm (σ.asIso.hom.app (galoisUnderlyingFLC R F hF) (κF a)) ⊗ₜ[R]
+      κH.symm (σ.asIso.hom.app (galoisUnderlyingFLC R H hH) (κH b)))) =
+      σ.asIso.hom.app (galoisUnderlyingFLC R K hK) (κK (β (a ⊗ₜ[R] b))) := by
   classical
   let p := pointSmallEtale y
   let T : Y.FLC ⥤ Type (u + 1) := ObjectProperty.ι _ ⋙ p.sheafFiber
@@ -358,12 +358,12 @@ private theorem stalk_pairing_action
       rw [← he, Iso.inv_hom_id_assoc]
     exact congrArg (fun k : TypeCat.Hom (T.obj X × T.obj Z) (T.obj Z) ↦
       k.hom (κF a, κH b)) hi
-  have hn₁ := ConcreteCategory.congr_hom (σ.hom.naturality π₁) w
-  have hn₂ := ConcreteCategory.congr_hom (σ.hom.naturality π₂) w
-  have hn := ConcreteCategory.congr_hom (σ.hom.naturality f) w
-  change σ.hom.app X (T.map π₁ w) = T.map π₁ (σ.hom.app P w) at hn₁
-  change σ.hom.app Z (T.map π₂ w) = T.map π₂ (σ.hom.app P w) at hn₂
-  change σ.hom.app W (T.map f w) = T.map f (σ.hom.app P w) at hn
+  have hn₁ := ConcreteCategory.congr_hom (σ.asIso.hom.naturality π₁) w
+  have hn₂ := ConcreteCategory.congr_hom (σ.asIso.hom.naturality π₂) w
+  have hn := ConcreteCategory.congr_hom (σ.asIso.hom.naturality f) w
+  change σ.asIso.hom.app X (T.map π₁ w) = T.map π₁ (σ.asIso.hom.app P w) at hn₁
+  change σ.asIso.hom.app Z (T.map π₂ w) = T.map π₂ (σ.asIso.hom.app P w) at hn₂
+  change σ.asIso.hom.app W (T.map f w) = T.map f (σ.asIso.hom.app P w) at hn
   rw [hf, hf, ← hn₁, ← hn₂, hw₁, hw₂,
     Equiv.symm_apply_apply, Equiv.symm_apply_apply] at hn
   exact hn.symm
@@ -417,7 +417,7 @@ private theorem stalk_constant_action (M : ModuleCat.{u + 1} R)
       (pointSmallEtale y).sheafFiber (A := Type (u + 1))))
     (z : ((pointSmallEtale y).sheafFiber (A := Type (u + 1))).obj (galoisUnderlyingSetSheaf R
       ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)).obj M))) :
-    σ.hom.app (galoisUnderlyingFLC R _ h) z = z := by
+    σ.asIso.hom.app (galoisUnderlyingFLC R _ h) z = z := by
   classical
   let p := pointSmallEtale y
   let C := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)).obj M
@@ -441,8 +441,8 @@ private theorem stalk_constant_action (M : ModuleCat.{u + 1} R)
       ((p.ulift.{u + 1}.sheafFiberConstantSheafIso M).hom_inv_id) (κ.symm z)
     change (p.ulift.{u + 1}.sheafFiberConstantSheafIso M).inv a = κ.symm z at he
     rw [he, κ.apply_symm_apply]
-  have hn := ConcreteCategory.congr_hom (σ.hom.naturality f) z
-  change σ.hom.app X (T.map f z) = T.map f (σ.hom.app X z) at hn
+  have hn := ConcreteCategory.congr_hom (σ.asIso.hom.naturality f) z
+  change σ.asIso.hom.app X (T.map f z) = T.map f (σ.asIso.hom.app X z) at hn
   rw [hf, hf] at hn
   exact hn
 
@@ -868,7 +868,7 @@ private def integralNormalizedAction : Prop :=
     (Padic.coefficientExtensionIntegers l E) (F.obj.obj (op n))).obj z) ∧
     ∀ (g : G) (z : (r F).V),
       κ (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n)
-        (τ F ((r F).ρ g z))) = (σ g).hom.app
+        (τ F ((r F).ρ g z))) = (σ g).asIso.hom.app
     (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E) (F.obj.obj (op n)) h) (κ
     (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n) (τ F z)))
 
@@ -1083,7 +1083,7 @@ private theorem integralEvaluation_from_construction
       congrArg (fun w ↦ κ ((α.hom.app (op n)) w))
         (Rep.hom_comm_apply (e.inv ≫ C.π.app (op n)) g z)
     _ = _ := haction g _
-    _ = _ := congrArg (fun w ↦ (c.γ g).hom.app
+    _ = _ := congrArg (fun w ↦ (c.γ g).asIso.hom.app
       (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E.val)
         (F.obj.obj (op n)) h) (κ w)) (hproj z)
 
@@ -1132,7 +1132,6 @@ private theorem rational_abelian :
     ⟨fun J ↦ Adjunction.hasLimitsOfShape_of_equivalence (d.eR E).functor⟩
   exact ⟨abelianOfEquivalence (d.eR E).functor⟩
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem rational_tensor_from_integral
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d)
@@ -1145,10 +1144,8 @@ private theorem rational_tensor_from_integral
     (rR := fun F ↦ ((d.eR E).functor.obj F).obj)
     (hloc := ?_) (hIT := hIT E)
   intro F
-  obtain ⟨η, hη, _⟩ := hcanon.localization E F
-  exact ⟨η, hη⟩
+  exact (hcanon.localization E F).imp fun _ h ↦ h.1
 
-set_option maxHeartbeats 8000000 in
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 private theorem rational_unit_from_integral
     (hcanon : GaloisAdicCanonicalConstruction y G c l Q d)
@@ -1161,8 +1158,7 @@ private theorem rational_unit_from_integral
     (rR := fun F ↦ ((d.eR E).functor.obj F).obj)
     (hloc := ?_) (hIU := hIU E)
   intro F
-  obtain ⟨η, hη, _⟩ := hcanon.localization E F
-  exact ⟨η, hη⟩
+  exact (hcanon.localization E F).imp fun _ h ↦ h.1
 
 -- Allow elaboration of the large dependent representation and fibre comparison types.
 omit [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]

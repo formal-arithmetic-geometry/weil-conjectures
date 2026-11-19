@@ -159,11 +159,9 @@ instance _root_.Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (K L : T
     exact { }
 
 /-- **Base change along a purely inseparable extension is a homeomorphism.** For a purely
-inseparable extension `k'/k` and a `k`-scheme `f : X ⟶ Spec k`, the projection
+inseparable extension `k'/k` and a `k`-scheme `f: X ⟶ Spec k`, the projection
 `X_{k'} = X ×_{Spec k} Spec k' ⟶ X` is a homeomorphism: it is the base change of the universal
-homeomorphism `Spec k' ⟶ Spec k`.
-
-(blueprint: `lem-pc-homeo-pure-insep`) -/
+homeomorphism `Spec k' ⟶ Spec k`. -/
 theorem isHomeomorph_pullback_fst_of_isPurelyInseparable (k k' : Type u) [Field k] [Field k']
     [Algebra k k'] [IsPurelyInseparable k k'] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) :
     IsHomeomorph (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base :=

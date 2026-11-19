@@ -161,8 +161,6 @@ private theorem derived_square_unit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- The comparison unfolds several derived universal-property constructions.
 /-- Evaluating the constructed derived direct-image comparison on its right-derived
 units gives the underived sectionwise comparison on the homotopy category.
 Source: Stacks Project, Tags 08FE and 08BS.
@@ -212,12 +210,6 @@ theorem singleComplexOpen_directImage_unit
   have : eX.Additive := Functor.additive_of_preserves_binary_products _
   have : eX.PreservesKInjectiveComplexes := inferInstance
   have : rX.PreservesKInjectiveComplexes := inferInstance
-  let b := (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F rY).symm ≪≫
-    Functor.rightDerivedFunctorNatIso (singleComplexOpenUnderivedDirectImageIso f V) ≪≫
-    Functor.rightDerivedFunctorCompIso rX F₀ ≪≫
-    Functor.isoWhiskerRight rX.rightDerivedFunctorIsoMapDerivedCategory F₀.rightDerivedFunctor
-  have hb : singleComplexOpenDirectImageIso f V = b := rfl
-  rw [hb]
   exact derived_square_unit F rY rX F₀ (singleComplexOpenUnderivedDirectImageIso f V) I
 
 end AlgebraicGeometry

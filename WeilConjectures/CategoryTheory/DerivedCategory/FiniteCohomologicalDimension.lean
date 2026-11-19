@@ -34,7 +34,8 @@ cohomological dimension*: there is `d` with `R^q F X = 0` for every object `X` a
   represented by K-injective complexes with injective components, whose coproduct is a complex of
   `F`-acyclic objects computing the coproduct in `D(C)`.
 
-This is the abstract part of Stacks, Tag 0F11 (blueprint `lem-kun-0f11`).
+This is the abstract part of Stacks, Tag 0F11 (blueprint
+`proposition-open-direct-image-preserves-finite`).
 
 The finite cohomological dimension is expressed through the unbounded right derived functor:
 `H^q(RF(X[0])) = 0` for `q > d`; it is equivalent to the vanishing of the classical right

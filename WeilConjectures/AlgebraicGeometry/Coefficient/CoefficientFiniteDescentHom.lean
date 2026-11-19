@@ -348,7 +348,7 @@ public import Mathlib.CategoryTheory.Sites.Grothendieck
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
-public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import Mathlib.Order.Int.ConditionallyCompleteOrder
 public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 public import Mathlib.Geometry.RingedSpace.PresheafedSpace
 public import Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -394,9 +394,9 @@ public import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionSt
 /-!
 # Finite descent of derived coefficient morphisms
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md and its proof
-(blueprint: det-lem-coefficient-finite-descent-hom).
+(blueprint: lemma-descent-finite-coefficient-field--1).
 
 All coefficient maps, adjunctions, and tensor comparisons below are the recorded
 constructions. The Hom-colimit assertion is expressed by surjectivity on finite
@@ -418,7 +418,7 @@ open Scheme PadicAlgCl
 
 /-- Transport a shifted morphism by scalar extension and the given canonical tensor
 comparison. Source: blueprint coefficient-finite-descent-hom, proof paragraph (1),
-tensor transitivity (blueprint: det-lem-coefficient-finite-descent-hom). -/
+tensor transitivity (blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentDerivedHomMap
     {A : Type uA} [Category.{vA} A]
     {B : Type uB} [Category.{vB} B] [HasShift B ℤ]
@@ -432,7 +432,7 @@ def coefficientDescentDerivedHomMap
 /-- The coefficient-inclusion map on restricted extensions is the adjunction mate
 of tensor transitivity and the old counit. This fixes the actual transition map.
 Source: blueprint coefficient-finite-descent-hom, proof paragraph (1), unit and counit
-formulas (blueprint: det-lem-coefficient-finite-descent-hom). -/
+formulas (blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentDerivedRestrictionMap
     {A : Type uA} [Category.{vA} A]
     {B : Type uB} [Category.{vB} B] [HasShift B ℤ]
@@ -502,7 +502,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The specified finite-field extension map on shifted derived Hom.
 Source: blueprint coefficient-finite-descent-hom, clauses (1) and (3)
-(blueprint: det-lem-coefficient-finite-descent-hom). -/
+(blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentHomTransition
     {E F G : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (k : F ≤ G)
     (C D : DerivedCategory
@@ -517,7 +517,7 @@ def coefficientDescentHomTransition
 
 /-- The specified extension-to-algebraic-closure map on shifted derived Hom.
 Source: blueprint coefficient-finite-descent-hom, clauses (1) and (3)
-(blueprint: det-lem-coefficient-finite-descent-hom). -/
+(blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentHomToAlgCl
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (C D : DerivedCategory
@@ -532,7 +532,7 @@ def coefficientDescentHomToAlgCl
 
 /-- The finite-stage transition on restricted shifted derived extensions.
 Source: blueprint coefficient-finite-descent-hom, clause (1), transition identity
-(blueprint: det-lem-coefficient-finite-descent-hom). -/
+(blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentRestrictionTransition
     {E F G : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (k : F ≤ G)
     (D : DerivedCategory
@@ -549,7 +549,7 @@ def coefficientDescentRestrictionTransition
 
 /-- The algebraic-closure transition on restricted shifted derived extensions.
 Source: blueprint coefficient-finite-descent-hom, clause (1), transition identity
-(blueprint: det-lem-coefficient-finite-descent-hom). -/
+(blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentRestrictionToAlgCl
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (D : DerivedCategory
@@ -566,7 +566,7 @@ def coefficientDescentRestrictionToAlgCl
 
 /-- The poset of finite fields containing E, lifted to the coefficient universe.
 Source: blueprint coefficient-finite-descent-hom, proof paragraph (2)
-(blueprint: det-lem-coefficient-finite-descent-hom). -/
+(blueprint: lemma-descent-finite-coefficient-field--1). -/
 def coefficientDescentFields (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     AsSmall.{u + 1} (Under E) ⥤ PadicAlgCl.FiniteIntermediateField ℓ :=
   (AsSmall.equiv (C := Under E)).inverse ⋙ Under.forget E
@@ -644,42 +644,42 @@ private lemma descentHomToAlgCl_injective
 
 /-- Derived coefficient Hom adjunction, its coefficient naturality, the uniformly
 bounded-below coefficient tensor colimit, and bijectivity on finite representatives.
-Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit,
+Source: blueprint main-20261015, lemma-descent-finite-coefficient-field,
 sk-lem-coefficient-finite-descent-hom.md, clauses (1)--(3)
-(blueprint: det-lem-coefficient-finite-descent-hom).
+(blueprint: lemma-descent-finite-coefficient-field--1).
 
 Proof, following the ten DAG steps:
 1. On a small skeleton of the pro-etale site, sheaf tensor is closed and preserves
-colimits (sk-def-sfb-sheaf-tensor). The extension/restriction adjunction of
-sk-def-sfb-change-of-scalars has exact restriction; lem-sfb-subfield-flat and
-lem-sfb-qlbar-flat make extension exact as well.
-2. Lift this adjunction to complexes by lem-weil-pbc-termwise-adjunction-homotopy.
+colimits (lemma-descent-finite-coefficient-field--1). The extension/restriction adjunction of
+lemma-descent-finite-coefficient-field--1 has exact restriction; prose-03-27 and
+prose-03-27 make extension exact as well.
+2. Lift this adjunction to complexes by lemma-descent-finite-coefficient-field--1.
 Exact functors preserve quasi-isomorphisms by
-lem-weil-pbc-exact-functor-derived-factorization. Apply lem-sfb-adjunction-localization:
+situation-conventions. Apply lemma-descent-finite-coefficient-field--1:
 the Hom map is restriction followed by the unit, and its inverse is extension
 followed by the counit. Restriction commutes with shifts.
 3. Identify the recorded left-derived extensions with these termwise extensions
-by the exact-functor clause of sk-def-sfb-derived-categories.
+by the exact-functor clause of lemma-descent-finite-coefficient-field--1.
 4. Tensor multiplication and insertion of 1 give inverse transitivity maps.
-Their unit compatibility and lem-weil-pbc-conjugate-iso-unit-equation identify
-them with def-sfb-derived-extend-comp-iso and the recorded finite comparison.
+Their unit compatibility and situation-conventions identify
+them with definition-sp-scalar-extension--2 and the recorded finite comparison.
 5. The inclusion map sends the old unit to the new one. Counit naturality gives
 the two displayed Hom-naturality identities, also for the algebraic closure.
 6. The finite fields containing E form a nonempty directed poset, by finite
-composita (det-def-sfb-qlbar-condensed-subextensions). The ring cocone of
-sk-prop-sfb-qlbar-colimit-x remains colimiting on this tail: extend a cocone on
+composita (prose-02-50). The ring cocone of
+lemma-comparison-completed-coefficients remains colimiting on this tail: extend a cocone on
 the tail to every finite H via EH. All legs remain the actual inclusions.
-7. Use def-weil-pbc-internal-abelian-sheaf-module-equivalence and
-lem-sfb-directed-ring-sheaf-module-colimit to identify this same cocone as a
+7. Use lemma-descent-finite-coefficient-field--1 and
+lemma-descent-finite-coefficient-field--1 to identify this same cocone as a
 colimit of E-module sheaves.
 8. Tensor with each term of the representative preserves this colimit, by
-lem-weil-pbc-independent-sheaf-tensor-colimits; its balancing maps are those of
-def-sfb-modobj-relative-tensor. The comparisons commute with differentials.
+lemma-descent-finite-coefficient-field--1; its balancing maps are those of
+prose-03-02. The comparisons commute with differentials.
 Additivity preserves every zero term below the given lower bound.
-9. The standing scheme is Noetherian by lem-weil-pbc-finite-type-over-noetherian.
-Bounded constructibility and lem-sfb-bounded-representative give a bounded
+9. The standing scheme is Noetherian by lemma-descent-finite-coefficient-field--1.
+Bounded constructibility and lemma-descent-finite-coefficient-field--1 give a bounded
 representative of D.
-10. Apply sk-lem-constructible-ext-continuity with source C, the coefficient
+10. Apply lemma-continuity-ext-out-constructible-complex--1 with source C, the coefficient
 diagram of steps 6--8, and degree r. The identities of step 5 identify its
 comparison with coefficient extension on Hom. A filtered-colimit element is a
 finite representative, and equality is equality at a common later stage. Thus

@@ -43,7 +43,7 @@ private def inverseMateIso
     {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
     L ⋙ G ≅ F ⋙ L' := by
-  let α := ((mateEquiv a b).symm (.mk _ _ _ _ e.hom)).natTrans
+  let α := ((mateEquiv a b).symm (.mk _ _ _ _ e.hom))
   letI : IsIso α := isIso_inverseMate_of_equivalences a b e
   exact (asIso α).symm
 
@@ -52,8 +52,8 @@ private theorem inverseMateIso_mate
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
-    (mateEquiv a b (.mk _ _ _ _ (inverseMateIso a b e).inv)).natTrans = e.hom := by
-  exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply _)
+    (mateEquiv a b (.mk _ _ _ _ (inverseMateIso a b e).inv)) = e.hom := by
+  exact ((mateEquiv a b).apply_symm_apply _)
 
 /-- Normalized realizations and coefficient projection, without singleton extension.
 Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
@@ -117,14 +117,14 @@ theorem etaleBrownLevelComparisons
         c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
           (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
             c.i).rightDerivedFunctorIsoMapDerivedCategory)
-      (.mk _ _ _ _ (openComparison n).inv)).natTrans = (openRealization n).inverse.inv) ∧
+      (.mk _ _ _ _ (openComparison n).inv)) = (openRealization n).inverse.inv) ∧
       (∀ {m n : ℕ} (h : m ≤ n),
     (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-      (.mk _ _ _ _ (openProjection h).hom)).natTrans = (S.openDerived.derivedTensor h).inv) ∧
+      (.mk _ _ _ _ (openProjection h).hom)) = (S.openDerived.derivedTensor h).inv) ∧
       (∀ {m n : ℕ} (h : m ≤ n),
     (properProjection h).inv =
       (mateEquiv (S.properDerived.level n).adjunction (S.properDerived.level m).adjunction
-        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom)).natTrans) ∧
+        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom))) ∧
       (let levelComparison (n : ℕ) :
           S.levelFunctor n ⋙ realizationY.derived n ≅
             realizationX.derived n ⋙ Etale.rightDerivedLowerShriekOfCompactification
@@ -172,7 +172,7 @@ theorem etaleBrownLevelComparisons
     (ro n).inverse.symm
   have hjo (n : ℕ) :
       (mateEquiv (S.levelDerivedOpenAdjunction n) (a n)
-        (.mk _ _ _ _ (jo n).inv)).natTrans = (ro n).inverse.inv :=
+        (.mk _ _ _ _ (jo n).inv)) = (ro n).inverse.inv :=
     inverseMateIso_mate _ _ _
   have hp {m n : ℕ} (h : m ≤ n) :=
     letI := hfinite n

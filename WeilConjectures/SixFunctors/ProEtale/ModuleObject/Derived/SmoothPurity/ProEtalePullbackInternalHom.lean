@@ -105,7 +105,7 @@ private noncomputable def pullbackConcreteIhomIso
   let G := ProEtale.upperStar Ab.{u + 1} f
   let ρ := (asIso (condensedPullbackHom Λ f)).inv
   let F := supportPullback Λ f
-  have : ∀ Z, IsIso (Functor.LaxMonoidal.ihomComparison G Z).natTrans :=
+  have : ∀ Z, IsIso (Functor.LaxMonoidal.ihomComparison G Z) :=
     ProEtale.isIso_ihomComparison_upperStar Ab.{u + 1} f
   have (N : supportModules Λ Y) : PreservesLimit
       (parallelPair (Mod.homModPre (Mod.act M.X) N)
@@ -131,7 +131,7 @@ private lemma pullbackConcreteIhomIso_embedding
       G.map (((concreteIhomIso _ M).hom.app N).hom) ≫
         G.map ((equalizer.ι (Mod.homModPre (Mod.act M.X) N)
           (Mod.homModB _ M N)).hom) ≫
-        (Functor.LaxMonoidal.ihomComparison G M.X).natTrans.app N.X := by
+        (Functor.LaxMonoidal.ihomComparison G M.X).app N.X := by
   dsimp only
   have hc : (pullbackConcreteIhomIso Λ f M).hom.app N ≫
       (concreteIhomIso _ ((supportPullback Λ f).obj M)).hom.app
@@ -194,18 +194,18 @@ argument applies on the empty site and to the zero coefficient ring. -/
 theorem supportPullback_ihomComparison_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [WeaklyEtale f] (M : supportModules Λ Y) :
-    IsIso (Functor.LaxMonoidal.ihomComparison (supportPullback Λ f) M).natTrans := by
+    IsIso (Functor.LaxMonoidal.ihomComparison (supportPullback Λ f) M) := by
   let F := supportPullback Λ f
   let G := ProEtale.upperStar Ab.{u + 1} f
   have hcomp (N : supportModules Λ Y) :
-      IsIso ((Functor.LaxMonoidal.ihomComparison F M).natTrans.app N) := by
+      IsIso ((Functor.LaxMonoidal.ihomComparison F M).app N) := by
     let eX := (concreteIhomIso _ (F.obj M)).hom.app (F.obj N)
     let eY := (concreteIhomIso _ M).hom.app N
     let ιX := (equalizer.ι (Mod.homModPre (Mod.act (F.obj M).X) (F.obj N))
       (Mod.homModB _ (F.obj M) (F.obj N))).hom
     let ιY := (equalizer.ι (Mod.homModPre (Mod.act M.X) N)
       (Mod.homModB _ M N)).hom
-    have heq : (Functor.LaxMonoidal.ihomComparison F M).natTrans.app N =
+    have heq : (Functor.LaxMonoidal.ihomComparison F M).app N =
         (pullbackConcreteIhomIso Λ f M).hom.app N := by
       apply (cancel_mono eX).mp
       apply (cancel_mono (equalizer.ι (Mod.homModPre (Mod.act (F.obj M).X) (F.obj N))

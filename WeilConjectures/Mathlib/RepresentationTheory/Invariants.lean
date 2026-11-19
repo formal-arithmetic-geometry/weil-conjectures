@@ -29,7 +29,7 @@ Let `G` be a `p`-group and `V` a finite-dimensional `𝔽_p`-linear representati
 - `Representation.exists_forall_sub_mem_of_isPGroup`: for a proper `G`-stable subspace `W`
   there is `x ∉ W` with `g x - x ∈ W` for all `g`.
 - `Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup`: both statements of
-  the blueprint lemma together (blueprint: `lemma-weil-pbc-finite-l-group-filtration`).
+  the blueprint lemma together (blueprint: `lemma-reduction-unipotent-local-system--1`).
 - `Representation.IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top`: in an irreducible
   representation the invariants of a normal subgroup are zero or everything.
 -/
@@ -128,7 +128,7 @@ finite-dimensional `𝔽_p`-linear representation of `G`. If `V ≠ 0` then `V^G
 subspaces with `dim F i = i` such that `G` acts trivially on each quotient
 `F (i + 1) / F i`, i.e. `g x - x ∈ F i` for `x ∈ F (i + 1)`. Its successive quotients are thus
 the trivial one-dimensional representation. The finiteness of `G` is not needed.
-(blueprint: `lemma-weil-pbc-finite-l-group-filtration`) -/
+(blueprint: `lemma-reduction-unipotent-local-system--1`) -/
 theorem invariants_ne_bot_and_exists_filtration_of_isPGroup (hG : IsPGroup p G) :
     (Nontrivial V → ρ.invariants ≠ ⊥) ∧
       ∃ F : ℕ → Submodule (ZMod p) V, F 0 = ⊥ ∧ F (finrank (ZMod p) V) = ⊤ ∧

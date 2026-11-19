@@ -40,7 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
 /-- The supplied normalized Roos model after coefficient restriction.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Step 5.
+Source: blueprint theorem-poincare-duality-frobenius--2, Step 5.
 (blueprint: def-pod-reindexing-limit-complex-comparison) -/
 def podReindexingLimitRoosIso (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W) :
     DerivedCategory.Q ⋙ coefficientSequenceLimit l E W ≅
@@ -54,7 +54,7 @@ def podReindexingLimitRoosIso (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel
         ρ.comparison
 
 /-- The strict Roos maps assembled using their specified naturality.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5.
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
 (blueprint: def-pod-reindexing-limit-complex-comparison) -/
 def podReindexingStrictRoosIso (S : PodReindexingStrictData l E g)
     (hS : S.RoosNaturality l E g) :
@@ -67,7 +67,7 @@ def podReindexingStrictRoosIso (S : PodReindexingStrictData l E g)
     exact hS C C' f)
 
 /-- Paste the normalized source and target Roos models with strict reindexing.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5.
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
 Each factor is specified: no witness of an existence theorem is chosen.
 (blueprint: def-pod-reindexing-limit-complex-comparison) -/
 def podReindexingLimitComparisonOnComplexes (S : PodReindexingStrictData l E g)

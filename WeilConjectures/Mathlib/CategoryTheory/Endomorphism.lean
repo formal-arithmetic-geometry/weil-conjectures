@@ -29,17 +29,17 @@ namespace CategoryTheory.Aut
 variable {C : Type*} [Category* C] (X : C)
 
 @[simp]
-lemma one_hom : (1 : Aut X).hom = 𝟙 X :=
+lemma one_hom : (1 : Aut X).asIso.hom = 𝟙 X :=
   rfl
 
 variable {X}
 
 @[simp]
-lemma inv_hom (f : Aut X) : f⁻¹.hom = f.inv :=
+lemma inv_hom (f : Aut X) : f⁻¹.asIso.hom = f.asIso.inv :=
   rfl
 
 @[simp]
-lemma mul_hom (f g : Aut X) : (f * g).hom = g.hom ≫ f.hom :=
+lemma mul_hom (f g : Aut X) : (f * g).asIso.hom = g.asIso.hom ≫ f.asIso.hom :=
   rfl
 
 end CategoryTheory.Aut
@@ -54,20 +54,22 @@ lemma asHom_pow_comp_eq_comp_asHom_pow {a : Y ⟶ Y} {b : X ⟶ X} {p : Y ⟶ X}
     (h : a ≫ p = p ≫ b) (m : ℕ) :
     asHom (of a ^ m) ≫ p = p ≫ asHom (of b ^ m) := by
   induction m with
-  | zero => simp [one_def]
+  | zero => simp [one_asHom]
   | succ m ih =>
     change asHom (of a ^ m * of a) ≫ p = p ≫ asHom (of b ^ m * of b)
-    rw [mul_def, mul_def]
+    rw [mul_asHom, mul_asHom]
     change (a ≫ asHom (of a ^ m)) ≫ p = p ≫ b ≫ asHom (of b ^ m)
     rw [Category.assoc, ih, reassoc_of% h]
 
 /-- If `x ≫ A = S ≫ x` then `x ≫ A ^ j = S ^ j ≫ x` for the monoid powers in `End`. -/
 lemma comp_pow_eq_pow_comp {W X : C} (x : W ⟶ X) (A : End X)
-    (S : End W) (h : x ≫ A = S ≫ x) (j : ℕ) : x ≫ (A ^ j : End X) = (S ^ j : End W) ≫ x := by
+    (S : End W) (h : x ≫ A.asHom = S.asHom ≫ x) (j : ℕ) :
+    x ≫ ((A ^ j : End X)).asHom = ((S ^ j : End W)).asHom ≫ x := by
   induction j with
-  | zero => rw [pow_zero, pow_zero, End.one_def, End.one_def, Category.comp_id, Category.id_comp]
+  | zero =>
+    rw [pow_zero, pow_zero, End.one_asHom, End.one_asHom, Category.comp_id, Category.id_comp]
   | succ j ih =>
-    rw [pow_succ, pow_succ, End.mul_def, End.mul_def, ← Category.assoc, h, Category.assoc, ih,
+    rw [pow_succ, pow_succ, End.mul_asHom, End.mul_asHom, ← Category.assoc, h, Category.assoc, ih,
       Category.assoc]
 
 /-- If `a ≫ p = p`, then `a ^ m ≫ p = p` for every `m`. -/

@@ -225,7 +225,6 @@ private theorem lift_roos_cancel
   rw [← Category.assoc, hh, Category.assoc, e.hom_inv_id]
   exact Category.comp_id _
 
-set_option maxHeartbeats 300000 in
 -- Normalize scalar-extension presentations before the generic cone calculation.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Multiplication and the product comparison identify the specified comparison

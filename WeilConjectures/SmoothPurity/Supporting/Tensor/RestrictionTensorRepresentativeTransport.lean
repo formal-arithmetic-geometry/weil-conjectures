@@ -10,7 +10,7 @@ import WeilConjectures.SmoothPurity.Supporting.Tensor.RestrictionTensorRepresent
 
 /-! # Enlargement of restriction tensor representatives
 
-Source: def-pur-section-invariant, common-stage subargument
+Source: lemma-section-normal-bundle--1, common-stage subargument
 (blueprint: lem-pur-restriction-tensor-representative-transport).
 
 The component calculation from steps 3--5 of the common-stage restriction tensor
@@ -50,7 +50,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The mixed tensor square identifies the class of the compositum representative
 with its class at every larger finite field.
-Source: def-pur-section-invariant, common-stage subargument, steps 3--5
+Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3--5
 (blueprint: lem-pur-restriction-tensor-representative-transport).
 Proof: write c_H as mu_H followed by the tensor of the inverse pullback scalar
 comparisons. At L, tensor comparison naturality moves the scalar extension of

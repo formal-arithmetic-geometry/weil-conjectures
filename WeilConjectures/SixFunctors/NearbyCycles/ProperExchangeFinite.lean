@@ -20,7 +20,7 @@ special fibres and of identifications `ε` are cartesian and whose inclusion `j_
 generic fibre is quasi-compact and quasi-separated, the pushforward exchange
 `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` is an isomorphism at every complex bounded below of étale origin
 (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_finiteCoefficient`). This is
-blueprint `det-sp-nearby-cycles-exchanges` (2), "proper exchange", SGA 7 XIII 2.1.7, for a model
+blueprint `prose-E-03` (2), "proper exchange", SGA 7 XIII 2.1.7, for a model
 over an arbitrary trait (no hypothesis on the base is needed).
 
 By `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isIso_baseChangeMap`, `χ_f` is
@@ -53,7 +53,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 /-- **The proper exchange of nearby cycles with finite coefficients** (blueprint
-`det-sp-nearby-cycles-exchanges` (2); SGA 7 XIII 2.1.7): let `φ : M ⟶ N` be a morphism of models
+`prose-E-03` (2); SGA 7 XIII 2.1.7): let `φ : M ⟶ N` be a morphism of models
 whose morphism of total spaces and `f` are proper, whose squares of special fibres and of
 identifications `ε` are cartesian, and whose inclusion `j_M` of the geometric generic fibre is
 quasi-compact and quasi-separated. Then the pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` with

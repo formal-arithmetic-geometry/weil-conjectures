@@ -453,12 +453,12 @@ theorem exists_lisseSheaf_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
   have hrep (g : Aut (fiber t)) (c : Fin n → PadicAlgCl l) :
       (U.lisseMonodromy hU).rep t G' g (Ψ c) = Ψ (R g *ᵥ c) := by
     rw [LisseMonodromy.rep_apply, LisseMonodromy.monoLinear, lisseMonodromy_mono]
-    change ((monoIso hU g).hom.app G').hom (((U.ptRes l t).app G.X).hom _) = _
+    change ((monoIso hU g.asIso).hom.app G').hom (((U.ptRes l t).app G.X).hom _) = _
     rw [monoIso_hom_app_ptRes_apply, transportRes_hom_app]
     change ((U.ptRes l t).app G.X).hom _ = ((U.ptRes l t).app G.X).hom _
     congr 1
-    set h := (U.transport g).inv
-    have he : h ≫ U.proj t = U.proj t := U.transport_inv_proj g
+    set h := (U.transport g.asIso).inv
+    have he : h ≫ U.proj t = U.proj t := U.transport_inv_proj g.asIso
     have key := resOver_freeSection ε h he fun i ↦ algebraMap _ _ (c i)
     -- the transition matrix of `h, 𝟙` is the constant matrix `R g`
     let c' : U.cover t ⟶ Limits.pullback (U.proj t) (U.proj t) :=

@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SepClosedPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageTorAmplitudeNoetherian
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.Torsion.TorsionObjectConstantProjection
@@ -56,14 +58,14 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 /-! ### Torsion coefficients with invertible exponent
 
 The statements of this section are the ones of `sk-thm-sf-direct-image-tor-amplitude`,
-`sk-thm-sf-hom-ctf`, `sk-prop-sf-rf-shriek-preservation` (ii)–(iv) and
-`sk-thm-sf-ctf-stability` (iii), (v), (vi) whose content is a bound on étale cohomological
+`sk-thm-sf-hom-ctf`, `theorem-f-shriek-finite-coefficients` (ii)–(iv) and
+`proposition-six-operations-dctf` (iii), (v), (vi) whose content is a bound on étale cohomological
 dimension, a constructibility theorem for direct images or purity. They are made in the setting
-of `def-sf-setting`: the coefficients are a finite ring `Λ` whose exponent is invertible on
-the schemes in sight, and the schemes are of finite type over a field `k`. Neither hypothesis
-can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier),
-so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and over a
-general Noetherian base étale cohomology need not vanish above twice the dimension. -/
+of `definition-constructible-sheaves--6`: the coefficients are a finite ring `Λ` whose exponent is
+invertible on the schemes in sight, and the schemes are of finite type over a field `k`. Neither
+hypothesis can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite
+(Artin–Schreier), so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and
+over a general Noetherian base étale cohomology need not vanish above twice the dimension. -/
 
 section Torsion
 
@@ -180,7 +182,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : 
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
   exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
@@ -203,7 +205,42 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- **Proper direct image with finite coefficients**, finite-Tor form: for a
+proper morphism `f : X ⟶ Y` of finite-type `k`-schemes and a finite `Λ` whose exponent is
+invertible on `Y`, `Rf_*` carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`. Bounded constructibility is
+proper finiteness
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
+SGA 4 XIV 1.1), not the finiteness theorem for arbitrary `f`; the Tor amplitude bound is
+`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`. This is the proper leg of
+`Rf_! = Rp_* ∘ j_!` in the notes' proof of the results from étale theory. -/
+theorem constructibleFiniteTor_rightDerivedLowerStar_of_isProper {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsProper f]
+    [HasInvertibleExponent Λ Y]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  obtain ⟨hbc, a, b, hta⟩ := hK
+  cases isEmpty_or_nonempty X with
+  | inl hX =>
+    have h0 : IsZero ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
+      (R((f)_*[ModuleCat.{u + 1} Λ])).map_isZero (isZero_derivedCategory_of_isEmpty _ X K)
+    exact ⟨boundedConstructible_of_isZero Λ h0, a, b,
+      _root_.DerivedCategory.torAmplitudeIn_of_isZero a b h0⟩
+  | inr hX =>
+    have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
+    have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
+    obtain ⟨N, hN0, hNΛ, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
+    have : NeZero N := ⟨hN0.ne'⟩
+    have hN := nsmul_id_eq_zero_of_natCast_eq_zero hNΛ K
+    have : IsNoetherianRing Λ := inferInstance
+    exact ⟨boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY f hbc, a,
+      b + 2 * (d : ℤ), torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
+
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`
@@ -211,8 +248,8 @@ admitting a compactification, over a finite-type `k`-scheme `Y`, for a finite `�
 is invertible on `Y`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf_!` is
 `Rg_* ∘ j_!`; extension by zero preserves `Dctf`
 (`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`)
-and so does the direct image along the proper `g`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`).
+and so does the direct image along the proper `g`, by proper finiteness
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar_of_isProper`).
 
 Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, which is proper,
 `Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded. -/
@@ -227,7 +264,8 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
   obtain ⟨hbc, a, b, hta⟩ := hK
   have h := constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
     ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
-  exact constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl ⟨h.1.1, a, b, h.2⟩
+  exact constructibleFiniteTor_rightDerivedLowerStar_of_isProper Λ (c.g ≫ aY) aY c.g rfl
+    ⟨h.1.1, a, b, h.2⟩
 
 /-! #### Internal hom: local tools -/
 

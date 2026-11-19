@@ -181,7 +181,7 @@ theorem tensorSquare_mate_transfer
         (ap.homEquiv _ _).symm
           (tensorSquareMateSecond Pr Rr Pp Rp ar ap Pi Pk J K theta TA TB TD muP dk a M N) =
             tensorSquareMateCommonTranspose Pr Rr Pp ar Pi J K TA TC TD muR di a M N := by
-  let g := (mateEquiv ar ap (TwoSquare.mk J Pr Pp K a)).natTrans
+  let g := (mateEquiv ar ap (TwoSquare.mk J Pr Pp K a))
   have first (M : A) (N : D) :
       (ap.homEquiv _ _).symm
         (tensorSquareMateFirst Pr Rr Pp Rp ar ap Pi J K TA TC TD muR di a M N) =
