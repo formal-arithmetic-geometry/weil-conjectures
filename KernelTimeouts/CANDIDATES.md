@@ -1,12 +1,13 @@
 # Kernel-timeout candidates
 
-Collected from `the repository` history and the dumped Zulip discussions. `real` means the change appears to alter what the kernel checks and is a reproduction target; `excluded` is recorded here for the top-level README rather than built as a case.
+Collected from merged project history and the dumped Zulip discussions. `real` means the change appears to alter what the kernel checks and is a reproduction target; `excluded` is recorded here for the top-level README rather than built as a case.
 
 - `212f97dd22a` (2026-11-05), `IndEtaleDerivedImageHomCounit.lean`: global-Hom counit naturality; explicit abstract functor/counit arguments remove a kernel timeout. **case: ImageHomCounit (cost)**.
 - `b400b43ec29` (2026-11-05), `IntegralComparisonPullbackRealizationShifts.lean`: comm-shift localization; wrapper vocabulary avoids kernel unfolding. **case: IntegralComparisonPullbackRealizationShifts (cost)**.
 - `f66ad18a9ed` (2026-11-05), `IndEtaleDerivedImageHom{Adjunction,Comp,Counit}.lean`: image-Hom naturality; **F66Adj is a cost case; Comp is equal-cost; Counit is current-master incompatible**.
 - `6e654a169f7` (2026-11-05), `EtaleScalarConstantPullback.lean`: **current-master representation mismatch before a valid target result**.
 - `0676f555de6` (2026-11-02), `FiniteBaseChangeRestrictionMateTransport.lean`: **case: FiniteBaseChangeRestrictionMateTransport (high Kernel cost at the historical budget; reduced-budget probe times out)**.
+- `f4946fdb6b6` (2026-11-02), `OrderedSpectralLattices.lean`: **case: OrderedSpectralRawLattices (hard Kernel timeout after a one-line current API port)**.
 - `2f3ec5f4a16` (2026-11-05), `DiagonalLocalChernPullbackData.lean`: consistent endpoint types cut kernel memory. **candidate; parent source hits a later missing `Additive` instance under current master**.
 - `77a08aac58b` (2026-11-05), four heavy modules: **attempted; `derivedTensorHomShiftComparison_component` still fails in a shared helper after the instance rename, and the other modules have current application/instance/rewrite mismatches before target**.
 - `5e80d330d08` (2026-11-05), `CanonicalOrdinaryTensorInverseAssociativity.lean`: split proof and avoid abstracted-proof mismatches. **candidate; parent source hits a later representation mismatch under current master**.

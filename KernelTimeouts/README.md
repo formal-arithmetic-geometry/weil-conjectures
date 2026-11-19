@@ -1,6 +1,6 @@
 # Kernel timeout dataset
 
-All measurements were run on the Weil server with Lean 4.35.0 / Mathlib 4.35.0, from `the master build tree`, using `LEAN_NUM_THREADS=1`, `timeout 1800`, `nice -n 10`, and `/usr/bin/time -v`. The case sources are standalone files and are not imported by the WeilConjectures library.
+All measurements were run on the Weil server with Lean 4.35.0 / Mathlib 4.35.0, from the master build tree, using `LEAN_NUM_THREADS=1`, `timeout 1800`, `nice -n 10`, and `/usr/bin/time -v`. The case sources are standalone files and are not imported by the WeilConjectures library.
 
 | case | origin commit | original symptom | Before on 4.35.0 | After on 4.35.0 | fix kind |
 |---|---|---|---|---|---|
@@ -11,8 +11,9 @@ All measurements were run on the Weil server with Lean 4.35.0 / Mathlib 4.35.0, 
 | [EtaleHomComparisonReversedExact](EtaleHomComparisonReversedExact/README.md) | `8ca2e912b93` (2026-11-05), `EtaleHomTransposeExactCommShiftComponent.lean:etaleHomComparison_reversedExact_commShift_component` | costly direct kernel conversion under `derivedHom` | 1:50.07, ok, 12,487,664 KB RSS (cost) | 3.50 s, ok, 3,196,476 KB RSS | transport exact endpoint instead of unfolding derived Hom |
 | [RealPurity](RealPurity/README.md) | `e2d8b540cba` (2026-11-07), `RealPurity.lean:IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight` | `(kernel) deterministic timeout` | 58.94 s, kernel timeout, 5,590,352 KB RSS | 58.84 s, kernel timeout, 5,584,740 KB RSS; Master 6.10 s, ok | historical proof split no longer sufficient on 4.35.0 |
 | [FiniteBaseChangeRestrictionMateTransport](FiniteBaseChangeRestrictionMateTransport/README.md) | `0676f555de6` (2026-11-02), `FiniteBaseChangeRestrictionMateTransport.lean:finite_base_change_restriction_mate_transport` | kernel-expensive direct mate transport | 9:37.08, ok, 23,906,184 KB RSS (current-prefix port, original 4,000,000 heartbeats); 400,000-heartbeat probe: 1:28.46, kernel timeout | 4.10 s, ok, 2,322,976 KB RSS | abstract functor and equivalence arguments before concrete application |
+| [OrderedSpectralRawLattices](OrderedSpectralRawLattices/README.md) | `f4946fdb6b6` (2026-11-02), `OrderedSpectralLattices.lean:small_spectral_raw_lattices` | `(kernel) deterministic timeout` at the target application | 45.73 s, kernel timeout, 3,283,804 KB RSS | 13.91 s, ok, 2,494,432 KB RSS | instance-search alignment avoids the parent conversion |
 
-The old forms are kept even when current Lean no longer emits the original timeout. Five canonical Before forms reproduce high Kernel cost and two reproduce hard Kernel timeouts. `FiniteBaseChangeRestrictionMateTransport` also has a reduced-budget timeout probe. `RealPurity` is retained because its Before reproduces a hard Kernel timeout; its historical After also times out on 4.35.0, and `Master.lean` documents the later passing form. See [REPORT.md](REPORT.md) for the guide's phase and mechanism classification.
+The old forms are kept even when current Lean no longer emits the original timeout. Five canonical Before forms reproduce high Kernel cost and three reproduce hard Kernel timeouts. `FiniteBaseChangeRestrictionMateTransport` also has a reduced-budget timeout probe. `RealPurity` is retained because its Before reproduces a hard Kernel timeout; its historical After also times out on 4.35.0, and `Master.lean` documents the later passing form. See [REPORT.md](REPORT.md) for the guide's phase and mechanism classification.
 
 ## Excluded candidates
 

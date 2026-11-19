@@ -1,54 +1,120 @@
-# Kernel timeout classification report
+# Kernel timeout diagnosis report
 
-Lean/Mathlib 4.35.0 on the Weil server, single-threaded Lean, `timeout 1800`, `nice -n 10`. Baseline times are wall seconds and peak RSS in MiB (the source READMEs retain exact KB). Phase controls used `-DElab.async=false -Ddebug.skipKernelTC=true`; Kernel-on controls used the same synchronous setting. Kernel skip is diagnostic only. The branch is based on the reviewed `dataset/kernel-timeouts` checkout; no library file is changed.
+Lean/Mathlib 4.35.0, single-threaded Lean, synchronous elaboration
+(`-DElab.async=false`), and the master build tree were used for the controls.
+Kernel-skipped runs use `-Ddebug.skipKernelTC=true` only as a diagnostic.
+Times are wall seconds; peak RSS is in the case README files.
 
-The measurement tree `the master build tree` is at revision `1ef1fddac73e` with Lean 4.35.0 and its built Mathlib; the host reports 80 logical cores and 308 GiB RAM. Load varied during runs, so CPU and RSS together with the synchronous controls carry more weight than wall time alone. Each run had `LEAN_NUM_THREADS=1`; at most five of our Lean runs overlapped, below the six-process limit.
+| Case | Phase gate (Before on / skipped) | Exact Kernel component | Primary / contributing | Evidence | Before / After |
+|---|---:|---|---|---|---|
+| [RealPushforward](RealPushforward/CLASSIFICATION.md) | 54.73 s timeout / 3.00 s | final `exact this`: `charpolyRev` versus `localPolynomial` equality | A / E | confirmed site; strong mechanism | 54.94 s timeout / 2.80 s |
+| [ImageHomCounit](ImageHomCounit/CLASSIFICATION.md) | 54.53 s / 2.90 s | final `exact h` over concrete derived-category wrapper | E / A, C | confirmed | 55.53 s / 2.60 s |
+| [IntegralComparisonPullbackRealizationShifts](IntegralComparisonPullbackRealizationShifts/CLASSIFICATION.md) | 105.67 s / 11.11 s | `change` after localization, wrapper endpoint to `DerivedCategory.Q` | A / E, C | confirmed | 102.27 s / 23.61 s |
+| [F66Adj](F66Adj/CLASSIFICATION.md) | 116.48 s / 4.30 s | `homIso_naturality_of_counit` application at concrete `NatTrans.app` | E / A, C | confirmed | 116.47 s / 3.40 s |
+| [FiniteBaseChangeRestrictionMateTransport](FiniteBaseChangeRestrictionMateTransport/CLASSIFICATION.md) | 577.08 s / 4.70 s | `hb` argument conversion into `transport_from_unit` | A / C, E | confirmed | 577.08 s / 4.10 s |
+| [EtaleHomComparisonReversedExact](EtaleHomComparisonReversedExact/CLASSIFICATION.md) | 109.87 s / 3.40 s | concrete `hv` argument to `derivedTensorHomShiftComparison_component` | E / A, C | confirmed site; strong mechanism | 110.07 s / 3.50 s |
+| [RealPurity](RealPurity/CLASSIFICATION.md) | 58.94 s timeout / ~7.4 s | final `exact h` in `hreal'` after stalk equivalence rewrite | unclassified; B/C/E candidates | confirmed site; mechanism plausible | 58.94 s timeout / 6.10 s Master |
+| [OrderedSpectralRawLattices](OrderedSpectralRawLattices/CLASSIFICATION.md) | 45.73 s timeout / 13.11 s | `small_spectral_raw_lattices` target application | E / A | confirmed site; strong mechanism | 45.73 s timeout / 13.91 s |
 
-| Case | Phase gate (Before on / skipped) | Cost site | Primary; contributing | Strength | Before / After on 4.35.0 |
-|---|---|---|---|---|---|
-| [RealPushforward](RealPushforward/CLASSIFICATION.md) | 54.73 s timeout / 3.00 s ok | value, final concrete local-polynomial rewrite; exact conversion unresolved | A; E | strongly supported | 54.94 s timeout, 4,606 MiB / 2.80 s ok, 3,053 MiB |
-| [ImageHomCounit](ImageHomCounit/CLASSIFICATION.md) | 54.53 / 2.90 s | value, concrete `conjugateEquiv_counit` application | E; A, C | strongly supported | 55.53 s ok, 7,291 MiB / 2.60 s ok, 2,729 MiB |
-| [IntegralComparisonPullbackRealizationShifts](IntegralComparisonPullbackRealizationShifts/CLASSIFICATION.md) | 105.67 / 11.11 s | value, localization/comm-shift endpoint conversion; exact prefix unresolved | A; E, C | plausible site, strong phase | 102.27 s ok, 9,166 MiB / 23.61 s ok, 3,789 MiB |
-| [F66Adj](F66Adj/CLASSIFICATION.md) | 116.48 / 4.30 s | value, coefficient-variance/`NatTrans.app` handoff | E; A, C | strongly supported | 116.47 s ok, 12,343 MiB / 3.40 s ok, 2,769 MiB |
-| [FiniteBaseChangeRestrictionMateTransport](FiniteBaseChangeRestrictionMateTransport/CLASSIFICATION.md) | 577.08 / 4.70 s | value, direct `transport_from_unit` application to concrete records | A; C, E | strongly supported | 577.08 s ok, 23,346 MiB / 4.10 s ok, 2,269 MiB; 400,000-heartbeat probe: 88.46 s timeout, 5,597 MiB |
-| [EtaleHomComparisonReversedExact](EtaleHomComparisonReversedExact/CLASSIFICATION.md) | 109.87 / 3.40 s | value, direct tensor-Hom shift theorem at concrete `derivedHom` endpoints | E; A, C | strongly supported | 110.07 s ok, 12,195 MiB / 3.50 s ok, 3,122 MiB |
-| [RealPurity](RealPurity/CLASSIFICATION.md) | 59.44 s timeout / 7.40 s ok | value, large constituent/subquotient proof; exact child unresolved | B (plausible); C, A hypotheses | strong phase, plausible mechanism | 58.94 s timeout, 5,459 MiB / 58.84 s timeout, 5,454 MiB; Master 6.10 s ok |
+## Diagnosis paths
 
-## Observations
+### RealPushforward
 
-- All seven case Before files show a large Kernel-on versus Kernel-skipped difference; five current Before forms succeed slowly and two reproduce a deterministic timeout (RealPurity and RealPushforward). The FiniteBaseChange reduced-budget probe also times out.
-- The fixed RealPurity revision still times out on 4.35.0. Its current master form passes, so the 2026-11-07 split alone is insufficient in this environment.
-- The cost cases have Kernel-skipped times near their fixed forms. The integral comparison file has a larger common elaboration floor, about 11 seconds.
-- Per-declaration profiling attributes 53.8 s, 53.6 s, 95.2 s, 117 s, 85.3 s, 110 s, and 52.2 s to type checking of the seven cases in table order. The RealPushforward and ImageHomCounit checks spend less than 0.4 s in tactics and 0.04 s in elaboration. ImageHomCounit diagnostics report 604,574 Kernel `Functor.obj` unfolds and 842,612 `Add.add` unfolds; counts identify activity, not the exact conversion pair.
-- `8ca2e912b93` required only the anonymous derived-monoidal instance rename in a local attribute. `0676f555de6` required the current prefix/statement to host the historical direct proof body.
+The type-only and prefix-with-`sorry` controls are cheap. Only checking the
+old final equality reproduces the timeout. The printed heads are
+`LinearMap.charpolyRev` and `FrobeniusModule.localPolynomial`; the fixed
+generic lemma avoids reducing that concrete representation.
 
-## Interpretations
+### ImageHomCounit
 
-- The common pattern in the successful repairs is a smaller Kernel conversion at an application boundary: abstract functors or exact endpoint transport keep dependent types syntactically aligned. This is a mechanism inference from controlled source changes and phase gates; exact elaborated expression pairs were not dumped.
-- The RealPurity failure suggests the proof abstraction boundary remained expensive after splitting. No claim is made about the exact generated `_proof_n` subterm without a typed-sorry bisect.
-- Source size and wall time alone were not used as Kernel evidence; the synchronous skip controls are the phase evidence.
+The concrete `conjugateEquiv_counit` result is cheap when discarded and slow
+only when checked against the declaration. The inferred type is over an
+expanded sheaf-derived category, while the goal uses `DerivedCategoryModule`;
+diagnostics show 842,612 `Add.add` unfolds. The fixed direct theorem avoids the
+wrapper conversion.
 
-## Unreproduced Candidates
+### Integral comparison
 
-These are not case-table rows because no valid target Kernel check was obtained on current master. The complete exclusion inventory is in [README.md](README.md) and [CANDIDATES.md](CANDIDATES.md).
+The localization setup and generator goal are cheap. The explicit `change`
+from a localized endpoint to `DerivedCategory.Q.obj P.obj` triggers 1,193,814
+`Add.add` and 1,047,896 `PresheafOfModules.obj` unfolds. Later proof terms are
+not needed to reproduce the cost. The fixed wrapper definitions preserve the
+endpoint vocabulary.
 
-| Candidate | Reason |
+### F66Adj
+
+The type is cheap, but applying the abstract helper to concrete global-Hom
+and restriction functors already costs 35.32 seconds and 511,948 Kernel
+unfolds. Its result carries an abstract `GT.map` application; the goal expands
+the concrete global-Hom path. Binding coefficient variance `γ` makes these
+expressions line up.
+
+### Finite-base transport
+
+The direct helper application is slow even when its result is discarded.
+Replacing only the `hb` right-square argument makes the reduced-budget probe
+cheap; replacing `hγ` does not. The expensive argument conversion unfolds
+concrete equivalence, functor, and module instance paths. The fixed helper
+abstracts these records first.
+
+### Etale Hom comparison
+
+The generic component application is the first hotspot: 29.02 seconds and
+421,348 Kernel unfolds with the final handoff discarded. Replacing its `hv`
+transpose-premise argument reduces the probe to about 3.3 seconds, isolating
+that argument conversion. Its result is stated using a derived-category
+shift, while the goal uses the `DerivedCategoryModule` wrapper.
+`transport_exact` closes the small endpoint conversion in the fixed proof.
+
+### RealPurity
+
+The constituent equivalence and the final purity calculation are cheap in
+isolation. The final `exact h` in `hreal'` is the only operation that restores
+the 59-second timeout. The printed equality has the same mathematical
+polynomial on both sides but carries different stalk/representation proof
+arguments after transport. The exact hidden mismatch has not been isolated.
+The historical split remains insufficient on this
+toolchain; current Master passes in 6.10 seconds.
+
+## Cross-case observations
+
+Observed: all eight Before forms have a large synchronous Kernel-on versus
+Kernel-skipped gap. The isolated hotspots are conversions at application or
+endpoint boundaries; no case was localized to recursive computation. The
+diagnostic counters are dominated by routine `Add.add`, `Functor.obj`, or
+module-instance unfolds after the high-level conversion starts.
+
+Interpretation: the recurring mechanism is representation alignment. Abstract
+helpers, explicit instance paths, and endpoint transport reduce the amount of
+dependent structure that Kernel must unfold. Proof abstraction is primary in
+RealPurity remains unclassified at the mechanism level because the exact
+expression difference has not been isolated.
+
+## Part 2: additional candidate sweep
+
+The historical kernel-fix inventory was searched for candidates that could be
+ported and measured in under twenty minutes. Three older commits were
+inspected and measured where their retained source could run on current
+master. The previously attempted candidates are listed separately below:
+
+| Candidate | Result |
 |---|---|
-| `d6a6682d7e7` `restrictionTensor_mate_model` | Full historical Before and After fail before the target on missing `HSMul` instances and rewrite/type mismatches; 2:57.41 / 1:38.16. |
-| `77a08aac58b` `derivedTensorHomShiftComparison_component` | Both forms fail in shared `normalized_transpose_aux` at line 42: current `Functor.map_comp_assoc` cannot match the changed shift-composition type; the one-line `map_comp` port also fails. |
-| `8ca2e912b93` OrderedExchange rho/lambda split | The selected étale transpose component is a measured case; the larger OrderedExchange split has not been isolated into a declaration-level target on current master. |
-| `f66ad18a9ed` `imageHomIso_counit` | Both historical forms reach a current `simp`/representation mismatch before the target; the separate `ImageHomCounit` case comes from `212f97dd22a`. |
-| `6e654a169f7` `etaleScalarConstantPullback` | Current scalar-coefficient `change` no longer matches; the fixed body also reaches a `simp` mismatch. |
-| `2f3ec5f4a16` `DiagonalLocalChernPullbackData` | Parent prefix reaches a missing current `Additive` instance before target. |
-| `5e80d330d08` `CanonicalOrdinaryTensorInverseAssociativity` | Parent prefix reaches a current representation mismatch. |
-| `a8c848cdde3` `DiagonalTraceFiniteEtaleIntegralBoundary` | Parent prefix reaches a representation mismatch after 4:35.48 / 14,350,036 KB RSS. |
-| `77a08aac58b` `finiteEtaleDiagonalClass_postcomp_injective`, `geoP1Cohomology`, `purCoefficientRoosShiftNormalization` | Current application, `simp`, or rewrite mismatches before the target. |
-| `7cef97103d4` split-coefficient map | Missing current `HasTensor₄ObjExt` instances before target. |
-| `9460df68701` integral reduction counit | Parent hits three current API type mismatches before target. |
-| `b94d64de19a` point-fiber colimit | Current derived-category composition and `CommShift` mismatches before target. |
-| `5b0d50455a6` diagonal boundary | Current stuck typeclass, type, and rewrite errors in the parent prefix. |
-| `8afc7df6d06` point-fiber integral family | Parent split file did not complete during the earlier shared-server probe; no valid target result. |
-| `c3af60ee018` smooth-purity descent | Both forms hit current unsolved-goal/`simp` mismatches before target. |
-| Zulip #621/#624 `PerfectOverlapObjectRealizationCoreData` | Historical declaration/source attachment unavailable in the dumps; no faithful Before term. |
+| `eea424dc3a7` locally-bijective instance alignment | Current parent and fixed sources were measured, but both still hit current API/type errors before a valid target result. Not added. |
+| `ad9cebd0557` EssentiallySmall instance alignment | Current parent and fixed sources were measured, but both still hit current API/type errors before a valid target result. Not added. |
+| `f4946fdb6b6` OrderedSpectralLattices instance alignment | Added as [OrderedSpectralRawLattices](OrderedSpectralRawLattices/CLASSIFICATION.md); one current API rename was applied to both source forms. |
+| `77a08aac58b`, `6e654a169f7`, `2f3ec5f4a16`, `5e80d330d08`, `a8c848cdde3`, `5b0d50455a6`, `8afc7df6d06`, `d6a6682d7e7`, `b94d64de19a`, `9460df68701`, `c3af60ee018` | Already attempted in the prior rounds; current parent prefixes fail before the target or do not produce a valid Kernel result. Reasons are listed in `README.md` and `CANDIDATES.md`. |
 
-Heartbeat-only changes and elaborator-only Zulip reports are excluded separately in [README.md](README.md).
+No additional case is added without a faithful Before declaration and a
+Kernel-on/skipped measurement. The dataset therefore has eight real cases,
+with the exact diagnosis requested by Round 4 recorded above.
+
+## Reproduction
+
+Each case directory contains `Before.lean`, `After.lean` (and `Master.lean`
+for RealPurity), the classification record, and the cited probes. Run a probe
+from the master build tree with:
+
+```text
+LEAN_NUM_THREADS=1 /usr/bin/time -v timeout 1800 nice -n 10 lake env lean \
+  -DElab.async=false -Ddebug.skipKernelTC=false KernelTimeouts/<Case>/probes/<Probe>.lean
+```
