@@ -78,7 +78,6 @@ private theorem canonical_conjugate_eq {A B C D : Scheme.{u}}
 
 -- Avoid linting the large chosen adjunction/comparison data again after kernel checking.
 set_option linter.all false in
-set_option maxHeartbeats 500000 in
 -- Matching the canonical composition choices expands derived-functor instance data.
 /-- The sheaf-level unit equation for the square conjugate.
 Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.

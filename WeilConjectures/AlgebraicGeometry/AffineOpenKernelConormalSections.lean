@@ -28,8 +28,41 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-set_option maxHeartbeats 800000 in
--- Open-section identifications and semilinear scalar transports need extra elaboration fuel.
+/-- Compose the conormal equivalences and their unit formulas on abstract modules, so the
+scalar calculation and witness elimination do not unfold the sheaf constructions. -/
+private theorem affineOpen_conormal_transport_comp
+    {R A B S : Type*} [CommRing R] [CommRing A] [CommRing B] [CommRing S]
+    (r : R ≃+* A) (w : B ≃+* A) (ρ : A →+* S) (I : Ideal R)
+    {C D H Q : Type*} [AddCommGroup C] [Module B C] [AddCommGroup D] [Module S D]
+    (κ : H → A) (κ' : Q → B) (η : H → D) (η' : Q → C)
+    (hc : ∃ c : LinearEquiv (r.trans w.symm : R →+* B)
+        (σ' := ((r.trans w.symm).symm : B →+* R)) I.Cotangent C,
+      ∀ (a : I) (t : Q), κ' t = (r.trans w.symm) (a : R) →
+        c (I.toCotangent a) = η' t)
+    (hd : letI : Module B D := Module.compHom _ (ρ.comp w.toRingHom)
+      ∃ d : C ≃ₗ[B] D, ∀ s : H, ∃ t : Q,
+        κ' t = w.symm (κ s) ∧ d (η' t) = η s) :
+    letI : Module R D := Module.compHom _ (ρ.comp r.toRingHom)
+    ∃ e : I.Cotangent ≃ₗ[R] D, ∀ (a : I) (s : H),
+      κ s = r (a : R) → e (I.toCotangent a) = η s := by
+  let : Module B D := Module.compHom _ (ρ.comp w.toRingHom)
+  obtain ⟨c, hc⟩ := hc
+  obtain ⟨d, hd⟩ := hd
+  let : Module R D := Module.compHom _ (ρ.comp r.toRingHom)
+  let e : I.Cotangent ≃ₗ[R] D :=
+    { c.toAddEquiv.trans d.toAddEquiv with
+      map_smul' := by
+        intro a x
+        change d (c (a • x)) = a • d (c x)
+        refine (congrArg d (c.map_smulₛₗ a x)).trans
+          ((d.map_smul ((r.trans w.symm) a) (c x)).trans ?_)
+        change ρ (w (w.symm (r a))) • d (c x) = ρ (r a) • d (c x)
+        exact congrArg (fun b ↦ ρ b • d (c x)) (w.apply_symm_apply (r a)) }
+  refine ⟨e, ?_⟩
+  intro a s hs
+  obtain ⟨t, ht, hu⟩ := hd s
+  exact (congrArg d (hc a t (ht.trans (congrArg w.symm hs)))).trans hu
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual kernel conormal on an affine closed chart, with its original unit.
@@ -104,37 +137,20 @@ theorem affineOpen_kernel_conormal_sections {X Y : Scheme.{u}} (g : X ⟶ Y)
       (W.1.topIso.hom (r' a))) = 0
     rw [show W.1.topIso.hom (r' a) = r a from w.apply_symm_apply _]
     exact (map_eq_zero_iff _ (ConcreteCategory.bijective_of_isIso U.1.topIso.inv).1).symm
-  obtain ⟨c, hc⟩ := affine_conormal_sections_existence i ⟨⊤, isAffineOpen_top _⟩
-    R r' I hI'
-  dsimp only
   let K := kernel (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom)
   let N := (tensorPullback g).obj K
-  let : Module Γ(W.1.toScheme, ⊤) Γ(N, U.1) :=
-    Module.compHom _ ((g.appLE W.1 U.1 h).hom.comp W.1.topIso.hom.hom)
-  obtain ⟨d, hd⟩ := open_kernel_conormal_transport g W.1 U.1 h hpre
-  dsimp only at d hd
-  let : Module R Γ(N, U.1) :=
-    Module.compHom _ ((g.appLE W.1 U.1 h).hom.comp r.toRingHom)
-  let e : I.Cotangent ≃ₗ[R] Γ(N, U.1) :=
-    { (c.toAddEquiv.trans d.toAddEquiv) with
-      map_smul' := by
-        intro a x
-        change d (c (a • x)) = a • d (c x)
-        have h₁ := c.map_smulₛₗ a x
-        have h₂ := d.map_smul (r' a) (c x)
-        refine (congrArg (fun z ↦ d z) h₁).trans (h₂.trans ?_)
-        change (g.appLE W.1 U.1 h) (W.1.topIso.hom (r' a)) • d (c x) =
-          (g.appLE W.1 U.1 h) (r a) • d (c x)
-        exact congrArg (fun b ↦ (g.appLE W.1 U.1 h) b • d (c x))
-          (w.apply_symm_apply (r a)) }
-  refine ⟨e, ?_⟩
-  intro a s hs
-  obtain ⟨t, ht, hu⟩ := hd s
-  have ht' : i.ker.toModulesι.app ⊤ t = r' (a : R) := by
-    rw [ht, hs]
-    rfl
-  change d (c (I.toCotangent a)) = _
-  rw [hc a t ht']
-  exact hu
+  exact affineOpen_conormal_transport_comp r w (g.appLE W.1 U.1 h).hom I
+    (C := Γ((pushforward i).obj ((tensorPullback i).obj i.ker.toModules), ⊤))
+    (D := Γ(N, U.1)) (H := Γ(K, W.1)) (Q := Γ(i.ker.toModules, ⊤))
+    (fun s ↦ (kernel.ι (SheafOfModules.unitToPushforwardObjUnit
+      g.toRingCatSheafHom)).val.app (op W.1) s)
+    (fun t ↦ i.ker.toModulesι.app ⊤ t)
+    (fun s ↦ N.presheaf.map (homOfLE h).op
+      (((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app K).val.app
+        (op W.1) s))
+    (fun t ↦ ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
+      i.ker.toModules).app ⊤ t)
+    (affine_conormal_sections_existence i ⟨⊤, isAffineOpen_top _⟩ R r' I hI')
+    (open_kernel_conormal_transport g W.1 U.1 h hpre)
 
 end AlgebraicGeometry.Scheme.Modules

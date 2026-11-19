@@ -85,8 +85,6 @@ private theorem product_section_ext {T : Scheme.{u}}
     ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id] at h
   exact h
 
-set_option maxHeartbeats 700000 in
--- Comparing the sectionwise coefficient types requires extended definitional equality checks.
 /-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
 (blueprint: lem-weil-pbc-inverse-image-scalar-distributivity-left).
 
@@ -168,6 +166,15 @@ theorem etaleInverseImageScalarDistributivity_left (U V : Scheme.{u}) (f : U ⟶
       (∀ (r : OR.obj.obj W) (x y : A.obj.obj W),
         act W r (x + y) = act W r x + act W r y )
     := by
+  -- Select products directly in the set-sheaf categories, avoiding searches through module lifts.
+  have (B C : Sheaf V.smallEtaleTopology (Type (u + 1))) : HasBinaryProduct B C :=
+    let _ : HasBinaryProducts (Sheaf V.smallEtaleTopology (Type (u + 1))) :=
+      Sheaf.instHasLimitsOfShape
+    HasLimitsOfShape.has_limit _
+  have (B C : Sheaf U.smallEtaleTopology (Type (u + 1))) : HasBinaryProduct B C :=
+    let _ : HasBinaryProducts (Sheaf U.smallEtaleTopology (Type (u + 1))) :=
+      Sheaf.instHasLimitsOfShape
+    HasLimitsOfShape.has_limit _
   dsimp only
   intro Lr ar er ea hcompat G muV hmu
   let L := Scheme.etaleSetPullback f

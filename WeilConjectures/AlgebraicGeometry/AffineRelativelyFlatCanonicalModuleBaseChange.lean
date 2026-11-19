@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechBaseChangeFactoriz
 
 /-! # Affine computation of relatively flat canonical module base change
 
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--5;
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5;
 Stacks Project, Tag 0A1D, specializing to a module in degree zero.
 -/
 
@@ -54,8 +54,8 @@ private theorem affineAlternatingCechModel_bounded
       tilde.functor A) hext
 
 /-- Over affine bases the canonical module base-change composite is invertible.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--5, and Stacks Tag 0A1D.
-(blueprint: lem-pc-affine-relatively-flat-canonical-module-base-change).
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5, and Stacks Tag
+0A1D. (blueprint: lem-pc-affine-relatively-flat-canonical-module-base-change).
 
 Proof: choose a finite ordered affine cover of X. Separatedness over Spec A makes
 all finite intersections affine. Their modules of sections of G are flat over A

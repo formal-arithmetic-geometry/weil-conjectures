@@ -21,7 +21,7 @@ intertwines the scalar extension of the compact Frobenius of a Weil datum `φ : 
 the compact Frobenius of its scalar extension `φ_S : Lg^* Ψ K ≅ Ψ Lg^* K --Ψ φ--> Ψ K`
 (`AlgebraicGeometry.ProEtale.extendScalarsWeilDatum`). This is the compatibility of compact
 cohomology with the change of coefficients and the Frobenius maps of blueprint
-`sk-p-trace-coeff`.
+`theorem-grothendieck-lefschetz-trace-formula--7`.
 
 ## Main results
 
@@ -71,9 +71,9 @@ theorem lowerShriekWeilDatum_extendScalarsWeilDatum (hi : IsPullback g c.i c.i g
   exact (reassoc_of% hEx) _
 
 /-- **Derived scalar extension commutes with the compact Frobenius** (blueprint
-`sk-p-trace-coeff`): the comparison map `ξ : Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` carries the scalar
-extension of the compact Frobenius of `φ` to the compact Frobenius of its scalar extension `φ_S`,
-`Ψ (F_c(φ)) ≫ ξ = ξ ≫ F_c(φ_S)`. -/
+`theorem-grothendieck-lefschetz-trace-formula--7`): the comparison map
+`ξ : Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` carries the scalar extension of the compact Frobenius of `φ` to
+the compact Frobenius of its scalar extension `φ_S`, `Ψ (F_c(φ)) ≫ ξ = ξ ≫ F_c(φ_S)`. -/
 theorem compactFrobenius_extendScalarsWeilDatum (hi : IsPullback g c.i c.i gZ)
     (hg : CommSq gZ c.g c.g (𝟙 Y)) (φ : L((g)^*[ModuleCat.{u + 1} R]).obj K ⟶ K) :
     L(sheafExtendScalars (algebraMap R S) Y).map

@@ -43,15 +43,15 @@ private theorem flatOver_restrict
   convert hh using 1 <;> try rfl
   ext r m
   change (M.smul ((e.appIso U.1).inv.hom
-    (((e ≫ b).appLE V.1 U.1 hU).hom r))).hom m =
-      (M.smul ((b.appLE V.1 U'.1 hU').hom r)).hom m
+    (((e ≫ b).appLE V.1 U.1 hU).hom r))).asHom.hom m =
+      (M.smul ((b.appLE V.1 U'.1 hU').hom r)).asHom.hom m
   have he : U.1 ≤ e ⁻¹ᵁ U'.1 := (e.preimage_image_eq U.1).ge
   have hcomp := e.appLE_comp_appLE b V.1 U'.1 U.1 hU' he
   have hring : (e ≫ b).appLE V.1 U.1 hU ≫ (e.appIso U.1).inv =
       b.appLE V.1 U'.1 hU' := by
     rw [← hcomp, Category.assoc, ← Scheme.Hom.appIso_hom', Iso.hom_inv_id,
       Category.comp_id]
-  exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).hom m) hring
+  exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).asHom.hom m) hring
 
 private theorem flatOver_tensorPullback_iso
     {P Q T : Scheme.{u}} (e : P ≅ Q) (b : Q ⟶ T) (M : Q.Modules)

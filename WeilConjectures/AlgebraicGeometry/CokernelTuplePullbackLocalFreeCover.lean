@@ -103,8 +103,47 @@ private theorem tuple_over_eval (X : RingedSpace.{u})
   exact hs.trans (((M.over U).val.sections_property ((M.over U).freeHomEquiv g i)
     (Over.homMk (homOfLE hVU) : Over.mk (homOfLE hVU) ⟶ Over.mk (𝟙 U)).op).symm)
 
+-- Enumerate finite free sources without unfolding the target or its construction.
+private theorem finite_free_cover_of_finite_coprod
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    (I K : Type u) [Finite I] [Finite K] {M : SheafOfModules.{u} R}
+    (p : SheafOfModules.free (R := R) I ⨿ SheafOfModules.free K ⟶ M) [Epi p] :
+    ∃ (m : ℕ) (q : SheafOfModules.free (R := R) (ULift.{u} (Fin m)) ⟶ M), Epi q := by
+  classical
+  let : Fintype (I ⊕ K) := Fintype.ofFinite (I ⊕ K)
+  let eI : ULift.{u} (Fin (Fintype.card (I ⊕ K))) ≃ (I ⊕ K) :=
+    Equiv.ulift.trans (Fintype.equivFin (I ⊕ K)).symm
+  let eFree := (SheafOfModules.freeFunctor (R := R)).mapIso (Equiv.toIso eI)
+  let q := eFree.hom ≫ (SheafOfModules.freeSumIso (R := R) I K).inv ≫ p
+  exact ⟨Fintype.card (I ⊕ K), q, by dsimp [q]; infer_instance⟩
+
+-- Convert a family of section lifts to a commuting free-sheaf map for arbitrary modules.
+private theorem free_tuple_lift_of_sections (X : RingedSpace.{u})
+    (G H : SheafOfModules.{u} (moduleRings X)) (q : G ⟶ H)
+    {U V : Opens X} (hVU : V ≤ U) {I : Type u}
+    (g : SheafOfModules.free (R := (moduleRings X).over U) I ⟶ H.over U)
+    (t : I → G.val.obj (Opposite.op V))
+    (ht : ∀ i, q.val.app (Opposite.op V) (t i) =
+      H.val.map (homOfLE hVU).op
+        (((H.over U).freeHomEquiv g i).val (Opposite.op (Over.mk (𝟙 U))))) :
+    let D := SheafOfModules.overMap (moduleRings X) (homOfLE hVU)
+    let e := SheafOfModules.mapFreeIso D I
+      (SheafOfModules.overMapUnitIso (R := moduleRings X) (homOfLE hVU)).symm
+    let c := (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE hVU)).app H
+    (G.over V).freeHomEquiv.symm (fun i ↦ section_on_open X G V (t i)) ≫ q.over V =
+      e.hom ≫ D.map g ≫ c.hom := by
+  dsimp only
+  apply (H.over V).freeHomEquiv.injective
+  funext i
+  rw [SheafOfModules.freeHomEquiv_comp_apply, Equiv.apply_symm_apply]
+  apply sections_ext_top X H V
+  rw [tuple_over_eval]
+  change q.val.app (Opposite.op V) (G.val.map (𝟙 _) (t i)) = _
+  rw [G.val.map_id]
+  exact ht i
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Unfold restriction functors while synthesizing the pullback instance.
 /-- The pullback of a finite tuple along a cokernel projection admits a local
 finite-free epimorphism.
@@ -138,6 +177,13 @@ theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
             ((SheafOfModules.overMap (moduleRings X) (homOfLE hVU)).map
               ((cokernel.π f).over U))), Epi p := by
   classical
+  -- Reuse the sheafification instances throughout the restrictions and free constructions.
+  have hsheaf (V : Opens X) :
+      HasWeakSheafify ((Opens.grothendieckTopology X).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have hbijective (V : Opens X) :
+      ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+    inferInstance
   -- Use generators of F directly; their images generate the kernel of the projection.
   obtain ⟨σ, hσ⟩ := hF.exists_localGeneratorsData
   obtain ⟨W, _, ⟨j, ⟨hj⟩⟩, hxW⟩ := σ.coversTop ⊤ x (by trivial)
@@ -164,17 +210,8 @@ theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
   let l₀ : SheafOfModules.free (R := (moduleRings X).over V) (ULift.{u} (Fin n)) ⟶
       G.over V := (G.over V).freeHomEquiv.symm (fun i ↦ section_on_open X G V (t i))
   have hl₀ : l₀ ≫ (cokernel.π f).over V = e.hom ≫ D.map g ≫ cH.hom := by
-    apply ((cokernel f).over V).freeHomEquiv.injective
-    funext i
-    rw [SheafOfModules.freeHomEquiv_comp_apply]
-    dsimp only [l₀]
-    rw [Equiv.apply_symm_apply]
-    apply sections_ext_top X (cokernel f) V
-    rw [tuple_over_eval]
-    change (cokernel.π f).val.app (Opposite.op V)
-      (G.val.map (𝟙 _) (t i)) = _
-    rw [G.val.map_id]
-    change (cokernel.π f).val.app (Opposite.op V) (t i) = _
+    apply free_tuple_lift_of_sections X G (cokernel f) (cokernel.π f) hVU g t
+    intro i
     rw [ht i, tuple_over_eval]
     exact ((cokernel f).val.map_comp_apply
       (homOfLE inf_le_left).op (homOfLE hVT).op _).symm.trans
@@ -205,16 +242,7 @@ theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
     (pullback.lift e.hom l hl)
   have : Epi pF := by dsimp [pF]; infer_instance
   have : Epi p := epi_pullback_generators fV q hfV he (D.map g) pF e l hl
-  -- Enumerate both finite lists without excluding the empty-list case.
-  let I := a.I ⊕ ULift.{u} (Fin n)
-  let : Fintype I := Fintype.ofFinite I
-  let eI : ULift.{u} (Fin (Fintype.card I)) ≃ I :=
-    Equiv.ulift.trans (Fintype.equivFin I).symm
-  let eFree := (SheafOfModules.freeFunctor (R := (moduleRings X).over V)).mapIso
-    (Equiv.toIso eI)
-  let p' := eFree.hom ≫
-    (SheafOfModules.freeSumIso (R := (moduleRings X).over V) a.I
-      (ULift.{u} (Fin n))).inv ≫ p
-  exact ⟨V, hVU, hxV, Fintype.card I, p', by dsimp [p']; infer_instance⟩
+  obtain ⟨m, p', hp'⟩ := finite_free_cover_of_finite_coprod a.I (ULift.{u} (Fin n)) p
+  exact ⟨V, hVU, hxV, m, p', hp'⟩
 
 end AlgebraicGeometry.RingedSpace

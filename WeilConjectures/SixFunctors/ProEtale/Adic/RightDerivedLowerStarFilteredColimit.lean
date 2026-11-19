@@ -19,9 +19,9 @@ filtered colimits indexed by essentially `u + 1`-small categories
 `AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`), and with direct
 sums (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_lowerStar`,
 `AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_rightDerived_lowerStar`). This is
-the complement of the blueprint node `sk-cor-pe-bounded-continuity` (for the constant ring sheaf
+the complement of the blueprint node `corollary-continuity-cohomology` (for the constant ring sheaf
 `ℤ`), in the case of complexes concentrated in degree `0` of the blueprint node
-`det-pe-bounded-continuity-direct-image`. In degree `0` this is
+`corollary-continuity-cohomology--2`. In degree `0` this is
 `AlgebraicGeometry.ProEtale.isColimit_lowerStar_mapCocone`; the induction step
 `CategoryTheory.Functor.preservesColimitsOfShape_rightDerived_succ` uses that filtered colimits
 of injective sheaves are `f_*`-acyclic
@@ -56,7 +56,7 @@ theorem preservesColimitsOfShape_lowerStar (J : Type v) [Category.{w} J]
   exact preservesColimitsOfShape_of_equiv (equivSmallModel J).symm _
 
 /-- **Higher direct images commute with filtered colimits** (blueprint
-`det-pe-bounded-continuity-direct-image`, sub-node of `sk-cor-pe-bounded-continuity`, in the case
+`corollary-continuity-cohomology--2`, sub-node of `corollary-continuity-cohomology`, in the case
 of complexes concentrated in degree `0` and of the ring sheaf `ℤ`; [Stacks 0739] on the
 pro-étale site): for a quasi-compact quasi-separated morphism `f` and a filtered diagram `(Kᵢ)`
 of abelian sheaves on `X_proét` indexed by an essentially `u + 1`-small category, the canonical

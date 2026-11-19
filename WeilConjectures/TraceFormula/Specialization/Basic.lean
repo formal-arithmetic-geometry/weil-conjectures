@@ -15,10 +15,10 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` over 
 `ι : Fix(c) ⟶ C`, `d = ι ≫ c₁`, and let `c' : C' ⟶ X' × X'` be an endocorrespondence of
 `(X', K')` over a second field `k'`, with fixed locus `ι' : Fix(c') ⟶ C'`. In Varshavsky's proof
 of the contracting theorem (*Lefschetz–Verdier trace formula and a generalization of a theorem of
-Fujiwara*, §1.4–§2; blueprint `sk-prop-tf-trace-specialization`), `c` is the generic fibre and
-`c'` the special fibre of a correspondence over a strictly henselian trait, and nearby cycles
+Fujiwara*, §1.4–§2; blueprint `proposition-specialization-trace-class`), `c` is the generic fibre
+and `c'` the special fibre of a correspondence over a strictly henselian trait, and nearby cycles
 `Ψ` relate the six functors on the two fibres through the exchange maps (blueprint
-`det-nearby-exchange-maps`)
+`prose-E-15`)
 ```
 χ_ι : Ψ_C Rι_* ⟶ Rι'_* Ψ_F,     χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X,
 β_c : Ψ_C Rc^! ⟶ Rc'^! Ψ_{X×X},  β_d : Ψ_F Rd^! ⟶ Rd'^! Ψ_X,
@@ -30,13 +30,14 @@ uses (`ProEtale.CondensedRing.Correspondence.TraceSpecialization`), defines the
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.sp`), and proves that the
 specialization of the trace class factors through the exceptional exchange `β_c` at the kernel
 `K ⊠ D_X K` (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.traceMap_specialization`,
-the first identity of blueprint `det-tf-sp-trace-morphism` with the nearby cycles of the
-universal kernel left unidentified). In particular the specialization of the trace class
+the first identity of blueprint `proposition-specialization-trace-class` with the nearby cycles of
+the universal kernel left unidentified). In particular the specialization of the trace class
 vanishes as soon as `Rc'^! Ψ_{X×X}(K ⊠ D_X K)` does
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.sp_traceClass_eq_zero`), which is the
-mechanism of Varshavsky's vanishing argument (blueprint `det-tf-contracting-vanishing`): for the
-deformation to the normal cone, `Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ D_{X'} Ψ_X K` by Gabber's theorems,
-so `Rc'^! Ψ_{X×X}(K ⊠ D_X K) ≅ RHom(Lc₂'^* Ψ_X K, Rc₁'^! Ψ_X K)`, and `Lc₂'^* Ψ_X K = 0`.
+mechanism of Varshavsky's vanishing argument (blueprint
+`theorem-contracting-correspondences-local-terms`): for the deformation to the normal cone,
+`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ D_{X'} Ψ_X K` by Gabber's theorems, so
+`Rc'^! Ψ_{X×X}(K ⊠ D_X K) ≅ RHom(Lc₂'^* Ψ_X K, Rc₁'^! Ψ_X K)`, and `Lc₂'^* Ψ_X K = 0`.
 
 ## Main definitions
 
@@ -86,19 +87,21 @@ variable (c : Correspondence ℓ K) (F : c.FixedLocus) (c' : Correspondence ℓ 
 
 /-- The *specialization data* of a correspondence `c` over `k` (the generic fibre) to a
 correspondence `c'` over `k'` (the special fibre), with fixed loci `F` and `F'` (blueprint
-`sk-prop-tf-trace-specialization`, `det-nearby-exchange-maps`): specialization functors
+`proposition-specialization-trace-class`, `prose-E-15`): specialization functors
 `Ψ_C`, `Ψ_F`, `Ψ_X`, `Ψ_{X×X}` on the bounded constructible derived categories, the
 specialization units `σ`, the dualizing maps `θ`, the proper exchanges `χ` for the closed
 immersions `ι` and `Δ`, and the exceptional exchanges `β` for the support map `c` and for
 `d = ι ≫ c₁`, subject to the three coherences used by the trace class:
 
-* `σ` commutes with the adjunction `Lι^* ⊣ Rι_*` (blueprint `det-tf-sp-trace-morphism`, the unit
+* `σ` commutes with the adjunction `Lι^* ⊣ Rι_*` (blueprint
+`proposition-specialization-trace-class`, the unit
   identity `χ_ι Ψ_C(η_ι) σ_C = Rι'_*(σ_F) η_ι'`, combined with naturality);
-* the composition law `θ_F = d'^! θ_X ∘ β_d(ω_X)` (blueprint `det-nearby-exceptional-tensor` (3),
+* the composition law `θ_F = d'^! θ_X ∘ β_d(ω_X)` (blueprint
+`lemma-compatibilities-base-change-maps` (3),
   read through the composition isomorphisms `Rd^! ω_X ≅ ω_F` of the dualizing complexes);
 * the fixed-square identity `Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ Rc'^!(χ_Δ) ∘ β_c(RΔ_*)` for the
   base change isomorphisms `B : Rc^! RΔ_* ≅ Rι_* Rd^!` of the fixed squares (blueprint
-  `sk-lem-tf-nearby-mate-coherences` (6)).
+  `sec-Base-change-for-nearby-cycles` (6)).
 
 For nearby cycles over a strictly henselian trait these are theorems of the nearby-cycles
 formalism; here they are the fields of the structure. -/
@@ -132,8 +135,9 @@ structure TraceSpecialization where
   /-- the exceptional exchange `β_d : Ψ_F Rd^! ⟶ Rd'^! Ψ_X`. -/
   βd : boundedConstructibleUpperShriek ℓ F.d ⋙ ΨF ⟶
     ΨX ⋙ boundedConstructibleUpperShriek ℓ F'.d
-  /-- the unit identity `χ_ι Ψ_C(η_ι) σ_C = Rι'_*(σ_F) η_ι'` (blueprint `det-tf-sp-trace-morphism`),
-  read through the unit isomorphisms `Lι^* ℚ̄_ℓ ≅ ℚ̄_ℓ` of the monoidal pullbacks. -/
+  /-- the unit identity `χ_ι Ψ_C(η_ι) σ_C = Rι'_*(σ_F) η_ι'` (blueprint
+  `proposition-specialization-trace-class`), read through the unit isomorphisms `Lι^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
+  of the monoidal pullbacks. -/
   unit_comp : σC ≫ ΨC.map ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).unit.app
       (𝟙_ _)) ≫ χι.app _ =
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ F'.ι).unit.app (𝟙_ _) ≫
@@ -204,7 +208,7 @@ lemma σF_comp_map_eq_homEquiv_symm (M : Dᵇc(F.F.left)⟦Profinite.padicAlgClR
   rw [key, Equiv.symm_apply_apply, (Functor.Monoidal.εIso _).hom_inv_id_assoc]
 
 /-- The *specialization* `sp_F(z) = θ_F Ψ_F(z) σ_F` of a Borel–Moore section `z` of the fixed
-locus (blueprint `sk-prop-tf-trace-specialization`). -/
+locus (blueprint `proposition-specialization-trace-class`). -/
 noncomputable def sp (z : BorelMooreSection ℓ F.F) : BorelMooreSection ℓ F'.F :=
   T.σF ≫ T.ΨF.map z ≫ T.θF
 
@@ -279,9 +283,9 @@ theorem map_traceKernel_specialization {P : Dᵇc((X ⨯ X).left)⟦Profinite.pa
   exact comp_eq_of_fixedSquare _ _ _ _ _ _ _ _ _ _ _ _ _ _ hχ hθ' (T.βc.naturality e)
     (T.fixedSquare (dualizingComplex' ℓ X))
 
-/-- **Specialization of the trace map** (blueprint `det-tf-sp-trace-morphism`, first identity,
-with the nearby cycles of the universal kernel left unidentified): the specialized trace map
-`Rι'_* θ_F ∘ χ_ι ∘ Ψ_C(𝔱)` factors through the exceptional exchange `β_c` at the universal
+/-- **Specialization of the trace map** (blueprint `proposition-specialization-trace-class`, first
+identity, with the nearby cycles of the universal kernel left unidentified): the specialized trace
+map `Rι'_* θ_F ∘ χ_ι ∘ Ψ_C(𝔱)` factors through the exceptional exchange `β_c` at the universal
 kernel `P = K ⊠ D_X K`:
 ```
 Rι'_* θ_F ∘ χ_ι ∘ Ψ_C(𝔱) = Rι'_*(θ'_d ∘ Rd'^! θ_X) ∘ B' ∘ Rc'^!(χ_Δ ∘ Ψ_{X×X}(e_K)) ∘ β_c(P)
@@ -308,7 +312,7 @@ theorem traceMap_specialization :
 /-- **Vanishing of the specialized trace class**: if the exceptional pullback
 `Rc'^! Ψ_{X×X}(K ⊠ D_X K)` of the specialized universal kernel vanishes, then the specialization
 of the trace class of `u` vanishes, whatever the coefficient map `u`. This is the mechanism of
-Varshavsky's vanishing argument (blueprint `det-tf-contracting-vanishing`). -/
+Varshavsky's vanishing argument (blueprint `theorem-contracting-correspondences-local-terms`). -/
 theorem sp_traceClass_eq_zero
     (h : IsZero ((boundedConstructibleUpperShriek ℓ c'.support).obj
       (T.ΨXX.obj (externalProduct ℓ K (verdierDual ℓ K))))) :

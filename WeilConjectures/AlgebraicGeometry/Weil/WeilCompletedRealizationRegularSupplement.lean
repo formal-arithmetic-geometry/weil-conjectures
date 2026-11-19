@@ -263,7 +263,7 @@ theorem completedRealizationRegular
     let c := completedCechCoefficientUnit X d ≫
       F.map (completedKoszulOne X (intrinsicPresentationDatum d))
     IsIso c ∧ ∀ a : A, c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A a)) =
-      ringedKoszulScalar O (completedCechScalar X d a) ≫ c := by
+      (ringedKoszulScalar O (completedCechScalar X d a)).asHom ≫ c := by
   let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor
   let G := completedKoszulConstant X (intrinsicPresentationDatum d)
   have := completedOne_isIso X (intrinsicPresentationDatum d)
@@ -275,7 +275,7 @@ theorem completedRealizationRegular
   intro U
   let V := (completedCechSiteEquiv X).inverse.op.obj U
   have hs : (ringedKoszulScalar (completedCechRing X d)
-      (completedCechScalar X d a)).val.app U
+      (completedCechScalar X d a)).asHom.val.app U
         (1 : (completedCechRing X d).obj.obj U) =
         (completedCechScalar X d a).val U := by
     let N := SheafOfModules.unit ((sheafCompose (completedCechTopology X)
@@ -290,7 +290,7 @@ theorem completedRealizationRegular
     (F.map (completedKoszulOne X (intrinsicPresentationDatum d))).val.app U
       ((completedCechCoefficientUnit X d).val.app U
         ((ringedKoszulScalar (completedCechRing X d)
-          (completedCechScalar X d a)).val.app U
+          (completedCechScalar X d a)).asHom.val.app U
         (1 : (completedCechRing X d).obj.obj U)))
   rw [transportedUnit_one, hs]
   erw [transportedUnit_apply]

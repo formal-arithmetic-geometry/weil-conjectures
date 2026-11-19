@@ -138,7 +138,6 @@ private theorem ordinaryPullback_inv_unit (M : proEtaleRingModules Y R)
   have hmate := restrictionPullback_mate f R R
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) S
     (𝟙 R) c.hom (Iso.refl _) c (by simp)
-  dsimp only [TwoSquare.natTrans] at hmate
   rw [hmate] at hm
   have h := congrArg (fun v ↦ v.val.app V m) hm
   have hd := (Classical.choose_spec

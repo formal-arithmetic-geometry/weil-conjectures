@@ -21,14 +21,7 @@ Let `W` be the Weil group of a smooth geometrically connected curve `C₀` over 
 the étale fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`), and `ℓ ≠ p`. This
 file proves that a continuous character `χ : W → ℚ̄_ℓˣ` has finite geometric image, and hence
 that the rank-one Weil sheaf it defines is punctually `ι`-pure of weight
-`2 log_q |ι (χ γ)|` (blueprint subsection `sk-p-real-rankone`).
-
-The proof of finiteness follows the blueprint. The values of `χ` on `π₁(C)` lie in a finite
-extension `E / ℚ_ℓ` (`sk-p-real-integral`); some power `χ ^ N` takes values in `1 + ℓ² 𝒪_E`, on
-which the logarithm is an injective homomorphism (`det-d-real-log`). The coordinates of
-`log ∘ χ ^ N` in a `ℚ_ℓ`-basis of `E` are continuous homomorphisms `π₁(C) → ℚ_ℓ` invariant
-under conjugation by the Frobenius lift, hence zero
-(`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant`).
+`2 log_q |ι (χ γ)|`.
 
 ## Main statements
 
@@ -39,6 +32,15 @@ under conjugation by the Frobenius lift, hence zero
   `AlgebraicGeometry.WeilGroup.finite_range_of_continuous`: finite geometric image.
 - `AlgebraicGeometry.WeilGroup.frobeniusWeight_eq_of_continuous`: the local weights of a
   continuous character.
+
+## Implementation details
+
+The values of `χ` on `π₁(C)` lie in a finite extension `E / ℚ_ℓ`; some power `χ ^ N` takes values
+in `1 + ℓ² 𝒪_E`, on which the logarithm is an injective homomorphism. The homomorphism
+`log ∘ χ ^ N : π₁(C) → E` is continuous and invariant under conjugation by the Frobenius lift,
+hence zero (`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_finiteDimensional`): its
+coordinates in a `ℚ_ℓ`-basis of `E` are continuous invariant homomorphisms `π₁(C) → ℚ_ℓ`, which
+vanish by `AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_continuous`.
 -/
 
 @[expose] public section
@@ -53,9 +55,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 
 namespace WeilGroup
 
-/-- Blueprint `lem-tw-root-of-unity-modulus`: Modulus of a root of unity.
-
-A root of unity has weight `0` for every `ι` and every residue cardinality. -/
+/-- A root of unity has weight `0` for every `ι` and every residue cardinality. -/
 theorem frobeniusWeight_eq_zero_of_pow_eq_one {E : Type*} [Field E] (ι : E →+* ℂ) (qx : ℕ)
     {ζ : E} {n : ℕ} (hn : n ≠ 0) (hζ : ζ ^ n = 1) : frobeniusWeight ι qx ζ = 0 := by
   rw [frobeniusWeight, norm_eq_one_of_pow_eq_one (by rw [← map_pow, hζ, map_one]) hn,
@@ -109,13 +109,9 @@ theorem eq_one_of_conj_invariant_of_continuous (b : W.geometric →* Multiplicat
     (pow_ne_zero _ (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero))
   exact Multiplicative.toAdd.injective h3
 
-/-- Blueprint `lemma-invariant-additive-characters`: Invariant additive characters.
-
-Let `E` be a finite-dimensional `ℚ_ℓ`-vector space with a Hausdorff vector space topology, for
-instance a finite extension of `ℚ_ℓ`. A continuous additive homomorphism `a : π₁(C) → E`
-invariant under conjugation by the Frobenius lift is zero: its coordinates in a `ℚ_ℓ`-basis of
-`E` are continuous invariant homomorphisms `π₁(C) → ℚ_ℓ`, which vanish by
-`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant_of_continuous`. -/
+/-- A continuous homomorphism `π₁(C) → E` to a finite-dimensional Hausdorff topological
+`ℚ_ℓ`-vector space (for instance a finite extension of `ℚ_ℓ`), invariant under conjugation
+by the Frobenius lift, is trivial. -/
 theorem eq_one_of_conj_invariant_of_finiteDimensional {E : Type*} [AddCommGroup E]
     [Module ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [TopologicalSpace E] [IsTopologicalAddGroup E]
     [ContinuousSMul ℚ_[l] E] [T2Space E] (a : W.geometric →* Multiplicative E)
@@ -135,10 +131,7 @@ theorem eq_one_of_conj_invariant_of_finiteDimensional {E : Type*} [AddCommGroup 
     simp [b, ha g h hgh]
   simpa [b] using congrArg (fun φ ↦ (φ g).toAdd) h1
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
-rank-one Weil character on a curve.
-
-A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` has finite geometric image: there is `N ≥ 1` with
+/-- A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` has finite geometric image: there is `N ≥ 1` with
 `χ (g) ^ N = 1` for every `g ∈ π₁(C)`. -/
 theorem exists_pow_eq_one_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
     (hχ : Continuous fun g : W.geometric ↦ (χ g : PadicAlgCl l)) :
@@ -242,10 +235,7 @@ theorem exists_pow_eq_one_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   rw [Units.val_pow_eq_pow_val, ← hu g, hu1]
   rfl
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
-rank-one Weil character on a curve.
-
-A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` takes finitely many values on `π₁(C)`. -/
+/-- A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` takes finitely many values on `π₁(C)`. -/
 theorem finite_range_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
     (hχ : Continuous fun g : W.geometric ↦ (χ g : PadicAlgCl l)) :
     (Set.range fun g : W.geometric ↦ χ g).Finite := by
@@ -255,10 +245,7 @@ theorem finite_range_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   rintro _ ⟨g, rfl⟩
   exact ⟨⟨χ g, (mem_rootsOfUnity _ _).mpr (h g)⟩, rfl⟩
 
-/-- Blueprint `cor-wf-rank-one-punctual-purity-curve`: Punctual purity of a rank-one Weil
-character on a curve.
-
-A continuous character `χ` of the Weil group is punctually `ι`-pure of weight
+/-- A continuous character `χ` of the Weil group is punctually `ι`-pure of weight
 `w = 2 log |ι (χ γ)| / log q`, for the Frobenius lift `γ`: at a closed point `x` of degree `d`,
 `χ (F_x) = χ (F_x γ⁻ᵈ) χ (γ) ^ d` with `χ (F_x γ⁻ᵈ)` a root of unity, so that
 `|ι χ (F_x)| = |ι (χ γ)| ^ d` and `q_x = q ^ d`. -/
@@ -288,10 +275,7 @@ theorem frobeniusWeight_eq_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   field_simp
   exact mul_div_cancel_left₀ _ hd'
 
-/-- Blueprint `cor-wf-rank-one-punctual-purity-curve`: Punctual purity of a rank-one Weil
-character on a curve.
-
-The weight `2 log |ι (χ s)| / log q` does not depend on the choice of the element `s` of degree
+/-- The weight `2 log |ι (χ s)| / log q` does not depend on the choice of the element `s` of degree
 one: two such elements differ by an element of `π₁(C)`, on which `χ` takes root of unity
 values. -/
 theorem frobeniusWeight_eq_of_deg_eq_one (χ : W.carrier →* (PadicAlgCl l)ˣ)

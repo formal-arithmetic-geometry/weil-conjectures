@@ -38,7 +38,6 @@ private theorem biprod_prod_snd (A B : AddCommGrpCat.{u + 1}) :
   rw [← AddCommGrpCat.biprodIsoProd_inv_comp_snd, Iso.hom_inv_id_assoc]
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 500000 in
 -- The dependent scheme and sheaf identifications exhaust the default elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero restriction row on a cofinal tail.

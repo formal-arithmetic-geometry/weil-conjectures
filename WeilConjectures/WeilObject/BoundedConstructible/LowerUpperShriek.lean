@@ -182,7 +182,7 @@ noncomputable def weilUpperShriekComparison :
   (mateEquiv
     (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (TwoSquare.mk _ _ _ _ (weilLowerShriekComparison ℓ eX eY hf).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (weilLowerShriekComparison ℓ eX eY hf).inv))
 
 /-- The Frobenius comparison of the upper shriek is an isomorphism: it is the mate of an
 isomorphism along the Frobenius pullbacks, which are equivalences

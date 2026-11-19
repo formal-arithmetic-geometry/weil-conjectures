@@ -31,8 +31,8 @@ cyclic subgroup `⟨Φ⟩` and `W(π, Φ)` with the inverse image of `⟨Φ⟩` 
 
 ## Blueprint
 
-`MonoidHom.exact_weilGroupDeg` implements `lem-wf-weil-group-exact-sequence`. The Weil group of a
-scheme (`def-wf-weil-group`) is `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, the Weil group
+`MonoidHom.exact_weilGroupDeg` implements `situation-weil`. The Weil group of a
+scheme (`situation-weil`) is `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, the Weil group
 `W(π, Φ)` of the action of `π₁(X₀, s)` on the geometric fibres of the constant covers and the
 geometric Frobenius.
 -/
@@ -77,7 +77,7 @@ theorem coe_kerToWeilGroup_apply (g : π.ker) :
 the degree map `deg : W(π, Φ) → ℤ` is surjective, the inclusion `ker π → W(π, Φ)` is injective
 with image `ker deg`, and every lift of `Φ` to `W(π, Φ)` has degree one; that is,
 `1 → ker π → W(π, Φ) → ℤ → 0` is exact.
-(blueprint: `lem-wf-weil-group-exact-sequence`) -/
+(blueprint: `situation-weil`) -/
 theorem exact_weilGroupDeg (hπ : Φ ∈ π.range) (hΦ : ¬IsOfFinOrder Φ) :
     Function.Surjective (weilGroupDeg π Φ) ∧ Function.Injective (kerToWeilGroup π Φ) ∧
       (kerToWeilGroup π Φ).range = (weilGroupDeg π Φ).ker ∧

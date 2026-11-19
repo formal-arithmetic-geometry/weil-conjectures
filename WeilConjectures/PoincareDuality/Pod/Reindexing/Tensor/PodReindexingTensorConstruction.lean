@@ -91,7 +91,7 @@ private theorem ordinaryConstructible
     ((constructibleIntegralPullback l E g).obj M).property
 
 /-- Extend a fixed normalized completion comparison to completed tensor.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-construction).
 
 Proof: on simultaneous flat-term K-flat P,Q, use the quotient maps in D and the

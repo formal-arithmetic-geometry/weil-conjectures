@@ -17,13 +17,13 @@ public import WeilConjectures.AlgebraicGeometry.ScalarGeometricExchangeRectangle
 
 /-! # Scalar extension and geometric exchange
 
-Source: blueprint main-20261015, det-sf-comp-coherence-refinement.proof.md, (2),
-coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47
-(blueprint: lem-sfb-scalar-geometric-exchange-rectangle).
-
 All functors are the existing ordinary unbounded internal-module derived functors.
 The balancing maps are specified by their universal computation-counit normalization.
 The direct-image maps are their actual mates, without an invertibility assumption.
+
+## References
+
+* Stacks Project, Tags 07A7 and 0E47
 -/
 
 @[expose] public noncomputable section
@@ -800,31 +800,7 @@ attribute [local irreducible] rho SectionPullNormalized SectionScalarNormalized
 conjunct supplies normalized section scalar and pullback comparisons, identifies
 each realized route with its section route after conjugating by the fixed source
 and target comparisons, and asserts equality of the actual section routes. Their
-rho and exchange are mates under the independently specified section adjunctions.
-
-Source: blueprint main-20261015, det-sf-comp-coherence-refinement.proof.md, (2),
-coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47
-(blueprint: lem-sfb-scalar-geometric-exchange-rectangle).
-
-Proof:
-1. Apply the normalized scalar/pullback theorem at identity morphisms to choose
-one normalized section scalar comparison at each scheme. Endpoint-normalization
-transport then makes every supplied b section-normalized for this one family.
-2. The normalized scalar/pullback square-coherence lemma identifies the two
-successive balancing maps around the canonical geometric pullback square.
-3. The categorical mate_rectangle lemma transposes under the final new-coefficient
-geometric adjunction. Four mateEquiv_counit equations and naturality reduce the two
-transposes to the equation of step 2. Injectivity of the Hom equivalence gives the
-internal rectangle. No direct-image mate or exchange is cancelled.
-4. The proved geometric derivedMate and derivedPullComp normalization identities
-identify the realization of each geometric adjunction and compositor. Abstract
-compositionCoherence_eq transports the compositor along the chosen square equality;
-iso_square_transport and mate_transport carry the exchange to its section mate.
-The final SectionPullNormalized equation carries balancing, hence its scalar
-mate, to the independently specified section operations.
-5. Naturality transports each three-factor route through the fixed source and
-target realization isomorphisms. Cancel these isomorphisms and apply the internal
-rectangle equality to conclude equality of the actual section routes. -/
+rho and exchange are mates under the independently specified section adjunctions. -/
 theorem scalar_geometric_exchange_rectangle (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)

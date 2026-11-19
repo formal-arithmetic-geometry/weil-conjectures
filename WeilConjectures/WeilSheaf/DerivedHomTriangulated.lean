@@ -24,7 +24,7 @@ shifts and is triangulated, `D(A)ᵒᵖ` being equipped with the triangulated st
 (`DerivedCategory.exists_commShift_isTriangulated_bifunctorRHom`).
 
 This is the exactness of the Verdier dual `RHom(-, ω_X)` of Weil complexes (blueprint
-`det-pd-biduality-coefficients`).
+`theorem-verdier-biduality`).
 -/
 
 @[expose] public section

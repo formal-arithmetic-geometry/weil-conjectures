@@ -20,8 +20,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/
 sk-prop-sf-existence/lem-exc-closed-ambient.md,
-node lem-exc-closed-ambient, order 1803
-(blueprint: lem-exc-closed-ambient).
+node lemma-local-cohomology-right-adjoint--1, order 1803
+(blueprint: lemma-local-cohomology-right-adjoint--1).
 -/
 
 set_option autoImplicit false
@@ -96,8 +96,8 @@ private theorem closedLowerStar_isLeftAdjoint
 
 /-- Closed direct image has a right adjoint on the ordinary, unbounded derived categories.
 The open complement is canonical and is not extra input to this existence assertion.
-Source: blueprint smooth-purity, sk-prop-sf-existence, node order 1803
-(blueprint: lem-exc-closed-ambient).
+Source: blueprint smooth-purity, theorem-existence-exceptional-inverse-image, node order 1803
+(blueprint: lemma-local-cohomology-right-adjoint--1).
 
 Proof:
 1. For the open complement j put Gamma_Z N = ker(N → j_* j^* N). Geometric-stalk

@@ -26,8 +26,8 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 - `AlgebraicGeometry.Etale.dualizingComplex`: `ω_X = Ra^! Λ_S`.
 - `AlgebraicGeometry.Etale.verdierDual`: `𝔻_X = RHom_X(-, ω_X)`.
 - `AlgebraicGeometry.Etale.verdierDualEvaluation`, `AlgebraicGeometry.Etale.verdierDualDoubleDual`
-  (`lem-weil-duality-pairing`): the evaluation pairing `K ⊗ᴸ 𝔻_X K ⟶ ω_X` and the double-dual
-  morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, its transpose.
+  (`definition-verdier-dual-evaluation--4`): the evaluation pairing `K ⊗ᴸ 𝔻_X K ⟶ ω_X` and the
+  double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, its transpose.
 
 ## Main statements
 
@@ -35,7 +35,7 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
   an invertible dualizing complex.
 
 General Verdier biduality on `Dctf(X, Λ)` (`sk-prop-sf-biduality-general`) and the preservation
-of `Dctf(X, Λ)` by `𝔻_X` (`lem-weil-verdier-preservation-strata`) are proved in
+of `Dctf(X, Λ)` by `𝔻_X` (`lemma-verdier-duality-preserves-constructibility--1`) are proved in
 `WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality`.
 
 ## Implementation notes
@@ -46,13 +46,13 @@ of `Dctf(X, Λ)` by `𝔻_X` (`lem-weil-verdier-preservation-strata`) are proved
 torsion coefficients).
 
 The biduality theorems are stated in the setting of the blueprint's
-`sk-prop-sf-biduality-general` and of `def-sf-setting`: `X` is a separated scheme of finite
-type over a field `k`, and the coefficients are a finite ring `Λ` whose exponent is invertible on
-`k`. Both hypotheses are needed. Over a singular base biduality fails already for `a = 𝟙`: on a
-nodal curve, with `K = i_* Λ` the skyscraper at the node, `i^! Λ` has rank three, so `𝔻_X 𝔻_X K` has
-rank nine. For `p`-torsion coefficients in characteristic `p` the Verdier dual of `j_! Λ` is
-`Rj_* Λ`, which is not constructible (Artin–Schreier). At a finite stage every object of `Dctf` is
-locally perfect, so no quasi-Frobenius hypothesis on `Λ` is needed.
+`sk-prop-sf-biduality-general` and of `definition-constructible-sheaves--6`: `X` is a separated
+scheme of finite type over a field `k`, and the coefficients are a finite ring `Λ` whose exponent is
+invertible on `k`. Both hypotheses are needed. Over a singular base biduality fails already for
+`a = 𝟙`: on a nodal curve, with `K = i_* Λ` the skyscraper at the node, `i^! Λ` has rank three, so
+`𝔻_X 𝔻_X K` has rank nine. For `p`-torsion coefficients in characteristic `p` the Verdier dual of
+`j_! Λ` is `Rj_* Λ`, which is not constructible (Artin–Schreier). At a finite stage every object of
+`Dctf` is locally perfect, so no quasi-Frobenius hypothesis on `Λ` is needed.
 
 The statements are for torsion coefficients, finitely generated objects of `A` being finite
 (`CategoryTheory.ConcreteCategory.FiniteOfIsFinitelyGenerated`, which holds for `ModuleCat Λ`
@@ -85,13 +85,14 @@ namespace Etale
 
 /-- The dualizing complex `ω_X = Ra^! Λ_S` of a scheme `X` over a base `S`, the exceptional
 inverse image along the structure morphism `a : X ⟶ S` of the monoidal unit `Λ_S` (blueprint
-`def-trf-dualizing-complex`, with `S = Spec k` and finite coefficients `A = ModuleCat Λ`). -/
+`definition-verdier-dual-evaluation`, with `S = Spec k` and finite coefficients
+`A = ModuleCat Λ`). -/
 noncomputable def dualizingComplex : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) :=
   (R(a)^![Λ]).obj (𝟙_ _)
 
-/-- Blueprint `def-sf-pf`: Coefficient dual, Verdier dual, and the projection formula, and
-`def-trf-dualizing-complex` (the dualizing complex).
+/-- Blueprint `definition-verdier-dual-evaluation--2`: Coefficient dual, Verdier dual, and the
+projection formula, and `definition-verdier-dual-evaluation` (the dualizing complex).
 
 The Verdier dual `𝔻_X = RHom_X(-, ω_X) : D(X_ét)ᵒᵖ ⥤ D(X_ét)`, the internal hom into the
 dualizing complex `AlgebraicGeometry.Etale.dualizingComplex`. The other two items of the
@@ -122,7 +123,8 @@ noncomputable def derivedHomToIhomIhomNatTrans (X : Scheme.{u})
     𝟭 _ ⟶ ((derivedHom A X).flip.obj ω).rightOp ⋙ (derivedHom A X).flip.obj ω :=
   MonoidalClosed.toIhomIhomNatTrans ω
 
-/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
+/-- Blueprint `definition-verdier-dual-evaluation--4`: The duality pairing and the double-dual
+morphism.
 
 The evaluation `ev_K : K ⊗ᴸ 𝔻_X K ⟶ ω_X` of the internal hom, a pairing natural in `K`. No
 finiteness of `K` or of `𝔻_X K` is needed. -/
@@ -131,7 +133,8 @@ noncomputable def verdierDualEvaluation
     K ⊗ (verdierDual Λ a).obj (op K) ⟶ dualizingComplex Λ a :=
   (ihom.ev K).app (dualizingComplex Λ a)
 
-/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
+/-- Blueprint `definition-verdier-dual-evaluation--4`: The duality pairing and the double-dual
+morphism.
 
 The double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, natural in `K`: the transpose of the
 evaluation pairing `AlgebraicGeometry.Etale.verdierDualEvaluation` precomposed with the
@@ -141,9 +144,10 @@ noncomputable def verdierDualDoubleDual :
     𝟭 _ ⟶ (verdierDual Λ a).rightOp ⋙ verdierDual Λ a :=
   derivedHomToIhomIhomNatTrans (ModuleCat.{u + 1} Λ) X (dualizingComplex Λ a)
 
-/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism `δ_K` is the transpose of
-the evaluation `ev_K` composed with the symmetry, `CategoryTheory.MonoidalClosed.toIhomIhom`
-(see `CategoryTheory.MonoidalClosed.uncurry_toIhomIhom`). -/
+/-- Blueprint `definition-verdier-dual-evaluation--4`: the double-dual morphism `δ_K` is the
+transpose of the evaluation `ev_K` composed with the symmetry,
+`CategoryTheory.MonoidalClosed.toIhomIhom` (see
+`CategoryTheory.MonoidalClosed.uncurry_toIhomIhom`). -/
 lemma verdierDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))) :
     (verdierDualDoubleDual Λ a).app K = MonoidalClosed.toIhomIhom (dualizingComplex Λ a) K :=

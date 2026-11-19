@@ -307,7 +307,7 @@ private theorem mate_whiskerTop (τ : TwoSquare EA Fs Fl EB) (γ : EA' ⟶ EA) :
     Functor.whiskerRight_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
     Functor.comp_map, Functor.map_comp, Category.id_comp, Category.assoc]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj, TwoSquare] at τ ⊢
+  dsimp only [Functor.comp_obj, TwoSquare] at τ ⊢
   erw [Category.comp_id]
   have hu := alevel.unit_naturality (γ.app (Gs.obj M))
   simpa only [Category.assoc, Category.comp_id, Category.id_comp,
@@ -326,7 +326,7 @@ private theorem mate_whiskerBottom (τ : TwoSquare EA Fs Fl EB) (γ : EB ⟶ EB'
     Functor.whiskerRight_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
     Functor.comp_map, Functor.map_comp, Category.id_comp, Category.assoc]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj, TwoSquare] at τ ⊢
+  dsimp only [Functor.comp_obj, TwoSquare] at τ ⊢
   erw [Category.comp_id, Category.id_comp]
   have hn := γ.naturality (asys.counit.app M)
   have hh := congrArg (fun f ↦ alevel.unit.app (EA.obj (Gs.obj M)) ≫
@@ -360,7 +360,7 @@ private theorem transition_mates
   let τ₀ : TwoSquare EA₀ Fs Fl EB₀ := α₀.inv
   have hh : (τ₁.hComp τ₂).whiskerTop tA = τ₀.whiskerBottom tB := by
     ext H
-    dsimp only [τ₀, τ₁, τ₂, TwoSquare.natTrans]
+    dsimp only [τ₀, τ₁, τ₂]
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp_app,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
     apply (cancel_epi (α₀.hom.app H)).1
@@ -395,33 +395,33 @@ set_option backward.isDefEq.respectTransparency.types false in
 omit [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
   [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
 private theorem tensorSquare_exists
-    [IsIso (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)).natTrans] :
+    [IsIso (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom))] :
     ∃ θ : TA ⋙ Fn ≅ F ⋙ TB, ∀ M,
       F.map (aTA.unit.app M) ≫ β.hom.app (TA.obj M) ≫
         RB.map (θ.hom.app M) = aTB.unit.app (F.obj M) := by
   let τ := (mateEquiv aTA aTB).symm (TwoSquare.mk _ _ _ _ β.hom)
-  have ht : (mateEquiv aTA aTB τ).natTrans = β.hom :=
-    congrArg TwoSquare.natTrans ((mateEquiv aTA aTB).apply_symm_apply _)
-  have hc : conjugateEquiv (aTA.comp an) (a.comp aTB) τ.natTrans =
-      (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)).natTrans := by
+  have ht : (mateEquiv aTA aTB τ) = β.hom :=
+    ((mateEquiv aTA aTB).apply_symm_apply _)
+  have hc : conjugateEquiv (aTA.comp an) (a.comp aTB) τ =
+      (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)) := by
     rw [← iterated_mateEquiv_conjugateEquiv aTA aTB a an τ]
-    exact congrArg (fun t ↦ (mateEquiv an a t).natTrans) ht
-  have : IsIso (conjugateEquiv (aTA.comp an) (a.comp aTB) τ.natTrans) := by
+    exact congrArg (fun t ↦ (mateEquiv an a t)) ht
+  have : IsIso (conjugateEquiv (aTA.comp an) (a.comp aTB) τ) := by
     rw [hc]
     infer_instance
-  have : IsIso τ.natTrans :=
-    conjugateEquiv_of_iso (aTA.comp an) (a.comp aTB) τ.natTrans
-  let θ := (asIso τ.natTrans).symm
+  have : IsIso τ :=
+    conjugateEquiv_of_iso (aTA.comp an) (a.comp aTB) τ
+  let θ := (asIso τ).symm
   refine ⟨θ, ?_⟩
   intro M
   have hu := unit_mateEquiv aTA aTB τ M
   change F.map (aTA.unit.app M) ≫
-    ((mateEquiv aTA aTB τ).natTrans).app (TA.obj M) =
-      aTB.unit.app (F.obj M) ≫ RB.map (τ.natTrans.app M) at hu
+    ((mateEquiv aTA aTB τ)).app (TA.obj M) =
+      aTB.unit.app (F.obj M) ≫ RB.map (τ.app M) at hu
   rw [ht] at hu
   rw [← Category.assoc, hu, Category.assoc, ← RB.map_comp]
   change aTB.unit.app (F.obj M) ≫ RB.map
-    ((asIso τ.natTrans).hom.app M ≫ (asIso τ.natTrans).inv.app M) = _
+    ((asIso τ).hom.app M ≫ (asIso τ).inv.app M) = _
   rw [Iso.hom_inv_id_app]
   erw [RB.map_id, Category.comp_id]
 
@@ -445,16 +445,16 @@ set_option backward.isDefEq.respectTransparency.types false in
 omit [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
   [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
 private theorem fourMate_isIso
-    (hτ : IsIso ((mateEquiv aTA aTB).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans) :
-    IsIso (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)).natTrans := by
+    (hτ : IsIso ((mateEquiv aTA aTB).symm (TwoSquare.mk _ _ _ _ β.hom))) :
+    IsIso (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)) := by
   have := hτ
   let τ := (mateEquiv aTA aTB).symm (TwoSquare.mk _ _ _ _ β.hom)
-  have ht : (mateEquiv aTA aTB τ).natTrans = β.hom :=
-    congrArg TwoSquare.natTrans ((mateEquiv aTA aTB).apply_symm_apply _)
-  have hc : conjugateEquiv (aTA.comp an) (a.comp aTB) τ.natTrans =
-      (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)).natTrans := by
+  have ht : (mateEquiv aTA aTB τ) = β.hom :=
+    ((mateEquiv aTA aTB).apply_symm_apply _)
+  have hc : conjugateEquiv (aTA.comp an) (a.comp aTB) τ =
+      (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)) := by
     rw [← iterated_mateEquiv_conjugateEquiv aTA aTB a an τ]
-    exact congrArg (fun t ↦ (mateEquiv an a t).natTrans) ht
+    exact congrArg (fun t ↦ (mateEquiv an a t)) ht
   rw [← hc]
   infer_instance
 
@@ -469,26 +469,26 @@ private theorem doubleMate_homEquiv (M : A) (N : D)
     a.homEquiv _ _ (aTB.homEquiv _ _
       (((mateEquiv aTA aTB).symm (TwoSquare.mk _ _ _ _ β.hom)).app M ≫ f)) := by
   let τ := (mateEquiv aTA aTB).symm (TwoSquare.mk _ _ _ _ β.hom)
-  have ht : (mateEquiv aTA aTB τ).natTrans = β.hom :=
-    congrArg TwoSquare.natTrans ((mateEquiv aTA aTB).apply_symm_apply _)
-  have hc : conjugateEquiv (aTA.comp an) (a.comp aTB) τ.natTrans =
-      (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)).natTrans := by
+  have ht : (mateEquiv aTA aTB τ) = β.hom :=
+    ((mateEquiv aTA aTB).apply_symm_apply _)
+  have hc : conjugateEquiv (aTA.comp an) (a.comp aTB) τ =
+      (mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)) := by
     rw [← iterated_mateEquiv_conjugateEquiv aTA aTB a an τ]
-    exact congrArg (fun t ↦ (mateEquiv an a t).natTrans) ht
-  change _ ≫ ((mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom)).natTrans).app N = _
+    exact congrArg (fun t ↦ (mateEquiv an a t)) ht
+  change _ ≫ ((mateEquiv an a (TwoSquare.mk _ _ _ _ β.hom))).app N = _
   rw [← hc]
   have h₁ : (aTA.comp an).homEquiv M N f =
       aTA.homEquiv M _ (an.homEquiv _ N f) := by
     rw [Adjunction.comp_homEquiv]
     rfl
-  have h₂ : (a.comp aTB).homEquiv M N (τ.natTrans.app M ≫ f) =
-      a.homEquiv M _ (aTB.homEquiv _ N (τ.natTrans.app M ≫ f)) := by
+  have h₂ : (a.comp aTB).homEquiv M N (τ.app M ≫ f) =
+      a.homEquiv M _ (aTB.homEquiv _ N (τ.app M ≫ f)) := by
     rw [Adjunction.comp_homEquiv]
     rfl
-  change _ = a.homEquiv _ _ (aTB.homEquiv _ _ (τ.natTrans.app M ≫ f))
+  change _ = a.homEquiv _ _ (aTB.homEquiv _ _ (τ.app M ≫ f))
   rw [← h₁, ← h₂, Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   rw [Category.assoc]
-  erw [(conjugateEquiv (aTA.comp an) (a.comp aTB) τ.natTrans).naturality f]
+  erw [(conjugateEquiv (aTA.comp an) (a.comp aTB) τ).naturality f]
   erw [← Category.assoc, unit_conjugateEquiv, Category.assoc, ← Functor.map_comp]
 
 end TensorSquare
@@ -523,7 +523,7 @@ variable {C : Type c} [Category.{cv} C] [Abelian C] [HasDerivedCategory.{d} C]
     F.map (aTA.unit.app P) ≫ β.hom.app (TA.obj P))
 
 private def derivedLeftSquare : FD ⋙ DB.derived ⟶ DA.derived ⋙ FnD :=
-  ((mateEquiv DA.derivedAdj DB.derivedAdj).symm (TwoSquare.mk _ _ _ _ βD.hom)).natTrans
+  ((mateEquiv DA.derivedAdj DB.derivedAdj).symm (TwoSquare.mk _ _ _ _ βD.hom))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -749,9 +749,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 include h₀ h₁ hβ in
 private theorem restrictionMate_isIso :
-    IsIso (mateEquiv a₀ a₁ (TwoSquare.mk _ _ _ _ β.hom)).natTrans := by
+    IsIso (mateEquiv a₀ a₁ (TwoSquare.mk _ _ _ _ β.hom)) := by
   let α := (mateEquiv a₀ a₁
-    (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ β.hom))
   have hα (N) : Ua.map (α.app N) ≫ γ₁.hom.app (RB.obj N) ≫
       V.map (rb.hom.app N) = ra.hom.app (G₀.obj N) ≫
         γ₀.hom.app N := by
@@ -765,7 +765,7 @@ private theorem restrictionMate_isIso :
         Functor.leftUnitor_hom_app, Functor.associator_hom_app,
         Functor.associator_inv_app, Functor.comp_obj]
       simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.id_comp]
-      dsimp only [Functor.comp_map, TwoSquare.natTrans]
+      dsimp only [Functor.comp_map]
       erw [Category.comp_id]
     rw [ha]
     erw [← Category.assoc, h₁]
@@ -892,9 +892,9 @@ variable (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (a : F ⊣ G)
       (∀ i : ℤ, FlatA n (P.X i)) ∧ KFB n (((Fl n).mapHomologicalComplex (.up ℤ)).obj P) ∧
         ∀ i : ℤ, FlatB n ((Fl n).obj (P.X i)))
   (hRestr : ∀ {m n : ℕ} (h : n ≤ m),
-    IsIso (mateEquiv (al n) (al m) (TwoSquare.mk _ _ _ _ (β h).hom)).natTrans)
+    IsIso (mateEquiv (al n) (al m) (TwoSquare.mk _ _ _ _ (β h).hom)))
   (hEval : ∀ n,
-    IsIso (mateEquiv a (al n) (TwoSquare.mk _ _ _ _ (α n).inv)).natTrans)
+    IsIso (mateEquiv a (al n) (TwoSquare.mk _ _ _ _ (α n).inv)))
   (hTrans : ∀ {m n : ℕ} (h : n ≤ m) M,
     (PX.strictTransition h).app (F.obj M) ≫ (RB h).map ((α n).hom.app M) =
     (α m).hom.app M ≫ (Fl m).map ((PY.strictTransition h).app M) ≫
@@ -949,7 +949,7 @@ private theorem comparison_assembly :
         (eB n).map (χ.hom.app M) =
           (PX.adj n).unit.app ((Fl n).obj M) := by
     have : IsIso (mateEquiv a (al n)
-        (TwoSquare.mk _ _ _ _ (α n).symm.hom)).natTrans := hEval n
+        (TwoSquare.mk _ _ _ _ (α n).symm.hom)) := hEval n
     exact tensorSquare_exists (Fl n) (Gl n) (al n)
       (PY.extension n) (eA n)
       (PX.extension n) (eB n)
@@ -1017,14 +1017,14 @@ private theorem comparison_assembly :
     · intro P hP
       exact PX.computes n _ hP.2.1 hP.2.2
   have hdEv (n : ℕ) : IsIso (mateEquiv ds.adjunction (dl n).adjunction
-      (TwoSquare.mk _ _ _ _ (ev n).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (ev n).inv)) := by
     have := hdE n
     exact fourMate_isIso (dl n).inverse (dl n).direct (dl n).adjunction
       (PY.derivedExtension n) (PY.evaluation n) (PX.derivedExtension n) (PX.evaluation n)
       ds.inverse ds.direct (PY.derivedAdj n) (PX.derivedAdj n) ds.adjunction (ev n).symm (hdE n)
   let de := fun n ↦ (asIso
     (mateEquiv ds.adjunction (dl n).adjunction
-      (TwoSquare.mk _ _ _ _ (ev n).inv)).natTrans)
+      (TwoSquare.mk _ _ _ _ (ev n).inv)))
   let E : CoefficientEvaluationImageData F G a Fl Gl al eA eB
       PY.evaluation PX.evaluation PY.evaluationFactors PX.evaluationFactors α :=
     { system := ds
@@ -1054,7 +1054,7 @@ private theorem comparison_assembly :
       (PY.transition_rep h) (PX.transition_rep h) (hTrans h) H
   have hdR {m n : ℕ} (h : n ≤ m) : IsIso
       (mateEquiv (dl n).adjunction (dl m).adjunction
-        (TwoSquare.mk _ _ _ _ (δ h).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (δ h).hom)) := by
     have := hdT h
     exact fourMate_isIso (dl m).inverse (dl m).direct (dl m).adjunction
       (PY.scalar h).derived (PY.scalar h).restriction
@@ -1069,7 +1069,7 @@ private theorem comparison_assembly :
       _ _ (PY.scalar h) (PX.scalar h) (dl m).inverse (dl n).inverse (δ h))).symm
   let rd := fun {m n : ℕ} (h : n ≤ m) ↦ (asIso
     (mateEquiv (dl n).adjunction (dl m).adjunction
-      (TwoSquare.mk _ _ _ _ (δ h).hom)).natTrans).symm
+      (TwoSquare.mk _ _ _ _ (δ h).hom))).symm
   refine ⟨E, ⟨{
     tensor := θ
     tensor_unit := hθ
@@ -1338,7 +1338,6 @@ private def freeImageIso : free R ⋙ F₀ ≅ L₀ ⋙ free R' :=
     (((freeAdjunction R).comp a₀).ofNatIsoRight e₀)
     (adj₀.comp (freeAdjunction R'))
 
-set_option maxHeartbeats 1200000 in
 -- The resolving subcategory carries two dependent monoidal structures.
 include L₀ V₀ adj₀ G₀ a₀ e₀ in
 set_option backward.isDefEq.respectTransparency false in
@@ -1438,7 +1437,7 @@ private theorem ordinaryRestrictionMate_isIso
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
     {m n : ℕ} (h : n ≤ m) :
     IsIso (mateEquiv (S.levelAdj n) (S.levelAdj m)
-      (TwoSquare.mk _ _ _ _ (S.restrictInverse h).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (S.restrictInverse h).hom)) := by
   have : HasWeakSheafify J AddCommGrpCat.{w} := inferInstance
   have : HasWeakSheafify K AddCommGrpCat.{w} := inferInstance
   exact restrictionMate_isIso (S.lift n).modules (S.right n) (S.levelAdj n)
@@ -1457,7 +1456,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 private theorem ordinaryEvaluationMate_eq
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj) (n : ℕ) :
     (mateEquiv S.systemAdj (S.levelAdj n)
-      (TwoSquare.mk _ _ _ _ (S.inverseEvaluation n).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (S.inverseEvaluation n).inv)) =
         (S.rightEvaluation n).hom := by
   have : HasWeakSheafify J AddCommGrpCat.{w} := inferInstance
   have : HasWeakSheafify K AddCommGrpCat.{w} := inferInstance
@@ -1474,7 +1473,7 @@ private theorem ordinaryEvaluationMate_eq
   dsimp only [mateEquiv, TwoSquare.mk, Equiv.coe_fn_mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.rightUnitor_inv_app,
     Functor.leftUnitor_hom_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Functor.comp_obj, TwoSquare.natTrans]
+    Functor.associator_inv_app, Functor.comp_obj]
   erw [Category.id_comp, Category.comp_id]
   change (S.levelAdj n).unit.app (M.level n) ≫
     (S.right n).map ((S.inverseEvaluation n).inv.app M) ≫
@@ -1573,7 +1572,6 @@ private theorem ordinaryInverseTransition
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1200000 in
 -- Elaborate the dependent normalized comparison equations.
 /-- Derived direct image commutes with evaluation, including its canonical mates.
 Source: Zheng, Construction 4.1 and Lemma 4.10, printed pp. 21 and 23--24.
@@ -1638,7 +1636,7 @@ theorem coefficientSystemUnboundedComparison
       (S.lift n).modules (S.right n) (S.levelAdj n) (S.rightUnderlying n))
     (fun {_ _} h ↦ ordinaryRestrictionMate_isIso O ell L V adj S h)
     (fun n ↦ show IsIso (mateEquiv S.systemAdj (S.levelAdj n)
-      (TwoSquare.mk _ _ _ _ (S.inverseEvaluation n).inv)).natTrans by
+      (TwoSquare.mk _ _ _ _ (S.inverseEvaluation n).inv)) by
         rw [ordinaryEvaluationMate_eq O ell L V adj S n]
         infer_instance)
     (fun {_ _} h ↦ ordinaryInverseTransition O ell L V adj S PY PX h)

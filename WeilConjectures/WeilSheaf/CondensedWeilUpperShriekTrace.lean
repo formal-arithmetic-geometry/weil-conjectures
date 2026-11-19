@@ -294,7 +294,7 @@ variable {f} [HasUpperShriek k₀ l f]
 
 set_option linter.style.longLine false in
 /-- **The Weil orientation from the trace square, condensed model** (the uniqueness route,
-blueprint `thm-pur-weil-equivariance-of-purity-and-trace`): let
+blueprint `proposition-purity-trace-commute-frobenius`): let
 `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an orientation on `X̄` in the condensed model
 (`f̄^! = ī^* ∘ ḡ^!` for the compactification, `ℚ̄_ℓ(d)[2d]` the condensed model of the Tate twist),
 whose trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant for the composite exchange of `f̄_!`

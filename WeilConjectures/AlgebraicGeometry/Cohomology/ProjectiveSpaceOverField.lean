@@ -22,7 +22,7 @@ twisting sheaves `𝒪(m)`, for the `k`-vector space structure
 
 They are the specialisations to `A = k` of the isomorphisms over a commutative ring `A` of
 `WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceSerrePairing`. The existence
-statements of `det-thm-picard-pn` follow.
+statements of `lemma-coherent-base-change-invertible-sheaves--1` follow.
 
 ## Main definitions and statements
 
@@ -55,7 +55,8 @@ variable (n : Type u) (k : Type u) [Field k]
 polynomials in the homogeneous coordinates: a class of `H⁰` is a global section of `𝒪(m)`, which
 is the section of a unique homogeneous polynomial (`twistHZeroLinearEquiv_symm_apply`).
 
-(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (i)) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`,
+`lem-pc-projective-space-twist-cohomology` (i)) -/
 def twistHZeroLinearEquivOfField [Fintype n] [Nonempty n] (m : ℕ) :
     (twist n (Spec (.of k)) m).H 0 ≃ₗ[k] MvPolynomial.homogeneousSubmodule n k m :=
   twistHZeroLinearEquiv k m
@@ -74,8 +75,9 @@ homology of the monomial Čech complex, followed by the monomial duality there. 
 the isomorphism induced by the Serre pairing `H⁰(𝒪(-m-d-1)) × Hᵈ(𝒪(m)) → Hᵈ(𝒪(-d-1)) ≅ k`
 (`twistHTopLinearEquivDualOfField_apply`); for `d = 0` both sides are `k`.
 
-(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii),
-`lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`,
+`lem-pc-projective-space-twist-cohomology` (ii),
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 def twistHTopLinearEquivDualOfField [Fintype n] {d : ℕ} (hn : Fintype.card n = d + 1) {m : ℤ}
     (hm : m ≤ -(d : ℤ) - 1) :
     (twist n (Spec (.of k)) m).H d ≃ₗ[k]
@@ -88,7 +90,8 @@ def twistHTopLinearEquivDualOfField [Fintype n] {d : ℕ} (hn : Fintype.card n =
 image of `x` under multiplication by the section `f` of `𝒪(-m-d-1)` and
 `tr : Hᵈ(ℙᵈ_k, 𝒪(-d-1)) ≅ k` is the trace `twistTopTrace`.
 
-(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`,
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem twistHTopLinearEquivDualOfField_apply [Fintype n] {p : ℕ}
     (hn : Fintype.card n = p + 1 + 1) {m : ℤ} (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (x : (twist n (Spec (.of k)) m).H (p + 1))
@@ -103,7 +106,8 @@ for an index type `n` of homogeneous coordinates with `Nat.card n = d + 1`, and 
 `V = k^{d+1}` the degree-`m` homogeneous part of the polynomial ring in those coordinates,
 `H⁰(X, 𝒪(m)) = Sᵐ(V)` for `m ≥ 0`. The isomorphism is `twistHZeroLinearEquivOfField`.
 
-(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (i)) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`,
+`lem-pc-projective-space-twist-cohomology` (i)) -/
 theorem nonempty_H_zero_twist_equiv [Finite n] (d : ℕ) (hn : Nat.card n = d + 1) (m : ℕ) :
     Nonempty ((twist n (Spec (.of k)) m).H 0 ≃ₗ[k] MvPolynomial.homogeneousSubmodule n k m) := by
   have := Fintype.ofFinite n
@@ -115,8 +119,9 @@ theorem nonempty_H_zero_twist_equiv [Finite n] (d : ℕ) (hn : Nat.card n = d + 
 the dualising sheaf of `ℙᵈ_k`. The isomorphism is `twistHTopLinearEquivDualOfField`, induced by
 the Serre pairing (`twistHTopLinearEquivDualOfField_apply`).
 
-(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii),
-`lem-pc-projective-space-serre-pairing`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`,
+`lem-pc-projective-space-twist-cohomology` (ii),
+`theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem nonempty_H_twist_top_equiv_dual [Finite n] (d : ℕ) (hn : Nat.card n = d + 1) (m : ℤ)
     (hm : m ≤ -(d : ℤ) - 1) :
     Nonempty ((twist n (Spec (.of k)) m).H d ≃ₗ[k]

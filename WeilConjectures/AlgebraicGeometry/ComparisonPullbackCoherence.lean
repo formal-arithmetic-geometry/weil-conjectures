@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Coherent comparison of etale and pro-etale inverse images
 
-Source: blueprint, sec-proper-base-change, sk-thm-properbasechange,
-node lem-weil-pbc-comparison-pullback; Stacks Project, Tags 098T, 099R, 00WX and 0B65.
+Source: blueprint, chap-Proper-base-change, theorem-proper-base-change-classical-pro,
+node proposition-comparison-etale-derived-category--5; Stacks Project, Tags 098T, 099R, 00WX and
+0B65.
 
 The auxiliary interfaces extend the existing Kan-extension constructions to sets as
 well as abelian groups and finite fixed-ring modules. Every comparison is the mate
@@ -36,7 +37,7 @@ variable [∀ X : Scheme.{u}, HasWeakSheafify (Scheme.ProEt.topology X) D]
 
 /-- The constructed etale inverse image for the coefficient category `D`.
 For abelian coefficients this is definitionally the existing `upperStar`.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable abbrev etaleComparisonPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -44,7 +45,7 @@ noncomputable abbrev etaleComparisonPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
     Y.smallEtaleTopology X.smallEtaleTopology
 
 /-- The canonical inverse-image adjunction, obtained from Kan extension and sheafification.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable abbrev etaleComparisonAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     etaleComparisonPullback D f ⊣ Etale.lowerStar D f :=
@@ -55,7 +56,7 @@ noncomputable abbrev etaleComparisonAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) 
     Y.smallEtaleTopology X.smallEtaleTopology
 
 /-- The identity comparison, adjoint to the canonical fibre-product identity.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def etaleComparisonId (X : Scheme.{u}) :
     etaleComparisonPullback D (𝟙 X) ≅ 𝟭 _ :=
@@ -66,7 +67,7 @@ noncomputable def etaleComparisonId (X : Scheme.{u}) :
       (MorphismProperty.Over.pullbackId @Etale ⊤ X) D X.smallEtaleTopology).symm
 
 /-- The composition comparison, adjoint to associativity of chosen fibre products.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def etaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     etaleComparisonPullback D (f ≫ g) ≅
@@ -85,7 +86,7 @@ noncomputable def etaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
 
 /-- The specified square identification: compose through the equal composite morphisms.
 The chosen Cartesian identification supplies the commutativity equation.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def etaleComparisonSquare {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -98,7 +99,7 @@ noncomputable def etaleComparisonSquare {X' X Y' Y : Scheme.{u}}
 
 /-- The constructed proEtale inverse image for the coefficient category `D`.
 For abelian coefficients this is definitionally the existing `upperStar`.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable abbrev proEtaleComparisonPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -106,7 +107,7 @@ noncomputable abbrev proEtaleComparisonPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
 /-- The canonical inverse-image adjunction, obtained from Kan extension and sheafification.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable abbrev proEtaleComparisonAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -114,7 +115,7 @@ noncomputable abbrev proEtaleComparisonAdjunction {X Y : Scheme.{u}} (f : X ⟶ 
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
 
 /-- The identity comparison, adjoint to the canonical fibre-product identity.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def proEtaleComparisonId (X : Scheme.{u}) :
     proEtaleComparisonPullback D (𝟙 X) ≅ 𝟭 _ :=
@@ -123,7 +124,7 @@ noncomputable def proEtaleComparisonId (X : Scheme.{u}) :
       (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) D (Scheme.ProEt.topology X)).symm
 
 /-- The composition comparison, adjoint to associativity of chosen fibre products.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def proEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     proEtaleComparisonPullback D (f ≫ g) ≅
@@ -136,7 +137,7 @@ noncomputable def proEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g :
 
 /-- The specified square identification: compose through the equal composite morphisms.
 The chosen Cartesian identification supplies the commutativity equation.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def proEtaleComparisonSquare {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -151,7 +152,7 @@ noncomputable def proEtaleComparisonSquare {X' X Y' Y : Scheme.{u}}
 `lowerStarCompComparisonLowerStarIso`, which evaluates on `W` as the identity on
 sections over `W ×[Y] X`. This extends the inverse of
 `comparisonUpperStarCompUpperStarIso` to set coefficients.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 noncomputable def comparisonCoefficientPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     etaleComparisonPullback D f ⋙ comparisonCoefficientPullback D X ≅
@@ -400,7 +401,7 @@ private noncomputable def comparison_path_generic
       Functor.associator _ _ _
 
 /-- Data of two comparison paths and their square identifications.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof step 4. -/
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof step 4. -/
 structure ComparisonSquareData
     (A B B' C P Q Q' R : Type*) [Category* A] [Category* B] [Category* B']
     [Category* C] [Category* P] [Category* Q] [Category* Q'] [Category* R] where
@@ -424,7 +425,7 @@ structure ComparisonSquareData
   sp : R₁ ⋙ R₂ ≅ R₁' ⋙ R₂'
 
 /-- The componentwise square equation for the supplied comparison data.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof step 4. -/
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof step 4. -/
 def ComparisonSquareComponent
     {A B B' C P Q Q' R : Type*} [Category* A] [Category* B] [Category* B']
     [Category* C] [Category* P] [Category* Q] [Category* Q'] [Category* R]
@@ -475,7 +476,7 @@ private theorem comparison_square_components_bundled
 
 /-- The canonical data of the specified etale/pro-etale square. Its fields use exactly
 `comparisonCoefficientPullbackIso`, `etaleComparisonSquare`, and `proEtaleComparisonSquare`.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof step 4. -/
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof step 4. -/
 noncomputable def comparisonSquareData {X' X Y' Y : Scheme.{u}}
     (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y)
     (sq : ChosenCartesianSquare g' f' f g) :
@@ -572,7 +573,7 @@ end CoherenceProof
 canonical comparison. Equations are componentwise on every sheaf, equivalently
 equalities of natural transformations. The square is the specified one, including
 its commutativity transport; it is not replaced by an arbitrary isomorphism.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 . -/
 def ComparisonPullbackCoherent : Prop :=
   (∀ (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology D),
@@ -599,8 +600,8 @@ private theorem comparison_coherent : ComparisonPullbackCoherent D :=
 
 /-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
 sheaves and sheaves of modules over every finite discrete ring.
-Source: blueprint, sec-proper-base-change, sk-thm-properbasechange,
-lem-weil-pbc-comparison-pullback; Stacks, Tags 098T, 099R and 0B65.
+Source: blueprint, chap-Proper-base-change, theorem-proper-base-change-classical-pro,
+proposition-comparison-etale-derived-category--5; Stacks, Tags 098T, 099R and 0B65.
 
 Proof: (1) the etale-to-pro-etale inclusion commutes with base change: both composites
 have the same fibre products and arrows. Restriction of sheaves therefore gives

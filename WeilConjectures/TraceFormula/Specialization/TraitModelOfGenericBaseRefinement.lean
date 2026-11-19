@@ -29,7 +29,7 @@ models `P₃ ⟶ P₁` over proper morphisms `X₃ ⟶ X₁`, `X₃' ⟶ X₁'`,
 `N`, over which `N` is cartesian. Any two compactifications have a common refinement
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_refinement`, in
 `TraceFormula.Specialization.TraitModelOfGenericBaseCommonRefinement`). This is the common
-refinement of the proof of blueprint `det-nearby-exchange-maps` ("two compactifications
+refinement of the proof of blueprint `prose-E-15` ("two compactifications
 have a common proper refinement"), as for trait models over a base field
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`).
 

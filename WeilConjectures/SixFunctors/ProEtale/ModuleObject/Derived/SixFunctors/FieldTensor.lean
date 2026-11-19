@@ -23,7 +23,8 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 # Tensor closure of rational localizing categories
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint: det-thm-sf-pf-field-tensor).
+`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint:
+proposition-projection-formula-rational-coefficients--1).
 -/
 
 @[expose] public section
@@ -47,7 +48,7 @@ private theorem localizing_inverseImage
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro I G hG h
   let := hG
-  have hcol : P (colimit (G ⋙ F)) := hP.2.2 (G ⋙ F) inferInstance h
+  have hcol : P (colimit (G ⋙ F)) := hP.prop_colimit (G ⋙ F) inferInstance h
   exact P.prop_of_iso (preservesColimitIso F G).symm hcol
 
 private theorem localizing_tensor_closed
@@ -166,7 +167,8 @@ private theorem constantModel_tensor_transport
 and its localizing closure is closed under derived tensor.
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint: det-thm-sf-pf-field-tensor).
+`sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md` (blueprint:
+proposition-projection-formula-rational-coefficients--1).
 
 The coefficient hypothesis `hΛ` identifies `Λ` with the condensed ring of `E` or of the
 finite-subextension-valued `Q̄_ℓ` as commutative monoid objects (an isomorphism in `Mon`), so
@@ -189,8 +191,7 @@ Proof:
 -/
 theorem constantModelBoundedConstructible_derivedTensor
     (ℓ : ℕ) [Fact ℓ.Prime]
-    {k : Type u} [Field k] (p : ℕ) [CharP k p]
-    (hp : 0 < p) (hpl : p ≠ ℓ)
+    {k : Type u} [Field k] (p : ℕ) [CharP k p] (hpl : p ≠ ℓ)
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -225,7 +226,6 @@ theorem constantModelBoundedConstructible_derivedTensor
   let : LocallyOfFiniteType XOver.hom := inferInstanceAs (LocallyOfFiniteType aX)
   let : QuasiCompact XOver.hom := inferInstanceAs (QuasiCompact aX)
   let : IsSeparated XOver.hom := inferInstanceAs (IsSeparated aX)
-  have hEq := (finiteCoefficientDescentTwoColimit k p ℓ hp hpl X).2.2.2
   have hcanonicalE (E : PadicAlgCl.FiniteIntermediateField ℓ)
       (heq : constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
         boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X)) :
@@ -256,13 +256,17 @@ theorem constantModelBoundedConstructible_derivedTensor
       have : IsIso φ := inferInstanceAs (IsIso e.inv.hom)
       exact constantModel_tensor_transport
         (Λ := Profinite.continuousMapRingObj E) (Λ' := Λ) φ X
-        (hcanonicalE E (hEq.1 E).1)
+        (hcanonicalE E
+          (constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E
+            X))
     · obtain ⟨e⟩ := hΛ
       let φ := e.inv.hom
       have : IsIso φ := inferInstanceAs (IsIso e.inv.hom)
       exact constantModel_tensor_transport
         (Λ := Profinite.padicAlgClRingObj ℓ) (Λ' := Λ) φ X
-        (hcanonical hEq.2.1.1)
+        (hcanonical
+          (constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ
+            X))
   refine ⟨hbc, ?_⟩
   let : BraidedCategory (DerivedCategory (Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=

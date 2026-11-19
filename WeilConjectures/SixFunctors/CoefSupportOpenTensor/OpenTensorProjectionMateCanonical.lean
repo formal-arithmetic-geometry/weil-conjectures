@@ -298,8 +298,6 @@ private theorem projection_chain_adjunct
 
 attribute [local irreducible] coefficientTotalTensor
 
-set_option maxHeartbeats 400000 in
--- The localized tensor-model calculation needs extra elaboration heartbeats.
 /-- The canonical adjunction-transpose projection identity on resolving pairs.
 The one-flat comparisons agree with the simultaneous K-flat models; both input
 complexes are flat-term K-flat representatives. Source: Stacks 0GL1, 07A4 and

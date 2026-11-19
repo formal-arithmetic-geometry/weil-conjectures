@@ -25,6 +25,10 @@ import WeilConjectures.AlgebraicGeometry.EventuallyProper
 import WeilConjectures.AlgebraicGeometry.IsOpenImmersion.OpenImmersionInverseLimitDescent
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.DescendSmoothQcqs
 import Mathlib.Order.Filter.AtTopBot.Finite
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Data.Fintype.Shrink
 
 /-!
 # Common-stage descent of finite chains with a finite comparison

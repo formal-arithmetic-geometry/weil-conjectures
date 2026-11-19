@@ -210,7 +210,7 @@ base change map `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on the unbounded deri
 
 This is the unbounded upgrade of the smooth base change theorem
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth` (blueprint
-`sk-thm-smooth-base-change`), by the argument of
+`theorem-smooth-base-change-classical-torsion--1`), by the argument of
 `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`: the
 underived base change map is an isomorphism (`isIso_baseChangeMap_of_smooth`), `g'^*` of an
 injective sheaf is `f'_*`-acyclic (`rightAcyclic_upperStar_of_smooth`), and `f'_*` has pointwise

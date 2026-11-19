@@ -32,9 +32,9 @@ The proof follows the Stacks project:
 5. Thus `T = D` works: `S → D` is faithfully flat ind-étale and `R → C → D` is ind-étale.
 
 The ring `D` is `Algebra.WeaklyEtale.refinement R S` (blueprint
-`def-weil-pbc-weak-etale-refinement`), and its properties are
+`theorem-pro-etale-refinements-weakly-etale`), and its properties are
 `Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`
-(blueprint `thm-weil-pbc-weak-etale-refinement`).
+(blueprint `theorem-pro-etale-refinements-weakly-etale--1`).
 -/
 
 @[expose] public section
@@ -93,7 +93,6 @@ end ResidueField
 
 section BaseChangeSurjective
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- The faithful flatness of `κ(q)` over `κ(p)` goes through the residue field algebra
 -- instances on localizations, which makes the instance search exceed the default limit.
 /-- If `Spec A → Spec R` is surjective, so is any base change `Spec (S ⊗[R] A) → Spec S`.
@@ -205,7 +204,7 @@ noncomputable def refinementIdeal : Ideal (WStrictLocalization R ⊗[R] S) :=
     (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))
 
 /-- The canonical refinement of an `R`-algebra `S` (blueprint
-`def-weil-pbc-weak-etale-refinement`): the w-localization of `C ⊗[R] S` along
+`theorem-pro-etale-refinements-weakly-etale`): the w-localization of `C ⊗[R] S` along
 `J · (C ⊗[R] S)`, where `C = WStrictLocalization R` and `J ⊆ C` cuts out the closed points of
 `Spec C`. If `S` is weakly étale over `R`, it is faithfully flat and ind-étale over `S`, and
 ind-étale over `R` (`Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`). -/
@@ -268,8 +267,8 @@ attribute [local instance] Algebra.TensorProduct.rightAlgebra
 variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
 
 open WStrictLocalization in
-/-- **Stacks 097Z** (blueprint `thm-weil-pbc-weak-etale-refinement`): if `S` is a weakly étale
-`R`-algebra, its canonical refinement `Algebra.WeaklyEtale.refinement R S` is ind-étale and
+/-- **Stacks 097Z** (blueprint `theorem-pro-etale-refinements-weakly-etale--1`): if `S` is a weakly
+étale `R`-algebra, its canonical refinement `Algebra.WeaklyEtale.refinement R S` is ind-étale and
 faithfully flat over `S`, and ind-étale over `R`. -/
 theorem Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement [Algebra.WeaklyEtale R S] :
     Algebra.IndEtale S (refinement R S) ∧ Module.FaithfullyFlat S (refinement R S) ∧

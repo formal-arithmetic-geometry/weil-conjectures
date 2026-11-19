@@ -127,7 +127,7 @@ theorem isZero_upperStar_obj_upperShriek_obj_lowerShriek_obj_padicIntegers
   refine (L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E 1)) g'.left)).mapIso
     (asIso (((mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
       (Etale.rightDerivedUpperShriekAdjunction _ f.left)
-      (TwoSquare.mk _ _ _ _ γf.inv)).natTrans.app _)) ≪≫ ?_)
+      (TwoSquare.mk _ _ _ _ γf.inv)).app _)) ≪≫ ?_)
   exact (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E 1) f.left).mapIso (γj.app M)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

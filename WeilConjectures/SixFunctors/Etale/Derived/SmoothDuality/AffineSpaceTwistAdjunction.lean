@@ -15,14 +15,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 For a normalized Tate twist and every scheme `S` on which the exponent of `Λ` is invertible, the
 projection `p_d : 𝔸^d_S ⟶ S` satisfies `Rp_{d!} ⊣ Lp_d^*(d)[2d]`
 (`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`, blueprint
-`cor-amb-affine-space-adjunction`, `sk-lem-geo-affine-local`).
+`lemma-affine-space-etale-localization--1`, `lemma-affine-space-etale-localization`).
 
 The proof composes *twisted adjunctions* `Rf_! ⊣ Lf^*(a)[2a]`
 (`AlgebraicGeometry.Etale.nonempty_adjunction_twistShift_comp`): étale morphisms have one with
 `a = 0` (`Rf_!` is the extension by zero, left adjoint to `Lf^*`), the projective line
-`q : ℙ¹_S ⟶ S` has one with `a = 1` (`thm-amb-p1-adjunction`), so the affine line, which is the
-standard chart `𝔸¹_S ⊆ ℙ¹_S` followed by `q`, has one with `a = 1`, and affine spaces follow by
-induction through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`.
+`q : ℙ¹_S ⟶ S` has one with `a = 1` (`proposition-adjunction-projective-line--1`), so the affine
+line, which is the standard chart `𝔸¹_S ⊆ ℙ¹_S` followed by `q`, has one with `a = 1`, and affine
+spaces follow by induction through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`.
 
 ## Main statements
 
@@ -163,7 +163,7 @@ theorem nonempty_adjunction_twistShift_of_etale {X Y : Scheme.{u}} [HasInvertibl
 
 /-- **The projective-line adjunction** `Rq_! ⊣ Lq^*(1)[2]` for `q : ℙ¹_S ⟶ S` and a normalized
 Tate twist, over any scheme `S` on which the exponent of `Λ` is invertible
-(blueprint `thm-amb-p1-adjunction`; it is part of
+(blueprint `proposition-adjunction-projective-line--1`; it is part of
 `AlgebraicGeometry.Etale.projectiveLineAdjunctionBaseChange_of_isNormalized`). -/
 theorem nonempty_adjunction_projectiveLine [HasTateTwist.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
@@ -193,7 +193,7 @@ theorem nonempty_adjunction_affineLine [HasTateTwist.IsNormalized Λ] (S : Schem
     (by norm_num) (nonempty_adjunction_twistShift_of_etale Λ _ rfl)
     (nonempty_adjunction_projectiveLine Λ S)
 
-/-- Blueprint `cor-amb-affine-space-adjunction`: affine-space ambient adjunction.
+/-- Blueprint `lemma-affine-space-etale-localization--1`: affine-space ambient adjunction.
 
 For the projection `p_d : 𝔸^d_S ⟶ S` of relative affine space over a scheme `S` on which the
 exponent of `Λ` is invertible, on the entire derived categories of étale sheaves of
@@ -201,7 +201,7 @@ exponent of `Λ` is invertible, on the entire derived categories of étale sheav
 
 `Rp_{d!} ⊣ p_d^*(d)[2d]`.
 
-This is also clause 1 of `sk-lem-geo-affine-local`. For `d = 0` the
+This is also clause 1 of `lemma-affine-space-etale-localization`. For `d = 0` the
 projection is an isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the
 composite of the affine-line projection over `𝔸^d_S` and of `p_d`, and twisted adjunctions
 compose (`AlgebraicGeometry.Etale.nonempty_adjunction_twistShift_comp`). -/

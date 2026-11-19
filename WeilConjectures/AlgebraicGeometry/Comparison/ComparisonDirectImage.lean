@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 # The canonical comparison for bounded below direct images
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-prop-weil-pbc-comparison-direct-image; Stacks Project, Tag 099R
-(blueprint: prop-weil-pbc-comparison-direct-image).
+theorem-comparison-direct-images--1; Stacks Project, Tag 099R
+(blueprint: theorem-comparison-direct-images--1).
 
 The comparison is the existing derived base-change transformation of the canonical
 underived mate. The three statements give invertibility, identity compatibility and
@@ -31,8 +31,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical derived composition identification on Etale sheaves, with the
 injective-preservation instance supplied by the exact inverse-image adjunction.
-Source: blueprint prop-weil-pbc-comparison-direct-image, final proof paragraph;
-Stacks, Tag 099R (blueprint: prop-weil-pbc-comparison-direct-image). -/
+Source: blueprint theorem-comparison-direct-images--1, final proof paragraph;
+Stacks, Tag 099R (blueprint: theorem-comparison-direct-images--1). -/
 noncomputable def etaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}} (f : U ⟶ V) (g : V ⟶ W) :
     (Etale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus ⋙
@@ -47,8 +47,8 @@ noncomputable def etaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ
 
 /-- The canonical derived composition identification on ProEtale sheaves, with the
 injective-preservation instance supplied by the exact inverse-image adjunction.
-Source: blueprint prop-weil-pbc-comparison-direct-image, final proof paragraph;
-Stacks, Tag 099R (blueprint: prop-weil-pbc-comparison-direct-image). -/
+Source: blueprint theorem-comparison-direct-images--1, final proof paragraph;
+Stacks, Tag 099R (blueprint: theorem-comparison-direct-images--1). -/
 noncomputable def proEtaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}} (f : U ⟶ V) (g : V ⟶ W) :
     (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus ⋙
@@ -62,8 +62,8 @@ noncomputable def proEtaleComparisonDirectImageCompIso (Λ : Type (u + 1)) [Ring
     (ProEtale.lowerStarComp (ModuleCat.{u + 1} Λ) f g)
 
 /-- The canonical comparison for a quasi-compact quasi-separated morphism is invertible.
-Source: blueprint prop-weil-pbc-comparison-direct-image; Stacks, Tag 099R
-(blueprint: prop-weil-pbc-comparison-direct-image).
+Source: blueprint theorem-comparison-direct-images--1; Stacks, Tag 099R
+(blueprint: theorem-comparison-direct-images--1).
 
 Proof: take the mate of the pulled-back etale counit using the pullback comparison.
 Exact inverse images and bounded below injective representatives keep both sides in D+.
@@ -366,8 +366,8 @@ private theorem derived_identity {C D : Type*} [Category* C] [Category* D]
   exact hL
 
 /-- Identity compatibility of the canonical derived comparison.
-Source: blueprint prop-weil-pbc-comparison-direct-image, final proof paragraph
-(blueprint: prop-weil-pbc-comparison-direct-image).
+Source: blueprint theorem-comparison-direct-images--1, final proof paragraph
+(blueprint: theorem-comparison-direct-images--1).
 
 Proof: for the identity morphism the defining pulled-back counit mate is the identity
 under the canonical identity identifications. The adjunction triangle identities cancel
@@ -514,8 +514,8 @@ private theorem derived_comp
     δ.mapDerivedCategoryPlus.map_id, Category.id_comp]
 
 /-- Composition compatibility of the canonical derived comparison.
-Source: blueprint prop-weil-pbc-comparison-direct-image, final proof paragraph
-(blueprint: prop-weil-pbc-comparison-direct-image).
+Source: blueprint theorem-comparison-direct-images--1, final proof paragraph
+(blueprint: theorem-comparison-direct-images--1).
 
 Proof: the counit of a composite adjunction is the composite of its two counits under
 associativity. Substitute this into the defining mate formula. Pullback comparison

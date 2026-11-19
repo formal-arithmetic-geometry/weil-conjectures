@@ -418,13 +418,13 @@ theorem proEtaleRingRestrictionPullbackApp_properties :
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
       Category.id_comp]
-    dsimp only [TwoSquare.natTrans, Functor.comp_map]
+    dsimp only [Functor.comp_map]
     simp only [CategoryTheory.Functor.map_id, Category.id_comp]
     unfold proEtaleRingRestrictionPullbackApp
     rfl
   refine ⟨?_, ?_⟩
   · intro M N h
-    simpa only [Functor.comp_map, hs] using s.natTrans.naturality h
+    simpa only [Functor.comp_map, hs] using s.naturality h
   · intro M
     have happ : proEtaleRingRestrictionPullbackApp f RV SV RU SU aV aU cR cS comm M =
         (adjR.homEquiv _ _).symm

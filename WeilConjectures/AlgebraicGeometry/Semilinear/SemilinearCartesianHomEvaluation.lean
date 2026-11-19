@@ -13,8 +13,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Cartesian internal Hom evaluation
 
-Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY,
-07A4, 07A6 and 08J9 (blueprint: lem-coef-semilinear-cartesian-hom-evaluation).
+## References
+
+* Zheng, Construction 4.1 and Proposition 4.17
+* Stacks Tags 06YY, 07A4, 07A6 and 08J9
+* Zheng Proposition 4.17
 -/
 
 @[expose] public noncomputable section
@@ -81,7 +84,7 @@ private theorem closed_evaluation_of_projection
       intro X Y f
       simpa [CoefficientClosedStructure.tensor, MonoidalCategory.tensorRight] using
         μ.inv.naturality (Prod.mkHom f (𝟙 M)))
-  let p := ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ θ.hom)).natTrans
+  let p := ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ θ.hom))
   have hcomponent (P : D) : p.app P = (adj.homEquiv _ _).symm
       (T.tensor.map (Prod.mkHom (adj.unit.app P) (𝟙 (E.obj M))) ≫
         μ.inv.app (L.obj P, M)) := by
@@ -92,7 +95,7 @@ private theorem closed_evaluation_of_projection
     exact hp P
   have : IsIso p := NatIso.isIso_of_isIso_app p
   let β := (mateEquiv (S.adjunction M) (T.adjunction (E.obj M))
-    (TwoSquare.mk _ _ _ _ θ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ θ.hom))
   have hβ : β = conjugateEquiv (adj.comp (S.adjunction M))
       ((T.adjunction (E.obj M)).comp adj) p := by
     have h := iterated_mateEquiv_conjugateEquiv adj adj
@@ -113,9 +116,7 @@ private theorem closed_evaluation_of_projection
 variable (S : SystemScalarCoherence.{c, v, r} J B τ)
   (T : SystemTensorCoherence.{c, v, r} J B τ S)
 
-/-- The cartesian comparison with its evaluation normalization, without a transition law.
-Source: Zheng Proposition 4.17; Stacks 08J9
-(blueprint: lem-coef-semilinear-cartesian-hom-evaluation). -/
+/-- The cartesian comparison with its evaluation normalization, without a transition law. -/
 structure SystemCartesianHomEvaluation where
   /-- The cartesian-input internal-Hom comparison, natural in the second input. -/
   homEvaluation : ∀ (M : DS.{c, v, max c v r} J B τ)
@@ -139,27 +140,7 @@ structure SystemCartesianHomEvaluation where
           (systemRing.{c, v, max c v r} J B τ)).obj (op M, N), M) ≫
         (e.{c, v, max c v r} J B τ n).map (T.closed.evaluation M N)
 
-/-- Internal Hom evaluates on a cartesian first input, preserving its actual evaluation.
-Source: Zheng Construction 4.1 and Proposition 4.17; Stacks 08J9
-(blueprint: lem-coef-semilinear-cartesian-hom-evaluation).
-Proof: define E_n F at q ≤ n by extension of scalars from B_n to B_q,
-and at q > n by zero. A map F to M_n extends uniquely by applying the
-system transition and then multiplying by the coefficient; this constructs
-E_n left adjoint to evaluation. K-flat resolutions derive this adjunction:
-L_n is E_n on flat-term K-flat representatives, and evaluation is exact.
-For cartesian M, the adjunction unit constructs
-L_n(P tensor M_n) to L_n P tensor M. On representatives its q-component
-below n is the tensor of P reduced to q with the cartesian reduction of M;
-above n it is the unique map between zero objects. These are isomorphisms,
-so componentwise cohomology makes the constructed projection map invertible.
-The chain of adjunctions
-Hom(P,e_n Hom(M,N)) = Hom(L_n P,Hom(M,N))
-= Hom(L_n P tensor M,N) = Hom(L_n(P tensor M_n),N)
-= Hom(P tensor M_n,N_n) = Hom(P,Hom(M_n,N_n))
-is natural in P and N. Yoneda gives homEvaluation, and transposing its
-defining chain at the identity gives precisely homEvaluation_evaluation.
-This uses the counit map on systems and never infers equality from evaluation.
-The empty site and zero inputs give the same adjunction and zero comparisons. -/
+/-- Internal Hom evaluates on a cartesian first input, preserving its actual evaluation. -/
 theorem systemCartesianHomEvaluation_nonempty :
     Nonempty (SystemCartesianHomEvaluation.{c, v, r} J B τ S T) := by
   classical

@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimi
 Let `X` be quasi-compact and quasi-separated and `j : U ⟶ X` a quasi-compact open immersion with
 closed complement `i : Z ⟶ X`. The extension by zero `j_!` of pro-étale sheaves of modules preserves
 products (`AlgebraicGeometry.ProEtale.isIso_piComparison_openImmersionLowerShriek`, part (3) of
-blueprint `det-sf-open-closed-extension-zero-limits`): the comparison map
+blueprint `proposition-extension-zero-restriction-closed-subscheme`): the comparison map
 `j_! ∏ Nₐ ⟶ ∏ j_! Nₐ` is an isomorphism after `j^*`, since `j^* j_! = 𝟭`, and after `i^*`, where
 both sides vanish since `i^*` preserves products
 (`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_of_isCompl`).
@@ -45,7 +45,7 @@ lemma _root_.CategoryTheory.Limits.map_piComparison_comp_piComparison {C D E : T
 variable {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
   (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
-/-- Blueprint `det-sf-open-closed-extension-zero-limits`, part (3): let `X` be
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (3): let `X` be
 quasi-compact and quasi-separated and `j : U ⟶ X` a quasi-compact open immersion with closed
 complement `i`. The
 extension by zero `j_!` of pro-étale sheaves of modules preserves products. -/

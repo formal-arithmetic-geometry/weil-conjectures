@@ -258,7 +258,7 @@ paths are the same map, the two braiding paths carry the same Koszul sign, and t
 coefficient unit is preserved. Tensor-model descent and naturality extend these
 equalities to all constructible objects. The zero and empty-scheme cases are
 included by the same generator formulas.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-tensor-family-tensor-constraints).
 -/
 theorem podReindexingTensorFamilyTensorConstraints

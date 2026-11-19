@@ -22,7 +22,7 @@ triangle
 
 `Ri_* Ri^! K ⟶ K ⟶ Rj_* Lj^* K ⟶ (Ri_* Ri^! K)[1]`
 
-(blueprint `lem-exc-proetale-support-triangle`). No constructibility is involved.
+(blueprint `lemma-local-cohomology-right-adjoint--2`). No constructibility is involved.
 
 The proof is formal from the following sheaf-level facts:
 
@@ -46,7 +46,7 @@ then `Lj^* K' = 0`, so `K'` lies in the essential image of `Ri_*`, and
 - `AlgebraicGeometry.ProEtale.subsingleton_hom_shift_rightDerivedFunctor_lowerStar`:
   `Hom((Ri_* M)[n], Rj_* N) = 0`.
 - `AlgebraicGeometry.ProEtale.exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit`:
-  the closed-support triangle (blueprint `lem-exc-proetale-support-triangle`).
+  the closed-support triangle (blueprint `lemma-local-cohomology-right-adjoint--2`).
 -/
 
 @[expose] public section
@@ -135,7 +135,7 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_rightDerivedFunctor_lowerStar [Quas
     M).of_iso (D((j)^*[ModuleCat.{u + 1} R]).mapIso
       (((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctorIsoMapDerivedCategory.app M))
 
-/-- Blueprint `lem-exc-proetale-support-triangle`: Pro-etale closed-support triangle before
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
 constructible restriction (the vanishing used in the proof).
 
 For a closed immersion `i` whose range is the complement of the range of the quasi-compact open
@@ -210,7 +210,7 @@ theorem rightDerivedFunctor_lowerStar_essImage_of_isZero [QuasiCompact j]
     ⟨((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
       (asIso (adj.unit.app E)).symm⟩⟩
 
-/-- Blueprint `lem-exc-proetale-support-triangle`: Pro-etale closed-support triangle before
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
 constructible restriction
 
 Let `i : Z ⟶ X` be a closed immersion whose range is the complement of the range of the
@@ -275,7 +275,7 @@ noncomputable abbrev closedSupportTriangle [QuasiCompact j]
   Triangle.mk ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit.app K)
     ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) j).unit.app K) w
 
-/-- Blueprint `lem-exc-proetale-support-triangle`: Pro-etale closed-support triangle before
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
 constructible restriction (uniqueness of the connecting map).
 
 The connecting map of the closed-support triangle
@@ -304,7 +304,7 @@ theorem existsUnique_distTriang_closedSupportTriangle [QuasiCompact j]
   erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] at h
   exact h
 
-/-- Blueprint `lem-exc-proetale-support-triangle`: Pro-etale closed-support triangle before
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pro-etale closed-support triangle before
 constructible restriction (naturality).
 
 For `φ : K ⟶ K'` and distinguished closed-support triangles of `K` and `K'`, the triple

@@ -144,8 +144,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- A bounded constructible complex over the first residue ring `𝒪_E/ϖ_E` has finite Tor
-amplitude. Hence the finite Tor clause in (2) of `sk-prop-integral-criterion` holds
-automatically, `𝒪_E/ϖ_E` being a field.
+amplitude. Hence the finite Tor clause in (2) of `proposition-integral-constructibility-criterion`
+holds automatically, `𝒪_E/ϖ_E` being a field.
 Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 0651 and 08FC
 (auxiliary; not a blueprint node).
 

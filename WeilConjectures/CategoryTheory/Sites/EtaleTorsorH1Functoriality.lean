@@ -30,9 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace CategoryTheory.Sheaf.Torsor
 
-set_option maxHeartbeats 600000 in
--- The naturality of the pullback comparison `σ` identifies sections of the pushforward of the
--- sheaf inverse image with those of `Scheme.etaleSetPullback`, which unfolds both constructions.
 /-- The canonical torsor class is compatible with scheme pullback and change of coefficients.
 The inverse-image torsor is identified with the sheafified set inverse image, with its action
 specified by equivariance on the sections pulled back by the adjunction units. The contracted
@@ -43,8 +40,8 @@ Source: Stacks Project, Cohomology on Sites, Lemma 03AJ.
 
 Proof:
 1. Represent the class of T by the connecting image of 1 in the canonical extension
-0 → G → E_T → ℤ → 0 (`lem-sc-torsor-h1`). Pullback identifies this extension with the
-extension of the set inverse image, whose fibre over 1 is the inverse-image torsor
+0 → G → E_T → ℤ → 0 (`lemma-cohomology-multiplicative-group--3`). Pullback identifies this extension
+with the extension of the set inverse image, whose fibre over 1 is the inverse-image torsor
 (`lem-sc-etale-torsor-inverse-image-extension`).
 2. Pullback commutes with the connecting maps
 (`lem-weil-pbc-pullback-cohomology-long-exact-ladder`, clause 3) and in degree zero pulls back
@@ -56,8 +53,8 @@ representative description gives the asserted equality of classes under scheme p
 4. The maps (φ, E_T → pushout, id_ℤ) form a morphism of short exact sequences. Connecting
 maps are natural (`lem-weil-pbc-right-derived-universal-delta-functor`), so H¹(φ) sends the
 boundary of 1 to the boundary of 1 for the pushout. The canonical classification identifies
-these boundaries with the two torsor classes (`lem-sc-torsor-h1`), and the coefficient map
-is that of `lem-weil-pbc-cohomology-pullback-functorial`. -/
+these boundaries with the two torsor classes (`lemma-cohomology-multiplicative-group--3`), and the
+coefficient map is that of `proposition-cohomology-p-1-over-henselian--1`. -/
 theorem etale_torsor_h1_functoriality :
     (∀ (X Y : Scheme.{u}) (f : Y ⟶ X)
       (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (T : Torsor G),
@@ -107,11 +104,14 @@ theorem etale_torsor_h1_functoriality :
         T'.sheaf.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop)) :=
       fun W x ↦ eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop))
         (ε.hom.app W x)
+    -- Specify the morphism and section to avoid inferring them through sheafification.
     have hσ : ∀ ⦃W V : X.Etaleᵒᵖ⦄ (h : W ⟶ V) (x : T.sheaf.obj.obj W),
         T'.sheaf.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map h.unop).op (σ W x) =
           σ V (T.sheaf.obj.map h x) := fun W V h x ↦
-      ((NatTrans.naturality_apply eT.hom.hom _ _).symm.trans
-        (congrArg _ (NatTrans.naturality_apply ε.hom h x).symm))
+      (NatTrans.naturality_apply eT.hom.hom
+        ((MorphismProperty.Over.pullback @Etale ⊤ f).map h.unop).op (ε.hom.app W x)).symm.trans
+          (congrArg (eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V.unop)))
+            (NatTrans.naturality_apply ε.hom h x).symm)
     have key := Etale.classH1_eq_map_cohomologyMap_of_equivariant f
       ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G) T T' σ hσ
       (fun W a x ↦ heT W.unop a x)

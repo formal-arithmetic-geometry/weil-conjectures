@@ -316,16 +316,16 @@ private theorem stratumScalarIso_exists (n : ℕ) :
     (d.projection X n) (d.projection Y n) (d.integralRingIso f) (d.finiteRingIso f n)
     (d.projection_comm f n)
   let β := TwoSquare.mk _ _ _ _ b
-  have hm : (mateEquiv az ar β).natTrans = t.hom :=
+  have hm : mateEquiv az ar β = t.hom :=
     restrictionPullback_mate f _ _ _ _ _ _ _ _ _
   let γ := (mateEquiv av au).symm β
-  have hγ : IsIso γ.natTrans := by
+  have hγ : IsIso γ := by
     have hmate : mateEquiv av au γ = β := Equiv.apply_symm_apply _ _
-    have : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
+    have : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ) := by
       rw [← iterated_mateEquiv_conjugateEquiv av au ar az γ, hmate, hm]
       infer_instance
-    exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ.natTrans
-  let e := (asIso γ.natTrans).symm
+    exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ
+  let e := (asIso γ).symm
   refine ⟨e, ?_⟩
   intro M
   have h := unit_mateEquiv_symm av au β M
@@ -333,7 +333,7 @@ private theorem stratumScalarIso_exists (n : ℕ) :
     (proEtaleRingRestrictScalars (d.projection Y n)).map (e.hom.app M) = _
   rw [← Category.assoc]
   have hh := (Iso.comp_inv_eq
-    ((proEtaleRingRestrictScalars (d.projection Y n)).mapIso ((asIso γ.natTrans).app M))).2 h
+    ((proEtaleRingRestrictScalars (d.projection Y n)).mapIso ((asIso γ).app M))).2 h
   exact hh
 
 private theorem stratumModuleLevelIso (n : ℕ)
@@ -1201,7 +1201,7 @@ theorem stratumRlimComparison_isIso (hf : IsAdicStratumRestriction f)
     rfl
   let α := (mateEquiv (d.constantRlimAdjunction X) (d.constantRlimAdjunction Y)
     (TwoSquare.mk _ _ _ _
-      (Functor.mapDerivedCategorySquareIso (Functor.compConstIso ℕᵒᵖ F)).hom)).natTrans
+      (Functor.mapDerivedCategorySquareIso (Functor.compConstIso ℕᵒᵖ F)).hom))
   have : IsIso α := by
     exact productPreservingDerivedLimitMate_isIso F (fun _ ↦ inferInstance)
   have hm : stratumRlimComparison d f T = α.app T := by
@@ -1209,7 +1209,7 @@ theorem stratumRlimComparison_isIso (hf : IsAdicStratumRestriction f)
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
-      Functor.comp_obj, TwoSquare.natTrans, Category.id_comp,
+      Functor.comp_obj, Category.id_comp,
       Functor.comp_map, Functor.map_comp, he]
     erw [Category.comp_id]
   rw [hm]

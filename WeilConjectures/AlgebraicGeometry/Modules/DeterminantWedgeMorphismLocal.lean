@@ -21,15 +21,7 @@ open CategoryTheory Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A compatible family of local wedge maps glues to a sheaf morphism.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-(blueprint: lem-sc-determinant-wedge-morphism-glue).
-
-Proof: The local maps have the same displayed formula on restrictions, hence agree on
-overlaps by separatedness of the target sheaf. The sheaf gluing property assembles them
-into one morphism, and the formula is preserved after restriction and therefore holds
-on every open. -/
+/-- A compatible family of local wedge maps glues to a sheaf morphism. -/
 theorem determinant_wedgeMorphism_of_local_data {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁]

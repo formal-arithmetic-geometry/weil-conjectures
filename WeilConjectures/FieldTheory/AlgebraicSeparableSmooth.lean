@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Etale.Field
 An algebraic separable field extension `L / K` is the filtered union of its finite separable
 subextensions, which are finite étale, hence smooth, `K`-algebras
 (`Algebra.exists_smooth_subalgebra_of_isSeparable`, blueprint
-`lem-kun-algebraic-separable-smooth`). The general separable case is
+`corollary-open-direct-image-over-field--2`). The general separable case is
 `FieldTheory.separable_extension_is_filtered_colimit_smooth`.
 -/
 
@@ -23,7 +23,7 @@ namespace Algebra
 
 variable {K L : Type*} [Field K] [Field L] [Algebra K L]
 
-/-- Blueprint `lem-kun-algebraic-separable-smooth`: an algebraic separable extension `L / K`
+/-- Blueprint `corollary-open-direct-image-over-field--2`: an algebraic separable extension `L / K`
 is the filtered union of its finite separable subextensions, which are finite étale, hence
 smooth, `K`-algebras: every finite subset of `L` lies in a finite type smooth (indeed étale)
 `K`-subalgebra of `L`.

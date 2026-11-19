@@ -13,9 +13,9 @@ public import WeilConjectures.TraceFormula.Specialization.Basic
 
 Let `c` be an endocorrespondence over `k` (the generic fibre) and `c'` one over `k'` (the special
 fibre), with fixed loci `ι : F ⟶ C` and `ι' : F' ⟶ C'`. The specialization data
-`TraceSpecialization` of blueprint `sk-prop-tf-trace-specialization` consists of specialization
-functors `Ψ_C, Ψ_F, Ψ_X, Ψ_{X×X}`, units `σ`, dualizing maps `θ` and exchange maps `χ`, `β`, with
-three coherences.
+`TraceSpecialization` of blueprint `proposition-specialization-trace-class` consists of
+specialization functors `Ψ_C, Ψ_F, Ψ_X, Ψ_{X×X}`, units `σ`, dualizing maps `θ` and exchange maps
+`χ`, `β`, with three coherences.
 
 The specialization of the fixed locus can be read off the specialization of the support: since
 `ι` and `ι'` are closed immersions, `Ψ_F ≅ Lι'^* Ψ_C Rι_*` for nearby cycles, through the proper
@@ -189,8 +189,8 @@ variable (σC : 𝟙_ _ ⟶ ΨC.obj (𝟙_ _))
   (θX : ΨX.obj (dualizingComplex' ℓ X) ⟶ dualizingComplex' ℓ X')
 
 /-- **The specialization data determined by the support** (blueprint
-`sk-prop-tf-trace-specialization`): given the specialization `Ψ_C` of the support with its unit
-`σ_C`, specializations `Ψ_X`, `Ψ_{X×X}` with a transformation `χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X`,
+`proposition-specialization-trace-class`): given the specialization `Ψ_C` of the support with its
+unit `σ_C`, specializations `Ψ_X`, `Ψ_{X×X}` with a transformation `χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X`,
 the exceptional exchange `β_c : Ψ_C Rc^! ⟶ Rc'^! Ψ_{X×X}` of the support map and a dualizing map
 `θ_X`, the specialization data with
 * `Ψ_F = Lι'^* Ψ_C Rι_*` and `χ_ι` the unit of `Lι'^* ⊣ Rι'_*`;

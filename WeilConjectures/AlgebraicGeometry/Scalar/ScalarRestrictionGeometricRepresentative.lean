@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # The exact restriction and geometric representative square
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6
-(blueprint: lem-pur-scalar-restriction-geometric-representative).
+## References
+
+* Stacks 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -27,13 +28,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory upperStar lowerStar
 
 /-- Exact restriction commutes with geometric representatives, with the ordinary
-restriction/pullback square as its complex representative.
-Source: Stacks 07A4 and 07A6
-(blueprint: lem-pur-scalar-restriction-geometric-representative).
-Proof: start with the exact derived square in ScalarPullbackRepresentativeData.
-Precompose with the image of the inverse source restriction-factor iso. Cancel
-its source hom/inverse pair and the target inverse/hom pair. Functoriality then
-gives the displayed forward representative equation. -/
+restriction/pullback square as its complex representative. -/
 theorem scalarRestrictionPullbackIso_geometric_representative
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

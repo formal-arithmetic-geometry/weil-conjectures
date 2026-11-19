@@ -19,13 +19,14 @@ Let `K` be a field, `n` an integer invertible in `K` and killing the coefficient
 `t : T ⟶ S'` from an affine scheme and `Y = X' ×_{S'} T`, the exchange morphism
 `p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism for every sheaf `F` pulled back from
 `Spec K` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`, the general
-form of blueprint `lem-kun-0f1i-normal`): writing `Γ(S')` and `Γ(T)` as directed unions of
-finite type `K`-subalgebras, `t` is a cofiltered limit of morphisms of schemes of finite type
-over `K`, and the limit theorem (blueprint `lem-kun-0ezt`) reduces the claim to
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`.
+form of blueprint `lemma-kunneth-finite-direct-image--1`): writing `Γ(S')` and `Γ(T)` as directed
+unions of finite type `K`-subalgebras, `t` is a cofiltered limit of morphisms of schemes of finite
+type over `K`, and the limit theorem (blueprint `corollary-open-direct-image-over-field--2`) reduces
+the claim to `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`.
 
 Taking `T = Spec L` for a separably closed field `L`, the direct images along `t` vanish in
-positive degrees (blueprint `lem-kun-0ezp`), whence blueprint `lem-kun-0f1i-normal`:
+positive degrees (blueprint `lemma-sheaves-finite-support-finite-morphisms--1`), whence blueprint
+`lemma-kunneth-finite-direct-image--1`:
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`.
 
 ## Main statements
@@ -164,8 +165,9 @@ over a field `K`, for the base changes `Xᵢ = X ×_K Sᵢ` of a scheme `X` of f
 Let `t : T ⟶ S'` be the limit of the `gᵢ` (with affine transition maps), `X' = X ×_K S'` and
 `Y = X' ×_{S'} T`. Then the exchange morphism `p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an
 isomorphism for every sheaf `F` pulled back from `Spec K`: by the limit theorem (blueprint
-`lem-kun-0ezt`, `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`) this reduces
-to the stages, where it is `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`. -/
+`corollary-open-direct-image-over-field--2`,
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`) this reduces to the stages, where
+it is `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)
@@ -278,8 +280,8 @@ noncomputable def Scheme.isLimitConeSpecOfMonotone (Z : Scheme.{u}) [IsAffine Z]
   exact (Z.isoSpec_inv_toSpecΓ_assoc
     (Spec.map (CommRingCat.ofHom (F i.unop).val.toRingHom))).symm
 
-/-- The general form of blueprint `lem-kun-0f1i-normal`, for given `K`-algebra structures on
-`Γ(S')` and `Γ(T)` compatible with `s` and `t`; see
+/-- The general form of blueprint `lemma-kunneth-finite-direct-image--1`, for given `K`-algebra
+structures on `Γ(S')` and `Γ(T)` compatible with `s` and `t`; see
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : Type u}
     [Field K] {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
@@ -349,8 +351,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field Λ a n hn hΛ g w hS hT s hs t ht
     htc hts b p' hpb sq q G
 
-/-- Blueprint `lem-kun-0f1i-normal` (general form): base change for `X ×_K S' ⟶ S'` along a
-morphism of affine schemes.
+/-- Blueprint `lemma-kunneth-finite-direct-image--1` (general form): base change for `X ×_K S' ⟶ S'`
+along a morphism of affine schemes.
 
 Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, `X` a scheme of finite type
 over `K`, `S'` an affine `K`-scheme, `X' = X ×_K S'`, `t : T ⟶ S'` a morphism from an affine
@@ -378,7 +380,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
   rw [hK, Spec.map_comp, ← Scheme.toSpecΓ_naturality_assoc, toSpecΓ_SpecMap_ΓSpecIso_inv,
     Category.comp_id]
 
-/-- Blueprint `lem-kun-0f1i-normal`: the normal integral case.
+/-- Blueprint `lemma-kunneth-finite-direct-image--1`: the normal integral case.
 
 Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, and `X` a scheme of finite
 type over `K`. Let `X' = X ×_K S'` be the base change of `X` to an affine integral scheme `S'`

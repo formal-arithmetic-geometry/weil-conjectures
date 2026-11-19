@@ -12,13 +12,15 @@ import Mathlib.RingTheory.KrullDimension.Field
 import Mathlib.RingTheory.KrullDimension.Regular
 import WeilConjectures.RingTheory.HomogeneousIndependenceLocalization
 import WeilConjectures.RingTheory.HomogeneousIndependenceQuotient
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Height from homogeneous independence at a rational point
 
 Source: the invariant-derivation argument in Waterhouse, *Introduction to Affine Group
 Schemes*, §11.4, as recorded in `WeilConjectures.RingTheory.HopfAlgebra.Cartier`, and the
-local dimension step of blueprint `lem-wf-same-lie-closed-subgroup`, clause (2).
+local dimension step of blueprint `lemma-connected-components-images-homomorphisms--3`, clause (2).
 (blueprint: lem-wf-height-of-homogeneous-independence).
 -/
 
@@ -102,8 +104,8 @@ private theorem local_dimension_of_homogeneous_independence
 
 /-- A polynomial associated graded ring has local dimension the number of its variables.
 
-Source: the local dimension step of `lem-wf-same-lie-closed-subgroup`, clause (2), with
-regularity obtained from the homogeneous independence argument recorded in
+Source: the local dimension step of `lemma-connected-components-images-homomorphisms--3`, clause
+(2), with regularity obtained from the homogeneous independence argument recorded in
 `WeilConjectures.RingTheory.HopfAlgebra.Cartier` (Waterhouse, §11.4).
 
 Proof in words: put `I = ker ε`. The map `ε` is onto, since it is a `k`-algebra map to

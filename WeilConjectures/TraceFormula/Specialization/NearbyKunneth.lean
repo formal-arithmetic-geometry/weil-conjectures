@@ -18,7 +18,8 @@ Let `M` and `N` be models of finite type over the strictly henselian trait `S = 
 `φ₁ : P ⟶ M` and `φ₂ : P ⟶ N`
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitProduct`).
 **Gabber's Künneth formula** (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.7;
-blueprint `sk-prop-tf-nearby-external-kunneth`) says that the Künneth map of nearby cycles
+blueprint `proposition-external-kunneth-formula-nearby-cycles`) says that the Künneth map of nearby
+cycles
 ```
 Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)
 ```
@@ -67,10 +68,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Gabber's Künneth formula in every chart dimension** (Illusie, *Autour du théorème de
-monodromie locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`), for every separably
-closed field `k'` (`NearbyCyclesModel.KunnethFormula` with `ℚ̄_ℓ`-coefficients). It is deduced
-from the Künneth formula with `𝒪_E`-coefficients (`NearbyCyclesModel.integralKunnethFormula`)
-through integral models of the coefficients
+monodromie locale*, Thm. 4.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`), for
+every separably closed field `k'` (`NearbyCyclesModel.KunnethFormula` with `ℚ̄_ℓ`-coefficients). It
+is deduced from the Künneth formula with `𝒪_E`-coefficients
+(`NearbyCyclesModel.integralKunnethFormula`) through integral models of the coefficients
 (`NearbyCyclesModel.kunnethFormula_padicAlgCl_of_integral`). -/
 theorem kunnethFormula (n : ℕ) (k' : Type u) [Field k'] [IsSepClosed k']
     [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] :
@@ -78,9 +79,9 @@ theorem kunnethFormula (n : ℕ) (k' : Type u) [Field k'] [IsSepClosed k']
   kunnethFormula_padicAlgCl_of_integral (integralKunnethFormula ℓ n k')
 
 /-- **Gabber's Künneth formula for nearby cycles** (Illusie, *Autour du théorème de monodromie
-locale*, Thm. 4.7; SGA 7 XIII; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product
-`P` over the strictly henselian trait `Spec k'⟦t⟧` of two models `M`, `N` of finite type and
-bounded constructible `A`, `B`, the Künneth map of nearby cycles
+locale*, Thm. 4.7; SGA 7 XIII; blueprint `proposition-external-kunneth-formula-nearby-cycles`): for
+the product `P` over the strictly henselian trait `Spec k'⟦t⟧` of two models `M`, `N` of finite type
+and bounded constructible `A`, `B`, the Künneth map of nearby cycles
 `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)` is an isomorphism. The blueprint node is stated for
 finite `ℓ`-primary coefficients and `D^b_ctf`; the statement here, for bounded constructible
 `ℚ̄_ℓ`-complexes, follows from it by passage to the limit (Bhatt–Scholze, §6.8). The total spaces

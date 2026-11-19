@@ -323,7 +323,7 @@ private theorem brownHypotheses_admissible_small
 No field, characteristic, or separatedness hypothesis is required for this equivalence.
 
 Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
-and det-brown-hypotheses-small, whose hypothesis is that X is Noetherian.
+and lemma-hypotheses-brown-representability--5, whose hypothesis is that X is Noetherian.
 (blueprint: lem-sfb-brown-noetherian-compactness-criterion).
 
 Proof: apply brownHypotheses_admissible_small to the actual admissibility predicate.

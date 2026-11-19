@@ -349,7 +349,7 @@ private theorem reverse_scalar_cube
     pbcComparisonReduction, asIso_hom, pbcComparisonReductionMap, pbcFixedScalarExtension,
     scalarPullbackReverseProEtale, scalarPullbackReverseEtale,
     Category.id_comp, Category.comp_id, Category.assoc] using
-    congrArg (fun t ↦ t.natTrans.app M) h
+    congrArg (fun t ↦ t.app M) h
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -103,7 +103,6 @@ private theorem alternatingCechColumnProjection_isIso
     infer_instance
   exact IsIso.of_isIso_comp_right _ (piComparison E P)
 
-set_option maxHeartbeats 400000 in
 -- Explicit product comparisons require additional elaboration of the composite functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem alternatingCechColumn_quasiIso

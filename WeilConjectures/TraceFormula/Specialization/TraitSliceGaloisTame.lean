@@ -223,7 +223,7 @@ theorem mem_traitGenericSepCompositum_of_pow_eq {n : ℕ} (hn : (n : k') ≠ 0)
   have : NeZero (n : Ω) := ⟨by
     rw [← map_natCast (algebraMap F Ω)]
     exact (_root_.map_ne_zero _).2 hnF⟩
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω n
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω n
   obtain ⟨ω, hω⟩ := IsAlgClosed.exists_pow_nat_eq (algebraMap F Ω tF) hn0
   set φ := traitGenericFieldMap k' K
   have hφt : φ (algebraMap F Ω tF) =

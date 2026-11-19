@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 
 /-! # Geometric computation for normalized section transport
 
-Source: Stacks Project, Tags 06YY, 0D6D and 07A6.
-(blueprint: lem-sfb-quotient-section-pull-transport-geometric-computation)
+## References
+
+* Stacks Project, Tags 06YY, 0D6D and 07A6
+* Stacks 0D6D and 07A6, the geometric computation step of normalized section transport
 -/
 
 @[expose] public noncomputable section
@@ -74,12 +76,7 @@ private theorem native_localization_hom (T : Scheme.{u})
   rfl
 
 -- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
-/-- The fixed geometric comparison commutes with the two localization computation maps.
-Source: Stacks 0D6D and 07A6, the geometric computation step of normalized section transport.
-(blueprint: lem-sfb-quotient-section-pull-transport-geometric-computation).
-Proof: use the fifth clause of the existing sectionDerivedPushpullNormalization theorem,
-in reverse. Its named internal pullback is the same total left derived functor L, and its
-section computation is the canonical mapDerivedCategoryFactors component. -/
+/-- The fixed geometric comparison commutes with the two localization computation maps. -/
 theorem section_pull_transport_geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
     @Eq ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj

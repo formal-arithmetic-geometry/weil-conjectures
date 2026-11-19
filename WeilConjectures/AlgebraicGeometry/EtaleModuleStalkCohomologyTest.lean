@@ -42,13 +42,13 @@ Tag 0DJJ (blueprint: lem-sf-etale-module-stalk-cohomology-test).
 
 Proof: steps 1-6 of the node. First forgetting modules preserves kernels,
 cokernels, images, quotients and cohomology by
-lem-weil-pbc-module-sheaves-colimits-forgetful and
+situation-conventions and
 lem-sp-exact-functor-preserves-homology. Next the action a[m] = [a_V m] is well
 defined on pointed-neighbourhood germs and makes the stalk maps A-linear.
 By prop-weil-pbc-geometric-stalks-exact this module stalk is exact. Applying
 lem-weil-pbc-exact-functor-complex-cohomology gives the natural cohomology
 comparison on unbounded complexes and preservation of quasi-isomorphisms.
-By lem-weil-pbc-exact-functor-derived-factorization it descends to the full
+By situation-conventions it descends to the full
 derived categories, with naturality also for inverses of quasi-isomorphisms.
 If the cohomology sheaf is zero, its stalks and hence the corresponding stalk
 cohomology modules vanish. Conversely, if those modules vanish, the comparison

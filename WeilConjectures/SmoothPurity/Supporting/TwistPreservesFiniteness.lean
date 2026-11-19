@@ -32,8 +32,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Tate twists preserve finiteness conditions
 
-Source: blueprint prop-weil-twist-preserves, order 1802; main-20261015 order 2148
-(blueprint: prop-weil-twist-preserves).
+Source: blueprint definition-tate-twists--10, order 1802; main-20261015 order 2148
+(blueprint: definition-tate-twists--10).
 
 ## Main definitions
 * `TwistReductionMaps`
@@ -65,7 +65,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
 
 /-- The quotient unit in the prescribed first finite line, using the original
 constant-integer tensor construction. Source: blueprint proof, steps 1 and 6
-(blueprint: prop-weil-twist-preserves). -/
+(blueprint: definition-tate-twists--10). -/
 def twistFiniteFirstReductionSection (n : ℕ) (U : S.ProEtᵒᵖ)
     (x : (purTwistIntegralModule S l E).val.obj U) :
     (purTwistFiniteOne S l E n).val.obj U :=
@@ -78,7 +78,7 @@ def twistFiniteFirstReductionSection (n : ℕ) (U : S.ProEtᵒᵖ)
         ((purTwistIntegralQuotient S l E n).hom.app U).hom] x)
 
 /-- Semilinear reductions of all signed completed lines along the actual limit projection.
-Source: blueprint proof, steps 1 and 6 (blueprint: prop-weil-twist-preserves). -/
+Source: blueprint proof, steps 1 and 6 (blueprint: definition-tate-twists--10). -/
 abbrev TwistReductionMaps (n : ℕ) := ∀ m : ℤ,
   integralTwistLine l E S m ⟶
     (scalarReductionRestriction l E S n).obj (finiteCoefficientTwist l E S n m)
@@ -86,7 +86,7 @@ abbrev TwistReductionMaps (n : ℕ) := ∀ m : ℤ,
 /-- The reduction is fixed at zero by the coefficient projection, at one by the
 original quotient tensor, at positive powers by tensoring, and at negative powers
 by the dual evaluation pairing. Thus no arbitrary isomorphism is called canonical.
-Source: blueprint proof, steps 1 and 6 (blueprint: prop-weil-twist-preserves). -/
+Source: blueprint proof, steps 1 and 6 (blueprint: definition-tate-twists--10). -/
 def IsCanonicalTwistReductionMaps (n : ℕ) (c : TwistReductionMaps l E S n) : Prop :=
   (∀ (U : S.ProEtᵒᵖ)
       (a : (completedIntegralCommRingSheafUnrestricted l E S).obj.obj U),
@@ -219,14 +219,14 @@ private theorem finite_twist_constructible (n : ℕ) (m : ℤ)
     ((finiteLineTensor_conditions S _ (finiteCoefficientTwist l E S n m)).2.1 _ (hK.2 i))
 
 /-- The exact preservation and inverse-twist assertions at all four coefficients.
-Source: blueprint node prop-weil-twist-preserves, order 1802; main order 2148
-(blueprint: prop-weil-twist-preserves).
+Source: blueprint node definition-tate-twists--10, order 1802; main order 2148
+(blueprint: definition-tate-twists--10).
 
 Proof plan:
 1. Let $R$ be $(A_{E,n})_S$ or $\widehat{\mathcal O}_{E,S}$. The finite and integral assertions of
 [lem-pur-twist-sheaf-locally-free], clauses 3 and 4, give a covering on which $\Lambda(1)$ is $R$,
 its finite reductions, and the integral membership of $\mathcal O_E(1)$ in $D^b_c$. Apply the
-tensor-power and sheaf-Hom definitions of [def-coefficient-twists-detailed]. On the same covering
+tensor-power and sheaf-Hom definitions of [definition-tate-twists]. On the same covering
 every positive power is $R^{\otimes m}\cong R$, and its dual is $\mathcal Hom_R(R,R)\cong R$. Thus
 $L=\Lambda(m)$ is locally free of rank one for every integer $m$, including $m=0$ and $m<0$. The
 evaluation maps $L\otimes_R L^\vee\to R$ and $L^\vee\otimes_R L\to R$ are isomorphisms: locally
@@ -269,7 +269,7 @@ pbc-site-derived-tensor-descent] applies to the two K-flat flat-term complexes $
 gives $C\otimes_R^LL\cong T_L(C)$. In particular the cohomology formula holds for derived tensor.
 Both $L$ and its dual have amplitude $[0,0]$, and the inverse equivalence shows that $\mathcal
 H^i(C\otimes_R^LL)$ vanishes exactly when $\mathcal H^i(C)$ vanishes. Uses: lem-weil-pbc-exact-
-functor-complex-cohomology, lem-sf-exact-functor-derived-triangulated, lem-pc-kflat-resolution,
+functor-complex-cohomology, situation-conventions, lem-pc-kflat-resolution,
 def-pc-kflat-complex, lem-weil-pbc-site-derived-tensor-descent, lem-pc-sheaf-modules-tensor-
 closed, def-pc-tensor-complex-sheaves.
 
@@ -298,14 +298,14 @@ cohomology formula of step 3 imply that its cohomology vanishes outside $[a,b]$.
 just proved also holds with $L^\vee$ as its line; applying that implication to $C\otimes_R^LL$ and
 using $(C\otimes_R^LL)\otimes_R^LL^\vee\cong C$ proves the converse. Thus the entire Tor interval,
 rather than merely existence of some finite interval, is preserved. This tests all module sheaves
-$M$, not just constructible ones. Uses: def-weil-finite-tor-amplitude, lem-pc-sheaf-modules-
+$M$, not just constructible ones. Uses: definition-constructible-sheaves, lem-pc-sheaf-modules-
 tensor-closed, def-pc-kflat-complex, lem-weil-pbc-site-derived-tensor-descent, lem-pc-kflat-
 resolution.
 
 6. For the integral stage write $R=\widehat{\mathcal O}_{E,S}$, $A_j=(A_{E,j})_S$, and $L=\mathcal
 O_E(m)$. Reducing a trivialization $L|_V\cong R|_V$ gives $L_j=L\otimes_RA_j$ free of rank one
 locally. The canonical base-change maps for tensor powers and their duals are isomorphisms, since
-locally they are the identities on $A_j$; hence step 1 and [def-coefficient-twists-detailed]
+locally they are the identities on $A_j$; hence step 1 and [definition-tate-twists]
 identify $L_j$ with $A_{E,j}(m)$ for every $j$. Choose $P\to C$ as in step 3. The termwise
 rebracketing map $$(P\otimes_RL)\otimes_RA_j\cong(P\otimes_RA_j)\otimes_{A_j}L_j$$ is an
 isomorphism of complexes. The left computes the reduction of $C\otimes_R^LL$, by [def-weil-
@@ -320,7 +320,7 @@ restriction of scalars, the same comparison for a reduction complex $B$ is the t
 $B\otimes_RL\cong B\otimes_{A_j}L_j$; it computes $T_L$ on that reduction since $T_L$ is exact,
 without assuming $B$ is K-flat over $R$. The tensor computations use the ringed-site derived
 tensor of [lem-weil-pbc-site-derived-tensor-descent], so no discrete integral coefficient category
-is substituted. Uses: def-coefficient-twists-detailed, lem-pc-sheaf-modules-tensor-closed, lem-pc-
+is substituted. Uses: definition-tate-twists, lem-pc-sheaf-modules-tensor-closed, lem-pc-
 kflat-resolution, lem-pur-kflat-change-of-rings, lem-weil-pbc-site-derived-tensor-descent, def-
 weil-integral-derived-reduction.
 
@@ -339,7 +339,7 @@ maps as components, and its second map is $1-s$ for that tower, by the compatibi
 step 6. Consequently $T_LC$ is derived complete by precisely the existential Roos-triangle
 condition of [def-weil-derived-complete]. This does not choose a purported unique morphism into a
 derived limit. Taking the line in this quantified argument to be $L^\vee$ proves preservation by
-the inverse twist. Uses: def-weil-derived-complete, lem-sf-exact-functor-derived-triangulated.
+the inverse twist. Uses: def-weil-derived-complete, situation-conventions.
 
 8. For the integral interval clauses, take an arbitrary derived object $C$ whose
 reductions satisfy the displayed common cohomological interval, or the displayed common
@@ -350,10 +350,10 @@ integral-detailed] supplies derived completeness and one cohomological interval 
 reductions. Steps 4 and 6 give bounded constructible reductions of $T_LC$, and step 7
 gives completeness, proving membership in the integral $D^b_c$. If $C$ satisfies the
 integral finite-Tor condition, its reductions have one Tor interval independent of the
-level by [def-weil-finite-tor-amplitude], and steps 5 and 6 preserve it. All statements
+level by [definition-constructible-sheaves], and steps 5 and 6 preserve it. All statements
 hold for the inverse line as well. In particular the integral unit and every signed line
 have the required degree-zero reductions and completeness. Uses: def-weil-derived-
-complete-integral-detailed, def-weil-finite-tor-amplitude, lem-pur-twist-sheaf-locally-free.
+complete-integral-detailed, definition-constructible-sheaves, lem-pur-twist-sheaf-locally-free.
 9. The functors $T_L$ and $T_{L^\vee}$ are exact and $\mathcal O_E$-linear by their tensor
 definitions and the inverse identities of step 2. Applying [lem-weil-twist-rationalization] to the
 scalar localization in [def-weil-rationalization-karoubi] gives inverse functors on $D^b_c(S,E)$
@@ -366,7 +366,7 @@ T\otimes_{R_0}R_H$ for $H=E,F$: substitute $R_H=R_0\otimes_{(\mathbf Z_\ell)_S}(
 and rebracket. Thus [lem-weil-integral-twist-base-change] applies and gives $\mathcal
 O_E(m)\otimes_{R_E}R_F\cong\mathcal O_F(m)$ for every integer $m$, compatibly with evaluation and
 tensor/dual powers. Uses: lem-weil-integral-twist-base-change, lem-pur-twist-sheaf-locally-free,
-def-coefficient-twists-detailed.
+definition-tate-twists.
 
 11. For a derived-complete $C$ and a K-flat flat-term representative $P\to C$, [lem-weil-integral-
 twist-derived-scalar] supplies the chain isomorphism $(P\otimes_{R_E}\mathcal
@@ -393,10 +393,10 @@ $[F,T_{F,m}(f)]$ with endpoints identified by the scalar comparisons: explicitly
 representative is $\beta_{F/E',C'}^{-1}\circ T_{F,m}(f)\circ\beta_{F/E,C}$. The lemma gives
 independence of enlarging $F$, functoriality, and the descended line-evaluation inverse
 identities. Thus these are inverse twists on the common-stage category with inverse $(-m)$, and
-$\Qlb(m)$ is invertible. At $E$ and $\Qlb$ coefficients, [def-weil-finite-tor-amplitude]
+$\Qlb(m)$ is invertible. At $E$ and $\Qlb$ coefficients, [definition-constructible-sheaves]
 identifies the finite-Tor subcategory with the constructible category. All constructions use
 integral representatives and common finite stages. Uses: lem-weil-qbar-twist-common-stage, def-
-weil-algebraically-closed-coefficients, def-weil-finite-tor-amplitude.
+weil-algebraically-closed-coefficients, definition-constructible-sheaves.
 
 The intrinsic names sfIntegralConstructible, IsSfDerivedComplete and
 scalarReductionDerivedExtension give the same completed-coefficient objects,

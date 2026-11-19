@@ -21,7 +21,7 @@ import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRowHomComparison
 For Weil complexes `K` and `L` on a separated `k₀`-scheme of finite type `X`, the derived internal
 hom `RHom(K, L)` of pro-étale Weil sheaves (`AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`) is
 again a Weil complex (`AlgebraicGeometry.WeilComplex.objectProperty_derivedHom`), the Weil analogue
-of `lem-sfb-dc-hom-preserves`.
+of `proposition-six-operations-dctf--15`.
 
 Forget the Weil structure and pass to condensed `ℚ̲̄_ℓ`-modules on the geometric fibre `X̄`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.nativeGeometricForget`). This functor detects Weil complexes
@@ -117,9 +117,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The derived internal hom preserves Weil complexes** (blueprint: `lem-fix-weil-operations`,
-internal-Hom paragraph, with `lem-sfb-dc-hom-preserves`): for Weil complexes `K` and `L`, the
-derived internal hom `RHom(K, L)` of pro-étale Weil sheaves is a Weil complex. -/
+/-- **The derived internal hom preserves Weil complexes** (blueprint: `prose-10-20`,
+internal-Hom paragraph, with `proposition-six-operations-dctf--15`): for Weil complexes `K` and `L`,
+the derived internal hom `RHom(K, L)` of pro-étale Weil sheaves is a Weil complex. -/
 theorem objectProperty_derivedHom (K L : WeilComplex k₀ l X) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.derivedHom k₀ l X L.obj).obj (op K.obj)) := by

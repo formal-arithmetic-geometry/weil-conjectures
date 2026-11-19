@@ -16,8 +16,10 @@ The composition comparison of module inverse images, conjugate to the restrictio
 sections along the fibre-product pasting isomorphism, is compatible with the
 restriction/pullback mates along the quotient coefficient maps.
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03DA; Cohomology on Sites,
-Tag 0D6D.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D8 and 03DA
+* Cohomology on Sites, Tag 0D6D
 -/
 
 public noncomputable section
@@ -366,11 +368,7 @@ private theorem comp_rhs_restrict (n : ℕ)
       (baseRestriction_unit d (f ≫ g) n N U m)).trans (sheafMapElem_restrictElem _ _ _ _))
 
 /-- The composition comparison of module inverse images is compatible with the
-restriction/pullback comparisons along the consecutive quotient of coefficients.
-
-Proof: transpose through the composite adjunction and evaluate on unit sections. Both
-sides give the restriction, along the fibre-product pasting isomorphism, of the unit
-section of the composite inverse image. -/
+restriction/pullback comparisons along the consecutive quotient of coefficients. -/
 theorem lisseTowerPullbackComp_restriction (n : ℕ)
     (N : proEtaleRingModules X ((pbcAdicRings X d).obj (op n))) :
     (lisseTowerStepPullback f g d (n + 1)).map ((lisseTowerBaseRestriction d g n).app N) ≫

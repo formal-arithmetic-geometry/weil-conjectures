@@ -26,8 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 400000 in
--- The rewrites through the localized monoidal structure on sheaves of modules are slow.
 /-- The identification `M ⊗ P ≅ a(M ⊗ P)` of the tensor product of sheaves of modules with the
 sheafification of the tensor product of presheaves is natural in `M`: for `f : M ⟶ M'` the square
 ```
@@ -43,19 +41,7 @@ lemma whiskerRight_tensorObjIsoSheafification_hom {M M' : X.Modules} (f : M ⟶ 
     f ▷ P ≫ (SheafOfModules.tensorObjIsoSheafification (R := X.sheaf) M' P).hom =
       (SheafOfModules.tensorObjIsoSheafification (R := X.sheaf) M P).hom ≫
         (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map (f.val ▷ P.val) := by
-  let := SheafOfModules.sheafificationMonoidal X.sheaf
-  simp only [SheafOfModules.tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom,
-    Functor.Monoidal.μIso_hom, Category.assoc]
-  erw [← Functor.LaxMonoidal.μ_natural_left]
-  rw [← Category.assoc, ← Category.assoc]
-  congr 1
-  simp only [tensorIso_inv, Iso.app_inv, asIso_inv]
-  rw [← tensorHom_id (C := X.Modules), ← tensorHom_id (C := X.Modules),
-    tensorHom_comp_tensorHom (C := X.Modules), tensorHom_comp_tensorHom (C := X.Modules)]
-  erw [Category.id_comp]
-  congr 1
-  exact (inv (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit).naturality
-    f
+  exact SheafOfModules.whiskerRight_tensorObjIsoSheafification_hom (R := X.sheaf) f P
 
 /-- The morphism `Mᵛ ⊗ N ⟶ Hom(M, N)`, `φ ⊗ n ↦ (m ↦ φ(m) n)`, of sheaves of modules: the
 sheafification of the corresponding morphism of presheaves of modules. -/

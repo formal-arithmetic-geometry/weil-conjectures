@@ -187,7 +187,7 @@ statement and proof paragraphs 1--6; Stacks Project, Tag 03PL
 
 We use the fixed-scalar sheaf presentation of ordinary pro-etale modules, canonically
 realized by `finiteCoefficientRealization` over the coefficient ring sheaf of
-`def-weil-pbc-proetale-modules`. `Ext.homEquiv` identifies every degree-two Ext class
+`definition-small-pro-etale-site--1`. `Ext.homEquiv` identifies every degree-two Ext class
 below with the displayed morphism from the degree-zero supported constant object to
 its finite Tate line shifted by two. No condensed or completed coefficient category occurs.
 The auxiliary definitions only spell out this class and its normalization diagrams.
@@ -207,7 +207,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A simultaneous family allows coefficient, exponent and geometric compatibility
 between its actual members. Invertibility of ℓ^r equals invertibility of ℓ for r > 0.
-Source: blueprint sk-lem-geo-cartier, statement (blueprint: def-sfb-geo-cartier-interface). -/
+Source: blueprint lemma-cycle-class-cartier-divisor, statement (blueprint:
+def-sfb-geo-cartier-interface). -/
 def GeoCartierClassFamily (ℓ : ℕ) : Type (u + 2) :=
   ∀ (r : ℕ) (_hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : ((ℓ ^ r : ℕ) : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
@@ -215,7 +216,7 @@ def GeoCartierClassFamily (ℓ : ℕ) : Type (u + 2) :=
     GeoCartierClass A (ℓ ^ r) hA i
 
 /-- The inverse-image commutation isomorphism for the specified square.
-Source: blueprint sk-lem-geo-cartier, opening comparison and paragraph 6
+Source: blueprint lemma-cycle-class-cartier-divisor, opening comparison and paragraph 6
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def geoCartierPullbackSquare (A : Type (u + 1)) [CommRing A]
@@ -230,7 +231,7 @@ def geoCartierPullbackSquare (A : Type (u + 1)) [CommRing A]
 /-- Canonical pro-etale closed exchange, as the adjoint of inverse-image commutation
 followed by the counit and the pullback of constants. This formula works for arbitrary
 base morphisms; no weakly-etale or flatness restriction is imposed.
-Source: blueprint sk-lem-geo-cartier, proof paragraph 6
+Source: blueprint lemma-cycle-class-cartier-divisor, proof paragraph 6
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def geoCartierExchange (A : Type (u + 1)) [CommRing A]
@@ -248,7 +249,7 @@ def geoCartierExchange (A : Type (u + 1)) [CommRing A]
 
 /-- Pull back the finite Tate line through the canonical comparison square and the
 existing roots-normalized etale transport.
-Source: blueprint sk-lem-geo-cartier, base-change clause
+Source: blueprint lemma-cycle-class-cartier-divisor, base-change clause
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def geoCartierLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -263,7 +264,7 @@ def geoCartierLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
 /-- The Chern equation is the actual Kummer boundary of the dual ideal line, expressed
 in module Ext and then pulled back by ν. The integral generator fixes the usual
 cohomological normalization; it does not supply an arbitrary Chern class.
-Source: blueprint sk-lem-geo-cartier, statement and proof paragraph 5
+Source: blueprint lemma-cycle-class-cartier-divisor, statement and proof paragraph 5
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def GeoCartierChernEquation (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -281,7 +282,7 @@ def GeoCartierChernEquation (A : Type (u + 1)) [CommRing A] (N : ℕ)
 /-- Derived extension at a specified sheaf map is characterized by its Hom universal
 property against every unbounded complex. This is a property of the given coefficient
 unit, not a choice of a replacement scalar-extension functor.
-Source: Stacks 07A6; blueprint sk-lem-geo-cartier, coefficient clause
+Source: Stacks 07A6; blueprint lemma-cycle-class-cartier-divisor, coefficient clause
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def GeoCartierScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
@@ -297,7 +298,7 @@ def GeoCartierScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
 /-- Coefficient compatibility with the canonical supported-constant and Tate-line
 units. Normalization is on constants and on pure root tensors through the comparison
 adjunction unit. These generate after sheafification, so the comparisons are fixed.
-Source: blueprint sk-lem-geo-cartier, coefficient clause
+Source: blueprint lemma-cycle-class-cartier-divisor, coefficient clause
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def GeoCartierScalarCompatibility {R S : Type (u + 1)} [CommRing R] [CommRing S]
@@ -332,7 +333,8 @@ def GeoCartierScalarCompatibility {R S : Type (u + 1)} [CommRing R] [CommRing S]
 
 /-- Cartier-preserving pullback of a simultaneous class family, using the counit mate
 for the source and the roots-normalized finite Tate-line comparison for the target.
-Source: blueprint sk-lem-geo-cartier, final clause (blueprint: def-sfb-geo-cartier-interface). -/
+Source: blueprint lemma-cycle-class-cartier-divisor, final clause (blueprint:
+def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def GeoCartierBaseChange (ℓ : ℕ) (c : GeoCartierClassFamily.{u} ℓ) : Prop :=
   ∀ (r : ℕ) (hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -350,7 +352,7 @@ def GeoCartierBaseChange (ℓ : ℕ) (c : GeoCartierClassFamily.{u} ℓ) : Prop 
 
 /-- Independence of the killing exponent under the actual roots projection. The map
 on roots is pinned by its inclusion into G_m, and the line map by its pure tensors.
-Source: blueprint sk-lem-geo-cartier, exponent sentence
+Source: blueprint lemma-cycle-class-cartier-divisor, exponent sentence
 (blueprint: def-sfb-geo-cartier-interface). -/
 @[irreducible]
 def GeoCartierExponentIndependence (ℓ : ℕ) (c : GeoCartierClassFamily.{u} ℓ) : Prop :=

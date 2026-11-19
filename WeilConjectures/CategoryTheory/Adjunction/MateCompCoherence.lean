@@ -47,7 +47,7 @@ lemma mateEquiv_ofNatIsoLeft_right {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} 
     {L₂ L₂' : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e : L₂ ≅ L₂')
     (α : TwoSquare G L₁ L₂' H) :
     mateEquiv adj₁ (adj₂.ofNatIsoLeft e) α =
-      mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ (Functor.whiskerLeft G e.hom ≫ α.natTrans)) := by
+      mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ (Functor.whiskerLeft G e.hom ≫ α)) := by
   ext X
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit]
 
@@ -68,16 +68,16 @@ adjoints compatible with composition isomorphisms `c_G : G_{pq} ≅ G_q ⋙ G_p`
 lemma mateEquiv_app_comp_of_compCoherence (adjZ : LZ ⊣ RZ) (adjY : LY ⊣ RY) (adjX : LX ⊣ RX)
     (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ Hq ⋙ Hp) (aq : TwoSquare Gq LZ LY Hq)
     (ap : TwoSquare Gp LY LX Hp) (apq : TwoSquare Gpq LZ LX Hpq)
-    (h : ∀ M, apq.natTrans.app M ≫ cH.hom.app (LZ.obj M) =
-      LX.map (cG.hom.app M) ≫ ap.natTrans.app (Gq.obj M) ≫ Hp.map (aq.natTrans.app M))
+    (h : ∀ M, apq.app M ≫ cH.hom.app (LZ.obj M) =
+      LX.map (cG.hom.app M) ≫ ap.app (Gq.obj M) ≫ Hp.map (aq.app M))
     (K : BZ) :
-    (mateEquiv adjZ adjX apq).natTrans.app K ≫ RX.map (cH.hom.app K) =
-      cG.hom.app (RZ.obj K) ≫ Gp.map ((mateEquiv adjZ adjY aq).natTrans.app K) ≫
-        (mateEquiv adjY adjX ap).natTrans.app (Hq.obj K) := by
+    (mateEquiv adjZ adjX apq).app K ≫ RX.map (cH.hom.app K) =
+      cG.hom.app (RZ.obj K) ≫ Gp.map ((mateEquiv adjZ adjY aq).app K) ≫
+        (mateEquiv adjY adjX ap).app (Hq.obj K) := by
   have key : (mateEquiv adjZ adjX
-      (TwoSquare.mk _ _ _ _ (apq.natTrans ≫ Functor.whiskerLeft LZ cH.hom))).natTrans =
+      (TwoSquare.mk _ _ _ _ (apq ≫ Functor.whiskerLeft LZ cH.hom))) =
       (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight cG.hom LX ≫ (aq ≫ₕ ap).natTrans))).natTrans := by
+        (Functor.whiskerRight cG.hom LX ≫ (aq ≫ₕ ap)))) := by
     congr 2
     ext M
     simpa [TwoSquare.hComp] using h M

@@ -15,7 +15,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 
 Let `Λ` be a finite ring whose exponent is invertible on a finite-type `k`-scheme `Y`, and let
 `c = (X ⟶[j] X̄ ⟶[p] Y)` be a compactification of `f : X ⟶ Y`. Blueprint
-`det-sf-comp-coherence-single`: the compact-support functor `Rf_!(c) = Rp_* ∘ j_!`
+`proposition-construction-independence-rf-shriek`: the compact-support functor
+`Rf_!(c) = Rp_* ∘ j_!`
 
 * preserves coproducts of objects of `Loc(Dctf(X, Λ))`
   (`preservesColimitsOfShape_localizingClosure_rightDerivedLowerShriekOfCompactification`):
@@ -45,8 +46,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {f : X ⟶ Y} (c : Compactification f)
 
 include aY in
-/-- Blueprint `det-sf-comp-coherence-single`: the compact-support functor `Rf_!(c)` preserves
-coproducts of objects of `Loc(Dctf(X, Λ))`. -/
+/-- Blueprint `proposition-construction-independence-rf-shriek`: the compact-support functor
+`Rf_!(c)` preserves coproducts of objects of `Loc(Dctf(X, Λ))`. -/
 theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerShriekOfCompactification
     (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J)
@@ -74,8 +75,8 @@ theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerShriekOfComp
   exact preservesColimitsOfShape_of_discrete _
 
 include aY in
-/-- Blueprint `det-sf-comp-coherence-single`: the compact-support functor `Rf_!(c)` maps
-`Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))`. -/
+/-- Blueprint `proposition-construction-independence-rf-shriek`: the compact-support functor
+`Rf_!(c)` maps `Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))`. -/
 theorem localizingClosure_rightDerivedLowerShriekOfCompactification_obj [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
     (hK : (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure K) :

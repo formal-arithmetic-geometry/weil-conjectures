@@ -65,7 +65,48 @@ private def towerScalarNat
     intro i
     exact (ScalarRoosLiftProof.scalarComponentNat l L F j X n.unop).naturality (f.f i)
 
-set_option maxHeartbeats 800000 in
+-- Compute Roos coordinates before specializing to the sheaf categories.
+private theorem quotientRoosMap_fst
+    {A B : Type*} [Category A] [Abelian A] [HasCountableProducts A]
+    [Category B] [Abelian B] [HasCountableProducts B]
+    (F : A ⥤ B) [F.Additive] {C : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    {D E : ℕᵒᵖ ⥤ CochainComplex B ℤ}
+    (a : C ⋙ F.mapHomologicalComplex (.up ℤ) ⟶ D) (q : D ⟶ E)
+    {P : CochainComplex A ℤ} (f : P ⟶ integralOperationsRoos C) (n : ℕ) :
+    (F.mapHomologicalComplex (.up ℤ)).map f ≫ scalarRoosMap F C ≫
+        integralOperationsRoosMap a ≫ integralOperationsRoosMap q ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary E) ≫
+        Pi.π (fun m ↦ E.obj (op m)) n =
+      (F.mapHomologicalComplex (.up ℤ)).map
+        (f ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C) ≫
+          Pi.π (fun m ↦ C.obj (op m)) n) ≫ a.app (op n) ≫ q.app (op n) := by
+  rw [reassoc_of% (scalarRoosTowerCoordinates q).1]
+  simp only [Limits.Pi.map_π]
+  rw [reassoc_of% (scalarRoosTowerCoordinates a).1]
+  rw [Limits.Pi.map_π_assoc]
+  rw [reassoc_of% (scalarRoosCoordinates F C).1]
+  simp only [Category.assoc, piComparison_comp_π_assoc, Functor.map_comp]
+
+private theorem quotientRoosMap_snd_zero
+    {A B : Type*} [Category A] [Abelian A] [HasCountableProducts A]
+    [Category B] [Abelian B] [HasCountableProducts B]
+    (F : A ⥤ B) [F.Additive] {C : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    {D E : ℕᵒᵖ ⥤ CochainComplex B ℤ}
+    (a : C ⋙ F.mapHomologicalComplex (.up ℤ) ⟶ D) (q : D ⟶ E)
+    {P : CochainComplex A ℤ} (f : P ⟶ integralOperationsRoos C) (i : ℤ)
+    (hf : f.f i ≫ (CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v
+      i (i - 1) (by omega) = 0) :
+    ((F.mapHomologicalComplex (.up ℤ)).map f ≫ scalarRoosMap F C ≫
+        integralOperationsRoosMap a ≫ integralOperationsRoosMap q).f i ≫
+        (CochainComplex.mappingCocone.snd (scalarRoosBoundary E)).v
+          i (i - 1) (by omega) = 0 := by
+  simp only [HomologicalComplex.comp_f, Category.assoc]
+  rw [(scalarRoosTowerCoordinates q).2 i (i - 1) (by omega),
+    reassoc_of% (scalarRoosTowerCoordinates a).2 i (i - 1) (by omega),
+    reassoc_of% (scalarRoosCoordinates F C).2 i]
+  rw [Functor.mapHomologicalComplex_map_f, ← Functor.map_comp_assoc, hf,
+    Functor.map_zero, zero_comp]
+
 -- Tensor section types involve several equivalent presentations of the scalar functor.
 private theorem quotientScalarChainComparison
     (l : ℕ) [Fact l.Prime]
@@ -112,9 +153,6 @@ private theorem quotientScalarChainComparison
       integralOperationsRoosFunctor.map q.hom =
     (completedScalarChainComparison l L F j X).app P.obj := by
   let CL := ((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj C
-  let CF := ((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
-    (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
-      (.up ℤ)).obj C)
   let G := completedOrdinaryScalarComplex l L F j X
   let u := ((constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l L X)).mapHomologicalComplex
     (.up ℤ)).homEquiv P.obj CL c
@@ -130,55 +168,22 @@ private theorem quotientScalarChainComparison
   change (∀ P i n U s x, (((completedScalarChainComparison l L F j X).app P).f i ≫
     _ ≫ _).val.app U (completedScalarTensorSection l L F j X (P.X i) U s x) = _) ∧ _ at hb
   let δ := completedScalarRoosEndomorphism l L F j X P.obj
-  have hfq : integralOperationsRoosFunctor.map q.hom ≫
-      CochainComplex.mappingCocone.fst δ =
-      CochainComplex.mappingCocone.fst (scalarRoosBoundary CF.asFunctor) ≫
-        Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n)) :=
-    (IntegralAmbient.roosMap_coordinates q.hom).1
-  have hsq (i : ℤ) : (integralOperationsRoosFunctor.map q.hom).f i ≫
-      (CochainComplex.mappingCocone.snd δ).v i (i - 1) (by omega) =
-      (CochainComplex.mappingCocone.snd (scalarRoosBoundary CF.asFunctor)).v
-        i (i - 1) (by omega) ≫
-          (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) :=
-    (IntegralAmbient.roosMap_coordinates q.hom).2 i (i - 1) (by omega)
-  have hfa := (scalarRoosTowerCoordinates a).1
-  have hsa := (scalarRoosTowerCoordinates a).2
-  have hfg := (scalarRoosCoordinates (completedOrdinaryScalarExtension l L F j X)
-    CL.asFunctor).1
-  have hsg := (scalarRoosCoordinates (completedOrdinaryScalarExtension l L F j X)
-    CL.asFunctor).2
   change G.map (u ≫ integralComparisonLimitToRoos l L X CL) ≫
     scalarRoosMap (completedOrdinaryScalarExtension l L F j X) CL.asFunctor ≫
       integralOperationsRoosMap a ≫ integralOperationsRoosFunctor.map q.hom =
         (completedScalarChainComparison l L F j X).app P.obj
   apply cone_ext δ
-  · simp only [Category.assoc]
-    rw [hfq]
-    erw [reassoc_of% hfa, reassoc_of% hfg]
-    apply Pi.hom_ext
+  · apply Pi.hom_ext
     intro n
-    have hπq : Limits.Pi.map (fun m : ℕ ↦ q.hom.app (op m)) ≫
-        Pi.π (fun m ↦ ((integralScalarTowerFunctor l L F j X).obj P.obj).obj (op m)) n =
-        Pi.π (fun m ↦ CF.asFunctor.obj (op m)) n ≫ q.hom.app (op n) :=
-      Limits.Pi.map_π (fun m : ℕ ↦ q.hom.app (op m)) n
-    have hπa : Limits.Pi.map (fun m : ℕ ↦ a.app (op m)) ≫
-        Pi.π (fun m ↦ CF.asFunctor.obj (op m)) n =
-        Pi.π (fun m ↦ G.obj (CL.asFunctor.obj (op m))) n ≫ a.app (op n) :=
-      Limits.Pi.map_π (fun m : ℕ ↦ a.app (op m)) n
-    have hπG : piComparison G (fun m : ℕ ↦ CL.asFunctor.obj (op m)) ≫
-        Pi.π (fun m ↦ G.obj (CL.asFunctor.obj (op m))) n =
-        G.map (Pi.π (fun m : ℕ ↦ CL.asFunctor.obj (op m)) n) :=
-      piComparison_comp_π G (fun m : ℕ ↦ CL.asFunctor.obj (op m)) n
     simp only [Category.assoc]
-    rw [hπq, reassoc_of% hπa]
-    erw [reassoc_of% hπG]
+    erw [quotientRoosMap_fst]
     have hi := hι.1 n
-    have hfirst : G.map (u ≫ integralComparisonLimitToRoos l L X CL) ≫
-        G.map (CochainComplex.mappingCocone.fst (scalarRoosBoundary CL.asFunctor)) ≫
-        G.map (Pi.π (fun n : ℕ ↦ CL.asFunctor.obj (op n)) n) =
+    have hfirst : G.map ((u ≫ integralComparisonLimitToRoos l L X CL) ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary CL.asFunctor) ≫
+        Pi.π (fun n : ℕ ↦ CL.asFunctor.obj (op n)) n) =
         G.map (u ≫ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app CL) := by
-      simp only [← G.map_comp, Category.assoc, hi]
-    erw [reassoc_of% hfirst]
+      rw [Category.assoc, hi]
+    erw [hfirst]
     apply HomologicalComplex.Hom.ext
     funext i
     apply completedScalar_tensor_ext l L F j X
@@ -200,11 +205,6 @@ private theorem quotientScalarChainComparison
     erw [hc n i U x, ScalarRoosLiftProof.scalarComponent_tensor]
     exact (hq n i U _ x).trans (hb.1 P.obj i n U s x).symm
   · intro i
-    simp only [HomologicalComplex.comp_f, Category.assoc]
-    rw [hsq i]
-    erw [reassoc_of% hsa i (i - 1) (by omega), reassoc_of% hsg i]
-    dsimp only [G, completedOrdinaryScalarComplex]
-    rw [Functor.mapHomologicalComplex_map_f]
     have hz : (u ≫ integralComparisonLimitToRoos l L X CL).f i ≫
         (CochainComplex.mappingCocone.snd (scalarRoosBoundary CL.asFunctor)).v
           i (i - 1) (by omega) = 0 := by
@@ -212,8 +212,8 @@ private theorem quotientScalarChainComparison
           (CochainComplex.mappingCocone.snd (scalarRoosBoundary CL.asFunctor)).v
             i (i - 1) (by omega) = 0 := hι.2 i (i - 1) (by omega)
       simp only [HomologicalComplex.comp_f, Category.assoc, hi2, comp_zero]
-    rw [← Functor.map_comp_assoc, hz, Functor.map_zero, zero_comp]
-    exact (hb.2 P.obj i).symm
+    exact (quotientRoosMap_snd_zero (completedOrdinaryScalarExtension l L F j X)
+      a q.hom (u ≫ integralComparisonLimitToRoos l L X CL) i hz).trans (hb.2 P.obj i).symm
 
 /-- Transposing a quotient tensor family commutes with scalar change, independently
 of any chosen derived reduction calculus or completed scalar realization.

@@ -15,10 +15,12 @@ import WeilConjectures.CategoryTheory.Augmented.AugmentedDerivedTowerUnit
 
 /-! # The canonical augmentation of a simultaneous integral reduction
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion.
-(blueprint: lem-sfb-integral-strict-augmentation).
 The construction uses the universal left-derived counit and localization, so its
 naturality holds for all derived morphisms.
+
+## References
+
+* Stacks 099M, canonical completion-map construction
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +29,7 @@ universe a v w s
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The simultaneous quotient projections form one map of strict towers.
-Source: Stacks 099M (blueprint: lem-sfb-integral-strict-augmentation). -/
+/-- The simultaneous quotient projections form one map of strict towers. -/
 def diagonalReductionTowerAugmentation
     {A : Type a} [Category.{v} A] [Abelian A] (ℓ : ℕ)
     (O : DiagonalReductionPresentation ℓ (𝟭 A)) : Functor.const ℕᵒᵖ ⟶ O.E where
@@ -50,8 +51,7 @@ variable (ℓ : ℕ) (I : DiagonalDerivedReduction ℓ (𝟭 A))
     DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RZ)
 
 /-- The ordinary quotient map followed by the specified derived-limit comparison.
-This construction uses no left-derived reduction.
-Source: Stacks 099M (blueprint: lem-sfb-integral-strict-augmentation). -/
+This construction uses no left-derived reduction. -/
 def integralStrictOrdinaryAugmentation
     (O : DiagonalReductionPresentation ℓ (𝟭 A)) (P : CochainComplex A ℤ) :
     DerivedCategory.Q.obj P ⟶
@@ -65,14 +65,7 @@ def integralStrictOrdinaryAugmentation
       ηZ.app ((O.E.mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- A natural map into the derived strict quotient limit, with its ordinary normalization.
-The two universal lifts are supplied by the existing generic augmented-tower theorem.
-
-Source: Stacks 099M, canonical completion-map construction
-(blueprint: lem-sfb-integral-strict-augmentation).
-Proof: apply exists_augmentedDerivedTowerUnit to localization of cochain complexes,
-the exact constant-tower functor, the ordinary quotient-tower functor, and ordinary
-limit. Its right Kan extension is the supplied left-derived reduction. Its last
-factorization equation is exactly the displayed ordinary augmentation. -/
+The two universal lifts are supplied by the existing generic augmented-tower theorem. -/
 theorem exists_integralStrictAugmentation :
     ∃ a : 𝟭 (DerivedCategory A) ⟶ I.T ⋙ RZ,
       ∀ P : CochainComplex A ℤ,

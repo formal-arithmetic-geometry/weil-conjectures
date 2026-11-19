@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 # Compact-support exchanges along a refinement of compactifications
 
 Let `ν_C = χ_P⁻¹ ∘ R'_{P*}(ν_ι)` be the compact-support exchange of a compactification `ι : N ⊆ P`
-(blueprint `det-nearby-exchange-maps` (3); `ν_ι` the adjoint of the inverse of the pullback
+(blueprint `prose-E-15` (3); `ν_ι` the adjoint of the inverse of the pullback
 exchange `α_ι`, `χ_P` the proper exchange). This file proves, in abstract categories, the formal
 steps showing that `ν_C` is unchanged along a refinement `π : P₃ ⟶ P₁` (with `ι₁ = ι₃ ≫ π`):
 

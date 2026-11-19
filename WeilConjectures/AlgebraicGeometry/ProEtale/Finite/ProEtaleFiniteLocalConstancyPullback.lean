@@ -25,9 +25,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Finite local constancy under inverse image
 
-Source: Stacks Project, Modules on Sites, Tag 093R;
-Etale Cohomology, Tag 095I (common stratifications).
-(blueprint: lem-pur-proetale-finite-local-constancy-pullback).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093R
+* Etale Cohomology, Tag 095I (common stratifications)
+* Stacks Project, Tag 0H7J, the constant-sheaf universal property
+* Stacks Project, Tag 03D2
+* Stacks Project, Modules on Sites, Tag 093R, applied to pro-etale module inverse image
 -/
 
 @[expose] public section
@@ -37,9 +41,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The coefficient direct-image map extends the constant-section unit.
-Source: Stacks Project, Tag 0H7J, the constant-sheaf universal property.
-(blueprint: lem-pur-proetale-finite-local-constancy-pullback). -/
+/-- The coefficient direct-image map extends the constant-section unit. -/
 theorem proEtaleConstantModulePullback_rho_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u)
     [CommRing A] (W : Y.ProEtᵒᵖ) :
     (toSheafify (ProEt.topology Y)
@@ -56,9 +58,7 @@ theorem proEtaleConstantModulePullback_rho_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))))
   exact congrArg (fun t ↦ t.app W) h
 
-/-- The ring direct-image map is the adjunct of the canonical coefficient comparison.
-Source: Stacks Project, Tag 03D2, inverse-image/direct-image adjunction.
-(blueprint: lem-pur-proetale-finite-local-constancy-pullback). -/
+/-- The ring direct-image map is the adjunct of the canonical coefficient comparison. -/
 theorem proEtaleConstantModulePullback_ring_direct
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A]
     [IsIso (proEtaleCoefficientInverseImageMap f A)] :
@@ -68,23 +68,7 @@ theorem proEtaleConstantModulePullback_ring_direct
   exact (proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _
     |>.apply_symm_apply (proEtaleCoefficientDirectImageMap f A)
 
-/-- Inverse image preserves finite local constancy of a module sheaf.
-
-Source: Stacks Project, Modules on Sites, Tag 093R,
-lemma-pullback-locally-constant, applied to pro-etale module inverse image.
-(blueprint: lem-pur-proetale-finite-local-constancy-pullback).
-
-Proof: use the coefficient-encoding equivalence to express F by finite constant
-models on a pro-etale cover. Pull this cover back along b; precoverage stability
-under base change preserves its covering property. The pullback composition
-isomorphisms and the cartesian-square equation identify each new restriction with
-the pullback of its old constant model. A terminal-object-preserving site inverse
-image commutes with constant sheaves, so each new model has the same finite value.
-Finally restriction to constant scalars commutes with the specified intrinsic
-module pullback. Transport the finite-model condition through this comparison and
-back through the coefficient-encoding equivalence. That equivalence supplies both
-local constancy on localized ringed sites and finiteness of every geometric stalk.
-The argument also covers empty schemes, empty covering members and the zero ring. -/
+/-- Inverse image preserves finite local constancy of a module sheaf. -/
 theorem proEtale_finiteLocalConstancy_pullback
     {Y X : Scheme.{u}} (b : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A]

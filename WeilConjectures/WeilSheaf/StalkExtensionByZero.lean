@@ -18,10 +18,10 @@ import WeilConjectures.WeilSheaf.StalkUpperStar
 
 Let `j : U ⟶ X` be a quasi-compact open immersion of `k₀`-schemes and `G` a Weil sheaf on `U`.
 The extension by zero `j₀!G` (`AlgebraicGeometry.WeilSheaf.extensionByZero`) has the stalk
-prescription of blueprint `lem-cbc-proetale-extension-zero`: at a closed point `j z` of `U` its
-geometric stalk, with its local Frobenius, is that of `G` at `z`, and at a closed point outside
-`U` it vanishes. In particular `j₀!` preserves punctual purity, and, being exact, mixed upper
-weight bounds.
+prescription of blueprint `proposition-extension-zero-restriction-closed-subscheme`: at a closed
+point `j z` of `U` its geometric stalk, with its local Frobenius, is that of `G` at `z`, and at a
+closed point outside `U` it vanishes. In particular `j₀!` preserves punctual purity, and, being
+exact, mixed upper weight bounds.
 
 ## Main statements
 
@@ -30,7 +30,7 @@ weight bounds.
   missing `Ū` vanishes.
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_extensionByZero`: the stalk of `j₀!G` at a
   closed point `j z` of `U` is that of `G` at `z`, with its local Frobenius
-  (`lem-cbc-proetale-extension-zero`).
+  (`proposition-extension-zero-restriction-closed-subscheme`).
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.extensionByZero`: `j₀!` preserves
   punctual purity and mixed upper weight bounds.
@@ -83,18 +83,18 @@ theorem subsingleton_stalk_extensionByZero (G : WeilSheaf k₀ l U) (x : X.finit
 private lemma stalkAt_eq_of_degree_eq (F : WeilSheaf k₀ l X)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m n : ℕ} (h : m = n)
-    (hm : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hn : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius k₀ ^ n).hom ≫ s) :
+    (hm : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hn : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ s) :
     F.stalkAt s m hm = F.stalkAt s n hn := by
   subst n
   rfl
 
 /-- **The stalks of the extension by zero inside `U`** (blueprint:
-`lem-cbc-proetale-extension-zero`, `(j_!K)_x̄ = K_x̄` for a geometric point `x̄` of `U`): the
-geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local Frobenius, is that of
-`G` at `z`. -/
+`proposition-extension-zero-restriction-closed-subscheme`, `(j_!K)_x̄ = K_x̄` for a geometric point
+`x̄` of `U`): the geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local
+Frobenius, is that of `G` at `z`. -/
 theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.finitePoints) :
     Nonempty ((((extensionByZero j).obj G).stalk
       ⟨j.base z.1, (Scheme.Hom.mem_finitePoints_iff_of_isIso j z.1).2 z.2⟩).Equiv
@@ -111,8 +111,8 @@ theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.fin
   have ht := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
     (U ↘ Spec (CommRingCat.of k₀)) z
   have ht' : (t ≫ J) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
-      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+      (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom ≫
         (t ≫ J) := by
     rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
       ← Category.assoc, ht, Category.assoc]

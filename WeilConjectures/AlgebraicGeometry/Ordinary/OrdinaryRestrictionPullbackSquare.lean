@@ -12,8 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! Restriction of scalars and ordinary inverse-image composition.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7.
-(blueprint: lem-fix-ordinary-restriction-pullback-square) -/
+
+## References
+
+* Stacks, Modules on Sites, Tags 03D8 and 03D7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,14 +29,12 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory.Functor
 
-/-- Ordinary scalar restriction in constant-ring coordinates.
-Source: Stacks Tag 03D7 (blueprint: lem-fix-ordinary-restriction-pullback-square). -/
+/-- Ordinary scalar restriction in constant-ring coordinates. -/
 abbrev ordinaryScalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   Scheme.proEtaleRingRestrictScalars (Scheme.proEtaleConstantRingMap (T := T) φ)
 
-/-- The recorded ordinary constant-ring inverse image.
-Source: Stacks Tag 03D8 (blueprint: lem-fix-ordinary-restriction-pullback-square). -/
+/-- The recorded ordinary constant-ring inverse image. -/
 abbrev ordinaryConstantPullback (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :=
   StrictTower.modulePullback (ULift.{u + 1, u} A) f
 
@@ -44,9 +45,7 @@ private abbrev padj (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :
   Scheme.proEtaleRingModuleAdjunction f (Scheme.proEtaleConstantRing W A)
     (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRingComparison f A)
 
-/-- Constant coefficient maps commute with inverse-image identification.
-Source: Stacks Tag 03D7 (blueprint: lem-fix-ordinary-restriction-pullback-square).
-Proof: apply naturality of the canonical constant inverse-image map. -/
+/-- Constant coefficient maps commute with inverse-image identification. -/
 theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     (Scheme.proEtaleConstantRingComparison f A).hom ≫
@@ -58,8 +57,7 @@ theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (Scheme.proEtaleConstantInverseImageMap_naturality f
       (a := CommRingCat.ofHom (RingHom.ulift φ))).symm
 
-/-- The specified ordinary restriction/pullback mate.
-Source: Stacks Tag 03D7 (blueprint: lem-fix-ordinary-restriction-pullback-square). -/
+/-- The specified ordinary restriction/pullback mate. -/
 def ordinaryRestrictionComparison {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     ordinaryScalarRestriction φ W ⋙ ordinaryConstantPullback A f ⟶
@@ -115,15 +113,14 @@ private lemma comparison_mate {A B : Type u} [CommRing A] [CommRing B]
     mateEquiv (padj B f) (padj A f) (TwoSquare.mk _ _ _ _ (ordinaryRestrictionComparison φ f)) =
       TwoSquare.mk _ _ _ _ (directComparison φ f).hom := by
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_symm_apply, ordinaryRestrictionComparison,
     Scheme.proEtaleRingRestrictionPullbackInv, Scheme.proEtaleRingRestrictionPullbackApp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
     Functor.rightUnitor_hom_app, Functor.comp_map, Category.id_comp]
   simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   exact (Category.comp_id _).symm
 
@@ -175,8 +172,7 @@ private lemma comparison_comp {A B : Type u} [CommRing A] [CommRing B]
           (StrictTower.moduleRComp (ULift.{u + 1, u} C) f g).hom :=
       Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
     rw [hG A, hG B]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro Y
@@ -185,7 +181,7 @@ private lemma comparison_comp {A B : Type u} [CommRing A] [CommRing B]
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    simp only [ModuleCat.comp_apply]
     erw [directComparison_apply φ g ((push B f).obj N) Y n]
     change ((StrictTower.moduleRComp (ULift.{u + 1, u} A) f g).hom.app
         ((ordinaryScalarRestriction φ V).obj N)).val.app Y
@@ -238,25 +234,7 @@ private lemma pasteTransport
   rw [reassoc_of% hb]
 
 /-- Restriction of scalars respects the specified ordinary pullback-square compositor.
-No derived tensor functor, localization, or extension by zero occurs here.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7; the ordinary composition
-calculation underlying parent `lem-fix-tensor-pullback-square`.
-(blueprint: lem-fix-ordinary-restriction-pullback-square)
-Proof: first use the fibre-product direct-image compositor moduleRComp. Its forward
-map is restriction along Over.pullbackComp.hom, by moduleRComp_existsUnique.
-Restriction of scalars leaves sections and their restriction maps unchanged.
-The canonical restriction/direct-image comparison is the identity on every section,
-by proEtaleRingRestrictionDirectImage_existsUnique. Thus the two pastings involving
-the direct-image compositor and these comparisons agree sectionwise. Conjugate this
-identity by the two composite module adjunctions. The conjugate of moduleRComp is
-moduleGComp.inv by leftAdjointCompIso, and the inverse mate of the sectionwise
-identity is proEtaleRingRestrictionPullbackInv by its defining unit-counit formula.
-The mate pasting laws give compatibility of these inverse-image comparisons with
-moduleGComp. Apply it to both composable paths in the square. Eliminate their common
-composite using sq.toCommSq.w; equality transport is natural in the coefficient map.
-Composing one path with the inverse of the other gives precisely moduleSquareG.inv
-on each coefficient ring and the displayed equation. The computation is valid for
-empty schemes, the zero ring, and arbitrary coefficient homomorphisms. -/
+No derived tensor functor, localization, or extension by zero occurs here. -/
 theorem ordinaryRestrictionPullbackSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B)
     {U' U X' X : Scheme.{u}}

@@ -153,7 +153,7 @@ def finiteExchange {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (TwoSquare.mk _ _ _ _
       ((sfIntrinsicDerivedPullbackComp A f' gY).symm ≪≫
         eqToIso (congrArg (fun h ↦ sfIntrinsicDerivedPullback A h) w.symm) ≪≫
-        sfIntrinsicDerivedPullbackComp A gX f).hom)).natTrans
+        sfIntrinsicDerivedPullbackComp A gX f).hom))
 
 /-- The ambient mate in the recorded tensor-pullback coordinates. Both coordinate
 changes are uniquely fixed by the ordinary units, so this is the ambient ringed mate.
@@ -271,7 +271,7 @@ def systemExchange {X Y : Scheme.{u}} (f : X ⟶ Y) (gX : X ⟶ X) (gY : Y ⟶ Y
     systemDirect l E f ⋙ integralComparisonDerivedSequencePullback l E gY ⟶
       integralComparisonDerivedSequencePullback l E gX ⋙ systemDirect l E f :=
   (mateEquiv (systemAdjunction l E f) (systemAdjunction l E f)
-    (TwoSquare.mk _ _ _ _ (systemSquare l E f gX gY w).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (systemSquare l E f gX gY w).hom))
 
 /-- A simultaneous quotient-complex presentation of the published integral operations.
 Its reduction, total limit and pullback realizations carry the dependency's full
@@ -492,7 +492,7 @@ def systemPullEvaluationOrdinaryInv {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       integralComparisonSequencePullback l E f ⋙ coefficientSequenceEvaluation l E X n :=
   ((mateEquiv (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E f))
     (sfIntrinsicConstantModuleAdjunction f (Padic.coefficientExtensionRing l E (n + 1)))).symm
-    (TwoSquare.mk _ _ _ _ (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).hom))
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -508,7 +508,7 @@ theorem systemPullEvaluationOrdinaryInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (
   change IsIso ((mateEquiv (Adjunction.ofIsRightAdjoint
     (integralComparisonSequenceDirectImage l E f))
     (sfIntrinsicConstantModuleAdjunction f
-      (Padic.coefficientExtensionRing l E (n + 1)))).symm d.hom).natTrans
+      (Padic.coefficientExtensionRing l E (n + 1)))).symm d.hom)
   apply WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
     (ProEt.topology Y) (ProEt.topology X) (proEtaleBaseChange f)
     ((sheafCompose (coefficientSequenceTopology (ProEt.topology Y))
@@ -562,7 +562,7 @@ def systemDirectEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   (mateEquiv (systemAdjunction l E f)
     (sfIntrinsicConstantModuleAdjunction f
       (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (systemPullEvaluation l E f n).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (systemPullEvaluation l E f n).hom))
 
 section EvaluationProof
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
@@ -585,10 +585,10 @@ theorem systemDirectEvaluation_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
     (Padic.coefficientExtensionRing l E (n + 1))
   let θ := @asIso _ _ _ _ (systemPullEvaluationOrdinaryInv l E f n)
     (systemPullEvaluationOrdinaryInv_isIso l E f n)
-  have hθ : IsIso (mateEquiv a b θ.hom).natTrans := by
+  have hθ : IsIso (mateEquiv a b θ.hom) := by
     change IsIso (mateEquiv a b ((mateEquiv a b).symm
       (TwoSquare.mk _ _ _ _
-        (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).hom))).natTrans
+        (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).hom)))
     rw [Equiv.apply_symm_apply]
     exact (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).isIso_hom
   unfold systemDirectEvaluation systemAdjunction
@@ -606,7 +606,7 @@ def systemOpenEvaluationInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   ((mateEquiv (systemDerivedOpenAdjunction l E j)
     (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
       (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j))).symm
-    (TwoSquare.mk _ _ _ _ (systemPullEvaluation l E j n).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (systemPullEvaluation l E j n).inv))
 
 section OpenEvaluationProof
 
@@ -719,7 +719,6 @@ section MateNormalization
 attribute [local irreducible] integralComparisonSequenceDirectImage coefficientSequenceEvaluation
   proEtaleConstantModuleDirectImage
 
-set_option maxHeartbeats 2000000 in
 -- The coefficient-category and chosen-adjoint transports need a larger elaboration budget.
 private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) :
@@ -727,7 +726,7 @@ private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U 
       (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j)).symm
       (TwoSquare.mk _ _ _ _
         (@asIso _ _ _ _ (systemPullEvaluationOrdinaryInv l E j n)
-          (systemPullEvaluationOrdinaryInv_isIso l E j n)).inv)).natTrans := by
+          (systemPullEvaluationOrdinaryInv_isIso l E j n)).inv)) := by
   letI : (integralComparisonSequenceDirectImage l E j).IsRightAdjoint :=
     integralComparisonSequenceRightAdjoint l E j
   let b := sfIntrinsicConstantModuleAdjunction j
@@ -747,7 +746,7 @@ private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U 
       (finitePush_eq l E j n) b (systemOpen l E j) (systemOpenAdjunction l E j)
       (coefficientSequenceEvaluation l E U n) (coefficientSequenceEvaluation l E X n)
       (ordinaryEvaluation_eq l E U n) (ordinaryEvaluation_eq l E X n) d hd β hβ
-  have hi : IsIso ((mateEquiv (systemOpenAdjunction l E j) c).symm β.inv).natTrans :=
+  have hi : IsIso ((mateEquiv (systemOpenAdjunction l E j) c).symm β.inv) :=
     inverseMate_isIso_of_counit
       (systemOpenAdjunction l E j) c β.inv e he
   letI := hi
@@ -786,7 +785,7 @@ theorem systemOpenEvaluationInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     (systemPullEvaluationOrdinaryInv_isIso l E j n)
   letI : IsIso ((mateEquiv (systemOpenAdjunction l E j)
       (sfIntrinsicOpenAdjunction A j)).symm
-      (TwoSquare.mk _ _ _ _ β.symm.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ β.symm.hom)) := by
     simpa only [β, A, Iso.symm_hom] using systemOpenEvaluationOrdinaryInv_isIso l E j n
   have hi := (exact_localization_inverse_mate (systemOpenAdjunction l E j)
     (sfIntrinsicOpenAdjunction A j) β.symm).1
@@ -936,7 +935,7 @@ def systemOpenExchangeInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     integralComparisonDerivedSequencePullback l E gU ⋙ systemDerivedOpen l E j ⟶
       systemDerivedOpen l E j ⋙ integralComparisonDerivedSequencePullback l E gX :=
   ((mateEquiv (systemDerivedOpenAdjunction l E j) (systemDerivedOpenAdjunction l E j)).symm
-    (TwoSquare.mk _ _ _ _ (systemSquare l E j gU gX w).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (systemSquare l E j gU gX w).inv))
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -992,13 +991,13 @@ def scalarModels : IntegralComparisonScalarData l E L ι (models l E) (models l 
 
 /-- Coefficient change of direct image is the actual mate of normalized tensor pullback.
 It is formed on whole strict systems, before any evaluation or inverse limit.
-Source: lem-fix-operation-reduction; Zheng 4.10
+Source: proposition-six-operations-change-coefficients; Zheng 4.10
 (blueprint: def-weil-system-operation-exchange-realization). -/
 def systemDirectScalar {X Y : Scheme.{u}} (f : X ⟶ Y) :
     systemDirect l E f ⋙ integralComparisonDerivedSequenceScalar l E L ι Y ⟶
       integralComparisonDerivedSequenceScalar l E L ι X ⋙ systemDirect l L f :=
   (mateEquiv (systemAdjunction l E f) (systemAdjunction l L f)
-    (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι f).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι f).inv))
 
 /-- The inverse open coefficient exchange is the actual left-adjunction mate.
 Source: Zheng 4.1, 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
@@ -1007,7 +1006,7 @@ def systemOpenScalarInv {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
       systemDerivedOpen l E j ⋙ integralComparisonDerivedSequenceScalar l E L ι B :=
   ((mateEquiv (systemDerivedOpenAdjunction l E j)
     (systemDerivedOpenAdjunction l L j)).symm
-    (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι j).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι j).hom))
 
 /-- Tensor extension commutes with the specified exact open extension, componentwise.
 Source: Zheng 4.1, 4.10; Stacks 03DI
@@ -1039,7 +1038,7 @@ def systemOpenScalar {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :=
   (asIso (systemOpenScalarInv l E L ι j)).symm
 
 /-- The proper/open scalar comparison uses the same compactification at every level.
-Source: lem-fix-operation-reduction, compact-support paragraph
+Source: proposition-six-operations-change-coefficients, compact-support paragraph
 (blueprint: def-weil-system-operation-exchange-realization). -/
 def systemCompactScalar {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g) ⋙
@@ -1079,7 +1078,7 @@ def scalarReductionIso (X : Scheme.{u}) :
   exact asIso t
 
 /-- Realize a specified coefficient-system mate, rather than lift finite evaluations.
-Source: lem-fix-operation-reduction; Stacks 06YY, 0941
+Source: proposition-six-operations-change-coefficients; Stacks 06YY, 0941
 (blueprint: def-weil-system-operation-exchange-realization). -/
 def coefficientExchange {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)

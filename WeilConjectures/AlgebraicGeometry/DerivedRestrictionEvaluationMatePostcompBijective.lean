@@ -21,7 +21,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option synthInstance.maxSize 2048
 
-set_option maxHeartbeats 800000 in
 -- The two scheme tensor structures need extra elaboration when composing Hom equivalences.
 /-- The explicit restricted evaluation mate induces bijections on all Hom sets.
 Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
@@ -60,15 +59,8 @@ theorem derivedRestriction_evaluationMate_postcomp_bijective
               R.map (schemeDerivedTensorHomEquiv X
                 (H.obj (op L, E)) L E (𝟙 _)))) := by
   classical
-  dsimp only
-  intro t ht L E A
-  let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)).mapDerivedCategory
-  let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-    X.toRingedSpace.sheaf
+  -- Keep the functor abbreviations shared throughout the Hom-equivalence calculation.
+  intro R H t ht L E A
   let V := H.obj (op L, E)
   let eX := schemeDerivedTensorHomEquiv X
   let eU := schemeDerivedTensorHomEquiv U.toScheme
@@ -109,8 +101,11 @@ theorem derivedRestriction_evaluationMate_postcomp_bijective
     change eU A (R.obj L) (R.obj E)
       (f ≫ m ≫ HU.map ((𝟙 (R.obj L)).op, 𝟙 (R.obj E))) =
         (f ⊗ₘ 𝟙 (R.obj L)) ≫ eU (R.obj V) (R.obj L) (R.obj E) m ≫ 𝟙 _ at hn
-    rw [hi, Category.comp_id, Category.comp_id] at hn
-    simpa only [m, Equiv.apply_symm_apply, Category.assoc] using hn
+    -- Simplify the argument directly, without rewriting inside the chosen equivalence.
+    have hm : m ≫ HU.map ((𝟙 (R.obj L)).op, 𝟙 (R.obj E)) = m :=
+      (congrArg (fun k ↦ m ≫ k) hi).trans (Category.comp_id m)
+    have hn' := (congrArg (fun k ↦ eU A (R.obj L) (R.obj E) (f ≫ k)) hm).symm.trans hn
+    simpa only [m, Equiv.apply_symm_apply, Category.comp_id, Category.assoc] using hn'
   have hc (f : B ⟶ V) :
       (R.map f ⊗ₘ 𝟙 (R.obj L)) ≫ (t V L).inv =
         (t B L).inv ≫ R.map (f ⊗ₘ 𝟙 L) := by
@@ -125,7 +120,7 @@ theorem derivedRestriction_evaluationMate_postcomp_bijective
       eU A (R.obj L) (R.obj E)
         ((eU A (R.obj L) (R.obj E)).symm (s.hom ≫ R.map (eX B L E f)))
     rw [Equiv.apply_symm_apply]
-    rw [hx, R.map_comp]
+    simp only [hx, R.map_comp]
     dsimp only [s, Iso.trans_hom, tensorIso_hom, Iso.refl_hom, Iso.symm_hom]
     change ((i.hom ≫ R.map f) ⊗ₘ 𝟙 (R.obj L)) ≫ (t V L).inv ≫ R.map ev =
       ((i.hom ⊗ₘ 𝟙 (R.obj L)) ≫ (t B L).inv) ≫

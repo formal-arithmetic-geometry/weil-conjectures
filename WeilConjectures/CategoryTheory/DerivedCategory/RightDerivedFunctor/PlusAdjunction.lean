@@ -421,37 +421,37 @@ theorem derivedPlus_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
     (θ : TwoSquare G.mapDerivedCategoryPlus L.mapDerivedCategoryPlus L'.mapDerivedCategoryPlus
       G'.mapDerivedCategoryPlus)
     (hθ : ∀ N : HomotopyCategory.Plus C₂,
-      θ.natTrans.app (DerivedCategory.Plus.Qh.obj N) ≫
+      θ.app (DerivedCategory.Plus.Qh.obj N) ≫
           G'.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
           G'.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj N) =
         L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
           L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫
-          DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N))
+          DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ).app N))
     (K : HomotopyCategory.Plus C₁) :
     G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
-        (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app
+        (mateEquiv adj.derivedPlus adj'.derivedPlus θ).app
           (DerivedCategory.Plus.Qh.obj K) =
       G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
         DerivedCategory.Plus.Qh.map
-          ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app K) ≫
+          ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ)).app K) ≫
         R'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj K) ≫
         R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K) := by
   have hmate : ∀ (Z : DerivedCategory.Plus C₁),
-      (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app Z =
+      (mateEquiv adj.derivedPlus adj'.derivedPlus θ).app Z =
         adj'.derivedPlus.unit.app
             (G.mapDerivedCategoryPlus.obj (R.rightDerivedFunctorPlus.obj Z)) ≫
-          R'.rightDerivedFunctorPlus.map (θ.natTrans.app (R.rightDerivedFunctorPlus.obj Z)) ≫
+          R'.rightDerivedFunctorPlus.map (θ.app (R.rightDerivedFunctorPlus.obj Z)) ≫
           R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlus.map
             (adj.derivedPlus.counit.app Z)) := fun Z => by
     simp [mateEquiv_apply]
   set N := R.mapHomotopyCategoryPlus.obj K
   set u := R.rightDerivedFunctorPlusUnith.app K
   have h₁ := adj'.derivedPlus.unit.naturality (G.mapDerivedCategoryPlus.map u)
-  have h₂ := θ.natTrans.naturality u
+  have h₂ := θ.naturality u
   have h₃ := adj.derivedPlus_counit_app_fac K
   have h₄ := NatTrans.mapHomotopyCategoryPlus_mateEquiv_app adj adj' σ K
   have h₅ := R'.rightDerivedFunctorPlusUnith.naturality
-    ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N ≫
+    ((NatTrans.mapHomotopyCategoryPlus σ).app N ≫
       G'.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app K))
   have h₆ := adj'.derivedPlus_unit_app_fac (G.mapHomotopyCategoryPlus.obj N)
   have h₇ := adj'.derivedPlus.unit.naturality (G.mapDerivedCategoryPlusFactorsh.hom.app N)
@@ -466,12 +466,12 @@ theorem derivedPlus_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
   erw [Functor.map_comp DerivedCategory.Plus.Qh, Category.assoc, reassoc_of% h₅]
   erw [← reassoc_of% h₆, reassoc_of% h₇]
   congr 1
-  have key : θ.natTrans.app (DerivedCategory.Plus.Qh.obj N) ≫
+  have key : θ.app (DerivedCategory.Plus.Qh.obj N) ≫
       G'.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app N ≫
         DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.counit.app K)) =
       L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
         L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫
-        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N) ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ).app N) ≫
         DerivedCategory.Plus.Qh.map
           (G'.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app K)) ≫
         G'.mapDerivedCategoryPlusFactorsh.inv.app K := by
