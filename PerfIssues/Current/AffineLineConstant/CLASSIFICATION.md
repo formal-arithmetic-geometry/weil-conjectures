@@ -1,0 +1,3 @@
+# AffineLineConstant exclusion record
+
+Case ID: current module `AffineLineConstant`; repository revision `1ef1fddac73e`; Lean 4.35.0 with built dependencies. Phase gate: unavailable, because the unchanged module fails before a valid target proof. The exact failure is typeclass synthesis of `GradedObject.HasTensor₄ObjExt` in `isIso_unit_app_of_isIso_baseChangeMap_app` at line 93, followed by `MonoidalClosed`/`MonoidalCategory` synthesis failures in `leftDerivedExtendScalarsTensorUnitIso` at lines 115-118. Failing-run typeclass inference totals 31.9 s; no successful Kernel-on/Kernel-skipped pair exists. Cost site, expression pair, A–F label, and confidence: **unclassified / insufficient valid evidence**. See the README for command and resource measurements.
