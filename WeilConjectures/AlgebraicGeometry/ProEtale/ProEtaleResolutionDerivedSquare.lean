@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleResolutionSigmaNatural
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleResolutionRepresentativeSquare
 
 /-! # The derived coefficient square by naturality and cancellation
-
-(blueprint: lem-sp-resolution-derived-square)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

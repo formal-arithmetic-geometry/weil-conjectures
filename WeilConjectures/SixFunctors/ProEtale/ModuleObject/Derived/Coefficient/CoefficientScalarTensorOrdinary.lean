@@ -213,8 +213,6 @@ private theorem coefficient_pure_smul_unit (Z : Scheme.{u})
     Mod.extendRestrictAdjunction_unit_app_hom, map_smul] at hh
   exact hh
 
-set_option maxHeartbeats 800000 in
--- Comparing the two normalized tensor structures involves several equivalence projections.
 /-- The ordinary scalar tensor square under the section equivalence.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
 Precompose with the scalar coequalizer and the internal tensor coequalizer.
@@ -240,7 +238,6 @@ theorem coefficientScalarTensor_ordinary (Z : Scheme.{u})
   let := internalScalarMonoidal a Z
   apply scalar_tensor_ext a Z M N
   intro V s x y
-  let J := Scheme.ProEt.topology Z
   let A := coefficientMap a Z
   let F := Mod.extendScalars A
   let ER := (ModuleRingedComparison.equivalence R Z).functor
@@ -248,58 +245,61 @@ theorem coefficientScalarTensor_ordinary (Z : Scheme.{u})
   let δ := Functor.OplaxMonoidal.δ F M N
   let eR := ModuleRingedComparison.ordinaryTensorComparison R Z M N
   let eS := ModuleRingedComparison.ordinaryTensorComparison S Z (F.obj M) (F.obj N)
-  change (d.o.hom.app M ⊗ₘ d.o.hom.app N).val.app V
+  -- Both sides are linear, so compare them on the scalar-unit generators.
+  simp only [InternalAbelianSheafModule.internalScalarGenerator_eq_smul,
+    map_smul, Mod.extendRestrictAdjunction_unit_app_hom]
+  change s • (d.o.hom.app M ⊗ₘ d.o.hom.app N).val.app V
       (eS.hom.val.app V ((ES.map δ).val.app V
-        (InternalAbelianSheafModule.internalScalarGenerator J A (M ⊗ N) V s
+        ((Mod.extendUnitHom A (M ⊗ N)).hom.app V
           (ModuleRingedComparison.internalPureTensor R Z M N V x y)))) =
-    (d.m.toOplaxMonoidal.δ (ER.obj M) (ER.obj N)).val.app V
+    s • (d.m.toOplaxMonoidal.δ (ER.obj M) (ER.obj N)).val.app V
       ((d.b.extension.map eR.hom).val.app V
         ((d.o.hom.app (M ⊗ N)).val.app V
-          (InternalAbelianSheafModule.internalScalarGenerator J A (M ⊗ N) V s
+          ((Mod.extendUnitHom A (M ⊗ N)).hom.app V
             (ModuleRingedComparison.internalPureTensor R Z M N V x y))))
-  have hg := h.hgenerator (M ⊗ N) V s
-    (ModuleRingedComparison.internalPureTensor R Z M N V x y)
-  have hb := coefficient_pure_natural a Z d.b eR.hom V s
-    (ModuleRingedComparison.internalPureTensor R Z M N V x y)
-  have heR := ModuleRingedComparison.pullTensor_tensorComparison_apply R Z M N V x y
-  have hm := h.hmonoidal (ER.obj M) (ER.obj N) V s x y
-  conv_rhs => rw [hg]
-  conv_rhs => rw [hb]
-  conv_rhs => rw [heR]
-  conv_rhs => rw [hm]
-  conv_lhs => rw [InternalAbelianSheafModule.internalScalarGenerator_eq_smul]
-  simp only [map_smul]
-  conv_lhs => rw [Mod.extendRestrictAdjunction_unit_app_hom]
+  apply congrArg (fun z ↦ s • z)
+  have hu (P : ModuleRingedComparison.internalModules R Z) (z : P.X.obj.obj V) :
+      (d.o.hom.app P).val.app V ((Mod.extendUnitHom A P).hom.app V z) =
+        coefficientSectionScalarPure a Z d.b (ER.obj P) V 1 z := by
+    simpa only [one_smul] using coefficient_pure_smul_unit a Z d h P V
+      (1 : (ModuleRingedComparison.ring S Z).obj.obj V) z
   let ux := (Mod.extendUnitHom A M).hom.app V x
   let uy := (Mod.extendUnitHom A N).hom.app V y
   let O := (d.o.hom.app M ⊗ₘ d.o.hom.app N).val.app V
-  trans s • O (eS.hom.val.app V
+  trans O (eS.hom.val.app V
     (ModuleRingedComparison.internalPureTensor S Z (F.obj M) (F.obj N) V ux uy))
-  · exact congrArg (fun z ↦ s • O (eS.hom.val.app V z))
-      (internal_delta_unit a Z M N V x y)
-  trans s • O (ModuleRingedComparison.sectionPureTensor S Z (ES.obj (F.obj M))
+  · exact congrArg (fun z ↦ O (eS.hom.val.app V z)) (internal_delta_unit a Z M N V x y)
+  trans O (ModuleRingedComparison.sectionPureTensor S Z (ES.obj (F.obj M))
     (ES.obj (F.obj N)) V ux uy)
-  · exact congrArg (fun z ↦ s • O z)
-      (ModuleRingedComparison.pullTensor_tensorComparison_apply S Z
-        (F.obj M) (F.obj N) V ux uy)
-  trans s • ModuleRingedComparison.sectionPureTensor S Z
-    (d.b.extension.obj (ER.obj M)) (d.b.extension.obj (ER.obj N)) V
-    ((d.o.hom.app M).val.app V ux) ((d.o.hom.app N).val.app V uy)
-  · exact congrArg (fun z ↦ s • z)
-      (InternalAbelianSheafModule.comparison_sectionTmul_natural J (condensedRingObj S Z)
-        (d.o.hom.app M) (d.o.hom.app N) V ux uy)
-  have hM := coefficient_pure_smul_unit a Z d h M V s x
-  have hN : (d.o.hom.app N).val.app V uy = coefficientSectionScalarPure a Z d.b
-      (ER.obj N) V (1 : (ModuleRingedComparison.ring S Z).obj.obj V) y := by
-    simpa only [one_smul] using coefficient_pure_smul_unit a Z d h N V
-      (1 : (ModuleRingedComparison.ring S Z).obj.obj V) y
+  · exact congrArg O (ModuleRingedComparison.pullTensor_tensorComparison_apply S Z
+      (F.obj M) (F.obj N) V ux uy)
   trans ModuleRingedComparison.sectionPureTensor S Z
     (d.b.extension.obj (ER.obj M)) (d.b.extension.obj (ER.obj N)) V
-    (s • (d.o.hom.app M).val.app V ux) ((d.o.hom.app N).val.app V uy)
-  · unfold ModuleRingedComparison.sectionPureTensor
-      InternalAbelianSheafModule.comparison_sectionTmul
-    simp only [← TensorProduct.smul_tmul', map_smul]
+    ((d.o.hom.app M).val.app V ux) ((d.o.hom.app N).val.app V uy)
+  · exact ModuleRingedComparison.pullTensor_sectionTensor_natural S Z
+      (d.o.hom.app M) (d.o.hom.app N) V ux uy
+  trans ModuleRingedComparison.sectionPureTensor S Z
+    (d.b.extension.obj (ER.obj M)) (d.b.extension.obj (ER.obj N)) V
+    (coefficientSectionScalarPure a Z d.b (ER.obj M) V 1 x)
+    (coefficientSectionScalarPure a Z d.b (ER.obj N) V 1 y)
   · exact congrArg₂ (ModuleRingedComparison.sectionPureTensor S Z
-      (d.b.extension.obj (ER.obj M)) (d.b.extension.obj (ER.obj N)) V) hM hN
+      (d.b.extension.obj (ER.obj M)) (d.b.extension.obj (ER.obj N)) V) (hu M x) (hu N y)
+  symm
+  let D := (d.m.toOplaxMonoidal.δ (ER.obj M) (ER.obj N)).val.app V
+  trans D ((d.b.extension.map eR.hom).val.app V
+    (coefficientSectionScalarPure a Z d.b (ER.obj (M ⊗ N)) V 1
+      (ModuleRingedComparison.internalPureTensor R Z M N V x y)))
+  · exact congrArg (fun z ↦ D ((d.b.extension.map eR.hom).val.app V z))
+      (hu (M ⊗ N) (ModuleRingedComparison.internalPureTensor R Z M N V x y))
+  trans D (coefficientSectionScalarPure a Z d.b (ER.obj M ⊗ ER.obj N) V 1
+    (eR.hom.val.app V (ModuleRingedComparison.internalPureTensor R Z M N V x y)))
+  · exact congrArg D (coefficient_pure_natural a Z d.b eR.hom V 1
+      (ModuleRingedComparison.internalPureTensor R Z M N V x y))
+  trans D (coefficientSectionScalarPure a Z d.b (ER.obj M ⊗ ER.obj N) V 1
+    (ModuleRingedComparison.sectionPureTensor R Z (ER.obj M) (ER.obj N) V x y))
+  · exact congrArg (fun z ↦ D
+      (coefficientSectionScalarPure a Z d.b (ER.obj M ⊗ ER.obj N) V 1 z))
+      (ModuleRingedComparison.pullTensor_tensorComparison_apply R Z M N V x y)
+  exact h.hmonoidal (ER.obj M) (ER.obj N) V 1 x y
 
 end AlgebraicGeometry.ProEtale.CondensedRing

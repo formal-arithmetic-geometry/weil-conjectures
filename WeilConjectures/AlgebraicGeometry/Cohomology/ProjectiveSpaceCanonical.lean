@@ -15,7 +15,7 @@ Let `A` be a commutative ring and `ℙᵈ_A = ℙ(n; Spec A)` with `Fintype.card
 The canonical module `ω = ⋀ᵈ Ω¹_{ℙ/A}` is isomorphic to `𝒪(-d-1)`
 (`AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`), hence `Hᵈ(ℙᵈ_A, ω) ≅ A`.
 
-(blueprint: `lem-pc-projective-space-canonical`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -37,7 +37,7 @@ variable {n : Type u}
 (`canonicalModuleIsoTwist`) and `Hᵈ(ℙᵈ_A, 𝒪(-d-1)) ≅ A`
 (`nonempty_H_twist_top_linearEquiv_self`).
 
-(blueprint: `lem-pc-projective-space-canonical`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem nonempty_H_canonicalModule_top_linearEquiv (A : Type u) [CommRing A] [Fintype n]
     {d : ℕ} (hn : Fintype.card n = d + 1) (hd : d ≠ 0) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A))

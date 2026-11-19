@@ -39,7 +39,7 @@ private theorem mixed_mate_unit_square
   let α : TwoSquare Lg Lf Lq Lp := .mk _ _ _ _ k
   have h := unit_mateEquiv ap ag (mateEquiv af aq α) E
   change Rf.map (ap.unit.app E) ≫
-      ((mateEquiv ap ag (mateEquiv af aq α)).natTrans).app (Lp.obj E) = _ at h
+      ((mateEquiv ap ag (mateEquiv af aq α))).app (Lp.obj E) = _ at h
   rw [iterated_mateEquiv_conjugateEquiv] at h
   simpa [α, mateEquiv, Adjunction.homEquiv_unit, Functor.map_comp,
     Category.assoc] using h.symm

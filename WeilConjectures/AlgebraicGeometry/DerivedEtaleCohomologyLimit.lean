@@ -39,11 +39,11 @@ with the inverse image along the composite. Thus these are the canonical pullbac
 
 Proof: represent the bounded-below object by a complex zero below some integer `a`,
 using good truncation (def-weil-abstract-derived-category and
- def-weil-pbc-bounded-derived-subcategories). Pull it back termwise at each stage and
-at the limit (def-weil-pbc-derived-inverse-image). The composition identifications
+ situation-conventions). Pull it back termwise at each stage and
+at the limit (situation-conventions). The composition identifications
 (lem-weil-pbc-inverse-image-composition) make the pulled-back diagram on the limit
 constant, so its termwise filtered colimit is the limit pullback
-(lem-weil-pbc-colimit-constant-connected-diagram). Apply continuity for uniformly
+(definition-torsion-sheaves--3). Apply continuity for uniformly
 bounded-below complex systems (lem-weil-pbc-etale-cohomology-limit-complex-systems,
 Stacks 0EZM). Its maps are the projection pullbacks. Identify their cohomology with
 cohomology of derived global sections (def-weil-pbc-etale-cohomology); the resulting

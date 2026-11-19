@@ -18,7 +18,7 @@ is the morphism
 `M ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* F)`
 
 in `D(X'_ét)` (`AlgebraicGeometry.Etale.tensorBaseChangeMap`), which appears in blueprint
-`lem-kun-0f1j` and `lem-kun-0f1n`.
+`lemma-kunneth-field-coefficients--1` and `lemma-kunneth-field-coefficients--1`.
 
 This file shows that it is natural in both variables and, as a natural transformation in each
 variable, compatible with the shifts. It also records that the derived tensor product commutes
@@ -60,9 +60,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X' S' T Y : Scheme.{u}}
 
-/-- The base change map for a pushforward tensored with a complex (`lem-kun-0f1j`,
-`lem-kun-0f1n`): for a commutative square `h ≫ f' = e ≫ g` (with `h : Y ⟶ X'`, `e : Y ⟶ T`,
-`f' : X' ⟶ S'`, `g : T ⟶ S'`) and `M ∈ D(X'_ét)`, `F ∈ D(T_ét)`, the morphism
+/-- The base change map for a pushforward tensored with a complex
+(`lemma-kunneth-field-coefficients--1`, `lemma-kunneth-field-coefficients--1`): for a commutative
+square `h ≫ f' = e ≫ g` (with `h : Y ⟶ X'`, `e : Y ⟶ T`, `f' : X' ⟶ S'`, `g : T ⟶ S'`) and
+`M ∈ D(X'_ét)`, `F ∈ D(T_ét)`, the morphism
 
 `M ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* F)`
 

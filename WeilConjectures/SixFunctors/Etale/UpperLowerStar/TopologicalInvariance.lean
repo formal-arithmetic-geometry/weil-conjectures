@@ -156,7 +156,7 @@ theorem isEquivalence_upperStar : ((f)^*[A]).IsEquivalence :=
   Functor.isEquivalence_of_iso (upperStarIsoInverse A f).symm
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `sbc-lem-thickening-etale-site`: The etale site of a thickening.
+/-- Blueprint `lemma-reduction-field`: The etale site of a thickening.
 
 If `i : T₁ ⟶ T₂` is a thickening, that is, a closed immersion which is surjective on points,
 then pullback along `i` is an equivalence between the categories of `A`-valued étale sheaves
@@ -204,7 +204,7 @@ variable {F} in
    H^n(Y_ét, G) ──cohomologyMap f G n──→ H^n(X_ét, f^* G)
 ```
 
-commutes. (blueprint: `lem-weil-pbc-cohomology-pullback-functorial`, naturality) -/
+commutes. (blueprint: `proposition-cohomology-p-1-over-henselian--1`, naturality) -/
 lemma cohomologyMap_map {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
     (x : Sheaf.H F n) :
     cohomologyMap f G n (Sheaf.H.map φ n x) =

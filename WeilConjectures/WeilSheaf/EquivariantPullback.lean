@@ -52,8 +52,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
   {L : Type u} [Field L] [Finite L] [Fact (ringChar L ≠ l)]
   {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of L))] {N : ℕ}
   (j : (Y ↘ Spec (CommRingCat.of L)).geometricFiber ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-    (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+  (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom =
+    (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
 
 /-- If finitely many subsheaves defined over `L` span `F̄` and the pullback of each is punctually
 `ι`-pure of weight `w`, so is the pullback of `F`: it is a quotient of their direct sum. -/
@@ -76,8 +76,8 @@ theorem isPunctuallyPureOfWeight_curvePullback_of_iSup_eq_top
 subsheaf, on the global sections of the pullbacks along `s'`. -/
 lemma stalkAtMap_curvePullbackSubι (F : WeilSheaf k₀ l X)
     {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber} {n : ℕ}
-    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius L ^ n).hom ≫ s')
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius L ^ n).asIso.hom ≫ s')
     (P : Subobject F.obj.carrier) (hP : (⇑F.frobeniusTwist)^[N] P = P)
     (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
     stalkAtMap s' n hs' (curvePullbackSubι j hj F P hP hPl) =
@@ -127,8 +127,8 @@ lemma range_stalkAtMap_curvePullbackSubι (F : WeilSheaf k₀ l X)
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (Θ : Spec (.of (AlgebraicClosure L)) ≅ Spec (.of (AlgebraicClosure k₀)))
     (hsq : Θ.hom ≫ s = s' ≫ j) {n : ℕ}
-    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius L ^ n).hom ≫ s')
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius L ^ n).asIso.hom ≫ s')
     (P : Subobject F.obj.carrier) (hP : (⇑F.frobeniusTwist)^[N] P = P)
     (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
     LinearMap.range (stalkAtMap s' n hs' (curvePullbackSubι j hj F P hP hPl)) =
@@ -151,18 +151,18 @@ lemma range_stalkAtMap_curvePullbackSubι (F : WeilSheaf k₀ l X)
 reparametrisation, through `Spec θ : Spec k̄_L ≅ Spec k̄₀`, is fixed by `Fr^{N n}` up to
 reparametrisation, `N = [L : k₀]`. -/
 lemma comp_geometricGaloisFrobenius_pow_mul_of_comp_eq [Algebra k₀ L]
-    (hj' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+    (hj' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom =
+      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
     (hN : N = Module.finrank k₀ L) (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L)
     {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hss' : s' ≫ j = (specAlgHomAlgebraicClosureIso θ).hom ≫ s) {n : ℕ}
-    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius L ^ n).hom ≫ s') :
-    s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).hom =
-      (specGeometricFrobenius k₀ ^ (N * n)).hom ≫ s := by
-  have hΘ : (specGeometricFrobenius L ^ n).hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
-      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).hom := by
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius L ^ n).asIso.hom ≫ s') :
+    s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (N * n)).asIso.hom ≫ s := by
+  have hΘ : (specGeometricFrobenius L ^ n).asIso.hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
+      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).asIso.hom := by
     rw [hN, specAlgHomAlgebraicClosureIso_hom]
     exact specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
   rw [← cancel_epi (specAlgHomAlgebraicClosureIso θ).hom, ← Category.assoc, ← hss',
@@ -180,10 +180,10 @@ lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_curvePullback
     {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hsq : (specAlgHomAlgebraicClosureIso θ).hom ≫ s = s' ≫ j) {n : ℕ}
-    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius L ^ n).hom ≫ s')
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).hom =
-      (specGeometricFrobenius k₀ ^ (N * n)).hom ≫ s) :
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius L ^ n).asIso.hom ≫ s')
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (N * n)).asIso.hom ≫ s) :
     ((WeilCoefficients.toModuleCat l).map (ProEtale.globalSectionsTransport _ hsq
         (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
           ((curvePullback j hj).obj F).obj.carrier.X))).hom ∘ₗ
@@ -193,16 +193,16 @@ lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_curvePullback
         (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
           ((curvePullback j hj).obj F).obj.carrier.X))).hom := by
   have : Module.Finite k₀ L := Module.Finite.of_finite
-  have hΘ : (specGeometricFrobenius L ^ n).hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
-      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).hom := by
+  have hΘ : (specGeometricFrobenius L ^ n).asIso.hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
+      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).asIso.hom := by
     rw [hN, specAlgHomAlgebraicClosureIso_hom]
     exact specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
   rw [frobeniusEnd_stalkAt, frobeniusEnd_stalkAt,
     ← WeilCoefficients.toModuleCat_map_comp_hom, ← WeilCoefficients.toModuleCat_map_comp_hom]
   refine congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom) ?_
   rcases Nat.eq_zero_or_pos n with rfl | hn
-  · have h₀ : (specGeometricFrobenius k₀ ^ 0).hom ≫ s =
-        s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom := by
+  · have h₀ : (specGeometricFrobenius k₀ ^ 0).asIso.hom ≫ s =
+        s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom := by
       rw [pow_zero, pow_zero]
       rfl
     rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_zero N)
@@ -223,10 +223,10 @@ theorem exists_equiv_stalkAt_curvePullback (F : WeilSheaf k₀ l X)
     {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hss' : s' ≫ j = (specAlgHomAlgebraicClosureIso θ).hom ≫ s) {n : ℕ}
-    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius L ^ n).hom ≫ s') :
-    ∃ (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).hom =
-        (specGeometricFrobenius k₀ ^ (N * n)).hom ≫ s)
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius L ^ n).asIso.hom ≫ s') :
+    ∃ (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).asIso.hom =
+        (specGeometricFrobenius k₀ ^ (N * n)).asIso.hom ≫ s)
       (e : (((curvePullback j hj).obj F).stalkAt s' n hs').Equiv (F.stalkAt s (N * n) hs)),
       ∀ (P : Subobject F.obj.carrier) (hP : (⇑F.frobeniusTwist)^[N] P = P)
         (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)),

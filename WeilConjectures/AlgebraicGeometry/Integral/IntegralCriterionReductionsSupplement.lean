@@ -238,10 +238,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
 
 /-!
 # Constructibility of all integral reductions from the first
-
-Source: blueprint main-20261015, sec-proetale-coefficients,
-sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.md
-(blueprint: det-prop-integral-criterion-reductions).
 -/
 
 -- After pruning, this module only keeps private declarations.

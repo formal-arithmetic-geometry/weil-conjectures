@@ -200,10 +200,10 @@ category of sequences of derived objects. The semilinear-derived-sections node s
 restriction, derived right adjoints, exact evaluations e_n jointly detecting isomorphisms, and
 compatibility of evaluations with their units, counits and specified mate maps. At each finite
 level, pro-etale open restriction is the subterminal localization in lem-weil-proetale-weakly-
-etale-localization. The site is small and subcanonical by det-pe-topos-functoriality-site. It
+etale-localization. The site is small and subcanonical by proposition-topos-functoriality--1. It
 has terminal object X and pullbacks: for any arrows P->C<-Q, the family {id_C,P->C} is a
 covering of C in the sense of def-weil-pbc-small-proetale-site, since both maps are weakly etale
-and the fpqc condition of def-weil-pbc-proetale-covering is met on every affine open of C by
+and the fpqc condition of definition-small-pro-etale-site--1 is met on every affine open of C by
 that open itself inside the identity term; apply the covering base-change axiom to it along
 Q->C; thus it has finite limits. Apply lem-sp-subterminal-derived-image-calculus on this finite-
 level site with its actual constant ring O/ell^n. It gives self-restriction counit isomorphisms
@@ -258,7 +258,7 @@ with each cohomology sheaf. If i is outside [a_0,b_0], the module sheaf H^i(H_n)
 and V. On every pro-etale object T->X the base changes T×_X U and T×_X V are open subschemes of
 T covering it; open immersions are weakly etale, and every affine open of T is covered by
 finitely many affine opens each contained in one of them (quasi-compactness), so they form a
-covering of T by def-weil-pbc-proetale-covering; the sheaf separatedness axiom then forces every
+covering of T by definition-small-pro-etale-site--1; the sheaf separatedness axiom then forces every
 section of H^i(H_n) to be zero. Thus H^i(H_n)=0 outside precisely the same interval,
 independently of n.
 
@@ -298,7 +298,7 @@ for both restrictions. The sheaf-local vanishing argument of step 6 therefore gi
 vanishing on X. Since M was arbitrary, the definition of Tor amplitude gives amplitude [u_0,v_0]
 for H_n, with no widening and independently of n. Together with steps 6–8 this says exactly that
 H lies in the full subcategory of uniformly bounded constructible finite-Tor towers specified in
-sk-def-sp-normalized-towers; this is the ambient category C_X, not its separately defined
+prose-09-21; this is the ambient category C_X, not its separately defined
 normalized subcategory. -/
 theorem spRingedTowerBinaryDescent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

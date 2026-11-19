@@ -13,8 +13,9 @@ import Mathlib.Topology.Algebra.Ring.Compact
 
 /-! # Residue comparison for embedded coefficients
 
-Source: integral-models proof, first paragraph; Stacks Project Tags 03ET and 06YQ (blueprint:
-lem-sfb-embedded-integral-residue-comparison).
+## References
+
+* Stacks Project Tags 03ET and 06YQ
 -/
 
 @[expose] public noncomputable section
@@ -36,21 +37,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Constructible cohomology and finite Tor amplitude of the first constant reduction
 are equivalent to bounded constructible etale origin of the first completed reduction.
-
-Source: integral-models proof, first paragraph; Stacks Project Tags 03ET and 06YQ
-(blueprint: lem-sfb-embedded-integral-residue-comparison).
-
-Proof: the uniformizer equation gives a maximal first quotient ideal. The quotient is
-finite, and compactness of the integer ring makes its maximal ideal open, so its quotient
-topology is discrete. Equip the quotient with its field structure. The first-reduction
-comparison identifies the specified intrinsic realizations of the constant and continuous
-reductions. The finite-field cohomology criterion identifies constructible homology and
-finite Tor amplitude of the constant reduction with intrinsically constructible bounded
-homology of its realization. Apply the essential-image clause of
-finiteRing_constructibleDerived_origin, then transport across the reduction isomorphism.
-Package the finite and discrete instances for the origin predicate. Conversely unpack
-that predicate, transport across the inverse isomorphism, and apply the same criterion.
-No completeness or boundedness assumption on K enters this argument.
 -/
 theorem integralModelsEmbeddedResidueComparison
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

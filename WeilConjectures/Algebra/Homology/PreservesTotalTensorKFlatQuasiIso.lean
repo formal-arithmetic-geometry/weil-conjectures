@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Preservation of quasi-isomorphisms between K-flat complexes
 
-Source: Weil conjectures blueprint, main-20261015, `sec-proetale-coefficients`,
+Source: Weil conjectures blueprint, main-20261015, `chap-The-pro-etale-site`,
 `sk-def-sfb-derived-categories`, definition `def-sfb-preserves-kflat-quasi-iso`
 (blueprint: def-sfb-preserves-kflat-quasi-iso).
 

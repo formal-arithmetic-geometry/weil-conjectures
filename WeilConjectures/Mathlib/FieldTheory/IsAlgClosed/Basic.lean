@@ -190,7 +190,8 @@ theorem exists_eval_sub_self_eq_of_derivative_eq_zero {P : k[X]} (hP : derivativ
     simp [hP] at this
   exact ⟨y, by simpa [sub_eq_zero] using hy⟩
 
-/-- Blueprint `lem-sc-artin-schreier-k`: Artin–Schreier on algebraically closed fields.
+/-- Blueprint `proposition-p-torsion-smooth-proper-curve--2`: Artin–Schreier on algebraically closed
+fields.
 
 Over an algebraically closed field `k` of characteristic `p > 0`, the Artin–Schreier map
 `x ↦ x ^ p - x` is surjective, since `X ^ p - X - a` has derivative `-1`. Its kernel is the prime

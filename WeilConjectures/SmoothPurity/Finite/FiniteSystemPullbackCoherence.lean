@@ -244,7 +244,6 @@ private theorem varyingDirectEvaluation_apply
   exact (AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalP_existsUnique
     R φ f n).choose_spec.1 N U x
 
-set_option maxHeartbeats 350000 in
 -- The sectionwise equations compare modules with different scalar presentations.
 private theorem varyingEvaluationUnit_iff
     (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R (n + 1) ⟶ R n)

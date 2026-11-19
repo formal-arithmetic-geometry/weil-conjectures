@@ -98,7 +98,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
 
-set_option maxHeartbeats 500000 in
 -- Track the specified localization and termwise-equivalence instances through the diagram.
 /-- The normalized scalar comparison intertwines the universal computation maps on
 all complexes, without flatness hypotheses on their terms.

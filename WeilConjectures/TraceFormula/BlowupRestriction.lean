@@ -14,19 +14,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 # Restriction through the blow-up of a strictly local surface
 
 This file assembles the proof of the blowup restriction vanishing (blueprint
-`sk-lem-tf-blowup-restriction`). Abstractly: let `T'` be a scheme (in the application `T - D`),
-`i' : U' ⟶ T'` an open immersion (`T - (D ∪ H) ⟶ T - D`) and `E` a complex on `U'` with finite
-`ℓ`-group monodromy. Suppose given a transverse boundary configuration `(Z, X, Y)` (in the
-application, a chart of the blow-up of `T` at `t` minus the strict transform of `D`) and a
+`lemma-vanishing-restrictions-after-blowing-up--1`). Abstractly: let `T'` be a scheme (in the
+application `T - D`), `i' : U' ⟶ T'` an open immersion (`T - (D ∪ H) ⟶ T - D`) and `E` a complex on
+`U'` with finite `ℓ`-group monodromy. Suppose given a transverse boundary configuration `(Z, X, Y)`
+(in the application, a chart of the blow-up of `T` at `t` minus the strict transform of `D`) and a
 morphism `φ : Z - Y ⟶ T'` with `φ⁻¹(U') = Z - (X ∪ Y)` (in the application the blow-up map,
-`det-tf-blowup-configuration` (2), (3)). Let `ψ : W ⟶ T'` (the punctured curve `B - t`) be a
-finite disjoint union of maps `W_j ⟶ Z - Y ⟶ T'` each of which factors through a strictly local
-scheme `S_j ⟶ Z` whose closed point lies on `Y` (the strictly local branches of the strict
-transform of `B`, `det-tf-blowup-strict-transform`). Then the restriction map
-`RΓ(T', i'_! E) ⟶ RΓ(W, ψ^* i'_! E)` is zero: it is the tuple of the restrictions to the `W_j`
+`lemma-vanishing-restrictions-after-blowing-up--1` (2), (3)). Let `ψ : W ⟶ T'` (the punctured curve
+`B - t`) be a finite disjoint union of maps `W_j ⟶ Z - Y ⟶ T'` each of which factors through a
+strictly local scheme `S_j ⟶ Z` whose closed point lies on `Y` (the strictly local branches of the
+strict transform of `B`, `lemma-vanishing-restrictions-after-blowing-up--1`). Then the restriction
+map `RΓ(T', i'_! E) ⟶ RΓ(W, ψ^* i'_! E)` is zero: it is the tuple of the restrictions to the `W_j`
 (`AlgebraicGeometry.Etale.eq_zero_of_globalSectionsRestriction_of_isColimit`), and each of those
 factors through the restriction `RΓ(Z - Y, i_! φ^* E) ⟶ RΓ(W_j, -)`, which vanishes by the
-punctured restriction lemma (`sk-lem-tf-punctured-restriction`,
+punctured restriction lemma (`lemma-restriction-punctured-curve`,
 `AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_strictlyLocal`).
 -/
 
@@ -88,10 +88,10 @@ theorem globalSectionsRestriction_transverseBoundaryComplex_eq_zero_of_pi (hℓ 
   exact hc.symm
 
 /-- **Restriction through a transverse configuration vanishes** (assembly of the proof of
-`sk-lem-tf-blowup-restriction`). Let `(Z, X, Y, z)` be a transverse boundary configuration with
-`Y` connected, `i' : U' ⟶ T'` an open immersion, `E` a complex with finite `ℓ`-group monodromy on
-`U'`, and `φ : Z - Y ⟶ T'` with `φ⁻¹(U') = Z - (X ∪ Y)` (a cartesian square). Let
-`ψ : W ⟶ T'` factor as `W ⟶ Z - Y ⟶ T'` such that `W ⟶ Z - Y ⟶ Z` factors through a finite
+`lemma-vanishing-restrictions-after-blowing-up--1`). Let `(Z, X, Y, z)` be a transverse boundary
+configuration with `Y` connected, `i' : U' ⟶ T'` an open immersion, `E` a complex with finite
+`ℓ`-group monodromy on `U'`, and `φ : Z - Y ⟶ T'` with `φ⁻¹(U') = Z - (X ∪ Y)` (a cartesian square).
+Let `ψ : W ⟶ T'` factor as `W ⟶ Z - Y ⟶ T'` such that `W ⟶ Z - Y ⟶ Z` factors through a finite
 disjoint union `S = Spec (∏ R_j) ⟶ Z` of strictly local schemes mapping their closed points to
 closed points of `Y`. Then the restriction map `RΓ(T', i'_! E) ⟶ RΓ(W, ψ^* i'_! E)` is zero. -/
 theorem globalSectionsRestriction_eq_zero_of_transverse (hℓ : (ℓ : k) ≠ 0)

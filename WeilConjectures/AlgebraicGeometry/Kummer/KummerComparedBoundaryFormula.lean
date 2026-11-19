@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictAdjunctData
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import all WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
 
-/-! # The compared Kummer boundary formula
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-kummer-compared-boundary-formula). -/
+/-! # The compared Kummer boundary formula. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,12 +34,7 @@ private theorem mk0_ext_mk0_hom
   simp only [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀]
   rfl
 
-/-- Expand the compared Kummer class as its actual short-exact-sequence boundary.
-Source: diagonal tower system proof, step (4), the positive Kummer boundary
-(blueprint: lem-sfb-kummer-compared-boundary-formula).
-Proof: expand the two degree-zero Ext factors and their compositions. The Ext
-class of the actual short exact Kummer complex has hom equal to its single
-boundary. The single functor sends the two endpoint maps to the displayed maps. -/
+/-- Expand the compared Kummer class as its actual short-exact-sequence boundary. -/
 theorem kummer_compared_boundary_formula (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)] (n : ℕ) :

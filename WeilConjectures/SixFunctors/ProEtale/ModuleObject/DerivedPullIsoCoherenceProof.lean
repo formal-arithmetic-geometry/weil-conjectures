@@ -118,7 +118,6 @@ lemma conjugateEquiv_upperStarComp_hom_eq_lowerStarComp :
       (lowerStarComp Λ f g).hom :=
   (conjugateEquiv _ _).apply_symm_apply _
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `lowerStarCompHomotopy` is induced by the composition isomorphism `lowerStarComp` of
 pushforwards of module objects. -/
@@ -160,7 +159,6 @@ lemma comapLowerStarIso_hom_app_lowerStarComp
     comapLowerStarIso_hom_app_hom, comapLowerStarIso_hom_app_hom]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The coherence of `comapLowerStarIso` with `lowerStarCompHomotopy` on the homotopy
 categories: the hypothesis `hH` of `derivedPullIso_hom_app_comp_of_homotopy`. -/
@@ -186,7 +184,6 @@ lemma comapLowerStarIso_lowerStarCompHomotopy
   ext n : 1
   exact comapLowerStarIso_hom_app_lowerStarComp Λ f g a (K.X n)
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- Every object of the derived category is the image of a complex on which the right derived
 units of `f_* ⋙ g_*` are isomorphisms, namely a K-injective complex: the hypothesis `hK` of
@@ -209,7 +206,6 @@ lemma exists_iso_Qh_obj_isIso_rightDerivedFunctorUnit_lowerStar
 
 variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The derived (Pull) isomorphisms for a flat coefficient change are compatible with the
 composition isomorphisms `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`. -/

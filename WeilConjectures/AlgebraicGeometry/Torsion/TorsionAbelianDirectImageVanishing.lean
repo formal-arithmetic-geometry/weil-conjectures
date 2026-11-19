@@ -38,7 +38,7 @@ private theorem torsion_forget_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj
         ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) f).obj F)).IsTorsion := by
   exact Sheaf.IsTorsion.of_iso
-    (asIso ((Etale.upperStarForget₂ (ULift.{u + 1} ℤ) f).natTrans.app F))
+    (asIso ((Etale.upperStarForget₂ (ULift.{u + 1} ℤ) f).app F))
     (Etale.isTorsion_upperStar f hF)
 
 private theorem module_vanishing

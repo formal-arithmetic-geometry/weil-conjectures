@@ -32,7 +32,7 @@ Source: Stacks Project, Tag 03Q1(1), with exactness as in Tag 0034
 
 Proof:
 1. Base change on the étale sites preserves finite limits
-   (`lem-weil-pbc-etale-base-change-finite-limits`). Presheaf pullback is left adjoint to
+   (`situation-conventions`). Presheaf pullback is left adjoint to
    restriction (`lem-weil-pbc-presheaf-pullback-left-exact`), and sheafification is left
    adjoint to inclusion (`def-weil-pbc-sheafification`). The chain of adjunctions identifies
    inverse image (`def-weil-pbc-inverse-image`) with inclusion, presheaf pullback, then
@@ -41,9 +41,9 @@ Proof:
 3. The base-change functor preserves finite limits; its presheaf pullback is a filtered
    colimit and preserves finite limits (`lem-weil-pbc-presheaf-pullback-left-exact`).
 4. Inclusion and sheafification preserve finite limits
-   (`lem-weil-pbc-sheafification-exact`). Thus their composite with presheaf pullback, and
+   (`situation-conventions`). Thus their composite with presheaf pullback, and
    the naturally isomorphic inverse image, preserve finite limits, including kernels.
-5. Finite products in the abelian categories (`def-weil-pbc-abelian-etale-sheaves`) are
+5. Finite products in the abelian categories (`situation-conventions`) are
    biproducts, giving additivity. Preservation of kernels and cokernels carries a short
    exact sequence to a short exact sequence. -/
 theorem upperStar_abelian_exact {U V : Scheme.{u}} (f : U ⟶ V) :

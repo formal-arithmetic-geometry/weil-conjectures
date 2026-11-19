@@ -15,7 +15,7 @@ public import WeilConjectures.WeilSheaf.ShiftedSheaf
 
 Let `M` be a lisse Weil sheaf on a dense open `j : U₀ ↪ 𝔸¹` with finite complement, and let
 `B = j_*M / j_!M` be its boundary sheaf. Then `FT_ψ(B) ≅ B'[1]` for a lisse Weil sheaf `B'` on
-the dual line (Steps 1–3 of `prop-fd-zero-extension-comparison`).
+the dual line (Steps 1–3 of `lemma-fourier-transform-boundary-sequence`).
 
 Let `i : Z₀ ↪ 𝔸¹` be the reduced closed complement of `U₀`, a finite étale `k₀`-scheme. Since `B`
 vanishes on `U₀`, the open–closed triangle gives `B ≅ i_* E` with `E = i^* B`. Writing
@@ -105,8 +105,8 @@ namespace WeilSheaf
 open WeilComplex
 
 /-- **The transform of the direct image of a sheaf on a closed subscheme** (Steps 2–3 of
-`prop-fd-zero-extension-comparison`). Let `i : Z₀ ↪ 𝔸¹` be a closed immersion, `X'` the base change
-of `i` along the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and
+`lemma-fourier-transform-boundary-sequence`). Let `i : Z₀ ↪ 𝔸¹` be a closed immersion, `X'` the base
+change of `i` along the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and
 `i' : X' ⟶ 𝔸¹ × 𝔸¹`, and `π = pr₂ ∘ i'` finite. For a Weil sheaf `E` on `Z₀`,
 `FT_ψ(i_! E) ≅ (π_*(i'^* 𝓚_ψ ⊗ q^* E))[1]`: compact support base change, the projection formula
 and the composition law give `FT_ψ(i_! E) ≅ Rπ_!(i'^*𝓚_ψ ⊗ q^*E)[1]`, and `Rπ_!` of a sheaf is
@@ -179,9 +179,9 @@ theorem nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback
     homologySheafShiftIso Kπ 1 (-1) 0 rfl ≪≫ e₀)⟩
 
 /-- **The transform of a punctual sheaf, explicitly** (Steps 1–3 of
-`prop-fd-zero-extension-comparison`). Let `F` be a Weil sheaf on the affine line vanishing on a
-dense open `U₀` with closed complement `i : Z₀ ↪ 𝔸¹`, and let `X'` be the base change of `i` along
-the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and `i' : X' ⟶ 𝔸¹ × 𝔸¹`, and
+`lemma-fourier-transform-boundary-sequence`). Let `F` be a Weil sheaf on the affine line vanishing
+on a dense open `U₀` with closed complement `i : Z₀ ↪ 𝔸¹`, and let `X'` be the base change of `i`
+along the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and `i' : X' ⟶ 𝔸¹ × 𝔸¹`, and
 `π = pr₂ ∘ i'` finite. Then `FT_ψ(F) ≅ (π_*(i'^* 𝓚_ψ ⊗ q^* i^* F))[1]`: `F ≅ i_* i^* F`, compact
 support base change, the projection formula and the composition law give
 `FT_ψ(i_* E) ≅ Rπ_!(i'^*𝓚_ψ ⊗ q^*E)[1]`, and `Rπ_!` of a sheaf is the sheaf `π_*` in degree zero
@@ -227,11 +227,11 @@ theorem nonempty_iso_fourierTransform_toComplex_of_isPullback
     (nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback ψ i q i' π hπ hP
       ((WeilSheaf.upperStar i).obj F)).some⟩
 
-/-- **The transform of a punctual sheaf** (Steps 1–3 of `prop-fd-zero-extension-comparison`).
-Let `F` be a Weil sheaf on the affine line vanishing on a dense open `U₀`. Then
-`FT_ψ(F) ≅ B'[1]` for a lisse Weil sheaf `B'` on the dual line: with `i : Z₀ ↪ 𝔸¹` the reduced
-closed complement of `U₀`, `F ≅ i_* i^* F` and `B' = π_*(q^* i^* F ⊗ i'^* 𝓚_ψ)` for the finite
-étale projection `π : Z₀ × 𝔸¹ ⟶ 𝔸¹`
+/-- **The transform of a punctual sheaf** (Steps 1–3 of
+`lemma-fourier-transform-boundary-sequence`). Let `F` be a Weil sheaf on the affine line vanishing
+on a dense open `U₀`. Then `FT_ψ(F) ≅ B'[1]` for a lisse Weil sheaf `B'` on the dual line: with
+`i : Z₀ ↪ 𝔸¹` the reduced closed complement of `U₀`, `F ≅ i_* i^* F` and
+`B' = π_*(q^* i^* F ⊗ i'^* 𝓚_ψ)` for the finite étale projection `π : Z₀ × 𝔸¹ ⟶ 𝔸¹`
 (`AlgebraicGeometry.WeilSheaf.nonempty_iso_fourierTransform_toComplex_of_isPullback`). -/
 theorem exists_isLisse_iso_fourierTransform_of_isZero_upperStar
     (ψ : AddChar k₀ (PadicAlgCl l)) {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]

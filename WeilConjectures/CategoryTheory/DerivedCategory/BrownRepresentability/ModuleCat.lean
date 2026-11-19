@@ -31,7 +31,8 @@ of compact generators of the unbounded derived category `D(R)` of `R`-modules
 Hence Brown representability holds for `D(R)` (Stacks Lemma 13.38.1): every triangulated functor
 out of `D(R)` which preserves coproducts is a left adjoint
 (`DerivedCategory.isLeftAdjoint_of_preservesCoproducts_moduleCat`). This is the input of the
-proof of Stacks Tag 0F5Y, used in the blueprint node `thm-amb-etale-exceptional-adjoint`.
+proof of Stacks Tag 0F5Y, used in the blueprint node
+`theorem-existence-exceptional-inverse-image--1`.
 -/
 
 @[expose] public section

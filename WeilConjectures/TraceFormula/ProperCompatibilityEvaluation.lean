@@ -15,8 +15,8 @@ For a proper morphism `f : X ⟶ Y`, `q = f × f` and `K' = Rf_* K`, the kernel 
 `ρ_f : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` exchanges the evaluation kernels:
 `e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`
 (`ProEtale.CondensedRing.kernelPushforward_comp_evaluationKernel_lowerStar`, blueprint
-`lem-trf-trace-map-exchange`, (1)). The proof passes to the `LΔ_Y^* ⊣ RΔ_{Y*}` and
-`Lf^* ⊣ Rf_*` adjoints, where it reduces to the coherence of the composition isomorphisms of the
+`theorem-proper-pushforward-lefschetz-verdier--1`, (1)). The proof passes to the `LΔ_Y^* ⊣ RΔ_{Y*}`
+and `Lf^* ⊣ Rf_*` adjoints, where it reduces to the coherence of the composition isomorphisms of the
 derived pullbacks (`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit`).
 
 -/
@@ -44,10 +44,8 @@ section EvaluationExchange
 variable (ℓ) {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
 
-set_option maxHeartbeats 3000000 in
--- composite functors on bounded constructible complexes are unfolded
 /-- **Exchange of the evaluation kernels** along a proper morphism `f` (blueprint
-`lem-trf-trace-map-exchange`, (1)): with `q = f × f` and `K' = Rf_* K`,
+`theorem-proper-pushforward-lefschetz-verdier--1`, (1)): with `q = f × f` and `K' = Rf_* K`,
 `e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
 theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsProper f.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (hΔ : diag X ≫ prod.map f f = f ≫ diag Y) :
@@ -59,26 +57,35 @@ theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsPrope
           (dualizingComplex' ℓ X)) hΔ) ≫
         (boundedConstructibleLowerStarComp ℓ f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
         (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ f) := by
-  rw [kernelPushforward, Category.assoc, IsIso.inv_comp_eq, prodLowerStarExternalProduct,
-    evaluationKernel, evaluationKernel]
-  rw [Adjunction.homEquiv_comp_map_comp,
-    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left,
-    homEquiv_comp_lowerStarComp_hom_app_assoc, homEquiv_comp_eqToHom_of_eq_assoc,
-    homEquiv_comp_lowerStarComp_inv_app_assoc, ← Adjunction.homEquiv_naturality_right]
-  swap
-  · exact hΔ
+  -- Keep the derived functors folded while transporting both adjoints.
+  simp only [kernelPushforward, Category.assoc]
+  rewrite [IsIso.inv_comp_eq]
+  simp only [prodLowerStarExternalProduct, evaluationKernel]
+  simp only [Adjunction.homEquiv_comp_map_comp
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map f f))]
+  conv_lhs =>
+    simp only [← Adjunction.homEquiv_naturality_left
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y))]
+  conv_rhs =>
+    simp only [← Adjunction.homEquiv_naturality_left
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))]
+  simp only [homEquiv_comp_lowerStarComp_hom_app_assoc ℓ (diag X) (prod.map f f),
+    homEquiv_comp_eqToHom_of_eq_assoc ℓ hΔ,
+    homEquiv_comp_lowerStarComp_inv_app_assoc ℓ f (diag Y),
+    ← Adjunction.homEquiv_naturality_right
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y))]
   have hu : (boundedConstructibleLowerStar ℓ f).obj K ◁ lowerStarVerdierDualMap ℓ f K ≫
       (ihom.ev ((boundedConstructibleLowerStar ℓ f).obj K)).app (dualizingComplex' ℓ Y) =
       lowerStarTensorMap ℓ f K (verdierDual ℓ K) ≫
         (boundedConstructibleLowerStar ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
         lowerStarDualizingComplexTrace ℓ f :=
     MonoidalClosed.whiskerLeft_curry_ihom_ev_app _ _ _
-  rw [diagUpperStarExternalProductIso_hom_naturality_right_assoc]
+  simp only [diagUpperStarExternalProductIso_hom_naturality_right_assoc]
   refine (congrArg (fun t ↦ (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y)).homEquiv
     _ _ ((diagUpperStarExternalProductIso ℓ ((boundedConstructibleLowerStar ℓ f).obj K)
       ((boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K))).hom ≫ t))
         hu).trans ?_
-  rw [upperStarComp_inv_app_comp_prodUpperStarCounit_assoc ℓ f K (verdierDual ℓ K)
+  simp only [upperStarComp_inv_app_comp_prodUpperStarCounit_assoc ℓ f K (verdierDual ℓ K)
     hΔ]
   apply congrArg ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y)).homEquiv _
     (dualizingComplex' ℓ Y))
@@ -91,8 +98,9 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-/-- **Exchange of the evaluation kernels** (blueprint `lem-trf-trace-map-exchange`, (1)):
-`δ_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* δ_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
+/-- **Exchange of the evaluation kernels** (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, (1)): `δ_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* δ_K`,
+read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
 theorem kernelPushforward_comp_evaluationKernel :
     kernelPushforward ℓ P.f K ≫ evaluationKernel ℓ P.coeff =
       (boundedConstructibleLowerStar ℓ (prod.map P.f P.f)).map (evaluationKernel ℓ K) ≫

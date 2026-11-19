@@ -27,14 +27,14 @@ isomorphism on bounded constructible `ℚ̄_ℓ`-complexes
 ## Proof
 
 `ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth` (the smooth half
-of blueprint `det-sp-nearby-cycles-exchanges` (1), applied to the smooth morphism of deformation
-models of blueprint `det-sp-dnc-base-change` (3)) is reduced, by
+of blueprint `prose-E-03` (1), applied to the smooth morphism of deformation
+models of blueprint `lemma-functoriality-deformation` (3)) is reduced, by
 `ProEtale.CondensedRing.NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isIso_baseChangeMap_app`
 and `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth` (locally on the source a smooth
 morphism is étale over an affine space), to smooth base change along the projections
 `𝔸ⁿ_𝒴 ⟶ 𝒴` for the inclusion `j` of the geometric generic fibre,
 `ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app` (blueprint
-`sbc-thm-bounded-derived-smooth-base-change`). This is in turn reduced to integral coefficients
+`theorem-smooth-base-change-all-admissible--1`). This is in turn reduced to integral coefficients
 by integral models and the coefficient change `𝒪_E ⟶ ℚ̄_ℓ` of base change maps along qcqs
 morphisms
 (`ProEtale.CondensedRing.isIso_baseChangeMap_app_leftDerivedUpperStar_padicAlgCl_of_integral`).
@@ -61,10 +61,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
 
 /-- **Smooth base change along affine spaces for the geometric generic fibre** (blueprint
-`sbc-thm-bounded-derived-smooth-base-change`, for the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`): for the inclusion
-`j : 𝒴_Ω ⟶ 𝒴` of the geometric generic fibre of the deformation model `𝒴 = 𝒟_I Y` and the cartesian
-square of `j` along `π`, the base change morphism `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` is invertible at
-`Lε^* K` for every bounded constructible `ℚ̄_ℓ`-complex `K` on `Y`.
+`theorem-smooth-base-change-all-admissible--1`, for the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`): for the
+inclusion `j : 𝒴_Ω ⟶ 𝒴` of the geometric generic fibre of the deformation model `𝒴 = 𝒟_I Y` and the
+cartesian square of `j` along `π`, the base change morphism `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` is invertible
+at `Lε^* K` for every bounded constructible `ℚ̄_ℓ`-complex `K` on `Y`.
 
 The morphism `j` is not of finite type (it is a base change of the geometric generic point
 `Spec Ω ⟶ Spec k'⟦t⟧` of the trait), so the finite-type smooth base change
@@ -94,9 +94,9 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.o
   exact isIso_baseChangeMap_app_leftDerivedUpperStar_padicAlgCl_of_integral ℓ _ _ hK
     fun E _ hK₀ ↦ isIso_baseChangeMap_affineSpace_deformationModel_app_padicIntegers k' I n E hK₀
 
-/-- **The smooth exchange of nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (1),
-smooth case, for the morphism of deformation models of blueprint `det-sp-dnc-base-change` (3);
-SGA 7 XIII 2.1.7.1): for a morphism `φ : 𝒟_J X ⟶ 𝒟_I Y` of deformation models whose morphism of
+/-- **The smooth exchange of nearby cycles** (blueprint `prose-E-03` (1),
+smooth case, for the morphism of deformation models of blueprint `lemma-functoriality-deformation`
+(3); SGA 7 XIII 2.1.7.1): for a morphism `φ : 𝒟_J X ⟶ 𝒟_I Y` of deformation models whose morphism of
 total spaces is smooth and whose square of geometric generic fibres is cartesian (for instance the
 deformation of a smooth `f` with `J = f⁻¹ I`), the pullback exchange `α_φ : Lg_s^* Ψ_Y ⟶ Ψ_X Lg^*`
 is an isomorphism on bounded constructible `ℚ̄_ℓ`-complexes, by smooth base change along the

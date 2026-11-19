@@ -21,8 +21,61 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 500000 in
--- Both transported mate laws unfold the pinned sheaf adjunctions in this calculation.
+-- Equality transport and passage to homotopy are independent of the concrete sheaf functors.
+private theorem mapHomotopyCategory_leftAdjointCompIso_comp_id
+    {K C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    (L : K → C ⥤ D) (R : K → D ⥤ C) (adj : ∀ k, L k ⊣ R k)
+    [∀ k, (L k).Additive] {I S : D ⥤ D} [I.Additive]
+    (ai : I ⊣ S) (ri : S ≅ 𝟭 D) {i j : K} (e : i = j) (d : S ⋙ R j ≅ R i)
+    (hd : d ≪≫ eqToIso (congrArg R e) =
+      Functor.isoWhiskerRight ri (R j) ≪≫ Functor.leftUnitor (R j))
+    {ι : Type*} (c : ComplexShape ι) (H : HomotopyCategory C c) :
+    (Functor.mapHomotopyCategoryCompIso
+        (Adjunction.leftAdjointCompIso (adj j) ai (adj i) d) c).hom.app H ≫
+      (eqToIso (congrArg (fun k ↦ (L k).mapHomotopyCategory c) e)).hom.app H =
+    (NatTrans.mapHomotopyCategory (Adjunction.leftAdjointIdIso ai ri).hom c).app
+        (((L j).mapHomotopyCategory c).obj H) ≫
+      (Functor.mapHomotopyCategoryIdIso D c).hom.app
+        (((L j).mapHomotopyCategory c).obj H) := by
+  cases e
+  simp only [eqToIso_refl, Iso.trans_refl, Iso.refl_hom, NatTrans.id_app,
+    Category.comp_id] at hd ⊢
+  rw [Adjunction.leftAdjointCompIso_comp_id _ _ _ _ hd]
+  rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
+  dsimp
+  erw [Category.comp_id]
+  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
+  apply congrArg ((HomotopyCategory.quotient D c).map)
+  ext n
+  change (Adjunction.leftAdjointIdIso ai ri).hom.app ((L i).obj (P.X n)) ≫ 𝟙 _ = _
+  exact Category.comp_id _
+
+private theorem mapHomotopyCategory_leftAdjointCompIso_id_comp
+    {K C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    (L : K → C ⥤ D) (R : K → D ⥤ C) (adj : ∀ k, L k ⊣ R k)
+    [∀ k, (L k).Additive] {I S : C ⥤ C} [I.Additive]
+    (ai : I ⊣ S) (ri : S ≅ 𝟭 C) {i j : K} (e : i = j) (d : R j ⋙ S ≅ R i)
+    (hd : d ≪≫ eqToIso (congrArg R e) =
+      Functor.isoWhiskerLeft (R j) ri ≪≫ Functor.rightUnitor (R j))
+    {ι : Type*} (c : ComplexShape ι) (H : HomotopyCategory C c) :
+    (Functor.mapHomotopyCategoryCompIso
+        (Adjunction.leftAdjointCompIso ai (adj j) (adj i) d) c).hom.app H ≫
+      (eqToIso (congrArg (fun k ↦ (L k).mapHomotopyCategory c) e)).hom.app H =
+    ((L j).mapHomotopyCategory c).map
+      ((NatTrans.mapHomotopyCategory (Adjunction.leftAdjointIdIso ai ri).hom c).app H ≫
+        (Functor.mapHomotopyCategoryIdIso C c).hom.app H) := by
+  cases e
+  simp only [eqToIso_refl, Iso.trans_refl, Iso.refl_hom, NatTrans.id_app,
+    Category.comp_id] at hd ⊢
+  rw [Adjunction.leftAdjointCompIso_id_comp _ _ _ _ hd]
+  rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
+  erw [Category.comp_id]
+  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
+  apply congrArg ((HomotopyCategory.quotient D c).map)
+  ext n
+  change (L i).map ((Adjunction.leftAdjointIdIso ai ri).hom.app (P.X n)) ≫ 𝟙 _ = _
+  exact Category.comp_id _
+
 /-- Tensor composition mates satisfy both unit laws on the homotopy category.
 Source: Mathlib.CategoryTheory.Adjunction.CompositionIso,
 `Adjunction.leftAdjointCompIso_comp_id` and `Adjunction.leftAdjointCompIso_id_comp`;
@@ -81,100 +134,23 @@ private theorem tensorPullback_homotopy_unit
         (Functor.mapHomotopyCategoryIdIso
           (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))
           (ComplexShape.up ℤ)).hom.app H)) := by
-  let adj (k : X ⟶ Y) :=
+  let adj {X Y : Scheme.{u₁}} (k : X ⟶ Y) :=
     Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)
-  let adjX := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (𝟙 X))
-  have ht (k l : X ⟶ Y) (e : k = l)
-      (b : Scheme.Modules.pushforward (𝟙 X) ⋙ Scheme.Modules.pushforward f ≅
-        Scheme.Modules.pushforward k) :
-      Adjunction.leftAdjointCompIso (adj f) adjX (adj k) b ≪≫
-          eqToIso (congrArg (fun m ↦ Scheme.Modules.tensorPullback m) e) =
-        Adjunction.leftAdjointCompIso (adj f) adjX (adj l)
-          (b ≪≫ eqToIso (congrArg (fun m ↦ Scheme.Modules.pushforward m) e)) := by
-    subst l
-    simp
-  have hp : Scheme.Modules.pushforwardComp (𝟙 X) f ≪≫
-      eqToIso (congrArg (fun m : X ⟶ Y ↦ Scheme.Modules.pushforward m)
-        (Category.id_comp f)) =
-        Functor.isoWhiskerRight (Scheme.Modules.pushforwardId X)
-          (Scheme.Modules.pushforward f) ≪≫
-            Functor.leftUnitor (Scheme.Modules.pushforward f) := by
-    ext M U
-    simp
-  have hx := ht _ _ (Category.id_comp f) (Scheme.Modules.pushforwardComp (𝟙 X) f)
-  have hh := Adjunction.leftAdjointCompIso_comp_id (adj f) adjX
-    (Functor.isoWhiskerRight (Scheme.Modules.pushforwardId X)
-      (Scheme.Modules.pushforward f) ≪≫ Functor.leftUnitor _)
-    (Scheme.Modules.pushforwardId X) rfl
-  rw [hp, hh] at hx
-  have hm (k l : X ⟶ Y) (e : k = l)
-      (b : Scheme.Modules.tensorPullback f ⋙ Scheme.Modules.tensorPullback (𝟙 X) ≅
-        Scheme.Modules.tensorPullback k) :
-      (Functor.mapHomotopyCategoryCompIso b (ComplexShape.up ℤ)).hom.app H ≫
-          (eqToIso (congrArg (fun m ↦ (Scheme.Modules.tensorPullback m).mapHomotopyCategory
-            (ComplexShape.up ℤ)) e)).hom.app H =
-        (Functor.mapHomotopyCategoryCompIso
-          (b ≪≫ eqToIso (congrArg (fun m ↦ Scheme.Modules.tensorPullback m) e))
-          (ComplexShape.up ℤ)).hom.app H := by
-    subst l
-    simp
-  let adjY := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (𝟙 Y))
-  have htY (k l : X ⟶ Y) (e : k = l)
-      (b : Scheme.Modules.pushforward f ⋙ Scheme.Modules.pushforward (𝟙 Y) ≅
-        Scheme.Modules.pushforward k) :
-      Adjunction.leftAdjointCompIso adjY (adj f) (adj k) b ≪≫
-          eqToIso (congrArg (fun m ↦ Scheme.Modules.tensorPullback m) e) =
-        Adjunction.leftAdjointCompIso adjY (adj f) (adj l)
-          (b ≪≫ eqToIso (congrArg (fun m ↦ Scheme.Modules.pushforward m) e)) := by
-    subst l
-    simp
-  have hpY : Scheme.Modules.pushforwardComp f (𝟙 Y) ≪≫
-      eqToIso (congrArg (fun m : X ⟶ Y ↦ Scheme.Modules.pushforward m)
-        (Category.comp_id f)) =
-        Functor.isoWhiskerLeft (Scheme.Modules.pushforward f)
-          (Scheme.Modules.pushforwardId Y) ≪≫
-            Functor.rightUnitor (Scheme.Modules.pushforward f) := by
-    ext M U
-    simp
-  have hy := htY _ _ (Category.comp_id f) (Scheme.Modules.pushforwardComp f (𝟙 Y))
-  have hhY := Adjunction.leftAdjointCompIso_id_comp adjY (adj f)
-    (Functor.isoWhiskerLeft (Scheme.Modules.pushforward f)
-      (Scheme.Modules.pushforwardId Y) ≪≫ Functor.rightUnitor _)
-    (Scheme.Modules.pushforwardId Y) rfl
-  rw [hpY, hhY] at hy
-  have hmY (k l : X ⟶ Y) (e : k = l)
-      (b : Scheme.Modules.tensorPullback (𝟙 Y) ⋙ Scheme.Modules.tensorPullback f ≅
-        Scheme.Modules.tensorPullback k) :
-      (Functor.mapHomotopyCategoryCompIso b (ComplexShape.up ℤ)).hom.app H ≫
-          (eqToIso (congrArg (fun m ↦ (Scheme.Modules.tensorPullback m).mapHomotopyCategory
-            (ComplexShape.up ℤ)) e)).hom.app H =
-        (Functor.mapHomotopyCategoryCompIso
-          (b ≪≫ eqToIso (congrArg (fun m ↦ Scheme.Modules.tensorPullback m) e))
-          (ComplexShape.up ℤ)).hom.app H := by
-    subst l
-    simp
   constructor
-  · change (Functor.mapHomotopyCategoryCompIso
-      (Adjunction.leftAdjointCompIso (adj f) adjX (adj ((𝟙 X) ≫ f))
-        (Scheme.Modules.pushforwardComp (𝟙 X) f)) (ComplexShape.up ℤ)).hom.app H ≫ _ = _
-    rw [hm _ _ (Category.id_comp f), hx]
-    rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
-    dsimp
-    erw [Category.comp_id]
-    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
-    apply congrArg ((HomotopyCategory.quotient X.Modules (ComplexShape.up ℤ)).map)
-    ext n
-    rfl
-  · change (Functor.mapHomotopyCategoryCompIso
-      (Adjunction.leftAdjointCompIso adjY (adj f) (adj (f ≫ (𝟙 Y)))
-        (Scheme.Modules.pushforwardComp f (𝟙 Y))) (ComplexShape.up ℤ)).hom.app H ≫ _ = _
-    rw [hmY _ _ (Category.comp_id f), hy]
-    rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
-    erw [Category.comp_id]
-    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
-    apply congrArg ((HomotopyCategory.quotient X.Modules (ComplexShape.up ℤ)).map)
-    ext n
-    rfl
+  · exact mapHomotopyCategory_leftAdjointCompIso_comp_id
+      (fun k : X ⟶ Y ↦ Scheme.Modules.tensorPullback k)
+      (fun k : X ⟶ Y ↦ Scheme.Modules.pushforward k) adj
+      (adj (𝟙 X)) (Scheme.Modules.pushforwardId X) (Category.id_comp f)
+      (Scheme.Modules.pushforwardComp (𝟙 X) f) (by
+        ext M U
+        rfl) (ComplexShape.up ℤ) H
+  · exact mapHomotopyCategory_leftAdjointCompIso_id_comp
+      (fun k : X ⟶ Y ↦ Scheme.Modules.tensorPullback k)
+      (fun k : X ⟶ Y ↦ Scheme.Modules.pushforward k) adj
+      (adj (𝟙 Y)) (Scheme.Modules.pushforwardId Y) (Category.comp_id f)
+      (Scheme.Modules.pushforwardComp f (𝟙 Y)) (by
+        ext M U
+        rfl) (ComplexShape.up ℤ) H
 
 
 /-- The two unit comparisons agree on a K-flat representative, for identity

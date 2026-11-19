@@ -44,7 +44,7 @@ namespace Abelian
 
 /-- The short complex `F[r] ⟶ F ⟶ rF` of multiplication by `r` on `F`: the kernel of
 `r • 𝟙 F`, followed by the factorisation of `r • 𝟙 F` through its image.
-(blueprint: `lem-weil-pbc-prime-factor-devissage`) -/
+(blueprint: `theorem-proper-base-change-classical-pro`) -/
 noncomputable def nsmulShortComplex (F : C) (r : ℕ) : ShortComplex C :=
   ShortComplex.mk (kernel.ι (r • 𝟙 F)) (Limits.factorThruImage (r • 𝟙 F))
     (by rw [← cancel_mono (Limits.image.ι (r • 𝟙 F))]; simp)
@@ -86,7 +86,7 @@ is stable under extensions and holds for every object killed by a prime. Then `P
 every object killed by a positive integer `n`: choosing a prime `r ∣ n`, the short exact
 sequence `0 ⟶ F[r] ⟶ F ⟶ rF ⟶ 0` has `F[r]` killed by `r` and `rF` killed by `n / r < n`,
 and one inducts on `n`.
-(blueprint: `lem-weil-pbc-prime-factor-devissage`) -/
+(blueprint: `theorem-proper-base-change-classical-pro`) -/
 theorem ObjectProperty.prop_of_nsmul_id_eq_zero (P : ObjectProperty C)
     (hext : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
     (hprime : ∀ r : ℕ, r.Prime → ∀ F : C, r • 𝟙 F = 0 → P F) :

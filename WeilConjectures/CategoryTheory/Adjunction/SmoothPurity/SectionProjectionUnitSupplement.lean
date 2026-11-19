@@ -26,6 +26,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory.Adjunction
 
+set_option allowUnsafeReducibility true in
 attribute [local implicit_reducible] TwoSquare
 
 /-- Compose tensor comparisons and cancel a section compositor. -/

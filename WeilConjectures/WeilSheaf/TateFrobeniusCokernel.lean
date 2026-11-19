@@ -138,14 +138,14 @@ pullback along `g = 𝟙 × σ` of `ℤ/ℓⁿ ≅ μ_{ℓⁿ}` followed by the 
 `g^*(ℤ/ℓⁿ) ≅ ℤ/ℓⁿ` followed by `c` times `ℤ/ℓⁿ ≅ μ_{ℓⁿ}`, where `c ∈ ℤ/ℓⁿ` is the value of the
 modular cyclotomic character of the geometric Frobenius (`c q = 1`). -/
 theorem upperStar_map_cokernelPowIsoRootsOfUnitySheaf_hom_geometricGaloisFrobenius (n : ℕ) :
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
+    (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map
         (cokernelPowIsoRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure ℓ hζ n).hom ≫
-        upperStarRootsOfUnitySheafHom a.geometricGaloisFrobenius.hom (ℓ ^ n) =
-      (upperStarCokernelPowIso a.geometricGaloisFrobenius.hom (ℓ ^ n)).hom ≫
+        upperStarRootsOfUnitySheafHom a.geometricGaloisFrobenius.asIso.hom (ℓ ^ n) =
+      (upperStarCokernelPowIso a.geometricGaloisFrobenius.asIso.hom (ℓ ^ n)).hom ≫
         ((((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)).val : ℤ) •
           (cokernelPowIsoRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure ℓ hζ n).hom) := by
   refine Cofork.IsColimit.hom_ext (isColimitCoforkMapOfIsColimit'
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}]
+    (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}]
     (cokernel.condition (((ℓ ^ n : ℕ) : ℤ) •
       𝟙 (𝟙_ (Sheaf (ProEt.topology a.geometricFiber) Ab.{u + 1}))))
     (cokernelIsCokernel _)) ?_

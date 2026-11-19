@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 /-!
 # Finite models of pointed étale neighbourhoods over an integral morphism
 
-Source: blueprint `sbc-lem-bc-integral-base`, integral finite-subalgebra argument.
+Source: blueprint `lemma-integral-changes-source-base--2`, integral finite-subalgebra argument.
 (blueprint: lem-sbc-integral-pointed-etale-finite-model)
 -/
 
@@ -28,8 +28,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A pointed étale neighbourhood over an integral morphism has a finite model after
 restricting the base to an affine neighbourhood.
 
-Source: blueprint `sbc-lem-bc-integral-base`, proof, integral finite-subalgebra argument;
-see also the finite-subalgebra construction in `exists_hom_disjoint_cover_of_isAffine`.
+Source: blueprint `lemma-integral-changes-source-base--2`, proof, integral finite-subalgebra
+argument; see also the finite-subalgebra construction in `exists_hom_disjoint_cover_of_isAffine`.
 (blueprint: lem-sbc-integral-pointed-etale-finite-model)
 
 Proof: Choose an affine open of Y containing y, regarded as a pointed étale neighbourhood

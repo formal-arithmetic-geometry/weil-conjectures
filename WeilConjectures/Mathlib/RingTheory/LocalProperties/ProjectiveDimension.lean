@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Localization.Finiteness
 public import Mathlib.Algebra.Module.LocalizedModule.Exact
 public import Mathlib.RingTheory.LocalProperties.Projective
 public import WeilConjectures.Mathlib.Algebra.Module.StablyFree.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # Localizations of modules of finite projective dimension over a local ring

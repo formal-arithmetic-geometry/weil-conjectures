@@ -15,7 +15,7 @@ import Mathlib.Data.Int.GCD
 
 /-! # Rescaled trace transported through a commuting generic-point square
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 2.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 2.
 (blueprint: lem-sc-generic-primary-coarse-trace-retraction-maps)
 -/
 
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.IsConnectedCurve
 /-- A finite etale generic cover of degree coprime to an annihilator gives a
 retraction after generic direct image and terminal-sheaf identification.
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 2.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 2.
 Proof: Bezout rescales trace to invert degree multiplication on M. Apply generic
 pushforward and identify both composites of pushforwards using the commuting
 square. Conjugate by the terminal-sheaf isomorphism.

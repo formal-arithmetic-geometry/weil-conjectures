@@ -39,16 +39,16 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- The Chow immersion is closed and its pulled-back twisting module is relatively ample.
 Source: Stacks Project, Cohomology of Schemes, Remark 30.18.2 and Proposition 30.19.1,
-Tag 02O5 (blueprint: lem-pc-chow-relative-ample).
+Tag 02O5 (blueprint: theorem-chow-s-lemma-projective-form--2).
 
 Proof:
-1. Compose the two proper morphisms (lem-weil-pbc-proper-fp-permanence). Projective
+1. Compose the two proper morphisms (theorem-chow-s-lemma-projective-form--2). Projective
    space is proper and hence separated (lemma-nagata-projective-space-base-change-proper,
-   def-weil-proper-morphism). Proper-over-separated makes `j` proper
-   (lem-weil-pbc-proper-over-separated), so its image is closed. The immersion criterion
-   makes `j` closed (lem-weil-pbc-immersion-closed-image-closed-immersion). Properness
+   theorem-chow-s-lemma-projective-form--2). Proper-over-separated makes `j` proper
+   (theorem-chow-s-lemma-projective-form--2), so its image is closed. The immersion criterion
+   makes `j` closed (theorem-chow-s-lemma-projective-form--2). Properness
    gives quasi-compactness, so the factorization makes `π ≫ g` projective
-   (def-pc-projective-morphism).
+   (theorem-chow-s-lemma-projective-form--2).
 2. Base change `j` along `g`. The graph of `π` is the base change of the closed
    diagonal of `g`, which is separated since it is proper. Thus the graph and the
    base-changed `j` are closed immersions. Their composite is `liftBaseChange π j hj`;
@@ -56,15 +56,15 @@ Proof:
    supplies quasi-compactness, giving projectivity of `π`. Both twists are pulled
    from the same integral Proj twist, and the two composites to the integral model
    agree. Composition compatibility of tensor pullback gives their isomorphism
-   (lem-weil-pbc-proper-fp-permanence, def-weil-proper-morphism,
-   lem-weil-pbc-immersion-closed-image-closed-immersion, def-pc-projective-morphism,
-   def-pc-module-pullback, def-nagata-projective-space-base-change).
+   (theorem-chow-s-lemma-projective-form--2, theorem-chow-s-lemma-projective-form--2,
+   theorem-chow-s-lemma-projective-form--2, theorem-chow-s-lemma-projective-form--2,
+   theorem-chow-s-lemma-projective-form--2, theorem-chow-s-lemma-projective-form--2).
 3. For an affine open `V` of `S`, base change the closed immersion `j` to `V`.
    Pullback composition identifies its pulled-back O(1) with the restriction of `L`.
    The affine-base projective ampleness theorem proves invertibility and ampleness
-   (lem-weil-pbc-proper-fp-permanence, def-nagata-projective-space-base-change,
-   def-pc-module-pullback, lem-weil-pbc-projective-ample-invertible,
-   def-weil-pbc-ample-invertible-module). Invertibility of `L` itself follows from
+   (theorem-chow-s-lemma-projective-form--2, theorem-chow-s-lemma-projective-form--2,
+   theorem-chow-s-lemma-projective-form--2, theorem-chow-s-lemma-projective-form--2,
+   theorem-chow-s-lemma-projective-form--2). Invertibility of `L` itself follows from
    the standard-chart trivializations of the integral twist and tensor pullback.
 4. For an affine open `W` of `Z`, apply the same argument to the closed immersion
    `liftBaseChange π j hj`. The isomorphism in step 2 identifies its pulled-back O(1)

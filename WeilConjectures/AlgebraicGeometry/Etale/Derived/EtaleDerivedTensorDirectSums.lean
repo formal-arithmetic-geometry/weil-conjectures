@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplem
 # Derived tensor products of étale sheaves preserve direct sums
 
 Source: Weil conjectures blueprint, `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
-`lem-kun-derived-tensor-direct-sums.md` (blueprint: lem-kun-derived-tensor-direct-sums).
+`lem-kun-derived-tensor-direct-sums.md` (blueprint: proposition-open-direct-image-preserves-finite).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Etale
 set-indexed direct sums, including the empty sum.
 
 Source: Weil conjectures blueprint, `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
-`lem-kun-derived-tensor-direct-sums.md` (blueprint: lem-kun-derived-tensor-direct-sums).
+`lem-kun-derived-tensor-direct-sums.md` (blueprint: proposition-open-direct-image-preserves-finite).
 
 Proof plan:
 1. The category of coefficient sheaves is Grothendieck abelian, by
@@ -38,10 +38,10 @@ Proof plan:
 2. By `lem-kun-grothendieck-derived-coproducts`, termwise direct sums compute coproducts
 of arbitrary unbounded complexes after localization, also for the empty family.
 3. Choose a complex representing A and a K-flat resolution P, using
-`lem-kun-flat-resolution-existence`. The construction `def-kun-derived-tensor` computes
-A tensor B by the localization of the direct-sum total tensor P tensor C_B. Use the
-same P for every summand and their sum; independence is
-`lem-kun-derived-tensor-well-defined`.
+`lem-kun-flat-resolution-existence`. The construction
+`proposition-open-direct-image-preserves-finite` computes A tensor B by the localization of the
+direct-sum total tensor P tensor C_B. Use the same P for every summand and their sum; independence
+is `proposition-open-direct-image-preserves-finite`.
 4. The tensor-Hom adjunction `lem-pc-sheaf-modules-tensor-closed` shows that ordinary
 sheaf tensor preserves sums. Interchange the degreewise sums indexed by i and by
 (p,q) with p+q=n in `def-pc-tensor-complex-sheaves`. Both differentials restrict to

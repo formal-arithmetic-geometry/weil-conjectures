@@ -62,7 +62,7 @@ theorem etaleBrownProperScalarTransport
     ∃ p : (PV.scalar h).derived ⋙ (B.level m).direct ≅
         (B.level n).direct ⋙ (PW.scalar h).derived,
       p.inv = (mateEquiv (B.level n).adjunction (B.level m).adjunction
-        (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans ∧
+        (.mk _ _ _ _ (B.derivedTensor h).hom)) ∧
       ∀ P : DerivedCategory (strictEtaleLevel V O t n),
         (RW.derived m).map (p.inv.app P) ≫
           (rg m).right.hom.app ((PV.scalar h).derived.obj P) ≫
@@ -74,7 +74,7 @@ theorem etaleBrownProperScalarTransport
           (Etale.scalarMate (strictEtaleBrownRingMap O t h) g).app
             ((RV.derived n).obj P) := by
   let q := (mateEquiv (B.level n).adjunction (B.level m).adjunction
-    (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans
+    (.mk _ _ _ _ (B.derivedTensor h).hom))
   letI : IsIso q := etaleBrownProperScalarMate_isIso O t g A PW PV B RV RW rg h
   let p : (PV.scalar h).derived ⋙ (B.level m).direct ≅
       (B.level n).direct ⋙ (PW.scalar h).derived := (asIso q).symm

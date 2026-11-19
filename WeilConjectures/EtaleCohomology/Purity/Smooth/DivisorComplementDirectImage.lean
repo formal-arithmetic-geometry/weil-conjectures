@@ -105,7 +105,7 @@ noncomputable def homologyRightDerivedLowerShriekIso {X Y : Scheme.{u}} (f : X �
 
 end ClosedImmersion
 
-/-- Blueprint `det-tf-transverse-corner-constant`, via `sk-thm-regular`.
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, via `lemma-class-of-point--1`.
 
 **Direct images from the complement of a smooth divisor**, for a finite coefficient ring `Λ`
 whose exponent is invertible in the algebraically closed field `k`. Let `W` be smooth over `k`,
@@ -211,7 +211,7 @@ theorem exists_higherDirectImage_constantSheaf_of_isRegularImmersion (Λ : Type 
       (pullback.snd i W₀.ι)_*[ModuleCat.{u + 1} Λ].mapIso
         (homologyZeroConstantComplexIso Λ (pullback i W₀.ι))⟩⟩
 
-/-- Blueprint `det-tf-transverse-corner-constant`, via `sk-thm-regular`.
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, via `lemma-class-of-point--1`.
 
 **Direct images from the complement of a smooth divisor.** Let `W` be smooth over an
 algebraically closed field `k`, `i : D ⟶ W` a regular closed immersion of codimension one with

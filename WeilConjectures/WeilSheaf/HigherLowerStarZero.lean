@@ -20,11 +20,11 @@ object placed in degree `0` is the functor itself
 
 Along an open immersion `j : U ⟶ C` into a curve this is the description of the middle extension
 `j_* F = 𝓗⁰(Rj_* F)` of a lisse sheaf `F`
-(`AlgebraicGeometry.WeilSheaf.higherDirectImageZeroIso`, blueprint `def-wf-middle-extension`).
+(`AlgebraicGeometry.WeilSheaf.higherDirectImageZeroIso`, blueprint `definition-middle-extension`).
 This middle extension is constructible, for Weil sheaves and for lisse `ℓ`-adic sheaves on the
 geometric curve (`AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_directImage`,
 `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isAdicConstructibleSheaf_lowerStar_of_isOpenImmersion`,
-blueprint `lem-wf-dense-open-pi1-surjective` (5)).
+blueprint `theorem-purity-real-sheaves-curves` (5)).
 -/
 
 @[expose] public section
@@ -52,7 +52,7 @@ noncomputable def higherLowerStarZeroIso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRi
   NatIso.ofComponents (fun F ↦ ObjectProperty.isoMk _ (e.app F.obj))
     fun α ↦ ObjectProperty.hom_ext _ (e.hom.naturality α.hom)
 
-/-- Blueprint `def-wf-middle-extension`: the middle extension on a curve.
+/-- Blueprint `definition-middle-extension`: the middle extension on a curve.
 
 For a quasi-compact open immersion `j : U ⟶ C` (for instance a dense open of a smooth curve
 `C₀`) and a Weil sheaf `F` on `U₀`, for instance a lisse one, the sheaf-theoretic middle
@@ -68,7 +68,7 @@ noncomputable def higherDirectImageZeroIso {U C : Scheme.{u}} [U.Over (Spec (Com
     higherDirectImage (k₀ := k₀) (l := l) j 0 ≅ directImage j :=
   higherLowerStarZeroIso j
 
-/-- Blueprint `lem-wf-dense-open-pi1-surjective` (5), for Weil `ℚ̄_ℓ`-sheaves: the middle
+/-- Blueprint `theorem-purity-real-sheaves-curves` (5), for Weil `ℚ̄_ℓ`-sheaves: the middle
 extension `j_* F` of a lisse (indeed of any) Weil sheaf `F` along a quasi-compact open immersion
 `j` into a `k₀`-scheme of finite type is constructible. This is the finiteness theorem
 (`AlgebraicGeometry.WeilSheaf.isAdicConstructibleSheaf_lowerStar`), which is built into
@@ -84,7 +84,7 @@ end AlgebraicGeometry.WeilSheaf
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Blueprint `lem-wf-dense-open-pi1-surjective` (5), for lisse `ℚ̄_ℓ`-sheaves on a geometric
+/-- Blueprint `theorem-purity-real-sheaves-curves` (5), for lisse `ℚ̄_ℓ`-sheaves on a geometric
 curve: over an algebraically closed field `K` of characteristic `≠ ℓ`, the middle extension
 `j_* F` of a lisse `ℓ`-adic sheaf `F` along a quasi-compact open immersion `j : U ⟶ C` into a
 scheme `C` locally of finite type over `K` is constructible, by the finiteness theorem

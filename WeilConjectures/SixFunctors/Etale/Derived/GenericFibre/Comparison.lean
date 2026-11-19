@@ -17,7 +17,7 @@ Let `G : C ⥤ D` be a strong monoidal functor between monoidal closed categorie
 map `ρ : G [K, M] ⟶ [G K, G M]` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), the
 transpose of `G K ⊗ G [K, M] ≅ G (K ⊗ [K, M]) ⟶ G M`, is compatible with evaluation by
 construction. This file collects formal criteria for `ρ` to be an isomorphism, used for the
-internal-hom comparison of blueprint `lem-weil-geometric-generic-exchange`
+internal-hom comparison of blueprint `lemma-restriction-geometric-generic-fibre`
 (`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom`):
 
 * `ρ` is an isomorphism at `K` if `K` has a left dual
@@ -50,18 +50,18 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
 isomorphism: precomposed with `G` of `Y ≅ [X, 𝟙]` and followed by `[G X, G 𝟙] ≅ [G X, 𝟙]`, it is
 the isomorphism `G Y ≅ [G X, 𝟙]` of the mapped exact pairing. -/
 lemma isIso_ihomComparison_app_unit_of_exactPairing (Y X : C) [ExactPairing Y X] :
-    IsIso ((ihomComparison G X).natTrans.app (𝟙_ C)) := by
+    IsIso ((ihomComparison G X).app (𝟙_ C)) := by
   let := ExactPairing.map G Y X
-  have h : G.map (curry (ε_ Y X)) ≫ (ihomComparison G X).natTrans.app (𝟙_ C) ≫
+  have h : G.map (curry (ε_ Y X)) ≫ (ihomComparison G X).app (𝟙_ C) ≫
       (ihom (G.obj X)).map (η G) = curry (ε_ (G.obj Y) (G.obj X)) := by
     rw [ihomComparison_app_eq_curry]
     simp only [← curry_natural_right, ← curry_natural_left, Category.assoc]
     congr 1
     rw [μ_natural_right_assoc, ← G.map_comp_assoc, ← uncurry_eq, uncurry_curry]
     rfl
-  have : IsIso (G.map (curry (ε_ Y X)) ≫ (ihomComparison G X).natTrans.app (𝟙_ C) ≫
+  have : IsIso (G.map (curry (ε_ Y X)) ≫ (ihomComparison G X).app (𝟙_ C) ≫
       (ihom (G.obj X)).map (η G)) := by rw [h]; infer_instance
-  have : IsIso ((ihomComparison G X).natTrans.app (𝟙_ C) ≫ (ihom (G.obj X)).map (η G)) :=
+  have : IsIso ((ihomComparison G X).app (𝟙_ C) ≫ (ihom (G.obj X)).map (η G)) :=
     IsIso.of_isIso_comp_left (G.map (curry (ε_ Y X))) _
   exact IsIso.of_isIso_comp_right _ ((ihom (G.obj X)).map (η G))
 
@@ -70,13 +70,13 @@ map `G [X, Z] ⟶ [G X, G Z]` of a monoidal functor is an isomorphism for every 
 are `Y ⊗ Z` (`CategoryTheory.Functor.Monoidal.map_ihomUnitTensorToIhom_comp`), and the case
 `Z = 𝟙` is `isIso_ihomComparison_app_unit_of_exactPairing`. -/
 lemma isIso_ihomComparison_app_of_exactPairing (Y X : C) [ExactPairing Y X] (Z : C) :
-    IsIso ((ihomComparison G X).natTrans.app Z) := by
+    IsIso ((ihomComparison G X).app Z) := by
   let := ExactPairing.map G Y X
   have := isIso_ihomComparison_app_unit_of_exactPairing G Y X
   have := isIso_ihomUnitTensorToIhom Y X Z
   have := isIso_ihomUnitTensorToIhom (G.obj Y) (G.obj X) (G.obj Z)
   have h := map_ihomUnitTensorToIhom_comp G X Z
-  have : IsIso (G.map (ihomUnitTensorToIhom X Z) ≫ (ihomComparison G X).natTrans.app Z) := by
+  have : IsIso (G.map (ihomUnitTensorToIhom X Z) ≫ (ihomComparison G X).app Z) := by
     rw [h]; infer_instance
   exact IsIso.of_isIso_comp_left (G.map (ihomUnitTensorToIhom X Z)) _
 
@@ -121,10 +121,10 @@ isomorphism for all `K` and `N`: followed by `[G K, G H N] ≅ [G K, N]`, it is 
 `i` this says that `i^* RHom(K, Ri_* N) ≅ RHom(i^* K, i^* Ri_* N)`, and likewise for an open
 immersion. -/
 lemma isIso_ihomComparison_app_rightAdjoint [IsIso adj.counit] (K : C) (N : D) :
-    IsIso ((ihomComparison G K).natTrans.app (H.obj N)) := by
+    IsIso ((ihomComparison G K).app (H.obj N)) := by
   let σ : G.obj ((ihom K).obj (H.obj N)) ⟶ (ihom (G.obj K)).obj N :=
     curry (μ G K _ ≫ G.map ((ihom.ev K).app (H.obj N)) ≫ adj.counit.app N)
-  have hσ : (ihomComparison G K).natTrans.app (H.obj N) ≫ (ihom (G.obj K)).map (adj.counit.app N)
+  have hσ : (ihomComparison G K).app (H.obj N) ≫ (ihom (G.obj K)).map (adj.counit.app N)
       = σ := by
     rw [ihomComparison_app_eq_curry, ← curry_natural_right, Category.assoc]
   have := isIso_ihomRightAdjointComparison adj K N
@@ -151,17 +151,17 @@ isomorphic lax monoidal functors are isomorphisms at the same objects
 (`CategoryTheory.Functor.LaxMonoidal.ihomComparison_app_comp_map_app`). -/
 lemma isIso_ihomComparison_app_iff_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal]
     (τ : F ≅ F') [NatTrans.IsMonoidal τ.hom] (A B : C) :
-    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F' A).natTrans.app B) := by
+    IsIso ((ihomComparison F A).app B) ↔ IsIso ((ihomComparison F' A).app B) := by
   have h := ihomComparison_app_comp_map_app τ.hom A B
   constructor
   · intro _
-    have : IsIso (τ.hom.app _ ≫ (ihomComparison F' A).natTrans.app B ≫
+    have : IsIso (τ.hom.app _ ≫ (ihomComparison F' A).app B ≫
         (pre (τ.hom.app A)).app (F'.obj B)) := by rw [← h]; infer_instance
-    have : IsIso ((ihomComparison F' A).natTrans.app B ≫ (pre (τ.hom.app A)).app (F'.obj B)) :=
+    have : IsIso ((ihomComparison F' A).app B ≫ (pre (τ.hom.app A)).app (F'.obj B)) :=
       IsIso.of_isIso_comp_left (τ.hom.app _) _
     exact IsIso.of_isIso_comp_right _ ((pre (τ.hom.app A)).app (F'.obj B))
   · intro _
-    have : IsIso ((ihomComparison F A).natTrans.app B ≫ (ihom (F.obj A)).map (τ.hom.app B)) := by
+    have : IsIso ((ihomComparison F A).app B ≫ (ihom (F.obj A)).map (τ.hom.app B)) := by
       rw [h]; infer_instance
     exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))
 

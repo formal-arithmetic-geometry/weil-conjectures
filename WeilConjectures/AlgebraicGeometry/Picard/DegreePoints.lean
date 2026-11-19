@@ -19,10 +19,9 @@ functor are the invertible modules of degree `d` on `X`. For `d = 0` this is
 ## Main statements
 
 - `AlgebraicGeometry.exists_picardDegree_equiv_picardFunctorDegree`: the bijection between the
-  classes of degree `d` in `Pic X` and `Pic^d_{X/k}(k)` (blueprint
-  `thm-sc-theorem-of-the-base`).
+  classes of degree `d` in `Pic X` and `Pic^d_{X/k}(k)`.
 - `AlgebraicGeometry.theorem_of_the_base`: all clauses of the theorem of the base bundled in one
-  statement (blueprint `thm-sc-theorem-of-the-base`).
+  statement.
 -/
 
 @[expose] public section
@@ -40,11 +39,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 /-- **The `k`-points of `Pic^d_{X/k}` are the invertible modules of degree `d`.** For a smooth
 projective geometrically integral curve `X` over a separably closed field `k` and `d ∈ ℤ`, the
 map sending a class `ℒ ∈ Pic X` of degree `d` to the image of its pullback to `X ×_k k` is a
-bijection onto `Pic^d_{X/k}(k)`. By the split exact sequence with `T = Spec k` and
-`Pic (Spec k) = 0`, `Pic_{X/k}(k) = Pic X`, and the sections of `Pic^d_{X/k}` are the sections of
-`Pic_{X/k}` of degree `d` (`AlgebraicGeometry.exists_picardFunctorDegreeι_app_eq`).
-
-(blueprint: `thm-sc-theorem-of-the-base`, the `k`-points of `Pic^d_{C/k}`) -/
+bijection onto `Pic^d_{X/k}(k)`. -/
 theorem exists_picardDegree_equiv_picardFunctorDegree [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (d : ℤ) :
@@ -119,21 +114,11 @@ which is the disjoint union of open and closed subschemes `P^d`, `d ∈ ℤ`, su
   geometrically integral over `k` (a `g`-dimensional smooth proper `k`-variety);
 * the `k`-points of `P^d` are the invertible modules of degree `d` on `X`, via the class of their
   pullback to `X ×_k k`;
-* `P^d` represents `Pic^d_{X/k}` through `e d`, compatibly with the inclusion `j d : P^d ⟶ P`
+* `P^d` represents `Pic^d_{X/k}` through `e d`, compatibly with the inclusion `j d: P^d ⟶ P`
   and the inclusion `Pic^d_{X/k} ⊆ Pic_{X/k}`: the point of `P^d` classifying a class `ℒ` of
   fibrewise degree `d` is mapped by `j d` to the point of `P` classifying `ℒ`;
 * `P^0` is a commutative group scheme representing `Pic^0_{X/k}` compatibly with the group laws,
-  and the open and closed immersion `P^0 ⟶ P` is a morphism of group schemes.
-
-This bundles `AlgebraicGeometry.isRepresentable_picardFunctor`,
-`AlgebraicGeometry.exists_decomposition_picardFunctor_representableBy`,
-`AlgebraicGeometry.isMonHom_of_isPicardMul`,
-`AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree`,
-`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`,
-`AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree` and
-`AlgebraicGeometry.exists_picardDegree_equiv_picardFunctorDegree`.
-
-(blueprint: `thm-sc-theorem-of-the-base`) -/
+  and the open and closed immersion `P^0 ⟶ P` is a morphism of group schemes. -/
 theorem theorem_of_the_base [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] :

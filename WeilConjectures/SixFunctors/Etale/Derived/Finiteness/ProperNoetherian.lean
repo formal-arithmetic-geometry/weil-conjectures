@@ -15,8 +15,8 @@ Let `k` be a field, `Λ` a finite ring killed by an integer invertible in `k`, `
 `k`-scheme and `b : Y ⟶ S` a proper morphism. The derived direct image `Rb_*` preserves bounded
 constructible complexes of étale sheaves of `Λ`-modules
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
-blueprint `thm-weil-pbc-direct-image-finiteness-proper`): this is the finiteness theorem for
-proper morphisms (SGA 4, Exposé XIV, Théorème 1.1) together with the vanishing of `Rᵠb_*` above
+blueprint `proposition-proper-direct-image-finite-coefficients--1`): this is the finiteness theorem
+for proper morphisms (SGA 4, Exposé XIV, Théorème 1.1) together with the vanishing of `Rᵠb_*` above
 twice the dimension of the geometric fibres (Stacks, Tag 095U).
 
 For `S` of finite type over a field this is
@@ -49,9 +49,9 @@ open _root_.DerivedCategory
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `thm-weil-pbc-direct-image-finiteness-proper`: for a proper morphism `b : Y ⟶ S` to
-a noetherian scheme over a field `k` in which the exponent of the finite ring `Λ` is invertible,
-`Rb_*` maps
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients--1`: for a proper morphism
+`b : Y ⟶ S` to a noetherian scheme over a field `k` in which the exponent of the finite ring `Λ` is
+invertible, `Rb_*` maps
 bounded constructible complexes of étale sheaves of `Λ`-modules to bounded constructible complexes
 (SGA 4, Exposé XIV, Théorème 1.1; Stacks, Tag 095U). -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian {k : Type u}

@@ -27,7 +27,6 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   {O : Sheaf J CommRingCat.{u}}
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the comparison evaluation uses the same budget as the full record.
 /-- The ordinary coinduction and tensor-dual data, without free extension.
 Source: Stacks 0FRS (blueprint: lem-sf-finite-free-dg-coinduction-ordinary-core-stage3). -/

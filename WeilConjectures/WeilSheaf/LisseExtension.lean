@@ -25,7 +25,7 @@ Let `j : U₀ ⟶ C₀` be a dense open immersion into a smooth curve over the f
   the restriction of a lisse Weil sheaf on `C₀`
   (`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`). For `C₀ = U₀ ∪ {x}`
   the kernel is the local inertia at `x`: a lisse sheaf with trivial local monodromy at `x`
-  extends over `x` (blueprint `cor-wf-unramified-boundary-purity`).
+  extends over `x` (blueprint `corollary-unramified-boundary-point--2`).
 -/
 
 @[expose] public section
@@ -99,7 +99,8 @@ fundamental groups being surjective since `C̄` is regular), and so does the Wei
 (`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_adicUpperStar_iso`).
 
 For `C₀ = U₀ ∪ {x}` the kernel is the local inertia at `x`: this is the extension of a lisse sheaf
-with trivial local monodromy over `x`, used in blueprint `cor-wf-unramified-boundary-purity`. -/
+with trivial local monodromy over `x`, used in blueprint
+`corollary-unramified-boundary-point--2`. -/
 theorem exists_isLisse_upperStar_iso_of_rep_eq_self [Smooth (C ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]

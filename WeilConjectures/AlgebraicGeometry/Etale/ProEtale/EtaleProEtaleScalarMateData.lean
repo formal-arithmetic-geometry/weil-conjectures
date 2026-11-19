@@ -76,7 +76,7 @@ def scalarPullbackReverseProEtale
   ((mateEquiv
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) a))
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) a))).symm
-    (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso a f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso a f).hom))
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the reverse comparison
 on the etale site uses the actual exact restriction/pullback square. It specializes
@@ -92,7 +92,7 @@ def scalarPullbackReverseEtale
   ((mateEquiv
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology a))
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology a))).symm
-    (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom))
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the canonical tensor/pullback
 comparison is invertible for arbitrary ring maps. This is the constant-coefficient
@@ -146,7 +146,7 @@ abbrev scalarPullbackEtaleIso
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the canonical inverse-image
 square identifies exact termwise inverse images with their left derived functors.
-It specializes `sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+It specializes `theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate). -/
 def directImageComparisonAmbientPullbackIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -165,7 +165,7 @@ def directImageComparisonAmbientPullbackIso
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the ambient site/direct-image
 comparison is the actual counit mate of the specified inverse-image square.
-It specializes `sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+It specializes `theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate). -/
 def directImageComparisonAmbient
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -175,7 +175,7 @@ def directImageComparisonAmbient
         R(lowerStar (ModuleCat.{u + 1} A) f) :=
   (mateEquiv (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-    (TwoSquare.mk _ _ _ _ (directImageComparisonAmbientPullbackIso A f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (directImageComparisonAmbientPullbackIso A f).hom))
 
 section AmbientComparisonProof
 attribute [local irreducible] HasDerivedCategory.standard
@@ -184,7 +184,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the ambient canonical
 comparison is invertible at every bounded-below input. It specializes
-`sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+`theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate).
 Proof: the site square is the canonical fibre-product square (step 1). Exact inverse
 images preserve lower bounds, and termwise localization constructs the displayed square
@@ -227,7 +227,7 @@ end AmbientComparisonProof
 
 /-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the inverse of beta is
 taken only at the specified bounded-below input. It specializes
-`sk-thm-pe-direct-image-comparison`. Source: Stacks Tag 09A6
+`theorem-comparison-direct-images`. Source: Stacks Tag 09A6
 (blueprint: lem-sfb-etale-proetale-scalar-mate). -/
 def directImageComparisonAmbientIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -287,18 +287,17 @@ private theorem ordinary_reverse_of_mate
     {f : A ⥤ C} {rf : C ⥤ A} (af : f ⊣ rf)
     {g : B ⥤ D} {rg : D ⥤ B} (ag : g ⊣ rg)
     (e : rx ⋙ f ≅ g ⋙ rt) (δ : rg ⋙ rx ≅ rt ⋙ rf)
-    (hδ : (mateEquiv ag af (TwoSquare.mk _ _ _ _ e.hom)).natTrans = δ.hom) :
-    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans =
+    (hδ : (mateEquiv ag af (TwoSquare.mk _ _ _ _ e.hom)) = δ.hom) :
+    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e.hom)) =
       ((conjugateIsoEquiv (af.comp at') (ax.comp ag)).symm δ.symm).inv := by
   apply (mateEquiv ax at').injective
   apply (mateEquiv ag af).injective
   rw [Equiv.apply_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   have h := iterated_mateEquiv_conjugateEquiv ax at' af ag
     (TwoSquare.mk _ _ _ _
       ((conjugateIsoEquiv (af.comp at') (ax.comp ag)).symm δ.symm).inv)
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at h hδ
+  dsimp only [TwoSquare.mk] at h hδ
   rw [h, hδ]
   simp only [conjugateIsoEquiv_symm_apply_inv, Iso.symm_inv]
   erw [Equiv.apply_symm_apply]
@@ -318,7 +317,7 @@ private theorem ordinary_reverse_eq
     {T X : Scheme.{u}} (f : T ⟶ X) :
     ((mateEquiv (ProEtale.etaleSheafExtendScalarsAdjunction φ X)
       (ProEtale.etaleSheafExtendScalarsAdjunction φ T)).symm
-        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)).natTrans =
+        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)) =
       (scalarSheafPullbackIso φ f).inv := by
   unfold scalarSheafPullbackIso
   exact ordinary_reverse_of_mate
@@ -393,7 +392,7 @@ private theorem scalar_complex_unit
       (Sheaf.restrictScalars T.smallEtaleTopology φ).map
         (((mateEquiv (ProEtale.etaleSheafExtendScalarsAdjunction φ X)
           (ProEtale.etaleSheafExtendScalarsAdjunction φ T)).symm
-          (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)).natTrans.app M) at h
+          (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)).app M) at h
   rw [ordinary_reverse_eq] at h
   exact h
 
@@ -408,7 +407,7 @@ private theorem normalized_scalar_mate
     (hq : ax.unit.app P ≫ rx.map u = q)
     (ht : at'.unit.app V ≫ rt.map v = t)
     (h : f.map q ≫ e.app Q ≫ rt.map b = a ≫ t ≫ rt.map c) :
-    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e)).natTrans.app P ≫
+    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e)).app P ≫
         g.map u ≫ b = st.map a ≫ v ≫ c := by
   apply (at'.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]

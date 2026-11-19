@@ -21,13 +21,13 @@ public import WeilConjectures.TraceFormula.PointFiberFunctor
 
 Let `k` be a separably closed field and `s = Spec k`. Evaluation at the geometric point identifies
 the bounded constructible derived category `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` with the bounded derived category of
-finite-dimensional `ℚ̄_ℓ`-vector spaces (blueprint `def-weil-finite-coefficient-point`,
+finite-dimensional `ℚ̄_ℓ`-vector spaces (blueprint `lemma-perfect-complexes-geometric-point`,
 `ProEtale.CondensedRing.exists_fiberFunctor_point`). Consequently every object of
 `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is a finite direct sum of shifts of the unit.
 
 This file shows that the categorical trace on `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` is the supertrace on the graded
 spaces `Hⁿ(P) = Hom(𝟙⟦n⟧, P)`, and deduces that the trace is additive along every endomorphism of
-a distinguished triangle (blueprint `prop-trf-trace-formal-laws`, items (2) and (4)): over a field
+a distinguished triangle (blueprint `proposition-properties-trace`, items (2) and (4)): over a field
 the filtered origin of the endomorphism is not needed.
 -/
 
@@ -178,7 +178,7 @@ noncomputable def pointScalar : PadicAlgCl ℓ →+* End (𝟙_ (DerivedCategory
 
 omit [Fact (ringChar k).Prime] in
 lemma bijective_pointScalar [IsSepClosed k] : Function.Bijective (pointScalar ℓ k) :=
-  ((ObjectProperty.fullyFaithfulι _).map_bijective _ _).comp
+  (((ObjectProperty.fullyFaithfulι _).mulEquivEnd _).bijective).comp
     (bijective_padicAlgClUnitEndRingHom_point ℓ k)
 
 /-- The scalars acting on the shifted unit `𝟙⟦n⟧` by precomposition. -/
@@ -214,7 +214,7 @@ omit [Fact (ringChar k).Prime] in
 lemma gradedHomHom_smul (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)) (c : PadicAlgCl ℓ)
     (x : (gradedHom ℓ k n).obj Y) :
     gradedHomHom ℓ k (c • x) =
-      (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) ≫
+      (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c).asHom ≫
         gradedHomHom ℓ k x :=
   rfl
 
@@ -317,23 +317,24 @@ noncomputable def shiftedUnitEquiv (n : ℤ) :
     · intro c d h
       have h' := congrArg (gradedHomHom ℓ k) h
       simp only [LinearMap.toSpanSingleton_apply, gradedHomHom_smul] at h'
-      change (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ 𝟙 _ =
-        (shiftFunctor _ n).map (pointScalar ℓ k d) ≫ 𝟙 _ at h'
+      change (shiftFunctor _ n).map (pointScalar ℓ k c).asHom ≫ 𝟙 _ =
+        (shiftFunctor _ n).map (pointScalar ℓ k d).asHom ≫ 𝟙 _ at h'
       rw [Category.comp_id, Category.comp_id] at h'
-      exact (bijective_pointScalar ℓ k).1 ((shiftFunctor _ n).map_injective h')
+      exact (bijective_pointScalar ℓ k).1 (End.ext ((shiftFunctor _ n).map_injective h'))
     · intro x
-      obtain ⟨c, hc⟩ := (bijective_pointScalar ℓ k).2
+      obtain ⟨c, hc⟩ := (End.homEquiv.bijective.comp (bijective_pointScalar ℓ k)).2
         ((shiftFunctor (DerivedCategory (PointMod ℓ k)) n).preimage (gradedHomHom ℓ k x))
+      change (pointScalar ℓ k c).asHom = _ at hc
       refine ⟨c, ?_⟩
       change gradedHomHom ℓ k (c • gradedHomMk ℓ k (𝟙 _)) = gradedHomHom ℓ k x
       rw [gradedHomHom_smul]
-      change (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ 𝟙 _ = _
+      change (shiftFunctor _ n).map (pointScalar ℓ k c).asHom ≫ 𝟙 _ = _
       rw [Category.comp_id, hc, Functor.map_preimage])
 
 omit [Fact (ringChar k).Prime] in
 lemma gradedHomHom_shiftedUnitEquiv (n : ℤ) (c : PadicAlgCl ℓ) :
     gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n c) =
-      (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c) := by
+      (shiftFunctor (DerivedCategory (PointMod ℓ k)) n).map (pointScalar ℓ k c).asHom := by
   change gradedHomHom ℓ k (c • gradedHomMk ℓ k (𝟙 _)) = _
   rw [gradedHomHom_smul]
   exact Category.comp_id _
@@ -363,7 +364,7 @@ lemma linearMapTrace_gradedHom_map_shiftedUnitEquiv (n m : ℤ) (c : PadicAlgCl 
       change gradedHomHom ℓ k (((gradedHom ℓ k n).map _).hom (shiftedUnitEquiv ℓ k n d)) =
         gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n (c * d))
       rw [gradedHomHom_map_apply, gradedHomHom_shiftedUnitEquiv, gradedHomHom_shiftedUnitEquiv,
-        gradedHomHom_shiftedUnitEquiv, ← Functor.map_comp, ← End.mul_def, ← map_mul]
+        gradedHomHom_shiftedUnitEquiv, ← Functor.map_comp, ← End.mul_asHom, ← map_mul]
     rw [e, map_smul, LinearMap.trace_id, ← (shiftedUnitEquiv ℓ k n).finrank_eq,
       Module.finrank_self, Nat.cast_one, smul_eq_mul, mul_one]
   · have := subsingleton_hom_shiftedUnit ℓ k n m h
@@ -394,15 +395,15 @@ omit [Fact (ringChar k).Prime] in
 /-- The trace of `c • 𝟙` on `𝟙⟦m⟧` is `(-1)ᵐ c`. -/
 lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
     trace (gradedHomHom ℓ k (shiftedUnitEquiv ℓ k m c)) =
-      (m.negOnePow : ℤ) • pointScalar ℓ k c := by
+      (m.negOnePow : ℤ) • (pointScalar ℓ k c).asHom := by
   rw [gradedHomHom_shiftedUnitEquiv]
   let e : 𝟙_ (DerivedCategory (PointMod ℓ k)) ≅
       (DerivedCategory.singleFunctor (PointMod ℓ k) 0).obj (𝟙_ _) :=
     (DerivedCategory.quotientCompQhIso (PointMod ℓ k)).app (𝟙_ (CochainComplex (PointMod ℓ k) ℤ))
   let r := (DerivedCategory.singleFunctor (PointMod ℓ k) 0).preimage
-    (e.inv ≫ pointScalar ℓ k c ≫ e.hom)
+    (e.inv ≫ (pointScalar ℓ k c).asHom ≫ e.hom)
   have hr : (DerivedCategory.singleFunctor (PointMod ℓ k) 0).map r =
-      e.inv ≫ pointScalar ℓ k c ≫ e.hom := Functor.map_preimage _ _
+      e.inv ≫ (pointScalar ℓ k c).asHom ≫ e.hom := Functor.map_preimage _ _
   let hd : HasRightDual ((shiftFunctor (DerivedCategory (PointMod ℓ k)) m).obj
       ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).obj (𝟙_ _))) :=
     hasRightDualOfIso ((shiftFunctor _ m).mapIso e.symm)
@@ -410,21 +411,20 @@ lemma trace_gradedHomHom_shiftedUnitEquiv (m : ℤ) (c : PadicAlgCl ℓ) :
     ((shiftFunctor _ m).map ((DerivedCategory.singleFunctor (PointMod ℓ k) 0).map r))
     (by simp only [Functor.mapIso_hom, ← Functor.map_comp, hr, Iso.hom_inv_id_assoc])]
   rw [DerivedCategory.trace_shiftFunctor_map_singleFunctor_map, hr]
-  change e.hom ≫ ((m.negOnePow : ℤ) • (e.inv ≫ pointScalar ℓ k c ≫ e.hom)) ≫ e.inv = _
+  change e.hom ≫ ((m.negOnePow : ℤ) • (e.inv ≫ (pointScalar ℓ k c).asHom ≫ e.hom)) ≫ e.inv = _
   simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp, Category.assoc,
     Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instances on the ambient derived category of modules are found through long searches
 /-- **The trace is the supertrace on the graded pieces**: for an object `Y` of `D(Mod_{ℚ̲̄_ℓ,s})`
 which is a finite direct sum of shifts `𝟙⟦nⱼ⟧` of the unit, the categorical trace of an
 endomorphism `w` of `Y` is the alternating sum `∑ₙ (-1)ⁿ tr(w | Hⁿ(Y))` of the traces on the
-graded pieces `Hⁿ(Y) = Hom(𝟙⟦n⟧, Y)` (blueprint `prop-trf-trace-formal-laws`, item (4)). -/
+graded pieces `Hⁿ(Y) = Hom(𝟙⟦n⟧, Y)` (blueprint `proposition-properties-trace`, item (4)). -/
 theorem trace_eq_pointScalar_sum {Y : DerivedCategory (PointMod ℓ k)} [HasRightDual Y]
     (D : ShiftDecomposition (𝟙_ _) Y) (s : Finset ℤ) (hs : ∀ j, D.deg j ∈ s)
     [∀ n, FiniteDimensional (PadicAlgCl ℓ) ((gradedHom ℓ k n).obj Y)] (w : Y ⟶ Y) :
-    trace w = pointScalar ℓ k (∑ n ∈ s, (n.negOnePow : ℤ) •
-      LinearMap.trace (PadicAlgCl ℓ) _ ((gradedHom ℓ k n).map w).hom) := by
+    trace w = (pointScalar ℓ k (∑ n ∈ s, (n.negOnePow : ℤ) •
+      LinearMap.trace (PadicAlgCl ℓ) _ ((gradedHom ℓ k n).map w).hom)).asHom := by
   let c : D.ι → PadicAlgCl ℓ := fun j ↦
     (shiftedUnitEquiv ℓ k (D.deg j)).symm (gradedHomMk ℓ k (D.incl j ≫ w ≫ D.proj j))
   have hc (j : D.ι) : D.incl j ≫ w ≫ D.proj j =
@@ -438,7 +438,7 @@ theorem trace_eq_pointScalar_sum {Y : DerivedCategory (PointMod ℓ k)} [HasRigh
   rw [Finset.sum_comm]
   simp only [Finset.sum_ite_eq', hs, ite_true]
   rw [map_sum]
-  simp only [map_zsmul]
+  simp only [map_zsmul, End.sum_asHom, End.zsmul_asHom]
 
 end TraceFormula
 
@@ -465,12 +465,13 @@ noncomputable def gradedHomShift (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)
         _ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k y)
     rw [Functor.map_add, Preadditive.comp_add]
   map_smul' c x := by
-    change _ ≫ (shiftFunctor _ (1 : ℤ)).map ((shiftFunctor _ (n - 1)).map (pointScalar ℓ k c) ≫
-        gradedHomHom ℓ k x) = (shiftFunctor _ n).map (pointScalar ℓ k c) ≫ _ ≫
+    change _ ≫ (shiftFunctor _ (1 : ℤ)).map
+        ((shiftFunctor _ (n - 1)).map (pointScalar ℓ k c).asHom ≫ gradedHomHom ℓ k x) =
+      (shiftFunctor _ n).map (pointScalar ℓ k c).asHom ≫ _ ≫
         (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x)
     have h :=
       (shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.naturality
-        (pointScalar ℓ k c)
+        (pointScalar ℓ k c).asHom
     simp only [Functor.comp_map] at h
     rw [Functor.map_comp, reassoc_of% h]
 
@@ -645,8 +646,9 @@ theorem trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition [IsSepClose
     (fun n ↦ gradedHom_map_comp_comm ℓ k n h₂) (fun n ↦ gradedHomConnecting_comm ℓ k n h₃) s
     (hsub D₁ hs₁) (hsub D₃ hs₃)
   rw [trace_eq_pointScalar_sum ℓ k D₁ s hs₁, trace_eq_pointScalar_sum ℓ k D₂ s hs₂,
-    trace_eq_pointScalar_sum ℓ k D₃ s hs₃, ← (pointScalar ℓ k).map_add, ← Finset.sum_add_distrib]
-  congr 1
+    trace_eq_pointScalar_sum ℓ k D₃ s hs₃, ← End.add_asHom,
+    ← (pointScalar ℓ k).map_add, ← Finset.sum_add_distrib]
+  congr 2
   rw [← sub_eq_zero, ← Finset.sum_sub_distrib, ← key]
   refine Finset.sum_congr rfl fun n _ ↦ ?_
   simp only [smul_sub]
