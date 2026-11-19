@@ -44,9 +44,8 @@ adjunction `Ra_! ⊣ Ra^!`, and the statements are made for an arbitrary right a
   isomorphism for perfect `K`.
 - `AlgebraicGeometry.Etale.curry_poincarePairing_eq`:
   `β_K^♯` is the purity identification followed by the inverse of global Verdier duality.
-- `AlgebraicGeometry.Etale.inv_curry_poincarePairing_eq`
- : the inverse of `β_K^♯` is global Verdier duality
-  followed by the inverse of the purity identification.
+- `AlgebraicGeometry.Etale.inv_curry_poincarePairing_eq`: the inverse of `β_K^♯` is global
+  Verdier duality followed by the inverse of the purity identification.
 -/
 
 @[expose] public section

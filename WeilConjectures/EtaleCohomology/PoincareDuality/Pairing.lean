@@ -33,9 +33,8 @@ orientation is an orientation in the sense of the six-functor formalism
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`
- : at finite coefficients, the derived Poincaré pairing
-  of a Tate orientation is perfect for `K` dualizable.
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`: at finite
+  coefficients, the derived Poincaré pairing of a Tate orientation is perfect for `K` dualizable.
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_properPoincarePairing`: the same for
   proper `a`, with `Ra_! ≅ Ra_*`.
 - `AlgebraicGeometry.Etale.TateOrientation.nonempty`,

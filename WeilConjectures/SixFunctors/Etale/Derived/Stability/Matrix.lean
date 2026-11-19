@@ -76,7 +76,7 @@ include aX in
 
 For `X` of finite type over `k` and a finite `Λ` whose exponent is invertible on `X`, the
 internal hom carries `Dctf(X, Λ) × Dctf(X, Λ)` into `Dctf(X, Λ)`, for two arbitrary objects.
-This is the notes' proof (six operations on `Dctf`): by the generation theorem for
+The proof: by the generation theorem for
 `Dctf(X, Λ)` it suffices to treat a first argument `Rg_* Rj_! P` supported on one stratum, where
 the internal hom is computed by the tensor–Hom exchanges for `g` and `j`
 (`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`). No Verdier duality is

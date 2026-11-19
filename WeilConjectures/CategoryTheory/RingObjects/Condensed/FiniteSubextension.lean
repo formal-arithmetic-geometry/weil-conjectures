@@ -34,11 +34,10 @@ are morphisms of ring objects. Their pullbacks along `p_X` are the coefficient c
 The inclusions `E̲ ⟶ ℚ̲̄_ℓ` form a cocone `Profinite.padicAlgClRingObjCocone` over the diagram
 `E ↦ E̲` (`Profinite.padicSubfieldRingObjFunctor`) of condensed abelian groups, indexed by the
 filtered poset of finite subextensions, and this cocone is a colimit
-(`Profinite.isColimitPadicAlgClRingObjCocone`): `ℚ̲̄_ℓ = colim_E E̲`. This is the comparison
-identity `eq:Qbar-comparison` of `WeilConjectures/RefactorInstruction.tex` (Proposition
-`prop:comparison-only`); it is a theorem, not the definition of `ℚ̲̄_ℓ`, which is defined by its
-sections. It holds because filtered colimits of condensed abelian groups are computed
-sectionwise on profinite sets (the coverings of `*_proét` being refined by finite ones), and
+(`Profinite.isColimitPadicAlgClRingObjCocone`): `ℚ̲̄_ℓ = colim_E E̲`. This comparison
+identity is a theorem, not the definition of `ℚ̲̄_ℓ`, which is defined by its sections. It holds
+because filtered colimits of condensed abelian groups are computed sectionwise on profinite sets
+(the coverings of `*_proét` being refined by finite ones), and
 sectionwise `ℚ̲̄_ℓ(S)` is the union of the subgroups `C(S, E)` of `C(S, ℚ̄_ℓ)` by definition.
 
 ## Proof of the colimit comparison
