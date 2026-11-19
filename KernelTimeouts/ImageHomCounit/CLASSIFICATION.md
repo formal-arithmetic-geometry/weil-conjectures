@@ -1,43 +1,43 @@
-Case ID / declaration
----------------------
-ImageHomCounit / `imageHomIso_counit`
-Origin: `212f97dd22a`; Lean/Mathlib 4.35.0; Weil server the build server.
-Imports/options: see `Before.lean`, `maxHeartbeats 200000`.
+# ImageHomCounit: exact Kernel site
 
-1. Phase attribution
---------------------
-Synchronous Kernel on: 54.53 s / 7,458,644 KB RSS, exit 0.
-Synchronous Kernel skipped: 2.90 s / 2,785,800 KB RSS, exit 0.
-Baseline Before/After: 55.53 s / 2.60 s. Per-declaration profiler: type
-checking 53.6 s, tactic execution 378 ms, elaboration 39.8 ms. Kernel
-diagnostics count 604,574 `Functor.obj` unfolds and 842,612 `Add.add` unfolds
-in this check. Conclusion: Kernel cost.
+**Declaration:** `AlgebraicGeometry.Etale.IndEtaleMapping.imageHomIso_counit`,
+origin `212f97dd22a`.
 
-2. What is expensive?
----------------------
-The target theorem value at `exact conjugateEquiv_counit` applied to concrete
-global-Hom adjunctions. The declared statement is shared with the cheap After
-file, so it is not the dominant cost. The expensive conversion is in checking
-this application or matching its inferred result to the declaration; these
-two suboperations are not yet separated.
+## Phase gate and bisect
 
-3. Structural evidence
-----------------------
-Before passes concrete functor/adjunction objects directly. The fixed helper
-peels their heterogeneous equality one argument at a time, ending in `rfl`.
-No elaborated expression dump or `Expr.equal` comparison was retained.
+With `-DElab.async=false`, Before takes 54.53 s with Kernel and 2.90 s with
+`-Ddebug.skipKernelTC=true`; peak RSS is 7,458,644 KB versus 2,785,800 KB.
+The type-only probe `probes/TypeOnly.lean` is 2.70 s with Kernel on. The full
+Before is 55.53 s; After is 2.60 s.
 
-4. Why is it expensive?
------------------------
-Primary E (representation/interface mismatch); contributing A and C.
-The phase gate and single proof-term change support conversion over concrete
-dependent arguments. Evidence strength: strongly supported.
+`probes/HaveApplication.lean` binds the old `conjugateEquiv_counit` result as
+`h` and then uses `sorry`: 2.70 s. `probes/FinalExact.lean` changes only the
+last line to `exact h`: 54.83 s, 7,459,004 KB. Therefore the exact site is
+the final inferred-type-to-declared-type conversion, not construction of
+`h` or checking the theorem type.
 
-5. Confidence
--------------
-Strongly supported; a focused `HEq` pair probe could confirm the exact
-cross-expression conversion.
+## Expressions and diagnostics
 
-6. Scope and caveats
---------------------
-Standalone statement, current master imports; no diagnostic axiom retained.
+`probes/PrintConversion.lean` prints both expressions with
+`pp.explicit`, `pp.proofs`, and `pp.universes`. The inferred equality is over
+`DerivedCategory (Sheaf T.left.Etale (ModuleCat A))`; the declaration is over
+the wrapper `DerivedCategoryModule A T.left`. The two sides contain distinct
+`instCategoryDerivedCategory`, `HasDerivedCategory.ofIsGrothendieckAbelian`,
+and generated `DerivedCategoryModule._proof_1/_proof_2` arguments. The
+pretty-printed mathematical morphisms look the same, but the wrapper and
+concrete derived-category instance paths differ under `Eq`.
+
+The diagnostic run
+`-Ddiagnostics=true -Ddiagnostics.threshold=1` on `FinalExact.lean` reports
+842,612 Kernel unfolds of `Add.add`, 604,585 of `Functor.obj`, and 423,893 of
+`DFunLike.coe`. These are the reduction chain triggered by the conversion;
+they are not independent root causes.
+
+## Classification
+
+Primary mechanism: **E (representation/instance/interface mismatch)**.
+Contributing mechanisms: **A** and **C** because the mismatched derived
+category paths are compared beneath dependent morphism domains. Evidence:
+**confirmed** for the final conversion and **strongly supported** for E/A/C.
+The fixed theorem uses `imageHomIso_counit` directly, while the old proof asks
+Kernel to reconcile the concrete adjunction expression with the wrapper type.
