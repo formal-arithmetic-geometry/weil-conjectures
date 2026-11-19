@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
 
 /-!
 # The curve estimate on an arbitrary affine curve
@@ -23,6 +24,14 @@ on a dense open `V ⊆ 𝔸¹`, which is a smooth geometrically connected curve,
 dense opens of the line
 (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology`)
 applies; the finite complement contributes only in degree zero, with weights at most `w`.
+
+For a smooth geometrically connected affine curve `C` and a lisse `F`
+(`AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse`), the
+finite map is the generically étale map `g : C' ⟶ 𝔸¹` from a curve `C' ⊇ C` with finite complement
+(`AlgebraicGeometry.AffineSpace.exists_isOpenImmersion_isFinite_etale_morphismRestrict`), the sheaf
+on the line is `K = g_* j_! F`, and `H_c^r(C, F) ≅ H_c^r(𝔸¹, K)` is the cohomology transport
+`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_extensionByZero`
+of the finite-map reduction.
 -/
 
 @[expose] public section
@@ -198,10 +207,19 @@ theorem WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_isAffine {C 
 /-- **Affine compact-support upper bound.** Let `C` be a smooth geometrically connected affine
 curve over `k₀` and `F` a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then every
 `H_c^r(C, F)` has weights at most `w + r`. More precisely, `H_c^0(C, F) = 0`, `H_c^2(C, F)` is
-`ι`-pure of weight `w + 2`, and `H_c^r(C, F) = 0` for `r ∉ {0, 1, 2}`. The degree-one bound
-comes from a finite morphism `C ⟶ 𝔸¹` and the estimate on dense opens of the line
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology`),
-see `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine`. -/
+`ι`-pure of weight `w + 2`, and `H_c^r(C, F) = 0` for `r ∉ {0, 1, 2}`.
+
+The bound in degree `r ≥ 0` goes through a finite generically étale map
+`g : C' ⟶ 𝔸¹` from a smooth curve `C' ⊇ C` with finite complement
+(`AlgebraicGeometry.AffineSpace.exists_isOpenImmersion_isFinite_etale_morphismRestrict`), the
+transported sheaf `K = g_* j_! F` on the line, punctually `ι`-pure of weight `w`
+(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.extensionByZero`,
+`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.lowerStar_of_isFinite`), the identification
+`H_c^r(C, F) ≅ H_c^r(𝔸¹, K)` (the cohomology transport
+`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_extensionByZero`)
+and the curve estimate on the affine line
+(`AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_affineLine`), which contains
+the localization to the dense open on which `K` is lisse. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -213,11 +231,52 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse
       (F.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (w + 2) ∧
       ∀ r : ℤ, r < 0 ∨ 2 < r → Subsingleton (F.compactlySupportedCohomology r).carrier := by
   have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
-  exact ⟨hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine ι
-      (ringKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (CommRingCat.of k₀)) 1) F hw,
-    WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF (Or.inl le_rfl),
+  -- the vanishing in degrees `r ≤ 0` and `r > 2`
+  have hsub (r : ℤ) (hr : r ≤ 0 ∨ 2 < r) :
+      Subsingleton (F.compactlySupportedCohomology r).carrier :=
+    WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF hr
+  refine ⟨fun r ↦ ?_, hsub 0 (Or.inl le_rfl),
     hw.isPureOfWeightOver_compactlySupportedCohomology_two hF,
-    fun r hr ↦ WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF
-      (hr.imp_left le_of_lt)⟩
+    fun r hr ↦ hsub r (hr.imp_left le_of_lt)⟩
+  rcases lt_or_ge r 0 with hr | hr
+  · -- negative degrees: `H_c^r` vanishes
+    have := hsub r (Or.inl hr.le)
+    intro β hβ
+    obtain ⟨x, hx⟩ := hβ.exists_hasEigenvector
+    exact (hx.2 (Subsingleton.elim _ _)).elim
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, r = n := ⟨r.toNat, (Int.toNat_of_nonneg hr).symm⟩
+  -- a finite generically étale map `g : C' ⟶ 𝔸¹` from a curve `C' ⊇ C` with finite complement
+  obtain ⟨C', π, j, hj, hjπ, -, -, hπ, -, g, hgπ, hg, -, -, -⟩ :=
+    AffineSpace.exists_isOpenImmersion_isFinite_etale_morphismRestrict (k := k₀) C
+  let : C'.Over (Spec (CommRingCat.of k₀)) := ⟨π⟩
+  have : j.IsOver (Spec (CommRingCat.of k₀)) := ⟨hjπ⟩
+  have : g.IsOver (Spec (CommRingCat.of k₀)) := ⟨hgπ⟩
+  have : Smooth π := SmoothOfRelativeDimension.smooth 1 π
+  have : LocallyOfFiniteType (C' ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType π)
+  have : IsSeparated (C' ↘ Spec (CommRingCat.of k₀)) := by
+    change IsSeparated π
+    rw [← hgπ]
+    infer_instance
+  have : QuasiCompact (C' ↘ Spec (CommRingCat.of k₀)) := by
+    change QuasiCompact π
+    rw [← hgπ]
+    infer_instance
+  have : IsSeparated (C ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : TopologicalSpace.NoetherianSpace C := by
+    have := LocallyOfFiniteType.isLocallyNoetherian (C ↘ Spec (CommRingCat.of k₀))
+    have : IsNoetherian C := {}
+    infer_instance
+  have : QuasiCompact j := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  -- the transported sheaf `K = g_* j_! F` on the line is punctually pure of weight `w`
+  have hK : ((WeilSheaf.lowerStar g).obj
+      ((WeilSheaf.extensionByZero j).obj F)).IsPunctuallyPureOfWeight ι w :=
+    WeilSheaf.IsPunctuallyPureOfWeight.lowerStar_of_isFinite g
+      (WeilSheaf.IsPunctuallyPureOfWeight.extensionByZero j hw)
+  -- `H_c^n(C, F) ≅ H_c^n(𝔸¹, K)`, and the curve estimate on the line
+  obtain ⟨E⟩ :=
+    WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_extensionByZero j g F n
+  exact FrobeniusModule.HasWeightsAtMost.of_equiv E
+    (hasWeightsAtMostOver_compactlySupportedCohomology_affineLine ι _ hK n)
 
 end AlgebraicGeometry
