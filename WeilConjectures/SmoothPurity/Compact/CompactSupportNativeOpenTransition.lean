@@ -196,19 +196,19 @@ private theorem inverseMate_localize
     [PreservesFiniteLimits E] [PreservesFiniteColimits E]
     [PreservesFiniteLimits E'] [PreservesFiniteColimits E']
     (d : P ⋙ E ≅ E' ⋙ P')
-    [IsIso ((mateEquiv a b).symm d.hom).natTrans] :
+    [IsIso ((mateEquiv a b).symm d.hom)] :
     ((mateEquiv
       ((a.mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
         P.rightDerivedFunctorIsoMapDerivedCategory)
       ((b.mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
         P'.rightDerivedFunctorIsoMapDerivedCategory)).symm
-      (Functor.mapDerivedCategorySquareIso d).hom).natTrans =
+      (Functor.mapDerivedCategorySquareIso d).hom) =
     (Functor.mapDerivedCategorySquareIso
-      (asIso ((mateEquiv a b).symm d.hom).natTrans)).hom := by
+      (asIso ((mateEquiv a b).symm d.hom))).hom := by
   have ha := Adjunction.ext (exactAdj_unit_eq a)
   have hb := Adjunction.ext (exactAdj_unit_eq b)
   rw [ha, hb]
-  let β := asIso ((mateEquiv a b).symm d.hom).natTrans
+  let β := asIso ((mateEquiv a b).symm d.hom)
   have hβ (M : A) : b.unit.app (E.obj M) ≫ P'.map (β.hom.app M) =
       E.map (a.unit.app M) ≫ d.hom.app (L.obj M) :=
     (unit_mateEquiv_symm a b d.hom M).symm
@@ -344,7 +344,7 @@ private theorem nativeOpenEvaluation_localize
   have := ProEtale.StrictTower.modulePullback_finiteLimits (R n) j
   have := ProEtale.StrictTower.modulePullback_finiteColimits (R n) j
   have := ordinaryOpenMateIso R q j n
-  let β := asIso ((mateEquiv a b).symm d.hom).natTrans
+  let β := asIso ((mateEquiv a b).symm d.hom)
   have hj : evalJ R q j n = Functor.mapDerivedCategorySquareIso β.symm := by
     apply Iso.ext_inv
     change evalJInv R q j n = _

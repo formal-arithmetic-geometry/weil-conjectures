@@ -74,7 +74,7 @@ variable {C D : Type w} [Category.{v₁} C] [Category.{v₂} D]
 
 private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
     [F.CommShift ℤ] [F.IsTriangulated]
-    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
+    [∀ I : Type v₁, PreservesColimitsOfShape (Discrete I) F]
     (hP : IsLocalizingSubcategory P) :
     IsLocalizingSubcategory (P.inverseImage F) := by
   let := hP.1
@@ -84,11 +84,11 @@ private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
   let := hG
   let : HasColimit (G ⋙ F) := ⟨_, isColimitOfPreserves F (colimit.isColimit G)⟩
   exact P.prop_of_iso (preservesColimitIso F G).symm
-    (hP.2.2 (G ⋙ F) inferInstance hPG)
+    (hP.prop_colimit (G ⋙ F) inferInstance hPG)
 
 private theorem localizing_forward (S : ObjectProperty C) (T : ObjectProperty D)
     (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
-    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
+    [∀ I : Type v₁, PreservesColimitsOfShape (Discrete I) F]
     (hST : ∀ K, S K → T (F.obj K)) {K : C} (hK : localizingClosure S K) :
     localizingClosure T (F.obj K) := by
   intro P hP hT
@@ -117,8 +117,8 @@ tensor, every ordered Tor interval, finite local models, bounded constructible f
 objects, triangulated and coproduct structure, localizing closures, and the two composites
 for each fixed compactification.
 
-Source: blueprint main-20261015, sec-six-functors-basics,
-sk-prop-sf-rf-shriek-preservation, coefficient-identification step
+Source: blueprint main-20261015, chap-Construction-of-f,
+theorem-f-shriek-finite-coefficients, coefficient-identification step
 (blueprint: lem-sf-module-object-ordinary-coefficient-equivalence).
 
 Proof following the twelve DAG steps:
@@ -131,7 +131,7 @@ and inverse equivalences preserve kernels and cokernels, hence are exact.
 3. Restrict to constant scalars to identify the intrinsic module category with fixed scalar
 module sheaves (lem-cbc-constant-ring-module-sheaves). Conversely local scalar sections act
 by gluing constant actions. The unit and counit are identity on underlying sections.
-4. Apply lem-sf-exact-functor-derived-triangulated to the two additive equivalences and
+4. Apply situation-conventions to the two additive equivalences and
 inverses. Units and counits extend termwise and descend through quasi-isomorphisms. Homology,
 shifts and distinguished triangles are preserved.
 5. Apply lem-pe-internal-section-tensor-comparison. Its local pure-tensor comparison is the
@@ -154,7 +154,7 @@ trivializes the constant models. Over finite A, finite and finitely presented mo
 Apply this on the same constructible locally closed strata, and affine-locally on arbitrary
 schemes. Homology and Tor compatibility identify the bounded constructible finite-Tor objects.
 10. The derived equivalence preserves shifts, triangles, isomorphisms and small coproducts.
-Transport the subcategories in the intersection defining sk-def-localizing-closure. Apply
+Transport the subcategories in the intersection defining definition-localizing-subcategory. Apply
 the same argument to the inverse to obtain equality of localizing-closure membership.
 11. Both direct images have sections M(V times_T U). The coefficient-sections equation
 identifies their actions. For an open immersion both extensions by zero are left adjoint

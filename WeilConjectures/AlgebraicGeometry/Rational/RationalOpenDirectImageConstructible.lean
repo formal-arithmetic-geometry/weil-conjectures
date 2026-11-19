@@ -29,10 +29,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstruc
 /-!
 # Rational open direct images with finite constant local models
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-open-coefficients,
-integral and rational paragraphs
-(blueprint: lem-sfb-rational-open-direct-image-constructible).
-
 The two conjuncts are the finite-subextension and algebraic-closure coefficient cases.
 Both use the finite-constant-model predicate, rather than general local finite presentation.
 -/
@@ -50,21 +46,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Rational derived direct image along a quasi-compact open immersion preserves bounded
 constructibility with finite constant scalar models, for both rational coefficient rings.
-Source: blueprint sk-prop-open-coefficients, rational paragraph
-(blueprint: lem-sfb-rational-open-direct-image-constructible).
-
-Proof:
-1. Clause (4) of [sk-thm-sfb-qlbar-two-colimit], applied to U and X, identifies
-   finite-constant-model bounded constructibility with ring-object bounded constructibility
-   for both E and the algebraic closure. Its positive-characteristic hypothesis follows from
-   primality of ringChar k, and the distinct-prime hypothesis is part of the standing setting.
-2. Regard j as a morphism over Spec k. For E, convert the input by the equality on U, apply
-   [lem-sfb-dc-lower-star-preserves] with the continuous E coefficient ring, and convert the
-   output by the equality on X. The underlying morphism and derived direct image remain j
-   and its ordinary right derived module direct image.
-3. Apply the same argument to the algebraic-closure coefficient ring and pair the results.
-   The direct-image theorem is stated separately for each of the two coefficient rings.
-   The geometric instances on the bundled over-objects are exactly the given instances.
 -/
 theorem constantModelBoundedConstructible_rational_open_direct_image
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
@@ -101,19 +82,17 @@ theorem constantModelBoundedConstructible_rational_open_direct_image
     inferInstanceAs (QuasiCompact (X ↘ Spec (.of k)))
   let : IsSeparated (X.asOver (Spec (.of k))).hom :=
     inferInstanceAs (IsSeparated (X ↘ Spec (.of k)))
-  have hU := (finiteCoefficientDescentTwoColimit k (ringChar k) ℓ
-    (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ ℓ) U).2.2.2
-  have hX := (finiteCoefficientDescentTwoColimit k (ringChar k) ℓ
-    (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ ℓ) X).2.2.2
   constructor
   · intro K hK
-    rw [(hU.1 E).1] at hK
-    rw [(hX.1 E).1]
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E U]
+      at hK
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E X]
     exact CondensedRing.ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj
       ℓ (k := k) E f ⟨K, hK⟩
   · intro K hK
-    rw [hU.2.1.1] at hK
-    rw [hX.2.1.1]
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ U]
+      at hK
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ X]
     exact CondensedRing.boundedConstructible_rightDerivedLowerStar_obj ℓ (k := k) f ⟨K, hK⟩
 
 end AlgebraicGeometry.ProEtale

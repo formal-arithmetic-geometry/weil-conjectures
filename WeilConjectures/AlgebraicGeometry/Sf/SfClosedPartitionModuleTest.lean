@@ -44,9 +44,9 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.NoetherianComplementaryStra
 /-!
 # Closed-side partitions and pro-etale module restrictions
 
-Source: Stacks Project, Tags 02V0, 01OW, 01OZ, 04ZA and 03D8;
-finite-stage paragraph of prop-sf-open-closed-triangle-all-stages
-(blueprint: lem-sf-closed-partition-module-test).
+## References
+
+* Stacks Project, Tags 02V0, 01OW, 01OZ, 04ZA and 03D8
 -/
 
 -- After pruning, this module only keeps private declarations.

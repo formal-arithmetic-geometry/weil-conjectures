@@ -39,10 +39,10 @@ The connecting maps are natural transformations, hence functorial in the coeffic
 
 Proof:
 1. The open immersions are étale, and U, V cover X. Their fibre products are intersections
-   (lem-weil-pbc-etale-composition-cancellation, lem-weil-pbc-open-fibre-product).
+   (definition-torsion-sheaves--3, lem-weil-pbc-open-fibre-product).
 2. The sheaf equalizer condition makes sections on X inject into sections on U × V and
    identifies their image with the kernel of the difference of restrictions
-   (def-weil-pbc-abelian-etale-sheaves).
+   (situation-conventions).
 3. For an injective sheaf, a section γ on U ∩ V gives the Čech cocycle (0, γ, -γ, 0).
    Čech acyclicity makes it a boundary, proving surjectivity of the difference map
    (lem-weil-pbc-injective-sheaf-cech-acyclic, def-weil-pbc-cech-complex).
@@ -56,7 +56,7 @@ Proof:
 6. Restriction to each étale open preserves injectives. Sections of the restricted
    resolution equal sections on that object of X's site (03F3 (2)); the unit and
    composition comparisons identify its maps with pullback restriction
-   (lem-weil-pbc-cohomology-pullback-functorial,
+   (proposition-cohomology-p-1-over-henselian--1,
    lem-weil-pbc-etale-inverse-image-restriction,
    lem-weil-pbc-inverse-image-composition).
 7. A morphism of sheaves lifts to resolutions. Naturality of the homology sequence

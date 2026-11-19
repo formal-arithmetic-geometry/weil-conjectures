@@ -118,7 +118,6 @@ private theorem whiskerLeft_val {M N N' :
   exact whiskerLeft_app_tmulSection (X := X) g s t
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Tensor sheaf instances and the three transported component formulas need extra elaboration.
 /-- The assembled component maps satisfy the signed chain equation by Leibniz. Source: Stacks
 Project, Tag 0FKU, construction before Lemma 20.31.3.

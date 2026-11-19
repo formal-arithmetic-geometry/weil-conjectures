@@ -29,7 +29,7 @@ Source: Stacks Project, More on Algebra, Lemma 07PT
 
 Proof plan, following the nine steps of the node:
 1. A maximal ideal is prime, so the forward direction is immediate from
-   def-weil-pbc-g-ring.
+   theorem-finite-etale-covers-proper-henselian--2.
 2. Conversely, for a prime p choose a maximal ideal m containing p. Put A = R_m and
    c : A → completion(A). Localization-at-prime and lem-weil-pbc-flat-local-ring-maps
    give Noetherian local rings A and R_p.
@@ -56,7 +56,7 @@ Proof plan, following the nine steps of the node:
 9. Apply lem-weil-pbc-regular-permanence to R_p → completion(R_p) → completion(B):
    the composite is regular by step 7 and the second map is flat and surjective on
    spectra by step 8. The first map is therefore regular. Since p was arbitrary,
-   def-weil-pbc-g-ring gives IsGRing R. -/
+   theorem-finite-etale-covers-proper-henselian--2 gives IsGRing R. -/
 theorem isGRing_iff_maximalIdeal
     (R : Type w) [CommRing R] [IsNoetherianRing R] :
     IsGRing R ↔

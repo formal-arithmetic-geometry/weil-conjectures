@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 
 /-! # The normalized condensed coefficient comparison for open extension
 
-The open-extension step of `lem-zl-morphism-open-closed-reduction` uses module objects over
+The open-extension step of `lemma-weight-bounds-partitions` uses module objects over
 pulled-back condensed coefficient rings. Its coefficient comparison is the conjugate of the
 specified scalar-restriction/pullback square along the derived open and scalar adjunctions.
 

@@ -77,7 +77,6 @@ theorem integralOperationsPullbackOnGoodCommShift_hom_app (l : ℕ) [Fact l.Prim
   simp only [Functor.comp_map]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Matching the good-subcategory and ambient derived category instances is slow.
 /-- The defining integral pullback comparison commutes with the cochain and derived
 pullback shifts related by representative descent. -/

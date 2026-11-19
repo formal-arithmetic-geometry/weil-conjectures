@@ -43,8 +43,6 @@ attribute [local irreducible] podReindexingCoefficient podReindexingHomModel
   Functor.mapHomologicalComplexUpToQuasiIso Functor.mapHomologicalComplexUpToQuasiIsoFactors
   CoefficientClosedStructure.tensor
 
-set_option maxHeartbeats 800000 in
--- Sectionwise reindexing crosses coefficient transports in the generator rewrites.
 /-- The pure-normalized tensor-chain comparison is natural in both inputs.
 Source: blueprint dual-Tate compatibility, Steps 1 and 2.
 (blueprint: lem-pod-reindexing-tensor-chain-naturality).
@@ -68,6 +66,7 @@ theorem tensor_chain_naturality {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         ((podReindexingComplexFunctor l E g s).map f,
           (podReindexingComplexFunctor l E g s).map h) := by
   apply (cancel_epi (t.tensorChain P L).inv).mp
+  simp only [Iso.inv_hom_id_assoc]
   ext n : 1
   apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology X)
     (R := podReindexingRing l E X s)
@@ -85,17 +84,19 @@ theorem tensor_chain_naturality {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj P)
         ((podReindexingComplexFunctor l E g s).obj L) p q n hpq U x y) = z :=
     hi.symm.trans hcancel
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rw [hi']
-  change (((t.tensorChain P' L').hom.f n).val.app U)
-      ((((total l E Y s).map (f, h)).f n).val.app
-        (op ((proEtaleIsoPostcompose g).obj U.unop)) z) = _
-  dsimp only [z]
-  erw [ScalarHomTensor.tensor_generator_map]
-  erw [t.tensorChain_pure]
-  erw [t.tensorChain_pure]
-  erw [ScalarHomTensor.tensor_generator_map]
-  rfl
+  -- Apply the generator equations directly, without searching through coefficient transports.
+  refine (congrArg (fun w ↦ (((t.tensorChain P' L').hom.f n).val.app U)
+    ((((total l E Y s).map (f, h)).f n).val.app
+      (op ((proEtaleIsoPostcompose g).obj U.unop)) w)) hi').trans ?_
+  refine (congrArg (fun w ↦ (((t.tensorChain P' L').hom.f n).val.app U) w)
+    (ScalarHomTensor.tensor_generator_map (J := ProEt.topology Y)
+      (R := podReindexingRing l E Y s) f h p q n hpq
+      (op ((proEtaleIsoPostcompose g).obj U.unop)) x y)).trans ?_
+  refine (t.tensorChain_pure P' L' p q n hpq U.unop
+    ((f.f p).val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) x)
+    ((h.f q).val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) y)).trans ?_
+  exact (ScalarHomTensor.tensor_generator_map (J := ProEt.topology X)
+    (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).map f)
+    ((podReindexingComplexFunctor l E g s).map h) p q n hpq U x y).symm
 
 end WeilConjectures.PodReindexingCoherence

@@ -89,7 +89,7 @@ sheaves is bijective for every `q`. This is the assertion `C₇(C, F)` of the ei
 calculations; it is proved by reducing to reduced curves and constructible `𝐅_r`-coefficients,
 splitting off the zero-dimensional components, localising to a dense open, passing to the
 normalisation and to the smooth constant case of the curve calculations.
-(blueprint: prop-weil-pbc-algebraically-closed-extension)
+(blueprint: theorem-cohomology-curves--7)
 -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgClosed k]
@@ -125,7 +125,7 @@ universal homeomorphisms and are bijective on étale cohomology
 (`AlgebraicGeometry.Etale.cohomologyMap_bijective`). The square of pullback maps between the
 four cohomology groups commutes, and its bottom row `Hᵠ(C_{k̄}) ⟶ Hᵠ(C_{k̄'})` is bijective by
 `H`.
-(blueprint: lemma-weil-pbc-curve-separably-closed-passage)
+(blueprint: lemma-extension-separably-closed-ground-field--1)
 -/
 theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
     (H : ∀ {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
@@ -227,7 +227,7 @@ sheaves is bijective for every `q`: the algebraically closed case
 `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`, transported to separably
 closed fields by
 `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`.
-(blueprint: prop-weil-pbc-proper-curve-sepclosed-invariance)
+(blueprint: lemma-extension-separably-closed-ground-field--1)
 -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepClosed k]

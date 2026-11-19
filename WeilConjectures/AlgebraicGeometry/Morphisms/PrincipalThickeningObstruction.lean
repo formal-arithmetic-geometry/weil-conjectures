@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningCokernelSe
 
 /-! # The section obstruction sequence for principal thickenings
 
-Source: Stacks Project, Tags 01IH, 01QP and 01DZ.
+## References
+
+* Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and Tag 01DZ, Section 20.2
+  (cohomology as a universal delta-functor)
 -/
 
 @[expose] public section
@@ -55,25 +58,7 @@ private theorem boundary_naturality {X : Scheme.{u}} {S T : ShortComplex X.Modul
   exact congrArg (fun z ↦ Abelian.Ext.comp x z rfl) he.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exactness and naturality of the section obstruction sequence.
-
-Source: Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and
-Tag 01DZ, Section 20.2 (cohomology as a universal delta-functor).
-(blueprint: new-principal-thickening-obstruction)
-
-Proof: Put O = O_W and I_n = image(g^(n+1):O -> O). The kernel of the quotient
-R -> R/(g) is (g), and its (n+1)st power is (g^(n+1)). The pullback defining the
-thickening is the closed subscheme of W defined by I_n. On affine opens the
-quotient sheaf O/I_n is thus the pushforward of its structure sheaf, with quotient
-projection equal to restriction. These local identifications agree on overlaps.
-The short exact sequence 0 -> I_n -> O -> O/I_n -> 0 gives an additive boundary
-map from thickening sections to H^1(W,I_n). Exactness says a boundary-zero section
-is the restriction of an ambient section. If kappa commutes with the ideal
-inclusions and h commutes with the ambient maps, they give a morphism of these
-short exact sequences with middle map the identity. The induced quotient map is
-h.appTop. Naturality of the long exact sequence gives the displayed equality.
-No cohomology vanishing or torsion bound is needed. For an empty W all groups
-are zero. For g=0 the ideal is zero; for a unit g the quotient sheaf is zero. -/
+/-- Exactness and naturality of the section obstruction sequence. -/
 theorem principal_thickening_obstruction
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens) :
     ∃ δ : ∀ n : ℕ, Γ(FiniteEtale.Adic.openThickening

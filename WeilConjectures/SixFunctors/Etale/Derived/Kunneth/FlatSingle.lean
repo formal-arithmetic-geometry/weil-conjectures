@@ -32,13 +32,14 @@ quasi-separated. For a flat sheaf `𝓔` of `Λ`-modules on `X_ét` and a sheaf 
 `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)`
 
 is an isomorphism (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_flat`).
-This is the case of single sheaves in the proof of blueprint `lem-kun-0f1j`, to which the
-general case is reduced in `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction`.
+This is the case of single sheaves in the proof of blueprint `lemma-kunneth-field-coefficients--1`,
+to which the general case is reduced in
+`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction`.
 
 Following the blueprint, the coefficients are reduced to residue fields of `Λ`, the sheaf `𝓔`
 is written as a filtered colimit of constructible sheaves, each of which embeds into a finite
 sum of pushforwards of constant sheaves along finite morphisms, and for those the statement is
-the base change theorem towards spectra of fields (blueprint `lem-kun-0f1i`,
+the base change theorem towards spectra of fields (blueprint `lemma-kunneth-field-coefficients--1`,
 `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_field`) for a scheme finite over `X`.
 -/
 
@@ -58,8 +59,8 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-kun-0f1j`, for single sheaves: base change for a pushforward tensored with a
-flat sheaf.
+/-- Blueprint `lemma-kunneth-field-coefficients--1`, for single sheaves: base change for a
+pushforward tensored with a flat sheaf.
 
 Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. For a diagram
 

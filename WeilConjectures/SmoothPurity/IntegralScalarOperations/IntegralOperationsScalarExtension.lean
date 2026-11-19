@@ -186,7 +186,7 @@ import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 /-! # Integral operations and finite coefficient extension
 
 Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations,
-`def-weil-derived-pullback-tensor-hom`, integral/common-stage paragraph
+`prose-03-02`, integral/common-stage paragraph
 (blueprint: lem-pur-integral-operations-scalar-extension).
 
 The comparison predicate records all three natural isomorphisms and their actual

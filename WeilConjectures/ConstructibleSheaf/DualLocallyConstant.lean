@@ -64,7 +64,7 @@ theorem IsFiniteLocallyConstantSheaf.ihom_unit_locallyConstant
   let := hM
   have := Etale.isIso_ihomComparison_upperStar A f F
   let eH := asIso ((Functor.LaxMonoidal.ihomComparison
-    (Etale.upperStar A f) F).natTrans.app (𝟙_ _))
+    (Etale.upperStar A f) F).app (𝟙_ _))
   obtain ⟨eD⟩ := nonempty_constant_finite_dual_iso (d.cover.X i) M
   exact Sheaf.isConstant_of_iso _
     (eH ≪≫ (ihom ((Etale.upperStar A f).obj F)).mapIso

@@ -15,8 +15,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeChainMapStalkEquality
 
 /-! # Spreading a homotopy of a bounded finite free complex
 
-Source: lem-pc-perfect-locus, extension of finite calculations near a point.
-(blueprint: lem-pc-finite-free-stalk-homotopy-p-only)
+Source: lemma-coherent-base-change-invertible-sheaves--3, extension of finite calculations near a
+point. (blueprint: lem-pc-finite-free-stalk-homotopy-p-only)
 -/
 
 @[expose] public section

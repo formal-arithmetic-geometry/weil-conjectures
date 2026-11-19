@@ -39,7 +39,7 @@ lemma mapOfNatIso_obj_obj_str_eq {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L) (K : Is
 
 variable {L L' : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (adj' : R ⊣ L') [IsIso adj'.counit]
   (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R) (eL' : L' ⋙ G ≅ F ⋙ L')
-  (h' : (mateEquiv adj' adj' (TwoSquare.mk _ _ _ _ eR.inv)).natTrans = eL'.hom)
+  (h' : (mateEquiv adj' adj' (TwoSquare.mk _ _ _ _ eR.inv)) = eL'.hom)
   (ι : L ⟶ L') (hι : Functor.whiskerRight ι G ≫ eL'.hom = eL.hom ≫ Functor.whiskerLeft F ι)
   (hηι : ∀ K : C, adj.unit.app K ≫ R.map (ι.app K) = inv (adj'.counit.app K))
 

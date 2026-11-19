@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 /-!
 # Filtered colimit cocones of ring objects
 
-Source: blueprint `sec-proetale-coefficients`, proof of `sk-prop-sfb-qlbar-colimit-x`,
+Source: blueprint `chap-The-pro-etale-site`, proof of `lemma-comparison-completed-coefficients`,
 paragraph "Third isomorphism"; Stacks Project, Tags 002F, 002V and 0FFK
 (blueprint: lem-sfb-filtered-ring-object-cocone-colimit).
 
@@ -35,8 +35,8 @@ namespace CategoryTheory
 open MonObj
 
 /-- An underlying filtered colimit cocone of ring objects is colimiting in ring objects.
-Source: blueprint `sk-prop-sfb-qlbar-colimit-x`, proof, "Third isomorphism"; Stacks Project,
-Tags 002F, 002V and 0FFK (blueprint: lem-sfb-filtered-ring-object-cocone-colimit).
+Source: blueprint `lemma-comparison-completed-coefficients`, proof, "Third isomorphism"; Stacks
+Project, Tags 002F, 002V and 0FFK (blueprint: lem-sfb-filtered-ring-object-cocone-colimit).
 
 Proof: (1) For a competing ring-object cocone `s`, the underlying colimit gives the unique
 map `b` with `c_i ≫ b = s_i` (def-weil-pbc-category-colimit). (2) Choose an index using

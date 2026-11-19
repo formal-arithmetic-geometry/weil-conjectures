@@ -34,7 +34,7 @@ import WeilConjectures.Algebra.Homology.System.SystemRingedSequenceSite
 /-! # Integral exceptional inverse image from actual coefficient systems
 
 Source: blueprint sec-smooth-purity/sk-def-sf-operations,
-def-weil-exceptional-inverse-image, integral construction
+theorem-f-shriek-finite-coefficients, integral construction
 (blueprint: def-pur-adic-exceptional-system-realization).
 
 The ordinary coordinate functor below changes only quotient-ring presentations.

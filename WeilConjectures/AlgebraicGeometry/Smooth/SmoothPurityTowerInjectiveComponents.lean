@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.CategoryTheory.Retract
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerEvaluationAdjoint
@@ -55,9 +56,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHo
 /-!
 # Acyclic components of injective coefficient towers
 
-Source: blueprint main-20261015, sec-smooth-purity, sk-lem-sp-tower-levels,
+Source: blueprint main-20261015, chap-Smooth-purity, prose-09-23,
 `sk-lem-sp-tower-levels-acyclic.md` and its proof; Stacks Tags 03FD, 015E and 05TH
-(blueprint: det-sp-tower-injective-components).
+(blueprint: prose-09-23).
 
 Index n denotes the positive level n+1. The tower direct image is the actual
 product-site module pushforward. Its scalar map is the existing constant-section

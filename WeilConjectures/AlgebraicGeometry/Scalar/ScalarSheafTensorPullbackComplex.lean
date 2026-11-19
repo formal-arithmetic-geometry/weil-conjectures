@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorRepre
 /-!
 # The ordinary scalar tensor pullback square on complexes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4
-(blueprint: lem-pur-scalar-sheaf-tensor-pullback-complex).
+## References
+
+* Stacks 07A4
 -/
 
 @[expose] public noncomputable section
@@ -54,13 +55,7 @@ private theorem lift_complex_square
     (t.hom.app (P.X i) ≫ 𝟙 _) ≫ σ.app (F.obj (P.X i))
   simpa only [Category.comp_id] using h (P.X i)
 
-/-- The ordinary balancing/pullback square applied degreewise to a complex.
-Source: Stacks 07A4; parent normalization proof step 1
-(blueprint: lem-pur-scalar-sheaf-tensor-pullback-complex).
-Proof: apply scalarSheafTensorPullback_square in every degree. The component of
-mapHomologicalComplexCompIso for a functor iso is its component followed by the
-identity. Thus each degree of the asserted square is the ordinary square, after
-removing these identity factors. Equality of complex maps follows degreewise. -/
+/-- The ordinary balancing/pullback square applied degreewise to a complex. -/
 theorem scalarSheafTensorPullbackComplex_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

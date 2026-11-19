@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDe
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDerivedComparisonBetaPullback
 
 /-! Construction and normalization of the finite-free beta comparison.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-normalized)
 -/
 
 @[expose] public noncomputable section
@@ -27,18 +26,8 @@ namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. This is the construction, ordinary augmentation normalization, and
+This is the construction, ordinary augmentation normalization, and
 pullback part of the beta comparison.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-normalized)
-
-Proof: choose flat-term K-flat representatives and apply the restricted K-flat
-tensor identification to the augmentation. The normalized section comparison
-then descends this representative map to the derived categories. Exact point
-pullback transports the representative comparison and gives the displayed
-pullback square, while the finite-free identifications provide the required
-normalization.
 -/
 theorem finiteFreeScalarDerivedComparison_beta_normalized
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

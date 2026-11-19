@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardCompos
 
 /-! # Invertibility of the diagonal source comparison
 
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart Cartier calculation;
+Source: blueprint lemma-class-diagonal-projective-line, standard-chart Cartier calculation;
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 -/
 
@@ -102,7 +102,7 @@ attribute [local irreducible] projectiveLineDiagonalAlpha ordinaryFiniteUnitPull
   derivedUpperStarLowerStarAdjunction
 
 /-- The canonical source comparison for the diagonal is an isomorphism over every base.
-Source: blueprint lem-amb-p1-diagonal-integrals, derived-composition identification alpha.
+Source: blueprint lemma-class-diagonal-projective-line, derived-composition identification alpha.
 (auxiliary; not a blueprint node)
 
 Proof: each projection composed with the diagonal is identity. The corresponding

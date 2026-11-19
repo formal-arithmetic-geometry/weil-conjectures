@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Functor
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism

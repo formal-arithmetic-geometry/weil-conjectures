@@ -107,7 +107,7 @@ with stalks and products; the resulting finite product of finite sets is finite.
 If n is zero, the source is empty and the underlying image is constant singleton.
 Finally apply finite base change to the cartesian square for g and p followed by
 V inclusion, and inverse-image composition to separate p from V inclusion.
-`lem-weil-pbc-etale-inverse-image-algebraic-structures` commutes the forgetful
+`situation-conventions` commutes the forgetful
 functor with inverse and direct image. These isomorphisms identify the lisse
 product just obtained with the displayed set sheaf. Transport its trivializing
 cover and finite stalks through that isomorphism. No descent from T is asserted

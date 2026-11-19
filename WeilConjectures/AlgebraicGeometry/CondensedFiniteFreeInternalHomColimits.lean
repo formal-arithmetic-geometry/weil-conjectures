@@ -157,7 +157,7 @@ private noncomputable def pullIhomIso
       Mod.ihom M ≅ Mod.ihom' (G.obj R) M :=
     (Mod.ihomAdjunction M).rightAdjointUniq (Mod.ihom'Adjunction _ M)
   have hIso (P0 : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-      IsIso (ihomComparison (g)^*[Ab.{u + 1}] P0).natTrans := by
+      IsIso (ihomComparison (g)^*[Ab.{u + 1}] P0) := by
     let h : WeaklyEtale g := inferInstance
     let R := (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous Ab.{u + 1}
       (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
@@ -167,17 +167,17 @@ private noncomputable def pullIhomIso
         (Under.post (MorphismProperty.Over.map ⊤ h).op (X := k)).IsEquivalence :=
       fun k ↦ MorphismProperty.Over.isEquivalence_post_map_op h k.unop
     have hW : IsIso (ihomComparison W ((sheafToPresheaf _ Ab.{u + 1}).obj
-        P0)).natTrans := inferInstance
+        P0)) := inferInstance
     have hι : ∀ Y : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1},
-        IsIso (ihomComparison (sheafToPresheaf _ Ab.{u + 1}) Y).natTrans :=
+        IsIso (ihomComparison (sheafToPresheaf _ Ab.{u + 1}) Y) :=
       Monoidal.Reflective.isIso_ihomComparison
         (sheafificationAdjunction (Scheme.ProEt.topology _) Ab.{u + 1})
     have hιV : ∀ Y : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1},
-        IsIso (ihomComparison (sheafToPresheaf _ Ab.{u + 1}) Y).natTrans :=
+        IsIso (ihomComparison (sheafToPresheaf _ Ab.{u + 1}) Y) :=
       Monoidal.Reflective.isIso_ihomComparison
         (sheafificationAdjunction (Scheme.ProEt.topology _) Ab.{u + 1})
     have h1 : IsIso (ihomComparison (sheafToPresheaf _ Ab.{u + 1} ⋙ W)
-        P0).natTrans := by
+        P0) := by
       rw [NatTrans.isIso_iff_isIso_app]
       intro Q
       rw [ihomComparison_comp_app]
@@ -187,23 +187,23 @@ private noncomputable def pullIhomIso
       (Scheme.ProEt.topology X)
     have : NatTrans.IsMonoidal τ.symm.hom := inferInstanceAs (NatTrans.IsMonoidal τ.inv)
     have h2 : IsIso (ihomComparison (R ⋙ sheafToPresheaf _ Ab.{u + 1})
-        P0).natTrans := isIso_ihomComparison_of_iso τ.symm _
-    have hR : IsIso (ihomComparison R P0).natTrans := by
+        P0) := isIso_ihomComparison_of_iso τ.symm _
+    have hR : IsIso (ihomComparison R P0) := by
       rw [NatTrans.isIso_iff_isIso_app]
       intro Q
       have hq := NatIso.isIso_app_of_isIso
         (ihomComparison (R ⋙ sheafToPresheaf _ Ab.{u + 1})
-          P0).natTrans Q
+          P0) Q
       rw [ihomComparison_comp_app] at hq
       have := IsIso.of_isIso_comp_right ((sheafToPresheaf _ Ab.{u + 1}).map
-        ((ihomComparison R P0).natTrans.app Q))
-        ((ihomComparison (sheafToPresheaf _ Ab.{u + 1}) (R.obj P0)).natTrans.app
+        ((ihomComparison R P0).app Q))
+        ((ihomComparison (sheafToPresheaf _ Ab.{u + 1}) (R.obj P0)).app
           (R.obj Q))
       exact isIso_of_reflects_iso _ (sheafToPresheaf _ Ab.{u + 1})
     exact isIso_ihomComparison_of_iso (upperStarIsoSheafPushforward Ab.{u + 1} g h)
       P0
   letI (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-      IsIso (ihomComparison (g)^*[Ab.{u + 1}] Q).natTrans := hIso Q
+      IsIso (ihomComparison (g)^*[Ab.{u + 1}] Q) := hIso Q
   have (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
       PreservesLimit (parallelPair (Mod.homModPre (Mod.act P.X) N)
         (Mod.homModB _ P N)) F := by

@@ -44,7 +44,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 Its hom is signed symmetry, the canonical proper projection map, direct image of
 signed symmetry, and the canonical pullback-of-constants identification.
 Source: Zheng, Theorem 2.18(2) and Construction 2.26, printed pp. 12 and 15;
-`lem-amb-proper-coproducts-projection`
+`lemma-cohomology-projective-line-trace`
 (blueprint: lem-sfb-arbitrary-field-exceptional-constant-tensor). -/
 noncomputable def properConstantProjectionIso
     (V : DerivedCategory (ModuleCat.{u + 1} A)) (K : DerivedCategoryModule A X) :

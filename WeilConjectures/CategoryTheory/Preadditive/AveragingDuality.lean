@@ -25,11 +25,11 @@ A ──u₁──▶ T₁ ──f──▶ 𝔻 T₂ ──𝔻(u₂)──▶ 
 of `f` to the two invariant summands is an isomorphism, with inverse `𝔻(r₂) ≫ f⁻¹ ≫ r₁`
 (`CategoryTheory.isIso_comp_comp_map_op_of_averaging`).
 
-This is the last step of the proof of blueprint `det-tf-nearby-duality-slice`: the restriction of
+This is the last step of the proof of blueprint `lemma-nearby-duality-slice--1`: the restriction of
 the duality map of nearby cycles to the special fibre of a generic slice is the restriction of the
 duality map of the slice to the summands of invariants under the pro-`p` kernel `P`, and the
-latter is an isomorphism (blueprint `det-tf-invariants-duality`). By the stabilization of the
-`P`-action at a finite level, the summands are the images of averaging idempotents of finite
+latter is an isomorphism (blueprint `lemma-duality-invariants-pro-p--1`). By the stabilization of
+the `P`-action at a finite level, the summands are the images of averaging idempotents of finite
 `p`-group quotients of `P` (`CategoryTheory.nsmul_normalizedTrace_comp_eq_sum`), as here.
 
 -/
@@ -58,8 +58,8 @@ lemma comp_map_op_comp_inv_eq_of_averaging {A T₁ : D} {B T₂ : C} {u₁ : A �
   refine Fintype.sum_equiv (Equiv.inv Γ) _ _ fun a ↦ ?_
   rw [Equiv.inv_apply, ← assoc, IsIso.comp_inv_eq, hf, inv_inv]
 
-/-- **Duality restricted to averaging summands** (blueprint `det-tf-nearby-duality-slice`,
-"Conclusion", with `det-tf-invariants-duality`): if `u₁`, `u₂` are split by `r₁`, `r₂` with
+/-- **Duality restricted to averaging summands** (blueprint `lemma-nearby-duality-slice--1`,
+"Conclusion", with `lemma-duality-invariants-pro-p--1`): if `u₁`, `u₂` are split by `r₁`, `r₂` with
 averaging idempotents `n • (r ≫ u) = ∑ a, ρ a` (`n = |Γ|` invertible on `T₁`) and the isomorphism
 `f : T₁ ⟶ 𝔻 T₂` intertwines `ρ₁` with the contragredient action `a ↦ 𝔻(ρ₂ a⁻¹)`, then
 `u₁ ≫ f ≫ 𝔻(u₂) : A ⟶ 𝔻 B` is an isomorphism. -/

@@ -78,6 +78,19 @@ instance : NatTrans.CommShift (boundedConstructibleLowerStarCompatibility ℓ f)
   unfold boundedConstructibleLowerStarCompatibility boundedConstructibleLowerStar
   infer_instance
 
+/-- The derived pushforward along a proper morphism on bounded constructible complexes commutes
+with the shifts. -/
+noncomputable instance [IsProper f.left] :
+    (boundedConstructibleLowerStarOfIsProper ℓ f).CommShift ℤ := by
+  delta boundedConstructibleLowerStarOfIsProper
+  infer_instance
+
+instance [IsProper f.left] :
+    NatTrans.CommShift (boundedConstructibleLowerStarOfIsProperCompatibility ℓ f).hom ℤ := by
+  unfold boundedConstructibleLowerStarOfIsProperCompatibility
+    boundedConstructibleLowerStarOfIsProper
+  infer_instance
+
 /-- The adjunction `Lf^* ⊣ Rf_*` on bounded constructible complexes commutes with the shifts. -/
 instance commShift_boundedConstructibleUpperStarLowerStarAdjunction :
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).CommShift ℤ :=

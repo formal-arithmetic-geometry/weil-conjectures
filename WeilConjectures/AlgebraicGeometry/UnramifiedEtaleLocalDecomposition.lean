@@ -41,7 +41,7 @@ Proof:
    étale base change. Unramifiedness persists by
    `lem-weil-pbc-unramified-base-change-open` (Stacks 02G6 and 02GA).
 2. Shrink the neighbourhood to an affine open, using
-   `lem-weil-pbc-etale-composition-cancellation`. Apply
+   `definition-torsion-sheaves--3`. Apply
    `lem-weil-pbc-finite-unramified-one-point-closed` to the finite unramified pieces and
    intersect the resulting neighbourhoods. On each shrinking replace every piece by its
    base change; `lem-weil-pbc-open-fibre-product` identifies it with the inverse-image open.

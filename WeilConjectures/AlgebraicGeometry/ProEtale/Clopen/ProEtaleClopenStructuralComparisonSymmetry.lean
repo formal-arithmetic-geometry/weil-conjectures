@@ -8,8 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructuralComparisonPrefix
 
 /-! Split structural comparison data for finite clopen restriction.
-Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-structural-comparison). -/
+
+## References
+
+* Stacks Project, Tag 0GMW
+* Stacks Project, Tag 0FPQ
+-/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -26,16 +30,10 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open WeilConjectures
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-! Symmetry completion for the clopen structural comparison.
-Source: Stacks Project, sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-structural-comparison-symmetry). -/
+/-! Symmetry completion for the clopen structural comparison. -/
 
-/-- The signed Koszul symmetry clause follows from the normalized prefix comparison.
-Source: Stacks Project, sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-structural-comparison-symmetry).
-
-The proof compares the two total-tensor routes on each summand; braided coherence gives the
-Koszul sign and the prefix equations identify both routes with the chosen comparison. -/
+/-- Given the normalized prefix comparison, the total tensor comparison satisfies the signed
+Koszul symmetry clause on each summand. -/
 theorem clopen_structural_comparison_symmetry
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

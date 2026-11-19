@@ -57,17 +57,20 @@ theorem discreteContinuousRepToCommGrp_essSurj
       let P₀ : Action (Type w) G :=
         { V := A.obj.obj.V × B.obj.obj.V
           ρ :=
-            { toFun g := ↾fun x ↦ (A.obj.obj.ρ g x.1, B.obj.obj.ρ g x.2)
+            { toFun g := .of <| ↾fun x ↦ (A.obj.obj.ρ g x.1, B.obj.obj.ρ g x.2)
               map_one' := by
+                apply End.ext
                 apply ConcreteCategory.hom_ext
                 intro x
-                exact Prod.ext (ConcreteCategory.congr_hom A.obj.obj.ρ.map_one x.1)
-                  (ConcreteCategory.congr_hom B.obj.obj.ρ.map_one x.2)
+                exact Prod.ext (ConcreteCategory.congr_hom congr($(A.obj.obj.ρ.map_one).asHom) x.1)
+                  (ConcreteCategory.congr_hom congr($(B.obj.obj.ρ.map_one).asHom) x.2)
               map_mul' g h := by
+                apply End.ext
                 apply ConcreteCategory.hom_ext
                 intro x
-                exact Prod.ext (ConcreteCategory.congr_hom (A.obj.obj.ρ.map_mul g h) x.1)
-                  (ConcreteCategory.congr_hom (B.obj.obj.ρ.map_mul g h) x.2) } }
+                exact Prod.ext
+                  (ConcreteCategory.congr_hom congr($(A.obj.obj.ρ.map_mul g h).asHom) x.1)
+                  (ConcreteCategory.congr_hom congr($(B.obj.obj.ρ.map_mul g h).asHom) x.2) } }
       let P : DiscreteContAction (Type w) G := ⟨⟨P₀, by
         let : DiscreteTopology ((forget₂ _ TopCat).obj P₀) := discreteTopology_bot _
         apply continuousSMul_iff_stabilizer_isOpen.mpr
@@ -166,15 +169,19 @@ theorem discreteContinuousRepToCommGrp_essSurj
   let : AddCommGroup V := inferInstance
   let : Module ℤ V := inferInstance
   let t (g : G) : F ⟶ F :=
-    { app X := X.obj.obj.ρ g
+    { app X := (X.obj.obj.ρ g).asHom
       naturality {X Y} f := (f.hom.hom.comm g).symm }
   let a (g : G) : V →+ V :=
     ((CommGrpTypeEquivalenceCommGrp.functor.map
       ((Functor.mapCommGrpNatTrans (t g)).app A)).hom).toAdditive
   let ρ : Representation ℤ G V :=
     { toFun g := (a g).toIntLinearMap
-      map_one' := by ext x; exact ConcreteCategory.congr_hom A.X.obj.obj.ρ.map_one x
-      map_mul' g h := by ext x; exact ConcreteCategory.congr_hom (A.X.obj.obj.ρ.map_mul g h) x }
+      map_one' := by
+        ext x
+        exact ConcreteCategory.congr_hom congr($(A.X.obj.obj.ρ.map_one).asHom) x
+      map_mul' g h := by
+        ext x
+        exact ConcreteCategory.congr_hom congr($(A.X.obj.obj.ρ.map_mul g h).asHom) x }
   let M : DiscreteContinuousRep.{0, u, w} ℤ G := ⟨Rep.of ρ, by
     intro x
     let : DiscreteTopology ((forget₂ _ TopCat).obj A.X.obj.obj) := A.X.property

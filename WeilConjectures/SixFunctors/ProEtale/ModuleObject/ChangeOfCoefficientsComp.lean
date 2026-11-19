@@ -113,11 +113,12 @@ theorem derivedComapLowerStarIso_hom_app_comp (hc : a ≫ b = c)
     (comapCoefficientMapCompIso a b c hc Y) (comapLowerStarIso_hom_app_of_comp_eq a b c f hc) K
 
 
-/-- **(Push) is compatible with the composition of coefficient changes.** For `c = a ≫ b`, the
-comparison `Rf_* ⋙ T_c ⟶ T_c ⋙ Rf_*` is the composite of the comparisons for `a` and `b`, up to
-the transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars
-(`Mod.derivedExtendScalarsCompIso`) on `Y` and on `X`. -/
-theorem derivedPushHom_comp_app (hc : a ≫ b = c)
+/-- The (Push) comparisons are the transposes, along `L(Ext) ⊣ D(Res)`, of the isomorphisms
+`Rf_* ⋙ D(Res) ≅ D(Res) ⋙ Rf_*`, and these compose (`derivedComapLowerStarIso_hom_app_comp`); so
+for `c = a ≫ b` the comparison for `c` is the composite of the comparisons for `a` and `b`, up to
+the transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars on `Y` and
+on `X`. -/
+theorem derivedPushHom_app_eq_comp_of_comp_eq (hc : a ≫ b = c)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
     (derivedPushHom c f).app K =
       (Mod.derivedExtendScalarsCompIso (coefficientMap a Y) (coefficientMap b Y)
@@ -139,6 +140,23 @@ theorem derivedPushHom_comp_app (hc : a ≫ b = c)
     (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc X))
     (Mod.mapDerivedCategoryComapCompIso _ _ _ (coefficientMap_comp_eq a b c hc Y))
     (derivedComapLowerStarIso_hom_app_comp a b c f hc) K
+
+/-- **(Push) is compatible with the composition of coefficient changes.** For `c = a ≫ b`, the
+comparison `Rf_* ⋙ T_c ⟶ T_c ⋙ Rf_*` is the composite of the comparisons for `a` and `b`, up to
+the transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars
+(`Mod.derivedExtendScalarsCompIso`) on `Y` and on `X`. -/
+theorem derivedPushHom_comp_app (hc : a ≫ b = c)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    (derivedPushHom c f).app K =
+      (Mod.derivedExtendScalarsCompIso (coefficientMap a Y) (coefficientMap b Y)
+          (coefficientMap c Y) (coefficientMap_comp_eq a b c hc Y)).hom.app
+          (R((f)_*⟦Λ⟧).obj K) ≫
+        L(Mod.extendScalars (coefficientMap b Y)).map ((derivedPushHom a f).app K) ≫
+        (derivedPushHom b f).app (L(Mod.extendScalars (coefficientMap a X)).obj K) ≫
+        R((f)_*⟦Λ''⟧).map ((Mod.derivedExtendScalarsCompIso (coefficientMap a X)
+          (coefficientMap b X) (coefficientMap c X)
+          (coefficientMap_comp_eq a b c hc X)).inv.app K) :=
+  derivedPushHom_app_eq_comp_of_comp_eq a b c f hc K
 
 end Derived
 

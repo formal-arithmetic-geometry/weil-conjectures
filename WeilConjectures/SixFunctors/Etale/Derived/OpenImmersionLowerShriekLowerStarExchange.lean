@@ -99,7 +99,7 @@ noncomputable def openImmersionLowerShriekLowerStarExchange (hsq : IsPullback g'
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction A g')
     (mapDerivedUpperStarLowerStarAdjunction A g'')
     (TwoSquare.mk _ _ _ _
-      (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso A hsq).inv)).natTrans
+      (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso A hsq).inv))
 
 /-- The exchange map `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` at `K`, written out: the unit of
 `D(g''^*) ⊣ Rg''_*`, then the inverse of the base change isomorphism `bc`, then the counit of

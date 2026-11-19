@@ -113,7 +113,7 @@ private theorem scalar_mate_fac (a : Λ ⟶ Λ') [IsMonHom a]
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (CondensedRing.pullIso a f).hom (.up ℤ)).app P) =
       (((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-        (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)).natTrans).app
+        (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv))).app
           (DerivedCategory.Qh.obj P) ≫
         (L Λ' f).map ((scalarCounit a Y).app P) ≫
         (pullCounit (Λ := Λ') f).app
@@ -223,7 +223,7 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hb : PullNormalized a f b) :
     b.inv = ((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-      (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)) := by
   have := comparisonCounit_derived a f
   apply Functor.leftDerived_ext _ (comparisonCounit a f)
     (HomotopyCategory.quasiIso (Modules Λ Y) (.up ℤ)) _

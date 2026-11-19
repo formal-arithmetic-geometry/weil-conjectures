@@ -39,7 +39,7 @@ of mates (`CategoryTheory.mateEquiv_app_cube`) shows that the reduction carries 
 morphism `Lg^* Rf_* ⟶ Rf'_* Lg'^*` with `𝒪_E`-coefficients to the one with
 `𝒪_E ⧸ ℓⁿ`-coefficients
 (`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReduction_baseChange`; blueprint
-`det-sp-mixed-base-change`, direct images).
+`proposition-compatibility-purity-base-change`, direct images).
 -/
 
 @[expose] public section

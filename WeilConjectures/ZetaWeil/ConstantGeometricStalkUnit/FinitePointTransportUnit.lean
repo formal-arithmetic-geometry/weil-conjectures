@@ -16,8 +16,8 @@ set_option linter.privateModule false
 
 /-! # One-step point transport on the finite regular coefficient unit
 
-Source: the constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion
-step 4 (blueprint: lem-zl-finite-point-transport-unit).
+Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
+expansion step 4 (blueprint: lem-zl-finite-point-transport-unit).
 -/
 
 @[expose] public noncomputable section

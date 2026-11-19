@@ -19,8 +19,8 @@ import WeilConjectures.CategoryTheory.SmoothPurity.CountableCoproductsIdempotent
 
 /-! # The localizing hull of bounded constructible pro-étale module complexes
 
-Source: blueprint `sk-def-localizing-closure`, using the bounded constructible
-generators needed for the ell-adic cases of `sk-thm-existence`.
+Source: blueprint `definition-localizing-subcategory`, using the bounded constructible
+generators needed for the ell-adic cases of `theorem-exceptional-inverse-image`.
 (blueprint: def-sfb-bounded-constructible-localizing-closure)
 -/
 
@@ -41,8 +41,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 constructible complexes and closed under coproducts in the ambient derived category.
 Coproducts are indexed in the coefficient/sheaf morphism universe `u + 1`.
 
-Source: blueprint `sk-def-localizing-closure` and the ell-adic specialization in
-`sk-thm-existence`. No completeness condition is added to the hull.
+Source: blueprint `definition-localizing-subcategory` and the ell-adic specialization in
+`theorem-exceptional-inverse-image`. No completeness condition is added to the hull.
 (blueprint: def-sfb-bounded-constructible-localizing-closure) -/
 def boundedConstructibleLocalizingClosure :
     ObjectProperty (DerivedCategory

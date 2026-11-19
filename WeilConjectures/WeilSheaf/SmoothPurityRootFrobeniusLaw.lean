@@ -43,7 +43,7 @@ variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (r
   (hζ : ∀ n, IsPrimitiveRoot (ζ n) (ℓ ^ n)) (hζ' : ∀ n, ζ (n + 1) ^ ℓ = ζ n)
 
 instance weaklyEtale_geometricGaloisFrobenius_hom :
-    WeaklyEtale a.geometricGaloisFrobenius.hom :=
+    WeaklyEtale a.geometricGaloisFrobenius.asIso.hom :=
   MorphismProperty.of_isIso _ _
 
 /-- **The trivialization of the Tate module under the geometric Galois Frobenius**, on
@@ -51,18 +51,18 @@ underlying sheaves: `Fr^*` of the trivialization `p^* ℤ_ℓ(1) ≅ p^* ℤ_ℓ
 factorization `Fr^* p^* ℤ_ℓ,X₀ ≅ p^* ℤ_ℓ,X₀` is `q` times the factorization
 `Fr^* p^* ℤ_ℓ(1) ≅ p^* ℤ_ℓ(1)` followed by the trivialization. -/
 theorem upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom_frobenius :
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
+    (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map
         (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
           a.geometricFiberToAlgebraicClosure ℓ hζ hζ').hom.hom ≫
-      (upperStarFactorIso a.geometricGaloisFrobenius.hom a.geometricFiberProj
+      (upperStarFactorIso a.geometricGaloisFrobenius.asIso.hom a.geometricFiberProj
         a.geometricGaloisFrobenius_hom_comp_geometricFiberProj).hom.app
           (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) X₀) =
     (Nat.card k : ℤ) •
-      ((upperStarFactorIso a.geometricGaloisFrobenius.hom a.geometricFiberProj
+      ((upperStarFactorIso a.geometricGaloisFrobenius.asIso.hom a.geometricFiberProj
           a.geometricGaloisFrobenius_hom_comp_geometricFiberProj).hom.app (tateModule X₀ ℓ).X ≫
         (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
           a.geometricFiberToAlgebraicClosure ℓ hζ hζ').hom.hom) := by
-  rw [upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom a.geometricGaloisFrobenius.hom
+  rw [upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom a.geometricGaloisFrobenius.asIso.hom
     a.geometricFiberProj a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     a.geometricFiberToAlgebraicClosure
     a.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure ℓ hζ hζ',

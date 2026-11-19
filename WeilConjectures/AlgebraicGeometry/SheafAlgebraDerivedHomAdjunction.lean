@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 import WeilConjectures.AlgebraicGeometry.SheafAlgebraMapDerivedAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The constructed algebra-valued derived Hom adjunction
 

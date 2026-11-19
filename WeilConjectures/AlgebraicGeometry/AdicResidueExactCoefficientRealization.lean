@@ -123,18 +123,18 @@ private theorem generator_smul (M : ModuleCat.{w} A) (V : Cᵒᵖ) (a : A) (m : 
 
 private theorem oneMap_scalar (a : A) :
     oneMap T φ ≫ (realize T φ).map (ModuleCat.ofHom (LinearMap.mul A A a)) =
-      ringedKoszulScalar B (algebraSection φ a) ≫ oneMap T φ := by
+      (ringedKoszulScalar B (algebraSection φ a)).asHom ≫ oneMap T φ := by
   apply (SheafOfModules.unitHomEquiv _).injective
   apply PresheafOfModules.sections_ext
   intro V
   change ((realize T φ).map (ModuleCat.ofHom (LinearMap.mul A A a))).val.app V
       ((oneMap T φ).val.app V (1 : B.obj.obj V)) =
     (oneMap T φ).val.app V
-      ((ringedKoszulScalar B (algebraSection φ a)).val.app V (1 : B.obj.obj V))
+      ((ringedKoszulScalar B (algebraSection φ a)).asHom.val.app V (1 : B.obj.obj V))
   rw [oneMap_one, generator_naturality]
   change generator T φ (ModuleCat.of A A) V (a * 1) = _
   rw [mul_one]
-  have hs : (ringedKoszulScalar B (algebraSection φ a)).val.app V
+  have hs : (ringedKoszulScalar B (algebraSection φ a)).asHom.val.app V
       (1 : B.obj.obj V) = (algebraSection φ a).val V := by
     change (1 : B.obj.obj V) *
       (show B.obj.obj V from (algebraSection φ a).val V) = _
@@ -353,7 +353,7 @@ theorem adicResidue_exact_coefficient_realization
       (q : ∀ n : ℕ, E.obj (ModuleCat.of A (A ⧸ J ^ (n + 1))) ≅
         adicResidueQuotientModule X J U n),
       (∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
-        ringedKoszulScalar O (s x) ≫ c.hom) ∧
+        (ringedKoszulScalar O (s x)).asHom ≫ c.hom) ∧
       ∀ n : ℕ, c.hom ≫ E.map (ModuleCat.ofHom (J ^ (n + 1)).mkQ) ≫ (q n).hom =
         (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫
           (adicResidueQuotientCoefficientUnit X J U n).f 0 ≫

@@ -101,7 +101,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdem
 /-!
 # Integral generators and their finite reductions
 
-(1)--(3) (blueprint: det-lem-integral-models-generators).
+(1)--(3) (blueprint: lemma-integral-models).
 
 The generator classes use the existing canonical scalar extension and locally closed
 extension by zero. Finite reductions use the total left derived extension of scalars.
@@ -124,7 +124,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Convert a condensed ring sheaf to its existing ring object, then pull back to `X`.
 Source: blueprint comparison with completed coefficients, notation `Λ_X`
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedCoefficient (X : Scheme.{u})
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) :=
   coefficientRing X
@@ -141,7 +141,7 @@ attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
 
 /-- Canonical coefficient specialization used in the integral generator statement.
 (1)--(3)
-(blueprint: det-lem-integral-models-generators). -/
+(blueprint: lemma-integral-models). -/
 noncomputable instance integralModel_coefficientMonObj
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u}) : MonObj (condensedRingObj Λ X) :=
@@ -149,7 +149,7 @@ noncomputable instance integralModel_coefficientMonObj
 
 /-- The pulled-back continuous quotient ring retains its commutative ring structure.
 Source: blueprint integral generators (3), the finite coefficient identification
-(blueprint: det-lem-integral-models-generators). -/
+(blueprint: lemma-integral-models). -/
 noncomputable instance integralModelFiniteCoefficient_isComm (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] :
     IsCommMonObj (completedCoefficient X (Profinite.continuousMapRingSheaf A)).X := by

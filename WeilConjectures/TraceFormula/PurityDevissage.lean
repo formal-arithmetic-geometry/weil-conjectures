@@ -21,7 +21,8 @@ Let `f : X ⟶ Y` be a smooth morphism of separated `k`-schemes of finite type. 
 that the purity map `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K`
 (`ProEtale.CondensedRing.upperShriekUnitTensorMap`) is an isomorphism for every bounded
 constructible `K` (`ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`; blueprint
-`sk-thm-sp-qbar`, in the form `Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`, and `sk-prop-cohsm`, (G11)).
+`theorem-sp-qbar`, in the form `Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`, and
+`proposition-exceptional-inverse-image-smooth-morphism`, (G11)).
 
 ## Proof
 
@@ -203,9 +204,10 @@ theorem isIso_upperShriekUnitTensorMap_lowerStar_lowerStar (f : X ⟶ Y) [Smooth
       asIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁.flip).app _) ≪≫
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (pullback.fst f g)).app _)
 
-/-- **Smooth purity for `ℚ̄_ℓ`-coefficients** (blueprint `sk-thm-sp-qbar`, in the form
-`Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`; `sk-prop-cohsm`, (G11)): for a smooth morphism `f`, the purity map
-`γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` is an isomorphism for every bounded constructible `K`. -/
+/-- **Smooth purity for `ℚ̄_ℓ`-coefficients** (blueprint `theorem-sp-qbar`, in the form
+`Rf_! ⊣ Lf^*(-) ⊗ Rf^! ℚ̄_ℓ`; `proposition-exceptional-inverse-image-smooth-morphism`, (G11)): for a
+smooth morphism `f`, the purity map `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` is an isomorphism for
+every bounded constructible `K`. -/
 theorem isIso_upperShriekUnitTensorMap_of_smooth (f : X ⟶ Y) [Smooth f.left]
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (upperShriekUnitTensorMap ℓ f K) := by

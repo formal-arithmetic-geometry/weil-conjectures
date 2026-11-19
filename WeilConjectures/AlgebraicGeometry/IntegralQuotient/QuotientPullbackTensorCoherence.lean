@@ -12,13 +12,20 @@ import WeilConjectures.AlgebraicGeometry.IntegralQuotient.QuotientPullbackTensor
 
 /-! # Tensor coherence of the normalized quotient pullback comparison
 
-Source: blueprint latest (main-20261026), integral proper-base-change proof, paragraph (3);
-Stacks Project, sites-cohomology.tex, Tags 0D6D and 07A4
-(blueprint: lem-sfb-quotient-pullback-tensor-coherence).
-
 The positive exponent is n + 1, including the residue-field quotient at n = 0.
 The section comparison is specified by its ordinary ringed-square balancing map
 and localization counits, rather than by an arbitrary isomorphism of functors.
+
+## References
+
+* Tags 0D6D and 07A4
+
+## Implementation details
+
+In `quotient_pullback_tensor_coherence` the section composition comparison is characterized by
+`SectionPullNormalized`: its ordinary map is the conjugate of `pullIso`, and its derived map is
+fixed by the two composite localization counits on every flat-term K-flat model. This is the
+normalization used in `integral_quotient_direct_image_comparison`.
 -/
 
 @[expose] public noncomputable section
@@ -85,9 +92,8 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 
 open QuotientChange QuotientSectionTensor
 
-/-- The existing tensor comparison with the recorded pullback functor type exposed.
-This only shares the structural arguments of leftDerivedUpperStarTensor.
-Source: Stacks 07A4 (blueprint: lem-sfb-quotient-pullback-tensor-coherence). -/
+/-- The derived tensor comparison `leftDerivedUpperStarTensor` for the pullback functor
+`L B f`. -/
 @[irreducible] def quotientTensorPull
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -99,33 +105,7 @@ Source: Stacks 07A4 (blueprint: lem-sfb-quotient-pullback-tensor-coherence). -/
 
 /-- The actual quotient coefficient square commutes, its normalized pullback
 comparison realizes the ringed-square composition comparison, and that same
-comparison intertwines the two composite tensorators on all unbounded inputs.
-
-The section composition comparison is characterized by SectionPullNormalized:
-its ordinary map is the conjugate of the actual pullIso, and its derived map is
-fixed by the two composite localization counits on every flat-term K-flat model.
-Thus the comparison in the first conclusion and the tensor equation is the given
-lam, with the normalization used in integral_quotient_direct_image_comparison.
-
-Source: blueprint latest (main-20261026) integral proper-base-change proof, paragraph (3);
-Stacks sites-cohomology.tex, Tags 0D6D and 07A4
-(blueprint: lem-sfb-quotient-pullback-tensor-coherence).
-
-Proof:
-1. Naturality of upperStarFromPointComp at the actual reduction morphism gives
-   the coefficient-square equation directly.
-2. The existing quotient_section_tensor_normalization supplies the normalized
-   scalar section data cX and cY and the comparison barLam for this given lam.
-3. On two flat-term K-flat complexes, apply quotient_pullback_tensor_flat_model.
-   This is the ordinary balanced-generator and signed-total calculation.
-4. Regard the two composites as natural transformations on the product of the
-   two derived categories. Choose flat-term K-flat resolutions of preimages of
-   U and V under Q, using CochainComplex.exists_quasiIso_flat_kFlat. The mapped
-   resolution maps and the preimage isomorphisms give isomorphisms Q(P) to U and
-   Q(Q) to V. Naturality transports the equality of step 3 along their product;
-   cancellation of its image under the source functor gives equality at U,V.
-   The proved private lemma natTrans_ext_flat carries out this descent.
-No properness, completeness, boundedness or quotient-flatness hypothesis is used. -/
+comparison intertwines the two composite tensorators on all unbounded inputs. -/
 theorem quotient_pullback_tensor_coherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

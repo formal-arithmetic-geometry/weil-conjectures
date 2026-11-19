@@ -87,8 +87,8 @@ private theorem bounded_origin_of_homology_origin
 /-- Derived comparison is fully faithful between bounded objects, and an object
 with bounded classical cohomology has an etale derived antecedent. No constructibility
 or finiteness of its cohomology modules is imposed here.
-Source: blueprint det-pe-classical-derived-equivalence and sk-prop-sf-comparison;
-Stacks Tag 09AL (auxiliary; not a blueprint node).
+Source: blueprint det-pe-classical-derived-equivalence and
+theorem-bounded-below-cohomology-comparison; Stacks Tag 09AL (auxiliary; not a blueprint node).
 
 Proof: exactness of intrinsic module comparison and enough injectives give its
 bounded-below derived adjunction. The ordinary unit on injectives and acyclicity

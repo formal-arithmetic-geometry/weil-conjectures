@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineSect
 
 /-! # The principal-open section comparison for matching rings
 
-Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
-(blueprint: lem-sbc-punctured-completion-matching-affine-sections)
+## References
+
+* Stacks Project, Tag 0BLH, proof, and the localized comparison in Tag 05ER
+* Stacks Project, Tag 05EU
 -/
 
 @[expose] public section
@@ -23,10 +25,6 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- On a principal open contained in the punctured spectrum, the first projection of the
 matching ring induces a bijection on the sections of the two restricted schemes.
-
-Source: Stacks Project, Tag 0BLH, proof, and the localized comparison in Tag 05ER;
-the algebra compatibility is Tag 05EU.
-(blueprint: lem-sbc-punctured-completion-matching-affine-sections)
 -/
 theorem puncturedMap_basicOpen_appTop_bijective
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]

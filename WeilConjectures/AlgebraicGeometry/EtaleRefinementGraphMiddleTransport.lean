@@ -37,13 +37,13 @@ private theorem triangle_transport
     haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F)
       (by simpa only [Category.id_comp] using ht.paste_vert hs :
         IsPullback t j (a ≫ b) z)
-    (F.sh b).map ((F.exchange t (𝟙 X) a s ht.w).natTrans.app M ≫
+    (F.sh b).map ((F.exchange t (𝟙 X) a s ht.w).app M ≫
         (F.pf s).map ((F.shId X).hom.app M)) ≫
-        (F.exchange s j b z hs.w).natTrans.app M =
+        (F.exchange s j b z hs.w).app M =
       (F.shComp' a b (a ≫ b) rfl).inv.app ((F.pf t).obj M) ≫
         (F.exchange t j (a ≫ b) z
           ((ht.paste_vert hs).w.trans
-            (congrArg (fun q ↦ q ≫ z) (Category.id_comp j)))).natTrans.app M := by
+            (congrArg (fun q ↦ q ≫ z) (Category.id_comp j)))).app M := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) ht
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) hs
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F)
@@ -65,7 +65,7 @@ private theorem triangle_transport
     apply (cancel_epi ((F.shComp' (𝟙 X) j j (Category.id_comp j)).hom.app M)).1
     rw [Iso.hom_inv_id_app, hi]
   rw [hinv] at h
-  have hn := (F.exchange s j b z hs.w).natTrans.naturality ((F.shId X).hom.app M)
+  have hn := (F.exchange s j b z hs.w).naturality ((F.shId X).hom.app M)
   simp only [Functor.comp_map] at hn
   simp only [Category.assoc] at h
   rw [← hn] at h

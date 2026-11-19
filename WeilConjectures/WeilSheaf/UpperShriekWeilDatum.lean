@@ -23,7 +23,7 @@ datum*: the transport along `ī^*` of the right Weil datum of the adjunction `R�
 counit `Rḡ_* ḡ^! L̄ ⟶ L̄` is Frobenius equivariant
 (`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_obj_iso_isWeilEquivariant`).
 
-This is the formal half of blueprint `thm-pur-weil-equivariance-of-purity-and-trace` (the Weil
+This is the formal half of blueprint `proposition-purity-trace-commute-frobenius` (the Weil
 structure of `Rf^!` is the exceptional datum of the Frobenius square); the geometric half, that
 the canonical orientation carries the exceptional datum to the Tate datum, is the trace square.
 
@@ -139,7 +139,7 @@ noncomputable def upperShriekExceptionalDatum
 set_option linter.style.longLine false in
 set_option linter.unusedSectionVars false in
 /-- **The Frobenius structure of the Weil `Rf^!` is the exceptional datum** (blueprint
-`thm-pur-weil-equivariance-of-purity-and-trace`, formal half): for a right adjoint `ḡ^!` of
+`proposition-purity-trace-commute-frobenius`, formal half): for a right adjoint `ḡ^!` of
 `Rḡ_*` on bounded constructible adic complexes and a Weil complex `L` on `Y`, there is an
 identification `θ` of the underlying complex of `Rf^! L` with `ī^* (ḡ^! L̄)` which is Frobenius
 equivariant for the structure of `Rf^! L` and the exceptional datum

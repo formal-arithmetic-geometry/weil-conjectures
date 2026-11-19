@@ -140,7 +140,7 @@ def diagonalRlimPullbackMate (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X 
     LS.R ⋙ (diagonalRlimPull l f).mapDerivedCategory ⟶
       (diagonalRlimTowerPull l f).mapDerivedCategory ⋙ LX.R :=
   (mateEquiv adjS adjX (TwoSquare.mk _ _ _ _
-    (ringedConstantTowerPullback (diagonalRlimPull l f)).inv)).natTrans
+    (ringedConstantTowerPullback (diagonalRlimPull l f)).inv))
 
 /-- The full pulled cone, using the canonical constant-tower interchange.
 Source: blueprint coefficient proof (3), ordinary cone normalization
@@ -356,7 +356,7 @@ theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{
         (mateEquiv g.ordinaryAdjunction
           ((upperStarLowerStarAdjunction
             (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).whiskerRight ℕᵒᵖ)
-          (TwoSquare.mk _ _ _ _ v.hom)).natTrans = d.hom ∧
+          (TwoSquare.mk _ _ _ _ v.hom)) = d.hom ∧
         NatTrans.CommShift
           (diagonalRlimVaryingSquare l f b g rS rX v).hom ℤ) ∧
     (∃ (d : Scheme.proEtaleRingModuleDirectImage f
@@ -377,7 +377,7 @@ theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{
           (asIso (diagonalCompletedCoefficientMap l f)))
         (upperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)
-        (TwoSquare.mk _ _ _ _ v.hom)).natTrans = d.hom ∧
+        (TwoSquare.mk _ _ _ _ v.hom)) = d.hom ∧
       NatTrans.CommShift (diagonalRlimExactSquare (diagonalCompletedRestriction l S)
         (diagonalRlimPull l f) (DiagonalCoefficients.diagonalRealizationPull l f)
         (diagonalCompletedRestriction l X) v).hom ℤ) ∧

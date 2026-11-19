@@ -32,14 +32,15 @@ read through `Re^! ω_Z ≅ ω_E`, where:
 
 * `uc = κ_{L,K}⁻¹ ∘ [u]` and `vc` are the supported classes of `u` and `v`
   (`ProEtale.CondensedRing.supportedClass`, `ProEtale.CondensedRing.oppositeSupportedClass`),
-  the class of `lem-trf-correspondence-class` read through the inverse Künneth–Verdier map, the
-  second one transported along `τ`;
+  the class of `lemma-external-duality-trace-morphism--2` read through the inverse Künneth–Verdier
+  map, the second one transported along `τ`;
 * the first isomorphism `μ` is built from the composition of the lower shrieks, compact-support
   base change in the cartesian square of `E` and the projection formula for `c`
   (`ProEtale.CondensedRing.supportProductIso`);
 * the contraction uses the monoidality of `Lp_i^*`, the two evaluations, and the exterior
   product `ω_Y ⊠ ω_X ⟶ ω_Z` (`ProEtale.CondensedRing.dualizingComplexExternalProduct`, the
-  exceptional Künneth map of blueprint `prop-trf-exceptional-kunneth` for `a_Y` and `a_X`).
+  exceptional Künneth map of blueprint `proposition-exceptional-external-kunneth--1` for `a_Y` and
+  `a_X`).
 
 The *local term* of the pair along an open and closed subscheme `B` of `E` proper over `s` is the
 local term of the supported pairing (`ProEtale.CondensedRing.localTermPair`, blueprint
@@ -104,7 +105,7 @@ variable {X Y C D : Over (Spec (.of k))}
 /-- The *supported class* `uc = κ_{L,K}⁻¹ ∘ [u] : Rc_! ℚ̄_ℓ,C ⟶ L ⊠ D_X K` of a correspondence
 `u : L(c ≫ p₂)^* K ⟶ R(c ≫ p₁)^! L` from `(X, K)` to `(Y, L)` with support `c : C ⟶ Y ⨯ X`
 (blueprint `def-trf-supported-pairing`, Step 1): the class `[u]` of
-`lem-trf-correspondence-class`, a class supported on `c` in the sense of
+`lemma-external-duality-trace-morphism--2`, a class supported on `c` in the sense of
 `def-trf-supported-class`, read through the inverse Künneth–Verdier isomorphism. -/
 noncomputable def supportedClass (c : C ⟶ Y ⨯ X)
     (u : (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
@@ -160,8 +161,9 @@ Ra_Z! (ω_Y ⊠ ω_X) ≅ Ra_Y! Rp₁! (ω_Y ⊠ ω_X) ⟶ Ra_Y! ω_Y ⟶ ℚ̄_
 ```
 the composition isomorphism for `a_Z = p₁ ≫ a_Y`, the morphism `exceptionalKunnethAdjoint`
 (projection formula, base change in the product square and the counit of `a_X`) and the counit
-of `a_Y`. It is the exceptional Künneth map `α` of blueprint `prop-trf-exceptional-kunneth`
-(`def-sf-kv-maps`, (ii)) for `f₁ = a_Y`, `f₂ = a_X`, `L₁ = L₂ = ℚ̄_ℓ`. -/
+of `a_Y`. It is the exceptional Künneth map `α` of blueprint
+`proposition-exceptional-external-kunneth--1` (`lemma-external-duality-trace-morphism`, (ii)) for
+`f₁ = a_Y`, `f₂ = a_X`, `L₁ = L₂ = ℚ̄_ℓ`. -/
 noncomputable def dualizingComplexExternalProduct :
     externalProduct ℓ (dualizingComplex' ℓ Y) (dualizingComplex' ℓ X) ⟶
       dualizingComplex' ℓ (Y ⨯ X) :=

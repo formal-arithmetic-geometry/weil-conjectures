@@ -171,11 +171,11 @@ point to an affine open contained in the inverse image of `U`, using
 Its spectrum yields a section `U → V` over `T` through the marked geometric point:
 the residue-field maps agree because the retraction inverts the residue isomorphism.
 3. Pointed etale neighbourhoods are cofiltered by
-`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`. The full subcategory consisting
+`definition-torsion-sheaves--3`. The full subcategory consisting
 of `(U, t)` has only its identity endomorphism, since `U.ι` is a monomorphism, and
 maps to every neighbourhood by step 2. Apply
 `lem-weil-pbc-colimit-initial-full-subcategory` and
-`lem-weil-pbc-colimit-constant-connected-diagram` to compute the stalk as `G(U)`.
+`definition-torsion-sheaves--3` to compute the stalk as `G(U)`.
 The colimit coprojection is precisely the germ map written below. -/
 theorem strictlyHenselianOpen_toPresheafFiber_bijective
     {T : Scheme.{u}} (U : T.Opens) {R : Type u} [CommRing R] [IsLocalRing R]

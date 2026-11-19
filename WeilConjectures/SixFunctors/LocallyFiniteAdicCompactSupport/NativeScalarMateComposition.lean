@@ -148,7 +148,7 @@ theorem nativeScalarDerivedCompositeMate
     ((mateEquiv (nativeScalarDerivedCompositeAdjunction b c U)
         (nativeScalarDerivedCompositeAdjunction b c V)).symm
       ((nativeScalarDerivedRestrictionSquare c g).hComp
-        (nativeScalarDerivedRestrictionSquare b g))).natTrans.app M =
+        (nativeScalarDerivedRestrictionSquare b g))).app M =
       (Mod.extendScalars (coefficientMap c V)).leftDerivedFunctor.map
           ((CondensedRing.derivedPushHom b g).app M) ≫
         (CondensedRing.derivedPushHom c g).app

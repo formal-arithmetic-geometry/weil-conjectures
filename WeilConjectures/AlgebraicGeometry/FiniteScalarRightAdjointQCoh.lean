@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Quasi-coherence of a specified finite scalar right adjoint
 

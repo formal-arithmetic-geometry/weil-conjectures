@@ -694,7 +694,7 @@ theorem nativeIntegralCoefficient_heart
         (pbcRestrictComp c.inv (CondensedRing.sectionRingMap X a) (C.integralMap l X)
           (by rw [ha]; exact c.inv_hom_id_assoc (C.integralMap l X)))
   let α := ((mateEquiv (Mod.extendRestrictAdjunction a)
-    (pbcScalarAdjunction (C.integralMap l X))).symm β.hom).natTrans
+    (pbcScalarAdjunction (C.integralMap l X))).symm β.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences (G := H) (H := B.functor)
     (Mod.extendRestrictAdjunction a) (pbcScalarAdjunction (C.integralMap l X)) β
   let δ := (asIso α).symm

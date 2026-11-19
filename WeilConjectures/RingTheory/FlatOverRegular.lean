@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.AlgebraicGeometry.FlatLocalCriterionNonzerodivisor
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Flatness over a regular local ring

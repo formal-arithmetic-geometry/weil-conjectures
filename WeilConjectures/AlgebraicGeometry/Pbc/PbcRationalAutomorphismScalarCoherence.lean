@@ -14,17 +14,12 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 # Scalar association and automorphism transport
 
 The canonical coefficient comparison commutes with successive scalar extensions.
-Source: `literature/blueprint/latest/blueprint/sec-six-functors-basics/`
-`sk-def-sf-admissible/def-weil-weil-sheaf-complex.proof.md`, Extension of scalars,
-and step 4 of the original Weil-category node.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u c
 open CategoryTheory CategoryTheory.Limits
--- `Aut` is a definitional alias for an isomorphism.
-attribute [local implicit_reducible] CategoryTheory.Aut
 private theorem conjugate_associator_inv
     {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
     {L₀ : A ⥤ B} {R₀ : B ⥤ A} {L₁ : B ⥤ C} {R₁ : C ⥤ B}
@@ -422,13 +417,13 @@ omit [IsNoetherian T] in
 private theorem right_comparison_section (h : E ≤ F)
     (M : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F)))
     (U : T.ProEtᵒᵖ)
-    (x : M.val.obj ((proEtaleBaseChange e.hom).op.obj U)) :
+    (x : M.val.obj ((proEtaleBaseChange e.asIso.hom).op.obj U)) :
     ((pbcIsoScalarRightComparison l Ω e h).hom.app M).val.app U x = x := by
   exact eq_of_heq ((pbcIsoScalarRightComparison_exists l Ω e h).exists.choose_spec M U x)
 
 private theorem ordinary_coherence (h : E ≤ F) (k : F ≤ G)
     (M : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) :
-    (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω G)).map
+    (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).map
         ((ordinaryAssociator l Ω h k).hom.app M) ≫
       (pbcIsoOrdinaryScalarComparison l Ω e (h.trans k)).hom.app M =
     (pbcIsoOrdinaryScalarComparison l Ω e k).hom.app
@@ -436,22 +431,22 @@ private theorem ordinary_coherence (h : E ≤ F) (k : F ≤ G)
       (pbcExtend (pbcCompletedScalarMap l Ω T k)).map
         ((pbcIsoOrdinaryScalarComparison l Ω e h).hom.app M) ≫
       (ordinaryAssociator l Ω h k).hom.app
-        ((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).obj M) := by
+        ((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj M) := by
   let φ := pbcCompletedScalarMap l Ω T h
   let ψ := pbcCompletedScalarMap l Ω T k
   let χ := pbcCompletedScalarMap l Ω T (h.trans k)
-  let D₀ := proEtaleRingModuleDirectImage e.hom
+  let D₀ := proEtaleRingModuleDirectImage e.asIso.hom
     (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
     (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
-    (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E)))
-  let D₁ := proEtaleRingModuleDirectImage e.hom
+    (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E)))
+  let D₁ := proEtaleRingModuleDirectImage e.asIso.hom
     (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F))
     (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F))
-    (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω F)))
-  let D₂ := proEtaleRingModuleDirectImage e.hom
+    (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω F)))
+  let D₂ := proEtaleRingModuleDirectImage e.asIso.hom
     (pbcAdicCompletion T (pbcStageDatum.{u} l Ω G))
     (pbcAdicCompletion T (pbcStageDatum.{u} l Ω G))
-    (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω G)))
+    (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω G)))
   let r := pbcRestrictComp φ ψ χ (pbcCompletedScalarMap_comp l Ω T h k)
   let sh := pbcIsoScalarRightComparison l Ω e h
   let sk := pbcIsoScalarRightComparison l Ω e k
@@ -463,19 +458,19 @@ private theorem ordinary_coherence (h : E ≤ F) (k : F ≤ G)
         (Functor.associator (pbcRestrict ψ) D₁ (pbcRestrict φ)).inv ≫
         Functor.whiskerRight sk.hom (pbcRestrict φ) ≫
         (Functor.associator D₂ (pbcRestrict ψ) (pbcRestrict φ)).hom := by
-    exact sectionwise_right_square e.hom _ _ _ φ ψ χ
+    exact sectionwise_right_square e.asIso.hom _ _ _ φ ψ χ
       (pbcCompletedScalarMap_comp l Ω T h k) sh sk sd
       (right_comparison_section l Ω e h)
       (right_comparison_section l Ω e k)
       (right_comparison_section l Ω e (h.trans k))
   have hh := mate_scalar_square_app (pbcScalarAdjunction φ) (pbcScalarAdjunction ψ)
     (pbcScalarAdjunction χ)
-    (proEtaleRingModuleAdjunction e.hom _ _
-      (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E))))
-    (proEtaleRingModuleAdjunction e.hom _ _
-      (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω F))))
-    (proEtaleRingModuleAdjunction e.hom _ _
-      (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω G)))) r sh sk sd hs M
+    (proEtaleRingModuleAdjunction e.asIso.hom _ _
+      (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E))))
+    (proEtaleRingModuleAdjunction e.asIso.hom _ _
+      (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω F))))
+    (proEtaleRingModuleAdjunction e.asIso.hom _ _
+      (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω G)))) r sh sk sd hs M
   unfold ordinaryAssociator pbcIsoOrdinaryScalarComparison
   exact hh
 
@@ -483,8 +478,8 @@ omit [IsNoetherian T] in
 private theorem complexComparison_eq (h : E ≤ F) :
     pbcIsoOrdinaryComplexComparison l Ω e h =
       complexComparison (pbcExtend (pbcCompletedScalarMap l Ω T h))
-        (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E))
-        (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F))
+        (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E))
+        (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F))
         (pbcIsoOrdinaryScalarComparison l Ω e h) := by
   unfold pbcIsoOrdinaryComplexComparison complexComparison
   rfl
@@ -492,7 +487,7 @@ private theorem complexComparison_eq (h : E ≤ F) :
 private theorem complex_coherence (h : E ≤ F) (k : F ≤ G)
     (P : CochainComplex
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :
-    ((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω G)).mapHomologicalComplex
+    ((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).mapHomologicalComplex
         (.up ℤ)).map ((complexAssociator l Ω h k).hom.app P) ≫
       (pbcIsoOrdinaryComplexComparison l Ω e (h.trans k)).hom.app P =
     (pbcIsoOrdinaryComplexComparison l Ω e k).hom.app
@@ -501,7 +496,7 @@ private theorem complex_coherence (h : E ≤ F) (k : F ≤ G)
       ((pbcExtend (pbcCompletedScalarMap l Ω T k)).mapHomologicalComplex (.up ℤ)).map
         ((pbcIsoOrdinaryComplexComparison l Ω e h).hom.app P) ≫
       (complexAssociator l Ω h k).hom.app
-        (((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
+        (((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
           (.up ℤ)).obj P) := by
   unfold complexAssociator
   rw [complexComparison_eq l Ω e (h.trans k), complexComparison_eq l Ω e k,
@@ -510,9 +505,9 @@ private theorem complex_coherence (h : E ≤ F) (k : F ≤ G)
       (pbcExtend (pbcCompletedScalarMap l Ω T h))
       (pbcExtend (pbcCompletedScalarMap l Ω T k))
       (pbcExtend (pbcCompletedScalarMap l Ω T (h.trans k)))
-      (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E))
-      (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F))
-      (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω G))
+      (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E))
+      (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F))
+      (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω G))
       (ordinaryAssociator l Ω h k)
       (pbcIsoOrdinaryScalarComparison l Ω e h)
       (pbcIsoOrdinaryScalarComparison l Ω e k)
@@ -587,14 +582,14 @@ private theorem ambient_comparison_normalization (h : E ≤ F)
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :
     (pbcIsoAmbientScalarComparison l Ω e h).hom.app (DerivedCategory.Q.obj P) ≫
       (pbcAmbientScalarExtension l Ω T h).map
-        ((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors.hom.app
-          P) ≫
+        ((pbcIsoModulePullback e.asIso.hom
+          (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors.hom.app P) ≫
       pbcComplexCounit (pbcCompletedScalarMap l Ω T h)
-        (((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
+        (((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
           (.up ℤ)).obj P) =
-    (pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω F)).map
+    (pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).map
         (pbcComplexCounit (pbcCompletedScalarMap l Ω T h) P) ≫
-      (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors.hom.app
+      (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors.hom.app
         (((pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((pbcIsoOrdinaryComplexComparison l Ω e h).hom.app P) :=
 by
@@ -603,7 +598,7 @@ by
 
 private theorem ambient_coherence (h : E ≤ F) (k : F ≤ G)
     (K : pbcAmbientStage l Ω T E) :
-    (pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω G)).map
+    (pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).map
         ((pbcAmbientScalarAssociator l Ω T h k).hom.app K) ≫
       (pbcIsoAmbientScalarComparison l Ω e (h.trans k)).hom.app K =
     (pbcIsoAmbientScalarComparison l Ω e k).hom.app
@@ -611,12 +606,12 @@ private theorem ambient_coherence (h : E ≤ F) (k : F ≤ G)
       (pbcAmbientScalarExtension l Ω T k).map
         ((pbcIsoAmbientScalarComparison l Ω e h).hom.app K) ≫
       (pbcAmbientScalarAssociator l Ω T h k).hom.app
-        ((pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω E)).obj K) := by
+        ((pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj K) := by
   -- The universal derived comparison is uniquely determined on complexes.
   have hh := normalized_comparison_coherence DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
-    ((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors)
-    ((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors)
-    ((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω G)).mapDerivedCategoryFactors)
+    ((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors)
+    ((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors)
+    ((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).mapDerivedCategoryFactors)
     (tensorComplexCounit (pbcCompletedScalarMap l Ω T h))
     (tensorComplexCounit (pbcCompletedScalarMap l Ω T k))
     (tensorComplexCounit (pbcCompletedScalarMap l Ω T (h.trans k)))
@@ -648,7 +643,7 @@ private theorem integral_comparison_hom (h : E ≤ F)
 
 private theorem integral_coherence (h : E ≤ F) (k : F ≤ G)
     (K : pbcIntegralStage l Ω T E) :
-    (pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω G)).map
+    (pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).map
         ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K) ≫
       (pbcIsoIntegralScalarComparison l Ω e hdim hl (h.trans k)).hom.app K =
     (pbcIsoIntegralScalarComparison l Ω e hdim hl k).hom.app
@@ -656,9 +651,9 @@ private theorem integral_coherence (h : E ≤ F) (k : F ≤ G)
       (pbcIntegralScalarExtension l Ω T hdim hl k).map
         ((pbcIsoIntegralScalarComparison l Ω e hdim hl h).hom.app K) ≫
       (pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app
-        ((pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)).obj K) := by
+        ((pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj K) := by
   apply ObjectProperty.hom_ext
-  change (pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω G)).map
+  change (pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).map
         (((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K).hom) ≫ _ = _
   dsimp only [pbcIntegralScalarExtension, pbcIsoIntegralPullback, ObjectProperty.lift,
     Functor.comp_obj, Functor.comp_map, pbcStageInclusion, ObjectProperty.ι, inducedFunctor]
@@ -693,7 +688,7 @@ private theorem rational_comparison_normalization (h : E ≤ F)
     (pbcIsoRationalScalarComparison l Ω e hdim hl h).hom.app
         ((pbcStageLocalization l Ω T E).obj K) ≫
       (pbcScalarIntegralComparison l Ω T hdim hl h).hom.app
-        ((pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)).obj K) =
+        ((pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj K) =
     (pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω F)
         (pbcStageUniformizer.{u} l Ω F)).map
         ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K) ≫
@@ -713,7 +708,7 @@ private theorem rational_comparison_normalization_full (h : E ≤ F)
       (pbcScalarExtension l Ω T hdim hl h).map
         ((eqToIso (pbcIsoRationalization l Ω e E)).hom.app K) ≫
       (pbcScalarIntegralComparison l Ω T hdim hl h).hom.app
-        ((pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)).obj K) =
+        ((pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj K) =
     (pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω F)
         (pbcStageUniformizer.{u} l Ω F)).map
         ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K) ≫
@@ -730,24 +725,7 @@ attribute [local irreducible] pbcIsoRationalScalarComparison pbcScalarIntegralCo
   pbcScalarAssociator pbcIntegralScalarAssociator pbcIsoIntegralScalarComparison
   pbcScalarExtension pbcIntegralScalarExtension pbcIsoIntegralPullback
 
-/-- The scalar associator commutes with the canonical automorphism comparison.
-Source: blueprint, Extension of scalars, and parent Weil-category proof step 4
-(blueprint: lem-sf-pbc-rational-automorphism-coherence).
-Proof: coefficient restriction followed by automorphism direct image and direct
-image followed by restriction agree sectionwise. Their identity comparisons
-commute with composition of two scalar restrictions. Taking left adjoint mates
-identifies this equation with the ordinary tensor-associator square. Apply it
-to complexes, using the specified derived tensor counits and exact-transport
-localization comparison; localization at quasi-isomorphisms gives the ambient
-derived square. Restrict along the faithful integral full inclusions. Conjugate
-this integral square by the scalar/localization comparisons and the
-transport/localization comparisons. Postcompose both rational composites by
-the invertible direct scalar/localization comparison followed by the transport
-comparison. Their normalization equations and naturality move all comparison
-factors past each other and reduce the equality to the integral square. Cancel
-the invertible postcomposition. Every raw rational object is an integral object,
-so this proves the square on all objects. This also applies to repeated fields,
-where the associators and transitions have their normalized unit values. -/
+/-- The scalar associator commutes with the canonical automorphism comparison. -/
 theorem pbcIsoRationalScalarComparison_comp (h : E ≤ F) (k : F ≤ G)
     (K : pbcStageCategory l Ω T E) :
     (pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω G)
@@ -792,7 +770,7 @@ theorem pbcIsoRationalScalarComparison_comp (h : E ≤ F) (k : F ≤ G)
     ((pbcScalarExtension l Ω T hdim hl (h.trans k)).map
         ((eqToIso (pbcIsoRationalization l Ω e E)).hom.app X) ≫
       (pbcScalarIntegralComparison l Ω T hdim hl (h.trans k)).hom.app
-        ((pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)).obj X))).1
+        ((pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj X))).1
   exact (hc' X).trans
     (rational_comparison_normalization_full l Ω e hdim hl (h.trans k) X).symm
 

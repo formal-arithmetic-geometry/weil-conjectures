@@ -77,7 +77,7 @@ a nonzero `v ∈ V`. The sequence `0 ⟶ 𝒪_E ⊗_k V ⟶ ℒ ⟶ 𝒪_E ⟶ 0
 `k ⟶ H¹(E, 𝒪_E) ⊗_k V` sending `1` to `v`, so `f_* ℒ` corresponds to the module `V`, which is
 killed by `V` and infinite-dimensional over `k`, hence not of finite type over `k ⊕ V`.
 
-(blueprint: `det-thm-picard-coherence`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
@@ -189,8 +189,8 @@ general case reduces to this by Noetherian approximation of `(f, ℱ)` [EGA IV�
 Alternatively, it follows from Kiehl's theorem that `R f_* ℱ` is pseudo-coherent, and finite
 Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H].
 
-(blueprint: `det-thm-picard-coherence`) 
-(blueprint: lem-pc-universal-finite-free-complex)
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) 
+(blueprint: lemma-coherent-base-change-invertible-sheaves--1)
 -/
 theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFinitePresentation f]
     [QuasiCompact f] [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]

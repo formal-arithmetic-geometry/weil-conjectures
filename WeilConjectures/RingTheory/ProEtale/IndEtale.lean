@@ -109,6 +109,12 @@ instance (priority := 100) of_indZariski [IndZariski R S] : IndEtale R S := by
   refine ObjectProperty.ind_mono (isLocalIso_le_etale R) _ ?_
   rwa [← Algebra.IndZariski.iff_ind_isLocalIso]
 
+/-- An étale algebra is ind-étale: it is the filtered colimit of the one-object diagram
+consisting of itself. -/
+instance (priority := 100) of_etale [Algebra.Etale R S] : IndEtale R S := by
+  rw [iff_ind_etale]
+  exact (CommAlgCat.etale R).le_ind _ (inferInstanceAs (Algebra.Etale R S))
+
 /-- Let `A → B` be an ind-étale algebra and let `L` be a local ring that is also an algebra
 over a field `k`, in a way compatible with the `A`-algebra structures. Then for every
 `A`-algebra homomorphism `φ : B →ₐ[A] L` and every `b : B`, the image `φ b` is separable
