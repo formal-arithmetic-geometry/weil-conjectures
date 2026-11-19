@@ -39,8 +39,8 @@ The workplan probe rechecks each complete endpoint, then attempts to replace
 only arguments 2, 3, 6, and 7 on the expected endpoint. All eight attempted
 replacements (four per endpoint) are rejected by `Kernel.check` as
 ill-typed: those arguments carry dependent endpoint data and cannot be
-aligned independently. The probe also reports the immediate body of regular
-`Functor.comp`, which is `Functor.mk`.
+aligned independently. The preserved prior body probe reports the immediate
+body of regular `Functor.comp` as `Functor.mk`.
 
 This separates the cheap local unequal comparisons from the expensive
 whole endpoint conversion. The individual argument differences do not
