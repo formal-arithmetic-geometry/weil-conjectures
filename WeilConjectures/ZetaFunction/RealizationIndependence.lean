@@ -162,6 +162,71 @@ theorem exists_isWeilNumber_of_mem_roots_reverse {A B : Polynomial ℤ}
     obtain ⟨hj, heven⟩ := Finset.mem_filter.1 hj
     exact ⟨j, by have := Finset.mem_range.1 hj; omega, heven, h⟩
 
+/-- Every algebraic reciprocal root of the normalized zeta numerator or denominator becomes a
+Frobenius eigenvalue after any embedding into an ℓ-adic algebraic closure. The degree has the
+parity of the polynomial from which the root came. -/
+theorem exists_frobeniusEigenvalue_of_mem_roots_reverse {A B : Polynomial ℤ}
+    (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
+      B) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+    (θ : AlgebraicClosure ℚ →+* PadicAlgCl l) :
+    (∀ α ∈ (A.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Odd i ∧
+        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue (θ α)) ∧
+    (∀ α ∈ (B.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Even i ∧
+        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue (θ α)) := by
+  obtain ⟨hA, hB⟩ := map_eq_frobeniusProduct_of_isNormalizedIntegralFraction k₀ X d l hAB
+  have hcomp : θ.comp (algebraMap ℤ (AlgebraicClosure ℚ)) =
+      Int.castRingHom (PadicAlgCl l) := RingHom.ext_int _ _
+  have key (C : Polynomial ℤ) (h0 : C.coeff 0 = 1) (s : Finset ℕ)
+      (hC : C.map (Int.castRingHom (PadicAlgCl l)) =
+        ∏ j ∈ s, frobeniusCharpolyRev k₀ l X j)
+      (α : AlgebraicClosure ℚ)
+      (hα : α ∈ (C.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots) :
+      ∃ j ∈ s,
+        ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobeniusEnd.HasEigenvalue (θ α) := by
+    have hrev0 : C.reverse.map (Int.castRingHom (PadicAlgCl l)) ≠ 0 :=
+      (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2
+        (Polynomial.monic_reverse_of_coeff_zero_eq_one h0).ne_zero
+    have hroot : (C.reverse.map (Int.castRingHom (PadicAlgCl l))).IsRoot (θ α) := by
+      have h := (Polynomial.mem_roots'.1 hα).2.map (f := θ)
+      simpa only [Polynomial.map_map, hcomp] using h
+    have hα' : θ α ∈ (C.reverse.map (Int.castRingHom (PadicAlgCl l))).roots :=
+      (Polynomial.mem_roots hrev0).2 hroot
+    have hC0 : C.map (Int.castRingHom (PadicAlgCl l)) ≠ 0 := by
+      intro he
+      have he0 := congrArg (fun P : Polynomial (PadicAlgCl l) ↦ P.coeff 0) he
+      simp only [Polynomial.coeff_map, h0, map_one] at he0
+      simp at he0
+    rw [← Polynomial.reverse_map (RingHom.injective_int _),
+      Polynomial.mem_roots_reverse_iff hC0] at hα'
+    obtain ⟨hα0, hroot'⟩ := hα'
+    rw [hC, Polynomial.IsRoot, Polynomial.eval_prod, Finset.prod_eq_zero_iff] at hroot'
+    obtain ⟨j, hj, hjroot⟩ := hroot'
+    have hP0 : frobeniusCharpolyRev k₀ l X j ≠ 0 := by
+      intro he
+      have he0 := congrArg (fun P : Polynomial (PadicAlgCl l) ↦ P.coeff 0) he
+      simp [coeff_zero_frobeniusCharpolyRev] at he0
+    have hmem : θ α ∈ (frobeniusCharpolyRev k₀ l X j).reverse.roots := by
+      apply (Polynomial.mem_roots_reverse_iff hP0).2
+      exact ⟨hα0, hjroot⟩
+    rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial,
+      (LinearMap.reciprocal_roots_eigenvalues
+        ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobeniusEnd
+        (LinearEquiv.isUnit_det' ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobenius)).1]
+      at hmem
+    exact ⟨j, hj, (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2
+      (Polynomial.isRoot_of_mem_roots hmem)⟩
+  refine ⟨fun α hα ↦ ?_, fun α hα ↦ ?_⟩
+  · obtain ⟨j, hj, heig⟩ := key A hAB.1 _
+      (by rw [hA, oddFrobeniusProduct]) α hα
+    obtain ⟨hjrange, hodd⟩ := Finset.mem_filter.1 hj
+    exact ⟨j, by have := Finset.mem_range.1 hjrange; omega, hodd, heig⟩
+  · obtain ⟨j, hj, heig⟩ := key B hAB.2.1 _
+      (by rw [hB, evenFrobeniusProduct]) α hα
+    obtain ⟨hjrange, heven⟩ := Finset.mem_filter.1 hj
+    exact ⟨j, by have := Finset.mem_range.1 hjrange; omega, heven, heig⟩
+
 end ReciprocalRoots
 
 /-- For `X₀` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`,
