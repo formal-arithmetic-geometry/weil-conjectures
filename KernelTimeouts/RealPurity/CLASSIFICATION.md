@@ -1,46 +1,50 @@
-Case ID / declaration
----------------------
-RealPurity / `IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight`
-Module: `WeilSheaf/RealPurity.lean`; origin `e2d8b540cba`
-Lean / Mathlib: 4.35.0 / 4.35.0; host Weil server the build server
+# RealPurity: exact Kernel site
 
-1. Phase attribution
---------------------
-Before: kernel deterministic timeout at 58.94 s / 5,590,352 KB RSS. After:
-kernel deterministic timeout at 58.84 s / 5,584,740 KB RSS. Master source:
-6.10 s / 4,015,364 KB RSS, exit 0. Kernel-skipped Before/After are both about
-7.4-7.8 s / 3.99 GB, so the timeout delta is trusted Kernel checking. A
-per-declaration profiler attributes 52.2 s to checking the theorem at line
-241; the next error is only the downstream unknown-constant cascade.
+**Declaration:** `IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight`,
+origin `e2d8b540cba`.
 
-2. What is expensive?
----------------------
-The Before timeout is in the value proof at the large constituent/subquotient
-construction (`hσ` and its dependent equivalence); the split `as_aux_lemma`
-proof still times out in the historical After. The declared theorem type is not
-the source of the timeout.
+## Measurements and bisect
 
-3. Structural evidence
-----------------------
-The fixed commit moves `hσ`, `hreal'`, and the two final stalk calculations into
-auxiliary proof blocks. This changes proof abstraction boundaries but leaves the
-statement unchanged. Master has further changed the surrounding source and is
-cheap, showing the historical fix was insufficient on 4.35.0.
+The type-only probe is 4.70 s. The historical Before is a Kernel
+deterministic timeout at 58.94 s / 5,590,352 KB; Kernel skipped is about
+7.4 s. Replacing the entire `hσ` constituent witness with `sorry` still
+times out (59.54 s), while a prefix through `hσ` and before later consumers
+takes 6.90 s. Replacing only the body of `hreal'` makes the file 7.10 s.
+Keeping the two rewrites in `hreal'` and replacing only `exact h` gives the
+same cheap result; keeping `exact h` and replacing later purity work still
+times out at 58.94 s. This isolates the final equality conversion in `hreal'`.
 
-4. Why is it expensive?
------------------------
-Primary B (proof-term/proof-abstraction heavy), plausible; contributing C and
-A remain hypotheses. Evidence: Kernel-on versus skipped timing confirms proof
-checking is expensive, while the unchanged timeout after splitting shows the
-historical abstraction boundary did not remove it. The exact subterm and
-mechanism need a typed-sorry bisect.
+## Exact expressions
 
-5. Confidence
--------------
-Strongly supported for the Kernel phase, plausible for B, unresolved as to why
-the 4.35.0 split still times out.
+The compact state probe prints:
 
-6. Scope and caveats
---------------------
-Master.lean is the current source and passes. Before/After retain the original
-historical terms and both fail as required by ROUND3.
+```text
+h : starRingEnd Complex (ι (P.obj.ρ (W.frobenius x)).charpoly.reverse.coeff n)
+      = ι (P.obj.ρ (W.frobenius x)).charpoly.reverse.coeff n
+goal : starRingEnd Complex (ι (P.obj.ρ (W.frobenius x)).charpoly.reverse.coeff n)
+      = ι (P.obj.ρ (W.frobenius x)).charpoly.reverse.coeff n
+```
+
+The compact printer shows the same proposition on both sides. The full
+`pp.explicit` trace is retained by `probes/PrintHRealCompact.lean`'s companion
+run with `set_option pp.explicit true`; it expands the `PadicAlgCl`,
+representation, and finite-dimensional instance arguments but has not yet
+isolated a smallest unequal subexpression. The measured operation is the
+final `exact h` conversion after the equivalence `f` rewrites the sheaf-stalk
+polynomial. The typed placeholder controls show that the large constituent
+equivalence itself is cheap.
+
+Kernel diagnostics on the isolated `hreal'` probe show only small local
+unfold counts (maximum 8), while the full conversion times out; this is a
+context-sensitive proof-term/type reconciliation rather than a recursive
+computation. The current `Master.lean` form passes in 6.10 s, so the
+historical split is insufficient on 4.35.0.
+
+## Classification
+
+Primary mechanism: **unclassified**. Candidate mechanisms: B, C, and E.
+Evidence: **confirmed** for the exact `hreal'` conversion, **plausible** for
+the candidate mechanisms. The controlled bisect does not distinguish a
+proof-abstraction mismatch from a representation-instance mismatch. The
+historical After still times out; later master changes are not attributed to
+the historical fix.
