@@ -1,44 +1,40 @@
-Case ID / declaration
----------------------
-IntegralComparisonPullbackRealizationShifts / `integralComparisonPullbackRealization_commShift`
-Origin: `b400b43ec29`; Lean/Mathlib 4.35.0; Weil server the build server.
-Imports/options: see `Before.lean`, `maxHeartbeats 200000`.
+# IntegralComparisonPullbackRealizationShifts: exact Kernel site
 
-1. Phase attribution
---------------------
-Kernel skipped, synchronous: Before 11.11 s / 2,744,228 KB RSS; After
-10.61 s / 2,745,456 KB RSS, both exit 0. Baseline Kernel-on Before 1:42.27 /
-9,386,264 KB RSS; After 23.61 s / 3,880,060 KB RSS. This is a strong Kernel
-gate for the cost difference, though whole-file elaboration contributes about
-11 s in both variants. Per-declaration profiling attributes 95.2 s to type
-checking of the slow declaration (the earlier declarations have checks of
-2.9 s or less), with 6.01 s cumulative tactic execution in the file.
+**Declaration:** `integralComparisonPullbackRealization_commShift`, origin
+`b400b43ec29`.
 
-2. What is expensive?
----------------------
-The target proof value around the localization extensionality application and
-the `CommShift` endpoint conversion. Wrapper definitions in the fixed form
-preserve the theorem statement while reducing the concrete conversion. The
-exact application prefix and final reconciliation have not been timed apart.
+## Phase gate and top-down bisect
 
-3. Structural evidence
-----------------------
-The fixed term names the comm-shift component, natural transformation app,
-shifted morphism, and square equality. That makes endpoint types syntactically
-match before localization. The per-declaration profiler identifies the target
-as the 95.2 s type check in the full source.
+The type-only probe is 7.80 s. The full Before is 105.67 s in the synchronous
+Kernel gate versus 11.11 s with Kernel skipped. `probes/AfterIntroSorry.lean`
+stops after `commShift_of_localization ...; intro P m; sorry` and takes 7.90 s.
+Adding the explicit `change` statement takes 86.06 s; retaining all later
+proofs but replacing the final `cancel_shift_square` takes 105.47 s. Thus the
+first expensive operation is the conversion created by `change`, before any
+normalization, localized shift square, or final cancellation witness.
 
-4. Why is it expensive?
------------------------
-Primary A; contributing E and C. Kernel skipping removes the large delta;
-the wrapper change points to reduction under dependent localization endpoints.
-Evidence strength: strongly supported for phase, plausible for exact mechanism.
+## Exact expressions
 
-5. Confidence
--------------
-Plausible site, strongly supported phase. Per-declaration profiler and a
-typed-sorry bisect would raise the site attribution.
+Before `change`, the goal is a morphism equation at
+`(integralOperationsGoodLocalization ...).obj P`, with
+`M.realization.hom.app` and the derived pullback comm-shift. After `change`,
+the same equation is stated at `DerivedCategory.Q.obj P.obj` and uses
+`integralDerivedPullback`, `SY.reduction ⋙ H`, and explicit shift functors.
+The compact probes print both forms. The endpoint objects are mathematically
+the same but are represented through the localization wrapper versus its
+underlying `DerivedCategory.Q` object; the conversion unfolds concrete
+`PresheafOfModules.obj` and additive/module instances under `NatTrans.app`.
 
-6. Scope and caveats
---------------------
-Whole historical module measurement, not an isolated target-only probe.
+With `-Ddiagnostics=true -Ddiagnostics.threshold=1`, the post-`change`
+probe reports 1,193,814 Kernel unfolds of `Add.add`, 1,047,896 of
+`PresheafOfModules.obj`, and 812,294 of `AddMonoid.toAdd`. The pre-`change`
+probe remains at the 7--8 second import/type floor. These counters identify
+the conversion chain triggered by the endpoint representation, not the source
+of the mathematics.
+
+## Classification
+
+Primary mechanism: **A**. Contributing mechanisms: **E** and **C**. Evidence:
+**confirmed** for the `change` conversion and **strongly supported** for A/E/C.
+The fixed wrapper vocabulary keeps the localization endpoint types aligned so
+the same square is checked without this conversion.
