@@ -25,7 +25,8 @@ paths are `IsRegularLocalRing.toIsLocalRing`,
 The following are separate G3-B/H5 one-factor or explicitly marked factorial
 experiments. The baseline for the original seven-control timing session was
 45.73 s wall and 3,283,804 KB RSS, deterministic Kernel timeout at 200,000
-heartbeats. A fresh baseline in this workplan session was 40.23 s wall,
+heartbeats; CPU time was not retained for that earlier session. A fresh
+baseline in this workplan session was 40.23 s wall,
 46.31 s user + 0.99 s system, 3,341,996 KB RSS, same timeout.
 The current full three-path control was 10.11 s wall,
 13.82 + 0.92 s CPU, 2,564,172 KB RSS, success. Kernel-only time and

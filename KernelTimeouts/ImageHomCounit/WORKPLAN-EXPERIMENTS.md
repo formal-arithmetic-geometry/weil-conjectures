@@ -19,7 +19,7 @@ All timings use one Lean thread, `timeout 3600`,
 are not separately available. The baseline in this workplan session,
 `probes/FinalExact.lean`, succeeds in 54.94 s wall,
 53.90 + 1.08 s CPU, 7,487,640 KB RSS. The helper application alone
-was 2.70 s in the head audit; the final conversion carries the cost.
+was inexpensive in the head audit; the final conversion carries the cost.
 
 ## C2-W: Unfold only the declared wrapper
 
@@ -83,7 +83,7 @@ full alignment. Confidence: confirmed for the aligned control.
 
 The earlier `UniformRaw.lean` and `RegularWrapper.lean`
 source-spelling variants both leave the elaborated pair unchanged
-and remain near 55 seconds. They are not interpreted as
+and remain expensive. They are not interpreted as
 counterexamples to C2-W or C2-I. Their head probes are retained
 outside `wp` with the original head audit.
 

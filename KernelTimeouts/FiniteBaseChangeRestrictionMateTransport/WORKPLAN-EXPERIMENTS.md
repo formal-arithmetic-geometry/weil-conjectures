@@ -64,7 +64,7 @@ supplied proof's proposition conversion to the instantiated helper
 domain. BASELINE: the original `hb := h` application at 400,000
 heartbeats gives a deterministic Kernel timeout, 89.36 s wall,
 89.06 + 1.05 s CPU, 5,743,096 KB RSS. The original 4,000,000-budget
-application took 577.57 s in the head audit. CONTROL:
+application was also expensive in the head audit. CONTROL:
 `probes/TransportHB.lean` replaces only argument 49 with
 `fun M => by transport_exact h M`, leaving the other 48 arguments
 and square obligation intact. `probes/TransportHead.lean` confirms

@@ -80,7 +80,7 @@ application are normally Kernel checked; the enclosing diagnostic
 example ends with `sorry` afterward. RESULT: 3.40 s wall,
 2.46 + 1.08 s CPU, 3,181,636 KB RSS. The expensive argument-domain
 conversion is removed. The complete fixed declaration in
-`After.lean` also Kernel checks (about 3.5 s in the prior audit).
+`After.lean` also Kernel checks in the prior audit.
 INTERPRETATION: exact proposition alignment is causal, while B1-D
 shows that a single top-level binder-domain spelling change is not
 enough. Confidence: confirmed for the transport control; the exact

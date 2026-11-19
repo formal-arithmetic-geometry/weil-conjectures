@@ -62,7 +62,7 @@ for instance alignment; plausible deeper mechanism.
 EXPERIMENT: C3-K; group: phase diagnostic. Hypothesis:
 C3-I's remaining 83 seconds are still Kernel-bound rather
 than a new elaboration cost from the custom `change` tactic.
-BASELINE: C3-I, 83.15 s wall, normal Kernel checking.
+BASELINE: C3-I above, with normal Kernel checking.
 CONTROL: `probes/wp/AlignInstanceSkipKernel.lean` differs
 only by `debug.skipKernelTC true`. The same aligned
 expression pair is constructed and printed, but Kernel
@@ -79,7 +79,7 @@ supported.
 
 `probes/LocalTowerInstance.lean` added a local tower
 instance but left the first divergent elaborated pair
-unchanged and cost about 85 seconds. Its result is not
+unchanged and remained expensive. Its result is not
 interpreted as an instance-alignment experiment. The new
 C3-I control changes the stored instance argument itself.
 

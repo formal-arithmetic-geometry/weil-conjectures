@@ -74,8 +74,7 @@ representation as the trigger.
 
 EXPERIMENT: B3-Q; group: G2-C. Hypothesis: the earlier tensor
 isomorphism rather than the proof proposition drives the jump.
-BASELINE: the same argument-39 application; the original session
-measured 35.22 s for `Prefix39`. CONTROL:
+BASELINE: the same argument-39 application, measured above. CONTROL:
 `probes/ReplaceTauQ.lean` changes only the preceding
 tensor-isomorphism argument. The proof argument and its original
 first `Over.left` divergence remain. Theorem obligation is
