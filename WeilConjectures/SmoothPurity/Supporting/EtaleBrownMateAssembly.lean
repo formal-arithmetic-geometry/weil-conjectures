@@ -31,10 +31,10 @@ theorem etaleBrownMatePasting
     (k : TwoSquare U LB LA V) (i : TwoSquare U' LB' LA' V')
     (t : U ⋙ GA ⟶ GB ⋙ U') (s : V ⋙ HA ⟶ HB ⋙ V')
     (h : ∀ M : DB,
-      t.app (RB.obj M) ≫ U'.map ((mateEquiv aB bB ab).natTrans.app M) ≫
-          (mateEquiv bB bA i).natTrans.app (HB.obj M) =
-        GA.map ((mateEquiv aB aA k).natTrans.app M) ≫
-          (mateEquiv aA bA aa).natTrans.app (V.obj M) ≫ RA'.map (s.app M))
+      t.app (RB.obj M) ≫ U'.map ((mateEquiv aB bB ab).app M) ≫
+          (mateEquiv bB bA i).app (HB.obj M) =
+        GA.map ((mateEquiv aB aA k).app M) ≫
+          (mateEquiv aA bA aa).app (V.obj M) ≫ RA'.map (s.app M))
     : (ab.hComp i).whiskerTop t = (k.hComp aa).whiskerBottom s := by
   apply (mateEquiv aB bA).injective
   rw [show mateEquiv aB bA ((ab.hComp i).whiskerTop t) =

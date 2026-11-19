@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictTargetTransport
 
-/-! # Assembly of normalized Kummer transport and finite class uniqueness
-Source: diagonal tower system proof, steps (3)--(4).
-(blueprint: lem-sfb-kummer-transport-assembly). -/
+/-! # Assembly of normalized Kummer transport and finite class uniqueness. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,20 +22,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalDerivedSingleCounit HasDerivedCategory.standard HomotopyCategory.singleFunctors
 
 /-- Source quotient normalization, strict target transport, and uniqueness of each
-scalar adjunct assemble the normalized boundary target.
-
-Source: diagonal tower system proof, steps (3)--(4), the source/target choices
-and final finite class comparison (blueprint: lem-sfb-kummer-transport-assembly).
-
-Proof: retain the single strict H, roots identification, and derived isomorphism
-b from target transport. At each level choose the normalized source s and target
-t. Apply the arbitrary-arrow transport formula to the fixed boundary delta.
-Apply the assumed finite-class implication to its scalar-adjunct equation.
-The transport evaluation equation identifies the restricted residue class with
-the actual evaluated boundary. Substitute this equality into the class predicate, while
-retaining both normalizations and all the original strict system data. The
-argument is formal in the abelian categories and uses no faithfulness of a
-functor on derived categories or detection of strict arrows by evaluation. -/
+scalar adjunct assemble the normalized boundary target. -/
 theorem kummer_transport_assembly
     (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [abA : Abelian A] [hA : HasExt.{w} A]
     {B : Type uB} [Category.{vB} B] [abB : Abelian B] [hB : HasExt.{w} B]

@@ -222,7 +222,7 @@ Proof:
    the module axioms. Naturality of `c` and semilinearity of restrictions give compatible
    restrictions. Precomposition preserves sheaves by hypothesis. Precomposed linear maps
    remain linear and preserve identities and compositions
-   [def-weil-sheaf-of-modules-category]. This is Mathlib's `pushforward c`.
+   [situation-conventions]. This is Mathlib's `pushforward c`.
 2. The pairing at U is `b (v.op.obj U)`. Its additivity and R(U)-bilinearity follow from
    S(vU)-bilinearity by substituting `c_U(r)`. Its restriction compatibility follows from
    that of b, so it is a bilinear morphism of underlying sheaves.

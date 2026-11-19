@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroDescent
 
 # The supported restriction is zero for Frobenius
 
-This file proves blueprint `sk-lem-tf-curve-restriction-zero` on the classical étale models: in
+This file proves blueprint `lemma-vanishing-local-term-zero-stalk` on the classical étale models: in
 the strictly local model `T` of a `CurveLocalModel` (the strict localization of `X ×_k X` at
 `(y, y)`, with the graph `G` of `h` and the diagonal `B`), let `L, K ∈ D^b_{ctf}(X, Λ)` with
 `K_ȳ = 0` and `P = (L ⊠ K)|_T`. Then the supported restriction
@@ -27,13 +27,13 @@ Tor-dimension.
 
 The proof follows the blueprint:
 1. both `RΓ(T, P)` and `RΓ(B, b^* P)` vanish, the schemes being strictly local with closed stalk
-   `L_ȳ ⊗ᴸ K_ȳ = 0` (`det-tf-restriction-zero-localization` (ii)), so the localization triangles
+   `L_ȳ ⊗ᴸ K_ȳ = 0` (`lemma-vanishing-local-term-zero-stalk--1` (ii)), so the localization triangles
    identify `ρ_{a,b}` with the restriction `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ y, b^* P)`, which factors
-   through `RΓ(T ∖ (G ∪ V), P)` (`det-tf-restriction-zero-localization` (iii));
-2. prime-to-`ℓ` covers (`det-tf-restriction-zero-covers`) put the curves in the position of
-   `sk-lem-tf-blowup-restriction`, which kills the restriction upstairs;
+   through `RΓ(T ∖ (G ∪ V), P)` (`lemma-vanishing-local-term-zero-stalk--1` (iii));
+2. prime-to-`ℓ` covers (`lemma-tangent-cones-on-cover`) put the curves in the position of
+   `lemma-vanishing-restrictions-after-blowing-up--1`, which kills the restriction upstairs;
 3. the finite étale trace on the punctured diagonal descends the vanishing, the degree being
-   invertible in `Λ` (`det-tf-restriction-zero-trace-descent`).
+   invertible in `Λ` (`lemma-descent-vanishing-finite-etale`).
 
 -/
 
@@ -52,7 +52,7 @@ open Scheme
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
 /-- **The supported restriction is zero for Frobenius** (blueprint
-`sk-lem-tf-curve-restriction-zero`): on the classical strictly local model, for a prime `ℓ`
+`lemma-vanishing-local-term-zero-stalk`): on the classical strictly local model, for a prime `ℓ`
 invertible in `k`, a finite commutative `ℓ`-primary ring `Λ`, `L, K ∈ D^b_{ctf}(X, Λ)` with
 `K_ȳ = 0` and `P = (L ⊠ K)|_T`, the supported restriction
 `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_y(B, b^* P)` is zero in `D(Λ)`. -/

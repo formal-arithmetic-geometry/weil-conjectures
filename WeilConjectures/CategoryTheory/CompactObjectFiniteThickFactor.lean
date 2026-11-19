@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 /-! Abstract compact-to-thick factorization for a compact generating family.
 
 Source: Stacks Project Tags 09SN, 09SP, and 094A, exactly the telescope and finite-stage
-factorization paragraphs of `det-ctf-finite-compact-generators`.
+factorization paragraphs of `proposition-compactness-finite-coefficients`.
 (blueprint: det-ctf-finite-compact-thick-factor)
 -/
 
@@ -29,7 +29,7 @@ namespace CategoryTheory
 /-- A compact object in a category built by a compact generating family retracts from a finite
 thick envelope of that family.
 
-Source: `det-ctf-finite-compact-generators`, compact objects paragraph, Stacks Tags
+Source: `proposition-compactness-finite-coefficients`, compact objects paragraph, Stacks Tags
 09SN, 094A and 09SP (blueprint: det-ctf-finite-compact-thick-factor).
 
 Proof: write the object as the telescope of extensions of coproducts of shifted generators.

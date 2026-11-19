@@ -84,8 +84,8 @@ theorem frobenius_linear_kernel_etale_pullback
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e))
     (V : S.Etale) [IsOpenImmersion V.hom] (G : V.left.Modules) [G.IsQuasicoherent]
     (α : (Modules.tensorPullback V.hom).obj E ≅ G) :
@@ -95,8 +95,8 @@ theorem frobenius_linear_kernel_etale_pullback
       F' = Φ.inv ≫ (etaleOpenSmallRestriction V.hom).map F ≫ Φ.hom ∧
       (∀ (W : V.left.Etale) (a : Γ(W.left, ⊤))
         (m : Γ((Modules.tensorPullback W.hom).obj G, ⊤)),
-        F'.hom.app (op W) ((((Modules.tensorPullback W.hom).obj G).smul a).hom m) =
-          (((Modules.tensorPullback W.hom).obj G).smul (a ^ p)).hom
+        F'.hom.app (op W) ((((Modules.tensorPullback W.hom).obj G).smul a).asHom.hom m) =
+          (((Modules.tensorPullback W.hom).obj G).smul (a ^ p)).asHom.hom
             (F'.hom.app (op W) m)) ∧
       Nonempty
         (((Etale.upperStar AddCommGrpCat.{u + 1} V.hom).obj
@@ -119,8 +119,8 @@ theorem frobenius_linear_kernel_etale_pullback
     rfl
   have hlin (W : V.left.Etale) (a : Γ(W.left, ⊤))
       (x : Γ((Modules.tensorPullback (W.hom ≫ V.hom)).obj E, ⊤)) :
-      Φ.hom.hom.app (op W) ((((Modules.tensorPullback (W.hom ≫ V.hom)).obj E).smul a).hom x) =
-        (((Modules.tensorPullback W.hom).obj G).smul a).hom (Φ.hom.hom.app (op W) x) := by
+      Φ.hom.hom.app (op W) ((((Modules.tensorPullback (W.hom ≫ V.hom)).obj E).smul a).asHom.hom x) =
+        (((Modules.tensorPullback W.hom).obj G).smul a).asHom.hom (Φ.hom.hom.app (op W) x) := by
     rw [hΦ]
     exact (congrArg _ ((congrArg _ (Modules.Hom.app_smul
       ((Modules.tensorSectionsComp W.hom V.hom).inv.app E) a x)).trans

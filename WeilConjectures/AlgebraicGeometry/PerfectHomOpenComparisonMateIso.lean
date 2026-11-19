@@ -171,7 +171,7 @@ theorem perfect_hom_open_comparison_mate_isIso
         schemeDerivedDirectImage (pullback.fst s r))
       (ap' : derivedPullback (pullback.fst (B.ι ≫ s) r) ⊣
         schemeDerivedDirectImage (pullback.fst (B.ι ≫ s) r)),
-      IsIso (mateEquiv ap ap' (TwoSquare.mk _ _ _ _ κ₀.inv)).natTrans := by
+      IsIso (mateEquiv ap ap' (TwoSquare.mk _ _ _ _ κ₀.inv)) := by
   classical
   dsimp only
   intro ap ap'
@@ -182,7 +182,7 @@ theorem perfect_hom_open_comparison_mate_isIso
         ≪≫ (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫
       Functor.isoWhiskerRight
         ((conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)).symm
-        (derivedPullback (pullback.fst (B.ι ≫ s) r))).inv)).natTrans
+        (derivedPullback (pullback.fst (B.ι ≫ s) r))).inv))
   change IsIso α
   have hQ (I : CochainComplex
       (SheafOfModules.{u} (moduleRings (pullback s r).toRingedSpace)) ℤ)

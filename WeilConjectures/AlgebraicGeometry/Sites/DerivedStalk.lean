@@ -12,8 +12,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Conservativity of geometric stalks on the derived category
 
-A morphism `f : K ⟶ L` in the derived category of `A`-valued sheaves on the small étale site
-of a scheme `S` is an isomorphism as soon as, for every `i : ℤ` and every geometric point
+A morphism `f: K ⟶ L` in the derived category of `A`-valued sheaves on the small étale site
+of a scheme `S` is an isomorphism as soon as, for every `i: ℤ` and every geometric point
 `s̄` of `S`, the map of geometric stalks `ℋⁱ(K)_s̄ ⟶ ℋⁱ(L)_s̄` is an isomorphism.
 
 ## Main statements
@@ -21,7 +21,7 @@ of a scheme `S` is an isomorphism as soon as, for every `i : ℤ` and every geom
 - `AlgebraicGeometry.Scheme.isIso_iff_isIso_sheafFiber_map_homologyFunctor_map`: the statement
   on the unbounded derived category.
 - `AlgebraicGeometry.Scheme.isIso_iff_isIso_sheafFiber_map_homologyFunctor_map_plus`
-  (`lem-weil-pbc-derived-stalk-conservative`): the statement on the bounded below derived
+: the statement on the bounded below derived
   category.
 -/
 
@@ -54,11 +54,11 @@ lemma isIso_iff_isIso_sheafFiber_map_homologyFunctor_map
   exact ⟨fun _ _ _ ↦ inferInstance, fun h i ↦ isIso_of_isIso_sheafFiber_map _ (h i)⟩
 
 include hC hJ in
-/-- Blueprint `lem-weil-pbc-derived-stalk-conservative`: Conservativity of geometric stalks on
+/-- Conservativity of geometric stalks on
 the derived category.
 
-A morphism `f : K ⟶ L` of `D⁺(S_ét, A)` is an isomorphism if and only if the maps of geometric
-stalks `ℋⁱ(K)_s̄ ⟶ ℋⁱ(L)_s̄` are isomorphisms for every `i : ℤ` and every point `s` of `S`. -/
+A morphism `f: K ⟶ L` of `D⁺(S_ét, A)` is an isomorphism if and only if the maps of geometric
+stalks `ℋⁱ(K)_s̄ ⟶ ℋⁱ(L)_s̄` are isomorphisms for every `i: ℤ` and every point `s` of `S`. -/
 lemma isIso_iff_isIso_sheafFiber_map_homologyFunctor_map_plus
     {K L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology A)} (f : K ⟶ L) :
     IsIso f ↔ ∀ (i : ℤ) (s : S), IsIso ((S.uliftPointSmallEtale s).sheafFiber.map

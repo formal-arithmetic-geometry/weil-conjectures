@@ -215,7 +215,7 @@ Stacks Project, Tags 03D7, 03D8, 015F and 09T5.
 Proof:
 1. Work on ordinary module sheaves. Put L = i*, R = i_*, V = (i.inv)* and U = (i.inv)_*.
 The adjunctions a : L adjoint R and b : V adjoint U have the ordinary module units of
-prop-weil-pbc-inverse-image-modules-exact. The direct-image equivalence gives e : R adjoint U
+situation-conventions. The direct-image equivalence gives e : R adjoint U
 with geometric counit d : RU isomorphic to Id. Its triangles hold on sections: the two maps
 from the iterated fibre product retain the original coordinate. If c : VL isomorphic to Id
 is inverse upperStarComp followed by upperStarId, the normalized composition and identity

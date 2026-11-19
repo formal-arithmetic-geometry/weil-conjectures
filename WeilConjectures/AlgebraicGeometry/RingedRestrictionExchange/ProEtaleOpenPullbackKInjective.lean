@@ -54,7 +54,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Open pro-etale pullback preserves K-injective complexes
 
-Source: Stacks Project, Tags 08FI and 09A5.
+## References
+
+* Stacks Project, Tags 08FI and 09A5
 -/
 
 @[expose] public noncomputable section
@@ -71,16 +73,7 @@ attribute [local instance 30000]
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 attribute [local irreducible] proEtaleRingModulePullback
 
-/-- Open pullback preserves K-injectives, including transported coefficient rings.
-Source: Stacks Project, Tags 08FI and 09A5
-(blueprint: lem-sf-proetale-open-pullback-preserves-kinjective).
-Proof: identify inverse image with module-sheaf restriction to the open slice.
-Restriction preserves K-injectives because exact extension by zero is its left
-adjoint. Transport this property through the open-site equivalence and the scalar
-restriction equivalence induced by c. The scalar-extension comparison identifies
-the resulting functor with the specified module pullback. Preservation of
-K-injectives is invariant under natural isomorphism and composition, giving the
-asserted functor-level preservation instance. -/
+/-- Open pullback preserves K-injectives, including transported coefficient rings. -/
 @[instance] theorem open_pullback_preservesKInjectiveComplexes {S Z : Scheme.{u}}
     (j : S ⟶ Z) [IsOpenImmersion j]
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})

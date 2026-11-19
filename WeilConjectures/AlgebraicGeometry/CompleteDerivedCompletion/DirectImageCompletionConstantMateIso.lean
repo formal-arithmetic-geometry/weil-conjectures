@@ -41,7 +41,7 @@ all derived objects.
 theorem directImage_constant_mate_isIso :
     IsIso ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
       (.mk _ _ _ _ (constantInterchange l E
-        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv)).natTrans) := by
+        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv))) := by
   have h := CategoryTheory.UnboundedExactTower.constant_isIso
     (CondensedRing.upperStarLowerStarAdjunction
       (DerivedNakayama.integerRing l E) f)

@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 
 Let `Λ` be a commutative condensed ring and `g' ≫ p = p' ≫ g` a commutative square of schemes.
 This file proves the formal part of proper base change on the localizing categories (blueprint
-`sk-prop-proper-base-change-unbounded`, `det-proper-base-change-unbounded-extension`): if the
+`proposition-proper-base-change-localizing-categories--1`): if the
 base change map `Lg^* Rp_* ⟶ Rp'_* Lg'^*` is an isomorphism on `Dbc(X, Λ)`, if `Rp_*` and
 `Rp'_*` preserve the direct sums of objects of the localizing closures of `Dbc` and `Lg'^*`
 preserves `Dbc`, then the base change map is an isomorphism on `Loc(Dbc(X, Λ))`
@@ -22,7 +22,8 @@ preserves `Dbc`, then the base change map is an isomorphism on `Loc(Dbc(X, Λ))`
 
 Both sides are triangulated functors and the base change map commutes with the shifts
 (`ProEtale.CondensedRing.commShift_baseChangeMap`), so this is the determination argument
-`CategoryTheory.NatTrans.isIso_app_of_localizingClosure` (blueprint `sk-lem-sf-determination`).
+`CategoryTheory.NatTrans.isIso_app_of_localizingClosure` (blueprint
+`lemma-checking-isomorphisms-constructible-complexes--1`).
 -/
 
 @[expose] public section
@@ -98,9 +99,9 @@ instance commShift_baseChangeMap (sq : CommSq g' p' p g) :
   NatTrans.CommShift.exchangeRight (derivedUpperStarLowerStarAdjunction Λ p)
     (derivedUpperStarLowerStarAdjunction Λ p') (pullbackSquareComparison Λ sq)
 
-/-- The formal part of blueprint `sk-prop-proper-base-change-unbounded` and
-`det-proper-base-change-unbounded-extension`, for an arbitrary condensed ring `Λ`: proper base
-change extends from `Dbc` to `Loc(Dbc)`.
+/-- The formal part of blueprint `proposition-proper-base-change-localizing-categories--1` and
+`proposition-proper-base-change-localizing-categories--1`, for an arbitrary condensed ring `Λ`:
+proper base change extends from `Dbc` to `Loc(Dbc)`.
 
 Let `g' ≫ p = p' ≫ g` be a commutative square. Assume that `Rp_*` and `Rp'_*` preserve the
 direct sums of objects of `Loc(Dbc(X, Λ))`, resp. `Loc(Dbc(X', Λ))`, that `Lg'^*` maps

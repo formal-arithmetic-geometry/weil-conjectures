@@ -17,7 +17,7 @@ On the affine ind-étale basis `B_Z` of `Z_proét`, formed by the objects
 sheafification of the presheaf `P_F(V) = F(v(V))`: the map `P_F ⟶ i^* F`, given by the unit of
 `i^* ⊣ i_*`, is locally surjective and locally injective on the basis
 (`AlgebraicGeometry.ProEtale.closedInverseImage_formula`, blueprint
-`lem-exc-closed-inverse-image-formula`).
+`proposition-extension-zero-restriction-closed-subscheme`).
 -/
 
 @[expose] public section
@@ -35,7 +35,7 @@ namespace ProEtale
 variable {A : CommRingCat.{u}} (I : Ideal A)
 
 /-- The henselian lift `v(V) = Spec H_A(C̄)` of `V = Spec C̄`, for an `A ⧸ I`-algebra `C̄`
-(blueprint `def-exc-closed-site-lift`). -/
+(blueprint `proposition-extension-zero-restriction-closed-subscheme`). -/
 noncomputable abbrev closedLiftSpec' (C : Type u) [CommRing C] [Algebra (A ⧸ I) C] :
     (Spec A).ProEt :=
   @closedLiftSpec A C _ (Algebra.compHom C (algebraMap A (A ⧸ I)))
@@ -43,7 +43,8 @@ noncomputable abbrev closedLiftSpec' (C : Type u) [CommRing C] [Algebra (A ⧸ I
 variable {I}
 
 /-- The lift `v(φ) : v(V') ⟶ v(V)` of the morphism `V' = Spec C̄' ⟶ V = Spec C̄` given by an
-`A ⧸ I`-algebra map `φ : C̄ ⟶ C̄'` (blueprint `def-exc-closed-site-lift`). -/
+`A ⧸ I`-algebra map `φ : C̄ ⟶ C̄'` (blueprint
+`proposition-extension-zero-restriction-closed-subscheme`). -/
 noncomputable def closedLiftSpecMap {C C' : Type u} [CommRing C] [Algebra (A ⧸ I) C] [CommRing C']
     [Algebra (A ⧸ I) C'] (φ : C →ₐ[A ⧸ I] C') : closedLiftSpec' I C' ⟶ closedLiftSpec' I C :=
   let : Algebra A C := Algebra.compHom C (algebraMap A (A ⧸ I))
@@ -94,10 +95,10 @@ lemma closedLiftBasisIso_hom_comp_map {C C' : Type u} [CommRing C] [Algebra (A �
 variable {R : Type (u + 1)} [Ring R] {U : Scheme.{u}} (j : U ⟶ Spec A) [IsOpenImmersion j]
   [QuasiCompact j]
 
-/-- Blueprint `lem-exc-closed-inverse-image-formula` (subsection
-`sk-prop-sf-open-closed-triangle`): let `i : Z = Spec (A ⧸ I) ⟶ X = Spec A` be a closed immersion
-with quasi-compact open complement `j`, and `F` a pro-étale sheaf of modules on `X`. On the affine
-ind-étale basis of `Z_proét`, `i^* F` is the sheafification of the presheaf
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
+`proposition-extension-zero-restriction-closed-subscheme`): let `i : Z = Spec (A ⧸ I) ⟶ X = Spec A`
+be a closed immersion with quasi-compact open complement `j`, and `F` a pro-étale sheaf of modules
+on `X`. On the affine ind-étale basis of `Z_proét`, `i^* F` is the sheafification of the presheaf
 `P_F(V) = F(v(V))`, `v(V) = Spec H_A(C̄)` for `V = Spec C̄ ≅ v(V) ×_X Z`: the map
 `P_F(V) ⟶ (i^* F)(V)` given by the unit of `i^* ⊣ i_*` is locally surjective and locally
 injective. Explicitly, every basis object `V = Spec C̄` has a covering `Spec φ : V' ⟶ V` by a basis

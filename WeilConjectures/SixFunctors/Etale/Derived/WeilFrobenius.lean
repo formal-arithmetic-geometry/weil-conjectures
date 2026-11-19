@@ -41,7 +41,7 @@ operations that the Frobenius statements of Poincaré duality are phrased with.
 - `AlgebraicGeometry.Etale.shiftWeilDatum`, `AlgebraicGeometry.Etale.tensorWeilDatum`,
   `AlgebraicGeometry.Etale.lowerShriekWeilDatum`, `AlgebraicGeometry.Etale.lowerStarWeilDatum`:
   the induced Weil data.
-- `AlgebraicGeometry.Etale.frobeniusOperator` (`def-trf-frobenius-operators`): the Frobenius
+- `AlgebraicGeometry.Etale.frobeniusOperator` (`definition-frobenius-operator--1`): the Frobenius
   operator of a Weil datum, a `Λ`-linear endomorphism of `Hom(Λ_Y, M)`.
 - `AlgebraicGeometry.Etale.IsWeilMorphism`, `AlgebraicGeometry.Etale.IsWeilPairing`: morphisms
   and pairings of Weil objects.
@@ -99,7 +99,7 @@ noncomputable def tensorWeilDatum {A B : DerivedCategoryModule Λ Y}
   (leftDerivedUpperStarTensorIso _ h A B).hom ≫ ((derivedTensor _ Y).map ψA).app _ ≫
     ((derivedTensor _ Y).obj A).map ψB
 
-/-- Blueprint `def-trf-frobenius-operators`: the Frobenius operators.
+/-- Blueprint `definition-frobenius-operator--1`: the Frobenius operators.
 
 The *Frobenius operator* of a Weil datum `ψ : Lh^* M ⟶ M` on `H⁰(Y, M) = Hom(Λ_Y, M)`,
 ```
@@ -379,7 +379,7 @@ lemma isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv [QuasiCompact a]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hEx, h', Iso.hom_inv_id_app_assoc]
 
-/-- Blueprint `lem-fix-weil-operations` (the cup product part).
+/-- Blueprint `prose-10-20` (the cup product part).
 
 **The mixed-support cup product is a Weil pairing**: for Weil data `φ` on `K` and `ψ` on `M`,
 `⌣_c : Ra_! K ⊗ᴸ Ra_* M ⟶ Ra_!(K ⊗ᴸ M)` is a morphism of Weil objects for the induced data

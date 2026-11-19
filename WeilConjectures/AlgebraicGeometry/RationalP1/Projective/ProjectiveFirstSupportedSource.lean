@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveOrdinar
 import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.RightDerivedSingleCounit
 
 /-! # First-projection supported source normalization
-
-Source: current blueprint, rational projective-line triangle, First identity.
 -/
 
 @[expose] public noncomputable section
@@ -143,28 +141,19 @@ private theorem exact_single_unit_iso
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
   rw [← Category.assoc, hu, Iso.inv_hom_id_app]
 
-set_option maxHeartbeats 500000 in
+/-- Cancel a split augmentation after applying a functor. -/
+private theorem cancel_mapped_single_unit
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B : C} {P Q : D} (a : P ⟶ Q) (b : Q ⟶ F.obj A)
+    (u : A ⟶ B) (v : B ⟶ A) (c : P ⟶ F.obj B)
+    (h : a ≫ b ≫ F.map u = c) (hu : u ≫ v = 𝟙 A) :
+    a ≫ b = c ≫ F.map v := by
+  rw [← h, Category.assoc, Category.assoc, ← F.map_comp, hu, F.map_id,
+    Category.comp_id]
+
 -- Cancel the exact-single augmentation with fixed native functor instances.
 /-- The normalized supported source agrees with the first-projection section arrow.
 There is no variable tensor factor, kernel class, functional or outer direct image.
-
-Source: current rational projective-line triangle proof, First identity, identification
-Rp1* Delta* = id and the normalized coefficient source
-(blueprint: lem-sfb-projective-first-supported-source).
-
-Proof: expand NormalizedSource.hom as the single functor applied to support1.iso.hom
-followed by diagonalTraceRightSingle. The full-unit equation d.p1_unit identifies
-this latter arrow, after transport by d.p1_canonical, with the canonical right-derived
-unit on the single complex of the supported regular module. The ordinary normalization
-of support1.iso identifies its inverse with the composite lowerStarComp, the equality
-Delta p1 = id and lowerStarId; faithfulness of the underlying sheaf functor gives this
-identity for module morphisms. Derive the ordinary composite adjunction. The unit and
-counit normalizations of the derived adjunction identify its section comparison with
-the conjugate of pullSectionIso, namely firstPushSectionIso. Naturality of the derived
-unit and the exact diagonal direct image give the remaining single-degree comparison,
-which is supportedUnitIso. Cancel the single functor images of support1.iso.inv and
-support1.iso.hom. The resulting equality is precisely the displayed untensored arrow.
-The argument uses neither the diagonal class nor any trace or integration equation.
 -/
 theorem first_supported_source
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -193,27 +182,17 @@ theorem first_supported_source
             (Mod.regular (condensedRingObj Λ (ProjectiveLine Y))))
       d.support₁.iso.symm).2 hn.symm
   rw [hn'] at hs
-  have hc := congrArg (fun z ↦ z ≫
-    (moduleObjectDerivedPushforward Λ (firstProjection Y)).map
-      (supportedUnitIso Λ Y).hom) hs
   have hi := exact_single_unit_iso
     (CondensedRing.lowerStar Λ (diagonalImmersion Y))
     (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))
+  have hc := cancel_mapped_single_unit
+    (CondensedRing.lowerStar Λ (firstProjection Y)).rightDerivedFunctor
+    _ _ _ _ _ hs hi
   dsimp only [DiagonalTrace.NormalizedSource.hom]
   change (_ ≫ diagonalTraceRightSingle
     (CondensedRing.lowerStar Λ (firstProjection Y)) d.R₁ (source Λ Y)) ≫ _ = _
   rw [Category.assoc, canonical_diagram_single]
-  dsimp only [supportedUnitIso, moduleObjectDerivedPushforward, unit] at hc
-  simp only [Category.assoc, ← Functor.map_comp] at hc
-  have hi' :
-      (CondensedRing.lowerStar Λ (diagonalImmersion Y)).singleRightDerivedUnit.app
-          (Mod.regular (condensedRingObj Λ (ProjectiveLine Y))) ≫
-        ((CondensedRing.lowerStar Λ
-          (diagonalImmersion Y)).singleFunctorCompRightDerivedFunctorIso.app
-          (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))).hom = 𝟙 _ := hi
-  rw [hi'] at hc
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
   simpa only [derivedAdj, firstPushSectionIso, supportedUnitIso,
-    moduleObjectDerivedPushforward, unit, source, id, Functor.id_obj] using hc
+    moduleObjectDerivedPushforward, unit, source, id, Functor.id_obj, Iso.app_hom] using hc
 
 end AlgebraicGeometry.ProEtale.RationalP1

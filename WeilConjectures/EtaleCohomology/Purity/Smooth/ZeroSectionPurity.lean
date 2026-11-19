@@ -266,8 +266,8 @@ theorem isIso_supportedClassMap_lineInfinity (S : Scheme.{u}) [HasInvertibleExpo
     IsIso (supportedClassMap Λ (ProjectiveSpace.lineInfinityι S)
       (chartBoundarySupportedClass Λ (ProjectiveSpace.lineInfinityOpen S)
         (ProjectiveSpace.coordRatio (Option (ULift.{u} (Fin 1))) S (some ⟨0⟩) none))) := by
-  have hdec := isIso_projectiveLineDecompositionMap Λ S
-  rw [projectiveLineDecompositionMap, Adjunction.homEquiv_unit, projectiveLineHyperplaneClass,
+  have hdec := isIso_projectiveLineDecompositionMapAux Λ S
+  rw [projectiveLineDecompositionMapAux, Adjunction.homEquiv_unit, projectiveLineHyperplaneClassAux,
     chartBoundaryClass_eq] at hdec
   refine isIso_supportedClassMap_of_isIso_biprodDesc Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)
     (ProjectiveSpace.lineInfinityι S) (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S)

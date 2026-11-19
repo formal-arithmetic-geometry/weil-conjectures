@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Topology.PresheafStalkTensor
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Stalk of a tensor product of modules on a ringed space
@@ -113,8 +114,6 @@ private theorem tensorUnitMap_stalk_isIso (F G : SheafOfModules.{u} 𝓡) :
   rw [S.map_comp]
   infer_instance
 
-set_option maxHeartbeats 400000 in
--- Comparing the adjunction tensorator with the localized tensor needs extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensorUnitMap_natural
     {F G F' G' : SheafOfModules.{u} 𝓡} (f : F ⟶ F') (g : G ⟶ G') :
@@ -123,16 +122,9 @@ private theorem tensorUnitMap_natural
   let A := PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡).obj)
   let H := forget 𝓡 ⋙ PresheafOfModules.restrictScalars (𝟙 (𝓡).obj)
   let : H.LaxMonoidal := A.rightAdjointLaxMonoidal
-  have hθ (M N : SheafOfModules.{u} 𝓡) :
-      tensorUnitMap X M N = Functor.LaxMonoidal.μ H M N := by rfl
-  rw [hθ, hθ]
-  have hmap {M N : SheafOfModules.{u} 𝓡} (a : M ⟶ N) :
-      H.map a = (forget 𝓡).map a := by
-    ext U m
-    rfl
   have hn := Functor.LaxMonoidal.μ_natural H f g
-  rw [hmap f, hmap g, hmap (f ⊗ₘ g)] at hn
-  exact hn
+  ext U m
+  exact ConcreteCategory.congr_hom (congrArg (fun k ↦ k.app U) hn) m
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem stalkMap_germ {M N : PresheafOfModules.{u} (𝓡).obj}

@@ -52,7 +52,7 @@ variable {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D
 `a' ⋙ G ≅ H ⋙ b'`, the mate `G a' ⟶ b' H` of the inverse of any invertible base change morphism
 `bc : a H ⟶ G b` is invertible. -/
 lemma isIso_mateEquiv_app_of_isIso_unit [IsIso adj.unit] [IsIso adj'.unit]
-    (τ : a' ⋙ G ≅ H ⋙ b') (U : D) : IsIso ((mateEquiv adj adj' (inv bc)).natTrans.app U) := by
+    (τ : a' ⋙ G ≅ H ⋙ b') (U : D) : IsIso ((mateEquiv adj adj' (inv bc)).app U) := by
   have := isIso_unitBaseChange_of_isIso_unit adj adj' bc (𝟙 (H.obj U)) τ
   simpa [unitBaseChange] using this
 

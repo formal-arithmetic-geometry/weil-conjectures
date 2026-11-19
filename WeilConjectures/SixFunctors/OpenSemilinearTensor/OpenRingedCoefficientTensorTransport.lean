@@ -119,7 +119,6 @@ section
 omit [HasSheafify J AddCommGrpCat.{max c v r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
-set_option maxHeartbeats 800000 in
 -- The four explicit tensor-section maps retain their full sheafification structures.
 private theorem localTensorTransport_pure (M : scalarModules K S)
     (N : scalarModules J R) (V : C)
@@ -188,7 +187,6 @@ private theorem localTensorTransport_pure (M : scalarModules K S)
 
 end
 
-set_option maxHeartbeats 800000 in
 -- The composed two-variable isomorphism and its section equation have large dependent types.
 /-- Transport of the normalized slice tensor formula through a coefficient equivalence.
 Source: Stacks 03DI, 03EK and 0E8I

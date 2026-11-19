@@ -19,8 +19,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 /-!
 # Finiteness of torsion étale cohomological dimension
 
-Source: Stacks Project, Tag 0F10, Lemma 59.96.2; blueprint sec-smooth-purity,
-sk-prop-sf-kunneth-ordinary (blueprint: lem-kun-0f10).
+Source: Stacks Project, Tag 0F10, Lemma 59.96.2; blueprint chap-Smooth-purity,
+proposition-ordinary-external-kunneth--1 (blueprint: theorem-results-from-etale-theory--6).
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ namespace AlgebraicGeometry
 
 /-- A morphism over a field between finite-type schemes has finite torsion étale
 cohomological dimension; over a separably closed field each such scheme has finite dimension.
-Source: Stacks Project, Tag 0F10 (blueprint: lem-kun-0f10).
+Source: Stacks Project, Tag 0F10 (blueprint: theorem-results-from-etale-theory--6).
 
 Proof: Choose a natural uniform bound for the dimensions of all extensions of the
 source's ground field, using a finite affine cover and finite algebra generators.

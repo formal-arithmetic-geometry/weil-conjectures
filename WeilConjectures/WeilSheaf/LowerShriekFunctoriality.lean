@@ -27,7 +27,7 @@ The direct image with compact support `Rf₀! = Rḡ_* ∘ ī_!` of Weil complex
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`) is defined through the compactification
 `X ⟶[i] Z ⟶[g] Y` of `f` chosen by Nagata's theorem. This file records the compatibilities of
 `Rf₀!` collected in the blueprint theorem `prop-functor-package` of the six-functor chapter that
-the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
+the Deligne–Laumon reduction (`chap-The-Deligne-Laumon-theorem-in-general`) uses:
 
 - *independence of the compactification* (clause 2), in the case of the compactification
   `U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`: `Rj₀!` is the extension by zero;
@@ -37,10 +37,10 @@ the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
 - *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square;
 
 as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex
-(`prop-sf-open-closed-triangle-all-stages`), as well as the identification of `Rf₀!` with `Rf₀*`
-for proper `f`. The extension by zero, the open–closed triangle and the composition are deduced
-from the native comparisons of `Sheaf.WeilSheaf`; the base change is deduced from the native
-proper and open base changes (`Sheaf.WeilSheaf.NativeProperNaturalBaseChange`,
+(`proposition-extension-zero-restriction-closed-subscheme--8`), as well as the identification of
+`Rf₀!` with `Rf₀*` for proper `f`. The extension by zero, the open–closed triangle and the
+composition are deduced from the native comparisons of `Sheaf.WeilSheaf`; the base change is deduced
+from the native proper and open base changes (`Sheaf.WeilSheaf.NativeProperNaturalBaseChange`,
 `Sheaf.WeilSheaf.NativeOpenNaturalBaseChange`) and the compactification model comparison.
 
 ## Main statements
@@ -53,7 +53,7 @@ proper and open base changes (`Sheaf.WeilSheaf.NativeProperNaturalBaseChange`,
   `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: clauses 2, 3 and 4 of
   `prop-functor-package`.
 - `AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed`: the open–closed triangle
-  (`prop-sf-open-closed-triangle-all-stages`).
+  (`proposition-extension-zero-restriction-closed-subscheme--8`).
 -/
 
 @[expose] public section
@@ -302,9 +302,10 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
   exact (e.app (WeilSheaf.toComplex.obj G)).symm ≪≫
     ((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategorySingleFunctor 0).app G.obj
 
-/-- **The open–closed triangle** (blueprint: `prop-sf-open-closed-triangle-all-stages`): for a
-quasi-compact open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K`
-on `X`, the open counit and the closed unit extend to a distinguished triangle of Weil complexes
+/-- **The open–closed triangle** (blueprint:
+`proposition-extension-zero-restriction-closed-subscheme--8`): for a quasi-compact open immersion
+`j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K` on `X`, the open counit and
+the closed unit extend to a distinguished triangle of Weil complexes
 `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`.
 
 This is a weakening of the blueprint node: the vertices of the triangle are only identified up
@@ -347,8 +348,8 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
     ((derivedLowerStar i).obj ((upperStar i).obj K)) T hT (e₁ ≪≫ c₁) e₂ (e₃ ≪≫ c₃)
 
 /-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,
-clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `lem-zl-shriek-composition` of
-`sec-deligne-laumon-general`). For composable separated morphisms of finite type
+clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `proposition-composition-base-change-rf-shriek--1` of
+`chap-The-Deligne-Laumon-theorem-in-general`). For composable separated morphisms of finite type
 `X ⟶[f] Y ⟶[g] Z` of `k₀`-schemes, `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`. -/
 theorem nonempty_derivedLowerShriek_comp_iso (f : X ⟶ Y) (g : Y ⟶ Z)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]

@@ -156,7 +156,7 @@ henselization (blueprint: def-weil-pbc-strict-henselization-limit).
 Proof: the affine pointed category is equivalent to the full affine subcategory of
 pointed neighbourhoods, using the affine scheme--ring anti-equivalence. That full
 subcategory is initial by `lemma-weil-pbc-affine-neighbourhood-cofinal`. The ambient
-category is cofiltered by `lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`;
+category is cofiltered by `definition-torsion-sheaves--3`;
 `lem-weil-pbc-colimit-initial-full-subcategory` transfers cofilteredness to the affine
 subcategory and then to the small representative model.
 The opposite of the ring colimit cocone is a limit cone. The spectrum functor is a

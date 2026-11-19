@@ -36,7 +36,7 @@ namespace TateResidue
 variable {k K : Type*} [Field k] [CommRing K] [Algebra k K]
 
 /-- **Tate's local residue** `res_O = res_{K,O} : Ω[K⁄k] → k` attached to a `k`-subalgebra
-`O ⊆ K` (blueprint: `det-thm-picard-duality`). -/
+`O ⊆ K` (blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
 noncomputable def localRes (O : Subalgebra k K) : Ω[K⁄k] →ₗ[k] k :=
   res K (Subalgebra.toSubmodule O)
 
@@ -96,7 +96,8 @@ namespace TateResidue
 variable {k K : Type*} [Field k] [Field K] [Algebra k K]
 
 /-- **(R5) for the local residue**: for `u, t ∈ O` with `t ≠ 0` and `O / t O` finite-dimensional,
-`res_O (u t⁻¹ dt) = Tr_{(O / t O)/k} (u)` (blueprint: `det-thm-picard-duality`). -/
+`res_O (u t⁻¹ dt) = Tr_{(O / t O)/k} (u)` (blueprint:
+`theorem-riemann-roch-coherent-serre-duality--2`). -/
 theorem localRes_mul_inv_smul_D {O : Subalgebra k K}
     (hO : Admissible K (Subalgebra.toSubmodule O)) (u t : O) (ht : (t : K) ≠ 0)
     [Module.Finite k (O ⧸ Ideal.span {t})] :

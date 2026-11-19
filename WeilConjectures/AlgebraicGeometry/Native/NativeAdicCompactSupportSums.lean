@@ -16,10 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 
 /-! # Actual locally finite adic compact supports on constructible localizing hulls
-
-Source: the first two bullets and final paragraph of the blueprint proof
-`sk-prop-int-brown-construction`, in the native locally finite coefficient variant.
-(blueprint: lem-sf-locally-finite-adic-compact-support-sums)
 -/
 
 @[expose] public section
@@ -33,18 +29,13 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The full replete localizing hull of bounded complexes with native constructible cohomology.
-This specializes the existing localizing closure and bounded constructible predicates.
-Source: blueprint `sk-prop-int-brown-construction`, first two bullets and final paragraph.
-(blueprint: lem-sf-locally-finite-adic-compact-support-sums) -/
+This specializes the existing localizing closure and bounded constructible predicates. -/
 abbrev nativeAdicConstructibleLocalizingHull (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     ObjectProperty (_root_.DerivedCategory (AdicSheaf l T)) :=
   (DerivedCategory.boundedAdicConstructible l T).localizingClosure
 
 /-- Actual ambient compact support for a specified compactification: apply the native open
-extension by zero termwise and then take the ordinary total right derived proper direct image.
-Source: blueprint `sk-prop-int-brown-construction`, final paragraph, with the native operations
-of `def-sf-native-weil-derived-framework`.
-(blueprint: lem-sf-locally-finite-adic-compact-support-sums) -/
+extension by zero termwise and then take the ordinary total right derived proper direct image. -/
 noncomputable abbrev nativeAdicCompactSupport (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     _root_.DerivedCategory (AdicSheaf l X) ⥤ _root_.DerivedCategory (AdicSheaf l Y) :=
@@ -111,30 +102,6 @@ private theorem nativeOpen_bounded
 localizing hulls and preserves every small coproduct there. Absolute separatedness of the
 schemes is not assumed. The ambient derived categories are ordinary module derived categories;
 no coproduct assertion is made for the whole ambient categories.
-
-Source: blueprint `sk-prop-int-brown-construction`, first two bullets and final paragraph,
-in the native locally finite coefficient variant.
-(blueprint: lem-sf-locally-finite-adic-compact-support-sums)
-
-Proof:
-1. Package the given finite field and its algebraic closure as FiniteFieldDatum.
-Apply the existing coefficient construction and compact-support realization. Its
-preserves field gives bounded constructible preservation for the actual functor.
-The same argument for an open compactification, whose proper map is the identity,
-gives bounded constructible preservation by native open extension alone.
-2. Exact native open extension preserves derived coproducts. Minimality extends
-its generator preservation to the localizing hull. Its lift to the source and
-middle hulls preserves coproducts because the middle inclusion reflects colimits.
-3. The middle scheme and Y are Noetherian. Apply the native proper-factor result
-lem-sf-native-adic-proper-coproducts, proved via the fixed encoding and the existing
-condensed proper-image coproduct theorem. Composing with the lifted open extension
-shows that the actual compact-support composite preserves coproducts on the source
-hull. This makes no assertion on arbitrary ambient objects.
-4. The composite is triangulated. The intersection of the source hull with the
-inverse image of the target hull is localizing and contains the generators by
-step 1. Thus it contains the source hull. Restrict along this assertion; the
-restriction is triangulated, and reflection through the target inclusion gives
-its coproduct preservation for every Type (u+1), including the empty family.
 -/
 theorem nativeAdicCompactSupport_localizing_preservesCoproducts
     (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]

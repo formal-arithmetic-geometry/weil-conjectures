@@ -101,7 +101,7 @@ lemma derivedTensorRightUnitor_eq (K : _root_.DerivedCategory (Sheaf X.smallEtal
 
 /-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
 an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived
-tensor product is symmetric monoidal (blueprint `det-def-sf-operations`, remark
+tensor product is symmetric monoidal (blueprint `theorem-f-shriek-ell-adic-coefficients--4`, remark
 `rem-sf-summary`); this is the existence of its symmetry.
 
 It is the braiding of `D(X_ét)` given by `DerivedCategory.nonempty_braidedCategory`. -/
@@ -115,7 +115,7 @@ theorem nonempty_iso_derivedTensor_flip :
 
 variable {A X}
 
-/-- Blueprint `def-pod-perfect-derived-pairing`: Perfect derived pairing.
+/-- Blueprint `definition-perfect-pairing--1`: Perfect derived pairing.
 
 A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
 `D ⟶ RHom(C, Λ_X)` is an isomorphism.

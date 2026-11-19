@@ -67,8 +67,8 @@ private theorem inverse_mate_transport
     (x : TwoSquare U H G V) (e : G ≅ G') (f : H ≅ H') :
     ((mateEquiv a b).symm
       (TwoSquare.mk U H' G' V
-        (Functor.whiskerLeft U e.inv ≫ x.natTrans ≫ Functor.whiskerRight f.hom V))).natTrans =
-      Functor.whiskerRight e.inv M ≫ ((mateEquiv a b).symm x).natTrans ≫
+        (Functor.whiskerLeft U e.inv ≫ x ≫ Functor.whiskerRight f.hom V))) =
+      Functor.whiskerRight e.inv M ≫ ((mateEquiv a b).symm x) ≫
         Functor.whiskerLeft L f.hom := by
   ext z
   simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerRight_app,
@@ -101,7 +101,7 @@ private theorem inverse_mate_cube
     (c : TwoSquare U H' H V) (q : TwoSquare V s' s v)
     (b : r ⋙ K ≅ H ⋙ s) (b' : r' ⋙ K' ≅ H' ⋙ s')
     (h : t ≫ᵥ k = TwoSquare.mk U (r' ⋙ K') (r ⋙ K) v
-      (Functor.whiskerLeft U b.hom ≫ (c ≫ᵥ q).natTrans ≫
+      (Functor.whiskerLeft U b.hom ≫ (c ≫ᵥ q) ≫
         Functor.whiskerRight b'.inv v)) (x : A) :
     m.map (b.hom.app x) ≫
         ((mateEquiv am ad).symm q).app (H.obj x) ≫
@@ -112,11 +112,11 @@ private theorem inverse_mate_cube
   have hq := inverse_mate_paste a am ad c q
   rw [h] at ht
   have hn := inverse_mate_transport a ad (c ≫ᵥ q) b.symm b'.symm
-  have hp := congrArg (fun w ↦ w.natTrans.app x) ht
+  have hp := congrArg (fun w ↦ w.app x) ht
   dsimp only [Iso.symm_hom, Iso.symm_inv] at hn
   rw [NatTrans.congr_app hn] at hp
   rw [hq] at hp
-  simp only [TwoSquare.hComp, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Iso.symm_hom, Iso.symm_inv, Category.comp_id,
     Category.id_comp, Category.assoc] at hp
@@ -208,6 +208,7 @@ private theorem normalMate_eq_conjugate (q : R →+* S) :
     (sheafCompose J (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q)) (𝟙 _)
   have hγ : (mateEquiv adjK adjJ).symm γ = TwoSquare.mk _ _ _ _ (𝟙 _) := by
     ext X : 2
+    apply Sheaf.hom_ext
     simp only [Functor.comp_obj, mateEquiv_symm_apply, NatTrans.comp_app, Functor.id_obj,
       Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map,
       Functor.associator_inv_app, Functor.associator_hom_app, CategoryTheory.Functor.map_id,
@@ -474,22 +475,22 @@ private theorem exact_scalar_mate_etale (q : R →+* S) {X Y : Scheme.{u}} (f : 
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology q))).symm
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso
-          (upperStarRestrictScalarsIsoSheaf q f)).hom)).natTrans := by
+          (upperStarRestrictScalarsIsoSheaf q f)).hom)) := by
   let a := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology q)
   let b := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology q)
   let x := TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso q f).hom
   let e := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} R) f
   let e' := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} S) f
-  have hx : IsIso ((mateEquiv a b).symm x).natTrans := (ProEtale.scalarPullbackReverse_isIso q f).2
+  have hx : IsIso ((mateEquiv a b).symm x) := (ProEtale.scalarPullbackReverse_isIso q f).2
   have h := inverse_mate_transport a b x e e'
   have ht : IsIso (Functor.whiskerRight e.inv _ ≫
-      ((mateEquiv a b).symm x).natTrans ≫ Functor.whiskerLeft _ e'.hom) := inferInstance
+      ((mateEquiv a b).symm x) ≫ Functor.whiskerLeft _ e'.hom) := inferInstance
   rw [← h] at ht
   have heq : TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf q f)).hom =
       TwoSquare.mk _ _ _ _
         (Functor.whiskerLeft (Sheaf.derivedRestrictScalars Y.smallEtaleTopology q)
-          e.inv ≫ x.natTrans ≫
+          e.inv ≫ x ≫
           Functor.whiskerRight e'.hom
             (Sheaf.derivedRestrictScalars X.smallEtaleTopology q)) := by
     ext M

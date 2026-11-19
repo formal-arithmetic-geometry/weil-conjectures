@@ -139,20 +139,19 @@ supplied for the sheaf categories by the instances of the folder
 compatibility with colimits provided by its `Monoidal` subfolder, and its preadditivity
 by `CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
-As in the étale case one of those instances is still `sorry`ed, so everything below
-depends on it: `AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf` (functorial
-flat resolutions of pro-étale sheaves), discussed in the module docstring of the file that
-states it. The tensor-colimit input is no longer among them: it is now proved, by Day's
-reflection theorem, in
-`AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`.
+As in the étale case, the functorial flat resolutions of pro-étale sheaves are
+`AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf`
+(`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`), and the
+tensor-colimit input is `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`
+(Day's reflection theorem).
 
 The additivity and exactness of `g^*` are `ProEtale.additive_upperStar`,
 `ProEtale.preservesFiniteLimits_upperStar` and `ProEtale.preservesHomology_upperStar` of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs`; the left exactness
-there rests on the sorried `HasSheafify` instance for the small pro-étale site of `Z` and on left
+there rests on the `HasSheafify` instance for the small pro-étale site of `Z` and on left
 exactness of the left Kan extension along the opposite of base change, both global
 instances of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian` (for a weakly
-étale `g` the latter is proved, not sorried). Since `g^*` is exact, it preserves in
+étale `g` the latter is proved directly). Since `g^*` is exact, it preserves in
 particular all K-flat quasi-isomorphisms, which is the input needed by the
 derivability-structure machinery.
 -/
@@ -334,8 +333,8 @@ variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-derived-direct-image`: Derived direct image; and blueprint
-`def-weil-derived-pullback-tensor-hom`, the derived pullback. The derived direct image
+/-- Blueprint `prose-03-02`: Derived direct image; and blueprint
+`prose-03-02`, the derived pullback. The derived direct image
 `Rg_* = R((g)_*[A])` (the generic total right derived functor, computed by K-injective
 resolutions) and the derived pullback `Lg^* = L((g)^*[A])` (computed by K-flat resolutions,
 isomorphic to `D((g)^*[A])` by `leftDerivedUpperStarIsoMapDerivedCategory`) have no
@@ -369,8 +368,8 @@ noncomputable def leftDerivedUpperStarSquareIso (sq : CommSq g' f' f g) :
   (leftDerivedUpperStarComp A f' g).symm ≪≫ leftDerivedUpperStarCongr A sq.w.symm ≪≫
     leftDerivedUpperStarComp A g' f
 
-/-- Blueprint `def-exchange-projection`: Exchange and projection transformations, the
-direct-image exchange `Ex_*`.
+/-- Blueprint `definition-pro-etale-base-change-map--1`: Exchange and projection transformations,
+the direct-image exchange `Ex_*`.
 
 The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes,

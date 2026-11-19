@@ -251,14 +251,24 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 
 /-! # Condensed-point pullback and unbounded derived internal Hom
 
-Source: Hemo--Richarz--Scholbach, Proposition 4.3(1), equation (4.1), and
-its globalization over the w-contractible affine basis
-(blueprint: lem-sfb-point-pullback-derived-hom).
-
 ## Main definitions and statements
 
 - `comparison`: the canonical evaluation-adjoint map.
 - `point_pullback_derived_hom`: invertibility, both naturalities and restriction equality.
+
+## References
+
+* Hemo--Richarz--Scholbach, Proposition 4.3(1), equation (4.1), and its globalization over the
+  w-contractible affine basis
+* Stacks Project, Tag 07A4, and Hemo--Richarz--Scholbach, (4.1)
+* HRS Section 3
+* HRS (4.1)
+* Stacks 03EL, 07A4
+* Stacks 07A4, 0G7D
+* HRS (4.1), Stacks 08J9
+* HRS Proposition 4.3(1), (4.1)
+* HRS (4.1), and the recorded profinite-point composition comparisons
+* HRS (4.1), termwise localization
 -/
 
 @[expose] public noncomputable section
@@ -275,17 +285,13 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.PointDerivedHom
 
-/-- Select data only from a unique, fully specified object.
-Source: the canonical comparison specifications of Stacks 07A4 and HRS (4.1)
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Select data only from a unique, fully specified object. -/
 def uniqueChoice {A : Sort a} {P : A → Prop} (h : ∃! x : A, P x) : A :=
   Classical.choose h.exists
 
 /-- The canonical tensor comparison for the termwise functor of an exact inverse image.
 The existing K-flat derived tensorator is transported through the canonical identification
-of total left derivation with the exact termwise functor.
-Source: Stacks 07A4 and 0G7D; HRS Section 3
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
+of total left derivation with the exact termwise functor. -/
 def exactTensor {C : Type c} [Category.{v + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{v + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
@@ -302,92 +308,68 @@ def exactTensor {C : Type c} [Category.{v + 1} C] [Abelian C]
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The existing module-object inverse image from the condensed point.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The existing module-object inverse image from the condensed point. -/
 abbrev pull (X : Scheme.{u}) := (upperStarFromPoint X).mapMod Λ
 
-/-- Left exactness is the recorded geometric inverse-image exactness.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Left exactness is the recorded geometric inverse-image exactness. -/
 instance pointLimits (X : Scheme.{u}) : PreservesFiniteLimits (upperStarFromPoint X) := by
   have : PreservesFiniteLimits pointUpperStar.{u} :=
     profinite_point_pullback.2.2.2.2.2.2.2.2.1
   unfold upperStarFromPoint
   infer_instance
 
-/-- Colimits are preserved by the recorded point adjunction.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Colimits are preserved by the recorded point adjunction. -/
 instance pointColimits (X : Scheme.{u}) :
     PreservesColimitsOfSize.{u + 1, u + 1} (upperStarFromPoint X) :=
   (pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).leftAdjoint_preservesColimits
 
-/-- The symmetric point inverse image with its existing tensorator.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The symmetric point inverse image with its existing tensorator. -/
 instance pointBraided (X : Scheme.{u}) : (upperStarFromPoint X).Braided where
   toMonoidal := inferInstance
   braided := Functor.LaxBraided.braided
 
-/-- Limits of module objects are computed on underlying sheaves.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Limits of module objects are computed on underlying sheaves. -/
 instance pullLimits (X : Scheme.{u}) : PreservesFiniteLimits (pull Λ X) :=
   inferInstanceAs (PreservesFiniteLimits ((upperStarFromPoint X).mapMod Λ))
 
-/-- Finite colimits of module objects are computed on underlying sheaves.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Finite colimits of module objects are computed on underlying sheaves. -/
 instance pullColimits (X : Scheme.{u}) : PreservesFiniteColimits (pull Λ X) :=
   inferInstanceAs (PreservesFiniteColimits ((upperStarFromPoint X).mapMod Λ))
 
-/-- Additivity of the existing exact inverse image.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Additivity of the existing exact inverse image. -/
 instance pullAdditive (X : Scheme.{u}) : (pull Λ X).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The ordinary balanced module tensorator of the point inverse image.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The ordinary balanced module tensorator of the point inverse image. -/
 instance pullMonoidal (X : Scheme.{u}) : (pull Λ X).Monoidal :=
   Functor.monoidal_mapMod (upperStarFromPoint X)
 
-/-- The ordinary uncompleted unbounded termwise derived inverse image.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The ordinary uncompleted unbounded termwise derived inverse image. -/
 abbrev derivedPull (X : Scheme.{u}) := (pull Λ X).mapDerivedCategory
 
-/-- The point adjunction lifted to modules supplies a genuine right adjoint.
-Source: HRS Section 3 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The point adjunction lifted to modules supplies a genuine right adjoint. -/
 instance pullLeftAdjoint (X : Scheme.{u}) : (pull Λ X).IsLeftAdjoint :=
   ((pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).mapModAdjunction Λ).isLeftAdjoint
 
-/-- Pullback from the condensed point preserves flat internal coefficient modules.
-Source: Stacks 03EL, 07A4; HRS Section 3
-(blueprint: lem-sfb-point-pullback-derived-hom).
-
-Proof: use the internal-module/section-ring equivalence and the corresponding geometric
-inverse image. A flat module is a filtered colimit of finite free modules locally on
-the ringed site. Inverse image preserves these colimits and sends a finite free module
-to the finite free module over the pulled-back ring. The resulting local filtered
-colimit is flat. Equivalently the exact inverse image preserves the tensor tests for
-flatness on local generators. The underlying coefficient and action maps are the
-recorded mapMod construction, so transport back gives the asserted property. -/
+/-- Pullback from the condensed point preserves flat internal coefficient modules. -/
 @[instance] theorem pullFlat (X : Scheme.{u}) : (pull Λ X).PreservesFlat :=
   preservesFlat_mapMod_upperStarFromPoint Λ X
 
 /-- The canonical K-flat derived tensor comparison transported to termwise pullback.
-Its maps come from the existing normalized left-derived tensor comparison.
-Source: HRS (4.1); Stacks 07A4, 0G7D
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
+Its maps come from the existing normalized left-derived tensor comparison. -/
 def tensorComparison (X : Scheme.{u}) :
     ExactDerivedTensorComparisonFamily (pull Λ X) := exactTensor (pull Λ X)
 
-/-- The type of comparisons of two internal Homs, with both inputs arbitrary.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The type of comparisons of two internal Homs, with both inputs arbitrary. -/
 def HomComparisonFamily {C : Type c} [Category.{v} C] [MonoidalCategory C]
     [MonoidalClosed C] {D : Type d} [Category.{z} D] [MonoidalCategory D]
     [MonoidalClosed D] (F : C ⥤ D) :=
   ∀ K L : C, F.obj ((ihom K).obj L) ⟶ (ihom (F.obj K)).obj (F.obj L)
 
 /-- Evaluation-adjoint comparison for specified tensor comparison maps. This is an
-actual transpose, and does not assume that it is invertible.
-Source: Stacks 08J9 (blueprint: lem-sfb-point-pullback-derived-hom). -/
+actual transpose, and does not assume that it is invertible. -/
 def evaluationComparison {C : Type c} [Category.{v} C] [MonoidalCategory C]
     [MonoidalClosed C]
     {D : Type d} [Category.{z} D] [MonoidalCategory D]
@@ -396,9 +378,7 @@ def evaluationComparison {C : Type c} [Category.{v} C] [MonoidalCategory C]
     HomComparisonFamily F := fun K L ↦
   MonoidalClosed.curry ((t K ((ihom K).obj L)).inv ≫ F.map ((ihom.ev K).app L))
 
-/-- Transpose the exact derived tensor map using the existing native derived closedness.
-Source: HRS (4.1), Stacks 08J9
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Transpose the exact derived tensor map using the existing native derived closedness. -/
 def exactEvaluation {C : Type c} [Category.{v + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{v + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
@@ -410,29 +390,22 @@ def exactEvaluation {C : Type c} [Category.{v + 1} C] [Abelian C]
   evaluationComparison F.mapDerivedCategory t
 
 /-- The comparison beta, defined before any invertibility assertion. Its right-tensor
-transpose is the inverse tensor comparison followed by pullback of evaluation.
-The native left-tensor adjunction writes K first; symmetry writes the same map with
-the Hom factor first as in the source, using the native Koszul braidings.
-Source: HRS Proposition 4.3(1), (4.1); Stacks 08J9
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
+transpose is the inverse tensor comparison followed by pullback of evaluation. -/
 def comparison (X : Scheme.{u}) : HomComparisonFamily (derivedPull Λ X) :=
   exactEvaluation (pull Λ X) (tensorComparison Λ X)
 
-/-- Ordinary point-composition comparison families, with the actual coefficient transport.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Ordinary point-composition comparison families, with the actual coefficient transport. -/
 def PointCompositionFamily {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   pull Λ Y ⋙ CondensedRing.supportPullback Λ f ≅ pull Λ X
 
-/-- Underlying-sheaf normalization of the ordinary point-composition map.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Underlying-sheaf normalization of the ordinary point-composition map. -/
 def PointCompositionNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (e : PointCompositionFamily Λ f) : Prop :=
   ∀ M : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ,
     (e.hom.app M).hom = (upperStarFromPointComp f).hom.app M.X
 
 /-- The point-composition comparison on module objects: the module version of
-`upperStarFromPointComp f`, followed by restricting scalars back along `α_f⁻¹ ≫ α_f = 𝟙`.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+`upperStarFromPointComp f`, followed by restricting scalars back along `α_f⁻¹ ≫ α_f = 𝟙`. -/
 private def restrictionComparisonAux {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PointCompositionFamily Λ f :=
   (Functor.associator _ _ _).symm ≪≫
@@ -463,24 +436,14 @@ private lemma restrictionComparisonAux_normalization {X Y : Scheme.{u}} (f : X �
 -- the commutativity of `Λ` is part of the fixed statement but not needed by the proof
 set_option linter.unusedSectionVars false in
 /-- The ordinary point-composition comparison, including coefficient transport,
-is uniquely determined by its underlying abelian-sheaf map.
-Source: HRS (4.1), and the recorded profinite-point composition comparisons
-(blueprint: lem-sfb-point-pullback-derived-hom).
-
-Proof: lift the monoidal comparison upperStarFromPointComp f to module objects.
-Transport the coefficient action along the inverse of its component at Lambda, exactly
-as in supportPullback. Monoidality proves linearity of every component, and naturality
-on sheaves proves naturality on modules. The inverse sheaf map gives the inverse module
-map. The forgetful functor is faithful, so the stated underlying maps determine the
-natural isomorphism uniquely. -/
+is uniquely determined by its underlying abelian-sheaf map. -/
 theorem restrictionComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : PointCompositionFamily Λ f, PointCompositionNormalization Λ f e := by
   refine ⟨restrictionComparisonAux Λ f, restrictionComparisonAux_normalization Λ f,
     fun e' he' ↦ Iso.ext (NatTrans.ext (funext fun M ↦ Mod.hom_ext _ _ ?_))⟩
   exact (he' M).trans (restrictionComparisonAux_normalization Λ f M).symm
 
-/-- Type of canonical composition identifications after exact localization.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Type of canonical composition identifications after exact localization. -/
 def DerivedCompositionFamily {C : Type c} [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{v} C]
     {D : Type d} [Category.{z} D] [Abelian D] [HasDerivedCategory.{z} D]
@@ -492,9 +455,7 @@ def DerivedCompositionFamily {C : Type c} [Category.{v} C] [Abelian C]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] :=
   F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory
 
-/-- Localize an ordinary composition isomorphism of exact functors.
-Source: HRS (4.1), termwise localization
-(blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Localize an ordinary composition isomorphism of exact functors. -/
 def localizeComposition {C : Type c} [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{v} C]
     {D : Type d} [Category.{z} D] [Abelian D] [HasDerivedCategory.{z} D]
@@ -507,13 +468,11 @@ def localizeComposition {C : Type c} [Category.{v} C] [Abelian C]
     DerivedCompositionFamily F G H :=
   Functor.mapDerivedCategoryCompIso F G ≪≫ Functor.mapDerivedCategoryNatIso h
 
-/-- The ordinary comparison uses the actual point-composition map on underlying sheaves.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- The ordinary comparison uses the actual point-composition map on underlying sheaves. -/
 def restrictionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) : PointCompositionFamily Λ f :=
   uniqueChoice (restrictionComparison_existsUnique Λ f)
 
-/-- Termwise localization of the coefficient-normalized point-composition comparison.
-Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
+/-- Termwise localization of the coefficient-normalized point-composition comparison. -/
 def derivedRestrictionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCompositionFamily (pull Λ Y) (CondensedRing.supportPullback Λ f) (pull Λ X) :=
   localizeComposition (pull Λ Y) (CondensedRing.supportPullback Λ f) (pull Λ X)

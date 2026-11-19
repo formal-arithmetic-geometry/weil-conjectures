@@ -86,7 +86,7 @@ theorem isIso_mateEquiv_symm_app_of_homBasis
     (hY : ∀ N Z : CY, Bijective (fun g : Fin d → (N ⟶ Z) ↦ ∑ i, b i • TY.map (g i)))
     (hX : ∀ N Z : CX, Bijective (fun g : Fin d → (N ⟶ Z) ↦ ∑ i, b i • TX.map (g i)))
     (N : CY) :
-    IsIso (((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ β)).natTrans.app (TY.obj N)) := by
+    IsIso (((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ β)).app (TY.obj N)) := by
   classical
   let P := UY.obj (TY.obj N)
   obtain ⟨s, hs⟩ := (hY N P).2 (bY.unit.app (TY.obj N))
@@ -113,7 +113,7 @@ theorem isIso_mateEquiv_symm_app_of_homBasis
   funext φ
   symm
   have key : GF.map (bY.unit.app (TY.obj N)) ≫ β.app P = bX.unit.app (GF.obj (TY.obj N)) ≫
-      TX.map (((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ β)).natTrans.app (TY.obj N)) :=
+      TX.map (((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ β)).app (TY.obj N)) :=
     unit_mateEquiv_symm bY bX (TwoSquare.mk _ _ _ _ β) (TY.obj N)
   simp only [Function.comp_apply, e, Adjunction.homEquiv_unit, Functor.map_comp]
   rw [← Category.assoc (bX.unit.app _), ← key, ← hs, GF.map_sum]

@@ -32,8 +32,9 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Flatness under sectionwise reindexing
 
-Source: Stacks Project, Tags 08FC and 05VD; the flatness part of
-`lem-pod-sectionwise-flat-kflat`.
+## References
+
+* Stacks Project, Tags 08FC and 05VD
 -/
 
 @[expose] public section
@@ -57,20 +58,7 @@ private theorem postcompose_cocontinuous
   exact (E.toAdjunction.isCocontinuous_iff_coverPreserving _ _).2 e.2.2.2.2.some
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-flat module sheaves.
-
-Source: Stacks Project, Tags 08FC and 05VD and the flatness clause of
-`lem-pod-sectionwise-flat-kflat` (blueprint: lem-pod-sectionwise-flat-kflat-flat).
-
-Proof: postcomposition by the scheme isomorphism is a site equivalence whose
-inverse preserves coverings, so pulling back a covering sieve gives a covering.
-For a finite relation in the image module, send its coefficients through c inverse
-and apply the local equational criterion to the resulting relation in the original
-flat module. Pull back its covering sieve and send the factorization coefficients
-through c. The inverse identities prove the section factorization equations, and
-naturality, additivity and multiplicativity of c prove the zero coefficient sums.
-The converse local equational criterion proves flatness. Empty relations are
-included. -/
+flat module sheaves. -/
 theorem isoSectionwiseModuleInverseImage_preservesFlat
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

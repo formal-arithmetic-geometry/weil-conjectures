@@ -9,6 +9,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackComparisonDerived
 public import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismCoefficientInclusions
 import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismPullbackScalarIntegralShift
+import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRational
 
 /-! # A step of coherent isomorphism pullback -/
 
@@ -95,8 +96,6 @@ private theorem localization_shift_obj (l : ℕ) [Fact l.Prime]
     J⟦(1 : ℤ)⟧ = (sfRationalConstructibleLocalization l E W).obj (J.obj⟦(1 : ℤ)⟧) :=
   Functor.congr_obj (sfRationalTriangulationDatum l E W).choose_spec.choose_spec.1 J
 
-set_option maxHeartbeats 800000 in
--- The four normalized localization squares require explicit heterogeneous transports.
 /-- The specified scalar comparison preserves the normalized integral and rational shifts.
 Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
 prop-constructible-truncations.proof.md, final automorphism sentence;
@@ -201,121 +200,16 @@ theorem isomorphismPullbackScalarShift
   change NatTrans.CommShift
     (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g).hom ℤ
-  apply commShift_of_one
-  constructor
-  ext K
-  let A := constructibleIntegralPullback l (Coefficient.{u} l Ω E) g
-  let B := constructibleIntegralPullback l (Coefficient.{u} l Ω L) g
-  let Ar := rationalDerivedPullback l (Coefficient.{u} l Ω E) g
-  let Br := rationalDerivedPullback l (Coefficient.{u} l Ω L) g
-  let S (W : Scheme.{u}) :=
-    GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω W E L h
-  let T (W : Scheme.{u}) := sfRationalScalarExtension l (Coefficient.{u} l Ω E) W 0
-    (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
-    (coefficientInclusion l Ω E L h)
-  let Q (W : Scheme.{u}) := sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) W
-  let QL (W : Scheme.{u}) := sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) W
-  let β := rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
-    (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g
-  have oA (J : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y) :
-      Ar.obj J = (Q X).obj (A.obj J.obj) := by
-    simpa only [Ar, A, Q, rationalDerivedPullback, sfRationalConstructibleLocalization,
-      ScalarLocalization.localization] using
-      (rationalDerivedPullback_existsUnique l (Coefficient.{u} l Ω E) g).exists.choose_spec.2.1 J
-  have oB (J : sfRationalConstructibleCategory l (Coefficient.{u} l Ω L) Y) :
-      Br.obj J = (QL X).obj (B.obj J.obj) := by
-    simpa only [Br, B, QL, rationalDerivedPullback, sfRationalConstructibleLocalization,
-      ScalarLocalization.localization] using
-      (rationalDerivedPullback_existsUnique l (Coefficient.{u} l Ω L) g).exists.choose_spec.2.1 J
-  have oT (W : Scheme.{u}) (J : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) W) :
-      (T W).obj J = (QL W).obj ((S W).obj J.obj) := by
-    simpa only [T, S, QL, GeneralAlgebraicallyClosedCoefficients.integralTransition,
-      sfRationalScalarExtension, sfRationalConstructibleLocalization,
-      ScalarLocalization.localization] using
-      (sfRationalScalarExtension_existsUnique l (Coefficient.{u} l Ω E) W 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
-      (coefficientInclusion l Ω E L h)).exists.choose_spec.2.1 J
-  have oF (J : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y) :
-      (Ar ⋙ T X).obj J = (QL X).obj ((A ⋙ S X).obj J.obj) :=
-    (congrArg (T X).obj (oA J)).trans (oT X _)
-  have oG (J : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y) :
-      (T Y ⋙ Br).obj J = (QL X).obj ((S Y ⋙ B).obj J.obj) :=
-    (congrArg Br.obj (oT Y J)).trans (oB _)
-  have mT (W : Scheme.{u}) (J J' : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) W)
-      (f : J ⟶ J') : HEq ((T W).map ((Q W).map f)) ((QL W).map ((S W).map f)) := by
-    have hh := sfRationalScalarExtension_map_tmul l (Coefficient.{u} l Ω E) W 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
-      (coefficientInclusion l Ω E L h) J J' f 1
-    simp only [T, Q, QL, S, GeneralAlgebraicallyClosedCoefficients.integralTransition,
-      sfRationalConstructibleLocalization, ScalarLocalization.localization, map_one] at hh ⊢
-    convert hh using 1
-  have mB (J J' : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω L) Y)
-      (f : J ⟶ J') : HEq (Br.map ((QL Y).map f)) ((QL X).map (B.map f)) := by
-    simp only [Br, B, QL, sfRationalConstructibleLocalization, ScalarLocalization.localization]
-    delta rationalDerivedPullback
-    exact (rationalDerivedPullback_existsUnique l
-      (Coefficient.{u} l Ω L) g).exists.choose_spec.2.2 J J' f 1
-  have cY := localization_shift_obj l (Coefficient.{u} l Ω E) Y
-  have cX := localization_shift_obj l (Coefficient.{u} l Ω E) X
-  have cLY := localization_shift_obj l (Coefficient.{u} l Ω L) Y
-  have cLX := localization_shift_obj l (Coefficient.{u} l Ω L) X
-  have cA := congrArg (fun J ↦ J.obj⟦(1 : ℤ)⟧) (oA K)
-  have cT := congrArg (fun J ↦ J.obj⟦(1 : ℤ)⟧) (oT Y K)
-  have srcA := (congrArg Ar.obj (cY K)).trans (oA _)
-  have tgtA := (cX (Ar.obj K)).trans (congrArg (Q X).obj cA)
-  have srcT := (congrArg (T Y).obj (cY K)).trans (oT Y _)
-  have tgtT := (cLY ((T Y).obj K)).trans (congrArg (QL Y).obj cT)
-  dsimp only [Q, QL, sfRationalConstructibleLocalization, ScalarLocalization.localization,
-    Functor.comp_obj] at srcA tgtA srcT tgtT
-  have hmapA := (map_heq (T X) srcA tgtA (hrE K.obj)).trans
-    (mT X _ _ ((A.commShiftIso (1 : ℤ)).hom.app K.obj))
-  have hmapT := (map_heq Br srcT tgtT
-    ((GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique
-      l Ω Y E L h).exists.choose_spec K)).trans
-    (mB _ _ (((S Y).commShiftIso (1 : ℤ)).hom.app K.obj))
-  have hTX : HEq (((T X).commShiftIso (1 : ℤ)).hom.app (Ar.obj K))
-      ((QL X).map (((S X).commShiftIso (1 : ℤ)).hom.app (A.obj K.obj))) :=
-    (dependent_app_heq (fun J ↦ ((T X).commShiftIso (1 : ℤ)).hom.app J) (oA K)).trans
-      ((GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique
-        l Ω X E L h).exists.choose_spec ((Q X).obj (A.obj K.obj)))
-  have hBR : HEq ((Br.commShiftIso (1 : ℤ)).hom.app ((T Y).obj K))
-      ((QL X).map ((B.commShiftIso (1 : ℤ)).hom.app ((S Y).obj K.obj))) :=
-    (dependent_app_heq (fun J ↦ (Br.commShiftIso (1 : ℤ)).hom.app J) (oT Y K)).trans
-      (hrL ((S Y).obj K.obj))
-  have srcF := (congrArg (Ar ⋙ T X).obj (cY K)).trans (oF _)
-  have srcG := (congrArg (T Y ⋙ Br).obj (cY K)).trans (oG _)
-  have midF := (congrArg (T X).obj tgtA).trans (oT X _)
-  have midG := (congrArg Br.obj tgtT).trans (oB _)
-  have endF := (congrArg (shiftFunctor _ (1 : ℤ)).obj (oF K)).trans (cLX _)
-  have endG := (congrArg (shiftFunctor _ (1 : ℤ)).obj (oG K)).trans (cLX _)
-  dsimp only [Q, QL, sfRationalConstructibleLocalization, ScalarLocalization.localization,
-    Functor.comp_obj] at srcF srcG midF midG endF endG
-  have hF := heq_comp srcF midF endF hmapA hTX
-  have hG := heq_comp srcG midG endG hmapT hBR
-  have hβ (J : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y) :
-      HEq (β.hom.app J) ((QL X).map (α.hom.app J.obj)) := by
-    have hh := (rationalPullbackScalarComparison_existsUnique l (Coefficient.{u} l Ω E)
-      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g).exists.choose_spec J
-    have hα' := congrArg Iso.hom (hα J.obj)
-    dsimp only [β, QL]
-    delta rationalPullbackScalarComparison
-    simpa only [← hα', Iso.app_hom, Functor.comp_obj,
-      GeneralAlgebraicallyClosedCoefficients.integralTransition] using hh
-  have hn : HEq (β.hom.app (K⟦(1 : ℤ)⟧))
-      ((QL X).map (α.hom.app (K.obj⟦(1 : ℤ)⟧))) :=
-    (dependent_app_heq β.hom.app (cY K)).trans (hβ _)
-  have hm : HEq ((β.hom.app K)⟦(1 : ℤ)⟧')
-      ((QL X).map ((α.hom.app K.obj)⟦(1 : ℤ)⟧')) := by
-    exact (map_heq (shiftFunctor _ (1 : ℤ)) (oF K) (oG K) (hβ K)).trans
-      (localization_shift_map l (Coefficient.{u} l Ω L) X (α.hom.app K.obj))
-  have hleft := heq_comp srcF endF endG hF hm
-  have hright := heq_comp srcF srcG endG hn hG
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.commShiftIso_comp_hom_app]
-  have hi := NatTrans.shift_app_comm α.hom (1 : ℤ) K.obj
-  have hq := congrArg (QL X).map hi
-  simp only [Functor.commShiftIso_comp_hom_app, Functor.map_comp] at hq
-  apply eq_of_heq
-  exact hleft.trans ((heq_of_eq hq).trans hright.symm)
+  exact rationalPullbackScalarComparison_commShift
+    (iX := GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω Y E L h)
+    (iY := GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω X E L h)
+    (tX := GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω Y E L h)
+    (tY := GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω X E L h)
+    l Ω g E L h
+    (GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique
+      l Ω Y E L h).exists.choose_spec
+    (GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique
+      l Ω X E L h).exists.choose_spec
+    (fun K ↦ hrE K.obj) (fun K ↦ hrL K.obj) α hα ha
 
 end WeilConjectures

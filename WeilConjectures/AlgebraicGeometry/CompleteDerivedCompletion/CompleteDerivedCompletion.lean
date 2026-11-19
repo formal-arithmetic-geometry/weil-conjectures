@@ -19,7 +19,7 @@ definitions of `CompleteDerivedCompletionDefs`.
 
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
 sk-prop-pbc-complete/det-pbc-complete-derived-completion.md
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +42,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 
 /-- All six assertions about integral module towers and their derived completion.
 Source: blueprint Notation 1--4 and Assertions 1--6
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 
 Proof plan, following the node's fifteen steps:
 1. On the small pro-étale site identify internal modules with sheaves of modules using
@@ -53,28 +53,28 @@ Proof plan, following the node's fifteen steps:
    and levelwise exactness give the exact left adjoint. Apply
    `lem-weil-pbc-right-adjoint-preserves-kinjective` to evaluation.
 3. Both module and tower categories have K-injective resolutions by
-   `lem-sfb-grothendieck-k-injective`. Apply `lem-weil-pbc-kinjective-total-derived`
+   `prose-03-02`. Apply `lem-weil-pbc-kinjective-total-derived`
    to ordinary limit and levelwise pushforward; the derived-limit exactness also follows
    from `lem-weil-pbc-ringed-strict-tower-homotopy-limit`.
 4. Represent a derived tower arrow by a map between K-injective resolutions using
    `lem-weil-pbc-kinjective-hom-derived`. Evaluation commutes with cohomology; an arrow
    whose evaluations are isomorphisms is a quasi-isomorphism levelwise and hence globally.
 5. Whisker the ordinary module adjunction levelwise. Pullback is exact by
-   `det-prop-sfb-module-pullback-exact-main`. Apply
+   `prose-03-02`. Apply
    `lem-weil-pbc-tower-derived-evaluation-normalization` to obtain the canonical mate
    isomorphisms, their transition compatibility and their unit and counit equations.
 6. Ordinary pushforward and limit have exact left adjoints and preserve K-injectives.
    The right adjoint pushforward preserves ordinary limits by
-   `lem-weil-pbc-right-adjoint-preserves-limits`. Derive that ordinary isomorphism;
+   `situation-conventions`. Derive that ordinary isomorphism;
    equivalently conjugate the constant-pullback comparison under the derived adjunctions.
-7. Products are exact by `det-pe-products-exact`. Apply
+7. Products are exact by `proposition-exact-products--1`. Apply
    `lem-weil-pbc-exact-products-roos-comparison` to identify Rlim with the functorial
    Milnor fibre of 1-shift, normalized by the ordinary limit inclusion.
 8. For a constant tower, 1-shift is split surjective, by successive subtraction.
    Its kernel is the diagonal complex and the extra summand is contractible. The
    constant-limit unit is therefore an isomorphism, with the specified diagonal map.
 9. An exact equivalence preserves products and intertwines the shift endomorphism by
-   its projections. By `lem-sf-exact-functor-derived-triangulated`, applying it to the
+   its projections. By `situation-conventions`, applying it to the
    Milnor fibre gives the comparison for the levelwise equivalence. This is the
    isomorphism obtained by conjugating the constant comparison for its inverse.
 10. For bounded finite-free P only finitely many finite sums occur in each total degree.
@@ -82,10 +82,11 @@ Proof plan, following the node's fifteen steps:
    cone compatibility and `lem-weil-pbc-independent-bounded-flat-kflat` for K-flatness.
    This gives the tensor comparison naturally on the entire derived tower category.
 11. The two-term resolutions R_n=[A→A] use π^(n+1) and transitions (π,1).
-   `det-pe-derived-nakayama-resolution` identifies them with finite reductions.
+   `lemma-reduction-derived-nakayama--1` identifies them with finite reductions.
    `lem-pur-kflat-tensor-quasiiso-independent` gives descent of the strict cone tower;
    tensor-cone compatibility gives exactness. Degree-zero inclusions commute with
-   transitions and identify the resulting completion unit with `def-pe-derived-complete`.
+   transitions and identify the resulting completion unit with
+   `definition-derived-adic-completeness--1`.
 12. Choose a K-flat representative by `lem-pc-kflat-resolution`. For fixed m, commute
    tensor with R_m through Rlim by step 10, replace R_m by A_m, and restrict to the
    cofinal tail n≥m using `lem-fix-cofinal-roos-restriction`. The resulting tower splits
@@ -99,7 +100,7 @@ Proof plan, following the node's fifteen steps:
    are the maps of step 13. Apply the conservativity from step 4 to this map itself.
 15. Apply `lem-weil-pbc-ringed-koszul-completion-reflector` with the singleton
    uniformizer. Its tower and unit are those of step 11. Its completion is complete;
-   its unit criterion, identified with `def-pe-derived-complete`, gives the stated
+   its unit criterion, identified with `definition-derived-adic-completeness--1`, gives the stated
    completeness of every output without assuming completeness of the input.
 -/
 theorem completeDerivedCompletion

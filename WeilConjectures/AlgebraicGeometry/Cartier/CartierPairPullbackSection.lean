@@ -15,7 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.PicardCanonicalBaseChange
 /-! # Pullback of the Cartier line bundle with its canonical section
 
 Source: Stacks Project, Tag 0C4U, and the relative Cartier class in the blueprint
-proof of lem-amb-cartier-kummer-map.
+proof of lemma-cycle-class-cartier-divisor.
 -/
 
 @[expose] public noncomputable section
@@ -83,7 +83,7 @@ private theorem iso_conj_map {C : Type u₁} {D : Type u₂}
   rw [← e.inv.naturality_assoc, e.inv_hom_id_app, Category.comp_id]
 
 /-- The dual ideal of a Cartier pair pulls back together with its canonical section.
-Source: Stacks Project, Tag 0C4U; blueprint lem-amb-cartier-kummer-map, the
+Source: Stacks Project, Tag 0C4U; blueprint lemma-cycle-class-cartier-divisor, the
 trivialized line bundle paragraph (blueprint: lem-asd-cartier-pair-pullback-section).
 Proof: the cartesian square identifies the new ideal with the extended ideal.
 The canonical map from the pulled ideal to the extended ideal is invertible:

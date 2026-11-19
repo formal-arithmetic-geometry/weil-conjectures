@@ -45,7 +45,7 @@ Proof:
    quotient is `a_{k!}(b_k^* L)` for the locally closed `a_k : T_k → X`, written as an
    open immersion followed by a closed immersion (all opens are quasi-compact by
    lem-sfb-noetherian-space-compact-subsets).
-4. `E_X` is flat over `O_{E,X}` (det-prop-sfb-qlbar-colimit-x-invert-ell), and the open and
+4. `E_X` is flat over `O_{E,X}` (lemma-comparison-completed-coefficients--2), and the open and
    closed projection formulas (lem-sfb-condensed-support-projection-formula) give
    `E ⊗ a_{k!} L_{0,k} ≅ a_{k!}(E ⊗ L_{0,k}) ≅ a_{k!}(b_k^* L)`: each quotient in degree
    zero is isomorphic to an integral generator.

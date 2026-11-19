@@ -109,7 +109,6 @@ lemma isIso_tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X
   exact IsIso.of_isIso_comp_right _ (R((h)_*[A]).map
     ((leftDerivedUpperStarUnitIso A h).hom ▷ L((e)^*[A]).obj F ≫ (λ_ _).hom))
 
-set_option maxHeartbeats 1000000 in
 -- the pasting computation in the derived category is expensive to elaborate
 /-- **Pasting of base change maps**: for two commutative squares pasted horizontally,
 

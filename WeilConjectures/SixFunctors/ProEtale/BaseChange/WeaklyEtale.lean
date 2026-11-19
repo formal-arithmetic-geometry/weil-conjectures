@@ -123,7 +123,7 @@ lemma ProEtale.isIso_localizationRestrictionBaseChangeMap_of_isPullback
 lemma ProEtale.mateEquiv_localizationRestrictionBaseChangeMap (sq : CommSq g' j' j g'') :
     (mateEquiv (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (ProEtale.localizationRestrictionBaseChangeMap A sq))).natTrans =
+      (TwoSquare.mk _ _ _ _ (ProEtale.localizationRestrictionBaseChangeMap A sq))) =
       (ProEtale.squareLowerStarIso A sq).hom := by
   ext F ⟨b⟩
   simp only [Functor.comp_obj, mateEquiv, ProEtale.localizationRestrictionLowerStarAdjunction,
@@ -161,7 +161,7 @@ variable [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 noncomputable def ProEtale.baseChangeMap (sq : CommSq g' j' j g'') :
     (g'')_*[A] ⋙ (j)^*[A] ⟶ (j')^*[A] ⋙ (g')_*[A] :=
   ((mateEquiv (upperStarLowerStarAdjunction A j') (upperStarLowerStarAdjunction A j)).symm
-    (TwoSquare.mk _ _ _ _ (ProEtale.squareLowerStarIso A sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (ProEtale.squareLowerStarIso A sq).hom))
 
 /-- The base change map agrees with `ProEtale.localizationRestrictionBaseChangeMap`,
 transported along the identifications `j^* ≅ j_{loc}^*` and `j'^* ≅ j'_{loc}^*`. -/
@@ -186,9 +186,7 @@ lemma ProEtale.baseChangeMap_eq (sq : CommSq g' j' j g'') :
             (ProEtale.upperStarIsoLocalizationRestriction A j' inferInstance).inv
               (g')_*[A])) := by
     refine Eq.trans ?_ h.symm
-    ext1
-    exact congrArg (fun α ↦ NatTrans.app α _)
-      (ProEtale.mateEquiv_localizationRestrictionBaseChangeMap A sq).symm
+    exact (ProEtale.mateEquiv_localizationRestrictionBaseChangeMap A sq).symm
   rw [ProEtale.baseChangeMap, h', Equiv.symm_apply_apply]
 
 /-- **Weakly étale base change for the pushforward**: for a cartesian square the base change

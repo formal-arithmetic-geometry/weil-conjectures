@@ -11,6 +11,7 @@ public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Cohomology of an open and closed subscheme

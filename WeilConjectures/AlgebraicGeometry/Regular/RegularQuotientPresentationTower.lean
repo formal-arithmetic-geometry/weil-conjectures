@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Regular.RegularPrincipalQuotientTower
 
 /-! # Transport of regular quotient presentations
 
-Source: Stacks Project, Tag 099M (blueprint: lem-sfb-regular-quotient-presentation-tower).
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public section
@@ -222,19 +224,7 @@ private theorem principal_quotient_tower_nat
     simpa only [hs n] using hT n
   exact regular_principal_quotient_tower J (ℓ : Λ) hr R Y p hz' hT' hp K g
 
-/-- An ordinary quotient presentation is transported to the positive derived quotient tower.
-
-Source: Stacks Project, Tag 099M, lemma-naive-completion
-(blueprint: lem-sfb-regular-quotient-presentation-tower).
-
-Proof: the cokernel universal properties and degreewise monicity give short exact
-sequences of complexes. An additive equivalence preserves these sequences and
-natural-number multiples. Apply the regular principal quotient comparison to the
-mapped complex and mapped quotient tower. The presentation transition equation gives
-the required compatibility of the projections. Finally use the canonical comparison
-between the induced derived functor and the functor on complexes, and invert the
-coefficient comparison. Its augmentation identity and naturality of the canonical
-comparison give the asserted augmentation identity. -/
+/-- An ordinary quotient presentation is transported to the positive derived quotient tower. -/
 theorem regular_quotient_presentation_tower
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{u + 1} A]
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]

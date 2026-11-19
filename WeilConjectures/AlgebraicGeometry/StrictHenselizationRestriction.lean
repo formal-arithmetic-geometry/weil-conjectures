@@ -319,7 +319,7 @@ noncomputable def strictHenselizationCohomologyComparison
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
               (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-            |>.natTrans.app
+            |>.app
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ≫
     (strictHenselizationLerayHomologyIso s f (q : ℤ) _).hom ≫
     (cohomology AddCommGrpCat.{v + 1}

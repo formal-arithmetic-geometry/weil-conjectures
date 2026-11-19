@@ -13,9 +13,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Classical cohomology of comparison inverse image
 
-Source: the Weil conjectures blueprint, main-20261015,
-`sec-proetale-coefficients/sk-cor-pe-classical-derived/`
-(blueprint: lem-pe-classical-derived-image).
+The derived comparison inverse image of a bounded-below étale complex of `Λ`-modules has
+classical cohomology sheaves in every degree.
 -/
 
 @[expose] public section
@@ -52,7 +51,9 @@ private noncomputable def classicalHomologyIso (X : Scheme.{u}) (Λ : Type (u + 
           (HasDerivedCategory.standard B) q).symm ≪≫
         Functor.isoWhiskerRight eQ.symm H ≪≫ Functor.associator _ _ _)
 
-private theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
+/-- Classicality of a module sheaf is invariant under isomorphism: the continuity maps of
+isomorphic sheaves differ by the induced isomorphisms on sections and on the colimits. -/
+theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ]
     {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
     (e : F ≅ G) (hF : IsClassicalModuleFor X Λ F) : IsClassicalModuleFor X Λ G := by
@@ -69,13 +70,12 @@ private theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
   infer_instance
 
 /-- The comparison inverse image has classical bounded-below cohomology.
-Source: the bounded-below image argument in the proof of
-`det-pe-classical-derived-equivalence` (blueprint: lem-pe-classical-derived-image).
-Proof: inverse image commutes with cohomology because it is exact. Each
-underived inverse image is classical by the module equivalence. Classicality
-is invariant under an isomorphism, by naturality of the continuity map.
-Finally compare homology in the small and standard derived models using the
-localization universal property and the equivalence shrinking the Hom types. -/
+Proof: inverse image commutes with cohomology because it is exact
+(`Functor.mapDerivedCategoryPlusHomologyFunctorIso`). Each underived inverse image is
+classical by the module equivalence of `proEtaleClassicalSheaves`. Classicality is invariant
+under an isomorphism (`classicalModule_of_iso`), by naturality of the continuity map.
+Finally compare homology in the small and standard derived models (`classicalHomologyIso`)
+using the localization universal property and the equivalence shrinking the Hom types. -/
 theorem classicalDerivedImage (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (_hunit : ∀ L : DerivedCategory.Plus

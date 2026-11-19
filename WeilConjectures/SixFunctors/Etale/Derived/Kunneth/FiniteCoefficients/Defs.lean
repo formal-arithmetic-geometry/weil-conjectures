@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 /-!
 # Finite-coefficient étale categories and functors for the ordinary Künneth formula
 
-The definitions of the blueprint subsection `sk-prop-sf-kunneth-ordinary` (section
-`sec-smooth-purity`) which only name categories and functors of the étale six-functor formalism
+The definitions of the blueprint subsection `proposition-ordinary-external-kunneth--1` (section
+`chap-Smooth-purity`) which only name categories and functors of the étale six-functor formalism
 at a finite coefficient ring. The blueprint fixes the coefficient ring `𝒪_E/ϖⁿ` (a finite local
 ring), or a finite field `𝔽_{ℓ^r}`; as in the rest of the repository the definitions are stated
 for an arbitrary commutative coefficient ring `Λ : Type (u + 1)`, respectively an arbitrary
@@ -30,10 +30,11 @@ the coefficient category `ModuleCat Λ`, respectively `ModuleCat F`.
 - `AlgebraicGeometry.Etale.constantComplexFunctor` (`pur7710-def-constant-complex`) and
   `AlgebraicGeometry.Etale.constantComplexFunctorFiniteField`
   (`pur7710-def-constant-complex-field`).
-- `AlgebraicGeometry.Etale.exteriorProduct` (`pur7710-def-exterior-product`) and
-  `AlgebraicGeometry.Etale.exteriorProductFiniteField` (`pur7710-def-exterior-product-field`).
+- `AlgebraicGeometry.Etale.exteriorProduct` (`prose-08-18`) and
+  `AlgebraicGeometry.Etale.exteriorProductFiniteField` (`prose-08-18`).
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarModule` (`pur7710-def-unbounded-etale-push`).
-- `AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_iff` (`pur7710-def-torsion-cd`).
+- `AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_iff`
+(`definition-cohomological-dimension--1`).
 -/
 
 @[expose] public section
@@ -50,7 +51,7 @@ open Scheme
 
 namespace Scheme
 
-/-- Blueprint `pur7710-def-torsion-cd`: torsion étale cohomological dimension.
+/-- Blueprint `definition-cohomological-dimension--1`: torsion étale cohomological dimension.
 
 The assertion `cd_tor(W) ≤ d` is the repository's
 `AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE W d`: the étale cohomology
@@ -146,7 +147,7 @@ noncomputable abbrev rightDerivedLowerStarModule {X Y : Scheme.{u}} (f : X ⟶ Y
       DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   R((f)_*[ModuleCat.{u + 1} Λ])
 
-/-- Blueprint `pur7710-def-exterior-product`: the derived exterior product at finite level.
+/-- Blueprint `prose-08-18`: the derived exterior product at finite level.
 
 For schemes `X`, `Y` over a base `S` (in the blueprint `S = Spec k`), with `Z = X ×_S Y` and
 projections `p_X`, `p_Y`, and for `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
@@ -213,7 +214,7 @@ noncomputable abbrev constantComplexFunctorFiniteField (W : Scheme.{u}) :
     DerivedCategory (ModuleCat.{u + 1} F) ⥤ DerivedCategoryFiniteField F W :=
   constantComplexFunctor F W
 
-/-- Blueprint `pur7710-def-exterior-product-field`: the derived exterior product with
+/-- Blueprint `prose-08-18`: the derived exterior product with
 finite-field coefficients.
 
 For `X`, `Y` over `S`, `Z = X ×_S Y`, `K ∈ D(X_ét, F)` and `L ∈ D(Y_ét, F)`,

@@ -51,7 +51,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 attribute [local irreducible] integralOperationsRoos
 
-set_option maxHeartbeats 600000 in
 -- Share the normalized categorical expressions without unfolding coefficient constructions.
 /-- Transport a source signed Roos shift through reindexing and a tower morphism.
 Use comparison naturality and CommShift, RoosNaturality, RoosShift, and signed-shift naturality.

@@ -35,8 +35,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 open MonoidalCategory in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- Comparing the two adjunction units unfolds the tensor-pullback construction.
 private theorem quotient_unit_eq_zero_iff
     {A : Type u} [CommRing A] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of A)) (I : Ideal A)
@@ -52,8 +50,8 @@ private theorem quotient_unit_eq_zero_iff
   let adj₀ := Classical.choice (nonempty_tensorPullbackAdjunction j)
   let adj := Classical.choose (exists_tensorPullbackAdjunction j)
   let μ := j.ker.toModulesι ▷ L ≫ (λ_ L).hom
-  obtain ⟨η', hη', _⟩ := closedImmersion_unit_quotient j
-  obtain ⟨_, ⟨w, ⟨hlim⟩⟩, _, _⟩ := hη' L
+  obtain ⟨w, ⟨hlim⟩⟩ := ((Classical.choose_spec
+    (closedImmersion_unit_quotient j)).1 L).2.1
   let e : image μ ≅ kernel (adj₀.unit.app L) :=
     hlim.conePointUniqueUpToIso (limit.isLimit _)
   have he : e.hom ≫ kernel.ι (adj₀.unit.app L) = image.ι μ :=
@@ -148,10 +146,77 @@ private theorem finite_principal_upper_bound
       · exact h
       · exact ha c hc
 
+-- Keep the compactness and sheaf arguments independent of the tensor-pullback construction.
+private theorem exists_nonzero_maximalIdeal_family_section_eq_zero
+    {A : Type u} [CommRing A] [IsDomain A] [ValuationRing A] (hA : ¬ IsField A)
+    {X : Scheme.{u}} [CompactSpace X] (f : X ⟶ Spec (CommRingCat.of A))
+    (L : X.Modules) (N : Ideal A → X.Modules) (η : ∀ I, L ⟶ N I)
+    (hη : ∀ (I : Ideal A) (U : X.affineOpens) (t : Γ(L, U.1)),
+      (η I).app U.1 t = 0 ↔
+        t ∈ I.map ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom •
+          (⊤ : Submodule Γ(X, U.1) Γ(L, U.1)))
+    (s : Γ(L, ⊤)) (hs : (η (IsLocalRing.maximalIdeal A)).app ⊤ s = 0) :
+    ∃ π : A, π ≠ 0 ∧ π ∈ IsLocalRing.maximalIdeal A ∧
+      (η (Ideal.span {π})).app ⊤ s = 0 := by
+  classical
+  let t (U : X.affineOpens) := L.presheaf.map (homOfLE (show U.1 ≤ ⊤ from le_top)).op s
+  have hm (U : X.affineOpens) :
+      (η (IsLocalRing.maximalIdeal A)).app U.1 (t U) = 0 := by
+    have hn := congrArg (fun q ↦ q s)
+      ((η (IsLocalRing.maximalIdeal A)).val.naturality
+        (homOfLE (show U.1 ≤ ⊤ from le_top)).op)
+    change (η (IsLocalRing.maximalIdeal A)).app U.1 (t U) =
+      (N (IsLocalRing.maximalIdeal A)).presheaf.map
+        (homOfLE (show U.1 ≤ ⊤ from le_top)).op
+        ((η (IsLocalRing.maximalIdeal A)).app ⊤ s) at hn
+    exact hn.trans (by rw [hs]; exact map_zero _)
+  have hlocal (U : X.affineOpens) : ∃ a : IsLocalRing.maximalIdeal A,
+      t U ∈ (Ideal.span {a.val}).map
+        ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom •
+        (⊤ : Submodule Γ(X, U.1) Γ(L, U.1)) := by
+    exact exists_principal_stage _ (t U)
+      ((hη (IsLocalRing.maximalIdeal A) U (t U)).mp (hm U))
+  choose a ha using hlocal
+  have hcover : Set.univ ⊆ ⋃ U : X.affineOpens, (U.1 : Set X) := by
+    intro x hx
+    obtain ⟨U, hU, hxU, _⟩ := exists_isAffineOpen_mem_and_subset
+      (show x ∈ (⊤ : X.Opens) from trivial)
+    exact Set.mem_iUnion.mpr ⟨⟨U, hU⟩, hxU⟩
+  obtain ⟨S, hS⟩ := isCompact_univ.elim_finite_subcover
+    (fun U : X.affineOpens ↦ (U.1 : Set X)) (fun U ↦ U.1.isOpen) hcover
+  obtain ⟨a₀, ha₀, hne₀⟩ := Submodule.exists_mem_ne_zero_of_ne_bot
+    (show IsLocalRing.maximalIdeal A ≠ ⊥ from
+      fun h ↦ hA (IsLocalRing.isField_iff_maximalIdeal_eq.mpr h))
+  obtain ⟨π, hπ₀, hπ⟩ := finite_principal_upper_bound (S.image a) ⟨a₀, ha₀⟩
+  have hne : π.val ≠ 0 := by
+    intro hz
+    have hmem := hπ₀ (Ideal.subset_span (Set.mem_singleton a₀))
+    have hdiv : π.val ∣ a₀ := Ideal.mem_span_singleton.mp hmem
+    exact hne₀ (zero_dvd_iff.mp (hz ▸ hdiv))
+  refine ⟨π.val, hne, π.property, ?_⟩
+  have hzero (U : S) : (η (Ideal.span {π.val})).app U.1.1 (t U.1) = 0 := by
+    apply (hη (Ideal.span {π.val}) U.1 (t U.1)).mpr
+    exact Submodule.smul_mono_left
+      (Ideal.map_mono (hπ (a U.1) (Finset.mem_image.mpr ⟨U.1, U.2, rfl⟩))) (ha U.1)
+  have htop : (⊤ : X.Opens) ≤ ⨆ U : S, U.1.1 := by
+    intro x hx
+    obtain ⟨U, hU⟩ := Set.mem_iUnion.mp (hS (Set.mem_univ x))
+    obtain ⟨hUS, hxU⟩ := Set.mem_iUnion.mp hU
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨U, hUS⟩, hxU⟩
+  apply TopCat.Sheaf.eq_of_locally_eq' ((SheafOfModules.toSheaf _).obj (N (Ideal.span {π.val})))
+    (fun U : S ↦ U.1.1) ⊤ (fun _ ↦ homOfLE le_top) htop
+  intro U
+  have hn := congrArg (fun q ↦ q s)
+    ((η (Ideal.span {π.val})).val.naturality
+      (homOfLE (show U.1.1 ≤ ⊤ from le_top)).op)
+  change (η (Ideal.span {π.val})).app U.1.1 (t U.1) =
+    (N (Ideal.span {π.val})).presheaf.map (homOfLE (show U.1.1 ≤ ⊤ from le_top)).op
+      ((η (Ideal.span {π.val})).app ⊤ s) at hn
+  exact hn.symm.trans ((hzero U).trans (map_zero _).symm)
+
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
--- Ideal comparisons and the explicit pullback units require additional elaboration.
 /-- A section vanishing on the closed fibre vanishes modulo a nonzero element of the
 maximal ideal. Source: Stacks Project, Tag 0EX8, proof of
 `lemma-triviality-generic-fibre-valuation-ring`.
@@ -178,76 +243,15 @@ theorem exists_nonzero_maximalIdeal_section_eq_zero
       ((Classical.choose (exists_tensorPullbackAdjunction
         (pullback.fst f (Spec.map (CommRingCat.ofHom
           (Ideal.Quotient.mk (Ideal.span {π}))))))).unit.app L).val.app (op ⊤) s = 0 := by
-  classical
   let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   have : L.IsQuasicoherent := IsInvertible.isQuasicoherent L
-  let η (I : Ideal A) : L ⟶
-      (pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
-        (Ideal.Quotient.mk I))))).obj
+  exact exists_nonzero_maximalIdeal_family_section_eq_zero hA f L
+    (fun I ↦ (pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+      (Ideal.Quotient.mk I))))).obj
         ((tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-          (Ideal.Quotient.mk I))))).obj L) := (Classical.choose (exists_tensorPullbackAdjunction
-    (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))))).unit.app L
-  change (η (IsLocalRing.maximalIdeal A)).app ⊤ s = 0 at hs
-  let t (U : X.affineOpens) := L.presheaf.map (homOfLE (show U.1 ≤ ⊤ from le_top)).op s
-  have hm (U : X.affineOpens) :
-      (η (IsLocalRing.maximalIdeal A)).app U.1 (t U) = 0 := by
-    have hn := congrArg (fun q ↦ q s)
-      ((η (IsLocalRing.maximalIdeal A)).val.naturality
-        (homOfLE (show U.1 ≤ ⊤ from le_top)).op)
-    change (η (IsLocalRing.maximalIdeal A)).app U.1 (t U) =
-      ((pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
-        (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A)))))).obj
-        ((tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-          (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A)))))).obj L)).presheaf.map
-        (homOfLE (show U.1 ≤ ⊤ from le_top)).op
-        ((η (IsLocalRing.maximalIdeal A)).app ⊤ s) at hn
-    exact hn.trans (by rw [hs]; exact map_zero _)
-  have hlocal (U : X.affineOpens) : ∃ a : IsLocalRing.maximalIdeal A,
-      t U ∈ (Ideal.span {a.val}).map
-        ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom •
-        (⊤ : Submodule Γ(X, U.1) Γ(L, U.1)) := by
-    exact exists_principal_stage _ (t U)
-      ((quotient_unit_eq_zero_iff f (IsLocalRing.maximalIdeal A) L U (t U)).mp (hm U))
-  choose a ha using hlocal
-  have hcover : Set.univ ⊆ ⋃ U : X.affineOpens, (U.1 : Set X) := by
-    intro x hx
-    obtain ⟨U, hU, hxU, _⟩ := exists_isAffineOpen_mem_and_subset
-      (show x ∈ (⊤ : X.Opens) from trivial)
-    exact Set.mem_iUnion.mpr ⟨⟨U, hU⟩, hxU⟩
-  obtain ⟨S, hS⟩ := isCompact_univ.elim_finite_subcover
-    (fun U : X.affineOpens ↦ (U.1 : Set X)) (fun U ↦ U.1.isOpen) hcover
-  obtain ⟨a₀, ha₀, hne₀⟩ := Submodule.exists_mem_ne_zero_of_ne_bot
-    (show IsLocalRing.maximalIdeal A ≠ ⊥ from
-      fun h ↦ hA (IsLocalRing.isField_iff_maximalIdeal_eq.mpr h))
-  obtain ⟨π, hπ₀, hπ⟩ := finite_principal_upper_bound (S.image a) ⟨a₀, ha₀⟩
-  have hne : π.val ≠ 0 := by
-    intro hz
-    have hmem := hπ₀ (Ideal.subset_span (Set.mem_singleton a₀))
-    have hdiv : π.val ∣ a₀ := Ideal.mem_span_singleton.mp hmem
-    exact hne₀ (zero_dvd_iff.mp (hz ▸ hdiv))
-  refine ⟨π.val, hne, π.property, ?_⟩
-  let N := (pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
-    (Ideal.Quotient.mk (Ideal.span {π.val})))))).obj
-      ((tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-        (Ideal.Quotient.mk (Ideal.span {π.val})))))).obj L)
-  have hzero (U : S) : (η (Ideal.span {π.val})).app U.1.1 (t U.1) = 0 := by
-    apply (quotient_unit_eq_zero_iff f (Ideal.span {π.val}) L U.1 (t U.1)).mpr
-    exact Submodule.smul_mono_left
-      (Ideal.map_mono (hπ (a U.1) (Finset.mem_image.mpr ⟨U.1, U.2, rfl⟩))) (ha U.1)
-  have htop : (⊤ : X.Opens) ≤ ⨆ U : S, U.1.1 := by
-    intro x hx
-    obtain ⟨U, hU⟩ := Set.mem_iUnion.mp (hS (Set.mem_univ x))
-    obtain ⟨hUS, hxU⟩ := Set.mem_iUnion.mp hU
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨U, hUS⟩, hxU⟩
-  apply TopCat.Sheaf.eq_of_locally_eq' ((SheafOfModules.toSheaf _).obj N)
-    (fun U : S ↦ U.1.1) ⊤ (fun _ ↦ homOfLE le_top) htop
-  intro U
-  have hn := congrArg (fun q ↦ q s)
-    ((η (Ideal.span {π.val})).val.naturality
-      (homOfLE (show U.1.1 ≤ ⊤ from le_top)).op)
-  change (η (Ideal.span {π.val})).app U.1.1 (t U.1) =
-    N.presheaf.map (homOfLE (show U.1.1 ≤ ⊤ from le_top)).op
-      ((η (Ideal.span {π.val})).app ⊤ s) at hn
-  exact hn.symm.trans ((hzero U).trans (map_zero _).symm)
+          (Ideal.Quotient.mk I))))).obj L))
+    (fun I ↦ (Classical.choose (exists_tensorPullbackAdjunction
+      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))))).unit.app L)
+    (fun I U t ↦ quotient_unit_eq_zero_iff f I L U t) s hs
 
 end AlgebraicGeometry.Scheme.Modules

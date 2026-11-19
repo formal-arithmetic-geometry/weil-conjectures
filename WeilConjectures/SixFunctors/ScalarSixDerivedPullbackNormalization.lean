@@ -160,8 +160,7 @@ private theorem scalarSixOrdinaryRestrictionTowerSquare
     (comapUpperStarIso_mate (Λ := Λ.X) (Λ' := Λ''.X) (a ≫ b).hom.hom f)
     (scalarSixOrdinaryRestrictionTower a b Y) (scalarSixOrdinaryRestrictionTower a b X)
     ?_ N
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   apply Mod.hom_ext
   simp only [TwoSquare.vComp, TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,

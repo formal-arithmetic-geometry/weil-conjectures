@@ -20,9 +20,9 @@ Deligne–Laumon bound on a curve is reduced to the affine line.
 ## Main statements
 
 - `WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite`:
-  blueprint `lem-a1-finite-map-cohomology`.
+  blueprint `lemma-finite-generically-etale-map-line--3`.
 - `WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_extensionByZero`:
-  blueprint `lem-a1-reduction-composition`.
+  blueprint `lemma-finite-generically-etale-map-line--3`.
 -/
 
 @[expose] public section
@@ -35,9 +35,9 @@ namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- **Cohomology under a finite map** (blueprint: `lem-a1-finite-map-cohomology`, there for
-`Y = 𝔸¹` and `F` lisse). For a finite morphism `g : C ⟶ Y` of separated `k₀`-schemes of finite
-type and a Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*F)` as Frobenius modules: the
+/-- **Cohomology under a finite map** (blueprint: `lemma-finite-generically-etale-map-line--3`,
+there for `Y = 𝔸¹` and `F` lisse). For a finite morphism `g : C ⟶ Y` of separated `k₀`-schemes of
+finite type and a Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*F)` as Frobenius modules: the
 direct image `Rg₀*F` is `g₀*F` placed in degree zero, `g₀*` being exact, and
 `R(a_C)₀! ≅ R(a_Y)₀! ∘ Rg₀! ≅ R(a_Y)₀! ∘ Rg₀*` since `g` is proper. -/
 theorem nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite
@@ -68,8 +68,8 @@ theorem nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite
   exact ⟨globalSectionsEquivOfIso ((WeilComplex.homologySheaf i).mapIso E)⟩
 
 /-- **Cohomology transport under the finite-map reduction** (blueprint:
-`lem-a1-reduction-composition`, there for curves and `Y = 𝔸¹`). For a quasi-compact open
-immersion `j : C ⟶ C'` and a finite morphism `g : C' ⟶ Y` of separated `k₀`-schemes of finite
+`lemma-finite-generically-etale-map-line--3`, there for curves and `Y = 𝔸¹`). For a quasi-compact
+open immersion `j : C ⟶ C'` and a finite morphism `g : C' ⟶ Y` of separated `k₀`-schemes of finite
 type and a Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*j₀!F)` as Frobenius modules:
 `H_c^i(C, F) ≅ H_c^i(C', j₀!F)` since `R(a_C)₀! ≅ R(a_{C'})₀! ∘ Rj₀!` and `Rj₀!F ≅ j₀!F`, and
 the finite-map transport

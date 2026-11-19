@@ -104,7 +104,7 @@ Proof plan from the node:
    `C = R' ⊗[R] A` whose localization is finite and has a unique prime over that base prime.
 4. Put `U = Spec R'`. Its composite map to `W ⊆ S` is étale by
    `lem-weil-pbc-etale-ring-map-iff-etale-affine` and
-   `lem-weil-pbc-etale-composition-cancellation`. The residue-field identifications of
+   `definition-torsion-sheaves--3`. The residue-field identifications of
    `lem-weil-pbc-spec-residue-field-identification` give the elementary neighbourhood.
 5. The lemmas `lem-weil-pbc-open-fibre-product`, `lem-weil-pbc-fibre-product-affine-spectra`
    and `lem-weil-pbc-principal-localization-open-immersion` identify `Spec Cₑ` with an open

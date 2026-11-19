@@ -74,7 +74,7 @@ private def residueExtensionIso
     {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
     (a : L ⊣ U) (b : L' ⊣ U') (e : U ⋙ F ≅ G ⋙ U') :
     L ⋙ G ≅ F ⋙ L' := by
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom))
   letI : IsIso α := CategoryTheory.isIso_inverseMate_of_equivalences a b e
   exact (asIso α).symm
 
@@ -437,7 +437,6 @@ attribute [local irreducible] scalarMap residueMap IntegralConstantModel.modules
   residueExtensionIso residueDerivedComposite residueDerivedSquare residueDiscreteIso
   residueSiteScalarSquare residueScalarSquare residueSmallScalarSquare
 
-set_option maxHeartbeats 400000 in
 -- The exact restriction squares instantiate several derived scalar adjunctions.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective

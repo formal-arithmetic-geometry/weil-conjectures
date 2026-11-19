@@ -163,7 +163,6 @@ private theorem representative_square_pasting {C : Type*} [Category* C]
 
 attribute [local irreducible] coefficientFiniteTensorModelIso coefficientTotalTensor
 
-set_option maxHeartbeats 1000000 in
 -- The concrete coefficient categories require many definitional identifications.
 attribute [local irreducible] sfIntrinsicPullback coefficientFiniteQuotientExtension in
 /-- The quotient tensor square holds on flat-term K-flat pairs.

@@ -31,7 +31,7 @@ automorphism of finite order.
 
 - `ProEtale.CondensedRing.WeilBoundedConstructible.trace_compactFrobenius_eq_add`: additivity of
   the trace of `F_c` along an open subscheme and its closed complement, both stable under `Φ`
-  (blueprint `prop-trf-trace-additivity-open-closed`).
+  (blueprint `lemma-additivity-open-subscheme-complement`).
 - `ProEtale.CondensedRing.WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar`: the local
   Frobenius of the restriction of `K` to an open subscheme.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.unit`: the constant Weil object `ℚ̄_ℓ,X`, and
@@ -70,12 +70,12 @@ variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U
   [IsClosedImmersion i.left]
 
 /-- **Additivity of the compactly supported Frobenius along an open–closed decomposition**
-(blueprint `prop-trf-trace-additivity-open-closed`): for an open subscheme `j : U ⟶ X` with
+(blueprint `lemma-additivity-open-subscheme-complement`): for an open subscheme `j : U ⟶ X` with
 closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace of the Frobenius of
 `RΓ_c(X, K)` is the sum of the traces of the Frobenii of `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)`,
 the restrictions being the derived pullbacks of Weil objects. It comes from the localization
 triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶`, a triangle of Weil objects, and the additivity of
-traces in distinguished triangles (blueprint `prop-trf-trace-formal-laws`); no
+traces in distinguished triangles (blueprint `proposition-properties-trace`); no
 invertibility of `φ` is used in the blueprint. -/
 theorem trace_compactFrobenius_eq_add [IsSepClosed k]
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
@@ -342,7 +342,7 @@ omit [IsOpenImmersion j.left] in
 /-- The stalks of the restriction of a Weil object to a Frobenius stable subscheme are the
 stalks of the Weil object: for `j : U ⟶ X` with `Φ_U ≫ j = j ≫ Φ` and a rational point `x` of
 `U` fixed by `Φ_{U,m}`, the local Frobenius of `K|_U` at `x` has the trace of the local
-Frobenius of `K` at `x ≫ j` (blueprint `prop-trf-trace-additivity-open-closed`, the stalk
+Frobenius of `K` at `x ≫ j` (blueprint `lemma-additivity-open-subscheme-complement`, the stalk
 side). -/
 theorem trace_stalkFrobenius_weilUpperStar (hj : ΦU ≫ j = j ≫ Φ)
     (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (x : RationalPoint U)
@@ -485,7 +485,6 @@ lemma stalkFrobenius_unit_aux {𝒞 : Type*} [Category 𝒞] {W Y : 𝒞} {DW DY
     Iso.inv_hom_id_app_assoc, ← NatTrans.naturality_assoc, Functor.id_map, ← hid,
     Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- the unit of `Dᵇc` is compared through the monoidal instances of several schemes
 /-- The local Frobenii of the constant Weil object are the identity: `tr(F_{x,m} | ℚ̄_ℓ) = 1`. -/
 theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)

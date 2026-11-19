@@ -20,8 +20,61 @@ universe u
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 1000000 in
--- The finite-presentation and PID elaboration needs a larger heartbeat budget.
+private theorem finite_torsion_pid_resolution
+    (R : Type*) [CommRing R] [IsDomain R] [IsPrincipalIdealRing R]
+    (M : Type*) [AddCommGroup M] [Module R M] [Module.Finite R M]
+    (t : R) (ht : t ≠ 0) (hkill : ∀ x : M, t • x = 0) :
+    ∃ (r : ℕ)
+      (f : (Fin r → ULift.{u + 1} R) →ₗ[R] (Fin r → ULift.{u + 1} R))
+      (g : (Fin r → ULift.{u + 1} R) →ₗ[R] M),
+      Function.Injective f ∧ Function.Exact f g ∧ Function.Surjective g := by
+  classical
+  obtain ⟨r, g, hg⟩ := Module.Finite.exists_fin' R M
+  let K := LinearMap.ker g
+  obtain ⟨s, ⟨b⟩⟩ := K.nonempty_basis_of_pid (Pi.basisFun R (Fin r))
+  have : Module.Finite R K := Module.Finite.of_basis b
+  let j : (Fin r → R) →ₗ[R] K :=
+    (t • (LinearMap.id : (Fin r → R) →ₗ[R] (Fin r → R))).codRestrict K
+      (fun x ↦ by
+        change g (t • x) = 0
+        rw [map_smul]
+        exact hkill (g x))
+  have hj : Function.Injective j := by
+    intro x y h
+    have h' : t • x = t • y := congrArg Subtype.val h
+    exact (smul_right_injective _ ht) h'
+  have hs : s = r := by
+    have h₁ : Module.finrank R K ≤ Module.finrank R (Fin r → R) :=
+      LinearMap.finrank_le_finrank_of_injective K.subtype_injective
+    have h₂ : Module.finrank R (Fin r → R) ≤ Module.finrank R K :=
+      LinearMap.finrank_le_finrank_of_injective hj
+    have hb : Module.finrank R K = s := by
+      simpa only [Fintype.card_fin] using Module.finrank_eq_card_basis b
+    have hr : Module.finrank R (Fin r → R) = r := by
+      simp only [Module.finrank_fintype_fun_eq_card, Fintype.card_fin]
+    rw [hb, hr] at h₁ h₂
+    exact Nat.le_antisymm h₁ h₂
+  subst s
+  let e : (Fin r → ULift.{u + 1} R) ≃ₗ[R] (Fin r → R) :=
+    LinearEquiv.piCongrRight (fun _ ↦ ULift.moduleEquiv)
+  let k : (Fin r → R) ≃ₗ[R] K := b.equivFun.symm
+  let f := e.symm.toLinearMap.comp (K.subtype.comp (k.toLinearMap.comp e.toLinearMap))
+  let g' := g.comp e.toLinearMap
+  refine ⟨r, f, g', ?_, ?_, hg.comp e.surjective⟩
+  · exact e.symm.injective.comp (K.subtype_injective.comp (k.injective.comp e.injective))
+  · intro x
+    constructor
+    · intro hx
+      let y : K := ⟨e x, hx⟩
+      refine ⟨e.symm (k.symm y), ?_⟩
+      change e.symm (K.subtype (k (e (e.symm (k.symm y))))) = x
+      rw [e.apply_symm_apply, k.apply_symm_apply]
+      exact e.symm_apply_apply x
+    · rintro ⟨y, rfl⟩
+      change g (e (e.symm (K.subtype (k (e y))))) = 0
+      rw [e.apply_symm_apply]
+      exact (k (e y)).property
+
 /-- A finite integral algebra admits an equal-rank ordinary free resolution.
 
 Source: the finite free and finitely presented coefficient extension paragraph of the
@@ -55,10 +108,6 @@ theorem integralFinitePointResolution_algebraic
   letI : Module R A := Module.compHom A φ
   let φ' : R →+* ULift.{u + 1} A := ULift.ringEquiv.symm.toRingHom.comp φ
   letI : Module R (ULift.{u + 1} A) := Module.compHom (ULift.{u + 1} A) φ'
-  obtain ⟨r, g, hg⟩ := Module.Finite.exists_fin' R (ULift.{u + 1} A)
-  let K := LinearMap.ker g
-  obtain ⟨s, ⟨b⟩⟩ := K.nonempty_basis_of_pid (Pi.basisFun R (Fin r))
-  letI := Module.Finite.of_basis b
   obtain ⟨n, hn⟩ := hA
   let t : R := (ell ^ n : ℕ)
   have ht : t ≠ 0 := by
@@ -68,43 +117,8 @@ theorem integralFinitePointResolution_algebraic
   have hkill (a : ULift.{u + 1} A) : t • a = 0 := by
     rw [show t = ((ell ^ n : ℕ) : R) from rfl, Nat.cast_smul_eq_nsmul]
     exact ULift.ext (hn a.down)
-  let j : (Fin r → R) →ₗ[R] K :=
-    (t • (LinearMap.id : (Fin r → R) →ₗ[R] (Fin r → R))).codRestrict K
-      (fun x ↦ by
-        change g (t • x) = 0
-        rw [map_smul]
-        exact hkill (g x))
-  have hj : Function.Injective j := by
-    intro x y h
-    have h' : t • x = t • y := congrArg Subtype.val h
-    exact (smul_right_injective _ ht) h'
-  have hs : s = r := by
-    have h₁ := LinearMap.finrank_le_finrank_of_injective K.subtype_injective
-    have h₂ := LinearMap.finrank_le_finrank_of_injective hj
-    have hb : Module.finrank R K = s := by
-      simpa using Module.finrank_eq_card_basis b
-    have hr : Module.finrank R (Fin r → R) = r := by
-      simp
-    exact Nat.le_antisymm (by simpa [hb, hr] using h₁) (by simpa [hb, hr] using h₂)
-  subst s
-  let e : (Fin r → ULift.{u + 1} R) ≃ₗ[R] (Fin r → R) :=
-    LinearEquiv.piCongrRight (fun _ ↦ ULift.moduleEquiv)
-  let k : (Fin r → R) ≃ₗ[R] K := b.equivFun.symm
-  let f := e.symm.toLinearMap.comp (K.subtype.comp (k.toLinearMap.comp e.toLinearMap))
-  let g' := g.comp e.toLinearMap
-  refine ⟨r, ModuleCat.ofHom f, ModuleCat.ofHom g', ?_, ?_, ?_⟩
-  · exact e.symm.injective.comp (K.subtype_injective.comp (k.injective.comp e.injective))
-  · intro x
-    constructor
-    · intro hx
-      let y : K := ⟨e x, hx⟩
-      refine ⟨e.symm (k.symm y), ?_⟩
-      change e.symm (K.subtype (k (e (e.symm (k.symm y))))) = x
-      simp [y]
-    · rintro ⟨y, rfl⟩
-      change g (e (e.symm (K.subtype (k (e y))))) = 0
-      simp only [LinearEquiv.apply_symm_apply]
-      exact (k (e y)).property
-  · exact hg.comp e.surjective
+  obtain ⟨r, f₀, g, hf₀, hexact, hg⟩ :=
+    finite_torsion_pid_resolution R (ULift.{u + 1} A) t ht hkill
+  exact ⟨r, ModuleCat.ofHom f₀, ModuleCat.ofHom g, hf₀, hexact, hg⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -38,7 +38,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRe
 
 Source: `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
   sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md`
-(blueprint: det-cor-affine-space-rational-line).
+(blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 ## Main declarations
 
@@ -74,7 +74,7 @@ attribute [local irreducible] upperStar Functor.leftDerivedFunctor Functor.mapDe
 The instance arguments are the existing affine-space and composition instances, written
 explicitly because typeclass search does not unfold the Over-object projections here.
 Source: blueprint `sk-def-sfb-dc-setting`, chosen compactification convention
-(blueprint: det-cor-affine-space-rational-line). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 noncomputable def affineLineChosenCompactification
     (k : Type u) [Field k] (V : Scheme.{u}) [V.Over (Spec (.of k))]
     [LocallyOfFiniteType (V ↘ Spec (.of k))]
@@ -97,7 +97,7 @@ attribute [local irreducible] affineLineChosenCompactification
 
 /-- The complete assertion for one of the two rational coefficient conventions.
 Source: blueprint `sk-cor-affine-space-rational-line`
-(blueprint: det-cor-affine-space-rational-line).
+(blueprint: theorem-f-shriek-ell-adic-coefficients).
 The comparison isomorphisms to the ambient derived categories make every displayed functor
 be the specified module-object functor, rather than an unrelated functor between subcategories.
 -/
@@ -377,7 +377,7 @@ attribute [local semireducible] RationalP1.coefficient RationalP1.line
 subextension and for the finite-subextension-valued algebraic closure.  The three assertions
 are respectively clauses (1), (2), and (3) of the source statement.
 Source: blueprint `sk-cor-affine-space-rational-line`
-(blueprint: det-cor-affine-space-rational-line).
+(blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 Proof (the ten steps of the DAG node):
 1. The standard-chart theorem gives j and qj = p; finite-coordinate projective-space
@@ -394,12 +394,14 @@ Spec k follows from its quasi-separatedness. Both total spaces are separated fin
 k-schemes and qcqs (`lem-weil-pbc-proper-fp-permanence`,
 `lem-weil-pbc-affine-scheme-qcqs`, `lem-weil-pbc-qcqs-morphism-permanence`).
 5. A map from a quasi-compact scheme to a quasi-separated scheme is quasi-compact, so j
-is quasi-compact and (j,q) is a compactification (`sk-def-nagata-sketch-data`).
+is quasi-compact and (j,q) is a compactification (`definition-compactification-refinement`).
 6. For these rational coefficients Dctf = Dbc and their localizing closures agree.
-Apply clause 1 of `det-sf-mate-open-restriction` and transport across this equality
-(`det-def-localizing-closure-ctf-equals-bc`). This proves preservation and J adjoint R.
+Apply clause 1 of `proposition-composition-open-restriction-compactifications-f` and transport
+across this equality (`det-def-localizing-closure-ctf-equals-bc`). This proves preservation and J
+adjoint R.
 7. For (j,q), lower shriek is Rq_* j_! by definition. Compare the chosen compactification
-to this one by `det-sf-comp-coherence-cocycle`, then use step 6 to obtain F isomorphic JQ.
+to this one by `proposition-construction-independence-rf-shriek`, then use step 6 to obtain F
+isomorphic JQ.
 8. Strong monoidality of derived pullback, its single-functor comparison and the
 canonical rational Tate-line pullback identify tensoring with the pulled-back line.
 The pullback CommShift comparison moves shift two, and derived pullback composition

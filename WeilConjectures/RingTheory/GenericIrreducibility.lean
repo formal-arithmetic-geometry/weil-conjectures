@@ -688,8 +688,72 @@ lemma exists_ne_zero_dvd_C_mul_of_map_dvd {σ A K : Type*} [CommRing A] [IsDomai
   rw [map_mul, map_mul, map_C, hR', hR]
   ring
 
-set_option maxHeartbeats 1000000 in
--- the spreading-out argument is long and elaborates many tensor products
+/-- Generic irreducibility descends along a finite type extension of domains and a surjective
+algebra map whose kernel elements have powers annihilated by nonzero scalars. -/
+private lemma exists_ne_zero_forall_irreducibleSpace_of_torsion_nilpotent_ker
+    {A A' C D : Type*} [CommRing A] [IsDomain A] [IsNoetherianRing A]
+    [CommRing A'] [IsDomain A'] [Algebra A A'] [Algebra.FiniteType A A']
+    [CommRing C] [Algebra A C] [Algebra.FiniteType A C] [CommRing D] [Algebra A' D]
+    (hA'inj : Function.Injective (algebraMap A A')) (f : A' ⊗[A] C →ₐ[A'] D)
+    (hf : Function.Surjective f)
+    (hnil : ∀ x ∈ RingHom.ker f, ∃ b : A', b ≠ 0 ∧ ∃ m : ℕ, b • x ^ m = 0)
+    (a' : A') (ha' : a' ≠ 0)
+    (hB : ∀ p : PrimeSpectrum A', a' ∉ p.asIdeal →
+      IrreducibleSpace (PrimeSpectrum (p.asIdeal.ResidueField ⊗[A'] D))) :
+    ∃ a : A, a ≠ 0 ∧ ∀ p : PrimeSpectrum A, a ∉ p.asIdeal →
+      IrreducibleSpace (PrimeSpectrum (p.asIdeal.ResidueField ⊗[A] C)) := by
+  classical
+  have : IsNoetherianRing A' := Algebra.FiniteType.isNoetherianRing A A'
+  have : IsNoetherianRing (A' ⊗[A] C) := Algebra.FiniteType.isNoetherianRing A' _
+  obtain ⟨T', hT'⟩ := (IsNoetherian.noetherian (RingHom.ker f) :
+    (RingHom.ker f).FG)
+  choose! b hb0 m hbm using hnil
+  have hTk (x : A' ⊗[A] C) (hx : x ∈ T') : x ∈ RingHom.ker f :=
+    hT' ▸ Submodule.subset_span hx
+  obtain ⟨bb, hbb⟩ : ∃ bb, bb = ∏ x ∈ T', b x := ⟨_, rfl⟩
+  have hbb0 : bb ≠ 0 := hbb ▸ Finset.prod_ne_zero_iff.mpr fun x hx ↦ hb0 x (hTk x hx)
+  have hTb : ∀ x ∈ (T' : Set (A' ⊗[A] C)), ∃ m : ℕ, bb • x ^ m = 0 := by
+    intro x hx
+    refine ⟨m x, ?_⟩
+    rw [hbb, ← Finset.mul_prod_erase T' b hx, mul_comm, mul_smul, hbm x (hTk x hx), smul_zero]
+  -- Chevalley: the image of `D(a' bb)` contains a dense open of `Spec A`
+  set Z := PrimeSpectrum.comap (algebraMap A A') ''
+    (PrimeSpectrum.basicOpen (a' * bb) : Set (PrimeSpectrum A'))
+  have hZ : Topology.IsConstructible Z := PrimeSpectrum.isConstructible_comap_image
+    (RingHom.finitePresentation_algebraMap.mpr
+      (Algebra.FinitePresentation.of_finiteType.mp inferInstance))
+    PrimeSpectrum.isConstructible_basicOpen
+  have hgen : (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum A) ∉ Zᶜ := by
+    rw [Set.notMem_compl_iff]
+    refine ⟨⟨⊥, Ideal.isPrime_bot⟩, ?_, PrimeSpectrum.ext (Ideal.comap_bot_of_injective _ hA'inj)⟩
+    rw [SetLike.mem_coe, PrimeSpectrum.mem_basicOpen]
+    exact mul_ne_zero ha' hbb0
+  obtain ⟨a, ha, hZa⟩ := BertiniNoether.exists_ne_zero_forall_mem_of_isConstructible hZ.compl hgen
+  refine ⟨a, ha, fun p hp ↦ ?_⟩
+  obtain ⟨p', hp'O, rfl⟩ : p ∈ Z := by
+    by_contra h
+    exact hp (hZa p h)
+  rw [SetLike.mem_coe, PrimeSpectrum.mem_basicOpen, p'.2.mul_mem_iff_mem_or_mem, not_or] at hp'O
+  -- transfer the irreducibility of the fibres
+  have h1 := hB p' hp'O.1
+  have h2 : IrreducibleSpace (PrimeSpectrum (p'.asIdeal.ResidueField ⊗[A'] (A' ⊗[A] C))) :=
+    irreducibleSpace_of_comap_surjective _ (comap_surjective_map_tensor_of_ker f
+      hf bb (isUnit_iff_ne_zero.mpr
+        (by rw [Ne, Ideal.algebraMap_residueField_eq_zero]; exact hp'O.2)) T' hT'.symm hTb)
+  have h3 : IrreducibleSpace (PrimeSpectrum (p'.asIdeal.ResidueField ⊗[A] C)) :=
+    irreducibleSpace_of_comap_surjective (Algebra.TensorProduct.cancelBaseChange A A'
+      p'.asIdeal.ResidueField p'.asIdeal.ResidueField C).symm.toRingHom
+      (PrimeSpectrum.comapEquiv _).surjective
+  let : Algebra (PrimeSpectrum.comap (algebraMap A A') p').asIdeal.ResidueField
+      p'.asIdeal.ResidueField :=
+    (Ideal.ResidueField.map _ p'.asIdeal (algebraMap A A') rfl).toAlgebra
+  have : IsScalarTower A (PrimeSpectrum.comap (algebraMap A A') p').asIdeal.ResidueField
+      p'.asIdeal.ResidueField := .of_algebraMap_eq fun x ↦
+    (IsScalarTower.algebraMap_apply A A' p'.asIdeal.ResidueField x).trans
+      (Ideal.ResidueField.map_algebraMap _ p'.asIdeal (algebraMap A A') rfl x).symm
+  exact irreducibleSpace_of_comap_surjective _
+    (comap_surjective_map_tensor_of_field (k' := p'.asIdeal.ResidueField))
+
 /-- **Spreading out.** Let `φ : L ⊗[A] C → F` be a map to a field whose kernel is nil, such that
 `F` is birational to an (absolutely) irreducible hypersurface over the algebraically closed field
 `L ⊇ A`, as in `exists_hypersurface_of_perfectField`, where the coordinates `v` have a common
@@ -862,9 +926,6 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
       obtain ⟨_, ⟨Q, rfl⟩, m, hm⟩ := hC''le c.2
       exact ⟨Q, m, hm⟩)
   -- the kernel of `A' ⊗ C → C''` is nil generically
-  have : IsNoetherianRing (A' ⊗[A] C) := Algebra.FiniteType.isNoetherianRing A' _
-  obtain ⟨T', hT'⟩ := (IsNoetherian.noetherian (RingHom.ker Φ.rangeRestrict) :
-    (RingHom.ker Φ.rangeRestrict).FG)
   have hnil (x : A' ⊗[A] C) (hx : x ∈ RingHom.ker Φ.rangeRestrict) :
       ∃ b : A', b ≠ 0 ∧ ∃ m : ℕ, b • x ^ m = 0 := by
     have hx0 : φ (ι' x) = 0 := congrArg Subtype.val (RingHom.mem_ker.mp hx)
@@ -878,54 +939,10 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
     have h3 := (hιeq (x ^ m)).trans hm'
     obtain ⟨b, hb, hbm⟩ := exists_smul_eq_zero_of_map_eq_zero (A := A) (C := C) hA'L (x ^ m) h3
     exact ⟨b, hb, m, hbm⟩
-  choose! b hb0 m hbm using hnil
-  have hTk (x : A' ⊗[A] C) (hx : x ∈ T') : x ∈ RingHom.ker Φ.rangeRestrict :=
-    hT' ▸ Submodule.subset_span hx
-  obtain ⟨bb, hbb⟩ : ∃ bb, bb = ∏ x ∈ T', b x := ⟨_, rfl⟩
-  have hbb0 : bb ≠ 0 := hbb ▸ Finset.prod_ne_zero_iff.mpr fun x hx ↦ hb0 x (hTk x hx)
-  have hTb : ∀ x ∈ (T' : Set (A' ⊗[A] C)), ∃ m : ℕ, bb • x ^ m = 0 := by
-    intro x hx
-    refine ⟨m x, ?_⟩
-    rw [hbb, ← Finset.mul_prod_erase T' b hx, mul_comm, mul_smul, hbm x (hTk x hx), smul_zero]
-  -- Chevalley: the image of `D(a' bb)` contains a dense open of `Spec A`
   have hA'inj : Function.Injective (algebraMap A A') := fun x y h ↦ hAL (by
     rw [IsScalarTower.algebraMap_apply A A' L x, h, ← IsScalarTower.algebraMap_apply])
-  set Z := PrimeSpectrum.comap (algebraMap A A') ''
-    (PrimeSpectrum.basicOpen (a' * bb) : Set (PrimeSpectrum A'))
-  have hZ : Topology.IsConstructible Z := PrimeSpectrum.isConstructible_comap_image
-    (RingHom.finitePresentation_algebraMap.mpr
-      (Algebra.FinitePresentation.of_finiteType.mp inferInstance))
-    PrimeSpectrum.isConstructible_basicOpen
-  have hgen : (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum A) ∉ Zᶜ := by
-    rw [Set.notMem_compl_iff]
-    refine ⟨⟨⊥, Ideal.isPrime_bot⟩, ?_, PrimeSpectrum.ext (Ideal.comap_bot_of_injective _ hA'inj)⟩
-    rw [SetLike.mem_coe, PrimeSpectrum.mem_basicOpen]
-    exact mul_ne_zero ha' hbb0
-  obtain ⟨a, ha, hZa⟩ := BertiniNoether.exists_ne_zero_forall_mem_of_isConstructible hZ.compl hgen
-  refine ⟨a, ha, fun p hp ↦ ?_⟩
-  obtain ⟨p', hp'O, rfl⟩ : p ∈ Z := by
-    by_contra h
-    exact hp (hZa p h)
-  rw [SetLike.mem_coe, PrimeSpectrum.mem_basicOpen, p'.2.mul_mem_iff_mem_or_mem, not_or] at hp'O
-  -- transfer the irreducibility of the fibres
-  have h1 := hB p' hp'O.1
-  have h2 : IrreducibleSpace (PrimeSpectrum (p'.asIdeal.ResidueField ⊗[A'] (A' ⊗[A] C))) :=
-    irreducibleSpace_of_comap_surjective _ (comap_surjective_map_tensor_of_ker Φ.rangeRestrict
-      Φ.rangeRestrict_surjective bb (isUnit_iff_ne_zero.mpr
-        (by rw [Ne, Ideal.algebraMap_residueField_eq_zero]; exact hp'O.2)) T' hT'.symm hTb)
-  have h3 : IrreducibleSpace (PrimeSpectrum (p'.asIdeal.ResidueField ⊗[A] C)) :=
-    irreducibleSpace_of_comap_surjective (Algebra.TensorProduct.cancelBaseChange A A'
-      p'.asIdeal.ResidueField p'.asIdeal.ResidueField C).symm.toRingHom
-      (PrimeSpectrum.comapEquiv _).surjective
-  let : Algebra (PrimeSpectrum.comap (algebraMap A A') p').asIdeal.ResidueField
-      p'.asIdeal.ResidueField :=
-    (Ideal.ResidueField.map _ p'.asIdeal (algebraMap A A') rfl).toAlgebra
-  have : IsScalarTower A (PrimeSpectrum.comap (algebraMap A A') p').asIdeal.ResidueField
-      p'.asIdeal.ResidueField := .of_algebraMap_eq fun x ↦
-    (IsScalarTower.algebraMap_apply A A' p'.asIdeal.ResidueField x).trans
-      (Ideal.ResidueField.map_algebraMap _ p'.asIdeal (algebraMap A A') rfl x).symm
-  exact irreducibleSpace_of_comap_surjective _
-    (comap_surjective_map_tensor_of_field (k' := p'.asIdeal.ResidueField))
+  exact exists_ne_zero_forall_irreducibleSpace_of_torsion_nilpotent_ker hA'inj
+    Φ.rangeRestrict Φ.rangeRestrict_surjective hnil a' ha' hB
 
 end GenericIrreducibility
 

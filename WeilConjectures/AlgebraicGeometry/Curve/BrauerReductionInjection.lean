@@ -16,8 +16,8 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Brauer pullback to the reduction of a curve
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its cohomology claim.
-(blueprint: lem-sc-brauer-reduction-injection)
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its cohomology
+claim. (blueprint: lem-sc-brauer-reduction-injection)
 -/
 
 @[expose] public section

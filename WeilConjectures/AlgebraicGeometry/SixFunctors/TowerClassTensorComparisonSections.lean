@@ -14,8 +14,10 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluati
 
 /-! # Generalized unit sections of the ordinary tensor comparison
 
-Source: Stacks 03EL; Zheng Construction 4.1; blueprint tower-operations proof (2).
-(blueprint: lem-sfb-tensor-comparison-evaluated-component).
+## References
+
+* Stacks 03EL
+* Zheng Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -47,12 +49,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (O : GeometryOrdinary.{c, v, r} J B τ J' L P a)
     (T : GeometryOrdinaryTensor.{c, v, r} J B τ J' L P a O)
 
-/-- Evaluation of a system tensor comparison is its specified geometric component.
-Source: Zheng Construction 4.1; blueprint tower-operations proof, clause (2).
-(blueprint: lem-sfb-tensor-comparison-evaluated-component).
-
-Proof: both morphisms satisfy the same evaluation square. Cancel the target evaluation
-isomorphism and the tensor of the two pull-evaluation isomorphisms. -/
+/-- Evaluation of a system tensor comparison is its specified geometric component. -/
 theorem tensorComparison_evaluation (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ) :
     (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map
         (T.system M N).hom =

@@ -39,7 +39,7 @@ import WeilConjectures.SmoothPurity.Scalar.ScalarSemilinearDualExt
 
 Source: blueprint `sec-smooth-purity/sk-def-sf-admissible/def-coefficient-twists-detailed.md`,
 order 1505; current main-20261015 source: `sec-proetale-coefficients/sk-def-sp-tate-twist/`,
-order 1864 (blueprint: def-coefficient-twists-detailed).
+order 1864 (blueprint: definition-tate-twists).
 
 The intrinsic rational and common-stage functors are provided by
 `WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted`;
@@ -107,7 +107,7 @@ attribute [local instance 3000] integralTowerHasDerivedCategory
 variable (X : Scheme.{u})
 
 /-- Tensor powers of the coefficient line, with the unit at exponent zero.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 abbrev coefficientTwistPower {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (L : SheafOfModules.{u + 1}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
@@ -116,7 +116,7 @@ abbrev coefficientTwistPower {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
   SheafOfModules.scalarTensorPower R L
 
 /-- Positive powers and internal duals of the coefficient line.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def coefficientTwistLine {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (L : SheafOfModules.{u + 1}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
@@ -128,7 +128,7 @@ def coefficientTwistLine {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
 
 /-- Tensor with an integer power or dual of a rank-one line is exact and additive.
 Source: blueprint order 1505; Stacks Tags 03EK and 03RV
-(blueprint: def-coefficient-twists-detailed).
+(blueprint: definition-tate-twists).
 Proof: on a cover trivializing L, each positive tensor power is the unit module,
 and internal Hom into the unit is also the unit. Thus tensor with every integer
 power is locally the identity. Exactness can be checked locally; additivity follows
@@ -175,26 +175,26 @@ variable (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠
 
 /-- The published integral first line has rank one; reuse its recorded theorem.
 Source: blueprint order 1505; Stacks 03PK
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance coefficientTwistIntegralRank :
     (purTwistIntegralModule S ℓ E).IsFiniteLocallyFreeOfRank 1 :=
   (pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.1
 
 /-- The published ordinary finite reduction has rank one.
 Source: blueprint order 1505; Stacks 03PK
-(blueprint: def-coefficient-twists-detailed). -/
+(blueprint: definition-tate-twists). -/
 instance coefficientTwistFiniteRank (n : ℕ) :
     (purTwistFiniteOne S ℓ E n).IsFiniteLocallyFreeOfRank 1 :=
   ((pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.2 n).2.1
 
 /-- The finite coefficient twist at quotient exponent n+1.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 abbrev finiteCoefficientTwist (n : ℕ) (m : ℤ) :
     SheafOfModules.{u + 1} (integralCoefficientSheaf ℓ E S n) :=
   coefficientTwistLine S (purTwistFiniteOne S ℓ E n) m
 
 /-- Derived tensor by the finite twisting line.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def finiteComplexTwist (n : ℕ) (m : ℤ) :
     proEtaleDerivedCategory S (Padic.coefficientExtensionRing ℓ E (n + 1)) ⥤
       proEtaleDerivedCategory S (Padic.coefficientExtensionRing ℓ E (n + 1)) := by
@@ -206,7 +206,7 @@ def finiteComplexTwist (n : ℕ) (m : ℤ) :
     (finiteCoefficientTwist ℓ E S n m)).mapDerivedCategory
 
 /-- Tensor by the completed integral line on module sheaves.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def integralSheafTwist (m : ℤ) : integralTowerModules ℓ E S ⥤ integralTowerModules ℓ E S :=
   SheafOfModules.siteSheafTensorRight
     (A := completedIntegralCommRingSheafUnrestricted ℓ E S)
@@ -214,20 +214,20 @@ def integralSheafTwist (m : ℤ) : integralTowerModules ℓ E S ⥤ integralTowe
       (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m)
 
 /-- Additivity of tensor with the integral line.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 instance integralSheafTwist_additive (m : ℤ) : (integralSheafTwist ℓ E S m).Additive :=
   (coefficientTwistLine_exact S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m).1
 
 /-- Tensor with the integral line preserves finite limits.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 instance integralSheafTwist_finiteLimits (m : ℤ) :
     PreservesFiniteLimits (integralSheafTwist ℓ E S m) :=
   (coefficientTwistLine_exact S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m).2.1
 
 /-- Tensor with the integral line preserves finite colimits.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 instance integralSheafTwist_finiteColimits (m : ℤ) :
     PreservesFiniteColimits (integralSheafTwist ℓ E S m) :=
   (coefficientTwistLine_exact S
@@ -235,14 +235,14 @@ instance integralSheafTwist_finiteColimits (m : ℤ) :
 
 /-- Derived tensor by the completed integral twisting line. Since the line is flat,
 termwise tensor already computes derived tensor for every unbounded complex.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def integralComplexTwist (m : ℤ) :
     completedIntegralDerivedCategory ℓ E S D hℓ ⥤
       completedIntegralDerivedCategory ℓ E S D hℓ :=
   (integralSheafTwist ℓ E S m).mapDerivedCategory
 
 /-- The integral twist placed in degree zero.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def integralCoefficientTwist (m : ℤ) :
     completedIntegralDerivedCategory ℓ E S D hℓ :=
   (DerivedCategory.singleFunctor _ 0).obj
@@ -250,7 +250,7 @@ def integralCoefficientTwist (m : ℤ) :
       (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m)
 
 /-- Every integral twist is bounded constructible and derived complete.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
+Source: blueprint order 1505 (blueprint: definition-tate-twists).
 Proof: trivialize on a primitive-root pro-etale cover. Powers and duals are again
 rank-one lines, and their finite reductions are finite locally constant with common
 support interval [0,0]. The compatible finite reductions recover the completed line,
@@ -292,7 +292,7 @@ theorem integralCoefficientTwist_constructible (m : ℤ) :
   exact ⟨le_rfl, le_rfl⟩
 
 /-- The coefficient line as a module sheaf, for every integer exponent.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 abbrev integralTwistLine (m : ℤ) : integralTowerModules ℓ E S :=
   coefficientTwistLine S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m
@@ -303,7 +303,7 @@ variable (L : Type u) [Field L] [Algebra (Padic ℓ) L]
   [FiniteDimensional (Padic ℓ) L] (ι : E →ₐ[Padic ℓ] L)
 
 /-- The constant integer inclusion induced by the specified coefficient embedding.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def twistConstantIntegerMap : purTwistIntegralConstant S ℓ E ⟶
     purTwistIntegralConstant S ℓ L :=
   (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).map
@@ -311,7 +311,7 @@ def twistConstantIntegerMap : purTwistIntegralConstant S ℓ E ⟶
       ((integralScalarIntegerInclusion ℓ E L ι).comp ULift.ringEquiv.toRingHom)))
 
 /-- Semilinear maps from the E-lines to the L-lines, before scalar extension.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 abbrev TwistScalarMaps := ∀ m : ℤ,
   integralTwistLine ℓ E S m ⟶
     (SheafOfModules.restrictScalars.{u + 1}
@@ -321,7 +321,7 @@ abbrev TwistScalarMaps := ∀ m : ℤ,
 
 /-- The roots-of-unity, unit, tensor-power and dual-evaluation normalization.
 These equations specify maps, rather than merely coherent isomorphisms.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def IsCanonicalTwistScalarMaps (c : TwistScalarMaps ℓ E S L ι) : Prop :=
   (∀ (U : S.ProEtᵒᵖ) (a : (completedIntegralCommRingSheafUnrestricted ℓ E S).obj.obj U),
     (c 0).val.app U a = (integralCompletedScalarMap ℓ E L ι S).hom.app U a) ∧
@@ -490,7 +490,7 @@ private theorem twistScalarComparison_data :
         ((hd.2.2.2 n U f x).trans (hc.2.2.2 n U f x).symm)
 
 /-- There is exactly one normalized semilinear family on the signed Tate lines.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
+Source: blueprint order 1505 (blueprint: definition-tate-twists).
 Proof: at zero take the completed coefficient inclusion. At one send the root
 limit tensor b to the same root limit tensor its integer image. The balanced
 relations agree by the finite residue characterizations of the completed actions.
@@ -506,12 +506,12 @@ theorem twistScalarMaps_existsUnique :
   exact ⟨_, hc, hu⟩
 
 /-- The signed scalar maps fixed by root tensors, powers and dual evaluation.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def twistScalarMaps : TwistScalarMaps ℓ E S L ι :=
   (twistScalarMaps_existsUnique ℓ E S L ι).exists.choose
 
 /-- Scalar extension of each line is the target line, with the specified map.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
+Source: blueprint order 1505 (blueprint: definition-tate-twists).
 Proof: extend the semilinear map by balancing, sending s tensor x to s times c(x).
 On a trivializing cover this is multiplication R_L tensor R_E to R_L and has
 inverse z to z tensor one. Glue the local inverses. Pure tensors generate locally,
@@ -573,14 +573,14 @@ theorem twistLineScalarIso_existsUnique (m : ℤ) :
   rw [he', he]
 
 /-- The canonical scalar-extension isomorphism for the signed line.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def twistLineScalarIso (m : ℤ) :
     (integralOrdinaryScalar ℓ E L ι S).obj (integralTwistLine ℓ E S m) ≅
       integralTwistLine ℓ L S m :=
   (twistLineScalarIso_existsUnique ℓ E S L ι m).exists.choose
 
 /-- Tensor and scalar extension commute by the normalized balanced map.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
+Source: blueprint order 1505 (blueprint: definition-tate-twists).
 Proof: send s tensor (x tensor y) to (s tensor x) tensor c(y), with c the
 normalized semilinear line map. Its inverse is the ordinary tensor associator
 followed by the inverse canonical line comparison. The balanced formulas commute
@@ -615,7 +615,7 @@ theorem twistSheafScalarComparison_existsUnique (m : ℤ) :
         (twistLineScalarIso_existsUnique ℓ E S L ι m).exists.choose_spec U 1 y)
 
 /-- The ordinary natural comparison fixed on local pure tensors.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+Source: blueprint order 1505 (blueprint: definition-tate-twists). -/
 def twistSheafScalarComparison (m : ℤ) :
     integralSheafTwist ℓ E S m ⋙ integralOrdinaryScalar ℓ E L ι S ≅
       integralOrdinaryScalar ℓ E L ι S ⋙ integralSheafTwist ℓ L S m :=

@@ -46,10 +46,14 @@ import WeilConjectures.RingTheory.ProperBaseChange.WContractibleClosedLocalizati
 import WeilConjectures.AlgebraicGeometry.Affine.AffineClosedSpecializationLocalization
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WContractibleAffineEvaluation
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Open and closed support for modules in independent universes
 
-Source: Stacks Project, Tags 09AG, 09AH and 09BM.
+## References
+
+* Stacks Project, Tags 09AG, 09AH and 09BM
+* Stacks Project, with arbitrary ring sheaves
 -/
 
 @[expose] public section
@@ -356,34 +360,7 @@ private theorem support_detect_isIso
   exact isIso_of_reflects_iso f E
 
 /-- Complementary restrictions detect module isomorphisms, and closed restriction
-annihilates open extension. Neither assertion concerns preservation of products.
-
-Source: Stacks Project, Tags 09AG (lemma-jshriek-zero), 09AH
-(lemma-ses-associated-to-open), and 09BM
-(lemma-closed-immersion-complement-retrocompact-exact), with arbitrary ring sheaves.
-(blueprint: lem-sf-open-closed-module-support-of-universes).
-
-Proof in words: write the underlying extension as the abelian sheafification of
-its actual direct-sum presheaf P. For any abelian sheaf H on Z, every presheaf map
-P -> i_*H is zero. Indeed, on a summand indexed by V -> U the closed fibre of V
-is empty, so H has zero sections there. Direct-sum induction handles every
-section, including an empty index set. The inverse-image and sheafification
-adjunctions identify maps I(L(M)) -> H with these presheaf maps. Thus I(L(M))
-is initial, hence zero. This argument needs only disjoint images.
-For detection, refine each affine open of a test object by a bounded
-w-contractible affine cover. The quasi-compact complementary open is cut out
-set-theoretically by finitely many elements. Its basic opens and the localization
-at elements invertible modulo their ideal form a cover. Each basic open maps to U;
-the other piece is affine and w-contractible and every point specializes into
-the closed fibre. Its evaluation sends epimorphisms of set sheaves in the
-coefficient universe to surjections. The independent-universe abelian
-specialization theorem therefore makes the actual closed unit bijective on
-sections of this piece. Naturality and invertibility of I(f) make f bijective
-there. On the open pieces invertibility of the slice restriction gives the
-same conclusion by evaluation. Thus the underlying abelian sheaf map is locally
-bijective, hence invertible; forgetting module structure reflects isomorphisms.
-All covers consist of schemes in t, and all section sets lie in max u (t+1).
-Empty pieces and zero rings use the same argument. -/
+annihilates open extension. Neither assertion concerns preservation of products. -/
 theorem proEtaleOpenClosedModuleSupportOfUniverses
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]

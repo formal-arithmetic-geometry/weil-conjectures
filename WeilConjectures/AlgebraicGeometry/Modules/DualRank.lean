@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 The ordinary dual `Hom(M, O)` of a finite locally free module of constant rank `r` is again
 finite locally free of rank `r`: on each trivializing open, `Hom(O^r, O) ≅ O^r`.
 
-Source: Stacks Project, Tag 01C6.
+## References
+
+* Stacks Project, Tag 01C6
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The dual of a finite locally free module of constant rank `r` has constant rank `r`.
-Source: Stacks Project, Tag 01C6. -/
+/-- The dual of a finite locally free module of constant rank `r` has constant rank `r`. -/
 instance isFiniteLocallyFreeOfRank_dual {X : Scheme.{u}} (M : X.Modules) (r : ℕ)
     [M.IsFiniteLocallyFreeOfRank r] : (dual M).IsFiniteLocallyFreeOfRank r := by
   obtain ⟨q, hq, hr⟩ :=

@@ -360,7 +360,6 @@ attribute [local irreducible] Functor.mapDerivedCategory
   AlgebraicGeometry.ProEtaleWeilSheaf.NativeOrdinaryKFlat
   AlgebraicGeometry.ProEtaleWeilSheaf.NativeTensorKFlat
 
-set_option maxHeartbeats 400000 in
 -- The dependent ringed and ordinary tensor models require extra elaboration during descent.
 /-- Extend the normalized representative coherence equations to all derived objects.
 

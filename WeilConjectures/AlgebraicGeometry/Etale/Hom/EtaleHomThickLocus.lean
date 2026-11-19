@@ -180,8 +180,8 @@ distinguished triangle to the reversed triangle, including the connecting sign),
 its isomorphism locus is thick: zero, isomorphisms, all integer shifts, cones, and
 retracts.  No flatness assumption on `φ` is made.
 
-Source: blueprint thm-coef-finite-hom, proof paragraph 2 (localization reduction),
-and Stacks 06YY, 07A4, 08J9, 08JC; expanded proof steps 1--9 of this node.
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2 (localization
+reduction), and Stacks 06YY, 07A4, 08J9, 08JC; expanded proof steps 1--9 of this node.
 
 Proof:
 1. The canonical comparison on flat-term K-flat models is coefficient multiplication;

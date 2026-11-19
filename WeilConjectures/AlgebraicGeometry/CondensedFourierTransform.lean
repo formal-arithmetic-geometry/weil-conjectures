@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 /-! # Fourier--Deligne transform with ordinary condensed module coefficients
 
 Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/def-fd-transform.md
-(blueprint: def-fd-transform).
+(blueprint: sec-Fourier-inversion).
 The ordinary etale transform is re-exported by the kernel module.
 -/
 
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The ordinary condensed transform Rp₂! (Lp₁* K tensor Kψ)[r], using the specified
 compactification. All operations are the published module-object derived operations.
 Source: latest blueprint, def-fd-transform.md, displayed formula
-(blueprint: def-fd-transform). -/
+(blueprint: sec-Fourier-inversion). -/
 def condensedFourierTransform
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -52,7 +52,7 @@ def condensedFourierTransform
 its rank. The structure map of the product is the composite of its first projection
 and the given base map, so it introduces no additional geometric datum.
 Source: latest blueprint, def-fd-transform.md, affine application
-(blueprint: def-fd-transform). -/
+(blueprint: sec-Fourier-inversion). -/
 def condensedAffineFourierTransform
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -70,7 +70,7 @@ def condensedAffineFourierTransform
 /-- The affine-line transform after a field extension of the finite field of the
 character. The field inclusion supplies the actual structure morphism.
 Source: latest blueprint, def-fd-transform.md, base change application
-(blueprint: def-fd-transform). -/
+(blueprint: sec-Fourier-inversion). -/
 def condensedFieldFourierTransform
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

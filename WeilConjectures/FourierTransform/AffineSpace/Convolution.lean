@@ -192,7 +192,7 @@ variable [Fintype n]
 /-- The integrand of the convolution `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` on the triple product with points
 `(x, ξ, y)`: `r₁₂^* 𝒦_ψ ⊗ᴸ r₂₃^* 𝒦_{ψ⁻¹} = ℒ_{ψ(⟨x, ξ⟩ - ⟨ξ, y⟩)}` is the pullback of the
 Fourier kernel `𝒦_ψ` along the shear `(x, ξ, y) ↦ (ξ, x - y)`.
-(sketch blueprint: `lem-fd-convolution-kernel`) -/
+(sketch blueprint: `proposition-fourier-inversion`) -/
 theorem nonempty_iso_fourierKernel_convolution_integrand
     [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((derivedTensorRight (ModuleCat.{u + 1} Λ)

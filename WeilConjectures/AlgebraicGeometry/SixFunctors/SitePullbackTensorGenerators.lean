@@ -109,7 +109,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
 /-! # Ordinary tensor generators and flat representatives for a ringed-site pullback
 
-Source: Stacks Project, Modules on Sites, Tag 03EL, and Cohomology on Sites, Tag 0G7E.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL, and Cohomology on Sites, Tag 0G7E
+* Stacks Project, Modules on Sites, Tag 03D7
 -/
 
 @[expose] public noncomputable section
@@ -455,9 +458,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The linear adjunction to the supplied sectionwise pushforward, retaining the
-underlying set-sheaf hom equivalence. The scalar insertion is the image of `1 ⊗ m`.
-This is the module adjunction construction of Stacks 03D7 with its normalization
-recorded, rather than discarded by the existential wrapper. -/
+underlying set-sheaf hom equivalence.
+The scalar insertion is the image of `1 ⊗ m`. -/
 private theorem normalizedAdjunction
     {C D : Type c} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]
@@ -978,13 +980,7 @@ attribute [-instance] additiveWeakSheafification additiveLocallyBijective setShe
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Ordinary tensor comparison, uniquely normalized on scalar-extension generators.
-Source: Stacks 03EL and 0G7E (blueprint: lem-sf-site-pullback-tensor-generators).
-Proof: construct the algebraic inverse image and extend scalars along the adjunct
-coefficient morphism. The set-sheaf adjunction identifies its unit on pure tensors.
-Restrictions and scalar multiplication give the generator equation. The module
-adjunction and pure tensor generation give uniqueness. K-flatness with flat terms
-is preserved by the same inverse-image/scalar-extension construction. -/
+/-- Ordinary tensor comparison, uniquely normalized on scalar-extension generators. -/
 theorem sitePullbackTensorGenerators
     {C D : Type c} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

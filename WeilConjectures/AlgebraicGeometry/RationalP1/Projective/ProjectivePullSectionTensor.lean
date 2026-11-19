@@ -180,22 +180,7 @@ private theorem eqToIso_symm_eq {C : Type*} [Category C] {A B : C} (h : A = B) :
   cases h
   rfl
 
-/-- The native derived tensor comparison commutes with the canonical section comparison.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, compatibility of tensor and inverse-image composition.
-(blueprint: lem-sfb-projective-pull-section-tensor).
-Proof: on ordinary modules the inverse-image compositor is the scalar-extension
-pasting isomorphism. Its tensor square commutes on balanced pure tensors: both
-arrows pull back the two factors and multiply the scalar coefficients. Apply the
-termwise comparisons to total complexes and descend by the two-variable K-flat
-universal property. The native comparison is the generic left-derived tensor
-comparison, so its composition formula gives the square for the derived
-compositor. Its right-unit law gives the tensor square for identity inverse
-image (cancel the invertible tensor comparison). Finally insert the equality
-Delta followed by f equals identity, compose with the identity comparison, and
-cancel the compositor. No Tate object, field, or base-object hypothesis is used.
-The calculation also applies to zero objects and the empty scheme. -/
+/-- The native derived tensor comparison commutes with the canonical section comparison. -/
 theorem pullSectionIso_tensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

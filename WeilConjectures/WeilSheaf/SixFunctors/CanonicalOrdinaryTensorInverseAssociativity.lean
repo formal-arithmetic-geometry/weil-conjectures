@@ -38,9 +38,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option synthInstance.maxHeartbeats 200000 in
 -- The native and ringed tensor instances have separate coefficient and site universes.
 /-- The canonical evaluation normalization forces inverse underived associativity.
 Source: Stacks 03EK and 03EO; normalized inverse closed mates.

@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictTargetTransport
 
-/-! # Predicate types for sheaf Kummer assembly
-Source: the normalized source, target and finite evaluation in the diagonal tower
-proof, steps (3)--(4) (blueprint: def-sfb-kummer-sheaf-predicates). -/
+/-! # Predicate types for sheaf Kummer assembly -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,10 +28,8 @@ attribute [local irreducible] DerivedCategory.singleFunctors
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The type of finite-class predicates, sharing the actual exact image objects.
-Source: the finite class assertion of diagonal tower proof step (4)
-(blueprint: def-sfb-kummer-sheaf-predicates).
-This is the literal predicate type, with no chosen object or proof. -/
+/-- The type of finite-class predicates: families of predicates on the degree-two `Ext` classes
+from the finite quotients `Q n` to the Cartier lines. -/
 def sheafKummerFinitePredicate (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (Q : ∀ n, Sheaf (Scheme.ProEt.topology W)
       (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n))) : Type (u + 1) :=
@@ -42,10 +38,8 @@ def sheafKummerFinitePredicate (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
       (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
         (cartierResidue_cast ℓ (n + 1)) W)) 2 → Prop
 
-/-- The type of source-normalization predicates on the actual finite quotients.
-Source: diagonal tower proof step (3), source normalization
-(blueprint: def-sfb-kummer-sheaf-predicates).
-This shares only the predicate type and makes no existence assertion. -/
+/-- The type of source-normalization predicates: families of predicates on isomorphisms from
+the levels of `D.ordinary.E.obj S` to the finite quotients `Q n`. -/
 def sheafKummerSourcePredicate (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

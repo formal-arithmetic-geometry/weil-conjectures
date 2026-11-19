@@ -138,7 +138,7 @@ private theorem restrictionCounit
     (a : F ⊣ P) (b : F' ⊣ P') (al : L ⊣ H) (aj : J ⊣ V) (ak : K ⊣ U)
     (rev : V ⊣ J) (k : U ≅ H ⋙ V) (θ : G ⋙ F' ≅ F ⋙ H)
     [IsIso al.unit] [IsIso aj.unit] [(F' ⋙ V).IsEquivalence]
-    [IsIso (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom)).natTrans] (M : C) :
+    [IsIso (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom))] (M : C) :
     IsIso (U.map (a.counit.app (K.obj M))) := by
   have : J.Full := aj.fullyFaithfulLOfIsIsoUnit.full
   have : J.Faithful := aj.fullyFaithfulLOfIsIsoUnit.faithful
@@ -149,7 +149,7 @@ private theorem restrictionCounit
   have hs : IsIso (V.map (b.counit.app (J.obj M))) := sectionCounit b rev M
   have hN : IsIso (V.map (b.counit.app (H.obj N))) :=
     (NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight b.counit V) eN).mpr hs
-  let β := (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom)).natTrans
+  let β := (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom))
   have hm := mateEquiv_counit a b (TwoSquare.mk _ _ _ _ θ.hom) N
   have hh : IsIso (V.map (θ.hom.app _) ≫ V.map (H.map (a.counit.app N))) := by
     rw [← Functor.map_comp, ← hm, Functor.map_comp]
@@ -232,7 +232,7 @@ theorem refinementProperCounit_isIso
   have hβ : IsIso (RingedRestrictionExchange.exchange q) :=
     (RingedRestrictionExchange.open_comparison q).2
   change IsIso ((mateEquiv ar ap
-    (TwoSquare.mk _ _ _ _ (RingedRestrictionExchange.pullSquare q).hom)).natTrans) at hβ
+    (TwoSquare.mk _ _ _ _ (RingedRestrictionExchange.pullSquare q).hom))) at hβ
   exact restrictionCounit ar ap ag aS ac bS k (RingedRestrictionExchange.pullSquare q) M
 
 /--

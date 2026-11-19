@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.GroupTheory.Torsion
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # The map on sheaf cohomology induced by an exact functor
@@ -160,7 +161,7 @@ In torsor language: the fibre of `E → Q` over a global section of `Q` is an `F
 is trivial exactly when the section lifts; every class in `H¹(F) = Ext¹(ℤ, F)` arises this way
 from an embedding of `F` into an injective sheaf. This is the half of the classification of
 `H¹` by torsors that is needed for vanishing results.
-(blueprint: `lem-sc-torsor-h1`, vanishing direction) -/
+(blueprint: `lemma-cohomology-multiplicative-group--3`, vanishing direction) -/
 theorem Sheaf.subsingleton_H_one_of_surjective (F : Sheaf J AddCommGrpCat.{w}) {T : C}
     (hT : IsTerminal T)
     (h : ∀ ⦃E Q : Sheaf J AddCommGrpCat.{w}⦄ (ι : F ⟶ E) (π : E ⟶ Q) (w : ι ≫ π = 0),

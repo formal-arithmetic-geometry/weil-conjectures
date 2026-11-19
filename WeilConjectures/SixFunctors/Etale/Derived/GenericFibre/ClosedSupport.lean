@@ -26,7 +26,7 @@ change map `Ex_* : g^* Rj_* j^* M ⟶ Rj'_* g_U^* j^* M` is one
 generic point of an integral base this applies to every bounded constructible `M`, by
 `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_generic`: this is
 the second comparison `g_Z^* Ri^! M ≅ Ri_{η̄}^! g_X^* M` of blueprint
-`lem-weil-geometric-generic-exchange`
+`lemma-restriction-geometric-generic-fibre`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_generic`).
 
 ## Proof
@@ -115,7 +115,7 @@ of `i`, `j` along `g` (with disjoint images). If the derived base change map
 `β_M : g_Z^* Ri^! M ⟶ Ri'^! g^* M` of
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`.
 
-This is the closed-support step of blueprint `lem-weil-geometric-generic-exchange`: pull back
+This is the closed-support step of blueprint `lemma-restriction-geometric-generic-fibre`: pull back
 the supported localization triangle `i_! Ri^! M ⟶ M ⟶ Rj_* j^* M ⟶` along `g` and use that
 `i'_!` is fully faithful (`CategoryTheory.Pretriangulated.isIso_of_adjunction_triangle`). -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso {X X' Z Z' U U' : Scheme.{u}}
@@ -162,7 +162,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso {X X' Z Z' U U' 
     rw [NatIso.isIso_inv_app] at h
     exact h
 
-/-- Blueprint `lem-weil-geometric-generic-exchange`, second comparison: closed exceptional
+/-- Blueprint `lemma-restriction-geometric-generic-fibre`, second comparison: closed exceptional
 inverse images commute with generic base change.
 
 Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
