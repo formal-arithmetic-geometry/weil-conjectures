@@ -1,44 +1,62 @@
-Case ID / declaration
----------------------
-RealPushforward / `isReal_higherLowerShriek_one`
-Origin: `ed3d39ddb5d`; Lean/Mathlib 4.35.0; Weil server the build server.
-Imports/options: see `Before.lean`, `maxHeartbeats 200000`.
+# RealPushforward: exact Kernel site
 
-1. Phase attribution
---------------------
-Synchronous Kernel on: 54.73 s / 4,686,328 KB RSS, `(kernel) deterministic timeout`.
-Synchronous Kernel skipped: 3.00 s / 3,125,404 KB RSS, exit 0.
-Baseline Before/After: 54.94 s timeout / 2.80 s ok. Per-declaration
-profiler: type checking 53.8 s, tactic execution 209 ms, elaboration 23.1 ms;
-the diagnostic remains `(kernel) deterministic timeout`. Conclusion: Kernel.
+**Declaration:** `AlgebraicGeometry.WeilSheaf` example with the statement of
+`isReal_higherLowerShriek_one`, from `ed3d39ddb5d`.
 
-2. What is expensive?
----------------------
-The target theorem value, at the final `rwa` that rewrites
-`FrobeniusModule.localPolynomial` and `Polynomial.coeff_expand_mul` on a
-concrete stalk. The type-only control is represented by the cheap After theorem
-application to the identical statement; the remaining cost belongs to the old
-value or its inferred-type conversion. Exact Kernel suboperation is unresolved.
+## Phase gate
 
-3. Structural evidence
-----------------------
-The old proof exposes the concrete stalk's `localPolynomial` definition.
-The fix proves `charpolyRev = localPolynomial` for an abstract Frobenius module
-and rewrites through that lemma. Hidden instance arguments and shared DAG size
-were not dumped; no exact `Expr.equal` result is claimed.
+The master build tree is Lean/Mathlib 4.35.0. Every command below was run
+with `LEAN_NUM_THREADS=1`, `-DElab.async=false`, and `/usr/bin/time -v`.
+The original Before file took 54.73 s with Kernel checking and reported
+`(kernel) deterministic timeout` (4,686,328 KB RSS); the same file with
+`-Ddebug.skipKernelTC=true` took 3.00 s (3,125,404 KB). The type-only probe
+`probes/TypeOnly.lean` took 2.80 s with Kernel on. Thus the declared type and
+the prefix are cheap; the expensive work is in the value check.
 
-4. Why is it expensive?
------------------------
-Primary A (reduction/definitional equality); contributing E (instance-path
-mismatch). Kernel skip is a controlled phase probe; abstract versus concrete
-rewrite is a controlled proof-term change. Alternative B remains possible for
-the rewrite proof itself. Evidence strength: strongly supported.
+## Top-down bisect
 
-5. Confidence
--------------
-Strongly supported. A typed-sorry bisect of the final rewrite term could
-separate its argument check from final type reconciliation.
+1. `probes/TypeOnly.lean` replaces the whole value by a typed `sorry`: 2.80 s.
+2. `probes/BeforeFinalSorry.lean` retains the old `rwa` prefix but replaces
+   the final consumer with `sorry`: 3.00 s.
+3. `probes/FinalExact.lean` retains the same prefix, binds its local equality
+   as `this`, and checks `exact this` against the declaration goal: 54.54 s,
+   deterministic timeout (4,686,316 KB RSS).
 
-6. Scope and caveats
---------------------
-Standalone in-situ declaration; diagnostic Kernel skip is not a proof result.
+The first expensive operation is therefore the final Kernel conversion
+`type(this) == declared goal`, not `h₁`, `hc`, or the preceding rewrite
+tactics. `probes/PrintConversion.lean` uses `pp.explicit`, `pp.proofs`, and
+`pp.universes` to print both sides immediately before that conversion.
+
+## Exact expressions and diagnosis
+
+The left side has head
+`Polynomial.coeff (LinearMap.charpolyRev (stalk ((higherLowerShriek ... 1).obj K) ξ))`;
+the goal has the same coefficient expression with
+`FrobeniusModule.localPolynomial` as its polynomial head. The visible
+`rw [FrobeniusModule.localPolynomial, ← hc, Polynomial.coeff_expand_mul ...]`
+does not make the stored equality's inferred type syntactically identical to
+the theorem statement: the implicit `PadicAlgCl`, stalk, `WeilSheaf`, and
+finite-point instances remain in different unfolded paths. The proof is an
+ordinary equality, so the conversion must reduce the concrete polynomial
+representation before accepting it.
+
+With `-Ddiagnostics=true -Ddiagnostics.threshold=1` on `FinalExact.lean`,
+Kernel diagnostics report a deterministic timeout and deep reduction chains;
+the compact successful fixed proof avoids this conversion. The exact
+diagnostic command is recorded by the probe name and is reproducible with:
+
+```text
+LEAN_NUM_THREADS=1 /usr/bin/time -v timeout 1800 nice -n 10 lake env lean \
+  -DElab.async=false -Ddiagnostics=true -Ddiagnostics.threshold=1 probes/FinalExact.lean
+```
+
+## Classification
+
+Primary mechanism: **A (reduction/definitional equality heavy)**. Contributing
+mechanism: **E (representation/instance mismatch)**. The phase gate and the
+typed-sorry/final-`exact` bisect confirm the conversion site; the printed
+`charpolyRev` versus `localPolynomial` heads and the fixed abstract theorem
+application explain why reduction is required. Evidence: **confirmed** for the
+cost site, **strongly supported** for A/E. The fixed form takes 2.80 s and
+uses `isReal_higherLowerShriek_one`, which keeps the polynomial identity behind
+a generic lemma.
