@@ -16,13 +16,15 @@ and the goal. The full original handoff is 110.07 s; After is 3.50 s.
 ## Exact component
 
 The first expensive application is
-`@derivedTensorHomShiftComparison_component ... K n`. Its result uses
+`@derivedTensorHomShiftComparison_component ... K n`, specifically its
+concrete `hv` transpose-premise argument. Its result uses
 `shiftFunctor (DerivedCategory (Sheaf ...))`; the declaration uses
 `shiftFunctor (DerivedCategoryModule B X)`. The printed state shows the same
 `scalarExtension`, `CommShift`, and `v.app`, but different derived-category
 wrappers and category instances under the shifted morphism. Replacing the
-transpose premise by a typed `sorry` does not remove the 29 s application
-cost, so `hv` is not the hotspot.
+transpose premise by a typed `sorry` in `probes/NoHV.lean` reduces the probe
+to 3.30 s,
+isolating the conversion of `hv` as the hotspot.
 
 Diagnostics on the application-only probe report 421,348 Kernel unfolds of
 `Add.add`, 303,281 `Functor.obj`, and 213,332 `DFunLike.coe`. This is the
