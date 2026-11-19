@@ -24,23 +24,21 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Sta
 
 For a finite coefficient ring `Λ` whose exponent is invertible on a field `k` and schemes of
 finite type over `k`, this file collects which of the six operations preserve the bounded
-constructible complexes `Dᵇc` and the constructible complexes of finite Tor amplitude `Dctf`
-(blueprint `sk-rem-sf-matrix`), and the explicit intervals that come with them (blueprint
-`rem-sf-preservation-matrix`).
+constructible complexes `Dᵇc` and the constructible complexes of finite Tor amplitude `Dctf`,
+and the explicit intervals that come with them.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_preservation`: `Lf^*`, `Rf_*` and `Rf_!`
   preserve `Dᵇc`.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_preservation`: `Lf^*`, `⊗ᴸ`, `Rf_*`, `Rf_!`,
-  `RHom`, `Rf^!` and `𝔻_X` preserve `Dctf`.
+  `RHom` and `Rf^!` preserve `Dctf`, over an arbitrary field.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`:
   on the pro-étale site, `RHom(ν^* K, ν^* M)` lies in `Dctf` for `K, M ∈ Dctf(X_ét)`.
 - `AlgebraicGeometry.Etale.torAmplitudeIn_preservation`: the Tor-amplitude intervals of these
   operations.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`
-  (`det-rem-sf-matrix-hom-devissage`, in
-  `WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage`): `RHom` preserves `Dctf`
+  (in `WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage`): `RHom` preserves `Dctf`
   over an arbitrary field, by dévissage.
 
 ## Implementation notes
@@ -74,24 +72,22 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 include aX in
-/-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
+/-- Internal Hom with finite Tor amplitude.
 
 For `X` of finite type over `k` and a finite `Λ` whose exponent is invertible on `X`, the
 internal hom carries `Dctf(X, Λ) × Dctf(X, Λ)` into `Dctf(X, Λ)`, for two arbitrary objects.
-This is `AlgebraicGeometry.Etale.boundedConstructible_derivedHom` together with the
-dimension-dependent bound `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`, `X` having
-finite dimension. -/
-theorem constructibleFiniteTor_derivedHom [IsAlgClosed k] [HasInvertibleExponent Λ X]
+The proof: by the generation theorem for
+`Dctf(X, Λ)` it suffices to treat a first argument `Rg_* Rj_! P` supported on one stratum, where
+the internal hom is computed by the tensor–Hom exchanges for `g` and `j`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`). No Verdier duality is
+used, and `k` need not be algebraically closed. -/
+theorem constructibleFiniteTor_derivedHom [HasInvertibleExponent Λ X]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
-  obtain ⟨hKbc, a, b, hKt⟩ := hK
-  obtain ⟨hMbc, c, d, hMt⟩ := hM
-  obtain ⟨m, hm⟩ := exists_topologicalKrullDim_le aX
-  exact ⟨boundedConstructible_derivedHom Λ aX a b c d hKbc hKt hMbc hMt, _, _,
-    torAmplitudeIn_derivedHom Λ aX m hm a b c d hKbc hKt hMbc hMt⟩
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
+  constructibleFiniteTor_derivedHom_of_field Λ aX hK hM
 
 omit [Finite Λ] in
 /-- A Tate twisting object `Λ_X(m)` is a constructible flat sheaf placed in degree `0`, every
@@ -107,7 +103,7 @@ lemma exists_tateObject_iso_singleFunctor [HasTateTwist Λ] (X : Scheme.{u})
   have := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hfib
   exact ⟨L, this.1, this.2, hfib, he⟩
 
-/-- Blueprint `rem-sf-proetale-hom-status`: Status of the coefficient-only internal-Hom bound.
+/-- Status of the coefficient-only internal-Hom bound.
 
 The sharp bound `[c - b, d - a]` of
 `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable` requires a site-perfect first
@@ -115,7 +111,7 @@ variable: for arbitrary bounded constructible first variables of finite Tor ampl
 false. Let `k` be algebraically closed, `Λ` a nonzero finite ring whose exponent is invertible on
 `k`, and `s : V ⟶ 𝔸¹` the origin. Then `K = Rs_! Λ_V` and `M = Λ(1)[2]` have Tor amplitude in
 `[0, 0]` and `[-2, -2]`, while `RHom(Rs_! Λ_V, Λ(1)[2]) ≅ Rs_* Rs^! Λ(1)[2] ≅ Rs_* Λ_V` is
-concentrated in degree `0`, outside `[-2, -2]`; this is the blueprint's
+concentrated in degree `0`, outside `[-2, -2]`; this is the classical
 `RHom(i_* Λ, Λ) = i_* Λ(-1)[-2]`, twisted by `Λ(1)[2]`. The identification `Rs^! Λ(1)[2] ≅ Λ_V`
 is the normalisation of the twist (`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`), which
 is why a normalized Tate twist datum is assumed, as in every statement comparing the twist with
@@ -209,7 +205,7 @@ variable (f : X ⟶ Y) (hf : f ≫ aY = aX)
 include hf
 
 omit [QuasiCompact aX] in
-/-- Blueprint `sk-rem-sf-matrix`: The preservation matrix, bounded constructible cells.
+/-- The preservation matrix, bounded constructible cells.
 
 For a finite `Λ` whose exponent is invertible on `k` and a morphism `f : X ⟶ Y` of schemes of
 finite type over `k`, the operations `Lf^* : Dᵇc(Y) ⥤ Dᵇc(X)`, `Rf_* : Dᵇc(X) ⥤ Dᵇc(Y)` and
@@ -234,19 +230,23 @@ theorem boundedConstructible_preservation [QuasiCompact f] [HasCompactification 
       K hK,
     fun K hK ↦ boundedConstructible_rightDerivedLowerShriek Λ f aX aY hf K hK⟩
 
-/-- Blueprint `sk-rem-sf-matrix`: The preservation matrix, constructible finite-Tor cells.
+/-- The preservation matrix, constructible finite-Tor
+cells.
 
-For a finite `Λ` whose exponent is invertible on `k` and a separated morphism `f : X ⟶ Y` of
-schemes of finite type over `k`, with `X` separated over `k`, the following operations preserve
-the constructible complexes of finite Tor amplitude:
+For a finite `Λ` whose exponent is invertible on an arbitrary field `k` and a separated morphism
+`f : X ⟶ Y` of schemes of finite type over `k`, with `X` separated over `k`, the six operations
+preserve the constructible complexes of finite Tor amplitude:
 `Lf^* : Dctf(Y) ⥤ Dctf(X)`, `- ⊗ᴸ - : Dctf(X) × Dctf(X) ⥤ Dctf(X)`, `Rf_* : Dctf(X) ⥤ Dctf(Y)`,
 `Rf_! : Dctf(X) ⥤ Dctf(Y)`, `RHom(-, -) : Dctf(X) × Dctf(X) ⥤ Dctf(X)` for two arbitrary
-objects, `Rf^! : Dctf(Y) ⥤ Dctf(X)` for every such `f` (no admissibility hypothesis), and the
-Verdier dual `𝔻_X : Dctf(X) ⥤ Dctf(X)`. The pro-étale internal-Hom cell is
+objects, and `Rf^! : Dctf(Y) ⥤ Dctf(X)` for every such `f` (no admissibility hypothesis). The
+internal-Hom cell is `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`, by dévissage,
+and the pro-étale internal-Hom cell is
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`.
+The Verdier dual, which is not one of the six operations, preserves `Dctf(X)` over a perfect
+field (`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`).
 -/
 theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactification f]
-    [IsSeparated aX] [HasCompactification aX] [IsAlgClosed k] :
+    [IsSeparated aX] [HasCompactification aX] :
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -272,11 +272,7 @@ theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactificatio
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-          ((R(f)^![Λ]).obj K)) ∧
-    (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
-        constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-          ((verdierDual Λ aX).obj (op K))) := by
+          ((R(f)^![Λ]).obj K)) := by
   have : HasInvertibleExponent Λ Y := .of_hom aY
   have : IsSeparated f := by
     have : IsSeparated (f ≫ aY) := hf ▸ inferInstance
@@ -287,29 +283,26 @@ theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactificatio
     fun K hK ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f hK,
     fun K M hK hM ↦ have : HasInvertibleExponent Λ X := .of_hom aX
       constructibleFiniteTor_derivedHom Λ aX hK hM,
-    fun K hK ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK,
-    fun K hK ↦ constructibleFiniteTor_verdierDual Λ aX hK⟩
+    fun K hK ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK⟩
 
-/-- Blueprint `rem-sf-preservation-matrix`: Preservation results and their actual hypotheses.
+/-- Preservation results and their actual hypotheses.
 
 For a finite `Λ` whose exponent is invertible on `k` and a separated morphism `f : X ⟶ Y` of
 schemes of finite type over `k`, with `X` separated over `k`, the finite-coefficient preservation
 results come with these intervals:
 
-1. `Lf^*` preserves Tor amplitude in `[a, b]` (`lem-sf-pullback-tor-amplitude`), and the
-   derived tensor product of objects of Tor amplitude `[a, b]` and `[c, d]` has Tor amplitude
-   in `[a + c, b + d]` (`lem-sf-tensor-ctf`);
+1. `Lf^*` preserves Tor amplitude in `[a, b]`, and the derived tensor product of objects of Tor
+   amplitude `[a, b]` and `[c, d]` has Tor amplitude in `[a + c, b + d]`;
 2. on the pro-étale site, if `dim X ≤ d`, the direct image `Rf_*` carries a bounded constructible
    complex of Tor amplitude `[a, b]` to a bounded constructible complex of Tor amplitude
-   `[a, b + 2d]` (`cor-sf-direct-image-ctf-proetale`);
+   `[a, b + 2d]`;
 3. if `dim X ≤ m`, the internal hom `RHom(K, M)` of bounded constructible `K, M` of Tor
    amplitude `[a, b]` and `[c, d]` has Tor amplitude in `[c - b - 2m, d - a + 2m]`, and in the
-   sharper interval `[c - b, d - a]` when `K` is dualizable (`thm-sf-hom-ctf`);
+   sharper interval `[c - b, d - a]` when `K` is dualizable;
 4. `Rf^!` sends `D_c^[a, b]` with Tor amplitude in `[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`
-   with the same Tor bound, for a constant `D` depending only on `f`
-   (`thm-sf-preservation-class`); if `dim X ≤ d` the Verdier dual `𝔻_X` sends Tor amplitude
-   `[a, b]` to `[-b - 2d, -a]` (`lem-weil-verdier-preservation-strata`), and it preserves
-   `Dctf(X)` and is an involution on it (`thm-sf-biduality-class`).
+   with the same Tor bound, for a constant `D` depending only on `f`; if `dim X ≤ d` the Verdier
+   dual `𝔻_X` sends Tor amplitude `[a, b]` to `[-b - 2d, -a]`, and it preserves `Dctf(X)` and is
+   an involution on it.
 
 The pro-étale and boundary entries are
 `AlgebraicGeometry.ProEtale.DerivedCategory.preservationMatrix_of_isAlgClosure`, and the
@@ -402,12 +395,13 @@ namespace ProEtale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `sk-rem-sf-matrix`: The preservation matrix, the pro-étale internal-Hom cell.
+/-- The preservation matrix, the pro-étale internal-Hom
+cell.
 
 Let `X` be of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring whose
 exponent is invertible on `X`. For a pulled-back pair `ν^* K, ν^* M` with `K, M ∈ Dctf(X_ét, Λ)`,
 the pro-étale internal hom `RHom(ν^* K, ν^* M)` lies in `Dctf(X_proét, Λ)`: it is
-`ν^* RHom(K, M)` (`thm-sf-hom-comparison-constructible`), and `RHom(K, M) ∈ Dctf(X_ét, Λ)`. -/
+`ν^* RHom(K, M)`, and `RHom(K, M) ∈ Dctf(X_ét, Λ)`. -/
 theorem constructibleFiniteTor_derivedHom_mapDerivedCategory {k : Type u} [Field k] {p : ℕ}
     [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -425,15 +419,14 @@ theorem constructibleFiniteTor_derivedHom_mapDerivedCategory {k : Type u} [Field
     (constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_derivedHom Λ aX hK hM))
 
-/-- Blueprint `cor-sf-hom-ctf-proetale-unconditional`: The pro-étale internal Hom for a
-site-perfect first variable.
+/-- The pro-étale internal Hom for a site-perfect
+first variable.
 
 Let `X` be of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring whose
 exponent is invertible on `X`. Let `K', M' ∈ Dᵇc(X_ét, Λ)` have Tor amplitude in `[a, b]` and
 `[c, d]`, with `K'` site-perfect (dualizable). Then `RHom(ν^* K', ν^* M')` is bounded
-constructible with Tor amplitude in `[c - b, d - a]`: it is `ν^* RHom(K', M')`
-(`thm-sf-hom-comparison-constructible`), and `RHom(K', M')` has these properties on the étale
-site (`thm-sf-hom-ctf`), which `ν^*` preserves (`lem-exc-comparison-tor-interval`). -/
+constructible with Tor amplitude in `[c - b, d - a]`: it is `ν^* RHom(K', M')`, and
+`RHom(K', M')` has these properties on the étale site, which `ν^*` preserves. -/
 theorem boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable {k : Type u}
     [Field k] {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -460,7 +453,7 @@ theorem boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable {k : 
     (torAmplitudeIn _ X _ _).prop_of_iso e (torAmplitudeIn_mapDerivedCategory Λ
       (Etale.torAmplitudeIn_derivedHom_of_isDualizable Λ aX a b c d hK hKt hKd hM hMt))⟩
 
-/-- Blueprint `rem-sf-preservation-matrix`: Preservation results and their actual hypotheses,
+/-- Preservation results and their actual hypotheses,
 the entries over `k = 𝔽̄_p`.
 
 Let `X` be separated of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring
@@ -468,12 +461,12 @@ whose exponent is invertible on `k`.
 
 * Item 3, pro-étale: for `K', M' ∈ Dᵇc(X_ét, Λ)` of Tor amplitude `[a, b]` and `[c, d]` with
   `K'` site-perfect, `RHom(ν^* K', ν^* M')` is bounded constructible of Tor amplitude
-  `[c - b, d - a]` (`cor-sf-hom-ctf-proetale-unconditional`); for a general first variable
-  this sharp bound fails (`AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`).
+  `[c - b, d - a]`; for a general first variable this sharp bound fails
+  (`AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`).
 * Item 4, closed-boundary exchange: for a closed immersion `i : Z ⟶ X` and `L ∈ Dctf(X, Λ)`,
-  `i^* 𝔻_X L ≅ 𝔻_Z Ri^! L` (`cor-weil-boundary-duality-discharge`).
+  `i^* 𝔻_X L ≅ 𝔻_Z Ri^! L`.
 * Item 3, status: for a general constructible first variable of finite Tor amplitude the
-  sharp bound `[c - b, d - a]` is false (`rem-sf-proetale-hom-status`); the counterexample
+  sharp bound `[c - b, d - a]` is false; the counterexample
   uses the normalisation of the Tate twist, whence the normalized Tate twist datum. -/
 theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
     [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k] [HasInvertibleExponent Λ (Spec (.of k))]

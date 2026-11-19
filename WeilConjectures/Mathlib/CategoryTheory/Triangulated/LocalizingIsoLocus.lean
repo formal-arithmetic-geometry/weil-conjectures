@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 
 Source: blueprint `sec-six-functors-basics/sk-lem-sf-determination/`,
 `det-sf-determination-localizing.md`, statement and proof
-(blueprint: det-sf-determination-localizing).
+(blueprint: lemma-checking-isomorphisms-constructible-complexes--1).
 
 The localizing closure is written as its defining intersection in the statement.
 Coproduct closure uses arbitrary colimit cocones, including singleton coproducts,
@@ -38,7 +38,8 @@ If it contains `S`, it contains the intersection of all triangulated subcategori
 containing `S` and closed under arbitrary coproducts, namely the localizing closure.
 
 Source: blueprint `sec-six-functors-basics/sk-lem-sf-determination/`,
-`det-sf-determination-localizing.md` (blueprint: det-sf-determination-localizing).
+`det-sf-determination-localizing.md` (blueprint:
+lemma-checking-isomorphisms-constructible-complexes--1).
 
 Proof: write the common source as `C`, whether it is the ambient category or the
 localizing category. Naturality conjugates components along object isomorphisms,
@@ -46,8 +47,8 @@ so the locus is replete. The component at zero is invertible, since exact functo
 send zero to zero. Shift compatibility conjugates the component on a shifted object
 to the shifted original component, giving closure under every integer shift.
 Exactness and compatibility form a morphism of image distinguished triangles;
-`lem-sf-triangle-two-out-of-three` gives invertibility at the third vertex from
-any two, proving triangulated closure in Mathlib's full-subcategory convention.
+`lemma-checking-isomorphisms-constructible-complexes--1` gives invertibility at the third vertex
+from any two, proving triangulated closure in Mathlib's full-subcategory convention.
 For a coproduct with inclusions `i`, both functors give colimit cocones. The
 universal property constructs an inverse whose precomposition with `F₂.map i` is
 `inv (η.app _) ≫ F₁.map i`. Naturality and coproduct

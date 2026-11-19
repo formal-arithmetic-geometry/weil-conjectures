@@ -112,7 +112,8 @@ private theorem baseChangeMapCore_pasting
       conjugateEquiv_mateEquiv_vcomp _ ((adj g').comp (adj h')),
       mateEquiv_hcomp, hc, hc']
     simp only [baseChangeSquare, Equiv.apply_symm_apply]
-    ext M : 1
+    apply NatTrans.ext
+    funext M
     apply hom_ext
     intro U
     simp only [pushforwardSquare, TwoSquare.hComp, TwoSquare.whiskerTop,

@@ -128,7 +128,6 @@ local macro_rules | `(tactic| lia) => `(tactic| decide)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 400000 in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Assemble presentations on prescribed CE resolutions with normalized quotient pages,
 and compute a supplied map of the first page on ordinary sheaf cohomology.

@@ -50,7 +50,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 attribute [local irreducible] nativeWeilRingedMonoidal nativeRingedTensorComparison
 
-set_option maxHeartbeats 800000 in
 -- The concrete model maps remain folded during tensor-square elaboration.
 /-- The left iterated native model commutes with the ringed comparison.
 Source: Stacks 0FPT

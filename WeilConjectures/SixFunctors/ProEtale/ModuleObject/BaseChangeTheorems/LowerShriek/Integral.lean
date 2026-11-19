@@ -28,7 +28,7 @@ Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, w
 The constructions are the generic ones of those files. The only coefficient-specific input is the
 proper base change theorem for bounded constructible `𝒪_E`-sheaves
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`,
-blueprint `sk-thm-sfb-proper-base-change`, in
+blueprint `proposition-proper-direct-image-constructible-complexes`, in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper`).
 
 ## Main statements

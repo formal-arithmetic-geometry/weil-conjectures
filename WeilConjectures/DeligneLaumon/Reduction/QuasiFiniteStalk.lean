@@ -295,9 +295,9 @@ variable [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCo
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The local Frobenius of a quasi-finite direct image** (blueprint: `lem-zl-quasi-finite`).
-For `f : X ⟶ Y` separated and quasi-finite and a closed point `y` of `Y`, there are finitely many
-closed points `x` of `X` above `y`, and
+/-- **The local Frobenius of a quasi-finite direct image** (blueprint:
+`lemma-finite-quasi-finite-direct-images`). For `f : X ⟶ Y` separated and quasi-finite and a closed
+point `y` of `Y`, there are finitely many closed points `x` of `X` above `y`, and
 `det (1 - T F_y ∣ (f₀!F)_ȳ) = ∏_{x ↦ y} det (1 - T^{e_x} F_x ∣ F_x̄)`, with
 `e_x = deg x / deg y = [κ(x) : κ(y)]` (see `Scheme.Hom.degreeOver_dvd_of_isOver`). -/
 theorem WeilSheaf.exists_charpolyRev_stalk_higherLowerShriek_zero (F : WeilSheaf k₀ l X)

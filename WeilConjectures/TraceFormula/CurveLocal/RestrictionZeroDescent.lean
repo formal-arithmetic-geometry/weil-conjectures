@@ -21,7 +21,7 @@ blueprint, the punctured diagonals `B ∖ y` and `B' ∖ y'`) with a morphism `�
 If the upstairs restriction `RΓ(O', π^* P) ⟶ RΓ(U', ψ'^* π^* P)` vanishes, so does the
 downstairs restriction `RΓ(O, P) ⟶ RΓ(U, ψ^* P)`
 (`AlgebraicGeometry.Etale.sectionsRestriction_app_eq_zero_of_trace`, blueprint
-`det-tf-restriction-zero-trace-descent`): the two restrictions form a commutative square with the
+`lemma-descent-vanishing-finite-etale`): the two restrictions form a commutative square with the
 pullbacks along `π` and `π_U`, since both composites are the restriction along `U' ⟶ T`, so
 `d` times the downstairs restriction factors through the upstairs one.
 
@@ -44,7 +44,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 include hw hπ in
 /-- **Descent of the vanishing along a cover with a trace** (blueprint
-`det-tf-restriction-zero-trace-descent`): if the restriction along `π_U : U' ⟶ U` admits a trace
+`lemma-descent-vanishing-finite-etale`): if the restriction along `π_U : U' ⟶ U` admits a trace
 `t` with `π_U^* ≫ t = d • 𝟙`, `d` invertible in `Λ`, and the upstairs restriction
 `RΓ(O', π^* P) ⟶ RΓ(U', ψ'^* π^* P)` vanishes, then the downstairs restriction
 `RΓ(O, P) ⟶ RΓ(U, ψ^* P)` vanishes. -/
@@ -83,7 +83,7 @@ theorem sectionsRestriction_app_eq_zero_of_trace
 
 include hw hπ in
 /-- **Descent of the vanishing along a finite étale cover of invertible degree** (blueprint
-`det-tf-restriction-zero-trace-descent`): if `π_U : U' ⟶ U` is finite étale, all of its geometric
+`lemma-descent-vanishing-finite-etale`): if `π_U : U' ⟶ U` is finite étale, all of its geometric
 fibres have `d` points and `d` is invertible in `Λ`, the vanishing of the upstairs restriction
 `RΓ(O', π^* P) ⟶ RΓ(U', ψ'^* π^* P)` implies that of the downstairs restriction
 `RΓ(O, P) ⟶ RΓ(U, ψ^* P)`: trace after pullback along `π_U` is multiplication by `d`. -/

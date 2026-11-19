@@ -20,7 +20,7 @@ pullback exchanges `α_{ρ_M}(A)` and `α_{ρ_P}(A ⊠ B)` are split monomorphis
 (`NearbyCyclesModel.Hom.autAction`), the Künneth map of the pullback models is equivariant, and
 the automorphisms act trivially on the nearby cycles of the second factor, then the square is a
 tensor retract (`NearbyCyclesModel.isTensorRetract_of_average`). This is the formal part of the
-projection formula for invariants (blueprint `det-nearby-kunneth-invariants`) in the
+projection formula for invariants (blueprint `prose-E-10`) in the
 generic-slicing step of Gabber's Künneth formula.
 
 -/
@@ -48,11 +48,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
-`det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
-`sk-prop-tf-nearby-external-kunneth`). Let finite families of automorphisms `σM i`, `σN i`, `σP i`
-of the pullback models act on nearby cycles (`NearbyCyclesModel.Hom.autAction`). Suppose the
-Künneth map `Π'` of the pullback models is equivariant, the action on the second factor is
-trivial, and `n` times the idempotents of split pullback exchanges `α_{ρ_M}(A)`,
+`prose-E-10`, in the form used in the generic-slicing step of
+`proposition-external-kunneth-formula-nearby-cycles`). Let finite families of automorphisms `σM i`,
+`σN i`, `σP i` of the pullback models act on nearby cycles (`NearbyCyclesModel.Hom.autAction`).
+Suppose the Künneth map `Π'` of the pullback models is equivariant, the action on the second factor
+is trivial, and `n` times the idempotents of split pullback exchanges `α_{ρ_M}(A)`,
 `α_{ρ_P}(A ⊠ B)` are
 the sums of the actions, i.e. the exchanges are the inclusions of the invariants. Then
 `(E ⊗ B)^G = E^G ⊗ B`: the retractions are carried into each other by `Π'`

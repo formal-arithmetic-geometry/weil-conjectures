@@ -17,7 +17,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsS
 
 /-! # Normalized reduction of signed completed Tate lines
 
-Source: prop-weil-twist-preserves, proof steps 1 and 6.
+Source: definition-tate-twists--10, proof steps 1 and 6.
 (blueprint: lem-weil-signed-twist-reduction-comparison).
 -/
 
@@ -316,7 +316,7 @@ private theorem reduction_unique (n : ℕ) (c d : ReductionMaps l E S n)
       _ = _ := (hc.2.2.2 k V _ x).symm
 
 /-- Reduction respects signed powers, dual evaluation, and exact derived line tensor.
-Source: blueprint prop-weil-twist-preserves, proof steps 1 and 6
+Source: blueprint definition-tate-twists--10, proof steps 1 and 6
 (blueprint: lem-weil-signed-twist-reduction-comparison).
 
 Proof: the integral first line reduces to its prescribed finite line by the original

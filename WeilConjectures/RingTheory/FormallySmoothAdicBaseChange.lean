@@ -40,7 +40,7 @@ Proof:
    since it carries every product of `k` elements of `n` there. Thus `g` kills
    `n ^ k` and is continuous (`def-weil-pbc-algebra-hom-quotient`).
 3. Apply `h` to obtain an `R`-algebra lift `f : S → D` of `g`
-   (`def-weil-pbc-formally-smooth-adic`).
+   (`theorem-finite-etale-covers-proper-henselian--2`).
 4. The tensor-product pushout property extends `f` and the structure map `R' → D`
    to `f' : S ⊗[R] R' → D`, sending `s ⊗ r'` to `f(s) * r'`. Its restriction
    to `R'` is the structure map, so it is an `R'`-algebra map
@@ -48,7 +48,7 @@ Proof:
 5. The quotient of `f'` and `g'` agree after both tensor-factor inclusions;
    pushout uniqueness makes them equal. This solves every lifting problem
    (`lem-weil-pbc-algebra-tensor-pushout-universal-property`,
-   `def-weil-pbc-algebra-hom-quotient`, `def-weil-pbc-formally-smooth-adic`). -/
+   `def-weil-pbc-algebra-hom-quotient`, `theorem-finite-etale-covers-proper-henselian--2`). -/
 theorem formallySmoothAdic_tensorProduct
     (R : Type u) (S : Type v) (R' : Type w)
     [CommRing R] [CommRing S] [CommRing R']

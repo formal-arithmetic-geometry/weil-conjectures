@@ -40,7 +40,7 @@ private theorem quotientDualLowDegrees
       (ringedKoszulDualUnit O r s n).f 0 ≫ e₀.hom =
         (HomologicalComplex.singleObjXSelf (.up ℤ) 0 U).hom ∧
       ∀ i : Fin r, biproduct.ι _ i ≫ e₁.hom ≫ D.d (-1) 0 ≫ e₀.hom =
-        (ringedKoszulScalar O (s i)) ^ (n + 1) := by
+        ((ringedKoszulScalar O (s i)) ^ (n + 1)).asHom := by
   obtain ⟨e, _, hu⟩ :
       ∃ e : ∀ m : ℕ, ringedNegativeKoszul O r s m ≅
           (ringedKoszulDualTower O r s).obj (op m),
@@ -134,7 +134,7 @@ private theorem reduction_tensor_scalar_zero (ha : Ideal.span (Set.range a) = I)
     (η : 𝟭 (Mod (coefficients J A I b)) ⟶ reduction J A I b n) :
     let := SheafOfModules.monoidalCategory (coefficients J A I b)
     M ◁ ((ringedKoszulScalar (coefficients J A I b)
-      (algebraSection (baseMap J A I b) (a i))) ^ (n + 1)) ≫
+      (algebraSection (baseMap J A I b) (a i))) ^ (n + 1)).asHom ≫
         (ρ_ M).hom ≫ η.app M = 0 := by
   let O := coefficients J A I b
   let s : (SheafOfModules.unit (rings O)).sections :=
@@ -143,7 +143,7 @@ private theorem reduction_tensor_scalar_zero (ha : Ideal.span (Set.range a) = I)
   let z := sectionScalarNat O s (n + 1)
   let := SheafOfModules.monoidalCategory O
   have hs : z.app (SheafOfModules.unit (rings O)) =
-      (ringedKoszulScalar O (algebraSection (baseMap J A I b) (a i))) ^ (n + 1) :=
+      ((ringedKoszulScalar O (algebraSection (baseMap J A I b) (a i))) ^ (n + 1)).asHom :=
     sectionScalarNat_unit O s (n + 1)
   change M ◁ _ ≫ (ρ_ M).hom ≫ η.app M = 0
   rw [← hs]
@@ -170,11 +170,11 @@ private theorem tensor_boundary_zero
     (e₁ : (⨁ fun _ : Fin r ↦ SheafOfModules.unit (rings O)) ≅ D.X (-1))
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections) (n : ℕ)
     (he : ∀ i : Fin r, biproduct.ι _ i ≫ e₁.hom ≫ D.d (-1) 0 ≫ e₀.hom =
-      (ringedKoszulScalar O (s i)) ^ (n + 1))
+      ((ringedKoszulScalar O (s i)) ^ (n + 1)).asHom)
     (F : Mod O ⥤ Mod O) (η : 𝟭 (Mod O) ⟶ F)
     (hz : ∀ (i : Fin r) (M : Mod O),
       let := SheafOfModules.monoidalCategory O
-      M ◁ ((ringedKoszulScalar O (s i)) ^ (n + 1)) ≫
+      M ◁ ((ringedKoszulScalar O (s i)) ^ (n + 1)).asHom ≫
         (ρ_ M).hom ≫ η.app M = 0) (M : Mod O) :
     let := SheafOfModules.monoidalCategory O
     M ◁ (D.d (-1) 0 ≫ e₀.hom) ≫ (ρ_ M).hom ≫ η.app M = 0 := by

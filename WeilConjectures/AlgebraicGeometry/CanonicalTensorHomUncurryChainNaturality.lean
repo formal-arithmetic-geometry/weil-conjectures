@@ -155,9 +155,17 @@ private theorem naturality_transport
   apply (cancel_mono eM'.inv).mp
   simpa only [Category.assoc, hc'] using h
 
+-- Keep the functorial composition calculation independent of resolution instances.
+private theorem map_comp_naturality_of_lift
+    {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
+    {P P' I I' : C} {H H' : D}
+    (a : P' ⟶ P) (φ : P ⟶ I) (g : I ⟶ I')
+    (s : Q.obj I ⟶ H) (s' : Q.obj I' ⟶ H') (h : H ⟶ H') (f : Q.obj P ⟶ H)
+    (hg : Q.map g ≫ s' = s ≫ h) (hφ : Q.map φ ≫ s = f) :
+    Q.map (a ≫ φ ≫ g) ≫ s' = Q.map a ≫ f ≫ h := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hg, ← Category.assoc (Q.map φ), hφ]
 
-set_option maxHeartbeats 800000 in
--- The resolution and localization instances need extra elaboration heartbeats.
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
 The input `f` is an arbitrary derived morphism; the three variable maps are chain maps.
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
@@ -220,23 +228,23 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
         (DerivedCategory.Q.map a ⊗ₘ DerivedCategory.Q.map b) ≫
           t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M) f ≫
             DerivedCategory.Q.map c := by
+  let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
   let := schemeDerivedTensorMonoidal X
+  let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
   intro P P' L L' M M' a b c f
   obtain ⟨F, F', a₀, eP, eP', hF, hF', ha⟩ :=
-    kflat_arrow_rep X P P' (DerivedCategory.Q.map a)
+    kflat_arrow_rep X P P' (Q.map a)
   obtain ⟨N, N', b₀, eL, eL', hN, hN', hb⟩ :=
-    kflat_arrow_rep X L L' (DerivedCategory.Q.map b)
-  have hn (f₀ : DerivedCategory.Q.obj F ⟶
+    kflat_arrow_rep X L L' (Q.map b)
+  have hn (f₀ : Q.obj F ⟶
       (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).obj (op (DerivedCategory.Q.obj N), DerivedCategory.Q.obj M)) :
-      t (DerivedCategory.Q.obj F') (DerivedCategory.Q.obj N') (DerivedCategory.Q.obj M')
-        (DerivedCategory.Q.map a₀ ≫ f₀ ≫
+        X.toRingedSpace.sheaf).obj (op (Q.obj N), Q.obj M)) :
+      t (Q.obj F') (Q.obj N') (Q.obj M')
+        (Q.map a₀ ≫ f₀ ≫
           (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-            X.toRingedSpace.sheaf).map ((DerivedCategory.Q.map b₀).op,
-              DerivedCategory.Q.map c)) =
-      (DerivedCategory.Q.map a₀ ⊗ₘ DerivedCategory.Q.map b₀) ≫
-        t (DerivedCategory.Q.obj F) (DerivedCategory.Q.obj N) (DerivedCategory.Q.obj M) f₀ ≫
-          DerivedCategory.Q.map c := by
+            X.toRingedSpace.sheaf).map ((Q.map b₀).op, Q.map c)) =
+      (Q.map a₀ ⊗ₘ Q.map b₀) ≫
+        t (Q.obj F) (Q.obj N) (Q.obj M) f₀ ≫ Q.map c := by
     have : IsGrothendieckAbelian.{u}
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
       SheafOfModules.isGrothendieckAbelian _
@@ -248,38 +256,35 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
     obtain ⟨φ, hφ⟩ := chain_lift F
       (homComplex (R := X.sheaf) N ((schemeHomKInjectiveResolution X).obj M))
       (f₀ ≫ (schemeDerivedInternalHomResolutionIso X N M).hom)
-    have hf : DerivedCategory.Q.map φ ≫
-        (schemeDerivedInternalHomResolutionIso X N M).inv = f₀ := by
-      rw [hφ]
-      simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    have hf : Q.map φ ≫
+        (schemeDerivedInternalHomResolutionIso X N M).inv = f₀ :=
+      (Iso.comp_inv_eq _).2 hφ
     let ψ : F' ⟶ homComplex (R := X.sheaf) N'
         ((schemeHomKInjectiveResolution X).obj M') :=
       a₀ ≫ φ ≫ (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map
         (X := (op N, (schemeHomKInjectiveResolution X).obj M))
         (Y := (op N', (schemeHomKInjectiveResolution X).obj M'))
         (b₀.op, (schemeHomKInjectiveResolution X).map c)
-    have hψ : DerivedCategory.Q.map ψ ≫
+    have hψ : Q.map ψ ≫
         (schemeDerivedInternalHomResolutionIso X N' M').inv =
-        DerivedCategory.Q.map a₀ ≫ f₀ ≫
+        Q.map a₀ ≫ f₀ ≫
           (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-            X.toRingedSpace.sheaf).map ((DerivedCategory.Q.map b₀).op,
-              DerivedCategory.Q.map c) := by
-      dsimp only [ψ]
-      simp only [Functor.map_comp, Category.assoc]
-      rw [hom_model_natural, ← Category.assoc (DerivedCategory.Q.map φ), hf]
+            X.toRingedSpace.sheaf).map ((Q.map b₀).op, Q.map c) := by
+      exact map_comp_naturality_of_lift Q a₀ φ _ _ _ _ f₀
+        (hom_model_natural X N N' M M' b₀ c) hf
     rw [← hψ, ht F' N' M' hF' ψ, ← hf, ht F N M hF φ]
     exact schemeTensorHomUncurry_localized_evaluation X F F' N N' M M' a₀ b₀ c φ
   exact naturality_transport
     (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
       X.toRingedSpace.sheaf) t eP eP' eL eL'
-    (Iso.refl (DerivedCategory.Q.obj M)) (Iso.refl (DerivedCategory.Q.obj M'))
-    (DerivedCategory.Q.map a) (DerivedCategory.Q.map b) (DerivedCategory.Q.map c)
-    (DerivedCategory.Q.map a₀) (DerivedCategory.Q.map b₀) (DerivedCategory.Q.map c)
+    (Iso.refl (Q.obj M)) (Iso.refl (Q.obj M'))
+    (Q.map a) (Q.map b) (Q.map c)
+    (Q.map a₀) (Q.map b₀) (Q.map c)
     ha hb (by simp) hn f
     (hi _ _ _ _ _ _ eP eL (Iso.refl _) f)
     (hi _ _ _ _ _ _ eP' eL' (Iso.refl _)
-      (DerivedCategory.Q.map a ≫ f ≫
+      (Q.map a ≫ f ≫
         (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-          X.toRingedSpace.sheaf).map ((DerivedCategory.Q.map b).op, DerivedCategory.Q.map c)))
+          X.toRingedSpace.sheaf).map ((Q.map b).op, Q.map c)))
 
 end AlgebraicGeometry

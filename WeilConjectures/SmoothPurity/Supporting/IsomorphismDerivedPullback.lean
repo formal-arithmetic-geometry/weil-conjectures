@@ -543,7 +543,7 @@ Proof:
    x ↦ x tensor 1 and x tensor a ↦ x tensor rho(a). The identifications respect
    resolution comparisons by lem-weil-integral-reduction-tower-well-defined.
 3. Exact countable products (lem-weil-proetale-countable-products-exact) represent
-   derived products by lem-weil-derived-limit-existence. For B(P)=product Res_n P_n,
+   derived products by lemma-reduction-derived-nakayama. For B(P)=product Res_n P_n,
    C(P)=Cone(1-s)[-1] has differential d(y,x)=(-d y-(1-s)x,d x). The quotient
    maps a:P→B(P) satisfy (1-s)a=0, so x ↦ (0,a(x)) is the canonical comparison.
    The L=E case of lem-weil-finite-free-completed-scalar-comparison says this

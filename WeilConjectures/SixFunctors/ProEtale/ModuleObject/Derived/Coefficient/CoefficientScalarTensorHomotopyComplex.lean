@@ -41,7 +41,6 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.totalComparison ModuleRingedComparison.ordinaryTensorComparison
   Localization.Monoidal.tensorBifunctor
 
-set_option maxHeartbeats 800000 in
 -- Compare the homotopy and complex presentations of the same tensor counit face.
 /-- The general derived tensor counit equation on internal complex representatives.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, derived tensor compatibility.

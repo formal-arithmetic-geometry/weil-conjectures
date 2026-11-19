@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageUnitMorp
 
 /-! # Compatibility of the fixed section map with restriction
 
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-section-map-restriction)
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -23,27 +24,8 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
--- The fixed derived comparison terms need extra elaboration heartbeats.
 /-- The actual canonical section map commutes with successive base change.
-It asserts an equality of maps and does not assert their bijectivity.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-section-map-restriction)
-
-Proof: The two projection equations identify j with the cartesian comparison by
-pullback hom-extensionality. Use the associativity law of
-exists_derivedPullbackComposition on i, t and the fibre-product projections.
-The definition of the base-change map is the transpose of the pulled-back counit
-under the pinned derived adjunction. The unit and counit naturality laws therefore
-identify the composite base-change mate with the mate for t'. The canonical
-single pullback square transports the source structure-sheaf map through this
-composition comparison. Apply H^0. canonicalDegreeZeroMateSquare identifies the
-result with the ordinary pullback mate. The inverse mate of pushforward composition
-has exactly the coefficient comparison c, by uniqueness of conjugate isomorphisms.
-Evaluation of the ordinary adjunction at 1 gives its unit on the given section.
-Naturality of the module morphisms lets restriction from j inverse-top to top pass
-through the coefficient comparison, yielding the displayed formula. This calculation
-uses no flatness, properness, invertibility, nonempty scheme or nonempty fibre. -/
+It asserts an equality of maps and does not assert their bijectivity. -/
 theorem picardDirectImageSectionMap_restriction
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -81,8 +63,6 @@ theorem picardDirectImageSectionMap_restriction
   set_option backward.isDefEq.respectTransparency.types false in
   set_option backward.defeqAttrib.useBackward true in
   set_option maxRecDepth 2048 in
-  set_option maxHeartbeats 800000 in
-  -- The fixed derived comparison terms need extra elaboration heartbeats.
     classical
     dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
     intro T T' i t t' h j hj₁ hj₂ ξ
@@ -126,14 +106,25 @@ theorem picardDirectImageSectionMap_restriction
       rw [Iso.hom_inv_id_assoc, adj.homEquiv_unit]
       exact adj.unit_naturality n
     rw [hh] at hev
-    rw [← picardDirectImageUnitMorphism_evaluation f L W k t ξ,
-      ← picardDirectImageUnitMorphism_evaluation f L W k t'
-        (picardDerivedModelRestriction _ i t t' h ξ)]
-    change (c.app L).inv.app ⊤
-      (((Modules.tensorPullback j).obj N).presheaf.map _
-        ((n ≫ adj.unit.app N).val.app (Opposite.op ⊤) (1 : Γ(pullback f (t ≫ k), ⊤)))) =
-      n'.val.app (Opposite.op ⊤) (1 : Γ(pullback f (t' ≫ k), ⊤))
-    erw [hev, hn']
-    rfl
+    calc
+      _ = (c.app L).inv.app ⊤
+          (((Modules.tensorPullback j).obj N).presheaf.map (homOfLE j.preimage_top.ge).op
+            ((n ≫ adj.unit.app N).val.app (Opposite.op ⊤)
+              (1 : Γ(pullback f (t ≫ k), ⊤)))) :=
+        congrArg (fun s ↦ (c.app L).inv.app ⊤
+          (((Modules.tensorPullback j).obj N).presheaf.map (homOfLE j.preimage_top.ge).op
+            ((adj.unit.app N).val.app (Opposite.op ⊤) s)))
+          (picardDirectImageUnitMorphism_evaluation f L W k t ξ).symm
+      _ = (c.app L).inv.app ⊤
+          ((e.inv ≫ (Modules.tensorPullback j).map n).val.app (Opposite.op ⊤)
+            (1 : Γ(pullback f (t' ≫ k), ⊤))) :=
+        congrArg ((c.app L).inv.app ⊤) hev
+      _ = n'.val.app (Opposite.op ⊤) (1 : Γ(pullback f (t' ≫ k), ⊤)) :=
+        congrArg (fun a : SheafOfModules.unit
+            (moduleRings (pullback f (t' ≫ k)).toRingedSpace) ⟶
+            (Modules.tensorPullback (pullback.fst f (t' ≫ k))).obj L ↦
+          a.val.app (Opposite.op ⊤) (1 : Γ(pullback f (t' ≫ k), ⊤))) hn'.symm
+      _ = _ := picardDirectImageUnitMorphism_evaluation f L W k t'
+        (picardDerivedModelRestriction _ i t t' h ξ)
 
 end AlgebraicGeometry.Scheme

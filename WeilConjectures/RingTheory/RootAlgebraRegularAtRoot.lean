@@ -9,6 +9,7 @@ module
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
+public import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.KrullDimension.Regular
 import WeilConjectures.RingTheory.RegularRingOfQuotientAway

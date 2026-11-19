@@ -19,8 +19,7 @@ We complete the induction proving the affine Artin bound `ArtinBound d` in every
   preserve cohomology, which reduces to affine space
   (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_mvPolynomial`);
 * over an arbitrary field one passes to an algebraic closure
-  (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure`, blueprint
-  `lem-sc-cd-ground-field`).
+  (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure`).
 -/
 
 @[expose] public section

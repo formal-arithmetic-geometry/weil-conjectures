@@ -103,7 +103,7 @@ theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
-                |>.natTrans.app K))) =
+                |>.app K))) =
             (e i).hom ≫
               termwiseSectionsRestriction (Q.smallModelLegs.app i)
                 ((strictLocalNeighbourhoodProjection f s).app i)

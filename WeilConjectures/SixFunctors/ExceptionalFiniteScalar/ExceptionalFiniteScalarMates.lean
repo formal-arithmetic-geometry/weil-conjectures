@@ -47,8 +47,8 @@ of $P^i$ preserves this injection. On any stratum trivializing $P^i$, its tensor
 ring $B$ is finite locally constant. Take a common finite refinement for the finitely many terms.
 The constructible Serre theorem gives constructible kernels, images and cohomology. The same flat
 complex supported in $[u,v]$ therefore has Tor interval $[u,v]$ over $B$, including for nonflat
-$A\to B$. Uses: lem-sf-proetale-constructible-origin, lem-sf-comparison-tor-amplitude,
-lem-sf-flat-model, lem-pur-derived-change-of-rings, thm-constructible-serre,
+$A\to B$. Uses: theorem-comparison-constructible-sheaves, lem-sf-comparison-tor-amplitude,
+lemma-flat-models-generators--1, lem-pur-derived-change-of-rings, thm-constructible-serre,
 lem-weil-pbc-independent-bounded-flat-kflat.
 
 2. Exact comparison inverse image and the canonical derived pullback/tensor identification
@@ -60,7 +60,7 @@ are literally those of the ambient functor: $I_{T,B}T_{a,T}=S_{a,T}I_{T,A}$, wit
 realization. Exactness and its canonical shifts are inherited from derived change of rings. This
 construction applies separately to every actual finite ring map, including an identity or a
 composite. Uses: lem-weil-pbc-ringed-topoi-derived-tensor-pullback,
-lem-sf-proetale-constructible-origin, lem-sf-comparison-tor-amplitude,
+theorem-comparison-constructible-sheaves, lem-sf-comparison-tor-amplitude,
 lem-pur-derived-change-of-rings.
 
 3. Write $F^e_R=Rp_{c,\mathrm{et},R,*}j^e_{!,R}$ and $G^e_R=f^\times_{c,R}$ on the entire etale
@@ -71,8 +71,8 @@ the proper counit after the canonical pullback/tensor identification; the open m
 balancing on the open and zero off it. The compact scalar coherence theorem proves this specified
 composite invertible for any finite $A\to B$, with no flatness assumption. Thus
 $q^e_a:S_YF^e_A\cong F^e_BS_X$ is the required left map rather than an independently chosen
-isomorphism. Uses: thm-amb-etale-exceptional-adjoint, lem-asd-proper-finite-coefficient-extension,
-lem-pur-etale-compact-scalar-coherence.
+isomorphism. Uses: theorem-existence-exceptional-inverse-image--1,
+lem-asd-proper-finite-coefficient-extension, lem-pur-etale-compact-scalar-coherence.
 
 4. Put $U_T=\operatorname{Res}_{a,T}$. Derived ringed direct-image composition applied to the two
 factorizations of the same ringed-topos map gives $U_YRp_{c,B,*}\cong Rp_{c,A,*}U_{\overline X}$.
@@ -93,7 +93,7 @@ F^e_A(B_X\otimes^L_AK)$. Naturality of $h$ then rewrites the image as
 $U_Y\epsilon^e_{B,N}\,h^{-1}\,F^e_A(U_Xc)\,P\,\eta$. Since $P$ is natural in the constant factor
 and is the identity for the unit $A$, $F^e_A(U_Xc)\,P\,\eta=\mathrm{id}$. Uses:
 lem-weil-pbc-ringed-topoi-derived-pushforward-composition,
-lem-pur-sheaf-ring-derived-coefficient-adjunction, thm-amb-etale-exceptional-adjoint,
+lem-pur-sheaf-ring-derived-coefficient-adjunction, theorem-existence-exceptional-inverse-image--1,
 lem-galois-yoneda-hom-bijection, lem-pur-etale-compact-scalar-coherence,
 lem-asd-proper-finite-coefficient-extension, lem-weil-pbc-ringed-projection-mate-exact.
 
@@ -113,7 +113,7 @@ the displayed formula. It is the defining transpose of the exceptional constant-
 The constant-tensor theorem applies to $B\in D(A\text{-}\mathrm{Mod})$ without requiring
 perfection or bounded projective dimension, so this restricted map is invertible. Restriction
 detects quasi-isomorphisms: the cohomology of a cone is unchanged as an abelian sheaf. Hence the
-$B$-linear map $b^e_a$ is invertible. Uses: thm-amb-etale-exceptional-adjoint,
+$B$-linear map $b^e_a$ is invertible. Uses: theorem-existence-exceptional-inverse-image--1,
 lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-asd-proper-finite-coefficient-extension,
 lem-pur-etale-compact-scalar-coherence, lem-pur-etale-exceptional-constant-tensor.
 
@@ -128,8 +128,8 @@ equation in step 5 therefore gives
 $$\epsilon_{B,T_{a,Y}L}F_B(b_{a,L})q_{a,G_AL}=T_{a,Y}(\epsilon_{A,L}).$$ Fullness identifies the
 transported arrows with natural transformations on the actual full subcategories, and full
 faithfulness makes this the unique transpose there. Uses: lem-sf-exceptional-finite-operations,
-lem-sf-proetale-constructible-origin, thm-weil-pbc-site-comparison,
-lem-sf-class-compact-support-comparison.
+theorem-comparison-constructible-sheaves, theorem-bounded-below-cohomology-comparison,
+proposition-comparison-immersions--4.
 
 7. For the realization of $q$, expand the compact-support site comparison into its two factors.
 The proper factor is the counit-normalized direct-image mate, not an unspecified site isomorphism.
@@ -142,7 +142,7 @@ proper scalar-adjunction mate followed by the open tensor map. The counit equati
 identifies $b$ with its required normalized transpose; no second choice of Hom bijections is
 introduced. The restriction description in step 5 transports to etale-origin objects using these
 same identifications and site units. Uses: lem-weil-pbc-comparison-direct-image-canonical-mate,
-lem-cbc-proetale-extension-zero-comparison, lem-weil-pbc-ringed-topoi-derived-tensor-pullback,
+proposition-comparison-immersions--1, lem-weil-pbc-ringed-topoi-derived-tensor-pullback,
 lem-asd-proper-finite-coefficient-extension, lem-pur-sheaf-ring-derived-coefficient-adjunction.
 
 8. All shift equations use the chosen derived shifts. Derived change of rings is exact. The
@@ -162,7 +162,7 @@ bijection makes the two arrows equal. This also proves compatibility for every i
 unique adjoint shift structure. Uses: lem-pur-derived-change-of-rings,
 lem-weil-pbc-ringed-projection-mate-exact, lem-sfb-ringed-projection-first-shift,
 lem-pur-etale-open-derived-tensor, lem-weil-pbc-adjunction-shift-compatibility-unique,
-lem-weil-pbc-commshift-nattrans-comp-whisker, thm-amb-etale-exceptional-adjoint.
+lem-weil-pbc-commshift-nattrans-comp-whisker, theorem-existence-exceptional-inverse-image--1.
 -/
 theorem exceptionalFiniteScalarMates
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

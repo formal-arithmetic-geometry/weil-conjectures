@@ -10,7 +10,7 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLeve
 
 /-! # Naturality part of strict tensor tower reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers-naturality).
 
 The quotient normalization fixes the comparison on reduced original-section
@@ -75,7 +75,7 @@ private theorem reindexTower_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
   rfl
 
 /-- Naturality of a generator-compatible strict tower family.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers-naturality).
 STATEMENT-DISPUTED: the former signature omitted quotient normalization; repaired here.
 The quotient-generator normalization is required: an arbitrary objectwise

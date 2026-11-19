@@ -17,6 +17,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubcategory
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleExactClosure
+import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Limits
 import Mathlib.Data.Int.Interval
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -25,9 +26,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-!
 # Bounded constructible pro-etale complexes form a triangulated subcategory
 
-Source: Stacks Project, Tags 09AL, 09B5 and 06UQ; Weil blueprint,
-`def-weil-finite-torsion-constructibility`
-(blueprint: lem-weil-proetale-dbc-triangulated).
+## References
+
+* Stacks Project, Tags 09AL, 09B5 and 06UQ
+* Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction
 -/
 
 @[expose] public section
@@ -38,9 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical constant-coefficient inverse-image comparison is invertible.
-Source: Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction
-(blueprint: lem-pur-proetale-constant-coefficient-comparison). -/
+/-- The canonical constant-coefficient inverse-image comparison is invertible. -/
 theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) :=
   proEtaleConstantRingComparison_isIso.{u} f A
@@ -106,12 +106,7 @@ theorem finite_stalk_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     [Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)] :
     Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) G) := by
-  let E : proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
-      ModuleCat.{u + 1} (proEtaleGeometricStalkRing y (proEtaleConstantRing Y A)) :=
-    (SheafOfModules.forget _ ⋙
-    PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y) _ ⋙
-    PresheafOfModules.colimitFunctor (C := ProEtaleGeometricNeighbourhood y)
-      (colimit.isColimit (proEtaleGeometricStalkRingDiagram y (proEtaleConstantRing Y A))))
+  let E := geometricRingModuleStalkFunctor y (proEtaleConstantRing Y A)
   have : Finite (E.obj F) :=
     ‹Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)›
   change Finite (E.obj G)
@@ -122,13 +117,7 @@ theorem finite_stalk_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) (hF : IsZero F)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
     Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) := by
-  let D := PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y)
-    ((proEtaleConstantRing Y A).obj ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
-  let L := PresheafOfModules.colimitFunctor (C := ProEtaleGeometricNeighbourhood y)
-    (colimit.isColimit (proEtaleGeometricStalkRingDiagram y (proEtaleConstantRing Y A)))
-  have : D.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-  have : L.IsLeftAdjoint := (PresheafOfModules.colimitAdjunction _).isLeftAdjoint
-  have hz := (SheafOfModules.forget _ ⋙ D ⋙ L).map_isZero hF
+  have hz := (geometricRingModuleStalkFunctor y (proEtaleConstantRing Y A)).map_isZero hF
   have : Subsingleton (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) :=
     ModuleCat.subsingleton_of_isZero hz
   infer_instance
@@ -188,31 +177,7 @@ private theorem finite_homology_support_iff_bounded
       ⟨b, fun i hi ↦ le_of_not_gt fun h ↦ hi ((DerivedCategory.isLE_iff K b).1 hb i h)⟩⟩
 
 /-- Bounded globally constructible cohomology is invariant under isomorphisms and
-cuts out a full triangulated subcategory. Source: Stacks Project, Tags 09AL,
-09B5 and 06UQ; Weil blueprint, `def-weil-finite-torsion-constructibility`
-(blueprint: lem-weil-proetale-dbc-triangulated).
-
-Proof:
-1. A zero sheaf is constructible using the single stratum equal to the whole scheme.
-The canonical constant-ring comparison is invertible by uniqueness of the
-constant-sheaf left adjoint, with its normalization checked on constant sections.
-The specified pullback is therefore the existing exact operations functor and preserves zero
-objects.
-Localization and geometric stalks preserve zero objects as well. The identity covering
-therefore trivializes its restriction with the zero module, and its geometric stalks have
-singleton underlying
-sets. An isomorphism transports the same stratification, local trivializations and stalk
-finiteness, because module pullback, localization and geometric stalks are functorial.
-2. `constructibleProEtale_exactClosure` gives kernels, cokernels and extensions in the
-constructible class. The universal-property isomorphisms identify arbitrary limiting
-kernels and colimiting cokernels with the selected ones, yielding the ObjectProperty
-closure classes required by `cohomology_in_weak_serre_subcategory`.
-3. Its bounded clause supplies the triangulation of `homologyProperty P` intersected
-with the bounded standard derived class. A set of integers is finite exactly when it is
-bounded above and below. `DerivedCategory.isGE_iff` and `isLE_iff` turn those bounds for
-nonzero homology into the standard derived bounds. Thus the displayed predicate equals
-that intersection, up to commutation of its two conjuncts. Substitute this equality to
-obtain both isomorphism closure and triangulation. -/
+cuts out a full triangulated subcategory. -/
 theorem proEtale_bounded_constructible_isTriangulated
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     ObjectProperty.IsClosedUnderIsomorphisms (fun K : proEtaleDerivedCategory Y A ↦

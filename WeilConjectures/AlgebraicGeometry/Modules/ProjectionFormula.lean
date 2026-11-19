@@ -61,9 +61,7 @@ variable {X Y : Scheme.{u}}
 section Tensor
 
 /-- **The pullback of a tensor product is the tensor product of the pullbacks.** For
-`g : X ⟶ Y` and `𝒪_Y`-modules `M` and `N`, `g^* (M ⊗ N) ≅ g^* M ⊗ g^* N`: the pullback is the
-sheafification of the presheaf pullback, which is a base change of modules and so commutes with
-tensor products. -/
+`g : X ⟶ Y` and `𝒪_Y`-modules `M` and `N`, `g^* (M ⊗ N) ≅ g^* M ⊗ g^* N`. -/
 theorem nonempty_pullback_tensorObj_iso (g : X ⟶ Y) (M N : Y.Modules) :
     Nonempty ((pullback g).obj (M ⊗ N) ≅ (pullback g).obj M ⊗ (pullback g).obj N) :=
   ⟨(Functor.Monoidal.μIso (pullback g) M N).symm⟩
@@ -78,8 +76,8 @@ theorem nonempty_pullback_tensorPow_iso (g : X ⟶ Y) (M : Y.Modules) (m : ℕ) 
     obtain ⟨e⟩ := nonempty_pullback_tensorObj_iso g M (M.tensorPow m)
     exact ⟨e ≪≫ (Iso.refl _ ⊗ᵢ ih.some)⟩
 
-/-- **A tensor product of invertible modules is invertible.** If `M` and `N` are trivial near a
-point `x`, so is `M ⊗ N`, since restriction to an open commutes with tensor products. -/
+/-- **A tensor product of invertible modules is invertible.** If `M` and `N` are invertible, so is
+`M ⊗ N`. -/
 instance IsInvertible.tensorObj (M N : X.Modules) [M.IsInvertible] [N.IsInvertible] :
     (M ⊗ N).IsInvertible where
   exists_isoUnit x := by
@@ -151,8 +149,8 @@ lemma nonempty_over_tensorObj_iso (M N : X.Modules) {U : X.Opens}
   exact ⟨(overEquiv U).functor.preimageIso (overEquivObjOverIso (M ⊗ N) U ≪≫ t ≪≫
     (Iso.refl _ ⊗ᵢ e) ≪≫ ρ_ _ ≪≫ (overEquivObjOverIso M U).symm)⟩
 
-/-- **Twisting by an invertible module preserves quasi-coherence.** Locally `N ≅ 𝒪_X`, so
-`M ⊗ N` is locally isomorphic to `M`, and quasi-coherence is a local property. -/
+/-- **Twisting by an invertible module preserves quasi-coherence.** If `M` is
+quasi-coherent and `N` is invertible, then `M ⊗ N` is quasi-coherent. -/
 theorem isQuasicoherent_tensorObj (M N : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] [N.IsInvertible] :
     (M ⊗ N).IsQuasicoherent := by
@@ -165,8 +163,8 @@ theorem isQuasicoherent_tensorObj (M N : X.Modules)
   rw [Opens.coversTop_iff]
   exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hU x⟩)
 
-/-- **Twisting by an invertible module preserves finite presentation.** Locally `N ≅ 𝒪_X`, so
-`M ⊗ N` is locally isomorphic to `M`, and finite presentation is a local property. -/
+/-- **Twisting by an invertible module preserves finite presentation.** If `M`
+is of finite presentation and `N` is invertible, then so is `M ⊗ N`. -/
 theorem isFinitePresentation_tensorObj (M N : X.Modules)
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M] [N.IsInvertible] :
     (M ⊗ N).IsFinitePresentation := by
@@ -300,16 +298,9 @@ lemma bijective_projectionHom_app {V : Y.Opens} {e : Γ(N, V)} (he : IsFreeGener
   rw [← this] at h₂
   exact (Function.Bijective.of_comp_iff _ h₁).1 h₂
 
-/-- **The projection formula** for an invertible module. For `g : X ⟶ Y`, an `𝒪_X`-module `ℱ`
-and an invertible `𝒪_Y`-module `N`, the natural map `projectionHom : g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`,
-`x ⊗ n ↦ x ⊗ η n` with `η : N ⟶ g_* g^* N` the unit of the adjunction, is an isomorphism. It is
-one locally on `Y`: if `e` is a free generator of `N` on `V`, then `η e` is one of `g^* N` on
-`g ⁻¹ᵁ V`, and both sides have sections `Γ(ℱ, g ⁻¹ᵁ W)` over every `W ≤ V`, via `x ↦ x ⊗ e` and
-`x ↦ x ⊗ η e`.
-
-For a closed immersion `g` this is the last clause of the blueprint lemma.
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+/-- **The projection formula** for an invertible module. For `g: X ⟶ Y`, an `𝒪_X`-module `ℱ`
+and an invertible `𝒪_Y`-module `N`, the natural map `projectionHom: g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`,
+`x ⊗ n ↦ x ⊗ η n` with `η: N ⟶ g_* g^* N` the unit of the adjunction, is an isomorphism. -/
 theorem isIso_projectionHom [N.IsInvertible] : IsIso (projectionHom g F N) := by
   have := IsInvertible.sheafOfModules_isInvertible N
   refine Hom.isIso_of_forall_bijective_app _ fun y ↦ ?_
@@ -321,9 +312,7 @@ end ProjectionHom
 section ProjectionFormula
 
 /-- **The projection formula** for an invertible module: `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`, the
-inverse of the isomorphism `projectionHom` (`isIso_projectionHom`).
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+inverse of the isomorphism `projectionHom` (`isIso_projectionHom`). -/
 theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules) (N : Y.Modules)
     [N.IsInvertible] :
     Nonempty ((pushforward g).obj (F ⊗ (pullback g).obj N) ≅ (pushforward g).obj F ⊗ N) :=
@@ -331,16 +320,14 @@ theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules
   ⟨(asIso (projectionHom g F N)).symm⟩
 
 /-- **The projection formula** for an invertible module and the structure sheaf. For
-`g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is
-`nonempty_pushforward_tensorObj_pullback_iso` for `ℱ = 𝒪_X`, since `g^* N ≅ 𝒪_X ⊗ g^* N`. -/
+`g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`. -/
 theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInvertible] :
     Nonempty ((pushforward g).obj ((pullback g).obj N) ≅
       (pushforward g).obj (𝟙_ X.Modules) ⊗ N) := by
   obtain ⟨e⟩ := nonempty_pushforward_tensorObj_pullback_iso g (𝟙_ X.Modules) N
   exact ⟨(pushforward g).mapIso (λ_ _).symm ≪≫ e⟩
 
-/-- If `g_* 𝒪_X ≅ 𝒪_Y`, then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`: by the
-projection formula `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N ≅ 𝒪_Y ⊗ N ≅ N`. -/
+/-- If `g_* 𝒪_X ≅ 𝒪_Y`, then `g_* (g^* N) ≅ N` for every invertible `𝒪_Y`-module `N`. -/
 theorem nonempty_pushforward_pullback_iso_self (g : X ⟶ Y)
     (e : (pushforward g).obj (𝟙_ X.Modules) ≅ 𝟙_ Y.Modules) (N : Y.Modules) [N.IsInvertible] :
     Nonempty ((pushforward g).obj ((pullback g).obj N) ≅ N) := by

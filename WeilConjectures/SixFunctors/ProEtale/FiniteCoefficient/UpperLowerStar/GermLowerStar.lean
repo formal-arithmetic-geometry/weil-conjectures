@@ -20,7 +20,7 @@ of `(g ≫ f)^* ⊣ (g ≫ f)_*` as the composite of the units and from the tria
 
 For an open immersion `f = j`, this compares the germs of sections of `j_* F` at the points of
 `U` with the germs of sections of `F`, as used for the boundary stalks of direct images in
-blueprint `lem-wf-boundary-stalk-invariants`.
+blueprint `lemma-boundary-stalk--1`.
 -/
 
 @[expose] public section

@@ -31,7 +31,7 @@ schemeDerivedCategory X ≌ DerivedCategory X.Modules`.
   `IsPerfect X E ↔ IsPerfectComplex ((schemeDerivedCategoryEquiv X).functor.obj E)`.
 
 Source: Stacks Project, Cohomology of Sheaves, Definitions 08C4 and 08CM
-(blueprint: def-pc-perfect-complex).
+(blueprint: lemma-coherent-base-change-invertible-sheaves--1).
 -/
 
 @[expose] public section
@@ -165,7 +165,7 @@ functors correspond (`restrictMapDerivedCategoryIso`). A representative on an op
 to a representative on an affine open `V ⊆ U` containing the given point, since restriction of
 a free module along an open immersion is free.
 Source: Stacks Project, Cohomology of Sheaves, Definitions 08C4 and 08CM
-(blueprint: def-pc-perfect-complex). -/
+(blueprint: lemma-coherent-base-change-invertible-sheaves--1). -/
 theorem isPerfect_iff_isPerfectComplex (E : schemeDerivedCategory X) :
     IsPerfect X E ↔
       Modules.IsPerfectComplex ((schemeDerivedCategoryEquiv.{w} X).functor.obj E) := by

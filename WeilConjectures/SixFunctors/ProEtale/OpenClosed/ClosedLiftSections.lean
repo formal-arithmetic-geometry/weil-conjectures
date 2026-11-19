@@ -26,7 +26,7 @@ covers split (e.g. a w-contractible one), and `W = Spec H_A(C̄)` its henselian 
   `W` (`AlgebraicGeometry.ProEtale.subsingleton_openImmersionLowerShriek_closedLiftSpec`);
 * consequently the unit `F(W) ⟶ (i^* F)(W ×_X Z)` is bijective
   (`AlgebraicGeometry.ProEtale.bijective_unit_app_closedLiftSpec`), part (1) of blueprint
-  `det-sf-open-closed-pullback-limits`.
+  `proposition-extension-zero-restriction-closed-subscheme`.
 -/
 
 @[expose] public section
@@ -45,7 +45,7 @@ variable {A : CommRingCat.{u}} (I : Ideal A) (C : Type u) [CommRing C] [Algebra 
   [Algebra A C] [IsScalarTower A (A ⧸ I) C]
 
 /-- The henselian lift `W = Spec H_A(C̄)` of `Algebra.ClosedLift`, as an object of the small
-pro-étale site of `Spec A` (blueprint `def-exc-closed-site-lift`). -/
+pro-étale site of `Spec A` (blueprint `proposition-extension-zero-restriction-closed-subscheme`). -/
 noncomputable def closedLiftSpec (A : CommRingCat.{u}) (C : Type u) [CommRing C] [Algebra A C] :
     (Spec A).ProEt :=
   Scheme.ProEt.mk (Spec.map (CommRingCat.ofHom (algebraMap A (Algebra.ClosedLift A C))))
@@ -166,10 +166,10 @@ lemma surjective_app_of_isWeaklyContractible {T : Scheme.{u}} {W : T.ProEt}
 
 variable [QuasiCompact j]
 
-/-- Blueprint `det-sf-open-closed-pullback-limits`, part (1): let `i : Spec (A ⧸ I) ⟶ Spec A` have
-quasi-compact open complement `j`, and let `C̄` be an ind-étale `A ⧸ I`-algebra all of whose
-faithfully flat ind-étale covers split (e.g. a w-contractible one). For every pro-étale sheaf
-of modules `F` on `Spec A`, the unit of `i^* ⊣ i_*` gives a bijection
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (1): let
+`i : Spec (A ⧸ I) ⟶ Spec A` have quasi-compact open complement `j`, and let `C̄` be an ind-étale
+`A ⧸ I`-algebra all of whose faithfully flat ind-étale covers split (e.g. a w-contractible one). For
+every pro-étale sheaf of modules `F` on `Spec A`, the unit of `i^* ⊣ i_*` gives a bijection
 `F(v(V)) ≅ (i^* F)(v(V) ×_X Z)` for the henselian lift `v(V) = Spec H_A(C̄)` of `V = Spec C̄`
 (and `v(V) ×_X Z ≅ V` by `Algebra.ClosedLift.bijective_reduction`).
 

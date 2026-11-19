@@ -22,7 +22,7 @@ through an identification of its target with `RΓ_Y(B, b^* P|_T)`, through the c
 restriction `ρ_{a,b}` on the strict localization `T` of `X ×_k X` at `(y, y)`
 (`AlgebraicGeometry.Etale.sectionsWithSupportRestriction`). This is the identification of the
 stalk of the supported restriction with the strictly local `ρ_{a,b}` used in blueprint
-`sk-lem-tf-curve-supported-pairing`.
+`lemma-local-term-restriction-map`.
 
 The proof pulls the fixed square back along `τ : T ⟶ X ×_k X`
 (`CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`, with compact-support base

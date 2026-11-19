@@ -111,7 +111,7 @@ theorem etale (hn₀ : n ≠ 0) (hn : IsUnit (n : B)) :
 extends to `B[ζ]`, by sending `ζ` to a primitive `n`-th root of unity of `Ω`. -/
 theorem exists_lift {Ω : Type*} [Field Ω] [IsSepClosed Ω] [NeZero (n : Ω)] (φ : B →+* Ω) :
     ∃ ψ : PrimitiveRootsAlgebra B n →+* Ω, ψ.comp (algebraMap B _) = φ := by
-  obtain ⟨ξ, hξ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω n
+  obtain ⟨ξ, hξ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω n
   have hroot : eval₂ φ ξ (X ^ n - C (1 : B)) = 0 := by
     simp [hξ.pow_eq_one]
   let f : AdjoinRoot (X ^ n - C (1 : B)) →+* Ω := AdjoinRoot.lift φ ξ hroot

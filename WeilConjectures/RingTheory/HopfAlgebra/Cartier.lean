@@ -66,8 +66,8 @@ through the smoothness of the reduced group by the invariant derivations.
 
 ## Blueprint
 
-- `lem-ag-cartier-reduced`: Cartier's theorem.
-- `lem-wf-same-lie-closed-subgroup`: the dimension clause (2).
+- `proposition-cartier-s-theorem`: Cartier's theorem.
+- `lemma-connected-components-images-homomorphisms--3`: the dimension clause (2).
 -/
 
 @[expose] public section
@@ -842,7 +842,7 @@ theorem HopfAlgebra.isReduced_of_isAlgClosed [IsAlgClosed k] [Algebra.FiniteType
 
 /-- **Cartier's theorem**: over a field of characteristic zero, a finitely generated commutative
 Hopf algebra is reduced. Equivalently, an affine group scheme of finite type over a field of
-characteristic zero is reduced. (blueprint: `lem-ag-cartier-reduced`) -/
+characteristic zero is reduced. (blueprint: `proposition-cartier-s-theorem`) -/
 theorem HopfAlgebra.isReduced_of_charZero [Algebra.FiniteType k A] : IsReduced A := by
   have : CharZero (AlgebraicClosure k) :=
     charZero_of_injective_algebraMap (algebraMap k (AlgebraicClosure k)).injective
@@ -853,7 +853,7 @@ theorem HopfAlgebra.isReduced_of_charZero [Algebra.FiniteType k A] : IsReduced A
     (Algebra.TensorProduct.includeRight_injective (algebraMap k (AlgebraicClosure k)).injective)
 
 /-- In characteristic zero, every Hopf ideal of a finitely generated commutative Hopf algebra is
-radical: closed subgroup schemes are reduced. (blueprint: `lem-ag-cartier-reduced`) -/
+radical: closed subgroup schemes are reduced. (blueprint: `proposition-cartier-s-theorem`) -/
 theorem Ideal.IsHopfIdeal.isRadical [Algebra.FiniteType k A] (I : Ideal A) [I.IsHopfIdeal k] :
     I.IsRadical := by
   have := HopfAlgebra.isReduced_of_charZero (k := k) (A := A ⧸ I)
@@ -873,7 +873,7 @@ variable (k A) in
 Hopf algebra `A` over a field `k` of characteristic zero, the cotangent space `𝔪 / 𝔪²` at the
 identity has dimension `dim A`: the group scheme `Spec A` is smooth, so its tangent space at the
 identity has the dimension of the local ring there, and translations make all its local
-dimensions equal. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (2)) -/
+dimensions equal. (blueprint: `lemma-connected-components-images-homomorphisms--3`, clause (2)) -/
 theorem HopfAlgebra.finrank_cotangent_eq_ringKrullDim [Algebra.FiniteType k A] :
     (Module.finrank k (RingHom.ker (counitAlgHom k A)).Cotangent : WithBot ℕ∞) =
       ringKrullDim A :=

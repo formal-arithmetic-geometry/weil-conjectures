@@ -12,9 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 /-!
 # Canonical direct-image mate in fixed coefficients
 
-Source: blueprint, prop-weil-pbc-comparison-direct-image, first proof paragraph;
-Stacks Project, Tags 099R and 0B65
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 099R and 0B65.
 
 ## Main definitions and statements
 
@@ -40,9 +38,7 @@ set_option backward.defeqAttrib.useBackward true
 namespace AlgebraicGeometry.ProEtale
 
 /-- The pullback comparison, induced termwise from the specified sheaf comparison.
-Exact pro-etale pullback is its own left derived functor.
-Source: Stacks Tags 099R and 0B65; blueprint comparison-direct-image proof
-(auxiliary; not a blueprint node). -/
+Exact pro-etale pullback is its own left derived functor (Stacks Project, Tags 099R and 0B65). -/
 noncomputable def fixedComparisonPullbackPlus (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V) :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus ⋙
@@ -60,9 +56,8 @@ noncomputable def fixedComparisonPullbackPlus (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The canonical derived direct-image mate of the underived counit comparison.
 Its data is the existing right-derived base-change transformation, with its universal
-property normalization, not a chosen isomorphism between the endpoints.
-Source: Stacks Tags 099R and 0B65; blueprint comparison-direct-image proof
-(auxiliary; not a blueprint node). -/
+property normalization, not a chosen isomorphism between the endpoints
+(Stacks Project, Tags 099R and 0B65). -/
 noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V) :
     Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙
@@ -72,9 +67,7 @@ noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRi
   Functor.rightDerivedFunctorPlusBaseChange
     (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ))
 
-/-- Invertibility of the specified mate for a qcqs morphism.
-Source: Stacks Tag 099R; blueprint comparison-direct-image proof
-(auxiliary; not a blueprint node).
+/-- Invertibility of the specified mate for a qcqs morphism (Stacks Project, Tag 099R).
 
 Proof: the canonical underived comparison is invertible for qcqs f by
 `isIso_lowerStarComparisonUpperStarBaseChange`. The comparison pullback of every
@@ -94,9 +87,9 @@ theorem isIso_fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing �
       (ModuleCat.{u + 1} Λ) f I)
 
 /-- The specified counit-mate normalization. It also characterizes the named component
-as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison.
-Source: Stacks Tag 0B65; blueprint comparison-direct-image proof, first paragraph
-(auxiliary; not a blueprint node).
+as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison
+(Stacks Project, Tag 0B65). No finiteness of the coefficient ring and no quasi-compactness or
+quasi-separatedness of `f` is needed.
 
 Proof: the iterated-mate identity identifies the underived direct-image comparison
 as the mate of the specified pullback comparison. On bounded-below homotopy categories,
@@ -108,8 +101,7 @@ the derived mate identity. Identify the restricted adjunctions with `derivedPlus
 induced natural isomorphism with inversion is checked through the faithful inclusion
 of D+ into the unbounded derived category. Naturality is built into the transformation. -/
 theorem fixedComparisonDirectImageMatePlus_counit (Λ : Type (u + 1)) [CommRing Λ]
-    [Finite Λ] {U V : Scheme.{u}} (f : U ⟶ V)
-    [QuasiCompact f] [QuasiSeparated f]
+    {U V : Scheme.{u}} (f : U ⟶ V)
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (fixedComparisonPullbackPlus Λ f).hom.app
         ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj K) ≫
@@ -132,7 +124,7 @@ theorem fixedComparisonDirectImageMatePlus_counit (Λ : Type (u + 1)) [CommRing 
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
   have hb : fixedComparisonDirectImageMatePlus Λ f =
       (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom).natTrans := by
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom) := by
     unfold fixedComparisonDirectImageMatePlus
     rw [ComparisonCore.underived_comparison_mate,
       Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv]

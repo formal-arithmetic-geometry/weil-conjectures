@@ -10,8 +10,11 @@ import WeilConjectures.Algebra.Homology.InverseImageScalarRestriction.InverseIma
 
 /-! # Direct image and coefficient restrictions
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
-(blueprint: lem-coef-ordinary-direct-restriction-comparison).
+## References
+
+* Zheng Construction 4.1
+* Stacks 03D2 and 03DA
+* Stacks 03D7
 -/
 
 @[expose] public noncomputable section
@@ -133,9 +136,7 @@ private theorem directRestrictionComparison
     (a m) (a n) (I m).moduleUnderlying (I n).moduleUnderlying (eV m) (eV n)
     ρ hρ (ha m) (ha n)
 
-/-- Normalized direct-image comparisons for every coefficient restriction.
-Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-restriction-comparison). -/
+/-- Normalized direct-image comparisons for every coefficient restriction. -/
 structure DirectRestrictions
     (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
     (eV : ∀ n, V n ⋙ underlying.{c, v, r} J (B n) ≅
@@ -148,15 +149,7 @@ structure DirectRestrictions
 
 section DirectRestrictionConstruction
 
-/-- The level right adjoints commute with compatible coefficient restrictions.
-Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-restriction-comparison).
-
-Proof: iterate the adjacent ring square. For each inverse-image restriction
-comparison, transpose the restricted counit. The normalized Hom equations identify
-its underlying map with the specified underlying isomorphisms. It is invertible
-by reflection of isomorphisms, and its inverse is the asserted comparison.
-Naturality follows by faithfulness from its underlying formula. -/
+/-- The level right adjoints commute with compatible coefficient restrictions. -/
 theorem directRestrictions_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

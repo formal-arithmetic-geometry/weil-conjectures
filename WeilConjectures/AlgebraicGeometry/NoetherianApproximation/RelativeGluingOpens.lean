@@ -22,9 +22,9 @@ maps and limit cone `c`, and let `V` be a quasi-compact open of a stage `F_λ`. 
   (`AlgebraicGeometry.exists_resLE_comp_eq_of_locallyOfFinitePresentation`).
 
 Stages past `λ` are objects `k : Over λ`, and "for every later stage" is expressed by quantifying
-over all `k'` with a morphism `k' ⟶ k` in `Over λ`. These are the variants of
-`lemma-nagata-qc-open-eq-eventually`, `lemma-nagata-morphism-eq-eventually` and
-`lemma-nagata-morphism-descends` used for the overlaps of a relative gluing datum.
+over all `k'` with a morphism `k' ⟶ k` in `Over λ`. These are the variants of the eventual
+equality and descent statements for limits of schemes used for the overlaps of a relative gluing
+datum.
 -/
 
 @[expose] public section

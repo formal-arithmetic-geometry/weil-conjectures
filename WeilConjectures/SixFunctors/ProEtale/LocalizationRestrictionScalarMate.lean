@@ -53,7 +53,7 @@ theorem localizationRestrictionRestrictScalarsSquare_mate_app
     (F : Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} S)) :
     (mateEquiv (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} S) f h)
       (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} R) f h)
-      (localizationRestrictionRestrictScalarsSquare f h q)).natTrans.app F = 𝟙 _ := by
+      (localizationRestrictionRestrictScalarsSquare f h q)).app F = 𝟙 _ := by
   simp only [Functor.comp_obj, mateEquiv_apply, NatTrans.comp_app, Functor.id_obj,
     Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.whiskerRight_app, Functor.comp_map,
@@ -67,11 +67,11 @@ theorem localizationRestrictionRestrictScalarsSquare_mate_app
 instance localizationRestrictionRestrictScalarsSquare_mate_isIso :
     IsIso (mateEquiv (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} S) f h)
       (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} R) f h)
-      (localizationRestrictionRestrictScalarsSquare f h q)).natTrans := by
+      (localizationRestrictionRestrictScalarsSquare f h q)) := by
   have (F : Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} S)) :
       IsIso ((mateEquiv (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} S) f h)
         (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} R) f h)
-        (localizationRestrictionRestrictScalarsSquare f h q)).natTrans.app F) := by
+        (localizationRestrictionRestrictScalarsSquare f h q)).app F) := by
     rw [localizationRestrictionRestrictScalarsSquare_mate_app]
     infer_instance
   exact NatIso.isIso_of_isIso_app _

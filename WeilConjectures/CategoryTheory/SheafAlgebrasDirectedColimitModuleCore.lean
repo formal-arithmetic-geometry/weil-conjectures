@@ -15,6 +15,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Underlying modules of directed colimits of algebra sheaves
 

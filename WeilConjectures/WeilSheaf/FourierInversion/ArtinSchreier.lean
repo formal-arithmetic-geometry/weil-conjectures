@@ -13,8 +13,9 @@ public import WeilConjectures.WeilSheaf.UpperStarId
 /-!
 # Fourier inversion: Artin–Schreier sheaves of functions
 
-Multiplicativity of the Artin–Schreier sheaves `ℒ_{ψ,a}` (blueprint `lem-fd-as-lisse`,
-`lem-fd-as-characters`) and their compatibility with pullback.
+Multiplicativity of the Artin–Schreier sheaves `ℒ_{ψ,a}` (blueprint
+`lemma-artin-schreier-character-sheaf--2`, `lemma-artin-schreier-character-sheaf`) and their
+compatibility with pullback.
 -/
 
 @[expose] public section
@@ -29,7 +30,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lem-fd-as-lisse` / `lem-fd-as-characters`: `ℒ_{ψ⁻¹,a} ≅ ℒ_{ψ,-a}`. -/
+/-- Blueprint `lemma-artin-schreier-character-sheaf--2` / `lemma-artin-schreier-character-sheaf`:
+`ℒ_{ψ⁻¹,a} ≅ ℒ_{ψ,-a}`. -/
 theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     Nonempty (artinSchreierOf ψ⁻¹ a ≅ artinSchreierOf ψ (-a)) := by
   rw [artinSchreierOf_eq, artinSchreierOf_eq, artinSchreier, artinSchreier,
@@ -45,8 +47,8 @@ theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a :
       (WeilSheaf.hasImage_artinSchreierIdempotent ψ))
   exact ⟨e₁ ≪≫ e₂.symm⟩
 
-/-- Blueprint `lem-fd-as-characters` (`ℒ_{ψ,0}` is the constant sheaf, the Artin–Schreier
-cover of the zero function being the trivial torsor): `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/
+/-- Blueprint `lemma-artin-schreier-character-sheaf` (`ℒ_{ψ,0}` is the constant sheaf, the
+Artin–Schreier cover of the zero function being the trivial torsor): `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/
 theorem nonempty_iso_artinSchreierOf_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreierOf ψ (0 : Γ(X, ⊤)) ≅ WeilSheaf.adicConstant k₀ l X) := by
   rw [artinSchreierOf_eq, artinSchreier, WeilSheaf.image_artinSchreierIdempotent_eq]

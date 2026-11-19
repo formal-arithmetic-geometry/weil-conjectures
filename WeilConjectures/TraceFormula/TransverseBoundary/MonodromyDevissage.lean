@@ -24,7 +24,8 @@ which spans an injection `(Λ v)_V ↪ H` whose cokernel is trivialized by the s
 smaller value `M / Λ v`. By induction on the cardinality of `M`, and by truncation for bounded
 complexes, a property of objects of `D(V_ét, Λ)` stable under isomorphisms, shifts and extensions
 which holds for these constant sheaves holds for every bounded complex whose cohomology sheaves
-have finite `ℓ`-group monodromy (blueprint `det-tf-transverse-corner-vanishing`, dévissage).
+have finite `ℓ`-group monodromy (blueprint `lemma-cohomology-near-two-transverse-divisors--1`,
+dévissage).
 
 ## Main statements
 
@@ -80,7 +81,7 @@ induction on the cardinality of the value `M` of the trivialization: a nonzero g
 killed by `ℓ` (`AlgebraicGeometry.Etale.exists_ne_zero_smul_eq_zero_of_connected_cover`) spans
 a constant subsheaf whose quotient is trivialized by the same cover with smaller value
 (`AlgebraicGeometry.Etale.exists_mono_constantSheaf_of_connected_cover`)
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem prop_singleFunctor_of_connected_cover {G : Type (u + 1)} [Group G] [Finite G]
     (hG : IsPGroup ℓ G) (c : V.GaloisCover G) [ConnectedSpace c.P]
     (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (M : ModuleCat.{u + 1} Λ) [Finite M]
@@ -105,7 +106,7 @@ theorem prop_singleFunctor_of_connected_cover {G : Type (u + 1)} [Group G] [Fini
 
 include hΛ hext hconst in
 /-- **Dévissage of sheaves with finite `ℓ`-group monodromy** (blueprint
-`det-tf-transverse-corner-vanishing`): on a connected scheme, a property of objects of
+`lemma-cohomology-near-two-transverse-divisors--1`): on a connected scheme, a property of objects of
 `D(V_ét, Λ)` stable under isomorphisms and extensions which holds for the constant sheaves `N_V`,
 `N` a finite `Λ`-module killed by `ℓ`, holds for every sheaf with finite `ℓ`-group monodromy,
 placed in degree `0`. -/
@@ -121,7 +122,7 @@ theorem prop_singleFunctor_of_hasFiniteEllGroupMonodromy
 
 include hΛ hshift hext hconst in
 /-- **Dévissage of complexes with finite `ℓ`-group monodromy** (blueprint
-`det-tf-transverse-corner-vanishing`): on a connected scheme, a property of objects of
+`lemma-cohomology-near-two-transverse-divisors--1`): on a connected scheme, a property of objects of
 `D(V_ét, Λ)` stable under isomorphisms, shifts and extensions which holds for the constant
 sheaves `N_V`, `N` a finite `Λ`-module killed by `ℓ`, holds for every bounded complex whose
 cohomology sheaves have finite `ℓ`-group monodromy. -/

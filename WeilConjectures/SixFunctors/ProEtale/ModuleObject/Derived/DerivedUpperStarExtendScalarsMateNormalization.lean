@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarCompNormalization
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullMate
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullCounit
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MateCounit
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.CompNatIsoCounit
 
@@ -40,9 +41,42 @@ private theorem derived_unique_fac
     Iso.refl_hom, NatTrans.id_app, Category.comp_id] using
     Functor.leftDerivedNatTrans_app LF LF' c c' W (𝟙 _) K
 
-set_option maxHeartbeats 2000000 in
--- Comparing the internal module-object derived functors needs this elaboration budget.
-set_option synthInstance.maxHeartbeats 200000 in
+private theorem Qh_mapHomotopyCategoryCompIso_refl_hom_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Abelian E] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory C (.up ℤ)) :
+    DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) =
+      𝟙 _ := by
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+  exact DerivedCategory.Qh.map_id _
+
+private theorem comp_Qh_mapHomotopyCategoryCompIso_refl_hom_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Abelian E] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory C (.up ℤ)) {X : DerivedCategory E}
+    (f : X ⟶ DerivedCategory.Qh.obj
+      ((F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ)).obj K)) :
+    f ≫ DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) =
+      f := by
+  rw [Qh_mapHomotopyCategoryCompIso_refl_hom_app]
+  exact Category.comp_id f
+
+private theorem Qh_mapHomotopyCategoryCompIso_refl_hom_app_comp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Abelian E] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory C (.up ℤ)) {X : DerivedCategory E}
+    (f : DerivedCategory.Qh.obj (((F ⋙ G).mapHomotopyCategory (.up ℤ)).obj K) ⟶ X) :
+    DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) ≫ f =
+      f := by
+  rw [Qh_mapHomotopyCategoryCompIso_refl_hom_app]
+  exact Category.id_comp f
+
 /-- The specified nonflat derived scalar pullback comparison has the specified restriction mate.
 
 Source: proof step 2 of `lem-sp-original-integral-finite-quotient-mate-transport`, above
@@ -87,121 +121,9 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc]
-  simp only [derivedUpperStarExtendScalarsIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Category.id_comp, Category.assoc]
-  have hn := (leftDerivedUpperStarIsoMapDerivedCategory B h).inv.naturality
-    ((Mod.extendScalars (coefficientMap a V)).leftDerivedFunctorCounit.app K)
-  simp only [Functor.comp_obj] at hn
-  rw [← reassoc_of% hn]
-  have hB := (h)^*⟦B⟧.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac
-    (((Mod.extendScalars (coefficientMap a V)).mapHomotopyCategory (.up ℤ)).obj K)
-  rw [← hB]
-  simp only [leftDerivedUpperStarIsoMapDerivedCategory, Iso.inv_hom_id_app_assoc]
-  have hr := derived_unique_fac
-    (HomotopyCategory.quasiIso _ (.up ℤ))
-    L(Mod.extendScalars (coefficientMap a V) ⋙ (h)^*⟦B⟧)
-    (L(Mod.extendScalars (coefficientMap a V)) ⋙ D((h)^*⟦B⟧))
-    (Mod.extendScalars (coefficientMap a V) ⋙ (h)^*⟦B⟧).leftDerivedFunctorCounit
-    (Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit _ _) K
-  change (Functor.leftDerivedFunctorCompMapDerivedCategoryRightIso
-      (Mod.extendScalars (coefficientMap a V)) (h)^*⟦B⟧).hom.app
-        (DerivedCategory.Qh.obj K) ≫
-      (Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit _ _).app K = _ at hr
-  simp only [Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit,
-    NatTrans.comp_app, Functor.associator_inv_app, Functor.associator_hom_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Category.id_comp] at hr
-  dsimp only [Functor.comp_obj] at hr
-  change _ ≫ _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) = _ at hr
-  rw [CategoryTheory.Functor.map_id, Category.comp_id] at hr
-  erw [hr]
-  have hi := Functor.leftDerivedNatTrans_app
-    L((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V) ⋙
-      Mod.extendScalars (condensedPullbackHom A h ≫ coefficientMap a U))
-    L(Mod.extendScalars (coefficientMap a V) ⋙ (h)^*⟦B⟧)
-    ((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V) ⋙
-      Mod.extendScalars (condensedPullbackHom A h ≫ coefficientMap a U)).leftDerivedFunctorCounit
-    (Mod.extendScalars (coefficientMap a V) ⋙ (h)^*⟦B⟧).leftDerivedFunctorCounit
-    (HomotopyCategory.quasiIso _ (.up ℤ))
-    (Functor.whiskerRight
-      (NatTrans.mapHomotopyCategory (mapModUpperStarExtendScalarsIso a h).hom (.up ℤ))
-      DerivedCategory.Qh) K
-  change (Functor.leftDerivedFunctorIsoOfIso (mapModUpperStarExtendScalarsIso a h)).hom.app
-      (DerivedCategory.Qh.obj K) ≫ _ = _ at hi
-  simp only [Functor.whiskerRight_app] at hi
-  erw [hi]
-  have := Functor.isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor
-    ((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V))
-    (Mod.extendScalars (condensedPullbackHom A h ≫ coefficientMap a U))
-  have hl := derived_unique_fac (HomotopyCategory.quasiIso _ (.up ℤ))
-    L((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V) ⋙
-      Mod.extendScalars (condensedPullbackHom A h ≫ coefficientMap a U))
-    (D((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V)) ⋙
-      L(Mod.extendScalars (condensedPullbackHom A h ≫ coefficientMap a U)))
-    ((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V) ⋙
-      Mod.extendScalars (condensedPullbackHom A h ≫ coefficientMap a U)).leftDerivedFunctorCounit
-    (Functor.leftDerivedFunctorCompMapDerivedCategoryCounit _ _) K
-  change (Functor.leftDerivedFunctorCompMapDerivedCategoryIso _ _).hom.app
-    (DerivedCategory.Qh.obj K) ≫ _ = _ at hl
-  rw [← hl]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  simp only [Functor.leftDerivedFunctorCompMapDerivedCategoryCounit,
-    NatTrans.comp_app, Functor.associator_inv_app, Functor.associator_hom_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp, Category.assoc]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  have ht := (Mod.derivedExtendScalarsCompIso (condensedPullbackHom A h)
-    (coefficientMap a U) _ rfl).inv.naturality
-      (((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V)).mapDerivedCategoryFactorsh.hom.app K)
-  simp only [Functor.comp_map, Functor.comp_obj] at ht
-  rw [← reassoc_of% ht]
-  have hm : (NatTrans.mapHomotopyCategory
-      (mapModUpperStarExtendScalarsIso a h).hom (.up ℤ)).app K =
-      (NatTrans.mapHomotopyCategory
-        (Mod.extendScalarsComp (condensedPullbackHom A h) (coefficientMap a U)).hom
-        (.up ℤ)).app
-          ((((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V)).mapHomotopyCategory
-            (.up ℤ)).obj K) ≫
-        (NatTrans.mapHomotopyCategory (pullIso a h).hom (.up ℤ)).app K := by
-    obtain ⟨C, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-    change (HomotopyCategory.quotient _ (.up ℤ)).map _ =
-      (HomotopyCategory.quotient _ (.up ℤ)).map _ ≫
-        (HomotopyCategory.quotient _ (.up ℤ)).map _
-    rw [← Functor.map_comp]
-    congr 1
-  rw [hm, Functor.map_comp]
-  have hs := scalarCompNormalization (condensedPullbackHom A h) (coefficientMap a U)
-    ((((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V)).mapHomotopyCategory (.up ℤ)).obj K)
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.comp_id] at hs
-  have hs' := congrArg (fun m =>
-    (Mod.derivedExtendScalarsCompIso (condensedPullbackHom A h)
-      (coefficientMap a U) _ rfl).inv.app
-        (DerivedCategory.Qh.obj
-          ((((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V)).mapHomotopyCategory
-            (.up ℤ)).obj K)) ≫ m) hs
-  simp only [Iso.inv_hom_id_app_assoc] at hs'
-  rw [← reassoc_of% hs']
-  have := Functor.isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor
-    ((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V))
-    (Mod.extendScalars (condensedPullbackHom A h))
-  have hA := derived_unique_fac (HomotopyCategory.quasiIso _ (.up ℤ))
-    L((h)^*⟦A⟧)
-    (D((h)^*[Ab.{u + 1}].mapMod (condensedRingObj A V)) ⋙
-      L(Mod.extendScalars (condensedPullbackHom A h)))
-    (h)^*⟦A⟧.leftDerivedFunctorCounit
-    (Functor.leftDerivedFunctorCompMapDerivedCategoryCounit _ _) K
-  change (leftDerivedUpperStarIso A h).hom.app (DerivedCategory.Qh.obj K) ≫ _ = _ at hA
-  simp only [Functor.leftDerivedFunctorCompMapDerivedCategoryCounit,
-    NatTrans.comp_app, Functor.associator_inv_app, Functor.associator_hom_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at hA
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hA
-  simp only [← Functor.map_comp_assoc]
-  erw [hA]
-  rfl
+  simpa only [comp_Qh_mapHomotopyCategoryCompIso_refl_hom_app,
+    Qh_mapHomotopyCategoryCompIso_refl_hom_app_comp] using
+    derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
 
 
 end AlgebraicGeometry.ProEtale.CondensedRing

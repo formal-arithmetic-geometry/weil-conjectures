@@ -89,8 +89,8 @@ public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 
 /-! # Finite discrete internal and ordinary coefficients
 
-Source: blueprint main-20261015, sec-six-functors-basics,
-sk-prop-sf-rf-shriek-preservation, coefficient-identification step
+Source: blueprint main-20261015, chap-Construction-of-f,
+theorem-f-shriek-finite-coefficients, coefficient-identification step
 (blueprint: lem-sf-finite-discrete-normalized-encoding).
 -/
 
@@ -124,7 +124,7 @@ instance Encoding.fixedDerivedShift {T : Scheme.{u}} (e : Encoding A T) :
   infer_instance
 
 /-- The ordinary bounded constructible finite-Tor predicate, without a fixed Tor bound.
-Source: sk-def-sfb-constructible, final paragraph, and blueprint proof steps 7 and 9
+Source: definition-constructible-sheaves, final paragraph, and blueprint proof steps 7 and 9
 (blueprint: lem-sf-finite-discrete-normalized-encoding). -/
 def ordinaryCtf (T : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)

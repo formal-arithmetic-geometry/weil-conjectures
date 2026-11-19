@@ -185,11 +185,7 @@ lemma bijective_pushforwardHomObjComparisonApp_of_sum_comp_eq_id {N : X.Modules}
 
 /-- **Reduction to the structure sheaf.** Let `f : X ⟶ Y` be affine and `τ : f_* L ⟶ G`. If
 `f_* Hom(𝒪_X, L) ⟶ Hom(f_* 𝒪_X, G)`, `φ ↦ τ ∘ f_* φ`, is an isomorphism, then so is
-`f_* Hom(M, L) ⟶ Hom(f_* M, G)` for every finite locally free `M`. Both sides are sheaves, so it
-suffices to check bijectivity over affine opens `V ⊆ Y`; there `f⁻¹V` is affine, so `M|_{f⁻¹V}`
-is a direct summand of a free module of finite rank
-(`AlgebraicGeometry.Scheme.Modules.exists_sum_comp_eq_id_over`), and the comparison for `M` is a
-retract of the one for `𝒪_X^n`. -/
+`f_* Hom(M, L) ⟶ Hom(f_* M, G)` for every finite locally free `M`. -/
 theorem isIso_pushforwardHomObjComparison_of_isIso_unit [IsAffineHom f]
     (hτ : IsIso (pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)))
     (M : X.Modules) [M.IsFiniteLocallyFree] : IsIso (pushforwardHomObjComparison f τ M) := by

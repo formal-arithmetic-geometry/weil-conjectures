@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # Finite connected-component decomposition of a smooth curve
 
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step.
+Source: blueprint theorem-cohomology-curves--6, first step.
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ namespace AlgebraicGeometry
 
 /-- A qc separated smooth curve of relative dimension one is a finite coproduct
 of connected smooth curves, compatibly with its structure map.
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step.
+Source: blueprint theorem-cohomology-curves--6, first step.
 (blueprint: lem-sc-smooth-curve-connected-coproduct)
 
 Proof: Finite type over the field makes C Noetherian. Its connected components

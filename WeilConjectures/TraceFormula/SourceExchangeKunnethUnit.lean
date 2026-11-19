@@ -13,7 +13,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 
 Consequences of the coherence of the projection formula (blueprint `prop-sf-pf-coherence`) used
 for the exceptional Künneth part of identity (a) of the trace-class source exchange (blueprint
-`lem-trf-trace-source-exchange`, Step 3):
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3):
 
 - `ProEtale.CondensedRing.exceptionalProjection_comp_square`: for a commutative square
   `q ≫ p' = p ≫ f`, the projection morphisms of `q` and `p'` combine into those of `p` and `f`

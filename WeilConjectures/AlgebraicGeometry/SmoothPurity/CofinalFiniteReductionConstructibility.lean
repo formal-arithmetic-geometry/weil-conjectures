@@ -124,8 +124,8 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # Cofinal finite reductions and constructibility
 
-Source: blueprint main-20261015, sk-lem-sp-tower, final integral-constructibility sentence;
-Stacks Tags 0D6D and 0G7E; scalar-extension proof paragraphs (2) and (4)
+Source: blueprint main-20261015, proposition-sp-integral-towers, final integral-constructibility
+sentence; Stacks Tags 0D6D and 0G7E; scalar-extension proof paragraphs (2) and (4)
 (blueprint: lem-sp-cofinal-finite-reduction-constructibility).
 
 Index n means positive exponent n+1. The ordinary and derived tensors below are the

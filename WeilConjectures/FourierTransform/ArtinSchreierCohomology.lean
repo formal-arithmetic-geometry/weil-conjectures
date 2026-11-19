@@ -68,7 +68,7 @@ variable (Λ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 characteristic `p` and a finite coefficient ring `Λ` in which `p` is invertible,
 `H^0(𝔸¹_Ω, Λ) ≅ Λ` and `H^q(𝔸¹_Ω, Λ) = 0` for `q ≠ 0`: the affine line is connected, its
 cohomological dimension is one, and `H^1(𝔸¹_Ω, ℤ/n) ≅ Pic(𝔸¹_Ω)[n] = 0` for `n` prime to `p`.
-(blueprint: `lem-fd-affine-line-constant-cohomology`) -/
+(blueprint: `lemma-integral-linear-character--2`) -/
 theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertible (p : Λ)] :
     Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) 0).obj
         ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _)) ≅ ModuleCat.of Λ Λ) ∧
@@ -76,9 +76,10 @@ theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertibl
         IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj
           ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _))) := by
   -- `H^0` is `Λ` as `𝔸¹_Ω` is connected; `H^q = 0` for `q ≥ 2` by the cohomological dimension
-  -- of an affine curve (`sbc-thm-cohomological-dimension-of-an-affine-curve`); and
-  -- `H^1 = 0` by the Kummer sequence (`thm-sc-affine-cohomology`), the units of `Ω[x]` being
-  -- divisible and `Pic(𝔸¹_Ω) = 0` (`lem-sc-pic-affine`). Here these facts enter through the
+  -- of an affine curve (`theorem-cohomology-curves--2`); and
+  -- `H^1 = 0` by the Kummer sequence (`proposition-cohomology-smooth-affine-curve--2`), the units
+  -- of `Ω[x]` being divisible and `Pic(𝔸¹_Ω) = 0`
+  -- (`proposition-cohomology-smooth-affine-curve--3`). Here these facts enter through the
   -- acyclicity `Rp_* Λ ≅ Λ` of the affine line of the purity chapter
   -- (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_affineLine`).
   have := HasInvertibleExponent.spec_of_charP Λ (Ω := Ω) p
@@ -269,7 +270,7 @@ theorem isZero_cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite 
 /-- **Cohomology of an affine line with an exponential sheaf.** Let `Ψ` be a primitive additive
 character of `k` with values in a finite domain `Λ`, and `a ∈ k`. On `𝔸¹_Ω`,
 `H^q(𝔸¹_Ω, ℒ_{Ψ, a x})` is `Λ` for `q = 0` and `a = 0`, and vanishes otherwise.
-(blueprint: `lem-fd-cohomology-affine-line-character`) -/
+(blueprint: `lemma-integral-linear-character--2`) -/
 theorem cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ] (Ψ : AddChar k Λ)
     (hΨ : Ψ.IsPrimitive) (a : k) :
     (a ≠ 0 → ∀ q, IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω))

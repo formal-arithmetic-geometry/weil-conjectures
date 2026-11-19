@@ -124,7 +124,7 @@ $R_0$-module via $\varphi$.
 $R_0/P\cong\varphi(R_0)$ is a subring of the domain $R$. Suppose $P\ne0$. By step 6, $R$ is a
 finitely generated module over $R_0/P$, hence integral over $R_0/P$
 [lem-weil-pbc-finite-algebra-is-integral], so $\dim R\le\dim(R_0/P)$ by
-[lem-weil-pbc-integral-extension-dimension]. As $R_0$ is a domain
+[proposition-proper-direct-image-constructible-complexes]. As $R_0$ is a domain
 ([lem-weil-pbc-power-series-field-cohen-regular-complete] (1)), $(0)$ is a prime with
 $(0)\subsetneq P$; a chain $\mathfrak q_0/P\subsetneq\cdots\subsetneq\mathfrak q_\ell/P$ of primes
 of $R_0/P$ gives the chain $(0)\subsetneq\mathfrak q_0\subsetneq\cdots\subsetneq\mathfrak q_\ell$

@@ -120,8 +120,8 @@ finish the identity.
 theorem scalarFactorBasis (φ : R ⟶ B)
     (s : (R.obj ⋙ forget CommRingCat).sections) (m : ℕ) (e : Bool)
     (j : (extension φ).obj (one R) ≅ one B)
-    (hj : (extension φ).map (ringedKoszulScalar R s) ≫ j.hom =
-      j.hom ≫ ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0)) :
+    (hj : (extension φ).map (ringedKoszulScalar R s).asHom ≫ j.hom =
+      j.hom ≫ (ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0)).asHom) :
     (extension φ).map (factorBasis R s m e) ≫
         (ScalarKoszulTransport.factorIso (extension φ) s
           (imageSections φ (fun _ : Fin 1 ↦ s) 0)

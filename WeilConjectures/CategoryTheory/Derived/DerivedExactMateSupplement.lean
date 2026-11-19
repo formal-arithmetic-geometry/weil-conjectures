@@ -58,11 +58,11 @@ omit [HasDerivedCategory C₁] [HasDerivedCategory C₂]
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] in
 private lemma homotopyMate (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' G') (K : HomotopyCategory C₁ (.up ℤ)) :
-    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K =
+    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K =
       (adj'.mapHomotopyCategory (.up ℤ)).unit.app
           ((G.mapHomotopyCategory (.up ℤ)).obj ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
-          ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app
+          ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app
             ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
           ((G'.mapHomotopyCategory (.up ℤ)).map

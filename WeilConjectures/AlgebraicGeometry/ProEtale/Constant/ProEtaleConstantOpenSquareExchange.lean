@@ -12,12 +12,14 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTranspo
 /-!
 # The canonical open-square exchange in tensor-pullback coordinates
 
-Source: main-20261015, `lem-trf-open-square-exchange`, construction by normalized mates;
-Stacks Project, Tags 03S6 and 04J0 (blueprint: lem-trf-open-square-exchange).
-
 The original exchange uses the transported fixed-scalar inverse image. The Frobenius
 comparison uses tensor inverse image over the same intrinsic constant ring. The bridge
 below is uniquely fixed by the sectionwise units, and is descended termwise.
+
+## References
+
+* Stacks Tags 03S6, 03D3 and 00YV
+* Stacks Tags 03S6 and 04J0
 -/
 
 @[expose] public noncomputable section
@@ -40,15 +42,7 @@ private def openSquare_directImageModel (A : Type u) [CommRing A]
   SheafOfModules.pushforwardCongr (by rw [openSquare_coefficientMap A f])
 
 /-- The unique identification of the two pullbacks used in the open-square construction.
-Its sectionwise equation preserves their specified units and fixes the scalar action.
-Source: main-20261015, `lem-trf-open-square-exchange`, normalized-mate construction;
-Stacks Tags 03S6, 03D3 and 00YV (blueprint: lem-trf-open-square-exchange).
-Proof: both right adjoints evaluate a module on X ×_Y V, with scalar action from the
-same constant-section map. The realization comparison is the identity on scalar-unit
-sections and extends uniquely to locally constant scalars. Conjugate this sectionwise
-comparison under the tensor-normalized and realization-normalized adjunctions. The
-resulting mate is invertible and satisfies the displayed unit equation. Conversely that
-equation determines its adjoint on every section, hence determines the mate uniquely. -/
+Its sectionwise equation preserves their specified units and fixes the scalar action. -/
 theorem openSquarePullbackModel_existsUnique (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : proEtaleConstantRingPullback A f ≅ sfIntrinsicPullback A f,
@@ -87,17 +81,13 @@ theorem openSquarePullbackModel_existsUnique (A : Type u) [CommRing A] [Finite A
         ((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app V s
     exact he' M V.unop s
 
-/-- The unique unit-preserving ordinary change of pullback coordinates.
-Source: main-20261015, `lem-trf-open-square-exchange`, construction by mates
-(blueprint: lem-trf-open-square-exchange). -/
+/-- The unique unit-preserving ordinary change of pullback coordinates. -/
 def openSquarePullbackModel (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleConstantRingPullback A f ≅ sfIntrinsicPullback A f :=
   (openSquarePullbackModel_existsUnique A f).exists.choose
 
-/-- Exact termwise descent of the unit-preserving coordinate identification.
-Source: main-20261015, `lem-trf-open-square-exchange`, derived construction
-(blueprint: lem-trf-open-square-exchange). -/
+/-- Exact termwise descent of the unit-preserving coordinate identification. -/
 def openSquareDerivedPullbackModel (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleConstantRingDerivedPullback A f ≅ sfIntrinsicDerivedPullback A f :=
@@ -107,9 +97,7 @@ def openSquareDerivedPullbackModel (A : Type u) [CommRing A] [Finite A]
 the existing exchange, whose inverse is the specified open-adjunction mate and whose
 restriction, identity and pasting laws are recorded in SfOpenSquareExchangeData.
 The two outer factors are the unique unit-preserving changes of coordinates; consequently
-these normalizations transport with the exchange, including its identity on the open.
-Source: main-20261015, `lem-trf-open-square-exchange`; Stacks Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange). -/
+these normalizations transport with the exchange, including its identity on the open. -/
 def constantOpenSquareExchange (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) (hn : 1 ≤ n)

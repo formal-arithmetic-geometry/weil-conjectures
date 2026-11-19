@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 
 /-! # Twisting for canonical tower classes
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 `sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-twisting).
 -/
 
@@ -40,7 +40,7 @@ abbrev systemRing (T : Scheme.{u}) :=
     (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T)
 
 /-- Tensor by the actual Tate line before localization.
-Source: sk-def-sp-tate-twist (blueprint: def-sp-tower-class-twisting). -/
+Source: definition-tate-twists (blueprint: def-sp-tower-class-twisting). -/
 def positive {T : Scheme.{u}} (c : Chern l E T) :
     Systems T (Arings l E T) ⥤ Systems T (Arings l E T) :=
   letI := SemilinearSections.abelianSheafify.{u + 1, u, u + 1}
@@ -50,7 +50,7 @@ def positive {T : Scheme.{u}} (c : Chern l E T) :
   SheafOfModules.siteSheafTensorRight (A := systemRing l E T) (lineModule l E c)
 
 /-- Pure tensors in that exact, ordinary line twist.
-Source: sk-def-sp-tate-twist (blueprint: def-sp-tower-class-twisting). -/
+Source: definition-tate-twists (blueprint: def-sp-tower-class-twisting). -/
 def pure {T : Scheme.{u}} (c : Chern l E T)
     (M : Systems T (Arings l E T)) (U : (ℕ × T.ProEt)ᵒᵖ)
     (x : M.val.obj U) (y : (lineModule l E c).val.obj U) :
@@ -69,7 +69,7 @@ local instance coefficientSectionSMul {T : Scheme.{u}}
 /-- Line twisting is the actual tensor/Hom equivalence. The coevaluation and
  evaluation are fixed on local sections, including their signs. Neither an arbitrary
  equivalence nor a second, independently chosen inverse line occurs.
-Source: classes (4); sk-def-sp-tate-twist negative powers
+Source: classes (4); definition-tate-twists negative powers
 (blueprint: def-sp-tower-class-twisting). -/
 structure Twisting {T : Scheme.{u}} (c : Chern l E T) where
   equivalence : Systems T (Arings l E T) ≌ Systems T (Arings l E T)

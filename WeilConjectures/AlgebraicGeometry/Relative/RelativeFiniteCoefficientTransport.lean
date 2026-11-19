@@ -282,7 +282,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssen
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
-/-! # Explicit transport of inverse-image constant coefficients to the small site -/
+/-! # Explicit transport of inverse-image constant coefficients to the small site
+
+## References
+
+* Stacks Tags 00VC, 03A0, and 0H7J
+* Stacks Tags 03D1 and 05RU
+-/
 
 @[expose] public noncomputable section
 
@@ -294,9 +300,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Inverse image preserves the constant coefficient ring by uniqueness of left adjoints.
-Source: Stacks Tag 0H7J
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+/-- Inverse image preserves the constant coefficient ring by uniqueness of left adjoints. -/
 theorem relativeFiniteConstantInverseImage_isIso {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     IsIso (proEtaleConstantInverseImageMap g CommRingCat.{u + 1} (CommRingCat.of B)) := by
@@ -331,9 +335,7 @@ theorem relativeFiniteConstantInverseImage_isIso {X Y : Scheme.{u}} (g : Y ⟶ X
   infer_instance
 
 /-- The canonical coefficient identification, first along the equivalence of sites,
-then along inverse image. Both comparisons are constructed by their adjunctions.
-Source: Stacks Tags 00VC, 03A0, and 0H7J
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+then along inverse image. Both comparisons are constructed by their adjunctions. -/
 def relativeFiniteModelCoefficient {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     CategoryTheory.ConstantCompletion.constant (proEtaleModelTopology Y) B ≅
@@ -355,9 +357,7 @@ def relativeFiniteModelCoefficient {X Y : Scheme.{u}} (g : Y ⟶ X)
             (CommRingCat.of B))).symm
 
 /-- Sectionwise transport with scalar action through the canonical coefficient map.
-There is no choice of module objects in this definition.
-Source: Stacks Tags 03A0 and 03D1
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+There is no choice of module objects in this definition. -/
 def relativeFiniteModelModules {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)) ⥤
@@ -416,9 +416,7 @@ private theorem isoRestriction_isEquivalence
         congrArg (fun f : R ⟶ R ↦ (f.hom.app V).hom x) c.hom_inv_id)
   exact inferInstanceAs e.functor.IsEquivalence
 
-/-- The explicit coefficient transport is an equivalence of module categories.
-Source: Stacks Tags 03A0 and 03D1
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+/-- The explicit coefficient transport is an equivalence of module categories. -/
 instance relativeFiniteModelModules_isEquivalence {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     (relativeFiniteModelModules g B).IsEquivalence := by
@@ -435,9 +433,7 @@ instance relativeFiniteModelModules_isEquivalence {X Y : Scheme.{u}} (g : Y ⟶ 
   unfold relativeFiniteModelModules
   infer_instance
 
-/-- The transport preserves addition on maps, section by section.
-Source: Stacks Tag 03D1
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+/-- The transport preserves addition on maps, section by section. -/
 instance relativeFiniteModelModules_additive {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] : (relativeFiniteModelModules g B).Additive where
   map_add := by intros; rfl
@@ -445,9 +441,7 @@ instance relativeFiniteModelModules_additive {X Y : Scheme.{u}} (g : Y ⟶ X)
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientRingSheafify in
-/-- The exact transport on the standard derived localizations.
-Source: Stacks Tags 03D1 and 05RU
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+/-- The exact transport on the standard derived localizations. -/
 def relativeFiniteModelDerived {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     DerivedCategory (pbcModules Y
@@ -461,9 +455,7 @@ def relativeFiniteModelDerived {X Y : Scheme.{u}} (g : Y ⟶ X)
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientRingSheafify in
-/-- Exact transport commutes with homology in every degree.
-Source: Stacks Tag 03D1
-(blueprint: lem-weil-pbc-relative-finite-coefficient-transport). -/
+/-- Exact transport commutes with homology in every degree. -/
 def relativeFiniteModelHomologyIso {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B]
     (K : DerivedCategory (pbcModules Y

@@ -53,7 +53,7 @@ lem-weil-pbc-spec-module-tilde-sections, lem-weil-pbc-affine-tilde-gamma-adjunct
 (lem-weil-pbc-open-immersion-module-pullback-restriction).
 (4) Compare the two composite pullbacks through the chart square by uniqueness of adjoints;
 the conjugate-isomorphism unit equation identifies their pulled-back sections
-(def-weil-pbc-composite-adjunction, lem-weil-pbc-conjugate-iso-unit-equation).
+(def-weil-pbc-composite-adjunction, situation-conventions).
 (5) Apply the functorial tilde base-change isomorphism for A → B, taking the pullback of s
 to the section associated to 1 ⊗ s (lem-weil-pbc-tilde-pullback-base-change).
 (6) Take global sections and invert the resulting B-linear isomorphism, then swap tensor

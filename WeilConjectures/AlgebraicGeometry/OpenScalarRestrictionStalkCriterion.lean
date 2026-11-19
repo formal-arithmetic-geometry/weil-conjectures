@@ -18,6 +18,7 @@ import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Stalk criterion for scalar restriction on an open site
 

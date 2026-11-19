@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 Let `i : Z ⟶ X` be a closed immersion with complementary open immersion `j : U ⟶ X`. For every
 `K ∈ D(X_ét, A)` the global derived Hom `RΓ(X, RHom(i_* Λ_Z, K))` is the fibre of the
-restriction map `RΓ(X, K) ⟶ RΓ(U, j^* K)` (blueprint `lem-amb-closed-support-hom`).
+restriction map `RΓ(X, K) ⟶ RΓ(U, j^* K)` (blueprint `lemma-cycle-class-cartier-divisor`).
 
 The proof applies `RHom(-, K)` to the open–closed triangle `j_! j^* Λ ⟶ Λ ⟶ i_* i^* Λ ⟶`
 (`AlgebraicGeometry.Etale.exists_distTriang_openClosed`) and identifies
@@ -201,7 +201,7 @@ section ClosedSupport
 
 variable {Z X U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
 
-/-- Blueprint `lem-amb-closed-support-hom`: Closed support as a relative section complex.
+/-- Blueprint `lemma-cycle-class-cartier-divisor`: Closed support as a relative section complex.
 
 Let `i : Z ⟶ X` be a closed immersion with complementary open immersion `j : U ⟶ X`. For every
 complex `K` of étale sheaves on `X`, the global derived Hom out of `i_* Λ_Z`,

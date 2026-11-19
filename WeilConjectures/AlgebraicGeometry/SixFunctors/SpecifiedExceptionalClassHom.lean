@@ -37,9 +37,6 @@ public import WeilConjectures.AlgebraicGeometry.Fixed.FixedEtaleOriginWitness
 /-!
 # The relative Hom bijection at a specified compactification
 
-Source: blueprint thm-sf-ambient-adjoint-class, clauses (2)--(3)
-(blueprint: thm-sf-ambient-adjoint-class).
-
 The original existence, dimension-bound and coherent-comparison interface is reexported.
 These helpers realize its normalized Hom chain for the right adjoint of the actual
 specified compactification, rather than the opaque choice inside HasCompactification.
@@ -60,19 +57,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The specified ordinary etale compact-support right adjoint takes R-nu-star of
 bounded-below inputs to bounded-below objects. This is the finite-amplitude step of
-the relative adjunction, with the compactification retained literally.
-Source: blueprint thm-sf-ambient-adjoint-class (2), its finite-dimension argument
-(blueprint: thm-sf-ambient-adjoint-class).
-
-Proof: on the quasi-compact target, the proper finite-type part of c has a uniform
-finite bound on its geometric fibre dimensions. Ordinary etale direct image for finite
-coefficients has the corresponding finite cohomological amplitude. Exact extension
-by zero gives the same upper bound for the compact-support functor. By the ordinary
-etale adjunction and t-structure orthogonality, its right adjoint shifts a lower bound
-by at most this finite amplitude. Right derived comparison direct image preserves a
-lower bound. Combining the two bounds proves the assertion. On the finite-type
-field-scheme domain of the node, lem-kun-dimension-finite-type supplies the stated
-finite bound; no all-sheaf pro-etale cohomological bound is used. -/
+the relative adjunction, with the compactification retained literally. -/
 theorem specifiedExceptionalEtale_boundedBelow
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
     DerivedCategory.TStructure.t.plus
@@ -96,9 +81,7 @@ theorem specifiedExceptionalEtale_boundedBelow
 etale origin. The successive factors are alpha, the normalized compact-support
 comparison, the comparison adjunction, the specified etale adjunction, full faithfulness
 of comparison on a bounded-below target, and alpha again. Every factor is an existing
-canonical bijection; this does not choose an arbitrary equivalence from existence.
-Source: blueprint thm-sf-ambient-adjoint-class (2), the four natural Hom identifications
-and their chosen-compactification normalization (blueprint: thm-sf-ambient-adjoint-class). -/
+canonical bijection; this does not choose an arbitrary equivalence from existence. -/
 def specifiedExceptionalHomEquiv
     (M : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
     (W : Scheme.FixedEtaleOriginWitness X Λ M)

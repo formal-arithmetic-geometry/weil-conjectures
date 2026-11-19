@@ -118,7 +118,7 @@ private theorem pulledIdealCoordinates_range {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- On every etale object, the canonical map from pulled-back ideal sections is the
 kernel of restriction to the base-changed closed subscheme.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-etale-ideal-sections-kernel)
 
 Proof: Flat module pullback preserves finite limits, so the pulled-back ideal

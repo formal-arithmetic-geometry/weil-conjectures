@@ -157,7 +157,7 @@ Proof:
    equation below specifies exactly these identifications, for `N = ![A, B, C]`.
 2. Postcomposition by the sequence maps becomes their coordinatewise finite direct sums.
    Finite direct sums preserve short exact sequences in the abelian category of sheaves
-   of modules (`def-weil-sheaf-of-modules-category`), also when `r = 0`.
+   of modules (`situation-conventions`), also when `r = 0`.
 3. The two displayed commutative squares transport that exactness to the internal-Hom
    sequence and provide the claimed canonical identifications.
 -/

@@ -17,10 +17,6 @@ import WeilConjectures.WeilSheaf.IsotypicPullback
 /-!
 # Native Weil open base change
 
-Source: Stacks Project, `etale-cohomology.tex`, Tag 03S6 (`lemma-shriek-base-change`),
-and `sites-modules.tex`, Tag 04J0 (`lemma-localize-morphism-ringed-sites`); blueprint
-`lem-sf-native-weil-open-natural-base-change`.
-
 The assertion is the natural base-change isomorphism for the actual native extension by
 zero and pullback functors on the ordinary derived categories of all native Weil sheaves.
 -/
@@ -44,7 +40,7 @@ private theorem inverseMate_app
     {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
     {L₂ : E ⥤ F} {R₂ : F ⥤ E} (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
     (β : R₁ ⋙ G ⟶ H ⋙ R₂) (M : C) :
-    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β)).natTrans.app M) =
+    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β)).app M) =
       L₂.map (G.map (a₁.unit.app M)) ≫
         L₂.map (β.app (L₁.obj M)) ≫ a₂.counit.app (H.obj (L₁.obj M)) := by
   simp only [mateEquiv, Equiv.coe_fn_symm_mk, TwoSquare.mk, NatTrans.comp_app,
@@ -62,7 +58,7 @@ private noncomputable def inverseMateNatTrans
   app M := L₂.map (G.map (a₁.unit.app M)) ≫
     L₂.map (β.app (L₁.obj M)) ≫ a₂.counit.app (H.obj (L₁.obj M))
   naturality M N f := by
-    have h := (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β)).natTrans).naturality f
+    have h := (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β))).naturality f
     simpa only [inverseMate_app] using h
 
 end CategoryTheory
@@ -245,24 +241,7 @@ private noncomputable def nativeOpenDerivedBaseChangeIso
 
 attribute [local irreducible] nativeOpenDerivedBaseChangeIso
 
-/-- Pullback commutes with native extension by zero in a Cartesian open square.
-
-Source: Stacks Project, `etale-cohomology.tex`, Tag 03S6 (`lemma-shriek-base-change`),
-and `sites-modules.tex`, Tag 04J0 (`lemma-localize-morphism-ringed-sites`);
-blueprint `lem-sf-native-weil-open-natural-base-change`.
-
-Proof: (1) identify the two geometric-fibre pro-etale sites with the localized sites
-and use the canonical ringed-site localization comparison for the locally finite
-coefficient sheaves. (2) Apply the module inverse-image and extension-by-zero
-adjunctions; the resulting Hom-chain defines the canonical comparison and its inverse.
-(3) The comparison commutes with the four Frobenius maps by the identity-on-evaluations
-description and mate-pasting. (4) Taking Frobenius mates gives the corresponding
-isomorphism in the native Weil hearts, with the inverse satisfying the same equation.
-(5) Native pullback and open extension are additive exact functors, so the comparison
-lifts termwise to complexes. (6) Exact derived natural-isomorphism and composition
-comparisons yield the displayed isomorphism on the full unbounded ordinary derived
-categories, with no constructibility or separatedness hypothesis.
-(blueprint: lem-sf-native-weil-open-natural-base-change). -/
+/-- Pullback commutes with native extension by zero in a Cartesian open square. -/
 theorem nativeWeilOpenNaturalBaseChange
     (k₀ : Type u) [Field k₀] [Finite k₀]
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

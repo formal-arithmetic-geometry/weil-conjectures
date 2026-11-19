@@ -186,8 +186,7 @@ theorem globalOperator_graph_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : �
     [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
     [IsFinite (frobeniusIterate Φ 1).left] [IsUniversalHomeomorphism (frobeniusIterate Φ 1).left] :
     (K.graph m).globalOperator =
-      (show End ((boundedConstructibleLowerShriek ℓ
-          (toPoint X)).obj K.carrier) from K.globalOperator 1) ^ m :=
+      (End.of (K.globalOperator 1) ^ m).asHom :=
   (globalOperator_eq_correspondenceGlobalOperator K m).symm.trans (globalOperator_eq_pow K m)
 
 end WeilBoundedConstructible

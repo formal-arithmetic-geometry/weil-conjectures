@@ -227,10 +227,10 @@ theorem exceptionalProCompactSupport_exists
   obtain ⟨hexact, heval⟩ := exceptionalProOpen_evaluation O ell c.i IX
   let := heval
   let e (n : ℕ) :=
-    (asIso ((mateEquiv ad₀ (an n)).symm (IX.inverseEvaluation n).hom).natTrans).symm
+    (asIso ((mateEquiv ad₀ (an n)).symm (IX.inverseEvaluation n).hom)).symm
   have hmate (n : ℕ) : (IX.inverseEvaluation n).hom =
-      (mateEquiv ad₀ (an n) (.mk _ _ _ _ (e n).inv)).natTrans := by
-    exact (congrArg TwoSquare.natTrans
+      (mateEquiv ad₀ (an n) (.mk _ _ _ _ (e n).inv)) := by
+    exact (
       ((mateEquiv ad₀ (an n)).apply_symm_apply
         (.mk _ _ _ _ (IX.inverseEvaluation n).hom))).symm
   let : F.Additive := ad₀.left_adjoint_additive

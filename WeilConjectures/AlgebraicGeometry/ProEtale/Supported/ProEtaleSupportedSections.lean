@@ -18,11 +18,8 @@ public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 /-!
 # The supported-kernel construction with the finite-coefficient interface
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-closed-unit,
-def-exc-proetale-sections-with-support (blueprint: def-exc-proetale-sections-with-support).
-
 The attached legacy module imports a second copy of the star functors. This interface
-uses the same kernel construction with the published finite-coefficient star functors.
+uses the same kernel construction with the finite-coefficient star functors.
 The kernel is taken in the functor category, so its action on morphisms is canonical.
 -/
 
@@ -37,26 +34,21 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The functor `M ↦ ker(M ⟶ j_*j^*M)`, including its canonical action on morphisms.
-The kernel of the natural unit is computed objectwise. Source: blueprint
-sk-prop-sf-closed-unit, supported sections
-(blueprint: def-exc-proetale-sections-with-support). -/
+The kernel of the natural unit is computed objectwise. -/
 noncomputable def finiteSupportedSections (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X U : Scheme.{u}} (j : U ⟶ X) :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤
       Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) :=
   kernel (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit
 
-/-- The canonical kernel inclusion into the original sheaf, natural in the sheaf.
-Source: blueprint sk-prop-sf-closed-unit, supported-kernel construction
-(blueprint: def-exc-proetale-sections-with-support). -/
+/-- The canonical kernel inclusion into the original sheaf, natural in the sheaf. -/
 noncomputable def finiteSupportedSectionsι (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X U : Scheme.{u}} (j : U ⟶ X) : finiteSupportedSections Λ j ⟶ 𝟭 _ :=
   kernel.ι (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit
 
 /-- The closed inverse image of the supported kernel: `s^!₀ = s^{-1} G_Z`.
 On morphisms this applies closed inverse image to the induced kernel map. No adjunction
-or constructibility assertion is included. Source: blueprint sk-prop-sf-closed-unit
-(blueprint: def-exc-proetale-sections-with-support). -/
+or constructibility assertion is included. -/
 noncomputable def finiteClosedUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Z U : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X) :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤

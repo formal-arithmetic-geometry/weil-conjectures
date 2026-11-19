@@ -170,24 +170,25 @@ Source: Mathlib's functoriality and additivity of `Sheaf.H.map`.
 def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
     (F : Sheaf J AddCommGrpCat.{u}) (ρ : R →+* End F) (q : ℕ) : Module R (F.H q) where
-  smul a x := Sheaf.H.map (ρ a) q x
+  smul a x := Sheaf.H.map (ρ a).asHom q x
   one_smul x := by
-    change Sheaf.H.map (ρ 1) q x = x
+    change Sheaf.H.map (ρ 1).asHom q x = x
     rw [map_one]
     exact Sheaf.H.map_id_apply x
   mul_smul a b x := by
-    change Sheaf.H.map (ρ (a * b)) q x =
-      Sheaf.H.map (ρ a) q (Sheaf.H.map (ρ b) q x)
-    rw [map_mul]
-    exact Sheaf.H.map_comp_apply (ρ b) (ρ a) x
-  smul_add a x y := (Sheaf.H.map (ρ a) q).map_add x y
-  smul_zero a := (Sheaf.H.map (ρ a) q).map_zero
+    change Sheaf.H.map (ρ (a * b)).asHom q x =
+      Sheaf.H.map (ρ a).asHom q (Sheaf.H.map (ρ b).asHom q x)
+    rw [map_mul, End.mul_asHom]
+    exact Sheaf.H.map_comp_apply (ρ b).asHom (ρ a).asHom x
+  smul_add a x y := (Sheaf.H.map (ρ a).asHom q).map_add x y
+  smul_zero a := (Sheaf.H.map (ρ a).asHom q).map_zero
   add_smul a b x := by
-    change Sheaf.H.map (ρ (a + b)) q x = Sheaf.H.map (ρ a) q x + Sheaf.H.map (ρ b) q x
-    rw [map_add, Sheaf.H.map_add_apply]
+    change Sheaf.H.map (ρ (a + b)).asHom q x =
+      Sheaf.H.map (ρ a).asHom q x + Sheaf.H.map (ρ b).asHom q x
+    rw [map_add, End.add_asHom, Sheaf.H.map_add_apply]
   zero_smul x := by
-    change Sheaf.H.map (ρ 0) q x = 0
-    rw [map_zero]
+    change Sheaf.H.map (ρ 0).asHom q x = 0
+    rw [map_zero, End.zero_asHom]
     have h := Sheaf.H.map_add_apply (0 : F ⟶ F) 0 x
     rw [add_zero] at h
     exact left_eq_add.mp h
@@ -197,18 +198,24 @@ Source: the source library's `smulHom` identities and functoriality of `toSheaf`
 (blueprint: def-pc-flat-cohomology-comparison) -/
 def scalarRep (M : X.Modules) :
     Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
-  toFun a := (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
-  map_one' := by
+  toFun a := .of ((SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a))
+  map_one' := End.ext (by
     change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom 1) = 𝟙 _
     rw [smulHom_one]
-    exact (SheafOfModules.toSheaf X.ringCatSheaf).map_id M
-  map_zero' := by rw [smulHom_zero, Functor.map_zero]
-  map_add' a b := by rw [smulHom_add, Functor.map_add]
-  map_mul' a b := by
+    exact (SheafOfModules.toSheaf X.ringCatSheaf).map_id M)
+  map_zero' := End.ext (by
+    change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom 0) = 0
+    rw [smulHom_zero, Functor.map_zero])
+  map_add' a b := End.ext (by
+    change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom (a + b)) =
+      (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a) +
+        (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom b)
+    rw [smulHom_add, Functor.map_add])
+  map_mul' a b := End.ext (by
     change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom (a * b)) =
       (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom b) ≫
         (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
-    rw [smulHom_mul, Functor.map_comp]
+    rw [smulHom_mul, Functor.map_comp])
 
 instance HOver_module (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : Module R (HOver f M q) :=
   letI : Module Γ(X, ⊤) (HOver f M q) := moduleH M q
@@ -303,7 +310,7 @@ def cohomologyComparisonLinear
       G.obj ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))))
     {F : Sheaf J AddCommGrpCat.{u}} {F' : Sheaf K AddCommGrpCat.{u}}
     (φ : G.obj F ⟶ F') (ρ : R →+* End F) (τ : R →+* End F')
-    (h : ∀ a, G.map (ρ a) ≫ φ = φ ≫ τ a) (q : ℕ) :
+    (h : ∀ a, G.map ((ρ a)).asHom ≫ φ = φ ≫ (τ a).asHom) (q : ℕ) :
     letI := cohomologyModule F ρ q
     letI := cohomologyModule F' τ q
     F.H q →ₗ[R] F'.H q := by
@@ -314,7 +321,7 @@ def cohomologyComparisonLinear
       map_add' := fun x y ↦ by
         rw [map_add, map_add]
       map_smul' := fun a x ↦
-        sheafComparison_naturality G e φ φ (ρ a) (τ a) (h a) q x }
+        sheafComparison_naturality G e φ φ (ρ a).asHom (τ a).asHom (h a) q x }
 
 /-- The pullback on cohomology before extending scalars.
 Source: Stacks Project, Tag 02KH, canonical comparison.

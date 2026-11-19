@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdMorphismDesce
 
 /-! # The category of finite-stage coefficient complexes
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: def-weil-point-fd-qlbar-category).
 
 Objects are literally pairs (finite coefficient field, finite-dimensional derived complex).

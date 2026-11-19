@@ -10,8 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReductio
 
 /-! # Pure tensors and the actual horizontal restrictions
 
-Source: Zheng Construction 4.1; Stacks 03EL.
-(blueprint: lem-coef-evaluation-tensor-horizontal-pure)
+## References
+
+* Zheng Construction 4.1
+* Stacks Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -76,13 +78,11 @@ private theorem evaluation_tensor_transition_cast {m n : ℕ} (h : n ≤ m)
           (tensorSection.{c, v, r} J (B n) _ _ U) h₅ h₆).symm)))
 
 /-- Evaluation of the actual horizontal tensor restriction preserves pure tensors.
-Source: Zheng Construction 4.1; Stacks Tags 03EK and 03EL.
 Choose the corresponding sections on the coefficient-sequence site. The evaluation
 tensor isomorphism takes their pure tensor to the evaluated pure tensor. Restriction
 of the sheaf tensor pairing is the pairing of the restrictions, and the actual
 horizontal map is this restriction under the evaluation section identifications.
-Transport these equalities back to arbitrary evaluated sections.
-(blueprint: lem-coef-evaluation-tensor-horizontal-pure). -/
+Transport these equalities back to arbitrary evaluated sections. -/
 theorem evaluation_tensor_transition_pure {m n : ℕ} (h : n ≤ m)
     (M N : Systems.{c, v, max c v r} J B τ) (U : Cᵒᵖ)
     (x : ((evaluation.{c, v, max c v r} J B τ m).obj M).val.obj U)

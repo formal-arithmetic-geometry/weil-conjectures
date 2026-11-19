@@ -92,7 +92,7 @@ noncomputable def moduleContinuityMap {I : Type (u + 1)} [SmallCategory I]
 
 /-- Classicality of intrinsic constant-ring module sheaves.
 Source: current blueprint, continuity-map detail, clause 3
-(blueprint: det-pe-classical-definition-continuity-map). -/
+(blueprint: definition-classical-pro-etale-sheaves--1). -/
 def IsClassicalModule : Prop :=
   ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (P : AffinePresentation X I), IsIso (moduleContinuityMap Λ F P)
@@ -131,7 +131,7 @@ theorem isClassicalModule_iff :
 
 /-- Classicality of the recorded intrinsic derived category, using its cohomology sheaves.
 Source: current blueprint, continuity-map detail, clause 4
-(blueprint: det-pe-classical-definition-continuity-map). -/
+(blueprint: definition-classical-pro-etale-sheaves--2). -/
 def IsClassicalComplex {X : Scheme.{u}} (Λ : Type u) [CommRing Λ]
     (K : Scheme.proEtaleDerivedCategory X Λ) : Prop :=
   ∀ q : ℤ, IsClassicalModule Λ

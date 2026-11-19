@@ -26,7 +26,11 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
 /-! # Full faithfulness on the punctured completion
 
-Source: Stacks Project, Tags 0BM6, 0EKS, 0EL8 and 0EII.
+## References
+
+* Stacks Project, Tags 0BM6, 0EKS, 0EL8 and 0EII
+* Stacks Project, Tag 0BM6, applied in the complete case of Tag 0BLS
+* Tags 0AVY, 0ALZ and 0ALJ
 -/
 
 @[expose] public section
@@ -221,27 +225,7 @@ private theorem complete_punctured_quotient_restriction_surjective
       using (MorphismProperty.Over.w φ).symm
 
 /-- Quotient restriction of finite etale covers of the punctured completion is fully faithful.
-
-Source: Stacks Project, Tag 0BM6, applied in the complete case of Tag 0BLS;
-Tags 0AVY, 0ALZ and 0ALJ.
-(blueprint: lem-sbc-completed-punctured-quotient-fully-faithful)
-
-Proof: The maximal-ideal completion C is Noetherian, local, complete and flat over A.
-Its maximal ideal is the extension of that of A, and the only prime of C above the
-maximal ideal of A is its maximal ideal. Hence W is the punctured spectrum of C.
-Flat local base change preserves regular sequences, so C still has depth at least three.
-Depth-two Hartogs identifies the global sections of W with C, making W connected.
-The principal ideal theorem gives a nonclosed prime containing the image g of f,
-so the principal slice is nonempty. Faithfulness of the geometric fibre functor
-then makes restriction injective on Hom sets.
-For surjectivity, lift a given map uniquely through each nilpotent thickening by
-formal etaleness. Uniqueness makes the lifts compatible. Scalar formal comparison
-on the complete local puncture (0EII), transferred to the finite etale source cover,
-algebraizes the compatible maps on global sections. The quasi-affine toSpecGamma
-pullback reconstructs a scheme morphism over W. Comparing both pullback projections
-shows that it restricts to the prescribed map. Bijectivity on Hom sets gives the
-required fully faithful structure. No cancellation of g is used, and empty covers
-are included. -/
+-/
 theorem fullyFaithful_completed_punctured_quotient
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

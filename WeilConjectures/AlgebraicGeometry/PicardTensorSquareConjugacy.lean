@@ -52,7 +52,6 @@ private theorem tensorComp_app {X Y Z : Scheme.{u}} (k : X ⟶ Y) (l : Y ⟶ Z)
     (A : Z.Modules) : (tensorComp k l).app A = picardTensorCompIso k l A := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Matching the whiskering laws unfolds the scheme module category instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

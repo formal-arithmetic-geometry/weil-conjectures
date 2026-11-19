@@ -111,7 +111,7 @@ Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07CC
 
 Proof:
 1. Choose the presentation and integer `c` witnessing the given standardness
-   (def-weil-pbc-strictly-standard-element). Base change the presentation, keeping the
+   (theorem-finite-etale-covers-proper-henselian--2). Base change the presentation, keeping the
    same numbers of variables and relations and the same `c`
    (def-weil-pbc-finitely-presented-algebra, lem-weil-pbc-presentation-base-change).
    The resulting algebra is finitely presented
@@ -126,11 +126,11 @@ Proof:
    shows that every Jacobian minor maps to the corresponding new minor.
 4. Apply the tensor inclusion to the elementary standard multiple identity, respectively
    the strictly standard sum identity. This gives the first condition of
-   def-weil-pbc-strictly-standard-element with the base-changed coefficients.
+   theorem-finite-etale-covers-proper-henselian--2 with the base-changed coefficients.
 5. Apply the coefficient map to each expression of a lifted element times a remaining
    relation in the ideal of the first `c` relations plus the square of the relation ideal.
    The resulting expression satisfies the second condition in the new presentation.
-   Independence of the polynomial lift is part of def-weil-pbc-strictly-standard-element.
+   Independence of the polynomial lift is part of theorem-finite-etale-covers-proper-henselian--2.
    These witnesses establish both conclusions. -/
 theorem standardElements_baseChange
     {R : Type u} {A : Type v} {R' : Type w}

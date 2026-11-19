@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 /-! # Isomorphism invariance of the Stacks adic constructibility predicate
 
 The Stacks adic constructibility predicate `stacksConstructible` of
-`det-lem-integral-models-stacks` is invariant under isomorphism.
+`lemma-integral-models--2` is invariant under isomorphism.
 
 Source: Stacks Tags 0999, 09C1 and 09C2 (auxiliary; not a blueprint node).
 -/

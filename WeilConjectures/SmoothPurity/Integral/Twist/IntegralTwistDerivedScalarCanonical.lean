@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistDerivedSc
 
 /-! # Named canonical integral twist and scalar comparisons
 
-Source: blueprint `prop-weil-twist-preserves`, integral/common-stage paragraph
+Source: blueprint `definition-tate-twists--10`, integral/common-stage paragraph
 (blueprint: lem-weil-integral-twist-derived-scalar).
 
 The existing theorem specifies the ordinary comparison on all good K-flat representatives
@@ -33,7 +33,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The ordinary beta, fixed by the exact K-flat pure-tensor and descent characterization
 in `integral_twist_derived_scalar` (its first existential witness).
-Source: blueprint `prop-weil-twist-preserves`, integral/common-stage paragraph
+Source: blueprint `definition-tate-twists--10`, integral/common-stage paragraph
 (blueprint: lem-weil-integral-twist-derived-scalar). -/
 def integralTwistOrdinaryBeta (m : ℤ) :
     (sfIntegralConstructible l E S).ι ⋙

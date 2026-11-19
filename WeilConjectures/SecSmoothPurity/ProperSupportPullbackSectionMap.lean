@@ -449,7 +449,7 @@ Source: Stacks Project, More on Étale Cohomology, Tag 0F55 (lemma-base-change-f
 
 Proof:
 1. Evaluate the constant-coefficient inverse-image/direct-image unit on each étale
-object (prop-weil-pbc-inverse-image-modules-exact). Restrict along
+object (situation-conventions). Restrict along
 `properSupportBaseChangeEtaleMap`, the lift of `properSupportBaseChangeProjection`.
 This gives `properSupportUnitPullback` on every ambient section before imposing support.
 2. The inverse-image stalk-and-germ comparison (lem-weil-pbc-inverse-image-stalk-germ)

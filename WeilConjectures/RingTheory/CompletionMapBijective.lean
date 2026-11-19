@@ -26,7 +26,7 @@ namespace RingHom
 
 /-- Bijectivity of a completion map under the residue-field and maximal-ideal hypotheses.
 Source: More on Algebra, Lemma Tag 0AGX, final rank-one argument.
-(blueprint: lem-weil-pbc-flat-local-completion-iso-bijective)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof:
 Let R and S denote the two completions, with maximal ideals mR and nS.
