@@ -7,7 +7,8 @@ Run from the master build tree:
 
 ```text
 LEAN_NUM_THREADS=1 /usr/bin/time -v timeout 1200 nice -n 10 lake env lean \
-  -DElab.async=false -Ddebug.skipKernelTC=false KernelTimeouts/OrderedSpectralRawLattices/Before.lean
+  -DElab.async=false -Ddebug.skipKernelTC=false \
+  /path/to/dataset/KernelTimeouts/OrderedSpectralRawLattices/Before.lean
 ```
 
 Use `After.lean` for the fixed form and `probes/Before.lean` or

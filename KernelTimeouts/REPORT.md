@@ -127,5 +127,6 @@ from the master build tree with:
 
 ```text
 LEAN_NUM_THREADS=1 /usr/bin/time -v timeout 1800 nice -n 10 lake env lean \
-  -DElab.async=false -Ddebug.skipKernelTC=false KernelTimeouts/<Case>/probes/<Probe>.lean
+  -DElab.async=false -Ddebug.skipKernelTC=false \
+  /path/to/dataset/KernelTimeouts/<Case>/probes/<Probe>.lean
 ```

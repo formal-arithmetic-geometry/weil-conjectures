@@ -22,7 +22,8 @@ All controls use this command from the master build tree, replacing
 
 ```text
 LEAN_NUM_THREADS=1 /usr/bin/time -v timeout 1200 nice -n 10 lake env lean \
-  -DElab.async=false -Ddebug.skipKernelTC=<skip> <dataset checkout>/KernelTimeouts/OrderedSpectralRawLattices/probes/<probe>.lean
+  -DElab.async=false -Ddebug.skipKernelTC=<skip> \
+  /path/to/dataset/KernelTimeouts/OrderedSpectralRawLattices/probes/<probe>.lean
 ```
 
 | Probe | Kernel on | Kernel skipped | Result |
