@@ -172,8 +172,8 @@ instance : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderFiniteProducts :=
       (HasLimit.isoOfNatIso (diagramIsoPair G)).symm))
   .mk'
 
-/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems,
-exactness.
+/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
+local systems, exactness.
 
 Every equivalence `e` between finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite
 continuous `Λ`-representations of a topological group `G` — such as the Galois correspondence

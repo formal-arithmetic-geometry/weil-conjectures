@@ -64,7 +64,8 @@ private theorem pushforwardSquare_pasting
       ((TwoSquare.hComp (pushforwardSquare f' f'' h h' hsq₂)
         (pushforwardSquare f f' g g' hsq₁)).whiskerTop
           (pushforwardComp h' g').inv).whiskerBottom (pushforwardComp h g).hom := by
-  ext M : 1
+  apply NatTrans.ext
+  funext M
   apply hom_ext
   intro U
   simp only [pushforwardSquare, TwoSquare.hComp, TwoSquare.whiskerTop,
@@ -96,7 +97,7 @@ its adjoint, the unit is natural, and sectionwise pushforward composes (0096, 00
 2. `β` is the inverse Hom equivalence applied to the pushforward of the top-arrow unit,
 natural in `F` since both naturality composites have the same adjoint.
 3. Compose the two adjunctions (`def-weil-pbc-composite-adjunction`) and conjugate the
-pushforward composition isomorphism (`lem-weil-pbc-conjugate-iso-unit-equation`). This
+pushforward composition isomorphism (`situation-conventions`). This
 produces the unique pullback composition isomorphism compatible with the composite unit.
 4. Take the adjoint of the displayed four-arrow composite. (a) Unit compatibility for
 `c_{g,h}` replaces the outer unit by the composite unit. (b) Naturality of the unit for `h`

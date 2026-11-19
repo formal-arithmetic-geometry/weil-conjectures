@@ -17,7 +17,7 @@ import WeilConjectures.Algebra.TorDimensionShiftNatural
 /-!
 # Two-step dimension shifting for Tor
 
-Source: blueprint, `lem-sc-p1-graded-resolution`, proof; Stacks Project,
+Source: blueprint, `theorem-riemann-roch-coherent-serre-duality`, proof; Stacks Project,
 Algebra, proof of Lemma Tag 00S2 and Section Tag 00LY
 (blueprint: lem-sc-p1-tor-dimension-shifting).
 -/
@@ -38,7 +38,7 @@ Two-step dimension shifting for Tor. The short exact sequence `E₀` is
 `θ k : Tor₁(K₂,k) ≅ Tor₃(M,k)` of a family natural in the second module;
 the second is the vanishing when `M` has projective dimension at most two.
 
-Source: blueprint, `lem-sc-p1-graded-resolution`, proof; Stacks Project, Algebra,
+Source: blueprint, `theorem-riemann-roch-coherent-serre-duality`, proof; Stacks Project, Algebra,
 proof of Lemma Tag 00S2 (dimension shifting), and Section Tag 00LY (Tor).
 
 Step 1. Apply `lem-sc-p1-tor-dimension-shift-natural` to `E₁` (`F₁` free)

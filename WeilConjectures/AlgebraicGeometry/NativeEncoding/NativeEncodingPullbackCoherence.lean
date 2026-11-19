@@ -11,9 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 
 /-! # Coherence of the normalized ordinary native encoding
 
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism;
-compatibility of the coefficient comparison with inverse images and composition.
-(blueprint: lem-sf-native-encoding-pullback-cube).
+## References
+
+* Stacks 03D7 and 0B65
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +34,7 @@ private theorem ordinary_mate (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (adicUpperStarLowerStarAdjunction l f)
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
-      (TwoSquare.mk _ _ _ _ (pullComparison l f).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullComparison l f).inv)) =
         (pushComparison l f).hom := by
   dsimp only [pullComparison, pushComparison]
   exact (Classical.choose_spec
@@ -168,9 +168,7 @@ private theorem ordinary_forward_cube (l : ℕ) [Fact l.Prime]
     (pull_composition l p' g M) (comparison_eq l sq.w.symm M) hr
 
 /-- The specified ordinary condensed pullback-square compositor, kept as a single
-isomorphism so localization can use its components without expanding adjunction data.
-Source: blueprint thm-weil-pbc-qbar.proof.md, the canonical pullback comparison.
-(blueprint: lem-sf-native-encoding-pullback-cube). -/
+isomorphism so localization can use its components without expanding adjunction data. -/
 @[irreducible] def condensedPullbackSquare (l : ℕ) [Fact l.Prime]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g) :
@@ -182,23 +180,7 @@ Source: blueprint thm-weil-pbc-qbar.proof.md, the canonical pullback comparison.
     eqToIso (congrArg (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)) sq.w.symm) ≪≫
       CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) v p
 
-/-- The ordinary inverse-image comparisons commute with the specified square compositors.
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism;
-Stacks 03D7 and 0B65.
-(blueprint: lem-sf-native-encoding-pullback-cube).
-
-Proof: the normalized direct-image comparison is the identity on the underlying
-abelian sheaf. The direct-image compositors on both sides are the restriction maps
-along the same canonical iterated fiber-product isomorphism. Hence the direct-image
-comparisons commute with these compositors, as is checked on sections. Transpose this
-identity under the two composite inverse-image/direct-image adjunctions. The specified
-pullComparison is the inverse adjunction mate of pushComparison, and both inverse-image
-compositors are conjugates of the direct-image compositors. The mates pasting identity
-therefore gives the inverse-image composition comparison. Paste this identity for
-(p', g) and (v, p), with the equality of their composites supplied by sq. Naturality
-under equality transport gives the middle face. Invert the two outside comparison
-isomorphisms to obtain the displayed equation. This holds for every commutative square,
-including identity maps, empty schemes, and zero modules; no derived operation is used. -/
+/-- The ordinary inverse-image comparisons commute with the specified square compositors. -/
 theorem encoding_pullback_cube (l : ℕ) [Fact l.Prime]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g)

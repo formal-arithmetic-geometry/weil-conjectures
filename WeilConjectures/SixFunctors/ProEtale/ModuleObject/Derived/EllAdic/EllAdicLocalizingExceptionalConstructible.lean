@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdic
 
 /-! # Constructibility of the localizing exceptional inverse image
 
-Source: blueprint `sk-thm-existence` (4), `det-existence-restriction.proof.md`.
+Source: blueprint `theorem-exceptional-inverse-image` (4), `det-existence-restriction.proof.md`.
 (blueprint: lem-sfb-adic-localizing-exceptional-constructible)
 -/
 
@@ -37,8 +37,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance)
 
 /-- `ellAdic_localizing_rightAdjoint_obj_boundedConstructible` for the coefficients `E` and
-`Q̄_ℓ`, through the rational restriction theorem only (blueprint: sk-thm-restriction).
-(blueprint: lem-sfb-adic-localizing-exceptional-constructible)
+`Q̄_ℓ`, through the rational restriction theorem only (blueprint:
+theorem-f-shriek-ell-adic-coefficients). (blueprint:
+lem-sfb-adic-localizing-exceptional-constructible)
 -/
 theorem ellAdic_localizing_rightAdjoint_obj_boundedConstructible_rational
     (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)

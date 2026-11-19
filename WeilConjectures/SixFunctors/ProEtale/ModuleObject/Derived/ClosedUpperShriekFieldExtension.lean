@@ -196,8 +196,29 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {i : Z ⟶ P} {i' : Z' ⟶ P'} [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
-set_option maxHeartbeats 400000 in
--- the proof elaborates two triangles and several base change maps of the derived categories
+/-- Identify the closed exceptional pullback from a triangle whose third term receives no maps
+from closed pushforwards or their shifts. The adjunction and full faithfulness are shared between
+the original triangle and its base change. -/
+private lemma nonempty_iso_upperShriek_of_distinguished_triangle
+    (Tr : Triangle (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left))))
+    (hT : Tr ∈ distTriang _) (Q : Dᵇc(Z.left)⟦𝐐⟧) (M : Dᵇc(P.left)⟦𝐐⟧)
+    (e₁ : ((boundedConstructibleLowerStar ℓ i).obj Q).obj ≅ Tr.obj₁)
+    (e₂ : M.obj ≅ Tr.obj₂)
+    (h₀ : ∀ B : Dᵇc(Z.left)⟦𝐐⟧,
+      Subsingleton (((boundedConstructibleLowerStar ℓ i).obj B).obj ⟶ Tr.obj₃))
+    (h₁ : ∀ B : Dᵇc(Z.left)⟦𝐐⟧,
+      Subsingleton (((boundedConstructibleLowerStar ℓ i).obj B).obj ⟶ Tr.obj₃⟦(-1 : ℤ)⟧)) :
+    Nonempty ((boundedConstructibleUpperShriek ℓ i).obj M ≅ Q) := by
+  have hLi : (boundedConstructibleLowerStar ℓ i ⋙ (boundedConstructible _).ι).FullyFaithful :=
+    ((ObjectProperty.fullyFaithfulι _).comp
+      (derivedUpperStarLowerStarAdjunction 𝐐 i.left).fullyFaithfulROfIsIsoCounit).ofIso
+      (boundedConstructibleLowerStarCompatibility ℓ i).symm
+  exact nonempty_iso_of_adjunction_triangle
+    ((boundedConstructibleUpperShriekAdjunction ℓ i).ofNatIsoLeft
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i))
+    (ObjectProperty.fullyFaithfulι _) hLi Tr hT e₁ e₂ h₀ h₁
+
 /-- **Closed exceptional inverse images commute with base change along field extensions**: for a
 closed immersion `i : Z ⟶ P` of separated `F`-schemes of finite type, its base change
 `i' : Z' ⟶ P'` along a field extension `F ⟶ L` (`πP : P' ⟶ P`, `πZ : Z' ⟶ Z`) and a bounded
@@ -255,14 +276,8 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
   let e₁ : (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ i).obj Q₀) ≅ X :=
     (asIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X)).symm
   /- `Ri^! M ≅ Q₀`. -/
-  have hLi : (boundedConstructibleLowerStar ℓ i ⋙ (boundedConstructible _).ι).FullyFaithful :=
-    ((ObjectProperty.fullyFaithfulι _).comp
-      (derivedUpperStarLowerStarAdjunction 𝐐 i.left).fullyFaithfulROfIsIsoCounit).ofIso
-      (boundedConstructibleLowerStarCompatibility ℓ i).symm
-  obtain ⟨φ₁⟩ := nonempty_iso_of_adjunction_triangle
-    ((boundedConstructibleUpperShriekAdjunction ℓ i).ofNatIsoLeft
-      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i))
-    (ObjectProperty.fullyFaithfulι _) hLi _ hT e₁ (Iso.refl _)
+  obtain ⟨φ₁⟩ := nonempty_iso_upperShriek_of_distinguished_triangle ℓ (i := i)
+    _ hT Q₀ M e₁ (Iso.refl _)
     (fun Q ↦ adjV.subsingleton_hom_of_isZero
       (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V.ι i.left
         hcompl.symm.disjoint Q.obj) _)
@@ -288,16 +303,10 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
   let e₃ : Tr'.obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
       ((L((πP ∣_ V)^*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
     asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
-  have hLi' : (boundedConstructibleLowerStar ℓ i' ⋙ (boundedConstructible _).ι).FullyFaithful :=
-    ((ObjectProperty.fullyFaithfulι _).comp
-      (derivedUpperStarLowerStarAdjunction 𝐐 i'.left).fullyFaithfulROfIsIsoCounit).ofIso
-      (boundedConstructibleLowerStarCompatibility ℓ i').symm
   /- `Ri'^! πP^* M ≅ πZ^* Q₀`. -/
-  obtain ⟨φ₂⟩ := nonempty_iso_of_adjunction_triangle
-    ((boundedConstructibleUpperShriekAdjunction ℓ i').ofNatIsoLeft
-      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i'))
-    (ObjectProperty.fullyFaithfulι _) hLi' Tr' hT' e₁'
-    (B := (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') πP).obj M) (Iso.refl _)
+  obtain ⟨φ₂⟩ := nonempty_iso_upperShriek_of_distinguished_triangle ℓ (i := i')
+    Tr' hT' Q₀' ((boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') πP).obj M)
+    e₁' (Iso.refl _)
     (fun Q ↦ @Equiv.subsingleton _ _ (Iso.homCongr (Iso.refl _) e₃)
       ((derivedUpperStarLowerStarAdjunction 𝐐 V'.ι).subsingleton_hom_of_isZero
         (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V'.ι i'.left

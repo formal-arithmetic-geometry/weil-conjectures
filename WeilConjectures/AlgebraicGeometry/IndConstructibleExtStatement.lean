@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DetIndHeartIIVanishing
 
 Source: blueprint latest, `part-six-operations/sec-six-functors-basics/sec-compactness/`
 `sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/_section.md` and
-`sk-cor-ind-heart-ii.proof.md` in the same directory (blueprint: sk-cor-ind-heart-ii).
+`sk-cor-ind-heart-ii.proof.md` in the same directory (blueprint: corollary-ind-heart-b).
 
 The supplied nonnegative cutoff retains its value on passing from constructible to
 ind-constructible targets. In every integer degree the canonical direct-sum comparison
@@ -37,23 +37,24 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The uniform constructible-target Ext bound also applies to ind-constructible
 sheaves, and Ext in every integer degree preserves small sums of such sheaves.
-The cutoff is supplied with precisely the property of sk-lem-uniform-constructible-ext;
+The cutoff is supplied with precisely the property of lemma-uniform-ext-bound;
 its existence is not an additional conclusion of this corollary. The coefficient equality
 is equality of bundled monoid objects, so it includes the ring multiplication.
 
 Source: blueprint latest, `part-six-operations/sec-six-functors-basics/sec-compactness/`
 `sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/_section.md` and
-`sk-cor-ind-heart-ii.proof.md` in the same directory (blueprint: sk-cor-ind-heart-ii).
+`sk-cor-ind-heart-ii.proof.md` in the same directory (blueprint: corollary-ind-heart-b).
 
 Proof plan, following the two DAG steps:
-1. By sk-prop-ind-heart, each ind-constructible sheaf is an actual small filtered
+1. By proposition-ind-constructible-sheaves, each ind-constructible sheaf is an actual small
+filtered
    colimit of constructible module sheaves. Regard the presentation as complexes
    concentrated in degree zero. The Ext-continuity comparison identifies Ext into
    this colimit with the filtered colimit of the stage Ext groups. For q > d every
    stage group is zero by the supplied bound; hence its colimit is zero. This is
-   det-ind-heart-ii-vanishing, with the same cutoff d.
+   corollary-ind-heart-b--1, with the same cutoff d.
 2. The standing finite-type scheme over a field is Noetherian. Apply
-   det-ind-heart-ii-sums: write the ambient sum as the filtered colimit of its finite
+   corollary-ind-heart-b--2: write the ambient sum as the filtered colimit of its finite
    subsums and use finite additivity and Ext continuity. The comparison sends an
    element of the s-th group to its composite with the shifted coprojection; hence
    it is exactly DirectSum.toAddMonoid below. This works in every integer degree

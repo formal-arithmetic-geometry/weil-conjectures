@@ -20,7 +20,7 @@ differentials). On the overlap of two standard charts `Uₚ`, `U_q` of projectiv
 `(-1)ᵖ ⋀_{k ≠ p} δ(y k) = (y q)^{D+1} • (-1)^q ⋀_{k ≠ q} δ(z k)`,
 
 the wedge products being taken in increasing order of `k`. This is the computation behind
-`ω_ℙ ≅ 𝒪(-D-1)` (blueprint: `lem-pc-projective-space-canonical`).
+`ω_ℙ ≅ 𝒪(-D-1)` (blueprint: `theorem-riemann-roch-coherent-serre-duality--2`).
 
 ## Main statements
 

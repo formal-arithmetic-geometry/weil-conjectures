@@ -181,7 +181,7 @@ for each of the finitely many cohomology degrees in this interval. Repeatedly us
 lem-weil-pbc-constructible-stratification-intersection to obtain a common refinement,
 using actual fibre products of stratum schemes and constructible intersections.
 The first stratification starts the induction; empty fibre products may be retained.
-2. Exact inverse image (prop-weil-pbc-inverse-image-modules-exact) identifies homology
+2. Exact inverse image (situation-conventions) identifies homology
 on a refined stratum with the inverse image of the original homology. Pull back each
 trivializing etale cover along the refinement projection. The natural constant-module
 comparison (lem-sfb-geometric-inverse-image-constant-module) preserves its finite values.
@@ -194,7 +194,7 @@ finite-dimensional because its finite set of elements spans it.
 these bounded finite-dimensional complexes themselves witness IsPerfectRingComplex
 (def-pc-perfect-ring-complex), including the zero complex and zero terms.
 5. Put h = v followed by the stratum immersion. The canonical comparison-pullback
-isomorphisms (lem-weil-pbc-comparison-pullback) commute inverse image with nu^*.
+isomorphisms (proposition-comparison-etale-derived-category--5) commute inverse image with nu^*.
 Exactness (lem-pe-constant-left-module-inverse-image) descends them termwise to derived
 categories. The constant-preserving coefficient identification of
 prop-weil-pbc-proetale-constant-ring-map is precisely the realization used by

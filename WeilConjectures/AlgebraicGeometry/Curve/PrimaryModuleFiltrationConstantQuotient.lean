@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.ConstructibleSheaf.Defs
@@ -16,7 +17,7 @@ import Mathlib.Algebra.Field.ULift
 /-!
 # Constant prime-field quotient identification
 
-Source: Stacks Project, Tag 04JQ; blueprint `lem-sc-affine-generic-second`,
+Source: Stacks Project, Tag 04JQ; blueprint `theorem-cohomology-curves--2`,
 proof paragraphs 1--2.
 -/
 
@@ -64,7 +65,7 @@ private theorem constant_fin_power (T : Scheme.{u}) (ℓ d : ℕ) :
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))) ≪≫ biprod.mapIso hd (Iso.refl _)⟩
 
 /-- Source: Stacks Project, Tags 04JQ, 03QT and 03QW; blueprint
-`lem-sc-affine-generic-second`, proof paragraphs 1--2.
+`theorem-cohomology-curves--2`, proof paragraphs 1--2.
 (blueprint: lem-sc-primary-constant-quotient-identification)
 
 Proof: Set L = Ks^H. The canonical map from V to the geometric stalk of
@@ -170,7 +171,7 @@ private theorem primary_trivialRepresentation_constant
     (C.inverse.mapIso r' ≪≫ (C.unitIso.app F).symm) ≪≫
       (upperStarConstantSheafIso AddCommGrpCat.{u + 1} e.inv).app (AddCommGrpCat.of V)⟩
 
-/-- Source: Stacks Project, Tag 04JQ; blueprint `lem-sc-affine-generic-second`,
+/-- Source: Stacks Project, Tag 04JQ; blueprint `theorem-cohomology-curves--2`,
 proof paragraphs 1--2.
 (blueprint: lem-sc-primary-constant-quotient-identification)
 

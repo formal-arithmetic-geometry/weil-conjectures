@@ -37,8 +37,8 @@ Sheaves 007O(7), 0087(1), and Section 009E(3); directed sets are nonempty preord
 as in Categories, Definition `definition-directed-set`.
 
 First form the sectionwise presheaf module colimit
-(`lem-weil-pbc-presheaf-modules-colimits-sectionwise`). Its sheafification is the module
-colimit by `lem-weil-pbc-module-sheaves-colimits-forgetful`, hence canonically isomorphic
+(`situation-conventions`). Its sheafification is the module
+colimit by `situation-conventions`, hence canonically isomorphic
 as a cocone to the given colimit. For every open, the filtered module colimit has underlying
 set the colimit of underlying sets (`lem-weil-pbc-filtered-colimit-modules-elementwise`),
 compatibly with restrictions. Second, module sheafification has underlying sheaf of sets

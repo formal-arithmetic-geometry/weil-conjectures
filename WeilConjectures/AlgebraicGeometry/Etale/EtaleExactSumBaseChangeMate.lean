@@ -49,26 +49,26 @@ private lemma mates_paste
     (s : V₀₂ ≅ V₀₁ ⋙ V₁₂) (t : W₀₂ ≅ W₀₁ ⋙ W₁₂)
     (α : TwoSquare V₀₁ L₀ L₁ W₀₁) (β : TwoSquare V₁₂ L₁ L₂ W₁₂)
     (γ : TwoSquare V₀₂ L₀ L₂ W₀₂)
-    (h : ∀ M, L₂.map (s.inv.app M) ≫ γ.natTrans.app M ≫ t.hom.app (L₀.obj M) =
-      β.natTrans.app (V₀₁.obj M) ≫ W₁₂.map (α.natTrans.app M)) (K : D₀) :
-    V₁₂.map ((mateEquiv a₀ a₁ α).natTrans.app K) ≫
-        (mateEquiv a₁ a₂ β).natTrans.app (W₀₁.obj K) =
-      s.inv.app (R₀.obj K) ≫ (mateEquiv a₀ a₂ γ).natTrans.app K ≫
+    (h : ∀ M, L₂.map (s.inv.app M) ≫ γ.app M ≫ t.hom.app (L₀.obj M) =
+      β.app (V₀₁.obj M) ≫ W₁₂.map (α.app M)) (K : D₀) :
+    V₁₂.map ((mateEquiv a₀ a₁ α).app K) ≫
+        (mateEquiv a₁ a₂ β).app (W₀₁.obj K) =
+      s.inv.app (R₀.obj K) ≫ (mateEquiv a₀ a₂ γ).app K ≫
         R₂.map (t.hom.app K) := by
   have hα := mateEquiv_counit a₀ a₁ α K
-  change L₁.map ((mateEquiv a₀ a₁ α).natTrans.app K) ≫ a₁.counit.app _ =
-    α.natTrans.app (R₀.obj K) ≫ W₀₁.map (a₀.counit.app K) at hα
+  change L₁.map ((mateEquiv a₀ a₁ α).app K) ≫ a₁.counit.app _ =
+    α.app (R₀.obj K) ≫ W₀₁.map (a₀.counit.app K) at hα
   have hβ := mateEquiv_counit a₁ a₂ β (W₀₁.obj K)
-  change L₂.map ((mateEquiv a₁ a₂ β).natTrans.app _) ≫ a₂.counit.app _ =
-    β.natTrans.app (R₁.obj (W₀₁.obj K)) ≫ W₁₂.map (a₁.counit.app _) at hβ
+  change L₂.map ((mateEquiv a₁ a₂ β).app _) ≫ a₂.counit.app _ =
+    β.app (R₁.obj (W₀₁.obj K)) ≫ W₁₂.map (a₁.counit.app _) at hβ
   have hγ := mateEquiv_counit a₀ a₂ γ K
-  change L₂.map ((mateEquiv a₀ a₂ γ).natTrans.app K) ≫ a₂.counit.app _ =
-    γ.natTrans.app (R₀.obj K) ≫ W₀₂.map (a₀.counit.app K) at hγ
-  have hn := β.natTrans.naturality ((mateEquiv a₀ a₁ α).natTrans.app K)
-  change L₂.map (V₁₂.map ((mateEquiv a₀ a₁ α).natTrans.app K)) ≫
-    β.natTrans.app (R₁.obj (W₀₁.obj K)) =
-      β.natTrans.app (V₀₁.obj (R₀.obj K)) ≫
-        W₁₂.map (L₁.map ((mateEquiv a₀ a₁ α).natTrans.app K)) at hn
+  change L₂.map ((mateEquiv a₀ a₂ γ).app K) ≫ a₂.counit.app _ =
+    γ.app (R₀.obj K) ≫ W₀₂.map (a₀.counit.app K) at hγ
+  have hn := β.naturality ((mateEquiv a₀ a₁ α).app K)
+  change L₂.map (V₁₂.map ((mateEquiv a₀ a₁ α).app K)) ≫
+    β.app (R₁.obj (W₀₁.obj K)) =
+      β.app (V₀₁.obj (R₀.obj K)) ≫
+        W₁₂.map (L₁.map ((mateEquiv a₀ a₁ α).app K)) at hn
   have ht := a₂.counit.naturality (t.hom.app K)
   change L₂.map (R₂.map (t.hom.app K)) ≫ a₂.counit.app (W₁₂.obj (W₀₁.obj K)) =
     a₂.counit.app (W₀₂.obj K) ≫ t.hom.app K at ht
@@ -91,8 +91,8 @@ private lemma mate_eq_of_unit
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (a : L ⊣ R) (b : L' ⊣ R') {V : C ⥤ E} {W : D ⥤ F}
     (α : TwoSquare V L L' W) (β : TwoSquare R W V R')
-    (h : ∀ M, b.unit.app (V.obj M) ≫ R'.map (α.natTrans.app M) =
-      V.map (a.unit.app M) ≫ β.natTrans.app (L.obj M)) :
+    (h : ∀ M, b.unit.app (V.obj M) ≫ R'.map (α.app M) =
+      V.map (a.unit.app M) ≫ β.app (L.obj M)) :
     mateEquiv a b α = β := by
   apply (mateEquiv a b).symm.injective
   rw [Equiv.symm_apply_apply]
@@ -159,7 +159,7 @@ theorem etaleExactSumBaseChangeMate
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e' inferInstance)
       (TwoSquare.mk _ _ _ _
         (mapDerivedCategoryEtaleLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) sq).hom)
-      ).natTrans =
+      ) =
       (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).inv := by
   let B := ModuleCat.{u + 1} A
   let a := etaleLowerShriekUpperStarAdjunction B e inferInstance
@@ -200,7 +200,7 @@ theorem etaleExactSumBaseChangeMate
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.leftUnitor_hom_app, Functor.rightUnitor_hom_app,
       Functor.comp_obj, Functor.id_obj, Category.id_comp, Category.comp_id,
-      TwoSquare.mk, TwoSquare.natTrans,
+      TwoSquare.mk,
       l, r, l', r', v, z, Word.ordinary, ExactFunctor.of_fst] using hn
   have hd := (exact_derived_transformation_pasting C).2.1 lhs rhs ho
   have hα : Word.cell C (P := .comp v l') (R := .comp l z) α.hom =

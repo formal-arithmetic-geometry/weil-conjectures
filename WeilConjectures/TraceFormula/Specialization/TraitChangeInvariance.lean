@@ -19,7 +19,8 @@ nearby cycles under change of strictly henselian trait
 [Th. finitude], Prop. 3.7) therefore applies to the base change `M ×_S Spec K⟦t⟧` of a model of
 finite type over `S = Spec k'⟦t⟧`
 (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`). This is the
-first "fact about traits" of the blueprint proof of `sk-prop-tf-nearby-external-kunneth`.
+first "fact about traits" of the blueprint proof of
+`proposition-external-kunneth-formula-nearby-cycles`.
 
 -/
 
@@ -84,9 +85,9 @@ variable [IsSepClosed k'] [IsSepClosed K] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ri
 
 include hM in
 /-- **Invariance of nearby cycles under change of trait** (SGA 4½, [Th. finitude], Prop. 3.7;
-blueprint `sk-prop-tf-nearby-external-kunneth`, "Facts about traits", first fact): for a model `M`
-of finite type over the strictly henselian trait `S = Spec k'⟦t⟧` and the change of trait
-`Spec K⟦t⟧ ⟶ S` to a separably closed extension `K`, the pullback exchange
+blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", first fact):
+for a model `M` of finite type over the strictly henselian trait `S = Spec k'⟦t⟧` and the change of
+trait `Spec K⟦t⟧ ⟶ S` to a separably closed extension `K`, the pullback exchange
 `α : Lσ^* Ψ_M A ⟶ Ψ_{M_T} A` to the nearby cycles of the base change `M_T = M ×_S Spec K⟦t⟧`
 (`NearbyCyclesModel.baseChange`) is an isomorphism if the restriction of `A` to the generic fibre
 is bounded constructible. This is the case `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of

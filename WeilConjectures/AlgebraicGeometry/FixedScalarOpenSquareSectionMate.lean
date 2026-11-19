@@ -48,7 +48,7 @@ def fixedScalarOpenSquareRestrictionMate
       (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j).inv ≫
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
-      (upperStarCompIso (ModuleCat.{u + 1} A) w).hom).natTrans ≫
+      (upperStarCompIso (ModuleCat.{u + 1} A) w).hom) ≫
     Functor.whiskerRight (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j').hom
       (lowerStar (ModuleCat.{u + 1} A) gU)
 
@@ -78,19 +78,19 @@ Proof (the delivered route, node `lem-sf-fixed-scalar-open-square-section-mate`)
    square underlying the open square) identifies the mate of `upperStarCompIso` along
    `g^* ⊣ g_*` and `gU^* ⊣ gU_*` with `baseChangeMap`; it applies
    `iterated_mateEquiv_conjugateEquiv` (`lem-trf-iterated-square-mates`) and the conjugate of
-   `upperStarCompIso` computed from the compositors (`def-sfb-finite-upper-star-comp`,
-   `def-sfb-finite-lower-star-comp`, `def-weil-pbc-adjunction-conjugate`).
+   `upperStarCompIso` computed from the compositors (`proposition-topos-functoriality--3`,
+   `proposition-topos-functoriality--3`, `def-weil-pbc-adjunction-conjugate`).
 2. `baseChangeMap_eq` rewrites `baseChangeMap` as `localizationRestrictionBaseChangeMap`
    conjugated by `upperStarIsoLocalizationRestriction` at `j` and its inverse at `j'`; it is
    proved by `mateEquiv_leftAdjointUniq` and `mateEquiv_localizationRestrictionBaseChangeMap`
    (`lem-weil-pbc-adjoint-continuous-restriction-adjunction`,
-   `lem-weil-pbc-conjugate-iso-unit-equation`, `lem-weil-pbc-mate-pasting`).
+   `situation-conventions`, `lem-weil-pbc-mate-pasting`).
 3. `upperStarIsoOpenImmersionRestriction` is `upperStarIsoLocalizationRestriction`, so the
    outer comparisons of the transported mate cancel the inner ones: the transported mate is
    `localizationRestrictionBaseChangeMap`.
 4. That map is `sheafPushforwardContinuousNatTrans` of `pullbackMapComparison`, which is
    `fixedScalarOpenSquareSectionComparison`; pushforward evaluates by precomposition
-   (`def-sfb-finite-lower-star`), so the component at `N` and `W` is `N(c_W)` by `rfl`.
+   (`proposition-topos-functoriality--2`), so the component at `N` and `W` is `N(c_W)` by `rfl`.
    Naturality in `W` and `N` is part of these natural transformations. -/
 theorem fixed_scalar_open_square_section_mate
     (A : Type (u + 1)) [CommRing A]

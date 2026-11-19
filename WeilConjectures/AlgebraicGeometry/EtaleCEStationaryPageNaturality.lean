@@ -61,7 +61,6 @@ def EtaleCEPageMapOnRepresentatives {X Y : Scheme.{uNatural}}
         (e q p r hr).inv ≫ (N.hom r hr).f (q, p) =
       z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L r (q, p) ≫ (e' q p r hr).inv
 
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE total and its filtration.
 private theorem etaleCE_filtration_bounds
     {X : Scheme.{uNatural}}
@@ -95,7 +94,6 @@ private theorem etaleCE_filtration_bounds
   · rw [D.filtration_formula, ← hL, htop]
   · rw [D.filtration_formula, ← hL, hbot]
 
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE total and its filtration.
 private theorem etaleCE_complexStep_antitone
     {X : Scheme.{uNatural}}
@@ -109,7 +107,6 @@ private theorem etaleCE_complexStep_antitone
   simpa only [DecreasingFiltration.complexStep, ← HomologicalComplex.comp_f,
     Subobject.ofLE_arrow] using h
 
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE total and its filtration.
 private theorem etaleCE_image_factor
     {X : Scheme.{uNatural}}
@@ -153,7 +150,6 @@ private theorem comparison_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent simultaneous page and presentation families.
 /-- Choose the stationary comparisons naturally for all sections-total filtered maps.
 No augmentation, pullback, ordinary first-page identification or CE lift is asserted.

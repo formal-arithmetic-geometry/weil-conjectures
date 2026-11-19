@@ -21,6 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.FullSubcategory
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Extending bounded-below support preservation using sums
 

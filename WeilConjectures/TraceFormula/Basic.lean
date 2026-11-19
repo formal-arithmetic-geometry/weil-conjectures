@@ -162,7 +162,7 @@ noncomputable def boundedConstructibleUnitEndRingHom :
     DerivedCategory.Qh
   have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_
       (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
-    (ObjectProperty.fullyFaithfulι _).map_bijective _ _
+    ((ObjectProperty.fullyFaithfulι _).mulEquivEnd _).bijective
   have : IsIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) := inferInstanceAs (IsIso (𝟙 _))
   ((RingEquiv.ofBijective _ hι).symm.toRingHom.comp
@@ -243,7 +243,7 @@ theorem bijective_padicAlgClUnitEndRingHom_point :
       (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso A).symm))
   have hF :
       Function.Bijective (F.mapEndRingHom (Mod.regular (condensedRingObj Λ (point k).left))) :=
-    (Functor.FullyFaithful.ofFullyFaithful F).map_bijective _ _
+    ((Functor.FullyFaithful.ofFullyFaithful F).mulEquivEnd _).bijective
   have h := bijective_pointUnitEndRingHom ℓ k
   unfold padicAlgClUnitEndRingHom boundedConstructibleUnitEndRingHom
   unfold pointUnitEndRingHom at h

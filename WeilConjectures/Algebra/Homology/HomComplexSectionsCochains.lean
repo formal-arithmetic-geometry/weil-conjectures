@@ -35,8 +35,20 @@ private theorem fan_projection_bijective.{t} {ι : Type} {X : ι → Type t}
   rw [hf]
   exact e.toEquiv.bijective
 
-set_option maxHeartbeats 800000 in
--- Chosen products and section evaluation require extra elaboration heartbeats.
+private noncomputable def localizedSectionAddEquiv
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{max u v}) (U : C)
+    (A B : SheafOfModules.{max u v}
+      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) :
+    (SheafOfModules.homObj (R := R) A B).val.obj (op U) ≃+
+      ((SheafOfModules.overFunctor _ U).obj A ⟶
+        (SheafOfModules.overFunctor _ U).obj B) where
+  toFun φ := ⟨φ⟩
+  invFun φ := φ.val
+  left_inv _ := rfl
+  right_inv _ := rfl
+  map_add' _ _ := rfl
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Product projections identify degreewise sections with all localized cochains.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
@@ -88,18 +100,19 @@ theorem homComplex_sections_cochains
     (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))
   let f (n : ℤ) : S.X n →+ CochainComplex.HomComplex.Cochain (res.obj L) (res.obj I) n :=
     { toFun := fun x ↦ CochainComplex.HomComplex.Cochain.mk
-        (fun p q hpq ↦ ⟨((π L I n p q hpq).val.app (op U)) x⟩)
+        (fun p q hpq ↦ localizedSectionAddEquiv R U (L.X p) (I.X q)
+          (((π L I n p q hpq).val.app (op U)) x))
       map_zero' := by
         apply CochainComplex.HomComplex.Cochain.ext
         intro p q hpq
-        apply SheafOfModules.hom_ext
-        exact map_zero ((π L I n p q hpq).val.app (op U)).hom
+        exact map_zero ((localizedSectionAddEquiv R U (L.X p) (I.X q)).toAddMonoidHom.comp
+          ((π L I n p q hpq).val.app (op U)).hom.toAddMonoidHom)
       map_add' := by
         intro x y
         apply CochainComplex.HomComplex.Cochain.ext
         intro p q hpq
-        apply SheafOfModules.hom_ext
-        exact map_add ((π L I n p q hpq).val.app (op U)).hom x y }
+        exact map_add ((localizedSectionAddEquiv R U (L.X p) (I.X q)).toAddMonoidHom.comp
+          ((π L I n p q hpq).val.app (op U)).hom.toAddMonoidHom) x y }
   have hf (n : ℤ) : Function.Bijective (f n) := by
     let H := fun p : ℤ ↦ SheafOfModules.homObj (L.X p) (I.X (p + n))
     have hlim := (Classical.choose_spec (Classical.choose_spec
@@ -111,15 +124,18 @@ theorem homComplex_sections_cochains
     · intro x y hxy
       apply hb.1
       funext p
-      exact congrArg (fun c ↦ (c.v p (p + n) rfl).val) hxy
+      apply (localizedSectionAddEquiv R U (L.X p) (I.X (p + n))).injective
+      exact CochainComplex.HomComplex.Cochain.congr_v hxy p (p + n) rfl
     · intro c
-      obtain ⟨x, hx⟩ := hb.2 (fun p ↦ (c.v p (p + n) rfl).val)
+      obtain ⟨x, hx⟩ := hb.2 (fun p ↦
+        (localizedSectionAddEquiv R U (L.X p) (I.X (p + n))).symm (c.v p (p + n) rfl))
       refine ⟨x, ?_⟩
       apply CochainComplex.HomComplex.Cochain.ext
       intro p q hpq
       subst q
-      apply SheafOfModules.hom_ext
-      exact congrFun hx p
+      exact (congrArg (localizedSectionAddEquiv R U (L.X p) (I.X (p + n)))
+        (congrFun hx p)).trans
+          ((localizedSectionAddEquiv R U (L.X p) (I.X (p + n))).apply_symm_apply _)
   refine ⟨fun n ↦ AddEquiv.ofBijective (f n) (hf n), ?_⟩
   intro n x p q hpq W
   rfl

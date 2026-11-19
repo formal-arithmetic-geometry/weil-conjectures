@@ -115,7 +115,6 @@ private def ordinaryEvaluation (K L : RingedTensorModules.{c, v, r} J R) :
     (WeilConjectures.ZeroClassAux.tensorHomEquiv.{r, c, v} R K
       (SheafOfModules.homObj (R := R) K L) L).symm (𝟙 _)
 
-set_option maxHeartbeats 800000 in
 -- Normalize the sheafified tensor generator in the two ordinary adjunction formulas.
 private theorem ordinaryEvaluation_pure (K L : RingedTensorModules.{c, v, r} J R) :
     IsSheafEvaluation.{c, v, r} J R K L (ordinaryEvaluation.{c, v, r} J R K L) := by

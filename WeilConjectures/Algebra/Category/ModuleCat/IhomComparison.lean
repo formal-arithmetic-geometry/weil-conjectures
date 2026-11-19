@@ -42,9 +42,9 @@ variable {R : Type u} [CommRing R] {D : Type*} [Category* D] [Preadditive D]
 comparison map `F [P, Q] ⟶ [F P, F Q]` is an isomorphism for a finitely presented module `P`. -/
 theorem isIso_ihomComparison_app_of_finitePresentation (P : ModuleCat.{u} R)
     [Module.FinitePresentation R P] (Q : ModuleCat.{u} R) :
-    IsIso ((ihomComparison F P).natTrans.app Q) := by
-  have hfree (n : ℕ) : IsIso ((ihomComparison F (ModuleCat.of R (Fin n → R))).natTrans.app Q) := by
-    have (_ : Fin n) : IsIso ((ihomComparison F (𝟙_ (ModuleCat.{u} R))).natTrans.app Q) :=
+    IsIso ((ihomComparison F P).app Q) := by
+  have hfree (n : ℕ) : IsIso ((ihomComparison F (ModuleCat.of R (Fin n → R))).app Q) := by
+    have (_ : Fin n) : IsIso ((ihomComparison F (𝟙_ (ModuleCat.{u} R))).app Q) :=
       isIso_ihomComparison_app_unit F Q
     have := @isIso_ihomComparison_app_biproduct _ _ _ _ _ _ _ _ F _ _ _ _ _ _ _ _
       (fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) _ Q this

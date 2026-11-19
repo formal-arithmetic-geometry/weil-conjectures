@@ -40,7 +40,7 @@ the acyclicity of the Grothendieck spectral sequence theorem because `f_*` prese
 objects (`AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar`). Its compatibility with
 inverse image along a cartesian base change is the general
 `CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`.
-(blueprint: `lem-weil-pbc-grothendieck-spectral-sequence`) -/
+(blueprint: `lemma-composition-cancellation`) -/
 theorem Etale.exists_grothendieckSpectralSequence_lowerStar {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (h : Y ⟶ Z) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)),

@@ -13,6 +13,7 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import WeilConjectures.RingTheory.MaximalChainLengthOfDepth
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Maximal chains in polynomial rings over fields

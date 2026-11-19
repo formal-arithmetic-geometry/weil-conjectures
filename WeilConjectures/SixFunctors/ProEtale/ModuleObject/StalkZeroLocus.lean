@@ -78,12 +78,14 @@ lemma isZero_finiteFree_iff {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpa
     by_contra hd
     obtain ⟨w⟩ := ‹Nonempty W›
     let i : Fin d := ⟨0, Nat.pos_of_ne_zero hd⟩
-    have h1 : (𝟙 (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W)) :
-        End _) = 0 := by
-      rw [← biproduct.ι_π_self (fun _ : Fin d ↦ Mod.regular _) i,
+    have h1 : (1 : End (Mod.regular
+        (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W))) = 0 := by
+      apply End.ext
+      rw [End.one_asHom, End.zero_asHom,
+        ← biproduct.ι_π_self (fun _ : Fin d ↦ Mod.regular _) i,
         h.eq_of_tgt (biproduct.ι (fun _ : Fin d ↦ Mod.regular _) i) 0, zero_comp]
     have h2 := congrArg (endValueRingHom (ℓ := ℓ) w) h1
-    rw [← End.one_def, map_one, map_zero] at h2
+    rw [map_one, map_zero] at h2
     exact one_ne_zero h2
   · rintro rfl
     exact isZero_finiteFree_zero _

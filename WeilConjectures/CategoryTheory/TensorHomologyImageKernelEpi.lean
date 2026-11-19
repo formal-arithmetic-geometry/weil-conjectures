@@ -47,7 +47,6 @@ private theorem tensorSingleIso_inv_naturality
     HomologicalComplex.single_map_f_self,
     whiskerLeft_comp]
 
-set_option maxHeartbeats 600000 in
 -- Comparing total tensor complexes with termwise tensoring requires extra type reductions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensor homology surjects naturally onto the kernel of the tensor image inclusion.

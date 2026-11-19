@@ -59,26 +59,27 @@ map from `image e₁ ⊗ image e₂` to `G (regular S)` is fixed by `e₃`, then
                        m := (ι ⊗ ι) ≫ μ ≫ G.map mul
 image e₁ ⊗ image e₂ ─────────────────────────────────▶ G (regular S) ⟲ e₃
           ╲                                                   ▲
-           ╲ m ≫ factorThruImage e₃  (≅)                      │ image.ι e₃
+           ╲ m ≫ factorThruImage e₃.asHom  (≅)                      │ image.ι e₃.asHom
             ╲──────────────────────▶ image e₃ ────────────────╯
 ```
-The hypothesis `h` is `m ≫ e₃ = m`, so `m` factors through `image e₃`; the theorem says that
+The hypothesis `h` is `m ≫ e₃.asHom = m`, so `m` factors through `image e₃`; the theorem says that
 the factor is an isomorphism.
 Source: blueprint lem-kernel-condensed-projector-descent. -/
 theorem image_tensor_regular_isIso (e₁ e₂ e₃ : End (G.obj (Mod.regular S)))
-    [IsIso (F.map (image.ι e₁) ≫ adj.counit.app (Mod.regular S))]
-    [IsIso (F.map (image.ι e₂) ≫ adj.counit.app (Mod.regular S))]
-    [IsIso (F.map (image.ι e₃) ≫ adj.counit.app (Mod.regular S))]
-    (h : ((image.ι e₁ ⊗ₘ image.ι e₂) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
-        G.map (Mod.regularMul S)) ≫ e₃ =
-      (image.ι e₁ ⊗ₘ image.ι e₂) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
+    [IsIso (F.map (image.ι e₁.asHom) ≫ adj.counit.app (Mod.regular S))]
+    [IsIso (F.map (image.ι e₂.asHom) ≫ adj.counit.app (Mod.regular S))]
+    [IsIso (F.map (image.ι e₃.asHom) ≫ adj.counit.app (Mod.regular S))]
+    (h : ((image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
+        G.map (Mod.regularMul S)) ≫ e₃.asHom =
+      (image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
         G.map (Mod.regularMul S)) :
-    IsIso (((image.ι e₁ ⊗ₘ image.ι e₂) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
-        G.map (Mod.regularMul S)) ≫ factorThruImage e₃) := by
+    IsIso (((image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
+        G.map (Mod.regularMul S)) ≫ factorThruImage e₃.asHom) := by
   rw [← isIso_iff_of_reflects_iso _ F]
-  have : IsIso (F.map (((image.ι e₁ ⊗ₘ image.ι e₂) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
-        G.map (Mod.regularMul S)) ≫ factorThruImage e₃) ≫
-        F.map (image.ι e₃) ≫ adj.counit.app (Mod.regular S)) := by
+  have : IsIso (F.map (((image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫
+        μ G (Mod.regular S) (Mod.regular S) ≫ G.map (Mod.regularMul S)) ≫
+        factorThruImage e₃.asHom) ≫
+        F.map (image.ι e₃.asHom) ≫ adj.counit.app (Mod.regular S)) := by
     rw [← F.map_comp_assoc, Category.assoc, image.fac, h, F.map_comp, F.map_comp,
       Category.assoc, Category.assoc]
     erw [adj.counit_naturality]
@@ -86,7 +87,7 @@ theorem image_tensor_regular_isIso (e₁ e₂ e₃ : End (G.obj (Mod.regular S))
     rw [← δ_natural_assoc,
       tensorHom_comp_tensorHom_assoc, Mod.regularMul_eq]
     infer_instance
-  exact IsIso.of_isIso_comp_right _ (F.map (image.ι e₃) ≫ adj.counit.app (Mod.regular S))
+  exact IsIso.of_isIso_comp_right _ (F.map (image.ι e₃.asHom) ≫ adj.counit.app (Mod.regular S))
 
 /-- If the image of `e` is trivialized after applying `F` and the unit of `G` is fixed by `e`,
 then the unit of `G` corestricts to an isomorphism from the monoidal unit onto `image e`.
@@ -100,15 +101,15 @@ The composite `ε ≫ e` equals `ε` by `h`, so `ε` factors through `image e`, 
 `ε ≫ factorThruImage e` is an isomorphism.
 Source: blueprint lem-kernel-condensed-projector-descent. -/
 theorem unit_image_regular_isIso (e : End (G.obj (Mod.regular S)))
-    [IsIso (F.map (image.ι e) ≫ adj.counit.app (Mod.regular S))]
-    (h : ε G ≫ e = ε G) :
-    IsIso (ε G ≫ factorThruImage e) := by
+    [IsIso (F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S))]
+    (h : ε G ≫ (e).asHom = ε G) :
+    IsIso (ε G ≫ factorThruImage (e).asHom) := by
   rw [← isIso_iff_of_reflects_iso _ F]
-  have : IsIso (F.map (ε G ≫ factorThruImage e) ≫
-      F.map (image.ι e) ≫ adj.counit.app (Mod.regular S)) := by
+  have : IsIso (F.map (ε G ≫ factorThruImage e.asHom) ≫
+      F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S)) := by
     rw [← F.map_comp_assoc, Category.assoc, image.fac, h]
     erw [adj.map_ε_comp_counit_app_unit]
     infer_instance
-  exact IsIso.of_isIso_comp_right _ (F.map (image.ι e) ≫ adj.counit.app (Mod.regular S))
+  exact IsIso.of_isIso_comp_right _ (F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S))
 
 end CategoryTheory.Adjunction

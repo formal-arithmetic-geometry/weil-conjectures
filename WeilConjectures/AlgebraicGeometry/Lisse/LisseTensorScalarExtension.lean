@@ -21,13 +21,15 @@ set_option linter.privateModule false
 
 /-! # Tensor products, scalar extension and stalks of lisse sheaves
 
-Source: Stacks Project, sites-modules, 093V, 03EL; etale-cohomology, 095D, 04FM,
-03PN (blueprint: lem-pod-lisse-tensor-and-scalar-extension).
-
 Lisse sheaves of `Λ`-modules are the sheaves satisfying the source predicate
 `Scheme.IsFiniteLocallyConstantSheaf` at `A = ModuleCat Λ`. Geometric points have
 algebraically closed fields. Stalks are the fibres of the lifted point
-`(pointSmallEtale y).ulift`, as in lem-pod-etale-stalk-tensor-scalar.
+`(pointSmallEtale y).ulift`.
+
+## References
+
+* Stacks Project, sites-modules, 093V, 03EL
+* Stacks Project, Tags 095D, 04FM and 03PN
 -/
 
 @[expose] public section

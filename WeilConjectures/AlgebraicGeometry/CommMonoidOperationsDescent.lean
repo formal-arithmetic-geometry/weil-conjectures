@@ -14,7 +14,7 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Descent of the two operations, without their laws
 
-Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
+Source: blueprint proposition-jacobian-over-ground-field--1, multiplication and unit step;
 Stacks Project, Descent, Tag 02W0.
 (blueprint: lem-pd-raw-monoid-operations-descent).
 -/
@@ -83,7 +83,7 @@ private theorem descend_local_morphism
 
 /-- The invariant multiplication and unit descend as morphisms. This assertion includes
 no associativity, unit law, or commutativity downstairs.
-Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
+Source: blueprint proposition-jacobian-over-ground-field--1, multiplication and unit step;
 Stacks Project, Descent, Tag 02W0.
 (blueprint: lem-pd-raw-monoid-operations-descent).
 

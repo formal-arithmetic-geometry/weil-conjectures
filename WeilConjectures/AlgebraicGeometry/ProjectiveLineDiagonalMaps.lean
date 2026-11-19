@@ -16,8 +16,8 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 /-- Either projection of the chosen fibre square of the projective line.
-Source: blueprint lem-amb-p1-diagonal-integrals, first sentence
-(blueprint: lem-amb-p1-diagonal-integrals). -/
+Source: blueprint lemma-class-diagonal-projective-line, first sentence
+(blueprint: lemma-class-diagonal-projective-line). -/
 def projectiveLineDiagonalProjection (S : Scheme.{u}) (a : Bool) :
     pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) ⟶ ProjectiveLine S :=
   match a with
@@ -26,8 +26,8 @@ def projectiveLineDiagonalProjection (S : Scheme.{u}) (a : Bool) :
 
 /-- The canonical projective-line chart for either projection, including its equation
 over the base. It comes from projective-space base change and the flipped square.
-Source: blueprint lem-amb-p1-diagonal-integrals, proof step 1
-(blueprint: lem-amb-p1-diagonal-integrals). -/
+Source: blueprint lemma-class-diagonal-projective-line, proof step 1
+(blueprint: lemma-class-diagonal-projective-line). -/
 def projectiveLineDiagonalChart (S : Scheme.{u}) (a : Bool) :
     {e : ProjectiveLine (ProjectiveLine S) ≅
       pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) //
@@ -55,8 +55,8 @@ attribute [local instance 100000] ordinaryFiniteClass._proof_1 ordinaryFiniteCla
 /-- The canonical source identification A_P → Rp_* RDelta_* A_P. The two units
 compose to the identity-map unit because p Delta = id, so this is the canonical
 derived-composition identification, in the direction required by the integral.
-Source: blueprint lem-amb-p1-diagonal-integrals, alpha_a and proof steps 3 and 5
-(blueprint: lem-amb-p1-diagonal-integrals). -/
+Source: blueprint lemma-class-diagonal-projective-line, alpha_a and proof steps 3 and 5
+(blueprint: lemma-class-diagonal-projective-line). -/
 def projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) (a : Bool) :
     ordinaryFiniteUnit A (ProjectiveLine S) ⟶

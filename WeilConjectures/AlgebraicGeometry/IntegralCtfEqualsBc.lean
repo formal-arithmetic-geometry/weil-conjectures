@@ -26,7 +26,7 @@ import all WeilConjectures.AlgebraicGeometry.PullbackFiniteConstantLocalModel
 
 Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-integral-criterion/lem-integral-ctf-equals-bc.md and its proof
-(blueprint: lem-integral-ctf-equals-bc).
+(blueprint: proposition-ctf-equals-bc).
 
 The categories are ordinary uncompleted internal-module derived categories. The scalar
 examples are stated on explicit helper definitions of this module.
@@ -45,8 +45,8 @@ bounded constructible complexes inherit the indicated cohomological interval, en
 by one only in the integral case. In particular Dctf and Dbc have identical object
 predicates, hence identical full subcategories and ambient morphisms.
 
-Source: latest blueprint lem-integral-ctf-equals-bc, clauses (1), (2) and their consequence
-(blueprint: lem-integral-ctf-equals-bc).
+Source: latest blueprint proposition-ctf-equals-bc, clauses (1), (2) and their consequence
+(blueprint: proposition-ctf-equals-bc).
 
 Proof:
 1. The integral clauses come from det-def-localizing-closure-ctf-equals-bc

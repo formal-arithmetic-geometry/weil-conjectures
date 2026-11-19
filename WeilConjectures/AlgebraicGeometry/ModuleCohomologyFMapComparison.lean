@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 
 /-! # Homotopy comparison of the auxiliary injective complexes
 

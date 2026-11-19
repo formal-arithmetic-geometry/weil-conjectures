@@ -56,12 +56,13 @@ variable (K l C) in
 the geometric curve, from the composition of pullbacks and `Fr^* ≅ (Fr⁻¹)_*`. -/
 noncomputable def stalkFrobTransport
     (y : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) :
-    stalkFunctor l (y ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom) ≅
-      ((C ↘ Spec (.of K)).geometricGaloisFrobenius.inv)_*[_] ⋙ stalkFunctor l y :=
-  Functor.isoWhiskerRight (upperStarComp _ y (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom) _ ≪≫
+    stalkFunctor l (y ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) ≅
+      ((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv)_*[_] ⋙ stalkFunctor l y :=
+  Functor.isoWhiskerRight
+    (upperStarComp _ y (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerRight (upperStarIsoLowerStarInv _
-      (C ↘ Spec (.of K)).geometricGaloisFrobenius) _
+      (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso) _
 
 /-- The isomorphism `G_{y ≫ Fr} ≅ ((Fr⁻¹)_* G)_y` of stalk functors is monoidal. -/
 instance isMonoidal_stalkFrobTransport_hom
@@ -77,9 +78,9 @@ lemma stalkFrobTransport_hom_app
     (G : Sheaf (Scheme.ProEt.topology (C ↘ Spec (.of K)).geometricFiber)
       (WeilCoefficients.{u} l)) :
     (stalkFrobTransport K C l y).hom.app G =
-      (upperStarStalkIso l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom y G).hom ≫
+      (upperStarStalkIso l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom y G).hom ≫
         (stalkFunctor l y).map ((upperStarIsoLowerStarInv _
-          (C ↘ Spec (.of K)).geometricGaloisFrobenius).hom.app G) := by
+          (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).hom.app G) := by
   simp [stalkFrobTransport, upperStarStalkIso]
 
 section UnitStalk
@@ -122,16 +123,17 @@ lemma globalSectionsToUpperStar_comp_stalkFrobTransport
     (y : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber)
     {G H : Sheaf (Scheme.ProEt.topology (C ↘ Spec (.of K)).geometricFiber)
       (WeilCoefficients.{u} l)}
-    (φ : ((C ↘ Spec (.of K)).geometricGaloisFrobenius.inv)_*[_].obj G ⟶ H) :
-    (globalSectionsToUpperStar _ (y ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)).app G ≫
+    (φ : ((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv)_*[_].obj G ⟶ H) :
+    (globalSectionsToUpperStar _
+        (y ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)).app G ≫
         (stalkFrobTransport K C l y).hom.app G ≫ (stalkFunctor l y).map φ =
-      (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom).app G ≫
+      (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom).app G ≫
         (Sheaf.Γ _ _).map ((upperStarIsoLowerStarInv _
-          (C ↘ Spec (.of K)).geometricGaloisFrobenius).hom.app G ≫ φ) ≫
+          (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).hom.app G ≫ φ) ≫
         (globalSectionsToUpperStar _ y).app H := by
   rw [stalkFrobTransport_hom_app, (globalSectionsToUpperStar _ y).naturality]
   have h := globalSectionsToUpperStar_comp (WeilCoefficients.{u} l) y
-    (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom G
+    (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom G
   simp only [upperStarStalkIso, Functor.mapIso_hom, Iso.app_hom, Category.assoc,
     Functor.comp_map] at h ⊢
   rw [reassoc_of% h, Functor.map_comp, Functor.map_comp]
@@ -155,7 +157,7 @@ lemma mono_comp_stalkFrobTransport_unit :
         (stalkFrobTransport K C l B.t).hom.app
           (WeilSheaf.adicConstant K l C).obj.carrier.X ≫
         (stalkFunctor l B.t).map (WeilSheaf.adicConstant K l C).obj.str.hom.hom =
-      (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom).app _ ≫
+      (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom).app _ ≫
         (Sheaf.Γ _ _).map (WeilSheaf.frobeniusStr (WeilSheaf.adicConstant K l C)) ≫
         (globalSectionsToUpperStar _ B.t).app _ := by
     rw [← Category.assoc]
@@ -239,9 +241,9 @@ lemma dualStalkLinearMap_rep (F : WeilSheaf K l C) (hF : F.IsLisse) (g : Aut (fi
   simp only [dualStalkLinearMap, WeilCoefficients.dualLinearMap_apply]
   change ((asIso (unitSection l B.t)).symm.toLinearEquiv
       (Mod.evaluationPairing (stalkFunctor l B.t) F.obj.carrier (AdicSheaf.unit l _)
-        (((M.mono g).hom.app ⟨_, hF.dual⟩).hom d)
-        (((M.mono g).hom.app (F.toLisse hF)).hom v))).down = _
-  have e := M.mono_evaluationPairing g (F.toLisse hF) (LisseSheaf.unit l) hF.dual d v
+        (((M.mono g.asIso).hom.app ⟨_, hF.dual⟩).hom d)
+        (((M.mono g.asIso).hom.app (F.toLisse hF)).hom v))).down = _
+  have e := M.mono_evaluationPairing g.asIso (F.toLisse hF) (LisseSheaf.unit l) hF.dual d v
   rw [mono_hom_app_unit] at e
   exact congrArg (fun x ↦ ((asIso (unitSection l B.t)).symm.toLinearEquiv x).down) e
 

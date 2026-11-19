@@ -48,13 +48,16 @@ public import WeilConjectures.AlgebraicGeometry.LatticeSheafBasic
 /-!
 # The sheaf of integral lattices
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.8.4(6),
-pp. 59--60 (blueprint: lem-weil-pbc-lattice-sheaf-locally-constant).
-
 The presentation by a surjection from pairs with its exact kernel relation avoids choosing
 representatives of isomorphism classes. Restriction is characterized by the embedded images
 on every object of the slice. This also specifies the normalization of the constant-coset
 isomorphism without making arbitrary choices of bases for integral modules.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.8.4(6), pp. 59--60
+* Bhatt--Scholze, Proposition 6.8.4(6)
+* Bhatt--Scholze, Lemma 4.2.12 and Proposition 6.8.4(6)
 -/
 
 @[expose] public section
@@ -70,9 +73,7 @@ attribute [local instance] latticeWeakSheafifyOver
   AlgebraicGeometry.Scheme.strictPerfectSliceLocallyBijective
 
 /-- The commutative-ring version of the continuous coefficient presheaf, with exactly the
-same sections and precomposition maps as `continuousMapRingPresheaf`.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(blueprint: lem-weil-pbc-lattice-sheaf-locally-constant). -/
+same sections and precomposition maps as `continuousMapRingPresheaf`. -/
 noncomputable def latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} where
@@ -85,14 +86,7 @@ noncomputable def latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
   map_comp _ _ := rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Continuous coefficients satisfy the sheaf axiom.
-Source: Bhatt--Scholze, Lemma 4.2.12 and Proposition 6.8.4(6)
-(blueprint: lem-weil-pbc-lattice-sheaf-locally-constant).
-Proof: forget to sets and identify the presheaf with the lifted restriction of
-`continuousMapPresheaf T`. Mathlib's fpqc continuous-function descent theorem makes this
-a sheaf. The pro-etale topology is contained in the fpqc topology. Restriction and the
-universe lift preserve the sheaf condition, and the forgetful functor from commutative
-rings reflects it. Thus the same functions form a sheaf of commutative rings. -/
+/-- Continuous coefficients satisfy the sheaf axiom. -/
 theorem isSheaf_latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X) (latticeCoefficientPresheaf X T) := by

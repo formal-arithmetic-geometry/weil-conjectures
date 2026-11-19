@@ -56,7 +56,7 @@ instance isMonHom_mul (f g : M ⟶ N) [IsMonHom f] [IsMonHom g] : IsMonHom (f * 
   rw [Hom.mul_def]
   infer_instance
 
-/-- Blueprint `lem-sc-mult-n-homomorphism`: multiplication by `n` is a homomorphism.
+/-- Blueprint `definition-abelian-variety`: multiplication by `n` is a homomorphism.
 
 A power `f ^ n` of a morphism of monoid objects into a commutative monoid object is a morphism
 of monoid objects. Applied to `f = 𝟙 M` this says that the `n`-fold product `𝟙 M ^ n`, which

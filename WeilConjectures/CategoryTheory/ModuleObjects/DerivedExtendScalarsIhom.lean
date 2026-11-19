@@ -21,7 +21,8 @@ Grothendieck abelian category `C` with functorial flat resolutions, and `k` an i
 that the derived extension of scalars `S ⊗ᴸ_R - : D(Mod_R(C)) ⥤ D(Mod_S(C))`, monoidal through
 `Functor.leftDerivedFunctorMonoidal`, commutes with internal homs: the comparison
 `S ⊗ᴸ_R RHom(A, B) ⟶ RHom(S ⊗ᴸ_R A, S ⊗ᴸ_R B)` is an isomorphism for all `A`, `B`
-(`Mod.isIso_ihomComparison_leftDerivedExtendScalars`; blueprint `lem-coef-integral-hom-reduction`).
+(`Mod.isIso_ihomComparison_leftDerivedExtendScalars`; blueprint
+`proposition-six-operations-change-coefficients--7`).
 
 Write `L = S ⊗ᴸ_R -` and `H = D(Res)` for its right adjoint, which reflects isomorphisms. By the
 projection formula (`Mod.isIso_derivedExtendMapDerivedCategoryAdjunction_projectionMorphism`), the
@@ -95,7 +96,7 @@ theorem isIso_ihomComparison_leftDerivedExtendScalars (k : ℤ) (w : (k • 𝟙
     (hφ : (ShortComplex.mk _ _ w).ShortExact) (A B : DerivedCategory (Mod C R)) :
     letI := extendScalarsMonoidal φ
     letI := (extendScalars φ).leftDerivedFunctorMonoidal
-    IsIso ((Functor.LaxMonoidal.ihomComparison (extendScalars φ).leftDerivedFunctor A).natTrans.app
+    IsIso ((Functor.LaxMonoidal.ihomComparison (extendScalars φ).leftDerivedFunctor A).app
       B) := by
   let := extendScalarsMonoidal φ
   let := (extendScalars φ).leftDerivedFunctorMonoidal

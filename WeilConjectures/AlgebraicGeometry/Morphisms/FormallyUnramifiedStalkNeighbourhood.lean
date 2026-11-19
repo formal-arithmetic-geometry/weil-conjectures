@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # An unramified stalk has an unramified neighbourhood
 
-Source: Stacks Project, Tag 02GF.
-(blueprint: lem-sbc-formally-unramified-stalk-neighbourhood)
+## References
+
+* Stacks Project, Tag 02GF, openness of the unramified locus
 -/
 
 @[expose] public section
@@ -50,18 +51,7 @@ private theorem isUnramifiedAt_appLE_of_stalkMap
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Formal unramifiedness of a stalk map spreads to a source neighbourhood for a
-morphism locally of finite type.
-
-Source: Stacks Project, Tag 02GF, openness of the unramified locus.
-Proof: Choose affine neighbourhoods Spec B of x and Spec A of f(x), with B of finite
-type over A. The module of differentials of B over A is finite. The stalk hypothesis
-says its localization at the prime of x is zero: localization of A to its image prime
-has zero differentials, and localization of differentials on B is compatible with the
-stalk map. Finite generation gives an element g outside the prime annihilating the
-module. Thus B[1/g] has zero relative differentials over A. The affine criterion gives
-formal unramifiedness on this basic open. Composing with the open immersion Spec A
-into the target gives the asserted neighbourhood.
-(blueprint: lem-sbc-formally-unramified-stalk-neighbourhood) -/
+morphism locally of finite type. -/
 theorem FormallyUnramified.exists_neighbourhood_of_stalkMap
     {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (x : X)
     (hx : (f.stalkMap x).hom.FormallyUnramified) :

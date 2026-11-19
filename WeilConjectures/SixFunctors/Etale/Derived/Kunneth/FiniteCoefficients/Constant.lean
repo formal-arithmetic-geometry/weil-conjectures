@@ -23,9 +23,9 @@ the exact monoidal constant sheaf functor. With these we define
 
 - `AlgebraicGeometry.Etale.constantProjectionMap` (`pur7710-def-constant-projection`):
   `RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)`;
-- `AlgebraicGeometry.Etale.globalSectionsKunnethMap` (`pur7710-def-kunneth-map`) and
+- `AlgebraicGeometry.Etale.globalSectionsKunnethMap` (`definition-kunneth-map--1`) and
   `AlgebraicGeometry.Etale.globalSectionsKunnethMapFiniteField`
-  (`pur7710-def-kunneth-map-field`): `RΓ_X K ⊗ᴸ RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ L)`.
+  (`definition-kunneth-map--1`): `RΓ_X K ⊗ᴸ RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ L)`.
 
 ## Implementation notes
 
@@ -248,7 +248,7 @@ noncomputable def constantProjectionMap (W : Scheme.{u})
         (((-⊗ᴸ-(W)[ModuleCat.{u + 1} Λ]).obj K).obj ((constantComplexFunctor Λ W).obj M)) :=
   derivedConstantSheafProjectionMap (ModuleCat.{u + 1} Λ) W K M
 
-/-- Blueprint `pur7710-def-kunneth-map`: the ordinary Künneth morphism at finite level.
+/-- Blueprint `definition-kunneth-map--1`: the ordinary Künneth morphism at finite level.
 
 For schemes `X`, `Y` over `S` (in the blueprint `S = Spec k`), `Z = X ×_S Y` with projections
 `p_X`, `p_Y`, and `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`, the morphism
@@ -268,7 +268,7 @@ noncomputable def globalSectionsKunnethMap {S X Y : Scheme.{u}} (f : X ⟶ S) (g
       (rightDerivedGlobalSectionsModule Λ (pullback f g)).obj (exteriorProduct Λ f g K L) :=
   derivedConstantSheafKunnethMap (ModuleCat.{u + 1} Λ) (pullback.fst f g) (pullback.snd f g) K L
 
-/-- Blueprint `pur7710-def-kunneth-map-field`: the ordinary Künneth morphism with finite-field
+/-- Blueprint `definition-kunneth-map--1`: the ordinary Künneth morphism with finite-field
 coefficients `F = 𝔽_{ℓ^r}`: the construction of
 `AlgebraicGeometry.Etale.globalSectionsKunnethMap` with `F` in place of `Λ`,
 `RΓ_X K ⊗ᴸ_F RΓ_Y L ⟶ RΓ_Z (K ⊠ᴸ_F L)`. -/

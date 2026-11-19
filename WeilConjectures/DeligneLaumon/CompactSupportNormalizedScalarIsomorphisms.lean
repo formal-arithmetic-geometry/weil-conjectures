@@ -17,7 +17,7 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRationalScalarIso
 /-! # Normalized compact-support comparisons for individual coefficient inclusions
 
 Source: main-20261015, lem-weil-compact-support-finite-field-independence, first sentence;
-lem-fix-operation-reduction, compact-support and final paragraphs
+proposition-six-operations-change-coefficients, compact-support and final paragraphs
 (blueprint: lem-weil-compact-support-normalized-scalar-isomorphisms).
 
 ## Main definitions and statements

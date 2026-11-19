@@ -297,7 +297,6 @@ private theorem canonical_smul
   exact hh.symm
 
 
-set_option maxHeartbeats 0 in
 -- Identifying the two scalar restrictions reduces their explicit section actions.
 private def heartCanonicalIso :
     heartEncoding A X ≅ (finiteCoefficientModEquivalence X A).functor :=

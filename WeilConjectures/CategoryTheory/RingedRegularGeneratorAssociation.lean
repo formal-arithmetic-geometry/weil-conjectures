@@ -27,19 +27,21 @@ variable (O : Sheaf J CommRingCat.{u})
 private theorem unitEnd_apply
     (f : End (SheafOfModules.unit (siteModuleRings O))) (U : Cᵒᵖ)
     (x : O.obj.obj U) :
-    f.val.app U x = @Mul.mul (O.obj.obj U) inferInstance x (f.val.app U (1 : O.obj.obj U)) := by
+    f.asHom.val.app U x = @Mul.mul (O.obj.obj U) inferInstance x
+      (f.asHom.val.app U (1 : O.obj.obj U)) := by
   let f' : ModuleCat.of (O.obj.obj U) (O.obj.obj U) ⟶
-      ModuleCat.of (O.obj.obj U) (O.obj.obj U) := f.val.app U
+      ModuleCat.of (O.obj.obj U) (O.obj.obj U) := f.asHom.val.app U
   change f' x = x * f' 1
   simpa only [smul_eq_mul, mul_one] using f'.hom.map_smul x (1 : O.obj.obj U)
 
 private theorem epi_unit_isIso
-    (f : End (SheafOfModules.unit (siteModuleRings O))) [Epi f] : IsIso f := by
-  let q := (SheafOfModules.toSheaf (siteModuleRings O)).map f
+    (f : End (SheafOfModules.unit (siteModuleRings O))) [Epi f.asHom] :
+    IsIso f.asHom := by
+  let q := (SheafOfModules.toSheaf (siteModuleRings O)).map f.asHom
   have : Epi q := inferInstance
   have : Sheaf.IsLocallySurjective q :=
     (Sheaf.isLocallySurjective_iff_epi' _ q).2 inferInstance
-  have hinj (U : Cᵒᵖ) : Function.Injective (f.val.app U) := by
+  have hinj (U : Cᵒᵖ) : Function.Injective (f.asHom.val.app U) := by
     intro x y hxy
     have hsheaf : Presieve.IsSheaf J (O.obj ⋙ forget CommRingCat) :=
       (isSheaf_iff_isSheaf_of_type J _).mp
@@ -47,29 +49,29 @@ private theorem epi_unit_isIso
     apply (hsheaf.isSeparated _ (Presheaf.imageSieve_mem J q.hom
       (1 : O.obj.obj U))).ext
     rintro V g ⟨z, hz⟩
-    change f.val.app (op V) z = O.obj.map g.op 1 at hz
+    change f.asHom.val.app (op V) z = O.obj.map g.op 1 at hz
     rw [map_one, unitEnd_apply O] at hz
     have hu : @IsUnit (O.obj.obj (op V)) inferInstance
-        (f.val.app (op V) (1 : O.obj.obj (op V))) := by
+        (f.asHom.val.app (op V) (1 : O.obj.obj (op V))) := by
       apply isUnit_iff_exists_inv.mpr
       refine ⟨z, ?_⟩
       change @Mul.mul (O.obj.obj (op V)) inferInstance _ z = 1
       exact (mul_comm _ _).trans hz
     apply hu.mul_right_cancel
     have hn := congrArg (fun z ↦ O.obj.map g.op z) hxy
-    have hx := PresheafOfModules.naturality_apply f.val g.op x
-    have hy := PresheafOfModules.naturality_apply f.val g.op y
-    have hh : f.val.app (op V) (O.obj.map g.op x) =
-        f.val.app (op V) (O.obj.map g.op y) := hx.trans (hn.trans hy.symm)
+    have hx := PresheafOfModules.naturality_apply f.asHom.val g.op x
+    have hy := PresheafOfModules.naturality_apply f.asHom.val g.op y
+    have hh : f.asHom.val.app (op V) (O.obj.map g.op x) =
+        f.asHom.val.app (op V) (O.obj.map g.op y) := hx.trans (hn.trans hy.symm)
     exact (unitEnd_apply O f (op V) (O.obj.map g.op x)).symm.trans
       (hh.trans (unitEnd_apply O f (op V) (O.obj.map g.op y)))
-  have : Mono f := ⟨by
+  have : Mono f.asHom := ⟨by
     intro M g h heq
     apply SheafOfModules.hom_ext
     ext U x
     apply hinj U
     exact congrArg (fun z ↦ z.val.app U x) heq⟩
-  exact isIso_of_mono_of_epi f
+  exact isIso_of_mono_of_epi f.asHom
 
 private theorem sections_over_ext (M : SheafOfModules (siteModuleRings O)) (U : C)
     {s t : (M.over U).sections}
@@ -87,7 +89,7 @@ private theorem epi_of_generating_over
     (ha : ∀ U : C, IsRingedIdealGeneratingList O I.module I.inclusion U 1
       (fun _ ↦ a.val (op U)))
     (f : SheafOfModules.unit (siteModuleRings O) ⟶ I.module)
-    (hf : f ≫ I.inclusion = ringedKoszulScalar O a) : Epi f := by
+    (hf : f ≫ I.inclusion = (ringedKoszulScalar O a).asHom) : Epi f := by
   have hepi (U : C) : Epi (f.over U) := by
     obtain ⟨σ, e, hσ⟩ := ha U
     have hs (i : σ.I) : σ.s i =
@@ -101,8 +103,8 @@ private theorem epi_of_generating_over
         (f.val.app (op U) (1 : O.obj.obj (op U)) : I.sections U).val
       have hh := congrArg (fun z ↦ z.val.app (op U) (1 : O.obj.obj (op U))) hf
       change (f.val.app (op U) (1 : O.obj.obj (op U)) : I.sections U).val =
-        (ringedKoszulScalar O a).val.app (op U) (1 : O.obj.obj (op U)) at hh
-      have hone : (ringedKoszulScalar O a).val.app (op U)
+        (ringedKoszulScalar O a).asHom.val.app (op U) (1 : O.obj.obj (op U)) at hh
+      have hone : (ringedKoszulScalar O a).asHom.val.app (op U)
           (1 : O.obj.obj (op U)) = a.val (op U) := by
         change @Mul.mul (O.obj.obj (op U)) inferInstance 1 (a.val (op U)) = _
         exact one_mul _
@@ -155,7 +157,7 @@ theorem ringed_regular_generator_association
       (fun _ ↦ a.val (op U))) :
     ∃ c : SheafOfModules.unit (siteModuleRings O) ≅
         SheafOfModules.unit (siteModuleRings O),
-      ringedKoszulScalar O t = c.hom ≫ ringedKoszulScalar O a := by
+      (ringedKoszulScalar O t).asHom = c.hom ≫ (ringedKoszulScalar O a).asHom := by
   have hmem (U : C) : a.val (op U) ∈ I.sections U := by
     obtain ⟨σ, e, hσ⟩ := ha U
     have h := hσ (e.symm 0)
@@ -170,7 +172,7 @@ theorem ringed_regular_generator_association
       fun f ↦ Subtype.ext (t.property f)⟩
   let α := I.module.unitHomEquiv.symm ta
   let τ := I.module.unitHomEquiv.symm tt
-  have hα : α ≫ I.inclusion = ringedKoszulScalar O a := by
+  have hα : α ≫ I.inclusion = (ringedKoszulScalar O a).asHom := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.Hom.ext
     funext U
@@ -180,7 +182,7 @@ theorem ringed_regular_generator_association
     change @Mul.mul (O.obj.obj U) inferInstance x (a.val U) =
       @Mul.mul (O.obj.obj U) inferInstance x (a.val U)
     rfl
-  have hτ : τ ≫ I.inclusion = ringedKoszulScalar O t := by
+  have hτ : τ ≫ I.inclusion = (ringedKoszulScalar O t).asHom := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.Hom.ext
     funext U
@@ -219,7 +221,7 @@ theorem ringed_regular_generator_association
     exact isIso_of_reflects_iso τ (SheafOfModules.forget (siteModuleRings O))
   have hαepi := epi_of_generating_over O I a ha α hα
   let u := α ≫ inv τ
-  have hu : IsIso u := epi_unit_isIso O u
+  have hu : IsIso u := epi_unit_isIso O (.of u)
   have : IsIso α := by
     have heq : α = u ≫ τ := by simp [u]
     rw [heq]

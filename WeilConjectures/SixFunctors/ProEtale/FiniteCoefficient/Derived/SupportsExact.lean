@@ -21,7 +21,7 @@ is a short exact sequence of complexes, `𝒢_Z I = ker (I ⟶ j_* j^* I)` being
 sections supported on the closed complement `Z` (`s_* s^! I` for a closed immersion
 `s : Z ⟶ X` with quasi-compact open complement `j`,
 `AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`). This is the pro-étale form of
-blueprint `lem-pur-support-exact`; the étale form is
+blueprint `lemma-local-cohomology-right-adjoint--2`; the étale form is
 `AlgebraicGeometry.Etale.shortExact_supportsShortComplex`.
 
 The argument is the one on the étale site: the counit `j_! j^* F ⟶ F` at `F = j_* j^* I` is a
@@ -72,8 +72,8 @@ instance mono_openImmersionLowerShriekUpperStarAdjunction_counit_app_lowerStar
     infer_instance
   infer_instance
 
-/-- Blueprint `lem-pur-support-exact`: The exact sequence of supported sections for injective
-objects (pro-étale form)
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The exact sequence of supported sections
+for injective objects (pro-étale form)
 
 For an injective pro-étale sheaf `I` on `X` and an open immersion `j`, the restriction
 `I ⟶ j_* j^* I` (the unit of `j^* ⊣ j_*`) is a split epimorphism. Put `F = j_* j^* I`. The counit
@@ -100,8 +100,8 @@ theorem isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective
   erw [adj.left_triangle_components]
   simp
 
-/-- Blueprint `lem-pur-support-exact`: The exact sequence of supported sections for injective
-objects (pro-étale form)
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The exact sequence of supported sections
+for injective objects (pro-étale form)
 
 Injective pro-étale sheaves are flasque for the pair (`AlgebraicGeometry.ProEtale.IsFlasqueFor`).
 -/
@@ -126,8 +126,8 @@ noncomputable def supportsShortComplex (I : CochainComplex (Sheaf (ProEt.topolog
     ShortComplex (CochainComplex (Sheaf (ProEt.topology X) A) ℤ) :=
   ShortComplex.mk (kernel.ι (supportsUnit A j I)) (supportsUnit A j I) (kernel.condition _)
 
-/-- Blueprint `lem-pur-support-exact`: The exact sequence of supported sections for injective
-objects (pro-étale form)
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The exact sequence of supported sections
+for injective objects (pro-étale form)
 
 For a complex `I` of injective pro-étale sheaves, `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is a short
 exact sequence of complexes. For a closed immersion `s : Z ⟶ X` with quasi-compact open

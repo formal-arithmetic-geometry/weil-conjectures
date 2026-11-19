@@ -56,7 +56,7 @@ def compactSupportScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* 
       ProEtale.StrictTower.modulePullback (ULift.{u + 1, u} B) f ⋙
         proEtaleCoefficientRestrictScalars X φ :=
   ((mateEquiv (proEtaleConstantRingAdjunction B f)
-    (proEtaleConstantRingAdjunction A f)).symm (compactSupportScalarDirectImage f φ).hom).natTrans
+    (proEtaleConstantRingAdjunction A f)).symm (compactSupportScalarDirectImage f φ).hom)
 
 private theorem compactSupportScalarPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
     IsIso (compactSupportScalarPullback f φ) := by
@@ -279,7 +279,7 @@ private theorem inverseRealization_counit
       p.map (f.counitIso.inv.app N) ≫ r.hom.app (f.inverse.obj N) := by
   simp only [Functor.map_comp]
   erw [← e.counitIso.inv.naturality_assoc, ← e.counitIso.inv.naturality_assoc]
-  simp only [Functor.comp_obj, Functor.id_map, Equivalence.counitIso_functor_comp]
+  simp only [Functor.comp_obj, Functor.id_map, Equivalence.counitInv_functor_comp]
   erw [Category.comp_id]
 
 private theorem realizedAdjunction_unit

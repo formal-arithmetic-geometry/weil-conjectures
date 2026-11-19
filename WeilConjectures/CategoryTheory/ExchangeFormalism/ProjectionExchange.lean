@@ -98,7 +98,7 @@ the square isomorphism. -/
 lemma unit_comp_map_baseChange (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) (Y : F.obj U) :
     (F.shAdj l).unit.app ((F.pb t).obj Y) ≫
-        (F.pb l).map ((F.baseChange t l r b w).natTrans.app Y) =
+        (F.pb l).map ((F.baseChange t l r b w).app Y) =
       (F.pb t).map ((F.shAdj r).unit.app Y) ≫ (F.sqIso t l r b w).hom.app ((F.sh r).obj Y) := by
   exact (unit_mateEquiv_symm (F.shAdj r) (F.shAdj l) (F.sqIso t l r b w).hom Y).symm
 
@@ -114,13 +114,13 @@ lemma baseChange_app_tensor_comp_projectionComparison
           δ (F.pb f) ((F.pb g).obj M) ((F.pb g).obj N))
     (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 r)]
     (w : t ≫ r = l ≫ b) (X : F.obj U) (N : F.obj Z) :
-    (F.baseChange t l r b w).natTrans.app (X ⊗ (F.pb r).obj N) ≫
+    (F.baseChange t l r b w).app (X ⊗ (F.pb r).obj N) ≫
         (F.pb b).map ((F.shAdj r).projectionComparison X N) ≫
         δ (F.pb b) ((F.sh r).obj X) N =
       (F.sh l).map (δ (F.pb t) X ((F.pb r).obj N) ≫
           (F.pb t).obj X ◁ (F.sqIso t l r b w).hom.app N) ≫
         (F.shAdj l).projectionComparison ((F.pb t).obj X) ((F.pb b).obj N) ≫
-        (F.baseChange t l r b w).natTrans.app X ▷ (F.pb b).obj N := by
+        (F.baseChange t l r b w).app X ▷ (F.pb b).obj N := by
   apply ((F.shAdj l).homEquiv _ _).injective
   rw [← cancel_mono (δ (F.pb l) ((F.pb b).obj ((F.sh r).obj X)) ((F.pb b).obj N))]
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
@@ -147,17 +147,17 @@ lemma inv_projectionComparison_comp_inv_baseChange_app_tensor
         (F.pbComp f g).hom.app (M ⊗ N) ≫ (F.pb f).map (δ (F.pb g) M N) ≫
           δ (F.pb f) ((F.pb g).obj M) ((F.pb g).obj N))
     (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 r)]
-    (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w).natTrans]
+    (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w)]
     [∀ K N, IsIso ((F.shAdj l).projectionComparison K N)]
     [∀ K N, IsIso ((F.shAdj r).projectionComparison K N)] (X : F.obj U) (N : F.obj Z) :
     (F.pb b).map (inv ((F.shAdj r).projectionComparison X N)) ≫
-        inv ((F.baseChange t l r b w).natTrans.app (X ⊗ (F.pb r).obj N)) ≫
+        inv ((F.baseChange t l r b w).app (X ⊗ (F.pb r).obj N)) ≫
         (F.sh l).map (δ (F.pb t) X ((F.pb r).obj N)) =
       δ (F.pb b) ((F.sh r).obj X) N ≫
-        inv ((F.baseChange t l r b w).natTrans.app X) ▷ (F.pb b).obj N ≫
+        inv ((F.baseChange t l r b w).app X) ▷ (F.pb b).obj N ≫
         inv ((F.shAdj l).projectionComparison ((F.pb t).obj X) ((F.pb b).obj N)) ≫
         (F.sh l).map ((F.pb t).obj X ◁ (F.sqIso t l r b w).inv.app N) := by
-  rw [← cancel_epi ((F.baseChange t l r b w).natTrans.app (X ⊗ (F.pb r).obj N) ≫
+  rw [← cancel_epi ((F.baseChange t l r b w).app (X ⊗ (F.pb r).obj N) ≫
     (F.pb b).map ((F.shAdj r).projectionComparison X N))]
   simp only [Category.assoc]
   rw [baseChange_app_tensor_comp_projectionComparison_assoc F hδ]
@@ -168,11 +168,11 @@ omit [∀ X, MonoidalCategory (F.obj X)] [∀ {X Y : 𝒞} (f : X ⟶ Y), (F.pb 
 @[reassoc]
 lemma map_map_comp_inv_baseChange_app (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b)
-    [IsIso (F.baseChange t l r b w).natTrans] {Y Y' : F.obj U} (f : Y ⟶ Y') :
-    (F.pb b).map ((F.sh r).map f) ≫ inv ((F.baseChange t l r b w).natTrans.app Y') =
-      inv ((F.baseChange t l r b w).natTrans.app Y) ≫ (F.sh l).map ((F.pb t).map f) := by
+    [IsIso (F.baseChange t l r b w)] {Y Y' : F.obj U} (f : Y ⟶ Y') :
+    (F.pb b).map ((F.sh r).map f) ≫ inv ((F.baseChange t l r b w).app Y') =
+      inv ((F.baseChange t l r b w).app Y) ≫ (F.sh l).map ((F.pb t).map f) := by
   rw [IsIso.comp_inv_eq, Category.assoc, IsIso.eq_inv_comp]
-  exact ((F.baseChange t l r b w).natTrans.naturality f).symm
+  exact ((F.baseChange t l r b w).naturality f).symm
 
 /-- **The exchange map intertwines the projection formulas**: for a commutative square
 `t ≫ r = l ≫ b` with `l`, `r` open immersions whose base change map is an isomorphism, the
@@ -195,16 +195,16 @@ theorem exchange_whiskerRight_comp_projectionMorphism
         (F.pbComp f g).hom.app (M ⊗ N) ≫ (F.pb f).map (δ (F.pb g) M N) ≫
           δ (F.pb f) ((F.pb g).obj M) ((F.pb g).obj N))
     (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 r)]
-    (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w).natTrans]
+    (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w)]
     [∀ K N, IsIso ((F.shAdj l).projectionComparison K N)]
     [∀ K N, IsIso ((F.shAdj r).projectionComparison K N)] (A : F.obj U') (N : F.obj Z) :
-    (F.exchange t l r b w).natTrans.app A ▷ N ≫
+    (F.exchange t l r b w).app A ▷ N ≫
         (F.adj b).projectionMorphism ((F.sh l).obj A) N ≫
         (F.pf b).map (inv ((F.shAdj l).projectionComparison A ((F.pb b).obj N)) ≫
           (F.sh l).map (A ◁ (F.sqIso t l r b w).inv.app N)) =
       inv ((F.shAdj r).projectionComparison ((F.pf t).obj A) N) ≫
         (F.sh r).map ((F.adj t).projectionMorphism A ((F.pb r).obj N)) ≫
-        (F.exchange t l r b w).natTrans.app (A ⊗ (F.pb t).obj ((F.pb r).obj N)) := by
+        (F.exchange t l r b w).app (A ⊗ (F.pb t).obj ((F.pb r).obj N)) := by
   apply ((F.adj b).homEquiv _ _).symm.injective
   simp only [Functor.comp_obj, Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
     Adjunction.counit_naturality, Adjunction.counit_naturality_assoc,

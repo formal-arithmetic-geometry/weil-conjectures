@@ -256,9 +256,9 @@ private theorem inverse_transition_isIso
 omit [IsOpenImmersion j] in
 private theorem coextension_mate_isIso (n : ℕ) :
     IsIso (mateEquiv (coextensionAdjunction Z O ell n)
-      (coextensionAdjunction X O ell n) (I.inverseEvaluation n).hom).natTrans := by
+      (coextensionAdjunction X O ell n) (I.inverseEvaluation n).hom) := by
   let beta := (mateEquiv (coextensionAdjunction Z O ell n)
-    (coextensionAdjunction X O ell n) (I.inverseEvaluation n).hom).natTrans
+    (coextensionAdjunction X O ell n) (I.inverseEvaluation n).hom)
   have hi (M) : IsIso (beta.app M) := by
     apply coextension_map_isIso X O ell n (beta.app M)
     · intro k hk
@@ -306,7 +306,7 @@ theorem exceptionalProOpen_evaluation
     ∀ n : ℕ, IsIso
       (((mateEquiv (Adjunction.ofIsRightAdjoint I.inverse)
         (Adjunction.ofIsRightAdjoint (I.lift n).modules)).symm
-          (I.inverseEvaluation n).hom).natTrans) := by
+          (I.inverseEvaluation n).hom)) := by
   constructor
   · intro n
     constructor

@@ -258,7 +258,7 @@ theorem nativeReductionCounit_kFlat (W : Scheme.{u})
   let a := (ordinaryReductionAdj l E W).mapHomotopyCategory (.up ℤ)
   let b := S.adjunction.ofNatIsoRight (reductionRightComparison l E W).symm
   let β := TwoSquare.mk _ _ _ _ F.rightDerivedFunctorUnit
-  let c := ((mateEquiv a b).symm β).natTrans
+  let c := ((mateEquiv a b).symm β)
   let K : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦
     ∃ P : CochainComplex A ℤ, P.IsKFlatIndependentCoefficients ∧ q.obj P = X
   have hres (X : HomotopyCategory A (.up ℤ)) :
@@ -294,29 +294,29 @@ theorem nativeReductionCounit_kFlat (W : Scheme.{u})
     (HomotopyCategory.quasiIso A (.up ℤ)) QA QB K hres
     (fun hX hY s hs ↦ hinv hX hY s hs) (q.obj P) ⟨P, hP, rfl⟩ (qB.obj I)
     (fun X ↦ CochainComplex.IsKInjective.Qh_map_bijective X I)
-  have hη : IsIso (β.natTrans.app (qB.obj I)) := inferInstance
+  have hη : IsIso (β.app (qB.obj I)) := inferInstance
   have hpost : Function.Bijective (fun f : QA.obj (q.obj P) ⟶
       QA.obj ((F.mapHomotopyCategory (.up ℤ)).obj (qB.obj I)) ↦
-        f ≫ β.natTrans.app (qB.obj I)) := by
+        f ≫ β.app (qB.obj I)) := by
     constructor
     · intro f g h
-      exact (cancel_mono (β.natTrans.app (qB.obj I))).mp h
+      exact (cancel_mono (β.app (qB.obj I))).mp h
     · intro f
-      refine ⟨f ≫ inv (β.natTrans.app (qB.obj I)), ?_⟩
+      refine ⟨f ≫ inv (β.app (qB.obj I)), ?_⟩
       simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   have hm (f : (G.mapHomotopyCategory (.up ℤ)).obj (q.obj P) ⟶ qB.obj I) :
       b.homEquiv _ _ (c.app (q.obj P) ≫ QB.map f) =
-        QA.map (a.homEquiv _ _ f) ≫ β.natTrans.app (qB.obj I) := by
+        QA.map (a.homEquiv _ _ f) ≫ β.app (qB.obj I) := by
     simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
     have hu : QA.map (a.unit.app (q.obj P)) ≫
-        β.natTrans.app ((G.mapHomotopyCategory (.up ℤ)).obj (q.obj P)) =
+        β.app ((G.mapHomotopyCategory (.up ℤ)).obj (q.obj P)) =
         b.unit.app (QA.obj (q.obj P)) ≫ F.rightDerivedFunctor.map (c.app (q.obj P)) := by
       simpa only [Functor.id_obj] using unit_mateEquiv_symm a b β (q.obj P)
     rw [← Category.assoc, ← hu, Category.assoc]
     have hn : QA.map ((F.mapHomotopyCategory (.up ℤ)).map f) ≫
-        β.natTrans.app (qB.obj I) =
-        β.natTrans.app ((G.mapHomotopyCategory (.up ℤ)).obj (q.obj P)) ≫
-          F.rightDerivedFunctor.map (QB.map f) := β.natTrans.naturality f
+        β.app (qB.obj I) =
+        β.app ((G.mapHomotopyCategory (.up ℤ)).obj (q.obj P)) ≫
+          F.rightDerivedFunctor.map (QB.map f) := β.naturality f
     rw [hn]
   have hcomp : Function.Bijective
       (fun f : (G.mapHomotopyCategory (.up ℤ)).obj (q.obj P) ⟶ qB.obj I ↦

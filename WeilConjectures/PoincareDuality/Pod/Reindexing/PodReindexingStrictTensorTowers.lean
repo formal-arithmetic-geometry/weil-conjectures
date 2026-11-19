@@ -37,7 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Reindexing of the strict total-tensor tower, before any derived limit.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers).
 
 Proof: at level n use the sectionwise tensor comparison for exact inverse image,

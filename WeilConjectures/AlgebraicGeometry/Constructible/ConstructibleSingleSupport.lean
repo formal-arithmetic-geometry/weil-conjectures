@@ -69,13 +69,7 @@ private theorem finite_stalk_of_isZero (Y : Scheme.{u}) (A : Type u) [CommRing A
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) (hF : IsZero F)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
     Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) := by
-  let D := PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y)
-    ((proEtaleConstantRing Y A).obj ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
-  let L := PresheafOfModules.colimitFunctor (C := ProEtaleGeometricNeighbourhood y)
-    (colimit.isColimit (proEtaleGeometricStalkRingDiagram y (proEtaleConstantRing Y A)))
-  have : D.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-  have : L.IsLeftAdjoint := (PresheafOfModules.colimitAdjunction _).isLeftAdjoint
-  have hz := (SheafOfModules.forget _ ⋙ D ⋙ L).map_isZero hF
+  have hz := (geometricRingModuleStalkFunctor y (proEtaleConstantRing Y A)).map_isZero hF
   have : Subsingleton (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F) :=
     ModuleCat.subsingleton_of_isZero hz
   infer_instance

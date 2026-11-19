@@ -50,8 +50,6 @@ private theorem restriction_exact {Z : TopCat.{v}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- The scalar-restriction comparison unfolds the ringed-space and sheaf category instances.
 /-- Under the cohomology comparison, the derived affine algebra unit is the
 underived unit applied to the cohomology module.
 Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
@@ -132,8 +130,12 @@ theorem affine_algebra_derived_unit_homology_factorization
       ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩
     let := hlim
     let := hcolim
-    have underived : R ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
-      Iso.refl _
+    -- Compare sections to avoid unfolding both functor records in a definitional equality.
+    let underived : R ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
+      NatIso.ofComponents (fun _ ↦
+        (SheafOfModules.fullyFaithfulForget _).preimageIso
+          (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by intros; ext x; rfl)))
+        (by intros; ext U x; rfl)
     let comparison : RD ⋙ T.rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
       Functor.isoWhiskerLeft RD T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
         (Functor.rightDerivedFunctorCompMapDerivedCategoryIso R T).symm ≪≫

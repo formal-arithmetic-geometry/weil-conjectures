@@ -132,7 +132,7 @@ lemma Scheme.Hom.coheight_apply_of_flat (f : X ⟶ Y) [Flat f] [LocallyQuasiFini
 quasi-finite, `dim X ≤ dim Y`: the fibres of `f` are discrete, so `f` maps strict chains of
 specializations to strict chains.
 
-Used for blueprint `lem-sf-etale-direct-image-vanishing`: an étale `X`-scheme has dimension at
+Used for blueprint `theorem-results-from-etale-theory--4`: an étale `X`-scheme has dimension at
 most `dim X`. -/
 theorem Scheme.Hom.topologicalKrullDim_le_of_locallyQuasiFinite (f : X ⟶ Y)
     [LocallyQuasiFinite f] : topologicalKrullDim X ≤ topologicalKrullDim Y :=
@@ -140,7 +140,7 @@ theorem Scheme.Hom.topologicalKrullDim_le_of_locallyQuasiFinite (f : X ⟶ Y)
 
 /-- **An étale morphism does not increase dimension.** For `f : X ⟶ Y` étale, `dim X ≤ dim Y`.
 
-Used for blueprint `lem-sf-etale-direct-image-vanishing`: an étale `X`-scheme has dimension at
+Used for blueprint `theorem-results-from-etale-theory--4`: an étale `X`-scheme has dimension at
 most `dim X`. -/
 theorem Scheme.Hom.topologicalKrullDim_le_of_etale (f : X ⟶ Y) [Etale f] :
     topologicalKrullDim X ≤ topologicalKrullDim Y :=

@@ -95,7 +95,7 @@ private theorem transport_eq_mate
     (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ b.unit ≫
         (Functor.squareTransport R₁ R₂ θ).hom ≫
         Functor.whiskerRight a.counit _ ≫ (Functor.leftUnitor _).hom =
-      (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom)).natTrans := by
+      (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.hom)) := by
   ext K
   simp only [mateEquiv, Equiv.coe_fn_mk,
     NatTrans.comp_app, Functor.squareTransport_hom_app, Functor.whiskerLeft_app,
@@ -503,8 +503,8 @@ private theorem cartesianComparisons_compatible
 set_option linter.unusedVariables false in
 /-- Cartesian base change with the total-derived open adjunction normalization.
 
-Source: blueprint det-sf-comp-composition-base-change, proof steps 1--8,
-and det-prop-int-brown-construction step 7.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 1--8,
+and proposition-construction-independence-rf-shriek step 7.
 (blueprint: lem-sfb-total-derived-cartesian-compact-support).
 
 Proof: the proper leg of the base-changed compactification is already the literal

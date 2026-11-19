@@ -51,7 +51,7 @@ closure factorization has exact coefficient-module factors and exact composite; 
 termwise functor commutes naturally with cohomology, preserves quasi-isomorphisms and
 descends to the unbounded derived categories with its localization comparison.
 
-Source: blueprint sk-lem-coefficient-heart, introductory paragraph and proof (1), (3);
+Source: blueprint lemma-constructible-sheaves, introductory paragraph and proof (1), (3);
 Stacks Tags 01OW, 01OZ, 01OY, 01R8, 09BM, 03DJ, 010N, 015F
 (blueprint: lem-sfb-coefficient-heart-locally-closed-extension).
 
@@ -64,25 +64,25 @@ lem-sfb-noetherian-space-compact-subsets, so every open immersion is quasi-compa
 Use lem-weil-pbc-locally-noetherian-quasi-separated for quasi-separatedness.
 2. Compactness of every subset of the source proves quasi-compactness of a and its
 diagonal. By lemma-nagata-immersion-open-in-scheme-image, a.toImage is open and dense.
-The image inclusion is closed, with composite a (def-nagata-scheme-image-factor);
+The image inclusion is closed, with composite a (lemma-schematic-closure-uniqueness--1);
 density identifies its range with the topological closure of the range of a.
 3. Use sk-def-sfb-sheaf-tensor and
 def-weil-pbc-internal-abelian-sheaf-module-equivalence to identify internal modules with
 sectionwise modules over the actual coefficient ring sheaf. Their categories are abelian
-by def-weil-sheaf-of-modules-category. The canonical coefficient identifications are
+by situation-conventions. The canonical coefficient identifications are
 sk-def-sfb-coefficient-morphisms and apply to any commutative condensed ring.
 4. The complement of the closed factor is quasi-compact by step 1. Apply
 lem-sfb-proetale-identified-open-closed to its coefficient identification. Under the
-module equivalences, its direct image agrees with def-sfb-module-lower-star: both keep
+module equivalences, its direct image agrees with prose-03-02: both keep
 the underlying direct-image sheaf and maps, with action r*m = eta_i(r)*m. This comparison
 is natural and linear. Equivalences preserve and reflect finite limits and colimits,
 so the actual internal-module closed direct image is exact.
-5. The actual open functor is exact by def-sfb-module-open-lower-shriek. The composite
+5. The actual open functor is exact by prose-03-02. The composite
 in def-sfb-locally-closed-coefficient-extension is therefore exact.
 6. Apply lem-weil-pbc-exact-functor-complex-cohomology for the natural homology
 isomorphisms in every integer degree. Naturality identifies the homology of the image
 of a quasi-isomorphism with the image of its homology, which is invertible.
-7. Apply lem-weil-pbc-exact-functor-derived-factorization for the unbounded localization
+7. Apply situation-conventions for the unbounded localization
 square of sk-def-sfb-derived-categories. No resolution or boundedness is required.
 The same argument allows empty schemes and zero complexes: the comparisons there are
 the unique isomorphisms of zero objects. -/

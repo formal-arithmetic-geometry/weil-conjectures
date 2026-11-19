@@ -24,7 +24,7 @@ and `g` the geometric Galois Frobenius of `X`, so that `g ≫ a = a ≫ σ` is c
 `ω = Ra^! Λ` carries the exceptional Weil datum of the square
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`), and the canonical orientation
 `θ : ω ≅ Λ_X(d)[2d]` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`) identifies it with
-the Tate datum, on which geometric Frobenius acts by `q⁻ᵈ` (`def-pur-tate-datum`,
+the Tate datum, on which geometric Frobenius acts by `q⁻ᵈ` (`definition-weil-structure--1`,
 `AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`). Over `k̄` the twist is trivial, so
 this can be written without Tate twists: there is an isomorphism `o : Λ_X[2d] ≅ ω` which is a
 morphism of Weil objects from the canonical datum of `Λ_X[2d]` to `q^d` times the exceptional
@@ -169,24 +169,25 @@ where `φ_{Λ_X}` is the canonical datum `Lg^* Λ_X ≅ Λ_X` and `φ^!` is the 
 It is the canonical orientation `θ : ω ≅ Λ_X(d)[2d]` composed with a trivialization
 `Λ_X ≅ Λ_X(d)` pulled back from `k̄`: by the base change compatibility of `θ`
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`, blueprint
-`sk-prop-sp-purity-bc`) the exceptional datum corresponds to the Tate datum, and on the pulled
-back trivialization the Tate datum is `q⁻ᵈ` times the canonical datum (`def-pur-tate-datum`,
-`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`). Equivalently, geometric Frobenius
-acts by `q^d` on the compactly supported cohomology `H^{2d}_c(X, Λ)` through the trace. -/
+`proposition-compatibility-purity-base-change`) the exceptional datum corresponds to the Tate datum,
+and on the pulled back trivialization the Tate datum is `q⁻ᵈ` times the canonical datum
+(`definition-weil-structure--1`, `AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`).
+Equivalently, geometric Frobenius acts by `q^d` on the compactly supported cohomology
+`H^{2d}_c(X, Λ)` through the trace. -/
 theorem exists_iso_dualizingComplex_isWeilMorphism :
     ∃ o : (𝟙_ (DerivedCategoryModule Λ f.geometricFiber))⟦(2 * d : ℤ)⟧ ≅
         dualizingComplex Λ f.geometricFiberToAlgebraicClosure,
-      IsWeilMorphism f.geometricGaloisFrobenius.hom
-        (shiftWeilDatum f.geometricGaloisFrobenius.hom
-          (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom).hom (2 * d))
+      IsWeilMorphism f.geometricGaloisFrobenius.asIso.hom
+        (shiftWeilDatum f.geometricGaloisFrobenius.asIso.hom
+          (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.asIso.hom).hom (2 * d))
         (((Nat.card k₀ : Λ) ^ d) •
           upperShriekMateWeilDatum (Λ := Λ) f.isPullback_geometricGaloisFrobenius
-            (leftDerivedUpperStarUnitIso _ (specGeometricFrobenius k₀).hom).hom)
+            (leftDerivedUpperStarUnitIso _ (specGeometricFrobenius k₀).asIso.hom).hom)
         o.hom := by
   have : NeZero (ringChar Λ) := ⟨CharP.char_ne_zero_of_finite Λ (ringChar Λ)⟩
   set a := f.geometricFiberToAlgebraicClosure
-  set g := f.geometricGaloisFrobenius.hom
-  set σ := (specGeometricFrobenius k₀).hom
+  set g := f.geometricGaloisFrobenius.asIso.hom
+  set σ := (specGeometricFrobenius k₀).asIso.hom
   have sq : IsPullback g a a σ := f.isPullback_geometricGaloisFrobenius
   have : SmoothOfRelativeDimension d a :=
     inferInstanceAs (SmoothOfRelativeDimension d (Limits.pullback.snd _ _))

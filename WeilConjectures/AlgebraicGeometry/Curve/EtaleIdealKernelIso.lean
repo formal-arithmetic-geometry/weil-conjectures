@@ -60,7 +60,7 @@ private theorem idealKernelIso {X : Scheme.{u}} (I : X.IdealSheafData) :
   exact hlim.conePointUniqueUpToIso_hom_comp (kernelIsKernel f) WalkingParallelPair.zero
 
 /-- Tensor sections identify with additive ideal kernels, compatibly with nested inclusion.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-etale-ideal-kernel-iso)
 
 Proof: The canonical ideal-section inclusion is a kernel on every etale object

@@ -10,6 +10,7 @@ public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Evaluation of internal Hom on stalks

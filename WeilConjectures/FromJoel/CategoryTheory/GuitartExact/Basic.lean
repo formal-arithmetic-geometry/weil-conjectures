@@ -60,7 +60,7 @@ variable {C₁' : Type u₁'} {C₂' : Type u₂'} {C₃' : Type u₃'} {C₄' :
   {T' : C₁' ⥤ C₂'} {L' : C₁' ⥤ C₃'} {R' : C₂' ⥤ C₄'} {B' : C₃' ⥤ C₄'}
   (w' : TwoSquare T' L' R' B')
 
-def prod : TwoSquare (T.prod T') (L.prod L') (R.prod R') (B.prod B') := NatTrans.prod w w'
+-- `TwoSquare.prod` is provided by Mathlib (CategoryTheory.Functor.TwoSquare) since v4.35.0.
 
 section
 
@@ -72,36 +72,21 @@ namespace JRightwardsProdEquivalence
 def functorObj (X : StructuredArrowRightwards (w.prod w') g) :
     (StructuredArrowRightwards w g.1) × (StructuredArrowRightwards w' g.2) :=
   ⟨StructuredArrowRightwards.mk w g.1 _ X.hom.left.1 X.right.hom.1 (by
-      have := congr_arg _root_.Prod.fst X.hom.w
-      dsimp at this
-      simp only [comp_id] at this
-      exact this),
+      simpa only [Category.comp_id] using! dsimp% congr($(X.hom.w).fst)),
     StructuredArrowRightwards.mk w' g.2 _ X.hom.left.2 X.right.hom.2 (by
-      have := congr_arg _root_.Prod.snd X.hom.w
-      dsimp at this
-      simp only [comp_id] at this
-      exact this)⟩
+      simpa only [Category.comp_id] using! dsimp% congr($(X.hom.w).snd))⟩
 
-set_option backward.isDefEq.respectTransparency false in
 @[simps]
 def functor : StructuredArrowRightwards (w.prod w') g ⥤
     (StructuredArrowRightwards w g.1) × (StructuredArrowRightwards w' g.2) where
   obj X := functorObj w w' g X
   map {X Y} f :=
     ⟨StructuredArrow.homMk (CostructuredArrow.homMk f.right.left.1) (by
-          ext
-          have eq := StructuredArrow.w f
-          dsimp at eq ⊢
-          rw [← eq]
-          rfl),
+        have := (StructuredArrow.w f).symm
+        cat_disch),
       StructuredArrow.homMk (CostructuredArrow.homMk f.right.left.2) (by
-          ext
-          have eq := StructuredArrow.w f
-          dsimp at eq ⊢
-          rw [← eq]
-          rfl)⟩
-  map_id _ := rfl
-  map_comp f g := rfl
+        have := (StructuredArrow.w f).symm
+        cat_disch)⟩
 
 @[simp]
 def inverseObj (X : (StructuredArrowRightwards w g.1) × (StructuredArrowRightwards w' g.2)) :
@@ -110,37 +95,18 @@ def inverseObj (X : (StructuredArrowRightwards w g.1) × (StructuredArrowRightwa
     ⟨X.1.hom.left, X.2.hom.left⟩ ⟨X.1.right.hom, X.2.right.hom⟩ (by
       dsimp
       ext
-      · have := X.1.hom.w
-        dsimp at this
-        simp only [comp_id] at this
-        exact this
-      · have := X.2.hom.w
-        dsimp at this
-        simp only [comp_id] at this
-        exact this)
+      · simpa only [Category.comp_id] using! dsimp% X.1.hom.w
+      · simpa only [Category.comp_id] using! dsimp% X.2.hom.w)
 
 @[simps]
 def inverse : (StructuredArrowRightwards w g.1) × (StructuredArrowRightwards w' g.2) ⥤
     StructuredArrowRightwards (w.prod w') g where
   obj X := inverseObj w w' g X
   map {X Y} f := StructuredArrow.homMk
-    (CostructuredArrow.homMk ⟨f.1.right.left, f.2.right.left⟩ (by
-      dsimp
-      ext
-      · exact CostructuredArrow.w f.1.right
-      · exact CostructuredArrow.w f.2.right)) (by
-      dsimp
-      ext
-      · have eq := StructuredArrow.w f.1
-        dsimp at eq ⊢
-        rw [← eq]
-        rfl
-      · have eq := StructuredArrow.w f.2
-        dsimp at eq ⊢
-        rw [← eq]
-        rfl)
-  map_id _ := rfl
-  map_comp _ _ := rfl
+    (CostructuredArrow.homMk ⟨f.1.right.left, f.2.right.left⟩) (by
+      have := StructuredArrow.w f.1
+      have := StructuredArrow.w f.2
+      cat_disch)
 
 end JRightwardsProdEquivalence
 
@@ -153,10 +119,6 @@ def StructuredArrowRightwardsProdEquivalence :
   inverse := JRightwardsProdEquivalence.inverse w w' g
   unitIso := Iso.refl _
   counitIso := Iso.refl _
-  functor_unitIso_comp X := by
-    dsimp
-    erw [comp_id, comp_id]
-    rfl
 
 end
 

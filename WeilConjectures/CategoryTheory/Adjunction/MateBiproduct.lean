@@ -105,9 +105,9 @@ biproduct powers `V ≅ finBiproductPow C d` and `V' ≅ finBiproductPow C' d`, 
 lemma Adjunction.mateEquiv_app_comp_map_biproductPow_π {G : C ⥤ C'} {R : C' ⥤ C} (adj : G ⊣ R)
     {d : ℕ} {V : C ⥤ C} {V' : C' ⥤ C'} (e : V ≅ Functor.finBiproductPow C d)
     (e' : V' ≅ Functor.finBiproductPow C' d) (α : TwoSquare V G G V') (i : Fin d)
-    (hα : ∀ X : C, α.natTrans.app X ≫ e'.hom.app (G.obj X) ≫ biproduct.π _ i =
+    (hα : ∀ X : C, α.app X ≫ e'.hom.app (G.obj X) ≫ biproduct.π _ i =
       G.map (e.hom.app X ≫ biproduct.π _ i)) (Y : C') :
-    (mateEquiv adj adj α).natTrans.app Y ≫ R.map (e'.hom.app Y ≫ biproduct.π _ i) =
+    (mateEquiv adj adj α).app Y ≫ R.map (e'.hom.app Y ≫ biproduct.π _ i) =
       e.hom.app (R.obj Y) ≫ biproduct.π _ i := by
   have h := e'.hom.naturality (adj.counit.app Y)
   simp only [Functor.finBiproductPow_map] at h
@@ -127,18 +127,18 @@ fails, see the module docstring.) -/
 theorem Adjunction.isIso_mateEquiv_of_biproductPow_π {G : C ⥤ C'} {R : C' ⥤ C} [R.Additive]
     (adj : G ⊣ R) {d : ℕ} {V : C ⥤ C} {V' : C' ⥤ C'} (e : V ≅ Functor.finBiproductPow C d)
     (e' : V' ≅ Functor.finBiproductPow C' d) (α : TwoSquare V G G V')
-    (hα : ∀ (X : C) (i : Fin d), α.natTrans.app X ≫ e'.hom.app (G.obj X) ≫ biproduct.π _ i =
+    (hα : ∀ (X : C) (i : Fin d), α.app X ≫ e'.hom.app (G.obj X) ≫ biproduct.π _ i =
       G.map (e.hom.app X ≫ biproduct.π _ i)) :
-    IsIso (mateEquiv adj adj α).natTrans := by
+    IsIso (mateEquiv adj adj α) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro Y
   have hc := R.isIso_biproduct_lift_map_π fun _ : Fin d ↦ Y
-  have h : (mateEquiv adj adj α).natTrans.app Y ≫ R.map (e'.hom.app Y) ≫
+  have h : (mateEquiv adj adj α).app Y ≫ R.map (e'.hom.app Y) ≫
       (biproduct.lift fun i ↦ R.map (biproduct.π (fun _ : Fin d ↦ Y) i)) = e.hom.app (R.obj Y) :=
     biproduct.hom_ext _ _ fun i ↦ by
       rw [Category.assoc, Category.assoc, biproduct.lift_π, ← R.map_comp]
       exact mateEquiv_app_comp_map_biproductPow_π adj e e' α i (hα · i) Y
-  have : IsIso ((mateEquiv adj adj α).natTrans.app Y ≫ R.map (e'.hom.app Y) ≫
+  have : IsIso ((mateEquiv adj adj α).app Y ≫ R.map (e'.hom.app Y) ≫
       (biproduct.lift fun i ↦ R.map (biproduct.π (fun _ : Fin d ↦ Y) i))) := by
     rw [h]
     infer_instance
@@ -167,17 +167,17 @@ isomorphism. -/
 theorem Adjunction.isIso_mateEquiv_inv_of_biproductPow (adj₁ : E₁ ⊣ Res₁) (adj₂ : E₂ ⊣ Res₂)
     (adjL₁ : L₁ ⊣ R₁) (adjL₂ : L₂ ⊣ R₂) [R₁.Additive] [Res₁.ReflectsIsomorphisms]
     (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁) (α : TwoSquare L₁ E₁ E₂ L₂)
-    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α.natTrans]
+    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α]
     {d : ℕ} (u₁ : E₁ ⋙ Res₁ ≅ Functor.finBiproductPow A d)
     (u₂ : E₂ ⋙ Res₂ ≅ Functor.finBiproductPow A' d)
-    (hu : ∀ (X : A) (i : Fin d), e.inv.app (E₁.obj X) ≫ Res₂.map (inv (α.natTrans.app X)) ≫
+    (hu : ∀ (X : A) (i : Fin d), e.inv.app (E₁.obj X) ≫ Res₂.map (inv (α.app X)) ≫
       u₂.hom.app (L₁.obj X) ≫ biproduct.π _ i = L₁.map (u₁.hom.app X ≫ biproduct.π _ i)) :
-    IsIso (mateEquiv adjL₁ adjL₂ (TwoSquare.mk _ _ _ _ (inv α.natTrans))).natTrans := by
+    IsIso (mateEquiv adjL₁ adjL₂ (TwoSquare.mk _ _ _ _ (inv α))) := by
   have hU := isIso_mateEquiv_of_biproductPow_π adjL₁ u₁ u₂
-    ((TwoSquare.mk _ _ _ _ (inv α.natTrans)).hComp (TwoSquare.mk _ _ _ _ e.inv)) (fun X i ↦ by
+    ((TwoSquare.mk _ _ _ _ (inv α)).hComp (TwoSquare.mk _ _ _ _ e.inv)) (fun X i ↦ by
       simpa [TwoSquare.hComp] using hu X i)
   rw [mateEquiv_vcomp adjL₁ adjL₂ adjL₁] at hU
-  have hc : IsIso (mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
+  have hc : IsIso (mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)) := by
     rw [← hα, iterated_mateEquiv_conjugateEquiv]
     infer_instance
   rw [NatTrans.isIso_iff_isIso_app] at hU ⊢
@@ -188,7 +188,7 @@ theorem Adjunction.isIso_mateEquiv_inv_of_biproductPow (adj₁ : E₁ ⊣ Res₁
     Category.id_comp, Category.comp_id] at hM
   rw [← isIso_iff_of_reflects_iso _ Res₁]
   exact IsIso.of_isIso_comp_right _
-    ((mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app (E₂.obj M))
+    ((mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)).app (E₂.obj M))
 
 /-- Given an adjunction `E ⊣ Res` and natural endomorphisms `μ i` (`i : Fin d`) of the identity
 of `B`, the natural transformation `finBiproductPow A d ⟶ E ⋙ Res` whose `i`-th component is
@@ -213,16 +213,16 @@ omit [Preadditive A] [HasFiniteBiproducts A] [Preadditive A'] [HasFiniteBiproduc
 @[reassoc]
 lemma Adjunction.map_unit_comp_mateEquiv_inv (adj₁ : E₁ ⊣ Res₁) (adj₂ : E₂ ⊣ Res₂)
     (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁) (α : TwoSquare L₁ E₁ E₂ L₂)
-    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α.natTrans]
+    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α]
     (μ₁ : 𝟭 B ⟶ 𝟭 B) (μ₂ : 𝟭 B' ⟶ 𝟭 B') (hμ : ∀ K : B, L₂.map (μ₁.app K) = μ₂.app (L₂.obj K))
     (X : A) :
     L₁.map (adj₁.unit.app X ≫ Res₁.map (μ₁.app (E₁.obj X))) ≫ e.inv.app (E₁.obj X) ≫
-      Res₂.map (inv (α.natTrans.app X)) =
+      Res₂.map (inv (α.app X)) =
       adj₂.unit.app (L₁.obj X) ≫ Res₂.map (μ₂.app (E₂.obj (L₁.obj X))) := by
   have hunit : L₁.map (adj₁.unit.app X) ≫ e.inv.app (E₁.obj X) =
-      adj₂.unit.app (L₁.obj X) ≫ Res₂.map (α.natTrans.app X) := by
+      adj₂.unit.app (L₁.obj X) ≫ Res₂.map (α.app X) := by
     simpa [hα] using unit_mateEquiv adj₁ adj₂ α X
-  have hnat := μ₂.naturality (inv (α.natTrans.app X))
+  have hnat := μ₂.naturality (inv (α.app X))
   have he := e.inv.naturality (μ₁.app (E₁.obj X))
   simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.comp_map] at hnat he
   rw [L₁.map_comp, Category.assoc, reassoc_of% he, hμ, ← Res₂.map_comp, ← hnat, Res₂.map_comp,
@@ -239,14 +239,14 @@ case the compatibility of the decompositions with the pasted square is automatic
 theorem Adjunction.isIso_mateEquiv_inv_of_isIso_biproductDesc_unit (adj₁ : E₁ ⊣ Res₁)
     (adj₂ : E₂ ⊣ Res₂) (adjL₁ : L₁ ⊣ R₁) (adjL₂ : L₂ ⊣ R₂) [R₁.Additive]
     [Res₁.ReflectsIsomorphisms] (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁) (α : TwoSquare L₁ E₁ E₂ L₂)
-    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α.natTrans]
+    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α]
     {d : ℕ} (μ₁ : Fin d → (𝟭 B ⟶ 𝟭 B)) (μ₂ : Fin d → (𝟭 B' ⟶ 𝟭 B'))
     (hμ : ∀ i (K : B), L₂.map ((μ₁ i).app K) = (μ₂ i).app (L₂.obj K))
     (h₁ : ∀ X : A, IsIso (biproduct.desc fun i : Fin d ↦
       adj₁.unit.app X ≫ Res₁.map ((μ₁ i).app (E₁.obj X))))
     (h₂ : ∀ X : A', IsIso (biproduct.desc fun i : Fin d ↦
       adj₂.unit.app X ≫ Res₂.map ((μ₂ i).app (E₂.obj X)))) :
-    IsIso (mateEquiv adjL₁ adjL₂ (TwoSquare.mk _ _ _ _ (inv α.natTrans))).natTrans := by
+    IsIso (mateEquiv adjL₁ adjL₂ (TwoSquare.mk _ _ _ _ (inv α))) := by
   have := adjL₁.left_adjoint_additive
   have : IsIso (adj₁.biproductDescUnit μ₁) := by
     rw [NatTrans.isIso_iff_isIso_app]

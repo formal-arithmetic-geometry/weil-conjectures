@@ -82,8 +82,8 @@ theorem nonempty_equiv_globalSections_stalkAt {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    [IsIso s] (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom =
-      (specGeometricFrobenius k₀ ^ 1).hom ≫ s) :
+    [IsIso s] (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ 1).asIso.hom ≫ s) :
     Nonempty (F.globalSections.Equiv (F.stalkAt s 1 hs)) :=
   have := F.finiteDimensional_globalSections
   have := F.finiteDimensional_stalkObj s

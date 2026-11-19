@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Mathlib.CategoryTheory.MorphismProperty.Retract
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Lifting a derived decomposition on an affine open to modules
 
@@ -27,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Derived functor compositions need additional typeclass search budget.
-set_option maxHeartbeats 400000 in
 -- Comparing the localizations elaborates several large exact-functor structures.
 /-- A decomposition of an associated module complex on an affine open comes from a
 binary decomposition in the module derived category. No boundedness, finite generation,
