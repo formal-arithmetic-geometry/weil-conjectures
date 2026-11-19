@@ -363,6 +363,29 @@ theorem isIso_derivedComparisonAdjunction_counit_app_derivedHom {k : Type u} [Fi
     Λ j g V.ι (by rw [Scheme.Opens.range_ι]; exact (compl_compl _).symm) L hL hM
 
 
+/-- On a separated finite-type scheme, comparison pullback preserves internal Hom when the
+first argument has finite Tor amplitude and the second is bounded constructible. -/
+theorem nonempty_iso_mapDerivedCategory_derivedHom_on_separated {k : Type u} [Field k]
+    {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
+    [QuasiCompact aX] [HasInvertibleExponent Λ X]
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hM : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M) :
+    Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
+        (((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj M) ≅
+      ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+        (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
+  let adj := derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X
+  obtain ⟨c, hc⟩ := hM.1.1
+  have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) X M ⟨c, hc⟩
+  have := isIso_derivedComparisonAdjunction_counit_app_derivedHom Λ aX hK ⟨c, hc⟩
+  exact ⟨(D(ν^*(X)[ModuleCat.{u + 1} Λ])).mapIso
+    (((rightDerivedComparisonLowerStarCompDerivedHomIso (ModuleCat.{u + 1} Λ) K).app _).symm ≪≫
+      ((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
+        (asIso (adj.unit.app M)).symm).symm ≪≫ asIso (adj.counit.app _)⟩
+
 /-- Blueprint `proposition-six-operations-dctf--15`: Finite-stage duality under the site
 comparison.
 
@@ -420,15 +443,8 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
           (((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj M) ≅
         ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
           (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
-            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
-    let adj := derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X
-    obtain ⟨c, hc⟩ := hM.1.1
-    have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) X M ⟨c, hc⟩
-    have := isIso_derivedComparisonAdjunction_counit_app_derivedHom Λ aX hK ⟨c, hc⟩
-    exact ⟨(D(ν^*(X)[ModuleCat.{u + 1} Λ])).mapIso
-      (((rightDerivedComparisonLowerStarCompDerivedHomIso (ModuleCat.{u + 1} Λ) K).app _).symm ≪≫
-        ((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
-          (asIso (adj.unit.app M)).symm).symm ≪≫ asIso (adj.counit.app _)⟩
+            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) :=
+    nonempty_iso_mapDerivedCategory_derivedHom_on_separated Λ aX (p := p) hK hM
   refine ⟨h₁, ?_⟩
   intro _
   -- clause 2: the pro-étale `Ra_X^!` is `ν^* ∘ a_X^× ∘ Rν_*`, and `Rν_* Λ ≅ Λ`
@@ -550,8 +566,8 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom {k : Type u} [Field k] {p : �
         (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)
     let eK := (mapDerivedCategoryComparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).app K
     let eM := (mapDerivedCategoryComparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).app M
-    obtain ⟨e₃⟩ := (nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated Λ (j ≫ aX)
-      (p := p)).1 (Etale.constructibleFiniteTor_mapDerivedCategory_upperStar Λ j hK)
+    obtain ⟨e₃⟩ := nonempty_iso_mapDerivedCategory_derivedHom_on_separated Λ (j ≫ aX)
+      (p := p) (Etale.constructibleFiniteTor_mapDerivedCategory_upperStar Λ j hK)
       (hM.mapDerivedCategory_upperStar j)
     exact ⟨_, ⟨e₂ ≪≫ ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) (U i)).mapIso eK.op.symm).app _ ≪≫
       ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) (U i)).obj _).mapIso eM ≪≫ e₃.symm⟩⟩
