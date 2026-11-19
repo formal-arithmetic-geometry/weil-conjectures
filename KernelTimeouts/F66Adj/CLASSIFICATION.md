@@ -8,7 +8,7 @@ The type-only probe is 3.10 s. Synchronous Before is 116.48 s / 12,639,544
 KB; skipped is 4.30 s. After is 3.40 s. `probes/ApplicationOnly.lean` binds
 `homIso_naturality_of_counit` with the old concrete parameters and then uses
 `sorry`: 35.32 s on / 3.50 s skipped. Replacing the final coherence argument
-with a typed `sorry` leaves 35.02 s, so the helper application itself is the
+with a typed `sorry` (`probes/NoHTau.lean`) leaves 35.02 s, so the helper application itself is the
 first expensive component. The full Before adds the final handoff and takes
 116.47 s.
 
