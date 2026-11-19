@@ -28,6 +28,7 @@ The earlier renamed-copy failures for three candidates were measurement artefact
 | [#1556 AmbientCounterexampleCoproducts](Old/PR1556-AmbientCounterexampleCoproducts/CLASSIFICATION.md) | 60.57; 7,760,464 / 5.73; 3,056,716 | Kernel | final `simpa using h =≫ ...commShiftIso.hom.app` in `not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety`, 54.9 s check | A plausible; phase and cost site confirmed | Kernel skip 3.55 s; closing `sorry` 5.66 s |
 | [#1563 RawModuleScalarPullback](Old/PR1563-RawModuleScalarPullback/CLASSIFICATION.md) | 117.04; 8,008,236 / 50.98; 5,146,444 | Kernel | `rawModuleScalar_pullback_module_formula`, 68.2 s historical versus 15.2 s fixed check | E plausible, A possible; phase and declaration confirmed | Kernel skip 16.06 s; target `sorry` 57.26 s |
 | [#1559 UpperStarMonoidal](Old/PR1559-UpperStarMonoidal/CLASSIFICATION.md) | **Unreproduced on 4.35.0**; PR reports 697 / 140 CPU s and 7.0 / 2.4 GB | Kernel in historical PR measurements; no current phase result | `Functor.OplaxMonoidal.ofLaxSquare` conversion and tensor-comparison application in historical source | E primary, A contributing, source-based | 4.35.0 port failed after API/instance errors; PR controlled measurements only |
+| [#1624 IntegersSheafHomologyTower](Old/PR1624-IntegersSheafHomologyTower/CLASSIFICATION.md) | 112.48 s; 11,038,208 KB / 12.44 s; 2,668,464 KB | Kernel | `homologyIntegersTowerIso` final concrete-functor iso chain; target check 102 / 3.18 s | A primary, E contributing; inner pair from historical PR | same-name 4.35.0 before/after values on current prefix |
 
 The [#1557 projection-formula candidate](Old/PR1557-ProjectionFormula/README.md) is excluded: both changed lemmas compile on the current prefix in 4.93 s historical versus 4.51 s fixed, with 3,158,552 versus 3,144,004 KB RSS. This does not reproduce the historical whole-module 10.7-to-4.0 GB drop. We stopped after these cheap isolated forms; no mechanism is asserted for the old measurement. The remaining marked historical PRs were not ported, so this table does not claim coverage of all ten.
 
@@ -68,6 +69,10 @@ The current prefix with the old one-line `simpa` closing proof compiles in 60.57
 ### Historical #1563
 
 Both ported forms share today's generic `higherDirectImageRawOverPullback_eq_moduleFactors` helper, which checks in about 32.5 s. The historical target then unfolds concrete functor, raw-pullback, triangle-map, source-factor, and coefficient-factor definitions with `simp only`; it checks in 68.2 s and the file peaks at 8.01 GB. The fixed target applies the helper and checks in 15.2 s, with a 5.15 GB peak. Kernel skip cuts the old file to 16.06 s; typed target `sorry` cuts its check to 21.6 s, showing a nontrivial type/context floor. Concrete versus abstract representation (E) and reduction (A) are plausible; no expression-level pair has separated them.
+
+### Historical #1624
+
+The old `homologyIntegersTowerIso` value, transplanted onto the current module prefix, directly composes named comparison isos over long concrete derived-functor compositions. On 4.35.0 its target Kernel check takes 102 s and the file peaks at 11.04 GB RSS. The current value delegates the final assembly to `homologyIntegersTowerIsoAux` over abstract functors; its target check takes 3.18 s and the file peaks at 2.67 GB RSS. Both forms elaborate in under a second of cumulative tactics. The historical PR separately isolated a single concrete reassociation as a roughly 15 s `rfl` conversion and identified `Functor.comp` unfolding. The direct 4.35.0 before/after control confirms the cost's persistence, while the precise inner expression pair in this toolchain has not been dumped.
 
 ## Observations
 
