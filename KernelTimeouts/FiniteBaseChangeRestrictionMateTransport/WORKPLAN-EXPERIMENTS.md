@@ -34,12 +34,22 @@ equality but is **not** a same-cost-site timing control and does not
 change either elaborated proposition in the expensive application.
 RESULT: the checked shape probe succeeds in 2.10 s wall,
 1.29 + 0.81 s CPU, 2,203,148 KB RSS. The site spelling is
-definitionally reconcilable; the next
-dependent field after this reduction is not isolated. Supports:
+definitionally reconcilable. `probes/wp/SiteUnfoldHead.lean`
+reconstructs the original instantiated proposition pair,
+replaces the eight expected `Site .ordinary` type
+applications with corresponding `Scheme.ProEt` applications,
+and prints the changed pair. The first difference moves from
+the site type to its category-instance argument:
+`Scheme.instCategoryProEt` versus
+`OpenTensorNormalization.instCategorySite` under `Mod`.
+This diagnostic takes 3.90 s wall, 3.98 + 0.67 s CPU,
+2,530,612 KB RSS; it ends in `sorry` and is not a
+same-cost-site Kernel control. Supports:
 necessary mode-match exposure for this initial leaf. Weakens: none.
 Classification: necessary representation reduction, with an
 unresolved downstream path. Confidence: strongly supported for the
-one-step equality, plausible for its share of the total cost.
+one-step equality and next instance mismatch, plausible for their
+individual shares of the total cost.
 
 An attempted source substitution at the explicit `Ab` category
 argument was rejected before timing: `Site .ordinary X` has type
@@ -67,8 +77,9 @@ RESULT: the application succeeds in 4.40 s wall,
 4.26 + 0.94 s CPU, 2,335,020 KB RSS. The expensive argument-domain
 conversion is removed. Supports: dependent proof-proposition alignment
 is causal. Weakens: proof-body construction alone explains the cost.
-Unresolved: whether a site-only alignment with every later dependent
-field unchanged would suffice. Classification: unfavorable
+Unresolved: whether aligning the site and category instance alone,
+with every later dependent field unchanged, would suffice.
+Classification: unfavorable
 dependent-domain path avoided by the transported argument.
 Confidence: confirmed for the exact-proposition control, plausible
 for site spelling as a sole cause.
@@ -78,7 +89,9 @@ for site spelling as a sole cause.
 The helper's expected proposition incorporates concrete data from the
 first 48 arguments. Its site type is stored as `Site .ordinary X`,
 whereas the supplied proof's proposition stores `X.ProEt`. The mode
-match provides a route to equality, but the complete proposition also
-contains nested functor and module data. The exact-proposition control
-avoids the costly check; no experiment here attributes all 89 seconds
-to the mode match alone.
+match provides a route to equality, but an independent
+mode-specific category-instance representation is the next
+stored difference. The complete proposition also contains
+nested functor and module data. The exact-proposition control
+avoids the costly check; no experiment here attributes all
+89 seconds to the mode match alone.
