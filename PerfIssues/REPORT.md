@@ -1,6 +1,6 @@
 # Weil performance issues on Lean 4.35.0
 
-This dataset classifies measured declaration costs on the master build tree at revision `1ef1fddac73e` using Lean 4.35.0 and its built Mathlib. The report branch began at `05245385867`; no library source was changed. Runs used `LEAN_NUM_THREADS=1`, `nice -n 10`, `-DElab.async=false`, per-process `timeout` (900-3600 s), and `/usr/bin/time -v`. At most six of our Lean runs overlapped. The host reported 80 logical cores and 308 GiB RAM; the measured jobs were near 100% CPU except for the named high-RSS Kernel checks. Wall, user CPU, system CPU, and peak RSS are retained in each README. Kernel skip and `sorry` are diagnostic controls only, never proof results.
+This dataset classifies measured declaration costs on the master build tree at revision `1ef1fddac73e` using Lean 4.35.0 and its built Mathlib. The report branch began at `05245385867`; no library source was changed. Runs used `LEAN_NUM_THREADS=1`, `nice -n 10`, `-DElab.async=false`, per-process `timeout` (420-3600 s), and `/usr/bin/time -v`. At most six of our Lean runs overlapped. The host reported 80 logical cores and 308 GiB RAM; the measured jobs were near 100% CPU except for the named high-RSS Kernel checks. Case READMEs report wall time, user CPU, and peak RSS; the shared control table reports user CPU. Kernel skip and `sorry` are diagnostic controls only, never proof results.
 
 The handover's module times came from instruction counts at revision `6f9ee9b2fd1`, not from direct compilation. This table uses direct user CPU seconds at the build-tree revision. A failed whole-module compile is not presented as a successful performance measurement.
 
@@ -107,7 +107,21 @@ The three earlier failed candidates were copied under new filenames. Lean module
 
 ### Shared completed-scalar counit trace
 
-On the valid `scalarCounit_natural` prefix, `trace.profiler true` with threshold 2000 ms retains a 285.339 s `Meta.isDefEq` call inside `exact`. Its sides are the derived scalar functor's naturality equation and a casted version of the same equation using a chosen counit component. A 187.936 s child enters `MorphismProperty.instCategoryLocalization._aux_5`, then `Classical.choose` and `LF.IsLeftDerivedFunctor`; one 89.070 s leaf compares `ε.1 ((HomotopyCategory.quotient ...).obj P)` with the same pretty-printed shape. A second branch of 97.401 s reaches an 88.206 s leaf of the same shape. The apparent identical sides conceal distinct instance/witness paths, so their printed form is an abbreviated pair, not proof of syntactic identity. Diagnostics count 25,076 `sheafCompose`, 20,624 `Classical.choose`, and 249,887 reducible `Functor.obj` unfolds in this call.
+On the valid `scalarCounit_natural` prefix, `trace.profiler true` with threshold 2000 ms retains a 285.339 s `Meta.isDefEq` call inside `exact`. Its sides are the derived scalar functor's naturality equation and a casted version of the same equation using a chosen counit component. A 187.936 s child enters `MorphismProperty.instCategoryLocalization._aux_5`, then `Classical.choose` and `LF.IsLeftDerivedFunctor`; one 89.070 s leaf compares `ε.1 ((HomotopyCategory.quotient ...).obj P)` with the same pretty-printed shape. A second branch of 97.401 s reaches an 88.206 s leaf of the same shape. The apparent identical sides omit hidden arguments, so their printed form does not identify the exact structural difference or prove syntactic identity. Diagnostics count 25,076 `sheafCompose`, 20,624 `Classical.choose`, and 249,887 reducible `Functor.obj` unfolds in this call.
+
+The 187.936-second child has these trimmed sides under the same derived-category composition operation:
+
+```text
+(completedDerivedScalarExtension ...).map (DerivedCategory.Q.map g) ≫
+  choose.app ((HomotopyCategory.quotient (integralTowerModules ...)).obj B)
+=?=
+(completedDerivedScalarExtension ...).map (DerivedCategory.Q.map g) ≫
+  cast ... (choose.app ((HomotopyCategory.quotient (SheafOfModules ...)).obj B))
+```
+
+A separate goal-pair probe elaborates the theorem application without an expected type and prints the first structural differences before conversion: the inferred equality carrier contains `HomotopyCategory.{u+1,u+2,0}` where the goal has `CochainComplex.{u+1,u+2,0} (integralTowerModules ...)`, and the right morphism first differs at `Functor.obj.{u+1,u+2,u+2,u+2}` versus `Functor.obj.{u+2,u+2,u+2,u+2}`. These are concrete positional mismatches in the problem given to `Meta.isDefEq`; neither is individually timed as the 89 s leaf. The probe's concrete theorem is diagnostic `sorry`.
+
+An 80-second-threshold trace with `pp.explicit` finishes in 599.72 user CPU seconds and retains 31 slow `Meta.isDefEq` nodes. Its two deepest `ε.1` calls take 90.455 and 88.496 seconds. Both sides show `ComplexShape.up`; the right side supplies `completedOrdinaryScalarExtension._proof_8` as a proof argument while the left side is printed as `⋯`. Raising the printer depth and step limit still omits the left proof. Enabling `pp.proofs true` expands the left side into a very large proof term, but the printer still truncates it; that run succeeds in 639.91 user CPU seconds. The output does not name the left proof or time that proof argument alone. The extra wall time is dominated by explicit printing.
 
 | Valid-prefix control | User CPU s | Result |
 |---|---:|---|
@@ -120,8 +134,11 @@ On the valid `scalarCounit_natural` prefix, `trace.profiler true` with threshold
 | Generic abstract lemma at local variables | 2.31 | lemma succeeds; concrete theorem has diagnostic `sorry` |
 | `diagnostics true`, threshold 1000 ms | 297.42 | success |
 | Profiler-filtered Meta trace | 303.46 | success; 285.339 s top `isDefEq` node |
+| Separate `Meta.synthInstance` trace | 317.77 | success; slowest individual node 8.379 ms |
+| Goal-pair explicit structural print | 7.95 | diagnostic `sorry`; first positional differences only |
+| Explicit profiler, 80 s threshold | 599.72 | success; 90.455/88.496 s chosen-counit leaves |
 
-The [control sources](Current/ScalarModelRoosZeroLiftFactorizationFromCoordinates/probes/) keep the same prefix. The named `have` is opaque and produces `witness.app`, which does not match the goal's chosen witness; its early error is not a speedup. Removing `with_unfolding_all` and toggling the backward transparency option do not materially change the cost. The abstract lemma shows that matching generic terms is cheap; the concrete chosen data causes the expensive conversion. Explicitly enabling `trace.Meta.isDefEq` prints tiny nodes regardless of `trace.profiler.threshold` in Lean 4.35.0, so the bounded result uses the profiler alone.
+The [control sources](Current/ScalarModelRoosZeroLiftFactorizationFromCoordinates/probes/) keep the same prefix. The named `have` is opaque and produces `witness.app`, which does not match the goal's chosen witness; its early error is not a speedup. Removing `with_unfolding_all` and toggling the backward transparency option do not materially change the cost. The abstract lemma shows that matching generic terms is cheap; the concrete chosen data causes the expensive conversion. Explicitly enabling `trace.Meta.isDefEq` prints tiny nodes regardless of `trace.profiler.threshold` in Lean 4.35.0, so the bounded result uses the profiler alone. A separate successful `trace.Meta.synthInstance` run prints 1,171 nodes, with a maximum individual duration of 8.379 ms. An explicit `trace.Meta.whnf` run exceeds its 420-second bound after over 18,000 tiny nodes; that partial run does not exclude aggregate WHNF work. No `Meta.unfold` trace class is registered in Lean 4.35.0; the unfold counts above come from diagnostics.
 
 Three same-name confirmation runs reproduce the nested shape: `ScalarRoosNaturalityData` has a 285.971 s `Meta.isDefEq` node and 88.827/88.709 s `ε.1` leaves; `CompletedLineOrdinaryEvaluation` has 287.140 and 89.256/89.445 s; `CompletedScalarOrdinaryCoherence` has 286.615 and 89.374/89.107 s. All are elaborator definitional-equality/delta reduction at chosen counit data, with no Kernel A-F assignment. These traced runs have printing overhead and do not replace the untraced baselines.
 

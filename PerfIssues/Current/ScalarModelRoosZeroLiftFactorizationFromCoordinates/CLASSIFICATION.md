@@ -34,8 +34,9 @@ and the same equality with chosen counit components cast between an
 `MorphismProperty.instCategoryLocalization._aux_5`. Its 97.621 s branch reaches
 `⋯.choose.1 =?= ⋯.choose.1`; within it, an 89.070 s comparison has two sides
 printed identically as `ε.1 ((HomotopyCategory.quotient ...).obj P)`. This
-pretty-printing hides distinct chosen-witness/instance paths; the trace does
-not justify claiming syntactic identity. A second branch takes 97.401 s and
+pretty-printing omits arguments, so the trace does not identify the exact
+structural difference or justify claiming syntactic identity. A second branch
+takes 97.401 s and
 reaches the same shape at 88.206 s. The repeated deepest call reduces a
 `Classical.choose` witness predicate through `LF.IsLeftDerivedFunctor` and
 `IsIso (ε.app ...)`. This is an elaborator **definitional-equality / delta
@@ -44,6 +45,32 @@ reduction** workload, with the cost centered on chosen counit data.
 The three other modules independently show a 286-287 s `Meta.isDefEq` call,
 187-188 s and 98-99 s branches, and 88-89 s `ε.1` leaves. The shared inner
 shape is therefore confirmed across four modules. No Kernel A-F label applies.
+
+The diagnostic [goal-pair probe](probes/CounitPair.lean) elaborates the same
+application without an expected type, before conversion, and prints first
+structural differences with explicit universes. The inferred equality's
+morphism type first uses `HomotopyCategory.{u+1,u+2,0}` where the goal uses
+`CochainComplex.{u+1,u+2,0} (integralTowerModules ...)`; in the right morphism,
+the first difference is `Functor.obj` at universe parameters
+`{u+1,u+2,u+2,u+2}` versus `{u+2,u+2,u+2,u+2}`. This is direct evidence of
+representation mismatches entering the conversion, not a timing assignment
+to either first positional difference. The probe closes its concrete theorem
+with diagnostic `sorry` and is not a proof result.
+
+An [explicit high-threshold trace](probes/CounitProfilerExplicitHigh.lean)
+finishes with 31 `Meta.isDefEq` nodes above 80 seconds. The two deepest
+`ε.1` comparisons take 90.455 and 88.496 seconds. Each side contains an
+application of `ComplexShape.up`; at one proof argument the right side names
+`completedOrdinaryScalarExtension._proof_8` while the left side is abbreviated
+as `⋯` by the printer. This exposes a proof argument on the right, but does
+not establish whether the left argument differs or individually time that
+argument. Explicit pretty-printing raises total CPU to 599.72 seconds.
+
+With `pp.proofs true`, the left side expands into a long proof term and is
+still truncated by the printer; that run succeeds in 639.91 user CPU seconds.
+The right side remains the named `_proof_8`. Thus the exact left proof is
+unresolved, and neither printer variation isolates an individual proof
+argument as the cause of the 90-second comparison.
 
 ## 4. Confidence and caveats
 
