@@ -1,0 +1,112 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.TraceFormula.SupportedRestrictionRational
+
+/-!
+
+# The supported restriction with `𝒪_E`-coefficients and its rationalization
+
+For a finite subextension `E ⊆ ℚ̄_ℓ` with ring of integers `𝒪_E` and a fixed locus `F` of a
+correspondence, the supported restriction can be formed with `𝒪_E`-coefficients from the
+compact-support base change of the fixed square (`FixedLocus.supportedRestrictionIntegral`).
+Under the extension of scalars `T : 𝒪_E ⟶ E` it becomes the `E`-supported restriction of `T P`
+(`FixedLocus.map_supportedRestrictionIntegral_comp`), given the compatibility of base change with
+the coefficient comparisons (blueprint `sk-thm-sf-compatibility`, (7):
+`boundedConstructibleLowerShriekBaseChange_extendScalars`). With the `f^!` clause of blueprint
+`sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekExtendScalars`) this transports the
+vanishing of a stalk of the supported restriction from `𝒪_E` to `E`
+(`FixedLocus.upperStar_map_supportedRestrictionE_eq_zero_of_supportedRestrictionIntegral`).
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory
+
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme PadicAlgCl
+
+attribute [local instance] boundedConstructibleBraiding
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {c : Correspondence ℓ K}
+
+namespace Correspondence.FixedLocus
+
+variable (F : c.FixedLocus) (E : FiniteIntermediateField ℓ)
+
+/-- Compact-support base change `Rc_! ⋙ LΔ^* ≅ Lι^* ⋙ Rd_!` in the fixed square, with
+`𝒪_E`-coefficients. -/
+noncomputable def lowerShriekBaseChangeIsoIntegral :
+    PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 c.support ⋙
+        boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ (diag X) ≅
+      boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ F.ι ⋙
+        PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 F.d :=
+  haveI := isIso_boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 F.isPullback
+  asIso (boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 F.isPullback)
+
+/-- The supported restriction `Lι^* Rc^! P ⟶ Rd^! LΔ^* P` with `𝒪_E`-coefficients: the mate
+`Rc^! ⋙ Lι^* ⟶ LΔ^* ⋙ Rd^!` of the inverse of compact-support base change in the fixed square. -/
+noncomputable def supportedRestrictionIntegral
+    (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
+    (boundedConstructibleUpperStar _ ℓ F.ι).obj
+        ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 c.support).obj P) ⟶
+      (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 F.d).obj
+        ((boundedConstructibleUpperStar _ ℓ (diag X)).obj P) :=
+  (CategoryTheory.mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1
+      c.support)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
+    (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoIntegral E).inv)).natTrans.app P
+
+set_option maxRecDepth 8000 in
+-- matching the coefficient compatibility unfolds the concrete coefficient rings
+/-- **The supported restriction under `𝒪_E ⟶ E`**: the extension of scalars `T` of the
+`𝒪_E`-supported restriction of `P`, followed by the `f^!`-exchange for `d` and the pullback
+comparison for `Δ`, is the pullback comparison for `ι`, then `Lι^*` of the `f^!`-exchange for `c`,
+then the `E`-supported restriction of `T P`. -/
+theorem map_supportedRestrictionIntegral_comp
+    (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
+    (boundedConstructibleExtendScalars F.F.left ℓ E).map (F.supportedRestrictionIntegral E P) ≫
+        (boundedConstructibleUpperShriekExtendScalars ℓ E F.d).app _ ≫
+        (ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E F.d).map
+          ((boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X)).hom.app P) =
+      (boundedConstructibleUpperStarExtendScalarsIso ℓ E F.ι).hom.app _ ≫
+        (boundedConstructibleUpperStar _ ℓ F.ι).map
+          ((boundedConstructibleUpperShriekExtendScalars ℓ E c.support).app P) ≫
+        F.supportedRestrictionE E ((boundedConstructibleExtendScalars (X ⨯ X).left ℓ E).obj P) := by
+  have h := Adjunction.map_mateEquiv_app_comp
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 c.support)
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
+    (boundedConstructibleUpperStar _ ℓ F.ι) (boundedConstructibleUpperStar _ ℓ (diag X))
+    (F.lowerShriekBaseChangeIsoIntegral E)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E F.d)
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ F.ι)
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (diag X))
+    (F.lowerShriekBaseChangeIsoE E)
+    (boundedConstructibleExtendScalars (X ⨯ X).left ℓ E)
+    (boundedConstructibleExtendScalars c.C.left ℓ E)
+    (boundedConstructibleExtendScalars F.F.left ℓ E)
+    (boundedConstructibleExtendScalars X.left ℓ E)
+    (boundedConstructibleLowerShriekExtendScalarsIso ℓ E c.support)
+    (boundedConstructibleLowerShriekExtendScalarsIso ℓ E F.d)
+    (boundedConstructibleUpperStarExtendScalarsIso ℓ E F.ι)
+    (boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X))
+    (boundedConstructibleLowerShriekBaseChange_extendScalars ℓ E F.isPullback) P
+  exact h
+
+end Correspondence.FixedLocus
+
+end AlgebraicGeometry.ProEtale.CondensedRing
