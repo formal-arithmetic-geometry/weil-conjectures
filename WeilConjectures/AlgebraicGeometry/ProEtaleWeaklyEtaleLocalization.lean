@@ -242,11 +242,11 @@ Proof plan:
 1. Compose weakly etale maps using 094T. Conversely cancel the weakly etale structure
    map using 0951 (`WeaklyEtale.of_comp`). The two assignments leave schemes and arrows
    unchanged, giving mutually inverse concrete categories and an equivalence of skeleta
-   (`def-weil-size-convention`, `lem-weil-pbc-weakly-etale-composition-base-change`,
-   `lem-trf-weakly-etale-between-objects`).
+   (`prose-01-10`, `lem-weil-pbc-weakly-etale-composition-base-change`,
+   `lemma-stability--5`).
 2. The fpqc finite-affine-cover condition depends only on the arrows to the covered scheme,
    not on the base. Thus the coverings agree and precomposition identifies sheaves
-   (`def-weil-pbc-proetale-site`, `def-pur-localized-ringed-site`).
+   (`definition-small-pro-etale-site--1`, `def-pur-localized-ringed-site`).
 3. Restrict the constant ring presheaf. Ring-valued sheafification commutes with localization
    (`Functor.pushforwardContinuousSheafificationCompatibility`, Tag 00XZ). Its unit identity
    identifies constant sections, and the sheafification universal property gives uniqueness
@@ -255,7 +255,7 @@ Proof plan:
 4. Restrict modules using `SheafOfModules.overFunctor`, then pull their actions back along
    the ring comparison. Naturality gives semilinearity; the inverse ring map reverses this
    operation. Both operations leave section groups and morphism components unchanged
-   (`def-pur-localized-ringed-site`, `def-weil-sheaf-of-modules-category`).
+   (`def-pur-localized-ringed-site`, `situation-conventions`).
 5. For an open immersion use its monomorphism property (01L7) for uniqueness. A factorization
    has image in the open; conversely `IsOpenImmersion.lift` (01HI) supplies the factorization
    whenever this image containment holds (`def-weil-open-immersion`,

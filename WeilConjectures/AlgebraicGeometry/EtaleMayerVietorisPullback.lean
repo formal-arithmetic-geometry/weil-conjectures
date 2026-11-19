@@ -46,7 +46,7 @@ Proof (the five steps of the node):
    (prop-weil-pbc-inverse-image-exact, lem-weil-pbc-kinjective-hom-derived).
    The possible augmentation homotopy is zero, since J vanishes in degree -1.
    Pullback is H^q of β after the adjunction unit on sections
-   (lem-weil-pbc-cohomology-pullback-functorial,
+   (proposition-cohomology-p-1-over-henselian--1,
    prop-weil-pbc-cohomology-resolution-independent, def-weil-pbc-cohomology-pullback).
 2. For W = X, U, V, U ∩ V, define φ_W(a) = β(W′)(η_g(a)).
    Base change identifies W′ with its inverse-image open
@@ -58,7 +58,7 @@ Proof (the five steps of the node):
    (lem-weil-pbc-complex-ses-long-exact-naturality).
 4. Identify H^q(φ_W) with restricted pullback followed by H^q of the composition
    comparison. Restricted resolutions remain injective and their sections identify
-   with sections on W (lem-weil-pbc-cohomology-pullback-functorial,
+   with sections on W (proposition-cohomology-p-1-over-henselian--1,
    lem-weil-pbc-etale-inverse-image-restriction). The comparison is
    lem-weil-pbc-inverse-image-composition; its compatibility with the unit is
    lem-weil-pbc-open-restriction-pullback-unit. The identity of the restricted J
@@ -66,7 +66,7 @@ Proof (the five steps of the node):
    (prop-weil-pbc-cohomology-resolution-independent).
 5. Substitute these identifications into step 3. Independence of resolutions and
    comparison maps follows from lem-weil-pbc-etale-mayer-vietoris and
-   lem-weil-pbc-cohomology-pullback-functorial. -/
+   proposition-cohomology-p-1-over-henselian--1. -/
 theorem etale_mayerVietoris_pullback
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)

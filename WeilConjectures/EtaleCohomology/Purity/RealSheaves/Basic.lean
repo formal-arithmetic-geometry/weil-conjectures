@@ -43,7 +43,7 @@ Coefficients are `ℚ̄_ℓ = PadicAlgCl l`, and the archimedean comparison is a
 
 The curve itself enters through the instance arguments `[Finite K]` and `[IsCurve p]` of
 `AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them.
-Geometric connectedness of `C₀`, a standing hypothesis of `def-wf-weil-group`, is the field
+Geometric connectedness of `C₀`, a standing hypothesis of `situation-weil`, is the field
 `AlgebraicGeometry.WeilGroup.geometricallyConnected`, since the presentation through
 `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` requires it; smoothness is an extra hypothesis
 where it is needed. Only closed
@@ -87,7 +87,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
+/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
 
 The Weil group of a curve `p : C₀ ⟶ Spec 𝔽_q`. It is the preimage of the integer powers of
 the geometric Frobenius under `π₁(C₀, s) → Gal(k / 𝔽_q)`, and comes with the exact degree
@@ -133,7 +133,7 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   /-- The chosen lift has degree one. -/
   deg_frobeniusLift : deg frobeniusLift = Multiplicative.ofAdd 1
   /-- A choice of local Frobenius element at a closed point of `C₀`; it is well defined up to
-  conjugacy, so the characteristic polynomials of `sk-d-real-weights` do not depend on it. -/
+  conjugacy, so the characteristic polynomials of `definition-weights` do not depend on it. -/
   frobenius : C.finitePoints → carrier
   /-- The local Frobenius at `x` has degree `e_x = [k(x) : 𝔽_q]`. -/
   deg_frobenius (x : C.finitePoints) :
@@ -154,7 +154,7 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   [isFundamentalGroup :
     PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber basePoint) fundamentalGroup]
   /-- The curve `C₀` is geometrically connected over `𝔽_q`, the standing hypothesis of the Weil
-  group `def-wf-weil-group`: without it the degree map of
+  group `situation-weil`: without it the degree map of
   `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` is not surjective. -/
   [geometricallyConnected : GeometricallyConnected p]
   /-- The identification of `W(C₀)` with the Weil group of `π₁(C₀, s)`: the pairs `(g, n)` such
@@ -198,7 +198,7 @@ theorem toFundamentalGroup_apply (g : W.carrier) :
     W.toFundamentalGroup g = (W.weilGroupEquiv g).1.1 :=
   rfl
 
-/-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
+/-- Blueprint `lemma-boundary-stalk--2`: Boundary stalks and restriction to an open.
 
 The restriction of Weil groups along a nonempty open immersion `j : U₀ ↪ C₀` of curves over
 `𝔽_q`: the homomorphism `W(U₀) → W(C₀)` induced by the restriction functor
@@ -211,7 +211,7 @@ map.
 
 The remaining fields are theorems about the map so defined: it is continuous and preserves
 degrees, it is surjective because `π₁(U) → π₁(C)` is for a nonempty open of a connected
-normal curve (`sk-i-real-boundary`), and it carries the local Frobenius at a closed point of
+normal curve (`lemma-boundary-stalk--2`), and it carries the local Frobenius at a closed point of
 `U₀` into the Frobenius conjugacy class at its image. -/
 structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] (WU : WeilGroup pU) (WC : WeilGroup p) where
@@ -243,12 +243,13 @@ structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
+/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
 
 A `ℚ̄_ℓ`-representation of the Weil group is *lisse* if the geometric subgroup `π₁(C)` acts
 continuously, i.e. the matrix coefficients of the restricted representation are continuous in
-every basis. By `sk-p-real-integral` this is equivalent, for a finite-dimensional `V`, to the
-existence of a model over a finite extension `E/ℚ_ℓ` carrying a `π₁(C)`-stable `𝒪_E`-lattice.
+every basis. By `proposition-lattices-representations-normal-scheme` this is equivalent, for a
+finite-dimensional `V`, to the existence of a model over a finite extension `E/ℚ_ℓ` carrying a
+`π₁(C)`-stable `𝒪_E`-lattice.
 
 Finite-dimensionality of `V` is not part of this predicate: it is an independent condition,
 imposed where it is needed (see `AlgebraicGeometry.WeilGroup.isLisseRep`). -/
@@ -289,7 +290,7 @@ theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (Padic
   continuous_toMatrix b i j := by
     simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
 
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
+/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
 
 Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
 continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
@@ -312,8 +313,8 @@ theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlg
   exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
     continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
 
-/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
-Blueprint `def-wf-constant-weil-twist`: Constant Weil twist.
+/-- Blueprint `definition-weil-representation`: Operations, constituents and coinvariants.
+Blueprint `proposition-twisting-weight-zero-adding-dual--2`: Constant Weil twist.
 
 The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
 acts by `b ^ deg g`; it is trivial on `π₁(C) = ker deg`. Tensoring with it,
@@ -330,7 +331,7 @@ noncomputable def constLine (b : (PadicAlgCl l)ˣ) :
     ext
     simp [smul_smul, mul_comm]
 
-/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
+/-- Blueprint `definition-weil-representation`: Operations, constituents and coinvariants.
 
 The Tate line `ℚ̄_ℓ(n) = B_{q ^ (-n)}`, on which the geometric Frobenius acts by `q ^ (-n)`. -/
 noncomputable def tateLine (n : ℤ) :

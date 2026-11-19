@@ -32,7 +32,8 @@ Source: Stacks Project, More on Algebra, Lemma Tag 0AH2
 (blueprint: lem-weil-pbc-g-ring-completion-regular).
 
 Proof:
-1. The G-ring hypothesis gives Noetherianity (`def-weil-pbc-g-ring`). The completion is
+1. The G-ring hypothesis gives Noetherianity (`theorem-finite-etale-covers-proper-henselian--2`).
+The completion is
    Noetherian (`lem-weil-pbc-adic-completion-noetherian`), and its canonical map is flat
    (`lem-weil-pbc-noetherian-completion-flat`). The ideal is finitely generated.
 2. By `lem-weil-pbc-regular-local-maximal`, it suffices to check regularity after localizing
@@ -54,7 +55,7 @@ Proof:
    (`lem-weil-pbc-flat-local-completion-iso`, `def-weil-pbc-adic-completion`).
 7. Compose B's completion map with e⁻¹ to obtain g : B → completion(A_m). The commuting
    square in step 6 proves g ∘ φ is exactly the completion map of A_m. It is regular
-   by `def-weil-pbc-g-ring`.
+   by `theorem-finite-etale-covers-proper-henselian--2`.
 8. The map g is flat: B's completion map is flat and e⁻¹ is bijective. It is also local,
    as both factors are local homomorphisms. Therefore it is faithfully flat, and its
    spectrum map is surjective (`lem-weil-pbc-local-completion-faithfully-flat`).

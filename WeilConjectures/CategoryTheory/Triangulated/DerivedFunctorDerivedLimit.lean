@@ -35,7 +35,7 @@ complexes. Their termwise product is K-injective and computes the product in the
 derived category (blueprint: lem-pc-ringed-space-product-kinjective). Product
 preservation by `F` identifies its image with the product of the images; the
 derived-product construction gives the target product
-(blueprint: lem-weil-derived-limit-existence). The right derived functor is
+(blueprint: lemma-reduction-derived-nakayama). The right derived functor is
 triangulated (blueprint: lem-pc-right-derived-functor-triangulated). Its image
 of the source Roos triangle is therefore distinguished, and the product
 comparison identifies its middle map with the target transition endomorphism

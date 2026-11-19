@@ -18,7 +18,7 @@ sum of ramification indices times inertia degrees over the maximal ideal of `R` 
 term `e · 1`.
 
 This is used for the degree of the punctured diagonal in blueprint
-`det-tf-restriction-zero-covers` (ii).
+`lemma-tangent-cones-on-cover` (ii).
 -/
 
 @[expose] public section

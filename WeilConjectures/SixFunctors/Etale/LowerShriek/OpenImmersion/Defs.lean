@@ -289,7 +289,8 @@ instance Etale.openImmersionRestriction_linear (Λ : Type*) [Semiring Λ] [Linea
 
 namespace Etale
 
-/-- Blueprint `def-weil-pbc-extension-by-zero`: Extension by zero for open immersions
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--7`: Extension by zero for
+open immersions
 
 The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
 étale sites: the left adjoint of the restriction `j^*`
@@ -337,9 +338,8 @@ are left exact: the first by
 `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overMap`, the second by
 the left exactness of sheafification, which is the content of `HasSheafify` beyond the
 `HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
-coefficient category `A`, the second by the sorried instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`.
-(blueprint: `lem-weil-pbc-extension-by-zero-exact`) -/
+coefficient category `A`, the second by the instance of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =

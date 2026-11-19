@@ -47,7 +47,7 @@ closed fields, `C` a smooth connected curve over `k` and `n` prime to `char k`. 
 (`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper`);
 otherwise `C` is affine (`AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top`,
 `AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine`).
-(blueprint: `thm-sc-constant-invariance`) -/
+(blueprint: `proposition-cohomology-smooth-affine-curve`) -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
@@ -117,7 +117,7 @@ If `C` has dimension one, this is
 `AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap`; otherwise `C` and
 `C_{k'}` are the points `Spec k` and `Spec k'`, with cohomology `ℤ/n` in degree zero only
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`).
-(blueprint: `sbc-thm-algebraically-closed-invariance`) -/
+(blueprint: `theorem-cohomology-curves--6`) -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace [IsAlgClosed k]
     [IsCurve f] [Smooth f] [ConnectedSpace C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) :
@@ -223,7 +223,7 @@ finitely many connected components `Cᵢ` of `C` are clopen, and so are their pr
 `Hᵠ((Cᵢ)_{k'}, ℤ/n)`
 (`AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace`),
 so both sides are finite of the same order.
-(blueprint: `sbc-thm-algebraically-closed-invariance`) -/
+(blueprint: `theorem-cohomology-curves--6`) -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f] [Smooth f]
     [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

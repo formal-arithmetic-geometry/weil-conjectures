@@ -38,10 +38,10 @@ noncomputable def mapTensorObjIsoUnit {X Y : C} (e : F.obj X ≅ 𝟙_ D) (e' : 
 /-- If a monoidal functor sends `X` and `Y` to the unit and commutes with the internal homs out
 of `X`, it sends the internal hom `[X, Y]` to the unit: `F [X, Y] ≅ [F X, F Y] ≅ [𝟙, 𝟙] ≅ 𝟙`. -/
 noncomputable def mapIhomObjIsoUnit [MonoidalClosed C] [MonoidalClosed D] {X Y : C}
-    [IsIso (LaxMonoidal.ihomComparison F X).natTrans] (e : F.obj X ≅ 𝟙_ D)
+    [IsIso (LaxMonoidal.ihomComparison F X)] (e : F.obj X ≅ 𝟙_ D)
     (e' : F.obj Y ≅ 𝟙_ D) :
     F.obj ((ihom X).obj Y) ≅ 𝟙_ D :=
-  asIso ((LaxMonoidal.ihomComparison F X).natTrans.app Y) ≪≫ (ihom (F.obj X)).mapIso e' ≪≫
+  asIso ((LaxMonoidal.ihomComparison F X).app Y) ≪≫ (ihom (F.obj X)).mapIso e' ≪≫
     ((MonoidalClosed.internalHom.mapIso e.op).app (𝟙_ D)).symm ≪≫
     (MonoidalClosed.unitNatIso.app (𝟙_ D)).symm
 

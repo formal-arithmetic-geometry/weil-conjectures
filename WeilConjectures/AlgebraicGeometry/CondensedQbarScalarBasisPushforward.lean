@@ -73,13 +73,14 @@ lemma qbar_scalarEndo_hom (b : 𝟙_ C ⟶ S) (M : Mod C S) :
   rw [← comp_whiskerRight_assoc, one_comp_regularLift]
 
 @[no_expose] noncomputable def qbar_scalarNatEndo (b : 𝟙_ C ⟶ S) :
-    𝟭 (Mod C S) ⟶ 𝟭 (Mod C S) where
-  app M := qbar_scalarEndo b M
-  naturality M N f := by
-    apply hom_ext
-    simp only [CategoryTheory.Functor.id_map, comp_hom', qbar_scalarEndo_hom]
-    rw [leftUnitor_inv_naturality_assoc f.hom, whisker_exchange_assoc, ← act_hom]
-    simp only [Category.assoc]
+    CatCenter (Mod C S) where
+  asHom :=
+    { app M := qbar_scalarEndo b M
+      naturality M N f := by
+        apply hom_ext
+        simp only [CategoryTheory.Functor.id_map, comp_hom', qbar_scalarEndo_hom]
+        rw [leftUnitor_inv_naturality_assoc f.hom, whisker_exchange_assoc, ← act_hom]
+        simp only [Category.assoc] }
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
 lemma qbar_scalarNatEndo_app (b : 𝟙_ C ⟶ S) (M : Mod C S) :
@@ -91,12 +92,13 @@ namespace CategoryTheory
 variable {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
 @[no_expose] noncomputable def qbar_complexCenter (τ : CatCenter A) :
     CatCenter (CochainComplex A ℤ) where
-  app K :=
-    { f i := τ.app (K.X i)
-      comm' i j _ := by simpa using (τ.naturality (K.d i j)).symm }
-  naturality K L f := by
-    ext i
-    exact τ.naturality (f.f i)
+  asHom :=
+    { app K :=
+        { f i := τ.app (K.X i)
+          comm' i j _ := by simpa using (τ.naturality (K.d i j)).symm }
+      naturality K L f := by
+        ext i
+        exact τ.naturality (f.f i) }
 
 omit [HasDerivedCategory A] in
 lemma qbar_complexCenter_app_f (τ : CatCenter A) (K : CochainComplex A ℤ) (i : ℤ) :
@@ -104,15 +106,16 @@ lemma qbar_complexCenter_app_f (τ : CatCenter A) (K : CochainComplex A ℤ) (i 
 
 @[no_expose] noncomputable def qbar_homotopyCenter (τ : CatCenter A) :
     CatCenter (HomotopyCategory A (.up ℤ)) where
-  app K := (HomotopyCategory.quotient A (.up ℤ)).map ((qbar_complexCenter τ).app K.as)
-  naturality K L f := by
-    let f' : K.as ⟶ L.as := (HomotopyCategory.quotient A (.up ℤ)).preimage f
-    have hf : (HomotopyCategory.quotient A (.up ℤ)).map f' = f :=
-      (HomotopyCategory.quotient A (.up ℤ)).map_preimage f
-    simp only [CategoryTheory.Functor.id_map]
-    rw [← hf, ← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp]
-    exact congrArg (HomotopyCategory.quotient A (.up ℤ)).map
-      ((qbar_complexCenter τ).naturality f')
+  asHom :=
+    { app K := (HomotopyCategory.quotient A (.up ℤ)).map ((qbar_complexCenter τ).app K.as)
+      naturality K L f := by
+        let f' : K.as ⟶ L.as := (HomotopyCategory.quotient A (.up ℤ)).preimage f
+        have hf : (HomotopyCategory.quotient A (.up ℤ)).map f' = f :=
+          (HomotopyCategory.quotient A (.up ℤ)).map_preimage f
+        simp only [CategoryTheory.Functor.id_map]
+        rw [← hf, ← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp]
+        exact congrArg (HomotopyCategory.quotient A (.up ℤ)).map
+          ((qbar_complexCenter τ).naturality f') }
 
 omit [HasDerivedCategory A] in
 lemma qbar_homotopyCenter_app (τ : CatCenter A) (K : HomotopyCategory A (.up ℤ)) :
@@ -219,8 +222,9 @@ private lemma qbar_map_derivedCenter
     (hF : ∀ X, F.map (τA.app X) = τB.app (F.obj X)) (M : DerivedCategory A) :
     F.mapDerivedCategory.map ((qbar_derivedCenter τA).app M) =
       (qbar_derivedCenter τB).app (F.mapDerivedCategory.obj M) := by
-  have h : CategoryTheory.Functor.whiskerRight (qbar_derivedCenter τA) F.mapDerivedCategory =
-      CategoryTheory.Functor.whiskerLeft F.mapDerivedCategory (qbar_derivedCenter τB) := by
+  have h : CategoryTheory.Functor.whiskerRight (qbar_derivedCenter τA).asHom
+      F.mapDerivedCategory =
+      CategoryTheory.Functor.whiskerLeft F.mapDerivedCategory (qbar_derivedCenter τB).asHom := by
     apply Localization.natTrans_ext DerivedCategory.Qh (HomotopyCategory.quasiIso A (.up ℤ))
     intro K
     dsimp only [CategoryTheory.Functor.whiskerRight_app, CategoryTheory.Functor.whiskerLeft_app]

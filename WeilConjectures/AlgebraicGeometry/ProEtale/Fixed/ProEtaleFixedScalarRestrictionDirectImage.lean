@@ -17,9 +17,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
 /-!
 # Direct image and finite coefficient restriction in the fixed scalar presentation
 
-Source: Stacks, Tags 0D6E and 07A6; blueprint
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
 The comparison is the actual adjunction mate of the canonical inverse-image comparison.
+
+## References
+
+* Stacks Tag 03D6
+* Stacks Tag 07A6
+* Stacks Tag 0D6E
 -/
 
 @[expose] public section
@@ -38,10 +42,10 @@ private theorem mate_left_iso
     (adj : L ⊣ R) (adj' : L' ⊣ R') (e : L ≅ E) (e' : L' ≅ E')
     (s : G ⋙ E' ⟶ E ⋙ H) :
     (mateEquiv (adj.ofNatIsoLeft e) (adj'.ofNatIsoLeft e')
-      (TwoSquare.mk _ _ _ _ s)).natTrans =
+      (TwoSquare.mk _ _ _ _ s)) =
       (mateEquiv adj adj'
         (TwoSquare.mk _ _ _ _
-          (Functor.whiskerLeft G e'.hom ≫ s ≫ Functor.whiskerRight e.inv H))).natTrans := by
+          (Functor.whiskerLeft G e'.hom ≫ s ≫ Functor.whiskerRight e.inv H))) := by
   ext X
   simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -70,14 +74,14 @@ private theorem derived_mate_isIso
     (t : R ⋙ G ⟶ H ⋙ R') [IsIso t]
     (hm : m = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans)
-    (ht : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = t)
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)))
+    (ht : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) = t)
     (hres : ∀ I : CochainComplex B ℤ, I.IsKInjective →
       ∀ J : CochainComplex D ℤ, J.IsKInjective →
       ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
         QuasiIso j → QuasiIso ((R'.mapHomologicalComplex (.up ℤ)).map j)) :
     IsIso m := by
-  have : IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans := by
+  have : IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) := by
     rw [ht]
     infer_instance
   have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
@@ -92,9 +96,9 @@ private theorem derived_mate_isIso
       chainDerivedUnit_isIso_of_resolution R' _ J j
     have : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
     have : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app I) := by
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app I) := by
       change IsIso (((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans)
+        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)))
         (.up ℤ)).app I).hom)
       infer_instance
     have hi := derived_mate_factors adj adj' s I
@@ -130,16 +134,11 @@ private theorem restriction_underived_mate
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)) =
         𝟙 (lowerStar (ModuleCat.{u + 1} B) f ⋙
           Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ) := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
-    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))).natTrans = _
   rw [iterated_mateEquiv_conjugateEquiv]
   rw [conjugateEquiv_upperStarRestrictScalarsIso_hom]
   ext M ⟨U⟩ x
@@ -147,8 +146,7 @@ private theorem restriction_underived_mate
     ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).right_triangle_components
       (M.obj.obj (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj U)))).symm
 
-/-- The sectionwise coefficient square, cached with its two explicit composite functor types.
-Source: Stacks Tag 03D6 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+/-- The sectionwise coefficient square, cached with its two explicit composite functor types. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImageUnderived
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -158,17 +156,13 @@ Source: Stacks Tag 03D6 (blueprint: lem-weil-proetale-direct-image-restriction-o
 
 attribute [local irreducible] upperStar
 
-/-- The canonical inverse-image/restriction square, with its published normalization.
-Source: Stacks Tag 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+/-- The canonical inverse-image/restriction square, with its normalization. -/
 noncomputable abbrev fixedScalarRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   leftDerivedUpperStarRestrictScalarsIso φ f
 
-/-- The inverse-direction direct-image comparison is the mate of the canonical square.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+/-- The inverse-direction direct-image comparison is the mate of the canonical square. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -222,7 +216,7 @@ private theorem simple_derived_mate_factors
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) ≫
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K) ≫
       restrictionDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
   have h := derived_mate_factors adj adj' s K
   rw [chainDerivedUnit_eq, chainDerivedUnit_eq] at h
@@ -271,11 +265,11 @@ private theorem restriction_mate_eq
           (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f))
         (TwoSquare.mk _ _ _ _
           (Functor.mapDerivedCategorySquareIso
-            (upperStarRestrictScalarsIso φ f)).hom)).natTrans := by
+            (upperStarRestrictScalarsIso φ f)).hom)) := by
   change (mateEquiv
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-    (TwoSquare.mk _ _ _ _ (fixedScalarRestrictionPullback φ f).hom)).natTrans = _
+    (TwoSquare.mk _ _ _ _ (fixedScalarRestrictionPullback φ f).hom)) = _
   rw [restriction_derived_adj_eq, restriction_derived_adj_eq]
   refine (mate_left_iso _ _ _ _ (fixedScalarRestrictionPullback φ f).hom).trans ?_
   congr 2
@@ -293,11 +287,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The coefficient mate intertwines the canonical chain-level right-derived units.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: apply the generic derived-mate factorization, replace the derived mate by the
-published comparison, and replace its ordinary mate by the sectionwise identity. -/
+/-- The coefficient mate intertwines the canonical chain-level right-derived units. -/
 theorem fixedScalarRestrictionDirectImageMap_factors
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -670,15 +660,7 @@ attribute [local irreducible] fixedScalarRestrictionDirectImageMap
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of finite coefficients commutes with the unbounded derived direct image.
-The map is fixed by its adjunction-mate definition, rather than an arbitrary isomorphism.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: restriction is exact. The two composites are the direct image of the same
-morphism of ringed topoi. Resolve a K-injective B-complex after restriction by a
-K-injective A-complex. The right-derived comparison is inverse to the image of this
-resolution. The canonical derived adjunction formula identifies that comparison with
-the mate above. In particular this argument does not suppose that restriction itself
-preserves K-injectives. This gives invertibility for every unbounded object. -/
+The map is fixed by its adjunction-mate definition, rather than an arbitrary isomorphism. -/
 theorem fixedScalarRestrictionDirectImageMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -695,8 +677,7 @@ theorem fixedScalarRestrictionDirectImageMap_isIso
   exact fixedRestriction_resolution_quasiIso φ f I J j
 
 /-- The forward-direction canonical comparison, with the K-injective normalization
-inherited from the named mate theorem. Source: Stacks Tag 0D6E
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+inherited from the named mate theorem. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImage
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -707,9 +688,7 @@ inherited from the named mate theorem. Source: Stacks Tag 0D6E
   letI := fixedScalarRestrictionDirectImageMap_isIso φ f
   (asIso (fixedScalarRestrictionDirectImageMap φ f)).symm
 
-/-- The inverse of the forward coefficient comparison is the published derived mate.
-Source: Stacks Tag 0D6E (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: the forward comparison is the symmetric isomorphism associated to this mate. -/
+/-- The inverse of the forward coefficient comparison is the derived mate. -/
 theorem fixedScalarRestrictionDirectImage_inv
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

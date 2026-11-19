@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
 
 /-! # The fixed module/Ext comparison respects h-maps
 
-Source: Stacks Project, Tags 01FB and 03FD.
+## References
+
+* Stacks Project, Tag 01FB (coefficient factorization) and Tag 03FD (comparison)
 -/
 
 @[expose] public section
@@ -23,15 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 set_option autoImplicit false
 
-/-- The resolution comparison respects h-maps in its original Ext universe.
-Source: Stacks Project, Tag 01FB (coefficient factorization) and Tag 03FD (comparison).
-(blueprint: lem-pbc-module-ext-resolution-hmap).
-
-Proof: Apply the coefficient-transport theorem to the fixed resolution equivalences.
-Their coefficient naturality supplies its first hypothesis, and the existing edge-map
-compatibility supplies its second. The transport theorem factors the general module
-h-map through the identity edge coefficient, applies those two squares, and uses the
-abelian coefficient factorization. No universe change enters this statement. -/
+/-- The resolution comparison respects h-maps in its original Ext universe. -/
 theorem moduleCohomologyExtResolutionEquiv_hmap {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : X.Modules) (G : Y.Modules) (φ : F ⟶ (pushforward g).obj G)
     (q : ℕ) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :

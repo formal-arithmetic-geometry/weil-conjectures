@@ -182,7 +182,6 @@ noncomputable def openPieceCoeffOfIsPullback :
       (Profinite.padicAlgClRingObj ℓ) ℓ jV).homEquiv _ _).symm
       (openRestrictionOfIsPullback ℓ sqV sqW hι K u)
 
-set_option maxHeartbeats 400000 in
 -- Matching the unfolded restriction against the triangle identity requires unifying several
 -- presentations of the same objects of `Dᵇc`, which is slow.
 /-- **The open piece coefficient and the counit**: `Rc₁^! ε ∘ [j]_! (u|_U) = u ∘ Lc₂^* ε` for the

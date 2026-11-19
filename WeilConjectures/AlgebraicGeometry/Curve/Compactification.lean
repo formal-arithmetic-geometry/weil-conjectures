@@ -77,7 +77,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {U : Scheme.{u}}
 
-/-- Blueprint `lem-wf-finite-field-curve-quasi-projective`: Finite-field curves admit a
+/-- Blueprint `lemma-proper-smooth-model--1`: Finite-field curves admit a
 projective closure.
 
 An integral curve `U` over a field `K` (separated, of finite type, of dimension at most one)
@@ -182,7 +182,7 @@ theorem exists_smooth_properCompactification_of_perfectField [PerfectField K]
     hopen.finite_compl_of_topologicalKrullDim_le_one hdim.le hne,
     fun z hz ↦ hopen.isClosed_singleton_of_mem_compl hdim.le hne hz⟩
 
-/-- Blueprint `sk-i-real-compactification`: Smooth proper completion.
+/-- Blueprint `lemma-proper-smooth-model--1`: Smooth proper completion.
 
 Every smooth geometrically connected curve `U₀` over a finite field `K` admits a smooth proper
 completion: a compactification `c : Compactification p` of the structure morphism
@@ -200,7 +200,7 @@ theorem exists_smooth_properCompactification
   obtain ⟨c, -, h₁, h₂, h₃, -, h₄, h₅⟩ := exists_smooth_properCompactification_of_perfectField p
   exact ⟨c, h₁, h₂, h₃, h₄, h₅⟩
 
-/-- Blueprint `lem-wf-curve-normal-smooth-compactification`: Smooth proper compactification of a
+/-- Blueprint `lemma-proper-smooth-model--1`: Smooth proper compactification of a
 normal finite-field curve.
 
 Let `U` be a normal geometrically connected curve of pure dimension one over a perfect field `K`
@@ -254,7 +254,7 @@ coordinate cover of `U` by affine charts (`AlgebraicGeometry.Scheme.CoordinateCo
 gives an immersion into projective space
 (`AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`). The blueprint instead glues
 embeddings of the members of an affine cover one at a time (Stacks `0A25`).
-(blueprint: `lem-sc-curves-quasi-projective`) -/
+(blueprint: `lemma-proper-smooth-model--1`) -/
 theorem IsCurve.isQuasiProjective (p : U ⟶ Spec (.of K)) [IsCurve p] [Smooth p] :
     IsQuasiProjective p := by
   classical
@@ -323,7 +323,7 @@ connected curve over `K`, in which `U` is open with complement a finite set of c
 The compactification is the normalization of a Nagata compactification of `U` in `U`, as in
 `AlgebraicGeometry.exists_smooth_properCompactification_of_perfectField`; the blueprint uses the
 normalization of the closure of `U` in a projective space instead.
-(blueprint: `lem-sc-compactification`) -/
+(blueprint: `lemma-proper-smooth-model--1`) -/
 theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
     (p : U ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] :
     ∃ c : Compactification p, IsConnectedCurve c.g ∧ Smooth c.g ∧ (Set.range c.i.base)ᶜ.Finite ∧
@@ -360,7 +360,7 @@ lemma IsConnectedCurve.smoothOfRelativeDimension_one {C : Scheme.{u}} (f : C ⟶
 over an algebraically closed field `K`. Every open subscheme `V ≠ C` is affine: its complement
 `S` is a finite nonempty set of closed points, the effective divisor `D = ∑_{P ∈ S} [P]` has
 positive degree, so `𝒪(D)` is ample, and `V = C ∖ D` is affine.
-(blueprint: `lem-sc-affine-open-proper`) -/
+(blueprint: `proposition-p-torsion-smooth-proper-curve--3`) -/
 theorem IsConnectedCurve.isAffine_of_ne_top [IsAlgClosed K] {C : Scheme.{u}}
     (p : C ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] [IsProper p] (V : C.Opens)
     (hV : V ≠ ⊤) : IsAffine V := by

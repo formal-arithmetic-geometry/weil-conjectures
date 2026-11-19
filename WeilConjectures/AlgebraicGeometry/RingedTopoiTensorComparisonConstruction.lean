@@ -28,7 +28,6 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 
 open scoped ChangeOfRings
 
-set_option maxHeartbeats 500000 in
 -- Elaborating the composite comparison checks several transported module structures.
 /-- The normalized ordinary tensor comparison exists.
 Source: Stacks Project, Modules on Sites, Tag 03EL, together with the inverse-image

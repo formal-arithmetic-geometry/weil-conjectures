@@ -73,13 +73,11 @@ variable (S) in
 abbrev Scheme.AffineOver.topology : GrothendieckTopology (Scheme.AffineOver S) :=
   (Scheme.AffineOver.ι S).inducedTopology (Scheme.fppfTopology.over S)
 
-/-- **The Picard functor agrees with its affine presentation.** For `f : X ⟶ S`, the restriction of
+/-- **The Picard functor agrees with its affine presentation.** For `f: X ⟶ S`, the restriction of
 the relative Picard functor `Pic_{X/S}` to affine `S`-schemes `T = Spec R` is canonically the fppf
 sheafification, on the site of affine `S`-schemes, of `Spec R ↦ Pic (X ×_S Spec R)`. For
 `S = Spec k` and `X` a smooth projective curve this is the Picard functor of the chapter on smooth
-curves, which is presented on `k`-algebras.
-
-(blueprint: `lem-pc-picard-functor-agrees-sc`, `rem-ptr-pc-picard-functor-7`) -/
+curves, which is presented on `k`-algebras. -/
 noncomputable def picardFunctorAffineRestrictionIso (f : X ⟶ S) :
     (presheafToSheaf (Scheme.AffineOver.topology S) (Type (u + 1))).obj
         ((Scheme.AffineOver.ι S).op ⋙ picardPresheaf f) ≅

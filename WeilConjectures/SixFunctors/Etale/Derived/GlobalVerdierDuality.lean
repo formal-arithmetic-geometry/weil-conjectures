@@ -18,7 +18,7 @@ a finite coefficient ring). Global Verdier duality is the canonical isomorphism
 
 natural in `K`: the inverse of the tensor–Hom exchange
 `Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)` at `N = Λ_S`. This is blueprint
-`thm-pod-global-verdier-duality` (in the étale setting, written in `D(S_ét)` with `Ra_{X!}` and
+`theorem-global-verdier-duality--1` (in the étale setting, written in `D(S_ét)` with `Ra_{X!}` and
 `Ra_{X*}`; over `S = Spec k` applying `RΓ(S, -)` gives the displayed form).
 
 ## Main definitions
@@ -139,7 +139,7 @@ variable (A' : Type u'') [Category.{u + 1} A'] [Abelian A'] [IsGrothendieckAbeli
   [IsIso (projectionMap A' aX)]
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point,
+/-- Blueprint `theorem-global-verdier-duality--1`: Global Verdier duality at the point,
 compatibility with finite coefficient reduction and scalar extension.
 
 A change of coefficients `A → A'` (the finite reduction `A_{E,n} → A_{E,m}`, or a scalar
@@ -159,7 +159,8 @@ Ra_{X*} RHom(K', G' T_S Λ) ---- iso⁻¹ ----> RHom(Ra_{X!} K', T_S Λ)
 ```
 commutes. Composing with a comparison `T_S Λ_S ⟶ Λ'_S` of the units (and the compatibility of
 the dualizing complexes `T_X ω_X ≅ ω'_X` with the smooth orientation, blueprint
-`thm-pur-finite-reduction-of-purity`) gives the comparison with the duality over `A'`. -/
+`proposition-compatibility-purity-change-coefficients`) gives the comparison with the duality over
+`A'`. -/
 theorem globalVerdierDualityIsoOfAdjunction_inv_comp_mateEquiv
     {G' : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A') ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A')}
@@ -202,7 +203,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX]
   [IsIso (projectionMap (ModuleCat.{u + 1} Λ) aX)]
 
-/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point.
+/-- Blueprint `theorem-global-verdier-duality--1`: Global Verdier duality at the point.
 
 For `a_X : X ⟶ S` admitting a compactification and satisfying the projection formula (which
 holds at every finite coefficient ring, `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`),
@@ -232,7 +233,7 @@ lemma globalVerdierDualityIso_eq
       (((derivedHomRightDerivedLowerShriekIso Λ aX).app (op K)).app (𝟙_ _)).symm :=
   rfl
 
-/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point, natural
+/-- Blueprint `theorem-global-verdier-duality--1`: Global Verdier duality at the point, natural
 form: `AlgebraicGeometry.Etale.globalVerdierDualityIso` as a natural isomorphism
 `(Ra_{X!} -)^∨ ≅ Ra_{X*} 𝔻_X(-)` of functors `D(X_ét)ᵒᵖ ⥤ D(S_ét)`. -/
 noncomputable def globalVerdierDualityNatIso :
@@ -241,7 +242,7 @@ noncomputable def globalVerdierDualityNatIso :
   globalVerdierDualityNatIsoOfAdjunction (ModuleCat.{u + 1} Λ)
     (rightDerivedUpperShriekAdjunction Λ aX)
 
-/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point, the case
+/-- Blueprint `theorem-global-verdier-duality--1`: Global Verdier duality at the point, the case
 `K = Λ_X`.
 
 At `K = Λ_X` global Verdier duality identifies `RΓ_c(X, Λ_X)^∨` with `RΓ(X, ω_X)`: it is

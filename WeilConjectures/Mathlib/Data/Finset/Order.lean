@@ -30,7 +30,7 @@ variable {α : Type*}
 
 namespace Finset
 
-/-- Blueprint `def-nagata-directed-finite-upper-bound`: Selected upper bound of a finite set.
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Selected upper bound of a finite set.
 
 Given a base point `i₀` and selected pairwise upper bounds `d`, the upper bound `u F` of a
 finite set `F` is defined by insertion: `u ∅ = i₀` and `u (F ∪ {i}) = d (u F) i`, the elements
@@ -44,7 +44,7 @@ lemma directedBound_empty (i₀ : α) (d : α → α → α) : directedBound i�
 
 variable [Preorder α] {i₀ : α} {d : α → α → α}
 
-/-- Blueprint `lemma-nagata-directed-finite-upper-bound`: Property of the selected finite upper
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Property of the selected finite upper
 bound. Every element of `F` lies below the selected upper bound `u F`. -/
 lemma le_directedBound (hd : ∀ a b, a ≤ d a b ∧ b ≤ d a b) {F : Finset α} {i : α}
     (hi : i ∈ F) : i ≤ directedBound i₀ d F :=

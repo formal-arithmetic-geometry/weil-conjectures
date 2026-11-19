@@ -43,7 +43,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorIntegra
 
 /-! # Normalized comparisons on strict quotient models
 
-Source: main-20261015 blueprint, def-weil-derived-pullback-tensor-hom, integral operations;
+Source: main-20261015 blueprint, prose-03-02, integral operations;
 Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 
 ## Main definitions
@@ -388,7 +388,6 @@ private theorem generator_smul (W : Scheme.{u}) (P Q : Complex l E W)
 
 attribute [local semireducible] integralComparisonSequenceTensorSection
 
-set_option maxHeartbeats 800000 in
 -- The comparison identifies two presentations of the same total complex.
 
 attribute [local semireducible] coefficientTotalTensor in
@@ -509,7 +508,6 @@ private theorem pullback_comparison (X Y : Scheme.{u}) (f : X ⟶ Y) :
 attribute [local irreducible] integralComparisonSequenceTensorSection
   coefficientTensorGenerator
   integralComparisonSequenceScalarPullback
-set_option maxHeartbeats 800000 in
 -- Use adjunction injectivity and the generators of each tensor summand.
 private theorem comparisons_unique (c d : Comparisons.{u} l) : c = d := by
   have hs : c.sigma = d.sigma := by

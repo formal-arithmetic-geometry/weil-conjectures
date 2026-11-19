@@ -148,7 +148,7 @@ private lemma constant_scalar (T : Scheme.{u}) (n : ℕ)
     (P : ModuleCat.{u + 1} (ULift.{u + 1} (R l E n))) (b : ULift.{u + 1} (R l E n)) :
     let G := constantSheaf (Scheme.ProEt.topology T)
       (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n)))
-    G.map (ModuleCat.ofHom (LinearMap.lsmul _ P b)) = torsionFixedScalar (G.obj P) b := by
+    G.map (ModuleCat.ofHom (LinearMap.lsmul _ P b)) = (torsionFixedScalar (G.obj P) b).asHom := by
   let J := Scheme.ProEt.topology T
   apply Sheaf.hom_ext
   apply sheafify_hom_ext J _ _ ((constantSheaf J _).obj P).property
@@ -178,7 +178,7 @@ private lemma point_integral_scalar (x : A l E) :
     Functor.LaxMonoidal.ε (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
       (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map
         (scalarIntegerMap (A l E) x) ≫ FiniteConstantModel.scalarToContinuous (A l E) =
-      MonObj.one ≫ torsionIntegerMultiply l E x := by
+      MonObj.one ≫ (torsionIntegerMultiply l E x).asHom := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let J := coherentTopology Profinite.{u}
   let U := sheafToPresheaf J Ab.{u + 1}
@@ -196,7 +196,7 @@ private lemma point_integral_scalar (x : A l E) :
   dsimp only [FiniteConstantModel.scalarToContinuous]
   rw [Equiv.apply_symm_apply]
   change _ = Functor.LaxMonoidal.ε U ≫ U.map
-    (MonObj.one ≫ torsionIntegerMultiply l E x)
+    (MonObj.one ≫ (torsionIntegerMultiply l E x).asHom)
   rw [U.map_comp, ← Category.assoc]
   erw [Sheaf.ε_sheafToPresheaf_comp_map_one_sheafCompose]
   ext S z
@@ -231,7 +231,7 @@ private lemma integralRegular_scalar (T : Scheme.{u}) (x : A l E) :
       (integralRegular l E T).hom =
     (integralRegular l E T).hom ≫ Mod.regularLift
       (Mod.regular (AdicCompletion.ring l E T))
-      (MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x)) := by
+      (MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x).asHom) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let S := AddCommGrpCat.of (ULift.{u + 1} (A l E))
   let F := constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
@@ -249,7 +249,7 @@ private lemma integralRegular_scalar (T : Scheme.{u}) (x : A l E) :
   have h₃ := square_trans _ _ (square_map H _ h₂)
     (mapRegular_lift U (Profinite.continuousCoefficientRingObj (A l E)) t'')
   have ht : Functor.LaxMonoidal.ε U ≫ U.map t'' =
-      MonObj.one ≫ U.map (torsionIntegerMultiply l E x) := by
+      MonObj.one ≫ U.map (torsionIntegerMultiply l E x).asHom := by
     dsimp only [t'', t', t, F]
     rw [Category.assoc, point_integral_scalar l E x, U.map_comp, ← Category.assoc]
     rfl
@@ -261,14 +261,14 @@ private lemma encoded_regular_scalar (T : Scheme.{u}) (n : ℕ)
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let H := (e.ordinary.trans e.fixed).functor
     H.map (Mod.regularLift (Mod.regular (AdicCompletion.finiteRing l E T n))
-        ((MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x)) ≫
+        ((MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x).asHom) ≫
           AdicCompletion.quotient l E T n)) =
-      torsionFixedScalar (H.obj (Mod.regular (AdicCompletion.finiteRing l E T n)))
-        (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x)) := by
+      (torsionFixedScalar (H.obj (Mod.regular (AdicCompletion.finiteRing l E T n)))
+        (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x))).asHom := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let M := Mod.regular (AdicCompletion.finiteRing l E T n)
   let p := Mod.regularLift M
-    ((MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x)) ≫
+    ((MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x).asHom) ≫
       AdicCompletion.quotient l E T n)
   let b : ULift.{u + 1} (R l E n) :=
     ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x)
@@ -276,7 +276,7 @@ private lemma encoded_regular_scalar (T : Scheme.{u}) (n : ℕ)
       Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n))),
       H = (FiniteDiscreteOrdinary.sectionEncoding (R l E n) T e.ringIso ⋙
         FiniteDiscreteOrdinary.fixedRestriction (R l E n) T) →
-      H.map p = torsionFixedScalar (H.obj M) b := by
+      H.map p = (torsionFixedScalar (H.obj M) b).asHom := by
     intro H hH
     subst H
     apply (sheafCompose (Scheme.ProEt.topology T)
@@ -287,7 +287,7 @@ private lemma encoded_regular_scalar (T : Scheme.{u}) (n : ℕ)
     have h := scalar_encoded l E T (n + 1) e M x
     dsimp only [torsionScalar, Mod.act_comap_obj] at h
     change ((λ_ (AdicCompletion.finiteRing l E T n)).inv ≫
-      (MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x)) ▷
+      (MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x).asHom) ▷
         AdicCompletion.finiteRing l E T n ≫
       (AdicCompletion.quotient l E T n) ▷ AdicCompletion.finiteRing l E T n ≫
         MonObj.mul) = _ at h
@@ -338,7 +338,7 @@ theorem ordinary_scalar (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T) :
   have hj := square_trans _ _
     (square_map Q (integralRegular l E T) (integralRegular_scalar l E T x))
     (extendRegular_lift (AdicCompletion.quotient l E T n)
-      (MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x)))
+      (MonObj.one ≫ (upperStarFromPoint T).map (torsionIntegerMultiply l E x).asHom))
   have hh := square_map H j hj
   rw [encoded_regular_scalar l E T n e x] at hh
   apply square_trans _ _ hh

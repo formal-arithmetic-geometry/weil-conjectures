@@ -246,7 +246,7 @@ therefore both are module isomorphisms. Localization gives the reduction and lim
 equations, while the tensor generator formula gives the tensor equation. Naturality
 and inverse laws follow from the site isomorphism identities. Empty sites and zero
 objects are covered by the same formulas.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 (blueprint: lem-pod-reindexing-tensor-family-identity-composition).
 -/
 theorem podReindexingTensorFamilyIdentityComposition

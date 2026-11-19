@@ -133,7 +133,7 @@ noncomputable def rightMate
       (c.ofIsPullback (IsPullback.of_hasPullback w e).flip) ⊣ G') :
     G ⋙ (upperStar (ModuleCat.{u + 1} A) (pullback.snd w e)).mapDerivedCategory ⟶
       (upperStar (ModuleCat.{u + 1} A) w).mapDerivedCategory ⋙ G' :=
-  (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ (exchangeIso A c w).inv)).natTrans
+  (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ (exchangeIso A c w).inv))
 
 /-- The inverse-comparison clause, as an equality of natural isomorphisms.
 Source: Stacks Tag 03S6; support-map compatibility (1)
@@ -447,11 +447,11 @@ private lemma mate_refinement
     (W : D ⥤ F) (V : C ⥤ E)
     (t : L₁ ⟶ L₂) (t' : L₁' ⟶ L₂')
     (α : TwoSquare V L₁ L₁' W) (β : TwoSquare V L₂ L₂' W)
-    (h : α.natTrans ≫ Functor.whiskerRight t W =
-      Functor.whiskerLeft V t' ≫ β.natTrans) :
+    (h : α ≫ Functor.whiskerRight t W =
+      Functor.whiskerLeft V t' ≫ β) :
     Functor.whiskerRight (conjugateEquiv a₂ a₁ t) V ≫
-        (mateEquiv a₁ a₁' α).natTrans =
-      (mateEquiv a₂ a₂' β).natTrans ≫
+        (mateEquiv a₁ a₁' α) =
+      (mateEquiv a₂ a₂' β) ≫
         Functor.whiskerLeft W (conjugateEquiv a₂' a₁' t') := by
   ext K
   apply (a₁'.homEquiv _ _).symm.injective
@@ -460,7 +460,7 @@ private lemma mate_refinement
     L₁'.map (_ ≫ _) ≫ a₁'.counit.app _
   rw [L₁'.map_comp, L₁'.map_comp, Category.assoc, Category.assoc,
     mateEquiv_counit, conjugateEquiv_counit]
-  have hn := α.natTrans.naturality ((conjugateEquiv a₂ a₁ t).app K)
+  have hn := α.naturality ((conjugateEquiv a₂ a₁ t).app K)
   change L₁'.map (V.map _) ≫ α.app _ = α.app _ ≫ W.map (L₁.map _) at hn
   rw [← Category.assoc, hn, Category.assoc, ← W.map_comp,
     conjugateEquiv_counit, W.map_comp, ← Category.assoc]
@@ -468,7 +468,7 @@ private lemma mate_refinement
   simp only [NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app] at hK
   rw [hK, Category.assoc, ← mateEquiv_counit a₂ a₂']
-  simpa only [Category.assoc, Functor.comp_obj, TwoSquare.natTrans] using
+  simpa only [Category.assoc, Functor.comp_obj] using
     (t'.naturality ((mateEquiv a₂ a₂' β).app K)).symm =≫ a₂'.counit.app _
 
 end AlgebraicGeometry.Etale.EtaleSupportExchange

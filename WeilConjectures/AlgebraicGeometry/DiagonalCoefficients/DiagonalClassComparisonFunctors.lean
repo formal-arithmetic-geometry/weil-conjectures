@@ -57,7 +57,7 @@ def diagonalClassLimitMate (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X �
     LS.R ⋙ (diagonalClassPull l f).mapDerivedCategory ⟶
       (diagonalClassTowerPull l f).mapDerivedCategory ⋙ LX.R :=
   (mateEquiv adjS adjX (TwoSquare.mk _ _ _ _
-    (ringedConstantTowerPullback (diagonalClassPull l f)).inv)).natTrans
+    (ringedConstantTowerPullback (diagonalClassPull l f)).inv))
 
 /-- Localize an exact comparison square using the canonical composition isomorphisms.
 Source: blueprint coefficient changes (3)

@@ -24,7 +24,7 @@ eigenvalues on the ambient space.
 ## Blueprint
 
 `Module.End.hasEigenvalue_of_subquotient` and `Module.End.hasEigenvalue_of_comp_eq_comp`
-implement part of `sk-p-linear-filtration`.
+implement part of `lemma-filtrations-spectra--2`.
 -/
 
 @[expose] public section
@@ -35,7 +35,7 @@ variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensiona
 
 /-- If a scalar `c` acts on a nonzero invariant subquotient `S ⧸ U` of `V`, then `c` is an
 eigenvalue of the endomorphism on all of `V`.
-(blueprint: `sk-p-linear-filtration`, `p-linear-filtration`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem hasEigenvalue_of_subquotient (f : Module.End K V) {U S : Submodule K V} (hUS : U < S)
     (hU : U ≤ U.comap f) (hS : S ≤ S.comap f) (c : K) (hc : ∀ x ∈ S, f x - c • x ∈ U) :
     f.HasEigenvalue c := by
@@ -61,7 +61,7 @@ theorem hasEigenvalue_of_subquotient (f : Module.End K V) {U S : Submodule K V} 
 /-- An eigenvalue of an endomorphism `g` of a quotient `π : V ↠ W` induced by `f`, i.e. with
 `π ∘ f = g ∘ π`, is an eigenvalue of `f`: otherwise `f - c` is injective, hence surjective, so
 `g - c` is surjective, hence injective.
-(blueprint: `sk-p-linear-filtration`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem hasEigenvalue_of_comp_eq_comp {W : Type*} [AddCommGroup W] [Module K W]
     [FiniteDimensional K W] (f : Module.End K V) (g : Module.End K W) (π : V →ₗ[K] W)
     (hπ : Function.Surjective π) (h : π ∘ₗ f = g ∘ₗ π) {c : K} (hc : g.HasEigenvalue c) :

@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite affine-local immersed partition admits a global immersed refinement with actual
 factorization maps into its local representatives. Source: Stacks Project, Etale Cohomology,
 Tag 03S0, locality reduction
-(blueprint: lem-weil-pbc-etale-stratification-local-gluing-core).
+(blueprint: theorem-comparison-constructible-sheaves).
 
 Proof: Each affine chart is quasi-compact and therefore retrocompact in the quasi-separated
 base. Its locally constructible strata are constructible in the base. Extend its partition by

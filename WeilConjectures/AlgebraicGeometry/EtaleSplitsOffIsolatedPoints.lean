@@ -139,7 +139,7 @@ Pairwise intersections are closed in the finite pieces; their images in the base
 and avoid the distinguished point, since the original points are distinct. Remove these
 finitely many images from the base. The retained properties follow from
 `lem-weil-pbc-elementary-etale-finite-piece-persistence`, and étaleness from
-`lem-weil-pbc-etale-composition-cancellation`. The pieces are now disjoint; their complement
+`definition-torsion-sheaves--3`. The pieces are now disjoint; their complement
 is the open and closed `W`. For `n = 0` the union is empty and `W` is the whole
 pullback. Finally `lem-weil-pbc-fibre-product-points` identifies points above
 `(x i, t)` with primes of the residue-field tensor product. Since the neighbourhood has

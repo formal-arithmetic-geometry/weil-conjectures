@@ -24,7 +24,7 @@ namespace IsLocalRing
 
 /-- The residue map of a complete local ring in residue characteristic zero has a section.
 Source: Stacks Project, Algebra, Theorem 032A(1), first proof paragraph.
-(blueprint: lem-weil-pbc-coefficient-residue-section)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof: Every nonzero integer is a unit in R, since its residue is nonzero, so R and
 all its adic quotients are Q-algebras. The residue field is formally smooth over Q.

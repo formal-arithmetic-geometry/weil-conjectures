@@ -18,8 +18,8 @@ field `K`, and `ι : K →+* ℂ`. Write `P_i = ι (det (1 - T A_i))`. If the al
 `P₁ P̄₂ = P̄₁ P₂`, both sides having the same logarithmic derivative and constant term `1`. If
 moreover the eigenvalues of `A₁` and of `A₂` have disjoint absolute values (`|ι α| ≤ R` for `A₁`,
 `|ι α| = S` for `A₂`, `R < S`), the fraction is reduced and both `P₁` and `P₂` are real
-(blueprint: `lem-zl-relative-envelope-factor-reality`, with `lem-zl-root-radius-separation` and
-`lem-zl-real-reduced-factors`).
+(blueprint: `theorem-pure-lisse-sheaves-over-relative--1`, with
+`theorem-pure-lisse-sheaves-over-relative--1` and `theorem-pure-lisse-sheaves-over-relative`).
 
 ## Main statements
 
@@ -169,7 +169,7 @@ theorem map_charpolyRev_mul_conj_eq_of_trace (ι : K →+* ℂ) {V₂ : Type*} [
     rw [map_sub, map_sub] at this
     linear_combination -this
 
-/-- **Reality of reduced factors** (blueprint: `lem-zl-relative-envelope-factor-reality`). Let
+/-- **Reality of reduced factors** (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). Let
 `A₁, A₂` be endomorphisms whose eigenvalues satisfy `|ι α| ≤ R` for `A₁` and `|ι α| = S` for
 `A₂`, with `R < S`. If the alternating traces `ι (tr A₂ᵐ - tr A₁ᵐ)`, `m ≥ 1`, are real, then the
 images `ι (det (1 - T A₁))` and `ι (det (1 - T A₂))` have real coefficients: the fraction

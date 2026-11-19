@@ -31,7 +31,7 @@ usual radius of convergence.
 This file also introduces nonnegative series, those all of whose complex coefficients lie in
 `ℝ≥0`, and proves the comparison results of the real-sheaves chapter: a factor of a convergent
 product of nonnegative series with constant term `1` has at least the radius of the product
-(`lem-rp-positive-product-radius`), and a polynomial whose inverse has radius `R` has no zero in
+(`lemma-positivity-convergence--1`), and a polynomial whose inverse has radius `R` has no zero in
 the open disc of radius `R`.
 
 ## Main definitions
@@ -61,7 +61,7 @@ open scoped ENNReal NNReal
 
 namespace PowerSeries
 
-/-- Blueprint `d-real-series`: Radius of a formal series.
+/-- Blueprint `lemma-positivity-convergence--1`: Radius of a formal series.
 
 The radius of convergence `R(f) ∈ ℝ≥0∞` of a formal power series `f = ∑ aₙ Tⁿ ∈ 𝕜⟦X⟧` over a
 nontrivially normed field `𝕜`.
@@ -77,7 +77,7 @@ bounded, and boundedness of `‖aₙ‖ rⁿ` for one `r` is equivalent to summa
 noncomputable def radius {𝕜 : Type*} [NontriviallyNormedField 𝕜] (f : 𝕜⟦X⟧) : ℝ≥0∞ :=
   (FormalMultilinearSeries.ofScalars 𝕜 fun n ↦ coeff n f).radius
 
-/-- Blueprint `d-real-series`: Radius of a formal series.
+/-- Blueprint `lemma-positivity-convergence--1`: Radius of a formal series.
 
 A formal power series `f = ∑ aₙ Tⁿ ∈ ℂ⟦X⟧` has nonnegative coefficients if every `aₙ` is a
 nonnegative real number. These are the series for which the coefficientwise comparison
@@ -228,7 +228,7 @@ theorem hasNonnegCoeffs_iff {f : ℂ⟦X⟧} : f.HasNonnegCoeffs ↔ ∀ n, 0 �
   · obtain ⟨a, ha, h⟩ := RCLike.nonneg_iff_exists_ofReal.1 h
     exact ⟨⟨a, ha⟩, h⟩
 
-/-- Blueprint `lem-rp-positive-product-radius`: Positive products and radii of convergence.
+/-- Blueprint `lemma-positivity-convergence--1`: Positive products and radii of convergence.
 
 Let `(f_j)` be a family of series in `1 + T ℝ≥0⟦T⟧` whose product converges in the product
 topology. Then every factor `f_j` has radius of convergence at least that of the product.
@@ -279,7 +279,7 @@ theorem radius_tprod_le_radius {J : Type*} {f : J → ℂ⟦X⟧} (hf : ∀ j, (
   rw [RCLike.norm_ofReal, RCLike.norm_ofReal, abs_of_nonneg ha, abs_of_nonneg hb]
   exact_mod_cast hab
 
-/-- Blueprint `lem-rp-positive-product-radius` (the "in particular" clause): Positive products
+/-- Blueprint `lemma-positivity-convergence--1` (the "in particular" clause): Positive products
 and radii of convergence.
 
 Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in
@@ -296,7 +296,7 @@ theorem eval_ne_zero_of_lt_radius_tprod_inv {J : Type*} {P : J → Polynomial �
       rw [constantCoeff_inv, ← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe, hP,
         inv_one]) hmul j
 
-/-- Blueprint `lem-rp-positive-product-radius` (holomorphic hypothesis): Positive products and
+/-- Blueprint `lemma-positivity-convergence--1` (holomorphic hypothesis): Positive products and
 radii of convergence.
 
 If `F ∈ ℂ⟦X⟧` is the Taylor series at `0` of a function `g` holomorphic on the open disc of
@@ -317,7 +317,7 @@ theorem le_radius_of_differentiableOn {g : ℂ → ℂ} {R : ℝ≥0∞} {F : �
     simp_rw [hF]
   exact hrad ▸ hp.r_le
 
-/-- Blueprint `lem-rp-positive-product-radius`: Positive products and radii of convergence.
+/-- Blueprint `lemma-positivity-convergence--1`: Positive products and radii of convergence.
 
 Let `(f_j)` be a family of series in `1 + T ℝ≥0⟦T⟧` whose product converges in the product
 topology. If the product is the Taylor series at `0` of a function `g` holomorphic on the open
@@ -329,7 +329,7 @@ theorem le_radius_of_differentiableOn_tprod {J : Type*} {f : J → ℂ⟦X⟧}
     R ≤ (f j).radius :=
   (le_radius_of_differentiableOn hg hF).trans (radius_tprod_le_radius hf h1 hmul j)
 
-/-- Blueprint `lem-rp-positive-product-radius` (the "in particular" clause): Positive products
+/-- Blueprint `lemma-positivity-convergence--1` (the "in particular" clause): Positive products
 and radii of convergence.
 
 Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in

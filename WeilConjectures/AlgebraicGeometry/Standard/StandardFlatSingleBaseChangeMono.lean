@@ -64,7 +64,6 @@ private theorem single_qcoh_terms (X : Scheme.{u}) (M : X.Modules) [M.IsQuasicoh
     exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
       (h.iso (isZero_kernel_of_mono (𝟙 M))).symm inferInstance
 
-set_option maxHeartbeats 400000 in
 -- The stalk and pinned counit comparisons unfold several shared module carriers.
 /-- The canonical single-module base-change comparison is injective on cohomology.
 

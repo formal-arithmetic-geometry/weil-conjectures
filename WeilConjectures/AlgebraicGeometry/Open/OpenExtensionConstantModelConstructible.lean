@@ -20,10 +20,6 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Extension by zero and finite constant local models
-
-Source: blueprint main-20261015, sec-six-functors/sk-lem-sf-open-ctf,
-sk-prop-proper-image-localizing-open.proof.md, paragraph Constructibility
-(blueprint: lem-sf-open-extension-zero-constant-model-constructible).
 -/
 
 @[expose] public section
@@ -329,37 +325,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Extension by zero preserves constructibility with finite constant scalar models.
 The supplied stratification witnesses the constructibility hypothesis. The equivalence
 of indices identifies the extended stratification, as schemes over X, with precisely the
-old strata and the reduced closed complement; empty strata are allowed.
-
-Source: blueprint main-20261015, sk-prop-proper-image-localizing-open.proof.md,
-paragraph Constructibility
-(blueprint: lem-sf-open-extension-zero-constant-model-constructible).
-
-Proof:
-1. Finite type over the field and quasi-compactness make X Noetherian. Construct
-an extended stratification with index zero the reduced closed complement and
-index a.succ the composite of the original stratum immersion with j. The range
-of the complement, coverage of S, and injectivity of j give a disjoint cover.
-Every image is locally closed, hence constructible in X.
-2. The abelian open-immersion adjunction triple has invertible unit. The module
-forgetful functor identifies the linear-extension unit with that abelian unit
-and reflects isomorphisms. Linear extension is therefore fully faithful.
-Restriction along the invertible coefficient map is an equivalence, so j_! is
-fully faithful as well. Its unit identifies j^*j_!M with M; pullback composition
-gives the isomorphisms on the original strata.
-3. For a map g whose range misses U, restriction of g_*F to U has sections over
-empty fibre products and is zero. The two abelian adjunctions then show that
-g^*j_!F is initial, hence zero. Extension along the coefficient isomorphism is
-restriction along its inverse on underlying sheaves, so faithfulness of the
-module forgetful functor gives the asserted module vanishing on the complement.
-4. Transport the original local models along the stratum isomorphisms, retaining
-the same covers and point modules. On the complement use the identity cover and
-the zero point module, presented by the identity of the rank-zero free module.
-The extended stratification and these models give constant-model constructibility.
-5. If U is empty, every pro-etale test scheme over U is empty, and the empty-cover
-sheaf axiom makes its sections zero. Thus M is zero and additive extension sends
-it to zero. If j is invertible, its surjectivity makes its complement empty.
-Empty strata, S.n = 0, and X empty are all included. -/
+old strata and the reduced closed complement; empty strata are allowed. -/
 theorem constantModelConstructible_openImmersionLowerShriek
     (ℓ p : ℕ) [Fact ℓ.Prime] [Fact p.Prime] (_hpℓ : p ≠ ℓ)
     (k : Type u) [Field k] [CharP k p]

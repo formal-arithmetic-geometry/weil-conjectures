@@ -23,9 +23,9 @@ complex over the valuation ring, its cohomology splits as a finite free sheaf an
 nilpotent-uniformizer torsion sheaf, and the cokernel of the uniformizer on the torsion
 part is a quotient of the consecutive-quotient Tor sheaf.
 
-Source: Bhatt--Scholze, Proposition 6.6.11; the elementary-divisor calculation in step 5
-of `lem-weil-pbc-adic-tor-implies-flat-cohomology`
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -122,9 +122,7 @@ def chartHomologyIso (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
       ).mapDerivedCategoryHomologyFunctorIso q).app C).symm
 
 /-- The inverse image of the realization of a finite free module is a finite free module
-sheaf: it has a basis on every object.
-Source: Bhatt--Scholze, Proposition 6.6.11 (blueprint:
-lem-weil-pbc-integral-cohomology-torsion-normal-form). -/
+sheaf: it has a basis on every object. -/
 theorem chart_free_sheaf (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T) (r : ℕ) :
     ∃ F : pbcModules S ((adicTowerInverseImage g).obj
         (pbcAdicCompletion T (pbcIntegralDatum l E))),
@@ -138,10 +136,7 @@ theorem chart_free_sheaf (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T) (r : �
 
 /-- On the base, the consecutive-quotient Tor sheaf of the realization of a perfect complex
 surjects, after restriction of scalars, onto the cokernel of the uniformizer on the
-realization of the torsion summand of its degree-`q` cohomology.
-Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form). -/
+realization of the torsion summand of its degree-`q` cohomology. -/
 theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
     (C : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)))
     (hC : @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.standard _) C)
@@ -217,10 +212,7 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
   exact epi_comp _ _
 
 /-- On a perfect chart, the consecutive-quotient Tor sheaf surjects onto the cokernel of
-the uniformizer on the realization of the torsion summand of its cohomology module.
-Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form). -/
+the uniformizer on the realization of the torsion summand of its cohomology module. -/
 theorem chart_tor_epi (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
     (K : DerivedCategory (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))))
     (q : ℤ) (C : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)))
@@ -268,15 +260,7 @@ theorem chart_tor_epi (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
 
 end Helpers
 
-/-- The torsion normal form on one perfect chart.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
-Proof: the perfect complex splits over the valuation ring as the sum of its shifted
-cohomology modules; its degree-q cohomology is a finite free module plus a torsion module
-killed by a power of the uniformizer. Inverse image and completed realization are exact,
-so this gives the splitting of the cohomology sheaf; the uniformizer is nilpotent on the
-torsion part. The consecutive-quotient Tor sheaf of the torsion summand is the realization
-of its reduction modulo the uniformizer, which is the cokernel of the uniformizer. -/
+/-- The torsion normal form on one perfect chart. -/
 theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {S : Scheme.{u}} (g : S ⟶ T)
@@ -304,7 +288,7 @@ theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
             (pbcAdicProjection T d n))).obj
           ((proEtaleRingModulePullback g ((pbcAdicRings T d).obj (op n))
             ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
-            (Iso.refl _)).obj (tor n)) ⟶ cokernel f,
+            (Iso.refl _)).obj (tor n)) ⟶ cokernel f.asHom,
           Epi t := by
   intro d B tor B' P
   let := pbcIntegralRing_isDomain l E
@@ -327,28 +311,28 @@ theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
   have : PreservesFiniteLimits G := comp_preservesFiniteLimits _ _
   have := preservesBinaryBiproducts_of_preservesBinaryProducts G
   obtain ⟨F, hF, ⟨eF⟩⟩ := chart_free_sheaf (l := l) (E := E) T g r
-  let φ : End N₀' := ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id)
+  let φ : End N₀' := .of (ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id))
   refine ⟨r, F, G.obj N₀', hF, ⟨chartHomologyIso T g K q C e ≪≫ G.mapIso ε' ≪≫
-    G.mapBiprod _ _ ≪≫ biprod.mapIso eF (Iso.refl _)⟩, G.map φ, ⟨k, ?_⟩, ?_⟩
+    G.mapBiprod _ _ ≪≫ biprod.mapIso eF (Iso.refl _)⟩, G.mapEnd N₀' φ, ⟨k, ?_⟩, ?_⟩
   · have hpow (m : ℕ) :
-        φ ^ m = ModuleCat.ofHom (pbcUniformizer l E ^ m • LinearMap.id) := by
+        φ ^ m = .of (ModuleCat.ofHom (pbcUniformizer l E ^ m • LinearMap.id)) := by
       induction m with
       | zero =>
-        refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+        refine End.ext (ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_))
         change x = pbcUniformizer l E ^ 0 • x
         rw [pow_zero, one_smul]
       | succ m ih =>
         rw [pow_succ, ih]
-        refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+        refine End.ext (ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_))
         change pbcUniformizer l E ^ m • (pbcUniformizer l E • x) =
           pbcUniformizer l E ^ (m + 1) • x
         rw [pow_succ, mul_smul]
     have hφ : φ ^ k = 0 := by
       rw [hpow]
-      exact ModuleCat.hom_ext (LinearMap.ext fun x ↦ hk x)
+      exact End.ext (ModuleCat.hom_ext (LinearMap.ext fun x ↦ hk x))
     change (G.mapEnd N₀') φ ^ k = 0
     rw [← map_pow, hφ]
-    exact G.map_zero N₀' N₀'
+    exact End.ext (G.map_zero N₀' N₀')
   · exact chart_tor_epi T g K q C hC e r N₀' ε' k hk
 
 end AlgebraicGeometry.Scheme

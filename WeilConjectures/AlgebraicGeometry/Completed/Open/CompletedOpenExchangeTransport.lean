@@ -724,7 +724,7 @@ Proof:
 to identify completed rings on both slices by every finite projection.
 lem-pc-quasi-compact-base-change makes the second open quasi-compact.
 2. lem-pur-site-restriction-module-adjunction-exact gives exact sheafified
-extension and restriction; lem-sf-exact-functor-derived-triangulated descends
+extension and restriction; situation-conventions descends
 them termwise. Scalar restriction leaves the direct-sum summands unchanged.
 3. lem-pc-kflat-resolution and lem-weil-pbc-ringed-slice-extension-tensor show
 that extension preserves K-flat complexes and identifies strict reductions,
@@ -741,7 +741,7 @@ lem-cbc-exact-functor-rlim and the ringed strict tower homotopy-limit lemma.
 def-weil-pbc-intrinsic-completion to preserve completeness. Use
 lemma-weil-pbc-completed-pullback-reduction for completeness of pullback.
 7. prop-weil-pbc-proetale-constant-exact and
-lem-cbc-proetale-extension-zero-base-change give finite adjoint-mate exchanges.
+proposition-extension-zero-restriction-closed-subscheme--11 give finite adjoint-mate exchanges.
 The summand and scalar-restriction formulas and site-morphism composition show
 they commute with quotient transitions. Constant/completed finite comparisons
 from lem-weil-pbc-constant-completion-equivalence retain those transitions.

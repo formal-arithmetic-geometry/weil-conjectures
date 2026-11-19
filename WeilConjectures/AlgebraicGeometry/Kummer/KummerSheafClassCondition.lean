@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerSheafPredicates
 
-/-! # Scalar-adjunct proposition for sheaf Kummer assembly
-Source: the normalized source, target and finite evaluation in the diagonal tower
-proof, steps (3)--(4) (blueprint: def-sfb-kummer-sheaf-class-condition). -/
+/-! # Scalar-adjunct proposition for sheaf Kummer assembly -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,8 +29,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The exact scalar-adjunct implication used in finite normalization.
-Source: diagonal tower proof, step (4)
-(blueprint: def-sfb-kummer-sheaf-class-condition).
 This is the universal implication for the full residue-linear class, followed by
 its actual exact-functor image. It contains no existence assertion or chosen data. -/
 def sheafKummerClassCondition (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})

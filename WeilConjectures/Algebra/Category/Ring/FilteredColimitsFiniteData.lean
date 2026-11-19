@@ -71,7 +71,7 @@ lemma aeval_comp_hom {R S : CommRingCat.{u}} (f : R ⟶ S) {σ : Type*} (y : σ 
     (P : MvPolynomial σ ℤ) : MvPolynomial.aeval (fun a ↦ f (y a)) P = f (MvPolynomial.aeval y P) :=
   (MvPolynomial.comp_aeval_apply (f := y) f.hom.toIntAlgHom P).symm
 
-/-- Blueprint `lemma-nagata-filtered-colimit-finite-data`: Finite data and finite relations
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite data and finite relations
 descend in a filtered colimit.
 
 Let `c` be a colimit of a filtered diagram `F` of commutative rings. Given finitely many

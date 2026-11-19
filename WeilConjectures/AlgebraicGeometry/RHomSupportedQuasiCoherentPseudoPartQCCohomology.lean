@@ -128,8 +128,6 @@ private theorem homComplex_trunc_homology_isIso
     hmid (show Mono (f.f ((ComplexShape.up ℤ).next n)) from inferInstance)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- The homology comparisons elaborate several presentations of the localized sheaf carrier.
 /-- The degreewise quasi-coherence calculation for RHom from a pseudo-coherent complex.
 
 Source: Stacks Project, Tag 0A6H, clause (1), affine-local finite-free calculation.
@@ -157,6 +155,14 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
       ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
         X.toRingedSpace.sheaf).obj (op K, L))).IsQuasicoherent := by
   classical
+  -- Reuse the site instances in both the local calculation and the final gluing.
+  let J := Opens.grothendieckTopology X.toRingedSpace
+  have : HasSheafify J AddCommGrpCat.{u} := inferInstance
+  have : J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, HasSheafify (J.over V) AddCommGrpCat.{u} := inferInstance
+  have : ∀ V, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  have : ∀ V W, HasSheafify ((J.over V).over W) AddCommGrpCat.{u} := inferInstance
+  have : ∀ V W, ((J.over V).over W).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   choose U hx P hb hf he using hK
   let H := (DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj

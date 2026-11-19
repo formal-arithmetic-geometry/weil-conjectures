@@ -23,8 +23,11 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Local finite Tor dimension of a proper relatively flat single-module direct image
 
-Source: Stacks Project, Tag 0A1H, single-module case; Tags 08CG and 08CI.
-(blueprint: lem-pc-proper-flat-single-local-finite-tor).
+## References
+
+* Stacks Project, Tag 0A1H, single-module case
+* Stacks Project, Tag 0A1H with E=O_X and G=F[0]
+* Tags 01XD, 08CG, 08CI
 -/
 
 @[expose] public section
@@ -70,9 +73,9 @@ private theorem flatOver_openImmersion_square {X T Y B : Scheme.{u}}
   convert hh using 1 <;> try rfl
   ext a m
   change (F.smul (((i.appIso W.1).inv.hom
-    ((p.appLE V.1 W.1 e).hom a)))).hom m =
-      (F.smul (ψ.hom (φ.hom a))).hom m
-  exact congrArg (fun q : Γ(B, V.1) ⟶ Γ(X, W'.1) ↦ (F.smul (q.hom a)).hom m) he.symm
+    ((p.appLE V.1 W.1 e).hom a)))).asHom.hom m =
+      (F.smul (ψ.hom (φ.hom a))).asHom.hom m
+  exact congrArg (fun q : Γ(B, V.1) ⟶ Γ(X, W'.1) ↦ (F.smul (q.hom a)).asHom.hom m) he.symm
 
 open CategoryTheory.Limits MonoidalCategory in
 /-- Tensor with a module in degree zero preserves the termwise vanishing interval. -/
@@ -97,22 +100,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- On each affine base open the restricted direct image has a finite Tor interval.
 The interval may depend on the neighbourhood. This supplies no finite-free model
 and asserts no pseudo-coherence.
-Source: Stacks Project, Tag 0A1H with E=O_X and G=F[0]; Tags 01XD, 08CG, 08CI.
-(blueprint: lem-pc-proper-flat-single-local-finite-tor).
-
-Proof: On the supplied affine open U, properness makes its inverse image
-quasi-compact and separated. Choose a finite affine cover of that inverse image.
-The alternating Cech section complex is bounded in degrees [0,d]; intersections
-are affine and its section modules are flat over the ring of U by relative
-flatness. Associate module sheaves on U. This gives a bounded complex of flat
-quasi-coherent sheaves representing the restricted direct image, by affine
-acyclicity and the Cech-to-derived comparison. A bounded flat complex is K-flat.
-Tensoring it with any module in degree zero has zero terms, hence zero homology,
-outside [0,d]. Thus the same interval works for every test module, as required
-by finite Tor dimension. Transport the representing isomorphism from the
-K-injective computation to the supplied target localization using uniqueness of
-localization; its terms, flatness and vanishing are unchanged. Empty inverse images
-and zero modules give the zero complex with interval [0,0].
 -/
 theorem properFlat_single_local_hasFiniteTorDimension
     {X S : Scheme.{u}} (f : X ⟶ S)

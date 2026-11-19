@@ -9,6 +9,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Extensionality on original balanced tensor sections
 

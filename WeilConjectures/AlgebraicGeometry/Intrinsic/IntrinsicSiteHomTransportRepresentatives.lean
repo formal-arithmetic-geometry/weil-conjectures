@@ -74,9 +74,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 /-! # Representative-level intrinsic Hom transport
 
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95; coefficient-presentation
-transport in Step 2 of lem-sf-tensor-exchange-ctf-domains.
-(blueprint: lem-sf-intrinsic-site-hom-transport)
+## References
+
+* Stacks Project, Tags 00YV, 08J7 and 0A95
 -/
 
 @[expose] public section
@@ -88,20 +88,8 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option linter.style.haveILetI false
 
-/-- Representative-level coefficient transport.  The source and target derived objects
-are fixed representatives, with the second representative K-injective.  The arbitrary
-object statement is obtained by the usual representative and localization argument.
-
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95; coefficient-presentation transport
-in Step 2 of lem-sf-tensor-exchange-ctf-domains.
-
-Proof: apply the exact associated-module-sheaf realization to the Hom object computed
-on the chosen representatives.  The sheaf-Hom and tensor adjunctions identify the
-resulting Hom complex with the intrinsic constant-ring Hom complex, and exactness of
-the
-realization preserves the K-injective computation.  The comparison is natural in both
-representatives and hence descends through the derived quotient.
--/
+/-- Representative-level coefficient transport, for fixed representatives `Lc` and `Ic` of the
+source and target derived objects with `Ic` K-injective. -/
 theorem intrinsicSiteHom_transport_representatives (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (Lc Ic : CochainComplex

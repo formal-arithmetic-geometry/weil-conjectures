@@ -45,7 +45,6 @@ attribute [local implicit_reducible] CoefficientClosedStructure.tensor
 attribute [local semireducible] scalarReductionExtension
 attribute [local implicit_reducible] scalarReductionExtension
 
-set_option maxHeartbeats 600000 in
 -- Match the recorded adjunction unit with the explicit scalar generator.
 /-- The prescribed finite scalar adjunction unit is the pure scalar section at 1.
 Source: Stacks 03CZ and 06YY.

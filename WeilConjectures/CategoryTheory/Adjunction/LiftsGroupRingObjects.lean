@@ -38,8 +38,8 @@ well-typed equations of structure maps.
 
 Proof: (1) The right adjoint preserves limits. Apply `Adjunction.mapCommGrp` for the
 group clauses, using the canonical braided structures on product preserving functors
-(lem-weil-pbc-right-adjoint-preserves-limits,
-lem-weil-pbc-adjunction-lifts-abelian-group-objects).
+(situation-conventions,
+situation-conventions).
 (2) The product comparisons commute with projections, pairings and product maps;
 the terminal comparison commutes with the unique maps to the terminal object
 (def-weil-category-product). These identities also hold for the right adjoint.
@@ -53,7 +53,7 @@ ring morphisms preserve every operation, giving functors commuting with forgetti
 that they preserve multiplication and one; their additive compatibility is (1).
 (6) A morphism and its adjunct preserve the operations simultaneously: one direction
 composes its right image with the unit; the other composes its left image with the
-counit (lem-weil-pbc-adjunct-counit-identity). Restrict the natural adjunction
+counit (situation-conventions). Restrict the natural adjunction
 bijection to obtain the lifted adjunction (lem-weil-pbc-adjunction-of-natural-bijection).
 Its unit and counit are the original components. -/
 theorem liftsGroupRingObjects

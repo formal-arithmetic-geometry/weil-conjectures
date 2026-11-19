@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionScalarExtension
 import Mathlib.Algebra.Homology.Functor
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Scalar extension from global sections on K-flat quasi-isomorphisms
 

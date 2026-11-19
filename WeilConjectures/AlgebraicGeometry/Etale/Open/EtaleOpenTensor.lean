@@ -168,10 +168,10 @@ private theorem scalarOpenInverseMate
     (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
     (q : JB ⋙ RU ≅ RX ⋙ JA) :
     ((mateEquiv a b).symm
-      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans =
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))) =
       ((a.comp x).leftAdjointUniq ((u.comp b).ofNatIsoRight q)).inv := by
   rw [uniq_eq_conjugate]
-  exact congrArg TwoSquare.natTrans
+  exact
     (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
 
 private theorem scalar_counit
@@ -192,9 +192,9 @@ private theorem scalar_counit
   let α := (mateEquiv x u).symm
     (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)
   have h := mateEquiv_counit_symm a b α T
-  have hm : ((mateEquiv a b).symm α).natTrans = (openScalarExtension φ j).inv :=
+  have hm : ((mateEquiv a b).symm α) = (openScalarExtension φ j).inv :=
     scalarOpenInverseMate a b x u (openDerivedRestrictScalarsIso φ j)
-  change _ = ((mateEquiv a b).symm α).natTrans.app _ ≫ _ at h
+  change _ = ((mateEquiv a b).symm α).app _ ≫ _ at h
   rw [hm] at h
   change (derivedExtension (A := B) j).map ((openScalarRestriction φ j).hom.app T) ≫
       (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j).counit.app
@@ -225,10 +225,10 @@ private theorem scalar_restricts
   let α := (mateEquiv x u).symm
     (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)
   have h := unit_mateEquiv_symm a b α P
-  have hm : ((mateEquiv a b).symm α).natTrans = (openScalarExtension φ j).inv :=
+  have hm : ((mateEquiv a b).symm α) = (openScalarExtension φ j).inv :=
     scalarOpenInverseMate a b x u (openDerivedRestrictScalarsIso φ j)
   change _ = b.unit.app _ ≫ (derivedRestriction (A := B) j).map
-    (((mateEquiv a b).symm α).natTrans.app P) at h
+    (((mateEquiv a b).symm α).app P) at h
   rw [hm] at h
   let l := asIso (b.unit.app ((scalarExtension φ U).obj P)) ≪≫
     (derivedRestriction (A := B) j).mapIso ((openScalarExtension φ j).symm.app P)

@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Point
 
 Let `k` be a separably closed field, `T = 𝔸¹_k` and `i : Spec k ⟶ T` the inclusion of the
 origin, the zero section. For a nonzero finite coefficient ring `Λ` whose exponent is invertible
-in `k`, the cohomology sheaf `𝓗²(Ri^! Λ_T)` is nonzero (blueprint `ex-exc-positive-degree`).
+in `k`, the cohomology sheaf `𝓗²(Ri^! Λ_T)` is nonzero (blueprint `example-closed-support`).
 Hence `Ri^!` does not preserve `D^{≤ 0}`, or any `D^{≤ c}` with `c < 2`.
 
 ## The argument
@@ -130,7 +130,7 @@ theorem nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed
     (R(s)^![Λ]).mapIso ((shiftFunctor _ (2 * 1 : ℤ)).mapIso
       (t.symm ≪≫ (derivedTensorLeftUnitor _ _ _).symm)) ≪≫ e⟩
 
-/-- Blueprint `ex-exc-positive-degree`: Positive cohomology of a closed exceptional image.
+/-- Blueprint `example-closed-support`: Positive cohomology of a closed exceptional image.
 
 Let `k` be a separably closed field, `T = 𝔸¹_k` and `i : Spec k ⟶ T` the origin (the zero
 section). For a nonzero finite coefficient ring `Λ` with exponent invertible in `k` (for

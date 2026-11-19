@@ -80,9 +80,9 @@ theorem isIso_nearbyDualityMap_of_forall_exists_restrictOpen (D : NearbyDualizin
 
 /-- **Gabber's theorem: nearby cycles commute with Verdier duality** (Illusie, *Autour du
 théorème de monodromie locale*, Thm. 4.2; SGA 7 XIII; blueprint
-`sk-prop-tf-nearby-duality-foundation`). For a trait model `M` over the base of a separated
-`k`-scheme `X` of finite type, over the strictly henselian trait `S = Spec k'⟦t⟧`, the duality map
-`δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K`, adjoint to `θ_M ∘ Ψ(ev) ∘ μ_Ψ` with the dualizing map
+`proposition-nearby-cycles-commute-verdier-duality`). For a trait model `M` over the base of a
+separated `k`-scheme `X` of finite type, over the strictly henselian trait `S = Spec k'⟦t⟧`, the
+duality map `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K`, adjoint to `θ_M ∘ Ψ(ev) ∘ μ_Ψ` with the dualizing map
 `θ_M = β_a(ℚ̄_ℓ)`, is an isomorphism for every bounded constructible `K`. By open locality
 (`NearbyCyclesModel.isIso_nearbyDualityMap_of_forall_exists_restrictOpen`) this is the case of
 affine total spaces, `NearbyCyclesModel.isIso_nearbyDualityMap_of_isAffine`. -/

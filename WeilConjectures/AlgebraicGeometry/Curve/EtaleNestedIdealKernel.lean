@@ -20,7 +20,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The additive kernel for J embeds in that for I and is the kernel of restriction to J.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-etale-nested-ideal-kernel)
 
 Proof: The closed-subscheme inclusion Z_I to Z_J, base changed to each etale

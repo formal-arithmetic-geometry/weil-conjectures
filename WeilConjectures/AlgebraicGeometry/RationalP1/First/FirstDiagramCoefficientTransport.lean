@@ -26,12 +26,7 @@ attribute [local implicit_reducible] firstProjection
 attribute [local irreducible] secondProjection square
 attribute [local irreducible] projectionMap singleUnitIso
 
-/-- Canonical diagram transport commutes with a coefficient arrow.
-Source: the rational projective-line triangle, First identity, source normalization
-(blueprint: lem-sfb-first-diagram-coefficient-transport).
-Proof: use naturality of the canonical functor isomorphism firstDiagramPushIso.
-Its component is the equality transport of d.p1_canonical. Equality transports
-compose, and their object-equality loop is the identity by proof irrelevance. -/
+/-- Canonical diagram transport commutes with a coefficient arrow. -/
 theorem first_diagram_coefficient_transport
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

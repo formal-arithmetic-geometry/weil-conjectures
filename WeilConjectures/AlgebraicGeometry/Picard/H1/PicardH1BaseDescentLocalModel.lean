@@ -27,8 +27,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Local scalar models and degree-one comparison for Picard descent
 
-Source: Stacks Project, Tag 0BF2, the finite-free complexes and the representing chain maps.
-(blueprint: lem-sc-picard-h1-base-descent-local-model)
+## References
+
+* Stacks Project, Tag 0BF2, the finite-free complexes and the representing chain maps
+* Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91, 0BCD and 08CR
 -/
 
 @[expose] public section
@@ -38,27 +40,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 600000 in
--- Comparing the derived direct-image expressions and localized module instances is expensive.
 /-- Construct the local finite-free model and its degree-one comparison square, without
-assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
-Source: Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91,
-0BCD and 08CR. (blueprint: lem-sc-picard-h1-base-descent-local-model)
-
-Proof: Apply picard_h1_common_minimal_model to choose a common affine U, target
-trivializations, and a bounded finite-free source complex with its term-rank
-isomorphisms, section bases, derived comparison, and vanishing residue differential.
-Each term-rank isomorphism exhibits the term as a finite-free retract, proving strict
-perfectness. For a negative degree the Betti number is zero, so the term is isomorphic
-to the free module on the empty type; its identity is zero by freeHomEquiv.
-Apply picard_h1_fixed_model_comparison to this fixed source complex and the supplied
-target trivializations. It constructs q, b, alpha, beta and the cohomology square, and
-asserts that b kills the image of the outgoing source differential. Define d to be
-the coordinates of the differential on e0 inverse(1). Linearity of e0 inverse, the
-module differential and e1 gives the formula for every scalar a. The residue equation
-is the one supplied by the minimal-model theorem, and b(d)=0 is the annihilation
-identity evaluated at 1. Assemble these witnesses. Empty free terms and the empty
-target family are covered by the two intermediate statements without case exclusions. -/
+assuming injectivity on H¹ and without realizing degree-zero cycles as sections. -/
 theorem picard_h1_base_descent_local_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -117,8 +100,21 @@ theorem picard_h1_base_descent_local_model
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                       (ui i) (hui i))).left) 1 (α z) := by
-  obtain ⟨U, hwU, hU, htrivial, m, K, hbounded, hbetti, hrank, e0, e1, hE, hdw⟩ :=
-    picard_h1_common_minimal_model f Xi fi ui hui hO hOi L W k w s hw hLi hLs
+  -- Explicit existential elimination avoids generalizing the large dependent conclusion.
+  refine (picard_h1_common_minimal_model
+    f Xi fi ui hui hO hOi L W k w s hw hLi hLs).elim fun U hmodel ↦ ?_
+  refine hmodel.elim fun hwU hmodel ↦ ?_
+  have hU := hmodel.1
+  have htrivial := hmodel.2.1
+  refine hmodel.2.2.elim fun m hmodel ↦ ?_
+  refine hmodel.elim fun K hmodel ↦ ?_
+  have hbounded := hmodel.1
+  have hbetti := hmodel.2.1
+  have hrank := hmodel.2.2.1
+  refine hmodel.2.2.2.elim fun e0 hmodel ↦ ?_
+  refine hmodel.elim fun e1 hmodel ↦ ?_
+  have hE := hmodel.1
+  have hdw := hmodel.2
   have hK : IsStrictlyPerfect W U K := by
     refine ⟨hbounded, fun j ↦ ?_⟩
     obtain ⟨e⟩ := hrank j
@@ -135,12 +131,13 @@ theorem picard_h1_base_descent_local_model
       ext i
       exact Fin.elim0 i.down
     exact hfree.of_iso e
-  obtain ⟨q, b, hb, hcomparison⟩ :=
-    picard_h1_fixed_model_comparison f Xi fi ui hui hO hOi L W k w s hw hLs
-      U hwU hU htrivial m K hK hnegative hrank e0 e1 hE
+  refine (picard_h1_fixed_model_comparison f Xi fi ui hui hO hOi L W k w s hw hLs
+    U hwU hU htrivial m K hK hnegative hrank e0 e1 hE).elim fun q hcomparison ↦ ?_
+  refine hcomparison.elim fun b hcomparison ↦ ?_
+  have hb := hcomparison.1
   let d := e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm 1))
   refine ⟨U, hwU, hU, m, q, d, b, K, hK, hnegative, e0, e1, hE, ?_, hdw,
-    hb 1, hcomparison⟩
+    hb 1, hcomparison.2⟩
   intro a
   have ha : e0.symm a = a • e0.symm 1 := by
     rw [← e0.symm.map_smul]

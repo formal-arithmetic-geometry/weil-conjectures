@@ -414,7 +414,6 @@ private noncomputable def ordinaryConeIsLimit (O : Sheaf J CommRingCat.{u})
 
 end TelescopeHomRoosProof
 
-set_option maxHeartbeats 400000 in
 -- The canonical sheaf limit instances require more than the default elaboration budget.
 /-- The algebraic telescope-Hom comparison identifies the actual arrow, using both
 canonical legs of the map from the telescope to the ordinary colimit. Neither

@@ -112,13 +112,13 @@ namespace AlgebraicGeometry.ProEtale.CondensedCurve
 
 /-- The finite-subextension-valued condensed ring `Q = Qbar_ℓ`; an abbreviation of
 `Profinite.padicAlgClRingObj`, introducing no new coefficient ring.
-Source: `det-def-sfb-qlbar-condensed`, as cited in the statement of the node
+Source: `prose-02-50`, as cited in the statement of the node
 (blueprint: lem-per-geometric-curve-compact-cohomology). -/
 abbrev CurveCoeff (ℓ : ℕ) [Fact ℓ.Prime] := Profinite.padicAlgClRingObj ℓ
 
 /-- Modules over `Q_X = p_X^* Q` on the small pro-étale site; the same category as
 `CondensedLisseMonodromy.Modules`, introducing no new notion.
-Source: `det-def-sfb-pulled-back-coefficients`, as cited in the statement of the node
+Source: `prose-02-51`, as cited in the statement of the node
 (blueprint: lem-per-geometric-curve-compact-cohomology). -/
 abbrev CurveModules (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :=
   CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

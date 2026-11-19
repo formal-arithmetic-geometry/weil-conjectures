@@ -13,12 +13,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 # Coherence of the mixed-support cup product
 
 Let `a : X ⟶ Y` be a morphism admitting a compactification. The *mixed-support cup product*
-(`AlgebraicGeometry.Etale.mixedSupportCupProduct`, blueprint `sk-def-pairing-data`)
+(`AlgebraicGeometry.Etale.mixedSupportCupProduct`, blueprint `theorem-poincare-duality--6`)
 ```
 ⌣_c : Ra_! K ⊗ᴸ Ra_* L ⟶ Ra_!(K ⊗ᴸ L)
 ```
 is the projection map of `Ra_!` followed by the counit of `La^* ⊣ Ra_*`. We prove its coherence
-(blueprint `prop-pod-cup-product-coherence`): it is natural in `K` and `L`, associative with
+(blueprint `theorem-poincare-duality--7`): it is natural in `K` and `L`, associative with
 respect to the cup product `∪ : Ra_* L ⊗ᴸ Ra_* M ⟶ Ra_*(L ⊗ᴸ M)`
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarCupProduct`), unital for the unit section
 `1 : Λ_Y ⟶ Ra_* Λ_X` (`AlgebraicGeometry.Etale.rightDerivedLowerStarUnit`), and compatible with
@@ -77,7 +77,7 @@ section CupProduct
 
 variable {X Y : Scheme.{u}} (a : X ⟶ Y)
 
-/-- Blueprint `prop-pod-cup-product-coherence`: the *cup product*
+/-- Blueprint `theorem-poincare-duality--7`: the *cup product*
 `∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)`, that is `RΓ(X, K) ⊗ᴸ RΓ(X, L) ⟶ RΓ(X, K ⊗ᴸ L)` read in
 `D(Y_ét)`: the projection map of `Ra_*` followed by `Ra_*(K ⊗ᴸ ε_L)`, for the counit
 `ε_L : La^* Ra_* L ⟶ L` of `La^* ⊣ Ra_*`. -/
@@ -88,7 +88,7 @@ noncomputable def rightDerivedLowerStarCupProduct [Etale.UpperStarPreservesFlat 
   (derivedUpperStarLowerStarAdjunction A a).rightAdjointCupProduct
     (leftDerivedUpperStarTensorComparison A a) K L
 
-/-- Blueprint `prop-pod-cup-product-coherence`: the *unit section* `1 : Λ_Y ⟶ Ra_* Λ_X`, the unit
+/-- Blueprint `theorem-poincare-duality--7`: the *unit section* `1 : Λ_Y ⟶ Ra_* Λ_X`, the unit
 `1 ∈ H⁰(X, Λ)` read in `D(Y_ét)`: the transpose along `La^* ⊣ Ra_*` of the identification
 `La^* Λ_Y ≅ Λ_X`. -/
 noncomputable def rightDerivedLowerStarUnit [Etale.UpperStarPreservesFlat A] :
@@ -248,7 +248,7 @@ lemma mixedSupportCupProduct_eq (K L : 𝐃(X, A)) :
   rw [mixedSupportCupProduct, projectionMap_app_app_eq, derivedTensor_obj_map,
     rightDerivedLowerShriek_map_eq, Adjunction.cupProductOfProjection]
 
-/-- Blueprint `prop-pod-cup-product-coherence`: the mixed-support cup product is natural in its
+/-- Blueprint `theorem-poincare-duality--7`: the mixed-support cup product is natural in its
 first variable. -/
 lemma mixedSupportCupProduct_naturality_left {K K' : 𝐃(X, A)} (x : K ⟶ K') (L : 𝐃(X, A)) :
     ((derivedTensor A Y).map ((R(a)_![A]).map x)).app ((R((a)_*[A])).obj L) ≫
@@ -259,7 +259,7 @@ lemma mixedSupportCupProduct_naturality_left {K K' : 𝐃(X, A)} (x : K ⟶ K') 
     (fun x L ↦ compactificationProjectionMap_naturality_left A
       (HasCompactification.compactification a) x L) x L
 
-/-- Blueprint `prop-pod-cup-product-coherence`: the mixed-support cup product is natural in its
+/-- Blueprint `theorem-poincare-duality--7`: the mixed-support cup product is natural in its
 second variable. -/
 lemma mixedSupportCupProduct_naturality_right (K : 𝐃(X, A)) {L L' : 𝐃(X, A)} (y : L ⟶ L') :
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map ((R((a)_*[A])).map y) ≫
@@ -270,7 +270,7 @@ lemma mixedSupportCupProduct_naturality_right (K : 𝐃(X, A)) {L L' : 𝐃(X, A
     (fun K _ _ y ↦ compactificationProjectionMap_naturality_right A
       (HasCompactification.compactification a) K y) K y
 
-/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+/-- Blueprint `theorem-poincare-duality--7`: Coherence of the mixed-support cup product.
 
 The mixed-support cup product `⌣_c : Ra_! K ⊗ᴸ Ra_* L ⟶ Ra_!(K ⊗ᴸ L)` is natural in `K` and
 `L`. -/
@@ -284,7 +284,7 @@ theorem mixedSupportCupProduct_naturality {K K' L L' : 𝐃(X, A)} (x : K ⟶ K'
   rw [mixedSupportCupProduct_naturality_right, reassoc_of% mixedSupportCupProduct_naturality_left,
     Functor.map_comp]
 
-/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+/-- Blueprint `theorem-poincare-duality--7`: Coherence of the mixed-support cup product.
 
 **Associativity**: on `RΓ_c(X, K) ⊗ RΓ(X, L) ⊗ RΓ(X, M)`, cupping first with `L` and then with
 `M` is cupping with the cup product `L ∪ M`:
@@ -314,7 +314,7 @@ theorem mixedSupportCupProduct_associativity (K L M : 𝐃(X, A)) :
     (compactificationProjectionMap_associativity A (HasCompactification.compactification a))
     K L M
 
-/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+/-- Blueprint `theorem-poincare-duality--7`: Coherence of the mixed-support cup product.
 
 **Unitality**: the unit `1 ∈ H⁰(X, Λ)` (`AlgebraicGeometry.Etale.rightDerivedLowerStarUnit`)
 acts as the identity: `Ra_! K ⊗ᴸ Λ_Y ⟶ Ra_! K ⊗ᴸ Ra_* Λ_X ⟶ Ra_!(K ⊗ᴸ Λ_X) ≅ Ra_! K` is the
@@ -349,7 +349,7 @@ lemma rightDerivedLowerShriekToLowerStarComp_comp_eq :
   rw [rightDerivedLowerStarComp_hom_comp_congr_hom]
   rfl
 
-/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+/-- Blueprint `theorem-poincare-duality--7`: Coherence of the mixed-support cup product.
 
 The mixed-support cup product is compatible with the cup product
 `∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)` through the forget-supports map `s : Ra_! ⟶ Ra_*`:
@@ -370,7 +370,7 @@ theorem mixedSupportCupProduct_comp_forgetSupports (K L : 𝐃(X, A)) :
     (compactificationProjectionMap_comp_forgetSupports A (HasCompactification.compactification a))
     K L
 
-/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+/-- Blueprint `theorem-poincare-duality--7`: Coherence of the mixed-support cup product.
 
 For a proper morphism `a`, the mixed-support cup product is the cup product
 `∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)` read through the identification `Ra_! ≅ Ra_*`
@@ -388,7 +388,7 @@ theorem mixedSupportCupProduct_comp_lowerShriekIsoLowerStar [IsProper a]
 
 end MixedSupport
 
-/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+/-- Blueprint `theorem-poincare-duality--7`: Coherence of the mixed-support cup product.
 
 **Associativity of the cup product** `∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)`, the compatibility
 with the iterate of the cup product. -/

@@ -9,13 +9,15 @@ public import WeilConjectures.AlgebraicGeometry.Proper.ProperFiniteCoefficientEx
 
 /-! # Proper finite coefficient extension
 
-Source: Stacks Project, `literature/stacks-project/more-etale.tex`, Tag 0GL6,
-remark-Rf-lower-shriek-change-of-rings, proper case.
-(blueprint: lem-asd-proper-finite-coefficient-extension).
-
 The theorem records the canonical unbounded coefficient-change comparison, its
 adjunction normalization, and the identification after restriction of scalars
 with the coefficient-first proper projection morphism.
+
+## References
+
+* Stacks Project, Tag 0GL6, proper case
+* Stacks Project, Tag 0GL6, with the counit-transpose normalization of Tag 0B56 and the direct-image
+  composition comparison of Tag 0D6E
 -/
 
 @[expose] public section
@@ -30,21 +32,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical unbounded proper direct-image comparison for a finite coefficient extension.
-
-Source: Stacks Project, Tag 0GL6, with the counit-transpose normalization of Tag 0B56
-and the direct-image composition comparison of Tag 0D6E.
-(blueprint: lem-asd-proper-finite-coefficient-extension).
-
-Proof: use the canonical scalar extension and pullback comparison, and take their mate
-under the two canonical derived inverse-image/direct-image adjunctions.  Exact restriction
-of scalars is conservative and the proper projection theorem makes the coefficient-first
-projection morphism invertible.  The canonical restricted direct-image comparison and the
-canonical scalar/tensor comparisons identify the restricted mate with that projection;
-therefore every component of the mate is invertible.  The mate construction is natural in
-all objects, and its defining equation is exactly the displayed counit transpose.  No
-flatness of the coefficient map or boundedness of the derived object is used.
--/
+/-- Canonical unbounded proper direct-image comparison for a finite coefficient extension. -/
 theorem properFiniteCoefficientExtension
     {R A : Type (u + 1)} [CommRing R] [CommRing A] [Finite R] [Finite A]
     (φ : R →+* A) {X Y : Scheme.{u}} (f : X ⟶ Y)

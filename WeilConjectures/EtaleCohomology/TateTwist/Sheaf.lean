@@ -93,7 +93,7 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) {Y : Scheme.{u}}
 
-/-- Blueprint `def-coefficient-twists-detailed`: Coefficient Tate twists.
+/-- Blueprint `definition-tate-twists`: Coefficient Tate twists.
 
 The *Tate sheaf* `Λ_X(1) = μₙ ⊗_ℤ Λ` on `X`, for `n` the characteristic of `Λ`: the extension of
 scalars to `Λ` of the étale sheaf `μₙ` of `n`-th roots of unity. When `ℓ^N` is the exponent of

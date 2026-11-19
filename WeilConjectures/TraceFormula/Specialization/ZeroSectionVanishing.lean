@@ -17,20 +17,21 @@ constructible `ℚ̄_ℓ`-complex `L` on `X`, the defect `C_{X,Z}(L)` of the spe
 normal cone vanishes, that is, the zero-section map
 `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)` is an isomorphism
 (`ProEtale.CondensedRing.isZero_specializationDefect`,
-`ProEtale.CondensedRing.isIso_zeroSectionMap`; blueprint `det-sp-zero-section-vanishing`).
+`ProEtale.CondensedRing.isIso_zeroSectionMap`; blueprint
+`theorem-verdier-s-theorem-specialization-zero--1`).
 
 The proof follows the blueprint:
 * replacing `L` by `j_! j^* L` does not change the defect, so we may assume `Li^* L = 0`
-  (blueprint `det-sp-defect-closed-vanishing`);
+  (blueprint `lemma-base-change-cone-x-z`);
 * blowing up `Z` reduces to the case of an effective Cartier divisor
   (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_blowup`, blueprint
-  `det-sp-zero-section-cartier`);
+  `theorem-verdier-s-theorem-specialization-zero`);
 * the assertion is local (`ProEtale.CondensedRing.isZero_specializationDefect_of_cover`), so we may
   assume that `X` is affine and `Z = V(h)` is principal
   (`ProEtale.CondensedRing.isZero_specializationDefect_of_isInvertible`);
 * embedding `V(h) ⊆ X` into a coordinate hyperplane of an affine space reduces to the coordinate
   hyperplane (`ProEtale.CondensedRing.isZero_specializationDefect_ofIdealTop_span_singleton`,
-  blueprint `det-sp-zero-section-affine-space`).
+  blueprint `theorem-verdier-s-theorem-specialization-zero`).
 
 -/
 
@@ -52,9 +53,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **The defect vanishes along an effective Cartier divisor** (proof of blueprint
-`det-sp-zero-section-vanishing`): if `I` is invertible, then `C_{X,Z}(L) = 0`. The assertion is
-local (`ProEtale.CondensedRing.isZero_specializationDefect_of_cover`), and on an affine open where
-`I` is principal it is
+`theorem-verdier-s-theorem-specialization-zero--1`): if `I` is invertible, then `C_{X,Z}(L) = 0`.
+The assertion is local (`ProEtale.CondensedRing.isZero_specializationDefect_of_cover`), and on an
+affine open where `I` is principal it is
 `ProEtale.CondensedRing.isZero_specializationDefect_ofIdealTop_span_singleton`. -/
 theorem isZero_specializationDefect_of_isInvertible (I : X.left.IdealSheafData)
     (hI : I.IsInvertible) (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -78,9 +79,10 @@ theorem isZero_specializationDefect_of_isInvertible (I : X.left.IdealSheafData)
     exact isZero_specializationDefect_ofIdealTop_span_singleton k' _ _
 
 variable (X) in
-/-- **The zero-section map is invertible** (blueprint `det-sp-zero-section-vanishing`, for
-`ℚ̄_ℓ`-coefficients): for every closed subscheme `Z = V(I)` of `X` and every bounded constructible
-`L`, the defect `C_{X,Z}(L)` vanishes. -/
+/-- **The zero-section map is invertible** (blueprint
+`theorem-verdier-s-theorem-specialization-zero--1`, for `ℚ̄_ℓ`-coefficients): for every closed
+subscheme `Z = V(I)` of `X` and every bounded constructible `L`, the defect `C_{X,Z}(L)`
+vanishes. -/
 theorem isZero_specializationDefect (I : X.left.IdealSheafData)
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero (specializationDefect X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) := by
@@ -93,8 +95,9 @@ theorem isZero_specializationDefect (I : X.left.IdealSheafData)
     Profinite.padicAlgClRingObj ℓ⟧).map_isZero h₃).of_iso e₂
 
 variable (X) in
-/-- **The zero-section map is invertible** (blueprint `det-sp-zero-section-vanishing`, for
-`ℚ̄_ℓ`-coefficients): `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)` is an isomorphism. -/
+/-- **The zero-section map is invertible** (blueprint
+`theorem-verdier-s-theorem-specialization-zero--1`, for `ℚ̄_ℓ`-coefficients):
+`ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)` is an isomorphism. -/
 theorem isIso_zeroSectionMap (I : X.left.IdealSheafData)
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (zeroSectionMap X I k' (Profinite.padicAlgClRingObj ℓ) L.obj) :=

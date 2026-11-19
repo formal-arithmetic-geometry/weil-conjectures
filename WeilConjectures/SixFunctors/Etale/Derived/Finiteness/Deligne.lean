@@ -37,19 +37,19 @@ map along the open immersion `Y_U ⟶ Y`, which is an isomorphism.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`: Deligne's generic
-  constructibility (`thm-fin-deligne-generic-open`).
+  constructibility (`theorem-generic-constructibility-base-change-rj`).
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`
   :
-  over a field, `Rj_* F` is bounded constructible (`cor-fin-deligne-open-over-field`).
+  over a field, `Rj_* F` is bounded constructible (`corollary-open-direct-image-over-field--1`).
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective`:
   descent of the property along a finite, surjective, radicial base change
-  (`lem-fin-radicial-exchange-descent`).
+  (`lemma-universal-homeomorphism-base--1`).
 
 ## Implementation notes
 
 The blueprint states the theorem and its corollary over a field for `𝔽_ℓ`-coefficients, and
 obtains arbitrary finite coefficients `Λ` by a dévissage
-(`cor-fin-deligne-open-finite-coefficients`, `lem-fin-coefficients-forgetful-direct-image`). Its
+(`corollary-open-direct-image-over-field--1`). Its
 proof applies verbatim to any finite `Λ` whose exponent is invertible on `S`, and we state it in
 that generality.
 -/
@@ -335,10 +335,10 @@ on `X`, there is a nonempty open `U ⊆ S` over which `Ra_* F` is bounded constr
 commutes with every base change from a noetherian scheme
 (`AlgebraicGeometry.Etale.SmoothGenericDirectImage`).
 
-This records the form of the node used by the induction for `thm-fin-deligne-generic-open`: the
-blueprint asks for `𝔽_ℓ`-coefficients and finite locally constant cohomology sheaves of
-`Rf_{U,*} L`, whereas this states bounded constructibility (with base change) over any finite
-ring `Λ` whose exponent is invertible on `S`. -/
+This records the form of the node used by the induction for
+`theorem-generic-constructibility-base-change-rj`: the blueprint asks for `𝔽_ℓ`-coefficients and
+finite locally constant cohomology sheaves of `Rf_{U,*} L`, whereas this states bounded
+constructibility (with base change) over any finite ring `Λ` whose exponent is invertible on `S`. -/
 theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ := by
   intro k _ S X _ aS _ _ _ a _ _ _ F _
   obtain ⟨n, hn, hnΛ, hnu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := S)
@@ -397,8 +397,8 @@ theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ := by
   change n • x = 0
   rw [← Nat.cast_smul_eq_nsmul Λ, hnΛ, zero_smul]
 
-/-- Blueprint `thm-fin-deligne-generic-open`: Generic bounded constructibility for an open
-immersion.
+/-- Blueprint `theorem-generic-constructibility-base-change-rj`: Generic bounded constructibility
+for an open immersion.
 
 Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
 is invertible on `S` (the blueprint takes `Λ = 𝔽_ℓ` with `ℓ ≠ char k`), and let `j : X ⟶ Y` be
@@ -418,7 +418,7 @@ theorem exists_hasConstructibleDirectImageBaseChangeOn {k : Type u} [Field k]
     (Λ := Λ) (smoothGenericDirectImage Λ) aS fY j F
 
 omit [Finite Λ] in
-/-- Blueprint `lem-fin-radicial-exchange-descent`: Descending the exchange property through a
+/-- Blueprint `lemma-universal-homeomorphism-base--1`: Descending the exchange property through a
 universal homeomorphism.
 
 Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), let `j : X ⟶ Y`
@@ -436,13 +436,13 @@ theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective
     HasConstructibleDirectImageBaseChangeOn Λ fY j F Set.univ :=
   .of_isFinite_of_surjective' π fY j g fY' hY g' j' hX F h
 
-/-- Blueprint `cor-fin-deligne-open-over-field`: Higher open direct images over a field.
+/-- Blueprint `corollary-open-direct-image-over-field--1`: Higher open direct images over a field.
 
 Let `k` be a field, let `Λ` be a finite ring whose exponent is invertible in `k` (the blueprint
 takes `Λ = 𝔽_ℓ` with `ℓ ≠ char k`), let `j : X ⟶ Y` be an open immersion of finite-type
 `k`-schemes and let `F` be a constructible sheaf of `Λ`-modules on `X`. Then `Rj_* F` is
-bounded constructible. This is `thm-fin-deligne-generic-open` over `S = Spec k`, whose only
-nonempty open is `S` itself. -/
+bounded constructible. This is `theorem-generic-constructibility-base-change-rj` over `S = Spec k`,
+whose only nonempty open is `S` itself. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field {k : Type u}
     [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (j : X ⟶ Y)

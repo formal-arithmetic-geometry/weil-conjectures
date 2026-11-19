@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Sets.Closeds
-import Mathlib.Topology.Separation.Profinite
+import Mathlib.Topology.Separation.Regular
 
 /-!
 # Bijective clopen pullback between profinite spaces
@@ -69,7 +69,7 @@ theorem bijective_and_isOpenMap_of_bijective_clopen_preimage
   have hinj : Function.Injective h := by
     intro x y hxy
     by_contra hne
-    obtain ⟨U, hU, hxU, hUy⟩ := compact_exists_isClopen_in_isOpen
+    obtain ⟨U, hU, hxU, hUy⟩ := exists_isClopen_mem_of_isOpen
       (isClosed_singleton (x := y)).isOpen_compl
       (show x ∈ ({y} : Set P)ᶜ from hne)
     obtain ⟨V, hV⟩ := hclop.2 (⟨U, hU⟩ : TopologicalSpace.Clopens P)
@@ -88,7 +88,7 @@ theorem bijective_and_isOpenMap_of_bijective_clopen_preimage
     by_contra hq
     have hclosed : IsClosed (Set.range h) := by
       simpa only [Set.image_univ] using hh.isClosedMap Set.univ isClosed_univ
-    obtain ⟨V, hV, hqV, hVr⟩ := compact_exists_isClopen_in_isOpen
+    obtain ⟨V, hV, hqV, hVr⟩ := exists_isClopen_mem_of_isOpen
       hclosed.isOpen_compl (show q ∈ (Set.range h)ᶜ from hq)
     have hpre : h ⁻¹' V = ∅ := by
       apply Set.eq_empty_iff_forall_notMem.mpr
