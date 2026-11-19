@@ -198,8 +198,8 @@ theorem localTerm_traceClass_ofGraph_squaring
     [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (specPolynomialOver.origin k)).obj K)] :
     ((ofGraph K (specPolynomialOver.squaring k) v).traceClass F).localTerm j =
-      trace (graphStalkMap K (specPolynomialOver.squaring k) v (specPolynomialOver.origin k)
-        (specPolynomialOver.origin_comp_squaring k)) :=
+      End.of (trace (graphStalkMap K (specPolynomialOver.squaring k) v (specPolynomialOver.origin k)
+        (specPolynomialOver.origin_comp_squaring k))) :=
   localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt _ v F _
     (isContractingAt_ofGraph_squaring v) j hB
 

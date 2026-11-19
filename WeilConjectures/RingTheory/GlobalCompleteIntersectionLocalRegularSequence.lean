@@ -16,6 +16,8 @@ import Mathlib.RingTheory.Regular.Flat
 import WeilConjectures.RingTheory.IsRegularOfDimensionDrop
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 
 /-!
 # Equations of a global complete intersection at a prime

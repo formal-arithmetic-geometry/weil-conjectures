@@ -12,6 +12,7 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.Algebra.Category.ModuleCat.Products
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 @[expose] public section
 

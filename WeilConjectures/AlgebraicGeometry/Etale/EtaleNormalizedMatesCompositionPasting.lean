@@ -114,7 +114,7 @@ noncomputable def etaleNormalizedRightExchange
     G ⋙ (upperStar (ModuleCat.{u + 1} A) w').mapDerivedCategory ⟶
       (upperStar (ModuleCat.{u + 1} A) w).mapDerivedCategory ⋙ G' :=
   (mateEquiv adj adj' (TwoSquare.mk _ _ _ _
-    (etaleNormalizedSupportExchange A sq c d).inv)).natTrans
+    (etaleNormalizedSupportExchange A sq c d).inv))
 
 private lemma support_exchange_global
     (A : Type (u + 1)) [CommRing A] [Finite A]

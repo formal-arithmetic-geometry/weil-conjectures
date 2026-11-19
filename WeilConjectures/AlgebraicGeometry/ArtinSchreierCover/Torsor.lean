@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 The Artin–Schreier cover of `f` is an `𝔽_p`-torsor over `S` (`Scheme.EtaleTorsor`), whose
 sheaf torsor under the constant sheaf `𝔽_p` is the functor of points of the cover, the constant
 section `a` acting by the translation `T ↦ T + a`.
-Source: blueprint, lem-fd-as-cover, step (5);
+Source: blueprint, lemma-artin-schreier-character-sheaf, step (5);
 lem-weil-pbc-small-etale-representable-presheaf-sheaf.
 -/
 
@@ -110,7 +110,7 @@ theorem artinSchreier_sheafTorsor (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S,
                 (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app
                   (Opposite.op U)) (ULift.up a)) s)).down =
           (e.hom.app (Opposite.op U) s).down ≫
-            (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).hom := by
+            (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).asIso.hom := by
   let : TopologicalSpace (ULift.{u + 1} (ZMod p)) := ⊥
   have : DiscreteTopology (ULift.{u + 1} (ZMod p)) := ⟨rfl⟩
   refine ⟨(artinSchreierEtaleTorsor hP hchar).toSheafTorsor,

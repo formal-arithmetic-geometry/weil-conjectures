@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Scalar compatibility of the intrinsic inverse-image clopen word
 
-Source: Stacks Project, Tag 0F7B, open case; Zheng, Construction 4.1 and Lemma 4.10.
+## References
+
+* Stacks Project, Tag 0F7B, open case
+* Zheng, Construction 4.1 and Lemma 4.10
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -86,7 +89,7 @@ private theorem normalized_pull
       HEq (fun x ↦ ((e.hom.app M).app (op n)).val.app (op U) x)
         (fun x : M.val.obj (op (n, (Scheme.proEtaleBaseChange f).obj U)) ↦ x)) :
     HEq ((mateEquiv (Adjunction.ofIsRightAdjoint F)
-      (VaryingRing.scalarTowerAdj B f)).symm (TwoSquare.mk _ _ _ _ e.inv)).natTrans
+      (VaryingRing.scalarTowerAdj B f)).symm (TwoSquare.mk _ _ _ _ e.inv))
       (Functor.whiskerRight aY.inv (StrictTower.towerPullback B f) ≫
         (D.b f).inv ≫ Functor.whiskerLeft (VaryingRing.pull C τ f) aX.hom) := by
   subst F
@@ -123,17 +126,16 @@ private theorem normalized_pull
       (VaryingRing.scalarTowerAdj B f) w = TwoSquare.mk _ _ _ _ d.hom := by
     dsimp only [w]
     erw [mateEquiv_whiskerTop_whiskerBottom]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     change aY.inv.app ((VaryingRing.push C τ f).obj N) ≫
       (mateEquiv (VaryingRing.moduleAdj C τ f) (VaryingRing.scalarTowerAdj B f)
-        (D.b f).inv).natTrans.app N ≫
+        (D.b f).inv).app N ≫
         (StrictTower.towerDirectImage B f).map (aX.hom.app N) = d.hom.app N
     rw [D.mate]
     rfl
   rw [← hd]
   change HEq ((mateEquiv (VaryingRing.moduleAdj C τ f)
-    (VaryingRing.scalarTowerAdj B f)).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans _
+    (VaryingRing.scalarTowerAdj B f)).symm (TwoSquare.mk _ _ _ _ d.hom)) _
   rw [← hw, Equiv.symm_apply_apply]
   exact HEq.rfl
 

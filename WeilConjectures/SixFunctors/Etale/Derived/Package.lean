@@ -41,7 +41,7 @@ product, and stability of the small categories.
 
 ## Implementation notes
 
-The package is stated in the setting of `def-sf-setting`: the coefficients are
+The package is stated in the setting of `definition-constructible-sheaves--6`: the coefficients are
 `ModuleCat Λ` for a finite ring `Λ` (with a normalized Tate twist datum, for the orientation
 clause) whose exponent is invertible on the base field `k`, and `Y` is separated of finite
 type over `k`. For a general coefficient category the clauses are false: for `Λ = 𝔽_p` over
@@ -76,18 +76,18 @@ statements and carry no mathematical content beyond the results they cite:
 - `rem-sf-yoga` (the dictionary from the axioms of the six-functor datum to the classical duality
   statements) and `rem-sf-axiom-verification` (each axiom is supplied by the corresponding result
   of this directory): this is the assembly `sixOperationsPackage` itself.
-- `rem-sf-ctf-descent`, `rem-ptr-trf-admissibility-14`,
-  `rem-ptr-weil-exceptional-adjoint-admissibility-10` and
-  `rem-ptr-weil-exceptional-inverse-image-16`: the coefficient comparisons of the exceptional
+- `rem-sf-ctf-descent`, `proposition-six-operations-change-coefficients`,
+  `lemma-change-coefficients-exceptional-inverse-image` and
+  `theorem-exceptional-inverse-image`: the coefficient comparisons of the exceptional
   adjoint are
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal`
-  (`lem-coef-finite-exceptional`) and
+  (`lemma-change-coefficients-exceptional-inverse-image--1`) and
   `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`.
-- `rem-ptr-sf-datum-1b`, `rem-weil-biduality-boundary-status` and `open-sf-preservation-gaps`:
+- `theorem-verdier-biduality`, `rem-weil-biduality-boundary-status` and `open-sf-preservation-gaps`:
   finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
   Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
   the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
-  (`det-pd-biduality-coefficients`).
+  (`theorem-verdier-biduality`).
 
 The reconstruction of normalized towers, an ingredient of the finite-level comparison, is
 `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.

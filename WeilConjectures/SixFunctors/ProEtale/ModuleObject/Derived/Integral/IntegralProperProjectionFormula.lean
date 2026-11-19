@@ -28,11 +28,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProje
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic/
 sk-thm-sf-pf-adic-projection.md, clauses (1)--(2)
-(blueprint: det-thm-sf-pf-adic-projection).
+(blueprint: lemma-projection-formula-integral-coefficients--1).
 
 All operations are the ordinary unbounded module-object derived operations.
 The localizing closures use ambient small sums and the constant-model
-constructibility predicate recorded by sk-def-sfb-constructible.
+constructibility predicate recorded by definition-constructible-sheaves.
 -/
 
 @[expose] public section
@@ -54,88 +54,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 open AlgebraicGeometry.Scheme
-
--- The upstream closure uses the Hom universe for its coproducts. Every existing
--- larger coproduct has Hom-small nonzero support, so it has the same closure.
-private theorem coproduct_small_support.{w, v, u₂, v₂}
-    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [LocallySmall.{w} D]
-    {I : Type v} (K : I → D) (t : Cofan K) (ht : IsColimit t) :
-    Small.{w} {i // ¬ IsZero (K i)} := by
-  classical
-  let p (i : I) : t.pt ⟶ K i := ht.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
-  have hp (i j : I) : t.inj j ≫ p i = Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
-    ht.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
-  apply small_of_injective (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ t.inj i.val)
-  intro i j hij
-  apply Subtype.ext
-  by_contra hne
-  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
-  have hi : t.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
-  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
-  have hid : 𝟙 (K i.val) = 0 := by
-    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
-  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
-
-private theorem localizing_large.{v, w}
-    {C : Type w} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    (P : ObjectProperty C) [P.IsLocalizing] : IsLocalizingSubcategory P := by
-  classical
-  refine ⟨inferInstance, inferInstance, ?_⟩
-  intro I F hF hmem
-  let := hF
-  let K : I → C := fun i ↦ F.obj ⟨i⟩
-  let t : Cofan K := Cofan.mk (colimit F) (fun i ↦ colimit.ι F ⟨i⟩)
-  let c (s : Cofan K) : Cocone F :=
-    { pt := s.pt
-      ι := Discrete.natTrans (fun i ↦ s.inj i.as) }
-  have ht : IsColimit t := by
-    refine Cofan.IsColimit.mk t (fun s ↦ colimit.desc F (c s)) ?_ ?_
-    · intro s i
-      exact colimit.ι_desc (c s) ⟨i⟩
-    · intro s m hm
-      apply colimit.hom_ext (F := F)
-      intro ⟨i⟩
-      exact (hm i).trans (colimit.ι_desc (c s) ⟨i⟩).symm
-  let J := {i // ¬ IsZero (K i)}
-  have : Small.{v} J := coproduct_small_support.{v, w, w, v} K t ht
-  let : P.IsClosedUnderColimitsOfShape (Discrete J) :=
-    ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-      (Discrete.equivalence (equivShrink J)).symm
-  let U : J → C := fun i ↦ K i.val
-  let r : Cofan U := Cofan.mk t.pt (fun i ↦ t.inj i.val)
-  have hr : IsColimit r := by
-    refine Cofan.IsColimit.mk r (fun s ↦ ht.desc (Cofan.mk s.pt
-      (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-    · intro s i
-      obtain ⟨i, hi⟩ := i
-      change t.ι.app (Discrete.mk i) ≫ _ = _
-      rw [ht.fac]
-      simp only [Cofan.mk_ι_app, dite_eq_left hi]
-    · intro s m hm
-      apply ht.hom_ext
-      intro ⟨i⟩
-      rw [ht.fac]
-      by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-          using hm ⟨i, hi⟩
-      · exact (not_not.mp hi).eq_of_src _ _
-  exact P.prop_of_isColimit (F := Discrete.functor U) (c := r) hr
-    (fun i ↦ hmem i.as.val)
-
-private theorem localizing_small.{v}
-    {C : Type (v + 1)} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
-    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    (P : ObjectProperty C) (hP : IsLocalizingSubcategory P) : P.IsLocalizing := by
-  let := hP.1
-  let := hP.2.1
-  refine { isClosedUnderColimitsOfShape_discrete := fun J ↦ ?_ }
-  let : P.IsClosedUnderColimitsOfShape (Discrete (ULift.{v + 1} J)) :=
-    ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
-      rintro _ ⟨F, hF⟩
-      exact hP.2.2 F inferInstance (fun i ↦ hF ⟨i⟩))
-  exact ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-    (Discrete.equivalence Equiv.ulift)
 
 private theorem canonical_sums_preserved.{v, w, w'}
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v} D]
@@ -163,7 +81,7 @@ private theorem localizing_inverseImage
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro I G hG h
   let := hG
-  have hcol : P (colimit (G ⋙ F)) := hP.2.2 (G ⋙ F) inferInstance h
+  have hcol : P (colimit (G ⋙ F)) := hP.prop_colimit (G ⋙ F) inferInstance h
   exact P.prop_of_iso (preservesColimitIso F G).symm hcol
 
 private theorem localizing_tensor_closed
@@ -223,7 +141,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 /-- The bounded integral proper projection formula, tensor closure of the localizing
 categories on every standing scheme, and the projection formula on those closures.
 Source: blueprint sk-thm-sf-pf-adic-projection, clauses (1)--(2)
-(blueprint: det-thm-sf-pf-adic-projection).
+(blueprint: lemma-projection-formula-integral-coefficients--1).
 
 Proof:
 1. A standing scheme is quasi-compact and locally Noetherian. The integral
@@ -338,13 +256,14 @@ theorem integralProperProjectionFormula (k : Type u) [Field k]
       change (boundedConstructible (condensedRingObj Λ T)).localizingClosure = _
       rw [hbc T]
       apply le_antisymm
-      · let := localizing_small
-            (localizingClosure (constantModelBoundedConstructible Λ T))
+      · let := (isLocalizingSubcategory_iff_isLocalizing
+            (localizingClosure (constantModelBoundedConstructible Λ T))).1
             (localizingClosure_exists Λ T
               (constantModelBoundedConstructible Λ T)).2.2.2.1
         exact ObjectProperty.localizingClosure_le (fun A hA P _ hSP ↦ hSP A hA)
       · intro A hA
-        exact hA _ (localizing_large _) (ObjectProperty.le_localizingClosure _)
+        exact hA _ ((isLocalizingSubcategory_iff_isLocalizing _).2 inferInstance)
+          (ObjectProperty.le_localizingClosure _)
     have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
       (Y ↘ Spec (.of k))
     obtain ⟨d, hd'⟩ := exists_fibre_dimension_bound p

@@ -563,7 +563,7 @@ coherence and regular-unit uniqueness
 Proof:
 1. Restrict scalars along `c` in the precomposition functor. Naturality and the ring-map
    equations give the module axioms and linear restrictions. The map `e_U(r) = c_U(r)`
-   is a module-sheaf morphism [def-weil-sheaf-of-modules-category].
+   is a module-sheaf morphism [situation-conventions].
 2. The lax structure on inclusion induced by the monoidal sheafification adjunction
    gives the canonical pure-tensor pairing and its naturality, associator and unitor
    formulas. Apply [lem-pd-ringed-pushforward-bilinear-transfer] to this pairing to

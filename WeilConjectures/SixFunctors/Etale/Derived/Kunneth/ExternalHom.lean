@@ -17,11 +17,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braide
 
 Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, separated
 finite-type `k`-schemes `Z₁`, `Z₂` and `Eᵢ ∈ Dctf(Zᵢ, Λ)`, the external Hom map
-(`AlgebraicGeometry.Etale.externalHomMap`, `def-sf-kv-maps` (iii))
+(`AlgebraicGeometry.Etale.externalHomMap`, `lemma-external-duality-trace-morphism` (iii))
 
 `β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)`
 
-is an isomorphism (`AlgebraicGeometry.Etale.isIso_externalHomMap`, `prop-trf-external-hom`).
+is an isomorphism (`AlgebraicGeometry.Etale.isIso_externalHomMap`,
+`lemma-external-duality-trace-morphism--1`).
 
 ## Strategy
 
@@ -157,7 +158,7 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
     fun M N ↦ hτ M N
   have : ∀ N, IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction Λ g₁)
       (rightDerivedUpperShriekAdjunction Λ g)
-      (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).natTrans.app N) := hBC
+      (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).app N) := hBC
   exact Adjunction.isIso_map_externalIhomMap_iff
     (F₁ := L((p₁)^*[ModuleCat.{u + 1} Λ])) (F₂ := L((p₂)^*[ModuleCat.{u + 1} Λ]))
     (F₁' := L((p₁')^*[ModuleCat.{u + 1} Λ])) (F₂' := L((g ≫ p₂)^*[ModuleCat.{u + 1} Λ]))
@@ -307,11 +308,11 @@ end Devissage
 
 variable {k}
 
-/-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map.
+/-- Blueprint `lemma-external-duality-trace-morphism--1`: External Hom; the `β` map.
 
 Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, separated
 finite-type `k`-schemes `Z₁`, `Z₂` and `Eᵢ, Nᵢ ∈ Dctf(Zᵢ, Λ)`, the external Hom map of
-`def-sf-kv-maps` (iii) (`AlgebraicGeometry.Etale.externalHomMap`)
+`lemma-external-duality-trace-morphism` (iii) (`AlgebraicGeometry.Etale.externalHomMap`)
 
 `β : RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ⟶ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`
 

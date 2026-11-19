@@ -41,7 +41,6 @@ open Scheme DerivedCategory
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}}
   (f : X ⟶ Y)
 
-set_option maxHeartbeats 4000000 in
 -- Producing the bounded below injective resolution of `K` is slow to elaborate.
 /-- **(Push) for `E ⟶ ℚ̄_ℓ` on bounded below objects**, assuming the underived (Push) is an
 isomorphism at injective `E_X`-modules `I` and the `ℚ̄_ℓ,X ⊗_{E_X} I` are `f_*`-acyclic: the

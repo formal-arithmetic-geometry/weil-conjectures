@@ -44,11 +44,11 @@ the parent proposition.
 theorem directImage_pushReductionMap_isIso :
     ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       IsIso ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
-        (.mk _ _ _ _ (pullReduction l E f).hom)).natTrans.app K) := by
+        (.mk _ _ _ _ (pullReduction l E f).hom)).app K) := by
   intro K
   apply directImage_pushReductionMap_levelwiseDetection l E (T := Y)
     ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
-      (.mk _ _ _ _ (pullReduction l E f).hom)).natTrans.app K)
+      (.mk _ _ _ _ (pullReduction l E f).hom)).app K)
   intro n
   exact directImage_pushReductionMap_levelwiseIso l E f K n
 

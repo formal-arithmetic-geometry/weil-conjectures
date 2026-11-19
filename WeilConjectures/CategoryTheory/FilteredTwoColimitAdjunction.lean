@@ -131,7 +131,7 @@ def ofIso (L : ∀ i, C i ⥤ C' i) (R : ∀ i, C' i ⥤ C i) (adj : ∀ i, L i 
       (α i).hom.app x = (c'.iso h).inv.app ((L i).obj x) ≫ (c'.Φ j).map ((γ h).hom.app x) ≫
         (α j).hom.app ((c.T h).obj x) ≫ F.map ((c.iso h).hom.app x))
     (hmate : ∀ {i j : I} (h : i ≤ j),
-      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (γ h).inv)).natTrans) :
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (γ h).inv))) :
     LevelwiseLeftAdjoint c c' F where
   L := L
   R := R

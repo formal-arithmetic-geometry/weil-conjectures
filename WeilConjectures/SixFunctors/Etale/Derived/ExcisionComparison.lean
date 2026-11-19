@@ -26,8 +26,8 @@ nonzero, whereas that of `j_! Λ` vanishes.
 The blueprint reads off the stalk of `j_* Λ` at the origin from the description of direct
 images. Here it is read off from the closed support triangle
 `s_* Rs^! Λ_T ⟶ Λ_T ⟶ Rj_* Λ_G ⟶` of the zero section `s` (blueprint
-`lem-exc-closed-support-triangle`): if `Ls^* Rj_* Λ_G` vanished, then `Rs^! Λ_T ≅ Ls^* Λ_T ≅ Λ_k`
-would have nonzero `𝓗⁰`, whereas `(Rs^! Λ_T)[2] ≅ Λ_k` by purity
+`lemma-local-cohomology-right-adjoint--2`): if `Ls^* Rj_* Λ_G` vanished, then
+`Rs^! Λ_T ≅ Ls^* Λ_T ≅ Λ_k` would have nonzero `𝓗⁰`, whereas `(Rs^! Λ_T)[2] ≅ Λ_k` by purity
 (`Etale.nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed`).
 This route needs a normalized Tate twist datum.
 

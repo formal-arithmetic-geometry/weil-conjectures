@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 /-! # The intrinsic compact scalar mate on bounded constructible inputs
 
 Source: Stacks 0GL6 and 09AL; the compact-support paragraph of
-`lem-fix-operation-reduction`.
+`proposition-six-operations-change-coefficients`.
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +32,7 @@ def intrinsicCompactScalar
       pbcDerivedExtend (scalarRingMap φ X) ⋙ sfIntrinsicCompactSupport c B :=
   ((mateEquiv (pbcDerivedScalarAdjunction (scalarRingMap φ X))
     (pbcDerivedScalarAdjunction (scalarRingMap φ Y))).symm
-      (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c φ).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c φ).hom))
 
 private def scalarTransposeAux
     {C₀ C₁ D₀ D₁ : Type*}
@@ -42,7 +42,7 @@ private def scalarTransposeAux
     (ax : Sx ⊣ Rx) (ay : Sy ⊣ Ry)
     {P₀ : C₀ ⥤ D₀} {P₁ : C₁ ⥤ D₁}
     (r : Rx ⋙ P₀ ⟶ P₁ ⋙ Ry) : P₀ ⋙ Sy ⟶ Sx ⋙ P₁ :=
-  ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ r)).natTrans
+  ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ r))
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem scalarTransposeAux_app
@@ -59,7 +59,7 @@ private theorem scalarTransposeAux_app
   apply (ay.homEquiv _ _).injective
   erw [Equiv.apply_symm_apply]
   simpa only [Adjunction.homEquiv_unit, scalarTransposeAux, TwoSquare.mk,
-    TwoSquare.natTrans, Functor.id_obj, Functor.comp_obj] using
+    Functor.id_obj, Functor.comp_obj] using
     (unit_mateEquiv_symm ax ay (TwoSquare.mk _ _ _ _ r) K).symm
 
 private theorem intrinsicCompactScalar_app
@@ -98,8 +98,8 @@ private theorem bounded_interval
 /-- The actual intrinsic scalar transpose is invertible if its input is bounded
 constructible and its scalar extension has bounded cohomology.
 
-Source: Stacks 0GL6 and 09AL; `lem-fix-operation-reduction`, compact-support paragraph.
-(blueprint: lem-sf-finite-compact-scalar-constructible).
+Source: Stacks 0GL6 and 09AL; `proposition-six-operations-change-coefficients`, compact-support
+paragraph. (blueprint: lem-sf-finite-compact-scalar-constructible).
 
 Proof: the finite-ring essential-image criterion gives a bounded constructible
 etale antecedent G. The normalized site/scalar isomorphism identifies the intrinsic

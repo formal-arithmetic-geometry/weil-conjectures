@@ -21,10 +21,11 @@ Let `j : U ⟶ X` be an open immersion with closed complement `s : Z ⟶ X`. For
 the complex of sections supported on `Z`, the complex itself and the restriction to the open
 part. If the terms of `I` are injective, the restriction `I ⟶ j_* j^* I` is a degreewise split
 epimorphism, so `0 ⟶ A(I) ⟶ B(I) ⟶ C(I) ⟶ 0` is a short exact sequence of complexes
-(`lem-pur-support-exact`). The map from the mapping cone of the inclusion `u : A(I) ⟶ B(I)` to
-`C(I)`, `(b, a) ↦ [b]`, is then a quasi-isomorphism, and the *support-localization triangle*
-`A(I) ⟶ B(I) ⟶ C(I) ⟶ A(I)[1]` is the image of the cone triangle in the derived category, with
-its third term identified with `C(I)` (`rem-ptr-pur-support-triangle-2`).
+(`lemma-local-cohomology-right-adjoint--2`). The map from the mapping cone of the inclusion
+`u : A(I) ⟶ B(I)` to `C(I)`, `(b, a) ↦ [b]`, is then a quasi-isomorphism, and
+the *support-localization triangle* `A(I) ⟶ B(I) ⟶ C(I) ⟶ A(I)[1]` is the image of the cone triangle
+in the derived category, with its third term identified with `C(I)`
+(`lemma-local-cohomology-right-adjoint--2`).
 
 ## Main definitions
 
@@ -62,8 +63,8 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [hJX : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hJX hJZ in
-/-- Blueprint `lem-pur-support-exact`: The exact sequence of supported sections for injective
-objects
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The exact sequence of supported sections
+for injective objects
 
 For an injective étale sheaf `I` on `X` and an open immersion `j` with closed complement `s`,
 the restriction `I ⟶ j_* j^* I` (the unit of `j^* ⊣ j_*`) is a split epimorphism. Put
@@ -94,8 +95,8 @@ theorem isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective
   erw [adj.left_triangle_components]
   simp
 
-/-- Blueprint `def-pur-support-triangle`: The support-localization triangle of a complex: the
-construction
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The support-localization triangle of a
+complex: the construction
 
 The restriction `I ⟶ j_* j^* I` of a complex of étale sheaves to the open part, degreewise the
 unit of `j^* ⊣ j_*`. -/
@@ -105,8 +106,8 @@ noncomputable def supportsUnit (I : CochainComplex (Sheaf X.smallEtaleTopology A
   f n := (upperStarLowerStarAdjunction A j).unit.app (I.X n)
   comm' n m _ := ((upperStarLowerStarAdjunction A j).unit.naturality (I.d n m)).symm
 
-/-- Blueprint `def-pur-support-triangle`: The support-localization triangle of a complex: the
-construction
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The support-localization triangle of a
+complex: the construction
 
 The short complex `A(I) ⟶ B(I) ⟶ C(I)` of a complex `I` of étale sheaves: `B(I) = I`,
 `C(I) = j_* j^* I`, and `A(I) = s_* s^! I` is the kernel of the restriction `I ⟶ j_* j^* I`, the
@@ -118,8 +119,8 @@ noncomputable def supportsShortComplex (I : CochainComplex (Sheaf X.smallEtaleTo
   ShortComplex.mk (kernel.ι (supportsUnit A j I)) (supportsUnit A j I) (kernel.condition _)
 
 include hJX hJZ in
-/-- Blueprint `lem-pur-support-exact`: The exact sequence of supported sections for injective
-objects
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The exact sequence of supported sections
+for injective objects
 
 For a complex `I` of injective étale sheaves, `0 ⟶ s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ 0` is a short exact
 sequence of complexes: the restriction `I ⟶ j_* j^* I` is a degreewise (split) epimorphism by
@@ -138,8 +139,8 @@ theorem shortExact_supportsShortComplex (hjs : Set.range s.base = (Set.range j.b
     (by rw [supportsShortComplex_f]; infer_instance) this
 
 include hJX hJZ in
-/-- Blueprint `rem-ptr-pur-support-triangle-2`: Pointer to the properties of
-`def-pur-support-triangle`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pointer to the properties of
+`lemma-local-cohomology-right-adjoint--2`
 
 For a complex `I` of injective étale sheaves, the map `Cone(u) ⟶ C(I)`, `(b, a) ↦ [b]`, from the
 mapping cone of the inclusion `u : s_* s^! I ⟶ I` to `j_* j^* I` is a quasi-isomorphism, by the
@@ -151,8 +152,8 @@ theorem quasiIso_descShortComplex_supportsShortComplex
   CochainComplex.mappingCone.quasiIso_descShortComplex
     (shortExact_supportsShortComplex A j s hjs I)
 
-/-- Blueprint `rem-ptr-pur-support-triangle-2`: Pointer to the properties of
-`def-pur-support-triangle`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pointer to the properties of
+`lemma-local-cohomology-right-adjoint--2`
 
 The *support-localization triangle* `s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ (s_* s^! I)[1]` of a complex `I`
 of injective étale sheaves, in the derived category: the triangle of the short exact sequence
@@ -162,8 +163,8 @@ noncomputable def supportLocalizationTriangle (hjs : Set.range s.base = (Set.ran
     Pretriangulated.Triangle (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   DerivedCategory.triangleOfSES (shortExact_supportsShortComplex A j s hjs I)
 
-/-- Blueprint `rem-ptr-pur-support-triangle-2`: Pointer to the properties of
-`def-pur-support-triangle`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pointer to the properties of
+`lemma-local-cohomology-right-adjoint--2`
 
 The support-localization triangle is the image of the cone triangle of the inclusion
 `u : s_* s^! I ⟶ I` in the derived category, its third term `Cone(u)` being identified with
@@ -177,8 +178,8 @@ noncomputable def supportLocalizationTriangleIso
         (CochainComplex.mappingCone.triangle (supportsShortComplex A j I).f) :=
   DerivedCategory.triangleOfSESIso _
 
-/-- Blueprint `rem-ptr-pur-support-triangle-2`: Pointer to the properties of
-`def-pur-support-triangle`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Pointer to the properties of
+`lemma-local-cohomology-right-adjoint--2`
 
 The support-localization triangle is distinguished. -/
 theorem supportLocalizationTriangle_distinguished
@@ -206,8 +207,8 @@ instance injective_injectiveResolutionOfIsGE_I_X
     Injective ((injectiveResolutionOfIsGE A K n).I.X m) :=
   (CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE (K.truncGE n) n).choose_spec.2 m
 
-/-- Blueprint `def-pur-support-triangle`: The support-localization triangle of a complex: the
-construction
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The support-localization triangle of a
+complex: the construction
 
 For a bounded below complex `K` of étale sheaves on `X` (cohomologically concentrated in degrees
 `≥ n`), with specified resolution `K ⟶ I(K)` by a K-injective complex of injective sheaves
@@ -226,8 +227,8 @@ noncomputable def supportsShortComplexOfIsGE
     ShortComplex (CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) :=
   supportsShortComplex A j (injectiveResolutionOfIsGE A K n).I
 
-/-- Blueprint `def-pur-support-triangle`: The support-localization triangle of a complex: the
-construction
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: The support-localization triangle of a
+complex: the construction
 
 The cone complex `Cone(u)` of the inclusion `u : A(K) ⟶ B(K)`, with
 `Cone(u)^m = A(K)^{m+1} ⊕ B(K)^m` and differential `d(a, b) = (-d_A a, u(a) + d_B b)`

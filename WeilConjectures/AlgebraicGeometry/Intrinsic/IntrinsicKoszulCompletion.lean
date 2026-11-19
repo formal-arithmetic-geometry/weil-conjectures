@@ -20,9 +20,6 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
 /-! # Intrinsic Koszul completion
-
-Source: blueprint, proper base change, order 1257
-(blueprint: def-weil-pbc-intrinsic-koszul-completion).
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{t}) (Λ : Type t) [CommRing Λ]
 
-/-- Constant commutative ring sheafification unit, forgetting commutativity.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- Constant commutative ring sheafification unit, forgetting commutativity. -/
 def koszulConstantUnit :
     (Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{t + 1} Λ)) ⟶
       (adicModuleRing X Λ).obj :=
@@ -48,10 +44,7 @@ def koszulConstantUnit :
     (forget₂ CommRingCat RingCat)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Local bijectivity of the constant ring sheafification unit.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion).
-Proof: forgetting commutativity preserves the underlying sections and local equalities;
-the original sheafification unit is locally bijective. -/
+/-- Local bijectivity of the constant ring sheafification unit. -/
 theorem koszulConstantUnit_local :
     Presheaf.IsLocallyInjective (ProEt.topology X) (koszulConstantUnit X Λ) ∧
     Presheaf.IsLocallySurjective (ProEt.topology X) (koszulConstantUnit X Λ) := by
@@ -71,8 +64,7 @@ theorem koszulConstantUnit_local :
         (CategoryTheory.forget CommRingCat))
     infer_instance
 
-/-- Constant module sheaves, obtained by actual module sheafification.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- Constant module sheaves, obtained by actual module sheafification. -/
 def koszulConstantFunctor :
     ModuleCat.{t + 1} (ULift.{t + 1} Λ) ⥤
       SheafOfModules.{t + 1} (adicModuleRing X Λ) :=
@@ -81,9 +73,7 @@ def koszulConstantFunctor :
   siteConstantModulePresheafGeneral (C := X.ProEt) (ULift.{t + 1} Λ) ⋙
     PresheafOfModules.sheafification (koszulConstantUnit X Λ)
 
-/-- Constants preserve zero morphisms.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion).
-Proof: the constant presheaf construction and module sheafification are additive. -/
+/-- Constants preserve zero morphisms. -/
 theorem koszulConstantFunctor_preservesZero :
     (koszulConstantFunctor X Λ).PreservesZeroMorphisms := by
   constructor
@@ -101,21 +91,18 @@ theorem koszulConstantFunctor_preservesZero :
 attribute [local instance] koszulConstantFunctor_preservesZero
 
 /-- The cohomologically reindexed Koszul complex of the positive power m+1.
-The lift changes only the carrier universe, not the coefficient ring.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+The lift changes only the carrier universe, not the coefficient ring. -/
 def koszulPower (r : ℕ) (f : Fin r → Λ) (m : ℕ) :
     CochainComplex (ModuleCat.{t + 1} (ULift.{t + 1} Λ)) ℤ :=
   (ExteriorAlgebra.koszulComplex (ULift.{t + 1} Λ) r
     (fun j ↦ ULift.up (f j ^ (m + 1)))).extend ComplexShape.embeddingDownNat
 
-/-- The constant Koszul sheaf complex.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- The constant Koszul sheaf complex. -/
 def koszulPowerSheaf (r : ℕ) (f : Fin r → Λ) (m : ℕ) :=
   ((koszulConstantFunctor X Λ).mapHomologicalComplex (ComplexShape.up ℤ)).obj
     (koszulPower Λ r f m)
 
-/-- Exterior map on the free generators, e_j ↦ f_j e_j.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- Exterior map on the free generators, e_j ↦ f_j e_j. -/
 def koszulPowerGenerator (r : ℕ) (f : Fin r → Λ) :
     (Fin r →₀ ULift.{t + 1} Λ) →ₗ[ULift.{t + 1} Λ] (Fin r →₀ ULift.{t + 1} Λ) :=
   Finsupp.linearCombination (ULift.{t + 1} Λ) (fun j ↦ Finsupp.single j (ULift.up (f j)))
@@ -150,11 +137,7 @@ private theorem koszulContract_natural (R : Type t) [CommRing R] (r : ℕ)
     simp only [map_mul, ExteriorAlgebra.map_apply_ι, CliffordAlgebra.contractLeft_ι_mul,
       hv, hx, map_sub, map_smul]
 
-/-- The power transition commutes with Koszul contraction.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion).
-Proof: on each exterior generator, contraction on the target multiplies the removed
-factor by f_j^(m+1), while the exterior map supplies f_j. This is f_j^(m+2),
-which is the source contraction. Multilinearity extends the equality. -/
+/-- The power transition commutes with Koszul contraction. -/
 theorem koszulPowerTransition_comm (r : ℕ) (f : Fin r → Λ) (m i j : ℕ) :
     ModuleCat.ofHom (exteriorPower.map i (koszulPowerGenerator Λ r f)) ≫
       (ExteriorAlgebra.koszulComplex (ULift.{t + 1} Λ) r
@@ -193,8 +176,7 @@ theorem koszulPowerTransition_comm (r : ℕ) (f : Fin r → Λ) (m i j : ℕ) :
     rw [HomologicalComplex.shape _ i j hn, HomologicalComplex.shape _ i j hn,
       zero_comp, comp_zero]
 
-/-- The specified exterior-algebra transition, followed by cohomological reindexing.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- The specified exterior-algebra transition, followed by cohomological reindexing. -/
 def koszulPowerTransition (r : ℕ) (f : Fin r → Λ) (m : ℕ) :
     koszulPower Λ r f (m + 1) ⟶ koszulPower Λ r f m :=
   HomologicalComplex.extendMap
@@ -203,10 +185,7 @@ def koszulPowerTransition (r : ℕ) (f : Fin r → Λ) (m : ℕ) :
     ComplexShape.embeddingDownNat
 
 /-- The canonical section 1 identifies the constant coefficient module with the unit.
-The equation at every site object determines the map, not merely its isomorphism class.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion).
-Proof: send 1 to the image of 1 under module sheafification. This gives a compatible
-section, hence a module map from the unit. A map from the unit is determined by 1. -/
+The equation at every site object determines the map, not merely its isomorphism class. -/
 theorem koszulConstantOne_exists :
     ∃! u : SheafOfModules.unit (adicModuleRing X Λ) ⟶
         (koszulConstantFunctor X Λ).obj (ModuleCat.of (ULift.{t + 1} Λ) (ULift.{t + 1} Λ)),
@@ -235,12 +214,10 @@ theorem koszulConstantOne_exists :
     exact (hu U).trans
       (congrArg (fun z : M.sections ↦ z.val U) (M.unitHomEquiv.apply_symm_apply s)).symm
 
-/-- The canonical constant unit map selected by its unique section formula.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- The canonical constant unit map selected by its unique section formula. -/
 def koszulConstantOne := (koszulConstantOne_exists X Λ).exists.choose
 
-/-- Degree zero of the Koszul complex contains the identity coefficient unit.
-Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completion). -/
+/-- Degree zero of the Koszul complex contains the identity coefficient unit. -/
 def koszulSheafUnitZero (r : ℕ) (f : Fin r → Λ) (m : ℕ) :
     SheafOfModules.unit (adicModuleRing X Λ) ⟶ (koszulPowerSheaf X Λ r f m).X 0 :=
   koszulConstantOne X Λ ≫ (koszulConstantFunctor X Λ).map

@@ -18,7 +18,6 @@ universe u v w
 open CategoryTheory
 namespace PresheafOfModules
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- The local gluing argument checks compatibility and four linearity laws in one declaration.
 /-- A restriction-compatible bilinear family extends to the module sheafifications.
 Source: Stacks Project, Modules on Sites, Tag 0GMW, the sheafification step of the

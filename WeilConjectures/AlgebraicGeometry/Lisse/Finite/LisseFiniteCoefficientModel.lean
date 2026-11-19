@@ -219,8 +219,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedFpHomStage
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
 /-! # Finite coefficient models for lisse objects
-
-Source: the finite-descent-lisse blueprint proof, steps 1--5.
 -/
 
 @[expose] public noncomputable section
@@ -262,23 +260,7 @@ private lemma finite_affine_free_cover
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- A lisse module over the algebraic closure admits a lisse finite-field model.
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md, proof (1).
-(blueprint: lem-sfb-lisse-finite-coefficient-model).
-
-Proof in words: remove the invertible coefficient pullback from each local free
-trivialization, pull along the identity, and refine to a finite affine cover. Choose the
-base coefficient field and the standard free module of the required rank on each member.
-Scalar extension preserves regular modules and finite biproducts, so their extensions
-identify with the original local models. Apply the existing finite local-model gluing
-theorem, which descends the overlap maps and glues compatible local submodules after one
-finite enlargement. Its local identifications show that the result is locally finite free.
-Transport along the coefficient comparison for the identity morphism. Pullback commutes
-with scalar extension, so the same cover witnesses that this transported object is lisse.
-Naturality of the coefficient comparison and canonical extension transitivity identify
-its algebraic-closure extension with the identity pullback of the original module, hence
-with the original module. Empty covers, varying ranks and zero ranks are included. -/
+/-- A lisse module over the algebraic closure admits a lisse finite-field model. -/
 theorem exists_lisse_finiteCoefficient_model [CompactSpace X] [QuasiSeparatedSpace X]
     (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))
     (hL : IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ) L) :

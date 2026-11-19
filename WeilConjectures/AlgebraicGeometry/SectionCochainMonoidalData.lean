@@ -59,7 +59,6 @@ private theorem ordinary_monoidal (T : Scheme.{u}) :
   intro M N
   exact (d.delta M N).trans (congrArg Iso.hom (ordinaryTensorComparison_eq Λ T M N))
 
-set_option maxHeartbeats 400000 in
 -- Identifying the signed total comparison elaborates the native cochain monoidal structure.
 /-- The termwise section equivalence is strong monoidal with the specified signed comparison.
 

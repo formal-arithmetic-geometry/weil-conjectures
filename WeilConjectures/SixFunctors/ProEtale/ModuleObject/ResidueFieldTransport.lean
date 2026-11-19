@@ -69,7 +69,7 @@ is that on the sheaf of `𝔽_E`-modules given by `finiteCoefficientModEquivalen
 lemma sectionActRingHom_residueFieldSectionRingHom_of_fac (h : ResidueFieldSectionFac X ℓ E)
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (residueFieldRingObj X ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
-    Mod.sectionActRingHom M (residueFieldSectionRingHom X ℓ E c) =
+    (Mod.sectionActRingHom M (residueFieldSectionRingHom X ℓ E c)).asHom =
       (sheafCompose (ProEt.topology X)
         (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1})).map
         (Sheaf.smulEnd

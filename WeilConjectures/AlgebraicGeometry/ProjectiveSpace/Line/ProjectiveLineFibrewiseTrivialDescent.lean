@@ -13,8 +13,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The kernel of restriction to the fibres of a projective line
 
-Source: EGA II, Remark 4.2.7; arbitrary-base descent in Stacks, Tag 0B8W.
-(blueprint: lem-sfb-projective-line-fibrewise-trivial-descent).
+## References
+
+* EGA II, Remark 4.2.7
+* EGA II, Remark 4.2.7, degree-zero case of projective-bundle Picard classification
+* Stacks, Tag 0B8W, for descent to finite-presentation models
 -/
 
 @[expose] public noncomputable section
@@ -136,24 +139,7 @@ private theorem field_degree_zero (k : Type u) [Field k] (m : ℤ)
   obtain ⟨d, _, hd⟩ := hC.field k (Iso.refl _) (𝟙_ P.Modules) inferInstance
   exact (hd m ⟨a.symm⟩).trans (hd 0 ⟨Iso.refl _⟩).symm
 
-/-- An invertible class trivial on every residue-field fibre comes from the base.
-
-Source: EGA II, Remark 4.2.7, degree-zero case of projective-bundle Picard
-classification; Stacks, Tag 0B8W, for descent to finite-presentation models.
-(blueprint: lem-sfb-projective-line-fibrewise-trivial-descent).
-
-Proof: use quotient geometry for the rank-two free module to identify its projective
-bundle and tautological line with the standard ProjectiveLine and its actual O(1).
-Apply projective_bundle_picard_classification to a representative of L, giving a
-locally constant integer d and an invertible coefficient N on S. Base change to
-Spec kappa(s). The coefficient line is trivial on this one-point scheme, so the
-restriction is O(d(s)). By the field uniqueness clause, the given triviality forces
-d(s)=0. Thus d is identically zero. The glued integer power on the zero stratum
-is the structure module, and the other strata are empty. Consequently the
-classification isomorphism reduces to L_rep isomorphic to q*N. Take B=[N].
-For the empty base the same argument uses the unique function to Z and the
-structure module, and all classes are equal. No reducedness, connectedness,
-Noetherianity or nonemptiness is required. -/
+/-- An invertible class trivial on every residue-field fibre comes from the base. -/
 theorem exists_base_class_of_fibrewise_trivial (S : Scheme.{u})
     (L : (ProjectiveLine S).Pic)
     (hL : ∀ s : S,

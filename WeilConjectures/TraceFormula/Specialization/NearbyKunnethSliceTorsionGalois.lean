@@ -85,7 +85,6 @@ instance subsingleton_primeSpectrum :
     (isAlgebraic_traitGenericField k')
   rwa [algebra_traitGenericField_eq] at h
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the module structure of the finite subextensions goes through the local algebra instances
 /-- **The Galois extension `L^sep / L` of a generic slice trait is pro-`p`**, `p` the
 characteristic of `k'`: every finite Galois subextension has degree a power of `p`. -/

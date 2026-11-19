@@ -17,15 +17,17 @@ Let `X₀` be a smooth, proper, geometrically connected scheme of pure dimension
 `k₀ = 𝔽_q`, with integral Frobenius factors `P₀, …, P_{2d}` and Betti numbers `bᵢ = deg Pᵢ`.
 Then `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b_{2d-i}`, `b₀ = b_{2d} = 1`,
 `P₀ = 1 - T` and `P_{2d} = 1 - qᵈ T`; consequently `Z(X₀, T)` has a pole of order exactly one at
-`T = 1` and, for `d ≥ 1`, at `T = q^{-d}` (blueprint `thm-weil-final-betti`).
+`T = 1` and, for `d ≥ 1`, at `T = q^{-d}` (blueprint
+`theorem-weil-conjectures-smooth-proper-schemes`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.natDegree_eq_finrank_of_isIntegralFrobeniusFactor`:
-  `deg Pᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`prop-weil-realization-independent-degrees`).
+  `deg Pᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`theorem-weil-conjectures-smooth-proper-schemes--8`).
 - `AlgebraicGeometry.Scheme.weilBettiNumber_eq_finrank`: `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for all
-  `i ∈ ℤ` (`prop-weil-betti-comparison`).
-- `AlgebraicGeometry.Scheme.betti_symmetry`: blueprint `thm-weil-final-betti`.
+  `i ∈ ℤ` (`theorem-weil-conjectures-smooth-proper-schemes--8`).
+- `AlgebraicGeometry.Scheme.betti_symmetry`: blueprint
+`theorem-weil-conjectures-smooth-proper-schemes`.
 -/
 
 @[expose] public section
@@ -111,9 +113,9 @@ namespace Scheme
 
 variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `prop-weil-realization-independent-degrees`: the degree of an integral Frobenius
-factor in degree `i` is `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every prime `ℓ ≠ p`: scalar extension along the
-injective `ℤ → ℚ̄_ℓ` preserves degrees, and `deg P_{i,ℓ} = dim Hⁱ`
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--8`: the degree of an integral
+Frobenius factor in degree `i` is `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every prime `ℓ ≠ p`: scalar extension
+along the injective `ℤ → ℚ̄_ℓ` preserves degrees, and `deg P_{i,ℓ} = dim Hⁱ`
 (`AlgebraicGeometry.Scheme.natDegree_frobeniusCharpolyRev`). In particular the degree does not
 depend on `ℓ`. -/
 theorem natDegree_eq_finrank_of_isIntegralFrobeniusFactor
@@ -125,7 +127,7 @@ theorem natDegree_eq_finrank_of_isIntegralFrobeniusFactor
   rw [← natDegree_frobeniusCharpolyRev, ← hP l,
     Polynomial.natDegree_map_eq_of_injective (RingHom.injective_int _)]
 
-/-- Blueprint `def-weil-determinant-constants`: the image in `ℚ̄_ℓ` of the determinant constant
+/-- Blueprint `corollary-functional-equation--3`: the image in `ℚ̄_ℓ` of the determinant constant
 `D = (-1)^b [T^b] P` of an integral Frobenius factor `P` in degree `i` is the determinant
 `det(F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` of the geometric Frobenius, for every prime `ℓ ≠ p`: the leading
 coefficient of `det(1 - T F)` is `(-1)^{dim} det F`. -/
@@ -149,11 +151,11 @@ variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
 omit [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] in
-/-- Blueprint `prop-weil-betti-comparison` (Betti-number comparison): for `X₀` smooth, proper
-and geometrically connected of pure dimension `d` with integral Frobenius factors `Pᵢ`, the Betti
-numbers `bᵢ` (`AlgebraicGeometry.weilBettiNumber`; `deg Pᵢ` for `0 ≤ i ≤ 2d` and `0` otherwise)
-satisfy `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `i ∈ ℤ` and every prime `ℓ ≠ p`; in particular they
-do not depend on `ℓ`. Outside `[0, 2d]` both sides vanish
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--8` (Betti-number comparison): for
+`X₀` smooth, proper and geometrically connected of pure dimension `d` with integral Frobenius
+factors `Pᵢ`, the Betti numbers `bᵢ` (`AlgebraicGeometry.weilBettiNumber`; `deg Pᵢ` for `0 ≤ i ≤ 2d`
+and `0` otherwise) satisfy `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `i ∈ ℤ` and every prime `ℓ ≠ p`;
+in particular they do not depend on `ℓ`. Outside `[0, 2d]` both sides vanish
 (`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`). -/
 theorem weilBettiNumber_eq_finrank {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) (l : ℕ)
@@ -169,10 +171,10 @@ theorem weilBettiNumber_eq_finrank {P : Fin (2 * d + 1) → Polynomial ℤ}
     have := WeilSheaf.subsingleton_cohomology_adicConstant k₀ l X d (i := i) (by omega)
     rw [weilBettiNumber_eq_zero P hi', Module.finrank_zero_of_subsingleton]
 
-/-- Blueprint `prop-endpoints` (endpoint cohomology): for `X₀` smooth, proper and geometrically
-connected of pure dimension `d` over `k₀ = 𝔽_q`, there are Frobenius-equivariant isomorphisms
-`H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, with geometric Frobenius acting by `1`, and
-`H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)`, with geometric Frobenius acting by `qᵈ`. -/
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (endpoint cohomology): for `X₀`
+smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, there are
+Frobenius-equivariant isomorphisms `H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, with geometric Frobenius acting by
+`1`, and `H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)`, with geometric Frobenius acting by `qᵈ`. -/
 theorem exists_linearEquiv_cohomology_endpoints (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] :
     (∃ e : ((WeilSheaf.adicConstant k₀ l X).cohomology 0).carrier ≃ₗ[PadicAlgCl l]
@@ -189,9 +191,10 @@ theorem exists_linearEquiv_cohomology_endpoints (l : ℕ) [Fact l.Prime]
   · obtain ⟨T, htr, -, -, -, hF, -⟩ := WeilSheaf.poincareDuality k₀ l X d
     exact ⟨LinearEquiv.ofBijective T.trace htr, hF⟩
 
-/-- Blueprint `prop-endpoints` (endpoint factors): for `X₀` smooth, proper and geometrically
-connected of pure dimension `d` over `k₀ = 𝔽_q`, the integral Frobenius factors satisfy
-`P₀ = 1 - T` and `P_{2d} = 1 - qᵈ T`, and the endpoint Betti numbers are `b₀ = b_{2d} = 1`. -/
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (endpoint factors): for `X₀` smooth,
+proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, the integral Frobenius
+factors satisfy `P₀ = 1 - T` and `P_{2d} = 1 - qᵈ T`, and the endpoint Betti numbers are
+`b₀ = b_{2d} = 1`. -/
 theorem endpoints_of_isIntegralFrobeniusFactor {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) :
     P 0 = 1 - Polynomial.X ∧
@@ -216,9 +219,9 @@ theorem endpoints_of_isIntegralFrobeniusFactor {P : Fin (2 * d + 1) → Polynomi
       Nat.cast_mul,
       Nat.cast_two, e.finrank_eq, Module.finrank_self]
 
-/-- Blueprint `thm-weil-final-betti` (Betti symmetry and the endpoint factors): for `X₀` smooth,
-proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with integral Frobenius
-factors `Pᵢ` and Betti numbers `bᵢ = deg Pᵢ`:
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Betti symmetry and the endpoint
+factors): for `X₀` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`,
+with integral Frobenius factors `Pᵢ` and Betti numbers `bᵢ = deg Pᵢ`:
 
 * `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every prime `ℓ ≠ p`;
 * `bᵢ = b_{2d-i}` and `b₀ = b_{2d} = 1`;

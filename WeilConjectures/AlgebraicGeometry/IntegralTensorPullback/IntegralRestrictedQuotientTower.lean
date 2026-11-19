@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralTensorPullback.IntegralT
 import WeilConjectures.AlgebraicGeometry.IntegralTensorPullback.IntegralFiniteScalarTensorIso
 
 /-! # The scalar restriction comparison of strict pulled finite quotient towers
-
-Source: blueprint `det-lem-int-tensor-pullback.proof.md`, comparison paragraph.
-(blueprint: lem-sfb-restricted-pulled-quotient-tower).
 -/
 
 @[expose] public noncomputable section

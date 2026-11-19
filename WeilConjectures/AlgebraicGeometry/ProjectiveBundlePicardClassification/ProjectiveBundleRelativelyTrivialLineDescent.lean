@@ -20,8 +20,13 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 /-!
 # Descent of relatively trivial modules on projective bundles
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 00AL, 00AM, 01XS.
-(blueprint: lem-sfb-projective-bundle-relatively-trivial-line-descent)
+## References
+
+* EGA II, Remark 4.2.7
+* EGA II, Remark 4.2.7, printed p.75
+* Stacks Project, Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, Lemma
+  glue-maps (Tag 04TN)
+* Stacks, Tags 00AL, 00AM, 04TN
 -/
 
 @[expose] public section
@@ -127,25 +132,7 @@ private theorem bundle_functions_on_affine (S : Scheme.{u}) (E : S.Modules)
     infer_instance
   exact isIso_app_of_isPullback _ V j _ hj
 
-/-- The canonical map on functions of every base open is bijective.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks Project, coherent.tex,
-Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, and
-sheaves.tex, Lemma glue-maps (Tag 04TN).
-(blueprint: lem-sfb-projective-bundle-relatively-trivial-line-descent)
-
-Proof: choose an affine open cover trivializing E, of constant positive rank r. The symmetric-
-algebra frame comparison identifies the inverse image of each member with projective (r-1)-space
-over its ring of functions, compatibly with the structural morphism. The degree-zero cohomology
-computation, O(0)=O, H0=Gamma and the constant-polynomial equivalence show that global functions
-form a free module of rank one over the coefficient ring. A unital algebra free of rank one is
-its coefficient ring through the canonical algebra map, including zero rings. Apply this on
-affine refinements inside any base open U. A function upstairs has unique scalar preimages on
-these affine members. On their intersections refine again by affine frame opens; injectivity
-there makes the scalar preimages agree. The base sheaf axiom glues them to a function on U.
-Their images agree with the original function on the inverse-image cover, hence globally by
-separation upstairs. The same affine-cover injectivity proves uniqueness. For rank one the same
-computation is projective zero-space; on empty opens both rings are the zero ring. -/
+/-- The canonical map on functions of every base open is bijective. -/
 private theorem projective_bundle_base_functions (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)
@@ -232,22 +219,22 @@ private theorem descent_counit_on_open {X Y : Scheme.{u}} (f : X ⟶ Y)
     TwoSquare.mk _ _ _ _ q.hom
   let b := (mateEquiv (descentAdj k) (descentAdj j)).symm sq
   let a := (mateEquiv (descentAdj f) (descentAdj g)).symm b
-  have ha : IsIso a.natTrans := by
+  have ha : IsIso a := by
     dsimp only [a, b]
     rw [iterated_mateEquiv_conjugateEquiv_symm]
     change IsIso ((conjugateEquiv ((descentAdj f).comp (descentAdj k))
       ((descentAdj j).comp (descentAdj g))).symm q.hom)
     infer_instance
-  have hb : b.natTrans.app M = moduleBaseChangeMap f g j k (morphismRestrict_ι f U).symm M := by
+  have hb : b.app M = moduleBaseChangeMap f g j k (morphismRestrict_ι f U).symm M := by
     apply ((descentAdj j).homEquiv _ _).injective
-    change ((descentAdj j).homEquiv _ _) (b.natTrans.app M) =
+    change ((descentAdj j).homEquiv _ _) (b.app M) =
       ((descentAdj j).homEquiv _ _)
         (((descentAdj j).homEquiv _ _).symm
           ((pushforward f).map ((descentAdj k).unit.app M) ≫
             q.hom.app ((tensorPullback k).obj M)))
     rw [Equiv.apply_symm_apply]
     exact (unit_mateEquiv_symm (descentAdj k) (descentAdj j) sq M).symm
-  have hbiso : IsIso (b.natTrans.app M) := by
+  have hbiso : IsIso (b.app M) := by
     rw [hb]
     apply moduleBaseChangeMap_open_square_isIso f g j k
       (morphismRestrict_ι f U).symm
@@ -257,12 +244,12 @@ private theorem descent_counit_on_open {X Y : Scheme.{u}} (f : X ⟶ Y)
   have := ha
   have := hbiso
   have := he
-  have hi : IsIso (a.natTrans.app ((pushforward f).obj M) ≫
+  have hi : IsIso (a.app ((pushforward f).obj M) ≫
       (tensorPullback k).map ((descentAdj f).counit.app M)) := by
     rw [← mateEquiv_counit_symm (descentAdj f) (descentAdj g) b M]
     infer_instance
   have := hi
-  exact IsIso.of_isIso_comp_left (a.natTrans.app ((pushforward f).obj M)) _
+  exact IsIso.of_isIso_comp_left (a.app ((pushforward f).obj M)) _
 
 private theorem descent_isIso_of_open_cover {X : Scheme.{u}} {I : Type u}
     (U : I → X.Opens) (hU : ⨆ i, U i = ⊤) {M N : X.Modules} (φ : M ⟶ N)
@@ -278,23 +265,7 @@ private theorem descent_isIso_of_open_cover {X : Scheme.{u}} {I : Type u}
   have := ho
   exact isIso_of_reflects_iso _ (overEquiv (U i)).functor
 
-/-- A module trivial above a base neighbourhood of every point descends to a base line.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, sheaves.tex, Tags 00AL, 00AM,
-04TN; coherent.tex, Tag 01XS.
-(blueprint: lem-sfb-projective-bundle-relatively-trivial-line-descent)
-
-Proof: choose the displayed neighbourhoods and trivializations. On each overlap the
-change of basis is a unit section on the projective bundle. The canonical map from
-base functions to functions on the bundle is an isomorphism: on affine opens
-trivializing E, the constant monomial computation gives H^0(P^(r-1), O) = R,
-with the identification induced by the structure map; restrictions agree and the
-local identifications glue on arbitrary base opens. Descend each transition unit
-uniquely through this ring isomorphism. The cocycle equations descend by injectivity.
-Glue the trivial base modules using these units to obtain an invertible N. The
-chosen local trivializations agree with the pulled-back transitions, so they and
-their inverses glue to an isomorphism F = p^*N. On the empty base the empty covering
-and its unique glued maps apply. No quasi-compactness or reducedness is used. -/
+/-- A module trivial above a base neighbourhood of every point descends to a base line. -/
 theorem projective_bundle_relatively_trivial_line_descent (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)

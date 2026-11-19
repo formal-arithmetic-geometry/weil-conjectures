@@ -82,7 +82,7 @@ Its left adjoint `g^*` is the left Kan extension on presheaves followed by sheaf
   of base change both hold for every Grothendieck abelian `A`, so `Etale.upperStar` and the
   adjunction `g^* ⊣ g_*` carry no hypotheses either. Sheafification is
   `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, still sorried through
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, provided through
   `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there, and it does
   use essential smallness of the site. The Kan extensions are proved and use no smallness
   of the site at all, only of the indexing comma categories, see
@@ -107,7 +107,7 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` is continuous for the small étale
 topologies. This is the `P = Q = @Etale` case of
 `AlgebraicGeometry.Scheme.isContinuous_overPullback`.
-(blueprint: `lem-weil-pbc-etale-base-change-continuous`) -/
+(blueprint: `situation-conventions`) -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
@@ -160,7 +160,7 @@ namespace Etale
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. The continuity of the
 base change functor is `Etale.isContinuous_overPullback`
-(blueprint: `def-weil-pbc-direct-image`, `lem-weil-pbc-etale-base-change-continuous`) -/
+(blueprint: `def-weil-pbc-direct-image`, `situation-conventions`) -/
 noncomputable def lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
   (MorphismProperty.Over.pullback @Etale ⊤ g).sheafPushforwardContinuous A
@@ -232,12 +232,11 @@ namespace Etale
 `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
 `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
 `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is still sorried
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved
 through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g` étale
 the Kan extension hypothesis is automatic by
 `Etale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by restriction,
-see `Etale.upperStarIsoOpenImmersionRestriction`
-(blueprint `def-weil-pbc-inverse-image`). -/
+see `Etale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ g) A
@@ -250,8 +249,8 @@ scoped notation "(" g ")^*[" A "]" =>
 end Etale
 
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites
-(blueprint: `def-weil-pbc-inverse-image`, `prop-weil-pbc-inverse-image-modules-exact`,
-`lem-weil-pbc-inverse-image-module-adjunction`) -/
+(blueprint: `def-weil-pbc-inverse-image`, `situation-conventions`,
+`situation-conventions`) -/
 noncomputable def Etale.upperStarLowerStarAdjunction : (g)^*[A] ⊣ (g)_*[A] :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) A
@@ -292,7 +291,7 @@ instance Etale.linear_upperStar (Λ : Type*) [Semiring Λ] [Linear Λ A] : (g)^*
 
 /-- The pullback `g^*` on étale sheaves preserves homology, being exact: it preserves
 finite limits by `Etale.preservesFiniteLimits_upperStar` and all colimits of size `0`,
-being a left adjoint. (blueprint: `prop-weil-pbc-inverse-image-modules-exact`) -/
+being a left adjoint. (blueprint: `situation-conventions`) -/
 instance Etale.preservesHomology_upperStar : (g)^*[A].PreservesHomology := by
   have : PreservesColimitsOfSize.{0, 0} (g)^*[A] :=
     (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits

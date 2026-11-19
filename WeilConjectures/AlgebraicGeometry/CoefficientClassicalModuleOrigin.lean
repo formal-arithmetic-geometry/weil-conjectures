@@ -379,7 +379,7 @@ private theorem fixedOrigin (X : Scheme.{u})
 
 /-- A module with invertible affine continuity maps has an etale module antecedent.
 There is no constructibility or Noetherianity assumption.
-Source: blueprint det-pe-classical-sheaves-modules, essential-image paragraph;
+Source: blueprint theorem-classical-sheaves-essential-image--1, essential-image paragraph;
 Bhatt--Scholze, The pro-etale topology for schemes, Lemma 5.1.2
 (auxiliary; not a blueprint node).
 

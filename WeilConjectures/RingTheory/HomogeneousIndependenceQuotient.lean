@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 /-!
 # Removing one variable from a polynomial associated graded ring
 
-Source: the local dimension argument in blueprint `lem-wf-same-lie-closed-subgroup`,
-clause (2), expanded in `lem-wf-height-of-homogeneous-independence`, steps 3 and 4.
+Source: the local dimension argument in blueprint
+`lemma-connected-components-images-homomorphisms--3`, clause (2), expanded in
+`lem-wf-height-of-homogeneous-independence`, steps 3 and 4.
 -/
 
 @[expose] public section

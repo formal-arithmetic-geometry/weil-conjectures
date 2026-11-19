@@ -524,7 +524,7 @@ For a quasi-compact open immersion `j : U ⟶ X` this is the blueprint's definit
 scheme-theoretically dense open (`𝒪_X → j_* 𝒪_U` injective). The project uses Mathlib's
 `IsSchemeTheoreticallyDominant` (kernel ideal sheaf `⊥`) as the definition, and this
 lemma identifies it with the blueprint's formulation.
-(blueprint: `def-nagata-scheme-theoretically-dense-open`) -/
+(blueprint: `definition-compactification-refinement--2`) -/
 theorem isSchemeTheoreticallyDominant_iff_app_injective {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] :
     IsSchemeTheoreticallyDominant f ↔ ∀ U : Y.Opens, Function.Injective (f.app U) := by

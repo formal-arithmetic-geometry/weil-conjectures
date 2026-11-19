@@ -22,7 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option maxHeartbeats 1200000 in
 -- The native and ordinary mapped-complex instances need additional elaboration fuel.
 /-- The native signed chain swap becomes the prescribed ordinary signed swap.
 Source: Stacks 06YU and 0FPT; homogeneous-summand part of native tensor transport.

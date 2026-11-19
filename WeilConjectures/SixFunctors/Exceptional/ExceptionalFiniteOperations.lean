@@ -60,10 +60,10 @@ Proof:
 2. Extend by zero, preserving constructibility and the Tor interval. Apply proper pro-etale
    direct image with bound 2d to obtain [a,b+2d]. Restrict the actual functor, including its
    morphisms, to the full categories. The compact-support exact structure and the inherited
-   triangulation give coherent integer shifts. Uses lem-trf-open-ctf,
-   cor-sf-direct-image-ctf-proetale, lem-compact-support-direct-image-triangulated and
-   lem-weil-finite-ctf-triangulated.
-3. Apply cor-pur-general-admissibility-datum to the specified comparison-transported
+   triangulation give coherent integer shifts. Uses
+   proposition-proper-direct-image-extension-zero--8, proposition-six-operations-dctf--2,
+   proposition-construction-independence-rf-shriek--1 and lem-weil-finite-ctf-triangulated.
+3. Apply theorem-f-shriek-finite-coefficients--1 to the specified comparison-transported
    exceptional functor. Fix finitely many affine presentations once, independently of E,n.
    For nonempty X their dimensions give D=max d_U and e=dim Y; the bound is
    [a-2D,b+2e+1] both cohomologically and for Tor. Empty X gives zero outputs.
@@ -73,9 +73,9 @@ Proof:
    this independent of the origin witness. Both values belong to the full finite-Tor
    categories by steps 2 and 3. The natural-bijection theorem gives the adjunction, its unit
    as the transpose of the identity, its counit as the inverse transpose of the identity,
-   and both triangles. Uses thm-amb-etale-exceptional-adjoint,
-   lem-sf-proetale-constructible-origin, lem-sf-class-compact-support-comparison,
-   thm-weil-pbc-site-comparison, thm-sf-ambient-adjoint-class and
+   and both triangles. Uses theorem-existence-exceptional-inverse-image--1,
+   theorem-comparison-constructible-sheaves, proposition-comparison-immersions--4,
+   theorem-bounded-below-cohomology-comparison, thm-sf-ambient-adjoint-class and
    lem-weil-pbc-adjunction-of-natural-bijection.
 5. Equip the right adjoint with the unique coherent adjoint shift structure. The shift
    adjunction theorem gives shift compatibility of both unit and counit. The exact-right-

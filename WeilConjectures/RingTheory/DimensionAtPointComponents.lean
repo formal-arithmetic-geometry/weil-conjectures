@@ -15,6 +15,7 @@ import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRing
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.Jacobson.Ring
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 
 @[expose] public section
 

@@ -75,7 +75,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- The general form of blueprint `lem-sc-constant-locus-closed`. Let `F : A ⟶ B` be a morphism
+/-- The general form of blueprint `lemma-rigidity`. Let `F : A ⟶ B` be a morphism
 of schemes over `Y`, with `a : A ⟶ Y` universally open and locally of finite type and with
 `b : B ⟶ Y` separated. Then the locus of `y : Y` such that the base change
 `F_ȳ : A_{κ(y)‾} ⟶ B_{κ(y)‾}` of `F` along the geometric point `ȳ` over `y` has subsingleton
@@ -166,7 +166,7 @@ theorem isClosed_setOf_subsingleton_range_fiberMap {A B Y : Scheme.{u}} (a : A �
         simp [hA, π, pullback.condition]
       rw [← Scheme.Hom.comp_apply, this, Scheme.Hom.comp_apply, hp]
 
-/-- Blueprint `lem-sc-constant-locus-closed`: The locus of constant fibres is closed
+/-- Blueprint `lemma-rigidity`: The locus of constant fibres is closed
 
 Let `X` be a `K`-scheme proper over `K`, let `Z` be separated over `K`, let `Y` be any
 `K`-scheme and let `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes. For `y : Y` let
@@ -231,7 +231,7 @@ theorem eventually_finite_image {X Y Z : Scheme.{u}} (fX : X ⟶ Spec (.of K))
   refine ⟨h.toImage x, ?_, ?_⟩ <;>
     simp_all [← Scheme.Hom.comp_apply, -Scheme.Hom.comp_base]
 
-/-- Step 4 of blueprint `lem-sc-rigidity` (`sk-prop-av-rigidity`): if `X` is proper,
+/-- Step 4 of blueprint `lemma-rigidity` (`lemma-rigidity`): if `X` is proper,
 geometrically connected and geometrically reduced over `K` and `g : X ×_K Y ⟶ Z` contracts the
 fibre `X ×_K {y}` of the second projection `pr₂` to a point, then `g` factors through `pr₂` over
 an open neighbourhood `U` of `y`: there is `h : U ⟶ Z` over `K` such that `a ≫ g = b ≫ h`
@@ -297,7 +297,7 @@ theorem exists_mem_and_comp_eq_of_subsingleton_image {X Y Z : Scheme.{u}}
       · simp [j, p, hab, pullback.map]
     rw [this, Category.assoc, ← hfac, pullback.lift_snd_assoc]
 
-/-- Blueprint `sk-prop-av-rigidity`: The rigidity lemma
+/-- Blueprint `lemma-rigidity`: The rigidity lemma
 
 Let `X`, `Y`, `Z` be `K`-schemes with `X` proper, geometrically connected and geometrically
 reduced over `K`, with `Y` connected and with `Z` separated over `K`, and let
@@ -324,7 +324,7 @@ imperfect of characteristic `p`, `a ∈ K ∖ K^p`, `K' = K(a^{1/p})`, `X = Spec
 reduced but not geometrically reduced, and `g` does not factor since `pr₂ : 𝔸¹_{K'} ⟶ 𝔸¹_K` is
 not a monomorphism. In both examples `Γ(X, 𝒪_X) ≠ K`.
 
-This is also blueprint `lem-sc-rigidity`. The proof follows the blueprint with one change: `L`
+This is also blueprint `lemma-rigidity`. The proof follows the blueprint with one change: `L`
 is the set of `y` near which `g` factors through `pr₂`. It is open by definition and contains
 `y₀` by `AlgebraicGeometry.exists_mem_and_comp_eq_of_subsingleton_image` (Step 4). The same
 lemma shows that `L` is the locus of `AlgebraicGeometry.isClosed_setOf_subsingleton_image`, so

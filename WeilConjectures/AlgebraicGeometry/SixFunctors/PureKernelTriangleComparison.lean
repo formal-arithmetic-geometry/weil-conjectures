@@ -9,9 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Functor.OfSequence
 
-/-! # Natural identifications from multiplication triangles
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-pure-kernel-triangle-comparison). -/
+/-! # Natural identifications from multiplication triangles. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,9 +22,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   DerivedCategory.singleFunctorIsoCompQ HasDerivedCategory.standard
 
 /-- The kernel, signed triangle, and transition property as a folded proposition.
-This definition chooses no objects or morphisms.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-pure-kernel-triangle-comparison). -/
+This definition chooses no objects or morphisms. -/
 @[irreducible] def KernelTriangleData
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory.{w} A]
     (ℓ : ℕ) (M : A) (R : ℕᵒᵖ ⥤ A) (P : ℕ → A)
@@ -44,9 +40,7 @@ Source: diagonal tower proof, steps (3) and (4)
       (r (n + 1)).hom ≫ i (n + 1) ≫ (ℓ • 𝟙 M)
 
 /-- The ordinary coefficient lift and its normalization, as a folded proposition.
-No derived category or choice of data occurs in this definition.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-pure-kernel-triangle-comparison). -/
+No derived category or choice of data occurs in this definition. -/
 @[irreducible] def FiniteKernelLift
     {A B : Type*} [Category A] [Category B] (U : B ⥤ A) (R : ℕᵒᵖ ⥤ A)
     (C : ℕ → Type*) [∀ n, Category (C n)]
@@ -103,18 +97,7 @@ private theorem pure_triangle_comparison
       Category.assoc] using h.symm
 
 /-- Two multiplication triangles with monic kernel inclusions determine a
-natural roots comparison and fix the second arrow at every level.
-Source: diagonal tower proof, step (3), common kernel and transition, and step (4), sign
-(blueprint: lem-sfb-pure-kernel-triangle-comparison).
-Proof: comparison of distinguished triangles using identities on their first two
-objects gives an isomorphism on their third objects. Full faithfulness of F
-lifts it to a_n. The third square gives a_n followed by i_n equal to minus d_n;
-the second square gives the asserted arrow equation. Set e_n=a_n followed by
-inverse r_n. The prescribed transition equations imply naturality after
-postcomposing with the monic lower root inclusion. Cancel that inclusion and
-use naturality on successor arrows to construct a natural isomorphism. Its
-components give the first equation. There is no choice of an unrelated kernel
-identification and no detection of arbitrary derived arrows levelwise. -/
+natural roots comparison and fix the second arrow at every level. -/
 theorem pure_kernel_triangle_comparison
     {A B : Type*} [Category A] [Abelian A] [HasDerivedCategory.{w} A] [Category B]
     (U : B ⥤ A) (H : ℕᵒᵖ ⥤ B) (M : A) (R : ℕᵒᵖ ⥤ A) (P : ℕ → A)

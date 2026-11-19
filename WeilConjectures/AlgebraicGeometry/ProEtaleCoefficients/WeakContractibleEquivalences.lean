@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 import WeilConjectures.AlgebraicGeometry.ProEtale.Projective
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.CategoryTheory.SiteCoveringAxioms
@@ -27,9 +28,9 @@ import Mathlib.CategoryTheory.Sites.Limits
 /-!
 # Equivalent forms of weak contractibility
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.md`
-(blueprint: det-pe-weak-contractible-equivalences).
+## References
+
+* Stacks Project, Tags 001P and 00WN
 -/
 
 @[expose] public section
@@ -44,31 +45,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The three equivalent lifting and evaluation formulations of weak contractibility.
 
-Source: blueprint main-20261015, unit `sk-def-pe-weak-contractible`, node
-`det-pe-weak-contractible-equivalences`, clauses 1--3 and final affine assertion;
-Stacks Project, Tags 001P and 00WN
-(blueprint: det-pe-weak-contractible-equivalences).
-
 An object satisfying the equivalent conditions is called weakly contractible.
-
-Proof:
-1. By `det-pe-topos-functoriality-site` the representable is a sheaf. Sheaves form
-   a full subcategory of presheaves (`def-weil-pbc-sites-and-cohomology`). Yoneda
-   (`lem-galois-yoneda-hom-bijection`) identifies maps from the representable with
-   sections. Naturality identifies the lifting equation with the equation for a
-   preimage under evaluation, proving (2) iff (3).
-2. For (1) implies (2), given an epimorphism and a map from the representable, form
-   the presheaf of pairs with the same image in the target. Glue both coordinates
-   using the sheaf axioms and apply separatedness of the target to verify that
-   the glued pair still has equal images. The resulting sheaf is the pullback.
-3. Apply `lem-weil-pbc-site-sheaf-sets-epi-locally-surjective` to lift each section
-   locally in the first coordinate. The second coordinate restricts along the same
-   cover, so the pullback projection is locally surjective and hence epimorphic.
-4. Condition (1) splits this projection. Compose its section with the other
-   projection to obtain the desired lift. Conversely, (2) lifts the identity of
-   the representable along every epimorphism onto it, proving (1).
-5. For an affine object with w-contractible coordinate ring,
-   `det-pe-wcb-projective` supplies (1), so the equivalences give all three conditions.
 -/
 theorem proetale_weakContractible_equivalences
     (X : Scheme.{u}) (W : X.ProEt) :
@@ -133,5 +110,36 @@ theorem proetale_weakContractible_equivalences
         rw [J.uliftYonedaEquiv_comp, Equiv.apply_symm_apply, ha]
     · intro D _ _ f _
       exact (proetale_wContractible_projective X D f).1
+
+/-- **Weak contractibility and projectivity of the representable sheaf.** An object `W` of the
+small pro-étale site of `X` is weakly contractible (every epimorphism of sheaves of sets is
+surjective on sections over `W`) if and only if the representable sheaf `h_W` is projective:
+epimorphisms of sheaves of sets are the locally surjective morphisms
+(`CategoryTheory.Sheaf.isLocallySurjective_iff_epi`), and the second equivalence of
+`AlgebraicGeometry.Scheme.proetale_weakContractible_equivalences` identifies the surjectivity
+condition with projectivity. -/
+theorem isWeaklyContractible_iff_projective (X : Scheme.{u}) (W : X.ProEt) :
+    (ProEt.topology X).IsWeaklyContractible.{u + 1} W ↔
+      Projective ((ProEt.topology X).uliftYoneda.{u + 1}.obj W) := by
+  rw [(proetale_weakContractible_equivalences X W).2.1]
+  constructor
+  · intro h F G φ _
+    exact h φ ((Sheaf.isLocallySurjective_iff_epi φ).2 inferInstance)
+  · intro h F G φ hφ
+    have : Epi φ := (Sheaf.isLocallySurjective_iff_epi φ).1 hφ
+    exact h F G φ
+
+/-- **Weak contractibility by splitting of epimorphisms onto the representable sheaf.** An object
+`W` of the small pro-étale site of `X` is weakly contractible if and only if every epimorphism
+of sheaves of sets `F ⟶ h_W` admits a section: both conditions are equivalent to the
+projectivity of `h_W` (`AlgebraicGeometry.Scheme.isWeaklyContractible_iff_projective` and the
+first equivalence of `AlgebraicGeometry.Scheme.proetale_weakContractible_equivalences`). -/
+theorem isWeaklyContractible_iff_forall_epi_splits (X : Scheme.{u}) (W : X.ProEt) :
+    (ProEt.topology X).IsWeaklyContractible.{u + 1} W ↔
+      ∀ (F : Sheaf (ProEt.topology X) (Type (u + 1)))
+        (φ : F ⟶ (ProEt.topology X).uliftYoneda.{u + 1}.obj W) [Epi φ],
+        ∃ s : (ProEt.topology X).uliftYoneda.{u + 1}.obj W ⟶ F, s ≫ φ = 𝟙 _ :=
+  (isWeaklyContractible_iff_projective X W).trans
+    (proetale_weakContractible_equivalences X W).1.symm
 
 end AlgebraicGeometry.Scheme

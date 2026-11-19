@@ -152,7 +152,7 @@ def coefficientMate {m n : ℕ} (h : n ≤ m) :
     (G.levelPush m).rightDerivedFunctor ⋙ (A.scalar h).T ⟶
       (G.target.scalar h).T ⋙ (G.levelPush n).rightDerivedFunctor :=
   (mateEquiv (G.derivedLevelAdjunction m) (G.derivedLevelAdjunction n)
-    (TwoSquare.mk _ _ _ _ (G.coefficientPullback h).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (G.coefficientPullback h).hom))
 
 /-- The exact extension-form transition formula for GN.
 Source: Zheng 4.10 (blueprint: def-coef-semilinear-geometry-ops). -/

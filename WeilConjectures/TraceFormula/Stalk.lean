@@ -36,13 +36,14 @@ and the Frobenius `WeilBoundedConstructible.frobenius` of this Weil object for t
 
 For a point `x` fixed by `Φ_m` the local Frobenius of the iterate `(K, φ_m)` is the operator
 `F_{x,m} = (φ_m)_x̄` on the geometric stalk `K_x̄ = Lx^* K` of the trace formula
-(`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius`, blueprint `sk-d-weil`).
+(`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius`, blueprint
+`definition-frobenius-correspondences-their-operators`).
 
 The stalks at `x` and at its Frobenius translate `x ≫ Φ` are isomorphic Weil objects
 (`ProEtale.CondensedRing.WeilBoundedConstructible.stalkTransport`), so their local Frobenii are
-conjugate and have the same trace (blueprint `lem-trf-local-frobenius-conjugacy`); and at a point
-fixed by `Φ_d` the operator `F_{x,dn}` is the `n`-th power of `F_{x,d}` (blueprint
-`lem-trf-frobenius-degree-formula`).
+conjugate and have the same trace (blueprint `theorem-trace-formula-euler-product--1`); and at a
+point fixed by `Φ_d` the operator `F_{x,dn}` is the `n`-th power of `F_{x,d}` (blueprint
+`theorem-trace-formula-euler-product`).
 
 ## Main definitions
 
@@ -134,7 +135,7 @@ the geometric stalk `K_x̄ = Lx^* K`. Explicitly it is the composite
 ```
 Lx^* K ≅ L(𝟙 s)^* Lx^* K ≅ Lx^* LΦ_m^* K --Lx^* φ_m--> Lx^* K
 ```
-(blueprint `sk-d-weil`). -/
+(blueprint `definition-frobenius-correspondences-their-operators`). -/
 noncomputable def stalkFrobenius (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier ⟶
@@ -363,7 +364,8 @@ lemma stalkFrobenius_zero (K : WeilBoundedConstructible ℓ Φ) (x : RationalPoi
     (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
     (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X)
     (fun a K ↦ boundedConstructibleUpperStarComp_id_right_app _ ℓ a K)
-    (frobeniusIterate_zero Φ) hx (K.iterate_carrier 0) _ (Category.id_comp _).symm
+    (frobeniusIterate_zero Φ) hx (K.iterate_carrier 0) _ (by
+      simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom])
 
 /-- At a point fixed by `Φ_a` and `Φ_b`, `F_{x,a+b} = F_{x,b} ∘ F_{x,a}`. -/
 lemma stalkFrobenius_add (K : WeilBoundedConstructible ℓ Φ) {a b : ℕ} (x : RationalPoint X)
@@ -380,15 +382,14 @@ lemma stalkFrobenius_add (K : WeilBoundedConstructible ℓ Φ) {a b : ℕ} (x : 
     (frobeniusIterate_add Φ a b) ha hb hab (K.iterate_carrier (a + b)) (K.iterate_carrier a)
     (K.iterate_carrier b) _ _ _ (K.iterateStr_add a b)
 
-/-- **The degree formula** (blueprint `lem-trf-frobenius-degree-formula`): at a point `x` fixed
+/-- **The degree formula** (blueprint `theorem-trace-formula-euler-product`): at a point `x` fixed
 by `Φ_d`, the local Frobenius of degree `d * n` is the `n`-th power of the local Frobenius of
 degree `d`, `F_{x,dn} = F_{x,d}ⁿ`. -/
 lemma stalkFrobenius_mul (K : WeilBoundedConstructible ℓ Φ) {d : ℕ} {x : RationalPoint X}
     (hx : x ≫ frobeniusIterate Φ d = x) (n : ℕ) :
     K.stalkFrobenius (d * n) x
         (by rw [frobeniusIterate_mul]; exact comp_frobeniusIterate_of_comp hx n) =
-      (show End ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-          K.carrier) from K.stalkFrobenius d x hx) ^ n := by
+      (End.of (K.stalkFrobenius d x hx) ^ n).asHom := by
   induction n with
   | zero => exact K.stalkFrobenius_zero x _
   | succ n ih =>
@@ -429,7 +430,12 @@ lemma iterateStr_comm (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
     (frobeniusIterate_zero Φ) (frobeniusIterate_succ Φ 0) (frobeniusIterate_succ Φ m)
     (frobeniusIterate_add Φ 1 m) (by rw [Nat.add_comm]) (comp_frobeniusIterate_comm Φ m)
     K.str.hom (K.iterateStr m).hom (K.iterateStr 0).hom (K.iterateStr 1).hom
-    (K.iterateStr (m + 1)).hom (K.iterateStr (1 + m)).hom (Category.id_comp _).symm rfl rfl
+    (K.iterateStr (m + 1)).hom (K.iterateStr (1 + m)).hom
+    (by simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom])
+    (by simp only [iterateStr, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
+      Functor.mapIso_hom])
+    (by simp only [iterateStr, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
+      Functor.mapIso_hom])
     (iterateStr_add K 1 m) (hcongr (Nat.add_comm m 1))
 
 /-- The isomorphism underlying the Frobenius transport `stalkTransport`:
@@ -482,7 +488,7 @@ noncomputable def stalkTransport (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
       _ _ _ _ _ _ _ _ _ _)
 
 attribute [local instance] boundedConstructibleBraiding in
-/-- **Conjugacy of the local Frobenii** (blueprint `lem-trf-local-frobenius-conjugacy`): the
+/-- **Conjugacy of the local Frobenii** (blueprint `theorem-trace-formula-euler-product--1`): the
 local Frobenii at `x` and at its Frobenius translate `x ≫ Φ` have the same trace. -/
 theorem trace_stalkFrobenius_comp (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x)

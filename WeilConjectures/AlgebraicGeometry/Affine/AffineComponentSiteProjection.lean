@@ -62,7 +62,7 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 import Mathlib.CategoryTheory.Limits.Yoneda
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.Topology.Separation.Profinite
+import Mathlib.Topology.Separation.Regular
 import Mathlib.Topology.Sheaves.Stalks
 
 /-!
@@ -1490,7 +1490,7 @@ locally constant function has finite image on the compact space $E$ and factors 
 finite clopen partition into fibres. Two such presentations agree on their common refinement.
 Thus $D$ is the filtered colimit of the finite products $A^{E_i}$. These are finite products of
 the principal localization $A_1$, so $A\to D$ is ind-Zariski and ind-etale by
-[def-weil-pbc-ind-etale-algebra].
+[definition-ind-etale-pro-etale-weakly].
 2. The map $E\times|T|\to E\times P$, $(e,t)\mapsto(e,q(t))$, is a quotient map: it is a
 continuous surjection from a quasi-compact space to a Hausdorff space and is closed, since each
 closed subset of its source is quasi-compact. Its fibres are the connected components of $|T|$.
@@ -1508,7 +1508,7 @@ $E\times P$, so a clopen containing $G$ excludes it. By
 [lem-weil-pbc-localization-spectrum-embedding], $\operatorname{Spec}B\to\operatorname{Spec}D$ is
 a homeomorphism onto precisely this intersection. The localization $B$ is the filtered colimit
 of $D_a$, $a\in M$, since finitely many denominators combine by multiplication. Therefore $D\to
-B$ is ind-Zariski and ind-etale; [lem-weil-pbc-ind-etale-stability] makes $A\to B$ ind-etale.
+B$ is ind-Zariski and ind-etale; [lemma-stability] makes $A\to B$ ind-etale.
 This constructs the required affine object without choosing unspecified existence data.
 4. At a point $(e,\mathfrak p)$ of $\operatorname{Spec}D$, evaluation identifies
 $D_{(e,\mathfrak p)}$ with $A_{\mathfrak p}$. Indeed every locally constant function is constant
@@ -1540,13 +1540,13 @@ continuous lifts into the corresponding finite limit of profinite spaces over $P
 unique map to its $T_E$. In particular $T_P=T$ and $T_{E_1\times_E
 E_2}=T_{E_1}\times_{T_E}T_{E_2}$. For a finite jointly surjective family $E_i\to E$, every point
 $(t,e)$ lifts to some $(t,e_i)$. Each induced arrow is ind-etale by the last algebra-map clause
-of [lem-weil-pbc-ind-etale-stability], since both algebras are ind-etale over $A$. It is weakly
+of [lemma-stability], since both algebras are ind-etale over $A$. It is weakly
 etale by that node. By [lem-weil-pbc-morphism-affine-schemes-affine], these arrows between
 affine schemes are affine: over every affine open of the target, their inverse images are
 affine. They remain jointly surjective over that open. Since the family is finite, these inverse
-images give exactly the finite affine source opens required by [def-weil-pbc-proetale-site].
+images give exactly the finite affine source opens required by [definition-small-pro-etale-site--1].
 This proves preservation of coverings, also when all spaces are empty.
-7. Take the small skeletons and the larger sheaf-value universe of [def-weil-size-convention].
+7. Take the small skeletons and the larger sheaf-value universe of [prose-01-10].
 The category of profinite spaces over $P$ has finite limits: they are the usual finite products
 and closed equalizer subspaces in compact Hausdorff totally disconnected spaces, with terminal
 object $P\to P$. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to $u:E\mapsto T_E$,
@@ -1555,7 +1555,7 @@ Kan extension followed by sheafification, and whose direct image is restriction 
 This invocation supplies both the adjunction and left exactness; neither is inferred just from a
 pointwise formula.
 8. Let $F$ be a sheaf of sets on $\mathbf{Prof}/P$ and $W\to T$ be qcqs. In the Kan formula of
-[lem-weil-pbc-presheaf-pullback-sets-left-exact], the index category before taking the opposite
+[situation-conventions], the index category before taking the opposite
 consists of pairs $(E,W\to T_E)$. Step 5 gives its initial object $(\pi_0(|W|)\to P,W\to
 T_{\pi_0(|W|)})$: the unique arrow to $(E,a)$ is the component map corresponding to $a$. Its
 opposite is terminal. The colimit is therefore $F(\pi_0(|W|)\to P)$: every element represented
@@ -1573,7 +1573,7 @@ identifications commute with $\eta$ by its naturality. This includes the empty f
 presheaves have singleton value on the empty scheme.
 10. Every covering of a qcqs $W$ has a finite affine refinement. Namely take a finite affine
 open cover of $W$; on each affine target open the covering condition of
-[def-weil-pbc-proetale-site] provides finitely many affine source opens mapping into it and
+[definition-small-pro-etale-site--1] provides finitely many affine source opens mapping into it and
 covering it. Their composites give the required refinement, and their sources are qcqs by
 [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. Hence every covering used to test local
 equality or local representability of sections at $W$ can be replaced by a finite qcqs covering
@@ -1596,7 +1596,7 @@ $\eta_W(\sigma^*a)=\sigma^*\eta_V(a)=\sigma^*p^*t=t$. Thus $\eta_W$ is bijective
 $K^\#=\pi_T^{-1}F$; compose $\eta_W^{-1}$ with step 8 to obtain the asserted formula. Naturality
 follows from that of $\eta$ and step 8, for maps between eligible objects. The section $\sigma$
 proves bijectivity only and does not enter this canonical identification.
-13. For an abelian-group or ring sheaf, use [lem-weil-pbc-sheaf-algebraic-structures-objects] to
+13. For an abelian-group or ring sheaf, use [situation-conventions] to
 regard its operations as maps out of finite powers of its underlying sheaf of sets. The inverse
 image preserves these powers by step 7. Naturality of the set-valued identification in step 12,
 applied to addition, zero, negation, multiplication and one, identifies the induced operations

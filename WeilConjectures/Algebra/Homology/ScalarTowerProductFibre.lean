@@ -64,13 +64,13 @@ homotopy equivalence gives the assertion. No condition on the scalar is needed;
 in particular zero and invertible scalars are included. -/
 private theorem scalarTowerProductFibre_quasiIso (P : CochainComplex A ℤ) (μ : End P) :
     let V := ∏ᶜ (fun _ : ℕ ↦ P)
-    let a : V ⟶ V := Limits.Pi.map (fun _ : ℕ ↦ (μ : P ⟶ P))
+    let a : V ⟶ V := Limits.Pi.map (fun _ : ℕ ↦ μ.asHom)
     let b : V ⟶ V := Limits.Pi.lift (fun n : ℕ ↦ Limits.Pi.π (fun _ : ℕ ↦ P) (n + 1))
     let d := -(𝟙 V - b ≫ a)
     ∃ (w : d ≫ a = a ≫ d),
       QuasiIso ((mappingCone.map d d a a w)⟦(-1 : ℤ)⟧') := by
   let V := ∏ᶜ (fun _ : ℕ ↦ P)
-  let a : V ⟶ V := Limits.Pi.map (fun _ : ℕ ↦ (μ : P ⟶ P))
+  let a : V ⟶ V := Limits.Pi.map (fun _ : ℕ ↦ μ.asHom)
   let b : V ⟶ V := Limits.Pi.lift (fun n : ℕ ↦ Limits.Pi.π (fun _ : ℕ ↦ P) (n + 1))
   have hab : a ≫ b = b ≫ a := by
     apply Limits.Pi.hom_ext

@@ -214,7 +214,7 @@ set-indexed conservative family of points. Source: Stacks Project, Sites, Tag 00
 
 The sheaves take values in `Type (max u w)`, a universe containing the site's
 universe `u`: in the source the site is a set and its sheaves are valued in all sets
-(size convention, def-weil-size-convention). With values in a universe below `u` the
+(size convention, prose-01-10). With values in a universe below `u` the
 conclusion fails, e.g. for presheaves on a meet-semilattice with an antichain of
 size larger than the value universe.
 

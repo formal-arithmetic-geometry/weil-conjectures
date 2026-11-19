@@ -50,7 +50,7 @@ pointed neighbourhoods is an equivalence compatible with forgetting the lift.
 neighbourhoods. Its universal property constructs the map with the displayed
 rule on representatives and proves uniqueness. The inverse equivalence constructs its
 inverse on representatives. For abelian sheaves, the same colimit construction is additive;
-lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered makes the colimits filtered,
+definition-torsion-sheaves--3 makes the colimits filtered,
 so they have the corresponding underlying sets and the map is an isomorphism. -/
 theorem geometricPointMorphism_stalk_bijection
     {S : Scheme.{u}} {k k' : Type u} [Field k] [IsAlgClosed k]

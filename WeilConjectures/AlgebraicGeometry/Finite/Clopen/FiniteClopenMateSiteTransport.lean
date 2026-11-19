@@ -75,8 +75,8 @@ private theorem transport_mate
       H'.map (al.hom.app X) = ak.hom.app (G.obj X) ≫
         K'.map (og.hom.app X) ≫ α'.app (AC.obj X)) (X : D) :
     og.hom.app (R.obj X) ≫ G'.map (br.app X) ≫
-      (mateEquiv a' b' (TwoSquare.mk _ _ _ _ α')).natTrans.app (AD.obj X) =
-    AE.map ((mateEquiv a b (TwoSquare.mk _ _ _ _ α)).natTrans.app X) ≫ bs.app (H.obj X) ≫
+      (mateEquiv a' b' (TwoSquare.mk _ _ _ _ α')).app (AD.obj X) =
+    AE.map ((mateEquiv a b (TwoSquare.mk _ _ _ _ α)).app X) ≫ bs.app (H.obj X) ≫
       S'.map (oh.hom.app X) := by
   apply (b'.homEquiv _ _).symm.injective
   change K'.map (_ ≫ _ ≫ _) ≫ b'.counit.app _ =
@@ -97,7 +97,7 @@ private theorem transport_mate
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_map] at hc
   rw [hc]
   have hak := ak.hom.naturality
-    ((mateEquiv a b (TwoSquare.mk _ _ _ _ α)).natTrans.app X)
+    ((mateEquiv a b (TwoSquare.mk _ _ _ _ α)).app X)
   dsimp only [Functor.comp_obj, Functor.comp_map] at hak
   rw [← reassoc_of% hak]
   rw [reassoc_of% hs]

@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict
 
 /-! # Local extension of one map between bounded finite free complexes
 
-Source: lem-pc-perfect-locus, finite matrix extension argument, expanded in
-lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension argument, expanded
+in lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3.
 (blueprint: lem-pc-finite-free-stalk-chain-map-lift)
 -/
 
@@ -28,8 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- One prescribed stalk chain map extends, using the canonical comparison, to every
 sufficiently small neighbourhood.
 
-Source: lem-pc-perfect-locus, finite matrix extension argument, as expanded in
-lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension argument, as
+expanded in lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3.
 (blueprint: lem-pc-finite-free-stalk-chain-map-lift)
 
 Proof: Choose finite bases of the nonzero terms of P and Q. Their bounded supports

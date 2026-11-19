@@ -18,7 +18,7 @@ with a dense subsite of the pro-étale site of `Spec Ω`
 4.1.10), so the pullback `p^* : Sh(*_proét, Ab) ⥤ Sh((Spec Ω)_proét, Ab)` from condensed abelian
 groups is an equivalence. Its right adjoint `p_*` is lax monoidal and the adjunction `p^* ⊣ p_*`
 is monoidal, so `p^*` also induces an equivalence `Mod_Λ ⥤ Mod_{p^* Λ}` on module objects over
-any condensed ring `Λ` (blueprint `sk-prop-pe-condensed-point`).
+any condensed ring `Λ` (blueprint `proposition-pro-etale-site-separably-closed`).
 
 ## Main results
 
@@ -64,7 +64,7 @@ instance isEquivalence_upperStarFromPoint : (upperStarFromPoint (Spec (.of Ω)))
 condensed `Λ`-modules to module objects over `p^* Λ` on `(Spec Ω)_proét` is an equivalence: the
 adjunction `p^* ⊣ p_*`, composite of `p^* ⊣ p_*` from the point to `Spec ℤ` and
 `π^* ⊣ π_*`, is monoidal, and its module version has invertible unit and counit, these being
-computed on the underlying sheaves (blueprint `sk-prop-pe-condensed-point`). -/
+computed on the underlying sheaves (blueprint `proposition-pro-etale-site-separably-closed`). -/
 instance isEquivalence_mapMod_upperStarFromPoint
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] :
     ((upperStarFromPoint (Spec (.of Ω))).mapMod Λ).IsEquivalence := by

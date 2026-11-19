@@ -14,8 +14,8 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 Let `C` be a pretriangulated category with coproducts indexed by `Type w`, for any universe `w`.
 Then `C` is idempotent complete
 (`CategoryTheory.Pretriangulated.isIdempotentComplete_of_hasCoproducts`, Bökstedt–Neeman, Stacks
-Tag 05QW, blueprint `det-brown-hypotheses-ambient`). Only the countable coproduct `∐ₙ A`, indexed
-by `ULift.{w} ℕ`, is used.
+Tag 05QW, blueprint `lemma-hypotheses-brown-representability`). Only the countable coproduct `∐ₙ A`,
+indexed by `ULift.{w} ℕ`, is used.
 
 For an idempotent `e : A ⟶ A`, let `Z` be the telescope (homotopy colimit) of
 `A ⟶[e] A ⟶[e] A ⟶ ⋯`, the third object of a distinguished triangle

@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexTargetLocality
 
 /-! # Degreewise monomorphism in qcqs single-complex base change
 
-Source: Stacks Project, Tag 0DJ9.
-(blueprint: lem-pc-single-complex-qcqs-homology-mono).
+## References
+
+* Stacks Project, Tag 0DJ9
 -/
 
 @[expose] public section
@@ -28,25 +29,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The monomorphism part in one degree of the qcqs single-complex stalk criterion.
-
-Source: Stacks Project, Tag 0DJ9, lemma-single-complex-base-change.
-(blueprint: lem-pc-single-complex-qcqs-homology-mono).
-
-Proof: Exact restriction to target opens detects the assertion, so restrict to
-an affine new base mapping into an affine original base. The source is then
-quasi-compact and quasi-separated. For an affine source open, translate
-quasi-coherent derived objects into complexes of modules. The localized stalk
-condition identifies the canonical comparison and makes it invertible in every
-degree. Induct over quasi-compact source opens. In a union of two such opens,
-the intersection is quasi-compact by quasi-separatedness. The two relative
-Mayer--Vietoris triangles and the canonical comparison form a morphism of
-triangles. Their long exact cohomology sequences propagate degreewise
-invertibility from the two opens and their intersection to the union. The
-quasi-compact-open induction principle reaches the whole source. The top-open
-comparison is the original mate followed by direct image of phi. Retain its
-monomorphism in degree n and descend from the target-open restriction. Zero
-objects, empty schemes and negative degrees require no extra hypotheses. -/
+/-- The monomorphism part in one degree of the qcqs single-complex stalk criterion. -/
 theorem singleComplexBaseChange_homology_mono
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
