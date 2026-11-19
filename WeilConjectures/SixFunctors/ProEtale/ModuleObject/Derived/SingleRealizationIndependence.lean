@@ -22,10 +22,10 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- Reconstructing an object in the essential image of a fully faithful functor
 from its image under a retraction does not depend on its temporary trivialization.
 Source: the single-complex/homology comparison in Steps 8 and 9 of the point-section
-transport argument, refining the twist-removal step of blueprint `sk-thm-frobenius`.
-Proof: the transition between the two trivializations is in the image of the fully
-faithful functor. Naturality of the retraction isomorphism at its preimage identifies
-the two reconstruction maps, after canceling the trivializations.
+transport argument, refining the twist-removal step of blueprint
+`theorem-poincare-duality-frobenius`. Proof: the transition between the two trivializations is in
+the image of the fully faithful functor. Naturality of the retraction isomorphism at its preimage
+identifies the two reconstruction maps, after canceling the trivializations.
 (blueprint: lem-pod-point-single-realization-independent) -/
 theorem single_realization_independent
     {A B : Type*} [Category* A] [Category* B]

@@ -46,6 +46,145 @@ open Scheme PadicAlgCl
 
 attribute [local instance] traitGenericFieldAlgebra
 
+/-- Constructibility of a derived pullback passes to any further factorization. -/
+private lemma boundedConstructible_leftDerivedUpperStar_obj_of_factorization
+    {Z Y X : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X) (fg : Z ⟶ X) (hfg : f ≫ g = fg)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (hA : boundedConstructible (condensedRingObj Λ Y) (L((g)^*⟦Λ⟧).obj A)) :
+    boundedConstructible (condensedRingObj Λ Z) (L((fg)^*⟦Λ⟧).obj A) :=
+  (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarCompOfEq Λ hfg).app A).symm
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f _ hA)
+
+/-- An invertible exchange transports triviality of the intertwined automorphism action. -/
+private lemma autAction_eq_id_of_pullbackExchange_intertwines
+    {X S : Scheme.{u}} {M N : NearbyCyclesModel X S}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (ρ : M.Hom N (𝟙 X) (𝟙 S)) (σ : M.Hom M (𝟙 X) (𝟙 S))
+    (τ : N.Hom N (𝟙 X) (𝟙 S))
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) (hρ : IsIso ((ρ.pullbackExchange Λ).app A))
+    (hint : (ρ.pullbackExchange Λ).app A ≫ σ.autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) =
+      L((𝟙 S)^*⟦Λ⟧).map (τ.autAction Λ A) ≫ (ρ.pullbackExchange Λ).app A)
+    (hτ : τ.autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) = 𝟙 _) :
+    σ.autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) = 𝟙 _ := by
+  have hτ' : τ.autAction Λ A = 𝟙 _ :=
+    eq_id_of_naturality_of_iso _ (fun f ↦ Hom.autAction_naturality Λ τ f)
+      ((leftDerivedUpperStarId Λ X).app A).symm hτ
+  rw [hτ', CategoryTheory.Functor.map_id, Category.id_comp] at hint
+  exact (cancel_epi _).1 (hint.trans (Category.comp_id _).symm)
+
+/-- Restriction through a Galois equivalence has the expected kernel and lifted section. -/
+private lemma exists_surjective_galoisRestriction_of_equiv
+    {G L Ω : Type*} [Group G] [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (eG : G ≃* Gal(Ω/L)) (L₁ : FiniteGaloisIntermediateField L Ω) :
+    ∃ π : G →* Gal(L₁.toIntermediateField/L), Function.Surjective π ∧
+      (∀ σ ∈ π.ker, eG σ ∈ L₁.toIntermediateField.fixingSubgroup) ∧
+      ∀ τ : Gal(L₁.toIntermediateField/L), π (eG.symm (τ.liftNormal Ω)) = τ := by
+  let π := (AlgEquiv.restrictNormalHom (F := L) (K₁ := Ω) L₁.toIntermediateField).comp
+    eG.toMonoidHom
+  refine ⟨π, (AlgEquiv.restrictNormalHom_surjective Ω).comp eG.surjective, ?_, ?_⟩
+  · intro σ hσ
+    rw [← IntermediateField.restrictNormalHom_ker]
+    exact hσ
+  · intro τ
+    simp only [π, MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.apply_symm_apply]
+    exact τ.restrict_liftNormal Ω
+
+/-- Exchange invertibility is independent of the presentation of its source model. -/
+private lemma isIso_pullbackExchange_app_of_model_eq
+    {X S S' : Scheme.{u}} {M₀ M₁ : NearbyCyclesModel X S} {N : NearbyCyclesModel X S'}
+    {f : X ⟶ X} {f' : S ⟶ S'}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (φ₀ : M₀.Hom N f f') (φ₁ : M₁.Hom N f f')
+    (hM : M₀ = M₁) (hφ : HEq φ₀ φ₁)
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (h : IsIso ((φ₀.pullbackExchange Λ).app A)) :
+    IsIso ((φ₁.pullbackExchange Λ).app A) := by
+  cases hM
+  cases hφ
+  exact h
+
+/-- A Galois average is independent of the presentation of its source model. -/
+private lemma galois_average_of_model_eq
+    {X S : Scheme.{u}} {M₀ M₁ N : NearbyCyclesModel X S}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {L Ω : Type*} [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (L₁ : FiniteGaloisIntermediateField L Ω)
+    (ψ₀ : M₀.Hom N (𝟙 X) (𝟙 S)) (ψ₁ : M₁.Hom N (𝟙 X) (𝟙 S))
+    (act₀ : Gal(Ω/L) → M₀.Hom M₀ (𝟙 X) (𝟙 S))
+    (act₁ : Gal(Ω/L) → M₁.Hom M₁ (𝟙 X) (𝟙 S))
+    (hM : M₀ = M₁) (hψ : HEq ψ₀ ψ₁) (hact : HEq act₀ act₁)
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (h : ∃ r, (ψ₀.pullbackExchange Λ).app A ≫ r = 𝟙 _ ∧
+      Fintype.card Gal(L₁.toIntermediateField/L) • (r ≫ (ψ₀.pullbackExchange Λ).app A) =
+        ∑ τ : Gal(L₁.toIntermediateField/L),
+          (act₀ (τ.liftNormal Ω)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A)) :
+    ∃ r, (ψ₁.pullbackExchange Λ).app A ≫ r = 𝟙 _ ∧
+      Fintype.card Gal(L₁.toIntermediateField/L) • (r ≫ (ψ₁.pullbackExchange Λ).app A) =
+        ∑ τ : Gal(L₁.toIntermediateField/L),
+          (act₁ (τ.liftNormal Ω)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) := by
+  cases hM
+  cases hψ
+  cases hact
+  exact h
+
+/-- An equivariant Galois average gives a retraction averaged over a finite quotient. -/
+private lemma exists_subgroup_pullbackExchange_of_galois_average
+    {X S S' : Scheme.{u}} {M'' N₁ N : NearbyCyclesModel X S}
+    {M : NearbyCyclesModel X S'} {f' : S ⟶ S'}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (ρ : M''.Hom N₁ (𝟙 X) (𝟙 S)) (ψ : N₁.Hom N (𝟙 X) (𝟙 S))
+    {χ : N.Hom M (𝟙 X ≫ 𝟙 X) (𝟙 S ≫ f')} (φ : M''.Hom M (𝟙 X) f')
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (hχ : IsIso ((χ.pullbackExchange Λ).app A))
+    (htot : (ρ.total ≫ ψ.total) ≫ χ.total = φ.total)
+    (hgen : (ρ.generic ≫ ψ.generic) ≫ χ.generic = φ.generic)
+    (hρ : ∀ C, IsIso ((ρ.pullbackExchange Λ).app C))
+    {G L Ω : Type*} [Group G] [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (eG : G ≃* Gal(Ω/L)) (L₁ : FiniteGaloisIntermediateField L Ω)
+    (act : G → M''.Hom M'' (𝟙 X) (𝟙 S))
+    (actΩ : Gal(Ω/L) → N₁.Hom N₁ (𝟙 X) (𝟙 S))
+    (hmul : ∀ σ τ C, (act (σ * τ)).autAction Λ C =
+      (act τ).autAction Λ C ≫ (act σ).autAction Λ C)
+    (hint : ∀ τ D, (ρ.pullbackExchange Λ).app D ≫
+        (act (eG.symm τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj D) =
+      L((𝟙 S)^*⟦Λ⟧).map ((actΩ τ).autAction Λ D) ≫ (ρ.pullbackExchange Λ).app D)
+    (htriv : ∀ τ ∈ L₁.toIntermediateField.fixingSubgroup,
+      (actΩ τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) = 𝟙 _)
+    (hSA : ∃ r, (ψ.pullbackExchange Λ).app A ≫ r = 𝟙 _ ∧
+      Fintype.card Gal(L₁.toIntermediateField/L) • (r ≫ (ψ.pullbackExchange Λ).app A) =
+        ∑ τ : Gal(L₁.toIntermediateField/L),
+          (actΩ (τ.liftNormal Ω)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A)) :
+    ∃ (V : Subgroup G) (_ : Fintype (G ⧸ V)),
+      (∀ σ ∈ V, (act σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) = 𝟙 _) ∧
+      ∃ r, (φ.pullbackExchange Λ).app A ≫ r = 𝟙 _ ∧
+        Fintype.card (G ⧸ V) • (r ≫ (φ.pullbackExchange Λ).app A) =
+          ∑ σ : G ⧸ V, (act σ.out).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) := by
+  have htriv' (σ : G) (hσ : eG σ ∈ L₁.toIntermediateField.fixingSubgroup) :=
+    autAction_eq_id_of_pullbackExchange_intertwines Λ ρ (act (eG.symm (eG σ)))
+      (actΩ (eG σ)) A (hρ A) (hint (eG σ) A) (htriv _ hσ)
+  simp only [MulEquiv.symm_apply_apply] at htriv'
+  refine (exists_retraction_pullbackExchange_of_comp_galoisLayer Λ ρ ψ χ φ htot hgen A
+    hρ hχ Finset.univ
+    (fun τ : Gal(L₁.toIntermediateField/L) ↦ act (eG.symm (τ.liftNormal Ω)))
+    (fun τ ↦ actΩ (τ.liftNormal Ω)) (Fintype.card _) hSA
+    (fun τ D ↦ hint (τ.liftNormal Ω) D)).elim fun r hravg ↦ ?_
+  refine (exists_surjective_galoisRestriction_of_equiv eG L₁).elim fun π hπdata ↦ ?_
+  have hπ := hπdata.1
+  have hker := hπdata.2.1
+  let : Fintype (G ⧸ π.ker) :=
+    Fintype.ofEquiv _ (QuotientGroup.quotientKerEquivOfSurjective π hπ).toEquiv.symm
+  refine ⟨π.ker, inferInstance, fun σ hσ ↦ htriv' σ (hker σ hσ), r, hravg.1, ?_⟩
+  exact MonoidHom.card_nsmul_eq_sum_quotient_ker' hravg.2 π hπ
+    (fun σ ↦ (act σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A))
+    (fun σ w hw ↦ by rw [hmul, htriv' w (hker w hw), Category.id_comp])
+    (fun τ ↦ eG.symm (τ.liftNormal Ω)) hπdata.2.2 (fun _ ↦ rfl)
+
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
   {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -81,10 +220,6 @@ lemma baseChangeToGaloisModel_comp_generic :
   exact (baseChangeToGaloisLayer_generic_fst_fst_assoc hM b hb v hv _).trans
     (pullback.lift_fst _ _ _)
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the instances `Module L L₁` for the concrete composita are found slowly
-set_option maxHeartbeats 8000000 in
--- the averages over the concrete Galois layer of the base change model are large terms
 /-- **The slicing exchange is the inclusion of the invariants, given the cartesian step**: if the
 pullback exchange of the cartesian part `χ : N'' ⟶ M` of the base change is invertible at `A`
 (`hM1`) and `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space, a subgroup `V` of
@@ -139,9 +274,9 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
   have : CompactSpace (baseChangeGaloisModel hM b hb v hv).generic :=
     QuasiCompact.compactSpace_of_compactSpace (baseChangeGaloisResidue hM b hb v hv)
   have : IsNoetherian (baseChangeGaloisModel hM b hb v hv).generic := ⟨⟩
-  have : QuasiCompact (baseChangeSpecial b v).hom := 
+  have : QuasiCompact (baseChangeSpecial b v).hom :=
     MorphismProperty.of_isPullback hT.isPullback_i ‹_›
-  have : IsSeparated (baseChangeSpecial b v).hom := 
+  have : IsSeparated (baseChangeSpecial b v).hom :=
     MorphismProperty.of_isPullback hT.isPullback_i ‹_›
   have : CompactSpace (baseChangeGaloisModel hM b hb v hv).total :=
     QuasiCompact.compactSpace_of_compactSpace (pullback.snd b v)
@@ -151,84 +286,87 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     QuasiCompact.compactSpace_of_compactSpace (baseChangeSpecial b v).hom
   have : QuasiSeparatedSpace (baseChangeSpecial b v).left :=
     quasiSeparatedSpace_of_quasiSeparated (baseChangeSpecial b v).hom
-  have hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      (baseChangeGaloisModel hM b hb v hv).generic)
-      (L(((baseChangeGaloisModel hM b hb v hv).ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) :=
-    (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarCompOfEq
-      (Profinite.padicAlgClRingObj ℓ) (Category.assoc _ _ _ : ((baseChangeHom hM b hb v
-        hv).traitChangeThickening (traitGenericField K) (baseChangeTotalStructure hM b hb v hv) q
-          g hM.isPullback_j.w (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _) ≫ M.ε =
-            (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hA)
-  obtain ⟨E, K₀, e, htors⟩ := exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB hC
-  obtain ⟨L₁, htriv, hSA⟩ := (baseChangeGaloisModel hM b hb v hv)
-    |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
-      (baseChangeGaloisResidue hM b hb v hv) _ ℓ
-      (fun M' _ ↦ IntermediateField.not_dvd_finrank_of_forall_finiteGalois
-        (not_dvd_finrank_traitTensorCompositum (K := K) (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
-      A hC E K₀ e htors
-  have htriv' (σ : GenericAut k' K)
-      (hσ : GenericAut.galoisEquiv σ ∈ L₁.toIntermediateField.fixingSubgroup) :
-      (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicAlgClRingObj ℓ)
-        (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) = 𝟙 _ := by
-    have h₂ : ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
-        (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
-            (traitGenericField k') (traitGenericField K)) (GenericAut.galoisEquiv σ)).autAction
-          (Profinite.padicAlgClRingObj ℓ) A = 𝟙 _ :=
-      eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality _ _ g)
-        ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app A).symm (htriv _ hσ)
-    have := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv
-      (Profinite.padicAlgClRingObj ℓ) A
-    have key := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv
-      (Profinite.padicAlgClRingObj ℓ) σ A
-    rw [h₂, CategoryTheory.Functor.map_id, Category.id_comp] at key
-    exact (cancel_epi _).1 (key.trans (Category.comp_id _).symm)
-  obtain ⟨r, hr, havg⟩ := exists_retraction_pullbackExchange_of_comp_galoisLayer
-    (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
-    ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
-      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+  have hC := boundedConstructible_leftDerivedUpperStar_obj_of_factorization
+    (Z := (baseChangeGaloisModel hM b hb v hv).generic)
+    ((baseChangeHom hM b hb v hv).traitChangeThickening (traitGenericField K)
       (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
-      (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
-    (baseChangeHom hM b hb v hv) (baseChangeToGaloisModel_comp_total hM b hb v hv)
-    (baseChangeToGaloisModel_comp_generic hM b hb v hv) A
-    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) (by transport_exact hM1)
-    Finset.univ
-    (fun τ : L₁.toIntermediateField ≃ₐ[traitTensorCompositum (PowerSeries K)
-        (traitGenericField k') (traitGenericField K)] L₁.toIntermediateField ↦
-      baseChangeAut hM b hb v hv (GenericAut.galoisEquiv.symm (τ.liftNormal _)))
-    (fun τ ↦ (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+      (baseChangeHom_total_comp hM b hb v hv) ≫ pullback.fst _ _)
+    M.ε (baseChangeGaloisModel hM b hb v hv).ε (Category.assoc _ _ _)
+    (Profinite.padicAlgClRingObj ℓ) A hA
+  -- Direct elimination keeps the large dependent types in their original form.
+  refine (exists_integralModel_baseChangeGaloisModel hM b hb v hv hB eB
+    (by cast_proofs hC)).elim fun E hE ↦ ?_
+  refine hE.elim fun K₀ hK₀ ↦ ?_
+  refine hK₀.elim fun e htors ↦ ?_
+  refine ((baseChangeGaloisModel hM b hb v hv)
+    |>.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
+      (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
       (baseChangeGaloisResidue hM b hb v hv)
-      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
-      (τ.liftNormal _))
-    (Fintype.card _) (by exact_mod_proofs hSA)
-    (fun τ D ↦ pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv
-      (Profinite.padicAlgClRingObj ℓ) (τ.liftNormal _) D)
-  obtain ⟨π, hπdef⟩ : ∃ π : GenericAut k' K →* (L₁.toIntermediateField ≃ₐ[traitTensorCompositum
-      (PowerSeries K) (traitGenericField k') (traitGenericField K)] L₁.toIntermediateField),
-      π = (AlgEquiv.restrictNormalHom L₁.toIntermediateField).comp
-        (GenericAut.galoisEquiv (k' := k') (K := K)).toMonoidHom := ⟨_, rfl⟩
-  have hπ : Function.Surjective π := by
-    rw [hπdef]
-    exact (AlgEquiv.restrictNormalHom_surjective _).comp (GenericAut.galoisEquiv).surjective
-  have hker (σ : GenericAut k' K) (hσ : σ ∈ π.ker) :
-      GenericAut.galoisEquiv σ ∈ L₁.toIntermediateField.fixingSubgroup := by
-    rw [← IntermediateField.restrictNormalHom_ker]
-    rw [hπdef] at hσ
-    exact hσ
-  have _ : Fintype (GenericAut k' K ⧸ π.ker) :=
-    Fintype.ofEquiv _ (QuotientGroup.quotientKerEquivOfSurjective π hπ).toEquiv.symm
-  refine ⟨π.ker, inferInstance, fun σ hσ ↦ htriv' σ (hker σ hσ), r, by transport_exact hr, ?_⟩
-  have key := MonoidHom.card_nsmul_eq_sum_quotient_ker' havg π hπ
-    (fun σ ↦ (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicAlgClRingObj ℓ) _)
-    (fun σ w hw ↦ by
-      rw [autAction_baseChangeAut_mul]
-      refine (congrArg (· ≫ _) ?_).trans (Category.id_comp _)
-      exact_mod_proofs htriv' w (hker w hw))
-    (fun τ ↦ GenericAut.galoisEquiv.symm (τ.liftNormal _))
-    (fun τ ↦ by
-      simp only [hπdef, MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.apply_symm_apply]
-      exact τ.restrict_liftNormal _) (fun _ ↦ rfl)
-  transport_exact key
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)) ℓ
+      (fun M' _ ↦ IntermediateField.not_dvd_finrank_of_forall_finiteGalois
+        (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
+        (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
+        (not_dvd_finrank_traitTensorCompositum (k' := k') (K := K)
+          (Fact.out : ringChar k' ≠ ℓ) Fact.out) M')
+      A (by cast_proofs hC) E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
+  have result := exists_subgroup_pullbackExchange_of_galois_average
+    (Λ := Profinite.padicAlgClRingObj ℓ)
+    (ρ := baseChangeToGaloisLayer hM b hb v hv)
+    (ψ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))))
+    (χ := (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv)).comp
+            (baseChangeHom hM b hb v hv).fromCartesian))
+    (φ := baseChangeHom hM b hb v hv) (A := A)
+    (hχ := by
+      exact isIso_pullbackExchange_app_of_model_eq
+        (M₀ := (baseChangeHom hM b hb v hv).traitChangeModel (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv))
+        (M₁ := baseChangeGaloisModel hM b hb v hv)
+        (Profinite.padicAlgClRingObj ℓ)
+        (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv)).comp
+            (baseChangeHom hM b hb v hv).fromCartesian)
+        (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv)).comp
+            (baseChangeHom hM b hb v hv).fromCartesian) rfl HEq.rfl A (by cast_proofs hM1))
+    (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
+    (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
+    (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
+    (act := baseChangeAut hM b hb v hv)
+    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁)
+    (actΩ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))))
+    (hmul := autAction_baseChangeAut_mul hM b hb v hv _)
+    (hint := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
+    (htriv := hL₁.1)
+    (hSA := by
+      exact galois_average_of_model_eq
+        (M₀ := (baseChangeGaloisModel hM b hb v hv).galoisLayer
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        (M₁ := baseChangeGaloisLayer hM b hb v hv)
+        (Profinite.padicAlgClRingObj ℓ) L₁
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        rfl HEq.rfl HEq.rfl A
+        (by cast_proofs hL₁.2))
+  cast_proofs result
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

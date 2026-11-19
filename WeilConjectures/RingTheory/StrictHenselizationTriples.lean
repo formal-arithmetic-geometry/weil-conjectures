@@ -139,7 +139,7 @@ through the residue field of its kernel.
 small skeleton (lem-weil-pbc-affine-etale-essentially-small-cover and
 lem-weil-pbc-colimit-initial-full-subcategory).
 3. Tensor products give common successors, including the identity triple for nonemptiness
-(lem-weil-pbc-etale-ring-base-change, lem-weil-pbc-etale-composition-cancellation).
+(lem-weil-pbc-etale-ring-base-change, definition-torsion-sheaves--3).
 4. For parallel maps beta1, beta2 : S → S', form E = S' ⊗[S] S' using these maps,
 then S'' = E ⊗[S' ⊗[R] S'] S' using multiplication on the last factor. Both
 base changes are etale by the same base-change and composition lemmas. The two maps

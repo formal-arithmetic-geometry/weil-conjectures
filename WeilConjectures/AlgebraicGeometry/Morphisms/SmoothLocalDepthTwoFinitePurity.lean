@@ -19,8 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 /-!
 # Etaleness of a depth-two finite extension over a smooth local base
 
-Source: Stacks Project, proof of Tag 0EYB, with uniqueness in Tag 0EY6(2).
-(blueprint: lem-sbc-smooth-local-depth-two-finite-purity)
+## References
+
+* Stacks Project, proof of Tag 0EYB, with uniqueness in Tag 0EY6(2)
+* Stacks Project, proof of Tag 0EYB, and Tag 0EY6(2), (a), (b)
 -/
 
 @[expose] public section
@@ -29,21 +31,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A supplied finite depth-two extension is etale when its etale open is fibrewise dense.
-
-Source: Stacks Project, proof of Tag 0EYB, and Tag 0EY6(2),(a),(b).
-(blueprint: lem-sbc-smooth-local-depth-two-finite-purity)
-
-Proof: Smoothness over the Noetherian affine base makes L locally Noetherian.
-The formal-completion flatness theorem gives Flat p from fibre density and
-the supplied extension's boundary depth condition. The flat depth-two purity
-criterion then gives FormallyUnramified p. Its proof uses 0BJH, since every
-source point of local dimension one must lie over U. Finiteness over a locally
-Noetherian scheme supplies local finite presentation. Mathlib's criterion
-combines flatness, formal unramifiedness and local finite presentation to give
-Etale p. This proves the original statement from two separate assertions:
-flatness by the completion argument, and absence of ramification for a flat
-extension. Neither assertion is the original etaleness statement. -/
+/-- A supplied finite depth-two extension is etale when its etale open is fibrewise dense. -/
 theorem etale_of_smooth_local_depth_two_finite_extension
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

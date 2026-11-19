@@ -60,8 +60,6 @@ local notation "Rp[" x "]" => HomogeneousLocalization 𝒜 T[x]
 local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
 
-set_option maxHeartbeats 700000 in
--- Elaborating the dependent chart, stalk and section witnesses requires extra reductions.
 /-- The associated sheaf exists, with the canonical restrictions, chart and stalk
 identifications, uniqueness, quasi-coherence, and the degree-zero global-section map.
 Source: Stacks, Constructions, Section 01M3 before Definition 01M6; Lemmas 01M4,
@@ -180,8 +178,12 @@ theorem gradedModuleSheaf_exists
           (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op s) : N[f]) =
             mk (m : M) 1) → s = gamma m) := by
   classical
-  obtain ⟨Z, hZ, lambda, lambdaS, rhoRel, rhoSRel, U, hU, hmaps, hid,
-    hpower, hcomp, hlocal⟩ := gradedModuleAwayRestriction 𝒜 𝓜 h𝓜 hsmul
+  obtain ⟨Z, hZ, haway⟩ := gradedModuleAwayRestriction 𝒜 𝓜 h𝓜 hsmul
+  refine ⟨Z, hZ, ?_⟩
+  obtain ⟨lambda, lambdaS, rhoRel, rhoSRel, U, hdata⟩ := haway
+  have hmaps := hdata.2.1
+  have hid := hdata.2.2.1
+  have hcomp := hdata.2.2.2.2.1
   have hRel (f g : Fidx) (i : D[g] ≤ D[f]) :
       ∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1 :=
     ((standardOpenProperties.{u, u, u} 𝒜).2.2.1 f.val.1 g.val.1 f.val.2 g.val.2
@@ -196,13 +198,12 @@ theorem gradedModuleSheaf_exists
           (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →
           (rho f g i q : N[g]) = mk (a ^ m • y)
             (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1)) := by
-    obtain ⟨_, _, _, _, _, hfrac, _, _, hcoer, _, hscalar, _⟩ :=
-      hmaps f g (hRel f g i)
-    refine ⟨hRel f g i, hscalar, ?_⟩
+    have hm := hmaps f g (hRel f g i)
+    refine ⟨hRel f g i, hm.2.2.2.2.2.2.2.2.2.2.1, ?_⟩
     intro e k a he ha hrel m y q hq
     change (rhoRel f g (hRel f g i) q : N[g]) = _
-    rw [hcoer, hq]
-    exact hfrac e k a he ha hrel y m
+    rw [hm.2.2.2.2.2.2.2.2.1, hq]
+    exact hm.2.2.2.2.2.1 e k a he ha hrel y m
   have hid' (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f) : rho f f i q = q :=
     (hid f (hRel f f i)).1 q
   have hcomp' (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f) :
@@ -218,41 +219,38 @@ theorem gradedModuleSheaf_exists
       intro q
       exact (hcomp' g f g j i q).trans (hid' g (i.trans j) q)
     exact ⟨hleft.injective, hright.surjective⟩
+  refine ⟨rhoS, rho, hmap, hid', hcomp', hbij, ?_⟩
   have hcanonical (f g : Fidx) (i : D[g] ≤ D[f]) :
       ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,
         (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =
           algebraMap S (Localization.Away g.val.1) a) ∧
         ∀ r : R[f], (rhoS f g i r).val = l r.val := by
-    obtain ⟨_, _, _, _, _, _, hbase, _, _, hcoerS, _, _⟩ :=
-      hmaps f g (hRel f g i)
-    exact ⟨lambdaS f g (hRel f g i), hbase, hcoerS⟩
+    have hm := hmaps f g (hRel f g i)
+    exact ⟨lambdaS f g (hRel f g i), hm.2.2.2.2.2.2.1, hm.2.2.2.2.2.2.2.2.2.1⟩
   obtain ⟨F, alpha, hscalar, hres, hring, hunique, hqc⟩ :=
     gradedModuleSheaf_extension 𝒜 𝓜 h𝓜 hsmul Z hZ rhoS rho
       ⟨hmap, hid', hcomp', hbij⟩ hcanonical
+  refine ⟨F, alpha, hscalar, hres, hring, hunique, hqc, ?_⟩
   obtain ⟨Zp, hZp, mu, hmuScalar, hmuGerm⟩ :=
     gradedModuleSheaf_stalks 𝒜 𝓜 h𝓜 hsmul Z hZ rhoS rho
       ⟨hmap, hid', hcomp', hbij⟩ F alpha ⟨hscalar, hres⟩
+  refine ⟨Zp, hZp, mu, hmuScalar, hmuGerm, ?_⟩
   obtain ⟨eta, gamma, heta, hgammaScalar, hgammaRes⟩ :=
     gradedModuleSheaf_globalSections 𝒜 𝓜 h𝓜 hsmul Z hZ rhoS rho
       ⟨hmap, hid', hcomp', hbij⟩ F alpha ⟨hscalar, hres⟩ hcanonical hring
-  have hgammaCompat (m : 𝓜 0) (f g : Fidx) (i : D[g] ≤ D[f]) :
-      rho f g i
-        (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op (gamma m))) =
-        alpha g (F.val.map (homOfLE (le_top : D[g] ≤ ⊤)).op (gamma m)) := by
+  refine ⟨eta, gamma, heta, hgammaScalar, hgammaRes, ?_, ?_⟩
+  · intro m f g i
     rw [← hres f g i]
     congr 1
     rw [← F.val.map_comp_apply]
     rfl
-  have hcover : (⊤ : (Proj 𝒜).Opens) ≤ ⨆ f : Fidx, D[f] := by
-    intro x hx
-    obtain ⟨V, ⟨f, d, hd, hf, rfl⟩, hxV, _⟩ :=
-      TopologicalSpace.Opens.isBasis_iff_nbhd.mp
-        (standardOpenProperties.{u, u, u} 𝒜).1 hx
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(f, d), hd, hf⟩, hxV⟩
-  have hgammaUnique (m : 𝓜 0) (s : F.val.obj (op ⊤))
-      (hs : ∀ f : Fidx,
-        (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op s) : N[f]) =
-          mk (m : M) 1) : s = gamma m := by
+  · have hcover : (⊤ : (Proj 𝒜).Opens) ≤ ⨆ f : Fidx, D[f] := by
+      intro x hx
+      obtain ⟨V, ⟨f, d, hd, hf, rfl⟩, hxV, _⟩ :=
+        TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+          (standardOpenProperties.{u, u, u} 𝒜).1 hx
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(f, d), hd, hf⟩, hxV⟩
+    intro m s hs
     let E : TopCat.Sheaf AddCommGrpCat (Proj 𝒜) := ⟨F.val.presheaf, F.isSheaf⟩
     apply E.eq_of_locally_eq' (fun f : Fidx ↦ D[f]) ⊤
       (fun _ ↦ homOfLE le_top) hcover s (gamma m)
@@ -260,8 +258,5 @@ theorem gradedModuleSheaf_exists
     apply (alpha f).injective
     apply Subtype.ext
     exact (hs f).trans (hgammaRes m f).symm
-  exact ⟨Z, hZ, rhoS, rho, hmap, hid', hcomp', hbij, F, alpha,
-    hscalar, hres, hring, hunique, hqc, Zp, hZp, mu, hmuScalar, hmuGerm,
-    eta, gamma, heta, hgammaScalar, hgammaRes, hgammaCompat, hgammaUnique⟩
 
 end AlgebraicGeometry.Proj

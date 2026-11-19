@@ -11,8 +11,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Exactness of extension by zero in intrinsic coefficients
 
-Source: Weil blueprint, order 1492; Stacks Project, Tags 03DI and 03DJ
-(blueprint: lem-weil-extension-by-zero-exact).
+## References
+
+* Stacks, Tags 03DI and 03DJ
 -/
 
 @[expose] public section
@@ -25,18 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Extension by zero is additive and preserves finite limits and colimits.
-Source: blueprint order 1492; Stacks, Tags 03DI and 03DJ
-(blueprint: lem-weil-extension-by-zero-exact).
-
-Proof: unfold the intrinsic extension as the composite of the inverse canonical
-coefficient realization, fixed-coefficient extension by zero, and the ambient canonical
-coefficient realization. The realization functors are additive equivalences
-(`finiteCoefficientIntrinsicRealization_exact`); their inverses are therefore additive,
-and both directions preserve limits and colimits. The middle functor is additive and
-preserves finite limits by `openImmersionLowerShriek_additive` and
-`preservesFiniteLimits_openImmersionLowerShriek`; it preserves colimits because it is
-a left adjoint. Composition gives the three assertions. -/
+/-- Extension by zero is additive and preserves finite limits and colimits. -/
 theorem sfIntrinsicExtensionByZero_exact {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicExtensionByZero j A).Additive ∧
@@ -49,23 +39,20 @@ theorem sfIntrinsicExtensionByZero_exact {U X : Scheme.{u}} (j : U ⟶ X)
   unfold sfIntrinsicExtensionByZero
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Additivity from the exactness assertion. Source: Stacks, Tag 03DJ
-(blueprint: lem-weil-extension-by-zero-exact). -/
+/-- Additivity from the exactness assertion. -/
 noncomputable instance sfIntrinsicExtensionByZero_additive {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicExtensionByZero j A).Additive :=
   (sfIntrinsicExtensionByZero_exact j A).1
 
-/-- Left exactness from the exactness assertion. Source: Stacks, Tag 03DJ
-(blueprint: lem-weil-extension-by-zero-exact). -/
+/-- Left exactness from the exactness assertion. -/
 noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteLimits
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :
     PreservesFiniteLimits (sfIntrinsicExtensionByZero j A) :=
   (sfIntrinsicExtensionByZero_exact j A).2.1
 
-/-- Right exactness from the exactness assertion. Source: Stacks, Tag 03DJ
-(blueprint: lem-weil-extension-by-zero-exact). -/
+/-- Right exactness from the exactness assertion. -/
 noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteColimits
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :

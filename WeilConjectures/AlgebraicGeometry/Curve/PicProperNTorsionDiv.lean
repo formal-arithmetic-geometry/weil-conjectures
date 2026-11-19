@@ -19,7 +19,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 /-- Degree-zero Picard divisibility for a proper smooth curve.
-Source: blueprint `lem-sc-pic-proper-ntorsion`, the Jacobian calculation.
+Source: blueprint `corollary-torsion-jacobian-field-extension`, the Jacobian calculation.
 (blueprint: lem-sc-pic-proper-ntorsion-div)
 
 Proof in words: Smoothness gives local Noetherianity and regularity, so connectedness

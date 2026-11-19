@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.WeilSheaf.DirectImageRestriction
@@ -59,7 +60,7 @@ The elements of the geometric part acting trivially form a closed normal subgrou
 `W(U₀)`, since `ρ` is continuous on the geometric part. Its image in `π₁(U₀)` is compact, hence
 closed, and normal since the Weil group is dense; it contains the inertia group, hence the local
 kernel (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`).
-(blueprint: `cor-wf-unramified-boundary-purity`) -/
+(blueprint: `corollary-unramified-boundary-point--2`) -/
 theorem apply_eq_self_of_mem_weilLocalKernel
     {ρ : Representation (PadicAlgCl l) (weilGroup pU sU GU) V}
     (hρ : (ofFundamentalGroup pU sU GU).IsLisse l ρ) (z : ↥((Set.range j.base)ᶜ))
@@ -160,18 +161,18 @@ omit [Finite K] [IsCurve p] [GeometricallyConnected p] [ConnectedSpace C] [Smoot
 changes along `f` acts trivially on the geometric fibre of every object isomorphic to one. -/
 lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.app_apply_eq_of_pullbackPathIso_eq_refl
     {X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (f : X ⟶ Y)
-    {y : Spec (.of Ω) ⟶ X} {σ : Aut (fiber y)} (hσ : pullbackPathIso f σ = Iso.refl _)
+    {y : Spec (.of Ω) ⟶ X} {σ : Aut (fiber y)} (hσ : pullbackPathIso f σ.asIso = Iso.refl _)
     {Q : X.FiniteEtale} {P : Y.FiniteEtale} (i : Q ≅ (pullback f).obj P) (a : (fiber y).obj Q) :
-    σ.hom.app Q a = a := by
-  have h₁ : σ.hom.app ((pullback f).obj P) = 𝟙 _ := by
+    σ.asIso.hom.app Q a = a := by
+  have h₁ : σ.asIso.hom.app ((pullback f).obj P) = 𝟙 _ := by
     have h := congrArg (fun τ : fiber (y ≫ f) ≅ fiber (y ≫ f) ↦ τ.hom.app P) hσ
     simp only [pullbackPathIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.refl_hom, NatTrans.id_app] at h
     rw [← cancel_epi ((pullbackFiberIso f y).inv.app P),
       ← cancel_mono ((pullbackFiberIso f y).hom.app P), Category.assoc, h]
     simp
-  have h₂ : σ.hom.app Q = 𝟙 _ := by
-    have h := σ.hom.naturality i.hom
+  have h₂ : σ.asIso.hom.app Q = 𝟙 _ := by
+    have h := σ.asIso.hom.naturality i.hom
     rw [h₁, Category.comp_id] at h
     rw [← cancel_mono ((fiber y).map i.hom), ← h, Category.id_comp]
   rw [h₂]
@@ -186,14 +187,14 @@ covers of `V₀`: these are base changes of covers of `V̄`, since `Ū ⟶ U₀ 
 theorem BasePointData.geomAut_mem_fixingSubgroup
     (B : BasePointData (ofFundamentalGroup pU sU GU)) {V : Scheme.{u}} (k : U ⟶ V)
     {q : V ⟶ Spec (.of K)} (hk : k ≫ q = pU) {σ : Aut (fiber B.t)}
-    (hσ : pullbackPathIso (Scheme.Hom.geometricFiberMap k hk) σ = Iso.refl _) :
+    (hσ : pullbackPathIso (Scheme.Hom.geometricFiberMap k hk) σ.asIso = Iso.refl _) :
     B.geomAut σ ∈ fixingSubgroup sU k GU := by
   intro P x
   set kb := Scheme.Hom.geometricFiberMap k hk
   have hsq : pU.geometricFiberProj ≫ k = kb ≫ q.geometricFiberProj :=
     (Scheme.Hom.geometricFiberMap_comp_geometricFiberProj k hk).symm
   -- the loop pushed down to `U₀` acts trivially on the fibres of `k^* P`
-  let e := pullbackPathIso pU.geometricFiberProj σ ≪≫ eqToIso (congrArg fiber
+  let e := pullbackPathIso pU.geometricFiberProj σ.asIso ≪≫ eqToIso (congrArg fiber
     (rfl : B.t ≫ pU.geometricFiberProj = B.t ≫ pU.geometricFiberProj))
   have he (a) : e.hom.app ((pullback k).obj P) a = a := by
     simp only [e, eqToIso_refl, Iso.trans_refl, pullbackPathIso, Iso.trans_hom, Iso.symm_hom,
@@ -204,8 +205,8 @@ theorem BasePointData.geomAut_mem_fixingSubgroup
         pullbackCompIso _ _ _)]
     exact ConcreteCategory.congr_hom
       ((pullbackFiberIso pU.geometricFiberProj B.t).inv_hom_id_app _) a
-  have key := B.toAutMulEquiv_toπ e
-  change (show GU from B.toπ e) • x = x
+  have key := B.toAutMulEquiv_toπ (Aut.of e)
+  change (show GU from B.toπ (Aut.of e)) • x = x
   rw [← toAut_hom_app_apply, ← toAutMulEquiv_apply]
   erw [key]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]
@@ -262,8 +263,8 @@ extends to a lisse Weil sheaf `G` on `V₀`
 (`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure of
 weight `w` since its restriction to `U₀` is
 (`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
-`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lem-a1-lisse-middle-extension`).
-(blueprint: `cor-wf-unramified-boundary-purity`) -/
+`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lemma-boundary-stalk--2`).
+(blueprint: `corollary-unramified-boundary-point--2`) -/
 theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.base)ᶜ))
     {F : WeilSheaf K l U} (hF : F.IsLisse)
     (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber)
@@ -272,7 +273,7 @@ theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.ba
     (hFt : ∀ σ : Aut (fiber t), pullbackPathIso (Scheme.Hom.geometricFiberMap
         (toBoundaryOpen (p := C ↘ Spec (.of K)) j z.1)
         (g := (boundaryOpen (p := C ↘ Spec (.of K)) j z.1).ι ≫ C ↘ Spec (.of K))
-        (toBoundaryOpen_comp_over j z.1)) σ = Iso.refl _ →
+        (toBoundaryOpen_comp_over j z.1)) σ.asIso = Iso.refl _ →
       ∀ v, (universalLisseMonodromy l (U ↘ Spec (.of K)).geometricFiber K).rep t
         ⟨F.obj.carrier, hF⟩ σ v = v)
     {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w)
@@ -327,7 +328,7 @@ theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.ba
   have : Smooth (U ↘ Spec (.of K)) := by rw [← comp_over j (Spec (.of K))]; infer_instance
   -- `F` extends to a lisse Weil sheaf `G` on `V₀`
   obtain ⟨G, hG, ⟨e⟩⟩ := exists_isLisse_upperStar_iso_of_rep_eq_self k hkd hF t
-    fun σ hσ v ↦ hFt σ (MonoidHom.mem_ker.1 hσ) v
+    fun σ hσ v ↦ hFt σ (congrArg Aut.asIso (MonoidHom.mem_ker.1 hσ)) v
   -- `G` is pure of weight `w`
   have hres : ((upperStar k).obj G).IsPunctuallyPureOfWeight ι w := fun y ↦
     (hw y).of_equiv (nonempty_equiv_stalk_of_iso e y).some
@@ -361,8 +362,8 @@ variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-/-- Blueprint `cor-wf-unramified-boundary-purity` (first clause, inertia form), together with
-`prop-wf-weil-sheaf-representation-equivalence`.
+/-- Blueprint `corollary-unramified-boundary-point--2` (first clause, inertia form), together with
+`definition-weil-representation--1`.
 
 Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
 geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius

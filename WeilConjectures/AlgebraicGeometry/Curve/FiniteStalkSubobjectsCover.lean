@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.FiniteStalkSubobjectElement
 /-!
 # Finite-stalk subobjects cover a torsion sheaf over a field
 
-Source: the finite stable subgroup argument in blueprint `lem-sc-affine-generic-second`,
+Source: the finite stable subgroup argument in blueprint `theorem-cohomology-curves--2`,
 paragraph 4; Stacks Project, Tags 04JQ and 03SA.
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Finite-stalk subobjects of a torsion abelian sheaf over a field have supremum top.
 
-Source: blueprint `lem-sc-affine-generic-second`, paragraph 4, finite stable subgroup
+Source: blueprint `theorem-cohomology-curves--2`, paragraph 4, finite stable subgroup
 construction; Stacks Project, Tag 04JQ (abelian sheaves on a field and discrete Galois
 modules) and Tag 03SA (torsion sheaves and constructible approximation).
 (blueprint: lem-sc-field-torsion-finite-stalk-subobjects-cover)

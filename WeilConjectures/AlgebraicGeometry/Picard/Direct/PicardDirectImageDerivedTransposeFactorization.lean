@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedUnit
 
 /-! # Factorization of the normalized transpose
 
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-factorization)
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -50,19 +51,34 @@ private theorem coefficientMate_evaluation
   rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_counit,
     schemeDerivedMate_evaluation, Category.assoc]
 
-set_option maxHeartbeats 500000 in
--- Keep the explicitly constructed coefficient comparison folded.
-/-- The normalized transpose factors through the coefficient transpose.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-factorization)
+/-- Evaluate the coefficient mate before specializing its square to a fibre product. -/
+private theorem coefficientMate_tensor_evaluation
+    {A B X W V : Scheme.{v}} (p : A ⟶ W) (p' : B ⟶ V)
+    (r : V ⟶ W) (a : B ⟶ A) (ha : a ≫ p = p' ≫ r)
+    (q : A ⟶ X) (q' : B ⟶ X) (hq : a ≫ q = q') (L : X.Modules) :
+    let M := (Modules.tensorPullback q).obj L
+    let K := (DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings A.toRingedSpace)) 0).obj M
+    let c := (conjugateIsoEquiv
+      ((Classical.choose (Modules.exists_tensorPullbackAdjunction q)).comp
+        (Classical.choose (Modules.exists_tensorPullbackAdjunction a)))
+      (Classical.choose (Modules.exists_tensorPullbackAdjunction q'))).symm
+      (Modules.pushforwardComp a q ≪≫ Modules.pushforwardCongr hq)
+    let d := ((Classical.choose (Modules.exists_tensorPullbackAdjunction a)).leftAdjointUniq
+      (Modules.pullbackPushforwardAdjunction a)).symm.app M ≪≫ (c.app L).symm
+    ((canonicalSchemeDerivedAdjunction p').homEquiv _ _).symm
+      (schemeDerivedBaseChangeMap p p' r a ha K ≫
+        (schemeDerivedDirectImage p').map
+          (Modules.canonicalSinglePullbackMap a M ≫
+            (DerivedCategory.singleFunctor _ 0).map d.hom)) =
+      coefficientCounitTranspose p p' r a ha K _ (tensorSingleCoefficientMap q q' a hq L) := by
+  intro M K c d
+  rw [coefficientCounitTranspose_eq, tensorSingleCoefficientMap_eq,
+    Modules.tensorCoefficientComparison_eq]
+  exact coefficientMate_evaluation p p' r a ha K _ _
 
-Proof: Expand the definition of the normalized transpose. Its argument under
-Hom equivalence is e.inv followed by the test section and the coefficient
-base-change map B. Naturality of the inverse Hom equivalence in its source
-identifies this with derived pullback of e.inv followed by the test section,
-then the transpose of B. Reassociate the three maps. This is valid for any
-coefficient module, including zero, and any scheme map, including identities
-and maps from the empty scheme; no base-change map is inverted. -/
+-- Keep the explicitly constructed coefficient comparison folded.
+/-- The normalized transpose factors through the coefficient transpose. -/
 theorem picardDirectImageDerivedTranspose_factorization
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)
@@ -101,9 +117,7 @@ theorem picardDirectImageDerivedTranspose_factorization
   unfold picardCoefficientTranspose picardDerivedUnitNormalization
   refine (transpose_three_maps _ _ _ _).trans ?_
   congr 1
-  rw [coefficientCounitTranspose_eq, tensorSingleCoefficientMap_eq,
-    Modules.tensorCoefficientComparison_eq]
-  exact coefficientMate_evaluation _ _ _ _ _ _ _ _
+  exact coefficientMate_tensor_evaluation _ _ _ _ _ _ _ _ _
 
 end
 end AlgebraicGeometry.Scheme

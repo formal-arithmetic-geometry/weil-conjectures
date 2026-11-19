@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 /-!
 # Blueprint statements
 
-lem-weil-pbc-hypercover-refinement.
+corollary-cohomology-pro-etale-affine.
 -/
 
 @[expose] public section
@@ -25,23 +25,23 @@ open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 noncomputable instance semiRepresentableHasFiniteLimits (X : Scheme.{u}) :
     HasFiniteLimits (FormalCoproduct.{w} X.Etale) :=
   hasFiniteLimits_of_hasTerminal_and_pullbacks
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 abbrev semiRepresentablePoints {X : Scheme.{u}} (T : X.Etale)
     (L : FormalCoproduct.{w} X.Etale) :=
   (FormalCoproduct.incl X.Etale).obj T ⟶ L
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 def semiRepresentablePointsMap {X : Scheme.{u}} (T : X.Etale)
     {L L' : FormalCoproduct.{w} X.Etale} (f : L ⟶ L') :
     semiRepresentablePoints T L → semiRepresentablePoints T L' :=
   fun t => t ≫ f
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 def IsSemiRepresentableCovering {X : Scheme.{u}}
     {U V : FormalCoproduct.{w} X.Etale} (f : U ⟶ V) : Prop :=
   ∀ j : V.I,
@@ -49,7 +49,7 @@ def IsSemiRepresentableCovering {X : Scheme.{u}}
       (fun i => f.φ i.val ≫ eqToHom (congrArg V.obj i.property)) ∈
         X.smallEtaleTopology (V.obj j)
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 instance semiRepresentableHasMultiequalizer {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (n : ℕ) :
     HasMultiequalizer (SimplicialObject.matchingBoundaryIndex K n) := by
@@ -63,7 +63,7 @@ instance semiRepresentableHasMultiequalizer {X : Scheme.{u}}
     inferInstanceAs (DecidableEq {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2})
   infer_instance
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 noncomputable def semiRepresentableMatchingObject {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) :
     ℕ → FormalCoproduct.{w} X.Etale
@@ -71,7 +71,7 @@ noncomputable def semiRepresentableMatchingObject {X : Scheme.{u}}
   | 1 => ∏ᶜ fun _ : Fin 2 => K _⦋0⦌
   | n + 2 => multiequalizer (SimplicialObject.matchingBoundaryIndex K n)
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 noncomputable def semiRepresentableMatchingMap {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) :
     (n : ℕ) → K _⦋n⦌ ⟶ semiRepresentableMatchingObject K n
@@ -95,7 +95,7 @@ noncomputable def semiRepresentableMatchingMap {X : Scheme.{u}}
           rw [← hb] at this
           exact this)
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 def IsSemiRepresentableHypercover {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) : Prop :=
   ∀ n : ℕ, IsSemiRepresentableCovering (semiRepresentableMatchingMap K n)

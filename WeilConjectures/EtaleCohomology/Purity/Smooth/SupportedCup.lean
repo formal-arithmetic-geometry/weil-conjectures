@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a closed immersion onto
 `Z ∩ W` (for instance `Z ×_X W`). Reading a class of `H^a_Z(X, F)` as a morphism
 `i_* Λ_Z ⟶ F[a]` (`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`, blueprint
-`lem-pur-supported-hom`), the supported cup product of `α ∈ H^a_Z(X, F)` and
+`lemma-sections-support-closed-subscheme--1`), the supported cup product of `α ∈ H^a_Z(X, F)` and
 `β ∈ H^b_W(X, G)` is
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ F[a] ⊗ᴸ G[b] ≅ (F ⊗ᴸ G)[a + b]`,
@@ -180,8 +180,8 @@ noncomputable abbrev lowerStarConstant (i : Z ⟶ X) :
   (_root_.DerivedCategory.singleFunctor _ 0).obj ((i)_*[ModuleCat.{u + 1} Λ].obj
     ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)))
 
-/-- Blueprint `def-pur-supported-cup`: Cup product with closed supports (the identification of
-the coefficient sheaves)
+/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports (the
+identification of the coefficient sheaves)
 
 For closed immersions `i : Z ⟶ X`, `k : W ⟶ X` and a closed immersion `h : V ⟶ X` onto `Z ∩ W`
 factoring through both (for instance `V = Z ×_X W`), the identification
@@ -198,10 +198,10 @@ noncomputable def lowerStarConstantTensorIso :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso
       (rightDerivedLowerShriekConstantComplexIso Λ k)
 
-/-- Blueprint `def-pur-supported-cup`: Cup product with closed supports (on morphisms)
+/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports (on morphisms)
 
 For classes represented by morphisms `α : i_* Λ_Z ⟶ F[a]` and `β : k_* Λ_W ⟶ G[b]`
-(`lem-pur-supported-hom`), their supported cup product is the morphism
+(`lemma-sections-support-closed-subscheme--1`), their supported cup product is the morphism
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ F[a] ⊗ᴸ G[b] ≅ (F ⊗ᴸ G)[a + b]`,
 
@@ -216,13 +216,14 @@ noncomputable def cupSupportedHom
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).map β ≫
     (derivedTensorShiftIso (ModuleCat.{u + 1} Λ) F G a b).hom
 
-/-- Blueprint `def-pur-supported-cup`: Cup product with closed supports
+/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports
 
 Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a closed immersion onto
 `Z ∩ W` factoring through both (for instance `h : Z ×_X W ⟶ X`,
 `AlgebraicGeometry.Etale.cupSupportCohomologyPullback`). For `α ∈ H^a_Z(X, F)` and
 `β ∈ H^b_W(X, G)`, represented by morphisms `i_* Λ_Z ⟶ F[a]` and `k_* Λ_W ⟶ G[b]`
-(`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`, `lem-pur-supported-hom`), their
+(`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`,
+`lemma-sections-support-closed-subscheme--1`), their
 *supported cup product* is the morphism
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ (F ⊗ᴸ G)[a + b]`
@@ -242,7 +243,7 @@ noncomputable def cupSupportCohomology
       (derivedSupportCohomologyAddEquiv Λ k G b β))
 
 omit [IsClosedImmersion h] in
-/-- Blueprint `def-pur-supported-cup`: Cup product with closed supports (for `Z ×_X W`)
+/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports (for `Z ×_X W`)
 
 The supported cup product `H^a_Z(X, F) × H^b_W(X, G) ⟶ H^{a+b}_{Z ×_X W}(X, F ⊗ᴸ G)` of
 `AlgebraicGeometry.Etale.cupSupportCohomology` for `h : Z ×_X W ⟶ X`. -/

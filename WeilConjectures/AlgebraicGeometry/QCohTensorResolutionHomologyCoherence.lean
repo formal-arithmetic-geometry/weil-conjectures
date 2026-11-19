@@ -43,7 +43,39 @@ noncomputable def tensorResolutionNormalizedRestrictHomologyIso {X Y : Scheme.{u
   (HomologicalComplex.homologyFunctor X.Modules (.up ℤ) i).mapIso
     (tensorResolutionRestrictionTotalIso j E F)
 
-set_option maxHeartbeats 400000 in
+/-- Compose a homology comparison square with the comparison for two exact functors. -/
+private theorem tensorResolution_normalized_homology_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.Additive] [G.Additive] [H.Additive]
+    [F.PreservesHomology] [G.PreservesHomology] [H.PreservesHomology]
+    (e : F ⋙ G ≅ H) {ι : Type*} (c : ComplexShape ι) (i : ι)
+    (A : HomologicalComplex C c) (B : HomologicalComplex D c)
+    (B' : HomologicalComplex E c)
+    (a : (F.mapHomologicalComplex c).obj A ≅ B)
+    (b : (H.mapHomologicalComplex c).obj A ≅ B')
+    (t : (G.mapHomologicalComplex c).obj B ⟶ B')
+    (hc : (G.mapHomologicalComplex c).map a.hom ≫ t =
+      ((Functor.mapHomologicalComplexCompIso e c).app A).hom ≫ b.hom) :
+    G.map (((A.sc i).mapHomologyIso F).symm ≪≫
+      (HomologicalComplex.homologyFunctor D c i).mapIso a).hom ≫
+        ((B.sc i).mapHomologyIso G).inv ≫ HomologicalComplex.homologyMap t i =
+      e.hom.app (A.homology i) ≫ (((A.sc i).mapHomologyIso H).symm ≪≫
+        (HomologicalComplex.homologyFunctor E c i).mapIso b).hom := by
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    HomologicalComplex.homologyFunctor]
+  rw [Functor.map_comp, Category.assoc]
+  have h₁ := tensorResolution_homology_square G c i a.hom b.hom
+    ((Functor.mapHomologicalComplexCompIso e c).app A).hom t hc
+  have h₂ := tensorResolution_homology_composition F G H e.hom (A.sc i)
+  rw [h₁]
+  change G.map ((A.sc i).mapHomologyIso F).inv ≫
+    (((A.sc i).map F).mapHomologyIso G).inv ≫
+      ShortComplex.homologyMap ((A.sc i).mapNatTrans e.hom) ≫ _ = _
+  rw [reassoc_of% h₂]
+  rfl
+
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Nested chart restriction is compatible with normalized tensor homology. -/
 theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
@@ -78,32 +110,14 @@ theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
       (tensorResolutionChartRestrictionIso Y V U h).hom.app
         ((CochainComplex.mapBifunctor E F (curriedTensor Y.Modules)).homology i) ≫
           (tensorResolutionNormalizedRestrictHomologyIso V.2.fromSpec E F i).hom := by
-  dsimp only
-  let A := CochainComplex.mapBifunctor E F (curriedTensor Y.Modules)
-  let RU := Scheme.Modules.restrictFunctor U.2.fromSpec
-  let RV := Scheme.Modules.restrictFunctor V.2.fromSpec
-  let R := Scheme.Modules.restrictFunctor (Spec.map (Y.presheaf.map (homOfLE h).op))
-  have h₁ := tensorResolution_homology_square R (.up ℤ) i
-    (tensorResolutionRestrictionTotalIso U.2.fromSpec E F).hom
-    (tensorResolutionRestrictionTotalIso V.2.fromSpec E F).hom
-    (tensorResolutionChartRestrictionComplexIso Y V U h A).hom _ hc
-  have h₂ := tensorResolution_homology_composition RU R RV
-    (tensorResolutionChartRestrictionIso Y V U h).hom (A.sc i)
-  dsimp only [tensorResolutionNormalizedRestrictHomologyIso, Iso.trans_hom,
-    Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp]
-  dsimp only [HomologicalComplex.homologyFunctor]
-  rw [Functor.map_comp]
-  rw [Category.assoc]
-  change R.map ((A.sc i).mapHomologyIso RU).inv ≫
-    R.map (HomologicalComplex.homologyMap
-      (tensorResolutionRestrictionTotalIso U.2.fromSpec E F).hom i) ≫ _ = _
-  have h₁' := congrArg (fun f ↦ R.map ((A.sc i).mapHomologyIso RU).inv ≫ f) h₁
-  refine h₁'.trans ?_
-  change R.map ((A.sc i).mapHomologyIso RU).inv ≫
-    (((A.sc i).map RU).mapHomologyIso R).inv ≫
-      ShortComplex.homologyMap ((A.sc i).mapNatTrans
-        (tensorResolutionChartRestrictionIso Y V U h).hom) ≫ _ = _
-  rw [reassoc_of% h₂]
-  rfl
+  have hn := tensorResolution_normalized_homology_naturality
+    (Scheme.Modules.restrictFunctor U.2.fromSpec)
+    (Scheme.Modules.restrictFunctor (Spec.map (Y.presheaf.map (homOfLE h).op)))
+    (Scheme.Modules.restrictFunctor V.2.fromSpec)
+    (tensorResolutionChartRestrictionIso Y V U h) (.up ℤ) i
+    (CochainComplex.mapBifunctor E F (curriedTensor Y.Modules)) _ _
+    (tensorResolutionRestrictionTotalIso U.2.fromSpec E F)
+    (tensorResolutionRestrictionTotalIso V.2.fromSpec E F) _ hc
+  exact hn
 
 end AlgebraicGeometry

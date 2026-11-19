@@ -18,6 +18,9 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Basis coordinates for finite free extension of sheaves
 

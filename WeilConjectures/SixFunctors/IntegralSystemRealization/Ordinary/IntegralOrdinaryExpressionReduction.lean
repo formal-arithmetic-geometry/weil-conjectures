@@ -40,7 +40,7 @@ def ordinaryPushReduction (o : Operations l E) (m : RealizationModel l E o)
     {U V : Scheme.{u}} (f : U ⟶ V) :
     ringedPush l E f ⋙ (calculus l E V).reduction ⟶
       (calculus l E U).reduction ⋙ Operations.push l E o f :=
-  (mateEquiv (ringedAdj l E f) (o.direct f).adj (m.reductionPull f).inv).natTrans
+  (mateEquiv (ringedAdj l E f) (o.direct f).adj (m.reductionPull f).inv)
 
 /-- Coefficient reduction of an ordinary expression, constructed independently of
 any realization comparison. At an open vertex use the inverse of its fixed reduction mate;

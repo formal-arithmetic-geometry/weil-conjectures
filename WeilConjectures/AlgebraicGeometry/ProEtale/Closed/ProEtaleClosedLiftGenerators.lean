@@ -9,10 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Free generators on affine closed-specialization neighbourhoods
-
-Source: the augmented free-module presentation in Step 3 of
-`lem-sp-proetale-proper-closed-injective-sections`.
-(blueprint: def-sp-proetale-closed-lift-generators).
 -/
 
 @[expose] public section
@@ -22,18 +18,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical augmentation by all free affine weakly contractible tests whose
-points specialize into the closed fibre. The index includes every map from such a
-free sheaf to `M`; no cover or lift is selected from an existence theorem.
-
-Source: the augmented free-module presentation in Step 3 of
-`lem-sp-proetale-proper-closed-injective-sections`.
-(blueprint: def-sp-proetale-closed-lift-generators).
-
-Construction: take the coproduct of `A[U]` indexed by the triples consisting of
-an affine weakly contractible pro-etale object U, its specialization property,
-and a morphism A[U] to M. Its augmentation is the coproduct descent of those
-morphisms. This construction includes the empty object and the zero module. -/
+/-- The canonical augmentation `∐ A[U] ⟶ M`, indexed by all affine weakly contractible
+pro-etale objects `U` whose points specialize into the closed fibre over `Z` together with
+all morphisms `A[U] ⟶ M`. -/
 noncomputable def closedLiftGeneratorAugmentation
     (A : Type u) [CommRing A] {X Z : Scheme.{u}} (z : Z ⟶ X)
     (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :

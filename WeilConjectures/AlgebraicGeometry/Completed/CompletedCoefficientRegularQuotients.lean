@@ -17,8 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 
 /-! # Regular scalars and finite quotients of completed coefficients
 
-Source: blueprint, sec-smooth-purity, sk-lem-sp-tower proof, first paragraph,
-and coefficient setup in sk-def-sp-coefficient-towers; Stacks Tags 00WK and 00YR.
+Source: blueprint, chap-Smooth-purity, proposition-sp-integral-towers proof, first paragraph,
+and coefficient setup in prose-09-21; Stacks Tags 00WK and 00YR.
 (blueprint: lem-sp-completed-coefficient-regular-quotients).
 
 Natural level n denotes exponent n+1. The commutative-ring objects below retain the
@@ -368,8 +368,8 @@ private theorem quotient_iso {C : Type t} [Category C]
 /-- Completed coefficients have regular positive scalar powers and the specified finite
 quotients, with the actual projections and all quotient transitions normalized.
 
-Source: blueprint, sk-lem-sp-tower proof, first paragraph; coefficient setup in
-sk-def-sp-coefficient-towers; Stacks Tags 00WK, 00YR, 03CO and 03DB.
+Source: blueprint, proposition-sp-integral-towers proof, first paragraph; coefficient setup in
+prose-09-21; Stacks Tags 00WK, 00YR, 03CO and 03DB.
 (blueprint: lem-sp-completed-coefficient-regular-quotients).
 
 Proof: (1) DVR factorization gives ell = u pi^e. The extending absolute value of ell

@@ -17,6 +17,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.Algebra.Category.Grp.Zero
 
 @[expose] public section
 

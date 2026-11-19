@@ -30,10 +30,9 @@ private theorem push_eq_mate_pull_inv (a : T ⊣ S) (b : T' ⊣ S')
     (c : l ⊣ r) (d : l' ⊣ r') (e : r' ⋙ S' ≅ S ⋙ r) :
     Adjunction.pushHomOfComapIso a b e =
       (mateEquiv c d (TwoSquare.mk _ _ _ _
-        (Adjunction.pullIsoOfComapIso a b c d e).inv)).natTrans := by
+        (Adjunction.pullIsoOfComapIso a b c d e).inv)) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm c d b a
     (TwoSquare.mk _ _ _ _ e.inv)
-  apply (TwoSquare.equivNatTrans _ _ _ _).symm.injective
   apply (mateEquiv c d).symm.injective
   change (mateEquiv c d).symm ((mateEquiv a b).symm (.mk _ _ _ _ e.inv)) =
     (mateEquiv c d).symm

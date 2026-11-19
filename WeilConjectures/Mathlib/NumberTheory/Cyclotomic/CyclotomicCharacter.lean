@@ -36,7 +36,7 @@ scalars.
 ## Blueprint
 
 `cyclotomicCharacter_frobeniusEquiv_pow` and `cyclotomicCharacter_frobeniusEquiv_pow_inv_mul`
-implement `det-p-cyclotomic`.
+implement `proposition-weights-under-usual-operations--13`.
 -/
 
 @[expose] public section
@@ -46,7 +46,7 @@ variable (K : Type*) [Field K] [IsAlgClosed K] (p : ℕ) [Fact p.Prime] [CharP K
 
 /-- The `q = p ^ a` power arithmetic Frobenius acts on the cyclotomic Tate module `ℤ_ℓ(1)` as
 multiplication by `q`.
-(blueprint: `det-p-cyclotomic`) -/
+(blueprint: `proposition-weights-under-usual-operations--13`) -/
 theorem cyclotomicCharacter_frobeniusEquiv_pow (hl : l ≠ p) :
     ((cyclotomicCharacter K l ((frobeniusEquiv K p) ^ a) : ℤ_[l]ˣ) : ℤ_[l]) = (p : ℤ_[l]) ^ a := by
   -- `ℓ` is invertible in `K`, so `K` contains all `ℓ^n`-th roots of unity.
@@ -64,7 +64,7 @@ theorem cyclotomicCharacter_frobeniusEquiv_pow (hl : l ≠ p) :
 /-- The geometric Frobenius `F = σ⁻¹`, the inverse of the `q = p ^ a` power Frobenius, acts on the
 cyclotomic Tate module `ℤ_ℓ(1)` as multiplication by `q⁻¹`; in particular `q` is a unit of `ℤ_ℓ`,
 which holds because `ℓ ≠ p`.
-(blueprint: `det-p-cyclotomic`) -/
+(blueprint: `proposition-weights-under-usual-operations--13`) -/
 theorem cyclotomicCharacter_frobeniusEquiv_pow_inv_mul (hl : l ≠ p) :
     ((cyclotomicCharacter K l (((frobeniusEquiv K p) ^ a)⁻¹) : ℤ_[l]ˣ) : ℤ_[l]) *
       (p : ℤ_[l]) ^ a = 1 := by

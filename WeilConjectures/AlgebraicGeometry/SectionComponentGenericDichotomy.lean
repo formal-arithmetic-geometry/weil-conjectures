@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.AlgebraicGeometry.SectionComponentGenericClopen
 
 /-!

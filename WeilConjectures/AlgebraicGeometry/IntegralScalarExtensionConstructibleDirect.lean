@@ -33,7 +33,7 @@ sk-prop-scalar-six/sk-prop-scalar-six-ctf.md, preservation clause
 
 /-- The direct derived extension of scalars `T(K) = S ⊗^L_R K` along the coefficient change
 `a_Y : p_Y^* 𝒪̲_E → p_Y^* 𝒪̲_L` induced by the inclusion `𝒪_E ⊆ 𝒪_L`: the left derived functor
-of `Mod.extendScalars`, as in `det-def-sfb-derived-extension-of-scalars`.
+of `Mod.extendScalars`, as in `prose-07-03`.
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/
 sk-prop-scalar-six-ctf.md, preservation for listed coefficient maps, the functor `T`
 (blueprint: lem-weil-integral-scalar-extension-constructible). -/
@@ -53,17 +53,18 @@ noncomputable abbrev integralScalarExtension
 /-- Direct derived extension of scalars along `𝒪_E → 𝒪_L` sends `D_cons(Y_proét, R)` into
 `D_cons(Y_proét, S)`; no derived completeness condition is involved.
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/
-sk-prop-scalar-six-ctf.md, det-sfb-coefficient-comparisons-ctf: preservation for listed
-coefficient maps, specialized to the finite integral extension in sk-prop-scalar-six (2)
-(blueprint: lem-weil-integral-scalar-extension-constructible).
+sk-prop-scalar-six-ctf.md, lemma-extension-scalars-preserves-dctf: preservation for listed
+coefficient maps, specialized to the finite integral extension in
+proposition-six-operations-change-coefficients (2) (blueprint:
+lem-weil-integral-scalar-extension-constructible).
 
-Proof: `cartesianCoefficients_finiteFree` (`det-prop-sfb-cartesian-coefficients-finite-free`),
+Proof: `cartesianCoefficients_finiteFree` (`lemma-inverse-image-coefficient-sheaves`),
 which assembles the integral basis (`lem-sfb-local-field-integral-basis`) and the finite-free
 coordinates of `Res_{a_Y} S`, gives at `Y` that `Ext_{a_Y}` preserves finite limits. Then
 `boundedConstructible_leftDerivedExtendScalars_obj`
 (`lem-weil-pbc-bounded-constructible-exact-scalar-extension`) with `X = Y` and `φ = a_Y` applies:
-its constructibility is exactly `boundedConstructible` (`det-def-sfb-bounded-constructible`) and
-its derived functor is `T` (`det-def-sfb-derived-extension-of-scalars`); no Noetherian hypothesis.
+its constructibility is exactly `boundedConstructible` (`definition-constructible-sheaves--4`) and
+its derived functor is `T` (`prose-07-03`); no Noetherian hypothesis.
 The statement includes empty schemes, zero complexes, identity extensions, shifts, torsion
 cohomology, and ramified finite extensions, and imposes no derived completeness condition.
 -/

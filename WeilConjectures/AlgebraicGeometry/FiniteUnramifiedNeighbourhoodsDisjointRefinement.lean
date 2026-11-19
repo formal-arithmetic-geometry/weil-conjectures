@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.FiniteUnramifiedOnePointClosed
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Disjoint refinement of finite unramified neighbourhoods

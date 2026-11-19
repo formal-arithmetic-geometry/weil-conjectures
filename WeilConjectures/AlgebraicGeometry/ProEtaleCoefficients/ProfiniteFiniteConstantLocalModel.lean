@@ -11,14 +11,15 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 
 /-! # Finite scalar local models on a profinite slice
 
-Source: blueprint latest, sk-def-sfb-constructible, clause (1); Hemo--Richarz--Scholbach,
-Remark 3.2 and Definition 3.5 (blueprint: sk-def-sfb-constructible).
-
 This is the profinite-slice companion of the imported scheme-site predicate. A finite
 presentation on the condensed point is a cokernel of a finite scalar matrix: maps between
 finite free regular modules are matrices over the sections at the one-point space.
 Its slice pullback is therefore exactly scalar extension from discrete constant scalars.
 The covering sieve permits different scalar presentations on its different members.
+
+## References
+
+* Hemo--Richarz--Scholbach, Remark 3.2 and Definition 3.5
 -/
 
 @[expose] public noncomputable section

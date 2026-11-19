@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Idempotents
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Idempotents in local rings and in the Jacobson radical

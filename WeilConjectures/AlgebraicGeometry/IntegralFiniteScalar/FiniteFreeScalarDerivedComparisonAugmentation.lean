@@ -38,7 +38,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-! Augmentation part of the finite-free scalar comparison.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-flatness)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,8 +50,7 @@ open CondensedRing
 set_option linter.unusedVariables false in
 /-- The pulled-back finite-free augmentation is a quasi-isomorphism.
 
-Source: the finite-free mono-cokernel theorem after point pullback and section-module
-transport.  The point pullback preserves the cokernel cofork and the two endpoint
+The point pullback preserves the cokernel cofork and the two endpoint
 finite-free presentations; exact section transport identifies its augmentation with
 `augmentation Λ S Z`.
 -/

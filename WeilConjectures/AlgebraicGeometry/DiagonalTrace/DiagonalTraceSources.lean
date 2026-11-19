@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimit
 public import WeilConjectures.AlgebraicGeometry.Geo.GeoP1Cohomology
 /-! # Sources and projective models for the completed trace
 Source: blueprint main-20261015, sk-prop-diagonal-tower-trace, proof steps 1--8
-(blueprint: det-prop-diagonal-tower-trace).
+(blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 ## Main declarations
 - `diagonalTraceFirstModel` and `diagonalTraceSecondModel` specify both product projections.
@@ -31,14 +31,14 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The specified projective-line model of the first product projection.
-Source: blueprint trace clause 1 (blueprint: det-prop-diagonal-tower-trace). -/
+Source: blueprint trace clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalTraceFirstModel (Y : Scheme.{u}) :
     diagonalSurface Y ≅ ProjectiveLine (ProjectiveLine Y) :=
   ((ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2))
     (ProjectiveLine Y ↘ Y)).flip.isoPullback).symm
 
 /-- The second projective-line model uses the canonical factor interchange.
-Source: blueprint trace clause 1 (blueprint: det-prop-diagonal-tower-trace). -/
+Source: blueprint trace clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalTraceSecondModel (Y : Scheme.{u}) :
     diagonalSurface Y ≅ ProjectiveLine (ProjectiveLine Y) :=
   pullbackSymmetry (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ≪≫
@@ -50,7 +50,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- Normalized source data for an ordinary direct image and its right derived functor.
 The predicate fixes the ordinary comparison; the last field asserts its acyclicity.
-Source: blueprint trace proof step 9 (blueprint: det-prop-diagonal-tower-trace). -/
+Source: blueprint trace proof step 9 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 structure NormalizedSource
     {A : Type a} {B : Type a} [Category.{va} A] [Category.{va} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -62,7 +62,7 @@ structure NormalizedSource
   acyclic : IsIso (diagonalTraceRightSingle F R M)
 
 /-- The canonical map from a normalized coefficient source to its derived direct image.
-Source: blueprint trace proof step 9 (blueprint: det-prop-diagonal-tower-trace). -/
+Source: blueprint trace proof step 9 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def NormalizedSource.hom
     {A : Type a} {B : Type a} [Category.{va} A] [Category.{va} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -74,7 +74,7 @@ def NormalizedSource.hom
   (DerivedCategory.singleFunctor B 0).map s.iso.hom ≫ diagonalTraceRightSingle F R M
 
 /-- The integration identity for a specified source comparison and trace.
-Source: blueprint trace clause 2 (blueprint: det-prop-diagonal-tower-trace). -/
+Source: blueprint trace clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def IsIntegration
     {C : Type a} {D : Type b} [Category.{va} C] [Category.{vb} D]
     (R : C ⥤ D) {M N : C} {K : D} (a : K ⟶ R.obj M) (t : R.obj N ⟶ K)
@@ -82,7 +82,7 @@ def IsIntegration
 
 /-- The ordinary supported-source identification is normalized by actual composition
 of additive direct images, the equality f Delta = id, and the identity direct image.
-Source: blueprint trace proof step 9 (blueprint: det-prop-diagonal-tower-trace). -/
+Source: blueprint trace proof step 9 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def supportedSourceNormalization (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (i : SheafOfModules.unit
@@ -102,7 +102,7 @@ def supportedSourceNormalization (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 /-- The source identification Rf_* Delta_* Z_l = Z_l uses the specified ordinary
 composition map and the universal derived unit, which is invertible on this source.
 Source: blueprint trace clause 2 and proof step 9
-(blueprint: det-prop-diagonal-tower-trace). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev SupportedSource (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l (ProjectiveLine Y))]
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l (diagonalSurface Y))]

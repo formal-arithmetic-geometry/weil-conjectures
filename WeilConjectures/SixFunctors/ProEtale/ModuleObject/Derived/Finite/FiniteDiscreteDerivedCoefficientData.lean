@@ -83,7 +83,7 @@ structure CoefficientPullbackData
       (Etale.derivedUpperStarLowerStarAdjunctionPlus
         (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)
       (coefficientDerivedAdjunction Λ h)
-      (TwoSquare.mk _ _ _ _ (pullback h).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (pullback h).inv))
   square : CoefficientPullbackSquare B Λ F pullback
 
 /-- Form the direct-image isomorphisms by taking canonical mates. -/
@@ -101,7 +101,7 @@ noncomputable def CoefficientPullbackData.toComparisonData
       (Etale.derivedUpperStarLowerStarAdjunctionPlus
         (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)
       (coefficientDerivedAdjunction Λ h)
-      (TwoSquare.mk _ _ _ _ (P.pullback h).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (P.pullback h).inv))
   unit h _ _ K := by
     let := P.rightMate h
     dsimp only [asIso_hom]

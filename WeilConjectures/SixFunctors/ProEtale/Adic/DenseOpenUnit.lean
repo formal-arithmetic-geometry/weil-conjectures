@@ -35,7 +35,7 @@ over `V` at the restriction of `F`.
 - `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`:
   the regular case.
 - `ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed`:
-  the normal case (blueprint `lem-wf-dense-open-pi1-surjective`, part (3)).
+  the normal case (blueprint `theorem-purity-real-sheaves-curves`, part (3)).
 -/
 
 @[expose] public section
@@ -245,7 +245,7 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isDo
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
 /-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open of a normal scheme** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (3), `ℓ`-adic level). Let `C` be a scheme whose local
+`theorem-purity-real-sheaves-curves`, part (3), `ℓ`-adic level). Let `C` be a scheme whose local
 rings are integrally closed domains, `j : U ⟶ C` a quasi-compact open immersion with dense image
 and `F` a lisse `ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction
 `j^* ⊣ j_*` is an isomorphism: schemes weakly étale over `C` have integral local rings
@@ -262,7 +262,7 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIn
 /-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open.** Let `C` be a scheme with
 regular local rings, `j : U ⟶ C` a quasi-compact open immersion with dense image and `F` a lisse
 `ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
-isomorphism. This is the `ℓ`-adic content of blueprint `lem-a1-lisse-middle-extension`; the
+isomorphism. This is the `ℓ`-adic content of blueprint `lemma-boundary-stalk--2`; the
 normal case is
 `IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed`. -/
 theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app {C U : Scheme.{u}}

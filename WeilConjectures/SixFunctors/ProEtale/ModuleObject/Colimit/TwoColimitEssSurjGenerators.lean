@@ -26,7 +26,7 @@ immersion `a = j ∘ i : S ⟶ U ⟶ X` (`i` a closed immersion, `j` an open imm
 degree `0`.
 
 * `ProEtale.CondensedRing.boundedConstructible_le_of_lowerShriek_isLocallyFree` (blueprint
-  `det-cor-coefficient-heart-ii-generation`): every bounded constructible `ℚ̄_ℓ,X`-complex lies
+  `corollary-coefficient-heart-b--2`): every bounded constructible `ℚ̄_ℓ,X`-complex lies
   in the smallest class of complexes closed under isomorphisms and extensions in distinguished
   triangles and containing the shifts `(a_! L)[n]`. The class of `K` all of whose shifts lie in
   such a class is triangulated, so by the truncation dévissage
@@ -114,8 +114,8 @@ noncomputable def derivedExtendScalarsLowerShriekSingleIso
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 open ZeroObject in
-/-- Blueprint `det-cor-coefficient-heart-ii-generation` (subsection
-`sk-cor-coefficient-heart-ii`): on a scheme `X` with noetherian underlying
+/-- Blueprint `corollary-coefficient-heart-b--2` (subsection
+`corollary-coefficient-heart-b`): on a scheme `X` with noetherian underlying
 space, every `K ∈ Dᵇc(X, ℚ̄_ℓ)` is obtained by finitely many cones from the objects
 `(a_! L)[n]`, for `a = j ∘ i : S ⟶ U ⟶ X` a locally closed immersion (`i` a closed immersion,
 `j` an open immersion), `L` a lisse `ℚ̄_ℓ,S`-module and `n ∈ ℤ`, where

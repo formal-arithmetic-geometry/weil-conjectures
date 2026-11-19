@@ -12,8 +12,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Derived category of modules on the small pro-etale site
 
-Source: the Weil conjectures blueprint, `def-weil-pbc-proetale-site`, order 662
-(blueprint: def-weil-pbc-proetale-site).
+Source: the Weil conjectures blueprint, `definition-small-pro-etale-site--1`, order 662
+(blueprint: definition-small-pro-etale-site--1).
 -/
 
 @[expose] public section
@@ -24,7 +24,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- (blueprint: def-weil-pbc-proetale-site) For a scheme `Y` and a commutative ring `A`,
+/-- (blueprint: definition-small-pro-etale-site--1) For a scheme `Y` and a commutative ring `A`,
 the small pro-etale site is `Y.ProEt` with `ProEt.topology Y`: its objects are weakly
 etale schemes over `Y`, and its covers are the pro-etale (fpqc) covering families.
 The constant ring sheaf `A_Y` is the sheafification of the constant presheaf.
@@ -32,7 +32,7 @@ The category of sheaves of `A_Y`-modules is `SheafOfModules`; its derived catego
 is the localization of cochain complexes at quasi-isomorphisms (`HasDerivedCategory.standard`);
 as an `abbrev` it carries the category and triangulated structure of `DerivedCategory`.
 
-Source: the Weil conjectures blueprint, `def-weil-pbc-proetale-site`, order 662;
+Source: the Weil conjectures blueprint, `definition-small-pro-etale-site--1`, order 662;
 Stacks Project, Tag 098K (the small site) and Tag 05RU (the derived category). -/
 noncomputable abbrev proEtaleDerivedCategory (Y : Scheme.{t})
     (A : Type t) [CommRing A] : Type _ :=

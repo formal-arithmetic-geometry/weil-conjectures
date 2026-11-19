@@ -27,9 +27,6 @@ set_option linter.privateModule false
 
 /-!
 # Affine-chart assembly for constructible exceptional inverse image
-
-Source: Weil blueprint, `sec-six-functors/sk-prop-sf-rf-shriek-preservation`,
-`cor-pur-general-admissibility-datum` (blueprint: cor-pur-general-admissibility-datum).
 -/
 
 @[expose] public section

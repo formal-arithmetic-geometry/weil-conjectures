@@ -59,22 +59,23 @@ paragraph (3), finite A open-image case; Stacks 0F10 (1), definition-cd-f
 (blueprint: lem-sfb-finite-etale-open-uniform-tor-image).
 
 Proof plan:
-1. Apply lem-kun-0f10 (1) over k to j. By def-kun-cd its finite dimension is a natural
-number d, depending only on j; no hypothesis on the absolute dimension of k is needed.
+1. Apply theorem-results-from-etale-theory--6 (1) over k to j. By definition-cohomological-dimension
+its finite dimension is a natural number d, depending only on j; no hypothesis on the absolute
+dimension of k is needed.
 2. Every A-module sheaf is killed by ell^n, hence its underlying abelian sheaf is torsion.
 The definition of d gives abelian higher-image vanishing above d. Transfer this through
 lem-sbc-higher-direct-image-forget-comparison; the forgetful functor reflects zero objects.
 The bounded-below and total derived images agree on sheaves in degree zero.
 3. A finite ring is Noetherian, and every finite A-module is finitely presented, since
 both a finite free cover and its kernel are finite. The bounded constructible L is bounded
-above. Apply lem-sf-projection-finite-constant using step 2. Its map is the recorded
+above. Apply proposition-open-direct-image-preserves-finite--1 using step 2. Its map is the recorded
 counit-adjunction mate, with the canonical constant inverse-image identification.
 4. L is also bounded below. Apply lem-sf-open-tor-bound-finite-constant-tests with e=d,
 the vanishing of step 2 and the projection isomorphisms of step 3. This gives vanishing
 outside [a,b+d] after tensoring the direct image with every finite constant module.
 5. Apply lem-sf-open-tor-bound-stalk-filtered-extension to extend these tests to all
 module sheaves. It uses stalks and exact filtered unions and has no field restriction.
-6. ell^n is invertible in k. Apply cor-fin-deligne-open-finite-coefficients to L to obtain
+6. ell^n is invertible in k. Apply corollary-open-direct-image-over-field--1 to L to obtain
 bounded constructibility of its direct image. Combine with steps 1--5. For the zero ring
 all unital modules vanish, and the same coefficient-independent d remains valid. -/
 theorem finiteEtaleOpen_uniformTorImage

@@ -33,12 +33,14 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
-Shared definitions for the normalized inverse-image comparison.
+# Definitions for the inverse-image tensor-hom comparison
 
-Source: Stacks Project, `sites-modules.tex`, Tags 03EK, 03CY and 03D2;
-`proetale.tex`, Tag 09A5 (blueprint: def-pur-inverse-image-tensor-hom-sections).
-These are the five original conventions of
-`lem-pur-isomorphism-inverse-image-tensor-hom`, relocated without changing their bodies.
+Shared definitions for the normalized comparison of inverse image with tensor products and
+internal homs.
+
+## References
+
+* Stacks Project, Tags 03EK, 03CY, 03D2 and 09A5
 -/
 
 @[expose] public section
@@ -53,8 +55,7 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Extension of scalars after inverse image, for the coefficient-extension clause. Source:
-Stacks Tag 03EK (blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
+/-- Extension of scalars after inverse image, for the coefficient-extension clause. -/
 noncomputable abbrev inverseImageScalarExtension
     {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y)
     (O O' : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (α : O ⟶ O')
@@ -67,8 +68,7 @@ noncomputable abbrev inverseImageScalarExtension
     ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).map α)
     ((proEtaleModuleInverseImage g O).obj F)
 
-/-- A pure tensor followed by module sheafification. Source: Stacks Tag 03EK
-(blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
+/-- A pure tensor followed by module sheafification. -/
 noncomputable def purTensorSection {X : AlgebraicGeometry.Scheme.{u}}
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (F G : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
@@ -82,9 +82,7 @@ noncomputable def purTensorSection {X : AlgebraicGeometry.Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The actual module inverse-image unit on sections, using the recorded small model.
-Source: Stacks Tags 03D2 and 09A5
-(blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
+/-- The actual module inverse-image unit on sections, using the recorded small model. -/
 noncomputable def purInverseImageSection {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
@@ -99,8 +97,7 @@ noncomputable def purInverseImageSection {X Y : AlgebraicGeometry.Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pure scalar-extension sections, in the recorded mixed-universe construction.
-Source: Stacks Tag 03EK (blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
+/-- Pure scalar-extension sections, in the recorded mixed-universe construction. -/
 noncomputable def purScalarSection {X : AlgebraicGeometry.Scheme.{u}}
     (O O' : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (α : O ⟶ O')
     (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)

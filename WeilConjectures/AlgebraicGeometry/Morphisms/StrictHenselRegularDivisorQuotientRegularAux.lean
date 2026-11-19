@@ -15,22 +15,20 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselDivisorQuotientPr
 import WeilConjectures.RingTheory.StrictHenselizationRegular
 import WeilConjectures.RingTheory.RegularLocalLocalization
 
-/-! Local regularity and Noetherianity of the strict henselization divisor quotient. -/
+/-! Local regularity and Noetherianity of the strict henselization divisor quotient.
+
+## References
+
+* Stacks Project, Tags 05WS and 06LN
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The divisor quotient has the local regularity properties needed to assemble a regular ring.
-Source: Stacks Project, Tags 05WS and 06LN.
-The presentation theorem identifies the quotient as an algebraic strict henselization of
-a prime localization of `R/(f)`, without using regularity. The localization is regular
-local by the assumed regularity of `R/(f)`. Apply the strict-henselization regularity
-equivalence to deduce regular locality of the quotient, hence its Noetherianity. Finally
-apply regular-local localization at every prime of the quotient.
-(blueprint: lem-sbc-strict-hensel-regular-divisor-quotient-regular-part-aux)
--/
+/-- The divisor quotient of the strict henselization by a regular divisor `f` is Noetherian and
+all its localizations at primes are regular local rings. -/
 theorem strictHenselizationRing_divisor_quotient_noetherian_and_local_regular
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
     [IsRegularRing (R ⧸ Ideal.span {f})]

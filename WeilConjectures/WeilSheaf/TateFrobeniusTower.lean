@@ -249,9 +249,9 @@ followed by the scalars `cₙ = χ_ℓ(γ) mod ℓⁿ` and the trivialization. -
 theorem cokernelPowTowerIsoRootsOfUnityTower_geometricGaloisFrobenius :
     Functor.whiskerRight (cokernelPowTowerIsoRootsOfUnityTower
         a.geometricFiberToAlgebraicClosure ℓ hζ hζ').hom
-        (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}] ≫
-        upperStarRootsOfUnityTowerHom a.geometricGaloisFrobenius.hom ℓ =
-      (upperStarCokernelPowTowerIso a.geometricGaloisFrobenius.hom ℓ).hom ≫
+        (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}] ≫
+        upperStarRootsOfUnityTowerHom a.geometricGaloisFrobenius.asIso.hom ℓ =
+      (upperStarCokernelPowTowerIso a.geometricGaloisFrobenius.asIso.hom ℓ).hom ≫
         cokernelPowTowerScalar _ ℓ (geometricFrobeniusModularCharacterVal k ℓ)
           (pow_dvd_geometricFrobeniusModularCharacterVal_sub k ℓ) ≫
         (cokernelPowTowerIsoRootsOfUnityTower a.geometricFiberToAlgebraicClosure ℓ hζ hζ').hom := by

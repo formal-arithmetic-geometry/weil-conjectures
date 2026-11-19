@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SixFunctors.PairwiseLaurentUnitExpansion
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SixFunctors.PairwiseCocycleNormalization
 
+/-! # Off-diagonal normalization of standard unit cocycles
+
+## References
+
+* Stacks Project, Tag 0BXJ
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -20,16 +27,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProjectiveSpace
 
-/-- The off-diagonal part of the standard-cover unit-cocycle normalization.
-
-Source: Stacks Project, divisors.tex, Tag 0BXJ, lemma-Pic-projective-space-UFD.
-(blueprint: new-sfb-projective-standard-unit-cocycle-off-diagonal)
-
-Proof: the Laurent-polynomial calculation on every double overlap gives a common
-integer exponent and scalar coboundary.  The calculation is carried out for
-pairwise distinct indices; this statement records precisely that part of the
-normalization argument, leaving the diagonal identities to the caller.
--/
+/-- A unit cocycle `t` on the standard cover of `ℙ^{r-1}_k`, `r ≥ 3`, is, off the diagonal,
+cohomologous to the standard transition units of some degree `d`, via units `a i` on the charts. -/
 theorem exists_standardUnitCocycle_normalization_offDiagonal (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)
     (t : ∀ i j : ULift.{u} (Fin r),

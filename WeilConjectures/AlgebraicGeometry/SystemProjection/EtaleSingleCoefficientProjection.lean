@@ -96,9 +96,8 @@ private theorem single_open_mate
       (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
       (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j))
       (TwoSquare.mk _ _ _ _
-        (derivedRestrictScalarsCompOpenImmersionLowerShriekIso φ j).hom)).natTrans =
+        (derivedRestrictScalarsCompOpenImmersionLowerShriekIso φ j).hom)) =
       (openDerivedRestrictScalarsIso φ j).hom := by
-  apply congrArg TwoSquare.natTrans
   apply mateEquiv_eq_of_unit
   intro K
   let τ := (upperStarRestrictScalarsIsoSheaf.{u} φ j).symm
@@ -161,16 +160,15 @@ private theorem single_open_unit
       (a.comp z) ((x.comp b).ofNatIsoRight q) K).symm
   have hm := iterated_mateEquiv_conjugateEquiv x z a b
     (TwoSquare.mk _ _ _ _ β.hom)
-  have hd : (mateEquiv b a (TwoSquare.mk _ _ _ _ d.hom)).natTrans = q.hom :=
+  have hd : (mateEquiv b a (TwoSquare.mk _ _ _ _ d.hom)) = q.hom :=
     single_open_mate φ j
   have hh : mateEquiv x z (TwoSquare.mk _ _ _ _ β.hom) =
       TwoSquare.mk _ _ _ _ d.hom := by
     apply (mateEquiv b a).injective
-    apply TwoSquare.ext
-    intro K
+    refine NatTrans.ext (funext fun K ↦ ?_)
     exact congrArg (fun e ↦ e.app K) (hm.trans (hc.trans hd.symm))
   have h := unit_mateEquiv x z (TwoSquare.mk _ _ _ _ β.hom) M
-  change _ ≫ (mateEquiv x z (TwoSquare.mk _ _ _ _ β.hom)).natTrans.app _ = _ at h
+  change _ ≫ (mateEquiv x z (TwoSquare.mk _ _ _ _ β.hom)).app _ = _ at h
   rw [hh] at h
   rw [single_open_eq]
   exact h.symm

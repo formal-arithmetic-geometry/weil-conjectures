@@ -32,11 +32,11 @@ placed in degree zero, in every integer degree.
 
 Source: Stacks Project, Tag 03FD (cohomology of modules agrees with abelian
 cohomology), and Tag 072W (higher direct images as sheafified cohomology presheaves).
-(blueprint: lem-sbc-higher-direct-image-forget-comparison)
+(blueprint: lemma-cohomology-modules-underlying-abelian)
 
 Proof: Use the canonical bounded-below derived coefficient comparison
 `moduleAbelianDerivedLowerStarIso` from
-lem-weil-pbc-module-abelian-derived-direct-image-comparison. Its invertibility is
+lemma-cohomology-modules-underlying-abelian. Its invertibility is
 already proved using the all-object acyclicity argument of Tags 03FD and 072W.
 Apply this isomorphism to F placed in degree zero. The exact forgetful functor
 commutes with degree-q homology by `mapDerivedCategoryPlusHomologyFunctorIso`,

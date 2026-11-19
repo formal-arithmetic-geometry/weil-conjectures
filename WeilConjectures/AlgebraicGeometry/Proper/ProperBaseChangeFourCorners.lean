@@ -17,13 +17,16 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 /-!
 # Four finite-level proper base-change corners
-Source: blueprint `def-weil-pbc-four-corners`, order 1342; Stacks Tags 099N,
-09C9, 0B56 and 0944 (blueprint: def-weil-pbc-four-corners).
 The finite constant coefficient presentation and its inverse limit are the recorded
 completed-coefficient datum. Its normalized comparison identifies finite coefficients
 with sheafified continuous component functions and respects quotient transitions.
 The reduction/pullback comparison is characterized on K-flat representatives by
 the mate of sectionwise restriction/direct-image commutation, fixing its tensor map.
+
+## References
+
+* Stacks Tags 099N, 09C9, 0B56 and 0944
+* Stacks 098T
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,22 +39,16 @@ attribute [local instance 40000] adicDatumModulesAbelian
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 variable {A : Type (t + 1)} [CommRing A]
 
-/-- The actual quotient ring tower, with exponent n+1 and its consecutive quotient maps.
-Source: blueprint order 1342 (blueprint: def-weil-pbc-four-corners). -/
+/-- The actual quotient ring tower, with exponent n+1 and its consecutive quotient maps. -/
 def fourCornerRingTower (I : Ideal A) : ℕᵒᵖ ⥤ CommRingCat.{t + 1} :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ CommRingCat.of (A ⧸ I ^ (n + 1)))
     (fun n ↦ CommRingCat.ofHom (Ideal.Quotient.factorPowSucc I (n + 1)))
 
-/-- Every quotient in the adic datum is finite, including the first positive level.
-Source: blueprint order 1342 (blueprint: def-weil-pbc-four-corners). -/
+/-- Every quotient in the adic datum is finite, including the first positive level. -/
 instance fourCornerRingTowerFinite (d : ProEtaleAdicCoefficientDatum A) (n : ℕᵒᵖ) :
     Finite ((fourCornerRingTower d.ideal).obj n) := d.quotientFinite n.unop
 
-/-- Constant sheafification commutes with the presentation of the strict quotient sequence.
-Source: blueprint order 1342 (blueprint: def-weil-pbc-four-corners).
-Proof: the two functors have identical objects. Each consecutive arrow is the constant
-sheaf image of the same quotient map. Every arrow is a finite composite of consecutive
-arrows; functoriality identifies its two images. This also covers identity arrows. -/
+/-- Constant sheafification commutes with the presentation of the strict quotient sequence. -/
 theorem fourCornerCoefficientTowerNaturality (T : Scheme.{t})
     (d : ProEtaleAdicCoefficientDatum A) {i j : ℕᵒᵖ} (h : i ⟶ j) :
     (proEtaleCoefficientTower T (fourCornerRingTower d.ideal)).map h =
@@ -66,16 +63,14 @@ theorem fourCornerCoefficientTowerNaturality (T : Scheme.{t})
   simpa only [e, NatTrans.ofOpSequence_app, Category.comp_id, Category.id_comp] using
     (show _ from e.naturality h)
 
-/-- The identity-on-objects isomorphism of the two strict coefficient presentations.
-Source: blueprint order 1342 (blueprint: def-weil-pbc-four-corners). -/
+/-- The identity-on-objects isomorphism of the two strict coefficient presentations. -/
 def fourCornerCoefficientTowerIso (T : Scheme.{t}) (d : ProEtaleAdicCoefficientDatum A) :
     proEtaleCoefficientTower T (fourCornerRingTower d.ideal) ≅
       adicLisseRingSystem T d.ideal :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun h ↦ (Category.comp_id _).trans
       ((fourCornerCoefficientTowerNaturality T d h).trans (Category.id_comp _).symm))
 
-/-- The specified profinite inverse-image comparison at the actual completed ring.
-Source: blueprint order 1342; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
+/-- The specified profinite inverse-image comparison at the actual completed ring. -/
 def fourCornerCoefficientIso {U V : Scheme.{t}} (f : U ⟶ V)
     (d : ProEtaleAdicCoefficientDatum A) :
     (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj (adicDatumRing V d) ≅
@@ -86,8 +81,7 @@ def fourCornerCoefficientIso {U V : Scheme.{t}} (f : U ⟶ V)
       ((proEtale_profinite_coefficient_inverse_image (fourCornerRingTower d.ideal)).2.1 U V f) ≪≫
     lim.mapIso (fourCornerCoefficientTowerIso U d)
 
-/-- The specified finite coefficient comparison, normalized by constant sections.
-Source: blueprint order 1342; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
+/-- The specified finite coefficient comparison, normalized by constant sections. -/
 def fourCornerFiniteIso {U V : Scheme.{t}} (f : U ⟶ V)
     (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
     (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj
@@ -97,11 +91,7 @@ def fourCornerFiniteIso {U V : Scheme.{t}} (f : U ⟶ V)
     ((fourCornerRingTower d.ideal).obj (op n)))
       ((proEtale_profinite_coefficient_inverse_image (fourCornerRingTower d.ideal)).1 U V f (op n))
 
-/-- The completed and finite comparisons commute with their actual limit projections.
-Source: blueprint order 1342; Stacks 098T (blueprint: def-weil-pbc-four-corners).
-Proof: use the projection clause of profinite-coefficient-inverse-image and naturality
-of the identity-on-objects diagram isomorphism. Its limit map carries each projection
-to the same projection, so the conjugations cancel. -/
+/-- The completed and finite comparisons commute with their actual limit projections. -/
 theorem fourCornerProjectionComm {U V : Scheme.{t}} (f : U ⟶ V)
     (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
     (fourCornerCoefficientIso f d).hom ≫ adicDatumProjection U d n =

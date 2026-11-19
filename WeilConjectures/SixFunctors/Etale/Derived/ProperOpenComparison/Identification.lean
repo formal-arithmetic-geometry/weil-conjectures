@@ -21,9 +21,9 @@ map `α_u` is adjoint, with the composite
 `j₂^* Ru_* j₁! K ≅ Rp_* b^* j₁! K ≅ Rp_* s_! K ≅ K`
 
 of the restriction of the derived direct image to the open `X ⊆ T₂`
-(blueprint `lem-weil-pbc-derived-open-restriction`), the restriction of the extension by zero
-to `V` and the direct image from the open and closed section `s`
-(blueprint `lem-weil-pbc-proper-open-identification`).
+(blueprint `proposition-construction-independence-rf-shriek--7`), the restriction of the extension
+by zero to `V` and the direct image from the open and closed section `s`
+(blueprint `proposition-construction-independence-rf-shriek--7`).
 
 ## Main definitions
 
@@ -57,8 +57,8 @@ namespace Etale
 variable {T S U V : Scheme.{u}} {f : T ⟶ S} {a : U ⟶ S} [IsOpenImmersion a] {b : V ⟶ T}
   {fU : V ⟶ U}
 
-/-- Blueprint `lem-weil-pbc-derived-open-restriction`: Derived direct image restricted to an
-open. For a morphism `f : T ⟶ S`, an open immersion `a : U ⟶ S` and the cartesian square
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Derived direct image restricted
+to an open. For a morphism `f : T ⟶ S`, an open immersion `a : U ⟶ S` and the cartesian square
 `V = T ×_S U` with projections `b : V ⟶ T` and `f_U : V ⟶ U`, restriction gives a natural
 isomorphism
 
@@ -145,8 +145,8 @@ lemma upperStarBLowerShriekIso_hom_app_comp
       (D.upperStarBToLowerStar Λ).app K := by
   simp [upperStarBLowerShriekIso]
 
-/-- Blueprint `lem-weil-pbc-proper-open-identification`: The specified comparison isomorphism.
-The restriction isomorphism `θ_{u,K} : j₂^* Ru_* j₁! K ≅ K` of
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: The specified comparison
+isomorphism. The restriction isomorphism `θ_{u,K} : j₂^* Ru_* j₁! K ≅ K` of
 `AlgebraicGeometry.ProperOpenDatum.restrictionIso`, to which the comparison map `α_u` is adjoint
 (`AlgebraicGeometry.ProperOpenDatum.homEquiv_comparison_app`), is the composite of
 

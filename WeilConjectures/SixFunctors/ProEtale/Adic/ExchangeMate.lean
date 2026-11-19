@@ -76,7 +76,6 @@ lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a 
     | rw [ObjectProperty.FullSubcategory.comp_hom]
     | rw [NatTrans.comp_app]
     | rw [lowerStar_map_hom_app']
-    | rw [Functor.map_comp]
     | rw [lowerStarComp_hom_app_hom_app]
     | rw [lowerStarComp_inv_app_hom_app]
     | rw [lowerStarCongr_hom_app_hom_app]
@@ -108,18 +107,19 @@ isomorphism of pushforwards. -/
 lemma conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     conjugateEquiv
         ((adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)).comp
-          (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction)
-        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction.comp
+          (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction)
+        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction.comp
           (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
       (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv =
-    (adicLowerStarComp l f.geometricGaloisFrobenius.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
+    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom
+      (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        g.geometricGaloisFrobenius.hom).inv := by
+        g.geometricGaloisFrobenius.asIso.hom).inv := by
   set j := Scheme.Hom.geometricFiberMap φ h
-  set a := f.geometricGaloisFrobenius
-  set b := g.geometricGaloisFrobenius
+  set a := f.geometricGaloisFrobenius.asIso
+  set b := g.geometricGaloisFrobenius.asIso
   set adj := adicUpperStarLowerStarAdjunction l j
   have h₁ := conjugateEquiv_whiskerRight (adicUpperStarLowerStarAdjunction l b.hom)
     (adicLowerStarEquivalence l b).symm.toAdjunction adj (adicUpperStarIsoLowerStarInv l b).inv
@@ -178,8 +178,6 @@ lemma adicLowerStarEquivalence_symm_unit_app_hom_hom_app {X : Scheme.{u}} (e : X
     adicLowerStarCongr_inv_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
     ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp]
 
-set_option maxHeartbeats 2000000 in
--- Rewriting both sides down to sections takes many elaboration steps.
 /-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two
 sides of `J ≫ b⁻¹ = a⁻¹ ≫ J` is the mate, under the equivalences `(a⁻¹)_* ⊣ a_*` and
 `(b⁻¹)_* ⊣ b_*`, of the composition isomorphism along the two sides of `a ≫ J = J ≫ b`. -/
@@ -188,12 +186,12 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
     (mateEquiv (adicLowerStarEquivalence l a).symm.toAdjunction
         (adicLowerStarEquivalence l b).symm.toAdjunction
         (TwoSquare.mk _ _ _ _ (adicLowerStarComp l J b.inv ≪≫ adicLowerStarCongr l c' ≪≫
-          (adicLowerStarComp l a.inv J).symm).hom)).natTrans =
+          (adicLowerStarComp l a.inv J).symm).hom)) =
     (adicLowerStarComp l a.hom J).hom ≫ (adicLowerStarCongr l c).hom ≫
       (adicLowerStarComp l J b.hom).inv := by
   -- Both sides are compared on sections, where they are restriction maps of `M.X`; see
   -- `AlgebraicGeometry.ProEtale.adicLowerStarComp_exchange`.
-  refine congrArg TwoSquare.natTrans (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
+  refine (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
     fun M ↦ Mod.hom_ext _ _ (ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))))
   have key := congrArg (fun φ ↦ φ.hom.app V)
     (lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X)
@@ -205,34 +203,35 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
       ((adicLowerStarEquivalence l e).symm.functor.obj N).X.obj.map φ =
         N.X.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.inv).map φ.unop).op :=
     rfl
-  repeat' first
-    | rw [Iso.trans_hom]
-    | rw [Iso.symm_hom]
-    | rw [Functor.map_comp]
-    | rw [Mod.comp_hom']
-    | rw [ObjectProperty.FullSubcategory.comp_hom]
-    | rw [NatTrans.comp_app]
-    | rw [adicLowerStar_map_hom_hom_app]
-    | rw [hi]
-    | rw [adicLowerStarEquivalence_symm_unit_app_hom_hom_app]
-    | rw [adicLowerStarComp_hom_app_hom_hom_app]
-    | rw [adicLowerStarComp_inv_app_hom_hom_app]
-    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
-    | rw [adicLowerStar_obj_X_obj_map]
-    | rw [hf]
-  repeat' first
-    | rw [Functor.map_comp] at key
-    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
-    | rw [NatTrans.comp_app] at key
-    | rw [lowerStar_map_hom_app'] at key
-    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
-    | rw [lowerStarComp_hom_app_hom_app] at key
-    | rw [lowerStarComp_inv_app_hom_app] at key
-    | rw [lowerStarCongr_hom_app_hom_app] at key
-    | rw [lowerStarId_inv_app_hom_app] at key
-    | rw [lowerStar_obj_obj_map'] at key
+  -- Expose components before normalizing module, sheaf, and section compositions in order.
+  -- `rewrite` retains explicit proofs without attempting reflexivity after every step.
+  repeat' rewrite [Iso.trans_hom]
+  repeat' rewrite [Iso.symm_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [Functor.map_comp]
+  repeat' rewrite [Mod.comp_hom']
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [adicLowerStar_map_hom_hom_app]
+  repeat' rewrite [hi]
+  repeat' rewrite [adicLowerStarEquivalence_symm_unit_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_inv_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarCongr_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStar_obj_X_obj_map]
+  repeat' rewrite [hf]
+  repeat' rewrite [Functor.map_comp] at key
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom] at key
+  repeat' rewrite [NatTrans.comp_app] at key
+  repeat' rewrite [lowerStar_map_hom_app'] at key
+  repeat' rewrite [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_hom_app_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_hom_app] at key
+  repeat' rewrite [lowerStarId_inv_app_hom_app] at key
+  repeat' rewrite [lowerStar_obj_obj_map'] at key
   simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
   exact key
 
@@ -241,15 +240,16 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
 is the mate, under the Frobenius equivalences, of the composition isomorphism
 `(Fr_X)_* ⋙ φ̄_* ≅ φ̄_* ⋙ (Fr_Y)_*` of pushforwards. -/
 lemma mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom :
-    (mateEquiv (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction
-        (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction
+    (mateEquiv (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction
+        (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction
         (TwoSquare.mk _ _ _ _
-          (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)).natTrans =
-    (adicLowerStarComp l f.geometricGaloisFrobenius.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
+          (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)) =
+    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom
+      (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        g.geometricGaloisFrobenius.hom).inv :=
+        g.geometricGaloisFrobenius.asIso.hom).inv :=
   mateEquiv_adicLowerStarComp_hom l _ _ _ _ _
 
 /-- **The Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*` are mates**: under the adjunction
@@ -262,16 +262,16 @@ lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     (mateEquiv (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
         (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
         (TwoSquare.mk _ _ _ _
-          (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)).natTrans =
+          (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)) =
       (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom := by
   have h₁ := iterated_mateEquiv_conjugateEquiv
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
-    (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction
-    (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction
+    (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction
+    (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction
     (TwoSquare.mk _ _ _ _ (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)
   rw [conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv,
     ← mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom] at h₁
-  exact congrArg TwoSquare.natTrans ((mateEquiv _ _).injective h₁)
+  exact ((mateEquiv _ _).injective h₁)
 
 end AlgebraicGeometry.ProEtale

@@ -10,7 +10,7 @@ public import WeilConjectures.ZetaFunction.SmoothProper
 /-!
 # Weight separation and the parity factorization
 
-Let `X₀` be a smooth, proper, geometrically connected scheme of pure dimension `d` over
+Let `X₀` be a smooth, proper scheme of pure dimension `d` over
 `k₀ = 𝔽_q`, and `ℓ ≠ p`. By root purity
 (`AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`)
 every reciprocal root of `P_{i,ℓ}` has absolute value `q^{i/2}` under every embedding
@@ -27,8 +27,7 @@ of the parity of `i` of absolute value `q^{-i/2}`.
   are coprime.
 - `AlgebraicGeometry.Scheme.roots_map_frobeniusCharpolyRev_eq_filter`: the roots of `ι P_{i,ℓ}`
   are the roots of `ι N_ℓ` or `ι D_ℓ` of absolute value `q^{-i/2}`.
-- `AlgebraicGeometry.Scheme.weight_separation`: blueprint `det-prop-separation` and
-  `prop-weight-separation`.
+- `AlgebraicGeometry.Scheme.weight_separation`: weight separation and the parity factorization.
 -/
 
 @[expose] public section
@@ -46,13 +45,12 @@ namespace Scheme
 variable (k₀) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))] (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
-  [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
 include d
 
-/-- Blueprint `prop-weight-separation`: for `i ≠ j` the determinant factors `P_{i,ℓ}` and
-`P_{j,ℓ}` have no common root and are coprime in `ℚ̄_ℓ[T]`: under an embedding `ι : ℚ̄_ℓ → ℂ` their
-roots have the distinct absolute values `q^{-i/2}` and `q^{-j/2}`. -/
+/-- For `i ≠ j` the determinant factors `P_{i,ℓ}` and `P_{j,ℓ}` have no common root and are
+coprime in `ℚ̄_ℓ[T]`: under an embedding `ι : ℚ̄_ℓ → ℂ` their roots have the distinct absolute
+values `q^{-i/2}` and `q^{-j/2}`. -/
 theorem isCoprime_frobeniusCharpolyRev {i j : ℕ} (hij : i ≠ j) :
     IsCoprime (frobeniusCharpolyRev k₀ l X i) (frobeniusCharpolyRev k₀ l X j) := by
   obtain ⟨ι⟩ := PadicAlgCl.nonempty_ringHom_complex l
@@ -60,8 +58,8 @@ theorem isCoprime_frobeniusCharpolyRev {i j : ℕ} (hij : i ≠ j) :
     (isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι i).isCoprime Finite.one_lt_card
       (isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι j) hij
 
-/-- Blueprint `prop-weight-separation`: the parity products `N_ℓ` and `D_ℓ` are coprime, a
-common root coming from a pair of factors of distinct parities, hence of distinct weights. -/
+/-- The parity products `N_ℓ` and `D_ℓ` are coprime, a common root coming from a pair of factors
+of distinct parities, hence of distinct weights. -/
 theorem isCoprime_oddFrobeniusProduct_evenFrobeniusProduct :
     IsCoprime (oddFrobeniusProduct k₀ l X d) (evenFrobeniusProduct k₀ l X d) := by
   refine IsCoprime.prod_left fun i hi ↦ IsCoprime.prod_right fun j hj ↦ ?_
@@ -69,9 +67,8 @@ theorem isCoprime_oddFrobeniusProduct_evenFrobeniusProduct :
   exact isCoprime_frobeniusCharpolyRev k₀ l X d fun h ↦ (Nat.not_odd_iff_even.2 hj.2) (h ▸ hi.2)
 
 omit [IsProper (X ↘ Spec (CommRingCat.of k₀))]
-  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
-  [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] in
-/-- Blueprint `prop-weight-separation`: the odd parity product has constant coefficient `1`. -/
+  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The odd parity product has constant coefficient `1`. -/
 theorem coeff_zero_oddFrobeniusProduct [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
@@ -80,9 +77,8 @@ theorem coeff_zero_oddFrobeniusProduct [QuasiCompact (X ↘ Spec (CommRingCat.of
   exact Finset.prod_eq_one fun i _ ↦ coeff_zero_frobeniusCharpolyRev k₀ l X i
 
 omit [IsProper (X ↘ Spec (CommRingCat.of k₀))]
-  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
-  [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] in
-/-- Blueprint `prop-weight-separation`: the even parity product has constant coefficient `1`. -/
+  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The even parity product has constant coefficient `1`. -/
 theorem coeff_zero_evenFrobeniusProduct [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
@@ -95,7 +91,7 @@ even. -/
 noncomputable abbrev parityFrobeniusProduct (i : ℕ) : Polynomial (PadicAlgCl l) :=
   if Even i then evenFrobeniusProduct k₀ l X d else oddFrobeniusProduct k₀ l X d
 
-/-- Blueprint `prop-weight-separation`, multiset clause: for `i ≤ 2d` and an embedding
+/-- The multiset clause of weight separation: for `i ≤ 2d` and an embedding
 `ι : ℚ̄_ℓ → ℂ`, the ordinary root multiset of `ι P_{i,ℓ}` is the submultiset of the roots of the
 parity product of the parity of `i` whose reciprocals `α` satisfy `|α| = q^{i/2}`, i.e. of
 absolute value `q^{-i/2}`. -/
@@ -116,9 +112,7 @@ theorem roots_map_frobeniusCharpolyRev_eq_filter (ι : PadicAlgCl l →+* ℂ) {
     exact (Polynomial.roots_prod_filter_norm_eq Finite.one_lt_card (fun j _ ↦ hP j)
       (Finset.mem_filter.2 ⟨hmem, Nat.not_even_iff_odd.1 h⟩)).symm
 
-/-- Blueprint `det-prop-separation` and `prop-weight-separation` (weight separation and the
-parity factorization): for `X₀` smooth, proper and geometrically connected of pure dimension
-`d`,
+/-- For `X₀` smooth and proper of pure dimension `d`,
 
 * `P_{i,ℓ}` and `P_{j,ℓ}` are coprime for `i ≠ j`;
 * the parity products `N_ℓ = ∏_{i odd} P_{i,ℓ}` and `D_ℓ = ∏_{i even} P_{i,ℓ}` are coprime and

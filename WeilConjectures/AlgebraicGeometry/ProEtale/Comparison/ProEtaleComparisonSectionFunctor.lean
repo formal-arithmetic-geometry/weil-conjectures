@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonS
 
 /-! # The section-valued comparison sheaf functor
 
-Source: Stacks Project, Tag 0GLZ.
+## References
+
+* Stacks Project, Tag 0GLZ (first proof paragraph)
 -/
 
 @[expose] public section
@@ -178,16 +180,9 @@ private lemma rawEquiv_restriction {X : Scheme.{u}}
         ((sectionIso (X := X) (Y := Y.left) Y.hom F).inv s)
   convert ConcreteCategory.congr_hom hh' s using 1 <;> rfl
 
-/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph.
-(blueprint: lem-cbc-comparison-section-functor).
-Proof: use terminal sections of inverse image as object values. The inverse-image
-unit and composition transport define restriction. Unit compatibility and associativity
-of inverse-image composition give the identity and composition laws. Unit naturality
-makes the construction functorial in F. A pro-etale cover is fpqc. Apply fpqc descent
-of etale sections on Y, and use the composition transports to identify its equalizer
-with the matching-family equalizer of these values. This includes the empty covering
-of an empty scheme. Bundle the resulting sheaves and the evaluated pullback maps as A;
-the equivalences e identify its section values with the prescribed types. -/
+/-- There is a functor `A` from étale sheaves to pro-étale sheaves whose sections over `Y` are
+the terminal sections of the étale pullback of `F` to `Y`, compatibly with restriction and
+with morphisms of sheaves. -/
 theorem proEtaleComparisonSectionFunctor (X : Scheme.{u}) :
     ∃ A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤
         Sheaf (Scheme.ProEt.topology X) (Type (u + 1)),

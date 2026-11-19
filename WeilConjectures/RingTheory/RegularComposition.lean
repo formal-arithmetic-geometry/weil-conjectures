@@ -34,7 +34,7 @@ Proof:
 1. Fix a prime `p` of `A` and a finite purely inseparable extension `k` of its residue
    field. Localize `A → B` at `p`: flatness follows from
    `lem-weil-pbc-flat-module-base-change`, and its fibres are the original fibres, so
-   the localized map is regular by `def-weil-pbc-g-ring`. Apply
+   the localized map is regular by `theorem-finite-etale-covers-proper-henselian--2`. Apply
    `lem-weil-pbc-regular-base-change` first to the residue-field quotient and then to
    the finite extension. Thus `B ⊗[A] k` is Noetherian and regular. The hypothesis
    makes `C ⊗[A] κ(p)` Noetherian, and `lem-weil-pbc-finite-type-algebra-noetherian`
@@ -55,7 +55,7 @@ Proof:
    Since `C ⊗[A] k` is Noetherian, regularity of all these local rings gives its
    regularity (`def-weil-regular-scheme`). This proves geometric regularity of every
    composite fibre. Compose flatness by `lem-weil-pbc-flat-ring-map-comp` and use
-   `def-weil-pbc-g-ring` to conclude. -/
+   `theorem-finite-etale-covers-proper-henselian--2` to conclude. -/
 theorem IsRegular.comp_of_fiber_noetherian
     {A : Type u} {B : Type v} {C : Type w}
     [CommRing A] [CommRing B] [CommRing C]

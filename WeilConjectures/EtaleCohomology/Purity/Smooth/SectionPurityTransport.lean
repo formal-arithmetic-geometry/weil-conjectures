@@ -32,7 +32,7 @@ purity maps) correspond under the exceptional base change
 geometric form of the coefficient-change statement
 `SupportedCoefficientChange.map_rightDerivedUpperShriekTateObjectIsoOfSection`,
 a step of the base change compatibility of the canonical orientation along an isomorphism of
-pairs (blueprint `sk-prop-sp-purity-bc`, the Frobenius square).
+pairs (blueprint `proposition-compatibility-purity-base-change`, the Frobenius square).
 -/
 
 @[expose] public section

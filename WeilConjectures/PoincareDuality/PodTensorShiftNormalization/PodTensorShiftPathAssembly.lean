@@ -73,7 +73,6 @@ variable [(isoReductionIntegralInverse l E g).Additive]
   [PreservesFiniteLimits (isoReductionIntegralInverse l E g)]
   [PreservesFiniteColimits (isoReductionIntegralInverse l E g)]
 
-set_option maxHeartbeats 600000 in
 -- Share the normalized categorical expressions without unfolding coefficient constructions.
 /-- Normalize the source-shift path from its model formula.
 Move the presentation past the ordinary shift comparison, substitute the presented tensor
