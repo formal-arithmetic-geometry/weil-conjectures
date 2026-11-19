@@ -18830,6 +18830,7 @@ public import WeilConjectures.RepresentationTheory.SmoothPurity.DvrGaloisCompari
 public import WeilConjectures.RepresentationTheory.SmoothPurity.KernelInvariantsCohomology
 public import WeilConjectures.RepresentationTheory.SmoothPurity.ProcyclicTwoTerm
 public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
+public import WeilConjectures.RepresentationTheory.TensorConstruction
 public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RepresentationTheory.TwistedClifford
 public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
@@ -26370,6 +26371,7 @@ public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import WeilConjectures.WeilSheaf.ProperLowerStarAdjoint
 public import WeilConjectures.WeilSheaf.ProperProjectionFormula
+public import WeilConjectures.WeilSheaf.Real
 public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
