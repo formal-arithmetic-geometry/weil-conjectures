@@ -76,6 +76,17 @@ arguments after transport. The exact hidden mismatch has not been isolated.
 The historical split remains insufficient on this
 toolchain; current Master passes in 6.10 seconds.
 
+### Ordered spectral raw lattices
+
+The declared type and a separately named helper result both take 13.91
+seconds. The final `exact h` reproduces a 48.73-second Kernel timeout, so the
+expensive check is the inferred type of
+`exists_stratified_lisse_integral_lattice` against the folded
+`RawStratifiedLattices` goal. The printed result expands the `∀ L` lattice
+predicate while the goal retains the private wrapper. The historical fix
+scopes three local-ring/domain instances so both sides use matching proofs;
+target diagnostics show 23,580 `Functor.obj` reductions.
+
 ## Cross-case observations
 
 Observed: all eight Before forms have a large synchronous Kernel-on versus
