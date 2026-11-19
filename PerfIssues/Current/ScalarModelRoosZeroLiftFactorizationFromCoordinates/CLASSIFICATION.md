@@ -21,12 +21,34 @@ exact homotopyCounit_naturality
     |>.choose_spec.2.2.choose_spec.choose) g
 ```
 
-It follows `dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]`. Profiler: 292 s tactic execution for the call, 0.404 s Kernel check of its declaration. The exact inner Meta conversion/WHNF/instance operation remains untraced. A typed [CounitSorry.lean](probes/CounitSorry.lean) control removes the entire block and falls to 2.92 s wall; it is diagnostic only.
+It follows `dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]`. Profiler: 292 s tactic execution for the call, 0.404 s Kernel check of its declaration. A typed [CounitSorry.lean](probes/CounitSorry.lean) control removes the entire block and falls to 2.92 s wall; it is diagnostic only.
 
 ## 3. Structure and mechanism
 
-The concrete completed scalar functors and deeply nested scalar-change witness are matched against a general homotopy-counit naturality theorem under full unfolding. This source pattern is identical to the naturality hotspots in `ScalarRoosNaturalityData` and `CompletedScalarOrdinaryCoherence`. The shared pattern is an observation, not proof that a particular Meta conversion is identical in all three runs. No Kernel expression pair, generated `_proof_n`, or DAG metrics are relevantly measured. **Kind: elaborator `exact` under full unfolding; inner operation unclassified.**
+The profiler-filtered [trace](probes/CounitProfilerOnly.lean) isolates one successful
+`Meta.isDefEq` call at 285.339 s inside the `exact`. Its sides are the naturality
+equality for `(completedDerivedScalarExtension ...).map (DerivedCategory.Q.map g)`
+and the same equality with chosen counit components cast between an
+`integralTowerModules` category and its expanded `SheafOfModules` form. The
+187.936 s child compares the first composite with and without that cast under
+`MorphismProperty.instCategoryLocalization._aux_5`. Its 97.621 s branch reaches
+`⋯.choose.1 =?= ⋯.choose.1`; within it, an 89.070 s comparison has two sides
+printed identically as `ε.1 ((HomotopyCategory.quotient ...).obj P)`. This
+pretty-printing hides distinct chosen-witness/instance paths; the trace does
+not justify claiming syntactic identity. A second branch takes 97.401 s and
+reaches the same shape at 88.206 s. The repeated deepest call reduces a
+`Classical.choose` witness predicate through `LF.IsLeftDerivedFunctor` and
+`IsIso (ε.app ...)`. This is an elaborator **definitional-equality / delta
+reduction** workload, with the cost centered on chosen counit data.
+
+The three other modules independently show a 286-287 s `Meta.isDefEq` call,
+187-188 s and 98-99 s branches, and 88-89 s `ε.1` leaves. The shared inner
+shape is therefore confirmed across four modules. No Kernel A-F label applies.
 
 ## 4. Confidence and caveats
 
-The phase and exact call are **confirmed** by synchronous Kernel skip and the single-call profiler. The whole source fails later on a cast/type mismatch in `simp`, so only the prefix is a valid measured case. A focused bounded `trace.Meta.isDefEq` or elaborator profiler trace would raise confidence about the inner mechanism.
+The phase and inner `Meta.isDefEq` call are **confirmed** by Kernel skip and
+the bounded profiler trace. The whole source fails later on a cast/type
+mismatch in `simp`, so only the prefix is a valid measured case. An explicit
+`trace.Meta.isDefEq` class floods the output even with a profiler threshold;
+`trace.profiler true` and threshold 2000 alone retained the slow nested nodes.

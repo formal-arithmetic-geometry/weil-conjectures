@@ -18,4 +18,4 @@ LEAN_NUM_THREADS=1 timeout 3600 nice -n 10 /usr/bin/time -v lake env lean \
   WeilConjectures/SmoothPurity/CompletedLineTensor/CompletedLineOrdinaryEvaluation.lean
 ```
 
-The skipped control adds `-Ddebug.skipKernelTC=true`; it still spends 298 s in the same `exact`. The `sorry` copy is diagnostic only. Its exact source and log-derived measurements reproduce the source-level cost site; inner Meta operations remain untraced.
+The skipped control adds `-Ddebug.skipKernelTC=true`; it still spends 298 s in the same `exact`. The `sorry` copy is diagnostic only. A Round 3 profiler-filtered trace isolates a 287.140 s `Meta.isDefEq` call with two approximately 89 s comparisons of chosen counit components; see [CLASSIFICATION.md](CLASSIFICATION.md).

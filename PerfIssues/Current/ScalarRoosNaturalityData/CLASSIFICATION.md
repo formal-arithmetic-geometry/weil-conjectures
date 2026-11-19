@@ -23,7 +23,7 @@ with_unfolding_all
       |>.choose_spec.2.2.choose_spec.choose) f
 ```
 
-The term is being matched against the naturality equality after `change` and `dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]`. [NaturalitySorry.lean](probes/NaturalitySorry.lean) retains the declaration and those preceding steps, replacing the `with_unfolding_all`/`exact` block with diagnostic `sorry`; wall time falls to 13.17 s and tactic execution to 0.300 s. This isolates the call as the dominant component. The exact inner elaborator operation (`Meta.isDefEq`, WHNF, or instance synthesis) has not been traced, so attributing the 292 s to one of them would be conjecture.
+The term is being matched against the naturality equality after `change` and `dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]`. [NaturalitySorry.lean](probes/NaturalitySorry.lean) retains the declaration and those preceding steps, replacing the `with_unfolding_all`/`exact` block with diagnostic `sorry`; wall time falls to 13.17 s and tactic execution to 0.300 s. This isolates the call as the dominant component. A Round 3 same-name run with profiler-filtered Meta tracing finds a 285.971 s `Meta.isDefEq` call, a 188.040 s child, and two approximately 89 s `ε.1` comparisons below chosen derived-counit data.
 
 ## 3. Structural evidence
 
@@ -31,4 +31,4 @@ The elaborator sees a concrete naturality goal involving `completedDerivedScalar
 
 ## 4. Mechanism, confidence, caveats
 
-Primary kind: **elaborator tactic `exact` under full unfolding**. The phase and exact source call are **confirmed** by two independent controls. The specific Meta conversion is **unclassified**. A focused `trace.profiler` or `trace.Meta.isDefEq` run on this call would identify its inner operation, if the trace volume is bounded. Measurements are in situ for the original source; the `sorry` control is a copied module and is not a valid proof result. Host contention is limited by the close wall/user CPU values but not independently measured.
+Primary kind: **elaborator `Meta.isDefEq` / delta reduction at chosen counit components**. The phase, source call, and shared inner comparison shape are confirmed by the bounded trace. The same-name confirmation takes 316.00 user CPU seconds; trace overhead makes it unsuitable as a replacement baseline. The 88.827 and 88.709 s leaves are pretty-printed as `ε.1 ((HomotopyCategory.quotient ...).obj P)` on both sides, hiding the differing instance/witness paths. Measurements are in situ for the original source; the `sorry` control is diagnostic only.

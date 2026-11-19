@@ -6,14 +6,14 @@ The handover's module times came from instruction counts at revision `6f9ee9b2fd
 
 ## Part A: current modules
 
-| Rank / module | User CPU s, measured scope | Top declaration / component | Phase | Exact cost site | Label / confidence | Evidence |
+| Handover rank / module | User CPU s, measured scope | Top declaration / component | Phase | Exact cost site | Label / confidence | Evidence |
 |---|---:|---|---|---|---|---|
 | 1 [ProjectiveLineCohomologyChartBoundary](Current/ProjectiveLineCohomologyChartBoundary/CLASSIFICATION.md) | 371.31 full | `chartBoundaryClass_eq`: `exact` 172 s; final existence theorem: `refine` 174 s | Elaborator | general shift-counit identity and concrete supported-class map applications | Not Kernel; source calls confirmed, Meta mechanism open | two independent `sorry` controls, Kernel skip 356.85 CPU s |
-| 2 [CompletedLineOrdinaryEvaluation](Current/CompletedLineOrdinaryEvaluation/CLASSIFICATION.md) | 325.80 full | `counit_naturality`: `exact` 296 s | Elaborator | `homotopyCounit_naturality` with completed scalar functors and chosen witness under `with_unfolding_all` | Not Kernel; source call confirmed, Meta mechanism open | Kernel skip 313.88 CPU s; one-block `sorry` 29.68 CPU s |
+| 2 [CompletedLineOrdinaryEvaluation](Current/CompletedLineOrdinaryEvaluation/CLASSIFICATION.md) | 325.80 full | `counit_naturality`: `exact` 296 s | Elaborator | chosen counit components under `Meta.isDefEq`, deepest `ε.1` calls 89.256/89.445 s | Meta definitional equality confirmed | Kernel skip 313.88 CPU s; filtered trace 287.140 s top node |
 | 3 [AffineLineConstant](Current/AffineLineConstant/CLASSIFICATION.md) | 295.42 full | integral-model construction: `refine` 56.5 s, `exact` 207 s | Elaborator | nested derived-complete/integral-model witness | Not Kernel; Meta mechanism open | same-name setup replay succeeds |
-| 4 [ScalarRoosNaturalityData](Current/ScalarRoosNaturalityData/CLASSIFICATION.md) | 305.03 full | `completedCounitNat.naturality`: `exact` 292 s | Elaborator | `homotopyCounit_naturality` under `with_unfolding_all` | Not Kernel; source call confirmed, Meta mechanism open | Kernel skip 300.60 CPU s; one-block `sorry` 12.34 CPU s |
-| 5 [CompletedScalarOrdinaryCoherence](Current/CompletedScalarOrdinaryCoherence/CLASSIFICATION.md) | 304.79 full | `counit_naturality`: `exact` 293 s | Elaborator | same general naturality theorem at concrete scalar functors | Not Kernel; source call confirmed, Meta mechanism open | Kernel skip 303.02 CPU s; one-block `sorry` 11.37 CPU s |
-| 6 [ScalarModelRoosZeroLiftFactorizationFromCoordinates](Current/ScalarModelRoosZeroLiftFactorizationFromCoordinates/CLASSIFICATION.md) | 294.31 valid prefix; whole fails | `scalarCounit_natural`: `exact` 292 s | Elaborator | `homotopyCounit_naturality` under `with_unfolding_all` | Not Kernel; prefix call confirmed, Meta mechanism open | valid prefix, Kernel skip 295.22 CPU s, `sorry` 2.12 CPU s; later `simp` error |
+| 4 [ScalarRoosNaturalityData](Current/ScalarRoosNaturalityData/CLASSIFICATION.md) | 305.03 full | `completedCounitNat.naturality`: `exact` 292 s | Elaborator | chosen counit `ε.1` comparisons, 88.827/88.709 s | Meta definitional equality confirmed | Kernel skip 300.60 CPU s; filtered trace 285.971 s top node |
+| 5 [CompletedScalarOrdinaryCoherence](Current/CompletedScalarOrdinaryCoherence/CLASSIFICATION.md) | 304.79 full | `counit_naturality`: `exact` 293 s | Elaborator | chosen counit `ε.1` comparisons, 89.374/89.107 s | Meta definitional equality confirmed | Kernel skip 303.02 CPU s; filtered trace 286.615 s top node |
+| 6 [ScalarModelRoosZeroLiftFactorizationFromCoordinates](Current/ScalarModelRoosZeroLiftFactorizationFromCoordinates/CLASSIFICATION.md) | 294.31 valid prefix; whole fails | `scalarCounit_natural`: `exact` 292 s | Elaborator | chosen counit `ε.1` comparisons, 89.070/88.206 s | Meta definitional equality confirmed | valid prefix; filtered trace 285.339 s top node; later `simp` error |
 | 7 [IntegralScalarExtensionConstructible](Current/IntegralScalarExtensionConstructible/CLASSIFICATION.md) | 225.58 full | `completedScalarChainComparison_isIso`: nested `h2` witness, profiler `refine` 196 s | Elaborator | `completedScalarChangeData ... choose_spec ...` producing `IsIso (completedScalarCounit ...)` | Not Kernel; witness location confirmed, Meta mechanism open | Kernel skip 210.62 CPU s; typed witness `sorry` 28.39 CPU s |
 | 8 [IntegralModelAmbient](Current/IntegralModelAmbient/CLASSIFICATION.md) | 191.41 full | `exists_derivedCompleteIntegers_iso_integralModel_aux`: `refine` 159 s | Elaborator | nested integral-model witness construction | Not Kernel; Meta mechanism open | same-name setup replay succeeds |
 | 9 [ProjectionFormulaField](Current/ProjectionFormulaField/CLASSIFICATION.md) | 150.23 full | localizing projection/base-change constructions | Elaborator | repeated concrete localizing-category applications | Not Kernel; Meta mechanism open | same-name setup replay succeeds |
@@ -31,8 +31,11 @@ The earlier renamed-copy failures for three candidates were measurement artefact
 | [#1624 IntegersSheafHomologyTower](Old/PR1624-IntegersSheafHomologyTower/CLASSIFICATION.md) | 112.48 s; 11,038,208 KB / 12.44 s; 2,668,464 KB | Kernel | `homologyIntegersTowerIso` final concrete-functor iso chain; target check 102 / 3.18 s | A primary, E contributing; inner pair from historical PR | same-name 4.35.0 before/after values on current prefix |
 | [#1625 TensorSheaf component](Old/PR1625-TensorSheaf/CLASSIFICATION.md) | 189.31 s; 8,245,292 KB / 104.95 s; 2,929,672 KB | Kernel | `leftDerivedUpperStarTensorComparison_app_app_fac` proof term; target check 87.6 / 2.43 s | A primary, E contributing; inner pair from historical PR | same-name cut prefixes, raised heartbeat limit; second of two PR changes |
 | [#1627 WeilSheafTransport](Old/PR1627-WeilSheafTransport/CLASSIFICATION.md) | 109.17 s; 7,781,816 KB / 9.85 s; 1,837,544 KB | Kernel | `powFunctor` hand-built functor fields and generated laws; three checks 27.8, 55.3, 14.6 s before | E primary, A contributing; inner pair from historical PR | same-name cut prefixes, raised heartbeat limit on both |
+| [#1630 PointFiberStageTransitionIso component](Old/PR1630-PointFiberStageTransitionIso/CLASSIFICATION.md) | 185.80 s; 2,624,356 KB / 92.85 s; 2,516,012 KB | Elaborator | `pointFiberStageTransitionIso` old component `exact` 84.8 s | Not Kernel; historical inner pair | same-name full current prefix; final of three PR changes only |
+| [#1743 SupportedRestrictionIntegral](Old/PR1743-SupportedRestrictionIntegral/CLASSIFICATION.md) | 580.90 s; 3,729,204 KB / 11.08 s; 3,550,928 KB | Elaborator | `map_supportedRestrictionIntegral_comp` old `refine` 223 s and `exact` 349 s | Not Kernel; historical inner pair | successful cut prefixes; Kernel totals 3.40/3.89 s |
+| [#2122 DiagonalTraceFiniteEtaleIntegralBoundary](Old/PR2122-DiagonalTraceFiniteEtaleIntegralBoundary/CLASSIFICATION.md) | 350.32 s; 16,321,824 KB / 30.69 s; 5,285,748 KB | Kernel | old module checks 15.6, 64.3, 176 s versus new 27.2 s | E primary, A contributing; historical pair | successful same-name modules; fixed version imports split helpers |
 
-The [#1557 projection-formula candidate](Old/PR1557-ProjectionFormula/README.md) is excluded: both changed lemmas compile on the current prefix in 4.93 s historical versus 4.51 s fixed, with 3,158,552 versus 3,144,004 KB RSS. This does not reproduce the historical whole-module 10.7-to-4.0 GB drop. We stopped after these cheap isolated forms; no mechanism is asserted for the old measurement. The remaining marked historical PRs were not ported, so this table does not claim coverage of all ten.
+The [#1557 projection-formula candidate](Old/PR1557-ProjectionFormula/README.md) is excluded: both changed lemmas compile on the current prefix in 4.93 s historical versus 4.51 s fixed, with 3,158,552 versus 3,144,004 KB RSS. This does not reproduce the historical whole-module 10.7-to-4.0 GB drop. No mechanism is asserted for that measurement. All six historical PRs requested in Round 3 were attempted and measured; #1559 remains explicitly unreproduced on 4.35.0.
 
 ## Diagnosis paths
 
@@ -42,19 +45,19 @@ The module's first 172 s `exact` occurs in `chartBoundaryClass_eq` after unfoldi
 
 ### Completed line ordinary evaluation
 
-The 296 s `exact` is in private `counit_naturality`, after `dsimp only` reduces the counit and ordinary scalar complex. It passes the two concrete completed scalar functors and a nested `completedScalarChangeData` witness to `homotopyCounit_naturality` under `with_unfolding_all`. Replacing only this block with diagnostic `sorry` reduces whole-file user CPU from 325.80 to 29.68 s; Kernel skip still takes 313.88 CPU s and the exact remains 298 s. The proof term checks in 0.432 s. The source call is isolated, while the particular Meta conversion or unfolding path is not.
+The 296 s `exact` is in private `counit_naturality`, after `dsimp only` reduces the counit and ordinary scalar complex. It passes the two concrete completed scalar functors and a nested `completedScalarChangeData` witness to `homotopyCounit_naturality`. Replacing only this block with diagnostic `sorry` reduces whole-file user CPU from 325.80 to 29.68 s; Kernel skip still takes 313.88 CPU s. A filtered trace finds a 287.140 s `Meta.isDefEq` call and two approximately 89 s chosen-counit comparisons.
 
 ### Scalar Roos naturality
 
-The module's `completedCounitNat.naturality` has the same general theorem application and nested scalar-change witness, here inside a natural-transformation structure field. The sole long `exact` is 292 s and the resulting declaration's Kernel check is 0.411 s. Kernel skipping leaves 297 s in the call, while replacing its block with `sorry` lowers the file to 12.34 CPU s. This directly establishes the elaborator phase. Neither the profiler nor the controls distinguish `Meta.isDefEq`, WHNF, or instance search inside the tactic.
+The module's `completedCounitNat.naturality` has the same general theorem application and nested scalar-change witness, here inside a natural-transformation structure field. The sole long `exact` is 292 s and the resulting declaration's Kernel check is 0.411 s. Kernel skipping leaves 297 s in the call, while replacing its block with `sorry` lowers the file to 12.34 CPU s. The filtered trace finds a 285.971 s `Meta.isDefEq` call with chosen-counit `ε.1` leaves at 88.827 and 88.709 s.
 
 ### Completed scalar ordinary coherence
 
-The private `counit_naturality` theorem uses `with_unfolding_all` and `exact homotopyCounit_naturality` after reducing the two named scalar constructions. The source also sets `backward.isDefEq.respectTransparency false` locally. The `exact` takes 293 s, with 0.423 s theorem checking. A one-block `sorry` cuts whole-file CPU from 304.79 to 11.37 s; Kernel skip still takes 303.02 s. The shared source pattern with the two Roos cases is visible, but no common inner Meta pair has been demonstrated.
+The private `counit_naturality` theorem uses `with_unfolding_all` and `exact homotopyCounit_naturality` after reducing the two named scalar constructions. The source also sets `backward.isDefEq.respectTransparency false` locally. The `exact` takes 293 s, with 0.423 s theorem checking. A one-block `sorry` cuts whole-file CPU from 304.79 to 11.37 s; Kernel skip still takes 303.02 s. The filtered trace finds a 286.615 s `Meta.isDefEq` call and two 89 s chosen-counit leaves, matching the other modules.
 
 ### Scalar Roos zero-lift factorization
 
-The full file reaches a 292 s `exact` in its first private theorem, `scalarCounit_natural`, then fails at line 182 with `simp made no progress` and a cast/type mismatch. A source prefix ending immediately after the private theorem succeeds and reproduces 292 s in that exact call. Kernel skip on the same valid prefix remains 295.22 CPU s; typed `sorry` drops the prefix to 2.12 CPU s. This is a valid declaration-level elaboration case, but the 303.18 s failed full-file run is not a successful module measurement. The inner Meta operation is still untraced.
+The full file reaches a 292 s `exact` in its first private theorem, `scalarCounit_natural`, then fails at line 182 with `simp made no progress` and a cast/type mismatch. A source prefix ending immediately after the private theorem succeeds and reproduces 292 s in that exact call. Kernel skip on the same valid prefix remains 295.22 CPU s; typed `sorry` drops the prefix to 2.12 CPU s. The filtered trace isolates a 285.339 s `Meta.isDefEq` call, with 187.936 and 97.401 s branches below chosen counit morphisms. The 303.18 s failed full-file run is not a successful module measurement.
 
 ### Integral scalar extension constructibility
 
@@ -84,6 +87,18 @@ The old direct `Functor.leftDerived₂NatTrans_app_app` proof of `leftDerivedUpp
 
 The old `powFunctor` value directly constructs a functor from concrete Weil-sheaf and Frobenius-power functors. In a 4.35.0 prefix ending after that definition, its generated field proofs account for three Kernel checks of 27.8, 55.3, and 14.6 s and a 7.78 GB RSS peak. The current application of generic `IsoAlgebra.liftOfStr` removes all three visible checks and peaks at 1.84 GB. The old prefix needs a higher heartbeat limit to finish pending metavariable synthesis; the same limit was used for both timed forms. The historical PR identifies a failed comparison between `frobeniusPowPullback` and `WeilSheaf.frobeniusPullback` that unfolds `adicLowerStar`. That inner pair was not independently re-dumped on 4.35.0, so its mechanism is attributed to the PR diagnosis while our controlled replay establishes persistence of the Kernel cost.
 
+### Historical #1630
+
+The old `pointFiberStageTransitionIso` value's component naturality proof has an 84.8 s `exact`, and the full same-name current-prefix file takes 185.07 user CPU seconds. The fixed `preimageIso` construction takes 92.14 seconds in the same prefix, with only 7-9 seconds of total Kernel checking in either. The historical PR prints the component equality under `rationalStageTransition`, `pointFiberStageEquivalence`, and `β.hom.app`; the 4.35.0 replay confirms the elaborator cost, but isolates only the final of that PR's three changes.
+
+### Historical #1743
+
+The old `map_supportedRestrictionIntegral_comp` on a successful cut prefix takes 579.86 user CPU seconds, almost all in a 223 s `refine` and 349 s `exact`; the current form takes 10.09 seconds. Kernel checking is 3.40 versus 3.89 seconds. The PR diagnoses matching `σ.hom.app` with a named base-change component and then comparing full-subcategory composites at default transparency. The fixed theorem passes equalities of whole morphisms to `map_mateEquiv_app_comp_of_hom_eq` and closes reducibly. The phase and before/after cost reproduce; the inner Meta pair comes from the PR's trace.
+
+### Historical #2122
+
+The old 733-line `DiagonalTraceFiniteEtaleIntegralBoundary` module takes 347.37 user CPU seconds and 16.32 GB peak RSS, with 269 seconds of Kernel checking. The current 133-line module takes 29.87 seconds and 5.29 GB, with a 27.2 s check. The old checks include 15.6, 64.3, and 176 s sites. The PR identifies concrete/abstract category representations under derived-category morphism types, and the fix names the categories and propositions, factors a generic Kummer lemma, and splits helpers into separately built modules. Thus the whole-module difference includes shifted dependency compilation; it is not a single proof-value A/B measurement.
+
 ## Observations
 
 ### Same-name module replays
@@ -92,21 +107,37 @@ The three earlier failed candidates were copied under new filenames. Lean module
 
 ### Shared completed-scalar counit trace
 
-The valid `scalarCounit_natural` prefix was traced with `trace.Meta.isDefEq`, profiler, and diagnostics controls. The trace printed many small instance-oriented comparisons (`Field`, `Algebra`, `Semiring`, and stuck synthesis metavariables) and repeated transparency raises; a full trace exceeded the bounded run before one dominant conversion could be isolated. This confirms that the repeated `with_unfolding_all` application is an aggregate Meta workload, but it does not justify choosing WHNF, instance search, or one conversion pair as the mechanism. The four completed-scalar modules remain **Not Kernel; Meta mechanism open**.
+On the valid `scalarCounit_natural` prefix, `trace.profiler true` with threshold 2000 ms retains a 285.339 s `Meta.isDefEq` call inside `exact`. Its sides are the derived scalar functor's naturality equation and a casted version of the same equation using a chosen counit component. A 187.936 s child enters `MorphismProperty.instCategoryLocalization._aux_5`, then `Classical.choose` and `LF.IsLeftDerivedFunctor`; one 89.070 s leaf compares `ε.1 ((HomotopyCategory.quotient ...).obj P)` with the same pretty-printed shape. A second branch of 97.401 s reaches an 88.206 s leaf of the same shape. The apparent identical sides conceal distinct instance/witness paths, so their printed form is an abbreviated pair, not proof of syntactic identity. Diagnostics count 25,076 `sheafCompose`, 20,624 `Classical.choose`, and 249,887 reducible `Functor.obj` unfolds in this call.
+
+| Valid-prefix control | User CPU s | Result |
+|---|---:|---|
+| Baseline `exact` under `with_unfolding_all` | 294.31 | success |
+| Same `exact` without `with_unfolding_all` | 294.28 | success |
+| Opaque named `have` witness | 14.44 | type mismatch; invalid alternative proof |
+| Transparent `let` witness | 295.95 | success |
+| `backward.isDefEq.respectTransparency true` | 297.65 | success |
+| `backward.isDefEq.respectTransparency false` | 294.57 | success |
+| Generic abstract lemma at local variables | 2.31 | lemma succeeds; concrete theorem has diagnostic `sorry` |
+| `diagnostics true`, threshold 1000 ms | 297.42 | success |
+| Profiler-filtered Meta trace | 303.46 | success; 285.339 s top `isDefEq` node |
+
+The [control sources](Current/ScalarModelRoosZeroLiftFactorizationFromCoordinates/probes/) keep the same prefix. The named `have` is opaque and produces `witness.app`, which does not match the goal's chosen witness; its early error is not a speedup. Removing `with_unfolding_all` and toggling the backward transparency option do not materially change the cost. The abstract lemma shows that matching generic terms is cheap; the concrete chosen data causes the expensive conversion. Explicitly enabling `trace.Meta.isDefEq` prints tiny nodes regardless of `trace.profiler.threshold` in Lean 4.35.0, so the bounded result uses the profiler alone.
+
+Three same-name confirmation runs reproduce the nested shape: `ScalarRoosNaturalityData` has a 285.971 s `Meta.isDefEq` node and 88.827/88.709 s `ε.1` leaves; `CompletedLineOrdinaryEvaluation` has 287.140 and 89.256/89.445 s; `CompletedScalarOrdinaryCoherence` has 286.615 and 89.374/89.107 s. All are elaborator definitional-equality/delta reduction at chosen counit data, with no Kernel A-F assignment. These traced runs have printing overhead and do not replace the untraced baselines.
 
 ### Historical #1559
 
 The old merge-parent source could not be made into a current-master before benchmark within the 20-minute porting budget: it has an application mismatch and two missing-instance errors after API drift. The PR's controlled measurements are 697 to 140 CPU seconds and 7.0 to 2.4 GB, with target Kernel checks 707 to 42 seconds and 637 to 3.3 seconds. The source diff names the mechanism: `LaxSquareHδ` and `app_app_comp_of_eq` make the equality/commutative-square interface explicit, so the Kernel compares arguments rather than unfolding the whole square. This supports E with A contributing; the failed port is not used as a successful before result.
 
-- Six current successful modules or valid prefixes spend over 190 CPU seconds in one or two elaborator tactics, and their synchronous Kernel-skipped controls retain those calls. The repeated `homotopyCounit_naturality` application occurs in three independently measured modules with 292-296 s `exact` calls.
+- Eight current successful modules or valid prefixes exceed 190 whole-file CPU seconds with one or two dominant elaborator tactics. The repeated `homotopyCounit_naturality` application occurs in four independently measured modules or valid prefixes with 292-296 s `exact` calls; their Kernel-skipped controls retain the cost.
 - `NativePullTensor` has four separate Kernel checks above 50 s. A direct replay finds approximately 23-second final conversions in each, and the slowest value contains two more approximately 23-second `Exists.choose` argument-domain conversions. Its RSS peaks near 7.93 GB, versus about 2.66 GB when Kernel checking is skipped.
-- Two historical proof forms reproduce large Kernel cost reductions on 4.35.0. #1557's isolated changed lemmas do not reproduce its old whole-module memory result.
+- #1624, #1625, #1627, and #2122 reproduce substantial historical Kernel costs on 4.35.0; #1630 and #1743 reproduce elaboration costs. #1557's isolated changed lemmas do not reproduce its old whole-module memory result.
 - The three renamed-copy failures become successful same-name setup replays; their valid profiles are now included in Part A. One current module still fails after a valid first theorem, so its prefix-only status remains recorded.
 
 ## Interpretations and limits
 
-- The repeated completed-scalar naturality source pattern is a candidate shared elaborator problem. No bounded inner Meta trace was obtained, so this report does not claim a single common conversion pair or prescribe a source fix.
+- The four completed-scalar naturality calls share the same timed `Meta.isDefEq` nesting down to chosen counit `ε.1` components. Their deepest terms pretty-print alike; an exact hidden-instance diff is still needed before prescribing a source rewrite.
 - #1556 and #1563 support the principle that a simpler proof application can reduce Kernel work, but their precise internal conversion sites are not yet dumped. The A/E labels are hypotheses of stated confidence, not root-cause certainties.
 - For `NativePullTensor`, the imported-environment replay may have different caches from the original check, but the in-situ profiler, cheap self-comparisons, slow cross-conversion, application-prefix bisection, and unfold counters jointly support the A/E mechanism. The first positional instance/proof mismatch is not asserted to be the sole cause.
-- The scalar counit trace demonstrates how quickly a full Meta trace becomes noisy: it is evidence about workload shape, not a causal assignment to a particular Meta subsystem.
+- The profiler-filtered scalar trace assigns the dominant time to `Meta.isDefEq` and its delta reductions. Explicit trace-class output remains too noisy for a bounded full run; neither the unfold counts nor the pretty-printed leaf alone establish one individual definition as the cause.
 - CPU and wall times are close in the elaborator cases; the native Kernel case has more system time and memory activity. Host load and cache state were not systematically controlled across all runs, so cross-module ordering beyond the large phase distinctions should not be overinterpreted.

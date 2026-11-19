@@ -21,12 +21,12 @@ with_unfolding_all
       |>.choose_spec.2.2.choose_spec.choose) f
 ```
 
-The `exact` call takes 293 s; Kernel checking of the resulting theorem takes 0.423 s. The [probe](probes/CounitNaturalitySorry.lean) replaces only that block with `sorry`, and the 293 s call disappears. This is the exact source-level call and proof application. The inner `Meta.isDefEq` pair, WHNF path, and instance synthesis trace have not been isolated.
+The `exact` call takes 293 s; Kernel checking of the resulting theorem takes 0.423 s. The [probe](probes/CounitNaturalitySorry.lean) replaces only that block with `sorry`, and the 293 s call disappears. A Round 3 same-name profiler-filtered trace finds a 286.615 s `Meta.isDefEq` call, a 188.170 s child, and two chosen-counit `ε.1` comparisons of 89.374 and 89.107 s.
 
 ## 3. Structural evidence
 
-The concrete arguments are two completed scalar extension functors and a deeply nested witness from `completedScalarChangeData`. The unfolding wrapper permits those definitions to expand during `exact`. Their mere presence does not prove which Meta operation takes the time. No Kernel expression diff, generated `_proof_n`, recursor/cast count, or expression-size measurement was made; A–F labels would overstate the evidence.
+The slow nested comparison has the same `MorphismProperty.instCategoryLocalization._aux_5`, `Classical.choose`, and `LF.IsLeftDerivedFunctor` shape as the other three completed-scalar modules. The wrapper itself is not the cause: the shared-prefix control without `with_unfolding_all` still takes 294.28 user CPU seconds. No Kernel A-F label applies.
 
 ## 4. Confidence and caveats
 
-The phase and exact source call are **strongly supported** by profiler and one-block control. The inner elaborator mechanism is **unclassified** pending bounded tracing of `Meta.isDefEq` or `trace.profiler`. The copied `sorry` source is diagnostic only; the original source succeeds.
+The phase, source call, and `Meta.isDefEq` inner comparison shape are **confirmed** by the bounded trace. The same-name confirmation takes 323.98 user CPU seconds with tracing overhead; the baseline remains 304.79 s. The deepest two sides pretty-print alike, leaving the hidden instance/witness difference unresolved. The copied `sorry` source is diagnostic only.

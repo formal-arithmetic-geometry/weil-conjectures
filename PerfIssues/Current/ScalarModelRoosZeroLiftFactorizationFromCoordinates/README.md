@@ -20,3 +20,35 @@ LEAN_NUM_THREADS=1 timeout 900 nice -n 10 /usr/bin/time -v lake env lean \
 ```
 
 The skipped control adds `-Ddebug.skipKernelTC=true`. Neither the failed whole module nor a diagnostic control is counted as a successful whole-module compile.
+
+## Round 3 controls on the valid prefix
+
+All variants preserve the imports and theorem context, use one Lean thread and
+the same synchronous command, and stop after the first theorem. CPU times are
+whole-prefix user seconds. A trace adds its own printing overhead.
+
+| Probe | User CPU s | Result |
+|---|---:|---|
+| [CounitNoUnfold.lean](probes/CounitNoUnfold.lean), same `exact` without wrapper | 294.28 | success; wrapper not needed for slow path |
+| [CounitHaveWitness.lean](probes/CounitHaveWitness.lean), opaque named `have` | 14.44 | type mismatch at goal; no valid speedup |
+| [CounitLetWitness.lean](probes/CounitLetWitness.lean), transparent `let` | 295.95 | success; still slow |
+| [CounitTransparencyTrue.lean](probes/CounitTransparencyTrue.lean) | 297.65 | success |
+| [CounitTransparencyFalse.lean](probes/CounitTransparencyFalse.lean) | 294.57 | success |
+| [CounitAbstract.lean](probes/CounitAbstract.lean), generic local-variable lemma | 2.31 | abstract lemma succeeds; concrete theorem replaced by diagnostic `sorry` |
+| [CounitDiagnostics.lean](probes/CounitDiagnostics.lean) | 297.42 | success; 1 s diagnostics threshold |
+| [CounitProfilerOnly.lean](probes/CounitProfilerOnly.lean) | 303.46 | success; slow nested Meta nodes retained |
+
+Diagnostics of the slow call count 25,076 `sheafCompose`, 22,328
+`Classical.indefiniteDescription`, 20,624 `Classical.choose`, 20,448
+`presheafToSheaf`, and 249,887 reducible `Functor.obj` unfolds. These are
+workload counters, not individually timed causes. The filtered profiler finds
+a 285.339-second `Meta.isDefEq` node, with 187.936 and 97.401-second children;
+the deepest repeated `ε.1` comparisons take 89.070 and 88.206 seconds.
+
+Setting `trace.Meta.isDefEq true` explicitly overrides the profiler threshold
+in Lean's trace machinery and emits tiny nodes as well, so the bounded trace
+uses `trace.profiler true` and `trace.profiler.threshold 2000` without enabling
+the class. The named `have` introduces an opaque local whose `witness.app`
+does not definitionally match the goal's chosen witness. Its early failure is
+not a successful alternative proof. The abstract probe explicitly marks its
+concrete theorem with `sorry`; only its generic lemma timing is meaningful.
