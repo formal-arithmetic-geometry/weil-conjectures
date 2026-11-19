@@ -10,6 +10,8 @@ concrete `Iso.hom` major premise. Replacing only that major premise with the
 definitionally equal left term changes the same comparison from 49.548 s to
 0 ms; the checked result type is structurally preserved. The reverse control
 is 50.585 s.
+The retained before run used 59.47 s CPU, 60.57 s wall, and 7,760,464 KB
+peak RSS.
 
 Probe retained under [`G3B-ClosingNatMajor.lean`](probes/wp/G3B-ClosingNatMajor.lean),
 with the surrounding proof-domain probes copied under `probes/wp/`.

@@ -34,6 +34,9 @@ isolation because its expected dependent context is supplied by the recursor.
 These are branch-boundary costs, not proof that `Exists.casesOn` iota
 reduction is the cause. The concrete category/functor differences described
 by the historical PR remain source-guided candidates only.
+The corrected branch probe used 379.92 s CPU, 6:23.20 wall, and
+16,327,872 KB peak RSS; it preserved the original declaration and changed
+only diagnostic inspection code.
 
 **Confidence:** branch-local cost is confirmed, but the exact inner
 conversion remains unclassified.

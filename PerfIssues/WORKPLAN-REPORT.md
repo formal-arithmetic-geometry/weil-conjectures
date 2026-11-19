@@ -12,6 +12,7 @@ only. The source theorem obligations were not changed.
 | #2122 | G4-B | 379.92 s CPU, 16,327,872 KB RSS; motive/witness branches check in 16.115/18.419 s; final dependent branch cannot be isolated | Branch-boundary work is confirmed, but no exact inner conversion or recursor-causality claim is established | Unclassified |
 | #1625 | D3 positive control | `NatTrans` major-premise alignment: 95.869 s to 0 ms | Accessor major-premise mismatch drives final type conversion | Confirmed |
 | #1556 | B4/D4 positive control | `NatTrans` major-premise alignment: 49.548 s to 0 ms | Same accessor mismatch inside generated proof proposition | Confirmed |
+| NativePullTensor | §3.5 retained positive control | Prior regular/regular versus abbrev/abbrev and major-premise controls; no rerun | Accessor alignment and reducibility interaction | Confirmed from prior audit |
 
 ## Cross-case observations
 

@@ -8,6 +8,7 @@
 | #2122 | motive/witness branches under `Exists.casesOn` | stored theorem value | binder-instantiated branch checks (16.115/18.419 s) | branch-boundary cost only; recursor not blamed | exact final dependent branch pair |
 | #1625 | `NatTrans.app` concrete major premise | final result type | type-preserving major-premise alignment | accessor-induced final type conversion | inner nested major premise |
 | #1556 | `NatTrans.app` concrete major premise | generated `congr` proposition | type-preserving major-premise alignment | accessor-induced dependent proposition | remaining proof detail |
+| NativePullTensor | accessor major premise / reducibility | endpoint conversion | prior regular/regular and major-premise controls retained | accessor alignment plus declaration-kind interaction | exact internal Kernel sequence |
 
 The matrix records only measured or explicitly bounded outcomes. A source
 spelling change without an elaborated-expression change is not counted.
