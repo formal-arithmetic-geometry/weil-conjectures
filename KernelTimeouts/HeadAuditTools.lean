@@ -62,12 +62,15 @@ def metadata (label : String) (e : Expr) : TacticM Unit := do
     | .quotInfo _ => logInfo m!"{label}: quotient"
   | .proj n i major =>
     logInfo m!"{label}: projection {n}.{i}, major={shape major}/{head major}"
+  | .fvar id =>
+    let decl ← id.getDecl
+    logInfo m!"{label}: local {decl.userName}, type={shape decl.type}/{head decl.type}"
   | _ => pure ()
 
 partial def firstDiff (label : String) (a b : Expr) (fuel : Nat := 25) : TacticM Unit := do
   logInfo m!"{label}: {shape a}/{head a} ({a.getAppArgs.size} args) vs {shape b}/{head b} ({b.getAppArgs.size} args); syntactic={a == b}"
   if a == b then return
-  if head a != head b then
+  if head a != head b || a.isFVar || b.isFVar then
     metadata s!"{label} actual" a
     metadata s!"{label} expected" b
   if fuel == 0 then return
