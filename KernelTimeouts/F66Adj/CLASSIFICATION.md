@@ -1,43 +1,35 @@
-Case ID / declaration
----------------------
-F66Adj / `imageHomIso_naturality`
-Origin: `f66ad18a9ed`; Lean/Mathlib 4.35.0; Weil server the build server.
-Imports/options: see `Before.lean`; parent scopes `maxHeartbeats 400000`, fixed
-uses default 200000.
+# F66Adj: exact Kernel site
 
-1. Phase attribution
---------------------
-Synchronous Kernel skipped: Before 4.30 s / 2,801,496 KB RSS; After 3.60 s /
-2,796,036 KB RSS. Baseline Kernel-on: Before 1:56.47 / 12,639,544 KB RSS;
-After 3.40 s / 2,835,572 KB RSS. Conclusion: Kernel-dominated cost.
-Per-declaration profiling attributes 117 s to type checking of the slow
-declaration, versus 1.43 s cumulative elaboration and 113 ms tactic execution.
+**Declaration:** `imageHomIso_naturality`, origin `f66ad18a9ed`.
 
-2. What is expensive?
----------------------
-The target proof value applying the abstract naturality/counit helper with
-concrete coefficient variance and restriction comparison. The near-equal
-skipped timings show the type and elaboration are not the large cost. The
-specific application argument conversion remains unisolated.
+## Measurements
 
-3. Structural evidence
-----------------------
-The fixed helper binds the target coefficient variance `γ` explicitly and
-substitutes its equality. This makes the `NatTrans.app` argument structurally
-match the expected domain. Exact hidden instance terms were not dumped.
+The type-only probe is 3.10 s. Synchronous Before is 116.48 s / 12,639,544
+KB; skipped is 4.30 s. After is 3.40 s. `probes/ApplicationOnly.lean` binds
+`homIso_naturality_of_counit` with the old concrete parameters and then uses
+`sorry`: 35.32 s on / 3.50 s skipped. Replacing the final coherence argument
+with a typed `sorry` leaves 35.02 s, so the helper application itself is the
+first expensive component. The full Before adds the final handoff and takes
+116.47 s.
 
-4. Why is it expensive?
------------------------
-Primary E; contributing A and C. Controlled source diff plus phase gate
-support a concrete interface/instance mismatch causing reduction through
-derived functors. Evidence strength: strongly supported.
+## Exact component
 
-5. Confidence
--------------
-Strongly supported; binder-aware expression diff would confirm the minimal
-implicit argument mismatch.
+The expensive expression is the application of
+`homIso_naturality_of_counit` whose result contains
+`(GT.map (c.hom.app K).op).app ...`; the declaration goal contains the same
+map through `imagePullback` and `leftDerivedUpperStarComp`. The compact probe
+shows that the result's `NatTrans.app` is instantiated through the abstract
+`GT`, while the goal expands the concrete `ExternalRHom.globalHom` path.
+This is the coefficient-variance/`NatTrans.app` handoff described by the fix.
 
-6. Scope and caveats
---------------------
-Standalone historical module; baseline timings compare different heartbeat
-budgets, but both succeed and the skip control isolates Kernel cost.
+Diagnostics on the application-only probe report 511,948 Kernel unfolds of
+`Add.add`, 368,876 `Functor.obj`, and 257,828 `DFunLike.coe`.
+
+## Classification
+
+Primary mechanism: **E** (different concrete and abstract interface paths).
+Contributing mechanisms: **A** and **C** because the comparison is under
+dependent functor applications. Evidence: **confirmed** for the helper
+application and **strongly supported** for E/A/C. The fixed helper exposes
+the coefficient variance as `γ`, then substitutes it, making the `NatTrans.app`
+argument syntactically match.
