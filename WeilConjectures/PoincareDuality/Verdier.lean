@@ -185,9 +185,8 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ (verdierDual ℓ K) :=
   Verdier.bidualityMap (dualizingComplex ℓ X) K
 
-/-- **Biduality for dualizable complexes** (the lisse step of the blueprint theorem
-`theorem-verdier-biduality`): if the dualizing complex `ω_X` is isomorphic to an invertible
-object (as `ℚ̄_ℓ(d)[2d]` is, for `X` smooth of dimension `d`), the double-dual morphism
+/-- **Biduality for dualizable complexes**: if the dualizing complex `ω_X` is isomorphic to an
+invertible object (as `ℚ̄_ℓ(d)[2d]` is, for `X` smooth of dimension `d`), the double-dual morphism
 `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every dualizable `K`. -/
 theorem isIso_verdierBiduality_of_isDualizable {T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (γ : T ≅ dualizingComplex ℓ X) (hT : IsInvertible T)
