@@ -10,3 +10,6 @@ Time: 49,867 ms forward; 50,279 ms reverse; full consumer 131,963/121,742 ms
 Representation: `def/abbrev`; same outer tensor head, different derived monoidal arguments  
 Interpretation: supports H1; deep additive unfolds are downstream evidence  
 Confidence: confirmed phase, strongly supported mechanism
+
+The numeric values above are historical first-pass notes. Fresh round-two values are in
+`A0-round2.md`, with source under `probes/round2/A1.lean`.

@@ -149,3 +149,33 @@ derived localization machinery.
 
 These controls distinguish a Kernel conversion problem from elaboration, typeclass search,
 proof construction, and an arbitrary low-level opacity hypothesis.
+
+## Round-two fresh measurements
+
+The runnable source is `probes/round2/A1.lean`. The command was
+`timeout 3600 /usr/bin/time -v lake env lean -Dpp.unicode.fun=true
+-DrelaxedAutoImplicit=false -Dbackward.isDefEq.respectTransparency=false
+-DmaxSynthPendingDepth=3 -Dwarn.sorry=false probes/round2/A1.lean`.
+
+| Variant | Hint / compile result | Tensor probe final conversion | Full consumer final conversion |
+| --- | --- | ---: | ---: |
+| A0 `abbrev` | `def/abbrev`; succeeds | 46,216 ms forward; 51,526 ms reverse | 119,953 / 127,832 ms |
+| A1 ordinary `def` | `def/regular`; downstream `IsLeftDerivedFunctor` synthesis fails | not applicable | not applicable |
+| A2 `@[reducible] def` | regular definition under reducible transparency; succeeds | 46,358 / 51,680 ms | 2 / 2 ms |
+| A3 exposed body | historical note, not re-measured in round two | historical note only | historical note only |
+
+For A0, `Kernel.check(value)` was 2 ms for the tensor probe and 1 ms for the full
+consumer. The final tensor node was `MonoidalCategoryStruct.tensorObj` on both sides;
+its argument timings were 0 ms (category), 1 ms (category instance), and 52,157 ms
+(the `MonoidalCategory` instance). These are fresh measurements; the earlier
+49,867/50,279 ms and 131,963/121,742 ms values remain historical notes.
+
+The ordinary-`def` failure is the valid A1.1 result: the unannotated form is not accepted
+by this historical consumer, so no kernel conversion can be measured for it. The hint
+probe recorded `tensorObj def/abbrev`, `DerivedMonoidal regular:2`,
+`DerivedMonoidal.bifunctor regular:8`, `leftDerived₂ regular:7`, and the derived
+monoidal category constructor `regular:27`.
+
+The one-sided/two-sided exposure controls were not independently re-run in round two;
+their interpretation remains a historical note. The A0/A2 orientation results above are
+direct fresh measurements.

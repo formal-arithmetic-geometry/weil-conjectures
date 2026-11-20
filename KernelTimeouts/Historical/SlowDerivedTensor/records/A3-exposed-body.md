@@ -7,3 +7,5 @@ Result: expensive A0 path returns; a diagnostic kernel accepting the shared-head
 Representation: no useful named comparison boundary  
 Interpretation: supports exposure as the trigger; exact kernel branch is inferred  
 Confidence: strongly supported
+
+This row was not re-measured in round two and remains a historical note.

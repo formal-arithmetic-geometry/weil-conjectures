@@ -91,3 +91,25 @@ out of the declared cone type.
 Both cases reproduce on the historical toolchain. A is a successful-vs-slow conversion
 change at a family of derived-functor heads. B is a timeout in the final declaration
 conversion, isolated by `sorry`, and disappears when the indexing diagram is named.
+
+## Round-two fresh runs
+
+All measurements in this section were run in this round from the two historical
+worktrees with the v4.33.1 toolchain. The command shape was
+`timeout 3600 /usr/bin/time -v lake env lean ... <probe>`; the runnable probes are
+committed under the corresponding `probes/round2/` directories.
+
+| Case/variant | Fresh result |
+| --- | --- |
+| A0 tensor probe, original `abbrev` | `Kernel.check(value)` 2 ms; forward conversion 46,216 ms; reverse 51,526 ms; peak RSS 7,277,660 kB |
+| A0 full consumer | `Kernel.check(value)` 1 ms; forward 119,953 ms; reverse 127,832 ms; peak RSS 11,966,564 kB |
+| A1 ordinary `def` | compilation failed before the consumer with missing `IsLeftDerivedFunctor` synthesis and `No goals to be solved`; no conversion timing exists |
+| A2 `@[reducible] def` tensor probe | value 1 ms; forward 46,358 ms; reverse 51,680 ms |
+| A2 `@[reducible] def` full consumer | value 1 ms; forward 2 ms; reverse 2 ms |
+| B inline `:= sorry` | deterministic kernel timeout at 118.66 s |
+| B named diagram `:= sorry` | succeeds in 2.27 s wall time |
+| B inline with explicit local `MonoidalCategory` | succeeds in 2.35 s wall time |
+
+The A3 exposed-body row, the 36-leaf abstractNestedProofs dump, and full B conversion
+tree remain historical notes from the first pass and were not re-measured in round two;
+they are identified as such in the case reports.

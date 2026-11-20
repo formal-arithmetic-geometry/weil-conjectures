@@ -74,3 +74,18 @@ then test a boundary-preserving alignment. A superficially similar wrapper or in
 is not enough. The current records that most closely match are `NativePullTensor` (same
 Kernel-domain phase), `PR1627` (nested proof types), `OrderedSpectralRawLattices` (bundle
 instance expressions), and `ImageHomCounit`/`PR1624` (whole representation alignment).
+
+## Round-two status
+
+The fresh historical runs preserve the synthesis while tightening the evidence. For A,
+the tensor node's instance argument alone took 52,157 ms in the A0 probe, while the
+category and category-instance arguments took 0 and 1 ms; changing the six aliases to
+`@[reducible] def` made the full consumer conversion 2 ms in both orientations. The
+unannotated ordinary-`def` form failed typeclass synthesis, so it is not a performance
+counterexample.
+
+For B, the fresh inline `sorry` declaration timed out at 118.66 s, while the named
+diagram and explicit shared-instance controls completed in 2.27 s and 2.35 s. Thus the
+round-two phase split directly confirms one final conversion boundary and independently
+supports both factors. The proof-leaf dump and conversion tree remain historical notes,
+not re-measured round-two numbers.

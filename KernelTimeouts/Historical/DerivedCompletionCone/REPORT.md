@@ -177,3 +177,35 @@ preserving the real cone term; the timeout returns when the inline type is resto
 **R7:** Classification **P2/H2**, with **H3** as a secondary repeated proof-position effect;
 confidence **confirmed** for phase and causal boundary, **strongly supported** for the exact
 proof-proposition fan-out. The exact internal branch ordering remains open.
+
+## Round-two fresh measurements
+
+The fresh source files are `probes/round2/B-inline.lean`, `B-named.lean`, and
+`B-explicit-instance.lean`. Each was run with
+`timeout 3600 /usr/bin/time -v lake env lean -Dbackward.isDefEq.respectTransparency=false
+-DmaxSynthPendingDepth=3 <probe>`.
+
+| Variant | Fresh result | Peak RSS |
+| --- | --- | ---: |
+| Inline `Cone (quotPowFunctor J I ⋙ tensorLeft K) := sorry` | deterministic kernel timeout at 118.66 s; exit 1 | 13,826,340 kB |
+| Named `Cone (derivedCompletionDiagram J I K) := sorry` | succeeds; 2.27 s wall | 3,741,412 kB |
+| Inline with explicit local `MonoidalCategory` parameter | succeeds; 2.35 s wall | 3,741,488 kB |
+
+The inline timeout is the direct B1.1 reproduction on the v4.33.1 historical toolchain.
+The named and explicit-instance rows are fresh controls. The earlier `>600 s`, 18 s,
+and 9.5 s values are historical notes from the first pass, not round-two measurements.
+
+The fresh hint probe reports the three scratch diagram declarations as regular definitions
+with height 31. The historical source's 36 proof-position differences, auxiliary proof
+names and proposition types, concrete `MonoidalCategory` expression dump, factorial
+matrix, and conversion tree were not re-generated in round two; those sections are
+retained as historical notes rather than new numerical evidence.
+
+The fresh matrix probe `probes/round2/B-matrix.lean` compiled the named `abbrev`, named
+ordinary `def`, named reducible `def`, shared-but-unnamed inline, and named-plus-explicit
+instance declarations together in 2.43 s wall time (3,743,452 kB peak RSS). Thus the
+four B3 cells are represented by fresh compilations: B00 is the separate 118.66 s
+timeout, B10 is the 2.27 s named inferred-instance run, B01 is the 2.35 s explicit
+inline run, and B11 is present in the matrix compilation and completes within its
+2.43 s process. The matrix process does not provide isolated per-declaration timings;
+the isolated B10/B01 values above are the preferred timings.
